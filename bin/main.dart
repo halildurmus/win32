@@ -1,81 +1,79 @@
-import 'package:win32/win32.dart' as win32;
+import 'package:win32/user32.dart' as win32;
 
-LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-
-int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow)
-{
-    // Register the window class.
-    const wchar_t CLASS_NAME[]  = L"Sample Window Class";
+// int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow)
+// {
+//     // Register the window class.
+//     const wchar_t CLASS_NAME[]  = L"Sample Window Class";
     
-    WNDCLASS wc = { };
+//     WNDCLASS wc = { };
 
-    wc.lpfnWndProc   = WindowProc;
-    wc.hInstance     = hInstance;
-    wc.lpszClassName = CLASS_NAME;
+//     wc.lpfnWndProc   = WindowProc;
+//     wc.hInstance     = hInstance;
+//     wc.lpszClassName = CLASS_NAME;
 
-    RegisterClass(&wc);
+//     RegisterClass(&wc);
 
-    // Create the window.
+//     // Create the window.
 
-    HWND hwnd = CreateWindowEx(
-        0,                              // Optional window styles.
-        CLASS_NAME,                     // Window class
-        L"Learn to Program Windows",    // Window text
-        WS_OVERLAPPEDWINDOW,            // Window style
+//     HWND hwnd = CreateWindowEx(
+//         0,                              // Optional window styles.
+//         CLASS_NAME,                     // Window class
+//         L"Learn to Program Windows",    // Window text
+//         WS_OVERLAPPEDWINDOW,            // Window style
 
-        // Size and position
-        CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+//         // Size and position
+//         CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
 
-        NULL,       // Parent window    
-        NULL,       // Menu
-        hInstance,  // Instance handle
-        NULL        // Additional application data
-        );
+//         NULL,       // Parent window    
+//         NULL,       // Menu
+//         hInstance,  // Instance handle
+//         NULL        // Additional application data
+//         );
 
-    if (hwnd == NULL)
-    {
-        return 0;
-    }
+//     if (hwnd == NULL)
+//     {
+//         return 0;
+//     }
 
-    ShowWindow(hwnd, nCmdShow);
+//     ShowWindow(hwnd, nCmdShow);
 
-    // Run the message loop.
+//     // Run the message loop.
 
-    MSG msg = { };
-    while (GetMessage(&msg, NULL, 0, 0))
-    {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
+//     MSG msg = { };
+//     while (GetMessage(&msg, NULL, 0, 0))
+//     {
+//         TranslateMessage(&msg);
+//         DispatchMessage(&msg);
+//     }
 
-    return 0;
-}
+//     return 0;
+// }
 
-LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
-{
-    switch (uMsg)
-    {
-    case WM_DESTROY:
-        PostQuitMessage(0);
-        return 0;
+// LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+// {
+//     switch (uMsg)
+//     {
+//     case WM_DESTROY:
+//         PostQuitMessage(0);
+//         return 0;
 
-    case WM_PAINT:
-        {
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hwnd, &ps);
+//     case WM_PAINT:
+//         {
+//             PAINTSTRUCT ps;
+//             HDC hdc = BeginPaint(hwnd, &ps);
 
 
 
-            FillRect(hdc, &ps.rcPaint, (HBRUSH) (COLOR_WINDOW+1));
+//             FillRect(hdc, &ps.rcPaint, (HBRUSH) (COLOR_WINDOW+1));
 
-            EndPaint(hwnd, &ps);
-        }
-        return 0;
+//             EndPaint(hwnd, &ps);
+//         }
+//         return 0;
 
-    }
-    return DefWindowProc(hwnd, uMsg, wParam, lParam);
-}
+//     }
+//     return DefWindowProc(hwnd, uMsg, wParam, lParam);
+// }
 
-main(List<String> arguments) {
-  print('Hello world: ${win32.calculate()}!');
+void main(List<String> arguments) {
+  print('Hello world!');
 }
