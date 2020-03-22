@@ -1,5 +1,7 @@
 import 'dart:ffi';
 
+// Prototypes of window-related functions, constants and structs in user32.dll
+
 // LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 typedef windowProcNative = Int32 Function();
 typedef windowProcDart = int Function();
@@ -45,6 +47,21 @@ typedef createWindowsExDart = int Function(
     int hMenu,
     int hInstance,
     Pointer<Void> lpParam);
+
+// ShowWindow constants
+const SW_HIDE = 0;
+const SW_SHOWNORMAL = 1;
+const SW_SHOWMINIMIZED = 2;
+const SW_MAXIMIZE = 3;
+const SW_SHOWMAXIMIZED = 3;
+const SW_SHOWNOACTIVATE = 4;
+const SW_SHOW = 5;
+const SW_MINIMIZE = 6;
+const SW_SHOWMINNOACTIVE = 7;
+const SW_SHOWNA = 8;
+const SW_RESTORE = 9;
+const SW_SHOWDEFAULT = 10;
+const SW_FORCEMINIMIZE = 11;
 
 // BOOL ShowWindow(
 //   HWND hWnd,
