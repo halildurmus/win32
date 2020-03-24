@@ -8,6 +8,8 @@ import 'package:ffi/ffi.dart';
 // CONSTANTS //
 ///////////////
 
+const NULL = 0;
+
 // WindowStyle constants
 const WS_BORDER = 0x00800000;
 const WS_CAPTION = 0x00C00000;
@@ -122,8 +124,7 @@ class WNDCLASS extends Struct {
   @Int32()
   int style;
 
-  @Int32()
-  int lpfnWndProc;
+  Pointer<NativeFunction> lpfnWndProc;
 
   @Int32()
   int cbClsExtra;
@@ -143,11 +144,8 @@ class WNDCLASS extends Struct {
   @Int32()
   int hbrBackground;
 
-  @Int32()
-  int lpszMenuName;
-
-  @Int32()
-  int lpszClassName;
+  Pointer<Utf16> lpszMenuName;
+  Pointer<Utf16> lpszClassName;
 }
 
 //////////////
@@ -206,6 +204,12 @@ typedef createWindowExDart = int Function(
     int hInstance,
     Pointer<Void> lpParam);
 
+// ATOM RegisterClassA(
+//   const WNDCLASSA *lpWndClass
+// );
+typedef registerClassNative = Int32 Function(Pointer<WNDCLASS> lpWndClass);
+typedef registerClassDart = int Function(Pointer<WNDCLASS> lpWndClass);
+
 // BOOL ShowWindow(
 //   HWND hWnd,
 //   int  nCmdShow
@@ -218,6 +222,7 @@ typedef showWindowDart = int Function(int hWnd, int nCmdShow);
 ///////////////
 class Win32 {
   createWindowExDart CreateWindowEx;
+  registerClassDart RegisterClass;
   showWindowDart ShowWindow;
   getModuleHandleDart GetModuleHandle;
 
@@ -226,6 +231,9 @@ class Win32 {
     CreateWindowEx =
         user32.lookupFunction<createWindowExNative, createWindowExDart>(
             'CreateWindowExA');
+    RegisterClass =
+        user32.lookupFunction<registerClassNative, registerClassDart>(
+            'RegisterClassA');
     ShowWindow =
         user32.lookupFunction<showWindowNative, showWindowDart>('ShowWindow');
 

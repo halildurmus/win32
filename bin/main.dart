@@ -74,15 +74,35 @@ import 'package:win32/win32.dart';
 //     return DefWindowProc(hwnd, uMsg, wParam, lParam);
 // }
 
+typedef WindowProcType = Pointer<Int64> Function(Int32, Int32, Int32, Int32);
+Pointer<Int64> WindowProc(int hwnd, int uMsg, int wParam, int lParam) {
+  switch (uMsg) {
+    case WM_DESTROY:
+      return nullptr;
+    case WM_PAINT:
+      return nullptr;
+  }
+  return nullptr;
+}
+
 void main(List<String> arguments) {
   final win32 = Win32();
   var hInstance = win32.GetModuleHandle(Pointer.fromAddress(0));
   print('hInstance: $hInstance');
 
+  final CLASS_NAME = ffi.Utf16.toUtf16('Sample Window Class');
+
+  var wc = WNDCLASS();
+  wc.lpfnWndProc = Pointer.fromFunction<WindowProcType>(WindowProc);
+  wc.hInstance = hInstance;
+  wc.lpszClassName = CLASS_NAME;
+
+  print(wc.lpszClassName);
+  win32.RegisterClass(wc.addressOf);
+
   var hWnd = win32.CreateWindowEx(
       0, // Optional window styles.
-      ffi.Utf16.toUtf16(
-          'CLASS_NAME'), // Window text                     // Window class
+      CLASS_NAME, // Window class
       ffi.Utf16.toUtf16('Learn to Program Windows'), // Window text
       WS_OVERLAPPEDWINDOW, // Window style
 
@@ -91,8 +111,8 @@ void main(List<String> arguments) {
       CW_USEDEFAULT,
       CW_USEDEFAULT,
       CW_USEDEFAULT,
-      0, // Parent window
-      0, // Menu
+      NULL, // Parent window
+      NULL, // Menu
       hInstance, // Instance handle
       nullptr // Additional application data
       );
