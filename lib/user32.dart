@@ -25,7 +25,12 @@ const WS_MAXIMIZEBOX = 0x00010000;
 const WS_MINIMIZE = 0x20000000;
 const WS_MINIMIZEBOX = 0x00020000;
 const WS_OVERLAPPED = 0x00000000;
-const WS_OVERLAPPEDWINDOW = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
+const WS_OVERLAPPEDWINDOW = WS_OVERLAPPED |
+    WS_CAPTION |
+    WS_SYSMENU |
+    WS_THICKFRAME |
+    WS_MINIMIZEBOX |
+    WS_MAXIMIZEBOX;
 const WS_POPUP = 0x80000000;
 const WS_POPUPWINDOW = WS_POPUP | WS_BORDER | WS_SYSMENU;
 const WS_SIZEBOX = 0x00040000;
@@ -33,9 +38,37 @@ const WS_SYSMENU = 0x00080000;
 const WS_TABSTOP = 0x00010000;
 const WS_THICKFRAME = 0x00040000;
 const WS_TILED = 0x00000000;
-const WS_TILEDWINDOW = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
+const WS_TILEDWINDOW = WS_OVERLAPPED |
+    WS_CAPTION |
+    WS_SYSMENU |
+    WS_THICKFRAME |
+    WS_MINIMIZEBOX |
+    WS_MAXIMIZEBOX;
 const WS_VISIBLE = 0x10000000;
 const WS_VSCROLL = 0x00200000;
+
+// WindowMessage constants
+const WM_NULL = 0x0000;
+const WM_CREATE = 0x0001;
+const WM_DESTROY = 0x0002;
+const WM_MOVE = 0x0003;
+const WM_SIZE = 0x0005;
+const WM_ACTIVATE = 0x0006;
+const WM_SETFOCUS = 0x0007;
+const WM_KILLFOCUS = 0x0008;
+const WM_ENABLE = 0x000A;
+const WM_SETREDRAW = 0x000B;
+const WM_SETTEXT = 0x000C;
+const WM_GETTEXT = 0x000D;
+const WM_GETTEXTLENGTH = 0x000E;
+const WM_PAINT = 0x000F;
+const WM_CLOSE = 0x0010;
+const WM_QUIT = 0x0012;
+const WM_ERASEBKGND = 0x0014;
+const WM_SYSCOLORCHANGE = 0x0015;
+const WM_SHOWWINDOW = 0x0018;
+const WM_WININICHANGE = 0x001A;
+const WM_SETTINGCHANGE = WM_WININICHANGE;
 
 // ShowWindow constants
 const SW_HIDE = 0;
@@ -70,7 +103,7 @@ const CW_USEDEFAULT = 0x80000000;
 //   LPCSTR    lpszMenuName;
 //   LPCSTR    lpszClassName;
 // } WNDCLASSA, *PWNDCLASSA, *NPWNDCLASSA, *LPWNDCLASSA;
-class WNDCLASS extends Struct{
+class WNDCLASS extends Struct {
   @Int32()
   int style;
 
@@ -158,12 +191,11 @@ typedef createWindowExDart = int Function(
     int hInstance,
     Pointer<Void> lpParam);
 
-
 // BOOL ShowWindow(
 //   HWND hWnd,
 //   int  nCmdShow
 // );
-typedef showWindowNative = Int8 Function(Int32 hWnd, int nCmdShow);
+typedef showWindowNative = Int8 Function(Int32 hWnd, Int32 nCmdShow);
 typedef showWindowDart = int Function(int hWnd, int nCmdShow);
 
 ///////////////
@@ -182,6 +214,8 @@ class Win32 {
             'CreateWindowsExA');
     ShowWindow =
         user32.lookupFunction<showWindowNative, showWindowDart>('ShowWindow');
-        GetModuleHandle = user32.lookupFunction<getModuleHandleNative, getModuleHandleDart>('GetModuleHandleA');
+    GetModuleHandle =
+        user32.lookupFunction<getModuleHandleNative, getModuleHandleDart>(
+            'GetModuleHandleA');
   }
 }
