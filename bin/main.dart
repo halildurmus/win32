@@ -1,10 +1,12 @@
-import 'package:win32/user32.dart' as win32;
+import 'dart:ffi';
+import 'package:ffi/ffi.dart' as ffi;
+import 'package:win32/user32.dart';
 
 // int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow)
 // {
 //     // Register the window class.
 //     const wchar_t CLASS_NAME[]  = L"Sample Window Class";
-    
+
 //     WNDCLASS wc = { };
 
 //     wc.lpfnWndProc   = WindowProc;
@@ -24,7 +26,7 @@ import 'package:win32/user32.dart' as win32;
 //         // Size and position
 //         CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
 
-//         NULL,       // Parent window    
+//         NULL,       // Parent window
 //         NULL,       // Menu
 //         hInstance,  // Instance handle
 //         NULL        // Additional application data
@@ -62,8 +64,6 @@ import 'package:win32/user32.dart' as win32;
 //             PAINTSTRUCT ps;
 //             HDC hdc = BeginPaint(hwnd, &ps);
 
-
-
 //             FillRect(hdc, &ps.rcPaint, (HBRUSH) (COLOR_WINDOW+1));
 
 //             EndPaint(hwnd, &ps);
@@ -74,6 +74,28 @@ import 'package:win32/user32.dart' as win32;
 //     return DefWindowProc(hwnd, uMsg, wParam, lParam);
 // }
 
+final win32 = Win32();
+
 void main(List<String> arguments) {
-  print('Hello world!');
+  var hInstance = win32.GetModuleHandle(Pointer.fromAddress(0));
+
+  var hWnd = win32.CreateWindowsEx(
+      0, // Optional window styles.
+      ffi.Utf16.toUtf16(
+          'CLASS_NAME'), // Window text                     // Window class
+      ffi.Utf16.toUtf16('Learn to Program Windows'), // Window text
+      WS_OVERLAPPEDWINDOW, // Window style
+
+      // Size and position
+      CW_USEDEFAULT,
+      CW_USEDEFAULT,
+      CW_USEDEFAULT,
+      CW_USEDEFAULT,
+      null, // Parent window
+      null, // Menu
+      hInstance, // Instance handle
+      null // Additional application data
+      );
+
+      print(hWnd);
 }
