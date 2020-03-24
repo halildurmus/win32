@@ -69,6 +69,21 @@ const WM_SYSCOLORCHANGE = 0x0015;
 const WM_SHOWWINDOW = 0x0018;
 const WM_WININICHANGE = 0x001A;
 const WM_SETTINGCHANGE = WM_WININICHANGE;
+const WM_KEYFIRST = 0x0100;
+const WM_KEYDOWN = 0x0100;
+const WM_KEYUP = 0x0101;
+const WM_CHAR = 0x0102;
+const WM_DEADCHAR = 0x0103;
+const WM_SYSKEYDOWN = 0x0104;
+const WM_SYSKEYUP = 0x0105;
+const WM_SYSCHAR = 0x0106;
+const WM_SYSDEADCHAR = 0x0107;
+const WM_INITDIALOG = 0x0110;
+const WM_COMMAND = 0x0111;
+const WM_SYSCOMMAND = 0x0112;
+const WM_TIMER = 0x0113;
+const WM_HSCROLL = 0x0114;
+const WM_VSCROLL = 0x0115;
 
 // ShowWindow constants
 const SW_HIDE = 0;
@@ -146,8 +161,8 @@ typedef windowProcDart = int Function();
 // HMODULE GetModuleHandleA(
 //   LPCSTR lpModuleName
 // );
-typedef getModuleHandleNative = Int32 Function(Pointer<Int16> lpModuleName);
-typedef getModuleHandleDart = int Function(Pointer<Int16> lpModuleName);
+typedef getModuleHandleNative = Int32 Function(Pointer<Int32> lpModuleName);
+typedef getModuleHandleDart = int Function(Pointer<Int32> lpModuleName);
 
 // HWND CreateWindowExA(
 //   DWORD     dwExStyle,
@@ -202,20 +217,21 @@ typedef showWindowDart = int Function(int hWnd, int nCmdShow);
 // API CLASS //
 ///////////////
 class Win32 {
-  createWindowExDart CreateWindowsEx;
+  createWindowExDart CreateWindowEx;
   showWindowDart ShowWindow;
   getModuleHandleDart GetModuleHandle;
 
   Win32() {
-    final user32 = DynamicLibrary.open('User32.dll');
-
-    CreateWindowsEx =
+    final user32 = DynamicLibrary.open('user32.dll');
+    CreateWindowEx =
         user32.lookupFunction<createWindowExNative, createWindowExDart>(
-            'CreateWindowsExA');
+            'CreateWindowExA');
     ShowWindow =
         user32.lookupFunction<showWindowNative, showWindowDart>('ShowWindow');
+
+    final kernel32 = DynamicLibrary.open('kernel32.dll');
     GetModuleHandle =
-        user32.lookupFunction<getModuleHandleNative, getModuleHandleDart>(
+        kernel32.lookupFunction<getModuleHandleNative, getModuleHandleDart>(
             'GetModuleHandleA');
   }
 }

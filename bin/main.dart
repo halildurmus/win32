@@ -1,6 +1,6 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart' as ffi;
-import 'package:win32/user32.dart';
+import 'package:win32/win32.dart';
 
 // int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow)
 // {
@@ -74,12 +74,12 @@ import 'package:win32/user32.dart';
 //     return DefWindowProc(hwnd, uMsg, wParam, lParam);
 // }
 
-final win32 = Win32();
-
 void main(List<String> arguments) {
+  final win32 = Win32();
   var hInstance = win32.GetModuleHandle(Pointer.fromAddress(0));
+  print('hInstance: $hInstance');
 
-  var hWnd = win32.CreateWindowsEx(
+  var hWnd = win32.CreateWindowEx(
       0, // Optional window styles.
       ffi.Utf16.toUtf16(
           'CLASS_NAME'), // Window text                     // Window class
@@ -91,11 +91,11 @@ void main(List<String> arguments) {
       CW_USEDEFAULT,
       CW_USEDEFAULT,
       CW_USEDEFAULT,
-      null, // Parent window
-      null, // Menu
+      0, // Parent window
+      0, // Menu
       hInstance, // Instance handle
-      null // Additional application data
+      nullptr // Additional application data
       );
 
-      print(hWnd);
+  print('hWnd: $hWnd');
 }
