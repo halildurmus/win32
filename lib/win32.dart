@@ -153,8 +153,10 @@ class WNDCLASS extends Struct {
 //////////////
 
 // LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-typedef windowProcNative = Int32 Function();
-typedef windowProcDart = int Function();
+typedef windowProcNative = Int32 Function(
+    Int32 hwnd, Int32 uMsg, Int32 wParam, Int32 lParam);
+typedef windowProcDart = int Function(
+    int hwnd, int uMsg, int wParam, int lParam);
 
 // HMODULE GetModuleHandleA(
 //   LPCSTR lpModuleName
@@ -204,6 +206,17 @@ typedef createWindowExDart = int Function(
     int hInstance,
     Pointer<Void> lpParam);
 
+// LRESULT LRESULT DefWindowProcA(
+//   HWND   hWnd,
+//   UINT   Msg,
+//   WPARAM wParam,
+//   LPARAM lParam
+// );
+typedef defWindowProcNative = Int32 Function(
+    Int32 hWnd, Int32 Msg, Int32 wParam, Int32 lParam);
+typedef defWindowProcDart = int Function(
+    int hWnd, int Msg, int wParam, int lParam);
+
 // ATOM RegisterClassA(
 //   const WNDCLASSA *lpWndClass
 // );
@@ -217,20 +230,34 @@ typedef registerClassDart = int Function(Pointer<WNDCLASS> lpWndClass);
 typedef showWindowNative = Int8 Function(Int32 hWnd, Int32 nCmdShow);
 typedef showWindowDart = int Function(int hWnd, int nCmdShow);
 
+// void PostQuitMessage(
+//   int nExitCode
+// );
+typedef postQuitMessageNative = Void Function(Int32 nExitCode);
+typedef postQuitMessageDart = void Function(int nExitCode);
+
 ///////////////
 // API CLASS //
 ///////////////
 class Win32 {
   createWindowExDart CreateWindowEx;
+  defWindowProcDart DefWindowProc;
+  getModuleHandleDart GetModuleHandle;
+  postQuitMessageDart PostQuitMessage;
   registerClassDart RegisterClass;
   showWindowDart ShowWindow;
-  getModuleHandleDart GetModuleHandle;
 
   Win32() {
     final user32 = DynamicLibrary.open('user32.dll');
     CreateWindowEx =
         user32.lookupFunction<createWindowExNative, createWindowExDart>(
             'CreateWindowExA');
+    DefWindowProc =
+        user32.lookupFunction<defWindowProcNative, defWindowProcDart>(
+            'DefWindowProcA');
+    PostQuitMessage =
+        user32.lookupFunction<postQuitMessageNative, postQuitMessageDart>(
+            'PostQuitMessage');
     RegisterClass =
         user32.lookupFunction<registerClassNative, registerClassDart>(
             'RegisterClassA');
