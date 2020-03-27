@@ -10,6 +10,7 @@ void main()
     printf("sizeof(LPCSTR) is %zu\n", sizeof(LPCSTR));
     printf("sizeof(LPCWSTR) is %zu\n", sizeof(LPCWSTR));
     printf("sizeof(HINSTANCE) is %zu\n", sizeof(HINSTANCE));
+    printf("sizeof(HWND) is %zu\n", sizeof(HWND));
     printf("sizeof(HDC) is %zu\n", sizeof(HDC));
     printf("sizeof(HBRUSH) is %zu\n", sizeof(HBRUSH));
     printf("sizeof(ATOM) is %zu\n", sizeof(ATOM));

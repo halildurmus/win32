@@ -259,12 +259,6 @@ typedef windowProcNative = Int64 Function(
 typedef windowProcDart = int Function(
     int hwnd, int uMsg, int wParam, int lParam);
 
-// HMODULE GetModuleHandleW(
-//   LPCWSTR lpModuleName
-// );
-typedef getModuleHandleNative = Int64 Function(Pointer<Int64> lpModuleName);
-typedef getModuleHandleDart = int Function(Pointer<Int64> lpModuleName);
-
 // HDC BeginPaint(
 //   HWND          hWnd,
 //   LPPAINTSTRUCT lpPaint
@@ -363,6 +357,12 @@ typedef getMessageNative = Int32 Function(
     Pointer<MSG> lpMsg, Int64 hWnd, Int32 wMsgFilterMin, Int32 wMsgFilterMax);
 typedef getMessageDart = int Function(
     Pointer<MSG> lpMsg, int hWnd, int wMsgFilterMin, int wMsgFilterMax);
+
+// HMODULE GetModuleHandleW(
+//   LPCWSTR lpModuleName
+// );
+typedef getModuleHandleNative = Int64 Function(Pointer<Int64> lpModuleName);
+typedef getModuleHandleDart = int Function(Pointer<Int64> lpModuleName);
 
 // ATOM RegisterClassW(
 //   const WNDCLASSW *lpWndClass

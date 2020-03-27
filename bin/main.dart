@@ -75,7 +75,7 @@ import 'package:win32/win32.dart';
 // }
 final win32 = Win32();
 
-int WindowProc(int hwnd, int uMsg, int wParam, int lParam) {
+int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
   switch (uMsg) {
     case WM_DESTROY:
       win32.PostQuitMessage(0);
@@ -93,7 +93,7 @@ int WindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 }
 
 int main() {
-  var hInstance = win32.GetModuleHandle(Pointer.fromAddress(0));
+  final hInstance = win32.GetModuleHandle(nullptr);
   print('hInstance: ${hInstance.toRadixString(16)}');
 
   // Register the window class.
@@ -101,7 +101,7 @@ int main() {
   var CLASS_NAME = ffi.Utf16.toUtf16('Sample Window Class');
   var wcPtr = ffi.allocate<WNDCLASS>();
   var wc = wcPtr.ref;
-  wc.lpfnWndProc = Pointer.fromFunction<windowProcNative>(WindowProc, 0);
+  wc.lpfnWndProc = Pointer.fromFunction<windowProcNative>(MainWindowProc, 0);
   wc.hInstance = hInstance;
   wc.lpszClassName = CLASS_NAME;
 
