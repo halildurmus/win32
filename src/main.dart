@@ -15,9 +15,14 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
     case WM_PAINT:
       var ps = PAINTSTRUCT.allocate();
       var hdc = win32.BeginPaint(hwnd, ps.addressOf);
-      win32.FillRect(
-          hdc, Pointer.fromAddress(ps.addressOf.address + 6), COLOR_WINDOW + 1);
+      var rect = RECT.allocate();
+      var text = Utf16.toUtf16('Hello, Dart!');
+
+      win32.GetClientRect(hwnd, rect.addressOf);
+      win32.DrawText(hdc, text, -1, rect.addressOf,
+          DT_CENTER | DT_VCENTER | DT_SINGLELINE);
       win32.EndPaint(hwnd, ps.addressOf);
+
       return 0;
   }
   return win32.DefWindowProc(hwnd, uMsg, wParam, lParam);
@@ -33,6 +38,8 @@ int main() {
   wc.lpfnWndProc = Pointer.fromFunction<windowProcNative>(MainWindowProc, 0);
   wc.hInstance = hInstance;
   wc.lpszClassName = CLASS_NAME;
+  wc.hCursor = win32.LoadCursor(NULL, IDC_ARROW);
+  wc.hbrBackground = win32.GetStockObject(WHITE_BRUSH);
   win32.RegisterClass(wc.addressOf);
 
   // Create the window.
@@ -68,10 +75,6 @@ int main() {
     win32.TranslateMessage(msg.addressOf);
     win32.DispatchMessage(msg.addressOf);
   }
-
-  // TODO: Is this necessary? Won't Dart tear this down anyway?
-  free(wc.addressOf);
-  free(CLASS_NAME);
 
   return 0;
 }

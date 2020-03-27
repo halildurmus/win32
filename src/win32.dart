@@ -101,13 +101,58 @@ const SW_RESTORE = 9;
 const SW_SHOWDEFAULT = 10;
 const SW_FORCEMINIMIZE = 11;
 
-// ControlWord constants
+// DrawText constants
+const DT_TOP = 0x000;
+const DT_LEFT = 0x000;
+const DT_CENTER = 0x001;
+const DT_RIGHT = 0x002;
+const DT_VCENTER = 0x004;
+const DT_BOTTOM = 0x008;
+const DT_WORDBREAK = 0x0010;
+const DT_SINGLELINE = 0x0020;
+
+// ControlWord constant
 const CW_USEDEFAULT = 0x80000000;
 
 // System colors
+const COLOR_SCROLLBAR = 0;
+const COLOR_BACKGROUND = 1;
+const COLOR_ACTIVECAPTION = 2;
+const COLOR_INACTIVECAPTION = 3;
+const COLOR_MENU = 4;
 const COLOR_WINDOW = 5;
+const COLOR_WINDOWFRAME = 6;
+const COLOR_MENUTEXT = 7;
+const COLOR_WINDOWTEXT = 8;
+const COLOR_CAPTIONTEXT = 9;
+const COLOR_ACTIVEBORDER = 10;
+const COLOR_INACTIVEBORDER = 11;
+const COLOR_APPWORKSPACE = 12;
+const COLOR_HIGHLIGHT = 13;
+const COLOR_HIGHLIGHTTEXT = 14;
+const COLOR_BTNFACE = 15;
+const COLOR_BTNSHADOW = 16;
+const COLOR_GRAYTEXT = 17;
+const COLOR_BTNTEXT = 18;
+const COLOR_INACTIVECAPTIONTEXT = 19;
+const COLOR_BTNHIGHLIGHT = 20;
 
-const IDC_ARROW = 32512;
+// Stock objects
+const WHITE_BRUSH = 0;
+const LTGRAY_BRUSH = 1;
+const GRAY_BRUSH = 2;
+const DKGRAY_BRUSH = 3;
+const BLACK_BRUSH = 4;
+const NULL_BRUSH = 5;
+const HOLLOW_BRUSH = NULL_BRUSH;
+const WHITE_PEN = 6;
+const BLACK_PEN = 7;
+
+final IDC_ARROW = Pointer<Utf16>.fromAddress(32512);
+final IDC_IBEAM = Pointer<Utf16>.fromAddress(32513);
+final IDC_WAIT = Pointer<Utf16>.fromAddress(32514);
+final IDC_CROSS = Pointer<Utf16>.fromAddress(32515);
+final IDC_UPARROW = Pointer<Utf16>.fromAddress(32516);
 
 //////////////
 // STRUCTS //
@@ -374,6 +419,18 @@ typedef defWindowProcDart = int Function(
 typedef dispatchMessageNative = Int64 Function(Pointer<MSG> lpMsg);
 typedef dispatchMessageDart = int Function(Pointer<MSG> lpMsg);
 
+// int DrawTextW(
+//   HDC     hdc,
+//   LPCWSTR lpchText,
+//   int     cchText,
+//   LPRECT  lprc,
+//   UINT    format
+// );
+typedef drawTextNative = Int32 Function(Int64 hdc, Pointer<Utf16> lpchText,
+    Int32 cchText, Pointer<RECT> lprc, Int32 format);
+typedef drawTextDart = int Function(int hdc, Pointer<Utf16> lpchText,
+    int cchText, Pointer<RECT> lprc, int format);
+
 // BOOL EndPaint(
 //   HWND              hWnd,
 //   const PAINTSTRUCT *lpPaint
@@ -411,6 +468,19 @@ typedef getMessageDart = int Function(
 // );
 typedef getModuleHandleNative = Int64 Function(Pointer<Utf16> lpModuleName);
 typedef getModuleHandleDart = int Function(Pointer<Utf16> lpModuleName);
+
+// BOOL GetClientRect(
+//   HWND   hWnd,
+//   LPRECT lpRect
+// );
+typedef getClientRectNative = Int32 Function(Int64 hwnd, Pointer<RECT> lpRect);
+typedef getClientRectDart = int Function(int hwnd, Pointer<RECT> lpRect);
+
+// HGDIOBJ GetStockObject(
+//   int i
+// );
+typedef getStockObjectNative = Int64 Function(Int32 i);
+typedef getStockObjectDart = int Function(int i);
 
 // HCURSOR LoadCursorW(
 //   HINSTANCE hInstance,
@@ -454,11 +524,14 @@ class Win32 {
   beginPaintDart BeginPaint;
   defWindowProcDart DefWindowProc;
   dispatchMessageDart DispatchMessage;
+  drawTextDart DrawText;
   endPaintDart EndPaint;
   fillRectDart FillRect;
+  getClientRectDart GetClientRect;
   getLastErrorDart GetLastError;
   getMessageDart GetMessage;
   getModuleHandleDart GetModuleHandle;
+  getStockObjectDart GetStockObject;
   loadCursorDart LoadCursor;
   postQuitMessageDart PostQuitMessage;
   registerClassDart RegisterClass;
@@ -478,8 +551,12 @@ class Win32 {
     DispatchMessage =
         user32.lookupFunction<dispatchMessageNative, dispatchMessageDart>(
             'DispatchMessageW');
+    DrawText = user32.lookupFunction<drawTextNative, drawTextDart>('DrawTextW');
     EndPaint = user32.lookupFunction<endPaintNative, endPaintDart>('EndPaint');
     FillRect = user32.lookupFunction<fillRectNative, fillRectDart>('FillRect');
+    GetClientRect =
+        user32.lookupFunction<getClientRectNative, getClientRectDart>(
+            'GetClientRect');
     GetMessage =
         user32.lookupFunction<getMessageNative, getMessageDart>('GetMessageW');
     LoadCursor =
@@ -502,5 +579,10 @@ class Win32 {
     GetModuleHandle =
         kernel32.lookupFunction<getModuleHandleNative, getModuleHandleDart>(
             'GetModuleHandleW');
+
+    final gdi32 = DynamicLibrary.open('gdi32.dll');
+    GetStockObject =
+        gdi32.lookupFunction<getStockObjectNative, getStockObjectDart>(
+            'GetStockObject');
   }
 }
