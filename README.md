@@ -3,6 +3,11 @@ application using Dart FFI. No Win32 SDK or C code is required.
 
 This requires the Dart 64-bit compiler. 
 
+The Dart code is in `bin\main.dart`. All Win32 API calls are in a `Win32`
+class, which wraps the FFI typedefs and dynamic library loading. That class can
+be found in `lib\win32.dart`, and contains a variety of instructive examples
+for more complex FFI usage scenarios.
+
 To run, type
 
 ```
