@@ -188,3 +188,116 @@ class RECT extends Struct {
     ..right = 0
     ..bottom = 0;
 }
+
+// *** CONSOLE STRUCTS ***
+
+// Dart FFI does not yet have support for nested structs, so there's extra
+// work necessary to unpack parameters like COORD and SMALL_RECT. The Dart
+// issue for this work is https://github.com/dart-lang/sdk/issues/37271.
+
+// typedef struct _CONSOLE_CURSOR_INFO {
+//   DWORD dwSize;
+//   BOOL  bVisible;
+// } CONSOLE_CURSOR_INFO, *PCONSOLE_CURSOR_INFO;
+class CONSOLE_CURSOR_INFO extends Struct {
+  @Int32()
+  int dwSize;
+  @Int32()
+  int bVisible;
+
+  factory CONSOLE_CURSOR_INFO.allocate() => allocate<CONSOLE_CURSOR_INFO>().ref
+    ..dwSize = 0
+    ..bVisible = 0;
+}
+
+// typedef struct _CONSOLE_SCREEN_BUFFER_INFO {
+//   COORD      dwSize;
+//   COORD      dwCursorPosition;
+//   WORD       wAttributes;
+//   SMALL_RECT srWindow;
+//   COORD      dwMaximumWindowSize;
+// } CONSOLE_SCREEN_BUFFER_INFO;
+class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
+  @Int16()
+  int dwSizeX;
+
+  @Int16()
+  int dwSizeY;
+
+  @Int16()
+  int dwCursorPositionX;
+  @Int16()
+  int dwCursorPositionY;
+
+  @Int16()
+  int wAttributes;
+
+  @Int16()
+  int srWindowLeft;
+  @Int16()
+  int srWindowTop;
+  @Int16()
+  int srWindowRight;
+  @Int16()
+  int srWindowBottom;
+
+  @Int16()
+  int dwMaximumWindowSizeX;
+  @Int16()
+  int dwMaximumWindowSizeY;
+
+  factory CONSOLE_SCREEN_BUFFER_INFO.allocate() =>
+      allocate<CONSOLE_SCREEN_BUFFER_INFO>().ref
+        ..dwSizeX = 0
+        ..dwSizeY = 0
+        ..dwCursorPositionX = 0
+        ..dwCursorPositionY = 0
+        ..wAttributes = 0
+        ..srWindowLeft = 0
+        ..srWindowTop = 0
+        ..srWindowRight = 0
+        ..srWindowBottom = 0
+        ..dwMaximumWindowSizeX = 0
+        ..dwMaximumWindowSizeY = 0;
+}
+
+// typedef struct _COORD {
+//   SHORT X;
+//   SHORT Y;
+// } COORD, *PCOORD;
+class COORD extends Struct {
+  @Int16()
+  int X;
+
+  @Int16()
+  int Y;
+
+  factory COORD.allocate() => allocate<COORD>().ref
+    ..X = 0
+    ..Y = 0;
+}
+
+// typedef struct _SMALL_RECT {
+//   SHORT Left;
+//   SHORT Top;
+//   SHORT Right;
+//   SHORT Bottom;
+// } SMALL_RECT;
+class SMALL_RECT extends Struct {
+  @Int16()
+  int Left;
+
+  @Int16()
+  int Top;
+
+  @Int16()
+  int Right;
+
+  @Int16()
+  int Bottom;
+  factory SMALL_RECT.allocate() => allocate<SMALL_RECT>().ref
+    ..Left = 0
+    ..Top = 0
+    ..Right = 0
+    ..Bottom = 0;
+}
