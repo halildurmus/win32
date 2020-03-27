@@ -148,6 +148,18 @@ class WNDCLASS extends Struct {
 
   Pointer<Utf16> lpszMenuName;
   Pointer<Utf16> lpszClassName;
+
+  factory WNDCLASS.allocate() => allocate<WNDCLASS>().ref
+    ..style = 0
+    ..lpfnWndProc = nullptr
+    ..cbClsExtra = 0
+    ..cbWndExtra = 0
+    ..hInstance = 0
+    ..hIcon = 0
+    ..hCursor = 0
+    ..hbrBackground = 0
+    ..lpszMenuName = nullptr
+    ..lpszClassName = nullptr;
 }
 
 // typedef struct tagMSG {
@@ -361,8 +373,8 @@ typedef getMessageDart = int Function(
 // HMODULE GetModuleHandleW(
 //   LPCWSTR lpModuleName
 // );
-typedef getModuleHandleNative = Int64 Function(Pointer<Int64> lpModuleName);
-typedef getModuleHandleDart = int Function(Pointer<Int64> lpModuleName);
+typedef getModuleHandleNative = Int64 Function(Pointer<Utf16> lpModuleName);
+typedef getModuleHandleDart = int Function(Pointer<Utf16> lpModuleName);
 
 // ATOM RegisterClassW(
 //   const WNDCLASSW *lpWndClass

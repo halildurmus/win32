@@ -94,19 +94,24 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
 int main() {
   final hInstance = win32.GetModuleHandle(nullptr);
-  print('hInstance: ${hInstance.toRadixString(16)}');
 
   // Register the window class.
 
   var CLASS_NAME = ffi.Utf16.toUtf16('Sample Window Class');
-  var wcPtr = ffi.allocate<WNDCLASS>();
-  var wc = wcPtr.ref;
+  var wc = WNDCLASS.allocate();
+  assert(sizeOf<WNDCLASS>() == 72);
+  wc.style = 0;
   wc.lpfnWndProc = Pointer.fromFunction<windowProcNative>(MainWindowProc, 0);
+  wc.cbClsExtra = 0;
+  wc.cbWndExtra = 0;
   wc.hInstance = hInstance;
+  wc.hIcon = 0;
+  wc.hCursor = 0;
+  wc.hbrBackground = 0;
+  wc.lpszMenuName = nullptr;
   wc.lpszClassName = CLASS_NAME;
-  print(wc.lpszClassName);
 
-  var atom = win32.RegisterClass(wcPtr);
+  var atom = win32.RegisterClass(wc.addressOf);
   if (atom == 0) {
     print('RegisterClass failed with error: ${win32.GetLastError()}');
     return -1;
@@ -117,7 +122,7 @@ int main() {
   var hWnd = win32.CreateWindowEx(
       0, // Optional window styles.
       CLASS_NAME, // Window class
-      ffi.Utf16.toUtf16('Learn to Program Windows'), // Window text
+      ffi.Utf16.toUtf16('Dart Native Win32 window'), // Window text
       WS_OVERLAPPEDWINDOW, // Window style
 
       // Size and position
@@ -144,7 +149,7 @@ int main() {
     win32.DispatchMessage(msg);
   }
 
-  ffi.free(wcPtr);
+  ffi.free(wc.addressOf);
   ffi.free(CLASS_NAME);
 
   return 0;
