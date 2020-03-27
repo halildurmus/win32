@@ -107,6 +107,8 @@ const CW_USEDEFAULT = 0x80000000;
 // System colors
 const COLOR_WINDOW = 5;
 
+const IDC_ARROW = 32512;
+
 //////////////
 // STRUCTS //
 //////////////
@@ -410,6 +412,15 @@ typedef getMessageDart = int Function(
 typedef getModuleHandleNative = Int64 Function(Pointer<Utf16> lpModuleName);
 typedef getModuleHandleDart = int Function(Pointer<Utf16> lpModuleName);
 
+// HCURSOR LoadCursorW(
+//   HINSTANCE hInstance,
+//   LPCWSTR   lpCursorName
+// );
+typedef loadCursorNative = Int64 Function(
+    Int64 hInstance, Pointer<Utf16> lpCursorName);
+typedef loadCursorDart = int Function(
+    int hInstance, Pointer<Utf16> lpCursorName);
+
 // ATOM RegisterClassW(
 //   const WNDCLASSW *lpWndClass
 // );
@@ -448,6 +459,7 @@ class Win32 {
   getLastErrorDart GetLastError;
   getMessageDart GetMessage;
   getModuleHandleDart GetModuleHandle;
+  loadCursorDart LoadCursor;
   postQuitMessageDart PostQuitMessage;
   registerClassDart RegisterClass;
   showWindowDart ShowWindow;
@@ -470,6 +482,8 @@ class Win32 {
     FillRect = user32.lookupFunction<fillRectNative, fillRectDart>('FillRect');
     GetMessage =
         user32.lookupFunction<getMessageNative, getMessageDart>('GetMessageW');
+    LoadCursor =
+        user32.lookupFunction<loadCursorNative, loadCursorDart>('LoadCursorW');
     PostQuitMessage =
         user32.lookupFunction<postQuitMessageNative, postQuitMessageDart>(
             'PostQuitMessage');

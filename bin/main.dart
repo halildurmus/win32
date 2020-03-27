@@ -83,11 +83,11 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       return 0;
 
     case WM_PAINT:
-      var ps = ffi.allocate<PAINTSTRUCT>();
-      var hdc = win32.BeginPaint(hwnd, ps);
+      var ps = PAINTSTRUCT.allocate();
+      var hdc = win32.BeginPaint(hwnd, ps.addressOf);
       win32.FillRect(
-          hdc, Pointer.fromAddress(ps.address + 6), COLOR_WINDOW + 1);
-      win32.EndPaint(hwnd, ps);
+          hdc, Pointer.fromAddress(ps.addressOf.address + 6), COLOR_WINDOW + 1);
+      win32.EndPaint(hwnd, ps.addressOf);
       return 0;
   }
   return win32.DefWindowProc(hwnd, uMsg, wParam, lParam);
@@ -103,7 +103,6 @@ int main() {
   wc.lpfnWndProc = Pointer.fromFunction<windowProcNative>(MainWindowProc, 0);
   wc.hInstance = hInstance;
   wc.lpszClassName = CLASS_NAME;
-
   win32.RegisterClass(wc.addressOf);
 
   // Create the window.
