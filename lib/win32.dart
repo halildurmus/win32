@@ -1,5 +1,4 @@
 import 'dart:ffi';
-
 import 'package:ffi/ffi.dart';
 
 // Prototypes of window-related functions, constants and structs in user32.dll
@@ -104,6 +103,9 @@ const SW_FORCEMINIMIZE = 11;
 
 // ControlWord constants
 const CW_USEDEFAULT = 0x80000000;
+
+// System colors
+const COLOR_WINDOW = 5;
 
 //////////////
 // STRUCTS //
@@ -230,6 +232,23 @@ class PAINTSTRUCT extends Struct {
   int rgb4;
 }
 
+// typedef struct tagRECT {
+//   LONG left;
+//   LONG top;
+//   LONG right;
+//   LONG bottom;
+// } RECT, *PRECT, *NPRECT, *LPRECT;
+class RECT extends Struct {
+  @Int32()
+  int left;
+  @Int32()
+  int top;
+  @Int32()
+  int right;
+  @Int32()
+  int bottom;
+}
+
 //////////////
 // TYPEDEFS //
 //////////////
@@ -245,6 +264,14 @@ typedef windowProcDart = int Function(
 // );
 typedef getModuleHandleNative = Int64 Function(Pointer<Int64> lpModuleName);
 typedef getModuleHandleDart = int Function(Pointer<Int64> lpModuleName);
+
+// HDC BeginPaint(
+//   HWND          hWnd,
+//   LPPAINTSTRUCT lpPaint
+// );
+typedef beginPaintNative = Int64 Function(
+    Int64 hWnd, Pointer<PAINTSTRUCT> lpPaint);
+typedef beginPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
 
 // HWND CreateWindowExW(
 //   DWORD     dwExStyle,
@@ -299,9 +326,43 @@ typedef defWindowProcNative = Int64 Function(
 typedef defWindowProcDart = int Function(
     int hWnd, int Msg, int wParam, int lParam);
 
+// LRESULT DispatchMessage(
+//   const MSG *lpMsg
+// );
+typedef dispatchMessageNative = Int64 Function(Pointer<MSG> lpMsg);
+typedef dispatchMessageDart = int Function(Pointer<MSG> lpMsg);
+
+// BOOL EndPaint(
+//   HWND              hWnd,
+//   const PAINTSTRUCT *lpPaint
+// );
+typedef endPaintNative = Int32 Function(
+    Int64 hWnd, Pointer<PAINTSTRUCT> lpPaint);
+typedef endPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
+
+// int FillRect(
+//   HDC        hDC,
+//   const RECT *lprc,
+//   HBRUSH     hbr
+// );
+typedef fillRectNative = Int32 Function(
+    Int64 hDC, Pointer<RECT> lprc, Int64 hbr);
+typedef fillRectDart = int Function(int hDC, Pointer<RECT> lprc, int hbr);
+
 // _Post_equals_last_error_ DWORD GetLastError();
 typedef getLastErrorNative = Int32 Function();
 typedef getLastErrorDart = int Function();
+
+// BOOL GetMessage(
+//   LPMSG lpMsg,
+//   HWND  hWnd,
+//   UINT  wMsgFilterMin,
+//   UINT  wMsgFilterMax
+// );
+typedef getMessageNative = Int32 Function(
+    Pointer<MSG> lpMsg, Int64 hWnd, Int32 wMsgFilterMin, Int32 wMsgFilterMax);
+typedef getMessageDart = int Function(
+    Pointer<MSG> lpMsg, int hWnd, int wMsgFilterMin, int wMsgFilterMax);
 
 // ATOM RegisterClassW(
 //   const WNDCLASSW *lpWndClass
@@ -316,6 +377,12 @@ typedef registerClassDart = int Function(Pointer<WNDCLASS> lpWndClass);
 typedef showWindowNative = Int32 Function(Int64 hWnd, Int32 nCmdShow);
 typedef showWindowDart = int Function(int hWnd, int nCmdShow);
 
+// BOOL TranslateMessage(
+//   const MSG *lpMsg
+// );
+typedef translateMessageNative = Int32 Function(Pointer<MSG> lpMsg);
+typedef translateMessageDart = int Function(Pointer<MSG> lpMsg);
+
 // void PostQuitMessage(
 //   int nExitCode
 // );
@@ -327,21 +394,36 @@ typedef postQuitMessageDart = void Function(int nExitCode);
 ///////////////
 class Win32 {
   createWindowExDart CreateWindowEx;
+  beginPaintDart BeginPaint;
   defWindowProcDart DefWindowProc;
+  dispatchMessageDart DispatchMessage;
+  endPaintDart EndPaint;
+  fillRectDart FillRect;
   getLastErrorDart GetLastError;
+  getMessageDart GetMessage;
   getModuleHandleDart GetModuleHandle;
   postQuitMessageDart PostQuitMessage;
   registerClassDart RegisterClass;
   showWindowDart ShowWindow;
+  translateMessageDart TranslateMessage;
 
   Win32() {
     final user32 = DynamicLibrary.open('user32.dll');
+    BeginPaint =
+        user32.lookupFunction<beginPaintNative, beginPaintDart>('BeginPaint');
     CreateWindowEx =
         user32.lookupFunction<createWindowExNative, createWindowExDart>(
             'CreateWindowExW');
     DefWindowProc =
         user32.lookupFunction<defWindowProcNative, defWindowProcDart>(
             'DefWindowProcW');
+    DispatchMessage =
+        user32.lookupFunction<dispatchMessageNative, dispatchMessageDart>(
+            'DispatchMessageW');
+    EndPaint = user32.lookupFunction<endPaintNative, endPaintDart>('EndPaint');
+    FillRect = user32.lookupFunction<fillRectNative, fillRectDart>('FillRect');
+    GetMessage =
+        user32.lookupFunction<getMessageNative, getMessageDart>('GetMessageW');
     PostQuitMessage =
         user32.lookupFunction<postQuitMessageNative, postQuitMessageDart>(
             'PostQuitMessage');
@@ -350,6 +432,9 @@ class Win32 {
             'RegisterClassW');
     ShowWindow =
         user32.lookupFunction<showWindowNative, showWindowDart>('ShowWindow');
+    TranslateMessage =
+        user32.lookupFunction<translateMessageNative, translateMessageDart>(
+            'TranslateMessage');
 
     final kernel32 = DynamicLibrary.open('kernel32.dll');
     GetLastError = kernel32

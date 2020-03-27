@@ -80,7 +80,13 @@ int WindowProc(int hwnd, int uMsg, int wParam, int lParam) {
     case WM_DESTROY:
       win32.PostQuitMessage(0);
       return 0;
+
     case WM_PAINT:
+      var ps = ffi.allocate<PAINTSTRUCT>();
+      var hdc = win32.BeginPaint(hwnd, ps);
+      win32.FillRect(
+          hdc, Pointer.fromAddress(ps.address + 6), COLOR_WINDOW + 1);
+      win32.EndPaint(hwnd, ps);
       return 0;
   }
   return win32.DefWindowProc(hwnd, uMsg, wParam, lParam);
@@ -130,6 +136,12 @@ int main() {
   print('hWnd: $hWnd');
 
   win32.ShowWindow(hWnd, SW_SHOWNORMAL);
+
+  var msg = ffi.allocate<MSG>();
+  while (win32.GetMessage(msg, NULL, 0, 0) != 0) {
+    win32.TranslateMessage(msg);
+    win32.DispatchMessage(msg);
+  }
 
   ffi.free(wcPtr);
   ffi.free(CLASS_NAME);
