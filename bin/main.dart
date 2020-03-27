@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:io';
 import 'package:ffi/ffi.dart' as ffi;
 import 'package:win32/win32.dart';
 
@@ -99,23 +100,11 @@ int main() {
 
   var CLASS_NAME = ffi.Utf16.toUtf16('Sample Window Class');
   var wc = WNDCLASS.allocate();
-  assert(sizeOf<WNDCLASS>() == 72);
-  wc.style = 0;
   wc.lpfnWndProc = Pointer.fromFunction<windowProcNative>(MainWindowProc, 0);
-  wc.cbClsExtra = 0;
-  wc.cbWndExtra = 0;
   wc.hInstance = hInstance;
-  wc.hIcon = 0;
-  wc.hCursor = 0;
-  wc.hbrBackground = 0;
-  wc.lpszMenuName = nullptr;
   wc.lpszClassName = CLASS_NAME;
 
-  var atom = win32.RegisterClass(wc.addressOf);
-  if (atom == 0) {
-    print('RegisterClass failed with error: ${win32.GetLastError()}');
-    return -1;
-  }
+  win32.RegisterClass(wc.addressOf);
 
   // Create the window.
 
@@ -135,18 +124,20 @@ int main() {
       hInstance, // Instance handle
       nullptr // Additional application data
       );
-  if (hWnd == 0) {
-    print('CreateWindowEx failed with error: ${win32.GetLastError()}');
-  }
 
-  print('hWnd: $hWnd');
+  if (hWnd == 0) {
+    stderr.writeln('CreateWindowEx failed with error: ${win32.GetLastError()}');
+    return -1;
+  }
 
   win32.ShowWindow(hWnd, SW_SHOWNORMAL);
 
-  var msg = ffi.allocate<MSG>();
-  while (win32.GetMessage(msg, NULL, 0, 0) != 0) {
-    win32.TranslateMessage(msg);
-    win32.DispatchMessage(msg);
+  // Run the message loop.
+
+  var msg = MSG.allocate();
+  while (win32.GetMessage(msg.addressOf, NULL, 0, 0) != 0) {
+    win32.TranslateMessage(msg.addressOf);
+    win32.DispatchMessage(msg.addressOf);
   }
 
   ffi.free(wc.addressOf);

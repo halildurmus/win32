@@ -195,6 +195,16 @@ class MSG extends Struct {
 
   @Int32()
   int lPrivate;
+
+  factory MSG.allocate() => allocate<MSG>().ref
+    ..hwnd = 0
+    ..message = 0
+    ..wParam = 0
+    ..lParam = 0
+    ..time = 0
+    ..ptX = 0
+    ..ptY = 0
+    ..lPrivate = 0;
 }
 
 // typedef struct tagPOINT {
@@ -207,6 +217,10 @@ class POINT extends Struct {
 
   @Int32()
   int y;
+
+  factory POINT.allocate() => allocate<POINT>().ref
+    ..x = 0
+    ..y = 0;
 }
 
 // typedef struct tagPAINTSTRUCT {
@@ -242,6 +256,20 @@ class PAINTSTRUCT extends Struct {
   int rgb3;
   @Int64()
   int rgb4;
+
+  factory PAINTSTRUCT.allocate() => allocate<PAINTSTRUCT>().ref
+    ..hdc = 0
+    ..fErase = 0
+    ..rcPaintL = 0
+    ..rcPaintT = 0
+    ..rcPaintR = 0
+    ..rcPaintB = 0
+    ..fRestore = 0
+    ..fIncUpdate = 0
+    ..rgb1 = 0
+    ..rgb2 = 0
+    ..rgb3 = 0
+    ..rgb4 = 0;
 }
 
 // typedef struct tagRECT {
@@ -259,6 +287,12 @@ class RECT extends Struct {
   int right;
   @Int32()
   int bottom;
+
+  factory RECT.allocate() => allocate<RECT>().ref
+    ..left = 0
+    ..top = 0
+    ..right = 0
+    ..bottom = 0;
 }
 
 //////////////
