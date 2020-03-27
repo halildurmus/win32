@@ -104,6 +104,7 @@ int main() {
   wc.lpfnWndProc = Pointer.fromFunction<windowProcNative>(MainWindowProc, 0);
   wc.hInstance = hInstance;
   wc.lpszClassName = CLASS_NAME;
+  print(wc.lpszClassName);
 
   var atom = win32.RegisterClass(wcPtr);
   if (atom == 0) {
