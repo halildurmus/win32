@@ -1,3 +1,5 @@
+// Development utility to confirm the width of various Win32 objects.
+
 #include <stdlib.h>
 #include <windows.h>
 #include <stdio.h>
