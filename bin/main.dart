@@ -75,7 +75,6 @@ import 'package:win32/win32.dart';
 // }
 final win32 = Win32();
 
-typedef WindowProcType = Int32 Function(Int32, Int32, Int32, Int32);
 int WindowProc(int hwnd, int uMsg, int wParam, int lParam) {
   switch (uMsg) {
     case WM_DESTROY:
@@ -87,29 +86,26 @@ int WindowProc(int hwnd, int uMsg, int wParam, int lParam) {
   return win32.DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
-void main(List<String> arguments) {
-  var debug = 0;
-
+int main() {
   var hInstance = win32.GetModuleHandle(Pointer.fromAddress(0));
-  print('hInstance: $hInstance');
+  print('hInstance: ${hInstance.toRadixString(16)}');
 
-  final CLASS_NAME = ffi.Utf16.toUtf16('Sample Window Class');
-  print(debug++);
+  // Register the window class.
 
-  var wc = WNDCLASS();
-  print(debug++);
-
-  wc.lpfnWndProc = Pointer.fromFunction<WindowProcType>(WindowProc, 0);
-  print(debug++);
-
+  var CLASS_NAME = ffi.Utf16.toUtf16('Sample Window Class');
+  var wcPtr = ffi.allocate<WNDCLASS>();
+  var wc = wcPtr.ref;
+  wc.lpfnWndProc = Pointer.fromFunction<windowProcNative>(WindowProc, 0);
   wc.hInstance = hInstance;
-  print(debug++);
-
   wc.lpszClassName = CLASS_NAME;
-  print(debug++);
 
-  print(wc.lpszClassName.address);
-  win32.RegisterClass(wc.addressOf);
+  var atom = win32.RegisterClass(wcPtr);
+  if (atom == 0) {
+    print('RegisterClass failed with error: ${win32.GetLastError()}');
+    return -1;
+  }
+
+  // Create the window.
 
   var hWnd = win32.CreateWindowEx(
       0, // Optional window styles.
@@ -127,6 +123,16 @@ void main(List<String> arguments) {
       hInstance, // Instance handle
       nullptr // Additional application data
       );
+  if (hWnd == 0) {
+    print('CreateWindowEx failed with error: ${win32.GetLastError()}');
+  }
 
   print('hWnd: $hWnd');
+
+  win32.ShowWindow(hWnd, SW_SHOWNORMAL);
+
+  ffi.free(wcPtr);
+  ffi.free(CLASS_NAME);
+
+  return 0;
 }

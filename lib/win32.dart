@@ -108,7 +108,7 @@ const CW_USEDEFAULT = 0x80000000;
 //////////////
 // STRUCTS //
 //////////////
-// typedef struct tagWNDCLASSA {
+// typedef struct tagWNDCLASSW {
 //   UINT      style;
 //   WNDPROC   lpfnWndProc;
 //   int       cbClsExtra;
@@ -117,9 +117,9 @@ const CW_USEDEFAULT = 0x80000000;
 //   HICON     hIcon;
 //   HCURSOR   hCursor;
 //   HBRUSH    hbrBackground;
-//   LPCSTR    lpszMenuName;
-//   LPCSTR    lpszClassName;
-// } WNDCLASSA, *PWNDCLASSA, *NPWNDCLASSA, *LPWNDCLASSA;
+//   LPCWSTR   lpszMenuName;
+//   LPCWSTR   lpszClassName;
+// } WNDCLASSW, *PWNDCLASSW, *NPWNDCLASSW, *LPWNDCLASSW;
 class WNDCLASS extends Struct {
   @Int32()
   int style;
@@ -132,20 +132,102 @@ class WNDCLASS extends Struct {
   @Int32()
   int cbWndExtra;
 
-  @Int32()
+  @Int64()
   int hInstance;
 
-  @Int32()
+  @Int64()
   int hIcon;
 
-  @Int32()
+  @Int64()
   int hCursor;
 
-  @Int32()
+  @Int64()
   int hbrBackground;
 
   Pointer<Utf16> lpszMenuName;
   Pointer<Utf16> lpszClassName;
+}
+
+// typedef struct tagMSG {
+//   HWND   hwnd;
+//   UINT   message;
+//   WPARAM wParam;
+//   LPARAM lParam;
+//   DWORD  time;
+//   POINT  pt;
+//   DWORD  lPrivate;
+// } MSG, *PMSG, *NPMSG, *LPMSG;
+class MSG extends Struct {
+  @Int64()
+  int hwnd;
+
+  @Int32()
+  int message;
+
+  @Int64()
+  int wParam;
+
+  @Int64()
+  int lParam;
+
+  @Int32()
+  int time;
+
+  @Int32()
+  int ptX;
+
+  @Int32()
+  int ptY;
+
+  @Int32()
+  int lPrivate;
+}
+
+// typedef struct tagPOINT {
+//   LONG x;
+//   LONG y;
+// } POINT, *PPOINT, *NPPOINT, *LPPOINT;
+class POINT extends Struct {
+  @Int32()
+  int x;
+
+  @Int32()
+  int y;
+}
+
+// typedef struct tagPAINTSTRUCT {
+//   HDC  hdc;
+//   BOOL fErase;
+//   RECT rcPaint;
+//   BOOL fRestore;
+//   BOOL fIncUpdate;
+//   BYTE rgbReserved[32];
+// } PAINTSTRUCT, *PPAINTSTRUCT, *NPPAINTSTRUCT, *LPPAINTSTRUCT;
+class PAINTSTRUCT extends Struct {
+  @Int64()
+  int hdc;
+  @Int32()
+  int fErase;
+  @Int32()
+  int rcPaintL;
+  @Int32()
+  int rcPaintT;
+  @Int32()
+  int rcPaintR;
+  @Int32()
+  int rcPaintB;
+  @Int32()
+  int fRestore;
+  @Int32()
+  int fIncUpdate;
+  @Int64()
+  int rgb1;
+  @Int64()
+  int rgb2;
+  @Int64()
+  int rgb3;
+  @Int64()
+  int rgb4;
 }
 
 //////////////
@@ -153,21 +235,21 @@ class WNDCLASS extends Struct {
 //////////////
 
 // LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-typedef windowProcNative = Int32 Function(
-    Int32 hwnd, Int32 uMsg, Int32 wParam, Int32 lParam);
+typedef windowProcNative = Int64 Function(
+    Int64 hwnd, Int32 uMsg, Int64 wParam, Int64 lParam);
 typedef windowProcDart = int Function(
     int hwnd, int uMsg, int wParam, int lParam);
 
-// HMODULE GetModuleHandleA(
-//   LPCSTR lpModuleName
+// HMODULE GetModuleHandleW(
+//   LPCWSTR lpModuleName
 // );
-typedef getModuleHandleNative = Int32 Function(Pointer<Int32> lpModuleName);
-typedef getModuleHandleDart = int Function(Pointer<Int32> lpModuleName);
+typedef getModuleHandleNative = Int64 Function(Pointer<Int64> lpModuleName);
+typedef getModuleHandleDart = int Function(Pointer<Int64> lpModuleName);
 
-// HWND CreateWindowExA(
+// HWND CreateWindowExW(
 //   DWORD     dwExStyle,
-//   LPCSTR    lpClassName,
-//   LPCSTR    lpWindowName,
+//   LPCWSTR   lpClassName,
+//   LPCWSTR   lpWindowName,
 //   DWORD     dwStyle,
 //   int       X,
 //   int       Y,
@@ -187,9 +269,9 @@ typedef createWindowExNative = Int32 Function(
     Int32 Y,
     Int32 nWidth,
     Int32 nHeight,
-    Int32 hWndParent,
-    Int32 hMenu,
-    Int32 hInstance,
+    Int64 hWndParent,
+    Int64 hMenu,
+    Int64 hInstance,
     Pointer<Void> lpParam);
 
 typedef createWindowExDart = int Function(
@@ -206,28 +288,32 @@ typedef createWindowExDart = int Function(
     int hInstance,
     Pointer<Void> lpParam);
 
-// LRESULT LRESULT DefWindowProcA(
+// LRESULT LRESULT DefWindowProcW(
 //   HWND   hWnd,
 //   UINT   Msg,
 //   WPARAM wParam,
 //   LPARAM lParam
 // );
-typedef defWindowProcNative = Int32 Function(
-    Int32 hWnd, Int32 Msg, Int32 wParam, Int32 lParam);
+typedef defWindowProcNative = Int64 Function(
+    Int64 hWnd, Int32 Msg, Int64 wParam, Int64 lParam);
 typedef defWindowProcDart = int Function(
     int hWnd, int Msg, int wParam, int lParam);
 
-// ATOM RegisterClassA(
-//   const WNDCLASSA *lpWndClass
+// _Post_equals_last_error_ DWORD GetLastError();
+typedef getLastErrorNative = Int32 Function();
+typedef getLastErrorDart = int Function();
+
+// ATOM RegisterClassW(
+//   const WNDCLASSW *lpWndClass
 // );
-typedef registerClassNative = Int32 Function(Pointer<WNDCLASS> lpWndClass);
+typedef registerClassNative = Int16 Function(Pointer<WNDCLASS> lpWndClass);
 typedef registerClassDart = int Function(Pointer<WNDCLASS> lpWndClass);
 
 // BOOL ShowWindow(
 //   HWND hWnd,
 //   int  nCmdShow
 // );
-typedef showWindowNative = Int8 Function(Int32 hWnd, Int32 nCmdShow);
+typedef showWindowNative = Int32 Function(Int64 hWnd, Int32 nCmdShow);
 typedef showWindowDart = int Function(int hWnd, int nCmdShow);
 
 // void PostQuitMessage(
@@ -242,6 +328,7 @@ typedef postQuitMessageDart = void Function(int nExitCode);
 class Win32 {
   createWindowExDart CreateWindowEx;
   defWindowProcDart DefWindowProc;
+  getLastErrorDart GetLastError;
   getModuleHandleDart GetModuleHandle;
   postQuitMessageDart PostQuitMessage;
   registerClassDart RegisterClass;
@@ -251,22 +338,24 @@ class Win32 {
     final user32 = DynamicLibrary.open('user32.dll');
     CreateWindowEx =
         user32.lookupFunction<createWindowExNative, createWindowExDart>(
-            'CreateWindowExA');
+            'CreateWindowExW');
     DefWindowProc =
         user32.lookupFunction<defWindowProcNative, defWindowProcDart>(
-            'DefWindowProcA');
+            'DefWindowProcW');
     PostQuitMessage =
         user32.lookupFunction<postQuitMessageNative, postQuitMessageDart>(
             'PostQuitMessage');
     RegisterClass =
         user32.lookupFunction<registerClassNative, registerClassDart>(
-            'RegisterClassA');
+            'RegisterClassW');
     ShowWindow =
         user32.lookupFunction<showWindowNative, showWindowDart>('ShowWindow');
 
     final kernel32 = DynamicLibrary.open('kernel32.dll');
+    GetLastError = kernel32
+        .lookupFunction<getLastErrorNative, getLastErrorDart>('GetLastError');
     GetModuleHandle =
         kernel32.lookupFunction<getModuleHandleNative, getModuleHandleDart>(
-            'GetModuleHandleA');
+            'GetModuleHandleW');
   }
 }
