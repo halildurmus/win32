@@ -36,6 +36,8 @@ final GetMessage =
     user32.lookupFunction<getMessageNative, getMessageDart>('GetMessageW');
 final LoadCursor =
     user32.lookupFunction<loadCursorNative, loadCursorDart>('LoadCursorW');
+final MessageBox =
+    user32.lookupFunction<messageBoxNative, messageBoxDart>('MessageBoxW');
 final PostQuitMessage =
     user32.lookupFunction<postQuitMessageNative, postQuitMessageDart>(
         'PostQuitMessage');

@@ -148,6 +148,17 @@ typedef loadCursorNative = Int64 Function(
 typedef loadCursorDart = int Function(
     int hInstance, Pointer<Utf16> lpCursorName);
 
+// int MessageBoxW(
+//   HWND    hWnd,
+//   LPCWSTR lpText,
+//   LPCWSTR lpCaption,
+//   UINT    uType
+// );
+typedef messageBoxNative = Int32 Function(
+    Int64 hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption, Int32 uType);
+typedef messageBoxDart = int Function(
+    int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption, int uType);
+
 // ATOM RegisterClassW(
 //   const WNDCLASSW *lpWndClass
 // );
