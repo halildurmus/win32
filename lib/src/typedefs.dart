@@ -176,3 +176,9 @@ typedef translateMessageDart = int Function(Pointer<MSG> lpMsg);
 // );
 typedef postQuitMessageNative = Void Function(Int32 nExitCode);
 typedef postQuitMessageDart = void Function(int nExitCode);
+
+// BOOL UpdateWindow(
+//   HWND hWnd
+// );
+typedef updateWindowNative = Int32 Function(Int64 hWnd);
+typedef updateWindowDart = int Function(int hWnd);

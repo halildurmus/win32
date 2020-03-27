@@ -30,6 +30,7 @@ class Win32 {
   registerClassDart RegisterClass;
   showWindowDart ShowWindow;
   translateMessageDart TranslateMessage;
+  updateWindowDart UpdateWindow;
 
   Win32() {
     final user32 = DynamicLibrary.open('user32.dll');
@@ -65,6 +66,8 @@ class Win32 {
     TranslateMessage =
         user32.lookupFunction<translateMessageNative, translateMessageDart>(
             'TranslateMessage');
+    UpdateWindow = user32
+        .lookupFunction<updateWindowNative, updateWindowDart>('UpdateWindow');
 
     final kernel32 = DynamicLibrary.open('kernel32.dll');
     GetLastError = kernel32

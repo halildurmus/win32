@@ -13,10 +13,10 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       return 0;
 
     case WM_PAINT:
-      var ps = PAINTSTRUCT.allocate();
-      var hdc = win32.BeginPaint(hwnd, ps.addressOf);
-      var rect = RECT.allocate();
-      var text = Utf16.toUtf16('Hello, Dart!');
+      final ps = PAINTSTRUCT.allocate();
+      final hdc = win32.BeginPaint(hwnd, ps.addressOf);
+      final rect = RECT.allocate();
+      final text = Utf16.toUtf16('Hello, Dart!');
 
       win32.GetClientRect(hwnd, rect.addressOf);
       win32.DrawText(hdc, text, -1, rect.addressOf,
@@ -33,8 +33,8 @@ int main() {
 
   // Register the window class.
 
-  var CLASS_NAME = Utf16.toUtf16('Sample Window Class');
-  var wc = WNDCLASS.allocate();
+  final CLASS_NAME = Utf16.toUtf16('Sample Window Class');
+  final wc = WNDCLASS.allocate();
   wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(MainWindowProc, 0);
   wc.hInstance = hInstance;
   wc.lpszClassName = CLASS_NAME;
@@ -44,7 +44,7 @@ int main() {
 
   // Create the window.
 
-  var hWnd = win32.CreateWindowEx(
+  final hWnd = win32.CreateWindowEx(
       0, // Optional window styles.
       CLASS_NAME, // Window class
       Utf16.toUtf16('Dart Native Win32 window'), // Window text
@@ -67,10 +67,11 @@ int main() {
   }
 
   win32.ShowWindow(hWnd, SW_SHOWNORMAL);
+  win32.UpdateWindow(hWnd);
 
   // Run the message loop.
 
-  var msg = MSG.allocate();
+  final msg = MSG.allocate();
   while (win32.GetMessage(msg.addressOf, NULL, 0, 0) != 0) {
     win32.TranslateMessage(msg.addressOf);
     win32.DispatchMessage(msg.addressOf);
