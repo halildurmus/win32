@@ -3,10 +3,6 @@ import 'package:ffi/ffi.dart';
 
 import 'structs.dart';
 
-//////////////
-// TYPEDEFS //
-//////////////
-
 // LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 typedef windowProcNative = Int64 Function(
     Int64 hwnd, Int32 uMsg, Int64 wParam, Int64 lParam);

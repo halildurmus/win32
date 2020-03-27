@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:win32/win32.dart';
 
+final hInstance = GetModuleHandle(nullptr);
+
 int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
   switch (uMsg) {
     case WM_DESTROY:
@@ -25,12 +27,11 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
   return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
-int main() {
-  final hInstance = GetModuleHandle(nullptr);
-
+void main() {
   // Register the window class.
 
   final CLASS_NAME = TEXT('Sample Window Class');
+
   final wc = WNDCLASS.allocate();
   wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(MainWindowProc, 0);
   wc.hInstance = hInstance;
@@ -60,7 +61,7 @@ int main() {
 
   if (hWnd == 0) {
     stderr.writeln('CreateWindowEx failed with error: ${GetLastError()}');
-    return -1;
+    exit(-1);
   }
 
   ShowWindow(hWnd, SW_SHOWNORMAL);
@@ -73,6 +74,4 @@ int main() {
     TranslateMessage(msg.addressOf);
     DispatchMessage(msg.addressOf);
   }
-
-  return 0;
 }

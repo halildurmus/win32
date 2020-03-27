@@ -5,17 +5,14 @@ import 'typedefs.dart';
 
 // Prototypes of window-related functions, constants and structs in user32.dll
 
-///////////////
-// CALLBACKS //
-///////////////
+// *** Callbacks ***
 typedef WindowProc = Int64 Function(
     Int64 hwnd, Int32 uMsg, Int64 wParam, Int64 lParam);
 
+// *** Helper Function ***
 final TEXT = Utf16.toUtf16;
 
-//////////
-// APIs //
-//////////
+// *** APIs ***
 final user32 = DynamicLibrary.open('user32.dll');
 final BeginPaint =
     user32.lookupFunction<beginPaintNative, beginPaintDart>('BeginPaint');
