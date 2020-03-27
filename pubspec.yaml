@@ -1,7 +1,7 @@
 name: win32
 description: A Dart library for accessing common Win32 APIs
 version: 1.0.0
-author: Tim Sneath <timsneath@google.com>
+homepage: https://github.com/timsneath/win32
 
 environment:
   sdk: '>=2.7.0 <3.0.0'
