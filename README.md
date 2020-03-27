@@ -10,7 +10,7 @@ dart bin\main.dart
 ```
 
 This should create a blank window:
-![]()
+![](https://github.com/timsneath/win32/raw/master/images/win32.PNG)
 
 To create a standalone Dart executable, simply run
 
