@@ -1,5 +1,8 @@
 // Development utility to confirm the width of various Win32 objects.
 
+// This is the only C++ code in the repo, and is not used by the
+// package itself.
+
 // Compile with cl constants.cpp
 
 #include <stdlib.h>
