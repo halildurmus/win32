@@ -1,5 +1,5 @@
 name: win32
-description: A sample Win32 application.
+description: A Dart library for accessing common Win32 APIs
 version: 1.0.0
 author: Tim Sneath <timsneath@google.com>
 

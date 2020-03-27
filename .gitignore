@@ -10,5 +10,9 @@ build/
 # Directory created by dartdoc
 doc/api/
 
+# Get rid of any unwanted executables...
 *.exe
 *.obj
+
+# ...but keep the sample executable around
+!bin/hello.exe
