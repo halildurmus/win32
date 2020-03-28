@@ -6,6 +6,8 @@ import 'typedefs.dart';
 // Prototypes of window-related functions, constants and structs in user32.dll
 
 // *** Callbacks ***
+typedef TimerProc = Void Function(
+    Int64 Arg1, Uint32 Arg2, Pointer<Uint32> Arg3, Int32 Arg4);
 typedef WindowProc = Int64 Function(
     Int64 hwnd, Int32 uMsg, Int64 wParam, Int64 lParam);
 
@@ -32,10 +34,15 @@ final FillRect =
     user32.lookupFunction<fillRectNative, fillRectDart>('FillRect');
 final GetClientRect = user32
     .lookupFunction<getClientRectNative, getClientRectDart>('GetClientRect');
+final GetDC = user32.lookupFunction<getDCNative, getDCDart>('GetDC');
 final GetMessage =
     user32.lookupFunction<getMessageNative, getMessageDart>('GetMessageW');
+final KillTimer =
+    user32.lookupFunction<killTimerNative, killTimerDart>('KillTimer');
 final LoadCursor =
     user32.lookupFunction<loadCursorNative, loadCursorDart>('LoadCursorW');
+final LoadIcon =
+    user32.lookupFunction<loadIconNative, loadIconDart>('LoadIconW');
 final MessageBox =
     user32.lookupFunction<messageBoxNative, messageBoxDart>('MessageBoxW');
 final PostQuitMessage =
@@ -43,6 +50,10 @@ final PostQuitMessage =
         'PostQuitMessage');
 final RegisterClass = user32
     .lookupFunction<registerClassNative, registerClassDart>('RegisterClassW');
+final ReleaseDC =
+    user32.lookupFunction<releaseDCNative, releaseDCDart>('ReleaseDC');
+final SetTimer =
+    user32.lookupFunction<setTimerNative, setTimerDart>('SetTimer');
 final ShowWindow =
     user32.lookupFunction<showWindowNative, showWindowDart>('ShowWindow');
 final TranslateMessage =

@@ -3,12 +3,6 @@ import 'package:ffi/ffi.dart';
 
 import 'structs.dart';
 
-// LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-typedef windowProcNative = Int64 Function(
-    Int64 hwnd, Int32 uMsg, Int64 wParam, Int64 lParam);
-typedef windowProcDart = int Function(
-    int hwnd, int uMsg, int wParam, int lParam);
-
 // HDC BeginPaint(
 //   HWND          hWnd,
 //   LPPAINTSTRUCT lpPaint
@@ -133,11 +127,24 @@ typedef getModuleHandleDart = int Function(Pointer<Utf16> lpModuleName);
 typedef getClientRectNative = Int32 Function(Int64 hwnd, Pointer<RECT> lpRect);
 typedef getClientRectDart = int Function(int hwnd, Pointer<RECT> lpRect);
 
+// HDC GetDC(
+//   HWND hWnd
+// );
+typedef getDCNative = Int64 Function(Int64 hwnd);
+typedef getDCDart = int Function(int hwnd);
+
 // HGDIOBJ GetStockObject(
 //   int i
 // );
 typedef getStockObjectNative = Int64 Function(Int32 i);
 typedef getStockObjectDart = int Function(int i);
+
+// BOOL KillTimer(
+//   HWND     hWnd,
+//   UINT_PTR uIDEvent
+// );
+typedef killTimerNative = Int32 Function(Int64 hWnd, Uint32 uIDEvent);
+typedef killTimerDart = int Function(int hWnd, int uIDEvent);
 
 // HCURSOR LoadCursorW(
 //   HINSTANCE hInstance,
@@ -147,6 +154,14 @@ typedef loadCursorNative = Int64 Function(
     Int64 hInstance, Pointer<Utf16> lpCursorName);
 typedef loadCursorDart = int Function(
     int hInstance, Pointer<Utf16> lpCursorName);
+
+// HICON LoadIconW(
+//   HINSTANCE hInstance,
+//   LPCWSTR   lpIconName
+// );
+typedef loadIconNative = Int64 Function(
+    Int64 hInstance, Pointer<Utf16> lpIconName);
+typedef loadIconDart = int Function(int hInstance, Pointer<Utf16> lpIconName);
 
 // int MessageBoxW(
 //   HWND    hWnd,
@@ -164,6 +179,24 @@ typedef messageBoxDart = int Function(
 // );
 typedef registerClassNative = Int16 Function(Pointer<WNDCLASS> lpWndClass);
 typedef registerClassDart = int Function(Pointer<WNDCLASS> lpWndClass);
+
+// int ReleaseDC(
+//   HWND hWnd,
+//   HDC  hDC
+// );
+typedef releaseDCNative = Int32 Function(Int64 hWnd, Int64 hDC);
+typedef releaseDCDart = int Function(int hWnd, int hDC);
+
+// UINT_PTR SetTimer(
+//   HWND      hWnd,
+//   UINT_PTR  nIDEvent,
+//   UINT      uElapse,
+//   TIMERPROC lpTimerFunc
+// );
+typedef setTimerNative = Uint32 Function(Int64 hWnd, Uint32 nIDEvent,
+    Uint32 uElapse, Pointer<NativeFunction> lpTimerFunc);
+typedef setTimerDart = int Function(
+    int hWnd, int nIDEvent, int uElapse, Pointer<NativeFunction> lpTimerFunc);
 
 // BOOL ShowWindow(
 //   HWND hWnd,

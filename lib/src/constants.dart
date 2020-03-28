@@ -161,6 +161,17 @@ const HOLLOW_BRUSH = NULL_BRUSH;
 const WHITE_PEN = 6;
 const BLACK_PEN = 7;
 
+final IDI_APPLICATION = Pointer<Utf16>.fromAddress(32512);
+final IDI_HAND = Pointer<Utf16>.fromAddress(32513);
+final IDI_QUESTION = Pointer<Utf16>.fromAddress(32514);
+final IDI_EXCLAMATION = Pointer<Utf16>.fromAddress(32515);
+final IDI_ASTERISK = Pointer<Utf16>.fromAddress(32516);
+final IDI_WINLOGO = Pointer<Utf16>.fromAddress(32517);
+final IDI_SHIELD = Pointer<Utf16>.fromAddress(32518);
+final IDI_WARNING = IDI_EXCLAMATION;
+final IDI_ERROR = IDI_HAND;
+final IDI_INFORMATION = IDI_ASTERISK;
+
 // Stock cursors
 final IDC_ARROW = Pointer<Utf16>.fromAddress(32512);
 final IDC_IBEAM = Pointer<Utf16>.fromAddress(32513);
