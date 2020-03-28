@@ -11,6 +11,8 @@
 
 void main()
 {
+    int test = CS_HREDRAW;
+
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));
 

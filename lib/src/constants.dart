@@ -109,6 +109,21 @@ const DT_BOTTOM = 0x008;
 const DT_WORDBREAK = 0x0010;
 const DT_SINGLELINE = 0x0020;
 
+// Class styles
+const CS_VREDRAW = 0x0001;
+const CS_HREDRAW = 0x0002;
+const CS_DBLCLKS = 0x0008;
+const CS_OWNDC = 0x0020;
+const CS_CLASSDC = 0x0040;
+const CS_PARENTDC = 0x0080;
+const CS_NOCLOSE = 0x0200;
+const CS_SAVEBITS = 0x0800;
+const CS_BYTEALIGNCLIENT = 0x1000;
+const CS_BYTEALIGNWINDOW = 0x2000;
+const CS_GLOBALCLASS = 0x4000;
+const CS_IME = 0x00010000;
+const CS_DROPSHADOW = 0x00020000;
+
 // ControlWord constant
 const CW_USEDEFAULT = 0x80000000;
 

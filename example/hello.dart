@@ -33,6 +33,7 @@ void main() {
   final CLASS_NAME = TEXT('Sample Window Class');
 
   final wc = WNDCLASS.allocate();
+  wc.style = CS_HREDRAW | CS_VREDRAW;
   wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(MainWindowProc, 0);
   wc.hInstance = hInstance;
   wc.lpszClassName = CLASS_NAME;
