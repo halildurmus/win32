@@ -3,9 +3,13 @@ import 'package:win32/win32.dart';
 void main() {
   final result = MessageBox(
       NULL,
-      TEXT('Resource not available\nDo you want to try again?'),
-      TEXT('Account Details'),
-      MB_ICONWARNING | MB_CANCELTRYCONTINUE | MB_DEFBUTTON2);
+      TEXT('This is not really an error, but we are pretending for the sake '
+          'of this test.\n\nResource error.\nDo you want to try again?'),
+      TEXT('Dart MessageBox Test'),
+      MB_ICONWARNING | // Warning
+          MB_CANCELTRYCONTINUE | // Action button
+          MB_DEFBUTTON2 // Second button is the default
+      );
 
   switch (result) {
     case IDCANCEL:
