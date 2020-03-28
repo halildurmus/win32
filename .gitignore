@@ -1,18 +1,19 @@
 # Files and directories created by pub
 .dart_tool/
 .packages
-# Remove the following pattern if you wish to check in your lock file
-pubspec.lock
 
-# Conventional directory for build outputs
-build/
+# Library packages shouldn't check in their pubspec.lock
+pubspec.lock
 
 # Directory created by dartdoc
 doc/api/
+
+# Conventional directory for build outputs
+build/
 
 # Get rid of any unwanted executables...
 *.exe
 *.obj
 
-# ...but keep the sample executable around
-!bin/hello.exe
+# ...but keep the sample executables around
+!example/bin/*.exe

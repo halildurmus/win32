@@ -20,7 +20,7 @@ This should create a window with a text message.
 This can be compiled into a standalone Win32 executable by running:
 
 ```
-dart2native example\hello.dart -o hello.exe
+dart2native example\hello.dart -o example\bin\hello.exe
 ```
 
 ## Features and bugs
