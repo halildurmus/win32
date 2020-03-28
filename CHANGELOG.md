@@ -1,5 +1,6 @@
-## 1.2.0
+## 1.1.1
 
+ - Add class styles
  - Match recommended package structure per pub.dev
 
 ## 1.1.0
