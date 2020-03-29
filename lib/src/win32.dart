@@ -88,5 +88,30 @@ final FillConsoleOutputAttribute = kernel32.lookupFunction<
     fillConsoleOutputAttributeDart>('FillConsoleOutputAttribute');
 
 final gdi32 = DynamicLibrary.open('gdi32.dll');
+final CreateSolidBrush =
+    gdi32.lookupFunction<createSolidBrushNative, createSolidBrushDart>(
+        'CreateSolidBrush');
+final DeleteObject =
+    gdi32.lookupFunction<deleteObjectNative, deleteObjectDart>('DeleteObject');
 final GetStockObject = gdi32
     .lookupFunction<getStockObjectNative, getStockObjectDart>('GetStockObject');
+final LineTo = gdi32.lookupFunction<lineToNative, lineToDart>('LineTo');
+final MoveToEx = gdi32.lookupFunction<moveToExNative, moveToExDart>('MoveToEx');
+final SaveDC = gdi32.lookupFunction<saveDCNative, saveDCDart>('SaveDC');
+final SetBkColor =
+    gdi32.lookupFunction<setBkColorNative, setBkColorDart>('SetBkColor');
+final SetBkMode =
+    gdi32.lookupFunction<setBkModeNative, setBkModeDart>('SetBkMode');
+final SetMapMode =
+    gdi32.lookupFunction<setMapModeNative, setMapModeDart>('SetMapMode');
+final SetTextColor =
+    gdi32.lookupFunction<setTextColorNative, setTextColorDart>('SetTextColor');
+final SetViewportExtEx =
+    gdi32.lookupFunction<setViewportExtExNative, setViewportExtExDart>(
+        'SetViewportExtEx');
+final SetViewportOrgEx =
+    gdi32.lookupFunction<setViewportOrgExNative, setViewportOrgExDart>(
+        'SetViewportOrgEx');
+final SetWindowExtEx = gdi32
+    .lookupFunction<setWindowExtExNative, setWindowExtExDart>('SetWindowExtEx');
+final TextOut = gdi32.lookupFunction<textOutNative, textOutDart>('TextOutW');

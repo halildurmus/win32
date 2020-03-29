@@ -98,6 +98,22 @@ class MSG extends Struct {
     ..lPrivate = 0;
 }
 
+// typedef struct tagSIZE {
+//   LONG cx;
+//   LONG cy;
+// } SIZE, *PSIZE;
+class SIZE extends Struct {
+  @Int32()
+  int cx;
+
+  @Int32()
+  int cy;
+
+  factory SIZE.allocate() => allocate<SIZE>().ref
+    ..cx = 0
+    ..cy = 0;
+}
+
 // typedef struct tagPOINT {
 //   LONG x;
 //   LONG y;
