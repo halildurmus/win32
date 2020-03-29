@@ -16,6 +16,7 @@ class Game {
   Game(DrawEngine de)
       : de = de,
         isPaused = false {
+    print('Game constructor');
     level = Level(de, 10, 20);
   }
 
@@ -70,6 +71,7 @@ class Game {
 
   /// Called on WM_PAINT
   void repaint() {
+    print('repaint');
     de.drawInterface();
     level.drawScore();
     level.drawSpeed();

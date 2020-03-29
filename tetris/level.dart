@@ -8,7 +8,7 @@ import 'piece.dart';
 class Level {
   List<List<int>> board; // The cavnas, the drawing board
   DrawEngine de; // Does graphics stuffs
-  PieceSet pieceSet; // Piece generator
+  PieceSet pieceSet = PieceSet(); // Piece generator
   Piece current; // Current dropping piece
   Piece next; // Next piece
   int width; // Level width (in cells)
@@ -25,7 +25,10 @@ class Level {
   Level(DrawEngine de, [int width = 10, int height = 20])
       : de = de,
         width = width,
-        height = height {
+        height = height,
+        lastTime = 0,
+        speed = 500,
+        score = -1 {
     board =
         List.generate(width, (i) => List.generate(height, (i) => RGB(0, 0, 0)));
     next = pieceSet.randomPiece;

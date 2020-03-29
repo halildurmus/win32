@@ -11,7 +11,7 @@ class DrawEngine {
   int hwnd;
 
   /// rectangle for drawing
-  RECT rect;
+  final rect = RECT.allocate();
 
   /// level width
   int width;
@@ -59,6 +59,7 @@ class DrawEngine {
   }
 
   void drawInterface() {
+    print('drawInterface');
     var hBrush = CreateSolidBrush(RGB(70, 70, 70));
     rect.top = height;
     rect.left = width;

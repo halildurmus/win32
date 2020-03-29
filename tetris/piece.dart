@@ -2,7 +2,11 @@ import 'dart:math' show min, max;
 
 import 'package:win32/win32.dart';
 
-//
+class Point {
+  int x;
+  int y;
+}
+
 // A piece in Tetris game. This class is only used by PieceSet. Other classes
 // should access Piece through PieceSet.
 //
@@ -16,7 +20,7 @@ import 'package:win32/win32.dart';
 //
 class Piece {
   // POINT array of which the piece is composed
-  List<POINT> body;
+  List<Point> body;
 
   // Number of points in body
   int nPoints;
@@ -41,7 +45,7 @@ class Piece {
   ///      moves these points automatically to snap the piece to bottom-left
   ///      corner (0,0)
   /// numPoints: number of points in apt
-  Piece(int pieceId, int pieceRotation, int pieceColor, List<POINT> apt,
+  Piece(int pieceId, int pieceRotation, int pieceColor, List<Point> apt,
       [int numPoints = 4]) {
     id = pieceId;
     rotation = pieceRotation;
@@ -58,7 +62,7 @@ class Piece {
       bottomLeft.y = min(apt[i].y, bottomLeft.y);
     }
 
-    var body = List<POINT>(nPoints);
+    body = List<Point>.generate(nPoints, (i) => Point());
 
     for (var i = 0; i < nPoints; i++) {
       body[i].x = apt[i].x - bottomLeft.x;
@@ -70,13 +74,13 @@ class Piece {
   }
 
   /// Gets the bottom part of points of the piece
-  List<POINT> get Skirt {
-    var points = <POINT>[];
+  List<Point> get Skirt {
+    var points = <Point>[];
 
     for (var x = 0; x < width; x++) {
       for (var y = 0; y < height; y++) {
         if (isPointExists(x, y)) {
-          var p = POINT.allocate();
+          var p = Point();
           p.x = x;
           p.y = y;
           points.add(p);
@@ -88,12 +92,12 @@ class Piece {
   }
 
   /// Gets the left part of points of the piece
-  List<POINT> get LeftSide {
-    var points = <POINT>[];
+  List<Point> get LeftSide {
+    var points = <Point>[];
     for (var y = 0; y < height; y++) {
       for (var x = 0; x < height; x++) {
         if (isPointExists(x, y)) {
-          var p = POINT.allocate();
+          var p = Point();
           p.x = x;
           p.y = y;
           points.add(p);
@@ -105,12 +109,12 @@ class Piece {
   }
 
   /// Gets the right part of points of the piece
-  List<POINT> get RightSide {
-    var points = <POINT>[];
+  List<Point> get RightSide {
+    var points = <Point>[];
     for (var y = 0; y < height; y++) {
       for (var x = width - 1; x >= 0; x--) {
         if (isPointExists(x, y)) {
-          var p = POINT.allocate();
+          var p = Point();
           p.x = x;
           p.y = y;
           points.add(p);

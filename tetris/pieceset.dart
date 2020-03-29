@@ -14,8 +14,8 @@ class PieceSet {
       List.generate(NUM_PIECES, (i) => List(NUM_ROTATIONS));
 
   PieceSet() {
-    var apt = List<POINT>(NUM_ROTATIONS);
-
+    var apt = List<Point>.generate(NUM_ROTATIONS, (i) => Point());
+    print(apt);
     // 0, I piece, red
     apt[0].x = 0;
     apt[0].y = 0;
@@ -93,6 +93,7 @@ class PieceSet {
     apt[3].y = 1;
     pieces[6][0] = Piece(6, 0, RGB(220, 180, 255), apt);
 
+    print('pieces constructed');
     // Create piece rotations
     rotateAll();
   }
@@ -111,9 +112,10 @@ class PieceSet {
       getPiece(rng.nextInt(NUM_PIECES), rng.nextInt(NUM_ROTATIONS));
 
   void rotateAll() {
-    var apt = List<POINT>(NUM_ROTATIONS);
+    var apt = List<Point>(NUM_ROTATIONS);
     for (var i = 0; i < NUM_PIECES; i++) {
       apt = pieces[i][0].body;
+      assert(apt != null);
       for (var j = 1; j < NUM_ROTATIONS; j++) {
         rotate(apt);
         if (pieces[i][j] != null) {
@@ -124,7 +126,7 @@ class PieceSet {
     }
   }
 
-  void rotate(List<POINT> apt, [int numPoints = 4]) {
+  void rotate(List<Point> apt, [int numPoints = 4]) {
     int tmp;
 
     // X' = -Y

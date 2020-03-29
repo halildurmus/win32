@@ -13,6 +13,8 @@ const GAME_SPEED = 33; // Update the game every GAME_SPEED millisecs (= 1/fps)
 const TIMER_ID = 1;
 
 final hInstance = GetModuleHandle(nullptr);
+Game game;
+DrawEngine de;
 
 void main() {
   final szAppName = TEXT('Tetris');
@@ -63,13 +65,12 @@ void main() {
 
 int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
   int hdc;
-  Game game;
-  DrawEngine de;
 
   final ps = PAINTSTRUCT.allocate();
 
   switch (uMsg) {
     case WM_CREATE:
+      print('WM_CREATE');
       hdc = GetDC(hwnd);
 
       de = DrawEngine(hdc, hwnd, PX_PER_BLOCK);
@@ -97,8 +98,11 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       return 0;
 
     case WM_PAINT:
+      print('WM_PAINT');
       hdc = BeginPaint(hwnd, ps.addressOf);
+      print(hdc);
       game.repaint();
+      print('EndPaint');
       EndPaint(hwnd, ps.addressOf);
       return 0;
 
