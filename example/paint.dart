@@ -1,10 +1,11 @@
-// hello.dart
+// paint.dart
 
-// Basic Petzoldian "hello world" Win32 app
+// Demonstrates simple GDI drawing and min/max window sizing
 
 import 'dart:ffi';
 import 'dart:io';
 
+import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 final hInstance = GetModuleHandle(nullptr);
@@ -15,16 +16,33 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       PostQuitMessage(0);
       return 0;
 
+    case WM_GETMINMAXINFO:
+      final info = Pointer<MINMAXINFO>.fromAddress(lParam).ref;
+      info.ptMinTrackSizeX = 400;
+      info.ptMinTrackSizeY = 400;
+      return 0;
+
     case WM_PAINT:
       final ps = PAINTSTRUCT.allocate();
       final hdc = BeginPaint(hwnd, ps.addressOf);
       final rect = RECT.allocate();
-      final msg = TEXT('Hello, Dart!');
 
       GetClientRect(hwnd, rect.addressOf);
-      DrawText(
-          hdc, msg, -1, rect.addressOf, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+      for (var i = 1; i <= 20; i++) {
+        final color = (255 - 256 / 10 * i).round();
+        final hBrush = CreateSolidBrush(
+            RGB(0, color >= 0 ? color : 0, color >= 0 ? color : 0));
+        rect.left = rect.left + 10;
+        rect.right = rect.right - 10;
+        rect.top = rect.top + 10;
+        rect.bottom = rect.bottom - 10;
+        FillRect(hdc, rect.addressOf, hBrush);
+        DeleteObject(hBrush);
+      }
+
       EndPaint(hwnd, ps.addressOf);
+      free(rect.addressOf);
+      free(ps.addressOf);
 
       return 0;
   }
@@ -34,7 +52,7 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 void main() {
   // Register the window class.
 
-  final CLASS_NAME = TEXT('Sample Window Class');
+  final CLASS_NAME = TEXT('Simple Paint Sample');
 
   final wc = WNDCLASS.allocate();
   wc.style = CS_HREDRAW | CS_VREDRAW;
@@ -50,7 +68,7 @@ void main() {
   final hWnd = CreateWindowEx(
       0, // Optional window styles.
       CLASS_NAME, // Window class
-      TEXT('Dart Native Win32 window'), // Window caption
+      CLASS_NAME, // Window caption
       WS_OVERLAPPEDWINDOW, // Window style
 
       // Size and position

@@ -114,6 +114,40 @@ class SIZE extends Struct {
     ..cy = 0;
 }
 
+// typedef struct tagMINMAXINFO {
+//   POINT ptReserved;
+//   POINT ptMaxSize;
+//   POINT ptMaxPosition;
+//   POINT ptMinTrackSize;
+//   POINT ptMaxTrackSize;
+// } MINMAXINFO, *PMINMAXINFO, *LPMINMAXINFO;
+class MINMAXINFO extends Struct {
+  @Int32()
+  int ptReservedX;
+  @Int32()
+  int ptReservedY;
+
+  @Int32()
+  int ptMaxSizeX;
+  @Int32()
+  int ptMaxSizeY;
+
+  @Int32()
+  int ptMaxPositionX;
+  @Int32()
+  int ptMaxPositionY;
+
+  @Int32()
+  int ptMinTrackSizeX;
+  @Int32()
+  int ptMinTrackSizeY;
+
+  @Int32()
+  int ptMaxTrackSizeX;
+  @Int32()
+  int ptMaxTrackSizeY;
+}
+
 // typedef struct tagPOINT {
 //   LONG x;
 //   LONG y;
