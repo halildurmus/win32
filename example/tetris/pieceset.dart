@@ -16,11 +16,10 @@ class PieceSet {
   final rng = Random();
 
   List<List<Piece>> pieces =
-      List.generate(NUM_PIECES, (i) => List(NUM_ROTATIONS));
+      List.generate(NUM_PIECES, (i) => List<Piece>(NUM_ROTATIONS));
 
   PieceSet() {
-    var apt = List<Point>.generate(NUM_ROTATIONS, (i) => Point());
-    print(apt);
+    var apt = List<Point>.generate(4, (i) => Point());
     // 0, I piece, red
     apt[0].x = 0;
     apt[0].y = 0;
@@ -98,12 +97,16 @@ class PieceSet {
     apt[3].y = 1;
     pieces[6][0] = Piece(6, 0, RGB(220, 180, 255), apt);
 
-    print('pieces constructed');
     // Create piece rotations
     rotateAll();
   }
 
   Piece getPiece(int id, int rotation) {
+    assert(!(id >= NUM_PIECES ||
+        id < 0 ||
+        rotation >= NUM_ROTATIONS ||
+        rotation < 0));
+
     if (id >= NUM_PIECES ||
         id < 0 ||
         rotation >= NUM_ROTATIONS ||
@@ -117,17 +120,16 @@ class PieceSet {
       getPiece(rng.nextInt(NUM_PIECES), rng.nextInt(NUM_ROTATIONS));
 
   void rotateAll() {
-    var apt = List<Point>(NUM_ROTATIONS);
     for (var i = 0; i < NUM_PIECES; i++) {
-      apt = pieces[i][0].body;
-      assert(apt != null);
+      var apt = List<Point>.from(pieces[i][0].body);
       for (var j = 1; j < NUM_ROTATIONS; j++) {
         rotate(apt);
-        if (pieces[i][j] != null) {
-          pieces[i].removeAt(j);
-        }
         pieces[i][j] = Piece(i, j, pieces[i][0].color, apt);
       }
+    }
+    assert(pieces.length == NUM_PIECES);
+    for (var p in pieces) {
+      assert(p.length == NUM_ROTATIONS);
     }
   }
 

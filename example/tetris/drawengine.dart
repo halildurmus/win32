@@ -59,7 +59,6 @@ class DrawEngine {
   }
 
   void drawInterface() {
-    print('drawInterface');
     var hBrush = CreateSolidBrush(RGB(70, 70, 70));
     rect.top = height;
     rect.left = width;

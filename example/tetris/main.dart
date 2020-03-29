@@ -70,7 +70,6 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
   switch (uMsg) {
     case WM_CREATE:
-      print('WM_CREATE');
       hdc = GetDC(hwnd);
 
       de = DrawEngine(hdc, hwnd, PX_PER_BLOCK);
@@ -99,7 +98,6 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
     case WM_PAINT:
       hdc = BeginPaint(hwnd, ps.addressOf);
-      print(hdc);
       game.repaint();
       EndPaint(hwnd, ps.addressOf);
       return 0;

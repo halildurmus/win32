@@ -7,8 +7,8 @@ import 'pieceset.dart';
 import 'piece.dart';
 
 class Level {
-  List<List<int>> board; // The cavnas, the drawing board
-  DrawEngine de; // Does graphics stuffs
+  List<List<int>> board; // The canvas / drawing board
+  DrawEngine de; // Does graphic rendering
   PieceSet pieceSet = PieceSet(); // Piece generator
   Piece current; // Current dropping piece
   Piece next; // Next piece
@@ -80,9 +80,7 @@ class Level {
     var color = piece.color;
 
     for (var i = 0; i < 4; i++) {
-      if (y + apt[i].y > height - 1) {
-        continue;
-      }
+      if (y + apt[i].y > height - 1) continue;
       board[x + apt[i].x][y + apt[i].y] = color;
     }
     return true;
@@ -136,7 +134,7 @@ class Level {
   }
 
   void clear(Piece piece) {
-    final apt = piece.body;
+    final apt = List.from(piece.body);
     var x, y;
     for (var i = 0; i < 4; i++) {
       x = posX + apt[i].x;
@@ -156,7 +154,7 @@ class Level {
   }
 
   bool isHitBottom() {
-    var apt = current.Skirt;
+    final apt = current.Skirt;
     int x, y;
     for (var i = 0; i < apt.length; i++) {
       x = posX + apt[i].x;
@@ -169,7 +167,7 @@ class Level {
   }
 
   bool isHitLeft() {
-    var apt = current.LeftSide;
+    final apt = current.LeftSide;
     int x, y;
     for (var i = 0; i < apt.length; i++) {
       x = posX + apt[i].x;
@@ -185,7 +183,7 @@ class Level {
   }
 
   bool isHitRight() {
-    var apt = current.RightSide;
+    final apt = current.RightSide;
     int x, y;
     for (var i = 0; i < apt.length; i++) {
       x = posX + apt[i].x;
@@ -201,7 +199,7 @@ class Level {
   }
 
   bool isCovered(Piece piece, int x, int y) {
-    var apt = piece.body;
+    final apt = piece.body;
     int tmpX, tmpY;
     for (var i = 0; i < 4; i++) {
       tmpX = apt[i].x + x;
@@ -256,7 +254,7 @@ class Level {
 
     // If there's a piece on the top, game over
     for (var i = 0; i < width; i++) {
-      if (board[i][height - 1] != null) {
+      if (board[i][height - 1] != 0) {
         if (current != null) place(posX, posY, current);
         return true;
       }

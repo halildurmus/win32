@@ -3,6 +3,12 @@ import 'dart:math' show min, max;
 class Point {
   int x;
   int y;
+
+  @override
+  String toString() => '($x, $y)';
+
+  Point([this.x = 0, this.y = 0]);
+  factory Point.clone(Point orig) => Point(orig.x, orig.y);
 }
 
 // A piece in Tetris game. This class is only used by PieceSet. Other classes
@@ -23,7 +29,7 @@ class Piece {
   // Number of points in body
   int nPoints;
 
-  // Make rotation more faster
+  // Make rotation faster
   int width;
   int height;
 
@@ -53,7 +59,8 @@ class Piece {
     width = 0;
     height = 0;
 
-    var bottomLeft = apt[0];
+    var bottomLeft = Point.clone(apt[0]);
+    bottomLeft.x = 999;
 
     for (var i = 1; i < nPoints; i++) {
       bottomLeft.x = min(apt[i].x, bottomLeft.x);
@@ -61,7 +68,6 @@ class Piece {
     }
 
     body = List<Point>.generate(nPoints, (i) => Point());
-
     for (var i = 0; i < nPoints; i++) {
       body[i].x = apt[i].x - bottomLeft.x;
       body[i].y = apt[i].y - bottomLeft.y;
@@ -126,15 +132,16 @@ class Piece {
   /// String representation of a piece (for debugging)
   @override
   String toString() {
-    StringBuffer buffer;
-    buffer.writeln('width = $width\n');
-    buffer.writeln('height = $height\n');
-    buffer.writeln('nPoints = $nPoints\n');
-    buffer.writeln('color = ${color.toRadixString(16)}\n');
+    var buffer = StringBuffer();
+    buffer.write('width = $width | ');
+    buffer.write('height = $height | ');
+    buffer.write('nPoints = $nPoints | ');
+    buffer.writeln('color = ${color.toRadixString(16)}');
 
     for (var y = height - 1; y >= 0; y--) {
       for (var x = 0; x < width; x++) {
         if (isPointExists(x, y)) {
+          print('($x,$y)');
           buffer.write('#');
         } else {
           buffer.write(' ');
@@ -147,13 +154,11 @@ class Piece {
 
   /// Determines if the piece has a point (x, y)
   bool isPointExists(int x, int y) {
-    {
-      for (var i = 0; i < 4; i++) {
-        if (body[i].x == x && body[i].y == y) {
-          return true;
-        }
+    for (var i = 0; i < 4; i++) {
+      if (body[i].x == x && body[i].y == y) {
+        return true;
       }
-      return false;
     }
+    return false;
   }
 }
