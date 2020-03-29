@@ -9,7 +9,7 @@ import 'drawengine.dart';
 const PX_PER_BLOCK = 25; // Cell size in pixels
 const SCREEN_WIDTH = 10; // Level width in cells
 const SCREEN_HEIGHT = 20; // Level height in cells
-const GAME_SPEED = 33; // Update the game every GAME_SPEED millisecs (= 1/fps)
+const GAME_SPEED = 33; // Update the game every GAME_SPEED ms (= 1000/fps)
 const TIMER_ID = 1;
 
 final hInstance = GetModuleHandle(nullptr);
@@ -98,11 +98,9 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       return 0;
 
     case WM_PAINT:
-      print('WM_PAINT');
       hdc = BeginPaint(hwnd, ps.addressOf);
       print(hdc);
       game.repaint();
-      print('EndPaint');
       EndPaint(hwnd, ps.addressOf);
       return 0;
 

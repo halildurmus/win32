@@ -4,6 +4,11 @@ import 'package:win32/win32.dart';
 
 import 'piece.dart';
 
+// PieceSet generates 7 types of pieces. Each piece has 4 rotations, so there
+// are 7 x 4 = 28 configurations in total.
+//
+// All 28 configurations are kept in memory after you new PieceSet(). To get
+// get piece, use the `getPiece()` method or the `randomPiece` property.
 class PieceSet {
   static const NUM_ROTATIONS = 4;
   static const NUM_PIECES = 7;
