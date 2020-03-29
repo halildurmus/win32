@@ -11,7 +11,7 @@
 
 void main()
 {
-    int test = LoadIcon();
+    int test = VK_UP;
 
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));
@@ -34,6 +34,7 @@ void main()
     printf("sizeof(WNDPROC) is %zu\n", sizeof(WNDPROC));
     printf("sizeof(POINT) is %zu\n", sizeof(POINT));
     printf("sizeof(RECT) is %zu\n", sizeof(RECT));
+    printf("sizeof(COLORREF) is %zu\n", sizeof(COLORREF));
     printf("sizeof(MSG) is %zu\n", sizeof(MSG));
 
     printf("sizeof(TCHAR) is %zu\n", sizeof(TCHAR));
