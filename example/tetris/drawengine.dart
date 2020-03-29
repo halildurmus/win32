@@ -70,26 +70,26 @@ class DrawEngine {
   }
 
   void drawText(String text, int x, int y) {
-    TextOut(hdc, x, y, TEXT(text), text.length + 1);
+    TextOut(hdc, x, y, TEXT(text), text.length);
   }
 
   void drawScore(int score, int x, int y) {
     var scoreText = 'Score: ${score}';
     SetBkMode(hdc, OPAQUE);
-    TextOut(hdc, x, y, TEXT(scoreText), scoreText.length + 1);
+    TextOut(hdc, x, y, TEXT(scoreText), scoreText.length);
     SetBkMode(hdc, TRANSPARENT);
   }
 
   void drawSpeed(int speed, int x, int y) {
     var speedText = 'Speed: ${speed}';
     SetBkMode(hdc, OPAQUE);
-    TextOut(hdc, x, y, TEXT(speedText), speedText.length + 1);
+    TextOut(hdc, x, y, TEXT(speedText), speedText.length);
     SetBkMode(hdc, TRANSPARENT);
   }
 
   void drawNextPiece(Piece piece, int x, int y) {
     var nextText = 'Next:';
-    TextOut(hdc, x, y + 5, TEXT(nextText), nextText.length + 1);
+    TextOut(hdc, x, y + 5, TEXT(nextText), nextText.length);
     var color = piece.color;
 
     // Draw the piece in a 4x4 square area
