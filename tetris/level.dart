@@ -1,4 +1,5 @@
 import 'dart:math' show min, max;
+import 'package:win32/win32.dart';
 
 import 'drawengine.dart';
 import 'pieceset.dart';
@@ -15,8 +16,8 @@ class Level {
   int posX; // X coordinate of dropping piece (Cartesian system)
   int posY; // Y coordinate of dropping piece
   int speed; // Drop a cell every _speed_ millisecs
-  double lastTime; // Last time updated
-  double currentTime; // Current update time
+  int lastTime; // Last time updated
+  int currentTime; // Current update time
   int score; // Player's score
 
   // de: used to draw the level
@@ -25,19 +26,9 @@ class Level {
       : de = de,
         width = width,
         height = height {
-    // srand(time(0));
-
-    // // Allocate the drawing board
-    // board = new COLORREF*[width];
-    // for (int i = 0; i < width; i++)
-    // {
-    //     board[i] = new COLORREF[height];
-    //     for (int j = 0; j < height; j++)
-    //         board[i][j] = RGB(0, 0, 0);
-    // }
-
-    // current = 0;
-    // next = pieceSet.getRandomPiece();
+    board =
+        List.generate(width, (i) => List.generate(height, (i) => RGB(0, 0, 0)));
+    next = pieceSet.randomPiece;
   }
 
   // Draws the level
@@ -49,8 +40,71 @@ class Level {
     }
   }
 
+  // Updates the level based on the current speed
+  void timerUpdate() {
+    // If the time isn't up, don't drop nor update
+    currentTime = DateTime.now().millisecondsSinceEpoch;
+    if (currentTime - lastTime < speed) return;
+
+    // Time's up, drop
+    // If the piece hits the bottom, check if player gets score, drop the next
+    // piece, increase speed, redraw info
+    // If player gets score, increase more speed
+    if (current == null || !move(0, -1)) {
+      var lines = clearRows();
+      speed = max(speed - 2 * lines, 100);
+      score += 1 + lines * lines * 5;
+      dropRandomPiece();
+      drawScore();
+      drawSpeed();
+      drawNextPiece();
+    }
+
+    lastTime = DateTime.now().millisecondsSinceEpoch;
+  }
+
+  bool place(int x, int y, Piece piece) {
+    // Out of boundary or the position has been filled
+    if (x + piece.width > width || isCovered(piece, x, y)) {
+      return false;
+    }
+
+    posX = x;
+    posY = y;
+
+    var apt = piece.body;
+    var color = piece.color;
+
+    for (var i = 0; i < 4; i++) {
+      if (y + apt[i].y > height - 1) {
+        continue;
+      }
+      board[x + apt[i].x][y + apt[i].y] = color;
+    }
+    return true;
+  }
+
   // Rotates the dropping piece, returns true if successful
   bool rotate() {
+    final tmp = current;
+
+    // Move the piece if it needs some space to rotate
+    final disX = max(posX + current.height - width, 0);
+
+    // Go to next rotation state (0-3)
+    final rotation = (current.rotation + 1) % PieceSet.NUM_ROTATIONS;
+
+    clear(current);
+    current = pieceSet.getPiece(current.id, rotation);
+
+    // Rotate successfully
+    if (place(posX - disX, posY, current)) {
+      return true;
+    }
+
+    // If the piece cannot rotate due to insufficient space, undo it
+    current = tmp;
+    place(posX, posY, current);
     return false;
   }
 
@@ -59,24 +113,153 @@ class Level {
   // cyDistance is vertical movement, positive value is up (normally it's
   // negaive)
   bool move(int cxDistance, int cyDistance) {
-    return false;
-    // if (posX + cxDistance < 0 || posY + cyDistance < 0 ||
-    //     posX + current.getWidth() + cxDistance > width)
-    //     return false;
-    // if (cxDistance < 0 && isHitLeft())
-    //     return false;
-    // if (cxDistance > 0 && isHitRight())
-    //     return false;
-    // if (cyDistance < 0 && isHitBottom())
-    //     return false;
-    // clear(current);
-    // return place(posX + cxDistance, posY + cyDistance, current);
+    if (posX + cxDistance < 0 ||
+        posY + cyDistance < 0 ||
+        posX + current.width + cxDistance > width) {
+      return false;
+    }
+    if (cxDistance < 0 && isHitLeft()) {
+      return false;
+    }
+    if (cxDistance > 0 && isHitRight()) {
+      return false;
+    }
+    if (cyDistance < 0 && isHitBottom()) {
+      return false;
+    }
+    clear(current);
+    return place(posX + cxDistance, posY + cyDistance, current);
   }
 
-  // Updates the level based on the current speed
-  void timerUpdate() {}
+  void clear(Piece piece) {
+    final apt = piece.body;
+    var x, y;
+    for (var i = 0; i < 4; i++) {
+      x = posX + apt[i].x;
+      y = posY + apt[i].y;
+
+      if (x > width - 1 || y > height - 1) {
+        continue;
+      }
+      board[posX + apt[i].x][posY + apt[i].y] = RGB(0, 0, 0);
+    }
+  }
+
+  void dropRandomPiece() {
+    current = next;
+    next = pieceSet.randomPiece;
+    place(3, height - 1, current);
+  }
+
+  bool isHitBottom() {
+    var apt = current.Skirt;
+    int x, y;
+    for (var i = 0; i < apt.length; i++) {
+      x = posX + apt[i].x;
+      y = posY + apt[i].y;
+      if (y < height && (y == 0 || board[x][y - 1] != RGB(0, 0, 0))) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bool isHitLeft() {
+    var apt = current.LeftSide;
+    int x, y;
+    for (var i = 0; i < apt.length; i++) {
+      x = posX + apt[i].x;
+      y = posY + apt[i].y;
+      if (y > height - 1) {
+        continue;
+      }
+      if (x == 0 || board[x - 1][y] != RGB(0, 0, 0)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bool isHitRight() {
+    var apt = current.RightSide;
+    int x, y;
+    for (var i = 0; i < apt.length; i++) {
+      x = posX + apt[i].x;
+      y = posY + apt[i].y;
+      if (y > height - 1) {
+        continue;
+      }
+      if (x == width - 1 || board[x + 1][y] != RGB(0, 0, 0)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bool isCovered(Piece piece, int x, int y) {
+    var apt = piece.body;
+    int tmpX, tmpY;
+    for (var i = 0; i < 4; i++) {
+      tmpX = apt[i].x + x;
+      tmpY = apt[i].y + y;
+      if (tmpX > width - 1 || tmpY > height - 1) {
+        continue;
+      }
+      if (board[tmpX][tmpY] != RGB(0, 0, 0)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  int clearRows() {
+    bool isComplete;
+    var rows = 0;
+
+    for (var i = 0; i < height; i++) {
+      for (var j = 0; j < width; j++) {
+        if (board[j][i] == RGB(0, 0, 0)) {
+          isComplete = false;
+          break;
+        }
+        // The row is full
+        if (j == width - 1) isComplete = true;
+      }
+      // If the row is full, clear it (fill with black)
+      if (isComplete) {
+        for (var j = 0; j < width; j++) {
+          board[j][i] = RGB(0, 0, 0);
+        }
+
+        // Move rows down
+        for (var k = i; k < height - 1; k++) {
+          for (var m = 0; m < width; m++) {
+            board[m][k] = board[m][k + 1];
+          }
+        }
+        i = -1;
+        rows++;
+      }
+    }
+    return rows;
+  }
 
   bool isGameOver() {
+    // Exclude the current piece
+    if (current != null) {
+      clear(current);
+    }
+
+    // If there's a piece on the top, game over
+    for (var i = 0; i < width; i++) {
+      if (board[i][height - 1] != null) {
+        if (current != null) place(posX, posY, current);
+        return true;
+      }
+    }
+
+    // Put the current piece back
+    if (current != null) place(posX, posY, current);
     return false;
   }
 

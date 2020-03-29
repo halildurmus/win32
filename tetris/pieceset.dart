@@ -1,3 +1,5 @@
+import 'dart:math' show Random;
+
 import 'package:win32/win32.dart';
 
 import 'piece.dart';
@@ -6,16 +8,12 @@ class PieceSet {
   static const NUM_ROTATIONS = 4;
   static const NUM_PIECES = 7;
 
+  final rng = Random();
+
   List<List<Piece>> pieces =
       List.generate(NUM_PIECES, (i) => List(NUM_ROTATIONS));
 
   PieceSet() {
-    // for (var i = 0; i < NUM_PIECES; i++) {
-    //   for (var j = 0; j < NUM_ROTATIONS; j++) {
-    //     pieces[i][j] = null;
-    //   }
-    // }
-
     var apt = List<POINT>(NUM_ROTATIONS);
 
     // 0, I piece, red
@@ -108,6 +106,9 @@ class PieceSet {
     }
     return pieces[id][rotation];
   }
+
+  Piece get randomPiece =>
+      getPiece(rng.nextInt(NUM_PIECES), rng.nextInt(NUM_ROTATIONS));
 
   void rotateAll() {
     var apt = List<POINT>(NUM_ROTATIONS);
