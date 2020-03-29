@@ -141,7 +141,6 @@ class Piece {
     for (var y = height - 1; y >= 0; y--) {
       for (var x = 0; x < width; x++) {
         if (isPointExists(x, y)) {
-          print('($x,$y)');
           buffer.write('#');
         } else {
           buffer.write(' ');
