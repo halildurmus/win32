@@ -1,7 +1,5 @@
 import 'dart:math' show min, max;
 
-import 'package:win32/win32.dart';
-
 class Point {
   int x;
   int y;

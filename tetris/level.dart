@@ -1,4 +1,5 @@
-import 'dart:math' show min, max;
+import 'dart:math' show max;
+
 import 'package:win32/win32.dart';
 
 import 'drawengine.dart';
