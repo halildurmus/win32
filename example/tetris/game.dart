@@ -4,7 +4,7 @@ import 'drawengine.dart';
 import 'level.dart';
 
 //
-// Game flow.
+// Game flow
 // Only Game and DrawEngine are exposed to main().
 //
 class Game {
