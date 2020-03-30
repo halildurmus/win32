@@ -249,6 +249,10 @@ class INPUT extends Struct {
   int type;
 
   Pointer<Void> input;
+
+  factory INPUT.allocate() => allocate<INPUT>().ref
+    ..type = 0
+    ..input = nullptr;
 }
 
 // typedef struct tagMOUSEINPUT {
@@ -275,6 +279,13 @@ class MOUSEINPUT extends Struct {
   int time;
 
   Pointer<Uint32> dwExtraInfo;
+
+  factory MOUSEINPUT.allocate() => allocate<MOUSEINPUT>().ref
+    ..dx = 0
+    ..dy = 0
+    ..mouseData = 0
+    ..dwFlags = 0
+    ..time = 0;
 }
 
 // typedef struct tagKEYBDINPUT {
@@ -298,6 +309,12 @@ class KEYBDINPUT extends Struct {
   int time;
 
   Pointer<Uint32> dwExtraInfo;
+
+  factory KEYBDINPUT.allocate() => allocate<KEYBDINPUT>().ref
+    ..wVk = 0
+    ..wScan = 0
+    ..dwFlag = 0
+    ..time = 0;
 }
 
 // typedef struct tagHARDWAREINPUT {
@@ -313,6 +330,11 @@ class HARDWAREINPUT extends Struct {
   int wParamL;
   @Int16()
   int wParamH;
+
+  factory HARDWAREINPUT.allocate() => allocate<HARDWAREINPUT>().ref
+    ..uMsg = 0
+    ..wParamL = 0
+    ..wParamH = 0;
 }
 
 // *** CONSOLE STRUCTS ***

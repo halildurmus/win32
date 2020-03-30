@@ -11,7 +11,7 @@
 
 void main()
 {
-    int test = VK_UP;
+    int test = KEYEVENTF_UNICODE;
 
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));

@@ -388,6 +388,12 @@ const VK_PROCESSKEY = 0xE5;
 const VK_ICO_CLEAR = 0xE6;
 const VK_PACKET = 0xE7;
 
+// Key events
+const KEYEVENTF_EXTENDEDKEY = 0x0001;
+const KEYEVENTF_KEYUP = 0x0002;
+const KEYEVENTF_UNICODE = 0x0004;
+const KEYEVENTF_SCANCODE = 0x0008;
+
 // *** CONSOLE APIS ***
 
 // Handles
