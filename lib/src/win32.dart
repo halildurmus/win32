@@ -82,6 +82,7 @@ final SetConsoleCursorInfo = kernel32.lookupFunction<setConsoleCursorInfoNative,
 final SetConsoleCursorPosition = kernel32.lookupFunction<
     setConsoleCursorPositionNative,
     setConsoleCursorPositionDart>('SetConsoleCursorPosition');
+final Sleep = kernel32.lookupFunction<sleepNative, sleepDart>('Sleep');
 final FillConsoleOutputCharacter = kernel32.lookupFunction<
     fillConsoleOutputCharacterNative,
     fillConsoleOutputCharacterDart>('FillConsoleOutputCharacterW');

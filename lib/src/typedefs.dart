@@ -315,6 +315,12 @@ typedef setWindowExtExDart = int Function(
 typedef showWindowNative = Int32 Function(Int64 hWnd, Int32 nCmdShow);
 typedef showWindowDart = int Function(int hWnd, int nCmdShow);
 
+// void Sleep(
+//   DWORD dwMilliseconds
+// );
+typedef sleepNative = Void Function(Uint32 dwMilliseconds);
+typedef sleepDart = void Function(int dwMilliseconds);
+
 // BOOL TextOutW(
 //   HDC     hdc,
 //   int     x,

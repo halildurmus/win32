@@ -1,6 +1,8 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
+import 'constants.dart';
+
 // typedef struct tagWNDCLASSW {
 //   UINT      style;
 //   WNDPROC   lpfnWndProc;
@@ -244,16 +246,9 @@ class RECT extends Struct {
 //     HARDWAREINPUT hi;
 //   } DUMMYUNIONNAME;
 // } INPUT, *PINPUT, *LPINPUT;
-class INPUT extends Struct {
-  @Int32()
-  int type;
 
-  Pointer<Void> input;
-
-  factory INPUT.allocate() => allocate<INPUT>().ref
-    ..type = 0
-    ..input = nullptr;
-}
+// We embed this type directly into the union types below, since nested structs
+// are unavailable in Dart FFI at present.
 
 // typedef struct tagMOUSEINPUT {
 //   LONG      dx;
@@ -265,14 +260,20 @@ class INPUT extends Struct {
 // } MOUSEINPUT, *PMOUSEINPUT, *LPMOUSEINPUT;
 class MOUSEINPUT extends Struct {
   @Int32()
+  int type;
+
+  @Int32()
+  int padding;
+
+  @Int32()
   int dx;
   @Int32()
   int dy;
 
-  @Int32()
+  @Int16()
   int mouseData;
 
-  @Int32()
+  @Int16()
   int dwFlags;
 
   @Int32()
@@ -281,6 +282,7 @@ class MOUSEINPUT extends Struct {
   Pointer<Uint32> dwExtraInfo;
 
   factory MOUSEINPUT.allocate() => allocate<MOUSEINPUT>().ref
+    ..type = INPUT_MOUSE
     ..dx = 0
     ..dy = 0
     ..mouseData = 0
@@ -296,6 +298,12 @@ class MOUSEINPUT extends Struct {
 //   ULONG_PTR dwExtraInfo;
 // } KEYBDINPUT, *PKEYBDINPUT, *LPKEYBDINPUT;
 class KEYBDINPUT extends Struct {
+  @Int32()
+  int type;
+
+  @Int32()
+  int padding;
+
   @Int16()
   int wVk;
 
@@ -310,11 +318,16 @@ class KEYBDINPUT extends Struct {
 
   Pointer<Uint32> dwExtraInfo;
 
+  @Int64()
+  int padding2;
+
   factory KEYBDINPUT.allocate() => allocate<KEYBDINPUT>().ref
+    ..type = INPUT_KEYBOARD
     ..wVk = 0
     ..wScan = 0
     ..dwFlag = 0
-    ..time = 0;
+    ..time = 0
+    ..dwExtraInfo = nullptr;
 }
 
 // typedef struct tagHARDWAREINPUT {
@@ -324,6 +337,12 @@ class KEYBDINPUT extends Struct {
 // } HARDWAREINPUT, *PHARDWAREINPUT, *LPHARDWAREINPUT;
 class HARDWAREINPUT extends Struct {
   @Int32()
+  int type;
+
+  @Int32()
+  int padding;
+
+  @Int32()
   int uMsg;
 
   @Int16()
@@ -332,6 +351,7 @@ class HARDWAREINPUT extends Struct {
   int wParamH;
 
   factory HARDWAREINPUT.allocate() => allocate<HARDWAREINPUT>().ref
+    ..type = INPUT_HARDWARE
     ..uMsg = 0
     ..wParamL = 0
     ..wParamH = 0;

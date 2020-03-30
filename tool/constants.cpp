@@ -11,7 +11,7 @@
 
 void main()
 {
-    int test = KEYEVENTF_UNICODE;
+    int test = MOUSEEVENTF_ABSOLUTE;
 
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));
