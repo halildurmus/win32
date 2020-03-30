@@ -60,7 +60,6 @@ class Piece {
     height = 0;
 
     var bottomLeft = Point.clone(apt[0]);
-    bottomLeft.x = 999;
 
     for (var i = 1; i < nPoints; i++) {
       bottomLeft.x = min(apt[i].x, bottomLeft.x);

@@ -97,8 +97,10 @@ class PieceSet {
     apt[3].y = 1;
     pieces[6][0] = Piece(6, 0, RGB(220, 180, 255), apt);
 
+    // print('before: ${pieces[0][0]}');
     // Create piece rotations
     rotateAll();
+    // print('after rotate: ${pieces[0][0]}');
   }
 
   Piece getPiece(int id, int rotation) {
@@ -121,11 +123,23 @@ class PieceSet {
 
   void rotateAll() {
     for (var i = 0; i < NUM_PIECES; i++) {
-      var apt = List<Point>.from(pieces[i][0].body);
+      print('PIECE $i:============');
+
+      // clone the original piece
+      var clone = pieces[i][0].body.map((e) => e).toList();
+      print(clone);
+      // print('$i. ${pieces[0][0]}');
+
       for (var j = 1; j < NUM_ROTATIONS; j++) {
-        rotate(apt);
-        pieces[i][j] = Piece(i, j, pieces[i][0].color, apt);
+        clone = rotate(clone);
+        print(clone);
+        if (pieces[i][j] != null) {
+          print('removed');
+          pieces[i].removeAt(j);
+        }
+        pieces[i][j] = Piece(i, j, pieces[i][0].color, clone);
       }
+      print('');
     }
     assert(pieces.length == NUM_PIECES);
     for (var p in pieces) {
@@ -133,15 +147,18 @@ class PieceSet {
     }
   }
 
-  void rotate(List<Point> apt, [int numPoints = 4]) {
-    int tmp;
+  List<Point> rotate(List<Point> apt, [int numPoints = 4]) {
+    var rotated = <Point>[];
 
     // X' = -Y
     // Y' = X
     for (var i = 0; i < numPoints; i++) {
-      tmp = apt[i].x;
-      apt[i].x = -apt[i].y;
-      apt[i].y = tmp;
+      final pt = Point();
+      pt.x = -apt[i].y;
+      pt.y = apt[i].x;
+      rotated.add(pt);
     }
+    // print(rotated);
+    return rotated;
   }
 }
