@@ -236,6 +236,85 @@ class RECT extends Struct {
     ..bottom = 0;
 }
 
+// typedef struct tagINPUT {
+//   DWORD type;
+//   union {
+//     MOUSEINPUT    mi;
+//     KEYBDINPUT    ki;
+//     HARDWAREINPUT hi;
+//   } DUMMYUNIONNAME;
+// } INPUT, *PINPUT, *LPINPUT;
+class INPUT extends Struct {
+  @Int32()
+  int type;
+
+  Pointer<Void> input;
+}
+
+// typedef struct tagMOUSEINPUT {
+//   LONG      dx;
+//   LONG      dy;
+//   DWORD     mouseData;
+//   DWORD     dwFlags;
+//   DWORD     time;
+//   ULONG_PTR dwExtraInfo;
+// } MOUSEINPUT, *PMOUSEINPUT, *LPMOUSEINPUT;
+class MOUSEINPUT extends Struct {
+  @Int32()
+  int dx;
+  @Int32()
+  int dy;
+
+  @Int32()
+  int mouseData;
+
+  @Int32()
+  int dwFlags;
+
+  @Int32()
+  int time;
+
+  Pointer<Uint32> dwExtraInfo;
+}
+
+// typedef struct tagKEYBDINPUT {
+//   WORD      wVk;
+//   WORD      wScan;
+//   DWORD     dwFlags;
+//   DWORD     time;
+//   ULONG_PTR dwExtraInfo;
+// } KEYBDINPUT, *PKEYBDINPUT, *LPKEYBDINPUT;
+class KEYBDINPUT extends Struct {
+  @Int16()
+  int wVk;
+
+  @Int16()
+  int wScan;
+
+  @Int32()
+  int dwFlag;
+
+  @Int32()
+  int time;
+
+  Pointer<Uint32> dwExtraInfo;
+}
+
+// typedef struct tagHARDWAREINPUT {
+//   DWORD uMsg;
+//   WORD  wParamL;
+//   WORD  wParamH;
+// } HARDWAREINPUT, *PHARDWAREINPUT, *LPHARDWAREINPUT;
+class HARDWAREINPUT extends Struct {
+  @Int32()
+  int uMsg;
+
+  @Int16()
+  int wParamL;
+  @Int16()
+  int wParamH;
+}
+
 // *** CONSOLE STRUCTS ***
 
 // Dart FFI does not yet have support for nested structs, so there's extra

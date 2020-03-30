@@ -223,6 +223,19 @@ typedef releaseDCDart = int Function(int hWnd, int hDC);
 typedef saveDCNative = Int32 Function(Int64 hdc);
 typedef saveDCDart = int Function(int hdc);
 
+// In the following typedef, we use Pointer<Void> since pInputs can take
+// an array of input messages, and Pointer<List<INPUT>> isn't possible.
+
+// UINT SendInput(
+//   UINT    cInputs,
+//   LPINPUT pInputs,
+//   int     cbSize
+// );
+typedef sendInputNative = Uint32 Function(
+    Uint32 cInputs, Pointer<Void> pInputs, Int32 cbSize);
+typedef sendInputDart = int Function(
+    int cInputs, Pointer<Void> pInputs, int cbSize);
+
 // COLORREF SetBkColor(
 //   HDC      hdc,
 //   COLORREF color

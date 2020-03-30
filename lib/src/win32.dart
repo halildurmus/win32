@@ -52,6 +52,8 @@ final RegisterClass = user32
     .lookupFunction<registerClassNative, registerClassDart>('RegisterClassW');
 final ReleaseDC =
     user32.lookupFunction<releaseDCNative, releaseDCDart>('ReleaseDC');
+final SendInput =
+    user32.lookupFunction<sendInputNative, sendInputDart>('SendInput');
 final SetTimer =
     user32.lookupFunction<setTimerNative, setTimerDart>('SetTimer');
 final ShowWindow =
