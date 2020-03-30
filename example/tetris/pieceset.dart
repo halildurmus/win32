@@ -97,18 +97,11 @@ class PieceSet {
     apt[3].y = 1;
     pieces[6][0] = Piece(6, 0, RGB(220, 180, 255), apt);
 
-    // print('before: ${pieces[0][0]}');
     // Create piece rotations
     rotateAll();
-    // print('after rotate: ${pieces[0][0]}');
   }
 
   Piece getPiece(int id, int rotation) {
-    assert(!(id >= NUM_PIECES ||
-        id < 0 ||
-        rotation >= NUM_ROTATIONS ||
-        rotation < 0));
-
     if (id >= NUM_PIECES ||
         id < 0 ||
         rotation >= NUM_ROTATIONS ||
@@ -123,27 +116,16 @@ class PieceSet {
 
   void rotateAll() {
     for (var i = 0; i < NUM_PIECES; i++) {
-      print('PIECE $i:============');
-
       // clone the original piece
       var clone = pieces[i][0].body.map((e) => e).toList();
-      print(clone);
-      // print('$i. ${pieces[0][0]}');
 
       for (var j = 1; j < NUM_ROTATIONS; j++) {
         clone = rotate(clone);
-        print(clone);
         if (pieces[i][j] != null) {
-          print('removed');
           pieces[i].removeAt(j);
         }
         pieces[i][j] = Piece(i, j, pieces[i][0].color, clone);
       }
-      print('');
-    }
-    assert(pieces.length == NUM_PIECES);
-    for (var p in pieces) {
-      assert(p.length == NUM_ROTATIONS);
     }
   }
 
@@ -158,7 +140,6 @@ class PieceSet {
       pt.y = apt[i].x;
       rotated.add(pt);
     }
-    // print(rotated);
     return rotated;
   }
 }
