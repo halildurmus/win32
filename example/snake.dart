@@ -1,6 +1,13 @@
 // snake.dart
 
-// Simple sample game
+// The classic Snake game, as popularized by the Nokia phones of the 1990s.
+
+// Original C implementation by David Jones, available here:
+//     https://github.com/davidejones/winsnake
+
+// NB THe code isn't yet idiomatic Dart, but it demonstrates some
+// useful concepts, including pointer arithmetic and use of virtual
+// memory in Win32.
 
 import 'dart:ffi';
 import 'dart:io';
@@ -9,22 +16,23 @@ import 'dart:math' show Random;
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+// Win32-specific vars
 final hInstance = GetModuleHandle(nullptr);
-bool isRunning = false;
+int hWnd;
+const IDT_TIMER1 = 1;
+const IDT_TIMER2 = 2;
+
+final rng = Random();
 
 final bitmapInfo = BITMAPINFO.allocate();
 Pointer<Void> bitmapMemory = nullptr;
 int bitmapWidth;
 int bitmapHeight;
-int bytesPerPixel = 4;
-int gameoverRow = 0;
-bool wipedown = true;
+const bytesPerPixel = 4;
 
-int hWnd;
-final rng = Random();
-
-const IDT_TIMER1 = 1;
-const IDT_TIMER2 = 2;
+bool isRunning = false;
+int gameOverRow = 0;
+bool wipeDown = true;
 
 int appleX = 0;
 int appleY = 0;
@@ -47,29 +55,29 @@ class Point {
   factory Point.clone(Point orig) => Point(orig.x, orig.y);
 }
 
-void drawRect(int rectX, int rectY, int width, int height, int hexColor) {
-  final red = (hexColor >> 16) & 0xFF;
-  final green = (hexColor >> 8) & 0xFF;
-  final blue = hexColor & 0xFF;
+/// Fill rectangle with supplied 24-bit color in RGB format
+void drawRect(int rectX, int rectY, int width, int height, int color) {
+  final red = (color >> 16) & 0xFF;
+  final green = (color >> 8) & 0xFF;
+  final blue = color & 0xFF;
 
   final pitch = bitmapWidth * bytesPerPixel;
 
   final ptr = Pointer<Uint8>.fromAddress(bitmapMemory.address);
   var rowOffset = 0;
+
   for (var y = 0; y < bitmapHeight; ++y) {
     var pixelOffset = rowOffset;
+
     for (var x = 0; x < bitmapWidth; ++x) {
       if ((x >= rectX && y >= rectY) &&
           (x <= (rectX + width) && y <= (rectY + height))) {
-        //blue
         ptr.elementAt(pixelOffset).value = blue;
         pixelOffset++;
 
-        //green
         ptr.elementAt(pixelOffset).value = green;
         pixelOffset++;
 
-        //red
         ptr.elementAt(pixelOffset).value = red;
         pixelOffset++;
 
@@ -77,36 +85,33 @@ void drawRect(int rectX, int rectY, int width, int height, int hexColor) {
         pixelOffset++;
       } else {
         // move along
-        pixelOffset++;
-        pixelOffset++;
-        pixelOffset++;
-        pixelOffset++;
+        pixelOffset += bytesPerPixel;
       }
     }
     rowOffset += pitch;
   }
 }
 
-bool first = true;
-int RandRange(int rangeMin, int rangeMax) {
-  if (first) {
-    first = false;
-  }
-  return rng.nextInt(rangeMax - rangeMin) + rangeMin;
-}
+// Return a random integer from (rangeMin <= n < rangeMax)
+int randRange(int rangeMin, int rangeMax) =>
+    rng.nextInt(rangeMax - rangeMin) + rangeMin;
 
+// Position an apple at a random location on the gameboard
 void setApple() {
   // clear old apple just in case
   data[appleY][appleX] = 0;
-  // get a random x y in our 2d vector coordinate space
-  final x = RandRange(0, (bitmapWidth / 10).floor());
-  final y = RandRange(0, (bitmapHeight / 10).floor());
+
+  // get a random x, y coordinate on the gameboard
+  final x = randRange(0, (bitmapWidth / 10).floor());
+  final y = randRange(0, (bitmapHeight / 10).floor());
+
   // set to 1 to represent apple
   if (data[y][x] == 0) {
     data[y][x] = 1;
     appleX = x;
     appleY = y;
   } else {
+    // something else already here, find a new location
     setApple();
   }
 }
@@ -340,7 +345,7 @@ void resetGame() {
 void gameOver() {
   Beep(350, 300);
   KillTimer(hWnd, IDT_TIMER1);
-  gameoverRow = 0;
+  gameOverRow = 0;
   SetTimer(hWnd, IDT_TIMER2, 20, nullptr);
 }
 
@@ -349,26 +354,26 @@ void gameover_update_complete() {
   resetGame();
 }
 
-void gameover_update() {
-  if (wipedown) {
-    for (var x = 0; x <= data[gameoverRow].length; x++) {
-      data[gameoverRow][x] = 4;
+void gameOverUpdate() {
+  if (wipeDown) {
+    for (var x = 0; x <= data[gameOverRow].length; x++) {
+      data[gameOverRow][x] = 4;
     }
     setVectorToMemory();
-    gameoverRow++;
-    if (gameoverRow >= blocksPerHeight - 1) {
-      gameoverRow = blocksPerHeight - 1;
-      wipedown = false;
+    gameOverRow++;
+    if (gameOverRow >= blocksPerHeight - 1) {
+      gameOverRow = blocksPerHeight - 1;
+      wipeDown = false;
     }
   } else {
-    for (var x = data[gameoverRow].length; x > -1; x--) {
-      data[gameoverRow][x] = 0;
+    for (var x = data[gameOverRow].length; x > -1; x--) {
+      data[gameOverRow][x] = 0;
     }
     setVectorToMemory();
-    gameoverRow--;
-    if (gameoverRow < 0) {
+    gameOverRow--;
+    if (gameOverRow < 0) {
       gameover_update_complete();
-      wipedown = true;
+      wipeDown = true;
     }
   }
 }
@@ -414,28 +419,29 @@ void draw(int hdc, RECT rect, int x, int y, int width, int height) {
   // this is a rect to rect copy
   final windowWidth = rect.right - rect.left;
   final windowHeight = rect.bottom - rect.top;
+
   StretchDIBits(
-      hdc,
-      //X, Y, Width, Height, X, Y, Width, Height,
-      0,
-      0,
-      bitmapWidth,
-      bitmapHeight,
-      0,
-      windowHeight + 1,
-      windowWidth,
-      -windowHeight,
-      bitmapMemory,
-      bitmapInfo.addressOf,
-      DIB_RGB_COLORS,
-      SRCCOPY);
+      hdc, // destination device context
+      0, // x-coordinate of dest rectangle origin
+      0, // y-coordinate of dest rectangle origin
+      bitmapWidth, // destination width in logical units
+      bitmapHeight, // destination height in logical units
+      0, // x-coordinate of source rectangle origin
+      windowHeight + 1, // y-coordinate of source rectangle origin
+      windowWidth, // source width in pixels
+      -windowHeight, // source height in pixels
+      bitmapMemory, // pointer to the image bits
+      bitmapInfo.addressOf, // pointer to DIB
+      DIB_RGB_COLORS, // color table is literal RGB values
+      SRCCOPY // copy directly to dest rectangle
+      );
 }
 
-void update() {
-  // Update game simulation
-  // set everything in our 10x10 grid and have that write to memory
+/// Updates game simulation (one tick of the game loop)
+void gameTick() {
+  // set everything in our 10x10 grid
 
-  //move snake
+  // move snake
   moveSnake();
 
   // is the snake head colliding with apple?
@@ -453,6 +459,7 @@ void update() {
     }
   }
 
+  // now write the grid to memory
   setVectorToMemory();
 }
 
@@ -461,36 +468,39 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
   switch (uMsg) {
     case WM_SIZE:
-      final ClientRect = RECT.allocate();
-      GetClientRect(hwnd, ClientRect.addressOf);
-      final Width = ClientRect.right - ClientRect.left;
-      final Height = ClientRect.bottom - ClientRect.top;
-      init(Width, Height);
+      final rect = RECT.allocate();
+      GetClientRect(hwnd, rect.addressOf);
+      final width = rect.right - rect.left;
+      final height = rect.bottom - rect.top;
+
+      init(width, height);
+      free(rect.addressOf);
+      break;
+
+    case WM_CLOSE:
+      isRunning = false;
       break;
 
     case WM_DESTROY:
-      PostQuitMessage(0);
-      break;
-
-    case WM_GETMINMAXINFO:
-      final info = Pointer<MINMAXINFO>.fromAddress(lParam).ref;
-      info.ptMinTrackSizeX = 400;
-      info.ptMinTrackSizeY = 400;
+      KillTimer(hwnd, IDT_TIMER1);
+      isRunning = false;
       break;
 
     case WM_PAINT:
       final ps = PAINTSTRUCT.allocate();
       final dc = BeginPaint(hwnd, ps.addressOf);
-      final X = ps.rcPaintL;
-      final Y = ps.rcPaintT;
-      final Width = ps.rcPaintR - ps.rcPaintL;
-      final Height = ps.rcPaintB - ps.rcPaintT;
+      final x = ps.rcPaintL;
+      final y = ps.rcPaintT;
+      final width = ps.rcPaintR - ps.rcPaintL;
+      final height = ps.rcPaintB - ps.rcPaintT;
 
       final rect = RECT.allocate();
       GetClientRect(hwnd, rect.addressOf);
-      update();
-      draw(dc, rect, X, Y, Width, Height);
+      gameTick();
+      draw(dc, rect, x, y, width, height);
       EndPaint(hwnd, ps.addressOf);
+
+      free(rect.addressOf);
       free(ps.addressOf);
       break;
 
@@ -533,11 +543,11 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
         switch (wParam) {
           case IDT_TIMER1:
             // process the gameplay timer
-            update();
+            gameTick();
             return 0;
           case IDT_TIMER2:
             // process the gameover timer
-            gameover_update();
+            gameOverUpdate();
             return 0;
         }
       }
@@ -558,53 +568,57 @@ void main() {
   wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(MainWindowProc, 0);
   wc.hInstance = hInstance;
   wc.lpszClassName = CLASS_NAME;
-  RegisterClass(wc.addressOf);
+  if (RegisterClass(wc.addressOf) != 0) {
+    // Create the window.
 
-  // Create the window.
+    hWnd = CreateWindowEx(
+        0, // Optional window styles.
+        CLASS_NAME, // Window class
+        TEXT('WinSnake'), // Window caption
+        WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_VISIBLE,
 
-  hWnd = CreateWindowEx(
-      0, // Optional window styles.
-      CLASS_NAME, // Window class
-      TEXT('WinSnake'), // Window caption
-      WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_VISIBLE,
+        // Size and position
+        CW_USEDEFAULT,
+        CW_USEDEFAULT,
+        800,
+        600,
+        NULL, // Parent window
+        NULL, // Menu
+        hInstance, // Instance handle
+        nullptr // Additional application data
+        );
 
-      // Size and position
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      800,
-      600,
-      NULL, // Parent window
-      NULL, // Menu
-      hInstance, // Instance handle
-      nullptr // Additional application data
-      );
+    if (hWnd != 0) {
+      SetTimer(hWnd, IDT_TIMER1, timerAmount, nullptr);
 
-  if (hWnd == 0) {
-    stderr.writeln('CreateWindowEx failed with error: ${GetLastError()}');
-    exit(-1);
-  } else {
-    SetTimer(hWnd, IDT_TIMER1, timerAmount, nullptr);
+      isRunning = true;
+      while (isRunning) {
+        // Run the message loop.
 
-    isRunning = true;
-    while (isRunning) {
-      // Run the message loop.
-
-      final msg = MSG.allocate();
-      while (PeekMessage(msg.addressOf, 0, 0, 0, PM_REMOVE) != 0) {
-        if (msg.message == WM_QUIT) {
-          isRunning = false;
+        final msg = MSG.allocate();
+        while (PeekMessage(msg.addressOf, 0, 0, 0, PM_REMOVE) != 0) {
+          if (msg.message == WM_QUIT) {
+            isRunning = false;
+          }
+          TranslateMessage(msg.addressOf);
+          DispatchMessage(msg.addressOf);
         }
-        TranslateMessage(msg.addressOf);
-        DispatchMessage(msg.addressOf);
-      }
+        free(msg.addressOf);
 
-      final dc = GetDC(hWnd);
-      final rect = RECT.allocate();
-      GetClientRect(hWnd, rect.addressOf);
-      final windowWidth = rect.right - rect.left;
-      final windowHeight = rect.bottom - rect.top;
-      draw(dc, rect, 0, 0, windowWidth, windowHeight);
-      ReleaseDC(hWnd, dc);
+        final dc = GetDC(hWnd);
+        final rect = RECT.allocate();
+        GetClientRect(hWnd, rect.addressOf);
+        final windowWidth = rect.right - rect.left;
+        final windowHeight = rect.bottom - rect.top;
+        draw(dc, rect, 0, 0, windowWidth, windowHeight);
+        ReleaseDC(hWnd, dc);
+      }
+    } else {
+      MessageBox(0, TEXT('Failed to create window'), TEXT('Error'),
+          MB_ICONEXCLAMATION | MB_OK);
     }
+  } else {
+    MessageBox(0, TEXT('Failed to create window'), TEXT('Error'),
+        MB_ICONEXCLAMATION | MB_OK);
   }
 }
