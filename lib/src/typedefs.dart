@@ -308,6 +308,18 @@ typedef setWindowExtExNative = Int32 Function(
 typedef setWindowExtExDart = int Function(
     int hdc, int x, int y, Pointer<SIZE> lpsz);
 
+// SHFOLDERAPI SHGetFolderPathW(
+//   HWND   hwnd,
+//   int    csidl,
+//   HANDLE hToken,
+//   DWORD  dwFlags,
+//   LPWSTR pszPath
+// );
+typedef shGetFolderPathNative = Int32 Function(Int64 hwnd, Int32 csidl,
+    Int64 hToken, Int32 dwFlags, Pointer<Utf16> pszPath);
+typedef shGetFolderPathDart = int Function(
+    int hwnd, int csidl, int hToken, int dwFlags, Pointer<Utf16> pszPath);
+
 // HINSTANCE ShellExecuteW(
 //   HWND    hwnd,
 //   LPCWSTR lpOperation,

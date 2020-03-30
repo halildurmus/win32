@@ -7,6 +7,8 @@ import 'package:ffi/ffi.dart';
 
 const NULL = 0;
 
+const MAX_PATH = 260;
+
 // WindowStyle constants
 const WS_BORDER = 0x00800000;
 const WS_CAPTION = 0x00C00000;

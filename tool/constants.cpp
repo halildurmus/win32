@@ -11,7 +11,7 @@
 
 void main()
 {
-    int test = MOUSEEVENTF_ABSOLUTE;
+    int test = MAX_PATH;
 
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));
@@ -22,6 +22,7 @@ void main()
     printf("sizeof(HANDLE) is %zu\n", sizeof(HANDLE));
     printf("sizeof(HINSTANCE) is %zu\n", sizeof(HINSTANCE));
     printf("sizeof(HWND) is %zu\n", sizeof(HWND));
+    printf("sizeof(HRESULT) is %zu\n", sizeof(HRESULT));
     printf("sizeof(HDC) is %zu\n", sizeof(HDC));
     printf("sizeof(HBRUSH) is %zu\n", sizeof(HBRUSH));
 
