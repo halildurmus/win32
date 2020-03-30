@@ -13,39 +13,38 @@ bool isRunning = false;
 
 final BitmapInfo = BITMAPINFO.allocate();
 
-
 void init(int Width, int Height) {
-    // we are initializing the bitmap memory buffer here
-    // this can be called on resize too but for now stick to fixed window
+  // we are initializing the bitmap memory buffer here
+  // this can be called on resize too but for now stick to fixed window
 
-    if(BitmapMemory) {
-        VirtualFree(BitmapMemory, 0, MEM_RELEASE);
-    }
+  // if(BitmapMemory) {
+  //     VirtualFree(BitmapMemory, 0, MEM_RELEASE);
+  // }
 
-    BitmapWidth = Width;
-    BitmapHeight = Height;
+  // BitmapWidth = Width;
+  // BitmapHeight = Height;
 
-    BitmapInfo.bmiHeader.biSize = sizeof(BitmapInfo.bmiHeader);
-    BitmapInfo.bmiHeader.biWidth = Width;
-    BitmapInfo.bmiHeader.biHeight = Height;
-    BitmapInfo.bmiHeader.biPlanes = 1;
-    BitmapInfo.bmiHeader.biBitCount = 32;
-    BitmapInfo.bmiHeader.biCompression = BI_RGB;
-    BitmapInfo.bmiHeader.biSizeImage = 0;
-    BitmapInfo.bmiHeader.biXPelsPerMeter = 0;
-    BitmapInfo.bmiHeader.biYPelsPerMeter = 0;
-    BitmapInfo.bmiHeader.biClrUsed = 0;
-    BitmapInfo.bmiHeader.biClrImportant = 0;
+  BitmapInfo.biSize = sizeOf<BITMAPINFO>();
+  BitmapInfo.biWidth = Width;
+  BitmapInfo.biHeight = Height;
+  BitmapInfo.biPlanes = 1;
+  BitmapInfo.biBitCount = 32;
+  BitmapInfo.biCompression = BI_RGB;
+  BitmapInfo.biSizeImage = 0;
+  BitmapInfo.biXPelsPerMeter = 0;
+  BitmapInfo.biYPelsPerMeter = 0;
+  BitmapInfo.biClrUsed = 0;
+  BitmapInfo.biClrImportant = 0;
 
-    int BitmapMemorySize = (Width*Height)*BytesPerPixel;
-    BitmapMemory = VirtualAlloc(0, BitmapMemorySize, MEM_COMMIT, PAGE_READWRITE);
+  // int BitmapMemorySize = (Width*Height)*BytesPerPixel;
+  // BitmapMemory = VirtualAlloc(0, BitmapMemorySize, MEM_COMMIT, PAGE_READWRITE);
 
-    // init other variables here
-    blocksperwidth = Width / 10;
-    blocksperheight = Height / 10;
-    data.resize(blocksperheight, std::vector<int>(blocksperwidth, 0));
+  // init other variables here
+  // blocksperwidth = Width / 10;
+  // blocksperheight = Height / 10;
+  // data.resize(blocksperheight, std::vector<int>(blocksperwidth, 0));
 
-    resetGame();
+  // resetGame();
 }
 
 int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
@@ -80,8 +79,8 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
       final ClientRect = RECT.allocate();
       GetClientRect(hwnd, ClientRect.addressOf);
-      update();
-      draw(DeviceContext, ClientRect.addressOf, X, Y, Width, Height);
+      // update();
+      // draw(DeviceContext, ClientRect.addressOf, X, Y, Width, Height);
       EndPaint(hwnd, Paint.addressOf);
       break;
 
