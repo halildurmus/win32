@@ -270,10 +270,10 @@ class MOUSEINPUT extends Struct {
   @Int32()
   int dy;
 
-  @Int16()
+  @Int32()
   int mouseData;
 
-  @Int16()
+  @Int32()
   int dwFlags;
 
   @Int32()
@@ -287,7 +287,8 @@ class MOUSEINPUT extends Struct {
     ..dy = 0
     ..mouseData = 0
     ..dwFlags = 0
-    ..time = 0;
+    ..time = 0
+    ..dwExtraInfo = nullptr;
 }
 
 // typedef struct tagKEYBDINPUT {

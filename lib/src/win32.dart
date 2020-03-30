@@ -118,3 +118,7 @@ final SetViewportOrgEx =
 final SetWindowExtEx = gdi32
     .lookupFunction<setWindowExtExNative, setWindowExtExDart>('SetWindowExtEx');
 final TextOut = gdi32.lookupFunction<textOutNative, textOutDart>('TextOutW');
+
+final shell32 = DynamicLibrary.open('shell32.dll');
+final ShellExecute = shell32
+    .lookupFunction<shellExecuteNative, shellExecuteDart>('ShellExecuteW');

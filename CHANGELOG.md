@@ -1,3 +1,7 @@
+## 1.2.1
+
+ - Added SendInput, Sleep and ShellExecute
+
 ## 1.2.0
 
  - Implemented a good sample of GDI calls

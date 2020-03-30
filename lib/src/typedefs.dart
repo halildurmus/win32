@@ -308,6 +308,29 @@ typedef setWindowExtExNative = Int32 Function(
 typedef setWindowExtExDart = int Function(
     int hdc, int x, int y, Pointer<SIZE> lpsz);
 
+// HINSTANCE ShellExecuteW(
+//   HWND    hwnd,
+//   LPCWSTR lpOperation,
+//   LPCWSTR lpFile,
+//   LPCWSTR lpParameters,
+//   LPCWSTR lpDirectory,
+//   INT     nShowCmd
+// );
+typedef shellExecuteNative = Int64 Function(
+    Int64 hwnd,
+    Pointer<Utf16> lpOperation,
+    Pointer<Utf16> lpFile,
+    Pointer<Utf16> lpParameters,
+    Pointer<Utf16> lpDirectory,
+    Int32 nShowCmd);
+typedef shellExecuteDart = int Function(
+    int hwnd,
+    Pointer<Utf16> lpOperation,
+    Pointer<Utf16> lpFile,
+    Pointer<Utf16> lpParameters,
+    Pointer<Utf16> lpDirectory,
+    int nShowCmd);
+
 // BOOL ShowWindow(
 //   HWND hWnd,
 //   int  nCmdShow
