@@ -1,3 +1,7 @@
+// console.dart
+
+// Shows usage of console APIs
+
 import 'dart:ffi';
 import 'package:win32/win32.dart';
 
@@ -17,7 +21,8 @@ void main() {
   print('Maximum window size X/Y: (${bufferInfo.dwMaximumWindowSizeX}, '
       '${bufferInfo.dwMaximumWindowSizeY})');
 
-  var cursorPosition = (15 << 16) + 3;
+  // set cursor to (15, 3)
+  final cursorPosition = (15 << 16) + 3;
 
   SetConsoleCursorPosition(outputHandle, cursorPosition);
   GetConsoleScreenBufferInfo(outputHandle, bufferInfo.addressOf);

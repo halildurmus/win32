@@ -1,3 +1,7 @@
+// hello.dart
+
+// Basic Petzoldian "hello world" Win32 app
+
 import 'dart:ffi';
 import 'dart:io';
 
@@ -46,7 +50,7 @@ void main() {
   final hWnd = CreateWindowEx(
       0, // Optional window styles.
       CLASS_NAME, // Window class
-      TEXT('Dart Native Win32 window'), // Window text
+      TEXT('Dart Native Win32 window'), // Window caption
       WS_OVERLAPPEDWINDOW, // Window style
 
       // Size and position

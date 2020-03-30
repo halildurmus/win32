@@ -15,5 +15,5 @@ build/
 *.exe
 *.obj
 
-# ...but keep the sample executables around
-!example/bin/*.exe
+# ...but keep one sample executable around
+!example/bin/hello.exe
