@@ -52,6 +52,8 @@ final RegisterClass = user32
     .lookupFunction<registerClassNative, registerClassDart>('RegisterClassW');
 final ReleaseDC =
     user32.lookupFunction<releaseDCNative, releaseDCDart>('ReleaseDC');
+final SendInput =
+    user32.lookupFunction<sendInputNative, sendInputDart>('SendInput');
 final SetTimer =
     user32.lookupFunction<setTimerNative, setTimerDart>('SetTimer');
 final ShowWindow =
@@ -80,6 +82,7 @@ final SetConsoleCursorInfo = kernel32.lookupFunction<setConsoleCursorInfoNative,
 final SetConsoleCursorPosition = kernel32.lookupFunction<
     setConsoleCursorPositionNative,
     setConsoleCursorPositionDart>('SetConsoleCursorPosition');
+final Sleep = kernel32.lookupFunction<sleepNative, sleepDart>('Sleep');
 final FillConsoleOutputCharacter = kernel32.lookupFunction<
     fillConsoleOutputCharacterNative,
     fillConsoleOutputCharacterDart>('FillConsoleOutputCharacterW');
@@ -115,3 +118,7 @@ final SetViewportOrgEx =
 final SetWindowExtEx = gdi32
     .lookupFunction<setWindowExtExNative, setWindowExtExDart>('SetWindowExtEx');
 final TextOut = gdi32.lookupFunction<textOutNative, textOutDart>('TextOutW');
+
+final shell32 = DynamicLibrary.open('shell32.dll');
+final ShellExecute = shell32
+    .lookupFunction<shellExecuteNative, shellExecuteDart>('ShellExecuteW');

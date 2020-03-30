@@ -6,4 +6,5 @@ The package includes several examples in the `example` subdirectory:
 | `paint.dart`       | Demonstrates simple GDI drawing and min/max window sizing |
 | `console.dart`     | Shows usage of console APIs                               |
 | `msgbox.dart`      | Demonstrates a MessageBox from the console                |
+| `sendinput.dart`   | Sends keyboard and mouse input to another window          |
 | `tetris\main.dart` | Port of an open-source Tetris game to Dart                |

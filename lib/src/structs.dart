@@ -1,6 +1,8 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
+import 'constants.dart';
+
 // typedef struct tagWNDCLASSW {
 //   UINT      style;
 //   WNDPROC   lpfnWndProc;
@@ -234,6 +236,126 @@ class RECT extends Struct {
     ..top = 0
     ..right = 0
     ..bottom = 0;
+}
+
+// typedef struct tagINPUT {
+//   DWORD type;
+//   union {
+//     MOUSEINPUT    mi;
+//     KEYBDINPUT    ki;
+//     HARDWAREINPUT hi;
+//   } DUMMYUNIONNAME;
+// } INPUT, *PINPUT, *LPINPUT;
+
+// We embed this type directly into the union types below, since nested structs
+// are unavailable in Dart FFI at present.
+
+// typedef struct tagMOUSEINPUT {
+//   LONG      dx;
+//   LONG      dy;
+//   DWORD     mouseData;
+//   DWORD     dwFlags;
+//   DWORD     time;
+//   ULONG_PTR dwExtraInfo;
+// } MOUSEINPUT, *PMOUSEINPUT, *LPMOUSEINPUT;
+class MOUSEINPUT extends Struct {
+  @Int32()
+  int type;
+
+  @Int32()
+  int padding;
+
+  @Int32()
+  int dx;
+  @Int32()
+  int dy;
+
+  @Int32()
+  int mouseData;
+
+  @Int32()
+  int dwFlags;
+
+  @Int32()
+  int time;
+
+  Pointer<Uint32> dwExtraInfo;
+
+  factory MOUSEINPUT.allocate() => allocate<MOUSEINPUT>().ref
+    ..type = INPUT_MOUSE
+    ..dx = 0
+    ..dy = 0
+    ..mouseData = 0
+    ..dwFlags = 0
+    ..time = 0
+    ..dwExtraInfo = nullptr;
+}
+
+// typedef struct tagKEYBDINPUT {
+//   WORD      wVk;
+//   WORD      wScan;
+//   DWORD     dwFlags;
+//   DWORD     time;
+//   ULONG_PTR dwExtraInfo;
+// } KEYBDINPUT, *PKEYBDINPUT, *LPKEYBDINPUT;
+class KEYBDINPUT extends Struct {
+  @Int32()
+  int type;
+
+  @Int32()
+  int padding;
+
+  @Int16()
+  int wVk;
+
+  @Int16()
+  int wScan;
+
+  @Int32()
+  int dwFlag;
+
+  @Int32()
+  int time;
+
+  Pointer<Uint32> dwExtraInfo;
+
+  @Int64()
+  int padding2;
+
+  factory KEYBDINPUT.allocate() => allocate<KEYBDINPUT>().ref
+    ..type = INPUT_KEYBOARD
+    ..wVk = 0
+    ..wScan = 0
+    ..dwFlag = 0
+    ..time = 0
+    ..dwExtraInfo = nullptr;
+}
+
+// typedef struct tagHARDWAREINPUT {
+//   DWORD uMsg;
+//   WORD  wParamL;
+//   WORD  wParamH;
+// } HARDWAREINPUT, *PHARDWAREINPUT, *LPHARDWAREINPUT;
+class HARDWAREINPUT extends Struct {
+  @Int32()
+  int type;
+
+  @Int32()
+  int padding;
+
+  @Int32()
+  int uMsg;
+
+  @Int16()
+  int wParamL;
+  @Int16()
+  int wParamH;
+
+  factory HARDWAREINPUT.allocate() => allocate<HARDWAREINPUT>().ref
+    ..type = INPUT_HARDWARE
+    ..uMsg = 0
+    ..wParamL = 0
+    ..wParamH = 0;
 }
 
 // *** CONSOLE STRUCTS ***

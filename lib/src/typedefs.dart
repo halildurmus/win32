@@ -223,6 +223,19 @@ typedef releaseDCDart = int Function(int hWnd, int hDC);
 typedef saveDCNative = Int32 Function(Int64 hdc);
 typedef saveDCDart = int Function(int hdc);
 
+// In the following typedef, we use Pointer<Void> since pInputs can take
+// an array of input messages, and Pointer<List<INPUT>> isn't possible.
+
+// UINT SendInput(
+//   UINT    cInputs,
+//   LPINPUT pInputs,
+//   int     cbSize
+// );
+typedef sendInputNative = Uint32 Function(
+    Uint32 cInputs, Pointer<Void> pInputs, Int32 cbSize);
+typedef sendInputDart = int Function(
+    int cInputs, Pointer<Void> pInputs, int cbSize);
+
 // COLORREF SetBkColor(
 //   HDC      hdc,
 //   COLORREF color
@@ -295,12 +308,41 @@ typedef setWindowExtExNative = Int32 Function(
 typedef setWindowExtExDart = int Function(
     int hdc, int x, int y, Pointer<SIZE> lpsz);
 
+// HINSTANCE ShellExecuteW(
+//   HWND    hwnd,
+//   LPCWSTR lpOperation,
+//   LPCWSTR lpFile,
+//   LPCWSTR lpParameters,
+//   LPCWSTR lpDirectory,
+//   INT     nShowCmd
+// );
+typedef shellExecuteNative = Int64 Function(
+    Int64 hwnd,
+    Pointer<Utf16> lpOperation,
+    Pointer<Utf16> lpFile,
+    Pointer<Utf16> lpParameters,
+    Pointer<Utf16> lpDirectory,
+    Int32 nShowCmd);
+typedef shellExecuteDart = int Function(
+    int hwnd,
+    Pointer<Utf16> lpOperation,
+    Pointer<Utf16> lpFile,
+    Pointer<Utf16> lpParameters,
+    Pointer<Utf16> lpDirectory,
+    int nShowCmd);
+
 // BOOL ShowWindow(
 //   HWND hWnd,
 //   int  nCmdShow
 // );
 typedef showWindowNative = Int32 Function(Int64 hWnd, Int32 nCmdShow);
 typedef showWindowDart = int Function(int hWnd, int nCmdShow);
+
+// void Sleep(
+//   DWORD dwMilliseconds
+// );
+typedef sleepNative = Void Function(Uint32 dwMilliseconds);
+typedef sleepDart = void Function(int dwMilliseconds);
 
 // BOOL TextOutW(
 //   HDC     hdc,
