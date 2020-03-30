@@ -1,6 +1,7 @@
 import 'dart:ffi';
 import 'dart:io';
 
+import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'game.dart';
@@ -64,7 +65,8 @@ void main() {
 }
 
 int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
-  int hdc;
+  var hdc;
+  var result = 0;
 
   final ps = PAINTSTRUCT.allocate();
 
@@ -77,35 +79,41 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       SetTimer(hwnd, TIMER_ID, GAME_SPEED, nullptr);
 
       ReleaseDC(hwnd, hdc);
-      return 0;
+      break;
 
     case WM_KEYDOWN:
       game.keyPress(wParam);
-      return 0;
+      break;
 
     case WM_TIMER:
       game.timerUpdate();
-      return 0;
+      break;
 
     case WM_KILLFOCUS:
       KillTimer(hwnd, TIMER_ID);
       game.pause(true);
-      return 0;
+      break;
 
     case WM_SETFOCUS:
       SetTimer(hwnd, TIMER_ID, GAME_SPEED, nullptr);
-      return 0;
+      break;
 
     case WM_PAINT:
       hdc = BeginPaint(hwnd, ps.addressOf);
       game.repaint();
       EndPaint(hwnd, ps.addressOf);
-      return 0;
+      break;
 
     case WM_DESTROY:
       KillTimer(hwnd, TIMER_ID);
       PostQuitMessage(0);
-      return 0;
+      break;
+
+    default:
+      result = DefWindowProc(hwnd, uMsg, wParam, lParam);
   }
-  return DefWindowProc(hwnd, uMsg, wParam, lParam);
+
+  free(ps.addressOf);
+
+  return result;
 }

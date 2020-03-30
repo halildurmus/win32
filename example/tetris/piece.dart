@@ -50,17 +50,14 @@ class Piece {
   ///      corner (0,0)
   /// numPoints: number of points in apt
   Piece(int pieceId, int pieceRotation, int pieceColor, List<Point> apt,
-      [int numPoints = 4]) {
-    id = pieceId;
-    rotation = pieceRotation;
-    color = pieceColor;
-
-    nPoints = numPoints;
-    width = 0;
-    height = 0;
-
+      [int numPoints = 4])
+      : id = pieceId,
+        rotation = pieceRotation,
+        color = pieceColor,
+        nPoints = numPoints,
+        width = 0,
+        height = 0 {
     var bottomLeft = Point.clone(apt[0]);
-    bottomLeft.x = 999;
 
     for (var i = 1; i < nPoints; i++) {
       bottomLeft.x = min(apt[i].x, bottomLeft.x);

@@ -19,94 +19,41 @@ class PieceSet {
       List.generate(NUM_PIECES, (i) => List<Piece>(NUM_ROTATIONS));
 
   PieceSet() {
-    var apt = List<Point>.generate(4, (i) => Point());
+    List<Point> tetrimino;
+
     // 0, I piece, red
-    apt[0].x = 0;
-    apt[0].y = 0;
-    apt[1].x = 0;
-    apt[1].y = 1;
-    apt[2].x = 0;
-    apt[2].y = 2;
-    apt[3].x = 0;
-    apt[3].y = 3;
-    pieces[0][0] = Piece(0, 0, RGB(255, 0, 0), apt);
+    tetrimino = <Point>[Point(0, 0), Point(0, 1), Point(0, 2), Point(0, 3)];
+    pieces[0][0] = Piece(0, 0, RGB(255, 0, 0), tetrimino);
 
     // 1, L piece, orange
-    apt[0].x = 0;
-    apt[0].y = 0;
-    apt[1].x = 1;
-    apt[1].y = 0;
-    apt[2].x = 0;
-    apt[2].y = 1;
-    apt[3].x = 0;
-    apt[3].y = 2;
-    pieces[1][0] = Piece(1, 0, RGB(230, 130, 24), apt);
+    tetrimino = <Point>[Point(0, 0), Point(1, 0), Point(0, 1), Point(0, 2)];
+    pieces[1][0] = Piece(1, 0, RGB(230, 130, 24), tetrimino);
 
     // 2, counter-L piece, yellow
-    apt[0].x = 0;
-    apt[0].y = 0;
-    apt[1].x = 1;
-    apt[1].y = 0;
-    apt[2].x = 1;
-    apt[2].y = 1;
-    apt[3].x = 1;
-    apt[3].y = 2;
-    pieces[2][0] = Piece(2, 0, RGB(255, 255, 0), apt);
+    tetrimino = <Point>[Point(0, 0), Point(1, 0), Point(1, 1), Point(1, 2)];
+    pieces[2][0] = Piece(2, 0, RGB(255, 255, 0), tetrimino);
 
     // 3, S piece, green
-    apt[0].x = 0;
-    apt[0].y = 0;
-    apt[1].x = 1;
-    apt[1].y = 0;
-    apt[2].x = 1;
-    apt[2].y = 1;
-    apt[3].x = 2;
-    apt[3].y = 1;
-    pieces[3][0] = Piece(3, 0, RGB(120, 200, 80), apt);
+    tetrimino = <Point>[Point(0, 0), Point(1, 0), Point(1, 1), Point(2, 1)];
+    pieces[3][0] = Piece(3, 0, RGB(120, 200, 80), tetrimino);
 
     // 4, Z piece, blue
-    apt[0].x = 1;
-    apt[0].y = 0;
-    apt[1].x = 2;
-    apt[1].y = 0;
-    apt[2].x = 0;
-    apt[2].y = 1;
-    apt[3].x = 1;
-    apt[3].y = 1;
-    pieces[4][0] = Piece(4, 0, RGB(100, 180, 255), apt);
+    tetrimino = <Point>[Point(1, 0), Point(2, 0), Point(0, 1), Point(1, 1)];
+    pieces[4][0] = Piece(4, 0, RGB(100, 180, 255), tetrimino);
 
     // 5, Square piece, dark blue
-    apt[0].x = 0;
-    apt[0].y = 0;
-    apt[1].x = 1;
-    apt[1].y = 0;
-    apt[2].x = 0;
-    apt[2].y = 1;
-    apt[3].x = 1;
-    apt[3].y = 1;
-    pieces[5][0] = Piece(5, 0, RGB(20, 100, 200), apt);
+    tetrimino = <Point>[Point(0, 0), Point(1, 0), Point(0, 1), Point(1, 1)];
+    pieces[5][0] = Piece(5, 0, RGB(20, 100, 200), tetrimino);
 
     // 6, T piece, purple
-    apt[0].x = 0;
-    apt[0].y = 0;
-    apt[1].x = 1;
-    apt[1].y = 0;
-    apt[2].x = 2;
-    apt[2].y = 0;
-    apt[3].x = 1;
-    apt[3].y = 1;
-    pieces[6][0] = Piece(6, 0, RGB(220, 180, 255), apt);
+    tetrimino = <Point>[Point(0, 0), Point(1, 0), Point(2, 0), Point(1, 1)];
+    pieces[6][0] = Piece(6, 0, RGB(220, 180, 255), tetrimino);
 
     // Create piece rotations
     rotateAll();
   }
 
   Piece getPiece(int id, int rotation) {
-    assert(!(id >= NUM_PIECES ||
-        id < 0 ||
-        rotation >= NUM_ROTATIONS ||
-        rotation < 0));
-
     if (id >= NUM_PIECES ||
         id < 0 ||
         rotation >= NUM_ROTATIONS ||
@@ -121,27 +68,30 @@ class PieceSet {
 
   void rotateAll() {
     for (var i = 0; i < NUM_PIECES; i++) {
-      var apt = List<Point>.from(pieces[i][0].body);
+      // clone the original piece
+      var clone = pieces[i][0].body.map((e) => e).toList();
+
       for (var j = 1; j < NUM_ROTATIONS; j++) {
-        rotate(apt);
-        pieces[i][j] = Piece(i, j, pieces[i][0].color, apt);
+        clone = rotate(clone);
+        if (pieces[i][j] != null) {
+          pieces[i].removeAt(j);
+        }
+        pieces[i][j] = Piece(i, j, pieces[i][0].color, clone);
       }
-    }
-    assert(pieces.length == NUM_PIECES);
-    for (var p in pieces) {
-      assert(p.length == NUM_ROTATIONS);
     }
   }
 
-  void rotate(List<Point> apt, [int numPoints = 4]) {
-    int tmp;
+  List<Point> rotate(List<Point> apt, [int numPoints = 4]) {
+    var rotated = <Point>[];
 
     // X' = -Y
     // Y' = X
     for (var i = 0; i < numPoints; i++) {
-      tmp = apt[i].x;
-      apt[i].x = -apt[i].y;
-      apt[i].y = tmp;
+      final pt = Point();
+      pt.x = -apt[i].y;
+      pt.y = apt[i].x;
+      rotated.add(pt);
     }
+    return rotated;
   }
 }

@@ -12,6 +12,7 @@ class Level {
   PieceSet pieceSet = PieceSet(); // Piece generator
   Piece current; // Current dropping piece
   Piece next; // Next piece
+
   int width; // Level width (in cells)
   int height; // Level height
   int posX; // X coordinate of dropping piece (Cartesian system)
@@ -134,7 +135,7 @@ class Level {
   }
 
   void clear(Piece piece) {
-    final apt = List.from(piece.body);
+    final apt = piece.body;
     var x, y;
     for (var i = 0; i < 4; i++) {
       x = posX + apt[i].x;
