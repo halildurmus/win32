@@ -3,6 +3,13 @@ import 'package:ffi/ffi.dart';
 
 import 'structs.dart';
 
+// BOOL Beep(
+//   DWORD dwFreq,
+//   DWORD dwDuration
+// );
+typedef beepNative = Int32 Function(Int32 dwFreq, Int32 dwDuration);
+typedef beepDart = int Function(int dwFreq, int dwDuration);
+
 // HDC BeginPaint(
 //   HWND          hWnd,
 //   LPPAINTSTRUCT lpPaint
@@ -204,6 +211,18 @@ typedef moveToExNative = Int32 Function(
     Int64 hdc, Int32 x, Int32 y, Pointer<POINT> lppt);
 typedef moveToExDart = int Function(int hdc, int x, int y, Pointer<POINT> lppt);
 
+// BOOL PeekMessageW(
+//   LPMSG lpMsg,
+//   HWND  hWnd,
+//   UINT  wMsgFilterMin,
+//   UINT  wMsgFilterMax,
+//   UINT  wRemoveMsg
+// );
+typedef peekMessageNative = Int32 Function(Pointer<MSG> lpMsg, Int64 hWnd,
+    Uint32 wMsgFilterMin, Uint32 wMsgFilterMax, Uint32 wRemoveMsg);
+typedef peekMessageDart = int Function(Pointer<MSG> lpMsg, int hWnd,
+    int wMsgFilterMin, int wMsgFilterMax, int wRemoveMsg);
+
 // ATOM RegisterClassW(
 //   const WNDCLASSW *lpWndClass
 // );
@@ -302,6 +321,50 @@ typedef setWindowExtExDart = int Function(
 typedef showWindowNative = Int32 Function(Int64 hWnd, Int32 nCmdShow);
 typedef showWindowDart = int Function(int hWnd, int nCmdShow);
 
+// int StretchDIBits(
+//   HDC              hdc,
+//   int              xDest,
+//   int              yDest,
+//   int              DestWidth,
+//   int              DestHeight,
+//   int              xSrc,
+//   int              ySrc,
+//   int              SrcWidth,
+//   int              SrcHeight,
+//   const VOID       *lpBits,
+//   const BITMAPINFO *lpbmi,
+//   UINT             iUsage,
+//   DWORD            rop
+// );
+typedef stretchDIBitsNative = Int32 Function(
+    Int64 hdc,
+    Int32 xDest,
+    Int32 yDest,
+    Int32 DestWidth,
+    Int32 DestHeight,
+    Int32 xSrc,
+    Int32 ySrc,
+    Int32 SrcWidth,
+    Int32 SrcHeight,
+    Pointer<Void> lpBits,
+    Pointer<BITMAPINFO> lpbmi,
+    Uint32 iUsage,
+    Int32 rop);
+typedef stretchDIBitsDart = int Function(
+    int hdc,
+    int xDest,
+    int yDest,
+    int DestWidth,
+    int DestHeight,
+    int xSrc,
+    int ySrc,
+    int SrcWidth,
+    int SrcHeight,
+    Pointer<Void> lpBits,
+    Pointer<BITMAPINFO> lpbmi,
+    int iUsage,
+    int rop);
+
 // BOOL TextOutW(
 //   HDC     hdc,
 //   int     x,
@@ -331,6 +394,27 @@ typedef postQuitMessageDart = void Function(int nExitCode);
 // );
 typedef updateWindowNative = Int32 Function(Int64 hWnd);
 typedef updateWindowDart = int Function(int hWnd);
+
+// LPVOID VirtualAlloc(
+//   LPVOID lpAddress,
+//   SIZE_T dwSize,
+//   DWORD  flAllocationType,
+//   DWORD  flProtect
+// );
+typedef virtualAllocNative = Pointer<Void> Function(Pointer<Void> lpAddress,
+    Int64 dwSize, Int32 flAllocationType, Int32 flProtect);
+typedef virtualAllocDart = Pointer<Void> Function(
+    Pointer<Void> lpAddress, int dwSize, int flAllocationType, int flProtect);
+
+// BOOL VirtualFree(
+//   LPVOID lpAddress,
+//   SIZE_T dwSize,
+//   DWORD  dwFreeType
+// );
+typedef virtualFreeNative = Int32 Function(
+    Pointer<Void> lpAddress, Int64 dwSize, Int32 dwFreeType);
+typedef virtualFreeDart = int Function(
+    Pointer<Void> lpAddress, int dwSize, int dwFreeType);
 
 // *** CONSOLE APIs ***
 // BOOL WINAPI FillConsoleOutputCharacter(

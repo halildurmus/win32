@@ -137,6 +137,11 @@ const CS_DROPSHADOW = 0x00020000;
 // ControlWord constant
 const CW_USEDEFAULT = 0x80000000;
 
+// PeekMessage options
+const PM_NOREMOVE = 0x0000;
+const PM_REMOVE = 0x0001;
+const PM_NOYIELD = 0x0002;
+
 // System colors
 const COLOR_SCROLLBAR = 0;
 const COLOR_BACKGROUND = 1;
@@ -247,6 +252,29 @@ const BI_RLE4 = 2;
 const BI_BITFIELDS = 3;
 const BI_JPEG = 4;
 const BI_PNG = 5;
+
+// DIB color table identifiers
+const DIB_RGB_COLORS = 0;
+const DIB_PAL_COLORS = 1;
+
+/* Ternary raster operations */
+const SRCCOPY = 0x00CC0020;
+const SRCPAINT = 0x00EE0086;
+const SRCAND = 0x008800C6;
+const SRCINVERT = 0x00660046;
+const SRCERASE = 0x00440328;
+const NOTSRCCOPY = 0x00330008;
+const NOTSRCERASE = 0x001100A6;
+const MERGECOPY = 0x00C000CA;
+const MERGEPAINT = 0x00BB0226;
+const PATCOPY = 0x00F00021;
+const PATPAINT = 0x00FB0A09;
+const PATINVERT = 0x005A0049;
+const DSTINVERT = 0x00550009;
+const BLACKNESS = 0x00000042;
+const WHITENESS = 0x00FF0062;
+const NOMIRRORBITMAP = 0x80000000;
+const CAPTUREBLT = 0x40000000;
 
 // Dialog box command IDs
 const IDOK = 1;
@@ -420,6 +448,8 @@ const ENABLE_WRAP_AT_EOL_OUTPUT = 0x0002;
 const ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004;
 const DISABLE_NEWLINE_AUTO_RETURN = 0x0008;
 const ENABLE_LVB_GRID_WORLDWIDE = 0x0010;
+
+// *** Kernel constants ***
 
 // memory management
 const PAGE_NOACCESS = 0x01;
