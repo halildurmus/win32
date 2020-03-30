@@ -13,6 +13,7 @@ final hInstance = GetModuleHandle(nullptr);
 bool isRunning = false;
 
 final bitmapInfo = BITMAPINFO.allocate();
+Pointer<Void> bitmapMemory = nullptr;
 int bitmapWidth;
 int bitmapHeight;
 int bytesPerPixel = 4;
@@ -33,6 +34,7 @@ int timerAmount = 100;
 
 Point direction = Point();
 List<Point> snakePoints = <Point>[];
+List<List<int>> data = [<int>[]];
 
 class Point {
   int x;
@@ -46,39 +48,42 @@ class Point {
 }
 
 void drawRect(int rectX, int rectY, int width, int height, int hexColor) {
-  // unsigned char R = static_cast<unsigned char>(((hexColor >> 16) & 0xFF));
-  // unsigned char G = static_cast<unsigned char>(((hexColor >> 8) & 0xFF));
-  // unsigned char B = static_cast<unsigned char>((hexColor & 0xFF));
+  final red = (hexColor >> 16) & 0xFF;
+  final green = (hexColor >> 8) & 0xFF;
+  final blue = hexColor & 0xFF;
+
   final pitch = bitmapWidth * bytesPerPixel;
-  // uint8_t *Row = (uint8_t *)BitmapMemory;
+
+  final ptr = Pointer<Uint8>.fromAddress(bitmapMemory.address);
+  var rowOffset = 0;
   for (var y = 0; y < bitmapHeight; ++y) {
-    // uint8_t *Pixel = (uint8_t *)Row;
+    var pixelOffset = rowOffset;
     for (var x = 0; x < bitmapWidth; ++x) {
       if ((x >= rectX && y >= rectY) &&
           (x <= (rectX + width) && y <= (rectY + height))) {
         //blue
-        // *Pixel = B;
-        ++pixel;
+        ptr.elementAt(pixelOffset).value = blue;
+        pixelOffset++;
 
         //green
-        // *Pixel = G;
-        ++pixel;
+        ptr.elementAt(pixelOffset).value = green;
+        pixelOffset++;
 
         //red
-        // *Pixel = R;
-        ++pixel;
+        ptr.elementAt(pixelOffset).value = red;
+        pixelOffset++;
 
-        // *Pixel = 0;
-        ++pixel;
+        ptr.elementAt(pixelOffset).value = 0;
+        pixelOffset++;
       } else {
         // move along
-        ++pixel;
-        ++pixel;
-        ++pixel;
-        ++pixel;
+        pixelOffset++;
+        pixelOffset++;
+        pixelOffset++;
+        pixelOffset++;
       }
     }
-    row += pitch;
+    rowOffset += pitch;
   }
 }
 
@@ -92,10 +97,10 @@ int RandRange(int rangeMin, int rangeMax) {
 
 void setApple() {
   // clear old apple just in case
-  data[appley][applex] = 0;
+  data[appleY][appleX] = 0;
   // get a random x y in our 2d vector coordinate space
-  final x = RandRange(0, (bitmapWidth / 10.0).floor());
-  final y = RandRange(0, (bitmapHeight / 10.0).floor());
+  final x = RandRange(0, (bitmapWidth / 10).floor());
+  final y = RandRange(0, (bitmapHeight / 10).floor());
   // set to 1 to represent apple
   if (data[y][x] == 0) {
     data[y][x] = 1;
@@ -158,7 +163,7 @@ void moveSnake() {
         // left
         snakePoints[i].x -= 1;
         if (snakePoints[i].x < 0) {
-          snakePoints[i].x = (bitmapWidth / 10);
+          snakePoints[i].x = (bitmapWidth / 10).floor();
         }
       } else if (direction.y == 1) {
         // down
@@ -170,7 +175,7 @@ void moveSnake() {
         // up
         snakePoints[i].y -= 1;
         if (snakePoints[i].y < 0) {
-          snakePoints[i].y = (bitmapHeight / 10) - 1;
+          snakePoints[i].y = (bitmapHeight / 10).floor() - 1;
         }
       }
     } else {
@@ -187,20 +192,201 @@ void moveSnake() {
   }
 }
 
-void init(int Width, int Height) {
+void setVectorToMemory() {
+  var vecX = 0;
+  var vecY = 0;
+
+  final pitch = bitmapWidth * bytesPerPixel;
+
+  final ptr = Pointer<Uint8>.fromAddress(bitmapMemory.address);
+
+  var rowOffset = 0;
+  for (var y = 0; y < bitmapHeight; ++y) {
+    var pixelOffset = rowOffset;
+    for (var x = 0; x < bitmapWidth; ++x) {
+      if (data[vecY][vecX] == 1) {
+        // Apple
+        //blue
+        ptr.elementAt(pixelOffset).value = 0;
+        pixelOffset++;
+
+        //green
+        ptr.elementAt(pixelOffset).value = 255;
+        pixelOffset++;
+
+        //red
+        ptr.elementAt(pixelOffset).value = 0;
+        pixelOffset++;
+
+        ptr.elementAt(pixelOffset).value = 0;
+        pixelOffset++;
+      } else if (data[vecY][vecX] == 2) {
+        // snake
+        //blue
+        ptr.elementAt(pixelOffset).value = 0;
+        pixelOffset++;
+
+        //green
+        ptr.elementAt(pixelOffset).value = 0;
+        pixelOffset++;
+
+        //red
+        ptr.elementAt(pixelOffset).value = 255;
+        pixelOffset++;
+
+        ptr.elementAt(pixelOffset).value = 0;
+        pixelOffset++;
+      } else if (data[vecY][vecX] == 3) {
+        // ???
+        //blue
+        ptr.elementAt(pixelOffset).value = 255;
+        pixelOffset++;
+
+        //green
+        ptr.elementAt(pixelOffset).value = 0;
+        pixelOffset++;
+
+        //red
+        ptr.elementAt(pixelOffset).value = 0;
+        pixelOffset++;
+
+        ptr.elementAt(pixelOffset).value = 0;
+        pixelOffset++;
+      } else if (data[vecY][vecX] == 4) {
+        //set to purple
+        //blue
+        ptr.elementAt(pixelOffset).value = 226;
+        pixelOffset++;
+
+        //green
+        ptr.elementAt(pixelOffset).value = 43;
+        pixelOffset++;
+
+        //red
+        ptr.elementAt(pixelOffset).value = 138;
+        pixelOffset++;
+
+        ptr.elementAt(pixelOffset).value = 0;
+        pixelOffset++;
+      } else {
+        //blue
+        ptr.elementAt(pixelOffset).value = 0;
+        pixelOffset++;
+
+        //green
+        ptr.elementAt(pixelOffset).value = 0;
+        pixelOffset++;
+
+        //red
+        ptr.elementAt(pixelOffset).value = 0;
+        pixelOffset++;
+
+        ptr.elementAt(pixelOffset).value = 0;
+        pixelOffset++;
+        // move along
+        //++Pixel;
+        //++Pixel;
+        //++Pixel;
+        //++Pixel;
+      }
+      vecX = (x / 10).floor();
+    }
+    rowOffset += pitch;
+    vecY = (y / 10).floor();
+  }
+}
+
+void resetGame() {
+  appleX = 0;
+  appleY = 0;
+  timerAmount = 100;
+
+  // init snake direction
+  direction.x = 1;
+  direction.y = 0;
+
+  // init snake
+  snakePoints.clear();
+  final p1 = Point();
+  p1.x = 3;
+  p1.y = 0;
+  snakePoints.add(p1);
+
+  final p2 = Point();
+  p2.x = 2;
+  p2.y = 0;
+  snakePoints.add(p2);
+
+  final p3 = Point();
+  p3.x = 1;
+  p3.y = 0;
+  snakePoints.add(p3);
+
+  final p4 = Point();
+  p4.x = 0;
+  p4.y = 0;
+  snakePoints.add(p4);
+
+  for (var i = 0; i < snakePoints.length; i++) {
+    data[snakePoints[i].y][snakePoints[i].x] = 2;
+  }
+
+  setApple();
+  setVectorToMemory();
+
+  SetTimer(hWnd, IDT_TIMER1, timerAmount, nullptr);
+}
+
+void gameOver() {
+  Beep(350, 300);
+  KillTimer(hWnd, IDT_TIMER1);
+  gameoverRow = 0;
+  SetTimer(hWnd, IDT_TIMER2, 20, nullptr);
+}
+
+void gameover_update_complete() {
+  KillTimer(hWnd, IDT_TIMER2);
+  resetGame();
+}
+
+void gameover_update() {
+  if (wipedown) {
+    for (var x = 0; x <= data[gameoverRow].length; x++) {
+      data[gameoverRow][x] = 4;
+    }
+    setVectorToMemory();
+    gameoverRow++;
+    if (gameoverRow >= blocksPerHeight - 1) {
+      gameoverRow = blocksPerHeight - 1;
+      wipedown = false;
+    }
+  } else {
+    for (var x = data[gameoverRow].length; x > -1; x--) {
+      data[gameoverRow][x] = 0;
+    }
+    setVectorToMemory();
+    gameoverRow--;
+    if (gameoverRow < 0) {
+      gameover_update_complete();
+      wipedown = true;
+    }
+  }
+}
+
+void init(int width, int height) {
   // we are initializing the bitmap memory buffer here
   // this can be called on resize too but for now stick to fixed window
 
-  if (bitmapMemory) {
+  if (bitmapMemory != nullptr) {
     VirtualFree(bitmapMemory, 0, MEM_RELEASE);
   }
 
-  bitmapWidth = Width;
-  bitmapHeight = Height;
+  bitmapWidth = width;
+  bitmapHeight = height;
 
   bitmapInfo.biSize = sizeOf<BITMAPINFO>();
-  bitmapInfo.biWidth = Width;
-  bitmapInfo.biHeight = Height;
+  bitmapInfo.biWidth = width;
+  bitmapInfo.biHeight = height;
   bitmapInfo.biPlanes = 1;
   bitmapInfo.biBitCount = 32;
   bitmapInfo.biCompression = BI_RGB;
@@ -210,39 +396,64 @@ void init(int Width, int Height) {
   bitmapInfo.biClrUsed = 0;
   bitmapInfo.biClrImportant = 0;
 
-  int bitmapMemorySize = (width * height) * bytesPerPixel;
+  final bitmapMemorySize = (width * height) * bytesPerPixel;
   bitmapMemory =
       VirtualAlloc(nullptr, bitmapMemorySize, MEM_COMMIT, PAGE_READWRITE);
 
   // init other variables here
-  blocksperwidth = Width / 10;
-  blocksperheight = Height / 10;
-  data.resize(blocksperheight, List<int>(blocksperwidth, 0));
+  blocksPerWidth = (width / 10).floor();
+  blocksPerHeight = (height / 10).floor();
+  data = List.generate(
+      blocksPerHeight, (e) => List.generate(blocksPerWidth, (e) => 0));
 
-  // resetGame();
+  resetGame();
 }
 
-void draw(
-    int DeviceContext, RECT WindowRect, int X, int Y, int Width, int Height) {
+void draw(int hdc, RECT rect, int x, int y, int width, int height) {
   // update memory state bitmap to window
   // this is a rect to rect copy
-  final WindowWidth = WindowRect.right - WindowRect.left;
-  final WindowHeight = WindowRect.bottom - WindowRect.top;
+  final windowWidth = rect.right - rect.left;
+  final windowHeight = rect.bottom - rect.top;
   StretchDIBits(
-      DeviceContext,
+      hdc,
       //X, Y, Width, Height, X, Y, Width, Height,
       0,
       0,
-      BitmapWidth,
-      BitmapHeight,
+      bitmapWidth,
+      bitmapHeight,
       0,
-      WindowHeight + 1,
-      WindowWidth,
-      -WindowHeight,
-      BitmapMemory,
-      BitmapInfo,
+      windowHeight + 1,
+      windowWidth,
+      -windowHeight,
+      bitmapMemory,
+      bitmapInfo.addressOf,
       DIB_RGB_COLORS,
       SRCCOPY);
+}
+
+void update() {
+  // Update game simulation
+  // set everything in our 10x10 grid and have that write to memory
+
+  //move snake
+  moveSnake();
+
+  // is the snake head colliding with apple?
+  if (snakePoints[0].x == appleX && snakePoints[0].y == appleY) {
+    collectApple();
+  }
+
+  // check if snake is colliding with itself
+  for (var i = 0; i < snakePoints.length; i++) {
+    if (i > 0) {
+      if (snakePoints[i].x == snakePoints[0].x &&
+          snakePoints[i].y == snakePoints[0].y) {
+        gameOver();
+      }
+    }
+  }
+
+  setVectorToMemory();
 }
 
 int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
@@ -372,7 +583,7 @@ void main() {
     stderr.writeln('CreateWindowEx failed with error: ${GetLastError()}');
     exit(-1);
   } else {
-    SetTimer(hWnd, IDT_TIMER1, timer_amount, nullptr);
+    SetTimer(hWnd, IDT_TIMER1, timerAmount, nullptr);
 
     isRunning = true;
     while (isRunning) {
