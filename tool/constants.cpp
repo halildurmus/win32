@@ -59,5 +59,6 @@ void main()
     printf("sizeof(BOOL) is %zu\n", sizeof(BOOL));
 
     printf("sizeof(COORD) is %zu\n", sizeof(COORD));
-    printf("sizeof(SMALL_RECT) is %zu\n", sizeof(MEM_COMMIT));
+    printf("sizeof(SMALL_RECT) is %zu\n", sizeof(SMALL_RECT));
+    printf("sizeof(SIZE_T) is %zu\n", sizeof(SIZE_T));
 }
