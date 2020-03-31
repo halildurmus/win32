@@ -8,13 +8,12 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <stdio.h>
-#include <ShlObj.h>
-#include <KnownFolders.h>
 
 void main()
 {
     auto test = GUID();
-    auto error = FOLDERID_Documents;
+    SUCCEEDED(0);
+
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));
     printf("sizeof(long) is %zu\n", sizeof(long));

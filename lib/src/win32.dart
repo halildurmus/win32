@@ -123,8 +123,6 @@ final shell32 = DynamicLibrary.open('shell32.dll');
 final SHGetFolderPath =
     shell32.lookupFunction<shGetFolderPathNative, shGetFolderPathDart>(
         'SHGetFolderPathW');
-final SHGetKnownFolderPath = shell32.lookupFunction<shGetKnownFolderPathNative,
-    shGetKnownFolderPathDart>('SHGetKnownFolderPath');
 final ShellExecute = shell32
     .lookupFunction<shellExecuteNative, shellExecuteDart>('ShellExecuteW');
 
