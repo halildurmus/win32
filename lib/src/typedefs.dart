@@ -11,6 +11,12 @@ typedef beginPaintNative = Int64 Function(
     Int64 hWnd, Pointer<PAINTSTRUCT> lpPaint);
 typedef beginPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
 
+// void CoTaskMemFree(
+//   _Frees_ptr_opt_ LPVOID pv
+// );
+typedef coTaskMemFreeNative = Void Function(Pointer<Void> pv);
+typedef coTaskMemFreeDart = void Function(Pointer<Void> pv);
+
 // HBRUSH CreateSolidBrush(
 //   COLORREF color
 // );
@@ -316,9 +322,20 @@ typedef setWindowExtExDart = int Function(
 //   LPWSTR pszPath
 // );
 typedef shGetFolderPathNative = Int32 Function(Int64 hwnd, Int32 csidl,
-    Int64 hToken, Int32 dwFlags, Pointer<Utf16> pszPath);
+    Int64 hToken, Int32 dwFlags, Pointer<Uint16> pszPath);
 typedef shGetFolderPathDart = int Function(
-    int hwnd, int csidl, int hToken, int dwFlags, Pointer<Utf16> pszPath);
+    int hwnd, int csidl, int hToken, int dwFlags, Pointer<Uint16> pszPath);
+
+// HRESULT SHGetKnownFolderPath(
+//   REFKNOWNFOLDERID rfid,
+//   DWORD            dwFlags,
+//   HANDLE           hToken,
+//   PWSTR            *ppszPath
+// );
+typedef shGetKnownFolderPathNative = Int32 Function(
+    Pointer<GUID> rfid, Int32 dwFlags, Int64 hToken, Pointer<Void> ppszPath);
+typedef shGetKnownFolderPathDart = int Function(
+    Pointer<GUID> rfid, int dwFlags, int hToken, Pointer<Void> ppszPath);
 
 // HINSTANCE ShellExecuteW(
 //   HWND    hwnd,
