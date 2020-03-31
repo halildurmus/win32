@@ -1,6 +1,6 @@
-// console.dart
+// knownfolder.dart
 
-// Shows usage of console APIs
+// Shows usage of SHGetFolderPath to retrieve the user's home directory
 
 import 'dart:ffi';
 import 'dart:io';
