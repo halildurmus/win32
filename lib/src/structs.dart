@@ -358,6 +358,53 @@ class HARDWAREINPUT extends Struct {
     ..wParamH = 0;
 }
 
+// *** COM STRUCTS ***
+
+// typedef struct _GUID {
+//     unsigned long  Data1;
+//     unsigned short Data2;
+//     unsigned short Data3;
+//     unsigned char  Data4[ 8 ];
+// } GUID;
+class GUID extends Struct {
+  @Uint32()
+  int Data1;
+  @Uint16()
+  int Data2;
+  @Uint16()
+  int Data3;
+  @Uint64()
+  int Data4;
+
+  factory GUID.allocate() => allocate<GUID>().ref
+    ..Data1 = 0
+    ..Data2 = 0
+    ..Data3 = 0
+    ..Data4 = 0;
+
+  /// Create GUID from common {FDD39AD0-238F-46AF-ADB4-6C85480369C7} format
+  factory GUID.fromString(String guidString) {
+    assert(guidString.length == 38);
+    final guid = allocate<GUID>().ref;
+    guid.Data1 = int.parse('${guidString.substring(1, 9)}', radix: 16);
+    guid.Data2 = int.parse('${guidString.substring(10, 14)}', radix: 16);
+    guid.Data3 = int.parse('${guidString.substring(15, 19)}', radix: 16);
+    guid.Data4 =
+        (int.parse('${guidString.substring(20, 24)}', radix: 16) << 48) +
+            int.parse('${guidString.substring(25, 37)}', radix: 16);
+    return guid;
+  }
+
+  /// Print GUID in common {FDD39AD0-238F-46AF-ADB4-6C85480369C7} format
+  @override
+  String toString() =>
+      '{${Data1.toRadixString(16).padLeft(8, '0').toUpperCase()}-'
+      '${Data2.toRadixString(16).padLeft(4, '0').toUpperCase()}-'
+      '${Data3.toRadixString(16).padLeft(4, '0').toUpperCase()}-'
+      '${((Data4 >> 48) & 0xFFFF).toRadixString(16).padLeft(4, '0').toUpperCase()}-'
+      '${(Data4 & 0xFFFFFFFFFFFF).toRadixString(16).padLeft(12, '0').toUpperCase()}}';
+}
+
 // *** CONSOLE STRUCTS ***
 
 // Dart FFI does not yet have support for nested structs, so there's extra

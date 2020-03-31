@@ -11,6 +11,18 @@ typedef beginPaintNative = Int64 Function(
     Int64 hWnd, Pointer<PAINTSTRUCT> lpPaint);
 typedef beginPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
 
+// HRESULT CoCreateGuid(
+//   GUID *pguid
+// );
+typedef coCreateGuidNative = Int32 Function(Pointer<GUID> pguid);
+typedef coCreateGuidDart = int Function(Pointer<GUID> pguid);
+
+// void CoTaskMemFree(
+//   _Frees_ptr_opt_ LPVOID pv
+// );
+typedef coTaskMemFreeNative = Void Function(Pointer<Void> pv);
+typedef coTaskMemFreeDart = void Function(Pointer<Void> pv);
+
 // HBRUSH CreateSolidBrush(
 //   COLORREF color
 // );
@@ -307,6 +319,18 @@ typedef setWindowExtExNative = Int32 Function(
     Int64 hdc, Int32 x, Int32 y, Pointer<SIZE> lpsz);
 typedef setWindowExtExDart = int Function(
     int hdc, int x, int y, Pointer<SIZE> lpsz);
+
+// SHFOLDERAPI SHGetFolderPathW(
+//   HWND   hwnd,
+//   int    csidl,
+//   HANDLE hToken,
+//   DWORD  dwFlags,
+//   LPWSTR pszPath
+// );
+typedef shGetFolderPathNative = Int32 Function(Int64 hwnd, Int32 csidl,
+    Int64 hToken, Int32 dwFlags, Pointer<Uint16> pszPath);
+typedef shGetFolderPathDart = int Function(
+    int hwnd, int csidl, int hToken, int dwFlags, Pointer<Uint16> pszPath);
 
 // HINSTANCE ShellExecuteW(
 //   HWND    hwnd,

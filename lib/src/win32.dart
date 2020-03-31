@@ -120,5 +120,14 @@ final SetWindowExtEx = gdi32
 final TextOut = gdi32.lookupFunction<textOutNative, textOutDart>('TextOutW');
 
 final shell32 = DynamicLibrary.open('shell32.dll');
+final SHGetFolderPath =
+    shell32.lookupFunction<shGetFolderPathNative, shGetFolderPathDart>(
+        'SHGetFolderPathW');
 final ShellExecute = shell32
     .lookupFunction<shellExecuteNative, shellExecuteDart>('ShellExecuteW');
+
+final ole32 = DynamicLibrary.open('ole32.dll');
+final CoCreateGuid =
+    ole32.lookupFunction<coCreateGuidNative, coCreateGuidDart>('CoCreateGuid');
+final CoTaskMemFree = ole32
+    .lookupFunction<coTaskMemFreeNative, coTaskMemFreeDart>('CoTaskMemFree');

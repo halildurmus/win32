@@ -11,10 +11,14 @@
 
 void main()
 {
-    int test = MOUSEEVENTF_ABSOLUTE;
+    auto test = GUID();
+    SUCCEEDED(0);
 
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));
+    printf("sizeof(long) is %zu\n", sizeof(long));
+    printf("sizeof(short) is %zu\n", sizeof(short));
+    printf("sizeof(char) is %zu\n", sizeof(char));
 
     printf("sizeof(LPCSTR) is %zu\n", sizeof(LPCSTR));
     printf("sizeof(LPCWSTR) is %zu\n", sizeof(LPCWSTR));
@@ -22,6 +26,7 @@ void main()
     printf("sizeof(HANDLE) is %zu\n", sizeof(HANDLE));
     printf("sizeof(HINSTANCE) is %zu\n", sizeof(HINSTANCE));
     printf("sizeof(HWND) is %zu\n", sizeof(HWND));
+    printf("sizeof(HRESULT) is %zu\n", sizeof(HRESULT));
     printf("sizeof(HDC) is %zu\n", sizeof(HDC));
     printf("sizeof(HBRUSH) is %zu\n", sizeof(HBRUSH));
 
