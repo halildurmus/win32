@@ -1,6 +1,6 @@
 // knownfolder.dart
 
-// Shows usage of SHGetFolderPath to retrieve the user's home directory
+// Shows usage of Shell APIs to retrieve the user's home directory
 
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
@@ -21,50 +21,51 @@ String fromUtf16(Pointer pointer, int length) {
   return buf.toString();
 }
 
-void main() {
-// Find user document folder -- new way
-  final guidFolder = GUID.fromString(FOLDERID_Desktop);
-  print('Looking for folder with ID: $guidFolder');
+/// Get the path for a known Windows folder, using the classic (deprecated) API
+void getFolderPath() {
+  final CSIDL_MYDOCUMENTS = 0x0005;
 
-  var ptr = allocate<Uint16>(count: 1000);
-  var ptrVoid = Pointer<Void>.fromAddress(ptr.address);
-  final result = SHGetKnownFolderPath(guidFolder.addressOf, 0, NULL, ptrVoid);
+  var path = allocate<Uint16>(count: MAX_PATH);
+
+  final result = SHGetFolderPath(NULL, CSIDL_MYDOCUMENTS, NULL, 0, path);
 
   if (SUCCEEDED(result)) {
-    final pszPath = Pointer<Utf16>.fromAddress(ptrVoid.address);
-    print(fromUtf16(pszPath, MAX_PATH));
+    print('SHGetFolderPath returned ${fromUtf16(path, MAX_PATH)}');
+  } else {
+    print(
+        'SHGetFolderPath returned error code 0x${result.toUnsigned(32).toRadixString(16)}');
+  }
+}
 
-    CoTaskMemFree(ptrVoid);
+/// Get the path for a known Windows folder, using the modern API
+void getKnownFolderPath() {
+  final guidFolder = GUID.fromString(FOLDERID_Documents);
+  assert(sizeOf<GUID>() == 16);
+  print('Looking for folder with ID: $guidFolder');
+
+  final path = allocate<Uint16>(count: MAX_PATH);
+  final ptr = Pointer<Void>.fromAddress(path.address);
+
+  final result =
+      SHGetKnownFolderPath(guidFolder.addressOf, KF_FLAG_DEFAULT, 0, ptr);
+
+  if (SUCCEEDED(result)) {
+    print('SHGetKnownFolderPath returned ${fromUtf16(ptr, MAX_PATH)}');
+    CoTaskMemFree(ptr);
   } else {
     if (result == E_FAIL) {
       print('SHGetKnownFolderPath returned error code E_FAIL');
     } else if (result == E_INVALIDARG) {
       print('SHGetKnownFolderPath returned error code E_INVALIDARG');
     } else {
-      print(
-          'SHGetKnownFolderPath returned error code 0x${result.toUnsigned(32).toRadixString(16)}');
+      print('SHGetKnownFolderPath returned error code '
+          '0x${result.toUnsigned(32).toRadixString(16)}');
     }
   }
+}
 
-  // final hresult =
-  //     SHGetKnownFolderPath(FOLDERID_DOCUMENTS.addressOf, 0, NULL, ppszPath);
-  // if (hresult == S_OK) {
-  //   final pszPath = Pointer<Utf16>.fromAddress(ppszPath.address);
-  //   print(fromUtf16(pszPath, MAX_PATH));
-  // } else {
-  //   print('COM error: 0x${hresult.toRadixString(16)}.');
-  // }
-
-  // // Find user document folder -- old way
-  // final CSIDL_PERSONAL = 0x0005;
-  // final CSIDL_FLAG_CREATE = 0x8000;
-  // var path = allocate<Uint16>(count: MAX_PATH);
-  // final result =
-  //     SHGetFolderPath(NULL, CSIDL_PERSONAL | CSIDL_FLAG_CREATE, NULL, 0, path);
-  // if (SUCCEEDED(result)) {
-  //   print(fromUtf16(path, MAX_PATH));
-  // } else {
-  //   print(
-  //       'SHGetFolderPath returned error code 0x${result.toUnsigned(32).toRadixString(16)}');
-  // }
+void main() {
+  getFolderPath();
+  print('');
+  getKnownFolderPath();
 }

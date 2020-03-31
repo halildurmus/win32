@@ -11,6 +11,12 @@ typedef beginPaintNative = Int64 Function(
     Int64 hWnd, Pointer<PAINTSTRUCT> lpPaint);
 typedef beginPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
 
+// HRESULT CoCreateGuid(
+//   GUID *pguid
+// );
+typedef coCreateGuidNative = Int32 Function(Pointer<GUID> pguid);
+typedef coCreateGuidDart = int Function(Pointer<GUID> pguid);
+
 // void CoTaskMemFree(
 //   _Frees_ptr_opt_ LPVOID pv
 // );

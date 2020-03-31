@@ -129,5 +129,7 @@ final ShellExecute = shell32
     .lookupFunction<shellExecuteNative, shellExecuteDart>('ShellExecuteW');
 
 final ole32 = DynamicLibrary.open('ole32.dll');
+final CoCreateGuid =
+    ole32.lookupFunction<coCreateGuidNative, coCreateGuidDart>('CoCreateGuid');
 final CoTaskMemFree = ole32
     .lookupFunction<coTaskMemFreeNative, coTaskMemFreeDart>('CoTaskMemFree');
