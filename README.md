@@ -26,6 +26,8 @@ This can be compiled into a standalone Win32 executable by running:
 dart2native example\hello.dart -o example\bin\hello.exe
 ```
 
+[More complex examples](https://github.com/timsneath/win32/blob/master/example/README.md) can also be found in the `example` subdirectory. 
+
 ## Features and bugs
 
 Please file feature requests and bugs at the [issue tracker][tracker].
