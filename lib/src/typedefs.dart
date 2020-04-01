@@ -11,17 +11,50 @@ typedef beginPaintNative = Int64 Function(
     Int64 hWnd, Pointer<PAINTSTRUCT> lpPaint);
 typedef beginPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
 
+// HRESULT CoCreateInstance(
+//   REFCLSID  rclsid,
+//   LPUNKNOWN pUnkOuter,
+//   DWORD     dwClsContext,
+//   REFIID    riid,
+//   LPVOID    *ppv
+// );
+typedef coCreateInstanceNative = Int32 Function(
+    Pointer<GUID> rclsid,
+    Pointer<Void> pUnkOuter,
+    Int32 dwClsContext,
+    Pointer<GUID> riid,
+    Pointer<Uint64> ppv);
+typedef coCreateInstanceDart = int Function(
+    Pointer<GUID> rclsid,
+    Pointer<Void> pUnkOuter,
+    int dwClsContext,
+    Pointer<GUID> riid,
+    Pointer<Uint64> ppv);
+
 // HRESULT CoCreateGuid(
 //   GUID *pguid
 // );
 typedef coCreateGuidNative = Int32 Function(Pointer<GUID> pguid);
 typedef coCreateGuidDart = int Function(Pointer<GUID> pguid);
 
+// HRESULT CoInitializeEx(
+//   LPVOID pvReserved,
+//   DWORD  dwCoInit
+// );
+typedef coInitializeExNative = Int32 Function(
+    Pointer<Void> pvReserved, Int32 dwCoInit);
+typedef coInitializeExDart = int Function(
+    Pointer<Void> pvReserved, int dwCoInit);
+
 // void CoTaskMemFree(
 //   _Frees_ptr_opt_ LPVOID pv
 // );
 typedef coTaskMemFreeNative = Void Function(Pointer<Void> pv);
 typedef coTaskMemFreeDart = void Function(Pointer<Void> pv);
+
+// void CoUninitialize();
+typedef coUninitializeNative = Void Function();
+typedef coUninitializeDart = void Function();
 
 // HBRUSH CreateSolidBrush(
 //   COLORREF color
@@ -479,3 +512,11 @@ typedef setConsoleCursorPositionDart = int Function(
 typedef setConsoleModeNative = Int32 Function(
     Int64 hConsoleHandle, Int32 dwMode);
 typedef setConsoleModeDart = int Function(int hConsoleHandle, int dwMode);
+
+// IFileDialog
+
+// HRESULT GetResult(
+//   IShellItem **ppsi
+// );
+typedef getResultNative = Int32 Function(Pointer<Void> ppsi);
+typedef getResultDart = int Function(Pointer<Void> ppsi);

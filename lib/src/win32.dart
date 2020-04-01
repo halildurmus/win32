@@ -129,5 +129,12 @@ final ShellExecute = shell32
 final ole32 = DynamicLibrary.open('ole32.dll');
 final CoCreateGuid =
     ole32.lookupFunction<coCreateGuidNative, coCreateGuidDart>('CoCreateGuid');
+final CoCreateInstance =
+    ole32.lookupFunction<coCreateInstanceNative, coCreateInstanceDart>(
+        'CoCreateInstance');
+final CoInitializeEx = ole32
+    .lookupFunction<coInitializeExNative, coInitializeExDart>('CoInitializeEx');
 final CoTaskMemFree = ole32
     .lookupFunction<coTaskMemFreeNative, coTaskMemFreeDart>('CoTaskMemFree');
+final CoUninitialize = ole32
+    .lookupFunction<coUninitializeNative, coUninitializeDart>('CoUninitialize');

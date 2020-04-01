@@ -12,7 +12,7 @@
 void main()
 {
     auto test = GUID();
-    SUCCEEDED(0);
+    SUCCEEDED(E_NOINTERFACE);
 
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));
