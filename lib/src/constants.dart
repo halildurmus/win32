@@ -488,6 +488,8 @@ const STD_INPUT_HANDLE = -10;
 const STD_OUTPUT_HANDLE = -11;
 const STD_ERROR_HANDLE = -12;
 
+const INVALID_HANDLE_VALUE = -1;
+
 // input flags
 const ENABLE_ECHO_INPUT = 0x0004;
 const ENABLE_EXTENDED_FLAGS = 0x0080;
