@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "windows.h": "c"
+        "windows.h": "c",
+        "xstring": "cpp"
     }
 }
