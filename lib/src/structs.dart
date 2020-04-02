@@ -389,9 +389,22 @@ class GUID extends Struct {
     guid.Data1 = int.parse('${guidString.substring(1, 9)}', radix: 16);
     guid.Data2 = int.parse('${guidString.substring(10, 14)}', radix: 16);
     guid.Data3 = int.parse('${guidString.substring(15, 19)}', radix: 16);
-    guid.Data4 =
-        (int.parse('${guidString.substring(20, 24)}', radix: 16) << 48) +
-            int.parse('${guidString.substring(25, 37)}', radix: 16);
+
+    // final component is pushed on the stack in reverse order per x64
+    // calling convention. This is a funky workaround until FFI supports
+    // passing structs by value.
+    final rawString = guidString.substring(35, 37) +
+        guidString.substring(33, 35) +
+        guidString.substring(31, 33) +
+        guidString.substring(29, 31) +
+        guidString.substring(27, 29) +
+        guidString.substring(25, 27) +
+        guidString.substring(22, 24) +
+        guidString.substring(20, 22);
+    print(rawString);
+    guid.Data4 = (int.parse('${rawString.substring(0, 4)}', radix: 16) << 48) +
+        int.parse('${rawString.substring(4, 16)}', radix: 16);
+
     return guid;
   }
 

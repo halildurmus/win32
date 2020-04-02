@@ -37,24 +37,23 @@ void getFolderPath() {
 
 /// Get the path for a known Windows folder, using the modern API
 void getKnownFolderPath() {
-  // final guidFolder = GUID.fromString(FOLDERID_Documents);
-  final guidMangled = GUID.fromString('{FDD39AD0-238F-46AF-C769-0348856CB4AD}');
+  final guidFolder = GUID.fromString(FOLDERID_Documents);
 
   final buffer = allocate<Uint16>(count: MAX_PATH);
   final ptr = Pointer<Uint64>.fromAddress(buffer.address);
 
-  final hr = SHGetKnownFolderPath(guidMangled.addressOf, 0, 0, ptr);
+  final hr = SHGetKnownFolderPath(guidFolder.addressOf, 0, 0, ptr);
 
   if (SUCCEEDED(hr)) {
-    final ptrResult = Pointer<Uint64>.fromAddress(ptr.address);
-    print(
-        'SHGetKnownFolderPath returned ${fromUtf16(Pointer<Uint16>.fromAddress(ptrResult.value), MAX_PATH)}');
+    final path = fromUtf16(Pointer<Uint16>.fromAddress(ptr.value), MAX_PATH);
+    print('SHGetKnownFolderPath returned $path');
+
     CoTaskMemFree(Pointer<Void>.fromAddress(ptr.address));
   } else {
     if (hr == E_FAIL) {
-      print('SHGetKnownFolderPath returned error code E_FAIL');
+      print('SHGetKnownFolderPath returned E_FAIL');
     } else if (hr == E_INVALIDARG) {
-      print('SHGetKnownFolderPath returned error code E_INVALIDARG');
+      print('SHGetKnownFolderPath returned E_INVALIDARG');
     } else {
       print('SHGetKnownFolderPath returned error code '
           '0x${hr.toUnsigned(32).toRadixString(16)}');
@@ -63,7 +62,7 @@ void getKnownFolderPath() {
 }
 
 void main() {
-  // getFolderPath();
-  // print('');
+  getFolderPath();
+  print('');
   getKnownFolderPath();
 }
