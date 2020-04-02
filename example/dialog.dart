@@ -43,6 +43,9 @@ class IFileDialogVtbl extends Struct {
   Pointer<NativeFunction> SetFilter;
 }
 
+String printableAddress(Pointer ptr) =>
+    BigInt.from(ptr.address).toUnsigned(64).toRadixString(16).padLeft(16, '0');
+
 void COMError(int hresult, String function) {
   hresult = hresult.toUnsigned(32);
 
@@ -78,13 +81,26 @@ void main() {
         GUID.fromString(IID_IFileOpenDialog).addressOf,
         pFileOpen);
     if (SUCCEEDED(hr)) {
-      final pVt = Pointer<IFileDialogVtbl>.fromAddress(pFileOpen.address);
+      final pVt = Pointer<IFileDialogVtbl>.fromAddress(pFileOpen.value);
+
+      print(printableAddress(pVt.ref.QueryInterface));
+      print(printableAddress(pVt.ref.AddRef));
+      print(printableAddress(pVt.ref.Show));
+
       final pFunc = pVt.ref.Show;
+      final pFuncUint64 = Pointer<Uint64>.fromAddress(pFunc.address);
+
       final pFuncDart =
           Pointer<NativeFunction<IModalWindowShowNative>>.fromAddress(
-              pFunc.address);
+              pFuncUint64.value);
+      print(printableAddress(pFuncDart));
+
+      MessageBox(NULL, TEXT('Preparing to invoke IFileDialog::Show'),
+          TEXT('Preparing'), MB_OK);
       final pFuncCallable = pFuncDart.asFunction<IModalWindowShowDart>();
-      pFuncCallable(Pointer<Uint64>.fromAddress(pFileOpen.value), NULL);
+
+      pFuncCallable(pFileOpen, NULL);
+      print('success');
     } else {
       COMError(hr, 'CoCreateInstance');
     }
