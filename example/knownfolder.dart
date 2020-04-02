@@ -37,16 +37,19 @@ void getFolderPath() {
 
 /// Get the path for a known Windows folder, using the modern API
 void getKnownFolderPath() {
-  final guidFolder = GUID.fromString(FOLDERID_Documents);
+  // final guidFolder = GUID.fromString(FOLDERID_Documents);
+  final guidMangled = GUID.fromString('{FDD39AD0-238F-46AF-C769-0348856CB4AD}');
 
   final buffer = allocate<Uint16>(count: MAX_PATH);
-  final ptr = Pointer<Void>.fromAddress(buffer.address);
+  final ptr = Pointer<Uint64>.fromAddress(buffer.address);
 
-  final hr = SHGetKnownFolderPath(guidFolder.addressOf, 0, 0, ptr);
+  final hr = SHGetKnownFolderPath(guidMangled.addressOf, 0, 0, ptr);
 
   if (SUCCEEDED(hr)) {
-    print('SHGetKnownFolderPath returned ${fromUtf16(ptr, MAX_PATH)}');
-    CoTaskMemFree(ptr);
+    final ptrResult = Pointer<Uint64>.fromAddress(ptr.address);
+    print(
+        'SHGetKnownFolderPath returned ${fromUtf16(Pointer<Uint16>.fromAddress(ptrResult.value), MAX_PATH)}');
+    CoTaskMemFree(Pointer<Void>.fromAddress(ptr.address));
   } else {
     if (hr == E_FAIL) {
       print('SHGetKnownFolderPath returned error code E_FAIL');

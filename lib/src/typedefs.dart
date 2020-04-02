@@ -339,9 +339,9 @@ typedef shGetFolderPathDart = int Function(
 //   PWSTR            *ppszPath
 // );
 typedef shGetKnownFolderPathNative = Int32 Function(
-    Pointer<GUID> rfid, Int32 dwFlags, Int64 hToken, Pointer<Void> ppszPath);
+    Pointer<GUID> rfid, Int32 dwFlags, Int64 hToken, Pointer<Uint64> ppszPath);
 typedef shGetKnownFolderPathDart = int Function(
-    Pointer<GUID> rfid, int dwFlags, int hToken, Pointer<Void> ppszPath);
+    Pointer<GUID> rfid, int dwFlags, int hToken, Pointer<Uint64> ppszPath);
 
 // HINSTANCE ShellExecuteW(
 //   HWND    hwnd,
