@@ -38,7 +38,6 @@ void getFolderPath() {
 /// Get the path for a known Windows folder, using the modern API
 void getKnownFolderPath() {
   final guidFolder = GUID.fromString(FOLDERID_Documents);
-  print(guidFolder);
 
   final buffer = allocate<Uint16>(count: MAX_PATH);
   final ptr = Pointer<Uint64>.fromAddress(buffer.address);
