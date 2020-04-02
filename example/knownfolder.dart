@@ -60,6 +60,30 @@ String getKnownFolderPath() {
   }
 }
 
+/// Get the path for a known Windows folder, using the modern API
+void getKnownFolderPath() {
+  final guidFolder = GUID.fromString(FOLDERID_Documents);
+
+  final buffer = allocate<Uint16>(count: MAX_PATH);
+  final ptr = Pointer<Void>.fromAddress(buffer.address);
+
+  final hr = SHGetKnownFolderPath(guidFolder.addressOf, 0, 0, ptr);
+
+  if (SUCCEEDED(hr)) {
+    print('SHGetKnownFolderPath returned ${fromUtf16(ptr, MAX_PATH)}');
+    CoTaskMemFree(ptr);
+  } else {
+    if (hr == E_FAIL) {
+      print('SHGetKnownFolderPath returned error code E_FAIL');
+    } else if (hr == E_INVALIDARG) {
+      print('SHGetKnownFolderPath returned error code E_INVALIDARG');
+    } else {
+      print('SHGetKnownFolderPath returned error code '
+          '0x${hr.toUnsigned(32).toRadixString(16)}');
+    }
+  }
+}
+
 void main() {
   print('SHGetFolderPath returned ${getFolderPath()}');
   print('SHGetKnownFolderPath returned ${getKnownFolderPath()}');
