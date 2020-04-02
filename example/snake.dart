@@ -10,7 +10,6 @@
 // memory in Win32.
 
 import 'dart:ffi';
-import 'dart:io';
 import 'dart:math' show Random;
 
 import 'package:ffi/ffi.dart';
@@ -66,10 +65,10 @@ void drawRect(int rectX, int rectY, int width, int height, int color) {
   final ptr = Pointer<Uint8>.fromAddress(bitmapMemory.address);
   var rowOffset = 0;
 
-  for (var y = 0; y < bitmapHeight; ++y) {
+  for (var y = 0; y < bitmapHeight; y++) {
     var pixelOffset = rowOffset;
 
-    for (var x = 0; x < bitmapWidth; ++x) {
+    for (var x = 0; x < bitmapWidth; x++) {
       if ((x >= rectX && y >= rectY) &&
           (x <= (rectX + width) && y <= (rectY + height))) {
         ptr.elementAt(pixelOffset).value = blue;
@@ -120,10 +119,10 @@ void collectApple() {
   // play sound
   Beep(750, 100);
   // increase speed and increase snake
-  final newp = Point();
-  newp.x = snakePoints[snakePoints.length - 1].x;
-  newp.y = snakePoints[snakePoints.length - 1].y;
-  snakePoints.add(newp);
+  final newPoint = Point();
+  newPoint.x = snakePoints[snakePoints.length - 1].x;
+  newPoint.y = snakePoints[snakePoints.length - 1].y;
+  snakePoints.add(newPoint);
 
   KillTimer(hWnd, IDT_TIMER1);
   timerAmount -= 5;
@@ -140,17 +139,16 @@ void moveSnake() {
   // set initial position and length
   // unset old
   // set direction on new
-  final lastblock = Point();
-  lastblock.x = 0;
-  lastblock.y = 0;
-  final pointsSize = snakePoints.length;
+  final lastBlock = Point();
+  lastBlock.x = 0;
+  lastBlock.y = 0;
 
-  for (var i = 0; i < pointsSize; i++) {
+  for (var i = 0; i < snakePoints.length; i++) {
     data[snakePoints[i].y][snakePoints[i].x] = 0;
   }
 
   // set
-  for (var i = 0; i < pointsSize; i++) {
+  for (var i = 0; i < snakePoints.length; i++) {
     //std::cout << snakePoints[i].x << ", " << snakePoints[i].y << std::endl;
 
     final tempX = snakePoints[i].x;
@@ -161,7 +159,7 @@ void moveSnake() {
       if (direction.x == 1) {
         // right
         snakePoints[i].x += 1;
-        if (snakePoints[i].x >= (bitmapWidth / 10)) {
+        if (snakePoints[i].x >= (bitmapWidth / 10).floor()) {
           snakePoints[i].x = 0;
         }
       } else if (direction.x == -1) {
@@ -173,7 +171,7 @@ void moveSnake() {
       } else if (direction.y == 1) {
         // down
         snakePoints[i].y += 1;
-        if (snakePoints[i].y >= (bitmapHeight / 10)) {
+        if (snakePoints[i].y >= (bitmapHeight / 10).floor()) {
           snakePoints[i].y = 0;
         }
       } else if (direction.y == -1) {
@@ -186,12 +184,12 @@ void moveSnake() {
     } else {
       // snake body
       // move to where last block was ahead of this one
-      snakePoints[i].x = lastblock.x;
-      snakePoints[i].y = lastblock.y;
+      snakePoints[i].x = lastBlock.x;
+      snakePoints[i].y = lastBlock.y;
     }
 
-    lastblock.x = tempX;
-    lastblock.y = tempY;
+    lastBlock.x = tempX;
+    lastBlock.y = tempY;
 
     data[snakePoints[i].y][snakePoints[i].x] = 2;
   }
@@ -206,9 +204,9 @@ void setVectorToMemory() {
   final ptr = Pointer<Uint8>.fromAddress(bitmapMemory.address);
 
   var rowOffset = 0;
-  for (var y = 0; y < bitmapHeight; ++y) {
+  for (var y = 0; y < bitmapHeight; y++) {
     var pixelOffset = rowOffset;
-    for (var x = 0; x < bitmapWidth; ++x) {
+    for (var x = 0; x < bitmapWidth; x++) {
       if (data[vecY][vecX] == 1) {
         // Apple
         //blue
@@ -349,7 +347,7 @@ void gameOver() {
   SetTimer(hWnd, IDT_TIMER2, 20, nullptr);
 }
 
-void gameover_update_complete() {
+void gameOverUpdateComplete() {
   KillTimer(hWnd, IDT_TIMER2);
   resetGame();
 }
@@ -372,7 +370,7 @@ void gameOverUpdate() {
     setVectorToMemory();
     gameOverRow--;
     if (gameOverRow < 0) {
-      gameover_update_complete();
+      gameOverUpdateComplete();
       wipeDown = true;
     }
   }
@@ -408,8 +406,7 @@ void init(int width, int height) {
   // init other variables here
   blocksPerWidth = (width / 10).floor();
   blocksPerHeight = (height / 10).floor();
-  data = List.generate(
-      blocksPerHeight, (e) => List.generate(blocksPerWidth, (e) => 0));
+  data = List.filled(blocksPerHeight, List.filled(blocksPerWidth, 0));
 
   resetGame();
 }
@@ -508,6 +505,7 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       {
         switch (wParam) {
           case VK_LEFT:
+            print('left');
             if (direction.x != 1) {
               direction.x = -1;
               direction.y = 0;
@@ -526,6 +524,7 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
             }
             break;
           case VK_DOWN:
+            print('down');
             if (direction.y != -1) {
               direction.x = 0;
               direction.y = 1;
