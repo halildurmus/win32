@@ -9,6 +9,40 @@ import 'package:win32/win32.dart';
 
 final hInstance = GetModuleHandle(nullptr);
 
+typedef IModalWindowShowNative = Int32 Function(
+    Pointer<Uint64> obj, Int64 hwndOwner);
+typedef IModalWindowShowDart = int Function(Pointer<Uint64> obj, int hwndOwner);
+
+class IFileDialogVtbl extends Struct {
+  Pointer<NativeFunction> QueryInterface;
+  Pointer<NativeFunction> AddRef;
+  Pointer<NativeFunction> Release;
+  Pointer<NativeFunction> Show;
+  Pointer<NativeFunction> SetFileTypes;
+  Pointer<NativeFunction> SetFileTypeIndex;
+  Pointer<NativeFunction> GetFileTypeIndex;
+  Pointer<NativeFunction> Advise;
+  Pointer<NativeFunction> Unadvise;
+  Pointer<NativeFunction> SetOptions;
+  Pointer<NativeFunction> GetOptions;
+  Pointer<NativeFunction> SetDefaultFolder;
+  Pointer<NativeFunction> SetFolder;
+  Pointer<NativeFunction> GetFolder;
+  Pointer<NativeFunction> GetCurrentSelection;
+  Pointer<NativeFunction> SetFileName;
+  Pointer<NativeFunction> GetFileName;
+  Pointer<NativeFunction> SetTitle;
+  Pointer<NativeFunction> SetOkButtonLabel;
+  Pointer<NativeFunction> SetFileNameLabel;
+  Pointer<NativeFunction> GetResult;
+  Pointer<NativeFunction> AddPlace;
+  Pointer<NativeFunction> SetDefaultExtension;
+  Pointer<NativeFunction> Close;
+  Pointer<NativeFunction> SetClientGuid;
+  Pointer<NativeFunction> ClearClientData;
+  Pointer<NativeFunction> SetFilter;
+}
+
 void COMError(int hresult, String function) {
   hresult = hresult.toUnsigned(32);
 
@@ -44,6 +78,13 @@ void main() {
         GUID.fromString(IID_IFileOpenDialog).addressOf,
         pFileOpen);
     if (SUCCEEDED(hr)) {
+      final pVt = Pointer<IFileDialogVtbl>.fromAddress(pFileOpen.address);
+      final pFunc = pVt.ref.Show;
+      final pFuncDart =
+          Pointer<NativeFunction<IModalWindowShowNative>>.fromAddress(
+              pFunc.address);
+      final pFuncCallable = pFuncDart.asFunction<IModalWindowShowDart>();
+      pFuncCallable(Pointer<Uint64>.fromAddress(pFileOpen.value), NULL);
     } else {
       COMError(hr, 'CoCreateInstance');
     }

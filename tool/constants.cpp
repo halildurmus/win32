@@ -8,11 +8,13 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <stdio.h>
+#include <ShlObj_core.h>
 
 void main()
 {
     auto test = GUID();
     SUCCEEDED(E_NOINTERFACE);
+    IFileDialog dlg;
 
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));
