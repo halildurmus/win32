@@ -389,20 +389,48 @@ class GUID extends Struct {
     guid.Data1 = int.parse('${guidString.substring(1, 9)}', radix: 16);
     guid.Data2 = int.parse('${guidString.substring(10, 14)}', radix: 16);
     guid.Data3 = int.parse('${guidString.substring(15, 19)}', radix: 16);
-    guid.Data4 =
-        (int.parse('${guidString.substring(20, 24)}', radix: 16) << 48) +
-            int.parse('${guidString.substring(25, 37)}', radix: 16);
+
+    // final component is pushed on the stack in reverse order per x64
+    // calling convention. This is a funky workaround until FFI supports
+    // passing structs by value.
+    final rawString = guidString.substring(35, 37) +
+        guidString.substring(33, 35) +
+        guidString.substring(31, 33) +
+        guidString.substring(29, 31) +
+        guidString.substring(27, 29) +
+        guidString.substring(25, 27) +
+        guidString.substring(22, 24) +
+        guidString.substring(20, 22);
+
+    // We need to split this to avoid overflowing a signed int.parse()
+    guid.Data4 = (int.parse('${rawString.substring(0, 4)}', radix: 16) << 48) +
+        int.parse('${rawString.substring(4, 16)}', radix: 16);
+
     return guid;
   }
 
   /// Print GUID in common {FDD39AD0-238F-46AF-ADB4-6C85480369C7} format
   @override
-  String toString() =>
-      '{${Data1.toRadixString(16).padLeft(8, '0').toUpperCase()}-'
-      '${Data2.toRadixString(16).padLeft(4, '0').toUpperCase()}-'
-      '${Data3.toRadixString(16).padLeft(4, '0').toUpperCase()}-'
-      '${((Data4 >> 48) & 0xFFFF).toRadixString(16).padLeft(4, '0').toUpperCase()}-'
-      '${(Data4 & 0xFFFFFFFFFFFF).toRadixString(16).padLeft(12, '0').toUpperCase()}}';
+  String toString() {
+    final comp1 = (Data4 & 0xFF).toRadixString(16) +
+        ((Data4 & 0xFF00) >> 8).toRadixString(16);
+
+    // This is hacky as all get-out :)
+    final comp2 = ((Data4 & 0xFF0000) >> 16).toRadixString(16).padLeft(2, '0') +
+        ((Data4 & 0xFF000000) >> 24).toRadixString(16).padLeft(2, '0') +
+        ((Data4 & 0xFF00000000) >> 32).toRadixString(16).padLeft(2, '0') +
+        ((Data4 & 0xFF0000000000) >> 40).toRadixString(16).padLeft(2, '0') +
+        ((Data4 & 0xFF000000000000) >> 48).toRadixString(16).padLeft(2, '0') +
+        (BigInt.from(Data4 & 0xFF00000000000000).toUnsigned(64) >> 56)
+            .toRadixString(16)
+            .padLeft(2, '0');
+
+    return '{${Data1.toRadixString(16).padLeft(8, '0').toUpperCase()}-'
+        '${Data2.toRadixString(16).padLeft(4, '0').toUpperCase()}-'
+        '${Data3.toRadixString(16).padLeft(4, '0').toUpperCase()}-'
+        '${comp1.toUpperCase()}-'
+        '${comp2.toUpperCase()}}';
+  }
 }
 
 // *** CONSOLE STRUCTS ***
