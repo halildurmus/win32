@@ -5,6 +5,8 @@ import 'dart:ffi';
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
+import '../example/knownfolder.dart';
+
 void main() {
   test('GetStdHandle()', () {
     final outputHandle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -23,9 +25,22 @@ void main() {
         GetConsoleScreenBufferInfo(outputHandle, bufferInfo.addressOf);
     expect(result, isNot(0));
 
+    expect(bufferInfo.dwCursorPositionX, lessThanOrEqualTo(bufferInfo.dwSizeX));
+    expect(bufferInfo.dwCursorPositionY, lessThanOrEqualTo(bufferInfo.dwSizeY));
+  });
+
+  test('SHGetKnownFolderPath', () {
+    final legacyAPI = getFolderPath();
+    final currentAPI = getKnownFolderPath();
+
     expect(
-        bufferInfo.dwSizeX, lessThanOrEqualTo(bufferInfo.dwMaximumWindowSizeX));
-    expect(
-        bufferInfo.dwSizeY, lessThanOrEqualTo(bufferInfo.dwMaximumWindowSizeY));
+      currentAPI,
+      allOf(
+        [
+          equals(legacyAPI),
+          isNot(contains('error')),
+        ],
+      ),
+    );
   });
 }
