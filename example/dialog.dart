@@ -43,8 +43,11 @@ class IFileDialogVtbl extends Struct {
   Pointer<NativeFunction> SetFilter;
 }
 
-String printableAddress(Pointer ptr) =>
+String pointerAsString(Pointer ptr) =>
     BigInt.from(ptr.address).toUnsigned(64).toRadixString(16).padLeft(16, '0');
+
+String uint64AsString(int addr) =>
+    BigInt.from(addr).toUnsigned(64).toRadixString(16).padLeft(16, '0');
 
 void COMError(int hresult, String function) {
   hresult = hresult.toUnsigned(32);
@@ -72,7 +75,8 @@ void main() {
   var hr = CoInitializeEx(
       nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
   if (SUCCEEDED(hr)) {
-    var pFileOpen = allocate<Uint64>();
+    // Address of pointer variable that receives the interface pointer
+    final pFileOpen = allocate<Uint64>();
 
     hr = CoCreateInstance(
         GUID.fromString(CLSID_FileOpenDialog).addressOf,
@@ -80,27 +84,23 @@ void main() {
         CLSCTX_ALL,
         GUID.fromString(IID_IFileOpenDialog).addressOf,
         pFileOpen);
+
+    print('pFileOpen address: ${pointerAsString(pFileOpen)}');
+
     if (SUCCEEDED(hr)) {
-      final pVt = Pointer<IFileDialogVtbl>.fromAddress(pFileOpen.value);
+      // *ppv contains the requested interface pointer.
+      final pVtable = Pointer<IFileDialogVtbl>.fromAddress(pFileOpen.value);
+      print('pVtable is at *pFileOpen: ${pointerAsString(pVtable)}');
 
-      print(printableAddress(pVt.ref.QueryInterface));
-      print(printableAddress(pVt.ref.AddRef));
-      print(printableAddress(pVt.ref.Show));
-
-      final pFunc = pVt.ref.Show;
-      final pFuncUint64 = Pointer<Uint64>.fromAddress(pFunc.address);
-
-      final pFuncDart =
+      final pShowNative =
           Pointer<NativeFunction<IModalWindowShowNative>>.fromAddress(
-              pFuncUint64.value);
-      print(printableAddress(pFuncDart));
+              pVtable.address + 8 * 3);
+      print('pShowNative is at: ${pointerAsString(pShowNative)}');
 
-      MessageBox(NULL, TEXT('Preparing to invoke IFileDialog::Show'),
-          TEXT('Preparing'), MB_OK);
-      final pFuncCallable = pFuncDart.asFunction<IModalWindowShowDart>();
+      final fShowDart = pShowNative.asFunction<IModalWindowShowDart>();
 
-      pFuncCallable(pFileOpen, NULL);
-      print('success');
+      hr = fShowDart(pFileOpen, NULL);
+      print('fShowDart returned $hr');
     } else {
       COMError(hr, 'CoCreateInstance');
     }
