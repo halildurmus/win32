@@ -37,6 +37,8 @@ final GetClientRect = user32
 final GetDC = user32.lookupFunction<getDCNative, getDCDart>('GetDC');
 final GetMessage =
     user32.lookupFunction<getMessageNative, getMessageDart>('GetMessageW');
+final GetScrollInfo = user32
+    .lookupFunction<getScrollInfoNative, getScrollInfoDart>('GetScrollInfo');
 final KillTimer =
     user32.lookupFunction<killTimerNative, killTimerDart>('KillTimer');
 final LoadCursor =
@@ -52,8 +54,12 @@ final RegisterClass = user32
     .lookupFunction<registerClassNative, registerClassDart>('RegisterClassW');
 final ReleaseDC =
     user32.lookupFunction<releaseDCNative, releaseDCDart>('ReleaseDC');
+final ScrollWindow =
+    user32.lookupFunction<scrollWindowNative, scrollWindowDart>('ScrollWindow');
 final SendInput =
     user32.lookupFunction<sendInputNative, sendInputDart>('SendInput');
+final SetScrollInfo = user32
+    .lookupFunction<setScrollInfoNative, setScrollInfoDart>('SetScrollInfo');
 final SetTimer =
     user32.lookupFunction<setTimerNative, setTimerDart>('SetTimer');
 final ShowWindow =
@@ -98,6 +104,9 @@ final DeleteObject =
     gdi32.lookupFunction<deleteObjectNative, deleteObjectDart>('DeleteObject');
 final GetStockObject = gdi32
     .lookupFunction<getStockObjectNative, getStockObjectDart>('GetStockObject');
+final GetTextMetrics =
+    gdi32.lookupFunction<getTextMetricsNative, getTextMetricsDart>(
+        'GetTextMetricsW');
 final LineTo = gdi32.lookupFunction<lineToNative, lineToDart>('LineTo');
 final MoveToEx = gdi32.lookupFunction<moveToExNative, moveToExDart>('MoveToEx');
 final SaveDC = gdi32.lookupFunction<saveDCNative, saveDCDart>('SaveDC');

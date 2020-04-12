@@ -42,6 +42,7 @@ void main()
     printf("sizeof(COLORREF) is %zu\n", sizeof(COLORREF));
     printf("sizeof(MSG) is %zu\n", sizeof(MSG));
 
+    printf("sizeof(WCHAR) is %zu\n", sizeof(WCHAR));
     printf("sizeof(TCHAR) is %zu\n", sizeof(TCHAR));
     printf("sizeof(UINT) is %zu\n", sizeof(UINT));
     printf("sizeof(DWORD) is %zu\n", sizeof(DWORD));

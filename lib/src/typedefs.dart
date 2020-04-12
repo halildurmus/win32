@@ -157,11 +157,29 @@ typedef getClientRectDart = int Function(int hwnd, Pointer<RECT> lpRect);
 typedef getDCNative = Int64 Function(Int64 hwnd);
 typedef getDCDart = int Function(int hwnd);
 
+// BOOL GetScrollInfo(
+//   HWND         hwnd,
+//   int          nBar,
+//   LPSCROLLINFO lpsi
+// );
+typedef getScrollInfoNative = Int32 Function(
+    Int64 hwnd, Int32 nBar, Pointer<SCROLLINFO> lpsi);
+typedef getScrollInfoDart = int Function(
+    int hwnd, int nBar, Pointer<SCROLLINFO> lpsi);
+
 // HGDIOBJ GetStockObject(
 //   int i
 // );
 typedef getStockObjectNative = Int64 Function(Int32 i);
 typedef getStockObjectDart = int Function(int i);
+
+// BOOL GetTextMetrics(
+//   HDC          hdc,
+//   LPTEXTMETRIC lptm
+// );
+typedef getTextMetricsNative = Int32 Function(
+    Int64 hdc, Pointer<TEXTMETRIC> lptm);
+typedef getTextMetricsDart = int Function(int hdc, Pointer<TEXTMETRIC> lptm);
 
 // BOOL KillTimer(
 //   HWND     hWnd,
@@ -235,6 +253,18 @@ typedef releaseDCDart = int Function(int hWnd, int hDC);
 typedef saveDCNative = Int32 Function(Int64 hdc);
 typedef saveDCDart = int Function(int hdc);
 
+// BOOL ScrollWindow(
+//   HWND       hWnd,
+//   int        XAmount,
+//   int        YAmount,
+//   const RECT *lpRect,
+//   const RECT *lpClipRect
+// );
+typedef scrollWindowNative = Int32 Function(Int64 hWnd, Int32 XAmount,
+    Int32 YAmount, Pointer<RECT> lpRect, Pointer<RECT> lpClipRect);
+typedef scrollWindowDart = int Function(int hWnd, int XAmount, int YAmount,
+    Pointer<RECT> lpRect, Pointer<RECT> lpClipRect);
+
 // In the following typedef, we use Pointer<Void> since pInputs can take
 // an array of input messages, and Pointer<List<INPUT>> isn't possible.
 
@@ -268,6 +298,17 @@ typedef setBkModeDart = int Function(int hdc, int mode);
 // );
 typedef setMapModeNative = Int32 Function(Int64 hdc, Int32 iMode);
 typedef setMapModeDart = int Function(int hdc, int iMode);
+
+// int SetScrollInfo(
+//   HWND          hwnd,
+//   int           nBar,
+//   LPCSCROLLINFO lpsi,
+//   BOOL          redraw
+// );
+typedef setScrollInfoNative = Int32 Function(
+    Int64 hwnd, Int32 nBar, Pointer<SCROLLINFO> lpsi, Int32 redraw);
+typedef setScrollInfoDart = int Function(
+    int hwnd, int nBar, Pointer<SCROLLINFO> lpsi, int redraw);
 
 // COLORREF SetTextColor(
 //   HDC      hdc,
