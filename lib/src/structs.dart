@@ -358,6 +358,128 @@ class HARDWAREINPUT extends Struct {
     ..wParamH = 0;
 }
 
+// typedef struct tagTEXTMETRICW {
+//   LONG  tmHeight;
+//   LONG  tmAscent;
+//   LONG  tmDescent;
+//   LONG  tmInternalLeading;
+//   LONG  tmExternalLeading;
+//   LONG  tmAveCharWidth;
+//   LONG  tmMaxCharWidth;
+//   LONG  tmWeight;
+//   LONG  tmOverhang;
+//   LONG  tmDigitizedAspectX;
+//   LONG  tmDigitizedAspectY;
+//   WCHAR tmFirstChar;
+//   WCHAR tmLastChar;
+//   WCHAR tmDefaultChar;
+//   WCHAR tmBreakChar;
+//   BYTE  tmItalic;
+//   BYTE  tmUnderlined;
+//   BYTE  tmStruckOut;
+//   BYTE  tmPitchAndFamily;
+//   BYTE  tmCharSet;
+// } TEXTMETRICW, *PTEXTMETRICW, *NPTEXTMETRICW, *LPTEXTMETRICW;
+class TEXTMETRIC extends Struct {
+  @Int32()
+  int tmHeight;
+  @Int32()
+  int tmAscent;
+  @Int32()
+  int tmDescent;
+  @Int32()
+  int tmInternalLeading;
+  @Int32()
+  int tmExternalLeading;
+  @Int32()
+  int tmAveCharWidth;
+  @Int32()
+  int tmMaxCharWidth;
+  @Int32()
+  int tmWeight;
+  @Int32()
+  int tmOverhang;
+  @Int32()
+  int tmDigitizedAspectX;
+  @Int32()
+  int tmDigitizedAspectY;
+  @Int16()
+  int tmFirstChar;
+  @Int16()
+  int tmLastChar;
+  @Int16()
+  int tmDefaultChar;
+  @Int16()
+  int tmBreakChar;
+  @Int8()
+  int tmItalic;
+  @Int8()
+  int tmUnderlined;
+  @Int8()
+  int tmStruckOut;
+  @Int8()
+  int tmPitchAndFamily;
+  @Int8()
+  int tmCharSet;
+
+  factory TEXTMETRIC.allocate() => allocate<TEXTMETRIC>().ref
+    ..tmHeight = 0
+    ..tmAscent = 0
+    ..tmDescent = 0
+    ..tmInternalLeading = 0
+    ..tmExternalLeading = 0
+    ..tmAveCharWidth = 0
+    ..tmMaxCharWidth = 0
+    ..tmWeight = 0
+    ..tmOverhang = 0
+    ..tmDigitizedAspectX = 0
+    ..tmDigitizedAspectY = 0
+    ..tmFirstChar = 0
+    ..tmLastChar = 0
+    ..tmDefaultChar = 0
+    ..tmBreakChar = 0
+    ..tmItalic = 0
+    ..tmUnderlined = 0
+    ..tmStruckOut = 0
+    ..tmPitchAndFamily = 0
+    ..tmCharSet = 0;
+}
+
+// typedef struct tagSCROLLINFO {
+//   UINT cbSize;
+//   UINT fMask;
+//   int  nMin;
+//   int  nMax;
+//   UINT nPage;
+//   int  nPos;
+//   int  nTrackPos;
+// } SCROLLINFO, *LPSCROLLINFO;
+class SCROLLINFO extends Struct {
+  @Int32()
+  int cbSize;
+  @Int32()
+  int fMask;
+  @Int32()
+  int nMin;
+  @Int32()
+  int nMax;
+  @Int32()
+  int nPage;
+  @Int32()
+  int nPos;
+  @Int32()
+  int nTrackPos;
+
+  factory SCROLLINFO.allocate() => allocate<SCROLLINFO>().ref
+    ..cbSize = 0
+    ..fMask = 0
+    ..nMin = 0
+    ..nMax = 0
+    ..nPage = 0
+    ..nPos = 0
+    ..nTrackPos = 0;
+}
+
 // *** COM STRUCTS ***
 
 // typedef struct _GUID {

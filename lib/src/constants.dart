@@ -7,6 +7,9 @@ import 'package:ffi/ffi.dart';
 
 const NULL = 0;
 
+const FALSE = 0;
+const TRUE = 1;
+
 const MAX_PATH = 260;
 
 // WindowStyle constants
@@ -110,6 +113,35 @@ const SW_SHOWNA = 8;
 const SW_RESTORE = 9;
 const SW_SHOWDEFAULT = 10;
 const SW_FORCEMINIMIZE = 11;
+
+// ScrollInfo constants
+const SIF_RANGE = 0x0001;
+const SIF_PAGE = 0x0002;
+const SIF_POS = 0x0004;
+const SIF_DISABLENOSCROLL = 0x0008;
+const SIF_TRACKPOS = 0x0010;
+const SIF_ALL = (SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS);
+
+// Scrollbar constants
+const SB_HORZ = 0;
+const SB_VERT = 1;
+const SB_CTL = 2;
+const SB_BOTH = 3;
+const SB_LINEUP = 0;
+const SB_LINELEFT = 0;
+const SB_LINEDOWN = 1;
+const SB_LINERIGHT = 1;
+const SB_PAGEUP = 2;
+const SB_PAGELEFT = 2;
+const SB_PAGEDOWN = 3;
+const SB_PAGERIGHT = 3;
+const SB_THUMBPOSITION = 4;
+const SB_THUMBTRACK = 5;
+const SB_TOP = 6;
+const SB_LEFT = 6;
+const SB_BOTTOM = 7;
+const SB_RIGHT = 7;
+const SB_ENDSCROLL = 8;
 
 // DrawText constants
 const DT_TOP = 0x000;
