@@ -4,12 +4,12 @@ them accessible to Dart code without requiring a C compiler or the Windows SDK.
 [![pub package](https://img.shields.io/pub/v/win32.svg)](https://pub.dev/packages/win32)
 [![Language](https://img.shields.io/badge/language-Dart-blue.svg)](https://dart.dev)
 
-Perhaps of more than the APIs themselves, this package provides a variety of
+Perhaps of more use than the APIs themselves, this package provides a variety of
 instructive examples for more complex FFI usage scenarios.
 
 ## Requirements
 
-This package assumes the Dart 64-bit compiler. 
+This package assumes the Dart 64-bit compiler, running on Windows.
 
 ## Usage
 
