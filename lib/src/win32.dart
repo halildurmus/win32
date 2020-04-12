@@ -71,6 +71,15 @@ final UpdateWindow =
     user32.lookupFunction<updateWindowNative, updateWindowDart>('UpdateWindow');
 
 final kernel32 = DynamicLibrary.open('kernel32.dll');
+final FindFirstVolume =
+    kernel32.lookupFunction<findFirstVolumeNative, findFirstVolumeDart>(
+        'FindFirstVolumeW');
+final FindNextVolume =
+    kernel32.lookupFunction<findNextVolumeNative, findNextVolumeDart>(
+        'FindNextVolumeW');
+final FindVolumeClose =
+    kernel32.lookupFunction<findVolumeCloseNative, findVolumeCloseDart>(
+        'FindVolumeClose');
 final GetLastError = kernel32
     .lookupFunction<getLastErrorNative, getLastErrorDart>('GetLastError');
 final GetModuleHandle =
@@ -78,9 +87,15 @@ final GetModuleHandle =
         'GetModuleHandleW');
 final GetStdHandle = kernel32
     .lookupFunction<getStdHandleNative, getStdHandleDart>('GetStdHandle');
+final GetVolumePathNamesForVolumeName = kernel32.lookupFunction<
+    getVolumePathNamesForVolumeNameNative,
+    getVolumePathNamesForVolumeNameDart>('GetVolumePathNamesForVolumeNameW');
 final GetConsoleScreenBufferInfo = kernel32.lookupFunction<
     getConsoleScreenBufferInfoNative,
     getConsoleScreenBufferInfoDart>('GetConsoleScreenBufferInfo');
+final QueryDosDevice =
+    kernel32.lookupFunction<queryDosDeviceNative, queryDosDeviceDart>(
+        'QueryDosDeviceW');
 final SetConsoleMode = kernel32
     .lookupFunction<setConsoleModeNative, setConsoleModeDart>('SetConsoleMode');
 final SetConsoleCursorInfo = kernel32.lookupFunction<setConsoleCursorInfoNative,

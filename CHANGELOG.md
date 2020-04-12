@@ -1,3 +1,7 @@
+## 1.2.4
+
+- Added volume management APIs
+
 ## 1.2.3
 
 - Add scrolling APIs and example
