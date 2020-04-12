@@ -1,3 +1,7 @@
+// typedefs.dart
+
+// FFI prototypes for the Win32 API methods, along with their Dart equivalents
+
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
@@ -123,6 +127,44 @@ typedef fillRectNative = Int32 Function(
     Int64 hDC, Pointer<RECT> lprc, Int64 hbr);
 typedef fillRectDart = int Function(int hDC, Pointer<RECT> lprc, int hbr);
 
+// HANDLE FindFirstVolumeW(
+//   LPWSTR lpszVolumeName,
+//   DWORD  cchBufferLength
+// );
+typedef findFirstVolumeNative = Int64 Function(
+    Pointer<Utf16> lpszVolumeName, Int32 cchBufferLength);
+typedef findFirstVolumeDart = int Function(
+    Pointer<Utf16> lpszVolumeName, int cchBufferLength);
+
+// BOOL FindNextVolumeW(
+//   HANDLE hFindVolume,
+//   LPWSTR lpszVolumeName,
+//   DWORD  cchBufferLength
+// );
+typedef findNextVolumeNative = Int32 Function(
+    Int64 hFindVolume, Pointer<Utf16> lpszVolumeName, Int32 cchBufferLength);
+typedef findNextVolumeDart = int Function(
+    int hFindVolume, Pointer<Utf16> lpszVolumeName, int cchBufferLength);
+
+// BOOL FindVolumeClose(
+//   HANDLE hFindVolume
+// );
+typedef findVolumeCloseNative = Int32 Function(Int64 hFindVolume);
+typedef findVolumeCloseDart = int Function(int hFindVolume);
+
+// BOOL GetClientRect(
+//   HWND   hWnd,
+//   LPRECT lpRect
+// );
+typedef getClientRectNative = Int32 Function(Int64 hwnd, Pointer<RECT> lpRect);
+typedef getClientRectDart = int Function(int hwnd, Pointer<RECT> lpRect);
+
+// HDC GetDC(
+//   HWND hWnd
+// );
+typedef getDCNative = Int64 Function(Int64 hwnd);
+typedef getDCDart = int Function(int hwnd);
+
 // _Post_equals_last_error_ DWORD GetLastError();
 typedef getLastErrorNative = Int32 Function();
 typedef getLastErrorDart = int Function();
@@ -143,19 +185,6 @@ typedef getMessageDart = int Function(
 // );
 typedef getModuleHandleNative = Int64 Function(Pointer<Utf16> lpModuleName);
 typedef getModuleHandleDart = int Function(Pointer<Utf16> lpModuleName);
-
-// BOOL GetClientRect(
-//   HWND   hWnd,
-//   LPRECT lpRect
-// );
-typedef getClientRectNative = Int32 Function(Int64 hwnd, Pointer<RECT> lpRect);
-typedef getClientRectDart = int Function(int hwnd, Pointer<RECT> lpRect);
-
-// HDC GetDC(
-//   HWND hWnd
-// );
-typedef getDCNative = Int64 Function(Int64 hwnd);
-typedef getDCDart = int Function(int hwnd);
 
 // BOOL GetScrollInfo(
 //   HWND         hwnd,
@@ -180,6 +209,23 @@ typedef getStockObjectDart = int Function(int i);
 typedef getTextMetricsNative = Int32 Function(
     Int64 hdc, Pointer<TEXTMETRIC> lptm);
 typedef getTextMetricsDart = int Function(int hdc, Pointer<TEXTMETRIC> lptm);
+
+// BOOL GetVolumePathNamesForVolumeNameW(
+//   LPCWSTR lpszVolumeName,
+//   LPWCH   lpszVolumePathNames,
+//   DWORD   cchBufferLength,
+//   PDWORD  lpcchReturnLength
+// );
+typedef getVolumePathNamesForVolumeNameNative = Int32 Function(
+    Pointer<Utf16> lpszVolumeName,
+    Pointer<Utf16> lpszVolumePathNames,
+    Int32 cchBufferLength,
+    Pointer<Int32> lpcchReturnLength);
+typedef getVolumePathNamesForVolumeNameDart = int Function(
+    Pointer<Utf16> lpszVolumeName,
+    Pointer<Utf16> lpszVolumePathNames,
+    int cchBufferLength,
+    Pointer<Int32> lpcchReturnLength);
 
 // BOOL KillTimer(
 //   HWND     hWnd,
@@ -233,6 +279,16 @@ typedef messageBoxDart = int Function(
 typedef moveToExNative = Int32 Function(
     Int64 hdc, Int32 x, Int32 y, Pointer<POINT> lppt);
 typedef moveToExDart = int Function(int hdc, int x, int y, Pointer<POINT> lppt);
+
+// DWORD QueryDosDeviceW(
+//   LPCWSTR lpDeviceName,
+//   LPWSTR  lpTargetPath,
+//   DWORD   ucchMax
+// );
+typedef queryDosDeviceNative = Int32 Function(
+    Pointer<Utf16> lpDeviceName, Pointer<Utf16> lpTargetPath, Int32 ucchMax);
+typedef queryDosDeviceDart = int Function(
+    Pointer<Utf16> lpDeviceName, Pointer<Utf16> lpTargetPath, int ucchMax);
 
 // ATOM RegisterClassW(
 //   const WNDCLASSW *lpWndClass

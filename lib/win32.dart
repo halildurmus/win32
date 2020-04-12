@@ -1,4 +1,10 @@
+// win32.dart
+
+// Exports the library to consuming Dart code
+
 library win32;
+
+export 'src/utf16.dart';
 
 export 'src/constants.dart';
 export 'src/macros.dart';
