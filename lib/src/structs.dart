@@ -1,3 +1,7 @@
+// structs.dart
+
+// Dart representations of common structs used in the Win32 API
+
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 

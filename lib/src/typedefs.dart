@@ -1,3 +1,7 @@
+// typedefs.dart
+
+// FFI prototypes for the Win32 API methods, along with their Dart equivalents
+
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 

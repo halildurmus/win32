@@ -1,15 +1,17 @@
+// constants.dart
+
+// Standard constants exposed by the Win32 API
+
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
-///////////////
-// CONSTANTS //
-///////////////
-
+// General constants
 const NULL = 0;
 
 const FALSE = 0;
 const TRUE = 1;
 
+// Path length
 const MAX_PATH = 260;
 
 // Error constants

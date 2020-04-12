@@ -1,3 +1,7 @@
+// win32.dart
+
+// Maps FFI prototypes onto the corresponding Win32 API function calls
+
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 

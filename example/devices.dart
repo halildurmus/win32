@@ -8,46 +8,6 @@ import 'package:win32/win32.dart';
 
 final volumeHandles = <int, String>{};
 
-String fromUtf16(Pointer pointer, int length) {
-  final buf = StringBuffer();
-  final ptr = Pointer<Uint16>.fromAddress(pointer.address);
-
-  for (var v = 0; v < length; v++) {
-    final charCode = ptr.elementAt(v).value;
-    if (charCode != 0) {
-      buf.write(String.fromCharCode(charCode));
-    } else {
-      return buf.toString();
-    }
-  }
-  return buf.toString();
-}
-
-// Assumes an array of null-terminated strings, with the final
-// element terminated with a second null.
-List<String> fromUtf16Array(Pointer pointer, int maxLength) {
-  final results = <String>[];
-  final buf = StringBuffer();
-  final ptr = Pointer<Uint16>.fromAddress(pointer.address);
-
-  for (var v = 0; v < maxLength; v++) {
-    final charCode = ptr.elementAt(v).value;
-    if (charCode != 0) {
-      buf.write(String.fromCharCode(charCode));
-    } else {
-      results.add(buf.toString());
-      if (ptr.elementAt(v + 1).value == 0) {
-        return results;
-      } else {
-        buf.clear();
-      }
-    }
-  }
-  // If array don't terminate before maxLength is are reached,
-  // just return the complete results thus far
-  return results;
-}
-
 void DisplayVolumePaths(String volumeName) {
   var error = 0;
 
@@ -61,7 +21,7 @@ void DisplayVolumePaths(String volumeName) {
 
   if (error != 0) {
     if (charCount.value > 1) {
-      for (var path in fromUtf16Array(pathNamePtr, charCount.value)) {
+      for (var path in pathNamePtr.unpackStringArray(charCount.value)) {
         print(path);
       }
     } else {
@@ -88,7 +48,7 @@ void main() {
   }
 
   while (true) {
-    var volumeName = fromUtf16(volumeNamePtr, MAX_PATH);
+    var volumeName = volumeNamePtr.unpackString(MAX_PATH);
 
     //  Skip the \\?\ prefix and remove the trailing backslash.
     final shortVolumeName = volumeName.substring(4, volumeName.length - 1);
@@ -103,7 +63,7 @@ void main() {
       break;
     }
 
-    print('\nFound a device:\n${fromUtf16(deviceName, MAX_PATH)}');
+    print('\nFound a device:\n${deviceName.unpackString(MAX_PATH)}');
     print('Volume name: $volumeName');
     print('Paths:');
     DisplayVolumePaths(volumeName);
