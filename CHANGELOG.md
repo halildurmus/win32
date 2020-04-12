@@ -1,3 +1,9 @@
+## 1.2.3
+
+- Add scrolling APIs and example
+- Add 'new' known folder API
+- Add some basic unit tests
+
 ## 1.2.2
 
 - Add known folder plus GUID classes
