@@ -1,4 +1,7 @@
-The package includes several examples in the `example` subdirectory:
+## Dart samples
+
+The package includes several examples in the `example` subdirectory. These
+examples use the Win32 API for all UI display and do not require Flutter.
 
 | Example            | Description                                               |
 | ------------------ | --------------------------------------------------------- |
@@ -15,3 +18,9 @@ The package includes several examples in the `example` subdirectory:
 The Tetris example listed above is a fuller worked example of a reasonably
 complete program that uses the Dart Win32 package. It is a port of a C version
 of the game by Chang-Hung Liang. [More information...](tetris/README.md)
+
+## Flutter samples
+
+The `explorer\` subdirectory contains an example of a simple Flutter app that
+uses the volume management Win32 APIs to find the disk drives connected to your
+computer and their volume IDs and attached paths.
