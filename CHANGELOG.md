@@ -1,6 +1,7 @@
 ## 1.2.5
 
 - Added Flutter example
+- Added common dialog example
 
 ## 1.2.4
 
