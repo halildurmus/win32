@@ -59,6 +59,56 @@ class WNDCLASS extends Struct {
     ..lpszClassName = nullptr;
 }
 
+// In the following struct, COLORREF is a DWORD that contains RGB values
+// in the form 0x00bbggrr
+
+// typedef struct tagCHOOSECOLORW {
+//   DWORD        lStructSize;
+//   HWND         hwndOwner;
+//   HWND         hInstance;
+//   COLORREF     rgbResult;
+//   COLORREF     *lpCustColors;
+//   DWORD        Flags;
+//   LPARAM       lCustData;
+//   LPCCHOOKPROC lpfnHook;
+//   LPCWSTR      lpTemplateName;
+// } CHOOSECOLORW, *LPCHOOSECOLORW;
+class CHOOSECOLOR extends Struct {
+  @Int32()
+  int lStructSize;
+
+  @Int64()
+  int hwndOwner;
+
+  @Int64()
+  int hInstance;
+
+  @Int32()
+  int rgbResult;
+
+  Pointer<Uint32> lpCustColors;
+
+  @Int32()
+  int Flags;
+
+  @Int64()
+  int lCustData;
+
+  Pointer<Int64> lpfnHook;
+  Pointer<Uint16> lpTemplateName;
+
+  factory CHOOSECOLOR.allocate() => allocate<CHOOSECOLOR>().ref
+    ..lStructSize = sizeOf<CHOOSECOLOR>()
+    ..hwndOwner = NULL
+    ..hInstance = NULL
+    ..rgbResult = 0
+    ..lpCustColors = allocate<Uint32>(count: 16)
+    ..Flags = 0
+    ..lCustData = 0
+    ..lpfnHook = nullptr
+    ..lpTemplateName = nullptr;
+}
+
 // typedef struct tagMSG {
 //   HWND   hwnd;
 //   UINT   message;

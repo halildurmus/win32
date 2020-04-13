@@ -156,6 +156,10 @@ final SHGetKnownFolderPath = shell32.lookupFunction<shGetKnownFolderPathNative,
 final ShellExecute = shell32
     .lookupFunction<shellExecuteNative, shellExecuteDart>('ShellExecuteW');
 
+final comdlg32 = DynamicLibrary.open('comdlg32.dll');
+final ChooseColor =
+    comdlg32.lookupFunction<chooseColorNative, chooseColorDart>('ChooseColorW');
+
 final ole32 = DynamicLibrary.open('ole32.dll');
 final CoCreateGuid =
     ole32.lookupFunction<coCreateGuidNative, coCreateGuidDart>('CoCreateGuid');

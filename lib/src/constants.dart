@@ -15,7 +15,6 @@ const TRUE = 1;
 const MAX_PATH = 260;
 
 // Error constants
-
 const ERROR_SUCCESS = 0;
 const NO_ERROR = 0;
 const SEC_E_OK = 0;
@@ -331,6 +330,16 @@ const CS_DROPSHADOW = 0x00020000;
 
 // ControlWord constant
 const CW_USEDEFAULT = 0x80000000;
+
+const CC_RGBINIT = 0x00000001;
+const CC_FULLOPEN = 0x00000002;
+const CC_PREVENTFULLOPEN = 0x00000004;
+const CC_SHOWHELP = 0x00000008;
+const CC_ENABLEHOOK = 0x00000010;
+const CC_ENABLETEMPLATE = 0x00000020;
+const CC_ENABLETEMPLATEHANDLE = 0x00000040;
+const CC_SOLIDCOLOR = 0x00000080;
+const CC_ANYCOLOR = 0x00000100;
 
 // System colors
 const COLOR_SCROLLBAR = 0;

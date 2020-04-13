@@ -15,6 +15,12 @@ typedef beginPaintNative = Int64 Function(
     Int64 hWnd, Pointer<PAINTSTRUCT> lpPaint);
 typedef beginPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
 
+// BOOL WINAPI ChooseColor(
+//   _Inout_ LPCHOOSECOLOR lpcc
+// );
+typedef chooseColorNative = Int32 Function(Pointer<CHOOSECOLOR> lpcc);
+typedef chooseColorDart = int Function(Pointer<CHOOSECOLOR> lpcc);
+
 // HRESULT CoCreateGuid(
 //   GUID *pguid
 // );
