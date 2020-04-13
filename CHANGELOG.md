@@ -1,3 +1,7 @@
+## 1.2.5
+
+- Added Flutter example
+
 ## 1.2.4
 
 - Added volume management APIs

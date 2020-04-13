@@ -21,6 +21,6 @@ of the game by Chang-Hung Liang. [More information...](tetris/README.md)
 
 ## Flutter samples
 
-The `explorer\` subdirectory contains an example of a simple Windows app that
-uses the volume management APIs to find the disk drives connected to your
+The `explorer\` subdirectory contains an example of a simple Flutter app that
+uses the volume management Win32 APIs to find the disk drives connected to your
 computer and their volume IDs and attached paths.
