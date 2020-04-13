@@ -1,13 +1,16 @@
 // main.dart
 
-// Trivial example showing Win32 common dialog box invocation
+// Trivial example showing Win32 common dialog box invocation.
+
+// More sophisticated examples can be found in the `example\` subdirectory
+// of the package.
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-// Convert from Win32 0x00BGR color layout to a user-friendly string
+// Convert from Win32 0x00BBGGRR color layout to a user-friendly string
 String toHexColor(int color) =>
     '0x' +
     GetRValue(color).toRadixString(16).padLeft(2, '0') +
