@@ -7,6 +7,17 @@ import 'package:ffi/ffi.dart';
 
 import 'structs.dart';
 
+// BOOL AppendMenuW(
+//   HMENU    hMenu,
+//   UINT     uFlags,
+//   UINT_PTR uIDNewItem,
+//   LPCWSTR  lpNewItem
+// );
+typedef appendMenuNative = Int32 Function(
+    Int64 hMenu, Uint32 uFlags, Uint32 uIDNewItem, Pointer<Utf16> lpNewItem);
+typedef appendMenuDart = int Function(
+    int hMenu, int uFlags, int uIDNewItem, Pointer<Utf16> lpNewItem);
+
 // HDC BeginPaint(
 //   HWND          hWnd,
 //   LPPAINTSTRUCT lpPaint
@@ -32,6 +43,10 @@ typedef coCreateGuidDart = int Function(Pointer<GUID> pguid);
 // );
 typedef coTaskMemFreeNative = Void Function(Pointer<Void> pv);
 typedef coTaskMemFreeDart = void Function(Pointer<Void> pv);
+
+// HMENU CreateMenu();
+typedef createMenuNative = Int64 Function();
+typedef createMenuDart = int Function();
 
 // HBRUSH CreateSolidBrush(
 //   COLORREF color
@@ -97,6 +112,12 @@ typedef defWindowProcDart = int Function(
 // );
 typedef deleteObjectNative = Int32 Function(Int64 ho);
 typedef deleteObjectDart = int Function(int ho);
+
+// BOOL DestroyWindow(
+//   HWND hWnd
+// );
+typedef destroyWindowNative = Int32 Function(Int64 hWnd);
+typedef destroyWindowDart = int Function(int hWnd);
 
 // LRESULT DispatchMessage(
 //   const MSG *lpMsg
@@ -276,6 +297,19 @@ typedef messageBoxNative = Int32 Function(
 typedef messageBoxDart = int Function(
     int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption, int uType);
 
+// BOOL MoveWindow(
+//   HWND hWnd,
+//   int  X,
+//   int  Y,
+//   int  nWidth,
+//   int  nHeight,
+//   BOOL bRepaint
+// );
+typedef moveWindowNative = Int32 Function(
+    Int64 hWnd, Int32 X, Int32 Y, Int32 nWidth, Int32 nHeight, Int32 bRepaint);
+typedef moveWindowDart = int Function(
+    int hWnd, int X, int Y, int nWidth, int nHeight, int bRepaint);
+
 // BOOL MoveToEx(
 //   HDC     hdc,
 //   int     x,
@@ -340,6 +374,17 @@ typedef sendInputNative = Uint32 Function(
 typedef sendInputDart = int Function(
     int cInputs, Pointer<Void> pInputs, int cbSize);
 
+// LRESULT SendMessage(
+//   HWND   hWnd,
+//   UINT   Msg,
+//   WPARAM wParam,
+//   LPARAM lParam
+// );
+typedef sendMessageNative = Int64 Function(
+    Int64 hWnd, Uint32 Msg, Int64 wParam, Int64 lParam);
+typedef sendMessageDart = int Function(
+    int hWnd, int Msg, int wParam, int lParam);
+
 // COLORREF SetBkColor(
 //   HDC      hdc,
 //   COLORREF color
@@ -353,6 +398,12 @@ typedef setBkColorDart = int Function(int hdc, int color);
 // );
 typedef setBkModeNative = Int32 Function(Int64 hdc, Int32 mode);
 typedef setBkModeDart = int Function(int hdc, int mode);
+
+// HWND SetFocus(
+//   HWND hWnd
+// );
+typedef setFocusNative = Int64 Function(Int64 hWnd);
+typedef setFocusDart = int Function(int hWnd);
 
 // int SetMapMode(
 //   HDC hdc,

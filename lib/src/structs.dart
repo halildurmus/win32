@@ -109,6 +109,118 @@ class CHOOSECOLOR extends Struct {
     ..lpTemplateName = nullptr;
 }
 
+// typedef struct tagCREATESTRUCTW {
+//   LPVOID    lpCreateParams;
+//   HINSTANCE hInstance;
+//   HMENU     hMenu;
+//   HWND      hwndParent;
+//   int       cy;
+//   int       cx;
+//   int       y;
+//   int       x;
+//   LONG      style;
+//   LPCWSTR   lpszName;
+//   LPCWSTR   lpszClass;
+//   DWORD     dwExStyle;
+// } CREATESTRUCTW, *LPCREATESTRUCTW;
+class CREATESTRUCT extends Struct {
+  Pointer<Void> lpCreateParams;
+
+  @Int64()
+  int hInstance;
+  @Int64()
+  int hMenu;
+  @Int64()
+  int hwndParent;
+  @Int32()
+  int cy;
+  @Int32()
+  int cx;
+  @Int32()
+  int y;
+  @Int32()
+  int x;
+  @Int32()
+  int style;
+
+  Pointer<Utf16> lpszName;
+  Pointer<Utf16> lpszClass;
+
+  @Int32()
+  int dwExStyle;
+
+  factory CREATESTRUCT.allocate() => allocate<CREATESTRUCT>().ref
+    ..lpCreateParams = nullptr
+    ..hInstance = 0
+    ..hMenu = 0
+    ..hwndParent = 0
+    ..cy = 0
+    ..cx = 0
+    ..y = 0
+    ..x = 0
+    ..style = 0
+    ..lpszName = nullptr
+    ..lpszClass = nullptr
+    ..dwExStyle = 0;
+}
+
+// typedef struct tagFINDREPLACEW {
+//   DWORD        lStructSize;
+//   HWND         hwndOwner;
+//   HINSTANCE    hInstance;
+//   DWORD        Flags;
+//   LPWSTR       lpstrFindWhat;
+//   LPWSTR       lpstrReplaceWith;
+//   WORD         wFindWhatLen;
+//   WORD         wReplaceWithLen;
+//   LPARAM       lCustData;
+//   LPFRHOOKPROC lpfnHook;
+//   LPCWSTR      lpTemplateName;
+// } FINDREPLACEW, *LPFINDREPLACEW;
+class FINDREPLACE extends Struct {
+  @Int32()
+  int lStructSize;
+
+  @Int64()
+  int hwndOwner;
+
+  @Int64()
+  int hInstance;
+
+  @Int32()
+  int Flags;
+
+  Pointer<Utf16> lpstrFindWhat;
+  Pointer<Utf16> lpstrReplaceWith;
+
+  @Int32()
+  int wFindWhatLen;
+
+  @Int32()
+  int wReplaceWithLen;
+
+  @Int32()
+  int lCustData;
+
+  Pointer<NativeFunction> lpfnHook;
+
+  @Int32()
+  int lpTemplateName;
+
+  factory FINDREPLACE.allocate() => allocate<FINDREPLACE>().ref
+    ..lStructSize = 0
+    ..hwndOwner = 0
+    ..hInstance = 0
+    ..Flags = 0
+    ..lpstrFindWhat = nullptr
+    ..lpstrReplaceWith = nullptr
+    ..wFindWhatLen = 0
+    ..wReplaceWithLen = 0
+    ..lCustData = 0
+    ..lpfnHook = nullptr
+    ..lpTemplateName = 0;
+}
+
 // typedef struct tagMSG {
 //   HWND   hwnd;
 //   UINT   message;

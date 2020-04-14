@@ -7,11 +7,9 @@ import 'package:ffi/ffi.dart';
 
 import 'typedefs.dart';
 
-// Prototypes of window-related functions, constants and structs in user32.dll
-
 // *** Callbacks ***
-typedef TimerProc = Void Function(
-    Int64 Arg1, Uint32 Arg2, Pointer<Uint32> Arg3, Int32 Arg4);
+typedef LPFRHookProc = Pointer<Uint32> Function(Int64, Int32, Int64, Int64);
+typedef TimerProc = Void Function(Int64, Uint32, Pointer<Uint32>, Int32);
 typedef WindowProc = Int64 Function(
     Int64 hwnd, Int32 uMsg, Int64 wParam, Int64 lParam);
 
@@ -20,13 +18,19 @@ final TEXT = Utf16.toUtf16;
 
 // *** APIs ***
 final user32 = DynamicLibrary.open('user32.dll');
+final AppendMenu =
+    user32.lookupFunction<appendMenuNative, appendMenuDart>('AppendMenuW');
 final BeginPaint =
     user32.lookupFunction<beginPaintNative, beginPaintDart>('BeginPaint');
+final CreateMenu =
+    user32.lookupFunction<createMenuNative, createMenuDart>('CreateMenu');
 final CreateWindowEx =
     user32.lookupFunction<createWindowExNative, createWindowExDart>(
         'CreateWindowExW');
 final DefWindowProc = user32
     .lookupFunction<defWindowProcNative, defWindowProcDart>('DefWindowProcW');
+final DestroyWindow = user32
+    .lookupFunction<destroyWindowNative, destroyWindowDart>('DestroyWindow');
 final DispatchMessage =
     user32.lookupFunction<dispatchMessageNative, dispatchMessageDart>(
         'DispatchMessageW');
@@ -51,6 +55,8 @@ final LoadIcon =
     user32.lookupFunction<loadIconNative, loadIconDart>('LoadIconW');
 final MessageBox =
     user32.lookupFunction<messageBoxNative, messageBoxDart>('MessageBoxW');
+final MoveWindow =
+    user32.lookupFunction<moveWindowNative, moveWindowDart>('MoveWindow');
 final PostQuitMessage =
     user32.lookupFunction<postQuitMessageNative, postQuitMessageDart>(
         'PostQuitMessage');
@@ -62,8 +68,12 @@ final ScrollWindow =
     user32.lookupFunction<scrollWindowNative, scrollWindowDart>('ScrollWindow');
 final SendInput =
     user32.lookupFunction<sendInputNative, sendInputDart>('SendInput');
+final SendMessage =
+    user32.lookupFunction<sendMessageNative, sendMessageDart>('SendMessage');
 final SetScrollInfo = user32
     .lookupFunction<setScrollInfoNative, setScrollInfoDart>('SetScrollInfo');
+final SetFocus =
+    user32.lookupFunction<setFocusNative, setFocusDart>('SetFocus');
 final SetTimer =
     user32.lookupFunction<setTimerNative, setTimerDart>('SetTimer');
 final ShowWindow =
