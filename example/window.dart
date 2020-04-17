@@ -1,6 +1,6 @@
 // window.dart
 
-// Demonstrates some basic window enumeration APIs
+// Enumerates open windows and demonstrates basic window manipulation
 
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
