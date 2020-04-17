@@ -588,8 +588,8 @@ class GUID extends Struct {
   /// Print GUID in common {FDD39AD0-238F-46AF-ADB4-6C85480369C7} format
   @override
   String toString() {
-    final comp1 = (Data4 & 0xFF).toRadixString(16) +
-        ((Data4 & 0xFF00) >> 8).toRadixString(16);
+    final comp1 = (Data4 & 0xFF).toRadixString(16).padLeft(2, '0') +
+        ((Data4 & 0xFF00) >> 8).toRadixString(16).padLeft(2, '0');
 
     // This is hacky as all get-out :)
     final comp2 = ((Data4 & 0xFF0000) >> 16).toRadixString(16).padLeft(2, '0') +
