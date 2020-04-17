@@ -36,6 +36,8 @@ final EndPaint =
     user32.lookupFunction<endPaintNative, endPaintDart>('EndPaint');
 final FillRect =
     user32.lookupFunction<fillRectNative, fillRectDart>('FillRect');
+final FindWindowEx = user32
+    .lookupFunction<findWindowExNative, findWindowExDart>('FindWindowExW');
 final GetClientRect = user32
     .lookupFunction<getClientRectNative, getClientRectDart>('GetClientRect');
 final GetDC = user32.lookupFunction<getDCNative, getDCDart>('GetDC');

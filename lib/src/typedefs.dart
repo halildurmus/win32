@@ -158,6 +158,17 @@ typedef findNextVolumeDart = int Function(
 typedef findVolumeCloseNative = Int32 Function(Int64 hFindVolume);
 typedef findVolumeCloseDart = int Function(int hFindVolume);
 
+// HWND FindWindowExW(
+//   HWND    hWndParent,
+//   HWND    hWndChildAfter,
+//   LPCWSTR lpszClass,
+//   LPCWSTR lpszWindow
+// );
+typedef findWindowExNative = Int64 Function(Int64 hWndParent,
+    Int64 hWndChildAfter, Pointer<Utf16> lpszClass, Pointer<Utf16> lpszWindow);
+typedef findWindowExDart = int Function(int hWndParent, int hWndChildAfter,
+    Pointer<Utf16> lpszClass, Pointer<Utf16> lpszWindow);
+
 // BOOL GetClientRect(
 //   HWND   hWnd,
 //   LPRECT lpRect
