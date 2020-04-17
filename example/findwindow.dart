@@ -1,13 +1,15 @@
 // findwindow.dart
 
-// Shows all the currently running windows
+// Finds the first Notepad window and maximizes it
 
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main() {
   final hwnd = FindWindowEx(0, 0, TEXT('Notepad'), nullptr);
-
-  print(hwnd);
+  if (hwnd == 0) {
+    print('No Notepad window found.');
+  } else {
+    ShowWindow(hwnd, SW_MAXIMIZE);
+  }
 }
