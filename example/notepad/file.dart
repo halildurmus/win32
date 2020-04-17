@@ -1,0 +1,49 @@
+import 'dart:ffi';
+
+import 'package:win32/win32.dart';
+
+class NotepadFile {
+  OPENFILENAME ofn;
+
+  void PopFileInitialize(int hwnd) {
+    ofn.lStructSize = sizeOf<OPENFILENAME>();
+    ofn.hwndOwner = hwnd;
+    ofn.hInstance = NULL;
+    ofn.lpstrFilter =
+        TEXT('Text Files (*.TXT)\0*.txt\0All Files (*.*)\0*.*\0\0');
+    ofn.lpstrCustomFilter = nullptr;
+    ofn.nMaxCustFilter = 0;
+    ofn.nFilterIndex = 0;
+    ofn.lpstrFile = nullptr; // Set in Open and Close functions
+    ofn.nMaxFile = MAX_PATH;
+    ofn.lpstrFileTitle = nullptr; // Set in Open and Close functions
+    ofn.nMaxFileTitle = MAX_PATH;
+    ofn.lpstrInitialDir = nullptr;
+    ofn.lpstrTitle = nullptr;
+    ofn.Flags = 0; // Set in Open and Close functions
+    ofn.nFileOffset = 0;
+    ofn.nFileExtension = 0;
+    ofn.lpstrDefExt = TEXT('txt');
+    ofn.lCustData = 0;
+    ofn.lpfnHook = nullptr;
+    ofn.lpTemplateName = nullptr;
+  }
+
+  int PopFileOpenDlg(int hwnd, String fileName, String titleName) {
+    ofn.hwndOwner = hwnd;
+    ofn.lpstrFile = TEXT(fileName);
+    ofn.lpstrFileTitle = TEXT(titleName);
+    ofn.Flags = OFN_HIDEREADONLY | OFN_CREATEPROMPT;
+
+    return GetOpenFileName(ofn.addressOf);
+  }
+
+  int PopFileSaveDlg(int hwnd, String fileName, String titleName) {
+    ofn.hwndOwner = hwnd;
+    ofn.lpstrFile = TEXT(fileName);
+    ofn.lpstrFileTitle = TEXT(titleName);
+    ofn.Flags = OFN_OVERWRITEPROMPT;
+
+    return GetSaveFileName(ofn.addressOf);
+  }
+}

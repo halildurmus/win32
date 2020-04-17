@@ -213,6 +213,18 @@ typedef getMessageDart = int Function(
 typedef getModuleHandleNative = Int64 Function(Pointer<Utf16> lpModuleName);
 typedef getModuleHandleDart = int Function(Pointer<Utf16> lpModuleName);
 
+// BOOL GetOpenFileNameW(
+//   LPOPENFILENAMEW Arg1
+// );
+typedef getOpenFileNameNative = Int32 Function(Pointer<OPENFILENAME> arg1);
+typedef getOpenFileNameDart = int Function(Pointer<OPENFILENAME> arg1);
+
+// BOOL GetSaveFileNameW(
+//   LPOPENFILENAMEW Arg1
+// );
+typedef getSaveFileNameNative = Int32 Function(Pointer<OPENFILENAME> arg1);
+typedef getSaveFileNameDart = int Function(Pointer<OPENFILENAME> arg1);
+
 // BOOL GetScrollInfo(
 //   HWND         hwnd,
 //   int          nBar,

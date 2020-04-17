@@ -169,6 +169,12 @@ final ShellExecute = shell32
 final comdlg32 = DynamicLibrary.open('comdlg32.dll');
 final ChooseColor =
     comdlg32.lookupFunction<chooseColorNative, chooseColorDart>('ChooseColorW');
+final GetOpenFileName =
+    comdlg32.lookupFunction<getOpenFileNameNative, getOpenFileNameDart>(
+        'GetOpenFileNameW');
+final GetSaveFileName =
+    comdlg32.lookupFunction<getSaveFileNameNative, getSaveFileNameDart>(
+        'GetSaveFileNameW');
 
 final ole32 = DynamicLibrary.open('ole32.dll');
 final CoCreateGuid =

@@ -109,6 +109,105 @@ class CHOOSECOLOR extends Struct {
     ..lpTemplateName = nullptr;
 }
 
+// typedef struct tagOFNW {
+//    DWORD        lStructSize;
+//    HWND         hwndOwner;
+//    HINSTANCE    hInstance;
+//    LPCWSTR      lpstrFilter;
+//    LPWSTR       lpstrCustomFilter;
+//    DWORD        nMaxCustFilter;
+//    DWORD        nFilterIndex;
+//    LPWSTR       lpstrFile;
+//    DWORD        nMaxFile;
+//    LPWSTR       lpstrFileTitle;
+//    DWORD        nMaxFileTitle;
+//    LPCWSTR      lpstrInitialDir;
+//    LPCWSTR      lpstrTitle;
+//    DWORD        Flags;
+//    WORD         nFileOffset;
+//    WORD         nFileExtension;
+//    LPCWSTR      lpstrDefExt;
+//    LPARAM       lCustData;
+//    LPOFNHOOKPROC lpfnHook;
+//    LPCWSTR      lpTemplateName;
+//    void *        pvReserved;
+//    DWORD        dwReserved;
+//    DWORD        FlagsEx;
+// } OPENFILENAMEW, *LPOPENFILENAMEW;
+class OPENFILENAME extends Struct {
+  @Int32()
+  int lStructSize;
+  @Int64()
+  int hwndOwner;
+  @Int64()
+  int hInstance;
+
+  Pointer<Utf16> lpstrFilter;
+  Pointer<Utf16> lpstrCustomFilter;
+
+  @Int32()
+  int nMaxCustFilter;
+  @Int32()
+  int nFilterIndex;
+
+  Pointer<Utf16> lpstrFile;
+  @Int32()
+  int nMaxFile;
+
+  Pointer<Utf16> lpstrFileTitle;
+  @Int32()
+  int nMaxFileTitle;
+
+  Pointer<Utf16> lpstrInitialDir;
+  Pointer<Utf16> lpstrTitle;
+
+  @Int32()
+  int Flags;
+  @Int16()
+  int nFileOffset;
+  @Int16()
+  int nFileExtension;
+
+  Pointer<Utf16> lpstrDefExt;
+
+  @Int64()
+  int lCustData;
+
+  Pointer<NativeFunction> lpfnHook;
+  Pointer<Utf16> lpTemplateName;
+  Pointer<Void> pvReserved;
+
+  @Int32()
+  int dwReserved;
+  @Int32()
+  int FlagsEx;
+
+  factory OPENFILENAME.allocate() => allocate<OPENFILENAME>().ref
+    ..lStructSize = 0
+    ..hwndOwner = 0
+    ..hInstance = 0
+    ..lpstrFilter = nullptr
+    ..lpstrCustomFilter = nullptr
+    ..nMaxCustFilter = 0
+    ..nFilterIndex = 0
+    ..lpstrFile = nullptr
+    ..nMaxFile = 0
+    ..lpstrFileTitle = nullptr
+    ..nMaxFileTitle = 0
+    ..lpstrInitialDir = nullptr
+    ..lpstrTitle = nullptr
+    ..Flags = 0
+    ..nFileOffset = 0
+    ..nFileExtension = 0
+    ..lpstrDefExt = nullptr
+    ..lCustData = 0
+    ..lpfnHook = nullptr
+    ..lpTemplateName = nullptr
+    ..pvReserved = nullptr
+    ..dwReserved = 0
+    ..FlagsEx = 0;
+}
+
 // typedef struct tagCREATESTRUCTW {
 //   LPVOID    lpCreateParams;
 //   HINSTANCE hInstance;
