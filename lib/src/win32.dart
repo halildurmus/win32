@@ -10,6 +10,7 @@ import 'typedefs.dart';
 // Prototypes of window-related functions, constants and structs in user32.dll
 
 // *** Callbacks ***
+typedef EnumWindowsProc = Int32 Function(Int64 hwnd, Int64 lParam);
 typedef TimerProc = Void Function(
     Int64 Arg1, Uint32 Arg2, Pointer<Uint32> Arg3, Int32 Arg4);
 typedef WindowProc = Int64 Function(
@@ -34,6 +35,8 @@ final DrawText =
     user32.lookupFunction<drawTextNative, drawTextDart>('DrawTextW');
 final EndPaint =
     user32.lookupFunction<endPaintNative, endPaintDart>('EndPaint');
+final EnumWindows =
+    user32.lookupFunction<enumWindowsNative, enumWindowsDart>('EnumWindows');
 final FillRect =
     user32.lookupFunction<fillRectNative, fillRectDart>('FillRect');
 final FindWindowEx = user32
@@ -45,6 +48,14 @@ final GetMessage =
     user32.lookupFunction<getMessageNative, getMessageDart>('GetMessageW');
 final GetScrollInfo = user32
     .lookupFunction<getScrollInfoNative, getScrollInfoDart>('GetScrollInfo');
+final GetWindowText = user32
+    .lookupFunction<getWindowTextNative, getWindowTextDart>('GetWindowTextW');
+final GetWindowTextLength =
+    user32.lookupFunction<getWindowTextLengthNative, getWindowTextLengthDart>(
+        'GetWindowTextLengthW');
+final IsWindowVisible =
+    user32.lookupFunction<isWindowVisibleNative, isWindowVisibleDart>(
+        'IsWindowVisible');
 final KillTimer =
     user32.lookupFunction<killTimerNative, killTimerDart>('KillTimer');
 final LoadCursor =

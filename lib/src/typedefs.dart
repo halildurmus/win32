@@ -124,6 +124,15 @@ typedef endPaintNative = Int32 Function(
     Int64 hWnd, Pointer<PAINTSTRUCT> lpPaint);
 typedef endPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
 
+// BOOL EnumWindows(
+//   WNDENUMPROC lpEnumFunc,
+//   LPARAM      lParam
+// );
+typedef enumWindowsNative = Int32 Function(
+    Pointer<NativeFunction> lpEnumFunc, Int64 lParam);
+typedef enumWindowsDart = int Function(
+    Pointer<NativeFunction> lpEnumFunc, int lParam);
+
 // int FillRect(
 //   HDC        hDC,
 //   const RECT *lprc,
@@ -243,6 +252,28 @@ typedef getVolumePathNamesForVolumeNameDart = int Function(
     Pointer<Utf16> lpszVolumePathNames,
     int cchBufferLength,
     Pointer<Int32> lpcchReturnLength);
+
+// int GetWindowTextW(
+//   HWND   hWnd,
+//   LPWSTR lpString,
+//   int    nMaxCount
+// );
+typedef getWindowTextNative = Int32 Function(
+    Int64 hWnd, Pointer<Utf16> lpString, Int32 nMaxCount);
+typedef getWindowTextDart = int Function(
+    int hWnd, Pointer<Utf16> lpString, int nMaxCount);
+
+// int GetWindowTextLengthW(
+//   HWND hWnd
+// );
+typedef getWindowTextLengthNative = Int32 Function(Int64 hWnd);
+typedef getWindowTextLengthDart = int Function(int hWnd);
+
+// BOOL IsWindowVisible(
+//   HWND hWnd
+// );
+typedef isWindowVisibleNative = Int32 Function(Int64 hWnd);
+typedef isWindowVisibleDart = int Function(int hWnd);
 
 // BOOL KillTimer(
 //   HWND     hWnd,
