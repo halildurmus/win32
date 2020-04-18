@@ -3,6 +3,8 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+import 'notepad.dart';
+
 const IDC_FILENAME = 1000;
 const IDM_FILE_NEW = 40001;
 const IDM_FILE_OPEN = 40002;
@@ -62,7 +64,7 @@ int LoadMenus() {
 
   hMenuPopup = CreateMenu();
   AppendMenu(hMenuPopup, MF_STRING, IDM_HELP, TEXT('&Help'));
-  AppendMenu(hMenuPopup, MF_STRING, IDM_APP_ABOUT, TEXT('&About Dartnote...'));
+  AppendMenu(hMenuPopup, MF_STRING, IDM_APP_ABOUT, TEXT('&About $APP_NAME...'));
   AppendMenu(hMenu, MF_POPUP, hMenuPopup, TEXT('&Help'));
 
   return hMenu;
@@ -70,7 +72,7 @@ int LoadMenus() {
 
 int LoadAccelerators() {
   final accel = ACCEL.allocate();
-  accel.fVirt = FNOINVERT;
+  accel.fVirt = FNOINVERT | FCONTROL;
   accel.key = 'N'.codeUnitAt(0);
   accel.cmd = IDM_FILE_NEW;
 
