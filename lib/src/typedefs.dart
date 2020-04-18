@@ -338,6 +338,13 @@ typedef getWindowTextDart = int Function(
 typedef getWindowTextLengthNative = Int32 Function(Int64 hWnd);
 typedef getWindowTextLengthDart = int Function(int hWnd);
 
+// BOOL IsDialogMessageW(
+//   HWND  hDlg,
+//   LPMSG lpMsg
+// );
+typedef isDialogMessageNative = Int32 Function(Int64 hDlg, Pointer<MSG> lpMsg);
+typedef isDialogMessageDart = int Function(int hDlg, Pointer<MSG> lpMsg);
+
 // BOOL IsWindowVisible(
 //   HWND hWnd
 // );
@@ -642,6 +649,16 @@ typedef textOutNative = Int32 Function(
     Int64 hdc, Int32 x, Int32 y, Pointer<Utf16> lpString, Int32 c);
 typedef textOutDart = int Function(
     int hdc, int x, int y, Pointer<Utf16> lpString, int c);
+
+// int TranslateAcceleratorW(
+//   HWND   hWnd,
+//   HACCEL hAccTable,
+//   LPMSG  lpMsg
+// );
+typedef translateAcceleratorNative = Int32 Function(
+    Int64 hWnd, Int64 hAccTable, Pointer<MSG> lpMsg);
+typedef translateAcceleratorDart = int Function(
+    int hWnd, int hAccTable, Pointer<MSG> lpMsg);
 
 // BOOL TranslateMessage(
 //   const MSG *lpMsg

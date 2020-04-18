@@ -64,6 +64,9 @@ final GetWindowText = user32
 final GetWindowTextLength =
     user32.lookupFunction<getWindowTextLengthNative, getWindowTextLengthDart>(
         'GetWindowTextLengthW');
+final IsDialogMessage =
+    user32.lookupFunction<isDialogMessageNative, isDialogMessageDart>(
+        'IsDialogMessageW');
 final IsWindowVisible =
     user32.lookupFunction<isWindowVisibleNative, isWindowVisibleDart>(
         'IsWindowVisible');
@@ -100,6 +103,9 @@ final SetWindowText = user32
     .lookupFunction<setWindowTextNative, setWindowTextDart>('SetWindowTextW');
 final ShowWindow =
     user32.lookupFunction<showWindowNative, showWindowDart>('ShowWindow');
+final TranslateAccelerator =
+    user32.lookupFunction<translateAcceleratorNative, translateAcceleratorDart>(
+        'TranslateAcceleratorW');
 final TranslateMessage =
     user32.lookupFunction<translateMessageNative, translateMessageDart>(
         'TranslateMessage');

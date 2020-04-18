@@ -293,6 +293,12 @@ const WM_PALETTEISCHANGING = 0x0310;
 const WM_PALETTECHANGED = 0x0311;
 const WM_HOTKEY = 0x0312;
 
+const FVIRTKEY = TRUE;
+const FNOINVERT = 0x02;
+const FSHIFT = 0x04;
+const FCONTROL = 0x08;
+const FALT = 0x10;
+
 // ShowWindow constants
 const SW_HIDE = 0;
 const SW_SHOWNORMAL = 1;
