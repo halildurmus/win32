@@ -22,6 +22,9 @@ final AppendMenu =
     user32.lookupFunction<appendMenuNative, appendMenuDart>('AppendMenuW');
 final BeginPaint =
     user32.lookupFunction<beginPaintNative, beginPaintDart>('BeginPaint');
+final CreateAcceleratorTable = user32.lookupFunction<
+    createAcceleratorTableNative,
+    createAcceleratorTableDart>('CreateAcceleratorTableW');
 final CreateMenu =
     user32.lookupFunction<createMenuNative, createMenuDart>('CreateMenu');
 final CreateWindowEx =
@@ -36,6 +39,8 @@ final DispatchMessage =
         'DispatchMessageW');
 final DrawText =
     user32.lookupFunction<drawTextNative, drawTextDart>('DrawTextW');
+final EnableMenuItem = user32
+    .lookupFunction<enableMenuItemNative, enableMenuItemDart>('EnableMenuItem');
 final EndPaint =
     user32.lookupFunction<endPaintNative, endPaintDart>('EndPaint');
 final FillRect =
@@ -47,6 +52,8 @@ final GetMessage =
     user32.lookupFunction<getMessageNative, getMessageDart>('GetMessageW');
 final GetScrollInfo = user32
     .lookupFunction<getScrollInfoNative, getScrollInfoDart>('GetScrollInfo');
+final InvalidateRect = user32
+    .lookupFunction<invalidateRectNative, invalidateRectDart>('InvalidateRect');
 final KillTimer =
     user32.lookupFunction<killTimerNative, killTimerDart>('KillTimer');
 final LoadCursor =
@@ -76,6 +83,8 @@ final SetFocus =
     user32.lookupFunction<setFocusNative, setFocusDart>('SetFocus');
 final SetTimer =
     user32.lookupFunction<setTimerNative, setTimerDart>('SetTimer');
+final SetWindowText = user32
+    .lookupFunction<setWindowTextNative, setWindowTextDart>('SetWindowTextW');
 final ShowWindow =
     user32.lookupFunction<showWindowNative, showWindowDart>('ShowWindow');
 final TranslateMessage =
@@ -131,6 +140,8 @@ final CreateSolidBrush =
         'CreateSolidBrush');
 final DeleteObject =
     gdi32.lookupFunction<deleteObjectNative, deleteObjectDart>('DeleteObject');
+final GetObject =
+    gdi32.lookupFunction<getObjectNative, getObjectDart>('GetObject');
 final GetStockObject = gdi32
     .lookupFunction<getStockObjectNative, getStockObjectDart>('GetStockObject');
 final GetTextMetrics =
