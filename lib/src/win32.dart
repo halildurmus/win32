@@ -92,7 +92,7 @@ final ScrollWindow =
 final SendInput =
     user32.lookupFunction<sendInputNative, sendInputDart>('SendInput');
 final SendMessage =
-    user32.lookupFunction<sendMessageNative, sendMessageDart>('SendMessage');
+    user32.lookupFunction<sendMessageNative, sendMessageDart>('SendMessageW');
 final SetScrollInfo = user32
     .lookupFunction<setScrollInfoNative, setScrollInfoDart>('SetScrollInfo');
 final SetFocus =
