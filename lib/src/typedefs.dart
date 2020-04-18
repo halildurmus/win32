@@ -49,9 +49,8 @@ typedef coTaskMemFreeDart = void Function(Pointer<Void> pv);
 //   int     cAccel
 // );
 typedef createAcceleratorTableNative = Int64 Function(
-    Pointer<ACCEL> paccel, Int32 cAccel);
-typedef createAcceleratorTableDart = int Function(
-    Pointer<ACCEL> paccel, int cAccel);
+    Pointer paccel, Int32 cAccel);
+typedef createAcceleratorTableDart = int Function(Pointer paccel, int cAccel);
 
 // HANDLE CreateFileW(
 //   LPCWSTR               lpFileName,

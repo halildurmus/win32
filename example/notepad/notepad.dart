@@ -49,7 +49,7 @@ void main() {
 
   RegisterClass(wc.addressOf);
 
-  final hMenu = LoadMenus();
+  final hMenu = ResourceLibrary.LoadMenus();
 
   // Create the window.
   final hWnd = CreateWindowEx(
@@ -77,7 +77,7 @@ void main() {
   ShowWindow(hWnd, SW_SHOWNORMAL);
   UpdateWindow(hWnd);
 
-  final hAccel = LoadAccelerators();
+  final hAccel = ResourceLibrary.LoadAccelerators();
 
   // Run the message loop.
 
@@ -197,6 +197,7 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
     case WM_COMMAND:
       switch (LOWORD(wParam)) {
         case IDM_FILE_NEW:
+          print('filenew');
           if (isFileDirty) return 0;
 
           SetWindowText(hwndEdit, TEXT('\0'));
@@ -229,6 +230,7 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
           return 0;
 
         case IDM_FILE_PRINT:
+          print('fileprint');
           return 0;
 
         case IDM_APP_EXIT:
