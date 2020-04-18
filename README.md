@@ -47,6 +47,8 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `msgbox.dart`      | Demonstrates a MessageBox from the console                |
 | `sendinput.dart`   | Sends keyboard and mouse input to another window          |
 | `knownfolder.dart` | Shows usage of shell APIs to retrieve user's home dir     |
+| `window.dart`      | Enumerates open windows and basic window manipulation     |
+| `guid.dart`        | Creates a globally unique identifier (GUID)               |
 | `devices.dart`     | Uses volume management APIs to list all disk devices      |
 | `tetris\main.dart` | Port of an open-source Tetris game to Dart                |
 

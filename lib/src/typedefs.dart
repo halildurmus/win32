@@ -164,6 +164,15 @@ typedef endPaintNative = Int32 Function(
     Int64 hWnd, Pointer<PAINTSTRUCT> lpPaint);
 typedef endPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
 
+// BOOL EnumWindows(
+//   WNDENUMPROC lpEnumFunc,
+//   LPARAM      lParam
+// );
+typedef enumWindowsNative = Int32 Function(
+    Pointer<NativeFunction> lpEnumFunc, Int64 lParam);
+typedef enumWindowsDart = int Function(
+    Pointer<NativeFunction> lpEnumFunc, int lParam);
+
 // int FillRect(
 //   HDC        hDC,
 //   const RECT *lprc,
@@ -197,6 +206,17 @@ typedef findNextVolumeDart = int Function(
 // );
 typedef findVolumeCloseNative = Int32 Function(Int64 hFindVolume);
 typedef findVolumeCloseDart = int Function(int hFindVolume);
+
+// HWND FindWindowExW(
+//   HWND    hWndParent,
+//   HWND    hWndChildAfter,
+//   LPCWSTR lpszClass,
+//   LPCWSTR lpszWindow
+// );
+typedef findWindowExNative = Int64 Function(Int64 hWndParent,
+    Int64 hWndChildAfter, Pointer<Utf16> lpszClass, Pointer<Utf16> lpszWindow);
+typedef findWindowExDart = int Function(int hWndParent, int hWndChildAfter,
+    Pointer<Utf16> lpszClass, Pointer<Utf16> lpszWindow);
 
 // BOOL GetClientRect(
 //   HWND   hWnd,
@@ -302,6 +322,27 @@ typedef invalidateRectNative = Int32 Function(
     Int64 hWnd, Pointer<RECT> lpRect, Int32 bErase);
 typedef invalidateRectDart = int Function(
     int hWnd, Pointer<RECT> lpRect, int bErase);
+// int GetWindowTextW(
+//   HWND   hWnd,
+//   LPWSTR lpString,
+//   int    nMaxCount
+// );
+typedef getWindowTextNative = Int32 Function(
+    Int64 hWnd, Pointer<Utf16> lpString, Int32 nMaxCount);
+typedef getWindowTextDart = int Function(
+    int hWnd, Pointer<Utf16> lpString, int nMaxCount);
+
+// int GetWindowTextLengthW(
+//   HWND hWnd
+// );
+typedef getWindowTextLengthNative = Int32 Function(Int64 hWnd);
+typedef getWindowTextLengthDart = int Function(int hWnd);
+
+// BOOL IsWindowVisible(
+//   HWND hWnd
+// );
+typedef isWindowVisibleNative = Int32 Function(Int64 hWnd);
+typedef isWindowVisibleDart = int Function(int hWnd);
 
 // BOOL KillTimer(
 //   HWND     hWnd,

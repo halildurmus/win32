@@ -10,6 +10,7 @@ import 'typedefs.dart';
 // *** Callbacks ***
 typedef LPFRHookProc = Pointer<Uint32> Function(Int64, Int32, Int64, Int64);
 typedef TimerProc = Void Function(Int64, Uint32, Pointer<Uint32>, Int32);
+typedef EnumWindowsProc = Int32 Function(Int64 hwnd, Int64 lParam);
 typedef WindowProc = Int64 Function(
     Int64 hwnd, Int32 uMsg, Int64 wParam, Int64 lParam);
 
@@ -43,8 +44,12 @@ final EnableMenuItem = user32
     .lookupFunction<enableMenuItemNative, enableMenuItemDart>('EnableMenuItem');
 final EndPaint =
     user32.lookupFunction<endPaintNative, endPaintDart>('EndPaint');
+final EnumWindows =
+    user32.lookupFunction<enumWindowsNative, enumWindowsDart>('EnumWindows');
 final FillRect =
     user32.lookupFunction<fillRectNative, fillRectDart>('FillRect');
+final FindWindowEx = user32
+    .lookupFunction<findWindowExNative, findWindowExDart>('FindWindowExW');
 final GetClientRect = user32
     .lookupFunction<getClientRectNative, getClientRectDart>('GetClientRect');
 final GetDC = user32.lookupFunction<getDCNative, getDCDart>('GetDC');
@@ -54,6 +59,14 @@ final GetScrollInfo = user32
     .lookupFunction<getScrollInfoNative, getScrollInfoDart>('GetScrollInfo');
 final InvalidateRect = user32
     .lookupFunction<invalidateRectNative, invalidateRectDart>('InvalidateRect');
+final GetWindowText = user32
+    .lookupFunction<getWindowTextNative, getWindowTextDart>('GetWindowTextW');
+final GetWindowTextLength =
+    user32.lookupFunction<getWindowTextLengthNative, getWindowTextLengthDart>(
+        'GetWindowTextLengthW');
+final IsWindowVisible =
+    user32.lookupFunction<isWindowVisibleNative, isWindowVisibleDart>(
+        'IsWindowVisible');
 final KillTimer =
     user32.lookupFunction<killTimerNative, killTimerDart>('KillTimer');
 final LoadCursor =
