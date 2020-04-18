@@ -338,6 +338,12 @@ typedef getWindowTextDart = int Function(
 typedef getWindowTextLengthNative = Int32 Function(Int64 hWnd);
 typedef getWindowTextLengthDart = int Function(int hWnd);
 
+// BOOL IsClipboardFormatAvailable(
+//   UINT format
+// );
+typedef isClipboardFormatAvailableNative = Int32 Function(Uint32 format);
+typedef isClipboardFormatAvailableDart = int Function(int format);
+
 // BOOL IsDialogMessageW(
 //   HWND  hDlg,
 //   LPMSG lpMsg

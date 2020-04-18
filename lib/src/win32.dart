@@ -64,6 +64,9 @@ final GetWindowText = user32
 final GetWindowTextLength =
     user32.lookupFunction<getWindowTextLengthNative, getWindowTextLengthDart>(
         'GetWindowTextLengthW');
+final IsClipboardFormatAvailable = user32.lookupFunction<
+    isClipboardFormatAvailableNative,
+    isClipboardFormatAvailableDart>('IsClipboardFormatAvailable');
 final IsDialogMessage =
     user32.lookupFunction<isDialogMessageNative, isDialogMessageDart>(
         'IsDialogMessageW');
