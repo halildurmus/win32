@@ -53,6 +53,32 @@ typedef createAcceleratorTableNative = Int64 Function(
 typedef createAcceleratorTableDart = int Function(
     Pointer<ACCEL> paccel, int cAccel);
 
+// HANDLE CreateFileW(
+//   LPCWSTR               lpFileName,
+//   DWORD                 dwDesiredAccess,
+//   DWORD                 dwShareMode,
+//   LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+//   DWORD                 dwCreationDisposition,
+//   DWORD                 dwFlagsAndAttributes,
+//   HANDLE                hTemplateFile
+// );
+typedef createFileNative = Int64 Function(
+    Pointer<Utf16> lpFileName,
+    Int32 dwDesiredAccess,
+    Int32 dwShareMode,
+    Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
+    Int32 dwCreationDisposition,
+    Int32 dwFlagsAndAttributes,
+    Int64 hTemplateFile);
+typedef createFileDart = int Function(
+    Pointer<Utf16> lpFileName,
+    int dwDesiredAccess,
+    int dwShareMode,
+    Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
+    int dwCreationDisposition,
+    int dwFlagsAndAttributes,
+    int hTemplateFile);
+
 // HMENU CreateMenu();
 typedef createMenuNative = Int64 Function();
 typedef createMenuDart = int Function();

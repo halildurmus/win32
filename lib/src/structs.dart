@@ -59,6 +59,21 @@ class WNDCLASS extends Struct {
     ..lpszClassName = nullptr;
 }
 
+// typedef struct _SECURITY_ATTRIBUTES {
+//   DWORD  nLength;
+//   LPVOID lpSecurityDescriptor;
+//   BOOL   bInheritHandle;
+// } SECURITY_ATTRIBUTES, *PSECURITY_ATTRIBUTES, *LPSECURITY_ATTRIBUTES;
+class SECURITY_ATTRIBUTES extends Struct {
+  @Int32()
+  int nLength;
+
+  Pointer<Void> lpSecurityDescriptor;
+
+  @Int32()
+  int bInheritHandle;
+}
+
 // typedef struct tagACCEL {
 //     WORD   fVirt;               /* Also called the flags field */
 //     WORD   key;

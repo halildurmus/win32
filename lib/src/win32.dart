@@ -116,6 +116,8 @@ final UpdateWindow =
     user32.lookupFunction<updateWindowNative, updateWindowDart>('UpdateWindow');
 
 final kernel32 = DynamicLibrary.open('kernel32.dll');
+final CreateFile =
+    kernel32.lookupFunction<createFileNative, createFileDart>('CreateFileW');
 final FindFirstVolume =
     kernel32.lookupFunction<findFirstVolumeNative, findFirstVolumeDart>(
         'FindFirstVolumeW');
