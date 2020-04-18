@@ -12,8 +12,8 @@ class NotepadFile {
     ofn.lStructSize = sizeOf<OPENFILENAME>();
     ofn.hwndOwner = hwnd;
     ofn.hInstance = NULL;
-    ofn.lpstrFilter =
-        TEXT('Text Files (*.TXT)\0*.txt\0All Files (*.*)\0*.*\0\0');
+    ofn.lpstrFilter = TEXT(
+        'Text Files (*.txt)\u{0}*.txt\u{0}All Files (*.*)\u{0}*.*\u{0}\u{0}');
     ofn.lpstrCustomFilter = nullptr;
     ofn.nMaxCustFilter = 0;
     ofn.nFilterIndex = 0;
