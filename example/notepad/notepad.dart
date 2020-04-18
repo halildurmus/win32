@@ -19,7 +19,7 @@ final file = NotepadFile();
 bool isFileDirty = false;
 int hwndEdit;
 int iOffset;
-String szFileName, szTitleName;
+String szFileName = '', szTitleName = '';
 int messageFindReplace;
 int iSelBeg, iSelEnd, iEnable;
 Pointer<FINDREPLACE> pfr;

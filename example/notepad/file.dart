@@ -6,6 +6,7 @@ class NotepadFile {
   OPENFILENAME ofn;
 
   void PopFileInitialize(int hwnd) {
+    ofn = OPENFILENAME.allocate();
     ofn.lStructSize = sizeOf<OPENFILENAME>();
     ofn.hwndOwner = hwnd;
     ofn.hInstance = NULL;
