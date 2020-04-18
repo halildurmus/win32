@@ -59,6 +59,25 @@ class WNDCLASS extends Struct {
     ..lpszClassName = nullptr;
 }
 
+// typedef struct tagACCEL {
+//     WORD   fVirt;               /* Also called the flags field */
+//     WORD   key;
+//     DWORD  cmd;
+// } ACCEL, *LPACCEL;
+class ACCEL extends Struct {
+  @Int16()
+  int fVirt;
+  @Int16()
+  int key;
+  @Int32()
+  int cmd;
+
+  factory ACCEL.allocate() => allocate<ACCEL>().ref
+    ..fVirt = 0
+    ..key = 0
+    ..cmd = 0;
+}
+
 // In the following struct, COLORREF is a DWORD that contains RGB values
 // in the form 0x00bbggrr
 
