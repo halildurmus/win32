@@ -1,6 +1,7 @@
 import 'dart:ffi';
 import 'dart:io';
 
+import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 class NotepadFile {
@@ -31,28 +32,30 @@ class NotepadFile {
     ofn.lpTemplateName = nullptr;
   }
 
-  int PopFileOpenDlg(int hwnd, String fileName, String titleName) {
+  int PopFileOpenDlg(
+      int hwnd, Pointer<Utf16> fileName, Pointer<Utf16> titleName) {
     ofn.hwndOwner = hwnd;
-    ofn.lpstrFile = TEXT(fileName);
-    ofn.lpstrFileTitle = TEXT(titleName);
+    ofn.lpstrFile = fileName;
+    ofn.lpstrFileTitle = titleName;
     ofn.Flags = OFN_HIDEREADONLY | OFN_CREATEPROMPT;
 
     return GetOpenFileName(ofn.addressOf);
   }
 
-  int PopFileSaveDlg(int hwnd, String fileName, String titleName) {
+  int PopFileSaveDlg(
+      int hwnd, Pointer<Utf16> fileName, Pointer<Utf16> titleName) {
     ofn.hwndOwner = hwnd;
-    ofn.lpstrFile = TEXT(fileName);
-    ofn.lpstrFileTitle = TEXT(titleName);
+    ofn.lpstrFile = fileName;
+    ofn.lpstrFileTitle = titleName;
     ofn.Flags = OFN_OVERWRITEPROMPT;
 
     return GetSaveFileName(ofn.addressOf);
   }
 
-  bool PopFileRead(int hwndEdit, String fileName) {
+  bool PopFileRead(int hwndEdit, Pointer<Utf16> fileName) {
     // Fairly naive implementation that doesn't account for
     // string encoding. That's fine -- this is a toy app!
-    final file = File(fileName);
+    final file = File(fileName.unpackString(MAX_PATH));
     final contents = file.readAsStringSync();
 
     SetWindowText(hwndEdit, TEXT(contents));

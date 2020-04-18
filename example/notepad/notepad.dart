@@ -21,7 +21,9 @@ final file = NotepadFile();
 bool isFileDirty = false;
 int hwndEdit;
 int iOffset;
-String szFileName = '', szTitleName = '';
+Pointer<Utf16> szFileName = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
+Pointer<Utf16> szTitleName = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
+
 int messageFindReplace;
 
 final iSelBeg = allocate<Uint64>();
@@ -32,6 +34,9 @@ Pointer<FINDREPLACE> pfr;
 int hDlgModeless = NULL;
 
 void main() {
+  szFileName.cast<Uint16>().elementAt(0).value = 0;
+  szTitleName.cast<Uint16>().elementAt(0).value = 0;
+
   // Register the window class.
 
   final wc = WNDCLASS.allocate();
@@ -87,7 +92,7 @@ void main() {
 }
 
 void DoCaption(int hwnd, String titleName) {
-  final caption = APP_NAME + ' - ' + titleName ?? UNTITLED;
+  final caption = APP_NAME + ' - ' + (titleName.isEmpty ? UNTITLED : titleName);
   SetWindowText(hwnd, TEXT(caption));
 }
 
@@ -139,7 +144,7 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
       file.PopFileInitialize(hwnd);
 
-      DoCaption(hwnd, szTitleName);
+      DoCaption(hwnd, szTitleName.unpackString(MAX_PATH));
       return 0;
 
     case WM_SETFOCUS:
@@ -198,16 +203,23 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
           return 0;
 
         case IDM_FILE_OPEN:
-          if (isFileDirty && AskAboutSave(hwnd, szTitleName) == IDCANCEL) {
+          if (isFileDirty &&
+              AskAboutSave(hwnd, szTitleName.unpackString(MAX_PATH)) ==
+                  IDCANCEL) {
             return 0;
           }
+
           if (file.PopFileOpenDlg(hwnd, szFileName, szTitleName) == TRUE) {
             if (!file.PopFileRead(hwndEdit, szFileName)) {
+              print('OKmessage');
               OkMessage(hwnd, 'Could not read file $szTitleName!');
-              szFileName = '\0';
-              szTitleName = '\0';
+              szFileName.cast<Uint16>().elementAt(0).value = 0;
+              szTitleName.cast<Uint16>().elementAt(0).value = 0;
             }
           }
+
+          DoCaption(hwnd, szTitleName.unpackString(MAX_PATH));
+          isFileDirty = false;
           return 0;
 
         case IDM_FILE_SAVE:
