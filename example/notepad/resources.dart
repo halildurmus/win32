@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 const IDC_FILENAME = 1000;
@@ -65,4 +66,13 @@ int LoadMenus() {
   AppendMenu(hMenu, MF_POPUP, hMenuPopup, TEXT('&Help'));
 
   return hMenu;
+}
+
+int LoadAccelerators(int hInstance, Pointer<Utf16> APP_NAME) {
+  final accel = ACCEL.allocate();
+  accel.fVirt = FNOINVERT;
+  accel.key = 'N'.codeUnitAt(0);
+  accel.cmd = IDM_FILE_NEW;
+
+  return CreateAcceleratorTable(accel.addressOf, 1);
 }

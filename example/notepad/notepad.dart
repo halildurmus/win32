@@ -5,11 +5,13 @@
 import 'dart:ffi';
 import 'dart:io';
 
+import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'file.dart';
 import 'resources.dart';
 
+final APP_NAME = TEXT('Dartnote'); // DartPad was taken :)
 final hInstance = GetModuleHandle(nullptr);
 
 final file = NotepadFile();
@@ -21,6 +23,61 @@ String szFileName, szTitleName;
 int messageFindReplace;
 int iSelBeg, iSelEnd, iEnable;
 Pointer<FINDREPLACE> pfr;
+
+void main() {
+  // Register the window class.
+
+  final wc = WNDCLASS.allocate();
+  wc.style = CS_HREDRAW | CS_VREDRAW;
+  wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(MainWindowProc, 0);
+  wc.hInstance = hInstance;
+  wc.lpszClassName = APP_NAME;
+  wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+  wc.hbrBackground = GetStockObject(WHITE_BRUSH);
+
+  RegisterClass(wc.addressOf);
+
+  final hMenu = LoadMenus();
+
+  // Create the window.
+  final hWnd = CreateWindowEx(
+      0, // Optional window styles.
+      APP_NAME, // Window class
+      APP_NAME,
+      WS_OVERLAPPEDWINDOW, // Window style
+
+      // Size and position
+      CW_USEDEFAULT,
+      CW_USEDEFAULT,
+      CW_USEDEFAULT,
+      CW_USEDEFAULT,
+      NULL, // Parent window
+      hMenu, // Menu
+      hInstance, // Instance handle
+      nullptr // Additional application data
+      );
+
+  if (hWnd == 0) {
+    stderr.writeln('CreateWindowEx failed with error: ${GetLastError()}');
+    exit(-1);
+  }
+
+  ShowWindow(hWnd, SW_SHOWNORMAL);
+  UpdateWindow(hWnd);
+
+  final hAccel = LoadAccelerators(hInstance, APP_NAME);
+
+  // Run the message loop.
+
+  final msg = MSG.allocate();
+  while (GetMessage(msg.addressOf, NULL, 0, 0) != 0) {
+    if (TranslateAccelerator(hWnd, hAccel, msg.addressOf) == FALSE) {
+      TranslateMessage(msg.addressOf);
+      DispatchMessage(msg.addressOf);
+    }
+  }
+  free(msg.addressOf);
+}
 
 int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
   switch (uMsg) {
@@ -131,56 +188,4 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       return 0;
   }
   return DefWindowProc(hwnd, uMsg, wParam, lParam);
-}
-
-void main() {
-  // Register the window class.
-
-  final APP_NAME = TEXT('Dartnote'); // DartPad was taken :)
-
-  final wc = WNDCLASS.allocate();
-  wc.style = CS_HREDRAW | CS_VREDRAW;
-  wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(MainWindowProc, 0);
-  wc.hInstance = hInstance;
-  print('hInstance: $hInstance');
-  wc.lpszClassName = APP_NAME;
-  wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-  wc.hbrBackground = GetStockObject(WHITE_BRUSH);
-  RegisterClass(wc.addressOf);
-
-  final hMenu = LoadMenus();
-
-  // Create the window.
-  final hWnd = CreateWindowEx(
-      0, // Optional window styles.
-      APP_NAME, // Window class
-      APP_NAME,
-      WS_OVERLAPPEDWINDOW, // Window style
-
-      // Size and position
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      NULL, // Parent window
-      hMenu, // Menu
-      hInstance, // Instance handle
-      nullptr // Additional application data
-      );
-
-  if (hWnd == 0) {
-    stderr.writeln('CreateWindowEx failed with error: ${GetLastError()}');
-    exit(-1);
-  }
-
-  ShowWindow(hWnd, SW_SHOWNORMAL);
-  UpdateWindow(hWnd);
-
-  // Run the message loop.
-
-  final msg = MSG.allocate();
-  while (GetMessage(msg.addressOf, NULL, 0, 0) != 0) {
-    TranslateMessage(msg.addressOf);
-    DispatchMessage(msg.addressOf);
-  }
 }
