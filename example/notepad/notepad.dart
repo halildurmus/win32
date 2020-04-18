@@ -11,7 +11,9 @@ import 'package:win32/win32.dart';
 import 'file.dart';
 import 'resources.dart';
 
-final APP_NAME = TEXT('Dartnote'); // DartPad was taken :)
+final APP_NAME = 'DartNote'; // DartPad was taken :)
+final UNTITLED = '(untitled)';
+
 final hInstance = GetModuleHandle(nullptr);
 
 final file = NotepadFile();
@@ -21,8 +23,13 @@ int hwndEdit;
 int iOffset;
 String szFileName = '', szTitleName = '';
 int messageFindReplace;
-int iSelBeg, iSelEnd, iEnable;
+
+final iSelBeg = allocate<Uint64>();
+final iSelEnd = allocate<Uint64>();
+int iEnable;
+
 Pointer<FINDREPLACE> pfr;
+int hDlgModeless = NULL;
 
 void main() {
   // Register the window class.
@@ -31,7 +38,7 @@ void main() {
   wc.style = CS_HREDRAW | CS_VREDRAW;
   wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(MainWindowProc, 0);
   wc.hInstance = hInstance;
-  wc.lpszClassName = APP_NAME;
+  wc.lpszClassName = TEXT(APP_NAME);
   wc.hCursor = LoadCursor(NULL, IDC_ARROW);
   wc.hbrBackground = GetStockObject(WHITE_BRUSH);
 
@@ -42,8 +49,8 @@ void main() {
   // Create the window.
   final hWnd = CreateWindowEx(
       0, // Optional window styles.
-      APP_NAME, // Window class
-      APP_NAME,
+      TEXT(APP_NAME), // Window class
+      TEXT(APP_NAME),
       WS_OVERLAPPEDWINDOW, // Window style
 
       // Size and position
@@ -65,7 +72,7 @@ void main() {
   ShowWindow(hWnd, SW_SHOWNORMAL);
   UpdateWindow(hWnd);
 
-  final hAccel = LoadAccelerators(hInstance, APP_NAME);
+  final hAccel = LoadAccelerators();
 
   // Run the message loop.
 
@@ -77,6 +84,29 @@ void main() {
     }
   }
   free(msg.addressOf);
+}
+
+void DoCaption(int hwnd, String titleName) {
+  final caption = APP_NAME + ' - ' + titleName ?? UNTITLED;
+  SetWindowText(hwnd, TEXT(caption));
+}
+
+void OkMessage(int hwnd, String szMessage) {
+  MessageBox(hwnd, TEXT(szMessage), TEXT(APP_NAME), MB_OK | MB_ICONEXCLAMATION);
+}
+
+int AskAboutSave(int hwnd, String szTitleName) {
+  final buffer = TEXT('Save current changes in ${szTitleName ?? UNTITLED}?');
+  final res = MessageBox(
+      hwnd, buffer, TEXT(APP_NAME), MB_YESNOCANCEL | MB_ICONQUESTION);
+
+  if (res == IDYES) {
+    if (SendMessage(hwnd, WM_COMMAND, IDM_FILE_SAVE, 0) == FALSE) {
+      return IDCANCEL;
+    }
+  }
+
+  return res;
 }
 
 int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
@@ -108,6 +138,8 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       SendMessage(hwndEdit, EM_LIMITTEXT, 32000, 0);
 
       file.PopFileInitialize(hwnd);
+
+      DoCaption(hwnd, szTitleName);
       return 0;
 
     case WM_SETFOCUS:
@@ -118,9 +150,42 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       MoveWindow(hwndEdit, 0, 0, LOWORD(lParam), HIWORD(lParam), TRUE);
       return 0;
 
-    case WM_CLOSE:
-      if (!isFileDirty) {
-        DestroyWindow(hwnd);
+    case WM_INITMENUPOPUP:
+      switch (lParam) {
+        case 1: // Edit menu
+
+          // Enable Undo if edit control can do it
+          EnableMenuItem(
+              wParam,
+              IDM_EDIT_UNDO,
+              SendMessage(hwndEdit, EM_CANUNDO, 0, 0) != FALSE
+                  ? MF_ENABLED
+                  : MF_GRAYED);
+
+          // Enable Paste if text is in the clipboard
+          EnableMenuItem(
+              wParam,
+              IDM_EDIT_PASTE,
+              IsClipboardFormatAvailable(CF_TEXT) != FALSE
+                  ? MF_ENABLED
+                  : MF_GRAYED);
+
+          SendMessage(hwndEdit, EM_GETSEL, iSelBeg.address, iSelEnd.address);
+
+          iEnable = iSelBeg != iSelEnd ? MF_ENABLED : MF_GRAYED;
+
+          EnableMenuItem(wParam, IDM_EDIT_CUT, iEnable);
+          EnableMenuItem(wParam, IDM_EDIT_COPY, iEnable);
+          EnableMenuItem(wParam, IDM_EDIT_CLEAR, iEnable);
+          break;
+
+        case 2: // Search menu
+          iEnable = hDlgModeless == NULL ? MF_ENABLED : MF_GRAYED;
+
+          EnableMenuItem(wParam, IDM_SEARCH_FIND, iEnable);
+          EnableMenuItem(wParam, IDM_SEARCH_NEXT, iEnable);
+          EnableMenuItem(wParam, IDM_SEARCH_REPLACE, iEnable);
+          break;
       }
       return 0;
 
@@ -133,6 +198,9 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
           return 0;
 
         case IDM_FILE_OPEN:
+          if (isFileDirty && AskAboutSave(hwnd, szTitleName) == IDCANCEL) {
+            return 0;
+          }
           if (file.PopFileOpenDlg(hwnd, szFileName, szTitleName) == TRUE) {
             return 0;
           }
@@ -174,6 +242,16 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
         case IDM_EDIT_SELECT_ALL:
           SendMessage(hwndEdit, EM_SETSEL, 0, -1);
           return 0;
+
+        case IDM_HELP:
+          OkMessage(hwnd, 'Help not yet implemented!');
+          return 0;
+      }
+      return 0;
+
+    case WM_CLOSE:
+      if (!isFileDirty) {
+        DestroyWindow(hwnd);
       }
       return 0;
 

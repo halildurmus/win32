@@ -68,7 +68,7 @@ int LoadMenus() {
   return hMenu;
 }
 
-int LoadAccelerators(int hInstance, Pointer<Utf16> APP_NAME) {
+int LoadAccelerators() {
   final accel = ACCEL.allocate();
   accel.fVirt = FNOINVERT;
   accel.key = 'N'.codeUnitAt(0);
