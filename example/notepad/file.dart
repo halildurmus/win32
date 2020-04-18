@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:win32/win32.dart';
 
@@ -46,5 +47,16 @@ class NotepadFile {
     ofn.Flags = OFN_OVERWRITEPROMPT;
 
     return GetSaveFileName(ofn.addressOf);
+  }
+
+  bool PopFileRead(int hwndEdit, String fileName) {
+    // Fairly naive implementation that doesn't account for
+    // string encoding. That's fine -- this is a toy app!
+    final file = File(fileName);
+    final contents = file.readAsStringSync();
+
+    SetWindowText(hwndEdit, TEXT(contents));
+
+    return true;
   }
 }

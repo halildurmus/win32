@@ -202,7 +202,11 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
             return 0;
           }
           if (file.PopFileOpenDlg(hwnd, szFileName, szTitleName) == TRUE) {
-            return 0;
+            if (!file.PopFileRead(hwndEdit, szFileName)) {
+              OkMessage(hwnd, 'Could not read file $szTitleName!');
+              szFileName = '\0';
+              szTitleName = '\0';
+            }
           }
           return 0;
 
