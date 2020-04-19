@@ -10,6 +10,7 @@ environment:
   sdk: '>=2.7.0 <3.0.0'
 
 dependencies:
+  semaphore: 0.1.4
   ffi: ^0.1.3
 
 dev_dependencies:

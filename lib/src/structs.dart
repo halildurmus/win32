@@ -9,10 +9,12 @@
 import 'dart:ffi';
 import 'dart:math' show min;
 import 'dart:typed_data';
+
 import 'package:ffi/ffi.dart';
 
 import 'constants.dart';
 import 'extensions/unpack_utf16.dart';
+import 'macros.dart';
 
 // typedef struct tagWNDCLASSW {
 //   UINT      style;
@@ -349,22 +351,21 @@ class SYSTEM_BATTERY_STATE extends Struct {
   @Uint32()
   int DefaultAlert2;
 
-  factory SYSTEM_BATTERY_STATE.allocate() =>
-      allocate<SYSTEM_BATTERY_STATE>().ref
-        ..AcOnLine = 0
-        ..BatteryPresent = 0
-        ..Charging = 0
-        ..Discharging = 0
-        ..Spare1a = 0
-        ..Spare1b = 0
-        ..Spare1c = 0
-        ..Tag = 0
-        ..MaxCapacity = 0
-        ..RemainingCapacity = 0
-        ..Rate = 0
-        ..EstimatedTime = 0
-        ..DefaultAlert1 = 0
-        ..DefaultAlert2 = 0;
+  factory SYSTEM_BATTERY_STATE.allocate() => allocate<SYSTEM_BATTERY_STATE>().ref
+    ..AcOnLine = 0
+    ..BatteryPresent = 0
+    ..Charging = 0
+    ..Discharging = 0
+    ..Spare1a = 0
+    ..Spare1b = 0
+    ..Spare1c = 0
+    ..Tag = 0
+    ..MaxCapacity = 0
+    ..RemainingCapacity = 0
+    ..Rate = 0
+    ..EstimatedTime = 0
+    ..DefaultAlert1 = 0
+    ..DefaultAlert2 = 0;
 }
 
 // typedef struct _STARTUPINFOEXW {
@@ -511,12 +512,11 @@ class SOLE_AUTHENTICATION_SERVICE extends Struct {
   @Int32()
   int hr;
 
-  factory SOLE_AUTHENTICATION_SERVICE.allocate() =>
-      allocate<SOLE_AUTHENTICATION_SERVICE>().ref
-        ..dwAuthnSvc = 0
-        ..dwAuthzSvc = 0
-        ..pPrincipalName = nullptr
-        ..hr = 0;
+  factory SOLE_AUTHENTICATION_SERVICE.allocate() => allocate<SOLE_AUTHENTICATION_SERVICE>().ref
+    ..dwAuthnSvc = 0
+    ..dwAuthzSvc = 0
+    ..pPrincipalName = nullptr
+    ..hr = 0;
 }
 
 // The VARIANT type is used in Win32 to represent a dynamic type. It is
@@ -1002,8 +1002,7 @@ class LOGFONT extends Struct {
   @Int32()
   int lfFaceName16;
 
-  Pointer<Utf16> get lfFaceName =>
-      addressOf.cast<Uint8>().elementAt(28).cast<Utf16>();
+  Pointer<Utf16> get lfFaceName => addressOf.cast<Uint8>().elementAt(28).cast<Utf16>();
 
   factory LOGFONT.allocate() => allocate<LOGFONT>().ref
     ..lfHeight = 0
@@ -1789,12 +1788,11 @@ class CREDENTIAL_ATTRIBUTE extends Struct {
 
   Pointer<Uint8> Value;
 
-  factory CREDENTIAL_ATTRIBUTE.allocate() =>
-      allocate<CREDENTIAL_ATTRIBUTE>().ref
-        ..Keyword = nullptr
-        ..Flags = 0
-        ..ValueSize = 0
-        ..Value = nullptr;
+  factory CREDENTIAL_ATTRIBUTE.allocate() => allocate<CREDENTIAL_ATTRIBUTE>().ref
+    ..Keyword = nullptr
+    ..Flags = 0
+    ..ValueSize = 0
+    ..Value = nullptr;
 }
 
 // typedef struct _CREDENTIALW {
@@ -2015,27 +2013,26 @@ class KNOWNFOLDER_DEFINITION extends Struct {
   @Uint64()
   int ftidType_guid4;
 
-  factory KNOWNFOLDER_DEFINITION.allocate() =>
-      allocate<KNOWNFOLDER_DEFINITION>().ref
-        ..category = 0
-        ..pszName = nullptr
-        ..pszDescription = nullptr
-        ..fidParent_guid1 = 0
-        ..fidParent_guid2 = 0
-        ..fidParent_guid3 = 0
-        ..fidParent_guid4 = 0
-        ..pszRelativePath = nullptr
-        ..pszParsingName = nullptr
-        ..pszTooltip = nullptr
-        ..pszLocalizedName = nullptr
-        ..pszIcon = nullptr
-        ..pszSecurity = nullptr
-        ..dwAttributes = 0
-        ..kfdFlags = 0
-        ..ftidType_guid1 = 0
-        ..ftidType_guid2 = 0
-        ..ftidType_guid3 = 0
-        ..ftidType_guid4 = 0;
+  factory KNOWNFOLDER_DEFINITION.allocate() => allocate<KNOWNFOLDER_DEFINITION>().ref
+    ..category = 0
+    ..pszName = nullptr
+    ..pszDescription = nullptr
+    ..fidParent_guid1 = 0
+    ..fidParent_guid2 = 0
+    ..fidParent_guid3 = 0
+    ..fidParent_guid4 = 0
+    ..pszRelativePath = nullptr
+    ..pszParsingName = nullptr
+    ..pszTooltip = nullptr
+    ..pszLocalizedName = nullptr
+    ..pszIcon = nullptr
+    ..pszSecurity = nullptr
+    ..dwAttributes = 0
+    ..kfdFlags = 0
+    ..ftidType_guid1 = 0
+    ..ftidType_guid2 = 0
+    ..ftidType_guid3 = 0
+    ..ftidType_guid4 = 0;
 }
 
 // typedef struct _SHITEMID
@@ -2146,19 +2143,18 @@ class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
   @Int16()
   int dwMaximumWindowSizeY;
 
-  factory CONSOLE_SCREEN_BUFFER_INFO.allocate() =>
-      allocate<CONSOLE_SCREEN_BUFFER_INFO>().ref
-        ..dwSizeX = 0
-        ..dwSizeY = 0
-        ..dwCursorPositionX = 0
-        ..dwCursorPositionY = 0
-        ..wAttributes = 0
-        ..srWindowLeft = 0
-        ..srWindowTop = 0
-        ..srWindowRight = 0
-        ..srWindowBottom = 0
-        ..dwMaximumWindowSizeX = 0
-        ..dwMaximumWindowSizeY = 0;
+  factory CONSOLE_SCREEN_BUFFER_INFO.allocate() => allocate<CONSOLE_SCREEN_BUFFER_INFO>().ref
+    ..dwSizeX = 0
+    ..dwSizeY = 0
+    ..dwCursorPositionX = 0
+    ..dwCursorPositionY = 0
+    ..wAttributes = 0
+    ..srWindowLeft = 0
+    ..srWindowTop = 0
+    ..srWindowRight = 0
+    ..srWindowBottom = 0
+    ..dwMaximumWindowSizeX = 0
+    ..dwMaximumWindowSizeY = 0;
 }
 
 // typedef struct _CONSOLE_SELECTION_INFO {
@@ -2188,15 +2184,14 @@ class CONSOLE_SELECTION_INFO extends Struct {
   @Int16()
   int srSelectionBottom;
 
-  factory CONSOLE_SELECTION_INFO.allocate() =>
-      allocate<CONSOLE_SELECTION_INFO>().ref
-        ..dwFlags = 0
-        ..dwSelectionAnchorX = 0
-        ..dwSelectionAnchorY = 0
-        ..srSelectionLeft = 0
-        ..srSelectionTop = 0
-        ..srSelectionRight = 0
-        ..srSelectionBottom = 0;
+  factory CONSOLE_SELECTION_INFO.allocate() => allocate<CONSOLE_SELECTION_INFO>().ref
+    ..dwFlags = 0
+    ..dwSelectionAnchorX = 0
+    ..dwSelectionAnchorY = 0
+    ..srSelectionLeft = 0
+    ..srSelectionTop = 0
+    ..srSelectionRight = 0
+    ..srSelectionBottom = 0;
 }
 
 // typedef struct _COORD {
@@ -2281,10 +2276,9 @@ class INITCOMMONCONTROLSEX extends Struct {
   @Uint32()
   int dwICC;
 
-  factory INITCOMMONCONTROLSEX.allocate() =>
-      allocate<INITCOMMONCONTROLSEX>().ref
-        ..dwSize = sizeOf<INITCOMMONCONTROLSEX>()
-        ..dwICC = 0;
+  factory INITCOMMONCONTROLSEX.allocate() => allocate<INITCOMMONCONTROLSEX>().ref
+    ..dwSize = sizeOf<INITCOMMONCONTROLSEX>()
+    ..dwICC = 0;
 }
 
 // typedef struct _TASKDIALOGCONFIG {
@@ -2483,13 +2477,10 @@ class OSVERSIONINFO extends Struct {
   @Uint32()
   int dwPlatformId;
 
-  String get szCSDVersion =>
-      addressOf.cast<Uint8>().elementAt(20).cast<Utf16>().unpackString(128);
+  String get szCSDVersion => addressOf.cast<Uint8>().elementAt(20).cast<Utf16>().unpackString(128);
 
   factory OSVERSIONINFO.allocate() =>
-      allocate<Uint8>(count: _OSVERSIONINFO_STRUCT_SIZE)
-          .cast<OSVERSIONINFO>()
-          .ref
+      allocate<Uint8>(count: _OSVERSIONINFO_STRUCT_SIZE).cast<OSVERSIONINFO>().ref
         ..dwOSVersionInfoSize = _OSVERSIONINFO_STRUCT_SIZE
         ..dwMajorVersion = 0
         ..dwMinorVersion = 0
@@ -2539,11 +2530,8 @@ class BLUETOOTH_DEVICE_INFO extends Struct {
   @Int64()
   int stLastUsedTime;
 
-  String get szName => addressOf
-      .cast<Uint8>()
-      .elementAt(60)
-      .cast<Utf16>()
-      .unpackString(BLUETOOTH_MAX_NAME_SIZE);
+  String get szName =>
+      addressOf.cast<Uint8>().elementAt(60).cast<Utf16>().unpackString(BLUETOOTH_MAX_NAME_SIZE);
 
   factory BLUETOOTH_DEVICE_INFO.allocate() =>
       allocate<Uint8>(count: 560).cast<BLUETOOTH_DEVICE_INFO>().ref
@@ -2615,8 +2603,7 @@ class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
   int dwSize;
 
   factory BLUETOOTH_FIND_RADIO_PARAMS.allocate() =>
-      allocate<BLUETOOTH_FIND_RADIO_PARAMS>().ref
-        ..dwSize = sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>();
+      allocate<BLUETOOTH_FIND_RADIO_PARAMS>().ref..dwSize = sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>();
 }
 
 // typedef struct _BLUETOOTH_PIN_INFO {
@@ -2628,16 +2615,13 @@ class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
 ///
 /// {@category Struct}
 class BLUETOOTH_PIN_INFO extends Struct {
-  int get pinLength =>
-      addressOf.cast<Uint8>().elementAt(BTH_MAX_PIN_SIZE).value;
+  int get pinLength => addressOf.cast<Uint8>().elementAt(BTH_MAX_PIN_SIZE).value;
 
   set pinLength(int length) {
-    addressOf.cast<Uint8>().elementAt(BTH_MAX_PIN_SIZE).value =
-        min(length, BTH_MAX_PIN_SIZE);
+    addressOf.cast<Uint8>().elementAt(BTH_MAX_PIN_SIZE).value = min(length, BTH_MAX_PIN_SIZE);
   }
 
-  String get pin =>
-      String.fromCharCodes(addressOf.cast<Uint8>().asTypedList(pinLength));
+  String get pin => String.fromCharCodes(addressOf.cast<Uint8>().asTypedList(pinLength));
 
   set pin(String pinString) {
     final pinData = Uint8List.fromList(pinString.codeUnits);
@@ -2701,3 +2685,195 @@ class STATSTG extends Struct {}
 
 /// {@category Struct}
 class NLM_SIMULATED_PROFILE_INFO extends Struct {}
+
+// typedef struct tagWAVEOUTCAPSW {
+//   WORD    wMid;                  /* manufacturer ID */
+//   WORD    wPid;                  /* product ID */
+//   MMVERSION vDriverVersion;      /* version of the driver */
+//   WCHAR   szPname[MAXPNAMELEN];  /* product name (NULL terminated string) */
+//   DWORD   dwFormats;             /* formats supported */
+//   WORD    wChannels;             /* number of sources supported */
+//   WORD    wReserved1;            /* packing */
+//   DWORD   dwSupport;             /* functionality supported by driver */
+// } WAVEOUTCAPSW, *PWAVEOUTCAPSW, *NPWAVEOUTCAPSW, *LPWAVEOUTCAPSW;
+// #define   MAXPNAMELEN     32     /* max product name length (including NULL) */
+class WAVEOUTCAPS extends Struct {
+  @Uint16()
+  int wMid;
+
+  @Uint16()
+  int wPid;
+
+  @Uint32()
+  int vDriverVersion;
+
+  // Need to use @Uint64() here because of the lack of fixed-size arrays
+  @Uint64()
+  int szPname1;
+  @Uint64()
+  int szPname2;
+  @Uint64()
+  int szPname3;
+  @Uint64()
+  int szPname4;
+  @Uint64()
+  int szPname5;
+  @Uint64()
+  int szPname6;
+  @Uint64()
+  int szPname7;
+  @Uint64()
+  int szPname8;
+
+  @Uint32()
+  int dwFormats;
+
+  @Uint16()
+  int wChannels;
+
+  @Uint16()
+  int wReserved1;
+
+  @Int32()
+  int dwSupport;
+
+  String get driverVersion => '${HIBYTE(vDriverVersion)}.${LOBYTE(vDriverVersion)}';
+
+  String get name =>
+      addressOf.cast<Uint8>().elementAt(8).cast<Utf16>().unpackString(32);
+
+  factory WAVEOUTCAPS.allocate() => allocate<WAVEOUTCAPS>().ref
+    ..wMid = 0
+    ..wPid = 0
+    ..vDriverVersion = 0
+    ..szPname1 = 0
+    ..szPname2 = 0
+    ..szPname3 = 0
+    ..szPname4 = 0
+    ..szPname5 = 0
+    ..szPname6 = 0
+    ..szPname7 = 0
+    ..szPname8 = 0
+    ..dwFormats = 0
+    ..wChannels = 0
+    ..wReserved1 = 0
+    ..dwSupport = 0;
+}
+
+// typedef struct tWAVEFORMATEX
+// {
+//   WORD        wFormatTag;         /* format type */
+//   WORD        nChannels;          /* number of channels (i.e. mono, stereo...) */
+//   DWORD       nSamplesPerSec;     /* sample rate */
+//   DWORD       nAvgBytesPerSec;    /* for buffer estimation */
+//   WORD        nBlockAlign;        /* block size of data */
+//   WORD        wBitsPerSample;     /* number of bits per sample of mono data */
+//   WORD        cbSize;             /* the count in bytes of the size of */
+//                                   /* extra information (after cbSize) */
+// } WAVEFORMATEX, *PWAVEFORMATEX, NEAR *NPWAVEFORMATEX, FAR *LPWAVEFORMATEX;
+/// extended waveform format structure used for all non-PCM formats. this
+/// structure is common to all non-PCM formats.
+class WAVEFORMATEX extends Struct {
+  @Uint16()
+  int wFormatTag;
+
+  @Uint16()
+  int nChannels;
+
+  @Uint32()
+  int nSamplesPerSec;
+
+  @Uint32()
+  int nAvgBytesPerSec;
+
+  @Uint16()
+  int nBlockAlign;
+
+  @Uint16()
+  int wBitsPerSample;
+
+  @Uint16()
+  int cbSize;
+
+  factory WAVEFORMATEX.allocate() => allocate<WAVEFORMATEX>().ref
+    ..wFormatTag = 0
+    ..nChannels = 0
+    ..nSamplesPerSec = 0
+    ..nAvgBytesPerSec = 0
+    ..nBlockAlign = 0
+    ..wBitsPerSample = 0
+    ..cbSize = 0;
+}
+
+/* wave data block header */
+// typedef struct wavehdr_tag {
+//   LPSTR       lpData;                 /* pointer to locked data buffer */
+//   DWORD       dwBufferLength;         /* length of data buffer */
+//   DWORD       dwBytesRecorded;        /* used for input only */
+//   DWORD_PTR   dwUser;                 /* for client's use */
+//   DWORD       dwFlags;                /* assorted flags (see defines) */
+//   DWORD       dwLoops;                /* loop control counter */
+//   struct wavehdr_tag FAR *lpNext;     /* reserved for driver */
+//   DWORD_PTR   reserved;               /* reserved for driver */
+// } WAVEHDR, *PWAVEHDR, NEAR *NPWAVEHDR, FAR *LPWAVEHDR;
+class WAVEHDR extends Struct {
+  Pointer<Uint8> lpData;
+
+  @Uint32()
+  int dwBufferLength;
+
+  @Uint32()
+  int dwBytesRecorded;
+
+  @IntPtr()
+  int dwUser;
+
+  @Uint32()
+  int dwFlags;
+
+  @Uint32()
+  int dwLoops;
+
+  @IntPtr()
+  int _lpNext; // reserved for driver
+
+  @IntPtr()
+  int _reserved; // reserved for driver
+
+  factory WAVEHDR.allocate() => allocate<WAVEHDR>().ref
+    ..lpData = nullptr
+    ..dwBufferLength = 0
+    ..dwBytesRecorded = 0
+    ..dwUser = 0
+    ..dwFlags = 0
+    ..dwLoops = 0
+    .._lpNext = 0
+    .._reserved = 0;
+}
+
+// typedef struct mmtime_tag
+// {
+//   UINT     wType;      /* indicates the contents of the union */
+//   union
+//   {
+//     DWORD  ms;         /* milliseconds */
+//     DWORD  sample;     /* samples */
+//     DWORD  cb;         /* byte count */
+//     DWORD  ticks;      /* ticks in MIDI stream */
+//     DWORD  songptrpos; /* song pointer position */
+//   } u;
+// } MMTIME, *PMMTIME, NEAR *NPMMTIME, FAR *LPMMTIME;
+class MMTIME extends Struct {
+  @Uint32()
+  int wType;
+
+  @Uint32()
+  int value;
+
+  @Uint32()
+  int reserved;
+
+  factory MMTIME.allocate() => allocate<MMTIME>().ref
+    ..wType = TIME_MS
+    ..value = 0;
+}

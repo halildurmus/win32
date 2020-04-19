@@ -7,6 +7,7 @@
 // ignore_for_file: camel_case_types
 
 import 'dart:ffi';
+
 import 'package:ffi/ffi.dart';
 
 // General constants
@@ -642,12 +643,8 @@ const WS_MINIMIZEBOX = 0x00020000;
 const WS_OVERLAPPED = 0x00000000;
 
 /// @nodoc
-const WS_OVERLAPPEDWINDOW = WS_OVERLAPPED |
-    WS_CAPTION |
-    WS_SYSMENU |
-    WS_THICKFRAME |
-    WS_MINIMIZEBOX |
-    WS_MAXIMIZEBOX;
+const WS_OVERLAPPEDWINDOW =
+    WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
 
 /// @nodoc
 const WS_POPUP = 0x80000000;
@@ -671,12 +668,8 @@ const WS_THICKFRAME = 0x00040000;
 const WS_TILED = 0x00000000;
 
 /// @nodoc
-const WS_TILEDWINDOW = WS_OVERLAPPED |
-    WS_CAPTION |
-    WS_SYSMENU |
-    WS_THICKFRAME |
-    WS_MINIMIZEBOX |
-    WS_MAXIMIZEBOX;
+const WS_TILEDWINDOW =
+    WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX;
 
 /// @nodoc
 const WS_VISIBLE = 0x10000000;
@@ -1225,16 +1218,10 @@ const QS_MOUSE = QS_MOUSEMOVE | QS_MOUSEBUTTON;
 const QS_INPUT = QS_MOUSE | QS_KEY | QS_RAWINPUT | QS_TOUCH | QS_POINTER;
 
 /// @nodoc
-const QS_ALLEVENTS =
-    QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY;
+const QS_ALLEVENTS = QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY;
 
 /// @nodoc
-const QS_ALLINPUT = QS_INPUT |
-    QS_POSTMESSAGE |
-    QS_TIMER |
-    QS_PAINT |
-    QS_HOTKEY |
-    QS_SENDMESSAGE;
+const QS_ALLINPUT = QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY | QS_SENDMESSAGE;
 
 /// @nodoc
 const FVIRTKEY = TRUE;
@@ -3760,8 +3747,7 @@ const PROC_THREAD_ATTRIBUTE_ADDITIVE = 0x00040000;
 
 /// @nodoc
 const PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE =
-    (PROC_THREAD_ATTRIBUTE_NUM.ProcThreadAttributePseudoConsole &
-            PROC_THREAD_ATTRIBUTE_NUMBER) |
+    (PROC_THREAD_ATTRIBUTE_NUM.ProcThreadAttributePseudoConsole & PROC_THREAD_ATTRIBUTE_NUMBER) |
         PROC_THREAD_ATTRIBUTE_INPUT;
 
 /// {@category Enum}
@@ -4060,15 +4046,11 @@ const KEY_WOW64_64KEY = 0x0100;
 const KEY_WOW64_RES = 0x0300;
 
 /// @nodoc
-const KEY_READ = (STANDARD_RIGHTS_READ |
-        KEY_QUERY_VALUE |
-        KEY_ENUMERATE_SUB_KEYS |
-        KEY_NOTIFY) &
-    (~SYNCHRONIZE);
+const KEY_READ =
+    (STANDARD_RIGHTS_READ | KEY_QUERY_VALUE | KEY_ENUMERATE_SUB_KEYS | KEY_NOTIFY) & (~SYNCHRONIZE);
 
 /// @nodoc
-const KEY_WRITE = (STANDARD_RIGHTS_WRITE | KEY_SET_VALUE | KEY_CREATE_SUB_KEY) &
-    (~SYNCHRONIZE);
+const KEY_WRITE = (STANDARD_RIGHTS_WRITE | KEY_SET_VALUE | KEY_CREATE_SUB_KEY) & (~SYNCHRONIZE);
 
 /// @nodoc
 const KEY_EXECUTE = KEY_READ & (~SYNCHRONIZE);
@@ -4529,10 +4511,8 @@ const CLSCTX_ACTIVATE_ARM32_SERVER = 0x2000000;
 const CLSCTX_PS_DLL = 0x80000000;
 
 /// @nodoc
-const CLSCTX_ALL = CLSCTX_INPROC_SERVER |
-    CLSCTX_INPROC_HANDLER |
-    CLSCTX_LOCAL_SERVER |
-    CLSCTX_REMOTE_SERVER;
+const CLSCTX_ALL =
+    CLSCTX_INPROC_SERVER | CLSCTX_INPROC_HANDLER | CLSCTX_LOCAL_SERVER | CLSCTX_REMOTE_SERVER;
 
 // RPC authentication
 
@@ -4898,8 +4878,7 @@ const FOLDERID_ProgramFilesCommon = '{F7F1ED05-9F6D-47A2-AAAE-29D317C6F066}';
 const FOLDERID_UserProgramFiles = '{5cd7aee2-2219-4a67-b85d-6c9ce15660cb}';
 
 /// @nodoc
-const FOLDERID_UserProgramFilesCommon =
-    '{bcbd3057-ca5c-4622-b42d-bc56db0ae516}';
+const FOLDERID_UserProgramFilesCommon = '{bcbd3057-ca5c-4622-b42d-bc56db0ae516}';
 
 /// @nodoc
 const FOLDERID_AdminTools = '{724EF170-A42D-4FEF-9F26-B60E846FBA4F}';
@@ -6282,3 +6261,133 @@ const LIST_MODULES_ALL = 0x03;
 
 /// @nodoc
 const LIST_MODULES_DEFAULT = 0x0;
+
+// general error return values
+const MMSYSERR_BASE = 0;
+const MMSYSERR_NOERROR = 0; // no error
+const MMSYSERR_ERROR = MMSYSERR_BASE + 1; // unspecified error
+const MMSYSERR_BADDEVICEID = MMSYSERR_BASE + 2; // device ID out of range
+const MMSYSERR_NOTENABLED = MMSYSERR_BASE + 3; // driver failed enable
+const MMSYSERR_ALLOCATED = MMSYSERR_BASE + 4; // device already allocated
+const MMSYSERR_INVALHANDLE = MMSYSERR_BASE + 5; // device handle is invalid
+const MMSYSERR_NODRIVER = MMSYSERR_BASE + 6; // no device driver present
+const MMSYSERR_NOMEM = MMSYSERR_BASE + 7; // memory allocation error
+const MMSYSERR_NOTSUPPORTED = MMSYSERR_BASE + 8; // function isn't supported
+const MMSYSERR_BADERRNUM = MMSYSERR_BASE + 9; // error value out of range
+const MMSYSERR_INVALFLAG = MMSYSERR_BASE + 10; // invalid flag passed
+const MMSYSERR_INVALPARAM = MMSYSERR_BASE + 11; // invalid parameter passed
+const MMSYSERR_HANDLEBUSY = MMSYSERR_BASE + 12; // handle being used simultaneously on another thread (eg callback)
+const MMSYSERR_INVALIDALIAS = MMSYSERR_BASE + 13; // specified alias not found
+const MMSYSERR_BADDB = MMSYSERR_BASE + 14; // bad registry database
+const MMSYSERR_KEYNOTFOUND = MMSYSERR_BASE + 15; // registry key not found
+const MMSYSERR_READERROR = MMSYSERR_BASE + 16; // registry read error
+const MMSYSERR_WRITEERROR = MMSYSERR_BASE + 17; // registry write error
+const MMSYSERR_DELETEERROR = MMSYSERR_BASE + 18; // registry delete error
+const MMSYSERR_VALNOTFOUND = MMSYSERR_BASE + 19; // registry value not found
+const MMSYSERR_NODRIVERCB = MMSYSERR_BASE + 20; // driver does not call DriverCallback
+const MMSYSERR_MOREDATA = MMSYSERR_BASE + 21; // more data to be returned
+
+// waveform audio error return values
+const WAVERR_BASE = 32;
+const WAVERR_BADFORMAT = WAVERR_BASE + 0; // unsupported wave format
+const WAVERR_STILLPLAYING = WAVERR_BASE + 1; // still something playing
+const WAVERR_UNPREPARED = WAVERR_BASE + 2; // header not prepared
+const WAVERR_SYNC = WAVERR_BASE + 3; // device is synchronous
+const WAVERR_LASTERROR = WAVERR_BASE + 3; // last error in range
+
+// wave callback messages
+const WOM_OPEN = 0x3BB;
+const WOM_CLOSE = 0x3BC;
+const WOM_DONE = 0x3BD;
+
+// device ID for wave device mapper
+const WAVE_MAPPER = -1;
+
+// flags for dwFlags parameter in waveOutOpen() and waveInOpen()
+const WAVE_FORMAT_QUERY = 0x0001;
+const WAVE_ALLOWSYNC = 0x0002;
+const WAVE_MAPPED = 0x0004;
+const WAVE_FORMAT_DIRECT = 0x0008;
+const WAVE_FORMAT_DIRECT_QUERY = WAVE_FORMAT_QUERY | WAVE_FORMAT_DIRECT;
+const WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE = 0x0010;
+
+// flags for dwFlags field of WAVEHDR
+const WHDR_DONE = 0x00000001; // done bit
+const WHDR_PREPARED = 0x00000002; // set if this header has been prepared
+const WHDR_BEGINLOOP = 0x00000004; // loop start block
+const WHDR_ENDLOOP = 0x00000008; // loop end block
+const WHDR_INQUEUE = 0x00000010; // reserved for driver
+
+// flags for dwSupport field of WAVEOUTCAPS
+const WAVECAPS_PITCH = 0x0001; // supports pitch control
+const WAVECAPS_PLAYBACKRATE = 0x0002; // supports playback rate control
+const WAVECAPS_VOLUME = 0x0004; // supports volume control
+const WAVECAPS_LRVOLUME = 0x0008; // separate left-right volume control
+const WAVECAPS_SYNC = 0x0010;
+const WAVECAPS_SAMPLEACCURATE = 0x0020;
+
+// defines for dwFormat field of WAVEINCAPS and WAVEOUTCAPS
+const WAVE_INVALIDFORMAT = 0x00000000; // invalid format
+const WAVE_FORMAT_1M08 = 0x00000001; // 11.025 kHz, Mono,   8-bit
+const WAVE_FORMAT_1S08 = 0x00000002; // 11.025 kHz, Stereo, 8-bit
+const WAVE_FORMAT_1M16 = 0x00000004; // 11.025 kHz, Mono,   16-bit
+const WAVE_FORMAT_1S16 = 0x00000008; // 11.025 kHz, Stereo, 16-bit
+const WAVE_FORMAT_2M08 = 0x00000010; // 22.05  kHz, Mono,   8-bit
+const WAVE_FORMAT_2S08 = 0x00000020; // 22.05  kHz, Stereo, 8-bit
+const WAVE_FORMAT_2M16 = 0x00000040; // 22.05  kHz, Mono,   16-bit
+const WAVE_FORMAT_2S16 = 0x00000080; // 22.05  kHz, Stereo, 16-bit
+const WAVE_FORMAT_4M08 = 0x00000100; // 44.1   kHz, Mono,   8-bit
+const WAVE_FORMAT_4S08 = 0x00000200; // 44.1   kHz, Stereo, 8-bit
+const WAVE_FORMAT_4M16 = 0x00000400; // 44.1   kHz, Mono,   16-bit
+const WAVE_FORMAT_4S16 = 0x00000800; // 44.1   kHz, Stereo, 16-bit
+const WAVE_FORMAT_44M08 = 0x00000100; // 44.1   kHz, Mono,   8-bit
+const WAVE_FORMAT_44S08 = 0x00000200; // 44.1   kHz, Stereo, 8-bit
+const WAVE_FORMAT_44M16 = 0x00000400; // 44.1   kHz, Mono,   16-bit
+const WAVE_FORMAT_44S16 = 0x00000800; // 44.1   kHz, Stereo, 16-bit
+const WAVE_FORMAT_48M08 = 0x00001000; // 48     kHz, Mono,   8-bit
+const WAVE_FORMAT_48S08 = 0x00002000; // 48     kHz, Stereo, 8-bit
+const WAVE_FORMAT_48M16 = 0x00004000; // 48     kHz, Mono,   16-bit
+const WAVE_FORMAT_48S16 = 0x00008000; // 48     kHz, Stereo, 16-bit
+const WAVE_FORMAT_96M08 = 0x00010000; // 96     kHz, Mono,   8-bit
+const WAVE_FORMAT_96S08 = 0x00020000; // 96     kHz, Stereo, 8-bit
+const WAVE_FORMAT_96M16 = 0x00040000; // 96     kHz, Mono,   16-bit
+const WAVE_FORMAT_96S16 = 0x00080000; // 96     kHz, Stereo, 16-bit
+
+//flags for wFormatTag field of WAVEFORMAT
+const WAVE_FORMAT_UNKNOWN = 0x0000;
+const WAVE_FORMAT_PCM = 0x0001;
+const WAVE_FORMAT_ADPCM = 0x0002;
+const WAVE_FORMAT_IEEE_FLOAT = 0x0003;
+const WAVE_FORMAT_ALAW = 0x0006;
+const WAVE_FORMAT_MULAW = 0x0007;
+const WAVE_FORMAT_DTS = 0x0008;
+const WAVE_FORMAT_MPEG = 0x0050;
+const WAVE_FORMAT_MPEGLAYER3 = 0x0055;
+const WAVE_FORMAT_MPEG_ADTS_AAC = 0x1600;
+const WAVE_FORMAT_MPEG_RAW_AAC = 0x1601;
+const WAVE_FORMAT_DTS2 = 0x200;
+const WAVE_FORMAT_OGG_VORBIS_MODE_1 = 0x674F;
+const WAVE_FORMAT_OGG_VORBIS_MODE_2 = 0x6750;
+const WAVE_FORMAT_OGG_VORBIS_MODE_3 = 0x6751;
+const WAVE_FORMAT_OGG_VORBIS_MODE_1_PLUS = 0x676F;
+const WAVE_FORMAT_OGG_VORBIS_MODE_2_PLUS = 0x6770;
+const WAVE_FORMAT_OGG_VORBIS_MODE_3_PLUS = 0x6771;
+const WAVE_FORMAT_MPEG4_AAC = 0xA106;
+const WAVE_FORMAT_FLAC = 0xF1AC;
+
+// flags used with waveOutOpen(), waveInOpen(), midiInOpen(), and
+// midiOutOpen() to specify the type of the dwCallback parameter.
+const CALLBACK_NULL = 0x00000000; // no callback
+const CALLBACK_WINDOW = 0x00010000; // dwCallback is a HWND
+const CALLBACK_THREAD = 0x00020000; // dwCallback is a Thread ID
+const CALLBACK_FUNCTION = 0x00030000; // dwCallback is a FARPROC
+const CALLBACK_EVENT = 0x00050000; // dwCallback is an EVENT Handle
+const CALLBACK_TYPEMASK = 0x00070000; // callback type mask
+
+// types for wType field in MMTIME struct
+const TIME_MS = 0x0001; // time in milliseconds
+const TIME_SAMPLES = 0x0002; // number of wave samples
+const TIME_BYTES = 0x0004; // current byte offset
+const TIME_SMPTE = 0x0008; // SMPTE time
+const TIME_MIDI = 0x0010; // MIDI time
+const TIME_TICKS = 0x0020; // Ticks within MIDI stream

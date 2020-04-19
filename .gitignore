@@ -19,3 +19,7 @@ build/
 
 # ...but keep one sample executable around
 !example/bin/hello.exe
+
+# IDE files
+.idea/
+*.iml

@@ -8,11 +8,11 @@ import 'constants.dart';
 
 // #define MAKEWORD(a, b)   ((WORD)(((BYTE)(((DWORD_PTR)(a)) & 0xff)) |
 //                          ((WORD)((BYTE)(((DWORD_PTR)(b)) & 0xff))) << 8))
-int MAKEWORD(int a, int b) => a & 0xff | (b & 0xff << 8);
+int MAKEWORD(int a, int b) => a & 0xff | ((b & 0xff) << 8);
 
 // #define MAKELONG(a, b)   ((LONG)(((WORD)(((DWORD_PTR)(a)) & 0xffff)) |
 //                          ((DWORD)((WORD)(((DWORD_PTR)(b)) & 0xffff))) << 16))
-int MAKELONG(int a, int b) => a & 0xffff | (b & 0xffff << 16);
+int MAKELONG(int a, int b) => a & 0xffff | ((b & 0xffff) << 16);
 
 // #define LOWORD(l)           ((WORD)(((DWORD_PTR)(l)) & 0xffff))
 int LOWORD(int l) => l & 0xffff;
