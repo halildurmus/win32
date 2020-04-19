@@ -35,4 +35,19 @@ class NotepadFind {
 
     return FindText(find.addressOf);
   }
+
+  int ReplaceDialog(int hwnd) {
+    replace.lStructSize = sizeOf<FINDREPLACE>();
+    replace.hwndOwner = hwnd;
+    replace.hInstance = NULL;
+    replace.Flags = FR_HIDEUPDOWN | FR_HIDEMATCHCASE | FR_HIDEWHOLEWORD;
+    replace.lpstrFindWhat = szFindText;
+    replace.lpstrReplaceWith = szReplText;
+    replace.wFindWhatLen = MAX_STRING_LEN;
+    replace.wReplaceWithLen = MAX_STRING_LEN;
+    replace.lCustData = 0;
+    replace.lpfnHook = nullptr;
+    replace.lpTemplateName = nullptr;
+    return ReplaceText(replace.addressOf);
+  }
 }
