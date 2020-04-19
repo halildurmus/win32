@@ -9,6 +9,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'file.dart';
+import 'font.dart';
 import 'resources.dart';
 
 final APP_NAME = 'DartNote'; // DartPad was taken :)
@@ -259,6 +260,16 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
         case IDM_EDIT_SELECT_ALL:
           SendMessage(hwndEdit, EM_SETSEL, 0, -1);
+          return 0;
+
+        case IDM_FORMAT_FONT:
+          final font = NotepadFont(hwndEdit);
+
+          if (font.NotepadChooseFont(hwnd)) {
+            font.NotepadSetFont(hwndEdit);
+          }
+
+          font.Delete();
           return 0;
 
         case IDM_HELP:

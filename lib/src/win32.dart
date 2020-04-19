@@ -159,13 +159,16 @@ final FillConsoleOutputAttribute = kernel32.lookupFunction<
     fillConsoleOutputAttributeDart>('FillConsoleOutputAttribute');
 
 final gdi32 = DynamicLibrary.open('gdi32.dll');
+final CreateFontIndirect =
+    gdi32.lookupFunction<createFontIndirectNative, createFontIndirectDart>(
+        'CreateFontIndirectW');
 final CreateSolidBrush =
     gdi32.lookupFunction<createSolidBrushNative, createSolidBrushDart>(
         'CreateSolidBrush');
 final DeleteObject =
     gdi32.lookupFunction<deleteObjectNative, deleteObjectDart>('DeleteObject');
 final GetObject =
-    gdi32.lookupFunction<getObjectNative, getObjectDart>('GetObject');
+    gdi32.lookupFunction<getObjectNative, getObjectDart>('GetObjectW');
 final GetStockObject = gdi32
     .lookupFunction<getStockObjectNative, getStockObjectDart>('GetStockObject');
 final GetTextMetrics =
@@ -204,6 +207,8 @@ final ShellExecute = shell32
 final comdlg32 = DynamicLibrary.open('comdlg32.dll');
 final ChooseColor =
     comdlg32.lookupFunction<chooseColorNative, chooseColorDart>('ChooseColorW');
+final ChooseFont =
+    comdlg32.lookupFunction<chooseFontNative, chooseFontDart>('ChooseFontW');
 final GetOpenFileName =
     comdlg32.lookupFunction<getOpenFileNameNative, getOpenFileNameDart>(
         'GetOpenFileNameW');

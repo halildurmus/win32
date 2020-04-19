@@ -143,6 +143,78 @@ class CHOOSECOLOR extends Struct {
     ..lpTemplateName = nullptr;
 }
 
+// typedef struct tagCHOOSEFONTW {
+//   DWORD        lStructSize;
+//   HWND         hwndOwner;
+//   HDC          hDC;
+//   LPLOGFONTW   lpLogFont;
+//   INT          iPointSize;
+//   DWORD        Flags;
+//   COLORREF     rgbColors;
+//   LPARAM       lCustData;
+//   LPCFHOOKPROC lpfnHook;
+//   LPCWSTR      lpTemplateName;
+//   HINSTANCE    hInstance;
+//   LPWSTR       lpszStyle;
+//   WORD         nFontType;
+//   WORD         ___MISSING_ALIGNMENT__;
+//   INT          nSizeMin;
+//   INT          nSizeMax;
+// } CHOOSEFONTW;
+class CHOOSEFONT extends Struct {
+  @Int32()
+  int lStructSize;
+  @Int64()
+  int hwndOwner;
+  @Int64()
+  int hDC;
+
+  Pointer<LOGFONT> lpLogFont;
+
+  @Int32()
+  int iPointSize;
+
+  @Int32()
+  int Flags;
+
+  @Int32()
+  int rgbColors;
+  @Int64()
+  int lCustData;
+
+  Pointer<NativeFunction> lpfnHook;
+  Pointer<Utf16> lpTemplateName;
+  @Int64()
+  int hInstance;
+  Pointer<Utf16> lpszStyle;
+  @Int16()
+  int nFontType;
+  @Int16()
+  int reserved;
+  @Int32()
+  int nSizeMin;
+  @Int32()
+  int nSizeMax;
+
+  factory CHOOSEFONT.allocate() => allocate<CHOOSEFONT>().ref
+    ..lStructSize = 0
+    ..hwndOwner = 0
+    ..hDC = 0
+    ..lpLogFont = nullptr
+    ..iPointSize = 0
+    ..Flags = 0
+    ..rgbColors = 0
+    ..lCustData = 0
+    ..lpfnHook = nullptr
+    ..lpTemplateName = nullptr
+    ..hInstance = 0
+    ..lpszStyle = nullptr
+    ..nFontType = 0
+    ..reserved = 0
+    ..nSizeMin = 0
+    ..nSizeMax = 0;
+}
+
 // typedef struct tagOFNW {
 //    DWORD        lStructSize;
 //    HWND         hwndOwner;
@@ -240,6 +312,90 @@ class OPENFILENAME extends Struct {
     ..pvReserved = nullptr
     ..dwReserved = 0
     ..FlagsEx = 0;
+}
+
+// typedef struct {
+//         lfHeight;
+//         lfWidth;
+//         lfEscapement;
+//         lfOrientation;
+//         lfWeight;
+//   BYTE  lfItalic;
+//   BYTE  lfUnderline;
+//   BYTE  lfStrikeOut;
+//   BYTE  lfCharSet;
+//   BYTE  lfOutPrecision;
+//   BYTE  lfClipPrecision;
+//   BYTE  lfQuality;
+//   BYTE  lfPitchAndFamily;
+//   WCHAR lfFaceName[LF_FACESIZE];
+// } LOGFONTW;
+class LOGFONT extends Struct {
+  @Int32()
+  int lfHeight;
+  @Int32()
+  int lfWidth;
+  @Int32()
+  int lfEscapement;
+  @Int32()
+  int lfOrientation;
+  @Int32()
+  int lfWeight;
+  @Int8()
+  int lfItalic;
+  @Int8()
+  int lfUnderline;
+  @Int8()
+  int lfStrikeOut;
+  @Int8()
+  int lfCharSet;
+  @Int8()
+  int lfOutPrecision;
+  @Int8()
+  int lfClipPrecision;
+  @Int8()
+  int lfQuality;
+  @Int8()
+  int lfPitchAndFamily;
+  @Int64()
+  int lfFaceName1;
+  @Int64()
+  int lfFaceName2;
+  @Int64()
+  int lfFaceName3;
+  @Int64()
+  int lfFaceName4;
+  @Int64()
+  int lfFaceName5;
+  @Int64()
+  int lfFaceName6;
+  @Int64()
+  int lfFaceName7;
+  @Int64()
+  int lfFaceName8;
+
+  factory LOGFONT.allocate() => allocate<LOGFONT>().ref
+    ..lfHeight = 0
+    ..lfWidth = 0
+    ..lfEscapement = 0
+    ..lfOrientation = 0
+    ..lfWeight = 0
+    ..lfItalic = 0
+    ..lfUnderline = 0
+    ..lfStrikeOut = 0
+    ..lfCharSet = 0
+    ..lfOutPrecision = 0
+    ..lfClipPrecision = 0
+    ..lfQuality = 0
+    ..lfPitchAndFamily = 0
+    ..lfFaceName1 = 0
+    ..lfFaceName2 = 0
+    ..lfFaceName3 = 0
+    ..lfFaceName4 = 0
+    ..lfFaceName5 = 0
+    ..lfFaceName6 = 0
+    ..lfFaceName7 = 0
+    ..lfFaceName8 = 0;
 }
 
 // typedef struct tagCREATESTRUCTW {

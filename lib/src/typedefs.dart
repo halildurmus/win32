@@ -32,6 +32,12 @@ typedef beginPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
 typedef chooseColorNative = Int32 Function(Pointer<CHOOSECOLOR> lpcc);
 typedef chooseColorDart = int Function(Pointer<CHOOSECOLOR> lpcc);
 
+// BOOL WINAPI ChooseFont(
+//   _Inout_ LPCHOOSEFONT lpcf
+// );
+typedef chooseFontNative = Int32 Function(Pointer<CHOOSEFONT> lpcf);
+typedef chooseFontDart = int Function(Pointer<CHOOSEFONT> lpcf);
+
 // HRESULT CoCreateGuid(
 //   GUID *pguid
 // );
@@ -77,6 +83,12 @@ typedef createFileDart = int Function(
     int dwCreationDisposition,
     int dwFlagsAndAttributes,
     int hTemplateFile);
+
+// HFONT CreateFontIndirectW(
+//   const LOGFONTW *lplf
+// );
+typedef createFontIndirectNative = Int64 Function(Pointer<LOGFONT> lplf);
+typedef createFontIndirectDart = int Function(Pointer<LOGFONT> lplf);
 
 // HMENU CreateMenu();
 typedef createMenuNative = Int64 Function();
