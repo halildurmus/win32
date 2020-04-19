@@ -143,6 +143,53 @@ class CHOOSECOLOR extends Struct {
     ..lpTemplateName = nullptr;
 }
 
+// typedef struct tagFINDREPLACEW {
+//   DWORD        lStructSize;
+//   HWND         hwndOwner;
+//   HINSTANCE    hInstance;
+//   DWORD        Flags;
+//   LPWSTR       lpstrFindWhat;
+//   LPWSTR       lpstrReplaceWith;
+//   WORD         wFindWhatLen;
+//   WORD         wReplaceWithLen;
+//   LPARAM       lCustData;
+//   LPFRHOOKPROC lpfnHook;
+//   LPCWSTR      lpTemplateName;
+// } FINDREPLACEW, *LPFINDREPLACEW;
+class FINDREPLACE extends Struct {
+  @Int32()
+  int lStructSize;
+  @Int64()
+  int hwndOwner;
+  @Int64()
+  int hInstance;
+  @Int32()
+  int Flags;
+  Pointer<Utf16> lpstrFindWhat;
+  Pointer<Utf16> lpstrReplaceWith;
+  @Int32()
+  int wFindWhatLen;
+  @Int32()
+  int wReplaceWithLen;
+  @Int64()
+  int lCustData;
+  Pointer<NativeFunction> lpfnHook;
+  Pointer<Utf16> lpTemplateName;
+
+  factory FINDREPLACE.allocate() => allocate<FINDREPLACE>().ref
+    ..lStructSize = 0
+    ..hwndOwner = 0
+    ..hInstance = 0
+    ..Flags = 0
+    ..lpstrFindWhat = nullptr
+    ..lpstrReplaceWith = nullptr
+    ..wFindWhatLen = 0
+    ..wReplaceWithLen = 0
+    ..lCustData = 0
+    ..lpfnHook = nullptr
+    ..lpTemplateName = nullptr;
+}
+
 // typedef struct tagCHOOSEFONTW {
 //   DWORD        lStructSize;
 //   HWND         hwndOwner;
@@ -451,63 +498,6 @@ class CREATESTRUCT extends Struct {
     ..lpszName = nullptr
     ..lpszClass = nullptr
     ..dwExStyle = 0;
-}
-
-// typedef struct tagFINDREPLACEW {
-//   DWORD        lStructSize;
-//   HWND         hwndOwner;
-//   HINSTANCE    hInstance;
-//   DWORD        Flags;
-//   LPWSTR       lpstrFindWhat;
-//   LPWSTR       lpstrReplaceWith;
-//   WORD         wFindWhatLen;
-//   WORD         wReplaceWithLen;
-//   LPARAM       lCustData;
-//   LPFRHOOKPROC lpfnHook;
-//   LPCWSTR      lpTemplateName;
-// } FINDREPLACEW, *LPFINDREPLACEW;
-class FINDREPLACE extends Struct {
-  @Int32()
-  int lStructSize;
-
-  @Int64()
-  int hwndOwner;
-
-  @Int64()
-  int hInstance;
-
-  @Int32()
-  int Flags;
-
-  Pointer<Utf16> lpstrFindWhat;
-  Pointer<Utf16> lpstrReplaceWith;
-
-  @Int32()
-  int wFindWhatLen;
-
-  @Int32()
-  int wReplaceWithLen;
-
-  @Int32()
-  int lCustData;
-
-  Pointer<NativeFunction> lpfnHook;
-
-  @Int32()
-  int lpTemplateName;
-
-  factory FINDREPLACE.allocate() => allocate<FINDREPLACE>().ref
-    ..lStructSize = 0
-    ..hwndOwner = 0
-    ..hInstance = 0
-    ..Flags = 0
-    ..lpstrFindWhat = nullptr
-    ..lpstrReplaceWith = nullptr
-    ..wFindWhatLen = 0
-    ..wReplaceWithLen = 0
-    ..lCustData = 0
-    ..lpfnHook = nullptr
-    ..lpTemplateName = 0;
 }
 
 // typedef struct tagMSG {

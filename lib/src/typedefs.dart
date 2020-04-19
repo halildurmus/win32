@@ -238,6 +238,12 @@ typedef findNextVolumeNative = Int32 Function(
 typedef findNextVolumeDart = int Function(
     int hFindVolume, Pointer<Utf16> lpszVolumeName, int cchBufferLength);
 
+// HWND FindTextW(
+//   LPFINDREPLACEW Arg1
+// );
+typedef findTextNative = Int64 Function(Pointer<FINDREPLACE> Arg1);
+typedef findTextDart = int Function(Pointer<FINDREPLACE> Arg1);
+
 // BOOL FindVolumeClose(
 //   HANDLE hFindVolume
 // );
@@ -482,6 +488,12 @@ typedef registerClassDart = int Function(Pointer<WNDCLASS> lpWndClass);
 // );
 typedef releaseDCNative = Int32 Function(Int64 hWnd, Int64 hDC);
 typedef releaseDCDart = int Function(int hWnd, int hDC);
+
+// HWND ReplaceTextW(
+//   LPFINDREPLACEW Arg1
+// );
+typedef replaceTextNative = Int64 Function(Pointer<FINDREPLACE> Arg1);
+typedef replaceTextDart = int Function(Pointer<FINDREPLACE> Arg1);
 
 // int SaveDC(
 //   HDC hdc

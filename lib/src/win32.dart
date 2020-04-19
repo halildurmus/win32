@@ -209,12 +209,16 @@ final ChooseColor =
     comdlg32.lookupFunction<chooseColorNative, chooseColorDart>('ChooseColorW');
 final ChooseFont =
     comdlg32.lookupFunction<chooseFontNative, chooseFontDart>('ChooseFontW');
+final FindText =
+    comdlg32.lookupFunction<findTextNative, findTextDart>('FindTextW');
 final GetOpenFileName =
     comdlg32.lookupFunction<getOpenFileNameNative, getOpenFileNameDart>(
         'GetOpenFileNameW');
 final GetSaveFileName =
     comdlg32.lookupFunction<getSaveFileNameNative, getSaveFileNameDart>(
         'GetSaveFileNameW');
+final ReplaceText =
+    comdlg32.lookupFunction<replaceTextNative, replaceTextDart>('ReplaceTextW');
 
 final ole32 = DynamicLibrary.open('ole32.dll');
 final CoCreateGuid =
