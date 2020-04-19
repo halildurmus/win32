@@ -95,7 +95,10 @@ void main() {
     if (SUCCEEDED(hr)) {
       // *ppv contains the requested interface pointer.
       final pVtable = Pointer<IFileDialogVtbl>.fromAddress(pFileOpen.value);
-      print('pVtable is at *pFileOpen: ${pointerAsString(pVtable)}');
+      print(pVtable);
+
+      final pVtable2 = pFileOpen.cast<Pointer<IFileDialogVtbl>>().value;
+      print(pVtable2);
 
       // vTable contains, in order:
       //   [0] QueryInterface
