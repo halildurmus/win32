@@ -11,7 +11,7 @@ class NotepadFont {
   NotepadFont(int hwndEdit) {
     logfont = LOGFONT.allocate();
     final sysFont = GetStockObject(SYSTEM_FONT);
-    GetObject(sysFont, sizeOf<LOGFONT>(), logfont.addressOf.cast());
+    GetObject(sysFont, 92, /* sizeOf<LOGFONT>() */ logfont.addressOf.cast());
     hFont = CreateFontIndirect(logfont.addressOf);
     SendMessage(hwndEdit, WM_SETFONT, hFont, 0);
   }
@@ -42,6 +42,7 @@ class NotepadFont {
     final rect = RECT.allocate();
 
     hFontNew = CreateFontIndirect(logfont.addressOf);
+    print(logfont.lfFaceName1);
     SendMessage(hwndEdit, WM_SETFONT, hFontNew, 0);
     DeleteObject(hFont);
     hFont = hFontNew;
