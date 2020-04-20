@@ -9,6 +9,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'file.dart';
+import 'find.dart';
 import 'font.dart';
 import 'resources.dart';
 
@@ -260,6 +261,17 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
         case IDM_EDIT_SELECT_ALL:
           SendMessage(hwndEdit, EM_SETSEL, 0, -1);
+          return 0;
+
+        case IDM_SEARCH_FIND:
+          SendMessage(hwndEdit, EM_GETSEL, 0, iOffset);
+          hDlgModeless = NotepadFind().ShowFindDialog(hwnd);
+          return 0;
+
+        case IDM_SEARCH_NEXT:
+          return 0;
+
+        case IDM_SEARCH_REPLACE:
           return 0;
 
         case IDM_FORMAT_FONT:

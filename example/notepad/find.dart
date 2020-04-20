@@ -20,7 +20,7 @@ class NotepadFind {
     replace = FINDREPLACE.allocate();
   }
 
-  int FindDialog(int hwnd) {
+  int ShowFindDialog(int hwnd) {
     find.lStructSize = sizeOf<FINDREPLACE>();
     find.hwndOwner = hwnd;
     find.hInstance = NULL;
@@ -36,7 +36,7 @@ class NotepadFind {
     return FindText(find.addressOf);
   }
 
-  int ReplaceDialog(int hwnd) {
+  int ShowReplaceDialog(int hwnd) {
     replace.lStructSize = sizeOf<FINDREPLACE>();
     replace.hwndOwner = hwnd;
     replace.hInstance = NULL;
@@ -49,5 +49,27 @@ class NotepadFind {
     replace.lpfnHook = nullptr;
     replace.lpTemplateName = nullptr;
     return ReplaceText(replace.addressOf);
+  }
+
+  int FindTextInEditWindow(
+      int hwndEdit, Pointer<Uint64> piSearchOffset, Pointer<FINDREPLACE> pfr) {
+    int iLength;
+
+    final pDoc = allocate<Uint16>(count: iLength + 1).cast<Utf16>();
+
+    iLength = GetWindowTextLength(hwndEdit);
+    GetWindowText(hwndEdit, pDoc, iLength + 1);
+    final strDoc = pDoc.unpackString(iLength + 1);
+    free(pDoc);
+
+    final toFind = pfr.ref.lpstrFindWhat.unpackString(MAX_STRING_LEN);
+    final startOffset = strDoc.indexOf(toFind);
+    if (startOffset == -1) return FALSE;
+    final endOffset = startOffset + toFind.length;
+
+    SendMessage(hwndEdit, EM_SETSEL, startOffset, endOffset);
+    SendMessage(hwndEdit, EM_SCROLLCARET, 0, 0);
+
+    return TRUE;
   }
 }
