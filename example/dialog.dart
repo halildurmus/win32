@@ -97,7 +97,8 @@ void main() {
       final pVtable = Pointer<IFileDialogVtbl>.fromAddress(pFileOpen.value);
       print(pVtable);
 
-      final pVtable2 = pFileOpen.cast<Pointer<IFileDialogVtbl>>().value;
+      final pVtable2 =
+          pFileOpen.cast<Pointer<Pointer<IFileDialogVtbl>>>().value.value;
       print(pVtable2);
 
       // vTable contains, in order:
@@ -109,7 +110,7 @@ void main() {
       // All should be 64-bit pointers
       final pShowNative =
           Pointer<NativeFunction<IModalWindowShowNative>>.fromAddress(
-              pVtable.address + 8 * 3);
+              pVtable2.address + 8 * 3);
       print(
           'pShowNative should be at *pVtable+24: ${pointerAsString(pShowNative)}');
 
