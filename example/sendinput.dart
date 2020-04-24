@@ -18,19 +18,19 @@ void main() {
       1, Pointer.fromAddress(kbd.addressOf.address), sizeOf<KEYBDINPUT>());
   if (result != 1) print('Error: ${GetLastError()}');
 
-  kbd.dwFlag = KEYEVENTF_KEYUP;
+  kbd.dwFlags = KEYEVENTF_KEYUP;
   result = SendInput(
       1, Pointer.fromAddress(kbd.addressOf.address), sizeOf<KEYBDINPUT>());
   if (result != 1) print('Error: ${GetLastError()}');
 
   kbd.wVk = 0;
   kbd.wScan = 0x20AC; // euro sign
-  kbd.dwFlag = KEYEVENTF_UNICODE;
+  kbd.dwFlags = KEYEVENTF_UNICODE;
   result = SendInput(
       1, Pointer.fromAddress(kbd.addressOf.address), sizeOf<KEYBDINPUT>());
   if (result != 1) print('Error: ${GetLastError()}');
 
-  kbd.dwFlag = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
+  kbd.dwFlags = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
   result = SendInput(
       1, Pointer.fromAddress(kbd.addressOf.address), sizeOf<KEYBDINPUT>());
   if (result != 1) print('Error: ${GetLastError()}');

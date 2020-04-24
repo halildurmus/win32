@@ -20,7 +20,6 @@ class NotepadFind {
   }
 
   int ShowFindDialog(int hwnd) {
-    print(sizeOf<FINDREPLACE>());
     find.lStructSize = sizeOf<FINDREPLACE>();
     find.hwndOwner = hwnd;
     find.hInstance = NULL;

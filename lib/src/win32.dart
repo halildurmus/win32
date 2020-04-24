@@ -8,11 +8,11 @@ import 'package:ffi/ffi.dart';
 import 'typedefs.dart';
 
 // *** Callbacks ***
-typedef LPFRHookProc = Pointer<Uint32> Function(Int64, Int32, Int64, Int64);
-typedef TimerProc = Void Function(Int64, Uint32, Pointer<Uint32>, Int32);
-typedef EnumWindowsProc = Int32 Function(Int64 hwnd, Int64 lParam);
-typedef WindowProc = Int64 Function(
-    Int64 hwnd, Int32 uMsg, Int64 wParam, Int64 lParam);
+typedef LPFRHookProc = Pointer<Uint32> Function(IntPtr, Int32, IntPtr, IntPtr);
+typedef TimerProc = Void Function(IntPtr, Uint32, Pointer<Uint32>, Int32);
+typedef EnumWindowsProc = Int32 Function(IntPtr hwnd, IntPtr lParam);
+typedef WindowProc = IntPtr Function(
+    IntPtr hwnd, Int32 uMsg, IntPtr wParam, IntPtr lParam);
 
 // *** Helper Function ***
 final TEXT = Utf16.toUtf16;

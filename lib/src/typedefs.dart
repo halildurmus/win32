@@ -14,7 +14,7 @@ import 'structs.dart';
 //   LPCWSTR  lpNewItem
 // );
 typedef appendMenuNative = Int32 Function(
-    Int64 hMenu, Uint32 uFlags, Uint32 uIDNewItem, Pointer<Utf16> lpNewItem);
+    IntPtr hMenu, Uint32 uFlags, Uint32 uIDNewItem, Pointer<Utf16> lpNewItem);
 typedef appendMenuDart = int Function(
     int hMenu, int uFlags, int uIDNewItem, Pointer<Utf16> lpNewItem);
 
@@ -22,8 +22,8 @@ typedef appendMenuDart = int Function(
 //   HWND          hWnd,
 //   LPPAINTSTRUCT lpPaint
 // );
-typedef beginPaintNative = Int64 Function(
-    Int64 hWnd, Pointer<PAINTSTRUCT> lpPaint);
+typedef beginPaintNative = IntPtr Function(
+    IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint);
 typedef beginPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
 
 // BOOL WINAPI ChooseColor(
@@ -54,7 +54,7 @@ typedef coTaskMemFreeDart = void Function(Pointer<Void> pv);
 //   LPACCEL paccel,
 //   int     cAccel
 // );
-typedef createAcceleratorTableNative = Int64 Function(
+typedef createAcceleratorTableNative = IntPtr Function(
     Pointer paccel, Int32 cAccel);
 typedef createAcceleratorTableDart = int Function(Pointer paccel, int cAccel);
 
@@ -67,14 +67,14 @@ typedef createAcceleratorTableDart = int Function(Pointer paccel, int cAccel);
 //   DWORD                 dwFlagsAndAttributes,
 //   HANDLE                hTemplateFile
 // );
-typedef createFileNative = Int64 Function(
+typedef createFileNative = IntPtr Function(
     Pointer<Utf16> lpFileName,
     Int32 dwDesiredAccess,
     Int32 dwShareMode,
     Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
     Int32 dwCreationDisposition,
     Int32 dwFlagsAndAttributes,
-    Int64 hTemplateFile);
+    IntPtr hTemplateFile);
 typedef createFileDart = int Function(
     Pointer<Utf16> lpFileName,
     int dwDesiredAccess,
@@ -87,17 +87,17 @@ typedef createFileDart = int Function(
 // HFONT CreateFontIndirectW(
 //   const LOGFONTW *lplf
 // );
-typedef createFontIndirectNative = Int64 Function(Pointer<LOGFONT> lplf);
+typedef createFontIndirectNative = IntPtr Function(Pointer<LOGFONT> lplf);
 typedef createFontIndirectDart = int Function(Pointer<LOGFONT> lplf);
 
 // HMENU CreateMenu();
-typedef createMenuNative = Int64 Function();
+typedef createMenuNative = IntPtr Function();
 typedef createMenuDart = int Function();
 
 // HBRUSH CreateSolidBrush(
 //   COLORREF color
 // );
-typedef createSolidBrushNative = Int64 Function(Int32 color);
+typedef createSolidBrushNative = IntPtr Function(Int32 color);
 typedef createSolidBrushDart = int Function(int color);
 
 // HWND CreateWindowExW(
@@ -123,9 +123,9 @@ typedef createWindowExNative = Int32 Function(
     Int32 Y,
     Int32 nWidth,
     Int32 nHeight,
-    Int64 hWndParent,
-    Int64 hMenu,
-    Int64 hInstance,
+    IntPtr hWndParent,
+    IntPtr hMenu,
+    IntPtr hInstance,
     Pointer<Void> lpParam);
 
 typedef createWindowExDart = int Function(
@@ -148,27 +148,27 @@ typedef createWindowExDart = int Function(
 //   WPARAM wParam,
 //   LPARAM lParam
 // );
-typedef defWindowProcNative = Int64 Function(
-    Int64 hWnd, Int32 Msg, Int64 wParam, Int64 lParam);
+typedef defWindowProcNative = IntPtr Function(
+    IntPtr hWnd, Int32 Msg, IntPtr wParam, IntPtr lParam);
 typedef defWindowProcDart = int Function(
     int hWnd, int Msg, int wParam, int lParam);
 
 // BOOL DeleteObject(
 //   HGDIOBJ ho
 // );
-typedef deleteObjectNative = Int32 Function(Int64 ho);
+typedef deleteObjectNative = Int32 Function(IntPtr ho);
 typedef deleteObjectDart = int Function(int ho);
 
 // BOOL DestroyWindow(
 //   HWND hWnd
 // );
-typedef destroyWindowNative = Int32 Function(Int64 hWnd);
+typedef destroyWindowNative = Int32 Function(IntPtr hWnd);
 typedef destroyWindowDart = int Function(int hWnd);
 
 // LRESULT DispatchMessage(
 //   const MSG *lpMsg
 // );
-typedef dispatchMessageNative = Int64 Function(Pointer<MSG> lpMsg);
+typedef dispatchMessageNative = IntPtr Function(Pointer<MSG> lpMsg);
 typedef dispatchMessageDart = int Function(Pointer<MSG> lpMsg);
 
 // int DrawTextW(
@@ -178,7 +178,7 @@ typedef dispatchMessageDart = int Function(Pointer<MSG> lpMsg);
 //   LPRECT  lprc,
 //   UINT    format
 // );
-typedef drawTextNative = Int32 Function(Int64 hdc, Pointer<Utf16> lpchText,
+typedef drawTextNative = Int32 Function(IntPtr hdc, Pointer<Utf16> lpchText,
     Int32 cchText, Pointer<RECT> lprc, Int32 format);
 typedef drawTextDart = int Function(int hdc, Pointer<Utf16> lpchText,
     int cchText, Pointer<RECT> lprc, int format);
@@ -189,7 +189,7 @@ typedef drawTextDart = int Function(int hdc, Pointer<Utf16> lpchText,
 //   UINT  uEnable
 // );
 typedef enableMenuItemNative = Int32 Function(
-    Int64 hMenu, Uint32 uIDEnableItem, Uint32 uEnable);
+    IntPtr hMenu, Uint32 uIDEnableItem, Uint32 uEnable);
 typedef enableMenuItemDart = int Function(
     int hMenu, int uIDEnableItem, int uEnable);
 
@@ -198,7 +198,7 @@ typedef enableMenuItemDart = int Function(
 //   const PAINTSTRUCT *lpPaint
 // );
 typedef endPaintNative = Int32 Function(
-    Int64 hWnd, Pointer<PAINTSTRUCT> lpPaint);
+    IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint);
 typedef endPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
 
 // BOOL EnumWindows(
@@ -206,7 +206,7 @@ typedef endPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
 //   LPARAM      lParam
 // );
 typedef enumWindowsNative = Int32 Function(
-    Pointer<NativeFunction> lpEnumFunc, Int64 lParam);
+    Pointer<NativeFunction> lpEnumFunc, IntPtr lParam);
 typedef enumWindowsDart = int Function(
     Pointer<NativeFunction> lpEnumFunc, int lParam);
 
@@ -216,14 +216,14 @@ typedef enumWindowsDart = int Function(
 //   HBRUSH     hbr
 // );
 typedef fillRectNative = Int32 Function(
-    Int64 hDC, Pointer<RECT> lprc, Int64 hbr);
+    IntPtr hDC, Pointer<RECT> lprc, IntPtr hbr);
 typedef fillRectDart = int Function(int hDC, Pointer<RECT> lprc, int hbr);
 
 // HANDLE FindFirstVolumeW(
 //   LPWSTR lpszVolumeName,
 //   DWORD  cchBufferLength
 // );
-typedef findFirstVolumeNative = Int64 Function(
+typedef findFirstVolumeNative = IntPtr Function(
     Pointer<Utf16> lpszVolumeName, Int32 cchBufferLength);
 typedef findFirstVolumeDart = int Function(
     Pointer<Utf16> lpszVolumeName, int cchBufferLength);
@@ -234,20 +234,20 @@ typedef findFirstVolumeDart = int Function(
 //   DWORD  cchBufferLength
 // );
 typedef findNextVolumeNative = Int32 Function(
-    Int64 hFindVolume, Pointer<Utf16> lpszVolumeName, Int32 cchBufferLength);
+    IntPtr hFindVolume, Pointer<Utf16> lpszVolumeName, Int32 cchBufferLength);
 typedef findNextVolumeDart = int Function(
     int hFindVolume, Pointer<Utf16> lpszVolumeName, int cchBufferLength);
 
 // HWND FindTextW(
 //   LPFINDREPLACEW Arg1
 // );
-typedef findTextNative = Int64 Function(Pointer<FINDREPLACE> Arg1);
+typedef findTextNative = IntPtr Function(Pointer<FINDREPLACE> Arg1);
 typedef findTextDart = int Function(Pointer<FINDREPLACE> Arg1);
 
 // BOOL FindVolumeClose(
 //   HANDLE hFindVolume
 // );
-typedef findVolumeCloseNative = Int32 Function(Int64 hFindVolume);
+typedef findVolumeCloseNative = Int32 Function(IntPtr hFindVolume);
 typedef findVolumeCloseDart = int Function(int hFindVolume);
 
 // HWND FindWindowExW(
@@ -256,8 +256,8 @@ typedef findVolumeCloseDart = int Function(int hFindVolume);
 //   LPCWSTR lpszClass,
 //   LPCWSTR lpszWindow
 // );
-typedef findWindowExNative = Int64 Function(Int64 hWndParent,
-    Int64 hWndChildAfter, Pointer<Utf16> lpszClass, Pointer<Utf16> lpszWindow);
+typedef findWindowExNative = IntPtr Function(IntPtr hWndParent,
+    IntPtr hWndChildAfter, Pointer<Utf16> lpszClass, Pointer<Utf16> lpszWindow);
 typedef findWindowExDart = int Function(int hWndParent, int hWndChildAfter,
     Pointer<Utf16> lpszClass, Pointer<Utf16> lpszWindow);
 
@@ -265,13 +265,13 @@ typedef findWindowExDart = int Function(int hWndParent, int hWndChildAfter,
 //   HWND   hWnd,
 //   LPRECT lpRect
 // );
-typedef getClientRectNative = Int32 Function(Int64 hwnd, Pointer<RECT> lpRect);
+typedef getClientRectNative = Int32 Function(IntPtr hwnd, Pointer<RECT> lpRect);
 typedef getClientRectDart = int Function(int hwnd, Pointer<RECT> lpRect);
 
 // HDC GetDC(
 //   HWND hWnd
 // );
-typedef getDCNative = Int64 Function(Int64 hwnd);
+typedef getDCNative = IntPtr Function(IntPtr hwnd);
 typedef getDCDart = int Function(int hwnd);
 
 // _Post_equals_last_error_ DWORD GetLastError();
@@ -285,14 +285,14 @@ typedef getLastErrorDart = int Function();
 //   UINT  wMsgFilterMax
 // );
 typedef getMessageNative = Int32 Function(
-    Pointer<MSG> lpMsg, Int64 hWnd, Int32 wMsgFilterMin, Int32 wMsgFilterMax);
+    Pointer<MSG> lpMsg, IntPtr hWnd, Int32 wMsgFilterMin, Int32 wMsgFilterMax);
 typedef getMessageDart = int Function(
     Pointer<MSG> lpMsg, int hWnd, int wMsgFilterMin, int wMsgFilterMax);
 
 // HMODULE GetModuleHandleW(
 //   LPCWSTR lpModuleName
 // );
-typedef getModuleHandleNative = Int64 Function(Pointer<Utf16> lpModuleName);
+typedef getModuleHandleNative = IntPtr Function(Pointer<Utf16> lpModuleName);
 typedef getModuleHandleDart = int Function(Pointer<Utf16> lpModuleName);
 
 // int GetObject(
@@ -300,7 +300,7 @@ typedef getModuleHandleDart = int Function(Pointer<Utf16> lpModuleName);
 //   int    c,
 //   LPVOID pv
 // );
-typedef getObjectNative = Int32 Function(Int64 h, Int32 c, Pointer pv);
+typedef getObjectNative = Int32 Function(IntPtr h, Int32 c, Pointer pv);
 typedef getObjectDart = int Function(int h, int c, Pointer pv);
 
 // BOOL GetOpenFileNameW(
@@ -321,14 +321,14 @@ typedef getSaveFileNameDart = int Function(Pointer<OPENFILENAME> arg1);
 //   LPSCROLLINFO lpsi
 // );
 typedef getScrollInfoNative = Int32 Function(
-    Int64 hwnd, Int32 nBar, Pointer<SCROLLINFO> lpsi);
+    IntPtr hwnd, Int32 nBar, Pointer<SCROLLINFO> lpsi);
 typedef getScrollInfoDart = int Function(
     int hwnd, int nBar, Pointer<SCROLLINFO> lpsi);
 
 // HGDIOBJ GetStockObject(
 //   int i
 // );
-typedef getStockObjectNative = Int64 Function(Int32 i);
+typedef getStockObjectNative = IntPtr Function(Int32 i);
 typedef getStockObjectDart = int Function(int i);
 
 // BOOL GetTextMetrics(
@@ -336,7 +336,7 @@ typedef getStockObjectDart = int Function(int i);
 //   LPTEXTMETRIC lptm
 // );
 typedef getTextMetricsNative = Int32 Function(
-    Int64 hdc, Pointer<TEXTMETRIC> lptm);
+    IntPtr hdc, Pointer<TEXTMETRIC> lptm);
 typedef getTextMetricsDart = int Function(int hdc, Pointer<TEXTMETRIC> lptm);
 
 // BOOL GetVolumePathNamesForVolumeNameW(
@@ -362,7 +362,7 @@ typedef getVolumePathNamesForVolumeNameDart = int Function(
 //   BOOL       bErase
 // );
 typedef invalidateRectNative = Int32 Function(
-    Int64 hWnd, Pointer<RECT> lpRect, Int32 bErase);
+    IntPtr hWnd, Pointer<RECT> lpRect, Int32 bErase);
 typedef invalidateRectDart = int Function(
     int hWnd, Pointer<RECT> lpRect, int bErase);
 // int GetWindowTextW(
@@ -371,14 +371,14 @@ typedef invalidateRectDart = int Function(
 //   int    nMaxCount
 // );
 typedef getWindowTextNative = Int32 Function(
-    Int64 hWnd, Pointer<Utf16> lpString, Int32 nMaxCount);
+    IntPtr hWnd, Pointer<Utf16> lpString, Int32 nMaxCount);
 typedef getWindowTextDart = int Function(
     int hWnd, Pointer<Utf16> lpString, int nMaxCount);
 
 // int GetWindowTextLengthW(
 //   HWND hWnd
 // );
-typedef getWindowTextLengthNative = Int32 Function(Int64 hWnd);
+typedef getWindowTextLengthNative = Int32 Function(IntPtr hWnd);
 typedef getWindowTextLengthDart = int Function(int hWnd);
 
 // BOOL IsClipboardFormatAvailable(
@@ -391,20 +391,20 @@ typedef isClipboardFormatAvailableDart = int Function(int format);
 //   HWND  hDlg,
 //   LPMSG lpMsg
 // );
-typedef isDialogMessageNative = Int32 Function(Int64 hDlg, Pointer<MSG> lpMsg);
+typedef isDialogMessageNative = Int32 Function(IntPtr hDlg, Pointer<MSG> lpMsg);
 typedef isDialogMessageDart = int Function(int hDlg, Pointer<MSG> lpMsg);
 
 // BOOL IsWindowVisible(
 //   HWND hWnd
 // );
-typedef isWindowVisibleNative = Int32 Function(Int64 hWnd);
+typedef isWindowVisibleNative = Int32 Function(IntPtr hWnd);
 typedef isWindowVisibleDart = int Function(int hWnd);
 
 // BOOL KillTimer(
 //   HWND     hWnd,
 //   UINT_PTR uIDEvent
 // );
-typedef killTimerNative = Int32 Function(Int64 hWnd, Uint32 uIDEvent);
+typedef killTimerNative = Int32 Function(IntPtr hWnd, Uint32 uIDEvent);
 typedef killTimerDart = int Function(int hWnd, int uIDEvent);
 
 // BOOL LineTo(
@@ -412,15 +412,15 @@ typedef killTimerDart = int Function(int hWnd, int uIDEvent);
 //   int x,
 //   int y
 // );
-typedef lineToNative = Int32 Function(Int64 hdc, Int32 x, Int32 y);
+typedef lineToNative = Int32 Function(IntPtr hdc, Int32 x, Int32 y);
 typedef lineToDart = int Function(int hdc, int x, int y);
 
 // HCURSOR LoadCursorW(
 //   HINSTANCE hInstance,
 //   LPCWSTR   lpCursorName
 // );
-typedef loadCursorNative = Int64 Function(
-    Int64 hInstance, Pointer<Utf16> lpCursorName);
+typedef loadCursorNative = IntPtr Function(
+    IntPtr hInstance, Pointer<Utf16> lpCursorName);
 typedef loadCursorDart = int Function(
     int hInstance, Pointer<Utf16> lpCursorName);
 
@@ -428,8 +428,8 @@ typedef loadCursorDart = int Function(
 //   HINSTANCE hInstance,
 //   LPCWSTR   lpIconName
 // );
-typedef loadIconNative = Int64 Function(
-    Int64 hInstance, Pointer<Utf16> lpIconName);
+typedef loadIconNative = IntPtr Function(
+    IntPtr hInstance, Pointer<Utf16> lpIconName);
 typedef loadIconDart = int Function(int hInstance, Pointer<Utf16> lpIconName);
 
 // int MessageBoxW(
@@ -439,7 +439,7 @@ typedef loadIconDart = int Function(int hInstance, Pointer<Utf16> lpIconName);
 //   UINT    uType
 // );
 typedef messageBoxNative = Int32 Function(
-    Int64 hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption, Int32 uType);
+    IntPtr hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption, Int32 uType);
 typedef messageBoxDart = int Function(
     int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption, int uType);
 
@@ -452,7 +452,7 @@ typedef messageBoxDart = int Function(
 //   BOOL bRepaint
 // );
 typedef moveWindowNative = Int32 Function(
-    Int64 hWnd, Int32 X, Int32 Y, Int32 nWidth, Int32 nHeight, Int32 bRepaint);
+    IntPtr hWnd, Int32 X, Int32 Y, Int32 nWidth, Int32 nHeight, Int32 bRepaint);
 typedef moveWindowDart = int Function(
     int hWnd, int X, int Y, int nWidth, int nHeight, int bRepaint);
 
@@ -463,7 +463,7 @@ typedef moveWindowDart = int Function(
 //   LPPOINT lppt
 // );
 typedef moveToExNative = Int32 Function(
-    Int64 hdc, Int32 x, Int32 y, Pointer<POINT> lppt);
+    IntPtr hdc, Int32 x, Int32 y, Pointer<POINT> lppt);
 typedef moveToExDart = int Function(int hdc, int x, int y, Pointer<POINT> lppt);
 
 // DWORD QueryDosDeviceW(
@@ -486,19 +486,19 @@ typedef registerClassDart = int Function(Pointer<WNDCLASS> lpWndClass);
 //   HWND hWnd,
 //   HDC  hDC
 // );
-typedef releaseDCNative = Int32 Function(Int64 hWnd, Int64 hDC);
+typedef releaseDCNative = Int32 Function(IntPtr hWnd, IntPtr hDC);
 typedef releaseDCDart = int Function(int hWnd, int hDC);
 
 // HWND ReplaceTextW(
 //   LPFINDREPLACEW Arg1
 // );
-typedef replaceTextNative = Int64 Function(Pointer<FINDREPLACE> Arg1);
+typedef replaceTextNative = IntPtr Function(Pointer<FINDREPLACE> Arg1);
 typedef replaceTextDart = int Function(Pointer<FINDREPLACE> Arg1);
 
 // int SaveDC(
 //   HDC hdc
 // );
-typedef saveDCNative = Int32 Function(Int64 hdc);
+typedef saveDCNative = Int32 Function(IntPtr hdc);
 typedef saveDCDart = int Function(int hdc);
 
 // BOOL ScrollWindow(
@@ -508,7 +508,7 @@ typedef saveDCDart = int Function(int hdc);
 //   const RECT *lpRect,
 //   const RECT *lpClipRect
 // );
-typedef scrollWindowNative = Int32 Function(Int64 hWnd, Int32 XAmount,
+typedef scrollWindowNative = Int32 Function(IntPtr hWnd, Int32 XAmount,
     Int32 YAmount, Pointer<RECT> lpRect, Pointer<RECT> lpClipRect);
 typedef scrollWindowDart = int Function(int hWnd, int XAmount, int YAmount,
     Pointer<RECT> lpRect, Pointer<RECT> lpClipRect);
@@ -532,8 +532,8 @@ typedef sendInputDart = int Function(
 //   WPARAM wParam,
 //   LPARAM lParam
 // );
-typedef sendMessageNative = Int64 Function(
-    Int64 hWnd, Uint32 Msg, Int64 wParam, Int64 lParam);
+typedef sendMessageNative = IntPtr Function(
+    IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam);
 typedef sendMessageDart = int Function(
     int hWnd, int Msg, int wParam, int lParam);
 
@@ -541,27 +541,27 @@ typedef sendMessageDart = int Function(
 //   HDC      hdc,
 //   COLORREF color
 // );
-typedef setBkColorNative = Int32 Function(Int64 hdc, Int32 color);
+typedef setBkColorNative = Int32 Function(IntPtr hdc, Int32 color);
 typedef setBkColorDart = int Function(int hdc, int color);
 
 // int SetBkMode(
 //   HDC hdc,
 //   int mode
 // );
-typedef setBkModeNative = Int32 Function(Int64 hdc, Int32 mode);
+typedef setBkModeNative = Int32 Function(IntPtr hdc, Int32 mode);
 typedef setBkModeDart = int Function(int hdc, int mode);
 
 // HWND SetFocus(
 //   HWND hWnd
 // );
-typedef setFocusNative = Int64 Function(Int64 hWnd);
+typedef setFocusNative = IntPtr Function(IntPtr hWnd);
 typedef setFocusDart = int Function(int hWnd);
 
 // int SetMapMode(
 //   HDC hdc,
 //   int iMode
 // );
-typedef setMapModeNative = Int32 Function(Int64 hdc, Int32 iMode);
+typedef setMapModeNative = Int32 Function(IntPtr hdc, Int32 iMode);
 typedef setMapModeDart = int Function(int hdc, int iMode);
 
 // int SetScrollInfo(
@@ -571,7 +571,7 @@ typedef setMapModeDart = int Function(int hdc, int iMode);
 //   BOOL          redraw
 // );
 typedef setScrollInfoNative = Int32 Function(
-    Int64 hwnd, Int32 nBar, Pointer<SCROLLINFO> lpsi, Int32 redraw);
+    IntPtr hwnd, Int32 nBar, Pointer<SCROLLINFO> lpsi, Int32 redraw);
 typedef setScrollInfoDart = int Function(
     int hwnd, int nBar, Pointer<SCROLLINFO> lpsi, int redraw);
 
@@ -579,7 +579,7 @@ typedef setScrollInfoDart = int Function(
 //   HDC      hdc,
 //   COLORREF color
 // );
-typedef setTextColorNative = Int32 Function(Int64 hdc, Int32 color);
+typedef setTextColorNative = Int32 Function(IntPtr hdc, Int32 color);
 typedef setTextColorDart = int Function(int hdc, int color);
 
 // UINT_PTR SetTimer(
@@ -588,7 +588,7 @@ typedef setTextColorDart = int Function(int hdc, int color);
 //   UINT      uElapse,
 //   TIMERPROC lpTimerFunc
 // );
-typedef setTimerNative = Uint32 Function(Int64 hWnd, Uint32 nIDEvent,
+typedef setTimerNative = Uint32 Function(IntPtr hWnd, Uint32 nIDEvent,
     Uint32 uElapse, Pointer<NativeFunction> lpTimerFunc);
 typedef setTimerDart = int Function(
     int hWnd, int nIDEvent, int uElapse, Pointer<NativeFunction> lpTimerFunc);
@@ -600,7 +600,7 @@ typedef setTimerDart = int Function(
 //   LPSIZE lpsz
 // );
 typedef setViewportExtExNative = Int32 Function(
-    Int64 hdc, Int32 x, Int32 y, Pointer<SIZE> lpsz);
+    IntPtr hdc, Int32 x, Int32 y, Pointer<SIZE> lpsz);
 typedef setViewportExtExDart = int Function(
     int hdc, int x, int y, Pointer<SIZE> lpsz);
 
@@ -611,7 +611,7 @@ typedef setViewportExtExDart = int Function(
 //   LPPOINT lppt
 // );
 typedef setViewportOrgExNative = Int32 Function(
-    Int64 hdc, Int32 x, Int32 y, Pointer<POINT> lppt);
+    IntPtr hdc, Int32 x, Int32 y, Pointer<POINT> lppt);
 typedef setViewportOrgExDart = int Function(
     int hdc, int x, int y, Pointer<POINT> lppt);
 
@@ -622,7 +622,7 @@ typedef setViewportOrgExDart = int Function(
 //   LPSIZE lpsz
 // );
 typedef setWindowExtExNative = Int32 Function(
-    Int64 hdc, Int32 x, Int32 y, Pointer<SIZE> lpsz);
+    IntPtr hdc, Int32 x, Int32 y, Pointer<SIZE> lpsz);
 typedef setWindowExtExDart = int Function(
     int hdc, int x, int y, Pointer<SIZE> lpsz);
 
@@ -631,7 +631,7 @@ typedef setWindowExtExDart = int Function(
 //   LPCWSTR lpString
 // );
 typedef setWindowTextNative = Int32 Function(
-    Int64 hWnd, Pointer<Utf16> lpString);
+    IntPtr hWnd, Pointer<Utf16> lpString);
 typedef setWindowTextDart = int Function(int hWnd, Pointer<Utf16> lpString);
 
 // SHFOLDERAPI SHGetFolderPathW(
@@ -641,8 +641,8 @@ typedef setWindowTextDart = int Function(int hWnd, Pointer<Utf16> lpString);
 //   DWORD  dwFlags,
 //   LPWSTR pszPath
 // );
-typedef shGetFolderPathNative = Int32 Function(Int64 hwnd, Int32 csidl,
-    Int64 hToken, Int32 dwFlags, Pointer<Uint16> pszPath);
+typedef shGetFolderPathNative = Int32 Function(IntPtr hwnd, Int32 csidl,
+    IntPtr hToken, Int32 dwFlags, Pointer<Uint16> pszPath);
 typedef shGetFolderPathDart = int Function(
     int hwnd, int csidl, int hToken, int dwFlags, Pointer<Uint16> pszPath);
 
@@ -653,9 +653,9 @@ typedef shGetFolderPathDart = int Function(
 //   PWSTR            *ppszPath
 // );
 typedef shGetKnownFolderPathNative = Int32 Function(
-    Pointer<GUID> rfid, Int32 dwFlags, Int64 hToken, Pointer<Uint64> ppszPath);
+    Pointer<GUID> rfid, Int32 dwFlags, IntPtr hToken, Pointer<IntPtr> ppszPath);
 typedef shGetKnownFolderPathDart = int Function(
-    Pointer<GUID> rfid, int dwFlags, int hToken, Pointer<Uint64> ppszPath);
+    Pointer<GUID> rfid, int dwFlags, int hToken, Pointer<IntPtr> ppszPath);
 
 // HINSTANCE ShellExecuteW(
 //   HWND    hwnd,
@@ -665,8 +665,8 @@ typedef shGetKnownFolderPathDart = int Function(
 //   LPCWSTR lpDirectory,
 //   INT     nShowCmd
 // );
-typedef shellExecuteNative = Int64 Function(
-    Int64 hwnd,
+typedef shellExecuteNative = IntPtr Function(
+    IntPtr hwnd,
     Pointer<Utf16> lpOperation,
     Pointer<Utf16> lpFile,
     Pointer<Utf16> lpParameters,
@@ -684,7 +684,7 @@ typedef shellExecuteDart = int Function(
 //   HWND hWnd,
 //   int  nCmdShow
 // );
-typedef showWindowNative = Int32 Function(Int64 hWnd, Int32 nCmdShow);
+typedef showWindowNative = Int32 Function(IntPtr hWnd, Int32 nCmdShow);
 typedef showWindowDart = int Function(int hWnd, int nCmdShow);
 
 // void Sleep(
@@ -701,7 +701,7 @@ typedef sleepDart = void Function(int dwMilliseconds);
 //   int     c
 // );
 typedef textOutNative = Int32 Function(
-    Int64 hdc, Int32 x, Int32 y, Pointer<Utf16> lpString, Int32 c);
+    IntPtr hdc, Int32 x, Int32 y, Pointer<Utf16> lpString, Int32 c);
 typedef textOutDart = int Function(
     int hdc, int x, int y, Pointer<Utf16> lpString, int c);
 
@@ -711,7 +711,7 @@ typedef textOutDart = int Function(
 //   LPMSG  lpMsg
 // );
 typedef translateAcceleratorNative = Int32 Function(
-    Int64 hWnd, Int64 hAccTable, Pointer<MSG> lpMsg);
+    IntPtr hWnd, IntPtr hAccTable, Pointer<MSG> lpMsg);
 typedef translateAcceleratorDart = int Function(
     int hWnd, int hAccTable, Pointer<MSG> lpMsg);
 
@@ -730,7 +730,7 @@ typedef postQuitMessageDart = void Function(int nExitCode);
 // BOOL UpdateWindow(
 //   HWND hWnd
 // );
-typedef updateWindowNative = Int32 Function(Int64 hWnd);
+typedef updateWindowNative = Int32 Function(IntPtr hWnd);
 typedef updateWindowDart = int Function(int hWnd);
 
 // *** CONSOLE APIs ***
@@ -742,7 +742,7 @@ typedef updateWindowDart = int Function(int hWnd);
 //   _Out_ LPDWORD lpNumberOfCharsWritten
 // );
 typedef fillConsoleOutputCharacterNative = Int32 Function(
-    Int64 hConsoleOutput,
+    IntPtr hConsoleOutput,
     Int8 cCharacter,
     Int32 nLength,
     Int32 dwWriteCoord,
@@ -762,7 +762,7 @@ typedef fillConsoleOutputCharacterDart = int Function(
 //   _Out_ LPDWORD lpNumberOfAttrsWritten
 // );
 typedef fillConsoleOutputAttributeNative = Int32 Function(
-    Int64 hConsoleOutput,
+    IntPtr hConsoleOutput,
     Int16 wAttribute,
     Int32 nLength,
     Int32 dwWriteCoord,
@@ -778,7 +778,7 @@ typedef fillConsoleOutputAttributeDart = int Function(
 //   _In_  HANDLE                      hConsoleOutput,
 //   _Out_ PCONSOLE_SCREEN_BUFFER_INFO lpConsoleScreenBufferInfo
 // );
-typedef getConsoleScreenBufferInfoNative = Int32 Function(Int64 hConsoleOutput,
+typedef getConsoleScreenBufferInfoNative = Int32 Function(IntPtr hConsoleOutput,
     Pointer<CONSOLE_SCREEN_BUFFER_INFO> lpConsoleScreenBufferInfo);
 typedef getConsoleScreenBufferInfoDart = int Function(int hConsoleOutput,
     Pointer<CONSOLE_SCREEN_BUFFER_INFO> lpConsoleScreenBufferInfo);
@@ -786,7 +786,7 @@ typedef getConsoleScreenBufferInfoDart = int Function(int hConsoleOutput,
 // HANDLE WINAPI GetStdHandle(
 //   _In_ DWORD nStdHandle
 // );
-typedef getStdHandleNative = Int64 Function(Int32 nStdHandle);
+typedef getStdHandleNative = IntPtr Function(Int32 nStdHandle);
 typedef getStdHandleDart = int Function(int nStdHandle);
 
 // BOOL WINAPI SetConsoleCursorInfo(
@@ -794,7 +794,7 @@ typedef getStdHandleDart = int Function(int nStdHandle);
 //   _In_ const CONSOLE_CURSOR_INFO *lpConsoleCursorInfo
 // );
 typedef setConsoleCursorInfoNative = Int32 Function(
-    Int64 hConsoleOutput, Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo);
+    IntPtr hConsoleOutput, Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo);
 typedef setConsoleCursorInfoDart = int Function(
     int hConsoleOutput, Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo);
 
@@ -803,7 +803,7 @@ typedef setConsoleCursorInfoDart = int Function(
 //   _In_ COORD  dwCursorPosition
 // );
 typedef setConsoleCursorPositionNative = Int32 Function(
-    Int64 hConsoleOutput, Int32 dwCursorPosition);
+    IntPtr hConsoleOutput, Int32 dwCursorPosition);
 typedef setConsoleCursorPositionDart = int Function(
     int hConsoleOutput, int dwCursorPosition);
 
@@ -812,5 +812,5 @@ typedef setConsoleCursorPositionDart = int Function(
 //   _In_ DWORD  dwMode
 // );
 typedef setConsoleModeNative = Int32 Function(
-    Int64 hConsoleHandle, Int32 dwMode);
+    IntPtr hConsoleHandle, Int32 dwMode);
 typedef setConsoleModeDart = int Function(int hConsoleHandle, int dwMode);

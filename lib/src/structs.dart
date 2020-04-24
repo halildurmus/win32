@@ -31,16 +31,16 @@ class WNDCLASS extends Struct {
   @Int32()
   int cbWndExtra;
 
-  @Int64()
+  @IntPtr()
   int hInstance;
 
-  @Int64()
+  @IntPtr()
   int hIcon;
 
-  @Int64()
+  @IntPtr()
   int hCursor;
 
-  @Int64()
+  @IntPtr()
   int hbrBackground;
 
   Pointer<Utf16> lpszMenuName;
@@ -111,10 +111,10 @@ class CHOOSECOLOR extends Struct {
   @Int32()
   int lStructSize;
 
-  @Int64()
+  @IntPtr()
   int hwndOwner;
 
-  @Int64()
+  @IntPtr()
   int hInstance;
 
   @Int32()
@@ -125,10 +125,10 @@ class CHOOSECOLOR extends Struct {
   @Int32()
   int Flags;
 
-  @Int64()
+  @IntPtr()
   int lCustData;
 
-  Pointer<Int64> lpfnHook;
+  Pointer<IntPtr> lpfnHook;
   Pointer<Uint16> lpTemplateName;
 
   factory CHOOSECOLOR.allocate() => allocate<CHOOSECOLOR>().ref
@@ -159,9 +159,9 @@ class CHOOSECOLOR extends Struct {
 class FINDREPLACE extends Struct {
   @Int32()
   int lStructSize;
-  @Int64()
+  @IntPtr()
   int hwndOwner;
-  @Int64()
+  @IntPtr()
   int hInstance;
   @Int32()
   int Flags;
@@ -171,7 +171,7 @@ class FINDREPLACE extends Struct {
   int wFindWhatLen;
   @Int32()
   int wReplaceWithLen;
-  @Int64()
+  @IntPtr()
   int lCustData;
   Pointer<NativeFunction> lpfnHook;
   Pointer<Utf16> lpTemplateName;
@@ -211,9 +211,9 @@ class FINDREPLACE extends Struct {
 class CHOOSEFONT extends Struct {
   @Int32()
   int lStructSize;
-  @Int64()
+  @IntPtr()
   int hwndOwner;
-  @Int64()
+  @IntPtr()
   int hDC;
 
   Pointer<LOGFONT> lpLogFont;
@@ -226,12 +226,12 @@ class CHOOSEFONT extends Struct {
 
   @Int32()
   int rgbColors;
-  @Int64()
+  @IntPtr()
   int lCustData;
 
   Pointer<NativeFunction> lpfnHook;
   Pointer<Utf16> lpTemplateName;
-  @Int64()
+  @IntPtr()
   int hInstance;
   Pointer<Utf16> lpszStyle;
   @Int16()
@@ -290,9 +290,9 @@ class CHOOSEFONT extends Struct {
 class OPENFILENAME extends Struct {
   @Int32()
   int lStructSize;
-  @Int64()
+  @IntPtr()
   int hwndOwner;
-  @Int64()
+  @IntPtr()
   int hInstance;
 
   Pointer<Utf16> lpstrFilter;
@@ -323,7 +323,7 @@ class OPENFILENAME extends Struct {
 
   Pointer<Utf16> lpstrDefExt;
 
-  @Int64()
+  @IntPtr()
   int lCustData;
 
   Pointer<NativeFunction> lpfnHook;
@@ -489,11 +489,11 @@ class LOGFONT extends Struct {
 class CREATESTRUCT extends Struct {
   Pointer<Void> lpCreateParams;
 
-  @Int64()
+  @IntPtr()
   int hInstance;
-  @Int64()
+  @IntPtr()
   int hMenu;
-  @Int64()
+  @IntPtr()
   int hwndParent;
   @Int32()
   int cy;
@@ -537,16 +537,16 @@ class CREATESTRUCT extends Struct {
 //   DWORD  lPrivate;
 // } MSG, *PMSG, *NPMSG, *LPMSG;
 class MSG extends Struct {
-  @Int64()
+  @IntPtr()
   int hwnd;
 
   @Int32()
   int message;
 
-  @Int64()
+  @IntPtr()
   int wParam;
 
-  @Int64()
+  @IntPtr()
   int lParam;
 
   @Int32()
@@ -647,7 +647,7 @@ class POINT extends Struct {
 //   BYTE rgbReserved[32];
 // } PAINTSTRUCT, *PPAINTSTRUCT, *NPPAINTSTRUCT, *LPPAINTSTRUCT;
 class PAINTSTRUCT extends Struct {
-  @Int64()
+  @IntPtr()
   int hdc;
   @Int32()
   int fErase;
@@ -722,6 +722,8 @@ class RECT extends Struct {
 // We embed this type directly into the union types below, since nested structs
 // are unavailable in Dart FFI at present.
 
+// BUG: Unfortunately this is broken on 32-bit Dart at present.
+
 // typedef struct tagMOUSEINPUT {
 //   LONG      dx;
 //   LONG      dy;
@@ -775,7 +777,7 @@ class KEYBDINPUT extends Struct {
   int type;
 
   @Int32()
-  int padding;
+  int padding1;
 
   @Int16()
   int wVk;
@@ -784,7 +786,7 @@ class KEYBDINPUT extends Struct {
   int wScan;
 
   @Int32()
-  int dwFlag;
+  int dwFlags;
 
   @Int32()
   int time;
@@ -798,7 +800,7 @@ class KEYBDINPUT extends Struct {
     ..type = INPUT_KEYBOARD
     ..wVk = 0
     ..wScan = 0
-    ..dwFlag = 0
+    ..dwFlags = 0
     ..time = 0
     ..dwExtraInfo = nullptr;
 }

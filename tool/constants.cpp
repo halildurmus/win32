@@ -43,6 +43,7 @@ void main()
     printf("sizeof(FINDREPLACE) is %zu\n", sizeof(FINDREPLACE));
     printf("sizeof(LOGFONTW) is %zu\n", sizeof(LOGFONTW));
     printf("sizeof(CHOOSEFONT) is %zu\n", sizeof(CHOOSEFONTW));
+    printf("sizeof(KEYBDINPUT) is %zu\n", sizeof(KEYBDINPUT));
     printf("sizeof(CHOOSECOLORW) is %zu\n", sizeof(CHOOSECOLORW));
     printf("sizeof(MSG) is %zu\n", sizeof(MSG));
 
