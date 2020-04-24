@@ -1,23 +1,23 @@
 import 'dart:ffi';
-import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 class NotepadFont {
-  LOGFONT logfont;
+  LOGFONT logfont = LOGFONT.allocate();
   int hFont;
 
   NotepadFont(int hwndEdit) {
-    logfont = LOGFONT.allocate();
-    final sysFont = GetStockObject(SYSTEM_FONT);
-    GetObject(sysFont, 92, /* sizeOf<LOGFONT>() */ logfont.addressOf.cast());
+    final hSysFont = GetStockObject(SYSTEM_FONT);
+    GetObject(hSysFont, sizeOf<LOGFONT>(), logfont.addressOf);
+
     hFont = CreateFontIndirect(logfont.addressOf);
     SendMessage(hwndEdit, WM_SETFONT, hFont, 0);
   }
 
   bool NotepadChooseFont(int hwnd) {
     final cf = CHOOSEFONT.allocate();
+
     cf.lStructSize = sizeOf<CHOOSEFONT>();
     cf.hwndOwner = hwnd;
     cf.hDC = NULL;
@@ -34,7 +34,8 @@ class NotepadFont {
     cf.nSizeMin = 0;
     cf.nSizeMax = 0;
 
-    return (ChooseFont(cf.addressOf) != FALSE);
+    final result = ChooseFont(cf.addressOf);
+    return (result == TRUE);
   }
 
   void NotepadSetFont(int hwndEdit) {
@@ -42,12 +43,15 @@ class NotepadFont {
     final rect = RECT.allocate();
 
     hFontNew = CreateFontIndirect(logfont.addressOf);
-    print(logfont.lfFaceName1);
-    SendMessage(hwndEdit, WM_SETFONT, hFontNew, 0);
+
+    SendMessage(hwndEdit, WM_SETFONT, hFontNew, FALSE);
     DeleteObject(hFont);
     hFont = hFontNew;
+
     GetClientRect(hwndEdit, rect.addressOf);
     InvalidateRect(hwndEdit, rect.addressOf, TRUE);
+
+    free(rect.addressOf);
   }
 
   void Delete() {
