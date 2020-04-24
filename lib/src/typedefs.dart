@@ -300,8 +300,8 @@ typedef getModuleHandleDart = int Function(Pointer<Utf16> lpModuleName);
 //   int    c,
 //   LPVOID pv
 // );
-typedef getObjectNative = Int32 Function(Int64 h, Int32 c, Pointer<Void> pv);
-typedef getObjectDart = int Function(int h, int c, Pointer<Void> pv);
+typedef getObjectNative = Int32 Function(Int64 h, Int32 c, Pointer pv);
+typedef getObjectDart = int Function(int h, int c, Pointer pv);
 
 // BOOL GetOpenFileNameW(
 //   LPOPENFILENAMEW Arg1
