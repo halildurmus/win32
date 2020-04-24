@@ -1,3 +1,11 @@
+## 1.3.0
+
+- Add notepad example
+- Add 20+ new APIs for common dialogs, message sending, accelerators,
+  menus, fonts and GDI object manipulation
+- Fix APIs to be 32-bit safe
+- Fix some minor bugs
+
 ## 1.2.6
 
 - Add window enumeration (FindWindowEx, EnumWindows, IsWindowVisible, 

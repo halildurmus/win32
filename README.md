@@ -9,7 +9,8 @@ instructive examples for more complex FFI usage scenarios.
 
 ## Requirements
 
-This package assumes the Dart 64-bit compiler, running on Windows.
+This package assumes the [Dart 32-bit or 64-bit compiler](https://dart.dev/get-dart),
+running on Windows.
 
 ## Usage
 
@@ -51,10 +52,15 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `guid.dart`        | Creates a globally unique identifier (GUID)               |
 | `devices.dart`     | Uses volume management APIs to list all disk devices      |
 | `tetris\main.dart` | Port of an open-source Tetris game to Dart                |
+| `notepad\notepad.dart` | Lightweight replica of the Windows notepad applet     |
 
 The Tetris example listed above is a fuller worked example of a reasonably
 complete program that uses the Dart Win32 package. It is a port of a C version
 of the game by Chang-Hung Liang. [More information...](tetris/README.md)
+
+The original C version of the Notepad example was originally authored by Charles
+Petzold, and is kindly [licensed by him](http://www.charlespetzold.com/faq.html)
+without restriction.
 
 ### Flutter samples
 
