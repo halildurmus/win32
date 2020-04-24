@@ -28,8 +28,8 @@ Pointer<Utf16> szTitleName = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
 
 int messageFindReplace;
 
-final iSelBeg = allocate<Uint64>();
-final iSelEnd = allocate<Uint64>();
+final iSelBeg = allocate<Uint64>()..value = 0;
+final iSelEnd = allocate<Uint64>()..value = 0;
 int iEnable;
 
 Pointer<FINDREPLACE> pfr;
@@ -199,10 +199,13 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
     case WM_COMMAND:
       switch (LOWORD(wParam)) {
         case IDM_FILE_NEW:
-          print('filenew');
           if (isFileDirty) return 0;
 
-          SetWindowText(hwndEdit, TEXT('\0'));
+          SetWindowText(hwndEdit, TEXT('\u{0}'));
+          szFileName.cast<Uint16>().elementAt(0).value = 0;
+          szTitleName.cast<Uint16>().elementAt(0).value = 0;
+          DoCaption(hwnd, szTitleName.unpackString(MAX_PATH));
+          isFileDirty = false;
           return 0;
 
         case IDM_FILE_OPEN:
@@ -226,13 +229,35 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
           return 0;
 
         case IDM_FILE_SAVE:
-          return 0;
+          if (szFileName.elementAt(0).cast<Uint16>().value != 0) {
+            if (file.PopFileWrite(hwndEdit, szFileName)) {
+              isFileDirty = false;
+              return 1;
+            } else {
+              OkMessage(hwnd,
+                  'Could not write file ${szFileName.unpackString(MAX_PATH)}');
+              return 0;
+            }
+          }
+          continue SAVE_AS; // fallthru if file is empty
 
+        SAVE_AS:
         case IDM_FILE_SAVE_AS:
+          if (file.PopFileSaveDlg(hwnd, szFileName, szTitleName) != 0) {
+            DoCaption(hwnd, szTitleName.unpackString(MAX_PATH));
+
+            if (file.PopFileWrite(hwndEdit, szFileName)) {
+              isFileDirty = false;
+              return 1;
+            } else {
+              OkMessage(hwnd,
+                  'Could not write file ${szFileName.unpackString(MAX_PATH)}');
+            }
+          }
           return 0;
 
         case IDM_FILE_PRINT:
-          print('fileprint');
+          OkMessage(hwnd, 'Print not yet implemented!');
           return 0;
 
         case IDM_APP_EXIT:
@@ -269,9 +294,12 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
           return 0;
 
         case IDM_SEARCH_NEXT:
+          SendMessage(hwndEdit, EM_GETSEL, 0, iOffset);
           return 0;
 
         case IDM_SEARCH_REPLACE:
+          SendMessage(hwndEdit, EM_GETSEL, 0, iOffset);
+          hDlgModeless = NotepadFind().ShowReplaceDialog(hwnd);
           return 0;
 
         case IDM_FORMAT_FONT:
@@ -281,11 +309,14 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
             font.NotepadSetFont(hwndEdit);
           }
 
-          font.Delete();
           return 0;
 
         case IDM_HELP:
           OkMessage(hwnd, 'Help not yet implemented!');
+          return 0;
+
+        case IDM_APP_ABOUT:
+          OkMessage(hwnd, 'About not yet implemented!');
           return 0;
       }
       return 0;
