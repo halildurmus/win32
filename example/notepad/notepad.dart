@@ -22,7 +22,7 @@ final file = NotepadFile();
 
 bool isFileDirty = false;
 int hwndEdit;
-int iOffset;
+int iOffset = NULL;
 Pointer<Utf16> szFileName = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
 Pointer<Utf16> szTitleName = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
 

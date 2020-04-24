@@ -78,6 +78,7 @@ class ResourceLibrary {
       ((accel.key & 0xFFFF) << 16) +
       (accel.fVirt & 0xFFFF);
 
+  // TODO: explore ways to load this
   static int LoadAccelerators() {
     final accel1 = ACCEL.allocate()
       ..fVirt = FVIRTKEY
