@@ -59,6 +59,40 @@ class WNDCLASS extends Struct {
     ..lpszClassName = nullptr;
 }
 
+// typedef struct _SECURITY_ATTRIBUTES {
+//   DWORD  nLength;
+//   LPVOID lpSecurityDescriptor;
+//   BOOL   bInheritHandle;
+// } SECURITY_ATTRIBUTES, *PSECURITY_ATTRIBUTES, *LPSECURITY_ATTRIBUTES;
+class SECURITY_ATTRIBUTES extends Struct {
+  @Int32()
+  int nLength;
+
+  Pointer<Void> lpSecurityDescriptor;
+
+  @Int32()
+  int bInheritHandle;
+}
+
+// typedef struct tagACCEL {
+//     WORD   fVirt;               /* Also called the flags field */
+//     WORD   key;
+//     DWORD  cmd;
+// } ACCEL, *LPACCEL;
+class ACCEL extends Struct {
+  @Int16()
+  int fVirt;
+  @Int16()
+  int key;
+  @Int32()
+  int cmd;
+
+  factory ACCEL.allocate() => allocate<ACCEL>().ref
+    ..fVirt = 0
+    ..key = 0
+    ..cmd = 0;
+}
+
 // In the following struct, COLORREF is a DWORD that contains RGB values
 // in the form 0x00bbggrr
 
@@ -107,6 +141,390 @@ class CHOOSECOLOR extends Struct {
     ..lCustData = 0
     ..lpfnHook = nullptr
     ..lpTemplateName = nullptr;
+}
+
+// typedef struct tagFINDREPLACEW {
+//   DWORD        lStructSize;
+//   HWND         hwndOwner;
+//   HINSTANCE    hInstance;
+//   DWORD        Flags;
+//   LPWSTR       lpstrFindWhat;
+//   LPWSTR       lpstrReplaceWith;
+//   WORD         wFindWhatLen;
+//   WORD         wReplaceWithLen;
+//   LPARAM       lCustData;
+//   LPFRHOOKPROC lpfnHook;
+//   LPCWSTR      lpTemplateName;
+// } FINDREPLACEW, *LPFINDREPLACEW;
+class FINDREPLACE extends Struct {
+  @Int32()
+  int lStructSize;
+  @Int64()
+  int hwndOwner;
+  @Int64()
+  int hInstance;
+  @Int32()
+  int Flags;
+  Pointer<Utf16> lpstrFindWhat;
+  Pointer<Utf16> lpstrReplaceWith;
+  @Int32()
+  int wFindWhatLen;
+  @Int32()
+  int wReplaceWithLen;
+  @Int64()
+  int lCustData;
+  Pointer<NativeFunction> lpfnHook;
+  Pointer<Utf16> lpTemplateName;
+
+  factory FINDREPLACE.allocate() => allocate<FINDREPLACE>().ref
+    ..lStructSize = 0
+    ..hwndOwner = 0
+    ..hInstance = 0
+    ..Flags = 0
+    ..lpstrFindWhat = nullptr
+    ..lpstrReplaceWith = nullptr
+    ..wFindWhatLen = 0
+    ..wReplaceWithLen = 0
+    ..lCustData = 0
+    ..lpfnHook = nullptr
+    ..lpTemplateName = nullptr;
+}
+
+// typedef struct tagCHOOSEFONTW {
+//   DWORD        lStructSize;
+//   HWND         hwndOwner;
+//   HDC          hDC;
+//   LPLOGFONTW   lpLogFont;
+//   INT          iPointSize;
+//   DWORD        Flags;
+//   COLORREF     rgbColors;
+//   LPARAM       lCustData;
+//   LPCFHOOKPROC lpfnHook;
+//   LPCWSTR      lpTemplateName;
+//   HINSTANCE    hInstance;
+//   LPWSTR       lpszStyle;
+//   WORD         nFontType;
+//   WORD         ___MISSING_ALIGNMENT__;
+//   INT          nSizeMin;
+//   INT          nSizeMax;
+// } CHOOSEFONTW;
+class CHOOSEFONT extends Struct {
+  @Int32()
+  int lStructSize;
+  @Int64()
+  int hwndOwner;
+  @Int64()
+  int hDC;
+
+  Pointer<LOGFONT> lpLogFont;
+
+  @Int32()
+  int iPointSize;
+
+  @Int32()
+  int Flags;
+
+  @Int32()
+  int rgbColors;
+  @Int64()
+  int lCustData;
+
+  Pointer<NativeFunction> lpfnHook;
+  Pointer<Utf16> lpTemplateName;
+  @Int64()
+  int hInstance;
+  Pointer<Utf16> lpszStyle;
+  @Int16()
+  int nFontType;
+  @Int16()
+  int reserved;
+  @Int32()
+  int nSizeMin;
+  @Int32()
+  int nSizeMax;
+
+  factory CHOOSEFONT.allocate() => allocate<CHOOSEFONT>().ref
+    ..lStructSize = 0
+    ..hwndOwner = 0
+    ..hDC = 0
+    ..lpLogFont = nullptr
+    ..iPointSize = 0
+    ..Flags = 0
+    ..rgbColors = 0
+    ..lCustData = 0
+    ..lpfnHook = nullptr
+    ..lpTemplateName = nullptr
+    ..hInstance = 0
+    ..lpszStyle = nullptr
+    ..nFontType = 0
+    ..reserved = 0
+    ..nSizeMin = 0
+    ..nSizeMax = 0;
+}
+
+// typedef struct tagOFNW {
+//    DWORD        lStructSize;
+//    HWND         hwndOwner;
+//    HINSTANCE    hInstance;
+//    LPCWSTR      lpstrFilter;
+//    LPWSTR       lpstrCustomFilter;
+//    DWORD        nMaxCustFilter;
+//    DWORD        nFilterIndex;
+//    LPWSTR       lpstrFile;
+//    DWORD        nMaxFile;
+//    LPWSTR       lpstrFileTitle;
+//    DWORD        nMaxFileTitle;
+//    LPCWSTR      lpstrInitialDir;
+//    LPCWSTR      lpstrTitle;
+//    DWORD        Flags;
+//    WORD         nFileOffset;
+//    WORD         nFileExtension;
+//    LPCWSTR      lpstrDefExt;
+//    LPARAM       lCustData;
+//    LPOFNHOOKPROC lpfnHook;
+//    LPCWSTR      lpTemplateName;
+//    void *        pvReserved;
+//    DWORD        dwReserved;
+//    DWORD        FlagsEx;
+// } OPENFILENAMEW, *LPOPENFILENAMEW;
+class OPENFILENAME extends Struct {
+  @Int32()
+  int lStructSize;
+  @Int64()
+  int hwndOwner;
+  @Int64()
+  int hInstance;
+
+  Pointer<Utf16> lpstrFilter;
+  Pointer<Utf16> lpstrCustomFilter;
+
+  @Int32()
+  int nMaxCustFilter;
+  @Int32()
+  int nFilterIndex;
+
+  Pointer<Utf16> lpstrFile;
+  @Int32()
+  int nMaxFile;
+
+  Pointer<Utf16> lpstrFileTitle;
+  @Int32()
+  int nMaxFileTitle;
+
+  Pointer<Utf16> lpstrInitialDir;
+  Pointer<Utf16> lpstrTitle;
+
+  @Int32()
+  int Flags;
+  @Int16()
+  int nFileOffset;
+  @Int16()
+  int nFileExtension;
+
+  Pointer<Utf16> lpstrDefExt;
+
+  @Int64()
+  int lCustData;
+
+  Pointer<NativeFunction> lpfnHook;
+  Pointer<Utf16> lpTemplateName;
+  Pointer<Void> pvReserved;
+
+  @Int32()
+  int dwReserved;
+  @Int32()
+  int FlagsEx;
+
+  factory OPENFILENAME.allocate() => allocate<OPENFILENAME>().ref
+    ..lStructSize = 0
+    ..hwndOwner = 0
+    ..hInstance = 0
+    ..lpstrFilter = nullptr
+    ..lpstrCustomFilter = nullptr
+    ..nMaxCustFilter = 0
+    ..nFilterIndex = 0
+    ..lpstrFile = nullptr
+    ..nMaxFile = 0
+    ..lpstrFileTitle = nullptr
+    ..nMaxFileTitle = 0
+    ..lpstrInitialDir = nullptr
+    ..lpstrTitle = nullptr
+    ..Flags = 0
+    ..nFileOffset = 0
+    ..nFileExtension = 0
+    ..lpstrDefExt = nullptr
+    ..lCustData = 0
+    ..lpfnHook = nullptr
+    ..lpTemplateName = nullptr
+    ..pvReserved = nullptr
+    ..dwReserved = 0
+    ..FlagsEx = 0;
+}
+
+// typedef struct {
+//         lfHeight;
+//         lfWidth;
+//         lfEscapement;
+//         lfOrientation;
+//         lfWeight;
+//   BYTE  lfItalic;
+//   BYTE  lfUnderline;
+//   BYTE  lfStrikeOut;
+//   BYTE  lfCharSet;
+//   BYTE  lfOutPrecision;
+//   BYTE  lfClipPrecision;
+//   BYTE  lfQuality;
+//   BYTE  lfPitchAndFamily;
+//   WCHAR lfFaceName[LF_FACESIZE];
+// } LOGFONTW;
+class LOGFONT extends Struct {
+  @Int32()
+  int lfHeight;
+  @Int32()
+  int lfWidth;
+  @Int32()
+  int lfEscapement;
+  @Int32()
+  int lfOrientation;
+  @Int32()
+  int lfWeight;
+  @Int8()
+  int lfItalic;
+  @Int8()
+  int lfUnderline;
+  @Int8()
+  int lfStrikeOut;
+  @Int8()
+  int lfCharSet;
+  @Int8()
+  int lfOutPrecision;
+  @Int8()
+  int lfClipPrecision;
+  @Int8()
+  int lfQuality;
+  @Int8()
+  int lfPitchAndFamily;
+
+  // Need to use @Int32() here, both because of the lack of fixed-size
+  // arrays, and because @Int64() doesn't line up with word boundaries
+  @Int32()
+  int lfFaceName1;
+  @Int32()
+  int lfFaceName2;
+  @Int32()
+  int lfFaceName3;
+  @Int32()
+  int lfFaceName4;
+  @Int32()
+  int lfFaceName5;
+  @Int32()
+  int lfFaceName6;
+  @Int32()
+  int lfFaceName7;
+  @Int32()
+  int lfFaceName8;
+  @Int32()
+  int lfFaceName9;
+  @Int32()
+  int lfFaceName10;
+  @Int32()
+  int lfFaceName11;
+  @Int32()
+  int lfFaceName12;
+  @Int32()
+  int lfFaceName13;
+  @Int32()
+  int lfFaceName14;
+  @Int32()
+  int lfFaceName15;
+  @Int32()
+  int lfFaceName16;
+
+  factory LOGFONT.allocate() => allocate<LOGFONT>().ref
+    ..lfHeight = 0
+    ..lfWidth = 0
+    ..lfEscapement = 0
+    ..lfOrientation = 0
+    ..lfWeight = 0
+    ..lfItalic = 0
+    ..lfUnderline = 0
+    ..lfStrikeOut = 0
+    ..lfCharSet = 0
+    ..lfOutPrecision = 0
+    ..lfClipPrecision = 0
+    ..lfQuality = 0
+    ..lfPitchAndFamily = 0
+    ..lfFaceName1 = 0
+    ..lfFaceName2 = 0
+    ..lfFaceName3 = 0
+    ..lfFaceName4 = 0
+    ..lfFaceName5 = 0
+    ..lfFaceName6 = 0
+    ..lfFaceName7 = 0
+    ..lfFaceName8 = 0
+    ..lfFaceName9 = 0
+    ..lfFaceName10 = 0
+    ..lfFaceName11 = 0
+    ..lfFaceName12 = 0
+    ..lfFaceName13 = 0
+    ..lfFaceName14 = 0
+    ..lfFaceName15 = 0
+    ..lfFaceName16 = 0;
+}
+
+// typedef struct tagCREATESTRUCTW {
+//   LPVOID    lpCreateParams;
+//   HINSTANCE hInstance;
+//   HMENU     hMenu;
+//   HWND      hwndParent;
+//   int       cy;
+//   int       cx;
+//   int       y;
+//   int       x;
+//   LONG      style;
+//   LPCWSTR   lpszName;
+//   LPCWSTR   lpszClass;
+//   DWORD     dwExStyle;
+// } CREATESTRUCTW, *LPCREATESTRUCTW;
+class CREATESTRUCT extends Struct {
+  Pointer<Void> lpCreateParams;
+
+  @Int64()
+  int hInstance;
+  @Int64()
+  int hMenu;
+  @Int64()
+  int hwndParent;
+  @Int32()
+  int cy;
+  @Int32()
+  int cx;
+  @Int32()
+  int y;
+  @Int32()
+  int x;
+  @Int32()
+  int style;
+
+  Pointer<Utf16> lpszName;
+  Pointer<Utf16> lpszClass;
+
+  @Int32()
+  int dwExStyle;
+
+  factory CREATESTRUCT.allocate() => allocate<CREATESTRUCT>().ref
+    ..lpCreateParams = nullptr
+    ..hInstance = 0
+    ..hMenu = 0
+    ..hwndParent = 0
+    ..cy = 0
+    ..cx = 0
+    ..y = 0
+    ..x = 0
+    ..style = 0
+    ..lpszName = nullptr
+    ..lpszClass = nullptr
+    ..dwExStyle = 0;
 }
 
 // typedef struct tagMSG {

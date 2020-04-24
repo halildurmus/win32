@@ -7,12 +7,10 @@ import 'package:ffi/ffi.dart';
 
 import 'typedefs.dart';
 
-// Prototypes of window-related functions, constants and structs in user32.dll
-
 // *** Callbacks ***
+typedef LPFRHookProc = Pointer<Uint32> Function(Int64, Int32, Int64, Int64);
+typedef TimerProc = Void Function(Int64, Uint32, Pointer<Uint32>, Int32);
 typedef EnumWindowsProc = Int32 Function(Int64 hwnd, Int64 lParam);
-typedef TimerProc = Void Function(
-    Int64 Arg1, Uint32 Arg2, Pointer<Uint32> Arg3, Int32 Arg4);
 typedef WindowProc = Int64 Function(
     Int64 hwnd, Int32 uMsg, Int64 wParam, Int64 lParam);
 
@@ -21,18 +19,29 @@ final TEXT = Utf16.toUtf16;
 
 // *** APIs ***
 final user32 = DynamicLibrary.open('user32.dll');
+final AppendMenu =
+    user32.lookupFunction<appendMenuNative, appendMenuDart>('AppendMenuW');
 final BeginPaint =
     user32.lookupFunction<beginPaintNative, beginPaintDart>('BeginPaint');
+final CreateAcceleratorTable = user32.lookupFunction<
+    createAcceleratorTableNative,
+    createAcceleratorTableDart>('CreateAcceleratorTableW');
+final CreateMenu =
+    user32.lookupFunction<createMenuNative, createMenuDart>('CreateMenu');
 final CreateWindowEx =
     user32.lookupFunction<createWindowExNative, createWindowExDart>(
         'CreateWindowExW');
 final DefWindowProc = user32
     .lookupFunction<defWindowProcNative, defWindowProcDart>('DefWindowProcW');
+final DestroyWindow = user32
+    .lookupFunction<destroyWindowNative, destroyWindowDart>('DestroyWindow');
 final DispatchMessage =
     user32.lookupFunction<dispatchMessageNative, dispatchMessageDart>(
         'DispatchMessageW');
 final DrawText =
     user32.lookupFunction<drawTextNative, drawTextDart>('DrawTextW');
+final EnableMenuItem = user32
+    .lookupFunction<enableMenuItemNative, enableMenuItemDart>('EnableMenuItem');
 final EndPaint =
     user32.lookupFunction<endPaintNative, endPaintDart>('EndPaint');
 final EnumWindows =
@@ -48,11 +57,19 @@ final GetMessage =
     user32.lookupFunction<getMessageNative, getMessageDart>('GetMessageW');
 final GetScrollInfo = user32
     .lookupFunction<getScrollInfoNative, getScrollInfoDart>('GetScrollInfo');
+final InvalidateRect = user32
+    .lookupFunction<invalidateRectNative, invalidateRectDart>('InvalidateRect');
 final GetWindowText = user32
     .lookupFunction<getWindowTextNative, getWindowTextDart>('GetWindowTextW');
 final GetWindowTextLength =
     user32.lookupFunction<getWindowTextLengthNative, getWindowTextLengthDart>(
         'GetWindowTextLengthW');
+final IsClipboardFormatAvailable = user32.lookupFunction<
+    isClipboardFormatAvailableNative,
+    isClipboardFormatAvailableDart>('IsClipboardFormatAvailable');
+final IsDialogMessage =
+    user32.lookupFunction<isDialogMessageNative, isDialogMessageDart>(
+        'IsDialogMessageW');
 final IsWindowVisible =
     user32.lookupFunction<isWindowVisibleNative, isWindowVisibleDart>(
         'IsWindowVisible');
@@ -64,6 +81,8 @@ final LoadIcon =
     user32.lookupFunction<loadIconNative, loadIconDart>('LoadIconW');
 final MessageBox =
     user32.lookupFunction<messageBoxNative, messageBoxDart>('MessageBoxW');
+final MoveWindow =
+    user32.lookupFunction<moveWindowNative, moveWindowDart>('MoveWindow');
 final PostQuitMessage =
     user32.lookupFunction<postQuitMessageNative, postQuitMessageDart>(
         'PostQuitMessage');
@@ -75,12 +94,21 @@ final ScrollWindow =
     user32.lookupFunction<scrollWindowNative, scrollWindowDart>('ScrollWindow');
 final SendInput =
     user32.lookupFunction<sendInputNative, sendInputDart>('SendInput');
+final SendMessage =
+    user32.lookupFunction<sendMessageNative, sendMessageDart>('SendMessageW');
 final SetScrollInfo = user32
     .lookupFunction<setScrollInfoNative, setScrollInfoDart>('SetScrollInfo');
+final SetFocus =
+    user32.lookupFunction<setFocusNative, setFocusDart>('SetFocus');
 final SetTimer =
     user32.lookupFunction<setTimerNative, setTimerDart>('SetTimer');
+final SetWindowText = user32
+    .lookupFunction<setWindowTextNative, setWindowTextDart>('SetWindowTextW');
 final ShowWindow =
     user32.lookupFunction<showWindowNative, showWindowDart>('ShowWindow');
+final TranslateAccelerator =
+    user32.lookupFunction<translateAcceleratorNative, translateAcceleratorDart>(
+        'TranslateAcceleratorW');
 final TranslateMessage =
     user32.lookupFunction<translateMessageNative, translateMessageDart>(
         'TranslateMessage');
@@ -88,6 +116,8 @@ final UpdateWindow =
     user32.lookupFunction<updateWindowNative, updateWindowDart>('UpdateWindow');
 
 final kernel32 = DynamicLibrary.open('kernel32.dll');
+final CreateFile =
+    kernel32.lookupFunction<createFileNative, createFileDart>('CreateFileW');
 final FindFirstVolume =
     kernel32.lookupFunction<findFirstVolumeNative, findFirstVolumeDart>(
         'FindFirstVolumeW');
@@ -129,11 +159,16 @@ final FillConsoleOutputAttribute = kernel32.lookupFunction<
     fillConsoleOutputAttributeDart>('FillConsoleOutputAttribute');
 
 final gdi32 = DynamicLibrary.open('gdi32.dll');
+final CreateFontIndirect =
+    gdi32.lookupFunction<createFontIndirectNative, createFontIndirectDart>(
+        'CreateFontIndirectW');
 final CreateSolidBrush =
     gdi32.lookupFunction<createSolidBrushNative, createSolidBrushDart>(
         'CreateSolidBrush');
 final DeleteObject =
     gdi32.lookupFunction<deleteObjectNative, deleteObjectDart>('DeleteObject');
+final GetObject =
+    gdi32.lookupFunction<getObjectNative, getObjectDart>('GetObjectW');
 final GetStockObject = gdi32
     .lookupFunction<getStockObjectNative, getStockObjectDart>('GetStockObject');
 final GetTextMetrics =
@@ -172,6 +207,18 @@ final ShellExecute = shell32
 final comdlg32 = DynamicLibrary.open('comdlg32.dll');
 final ChooseColor =
     comdlg32.lookupFunction<chooseColorNative, chooseColorDart>('ChooseColorW');
+final ChooseFont =
+    comdlg32.lookupFunction<chooseFontNative, chooseFontDart>('ChooseFontW');
+final FindText =
+    comdlg32.lookupFunction<findTextNative, findTextDart>('FindTextW');
+final GetOpenFileName =
+    comdlg32.lookupFunction<getOpenFileNameNative, getOpenFileNameDart>(
+        'GetOpenFileNameW');
+final GetSaveFileName =
+    comdlg32.lookupFunction<getSaveFileNameNative, getSaveFileNameDart>(
+        'GetSaveFileNameW');
+final ReplaceText =
+    comdlg32.lookupFunction<replaceTextNative, replaceTextDart>('ReplaceTextW');
 
 final ole32 = DynamicLibrary.open('ole32.dll');
 final CoCreateGuid =

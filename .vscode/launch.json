@@ -6,7 +6,7 @@
     "configurations": [
         {
             "name": "Dart",
-            "program": "example/tetris/main.dart",
+            "program": "example/notepad/notepad.dart",
             "request": "launch",
             "type": "dart"
         }

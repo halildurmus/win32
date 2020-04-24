@@ -40,6 +40,9 @@ void main()
     printf("sizeof(POINT) is %zu\n", sizeof(POINT));
     printf("sizeof(RECT) is %zu\n", sizeof(RECT));
     printf("sizeof(COLORREF) is %zu\n", sizeof(COLORREF));
+    printf("sizeof(FINDREPLACE) is %zu\n", sizeof(FINDREPLACE));
+    printf("sizeof(LOGFONTW) is %zu\n", sizeof(LOGFONTW));
+    printf("sizeof(CHOOSEFONT) is %zu\n", sizeof(CHOOSEFONTW));
     printf("sizeof(CHOOSECOLORW) is %zu\n", sizeof(CHOOSECOLORW));
     printf("sizeof(MSG) is %zu\n", sizeof(MSG));
 
@@ -48,6 +51,7 @@ void main()
     printf("sizeof(UINT) is %zu\n", sizeof(UINT));
     printf("sizeof(DWORD) is %zu\n", sizeof(DWORD));
     printf("sizeof(WORD) is %zu\n", sizeof(WORD));
+    printf("sizeof(INT) is %zu\n", sizeof(INT));
     printf("sizeof(SHORT) is %zu\n", sizeof(SHORT));
     printf("sizeof(LONG) is %zu\n", sizeof(LONG));
     printf("sizeof(BYTE) is %zu\n", sizeof(BYTE));
