@@ -62,4 +62,16 @@ class NotepadFile {
 
     return true;
   }
+
+  bool PopFileWrite(int hwndEdit, Pointer<Utf16> fileName) {
+    final file = File(fileName.unpackString(MAX_PATH));
+    final iLength = GetWindowTextLength(hwndEdit);
+    final pstrBuffer = allocate<Uint16>(count: iLength + 1).cast<Utf16>();
+
+    GetWindowText(hwndEdit, pstrBuffer, iLength + 1);
+    file.writeAsStringSync(pstrBuffer.unpackString(iLength + 1));
+
+    free(pstrBuffer);
+    return true;
+  }
 }
