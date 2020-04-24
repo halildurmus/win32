@@ -91,19 +91,11 @@ class ResourceLibrary {
       ..cmd = IDM_FILE_PRINT;
 
     var pTable = allocate<Uint64>(count: 2);
-    final accel1AsUint64 = AccelToUint64(accel1);
-    print(accel1AsUint64.toRadixString(16).padLeft(16, '0'));
-    print(accel1.addressOf
-        .cast<Uint64>()
-        .value
-        .toRadixString(16)
-        .padLeft(16, '0'));
 
     pTable.elementAt(0).value = AccelToUint64(accel2);
     pTable.elementAt(1).value = AccelToUint64(accel1);
 
     final result = CreateAcceleratorTable(pTable, 2);
-    print('accel: $result');
     return result;
   }
 }

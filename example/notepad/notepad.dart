@@ -217,7 +217,6 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
           if (file.PopFileOpenDlg(hwnd, szFileName, szTitleName) == TRUE) {
             if (!file.PopFileRead(hwndEdit, szFileName)) {
-              print('OKmessage');
               OkMessage(hwnd, 'Could not read file $szTitleName!');
               szFileName.cast<Uint16>().elementAt(0).value = 0;
               szTitleName.cast<Uint16>().elementAt(0).value = 0;

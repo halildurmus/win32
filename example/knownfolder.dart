@@ -23,7 +23,7 @@ String getFolderPath() {
 String getKnownFolderPath() {
   final guidFolder = GUID.fromString(FOLDERID_Documents);
 
-  final ptr = allocate<Uint64>();
+  final ptr = allocate<IntPtr>();
   final hr = SHGetKnownFolderPath(guidFolder.addressOf, 0, 0, ptr);
 
   if (SUCCEEDED(hr)) {
