@@ -404,22 +404,41 @@ class LOGFONT extends Struct {
   int lfQuality;
   @Int8()
   int lfPitchAndFamily;
-  @Int64()
+
+  // Need to use @Int32() here, both because of the lack of fixed-size
+  // arrays, and because @Int64() doesn't line up with word boundaries
+  @Int32()
   int lfFaceName1;
-  @Int64()
+  @Int32()
   int lfFaceName2;
-  @Int64()
+  @Int32()
   int lfFaceName3;
-  @Int64()
+  @Int32()
   int lfFaceName4;
-  @Int64()
+  @Int32()
   int lfFaceName5;
-  @Int64()
+  @Int32()
   int lfFaceName6;
-  @Int64()
+  @Int32()
   int lfFaceName7;
-  @Int64()
+  @Int32()
   int lfFaceName8;
+  @Int32()
+  int lfFaceName9;
+  @Int32()
+  int lfFaceName10;
+  @Int32()
+  int lfFaceName11;
+  @Int32()
+  int lfFaceName12;
+  @Int32()
+  int lfFaceName13;
+  @Int32()
+  int lfFaceName14;
+  @Int32()
+  int lfFaceName15;
+  @Int32()
+  int lfFaceName16;
 
   factory LOGFONT.allocate() => allocate<LOGFONT>().ref
     ..lfHeight = 0
@@ -442,7 +461,15 @@ class LOGFONT extends Struct {
     ..lfFaceName5 = 0
     ..lfFaceName6 = 0
     ..lfFaceName7 = 0
-    ..lfFaceName8 = 0;
+    ..lfFaceName8 = 0
+    ..lfFaceName9 = 0
+    ..lfFaceName10 = 0
+    ..lfFaceName11 = 0
+    ..lfFaceName12 = 0
+    ..lfFaceName13 = 0
+    ..lfFaceName14 = 0
+    ..lfFaceName15 = 0
+    ..lfFaceName16 = 0;
 }
 
 // typedef struct tagCREATESTRUCTW {
