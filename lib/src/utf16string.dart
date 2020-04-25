@@ -4,6 +4,10 @@ import 'package:win32/win32.dart';
 
 class Utf16String {
   Pointer<Utf16> pointer;
+
+  /// Represents the length set. This value is only accurate if you don't
+  /// pass the `pointer` value to other functions. In that event, you will need
+  /// to set the length manually.
   int length;
 
   /// Creates a fixed length string with capacity to store `length` characters,
@@ -39,7 +43,12 @@ class Utf16String {
 
   /// Returns the referenced string as a Dart `String`
   @override
-  String toString() => pointer.unpackString(length);
+  String toString({int maxLength = -1}) {
+    if (maxLength == -1) {
+      maxLength = length;
+    }
+    return pointer.unpackString(length);
+  }
 
   /// Unpacks the string into a `List`.
   ///
