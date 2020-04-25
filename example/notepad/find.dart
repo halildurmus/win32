@@ -1,3 +1,7 @@
+// find.dart
+
+// Find and replace routines.
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';

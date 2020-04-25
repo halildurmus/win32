@@ -1,13 +1,19 @@
+// file.dart
+
+// File loading and saving
+
 import 'dart:ffi';
 import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+import 'notepad.dart';
+
 class NotepadFile {
   OPENFILENAME ofn;
 
-  void PopFileInitialize(int hwnd) {
+  NotepadFile(int hwnd) {
     ofn = OPENFILENAME.allocate();
     ofn.lStructSize = sizeOf<OPENFILENAME>();
     ofn.hwndOwner = hwnd;
@@ -32,30 +38,81 @@ class NotepadFile {
     ofn.lpTemplateName = nullptr;
   }
 
-  int PopFileOpenDlg(
-      int hwnd, Pointer<Utf16> fileName, Pointer<Utf16> titleName) {
+  /// Shows open dialog.
+  ///
+  /// Returns `true` if the the user selects a file and the common dialog
+  /// is successful.
+  bool ShowOpenDialog(int hwnd) {
+    Pointer<Uint16> lpstrFile = nullptr;
+    Pointer<Uint16> lpstrFileTitle = nullptr;
+
+    if (fileFullPath == null) {
+      lpstrFile = allocate<Uint16>(count: MAX_PATH);
+      lpstrFile.value = 0;
+    }
+
+    if (fileFullPath == null) {
+      lpstrFileTitle = allocate<Uint16>(count: MAX_PATH);
+      lpstrFileTitle.value = 0;
+    }
+
     ofn.hwndOwner = hwnd;
-    ofn.lpstrFile = fileName;
-    ofn.lpstrFileTitle = titleName;
+    ofn.lpstrFile =
+        fileFullPath != null ? TEXT(fileFullPath) : lpstrFile.cast<Utf16>();
+    ofn.lpstrFileTitle =
+        fileTitle != null ? TEXT(fileTitle) : lpstrFileTitle.cast<Utf16>();
     ofn.Flags = OFN_HIDEREADONLY | OFN_CREATEPROMPT;
 
-    return GetOpenFileName(ofn.addressOf);
+    final result = GetOpenFileName(ofn.addressOf);
+    if (result == 0) {
+      return false;
+    } else {
+      fileFullPath = ofn.lpstrFile.unpackString(MAX_PATH);
+      fileTitle = ofn.lpstrFileTitle.unpackString(MAX_PATH);
+      return true;
+    }
   }
 
-  int PopFileSaveDlg(
-      int hwnd, Pointer<Utf16> fileName, Pointer<Utf16> titleName) {
+  /// Shows save dialog and updates `fileFullPath` and `fileTitle` if the user
+  /// selects a valid file.
+  ///
+  /// Returns `true` if the the user selects a file and the common dialog
+  /// is successful.
+  bool ShowSaveDialog(int hwnd) {
+    Pointer<Uint16> lpstrFile = nullptr;
+    Pointer<Uint16> lpstrFileTitle = nullptr;
+
+    if (fileFullPath == null) {
+      lpstrFile = allocate<Uint16>(count: MAX_PATH);
+      lpstrFile.value = 0;
+    }
+
+    if (fileFullPath == null) {
+      lpstrFileTitle = allocate<Uint16>(count: MAX_PATH);
+      lpstrFileTitle.value = 0;
+    }
+
     ofn.hwndOwner = hwnd;
-    ofn.lpstrFile = fileName;
-    ofn.lpstrFileTitle = titleName;
+    ofn.lpstrFile =
+        fileFullPath != null ? TEXT(fileFullPath) : lpstrFile.cast<Utf16>();
+    ofn.lpstrFileTitle =
+        fileTitle != null ? TEXT(fileTitle) : lpstrFileTitle.cast<Utf16>();
     ofn.Flags = OFN_OVERWRITEPROMPT;
 
-    return GetSaveFileName(ofn.addressOf);
+    final result = GetSaveFileName(ofn.addressOf);
+    if (result == 0) {
+      return false;
+    } else {
+      fileFullPath = ofn.lpstrFile.unpackString(MAX_PATH);
+      fileTitle = ofn.lpstrTitle.unpackString(MAX_PATH);
+      return true;
+    }
   }
 
-  bool PopFileRead(int hwndEdit, Pointer<Utf16> fileName) {
+  bool ReadFileIntoEditControl(int hwndEdit) {
     // Fairly naive implementation that doesn't account for
     // string encoding. That's fine -- this is a toy app!
-    final file = File(fileName.unpackString(MAX_PATH));
+    final file = File(fileFullPath);
     final contents = file.readAsStringSync();
 
     SetWindowText(hwndEdit, TEXT(contents));
@@ -63,8 +120,8 @@ class NotepadFile {
     return true;
   }
 
-  bool PopFileWrite(int hwndEdit, Pointer<Utf16> fileName) {
-    final file = File(fileName.unpackString(MAX_PATH));
+  bool WriteFileFromEditControl(int hwndEdit) {
+    final file = File(fileFullPath);
     final iLength = GetWindowTextLength(hwndEdit);
     final pstrBuffer = allocate<Uint16>(count: iLength + 1).cast<Utf16>();
 

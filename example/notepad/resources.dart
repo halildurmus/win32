@@ -1,3 +1,7 @@
+// resources.dart
+
+// Global resource identifiers, menus and accelerators
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -5,6 +9,7 @@ import 'package:win32/win32.dart';
 
 import 'notepad.dart';
 
+// Resource IDs
 const IDC_FILENAME = 1000;
 const IDM_FILE_NEW = 40001;
 const IDM_FILE_OPEN = 40002;
@@ -25,7 +30,10 @@ const IDM_FORMAT_FONT = 40016;
 const IDM_HELP = 40017;
 const IDM_APP_ABOUT = 40018;
 
-class ResourceLibrary {
+// wParam for edit control messages
+const EDITID = 1;
+
+class NotepadResources {
   static int LoadMenus() {
     final hMenu = CreateMenu();
 
@@ -67,7 +75,7 @@ class ResourceLibrary {
     hMenuPopup = CreateMenu();
     AppendMenu(hMenuPopup, MF_STRING, IDM_HELP, TEXT('&Help'));
     AppendMenu(
-        hMenuPopup, MF_STRING, IDM_APP_ABOUT, TEXT('&About $APP_NAME...'));
+        hMenuPopup, MF_STRING, IDM_APP_ABOUT, TEXT('&About ${APP_NAME}...'));
     AppendMenu(hMenu, MF_POPUP, hMenuPopup, TEXT('&Help'));
 
     return hMenu;
