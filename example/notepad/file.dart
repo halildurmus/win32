@@ -5,7 +5,6 @@
 import 'dart:ffi';
 import 'dart:io';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'notepad.dart';
@@ -43,25 +42,17 @@ class NotepadFile {
   /// Returns `true` if the the user selects a file and the common dialog
   /// is successful.
   bool ShowOpenDialog(int hwnd) {
-    Pointer<Utf16> lpstrFile;
-    Pointer<Utf16> lpstrFileTitle;
+    final strFile = fileFullPath != null
+        ? Utf16String.fromString(fileFullPath)
+        : Utf16String(MAX_PATH);
 
-    if (fileFullPath == null) {
-      lpstrFile = (allocate<Uint16>(count: MAX_PATH)..value = 0).cast<Utf16>();
-    } else {
-      lpstrFile = TEXT(fileFullPath);
-    }
-
-    if (fileTitle == null) {
-      lpstrFileTitle =
-          (allocate<Uint16>(count: MAX_PATH)..value = 0).cast<Utf16>();
-    } else {
-      lpstrFileTitle = TEXT(fileTitle);
-    }
+    final strFileTitle = fileTitle != null
+        ? Utf16String.fromString(fileTitle)
+        : Utf16String(MAX_PATH);
 
     ofn.hwndOwner = hwnd;
-    ofn.lpstrFile = lpstrFile;
-    ofn.lpstrFileTitle = lpstrFileTitle;
+    ofn.lpstrFile = strFile.pointer;
+    ofn.lpstrFileTitle = strFileTitle.pointer;
     ofn.Flags = OFN_HIDEREADONLY | OFN_CREATEPROMPT;
 
     final result = GetOpenFileName(ofn.addressOf);
@@ -80,25 +71,17 @@ class NotepadFile {
   /// Returns `true` if the the user selects a file and the common dialog
   /// is successful.
   bool ShowSaveDialog(int hwnd) {
-    Pointer<Utf16> lpstrFile;
-    Pointer<Utf16> lpstrFileTitle;
+    final strFile = fileFullPath != null
+        ? Utf16String.fromString(fileFullPath)
+        : Utf16String(MAX_PATH);
 
-    if (fileFullPath == null) {
-      lpstrFile = (allocate<Uint16>(count: MAX_PATH)..value = 0).cast<Utf16>();
-    } else {
-      lpstrFile = TEXT(fileFullPath);
-    }
-
-    if (fileTitle == null) {
-      lpstrFileTitle =
-          (allocate<Uint16>(count: MAX_PATH)..value = 0).cast<Utf16>();
-    } else {
-      lpstrFileTitle = TEXT(fileTitle);
-    }
+    final strFileTitle = fileTitle != null
+        ? Utf16String.fromString(fileTitle)
+        : Utf16String(MAX_PATH);
 
     ofn.hwndOwner = hwnd;
-    ofn.lpstrFile = lpstrFile;
-    ofn.lpstrFileTitle = lpstrFileTitle;
+    ofn.lpstrFile = strFile.pointer;
+    ofn.lpstrFileTitle = strFileTitle.pointer;
     ofn.Flags = OFN_OVERWRITEPROMPT;
 
     final result = GetSaveFileName(ofn.addressOf);
@@ -123,11 +106,11 @@ class NotepadFile {
   void WriteFileFromEditControl(int hwndEdit) {
     final file = File(fileFullPath);
     final iLength = GetWindowTextLength(hwndEdit);
-    final pstrBuffer = allocate<Uint16>(count: iLength + 1).cast<Utf16>();
+    final buffer = Utf16String(iLength);
 
-    GetWindowText(hwndEdit, pstrBuffer, iLength + 1);
-    file.writeAsStringSync(pstrBuffer.unpackString(iLength + 1));
+    GetWindowText(hwndEdit, buffer.pointer, iLength + 1);
+    file.writeAsStringSync(buffer.toString());
 
-    free(pstrBuffer);
+    buffer.delete();
   }
 }
