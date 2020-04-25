@@ -8,6 +8,7 @@ import 'dart:io';
 import 'package:win32/win32.dart';
 
 import 'notepad.dart';
+import 'utf16string.dart';
 
 class NotepadFile {
   OPENFILENAME ofn;
