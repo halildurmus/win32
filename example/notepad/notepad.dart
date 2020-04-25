@@ -93,7 +93,7 @@ class Notepad {
             0,
             0,
             hwnd,
-            0,
+            EDITID,
             hInstance,
             nullptr);
 
@@ -190,12 +190,7 @@ class Notepad {
             }
 
             if (file.ShowOpenDialog(hwnd)) {
-              if (!file.ReadFileIntoEditControl(hwndEdit)) {
-                ShowOKMessage(hwnd, 'Could not read file $fileTitle!');
-
-                fileFullPath = null;
-                fileTitle = null;
-              }
+              file.ReadFileIntoEditControl(hwndEdit);
             }
 
             SetWindowTitle(hwnd, fileTitle);
@@ -204,27 +199,28 @@ class Notepad {
 
           case IDM_FILE_SAVE:
             if (fileFullPath != null) {
-              if (file.WriteFileFromEditControl(hwndEdit)) {
-                isFileDirty = false;
-                return 1;
-              } else {
-                ShowOKMessage(hwnd, 'Could not write file ${fileTitle}');
-                return 0;
-              }
+              file.WriteFileFromEditControl(hwndEdit);
+              isFileDirty = false;
+              return 1;
             }
-            continue SAVE_AS; // fallthru if file is empty
 
-          SAVE_AS:
+            if (file.ShowSaveDialog(hwnd)) {
+              SetWindowTitle(hwnd, fileTitle);
+
+              file.WriteFileFromEditControl(hwndEdit);
+              isFileDirty = false;
+              return 1;
+            }
+
+            return 0;
+
           case IDM_FILE_SAVE_AS:
             if (file.ShowSaveDialog(hwnd)) {
               SetWindowTitle(hwnd, fileTitle);
 
-              if (file.WriteFileFromEditControl(hwndEdit)) {
-                isFileDirty = false;
-                return 1;
-              } else {
-                ShowOKMessage(hwnd, 'Could not write file ${fileTitle}');
-              }
+              file.WriteFileFromEditControl(hwndEdit);
+              isFileDirty = false;
+              return 1;
             }
             return 0;
 

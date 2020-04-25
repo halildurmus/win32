@@ -43,24 +43,25 @@ class NotepadFile {
   /// Returns `true` if the the user selects a file and the common dialog
   /// is successful.
   bool ShowOpenDialog(int hwnd) {
-    Pointer<Uint16> lpstrFile = nullptr;
-    Pointer<Uint16> lpstrFileTitle = nullptr;
+    Pointer<Utf16> lpstrFile;
+    Pointer<Utf16> lpstrFileTitle;
 
     if (fileFullPath == null) {
-      lpstrFile = allocate<Uint16>(count: MAX_PATH);
-      lpstrFile.value = 0;
+      lpstrFile = (allocate<Uint16>(count: MAX_PATH)..value = 0).cast<Utf16>();
+    } else {
+      lpstrFile = TEXT(fileFullPath);
     }
 
-    if (fileFullPath == null) {
-      lpstrFileTitle = allocate<Uint16>(count: MAX_PATH);
-      lpstrFileTitle.value = 0;
+    if (fileTitle == null) {
+      lpstrFileTitle =
+          (allocate<Uint16>(count: MAX_PATH)..value = 0).cast<Utf16>();
+    } else {
+      lpstrFileTitle = TEXT(fileTitle);
     }
 
     ofn.hwndOwner = hwnd;
-    ofn.lpstrFile =
-        fileFullPath != null ? TEXT(fileFullPath) : lpstrFile.cast<Utf16>();
-    ofn.lpstrFileTitle =
-        fileTitle != null ? TEXT(fileTitle) : lpstrFileTitle.cast<Utf16>();
+    ofn.lpstrFile = lpstrFile;
+    ofn.lpstrFileTitle = lpstrFileTitle;
     ofn.Flags = OFN_HIDEREADONLY | OFN_CREATEPROMPT;
 
     final result = GetOpenFileName(ofn.addressOf);
@@ -79,24 +80,25 @@ class NotepadFile {
   /// Returns `true` if the the user selects a file and the common dialog
   /// is successful.
   bool ShowSaveDialog(int hwnd) {
-    Pointer<Uint16> lpstrFile = nullptr;
-    Pointer<Uint16> lpstrFileTitle = nullptr;
+    Pointer<Utf16> lpstrFile;
+    Pointer<Utf16> lpstrFileTitle;
 
     if (fileFullPath == null) {
-      lpstrFile = allocate<Uint16>(count: MAX_PATH);
-      lpstrFile.value = 0;
+      lpstrFile = (allocate<Uint16>(count: MAX_PATH)..value = 0).cast<Utf16>();
+    } else {
+      lpstrFile = TEXT(fileFullPath);
     }
 
-    if (fileFullPath == null) {
-      lpstrFileTitle = allocate<Uint16>(count: MAX_PATH);
-      lpstrFileTitle.value = 0;
+    if (fileTitle == null) {
+      lpstrFileTitle =
+          (allocate<Uint16>(count: MAX_PATH)..value = 0).cast<Utf16>();
+    } else {
+      lpstrFileTitle = TEXT(fileTitle);
     }
 
     ofn.hwndOwner = hwnd;
-    ofn.lpstrFile =
-        fileFullPath != null ? TEXT(fileFullPath) : lpstrFile.cast<Utf16>();
-    ofn.lpstrFileTitle =
-        fileTitle != null ? TEXT(fileTitle) : lpstrFileTitle.cast<Utf16>();
+    ofn.lpstrFile = lpstrFile;
+    ofn.lpstrFileTitle = lpstrFileTitle;
     ofn.Flags = OFN_OVERWRITEPROMPT;
 
     final result = GetSaveFileName(ofn.addressOf);
@@ -109,18 +111,16 @@ class NotepadFile {
     }
   }
 
-  bool ReadFileIntoEditControl(int hwndEdit) {
+  void ReadFileIntoEditControl(int hwndEdit) {
     // Fairly naive implementation that doesn't account for
     // string encoding. That's fine -- this is a toy app!
     final file = File(fileFullPath);
     final contents = file.readAsStringSync();
 
     SetWindowText(hwndEdit, TEXT(contents));
-
-    return true;
   }
 
-  bool WriteFileFromEditControl(int hwndEdit) {
+  void WriteFileFromEditControl(int hwndEdit) {
     final file = File(fileFullPath);
     final iLength = GetWindowTextLength(hwndEdit);
     final pstrBuffer = allocate<Uint16>(count: iLength + 1).cast<Utf16>();
@@ -129,6 +129,5 @@ class NotepadFile {
     file.writeAsStringSync(pstrBuffer.unpackString(iLength + 1));
 
     free(pstrBuffer);
-    return true;
   }
 }
