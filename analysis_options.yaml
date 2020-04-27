@@ -1,1 +1,11 @@
 include: package:pedantic/analysis_options.yaml
+
+analyzer:
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false
+
+linter:
+  rules:
+    omit_local_variable_types: false
+    prefer_typing_uninitialized_variables: true

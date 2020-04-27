@@ -65,7 +65,7 @@ void main() {
 }
 
 int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
-  var hdc;
+  int hdc;
   var result = 0;
 
   final ps = PAINTSTRUCT.allocate();
