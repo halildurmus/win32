@@ -7,18 +7,20 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+import 'utf16string.dart';
+
 const MAX_STRING_LEN = 256;
 
 class NotepadFind {
   FINDREPLACE find;
   FINDREPLACE replace;
 
-  Pointer<Utf16> szFindText;
-  Pointer<Utf16> szReplText;
+  Utf16String szFindText;
+  Utf16String szReplText;
 
   NotepadFind() {
-    szFindText = allocate<Utf16>(count: MAX_STRING_LEN).cast();
-    szReplText = allocate<Utf16>(count: MAX_STRING_LEN).cast();
+    szFindText = Utf16String(MAX_STRING_LEN);
+    szReplText = Utf16String(MAX_STRING_LEN);
     find = FINDREPLACE.allocate();
     replace = FINDREPLACE.allocate();
   }
@@ -28,7 +30,7 @@ class NotepadFind {
     find.hwndOwner = hwnd;
     find.hInstance = NULL;
     find.Flags = FR_HIDEUPDOWN | FR_HIDEMATCHCASE | FR_HIDEWHOLEWORD;
-    find.lpstrFindWhat = szFindText;
+    find.lpstrFindWhat = szFindText.pointer;
     find.lpstrReplaceWith = nullptr;
     find.wFindWhatLen = MAX_STRING_LEN;
     find.wReplaceWithLen = 0;
@@ -44,8 +46,8 @@ class NotepadFind {
     replace.hwndOwner = hwnd;
     replace.hInstance = NULL;
     replace.Flags = FR_HIDEUPDOWN | FR_HIDEMATCHCASE | FR_HIDEWHOLEWORD;
-    replace.lpstrFindWhat = szFindText;
-    replace.lpstrReplaceWith = szReplText;
+    replace.lpstrFindWhat = szFindText.pointer;
+    replace.lpstrReplaceWith = szReplText.pointer;
     replace.wFindWhatLen = MAX_STRING_LEN;
     replace.wReplaceWithLen = MAX_STRING_LEN;
     replace.lCustData = 0;
@@ -81,7 +83,7 @@ class NotepadFind {
   int FindNextTextInEditWindow(int hwndEdit, Pointer<Uint64> piSearchOffset) {
     final fr = FINDREPLACE.allocate();
 
-    fr.lpstrFindWhat = szFindText;
+    fr.lpstrFindWhat = szFindText.pointer;
 
     return FindTextInEditWindow(hwndEdit, piSearchOffset, fr.addressOf);
   }
@@ -97,5 +99,5 @@ class NotepadFind {
     return TRUE;
   }
 
-  bool FindValidFind() => szFindText.elementAt(0).cast<Uint16>().value != 0;
+  bool FindValidFind() => !szFindText.isEmpty;
 }
