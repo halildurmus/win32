@@ -561,6 +561,15 @@ const CS_DROPSHADOW = 0x00020000;
 // ControlWord constant
 const CW_USEDEFAULT = 0x80000000;
 
+// Common Dialog window strings
+const LBSELCHSTRING = 'commdlg_LBSelChangedNotify';
+const SHAREVISTRING = 'commdlg_ShareViolation';
+const FILEOKSTRING = 'commdlg_FileNameOK';
+const COLOROKSTRING = 'commdlg_ColorOK';
+const SETRGBSTRING = 'commdlg_SetRGBColor';
+const HELPMSGSTRING = 'commdlg_help';
+const FINDMSGSTRING = 'commdlg_FindReplace';
+
 // Font Common Dialog constants
 const CF_SCREENFONTS = 0x00000001;
 const CF_PRINTERFONTS = 0x00000002;

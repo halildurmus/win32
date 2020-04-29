@@ -482,6 +482,12 @@ typedef queryDosDeviceDart = int Function(
 typedef registerClassNative = Int16 Function(Pointer<WNDCLASS> lpWndClass);
 typedef registerClassDart = int Function(Pointer<WNDCLASS> lpWndClass);
 
+// UINT RegisterWindowMessageW(
+//   LPCWSTR lpString
+// );
+typedef registerWindowMessageNative = Uint32 Function(Pointer<Utf16> lpString);
+typedef registerWindowMessageDart = int Function(Pointer<Utf16> lpString);
+
 // int ReleaseDC(
 //   HWND hWnd,
 //   HDC  hDC

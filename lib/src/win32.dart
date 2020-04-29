@@ -88,6 +88,8 @@ final PostQuitMessage =
         'PostQuitMessage');
 final RegisterClass = user32
     .lookupFunction<registerClassNative, registerClassDart>('RegisterClassW');
+final RegisterWindowMessage = user32.lookupFunction<registerWindowMessageNative,
+    registerWindowMessageDart>('RegisterWindowMessageW');
 final ReleaseDC =
     user32.lookupFunction<releaseDCNative, releaseDCDart>('ReleaseDC');
 final ScrollWindow =
