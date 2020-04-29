@@ -75,16 +75,16 @@ class SECURITY_ATTRIBUTES extends Struct {
 }
 
 // typedef struct tagACCEL {
-//     WORD   fVirt;               /* Also called the flags field */
+//     BYTE   fVirt;               /* Also called the flags field */
 //     WORD   key;
-//     DWORD  cmd;
+//     WORD  cmd;
 // } ACCEL, *LPACCEL;
 class ACCEL extends Struct {
-  @Int16()
+  @Int8()
   int fVirt;
   @Int16()
   int key;
-  @Int32()
+  @Int16()
   int cmd;
 
   factory ACCEL.allocate() => allocate<ACCEL>().ref
