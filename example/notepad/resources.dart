@@ -81,29 +81,98 @@ class NotepadResources {
     return hMenu;
   }
 
-  static int AccelToUint64(ACCEL accel) =>
-      ((accel.cmd & 0xFFFFFFFF) << 32) +
-      ((accel.key & 0xFFFF) << 16) +
-      (accel.fVirt & 0xFFFF);
-
-  // TODO: explore ways to load this
   static int LoadAccelerators() {
-    final accel1 = ACCEL.allocate()
-      ..fVirt = FVIRTKEY
-      ..key = VK_F5
+    final pTable = allocate<ACCEL>(count: 17);
+
+    pTable[0]
+      ..fVirt = FVIRTKEY | FALT | FNOINVERT
+      ..key = VK_BACK
+      ..cmd = IDM_EDIT_UNDO;
+
+    pTable[1]
+      ..fVirt = FVIRTKEY | FNOINVERT
+      ..key = VK_DELETE
+      ..cmd = IDM_EDIT_CLEAR;
+
+    pTable[2]
+      ..fVirt = FVIRTKEY | FSHIFT | FNOINVERT
+      ..key = VK_DELETE
+      ..cmd = IDM_EDIT_CUT;
+
+    pTable[3]
+      ..fVirt = FVIRTKEY | FNOINVERT
+      ..key = VK_F1
+      ..cmd = IDM_HELP;
+
+    pTable[4]
+      ..fVirt = FVIRTKEY | FNOINVERT
+      ..key = VK_F3
+      ..cmd = IDM_SEARCH_NEXT;
+
+    pTable[5]
+      ..fVirt = FVIRTKEY | FCONTROL | FNOINVERT
+      ..key = VK_INSERT
+      ..cmd = IDM_EDIT_COPY;
+
+    pTable[6]
+      ..fVirt = FVIRTKEY | FSHIFT | FNOINVERT
+      ..key = VK_INSERT
+      ..cmd = IDM_EDIT_PASTE;
+
+    pTable[7]
+      ..fVirt = FNOINVERT
+      ..key = 3 // Ctrl+C
+      ..cmd = IDM_EDIT_COPY;
+
+    pTable[8]
+      ..fVirt = FNOINVERT
+      ..key = 6 // Ctrl+F
+      ..cmd = IDM_SEARCH_FIND;
+
+    pTable[9]
+      ..fVirt = FNOINVERT
+      ..key = 14 // Ctrl+N
       ..cmd = IDM_FILE_NEW;
 
-    final accel2 = ACCEL.allocate()
-      ..fVirt = FVIRTKEY
-      ..key = VK_F6
+    pTable[10]
+      ..fVirt = FNOINVERT
+      ..key = 15 // Ctrl+O
+      ..cmd = IDM_FILE_OPEN;
+
+    pTable[11]
+      ..fVirt = FNOINVERT
+      ..key = 16 // Ctrl+P
       ..cmd = IDM_FILE_PRINT;
 
-    var pTable = allocate<Uint64>(count: 2);
+    pTable[12]
+      ..fVirt = FNOINVERT
+      ..key = 18 // Ctrl+R
+      ..cmd = IDM_SEARCH_REPLACE;
 
-    pTable.elementAt(0).value = AccelToUint64(accel2);
-    pTable.elementAt(1).value = AccelToUint64(accel1);
+    pTable[13]
+      ..fVirt = FNOINVERT
+      ..key = 19 // Ctrl+S
+      ..cmd = IDM_FILE_SAVE;
 
-    final result = CreateAcceleratorTable(pTable, 2);
+    pTable[14]
+      ..fVirt = FNOINVERT
+      ..key = 22 // Ctrl+V
+      ..cmd = IDM_EDIT_PASTE;
+
+    pTable[15]
+      ..fVirt = FNOINVERT
+      ..key = 24 // Ctrl+X
+      ..cmd = IDM_EDIT_CUT;
+
+    pTable[16]
+      ..fVirt = FNOINVERT
+      ..key = 26 // Ctrl+Z
+      ..cmd = IDM_EDIT_UNDO;
+
+    final result = CreateAcceleratorTable(pTable, 17);
+    if (result == NULL) {
+      print('Error loading accelerators: ${GetLastError()}');
+    }
     return result;
   }
 }
