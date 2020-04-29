@@ -57,20 +57,20 @@ class NotepadFind {
   }
 
   int FindTextInEditWindow(
-      int hwndEdit, Pointer<Uint64> piSearchOffset, Pointer<FINDREPLACE> pfr) {
+      int hwndEdit, Pointer<Uint32> piSearchOffset, Pointer<FINDREPLACE> pfr) {
     int iLength;
 
     // Read in the edit document
     iLength = GetWindowTextLength(hwndEdit);
 
-    final pDoc = allocate<Uint16>(count: iLength + 1).cast<Utf16>();
-    GetWindowText(hwndEdit, pDoc, iLength + 1);
-    final strDoc = pDoc.unpackString(iLength + 1);
-    free(pDoc);
+    final pDoc = Utf16String(iLength + 1);
+    GetWindowText(hwndEdit, pDoc.pointer, iLength + 1);
+    final strDoc = pDoc.toString();
+    pDoc.delete();
 
     // Search the document for the find string
     final toFind = pfr.ref.lpstrFindWhat.unpackString(MAX_STRING_LEN);
-    final startOffset = strDoc.indexOf(toFind);
+    final startOffset = strDoc.indexOf(toFind, piSearchOffset.value);
     if (startOffset == -1) return FALSE;
     final endOffset = startOffset + toFind.length;
 
@@ -80,7 +80,7 @@ class NotepadFind {
     return TRUE;
   }
 
-  int FindNextTextInEditWindow(int hwndEdit, Pointer<Uint64> piSearchOffset) {
+  int FindNextTextInEditWindow(int hwndEdit, Pointer<Uint32> piSearchOffset) {
     final fr = FINDREPLACE.allocate();
 
     fr.lpstrFindWhat = szFindText.pointer;
@@ -88,8 +88,8 @@ class NotepadFind {
     return FindTextInEditWindow(hwndEdit, piSearchOffset, fr.addressOf);
   }
 
-  int ReaplceTextInEditWindow(
-      int hwndEdit, Pointer<Uint64> piSearchOffset, Pointer<FINDREPLACE> fr) {
+  int ReplaceTextInEditWindow(
+      int hwndEdit, Pointer<Uint32> piSearchOffset, Pointer<FINDREPLACE> fr) {
     if (FindTextInEditWindow(hwndEdit, piSearchOffset, fr) != TRUE) {
       return FALSE;
     }

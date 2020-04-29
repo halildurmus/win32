@@ -30,6 +30,7 @@ bool isFileDirty = false;
 
 class Notepad {
   static NotepadFile file;
+  static NotepadFind find;
 
   static int hDlgModeless = NULL;
 
@@ -38,12 +39,12 @@ class Notepad {
 
   static int messageFindReplace;
 
-  static final iSelBeg = allocate<Uint64>()..value = 0;
-  static final iSelEnd = allocate<Uint64>()..value = 0;
-  static int iOffset = NULL;
+  static final iSelBeg = allocate<IntPtr>()..value = 0;
+  static final iSelEnd = allocate<IntPtr>()..value = 0;
+  static final iOffset = allocate<Uint32>()..value = 0;
   static int iEnable;
 
-  static Pointer<FINDREPLACE> pfr;
+  static FINDREPLACE pfr;
 
   static void SetWindowTitle(int hwnd, String titleName) {
     final caption = APP_NAME + ' - ' + (titleName ?? '(untitled)');
@@ -100,6 +101,9 @@ class Notepad {
         SendMessage(hwndEdit, EM_LIMITTEXT, 32767, 0);
 
         file = NotepadFile(hwnd);
+        find = NotepadFind();
+
+        messageFindReplace = RegisterWindowMessage(TEXT(FINDMSGSTRING));
 
         SetWindowTitle(hwnd, fileTitle);
         return 0;
@@ -257,16 +261,22 @@ class Notepad {
             return 0;
 
           case IDM_SEARCH_FIND:
-            SendMessage(hwndEdit, EM_GETSEL, 0, iOffset);
-            hDlgModeless = NotepadFind().ShowFindDialog(hwnd);
+            SendMessage(hwndEdit, EM_GETSEL, 0, iOffset.address);
+            hDlgModeless = find.ShowFindDialog(hwnd);
             return 0;
 
           case IDM_SEARCH_NEXT:
-            SendMessage(hwndEdit, EM_GETSEL, 0, iOffset);
+            SendMessage(hwndEdit, EM_GETSEL, 0, iOffset.address);
+
+            if (find.FindValidFind()) {
+              find.FindNextTextInEditWindow(hwndEdit, iOffset);
+            } else {
+              hDlgModeless = find.ShowFindDialog(hwnd);
+            }
             return 0;
 
           case IDM_SEARCH_REPLACE:
-            SendMessage(hwndEdit, EM_GETSEL, 0, iOffset);
+            SendMessage(hwndEdit, EM_GETSEL, 0, iOffset.address);
             hDlgModeless = NotepadFind().ShowReplaceDialog(hwnd);
             return 0;
 
@@ -304,6 +314,42 @@ class Notepad {
       case WM_DESTROY:
         PostQuitMessage(0);
         return 0;
+
+      default:
+        // Process "Find/Replace" messages
+
+        if (uMsg == messageFindReplace) {
+          pfr = Pointer<FINDREPLACE>.fromAddress(lParam).ref;
+
+          if (pfr.Flags & FR_DIALOGTERM == FR_DIALOGTERM) {
+            hDlgModeless = NULL;
+          }
+
+          if (pfr.Flags & FR_FINDNEXT == FR_FINDNEXT) {
+            if (find.FindTextInEditWindow(hwndEdit, iOffset, pfr.addressOf) ==
+                0) {
+              ShowOKMessage(hwnd, 'Text not found!');
+            }
+          }
+
+          if ((pfr.Flags & FR_REPLACE == FR_REPLACE) ||
+              (pfr.Flags & FR_REPLACEALL == FR_REPLACEALL)) {
+            if (find.ReplaceTextInEditWindow(
+                    hwndEdit, iOffset, pfr.addressOf) ==
+                0) {
+              ShowOKMessage(hwnd, 'Text not found!');
+            }
+          }
+
+          if (pfr.Flags & FR_REPLACEALL == FR_REPLACEALL) {
+            while (find.ReplaceTextInEditWindow(
+                    hwndEdit, iOffset, pfr.addressOf) !=
+                0) {}
+          }
+
+          return 0;
+        }
+        break;
     }
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
   }
