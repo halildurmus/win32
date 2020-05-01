@@ -74,6 +74,9 @@ class NotepadFind {
     if (startOffset == -1) return FALSE;
     final endOffset = startOffset + toFind.length;
 
+    // Set the start for the next search to be the end of the current one
+    piSearchOffset.value = endOffset;
+
     SendMessage(hwndEdit, EM_SETSEL, startOffset, endOffset);
     SendMessage(hwndEdit, EM_SCROLLCARET, 0, 0);
 
