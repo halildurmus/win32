@@ -3,5 +3,5 @@
         "windows.h": "c",
         "xstring": "cpp"
     },
-    "dart.sdkPath": "c:\\tools\\dart32"
+    "dart.sdkPath": "c:\\tools\\dart64"
 }

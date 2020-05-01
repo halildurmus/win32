@@ -4,7 +4,6 @@
 
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'utf16string.dart';
@@ -96,7 +95,7 @@ class NotepadFind {
     if (FindTextInEditWindow(hwndEdit, piSearchOffset, fr) != TRUE) {
       return FALSE;
     }
-
+    print(fr.ref.lpstrReplaceWith.unpackString(MAX_STRING_LEN));
     SendMessage(hwndEdit, EM_REPLACESEL, 0, fr.ref.lpstrReplaceWith.address);
 
     return TRUE;

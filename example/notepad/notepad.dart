@@ -277,7 +277,7 @@ class Notepad {
 
           case IDM_SEARCH_REPLACE:
             SendMessage(hwndEdit, EM_GETSEL, 0, iOffset.address);
-            hDlgModeless = NotepadFind().ShowReplaceDialog(hwnd);
+            hDlgModeless = find.ShowReplaceDialog(hwnd);
             return 0;
 
           case IDM_FORMAT_FONT:
