@@ -326,26 +326,26 @@ class Notepad {
           }
 
           if (pfr.Flags & FR_FINDNEXT == FR_FINDNEXT) {
-            if (find.FindTextInEditWindow(hwndEdit, iOffset, pfr.addressOf) ==
-                0) {
+            if (!find.FindTextInEditWindow(hwndEdit, iOffset, pfr.addressOf)) {
               ShowOKMessage(hwnd, 'Text not found!');
             }
           }
 
           if ((pfr.Flags & FR_REPLACE == FR_REPLACE) ||
               (pfr.Flags & FR_REPLACEALL == FR_REPLACEALL)) {
-            print('flag: ' + pfr.lpstrReplaceWith.unpackString(256));
-            if (find.ReplaceTextInEditWindow(
-                    hwndEdit, iOffset, pfr.addressOf) ==
-                0) {
+            print('replaces: ' +
+                pfr.lpstrFindWhat.unpackString(256) +
+                ' with ' +
+                pfr.lpstrReplaceWith.unpackString(256));
+            if (!find.ReplaceTextInEditWindow(
+                hwndEdit, iOffset, pfr.addressOf)) {
               ShowOKMessage(hwnd, 'Text not found!');
             }
           }
 
           if (pfr.Flags & FR_REPLACEALL == FR_REPLACEALL) {
             while (find.ReplaceTextInEditWindow(
-                    hwndEdit, iOffset, pfr.addressOf) !=
-                0) {}
+                hwndEdit, iOffset, pfr.addressOf)) {}
           }
 
           return 0;

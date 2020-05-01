@@ -12,7 +12,6 @@ const MAX_STRING_LEN = 256;
 
 class NotepadFind {
   FINDREPLACE find;
-  FINDREPLACE replace;
 
   Utf16String szFindText;
   Utf16String szReplText;
@@ -21,7 +20,6 @@ class NotepadFind {
     szFindText = Utf16String(MAX_STRING_LEN);
     szReplText = Utf16String(MAX_STRING_LEN);
     find = FINDREPLACE.allocate();
-    replace = FINDREPLACE.allocate();
   }
 
   int ShowFindDialog(int hwnd) {
@@ -41,25 +39,22 @@ class NotepadFind {
   }
 
   int ShowReplaceDialog(int hwnd) {
-    replace.lStructSize = sizeOf<FINDREPLACE>();
-    replace.hwndOwner = hwnd;
-    replace.hInstance = NULL;
-    replace.Flags = FR_HIDEUPDOWN | FR_HIDEMATCHCASE | FR_HIDEWHOLEWORD;
-    replace.lpstrFindWhat = szFindText.pointer;
-    replace.lpstrReplaceWith = szReplText.pointer;
-    replace.wFindWhatLen = MAX_STRING_LEN;
-    replace.wReplaceWithLen = MAX_STRING_LEN;
-    replace.lCustData = 0;
-    replace.lpfnHook = nullptr;
-    replace.lpTemplateName = nullptr;
+    find.lStructSize = sizeOf<FINDREPLACE>();
+    find.hwndOwner = hwnd;
+    find.hInstance = NULL;
+    find.Flags = FR_HIDEUPDOWN | FR_HIDEMATCHCASE | FR_HIDEWHOLEWORD;
+    find.lpstrFindWhat = szFindText.pointer;
+    find.lpstrReplaceWith = szReplText.pointer;
+    find.wFindWhatLen = MAX_STRING_LEN;
+    find.wReplaceWithLen = MAX_STRING_LEN;
+    find.lCustData = 0;
+    find.lpfnHook = nullptr;
+    find.lpTemplateName = nullptr;
 
-    final result = ReplaceText(replace.addressOf);
-    print('result: ' +
-        replace.lpstrReplaceWith.unpackString(replace.wReplaceWithLen));
-    return result;
+    return ReplaceText(find.addressOf);
   }
 
-  int FindTextInEditWindow(
+  bool FindTextInEditWindow(
       int hwndEdit, Pointer<Uint32> piSearchOffset, Pointer<FINDREPLACE> pfr) {
     int iLength;
 
@@ -74,7 +69,7 @@ class NotepadFind {
     // Search the document for the find string
     final toFind = pfr.ref.lpstrFindWhat.unpackString(MAX_STRING_LEN);
     final startOffset = strDoc.indexOf(toFind, piSearchOffset.value);
-    if (startOffset == -1) return FALSE;
+    if (startOffset == -1) return false;
     final endOffset = startOffset + toFind.length;
 
     // Set the start for the next search to be the end of the current one
@@ -83,10 +78,10 @@ class NotepadFind {
     SendMessage(hwndEdit, EM_SETSEL, startOffset, endOffset);
     SendMessage(hwndEdit, EM_SCROLLCARET, 0, 0);
 
-    return TRUE;
+    return true;
   }
 
-  int FindNextTextInEditWindow(int hwndEdit, Pointer<Uint32> piSearchOffset) {
+  bool FindNextTextInEditWindow(int hwndEdit, Pointer<Uint32> piSearchOffset) {
     final fr = FINDREPLACE.allocate();
 
     fr.lpstrFindWhat = szFindText.pointer;
@@ -94,15 +89,18 @@ class NotepadFind {
     return FindTextInEditWindow(hwndEdit, piSearchOffset, fr.addressOf);
   }
 
-  int ReplaceTextInEditWindow(
+  bool ReplaceTextInEditWindow(
       int hwndEdit, Pointer<Uint32> piSearchOffset, Pointer<FINDREPLACE> fr) {
-    if (FindTextInEditWindow(hwndEdit, piSearchOffset, fr) != TRUE) {
-      return FALSE;
+    if (!FindTextInEditWindow(hwndEdit, piSearchOffset, fr)) {
+      return false;
     }
-    print('replace: ' + fr.ref.lpstrReplaceWith.unpackString(MAX_STRING_LEN));
+    print('received repl: ' +
+        fr.ref.lpstrFindWhat.unpackString(MAX_STRING_LEN) +
+        ' with ' +
+        fr.ref.lpstrReplaceWith.unpackString(MAX_STRING_LEN));
     SendMessage(hwndEdit, EM_REPLACESEL, 0, fr.ref.lpstrReplaceWith.address);
 
-    return TRUE;
+    return true;
   }
 
   bool FindValidFind() => !szFindText.isEmpty;
