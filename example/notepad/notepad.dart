@@ -31,6 +31,7 @@ bool isFileDirty = false;
 class Notepad {
   static NotepadFile file;
   static NotepadFind find;
+  static NotepadFont font;
 
   static int hDlgModeless = NULL;
 
@@ -72,8 +73,8 @@ class Notepad {
     return res;
   }
 
-  static int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
-    switch (uMsg) {
+  static int MainWindowProc(int hwnd, int message, int wParam, int lParam) {
+    switch (message) {
       case WM_CREATE:
         hwndEdit = CreateWindowEx(
             0,
@@ -281,8 +282,6 @@ class Notepad {
             return 0;
 
           case IDM_FORMAT_FONT:
-            final font = NotepadFont(hwndEdit);
-
             if (font.NotepadChooseFont(hwnd)) {
               font.NotepadSetFont(hwndEdit);
             }
@@ -300,25 +299,26 @@ class Notepad {
         return 0;
 
       case WM_CLOSE:
-        if (!isFileDirty) {
+        if (!isFileDirty || AskAboutSave(hwnd) != IDCANCEL) {
           DestroyWindow(hwnd);
         }
         return 0;
 
       case WM_QUERYENDSESSION:
-        if (!isFileDirty) {
+        if (!isFileDirty || AskAboutSave(hwnd) != IDCANCEL) {
           return 1;
         }
         return 0;
 
       case WM_DESTROY:
+        font.Delete();
         PostQuitMessage(0);
         return 0;
 
       default:
         // Process "Find/Replace" messages
 
-        if (uMsg == messageFindReplace) {
+        if (message == messageFindReplace) {
           pfr = Pointer<FINDREPLACE>.fromAddress(lParam).ref;
 
           if (pfr.Flags & FR_DIALOGTERM == FR_DIALOGTERM) {
@@ -352,7 +352,7 @@ class Notepad {
         }
         break;
     }
-    return DefWindowProc(hwnd, uMsg, wParam, lParam);
+    return DefWindowProc(hwnd, message, wParam, lParam);
   }
 
   static void runApp() {
