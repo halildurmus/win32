@@ -334,6 +334,7 @@ class Notepad {
 
           if ((pfr.Flags & FR_REPLACE == FR_REPLACE) ||
               (pfr.Flags & FR_REPLACEALL == FR_REPLACEALL)) {
+            print('flag: ' + pfr.lpstrReplaceWith.unpackString(256));
             if (find.ReplaceTextInEditWindow(
                     hwndEdit, iOffset, pfr.addressOf) ==
                 0) {
@@ -401,9 +402,12 @@ class Notepad {
 
     final msg = MSG.allocate();
     while (GetMessage(msg.addressOf, NULL, 0, 0) != 0) {
-      if (TranslateAccelerator(hWnd, hAccel, msg.addressOf) == FALSE) {
-        TranslateMessage(msg.addressOf);
-        DispatchMessage(msg.addressOf);
+      if ((hDlgModeless == NULL) ||
+          (IsDialogMessage(hDlgModeless, msg.addressOf) == 0)) {
+        if (TranslateAccelerator(hWnd, hAccel, msg.addressOf) == FALSE) {
+          TranslateMessage(msg.addressOf);
+          DispatchMessage(msg.addressOf);
+        }
       }
     }
     free(msg.addressOf);

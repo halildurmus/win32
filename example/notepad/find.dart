@@ -52,7 +52,11 @@ class NotepadFind {
     replace.lCustData = 0;
     replace.lpfnHook = nullptr;
     replace.lpTemplateName = nullptr;
-    return ReplaceText(replace.addressOf);
+
+    final result = ReplaceText(replace.addressOf);
+    print('result: ' +
+        replace.lpstrReplaceWith.unpackString(replace.wReplaceWithLen));
+    return result;
   }
 
   int FindTextInEditWindow(
@@ -95,7 +99,7 @@ class NotepadFind {
     if (FindTextInEditWindow(hwndEdit, piSearchOffset, fr) != TRUE) {
       return FALSE;
     }
-    print(fr.ref.lpstrReplaceWith.unpackString(MAX_STRING_LEN));
+    print('replace: ' + fr.ref.lpstrReplaceWith.unpackString(MAX_STRING_LEN));
     SendMessage(hwndEdit, EM_REPLACESEL, 0, fr.ref.lpstrReplaceWith.address);
 
     return TRUE;
