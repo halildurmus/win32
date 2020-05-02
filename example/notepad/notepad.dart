@@ -45,7 +45,7 @@ class Notepad {
   static final iOffset = allocate<Uint32>()..value = 0;
   static int iEnable;
 
-  static FINDREPLACE pfr;
+  static Pointer<FINDREPLACE> pfr;
 
   static void SetWindowTitle(int hwnd, String titleName) {
     final caption = APP_NAME + ' - ' + (titleName ?? '(untitled)');
@@ -102,6 +102,7 @@ class Notepad {
         SendMessage(hwndEdit, EM_LIMITTEXT, 32767, 0);
 
         file = NotepadFile(hwnd);
+        font = NotepadFont(hwnd);
         find = NotepadFind();
 
         messageFindReplace = RegisterWindowMessage(TEXT(FINDMSGSTRING));
@@ -319,33 +320,31 @@ class Notepad {
         // Process "Find/Replace" messages
 
         if (message == messageFindReplace) {
-          pfr = Pointer<FINDREPLACE>.fromAddress(lParam).ref;
+          pfr = Pointer<FINDREPLACE>.fromAddress(lParam);
 
-          if (pfr.Flags & FR_DIALOGTERM == FR_DIALOGTERM) {
+          if (pfr.ref.Flags & FR_DIALOGTERM == FR_DIALOGTERM) {
             hDlgModeless = NULL;
           }
 
-          if (pfr.Flags & FR_FINDNEXT == FR_FINDNEXT) {
-            if (!find.FindTextInEditWindow(hwndEdit, iOffset, pfr.addressOf)) {
+          if (pfr.ref.Flags & FR_FINDNEXT == FR_FINDNEXT) {
+            if (!find.FindTextInEditWindow(hwndEdit, iOffset, pfr)) {
               ShowOKMessage(hwnd, 'Text not found!');
             }
           }
 
-          if ((pfr.Flags & FR_REPLACE == FR_REPLACE) ||
-              (pfr.Flags & FR_REPLACEALL == FR_REPLACEALL)) {
+          if ((pfr.ref.Flags & FR_REPLACE == FR_REPLACE) ||
+              (pfr.ref.Flags & FR_REPLACEALL == FR_REPLACEALL)) {
             print('replaces: ' +
-                pfr.lpstrFindWhat.unpackString(256) +
+                pfr.ref.lpstrFindWhat.unpackString(256) +
                 ' with ' +
-                pfr.lpstrReplaceWith.unpackString(256));
-            if (!find.ReplaceTextInEditWindow(
-                hwndEdit, iOffset, pfr.addressOf)) {
+                pfr.ref.lpstrReplaceWith.unpackString(256));
+            if (!find.ReplaceTextInEditWindow(hwndEdit, iOffset, pfr)) {
               ShowOKMessage(hwnd, 'Text not found!');
             }
           }
 
-          if (pfr.Flags & FR_REPLACEALL == FR_REPLACEALL) {
-            while (find.ReplaceTextInEditWindow(
-                hwndEdit, iOffset, pfr.addressOf)) {}
+          if (pfr.ref.Flags & FR_REPLACEALL == FR_REPLACEALL) {
+            while (find.ReplaceTextInEditWindow(hwndEdit, iOffset, pfr)) {}
           }
 
           return 0;
