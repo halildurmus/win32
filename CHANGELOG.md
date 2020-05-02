@@ -1,3 +1,9 @@
+## 1.3.1
+
+- Add RegisterWindowMessage
+- Fix bugs in ACCEL and FINDREPLACE structs
+- Fix various bugs in Notepad example
+
 ## 1.3.0
 
 - Add notepad example
