@@ -167,9 +167,9 @@ class FINDREPLACE extends Struct {
   int Flags;
   Pointer<Utf16> lpstrFindWhat;
   Pointer<Utf16> lpstrReplaceWith;
-  @Int32()
+  @Int16()
   int wFindWhatLen;
-  @Int32()
+  @Int16()
   int wReplaceWithLen;
   @IntPtr()
   int lCustData;

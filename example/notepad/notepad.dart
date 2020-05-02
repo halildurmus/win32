@@ -356,8 +356,8 @@ class Notepad {
 
   static void runApp() {
     // Register the window class.
-
     final wc = WNDCLASS.allocate();
+
     wc.style = CS_HREDRAW | CS_VREDRAW;
     wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(MainWindowProc, 0);
     wc.hInstance = hInstance;
@@ -401,8 +401,10 @@ class Notepad {
 
     final msg = MSG.allocate();
     while (GetMessage(msg.addressOf, NULL, 0, 0) != 0) {
+      // Translate dialog messages
       if ((hDlgModeless == NULL) ||
-          (IsDialogMessage(hDlgModeless, msg.addressOf) == 0)) {
+          (IsDialogMessage(hDlgModeless, msg.addressOf) == FALSE)) {
+        // Translate window accelerators and messages
         if (TranslateAccelerator(hWnd, hAccel, msg.addressOf) == FALSE) {
           TranslateMessage(msg.addressOf);
           DispatchMessage(msg.addressOf);
