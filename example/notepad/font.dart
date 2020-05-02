@@ -58,7 +58,7 @@ class NotepadFont {
     free(rect.addressOf);
   }
 
-  void Delete() {
+  void Dispose() {
     DeleteObject(hFont);
   }
 }

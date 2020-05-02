@@ -1,16 +1,22 @@
 // file.dart
 
-// File loading and saving
+// Represents the file currently loaded in the text editor
 
 import 'dart:ffi';
 import 'dart:io';
 
 import 'package:win32/win32.dart';
 
-import 'notepad.dart';
 import 'utf16string.dart';
 
 class NotepadFile {
+  /// The fully-qualified name of the current working file
+  /// (e.g. `C:\src\myfile.txt`)
+  String path;
+
+  /// The filename and extension of the current working file (e.g. `myfile.txt`)
+  String title;
+
   OPENFILENAME ofn;
 
   NotepadFile(int hwnd) {
@@ -43,13 +49,11 @@ class NotepadFile {
   /// Returns `true` if the the user selects a file and the common dialog
   /// is successful.
   bool ShowOpenDialog(int hwnd) {
-    final strFile = fileFullPath != null
-        ? Utf16String.fromString(fileFullPath)
-        : Utf16String(MAX_PATH);
+    final strFile =
+        path != null ? Utf16String.fromString(path) : Utf16String(MAX_PATH);
 
-    final strFileTitle = fileTitle != null
-        ? Utf16String.fromString(fileTitle)
-        : Utf16String(MAX_PATH);
+    final strFileTitle =
+        title != null ? Utf16String.fromString(title) : Utf16String(MAX_PATH);
 
     ofn.hwndOwner = hwnd;
     ofn.lpstrFile = strFile.pointer;
@@ -60,8 +64,8 @@ class NotepadFile {
     if (result == 0) {
       return false;
     } else {
-      fileFullPath = ofn.lpstrFile.unpackString(MAX_PATH);
-      fileTitle = ofn.lpstrFileTitle.unpackString(MAX_PATH);
+      path = ofn.lpstrFile.unpackString(MAX_PATH);
+      title = ofn.lpstrFileTitle.unpackString(MAX_PATH);
       return true;
     }
   }
@@ -72,13 +76,11 @@ class NotepadFile {
   /// Returns `true` if the the user selects a file and the common dialog
   /// is successful.
   bool ShowSaveDialog(int hwnd) {
-    final strFile = fileFullPath != null
-        ? Utf16String.fromString(fileFullPath)
-        : Utf16String(MAX_PATH);
+    final strFile =
+        path != null ? Utf16String.fromString(path) : Utf16String(MAX_PATH);
 
-    final strFileTitle = fileTitle != null
-        ? Utf16String.fromString(fileTitle)
-        : Utf16String(MAX_PATH);
+    final strFileTitle =
+        title != null ? Utf16String.fromString(title) : Utf16String(MAX_PATH);
 
     ofn.hwndOwner = hwnd;
     ofn.lpstrFile = strFile.pointer;
@@ -89,8 +91,8 @@ class NotepadFile {
     if (result == 0) {
       return false;
     } else {
-      fileFullPath = ofn.lpstrFile.unpackString(MAX_PATH);
-      fileTitle = ofn.lpstrTitle.unpackString(MAX_PATH);
+      path = ofn.lpstrFile.unpackString(MAX_PATH);
+      title = ofn.lpstrFileTitle.unpackString(MAX_PATH);
       return true;
     }
   }
@@ -98,14 +100,14 @@ class NotepadFile {
   void ReadFileIntoEditControl(int hwndEdit) {
     // Fairly naive implementation that doesn't account for
     // string encoding. That's fine -- this is a toy app!
-    final file = File(fileFullPath);
+    final file = File(path);
     final contents = file.readAsStringSync();
 
     SetWindowText(hwndEdit, TEXT(contents));
   }
 
   void WriteFileFromEditControl(int hwndEdit) {
-    final file = File(fileFullPath);
+    final file = File(path);
     final iLength = GetWindowTextLength(hwndEdit);
     final buffer = Utf16String(iLength);
 

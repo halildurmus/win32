@@ -8,9 +8,8 @@ import 'dart:io';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'file.dart';
+import 'editor.dart';
 import 'find.dart';
-import 'font.dart';
 import 'resources.dart';
 
 const APP_NAME = 'DartNote'; // DartPad was taken :)
@@ -18,58 +17,18 @@ const APP_NAME = 'DartNote'; // DartPad was taken :)
 /// Win32 handle to the current window instance
 final hInstance = GetModuleHandle(nullptr);
 
-/// The fully-qualified name of the current working file
-/// (e.g. `C:\src\myfile.txt`)
-String fileFullPath;
-
-/// The filename and extension of the current working file (e.g. `myfile.txt`)
-String fileTitle;
-
-/// Does the current file in memory contain unsaved changes?
-bool isFileDirty = false;
-
 class Notepad {
-  static NotepadFile file;
+  static NotepadEditor editor;
   static NotepadFind find;
-  static NotepadFont font;
-
-  static int hDlgModeless = NULL;
 
   /// The handle of the Notepad window's text edit control
   static int hwndEdit;
 
+  static FINDREPLACE findReplace;
   static int messageFindReplace;
+  static int hDlgModeless = NULL;
 
   static final iOffset = allocate<Uint32>()..value = 0;
-  static int iEnable;
-
-  static FINDREPLACE pfr;
-
-  static void SetWindowTitle(int hwnd, String titleName) {
-    final caption = APP_NAME + ' - ' + (titleName ?? '(untitled)');
-    SetWindowText(hwnd, TEXT(caption));
-  }
-
-  static void ShowOKMessage(int hwnd, String szMessage) {
-    MessageBox(
-        hwnd, TEXT(szMessage), TEXT(APP_NAME), MB_OK | MB_ICONEXCLAMATION);
-  }
-
-  static int AskAboutSave(int hwnd) {
-    final buffer = TEXT(fileTitle != null
-        ? 'Save current changes in $fileTitle?'
-        : 'Save changes to file?');
-    final res = MessageBox(
-        hwnd, buffer, TEXT(APP_NAME), MB_YESNOCANCEL | MB_ICONQUESTION);
-
-    if (res == IDYES) {
-      if (SendMessage(hwnd, WM_COMMAND, IDM_FILE_SAVE, 0) == FALSE) {
-        return IDCANCEL;
-      }
-    }
-
-    return res;
-  }
 
   static int MainWindowProc(int hwnd, int message, int wParam, int lParam) {
     switch (message) {
@@ -99,13 +58,12 @@ class Notepad {
 
         SendMessage(hwndEdit, EM_LIMITTEXT, 32767, 0);
 
-        file = NotepadFile(hwnd);
-        font = NotepadFont(hwnd);
+        editor = NotepadEditor(hwnd, hwndEdit);
         find = NotepadFind();
 
         messageFindReplace = RegisterWindowMessage(TEXT(FINDMSGSTRING));
 
-        SetWindowTitle(hwnd, fileTitle);
+        editor.UpdateWindowTitle();
         return 0;
 
       case WM_SETFOCUS:
@@ -128,7 +86,7 @@ class Notepad {
                     ? MF_ENABLED
                     : MF_GRAYED);
 
-            // Enable Paste if text is in the clipboard
+            // Enable Paste if clipboard contains text
             EnableMenuItem(
                 wParam,
                 IDM_EDIT_PASTE,
@@ -137,27 +95,19 @@ class Notepad {
                     : MF_GRAYED);
 
             // Enable Cut / Copy / Clear if there is a selection
-            final iSelBeg = allocate<Uint32>()..value = NULL;
-            final iSelEnd = allocate<Uint32>()..value = NULL;
+            final menuStyle = editor.isTextSelected ? MF_ENABLED : MF_GRAYED;
 
-            SendMessage(hwndEdit, EM_GETSEL, iSelBeg.address, iSelEnd.address);
-
-            iEnable = iSelBeg.value != iSelEnd.value ? MF_ENABLED : MF_GRAYED;
-
-            free(iSelBeg);
-            free(iSelEnd);
-
-            EnableMenuItem(wParam, IDM_EDIT_CUT, iEnable);
-            EnableMenuItem(wParam, IDM_EDIT_COPY, iEnable);
-            EnableMenuItem(wParam, IDM_EDIT_CLEAR, iEnable);
+            EnableMenuItem(wParam, IDM_EDIT_CUT, menuStyle);
+            EnableMenuItem(wParam, IDM_EDIT_COPY, menuStyle);
+            EnableMenuItem(wParam, IDM_EDIT_CLEAR, menuStyle);
             break;
 
           case 2: // Search menu
-            iEnable = hDlgModeless == NULL ? MF_ENABLED : MF_GRAYED;
+            final menuStyle = hDlgModeless == NULL ? MF_ENABLED : MF_GRAYED;
 
-            EnableMenuItem(wParam, IDM_SEARCH_FIND, iEnable);
-            EnableMenuItem(wParam, IDM_SEARCH_NEXT, iEnable);
-            EnableMenuItem(wParam, IDM_SEARCH_REPLACE, iEnable);
+            EnableMenuItem(wParam, IDM_SEARCH_FIND, menuStyle);
+            EnableMenuItem(wParam, IDM_SEARCH_NEXT, menuStyle);
+            EnableMenuItem(wParam, IDM_SEARCH_REPLACE, menuStyle);
             break;
         }
         return 0;
@@ -167,7 +117,7 @@ class Notepad {
         if ((lParam != 0) && (LOWORD(wParam) == EDITID)) {
           switch (HIWORD(wParam)) {
             case EN_UPDATE:
-              isFileDirty = true;
+              editor.isFileDirty = true;
               return 0;
             case EN_ERRSPACE:
             case EN_MAXTEXT:
@@ -181,62 +131,28 @@ class Notepad {
         // Messages from menu system
         switch (LOWORD(wParam)) {
           case IDM_FILE_NEW:
-            if (isFileDirty && AskAboutSave(hwnd) == IDCANCEL) {
+            if (editor.isFileDirty && editor.AskAboutSave() == IDCANCEL) {
               return 0;
             }
 
             // Empty edit control
             SetWindowText(hwndEdit, TEXT('\u{0}'));
 
-            fileFullPath = null;
-            fileTitle = null;
-            SetWindowTitle(hwnd, fileTitle);
-
-            isFileDirty = false;
+            editor.NewFile();
             return 0;
 
           case IDM_FILE_OPEN:
-            if (isFileDirty && AskAboutSave(hwnd) == IDCANCEL) {
-              return 0;
-            }
-
-            if (file.ShowOpenDialog(hwnd)) {
-              file.ReadFileIntoEditControl(hwndEdit);
-            }
-
-            SetWindowTitle(hwnd, fileTitle);
-            isFileDirty = false;
+            editor.OpenFile();
             return 0;
 
           case IDM_FILE_SAVE:
-            if (fileFullPath != null) {
-              file.WriteFileFromEditControl(hwndEdit);
-              isFileDirty = false;
-              return 1;
-            }
-
-            if (file.ShowSaveDialog(hwnd)) {
-              SetWindowTitle(hwnd, fileTitle);
-
-              file.WriteFileFromEditControl(hwndEdit);
-              isFileDirty = false;
-              return 1;
-            }
-
-            return 0;
+            return editor.SaveFile() ? 1 : 0;
 
           case IDM_FILE_SAVE_AS:
-            if (file.ShowSaveDialog(hwnd)) {
-              SetWindowTitle(hwnd, fileTitle);
-
-              file.WriteFileFromEditControl(hwndEdit);
-              isFileDirty = false;
-              return 1;
-            }
-            return 0;
+            return editor.SaveAsFile() ? 1 : 0;
 
           case IDM_FILE_PRINT:
-            ShowOKMessage(hwnd, 'Print not yet implemented!');
+            editor.ShowOKMessage('Print not yet implemented!');
             return 0;
 
           case IDM_APP_EXIT:
@@ -288,36 +204,33 @@ class Notepad {
             return 0;
 
           case IDM_FORMAT_FONT:
-            if (font.NotepadChooseFont(hwnd)) {
-              font.NotepadSetFont(hwndEdit);
-            }
-
+            editor.SetFont();
             return 0;
 
           case IDM_HELP:
-            ShowOKMessage(hwnd, 'Help not yet implemented!');
+            editor.ShowOKMessage('Help not yet implemented!');
             return 0;
 
           case IDM_APP_ABOUT:
-            ShowOKMessage(hwnd, 'About not yet implemented!');
+            editor.ShowOKMessage('About not yet implemented!');
             return 0;
         }
         return 0;
 
       case WM_CLOSE:
-        if (!isFileDirty || AskAboutSave(hwnd) != IDCANCEL) {
+        if (!editor.isFileDirty || editor.AskAboutSave() != IDCANCEL) {
           DestroyWindow(hwnd);
         }
         return 0;
 
       case WM_QUERYENDSESSION:
-        if (!isFileDirty || AskAboutSave(hwnd) != IDCANCEL) {
+        if (!editor.isFileDirty || editor.AskAboutSave() != IDCANCEL) {
           return 1;
         }
         return 0;
 
       case WM_DESTROY:
-        font.Delete();
+        editor.Dispose();
         PostQuitMessage(0);
         return 0;
 
@@ -325,29 +238,30 @@ class Notepad {
         // Process "Find/Replace" messages
 
         if (message == messageFindReplace) {
-          pfr = Pointer<FINDREPLACE>.fromAddress(lParam).ref;
+          findReplace = Pointer<FINDREPLACE>.fromAddress(lParam).ref;
 
-          if (pfr.Flags & FR_DIALOGTERM == FR_DIALOGTERM) {
+          if (findReplace.Flags & FR_DIALOGTERM == FR_DIALOGTERM) {
             hDlgModeless = NULL;
           }
 
-          if (pfr.Flags & FR_FINDNEXT == FR_FINDNEXT) {
-            if (!find.FindTextInEditWindow(hwndEdit, iOffset, pfr.addressOf)) {
-              ShowOKMessage(hwnd, 'Text not found!');
+          if (findReplace.Flags & FR_FINDNEXT == FR_FINDNEXT) {
+            if (!find.FindTextInEditWindow(
+                hwndEdit, iOffset, findReplace.addressOf)) {
+              editor.ShowOKMessage('Text not found!');
             }
           }
 
-          if ((pfr.Flags & FR_REPLACE == FR_REPLACE) ||
-              (pfr.Flags & FR_REPLACEALL == FR_REPLACEALL)) {
+          if ((findReplace.Flags & FR_REPLACE == FR_REPLACE) ||
+              (findReplace.Flags & FR_REPLACEALL == FR_REPLACEALL)) {
             if (!find.ReplaceTextInEditWindow(
-                hwndEdit, iOffset, pfr.addressOf)) {
-              ShowOKMessage(hwnd, 'Text not found!');
+                hwndEdit, iOffset, findReplace.addressOf)) {
+              editor.ShowOKMessage('Text not found!');
             }
           }
 
-          if (pfr.Flags & FR_REPLACEALL == FR_REPLACEALL) {
+          if (findReplace.Flags & FR_REPLACEALL == FR_REPLACEALL) {
             while (find.ReplaceTextInEditWindow(
-                hwndEdit, iOffset, pfr.addressOf)) {}
+                hwndEdit, iOffset, findReplace.addressOf)) {}
           }
 
           return 0;
