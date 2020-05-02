@@ -131,7 +131,7 @@ class Notepad {
         // Messages from menu system
         switch (LOWORD(wParam)) {
           case IDM_FILE_NEW:
-            if (editor.isFileDirty && editor.AskAboutSave() == IDCANCEL) {
+            if (editor.isFileDirty && editor.OfferSave() == IDCANCEL) {
               return 0;
             }
 
@@ -152,7 +152,7 @@ class Notepad {
             return editor.SaveAsFile() ? 1 : 0;
 
           case IDM_FILE_PRINT:
-            editor.ShowOKMessage('Print not yet implemented!');
+            editor.ShowMessage('Print not yet implemented!');
             return 0;
 
           case IDM_APP_EXIT:
@@ -208,23 +208,23 @@ class Notepad {
             return 0;
 
           case IDM_HELP:
-            editor.ShowOKMessage('Help not yet implemented!');
+            editor.ShowMessage('Help not yet implemented!');
             return 0;
 
           case IDM_APP_ABOUT:
-            editor.ShowOKMessage('About not yet implemented!');
+            editor.ShowMessage('About not yet implemented!');
             return 0;
         }
         return 0;
 
       case WM_CLOSE:
-        if (!editor.isFileDirty || editor.AskAboutSave() != IDCANCEL) {
+        if (!editor.isFileDirty || editor.OfferSave() != IDCANCEL) {
           DestroyWindow(hwnd);
         }
         return 0;
 
       case WM_QUERYENDSESSION:
-        if (!editor.isFileDirty || editor.AskAboutSave() != IDCANCEL) {
+        if (!editor.isFileDirty || editor.OfferSave() != IDCANCEL) {
           return 1;
         }
         return 0;
@@ -247,7 +247,7 @@ class Notepad {
           if (findReplace.Flags & FR_FINDNEXT == FR_FINDNEXT) {
             if (!find.FindTextInEditWindow(
                 hwndEdit, iOffset, findReplace.addressOf)) {
-              editor.ShowOKMessage('Text not found!');
+              editor.ShowMessage('Text not found!');
             }
           }
 
@@ -255,7 +255,7 @@ class Notepad {
               (findReplace.Flags & FR_REPLACEALL == FR_REPLACEALL)) {
             if (!find.ReplaceTextInEditWindow(
                 hwndEdit, iOffset, findReplace.addressOf)) {
-              editor.ShowOKMessage('Text not found!');
+              editor.ShowMessage('Text not found!');
             }
           }
 

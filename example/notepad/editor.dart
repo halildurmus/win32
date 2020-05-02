@@ -12,13 +12,17 @@ import 'font.dart';
 import 'resources.dart';
 
 class NotepadEditor {
-  int hwnd, hwndEdit;
+  // Handles to window and edit control. These don't change after the controls
+  // are instantiated, so we take a copy here to minimize ceremony while an
+  // instance is being used.
+  final int _hwnd;
+  final int _hwndEdit;
 
   NotepadFile file;
   NotepadFont font;
 
-  NotepadEditor(this.hwnd, this.hwndEdit) {
-    file = NotepadFile(hwnd);
+  NotepadEditor(this._hwnd, this._hwndEdit) {
+    file = NotepadFile(_hwnd);
   }
 
   void Dispose() {
@@ -36,7 +40,7 @@ class NotepadEditor {
     final iSelBeg = allocate<Uint32>()..value = NULL;
     final iSelEnd = allocate<Uint32>()..value = NULL;
 
-    SendMessage(hwndEdit, EM_GETSEL, iSelBeg.address, iSelEnd.address);
+    SendMessage(_hwndEdit, EM_GETSEL, iSelBeg.address, iSelEnd.address);
 
     result = (iSelBeg.value != iSelEnd.value);
 
@@ -54,12 +58,12 @@ class NotepadEditor {
   }
 
   void OpenFile() {
-    if (isFileDirty && AskAboutSave() == IDCANCEL) {
+    if (isFileDirty && OfferSave() == IDCANCEL) {
       return;
     }
 
-    if (file.ShowOpenDialog(hwnd)) {
-      file.ReadFileIntoEditControl(hwndEdit);
+    if (file.ShowOpenDialog(_hwnd)) {
+      file.ReadFileIntoEditControl(_hwndEdit);
     }
 
     UpdateWindowTitle();
@@ -68,7 +72,7 @@ class NotepadEditor {
 
   bool SaveFile() {
     if (file.path != null) {
-      file.WriteFileFromEditControl(hwndEdit);
+      file.WriteFileFromEditControl(_hwndEdit);
       isFileDirty = false;
       return true;
     }
@@ -77,10 +81,10 @@ class NotepadEditor {
   }
 
   bool SaveAsFile() {
-    if (file.ShowSaveDialog(hwnd)) {
+    if (file.ShowSaveDialog(_hwnd)) {
       UpdateWindowTitle();
 
-      file.WriteFileFromEditControl(hwndEdit);
+      file.WriteFileFromEditControl(_hwndEdit);
       isFileDirty = false;
       return true;
     }
@@ -89,32 +93,32 @@ class NotepadEditor {
   }
 
   void SetFont() {
-    font ??= NotepadFont(hwnd);
+    font ??= NotepadFont(_hwnd);
 
-    if (font.NotepadChooseFont(hwnd)) {
-      font.NotepadSetFont(hwndEdit);
+    if (font.NotepadChooseFont(_hwnd)) {
+      font.NotepadSetFont(_hwndEdit);
     }
   }
 
   void UpdateWindowTitle() {
     final caption = APP_NAME + ' - ' + (file.title ?? '(untitled)');
-    SetWindowText(hwnd, TEXT(caption));
+    SetWindowText(_hwnd, TEXT(caption));
   }
 
-  void ShowOKMessage(String szMessage) {
+  void ShowMessage(String szMessage) {
     MessageBox(
-        hwnd, TEXT(szMessage), TEXT(APP_NAME), MB_OK | MB_ICONEXCLAMATION);
+        _hwnd, TEXT(szMessage), TEXT(APP_NAME), MB_OK | MB_ICONEXCLAMATION);
   }
 
-  int AskAboutSave() {
+  int OfferSave() {
     final buffer = TEXT(file.title != null
         ? 'Save current changes in ${file.title}?'
         : 'Save changes to file?');
     final res = MessageBox(
-        hwnd, buffer, TEXT(APP_NAME), MB_YESNOCANCEL | MB_ICONQUESTION);
+        _hwnd, buffer, TEXT(APP_NAME), MB_YESNOCANCEL | MB_ICONQUESTION);
 
     if (res == IDYES) {
-      if (SendMessage(hwnd, WM_COMMAND, IDM_FILE_SAVE, 0) == FALSE) {
+      if (SendMessage(_hwnd, WM_COMMAND, IDM_FILE_SAVE, 0) == FALSE) {
         return IDCANCEL;
       }
     }
