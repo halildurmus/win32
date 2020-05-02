@@ -45,7 +45,7 @@ class Notepad {
   static final iOffset = allocate<Uint32>()..value = 0;
   static int iEnable;
 
-  static Pointer<FINDREPLACE> pfr;
+  static FINDREPLACE pfr;
 
   static void SetWindowTitle(int hwnd, String titleName) {
     final caption = APP_NAME + ' - ' + (titleName ?? '(untitled)');
@@ -320,31 +320,29 @@ class Notepad {
         // Process "Find/Replace" messages
 
         if (message == messageFindReplace) {
-          pfr = Pointer<FINDREPLACE>.fromAddress(lParam);
+          pfr = Pointer<FINDREPLACE>.fromAddress(lParam).ref;
 
-          if (pfr.ref.Flags & FR_DIALOGTERM == FR_DIALOGTERM) {
+          if (pfr.Flags & FR_DIALOGTERM == FR_DIALOGTERM) {
             hDlgModeless = NULL;
           }
 
-          if (pfr.ref.Flags & FR_FINDNEXT == FR_FINDNEXT) {
-            if (!find.FindTextInEditWindow(hwndEdit, iOffset, pfr)) {
+          if (pfr.Flags & FR_FINDNEXT == FR_FINDNEXT) {
+            if (!find.FindTextInEditWindow(hwndEdit, iOffset, pfr.addressOf)) {
               ShowOKMessage(hwnd, 'Text not found!');
             }
           }
 
-          if ((pfr.ref.Flags & FR_REPLACE == FR_REPLACE) ||
-              (pfr.ref.Flags & FR_REPLACEALL == FR_REPLACEALL)) {
-            print('replaces: ' +
-                pfr.ref.lpstrFindWhat.unpackString(256) +
-                ' with ' +
-                pfr.ref.lpstrReplaceWith.unpackString(256));
-            if (!find.ReplaceTextInEditWindow(hwndEdit, iOffset, pfr)) {
+          if ((pfr.Flags & FR_REPLACE == FR_REPLACE) ||
+              (pfr.Flags & FR_REPLACEALL == FR_REPLACEALL)) {
+            if (!find.ReplaceTextInEditWindow(
+                hwndEdit, iOffset, pfr.addressOf)) {
               ShowOKMessage(hwnd, 'Text not found!');
             }
           }
 
-          if (pfr.ref.Flags & FR_REPLACEALL == FR_REPLACEALL) {
-            while (find.ReplaceTextInEditWindow(hwndEdit, iOffset, pfr)) {}
+          if (pfr.Flags & FR_REPLACEALL == FR_REPLACEALL) {
+            while (find.ReplaceTextInEditWindow(
+                hwndEdit, iOffset, pfr.addressOf)) {}
           }
 
           return 0;

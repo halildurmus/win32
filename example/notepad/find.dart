@@ -94,10 +94,6 @@ class NotepadFind {
     if (!FindTextInEditWindow(hwndEdit, piSearchOffset, fr)) {
       return false;
     }
-    print('received repl: ' +
-        fr.ref.lpstrFindWhat.unpackString(MAX_STRING_LEN) +
-        ' with ' +
-        fr.ref.lpstrReplaceWith.unpackString(MAX_STRING_LEN));
     SendMessage(hwndEdit, EM_REPLACESEL, 0, fr.ref.lpstrReplaceWith.address);
 
     return true;
