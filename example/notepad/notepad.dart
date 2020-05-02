@@ -40,8 +40,6 @@ class Notepad {
 
   static int messageFindReplace;
 
-  static final iSelBeg = allocate<IntPtr>()..value = 0;
-  static final iSelEnd = allocate<IntPtr>()..value = 0;
   static final iOffset = allocate<Uint32>()..value = 0;
   static int iEnable;
 
@@ -138,9 +136,16 @@ class Notepad {
                     ? MF_ENABLED
                     : MF_GRAYED);
 
+            // Enable Cut / Copy / Clear if there is a selection
+            final iSelBeg = allocate<Uint32>()..value = NULL;
+            final iSelEnd = allocate<Uint32>()..value = NULL;
+
             SendMessage(hwndEdit, EM_GETSEL, iSelBeg.address, iSelEnd.address);
 
-            iEnable = iSelBeg != iSelEnd ? MF_ENABLED : MF_GRAYED;
+            iEnable = iSelBeg.value != iSelEnd.value ? MF_ENABLED : MF_GRAYED;
+
+            free(iSelBeg);
+            free(iSelEnd);
 
             EnableMenuItem(wParam, IDM_EDIT_CUT, iEnable);
             EnableMenuItem(wParam, IDM_EDIT_COPY, iEnable);
