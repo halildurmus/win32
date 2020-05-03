@@ -83,6 +83,8 @@ final MessageBox =
     user32.lookupFunction<messageBoxNative, messageBoxDart>('MessageBoxW');
 final MoveWindow =
     user32.lookupFunction<moveWindowNative, moveWindowDart>('MoveWindow');
+final PeekMessage =
+    user32.lookupFunction<peekMessageNative, peekMessageDart>('PeekMessageW');
 final PostQuitMessage =
     user32.lookupFunction<postQuitMessageNative, postQuitMessageDart>(
         'PostQuitMessage');
@@ -129,6 +131,16 @@ final FindNextVolume =
 final FindVolumeClose =
     kernel32.lookupFunction<findVolumeCloseNative, findVolumeCloseDart>(
         'FindVolumeClose');
+final Beep = kernel32.lookupFunction<beepNative, beepDart>('Beep');
+final FillConsoleOutputAttribute = kernel32.lookupFunction<
+    fillConsoleOutputAttributeNative,
+    fillConsoleOutputAttributeDart>('FillConsoleOutputAttribute');
+final FillConsoleOutputCharacter = kernel32.lookupFunction<
+    fillConsoleOutputCharacterNative,
+    fillConsoleOutputCharacterDart>('FillConsoleOutputCharacterW');
+final GetConsoleScreenBufferInfo = kernel32.lookupFunction<
+    getConsoleScreenBufferInfoNative,
+    getConsoleScreenBufferInfoDart>('GetConsoleScreenBufferInfo');
 final GetLastError = kernel32
     .lookupFunction<getLastErrorNative, getLastErrorDart>('GetLastError');
 final GetModuleHandle =
@@ -139,9 +151,6 @@ final GetStdHandle = kernel32
 final GetVolumePathNamesForVolumeName = kernel32.lookupFunction<
     getVolumePathNamesForVolumeNameNative,
     getVolumePathNamesForVolumeNameDart>('GetVolumePathNamesForVolumeNameW');
-final GetConsoleScreenBufferInfo = kernel32.lookupFunction<
-    getConsoleScreenBufferInfoNative,
-    getConsoleScreenBufferInfoDart>('GetConsoleScreenBufferInfo');
 final QueryDosDevice =
     kernel32.lookupFunction<queryDosDeviceNative, queryDosDeviceDart>(
         'QueryDosDeviceW');
@@ -153,12 +162,12 @@ final SetConsoleCursorPosition = kernel32.lookupFunction<
     setConsoleCursorPositionNative,
     setConsoleCursorPositionDart>('SetConsoleCursorPosition');
 final Sleep = kernel32.lookupFunction<sleepNative, sleepDart>('Sleep');
-final FillConsoleOutputCharacter = kernel32.lookupFunction<
-    fillConsoleOutputCharacterNative,
-    fillConsoleOutputCharacterDart>('FillConsoleOutputCharacterW');
-final FillConsoleOutputAttribute = kernel32.lookupFunction<
-    fillConsoleOutputAttributeNative,
-    fillConsoleOutputAttributeDart>('FillConsoleOutputAttribute');
+final SetConsoleMode = kernel32
+    .lookupFunction<setConsoleModeNative, setConsoleModeDart>('SetConsoleMode');
+final VirtualAlloc = kernel32
+    .lookupFunction<virtualAllocNative, virtualAllocDart>('VirtualAlloc');
+final VirtualFree =
+    kernel32.lookupFunction<virtualFreeNative, virtualFreeDart>('VirtualFree');
 
 final gdi32 = DynamicLibrary.open('gdi32.dll');
 final CreateFontIndirect =
@@ -195,6 +204,8 @@ final SetViewportOrgEx =
         'SetViewportOrgEx');
 final SetWindowExtEx = gdi32
     .lookupFunction<setWindowExtExNative, setWindowExtExDart>('SetWindowExtEx');
+final StretchDIBits = gdi32
+    .lookupFunction<stretchDIBitsNative, stretchDIBitsDart>('StretchDIBits');
 final TextOut = gdi32.lookupFunction<textOutNative, textOutDart>('TextOutW');
 
 final shell32 = DynamicLibrary.open('shell32.dll');
