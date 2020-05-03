@@ -30,6 +30,7 @@ void main()
     printf("sizeof(LPARAM) is %zu\n", sizeof(LPARAM));
     printf("sizeof(LRESULT) is %zu\n", sizeof(LRESULT));
 
+    printf("sizeof(BITMAPINFO) is %zu\n", sizeof(BITMAPINFO));
     printf("sizeof(WNDCLASS) is %zu\n", sizeof(WNDCLASS));
     printf("sizeof(WNDPROC) is %zu\n", sizeof(WNDPROC));
     printf("sizeof(POINT) is %zu\n", sizeof(POINT));

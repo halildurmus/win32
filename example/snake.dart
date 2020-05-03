@@ -24,6 +24,7 @@ const IDT_TIMER2 = 2;
 final rng = Random();
 
 final bitmapInfo = BITMAPINFO.allocate();
+
 Pointer<Void> bitmapMemory = nullptr;
 int bitmapWidth;
 int bitmapHeight;
@@ -336,8 +337,6 @@ void resetGame() {
 
   setApple();
   setVectorToMemory();
-
-  SetTimer(hWnd, IDT_TIMER1, timerAmount, nullptr);
 }
 
 void gameOver() {
@@ -404,9 +403,10 @@ void init(int width, int height) {
       VirtualAlloc(nullptr, bitmapMemorySize, MEM_COMMIT, PAGE_READWRITE);
 
   // init other variables here
-  blocksPerWidth = (width / 10).floor();
-  blocksPerHeight = (height / 10).floor();
-  data = List.filled(blocksPerHeight, List.filled(blocksPerWidth, 0));
+  blocksPerWidth = (width / 10).ceil();
+  blocksPerHeight = (height / 10).ceil();
+  data = List.generate(
+      blocksPerHeight, (_) => List.generate(blocksPerWidth, (_) => 0));
 
   resetGame();
 }
@@ -505,7 +505,6 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       {
         switch (wParam) {
           case VK_LEFT:
-            print('left');
             if (direction.x != 1) {
               direction.x = -1;
               direction.y = 0;
@@ -524,7 +523,6 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
             }
             break;
           case VK_DOWN:
-            print('down');
             if (direction.y != -1) {
               direction.x = 0;
               direction.y = 1;
@@ -573,7 +571,7 @@ void main() {
     hWnd = CreateWindowEx(
         0, // Optional window styles.
         CLASS_NAME, // Window class
-        TEXT('WinSnake'), // Window caption
+        TEXT('Dart WinSnake'), // Window caption
         WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_VISIBLE,
 
         // Size and position

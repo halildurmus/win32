@@ -337,7 +337,7 @@ typedef showWindowDart = int Function(int hWnd, int nCmdShow);
 //   DWORD            rop
 // );
 typedef stretchDIBitsNative = Int32 Function(
-    Int64 hdc,
+    IntPtr hdc,
     Int32 xDest,
     Int32 yDest,
     Int32 DestWidth,
