@@ -1035,6 +1035,83 @@ class GUID extends Struct {
 // work necessary to unpack parameters like COORD and SMALL_RECT. The Dart
 // issue for this work is https://github.com/dart-lang/sdk/issues/37271.
 
+// typedef struct tagBITMAPINFO {
+//   BITMAPINFOHEADER bmiHeader;
+//   RGBQUAD          bmiColors[1];
+// } BITMAPINFO, *LPBITMAPINFO, *PBITMAPINFO;
+//
+// typedef struct tagBITMAPINFOHEADER {
+//   DWORD biSize;
+//   LONG  biWidth;
+//   LONG  biHeight;
+//   WORD  biPlanes;
+//   WORD  biBitCount;
+//   DWORD biCompression;
+//   DWORD biSizeImage;
+//   LONG  biXPelsPerMeter;
+//   LONG  biYPelsPerMeter;
+//   DWORD biClrUsed;
+//   DWORD biClrImportant;
+// } BITMAPINFOHEADER, *PBITMAPINFOHEADER;
+//
+// typedef struct tagRGBQUAD {
+//   BYTE rgbBlue;
+//   BYTE rgbGreen;
+//   BYTE rgbRed;
+//   BYTE rgbReserved;
+// } RGBQUAD;
+class BITMAPINFO extends Struct {
+  @Int32()
+  int biSize;
+  @Int32()
+  int biWidth;
+  @Int32()
+  int biHeight;
+  @Int16()
+  int biPlanes;
+  @Int16()
+  int biBitCount;
+  @Int32()
+  int biCompression;
+  @Int32()
+  int biSizeImage;
+  @Int32()
+  int biXPelsPerMeter;
+  @Int32()
+  int biYPelsPerMeter;
+  @Int32()
+  int biClrUsed;
+  @Int32()
+  int biClrImportant;
+  @Int8()
+  int rgbBlue;
+  @Int8()
+  int rgbGreen;
+  @Int8()
+  int rgbRed;
+  @Int8()
+  int rgbReserved;
+
+  factory BITMAPINFO.allocate() => allocate<BITMAPINFO>().ref
+    ..biSize = 44 // default to single element RGBQUAD
+    ..biWidth = 0
+    ..biHeight = 0
+    ..biPlanes = 0
+    ..biBitCount = 0
+    ..biCompression = 0
+    ..biSizeImage = 0
+    ..biXPelsPerMeter = 0
+    ..biYPelsPerMeter = 0
+    ..biClrUsed = 0
+    ..biClrImportant = 0
+    ..rgbBlue = 0
+    ..rgbGreen = 0
+    ..rgbRed = 0
+    ..rgbReserved = 0;
+}
+
+// *** CONSOLE STRUCTS ***
+
 // typedef struct _CONSOLE_CURSOR_INFO {
 //   DWORD dwSize;
 //   BOOL  bVisible;
