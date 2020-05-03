@@ -7,16 +7,13 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-typedef queryInterfaceNative = Int32 Function(
-    Pointer<Uint64> obj, Pointer<GUID> riid, Pointer<Uint64> ppvObject);
-typedef queryInterfaceDart = int Function(
-    Pointer<Uint64> obj, Pointer<GUID> riid, Pointer<Uint64> ppvObject);
+// typedef queryInterfaceNative = Int32 Function(
+//     Pointer<Uint64> obj, Pointer<GUID> riid, Pointer<Uint64> ppvObject);
+// typedef queryInterfaceDart = int Function(
+//     Pointer<Uint64> obj, Pointer<GUID> riid, Pointer<Uint64> ppvObject);
 
-typedef IModalWindowShowNative = Int32 Function(
-    Pointer<Uint64> obj, Int64 hwndOwner);
-typedef IModalWindowShowDart = int Function(Pointer<Uint64> obj, int hwndOwner);
-// typedef IModalWindowShowNative = Int32 Function(Int64 hwndOwner);
-// typedef IModalWindowShowDart = int Function(int hwndOwner);
+typedef IModalWindowShowNative = Int32 Function(Pointer obj, IntPtr hwndOwner);
+typedef IModalWindowShowDart = int Function(Pointer obj, int hwndOwner);
 
 class IFileDialogVtbl extends Struct {
   Pointer<NativeFunction> QueryInterface;
@@ -47,45 +44,45 @@ class IFileDialogVtbl extends Struct {
   Pointer<NativeFunction> ClearClientData;
   Pointer<NativeFunction> SetFilter;
 
-  factory IFileDialogVtbl.allocate() => allocate<IFileDialogVtbl>().ref
-    ..QueryInterface = allocate<Uint64>().cast()
-    ..AddRef = allocate<Uint64>().cast()
-    ..Release = allocate<Uint64>().cast()
-    ..Show = allocate<Uint64>().cast()
-    ..SetFileTypes = allocate<Uint64>().cast()
-    ..SetFileTypeIndex = allocate<Uint64>().cast()
-    ..GetFileTypeIndex = allocate<Uint64>().cast()
-    ..Advise = allocate<Uint64>().cast()
-    ..Unadvise = allocate<Uint64>().cast()
-    ..SetOptions = allocate<Uint64>().cast()
-    ..GetOptions = allocate<Uint64>().cast()
-    ..SetDefaultFolder = allocate<Uint64>().cast()
-    ..SetFolder = allocate<Uint64>().cast()
-    ..GetFolder = allocate<Uint64>().cast()
-    ..GetCurrentSelection = allocate<Uint64>().cast()
-    ..SetFileName = allocate<Uint64>().cast()
-    ..GetFileName = allocate<Uint64>().cast()
-    ..SetTitle = allocate<Uint64>().cast()
-    ..SetOkButtonLabel = allocate<Uint64>().cast()
-    ..SetFileNameLabel = allocate<Uint64>().cast()
-    ..GetResult = allocate<Uint64>().cast()
-    ..AddPlace = allocate<Uint64>().cast()
-    ..SetDefaultExtension = allocate<Uint64>().cast()
-    ..Close = allocate<Uint64>().cast()
-    ..SetClientGuid = allocate<Uint64>().cast()
-    ..ClearClientData = allocate<Uint64>().cast()
-    ..SetFilter = allocate<Uint64>().cast();
+  // factory IFileDialogVtbl.allocate() => allocate<IFileDialogVtbl>().ref
+  //   ..QueryInterface = nullptr
+  //   ..AddRef = nullptr
+  //   ..Release = nullptr
+  //   ..Show = nullptr
+  //   ..SetFileTypes = nullptr
+  //   ..SetFileTypeIndex = nullptr
+  //   ..GetFileTypeIndex = nullptr
+  //   ..Advise = nullptr
+  //   ..Unadvise = nullptr
+  //   ..SetOptions = nullptr
+  //   ..GetOptions = nullptr
+  //   ..SetDefaultFolder = nullptr
+  //   ..SetFolder = nullptr
+  //   ..GetFolder = nullptr
+  //   ..GetCurrentSelection = nullptr
+  //   ..SetFileName = nullptr
+  //   ..GetFileName = nullptr
+  //   ..SetTitle = nullptr
+  //   ..SetOkButtonLabel = nullptr
+  //   ..SetFileNameLabel = nullptr
+  //   ..GetResult = nullptr
+  //   ..AddPlace = nullptr
+  //   ..SetDefaultExtension = nullptr
+  //   ..Close = nullptr
+  //   ..SetClientGuid = nullptr
+  //   ..ClearClientData = nullptr
+  //   ..SetFilter = nullptr;
 }
 
 class IFileDialog extends Struct {
   Pointer<IFileDialogVtbl> lpVtbl;
 
-  factory IFileDialog.allocate() => allocate<IFileDialog>().ref
-    ..lpVtbl = IFileDialogVtbl.allocate().addressOf;
+  factory IFileDialog.allocate() =>
+      allocate<IFileDialog>().ref..lpVtbl = allocate<IFileDialogVtbl>();
 }
 
 void printPointer(String name, Pointer ptr) {
-  print('${name.padRight(15)}: ${pointerAsString(ptr)}');
+  print('${name.padRight(30)}: ${pointerAsString(ptr).toUpperCase()}');
 }
 
 String pointerAsString(Pointer ptr) =>
@@ -123,30 +120,54 @@ void main() {
         GUID.fromString(CLSID_FileOpenDialog).addressOf,
         nullptr,
         CLSCTX_ALL,
-        GUID.fromString(IID_IFileOpenDialog).addressOf,
+        GUID.fromString(IID_IFileDialog).addressOf,
         dlg.cast());
 
     if (SUCCEEDED(hr)) {
       printPointer('dlg', dlg);
-      printPointer('lpVtbl', dlg.ref.lpVtbl);
-      printPointer('QueryInterface', dlg.ref.lpVtbl.ref.QueryInterface);
-      printPointer('AddRef', dlg.ref.lpVtbl.ref.AddRef);
-      printPointer('Release', dlg.ref.lpVtbl.ref.Release);
-      printPointer('Show', dlg.ref.lpVtbl.ref.Show);
-      printPointer(
-          'ShowCalc',
-          Pointer<NativeFunction<IModalWindowShowNative>>.fromAddress(
-              dlg.ref.lpVtbl.cast<Uint64>().value + 24));
+      printPointer('dlg->lpVtbl', dlg.ref.lpVtbl);
 
+      // vTable contains, in order:
+      //   [0] QueryInterface
+      //   [1] AddRef
+      //   [2] Release
+      //   [3] Show
+      //   ...
+      // All are function pointers
+
+      // This gives the correct value.
+      printPointer(
+          'dlg->lpVtbl->QueryInterface', dlg.ref.lpVtbl.ref.QueryInterface);
+
+      print('---');
+
+      // These do not give the right addresses.
+      printPointer('dlg->lpVtbl->AddRef', dlg.ref.lpVtbl.ref.AddRef);
+      printPointer('dlg->lpVtbl->Release', dlg.ref.lpVtbl.ref.Release);
+      printPointer('dlg->lpVtbl->Show', dlg.ref.lpVtbl.ref.Show);
+      printPointer('dlg->lpVtbl->SetTitle', dlg.ref.lpVtbl.ref.SetTitle);
+
+      print('---');
+
+      // But we know that Show is the fourth entry in the vtable, so it must
+      // be at *(QI + 24). On 64-bit, this gives 0x00007FF8CB32EF38, which is
+      // indeed the same value as the C-based version.
+      final showAddress =
+          dlg.ref.lpVtbl.cast<IntPtr>().value + sizeOf<IntPtr>() * 3;
+      final showNativePtr = Pointer<IntPtr>.fromAddress(showAddress);
+      printPointer('dlg->lpVtbl->Show (calc)', showNativePtr);
+
+      // Trying dereferencing this one more time to get to the actual function
+      // address. This may not be right -- am I dereferencing once to many?
       final showNative =
           Pointer<NativeFunction<IModalWindowShowNative>>.fromAddress(
-              dlg.ref.lpVtbl.cast<Uint64>().value + 24);
-      // final showNative = dlg.ref.lpVtbl.ref.Show
-      //     .cast<NativeFunction<IModalWindowShowNative>>();
+              showNativePtr.value);
+      printPointer('dlg->lpVtbl->Show*', showNative);
+
       final showDart = showNative.asFunction<IModalWindowShowDart>();
 
-      print('showing dialog');
-      hr = showDart(dlg.cast(), NULL);
+      print('Attempting to show dialog. The next line crashes...');
+      hr = showDart(dlg, NULL);
       print('showDart returned $hr');
     } else {
       COMError(hr, 'CoCreateInstance');

@@ -1,12 +1,18 @@
+// dialogshow.c
+
+// Opens the File Open dialog box and shows results
+
+// Compile with cl dialogshow.c /link ole32.lib
+
 #include <windows.h>
 #include <objbase.h>
 #include <ShlObj.h>
 #include <shlwapi.h>
 #include <stdio.h>
 
-void printPointer(char *name, void *ptr)
+void printPointer(char *name, const void *ptr)
 {
-    printf("%-15s: %p\n", name, (void *)ptr);
+    printf("%-30s: %p\n", name, (void *)ptr);
 }
 
 int main(int argc, char **argv)
@@ -25,11 +31,12 @@ int main(int argc, char **argv)
         if (SUCCEEDED(hr))
         {
             printPointer("dlg", &dlg);
-            printPointer("lpVtbl", &(dlg->lpVtbl));
-            printPointer("QueryInterface", &(dlg->lpVtbl->QueryInterface));
-            printPointer("AddRef", &(dlg->lpVtbl->AddRef));
-            printPointer("Release", &(dlg->lpVtbl->Release));
-            printPointer("Show", &(dlg->lpVtbl->Show));
+            printPointer("dlg->lpVtbl", &(dlg->lpVtbl));
+            printPointer("dlg->lpVtbl->QueryInterface", &(dlg->lpVtbl->QueryInterface));
+            printPointer("dlg->lpVtbl->AddRef", &(dlg->lpVtbl->AddRef));
+            printPointer("dlg->lpVtbl->Release", &(dlg->lpVtbl->Release));
+            printPointer("dlg->lpVtbl->Show", &(dlg->lpVtbl->Show));
+            printPointer("dlg->lpVtbl->SetTitle", &(dlg->lpVtbl->SetTitle));
 
             printf("showing dialog\n");
             hr = dlg->lpVtbl->Show(dlg, NULL);
