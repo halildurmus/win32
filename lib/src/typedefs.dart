@@ -133,7 +133,6 @@ typedef createWindowExNative = Int32 Function(
     IntPtr hMenu,
     IntPtr hInstance,
     Pointer<Void> lpParam);
-
 typedef createWindowExDart = int Function(
     int dwExStyle,
     Pointer<Utf16> lpClassName,
@@ -216,6 +215,46 @@ typedef enumWindowsNative = Int32 Function(
 typedef enumWindowsDart = int Function(
     Pointer<NativeFunction> lpEnumFunc, int lParam);
 
+// BOOL WINAPI FillConsoleOutputCharacter(
+//   _In_  HANDLE  hConsoleOutput,
+//   _In_  TCHAR   cCharacter,
+//   _In_  DWORD   nLength,
+//   _In_  COORD   dwWriteCoord,
+//   _Out_ LPDWORD lpNumberOfCharsWritten
+// );
+typedef fillConsoleOutputCharacterNative = Int32 Function(
+    IntPtr hConsoleOutput,
+    Int8 cCharacter,
+    Int32 nLength,
+    Int32 dwWriteCoord,
+    Pointer<Int32> lpNumberOfCharsWritten);
+typedef fillConsoleOutputCharacterDart = int Function(
+    int hConsoleOutput,
+    int cCharacter,
+    int nLength,
+    int dwWriteCoord,
+    Pointer<Int32> lpNumberOfCharsWritten);
+
+// BOOL WINAPI FillConsoleOutputAttribute(
+//   _In_  HANDLE  hConsoleOutput,
+//   _In_  WORD    wAttribute,
+//   _In_  DWORD   nLength,
+//   _In_  COORD   dwWriteCoord,
+//   _Out_ LPDWORD lpNumberOfAttrsWritten
+// );
+typedef fillConsoleOutputAttributeNative = Int32 Function(
+    IntPtr hConsoleOutput,
+    Int16 wAttribute,
+    Int32 nLength,
+    Int32 dwWriteCoord,
+    Pointer<Int32> lpNumberOfAttrsWritten);
+typedef fillConsoleOutputAttributeDart = int Function(
+    int hConsoleOutput,
+    int cCharacter,
+    int nLength,
+    int dwWriteCoord,
+    Pointer<Int32> lpNumberOfAttrsWritten);
+
 // int FillRect(
 //   HDC        hDC,
 //   const RECT *lprc,
@@ -274,6 +313,15 @@ typedef findWindowExDart = int Function(int hWndParent, int hWndChildAfter,
 typedef getClientRectNative = Int32 Function(IntPtr hwnd, Pointer<RECT> lpRect);
 typedef getClientRectDart = int Function(int hwnd, Pointer<RECT> lpRect);
 
+// BOOL WINAPI GetConsoleScreenBufferInfo(
+//   _In_  HANDLE                      hConsoleOutput,
+//   _Out_ PCONSOLE_SCREEN_BUFFER_INFO lpConsoleScreenBufferInfo
+// );
+typedef getConsoleScreenBufferInfoNative = Int32 Function(IntPtr hConsoleOutput,
+    Pointer<CONSOLE_SCREEN_BUFFER_INFO> lpConsoleScreenBufferInfo);
+typedef getConsoleScreenBufferInfoDart = int Function(int hConsoleOutput,
+    Pointer<CONSOLE_SCREEN_BUFFER_INFO> lpConsoleScreenBufferInfo);
+
 // HDC GetDC(
 //   HWND hWnd
 // );
@@ -330,6 +378,12 @@ typedef getScrollInfoNative = Int32 Function(
     IntPtr hwnd, Int32 nBar, Pointer<SCROLLINFO> lpsi);
 typedef getScrollInfoDart = int Function(
     int hwnd, int nBar, Pointer<SCROLLINFO> lpsi);
+
+// HANDLE WINAPI GetStdHandle(
+//   _In_ DWORD nStdHandle
+// );
+typedef getStdHandleNative = IntPtr Function(Int32 nStdHandle);
+typedef getStdHandleDart = int Function(int nStdHandle);
 
 // HGDIOBJ GetStockObject(
 //   int i
@@ -573,6 +627,32 @@ typedef setBkColorDart = int Function(int hdc, int color);
 // );
 typedef setBkModeNative = Int32 Function(IntPtr hdc, Int32 mode);
 typedef setBkModeDart = int Function(int hdc, int mode);
+
+// BOOL WINAPI SetConsoleCursorInfo(
+//   _In_       HANDLE              hConsoleOutput,
+//   _In_ const CONSOLE_CURSOR_INFO *lpConsoleCursorInfo
+// );
+typedef setConsoleCursorInfoNative = Int32 Function(
+    IntPtr hConsoleOutput, Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo);
+typedef setConsoleCursorInfoDart = int Function(
+    int hConsoleOutput, Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo);
+
+// BOOL WINAPI SetConsoleCursorPosition(
+//   _In_ HANDLE hConsoleOutput,
+//   _In_ COORD  dwCursorPosition
+// );
+typedef setConsoleCursorPositionNative = Int32 Function(
+    IntPtr hConsoleOutput, Int32 dwCursorPosition);
+typedef setConsoleCursorPositionDart = int Function(
+    int hConsoleOutput, int dwCursorPosition);
+
+// BOOL WINAPI SetConsoleMode(
+//   _In_ HANDLE hConsoleHandle,
+//   _In_ DWORD  dwMode
+// );
+typedef setConsoleModeNative = Int32 Function(
+    IntPtr hConsoleHandle, Int32 dwMode);
+typedef setConsoleModeDart = int Function(int hConsoleHandle, int dwMode);
 
 // HWND SetFocus(
 //   HWND hWnd
@@ -819,85 +899,3 @@ typedef virtualFreeNative = Int32 Function(
     Pointer<Void> lpAddress, Int64 dwSize, Int32 dwFreeType);
 typedef virtualFreeDart = int Function(
     Pointer<Void> lpAddress, int dwSize, int dwFreeType);
-
-// *** CONSOLE APIs ***
-// BOOL WINAPI FillConsoleOutputCharacter(
-//   _In_  HANDLE  hConsoleOutput,
-//   _In_  TCHAR   cCharacter,
-//   _In_  DWORD   nLength,
-//   _In_  COORD   dwWriteCoord,
-//   _Out_ LPDWORD lpNumberOfCharsWritten
-// );
-typedef fillConsoleOutputCharacterNative = Int32 Function(
-    IntPtr hConsoleOutput,
-    Int8 cCharacter,
-    Int32 nLength,
-    Int32 dwWriteCoord,
-    Pointer<Int32> lpNumberOfCharsWritten);
-typedef fillConsoleOutputCharacterDart = int Function(
-    int hConsoleOutput,
-    int cCharacter,
-    int nLength,
-    int dwWriteCoord,
-    Pointer<Int32> lpNumberOfCharsWritten);
-
-// BOOL WINAPI FillConsoleOutputAttribute(
-//   _In_  HANDLE  hConsoleOutput,
-//   _In_  WORD    wAttribute,
-//   _In_  DWORD   nLength,
-//   _In_  COORD   dwWriteCoord,
-//   _Out_ LPDWORD lpNumberOfAttrsWritten
-// );
-typedef fillConsoleOutputAttributeNative = Int32 Function(
-    IntPtr hConsoleOutput,
-    Int16 wAttribute,
-    Int32 nLength,
-    Int32 dwWriteCoord,
-    Pointer<Int32> lpNumberOfAttrsWritten);
-typedef fillConsoleOutputAttributeDart = int Function(
-    int hConsoleOutput,
-    int cCharacter,
-    int nLength,
-    int dwWriteCoord,
-    Pointer<Int32> lpNumberOfAttrsWritten);
-
-// BOOL WINAPI GetConsoleScreenBufferInfo(
-//   _In_  HANDLE                      hConsoleOutput,
-//   _Out_ PCONSOLE_SCREEN_BUFFER_INFO lpConsoleScreenBufferInfo
-// );
-typedef getConsoleScreenBufferInfoNative = Int32 Function(IntPtr hConsoleOutput,
-    Pointer<CONSOLE_SCREEN_BUFFER_INFO> lpConsoleScreenBufferInfo);
-typedef getConsoleScreenBufferInfoDart = int Function(int hConsoleOutput,
-    Pointer<CONSOLE_SCREEN_BUFFER_INFO> lpConsoleScreenBufferInfo);
-
-// HANDLE WINAPI GetStdHandle(
-//   _In_ DWORD nStdHandle
-// );
-typedef getStdHandleNative = IntPtr Function(Int32 nStdHandle);
-typedef getStdHandleDart = int Function(int nStdHandle);
-
-// BOOL WINAPI SetConsoleCursorInfo(
-//   _In_       HANDLE              hConsoleOutput,
-//   _In_ const CONSOLE_CURSOR_INFO *lpConsoleCursorInfo
-// );
-typedef setConsoleCursorInfoNative = Int32 Function(
-    IntPtr hConsoleOutput, Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo);
-typedef setConsoleCursorInfoDart = int Function(
-    int hConsoleOutput, Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo);
-
-// BOOL WINAPI SetConsoleCursorPosition(
-//   _In_ HANDLE hConsoleOutput,
-//   _In_ COORD  dwCursorPosition
-// );
-typedef setConsoleCursorPositionNative = Int32 Function(
-    IntPtr hConsoleOutput, Int32 dwCursorPosition);
-typedef setConsoleCursorPositionDart = int Function(
-    int hConsoleOutput, int dwCursorPosition);
-
-// BOOL WINAPI SetConsoleMode(
-//   _In_ HANDLE hConsoleHandle,
-//   _In_ DWORD  dwMode
-// );
-typedef setConsoleModeNative = Int32 Function(
-    IntPtr hConsoleHandle, Int32 dwMode);
-typedef setConsoleModeDart = int Function(int hConsoleHandle, int dwMode);
