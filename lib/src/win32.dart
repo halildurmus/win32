@@ -162,6 +162,8 @@ final SetConsoleCursorPosition = kernel32.lookupFunction<
     setConsoleCursorPositionNative,
     setConsoleCursorPositionDart>('SetConsoleCursorPosition');
 final Sleep = kernel32.lookupFunction<sleepNative, sleepDart>('Sleep');
+final SetConsoleMode = kernel32
+    .lookupFunction<setConsoleModeNative, setConsoleModeDart>('SetConsoleMode');
 final VirtualAlloc = kernel32
     .lookupFunction<virtualAllocNative, virtualAllocDart>('VirtualAlloc');
 final VirtualFree =
