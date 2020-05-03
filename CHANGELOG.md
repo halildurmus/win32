@@ -1,3 +1,9 @@
+## 1.3.2
+
+ - Add Snake GDI example
+ - Add PeekMessage, MoveTo, VirtualAlloc/Free, StretchDibBits, Beep
+ - Tidy up code and test
+
 ## 1.3.1
 
 - Add RegisterWindowMessage

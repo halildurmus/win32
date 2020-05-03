@@ -51,16 +51,9 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `window.dart`      | Enumerates open windows and basic window manipulation     |
 | `guid.dart`        | Creates a globally unique identifier (GUID)               |
 | `devices.dart`     | Uses volume management APIs to list all disk devices      |
+| `snake.dart`       | Snake game using various GDI features                     |
 | `tetris\main.dart` | Port of an open-source Tetris game to Dart                |
 | `notepad\notepad.dart` | Lightweight replica of the Windows notepad applet     |
-
-The Tetris example listed above is a fuller worked example of a reasonably
-complete program that uses the Dart Win32 package. It is a port of a C version
-of the game by Chang-Hung Liang. [More information...](tetris/README.md)
-
-The original C version of the Notepad example was originally authored by Charles
-Petzold, and is kindly [licensed by him](http://www.charlespetzold.com/faq.html)
-without restriction.
 
 ### Flutter samples
 
@@ -74,5 +67,18 @@ Please file feature requests and bugs at the [issue tracker][tracker]. This
 is a hobby project, and should not be viewed as having the same level of
 quality assurance as an official package from the Dart team. I'm a product
 manager having fun on my weekends!
+
+## Acknowledgements
+
+The Tetris example listed above is a fuller worked example of a reasonably
+complete program that uses the Dart Win32 package. It is a port of a C version
+of the game by Chang-Hung Liang. [More information...](tetris/README.md)
+
+The [C implementation of the Snake game](https://github.com/davidejones/winsnake)
+is by David Jones, and is ported with his permission.
+
+The original C version of the Notepad example was originally authored by Charles
+Petzold, and is kindly [licensed by him](http://www.charlespetzold.com/faq.html)
+without restriction.
 
 [tracker]: http://github.com/timsneath/win32
