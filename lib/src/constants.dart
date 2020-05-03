@@ -666,6 +666,10 @@ const CC_ENABLETEMPLATE = 0x00000020;
 const CC_ENABLETEMPLATEHANDLE = 0x00000040;
 const CC_SOLIDCOLOR = 0x00000080;
 const CC_ANYCOLOR = 0x00000100;
+// PeekMessage options
+const PM_NOREMOVE = 0x0000;
+const PM_REMOVE = 0x0001;
+const PM_NOYIELD = 0x0002;
 
 // System colors
 const COLOR_SCROLLBAR = 0;
@@ -785,6 +789,29 @@ const BI_RLE4 = 2;
 const BI_BITFIELDS = 3;
 const BI_JPEG = 4;
 const BI_PNG = 5;
+
+// DIB color table identifiers
+const DIB_RGB_COLORS = 0;
+const DIB_PAL_COLORS = 1;
+
+/* Ternary raster operations */
+const SRCCOPY = 0x00CC0020;
+const SRCPAINT = 0x00EE0086;
+const SRCAND = 0x008800C6;
+const SRCINVERT = 0x00660046;
+const SRCERASE = 0x00440328;
+const NOTSRCCOPY = 0x00330008;
+const NOTSRCERASE = 0x001100A6;
+const MERGECOPY = 0x00C000CA;
+const MERGEPAINT = 0x00BB0226;
+const PATCOPY = 0x00F00021;
+const PATPAINT = 0x00FB0A09;
+const PATINVERT = 0x005A0049;
+const DSTINVERT = 0x00550009;
+const BLACKNESS = 0x00000042;
+const WHITENESS = 0x00FF0062;
+const NOMIRRORBITMAP = 0x80000000;
+const CAPTUREBLT = 0x40000000;
 
 // Dialog box command IDs
 const IDOK = 1;
@@ -1246,6 +1273,8 @@ const FOLDERID_AppDataDesktop = '{B2C5E279-7ADD-439F-B28C-C41FE1BBF672}';
 const FOLDERID_AppDataDocuments = '{7BE16610-1F7F-44AC-BFF0-83E15F2FFCA1}';
 const FOLDERID_AppDataFavorites = '{7CFBEFBC-DE1F-45AA-B843-A542AC536CC9}';
 const FOLDERID_AppDataProgramData = '{559D40A3-A036-40FA-AF61-84CB430A4D34}';
+// *** Kernel constants ***
+
 // memory management
 const PAGE_NOACCESS = 0x01;
 const PAGE_READONLY = 0x02;
