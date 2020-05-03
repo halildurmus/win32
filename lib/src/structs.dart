@@ -1,3 +1,7 @@
+// structs.dart
+
+// Dart representations of common structs used in the Win32 API
+
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
@@ -27,16 +31,16 @@ class WNDCLASS extends Struct {
   @Int32()
   int cbWndExtra;
 
-  @Int64()
+  @IntPtr()
   int hInstance;
 
-  @Int64()
+  @IntPtr()
   int hIcon;
 
-  @Int64()
+  @IntPtr()
   int hCursor;
 
-  @Int64()
+  @IntPtr()
   int hbrBackground;
 
   Pointer<Utf16> lpszMenuName;
@@ -55,6 +59,474 @@ class WNDCLASS extends Struct {
     ..lpszClassName = nullptr;
 }
 
+// typedef struct _SECURITY_ATTRIBUTES {
+//   DWORD  nLength;
+//   LPVOID lpSecurityDescriptor;
+//   BOOL   bInheritHandle;
+// } SECURITY_ATTRIBUTES, *PSECURITY_ATTRIBUTES, *LPSECURITY_ATTRIBUTES;
+class SECURITY_ATTRIBUTES extends Struct {
+  @Int32()
+  int nLength;
+
+  Pointer<Void> lpSecurityDescriptor;
+
+  @Int32()
+  int bInheritHandle;
+}
+
+// typedef struct tagACCEL {
+//     BYTE   fVirt;               /* Also called the flags field */
+//     WORD   key;
+//     WORD  cmd;
+// } ACCEL, *LPACCEL;
+class ACCEL extends Struct {
+  @Int8()
+  int fVirt;
+  @Int16()
+  int key;
+  @Int16()
+  int cmd;
+
+  factory ACCEL.allocate() => allocate<ACCEL>().ref
+    ..fVirt = 0
+    ..key = 0
+    ..cmd = 0;
+}
+
+// In the following struct, COLORREF is a DWORD that contains RGB values
+// in the form 0x00bbggrr
+
+// typedef struct tagCHOOSECOLORW {
+//   DWORD        lStructSize;
+//   HWND         hwndOwner;
+//   HWND         hInstance;
+//   COLORREF     rgbResult;
+//   COLORREF     *lpCustColors;
+//   DWORD        Flags;
+//   LPARAM       lCustData;
+//   LPCCHOOKPROC lpfnHook;
+//   LPCWSTR      lpTemplateName;
+// } CHOOSECOLORW, *LPCHOOSECOLORW;
+class CHOOSECOLOR extends Struct {
+  @Int32()
+  int lStructSize;
+
+  @IntPtr()
+  int hwndOwner;
+
+  @IntPtr()
+  int hInstance;
+
+  @Int32()
+  int rgbResult;
+
+  Pointer<Uint32> lpCustColors;
+
+  @Int32()
+  int Flags;
+
+  @IntPtr()
+  int lCustData;
+
+  Pointer<IntPtr> lpfnHook;
+  Pointer<Uint16> lpTemplateName;
+
+  factory CHOOSECOLOR.allocate() => allocate<CHOOSECOLOR>().ref
+    ..lStructSize = sizeOf<CHOOSECOLOR>()
+    ..hwndOwner = NULL
+    ..hInstance = NULL
+    ..rgbResult = 0
+    ..lpCustColors = allocate<Uint32>(count: 16)
+    ..Flags = 0
+    ..lCustData = 0
+    ..lpfnHook = nullptr
+    ..lpTemplateName = nullptr;
+}
+
+// typedef struct tagFINDREPLACEW {
+//   DWORD        lStructSize;
+//   HWND         hwndOwner;
+//   HINSTANCE    hInstance;
+//   DWORD        Flags;
+//   LPWSTR       lpstrFindWhat;
+//   LPWSTR       lpstrReplaceWith;
+//   WORD         wFindWhatLen;
+//   WORD         wReplaceWithLen;
+//   LPARAM       lCustData;
+//   LPFRHOOKPROC lpfnHook;
+//   LPCWSTR      lpTemplateName;
+// } FINDREPLACEW, *LPFINDREPLACEW;
+class FINDREPLACE extends Struct {
+  @Int32()
+  int lStructSize;
+  @IntPtr()
+  int hwndOwner;
+  @IntPtr()
+  int hInstance;
+  @Int32()
+  int Flags;
+  Pointer<Utf16> lpstrFindWhat;
+  Pointer<Utf16> lpstrReplaceWith;
+  @Int16()
+  int wFindWhatLen;
+  @Int16()
+  int wReplaceWithLen;
+  @IntPtr()
+  int lCustData;
+  Pointer<NativeFunction> lpfnHook;
+  Pointer<Utf16> lpTemplateName;
+
+  factory FINDREPLACE.allocate() => allocate<FINDREPLACE>().ref
+    ..lStructSize = 0
+    ..hwndOwner = 0
+    ..hInstance = 0
+    ..Flags = 0
+    ..lpstrFindWhat = nullptr
+    ..lpstrReplaceWith = nullptr
+    ..wFindWhatLen = 0
+    ..wReplaceWithLen = 0
+    ..lCustData = 0
+    ..lpfnHook = nullptr
+    ..lpTemplateName = nullptr;
+}
+
+// typedef struct tagCHOOSEFONTW {
+//   DWORD        lStructSize;
+//   HWND         hwndOwner;
+//   HDC          hDC;
+//   LPLOGFONTW   lpLogFont;
+//   INT          iPointSize;
+//   DWORD        Flags;
+//   COLORREF     rgbColors;
+//   LPARAM       lCustData;
+//   LPCFHOOKPROC lpfnHook;
+//   LPCWSTR      lpTemplateName;
+//   HINSTANCE    hInstance;
+//   LPWSTR       lpszStyle;
+//   WORD         nFontType;
+//   WORD         ___MISSING_ALIGNMENT__;
+//   INT          nSizeMin;
+//   INT          nSizeMax;
+// } CHOOSEFONTW;
+class CHOOSEFONT extends Struct {
+  @Int32()
+  int lStructSize;
+  @IntPtr()
+  int hwndOwner;
+  @IntPtr()
+  int hDC;
+
+  Pointer<LOGFONT> lpLogFont;
+
+  @Int32()
+  int iPointSize;
+
+  @Int32()
+  int Flags;
+
+  @Int32()
+  int rgbColors;
+  @IntPtr()
+  int lCustData;
+
+  Pointer<NativeFunction> lpfnHook;
+  Pointer<Utf16> lpTemplateName;
+  @IntPtr()
+  int hInstance;
+  Pointer<Utf16> lpszStyle;
+  @Int16()
+  int nFontType;
+  @Int16()
+  int reserved;
+  @Int32()
+  int nSizeMin;
+  @Int32()
+  int nSizeMax;
+
+  factory CHOOSEFONT.allocate() => allocate<CHOOSEFONT>().ref
+    ..lStructSize = 0
+    ..hwndOwner = 0
+    ..hDC = 0
+    ..lpLogFont = nullptr
+    ..iPointSize = 0
+    ..Flags = 0
+    ..rgbColors = 0
+    ..lCustData = 0
+    ..lpfnHook = nullptr
+    ..lpTemplateName = nullptr
+    ..hInstance = 0
+    ..lpszStyle = nullptr
+    ..nFontType = 0
+    ..reserved = 0
+    ..nSizeMin = 0
+    ..nSizeMax = 0;
+}
+
+// typedef struct tagOFNW {
+//    DWORD        lStructSize;
+//    HWND         hwndOwner;
+//    HINSTANCE    hInstance;
+//    LPCWSTR      lpstrFilter;
+//    LPWSTR       lpstrCustomFilter;
+//    DWORD        nMaxCustFilter;
+//    DWORD        nFilterIndex;
+//    LPWSTR       lpstrFile;
+//    DWORD        nMaxFile;
+//    LPWSTR       lpstrFileTitle;
+//    DWORD        nMaxFileTitle;
+//    LPCWSTR      lpstrInitialDir;
+//    LPCWSTR      lpstrTitle;
+//    DWORD        Flags;
+//    WORD         nFileOffset;
+//    WORD         nFileExtension;
+//    LPCWSTR      lpstrDefExt;
+//    LPARAM       lCustData;
+//    LPOFNHOOKPROC lpfnHook;
+//    LPCWSTR      lpTemplateName;
+//    void *        pvReserved;
+//    DWORD        dwReserved;
+//    DWORD        FlagsEx;
+// } OPENFILENAMEW, *LPOPENFILENAMEW;
+class OPENFILENAME extends Struct {
+  @Int32()
+  int lStructSize;
+  @IntPtr()
+  int hwndOwner;
+  @IntPtr()
+  int hInstance;
+
+  Pointer<Utf16> lpstrFilter;
+  Pointer<Utf16> lpstrCustomFilter;
+
+  @Int32()
+  int nMaxCustFilter;
+  @Int32()
+  int nFilterIndex;
+
+  Pointer<Utf16> lpstrFile;
+  @Int32()
+  int nMaxFile;
+
+  Pointer<Utf16> lpstrFileTitle;
+  @Int32()
+  int nMaxFileTitle;
+
+  Pointer<Utf16> lpstrInitialDir;
+  Pointer<Utf16> lpstrTitle;
+
+  @Int32()
+  int Flags;
+  @Int16()
+  int nFileOffset;
+  @Int16()
+  int nFileExtension;
+
+  Pointer<Utf16> lpstrDefExt;
+
+  @IntPtr()
+  int lCustData;
+
+  Pointer<NativeFunction> lpfnHook;
+  Pointer<Utf16> lpTemplateName;
+  Pointer<Void> pvReserved;
+
+  @Int32()
+  int dwReserved;
+  @Int32()
+  int FlagsEx;
+
+  factory OPENFILENAME.allocate() => allocate<OPENFILENAME>().ref
+    ..lStructSize = 0
+    ..hwndOwner = 0
+    ..hInstance = 0
+    ..lpstrFilter = nullptr
+    ..lpstrCustomFilter = nullptr
+    ..nMaxCustFilter = 0
+    ..nFilterIndex = 0
+    ..lpstrFile = nullptr
+    ..nMaxFile = 0
+    ..lpstrFileTitle = nullptr
+    ..nMaxFileTitle = 0
+    ..lpstrInitialDir = nullptr
+    ..lpstrTitle = nullptr
+    ..Flags = 0
+    ..nFileOffset = 0
+    ..nFileExtension = 0
+    ..lpstrDefExt = nullptr
+    ..lCustData = 0
+    ..lpfnHook = nullptr
+    ..lpTemplateName = nullptr
+    ..pvReserved = nullptr
+    ..dwReserved = 0
+    ..FlagsEx = 0;
+}
+
+// typedef struct {
+//         lfHeight;
+//         lfWidth;
+//         lfEscapement;
+//         lfOrientation;
+//         lfWeight;
+//   BYTE  lfItalic;
+//   BYTE  lfUnderline;
+//   BYTE  lfStrikeOut;
+//   BYTE  lfCharSet;
+//   BYTE  lfOutPrecision;
+//   BYTE  lfClipPrecision;
+//   BYTE  lfQuality;
+//   BYTE  lfPitchAndFamily;
+//   WCHAR lfFaceName[LF_FACESIZE];
+// } LOGFONTW;
+class LOGFONT extends Struct {
+  @Int32()
+  int lfHeight;
+  @Int32()
+  int lfWidth;
+  @Int32()
+  int lfEscapement;
+  @Int32()
+  int lfOrientation;
+  @Int32()
+  int lfWeight;
+  @Int8()
+  int lfItalic;
+  @Int8()
+  int lfUnderline;
+  @Int8()
+  int lfStrikeOut;
+  @Int8()
+  int lfCharSet;
+  @Int8()
+  int lfOutPrecision;
+  @Int8()
+  int lfClipPrecision;
+  @Int8()
+  int lfQuality;
+  @Int8()
+  int lfPitchAndFamily;
+
+  // Need to use @Int32() here, both because of the lack of fixed-size
+  // arrays, and because @Int64() doesn't line up with word boundaries
+  @Int32()
+  int lfFaceName1;
+  @Int32()
+  int lfFaceName2;
+  @Int32()
+  int lfFaceName3;
+  @Int32()
+  int lfFaceName4;
+  @Int32()
+  int lfFaceName5;
+  @Int32()
+  int lfFaceName6;
+  @Int32()
+  int lfFaceName7;
+  @Int32()
+  int lfFaceName8;
+  @Int32()
+  int lfFaceName9;
+  @Int32()
+  int lfFaceName10;
+  @Int32()
+  int lfFaceName11;
+  @Int32()
+  int lfFaceName12;
+  @Int32()
+  int lfFaceName13;
+  @Int32()
+  int lfFaceName14;
+  @Int32()
+  int lfFaceName15;
+  @Int32()
+  int lfFaceName16;
+
+  factory LOGFONT.allocate() => allocate<LOGFONT>().ref
+    ..lfHeight = 0
+    ..lfWidth = 0
+    ..lfEscapement = 0
+    ..lfOrientation = 0
+    ..lfWeight = 0
+    ..lfItalic = 0
+    ..lfUnderline = 0
+    ..lfStrikeOut = 0
+    ..lfCharSet = 0
+    ..lfOutPrecision = 0
+    ..lfClipPrecision = 0
+    ..lfQuality = 0
+    ..lfPitchAndFamily = 0
+    ..lfFaceName1 = 0
+    ..lfFaceName2 = 0
+    ..lfFaceName3 = 0
+    ..lfFaceName4 = 0
+    ..lfFaceName5 = 0
+    ..lfFaceName6 = 0
+    ..lfFaceName7 = 0
+    ..lfFaceName8 = 0
+    ..lfFaceName9 = 0
+    ..lfFaceName10 = 0
+    ..lfFaceName11 = 0
+    ..lfFaceName12 = 0
+    ..lfFaceName13 = 0
+    ..lfFaceName14 = 0
+    ..lfFaceName15 = 0
+    ..lfFaceName16 = 0;
+}
+
+// typedef struct tagCREATESTRUCTW {
+//   LPVOID    lpCreateParams;
+//   HINSTANCE hInstance;
+//   HMENU     hMenu;
+//   HWND      hwndParent;
+//   int       cy;
+//   int       cx;
+//   int       y;
+//   int       x;
+//   LONG      style;
+//   LPCWSTR   lpszName;
+//   LPCWSTR   lpszClass;
+//   DWORD     dwExStyle;
+// } CREATESTRUCTW, *LPCREATESTRUCTW;
+class CREATESTRUCT extends Struct {
+  Pointer<Void> lpCreateParams;
+
+  @IntPtr()
+  int hInstance;
+  @IntPtr()
+  int hMenu;
+  @IntPtr()
+  int hwndParent;
+  @Int32()
+  int cy;
+  @Int32()
+  int cx;
+  @Int32()
+  int y;
+  @Int32()
+  int x;
+  @Int32()
+  int style;
+
+  Pointer<Utf16> lpszName;
+  Pointer<Utf16> lpszClass;
+
+  @Int32()
+  int dwExStyle;
+
+  factory CREATESTRUCT.allocate() => allocate<CREATESTRUCT>().ref
+    ..lpCreateParams = nullptr
+    ..hInstance = 0
+    ..hMenu = 0
+    ..hwndParent = 0
+    ..cy = 0
+    ..cx = 0
+    ..y = 0
+    ..x = 0
+    ..style = 0
+    ..lpszName = nullptr
+    ..lpszClass = nullptr
+    ..dwExStyle = 0;
+}
+
 // typedef struct tagMSG {
 //   HWND   hwnd;
 //   UINT   message;
@@ -65,16 +537,16 @@ class WNDCLASS extends Struct {
 //   DWORD  lPrivate;
 // } MSG, *PMSG, *NPMSG, *LPMSG;
 class MSG extends Struct {
-  @Int64()
+  @IntPtr()
   int hwnd;
 
   @Int32()
   int message;
 
-  @Int64()
+  @IntPtr()
   int wParam;
 
-  @Int64()
+  @IntPtr()
   int lParam;
 
   @Int32()
@@ -175,7 +647,7 @@ class POINT extends Struct {
 //   BYTE rgbReserved[32];
 // } PAINTSTRUCT, *PPAINTSTRUCT, *NPPAINTSTRUCT, *LPPAINTSTRUCT;
 class PAINTSTRUCT extends Struct {
-  @Int64()
+  @IntPtr()
   int hdc;
   @Int32()
   int fErase;
@@ -250,6 +722,8 @@ class RECT extends Struct {
 // We embed this type directly into the union types below, since nested structs
 // are unavailable in Dart FFI at present.
 
+// BUG: Unfortunately this is broken on 32-bit Dart at present.
+
 // typedef struct tagMOUSEINPUT {
 //   LONG      dx;
 //   LONG      dy;
@@ -303,7 +777,7 @@ class KEYBDINPUT extends Struct {
   int type;
 
   @Int32()
-  int padding;
+  int padding1;
 
   @Int16()
   int wVk;
@@ -312,7 +786,7 @@ class KEYBDINPUT extends Struct {
   int wScan;
 
   @Int32()
-  int dwFlag;
+  int dwFlags;
 
   @Int32()
   int time;
@@ -326,7 +800,7 @@ class KEYBDINPUT extends Struct {
     ..type = INPUT_KEYBOARD
     ..wVk = 0
     ..wScan = 0
-    ..dwFlag = 0
+    ..dwFlags = 0
     ..time = 0
     ..dwExtraInfo = nullptr;
 }
@@ -356,6 +830,128 @@ class HARDWAREINPUT extends Struct {
     ..uMsg = 0
     ..wParamL = 0
     ..wParamH = 0;
+}
+
+// typedef struct tagTEXTMETRICW {
+//   LONG  tmHeight;
+//   LONG  tmAscent;
+//   LONG  tmDescent;
+//   LONG  tmInternalLeading;
+//   LONG  tmExternalLeading;
+//   LONG  tmAveCharWidth;
+//   LONG  tmMaxCharWidth;
+//   LONG  tmWeight;
+//   LONG  tmOverhang;
+//   LONG  tmDigitizedAspectX;
+//   LONG  tmDigitizedAspectY;
+//   WCHAR tmFirstChar;
+//   WCHAR tmLastChar;
+//   WCHAR tmDefaultChar;
+//   WCHAR tmBreakChar;
+//   BYTE  tmItalic;
+//   BYTE  tmUnderlined;
+//   BYTE  tmStruckOut;
+//   BYTE  tmPitchAndFamily;
+//   BYTE  tmCharSet;
+// } TEXTMETRICW, *PTEXTMETRICW, *NPTEXTMETRICW, *LPTEXTMETRICW;
+class TEXTMETRIC extends Struct {
+  @Int32()
+  int tmHeight;
+  @Int32()
+  int tmAscent;
+  @Int32()
+  int tmDescent;
+  @Int32()
+  int tmInternalLeading;
+  @Int32()
+  int tmExternalLeading;
+  @Int32()
+  int tmAveCharWidth;
+  @Int32()
+  int tmMaxCharWidth;
+  @Int32()
+  int tmWeight;
+  @Int32()
+  int tmOverhang;
+  @Int32()
+  int tmDigitizedAspectX;
+  @Int32()
+  int tmDigitizedAspectY;
+  @Int16()
+  int tmFirstChar;
+  @Int16()
+  int tmLastChar;
+  @Int16()
+  int tmDefaultChar;
+  @Int16()
+  int tmBreakChar;
+  @Int8()
+  int tmItalic;
+  @Int8()
+  int tmUnderlined;
+  @Int8()
+  int tmStruckOut;
+  @Int8()
+  int tmPitchAndFamily;
+  @Int8()
+  int tmCharSet;
+
+  factory TEXTMETRIC.allocate() => allocate<TEXTMETRIC>().ref
+    ..tmHeight = 0
+    ..tmAscent = 0
+    ..tmDescent = 0
+    ..tmInternalLeading = 0
+    ..tmExternalLeading = 0
+    ..tmAveCharWidth = 0
+    ..tmMaxCharWidth = 0
+    ..tmWeight = 0
+    ..tmOverhang = 0
+    ..tmDigitizedAspectX = 0
+    ..tmDigitizedAspectY = 0
+    ..tmFirstChar = 0
+    ..tmLastChar = 0
+    ..tmDefaultChar = 0
+    ..tmBreakChar = 0
+    ..tmItalic = 0
+    ..tmUnderlined = 0
+    ..tmStruckOut = 0
+    ..tmPitchAndFamily = 0
+    ..tmCharSet = 0;
+}
+
+// typedef struct tagSCROLLINFO {
+//   UINT cbSize;
+//   UINT fMask;
+//   int  nMin;
+//   int  nMax;
+//   UINT nPage;
+//   int  nPos;
+//   int  nTrackPos;
+// } SCROLLINFO, *LPSCROLLINFO;
+class SCROLLINFO extends Struct {
+  @Int32()
+  int cbSize;
+  @Int32()
+  int fMask;
+  @Int32()
+  int nMin;
+  @Int32()
+  int nMax;
+  @Int32()
+  int nPage;
+  @Int32()
+  int nPos;
+  @Int32()
+  int nTrackPos;
+
+  factory SCROLLINFO.allocate() => allocate<SCROLLINFO>().ref
+    ..cbSize = 0
+    ..fMask = 0
+    ..nMin = 0
+    ..nMax = 0
+    ..nPage = 0
+    ..nPos = 0
+    ..nTrackPos = 0;
 }
 
 // *** COM STRUCTS ***
@@ -412,8 +1008,8 @@ class GUID extends Struct {
   /// Print GUID in common {FDD39AD0-238F-46AF-ADB4-6C85480369C7} format
   @override
   String toString() {
-    final comp1 = (Data4 & 0xFF).toRadixString(16) +
-        ((Data4 & 0xFF00) >> 8).toRadixString(16);
+    final comp1 = (Data4 & 0xFF).toRadixString(16).padLeft(2, '0') +
+        ((Data4 & 0xFF00) >> 8).toRadixString(16).padLeft(2, '0');
 
     // This is hacky as all get-out :)
     final comp2 = ((Data4 & 0xFF0000) >> 16).toRadixString(16).padLeft(2, '0') +
@@ -438,6 +1034,83 @@ class GUID extends Struct {
 // Dart FFI does not yet have support for nested structs, so there's extra
 // work necessary to unpack parameters like COORD and SMALL_RECT. The Dart
 // issue for this work is https://github.com/dart-lang/sdk/issues/37271.
+
+// typedef struct tagBITMAPINFO {
+//   BITMAPINFOHEADER bmiHeader;
+//   RGBQUAD          bmiColors[1];
+// } BITMAPINFO, *LPBITMAPINFO, *PBITMAPINFO;
+//
+// typedef struct tagBITMAPINFOHEADER {
+//   DWORD biSize;
+//   LONG  biWidth;
+//   LONG  biHeight;
+//   WORD  biPlanes;
+//   WORD  biBitCount;
+//   DWORD biCompression;
+//   DWORD biSizeImage;
+//   LONG  biXPelsPerMeter;
+//   LONG  biYPelsPerMeter;
+//   DWORD biClrUsed;
+//   DWORD biClrImportant;
+// } BITMAPINFOHEADER, *PBITMAPINFOHEADER;
+//
+// typedef struct tagRGBQUAD {
+//   BYTE rgbBlue;
+//   BYTE rgbGreen;
+//   BYTE rgbRed;
+//   BYTE rgbReserved;
+// } RGBQUAD;
+class BITMAPINFO extends Struct {
+  @Int32()
+  int biSize;
+  @Int32()
+  int biWidth;
+  @Int32()
+  int biHeight;
+  @Int16()
+  int biPlanes;
+  @Int16()
+  int biBitCount;
+  @Int32()
+  int biCompression;
+  @Int32()
+  int biSizeImage;
+  @Int32()
+  int biXPelsPerMeter;
+  @Int32()
+  int biYPelsPerMeter;
+  @Int32()
+  int biClrUsed;
+  @Int32()
+  int biClrImportant;
+  @Int8()
+  int rgbBlue;
+  @Int8()
+  int rgbGreen;
+  @Int8()
+  int rgbRed;
+  @Int8()
+  int rgbReserved;
+
+  factory BITMAPINFO.allocate() => allocate<BITMAPINFO>().ref
+    ..biSize = 44 // default to single element RGBQUAD
+    ..biWidth = 0
+    ..biHeight = 0
+    ..biPlanes = 0
+    ..biBitCount = 0
+    ..biCompression = 0
+    ..biSizeImage = 0
+    ..biXPelsPerMeter = 0
+    ..biYPelsPerMeter = 0
+    ..biClrUsed = 0
+    ..biClrImportant = 0
+    ..rgbBlue = 0
+    ..rgbGreen = 0
+    ..rgbRed = 0
+    ..rgbReserved = 0;
+}
+
+// *** CONSOLE STRUCTS ***
 
 // typedef struct _CONSOLE_CURSOR_INFO {
 //   DWORD dwSize;

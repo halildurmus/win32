@@ -1,6 +1,6 @@
 // guid.dart
 
-// Tests various GUID-related APIs
+// Creates a globally unique identifier (GUID)
 
 import 'dart:ffi';
 import 'package:win32/win32.dart';

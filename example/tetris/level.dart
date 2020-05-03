@@ -136,7 +136,7 @@ class Level {
 
   void clear(Piece piece) {
     final apt = piece.body;
-    var x, y;
+    int x, y;
     for (var i = 0; i < 4; i++) {
       x = posX + apt[i].x;
       y = posY + apt[i].y;
