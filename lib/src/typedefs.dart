@@ -488,7 +488,7 @@ typedef queryDosDeviceDart = int Function(
 //   UINT  wMsgFilterMax,
 //   UINT  wRemoveMsg
 // );
-typedef peekMessageNative = Int32 Function(Pointer<MSG> lpMsg, Int64 hWnd,
+typedef peekMessageNative = Int32 Function(Pointer<MSG> lpMsg, IntPtr hWnd,
     Uint32 wMsgFilterMin, Uint32 wMsgFilterMax, Uint32 wRemoveMsg);
 typedef peekMessageDart = int Function(Pointer<MSG> lpMsg, int hWnd,
     int wMsgFilterMin, int wMsgFilterMax, int wRemoveMsg);
