@@ -17,6 +17,7 @@ typedef appendMenuNative = Int32 Function(
     IntPtr hMenu, Uint32 uFlags, Uint32 uIDNewItem, Pointer<Utf16> lpNewItem);
 typedef appendMenuDart = int Function(
     int hMenu, int uFlags, int uIDNewItem, Pointer<Utf16> lpNewItem);
+
 // BOOL Beep(
 //   DWORD dwFreq,
 //   DWORD dwDuration
@@ -31,6 +32,24 @@ typedef beepDart = int Function(int dwFreq, int dwDuration);
 typedef beginPaintNative = IntPtr Function(
     IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint);
 typedef beginPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
+
+// BOOL WINAPI ChooseColor(
+//   _Inout_ LPCHOOSECOLOR lpcc
+// );
+typedef chooseColorNative = Int32 Function(Pointer<CHOOSECOLOR> lpcc);
+typedef chooseColorDart = int Function(Pointer<CHOOSECOLOR> lpcc);
+
+// BOOL WINAPI ChooseFont(
+//   _Inout_ LPCHOOSEFONT lpcf
+// );
+typedef chooseFontNative = Int32 Function(Pointer<CHOOSEFONT> lpcf);
+typedef chooseFontDart = int Function(Pointer<CHOOSEFONT> lpcf);
+
+// HRESULT CoCreateGuid(
+//   GUID *pguid
+// );
+typedef coCreateGuidNative = Int32 Function(Pointer<GUID> pguid);
+typedef coCreateGuidDart = int Function(Pointer<GUID> pguid);
 
 // HRESULT CoCreateInstance(
 //   REFCLSID  rclsid,
@@ -51,23 +70,6 @@ typedef coCreateInstanceDart = int Function(
     int dwClsContext,
     Pointer<GUID> riid,
     Pointer<Uint64> ppv);
-// BOOL WINAPI ChooseColor(
-//   _Inout_ LPCHOOSECOLOR lpcc
-// );
-typedef chooseColorNative = Int32 Function(Pointer<CHOOSECOLOR> lpcc);
-typedef chooseColorDart = int Function(Pointer<CHOOSECOLOR> lpcc);
-
-// BOOL WINAPI ChooseFont(
-//   _Inout_ LPCHOOSEFONT lpcf
-// );
-typedef chooseFontNative = Int32 Function(Pointer<CHOOSEFONT> lpcf);
-typedef chooseFontDart = int Function(Pointer<CHOOSEFONT> lpcf);
-
-// HRESULT CoCreateGuid(
-//   GUID *pguid
-// );
-typedef coCreateGuidNative = Int32 Function(Pointer<GUID> pguid);
-typedef coCreateGuidDart = int Function(Pointer<GUID> pguid);
 
 // HRESULT CoInitializeEx(
 //   LPVOID pvReserved,
