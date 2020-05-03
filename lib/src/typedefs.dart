@@ -208,7 +208,7 @@ typedef messageBoxDart = int Function(
 //   LPPOINT lppt
 // );
 typedef moveToExNative = Int32 Function(
-    Int64 hdc, Int32 x, Int32 y, Pointer<POINT> lppt);
+    IntPtr hdc, Int32 x, Int32 y, Pointer<POINT> lppt);
 typedef moveToExDart = int Function(int hdc, int x, int y, Pointer<POINT> lppt);
 
 // BOOL PeekMessageW(
@@ -218,7 +218,7 @@ typedef moveToExDart = int Function(int hdc, int x, int y, Pointer<POINT> lppt);
 //   UINT  wMsgFilterMax,
 //   UINT  wRemoveMsg
 // );
-typedef peekMessageNative = Int32 Function(Pointer<MSG> lpMsg, Int64 hWnd,
+typedef peekMessageNative = Int32 Function(Pointer<MSG> lpMsg, IntPtr hWnd,
     Uint32 wMsgFilterMin, Uint32 wMsgFilterMax, Uint32 wRemoveMsg);
 typedef peekMessageDart = int Function(Pointer<MSG> lpMsg, int hWnd,
     int wMsgFilterMin, int wMsgFilterMax, int wRemoveMsg);
