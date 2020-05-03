@@ -1162,6 +1162,7 @@ const CLSCTX_ALL = (CLSCTX_INPROC_SERVER |
     CLSCTX_REMOTE_SERVER);
 
 const CLSID_FileOpenDialog = '{DC1C5A9C-E88A-4dde-A5A1-60F82A20AEF7}';
+const IID_IFileDialog = '{42f85136-db7e-439c-85f1-e4075d135fc8}';
 const IID_IFileOpenDialog = '{d57c7288-d4ad-4768-be02-9d969532d960}';
 
 const FOS_OVERWRITEPROMPT = 0x2;

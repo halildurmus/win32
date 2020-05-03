@@ -63,13 +63,13 @@ typedef coCreateInstanceNative = Int32 Function(
     Pointer<Void> pUnkOuter,
     Int32 dwClsContext,
     Pointer<GUID> riid,
-    Pointer<Uint64> ppv);
+    Pointer<IntPtr> ppv);
 typedef coCreateInstanceDart = int Function(
     Pointer<GUID> rclsid,
     Pointer<Void> pUnkOuter,
     int dwClsContext,
     Pointer<GUID> riid,
-    Pointer<Uint64> ppv);
+    Pointer<IntPtr> ppv);
 
 // HRESULT CoInitializeEx(
 //   LPVOID pvReserved,
