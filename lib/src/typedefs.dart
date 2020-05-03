@@ -886,7 +886,7 @@ typedef updateWindowDart = int Function(int hWnd);
 //   DWORD  flProtect
 // );
 typedef virtualAllocNative = Pointer<Void> Function(Pointer<Void> lpAddress,
-    Int64 dwSize, Int32 flAllocationType, Int32 flProtect);
+    IntPtr dwSize, Int32 flAllocationType, Int32 flProtect);
 typedef virtualAllocDart = Pointer<Void> Function(
     Pointer<Void> lpAddress, int dwSize, int flAllocationType, int flProtect);
 
@@ -896,6 +896,6 @@ typedef virtualAllocDart = Pointer<Void> Function(
 //   DWORD  dwFreeType
 // );
 typedef virtualFreeNative = Int32 Function(
-    Pointer<Void> lpAddress, Int64 dwSize, Int32 dwFreeType);
+    Pointer<Void> lpAddress, IntPtr dwSize, Int32 dwFreeType);
 typedef virtualFreeDart = int Function(
     Pointer<Void> lpAddress, int dwSize, int dwFreeType);
