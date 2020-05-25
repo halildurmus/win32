@@ -38,11 +38,11 @@ int main(int argc, char **argv)
             printPointer("dlg->lpVtbl->Show", &(dlg->lpVtbl->Show));
             printPointer("dlg->lpVtbl->SetTitle", &(dlg->lpVtbl->SetTitle));
 
-            printf("showing dialog\n");
-            hr = dlg->lpVtbl->Show(dlg, NULL);
+            printf("adding ref\n");
+            hr = dlg->lpVtbl->AddRef(dlg);
             if (SUCCEEDED(hr))
             {
-                printf("succeeded\n");
+                printf("succeeded %lu", hr);
             }
             CoUninitialize();
         }

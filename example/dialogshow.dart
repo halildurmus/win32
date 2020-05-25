@@ -12,8 +12,11 @@ import 'package:win32/win32.dart';
 // typedef queryInterfaceDart = int Function(
 //     Pointer<Uint64> obj, Pointer<GUID> riid, Pointer<Uint64> ppvObject);
 
-typedef IModalWindowShowNative = Int32 Function(Pointer obj, IntPtr hwndOwner);
-typedef IModalWindowShowDart = int Function(Pointer obj, int hwndOwner);
+typedef IFileDialog_AddRef_Native = Int32 Function(Pointer obj);
+typedef IFileDialog_AddRef_Dart = int Function(Pointer obj);
+
+typedef IFileDialog_Show_Native = Int32 Function(Pointer obj, IntPtr hwndOwner);
+typedef IFileDialog_Show_Dart = int Function(Pointer obj, int hwndOwner);
 
 class IFileDialogVtbl extends Struct {
   Pointer<NativeFunction> QueryInterface;
@@ -111,7 +114,7 @@ void COMError(int hresult, String function) {
 }
 
 void main() {
-  final dlg = IFileDialog.allocate().addressOf;
+  var dlg = IFileDialog.allocate().addressOf;
 
   var hr = CoInitializeEx(
       nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
@@ -152,23 +155,35 @@ void main() {
       // But we know that Show is the fourth entry in the vtable, so it must
       // be at *(QI + 24). On 64-bit, this gives 0x00007FF8CB32EF38, which is
       // indeed the same value as the C-based version.
+      final addRefAddress =
+          dlg.ref.lpVtbl.cast<IntPtr>().value + sizeOf<IntPtr>() * 1;
+      final addRefPtr =
+          Pointer<NativeFunction<IFileDialog_AddRef_Native>>.fromAddress(
+              addRefAddress);
+      printPointer('dlg->lpVtbl->AddRef (calc)', addRefPtr);
+      final addRefDart =
+          Pointer<NativeFunction<IFileDialog_AddRef_Native>>.fromAddress(
+                  addRefPtr.cast<IntPtr>().value)
+              .asFunction<IFileDialog_AddRef_Dart>();
+
       final showAddress =
           dlg.ref.lpVtbl.cast<IntPtr>().value + sizeOf<IntPtr>() * 3;
-      final showNativePtr = Pointer<IntPtr>.fromAddress(showAddress);
-      printPointer('dlg->lpVtbl->Show (calc)', showNativePtr);
+      final showPtr =
+          Pointer<NativeFunction<IFileDialog_Show_Native>>.fromAddress(
+              showAddress);
+      printPointer('dlg->lpVtbl->Show (calc)', showPtr);
+      final showDart =
+          Pointer<NativeFunction<IFileDialog_Show_Native>>.fromAddress(
+                  showPtr.cast<IntPtr>().value)
+              .asFunction<IFileDialog_Show_Dart>();
 
-      // Trying dereferencing this one more time to get to the actual function
-      // address. This may not be right -- am I dereferencing once to many?
-      final showNative =
-          Pointer<NativeFunction<IModalWindowShowNative>>.fromAddress(
-              showNativePtr.value);
-      printPointer('dlg->lpVtbl->Show*', showNative);
+      print('Attempting to AddRef.');
+      hr = addRefDart(dlg);
+      print('addRef returned $hr');
 
-      final showDart = showNative.asFunction<IModalWindowShowDart>();
-
-      print('Attempting to show dialog. The next line crashes...');
+      print('Attempting to Show.');
       hr = showDart(dlg, NULL);
-      print('showDart returned $hr');
+      print('show returned $hr');
     } else {
       COMError(hr, 'CoCreateInstance');
     }
