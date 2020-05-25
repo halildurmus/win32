@@ -104,5 +104,6 @@ void main() {
   printPointer('dlg->lpVtbl->AddRef', dlg.ref.lpVtbl.ref.AddRef);
   printPointer('dlg->lpVtbl->Release', dlg.ref.lpVtbl.ref.Release);
   printPointer('dlg->lpVtbl->Show', dlg.ref.lpVtbl.ref.Show);
+  printPointer('dlg->lpVtbl->SetFileTypes', dlg.ref.lpVtbl.ref.SetFileTypes);
   printPointer('dlg->lpVtbl->SetTitle', dlg.ref.lpVtbl.ref.SetTitle);
 }
