@@ -40,6 +40,9 @@ int main(int argc, char **argv)
 
             printf("adding ref\n");
             hr = dlg->lpVtbl->AddRef(dlg);
+
+            printf("show\n");
+            hr = dlg->lpVtbl->Show(dlg, NULL);
             if (SUCCEEDED(hr))
             {
                 printf("succeeded %lu", hr);

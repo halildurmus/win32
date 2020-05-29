@@ -19,62 +19,62 @@ typedef IFileDialog_Show_Native = Int32 Function(Pointer obj, IntPtr hwndOwner);
 typedef IFileDialog_Show_Dart = int Function(Pointer obj, int hwndOwner);
 
 class IFileDialogVtbl extends Struct {
-  Pointer<NativeFunction> QueryInterface;
-  Pointer<NativeFunction> AddRef;
-  Pointer<NativeFunction> Release;
-  Pointer<NativeFunction> Show;
-  Pointer<NativeFunction> SetFileTypes;
-  Pointer<NativeFunction> SetFileTypeIndex;
-  Pointer<NativeFunction> GetFileTypeIndex;
-  Pointer<NativeFunction> Advise;
-  Pointer<NativeFunction> Unadvise;
-  Pointer<NativeFunction> SetOptions;
-  Pointer<NativeFunction> GetOptions;
-  Pointer<NativeFunction> SetDefaultFolder;
-  Pointer<NativeFunction> SetFolder;
-  Pointer<NativeFunction> GetFolder;
-  Pointer<NativeFunction> GetCurrentSelection;
-  Pointer<NativeFunction> SetFileName;
-  Pointer<NativeFunction> GetFileName;
-  Pointer<NativeFunction> SetTitle;
-  Pointer<NativeFunction> SetOkButtonLabel;
-  Pointer<NativeFunction> SetFileNameLabel;
-  Pointer<NativeFunction> GetResult;
-  Pointer<NativeFunction> AddPlace;
-  Pointer<NativeFunction> SetDefaultExtension;
-  Pointer<NativeFunction> Close;
-  Pointer<NativeFunction> SetClientGuid;
-  Pointer<NativeFunction> ClearClientData;
-  Pointer<NativeFunction> SetFilter;
+  Pointer<IntPtr> QueryInterface;
+  Pointer<IntPtr> AddRef;
+  Pointer<IntPtr> Release;
+  Pointer<IntPtr> Show;
+  Pointer<IntPtr> SetFileTypes;
+  Pointer<IntPtr> SetFileTypeIndex;
+  Pointer<IntPtr> GetFileTypeIndex;
+  Pointer<IntPtr> Advise;
+  Pointer<IntPtr> Unadvise;
+  Pointer<IntPtr> SetOptions;
+  Pointer<IntPtr> GetOptions;
+  Pointer<IntPtr> SetDefaultFolder;
+  Pointer<IntPtr> SetFolder;
+  Pointer<IntPtr> GetFolder;
+  Pointer<IntPtr> GetCurrentSelection;
+  Pointer<IntPtr> SetFileName;
+  Pointer<IntPtr> GetFileName;
+  Pointer<IntPtr> SetTitle;
+  Pointer<IntPtr> SetOkButtonLabel;
+  Pointer<IntPtr> SetFileNameLabel;
+  Pointer<IntPtr> GetResult;
+  Pointer<IntPtr> AddPlace;
+  Pointer<IntPtr> SetDefaultExtension;
+  Pointer<IntPtr> Close;
+  Pointer<IntPtr> SetClientGuid;
+  Pointer<IntPtr> ClearClientData;
+  Pointer<IntPtr> SetFilter;
 
-  // factory IFileDialogVtbl.allocate() => allocate<IFileDialogVtbl>().ref
-  //   ..QueryInterface = nullptr
-  //   ..AddRef = nullptr
-  //   ..Release = nullptr
-  //   ..Show = nullptr
-  //   ..SetFileTypes = nullptr
-  //   ..SetFileTypeIndex = nullptr
-  //   ..GetFileTypeIndex = nullptr
-  //   ..Advise = nullptr
-  //   ..Unadvise = nullptr
-  //   ..SetOptions = nullptr
-  //   ..GetOptions = nullptr
-  //   ..SetDefaultFolder = nullptr
-  //   ..SetFolder = nullptr
-  //   ..GetFolder = nullptr
-  //   ..GetCurrentSelection = nullptr
-  //   ..SetFileName = nullptr
-  //   ..GetFileName = nullptr
-  //   ..SetTitle = nullptr
-  //   ..SetOkButtonLabel = nullptr
-  //   ..SetFileNameLabel = nullptr
-  //   ..GetResult = nullptr
-  //   ..AddPlace = nullptr
-  //   ..SetDefaultExtension = nullptr
-  //   ..Close = nullptr
-  //   ..SetClientGuid = nullptr
-  //   ..ClearClientData = nullptr
-  //   ..SetFilter = nullptr;
+  factory IFileDialogVtbl.allocate() => allocate<IFileDialogVtbl>().ref
+    ..QueryInterface = nullptr
+    ..AddRef = nullptr
+    ..Release = nullptr
+    ..Show = nullptr
+    ..SetFileTypes = nullptr
+    ..SetFileTypeIndex = nullptr
+    ..GetFileTypeIndex = nullptr
+    ..Advise = nullptr
+    ..Unadvise = nullptr
+    ..SetOptions = nullptr
+    ..GetOptions = nullptr
+    ..SetDefaultFolder = nullptr
+    ..SetFolder = nullptr
+    ..GetFolder = nullptr
+    ..GetCurrentSelection = nullptr
+    ..SetFileName = nullptr
+    ..GetFileName = nullptr
+    ..SetTitle = nullptr
+    ..SetOkButtonLabel = nullptr
+    ..SetFileNameLabel = nullptr
+    ..GetResult = nullptr
+    ..AddPlace = nullptr
+    ..SetDefaultExtension = nullptr
+    ..Close = nullptr
+    ..SetClientGuid = nullptr
+    ..ClearClientData = nullptr
+    ..SetFilter = nullptr;
 }
 
 class IFileDialog extends Struct {
@@ -144,7 +144,7 @@ void main() {
 
       print('---');
 
-      // These do not give the right addresses.
+      // These do not give the right addresses, so the struct isn't trustworthy.
       printPointer('dlg->lpVtbl->AddRef', dlg.ref.lpVtbl.ref.AddRef);
       printPointer('dlg->lpVtbl->Release', dlg.ref.lpVtbl.ref.Release);
       printPointer('dlg->lpVtbl->Show', dlg.ref.lpVtbl.ref.Show);
@@ -152,9 +152,10 @@ void main() {
 
       print('---');
 
-      // But we know that Show is the fourth entry in the vtable, so it must
-      // be at *(QI + 24). On 64-bit, this gives 0x00007FF8CB32EF38, which is
-      // indeed the same value as the C-based version.
+      // But we know that AddRef is the second entry in the v-table, so it must
+      // be at *(QI + sizeOf(IntPtr)). On my machine, this gives
+      // 0x00007FFC9C88EF28, which is indeed the same value as the C-based
+      // version.
       final addRefAddress =
           dlg.ref.lpVtbl.cast<IntPtr>().value + sizeOf<IntPtr>() * 1;
       final addRefPtr =
@@ -166,6 +167,10 @@ void main() {
                   addRefPtr.cast<IntPtr>().value)
               .asFunction<IFileDialog_AddRef_Dart>();
 
+      // But we know that Show is the fourth entry in the v-table, so it must
+      // be at *(QI + sizeOf(IntPtr) * 3). On my machine, this gives
+      // 0x00007FFC9C88EF38, which is indeed the same value as the C-based
+      // version.
       final showAddress =
           dlg.ref.lpVtbl.cast<IntPtr>().value + sizeOf<IntPtr>() * 3;
       final showPtr =
@@ -177,10 +182,12 @@ void main() {
                   showPtr.cast<IntPtr>().value)
               .asFunction<IFileDialog_Show_Dart>();
 
+      // This returns but with an error
       print('Attempting to AddRef.');
       hr = addRefDart(dlg);
       print('addRef returned $hr');
 
+      // This just crashes.
       print('Attempting to Show.');
       hr = showDart(dlg, NULL);
       print('show returned $hr');
