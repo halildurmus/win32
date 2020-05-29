@@ -4,33 +4,33 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 class IFileDialogVtbl extends Struct {
-  Pointer<NativeFunction> QueryInterface;
-  Pointer<NativeFunction> AddRef;
-  Pointer<NativeFunction> Release;
-  Pointer<NativeFunction> Show;
-  Pointer<NativeFunction> SetFileTypes;
-  Pointer<NativeFunction> SetFileTypeIndex;
-  Pointer<NativeFunction> GetFileTypeIndex;
-  Pointer<NativeFunction> Advise;
-  Pointer<NativeFunction> Unadvise;
-  Pointer<NativeFunction> SetOptions;
-  Pointer<NativeFunction> GetOptions;
-  Pointer<NativeFunction> SetDefaultFolder;
-  Pointer<NativeFunction> SetFolder;
-  Pointer<NativeFunction> GetFolder;
-  Pointer<NativeFunction> GetCurrentSelection;
-  Pointer<NativeFunction> SetFileName;
-  Pointer<NativeFunction> GetFileName;
-  Pointer<NativeFunction> SetTitle;
-  Pointer<NativeFunction> SetOkButtonLabel;
-  Pointer<NativeFunction> SetFileNameLabel;
-  Pointer<NativeFunction> GetResult;
-  Pointer<NativeFunction> AddPlace;
-  Pointer<NativeFunction> SetDefaultExtension;
-  Pointer<NativeFunction> Close;
-  Pointer<NativeFunction> SetClientGuid;
-  Pointer<NativeFunction> ClearClientData;
-  Pointer<NativeFunction> SetFilter;
+  Pointer<IntPtr> QueryInterface;
+  Pointer<IntPtr> AddRef;
+  Pointer<IntPtr> Release;
+  Pointer<IntPtr> Show;
+  Pointer<IntPtr> SetFileTypes;
+  Pointer<IntPtr> SetFileTypeIndex;
+  Pointer<IntPtr> GetFileTypeIndex;
+  Pointer<IntPtr> Advise;
+  Pointer<IntPtr> Unadvise;
+  Pointer<IntPtr> SetOptions;
+  Pointer<IntPtr> GetOptions;
+  Pointer<IntPtr> SetDefaultFolder;
+  Pointer<IntPtr> SetFolder;
+  Pointer<IntPtr> GetFolder;
+  Pointer<IntPtr> GetCurrentSelection;
+  Pointer<IntPtr> SetFileName;
+  Pointer<IntPtr> GetFileName;
+  Pointer<IntPtr> SetTitle;
+  Pointer<IntPtr> SetOkButtonLabel;
+  Pointer<IntPtr> SetFileNameLabel;
+  Pointer<IntPtr> GetResult;
+  Pointer<IntPtr> AddPlace;
+  Pointer<IntPtr> SetDefaultExtension;
+  Pointer<IntPtr> Close;
+  Pointer<IntPtr> SetClientGuid;
+  Pointer<IntPtr> ClearClientData;
+  Pointer<IntPtr> SetFilter;
 }
 
 class IFileDialog extends Struct {
@@ -75,17 +75,17 @@ void main() {
   var dlg_addr = ifd.lpVtbl.address;
   Pointer<IntPtr> ptr = Pointer.fromAddress(dlg_addr);
 
-  // var hr = CoInitializeEx(
-  //     nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-  // if (!SUCCEEDED(hr)) return;
+  var hr = CoInitializeEx(
+      nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+  if (!SUCCEEDED(hr)) return;
 
-  // hr = CoCreateInstance(
-  //     GUID.fromString(CLSID_FileOpenDialog).addressOf,
-  //     nullptr,
-  //     CLSCTX_ALL,
-  //     GUID.fromString(IID_IFileDialog).addressOf,
-  //     ifd.addressOf.cast());
-  // if (!SUCCEEDED(hr)) return;
+  hr = CoCreateInstance(
+      GUID.fromString(CLSID_FileOpenDialog).addressOf,
+      nullptr,
+      CLSCTX_ALL,
+      GUID.fromString(IID_IFileDialog).addressOf,
+      ifd.addressOf.cast());
+  if (!SUCCEEDED(hr)) return;
 
   ptr.elementAt(0).value = 0xFFFFFFFFFFFFFFFF;
   ptr.elementAt(1).value = 0x01;
@@ -98,12 +98,19 @@ void main() {
   printPointer('dlg', dlg);
   printPointer('dlg->lpVtbl', dlg.ref.lpVtbl);
 
-  // This gives the correct value.
   printPointer(
       'dlg->lpVtbl->QueryInterface', dlg.ref.lpVtbl.ref.QueryInterface);
   printPointer('dlg->lpVtbl->AddRef', dlg.ref.lpVtbl.ref.AddRef);
   printPointer('dlg->lpVtbl->Release', dlg.ref.lpVtbl.ref.Release);
   printPointer('dlg->lpVtbl->Show', dlg.ref.lpVtbl.ref.Show);
   printPointer('dlg->lpVtbl->SetFileTypes', dlg.ref.lpVtbl.ref.SetFileTypes);
+  printPointer('dlg->lpVtbl->SetTitle', dlg.ref.lpVtbl.ref.SetTitle);
+
+  print('---');
+  printPointer('dlg->lpVtbl->QueryInterface', dlg.ref.lpVtbl.elementAt(0));
+  printPointer('dlg->lpVtbl->AddRef', dlg.ref.lpVtbl.elementAt(1));
+  printPointer('dlg->lpVtbl->Release', dlg.ref.lpVtbl.elementAt(2));
+  printPointer('dlg->lpVtbl->Show', dlg.ref.lpVtbl.elementAt(3));
+  printPointer('dlg->lpVtbl->SetFileTypes', dlg.ref.lpVtbl.elementAt(4));
   printPointer('dlg->lpVtbl->SetTitle', dlg.ref.lpVtbl.ref.SetTitle);
 }
