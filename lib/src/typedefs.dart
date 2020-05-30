@@ -17,6 +17,7 @@ typedef appendMenuNative = Int32 Function(
     IntPtr hMenu, Uint32 uFlags, Uint32 uIDNewItem, Pointer<Utf16> lpNewItem);
 typedef appendMenuDart = int Function(
     int hMenu, int uFlags, int uIDNewItem, Pointer<Utf16> lpNewItem);
+
 // BOOL Beep(
 //   DWORD dwFreq,
 //   DWORD dwDuration
@@ -50,12 +51,44 @@ typedef chooseFontDart = int Function(Pointer<CHOOSEFONT> lpcf);
 typedef coCreateGuidNative = Int32 Function(Pointer<GUID> pguid);
 typedef coCreateGuidDart = int Function(Pointer<GUID> pguid);
 
+// HRESULT CoCreateInstance(
+//   REFCLSID  rclsid,
+//   LPUNKNOWN pUnkOuter,
+//   DWORD     dwClsContext,
+//   REFIID    riid,
+//   LPVOID    *ppv
+// );
+typedef coCreateInstanceNative = Int32 Function(
+    Pointer<GUID> rclsid,
+    Pointer<Void> pUnkOuter,
+    Int32 dwClsContext,
+    Pointer<GUID> riid,
+    Pointer<IntPtr> ppv);
+typedef coCreateInstanceDart = int Function(
+    Pointer<GUID> rclsid,
+    Pointer<Void> pUnkOuter,
+    int dwClsContext,
+    Pointer<GUID> riid,
+    Pointer<IntPtr> ppv);
+
+// HRESULT CoInitializeEx(
+//   LPVOID pvReserved,
+//   DWORD  dwCoInit
+// );
+typedef coInitializeExNative = Int32 Function(
+    Pointer<Void> pvReserved, Int32 dwCoInit);
+typedef coInitializeExDart = int Function(
+    Pointer<Void> pvReserved, int dwCoInit);
+
 // void CoTaskMemFree(
 //   _Frees_ptr_opt_ LPVOID pv
 // );
 typedef coTaskMemFreeNative = Void Function(Pointer<Void> pv);
 typedef coTaskMemFreeDart = void Function(Pointer<Void> pv);
 
+// void CoUninitialize();
+typedef coUninitializeNative = Void Function();
+typedef coUninitializeDart = void Function();
 // HACCEL CreateAcceleratorTableW(
 //   LPACCEL paccel,
 //   int     cAccel
