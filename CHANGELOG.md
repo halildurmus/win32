@@ -1,3 +1,8 @@
+## 1.4.0-dev.1
+
+ - Add COM support
+ - Add IFileDialog initial implementation
+
 ## 1.3.2
 
  - Add Snake GDI example
