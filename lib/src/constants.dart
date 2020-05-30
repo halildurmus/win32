@@ -1179,6 +1179,24 @@ const KF_FLAG_NOT_PARENT_RELATIVE = 0x00000200;
 const KF_FLAG_SIMPLE_IDLIST = 0x00000100;
 const KF_FLAG_ALIAS_ONLY = 0x80000000;
 
+// Task dialog icons.
+//
+// In the Windows header files, these are defined in the following format:
+//   #define TD_WARNING_ICON         MAKEINTRESOURCEW(-1)
+final TD_WARNING_ICON = Pointer<Utf16>.fromAddress(0xFFFF);
+final TD_ERROR_ICON = Pointer<Utf16>.fromAddress(0xFFFE);
+final TD_INFORMATION_ICON = Pointer<Utf16>.fromAddress(0xFFFD);
+final TD_SHIELD_ICON = Pointer<Utf16>.fromAddress(0xFFFC);
+
+class TASKDIALOG_COMMON_BUTTON_FLAGS {
+  static final int TDCBF_OK_BUTTON = 0x0001;
+  static final int TDCBF_YES_BUTTON = 0x0002;
+  static final int TDCBF_NO_BUTTON = 0x0004;
+  static final int TDCBF_CANCEL_BUTTON = 0x0008;
+  static final int TDCBF_RETRY_BUTTON = 0x0010;
+  static final int TDCBF_CLOSE_BUTTON = 0x0020;
+}
+
 // Folder IDs
 const FOLDERID_NetworkFolder = '{D20BEEC4-5CA8-4905-AE3B-BF251EA09B53}';
 const FOLDERID_ComputerFolder = '{0AC0837C-BBF8-452A-850D-79D08E667CA7}';

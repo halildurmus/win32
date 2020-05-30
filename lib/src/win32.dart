@@ -231,6 +231,10 @@ final GetSaveFileName =
 final ReplaceText =
     comdlg32.lookupFunction<replaceTextNative, replaceTextDart>('ReplaceTextW');
 
+final comctl32 = DynamicLibrary.open('comctl32.dll');
+final TaskDialog =
+    comctl32.lookupFunction<taskDialogNative, taskDialogDart>('TaskDialog');
+
 final ole32 = DynamicLibrary.open('ole32.dll');
 final CoCreateGuid =
     ole32.lookupFunction<coCreateGuidNative, coCreateGuidDart>('CoCreateGuid');

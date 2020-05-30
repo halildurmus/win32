@@ -41,6 +41,16 @@ void main() {
 
     final pathRes = Pointer<Utf16>.fromAddress(path.value);
 
+    TaskDialog(
+        NULL,
+        NULL,
+        TEXT('CommonFileDialogApp'),
+        pathRes,
+        nullptr,
+        TASKDIALOG_COMMON_BUTTON_FLAGS.TDCBF_OK_BUTTON,
+        TD_INFORMATION_ICON,
+        nullptr);
+
     print('Result: ${pathRes.unpackString(MAX_PATH)}');
 
     hr = item.Release(iShellItem.lpVtbl);

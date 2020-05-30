@@ -828,6 +828,7 @@ typedef showWindowDart = int Function(int hWnd, int nCmdShow);
 // );
 typedef sleepNative = Void Function(Uint32 dwMilliseconds);
 typedef sleepDart = void Function(int dwMilliseconds);
+
 // int StretchDIBits(
 //   HDC              hdc,
 //   int              xDest,
@@ -871,6 +872,35 @@ typedef stretchDIBitsDart = int Function(
     Pointer<BITMAPINFO> lpbmi,
     int iUsage,
     int rop);
+
+// HRESULT TaskDialog(
+//   HWND                           hwndOwner,
+//   HINSTANCE                      hInstance,
+//   PCWSTR                         pszWindowTitle,
+//   PCWSTR                         pszMainInstruction,
+//   PCWSTR                         pszContent,
+//   TASKDIALOG_COMMON_BUTTON_FLAGS dwCommonButtons,
+//   PCWSTR                         pszIcon,
+//   int                            *pnButton
+// );
+typedef taskDialogNative = Int32 Function(
+    Int32 hwndOwner,
+    Int32 hInstance,
+    Pointer<Utf16> pszWindowTitle,
+    Pointer<Utf16> pszMainInstruction,
+    Pointer<Utf16> pszContent,
+    Int32 dwCommonButtons,
+    Pointer<Utf16> pszIcon,
+    Pointer<Int32> pnButton);
+typedef taskDialogDart = int Function(
+    int hwndOwner,
+    int hInstance,
+    Pointer<Utf16> pszWindowTitle,
+    Pointer<Utf16> pszMainInstruction,
+    Pointer<Utf16> pszContent,
+    int dwCommonButtons,
+    Pointer<Utf16> pszIcon,
+    Pointer<Int32> pnButton);
 
 // BOOL TextOutW(
 //   HDC     hdc,
