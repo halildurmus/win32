@@ -4,10 +4,8 @@
 
 import 'dart:ffi';
 
+import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
-
-import 'package:win32/src/com/IFileDialog.dart';
-import 'package:win32/src/com/utils.dart';
 
 void main() {
   var hr = CoInitializeEx(
@@ -17,14 +15,41 @@ void main() {
     final fileDialog = FileDialog();
     final ptr = fileDialog.dlg.ref.lpVtbl;
 
-    hr = fileDialog.AddRef(ptr);
-    print('AddRef() returned $hr');
+    Pointer<Int32> pfos = allocate<Int32>();
+    hr = fileDialog.GetOptions(ptr, pfos);
+    if (!SUCCEEDED(hr)) throw COMException(hr);
+
+    int options = pfos.value | FILEOPENDIALOGOPTIONS.FOS_FORCEFILESYSTEM;
+    hr = fileDialog.SetOptions(ptr, options);
+    if (!SUCCEEDED(hr)) throw COMException(hr);
+
+    hr = fileDialog.SetDefaultExtension(ptr, TEXT('txt;csv'));
+    if (!SUCCEEDED(hr)) throw COMException(hr);
 
     hr = fileDialog.Show(ptr, NULL);
-    print('Show() returned $hr');
+    if (!SUCCEEDED(hr)) throw COMException(hr);
+
+    final iShellItem = IShellItem.allocate();
+    hr = fileDialog.GetResult(ptr, iShellItem.addressOf);
+    if (!SUCCEEDED(hr)) throw COMException(hr);
+
+    final item = ShellItem(iShellItem.addressOf);
+    final path = allocate<IntPtr>();
+    hr = item.GetDisplayName(
+        iShellItem.lpVtbl, SIGDN.SIGDN_FILESYSPATH, path.cast());
+    if (!SUCCEEDED(hr)) throw COMException(hr);
+
+    final pathRes = Pointer<Utf16>.fromAddress(path.value);
+
+    print('Result: ${pathRes.unpackString(MAX_PATH)}');
+
+    hr = item.Release(iShellItem.lpVtbl);
+    if (!SUCCEEDED(hr)) throw COMException(hr);
+
+    hr = fileDialog.Release(ptr);
+    if (!SUCCEEDED(hr)) throw COMException(hr);
   } else {
     throw COMException(hr);
   }
   CoUninitialize();
-  print('CoUninitialize successful()');
 }
