@@ -713,6 +713,11 @@ const DEVICE_DEFAULT_FONT = 14;
 const DEFAULT_PALETTE = 15;
 const SYSTEM_FIXED_FONT = 16;
 
+// In the original header files, these take the form:
+//   #define IDI_APPLICATION     MAKEINTRESOURCE(32512)
+// The MAKEINTRESOURCE() macro creates a pointer to a known memory address. The
+// address itself has no meaning other than as a marker.
+
 final IDI_APPLICATION = Pointer<Utf16>.fromAddress(32512);
 final IDI_HAND = Pointer<Utf16>.fromAddress(32513);
 final IDI_QUESTION = Pointer<Utf16>.fromAddress(32514);
