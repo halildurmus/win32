@@ -1,7 +1,7 @@
 name: filepicker_windows
 description: A plugin for selecting files in Windows
 version: 0.0.1
-homepage:
+repository: https://github.com/timsneath/filepicker_windows
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
