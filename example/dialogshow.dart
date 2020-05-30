@@ -7,81 +7,23 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-// typedef queryInterfaceNative = Int32 Function(
-//     Pointer<Uint64> obj, Pointer<GUID> riid, Pointer<Uint64> ppvObject);
-// typedef queryInterfaceDart = int Function(
-//     Pointer<Uint64> obj, Pointer<GUID> riid, Pointer<Uint64> ppvObject);
-
 typedef IFileDialog_AddRef_Native = Int32 Function(Pointer obj);
 typedef IFileDialog_AddRef_Dart = int Function(Pointer obj);
 
 typedef IFileDialog_Show_Native = Int32 Function(Pointer obj, IntPtr hwndOwner);
 typedef IFileDialog_Show_Dart = int Function(Pointer obj, int hwndOwner);
 
-class IFileDialogVtbl extends Struct {
-  Pointer<IntPtr> QueryInterface;
-  Pointer<IntPtr> AddRef;
-  Pointer<IntPtr> Release;
-  Pointer<IntPtr> Show;
-  Pointer<IntPtr> SetFileTypes;
-  Pointer<IntPtr> SetFileTypeIndex;
-  Pointer<IntPtr> GetFileTypeIndex;
-  Pointer<IntPtr> Advise;
-  Pointer<IntPtr> Unadvise;
-  Pointer<IntPtr> SetOptions;
-  Pointer<IntPtr> GetOptions;
-  Pointer<IntPtr> SetDefaultFolder;
-  Pointer<IntPtr> SetFolder;
-  Pointer<IntPtr> GetFolder;
-  Pointer<IntPtr> GetCurrentSelection;
-  Pointer<IntPtr> SetFileName;
-  Pointer<IntPtr> GetFileName;
-  Pointer<IntPtr> SetTitle;
-  Pointer<IntPtr> SetOkButtonLabel;
-  Pointer<IntPtr> SetFileNameLabel;
-  Pointer<IntPtr> GetResult;
-  Pointer<IntPtr> AddPlace;
-  Pointer<IntPtr> SetDefaultExtension;
-  Pointer<IntPtr> Close;
-  Pointer<IntPtr> SetClientGuid;
-  Pointer<IntPtr> ClearClientData;
-  Pointer<IntPtr> SetFilter;
-
-  factory IFileDialogVtbl.allocate() => allocate<IFileDialogVtbl>().ref
-    ..QueryInterface = nullptr
-    ..AddRef = nullptr
-    ..Release = nullptr
-    ..Show = nullptr
-    ..SetFileTypes = nullptr
-    ..SetFileTypeIndex = nullptr
-    ..GetFileTypeIndex = nullptr
-    ..Advise = nullptr
-    ..Unadvise = nullptr
-    ..SetOptions = nullptr
-    ..GetOptions = nullptr
-    ..SetDefaultFolder = nullptr
-    ..SetFolder = nullptr
-    ..GetFolder = nullptr
-    ..GetCurrentSelection = nullptr
-    ..SetFileName = nullptr
-    ..GetFileName = nullptr
-    ..SetTitle = nullptr
-    ..SetOkButtonLabel = nullptr
-    ..SetFileNameLabel = nullptr
-    ..GetResult = nullptr
-    ..AddPlace = nullptr
-    ..SetDefaultExtension = nullptr
-    ..Close = nullptr
-    ..SetClientGuid = nullptr
-    ..ClearClientData = nullptr
-    ..SetFilter = nullptr;
-}
-
 class IFileDialog extends Struct {
-  Pointer<IFileDialogVtbl> lpVtbl;
+  Pointer<IntPtr> lpVtbl;
+
+  Pointer<IntPtr> get vtable => Pointer.fromAddress(lpVtbl.value);
+  Pointer<IntPtr> get queryInterfacePtr => vtable.elementAt(0);
+  Pointer<IntPtr> get addRefPtr => vtable.elementAt(1);
+  Pointer<IntPtr> get releasePtr => vtable.elementAt(2);
+  Pointer<IntPtr> get showPtr => vtable.elementAt(3);
 
   factory IFileDialog.allocate() =>
-      allocate<IFileDialog>().ref..lpVtbl = allocate<IFileDialogVtbl>();
+      allocate<IFileDialog>().ref..lpVtbl = allocate<IntPtr>();
 }
 
 void printPointer(String name, Pointer ptr) {
@@ -129,72 +71,33 @@ void main() {
     if (SUCCEEDED(hr)) {
       printPointer('dlg', dlg);
       printPointer('dlg->lpVtbl', dlg.ref.lpVtbl);
+      printPointer('dlg->lpVtbl->QueryInterface', dlg.ref.queryInterfacePtr);
+      printPointer('dlg->lpVtbl->AddRef', dlg.ref.addRefPtr);
+      printPointer('dlg->lpVtbl->Release', dlg.ref.releasePtr);
+      printPointer('dlg->lpVtbl->Show', dlg.ref.showPtr);
 
-      // vTable contains, in order:
-      //   [0] QueryInterface
-      //   [1] AddRef
-      //   [2] Release
-      //   [3] Show
-      //   ...
-      // All are function pointers
+      final addRefFuncPtr =
+          Pointer<IntPtr>.fromAddress(dlg.ref.addRefPtr.value);
+      final addRefFuncNative =
+          addRefFuncPtr.cast<NativeFunction<IFileDialog_AddRef_Native>>();
+      final addRefFuncDart =
+          addRefFuncNative.asFunction<IFileDialog_AddRef_Dart>();
 
-      // This gives the correct value.
-      printPointer(
-          'dlg->lpVtbl->QueryInterface', dlg.ref.lpVtbl.ref.QueryInterface);
+      final showFuncPtr = Pointer<IntPtr>.fromAddress(dlg.ref.showPtr.value);
+      final showFuncNative =
+          showFuncPtr.cast<NativeFunction<IFileDialog_Show_Native>>();
+      final showFuncDart = showFuncNative.asFunction<IFileDialog_Show_Dart>();
 
-      print('---');
+      hr = addRefFuncDart(dlg.ref.lpVtbl);
+      print('AddRef() returned $hr');
 
-      // These do not give the right addresses, so the struct isn't trustworthy.
-      printPointer('dlg->lpVtbl->AddRef', dlg.ref.lpVtbl.ref.AddRef);
-      printPointer('dlg->lpVtbl->Release', dlg.ref.lpVtbl.ref.Release);
-      printPointer('dlg->lpVtbl->Show', dlg.ref.lpVtbl.ref.Show);
-      printPointer('dlg->lpVtbl->SetTitle', dlg.ref.lpVtbl.ref.SetTitle);
-
-      print('---');
-
-      // But we know that AddRef is the second entry in the v-table, so it must
-      // be at *(QI + sizeOf(IntPtr)). On my machine, this gives
-      // 0x00007FFC9C88EF28, which is indeed the same value as the C-based
-      // version.
-      final addRefAddress =
-          dlg.ref.lpVtbl.cast<IntPtr>().value + sizeOf<IntPtr>() * 1;
-      final addRefPtr =
-          Pointer<NativeFunction<IFileDialog_AddRef_Native>>.fromAddress(
-              addRefAddress);
-      printPointer('dlg->lpVtbl->AddRef (calc)', addRefPtr);
-      final addRefDart =
-          Pointer<NativeFunction<IFileDialog_AddRef_Native>>.fromAddress(
-                  addRefPtr.cast<IntPtr>().value)
-              .asFunction<IFileDialog_AddRef_Dart>();
-
-      // But we know that Show is the fourth entry in the v-table, so it must
-      // be at *(QI + sizeOf(IntPtr) * 3). On my machine, this gives
-      // 0x00007FFC9C88EF38, which is indeed the same value as the C-based
-      // version.
-      final showAddress =
-          dlg.ref.lpVtbl.cast<IntPtr>().value + sizeOf<IntPtr>() * 3;
-      final showPtr =
-          Pointer<NativeFunction<IFileDialog_Show_Native>>.fromAddress(
-              showAddress);
-      printPointer('dlg->lpVtbl->Show (calc)', showPtr);
-      final showDart =
-          Pointer<NativeFunction<IFileDialog_Show_Native>>.fromAddress(
-                  showPtr.cast<IntPtr>().value)
-              .asFunction<IFileDialog_Show_Dart>();
-
-      // This returns but with an error
-      print('Attempting to AddRef.');
-      hr = addRefDart(dlg);
-      print('addRef returned $hr');
-
-      // This just crashes.
-      print('Attempting to Show.');
-      hr = showDart(dlg, NULL);
-      print('show returned $hr');
+      hr = showFuncDart(dlg.ref.lpVtbl, NULL);
+      print('Show() returned $hr');
     } else {
       COMError(hr, 'CoCreateInstance');
     }
     CoUninitialize();
+    print('CoUninitialize()');
   } else {
     COMError(hr, 'CoInitializeEx');
   }
