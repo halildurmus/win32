@@ -41,6 +41,8 @@ void main() {
 
     final pathRes = Pointer<Utf16>.fromAddress(path.value);
 
+    // MAX_PATH is a hack here, since this could be longer. Worst case is that
+    // we truncate too early.
     print('Result: ${pathRes.unpackString(MAX_PATH)}');
 
     hr = item.Release(iShellItem.lpVtbl);
