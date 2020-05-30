@@ -1,7 +1,6 @@
 name: filepicker_windows
-description: A new flutter plugin project.
+description: A plugin for selecting files in Windows
 version: 0.0.1
-author:
 homepage:
 
 environment:
@@ -9,9 +8,8 @@ environment:
   flutter: ">=1.10.0"
 
 dependencies:
-  win32:
-    git:
-      git@github.com:timsneath/win32.git
+  win32: ^1.3.2
+  ffi: ^0.1.3
   flutter:
     sdk: flutter
 
