@@ -64,10 +64,15 @@ computer and their volume IDs and attached paths.
 
 ## Features and bugs
 
+Let me know what APIs you're interested in seeing. I'm not planning to project
+the entire Windows API, but I'm particularly interested in examples that either
+unblock a plugin for Windows or that demonstrate more complex Windows APIs that
+represent an important pattern.
+
 Please file feature requests and bugs at the [issue tracker][tracker]. This
 is a hobby project, and should not be viewed as having the same level of
 quality assurance as an official package from the Dart team. I'm a product
-manager having fun on my weekends!
+manager having fun on my weekends! 
 
 ## Acknowledgements
 

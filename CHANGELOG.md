@@ -1,7 +1,9 @@
-## 1.4.0-dev.2
+## 1.4.0-dev.3
 
  - Add COM support
- - Add IFileDialog implementation
+ - Add implementations for IOpenFileDialog, IFileDialog, IModalWindow,
+   IShellItem, IUnknown
+ - Add common item dialog example
 
 ## 1.3.2
 
