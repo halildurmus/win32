@@ -4,16 +4,21 @@ import 'package:flutter/material.dart';
 
 import 'package:filepicker_windows/filepicker_windows.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(FilePickerExample());
 
-class MyApp extends StatefulWidget {
+class FilePickerExample extends StatelessWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(home: HomePage());
+  }
 }
 
-class _MyAppState extends State<MyApp> {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   File path;
 
   @override
@@ -23,21 +28,41 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(path != null ? path.toString() : 'Select a file'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(path != null ? path.toString() : 'Select a file'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 2,
+              width: MediaQuery.of(context).size.width - 100,
+              child: path == null ? Placeholder() : Image.file(path),
+            ),
+            RaisedButton(
+              child: Text('Open file dialog'),
+              onPressed: () {
+                final file = FilePicker();
+                file.hidePinnedPlaces = true;
+                file.forcePreviewPaneOn = true;
+                file.filterSpecification = {
+                  'JPEG Files': '*.jpg;*.jpeg',
+                  'Bitmap Files': '*.bmp',
+                  'All Files (*.*)': '*.*'
+                };
+                file.title = 'Select an image';
+                final result = file.getFile();
+                if (result != null) {
+                  setState(() {
+                    path = result;
+                  });
+                }
+              },
+            ),
+          ],
         ),
-        body: RaisedButton(
-            child: Text('filepicker'),
-            onPressed: () {
-              final file = FilePicker();
-              setState(
-                () {
-                  path = file.getFile();
-                },
-              );
-            }),
       ),
     );
   }
