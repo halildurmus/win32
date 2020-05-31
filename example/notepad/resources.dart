@@ -82,7 +82,7 @@ class NotepadResources {
   }
 
   static int LoadAccelerators() {
-    final pTable = allocate<ACCEL>(count: 17);
+    final pTable = allocate<ACCEL>(count: 18);
 
     pTable[0]
       ..fVirt = FVIRTKEY | FALT | FNOINVERT
@@ -169,7 +169,12 @@ class NotepadResources {
       ..key = 26 // Ctrl+Z
       ..cmd = IDM_EDIT_UNDO;
 
-    final result = CreateAcceleratorTable(pTable, 17);
+    pTable[17]
+      ..fVirt = FNOINVERT
+      ..key = 1 // Ctrl+A
+      ..cmd = IDM_EDIT_SELECT_ALL;
+
+    final result = CreateAcceleratorTable(pTable, 18);
     if (result == NULL) {
       print('Error loading accelerators: ${GetLastError()}');
     }
