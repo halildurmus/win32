@@ -59,11 +59,10 @@ class FilePicker {
         nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
     if (!SUCCEEDED(hr)) throw COMException(hr);
 
-    final fileDialog = FileDialog();
-    final ptr = fileDialog.dlg.ref.lpVtbl;
+    final fileDialog = FileOpenDialog.createInstance();
 
     Pointer<Int32> pfos = allocate<Int32>();
-    hr = fileDialog.GetOptions(ptr, pfos);
+    hr = fileDialog.GetOptions(pfos);
     if (!SUCCEEDED(hr)) throw COMException(hr);
 
     int options = pfos.value;
@@ -82,26 +81,26 @@ class FilePicker {
     if (isDirectoryFixed ?? false) {
       options |= FILEOPENDIALOGOPTIONS.FOS_NOCHANGEDIR;
     }
-    hr = fileDialog.SetOptions(ptr, options);
+    hr = fileDialog.SetOptions(options);
     if (!SUCCEEDED(hr)) throw COMException(hr);
 
     if (defaultExtension != null && defaultExtension.isNotEmpty) {
-      hr = fileDialog.SetDefaultExtension(ptr, TEXT(defaultExtension));
+      hr = fileDialog.SetDefaultExtension(TEXT(defaultExtension));
       if (!SUCCEEDED(hr)) throw COMException(hr);
     }
 
     if (fileName != null && fileName.isNotEmpty) {
-      hr = fileDialog.SetFileName(ptr, TEXT(fileName));
+      hr = fileDialog.SetFileName(TEXT(fileName));
       if (!SUCCEEDED(hr)) throw COMException(hr);
     }
 
     if (fileNameLabel != null && fileNameLabel.isNotEmpty) {
-      hr = fileDialog.SetFileNameLabel(ptr, TEXT(fileNameLabel));
+      hr = fileDialog.SetFileNameLabel(TEXT(fileNameLabel));
       if (!SUCCEEDED(hr)) throw COMException(hr);
     }
 
     if (title != null && title.isNotEmpty) {
-      hr = fileDialog.SetTitle(ptr, TEXT(title));
+      hr = fileDialog.SetTitle(TEXT(title));
       if (!SUCCEEDED(hr)) throw COMException(hr);
     }
 
@@ -116,11 +115,11 @@ class FilePicker {
           ..pszSpec = TEXT(filterSpecification[key]);
         index++;
       }
-      hr = fileDialog.SetFileTypes(ptr, filterSpecification.length, rgSpec);
+      hr = fileDialog.SetFileTypes(filterSpecification.length, rgSpec);
       if (!SUCCEEDED(hr)) throw COMException(hr);
     }
 
-    hr = fileDialog.Show(ptr, NULL);
+    hr = fileDialog.Show(NULL);
     if (!SUCCEEDED(hr)) {
       if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
         didUserCancel = true;
@@ -128,25 +127,24 @@ class FilePicker {
         throw COMException(hr);
       }
     } else {
-      final iShellItem = IShellItem.allocate();
-      hr = fileDialog.GetResult(ptr, iShellItem.addressOf);
+      final iShellItem = COMObject.allocate();
+      hr = fileDialog.GetResult(iShellItem.addressOf);
       if (!SUCCEEDED(hr)) throw COMException(hr);
 
-      final item = ShellItem(iShellItem.addressOf);
+      final item = IShellItem(iShellItem.addressOf);
       final pathPtrPtr = allocate<IntPtr>();
-      hr = item.GetDisplayName(
-          iShellItem.lpVtbl, SIGDN.SIGDN_FILESYSPATH, pathPtrPtr.cast());
+      hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtrPtr.cast());
       if (!SUCCEEDED(hr)) throw COMException(hr);
 
       final pathPtr = Pointer<Utf16>.fromAddress(pathPtrPtr.value);
       // MAX_PATH is a slight hack here, since this could be longer.
       filePath = pathPtr.unpackString(MAX_PATH);
 
-      hr = item.Release(iShellItem.lpVtbl);
+      hr = item.Release();
       if (!SUCCEEDED(hr)) throw COMException(hr);
     }
 
-    hr = fileDialog.Release(ptr);
+    hr = fileDialog.Release();
     if (!SUCCEEDED(hr)) throw COMException(hr);
 
     CoUninitialize();
