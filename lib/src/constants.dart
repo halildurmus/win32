@@ -1389,3 +1389,42 @@ const MEM_PRESERVE_PLACEHOLDER = 0x00000002;
 const MEM_DECOMMIT = 0x00004000;
 const MEM_RELEASE = 0x00008000;
 const MEM_FREE = 0x00010000;
+
+class FILEOPENDIALOGOPTIONS {
+  static final int FOS_OVERWRITEPROMPT = 0x2;
+  static final int FOS_STRICTFILETYPES = 0x4;
+  static final int FOS_NOCHANGEDIR = 0x8;
+  static final int FOS_PICKFOLDERS = 0x20;
+  static final int FOS_FORCEFILESYSTEM = 0x40;
+  static final int FOS_ALLNONSTORAGEITEMS = 0x80;
+  static final int FOS_NOVALIDATE = 0x100;
+  static final int FOS_ALLOWMULTISELECT = 0x200;
+  static final int FOS_PATHMUSTEXIST = 0x800;
+  static final int FOS_FILEMUSTEXIST = 0x1000;
+  static final int FOS_CREATEPROMPT = 0x2000;
+  static final int FOS_SHAREAWARE = 0x4000;
+  static final int FOS_NOREADONLYRETURN = 0x8000;
+  static final int FOS_NOTESTFILECREATE = 0x10000;
+  static final int FOS_HIDEMRUPLACES = 0x20000;
+  static final int FOS_HIDEPINNEDPLACES = 0x40000;
+  static final int FOS_NODEREFERENCELINKS = 0x100000;
+  static final int FOS_OKBUTTONNEEDSINTERACTION = 0x200000;
+  static final int FOS_DONTADDTORECENT = 0x2000000;
+  static final int FOS_FORCESHOWHIDDEN = 0x10000000;
+  static final int FOS_DEFAULTNOMINIMODE = 0x20000000;
+  static final int FOS_FORCEPREVIEWPANEON = 0x40000000;
+  static final int FOS_SUPPORTSTREAMABLEITEMS = 0x80000000;
+}
+
+class SIGDN {
+  static final int SIGDN_NORMALDISPLAY = 0;
+  static final int SIGDN_PARENTRELATIVEPARSING = 0x80018001;
+  static final int SIGDN_DESKTOPABSOLUTEPARSING = 0x80028000;
+  static final int SIGDN_PARENTRELATIVEEDITING = 0x80031001;
+  static final int SIGDN_DESKTOPABSOLUTEEDITING = 0x8004c000;
+  static final int SIGDN_FILESYSPATH = 0x80058000;
+  static final int SIGDN_URL = 0x80068000;
+  static final int SIGDN_PARENTRELATIVEFORADDRESSBAR = 0x8007c001;
+  static final int SIGDN_PARENTRELATIVE = 0x80080001;
+  static final int SIGDN_PARENTRELATIVEFORUI = 0x8009400;
+}
