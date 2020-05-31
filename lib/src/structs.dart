@@ -74,6 +74,19 @@ class SECURITY_ATTRIBUTES extends Struct {
   int bInheritHandle;
 }
 
+// typedef struct _COMDLG_FILTERSPEC {
+//   LPCWSTR pszName;
+//   LPCWSTR pszSpec;
+// } COMDLG_FILTERSPEC;
+class COMDLG_FILTERSPEC extends Struct {
+  Pointer<Utf16> pszName;
+  Pointer<Utf16> pszSpec;
+
+  factory COMDLG_FILTERSPEC.allocate() => allocate<COMDLG_FILTERSPEC>().ref
+    ..pszName = nullptr
+    ..pszSpec = nullptr;
+}
+
 // typedef struct tagACCEL {
 //     BYTE   fVirt;               /* Also called the flags field */
 //     WORD   key;

@@ -45,13 +45,38 @@ typedef IFileDialog_Release_Dart = int Function(Pointer obj);
 typedef IFileDialog_Show_Native = Int32 Function(Pointer obj, IntPtr hwndOwner);
 typedef IFileDialog_Show_Dart = int Function(Pointer obj, int hwndOwner);
 
+typedef IFileDialog_SetFileTypes_Native = Int32 Function(
+    Pointer obj, Uint32 cFileTypes, Pointer rgFilterSpec);
+typedef IFileDialog_SetFileTypes_Dart = int Function(
+    Pointer obj, int cFileTypes, Pointer rgFilterSpec);
+
+typedef IFileDialog_SetOptions_Native = Int32 Function(Pointer obj, Int32 fos);
+typedef IFileDialog_SetOptions_Dart = int Function(Pointer obj, int fos);
+
 typedef IFileDialog_GetOptions_Native = Int32 Function(
     Pointer obj, Pointer<Int32> pfos);
 typedef IFileDialog_GetOptions_Dart = int Function(
     Pointer obj, Pointer<Int32> pfos);
 
-typedef IFileDialog_SetOptions_Native = Int32 Function(Pointer obj, Int32 fos);
-typedef IFileDialog_SetOptions_Dart = int Function(Pointer obj, int fos);
+typedef IFileDialog_SetFileName_Native = Int32 Function(
+    Pointer obj, Pointer<Utf16> pszName);
+typedef IFileDialog_SetFileName_Dart = int Function(
+    Pointer obj, Pointer<Utf16> pszName);
+
+typedef IFileDialog_SetOkButtonLabel_Native = Int32 Function(
+    Pointer obj, Pointer<Utf16> pszText);
+typedef IFileDialog_SetOkButtonLabel_Dart = int Function(
+    Pointer obj, Pointer<Utf16> pszText);
+
+typedef IFileDialog_SetFileNameLabel_Native = Int32 Function(
+    Pointer obj, Pointer<Utf16> pszLabel);
+typedef IFileDialog_SetFileNameLabel_Dart = int Function(
+    Pointer obj, Pointer<Utf16> pszLabel);
+
+typedef IFileDialog_SetTitle_Native = Int32 Function(
+    Pointer obj, Pointer<Utf16> pszTitle);
+typedef IFileDialog_SetTitle_Dart = int Function(
+    Pointer obj, Pointer<Utf16> pszTitle);
 
 typedef IFileDialog_GetResult_Native = Int32 Function(
     Pointer obj, Pointer<IShellItem> ppsi);
@@ -106,8 +131,13 @@ class FileDialog {
   IFileDialog_AddRef_Dart AddRef;
   IFileDialog_Release_Dart Release;
   IFileDialog_Show_Dart Show;
+  IFileDialog_SetFileTypes_Dart SetFileTypes;
   IFileDialog_GetOptions_Dart GetOptions;
   IFileDialog_SetOptions_Dart SetOptions;
+  IFileDialog_SetFileName_Dart SetFileName;
+  IFileDialog_SetOkButtonLabel_Dart SetOkButtonLabel;
+  IFileDialog_SetFileNameLabel_Dart SetFileNameLabel;
+  IFileDialog_SetTitle_Dart SetTitle;
   IFileDialog_GetResult_Dart GetResult;
   IFileDialog_SetDefaultExtension_Dart SetDefaultExtension;
 
@@ -135,6 +165,10 @@ class FileDialog {
         .cast<NativeFunction<IFileDialog_Show_Native>>()
         .asFunction<IFileDialog_Show_Dart>();
 
+    SetFileTypes = Pointer<IntPtr>.fromAddress(dlg.ref.setFileTypesPtr.value)
+        .cast<NativeFunction<IFileDialog_SetFileTypes_Native>>()
+        .asFunction<IFileDialog_SetFileTypes_Dart>();
+
     GetOptions = Pointer<IntPtr>.fromAddress(dlg.ref.getOptionsPtr.value)
         .cast<NativeFunction<IFileDialog_GetOptions_Native>>()
         .asFunction<IFileDialog_GetOptions_Dart>();
@@ -142,6 +176,24 @@ class FileDialog {
     SetOptions = Pointer<IntPtr>.fromAddress(dlg.ref.setOptionsPtr.value)
         .cast<NativeFunction<IFileDialog_SetOptions_Native>>()
         .asFunction<IFileDialog_SetOptions_Dart>();
+
+    SetTitle = Pointer<IntPtr>.fromAddress(dlg.ref.setTitlePtr.value)
+        .cast<NativeFunction<IFileDialog_SetTitle_Native>>()
+        .asFunction<IFileDialog_SetTitle_Dart>();
+
+    SetFileName = Pointer<IntPtr>.fromAddress(dlg.ref.setFileNamePtr.value)
+        .cast<NativeFunction<IFileDialog_SetFileName_Native>>()
+        .asFunction<IFileDialog_SetFileName_Dart>();
+
+    SetOkButtonLabel =
+        Pointer<IntPtr>.fromAddress(dlg.ref.setOkButtonLabelPtr.value)
+            .cast<NativeFunction<IFileDialog_SetOkButtonLabel_Native>>()
+            .asFunction<IFileDialog_SetOkButtonLabel_Dart>();
+
+    SetFileNameLabel =
+        Pointer<IntPtr>.fromAddress(dlg.ref.setFileNameLabelPtr.value)
+            .cast<NativeFunction<IFileDialog_SetFileNameLabel_Native>>()
+            .asFunction<IFileDialog_SetFileNameLabel_Dart>();
 
     GetResult = Pointer<IntPtr>.fromAddress(dlg.ref.getResultPtr.value)
         .cast<NativeFunction<IFileDialog_GetResult_Native>>()

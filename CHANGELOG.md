@@ -1,7 +1,7 @@
-## 1.4.0-dev.1
+## 1.4.0-dev.2
 
  - Add COM support
- - Add IFileDialog initial implementation
+ - Add IFileDialog implementation
 
 ## 1.3.2
 
