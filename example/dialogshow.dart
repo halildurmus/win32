@@ -14,7 +14,7 @@ void main() {
   if (SUCCEEDED(hr)) {
     final fileDialog = FileOpenDialog.createInstance();
 
-    Pointer<Int32> pfos = allocate<Int32>();
+    final pfos = allocate<Int32>();
     hr = fileDialog.GetOptions(pfos);
     if (!SUCCEEDED(hr)) throw COMException(hr);
 
@@ -60,15 +60,14 @@ void main() {
       if (!SUCCEEDED(hr)) throw COMException(hr);
 
       final item = IShellItem(iShellItem.addressOf);
-      final path = allocate<IntPtr>();
-      hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, path.cast());
+      final pathPtr = allocate<IntPtr>();
+      hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtr.cast());
       if (!SUCCEEDED(hr)) throw COMException(hr);
 
-      final pathRes = Pointer<Utf16>.fromAddress(path.value);
+      final path = Pointer<Utf16>.fromAddress(pathPtr.value);
 
-      // MAX_PATH is a hack here, since this could be longer. Worst case is that
-      // we truncate too early.
-      print('Result: ${pathRes.unpackString(MAX_PATH)}');
+      // MAX_PATH may truncate early if long filename support is enabled
+      print('Result: ${path.unpackString(MAX_PATH)}');
 
       hr = item.Release();
       if (!SUCCEEDED(hr)) throw COMException(hr);
