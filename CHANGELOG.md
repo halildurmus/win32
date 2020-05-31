@@ -1,4 +1,4 @@
-## 1.4.0-dev.3
+## 1.4.0
 
  - Add COM support
  - Add implementations for IOpenFileDialog, IFileDialog, IModalWindow,
