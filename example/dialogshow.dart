@@ -12,7 +12,7 @@ void main() {
       nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
 
   if (SUCCEEDED(hr)) {
-    final fileDialog = FileDialog();
+    final fileDialog = IFileDialog.createOpen();
     final ptr = fileDialog.dlg.ref.lpVtbl;
 
     Pointer<Int32> pfos = allocate<Int32>();

@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+import 'package:win32/src/com/IUnknown.dart';
 import 'package:win32/win32.dart';
 
 import 'IShellItem.dart';
@@ -88,48 +89,46 @@ typedef IFileDialog_SetDefaultExtension_Native = Int32 Function(
 typedef IFileDialog_SetDefaultExtension_Dart = int Function(
     Pointer obj, Pointer<Utf16> pszDefaultExtension);
 
-class IFileDialog extends Struct {
-  Pointer<IntPtr> lpVtbl;
+// class IFileDialog extends Struct {
+//   Pointer<IntPtr> lpVtbl;
 
-  Pointer<IntPtr> get vtable => Pointer.fromAddress(lpVtbl.value);
+//   Pointer<IntPtr> get vtable => Pointer.fromAddress(lpVtbl.value);
 
-  Pointer<IntPtr> get queryInterfacePtr => vtable.elementAt(0);
-  Pointer<IntPtr> get addRefPtr => vtable.elementAt(1);
-  Pointer<IntPtr> get releasePtr => vtable.elementAt(2);
-  Pointer<IntPtr> get showPtr => vtable.elementAt(3);
-  Pointer<IntPtr> get setFileTypesPtr => vtable.elementAt(4);
-  Pointer<IntPtr> get setFileTypeIndexPtr => vtable.elementAt(5);
-  Pointer<IntPtr> get getFileTypeIndexPtr => vtable.elementAt(6);
-  Pointer<IntPtr> get advisePtr => vtable.elementAt(7);
-  Pointer<IntPtr> get unadvisePtr => vtable.elementAt(8);
-  Pointer<IntPtr> get setOptionsPtr => vtable.elementAt(9);
-  Pointer<IntPtr> get getOptionsPtr => vtable.elementAt(10);
-  Pointer<IntPtr> get setDefaultFolderPtr => vtable.elementAt(11);
-  Pointer<IntPtr> get setFolderPtr => vtable.elementAt(12);
-  Pointer<IntPtr> get getFolderPtr => vtable.elementAt(13);
-  Pointer<IntPtr> get getCurrentSelectionPtr => vtable.elementAt(14);
-  Pointer<IntPtr> get setFileNamePtr => vtable.elementAt(15);
-  Pointer<IntPtr> get getFileNamePtr => vtable.elementAt(16);
-  Pointer<IntPtr> get setTitlePtr => vtable.elementAt(17);
-  Pointer<IntPtr> get setOkButtonLabelPtr => vtable.elementAt(18);
-  Pointer<IntPtr> get setFileNameLabelPtr => vtable.elementAt(19);
-  Pointer<IntPtr> get getResultPtr => vtable.elementAt(20);
-  Pointer<IntPtr> get addPlacePtr => vtable.elementAt(21);
-  Pointer<IntPtr> get setDefaultExtensionPtr => vtable.elementAt(22);
-  Pointer<IntPtr> get closePtr => vtable.elementAt(23);
-  Pointer<IntPtr> get setClientGuidPtr => vtable.elementAt(24);
-  Pointer<IntPtr> get clearClientDataPtr => vtable.elementAt(25);
-  Pointer<IntPtr> get setFilterPtr => vtable.elementAt(26);
+//   Pointer<IntPtr> get queryInterfacePtr => vtable.elementAt(0);
+//   Pointer<IntPtr> get addRefPtr => vtable.elementAt(1);
+//   Pointer<IntPtr> get releasePtr => vtable.elementAt(2);
+//   Pointer<IntPtr> get showPtr => vtable.elementAt(3);
+//   Pointer<IntPtr> get setFileTypesPtr => vtable.elementAt(4);
+//   Pointer<IntPtr> get setFileTypeIndexPtr => vtable.elementAt(5);
+//   Pointer<IntPtr> get getFileTypeIndexPtr => vtable.elementAt(6);
+//   Pointer<IntPtr> get advisePtr => vtable.elementAt(7);
+//   Pointer<IntPtr> get unadvisePtr => vtable.elementAt(8);
+//   Pointer<IntPtr> get setOptionsPtr => vtable.elementAt(9);
+//   Pointer<IntPtr> get getOptionsPtr => vtable.elementAt(10);
+//   Pointer<IntPtr> get setDefaultFolderPtr => vtable.elementAt(11);
+//   Pointer<IntPtr> get setFolderPtr => vtable.elementAt(12);
+//   Pointer<IntPtr> get getFolderPtr => vtable.elementAt(13);
+//   Pointer<IntPtr> get getCurrentSelectionPtr => vtable.elementAt(14);
+//   Pointer<IntPtr> get setFileNamePtr => vtable.elementAt(15);
+//   Pointer<IntPtr> get getFileNamePtr => vtable.elementAt(16);
+//   Pointer<IntPtr> get setTitlePtr => vtable.elementAt(17);
+//   Pointer<IntPtr> get setOkButtonLabelPtr => vtable.elementAt(18);
+//   Pointer<IntPtr> get setFileNameLabelPtr => vtable.elementAt(19);
+//   Pointer<IntPtr> get getResultPtr => vtable.elementAt(20);
+//   Pointer<IntPtr> get addPlacePtr => vtable.elementAt(21);
+//   Pointer<IntPtr> get setDefaultExtensionPtr => vtable.elementAt(22);
+//   Pointer<IntPtr> get closePtr => vtable.elementAt(23);
+//   Pointer<IntPtr> get setClientGuidPtr => vtable.elementAt(24);
+//   Pointer<IntPtr> get clearClientDataPtr => vtable.elementAt(25);
+//   Pointer<IntPtr> get setFilterPtr => vtable.elementAt(26);
 
-  factory IFileDialog.allocate() =>
-      allocate<IFileDialog>().ref..lpVtbl = allocate<IntPtr>();
-}
+//   factory IFileDialog.allocate() =>
+//       allocate<IFileDialog>().ref..lpVtbl = allocate<IntPtr>();
+// }
 
-class FileDialog {
-  Pointer<IFileDialog> dlg;
+class IFileDialog extends IUnknown {
+  Pointer<COMObject> dlg;
 
-  IFileDialog_AddRef_Dart AddRef;
-  IFileDialog_Release_Dart Release;
   IFileDialog_Show_Dart Show;
   IFileDialog_SetFileTypes_Dart SetFileTypes;
   IFileDialog_GetOptions_Dart GetOptions;
@@ -141,67 +140,72 @@ class FileDialog {
   IFileDialog_GetResult_Dart GetResult;
   IFileDialog_SetDefaultExtension_Dart SetDefaultExtension;
 
-  FileDialog() {
-    dlg = IFileDialog.allocate().addressOf;
+  factory IFileDialog.createOpen() {
+    final obj = COMObject.allocate().addressOf;
 
     var hr = CoCreateInstance(
         GUID.fromString(CLSID_FileOpenDialog).addressOf,
         nullptr,
         CLSCTX_ALL,
         GUID.fromString(IID_IFileDialog).addressOf,
-        dlg.cast());
+        obj.cast());
 
     if (!SUCCEEDED(hr)) throw COMException(hr);
 
-    AddRef = Pointer<IntPtr>.fromAddress(dlg.ref.addRefPtr.value)
-        .cast<NativeFunction<IFileDialog_AddRef_Native>>()
-        .asFunction<IFileDialog_AddRef_Dart>();
+    return IFileDialog(obj);
+  }
 
-    Release = Pointer<IntPtr>.fromAddress(dlg.ref.releasePtr.value)
-        .cast<NativeFunction<IFileDialog_Release_Native>>()
-        .asFunction<IFileDialog_Release_Dart>();
-
-    Show = Pointer<IntPtr>.fromAddress(dlg.ref.showPtr.value)
+  IFileDialog(this.dlg) : super(dlg) {
+    Show = dlg.ref.vtable
+        .elementAt(3)
         .cast<NativeFunction<IFileDialog_Show_Native>>()
         .asFunction<IFileDialog_Show_Dart>();
 
-    SetFileTypes = Pointer<IntPtr>.fromAddress(dlg.ref.setFileTypesPtr.value)
+    SetFileTypes = dlg.ref.vtable
+        .elementAt(4)
         .cast<NativeFunction<IFileDialog_SetFileTypes_Native>>()
         .asFunction<IFileDialog_SetFileTypes_Dart>();
 
-    GetOptions = Pointer<IntPtr>.fromAddress(dlg.ref.getOptionsPtr.value)
-        .cast<NativeFunction<IFileDialog_GetOptions_Native>>()
-        .asFunction<IFileDialog_GetOptions_Dart>();
-
-    SetOptions = Pointer<IntPtr>.fromAddress(dlg.ref.setOptionsPtr.value)
+    SetOptions = dlg.ref.vtable
+        .elementAt(9)
         .cast<NativeFunction<IFileDialog_SetOptions_Native>>()
         .asFunction<IFileDialog_SetOptions_Dart>();
 
-    SetTitle = Pointer<IntPtr>.fromAddress(dlg.ref.setTitlePtr.value)
-        .cast<NativeFunction<IFileDialog_SetTitle_Native>>()
-        .asFunction<IFileDialog_SetTitle_Dart>();
+    print(Pointer.fromAddress(dlg.ref.vtable.elementAt(10).address));
 
-    SetFileName = Pointer<IntPtr>.fromAddress(dlg.ref.setFileNamePtr.value)
+    GetOptions = dlg.ref.vtable
+        .elementAt(10)
+        .cast<NativeFunction<IFileDialog_GetOptions_Native>>()
+        .asFunction<IFileDialog_GetOptions_Dart>();
+
+    SetFileName = dlg.ref.vtable
+        .elementAt(15)
         .cast<NativeFunction<IFileDialog_SetFileName_Native>>()
         .asFunction<IFileDialog_SetFileName_Dart>();
 
-    SetOkButtonLabel =
-        Pointer<IntPtr>.fromAddress(dlg.ref.setOkButtonLabelPtr.value)
-            .cast<NativeFunction<IFileDialog_SetOkButtonLabel_Native>>()
-            .asFunction<IFileDialog_SetOkButtonLabel_Dart>();
+    SetTitle = dlg.ref.vtable
+        .elementAt(17)
+        .cast<NativeFunction<IFileDialog_SetTitle_Native>>()
+        .asFunction<IFileDialog_SetTitle_Dart>();
 
-    SetFileNameLabel =
-        Pointer<IntPtr>.fromAddress(dlg.ref.setFileNameLabelPtr.value)
-            .cast<NativeFunction<IFileDialog_SetFileNameLabel_Native>>()
-            .asFunction<IFileDialog_SetFileNameLabel_Dart>();
+    SetOkButtonLabel = dlg.ref.vtable
+        .elementAt(18)
+        .cast<NativeFunction<IFileDialog_SetOkButtonLabel_Native>>()
+        .asFunction<IFileDialog_SetOkButtonLabel_Dart>();
 
-    GetResult = Pointer<IntPtr>.fromAddress(dlg.ref.getResultPtr.value)
+    SetFileNameLabel = dlg.ref.vtable
+        .elementAt(19)
+        .cast<NativeFunction<IFileDialog_SetFileNameLabel_Native>>()
+        .asFunction<IFileDialog_SetFileNameLabel_Dart>();
+
+    GetResult = dlg.ref.vtable
+        .elementAt(20)
         .cast<NativeFunction<IFileDialog_GetResult_Native>>()
         .asFunction<IFileDialog_GetResult_Dart>();
 
-    SetDefaultExtension =
-        Pointer<IntPtr>.fromAddress(dlg.ref.setDefaultExtensionPtr.value)
-            .cast<NativeFunction<IFileDialog_SetDefaultExtension_Native>>()
-            .asFunction<IFileDialog_SetDefaultExtension_Dart>();
+    SetDefaultExtension = dlg.ref.vtable
+        .elementAt(22)
+        .cast<NativeFunction<IFileDialog_SetDefaultExtension_Native>>()
+        .asFunction<IFileDialog_SetDefaultExtension_Dart>();
   }
 }
