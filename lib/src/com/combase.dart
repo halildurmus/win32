@@ -1,6 +1,16 @@
 import 'dart:ffi';
 
+import 'package:ffi/ffi.dart';
 import '../constants.dart';
+
+class COMObject extends Struct {
+  Pointer<IntPtr> lpVtbl;
+
+  Pointer<IntPtr> get vtable => Pointer.fromAddress(lpVtbl.value);
+
+  factory COMObject.allocate() =>
+      allocate<COMObject>().ref..lpVtbl = allocate<IntPtr>();
+}
 
 class COMException implements Exception {
   final int hresult;
@@ -34,10 +44,3 @@ class COMException implements Exception {
     return 'COM error 0x${hresult.toRadixString(16)}';
   }
 }
-
-void printPointer(String name, Pointer ptr) {
-  print('${name.padRight(30)}: ${pointerAsString(ptr).toUpperCase()}');
-}
-
-String pointerAsString(Pointer ptr) =>
-    BigInt.from(ptr.address).toUnsigned(64).toRadixString(16).padLeft(16, '0');

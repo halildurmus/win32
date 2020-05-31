@@ -11,7 +11,14 @@ export 'src/macros.dart';
 export 'src/structs.dart';
 export 'src/win32.dart' hide user32, gdi32, kernel32, shell32, comdlg32, ole32;
 
-export 'src/com/IFileDialog.dart'
-    show IFileDialog, FileDialog, FILEOPENDIALOGOPTIONS;
-export 'src/com/IShellItem.dart' show IShellItem, ShellItem, SIGDN;
-export 'src/com/utils.dart' show COMException;
+export 'src/com/IShellItem.dart' show IShellItem, IID_IShellItem;
+export 'src/com/IFileOpenDialog.dart'
+    show
+        IFileOpenDialog,
+        IID_IFileOpenDialog,
+        FileOpenDialog,
+        CLSID_FileOpenDialog;
+export 'src/com/IFileDialog.dart' show IFileDialog, IID_IFileDialog;
+export 'src/com/IModalWindow.dart' show IModalWindow, IID_IModalWindow;
+export 'src/com/IUnknown.dart' show IUnknown, IID_IUnknown;
+export 'src/com/combase.dart' show COMObject, COMException;

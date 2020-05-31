@@ -12,27 +12,26 @@ void main() {
       nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
 
   if (SUCCEEDED(hr)) {
-    final fileDialog = FileDialog();
-    final ptr = fileDialog.dlg.ref.lpVtbl;
+    final fileDialog = FileOpenDialog.createInstance();
 
-    Pointer<Int32> pfos = allocate<Int32>();
-    hr = fileDialog.GetOptions(ptr, pfos);
+    final pfos = allocate<Int32>();
+    hr = fileDialog.GetOptions(pfos);
     if (!SUCCEEDED(hr)) throw COMException(hr);
 
     int options = pfos.value | FILEOPENDIALOGOPTIONS.FOS_FORCEFILESYSTEM;
-    hr = fileDialog.SetOptions(ptr, options);
+    hr = fileDialog.SetOptions(options);
     if (!SUCCEEDED(hr)) throw COMException(hr);
 
-    hr = fileDialog.SetDefaultExtension(ptr, TEXT('txt;csv'));
+    hr = fileDialog.SetDefaultExtension(TEXT('txt;csv'));
     if (!SUCCEEDED(hr)) throw COMException(hr);
 
-    hr = fileDialog.SetFileNameLabel(ptr, TEXT('Custom Label:'));
+    hr = fileDialog.SetFileNameLabel(TEXT('Custom Label:'));
     if (!SUCCEEDED(hr)) throw COMException(hr);
 
-    hr = fileDialog.SetTitle(ptr, TEXT('Custom Title'));
+    hr = fileDialog.SetTitle(TEXT('Custom Title'));
     if (!SUCCEEDED(hr)) throw COMException(hr);
 
-    hr = fileDialog.SetOkButtonLabel(ptr, TEXT('Go'));
+    hr = fileDialog.SetOkButtonLabel(TEXT('Go'));
     if (!SUCCEEDED(hr)) throw COMException(hr);
 
     final rgSpec = allocate<COMDLG_FILTERSPEC>(count: 3);
@@ -45,10 +44,10 @@ void main() {
     rgSpec[2]
       ..pszName = TEXT('All Files (*.*)')
       ..pszSpec = TEXT('*.*');
-    hr = fileDialog.SetFileTypes(ptr, 3, rgSpec);
+    hr = fileDialog.SetFileTypes(3, rgSpec);
     if (!SUCCEEDED(hr)) throw COMException(hr);
 
-    hr = fileDialog.Show(ptr, NULL);
+    hr = fileDialog.Show(NULL);
     if (!SUCCEEDED(hr)) {
       if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
         print('Dialog cancelled.');
@@ -56,30 +55,30 @@ void main() {
         throw COMException(hr);
       }
     } else {
-      final iShellItem = IShellItem.allocate();
-      hr = fileDialog.GetResult(ptr, iShellItem.addressOf);
+      final iShellItem = COMObject.allocate();
+      hr = fileDialog.GetResult(iShellItem.addressOf);
       if (!SUCCEEDED(hr)) throw COMException(hr);
 
-      final item = ShellItem(iShellItem.addressOf);
-      final path = allocate<IntPtr>();
-      hr = item.GetDisplayName(
-          iShellItem.lpVtbl, SIGDN.SIGDN_FILESYSPATH, path.cast());
+      final item = IShellItem(iShellItem.addressOf);
+      final pathPtr = allocate<IntPtr>();
+      hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtr.cast());
       if (!SUCCEEDED(hr)) throw COMException(hr);
 
-      final pathRes = Pointer<Utf16>.fromAddress(path.value);
+      final path = Pointer<Utf16>.fromAddress(pathPtr.value);
 
-      // MAX_PATH is a hack here, since this could be longer. Worst case is that
-      // we truncate too early.
-      print('Result: ${pathRes.unpackString(MAX_PATH)}');
+      // MAX_PATH may truncate early if long filename support is enabled
+      print('Result: ${path.unpackString(MAX_PATH)}');
 
-      hr = item.Release(iShellItem.lpVtbl);
+      hr = item.Release();
       if (!SUCCEEDED(hr)) throw COMException(hr);
     }
 
-    hr = fileDialog.Release(ptr);
+    hr = fileDialog.Release();
     if (!SUCCEEDED(hr)) throw COMException(hr);
   } else {
     throw COMException(hr);
   }
   CoUninitialize();
+
+  print('All done!');
 }
