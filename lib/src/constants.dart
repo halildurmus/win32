@@ -1181,6 +1181,37 @@ const CLSCTX_ALL = (CLSCTX_INPROC_SERVER |
     CLSCTX_LOCAL_SERVER |
     CLSCTX_REMOTE_SERVER);
 
+// RPC authentication
+const RPC_C_AUTHN_LEVEL_DEFAULT = 0;
+const RPC_C_AUTHN_LEVEL_NONE = 1;
+const RPC_C_AUTHN_LEVEL_CONNECT = 2;
+const RPC_C_AUTHN_LEVEL_CALL = 3;
+const RPC_C_AUTHN_LEVEL_PKT = 4;
+const RPC_C_AUTHN_LEVEL_PKT_INTEGRITY = 5;
+const RPC_C_AUTHN_LEVEL_PKT_PRIVACY = 6;
+
+const RPC_C_IMP_LEVEL_DEFAULT = 0;
+const RPC_C_IMP_LEVEL_ANONYMOUS = 1;
+const RPC_C_IMP_LEVEL_IDENTIFY = 2;
+const RPC_C_IMP_LEVEL_IMPERSONATE = 3;
+const RPC_C_IMP_LEVEL_DELEGATE = 4;
+
+const RPC_C_AUTHN_NONE = 0;
+const RPC_C_AUTHN_DCE_PRIVATE = 1;
+const RPC_C_AUTHN_DCE_PUBLIC = 2;
+const RPC_C_AUTHN_DEC_PUBLIC = 4;
+const RPC_C_AUTHN_GSS_NEGOTIATE = 9;
+const RPC_C_AUTHN_WINNT = 10;
+const RPC_C_AUTHN_GSS_SCHANNEL = 14;
+const RPC_C_AUTHN_GSS_KERBEROS = 16;
+const RPC_C_AUTHN_DPA = 17;
+const RPC_C_AUTHN_MSN = 18;
+
+const RPC_C_AUTHZ_NONE = 0;
+const RPC_C_AUTHZ_NAME = 1;
+const RPC_C_AUTHZ_DCE = 2;
+const RPC_C_AUTHZ_DEFAULT = 0xffffffff;
+
 // Known folder flags
 const KF_FLAG_DEFAULT = 0x00000000;
 const KF_FLAG_FORCE_APP_DATA_REDIRECTION = 0x00080000;
@@ -1428,4 +1459,47 @@ class SIGDN {
   static final int SIGDN_PARENTRELATIVEFORADDRESSBAR = 0x8007c001;
   static final int SIGDN_PARENTRELATIVE = 0x80080001;
   static final int SIGDN_PARENTRELATIVEFORUI = 0x8009400;
+}
+
+class EOLE_AUTHENTICATION_CAPABILITIES {
+  static final int EOAC_NONE = 0;
+  static final int EOAC_MUTUAL_AUTH = 0x1;
+  static final int EOAC_STATIC_CLOAKING = 0x20;
+  static final int EOAC_DYNAMIC_CLOAKING = 0x40;
+  static final int EOAC_ANY_AUTHORITY = 0x80;
+  static final int EOAC_MAKE_FULLSIC = 0x100;
+  static final int EOAC_DEFAULT = 0x800;
+  static final int EOAC_SECURE_REFS = 0x2;
+  static final int EOAC_ACCESS_CONTROL = 0x4;
+  static final int EOAC_APPID = 0x8;
+  static final int EOAC_DYNAMIC = 0x10;
+  static final int EOAC_REQUIRE_FULLSIC = 0x200;
+  static final int EOAC_AUTO_IMPERSONATE = 0x400;
+  static final int EOAC_DISABLE_AAA = 0x1000;
+  static final int EOAC_NO_CUSTOM_MARSHAL = 0x2000;
+  static final int EOAC_RESERVED1 = 0x4000;
+}
+
+class WBEM_GENERIC_FLAG_TYPE {
+  static final int WBEM_FLAG_RETURN_IMMEDIATELY = 0x10;
+  static final int WBEM_FLAG_RETURN_WBEM_COMPLETE = 0;
+  static final int WBEM_FLAG_BIDIRECTIONAL = 0;
+  static final int WBEM_FLAG_FORWARD_ONLY = 0x20;
+  static final int WBEM_FLAG_NO_ERROR_OBJECT = 0x40;
+  static final int WBEM_FLAG_RETURN_ERROR_OBJECT = 0;
+  static final int WBEM_FLAG_SEND_STATUS = 0x80;
+  static final int WBEM_FLAG_DONT_SEND_STATUS = 0;
+  static final int WBEM_FLAG_ENSURE_LOCATABLE = 0x100;
+  static final int WBEM_FLAG_DIRECT_READ = 0x200;
+  static final int WBEM_FLAG_SEND_ONLY_SELECTED = 0;
+  static final int WBEM_RETURN_WHEN_COMPLETE = 0;
+  static final int WBEM_RETURN_IMMEDIATELY = 0x10;
+  static final int WBEM_MASK_RESERVED_FLAGS = 0x1f000;
+  static final int WBEM_FLAG_USE_AMENDED_QUALIFIERS = 0x20000;
+  static final int WBEM_FLAG_STRONG_VALIDATION = 0x100000;
+}
+
+class WBEM_TIMEOUT_TYPE {
+  static final int WBEM_NO_WAIT = 0;
+  static final int WBEM_INFINITE = 0xffffffff;
 }

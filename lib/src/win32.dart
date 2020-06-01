@@ -239,6 +239,12 @@ final CoCreateInstance =
         'CoCreateInstance');
 final CoInitializeEx = ole32
     .lookupFunction<coInitializeExNative, coInitializeExDart>('CoInitializeEx');
+final CoInitializeSecurity =
+    ole32.lookupFunction<coInitializeSecurityNative, coInitializeSecurityDart>(
+        'CoInitializeSecurity');
+final CoSetProxyBlanket =
+    ole32.lookupFunction<coSetProxyBlanketNative, coSetProxyBlanketDart>(
+        'CoSetProxyBlanket');
 final CoTaskMemFree = ole32
     .lookupFunction<coTaskMemFreeNative, coTaskMemFreeDart>('CoTaskMemFree');
 final CoUninitialize = ole32

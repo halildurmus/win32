@@ -1,9 +1,12 @@
 import 'dart:ffi';
 
-import 'package:win32/win32.dart';
-
 import 'IFileDialog.dart';
 import 'combase.dart';
+
+import '../constants.dart';
+import '../macros.dart';
+import '../structs.dart';
+import '../win32.dart';
 
 const CLSID_FileSaveDialog = '{C0B4E2F3-BA21-4773-8DBA-335EC946EB8B}';
 const IID_IFileSaveDialog = '{84bccd23-5fde-4cdb-aea4-af64b83d78ab}';
