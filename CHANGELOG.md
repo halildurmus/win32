@@ -1,3 +1,7 @@
+## 1.4.1
+
+ - Expand COM support to include IShellItemArray and various WMI classes
+
 ## 1.4.0
 
  - Add COM support

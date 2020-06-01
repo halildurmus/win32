@@ -52,7 +52,8 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `guid.dart`        | Creates a globally unique identifier (GUID)               |
 | `devices.dart`     | Uses volume management APIs to list all disk devices      |
 | `snake.dart`       | Snake game using various GDI features                     |
-| `dialogshow.dart`  | Example of using a COM API                                |
+| `dialogshow.dart`  | Creates a common item dialog (file picker) using COM)     |
+| `wmi.dart`         | Using WMI from COM to retrieve device/OS information      |
 | `tetris\main.dart` | Port of an open-source Tetris game to Dart                |
 | `notepad\notepad.dart` | Lightweight replica of the Windows notepad applet     |
 
