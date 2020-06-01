@@ -13,7 +13,7 @@
 void main()
 {
     auto test = GUID();
-    SUCCEEDED(E_NOINTERFACE);
+    auto iid = IID_IFileDialog;
 
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));

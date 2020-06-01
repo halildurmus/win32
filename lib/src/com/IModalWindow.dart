@@ -9,6 +9,8 @@ typedef Show_Native = Int32 Function(Pointer obj, IntPtr hwndOwner);
 typedef Show_Dart = int Function(Pointer obj, int hwndOwner);
 
 class IModalWindow extends IUnknown {
+  // vtable begins at 3, ends at 3
+
   @override
   Pointer<COMObject> ptr;
 
