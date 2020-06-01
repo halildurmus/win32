@@ -239,7 +239,17 @@ final CoCreateInstance =
         'CoCreateInstance');
 final CoInitializeEx = ole32
     .lookupFunction<coInitializeExNative, coInitializeExDart>('CoInitializeEx');
+final CoInitializeSecurity =
+    ole32.lookupFunction<coInitializeSecurityNative, coInitializeSecurityDart>(
+        'CoInitializeSecurity');
+final CoSetProxyBlanket =
+    ole32.lookupFunction<coSetProxyBlanketNative, coSetProxyBlanketDart>(
+        'CoSetProxyBlanket');
 final CoTaskMemFree = ole32
     .lookupFunction<coTaskMemFreeNative, coTaskMemFreeDart>('CoTaskMemFree');
 final CoUninitialize = ole32
     .lookupFunction<coUninitializeNative, coUninitializeDart>('CoUninitialize');
+
+final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+final VariantClear = oleaut32
+    .lookupFunction<variantClearNative, variantClearDart>('VariantClear');

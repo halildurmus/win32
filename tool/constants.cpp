@@ -9,11 +9,12 @@
 #include <windows.h>
 #include <stdio.h>
 #include <ShlObj_core.h>
+#include <wbemidl.h>
 
 void main()
 {
-    auto test = GUID();
-    auto iid = IID_IFileDialog;
+    auto test = VARIANT();
+    auto iid = IID_IEnumWbemClassObject;
 
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));

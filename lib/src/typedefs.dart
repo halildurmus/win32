@@ -80,6 +80,67 @@ typedef coInitializeExNative = Int32 Function(
 typedef coInitializeExDart = int Function(
     Pointer<Void> pvReserved, int dwCoInit);
 
+// HRESULT CoInitializeSecurity(
+//   PSECURITY_DESCRIPTOR        pSecDesc,
+//   LONG                        cAuthSvc,
+//   SOLE_AUTHENTICATION_SERVICE *asAuthSvc,
+//   void                        *pReserved1,
+//   DWORD                       dwAuthnLevel,
+//   DWORD                       dwImpLevel,
+//   void                        *pAuthList,
+//   DWORD                       dwCapabilities,
+//   void                        *pReserved3
+// );
+typedef coInitializeSecurityNative = Int32 Function(
+    Pointer<SECURITY_DESCRIPTOR> pSecDesc,
+    Int32 cAuthSvc,
+    Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
+    Pointer<Void> pReserved1,
+    Int32 dwAuthnLevel,
+    Int32 dwImpLevel,
+    Pointer<Void> pAuthList,
+    Int32 dwCapabilities,
+    Pointer<Void> pReserved3);
+typedef coInitializeSecurityDart = int Function(
+    Pointer<SECURITY_DESCRIPTOR> pSecDesc,
+    int cAuthSvc,
+    Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
+    Pointer<Void> pReserved1,
+    int dwAuthnLevel,
+    int dwImpLevel,
+    Pointer<Void> pAuthList,
+    int dwCapabilities,
+    Pointer<Void> pReserved3);
+
+// HRESULT CoSetProxyBlanket(
+//   IUnknown                 *pProxy,
+//   DWORD                    dwAuthnSvc,
+//   DWORD                    dwAuthzSvc,
+//   OLECHAR                  *pServerPrincName,
+//   DWORD                    dwAuthnLevel,
+//   DWORD                    dwImpLevel,
+//   RPC_AUTH_IDENTITY_HANDLE pAuthInfo,
+//   DWORD                    dwCapabilities
+// );
+typedef coSetProxyBlanketNative = Int32 Function(
+    Pointer pProxy,
+    Int32 dwAuthnSvc,
+    Int32 dwAuthzSvc,
+    Pointer<Utf16> pServerPrincName,
+    Int32 dwAuthnLevel,
+    Int32 dwImpLevel,
+    Pointer<Void> pAuthInfo,
+    Int32 dwCapabilities);
+typedef coSetProxyBlanketDart = int Function(
+    Pointer pProxy,
+    int dwAuthnSvc,
+    int dwAuthzSvc,
+    Pointer<Utf16> pServerPrincName,
+    int dwAuthnLevel,
+    int dwImpLevel,
+    Pointer<Void> pAuthInfo,
+    int dwCapabilities);
+
 // void CoTaskMemFree(
 //   _Frees_ptr_opt_ LPVOID pv
 // );
@@ -89,6 +150,7 @@ typedef coTaskMemFreeDart = void Function(Pointer<Void> pv);
 // void CoUninitialize();
 typedef coUninitializeNative = Void Function();
 typedef coUninitializeDart = void Function();
+
 // HACCEL CreateAcceleratorTableW(
 //   LPACCEL paccel,
 //   int     cAccel
@@ -911,6 +973,12 @@ typedef postQuitMessageDart = void Function(int nExitCode);
 // );
 typedef updateWindowNative = Int32 Function(IntPtr hWnd);
 typedef updateWindowDart = int Function(int hWnd);
+
+// HRESULT VariantClear(
+//   VARIANTARG *pvarg
+// );
+typedef variantClearNative = Int32 Function(Pointer pvarg);
+typedef variantClearDart = int Function(Pointer pvarg);
 
 // LPVOID VirtualAlloc(
 //   LPVOID lpAddress,

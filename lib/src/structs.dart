@@ -74,6 +74,93 @@ class SECURITY_ATTRIBUTES extends Struct {
   int bInheritHandle;
 }
 
+// typedef struct _SECURITY_DESCRIPTOR {
+//   BYTE                        Revision;
+//   BYTE                        Sbz1;
+//   SECURITY_DESCRIPTOR_CONTROL Control;
+//   PSID                        Owner;
+//   PSID                        Group;
+//   PACL                        Sacl;
+//   PACL                        Dacl;
+// } SECURITY_DESCRIPTOR, *PISECURITY_DESCRIPTOR;
+class SECURITY_DESCRIPTOR extends Struct {
+  @Int8()
+  int Revision;
+
+  @Int8()
+  int Sbz1;
+
+  @Int16()
+  int Control;
+
+  Pointer<IntPtr> Owner;
+  Pointer<IntPtr> Group;
+  Pointer<IntPtr> Sacl;
+  Pointer<IntPtr> Dacl;
+
+  factory SECURITY_DESCRIPTOR.allocate() => allocate<SECURITY_DESCRIPTOR>().ref
+    ..Revision = 0
+    ..Sbz1 = 0
+    ..Control = 0
+    ..Owner = nullptr
+    ..Group = nullptr
+    ..Sacl = nullptr
+    ..Dacl = nullptr;
+}
+
+// typedef struct tagSOLE_AUTHENTICATION_SERVICE {
+//   DWORD   dwAuthnSvc;
+//   DWORD   dwAuthzSvc;
+//   OLECHAR *pPrincipalName;
+//   HRESULT hr;
+// } SOLE_AUTHENTICATION_SERVICE;
+class SOLE_AUTHENTICATION_SERVICE extends Struct {
+  @Int32()
+  int dwAuthnSvc;
+
+  @Int32()
+  int dwAuthzSvc;
+
+  Pointer<Utf16> pPrincipalName;
+
+  @Int32()
+  int hr;
+
+  factory SOLE_AUTHENTICATION_SERVICE.allocate() =>
+      allocate<SOLE_AUTHENTICATION_SERVICE>().ref
+        ..dwAuthnSvc = 0
+        ..dwAuthzSvc = 0
+        ..pPrincipalName = nullptr
+        ..hr = 0;
+}
+
+// The VARIANT type is used in Win32 to represent a dynamic type. It is
+// represented as a struct containing a union of the types that could be
+// stored. At the time this code was authored, Dart FFI does not support union
+// types. However, in many scenarios, it is possible to guarantee that the
+// returned value will be a Pointer, and so this struct is available for that
+// usage. This class will be replaced as/when FFI supports a more comprehensive
+// projection of this type.
+class VARIANT_POINTER extends Struct {
+  @Int16()
+  int vt;
+  @Int16()
+  int wReserved1;
+  @Int16()
+  int wReserved2;
+  @Int16()
+  int wReserved3;
+
+  Pointer<IntPtr> ptr;
+
+  factory VARIANT_POINTER.allocate() => allocate<VARIANT_POINTER>().ref
+    ..vt = 0
+    ..wReserved1 = 0
+    ..wReserved2 = 0
+    ..wReserved3 = 0
+    ..ptr = nullptr;
+}
+
 // typedef struct _COMDLG_FILTERSPEC {
 //   LPCWSTR pszName;
 //   LPCWSTR pszSpec;
