@@ -15,7 +15,7 @@ void main() {
     throw COMException(hr);
   }
 
-  // Initialize
+  // Initialize security model
   hr = CoInitializeSecurity(
       nullptr,
       -1, // COM negotiates service
@@ -38,14 +38,14 @@ void main() {
 
   // Obtain the initial locator to Windows Management
   // on a particular host computer.
-  IWbemLocator pLoc = IWbemLocator(COMObject.allocate().addressOf); // CHECK
+  IWbemLocator pLoc = IWbemLocator(COMObject.allocate().addressOf);
 
   hr = CoCreateInstance(
       GUID.fromString(CLSID_WbemLocator).addressOf,
       nullptr,
       CLSCTX_INPROC_SERVER,
       GUID.fromString(IID_IWbemLocator).addressOf,
-      pLoc.ptr.cast()); // CHECK
+      pLoc.ptr.cast());
 
   if (FAILED(hr)) {
     final exception = COMException(hr);
@@ -55,7 +55,7 @@ void main() {
     throw exception;
   }
 
-  final proxy = allocate<IntPtr>(); // CHECK
+  final proxy = allocate<IntPtr>();
 
   // Connect to the root\cimv2 namespace with the
   // current user and obtain pointer pSvc
@@ -69,7 +69,7 @@ void main() {
       NULL, // Security flags
       nullptr, // Authority
       nullptr, // Context object
-      proxy // IWbemServices proxy // CHECK
+      proxy // IWbemServices proxy
       );
 
   if (FAILED(hr)) {
@@ -84,10 +84,11 @@ void main() {
   print('Connected to ROOT\\CIMV2 WMI namespace');
 
   final pSvc = IWbemServices(proxy.cast());
+
   // Set the IWbemServices proxy so that impersonation
   // of the user (client) occurs.
   hr = CoSetProxyBlanket(
-      Pointer.fromAddress(proxy.value), // the proxy to set // CHECK
+      Pointer.fromAddress(proxy.value), // the proxy to set
       RPC_C_AUTHN_WINNT, // authentication service
       RPC_C_AUTHZ_NONE, // authorization service
       nullptr, // Server principal name
@@ -106,16 +107,12 @@ void main() {
     throw exception; // Program has failed.
   }
 
-  print('Proxy set');
-
   // Use the IWbemServices pointer to make requests of WMI.
-  // Make requests here:
 
-  // For example, query for all the running processes
-
-  var pEnumerator = allocate<IntPtr>(); // CHECK
+  final pEnumerator = allocate<IntPtr>();
   IEnumWbemClassObject enumerator;
 
+  // For example, query for all the running processes
   hr = pSvc.ExecQuery(
       TEXT('WQL'),
       TEXT('SELECT * FROM Win32_Process'),
@@ -131,17 +128,16 @@ void main() {
     pSvc.Release();
     pLoc.Release();
     CoUninitialize();
-    throw exception; // Program has failed.
-  } else {
-    print('Query executed');
 
-    enumerator = IEnumWbemClassObject(pEnumerator.cast()); // CHECK
+    throw exception;
+  } else {
+    enumerator = IEnumWbemClassObject(pEnumerator.cast());
 
     final uReturn = allocate<Uint32>();
 
     int idx = 0;
     while (enumerator.ptr.address > 0) {
-      var pClsObj = allocate<IntPtr>();
+      final pClsObj = allocate<IntPtr>();
 
       hr =
           enumerator.Next(WBEM_TIMEOUT_TYPE.WBEM_INFINITE, 1, pClsObj, uReturn);
@@ -156,7 +152,7 @@ void main() {
       // A VARIANT is a union struct, which can't be directly represented by
       // FFI yet. In this case we know that the VARIANT can only contain a BSTR
       // so we are able to use a specialized variant.
-      var vtProp = VARIANT_POINTER.allocate();
+      final vtProp = VARIANT_POINTER.allocate();
       hr = clsObj.Get(TEXT('Name'), 0, vtProp.addressOf, nullptr, nullptr);
       if (SUCCEEDED(hr)) {
         print('Process: ${vtProp.ptr.cast<Utf16>().unpackString(256)}');
@@ -168,13 +164,9 @@ void main() {
     print('$idx processes found.');
   }
 
-  // Cleanup
-  // ========
   pSvc.Release();
   pLoc.Release();
   enumerator.Release();
 
   CoUninitialize();
-
-  return; // Program successfully completed.
 }
