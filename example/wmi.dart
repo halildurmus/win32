@@ -139,7 +139,7 @@ void main() {
 
     final uReturn = allocate<Uint32>();
 
-    int idx = 1;
+    int idx = 0;
     while (enumerator.ptr.address > 0) {
       var pClsObj = allocate<IntPtr>();
 
@@ -156,14 +156,12 @@ void main() {
       // A VARIANT is a union struct, which can't be directly represented by
       // FFI yet. In this case we know that the VARIANT can only contain a BSTR
       // so we are able to use a specialized variant.
-      var vtProp = allocate<IntPtr>(count: 2);
-
-      hr = clsObj.Get(TEXT('Name'), 0, vtProp, nullptr, nullptr);
-
-      // First 4 x 16 entries can be ignored, the rest is a BSTR
-      Pointer<Utf16> process = Pointer.fromAddress(vtProp.elementAt(1).value);
-      print('Process Name : ${process.unpackString(256)}');
-      VariantClear(vtProp);
+      var vtProp = VARIANT_POINTER.allocate();
+      hr = clsObj.Get(TEXT('Name'), 0, vtProp.addressOf, nullptr, nullptr);
+      if (SUCCEEDED(hr)) {
+        print('Process: ${vtProp.ptr.cast<Utf16>().unpackString(256)}');
+      }
+      VariantClear(vtProp.addressOf);
 
       clsObj.Release();
     }
