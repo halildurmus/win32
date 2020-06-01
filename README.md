@@ -4,8 +4,15 @@ them accessible to Dart code without requiring a C compiler or the Windows SDK.
 [![pub package](https://img.shields.io/pub/v/win32.svg)](https://pub.dev/packages/win32)
 [![Language](https://img.shields.io/badge/language-Dart-blue.svg)](https://dart.dev)
 
-Perhaps of more use than the APIs themselves, this package provides a variety of
+Perhaps of as much use as the APIs themselves, this package provides a variety of
 instructive examples for more complex FFI usage scenarios.
+
+By design, this package provides minimal modifications to the Win32 API to support
+Dart idioms. The goal is to provide high familiarity to an existing Win32 developer.
+Other plugins may build on these primitives to provide a friendly API for Dart and
+Flutter developers. A good example of that is
+[filepicker_windows](https://pub.dev/packages/filepicker_windows), which offers a
+common item dialog suitable for incorporation into an existing Flutter app.
 
 ## Requirements
 
@@ -36,7 +43,7 @@ dart2native example\hello.dart -o example\bin\hello.exe
 
 ### Dart samples
 
-The package includes several examples in the `example` subdirectory. These
+The package includes a number of examples in the `example` subdirectory. These
 examples use the Win32 API for all UI display and do not require Flutter.
 
 | Example            | Description                                               |
