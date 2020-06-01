@@ -105,13 +105,15 @@ void main() {
     throw exception; // Program has failed.
   }
 
+  print('Proxy set');
+
   // Use the IWbemServices pointer to make requests of WMI.
   // Make requests here:
 
   // For example, query for all the running processes
   IEnumWbemClassObject pEnumerator =
       IEnumWbemClassObject(COMObject.allocate().addressOf); // CHECK
-  ;
+
   hres = pSvc.ExecQuery(
       TEXT('WQL'),
       TEXT('SELECT * FROM Win32_Process'),
@@ -128,6 +130,8 @@ void main() {
     CoUninitialize();
     throw exception; // Program has failed.
   } else {
+    print('Query executed');
+
     IWbemClassObject pclsObj = IWbemClassObject(COMObject.allocate().addressOf);
     final uReturn = allocate<Uint32>();
 
