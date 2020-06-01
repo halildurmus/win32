@@ -13,6 +13,8 @@ typedef GetDisplayName_Dart = int Function(
     Pointer obj, int sigdnName, Pointer<Utf16> ppszName);
 
 class IShellItem extends IUnknown {
+  // vtable begins at 3, ends at 7
+
   @override
   Pointer<COMObject> ptr;
 

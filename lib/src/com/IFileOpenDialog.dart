@@ -11,14 +11,24 @@ const IID_IFileOpenDialog = '{d57c7288-d4ad-4768-be02-9d969532d960}';
 typedef GetResults_Native = Int32 Function(Pointer obj, Pointer ppenum);
 typedef GetResults_Dart = int Function(Pointer obj, Pointer ppenum);
 
+typedef GetSelectedItems_Native = Int32 Function(Pointer obj, Pointer ppsai);
+typedef GetSelectedItems_Dart = int Function(Pointer obj, Pointer ppsai);
+
 class IFileOpenDialog extends IFileDialog {
+  // vtable begins at 27, ends at 28
+
   @override
   Pointer<COMObject> ptr;
 
   int GetResults(Pointer ppenum) =>
       Pointer<NativeFunction<GetResults_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
+              ptr.ref.vtable.elementAt(27).value)
           .asFunction<GetResults_Dart>()(ptr.ref.lpVtbl, ppenum);
+
+  int GetSelectedItems(Pointer ppsai) =>
+      Pointer<NativeFunction<GetSelectedItems_Native>>.fromAddress(
+              ptr.ref.vtable.elementAt(28).value)
+          .asFunction<GetSelectedItems_Dart>()(ptr.ref.lpVtbl, ppsai);
 
   IFileOpenDialog(this.ptr) : super(ptr);
 }
@@ -34,7 +44,7 @@ class FileOpenDialog extends IFileOpenDialog {
         GUID.fromString(CLSID_FileOpenDialog).addressOf,
         nullptr,
         CLSCTX_ALL,
-        GUID.fromString(IID_IFileDialog).addressOf,
+        GUID.fromString(IID_IFileOpenDialog).addressOf,
         ptr.cast());
 
     if (!SUCCEEDED(hr)) throw COMException(hr);

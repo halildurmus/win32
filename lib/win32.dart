@@ -18,6 +18,12 @@ export 'src/com/IFileOpenDialog.dart'
         IID_IFileOpenDialog,
         FileOpenDialog,
         CLSID_FileOpenDialog;
+export 'src/com/IFileSaveDialog.dart'
+    show
+        IFileSaveDialog,
+        IID_IFileSaveDialog,
+        FileSaveDialog,
+        CLSID_FileSaveDialog;
 export 'src/com/IFileDialog.dart' show IFileDialog, IID_IFileDialog;
 export 'src/com/IModalWindow.dart' show IModalWindow, IID_IModalWindow;
 export 'src/com/IUnknown.dart' show IUnknown, IID_IUnknown;

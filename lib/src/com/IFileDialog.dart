@@ -45,6 +45,8 @@ typedef SetDefaultExtension_Dart = int Function(
     Pointer obj, Pointer<Utf16> pszDefaultExtension);
 
 class IFileDialog extends IModalWindow {
+  // vtable begins at 4, ends at 26
+
   @override
   Pointer<COMObject> ptr;
 

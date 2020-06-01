@@ -17,6 +17,8 @@ typedef Release_Native = Int32 Function(Pointer obj);
 typedef Release_Dart = int Function(Pointer obj);
 
 class IUnknown {
+  // vtable begins at 0, ends at 2
+
   Pointer<COMObject> ptr;
 
   IUnknown(this.ptr);
