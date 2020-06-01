@@ -55,7 +55,7 @@ void main() {
     throw exception;
   }
 
-  IWbemServices pSvc = IWbemServices(COMObject.allocate().addressOf); // CHECK
+  final proxy = allocate<IntPtr>(); // CHECK
 
   // Connect to the root\cimv2 namespace with the
   // current user and obtain pointer pSvc
@@ -69,7 +69,7 @@ void main() {
       NULL, // Security flags
       nullptr, // Authority
       nullptr, // Context object
-      pSvc.ptr.cast() // IWbemServices proxy // CHECK
+      proxy // IWbemServices proxy // CHECK
       );
 
   if (FAILED(hres)) {
@@ -83,10 +83,11 @@ void main() {
 
   print('Connected to ROOT\\CIMV2 WMI namespace');
 
+  final pSvc = IWbemServices(proxy.cast());
   // Set the IWbemServices proxy so that impersonation
   // of the user (client) occurs.
   hres = CoSetProxyBlanket(
-      pSvc.ptr.cast(), // the proxy to set // CHECK
+      Pointer.fromAddress(proxy.value), // the proxy to set // CHECK
       RPC_C_AUTHN_WINNT, // authentication service
       RPC_C_AUTHZ_NONE, // authorization service
       nullptr, // Server principal name
