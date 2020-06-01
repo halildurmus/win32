@@ -134,6 +134,33 @@ class SOLE_AUTHENTICATION_SERVICE extends Struct {
         ..hr = 0;
 }
 
+// The VARIANT type is used in Win32 to represent a dynamic type. It is
+// represented as a struct containing a union of the types that could be
+// stored. At the time this code was authored, Dart FFI does not support union
+// types. However, in many scenarios, it is possible to guarantee that the
+// returned value will be a Pointer, and so this struct is available for that
+// usage. This class will be replaced as/when FFI supports a more comprehensive
+// projection of this type.
+class VARIANT_POINTER extends Struct {
+  @Int16()
+  int vt;
+  @Int16()
+  int wReserved1;
+  @Int16()
+  int wReserved2;
+  @Int16()
+  int wReserved3;
+
+  Pointer<IntPtr> ptr;
+
+  factory VARIANT_POINTER.allocate() => allocate<VARIANT_POINTER>().ref
+    ..vt = 0
+    ..wReserved1 = 0
+    ..wReserved2 = 0
+    ..wReserved3 = 0
+    ..ptr = nullptr;
+}
+
 // typedef struct _COMDLG_FILTERSPEC {
 //   LPCWSTR pszName;
 //   LPCWSTR pszSpec;
