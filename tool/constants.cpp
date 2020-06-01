@@ -13,7 +13,7 @@
 void main()
 {
     auto test = GUID();
-    auto iid = IID_IShellItem;
+    auto iid = IID_IFileDialog;
 
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));

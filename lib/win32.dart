@@ -11,6 +11,7 @@ export 'src/macros.dart';
 export 'src/structs.dart';
 export 'src/win32.dart' hide user32, gdi32, kernel32, shell32, comdlg32, ole32;
 
+export 'src/com/IShellItemArray.dart' show IShellItemArray, IID_IShellItemArray;
 export 'src/com/IShellItem.dart' show IShellItem, IID_IShellItem;
 export 'src/com/IFileOpenDialog.dart'
     show

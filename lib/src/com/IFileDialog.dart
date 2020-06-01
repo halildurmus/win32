@@ -13,6 +13,9 @@ typedef SetFileTypes_Native = Int32 Function(
 typedef SetFileTypes_Dart = int Function(
     Pointer obj, int cFileTypes, Pointer rgFilterSpec);
 
+typedef SetFileTypeIndex_Native = Int32 Function(Pointer obj, Uint32 iFileType);
+typedef SetFileTypeIndex_Dart = int Function(Pointer obj, int iFileType);
+
 typedef SetOptions_Native = Int32 Function(Pointer obj, Int32 fos);
 typedef SetOptions_Dart = int Function(Pointer obj, int fos);
 
@@ -55,6 +58,11 @@ class IFileDialog extends IModalWindow {
                   ptr.ref.vtable.elementAt(4).value)
               .asFunction<SetFileTypes_Dart>()(
           ptr.ref.lpVtbl, cFileTypes, rgFilterSpec);
+
+  int SetFileTypeIndex(int iFileType) =>
+      Pointer<NativeFunction<SetFileTypeIndex_Native>>.fromAddress(
+              ptr.ref.vtable.elementAt(5).value)
+          .asFunction<SetFileTypeIndex_Dart>()(ptr.ref.lpVtbl, iFileType);
 
   int SetOptions(int fos) =>
       Pointer<NativeFunction<SetOptions_Native>>.fromAddress(
