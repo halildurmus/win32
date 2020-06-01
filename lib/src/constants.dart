@@ -1423,83 +1423,83 @@ const MEM_RELEASE = 0x00008000;
 const MEM_FREE = 0x00010000;
 
 class FILEOPENDIALOGOPTIONS {
-  static final int FOS_OVERWRITEPROMPT = 0x2;
-  static final int FOS_STRICTFILETYPES = 0x4;
-  static final int FOS_NOCHANGEDIR = 0x8;
-  static final int FOS_PICKFOLDERS = 0x20;
-  static final int FOS_FORCEFILESYSTEM = 0x40;
-  static final int FOS_ALLNONSTORAGEITEMS = 0x80;
-  static final int FOS_NOVALIDATE = 0x100;
-  static final int FOS_ALLOWMULTISELECT = 0x200;
-  static final int FOS_PATHMUSTEXIST = 0x800;
-  static final int FOS_FILEMUSTEXIST = 0x1000;
-  static final int FOS_CREATEPROMPT = 0x2000;
-  static final int FOS_SHAREAWARE = 0x4000;
-  static final int FOS_NOREADONLYRETURN = 0x8000;
-  static final int FOS_NOTESTFILECREATE = 0x10000;
-  static final int FOS_HIDEMRUPLACES = 0x20000;
-  static final int FOS_HIDEPINNEDPLACES = 0x40000;
-  static final int FOS_NODEREFERENCELINKS = 0x100000;
-  static final int FOS_OKBUTTONNEEDSINTERACTION = 0x200000;
-  static final int FOS_DONTADDTORECENT = 0x2000000;
-  static final int FOS_FORCESHOWHIDDEN = 0x10000000;
-  static final int FOS_DEFAULTNOMINIMODE = 0x20000000;
-  static final int FOS_FORCEPREVIEWPANEON = 0x40000000;
-  static final int FOS_SUPPORTSTREAMABLEITEMS = 0x80000000;
+  static final FOS_OVERWRITEPROMPT = 0x2;
+  static final FOS_STRICTFILETYPES = 0x4;
+  static final FOS_NOCHANGEDIR = 0x8;
+  static final FOS_PICKFOLDERS = 0x20;
+  static final FOS_FORCEFILESYSTEM = 0x40;
+  static final FOS_ALLNONSTORAGEITEMS = 0x80;
+  static final FOS_NOVALIDATE = 0x100;
+  static final FOS_ALLOWMULTISELECT = 0x200;
+  static final FOS_PATHMUSTEXIST = 0x800;
+  static final FOS_FILEMUSTEXIST = 0x1000;
+  static final FOS_CREATEPROMPT = 0x2000;
+  static final FOS_SHAREAWARE = 0x4000;
+  static final FOS_NOREADONLYRETURN = 0x8000;
+  static final FOS_NOTESTFILECREATE = 0x10000;
+  static final FOS_HIDEMRUPLACES = 0x20000;
+  static final FOS_HIDEPINNEDPLACES = 0x40000;
+  static final FOS_NODEREFERENCELINKS = 0x100000;
+  static final FOS_OKBUTTONNEEDSINTERACTION = 0x200000;
+  static final FOS_DONTADDTORECENT = 0x2000000;
+  static final FOS_FORCESHOWHIDDEN = 0x10000000;
+  static final FOS_DEFAULTNOMINIMODE = 0x20000000;
+  static final FOS_FORCEPREVIEWPANEON = 0x40000000;
+  static final FOS_SUPPORTSTREAMABLEITEMS = 0x80000000;
 }
 
 class SIGDN {
-  static final int SIGDN_NORMALDISPLAY = 0;
-  static final int SIGDN_PARENTRELATIVEPARSING = 0x80018001;
-  static final int SIGDN_DESKTOPABSOLUTEPARSING = 0x80028000;
-  static final int SIGDN_PARENTRELATIVEEDITING = 0x80031001;
-  static final int SIGDN_DESKTOPABSOLUTEEDITING = 0x8004c000;
-  static final int SIGDN_FILESYSPATH = 0x80058000;
-  static final int SIGDN_URL = 0x80068000;
-  static final int SIGDN_PARENTRELATIVEFORADDRESSBAR = 0x8007c001;
-  static final int SIGDN_PARENTRELATIVE = 0x80080001;
-  static final int SIGDN_PARENTRELATIVEFORUI = 0x8009400;
+  static final SIGDN_NORMALDISPLAY = 0;
+  static final SIGDN_PARENTRELATIVEPARSING = 0x80018001;
+  static final SIGDN_DESKTOPABSOLUTEPARSING = 0x80028000;
+  static final SIGDN_PARENTRELATIVEEDITING = 0x80031001;
+  static final SIGDN_DESKTOPABSOLUTEEDITING = 0x8004c000;
+  static final SIGDN_FILESYSPATH = 0x80058000;
+  static final SIGDN_URL = 0x80068000;
+  static final SIGDN_PARENTRELATIVEFORADDRESSBAR = 0x8007c001;
+  static final SIGDN_PARENTRELATIVE = 0x80080001;
+  static final SIGDN_PARENTRELATIVEFORUI = 0x8009400;
 }
 
 class EOLE_AUTHENTICATION_CAPABILITIES {
-  static final int EOAC_NONE = 0;
-  static final int EOAC_MUTUAL_AUTH = 0x1;
-  static final int EOAC_STATIC_CLOAKING = 0x20;
-  static final int EOAC_DYNAMIC_CLOAKING = 0x40;
-  static final int EOAC_ANY_AUTHORITY = 0x80;
-  static final int EOAC_MAKE_FULLSIC = 0x100;
-  static final int EOAC_DEFAULT = 0x800;
-  static final int EOAC_SECURE_REFS = 0x2;
-  static final int EOAC_ACCESS_CONTROL = 0x4;
-  static final int EOAC_APPID = 0x8;
-  static final int EOAC_DYNAMIC = 0x10;
-  static final int EOAC_REQUIRE_FULLSIC = 0x200;
-  static final int EOAC_AUTO_IMPERSONATE = 0x400;
-  static final int EOAC_DISABLE_AAA = 0x1000;
-  static final int EOAC_NO_CUSTOM_MARSHAL = 0x2000;
-  static final int EOAC_RESERVED1 = 0x4000;
+  static final EOAC_NONE = 0;
+  static final EOAC_MUTUAL_AUTH = 0x1;
+  static final EOAC_STATIC_CLOAKING = 0x20;
+  static final EOAC_DYNAMIC_CLOAKING = 0x40;
+  static final EOAC_ANY_AUTHORITY = 0x80;
+  static final EOAC_MAKE_FULLSIC = 0x100;
+  static final EOAC_DEFAULT = 0x800;
+  static final EOAC_SECURE_REFS = 0x2;
+  static final EOAC_ACCESS_CONTROL = 0x4;
+  static final EOAC_APPID = 0x8;
+  static final EOAC_DYNAMIC = 0x10;
+  static final EOAC_REQUIRE_FULLSIC = 0x200;
+  static final EOAC_AUTO_IMPERSONATE = 0x400;
+  static final EOAC_DISABLE_AAA = 0x1000;
+  static final EOAC_NO_CUSTOM_MARSHAL = 0x2000;
+  static final EOAC_RESERVED1 = 0x4000;
 }
 
 class WBEM_GENERIC_FLAG_TYPE {
-  static final int WBEM_FLAG_RETURN_IMMEDIATELY = 0x10;
-  static final int WBEM_FLAG_RETURN_WBEM_COMPLETE = 0;
-  static final int WBEM_FLAG_BIDIRECTIONAL = 0;
-  static final int WBEM_FLAG_FORWARD_ONLY = 0x20;
-  static final int WBEM_FLAG_NO_ERROR_OBJECT = 0x40;
-  static final int WBEM_FLAG_RETURN_ERROR_OBJECT = 0;
-  static final int WBEM_FLAG_SEND_STATUS = 0x80;
-  static final int WBEM_FLAG_DONT_SEND_STATUS = 0;
-  static final int WBEM_FLAG_ENSURE_LOCATABLE = 0x100;
-  static final int WBEM_FLAG_DIRECT_READ = 0x200;
-  static final int WBEM_FLAG_SEND_ONLY_SELECTED = 0;
-  static final int WBEM_RETURN_WHEN_COMPLETE = 0;
-  static final int WBEM_RETURN_IMMEDIATELY = 0x10;
-  static final int WBEM_MASK_RESERVED_FLAGS = 0x1f000;
-  static final int WBEM_FLAG_USE_AMENDED_QUALIFIERS = 0x20000;
-  static final int WBEM_FLAG_STRONG_VALIDATION = 0x100000;
+  static final WBEM_FLAG_RETURN_IMMEDIATELY = 0x10;
+  static final WBEM_FLAG_RETURN_WBEM_COMPLETE = 0;
+  static final WBEM_FLAG_BIDIRECTIONAL = 0;
+  static final WBEM_FLAG_FORWARD_ONLY = 0x20;
+  static final WBEM_FLAG_NO_ERROR_OBJECT = 0x40;
+  static final WBEM_FLAG_RETURN_ERROR_OBJECT = 0;
+  static final WBEM_FLAG_SEND_STATUS = 0x80;
+  static final WBEM_FLAG_DONT_SEND_STATUS = 0;
+  static final WBEM_FLAG_ENSURE_LOCATABLE = 0x100;
+  static final WBEM_FLAG_DIRECT_READ = 0x200;
+  static final WBEM_FLAG_SEND_ONLY_SELECTED = 0;
+  static final WBEM_RETURN_WHEN_COMPLETE = 0;
+  static final WBEM_RETURN_IMMEDIATELY = 0x10;
+  static final WBEM_MASK_RESERVED_FLAGS = 0x1f000;
+  static final WBEM_FLAG_USE_AMENDED_QUALIFIERS = 0x20000;
+  static final WBEM_FLAG_STRONG_VALIDATION = 0x100000;
 }
 
 class WBEM_TIMEOUT_TYPE {
-  static final int WBEM_NO_WAIT = 0;
-  static final int WBEM_INFINITE = 0xffffffff;
+  static final WBEM_NO_WAIT = 0;
+  static final WBEM_INFINITE = 0xffffffff;
 }
