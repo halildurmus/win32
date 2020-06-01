@@ -9,7 +9,8 @@ export 'src/utf16.dart';
 export 'src/constants.dart';
 export 'src/macros.dart';
 export 'src/structs.dart';
-export 'src/win32.dart' hide user32, gdi32, kernel32, shell32, comdlg32, ole32;
+export 'src/win32.dart'
+    hide user32, gdi32, kernel32, shell32, comdlg32, ole32, oleaut32;
 
 export 'src/com/combase.dart' show COMObject, COMException;
 

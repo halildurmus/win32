@@ -249,3 +249,7 @@ final CoTaskMemFree = ole32
     .lookupFunction<coTaskMemFreeNative, coTaskMemFreeDart>('CoTaskMemFree');
 final CoUninitialize = ole32
     .lookupFunction<coUninitializeNative, coUninitializeDart>('CoUninitialize');
+
+final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+final VariantClear = oleaut32
+    .lookupFunction<variantClearNative, variantClearDart>('VariantClear');

@@ -974,6 +974,12 @@ typedef postQuitMessageDart = void Function(int nExitCode);
 typedef updateWindowNative = Int32 Function(IntPtr hWnd);
 typedef updateWindowDart = int Function(int hWnd);
 
+// HRESULT VariantClear(
+//   VARIANTARG *pvarg
+// );
+typedef variantClearNative = Int32 Function(Pointer pvarg);
+typedef variantClearDart = int Function(Pointer pvarg);
+
 // LPVOID VirtualAlloc(
 //   LPVOID lpAddress,
 //   SIZE_T dwSize,

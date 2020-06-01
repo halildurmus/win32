@@ -10,13 +10,13 @@ import 'package:win32/win32.dart';
 
 void main() {
   // Initialize COM
-  var hres = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
-  if (FAILED(hres)) {
-    throw COMException(hres);
+  var hr = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
+  if (FAILED(hr)) {
+    throw COMException(hr);
   }
 
   // Initialize
-  hres = CoInitializeSecurity(
+  hr = CoInitializeSecurity(
       nullptr,
       -1, // COM negotiates service
       nullptr, // Authentication services
@@ -28,8 +28,8 @@ void main() {
       nullptr // Reserved
       );
 
-  if (FAILED(hres)) {
-    final exception = COMException(hres);
+  if (FAILED(hr)) {
+    final exception = COMException(hr);
     print(exception.toString());
 
     CoUninitialize();
@@ -40,15 +40,15 @@ void main() {
   // on a particular host computer.
   IWbemLocator pLoc = IWbemLocator(COMObject.allocate().addressOf); // CHECK
 
-  hres = CoCreateInstance(
+  hr = CoCreateInstance(
       GUID.fromString(CLSID_WbemLocator).addressOf,
       nullptr,
       CLSCTX_INPROC_SERVER,
       GUID.fromString(IID_IWbemLocator).addressOf,
       pLoc.ptr.cast()); // CHECK
 
-  if (FAILED(hres)) {
-    final exception = COMException(hres);
+  if (FAILED(hr)) {
+    final exception = COMException(hr);
     print(exception.toString());
 
     CoUninitialize();
@@ -61,7 +61,7 @@ void main() {
   // current user and obtain pointer pSvc
   // to make IWbemServices calls.
 
-  hres = pLoc.ConnectServer(
+  hr = pLoc.ConnectServer(
       TEXT('ROOT\\CIMV2'), // WMI namespace
       nullptr, // User name
       nullptr, // User password
@@ -72,8 +72,8 @@ void main() {
       proxy // IWbemServices proxy // CHECK
       );
 
-  if (FAILED(hres)) {
-    final exception = COMException(hres);
+  if (FAILED(hr)) {
+    final exception = COMException(hr);
     print(exception.toString());
 
     pLoc.Release();
@@ -86,7 +86,7 @@ void main() {
   final pSvc = IWbemServices(proxy.cast());
   // Set the IWbemServices proxy so that impersonation
   // of the user (client) occurs.
-  hres = CoSetProxyBlanket(
+  hr = CoSetProxyBlanket(
       Pointer.fromAddress(proxy.value), // the proxy to set // CHECK
       RPC_C_AUTHN_WINNT, // authentication service
       RPC_C_AUTHZ_NONE, // authorization service
@@ -97,8 +97,8 @@ void main() {
       EOLE_AUTHENTICATION_CAPABILITIES.EOAC_NONE // proxy capabilities
       );
 
-  if (FAILED(hres)) {
-    final exception = COMException(hres);
+  if (FAILED(hr)) {
+    final exception = COMException(hr);
     print(exception.toString());
     pSvc.Release();
     pLoc.Release();
@@ -112,20 +112,22 @@ void main() {
   // Make requests here:
 
   // For example, query for all the running processes
-  IEnumWbemClassObject pEnumerator =
-      IEnumWbemClassObject(COMObject.allocate().addressOf); // CHECK
 
-  hres = pSvc.ExecQuery(
+  var pEnumerator = allocate<IntPtr>(); // CHECK
+  IEnumWbemClassObject enumerator;
+
+  hr = pSvc.ExecQuery(
       TEXT('WQL'),
       TEXT('SELECT * FROM Win32_Process'),
       WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_FORWARD_ONLY |
           WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_RETURN_IMMEDIATELY,
       nullptr,
-      pEnumerator.ptr.cast());
+      pEnumerator);
 
-  if (FAILED(hres)) {
-    final exception = COMException(hres);
+  if (FAILED(hr)) {
+    final exception = COMException(hr);
     print(exception.toString());
+
     pSvc.Release();
     pLoc.Release();
     CoUninitialize();
@@ -133,37 +135,46 @@ void main() {
   } else {
     print('Query executed');
 
-    IWbemClassObject pclsObj = IWbemClassObject(COMObject.allocate().addressOf);
+    enumerator = IEnumWbemClassObject(pEnumerator.cast()); // CHECK
+
     final uReturn = allocate<Uint32>();
 
-    while (pEnumerator.ptr.address > 0) {
-      hres = pEnumerator.Next(
-          WBEM_TIMEOUT_TYPE.WBEM_INFINITE, 1, pclsObj.ptr.cast(), uReturn);
+    int idx = 1;
+    while (enumerator.ptr.address > 0) {
+      var pClsObj = allocate<IntPtr>();
 
-      if (0 == uReturn.value) {
-        break;
-      }
+      hr =
+          enumerator.Next(WBEM_TIMEOUT_TYPE.WBEM_INFINITE, 1, pClsObj, uReturn);
 
-      Pointer vtProp = allocate<Uint16>(count: 132); // CHECK
+      // Break out of the while loop if we've run out of processes to inspect
+      if (uReturn.value == 0) break;
 
-      // Get the value of the Name property
-      hres = pclsObj.Get(TEXT('Name'), 0, vtProp, nullptr, nullptr);
+      idx++;
+
+      final clsObj = IWbemClassObject(pClsObj.cast());
+
+      // A VARIANT is a union struct, which can't be directly represented by
+      // FFI yet. In this case we know that the VARIANT can only contain a BSTR
+      // so we are able to use a specialized variant.
+      var vtProp = allocate<IntPtr>(count: 2);
+
+      hr = clsObj.Get(TEXT('Name'), 0, vtProp, nullptr, nullptr);
 
       // First 4 x 16 entries can be ignored, the rest is a BSTR
-      Pointer<Utf16> process = vtProp.elementAt(4).cast();
-      print('Process Name : ${process.unpackString(128)}');
-      // VariantClear(vtProp);
+      Pointer<Utf16> process = Pointer.fromAddress(vtProp.elementAt(1).value);
+      print('Process Name : ${process.unpackString(256)}');
+      VariantClear(vtProp);
 
-      pclsObj.Release();
+      clsObj.Release();
     }
+    print('$idx processes found.');
   }
 
   // Cleanup
   // ========
-
   pSvc.Release();
   pLoc.Release();
-  pEnumerator.Release();
+  enumerator.Release();
 
   CoUninitialize();
 
