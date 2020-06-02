@@ -1,3 +1,8 @@
+## 1.4.2
+
+ - Fix a few bugs
+ - Add support for desktop background management with IDesktopWallpaper
+
 ## 1.4.1
 
  - Expand COM support to include IShellItemArray and various WMI classes
