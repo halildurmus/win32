@@ -12,7 +12,8 @@ export 'src/structs.dart';
 export 'src/win32.dart'
     hide user32, gdi32, kernel32, shell32, comdlg32, ole32, oleaut32;
 
-export 'src/com/combase.dart' show COMObject, COMException;
+export 'src/com/combase.dart';
+export 'src/com/comerrors.dart';
 
 export 'src/com/IEnumWbemClassObject.dart'
     show IEnumWbemClassObject, IID_IEnumWbemClassObject;

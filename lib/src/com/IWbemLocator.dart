@@ -4,6 +4,7 @@ import 'package:ffi/ffi.dart';
 
 import 'IUnknown.dart';
 import 'combase.dart';
+import 'comerrors.dart';
 
 import '../constants.dart';
 import '../macros.dart';

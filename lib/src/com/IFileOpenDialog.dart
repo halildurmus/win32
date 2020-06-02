@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'IFileDialog.dart';
 import 'combase.dart';
+import 'comerrors.dart';
 
 import '../constants.dart';
 import '../macros.dart';
