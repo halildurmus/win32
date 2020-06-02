@@ -53,15 +53,13 @@ class IDesktopWallpaper extends IUnknown {
 
   IDesktopWallpaper(this.ptr) : super(ptr);
 
-  int SetWallpaper(
-          int hwndOwner, Pointer<Utf16> monitorID, Pointer<Utf16> wallpaper) =>
+  int SetWallpaper(Pointer<Utf16> monitorID, Pointer<Utf16> wallpaper) =>
       Pointer<NativeFunction<SetWallpaper_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(3).value)
               .asFunction<SetWallpaper_Dart>()(
           ptr.ref.lpVtbl, monitorID, wallpaper);
 
-  int GetWallpaper(
-          int hwndOwner, Pointer<Utf16> monitorID, Pointer<Utf16> wallpaper) =>
+  int GetWallpaper(Pointer<Utf16> monitorID, Pointer<Utf16> wallpaper) =>
       Pointer<NativeFunction<GetWallpaper_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(4).value)
               .asFunction<GetWallpaper_Dart>()(

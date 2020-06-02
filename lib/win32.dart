@@ -15,6 +15,12 @@ export 'src/win32.dart'
 export 'src/com/combase.dart';
 export 'src/com/comerrors.dart';
 
+export 'src/com/IDesktopWallpaper.dart'
+    show
+        IDesktopWallpaper,
+        IID_IDesktopWallpaper,
+        DesktopWallpaper,
+        CLSID_DesktopWallpaper;
 export 'src/com/IEnumWbemClassObject.dart'
     show IEnumWbemClassObject, IID_IEnumWbemClassObject;
 export 'src/com/IFileDialog.dart' show IFileDialog, IID_IFileDialog;
