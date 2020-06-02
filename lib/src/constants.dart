@@ -1504,3 +1504,27 @@ class WBEM_TIMEOUT_TYPE {
   static final WBEM_NO_WAIT = 0;
   static final WBEM_INFINITE = 0xffffffff;
 }
+
+class DESKTOP_SLIDESHOW_OPTIONS {
+  static final DSO_SHUFFLEIMAGES = 0x1;
+}
+
+class DESKTOP_SLIDESHOW_STATE {
+  static final DSS_ENABLED = 0x1;
+  static final DSS_SLIDESHOW = 0x2;
+  static final DSS_DISABLED_BY_REMOTE_SESSION = 0x4;
+}
+
+class DESKTOP_SLIDESHOW_DIRECTION {
+  static final DSD_FORWARD = 0;
+  static final DSD_BACKWARD = 1;
+}
+
+class DESKTOP_WALLPAPER_POSITION {
+  static final DWPOS_CENTER = 0;
+  static final DWPOS_TILE = 1;
+  static final DWPOS_STRETCH = 2;
+  static final DWPOS_FIT = 3;
+  static final DWPOS_FILL = 4;
+  static final DWPOS_SPAN = 5;
+}

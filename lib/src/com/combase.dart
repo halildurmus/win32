@@ -1,7 +1,6 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import '../constants.dart';
 
 class COMObject extends Struct {
   Pointer<IntPtr> lpVtbl;
