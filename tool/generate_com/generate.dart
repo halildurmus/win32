@@ -23,8 +23,9 @@ class Interface {
   List<Method> methods;
 }
 
-String printHeader() {
-  return '''
+String printHeader(Interface interface) {
+  if (interface.generateClass) {
+    return '''
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -38,6 +39,14 @@ import '../macros.dart';
 import '../structs.dart';
 import '../win32.dart';\n
 ''';
+  } else {
+    return '''
+import 'dart:ffi';
+
+import 'IUnknown.dart';
+import 'combase.dart';
+''';
+  }
 }
 
 const typeMappings = <String, String>{
@@ -63,6 +72,7 @@ const typeMappings = <String, String>{
   'INT': 'Int32',
   'UINT': 'Uint32',
   'DWORD': 'Uint32',
+  'ULONG': 'Uint32',
   'LONG': 'Int32',
   'WORD': 'Uint16',
   'SHORT': 'Int16',
@@ -73,7 +83,10 @@ const typeMappings = <String, String>{
   'DESKTOP_SLIDESHOW_STATE': 'Int32',
   'COLORREF': 'Uint32',
   'RECT': 'RECT',
-  'IShellItemArray': 'Pointer'
+  'IShellItemArray': 'Pointer',
+  'IWbemClassObject': 'Pointer',
+  'IWbemObjectSink': 'Pointer',
+  'IEnumWbemClassObject': 'Pointer'
 };
 
 const intTypes = <String>[
@@ -108,7 +121,10 @@ String printTypedefs(Interface interface) {
     // Native typedef
     buffer.writeln(
         'typedef ${method.name}_Native = ${method.returnType} Function(');
-    buffer.writeln('  Pointer obj,');
+    buffer.write('  Pointer obj');
+    if (method.parameters.isNotEmpty) {
+      buffer.writeln(',');
+    }
     for (var idx = 0; idx < method.parameters.length; idx++) {
       buffer.write(
           '  ${method.parameters[idx].type} ${method.parameters[idx].name}');
@@ -120,7 +136,10 @@ String printTypedefs(Interface interface) {
     // Dart typedef
     buffer.writeln(
         'typedef ${method.name}_Dart = ${dartType(method.returnType)} Function(');
-    buffer.writeln('  Pointer obj,');
+    buffer.write('  Pointer obj');
+    if (method.parameters.isNotEmpty) {
+      buffer.writeln(',');
+    }
     for (var idx = 0; idx < method.parameters.length; idx++) {
       buffer.write(
           '  ${dartType(method.parameters[idx].type)} ${method.parameters[idx].name}');
@@ -163,7 +182,10 @@ class ${interface.name} extends ${interface.inherits} {
     buffer.write(
         '                ptr.ref.vtable.elementAt(${vtableIndex++}).value)\n');
     buffer.write('            .asFunction<${method.name}_Dart>()(\n');
-    buffer.write('         ptr.ref.lpVtbl, ');
+    buffer.write('         ptr.ref.lpVtbl');
+    if (method.parameters.isNotEmpty) {
+      buffer.write(', ');
+    }
 
     for (var idx = 0; idx < method.parameters.length; idx++) {
       buffer.write('${method.parameters[idx].name}');
@@ -214,8 +236,10 @@ Interface loadSource(File file) {
   Method method;
 
   var lines = file.readAsLinesSync();
+  var lineIndex = 0;
 
   for (var line in lines) {
+    lineIndex++;
     if (!inMethod) {
       if (line.startsWith('// vtable_start ')) {
         interface.vtableStart = int.parse(line.split(' ').last);
@@ -239,28 +263,39 @@ Interface loadSource(File file) {
       if (line.contains('STDMETHODCALLTYPE')) {
         // method declaration
         method = Method();
-        final keywords = line.split(' ');
+        final keywords = line.trimRight().split(' ');
         final lastKeyword = keywords[keywords.length - 1];
         method.name = lastKeyword.substring(0, lastKeyword.length - 1);
         method.returnType = 'Int32';
         method.parameters = [];
         inMethod = true;
+
+        // Special case for void methods
+        if (line.contains('( void) = 0;')) {
+          method.name = keywords[keywords.indexOf('void)') - 1];
+          method.name = method.name.substring(0, method.name.length - 1);
+          interface.methods.add(method);
+          inMethod = false;
+        }
       }
     } else {
       // we're in a method -- we're dealing with a parameter
       final keywords = line.split(' ');
       final parameter = Parameter();
+      String win32Keyword;
 
       // don't know which field contains the return param, so we just search
       for (var type in typeMappings.entries) {
         for (var keyword in keywords) {
           if (keyword == type.key) {
+            win32Keyword = keyword;
             parameter.type = type.value;
+            break;
           }
         }
       }
       parameter.type ??= 'void';
-      if (line.contains(' * ') &&
+      if (line.contains('*', line.indexOf(win32Keyword)) &&
           (!parameter.type.contains('Pointer')) &&
           (!(['LPWSTR', 'LPCWSTR'].contains(parameter.type)))) {
         parameter.type = 'Pointer<${parameter.type}>';
@@ -271,7 +306,7 @@ Interface loadSource(File file) {
         final parameterKeyword = keywords[keywords.length - 1];
         parameter.name =
             parameterKeyword.substring(0, parameterKeyword.length - 1);
-        if (parameter.name.startsWith('*')) {
+        while (parameter.name.startsWith('*')) {
           // trim any pointer
           parameter.name = parameter.name.substring(1);
         }
@@ -281,7 +316,7 @@ Interface loadSource(File file) {
         final parameterKeyword = keywords[keywords.length - 3];
         parameter.name =
             parameterKeyword.substring(0, parameterKeyword.length - 1);
-        if (parameter.name.startsWith('*')) {
+        while (parameter.name.startsWith('*')) {
           // trim any pointer
           parameter.name = parameter.name.substring(1);
         }
@@ -289,6 +324,7 @@ Interface loadSource(File file) {
         interface.methods.add(method);
         inMethod = false;
       } else {
+        print('Line: $lineIndex');
         throw Exception('Can\'t find parameter name');
       }
     }
@@ -308,12 +344,13 @@ void main(List<String> args) {
 
   for (var inputFile in inputDirectory.listSync()) {
     if (inputFile is File) {
+      print('Parsing: ${inputFile.path}');
       final parsedFile = loadSource(inputFile);
 
       File outputFile =
           File('${outputDirectory.uri.toFilePath()}${parsedFile.name}.dart');
       print('Writing: ${outputFile.path}');
-      outputFile.writeAsStringSync(printHeader() +
+      outputFile.writeAsStringSync(printHeader(parsedFile) +
           printInterfaceHeader(parsedFile) +
           printTypedefs(parsedFile) +
           printInterface(parsedFile) +

@@ -6,8 +6,9 @@
     "configurations": [
         {
             "name": "Dart",
-            "program": "example/snake.dart",
+            "program": "tool\\generate_com\\generate.dart",
             "request": "launch",
+            "args": ["tool\\generate_com\\input", "tool\\generate_com\\output"],
             "type": "dart"
         }
     ]
