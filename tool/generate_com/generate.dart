@@ -24,13 +24,12 @@ class Interface {
 }
 
 String printHeader(Interface interface) {
-  if (interface.generateClass) {
-    return '''
+  return '''
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'IUnknown.dart';
+import '${interface.inherits}.dart';
 import 'combase.dart';
 import 'comerrors.dart';
 
@@ -39,14 +38,6 @@ import '../macros.dart';
 import '../structs.dart';
 import '../win32.dart';\n
 ''';
-  } else {
-    return '''
-import 'dart:ffi';
-
-import 'IUnknown.dart';
-import 'combase.dart';
-''';
-  }
 }
 
 const typeMappings = <String, String>{
@@ -69,6 +60,7 @@ const typeMappings = <String, String>{
   'LRESULT': 'IntPtr',
   'DESKTOP_WALLPAPER_POSITION': 'Int32',
   'WNDPROC': 'IntPtr',
+  'REFGUID': 'GUID',
   'INT': 'Int32',
   'UINT': 'Uint32',
   'DWORD': 'Uint32',
@@ -81,12 +73,18 @@ const typeMappings = <String, String>{
   'DESKTOP_SLIDESHOW_OPTIONS': 'Int32',
   'DESKTOP_SLIDESHOW_DIRECTION': 'Int32',
   'DESKTOP_SLIDESHOW_STATE': 'Int32',
+  'FILEOPENDIALOGOPTIONS': 'Uint32',
   'COLORREF': 'Uint32',
   'RECT': 'RECT',
+  'COMDLG_FILTERSPEC': 'COMDLG_FILTERSPEC',
+  'FDAP': 'Uint32',
+  'IShellItem': 'Pointer',
+  'IShellItemFilter': 'Pointer',
   'IShellItemArray': 'Pointer',
   'IWbemClassObject': 'Pointer',
   'IWbemObjectSink': 'Pointer',
-  'IEnumWbemClassObject': 'Pointer'
+  'IEnumWbemClassObject': 'Pointer',
+  'IFileDialogEvents': 'Pointer',
 };
 
 const intTypes = <String>[
@@ -294,7 +292,10 @@ Interface loadSource(File file) {
           }
         }
       }
-      parameter.type ??= 'void';
+      if (parameter.type == null) {
+        print('Line: $lineIndex');
+        throw Exception('Can\'t find type.');
+      }
       if (line.contains('*', line.indexOf(win32Keyword)) &&
           (!parameter.type.contains('Pointer')) &&
           (!(['LPWSTR', 'LPCWSTR'].contains(parameter.type)))) {
@@ -340,21 +341,25 @@ void main(List<String> args) {
   final inputDirectory = Directory(args[0]);
   final outputDirectory = Directory(args[1]);
 
-  print('Reading from: ${inputDirectory.uri.toFilePath()}');
-
   for (var inputFile in inputDirectory.listSync()) {
     if (inputFile is File) {
-      print('Parsing: ${inputFile.path}');
+      print('Parsing:    ${inputFile.path}');
       final parsedFile = loadSource(inputFile);
 
       File outputFile =
           File('${outputDirectory.uri.toFilePath()}${parsedFile.name}.dart');
-      print('Writing: ${outputFile.path}');
+      print('Writing:    ${outputFile.path}');
       outputFile.writeAsStringSync(printHeader(parsedFile) +
           printInterfaceHeader(parsedFile) +
           printTypedefs(parsedFile) +
           printInterface(parsedFile) +
           printClass(parsedFile));
+
+      print('Formatting: ${outputFile.path}');
+      Process.runSync('dartfmt', ['--overwrite', '--fix', outputFile.path],
+          runInShell: true);
+
+      print('');
     }
   }
 }
