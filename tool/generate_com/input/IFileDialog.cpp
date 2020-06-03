@@ -1,3 +1,6 @@
+#include "windows.h"
+#include "Shobjidl.h"
+
 // vtable_start 4
 MIDL_INTERFACE("42f85136-db7e-439c-85f1-e4075d135fc8")
 IFileDialog : public IModalWindow

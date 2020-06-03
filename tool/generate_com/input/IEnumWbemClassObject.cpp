@@ -1,3 +1,7 @@
+#include "windows.h"
+#include "Shobjidl.h"
+#include "Wbemidl.h"
+
 // vtable_start 3
 MIDL_INTERFACE("027947e1-d731-11ce-a357-000000000001")
 IEnumWbemClassObject : public IUnknown
