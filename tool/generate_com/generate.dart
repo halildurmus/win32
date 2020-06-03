@@ -89,7 +89,14 @@ const intTypes = <String>[
 ];
 
 String printInterfaceHeader(Interface interface) {
-  return "const IID_${interface.name} = '{${interface.iid.toString()}}';\n\n";
+  final buffer = StringBuffer();
+  if (interface.generateClass) {
+    buffer.write(
+        "const CLSID_${interface.className} = '{${interface.clsid.toString()}}';\n");
+  }
+  buffer.write(
+      "const IID_${interface.name} = '{${interface.iid.toString()}}';\n\n");
+  return buffer.toString();
 }
 
 String dartType(String nativeType) =>
@@ -131,9 +138,10 @@ String printInterface(Interface interface) {
   final buffer = StringBuffer();
   var vtableIndex = interface.vtableStart;
 
-  buffer.writeln('class ${interface.name} extends ${interface.inherits} {');
   buffer.writeln('''
-  
+class ${interface.name} extends ${interface.inherits} {
+  // vtable begins at ${interface.vtableStart}, ends at ${interface.vtableStart + interface.methods.length - 1}
+
   @override
   Pointer<COMObject> ptr;
 
@@ -199,16 +207,13 @@ class ${interface.className} extends ${interface.name} {
   }
 }
 
-Interface loadSource() {
+Interface loadSource(File file) {
   bool inMethod = false;
   final interface = Interface();
   interface.methods = [];
   Method method;
 
-  print(Directory.current);
-  File f = File('tool/generate_com/test.cpp');
-
-  var lines = f.readAsLinesSync();
+  var lines = file.readAsLinesSync();
 
   for (var line in lines) {
     if (!inMethod) {
@@ -292,13 +297,27 @@ Interface loadSource() {
   return interface;
 }
 
-void main() {
-  final source = loadSource();
+void main(List<String> args) {
+  if (args.length != 2) {
+    args = <String>['input', 'output'];
+  }
+  final inputDirectory = Directory(args[0]);
+  final outputDirectory = Directory(args[1]);
 
-  final output = File('tool/generate_com/output.dart');
-  output.writeAsStringSync(printHeader() +
-      printInterfaceHeader(source) +
-      printTypedefs(source) +
-      printInterface(source) +
-      printClass(source));
+  print('Reading from: ${inputDirectory.uri.toFilePath()}');
+
+  for (var inputFile in inputDirectory.listSync()) {
+    if (inputFile is File) {
+      final parsedFile = loadSource(inputFile);
+
+      File outputFile =
+          File('${outputDirectory.uri.toFilePath()}${parsedFile.name}.dart');
+      print('Writing: ${outputFile.path}');
+      outputFile.writeAsStringSync(printHeader() +
+          printInterfaceHeader(parsedFile) +
+          printTypedefs(parsedFile) +
+          printInterface(parsedFile) +
+          printClass(parsedFile));
+    }
+  }
 }
