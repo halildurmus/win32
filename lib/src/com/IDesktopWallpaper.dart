@@ -54,11 +54,13 @@ typedef GetPosition_Native = Int32 Function(
     Pointer obj, Pointer<Int32> position);
 typedef GetPosition_Dart = int Function(Pointer obj, Pointer<Int32> position);
 
-typedef SetSlideshow_Native = Int32 Function(Pointer obj, Pointer items);
-typedef SetSlideshow_Dart = int Function(Pointer obj, Pointer items);
+typedef SetSlideshow_Native = Int32 Function(
+    Pointer obj, Pointer<COMObject> items);
+typedef SetSlideshow_Dart = int Function(Pointer obj, Pointer<COMObject> items);
 
-typedef GetSlideshow_Native = Int32 Function(Pointer obj, Pointer items);
-typedef GetSlideshow_Dart = int Function(Pointer obj, Pointer items);
+typedef GetSlideshow_Native = Int32 Function(
+    Pointer obj, Pointer<COMObject> items);
+typedef GetSlideshow_Dart = int Function(Pointer obj, Pointer<COMObject> items);
 
 typedef SetSlideshowOptions_Native = Int32 Function(
     Pointer obj, Int32 options, Uint32 slideshowTick);
@@ -138,12 +140,12 @@ class IDesktopWallpaper extends IUnknown {
               ptr.ref.vtable.elementAt(11).value)
           .asFunction<GetPosition_Dart>()(ptr.ref.lpVtbl, position);
 
-  int SetSlideshow(Pointer items) =>
+  int SetSlideshow(Pointer<COMObject> items) =>
       Pointer<NativeFunction<SetSlideshow_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(12).value)
           .asFunction<SetSlideshow_Dart>()(ptr.ref.lpVtbl, items);
 
-  int GetSlideshow(Pointer items) =>
+  int GetSlideshow(Pointer<COMObject> items) =>
       Pointer<NativeFunction<GetSlideshow_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(13).value)
           .asFunction<GetSlideshow_Dart>()(ptr.ref.lpVtbl, items);

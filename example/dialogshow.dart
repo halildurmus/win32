@@ -14,7 +14,7 @@ void main() {
   if (SUCCEEDED(hr)) {
     final fileDialog = FileOpenDialog.createInstance();
 
-    final pfos = allocate<Int32>();
+    final pfos = allocate<Uint32>();
     hr = fileDialog.GetOptions(pfos);
     if (!SUCCEEDED(hr)) throw COMException(hr);
 
