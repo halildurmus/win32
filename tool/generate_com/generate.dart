@@ -26,6 +26,7 @@ class Interface {
 String printHeader(Interface interface) {
   final buffer = StringBuffer();
   buffer.writeln('''
+// ignore_for_file: unused_import
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
