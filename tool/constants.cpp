@@ -14,7 +14,7 @@
 void main()
 {
     auto test = VARIANT();
-    auto iid = IID_IEnumWbemClassObject;
+    auto iid = IID_IWbemServices;
 
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));
