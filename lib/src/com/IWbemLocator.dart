@@ -22,7 +22,7 @@ typedef ConnectServer_Native = Int32 Function(
     Pointer<Utf16> strLocale,
     Int32 lSecurityFlags,
     Pointer<Utf16> strAuthority,
-    Pointer pCtx,
+    Pointer<COMObject> pCtx,
     Pointer<IntPtr> ppNamespace);
 typedef ConnectServer_Dart = int Function(
     Pointer obj,
@@ -32,7 +32,7 @@ typedef ConnectServer_Dart = int Function(
     Pointer<Utf16> strLocale,
     int lSecurityFlags,
     Pointer<Utf16> strAuthority,
-    Pointer pCtx,
+    Pointer<COMObject> pCtx,
     Pointer<IntPtr> ppNamespace);
 
 class IWbemLocator extends IUnknown {
@@ -50,7 +50,7 @@ class IWbemLocator extends IUnknown {
           Pointer<Utf16> strLocale,
           int lSecurityFlags,
           Pointer<Utf16> strAuthority,
-          Pointer pCtx,
+          Pointer<COMObject> pCtx,
           Pointer<IntPtr> ppNamespace) =>
       Pointer<NativeFunction<ConnectServer_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(3).value)
@@ -76,7 +76,7 @@ class WbemLocator extends IWbemLocator {
     var hr = CoCreateInstance(
         GUID.fromString(CLSID_WbemLocator).addressOf,
         nullptr,
-        CLSCTX_INPROC_SERVER,
+        CLSCTX_ALL,
         GUID.fromString(IID_IWbemLocator).addressOf,
         ptr.cast());
 

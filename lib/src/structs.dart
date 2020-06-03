@@ -1319,6 +1319,7 @@ class SMALL_RECT extends Struct {
     ..Bottom = 0;
 }
 
-class PROPERTYKEY extends Struct {
-  // UNIMPLEMENTED; MARKER FOR COMPLETENESS
-}
+// UNIMPLEMENTED CLASSES THAT ARE INCLUDED SO THAT COM OBJECTS CAN BE GENERATED
+class PROPERTYKEY extends Struct {}
+
+class SAFEARRAY extends Struct {}

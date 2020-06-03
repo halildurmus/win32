@@ -1,5 +1,7 @@
 import 'dart:ffi';
 
+import 'package:ffi/ffi.dart';
+
 import 'IFileDialog.dart';
 import 'combase.dart';
 import 'comerrors.dart';
@@ -26,6 +28,8 @@ class IFileOpenDialog extends IFileDialog {
   @override
   Pointer<COMObject> ptr;
 
+  IFileOpenDialog(this.ptr) : super(ptr);
+
   int GetResults(Pointer<IntPtr> ppenum) =>
       Pointer<NativeFunction<GetResults_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(27).value)
@@ -35,8 +39,6 @@ class IFileOpenDialog extends IFileDialog {
       Pointer<NativeFunction<GetSelectedItems_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(28).value)
           .asFunction<GetSelectedItems_Dart>()(ptr.ref.lpVtbl, ppsai);
-
-  IFileOpenDialog(this.ptr) : super(ptr);
 }
 
 class FileOpenDialog extends IFileOpenDialog {

@@ -18,12 +18,12 @@ typedef BindToHandler_Native = Int32 Function(
     Pointer<COMObject> pbc,
     Pointer<GUID> bhid,
     Pointer<GUID> riid,
-    Pointer<void> ppv);
+    Pointer<IntPtr> ppv);
 typedef BindToHandler_Dart = int Function(Pointer obj, Pointer<COMObject> pbc,
-    Pointer<GUID> bhid, Pointer<GUID> riid, Pointer<void> ppv);
+    Pointer<GUID> bhid, Pointer<GUID> riid, Pointer<IntPtr> ppv);
 
-typedef GetParent_Native = Int32 Function(Pointer obj, Pointer<COMObject> ppsi);
-typedef GetParent_Dart = int Function(Pointer obj, Pointer<COMObject> ppsi);
+typedef GetParent_Native = Int32 Function(Pointer obj, Pointer<IntPtr> ppsi);
+typedef GetParent_Dart = int Function(Pointer obj, Pointer<IntPtr> ppsi);
 
 typedef GetDisplayName_Native = Int32 Function(
     Pointer obj, Uint32 sigdnName, Pointer<Utf16> ppszName);
@@ -49,13 +49,13 @@ class IShellItem extends IUnknown {
   IShellItem(this.ptr) : super(ptr);
 
   int BindToHandler(Pointer<COMObject> pbc, Pointer<GUID> bhid,
-          Pointer<GUID> riid, Pointer<void> ppv) =>
+          Pointer<GUID> riid, Pointer<IntPtr> ppv) =>
       Pointer<NativeFunction<BindToHandler_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(3).value)
               .asFunction<BindToHandler_Dart>()(
           ptr.ref.lpVtbl, pbc, bhid, riid, ppv);
 
-  int GetParent(Pointer<COMObject> ppsi) =>
+  int GetParent(Pointer<IntPtr> ppsi) =>
       Pointer<NativeFunction<GetParent_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(4).value)
           .asFunction<GetParent_Dart>()(ptr.ref.lpVtbl, ppsi);

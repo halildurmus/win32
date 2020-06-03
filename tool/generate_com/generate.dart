@@ -63,6 +63,7 @@ const typeMappings = <String, String>{
   'LPCSTR': 'Pointer<Utf16>',
   'LPCWSTR': 'Pointer<Utf16>',
   'LPWSTR': 'Pointer<Utf16>',
+  'BSTR': 'Pointer<Utf16>',
 
   // Core Windows types
   'ATOM': 'Int16',
@@ -80,6 +81,7 @@ const typeMappings = <String, String>{
   'WNDPROC': 'IntPtr',
 
   // Structs and enums
+  'CIMTYPE': 'Int32',
   'COLORREF': 'Uint32',
   'COMDLG_FILTERSPEC': 'COMDLG_FILTERSPEC',
   'DESKTOP_SLIDESHOW_OPTIONS': 'Uint32',
@@ -91,21 +93,30 @@ const typeMappings = <String, String>{
   'GETPROPERTYSTOREFLAGS': 'Uint32',
   'REFPROPERTYKEY': 'Pointer<PROPERTYKEY>',
   'RECT': 'RECT',
+  'SAFEARRAY': 'SAFEARRAY',
   'SFGAOF': 'Uint32',
   'SICHINTF': 'Uint32',
   'SIGDN': 'Uint32',
   'SIATTRIBFLAGS': 'Uint32',
+  'VARIANT': 'VARIANT_POINTER', // NOTE: This projection is incomplete
 
   // Interfaces
   'IBindCtx': 'COMObject',
   'IEnumShellItems': 'COMObject',
   'IEnumWbemClassObject': 'COMObject',
   'IFileDialogEvents': 'COMObject',
+  'IFileOperationProgressSink': 'COMObject',
+  'IPropertyDescriptionList': 'COMObject',
+  'IPropertyStore': 'COMObject',
   'IShellItem': 'COMObject',
   'IShellItemArray': 'COMObject',
   'IShellItemFilter': 'COMObject',
+  'IWbemCallResult': 'COMObject',
   'IWbemClassObject': 'COMObject',
-  'IWbemObjectSink': 'COMObject'
+  'IWbemContext': 'COMObject',
+  'IWbemObjectSink': 'COMObject',
+  'IWbemQualifierSet': 'COMObject',
+  'IWbemServices': 'COMObject',
 };
 
 const intTypes = <String>[
@@ -332,20 +343,14 @@ Interface loadSource(File file) {
           final parameterKeyword = keywords[keywords.length - 1];
           parameter.name =
               parameterKeyword.substring(0, parameterKeyword.length - 1);
-          while (parameter.name.startsWith('*')) {
-            // trim any pointer
-            parameter.name = parameter.name.substring(1);
-          }
+          trimPointer(parameter);
           method.parameters.add(parameter);
         } else if (line.contains(';')) {
           // parameter is third keyword from last, minus trailing parenthesis
           final parameterKeyword = keywords[keywords.length - 3];
           parameter.name =
               parameterKeyword.substring(0, parameterKeyword.length - 1);
-          while (parameter.name.startsWith('*')) {
-            // trim any pointer
-            parameter.name = parameter.name.substring(1);
-          }
+          trimPointer(parameter);
           method.parameters.add(parameter);
           interface.methods.add(method);
           inMethod = false;
@@ -358,6 +363,18 @@ Interface loadSource(File file) {
   } // end line processing
 
   return interface;
+}
+
+void trimPointer(Parameter parameter) {
+  if (parameter.name.startsWith('**')) {
+    // double pointer
+    parameter.type = 'Pointer<IntPtr>';
+    parameter.name = parameter.name.substring(2);
+  }
+  if (parameter.name.startsWith('*')) {
+    // pointer
+    parameter.name = parameter.name.substring(1);
+  }
 }
 
 void main(List<String> args) {

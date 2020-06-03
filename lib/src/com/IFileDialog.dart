@@ -48,13 +48,13 @@ typedef SetDefaultFolder_Dart = int Function(
 typedef SetFolder_Native = Int32 Function(Pointer obj, Pointer<COMObject> psi);
 typedef SetFolder_Dart = int Function(Pointer obj, Pointer<COMObject> psi);
 
-typedef GetFolder_Native = Int32 Function(Pointer obj, Pointer<COMObject> ppsi);
-typedef GetFolder_Dart = int Function(Pointer obj, Pointer<COMObject> ppsi);
+typedef GetFolder_Native = Int32 Function(Pointer obj, Pointer<IntPtr> ppsi);
+typedef GetFolder_Dart = int Function(Pointer obj, Pointer<IntPtr> ppsi);
 
 typedef GetCurrentSelection_Native = Int32 Function(
-    Pointer obj, Pointer<COMObject> ppsi);
+    Pointer obj, Pointer<IntPtr> ppsi);
 typedef GetCurrentSelection_Dart = int Function(
-    Pointer obj, Pointer<COMObject> ppsi);
+    Pointer obj, Pointer<IntPtr> ppsi);
 
 typedef SetFileName_Native = Int32 Function(
     Pointer obj, Pointer<Utf16> pszName);
@@ -77,8 +77,8 @@ typedef SetFileNameLabel_Native = Int32 Function(
 typedef SetFileNameLabel_Dart = int Function(
     Pointer obj, Pointer<Utf16> pszLabel);
 
-typedef GetResult_Native = Int32 Function(Pointer obj, Pointer<COMObject> ppsi);
-typedef GetResult_Dart = int Function(Pointer obj, Pointer<COMObject> ppsi);
+typedef GetResult_Native = Int32 Function(Pointer obj, Pointer<IntPtr> ppsi);
+typedef GetResult_Dart = int Function(Pointer obj, Pointer<IntPtr> ppsi);
 
 typedef AddPlace_Native = Int32 Function(
     Pointer obj, Pointer<COMObject> psi, Uint32 fdap);
@@ -157,12 +157,12 @@ class IFileDialog extends IModalWindow {
               ptr.ref.vtable.elementAt(12).value)
           .asFunction<SetFolder_Dart>()(ptr.ref.lpVtbl, psi);
 
-  int GetFolder(Pointer<COMObject> ppsi) =>
+  int GetFolder(Pointer<IntPtr> ppsi) =>
       Pointer<NativeFunction<GetFolder_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(13).value)
           .asFunction<GetFolder_Dart>()(ptr.ref.lpVtbl, ppsi);
 
-  int GetCurrentSelection(Pointer<COMObject> ppsi) =>
+  int GetCurrentSelection(Pointer<IntPtr> ppsi) =>
       Pointer<NativeFunction<GetCurrentSelection_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(14).value)
           .asFunction<GetCurrentSelection_Dart>()(ptr.ref.lpVtbl, ppsi);
@@ -192,7 +192,7 @@ class IFileDialog extends IModalWindow {
               ptr.ref.vtable.elementAt(19).value)
           .asFunction<SetFileNameLabel_Dart>()(ptr.ref.lpVtbl, pszLabel);
 
-  int GetResult(Pointer<COMObject> ppsi) =>
+  int GetResult(Pointer<IntPtr> ppsi) =>
       Pointer<NativeFunction<GetResult_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(20).value)
           .asFunction<GetResult_Dart>()(ptr.ref.lpVtbl, ppsi);
