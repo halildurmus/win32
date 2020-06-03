@@ -1,7 +1,15 @@
+// ignore_for_file: unused_import
 import 'dart:ffi';
 
+import 'package:ffi/ffi.dart';
+
 import 'combase.dart';
+import 'comerrors.dart';
+
+import '../constants.dart';
+import '../macros.dart';
 import '../structs.dart';
+import '../win32.dart';
 
 const IID_IUnknown = '{00000000-0000-0000-C000-000000000046}';
 

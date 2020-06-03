@@ -14,7 +14,7 @@ void main() {
   if (SUCCEEDED(hr)) {
     final fileDialog = FileOpenDialog.createInstance();
 
-    final pfos = allocate<Int32>();
+    final pfos = allocate<Uint32>();
     hr = fileDialog.GetOptions(pfos);
     if (!SUCCEEDED(hr)) throw COMException(hr);
 
@@ -55,11 +55,11 @@ void main() {
         throw COMException(hr);
       }
     } else {
-      final iShellItem = COMObject.allocate();
-      hr = fileDialog.GetResult(iShellItem.addressOf);
+      final ppsi = allocate<IntPtr>();
+      hr = fileDialog.GetResult(ppsi);
       if (!SUCCEEDED(hr)) throw COMException(hr);
 
-      final item = IShellItem(iShellItem.addressOf);
+      final item = IShellItem(ppsi.cast());
       final pathPtr = allocate<IntPtr>();
       hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtr.cast());
       if (!SUCCEEDED(hr)) throw COMException(hr);

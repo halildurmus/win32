@@ -1,7 +1,7 @@
 // Development utility to confirm the width of various Win32 objects.
 
-// This is the only C++ code in the repo, and is not used by the
-// package itself.
+// This code not used by the package itself, but is just a helper to inspect
+// widths across x86 and x64 architectures.
 
 // Compile with cl constants.cpp
 
@@ -14,7 +14,7 @@
 void main()
 {
     auto test = VARIANT();
-    auto iid = IID_IEnumWbemClassObject;
+    auto iid = IID_IWbemServices;
 
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));
