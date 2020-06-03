@@ -24,20 +24,26 @@ class Interface {
 }
 
 String printHeader(Interface interface) {
-  return '''
+  final buffer = StringBuffer();
+  buffer.writeln('''
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+''');
 
-import '${interface.inherits}.dart';
+  if (interface.inherits != '') {
+    buffer.writeln("import '${interface.inherits}.dart';");
+  }
+  buffer.writeln('''
 import 'combase.dart';
 import 'comerrors.dart';
 
 import '../constants.dart';
 import '../macros.dart';
 import '../structs.dart';
-import '../win32.dart';\n
-''';
+import '../win32.dart';
+''');
+  return buffer.toString();
 }
 
 const typeMappings = <String, String>{
@@ -187,16 +193,27 @@ String printInterface(Interface interface) {
   final buffer = StringBuffer();
   var vtableIndex = interface.vtableStart;
 
-  buffer.writeln('''
-class ${interface.name} extends ${interface.inherits} {
-  // vtable begins at ${interface.vtableStart}, ends at ${interface.vtableStart + interface.methods.length - 1}
+  if (interface.inherits == '') {
+    buffer.writeln('class ${interface.name} {');
+  } else {
+    buffer.writeln('class ${interface.name} extends ${interface.inherits} {');
+  }
 
-  @override
+  buffer.writeln('''
+  // vtable begins at ${interface.vtableStart}, ends at ${interface.vtableStart + interface.methods.length - 1}
+''');
+  if (interface.inherits.isNotEmpty) {
+    buffer.writeln('  @override');
+  }
+  buffer.write('''
   Pointer<COMObject> ptr;
 
-  ${interface.name}(this.ptr) : super(ptr);
-  
-  ''');
+  ${interface.name}(this.ptr)''');
+  if (interface.inherits.isNotEmpty) {
+    buffer.write(': super(ptr)');
+  }
+  buffer.writeln(';\n');
+
   for (var method in interface.methods) {
     buffer.write('  ${dartType(method.returnType)} ${method.name}(');
     for (var idx = 0; idx < method.parameters.length; idx++) {
@@ -285,11 +302,16 @@ Interface loadSource(File file) {
         final end = start + 36;
         interface.iid = line.substring(start, end);
       }
-      if (line.contains(' : ')) {
+      if (line.contains(' : ') || line == 'IUnknown') {
         // class declaration
-        final keywords = line.split(' ');
-        interface.name = keywords[0];
-        interface.inherits = keywords[keywords.length - 1];
+        if (line == 'IUnknown') {
+          interface.name = line;
+          interface.inherits = '';
+        } else {
+          final keywords = line.split(' ');
+          interface.name = keywords[0];
+          interface.inherits = keywords[keywords.length - 1];
+        }
       }
       if (line.contains('STDMETHODCALLTYPE')) {
         // method declaration
