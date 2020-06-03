@@ -1318,3 +1318,7 @@ class SMALL_RECT extends Struct {
     ..Right = 0
     ..Bottom = 0;
 }
+
+class PROPERTYKEY extends Struct {
+  // UNIMPLEMENTED; MARKER FOR COMPLETENESS
+}

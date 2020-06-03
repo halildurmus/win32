@@ -1,7 +1,15 @@
 import 'dart:ffi';
 
+import 'package:ffi/ffi.dart';
+
 import 'IUnknown.dart';
 import 'combase.dart';
+import 'comerrors.dart';
+
+import '../constants.dart';
+import '../macros.dart';
+import '../structs.dart';
+import '../win32.dart';
 
 const IID_IModalWindow = '{b4db1657-70d7-485e-8e3e-6fcb5a5c1802}';
 

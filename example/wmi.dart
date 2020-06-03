@@ -139,8 +139,8 @@ void main() {
     while (enumerator.ptr.address > 0) {
       final pClsObj = allocate<IntPtr>();
 
-      hr =
-          enumerator.Next(WBEM_TIMEOUT_TYPE.WBEM_INFINITE, 1, pClsObj, uReturn);
+      hr = enumerator.Next(
+          WBEM_TIMEOUT_TYPE.WBEM_INFINITE, 1, pClsObj.cast(), uReturn);
 
       // Break out of the while loop if we've run out of processes to inspect
       if (uReturn.value == 0) break;
