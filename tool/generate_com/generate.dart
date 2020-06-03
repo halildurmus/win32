@@ -41,26 +41,14 @@ import '../win32.dart';\n
 }
 
 const typeMappings = <String, String>{
+  // Base C types
+  'void': 'void',
   'int': 'Int32',
   'long': 'Int32',
   'short': 'Int16',
   'char': 'Int8',
-  'LPCSTR': 'Pointer<Utf16>',
-  'LPCWSTR': 'Pointer<Utf16>',
-  'LPWSTR': 'Pointer<Utf16>',
-  'HANDLE': 'IntPtr',
-  'HINSTANCE': 'IntPtr',
-  'HWND': 'IntPtr',
-  'HRESULT': 'Uint32',
-  'HDC': 'IntPtr',
-  'HBRUSH': 'IntPtr',
-  'ATOM': 'Int16',
-  'WPARAM': 'IntPtr',
-  'LPARAM': 'IntPtr',
-  'LRESULT': 'IntPtr',
-  'DESKTOP_WALLPAPER_POSITION': 'Int32',
-  'WNDPROC': 'IntPtr',
-  'REFGUID': 'Pointer<GUID>',
+
+// Windows ints
   'INT': 'Int32',
   'UINT': 'Uint32',
   'DWORD': 'Uint32',
@@ -70,21 +58,54 @@ const typeMappings = <String, String>{
   'SHORT': 'Int16',
   'BYTE': 'Uint8',
   'BOOL': 'Int32',
-  'DESKTOP_SLIDESHOW_OPTIONS': 'Int32',
-  'DESKTOP_SLIDESHOW_DIRECTION': 'Int32',
-  'DESKTOP_SLIDESHOW_STATE': 'Int32',
-  'FILEOPENDIALOGOPTIONS': 'Uint32',
+
+  // Windows strings
+  'LPCSTR': 'Pointer<Utf16>',
+  'LPCWSTR': 'Pointer<Utf16>',
+  'LPWSTR': 'Pointer<Utf16>',
+
+  // Core Windows types
+  'ATOM': 'Int16',
+  'HANDLE': 'IntPtr',
+  'HBRUSH': 'IntPtr',
+  'HDC': 'IntPtr',
+  'HINSTANCE': 'IntPtr',
+  'HRESULT': 'Uint32',
+  'HWND': 'IntPtr',
+  'LPARAM': 'IntPtr',
+  'LRESULT': 'IntPtr',
+  'REFGUID': 'Pointer<GUID>',
+  'REFIID': 'Pointer<GUID>',
+  'WPARAM': 'IntPtr',
+  'WNDPROC': 'IntPtr',
+
+  // Structs and enums
   'COLORREF': 'Uint32',
-  'RECT': 'RECT',
   'COMDLG_FILTERSPEC': 'COMDLG_FILTERSPEC',
+  'DESKTOP_SLIDESHOW_OPTIONS': 'Uint32',
+  'DESKTOP_SLIDESHOW_DIRECTION': 'Uint32',
+  'DESKTOP_SLIDESHOW_STATE': 'Uint32',
+  'DESKTOP_WALLPAPER_POSITION': 'Uint32',
   'FDAP': 'Uint32',
-  'IShellItem': 'COMObject',
-  'IShellItemFilter': 'COMObject',
-  'IShellItemArray': 'COMObject',
-  'IWbemClassObject': 'COMObject',
-  'IWbemObjectSink': 'COMObject',
+  'FILEOPENDIALOGOPTIONS': 'Uint32',
+  'GETPROPERTYSTOREFLAGS': 'Uint32',
+  'REFPROPERTYKEY': 'Pointer<PROPERTYKEY>',
+  'RECT': 'RECT',
+  'SFGAOF': 'Uint32',
+  'SICHINTF': 'Uint32',
+  'SIGDN': 'Uint32',
+  'SIATTRIBFLAGS': 'Uint32',
+
+  // Interfaces
+  'IBindCtx': 'COMObject',
+  'IEnumShellItems': 'COMObject',
   'IEnumWbemClassObject': 'COMObject',
   'IFileDialogEvents': 'COMObject',
+  'IShellItem': 'COMObject',
+  'IShellItemArray': 'COMObject',
+  'IShellItemFilter': 'COMObject',
+  'IWbemClassObject': 'COMObject',
+  'IWbemObjectSink': 'COMObject'
 };
 
 const intTypes = <String>[
@@ -237,6 +258,7 @@ Interface loadSource(File file) {
   var lineIndex = 0;
 
   for (var line in lines) {
+    line = line.trim();
     lineIndex++;
     if (!inMethod) {
       if (line.startsWith('// vtable_start ')) {
@@ -278,58 +300,62 @@ Interface loadSource(File file) {
       }
     } else {
       // we're in a method -- we're dealing with a parameter
-      final keywords = line.split(' ');
-      final parameter = Parameter();
-      String win32Keyword;
 
-      // don't know which field contains the return param, so we just search
-      for (var type in typeMappings.entries) {
-        for (var keyword in keywords) {
-          if (keyword == type.key) {
-            win32Keyword = keyword;
-            parameter.type = type.value;
-            break;
+      // ignore comment-only lines
+      if (!(line.startsWith('/*') && line.endsWith('*/'))) {
+        final keywords = line.split(' ');
+        final parameter = Parameter();
+        String win32Keyword;
+
+        // don't know which field contains the return param, so we just search
+        for (var type in typeMappings.entries) {
+          for (var keyword in keywords) {
+            if (keyword == type.key) {
+              win32Keyword = keyword;
+              parameter.type = type.value;
+              break;
+            }
           }
         }
-      }
-      if (parameter.type == null) {
-        print('Line: $lineIndex');
-        throw Exception('Can\'t find type.');
-      }
-      if (line.contains('*', line.indexOf(win32Keyword)) &&
-          (!parameter.type.contains('Pointer')) &&
-          (!(['LPWSTR', 'LPCWSTR'].contains(parameter.type)))) {
-        parameter.type = 'Pointer<${parameter.type}>';
-      }
+        if (parameter.type == null) {
+          print('Line: $lineIndex');
+          throw Exception('Can\'t find type.');
+        }
+        if (line.contains('*', line.indexOf(win32Keyword)) &&
+            (!parameter.type.contains('Pointer')) &&
+            (!(['LPWSTR', 'LPCWSTR'].contains(parameter.type)))) {
+          parameter.type = 'Pointer<${parameter.type}>';
+        }
 
-      if (line.contains(',')) {
-        // parameter is the last keyword, minus trailing comma
-        final parameterKeyword = keywords[keywords.length - 1];
-        parameter.name =
-            parameterKeyword.substring(0, parameterKeyword.length - 1);
-        while (parameter.name.startsWith('*')) {
-          // trim any pointer
-          parameter.name = parameter.name.substring(1);
-        }
-        method.parameters.add(parameter);
-      } else if (line.contains(';')) {
-        // parameter is third keyword from last, minus trailing parenthesis
-        final parameterKeyword = keywords[keywords.length - 3];
-        parameter.name =
-            parameterKeyword.substring(0, parameterKeyword.length - 1);
-        while (parameter.name.startsWith('*')) {
-          // trim any pointer
-          parameter.name = parameter.name.substring(1);
-        }
-        method.parameters.add(parameter);
-        interface.methods.add(method);
-        inMethod = false;
-      } else {
-        print('Line: $lineIndex');
-        throw Exception('Can\'t find parameter name');
-      }
-    }
-  }
+        if (line.contains(',')) {
+          // parameter is the last keyword, minus trailing comma
+          final parameterKeyword = keywords[keywords.length - 1];
+          parameter.name =
+              parameterKeyword.substring(0, parameterKeyword.length - 1);
+          while (parameter.name.startsWith('*')) {
+            // trim any pointer
+            parameter.name = parameter.name.substring(1);
+          }
+          method.parameters.add(parameter);
+        } else if (line.contains(';')) {
+          // parameter is third keyword from last, minus trailing parenthesis
+          final parameterKeyword = keywords[keywords.length - 3];
+          parameter.name =
+              parameterKeyword.substring(0, parameterKeyword.length - 1);
+          while (parameter.name.startsWith('*')) {
+            // trim any pointer
+            parameter.name = parameter.name.substring(1);
+          }
+          method.parameters.add(parameter);
+          interface.methods.add(method);
+          inMethod = false;
+        } else {
+          print('Line: $lineIndex');
+          throw Exception('Can\'t find parameter name');
+        } // end param processing
+      } // end no-comment line processing
+    } // end method processing
+  } // end line processing
 
   return interface;
 }
