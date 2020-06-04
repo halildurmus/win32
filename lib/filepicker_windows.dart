@@ -61,7 +61,7 @@ class FilePicker {
 
     final fileDialog = FileOpenDialog.createInstance();
 
-    Pointer<Int32> pfos = allocate<Int32>();
+    Pointer<Uint32> pfos = allocate<Uint32>();
     hr = fileDialog.GetOptions(pfos);
     if (!SUCCEEDED(hr)) throw COMException(hr);
 
@@ -127,11 +127,11 @@ class FilePicker {
         throw COMException(hr);
       }
     } else {
-      final iShellItem = COMObject.allocate();
-      hr = fileDialog.GetResult(iShellItem.addressOf);
+      final ppsi = allocate<IntPtr>();
+      hr = fileDialog.GetResult(ppsi);
       if (!SUCCEEDED(hr)) throw COMException(hr);
 
-      final item = IShellItem(iShellItem.addressOf);
+      final item = IShellItem(ppsi.cast());
       final pathPtrPtr = allocate<IntPtr>();
       hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtrPtr.cast());
       if (!SUCCEEDED(hr)) throw COMException(hr);

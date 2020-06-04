@@ -159,10 +159,10 @@ packages:
   win32:
     dependency: transitive
     description:
-      name: win32
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.4.2"
+      path: "/src/win32"
+      relative: false
+    source: path
+    version: "1.5.0"
 sdks:
   dart: ">=2.7.0 <3.0.0"
   flutter: ">=1.10.0"
