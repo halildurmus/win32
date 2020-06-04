@@ -24,6 +24,8 @@ export 'src/com/IDesktopWallpaper.dart'
 export 'src/com/IEnumWbemClassObject.dart'
     show IEnumWbemClassObject, IID_IEnumWbemClassObject;
 export 'src/com/IFileDialog.dart' show IFileDialog, IID_IFileDialog;
+export 'src/com/IFileDialogCustomize.dart'
+    show IFileDialogCustomize, IID_IFileDialogCustomize;
 export 'src/com/IFileOpenDialog.dart'
     show
         IFileOpenDialog,
@@ -38,7 +40,10 @@ export 'src/com/IFileSaveDialog.dart'
         CLSID_FileSaveDialog;
 export 'src/com/IModalWindow.dart' show IModalWindow, IID_IModalWindow;
 export 'src/com/IShellItem.dart' show IShellItem, IID_IShellItem;
+export 'src/com/IShellItem2.dart' show IShellItem2, IID_IShellItem2;
 export 'src/com/IShellItemArray.dart' show IShellItemArray, IID_IShellItemArray;
+export 'src/com/IShellItemFilter.dart'
+    show IShellItemFilter, IID_IShellItemFilter;
 export 'src/com/IUnknown.dart' show IUnknown, IID_IUnknown;
 export 'src/com/IWbemClassObject.dart'
     show IWbemClassObject, IID_IWbemClassObject;
