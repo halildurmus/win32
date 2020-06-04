@@ -1,3 +1,7 @@
+## 1.5.1
+
+ - Add GetTempPath()
+
 ## 1.5.0
 
 - Use automated Dart tool to generate all COM classes
