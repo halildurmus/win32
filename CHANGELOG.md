@@ -1,3 +1,7 @@
+## 0.1.1
+
+* Update APIs
+
 ## 0.1.0
 
 * Basic implementation using win32.
