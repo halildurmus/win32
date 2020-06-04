@@ -1,24 +1,31 @@
+## 1.5.0
+
+- Use automated Dart tool to generate all COM classes
+- Add IFileDialogCustomize, IShellItem2, IShellItemArray, IShellItemFilter
+- Fill out all the class methods
+- Fix some embarrassing bugs
+
 ## 1.4.2
 
- - Fix a few bugs
- - Add support for desktop background management with IDesktopWallpaper
+- Fix a few bugs
+- Add support for desktop background management with IDesktopWallpaper
 
 ## 1.4.1
 
- - Expand COM support to include IShellItemArray and various WMI classes
+- Expand COM support to include IShellItemArray and various WMI classes
 
 ## 1.4.0
 
- - Add COM support
- - Add implementations for IOpenFileDialog, IFileDialog, IModalWindow,
-   IShellItem, IUnknown
- - Add common item dialog example
+- Add COM support
+- Add implementations for IOpenFileDialog, IFileDialog, IModalWindow,
+ IShellItem, IUnknown
+- Add common item dialog example
 
 ## 1.3.2
 
- - Add Snake GDI example
- - Add PeekMessage, MoveTo, VirtualAlloc/Free, StretchDibBits, Beep
- - Tidy up code and test
+- Add Snake GDI example
+- Add PeekMessage, MoveTo, VirtualAlloc/Free, StretchDibBits, Beep
+- Tidy up code and test
 
 ## 1.3.1
 
