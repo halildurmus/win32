@@ -65,12 +65,14 @@ const typeMappings = <String, String>{
   'SHORT': 'Int16',
   'BYTE': 'Uint8',
   'BOOL': 'Int32',
+  'ULONGLONG': 'Uint64',
 
   // Windows strings
   'LPCSTR': 'Pointer<Utf16>',
   'LPCWSTR': 'Pointer<Utf16>',
   'LPWSTR': 'Pointer<Utf16>',
   'BSTR': 'Pointer<Utf16>',
+  'WCHAR': 'Pointer<Utf16>',
 
   // Core Windows types
   'ATOM': 'Int16',
@@ -88,7 +90,9 @@ const typeMappings = <String, String>{
   'WNDPROC': 'IntPtr',
 
   // Structs and enums
+  'CDCONTROLSTATEF': 'Int32',
   'CIMTYPE': 'Int32',
+  'CLSID': 'CLSID',
   'COLORREF': 'Uint32',
   'COMDLG_FILTERSPEC': 'COMDLG_FILTERSPEC',
   'DESKTOP_SLIDESHOW_OPTIONS': 'Uint32',
@@ -97,11 +101,15 @@ const typeMappings = <String, String>{
   'DESKTOP_WALLPAPER_POSITION': 'Uint32',
   'FDAP': 'Uint32',
   'FILEOPENDIALOGOPTIONS': 'Uint32',
+  'FILETIME': 'FILETIME',
   'GETPROPERTYSTOREFLAGS': 'Uint32',
+  'PROPERTYKEY': 'PROPERTYKEY',
+  'PROPVARIANT': 'PROPVARIANT',
   'REFPROPERTYKEY': 'Pointer<PROPERTYKEY>',
   'RECT': 'RECT',
   'SAFEARRAY': 'SAFEARRAY',
   'SFGAOF': 'Uint32',
+  'SHCONTF': 'Uint32',
   'SICHINTF': 'Uint32',
   'SIGDN': 'Uint32',
   'SIATTRIBFLAGS': 'Uint32',
@@ -118,6 +126,7 @@ const typeMappings = <String, String>{
   'IShellItem': 'COMObject',
   'IShellItemArray': 'COMObject',
   'IShellItemFilter': 'COMObject',
+  'IUnknown': 'COMObject',
   'IWbemCallResult': 'COMObject',
   'IWbemClassObject': 'COMObject',
   'IWbemContext': 'COMObject',
