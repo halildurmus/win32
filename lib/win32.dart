@@ -7,6 +7,7 @@ library win32;
 export 'src/utf16.dart';
 
 export 'src/constants.dart';
+export 'src/exceptions.dart';
 export 'src/macros.dart';
 export 'src/structs.dart';
 export 'src/win32.dart'

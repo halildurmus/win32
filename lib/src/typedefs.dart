@@ -486,6 +486,15 @@ typedef getStdHandleDart = int Function(int nStdHandle);
 typedef getStockObjectNative = IntPtr Function(Int32 i);
 typedef getStockObjectDart = int Function(int i);
 
+// DWORD GetTempPathW(
+//   DWORD  nBufferLength,
+//   LPWSTR lpBuffer
+// );
+typedef getTempPathNative = Uint32 Function(
+    Uint32 nBufferLength, Pointer<Utf16> lpBuffer);
+typedef getTempPathDart = int Function(
+    int nBufferLength, Pointer<Utf16> lpBuffer);
+
 // BOOL GetTextMetrics(
 //   HDC          hdc,
 //   LPTEXTMETRIC lptm

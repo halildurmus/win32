@@ -148,6 +148,8 @@ final GetModuleHandle =
         'GetModuleHandleW');
 final GetStdHandle = kernel32
     .lookupFunction<getStdHandleNative, getStdHandleDart>('GetStdHandle');
+final GetTempPath =
+    kernel32.lookupFunction<getTempPathNative, getTempPathDart>('GetTempPathW');
 final GetVolumePathNamesForVolumeName = kernel32.lookupFunction<
     getVolumePathNamesForVolumeNameNative,
     getVolumePathNamesForVolumeNameDart>('GetVolumePathNamesForVolumeNameW');
