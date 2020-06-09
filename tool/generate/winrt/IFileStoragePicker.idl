@@ -1,13 +1,3 @@
-#include <windows.h>
-#include <ole2.h>
-#include "inspectable.h"
-#include "AsyncInfo.h"
-#include "EventToken.h"
-#include "windowscontracts.h"
-#include "Windows.Foundation.h"
-#include "Windows.Storage.h"
-#include "Windows.System.h"
-
 // vtable_start 6
 [uuid(2CA8278A-12C5-4C5F-8977-94547793C241)]
 interface IFileOpenPicker : IInspectable
