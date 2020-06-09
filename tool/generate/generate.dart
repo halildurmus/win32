@@ -1,296 +1,21 @@
 import 'dart:io';
 
-class Parameter {
-  String type;
-  String name;
-}
-
-class Method {
-  String name;
-  String returnType;
-  List<Parameter> parameters;
-}
-
-class Interface {
-  String iid;
-  String name;
-  bool generateClass = false;
-  String clsid;
-  String className;
-  String inherits;
-  int vtableStart;
-
-  List<Method> methods;
-}
-
-String printHeader(Interface interface) {
-  final buffer = StringBuffer();
-  buffer.writeln('''
-// ignore_for_file: unused_import
-import 'dart:ffi';
-
-import 'package:ffi/ffi.dart';
-''');
-
-  if (interface.inherits != '') {
-    buffer.writeln("import '${interface.inherits}.dart';");
-  }
-  buffer.writeln('''
-import 'combase.dart';
-import 'comerrors.dart';
-
-import '../constants.dart';
-import '../macros.dart';
-import '../structs.dart';
-import '../win32.dart';
-''');
-  return buffer.toString();
-}
-
-const typeMappings = <String, String>{
-  // Base C types
-  'void': 'void',
-  'int': 'Int32',
-  'long': 'Int32',
-  'short': 'Int16',
-  'char': 'Int8',
-
-// Windows ints
-  'INT': 'Int32',
-  'UINT': 'Uint32',
-  'DWORD': 'Uint32',
-  'ULONG': 'Uint32',
-  'LONG': 'Int32',
-  'WORD': 'Uint16',
-  'SHORT': 'Int16',
-  'BYTE': 'Uint8',
-  'BOOL': 'Int32',
-  'ULONGLONG': 'Uint64',
-
-  // Windows strings
-  'LPCSTR': 'Pointer<Utf16>',
-  'LPCWSTR': 'Pointer<Utf16>',
-  'LPWSTR': 'Pointer<Utf16>',
-  'BSTR': 'Pointer<Utf16>',
-  'WCHAR': 'Pointer<Utf16>',
-
-  // Core Windows types
-  'ATOM': 'Int16',
-  'HANDLE': 'IntPtr',
-  'HBRUSH': 'IntPtr',
-  'HDC': 'IntPtr',
-  'HINSTANCE': 'IntPtr',
-  'HRESULT': 'Uint32',
-  'HWND': 'IntPtr',
-  'LPARAM': 'IntPtr',
-  'LRESULT': 'IntPtr',
-  'REFGUID': 'Pointer<GUID>',
-  'REFIID': 'Pointer<GUID>',
-  'WPARAM': 'IntPtr',
-  'WNDPROC': 'IntPtr',
-
-  // Structs and enums
-  'CDCONTROLSTATEF': 'Int32',
-  'CIMTYPE': 'Int32',
-  'CLSID': 'CLSID',
-  'COLORREF': 'Uint32',
-  'COMDLG_FILTERSPEC': 'COMDLG_FILTERSPEC',
-  'DESKTOP_SLIDESHOW_OPTIONS': 'Uint32',
-  'DESKTOP_SLIDESHOW_DIRECTION': 'Uint32',
-  'DESKTOP_SLIDESHOW_STATE': 'Uint32',
-  'DESKTOP_WALLPAPER_POSITION': 'Uint32',
-  'FDAP': 'Uint32',
-  'FILEOPENDIALOGOPTIONS': 'Uint32',
-  'FILETIME': 'FILETIME',
-  'GETPROPERTYSTOREFLAGS': 'Uint32',
-  'PROPERTYKEY': 'PROPERTYKEY',
-  'PROPVARIANT': 'PROPVARIANT',
-  'REFPROPERTYKEY': 'Pointer<PROPERTYKEY>',
-  'RECT': 'RECT',
-  'SAFEARRAY': 'SAFEARRAY',
-  'SFGAOF': 'Uint32',
-  'SHCONTF': 'Uint32',
-  'SICHINTF': 'Uint32',
-  'SIGDN': 'Uint32',
-  'SIATTRIBFLAGS': 'Uint32',
-  'VARIANT': 'VARIANT_POINTER', // NOTE: This projection is incomplete
-
-  // Interfaces
-  'IBindCtx': 'COMObject',
-  'IEnumShellItems': 'COMObject',
-  'IEnumWbemClassObject': 'COMObject',
-  'IFileDialogEvents': 'COMObject',
-  'IFileOperationProgressSink': 'COMObject',
-  'IPropertyDescriptionList': 'COMObject',
-  'IPropertyStore': 'COMObject',
-  'IShellItem': 'COMObject',
-  'IShellItemArray': 'COMObject',
-  'IShellItemFilter': 'COMObject',
-  'IUnknown': 'COMObject',
-  'IWbemCallResult': 'COMObject',
-  'IWbemClassObject': 'COMObject',
-  'IWbemContext': 'COMObject',
-  'IWbemObjectSink': 'COMObject',
-  'IWbemQualifierSet': 'COMObject',
-  'IWbemServices': 'COMObject',
-};
-
-const intTypes = <String>[
-  'Int8',
-  'Int16',
-  'Int32',
-  'Int64',
-  'IntPtr',
-  'Uint8',
-  'Uint16',
-  'Uint32',
-  'Uint64'
-];
-
-String printInterfaceHeader(Interface interface) {
-  final buffer = StringBuffer();
-  if (interface.generateClass) {
-    buffer.write(
-        "const CLSID_${interface.className} = '{${interface.clsid.toString()}}';\n");
-  }
-  buffer.write(
-      "const IID_${interface.name} = '{${interface.iid.toString()}}';\n\n");
-  return buffer.toString();
-}
-
-String dartType(String nativeType) =>
-    intTypes.contains(nativeType) ? 'int' : nativeType;
-
-String printTypedefs(Interface interface) {
-  final buffer = StringBuffer();
-  for (var method in interface.methods) {
-    // Native typedef
-    buffer.writeln(
-        'typedef ${method.name}_Native = ${method.returnType} Function(');
-    buffer.write('  Pointer obj');
-    if (method.parameters.isNotEmpty) {
-      buffer.writeln(',');
-    }
-    for (var idx = 0; idx < method.parameters.length; idx++) {
-      buffer.write(
-          '  ${method.parameters[idx].type} ${method.parameters[idx].name}');
-      if (idx < method.parameters.length - 1) buffer.write(', ');
-      buffer.writeln();
-    }
-    buffer.writeln(');');
-
-    // Dart typedef
-    buffer.writeln(
-        'typedef ${method.name}_Dart = ${dartType(method.returnType)} Function(');
-    buffer.write('  Pointer obj');
-    if (method.parameters.isNotEmpty) {
-      buffer.writeln(',');
-    }
-    for (var idx = 0; idx < method.parameters.length; idx++) {
-      buffer.write(
-          '  ${dartType(method.parameters[idx].type)} ${method.parameters[idx].name}');
-      if (idx < method.parameters.length - 1) buffer.write(', ');
-      buffer.writeln();
-    }
-    buffer.writeln(');');
-    buffer.writeln();
-  }
-
-  return buffer.toString();
-}
-
-String printInterface(Interface interface) {
-  final buffer = StringBuffer();
-  var vtableIndex = interface.vtableStart;
-
-  if (interface.inherits == '') {
-    buffer.writeln('class ${interface.name} {');
-  } else {
-    buffer.writeln('class ${interface.name} extends ${interface.inherits} {');
-  }
-
-  buffer.writeln('''
-  // vtable begins at ${interface.vtableStart}, ends at ${interface.vtableStart + interface.methods.length - 1}
-''');
-  if (interface.inherits.isNotEmpty) {
-    buffer.writeln('  @override');
-  }
-  buffer.write('''
-  Pointer<COMObject> ptr;
-
-  ${interface.name}(this.ptr)''');
-  if (interface.inherits.isNotEmpty) {
-    buffer.write(': super(ptr)');
-  }
-  buffer.writeln(';\n');
-
-  for (var method in interface.methods) {
-    buffer.write('  ${dartType(method.returnType)} ${method.name}(');
-    for (var idx = 0; idx < method.parameters.length; idx++) {
-      buffer.write(
-          '${dartType(method.parameters[idx].type)} ${method.parameters[idx].name}');
-      if (idx < method.parameters.length - 1) {
-        buffer.write(', ');
-      }
-    }
-    buffer.writeln(') =>');
-    buffer.write(
-        '    Pointer<NativeFunction<${method.name}_Native>>.fromAddress(\n');
-    buffer.write(
-        '                ptr.ref.vtable.elementAt(${vtableIndex++}).value)\n');
-    buffer.write('            .asFunction<${method.name}_Dart>()(\n');
-    buffer.write('         ptr.ref.lpVtbl');
-    if (method.parameters.isNotEmpty) {
-      buffer.write(', ');
-    }
-
-    for (var idx = 0; idx < method.parameters.length; idx++) {
-      buffer.write('${method.parameters[idx].name}');
-      if (idx < method.parameters.length - 1) {
-        buffer.write(', ');
-      }
-    }
-    buffer.write(');\n\n');
-  }
-  buffer.writeln('}\n\n');
-
-  return buffer.toString();
-}
-
-String printClass(Interface interface) {
-  if (interface.generateClass) {
-    return '''
-class ${interface.className} extends ${interface.name} {
-  @override
-  Pointer<COMObject> ptr;
-
-  factory ${interface.className}.createInstance() {
-    final ptr = COMObject.allocate().addressOf;
-
-    var hr = CoCreateInstance(
-        GUID.fromString(CLSID_${interface.className}).addressOf,
-        nullptr,
-        CLSCTX_ALL,
-        GUID.fromString(IID_${interface.name}).addressOf,
-        ptr.cast());
-
-    if (!SUCCEEDED(hr)) throw COMException(hr);
-    return ${interface.className}(ptr);
-  }
-
-  ${interface.className}(this.ptr) : super(ptr);
-}
-''';
-  } else {
-    return '';
-  }
-}
+import 'interface.dart';
+import 'types.dart';
 
 Interface loadSource(File file) {
   bool inMethod = false;
   final interface = Interface();
   interface.methods = [];
   Method method;
+
+  if (file.path.endsWith('.h')) {
+    interface.sourceType = SourceType.header;
+  } else if (file.path.endsWith('.idl')) {
+    interface.sourceType = SourceType.idl;
+  } else {
+    interface.sourceType = SourceType.unknown;
+  }
 
   var lines = file.readAsLinesSync();
   var lineIndex = 0;
@@ -307,8 +32,13 @@ Interface loadSource(File file) {
         interface.className = line.split(' ')[2];
         interface.clsid = line.split(' ')[3];
       }
-      if (line.contains('MIDL_INTERFACE')) {
+      if (line.startsWith('MIDL_INTERFACE')) {
         final start = line.indexOf('"') + 1;
+        final end = start + 36;
+        interface.iid = line.substring(start, end);
+      }
+      if (line.startsWith('[uuid())')) {
+        final start = line.indexOf('(') + 1;
         final end = start + 36;
         interface.iid = line.substring(start, end);
       }
@@ -323,7 +53,10 @@ Interface loadSource(File file) {
           interface.inherits = keywords[keywords.length - 1];
         }
       }
-      if (line.contains('STDMETHODCALLTYPE')) {
+      if (line.contains('STDMETHODCALLTYPE') ||
+          line.startsWith('[propget]') ||
+          line.startsWith('[propput]') ||
+          line.startsWith('HRESULT')) {
         // method declaration
         method = Method();
         final keywords = line.trimRight().split(' ');
@@ -424,11 +157,7 @@ void main(List<String> args) {
       File outputFile =
           File('${outputDirectory.uri.toFilePath()}${parsedFile.name}.dart');
       print('Writing:    ${outputFile.path}');
-      outputFile.writeAsStringSync(printHeader(parsedFile) +
-          printInterfaceHeader(parsedFile) +
-          printTypedefs(parsedFile) +
-          printInterface(parsedFile) +
-          printClass(parsedFile));
+      outputFile.writeAsStringSync(parsedFile.toString());
 
       print('Formatting: ${outputFile.path}');
       Process.runSync('dartfmt', ['--overwrite', '--fix', outputFile.path],
