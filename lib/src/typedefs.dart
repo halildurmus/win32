@@ -545,6 +545,14 @@ typedef getWindowTextDart = int Function(
 typedef getWindowTextLengthNative = Int32 Function(IntPtr hWnd);
 typedef getWindowTextLengthDart = int Function(int hWnd);
 
+// HRESULT IIDFromString(
+//   LPCOLESTR lpsz,
+//   LPIID     lpiid
+// );
+typedef iidFromStringNative = Int32 Function(
+    Pointer<Utf16> lpsz, Pointer lpiid);
+typedef iidFromStringDart = int Function(Pointer<Utf16> lpsz, Pointer lpiid);
+
 // BOOL IsClipboardFormatAvailable(
 //   UINT format
 // );
