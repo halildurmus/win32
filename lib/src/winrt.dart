@@ -2,8 +2,6 @@
 
 // FFI prototypes for the Win32 API methods in WinRT
 
-// https://blog.xojo.com/2019/07/02/accessing-windows-runtime-winrt/
-
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/src/com/IInspectable.dart';
@@ -88,7 +86,7 @@ void main() {
 
   RoInitialize(RO_INIT_TYPE.RO_INIT_SINGLETHREADED);
 
-  final fileOpenPickerClassName = 'Windows.Globalization.Calendar';
+  final fileOpenPickerClassName = 'Windows.Storage.Pickers.FileOpenPicker';
   final fileOpenPickerClassHString = allocate<IntPtr>();
 
   var hr = WindowsCreateString(Utf16.toUtf16(fileOpenPickerClassName),
