@@ -4,7 +4,7 @@
 
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
-import 'package:win32/src/com/IInspectable.dart';
+import 'package:win32/src/generated/IInspectable.dart';
 
 import 'macros.dart';
 import 'utf16.dart';

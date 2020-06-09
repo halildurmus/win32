@@ -3,6 +3,9 @@ import 'dart:io';
 import 'interface.dart';
 import 'types.dart';
 
+/// Takes a line such as
+///       `[propget] HRESULT ViewMode([out] [retval] Windows.Storage.Pickers.PickerViewMode* value);`
+/// and converts it into a structured [Method] object.
 Method parseIdlMethod(String line, int lineIndex) {
   final method = Method();
 
@@ -34,14 +37,31 @@ Method parseIdlMethod(String line, int lineIndex) {
     if (items.length != 2) {
       throw Exception('Unexpected: $param in $lineIndex');
     } else {
-      parameter.type = items[0];
+      // converts `Windows.Storage.Pickers.PickerViewMode` to `PickerViewMode`
+      var typePrimitive = items[0].split('.').last;
+
+      // convert IDL type to Dart
+      if (typeMappings.containsKey(typePrimitive)) {
+        typePrimitive = typeMappings[typePrimitive];
+      }
+
+      // deal with pointers
+      if (typePrimitive.contains('*') &&
+          (!typePrimitive.contains('Pointer')) &&
+          (!(['LPWSTR', 'LPCWSTR'].contains(typePrimitive)))) {
+        // double pointers
+        if (typePrimitive.contains('**')) {
+          typePrimitive = 'Pointer<IntPtr>';
+        } else {
+          // single pointers
+          typePrimitive.replaceAll('*', '');
+          typePrimitive = 'Pointer<${typePrimitive}>';
+        }
+      }
+
+      parameter.type = typePrimitive;
       parameter.name = items[1];
 
-      if (items[0].contains('*') &&
-          (!parameter.type.contains('Pointer')) &&
-          (!(['LPWSTR', 'LPCWSTR'].contains(parameter.type)))) {
-        parameter.type = 'Pointer<${parameter.type}>';
-      }
       print('${parameter.type} ${parameter.name}');
       method.parameters.add(parameter);
     }

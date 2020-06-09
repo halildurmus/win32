@@ -45,6 +45,12 @@ import '../macros.dart';
 import '../structs.dart';
 import '../win32.dart';
 ''');
+    if (sourceType == SourceType.idl) {
+      buffer.writeln('''
+import '../winrt_constants.dart';
+import '../com/IInspectable.dart';
+  ''');
+    }
     return buffer.toString();
   }
 
