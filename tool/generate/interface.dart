@@ -38,9 +38,8 @@ import 'package:ffi/ffi.dart';
       buffer.writeln("import '$inherits.dart';");
     }
     buffer.writeln('''
-import 'combase.dart';
-import 'comerrors.dart';
-
+import '../combase.dart';
+import '../comerrors.dart';
 import '../constants.dart';
 import '../macros.dart';
 import '../structs.dart';

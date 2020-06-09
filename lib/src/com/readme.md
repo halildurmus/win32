@@ -1,4 +1,5 @@
-As with the overall Win32 API, the COM objects in this directory are sparsely
-populated. The methods implemented are those that are used and tested for the
-various samples. An attempt has been made to offer at least a minimum viable
-set of functionality.
+These files are automatically generated using the following script:
+
+```
+C:\src\win32\tool\generate> dart generate.dart com ..\..\lib\src\com
+```

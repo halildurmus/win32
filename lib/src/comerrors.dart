@@ -1,4 +1,4 @@
-import '../constants.dart';
+import 'constants.dart';
 
 class COMException implements Exception {
   final int hresult;

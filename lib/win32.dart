@@ -13,8 +13,8 @@ export 'src/structs.dart';
 export 'src/win32.dart'
     hide user32, gdi32, kernel32, shell32, comdlg32, ole32, oleaut32;
 
-export 'src/com/combase.dart';
-export 'src/com/comerrors.dart';
+export 'src/combase.dart';
+export 'src/comerrors.dart';
 
 export 'src/com/IDesktopWallpaper.dart'
     show
