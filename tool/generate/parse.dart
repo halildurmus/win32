@@ -40,9 +40,12 @@ Method parseIdlMethod(String line, int lineIndex) {
       // converts `Windows.Storage.Pickers.PickerViewMode` to `PickerViewMode`
       var typePrimitive = items[0].split('.').last;
 
+      var dartTypePrimitive = typePrimitive;
+      dartTypePrimitive = dartTypePrimitive.replaceAll('*', '');
+
       // convert IDL type to Dart
-      if (typeMappings.containsKey(typePrimitive)) {
-        typePrimitive = typeMappings[typePrimitive];
+      if (typeMappings.containsKey(dartTypePrimitive)) {
+        dartTypePrimitive = typeMappings[dartTypePrimitive];
       }
 
       // deal with pointers
@@ -54,9 +57,10 @@ Method parseIdlMethod(String line, int lineIndex) {
           typePrimitive = 'Pointer<IntPtr>';
         } else {
           // single pointers
-          typePrimitive.replaceAll('*', '');
-          typePrimitive = 'Pointer<${typePrimitive}>';
+          typePrimitive = 'Pointer<${dartTypePrimitive}>';
         }
+      } else {
+        typePrimitive = dartTypePrimitive;
       }
 
       parameter.type = typePrimitive;

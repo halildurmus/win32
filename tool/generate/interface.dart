@@ -48,13 +48,12 @@ import '../win32.dart';
     if (sourceType == SourceType.idl) {
       buffer.writeln('''
 import '../winrt_constants.dart';
-import '../com/IInspectable.dart';
-  ''');
+''');
     }
     return buffer.toString();
   }
 
-  String get interfaceHeaderAsString {
+  String get guidConstantsAsString {
     final buffer = StringBuffer();
     if (generateClass) {
       buffer.write("const CLSID_$className = '{${clsid.toString()}}';\n");
@@ -127,35 +126,84 @@ import '../com/IInspectable.dart';
     buffer.writeln(';\n');
 
     for (var method in methods) {
-      buffer.write('  ${dartType(method.returnType)} ${method.name}(');
-      for (var idx = 0; idx < method.parameters.length; idx++) {
-        buffer.write(
-            '${dartType(method.parameters[idx].type)} ${method.parameters[idx].name}');
-        if (idx < method.parameters.length - 1) {
-          buffer.write(', ');
-        }
+      if (method.name.startsWith('get_')) {
+        buffer.write(dartGetProperty(method, vtableIndex));
+      } else if (method.name.startsWith('put_')) {
+        buffer.write(dartSetProperty(method, vtableIndex));
+      } else {
+        buffer.write(dartMethod(method, vtableIndex));
       }
-      buffer.writeln(') =>');
-      buffer.write(
-          '    Pointer<NativeFunction<${method.name}_Native>>.fromAddress(\n');
-      buffer.write(
-          '                ptr.ref.vtable.elementAt(${vtableIndex++}).value)\n');
-      buffer.write('            .asFunction<${method.name}_Dart>()(\n');
-      buffer.write('         ptr.ref.lpVtbl');
-      if (method.parameters.isNotEmpty) {
-        buffer.write(', ');
-      }
-
-      for (var idx = 0; idx < method.parameters.length; idx++) {
-        buffer.write('${method.parameters[idx].name}');
-        if (idx < method.parameters.length - 1) {
-          buffer.write(', ');
-        }
-      }
-      buffer.write(');\n\n');
+      vtableIndex++;
     }
     buffer.writeln('}\n\n');
 
+    return buffer.toString();
+  }
+
+  String dartMethod(Method method, int vtableIndex) {
+    final buffer = StringBuffer();
+    buffer.write('  ${dartType(method.returnType)} ${method.name}(');
+    for (var idx = 0; idx < method.parameters.length; idx++) {
+      buffer.write(
+          '${dartType(method.parameters[idx].type)} ${method.parameters[idx].name}');
+      if (idx < method.parameters.length - 1) {
+        buffer.write(', ');
+      }
+    }
+    buffer.writeln(') =>');
+    buffer.write(
+        '    Pointer<NativeFunction<${method.name}_Native>>.fromAddress(\n');
+    buffer.write(
+        '                ptr.ref.vtable.elementAt(${vtableIndex}).value)\n');
+    buffer.write('            .asFunction<${method.name}_Dart>()(\n');
+    buffer.write('         ptr.ref.lpVtbl');
+    if (method.parameters.isNotEmpty) {
+      buffer.write(', ');
+    }
+
+    for (var idx = 0; idx < method.parameters.length; idx++) {
+      buffer.write('${method.parameters[idx].name}');
+      if (idx < method.parameters.length - 1) {
+        buffer.write(', ');
+      }
+    }
+    buffer.write(');\n\n');
+    return buffer.toString();
+  }
+
+  String dartGetProperty(Method method, int vtableIndex) {
+    final buffer = StringBuffer();
+    buffer.writeln('  ${dartType(method.returnType)} get ${method.name} {');
+    buffer.writeln('    final retValuePtr = allocate<${method.returnType}>()');
+    buffer.writeln();
+    buffer.writeln(
+        '    final hr = Pointer<NativeFunction<${method.name}_Native>>.fromAddress(');
+    buffer.writeln(
+        '                ptr.ref.vtable.elementAt($vtableIndex).value)');
+    buffer.writeln(
+        '       .asFunction<${method.name}_Dart>()(ptr.ref.lpVtbl, retValuePtr);');
+    buffer.writeln('''
+    //   if (FAILED(hr)) throw COMException(hr);
+
+    //   final retValue = retValuePtr.value;
+    //   free(retValuePtr);
+    //   return retValue;
+    // }
+    ''');
+    return buffer.toString();
+  }
+
+  String dartSetProperty(Method method, int vtableIndex) {
+    final buffer = StringBuffer();
+    buffer.writeln('''
+  set ${method.name}(${dartType(method.returnType)} value) {
+    final hr = Pointer<NativeFunction<${method.name}_Native>>.fromAddress(
+            ptr.ref.vtable.elementAt($vtableIndex).value)
+        .asFunction<${method.name}_Dart>()(ptr.ref.lpVtbl, value);
+
+    if (FAILED(hr)) throw COMException(hr);
+  }
+''');
     return buffer.toString();
   }
 
@@ -191,8 +239,32 @@ class $className extends $name {
   @override
   String toString() =>
       headerAsString +
-      interfaceHeaderAsString +
+      guidConstantsAsString +
       typedefsAsString +
       interfaceAsString +
       classAsString;
 }
+
+/*
+  int get ViewMode {
+    final retValuePtr = allocate<Int32>();
+
+    final hr = Pointer<NativeFunction<get_ViewMode_Native>>.fromAddress(
+            ptr.ref.vtable.elementAt(6).value)
+        .asFunction<get_ViewMode_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+
+    if (FAILED(hr)) throw COMException(hr);
+
+    final retValue = retValuePtr.value;
+    free(retValuePtr);
+    return retValue;
+  }
+
+  set ViewMode(int value) {
+    final hr = Pointer<NativeFunction<put_ViewMode_Native>>.fromAddress(
+            ptr.ref.vtable.elementAt(7).value)
+        .asFunction<put_ViewMode_Dart>()(ptr.ref.lpVtbl, value);
+
+    if (FAILED(hr)) throw COMException(hr);
+  }
+*/

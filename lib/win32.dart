@@ -41,6 +41,7 @@ export 'src/generated/IFileSaveDialog.dart'
         IID_IFileSaveDialog,
         FileSaveDialog,
         CLSID_FileSaveDialog;
+export 'src/generated/IInspectable.dart' show IInspectable, IID_IInspectable;
 export 'src/generated/IModalWindow.dart' show IModalWindow, IID_IModalWindow;
 export 'src/generated/IShellItem.dart' show IShellItem, IID_IShellItem;
 export 'src/generated/IShellItem2.dart' show IShellItem2, IID_IShellItem2;

@@ -4,10 +4,8 @@
 
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
-import 'package:win32/src/generated/IInspectable.dart';
-
-import 'macros.dart';
-import 'utf16.dart';
+import 'package:win32/src/generated/IFileOpenPicker.dart';
+import 'package:win32/win32.dart';
 
 // From api-ms-win-core-winrt-l1-1-0.dll
 // https://docs.microsoft.com/en-us/windows/win32/apiindex/umbrella-lib-onecore#apis-from-api-ms-win-core-winrt-l1-1-0dll
@@ -107,6 +105,24 @@ void main() {
   if (FAILED(hr)) {
     print('GetRuntimeClassName failed.');
   }
+
+  final iFOP = GUID.allocate();
+  hr = IIDFromString(TEXT(IID_IFileOpenPicker), iFOP.addressOf);
+  if (FAILED(hr)) {
+    print('IIDFromString failed.');
+  }
+  print(iFOP);
+
+  final pickerPtr = allocate<IntPtr>();
+  hr = inspectable.QueryInterface(iFOP.addressOf, pickerPtr);
+
+  if (FAILED(hr)) {
+    print('QueryInterface failed.');
+  }
+
+  final picker = IFileOpenPicker(pickerPtr.cast());
+  picker.ViewMode = PickerViewMode.Thumbnail;
+  picker.PickSingleFileAsync(nullptr);
 
   final stringPtr = WindowsGetStringRawBuffer(classNamePtr.value, nullptr);
   print(stringPtr.unpackString(128));

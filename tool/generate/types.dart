@@ -70,6 +70,8 @@ const typeMappings = <String, String>{
   'IID': 'Pointer<GUID>',
   'HSTRING': 'IntPtr',
   'TrustLevel': 'Int32',
+  'PickerViewMode': 'Int32',
+  'PickerLocationId': 'Int32',
 
   // Interfaces
   'IBindCtx': 'COMObject',
