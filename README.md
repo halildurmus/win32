@@ -59,6 +59,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `window.dart`      | Enumerates open windows and basic window manipulation     |
 | `guid.dart`        | Creates a globally unique identifier (GUID)               |
 | `devices.dart`     | Uses volume management APIs to list all disk devices      |
+| `modules.dart`     | Enumerates all loaded modules on the current system       |
 | `snake.dart`       | Snake game using various GDI features                     |
 | `dialogshow.dart`  | Creates a common item dialog (file picker) using COM      |
 | `wmi.dart`         | Using WMI from COM to retrieve device/OS information      |

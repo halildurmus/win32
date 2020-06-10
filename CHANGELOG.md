@@ -1,3 +1,13 @@
+## 1.6.0
+
+- Add WinRT examples, including Windows.Globalization.Calendar and
+  Windows.Storage.Pickers.FileOpenPicker
+- Add various process management and kernel APIs: CloseHandle, EnumProcesses,
+  EnumProcessModules, GetModuleBaseName, GetModuleFileNameExt, OpenProcess,
+  ReadProcessMemory and WriteProcessMemory.
+- Add modules.dart sample
+- Lots of refactoring and tidy up work. 
+
 ## 1.5.1
 
  - Add GetTempPath()

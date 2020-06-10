@@ -45,6 +45,12 @@ typedef chooseColorDart = int Function(Pointer<CHOOSECOLOR> lpcc);
 typedef chooseFontNative = Int32 Function(Pointer<CHOOSEFONT> lpcf);
 typedef chooseFontDart = int Function(Pointer<CHOOSEFONT> lpcf);
 
+// BOOL CloseHandle(
+//   HANDLE hObject
+// );
+typedef closeHandleNative = Int32 Function(IntPtr hObject);
+typedef closeHandleDart = int Function(int hObject);
+
 // HRESULT CoCreateGuid(
 //   GUID *pguid
 // );
@@ -301,6 +307,27 @@ typedef endPaintNative = Int32 Function(
     IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint);
 typedef endPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
 
+// BOOL EnumProcesses(
+//   DWORD   *lpidProcess,
+//   DWORD   cb,
+//   LPDWORD lpcbNeeded
+// );
+typedef enumProcessesNative = Int32 Function(
+    Pointer<Uint32> lpidProcess, Uint32 cb, Pointer<Uint32> lpcbNeeded);
+typedef enumProcessesDart = int Function(
+    Pointer<Uint32> lpidProcess, int cb, Pointer<Uint32> lpcbNeeded);
+
+// BOOL EnumProcessModules(
+//   HANDLE  hProcess,
+//   HMODULE *lphModule,
+//   DWORD   cb,
+//   LPDWORD lpcbNeeded
+// );
+typedef enumProcessModulesNative = Int32 Function(IntPtr hProcess,
+    Pointer<IntPtr> lphModule, Int32 cb, Pointer<Int32> lpcbNeeded);
+typedef enumProcessModulesDart = int Function(
+    int hProcess, Pointer<IntPtr> lphModule, int cb, Pointer<Int32> lpcbNeeded);
+
 // BOOL EnumWindows(
 //   WNDENUMPROC lpEnumFunc,
 //   LPARAM      lParam
@@ -437,6 +464,28 @@ typedef getMessageNative = Int32 Function(
     Pointer<MSG> lpMsg, IntPtr hWnd, Int32 wMsgFilterMin, Int32 wMsgFilterMax);
 typedef getMessageDart = int Function(
     Pointer<MSG> lpMsg, int hWnd, int wMsgFilterMin, int wMsgFilterMax);
+
+// DWORD GetModuleBaseNameW(
+//   HANDLE  hProcess,
+//   HMODULE hModule,
+//   LPWSTR  lpBaseName,
+//   DWORD   nSize
+// );
+typedef getModuleBaseNameNative = Int32 Function(
+    IntPtr hProcess, IntPtr hModule, Pointer<Utf16> lpBaseName, Int32 nSize);
+typedef getModuleBaseNameDart = int Function(
+    int hProcess, int hModule, Pointer<Utf16> lpBaseName, int nSize);
+
+// DWORD GetModuleFileNameExW(
+//   HANDLE  hProcess,
+//   HMODULE hModule,
+//   LPWSTR  lpFilename,
+//   DWORD   nSize
+// );
+typedef getModuleFileNameExNative = Int32 Function(
+    IntPtr hProcess, IntPtr hModule, Pointer<Utf16> lpFilename, Int32 nSize);
+typedef getModuleFileNameExDart = int Function(
+    int hProcess, int hModule, Pointer<Utf16> lpFilename, int nSize);
 
 // HMODULE GetModuleHandleW(
 //   LPCWSTR lpModuleName
@@ -638,6 +687,16 @@ typedef moveToExNative = Int32 Function(
     IntPtr hdc, Int32 x, Int32 y, Pointer<POINT> lppt);
 typedef moveToExDart = int Function(int hdc, int x, int y, Pointer<POINT> lppt);
 
+// HANDLE OpenProcess(
+//   DWORD dwDesiredAccess,
+//   BOOL  bInheritHandle,
+//   DWORD dwProcessId
+// );
+typedef openProcessNative = Int32 Function(
+    Int32 dwDesiredAccess, Int32 bInheritHandle, Int32 dwProcessId);
+typedef openProcessDart = int Function(
+    int dwDesiredAccess, int bInheritHandle, int dwProcessId);
+
 // DWORD QueryDosDeviceW(
 //   LPCWSTR lpDeviceName,
 //   LPWSTR  lpTargetPath,
@@ -647,6 +706,7 @@ typedef queryDosDeviceNative = Int32 Function(
     Pointer<Utf16> lpDeviceName, Pointer<Utf16> lpTargetPath, Int32 ucchMax);
 typedef queryDosDeviceDart = int Function(
     Pointer<Utf16> lpDeviceName, Pointer<Utf16> lpTargetPath, int ucchMax);
+
 // BOOL PeekMessageW(
 //   LPMSG lpMsg,
 //   HWND  hWnd,
@@ -658,6 +718,26 @@ typedef peekMessageNative = Int32 Function(Pointer<MSG> lpMsg, IntPtr hWnd,
     Uint32 wMsgFilterMin, Uint32 wMsgFilterMax, Uint32 wRemoveMsg);
 typedef peekMessageDart = int Function(Pointer<MSG> lpMsg, int hWnd,
     int wMsgFilterMin, int wMsgFilterMax, int wRemoveMsg);
+
+// BOOL ReadProcessMemory(
+//   HANDLE  hProcess,
+//   LPCVOID lpBaseAddress,
+//   LPVOID  lpBuffer,
+//   SIZE_T  nSize,
+//   SIZE_T  *lpNumberOfBytesRead
+// );
+typedef readProcessMemoryNative = Int32 Function(
+    IntPtr hProcess,
+    Pointer<Void> lpBaseAddress,
+    Pointer<Void> lpBuffer,
+    IntPtr nSize,
+    Pointer<IntPtr> lpNumberOfBytesRead);
+typedef readProcessMemoryDart = int Function(
+    int hProcess,
+    Pointer<Void> lpBaseAddress,
+    Pointer<Void> lpBuffer,
+    int nSize,
+    Pointer<IntPtr> lpNumberOfBytesRead);
 
 // ATOM RegisterClassW(
 //   const WNDCLASSW *lpWndClass
@@ -1017,3 +1097,23 @@ typedef virtualFreeNative = Int32 Function(
     Pointer<Void> lpAddress, IntPtr dwSize, Int32 dwFreeType);
 typedef virtualFreeDart = int Function(
     Pointer<Void> lpAddress, int dwSize, int dwFreeType);
+
+// BOOL WriteProcessMemory(
+//   HANDLE  hProcess,
+//   LPVOID  lpBaseAddress,
+//   LPCVOID lpBuffer,
+//   SIZE_T  nSize,
+//   SIZE_T  *lpNumberOfBytesWritten
+// );
+typedef writeProcessMemoryNative = Int32 Function(
+    IntPtr hProcess,
+    Pointer<Void> lpBaseAddress,
+    Pointer<Void> lpBuffer,
+    IntPtr nSize,
+    Pointer<IntPtr> lpNumberOfBytesWritten);
+typedef writeProcessMemoryDart = int Function(
+    int hProcess,
+    Pointer<Void> lpBaseAddress,
+    Pointer<Void> lpBuffer,
+    int nSize,
+    Pointer<IntPtr> lpNumberOfBytesWritten);

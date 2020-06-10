@@ -13,7 +13,7 @@ export 'src/exceptions.dart';
 export 'src/macros.dart';
 export 'src/structs.dart';
 export 'src/win32.dart'
-    hide user32, gdi32, kernel32, shell32, comdlg32, ole32, oleaut32;
+    hide user32, gdi32, kernel32, psapi, shell32, comdlg32, ole32, oleaut32;
 
 // COM foundational exports
 export 'src/com/combase.dart';

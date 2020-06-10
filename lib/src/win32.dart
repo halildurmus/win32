@@ -121,6 +121,8 @@ final UpdateWindow =
 
 final kernel32 = DynamicLibrary.open('kernel32.dll');
 final Beep = kernel32.lookupFunction<beepNative, beepDart>('Beep');
+final CloseHandle =
+    kernel32.lookupFunction<closeHandleNative, closeHandleDart>('CloseHandle');
 final CreateFile =
     kernel32.lookupFunction<createFileNative, createFileDart>('CreateFileW');
 final FillConsoleOutputAttribute = kernel32.lookupFunction<
@@ -153,6 +155,11 @@ final GetTempPath =
 final GetVolumePathNamesForVolumeName = kernel32.lookupFunction<
     getVolumePathNamesForVolumeNameNative,
     getVolumePathNamesForVolumeNameDart>('GetVolumePathNamesForVolumeNameW');
+final OpenProcess =
+    kernel32.lookupFunction<openProcessNative, openProcessDart>('OpenProcess');
+final ReadProcessMemory =
+    kernel32.lookupFunction<readProcessMemoryNative, readProcessMemoryDart>(
+        'ReadProcessMemory');
 final QueryDosDevice =
     kernel32.lookupFunction<queryDosDeviceNative, queryDosDeviceDart>(
         'QueryDosDeviceW');
@@ -168,6 +175,22 @@ final VirtualAlloc = kernel32
     .lookupFunction<virtualAllocNative, virtualAllocDart>('VirtualAlloc');
 final VirtualFree =
     kernel32.lookupFunction<virtualFreeNative, virtualFreeDart>('VirtualFree');
+final WriteProcessMemory =
+    kernel32.lookupFunction<writeProcessMemoryNative, writeProcessMemoryDart>(
+        'WriteProcessMemory');
+
+final psapi = DynamicLibrary.open('psapi.dll');
+final EnumProcesses = psapi
+    .lookupFunction<enumProcessesNative, enumProcessesDart>('EnumProcesses');
+final EnumProcessModules =
+    psapi.lookupFunction<enumProcessModulesNative, enumProcessModulesDart>(
+        'EnumProcessModules');
+final GetModuleBaseName =
+    psapi.lookupFunction<getModuleBaseNameNative, getModuleBaseNameDart>(
+        'GetModuleBaseNameW');
+final GetModuleFileNameEx =
+    psapi.lookupFunction<getModuleFileNameExNative, getModuleFileNameExDart>(
+        'GetModuleFileNameExW');
 
 final gdi32 = DynamicLibrary.open('gdi32.dll');
 final CreateFontIndirect =
