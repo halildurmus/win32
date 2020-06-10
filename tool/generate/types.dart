@@ -66,6 +66,7 @@ const typeMappings = <String, String>{
   // WinRT types
   'IID': 'Pointer<GUID>',
   'HSTRING': 'IntPtr',
+  'AsyncStatus': 'Int32',
   'TrustLevel': 'Int32',
   'PickerViewMode': 'Int32',
   'PickerLocationId': 'Int32',
@@ -73,6 +74,9 @@ const typeMappings = <String, String>{
   'DateTime': 'Int64',
   'DayOfWeek': 'Int32',
   'Calendar': 'IntPtr', // NOTE: might need narrowing
+
+  // IDL weird and wonderful
+  'unsigned __int32': 'Uint32',
 
   // Interfaces
   'IBindCtx': 'COMObject',

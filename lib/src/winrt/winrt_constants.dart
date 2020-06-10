@@ -3,6 +3,14 @@ class RO_INIT_TYPE {
   static final RO_INIT_MULTITHREADED = 1;
 }
 
+// Windows.Foundation.AsyncStatus
+class AsyncStatus {
+  static final Started = 0;
+  static final Completed = (Started + 1);
+  static final Canceled = (Completed + 1);
+  static final Error = (Canceled + 1);
+}
+
 // Windows.Storage.Pickers.PickerViewMode
 class PickerViewMode {
   static final List = 0;

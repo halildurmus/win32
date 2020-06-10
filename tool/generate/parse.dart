@@ -35,7 +35,10 @@ Method parseIdlMethod(String line, int lineIndex) {
       param = param.substring(param.lastIndexOf(']') + 2);
     }
 
-    final items = param.split(' ');
+    var items = param.split(' ');
+    if ((items.length == 3) && (items[0] == 'unsigned')) {
+      items = [items[0] + ' ' + items[1], items[2]];
+    }
     if (items.length > 2) {
       throw Exception(
           'Unexpected at line $lineIndex: ${items.length} items in $param');
@@ -52,9 +55,10 @@ Method parseIdlMethod(String line, int lineIndex) {
       }
 
       // deal with pointers
-      if (typePrimitive.contains('*') &&
-          (!typePrimitive.contains('Pointer')) &&
-          (!(['LPWSTR', 'LPCWSTR'].contains(typePrimitive)))) {
+      if ((typePrimitive.contains('*') ||
+          (items[1].contains('*')) &&
+              (!typePrimitive.contains('Pointer')) &&
+              (!(['LPWSTR', 'LPCWSTR'].contains(typePrimitive))))) {
         // double pointers
         if (typePrimitive.contains('**')) {
           typePrimitive = 'Pointer<IntPtr>';
@@ -67,7 +71,7 @@ Method parseIdlMethod(String line, int lineIndex) {
       }
 
       parameter.type = typePrimitive;
-      parameter.name = items[1];
+      parameter.name = items[1].replaceAll('*', '');
 
       method.parameters.add(parameter);
     }
