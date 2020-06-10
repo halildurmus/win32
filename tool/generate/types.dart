@@ -72,6 +72,11 @@ const typeMappings = <String, String>{
   'TrustLevel': 'Int32',
   'PickerViewMode': 'Int32',
   'PickerLocationId': 'Int32',
+  'INT32': 'Int32',
+  'boolean': 'Uint8',
+  'DateTime': 'Int64',
+  'DayOfWeek': 'Int32',
+  'Calendar': 'IntPtr', // NOTE: might need fixing
 
   // Interfaces
   'IBindCtx': 'COMObject',

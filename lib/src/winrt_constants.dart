@@ -1,8 +1,10 @@
+// Windows.Storage.Pickers.PickerViewMode
 class PickerViewMode {
   static final List = 0;
   static final Thumbnail = 1;
 }
 
+// Windows.Storage.Pickers.PickerLocationId
 class PickerLocationId {
   static final DocumentsLibrary = 0;
   static final ComputerFolder = 1;
@@ -14,4 +16,15 @@ class PickerLocationId {
   static final VideosLibrary = 7;
   static final Objects3D = 8;
   static final Unspecified = 9;
+}
+
+// Windows.Globalization.DayOfWeek
+class DayOfWeek {
+  static final Sunday = 0;
+  static final Monday = 1;
+  static final Tuesday = 2;
+  static final Wednesday = 3;
+  static final Thursday = 4;
+  static final Friday = 5;
+  static final Saturday = 6;
 }

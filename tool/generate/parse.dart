@@ -31,12 +31,15 @@ Method parseIdlMethod(String line, int lineIndex) {
     final parameter = Parameter();
 
     // strip [in], [out], [retval]
-    param = param.substring(param.lastIndexOf(']') + 2);
+    if (param.contains(']')) {
+      param = param.substring(param.lastIndexOf(']') + 2);
+    }
 
     final items = param.split(' ');
-    if (items.length != 2) {
-      throw Exception('Unexpected: $param in $lineIndex');
-    } else {
+    if (items.length > 2) {
+      throw Exception(
+          'Unexpected at line $lineIndex: ${items.length} items in $param');
+    } else if (items.length == 2) {
       // converts `Windows.Storage.Pickers.PickerViewMode` to `PickerViewMode`
       var typePrimitive = items[0].split('.').last;
 

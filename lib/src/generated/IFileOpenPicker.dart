@@ -76,7 +76,6 @@ class IFileOpenPicker extends IInspectable {
     final hr = Pointer<NativeFunction<get_ViewMode_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(6).value)
         .asFunction<get_ViewMode_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-
     if (FAILED(hr)) throw COMException(hr);
 
     final retValue = retValuePtr.value;
@@ -92,40 +91,88 @@ class IFileOpenPicker extends IInspectable {
     if (FAILED(hr)) throw COMException(hr);
   }
 
-  int get_SettingsIdentifier(Pointer<IntPtr> value) =>
-      Pointer<NativeFunction<get_SettingsIdentifier_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(8).value)
-          .asFunction<get_SettingsIdentifier_Dart>()(ptr.ref.lpVtbl, value);
+  int get SettingsIdentifier {
+    final retValuePtr = allocate<IntPtr>();
 
-  int put_SettingsIdentifier(int value) =>
-      Pointer<NativeFunction<put_SettingsIdentifier_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(9).value)
-          .asFunction<put_SettingsIdentifier_Dart>()(ptr.ref.lpVtbl, value);
+    final hr =
+        Pointer<NativeFunction<get_SettingsIdentifier_Native>>.fromAddress(
+                    ptr.ref.vtable.elementAt(8).value)
+                .asFunction<get_SettingsIdentifier_Dart>()(
+            ptr.ref.lpVtbl, retValuePtr);
+    if (FAILED(hr)) throw COMException(hr);
 
-  int get_SuggestedStartLocation(Pointer<Int32> value) =>
-      Pointer<NativeFunction<get_SuggestedStartLocation_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(10).value)
-          .asFunction<get_SuggestedStartLocation_Dart>()(ptr.ref.lpVtbl, value);
+    final retValue = retValuePtr.value;
+    free(retValuePtr);
+    return retValue;
+  }
 
-  int put_SuggestedStartLocation(int value) =>
-      Pointer<NativeFunction<put_SuggestedStartLocation_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(11).value)
-          .asFunction<put_SuggestedStartLocation_Dart>()(ptr.ref.lpVtbl, value);
+  set SettingsIdentifier(int value) {
+    final hr =
+        Pointer<NativeFunction<put_SettingsIdentifier_Native>>.fromAddress(
+                ptr.ref.vtable.elementAt(9).value)
+            .asFunction<put_SettingsIdentifier_Dart>()(ptr.ref.lpVtbl, value);
 
-  int get_CommitButtonText(Pointer<IntPtr> value) =>
-      Pointer<NativeFunction<get_CommitButtonText_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(12).value)
-          .asFunction<get_CommitButtonText_Dart>()(ptr.ref.lpVtbl, value);
+    if (FAILED(hr)) throw COMException(hr);
+  }
 
-  int put_CommitButtonText(int value) =>
-      Pointer<NativeFunction<put_CommitButtonText_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(13).value)
-          .asFunction<put_CommitButtonText_Dart>()(ptr.ref.lpVtbl, value);
+  int get SuggestedStartLocation {
+    final retValuePtr = allocate<Int32>();
 
-  int get_FileTypeFilter(Pointer<IntPtr> value) =>
-      Pointer<NativeFunction<get_FileTypeFilter_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(14).value)
-          .asFunction<get_FileTypeFilter_Dart>()(ptr.ref.lpVtbl, value);
+    final hr =
+        Pointer<NativeFunction<get_SuggestedStartLocation_Native>>.fromAddress(
+                    ptr.ref.vtable.elementAt(10).value)
+                .asFunction<get_SuggestedStartLocation_Dart>()(
+            ptr.ref.lpVtbl, retValuePtr);
+    if (FAILED(hr)) throw COMException(hr);
+
+    final retValue = retValuePtr.value;
+    free(retValuePtr);
+    return retValue;
+  }
+
+  set SuggestedStartLocation(int value) {
+    final hr =
+        Pointer<NativeFunction<put_SuggestedStartLocation_Native>>.fromAddress(
+                    ptr.ref.vtable.elementAt(11).value)
+                .asFunction<put_SuggestedStartLocation_Dart>()(
+            ptr.ref.lpVtbl, value);
+
+    if (FAILED(hr)) throw COMException(hr);
+  }
+
+  int get CommitButtonText {
+    final retValuePtr = allocate<IntPtr>();
+
+    final hr = Pointer<NativeFunction<get_CommitButtonText_Native>>.fromAddress(
+            ptr.ref.vtable.elementAt(12).value)
+        .asFunction<get_CommitButtonText_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+    if (FAILED(hr)) throw COMException(hr);
+
+    final retValue = retValuePtr.value;
+    free(retValuePtr);
+    return retValue;
+  }
+
+  set CommitButtonText(int value) {
+    final hr = Pointer<NativeFunction<put_CommitButtonText_Native>>.fromAddress(
+            ptr.ref.vtable.elementAt(13).value)
+        .asFunction<put_CommitButtonText_Dart>()(ptr.ref.lpVtbl, value);
+
+    if (FAILED(hr)) throw COMException(hr);
+  }
+
+  int get FileTypeFilter {
+    final retValuePtr = allocate<IntPtr>();
+
+    final hr = Pointer<NativeFunction<get_FileTypeFilter_Native>>.fromAddress(
+            ptr.ref.vtable.elementAt(14).value)
+        .asFunction<get_FileTypeFilter_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+    if (FAILED(hr)) throw COMException(hr);
+
+    final retValue = retValuePtr.value;
+    free(retValuePtr);
+    return retValue;
+  }
 
   int PickSingleFileAsync(Pointer<IntPtr> operation) =>
       Pointer<NativeFunction<PickSingleFileAsync_Native>>.fromAddress(

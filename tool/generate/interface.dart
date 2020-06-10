@@ -172,9 +172,12 @@ import '../winrt_constants.dart';
   }
 
   String dartGetProperty(Method method, int vtableIndex) {
+    final rootType = method.parameters[0].type
+        .substring(8, method.parameters[0].type.length - 1);
     final buffer = StringBuffer();
-    buffer.writeln('  ${dartType(method.returnType)} get ${method.name} {');
-    buffer.writeln('    final retValuePtr = allocate<${method.returnType}>()');
+    buffer.writeln(
+        '  ${dartType(method.returnType)} get ${method.name.substring(4)} {');
+    buffer.writeln('    final retValuePtr = allocate<$rootType>();');
     buffer.writeln();
     buffer.writeln(
         '    final hr = Pointer<NativeFunction<${method.name}_Native>>.fromAddress(');
@@ -183,12 +186,12 @@ import '../winrt_constants.dart';
     buffer.writeln(
         '       .asFunction<${method.name}_Dart>()(ptr.ref.lpVtbl, retValuePtr);');
     buffer.writeln('''
-    //   if (FAILED(hr)) throw COMException(hr);
+       if (FAILED(hr)) throw COMException(hr);
 
-    //   final retValue = retValuePtr.value;
-    //   free(retValuePtr);
-    //   return retValue;
-    // }
+       final retValue = retValuePtr.value;
+       free(retValuePtr);
+       return retValue;
+     }
     ''');
     return buffer.toString();
   }
@@ -196,7 +199,7 @@ import '../winrt_constants.dart';
   String dartSetProperty(Method method, int vtableIndex) {
     final buffer = StringBuffer();
     buffer.writeln('''
-  set ${method.name}(${dartType(method.returnType)} value) {
+  set ${method.name.substring(4)}(${dartType(method.returnType)} value) {
     final hr = Pointer<NativeFunction<${method.name}_Native>>.fromAddress(
             ptr.ref.vtable.elementAt($vtableIndex).value)
         .asFunction<${method.name}_Dart>()(ptr.ref.lpVtbl, value);
