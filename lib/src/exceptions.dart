@@ -2,7 +2,8 @@
 
 // Exceptions that may be caught or thrown by the win32 library.
 
-import 'constants.dart';
+import 'package:win32/src/constants.dart';
+import 'package:win32/src/int.dart';
 
 /// General exception thrown when Windows returns an error.
 class WindowsException implements Exception {
@@ -49,6 +50,6 @@ class COMException implements Exception {
       case REGDB_E_IIDNOTREG:
         return 'REGDB_E_IIDNOTREG: Interface not registered.';
     }
-    return 'COM error 0x${hresult.toRadixString(16)}';
+    return 'COM error ${hresult.toHex(32)}';
   }
 }

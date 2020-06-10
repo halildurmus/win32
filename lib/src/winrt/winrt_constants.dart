@@ -1,3 +1,7 @@
+// winrt_constants.dart
+
+// Enums and constants used by WinRT
+
 class RO_INIT_TYPE {
   static final RO_INIT_SINGLETHREADED = 0;
   static final RO_INIT_MULTITHREADED = 1;

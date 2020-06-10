@@ -5,7 +5,7 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
-import 'structs.dart';
+import 'package:win32/src/structs.dart';
 
 // BOOL AppendMenuW(
 //   HMENU    hMenu,

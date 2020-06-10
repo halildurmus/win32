@@ -5,7 +5,7 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
-import 'typedefs.dart';
+import 'package:win32/src/typedefs.dart';
 
 // *** Callbacks ***
 typedef LPFRHookProc = Pointer<Uint32> Function(IntPtr, Int32, IntPtr, IntPtr);

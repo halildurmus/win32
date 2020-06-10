@@ -1,4 +1,9 @@
+// winrt_typedefs.dart
+
+// Function prototypes for C-based APIs associated with the Windows Runtime.
+
 import 'dart:ffi';
+
 import 'package:ffi/ffi.dart';
 
 // HRESULT RoInitialize(

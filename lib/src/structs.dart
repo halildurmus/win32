@@ -5,7 +5,7 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
-import 'constants.dart';
+import 'package:win32/src/constants.dart';
 
 // typedef struct tagWNDCLASSW {
 //   UINT      style;

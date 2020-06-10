@@ -5,7 +5,7 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
-import '../utf16.dart';
+import 'package:win32/src/utf16.dart';
 
 import 'package:win32/src/win32.dart';
 import 'package:win32/src/macros.dart';
