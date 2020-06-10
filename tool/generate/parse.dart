@@ -69,7 +69,6 @@ Method parseIdlMethod(String line, int lineIndex) {
       parameter.type = typePrimitive;
       parameter.name = items[1];
 
-      print('${parameter.type} ${parameter.name}');
       method.parameters.add(parameter);
     }
   }
@@ -136,6 +135,7 @@ Interface loadSource(File file) {
       if (line.contains('STDMETHODCALLTYPE') ||
           line.startsWith('[propget]') ||
           line.startsWith('[propput]') ||
+          line.startsWith('[overload') ||
           line.startsWith('HRESULT')) {
         // method declaration
         method = Method();

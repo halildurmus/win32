@@ -38,8 +38,8 @@ import 'package:ffi/ffi.dart';
       buffer.writeln("import '$inherits.dart';");
     }
     buffer.writeln('''
-import '../combase.dart';
-import '../comerrors.dart';
+import '../com/combase.dart';
+import '../com/comerrors.dart';
 import '../constants.dart';
 import '../macros.dart';
 import '../structs.dart';
@@ -47,7 +47,7 @@ import '../win32.dart';
 ''');
     if (sourceType == SourceType.idl) {
       buffer.writeln('''
-import '../winrt_constants.dart';
+import '../winrt/winrt_constants.dart';
 ''');
     }
     return buffer.toString();

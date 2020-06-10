@@ -4,14 +4,14 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'IInspectable.dart';
-import '../combase.dart';
-import '../comerrors.dart';
+import '../com/combase.dart';
+import '../com/comerrors.dart';
 import '../constants.dart';
 import '../macros.dart';
 import '../structs.dart';
 import '../win32.dart';
 
-import '../winrt_constants.dart';
+import '../winrt/winrt_constants.dart';
 
 const IID_IFileOpenPicker = '{2CA8278A-12C5-4C5F-8977-94547793C241}';
 

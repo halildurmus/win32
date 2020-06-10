@@ -1,3 +1,8 @@
+class RO_INIT_TYPE {
+  static final RO_INIT_SINGLETHREADED = 0;
+  static final RO_INIT_MULTITHREADED = 1;
+}
+
 // Windows.Storage.Pickers.PickerViewMode
 class PickerViewMode {
   static final List = 0;

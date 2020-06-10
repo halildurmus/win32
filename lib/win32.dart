@@ -13,10 +13,9 @@ export 'src/structs.dart';
 export 'src/win32.dart'
     hide user32, gdi32, kernel32, shell32, comdlg32, ole32, oleaut32;
 
-export 'src/combase.dart';
-export 'src/comerrors.dart';
-
-export 'src/winrt_constants.dart';
+// COM
+export 'src/com/combase.dart';
+export 'src/com/comerrors.dart';
 
 export 'src/generated/IDesktopWallpaper.dart'
     show
@@ -56,3 +55,11 @@ export 'src/generated/IWbemContext.dart' show IWbemContext, IID_IWbemContext;
 export 'src/generated/IWbemLocator.dart'
     show IWbemLocator, IID_IWbemLocator, WbemLocator, CLSID_WbemLocator;
 export 'src/generated/IWbemServices.dart' show IWbemServices, IID_IWbemServices;
+
+// WinRT
+export 'src/winrt/winrt_constants.dart';
+export 'src/winrt/winrt_prototypes.dart' hide winrt, winrt_string;
+
+export 'src/generated/ICalendar.dart' show ICalendar, IID_ICalendar;
+export 'src/generated/IFileOpenPicker.dart'
+    show IFileOpenPicker, IID_IFileOpenPicker;

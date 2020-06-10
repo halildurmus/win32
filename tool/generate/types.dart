@@ -6,17 +6,14 @@ const typeMappings = <String, String>{
   'short': 'Int16',
   'char': 'Int8',
 
-// Windows ints
-  'INT': 'Int32',
-  'UINT': 'Uint32',
-  'DWORD': 'Uint32',
-  'ULONG': 'Uint32',
-  'LONG': 'Int32',
-  'WORD': 'Uint16',
-  'SHORT': 'Int16',
+  // Windows ints
+  'LONGLONG': 'Int64', 'INT64': 'Int64',
+  'ULONGLONG': 'Uint64', 'UINT64': 'Uint64',
+  'LONG': 'Int32', 'INT': 'Int32', 'INT32': 'Int32',
+  'UINT': 'Uint32', 'UINT32': 'Uint32', 'DWORD': 'Uint32', 'ULONG': 'Uint32',
+  'SHORT': 'Int16', 'INT16': 'Int16', 'WORD': 'Uint16', 'UINT16': 'Uint16',
   'BYTE': 'Uint8',
   'BOOL': 'Int32',
-  'ULONGLONG': 'Uint64',
 
   // Windows strings
   'LPCSTR': 'Pointer<Utf16>',
@@ -72,11 +69,10 @@ const typeMappings = <String, String>{
   'TrustLevel': 'Int32',
   'PickerViewMode': 'Int32',
   'PickerLocationId': 'Int32',
-  'INT32': 'Int32',
   'boolean': 'Uint8',
   'DateTime': 'Int64',
   'DayOfWeek': 'Int32',
-  'Calendar': 'IntPtr', // NOTE: might need fixing
+  'Calendar': 'IntPtr', // NOTE: might need narrowing
 
   // Interfaces
   'IBindCtx': 'COMObject',

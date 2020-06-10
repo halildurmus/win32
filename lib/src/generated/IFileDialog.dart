@@ -4,8 +4,8 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'IModalWindow.dart';
-import '../combase.dart';
-import '../comerrors.dart';
+import '../com/combase.dart';
+import '../com/comerrors.dart';
 import '../constants.dart';
 import '../macros.dart';
 import '../structs.dart';
