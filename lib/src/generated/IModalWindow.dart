@@ -3,13 +3,14 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'IUnknown.dart';
-import '../com/combase.dart';
-import '../com/comerrors.dart';
-import '../constants.dart';
-import '../macros.dart';
-import '../structs.dart';
-import '../win32.dart';
+import 'package:win32/src/constants.dart';
+import 'package:win32/src/exceptions.dart';
+import 'package:win32/src/macros.dart';
+import 'package:win32/src/structs.dart';
+import 'package:win32/src/win32.dart';
+import 'package:win32/src/com/combase.dart';
+
+import 'package:win32/src/generated/IUnknown.dart';
 
 const IID_IModalWindow = '{b4db1657-70d7-485e-8e3e-6fcb5a5c1802}';
 

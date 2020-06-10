@@ -3,13 +3,14 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'IUnknown.dart';
-import '../com/combase.dart';
-import '../com/comerrors.dart';
-import '../constants.dart';
-import '../macros.dart';
-import '../structs.dart';
-import '../win32.dart';
+import 'package:win32/src/constants.dart';
+import 'package:win32/src/exceptions.dart';
+import 'package:win32/src/macros.dart';
+import 'package:win32/src/structs.dart';
+import 'package:win32/src/win32.dart';
+import 'package:win32/src/com/combase.dart';
+
+import 'package:win32/src/generated/IUnknown.dart';
 
 const CLSID_DesktopWallpaper = '{C2CF3110-460E-4fc1-B9D0-8A1C0C9CC4BD}';
 const IID_IDesktopWallpaper = '{B92B56A9-8B55-4E14-9A89-0199BBB6F93B}';

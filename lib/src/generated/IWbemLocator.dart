@@ -3,13 +3,14 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'IUnknown.dart';
-import '../com/combase.dart';
-import '../com/comerrors.dart';
-import '../constants.dart';
-import '../macros.dart';
-import '../structs.dart';
-import '../win32.dart';
+import 'package:win32/src/constants.dart';
+import 'package:win32/src/exceptions.dart';
+import 'package:win32/src/macros.dart';
+import 'package:win32/src/structs.dart';
+import 'package:win32/src/win32.dart';
+import 'package:win32/src/com/combase.dart';
+
+import 'package:win32/src/generated/IUnknown.dart';
 
 const CLSID_WbemLocator = '{4590f811-1d3a-11d0-891f-00aa004b2e24}';
 const IID_IWbemLocator = '{dc12a687-737f-11cf-884d-00aa004b2e24}';

@@ -34,21 +34,22 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 ''');
 
-    if (inherits != '') {
-      buffer.writeln("import '$inherits.dart';");
-    }
     buffer.writeln('''
-import '../com/combase.dart';
-import '../com/comerrors.dart';
-import '../constants.dart';
-import '../macros.dart';
-import '../structs.dart';
-import '../win32.dart';
+import 'package:win32/src/constants.dart';
+import 'package:win32/src/exceptions.dart';
+import 'package:win32/src/macros.dart';
+import 'package:win32/src/structs.dart';
+import 'package:win32/src/win32.dart';
+import 'package:win32/src/com/combase.dart';
 ''');
     if (sourceType == SourceType.idl) {
       buffer.writeln('''
-import '../winrt/winrt_constants.dart';
+import 'package:win32/src/winrt/winrt_constants.dart';
 ''');
+    }
+
+    if (inherits != '') {
+      buffer.writeln("import 'package:win32/src/generated/$inherits.dart';");
     }
     return buffer.toString();
   }

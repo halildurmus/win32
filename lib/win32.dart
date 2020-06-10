@@ -4,8 +4,10 @@
 
 library win32;
 
+// An extension helper for UTF-16 strings
 export 'src/utf16.dart';
 
+// Core Win32 APIs, constants and macros
 export 'src/constants.dart';
 export 'src/exceptions.dart';
 export 'src/macros.dart';
@@ -13,10 +15,15 @@ export 'src/structs.dart';
 export 'src/win32.dart'
     hide user32, gdi32, kernel32, shell32, comdlg32, ole32, oleaut32;
 
-// COM
+// COM foundational exports
 export 'src/com/combase.dart';
-export 'src/com/comerrors.dart';
 
+// WinRT foundational exports
+export 'src/winrt/winrt_constants.dart';
+export 'src/winrt/winrt_prototypes.dart' hide winrt, winrt_string;
+export 'src/winrt/winrt_helpers.dart';
+
+// COM interfaces
 export 'src/generated/IDesktopWallpaper.dart'
     show
         IDesktopWallpaper,
@@ -56,10 +63,7 @@ export 'src/generated/IWbemLocator.dart'
     show IWbemLocator, IID_IWbemLocator, WbemLocator, CLSID_WbemLocator;
 export 'src/generated/IWbemServices.dart' show IWbemServices, IID_IWbemServices;
 
-// WinRT
-export 'src/winrt/winrt_constants.dart';
-export 'src/winrt/winrt_prototypes.dart' hide winrt, winrt_string;
-
+// WinRT interfaces
 export 'src/generated/IAsyncInfo.dart' show IAsyncInfo, IID_IAsyncInfo;
 export 'src/generated/ICalendar.dart' show ICalendar, IID_ICalendar;
 export 'src/generated/IFileOpenPicker.dart'

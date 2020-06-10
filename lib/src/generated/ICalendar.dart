@@ -3,15 +3,16 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'IInspectable.dart';
-import '../com/combase.dart';
-import '../com/comerrors.dart';
-import '../constants.dart';
-import '../macros.dart';
-import '../structs.dart';
-import '../win32.dart';
+import 'package:win32/src/constants.dart';
+import 'package:win32/src/exceptions.dart';
+import 'package:win32/src/macros.dart';
+import 'package:win32/src/structs.dart';
+import 'package:win32/src/win32.dart';
+import 'package:win32/src/com/combase.dart';
 
-import '../winrt/winrt_constants.dart';
+import 'package:win32/src/winrt/winrt_constants.dart';
+
+import 'package:win32/src/generated/IInspectable.dart';
 
 const IID_ICalendar = '{CA30221D-86D9-40FB-A26B-D44EB7CF08EA}';
 
