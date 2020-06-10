@@ -1,0 +1,16 @@
+// vtable_start 6
+[uuid(2CA8278A-12C5-4C5F-8977-94547793C241)]
+interface IFileOpenPicker : IInspectable
+{
+    [propget] HRESULT ViewMode([out] [retval] Windows.Storage.Pickers.PickerViewMode* value);
+    [propput] HRESULT ViewMode([in] Windows.Storage.Pickers.PickerViewMode value);
+    [propget] HRESULT SettingsIdentifier([out] [retval] HSTRING* value);
+    [propput] HRESULT SettingsIdentifier([in] HSTRING value);
+    [propget] HRESULT SuggestedStartLocation([out] [retval] Windows.Storage.Pickers.PickerLocationId* value);
+    [propput] HRESULT SuggestedStartLocation([in] Windows.Storage.Pickers.PickerLocationId value);
+    [propget] HRESULT CommitButtonText([out] [retval] HSTRING* value);
+    [propput] HRESULT CommitButtonText([in] HSTRING value);
+    [propget] HRESULT FileTypeFilter([out] [retval] Windows.Foundation.Collections.IVector<HSTRING>** value);
+    HRESULT PickSingleFileAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.Storage.StorageFile*>** operation);
+    HRESULT PickMultipleFilesAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVectorView<Windows.Storage.StorageFile*>*>** operation);
+}

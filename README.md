@@ -52,10 +52,9 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `paint.dart`       | Demonstrates simple GDI drawing and min/max window sizing |
 | `scroll.dart`      | Example of horizontal and vertical scrolling text window  |
 | `console.dart`     | Shows usage of console APIs                               |
-| `folders.dart`     | Retrieves known folders from the Windows profile          |
 | `msgbox.dart`      | Demonstrates a MessageBox from the console                |
 | `sendinput.dart`   | Sends keyboard and mouse input to another window          |
-| `knownfolder.dart` | Shows usage of shell APIs to retrieve user's home dir     |
+| `knownfolder.dart` | Retrieves known folders from the current user profile     |
 | `window.dart`      | Enumerates open windows and basic window manipulation     |
 | `guid.dart`        | Creates a globally unique identifier (GUID)               |
 | `devices.dart`     | Uses volume management APIs to list all disk devices      |
