@@ -53,13 +53,14 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `scroll.dart`      | Example of horizontal and vertical scrolling text window  |
 | `console.dart`     | Shows usage of console APIs                               |
 | `msgbox.dart`      | Demonstrates a MessageBox from the console                |
+| `calendar.dart`    | Gets information about the calendar from a WinRT API      |
 | `sendinput.dart`   | Sends keyboard and mouse input to another window          |
 | `knownfolder.dart` | Retrieves known folders from the current user profile     |
 | `window.dart`      | Enumerates open windows and basic window manipulation     |
 | `guid.dart`        | Creates a globally unique identifier (GUID)               |
 | `devices.dart`     | Uses volume management APIs to list all disk devices      |
 | `snake.dart`       | Snake game using various GDI features                     |
-| `dialogshow.dart`  | Creates a common item dialog (file picker) using COM)     |
+| `dialogshow.dart`  | Creates a common item dialog (file picker) using COM      |
 | `wmi.dart`         | Using WMI from COM to retrieve device/OS information      |
 | `tetris\main.dart` | Port of an open-source Tetris game to Dart                |
 | `notepad\notepad.dart` | Lightweight replica of the Windows notepad applet     |
