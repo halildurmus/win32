@@ -60,6 +60,7 @@ export 'src/generated/IWbemServices.dart' show IWbemServices, IID_IWbemServices;
 export 'src/winrt/winrt_constants.dart';
 export 'src/winrt/winrt_prototypes.dart' hide winrt, winrt_string;
 
+export 'src/generated/IAsyncInfo.dart' show IAsyncInfo, IID_IAsyncInfo;
 export 'src/generated/ICalendar.dart' show ICalendar, IID_ICalendar;
 export 'src/generated/IFileOpenPicker.dart'
     show IFileOpenPicker, IID_IFileOpenPicker;

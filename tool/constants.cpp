@@ -11,35 +11,10 @@
 #include <ShlObj_core.h>
 #include <wbemidl.h>
 
-#include "winrt/Windows.Foundation.h"
-#include "winrt/Windows.Foundation.Collections.h"
-#include "winrt/Windows.ApplicationModel.Activation.h"
-#include "winrt/Windows.Storage.h"
-#include "winrt/Windows.Storage.AccessCache.h"
-#include "winrt/Windows.Storage.Pickers.h"
-#include "winrt/Windows.Storage.Pickers.Provider.h"
-#include "winrt/Windows.System.h"
-#include "winrt/Windows.UI.Core.h"
-#include "winrt/Windows.UI.Xaml.h"
-#include "winrt/Windows.UI.Xaml.Automation.Peers.h"
-#include "winrt/Windows.UI.Xaml.Controls.h"
-#include "winrt/Windows.UI.Xaml.Controls.Primitives.h"
-#include "winrt/Windows.UI.Xaml.Documents.h"
-#include "winrt/Windows.UI.Xaml.Interop.h"
-#include "winrt/Windows.UI.Xaml.Markup.h"
-#include "winrt/Windows.UI.Xaml.Media.h"
-#include "winrt/Windows.UI.Xaml.Navigation.h"
-
-using namespace winrt;
-using namespace Windows::Storage;
-using namespace Windows::Storage::Pickers;
-
 void main()
 {
     auto test = VARIANT();
     auto iid = IID_IWbemServices;
-
-    FileOpenPicker picker;
 
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));
