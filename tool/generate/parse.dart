@@ -1,3 +1,21 @@
+// parse.dart
+
+// Parses an .IDL or .H file and attempts to identify the methods, parameters
+// and properties contained within.
+
+// This is a very naive implementation: it combines pattern matching and simple
+// state machine logic; it would likely get a failing grade from any
+// undergraduate CS class, but it's just sufficient to grab what we need from
+// the machine-generated IDL that is used by Windows to declare the COM and
+// Windows Runtime libraries.
+
+// Disclaimers: The parser does not test whether the files are well-formed, it
+// frequently falls over on unexpected input, and it requires careful copying of
+// the IDL from the original SDK. Still, it is effective for the purposes of
+// projecting the Windows Runtime into a Dart-callable format.
+
+// The entrypoint for this utility is generate.dart.
+
 import 'dart:io';
 
 import 'interface.dart';

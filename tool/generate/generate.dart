@@ -1,3 +1,12 @@
+// generate.dart
+
+// The main entrypoint for the generate tool.
+
+// This utility takes two parameters -- an input and an output directory. It
+// reads IDL or H files from the input directory, parses them into an internal
+// representation and then emits them as Dart files in the output directory,
+// overwriting existing files as necessary.
+
 import 'dart:io';
 
 import 'parse.dart';

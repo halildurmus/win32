@@ -1,3 +1,13 @@
+// types.dart
+
+// A mapping of native C types into the appropriate Dart representation for the
+// projection. Integers are converted to the FFI native type representations of
+// the appropriate bit width; pointers are converted to an IntPtr, which varies
+// in width based on 32-bit or 64-bit implementations; structs and enums are
+// converted appropriately for the Dart projection.
+
+// The entrypoint for this utility is generate.dart.
+
 const typeMappings = <String, String>{
   // Base C types
   'void': 'void',

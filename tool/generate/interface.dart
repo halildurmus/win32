@@ -1,3 +1,11 @@
+// interface.dart
+
+// Contains the data classes for the representation of interfaces, methods and
+// parameters, as well as the logic necessary to emit a Dart language
+// representation (a projection) of the underlying API.
+
+// The entrypoint for this utility is generate.dart.
+
 import 'types.dart';
 
 enum SourceType { header, idl, unknown }

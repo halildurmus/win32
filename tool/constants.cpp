@@ -1,3 +1,5 @@
+// constants.cpp
+
 // Development utility to confirm the width of various Win32 objects.
 
 // This code not used by the package itself, but is just a helper to inspect
@@ -13,9 +15,6 @@
 
 void main()
 {
-    auto test = VARIANT();
-    auto iid = IID_IWbemServices;
-
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));
     printf("sizeof(long) is %zu\n", sizeof(long));
