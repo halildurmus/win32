@@ -1,3 +1,7 @@
+// IUnknown.dart
+
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
 // ignore_for_file: unused_import
 import 'dart:ffi';
 

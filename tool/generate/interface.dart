@@ -28,6 +28,10 @@ class Interface {
   String get headerAsString {
     final buffer = StringBuffer();
     buffer.writeln('''
+// ${name}.dart
+
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
 // ignore_for_file: unused_import
 import 'dart:ffi';
 
@@ -248,27 +252,3 @@ class $className extends $name {
       interfaceAsString +
       classAsString;
 }
-
-/*
-  int get ViewMode {
-    final retValuePtr = allocate<Int32>();
-
-    final hr = Pointer<NativeFunction<get_ViewMode_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(6).value)
-        .asFunction<get_ViewMode_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-
-    if (FAILED(hr)) throw COMException(hr);
-
-    final retValue = retValuePtr.value;
-    free(retValuePtr);
-    return retValue;
-  }
-
-  set ViewMode(int value) {
-    final hr = Pointer<NativeFunction<put_ViewMode_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(7).value)
-        .asFunction<put_ViewMode_Dart>()(ptr.ref.lpVtbl, value);
-
-    if (FAILED(hr)) throw COMException(hr);
-  }
-*/
