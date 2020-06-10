@@ -1,15 +1,20 @@
+// IEnumWbemClassObject.dart
+
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
 // ignore_for_file: unused_import
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'IUnknown.dart';
-import '../com/combase.dart';
-import '../com/comerrors.dart';
-import '../constants.dart';
-import '../macros.dart';
-import '../structs.dart';
-import '../win32.dart';
+import 'package:win32/src/constants.dart';
+import 'package:win32/src/exceptions.dart';
+import 'package:win32/src/macros.dart';
+import 'package:win32/src/structs.dart';
+import 'package:win32/src/win32.dart';
+import 'package:win32/src/com/combase.dart';
+
+import 'package:win32/src/generated/IUnknown.dart';
 
 const IID_IEnumWbemClassObject = '{027947e1-d731-11ce-a357-000000000001}';
 

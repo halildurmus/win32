@@ -2,7 +2,7 @@
 
 // Dart representations of Win32 C macros
 
-import 'constants.dart';
+import 'package:win32/src/constants.dart';
 
 // #define LOWORD(l)           ((WORD)(((DWORD_PTR)(l)) & 0xffff))
 int LOWORD(int l) => l & 0xffff;

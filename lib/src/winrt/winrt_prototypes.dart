@@ -4,7 +4,7 @@
 
 import 'dart:ffi';
 
-import 'winrt_typedefs.dart';
+import 'package:win32/src/winrt/winrt_typedefs.dart';
 
 // Umbrella libraries are documented here:
 // https://docs.microsoft.com/en-us/windows/win32/apiindex/umbrella-lib-onecore#apis-from-api-ms-win-core-winrt-l1-1-0dll

@@ -1,17 +1,22 @@
+// IFileOpenPicker.dart
+
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
 // ignore_for_file: unused_import
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'IInspectable.dart';
-import '../com/combase.dart';
-import '../com/comerrors.dart';
-import '../constants.dart';
-import '../macros.dart';
-import '../structs.dart';
-import '../win32.dart';
+import 'package:win32/src/constants.dart';
+import 'package:win32/src/exceptions.dart';
+import 'package:win32/src/macros.dart';
+import 'package:win32/src/structs.dart';
+import 'package:win32/src/win32.dart';
+import 'package:win32/src/com/combase.dart';
 
-import '../winrt/winrt_constants.dart';
+import 'package:win32/src/winrt/winrt_constants.dart';
+
+import 'package:win32/src/generated/IInspectable.dart';
 
 const IID_IFileOpenPicker = '{2CA8278A-12C5-4C5F-8977-94547793C241}';
 
