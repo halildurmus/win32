@@ -6,6 +6,7 @@
 // https://stackoverflow.com/questions/54375771/how-to-read-a-winmd-winrt-metadata-file
 // https://docs.microsoft.com/en-us/windows/win32/api/rometadataresolution/nf-rometadataresolution-rogetmetadatafile
 
+import 'dart:io';
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
@@ -18,15 +19,16 @@ void PrintMetaDataFilePathForTypeName(String typeName) {
   final spMetaDataImport = allocate<IntPtr>();
   final typeDef = allocate<Uint32>();
 
-  var hr = RoGetMetaDataFile(hstrTypeName.address, nullptr,
+  // RoGetMetaDataFile can only be used for Windows Runtime classes in an app
+  // that is not a Windows Store app.
+  var hr = RoGetMetaDataFile(hstrTypeName.value, nullptr,
       hstrMetaDataFilePath.address, spMetaDataImport, typeDef);
   if (SUCCEEDED(hr)) {
     print(
         'Type $typeName was found in ${convertFromHString(hstrMetaDataFilePath)}');
-  } else if (hr == RO_E_METADATA_NAME_NOT_FOUND) {
-    print('Type $typeName was not found!');
   } else {
-    throw COMException(hr);
+    print(COMException(hr));
+    exitCode = hr;
   }
 
   if (hstrTypeName != nullptr) {
@@ -38,6 +40,13 @@ void PrintMetaDataFilePathForTypeName(String typeName) {
   }
 }
 
+/// Example usage:
+/// ```
+///   dart winmd.dart Windows.Storage.Pickers.FileOpenPicker
+/// ```
 void main(List<String> args) {
+  if (args.isEmpty || args.length != 1) {
+    args = ['Windows.Globalization.Calendar'];
+  }
   PrintMetaDataFilePathForTypeName(args.first);
 }

@@ -4,6 +4,7 @@
 
 import 'package:win32/src/constants.dart';
 import 'package:win32/src/int.dart';
+import 'package:win32/src/winrt/winrt_constants.dart';
 
 /// General exception thrown when Windows returns an error.
 class WindowsException implements Exception {
@@ -20,15 +21,13 @@ class WindowsException implements Exception {
 
 /// COM exception
 class COMException implements Exception {
-  final int hresult;
+  final int hr;
 
-  COMException(this.hresult);
+  COMException(this.hr);
 
   @override
   String toString() {
-    final hresult = this.hresult.toUnsigned(32);
-
-    switch (hresult) {
+    switch (HRESULT(hr)) {
       case S_OK:
         return null;
       case E_OUTOFMEMORY:
@@ -49,7 +48,13 @@ class COMException implements Exception {
         return 'REGDB_E_CLASSNOTREG: Class not registered.';
       case REGDB_E_IIDNOTREG:
         return 'REGDB_E_IIDNOTREG: Interface not registered.';
+      case RO_E_METADATA_NAME_NOT_FOUND:
+        return 'RO_E_METADATA_NAME_NOT_FOUND: Typename or Namespace was not found in metadata file.';
+      case APPMODEL_ERROR_NO_PACKAGE:
+        return 'APPMODEL_ERROR_NO_PACKAGE: The process has no package identity.';
     }
-    return 'COM error ${hresult.toHex(32)}';
+    return 'COM error ${HRESULT(hr).toHex(32)}';
   }
 }
+
+int HRESULT(int hr) => hr.toUnsigned(16);
