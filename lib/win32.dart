@@ -20,7 +20,8 @@ export 'src/com/combase.dart';
 
 // WinRT foundational exports
 export 'src/winrt/winrt_constants.dart';
-export 'src/winrt/winrt_prototypes.dart' hide winrt, winrt_string;
+export 'src/winrt/winrt_prototypes.dart'
+    hide winrt, winrt_string, winrt_typeresolution;
 export 'src/winrt/winrt_helpers.dart';
 
 // COM interfaces
