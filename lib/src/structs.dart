@@ -1312,11 +1312,29 @@ class SMALL_RECT extends Struct {
 
   @Int16()
   int Bottom;
+
   factory SMALL_RECT.allocate() => allocate<SMALL_RECT>().ref
     ..Left = 0
     ..Top = 0
     ..Right = 0
     ..Bottom = 0;
+}
+
+// typedef struct COR_FIELD_OFFSET
+//     {
+//     mdFieldDef ridOfField;
+//     ULONG32 ulOffset;
+//     } 	COR_FIELD_OFFSET;
+class COR_FIELD_OFFSET extends Struct {
+  @Uint32()
+  int ridOfField;
+
+  @Uint32()
+  int ulOffset;
+
+  factory COR_FIELD_OFFSET.allocate() => allocate<COR_FIELD_OFFSET>().ref
+    ..ridOfField = 0
+    ..ulOffset = 0;
 }
 
 // UNIMPLEMENTED CLASSES THAT ARE INCLUDED SO THAT COM OBJECTS CAN BE GENERATED

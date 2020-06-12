@@ -16,7 +16,7 @@ const typeMappings = <String, String>{
   'short': 'Int16',
   'char': 'Int8',
 
-  // Windows ints
+  // Windows numerics
   'LONGLONG': 'Int64', 'INT64': 'Int64',
   'ULONGLONG': 'Uint64', 'UINT64': 'Uint64',
   'LONG': 'Int32', 'INT': 'Int32', 'INT32': 'Int32',
@@ -24,6 +24,8 @@ const typeMappings = <String, String>{
   'SHORT': 'Int16', 'INT16': 'Int16', 'WORD': 'Uint16', 'UINT16': 'Uint16',
   'BYTE': 'Uint8',
   'BOOL': 'Int32',
+  'FLOAT': 'Float',
+  'DOUBLE': 'Double',
 
   // Windows strings
   'LPCSTR': 'Pointer<Utf16>',
@@ -36,12 +38,14 @@ const typeMappings = <String, String>{
   'ATOM': 'Int16',
   'HANDLE': 'IntPtr',
   'HBRUSH': 'IntPtr',
+  'HCORENUM': 'IntPtr',
   'HDC': 'IntPtr',
   'HINSTANCE': 'IntPtr',
   'HRESULT': 'Uint32',
   'HWND': 'IntPtr',
   'LPARAM': 'IntPtr',
   'LRESULT': 'IntPtr',
+  'REFCLSID': 'Pointer<GUID>',
   'REFGUID': 'Pointer<GUID>',
   'REFIID': 'Pointer<GUID>',
   'WPARAM': 'IntPtr',
@@ -61,6 +65,7 @@ const typeMappings = <String, String>{
   'FILEOPENDIALOGOPTIONS': 'Uint32',
   'FILETIME': 'FILETIME',
   'GETPROPERTYSTOREFLAGS': 'Uint32',
+  'GUID': 'GUID',
   'PROPERTYKEY': 'PROPERTYKEY',
   'PROPVARIANT': 'PROPVARIANT',
   'REFPROPERTYKEY': 'Pointer<PROPERTYKEY>',
@@ -85,6 +90,38 @@ const typeMappings = <String, String>{
   'DayOfWeek': 'Int32',
   'Calendar': 'IntPtr', // NOTE: might need narrowing
 
+  // Metadata types
+  'COR_SIGNATURE': 'Uint8',
+  'PCCOR_SIGNATURE': 'Pointer<Uint8>',
+  'COR_FIELD_OFFSET': 'COR_FIELD_OFFSET',
+  'MDUTF8CSTR': 'Pointer<Uint8>',
+  'UVCP_CONSTANT': 'Pointer<Uint8>',
+  'mdToken': 'Uint32',
+  'mdModule': 'Uint32',
+  'mdTypeRef': 'Uint32',
+  'mdTypeDef': 'Uint32',
+  'mdFieldDef': 'Uint32',
+  'mdMethodDef': 'Uint32',
+  'mdParamDef': 'Uint32',
+  'mdInterfaceImpl': 'Uint32',
+  'mdMemberRef': 'Uint32',
+  'mdCustomAttribute': 'Uint32',
+  'mdPermission': 'Uint32',
+  'mdSignature': 'Uint32',
+  'mdEvent': 'Uint32',
+  'mdProperty': 'Uint32',
+  'mdModuleRef': 'Uint32',
+  'mdAssembly': 'Uint32',
+  'mdAssemblyRef': 'Uint32',
+  'mdFile': 'Uint32',
+  'mdExportedType': 'Uint32',
+  'mdManifestResource': 'Uint32',
+  'mdTypeSpec': 'Uint32',
+  'mdGenericParam': 'Uint32',
+  'mdMethodSpec': 'Uint32',
+  'mdGenericParamConstraint': 'Uint32',
+  'mdString': 'Uint32',
+
   // IDL weird and wonderful
   'unsigned __int32': 'Uint32',
 
@@ -106,6 +143,13 @@ const typeMappings = <String, String>{
   'IWbemObjectSink': 'COMObject',
   'IWbemQualifierSet': 'COMObject',
   'IWbemServices': 'COMObject',
+
+  // TO IMPLEMENT
+  'PropertyType': 'IntPtr',
+  'TimeSpan': 'IntPtr',
+  'Point': 'IntPtr',
+  'Size': 'IntPtr',
+  'Rect': 'IntPtr',
 };
 
 const intTypes = <String>[

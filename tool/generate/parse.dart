@@ -187,7 +187,7 @@ Interface loadSource(File file) {
 
       // ignore comment-only lines
       if (!(line.startsWith('/*') && line.endsWith('*/'))) {
-        final keywords = line.split(' ');
+        var keywords = line.split(' ');
         final parameter = Parameter();
         String win32Keyword;
 
@@ -204,10 +204,15 @@ Interface loadSource(File file) {
         if (parameter.type == null) {
           throw Exception('Can\'t find type in line $lineIndex.');
         }
-        if (line.contains('*', line.indexOf(win32Keyword)) &&
+        if ((line.contains('*', line.indexOf(win32Keyword)) ||
+                (line.contains('[  ]', line.indexOf(win32Keyword)))) &&
             (!parameter.type.contains('Pointer')) &&
             (!(['LPWSTR', 'LPCWSTR'].contains(parameter.type)))) {
           parameter.type = 'Pointer<${parameter.type}>';
+
+          // resplit the keywords
+          line = line.replaceAll('[  ]', '');
+          keywords = line.split(' ');
         }
 
         if (line.contains(',')) {
