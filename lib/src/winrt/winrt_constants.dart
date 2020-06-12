@@ -2,10 +2,21 @@
 
 // Enums and constants used by WinRT
 
+// RoInitialize enum
 class RO_INIT_TYPE {
   static final RO_INIT_SINGLETHREADED = 0;
   static final RO_INIT_MULTITHREADED = 1;
 }
+
+// Windows Runtime errors
+const RO_E_METADATA_NAME_NOT_FOUND = 0x8000000F;
+const RO_E_METADATA_NAME_IS_NAMESPACE = 0x80000010;
+const RO_E_METADATA_INVALID_TYPE_FORMAT = 0x80000011;
+const RO_E_INVALID_METADATA_FILE = 0x80000012;
+const RO_E_CLOSED = 0x80000013;
+const RO_E_EXCLUSIVE_WRITE = 0x80000014;
+const RO_E_CHANGE_NOTIFICATION_IN_PROGRESS = 0x80000015;
+const RO_E_ERROR_STRING_NOT_FOUND = 0x80000016;
 
 // Windows.Foundation.AsyncStatus
 class AsyncStatus {

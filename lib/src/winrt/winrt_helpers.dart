@@ -8,6 +8,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/src/utf16.dart';
 
 import 'package:win32/src/win32.dart';
+import 'package:win32/src/exceptions.dart';
 import 'package:win32/src/macros.dart';
 import 'package:win32/src/structs.dart';
 import 'package:win32/src/winrt/winrt_prototypes.dart';
@@ -22,8 +23,8 @@ void winrtInitialize() => RoInitialize(RO_INIT_TYPE.RO_INIT_SINGLETHREADED);
 /// Closes the Windows Runtime on the current thread.
 void winrtUninitialize() => RoUninitialize();
 
-/// Takes a HSTRING (a WinRT String), and converts it to a Dart String
-String convertHString(Pointer<IntPtr> hstring) {
+/// Takes a `HSTRING` (a WinRT String), and converts it to a Dart `String`.
+String convertFromHString(Pointer<IntPtr> hstring) {
   final stringLength = allocate<Uint32>();
   final stringPtr = WindowsGetStringRawBuffer(hstring.value, stringLength);
   final dartString = stringPtr.unpackString(stringLength.value);
@@ -31,6 +32,23 @@ String convertHString(Pointer<IntPtr> hstring) {
   free(stringLength);
 
   return dartString;
+}
+
+/// Takes a Dart String and converts it to an `HSTRING` (a WinRT String),
+/// returning a pointer to the `HSTRING`.
+///
+/// The caller is responsible for deleting the `HSTRING` when it is no longer
+/// used, through a call to `WindowsDeleteString()`.
+Pointer<IntPtr> convertToHString(String string) {
+  final hString = allocate<IntPtr>();
+
+  // Create a HSTRING representing the object
+  var hr = WindowsCreateString(Utf16.toUtf16(string), string.length, hString);
+  if (FAILED(hr)) {
+    throw WindowsException('WindowsCreateString failed.');
+  } else {
+    return hString;
+  }
 }
 
 /// Creates a WinRT object.
@@ -48,7 +66,6 @@ Pointer<IntPtr> CreateObject(String className, String iid) {
   if (FAILED(hr)) {
     throw Exception('WindowsCreateString failed.');
   }
-
   // Activates the specified Windows Runtime class. This returns the WinRT
   // IInspectable interface, which is a subclass of IUnknown.
   final inspectablePtr = allocate<IntPtr>();

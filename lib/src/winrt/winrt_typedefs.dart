@@ -25,6 +25,26 @@ typedef RoActivateInstance_Native = Int32 Function(
 typedef RoActivateInstance_Dart = int Function(
     int activatableClassId, Pointer<IntPtr> instance);
 
+// HRESULT RoGetMetaDataFile(
+//   const HSTRING        name,
+//   IMetaDataDispenserEx *metaDataDispenser,
+//   HSTRING              *metaDataFilePath,
+//   IMetaDataImport2     **metaDataImport,
+//   mdTypeDef            *typeDefToken
+// );
+typedef RoGetMetaDataFile_Native = Int32 Function(
+    IntPtr name,
+    Pointer<IntPtr> metaDataDispenser,
+    IntPtr metaDataFilePath,
+    Pointer<IntPtr> metaDataImport,
+    Pointer<Uint32> typeDefToken);
+typedef RoGetMetaDataFile_Dart = int Function(
+    int name,
+    Pointer<IntPtr> metaDataDispenser,
+    int metaDataFilePath,
+    Pointer<IntPtr> metaDataImport,
+    Pointer<Uint32> typeDefToken);
+
 // HRESULT WindowsCreateString(
 //   PCNZWCH sourceString,
 //   UINT32  length,

@@ -30,3 +30,8 @@ final WindowsDeleteString = winrt_string.lookupFunction<
 final WindowsGetStringRawBuffer = winrt_string.lookupFunction<
     WindowsGetStringRawBuffer_Native,
     WindowsGetStringRawBuffer_Dart>('WindowsGetStringRawBuffer');
+
+final winrt_typeresolution =
+    DynamicLibrary.open('api-ms-win-ro-typeresolution-l1-1-0.dll');
+final RoGetMetaDataFile = winrt_typeresolution.lookupFunction<
+    RoGetMetaDataFile_Native, RoGetMetaDataFile_Dart>('RoGetMetaDataFile');

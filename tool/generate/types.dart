@@ -136,6 +136,7 @@ const typeMappings = <String, String>{
   'IShellItem': 'COMObject',
   'IShellItemArray': 'COMObject',
   'IShellItemFilter': 'COMObject',
+  'ITypeInfo': 'COMObject',
   'IUnknown': 'COMObject',
   'IWbemCallResult': 'COMObject',
   'IWbemClassObject': 'COMObject',
