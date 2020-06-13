@@ -6,6 +6,8 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import 'package:win32/src/structs.dart';
+
 // HRESULT RoInitialize(
 //   RO_INIT_TYPE initType
 // );
@@ -44,6 +46,16 @@ typedef RoGetMetaDataFile_Dart = int Function(
     int metaDataFilePath,
     Pointer<IntPtr> metaDataImport,
     Pointer<Uint32> typeDefToken);
+
+// HRESULT MetaDataGetDispenser(
+//   REFCLSID rclsid,
+//   REFIID   riid,
+//   LPVOID   *ppv
+// );
+typedef MetaDataGetDispenser_Native = Int32 Function(
+    Pointer<GUID> rclsid, Pointer<GUID> riid, Pointer<IntPtr> ppv);
+typedef MetaDataGetDispenser_Dart = int Function(
+    Pointer<GUID> rclsid, Pointer<GUID> riid, Pointer<IntPtr> ppv);
 
 // HRESULT WindowsCreateString(
 //   PCNZWCH sourceString,

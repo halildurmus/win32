@@ -49,6 +49,14 @@ export 'src/generated/IFileSaveDialog.dart'
         FileSaveDialog,
         CLSID_FileSaveDialog;
 export 'src/generated/IInspectable.dart' show IInspectable, IID_IInspectable;
+export 'src/generated/IMetaDataDispenser.dart'
+    show IMetaDataDispenser, IID_IMetaDataDispenser;
+export 'src/generated/IMetaDataDispenserEx.dart'
+    show IMetaDataDispenserEx, IID_IMetaDataDispenserEx;
+export 'src/generated/IMetaDataImport.dart'
+    show IMetaDataImport, IID_IMetaDataImport;
+export 'src/generated/IMetaDataImport2.dart'
+    show IMetaDataImport2, IID_IMetaDataImport2;
 export 'src/generated/IModalWindow.dart' show IModalWindow, IID_IModalWindow;
 export 'src/generated/IShellItem.dart' show IShellItem, IID_IShellItem;
 export 'src/generated/IShellItem2.dart' show IShellItem2, IID_IShellItem2;
@@ -69,3 +77,5 @@ export 'src/generated/IAsyncInfo.dart' show IAsyncInfo, IID_IAsyncInfo;
 export 'src/generated/ICalendar.dart' show ICalendar, IID_ICalendar;
 export 'src/generated/IFileOpenPicker.dart'
     show IFileOpenPicker, IID_IFileOpenPicker;
+export 'src/generated/IPropertyValue.dart'
+    show IPropertyValue, IID_IPropertyValue;
