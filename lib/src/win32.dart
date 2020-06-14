@@ -257,6 +257,9 @@ final ReplaceText =
     comdlg32.lookupFunction<replaceTextNative, replaceTextDart>('ReplaceTextW');
 
 final ole32 = DynamicLibrary.open('ole32.dll');
+final CLSIDFromString =
+    ole32.lookupFunction<clsidFromStringNative, clsidFromStringDart>(
+        'CLSIDFromString');
 final CoCreateGuid =
     ole32.lookupFunction<coCreateGuidNative, coCreateGuidDart>('CoCreateGuid');
 final CoCreateInstance =

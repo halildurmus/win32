@@ -52,9 +52,11 @@ class COMException implements Exception {
         return 'RO_E_METADATA_NAME_NOT_FOUND: Typename or Namespace was not found in metadata file.';
       case APPMODEL_ERROR_NO_PACKAGE:
         return 'APPMODEL_ERROR_NO_PACKAGE: The process has no package identity.';
+      case CLASS_E_CLASSNOTAVAILABLE:
+        return 'CLASS_E_CLASSNOTAVAILABLE: ClassFactory cannot supply requested class';
     }
     return 'COM error ${HRESULT(hr).toHex(32)}';
   }
 }
 
-int HRESULT(int hr) => hr.toUnsigned(16);
+int HRESULT(int hr) => hr.toUnsigned(32);

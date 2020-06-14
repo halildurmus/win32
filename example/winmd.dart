@@ -12,95 +12,134 @@ import 'package:ffi/ffi.dart';
 
 import 'package:win32/win32.dart';
 
-void PrintMetadataFilePathForTypeName(String typeName) {
+class WindowsRuntimeType {
+  int token;
+  String typeName;
+  int flags;
+  int baseTypeToken;
+
+  WindowsRuntimeType(this.token, this.typeName, this.flags, this.baseTypeToken);
+}
+
+/// Takes a typename (e.g. `Windows.Globalization.Calendar`) and returns the
+/// metadata file that contains the type.
+File metadataFileContainingType(String typeName) {
   final hstrTypeName = convertToHString(typeName);
 
   final hstrMetaDataFilePath = allocate<IntPtr>();
   final spMetaDataImport = allocate<IntPtr>();
   final typeDef = allocate<Uint32>();
 
+  File path;
+
   // RoGetMetaDataFile can only be used for Windows Runtime classes in an app
   // that is not a Windows Store app.
   var hr = RoGetMetaDataFile(hstrTypeName.value, nullptr,
       hstrMetaDataFilePath.address, spMetaDataImport, typeDef);
   if (SUCCEEDED(hr)) {
-    print(
-        'Type $typeName was found in ${convertFromHString(hstrMetaDataFilePath)}');
+    print('file');
+    path = File(convertFromHString(hstrMetaDataFilePath));
   } else {
-    print(COMException(hr));
-    exitCode = hr;
+    throw COMException(hr);
   }
 
-  if (hstrTypeName != nullptr) {
-    WindowsDeleteString(hstrTypeName.address);
-  }
+  WindowsDeleteString(hstrTypeName.address);
+  WindowsDeleteString(hstrMetaDataFilePath.address);
 
-  if (hstrMetaDataFilePath != nullptr) {
-    WindowsDeleteString(hstrMetaDataFilePath.address);
-  }
+  free(hstrTypeName);
+  free(hstrMetaDataFilePath);
+
+  return path;
 }
 
-void PrintTypesInMetadataFile(String filename) {
-  final pDispenser = allocate<IntPtr>();
-  MetaDataGetDispenser(GUID.fromString(CLSID_CorMetaDataDispenser).addressOf,
-      GUID.fromString(IID_IMetaDataDispenser).addressOf, pDispenser);
+Pointer<Uint8> ConvertToIID(String strIID) {
+  final lpszIID = TEXT(strIID);
+  final iid = allocate<Uint8>(count: 16);
+
+  final hr = IIDFromString(lpszIID, iid);
+  if (FAILED(hr)) {
+    throw COMException(hr);
+  }
+  free(lpszIID);
+  return iid;
+}
+
+Pointer<Uint8> ConvertToCLSID(String strCLSID) {
+  final lpszCLSID = TEXT(strCLSID);
+  final clsid = allocate<Uint8>(count: 16);
+
+  final hr = CLSIDFromString(lpszCLSID, clsid);
+  if (FAILED(hr)) {
+    throw COMException(hr);
+  }
+  free(lpszCLSID);
+  return clsid;
+}
+
+List<WindowsRuntimeType> metadataTypesInFile(File file) {
+  final types = <WindowsRuntimeType>[];
+
+  final pDispenser = COMObject.allocate().addressOf;
+  var hr = MetaDataGetDispenser(
+      ConvertToCLSID(CLSID_CorMetaDataDispenser).cast(),
+      ConvertToIID(IID_IMetaDataDispenser).cast(),
+      pDispenser.cast());
+
+  if (FAILED(hr)) {
+    throw COMException(hr);
+  }
 
   final dispenser = IMetaDataDispenser(pDispenser.cast());
-
-  final szFile =
-      TEXT('C:\\WINDOWS\\system32\\WinMetadata\\Windows.Globalization.winmd');
-
-  print('opening scope');
+  final szFile = TEXT(file.path);
   final pReader = allocate<IntPtr>();
-  dispenser.OpenScope(szFile, CorOpenFlags.ofRead,
-      GUID.fromString(IID_IMetaDataImport).addressOf, pReader);
-  print('scope open');
 
-  final reader = IMetaDataImport(pReader.cast());
-  print('have reader');
-  final Pointer<IntPtr> phEnum = nullptr;
+  hr = dispenser.OpenScope(szFile, CorOpenFlags.ofRead,
+      ConvertToIID(IID_IMetaDataImport2).cast(), pReader);
+  if (FAILED(hr)) {
+    throw COMException(hr);
+  }
+
+  final reader = IMetaDataImport2(pReader.cast());
+
+  final phEnum = allocate<IntPtr>()..value = 0;
   final rgTypeDefs = allocate<Uint32>();
-  final pcTypeDefs = allocate<Uint32>(count: 1);
-  print('calling enumtypedefs');
+  final pcTypeDefs = allocate<Uint32>();
 
   while (reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs) == S_OK) {
-    print('enumtypedefs worked');
-    ProcessToken(reader, rgTypeDefs.value);
+    final token = rgTypeDefs.value;
+
+    types.add(ProcessToken(reader, token));
+    hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
   }
-  print('closing enum');
-  reader.CloseEnum(phEnum.value);
+  reader.CloseEnum(phEnum.address);
+
+  return types;
 }
 
-void ProcessToken(IMetaDataImport reader, int typeID) {
+WindowsRuntimeType ProcessToken(IMetaDataImport reader, int token) {
+  WindowsRuntimeType type;
+
   final nRead = allocate<Uint32>();
   final tdFlags = allocate<Uint32>();
   final baseClassToken = allocate<Uint32>();
-  final ancestorTypeID = allocate<Uint32>();
-
   final typeName = allocate<Uint16>(count: 256).cast<Utf16>();
 
-  print('getting props');
   var hr = reader.GetTypeDefProps(
-      typeID, typeName, 256, nRead, tdFlags, baseClassToken);
-  if (HRESULT(hr) == S_OK) {
-    // final typeName = allocate<Uint16>(count: nRead.value).cast<Utf16>();
-    // hr = reader.GetTypeDefProps(
-    //     typeID, typeName, nRead.value, nRead, tdFlags, ancestorTypeID);
-    print('${typeName.unpackString(nRead.value)}');
-    return;
-  } else {
-    print(COMException(hr));
-  }
+      token, typeName, 256, nRead, tdFlags, baseClassToken);
 
-  print('exiting props');
-  // hr = reader.GetTypeRefProps(typeID, null, 0, nRead, tdFlags, baseClassToken);
-  // if (HRESULT(hr) == S_OK) {
-  //   final typeName = allocate<Uint16>(count: nRead.value).cast<Utf16>();
-  //   hr = reader.GetTypeRefProps(
-  //       typeID, typeName, nRead.value, nRead, tdFlags);
-  //   print('Got it');
-  //   return;
-  // }
+  if (HRESULT(hr) == S_OK) {
+    type = WindowsRuntimeType(token, typeName.unpackString(nRead.value),
+        tdFlags.value, baseClassToken.value);
+
+    free(nRead);
+    free(tdFlags);
+    free(baseClassToken);
+    free(typeName);
+
+    return type;
+  } else {
+    throw COMException(hr);
+  }
 }
 
 /// Example usage:
@@ -108,10 +147,25 @@ void ProcessToken(IMetaDataImport reader, int typeID) {
 ///   dart winmd.dart Windows.Storage.Pickers.FileOpenPicker
 /// ```
 void main(List<String> args) {
-  PrintTypesInMetadataFile('');
-
   // if (args.isEmpty || args.length != 1) {
   //   args = ['Windows.Globalization.Calendar'];
   // }
-  // PrintMetadataFilePathForTypeName(args.first);
+  // final winmdFile = metadataFileContainingType(args.first);
+
+  final winmdFile =
+      File('C:\\WINDOWS\\system32\\WinMetadata\\Windows.Globalization.winmd');
+  final types = metadataTypesInFile(winmdFile);
+  print(types.length);
+  for (var type in types) {
+    print(
+        '[${type.token.toRadixString(16)}] ${type.typeName} (baseType: ${type.baseTypeToken.toRadixString(16)})');
+  }
+
+  // if (winmdFile != null) {
+  //   print('Type ${args.first} can be found in ${winmdFile.path}.');
+
+  //   print('\nOther types in the same file:');
+  //   final types = metadataTypesInFile(winmdFile);
+
+  // }
 }
