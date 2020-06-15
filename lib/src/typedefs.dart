@@ -51,6 +51,15 @@ typedef chooseFontDart = int Function(Pointer<CHOOSEFONT> lpcf);
 typedef closeHandleNative = Int32 Function(IntPtr hObject);
 typedef closeHandleDart = int Function(int hObject);
 
+// HRESULT CLSIDFromString(
+//   LPCOLESTR lpsz,
+//   LPCLSID   pclsid
+// );
+typedef clsidFromStringNative = Int32 Function(
+    Pointer<Utf16> lpsz, Pointer<Uint8> pclsid);
+typedef clsidFromStringDart = int Function(
+    Pointer<Utf16> lpsz, Pointer<Uint8> pclsid);
+
 // HRESULT CoCreateGuid(
 //   GUID *pguid
 // );
@@ -599,8 +608,9 @@ typedef getWindowTextLengthDart = int Function(int hWnd);
 //   LPIID     lpiid
 // );
 typedef iidFromStringNative = Int32 Function(
-    Pointer<Utf16> lpsz, Pointer lpiid);
-typedef iidFromStringDart = int Function(Pointer<Utf16> lpsz, Pointer lpiid);
+    Pointer<Utf16> lpsz, Pointer<Uint8> lpiid);
+typedef iidFromStringDart = int Function(
+    Pointer<Utf16> lpsz, Pointer<Uint8> lpiid);
 
 // BOOL IsClipboardFormatAvailable(
 //   UINT format

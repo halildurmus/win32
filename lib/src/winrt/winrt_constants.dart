@@ -18,6 +18,24 @@ const RO_E_EXCLUSIVE_WRITE = 0x80000014;
 const RO_E_CHANGE_NOTIFICATION_IN_PROGRESS = 0x80000015;
 const RO_E_ERROR_STRING_NOT_FOUND = 0x80000016;
 
+const CLSID_CorMetaDataDispenser = '{E5CB7A31-7512-11D2-89CE-0080C792E5D8}';
+
+class CorOpenFlags {
+  static final ofRead = 0x00000000;
+  static final ofWrite = 0x00000001;
+  static final ofReadWriteMask = 0x00000001;
+  static final ofCopyMemory = 0x00000002;
+  static final ofCacheImage = 0x00000004;
+  static final ofManifestMetadata = 0x00000008;
+  static final ofReadOnly = 0x00000010;
+  static final ofTakeOwnership = 0x00000020;
+  static final ofNoTypeLib = 0x00000080;
+  static final ofNoTransform = 0x00001000;
+  static final ofReserved1 = 0x00000100;
+  static final ofReserved2 = 0x00000200;
+  static final ofReserved = 0xffffff40;
+}
+
 // Windows.Foundation.AsyncStatus
 class AsyncStatus {
   static final Started = 0;

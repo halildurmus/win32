@@ -9,6 +9,10 @@ import 'package:win32/src/winrt/winrt_typedefs.dart';
 // Umbrella libraries are documented here:
 // https://docs.microsoft.com/en-us/windows/win32/apiindex/umbrella-lib-onecore#apis-from-api-ms-win-core-winrt-l1-1-0dll
 
+// It seems to be safe to use these for APIs introduced in Windows 10 and above.
+// But usage of OneCore.lib will prevent an app from being available to Windows
+// 7.
+
 final winrt = DynamicLibrary.open('api-ms-win-core-winrt-l1-1-0.dll');
 final RoInitialize = winrt
     .lookupFunction<RoInitialize_Native, RoInitialize_Dart>('RoInitialize');
@@ -35,3 +39,8 @@ final winrt_typeresolution =
     DynamicLibrary.open('api-ms-win-ro-typeresolution-l1-1-0.dll');
 final RoGetMetaDataFile = winrt_typeresolution.lookupFunction<
     RoGetMetaDataFile_Native, RoGetMetaDataFile_Dart>('RoGetMetaDataFile');
+
+final rometadata = DynamicLibrary.open('Rometadata.dll');
+final MetaDataGetDispenser = rometadata.lookupFunction<
+    MetaDataGetDispenser_Native,
+    MetaDataGetDispenser_Dart>('MetaDataGetDispenser');

@@ -75,8 +75,8 @@ Pointer<IntPtr> CreateObject(String className, String iid) {
   }
 
   // Create an IID for the interface required
-  final iidCalendar = GUID.allocate();
-  hr = IIDFromString(TEXT(iid), iidCalendar.addressOf);
+  final iidCalendar = allocate<Uint8>(count: 16);
+  hr = IIDFromString(TEXT(iid), iidCalendar);
   if (FAILED(hr)) {
     throw Exception('IIDFromString failed.');
   }
@@ -84,7 +84,7 @@ Pointer<IntPtr> CreateObject(String className, String iid) {
   // Now use IInspectable to navigate to the relevant interface
   final inspectable = IInspectable(inspectablePtr.cast());
   final classPtr = allocate<IntPtr>();
-  hr = inspectable.QueryInterface(iidCalendar.addressOf, classPtr);
+  hr = inspectable.QueryInterface(iidCalendar.cast(), classPtr);
   if (FAILED(hr)) {
     throw Exception('QueryInterface failed.');
   }
