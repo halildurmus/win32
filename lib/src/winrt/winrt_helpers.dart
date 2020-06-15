@@ -10,7 +10,6 @@ import 'package:win32/src/utf16.dart';
 import 'package:win32/src/win32.dart';
 import 'package:win32/src/exceptions.dart';
 import 'package:win32/src/macros.dart';
-import 'package:win32/src/structs.dart';
 import 'package:win32/src/winrt/winrt_prototypes.dart';
 import 'package:win32/src/winrt/winrt_constants.dart';
 
@@ -45,7 +44,7 @@ Pointer<IntPtr> convertToHString(String string) {
   // Create a HSTRING representing the object
   var hr = WindowsCreateString(Utf16.toUtf16(string), string.length, hString);
   if (FAILED(hr)) {
-    throw WindowsException('WindowsCreateString failed.');
+    throw WindowsException(hr);
   } else {
     return hString;
   }
@@ -64,21 +63,21 @@ Pointer<IntPtr> CreateObject(String className, String iid) {
   var hr = WindowsCreateString(
       Utf16.toUtf16(className), className.length, hstrClass);
   if (FAILED(hr)) {
-    throw Exception('WindowsCreateString failed.');
+    throw WindowsException(hr);
   }
   // Activates the specified Windows Runtime class. This returns the WinRT
   // IInspectable interface, which is a subclass of IUnknown.
   final inspectablePtr = allocate<IntPtr>();
   hr = RoActivateInstance(hstrClass.value, inspectablePtr);
   if (FAILED(hr)) {
-    throw Exception('RoActivateInstance failed.');
+    throw WindowsException(hr);
   }
 
   // Create an IID for the interface required
   final iidCalendar = allocate<Uint8>(count: 16);
   hr = IIDFromString(TEXT(iid), iidCalendar);
   if (FAILED(hr)) {
-    throw Exception('IIDFromString failed.');
+    throw WindowsException(hr);
   }
 
   // Now use IInspectable to navigate to the relevant interface
@@ -86,7 +85,7 @@ Pointer<IntPtr> CreateObject(String className, String iid) {
   final classPtr = allocate<IntPtr>();
   hr = inspectable.QueryInterface(iidCalendar.cast(), classPtr);
   if (FAILED(hr)) {
-    throw Exception('QueryInterface failed.');
+    throw WindowsException(hr);
   }
 
   // Return a pointer to the relevant class

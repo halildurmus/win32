@@ -12,7 +12,7 @@ void main() {
   // Initialize COM
   var hr = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
   if (FAILED(hr)) {
-    throw COMException(hr);
+    throw WindowsException(hr);
   }
 
   // Initialize security model
@@ -29,7 +29,7 @@ void main() {
       );
 
   if (FAILED(hr)) {
-    final exception = COMException(hr);
+    final exception = WindowsException(hr);
     print(exception.toString());
 
     CoUninitialize();
@@ -48,7 +48,7 @@ void main() {
       pLoc.ptr.cast());
 
   if (FAILED(hr)) {
-    final exception = COMException(hr);
+    final exception = WindowsException(hr);
     print(exception.toString());
 
     CoUninitialize();
@@ -73,7 +73,7 @@ void main() {
       );
 
   if (FAILED(hr)) {
-    final exception = COMException(hr);
+    final exception = WindowsException(hr);
     print(exception.toString());
 
     pLoc.Release();
@@ -99,7 +99,7 @@ void main() {
       );
 
   if (FAILED(hr)) {
-    final exception = COMException(hr);
+    final exception = WindowsException(hr);
     print(exception.toString());
     pSvc.Release();
     pLoc.Release();
@@ -122,7 +122,7 @@ void main() {
       pEnumerator);
 
   if (FAILED(hr)) {
-    final exception = COMException(hr);
+    final exception = WindowsException(hr);
     print(exception.toString());
 
     pSvc.Release();

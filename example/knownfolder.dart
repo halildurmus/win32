@@ -14,7 +14,7 @@ String getTemporaryPath() {
   if (length == 0) {
     final error = GetLastError();
     free(buffer);
-    throw WindowsException('$error');
+    throw WindowsException(error);
   } else {
     var path = buffer.unpackString(MAX_PATH);
 
@@ -50,11 +50,7 @@ String getKnownFolderPath() {
       knownFolderID.addressOf, KF_FLAG_DEFAULT, NULL, pathPtrPtr);
 
   if (FAILED(hr)) {
-    if (hr == E_INVALIDARG || hr == E_FAIL) {
-      throw WindowsException('Invalid folder.');
-    } else {
-      throw WindowsException('Unknown error.');
-    }
+    throw WindowsException(hr);
   }
 
   final pathPtr = Pointer<Utf16>.fromAddress(pathPtrPtr.value);

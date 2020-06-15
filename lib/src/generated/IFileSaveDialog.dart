@@ -97,7 +97,7 @@ class FileSaveDialog extends IFileSaveDialog {
         GUID.fromString(IID_IFileSaveDialog).addressOf,
         ptr.cast());
 
-    if (!SUCCEEDED(hr)) throw COMException(hr);
+    if (!SUCCEEDED(hr)) throw WindowsException(hr);
     return FileSaveDialog(ptr);
   }
 

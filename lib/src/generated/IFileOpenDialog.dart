@@ -60,7 +60,7 @@ class FileOpenDialog extends IFileOpenDialog {
         GUID.fromString(IID_IFileOpenDialog).addressOf,
         ptr.cast());
 
-    if (!SUCCEEDED(hr)) throw COMException(hr);
+    if (!SUCCEEDED(hr)) throw WindowsException(hr);
     return FileOpenDialog(ptr);
   }
 

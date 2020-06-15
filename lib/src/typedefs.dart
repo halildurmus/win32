@@ -437,6 +437,32 @@ typedef findWindowExNative = IntPtr Function(IntPtr hWndParent,
 typedef findWindowExDart = int Function(int hWndParent, int hWndChildAfter,
     Pointer<Utf16> lpszClass, Pointer<Utf16> lpszWindow);
 
+// DWORD FormatMessageW(
+//   DWORD   dwFlags,
+//   LPCVOID lpSource,
+//   DWORD   dwMessageId,
+//   DWORD   dwLanguageId,
+//   LPWSTR  lpBuffer,
+//   DWORD   nSize,
+//   va_list *Arguments
+// );
+typedef formatMessageNative = Int32 Function(
+    Int32 dwFlags,
+    Pointer<Void> lpSource,
+    Int32 dwMessageId,
+    Int32 dwLanguageId,
+    Pointer<Utf16> lpBuffer,
+    Int32 nSize,
+    Pointer arguments);
+typedef formatMessageDart = int Function(
+    int dwFlags,
+    Pointer<Void> lpSource,
+    int dwMessageId,
+    int dwLanguageId,
+    Pointer<Utf16> lpBuffer,
+    int nSize,
+    Pointer arguments);
+
 // BOOL GetClientRect(
 //   HWND   hWnd,
 //   LPRECT lpRect

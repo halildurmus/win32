@@ -140,6 +140,8 @@ final FindNextVolume =
 final FindVolumeClose =
     kernel32.lookupFunction<findVolumeCloseNative, findVolumeCloseDart>(
         'FindVolumeClose');
+final FormatMessage = kernel32
+    .lookupFunction<formatMessageNative, formatMessageDart>('FormatMessageW');
 final GetConsoleScreenBufferInfo = kernel32.lookupFunction<
     getConsoleScreenBufferInfoNative,
     getConsoleScreenBufferInfoDart>('GetConsoleScreenBufferInfo');

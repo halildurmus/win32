@@ -199,7 +199,7 @@ import 'package:win32/src/winrt/winrt_constants.dart';
     buffer.writeln(
         '       .asFunction<${method.name}_Dart>()(ptr.ref.lpVtbl, retValuePtr);');
     buffer.writeln('''
-       if (FAILED(hr)) throw COMException(hr);
+       if (FAILED(hr)) throw WindowsException(hr);
 
        final retValue = retValuePtr.value;
        free(retValuePtr);
@@ -217,7 +217,7 @@ import 'package:win32/src/winrt/winrt_constants.dart';
             ptr.ref.vtable.elementAt($vtableIndex).value)
         .asFunction<${method.name}_Dart>()(ptr.ref.lpVtbl, value);
 
-    if (FAILED(hr)) throw COMException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
   }
 ''');
     return buffer.toString();
@@ -240,7 +240,7 @@ class $className extends $name {
         GUID.fromString(IID_$name).addressOf,
         ptr.cast());
 
-    if (!SUCCEEDED(hr)) throw COMException(hr);
+    if (!SUCCEEDED(hr)) throw WindowsException(hr);
     return $className(ptr);
   }
 
