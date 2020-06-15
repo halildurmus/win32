@@ -10,6 +10,7 @@ import 'package:win32/src/utf16.dart';
 import 'package:win32/src/win32.dart';
 import 'package:win32/src/exceptions.dart';
 import 'package:win32/src/macros.dart';
+import 'package:win32/src/structs.dart';
 import 'package:win32/src/winrt/winrt_prototypes.dart';
 import 'package:win32/src/winrt/winrt_constants.dart';
 
@@ -74,8 +75,8 @@ Pointer<IntPtr> CreateObject(String className, String iid) {
   }
 
   // Create an IID for the interface required
-  final iidCalendar = allocate<Uint8>(count: 16);
-  hr = IIDFromString(TEXT(iid), iidCalendar);
+  final riidCalendar = GUID.allocate().addressOf;
+  hr = IIDFromString(TEXT(iid), riidCalendar);
   if (FAILED(hr)) {
     throw WindowsException(hr);
   }
@@ -83,7 +84,7 @@ Pointer<IntPtr> CreateObject(String className, String iid) {
   // Now use IInspectable to navigate to the relevant interface
   final inspectable = IInspectable(inspectablePtr.cast());
   final classPtr = allocate<IntPtr>();
-  hr = inspectable.QueryInterface(iidCalendar.cast(), classPtr);
+  hr = inspectable.QueryInterface(riidCalendar, classPtr);
   if (FAILED(hr)) {
     throw WindowsException(hr);
   }

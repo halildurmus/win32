@@ -49,12 +49,16 @@ String convertWindowsErrorToString(int windowsError) {
 
 /// Generalized Windows exception
 class WindowsException implements Exception {
-  final int hr;
+  int hr;
 
-  WindowsException(this.hr);
+  WindowsException(int hr) {
+    this.hr = HRESULT(hr);
+  }
 
   @override
   String toString() {
     return 'Error ${hr.toHex(32)}: ${convertWindowsErrorToString(hr)}';
   }
 }
+
+int HRESULT(int hr) => hr.toUnsigned(32);
