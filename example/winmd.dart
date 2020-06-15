@@ -52,37 +52,13 @@ File metadataFileContainingType(String typeName) {
   return path;
 }
 
-Pointer<Uint8> ConvertToIID(String strIID) {
-  final lpszIID = TEXT(strIID);
-  final iid = allocate<Uint8>(count: 16);
-
-  final hr = IIDFromString(lpszIID, iid);
-  if (FAILED(hr)) {
-    throw WindowsException(hr);
-  }
-  free(lpszIID);
-  return iid;
-}
-
-Pointer<Uint8> ConvertToCLSID(String strCLSID) {
-  final lpszCLSID = TEXT(strCLSID);
-  final clsid = allocate<Uint8>(count: 16);
-
-  final hr = CLSIDFromString(lpszCLSID, clsid);
-  if (FAILED(hr)) {
-    throw WindowsException(hr);
-  }
-  free(lpszCLSID);
-  return clsid;
-}
-
 List<WindowsRuntimeType> metadataTypesInFile(File file) {
   final types = <WindowsRuntimeType>[];
 
   final pDispenser = COMObject.allocate().addressOf;
   var hr = MetaDataGetDispenser(
-      ConvertToCLSID(CLSID_CorMetaDataDispenser).cast(),
-      ConvertToIID(IID_IMetaDataDispenser).cast(),
+      convertToCLSID(CLSID_CorMetaDataDispenser).cast(),
+      convertToIID(IID_IMetaDataDispenser).cast(),
       pDispenser.cast());
 
   if (FAILED(hr)) {
@@ -94,7 +70,7 @@ List<WindowsRuntimeType> metadataTypesInFile(File file) {
   final pReader = allocate<IntPtr>();
 
   hr = dispenser.OpenScope(szFile, CorOpenFlags.ofRead,
-      ConvertToIID(IID_IMetaDataImport2).cast(), pReader);
+      convertToIID(IID_IMetaDataImport2).cast(), pReader);
   if (FAILED(hr)) {
     throw WindowsException(hr);
   }
