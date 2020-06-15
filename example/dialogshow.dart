@@ -16,23 +16,23 @@ void main() {
 
     final pfos = allocate<Uint32>();
     hr = fileDialog.GetOptions(pfos);
-    if (!SUCCEEDED(hr)) throw COMException(hr);
+    if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
     int options = pfos.value | FILEOPENDIALOGOPTIONS.FOS_FORCEFILESYSTEM;
     hr = fileDialog.SetOptions(options);
-    if (!SUCCEEDED(hr)) throw COMException(hr);
+    if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
     hr = fileDialog.SetDefaultExtension(TEXT('txt;csv'));
-    if (!SUCCEEDED(hr)) throw COMException(hr);
+    if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
     hr = fileDialog.SetFileNameLabel(TEXT('Custom Label:'));
-    if (!SUCCEEDED(hr)) throw COMException(hr);
+    if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
     hr = fileDialog.SetTitle(TEXT('Custom Title'));
-    if (!SUCCEEDED(hr)) throw COMException(hr);
+    if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
     hr = fileDialog.SetOkButtonLabel(TEXT('Go'));
-    if (!SUCCEEDED(hr)) throw COMException(hr);
+    if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
     final rgSpec = allocate<COMDLG_FILTERSPEC>(count: 3);
     rgSpec[0]
@@ -45,24 +45,24 @@ void main() {
       ..pszName = TEXT('All Files (*.*)')
       ..pszSpec = TEXT('*.*');
     hr = fileDialog.SetFileTypes(3, rgSpec);
-    if (!SUCCEEDED(hr)) throw COMException(hr);
+    if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
     hr = fileDialog.Show(NULL);
     if (!SUCCEEDED(hr)) {
       if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
         print('Dialog cancelled.');
       } else {
-        throw COMException(hr);
+        throw WindowsException(hr);
       }
     } else {
       final ppsi = allocate<IntPtr>();
       hr = fileDialog.GetResult(ppsi);
-      if (!SUCCEEDED(hr)) throw COMException(hr);
+      if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
       final item = IShellItem(ppsi.cast());
       final pathPtr = allocate<IntPtr>();
       hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtr.cast());
-      if (!SUCCEEDED(hr)) throw COMException(hr);
+      if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
       final path = Pointer<Utf16>.fromAddress(pathPtr.value);
 
@@ -70,13 +70,13 @@ void main() {
       print('Result: ${path.unpackString(MAX_PATH)}');
 
       hr = item.Release();
-      if (!SUCCEEDED(hr)) throw COMException(hr);
+      if (!SUCCEEDED(hr)) throw WindowsException(hr);
     }
 
     hr = fileDialog.Release();
-    if (!SUCCEEDED(hr)) throw COMException(hr);
+    if (!SUCCEEDED(hr)) throw WindowsException(hr);
   } else {
-    throw COMException(hr);
+    throw WindowsException(hr);
   }
   CoUninitialize();
 

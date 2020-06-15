@@ -51,7 +51,7 @@ class IAsyncInfo extends IInspectable {
     final hr = Pointer<NativeFunction<get_Id_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(6).value)
         .asFunction<get_Id_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw COMException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
     free(retValuePtr);
@@ -64,7 +64,7 @@ class IAsyncInfo extends IInspectable {
     final hr = Pointer<NativeFunction<get_Status_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(7).value)
         .asFunction<get_Status_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw COMException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
     free(retValuePtr);
@@ -77,7 +77,7 @@ class IAsyncInfo extends IInspectable {
     final hr = Pointer<NativeFunction<get_ErrorCode_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(8).value)
         .asFunction<get_ErrorCode_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw COMException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
     free(retValuePtr);

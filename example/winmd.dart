@@ -40,7 +40,7 @@ File metadataFileContainingType(String typeName) {
     print('file');
     path = File(convertFromHString(hstrMetaDataFilePath));
   } else {
-    throw COMException(hr);
+    throw WindowsException(hr);
   }
 
   WindowsDeleteString(hstrTypeName.address);
@@ -58,7 +58,7 @@ Pointer<Uint8> ConvertToIID(String strIID) {
 
   final hr = IIDFromString(lpszIID, iid);
   if (FAILED(hr)) {
-    throw COMException(hr);
+    throw WindowsException(hr);
   }
   free(lpszIID);
   return iid;
@@ -70,7 +70,7 @@ Pointer<Uint8> ConvertToCLSID(String strCLSID) {
 
   final hr = CLSIDFromString(lpszCLSID, clsid);
   if (FAILED(hr)) {
-    throw COMException(hr);
+    throw WindowsException(hr);
   }
   free(lpszCLSID);
   return clsid;
@@ -86,7 +86,7 @@ List<WindowsRuntimeType> metadataTypesInFile(File file) {
       pDispenser.cast());
 
   if (FAILED(hr)) {
-    throw COMException(hr);
+    throw WindowsException(hr);
   }
 
   final dispenser = IMetaDataDispenser(pDispenser.cast());
@@ -96,7 +96,7 @@ List<WindowsRuntimeType> metadataTypesInFile(File file) {
   hr = dispenser.OpenScope(szFile, CorOpenFlags.ofRead,
       ConvertToIID(IID_IMetaDataImport2).cast(), pReader);
   if (FAILED(hr)) {
-    throw COMException(hr);
+    throw WindowsException(hr);
   }
 
   final reader = IMetaDataImport2(pReader.cast());
@@ -127,7 +127,7 @@ WindowsRuntimeType ProcessToken(IMetaDataImport reader, int token) {
   var hr = reader.GetTypeDefProps(
       token, typeName, 256, nRead, tdFlags, baseClassToken);
 
-  if (HRESULT(hr) == S_OK) {
+  if (hr == S_OK) {
     type = WindowsRuntimeType(token, typeName.unpackString(nRead.value),
         tdFlags.value, baseClassToken.value);
 
@@ -138,7 +138,7 @@ WindowsRuntimeType ProcessToken(IMetaDataImport reader, int token) {
 
     return type;
   } else {
-    throw COMException(hr);
+    throw WindowsException(hr);
   }
 }
 

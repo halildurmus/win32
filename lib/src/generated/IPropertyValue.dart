@@ -193,7 +193,7 @@ class IPropertyValue extends IInspectable {
     final hr = Pointer<NativeFunction<get_Type_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(6).value)
         .asFunction<get_Type_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw COMException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
     free(retValuePtr);
@@ -206,7 +206,7 @@ class IPropertyValue extends IInspectable {
     final hr = Pointer<NativeFunction<get_IsNumericScalar_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(7).value)
         .asFunction<get_IsNumericScalar_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw COMException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
     free(retValuePtr);
