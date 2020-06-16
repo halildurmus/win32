@@ -613,6 +613,7 @@ typedef invalidateRectNative = Int32 Function(
     IntPtr hWnd, Pointer<RECT> lpRect, Int32 bErase);
 typedef invalidateRectDart = int Function(
     int hWnd, Pointer<RECT> lpRect, int bErase);
+
 // int GetWindowTextW(
 //   HWND   hWnd,
 //   LPWSTR lpString,
