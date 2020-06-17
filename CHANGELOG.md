@@ -1,3 +1,7 @@
+## 1.6.2
+
+ - Clean up some of the generated documentation
+
 ## 1.6.1
 
  - Lots of minor refactoring and tidy up
