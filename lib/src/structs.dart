@@ -20,7 +20,7 @@ import 'package:win32/src/constants.dart';
 //   LPCWSTR   lpszClassName;
 // } WNDCLASSW, *PWNDCLASSW, *NPWNDCLASSW, *LPWNDCLASSW;
 class WNDCLASS extends Struct {
-  @Int32()
+  @Uint32()
   int style;
 
   Pointer<NativeFunction> lpfnWndProc;
@@ -640,7 +640,7 @@ class MSG extends Struct {
   @IntPtr()
   int hwnd;
 
-  @Int32()
+  @Uint32()
   int message;
 
   @IntPtr()
@@ -1029,15 +1029,15 @@ class TEXTMETRIC extends Struct {
 //   int  nTrackPos;
 // } SCROLLINFO, *LPSCROLLINFO;
 class SCROLLINFO extends Struct {
-  @Int32()
+  @Uint32()
   int cbSize;
-  @Int32()
+  @Uint32()
   int fMask;
   @Int32()
   int nMin;
   @Int32()
   int nMax;
-  @Int32()
+  @Uint32()
   int nPage;
   @Int32()
   int nPos;

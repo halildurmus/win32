@@ -63,5 +63,5 @@ void main()
 
     printf("sizeof(COORD) is %zu\n", sizeof(COORD));
     printf("sizeof(SMALL_RECT) is %zu\n", sizeof(SMALL_RECT));
-    printf("sizeof(SIZE_T) is %zu\n", sizeof(SIZE_T));
+    printf("sizeof(UINT_PTR) is %zu\n", sizeof(UINT_PTR));
 }

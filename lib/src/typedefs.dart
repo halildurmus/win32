@@ -14,7 +14,7 @@ import 'package:win32/src/structs.dart';
 //   LPCWSTR  lpNewItem
 // );
 typedef appendMenuNative = Int32 Function(
-    IntPtr hMenu, Uint32 uFlags, Uint32 uIDNewItem, Pointer<Utf16> lpNewItem);
+    IntPtr hMenu, Uint32 uFlags, IntPtr uIDNewItem, Pointer<Utf16> lpNewItem);
 typedef appendMenuDart = int Function(
     int hMenu, int uFlags, int uIDNewItem, Pointer<Utf16> lpNewItem);
 
@@ -264,7 +264,7 @@ typedef createWindowExDart = int Function(
 //   LPARAM lParam
 // );
 typedef defWindowProcNative = IntPtr Function(
-    IntPtr hWnd, Int32 Msg, IntPtr wParam, IntPtr lParam);
+    IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam);
 typedef defWindowProcDart = int Function(
     int hWnd, int Msg, int wParam, int lParam);
 
@@ -495,8 +495,8 @@ typedef getLastErrorDart = int Function();
 //   UINT  wMsgFilterMin,
 //   UINT  wMsgFilterMax
 // );
-typedef getMessageNative = Int32 Function(
-    Pointer<MSG> lpMsg, IntPtr hWnd, Int32 wMsgFilterMin, Int32 wMsgFilterMax);
+typedef getMessageNative = Int32 Function(Pointer<MSG> lpMsg, IntPtr hWnd,
+    Uint32 wMsgFilterMin, Uint32 wMsgFilterMax);
 typedef getMessageDart = int Function(
     Pointer<MSG> lpMsg, int hWnd, int wMsgFilterMin, int wMsgFilterMax);
 
@@ -662,7 +662,7 @@ typedef isWindowVisibleDart = int Function(int hWnd);
 //   HWND     hWnd,
 //   UINT_PTR uIDEvent
 // );
-typedef killTimerNative = Int32 Function(IntPtr hWnd, Uint32 uIDEvent);
+typedef killTimerNative = Int32 Function(IntPtr hWnd, IntPtr uIDEvent);
 typedef killTimerDart = int Function(int hWnd, int uIDEvent);
 
 // BOOL LineTo(
@@ -697,7 +697,7 @@ typedef loadIconDart = int Function(int hInstance, Pointer<Utf16> lpIconName);
 //   UINT    uType
 // );
 typedef messageBoxNative = Int32 Function(
-    IntPtr hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption, Int32 uType);
+    IntPtr hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption, Uint32 uType);
 typedef messageBoxDart = int Function(
     int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption, int uType);
 
@@ -920,7 +920,7 @@ typedef setTextColorDart = int Function(int hdc, int color);
 //   UINT      uElapse,
 //   TIMERPROC lpTimerFunc
 // );
-typedef setTimerNative = Uint32 Function(IntPtr hWnd, Uint32 nIDEvent,
+typedef setTimerNative = IntPtr Function(IntPtr hWnd, IntPtr nIDEvent,
     Uint32 uElapse, Pointer<NativeFunction> lpTimerFunc);
 typedef setTimerDart = int Function(
     int hWnd, int nIDEvent, int uElapse, Pointer<NativeFunction> lpTimerFunc);
