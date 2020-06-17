@@ -65,7 +65,7 @@ class WNDCLASS extends Struct {
 //   BOOL   bInheritHandle;
 // } SECURITY_ATTRIBUTES, *PSECURITY_ATTRIBUTES, *LPSECURITY_ATTRIBUTES;
 class SECURITY_ATTRIBUTES extends Struct {
-  @Int32()
+  @Uint32()
   int nLength;
 
   Pointer<Void> lpSecurityDescriptor;
@@ -115,10 +115,10 @@ class SECURITY_DESCRIPTOR extends Struct {
 //   HRESULT hr;
 // } SOLE_AUTHENTICATION_SERVICE;
 class SOLE_AUTHENTICATION_SERVICE extends Struct {
-  @Int32()
+  @Uint32()
   int dwAuthnSvc;
 
-  @Int32()
+  @Uint32()
   int dwAuthzSvc;
 
   Pointer<Utf16> pPrincipalName;
@@ -208,7 +208,7 @@ class ACCEL extends Struct {
 //   LPCWSTR      lpTemplateName;
 // } CHOOSECOLORW, *LPCHOOSECOLORW;
 class CHOOSECOLOR extends Struct {
-  @Int32()
+  @Uint32()
   int lStructSize;
 
   @IntPtr()
@@ -222,7 +222,7 @@ class CHOOSECOLOR extends Struct {
 
   Pointer<Uint32> lpCustColors;
 
-  @Int32()
+  @Uint32()
   int Flags;
 
   @IntPtr()
@@ -257,13 +257,13 @@ class CHOOSECOLOR extends Struct {
 //   LPCWSTR      lpTemplateName;
 // } FINDREPLACEW, *LPFINDREPLACEW;
 class FINDREPLACE extends Struct {
-  @Int32()
+  @Uint32()
   int lStructSize;
   @IntPtr()
   int hwndOwner;
   @IntPtr()
   int hInstance;
-  @Int32()
+  @Uint32()
   int Flags;
   Pointer<Utf16> lpstrFindWhat;
   Pointer<Utf16> lpstrReplaceWith;
@@ -309,7 +309,7 @@ class FINDREPLACE extends Struct {
 //   INT          nSizeMax;
 // } CHOOSEFONTW;
 class CHOOSEFONT extends Struct {
-  @Int32()
+  @Uint32()
   int lStructSize;
   @IntPtr()
   int hwndOwner;
@@ -321,7 +321,7 @@ class CHOOSEFONT extends Struct {
   @Int32()
   int iPointSize;
 
-  @Int32()
+  @Uint32()
   int Flags;
 
   @Int32()
@@ -388,7 +388,7 @@ class CHOOSEFONT extends Struct {
 //    DWORD        FlagsEx;
 // } OPENFILENAMEW, *LPOPENFILENAMEW;
 class OPENFILENAME extends Struct {
-  @Int32()
+  @Uint32()
   int lStructSize;
   @IntPtr()
   int hwndOwner;
@@ -398,23 +398,23 @@ class OPENFILENAME extends Struct {
   Pointer<Utf16> lpstrFilter;
   Pointer<Utf16> lpstrCustomFilter;
 
-  @Int32()
+  @Uint32()
   int nMaxCustFilter;
-  @Int32()
+  @Uint32()
   int nFilterIndex;
 
   Pointer<Utf16> lpstrFile;
-  @Int32()
+  @Uint32()
   int nMaxFile;
 
   Pointer<Utf16> lpstrFileTitle;
-  @Int32()
+  @Uint32()
   int nMaxFileTitle;
 
   Pointer<Utf16> lpstrInitialDir;
   Pointer<Utf16> lpstrTitle;
 
-  @Int32()
+  @Uint32()
   int Flags;
   @Int16()
   int nFileOffset;
@@ -430,9 +430,9 @@ class OPENFILENAME extends Struct {
   Pointer<Utf16> lpTemplateName;
   Pointer<Void> pvReserved;
 
-  @Int32()
+  @Uint32()
   int dwReserved;
-  @Int32()
+  @Uint32()
   int FlagsEx;
 
   factory OPENFILENAME.allocate() => allocate<OPENFILENAME>().ref
@@ -609,7 +609,7 @@ class CREATESTRUCT extends Struct {
   Pointer<Utf16> lpszName;
   Pointer<Utf16> lpszClass;
 
-  @Int32()
+  @Uint32()
   int dwExStyle;
 
   factory CREATESTRUCT.allocate() => allocate<CREATESTRUCT>().ref
@@ -649,7 +649,7 @@ class MSG extends Struct {
   @IntPtr()
   int lParam;
 
-  @Int32()
+  @Uint32()
   int time;
 
   @Int32()
@@ -658,7 +658,7 @@ class MSG extends Struct {
   @Int32()
   int ptY;
 
-  @Int32()
+  @Uint32()
   int lPrivate;
 
   factory MSG.allocate() => allocate<MSG>().ref
@@ -833,7 +833,7 @@ class RECT extends Struct {
 //   ULONG_PTR dwExtraInfo;
 // } MOUSEINPUT, *PMOUSEINPUT, *LPMOUSEINPUT;
 class MOUSEINPUT extends Struct {
-  @Int32()
+  @Uint32()
   int type;
 
   @Int32()
@@ -844,13 +844,13 @@ class MOUSEINPUT extends Struct {
   @Int32()
   int dy;
 
-  @Int32()
+  @Uint32()
   int mouseData;
 
-  @Int32()
+  @Uint32()
   int dwFlags;
 
-  @Int32()
+  @Uint32()
   int time;
 
   Pointer<Uint32> dwExtraInfo;
@@ -885,10 +885,10 @@ class KEYBDINPUT extends Struct {
   @Int16()
   int wScan;
 
-  @Int32()
+  @Uint32()
   int dwFlags;
 
-  @Int32()
+  @Uint32()
   int time;
 
   Pointer<Uint32> dwExtraInfo;
@@ -917,7 +917,7 @@ class HARDWAREINPUT extends Struct {
   @Int32()
   int padding;
 
-  @Int32()
+  @Uint32()
   int uMsg;
 
   @Int16()
@@ -1161,7 +1161,7 @@ class GUID extends Struct {
 //   BYTE rgbReserved;
 // } RGBQUAD;
 class BITMAPINFO extends Struct {
-  @Int32()
+  @Uint32()
   int biSize;
   @Int32()
   int biWidth;
@@ -1171,17 +1171,17 @@ class BITMAPINFO extends Struct {
   int biPlanes;
   @Int16()
   int biBitCount;
-  @Int32()
+  @Uint32()
   int biCompression;
-  @Int32()
+  @Uint32()
   int biSizeImage;
   @Int32()
   int biXPelsPerMeter;
   @Int32()
   int biYPelsPerMeter;
-  @Int32()
+  @Uint32()
   int biClrUsed;
-  @Int32()
+  @Uint32()
   int biClrImportant;
   @Int8()
   int rgbBlue;
@@ -1217,7 +1217,7 @@ class BITMAPINFO extends Struct {
 //   BOOL  bVisible;
 // } CONSOLE_CURSOR_INFO, *PCONSOLE_CURSOR_INFO;
 class CONSOLE_CURSOR_INFO extends Struct {
-  @Int32()
+  @Uint32()
   int dwSize;
   @Int32()
   int bVisible;
