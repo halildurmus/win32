@@ -17,12 +17,12 @@ void main() {
   final systemPtr = allocate<IntPtr>();
   calendar.GetCalendarSystem(systemPtr);
   print('The calendar system is ${convertFromHString(systemPtr)}.');
-  WindowsDeleteString(systemPtr.value);
+  WindowsDeleteString(systemPtr.address);
 
   final dayPtr = allocate<IntPtr>();
   calendar.DayOfWeekAsFullSoloString(dayPtr);
   print('Today is ${convertFromHString(dayPtr)}.');
-  WindowsDeleteString(systemPtr.value);
+  WindowsDeleteString(systemPtr.address);
 
   if (calendar.IsDaylightSavingTime == 1) {
     print('Daylight Saving Time is in observance.');

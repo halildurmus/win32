@@ -19,6 +19,10 @@ import 'package:win32/src/constants.dart';
 //   LPCWSTR   lpszMenuName;
 //   LPCWSTR   lpszClassName;
 // } WNDCLASSW, *PWNDCLASSW, *NPWNDCLASSW, *LPWNDCLASSW;
+
+/// WNDCLASS
+///
+/// {@category Struct}
 class WNDCLASS extends Struct {
   @Uint32()
   int style;
@@ -64,6 +68,10 @@ class WNDCLASS extends Struct {
 //   LPVOID lpSecurityDescriptor;
 //   BOOL   bInheritHandle;
 // } SECURITY_ATTRIBUTES, *PSECURITY_ATTRIBUTES, *LPSECURITY_ATTRIBUTES;
+
+/// SECURITY_ATTRIBUTES
+///
+/// {@category Struct}
 class SECURITY_ATTRIBUTES extends Struct {
   @Uint32()
   int nLength;
@@ -83,6 +91,10 @@ class SECURITY_ATTRIBUTES extends Struct {
 //   PACL                        Sacl;
 //   PACL                        Dacl;
 // } SECURITY_DESCRIPTOR, *PISECURITY_DESCRIPTOR;
+
+/// SECURITY_DESCRIPTOR
+///
+/// {@category Struct}
 class SECURITY_DESCRIPTOR extends Struct {
   @Uint8()
   int Revision;
@@ -114,6 +126,10 @@ class SECURITY_DESCRIPTOR extends Struct {
 //   OLECHAR *pPrincipalName;
 //   HRESULT hr;
 // } SOLE_AUTHENTICATION_SERVICE;
+
+/// SOLE_AUTHENTICATION_SERVICE
+///
+/// {@category Struct}
 class SOLE_AUTHENTICATION_SERVICE extends Struct {
   @Uint32()
   int dwAuthnSvc;
@@ -141,6 +157,10 @@ class SOLE_AUTHENTICATION_SERVICE extends Struct {
 // returned value will be a Pointer, and so this struct is available for that
 // usage. This class will be replaced as/when FFI supports a more comprehensive
 // projection of this type.
+
+/// VARIANT_POINTER
+///
+/// {@category Struct}
 class VARIANT_POINTER extends Struct {
   @Int16()
   int vt;
@@ -165,6 +185,10 @@ class VARIANT_POINTER extends Struct {
 //   LPCWSTR pszName;
 //   LPCWSTR pszSpec;
 // } COMDLG_FILTERSPEC;
+
+/// COMDLG_FILTERSPEC
+///
+/// {@category Struct}
 class COMDLG_FILTERSPEC extends Struct {
   Pointer<Utf16> pszName;
   Pointer<Utf16> pszSpec;
@@ -179,6 +203,10 @@ class COMDLG_FILTERSPEC extends Struct {
 //     WORD   key;
 //     WORD  cmd;
 // } ACCEL, *LPACCEL;
+
+/// ACCEL
+///
+/// {@category Struct}
 class ACCEL extends Struct {
   @Uint8()
   int fVirt;
@@ -207,6 +235,10 @@ class ACCEL extends Struct {
 //   LPCCHOOKPROC lpfnHook;
 //   LPCWSTR      lpTemplateName;
 // } CHOOSECOLORW, *LPCHOOSECOLORW;
+
+/// CHOOSECOLOR
+///
+/// {@category Struct}
 class CHOOSECOLOR extends Struct {
   @Uint32()
   int lStructSize;
@@ -256,6 +288,10 @@ class CHOOSECOLOR extends Struct {
 //   LPFRHOOKPROC lpfnHook;
 //   LPCWSTR      lpTemplateName;
 // } FINDREPLACEW, *LPFINDREPLACEW;
+
+/// FINDREPLACE
+///
+/// {@category Struct}
 class FINDREPLACE extends Struct {
   @Uint32()
   int lStructSize;
@@ -308,6 +344,10 @@ class FINDREPLACE extends Struct {
 //   INT          nSizeMin;
 //   INT          nSizeMax;
 // } CHOOSEFONTW;
+
+/// CHOOSEFONT
+///
+/// {@category Struct}
 class CHOOSEFONT extends Struct {
   @Uint32()
   int lStructSize;
@@ -387,6 +427,10 @@ class CHOOSEFONT extends Struct {
 //    DWORD        dwReserved;
 //    DWORD        FlagsEx;
 // } OPENFILENAMEW, *LPOPENFILENAMEW;
+
+/// OPENFILENAME
+///
+/// {@category Struct}
 class OPENFILENAME extends Struct {
   @Uint32()
   int lStructSize;
@@ -477,6 +521,10 @@ class OPENFILENAME extends Struct {
 //   BYTE  lfPitchAndFamily;
 //   WCHAR lfFaceName[LF_FACESIZE];
 // } LOGFONTW;
+
+/// LOGFONT
+///
+/// {@category Struct}
 class LOGFONT extends Struct {
   @Int32()
   int lfHeight;
@@ -586,6 +634,10 @@ class LOGFONT extends Struct {
 //   LPCWSTR   lpszClass;
 //   DWORD     dwExStyle;
 // } CREATESTRUCTW, *LPCREATESTRUCTW;
+
+/// CREATESTRUCT
+///
+/// {@category Struct}
 class CREATESTRUCT extends Struct {
   Pointer<Void> lpCreateParams;
 
@@ -636,6 +688,10 @@ class CREATESTRUCT extends Struct {
 //   POINT  pt;
 //   DWORD  lPrivate;
 // } MSG, *PMSG, *NPMSG, *LPMSG;
+
+/// MSG
+///
+/// {@category Struct}
 class MSG extends Struct {
   @IntPtr()
   int hwnd;
@@ -676,6 +732,10 @@ class MSG extends Struct {
 //   LONG cx;
 //   LONG cy;
 // } SIZE, *PSIZE;
+
+/// SIZE
+///
+/// {@category Struct}
 class SIZE extends Struct {
   @Int32()
   int cx;
@@ -695,6 +755,10 @@ class SIZE extends Struct {
 //   POINT ptMinTrackSize;
 //   POINT ptMaxTrackSize;
 // } MINMAXINFO, *PMINMAXINFO, *LPMINMAXINFO;
+
+/// MINMAXINFO
+///
+/// {@category Struct}
 class MINMAXINFO extends Struct {
   @Int32()
   int ptReservedX;
@@ -726,6 +790,10 @@ class MINMAXINFO extends Struct {
 //   LONG x;
 //   LONG y;
 // } POINT, *PPOINT, *NPPOINT, *LPPOINT;
+
+/// POINT
+///
+/// {@category Struct}
 class POINT extends Struct {
   @Int32()
   int x;
@@ -746,6 +814,10 @@ class POINT extends Struct {
 //   BOOL fIncUpdate;
 //   BYTE rgbReserved[32];
 // } PAINTSTRUCT, *PPAINTSTRUCT, *NPPAINTSTRUCT, *LPPAINTSTRUCT;
+
+/// PAINTSTRUCT
+///
+/// {@category Struct}
 class PAINTSTRUCT extends Struct {
   @IntPtr()
   int hdc;
@@ -793,6 +865,10 @@ class PAINTSTRUCT extends Struct {
 //   LONG right;
 //   LONG bottom;
 // } RECT, *PRECT, *NPRECT, *LPRECT;
+
+/// RECT
+///
+/// {@category Struct}
 class RECT extends Struct {
   @Int32()
   int left;
@@ -832,6 +908,10 @@ class RECT extends Struct {
 //   DWORD     time;
 //   ULONG_PTR dwExtraInfo;
 // } MOUSEINPUT, *PMOUSEINPUT, *LPMOUSEINPUT;
+
+/// MOUSEINPUT
+///
+/// {@category Struct}
 class MOUSEINPUT extends Struct {
   @Uint32()
   int type;
@@ -872,6 +952,10 @@ class MOUSEINPUT extends Struct {
 //   DWORD     time;
 //   ULONG_PTR dwExtraInfo;
 // } KEYBDINPUT, *PKEYBDINPUT, *LPKEYBDINPUT;
+
+/// KEYBDINPUT
+///
+/// {@category Struct}
 class KEYBDINPUT extends Struct {
   @Int32()
   int type;
@@ -910,6 +994,10 @@ class KEYBDINPUT extends Struct {
 //   WORD  wParamL;
 //   WORD  wParamH;
 // } HARDWAREINPUT, *PHARDWAREINPUT, *LPHARDWAREINPUT;
+
+/// HARDWAREINPUT
+///
+/// {@category Struct}
 class HARDWAREINPUT extends Struct {
   @Int32()
   int type;
@@ -954,6 +1042,10 @@ class HARDWAREINPUT extends Struct {
 //   BYTE  tmPitchAndFamily;
 //   BYTE  tmCharSet;
 // } TEXTMETRICW, *PTEXTMETRICW, *NPTEXTMETRICW, *LPTEXTMETRICW;
+
+/// TEXTMETRIC
+///
+/// {@category Struct}
 class TEXTMETRIC extends Struct {
   @Int32()
   int tmHeight;
@@ -1028,6 +1120,10 @@ class TEXTMETRIC extends Struct {
 //   int  nPos;
 //   int  nTrackPos;
 // } SCROLLINFO, *LPSCROLLINFO;
+
+/// SCROLLINFO
+///
+/// {@category Struct}
 class SCROLLINFO extends Struct {
   @Uint32()
   int cbSize;
@@ -1062,6 +1158,10 @@ class SCROLLINFO extends Struct {
 //     unsigned short Data3;
 //     unsigned char  Data4[ 8 ];
 // } GUID;
+
+/// GUID
+///
+/// {@category Struct}
 class GUID extends Struct {
   @Uint32()
   int Data1;
@@ -1160,6 +1260,10 @@ class GUID extends Struct {
 //   BYTE rgbRed;
 //   BYTE rgbReserved;
 // } RGBQUAD;
+
+/// BITMAPINFO
+///
+/// {@category Struct}
 class BITMAPINFO extends Struct {
   @Uint32()
   int biSize;
@@ -1216,6 +1320,10 @@ class BITMAPINFO extends Struct {
 //   DWORD dwSize;
 //   BOOL  bVisible;
 // } CONSOLE_CURSOR_INFO, *PCONSOLE_CURSOR_INFO;
+
+/// CONSOLE_CURSOR_INFO
+///
+/// {@category Struct}
 class CONSOLE_CURSOR_INFO extends Struct {
   @Uint32()
   int dwSize;
@@ -1234,6 +1342,10 @@ class CONSOLE_CURSOR_INFO extends Struct {
 //   SMALL_RECT srWindow;
 //   COORD      dwMaximumWindowSize;
 // } CONSOLE_SCREEN_BUFFER_INFO;
+
+/// CONSOLE_SCREEN_BUFFER_INFO
+///
+/// {@category Struct}
 class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
   @Int16()
   int dwSizeX;
@@ -1282,6 +1394,10 @@ class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
 //   SHORT X;
 //   SHORT Y;
 // } COORD, *PCOORD;
+
+/// COORD
+///
+/// {@category Struct}
 class COORD extends Struct {
   @Int16()
   int X;
@@ -1300,6 +1416,10 @@ class COORD extends Struct {
 //   SHORT Right;
 //   SHORT Bottom;
 // } SMALL_RECT;
+
+/// SMALL_RECT
+///
+/// {@category Struct}
 class SMALL_RECT extends Struct {
   @Int16()
   int Left;
@@ -1325,6 +1445,10 @@ class SMALL_RECT extends Struct {
 //     mdFieldDef ridOfField;
 //     ULONG32 ulOffset;
 //     } 	COR_FIELD_OFFSET;
+
+/// COR_FIELD_OFFSET
+///
+/// {@category Struct}
 class COR_FIELD_OFFSET extends Struct {
   @Uint32()
   int ridOfField;
