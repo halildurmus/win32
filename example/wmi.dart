@@ -10,7 +10,7 @@ import 'package:win32/win32.dart';
 
 void main() {
   // Initialize COM
-  var hr = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
+  var hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
   if (FAILED(hr)) {
     throw WindowsException(hr);
   }
