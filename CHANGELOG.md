@@ -1,3 +1,9 @@
+## 1.6.1
+
+ - Lots of minor refactoring and tidy up
+ - Some early WinMD parsing
+ - Add many more unit tests
+
 ## 1.6.0
 
 - Add WinRT examples, including Windows.Globalization.Calendar and
