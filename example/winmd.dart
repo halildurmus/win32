@@ -128,15 +128,6 @@ void main(List<String> args) {
   // }
   // final winmdFile = metadataFileContainingType(args.first);
 
-  final winmdFile =
-      File('C:\\WINDOWS\\system32\\WinMetadata\\Windows.Globalization.winmd');
-  final types = metadataTypesInFile(winmdFile);
-  print(types.length);
-  for (var type in types) {
-    print(
-        '[${type.token.toRadixString(16)}] ${type.typeName} (baseType: ${type.baseTypeToken.toRadixString(16)})');
-  }
-
   // if (winmdFile != null) {
   //   print('Type ${args.first} can be found in ${winmdFile.path}.');
 
@@ -144,4 +135,13 @@ void main(List<String> args) {
   //   final types = metadataTypesInFile(winmdFile);
 
   // }
+
+  final winmdFile =
+      File('C:\\WINDOWS\\system32\\WinMetadata\\Windows.Globalization.winmd');
+  final types = metadataTypesInFile(winmdFile);
+  print('Found ${types.length} types in ${winmdFile.path}:\nTypes:\n');
+  for (var type in types) {
+    print(
+        '[${type.token.toRadixString(16)}] ${type.typeName} (baseType: ${type.baseTypeToken.toRadixString(16)})');
+  }
 }
