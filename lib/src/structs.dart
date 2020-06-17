@@ -84,10 +84,10 @@ class SECURITY_ATTRIBUTES extends Struct {
 //   PACL                        Dacl;
 // } SECURITY_DESCRIPTOR, *PISECURITY_DESCRIPTOR;
 class SECURITY_DESCRIPTOR extends Struct {
-  @Int8()
+  @Uint8()
   int Revision;
 
-  @Int8()
+  @Uint8()
   int Sbz1;
 
   @Int16()
@@ -180,7 +180,7 @@ class COMDLG_FILTERSPEC extends Struct {
 //     WORD  cmd;
 // } ACCEL, *LPACCEL;
 class ACCEL extends Struct {
-  @Int8()
+  @Uint8()
   int fVirt;
   @Int16()
   int key;
@@ -488,21 +488,21 @@ class LOGFONT extends Struct {
   int lfOrientation;
   @Int32()
   int lfWeight;
-  @Int8()
+  @Uint8()
   int lfItalic;
-  @Int8()
+  @Uint8()
   int lfUnderline;
-  @Int8()
+  @Uint8()
   int lfStrikeOut;
-  @Int8()
+  @Uint8()
   int lfCharSet;
-  @Int8()
+  @Uint8()
   int lfOutPrecision;
-  @Int8()
+  @Uint8()
   int lfClipPrecision;
-  @Int8()
+  @Uint8()
   int lfQuality;
-  @Int8()
+  @Uint8()
   int lfPitchAndFamily;
 
   // Need to use @Int32() here, both because of the lack of fixed-size
@@ -763,13 +763,13 @@ class PAINTSTRUCT extends Struct {
   int fRestore;
   @Int32()
   int fIncUpdate;
-  @Int64()
+  @Uint64()
   int rgb1;
-  @Int64()
+  @Uint64()
   int rgb2;
-  @Int64()
+  @Uint64()
   int rgb3;
-  @Int64()
+  @Uint64()
   int rgb4;
 
   factory PAINTSTRUCT.allocate() => allocate<PAINTSTRUCT>().ref
@@ -985,15 +985,15 @@ class TEXTMETRIC extends Struct {
   int tmDefaultChar;
   @Int16()
   int tmBreakChar;
-  @Int8()
+  @Uint8()
   int tmItalic;
-  @Int8()
+  @Uint8()
   int tmUnderlined;
-  @Int8()
+  @Uint8()
   int tmStruckOut;
-  @Int8()
+  @Uint8()
   int tmPitchAndFamily;
-  @Int8()
+  @Uint8()
   int tmCharSet;
 
   factory TEXTMETRIC.allocate() => allocate<TEXTMETRIC>().ref
@@ -1183,13 +1183,13 @@ class BITMAPINFO extends Struct {
   int biClrUsed;
   @Uint32()
   int biClrImportant;
-  @Int8()
+  @Uint8()
   int rgbBlue;
-  @Int8()
+  @Uint8()
   int rgbGreen;
-  @Int8()
+  @Uint8()
   int rgbRed;
-  @Int8()
+  @Uint8()
   int rgbReserved;
 
   factory BITMAPINFO.allocate() => allocate<BITMAPINFO>().ref
