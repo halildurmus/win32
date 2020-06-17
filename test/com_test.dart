@@ -9,16 +9,40 @@ import 'package:win32/win32.dart';
 void main() {
   test('GUID creation', () {
     final guid = GUID.allocate();
-    final hresult = CoCreateGuid(guid.addressOf);
-    expect(hresult, equals(S_OK));
+    final hr = CoCreateGuid(guid.addressOf);
+    expect(hr, equals(S_OK));
 
     final guid2 = GUID.fromString(guid.toString());
     expect(guid.toString(), equals(guid2.toString()));
+
+    free(guid.addressOf);
+    free(guid2.addressOf);
   });
 
   test('GUID creation failure', () {
+    // Note the rogue 'X' here
     expect(() => GUID.fromString('{X161CA9B-9409-4A77-7327-8B8D3363C6B9}'),
         throwsFormatException);
+  });
+
+  test('CLSIDFromString', () {
+    final guid = GUID.allocate();
+    final hr = CLSIDFromString(TEXT(CLSID_FileSaveDialog), guid.addressOf);
+    expect(hr, equals(S_OK));
+
+    expect(guid.toString(), equalsIgnoringCase(CLSID_FileSaveDialog));
+
+    free(guid.addressOf);
+  });
+
+  test('IIDFromString', () {
+    final guid = GUID.allocate();
+    final hr = IIDFromString(TEXT(IID_IShellItem2), guid.addressOf);
+    expect(hr, equals(S_OK));
+
+    expect(guid.toString(), equalsIgnoringCase(IID_IShellItem2));
+
+    free(guid.addressOf);
   });
 
   test('Create COM object without calling CoInitialize()', () {

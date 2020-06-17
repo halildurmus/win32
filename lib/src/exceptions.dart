@@ -40,8 +40,9 @@ String convertWindowsErrorToString(int windowsError) {
 
   free(buffer);
 
-  if (errorMessage[errorMessage.length - 1] == '\n') {
-    errorMessage = errorMessage.substring(0, errorMessage.length - 1);
+  // Strip off CRLF in the returned error message, if it exists
+  if (errorMessage.substring(errorMessage.length - 2) == '\r\n') {
+    errorMessage = errorMessage.substring(0, errorMessage.length - 2);
   }
 
   return errorMessage;

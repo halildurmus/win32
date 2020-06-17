@@ -52,7 +52,7 @@ void main() {
 
     //  Skip the \\?\ prefix and remove the trailing backslash.
     final shortVolumeName = volumeName.substring(4, volumeName.length - 1);
-    final shortVolumeNamePtr = Utf16.toUtf16(shortVolumeName);
+    final shortVolumeNamePtr = TEXT(shortVolumeName);
 
     var deviceName = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
     var charCount = QueryDosDevice(shortVolumeNamePtr, deviceName, MAX_PATH);
