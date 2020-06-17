@@ -375,7 +375,7 @@ typedef fillConsoleOutputCharacterDart = int Function(
 // );
 typedef fillConsoleOutputAttributeNative = Int32 Function(
     IntPtr hConsoleOutput,
-    Int16 wAttribute,
+    Uint16 wAttribute,
     Uint32 nLength,
     Int32 dwWriteCoord,
     Pointer<Uint32> lpNumberOfAttrsWritten);

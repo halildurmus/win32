@@ -182,9 +182,9 @@ class COMDLG_FILTERSPEC extends Struct {
 class ACCEL extends Struct {
   @Uint8()
   int fVirt;
-  @Int16()
+  @Uint16()
   int key;
-  @Int16()
+  @Uint16()
   int cmd;
 
   factory ACCEL.allocate() => allocate<ACCEL>().ref
@@ -267,9 +267,9 @@ class FINDREPLACE extends Struct {
   int Flags;
   Pointer<Utf16> lpstrFindWhat;
   Pointer<Utf16> lpstrReplaceWith;
-  @Int16()
+  @Uint16()
   int wFindWhatLen;
-  @Int16()
+  @Uint16()
   int wReplaceWithLen;
   @IntPtr()
   int lCustData;
@@ -334,9 +334,9 @@ class CHOOSEFONT extends Struct {
   @IntPtr()
   int hInstance;
   Pointer<Utf16> lpszStyle;
-  @Int16()
+  @Uint16()
   int nFontType;
-  @Int16()
+  @Uint16()
   int reserved;
   @Int32()
   int nSizeMin;
@@ -416,9 +416,9 @@ class OPENFILENAME extends Struct {
 
   @Uint32()
   int Flags;
-  @Int16()
+  @Uint16()
   int nFileOffset;
-  @Int16()
+  @Uint16()
   int nFileExtension;
 
   Pointer<Utf16> lpstrDefExt;
@@ -879,10 +879,10 @@ class KEYBDINPUT extends Struct {
   @Int32()
   int padding1;
 
-  @Int16()
+  @Uint16()
   int wVk;
 
-  @Int16()
+  @Uint16()
   int wScan;
 
   @Uint32()
@@ -920,9 +920,9 @@ class HARDWAREINPUT extends Struct {
   @Uint32()
   int uMsg;
 
-  @Int16()
+  @Uint16()
   int wParamL;
-  @Int16()
+  @Uint16()
   int wParamH;
 
   factory HARDWAREINPUT.allocate() => allocate<HARDWAREINPUT>().ref
@@ -1167,9 +1167,9 @@ class BITMAPINFO extends Struct {
   int biWidth;
   @Int32()
   int biHeight;
-  @Int16()
+  @Uint16()
   int biPlanes;
-  @Int16()
+  @Uint16()
   int biBitCount;
   @Uint32()
   int biCompression;
@@ -1246,7 +1246,7 @@ class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
   @Int16()
   int dwCursorPositionY;
 
-  @Int16()
+  @Uint16()
   int wAttributes;
 
   @Int16()
