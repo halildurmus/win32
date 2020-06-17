@@ -75,13 +75,13 @@ typedef coCreateGuidDart = int Function(Pointer<GUID> pguid);
 // );
 typedef coCreateInstanceNative = Int32 Function(
     Pointer<GUID> rclsid,
-    Pointer<Void> pUnkOuter,
+    Pointer<IntPtr> pUnkOuter,
     Uint32 dwClsContext,
     Pointer<GUID> riid,
     Pointer<IntPtr> ppv);
 typedef coCreateInstanceDart = int Function(
     Pointer<GUID> rclsid,
-    Pointer<Void> pUnkOuter,
+    Pointer<IntPtr> pUnkOuter,
     int dwClsContext,
     Pointer<GUID> riid,
     Pointer<IntPtr> ppv);
@@ -294,7 +294,7 @@ typedef dispatchMessageDart = int Function(Pointer<MSG> lpMsg);
 //   UINT    format
 // );
 typedef drawTextNative = Int32 Function(IntPtr hdc, Pointer<Utf16> lpchText,
-    Int32 cchText, Pointer<RECT> lprc, Int32 format);
+    Int32 cchText, Pointer<RECT> lprc, Uint32 format);
 typedef drawTextDart = int Function(int hdc, Pointer<Utf16> lpchText,
     int cchText, Pointer<RECT> lprc, int format);
 
@@ -355,7 +355,7 @@ typedef enumWindowsDart = int Function(
 // );
 typedef fillConsoleOutputCharacterNative = Int32 Function(
     IntPtr hConsoleOutput,
-    Int8 cCharacter,
+    Uint8 cCharacter,
     Uint32 nLength,
     Int32 dwWriteCoord,
     Pointer<Uint32> lpNumberOfCharsWritten);
