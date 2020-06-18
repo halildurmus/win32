@@ -7,14 +7,14 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'package:win32/src/constants.dart';
-import 'package:win32/src/exceptions.dart';
-import 'package:win32/src/macros.dart';
-import 'package:win32/src/structs.dart';
-import 'package:win32/src/win32.dart';
-import 'package:win32/src/com/combase.dart';
+import '../constants.dart';
+import '../exceptions.dart';
+import '../macros.dart';
+import '../structs.dart';
+import '../prototypes.dart';
+import '../com/combase.dart';
 
-import 'package:win32/src/generated/IFileDialog.dart';
+import 'IFileDialog.dart';
 
 const CLSID_FileSaveDialog = '{C0B4E2F3-BA21-4773-8DBA-335EC946EB8B}';
 const IID_IFileSaveDialog = '{84bccd23-5fde-4cdb-aea4-af64b83d78ab}';

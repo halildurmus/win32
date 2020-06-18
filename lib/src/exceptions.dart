@@ -5,10 +5,10 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
-import 'package:win32/src/constants.dart';
-import 'package:win32/src/int.dart';
-import 'package:win32/src/utf16.dart';
-import 'package:win32/src/win32.dart';
+import 'constants.dart';
+import 'int.dart';
+import 'string.dart';
+import 'prototypes.dart';
 
 /// Converts a Windows error into a friendly string.
 ///

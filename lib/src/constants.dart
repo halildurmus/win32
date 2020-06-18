@@ -3584,6 +3584,24 @@ const KF_FLAG_SIMPLE_IDLIST = 0x00000100;
 /// @nodoc
 const KF_FLAG_ALIAS_ONLY = 0x80000000;
 
+// Task dialog icons.
+//
+// In the Windows header files, these are defined in the following format:
+//   #define TD_WARNING_ICON         MAKEINTRESOURCEW(-1)
+final TD_WARNING_ICON = Pointer<Utf16>.fromAddress(0xFFFF);
+final TD_ERROR_ICON = Pointer<Utf16>.fromAddress(0xFFFE);
+final TD_INFORMATION_ICON = Pointer<Utf16>.fromAddress(0xFFFD);
+final TD_SHIELD_ICON = Pointer<Utf16>.fromAddress(0xFFFC);
+
+class TASKDIALOG_COMMON_BUTTON_FLAGS {
+  static final int TDCBF_OK_BUTTON = 0x0001;
+  static final int TDCBF_YES_BUTTON = 0x0002;
+  static final int TDCBF_NO_BUTTON = 0x0004;
+  static final int TDCBF_CANCEL_BUTTON = 0x0008;
+  static final int TDCBF_RETRY_BUTTON = 0x0010;
+  static final int TDCBF_CLOSE_BUTTON = 0x0020;
+}
+
 // Folder IDs
 
 /// @nodoc
@@ -4145,6 +4163,55 @@ const MEM_RELEASE = 0x00008000;
 
 /// @nodoc
 const MEM_FREE = 0x00010000;
+
+// Processor architectures
+/// @nodoc
+const PROCESSOR_ARCHITECTURE_INTEL = 0;
+
+/// @nodoc
+const PROCESSOR_ARCHITECTURE_MIPS = 1;
+
+/// @nodoc
+const PROCESSOR_ARCHITECTURE_ALPHA = 2;
+
+/// @nodoc
+const PROCESSOR_ARCHITECTURE_PPC = 3;
+
+/// @nodoc
+const PROCESSOR_ARCHITECTURE_SHX = 4;
+
+/// @nodoc
+const PROCESSOR_ARCHITECTURE_ARM = 5;
+
+/// @nodoc
+const PROCESSOR_ARCHITECTURE_IA64 = 6;
+
+/// @nodoc
+const PROCESSOR_ARCHITECTURE_ALPHA64 = 7;
+
+/// @nodoc
+const PROCESSOR_ARCHITECTURE_MSIL = 8;
+
+/// @nodoc
+const PROCESSOR_ARCHITECTURE_AMD64 = 9;
+
+/// @nodoc
+const PROCESSOR_ARCHITECTURE_IA32_ON_WIN64 = 10;
+
+/// @nodoc
+const PROCESSOR_ARCHITECTURE_NEUTRAL = 11;
+
+/// @nodoc
+const PROCESSOR_ARCHITECTURE_ARM64 = 12;
+
+/// @nodoc
+const PROCESSOR_ARCHITECTURE_ARM32_ON_WIN64 = 13;
+
+/// @nodoc
+const PROCESSOR_ARCHITECTURE_IA32_ON_ARM64 = 14;
+
+/// @nodoc
+const PROCESSOR_ARCHITECTURE_UNKNOWN = 0xFFFF;
 
 /// {@category Enum}
 class FILEOPENDIALOGOPTIONS {

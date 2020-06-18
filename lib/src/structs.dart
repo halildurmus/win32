@@ -5,7 +5,7 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
-import 'package:win32/src/constants.dart';
+import 'constants.dart';
 
 // typedef struct tagWNDCLASSW {
 //   UINT      style;
@@ -61,6 +61,73 @@ class WNDCLASS extends Struct {
     ..hbrBackground = 0
     ..lpszMenuName = nullptr
     ..lpszClassName = nullptr;
+}
+
+// typedef struct _SYSTEM_INFO {
+//   union {
+//     DWORD dwOemId;
+//     struct {
+//       WORD wProcessorArchitecture;
+//       WORD wReserved;
+//     } DUMMYSTRUCTNAME;
+//   } DUMMYUNIONNAME;
+//   DWORD     dwPageSize;
+//   LPVOID    lpMinimumApplicationAddress;
+//   LPVOID    lpMaximumApplicationAddress;
+//   DWORD_PTR dwActiveProcessorMask;
+//   DWORD     dwNumberOfProcessors;
+//   DWORD     dwProcessorType;
+//   DWORD     dwAllocationGranularity;
+//   WORD      wProcessorLevel;
+//   WORD      wProcessorRevision;
+// } SYSTEM_INFO, *LPSYSTEM_INFO;
+
+/// SYSTEM_INFO
+///
+/// {@category Struct}
+class SYSTEM_INFO extends Struct {
+  @Uint16()
+  int wProcessorArchitecture;
+
+  @Uint16()
+  int wReserved;
+
+  @Uint32()
+  int dwPageSize;
+
+  Pointer lpMinimumApplicationAddress;
+  Pointer lpMaximumApplicationAddress;
+
+  @IntPtr()
+  int dwActiveProcessorMask;
+
+  @Uint32()
+  int dwNumberOfProcessors;
+
+  @Uint32()
+  int dwProcessorType;
+
+  @Uint32()
+  int dwAllocationGranularity;
+
+  @Uint16()
+  int wProcessorLevel;
+
+  @Uint16()
+  int wProcessorRevision;
+
+  factory SYSTEM_INFO.allocate() => allocate<SYSTEM_INFO>().ref
+    ..wProcessorArchitecture = 0
+    ..wReserved = 0
+    ..dwPageSize = 0
+    ..lpMaximumApplicationAddress = nullptr
+    ..lpMaximumApplicationAddress = nullptr
+    ..dwActiveProcessorMask = 0
+    ..dwNumberOfProcessors = 0
+    ..dwProcessorType = 0
+    ..dwAllocationGranularity = 0
+    ..wProcessorLevel = 0
+    ..wProcessorRevision = 0;
 }
 
 // typedef struct _SECURITY_ATTRIBUTES {

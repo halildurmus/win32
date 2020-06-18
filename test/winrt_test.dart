@@ -16,27 +16,4 @@ void main() {
     free(object);
     winrtUninitialize();
   });
-
-  test('String to HSTRING conversion', () {
-    final string = 'This is a string to convert.\n';
-    final hstring = convertToHString(string);
-
-    final string2 = convertFromHString(hstring);
-    expect(string, equals(string2));
-
-    WindowsDeleteString(hstring.address);
-  });
-  test('String to HSTRING conversion -- more complex', () {
-    final string = '''
-Some emojis: 💼📃👩🏾‍💻🛀🏼🤗
-Some Hangul: 이력서
-Some accented text: Résumé
-    ''';
-    final hstring = convertToHString(string);
-
-    final string2 = convertFromHString(hstring);
-    expect(string, equals(string2));
-
-    WindowsDeleteString(hstring.address);
-  });
 }

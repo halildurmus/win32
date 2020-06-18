@@ -7,12 +7,12 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'package:win32/src/constants.dart';
-import 'package:win32/src/exceptions.dart';
-import 'package:win32/src/macros.dart';
-import 'package:win32/src/structs.dart';
-import 'package:win32/src/win32.dart';
-import 'package:win32/src/com/combase.dart';
+import '../constants.dart';
+import '../exceptions.dart';
+import '../macros.dart';
+import '../structs.dart';
+import '../prototypes.dart';
+import '../com/combase.dart';
 
 const IID_IUnknown = '{00000000-0000-0000-C000-000000000046}';
 

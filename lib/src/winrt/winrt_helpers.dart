@@ -5,14 +5,13 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
-import 'package:win32/src/utf16.dart';
-
-import 'package:win32/src/win32.dart';
-import 'package:win32/src/exceptions.dart';
-import 'package:win32/src/macros.dart';
-import 'package:win32/src/structs.dart';
-import 'package:win32/src/winrt/winrt_prototypes.dart';
-import 'package:win32/src/winrt/winrt_constants.dart';
+import '../string.dart';
+import '../prototypes.dart';
+import '../exceptions.dart';
+import '../macros.dart';
+import '../structs.dart';
+import 'winrt_prototypes.dart';
+import 'winrt_constants.dart';
 
 import 'package:win32/src/generated/IInspectable.dart';
 

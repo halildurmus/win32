@@ -5,7 +5,7 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
-import 'package:win32/src/structs.dart';
+import 'structs.dart';
 
 // BOOL AppendMenuW(
 //   HMENU    hMenu,
@@ -463,6 +463,12 @@ typedef formatMessageDart = int Function(
     int nSize,
     Pointer arguments);
 
+// BOOL FreeLibrary(
+//   HMODULE hLibModule
+// );
+typedef freeLibraryNative = Int32 Function(IntPtr hLibModule);
+typedef freeLibraryDart = int Function(int hLibModule);
+
 // BOOL GetClientRect(
 //   HWND   hWnd,
 //   LPRECT lpRect
@@ -542,6 +548,15 @@ typedef getObjectDart = int Function(int h, int c, Pointer pv);
 typedef getOpenFileNameNative = Int32 Function(Pointer<OPENFILENAME> arg1);
 typedef getOpenFileNameDart = int Function(Pointer<OPENFILENAME> arg1);
 
+// FARPROC GetProcAddress(
+//   HMODULE hModule,
+//   LPCSTR  lpProcName
+// );
+typedef getProcAddressNative = IntPtr Function(
+    IntPtr hModule, Pointer<Uint8> lpProcName);
+typedef getProcAddressDart = int Function(
+    int hModule, Pointer<Uint8> lpProcName);
+
 // BOOL GetSaveFileNameW(
 //   LPOPENFILENAMEW Arg1
 // );
@@ -569,6 +584,12 @@ typedef getStdHandleDart = int Function(int nStdHandle);
 // );
 typedef getStockObjectNative = IntPtr Function(Int32 i);
 typedef getStockObjectDart = int Function(int i);
+
+// void GetSystemInfo(
+//   LPSYSTEM_INFO lpSystemInfo
+// );
+typedef getSystemInfoNative = Void Function(Pointer<SYSTEM_INFO> lpSystemInfo);
+typedef getSystemInfoDart = void Function(Pointer<SYSTEM_INFO> lpSystemInfo);
 
 // DWORD GetTempPathW(
 //   DWORD  nBufferLength,
@@ -689,6 +710,12 @@ typedef loadCursorDart = int Function(
 typedef loadIconNative = IntPtr Function(
     IntPtr hInstance, Pointer<Utf16> lpIconName);
 typedef loadIconDart = int Function(int hInstance, Pointer<Utf16> lpIconName);
+
+// HMODULE LoadLibraryW(
+//   LPCWSTR lpLibFileName
+// );
+typedef loadLibraryNative = IntPtr Function(Pointer<Utf16> lpLibFileName);
+typedef loadLibraryDart = int Function(Pointer<Utf16> lpLibFileName);
 
 // int MessageBoxW(
 //   HWND    hWnd,
@@ -1068,6 +1095,35 @@ typedef stretchDIBitsDart = int Function(
     Pointer<BITMAPINFO> lpbmi,
     int iUsage,
     int rop);
+
+// HRESULT TaskDialog(
+//   HWND                           hwndOwner,
+//   HINSTANCE                      hInstance,
+//   PCWSTR                         pszWindowTitle,
+//   PCWSTR                         pszMainInstruction,
+//   PCWSTR                         pszContent,
+//   TASKDIALOG_COMMON_BUTTON_FLAGS dwCommonButtons,
+//   PCWSTR                         pszIcon,
+//   int                            *pnButton
+// );
+typedef taskDialogNative = Int32 Function(
+    Int32 hwndOwner,
+    Int32 hInstance,
+    Pointer<Utf16> pszWindowTitle,
+    Pointer<Utf16> pszMainInstruction,
+    Pointer<Utf16> pszContent,
+    Int32 dwCommonButtons,
+    Pointer<Utf16> pszIcon,
+    Pointer<Int32> pnButton);
+typedef taskDialogDart = int Function(
+    int hwndOwner,
+    int hInstance,
+    Pointer<Utf16> pszWindowTitle,
+    Pointer<Utf16> pszMainInstruction,
+    Pointer<Utf16> pszContent,
+    int dwCommonButtons,
+    Pointer<Utf16> pszIcon,
+    Pointer<Int32> pnButton);
 
 // BOOL TextOutW(
 //   HDC     hdc,
