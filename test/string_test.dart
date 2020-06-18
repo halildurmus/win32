@@ -10,6 +10,8 @@ import 'package:win32/win32.dart';
 const testString = "If my grandmother had wheels, she'd be a motorbike";
 final testStringArray = 'apples|hazelnuts|bananas|raisins|coconuts|sultanas||';
 
+const TEST_RUNS = 500;
+
 Pointer<Utf16> createStringArray(String textWithPipeDelimiters) {
   final arrayPtr = TEXT(textWithPipeDelimiters);
 
@@ -30,30 +32,36 @@ Pointer<Utf16> createStringArray(String textWithPipeDelimiters) {
 void main() {
   // Run these tests a large number of times to try and identify memory leaks or
   // buffer overruns
-  for (var i = 0; i < 100; i++) {
-    group('Unicode', () {
-      test('Can create string', () {
+  group('Unicode', () {
+    test('Can create string', () {
+      for (var i = 0; i < TEST_RUNS; i++) {
         final stringPtr = TEXT(testString);
 
         expect(stringPtr.unpackString(5), equals(testString.substring(0, 5)));
         free(stringPtr);
-      });
+      }
+    });
 
-      test('Overflow string', () {
+    test('Overflow string', () {
+      for (var i = 0; i < TEST_RUNS; i++) {
         final stringPtr = TEXT(testString);
 
         expect(stringPtr.unpackString(256), equals(testString));
         free(stringPtr);
-      });
+      }
+    });
 
-      test('Empty string', () {
+    test('Empty string', () {
+      for (var i = 0; i < TEST_RUNS; i++) {
         final stringPtr = TEXT('');
 
         expect(stringPtr.unpackString(10), equals(''));
         free(stringPtr);
-      });
+      }
+    });
 
-      test('Array', () {
+    test('Array', () {
+      for (var i = 0; i < TEST_RUNS; i++) {
         final arrayPtr = createStringArray(testStringArray);
 
         // 400 is an arbitrarily long length to try and force an overflow error,
@@ -65,21 +73,25 @@ void main() {
         expect(arrayPtr.unpackStringArray(400).length, equals(6));
 
         free(arrayPtr);
-      });
+      }
     });
+  });
 
-    group('HSTRING tests', () {
-      test('String to HSTRING conversion', () {
+  group('HSTRING tests', () {
+    test('String to HSTRING conversion', () {
+      for (var i = 0; i < TEST_RUNS; i++) {
         final string = 'This is a string to convert.\n';
         final hstring = convertToHString(string);
 
-        // final string2 = convertFromHString(hstring);
-        // expect(string, equals(string2));
+        final string2 = convertFromHString(hstring);
+        expect(string, equals(string2));
 
         WindowsDeleteString(hstring.value);
         free(hstring);
-      });
-      test('String to HSTRING conversion -- more complex', () {
+      }
+    });
+    test('String to HSTRING conversion -- more complex', () {
+      for (var i = 0; i < TEST_RUNS; i++) {
         final string = '''
 Some emojis: 💼📃👩🏾‍💻🛀🏼🤗
 Some Hangul: 이력서
@@ -92,7 +104,7 @@ Some accented text: Résumé
 
         WindowsDeleteString(hstring.value);
         free(hstring);
-      });
+      }
     });
-  }
+  });
 }
