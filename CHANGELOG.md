@@ -1,12 +1,17 @@
 ## 1.6.2
 
- - Clean up some of the generated documentation
+- Clean up some of the generated documentation
+- Add TaskDialog and dynamic library loading APIs
+- Add dynamic load and Windows Runtime metadata samples
+- Fix an annoying bug with `WindowsDeleteString` usage
+- Add more tests and restructure code
+- Add script for generating classes
 
 ## 1.6.1
 
- - Lots of minor refactoring and tidy up
- - Some early WinMD parsing
- - Add many more unit tests
+- Lots of minor refactoring and tidy up
+- Some early WinMD parsing
+- Add many more unit tests
 
 ## 1.6.0
 
