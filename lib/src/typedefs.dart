@@ -690,6 +690,12 @@ typedef loadIconNative = IntPtr Function(
     IntPtr hInstance, Pointer<Utf16> lpIconName);
 typedef loadIconDart = int Function(int hInstance, Pointer<Utf16> lpIconName);
 
+// HMODULE LoadLibraryW(
+//   LPCWSTR lpLibFileName
+// );
+typedef loadLibraryNative = IntPtr Function(Pointer<Utf16> lpLibFileName);
+typedef loadLibraryDart = int Function(Pointer<Utf16> lpLibFileName);
+
 // int MessageBoxW(
 //   HWND    hWnd,
 //   LPCWSTR lpText,

@@ -47,17 +47,6 @@ void main() {
     hr = fileDialog.SetFileTypes(3, rgSpec);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-    // TaskDialog(
-    //     NULL,
-    //     NULL,
-    //     TEXT('CommonFileDialogApp'),
-    //     pathRes,
-    //     nullptr,
-    //     TASKDIALOG_COMMON_BUTTON_FLAGS.TDCBF_OK_BUTTON,
-    //     TD_INFORMATION_ICON,
-    //     nullptr);
-
-    // print('Result: ${pathRes.unpackString(MAX_PATH)}');
     hr = fileDialog.Show(NULL);
     if (!SUCCEEDED(hr)) {
       if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
@@ -78,7 +67,18 @@ void main() {
       final path = Pointer<Utf16>.fromAddress(pathPtr.value);
 
       // MAX_PATH may truncate early if long filename support is enabled
-      print('Result: ${path.unpackString(MAX_PATH)}');
+      final pathRes = path.unpackString(MAX_PATH);
+      print('Result: $pathRes');
+
+      TaskDialog(
+          NULL,
+          NULL,
+          TEXT('CommonFileDialogApp'),
+          path,
+          nullptr,
+          TASKDIALOG_COMMON_BUTTON_FLAGS.TDCBF_OK_BUTTON,
+          TD_INFORMATION_ICON,
+          nullptr);
 
       hr = item.Release();
       if (!SUCCEEDED(hr)) throw WindowsException(hr);

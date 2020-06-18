@@ -157,6 +157,8 @@ final GetTempPath =
 final GetVolumePathNamesForVolumeName = kernel32.lookupFunction<
     getVolumePathNamesForVolumeNameNative,
     getVolumePathNamesForVolumeNameDart>('GetVolumePathNamesForVolumeNameW');
+final LoadLibrary =
+    kernel32.lookupFunction<loadLibraryNative, loadLibraryDart>('LoadLibraryW');
 final OpenProcess =
     kernel32.lookupFunction<openProcessNative, openProcessDart>('OpenProcess');
 final ReadProcessMemory =
