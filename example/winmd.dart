@@ -12,6 +12,9 @@ import 'package:ffi/ffi.dart';
 
 import 'package:win32/win32.dart';
 
+String toHex(int value32) =>
+    '0x' + value32.toUnsigned(32).toRadixString(16).padLeft(8, '0');
+
 class WindowsRuntimeType {
   int token;
   String typeName;
@@ -37,14 +40,13 @@ File metadataFileContainingType(String typeName) {
   var hr = RoGetMetaDataFile(hstrTypeName.value, nullptr,
       hstrMetaDataFilePath.address, spMetaDataImport, typeDef);
   if (SUCCEEDED(hr)) {
-    print('file');
     path = File(convertFromHString(hstrMetaDataFilePath));
   } else {
     throw WindowsException(hr);
   }
 
-  WindowsDeleteString(hstrTypeName.address);
-  WindowsDeleteString(hstrMetaDataFilePath.address);
+  WindowsDeleteString(hstrTypeName.value);
+  WindowsDeleteString(hstrMetaDataFilePath.value);
 
   free(hstrTypeName);
   free(hstrMetaDataFilePath);
@@ -123,25 +125,21 @@ WindowsRuntimeType ProcessToken(IMetaDataImport reader, int token) {
 ///   dart winmd.dart Windows.Storage.Pickers.FileOpenPicker
 /// ```
 void main(List<String> args) {
-  // if (args.isEmpty || args.length != 1) {
-  //   args = ['Windows.Globalization.Calendar'];
-  // }
-  // final winmdFile = metadataFileContainingType(args.first);
+  if (args.isEmpty || args.length != 1) {
+    args = ['Windows.Globalization.Calendar'];
+  }
+  final winmdFile = metadataFileContainingType(args.first);
 
-  // if (winmdFile != null) {
-  //   print('Type ${args.first} can be found in ${winmdFile.path}.');
+  if (winmdFile != null) {
+    print('Type ${args.first} can be found in ${winmdFile.path}.');
 
-  //   print('\nOther types in the same file:');
-  //   final types = metadataTypesInFile(winmdFile);
+    print('\nLooking for other types in the same file...\n');
 
-  // }
-
-  final winmdFile =
-      File('C:\\WINDOWS\\system32\\WinMetadata\\Windows.Globalization.winmd');
-  final types = metadataTypesInFile(winmdFile);
-  print('Found ${types.length} types in ${winmdFile.path}:\nTypes:\n');
-  for (var type in types) {
-    print(
-        '[${type.token.toRadixString(16)}] ${type.typeName} (baseType: ${type.baseTypeToken.toRadixString(16)})');
+    final types = metadataTypesInFile(winmdFile);
+    print('Found ${types.length} types:');
+    for (var type in types) {
+      print(
+          '[${toHex(type.token)}] ${type.typeName} (baseType: ${toHex(type.baseTypeToken)})');
+    }
   }
 }

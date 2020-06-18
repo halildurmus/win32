@@ -53,7 +53,7 @@
 ///   final systemPtr = allocate<IntPtr>();
 ///   calendar.GetCalendarSystem(systemPtr);
 ///   print('The calendar system is ${convertFromHString(systemPtr)}.');
-///    WindowsDeleteString(systemPtr.address);
+///    WindowsDeleteString(systemPtr.value);
 /// ```
 
 library win32;
