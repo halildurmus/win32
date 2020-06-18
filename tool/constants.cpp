@@ -1,7 +1,9 @@
+// constants.cpp
+
 // Development utility to confirm the width of various Win32 objects.
 
-// This is the only C++ code in the repo, and is not used by the
-// package itself.
+// This code not used by the package itself, but is just a helper to inspect
+// widths across x86 and x64 architectures.
 
 // Compile with cl constants.cpp
 
@@ -9,12 +11,10 @@
 #include <windows.h>
 #include <stdio.h>
 #include <ShlObj_core.h>
+#include <wbemidl.h>
 
 void main()
 {
-    auto test = GUID();
-    SUCCEEDED(E_NOINTERFACE);
-
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));
     printf("sizeof(long) is %zu\n", sizeof(long));
@@ -63,5 +63,5 @@ void main()
 
     printf("sizeof(COORD) is %zu\n", sizeof(COORD));
     printf("sizeof(SMALL_RECT) is %zu\n", sizeof(SMALL_RECT));
-    printf("sizeof(SIZE_T) is %zu\n", sizeof(SIZE_T));
+    printf("sizeof(UINT_PTR) is %zu\n", sizeof(UINT_PTR));
 }

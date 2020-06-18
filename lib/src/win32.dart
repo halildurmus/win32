@@ -5,7 +5,7 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
-import 'typedefs.dart';
+import 'package:win32/src/typedefs.dart';
 
 // *** Callbacks ***
 typedef LPFRHookProc = Pointer<Uint32> Function(IntPtr, Int32, IntPtr, IntPtr);
@@ -121,6 +121,8 @@ final UpdateWindow =
 
 final kernel32 = DynamicLibrary.open('kernel32.dll');
 final Beep = kernel32.lookupFunction<beepNative, beepDart>('Beep');
+final CloseHandle =
+    kernel32.lookupFunction<closeHandleNative, closeHandleDart>('CloseHandle');
 final CreateFile =
     kernel32.lookupFunction<createFileNative, createFileDart>('CreateFileW');
 final FillConsoleOutputAttribute = kernel32.lookupFunction<
@@ -138,6 +140,8 @@ final FindNextVolume =
 final FindVolumeClose =
     kernel32.lookupFunction<findVolumeCloseNative, findVolumeCloseDart>(
         'FindVolumeClose');
+final FormatMessage = kernel32
+    .lookupFunction<formatMessageNative, formatMessageDart>('FormatMessageW');
 final GetConsoleScreenBufferInfo = kernel32.lookupFunction<
     getConsoleScreenBufferInfoNative,
     getConsoleScreenBufferInfoDart>('GetConsoleScreenBufferInfo');
@@ -148,9 +152,16 @@ final GetModuleHandle =
         'GetModuleHandleW');
 final GetStdHandle = kernel32
     .lookupFunction<getStdHandleNative, getStdHandleDart>('GetStdHandle');
+final GetTempPath =
+    kernel32.lookupFunction<getTempPathNative, getTempPathDart>('GetTempPathW');
 final GetVolumePathNamesForVolumeName = kernel32.lookupFunction<
     getVolumePathNamesForVolumeNameNative,
     getVolumePathNamesForVolumeNameDart>('GetVolumePathNamesForVolumeNameW');
+final OpenProcess =
+    kernel32.lookupFunction<openProcessNative, openProcessDart>('OpenProcess');
+final ReadProcessMemory =
+    kernel32.lookupFunction<readProcessMemoryNative, readProcessMemoryDart>(
+        'ReadProcessMemory');
 final QueryDosDevice =
     kernel32.lookupFunction<queryDosDeviceNative, queryDosDeviceDart>(
         'QueryDosDeviceW');
@@ -166,6 +177,22 @@ final VirtualAlloc = kernel32
     .lookupFunction<virtualAllocNative, virtualAllocDart>('VirtualAlloc');
 final VirtualFree =
     kernel32.lookupFunction<virtualFreeNative, virtualFreeDart>('VirtualFree');
+final WriteProcessMemory =
+    kernel32.lookupFunction<writeProcessMemoryNative, writeProcessMemoryDart>(
+        'WriteProcessMemory');
+
+final psapi = DynamicLibrary.open('psapi.dll');
+final EnumProcesses = psapi
+    .lookupFunction<enumProcessesNative, enumProcessesDart>('EnumProcesses');
+final EnumProcessModules =
+    psapi.lookupFunction<enumProcessModulesNative, enumProcessModulesDart>(
+        'EnumProcessModules');
+final GetModuleBaseName =
+    psapi.lookupFunction<getModuleBaseNameNative, getModuleBaseNameDart>(
+        'GetModuleBaseNameW');
+final GetModuleFileNameEx =
+    psapi.lookupFunction<getModuleFileNameExNative, getModuleFileNameExDart>(
+        'GetModuleFileNameExW');
 
 final gdi32 = DynamicLibrary.open('gdi32.dll');
 final CreateFontIndirect =
@@ -236,6 +263,9 @@ final TaskDialog =
     comctl32.lookupFunction<taskDialogNative, taskDialogDart>('TaskDialog');
 
 final ole32 = DynamicLibrary.open('ole32.dll');
+final CLSIDFromString =
+    ole32.lookupFunction<clsidFromStringNative, clsidFromStringDart>(
+        'CLSIDFromString');
 final CoCreateGuid =
     ole32.lookupFunction<coCreateGuidNative, coCreateGuidDart>('CoCreateGuid');
 final CoCreateInstance =
@@ -243,7 +273,19 @@ final CoCreateInstance =
         'CoCreateInstance');
 final CoInitializeEx = ole32
     .lookupFunction<coInitializeExNative, coInitializeExDart>('CoInitializeEx');
+final CoInitializeSecurity =
+    ole32.lookupFunction<coInitializeSecurityNative, coInitializeSecurityDart>(
+        'CoInitializeSecurity');
+final CoSetProxyBlanket =
+    ole32.lookupFunction<coSetProxyBlanketNative, coSetProxyBlanketDart>(
+        'CoSetProxyBlanket');
 final CoTaskMemFree = ole32
     .lookupFunction<coTaskMemFreeNative, coTaskMemFreeDart>('CoTaskMemFree');
 final CoUninitialize = ole32
     .lookupFunction<coUninitializeNative, coUninitializeDart>('CoUninitialize');
+final IIDFromString = ole32
+    .lookupFunction<iidFromStringNative, iidFromStringDart>('IIDFromString');
+
+final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+final VariantClear = oleaut32
+    .lookupFunction<variantClearNative, variantClearDart>('VariantClear');

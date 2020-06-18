@@ -14,7 +14,7 @@ void DisplayVolumePaths(String volumeName) {
   // Could be arbitrarily long, but 4*MAX_PATH is a reasonable default.
   // More sophisticated solutions can be found online
   final pathNamePtr = allocate<Uint16>(count: MAX_PATH * 4).cast<Utf16>();
-  final charCount = allocate<Int32>();
+  final charCount = allocate<Uint32>();
   charCount.value = MAX_PATH;
   error = GetVolumePathNamesForVolumeName(
       Utf16.toUtf16(volumeName), pathNamePtr, charCount.value, charCount);
@@ -52,7 +52,7 @@ void main() {
 
     //  Skip the \\?\ prefix and remove the trailing backslash.
     final shortVolumeName = volumeName.substring(4, volumeName.length - 1);
-    final shortVolumeNamePtr = Utf16.toUtf16(shortVolumeName);
+    final shortVolumeNamePtr = TEXT(shortVolumeName);
 
     var deviceName = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
     var charCount = QueryDosDevice(shortVolumeNamePtr, deviceName, MAX_PATH);

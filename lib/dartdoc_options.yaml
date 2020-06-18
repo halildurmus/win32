@@ -1,0 +1,11 @@
+dartdoc:
+  categories:
+    "Struct":
+      markdown: doc/struct.md
+    "Enum":
+      markdown: doc/enum.md
+  categoryOrder: ["Struct", "Enum"]
+  showUndocumentedCategories: true
+  ignore:
+    - broken-link
+    - missing-from-search-index

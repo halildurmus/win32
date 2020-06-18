@@ -2,6 +2,8 @@
 
 // Dart representations of Win32 C macros
 
+import 'package:win32/src/constants.dart';
+
 // #define LOWORD(l)           ((WORD)(((DWORD_PTR)(l)) & 0xffff))
 int LOWORD(int l) => l & 0xffff;
 
@@ -31,3 +33,9 @@ bool SUCCEEDED(int result) => (result >= 0);
 
 // #define FAILED(hr) (((HRESULT)(hr)) < 0)
 bool FAILED(int result) => (result < 0);
+
+// #define __HRESULT_FROM_WIN32(x) ((HRESULT)(x) <= 0 ? ((HRESULT)(x)) :
+//       ((HRESULT) (((x) & 0x0000FFFF) | (FACILITY_WIN32 << 16) | 0x80000000)))
+int HRESULT_FROM_WIN32(int x) =>
+    ((x <= 0 ? x : (x & 0x0000FFFF | (FACILITY_WIN32 << 16) | 0x80000000))
+        .toSigned(32));

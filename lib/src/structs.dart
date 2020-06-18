@@ -5,7 +5,7 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
-import 'constants.dart';
+import 'package:win32/src/constants.dart';
 
 // typedef struct tagWNDCLASSW {
 //   UINT      style;
@@ -19,8 +19,12 @@ import 'constants.dart';
 //   LPCWSTR   lpszMenuName;
 //   LPCWSTR   lpszClassName;
 // } WNDCLASSW, *PWNDCLASSW, *NPWNDCLASSW, *LPWNDCLASSW;
+
+/// WNDCLASS
+///
+/// {@category Struct}
 class WNDCLASS extends Struct {
-  @Int32()
+  @Uint32()
   int style;
 
   Pointer<NativeFunction> lpfnWndProc;
@@ -64,8 +68,12 @@ class WNDCLASS extends Struct {
 //   LPVOID lpSecurityDescriptor;
 //   BOOL   bInheritHandle;
 // } SECURITY_ATTRIBUTES, *PSECURITY_ATTRIBUTES, *LPSECURITY_ATTRIBUTES;
+
+/// SECURITY_ATTRIBUTES
+///
+/// {@category Struct}
 class SECURITY_ATTRIBUTES extends Struct {
-  @Int32()
+  @Uint32()
   int nLength;
 
   Pointer<Void> lpSecurityDescriptor;
@@ -74,17 +82,137 @@ class SECURITY_ATTRIBUTES extends Struct {
   int bInheritHandle;
 }
 
+// typedef struct _SECURITY_DESCRIPTOR {
+//   BYTE                        Revision;
+//   BYTE                        Sbz1;
+//   SECURITY_DESCRIPTOR_CONTROL Control;
+//   PSID                        Owner;
+//   PSID                        Group;
+//   PACL                        Sacl;
+//   PACL                        Dacl;
+// } SECURITY_DESCRIPTOR, *PISECURITY_DESCRIPTOR;
+
+/// SECURITY_DESCRIPTOR
+///
+/// {@category Struct}
+class SECURITY_DESCRIPTOR extends Struct {
+  @Uint8()
+  int Revision;
+
+  @Uint8()
+  int Sbz1;
+
+  @Int16()
+  int Control;
+
+  Pointer<IntPtr> Owner;
+  Pointer<IntPtr> Group;
+  Pointer<IntPtr> Sacl;
+  Pointer<IntPtr> Dacl;
+
+  factory SECURITY_DESCRIPTOR.allocate() => allocate<SECURITY_DESCRIPTOR>().ref
+    ..Revision = 0
+    ..Sbz1 = 0
+    ..Control = 0
+    ..Owner = nullptr
+    ..Group = nullptr
+    ..Sacl = nullptr
+    ..Dacl = nullptr;
+}
+
+// typedef struct tagSOLE_AUTHENTICATION_SERVICE {
+//   DWORD   dwAuthnSvc;
+//   DWORD   dwAuthzSvc;
+//   OLECHAR *pPrincipalName;
+//   HRESULT hr;
+// } SOLE_AUTHENTICATION_SERVICE;
+
+/// SOLE_AUTHENTICATION_SERVICE
+///
+/// {@category Struct}
+class SOLE_AUTHENTICATION_SERVICE extends Struct {
+  @Uint32()
+  int dwAuthnSvc;
+
+  @Uint32()
+  int dwAuthzSvc;
+
+  Pointer<Utf16> pPrincipalName;
+
+  @Int32()
+  int hr;
+
+  factory SOLE_AUTHENTICATION_SERVICE.allocate() =>
+      allocate<SOLE_AUTHENTICATION_SERVICE>().ref
+        ..dwAuthnSvc = 0
+        ..dwAuthzSvc = 0
+        ..pPrincipalName = nullptr
+        ..hr = 0;
+}
+
+// The VARIANT type is used in Win32 to represent a dynamic type. It is
+// represented as a struct containing a union of the types that could be
+// stored. At the time this code was authored, Dart FFI does not support union
+// types. However, in many scenarios, it is possible to guarantee that the
+// returned value will be a Pointer, and so this struct is available for that
+// usage. This class will be replaced as/when FFI supports a more comprehensive
+// projection of this type.
+
+/// VARIANT_POINTER
+///
+/// {@category Struct}
+class VARIANT_POINTER extends Struct {
+  @Int16()
+  int vt;
+  @Int16()
+  int wReserved1;
+  @Int16()
+  int wReserved2;
+  @Int16()
+  int wReserved3;
+
+  Pointer<IntPtr> ptr;
+
+  factory VARIANT_POINTER.allocate() => allocate<VARIANT_POINTER>().ref
+    ..vt = 0
+    ..wReserved1 = 0
+    ..wReserved2 = 0
+    ..wReserved3 = 0
+    ..ptr = nullptr;
+}
+
+// typedef struct _COMDLG_FILTERSPEC {
+//   LPCWSTR pszName;
+//   LPCWSTR pszSpec;
+// } COMDLG_FILTERSPEC;
+
+/// COMDLG_FILTERSPEC
+///
+/// {@category Struct}
+class COMDLG_FILTERSPEC extends Struct {
+  Pointer<Utf16> pszName;
+  Pointer<Utf16> pszSpec;
+
+  factory COMDLG_FILTERSPEC.allocate() => allocate<COMDLG_FILTERSPEC>().ref
+    ..pszName = nullptr
+    ..pszSpec = nullptr;
+}
+
 // typedef struct tagACCEL {
 //     BYTE   fVirt;               /* Also called the flags field */
 //     WORD   key;
 //     WORD  cmd;
 // } ACCEL, *LPACCEL;
+
+/// ACCEL
+///
+/// {@category Struct}
 class ACCEL extends Struct {
-  @Int8()
+  @Uint8()
   int fVirt;
-  @Int16()
+  @Uint16()
   int key;
-  @Int16()
+  @Uint16()
   int cmd;
 
   factory ACCEL.allocate() => allocate<ACCEL>().ref
@@ -107,8 +235,12 @@ class ACCEL extends Struct {
 //   LPCCHOOKPROC lpfnHook;
 //   LPCWSTR      lpTemplateName;
 // } CHOOSECOLORW, *LPCHOOSECOLORW;
+
+/// CHOOSECOLOR
+///
+/// {@category Struct}
 class CHOOSECOLOR extends Struct {
-  @Int32()
+  @Uint32()
   int lStructSize;
 
   @IntPtr()
@@ -122,7 +254,7 @@ class CHOOSECOLOR extends Struct {
 
   Pointer<Uint32> lpCustColors;
 
-  @Int32()
+  @Uint32()
   int Flags;
 
   @IntPtr()
@@ -156,20 +288,24 @@ class CHOOSECOLOR extends Struct {
 //   LPFRHOOKPROC lpfnHook;
 //   LPCWSTR      lpTemplateName;
 // } FINDREPLACEW, *LPFINDREPLACEW;
+
+/// FINDREPLACE
+///
+/// {@category Struct}
 class FINDREPLACE extends Struct {
-  @Int32()
+  @Uint32()
   int lStructSize;
   @IntPtr()
   int hwndOwner;
   @IntPtr()
   int hInstance;
-  @Int32()
+  @Uint32()
   int Flags;
   Pointer<Utf16> lpstrFindWhat;
   Pointer<Utf16> lpstrReplaceWith;
-  @Int16()
+  @Uint16()
   int wFindWhatLen;
-  @Int16()
+  @Uint16()
   int wReplaceWithLen;
   @IntPtr()
   int lCustData;
@@ -208,8 +344,12 @@ class FINDREPLACE extends Struct {
 //   INT          nSizeMin;
 //   INT          nSizeMax;
 // } CHOOSEFONTW;
+
+/// CHOOSEFONT
+///
+/// {@category Struct}
 class CHOOSEFONT extends Struct {
-  @Int32()
+  @Uint32()
   int lStructSize;
   @IntPtr()
   int hwndOwner;
@@ -221,7 +361,7 @@ class CHOOSEFONT extends Struct {
   @Int32()
   int iPointSize;
 
-  @Int32()
+  @Uint32()
   int Flags;
 
   @Int32()
@@ -234,9 +374,9 @@ class CHOOSEFONT extends Struct {
   @IntPtr()
   int hInstance;
   Pointer<Utf16> lpszStyle;
-  @Int16()
+  @Uint16()
   int nFontType;
-  @Int16()
+  @Uint16()
   int reserved;
   @Int32()
   int nSizeMin;
@@ -287,8 +427,12 @@ class CHOOSEFONT extends Struct {
 //    DWORD        dwReserved;
 //    DWORD        FlagsEx;
 // } OPENFILENAMEW, *LPOPENFILENAMEW;
+
+/// OPENFILENAME
+///
+/// {@category Struct}
 class OPENFILENAME extends Struct {
-  @Int32()
+  @Uint32()
   int lStructSize;
   @IntPtr()
   int hwndOwner;
@@ -298,27 +442,27 @@ class OPENFILENAME extends Struct {
   Pointer<Utf16> lpstrFilter;
   Pointer<Utf16> lpstrCustomFilter;
 
-  @Int32()
+  @Uint32()
   int nMaxCustFilter;
-  @Int32()
+  @Uint32()
   int nFilterIndex;
 
   Pointer<Utf16> lpstrFile;
-  @Int32()
+  @Uint32()
   int nMaxFile;
 
   Pointer<Utf16> lpstrFileTitle;
-  @Int32()
+  @Uint32()
   int nMaxFileTitle;
 
   Pointer<Utf16> lpstrInitialDir;
   Pointer<Utf16> lpstrTitle;
 
-  @Int32()
+  @Uint32()
   int Flags;
-  @Int16()
+  @Uint16()
   int nFileOffset;
-  @Int16()
+  @Uint16()
   int nFileExtension;
 
   Pointer<Utf16> lpstrDefExt;
@@ -330,9 +474,9 @@ class OPENFILENAME extends Struct {
   Pointer<Utf16> lpTemplateName;
   Pointer<Void> pvReserved;
 
-  @Int32()
+  @Uint32()
   int dwReserved;
-  @Int32()
+  @Uint32()
   int FlagsEx;
 
   factory OPENFILENAME.allocate() => allocate<OPENFILENAME>().ref
@@ -377,6 +521,10 @@ class OPENFILENAME extends Struct {
 //   BYTE  lfPitchAndFamily;
 //   WCHAR lfFaceName[LF_FACESIZE];
 // } LOGFONTW;
+
+/// LOGFONT
+///
+/// {@category Struct}
 class LOGFONT extends Struct {
   @Int32()
   int lfHeight;
@@ -388,21 +536,21 @@ class LOGFONT extends Struct {
   int lfOrientation;
   @Int32()
   int lfWeight;
-  @Int8()
+  @Uint8()
   int lfItalic;
-  @Int8()
+  @Uint8()
   int lfUnderline;
-  @Int8()
+  @Uint8()
   int lfStrikeOut;
-  @Int8()
+  @Uint8()
   int lfCharSet;
-  @Int8()
+  @Uint8()
   int lfOutPrecision;
-  @Int8()
+  @Uint8()
   int lfClipPrecision;
-  @Int8()
+  @Uint8()
   int lfQuality;
-  @Int8()
+  @Uint8()
   int lfPitchAndFamily;
 
   // Need to use @Int32() here, both because of the lack of fixed-size
@@ -486,6 +634,10 @@ class LOGFONT extends Struct {
 //   LPCWSTR   lpszClass;
 //   DWORD     dwExStyle;
 // } CREATESTRUCTW, *LPCREATESTRUCTW;
+
+/// CREATESTRUCT
+///
+/// {@category Struct}
 class CREATESTRUCT extends Struct {
   Pointer<Void> lpCreateParams;
 
@@ -509,7 +661,7 @@ class CREATESTRUCT extends Struct {
   Pointer<Utf16> lpszName;
   Pointer<Utf16> lpszClass;
 
-  @Int32()
+  @Uint32()
   int dwExStyle;
 
   factory CREATESTRUCT.allocate() => allocate<CREATESTRUCT>().ref
@@ -536,11 +688,15 @@ class CREATESTRUCT extends Struct {
 //   POINT  pt;
 //   DWORD  lPrivate;
 // } MSG, *PMSG, *NPMSG, *LPMSG;
+
+/// MSG
+///
+/// {@category Struct}
 class MSG extends Struct {
   @IntPtr()
   int hwnd;
 
-  @Int32()
+  @Uint32()
   int message;
 
   @IntPtr()
@@ -549,7 +705,7 @@ class MSG extends Struct {
   @IntPtr()
   int lParam;
 
-  @Int32()
+  @Uint32()
   int time;
 
   @Int32()
@@ -558,7 +714,7 @@ class MSG extends Struct {
   @Int32()
   int ptY;
 
-  @Int32()
+  @Uint32()
   int lPrivate;
 
   factory MSG.allocate() => allocate<MSG>().ref
@@ -576,6 +732,10 @@ class MSG extends Struct {
 //   LONG cx;
 //   LONG cy;
 // } SIZE, *PSIZE;
+
+/// SIZE
+///
+/// {@category Struct}
 class SIZE extends Struct {
   @Int32()
   int cx;
@@ -595,6 +755,10 @@ class SIZE extends Struct {
 //   POINT ptMinTrackSize;
 //   POINT ptMaxTrackSize;
 // } MINMAXINFO, *PMINMAXINFO, *LPMINMAXINFO;
+
+/// MINMAXINFO
+///
+/// {@category Struct}
 class MINMAXINFO extends Struct {
   @Int32()
   int ptReservedX;
@@ -626,6 +790,10 @@ class MINMAXINFO extends Struct {
 //   LONG x;
 //   LONG y;
 // } POINT, *PPOINT, *NPPOINT, *LPPOINT;
+
+/// POINT
+///
+/// {@category Struct}
 class POINT extends Struct {
   @Int32()
   int x;
@@ -646,6 +814,10 @@ class POINT extends Struct {
 //   BOOL fIncUpdate;
 //   BYTE rgbReserved[32];
 // } PAINTSTRUCT, *PPAINTSTRUCT, *NPPAINTSTRUCT, *LPPAINTSTRUCT;
+
+/// PAINTSTRUCT
+///
+/// {@category Struct}
 class PAINTSTRUCT extends Struct {
   @IntPtr()
   int hdc;
@@ -663,13 +835,13 @@ class PAINTSTRUCT extends Struct {
   int fRestore;
   @Int32()
   int fIncUpdate;
-  @Int64()
+  @Uint64()
   int rgb1;
-  @Int64()
+  @Uint64()
   int rgb2;
-  @Int64()
+  @Uint64()
   int rgb3;
-  @Int64()
+  @Uint64()
   int rgb4;
 
   factory PAINTSTRUCT.allocate() => allocate<PAINTSTRUCT>().ref
@@ -693,6 +865,10 @@ class PAINTSTRUCT extends Struct {
 //   LONG right;
 //   LONG bottom;
 // } RECT, *PRECT, *NPRECT, *LPRECT;
+
+/// RECT
+///
+/// {@category Struct}
 class RECT extends Struct {
   @Int32()
   int left;
@@ -732,8 +908,12 @@ class RECT extends Struct {
 //   DWORD     time;
 //   ULONG_PTR dwExtraInfo;
 // } MOUSEINPUT, *PMOUSEINPUT, *LPMOUSEINPUT;
+
+/// MOUSEINPUT
+///
+/// {@category Struct}
 class MOUSEINPUT extends Struct {
-  @Int32()
+  @Uint32()
   int type;
 
   @Int32()
@@ -744,13 +924,13 @@ class MOUSEINPUT extends Struct {
   @Int32()
   int dy;
 
-  @Int32()
+  @Uint32()
   int mouseData;
 
-  @Int32()
+  @Uint32()
   int dwFlags;
 
-  @Int32()
+  @Uint32()
   int time;
 
   Pointer<Uint32> dwExtraInfo;
@@ -772,6 +952,10 @@ class MOUSEINPUT extends Struct {
 //   DWORD     time;
 //   ULONG_PTR dwExtraInfo;
 // } KEYBDINPUT, *PKEYBDINPUT, *LPKEYBDINPUT;
+
+/// KEYBDINPUT
+///
+/// {@category Struct}
 class KEYBDINPUT extends Struct {
   @Int32()
   int type;
@@ -779,16 +963,16 @@ class KEYBDINPUT extends Struct {
   @Int32()
   int padding1;
 
-  @Int16()
+  @Uint16()
   int wVk;
 
-  @Int16()
+  @Uint16()
   int wScan;
 
-  @Int32()
+  @Uint32()
   int dwFlags;
 
-  @Int32()
+  @Uint32()
   int time;
 
   Pointer<Uint32> dwExtraInfo;
@@ -810,6 +994,10 @@ class KEYBDINPUT extends Struct {
 //   WORD  wParamL;
 //   WORD  wParamH;
 // } HARDWAREINPUT, *PHARDWAREINPUT, *LPHARDWAREINPUT;
+
+/// HARDWAREINPUT
+///
+/// {@category Struct}
 class HARDWAREINPUT extends Struct {
   @Int32()
   int type;
@@ -817,12 +1005,12 @@ class HARDWAREINPUT extends Struct {
   @Int32()
   int padding;
 
-  @Int32()
+  @Uint32()
   int uMsg;
 
-  @Int16()
+  @Uint16()
   int wParamL;
-  @Int16()
+  @Uint16()
   int wParamH;
 
   factory HARDWAREINPUT.allocate() => allocate<HARDWAREINPUT>().ref
@@ -854,6 +1042,10 @@ class HARDWAREINPUT extends Struct {
 //   BYTE  tmPitchAndFamily;
 //   BYTE  tmCharSet;
 // } TEXTMETRICW, *PTEXTMETRICW, *NPTEXTMETRICW, *LPTEXTMETRICW;
+
+/// TEXTMETRIC
+///
+/// {@category Struct}
 class TEXTMETRIC extends Struct {
   @Int32()
   int tmHeight;
@@ -885,15 +1077,15 @@ class TEXTMETRIC extends Struct {
   int tmDefaultChar;
   @Int16()
   int tmBreakChar;
-  @Int8()
+  @Uint8()
   int tmItalic;
-  @Int8()
+  @Uint8()
   int tmUnderlined;
-  @Int8()
+  @Uint8()
   int tmStruckOut;
-  @Int8()
+  @Uint8()
   int tmPitchAndFamily;
-  @Int8()
+  @Uint8()
   int tmCharSet;
 
   factory TEXTMETRIC.allocate() => allocate<TEXTMETRIC>().ref
@@ -928,16 +1120,20 @@ class TEXTMETRIC extends Struct {
 //   int  nPos;
 //   int  nTrackPos;
 // } SCROLLINFO, *LPSCROLLINFO;
+
+/// SCROLLINFO
+///
+/// {@category Struct}
 class SCROLLINFO extends Struct {
-  @Int32()
+  @Uint32()
   int cbSize;
-  @Int32()
+  @Uint32()
   int fMask;
   @Int32()
   int nMin;
   @Int32()
   int nMax;
-  @Int32()
+  @Uint32()
   int nPage;
   @Int32()
   int nPos;
@@ -962,6 +1158,10 @@ class SCROLLINFO extends Struct {
 //     unsigned short Data3;
 //     unsigned char  Data4[ 8 ];
 // } GUID;
+
+/// GUID
+///
+/// {@category Struct}
 class GUID extends Struct {
   @Uint32()
   int Data1;
@@ -1060,36 +1260,40 @@ class GUID extends Struct {
 //   BYTE rgbRed;
 //   BYTE rgbReserved;
 // } RGBQUAD;
+
+/// BITMAPINFO
+///
+/// {@category Struct}
 class BITMAPINFO extends Struct {
-  @Int32()
+  @Uint32()
   int biSize;
   @Int32()
   int biWidth;
   @Int32()
   int biHeight;
-  @Int16()
+  @Uint16()
   int biPlanes;
-  @Int16()
+  @Uint16()
   int biBitCount;
-  @Int32()
+  @Uint32()
   int biCompression;
-  @Int32()
+  @Uint32()
   int biSizeImage;
   @Int32()
   int biXPelsPerMeter;
   @Int32()
   int biYPelsPerMeter;
-  @Int32()
+  @Uint32()
   int biClrUsed;
-  @Int32()
+  @Uint32()
   int biClrImportant;
-  @Int8()
+  @Uint8()
   int rgbBlue;
-  @Int8()
+  @Uint8()
   int rgbGreen;
-  @Int8()
+  @Uint8()
   int rgbRed;
-  @Int8()
+  @Uint8()
   int rgbReserved;
 
   factory BITMAPINFO.allocate() => allocate<BITMAPINFO>().ref
@@ -1116,8 +1320,12 @@ class BITMAPINFO extends Struct {
 //   DWORD dwSize;
 //   BOOL  bVisible;
 // } CONSOLE_CURSOR_INFO, *PCONSOLE_CURSOR_INFO;
+
+/// CONSOLE_CURSOR_INFO
+///
+/// {@category Struct}
 class CONSOLE_CURSOR_INFO extends Struct {
-  @Int32()
+  @Uint32()
   int dwSize;
   @Int32()
   int bVisible;
@@ -1134,6 +1342,10 @@ class CONSOLE_CURSOR_INFO extends Struct {
 //   SMALL_RECT srWindow;
 //   COORD      dwMaximumWindowSize;
 // } CONSOLE_SCREEN_BUFFER_INFO;
+
+/// CONSOLE_SCREEN_BUFFER_INFO
+///
+/// {@category Struct}
 class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
   @Int16()
   int dwSizeX;
@@ -1146,7 +1358,7 @@ class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
   @Int16()
   int dwCursorPositionY;
 
-  @Int16()
+  @Uint16()
   int wAttributes;
 
   @Int16()
@@ -1182,6 +1394,10 @@ class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
 //   SHORT X;
 //   SHORT Y;
 // } COORD, *PCOORD;
+
+/// COORD
+///
+/// {@category Struct}
 class COORD extends Struct {
   @Int16()
   int X;
@@ -1200,6 +1416,10 @@ class COORD extends Struct {
 //   SHORT Right;
 //   SHORT Bottom;
 // } SMALL_RECT;
+
+/// SMALL_RECT
+///
+/// {@category Struct}
 class SMALL_RECT extends Struct {
   @Int16()
   int Left;
@@ -1212,9 +1432,42 @@ class SMALL_RECT extends Struct {
 
   @Int16()
   int Bottom;
+
   factory SMALL_RECT.allocate() => allocate<SMALL_RECT>().ref
     ..Left = 0
     ..Top = 0
     ..Right = 0
     ..Bottom = 0;
 }
+
+// typedef struct COR_FIELD_OFFSET
+//     {
+//     mdFieldDef ridOfField;
+//     ULONG32 ulOffset;
+//     } 	COR_FIELD_OFFSET;
+
+/// COR_FIELD_OFFSET
+///
+/// {@category Struct}
+class COR_FIELD_OFFSET extends Struct {
+  @Uint32()
+  int ridOfField;
+
+  @Uint32()
+  int ulOffset;
+
+  factory COR_FIELD_OFFSET.allocate() => allocate<COR_FIELD_OFFSET>().ref
+    ..ridOfField = 0
+    ..ulOffset = 0;
+}
+
+// UNIMPLEMENTED CLASSES THAT ARE INCLUDED SO THAT COM OBJECTS CAN BE GENERATED
+class PROPERTYKEY extends Struct {}
+
+class PROPVARIANT extends Struct {}
+
+class SAFEARRAY extends Struct {}
+
+class CLSID extends Struct {}
+
+class FILETIME extends Struct {}

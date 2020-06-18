@@ -12,54 +12,84 @@ void main() {
       nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
 
   if (SUCCEEDED(hr)) {
-    final fileDialog = FileDialog();
-    final ptr = fileDialog.dlg.ref.lpVtbl;
+    final fileDialog = FileOpenDialog.createInstance();
 
-    Pointer<Int32> pfos = allocate<Int32>();
-    hr = fileDialog.GetOptions(ptr, pfos);
-    if (!SUCCEEDED(hr)) throw COMException(hr);
+    final pfos = allocate<Uint32>();
+    hr = fileDialog.GetOptions(pfos);
+    if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
     int options = pfos.value | FILEOPENDIALOGOPTIONS.FOS_FORCEFILESYSTEM;
-    hr = fileDialog.SetOptions(ptr, options);
-    if (!SUCCEEDED(hr)) throw COMException(hr);
+    hr = fileDialog.SetOptions(options);
+    if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-    hr = fileDialog.SetDefaultExtension(ptr, TEXT('txt;csv'));
-    if (!SUCCEEDED(hr)) throw COMException(hr);
+    hr = fileDialog.SetDefaultExtension(TEXT('txt;csv'));
+    if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-    hr = fileDialog.Show(ptr, NULL);
-    if (!SUCCEEDED(hr)) throw COMException(hr);
+    hr = fileDialog.SetFileNameLabel(TEXT('Custom Label:'));
+    if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-    final iShellItem = IShellItem.allocate();
-    hr = fileDialog.GetResult(ptr, iShellItem.addressOf);
-    if (!SUCCEEDED(hr)) throw COMException(hr);
+    hr = fileDialog.SetTitle(TEXT('Custom Title'));
+    if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-    final item = ShellItem(iShellItem.addressOf);
-    final path = allocate<IntPtr>();
-    hr = item.GetDisplayName(
-        iShellItem.lpVtbl, SIGDN.SIGDN_FILESYSPATH, path.cast());
-    if (!SUCCEEDED(hr)) throw COMException(hr);
+    hr = fileDialog.SetOkButtonLabel(TEXT('Go'));
+    if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-    final pathRes = Pointer<Utf16>.fromAddress(path.value);
+    final rgSpec = allocate<COMDLG_FILTERSPEC>(count: 3);
+    rgSpec[0]
+      ..pszName = TEXT('JPEG Files')
+      ..pszSpec = TEXT('*.jpg;*.jpeg');
+    rgSpec[1]
+      ..pszName = TEXT('Bitmap Files')
+      ..pszSpec = TEXT('*.bmp');
+    rgSpec[2]
+      ..pszName = TEXT('All Files (*.*)')
+      ..pszSpec = TEXT('*.*');
+    hr = fileDialog.SetFileTypes(3, rgSpec);
+    if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-    TaskDialog(
-        NULL,
-        NULL,
-        TEXT('CommonFileDialogApp'),
-        pathRes,
-        nullptr,
-        TASKDIALOG_COMMON_BUTTON_FLAGS.TDCBF_OK_BUTTON,
-        TD_INFORMATION_ICON,
-        nullptr);
+    // TaskDialog(
+    //     NULL,
+    //     NULL,
+    //     TEXT('CommonFileDialogApp'),
+    //     pathRes,
+    //     nullptr,
+    //     TASKDIALOG_COMMON_BUTTON_FLAGS.TDCBF_OK_BUTTON,
+    //     TD_INFORMATION_ICON,
+    //     nullptr);
 
-    print('Result: ${pathRes.unpackString(MAX_PATH)}');
+    // print('Result: ${pathRes.unpackString(MAX_PATH)}');
+    hr = fileDialog.Show(NULL);
+    if (!SUCCEEDED(hr)) {
+      if (hr == HRESULT_FROM_WIN32(ERROR_CANCELLED)) {
+        print('Dialog cancelled.');
+      } else {
+        throw WindowsException(hr);
+      }
+    } else {
+      final ppsi = allocate<IntPtr>();
+      hr = fileDialog.GetResult(ppsi);
+      if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-    hr = item.Release(iShellItem.lpVtbl);
-    if (!SUCCEEDED(hr)) throw COMException(hr);
+      final item = IShellItem(ppsi.cast());
+      final pathPtr = allocate<IntPtr>();
+      hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtr.cast());
+      if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-    hr = fileDialog.Release(ptr);
-    if (!SUCCEEDED(hr)) throw COMException(hr);
+      final path = Pointer<Utf16>.fromAddress(pathPtr.value);
+
+      // MAX_PATH may truncate early if long filename support is enabled
+      print('Result: ${path.unpackString(MAX_PATH)}');
+
+      hr = item.Release();
+      if (!SUCCEEDED(hr)) throw WindowsException(hr);
+    }
+
+    hr = fileDialog.Release();
+    if (!SUCCEEDED(hr)) throw WindowsException(hr);
   } else {
-    throw COMException(hr);
+    throw WindowsException(hr);
   }
   CoUninitialize();
+
+  print('All done!');
 }
