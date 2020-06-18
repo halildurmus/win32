@@ -70,16 +70,6 @@ void main() {
       final pathRes = path.unpackString(MAX_PATH);
       print('Result: $pathRes');
 
-      TaskDialog(
-          NULL,
-          NULL,
-          TEXT('CommonFileDialogApp'),
-          path,
-          nullptr,
-          TASKDIALOG_COMMON_BUTTON_FLAGS.TDCBF_OK_BUTTON,
-          TD_INFORMATION_ICON,
-          nullptr);
-
       hr = item.Release();
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
     }

@@ -2,9 +2,26 @@
 
 // Demonstrates a MessageBox from the console
 
+import 'dart:ffi';
+
 import 'package:win32/win32.dart';
 
-void main() {
+void showTaskDialog() {
+  // Requires a reference to comctl32.dll v6 in the manifest to work, so
+  // commenting out here.
+  final hr = TaskDialog(
+      NULL,
+      NULL,
+      TEXT('Title message goes here'),
+      TEXT('Some text that will be displayed in the task dialog goes here.'),
+      nullptr,
+      TASKDIALOG_COMMON_BUTTON_FLAGS.TDCBF_OK_BUTTON,
+      TD_INFORMATION_ICON,
+      nullptr);
+  print(hr);
+}
+
+void showMessageBox() {
   final result = MessageBox(
       NULL,
       TEXT('This is not really an error, but we are pretending for the sake '
@@ -26,4 +43,9 @@ void main() {
       print('Continue pressed');
       break;
   }
+}
+
+void main() {
+  showMessageBox();
+  // showTaskDialog();
 }

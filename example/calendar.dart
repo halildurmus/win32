@@ -9,26 +9,29 @@ import 'package:win32/win32.dart';
 void main() {
   winrtInitialize();
 
-  final object = CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
-  final calendar = ICalendar(object.cast());
+  try {
+    final object =
+        CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
+    final calendar = ICalendar(object.cast());
 
-  print('The year is ${calendar.Year}.');
+    print('The year is ${calendar.Year}.');
 
-  final systemPtr = allocate<IntPtr>();
-  calendar.GetCalendarSystem(systemPtr);
-  print('The calendar system is ${convertFromHString(systemPtr)}.');
-  WindowsDeleteString(systemPtr.value);
+    final systemPtr = allocate<IntPtr>();
+    calendar.GetCalendarSystem(systemPtr);
+    print('The calendar system is ${convertFromHString(systemPtr)}.');
+    WindowsDeleteString(systemPtr.value);
 
-  final dayPtr = allocate<IntPtr>();
-  calendar.DayOfWeekAsFullSoloString(dayPtr);
-  print('Today is ${convertFromHString(dayPtr)}.');
-  WindowsDeleteString(systemPtr.value);
+    final dayPtr = allocate<IntPtr>();
+    calendar.DayOfWeekAsFullSoloString(dayPtr);
+    print('Today is ${convertFromHString(dayPtr)}.');
+    WindowsDeleteString(systemPtr.value);
 
-  if (calendar.IsDaylightSavingTime == 1) {
-    print('Daylight Saving Time is in observance.');
-  } else if (calendar.IsDaylightSavingTime == 0) {
-    print('Daylight Savings Time is not in observance.');
+    if (calendar.IsDaylightSavingTime == 1) {
+      print('Daylight Saving Time is in observance.');
+    } else if (calendar.IsDaylightSavingTime == 0) {
+      print('Daylight Savings Time is not in observance.');
+    }
+  } finally {
+    winrtUninitialize();
   }
-
-  winrtUninitialize();
 }

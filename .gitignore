@@ -15,6 +15,7 @@ build/
 *.exe
 *.obj
 *.pdb
+*.exe.config
 
 # ...but keep one sample executable around
 !example/bin/hello.exe

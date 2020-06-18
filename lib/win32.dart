@@ -17,12 +17,12 @@
 /// choose to wrap the exposed APIs in your application to make their invocation
 /// more idiomatic for a Dart consumer.
 ///
-/// ## Strings
+/// ## Strings (Win32 and COM)
 ///
 /// Win32 strings are typically stored as null-terminated arrays of UTF-16 code
 /// units. (Many older Windows APIs also offer an ANSI, or 8-bit representation,
-/// but no effort has been made to wrap these APIs here: we use the wide
-/// versions, which are suffixed with a capital 'W' (e.g. `FormatMessageW`).
+/// but we use the wide versions, which are suffixed with a capital 'W' (e.g.
+/// `FormatMessageW`).
 ///
 /// You can use the [TEXT] function to convert a Dart string into a
 /// `Pointer<Utf16>`, which can be passed to any Windows API expecting a string,
@@ -45,16 +45,32 @@
 ///   print(buffer.unpackString(length));
 /// ```
 ///
+/// A very small number of APIs offer no wide version (e.g. `GetProcAddress`),
+/// and so the [convertToANSIString] method may be of use to convert a Dart
+/// string to a `Pointer<Uint8>`, which represents this format:
+/// ```
+///   final ansi = convertToANSIString('Beep');
+///   final pGetNativeSystemInfo = GetProcAddress(hModule, ansi);
+///   ...
+///   free(ansi);
+/// ```
+///
+/// ## Strings (Windows Runtime)
+///
 /// Windows Runtime APIs use `HSTRING` as their native type, which is created
 /// with the [WindowsCreateString] API and deleted with the
-/// [WindowsDeleteString] API. A Dart function may be used to convert to and from
-/// `HSTRING`s, for example:
+/// [WindowsDeleteString] API. A Dart function may be used to convert to and
+/// from `HSTRING`s, for example:
 /// ```
 ///   final systemPtr = allocate<IntPtr>();
 ///   calendar.GetCalendarSystem(systemPtr);
 ///   print('The calendar system is ${convertFromHString(systemPtr)}.');
-///    WindowsDeleteString(systemPtr.value);
+///   WindowsDeleteString(systemPtr.value);
+///   free(systemPtr);
 /// ```
+///
+/// Make sure you dispose of `HSTRING`s by calling `WindowsDeleteString` and
+/// passing the string address itself, not the pointer, as shown above.
 
 library win32;
 
