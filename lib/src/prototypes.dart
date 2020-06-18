@@ -1,11 +1,10 @@
-// win32.dart
+// prototypes.dart
 
 // Maps FFI prototypes onto the corresponding Win32 API function calls
 
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 
-import 'package:win32/src/typedefs.dart';
+import 'typedefs.dart';
 
 // *** Callbacks ***
 typedef LPFRHookProc = Pointer<Uint32> Function(IntPtr, Int32, IntPtr, IntPtr);
@@ -13,9 +12,6 @@ typedef TimerProc = Void Function(IntPtr, Uint32, Pointer<Uint32>, Int32);
 typedef EnumWindowsProc = Int32 Function(IntPtr hwnd, IntPtr lParam);
 typedef WindowProc = IntPtr Function(
     IntPtr hwnd, Int32 uMsg, IntPtr wParam, IntPtr lParam);
-
-// *** Helper Function ***
-final TEXT = Utf16.toUtf16;
 
 // *** APIs ***
 final user32 = DynamicLibrary.open('user32.dll');
@@ -150,8 +146,12 @@ final GetLastError = kernel32
 final GetModuleHandle =
     kernel32.lookupFunction<getModuleHandleNative, getModuleHandleDart>(
         'GetModuleHandleW');
+final GetProcAddress = kernel32
+    .lookupFunction<getProcAddressNative, getProcAddressDart>('GetProcAddress');
 final GetStdHandle = kernel32
     .lookupFunction<getStdHandleNative, getStdHandleDart>('GetStdHandle');
+final GetSystemInfo = kernel32
+    .lookupFunction<getSystemInfoNative, getSystemInfoDart>('GetSystemInfo');
 final GetTempPath =
     kernel32.lookupFunction<getTempPathNative, getTempPathDart>('GetTempPathW');
 final GetVolumePathNamesForVolumeName = kernel32.lookupFunction<

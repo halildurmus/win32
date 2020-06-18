@@ -1,4 +1,4 @@
-// utf16.dart
+// string.dart
 
 // Extension methods to fill some gaps in the default Dart FFI implementation
 // of Utf16
@@ -6,6 +6,17 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+
+Pointer<Uint8> convertToANSIString(String str) {
+  final pStr = allocate<Uint8>(count: str.length + 1);
+  for (var i = 0; i < str.length; i++) {
+    pStr.elementAt(i).value = str.codeUnitAt(i) & 0xFF;
+  }
+  pStr.elementAt(str.length).value = 0;
+  return pStr;
+}
+
+final TEXT = Utf16.toUtf16;
 
 extension Utf16Conversion on Pointer<Utf16> {
   String unpackString(int maxLength) {

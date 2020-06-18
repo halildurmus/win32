@@ -6,7 +6,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'package:win32/src/structs.dart';
+import '../structs.dart';
 
 // HRESULT RoInitialize(
 //   RO_INIT_TYPE initType

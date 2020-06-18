@@ -58,15 +58,14 @@
 
 library win32;
 
-// An extension helper for UTF-16 strings
-export 'src/utf16.dart';
-
 // Core Win32 APIs, constants and macros
 export 'src/constants.dart';
 export 'src/exceptions.dart';
 export 'src/macros.dart';
 export 'src/structs.dart';
-export 'src/win32.dart'
+export 'src/string.dart';
+
+export 'src/prototypes.dart'
     hide user32, gdi32, kernel32, psapi, shell32, comdlg32, ole32, oleaut32;
 
 // COM foundational exports

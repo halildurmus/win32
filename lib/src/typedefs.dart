@@ -5,7 +5,7 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
-import 'package:win32/src/structs.dart';
+import 'structs.dart';
 
 // BOOL AppendMenuW(
 //   HMENU    hMenu,
@@ -542,6 +542,15 @@ typedef getObjectDart = int Function(int h, int c, Pointer pv);
 typedef getOpenFileNameNative = Int32 Function(Pointer<OPENFILENAME> arg1);
 typedef getOpenFileNameDart = int Function(Pointer<OPENFILENAME> arg1);
 
+// FARPROC GetProcAddress(
+//   HMODULE hModule,
+//   LPCSTR  lpProcName
+// );
+typedef getProcAddressNative = IntPtr Function(
+    IntPtr hModule, Pointer<Uint8> lpProcName);
+typedef getProcAddressDart = int Function(
+    int hModule, Pointer<Uint8> lpProcName);
+
 // BOOL GetSaveFileNameW(
 //   LPOPENFILENAMEW Arg1
 // );
@@ -569,6 +578,12 @@ typedef getStdHandleDart = int Function(int nStdHandle);
 // );
 typedef getStockObjectNative = IntPtr Function(Int32 i);
 typedef getStockObjectDart = int Function(int i);
+
+// void GetSystemInfo(
+//   LPSYSTEM_INFO lpSystemInfo
+// );
+typedef getSystemInfoNative = Void Function(Pointer<SYSTEM_INFO> lpSystemInfo);
+typedef getSystemInfoDart = void Function(Pointer<SYSTEM_INFO> lpSystemInfo);
 
 // DWORD GetTempPathW(
 //   DWORD  nBufferLength,

@@ -7,16 +7,16 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'package:win32/src/constants.dart';
-import 'package:win32/src/exceptions.dart';
-import 'package:win32/src/macros.dart';
-import 'package:win32/src/structs.dart';
-import 'package:win32/src/win32.dart';
-import 'package:win32/src/com/combase.dart';
+import '../constants.dart';
+import '../exceptions.dart';
+import '../macros.dart';
+import '../structs.dart';
+import '../prototypes.dart';
+import '../com/combase.dart';
 
-import 'package:win32/src/winrt/winrt_constants.dart';
+import '../winrt/winrt_constants.dart';
 
-import 'package:win32/src/generated/IInspectable.dart';
+import 'IInspectable.dart';
 
 const IID_IPropertyValue = '{4BD682DD-7554-40E9-9A9B-82654EDE7E62}';
 

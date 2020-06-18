@@ -6,10 +6,11 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'package:win32/src/exceptions.dart';
-import 'package:win32/src/macros.dart';
-import 'package:win32/src/structs.dart';
-import 'package:win32/src/win32.dart';
+import '../exceptions.dart';
+import '../macros.dart';
+import '../structs.dart';
+import '..//string.dart';
+import '../prototypes.dart';
 
 /// A representation of a generic COM object. All Dart COM objects inherit from
 /// this class.

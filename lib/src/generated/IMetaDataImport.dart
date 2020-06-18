@@ -7,14 +7,14 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import 'package:win32/src/constants.dart';
-import 'package:win32/src/exceptions.dart';
-import 'package:win32/src/macros.dart';
-import 'package:win32/src/structs.dart';
-import 'package:win32/src/win32.dart';
-import 'package:win32/src/com/combase.dart';
+import '../constants.dart';
+import '../exceptions.dart';
+import '../macros.dart';
+import '../structs.dart';
+import '../prototypes.dart';
+import '../com/combase.dart';
 
-import 'package:win32/src/generated/IUnknown.dart';
+import 'IUnknown.dart';
 
 const IID_IMetaDataImport = '{7DAC8207-D3AE-4C75-9B67-92801A497D44}';
 
