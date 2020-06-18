@@ -1,6 +1,6 @@
 name: win32
 description: A Dart library for accessing common Win32 APIs using FFI. No C required!
-version: 1.6.2
+version: 1.6.3
 homepage: https://github.com/timsneath/win32
 
 environment:
