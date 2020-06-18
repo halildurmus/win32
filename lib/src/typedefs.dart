@@ -463,6 +463,12 @@ typedef formatMessageDart = int Function(
     int nSize,
     Pointer arguments);
 
+// BOOL FreeLibrary(
+//   HMODULE hLibModule
+// );
+typedef freeLibraryNative = Int32 Function(IntPtr hLibModule);
+typedef freeLibraryDart = int Function(int hLibModule);
+
 // BOOL GetClientRect(
 //   HWND   hWnd,
 //   LPRECT lpRect
