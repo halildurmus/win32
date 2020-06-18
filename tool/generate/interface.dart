@@ -188,8 +188,15 @@ import '../winrt/winrt_constants.dart';
     final rootType = method.parameters[0].type
         .substring(8, method.parameters[0].type.length - 1);
     final buffer = StringBuffer();
-    buffer.writeln(
-        '  ${dartType(method.returnType)} get ${method.name.substring(4)} {');
+
+    var exposedMethodName = method.name.substring(4);
+
+    // trim any leading underscores
+    while (exposedMethodName.startsWith('_')) {
+      exposedMethodName = exposedMethodName.substring(1);
+    }
+
+    buffer.writeln('  ${dartType(method.returnType)} get $exposedMethodName {');
     buffer.writeln('    final retValuePtr = allocate<$rootType>();');
     buffer.writeln();
     buffer.writeln(

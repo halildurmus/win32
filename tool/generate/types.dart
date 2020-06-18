@@ -31,6 +31,7 @@ const typeMappings = <String, String>{
   'LPCSTR': 'Pointer<Utf16>',
   'LPCWSTR': 'Pointer<Utf16>',
   'LPWSTR': 'Pointer<Utf16>',
+  'LPOLESTR': 'Pointer<Utf16>',
   'BSTR': 'Pointer<Utf16>',
   'WCHAR': 'Pointer<Utf16>',
 
@@ -61,11 +62,20 @@ const typeMappings = <String, String>{
   'DESKTOP_SLIDESHOW_DIRECTION': 'Uint32',
   'DESKTOP_SLIDESHOW_STATE': 'Uint32',
   'DESKTOP_WALLPAPER_POSITION': 'Uint32',
+  'DISPID': 'Int32',
+  'DISPPARAMS': 'DISPPARAMS',
+  'EXCEPINFO': 'EXCEPINFO',
   'FDAP': 'Uint32',
   'FILEOPENDIALOGOPTIONS': 'Uint32',
   'FILETIME': 'FILETIME',
   'GETPROPERTYSTOREFLAGS': 'Uint32',
   'GUID': 'GUID',
+  'LCID': 'Uint32',
+  'NLM_CONNECTIVITY': 'Uint32',
+  'NLM_DOMAIN_TYPE': 'Uint32',
+  'NLM_ENUM_NETWORK': 'Uint32',
+  'NLM_NETWORK_CATEGORY': 'Uint32',
+  'NLM_SIMULATED_PROFILE_INFO': 'NLM_SIMULATED_PROFILE_INFO',
   'PROPERTYKEY': 'PROPERTYKEY',
   'PROPVARIANT': 'PROPVARIANT',
   'REFPROPERTYKEY': 'Pointer<PROPERTYKEY>',
@@ -77,6 +87,7 @@ const typeMappings = <String, String>{
   'SIGDN': 'Uint32',
   'SIATTRIBFLAGS': 'Uint32',
   'VARIANT': 'VARIANT_POINTER', // NOTE: This projection is incomplete
+  'VARIANT_BOOL': 'Int16',
 
   // WinRT types
   'IID': 'Pointer<GUID>',
@@ -127,10 +138,16 @@ const typeMappings = <String, String>{
 
   // Interfaces
   'IBindCtx': 'COMObject',
+  'IEnumNetworks': 'COMObject',
+  'IEnumNetworkConnections': 'COMObject',
   'IEnumShellItems': 'COMObject',
+  'IEnumVARIANT': 'COMObject',
   'IEnumWbemClassObject': 'COMObject',
   'IFileDialogEvents': 'COMObject',
   'IFileOperationProgressSink': 'COMObject',
+  'INetwork': 'COMObject',
+  'INetworkConnection': 'COMObject',
+  'INetworkListManager': 'COMObject',
   'IPropertyDescriptionList': 'COMObject',
   'IPropertyStore': 'COMObject',
   'IShellItem': 'COMObject',

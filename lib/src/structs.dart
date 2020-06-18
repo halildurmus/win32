@@ -1529,6 +1529,10 @@ class COR_FIELD_OFFSET extends Struct {
 }
 
 // UNIMPLEMENTED CLASSES THAT ARE INCLUDED SO THAT COM OBJECTS CAN BE GENERATED
+class DISPPARAMS extends Struct {}
+
+class EXCEPINFO extends Struct {}
+
 class PROPERTYKEY extends Struct {}
 
 class PROPVARIANT extends Struct {}
@@ -1538,3 +1542,5 @@ class SAFEARRAY extends Struct {}
 class CLSID extends Struct {}
 
 class FILETIME extends Struct {}
+
+class NLM_SIMULATED_PROFILE_INFO extends Struct {}
