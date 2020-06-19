@@ -6,9 +6,14 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 // General constants
+
+/// A zero value; used to represent an empty bitmask.
 const NULL = 0;
 
+/// Boolean false value returned from the Win32 API
 const FALSE = 0;
+
+/// Boolean true value returned from the Win32 API
 const TRUE = 1;
 
 // Path length
@@ -4248,6 +4253,30 @@ const PROCESSOR_ARCHITECTURE_IA32_ON_ARM64 = 14;
 
 /// @nodoc
 const PROCESSOR_ARCHITECTURE_UNKNOWN = 0xFFFF;
+
+/// @nodoc
+const DISPID_UNKNOWN = -1;
+
+/// @nodoc
+const DISPID_VALUE = 0;
+
+/// @nodoc
+const DISPID_PROPERTYPUT = -3;
+
+/// @nodoc
+const DISPID_NEWENUM = -4;
+
+/// @nodoc
+const DISPID_EVALUATE = -5;
+
+/// @nodoc
+const DISPID_CONSTRUCTOR = -6;
+
+/// @nodoc
+const DISPID_DESTRUCTOR = -7;
+
+/// @nodoc
+const DISPID_COLLECT = -8;
 
 /// {@category Enum}
 class FILEOPENDIALOGOPTIONS {

@@ -1381,6 +1381,52 @@ class BITMAPINFO extends Struct {
     ..rgbReserved = 0;
 }
 
+// typedef struct _FILETIME {
+//     DWORD dwLowDateTime;
+//     DWORD dwHighDateTime;
+// } FILETIME, *PFILETIME, *LPFILETIME;
+
+/// FILETIME
+///
+/// {@category Struct}
+class FILETIME extends Struct {
+  @Uint32()
+  int dwLowDateTime;
+  @Uint32()
+  int dwHighDateTime;
+
+  factory FILETIME.allocate() => allocate<FILETIME>().ref
+    ..dwLowDateTime = 0
+    ..dwHighDateTime = 0;
+}
+
+// typedef struct tagDISPPARAMS {
+//   VARIANTARG *rgvarg;
+//   DISPID     *rgdispidNamedArgs;
+//   UINT       cArgs;
+//   UINT       cNamedArgs;
+// } DISPPARAMS;
+
+/// DISPPARAMS
+///
+/// {@category Struct}
+class DISPPARAMS extends Struct {
+  Pointer rgvarg;
+  Pointer<Int32> rgdispidNamedArgs;
+
+  @Int16()
+  int cArgs;
+
+  @Int16()
+  int cNamedArgs;
+
+  factory DISPPARAMS.allocate() => allocate<DISPPARAMS>().ref
+    ..rgvarg = nullptr
+    ..rgdispidNamedArgs = nullptr
+    ..cArgs = 0
+    ..cNamedArgs = 0;
+}
+
 // *** CONSOLE STRUCTS ***
 
 // typedef struct _CONSOLE_CURSOR_INFO {
@@ -1529,8 +1575,6 @@ class COR_FIELD_OFFSET extends Struct {
 }
 
 // UNIMPLEMENTED CLASSES THAT ARE INCLUDED SO THAT COM OBJECTS CAN BE GENERATED
-/// {@category Struct}
-class DISPPARAMS extends Struct {}
 
 /// {@category Struct}
 class EXCEPINFO extends Struct {}
@@ -1546,9 +1590,6 @@ class SAFEARRAY extends Struct {}
 
 /// {@category Struct}
 class CLSID extends Struct {}
-
-/// {@category Struct}
-class FILETIME extends Struct {}
 
 /// {@category Struct}
 class NLM_SIMULATED_PROFILE_INFO extends Struct {}
