@@ -19,7 +19,7 @@ import 'IUnknown.dart';
 const CLSID_WbemLocator = '{4590f811-1d3a-11d0-891f-00aa004b2e24}';
 const IID_IWbemLocator = '{dc12a687-737f-11cf-884d-00aa004b2e24}';
 
-typedef ConnectServer_Native = Int32 Function(
+typedef _ConnectServer_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> strNetworkResource,
     Pointer<Utf16> strUser,
@@ -29,7 +29,7 @@ typedef ConnectServer_Native = Int32 Function(
     Pointer<Utf16> strAuthority,
     Pointer<COMObject> pCtx,
     Pointer<IntPtr> ppNamespace);
-typedef ConnectServer_Dart = int Function(
+typedef _ConnectServer_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> strNetworkResource,
     Pointer<Utf16> strUser,
@@ -57,9 +57,9 @@ class IWbemLocator extends IUnknown {
           Pointer<Utf16> strAuthority,
           Pointer<COMObject> pCtx,
           Pointer<IntPtr> ppNamespace) =>
-      Pointer<NativeFunction<ConnectServer_Native>>.fromAddress(
+      Pointer<NativeFunction<_ConnectServer_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(3).value)
-              .asFunction<ConnectServer_Dart>()(
+              .asFunction<_ConnectServer_Dart>()(
           ptr.ref.lpVtbl,
           strNetworkResource,
           strUser,

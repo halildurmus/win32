@@ -19,12 +19,13 @@ import 'IFileDialog.dart';
 const CLSID_FileOpenDialog = '{DC1C5A9C-E88A-4dde-A5A1-60F82A20AEF7}';
 const IID_IFileOpenDialog = '{d57c7288-d4ad-4768-be02-9d969532d960}';
 
-typedef GetResults_Native = Int32 Function(Pointer obj, Pointer<IntPtr> ppenum);
-typedef GetResults_Dart = int Function(Pointer obj, Pointer<IntPtr> ppenum);
+typedef _GetResults_Native = Int32 Function(
+    Pointer obj, Pointer<IntPtr> ppenum);
+typedef _GetResults_Dart = int Function(Pointer obj, Pointer<IntPtr> ppenum);
 
-typedef GetSelectedItems_Native = Int32 Function(
+typedef _GetSelectedItems_Native = Int32 Function(
     Pointer obj, Pointer<IntPtr> ppsai);
-typedef GetSelectedItems_Dart = int Function(
+typedef _GetSelectedItems_Dart = int Function(
     Pointer obj, Pointer<IntPtr> ppsai);
 
 class IFileOpenDialog extends IFileDialog {
@@ -36,14 +37,14 @@ class IFileOpenDialog extends IFileDialog {
   IFileOpenDialog(this.ptr) : super(ptr);
 
   int GetResults(Pointer<IntPtr> ppenum) =>
-      Pointer<NativeFunction<GetResults_Native>>.fromAddress(
+      Pointer<NativeFunction<_GetResults_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(27).value)
-          .asFunction<GetResults_Dart>()(ptr.ref.lpVtbl, ppenum);
+          .asFunction<_GetResults_Dart>()(ptr.ref.lpVtbl, ppenum);
 
   int GetSelectedItems(Pointer<IntPtr> ppsai) =>
-      Pointer<NativeFunction<GetSelectedItems_Native>>.fromAddress(
+      Pointer<NativeFunction<_GetSelectedItems_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(28).value)
-          .asFunction<GetSelectedItems_Dart>()(ptr.ref.lpVtbl, ppsai);
+          .asFunction<_GetSelectedItems_Dart>()(ptr.ref.lpVtbl, ppsai);
 }
 
 class FileOpenDialog extends IFileOpenDialog {

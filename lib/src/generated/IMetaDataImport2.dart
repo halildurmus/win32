@@ -18,14 +18,14 @@ import 'IMetaDataImport.dart';
 
 const IID_IMetaDataImport2 = '{FCE5EFA0-8BBA-4f8E-A036-8F2022B08466}';
 
-typedef EnumGenericParams_Native = Int32 Function(
+typedef _EnumGenericParams_Native = Int32 Function(
     Pointer obj,
     Pointer<IntPtr> phEnum,
     Uint32 tk,
     Pointer<Uint32> rGenericParams,
     Uint32 cMax,
     Pointer<Uint32> pcGenericParams);
-typedef EnumGenericParams_Dart = int Function(
+typedef _EnumGenericParams_Dart = int Function(
     Pointer obj,
     Pointer<IntPtr> phEnum,
     int tk,
@@ -33,7 +33,7 @@ typedef EnumGenericParams_Dart = int Function(
     int cMax,
     Pointer<Uint32> pcGenericParams);
 
-typedef GetGenericParamProps_Native = Int32 Function(
+typedef _GetGenericParamProps_Native = Int32 Function(
     Pointer obj,
     Uint32 gp,
     Pointer<Uint32> pulParamSeq,
@@ -43,7 +43,7 @@ typedef GetGenericParamProps_Native = Int32 Function(
     Pointer<Utf16> wzname,
     Uint32 cchName,
     Pointer<Uint32> pchName);
-typedef GetGenericParamProps_Dart = int Function(
+typedef _GetGenericParamProps_Dart = int Function(
     Pointer obj,
     int gp,
     Pointer<Uint32> pulParamSeq,
@@ -54,27 +54,27 @@ typedef GetGenericParamProps_Dart = int Function(
     int cchName,
     Pointer<Uint32> pchName);
 
-typedef GetMethodSpecProps_Native = Int32 Function(
+typedef _GetMethodSpecProps_Native = Int32 Function(
     Pointer obj,
     Uint32 mi,
     Pointer<Uint32> tkParent,
     Pointer<Uint8> ppvSigBlob,
     Pointer<Uint32> pcbSigBlob);
-typedef GetMethodSpecProps_Dart = int Function(
+typedef _GetMethodSpecProps_Dart = int Function(
     Pointer obj,
     int mi,
     Pointer<Uint32> tkParent,
     Pointer<Uint8> ppvSigBlob,
     Pointer<Uint32> pcbSigBlob);
 
-typedef EnumGenericParamConstraints_Native = Int32 Function(
+typedef _EnumGenericParamConstraints_Native = Int32 Function(
     Pointer obj,
     Pointer<IntPtr> phEnum,
     Uint32 tk,
     Pointer<Uint32> rGenericParamConstraints,
     Uint32 cMax,
     Pointer<Uint32> pcGenericParamConstraints);
-typedef EnumGenericParamConstraints_Dart = int Function(
+typedef _EnumGenericParamConstraints_Dart = int Function(
     Pointer obj,
     Pointer<IntPtr> phEnum,
     int tk,
@@ -82,32 +82,32 @@ typedef EnumGenericParamConstraints_Dart = int Function(
     int cMax,
     Pointer<Uint32> pcGenericParamConstraints);
 
-typedef GetGenericParamConstraintProps_Native = Int32 Function(
+typedef _GetGenericParamConstraintProps_Native = Int32 Function(
     Pointer obj,
     Uint32 gpc,
     Pointer<Uint32> ptGenericParam,
     Pointer<Uint32> ptkConstraintType);
-typedef GetGenericParamConstraintProps_Dart = int Function(Pointer obj, int gpc,
-    Pointer<Uint32> ptGenericParam, Pointer<Uint32> ptkConstraintType);
+typedef _GetGenericParamConstraintProps_Dart = int Function(Pointer obj,
+    int gpc, Pointer<Uint32> ptGenericParam, Pointer<Uint32> ptkConstraintType);
 
-typedef GetPEKind_Native = Int32 Function(
+typedef _GetPEKind_Native = Int32 Function(
     Pointer obj, Pointer<Uint32> pdwPEKind, Pointer<Uint32> pdwMAchine);
-typedef GetPEKind_Dart = int Function(
+typedef _GetPEKind_Dart = int Function(
     Pointer obj, Pointer<Uint32> pdwPEKind, Pointer<Uint32> pdwMAchine);
 
-typedef GetVersionString_Native = Int32 Function(Pointer obj,
+typedef _GetVersionString_Native = Int32 Function(Pointer obj,
     Pointer<Utf16> pwzBuf, Uint32 ccBufSize, Pointer<Uint32> pccBufSize);
-typedef GetVersionString_Dart = int Function(Pointer obj, Pointer<Utf16> pwzBuf,
-    int ccBufSize, Pointer<Uint32> pccBufSize);
+typedef _GetVersionString_Dart = int Function(Pointer obj,
+    Pointer<Utf16> pwzBuf, int ccBufSize, Pointer<Uint32> pccBufSize);
 
-typedef EnumMethodSpecs_Native = Int32 Function(
+typedef _EnumMethodSpecs_Native = Int32 Function(
     Pointer obj,
     Pointer<IntPtr> phEnum,
     Uint32 tk,
     Pointer<Uint32> rMethodSpecs,
     Uint32 cMax,
     Pointer<Uint32> pcMethodSpecs);
-typedef EnumMethodSpecs_Dart = int Function(
+typedef _EnumMethodSpecs_Dart = int Function(
     Pointer obj,
     Pointer<IntPtr> phEnum,
     int tk,
@@ -129,9 +129,9 @@ class IMetaDataImport2 extends IMetaDataImport {
           Pointer<Uint32> rGenericParams,
           int cMax,
           Pointer<Uint32> pcGenericParams) =>
-      Pointer<NativeFunction<EnumGenericParams_Native>>.fromAddress(
+      Pointer<NativeFunction<_EnumGenericParams_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(65).value)
-              .asFunction<EnumGenericParams_Dart>()(
+              .asFunction<_EnumGenericParams_Dart>()(
           ptr.ref.lpVtbl, phEnum, tk, rGenericParams, cMax, pcGenericParams);
 
   int GetGenericParamProps(
@@ -143,9 +143,9 @@ class IMetaDataImport2 extends IMetaDataImport {
           Pointer<Utf16> wzname,
           int cchName,
           Pointer<Uint32> pchName) =>
-      Pointer<NativeFunction<GetGenericParamProps_Native>>.fromAddress(
+      Pointer<NativeFunction<_GetGenericParamProps_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(66).value)
-              .asFunction<GetGenericParamProps_Dart>()(
+              .asFunction<_GetGenericParamProps_Dart>()(
           ptr.ref.lpVtbl,
           gp,
           pulParamSeq,
@@ -158,9 +158,9 @@ class IMetaDataImport2 extends IMetaDataImport {
 
   int GetMethodSpecProps(int mi, Pointer<Uint32> tkParent,
           Pointer<Uint8> ppvSigBlob, Pointer<Uint32> pcbSigBlob) =>
-      Pointer<NativeFunction<GetMethodSpecProps_Native>>.fromAddress(
+      Pointer<NativeFunction<_GetMethodSpecProps_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(67).value)
-              .asFunction<GetMethodSpecProps_Dart>()(
+              .asFunction<_GetMethodSpecProps_Dart>()(
           ptr.ref.lpVtbl, mi, tkParent, ppvSigBlob, pcbSigBlob);
 
   int EnumGenericParamConstraints(
@@ -169,9 +169,9 @@ class IMetaDataImport2 extends IMetaDataImport {
           Pointer<Uint32> rGenericParamConstraints,
           int cMax,
           Pointer<Uint32> pcGenericParamConstraints) =>
-      Pointer<NativeFunction<EnumGenericParamConstraints_Native>>.fromAddress(
+      Pointer<NativeFunction<_EnumGenericParamConstraints_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(68).value)
-              .asFunction<EnumGenericParamConstraints_Dart>()(
+              .asFunction<_EnumGenericParamConstraints_Dart>()(
           ptr.ref.lpVtbl,
           phEnum,
           tk,
@@ -183,21 +183,21 @@ class IMetaDataImport2 extends IMetaDataImport {
           Pointer<Uint32> ptkConstraintType) =>
       Pointer<
                       NativeFunction<
-                          GetGenericParamConstraintProps_Native>>.fromAddress(
+                          _GetGenericParamConstraintProps_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(69).value)
-              .asFunction<GetGenericParamConstraintProps_Dart>()(
+              .asFunction<_GetGenericParamConstraintProps_Dart>()(
           ptr.ref.lpVtbl, gpc, ptGenericParam, ptkConstraintType);
 
   int GetPEKind(Pointer<Uint32> pdwPEKind, Pointer<Uint32> pdwMAchine) =>
-      Pointer<NativeFunction<GetPEKind_Native>>.fromAddress(
+      Pointer<NativeFunction<_GetPEKind_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(70).value)
-          .asFunction<GetPEKind_Dart>()(ptr.ref.lpVtbl, pdwPEKind, pdwMAchine);
+          .asFunction<_GetPEKind_Dart>()(ptr.ref.lpVtbl, pdwPEKind, pdwMAchine);
 
   int GetVersionString(
           Pointer<Utf16> pwzBuf, int ccBufSize, Pointer<Uint32> pccBufSize) =>
-      Pointer<NativeFunction<GetVersionString_Native>>.fromAddress(
+      Pointer<NativeFunction<_GetVersionString_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(71).value)
-              .asFunction<GetVersionString_Dart>()(
+              .asFunction<_GetVersionString_Dart>()(
           ptr.ref.lpVtbl, pwzBuf, ccBufSize, pccBufSize);
 
   int EnumMethodSpecs(
@@ -206,8 +206,8 @@ class IMetaDataImport2 extends IMetaDataImport {
           Pointer<Uint32> rMethodSpecs,
           int cMax,
           Pointer<Uint32> pcMethodSpecs) =>
-      Pointer<NativeFunction<EnumMethodSpecs_Native>>.fromAddress(
+      Pointer<NativeFunction<_EnumMethodSpecs_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(72).value)
-              .asFunction<EnumMethodSpecs_Dart>()(
+              .asFunction<_EnumMethodSpecs_Dart>()(
           ptr.ref.lpVtbl, phEnum, tk, rMethodSpecs, cMax, pcMethodSpecs);
 }

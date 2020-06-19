@@ -93,59 +93,38 @@ export 'src/winrt/winrt_prototypes.dart'
     hide winrt, winrt_string, winrt_typeresolution;
 export 'src/winrt/winrt_helpers.dart';
 
-// COM interfaces
-export 'src/generated/IDesktopWallpaper.dart'
-    show
-        IDesktopWallpaper,
-        IID_IDesktopWallpaper,
-        DesktopWallpaper,
-        CLSID_DesktopWallpaper;
-export 'src/generated/IEnumWbemClassObject.dart'
-    show IEnumWbemClassObject, IID_IEnumWbemClassObject;
-export 'src/generated/IFileDialog.dart' show IFileDialog, IID_IFileDialog;
-export 'src/generated/IFileDialog2.dart' show IFileDialog2, IID_IFileDialog2;
-export 'src/generated/IFileDialogCustomize.dart'
-    show IFileDialogCustomize, IID_IFileDialogCustomize;
-export 'src/generated/IFileOpenDialog.dart'
-    show
-        IFileOpenDialog,
-        IID_IFileOpenDialog,
-        FileOpenDialog,
-        CLSID_FileOpenDialog;
-export 'src/generated/IFileSaveDialog.dart'
-    show
-        IFileSaveDialog,
-        IID_IFileSaveDialog,
-        FileSaveDialog,
-        CLSID_FileSaveDialog;
-export 'src/generated/IInspectable.dart' show IInspectable, IID_IInspectable;
-export 'src/generated/IMetaDataDispenser.dart'
-    show IMetaDataDispenser, IID_IMetaDataDispenser;
-export 'src/generated/IMetaDataDispenserEx.dart'
-    show IMetaDataDispenserEx, IID_IMetaDataDispenserEx;
-export 'src/generated/IMetaDataImport.dart'
-    show IMetaDataImport, IID_IMetaDataImport;
-export 'src/generated/IMetaDataImport2.dart'
-    show IMetaDataImport2, IID_IMetaDataImport2;
-export 'src/generated/IModalWindow.dart' show IModalWindow, IID_IModalWindow;
-export 'src/generated/IShellItem.dart' show IShellItem, IID_IShellItem;
-export 'src/generated/IShellItem2.dart' show IShellItem2, IID_IShellItem2;
-export 'src/generated/IShellItemArray.dart'
-    show IShellItemArray, IID_IShellItemArray;
-export 'src/generated/IShellItemFilter.dart'
-    show IShellItemFilter, IID_IShellItemFilter;
-export 'src/generated/IUnknown.dart' show IUnknown, IID_IUnknown;
-export 'src/generated/IWbemClassObject.dart'
-    show IWbemClassObject, IID_IWbemClassObject;
-export 'src/generated/IWbemContext.dart' show IWbemContext, IID_IWbemContext;
-export 'src/generated/IWbemLocator.dart'
-    show IWbemLocator, IID_IWbemLocator, WbemLocator, CLSID_WbemLocator;
-export 'src/generated/IWbemServices.dart' show IWbemServices, IID_IWbemServices;
-
-// WinRT interfaces
-export 'src/generated/IAsyncInfo.dart' show IAsyncInfo, IID_IAsyncInfo;
-export 'src/generated/ICalendar.dart' show ICalendar, IID_ICalendar;
-export 'src/generated/IFileOpenPicker.dart'
-    show IFileOpenPicker, IID_IFileOpenPicker;
-export 'src/generated/IPropertyValue.dart'
-    show IPropertyValue, IID_IPropertyValue;
+// COM and Windows Runtime interfaces
+export 'src/generated/IAsyncInfo.dart';
+export 'src/generated/ICalendar.dart';
+export 'src/generated/IDesktopWallpaper.dart';
+export 'src/generated/IEnumNetworkConnections.dart';
+export 'src/generated/IEnumNetworks.dart';
+export 'src/generated/IEnumVARIANT.dart';
+export 'src/generated/IEnumWbemClassObject.dart';
+export 'src/generated/IDispatch.dart';
+export 'src/generated/IEnumNetworkConnections.dart';
+export 'src/generated/IFileDialog.dart';
+export 'src/generated/IFileDialog2.dart';
+export 'src/generated/IFileDialogCustomize.dart';
+export 'src/generated/IFileOpenDialog.dart';
+export 'src/generated/IFileOpenPicker.dart';
+export 'src/generated/IFileSaveDialog.dart';
+export 'src/generated/IInspectable.dart';
+export 'src/generated/IMetaDataDispenser.dart';
+export 'src/generated/IMetaDataDispenserEx.dart';
+export 'src/generated/IMetaDataImport.dart';
+export 'src/generated/IMetaDataImport2.dart';
+export 'src/generated/IModalWindow.dart';
+export 'src/generated/INetwork.dart';
+export 'src/generated/INetworkConnection.dart';
+export 'src/generated/INetworkListManager.dart';
+export 'src/generated/IPropertyValue.dart';
+export 'src/generated/IShellItem.dart';
+export 'src/generated/IShellItem2.dart';
+export 'src/generated/IShellItemArray.dart';
+export 'src/generated/IShellItemFilter.dart';
+export 'src/generated/IUnknown.dart';
+export 'src/generated/IWbemClassObject.dart';
+export 'src/generated/IWbemContext.dart';
+export 'src/generated/IWbemLocator.dart';
+export 'src/generated/IWbemServices.dart';

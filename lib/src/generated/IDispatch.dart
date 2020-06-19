@@ -18,27 +18,27 @@ import 'IUnknown.dart';
 
 const IID_IDispatch = '{00020400-0000-0000-C000-000000000046}';
 
-typedef GetTypeInfoCount_Native = Int32 Function(
+typedef _GetTypeInfoCount_Native = Int32 Function(
     Pointer obj, Pointer<Uint32> pctinfo);
-typedef GetTypeInfoCount_Dart = int Function(
+typedef _GetTypeInfoCount_Dart = int Function(
     Pointer obj, Pointer<Uint32> pctinfo);
 
-typedef GetTypeInfo_Native = Int32 Function(
+typedef _GetTypeInfo_Native = Int32 Function(
     Pointer obj, Uint32 iTInfo, Uint32 lcid, Pointer<IntPtr> ppTInfo);
-typedef GetTypeInfo_Dart = int Function(
+typedef _GetTypeInfo_Dart = int Function(
     Pointer obj, int iTInfo, int lcid, Pointer<IntPtr> ppTInfo);
 
-typedef GetIDsOfNames_Native = Int32 Function(
+typedef _GetIDsOfNames_Native = Int32 Function(
     Pointer obj,
     Pointer<GUID> riid,
     Pointer<Utf16> rgszNames,
     Uint32 cNames,
     Uint32 lcid,
     Pointer<Int32> rgDispId);
-typedef GetIDsOfNames_Dart = int Function(Pointer obj, Pointer<GUID> riid,
+typedef _GetIDsOfNames_Dart = int Function(Pointer obj, Pointer<GUID> riid,
     Pointer<Utf16> rgszNames, int cNames, int lcid, Pointer<Int32> rgDispId);
 
-typedef Invoke_Native = Int32 Function(
+typedef _Invoke_Native = Int32 Function(
     Pointer obj,
     Int32 dispIdMember,
     Pointer<GUID> riid,
@@ -48,7 +48,7 @@ typedef Invoke_Native = Int32 Function(
     Pointer<VARIANT_POINTER> pVarResult,
     Pointer<EXCEPINFO> pExcepInfo,
     Pointer<Uint32> puArgErr);
-typedef Invoke_Dart = int Function(
+typedef _Invoke_Dart = int Function(
     Pointer obj,
     int dispIdMember,
     Pointer<GUID> riid,
@@ -68,21 +68,21 @@ class IDispatch extends IUnknown {
   IDispatch(this.ptr) : super(ptr);
 
   int GetTypeInfoCount(Pointer<Uint32> pctinfo) =>
-      Pointer<NativeFunction<GetTypeInfoCount_Native>>.fromAddress(
+      Pointer<NativeFunction<_GetTypeInfoCount_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
-          .asFunction<GetTypeInfoCount_Dart>()(ptr.ref.lpVtbl, pctinfo);
+          .asFunction<_GetTypeInfoCount_Dart>()(ptr.ref.lpVtbl, pctinfo);
 
   int GetTypeInfo(int iTInfo, int lcid, Pointer<IntPtr> ppTInfo) =>
-      Pointer<NativeFunction<GetTypeInfo_Native>>.fromAddress(
+      Pointer<NativeFunction<_GetTypeInfo_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(4).value)
-              .asFunction<GetTypeInfo_Dart>()(
+              .asFunction<_GetTypeInfo_Dart>()(
           ptr.ref.lpVtbl, iTInfo, lcid, ppTInfo);
 
   int GetIDsOfNames(Pointer<GUID> riid, Pointer<Utf16> rgszNames, int cNames,
           int lcid, Pointer<Int32> rgDispId) =>
-      Pointer<NativeFunction<GetIDsOfNames_Native>>.fromAddress(
+      Pointer<NativeFunction<_GetIDsOfNames_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(5).value)
-              .asFunction<GetIDsOfNames_Dart>()(
+              .asFunction<_GetIDsOfNames_Dart>()(
           ptr.ref.lpVtbl, riid, rgszNames, cNames, lcid, rgDispId);
 
   int Invoke(
@@ -94,8 +94,8 @@ class IDispatch extends IUnknown {
           Pointer<VARIANT_POINTER> pVarResult,
           Pointer<EXCEPINFO> pExcepInfo,
           Pointer<Uint32> puArgErr) =>
-      Pointer<NativeFunction<Invoke_Native>>.fromAddress(
+      Pointer<NativeFunction<_Invoke_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(6).value)
-              .asFunction<Invoke_Dart>()(ptr.ref.lpVtbl, dispIdMember, riid,
+              .asFunction<_Invoke_Dart>()(ptr.ref.lpVtbl, dispIdMember, riid,
           lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr);
 }

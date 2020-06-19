@@ -18,14 +18,14 @@ import 'IUnknown.dart';
 
 const IID_IWbemServices = '{9556dc99-828c-11cf-a37e-00aa003240c7}';
 
-typedef OpenNamespace_Native = Int32 Function(
+typedef _OpenNamespace_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> strNamespace,
     Int32 lFlags,
     Pointer<COMObject> pCtx,
     Pointer<IntPtr> ppWorkingNamespace,
     Pointer<IntPtr> ppResult);
-typedef OpenNamespace_Dart = int Function(
+typedef _OpenNamespace_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> strNamespace,
     int lFlags,
@@ -33,24 +33,24 @@ typedef OpenNamespace_Dart = int Function(
     Pointer<IntPtr> ppWorkingNamespace,
     Pointer<IntPtr> ppResult);
 
-typedef CancelAsyncCall_Native = Int32 Function(
+typedef _CancelAsyncCall_Native = Int32 Function(
     Pointer obj, Pointer<COMObject> pSink);
-typedef CancelAsyncCall_Dart = int Function(
+typedef _CancelAsyncCall_Dart = int Function(
     Pointer obj, Pointer<COMObject> pSink);
 
-typedef QueryObjectSink_Native = Int32 Function(
+typedef _QueryObjectSink_Native = Int32 Function(
     Pointer obj, Int32 lFlags, Pointer<IntPtr> ppResponseHandler);
-typedef QueryObjectSink_Dart = int Function(
+typedef _QueryObjectSink_Dart = int Function(
     Pointer obj, int lFlags, Pointer<IntPtr> ppResponseHandler);
 
-typedef GetObject_Native = Int32 Function(
+typedef _GetObject_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> strObjectPath,
     Int32 lFlags,
     Pointer<COMObject> pCtx,
     Pointer<IntPtr> ppObject,
     Pointer<IntPtr> ppCallResult);
-typedef GetObject_Dart = int Function(
+typedef _GetObject_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> strObjectPath,
     int lFlags,
@@ -58,171 +58,171 @@ typedef GetObject_Dart = int Function(
     Pointer<IntPtr> ppObject,
     Pointer<IntPtr> ppCallResult);
 
-typedef GetObjectAsync_Native = Int32 Function(
+typedef _GetObjectAsync_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> strObjectPath,
     Int32 lFlags,
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pResponseHandler);
-typedef GetObjectAsync_Dart = int Function(
+typedef _GetObjectAsync_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> strObjectPath,
     int lFlags,
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pResponseHandler);
 
-typedef PutClass_Native = Int32 Function(
+typedef _PutClass_Native = Int32 Function(
     Pointer obj,
     Pointer<COMObject> pObject,
     Int32 lFlags,
     Pointer<COMObject> pCtx,
     Pointer<IntPtr> ppCallResult);
-typedef PutClass_Dart = int Function(Pointer obj, Pointer<COMObject> pObject,
+typedef _PutClass_Dart = int Function(Pointer obj, Pointer<COMObject> pObject,
     int lFlags, Pointer<COMObject> pCtx, Pointer<IntPtr> ppCallResult);
 
-typedef PutClassAsync_Native = Int32 Function(
+typedef _PutClassAsync_Native = Int32 Function(
     Pointer obj,
     Pointer<COMObject> pObject,
     Int32 lFlags,
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pResponseHandler);
-typedef PutClassAsync_Dart = int Function(
+typedef _PutClassAsync_Dart = int Function(
     Pointer obj,
     Pointer<COMObject> pObject,
     int lFlags,
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pResponseHandler);
 
-typedef DeleteClass_Native = Int32 Function(
+typedef _DeleteClass_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> strClass,
     Int32 lFlags,
     Pointer<COMObject> pCtx,
     Pointer<IntPtr> ppCallResult);
-typedef DeleteClass_Dart = int Function(Pointer obj, Pointer<Utf16> strClass,
+typedef _DeleteClass_Dart = int Function(Pointer obj, Pointer<Utf16> strClass,
     int lFlags, Pointer<COMObject> pCtx, Pointer<IntPtr> ppCallResult);
 
-typedef DeleteClassAsync_Native = Int32 Function(
+typedef _DeleteClassAsync_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> strClass,
     Int32 lFlags,
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pResponseHandler);
-typedef DeleteClassAsync_Dart = int Function(
+typedef _DeleteClassAsync_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> strClass,
     int lFlags,
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pResponseHandler);
 
-typedef CreateClassEnum_Native = Int32 Function(
+typedef _CreateClassEnum_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> strSuperclass,
     Int32 lFlags,
     Pointer<COMObject> pCtx,
     Pointer<IntPtr> ppEnum);
-typedef CreateClassEnum_Dart = int Function(
+typedef _CreateClassEnum_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> strSuperclass,
     int lFlags,
     Pointer<COMObject> pCtx,
     Pointer<IntPtr> ppEnum);
 
-typedef CreateClassEnumAsync_Native = Int32 Function(
+typedef _CreateClassEnumAsync_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> strSuperclass,
     Int32 lFlags,
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pResponseHandler);
-typedef CreateClassEnumAsync_Dart = int Function(
+typedef _CreateClassEnumAsync_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> strSuperclass,
     int lFlags,
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pResponseHandler);
 
-typedef PutInstance_Native = Int32 Function(
+typedef _PutInstance_Native = Int32 Function(
     Pointer obj,
     Pointer<COMObject> pInst,
     Int32 lFlags,
     Pointer<COMObject> pCtx,
     Pointer<IntPtr> ppCallResult);
-typedef PutInstance_Dart = int Function(Pointer obj, Pointer<COMObject> pInst,
+typedef _PutInstance_Dart = int Function(Pointer obj, Pointer<COMObject> pInst,
     int lFlags, Pointer<COMObject> pCtx, Pointer<IntPtr> ppCallResult);
 
-typedef PutInstanceAsync_Native = Int32 Function(
+typedef _PutInstanceAsync_Native = Int32 Function(
     Pointer obj,
     Pointer<COMObject> pInst,
     Int32 lFlags,
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pResponseHandler);
-typedef PutInstanceAsync_Dart = int Function(
+typedef _PutInstanceAsync_Dart = int Function(
     Pointer obj,
     Pointer<COMObject> pInst,
     int lFlags,
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pResponseHandler);
 
-typedef DeleteInstance_Native = Int32 Function(
+typedef _DeleteInstance_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> strObjectPath,
     Int32 lFlags,
     Pointer<COMObject> pCtx,
     Pointer<IntPtr> ppCallResult);
-typedef DeleteInstance_Dart = int Function(
+typedef _DeleteInstance_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> strObjectPath,
     int lFlags,
     Pointer<COMObject> pCtx,
     Pointer<IntPtr> ppCallResult);
 
-typedef DeleteInstanceAsync_Native = Int32 Function(
+typedef _DeleteInstanceAsync_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> strObjectPath,
     Int32 lFlags,
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pResponseHandler);
-typedef DeleteInstanceAsync_Dart = int Function(
+typedef _DeleteInstanceAsync_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> strObjectPath,
     int lFlags,
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pResponseHandler);
 
-typedef CreateInstanceEnum_Native = Int32 Function(
+typedef _CreateInstanceEnum_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> strFilter,
     Int32 lFlags,
     Pointer<COMObject> pCtx,
     Pointer<IntPtr> ppEnum);
-typedef CreateInstanceEnum_Dart = int Function(
+typedef _CreateInstanceEnum_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> strFilter,
     int lFlags,
     Pointer<COMObject> pCtx,
     Pointer<IntPtr> ppEnum);
 
-typedef CreateInstanceEnumAsync_Native = Int32 Function(
+typedef _CreateInstanceEnumAsync_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> strFilter,
     Int32 lFlags,
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pResponseHandler);
-typedef CreateInstanceEnumAsync_Dart = int Function(
+typedef _CreateInstanceEnumAsync_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> strFilter,
     int lFlags,
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pResponseHandler);
 
-typedef ExecQuery_Native = Int32 Function(
+typedef _ExecQuery_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> strQueryLanguage,
     Pointer<Utf16> strQuery,
     Int32 lFlags,
     Pointer<COMObject> pCtx,
     Pointer<IntPtr> ppEnum);
-typedef ExecQuery_Dart = int Function(
+typedef _ExecQuery_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> strQueryLanguage,
     Pointer<Utf16> strQuery,
@@ -230,14 +230,14 @@ typedef ExecQuery_Dart = int Function(
     Pointer<COMObject> pCtx,
     Pointer<IntPtr> ppEnum);
 
-typedef ExecQueryAsync_Native = Int32 Function(
+typedef _ExecQueryAsync_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> strQueryLanguage,
     Pointer<Utf16> strQuery,
     Int32 lFlags,
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pResponseHandler);
-typedef ExecQueryAsync_Dart = int Function(
+typedef _ExecQueryAsync_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> strQueryLanguage,
     Pointer<Utf16> strQuery,
@@ -245,14 +245,14 @@ typedef ExecQueryAsync_Dart = int Function(
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pResponseHandler);
 
-typedef ExecNotificationQuery_Native = Int32 Function(
+typedef _ExecNotificationQuery_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> strQueryLanguage,
     Pointer<Utf16> strQuery,
     Int32 lFlags,
     Pointer<COMObject> pCtx,
     Pointer<IntPtr> ppEnum);
-typedef ExecNotificationQuery_Dart = int Function(
+typedef _ExecNotificationQuery_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> strQueryLanguage,
     Pointer<Utf16> strQuery,
@@ -260,14 +260,14 @@ typedef ExecNotificationQuery_Dart = int Function(
     Pointer<COMObject> pCtx,
     Pointer<IntPtr> ppEnum);
 
-typedef ExecNotificationQueryAsync_Native = Int32 Function(
+typedef _ExecNotificationQueryAsync_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> strQueryLanguage,
     Pointer<Utf16> strQuery,
     Int32 lFlags,
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pResponseHandler);
-typedef ExecNotificationQueryAsync_Dart = int Function(
+typedef _ExecNotificationQueryAsync_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> strQueryLanguage,
     Pointer<Utf16> strQuery,
@@ -275,7 +275,7 @@ typedef ExecNotificationQueryAsync_Dart = int Function(
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pResponseHandler);
 
-typedef ExecMethod_Native = Int32 Function(
+typedef _ExecMethod_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> strObjectPath,
     Pointer<Utf16> strMethodName,
@@ -284,7 +284,7 @@ typedef ExecMethod_Native = Int32 Function(
     Pointer<COMObject> pInParams,
     Pointer<IntPtr> ppOutParams,
     Pointer<IntPtr> ppCallResult);
-typedef ExecMethod_Dart = int Function(
+typedef _ExecMethod_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> strObjectPath,
     Pointer<Utf16> strMethodName,
@@ -294,7 +294,7 @@ typedef ExecMethod_Dart = int Function(
     Pointer<IntPtr> ppOutParams,
     Pointer<IntPtr> ppCallResult);
 
-typedef ExecMethodAsync_Native = Int32 Function(
+typedef _ExecMethodAsync_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> strObjectPath,
     Pointer<Utf16> strMethodName,
@@ -302,7 +302,7 @@ typedef ExecMethodAsync_Native = Int32 Function(
     Pointer<COMObject> pCtx,
     Pointer<COMObject> pInParams,
     Pointer<COMObject> pResponseHandler);
-typedef ExecMethodAsync_Dart = int Function(
+typedef _ExecMethodAsync_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> strObjectPath,
     Pointer<Utf16> strMethodName,
@@ -325,20 +325,20 @@ class IWbemServices extends IUnknown {
           Pointer<COMObject> pCtx,
           Pointer<IntPtr> ppWorkingNamespace,
           Pointer<IntPtr> ppResult) =>
-      Pointer<NativeFunction<OpenNamespace_Native>>.fromAddress(
+      Pointer<NativeFunction<_OpenNamespace_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(3).value)
-              .asFunction<OpenNamespace_Dart>()(ptr.ref.lpVtbl, strNamespace,
+              .asFunction<_OpenNamespace_Dart>()(ptr.ref.lpVtbl, strNamespace,
           lFlags, pCtx, ppWorkingNamespace, ppResult);
 
   int CancelAsyncCall(Pointer<COMObject> pSink) =>
-      Pointer<NativeFunction<CancelAsyncCall_Native>>.fromAddress(
+      Pointer<NativeFunction<_CancelAsyncCall_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(4).value)
-          .asFunction<CancelAsyncCall_Dart>()(ptr.ref.lpVtbl, pSink);
+          .asFunction<_CancelAsyncCall_Dart>()(ptr.ref.lpVtbl, pSink);
 
   int QueryObjectSink(int lFlags, Pointer<IntPtr> ppResponseHandler) =>
-      Pointer<NativeFunction<QueryObjectSink_Native>>.fromAddress(
+      Pointer<NativeFunction<_QueryObjectSink_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(5).value)
-              .asFunction<QueryObjectSink_Dart>()(
+              .asFunction<_QueryObjectSink_Dart>()(
           ptr.ref.lpVtbl, lFlags, ppResponseHandler);
 
   int GetObject(
@@ -347,107 +347,107 @@ class IWbemServices extends IUnknown {
           Pointer<COMObject> pCtx,
           Pointer<IntPtr> ppObject,
           Pointer<IntPtr> ppCallResult) =>
-      Pointer<NativeFunction<GetObject_Native>>.fromAddress(
+      Pointer<NativeFunction<_GetObject_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(6).value)
-              .asFunction<GetObject_Dart>()(
+              .asFunction<_GetObject_Dart>()(
           ptr.ref.lpVtbl, strObjectPath, lFlags, pCtx, ppObject, ppCallResult);
 
   int GetObjectAsync(Pointer<Utf16> strObjectPath, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      Pointer<NativeFunction<GetObjectAsync_Native>>.fromAddress(
+      Pointer<NativeFunction<_GetObjectAsync_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(7).value)
-              .asFunction<GetObjectAsync_Dart>()(
+              .asFunction<_GetObjectAsync_Dart>()(
           ptr.ref.lpVtbl, strObjectPath, lFlags, pCtx, pResponseHandler);
 
   int PutClass(Pointer<COMObject> pObject, int lFlags, Pointer<COMObject> pCtx,
           Pointer<IntPtr> ppCallResult) =>
-      Pointer<NativeFunction<PutClass_Native>>.fromAddress(
+      Pointer<NativeFunction<_PutClass_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(8).value)
-              .asFunction<PutClass_Dart>()(
+              .asFunction<_PutClass_Dart>()(
           ptr.ref.lpVtbl, pObject, lFlags, pCtx, ppCallResult);
 
   int PutClassAsync(Pointer<COMObject> pObject, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      Pointer<NativeFunction<PutClassAsync_Native>>.fromAddress(
+      Pointer<NativeFunction<_PutClassAsync_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(9).value)
-              .asFunction<PutClassAsync_Dart>()(
+              .asFunction<_PutClassAsync_Dart>()(
           ptr.ref.lpVtbl, pObject, lFlags, pCtx, pResponseHandler);
 
   int DeleteClass(Pointer<Utf16> strClass, int lFlags, Pointer<COMObject> pCtx,
           Pointer<IntPtr> ppCallResult) =>
-      Pointer<NativeFunction<DeleteClass_Native>>.fromAddress(
+      Pointer<NativeFunction<_DeleteClass_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(10).value)
-              .asFunction<DeleteClass_Dart>()(
+              .asFunction<_DeleteClass_Dart>()(
           ptr.ref.lpVtbl, strClass, lFlags, pCtx, ppCallResult);
 
   int DeleteClassAsync(Pointer<Utf16> strClass, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      Pointer<NativeFunction<DeleteClassAsync_Native>>.fromAddress(
+      Pointer<NativeFunction<_DeleteClassAsync_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(11).value)
-              .asFunction<DeleteClassAsync_Dart>()(
+              .asFunction<_DeleteClassAsync_Dart>()(
           ptr.ref.lpVtbl, strClass, lFlags, pCtx, pResponseHandler);
 
   int CreateClassEnum(Pointer<Utf16> strSuperclass, int lFlags,
           Pointer<COMObject> pCtx, Pointer<IntPtr> ppEnum) =>
-      Pointer<NativeFunction<CreateClassEnum_Native>>.fromAddress(
+      Pointer<NativeFunction<_CreateClassEnum_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(12).value)
-              .asFunction<CreateClassEnum_Dart>()(
+              .asFunction<_CreateClassEnum_Dart>()(
           ptr.ref.lpVtbl, strSuperclass, lFlags, pCtx, ppEnum);
 
   int CreateClassEnumAsync(Pointer<Utf16> strSuperclass, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      Pointer<NativeFunction<CreateClassEnumAsync_Native>>.fromAddress(
+      Pointer<NativeFunction<_CreateClassEnumAsync_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(13).value)
-              .asFunction<CreateClassEnumAsync_Dart>()(
+              .asFunction<_CreateClassEnumAsync_Dart>()(
           ptr.ref.lpVtbl, strSuperclass, lFlags, pCtx, pResponseHandler);
 
   int PutInstance(Pointer<COMObject> pInst, int lFlags, Pointer<COMObject> pCtx,
           Pointer<IntPtr> ppCallResult) =>
-      Pointer<NativeFunction<PutInstance_Native>>.fromAddress(
+      Pointer<NativeFunction<_PutInstance_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(14).value)
-              .asFunction<PutInstance_Dart>()(
+              .asFunction<_PutInstance_Dart>()(
           ptr.ref.lpVtbl, pInst, lFlags, pCtx, ppCallResult);
 
   int PutInstanceAsync(Pointer<COMObject> pInst, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      Pointer<NativeFunction<PutInstanceAsync_Native>>.fromAddress(
+      Pointer<NativeFunction<_PutInstanceAsync_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(15).value)
-              .asFunction<PutInstanceAsync_Dart>()(
+              .asFunction<_PutInstanceAsync_Dart>()(
           ptr.ref.lpVtbl, pInst, lFlags, pCtx, pResponseHandler);
 
   int DeleteInstance(Pointer<Utf16> strObjectPath, int lFlags,
           Pointer<COMObject> pCtx, Pointer<IntPtr> ppCallResult) =>
-      Pointer<NativeFunction<DeleteInstance_Native>>.fromAddress(
+      Pointer<NativeFunction<_DeleteInstance_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(16).value)
-              .asFunction<DeleteInstance_Dart>()(
+              .asFunction<_DeleteInstance_Dart>()(
           ptr.ref.lpVtbl, strObjectPath, lFlags, pCtx, ppCallResult);
 
   int DeleteInstanceAsync(Pointer<Utf16> strObjectPath, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      Pointer<NativeFunction<DeleteInstanceAsync_Native>>.fromAddress(
+      Pointer<NativeFunction<_DeleteInstanceAsync_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(17).value)
-              .asFunction<DeleteInstanceAsync_Dart>()(
+              .asFunction<_DeleteInstanceAsync_Dart>()(
           ptr.ref.lpVtbl, strObjectPath, lFlags, pCtx, pResponseHandler);
 
   int CreateInstanceEnum(Pointer<Utf16> strFilter, int lFlags,
           Pointer<COMObject> pCtx, Pointer<IntPtr> ppEnum) =>
-      Pointer<NativeFunction<CreateInstanceEnum_Native>>.fromAddress(
+      Pointer<NativeFunction<_CreateInstanceEnum_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(18).value)
-              .asFunction<CreateInstanceEnum_Dart>()(
+              .asFunction<_CreateInstanceEnum_Dart>()(
           ptr.ref.lpVtbl, strFilter, lFlags, pCtx, ppEnum);
 
   int CreateInstanceEnumAsync(Pointer<Utf16> strFilter, int lFlags,
           Pointer<COMObject> pCtx, Pointer<COMObject> pResponseHandler) =>
-      Pointer<NativeFunction<CreateInstanceEnumAsync_Native>>.fromAddress(
+      Pointer<NativeFunction<_CreateInstanceEnumAsync_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(19).value)
-              .asFunction<CreateInstanceEnumAsync_Dart>()(
+              .asFunction<_CreateInstanceEnumAsync_Dart>()(
           ptr.ref.lpVtbl, strFilter, lFlags, pCtx, pResponseHandler);
 
   int ExecQuery(Pointer<Utf16> strQueryLanguage, Pointer<Utf16> strQuery,
           int lFlags, Pointer<COMObject> pCtx, Pointer<IntPtr> ppEnum) =>
-      Pointer<NativeFunction<ExecQuery_Native>>.fromAddress(
+      Pointer<NativeFunction<_ExecQuery_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(20).value)
-              .asFunction<ExecQuery_Dart>()(
+              .asFunction<_ExecQuery_Dart>()(
           ptr.ref.lpVtbl, strQueryLanguage, strQuery, lFlags, pCtx, ppEnum);
 
   int ExecQueryAsync(
@@ -456,9 +456,9 @@ class IWbemServices extends IUnknown {
           int lFlags,
           Pointer<COMObject> pCtx,
           Pointer<COMObject> pResponseHandler) =>
-      Pointer<NativeFunction<ExecQueryAsync_Native>>.fromAddress(
+      Pointer<NativeFunction<_ExecQueryAsync_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(21).value)
-              .asFunction<ExecQueryAsync_Dart>()(ptr.ref.lpVtbl,
+              .asFunction<_ExecQueryAsync_Dart>()(ptr.ref.lpVtbl,
           strQueryLanguage, strQuery, lFlags, pCtx, pResponseHandler);
 
   int ExecNotificationQuery(
@@ -467,9 +467,9 @@ class IWbemServices extends IUnknown {
           int lFlags,
           Pointer<COMObject> pCtx,
           Pointer<IntPtr> ppEnum) =>
-      Pointer<NativeFunction<ExecNotificationQuery_Native>>.fromAddress(
+      Pointer<NativeFunction<_ExecNotificationQuery_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(22).value)
-              .asFunction<ExecNotificationQuery_Dart>()(
+              .asFunction<_ExecNotificationQuery_Dart>()(
           ptr.ref.lpVtbl, strQueryLanguage, strQuery, lFlags, pCtx, ppEnum);
 
   int ExecNotificationQueryAsync(
@@ -478,9 +478,9 @@ class IWbemServices extends IUnknown {
           int lFlags,
           Pointer<COMObject> pCtx,
           Pointer<COMObject> pResponseHandler) =>
-      Pointer<NativeFunction<ExecNotificationQueryAsync_Native>>.fromAddress(
+      Pointer<NativeFunction<_ExecNotificationQueryAsync_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(23).value)
-              .asFunction<ExecNotificationQueryAsync_Dart>()(ptr.ref.lpVtbl,
+              .asFunction<_ExecNotificationQueryAsync_Dart>()(ptr.ref.lpVtbl,
           strQueryLanguage, strQuery, lFlags, pCtx, pResponseHandler);
 
   int ExecMethod(
@@ -491,9 +491,9 @@ class IWbemServices extends IUnknown {
           Pointer<COMObject> pInParams,
           Pointer<IntPtr> ppOutParams,
           Pointer<IntPtr> ppCallResult) =>
-      Pointer<NativeFunction<ExecMethod_Native>>.fromAddress(
+      Pointer<NativeFunction<_ExecMethod_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(24).value)
-              .asFunction<ExecMethod_Dart>()(ptr.ref.lpVtbl, strObjectPath,
+              .asFunction<_ExecMethod_Dart>()(ptr.ref.lpVtbl, strObjectPath,
           strMethodName, lFlags, pCtx, pInParams, ppOutParams, ppCallResult);
 
   int ExecMethodAsync(
@@ -503,8 +503,14 @@ class IWbemServices extends IUnknown {
           Pointer<COMObject> pCtx,
           Pointer<COMObject> pInParams,
           Pointer<COMObject> pResponseHandler) =>
-      Pointer<NativeFunction<ExecMethodAsync_Native>>.fromAddress(
+      Pointer<NativeFunction<_ExecMethodAsync_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(25).value)
-              .asFunction<ExecMethodAsync_Dart>()(ptr.ref.lpVtbl, strObjectPath,
-          strMethodName, lFlags, pCtx, pInParams, pResponseHandler);
+              .asFunction<_ExecMethodAsync_Dart>()(
+          ptr.ref.lpVtbl,
+          strObjectPath,
+          strMethodName,
+          lFlags,
+          pCtx,
+          pInParams,
+          pResponseHandler);
 }

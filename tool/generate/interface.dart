@@ -80,7 +80,7 @@ import '../winrt/winrt_constants.dart';
     for (var method in methods) {
       // Native typedef
       buffer.writeln(
-          'typedef ${method.name}_Native = ${method.returnType} Function(');
+          'typedef _${method.name}_Native = ${method.returnType} Function(');
       buffer.write('  Pointer obj');
       if (method.parameters.isNotEmpty) {
         buffer.writeln(',');
@@ -95,7 +95,7 @@ import '../winrt/winrt_constants.dart';
 
       // Dart typedef
       buffer.writeln(
-          'typedef ${method.name}_Dart = ${dartType(method.returnType)} Function(');
+          'typedef _${method.name}_Dart = ${dartType(method.returnType)} Function(');
       buffer.write('  Pointer obj');
       if (method.parameters.isNotEmpty) {
         buffer.writeln(',');
@@ -165,10 +165,10 @@ import '../winrt/winrt_constants.dart';
     }
     buffer.writeln(') =>');
     buffer.write(
-        '    Pointer<NativeFunction<${method.name}_Native>>.fromAddress(\n');
+        '    Pointer<NativeFunction<_${method.name}_Native>>.fromAddress(\n');
     buffer.write(
         '                ptr.ref.vtable.elementAt(${vtableIndex}).value)\n');
-    buffer.write('            .asFunction<${method.name}_Dart>()(\n');
+    buffer.write('            .asFunction<_${method.name}_Dart>()(\n');
     buffer.write('         ptr.ref.lpVtbl');
     if (method.parameters.isNotEmpty) {
       buffer.write(', ');
@@ -200,11 +200,11 @@ import '../winrt/winrt_constants.dart';
     buffer.writeln('    final retValuePtr = allocate<$rootType>();');
     buffer.writeln();
     buffer.writeln(
-        '    final hr = Pointer<NativeFunction<${method.name}_Native>>.fromAddress(');
+        '    final hr = Pointer<NativeFunction<_${method.name}_Native>>.fromAddress(');
     buffer.writeln(
         '                ptr.ref.vtable.elementAt($vtableIndex).value)');
     buffer.writeln(
-        '       .asFunction<${method.name}_Dart>()(ptr.ref.lpVtbl, retValuePtr);');
+        '       .asFunction<_${method.name}_Dart>()(ptr.ref.lpVtbl, retValuePtr);');
     buffer.writeln('''
        if (FAILED(hr)) throw WindowsException(hr);
 
@@ -220,9 +220,9 @@ import '../winrt/winrt_constants.dart';
     final buffer = StringBuffer();
     buffer.writeln('''
   set ${method.name.substring(4)}(${dartType(method.returnType)} value) {
-    final hr = Pointer<NativeFunction<${method.name}_Native>>.fromAddress(
+    final hr = Pointer<NativeFunction<_${method.name}_Native>>.fromAddress(
             ptr.ref.vtable.elementAt($vtableIndex).value)
-        .asFunction<${method.name}_Dart>()(ptr.ref.lpVtbl, value);
+        .asFunction<_${method.name}_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
   }

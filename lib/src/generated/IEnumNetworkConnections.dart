@@ -18,25 +18,25 @@ import 'IDispatch.dart';
 
 const IID_IEnumNetworkConnections = '{DCB00006-570F-4A9B-8D69-199FDBA5723B}';
 
-typedef get__NewEnum_Native = Int32 Function(
+typedef _get__NewEnum_Native = Int32 Function(
     Pointer obj, Pointer<IntPtr> ppEnumVar);
-typedef get__NewEnum_Dart = int Function(
+typedef _get__NewEnum_Dart = int Function(
     Pointer obj, Pointer<IntPtr> ppEnumVar);
 
-typedef Next_Native = Int32 Function(Pointer obj, Uint32 celt,
+typedef _Next_Native = Int32 Function(Pointer obj, Uint32 celt,
     Pointer<IntPtr> rgelt, Pointer<Uint32> pceltFetched);
-typedef Next_Dart = int Function(
+typedef _Next_Dart = int Function(
     Pointer obj, int celt, Pointer<IntPtr> rgelt, Pointer<Uint32> pceltFetched);
 
-typedef Skip_Native = Int32 Function(Pointer obj, Uint32 celt);
-typedef Skip_Dart = int Function(Pointer obj, int celt);
+typedef _Skip_Native = Int32 Function(Pointer obj, Uint32 celt);
+typedef _Skip_Dart = int Function(Pointer obj, int celt);
 
-typedef Reset_Native = Int32 Function(Pointer obj);
-typedef Reset_Dart = int Function(Pointer obj);
+typedef _Reset_Native = Int32 Function(Pointer obj);
+typedef _Reset_Dart = int Function(Pointer obj);
 
-typedef Clone_Native = Int32 Function(
+typedef _Clone_Native = Int32 Function(
     Pointer obj, Pointer<IntPtr> ppEnumNetwork);
-typedef Clone_Dart = int Function(Pointer obj, Pointer<IntPtr> ppEnumNetwork);
+typedef _Clone_Dart = int Function(Pointer obj, Pointer<IntPtr> ppEnumNetwork);
 
 class IEnumNetworkConnections extends IDispatch {
   // vtable begins at 7, ends at 11
@@ -49,9 +49,9 @@ class IEnumNetworkConnections extends IDispatch {
   int get NewEnum {
     final retValuePtr = allocate<IntPtr>();
 
-    final hr = Pointer<NativeFunction<get__NewEnum_Native>>.fromAddress(
+    final hr = Pointer<NativeFunction<_get__NewEnum_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(7).value)
-        .asFunction<get__NewEnum_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+        .asFunction<_get__NewEnum_Dart>()(ptr.ref.lpVtbl, retValuePtr);
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
@@ -60,20 +60,20 @@ class IEnumNetworkConnections extends IDispatch {
   }
 
   int Next(int celt, Pointer<IntPtr> rgelt, Pointer<Uint32> pceltFetched) =>
-      Pointer<NativeFunction<Next_Native>>.fromAddress(
+      Pointer<NativeFunction<_Next_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(8).value)
-          .asFunction<Next_Dart>()(ptr.ref.lpVtbl, celt, rgelt, pceltFetched);
+          .asFunction<_Next_Dart>()(ptr.ref.lpVtbl, celt, rgelt, pceltFetched);
 
-  int Skip(int celt) => Pointer<NativeFunction<Skip_Native>>.fromAddress(
+  int Skip(int celt) => Pointer<NativeFunction<_Skip_Native>>.fromAddress(
           ptr.ref.vtable.elementAt(9).value)
-      .asFunction<Skip_Dart>()(ptr.ref.lpVtbl, celt);
+      .asFunction<_Skip_Dart>()(ptr.ref.lpVtbl, celt);
 
-  int Reset() => Pointer<NativeFunction<Reset_Native>>.fromAddress(
+  int Reset() => Pointer<NativeFunction<_Reset_Native>>.fromAddress(
           ptr.ref.vtable.elementAt(10).value)
-      .asFunction<Reset_Dart>()(ptr.ref.lpVtbl);
+      .asFunction<_Reset_Dart>()(ptr.ref.lpVtbl);
 
   int Clone(Pointer<IntPtr> ppEnumNetwork) =>
-      Pointer<NativeFunction<Clone_Native>>.fromAddress(
+      Pointer<NativeFunction<_Clone_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(11).value)
-          .asFunction<Clone_Dart>()(ptr.ref.lpVtbl, ppEnumNetwork);
+          .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppEnumNetwork);
 }

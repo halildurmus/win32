@@ -3,6 +3,7 @@
 #include "netlistmgr.h"
 
 // vtable_start 7
+// class NetworkListManager DCB00C01-570F-4A9B-8D69-199FDBA5723B
 MIDL_INTERFACE("DCB00000-570F-4A9B-8D69-199FDBA5723B")
 INetworkListManager : public IDispatch
 {

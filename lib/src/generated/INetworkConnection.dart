@@ -18,38 +18,38 @@ import 'IDispatch.dart';
 
 const IID_INetworkConnection = '{DCB00005-570F-4A9B-8D69-199FDBA5723B}';
 
-typedef GetNetwork_Native = Int32 Function(
+typedef _GetNetwork_Native = Int32 Function(
     Pointer obj, Pointer<IntPtr> ppNetwork);
-typedef GetNetwork_Dart = int Function(Pointer obj, Pointer<IntPtr> ppNetwork);
+typedef _GetNetwork_Dart = int Function(Pointer obj, Pointer<IntPtr> ppNetwork);
 
-typedef get_IsConnectedToInternet_Native = Int32 Function(
+typedef _get_IsConnectedToInternet_Native = Int32 Function(
     Pointer obj, Pointer<Int16> pbIsConnected);
-typedef get_IsConnectedToInternet_Dart = int Function(
-    Pointer obj, Pointer<Int16> pbIsConnected);
-
-typedef get_IsConnected_Native = Int32 Function(
-    Pointer obj, Pointer<Int16> pbIsConnected);
-typedef get_IsConnected_Dart = int Function(
+typedef _get_IsConnectedToInternet_Dart = int Function(
     Pointer obj, Pointer<Int16> pbIsConnected);
 
-typedef GetConnectivity_Native = Int32 Function(
+typedef _get_IsConnected_Native = Int32 Function(
+    Pointer obj, Pointer<Int16> pbIsConnected);
+typedef _get_IsConnected_Dart = int Function(
+    Pointer obj, Pointer<Int16> pbIsConnected);
+
+typedef _GetConnectivity_Native = Int32 Function(
     Pointer obj, Pointer<Uint32> pConnectivity);
-typedef GetConnectivity_Dart = int Function(
+typedef _GetConnectivity_Dart = int Function(
     Pointer obj, Pointer<Uint32> pConnectivity);
 
-typedef GetConnectionId_Native = Int32 Function(
+typedef _GetConnectionId_Native = Int32 Function(
     Pointer obj, Pointer<GUID> pgdConnectionId);
-typedef GetConnectionId_Dart = int Function(
+typedef _GetConnectionId_Dart = int Function(
     Pointer obj, Pointer<GUID> pgdConnectionId);
 
-typedef GetAdapterId_Native = Int32 Function(
+typedef _GetAdapterId_Native = Int32 Function(
     Pointer obj, Pointer<GUID> pgdAdapterId);
-typedef GetAdapterId_Dart = int Function(
+typedef _GetAdapterId_Dart = int Function(
     Pointer obj, Pointer<GUID> pgdAdapterId);
 
-typedef GetDomainType_Native = Int32 Function(
+typedef _GetDomainType_Native = Int32 Function(
     Pointer obj, Pointer<Uint32> pDomainType);
-typedef GetDomainType_Dart = int Function(
+typedef _GetDomainType_Dart = int Function(
     Pointer obj, Pointer<Uint32> pDomainType);
 
 class INetworkConnection extends IDispatch {
@@ -61,17 +61,17 @@ class INetworkConnection extends IDispatch {
   INetworkConnection(this.ptr) : super(ptr);
 
   int GetNetwork(Pointer<IntPtr> ppNetwork) =>
-      Pointer<NativeFunction<GetNetwork_Native>>.fromAddress(
+      Pointer<NativeFunction<_GetNetwork_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(7).value)
-          .asFunction<GetNetwork_Dart>()(ptr.ref.lpVtbl, ppNetwork);
+          .asFunction<_GetNetwork_Dart>()(ptr.ref.lpVtbl, ppNetwork);
 
   int get IsConnectedToInternet {
     final retValuePtr = allocate<Int16>();
 
     final hr =
-        Pointer<NativeFunction<get_IsConnectedToInternet_Native>>.fromAddress(
+        Pointer<NativeFunction<_get_IsConnectedToInternet_Native>>.fromAddress(
                     ptr.ref.vtable.elementAt(8).value)
-                .asFunction<get_IsConnectedToInternet_Dart>()(
+                .asFunction<_get_IsConnectedToInternet_Dart>()(
             ptr.ref.lpVtbl, retValuePtr);
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -83,9 +83,9 @@ class INetworkConnection extends IDispatch {
   int get IsConnected {
     final retValuePtr = allocate<Int16>();
 
-    final hr = Pointer<NativeFunction<get_IsConnected_Native>>.fromAddress(
+    final hr = Pointer<NativeFunction<_get_IsConnected_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(9).value)
-        .asFunction<get_IsConnected_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+        .asFunction<_get_IsConnected_Dart>()(ptr.ref.lpVtbl, retValuePtr);
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
@@ -94,22 +94,22 @@ class INetworkConnection extends IDispatch {
   }
 
   int GetConnectivity(Pointer<Uint32> pConnectivity) =>
-      Pointer<NativeFunction<GetConnectivity_Native>>.fromAddress(
+      Pointer<NativeFunction<_GetConnectivity_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(10).value)
-          .asFunction<GetConnectivity_Dart>()(ptr.ref.lpVtbl, pConnectivity);
+          .asFunction<_GetConnectivity_Dart>()(ptr.ref.lpVtbl, pConnectivity);
 
   int GetConnectionId(Pointer<GUID> pgdConnectionId) =>
-      Pointer<NativeFunction<GetConnectionId_Native>>.fromAddress(
+      Pointer<NativeFunction<_GetConnectionId_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(11).value)
-          .asFunction<GetConnectionId_Dart>()(ptr.ref.lpVtbl, pgdConnectionId);
+          .asFunction<_GetConnectionId_Dart>()(ptr.ref.lpVtbl, pgdConnectionId);
 
   int GetAdapterId(Pointer<GUID> pgdAdapterId) =>
-      Pointer<NativeFunction<GetAdapterId_Native>>.fromAddress(
+      Pointer<NativeFunction<_GetAdapterId_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(12).value)
-          .asFunction<GetAdapterId_Dart>()(ptr.ref.lpVtbl, pgdAdapterId);
+          .asFunction<_GetAdapterId_Dart>()(ptr.ref.lpVtbl, pgdAdapterId);
 
   int GetDomainType(Pointer<Uint32> pDomainType) =>
-      Pointer<NativeFunction<GetDomainType_Native>>.fromAddress(
+      Pointer<NativeFunction<_GetDomainType_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(13).value)
-          .asFunction<GetDomainType_Dart>()(ptr.ref.lpVtbl, pDomainType);
+          .asFunction<_GetDomainType_Dart>()(ptr.ref.lpVtbl, pDomainType);
 }

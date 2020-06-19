@@ -20,22 +20,22 @@ import 'IInspectable.dart';
 
 const IID_IAsyncInfo = '{00000036-0000-0000-C000-000000000046}';
 
-typedef get_Id_Native = Int32 Function(Pointer obj, Pointer<Uint32> id);
-typedef get_Id_Dart = int Function(Pointer obj, Pointer<Uint32> id);
+typedef _get_Id_Native = Int32 Function(Pointer obj, Pointer<Uint32> id);
+typedef _get_Id_Dart = int Function(Pointer obj, Pointer<Uint32> id);
 
-typedef get_Status_Native = Int32 Function(Pointer obj, Pointer<Int32> status);
-typedef get_Status_Dart = int Function(Pointer obj, Pointer<Int32> status);
+typedef _get_Status_Native = Int32 Function(Pointer obj, Pointer<Int32> status);
+typedef _get_Status_Dart = int Function(Pointer obj, Pointer<Int32> status);
 
-typedef get_ErrorCode_Native = Int32 Function(
+typedef _get_ErrorCode_Native = Int32 Function(
     Pointer obj, Pointer<Uint32> errorCode);
-typedef get_ErrorCode_Dart = int Function(
+typedef _get_ErrorCode_Dart = int Function(
     Pointer obj, Pointer<Uint32> errorCode);
 
-typedef Cancel_Native = Int32 Function(Pointer obj);
-typedef Cancel_Dart = int Function(Pointer obj);
+typedef _Cancel_Native = Int32 Function(Pointer obj);
+typedef _Cancel_Dart = int Function(Pointer obj);
 
-typedef Close_Native = Int32 Function(Pointer obj);
-typedef Close_Dart = int Function(Pointer obj);
+typedef _Close_Native = Int32 Function(Pointer obj);
+typedef _Close_Dart = int Function(Pointer obj);
 
 class IAsyncInfo extends IInspectable {
   // vtable begins at 6, ends at 10
@@ -48,9 +48,9 @@ class IAsyncInfo extends IInspectable {
   int get Id {
     final retValuePtr = allocate<Uint32>();
 
-    final hr = Pointer<NativeFunction<get_Id_Native>>.fromAddress(
+    final hr = Pointer<NativeFunction<_get_Id_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(6).value)
-        .asFunction<get_Id_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+        .asFunction<_get_Id_Dart>()(ptr.ref.lpVtbl, retValuePtr);
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
@@ -61,9 +61,9 @@ class IAsyncInfo extends IInspectable {
   int get Status {
     final retValuePtr = allocate<Int32>();
 
-    final hr = Pointer<NativeFunction<get_Status_Native>>.fromAddress(
+    final hr = Pointer<NativeFunction<_get_Status_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(7).value)
-        .asFunction<get_Status_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+        .asFunction<_get_Status_Dart>()(ptr.ref.lpVtbl, retValuePtr);
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
@@ -74,9 +74,9 @@ class IAsyncInfo extends IInspectable {
   int get ErrorCode {
     final retValuePtr = allocate<Uint32>();
 
-    final hr = Pointer<NativeFunction<get_ErrorCode_Native>>.fromAddress(
+    final hr = Pointer<NativeFunction<_get_ErrorCode_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(8).value)
-        .asFunction<get_ErrorCode_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+        .asFunction<_get_ErrorCode_Dart>()(ptr.ref.lpVtbl, retValuePtr);
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
@@ -84,11 +84,11 @@ class IAsyncInfo extends IInspectable {
     return retValue;
   }
 
-  int Cancel() => Pointer<NativeFunction<Cancel_Native>>.fromAddress(
+  int Cancel() => Pointer<NativeFunction<_Cancel_Native>>.fromAddress(
           ptr.ref.vtable.elementAt(9).value)
-      .asFunction<Cancel_Dart>()(ptr.ref.lpVtbl);
+      .asFunction<_Cancel_Dart>()(ptr.ref.lpVtbl);
 
-  int Close() => Pointer<NativeFunction<Close_Native>>.fromAddress(
+  int Close() => Pointer<NativeFunction<_Close_Native>>.fromAddress(
           ptr.ref.vtable.elementAt(10).value)
-      .asFunction<Close_Dart>()(ptr.ref.lpVtbl);
+      .asFunction<_Close_Dart>()(ptr.ref.lpVtbl);
 }
