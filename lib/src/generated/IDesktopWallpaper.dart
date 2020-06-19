@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,7 +17,10 @@ import '../com/combase.dart';
 
 import 'IUnknown.dart';
 
+/// @nodoc
 const CLSID_DesktopWallpaper = '{C2CF3110-460E-4fc1-B9D0-8A1C0C9CC4BD}';
+
+/// @nodoc
 const IID_IDesktopWallpaper = '{B92B56A9-8B55-4E14-9A89-0199BBB6F93B}';
 
 typedef _SetWallpaper_Native = Int32 Function(
@@ -90,6 +94,8 @@ typedef _GetStatus_Dart = int Function(Pointer obj, Pointer<Uint32> state);
 typedef _Enable_Native = Int32 Function(Pointer obj, Int32 enable);
 typedef _Enable_Dart = int Function(Pointer obj, int enable);
 
+/// {@category Interface}
+/// {@category com}
 class IDesktopWallpaper extends IUnknown {
   // vtable begins at 3, ends at 18
 
@@ -186,6 +192,7 @@ class IDesktopWallpaper extends IUnknown {
       .asFunction<_Enable_Dart>()(ptr.ref.lpVtbl, enable);
 }
 
+/// {@category com}
 class DesktopWallpaper extends IDesktopWallpaper {
   @override
   Pointer<COMObject> ptr;

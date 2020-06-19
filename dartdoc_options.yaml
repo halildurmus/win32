@@ -1,18 +1,30 @@
 dartdoc:
   categories:
-    "Struct":
-      markdown: doc/struct.md
-    "Enum":
-      markdown: doc/enum.md
+    "comctl32":
+      markdown: doc/comctl32.md
+    "comdlg32":
+      markdown: doc/comdlg32.md
     "gdi32":
       markdown: doc/gdi32.md
     "kernel32":
       markdown: doc/kernel32.md
+    "ole32":
+      markdown: doc/ole32.md
+    "oleaut32":
+      markdown: doc/oleaut32.md
+    "psapi":
+      markdown: doc/psapi.md
     "shell32":
       markdown: doc/shell32.md
     "user32":
       markdown: doc/user32.md
-  categoryOrder: ["Struct", "Enum", "kernel32", "user32", "gdi32", "shell32"]
+    "com":
+      name: "COM-based APIs"
+      markdown: doc/com.md
+    "winrt":
+      name: "WinRT APIs"
+      markdown: doc/winrt.md
+  categoryOrder: ["kernel32", "user32", "gdi32", "shell32", "ole32", "oleaut", "comctl32", "comdlg32", "psapi", "com", "winrt"]
   showUndocumentedCategories: true
   ignore:
     - broken-link

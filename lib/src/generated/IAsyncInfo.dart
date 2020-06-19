@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -18,6 +19,7 @@ import '../winrt/winrt_constants.dart';
 
 import 'IInspectable.dart';
 
+/// @nodoc
 const IID_IAsyncInfo = '{00000036-0000-0000-C000-000000000046}';
 
 typedef _get_Id_Native = Int32 Function(Pointer obj, Pointer<Uint32> id);
@@ -37,6 +39,8 @@ typedef _Cancel_Dart = int Function(Pointer obj);
 typedef _Close_Native = Int32 Function(Pointer obj);
 typedef _Close_Dart = int Function(Pointer obj);
 
+/// {@category Interface}
+/// {@category winrt}
 class IAsyncInfo extends IInspectable {
   // vtable begins at 6, ends at 10
 

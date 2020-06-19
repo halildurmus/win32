@@ -13,14 +13,14 @@ public:
         /* [retval][out] */ __RPC__deref_out_opt IEnumNetworks **ppEnumNetwork) = 0;
     
     virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetNetwork( 
-        /* [in] */ GUID gdNetworkId,
+        /* broken(struct_by_value) */ /* [in] */ GUID gdNetworkId,
         /* [retval][out] */ __RPC__deref_out_opt INetwork **ppNetwork) = 0;
     
     virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetNetworkConnections( 
         /* [retval][out] */ __RPC__deref_out_opt IEnumNetworkConnections **ppEnum) = 0;
     
     virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetNetworkConnection( 
-        /* [in] */ GUID gdNetworkConnectionId,
+        /* broken(struct_by_value) */ /* [in] */ GUID gdNetworkConnectionId,
         /* [retval][out] */ __RPC__deref_out_opt INetworkConnection **ppNetworkConnection) = 0;
     
     virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_IsConnectedToInternet( 

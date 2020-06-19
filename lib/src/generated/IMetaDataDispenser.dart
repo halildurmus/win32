@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,6 +17,7 @@ import '../com/combase.dart';
 
 import 'IUnknown.dart';
 
+/// @nodoc
 const IID_IMetaDataDispenser = '{809C652E-7396-11D2-9771-00A0C9B4D50C}';
 
 typedef _DefineScope_Native = Int32 Function(Pointer obj, Pointer<GUID> rclsid,
@@ -43,6 +45,8 @@ typedef _OpenScopeOnMemory_Dart = int Function(
     Pointer<GUID> riid,
     Pointer<IntPtr> ppIUnk);
 
+/// {@category Interface}
+/// {@category com}
 class IMetaDataDispenser extends IUnknown {
   // vtable begins at 3, ends at 5
 

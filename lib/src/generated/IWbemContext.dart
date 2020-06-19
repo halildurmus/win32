@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,6 +17,7 @@ import '../com/combase.dart';
 
 import 'IUnknown.dart';
 
+/// @nodoc
 const IID_IWbemContext = '{44aca674-e8fc-11d0-a07c-00c04fb68820}';
 
 typedef _Clone_Native = Int32 Function(Pointer obj, Pointer<IntPtr> ppNewCopy);
@@ -55,6 +57,8 @@ typedef _DeleteValue_Dart = int Function(
 typedef _DeleteAll_Native = Int32 Function(Pointer obj);
 typedef _DeleteAll_Dart = int Function(Pointer obj);
 
+/// {@category Interface}
+/// {@category com}
 class IWbemContext extends IUnknown {
   // vtable begins at 3, ends at 11
 

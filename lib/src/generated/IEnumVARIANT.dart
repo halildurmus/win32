@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,6 +17,7 @@ import '../com/combase.dart';
 
 import 'IUnknown.dart';
 
+/// @nodoc
 const IID_IEnumVARIANT = '{00020404-0000-0000-C000-000000000046}';
 
 typedef _Next_Native = Int32 Function(Pointer obj, Uint32 celt,
@@ -32,6 +34,8 @@ typedef _Reset_Dart = int Function(Pointer obj);
 typedef _Clone_Native = Int32 Function(Pointer obj, Pointer<IntPtr> ppEnum);
 typedef _Clone_Dart = int Function(Pointer obj, Pointer<IntPtr> ppEnum);
 
+/// {@category Interface}
+/// {@category com}
 class IEnumVARIANT extends IUnknown {
   // vtable begins at 3, ends at 6
 

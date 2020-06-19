@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,6 +17,7 @@ import '../com/combase.dart';
 
 import 'IDispatch.dart';
 
+/// @nodoc
 const IID_IEnumNetworks = '{DCB00003-570F-4A9B-8D69-199FDBA5723B}';
 
 typedef _get__NewEnum_Native = Int32 Function(
@@ -38,6 +40,8 @@ typedef _Clone_Native = Int32 Function(
     Pointer obj, Pointer<IntPtr> ppEnumNetwork);
 typedef _Clone_Dart = int Function(Pointer obj, Pointer<IntPtr> ppEnumNetwork);
 
+/// {@category Interface}
+/// {@category com}
 class IEnumNetworks extends IDispatch {
   // vtable begins at 7, ends at 11
 

@@ -13,6 +13,7 @@ enum SourceType { header, idl, unknown }
 class Parameter {
   String type;
   String name;
+  bool supported = true;
 }
 
 class Method {
@@ -41,6 +42,7 @@ class Interface {
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -69,45 +71,58 @@ import '../winrt/winrt_constants.dart';
   String get guidConstantsAsString {
     final buffer = StringBuffer();
     if (generateClass) {
-      buffer.write("const CLSID_$className = '{${clsid.toString()}}';\n");
+      buffer.writeln('/// @nodoc');
+      buffer.writeln("const CLSID_$className = '{${clsid.toString()}}';");
     }
-    buffer.write("const IID_$name = '{${iid.toString()}}';\n\n");
+    buffer.writeln('/// @nodoc');
+    buffer.writeln("const IID_$name = '{${iid.toString()}}';\n");
     return buffer.toString();
   }
 
   String get typedefsAsString {
     final buffer = StringBuffer();
     for (var method in methods) {
-      // Native typedef
-      buffer.writeln(
-          'typedef _${method.name}_Native = ${method.returnType} Function(');
-      buffer.write('  Pointer obj');
-      if (method.parameters.isNotEmpty) {
-        buffer.writeln(',');
-      }
-      for (var idx = 0; idx < method.parameters.length; idx++) {
-        buffer.write(
-            '  ${method.parameters[idx].type} ${method.parameters[idx].name}');
-        if (idx < method.parameters.length - 1) buffer.write(', ');
-        buffer.writeln();
-      }
-      buffer.writeln(');');
+      var generateTypedef = true;
 
-      // Dart typedef
-      buffer.writeln(
-          'typedef _${method.name}_Dart = ${dartType(method.returnType)} Function(');
-      buffer.write('  Pointer obj');
-      if (method.parameters.isNotEmpty) {
-        buffer.writeln(',');
+      // Check all params are supported
+      for (var params in method.parameters) {
+        if (!params.supported) {
+          generateTypedef = false;
+        }
       }
-      for (var idx = 0; idx < method.parameters.length; idx++) {
-        buffer.write(
-            '  ${dartType(method.parameters[idx].type)} ${method.parameters[idx].name}');
-        if (idx < method.parameters.length - 1) buffer.write(', ');
+
+      if (generateTypedef) {
+        // Native typedef
+        buffer.writeln(
+            'typedef _${method.name}_Native = ${method.returnType} Function(');
+        buffer.write('  Pointer obj');
+        if (method.parameters.isNotEmpty) {
+          buffer.writeln(',');
+        }
+        for (var idx = 0; idx < method.parameters.length; idx++) {
+          buffer.write(
+              '  ${method.parameters[idx].type} ${method.parameters[idx].name}');
+          if (idx < method.parameters.length - 1) buffer.write(', ');
+          buffer.writeln();
+        }
+        buffer.writeln(');');
+
+        // Dart typedef
+        buffer.writeln(
+            'typedef _${method.name}_Dart = ${dartType(method.returnType)} Function(');
+        buffer.write('  Pointer obj');
+        if (method.parameters.isNotEmpty) {
+          buffer.writeln(',');
+        }
+        for (var idx = 0; idx < method.parameters.length; idx++) {
+          buffer.write(
+              '  ${dartType(method.parameters[idx].type)} ${method.parameters[idx].name}');
+          if (idx < method.parameters.length - 1) buffer.write(', ');
+          buffer.writeln();
+        }
+        buffer.writeln(');');
         buffer.writeln();
       }
-      buffer.writeln(');');
-      buffer.writeln();
     }
 
     return buffer.toString();
@@ -117,6 +132,12 @@ import '../winrt/winrt_constants.dart';
     final buffer = StringBuffer();
     var vtableIndex = vtableStart;
 
+    buffer.writeln('/// {@category Interface}');
+    if (sourceType == SourceType.idl) {
+      buffer.writeln('/// {@category winrt}');
+    } else {
+      buffer.writeln('/// {@category com}');
+    }
     if (inherits == '') {
       buffer.writeln('class ${name} {');
     } else {
@@ -139,13 +160,26 @@ import '../winrt/winrt_constants.dart';
     buffer.writeln(';\n');
 
     for (var method in methods) {
-      if (method.name.startsWith('get_')) {
-        buffer.write(dartGetProperty(method, vtableIndex));
-      } else if (method.name.startsWith('put_')) {
-        buffer.write(dartSetProperty(method, vtableIndex));
-      } else {
-        buffer.write(dartMethod(method, vtableIndex));
+      var generateMethod = true;
+
+      // Check all params are supported
+      for (var params in method.parameters) {
+        if (!params.supported) {
+          generateMethod = false;
+        }
       }
+
+      if (generateMethod) {
+        if (method.name.startsWith('get_')) {
+          buffer.write(dartGetProperty(method, vtableIndex));
+        } else if (method.name.startsWith('put_')) {
+          buffer.write(dartSetProperty(method, vtableIndex));
+        } else {
+          buffer.write(dartMethod(method, vtableIndex));
+        }
+      }
+
+      // Always increment vtable even if we don't generate method
       vtableIndex++;
     }
     buffer.writeln('}\n\n');
@@ -218,6 +252,7 @@ import '../winrt/winrt_constants.dart';
 
   String dartSetProperty(Method method, int vtableIndex) {
     final buffer = StringBuffer();
+
     buffer.writeln('''
   set ${method.name.substring(4)}(${dartType(method.returnType)} value) {
     final hr = Pointer<NativeFunction<_${method.name}_Native>>.fromAddress(
@@ -232,7 +267,14 @@ import '../winrt/winrt_constants.dart';
 
   String get classAsString {
     if (generateClass) {
-      return '''
+      final buffer = StringBuffer();
+
+      if (sourceType == SourceType.idl) {
+        buffer.writeln('/// {@category winrt}');
+      } else {
+        buffer.writeln('/// {@category com}');
+      }
+      buffer.write('''
 class $className extends $name {
   @override
   Pointer<COMObject> ptr;
@@ -253,7 +295,8 @@ class $className extends $name {
 
   $className(this.ptr) : super(ptr);
 }
-''';
+''');
+      return buffer.toString();
     } else {
       return '';
     }

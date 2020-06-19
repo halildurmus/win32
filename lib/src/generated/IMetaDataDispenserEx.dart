@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,6 +17,7 @@ import '../com/combase.dart';
 
 import 'IMetaDataDispenser.dart';
 
+/// @nodoc
 const IID_IMetaDataDispenserEx = '{31BCFCE2-DAFB-11D2-9F81-00C04F79A0A3}';
 
 typedef _SetOption_Native = Int32 Function(
@@ -86,6 +88,8 @@ typedef _FindAssemblyModule_Dart = int Function(
     int cchName,
     Pointer<Uint32> pcName);
 
+/// {@category Interface}
+/// {@category com}
 class IMetaDataDispenserEx extends IMetaDataDispenser {
   // vtable begins at 6, ends at 11
 

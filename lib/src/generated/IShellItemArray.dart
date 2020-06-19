@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,6 +17,7 @@ import '../com/combase.dart';
 
 import 'IUnknown.dart';
 
+/// @nodoc
 const IID_IShellItemArray = '{b63ea76d-1f85-456f-a19c-48159efa858b}';
 
 typedef _BindToHandler_Native = Int32 Function(
@@ -56,6 +58,8 @@ typedef _EnumItems_Native = Int32 Function(
 typedef _EnumItems_Dart = int Function(
     Pointer obj, Pointer<IntPtr> ppenumShellItems);
 
+/// {@category Interface}
+/// {@category com}
 class IShellItemArray extends IUnknown {
   // vtable begins at 3, ends at 9
 

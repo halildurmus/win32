@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,6 +17,7 @@ import '../com/combase.dart';
 
 import 'IUnknown.dart';
 
+/// @nodoc
 const IID_IShellItem = '{43826d1e-e718-42ee-bc55-a1e261c37bfe}';
 
 typedef _BindToHandler_Native = Int32 Function(
@@ -45,6 +47,8 @@ typedef _Compare_Native = Int32 Function(
 typedef _Compare_Dart = int Function(
     Pointer obj, Pointer<COMObject> psi, int hint, Pointer<Int32> piOrder);
 
+/// {@category Interface}
+/// {@category com}
 class IShellItem extends IUnknown {
   // vtable begins at 3, ends at 7
 

@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,6 +17,7 @@ import '../com/combase.dart';
 
 import 'IUnknown.dart';
 
+/// @nodoc
 const IID_IWbemClassObject = '{dc12a681-737f-11cf-884d-00aa004b2e24}';
 
 typedef _GetQualifierSet_Native = Int32 Function(
@@ -176,6 +178,8 @@ typedef _GetMethodOrigin_Native = Int32 Function(
 typedef _GetMethodOrigin_Dart = int Function(
     Pointer obj, Pointer<Utf16> wszMethodName, Pointer<Utf16> pstrClassName);
 
+/// {@category Interface}
+/// {@category com}
 class IWbemClassObject extends IUnknown {
   // vtable begins at 3, ends at 26
 

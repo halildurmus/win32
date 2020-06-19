@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,6 +17,7 @@ import '../com/combase.dart';
 
 import 'IFileDialog.dart';
 
+/// @nodoc
 const IID_IFileDialog2 = '{61744fc7-85b5-4791-a9b0-272276309b13}';
 
 typedef _SetCancelButtonLabel_Native = Int32 Function(
@@ -28,6 +30,8 @@ typedef _SetNavigationRoot_Native = Int32 Function(
 typedef _SetNavigationRoot_Dart = int Function(
     Pointer obj, Pointer<COMObject> psi);
 
+/// {@category Interface}
+/// {@category com}
 class IFileDialog2 extends IFileDialog {
   // vtable begins at 27, ends at 28
 

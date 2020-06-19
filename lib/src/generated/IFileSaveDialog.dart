@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,7 +17,10 @@ import '../com/combase.dart';
 
 import 'IFileDialog.dart';
 
+/// @nodoc
 const CLSID_FileSaveDialog = '{C0B4E2F3-BA21-4773-8DBA-335EC946EB8B}';
+
+/// @nodoc
 const IID_IFileSaveDialog = '{84bccd23-5fde-4cdb-aea4-af64b83d78ab}';
 
 typedef _SetSaveAsItem_Native = Int32 Function(
@@ -51,6 +55,8 @@ typedef _ApplyProperties_Dart = int Function(
     int hwnd,
     Pointer<COMObject> pSink);
 
+/// {@category Interface}
+/// {@category com}
 class IFileSaveDialog extends IFileDialog {
   // vtable begins at 27, ends at 31
 
@@ -88,6 +94,7 @@ class IFileSaveDialog extends IFileDialog {
           ptr.ref.lpVtbl, psi, pStore, hwnd, pSink);
 }
 
+/// {@category com}
 class FileSaveDialog extends IFileSaveDialog {
   @override
   Pointer<COMObject> ptr;

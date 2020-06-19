@@ -2146,22 +2146,50 @@ const SYSTEM_FIXED_FONT = 16;
 // The MAKEINTRESOURCE() macro creates a pointer to a known memory address. The
 // address itself has no meaning other than as a marker.
 
+/// @nodoc
 final IDI_APPLICATION = Pointer<Utf16>.fromAddress(32512);
+
+/// @nodoc
 final IDI_HAND = Pointer<Utf16>.fromAddress(32513);
+
+/// @nodoc
 final IDI_QUESTION = Pointer<Utf16>.fromAddress(32514);
+
+/// @nodoc
 final IDI_EXCLAMATION = Pointer<Utf16>.fromAddress(32515);
+
+/// @nodoc
 final IDI_ASTERISK = Pointer<Utf16>.fromAddress(32516);
+
+/// @nodoc
 final IDI_WINLOGO = Pointer<Utf16>.fromAddress(32517);
+
+/// @nodoc
 final IDI_SHIELD = Pointer<Utf16>.fromAddress(32518);
+
+/// @nodoc
 final IDI_WARNING = IDI_EXCLAMATION;
+
+/// @nodoc
 final IDI_ERROR = IDI_HAND;
+
+/// @nodoc
 final IDI_INFORMATION = IDI_ASTERISK;
 
 // Stock cursors
+/// @nodoc
 final IDC_ARROW = Pointer<Utf16>.fromAddress(32512);
+
+/// @nodoc
 final IDC_IBEAM = Pointer<Utf16>.fromAddress(32513);
+
+/// @nodoc
 final IDC_WAIT = Pointer<Utf16>.fromAddress(32514);
+
+/// @nodoc
 final IDC_CROSS = Pointer<Utf16>.fromAddress(32515);
+
+/// @nodoc
 final IDC_UPARROW = Pointer<Utf16>.fromAddress(32516);
 
 // MessageBox flags
@@ -3588,11 +3616,19 @@ const KF_FLAG_ALIAS_ONLY = 0x80000000;
 //
 // In the Windows header files, these are defined in the following format:
 //   #define TD_WARNING_ICON         MAKEINTRESOURCEW(-1)
+/// @nodoc
 final TD_WARNING_ICON = Pointer<Utf16>.fromAddress(0xFFFF);
+
+/// @nodoc
 final TD_ERROR_ICON = Pointer<Utf16>.fromAddress(0xFFFE);
+
+/// @nodoc
 final TD_INFORMATION_ICON = Pointer<Utf16>.fromAddress(0xFFFD);
+
+/// @nodoc
 final TD_SHIELD_ICON = Pointer<Utf16>.fromAddress(0xFFFC);
 
+/// {@category Enum}
 class TASKDIALOG_COMMON_BUTTON_FLAGS {
   static final int TDCBF_OK_BUTTON = 0x0001;
   static final int TDCBF_YES_BUTTON = 0x0002;

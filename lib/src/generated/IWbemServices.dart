@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,6 +17,7 @@ import '../com/combase.dart';
 
 import 'IUnknown.dart';
 
+/// @nodoc
 const IID_IWbemServices = '{9556dc99-828c-11cf-a37e-00aa003240c7}';
 
 typedef _OpenNamespace_Native = Int32 Function(
@@ -311,6 +313,8 @@ typedef _ExecMethodAsync_Dart = int Function(
     Pointer<COMObject> pInParams,
     Pointer<COMObject> pResponseHandler);
 
+/// {@category Interface}
+/// {@category com}
 class IWbemServices extends IUnknown {
   // vtable begins at 3, ends at 25
 

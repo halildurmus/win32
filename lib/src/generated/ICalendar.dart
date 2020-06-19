@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -18,6 +19,7 @@ import '../winrt/winrt_constants.dart';
 
 import 'IInspectable.dart';
 
+/// @nodoc
 const IID_ICalendar = '{CA30221D-86D9-40FB-A26B-D44EB7CF08EA}';
 
 typedef _Clone_Native = Int32 Function(Pointer obj, Pointer<IntPtr> value);
@@ -427,6 +429,8 @@ typedef _get_IsDaylightSavingTime_Native = Int32 Function(
 typedef _get_IsDaylightSavingTime_Dart = int Function(
     Pointer obj, Pointer<Uint8> value);
 
+/// {@category Interface}
+/// {@category winrt}
 class ICalendar extends IInspectable {
   // vtable begins at 6, ends at 103
 

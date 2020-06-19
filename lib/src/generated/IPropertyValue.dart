@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -18,6 +19,7 @@ import '../winrt/winrt_constants.dart';
 
 import 'IInspectable.dart';
 
+/// @nodoc
 const IID_IPropertyValue = '{4BD682DD-7554-40E9-9A9B-82654EDE7E62}';
 
 typedef _get_Type_Native = Int32 Function(Pointer obj, Pointer<IntPtr> value);
@@ -180,6 +182,8 @@ typedef _GetRectArray_Native = Int32 Function(
 typedef _GetRectArray_Dart = int Function(
     Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
 
+/// {@category Interface}
+/// {@category winrt}
 class IPropertyValue extends IInspectable {
   // vtable begins at 6, ends at 44
 

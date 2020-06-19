@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,6 +17,7 @@ import '../com/combase.dart';
 
 import 'IMetaDataImport.dart';
 
+/// @nodoc
 const IID_IMetaDataImport2 = '{FCE5EFA0-8BBA-4f8E-A036-8F2022B08466}';
 
 typedef _EnumGenericParams_Native = Int32 Function(
@@ -115,6 +117,8 @@ typedef _EnumMethodSpecs_Dart = int Function(
     int cMax,
     Pointer<Uint32> pcMethodSpecs);
 
+/// {@category Interface}
+/// {@category com}
 class IMetaDataImport2 extends IMetaDataImport {
   // vtable begins at 65, ends at 72
 

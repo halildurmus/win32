@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,6 +17,7 @@ import '../com/combase.dart';
 
 import 'IUnknown.dart';
 
+/// @nodoc
 const IID_IShellItemFilter = '{2659B475-EEB8-48b7-8F07-B378810F48CF}';
 
 typedef _IncludeItem_Native = Int32 Function(
@@ -27,6 +29,8 @@ typedef _GetEnumFlagsForItem_Native = Int32 Function(
 typedef _GetEnumFlagsForItem_Dart = int Function(
     Pointer obj, Pointer<COMObject> psi, Pointer<Uint32> pgrfFlags);
 
+/// {@category Interface}
+/// {@category com}
 class IShellItemFilter extends IUnknown {
   // vtable begins at 3, ends at 4
 

@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,7 +17,10 @@ import '../com/combase.dart';
 
 import 'IDispatch.dart';
 
+/// @nodoc
 const CLSID_NetworkListManager = '{DCB00C01-570F-4A9B-8D69-199FDBA5723B}';
+
+/// @nodoc
 const IID_INetworkListManager = '{DCB00000-570F-4A9B-8D69-199FDBA5723B}';
 
 typedef _GetNetworks_Native = Int32 Function(
@@ -24,20 +28,10 @@ typedef _GetNetworks_Native = Int32 Function(
 typedef _GetNetworks_Dart = int Function(
     Pointer obj, int Flags, Pointer<IntPtr> ppEnumNetwork);
 
-// typedef _GetNetwork_Native = Int32 Function(
-//     Pointer obj, GUID gdNetworkId, Pointer<IntPtr> ppNetwork);
-// typedef _GetNetwork_Dart = int Function(
-//     Pointer obj, GUID gdNetworkId, Pointer<IntPtr> ppNetwork);
-
 typedef _GetNetworkConnections_Native = Int32 Function(
     Pointer obj, Pointer<IntPtr> ppEnum);
 typedef _GetNetworkConnections_Dart = int Function(
     Pointer obj, Pointer<IntPtr> ppEnum);
-
-// typedef _GetNetworkConnection_Native = Int32 Function(Pointer obj,
-//     GUID gdNetworkConnectionId, Pointer<IntPtr> ppNetworkConnection);
-// typedef _GetNetworkConnection_Dart = int Function(Pointer obj,
-//     GUID gdNetworkConnectionId, Pointer<IntPtr> ppNetworkConnection);
 
 typedef _get_IsConnectedToInternet_Native = Int32 Function(
     Pointer obj, Pointer<Int16> pbIsConnected);
@@ -62,6 +56,8 @@ typedef _SetSimulatedProfileInfo_Dart = int Function(
 typedef _ClearSimulatedProfileInfo_Native = Int32 Function(Pointer obj);
 typedef _ClearSimulatedProfileInfo_Dart = int Function(Pointer obj);
 
+/// {@category Interface}
+/// {@category com}
 class INetworkListManager extends IDispatch {
   // vtable begins at 7, ends at 15
 
@@ -76,23 +72,10 @@ class INetworkListManager extends IDispatch {
               .asFunction<_GetNetworks_Dart>()(
           ptr.ref.lpVtbl, Flags, ppEnumNetwork);
 
-  // int GetNetwork(GUID gdNetworkId, Pointer<IntPtr> ppNetwork) =>
-  //     Pointer<NativeFunction<_GetNetwork_Native>>.fromAddress(
-  //                 ptr.ref.vtable.elementAt(8).value)
-  //             .asFunction<_GetNetwork_Dart>()(
-  //         ptr.ref.lpVtbl, gdNetworkId, ppNetwork);
-
   int GetNetworkConnections(Pointer<IntPtr> ppEnum) =>
       Pointer<NativeFunction<_GetNetworkConnections_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(9).value)
           .asFunction<_GetNetworkConnections_Dart>()(ptr.ref.lpVtbl, ppEnum);
-
-  // int GetNetworkConnection(
-  //         GUID gdNetworkConnectionId, Pointer<IntPtr> ppNetworkConnection) =>
-  //     Pointer<NativeFunction<_GetNetworkConnection_Native>>.fromAddress(
-  //                 ptr.ref.vtable.elementAt(10).value)
-  //             .asFunction<_GetNetworkConnection_Dart>()(
-  //         ptr.ref.lpVtbl, gdNetworkConnectionId, ppNetworkConnection);
 
   int get IsConnectedToInternet {
     final retValuePtr = allocate<Int16>();
@@ -140,6 +123,7 @@ class INetworkListManager extends IDispatch {
           .asFunction<_ClearSimulatedProfileInfo_Dart>()(ptr.ref.lpVtbl);
 }
 
+/// {@category com}
 class NetworkListManager extends INetworkListManager {
   @override
   Pointer<COMObject> ptr;

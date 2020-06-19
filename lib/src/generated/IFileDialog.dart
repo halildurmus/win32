@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,6 +17,7 @@ import '../com/combase.dart';
 
 import 'IModalWindow.dart';
 
+/// @nodoc
 const IID_IFileDialog = '{42f85136-db7e-439c-85f1-e4075d135fc8}';
 
 typedef _SetFileTypes_Native = Int32 Function(
@@ -109,6 +111,8 @@ typedef _SetFilter_Native = Int32 Function(
     Pointer obj, Pointer<COMObject> pFilter);
 typedef _SetFilter_Dart = int Function(Pointer obj, Pointer<COMObject> pFilter);
 
+/// {@category Interface}
+/// {@category com}
 class IFileDialog extends IModalWindow {
   // vtable begins at 4, ends at 26
 

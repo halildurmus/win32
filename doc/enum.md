@@ -1,3 +1,3 @@
-## Enum
+## Enumerations
 
-TBD
+Enumerations used in the Win32 API.

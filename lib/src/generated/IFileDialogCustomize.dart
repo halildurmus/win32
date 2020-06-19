@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,6 +17,7 @@ import '../com/combase.dart';
 
 import 'IUnknown.dart';
 
+/// @nodoc
 const IID_IFileDialogCustomize = '{e6fdd21a-163f-4975-9c8c-a69f1ba37034}';
 
 typedef _EnableOpenDropDown_Native = Int32 Function(
@@ -142,6 +144,8 @@ typedef _SetControlItemText_Native = Int32 Function(
 typedef _SetControlItemText_Dart = int Function(
     Pointer obj, int dwIDCtl, int dwIDItem, Pointer<Utf16> pszLabel);
 
+/// {@category Interface}
+/// {@category com}
 class IFileDialogCustomize extends IUnknown {
   // vtable begins at 3, ends at 29
 

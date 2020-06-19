@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,6 +17,7 @@ import '../com/combase.dart';
 
 import 'IShellItem.dart';
 
+/// @nodoc
 const IID_IShellItem2 = '{7e9fb0d3-919f-4307-ab2e-9b1860310c93}';
 
 typedef _GetPropertyStore_Native = Int32 Function(
@@ -99,6 +101,8 @@ typedef _GetBool_Native = Int32 Function(
 typedef _GetBool_Dart = int Function(
     Pointer obj, Pointer<PROPERTYKEY> key, Pointer<Int32> pf);
 
+/// {@category Interface}
+/// {@category com}
 class IShellItem2 extends IShellItem {
   // vtable begins at 8, ends at 20
 

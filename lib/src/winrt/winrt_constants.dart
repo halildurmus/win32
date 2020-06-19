@@ -34,6 +34,7 @@ const RO_E_CHANGE_NOTIFICATION_IN_PROGRESS = 0x80000015;
 /// @nodoc
 const RO_E_ERROR_STRING_NOT_FOUND = 0x80000016;
 
+/// @nodoc
 const CLSID_CorMetaDataDispenser = '{E5CB7A31-7512-11D2-89CE-0080C792E5D8}';
 
 /// {@category Enum}

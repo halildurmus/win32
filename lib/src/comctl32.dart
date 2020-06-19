@@ -7,5 +7,7 @@ import 'dart:ffi';
 import 'typedefs.dart';
 
 final _comctl32 = DynamicLibrary.open('comctl32.dll');
+
+/// {@category comctl32}
 final TaskDialog =
     _comctl32.lookupFunction<taskDialogNative, taskDialogDart>('TaskDialog');

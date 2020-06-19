@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,7 +17,10 @@ import '../com/combase.dart';
 
 import 'IUnknown.dart';
 
+/// @nodoc
 const CLSID_WbemLocator = '{4590f811-1d3a-11d0-891f-00aa004b2e24}';
+
+/// @nodoc
 const IID_IWbemLocator = '{dc12a687-737f-11cf-884d-00aa004b2e24}';
 
 typedef _ConnectServer_Native = Int32 Function(
@@ -40,6 +44,8 @@ typedef _ConnectServer_Dart = int Function(
     Pointer<COMObject> pCtx,
     Pointer<IntPtr> ppNamespace);
 
+/// {@category Interface}
+/// {@category com}
 class IWbemLocator extends IUnknown {
   // vtable begins at 3, ends at 3
 
@@ -71,6 +77,7 @@ class IWbemLocator extends IUnknown {
           ppNamespace);
 }
 
+/// {@category com}
 class WbemLocator extends IWbemLocator {
   @override
   Pointer<COMObject> ptr;

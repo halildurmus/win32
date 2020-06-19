@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,6 +17,7 @@ import '../com/combase.dart';
 
 import 'IUnknown.dart';
 
+/// @nodoc
 const IID_IInspectable = '{AF86E2E0-B12D-4c6a-9C5A-D7AA65101E90}';
 
 typedef _GetIids_Native = Int32 Function(
@@ -33,6 +35,8 @@ typedef _GetTrustLevel_Native = Int32 Function(
 typedef _GetTrustLevel_Dart = int Function(
     Pointer obj, Pointer<Int32> trustLevel);
 
+/// {@category Interface}
+/// {@category com}
 class IInspectable extends IUnknown {
   // vtable begins at 3, ends at 5
 

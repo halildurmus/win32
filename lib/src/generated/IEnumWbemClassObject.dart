@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,6 +17,7 @@ import '../com/combase.dart';
 
 import 'IUnknown.dart';
 
+/// @nodoc
 const IID_IEnumWbemClassObject = '{027947e1-d731-11ce-a357-000000000001}';
 
 typedef _Reset_Native = Int32 Function(Pointer obj);
@@ -38,6 +40,8 @@ typedef _Skip_Native = Int32 Function(
     Pointer obj, Int32 lTimeout, Uint32 nCount);
 typedef _Skip_Dart = int Function(Pointer obj, int lTimeout, int nCount);
 
+/// {@category Interface}
+/// {@category com}
 class IEnumWbemClassObject extends IUnknown {
   // vtable begins at 3, ends at 7
 

@@ -17,12 +17,15 @@ import 'package:win32/src/generated/IInspectable.dart';
 
 /// Initializes the Windows Runtime on the current thread with a single-threaded
 /// concurrency model.
+/// {@category winrt}
 void winrtInitialize() => RoInitialize(RO_INIT_TYPE.RO_INIT_SINGLETHREADED);
 
 /// Closes the Windows Runtime on the current thread.
+/// {@category winrt}
 void winrtUninitialize() => RoUninitialize();
 
 /// Takes a `HSTRING` (a WinRT String), and converts it to a Dart `String`.
+/// {@category winrt}
 String convertFromHString(Pointer<IntPtr> hstring) {
   final stringLength = allocate<Uint32>();
   final stringPtr = WindowsGetStringRawBuffer(hstring.value, stringLength);
@@ -38,6 +41,7 @@ String convertFromHString(Pointer<IntPtr> hstring) {
 ///
 /// The caller is responsible for deleting the `HSTRING` when it is no longer
 /// used, through a call to `WindowsDeleteString()`.
+/// {@category winrt}
 Pointer<IntPtr> convertToHString(String string) {
   final hString = allocate<IntPtr>();
 
@@ -56,6 +60,7 @@ Pointer<IntPtr> convertToHString(String string) {
 /// final object = CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
 /// final calendar = ICalendar(object.cast());
 /// ```
+/// {@category winrt}
 Pointer<IntPtr> CreateObject(String className, String iid) {
   final hstrClass = allocate<IntPtr>();
 

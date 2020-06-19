@@ -191,6 +191,10 @@ Interface loadSource(File file) {
         final parameter = Parameter();
         String win32Keyword;
 
+        if (line.contains('/* broken(struct_by_value) */')) {
+          parameter.supported = false;
+        }
+
         // don't know which field contains the return param, so we just search
         for (var type in typeMappings.entries) {
           for (var keyword in keywords) {

@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,6 +17,7 @@ import '../com/combase.dart';
 
 import 'IUnknown.dart';
 
+/// @nodoc
 const IID_IMetaDataImport = '{7DAC8207-D3AE-4C75-9B67-92801A497D44}';
 
 typedef _CloseEnum_Native = Int32 Function(Pointer obj, IntPtr hEnum);
@@ -795,6 +797,8 @@ typedef _IsGlobal_Native = Int32 Function(
 typedef _IsGlobal_Dart = int Function(
     Pointer obj, int tk, Pointer<Int32> pbIsGlobal);
 
+/// {@category Interface}
+/// {@category com}
 class IMetaDataImport extends IUnknown {
   // vtable begins at 3, ends at 64
 

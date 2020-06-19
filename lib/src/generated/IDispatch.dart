@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,6 +17,7 @@ import '../com/combase.dart';
 
 import 'IUnknown.dart';
 
+/// @nodoc
 const IID_IDispatch = '{00020400-0000-0000-C000-000000000046}';
 
 typedef _GetTypeInfoCount_Native = Int32 Function(
@@ -59,6 +61,8 @@ typedef _Invoke_Dart = int Function(
     Pointer<EXCEPINFO> pExcepInfo,
     Pointer<Uint32> puArgErr);
 
+/// {@category Interface}
+/// {@category com}
 class IDispatch extends IUnknown {
   // vtable begins at 3, ends at 6
 

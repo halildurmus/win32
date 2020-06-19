@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -18,6 +19,7 @@ import '../winrt/winrt_constants.dart';
 
 import 'IInspectable.dart';
 
+/// @nodoc
 const IID_IFileOpenPicker = '{2CA8278A-12C5-4C5F-8977-94547793C241}';
 
 typedef _get_ViewMode_Native = Int32 Function(
@@ -69,6 +71,8 @@ typedef _PickMultipleFilesAsync_Native = Int32 Function(
 typedef _PickMultipleFilesAsync_Dart = int Function(
     Pointer obj, Pointer<IntPtr> operation);
 
+/// {@category Interface}
+/// {@category winrt}
 class IFileOpenPicker extends IInspectable {
   // vtable begins at 6, ends at 16
 

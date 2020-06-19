@@ -3,6 +3,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
 // ignore_for_file: unused_import
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -16,6 +17,7 @@ import '../com/combase.dart';
 
 import 'IDispatch.dart';
 
+/// @nodoc
 const IID_INetworkConnection = '{DCB00005-570F-4A9B-8D69-199FDBA5723B}';
 
 typedef _GetNetwork_Native = Int32 Function(
@@ -52,6 +54,8 @@ typedef _GetDomainType_Native = Int32 Function(
 typedef _GetDomainType_Dart = int Function(
     Pointer obj, Pointer<Uint32> pDomainType);
 
+/// {@category Interface}
+/// {@category com}
 class INetworkConnection extends IDispatch {
   // vtable begins at 7, ends at 13
 
