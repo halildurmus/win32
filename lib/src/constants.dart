@@ -4340,3 +4340,10 @@ class NLM_CONNECTIVITY {
   static final NLM_CONNECTIVITY_IPV6_LOCALNETWORK = 0x200;
   static final NLM_CONNECTIVITY_IPV6_INTERNET = 0x400;
 }
+
+/// {@category Enum}
+class NLM_ENUM_NETWORK {
+  static final NLM_ENUM_NETWORK_CONNECTED = 0x1;
+  static final NLM_ENUM_NETWORK_DISCONNECTED = 0x2;
+  static final NLM_ENUM_NETWORK_ALL = 0x3;
+}

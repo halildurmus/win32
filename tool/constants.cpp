@@ -12,9 +12,11 @@
 #include <stdio.h>
 #include <ShlObj_core.h>
 #include <wbemidl.h>
+#include <netlistmgr.h>
 
 void main()
 {
+    NLM_ENUM_NETWORK n;
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));
     printf("sizeof(long) is %zu\n", sizeof(long));
