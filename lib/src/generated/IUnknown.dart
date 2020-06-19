@@ -11,7 +11,7 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../structs.dart';
-import '../prototypes.dart';
+import '../ole32.dart';
 import '../com/combase.dart';
 
 const IID_IUnknown = '{00000000-0000-0000-C000-000000000046}';

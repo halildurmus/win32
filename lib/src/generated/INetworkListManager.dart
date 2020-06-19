@@ -11,7 +11,7 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../structs.dart';
-import '../prototypes.dart';
+import '../ole32.dart';
 import '../com/combase.dart';
 
 import 'IDispatch.dart';
@@ -24,20 +24,20 @@ typedef _GetNetworks_Native = Int32 Function(
 typedef _GetNetworks_Dart = int Function(
     Pointer obj, int Flags, Pointer<IntPtr> ppEnumNetwork);
 
-typedef _GetNetwork_Native = Int32 Function(
-    Pointer obj, GUID gdNetworkId, Pointer<IntPtr> ppNetwork);
-typedef _GetNetwork_Dart = int Function(
-    Pointer obj, GUID gdNetworkId, Pointer<IntPtr> ppNetwork);
+// typedef _GetNetwork_Native = Int32 Function(
+//     Pointer obj, GUID gdNetworkId, Pointer<IntPtr> ppNetwork);
+// typedef _GetNetwork_Dart = int Function(
+//     Pointer obj, GUID gdNetworkId, Pointer<IntPtr> ppNetwork);
 
 typedef _GetNetworkConnections_Native = Int32 Function(
     Pointer obj, Pointer<IntPtr> ppEnum);
 typedef _GetNetworkConnections_Dart = int Function(
     Pointer obj, Pointer<IntPtr> ppEnum);
 
-typedef _GetNetworkConnection_Native = Int32 Function(Pointer obj,
-    GUID gdNetworkConnectionId, Pointer<IntPtr> ppNetworkConnection);
-typedef _GetNetworkConnection_Dart = int Function(Pointer obj,
-    GUID gdNetworkConnectionId, Pointer<IntPtr> ppNetworkConnection);
+// typedef _GetNetworkConnection_Native = Int32 Function(Pointer obj,
+//     GUID gdNetworkConnectionId, Pointer<IntPtr> ppNetworkConnection);
+// typedef _GetNetworkConnection_Dart = int Function(Pointer obj,
+//     GUID gdNetworkConnectionId, Pointer<IntPtr> ppNetworkConnection);
 
 typedef _get_IsConnectedToInternet_Native = Int32 Function(
     Pointer obj, Pointer<Int16> pbIsConnected);

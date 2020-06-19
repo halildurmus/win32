@@ -8,7 +8,7 @@ import 'package:ffi/ffi.dart';
 import 'constants.dart';
 import 'int.dart';
 import 'string.dart';
-import 'prototypes.dart';
+import 'kernel32.dart';
 
 /// Converts a Windows error into a friendly string.
 ///

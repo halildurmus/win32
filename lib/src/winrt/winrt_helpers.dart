@@ -5,8 +5,8 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
+import '../ole32.dart';
 import '../string.dart';
-import '../prototypes.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../structs.dart';

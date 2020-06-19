@@ -51,7 +51,7 @@ import '../constants.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../structs.dart';
-import '../prototypes.dart';
+import '../ole32.dart';
 import '../com/combase.dart';
 ''');
     if (sourceType == SourceType.idl) {

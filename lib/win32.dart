@@ -80,9 +80,18 @@ export 'src/exceptions.dart';
 export 'src/macros.dart';
 export 'src/structs.dart';
 export 'src/string.dart';
+export 'src/callbacks.dart';
 
-export 'src/prototypes.dart'
-    hide user32, gdi32, kernel32, psapi, shell32, comdlg32, ole32, oleaut32;
+// Traditional C-style Windows APIs
+export 'src/comctl32.dart';
+export 'src/comdlg32.dart';
+export 'src/gdi32.dart';
+export 'src/kernel32.dart';
+export 'src/ole32.dart';
+export 'src/oleaut32.dart';
+export 'src/psapi.dart';
+export 'src/shell32.dart';
+export 'src/user32.dart';
 
 // COM foundational exports
 export 'src/com/combase.dart';
