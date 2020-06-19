@@ -58,9 +58,8 @@ class WindowsException implements Exception {
   }
 
   @override
-  String toString() {
-    return 'Error ${hr.toHex(32)}: ${convertWindowsErrorToString(hr)}';
-  }
+  String toString() =>
+      'Error ${hr.toHex(32)}: ${convertWindowsErrorToString(hr)}';
 }
 
 int HRESULT(int hr) => hr.toUnsigned(32);
