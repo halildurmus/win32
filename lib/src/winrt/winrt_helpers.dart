@@ -5,9 +5,9 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/src/generated/IInspectable.dart';
 
 import '../exceptions.dart';
+import '../generated/IInspectable.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../string.dart';
