@@ -8,12 +8,12 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import '../com/combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
 import '../macros.dart';
-import '../structs.dart';
 import '../ole32.dart';
-import '../com/combase.dart';
+import '../structs.dart';
 
 import '../winrt/winrt_constants.dart';
 

@@ -3,12 +3,13 @@
 // Exceptions that may be caught or thrown by the win32 library.
 
 import 'dart:ffi';
+
 import 'package:ffi/ffi.dart';
 
 import 'constants.dart';
 import 'int.dart';
-import 'string.dart';
 import 'kernel32.dart';
+import 'string.dart';
 
 /// Converts a Windows error into a friendly string.
 ///

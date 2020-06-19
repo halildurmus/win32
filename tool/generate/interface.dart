@@ -49,12 +49,12 @@ import 'package:ffi/ffi.dart';
 ''');
 
     buffer.writeln('''
+import '../com/combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
 import '../macros.dart';
-import '../structs.dart';
 import '../ole32.dart';
-import '../com/combase.dart';
+import '../structs.dart';
 ''');
     if (sourceType == SourceType.idl) {
       buffer.writeln('''

@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'game.dart';
 import 'drawengine.dart';
+import 'game.dart';
 
 const PX_PER_BLOCK = 25; // Cell size in pixels
 const SCREEN_WIDTH = 10; // Level width in cells

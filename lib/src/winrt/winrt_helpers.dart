@@ -3,17 +3,17 @@
 // Helper functions to minimize ceremony when calling WinRT APIs.
 
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 
-import '../ole32.dart';
-import '../string.dart';
+import 'package:ffi/ffi.dart';
+import 'package:win32/src/generated/IInspectable.dart';
+
 import '../exceptions.dart';
 import '../macros.dart';
+import '../ole32.dart';
+import '../string.dart';
 import '../structs.dart';
-import 'winrt_prototypes.dart';
 import 'winrt_constants.dart';
-
-import 'package:win32/src/generated/IInspectable.dart';
+import 'winrt_prototypes.dart';
 
 /// Initializes the Windows Runtime on the current thread with a single-threaded
 /// concurrency model.

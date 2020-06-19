@@ -3,8 +3,8 @@ import 'dart:math' show max;
 import 'package:win32/win32.dart';
 
 import 'drawengine.dart';
-import 'pieceset.dart';
 import 'piece.dart';
+import 'pieceset.dart';
 
 class Level {
   List<List<int>> board; // The canvas / drawing board

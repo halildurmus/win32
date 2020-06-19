@@ -6,10 +6,10 @@
 // https://stackoverflow.com/questions/54375771/how-to-read-a-winmd-winrt-metadata-file
 // https://docs.microsoft.com/en-us/windows/win32/api/rometadataresolution/nf-rometadataresolution-rogetmetadatafile
 
-import 'dart:io';
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
+import 'dart:io';
 
+import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 String toHex(int value32) =>

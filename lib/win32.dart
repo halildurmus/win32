@@ -1,5 +1,7 @@
 // win32.dart
 
+// ignore_for_file: directives_ordering
+
 /// Support for programming against the Win32 API on Windows operating systems.
 ///
 /// This library provides a wrapper around many useful functions from the API,
