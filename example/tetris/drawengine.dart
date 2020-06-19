@@ -20,12 +20,8 @@ class DrawEngine {
   int height;
 
   /// Initiate the DrawEngine
-  DrawEngine(int hdc, int hwnd,
-      [int pxPerBlock = 25, int width = 10, int height = 20])
-      : hdc = hdc,
-        hwnd = hwnd,
-        width = width,
-        height = height {
+  DrawEngine(this.hdc, this.hwnd,
+      [int pxPerBlock = 25, this.width = 10, this.height = 20]) {
     GetClientRect(hwnd, rect.addressOf);
 
     SaveDC(hdc);

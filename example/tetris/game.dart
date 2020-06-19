@@ -13,9 +13,7 @@ class Game {
 
   bool isPaused;
 
-  Game(DrawEngine de)
-      : de = de,
-        isPaused = false {
+  Game(this.de) : isPaused = false {
     level = Level(de, 10, 20);
   }
 

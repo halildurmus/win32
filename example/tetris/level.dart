@@ -24,11 +24,8 @@ class Level {
 
   // de: used to draw the level
   // width & height: level size in cells
-  Level(DrawEngine de, [int width = 10, int height = 20])
-      : de = de,
-        width = width,
-        height = height,
-        lastTime = 0,
+  Level(this.de, [this.width = 10, this.height = 20])
+      : lastTime = 0,
         speed = 500,
         score = -1 {
     board =

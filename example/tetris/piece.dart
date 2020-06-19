@@ -27,7 +27,7 @@ class Piece {
   List<Point> body;
 
   // Number of points in body
-  int nPoints;
+  int pointCount;
 
   // Make rotation faster
   int width;
@@ -42,32 +42,28 @@ class Piece {
 
   /// Constructs a piece
   ///
-  /// pieceId: piece type ID
-  /// pieceRotation: how many time is the piece rotated (0-3)
-  /// pieceColor: piece color in RGB
-  /// apt: array of points of which the piece is composed. This constructor
-  ///      moves these points automatically to snap the piece to bottom-left
-  ///      corner (0,0)
-  /// numPoints: number of points in apt
-  Piece(int pieceId, int pieceRotation, int pieceColor, List<Point> apt,
-      [int numPoints = 4])
-      : id = pieceId,
-        rotation = pieceRotation,
-        color = pieceColor,
-        nPoints = numPoints,
-        width = 0,
+  /// id: piece type ID
+  /// rotation: how many time is the piece rotated (0-3)
+  /// color: piece color in RGB
+  /// points: array of points of which the piece is composed. This constructor
+  ///         moves these points automatically to snap the piece to
+  ///         bottom-left corner (0,0)
+  /// pointCount: number of points in apt
+  Piece(this.id, this.rotation, this.color, List<Point> points,
+      [this.pointCount = 4])
+      : width = 0,
         height = 0 {
-    var bottomLeft = Point.clone(apt[0]);
+    var bottomLeft = Point.clone(points[0]);
 
-    for (var i = 1; i < nPoints; i++) {
-      bottomLeft.x = min(apt[i].x, bottomLeft.x);
-      bottomLeft.y = min(apt[i].y, bottomLeft.y);
+    for (var i = 1; i < pointCount; i++) {
+      bottomLeft.x = min(points[i].x, bottomLeft.x);
+      bottomLeft.y = min(points[i].y, bottomLeft.y);
     }
 
-    body = List<Point>.generate(nPoints, (i) => Point());
-    for (var i = 0; i < nPoints; i++) {
-      body[i].x = apt[i].x - bottomLeft.x;
-      body[i].y = apt[i].y - bottomLeft.y;
+    body = List<Point>.generate(pointCount, (i) => Point());
+    for (var i = 0; i < pointCount; i++) {
+      body[i].x = points[i].x - bottomLeft.x;
+      body[i].y = points[i].y - bottomLeft.y;
 
       width = max(body[i].x + 1, width);
       height = max(body[i].y + 1, height);
@@ -132,7 +128,7 @@ class Piece {
     var buffer = StringBuffer();
     buffer.write('width = $width | ');
     buffer.write('height = $height | ');
-    buffer.write('nPoints = $nPoints | ');
+    buffer.write('nPoints = $pointCount | ');
     buffer.writeln('color = ${color.toRadixString(16)}');
 
     for (var y = height - 1; y >= 0; y--) {

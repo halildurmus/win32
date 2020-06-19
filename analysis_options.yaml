@@ -11,6 +11,7 @@ linter:
     directives_ordering: true
     omit_local_variable_types: false
     prefer_expression_function_bodies: true
+    prefer_initializing_formals: true
     prefer_interpolation_to_compose_strings: true
     prefer_relative_imports: true
     prefer_typing_uninitialized_variables: true
