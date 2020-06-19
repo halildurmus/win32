@@ -1,3 +1,7 @@
+## 1.6.4
+
+- Lots of documentation and linter cleanup
+
 ## 1.6.3
 
 - Add TaskDialog and dynamic library loading APIs
