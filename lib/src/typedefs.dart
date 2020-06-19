@@ -1001,9 +1001,9 @@ typedef setWindowTextDart = int Function(int hWnd, Pointer<Utf16> lpString);
 //   LPWSTR pszPath
 // );
 typedef shGetFolderPathNative = Int32 Function(IntPtr hwnd, Int32 csidl,
-    IntPtr hToken, Uint32 dwFlags, Pointer<Uint16> pszPath);
+    IntPtr hToken, Uint32 dwFlags, Pointer<Utf16> pszPath);
 typedef shGetFolderPathDart = int Function(
-    int hwnd, int csidl, int hToken, int dwFlags, Pointer<Uint16> pszPath);
+    int hwnd, int csidl, int hToken, int dwFlags, Pointer<Utf16> pszPath);
 
 // HRESULT SHGetKnownFolderPath(
 //   REFKNOWNFOLDERID rfid,

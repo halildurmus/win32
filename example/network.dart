@@ -23,6 +23,8 @@ void main() {
   }
 
   final connectivity = nlmConnectivity.value;
+
+  // These two options are not mutually exclusive
   if (connectivity & NLM_CONNECTIVITY.NLM_CONNECTIVITY_IPV4_INTERNET ==
       NLM_CONNECTIVITY.NLM_CONNECTIVITY_IPV4_INTERNET) {
     print('Connected to the Internet via IPv4.');
@@ -31,6 +33,7 @@ void main() {
       NLM_CONNECTIVITY.NLM_CONNECTIVITY_IPV6_INTERNET) {
     print('Connected to the Internet via IPv6.');
   }
+
   free(nlmConnectivity);
   free(netManager.ptr);
 

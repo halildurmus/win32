@@ -20,11 +20,15 @@ void main() {
     calendar.GetCalendarSystem(systemPtr);
     print('The calendar system is ${convertFromHString(systemPtr)}.');
     WindowsDeleteString(systemPtr.value);
+    free(systemPtr);
 
     final dayPtr = allocate<IntPtr>();
     calendar.DayOfWeekAsFullSoloString(dayPtr);
     print('Today is ${convertFromHString(dayPtr)}.');
     WindowsDeleteString(systemPtr.value);
+    free(dayPtr);
+
+    free(object);
 
     if (calendar.IsDaylightSavingTime == 1) {
       print('Daylight Saving Time is in observance.');

@@ -3,7 +3,6 @@
 // Demonstrates simple GDI drawing and min/max window sizing
 
 import 'dart:ffi';
-import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
@@ -83,8 +82,8 @@ void main() {
       );
 
   if (hWnd == 0) {
-    stderr.writeln('CreateWindowEx failed with error: ${GetLastError()}');
-    exit(-1);
+    final error = GetLastError();
+    throw WindowsException(HRESULT_FROM_WIN32(error));
   }
 
   ShowWindow(hWnd, SW_SHOWNORMAL);

@@ -3,7 +3,6 @@
 // Basic Petzoldian "hello world" Win32 app
 
 import 'dart:ffi';
-import 'dart:io';
 
 import 'package:win32/win32.dart';
 
@@ -65,8 +64,8 @@ void main() {
       );
 
   if (hWnd == 0) {
-    stderr.writeln('CreateWindowEx failed with error: ${GetLastError()}');
-    exit(-1);
+    final error = GetLastError();
+    throw WindowsException(HRESULT_FROM_WIN32(error));
   }
 
   ShowWindow(hWnd, SW_SHOWNORMAL);

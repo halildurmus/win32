@@ -20,7 +20,7 @@ String getTemporaryPath() {
 
     // GetTempPath adds a trailing backslash, but SHGetKnownFolderPath does not.
     // Strip off trailing backslash for consistency with other methods here.
-    if (path[path.length - 1] == '\\') {
+    if (path.endsWith('\\')) {
       path = path.substring(0, path.length - 1);
     }
     free(buffer);
@@ -30,12 +30,12 @@ String getTemporaryPath() {
 
 /// Get the path for a known Windows folder, using the classic (deprecated) API
 String getFolderPath() {
-  var path = allocate<Uint16>(count: MAX_PATH);
+  var path = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
 
   final result = SHGetFolderPath(NULL, CSIDL_MYDOCUMENTS, NULL, 0, path);
 
   if (SUCCEEDED(result)) {
-    return path.cast<Utf16>().unpackString(MAX_PATH);
+    return path.unpackString(MAX_PATH);
   } else {
     return 'error code 0x${result.toUnsigned(32).toRadixString(16)}';
   }

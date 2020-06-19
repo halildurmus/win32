@@ -1,3 +1,7 @@
+// modules.dart
+
+// Enumerates all processes and modules loaded within the process
+
 import 'dart:ffi';
 import 'dart:io';
 
