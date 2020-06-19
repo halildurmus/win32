@@ -33,11 +33,8 @@ int printModules(int processID) {
 
       // Get the full path to the module's file.
       final hModule = hMods.elementAt(i).value;
-      final moduleValue = '0x' +
-          hModule
-              .toRadixString(16)
-              .padLeft(sizeOf<IntPtr>(), '0')
-              .toUpperCase();
+      final moduleValue =
+          '0x${hModule.toRadixString(16).padLeft(sizeOf<IntPtr>(), '0').toUpperCase()}';
 
       if (GetModuleFileNameEx(hProcess, hModule, szModName, MAX_PATH) != 0) {
         // Print the module name and handle value.

@@ -34,11 +34,11 @@ Method parseIdlMethod(String line, int lineIndex) {
   method.parameters = [];
 
   if (line.contains('[propget]')) {
-    method.name = 'get_' + method.name;
+    method.name = 'get_${method.name}';
   }
 
   if (line.contains('[propput]')) {
-    method.name = 'put_' + method.name;
+    method.name = 'put_${method.name}';
   }
 
   // parameters are on the same line
@@ -55,7 +55,7 @@ Method parseIdlMethod(String line, int lineIndex) {
 
     var items = param.split(' ');
     if ((items.length == 3) && (items[0] == 'unsigned')) {
-      items = [items[0] + ' ' + items[1], items[2]];
+      items = ['${items[0]} ${items[1]}', items[2]];
     }
     if (items.length > 2) {
       throw Exception(

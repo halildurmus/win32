@@ -11,11 +11,10 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 // Convert from Win32 0x00BBGGRR color layout to a user-friendly string
-String toHexColor(int color) =>
-    '0x' +
-    GetRValue(color).toRadixString(16).padLeft(2, '0') +
-    GetGValue(color).toRadixString(16).padLeft(2, '0') +
-    GetBValue(color).toRadixString(16).padLeft(2, '0');
+String toHexColor(int color) => '0x'
+    '${GetRValue(color).toRadixString(16).padLeft(2, '0')}'
+    '${GetGValue(color).toRadixString(16).padLeft(2, '0')}'
+    '${GetBValue(color).toRadixString(16).padLeft(2, '0')}';
 
 void main() {
   // Allocates memory on the native heap for the struct that will be used to

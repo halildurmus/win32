@@ -101,7 +101,7 @@ class NotepadEditor {
   }
 
   void UpdateWindowTitle() {
-    final caption = APP_NAME + ' - ' + (file.title ?? '(untitled)');
+    final caption = '$APP_NAME - ${file.title ?? '(untitled)'}';
     SetWindowText(_hwnd, TEXT(caption));
   }
 

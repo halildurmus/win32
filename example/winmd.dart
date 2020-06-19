@@ -13,7 +13,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 String toHex(int value32) =>
-    '0x' + value32.toUnsigned(32).toRadixString(16).padLeft(8, '0');
+    '0x${value32.toUnsigned(32).toRadixString(16).padLeft(8, '0')}';
 
 class WindowsRuntimeType {
   int token;
