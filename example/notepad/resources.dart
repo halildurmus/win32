@@ -75,7 +75,7 @@ class NotepadResources {
     hMenuPopup = CreateMenu();
     AppendMenu(hMenuPopup, MF_STRING, IDM_HELP, TEXT('&Help'));
     AppendMenu(
-        hMenuPopup, MF_STRING, IDM_APP_ABOUT, TEXT('&About ${APP_NAME}...'));
+        hMenuPopup, MF_STRING, IDM_APP_ABOUT, TEXT('&About $APP_NAME...'));
     AppendMenu(hMenu, MF_POPUP, hMenuPopup, TEXT('&Help'));
 
     return hMenu;

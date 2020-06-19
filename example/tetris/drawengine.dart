@@ -73,14 +73,14 @@ class DrawEngine {
   }
 
   void drawScore(int score, int x, int y) {
-    var scoreText = 'Score: ${score}';
+    var scoreText = 'Score: $score';
     SetBkMode(hdc, OPAQUE);
     TextOut(hdc, x, y, TEXT(scoreText), scoreText.length);
     SetBkMode(hdc, TRANSPARENT);
   }
 
   void drawSpeed(int speed, int x, int y) {
-    var speedText = 'Speed: ${speed}';
+    var speedText = 'Speed: $speed';
     SetBkMode(hdc, OPAQUE);
     TextOut(hdc, x, y, TEXT(speedText), speedText.length);
     SetBkMode(hdc, TRANSPARENT);

@@ -12,3 +12,4 @@ linter:
     prefer_interpolation_to_compose_strings: true
     prefer_relative_imports: true
     prefer_typing_uninitialized_variables: true
+    unnecessary_brace_in_string_interps: true

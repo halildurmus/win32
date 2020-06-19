@@ -37,7 +37,7 @@ class Interface {
   String get headerAsString {
     final buffer = StringBuffer();
     buffer.writeln('''
-// ${name}.dart
+// $name.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -139,13 +139,13 @@ import '../winrt/winrt_constants.dart';
       buffer.writeln('/// {@category com}');
     }
     if (inherits == '') {
-      buffer.writeln('class ${name} {');
+      buffer.writeln('class $name {');
     } else {
-      buffer.writeln('class ${name} extends ${inherits} {');
+      buffer.writeln('class $name extends $inherits {');
     }
 
     buffer.writeln('''
-  // vtable begins at ${vtableStart}, ends at ${vtableStart + methods.length - 1}
+  // vtable begins at $vtableStart, ends at ${vtableStart + methods.length - 1}
 ''');
     if (inherits.isNotEmpty) {
       buffer.writeln('  @override');
@@ -201,7 +201,7 @@ import '../winrt/winrt_constants.dart';
     buffer.write(
         '    Pointer<NativeFunction<_${method.name}_Native>>.fromAddress(\n');
     buffer.write(
-        '                ptr.ref.vtable.elementAt(${vtableIndex}).value)\n');
+        '                ptr.ref.vtable.elementAt($vtableIndex).value)\n');
     buffer.write('            .asFunction<_${method.name}_Dart>()(\n');
     buffer.write('         ptr.ref.lpVtbl');
     if (method.parameters.isNotEmpty) {

@@ -82,7 +82,7 @@ Method parseIdlMethod(String line, int lineIndex) {
           typePrimitive = 'Pointer<IntPtr>';
         } else {
           // single pointers
-          typePrimitive = 'Pointer<${dartTypePrimitive}>';
+          typePrimitive = 'Pointer<$dartTypePrimitive>';
         }
       } else {
         typePrimitive = dartTypePrimitive;
