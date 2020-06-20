@@ -121,6 +121,8 @@ export 'src/generated/IFileOpenDialog.dart';
 export 'src/generated/IFileOpenPicker.dart';
 export 'src/generated/IFileSaveDialog.dart';
 export 'src/generated/IInspectable.dart';
+export 'src/generated/IKnownFolder.dart';
+export 'src/generated/IKnownFolderManager.dart';
 export 'src/generated/IMetaDataDispenser.dart';
 export 'src/generated/IMetaDataDispenserEx.dart';
 export 'src/generated/IMetaDataImport.dart';

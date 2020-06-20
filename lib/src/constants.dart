@@ -4306,6 +4306,55 @@ class FILEOPENDIALOGOPTIONS {
 }
 
 /// {@category Enum}
+class FFFP_MODE {
+  static final FFFP_EXACTMATCH = 0;
+  static final FFFP_NEARESTPARENTMATCH = (FFFP_EXACTMATCH + 1);
+}
+
+/// {@category Enum}
+class KF_CATEGORY {
+  static final KF_CATEGORY_VIRTUAL = 1;
+  static final KF_CATEGORY_FIXED = 2;
+  static final KF_CATEGORY_COMMON = 3;
+  static final KF_CATEGORY_PERUSER = 4;
+}
+
+/// {@category Enum}
+class KF_DEFINITION_FLAGS {
+  static final KFDF_LOCAL_REDIRECT_ONLY = 0x2;
+  static final KFDF_ROAMABLE = 0x4;
+  static final KFDF_PRECREATE = 0x8;
+  static final KFDF_STREAM = 0x10;
+  static final KFDF_PUBLISHEXPANDEDPATH = 0x20;
+  static final KFDF_NO_REDIRECT_UI = 0x4;
+}
+
+/// {@category Enum}
+class KF_REDIRECT_FLAGS {
+  static final KF_REDIRECT_USER_EXCLUSIVE = 0x1;
+  static final KF_REDIRECT_COPY_SOURCE_DACL = 0x2;
+  static final KF_REDIRECT_OWNER_USER = 0x4;
+  static final KF_REDIRECT_SET_OWNER_EXPLICIT = 0x8;
+  static final KF_REDIRECT_CHECK_ONLY = 0x10;
+  static final KF_REDIRECT_WITH_UI = 0x20;
+  static final KF_REDIRECT_UNPIN = 0x40;
+  static final KF_REDIRECT_PIN = 0x80;
+  static final KF_REDIRECT_COPY_CONTENTS = 0x200;
+  static final KF_REDIRECT_DEL_SOURCE_CONTENTS = 0x400;
+  static final KF_REDIRECT_EXCLUDE_ALL_KNOWN_SUBFOLDERS = 0x800;
+}
+
+/// {@category Enum}
+class KF_REDIRECTION_CAPABILITIES {
+  static final KF_REDIRECTION_CAPABILITIES_ALLOW_ALL = 0xff;
+  static final KF_REDIRECTION_CAPABILITIES_REDIRECTABLE = 0x1;
+  static final KF_REDIRECTION_CAPABILITIES_DENY_ALL = 0xfff00;
+  static final KF_REDIRECTION_CAPABILITIES_DENY_POLICY_REDIRECTED = 0x100;
+  static final KF_REDIRECTION_CAPABILITIES_DENY_POLICY = 0x200;
+  static final KF_REDIRECTION_CAPABILITIES_DENY_PERMISSIONS = 0x400;
+}
+
+/// {@category Enum}
 class SIGDN {
   static final SIGDN_NORMALDISPLAY = 0;
   static final SIGDN_PARENTRELATIVEPARSING = 0x80018001;

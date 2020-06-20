@@ -1400,6 +1400,105 @@ class FILETIME extends Struct {
     ..dwHighDateTime = 0;
 }
 
+// typedef struct KNOWNFOLDER_DEFINITION
+//     {
+//     KF_CATEGORY category;
+//     LPWSTR pszName;
+//     LPWSTR pszDescription;
+//     KNOWNFOLDERID fidParent;
+//     LPWSTR pszRelativePath;
+//     LPWSTR pszParsingName;
+//     LPWSTR pszTooltip;
+//     LPWSTR pszLocalizedName;
+//     LPWSTR pszIcon;
+//     LPWSTR pszSecurity;
+//     DWORD dwAttributes;
+//     KF_DEFINITION_FLAGS kfdFlags;
+//     FOLDERTYPEID ftidType;
+//     } 	KNOWNFOLDER_DEFINITION;
+
+/// KNOWNFOLDER_DEFINITION
+///
+/// {@category Struct}
+class KNOWNFOLDER_DEFINITION extends Struct {
+  @Int32()
+  int category;
+  Pointer<Utf16> pszName;
+  Pointer<Utf16> pszDescription;
+
+  @Uint32()
+  int fidParent_guid1;
+  @Uint16()
+  int fidParent_guid2;
+  @Uint16()
+  int fidParent_guid3;
+  @Uint64()
+  int fidParent_guid4;
+
+  Pointer<Utf16> pszRelativePath;
+  Pointer<Utf16> pszParsingName;
+  Pointer<Utf16> pszTooltip;
+  Pointer<Utf16> pszLocalizedName;
+  Pointer<Utf16> pszIcon;
+  Pointer<Utf16> pszSecurity;
+
+  @Uint32()
+  int dwAttributes;
+  @Uint32()
+  int kfdFlags;
+
+  @Uint32()
+  int ftidType_guid1;
+  @Uint16()
+  int ftidType_guid2;
+  @Uint16()
+  int ftidType_guid3;
+  @Uint64()
+  int ftidType_guid4;
+
+  factory KNOWNFOLDER_DEFINITION.allocate() =>
+      allocate<KNOWNFOLDER_DEFINITION>().ref
+        ..category = 0
+        ..pszName = nullptr
+        ..pszDescription = nullptr
+        ..fidParent_guid1 = 0
+        ..fidParent_guid2 = 0
+        ..fidParent_guid3 = 0
+        ..fidParent_guid4 = 0
+        ..pszRelativePath = nullptr
+        ..pszParsingName = nullptr
+        ..pszTooltip = nullptr
+        ..pszLocalizedName = nullptr
+        ..pszIcon = nullptr
+        ..pszSecurity = nullptr
+        ..dwAttributes = 0
+        ..kfdFlags = 0
+        ..ftidType_guid1 = 0
+        ..ftidType_guid2 = 0
+        ..ftidType_guid3 = 0
+        ..ftidType_guid4 = 0;
+}
+
+// typedef struct _SHITEMID
+//     {
+//     USHORT cb;
+//     BYTE abID[ 1 ];
+//     }
+
+/// SHITEMID
+///
+/// {@category Struct}
+class SHITEMID extends Struct {
+  @Uint16()
+  int cb;
+  @Uint8()
+  int abID;
+
+  factory SHITEMID.allocate() => allocate<SHITEMID>().ref
+    ..cb = 0
+    ..abID = 0;
+}
+
 // typedef struct tagDISPPARAMS {
 //   VARIANTARG *rgvarg;
 //   DISPID     *rgdispidNamedArgs;
