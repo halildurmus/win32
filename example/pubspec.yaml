@@ -9,6 +9,6 @@ environment:
 
 dependencies:
   filepicker_windows:
-    path: ../../
+    path: ../
   win32:
-    path: ../../../win32
+    path: ../../win32

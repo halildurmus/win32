@@ -11,14 +11,14 @@ packages:
   filepicker_windows:
     dependency: "direct main"
     description:
-      path: "../.."
+      path: ".."
       relative: true
     source: path
     version: "0.1.2"
   win32:
     dependency: "direct main"
     description:
-      path: "../../../win32"
+      path: "../../win32"
       relative: true
     source: path
     version: "1.6.4"
