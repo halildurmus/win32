@@ -64,7 +64,7 @@ class FileOpenDialog extends IFileOpenDialog {
     var hr = CoCreateInstance(
         GUID.fromString(CLSID_FileOpenDialog).addressOf,
         nullptr,
-        CLSCTX_ALL,
+        CLSCTX_INPROC_SERVER,
         GUID.fromString(IID_IFileOpenDialog).addressOf,
         ptr.cast());
 

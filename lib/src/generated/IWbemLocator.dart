@@ -88,7 +88,7 @@ class WbemLocator extends IWbemLocator {
     var hr = CoCreateInstance(
         GUID.fromString(CLSID_WbemLocator).addressOf,
         nullptr,
-        CLSCTX_ALL,
+        CLSCTX_INPROC_SERVER,
         GUID.fromString(IID_IWbemLocator).addressOf,
         ptr.cast());
 
