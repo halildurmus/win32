@@ -4312,6 +4312,12 @@ class FFFP_MODE {
 }
 
 /// {@category Enum}
+class FDAP {
+  static final FDAP_BOTTOM = 0;
+  static final FDAP_TOP = 1;
+}
+
+/// {@category Enum}
 class KF_CATEGORY {
   static final KF_CATEGORY_VIRTUAL = 1;
   static final KF_CATEGORY_FIXED = 2;
