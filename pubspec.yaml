@@ -1,31 +1,15 @@
 name: filepicker_windows
 description: A plugin that uses FFI to offer file selection in Windows using the modern common item dialog box.
-version: 0.1.1
+version: 0.1.2
 homepage: https://github.com/timsneath/filepicker_windows
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.10.0"
 
 dependencies:
-  win32: ^1.4.2
-  # win32:
-  #   path: /src/win32
+  win32: 
+    path: ../win32
   ffi: ^0.1.3
-  flutter:
-    sdk: flutter
 
 dev_dependencies:
   pedantic: ^1.9.0
-  flutter_test:
-    sdk: flutter
-
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
-# The following section is specific to Flutter.
-flutter:
-  plugin:
-    platforms:
-      windows:
-        dartPluginClass: FilePicker

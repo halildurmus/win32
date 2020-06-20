@@ -7,12 +7,12 @@ class Wallpaper {
   static void set(File wallpaperFile) {
     var hr = CoInitializeEx(
         nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-    if (FAILED(hr)) throw COMException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
 
     final wallpaper = DesktopWallpaper.createInstance();
 
     wallpaper.SetWallpaper(nullptr, TEXT(wallpaperFile.path));
-    if (FAILED(hr)) throw COMException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
 
     CoUninitialize();
   }

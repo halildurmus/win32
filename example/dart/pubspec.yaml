@@ -1,0 +1,14 @@
+name: dart_examples
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  filepicker_windows:
+    path: ../../
+  win32:
+    path: ../../../win32
