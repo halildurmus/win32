@@ -1,6 +1,6 @@
 import 'package:filepicker_windows/filepicker_windows.dart';
 
-// Basic file open
+// Normal file open dialog box example
 void main() {
   final file = OpenFilePicker();
 
@@ -12,7 +12,8 @@ void main() {
   };
   file.defaultFilterIndex = 0;
   file.defaultExtension = 'doc';
-  file.title = 'Select an image';
+  file.title = 'Select a document';
+
   final result = file.getFile();
   if (result != null) {
     print(result.path);
