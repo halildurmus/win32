@@ -4,13 +4,13 @@ import 'dart:io';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'mdtype.dart';
+import 'windowsruntimetype.dart';
 
-class WinMDFile {
+class WindowsMetadataFile {
   IMetaDataImport2 reader;
 
-  /// Constructs a [WinMDFile] object from a .winmd file.
-  WinMDFile(File file) {
+  /// Constructs a [WindowsMetadataFile] object from a .winmd file.
+  WindowsMetadataFile(File file) {
     final pDispenser = COMObject.allocate().addressOf;
     var hr = MetaDataGetDispenser(
         convertToCLSID(CLSID_CorMetaDataDispenser).cast(),
@@ -35,7 +35,7 @@ class WinMDFile {
     reader = IMetaDataImport2(pReader.cast());
   }
 
-  WindowsRuntimeType processToken(IMetaDataImport2 reader, int token) {
+  WindowsRuntimeType processTypeDefToken(int token) {
     WindowsRuntimeType type;
 
     final nRead = allocate<Uint32>();
@@ -47,8 +47,12 @@ class WinMDFile {
         token, typeName, 256, nRead, tdFlags, baseClassToken);
 
     if (hr == S_OK) {
-      type = WindowsRuntimeType(token, typeName.unpackString(nRead.value),
-          tdFlags.value, baseClassToken.value);
+      type = WindowsRuntimeType(
+          reader,
+          token,
+          typeName.unpackString(nRead.value),
+          tdFlags.value,
+          baseClassToken.value);
 
       free(nRead);
       free(tdFlags);
@@ -61,7 +65,7 @@ class WinMDFile {
     }
   }
 
-  List<WindowsRuntimeType> get typedefs {
+  List<WindowsRuntimeType> get typeDefs {
     final types = <WindowsRuntimeType>[];
 
     final phEnum = allocate<IntPtr>()..value = 0;
@@ -72,7 +76,7 @@ class WinMDFile {
     while (hr == S_OK) {
       final token = rgTypeDefs.value;
 
-      types.add(processToken(reader, token));
+      types.add(processTypeDefToken(token));
       hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
     }
     reader.CloseEnum(phEnum.address);
@@ -80,6 +84,17 @@ class WinMDFile {
     free(rgTypeDefs);
     free(pcTypeDefs);
 
+    // dispose phEnum crashes here, so leave it allocated
+
     return types;
+  }
+
+  WindowsRuntimeType findTypeDef(String type) {
+    final szTypeDef = TEXT(type);
+    final ptkTypeDef = allocate<Uint32>();
+
+    reader.FindTypeDefByName(szTypeDef, NULL, ptkTypeDef);
+
+    return processTypeDefToken(ptkTypeDef.value);
   }
 }
