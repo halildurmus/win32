@@ -6,8 +6,8 @@
 // https://stackoverflow.com/questions/54375771/how-to-read-a-winmd-winrt-metadata-file
 // https://docs.microsoft.com/en-us/windows/win32/api/rometadataresolution/nf-rometadataresolution-rogetmetadatafile
 
+import 'mdFile.dart';
 import 'utils.dart';
-import 'windowsmetadatafile.dart';
 
 String toHex(int value32) =>
     '0x${value32.toUnsigned(32).toRadixString(16).padLeft(8, '0')}';
@@ -50,14 +50,18 @@ void listParameters() {
   final winTypeDef = winmdFile.findTypeDef('Windows.Globalization.Calendar');
   final methods = winTypeDef.methods;
 
-  final parameters = methods[75].parameters;
-  print(parameters.length);
-  for (var parameter in parameters) {
-    print('${parameter.name} (${parameter.value})');
+  final hourAsPaddedStringOrdinal = 75;
+  final parameters = methods[hourAsPaddedStringOrdinal].parameters;
+  print(
+      '${methods[hourAsPaddedStringOrdinal].methodName} has ${parameters.length - 1} parameter(s).');
+  for (int i = 1; i < parameters.length; i++) {
+    print(
+        '[${parameters[i].sequence}] ${parameters[i].name} (${toHex(parameters[i].token)})');
   }
+  final returnType = methods[hourAsPaddedStringOrdinal].returnType;
+  print('\nreturns: ${returnType.name} (${toHex(returnType.token)})');
 }
 
-// String HourAsPaddedString(int32) -- 75
 void main() {
   listParameters();
 }

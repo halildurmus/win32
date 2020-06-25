@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'windowsruntimetype.dart';
+import 'mdTypeDef.dart';
 
 class WindowsMetadataFile {
   IMetaDataImport2 reader;
@@ -35,8 +35,8 @@ class WindowsMetadataFile {
     reader = IMetaDataImport2(pReader.cast());
   }
 
-  WindowsRuntimeType processTypeDefToken(int token) {
-    WindowsRuntimeType type;
+  WindowsRuntimeTypeDef processTypeDefToken(int token) {
+    WindowsRuntimeTypeDef type;
 
     final nRead = allocate<Uint32>();
     final tdFlags = allocate<Uint32>();
@@ -47,7 +47,7 @@ class WindowsMetadataFile {
         token, typeName, 256, nRead, tdFlags, baseClassToken);
 
     if (hr == S_OK) {
-      type = WindowsRuntimeType(
+      type = WindowsRuntimeTypeDef(
           reader,
           token,
           typeName.unpackString(nRead.value),
@@ -65,8 +65,8 @@ class WindowsMetadataFile {
     }
   }
 
-  List<WindowsRuntimeType> get typeDefs {
-    final types = <WindowsRuntimeType>[];
+  List<WindowsRuntimeTypeDef> get typeDefs {
+    final types = <WindowsRuntimeTypeDef>[];
 
     final phEnum = allocate<IntPtr>()..value = 0;
     final rgTypeDefs = allocate<Uint32>();
@@ -89,7 +89,7 @@ class WindowsMetadataFile {
     return types;
   }
 
-  WindowsRuntimeType findTypeDef(String type) {
+  WindowsRuntimeTypeDef findTypeDef(String type) {
     final szTypeDef = TEXT(type);
     final ptkTypeDef = allocate<Uint32>();
 

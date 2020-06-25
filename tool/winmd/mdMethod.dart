@@ -4,7 +4,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'enums.dart';
-import 'windowsruntimeparameter.dart';
+import 'mdParameter.dart';
 
 class WindowsRuntimeMethod {
   IMetaDataImport2 reader;
@@ -98,12 +98,12 @@ class WindowsRuntimeMethod {
     final ptkParamDef = allocate<Uint32>();
     final pcTokens = allocate<Uint32>();
 
-    var hr = reader.EnumMethods(phEnum, token, ptkParamDef, 1, pcTokens);
+    var hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
     while (hr == S_OK) {
       final token = ptkParamDef.value;
 
       parameters.add(processParameterToken(token));
-      hr = reader.EnumMethods(phEnum, token, ptkParamDef, 1, pcTokens);
+      hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
     }
     reader.CloseEnum(phEnum.address);
 

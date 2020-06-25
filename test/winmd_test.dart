@@ -2,8 +2,8 @@
 
 import 'package:test/test.dart';
 
+import '../tool/winmd/mdFile.dart';
 import '../tool/winmd/utils.dart';
-import '../tool/winmd/windowsmetadatafile.dart';
 
 void main() {
   test('List all tokens in a file', () {
@@ -48,5 +48,19 @@ void main() {
     expect(methods[75].isVirtual, isTrue);
     expect(methods[75].isSpecialName, isFalse);
     expect(methods[75].isRTSpecialName, isFalse);
+  });
+
+  test('Calendar.HourAsPaddedString method params', () {
+    final file = metadataFileContainingType('Windows.Globalization.Calendar');
+    final winmdFile = WindowsMetadataFile(file);
+
+    final winTypeDef = winmdFile.findTypeDef('Windows.Globalization.Calendar');
+    final methods = winTypeDef.methods;
+
+    final hourAsPaddedStringOrdinal = 75;
+    final parameters = methods[hourAsPaddedStringOrdinal].parameters;
+    expect(parameters.length, equals(2));
+    expect(parameters[0].name, equals('result'));
+    expect(parameters[1].name, equals('minDigits'));
   });
 }

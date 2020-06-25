@@ -3,9 +3,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'windowsruntimemethod.dart';
+import 'mdMethod.dart';
 
-class WindowsRuntimeType {
+class WindowsRuntimeTypeDef {
   IMetaDataImport2 reader;
 
   int token;
@@ -13,7 +13,7 @@ class WindowsRuntimeType {
   int flags;
   int baseTypeToken;
 
-  WindowsRuntimeType(
+  WindowsRuntimeTypeDef(
       this.reader, this.token, this.typeName, this.flags, this.baseTypeToken);
 
   WindowsRuntimeMethod processMethodToken(int token) {
