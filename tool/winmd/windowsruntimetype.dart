@@ -33,6 +33,7 @@ class WindowsRuntimeType {
 
     if (hr == S_OK) {
       method = WindowsRuntimeMethod(
+          reader,
           token,
           szMethod.unpackString(pchMethod.value),
           pdwAttr.value,

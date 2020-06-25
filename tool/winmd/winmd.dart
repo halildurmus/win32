@@ -29,11 +29,35 @@ void listMethods() {
   final winTypeDef = winmdFile.findTypeDef('Windows.Globalization.Calendar');
   final methods = winTypeDef.methods;
 
+  int i = 0;
   for (var method in methods) {
-    print('${method.methodName}');
+    print('$i ${method.isPublic ? 'public ' : ''}'
+        '${method.isPrivate ? 'private ' : ''}'
+        '${method.isStatic ? 'static ' : ''}'
+        '${method.isFinal ? 'final ' : ''}'
+        '${method.isVirtual ? 'virtual ' : ''}'
+        '${method.isSpecialName ? 'special ' : ''}'
+        '${method.isRTSpecialName ? 'rt_special ' : ''}'
+        '${method.methodName} ');
+    i++;
   }
 }
 
+void listParameters() {
+  final file = metadataFileContainingType('Windows.Globalization.Calendar');
+  final winmdFile = WindowsMetadataFile(file);
+
+  final winTypeDef = winmdFile.findTypeDef('Windows.Globalization.Calendar');
+  final methods = winTypeDef.methods;
+
+  final parameters = methods[75].parameters;
+  print(parameters.length);
+  for (var parameter in parameters) {
+    print('${parameter.name} (${parameter.value})');
+  }
+}
+
+// String HourAsPaddedString(int32) -- 75
 void main() {
-  listTokens();
+  listParameters();
 }

@@ -32,4 +32,21 @@ void main() {
 
     expect(methods[8].methodName, equals('get_NumeralSystem'));
   });
+
+  test('Calendar.HourAsPaddedString method properties', () {
+    final file = metadataFileContainingType('Windows.Globalization.Calendar');
+    final winmdFile = WindowsMetadataFile(file);
+
+    final winTypeDef = winmdFile.findTypeDef('Windows.Globalization.Calendar');
+    final methods = winTypeDef.methods;
+
+    expect(methods[75].methodName, equals('HourAsPaddedString'));
+    expect(methods[75].isPublic, isTrue);
+    expect(methods[75].isPrivate, isFalse);
+    expect(methods[75].isStatic, isFalse);
+    expect(methods[75].isFinal, isTrue);
+    expect(methods[75].isVirtual, isTrue);
+    expect(methods[75].isSpecialName, isFalse);
+    expect(methods[75].isRTSpecialName, isFalse);
+  });
 }
