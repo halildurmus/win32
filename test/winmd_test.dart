@@ -1,6 +1,7 @@
 @TestOn('windows')
 
 import 'package:test/test.dart';
+import 'package:win32/win32.dart';
 
 import '../tool/winmd/mdFile.dart';
 import '../tool/winmd/utils.dart';
@@ -55,12 +56,23 @@ void main() {
     final winmdFile = WindowsMetadataFile(file);
 
     final winTypeDef = winmdFile.findTypeDef('Windows.Globalization.Calendar');
-    final methods = winTypeDef.methods;
+    final method = winTypeDef.findMethod('HourAsPaddedString');
 
-    final hourAsPaddedStringOrdinal = 75;
-    final parameters = methods[hourAsPaddedStringOrdinal].parameters;
+    final parameters = method.parameters;
     expect(parameters.length, equals(2));
     expect(parameters[0].name, equals('result'));
     expect(parameters[1].name, equals('minDigits'));
+  });
+
+  test('findMethod lookup failure', () {
+    final file = metadataFileContainingType('Windows.Globalization.Calendar');
+    final winmdFile = WindowsMetadataFile(file);
+
+    final winTypeDef = winmdFile.findTypeDef('Windows.Globalization.Calendar');
+
+    expect(
+        () => winTypeDef.findMethod('HourAsPaddedString2'),
+        throwsA(isA<COMException>()
+            .having((error) => error.hr, 'HRESULT', equals(0x80131130))));
   });
 }

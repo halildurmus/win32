@@ -5,6 +5,7 @@ import 'package:win32/win32.dart';
 
 import 'enums.dart';
 import 'mdParameter.dart';
+import 'mdType.dart';
 
 class WindowsRuntimeMethod {
   IMetaDataImport2 reader;
@@ -64,16 +65,14 @@ class WindowsRuntimeMethod {
 
     if (hr == S_OK) {
       if (pcchValue.value == 0) {
-        parameter = WindowsRuntimeParameter(reader, token, pulSequence.value,
-            pdwAttr.value, szName.unpackString(pchName.value), '');
-      } else {
         parameter = WindowsRuntimeParameter(
             reader,
             token,
             pulSequence.value,
             pdwAttr.value,
+            WindowsRuntimeType(pdwCPlusTypeFlag.value),
             szName.unpackString(pchName.value),
-            Utf8.fromUtf8(ppValue.cast()));
+            pcchValue.value);
       }
 
       free(pmd);

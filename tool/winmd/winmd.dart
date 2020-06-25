@@ -9,9 +9,6 @@
 import 'mdFile.dart';
 import 'utils.dart';
 
-String toHex(int value32) =>
-    '0x${value32.toUnsigned(32).toRadixString(16).padLeft(8, '0')}';
-
 void listTokens() {
   final file = metadataFileContainingType('Windows.Globalization.Calendar');
   final winmdFile = WindowsMetadataFile(file);
@@ -48,18 +45,19 @@ void listParameters() {
   final winmdFile = WindowsMetadataFile(file);
 
   final winTypeDef = winmdFile.findTypeDef('Windows.Globalization.Calendar');
-  final methods = winTypeDef.methods;
+  final method = winTypeDef.findMethod('HourAsPaddedString2');
 
-  final hourAsPaddedStringOrdinal = 75;
-  final parameters = methods[hourAsPaddedStringOrdinal].parameters;
-  print(
-      '${methods[hourAsPaddedStringOrdinal].methodName} has ${parameters.length - 1} parameter(s).');
+  final parameters = method.parameters;
+  print('${method.methodName} has '
+      '${parameters.length - 1} parameter(s).');
+
+  // the zeroth parameter is the return type
   for (int i = 1; i < parameters.length; i++) {
-    print(
-        '[${parameters[i].sequence}] ${parameters[i].name} (${toHex(parameters[i].token)})');
+    print('[${parameters[i].sequence}] ${parameters[i].name}');
   }
-  final returnType = methods[hourAsPaddedStringOrdinal].returnType;
-  print('\nreturns: ${returnType.name} (${toHex(returnType.token)})');
+
+  final returnType = method.returnType;
+  print('\nreturns: ${returnType.name}');
 }
 
 void main() {

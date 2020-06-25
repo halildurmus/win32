@@ -1,7 +1,6 @@
-import 'dart:ffi';
-
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
+
+import 'mdType.dart';
 
 class WindowsRuntimeParameter {
   IMetaDataImport2 reader;
@@ -9,9 +8,10 @@ class WindowsRuntimeParameter {
   int token;
   int sequence;
   int attributes;
+  WindowsRuntimeType typeFlag;
   String name;
-  String value;
+  int paramValueLength;
 
   WindowsRuntimeParameter(this.reader, this.token, this.sequence,
-      this.attributes, this.name, this.value);
+      this.attributes, this.typeFlag, this.name, this.paramValueLength);
 }

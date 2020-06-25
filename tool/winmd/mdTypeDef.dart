@@ -61,20 +61,43 @@ class WindowsRuntimeTypeDef {
     final mdMethodDef = allocate<Uint32>();
     final pcTokens = allocate<Uint32>();
 
-    var hr = reader.EnumMethods(phEnum, token, mdMethodDef, 1, pcTokens);
-    while (hr == S_OK) {
-      final token = mdMethodDef.value;
+    try {
+      var hr = reader.EnumMethods(phEnum, token, mdMethodDef, 1, pcTokens);
+      while (hr == S_OK) {
+        final token = mdMethodDef.value;
 
-      methods.add(processMethodToken(token));
-      hr = reader.EnumMethods(phEnum, token, mdMethodDef, 1, pcTokens);
+        methods.add(processMethodToken(token));
+        hr = reader.EnumMethods(phEnum, token, mdMethodDef, 1, pcTokens);
+      }
+      reader.CloseEnum(phEnum.address);
+    } finally {
+      free(mdMethodDef);
+      free(pcTokens);
+
+      // dispose phEnum crashes here, so leave it allocated
     }
-    reader.CloseEnum(phEnum.address);
-
-    free(mdMethodDef);
-    free(pcTokens);
-
-    // dispose phEnum crashes here, so leave it allocated
 
     return methods;
+  }
+
+  WindowsRuntimeMethod findMethod(String methodName) {
+    WindowsRuntimeMethod methodToken;
+
+    final szName = TEXT(methodName);
+    final pmb = allocate<Uint32>();
+
+    try {
+      final hr = reader.FindMethod(token, szName, nullptr, 0, pmb);
+      if (hr == S_OK) {
+        methodToken = processMethodToken(pmb.value);
+      } else {
+        throw COMException(hr);
+      }
+    } finally {
+      free(szName);
+      free(pmb);
+    }
+
+    return methodToken;
   }
 }

@@ -4,6 +4,9 @@ import 'dart:io';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+String toHex(int value32) =>
+    '0x${value32.toUnsigned(32).toRadixString(16).padLeft(8, '0')}';
+
 /// Takes a typename (e.g. `Windows.Globalization.Calendar`) and returns the
 /// metadata file that contains the type.
 File metadataFileContainingType(String typeName) {
