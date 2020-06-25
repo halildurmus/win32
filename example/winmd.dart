@@ -83,7 +83,8 @@ List<WindowsRuntimeType> metadataTypesInFile(File file) {
   final rgTypeDefs = allocate<Uint32>();
   final pcTypeDefs = allocate<Uint32>();
 
-  while (reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs) == S_OK) {
+  hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
+  while (hr == S_OK) {
     final token = rgTypeDefs.value;
 
     types.add(ProcessToken(reader, token));
