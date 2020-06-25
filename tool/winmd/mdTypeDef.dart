@@ -16,6 +16,41 @@ class WindowsRuntimeTypeDef {
   WindowsRuntimeTypeDef(
       this.reader, this.token, this.typeName, this.flags, this.baseTypeToken);
 
+  factory WindowsRuntimeTypeDef.none(IMetaDataImport2 reader) =>
+      WindowsRuntimeTypeDef(reader, 0, '', 0, 0);
+
+  factory WindowsRuntimeTypeDef.fromToken(IMetaDataImport2 reader, int token) {
+    var type = WindowsRuntimeTypeDef.none(reader);
+
+    final nRead = allocate<Uint32>();
+    final tdFlags = allocate<Uint32>();
+    final baseClassToken = allocate<Uint32>();
+    final typeName = allocate<Uint16>(count: 256).cast<Utf16>();
+
+    try {
+      final hr = reader.GetTypeDefProps(
+          token, typeName, 256, nRead, tdFlags, baseClassToken);
+
+      if (hr == S_OK) {
+        type = WindowsRuntimeTypeDef(
+            reader,
+            token,
+            typeName.unpackString(nRead.value),
+            tdFlags.value,
+            baseClassToken.value);
+      } else {
+        throw WindowsException(hr);
+      }
+    } finally {
+      free(nRead);
+      free(tdFlags);
+      free(baseClassToken);
+      free(typeName);
+    }
+
+    return type;
+  }
+
   WindowsRuntimeMethod processMethodToken(int token) {
     WindowsRuntimeMethod method;
 
@@ -28,17 +63,23 @@ class WindowsRuntimeTypeDef {
     final pulCodeRVA = allocate<Uint32>();
     final pdwImplFlags = allocate<Uint32>();
 
-    var hr = reader.GetMethodProps(token, pClass, szMethod, 256, pchMethod,
-        pdwAttr, ppvSigBlob.cast(), pcbSigBlob, pulCodeRVA, pdwImplFlags);
+    try {
+      final hr = reader.GetMethodProps(token, pClass, szMethod, 256, pchMethod,
+          pdwAttr, ppvSigBlob.cast(), pcbSigBlob, pulCodeRVA, pdwImplFlags);
 
-    if (hr == S_OK) {
-      method = WindowsRuntimeMethod(
-          reader,
-          token,
-          szMethod.unpackString(pchMethod.value),
-          pdwAttr.value,
-          pulCodeRVA.value);
+      if (hr == S_OK) {
+        method = WindowsRuntimeMethod(
+            reader,
+            token,
+            szMethod.unpackString(pchMethod.value),
+            pdwAttr.value,
+            pulCodeRVA.value);
 
+        return method;
+      } else {
+        throw WindowsException(hr);
+      }
+    } finally {
       free(pClass);
       free(szMethod);
       free(pchMethod);
@@ -47,10 +88,6 @@ class WindowsRuntimeTypeDef {
       free(pcbSigBlob);
       free(pulCodeRVA);
       free(pdwImplFlags);
-
-      return method;
-    } else {
-      throw WindowsException(hr);
     }
   }
 
@@ -99,5 +136,13 @@ class WindowsRuntimeTypeDef {
     }
 
     return methodToken;
+  }
+
+  WindowsRuntimeTypeDef get parent {
+    final ptdEnclosingClass = allocate<Uint32>();
+
+    reader.GetNestedClassProps(token, ptdEnclosingClass);
+
+    return WindowsRuntimeTypeDef.fromToken(reader, token);
   }
 }

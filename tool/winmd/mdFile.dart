@@ -35,36 +35,6 @@ class WindowsMetadataFile {
     reader = IMetaDataImport2(pReader.cast());
   }
 
-  WindowsRuntimeTypeDef processTypeDefToken(int token) {
-    WindowsRuntimeTypeDef type;
-
-    final nRead = allocate<Uint32>();
-    final tdFlags = allocate<Uint32>();
-    final baseClassToken = allocate<Uint32>();
-    final typeName = allocate<Uint16>(count: 256).cast<Utf16>();
-
-    var hr = reader.GetTypeDefProps(
-        token, typeName, 256, nRead, tdFlags, baseClassToken);
-
-    if (hr == S_OK) {
-      type = WindowsRuntimeTypeDef(
-          reader,
-          token,
-          typeName.unpackString(nRead.value),
-          tdFlags.value,
-          baseClassToken.value);
-
-      free(nRead);
-      free(tdFlags);
-      free(baseClassToken);
-      free(typeName);
-
-      return type;
-    } else {
-      throw WindowsException(hr);
-    }
-  }
-
   List<WindowsRuntimeTypeDef> get typeDefs {
     final types = <WindowsRuntimeTypeDef>[];
 
@@ -76,7 +46,7 @@ class WindowsMetadataFile {
     while (hr == S_OK) {
       final token = rgTypeDefs.value;
 
-      types.add(processTypeDefToken(token));
+      types.add(WindowsRuntimeTypeDef.fromToken(reader, token));
       hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
     }
     reader.CloseEnum(phEnum.address);
@@ -95,6 +65,6 @@ class WindowsMetadataFile {
 
     reader.FindTypeDefByName(szTypeDef, NULL, ptkTypeDef);
 
-    return processTypeDefToken(ptkTypeDef.value);
+    return WindowsRuntimeTypeDef.fromToken(reader, ptkTypeDef.value);
   }
 }
