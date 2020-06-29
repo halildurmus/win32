@@ -19,11 +19,11 @@ void listTokens() {
   }
 }
 
-void listMethods([String typeDef = 'Windows.Globalization.Calendar']) {
-  final file = metadataFileContainingType(typeDef);
+void listMethods([String type = 'Windows.Globalization.Calendar']) {
+  final file = metadataFileContainingType(type);
   final winmdFile = WinmdFile(file);
 
-  final winTypeDef = winmdFile.findTypeDef(typeDef);
+  final winTypeDef = winmdFile.findTypeDef(type);
   final methods = winTypeDef.methods;
 
   int i = 0;
@@ -40,12 +40,12 @@ void listMethods([String typeDef = 'Windows.Globalization.Calendar']) {
   }
 }
 
-void listParameters() {
-  final file = metadataFileContainingType('Windows.Globalization.Calendar');
+void listParameters([String type = 'Windows.Globalization.Calendar']) {
+  final file = metadataFileContainingType(type);
   final winmdFile = WinmdFile(file);
 
-  final winTypeDef = winmdFile.findTypeDef('Windows.Globalization.Calendar');
-  final method = winTypeDef.findMethod('HourAsPaddedString2');
+  final winTypeDef = winmdFile.findTypeDef(type);
+  final method = winTypeDef.findMethod('HourAsPaddedString');
 
   final parameters = method.parameters;
   print('${method.methodName} has '
@@ -60,8 +60,7 @@ void listParameters() {
   print('\nreturns: ${returnType.name}');
 }
 
-void listInterfaces() {
-  final type = 'Windows.Globalization.Calendar';
+void listInterfaces([String type = 'Windows.Globalization.Calendar']) {
   final file = metadataFileContainingType(type);
   final winmdFile = WinmdFile(file);
 
@@ -77,8 +76,7 @@ void listInterfaces() {
 }
 
 // [uuid(CA30221D-86D9-40FB-A26B-D44EB7CF08EA)]
-void listGUID() {
-  final type = 'Windows.Globalization.ICalendar';
+void listGUID([String type = 'Windows.Globalization.ICalendar']) {
   final file = metadataFileContainingType(type);
   final winmdFile = WinmdFile(file);
 
@@ -87,5 +85,28 @@ void listGUID() {
 }
 
 void main() {
-  listGUID();
+  final type = 'Windows.Globalization.ICalendar';
+  final file = metadataFileContainingType(type);
+  final winmdFile = WinmdFile(file);
+
+  final winTypeDef = winmdFile.findTypeDef(type);
+  print(winTypeDef.typeName);
+  print(winTypeDef.guid);
+  print('inherits ${winTypeDef.parent.typeName}');
+
+  for (var method in winTypeDef.methods) {
+    final buffer = StringBuffer();
+    buffer.write('${method.isPublic ? 'public ' : ''}'
+        '${method.isPrivate ? 'private ' : ''}'
+        '${method.isStatic ? 'static ' : ''}'
+        '${method.isFinal ? 'final ' : ''}'
+        '${method.isVirtual ? 'virtual ' : ''}'
+        '${method.isSpecialName ? 'special ' : ''}'
+        '${method.isRTSpecialName ? 'rt_special ' : ''}'
+        '${method.methodName} (');
+
+    buffer.write(method.parameters.map((e) => e.name).join(', '));
+    buffer.write(')');
+    print(buffer.toString());
+  }
 }
