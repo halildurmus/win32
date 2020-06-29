@@ -4,7 +4,6 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'mdFile.dart';
-import 'mdInterface.dart';
 import 'mdMethod.dart';
 import 'utils.dart';
 
@@ -73,9 +72,37 @@ class WindowsRuntimeTypeDef {
       throw WindowsException(hr);
     }
   }
+  WindowsRuntimeTypeDef processInterfaceToken(int token) {
+    var interfaceTypeDef = WindowsRuntimeTypeDef(reader);
 
-  List<WindowsRuntimeInterface> get interfaces {
-    final interfaces = <WindowsRuntimeInterface>[];
+    final pClass = allocate<Uint32>();
+    final ptkIface = allocate<Uint32>();
+
+    try {
+      final hr = reader.GetInterfaceImplProps(token, pClass, ptkIface);
+      if (hr == S_OK) {
+        if (tokenIsTypeRef(ptkIface.value)) {
+          interfaceTypeDef =
+              WindowsRuntimeTypeDef.fromTypeRef(reader, ptkIface.value);
+        } else if (tokenIsTypeDef(pClass.value)) {
+          interfaceTypeDef =
+              WindowsRuntimeTypeDef.fromToken(reader, ptkIface.value);
+        } else {
+          throw WindowsException(hr);
+        }
+      } else {
+        throw WindowsException(hr);
+      }
+    } finally {
+      free(pClass);
+      free(ptkIface);
+    }
+
+    return interfaceTypeDef;
+  }
+
+  List<WindowsRuntimeTypeDef> get interfaces {
+    final interfaces = <WindowsRuntimeTypeDef>[];
 
     final phEnum = allocate<IntPtr>()..value = 0;
     final rImpls = allocate<Uint32>();
@@ -86,7 +113,7 @@ class WindowsRuntimeTypeDef {
       while (hr == S_OK) {
         final token = rImpls.value;
 
-        interfaces.add(WindowsRuntimeInterface.fromToken(reader, token));
+        interfaces.add(processInterfaceToken(token));
         hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
       }
       reader.CloseEnum(phEnum.address);
@@ -153,5 +180,34 @@ class WindowsRuntimeTypeDef {
     reader.GetNestedClassProps(token, ptdEnclosingClass);
 
     return WindowsRuntimeTypeDef.fromToken(reader, token);
+  }
+
+  String get guid {
+    String guidAsString;
+
+    final attributeName = TEXT('Windows.Foundation.Metadata.GuidAttribute');
+    final ppData = allocate<IntPtr>();
+    final pcbData = allocate<Uint32>();
+
+    try {
+      final hr = reader.GetCustomAttributeByName(
+          token, attributeName, ppData, pcbData);
+      if (hr != S_OK) {
+        throw WindowsException(hr);
+      }
+
+      if (pcbData.value != 20) {
+        // GUID blob is incorrect length
+        return null;
+      } else {
+        final blob = Pointer<Uint8>.fromAddress(ppData.value);
+        final guid = blob.elementAt(2).cast<GUID>();
+        guidAsString = guid.ref.toString();
+      }
+    } finally {
+      free(ppData);
+      free(pcbData);
+    }
+    return guidAsString;
   }
 }

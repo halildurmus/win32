@@ -19,11 +19,11 @@ void listTokens() {
   }
 }
 
-void listMethods() {
-  final file = metadataFileContainingType('Windows.Globalization.Calendar');
+void listMethods([String typeDef = 'Windows.Globalization.Calendar']) {
+  final file = metadataFileContainingType(typeDef);
   final winmdFile = WindowsMetadataFile(file);
 
-  final winTypeDef = winmdFile.findTypeDef('Windows.Globalization.Calendar');
+  final winTypeDef = winmdFile.findTypeDef(typeDef);
   final methods = winTypeDef.methods;
 
   int i = 0;
@@ -61,19 +61,31 @@ void listParameters() {
 }
 
 void listInterfaces() {
-  final file = metadataFileContainingType('Windows.UI.Xaml.Controls.Button');
+  final type = 'Windows.Globalization.Calendar';
+  final file = metadataFileContainingType(type);
   final winmdFile = WindowsMetadataFile(file);
 
-  final winTypeDef = winmdFile.findTypeDef('Windows.UI.Xaml.Controls.Button');
+  final winTypeDef = winmdFile.findTypeDef(type);
 
   final interfaces = winTypeDef.interfaces;
 
+  print('$type implements:');
   for (var interface in interfaces) {
-    print(
-        '${toHex(interface.token)} ${interface.classToken.typeName} ${interface.interfaceToken.typeName}');
+    print('  ${interface.typeName}');
+    listMethods(interface.typeName);
   }
 }
 
+// [uuid(CA30221D-86D9-40FB-A26B-D44EB7CF08EA)]
+void listGUID() {
+  final type = 'Windows.Globalization.ICalendar';
+  final file = metadataFileContainingType(type);
+  final winmdFile = WindowsMetadataFile(file);
+
+  final winTypeDef = winmdFile.findTypeDef(type);
+  print(winTypeDef.guid);
+}
+
 void main() {
-  listInterfaces();
+  listGUID();
 }

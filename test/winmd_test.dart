@@ -75,4 +75,29 @@ void main() {
         throwsA(isA<COMException>()
             .having((error) => error.hr, 'HRESULT', equals(0x80131130))));
   });
+
+  test('Find interfaces returns sane results', () {
+    final type = 'Windows.UI.Xaml.Controls.Button';
+    final file = metadataFileContainingType(type);
+    final winmdFile = WindowsMetadataFile(file);
+    final winTypeDef = winmdFile.findTypeDef(type);
+
+    final interfaces = winTypeDef.interfaces;
+    expect(interfaces.length, equals(2));
+
+    final interfaceNames = interfaces.map((element) => element.typeName);
+    expect(interfaceNames, contains('Windows.UI.Xaml.Controls.IButton'));
+    expect(
+        interfaceNames, contains('Windows.UI.Xaml.Controls.IButtonWithFlyout'));
+  });
+
+  test('Interface GUID is correct', () {
+    final file = metadataFileContainingType('Windows.Globalization.ICalendar');
+    final winmdFile = WindowsMetadataFile(file);
+
+    final winTypeDef = winmdFile.findTypeDef('Windows.Globalization.ICalendar');
+    final guid = winTypeDef.guid;
+    expect(guid, isNotNull);
+    expect(guid, equals('{CA30221D-86D9-40FB-A26B-D44EB7CF08EA}'));
+  });
 }
