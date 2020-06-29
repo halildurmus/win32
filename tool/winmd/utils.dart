@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+import 'enums.dart';
+
 String toHex(int value32) =>
     '0x${value32.toUnsigned(32).toRadixString(16).padLeft(8, '0')}';
 
@@ -36,3 +38,8 @@ File metadataFileContainingType(String typeName) {
 
   return path;
 }
+
+bool tokenIsTypeRef(int token) =>
+    token & CorTokenType.mdtTypeRef == CorTokenType.mdtTypeRef;
+bool tokenIsTypeDef(int token) =>
+    token & CorTokenType.mdtTypeDef == CorTokenType.mdtTypeDef;

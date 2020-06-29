@@ -27,6 +27,35 @@ class CorMethodAttr {
   static final mdRequireSecObject = 0x8000;
 }
 
+class CorTokenType {
+  static final mdtModule = 0x00000000;
+  static final mdtTypeRef = 0x01000000;
+  static final mdtTypeDef = 0x02000000;
+  static final mdtFieldDef = 0x04000000;
+  static final mdtMethodDef = 0x06000000;
+  static final mdtParamDef = 0x08000000;
+  static final mdtInterfaceImpl = 0x09000000;
+  static final mdtMemberRef = 0x0a000000;
+  static final mdtCustomAttribute = 0x0c000000;
+  static final mdtPermission = 0x0e000000;
+  static final mdtSignature = 0x11000000;
+  static final mdtEvent = 0x14000000;
+  static final mdtProperty = 0x17000000;
+  static final mdtModuleRef = 0x1a000000;
+  static final mdtTypeSpec = 0x1b000000;
+  static final mdtAssembly = 0x20000000;
+  static final mdtAssemblyRef = 0x23000000;
+  static final mdtFile = 0x26000000;
+  static final mdtExportedType = 0x27000000;
+  static final mdtManifestResource = 0x28000000;
+  static final mdtGenericParam = 0x2a000000;
+  static final mdtMethodSpec = 0x2b000000;
+  static final mdtGenericParamConstraint = 0x2c000000;
+  static final mdtString = 0x70000000;
+  static final mdtName = 0x71000000;
+  static final mdtBaseType = 0x72000000;
+}
+
 class CorElementType {
   static final ELEMENT_TYPE_END = 0x0;
   static final ELEMENT_TYPE_VOID = 0x1;

@@ -60,6 +60,20 @@ void listParameters() {
   print('\nreturns: ${returnType.name}');
 }
 
+void listInterfaces() {
+  final file = metadataFileContainingType('Windows.UI.Xaml.Controls.Button');
+  final winmdFile = WindowsMetadataFile(file);
+
+  final winTypeDef = winmdFile.findTypeDef('Windows.UI.Xaml.Controls.Button');
+
+  final interfaces = winTypeDef.interfaces;
+
+  for (var interface in interfaces) {
+    print(
+        '${toHex(interface.token)} ${interface.classToken.typeName} ${interface.interfaceToken.typeName}');
+  }
+}
+
 void main() {
-  listParameters();
+  listInterfaces();
 }
