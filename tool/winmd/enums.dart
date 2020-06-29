@@ -1,5 +1,6 @@
 // Defined here:
 // https://docs.microsoft.com/en-us/dotnet/framework/unmanaged-api/metadata/cormethodattr-enumeration
+
 class CorMethodAttr {
   static final mdMemberAccessMask = 0x0007;
   static final mdPrivateScope = 0x0000;

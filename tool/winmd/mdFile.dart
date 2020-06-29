@@ -6,11 +6,11 @@ import 'package:win32/win32.dart';
 
 import 'mdType.dart';
 
-class WindowsMetadataFile {
+class WinmdFile {
   IMetaDataImport2 reader;
 
-  /// Constructs a [WindowsMetadataFile] object from a .winmd file.
-  WindowsMetadataFile(File file) {
+  /// Constructs a [WinmdFile] object from a .winmd file.
+  WinmdFile(File file) {
     final pDispenser = COMObject.allocate().addressOf;
     var hr = MetaDataGetDispenser(
         convertToCLSID(CLSID_CorMetaDataDispenser).cast(),
@@ -35,8 +35,8 @@ class WindowsMetadataFile {
     reader = IMetaDataImport2(pReader.cast());
   }
 
-  List<WindowsRuntimeTypeDef> get typeDefs {
-    final types = <WindowsRuntimeTypeDef>[];
+  List<WinmdType> get typeDefs {
+    final types = <WinmdType>[];
 
     final phEnum = allocate<IntPtr>()..value = 0;
     final rgTypeDefs = allocate<Uint32>();
@@ -46,7 +46,7 @@ class WindowsMetadataFile {
     while (hr == S_OK) {
       final token = rgTypeDefs.value;
 
-      types.add(WindowsRuntimeTypeDef.fromToken(reader, token));
+      types.add(WinmdType.fromToken(reader, token));
       hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
     }
     reader.CloseEnum(phEnum.address);
@@ -59,12 +59,12 @@ class WindowsMetadataFile {
     return types;
   }
 
-  WindowsRuntimeTypeDef findTypeDef(String type) {
+  WinmdType findTypeDef(String type) {
     final szTypeDef = TEXT(type);
     final ptkTypeDef = allocate<Uint32>();
 
     reader.FindTypeDefByName(szTypeDef, NULL, ptkTypeDef);
 
-    return WindowsRuntimeTypeDef.fromToken(reader, ptkTypeDef.value);
+    return WinmdType.fromToken(reader, ptkTypeDef.value);
   }
 }

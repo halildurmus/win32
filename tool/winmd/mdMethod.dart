@@ -6,7 +6,7 @@ import 'package:win32/win32.dart';
 import 'enums.dart';
 import 'mdParameter.dart';
 
-class WindowsRuntimeMethod {
+class WinmdMethod {
   IMetaDataImport2 reader;
 
   int token;
@@ -24,11 +24,11 @@ class WindowsRuntimeMethod {
   bool get isSpecialName => _testFlag(CorMethodAttr.mdSpecialName);
   bool get isRTSpecialName => _testFlag(CorMethodAttr.mdRTSpecialName);
 
-  WindowsRuntimeMethod(this.reader, this.token, this.methodName,
-      this.methodFlags, this.relativeVirtualAddress);
+  WinmdMethod(this.reader, this.token, this.methodName, this.methodFlags,
+      this.relativeVirtualAddress);
 
-  factory WindowsRuntimeMethod.fromToken(IMetaDataImport2 reader, int token) {
-    WindowsRuntimeMethod method;
+  factory WinmdMethod.fromToken(IMetaDataImport2 reader, int token) {
+    WinmdMethod method;
 
     final pClass = allocate<Uint32>();
     final szMethod = allocate<Uint16>(count: 256).cast<Utf16>();
@@ -44,7 +44,7 @@ class WindowsRuntimeMethod {
           pdwAttr, ppvSigBlob.cast(), pcbSigBlob, pulCodeRVA, pdwImplFlags);
 
       if (hr == S_OK) {
-        method = WindowsRuntimeMethod(
+        method = WinmdMethod(
             reader,
             token,
             szMethod.unpackString(pchMethod.value),
@@ -67,8 +67,8 @@ class WindowsRuntimeMethod {
     }
   }
 
-  WindowsRuntimeParameter get returnType {
-    WindowsRuntimeParameter parameter;
+  WinmdParameter get returnType {
+    WinmdParameter parameter;
 
     final ptkParamDef = allocate<Uint32>();
     var hr = reader.GetParamForMethodIndex(token, 0, ptkParamDef);
@@ -76,7 +76,7 @@ class WindowsRuntimeMethod {
       final token = ptkParamDef.value;
 
       if (reader.IsValidToken(token) != 0) {
-        parameter = WindowsRuntimeParameter.fromToken(reader, token);
+        parameter = WinmdParameter.fromToken(reader, token);
       } else {
         print('ERROR: Invalid token');
       }
@@ -87,8 +87,8 @@ class WindowsRuntimeMethod {
     return parameter;
   }
 
-  List<WindowsRuntimeParameter> get parameters {
-    final parameters = <WindowsRuntimeParameter>[];
+  List<WinmdParameter> get parameters {
+    final parameters = <WinmdParameter>[];
 
     final phEnum = allocate<IntPtr>()..value = 0;
     final ptkParamDef = allocate<Uint32>();
@@ -98,7 +98,7 @@ class WindowsRuntimeMethod {
     while (hr == S_OK) {
       final token = ptkParamDef.value;
 
-      parameters.add(WindowsRuntimeParameter.fromToken(reader, token));
+      parameters.add(WinmdParameter.fromToken(reader, token));
       hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
     }
     reader.CloseEnum(phEnum.address);

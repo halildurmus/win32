@@ -1,6 +1,6 @@
 import 'enums.dart';
 
-class WindowsRuntimeTypeOf {
+class WindowsRuntimeType {
   final CorTypeToDartStringMapping = <int, String>{
     CorElementType.ELEMENT_TYPE_END: null,
     CorElementType.ELEMENT_TYPE_VOID: 'void',
@@ -75,7 +75,7 @@ class WindowsRuntimeTypeOf {
 
   int corType;
 
-  WindowsRuntimeTypeOf(this.corType);
+  WindowsRuntimeType(this.corType);
 
   String get toDartType => CorTypeToDartStringMapping[corType];
 

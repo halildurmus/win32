@@ -11,7 +11,7 @@ import 'utils.dart';
 
 void listTokens() {
   final file = metadataFileContainingType('Windows.Globalization.Calendar');
-  final winmdFile = WindowsMetadataFile(file);
+  final winmdFile = WinmdFile(file);
 
   for (var type in winmdFile.typeDefs) {
     print(
@@ -21,7 +21,7 @@ void listTokens() {
 
 void listMethods([String typeDef = 'Windows.Globalization.Calendar']) {
   final file = metadataFileContainingType(typeDef);
-  final winmdFile = WindowsMetadataFile(file);
+  final winmdFile = WinmdFile(file);
 
   final winTypeDef = winmdFile.findTypeDef(typeDef);
   final methods = winTypeDef.methods;
@@ -42,7 +42,7 @@ void listMethods([String typeDef = 'Windows.Globalization.Calendar']) {
 
 void listParameters() {
   final file = metadataFileContainingType('Windows.Globalization.Calendar');
-  final winmdFile = WindowsMetadataFile(file);
+  final winmdFile = WinmdFile(file);
 
   final winTypeDef = winmdFile.findTypeDef('Windows.Globalization.Calendar');
   final method = winTypeDef.findMethod('HourAsPaddedString2');
@@ -63,7 +63,7 @@ void listParameters() {
 void listInterfaces() {
   final type = 'Windows.Globalization.Calendar';
   final file = metadataFileContainingType(type);
-  final winmdFile = WindowsMetadataFile(file);
+  final winmdFile = WinmdFile(file);
 
   final winTypeDef = winmdFile.findTypeDef(type);
 
@@ -80,7 +80,7 @@ void listInterfaces() {
 void listGUID() {
   final type = 'Windows.Globalization.ICalendar';
   final file = metadataFileContainingType(type);
-  final winmdFile = WindowsMetadataFile(file);
+  final winmdFile = WinmdFile(file);
 
   final winTypeDef = winmdFile.findTypeDef(type);
   print(winTypeDef.guid);

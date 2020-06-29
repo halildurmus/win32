@@ -3,24 +3,23 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'mdTypeOf.dart';
+import 'windowsType.dart';
 
-class WindowsRuntimeParameter {
+class WinmdParameter {
   IMetaDataImport2 reader;
 
   int token;
   int sequence;
   int attributes;
-  WindowsRuntimeTypeOf typeFlag;
+  WindowsRuntimeType typeFlag;
   String name;
   int paramValueLength;
 
-  WindowsRuntimeParameter(this.reader, this.token, this.sequence,
-      this.attributes, this.typeFlag, this.name, this.paramValueLength);
+  WinmdParameter(this.reader, this.token, this.sequence, this.attributes,
+      this.typeFlag, this.name, this.paramValueLength);
 
-  factory WindowsRuntimeParameter.fromToken(
-      IMetaDataImport2 reader, int token) {
-    WindowsRuntimeParameter parameter;
+  factory WinmdParameter.fromToken(IMetaDataImport2 reader, int token) {
+    WinmdParameter parameter;
 
     final pmd = allocate<Uint32>();
     final pulSequence = allocate<Uint32>();
@@ -36,12 +35,12 @@ class WindowsRuntimeParameter {
 
     if (hr == S_OK) {
       if (pcchValue.value == 0) {
-        parameter = WindowsRuntimeParameter(
+        parameter = WinmdParameter(
             reader,
             token,
             pulSequence.value,
             pdwAttr.value,
-            WindowsRuntimeTypeOf(pdwCPlusTypeFlag.value),
+            WindowsRuntimeType(pdwCPlusTypeFlag.value),
             szName.unpackString(pchName.value),
             pcchValue.value);
       }

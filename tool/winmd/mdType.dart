@@ -7,7 +7,7 @@ import 'mdFile.dart';
 import 'mdMethod.dart';
 import 'utils.dart';
 
-class WindowsRuntimeTypeDef {
+class WinmdType {
   IMetaDataImport2 reader;
 
   int token;
@@ -15,14 +15,14 @@ class WindowsRuntimeTypeDef {
   int flags;
   int baseTypeToken;
 
-  WindowsRuntimeTypeDef(this.reader,
+  WinmdType(this.reader,
       [this.token = 0,
       this.typeName = '',
       this.flags = 0,
       this.baseTypeToken = 0]);
 
-  factory WindowsRuntimeTypeDef.fromToken(IMetaDataImport2 reader, int token) {
-    var type = WindowsRuntimeTypeDef(reader);
+  factory WinmdType.fromToken(IMetaDataImport2 reader, int token) {
+    var type = WinmdType(reader);
 
     final nRead = allocate<Uint32>();
     final tdFlags = allocate<Uint32>();
@@ -34,12 +34,8 @@ class WindowsRuntimeTypeDef {
           token, typeName, 256, nRead, tdFlags, baseClassToken);
 
       if (hr == S_OK) {
-        type = WindowsRuntimeTypeDef(
-            reader,
-            token,
-            typeName.unpackString(nRead.value),
-            tdFlags.value,
-            baseClassToken.value);
+        type = WinmdType(reader, token, typeName.unpackString(nRead.value),
+            tdFlags.value, baseClassToken.value);
       } else {
         throw WindowsException(hr);
       }
@@ -53,8 +49,7 @@ class WindowsRuntimeTypeDef {
     return type;
   }
 
-  factory WindowsRuntimeTypeDef.fromTypeRef(
-      IMetaDataImport2 refReader, int typeRefToken) {
+  factory WinmdType.fromTypeRef(IMetaDataImport2 refReader, int typeRefToken) {
     final ptkResolutionScope = allocate<Uint32>();
     final szName = allocate<Uint16>(count: 256).cast<Utf16>();
     final pchName = allocate<Uint32>();
@@ -64,7 +59,7 @@ class WindowsRuntimeTypeDef {
     if (hr == S_OK) {
       final typeName = szName.unpackString(pchName.value);
       final file = metadataFileContainingType(typeName);
-      final winmdFile = WindowsMetadataFile(file);
+      final winmdFile = WinmdFile(file);
 
       final winTypeDef = winmdFile.findTypeDef(typeName);
       return winTypeDef;
@@ -72,8 +67,8 @@ class WindowsRuntimeTypeDef {
       throw WindowsException(hr);
     }
   }
-  WindowsRuntimeTypeDef processInterfaceToken(int token) {
-    var interfaceTypeDef = WindowsRuntimeTypeDef(reader);
+  WinmdType processInterfaceToken(int token) {
+    var interfaceTypeDef = WinmdType(reader);
 
     final pClass = allocate<Uint32>();
     final ptkIface = allocate<Uint32>();
@@ -82,11 +77,9 @@ class WindowsRuntimeTypeDef {
       final hr = reader.GetInterfaceImplProps(token, pClass, ptkIface);
       if (hr == S_OK) {
         if (tokenIsTypeRef(ptkIface.value)) {
-          interfaceTypeDef =
-              WindowsRuntimeTypeDef.fromTypeRef(reader, ptkIface.value);
+          interfaceTypeDef = WinmdType.fromTypeRef(reader, ptkIface.value);
         } else if (tokenIsTypeDef(pClass.value)) {
-          interfaceTypeDef =
-              WindowsRuntimeTypeDef.fromToken(reader, ptkIface.value);
+          interfaceTypeDef = WinmdType.fromToken(reader, ptkIface.value);
         } else {
           throw WindowsException(hr);
         }
@@ -101,8 +94,8 @@ class WindowsRuntimeTypeDef {
     return interfaceTypeDef;
   }
 
-  List<WindowsRuntimeTypeDef> get interfaces {
-    final interfaces = <WindowsRuntimeTypeDef>[];
+  List<WinmdType> get interfaces {
+    final interfaces = <WinmdType>[];
 
     final phEnum = allocate<IntPtr>()..value = 0;
     final rImpls = allocate<Uint32>();
@@ -127,8 +120,8 @@ class WindowsRuntimeTypeDef {
     return interfaces;
   }
 
-  List<WindowsRuntimeMethod> get methods {
-    final methods = <WindowsRuntimeMethod>[];
+  List<WinmdMethod> get methods {
+    final methods = <WinmdMethod>[];
 
     final phEnum = allocate<IntPtr>()..value = 0;
     final mdMethodDef = allocate<Uint32>();
@@ -139,7 +132,7 @@ class WindowsRuntimeTypeDef {
       while (hr == S_OK) {
         final token = mdMethodDef.value;
 
-        methods.add(WindowsRuntimeMethod.fromToken(reader, token));
+        methods.add(WinmdMethod.fromToken(reader, token));
         hr = reader.EnumMethods(phEnum, token, mdMethodDef, 1, pcTokens);
       }
       reader.CloseEnum(phEnum.address);
@@ -153,8 +146,8 @@ class WindowsRuntimeTypeDef {
     return methods;
   }
 
-  WindowsRuntimeMethod findMethod(String methodName) {
-    WindowsRuntimeMethod methodToken;
+  WinmdMethod findMethod(String methodName) {
+    WinmdMethod methodToken;
 
     final szName = TEXT(methodName);
     final pmb = allocate<Uint32>();
@@ -162,7 +155,7 @@ class WindowsRuntimeTypeDef {
     try {
       final hr = reader.FindMethod(token, szName, nullptr, 0, pmb);
       if (hr == S_OK) {
-        methodToken = WindowsRuntimeMethod.fromToken(reader, pmb.value);
+        methodToken = WinmdMethod.fromToken(reader, pmb.value);
       } else {
         throw COMException(hr);
       }
@@ -174,12 +167,12 @@ class WindowsRuntimeTypeDef {
     return methodToken;
   }
 
-  WindowsRuntimeTypeDef get parent {
+  WinmdType get parent {
     final ptdEnclosingClass = allocate<Uint32>();
 
     reader.GetNestedClassProps(token, ptdEnclosingClass);
 
-    return WindowsRuntimeTypeDef.fromToken(reader, token);
+    return WinmdType.fromToken(reader, token);
   }
 
   String get guid {
