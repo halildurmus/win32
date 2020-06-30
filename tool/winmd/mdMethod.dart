@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
@@ -12,7 +13,9 @@ class WinmdMethod {
   int token;
   String methodName;
   int methodFlags;
+  Uint8List methodSignature;
   int relativeVirtualAddress;
+  int implFlags;
 
   bool _testFlag(int attribute) => methodFlags & attribute == attribute;
 
@@ -25,7 +28,7 @@ class WinmdMethod {
   bool get isRTSpecialName => _testFlag(CorMethodAttr.mdRTSpecialName);
 
   WinmdMethod(this.reader, this.token, this.methodName, this.methodFlags,
-      this.relativeVirtualAddress);
+      this.methodSignature, this.relativeVirtualAddress, this.implFlags);
 
   factory WinmdMethod.fromToken(IMetaDataImport2 reader, int token) {
     WinmdMethod method;
@@ -44,12 +47,16 @@ class WinmdMethod {
           pdwAttr, ppvSigBlob.cast(), pcbSigBlob, pulCodeRVA, pdwImplFlags);
 
       if (hr == S_OK) {
+        final signature = Pointer<Uint8>.fromAddress(ppvSigBlob.value)
+            .asTypedList(pcbSigBlob.value);
         method = WinmdMethod(
             reader,
             token,
             szMethod.unpackString(pchMethod.value),
             pdwAttr.value,
-            pulCodeRVA.value);
+            signature,
+            pulCodeRVA.value,
+            pdwImplFlags.value);
 
         return method;
       } else {
@@ -110,4 +117,6 @@ class WinmdMethod {
 
     return parameters;
   }
+
+  String get signature => methodSignature.toString();
 }

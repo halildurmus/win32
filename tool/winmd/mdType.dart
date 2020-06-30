@@ -202,13 +202,6 @@ class WinmdType {
   }
 
   WinmdType get parent => WinmdType.fromToken(reader, baseTypeToken);
-  // WinmdType get parent {
-  //   final ptdEnclosingClass = allocate<Uint32>();
-
-  //   reader.GetNestedClassProps(token, ptdEnclosingClass);
-
-  //   return WinmdType.fromToken(reader, token);
-  // }
 
   String get guid {
     String guidAsString;

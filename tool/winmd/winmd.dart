@@ -84,7 +84,7 @@ void listGUID([String type = 'Windows.Globalization.ICalendar']) {
   print(winTypeDef.guid);
 }
 
-void main() {
+void printInterface() {
   final type = 'Windows.Globalization.ICalendar';
   final file = metadataFileContainingType(type);
   final winmdFile = WinmdFile(file);
@@ -109,4 +109,16 @@ void main() {
     buffer.write(')');
     print(buffer.toString());
   }
+}
+
+void main() {
+  final type = 'Windows.Globalization.ICalendar';
+  final file = metadataFileContainingType(type);
+  final winmdFile = WinmdFile(file);
+
+  final winTypeDef = winmdFile.findTypeDef(type);
+  print(winTypeDef.typeName);
+  final mapns = winTypeDef.findMethod('MonthAsPaddedNumericString');
+  print(mapns.parameters.length);
+  print(mapns.signature);
 }

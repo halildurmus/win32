@@ -1,5 +1,6 @@
 import 'dart:ffi';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
@@ -51,3 +52,37 @@ bool tokenIsTypeRef(int token) =>
     token & CorTokenType.mdtTypeRef == CorTokenType.mdtTypeRef;
 bool tokenIsTypeDef(int token) =>
     token & CorTokenType.mdtTypeDef == CorTokenType.mdtTypeDef;
+
+int corSigUncompressData(Uint8List pBytes) {
+  int pDataOut;
+
+  // Smallest.
+  if ((pBytes[0] & 0x80) == 0x00) // 0??? ????
+  {
+    pDataOut = pBytes[0];
+  }
+  // Medium.
+  else if ((pBytes[0] & 0xC0) == 0x80) // 10?? ????
+  {
+    if (pBytes.length < 2) {
+      throw WinmdException('Bad signature');
+    } else {
+      pDataOut = (((pBytes[0] & 0x3f) << 8 | pBytes[1]));
+    }
+  } else if ((pBytes[0] & 0xE0) == 0xC0) // 110? ????
+  {
+    if (pBytes.length < 4) {
+      throw WinmdException('Bad signature');
+    } else {
+      pDataOut = (((pBytes[0] & 0x1f) << 24 |
+          (pBytes[1]) << 16 |
+          (pBytes[2]) << 8 |
+          (pBytes[3])));
+    }
+  } else // We don't recognize this encoding
+  {
+    throw WinmdException('Bad signature');
+  }
+
+  return pDataOut;
+}
