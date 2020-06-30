@@ -1,6 +1,42 @@
 // Defined here:
 // https://docs.microsoft.com/en-us/dotnet/framework/unmanaged-api/metadata/cormethodattr-enumeration
 
+class CorTypeAttr {
+  static final tdVisibilityMask = 0x00000007;
+  static final tdNotPublic = 0x00000000;
+  static final tdPublic = 0x00000001;
+  static final tdNestedPublic = 0x00000002;
+  static final tdNestedPrivate = 0x00000003;
+  static final tdNestedFamily = 0x00000004;
+  static final tdNestedAssembly = 0x00000005;
+  static final tdNestedFamANDAssem = 0x00000006;
+  static final tdNestedFamORAssem = 0x00000007;
+  static final tdLayoutMask = 0x00000018;
+  static final tdAutoLayout = 0x00000000;
+  static final tdSequentialLayout = 0x00000008;
+  static final tdExplicitLayout = 0x00000010;
+  static final tdClassSemanticsMask = 0x00000020;
+  static final tdClass = 0x00000000;
+  static final tdInterface = 0x00000020;
+  static final tdAbstract = 0x00000080;
+  static final tdSealed = 0x00000100;
+  static final tdSpecialName = 0x00000400;
+  static final tdImport = 0x00001000;
+  static final tdSerializable = 0x00002000;
+  static final tdWindowsRuntime = 0x00004000;
+  static final tdStringFormatMask = 0x00030000;
+  static final tdAnsiClass = 0x00000000;
+  static final tdUnicodeClass = 0x00010000;
+  static final tdAutoClass = 0x00020000;
+  static final tdCustomFormatClass = 0x00030000;
+  static final tdCustomFormatMask = 0x00C00000;
+  static final tdBeforeFieldInit = 0x00100000;
+  static final tdForwarder = 0x00200000;
+  static final tdReservedMask = 0x00040800;
+  static final tdRTSpecialName = 0x00000800;
+  static final tdHasSecurity = 0x00040000;
+}
+
 class CorMethodAttr {
   static final mdMemberAccessMask = 0x0007;
   static final mdPrivateScope = 0x0000;

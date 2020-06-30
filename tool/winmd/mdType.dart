@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+import 'enums.dart';
 import 'mdFile.dart';
 import 'mdMethod.dart';
 import 'utils.dart';
@@ -15,6 +16,12 @@ class WinmdType {
   int flags;
   int baseTypeToken;
 
+  bool get isClass =>
+      (flags & CorTypeAttr.tdClass == CorTypeAttr.tdClass) &&
+      (flags & CorTypeAttr.tdInterface != CorTypeAttr.tdInterface);
+  bool get isInterface =>
+      flags & CorTypeAttr.tdInterface == CorTypeAttr.tdInterface;
+
   WinmdType(this.reader,
       [this.token = 0,
       this.typeName = '',
@@ -22,6 +29,16 @@ class WinmdType {
       this.baseTypeToken = 0]);
 
   factory WinmdType.fromToken(IMetaDataImport2 reader, int token) {
+    if (tokenIsTypeRef(token)) {
+      return WinmdType.fromTypeRef(reader, token);
+    } else if (tokenIsTypeDef(token)) {
+      return WinmdType.fromTypeDef(reader, token);
+    } else {
+      throw WinmdException('Invalid token.');
+    }
+  }
+
+  factory WinmdType.fromTypeDef(IMetaDataImport2 reader, int typeDefToken) {
     var type = WinmdType(reader);
 
     final nRead = allocate<Uint32>();
@@ -31,11 +48,15 @@ class WinmdType {
 
     try {
       final hr = reader.GetTypeDefProps(
-          token, typeName, 256, nRead, tdFlags, baseClassToken);
+          typeDefToken, typeName, 256, nRead, tdFlags, baseClassToken);
 
       if (hr == S_OK) {
-        type = WinmdType(reader, token, typeName.unpackString(nRead.value),
-            tdFlags.value, baseClassToken.value);
+        type = WinmdType(
+            reader,
+            typeDefToken,
+            typeName.unpackString(nRead.value),
+            tdFlags.value,
+            baseClassToken.value);
       } else {
         throw WindowsException(hr);
       }
@@ -50,23 +71,37 @@ class WinmdType {
   }
 
   factory WinmdType.fromTypeRef(IMetaDataImport2 refReader, int typeRefToken) {
+    WinmdType winTypeDef;
+
     final ptkResolutionScope = allocate<Uint32>();
     final szName = allocate<Uint16>(count: 256).cast<Utf16>();
     final pchName = allocate<Uint32>();
 
-    var hr = refReader.GetTypeRefProps(
-        typeRefToken, ptkResolutionScope, szName, 256, pchName);
-    if (hr == S_OK) {
-      final typeName = szName.unpackString(pchName.value);
-      final file = metadataFileContainingType(typeName);
-      final winmdFile = WinmdFile(file);
-
-      final winTypeDef = winmdFile.findTypeDef(typeName);
-      return winTypeDef;
-    } else {
-      throw WindowsException(hr);
+    if (typeRefToken == 0x01000000) {
+      return WinmdType(refReader, 0, 'IInspectable');
     }
+
+    try {
+      var hr = refReader.GetTypeRefProps(
+          typeRefToken, ptkResolutionScope, szName, 256, pchName);
+      if (hr == S_OK) {
+        final typeName = szName.unpackString(pchName.value);
+        final file = metadataFileContainingType(typeName);
+        final winmdFile = WinmdFile(file);
+
+        winTypeDef = winmdFile.findTypeDef(typeName);
+      } else {
+        throw WindowsException(hr);
+      }
+    } finally {
+      free(ptkResolutionScope);
+      free(szName);
+      free(pchName);
+    }
+
+    return winTypeDef;
   }
+
   WinmdType processInterfaceToken(int token) {
     var interfaceTypeDef = WinmdType(reader);
 
@@ -79,7 +114,7 @@ class WinmdType {
         if (tokenIsTypeRef(ptkIface.value)) {
           interfaceTypeDef = WinmdType.fromTypeRef(reader, ptkIface.value);
         } else if (tokenIsTypeDef(pClass.value)) {
-          interfaceTypeDef = WinmdType.fromToken(reader, ptkIface.value);
+          interfaceTypeDef = WinmdType.fromTypeDef(reader, ptkIface.value);
         } else {
           throw WindowsException(hr);
         }
@@ -139,7 +174,6 @@ class WinmdType {
     } finally {
       free(mdMethodDef);
       free(pcTokens);
-
       // dispose phEnum crashes here, so leave it allocated
     }
 
@@ -167,13 +201,14 @@ class WinmdType {
     return methodToken;
   }
 
-  WinmdType get parent {
-    final ptdEnclosingClass = allocate<Uint32>();
+  WinmdType get parent => WinmdType.fromToken(reader, baseTypeToken);
+  // WinmdType get parent {
+  //   final ptdEnclosingClass = allocate<Uint32>();
 
-    reader.GetNestedClassProps(token, ptdEnclosingClass);
+  //   reader.GetNestedClassProps(token, ptdEnclosingClass);
 
-    return WinmdType.fromToken(reader, token);
-  }
+  //   return WinmdType.fromToken(reader, token);
+  // }
 
   String get guid {
     String guidAsString;
@@ -185,14 +220,7 @@ class WinmdType {
     try {
       final hr = reader.GetCustomAttributeByName(
           token, attributeName, ppData, pcbData);
-      if (hr != S_OK) {
-        throw WindowsException(hr);
-      }
-
-      if (pcbData.value != 20) {
-        // GUID blob is incorrect length
-        return null;
-      } else {
+      if (hr == S_OK && pcbData.value == 20) {
         final blob = Pointer<Uint8>.fromAddress(ppData.value);
         final guid = blob.elementAt(2).cast<GUID>();
         guidAsString = guid.ref.toString();

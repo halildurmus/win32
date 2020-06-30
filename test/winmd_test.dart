@@ -100,4 +100,22 @@ void main() {
     expect(guid, isNotNull);
     expect(guid, equals('{CA30221D-86D9-40FB-A26B-D44EB7CF08EA}'));
   });
+
+  test('Interface is correctly identified', () {
+    final file = metadataFileContainingType('Windows.Globalization.ICalendar');
+    final winmdFile = WinmdFile(file);
+
+    final winTypeDef = winmdFile.findTypeDef('Windows.Globalization.ICalendar');
+    expect(winTypeDef.isInterface, isTrue);
+    expect(winTypeDef.isClass, isFalse);
+  });
+
+  test('Class is correctly identified', () {
+    final file = metadataFileContainingType('Windows.Globalization.Calendar');
+    final winmdFile = WinmdFile(file);
+
+    final winTypeDef = winmdFile.findTypeDef('Windows.Globalization.Calendar');
+    expect(winTypeDef.isInterface, isFalse);
+    expect(winTypeDef.isClass, isTrue);
+  });
 }
