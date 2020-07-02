@@ -34,7 +34,7 @@
   EnumProcessModules, GetModuleBaseName, GetModuleFileNameExt, OpenProcess,
   ReadProcessMemory and WriteProcessMemory.
 - Add modules.dart sample
-- Lots of refactoring and tidy up work. 
+- Lots of refactoring and tidy up work.
 
 ## 1.5.1
 

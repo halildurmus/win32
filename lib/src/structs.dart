@@ -130,6 +130,28 @@ class SYSTEM_INFO extends Struct {
     ..wProcessorRevision = 0;
 }
 
+// typedef struct _STARTUPINFOW {
+//   DWORD  cb;
+//   LPWSTR lpReserved;
+//   LPWSTR lpDesktop;
+//   LPWSTR lpTitle;
+//   DWORD  dwX;
+//   DWORD  dwY;
+//   DWORD  dwXSize;
+//   DWORD  dwYSize;
+//   DWORD  dwXCountChars;
+//   DWORD  dwYCountChars;
+//   DWORD  dwFillAttribute;
+//   DWORD  dwFlags;
+//   WORD   wShowWindow;
+//   WORD   cbReserved2;
+//   LPBYTE lpReserved2;
+//   HANDLE hStdInput;
+//   HANDLE hStdOutput;
+//   HANDLE hStdError;
+// } STARTUPINFOW, *LPSTARTUPINFOW;
+class STARTUPINFO extends Struct {}
+
 // typedef struct _SECURITY_ATTRIBUTES {
 //   DWORD  nLength;
 //   LPVOID lpSecurityDescriptor;

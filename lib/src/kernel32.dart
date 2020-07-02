@@ -29,6 +29,10 @@ final CreatePipe =
     _kernel32.lookupFunction<createPipeNative, createPipeDart>('CreatePipe');
 
 /// {@category kernel32}
+final CreateProcess = _kernel32
+    .lookupFunction<createProcessNative, createProcessDart>('CreateProcessW');
+
+/// {@category kernel32}
 final CreatePseudoConsole = _kernel32.lookupFunction<createPseudoConsoleNative,
     createPseudoConsoleDart>('CreatePseudoConsole');
 
@@ -125,6 +129,11 @@ final GetVolumePathNamesForVolumeName = _kernel32.lookupFunction<
     getVolumePathNamesForVolumeNameDart>('GetVolumePathNamesForVolumeNameW');
 
 /// {@category kernel32}
+final InitializeProcThreadAttributeList = _kernel32.lookupFunction<
+    initializeProcThreadAttributeListNative,
+    initializeProcThreadAttributeListDart>('InitializeProcThreadAttributeList');
+
+/// {@category kernel32}
 final LoadLibrary = _kernel32
     .lookupFunction<loadLibraryNative, loadLibraryDart>('LoadLibraryW');
 
@@ -185,6 +194,11 @@ final Sleep = _kernel32.lookupFunction<sleepNative, sleepDart>('Sleep');
 /// {@category kernel32}
 final VirtualAlloc = _kernel32
     .lookupFunction<virtualAllocNative, virtualAllocDart>('VirtualAlloc');
+
+/// {@category kernel32}
+final UpdateProcThreadAttribute = _kernel32.lookupFunction<
+    updateProcThreadAttributeNative,
+    updateProcThreadAttributeDart>('UpdateProcThreadAttribute');
 
 /// {@category kernel32}
 final VirtualFree =
