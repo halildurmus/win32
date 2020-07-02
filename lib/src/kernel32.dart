@@ -16,8 +16,21 @@ final CloseHandle =
     _kernel32.lookupFunction<closeHandleNative, closeHandleDart>('CloseHandle');
 
 /// {@category kernel32}
+final ClosePseudoConsole =
+    _kernel32.lookupFunction<closePseudoConsoleNative, closePseudoConsoleDart>(
+        'ClosePseudoConsole');
+
+/// {@category kernel32}
 final CreateFile =
     _kernel32.lookupFunction<createFileNative, createFileDart>('CreateFileW');
+
+/// {@category kernel32}
+final CreatePipe =
+    _kernel32.lookupFunction<createPipeNative, createPipeDart>('CreatePipe');
+
+/// {@category kernel32}
+final CreatePseudoConsole = _kernel32.lookupFunction<createPseudoConsoleNative,
+    createPseudoConsoleDart>('CreatePseudoConsole');
 
 /// {@category kernel32}
 final FillConsoleOutputAttribute = _kernel32.lookupFunction<
@@ -134,9 +147,18 @@ final QueryDosDevice =
         'QueryDosDeviceW');
 
 /// {@category kernel32}
+final ResizePseudoConsole = _kernel32.lookupFunction<resizePseudoConsoleNative,
+    resizePseudoConsoleDart>('ResizePseudoConsole');
+
+/// {@category kernel32}
 final ScrollConsoleScreenBuffer = _kernel32.lookupFunction<
     scrollConsoleScreenBufferNative,
     scrollConsoleScreenBufferDart>('ScrollConsoleScreenBuffer');
+
+/// {@category kernel32}
+final SetConsoleCtrlHandler = _kernel32.lookupFunction<
+    setConsoleCtrlHandlerNative,
+    setConsoleCtrlHandlerDart>('SetConsoleCtrlHandler');
 
 /// {@category kernel32}
 final SetConsoleCursorInfo = _kernel32.lookupFunction<
