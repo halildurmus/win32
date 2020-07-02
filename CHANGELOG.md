@@ -1,3 +1,8 @@
+## 1.6.5
+
+- Add a broader array of console APIs
+- Add a wallpaper example
+
 ## 1.6.4
 
 - Lots of documentation and linter cleanup
@@ -33,7 +38,7 @@
 
 ## 1.5.1
 
- - Add GetTempPath()
+- Add GetTempPath()
 
 ## 1.5.0
 
