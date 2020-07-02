@@ -3368,6 +3368,9 @@ const ENABLE_LVB_GRID_WORLDWIDE = 0x0010;
 const S_OK = 0;
 
 /// @nodoc
+const S_FALSE = 1;
+
+/// @nodoc
 const E_UNEXPECTED = 0x8000FFFF;
 
 /// @nodoc
