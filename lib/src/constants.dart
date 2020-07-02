@@ -3292,6 +3292,30 @@ const STD_ERROR_HANDLE = -12;
 /// @nodoc
 const INVALID_HANDLE_VALUE = -1;
 
+/// @nodoc
+const FOREGROUND_BLUE = 0x0001;
+
+/// @nodoc
+const FOREGROUND_GREEN = 0x0002;
+
+/// @nodoc
+const FOREGROUND_RED = 0x0004;
+
+/// @nodoc
+const FOREGROUND_INTENSITY = 0x0008;
+
+/// @nodoc
+const BACKGROUND_BLUE = 0x0010;
+
+/// @nodoc
+const BACKGROUND_GREEN = 0x0020;
+
+/// @nodoc
+const BACKGROUND_RED = 0x0040;
+
+/// @nodoc
+const BACKGROUND_INTENSITY = 0x0080;
+
 // input flags
 
 /// @nodoc

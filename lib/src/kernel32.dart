@@ -53,9 +53,33 @@ final FreeLibrary =
     _kernel32.lookupFunction<freeLibraryNative, freeLibraryDart>('FreeLibrary');
 
 /// {@category kernel32}
+final GetConsoleCursorInfo = _kernel32.lookupFunction<
+    getConsoleCursorInfoNative,
+    getConsoleCursorInfoDart>('GetConsoleCursorInfo');
+
+/// {@category kernel32}
+final GetConsoleMode = _kernel32
+    .lookupFunction<getConsoleModeNative, getConsoleModeDart>('GetConsoleMode');
+
+/// {@category kernel32}
 final GetConsoleScreenBufferInfo = _kernel32.lookupFunction<
     getConsoleScreenBufferInfoNative,
     getConsoleScreenBufferInfoDart>('GetConsoleScreenBufferInfo');
+
+/// {@category kernel32}
+final GetConsoleSelectionInfo = _kernel32.lookupFunction<
+    getConsoleSelectionInfoNative,
+    getConsoleSelectionInfoDart>('GetConsoleSelectionInfo');
+
+/// {@category kernel32}
+final GetConsoleTitle =
+    _kernel32.lookupFunction<getConsoleTitleNative, getConsoleTitleDart>(
+        'GetConsoleTitleW');
+
+/// {@category kernel32}
+final GetConsoleWindow =
+    _kernel32.lookupFunction<getConsoleWindowNative, getConsoleWindowDart>(
+        'GetConsoleWindow');
 
 /// {@category kernel32}
 final GetLastError = _kernel32
@@ -96,6 +120,10 @@ final OpenProcess =
     _kernel32.lookupFunction<openProcessNative, openProcessDart>('OpenProcess');
 
 /// {@category kernel32}
+final ReadFile =
+    _kernel32.lookupFunction<readFileNative, readFileDart>('ReadFile');
+
+/// {@category kernel32}
 final ReadProcessMemory =
     _kernel32.lookupFunction<readProcessMemoryNative, readProcessMemoryDart>(
         'ReadProcessMemory');
@@ -104,6 +132,11 @@ final ReadProcessMemory =
 final QueryDosDevice =
     _kernel32.lookupFunction<queryDosDeviceNative, queryDosDeviceDart>(
         'QueryDosDeviceW');
+
+/// {@category kernel32}
+final ScrollConsoleScreenBuffer = _kernel32.lookupFunction<
+    scrollConsoleScreenBufferNative,
+    scrollConsoleScreenBufferDart>('ScrollConsoleScreenBuffer');
 
 /// {@category kernel32}
 final SetConsoleCursorInfo = _kernel32.lookupFunction<
@@ -120,6 +153,11 @@ final SetConsoleMode = _kernel32
     .lookupFunction<setConsoleModeNative, setConsoleModeDart>('SetConsoleMode');
 
 /// {@category kernel32}
+final SetConsoleTextAttribute = _kernel32.lookupFunction<
+    setConsoleTextAttributeNative,
+    setConsoleTextAttributeDart>('SetConsoleTextAttribute');
+
+/// {@category kernel32}
 final Sleep = _kernel32.lookupFunction<sleepNative, sleepDart>('Sleep');
 
 /// {@category kernel32}
@@ -129,6 +167,10 @@ final VirtualAlloc = _kernel32
 /// {@category kernel32}
 final VirtualFree =
     _kernel32.lookupFunction<virtualFreeNative, virtualFreeDart>('VirtualFree');
+
+/// {@category kernel32}
+final WriteFile =
+    _kernel32.lookupFunction<writeFileNative, writeFileDart>('WriteFile');
 
 /// {@category kernel32}
 final WriteProcessMemory =

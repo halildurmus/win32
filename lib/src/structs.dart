@@ -1602,6 +1602,44 @@ class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
         ..dwMaximumWindowSizeY = 0;
 }
 
+// typedef struct _CONSOLE_SELECTION_INFO {
+//   DWORD      dwFlags;
+//   COORD      dwSelectionAnchor;
+//   SMALL_RECT srSelection;
+// } CONSOLE_SELECTION_INFO, *PCONSOLE_SELECTION_INFO;
+
+/// CONSOLE_SELECTION_INFO
+///
+/// {@category Struct}
+class CONSOLE_SELECTION_INFO extends Struct {
+  @Uint32()
+  int dwFlags;
+
+  @Int16()
+  int dwSelectionAnchorX;
+  @Int16()
+  int dwSelectionAnchorY;
+
+  @Int16()
+  int srSelectionLeft;
+  @Int16()
+  int srSelectionTop;
+  @Int16()
+  int srSelectionRight;
+  @Int16()
+  int srSelectionBottom;
+
+  factory CONSOLE_SELECTION_INFO.allocate() =>
+      allocate<CONSOLE_SELECTION_INFO>().ref
+        ..dwFlags = 0
+        ..dwSelectionAnchorX = 0
+        ..dwSelectionAnchorY = 0
+        ..srSelectionLeft = 0
+        ..srSelectionTop = 0
+        ..srSelectionRight = 0
+        ..srSelectionBottom = 0;
+}
+
 // typedef struct _COORD {
 //   SHORT X;
 //   SHORT Y;
@@ -1620,6 +1658,25 @@ class COORD extends Struct {
   factory COORD.allocate() => allocate<COORD>().ref
     ..X = 0
     ..Y = 0;
+}
+
+// typedef struct _CHAR_INFO {
+//   union {
+//     WCHAR UnicodeChar;
+//     CHAR  AsciiChar;
+//   } Char;
+//   WORD  Attributes;
+// } CHAR_INFO, *PCHAR_INFO;
+class CHAR_INFO extends Struct {
+  @Int16()
+  int UnicodeChar;
+
+  @Int16()
+  int Attributes;
+
+  factory CHAR_INFO.allocate() => allocate<CHAR_INFO>().ref
+    ..UnicodeChar = 0
+    ..Attributes = 0;
 }
 
 // typedef struct _SMALL_RECT {
