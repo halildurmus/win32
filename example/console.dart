@@ -76,7 +76,7 @@ void scrollScreenBuffer(int handle, int x) {
   fillChar.UnicodeChar = ' '.codeUnits.first;
 
   ScrollConsoleScreenBuffer(handle, scrollRect.addressOf, clipRect.addressOf,
-      coordDest.X, coordDest.Y, fillChar.addressOf);
+      coordDest.Y << 16 + coordDest.X, fillChar.addressOf);
 
   free(scrollRect.addressOf);
   free(coordDest.addressOf);

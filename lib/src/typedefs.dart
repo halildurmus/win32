@@ -51,6 +51,12 @@ typedef chooseFontDart = int Function(Pointer<CHOOSEFONT> lpcf);
 typedef closeHandleNative = Int32 Function(IntPtr hObject);
 typedef closeHandleDart = int Function(int hObject);
 
+// void WINAPI ClosePseudoConsole(
+//     _In_ HPCON hPC
+// );
+typedef closePseudoConsoleNative = Void Function(Pointer<IntPtr> hPC);
+typedef closePseudoConsoleDart = void Function(Pointer<IntPtr> hPC);
+
 // HRESULT CLSIDFromString(
 //   LPCOLESTR lpsz,
 //   LPCLSID   pclsid
@@ -209,6 +215,36 @@ typedef createFontIndirectDart = int Function(Pointer<LOGFONT> lplf);
 // HMENU CreateMenu();
 typedef createMenuNative = IntPtr Function();
 typedef createMenuDart = int Function();
+
+// BOOL CreatePipe(
+//   PHANDLE               hReadPipe,
+//   PHANDLE               hWritePipe,
+//   LPSECURITY_ATTRIBUTES lpPipeAttributes,
+//   DWORD                 nSize
+// );
+typedef createPipeNative = Int32 Function(
+    Pointer<IntPtr> hReadPipe,
+    Pointer<IntPtr> hWritePipe,
+    Pointer<SECURITY_ATTRIBUTES> lpPipeAttributes,
+    Uint32 nSize);
+typedef createPipeDart = int Function(
+    Pointer<IntPtr> hReadPipe,
+    Pointer<IntPtr> hWritePipe,
+    Pointer<SECURITY_ATTRIBUTES> lpPipeAttributes,
+    int nSize);
+
+// HRESULT WINAPI CreatePseudoConsole(
+//   _In_ COORD size,
+//   _In_ HANDLE hInput,
+//   _In_ HANDLE hOutput,
+//   _In_ DWORD dwFlags,
+//   _Out_ HPCON* phPC
+// );
+
+typedef createPseudoConsoleNative = Int32 Function(Int32 size, IntPtr hInput,
+    IntPtr hOutput, Int32 dwFlags, Pointer<IntPtr> phPC);
+typedef createPseudoConsoleDart = int Function(
+    int size, int hInput, int hOutput, int dwFlags, Pointer<IntPtr> phPC);
 
 // HBRUSH CreateSolidBrush(
 //   COLORREF color
@@ -887,6 +923,14 @@ typedef releaseDCDart = int Function(int hWnd, int hDC);
 typedef replaceTextNative = IntPtr Function(Pointer<FINDREPLACE> Arg1);
 typedef replaceTextDart = int Function(Pointer<FINDREPLACE> Arg1);
 
+// HRESULT WINAPI ResizePseudoConsole(
+//     _In_ HPCON hPC ,
+//     _In_ COORD size
+// );
+typedef resizePseudoConsoleNative = Int32 Function(
+    Pointer<IntPtr> hPC, Int32 size);
+typedef resizePseudoConsoleDart = int Function(Pointer<IntPtr> hPC, int size);
+
 // int SaveDC(
 //   HDC hdc
 // );
@@ -904,15 +948,13 @@ typedef scrollConsoleScreenBufferNative = Int32 Function(
     IntPtr hConsoleOutput,
     Pointer<SMALL_RECT> lpScrollRectangle,
     Pointer<SMALL_RECT> lpClipRectangle,
-    Int16 dwDestinationOriginX,
-    Int16 dwDestinationOriginY,
+    Int32 dwDestinationOrigin,
     Pointer<CHAR_INFO> lpFill);
 typedef scrollConsoleScreenBufferDart = int Function(
     int hConsoleOutput,
     Pointer<SMALL_RECT> lpScrollRectangle,
     Pointer<SMALL_RECT> lpClipRectangle,
-    int dwDestinationOriginX,
-    int dwDestinationOriginY,
+    int dwDestinationOrigin,
     Pointer<CHAR_INFO> lpFill);
 
 // BOOL ScrollWindow(
@@ -964,6 +1006,15 @@ typedef setBkColorDart = int Function(int hdc, int color);
 // );
 typedef setBkModeNative = Int32 Function(IntPtr hdc, Int32 mode);
 typedef setBkModeDart = int Function(int hdc, int mode);
+
+// BOOL WINAPI SetConsoleCtrlHandler(
+//   _In_opt_ PHANDLER_ROUTINE HandlerRoutine,
+//   _In_     BOOL             Add
+// );
+typedef setConsoleCtrlHandlerNative = Int32 Function(
+    Pointer<NativeFunction> HandlerRoutine, Int32 Add);
+typedef setConsoleCtrlHandlerDart = int Function(
+    Pointer<NativeFunction> HandlerRoutine, int Add);
 
 // BOOL WINAPI SetConsoleCursorInfo(
 //   _In_       HANDLE              hConsoleOutput,
