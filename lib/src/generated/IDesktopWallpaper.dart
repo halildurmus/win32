@@ -203,7 +203,7 @@ class DesktopWallpaper extends IDesktopWallpaper {
     var hr = CoCreateInstance(
         GUID.fromString(CLSID_DesktopWallpaper).addressOf,
         nullptr,
-        CLSCTX_INPROC_SERVER,
+        CLSCTX_ALL,
         GUID.fromString(IID_IDesktopWallpaper).addressOf,
         ptr.cast());
 

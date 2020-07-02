@@ -170,7 +170,7 @@ class KnownFolderManager extends IKnownFolderManager {
     var hr = CoCreateInstance(
         GUID.fromString(CLSID_KnownFolderManager).addressOf,
         nullptr,
-        CLSCTX_INPROC_SERVER,
+        CLSCTX_ALL,
         GUID.fromString(IID_IKnownFolderManager).addressOf,
         ptr.cast());
 

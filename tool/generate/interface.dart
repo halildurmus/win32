@@ -285,7 +285,7 @@ class $className extends $name {
     var hr = CoCreateInstance(
         GUID.fromString(CLSID_$className).addressOf,
         nullptr,
-        CLSCTX_INPROC_SERVER,
+        CLSCTX_ALL,
         GUID.fromString(IID_$name).addressOf,
         ptr.cast());
 

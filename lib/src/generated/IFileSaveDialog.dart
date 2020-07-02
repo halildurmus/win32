@@ -105,7 +105,7 @@ class FileSaveDialog extends IFileSaveDialog {
     var hr = CoCreateInstance(
         GUID.fromString(CLSID_FileSaveDialog).addressOf,
         nullptr,
-        CLSCTX_INPROC_SERVER,
+        CLSCTX_ALL,
         GUID.fromString(IID_IFileSaveDialog).addressOf,
         ptr.cast());
 

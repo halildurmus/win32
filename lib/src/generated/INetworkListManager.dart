@@ -134,7 +134,7 @@ class NetworkListManager extends INetworkListManager {
     var hr = CoCreateInstance(
         GUID.fromString(CLSID_NetworkListManager).addressOf,
         nullptr,
-        CLSCTX_INPROC_SERVER,
+        CLSCTX_ALL,
         GUID.fromString(IID_INetworkListManager).addressOf,
         ptr.cast());
 
