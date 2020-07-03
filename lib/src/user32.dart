@@ -79,6 +79,11 @@ final GetMessage =
     _user32.lookupFunction<getMessageNative, getMessageDart>('GetMessageW');
 
 /// {@category user32}
+final GetMonitorInfo =
+    _user32.lookupFunction<getMonitorInfoNative, getMonitorInfoDart>(
+        'GetMonitorInfoW');
+
+/// {@category user32}
 final GetScrollInfo = _user32
     .lookupFunction<getScrollInfoNative, getScrollInfoDart>('GetScrollInfo');
 
@@ -129,6 +134,11 @@ final MessageBox =
 /// {@category user32}
 final MoveWindow =
     _user32.lookupFunction<moveWindowNative, moveWindowDart>('MoveWindow');
+
+/// {@category user32}
+final MonitorFromWindow =
+    _user32.lookupFunction<monitorFromWindowNative, monitorFromWindowDart>(
+        'MonitorFromWindow');
 
 /// {@category user32}
 final PeekMessage =

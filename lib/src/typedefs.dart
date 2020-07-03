@@ -345,6 +345,12 @@ typedef defWindowProcDart = int Function(
 typedef deleteObjectNative = Int32 Function(IntPtr ho);
 typedef deleteObjectDart = int Function(int ho);
 
+// _BOOL DestroyPhysicalMonitor(
+//   HANDLE hMonitor
+// );
+typedef destroyPhysicalMonitorNative = Int32 Function(IntPtr hMonitor);
+typedef destroyPhysicalMonitorDart = int Function(int hMonitor);
+
 // BOOL DestroyWindow(
 //   HWND hWnd
 // );
@@ -644,6 +650,15 @@ typedef getModuleFileNameExDart = int Function(
 typedef getModuleHandleNative = IntPtr Function(Pointer<Utf16> lpModuleName);
 typedef getModuleHandleDart = int Function(Pointer<Utf16> lpModuleName);
 
+// BOOL GetMonitorInfoW(
+//   HMONITOR      hMonitor,
+//   LPMONITORINFO lpmi
+// );
+typedef getMonitorInfoNative = Int32 Function(
+    IntPtr hMonitor, Pointer<MONITORINFO> lpmi);
+typedef getMonitorInfoDart = int Function(
+    int hMonitor, Pointer<MONITORINFO> lpmi);
+
 // int GetObject(
 //   HANDLE h,
 //   int    c,
@@ -657,6 +672,16 @@ typedef getObjectDart = int Function(int h, int c, Pointer pv);
 // );
 typedef getOpenFileNameNative = Int32 Function(Pointer<OPENFILENAME> arg1);
 typedef getOpenFileNameDart = int Function(Pointer<OPENFILENAME> arg1);
+
+// _BOOL GetPhysicalMonitorsFromHMONITOR(
+//   HMONITOR           hMonitor,
+//   DWORD              dwPhysicalMonitorArraySize,
+//   LPPHYSICAL_MONITOR pPhysicalMonitorArray
+// );
+typedef getPhysicalMonitorsFromHMONITORNative = Int32 Function(IntPtr hMonitor,
+    Uint32 dwPhysicalMonitorArraySize, Pointer pPhysicalMonitorArray);
+typedef getPhysicalMonitorsFromHMONITORDart = int Function(int hMonitor,
+    int dwPhysicalMonitorArraySize, Pointer pPhysicalMonitorArray);
 
 // FARPROC GetProcAddress(
 //   HMODULE hModule,
@@ -876,6 +901,13 @@ typedef messageBoxNative = Int32 Function(
     IntPtr hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption, Uint32 uType);
 typedef messageBoxDart = int Function(
     int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption, int uType);
+
+// HMONITOR MonitorFromWindow(
+//   HWND  hwnd,
+//   DWORD dwFlags
+// );
+typedef monitorFromWindowNative = IntPtr Function(IntPtr hwnd, Uint32 dwFlags);
+typedef monitorFromWindowDart = int Function(int hwnd, int dwFlags);
 
 // BOOL MoveWindow(
 //   HWND hWnd,

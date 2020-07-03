@@ -455,6 +455,51 @@ class ACCEL extends Struct {
     ..cmd = 0;
 }
 
+// typedef struct tagMONITORINFO {
+//   DWORD cbSize;
+//   RECT  rcMonitor;
+//   RECT  rcWork;
+//   DWORD dwFlags;
+// } MONITORINFO, *LPMONITORINFO;
+
+/// MONITORINFO
+///
+/// {@category Struct}
+class MONITORINFO extends Struct {
+  @Uint32()
+  int cbSize;
+  @Int32()
+  int rcMonitorLeft;
+  @Int32()
+  int rcMonitorTop;
+  @Int32()
+  int rcMonitorRight;
+  @Int32()
+  int rcMonitorBottom;
+  @Int32()
+  int rcWorkLeft;
+  @Int32()
+  int rcWorkTop;
+  @Int32()
+  int rcWorkRight;
+  @Int32()
+  int rcWorkBottom;
+  @Uint32()
+  int dwFlags;
+
+  factory MONITORINFO.allocate() => allocate<MONITORINFO>().ref
+    ..cbSize = sizeOf<MONITORINFO>()
+    ..rcMonitorLeft = 0
+    ..rcMonitorTop = 0
+    ..rcMonitorRight = 0
+    ..rcMonitorBottom = 0
+    ..rcWorkLeft = 0
+    ..rcWorkTop = 0
+    ..rcWorkRight = 0
+    ..rcWorkBottom = 0
+    ..dwFlags = 0;
+}
+
 // In the following struct, COLORREF is a DWORD that contains RGB values
 // in the form 0x00bbggrr
 
