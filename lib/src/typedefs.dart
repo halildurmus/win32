@@ -254,7 +254,7 @@ typedef createProcessNative = Int32 Function(
     Uint32 dwCreationFlags,
     Pointer lpEnvironment,
     Pointer<Utf16> lpCurrentDirectory,
-    Pointer<STARTUPINFO> lpStartupInfo,
+    Pointer lpStartupInfo, // could be STARTUPINFO or STARTUPINFOEX
     Pointer<PROCESS_INFORMATION> lpProcessInformation);
 typedef createProcessDart = int Function(
     Pointer<Utf16> lpApplicationName,
@@ -265,7 +265,7 @@ typedef createProcessDart = int Function(
     int dwCreationFlags,
     Pointer lpEnvironment,
     Pointer<Utf16> lpCurrentDirectory,
-    Pointer<STARTUPINFO> lpStartupInfo,
+    Pointer lpStartupInfo, // could be STARTUPINFO or STARTUPINFOEX
     Pointer<PROCESS_INFORMATION> lpProcessInformation);
 
 // HRESULT WINAPI CreatePseudoConsole(

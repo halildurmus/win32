@@ -3259,6 +3259,7 @@ const PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE =
             PROC_THREAD_ATTRIBUTE_NUMBER) |
         PROC_THREAD_ATTRIBUTE_INPUT;
 
+/// {@category Enum}
 class PROC_THREAD_ATTRIBUTE_NUM {
   static const ProcThreadAttributeParentProcess = 0;
   static const ProcThreadAttributeHandleList = 2;
@@ -3276,6 +3277,101 @@ class PROC_THREAD_ATTRIBUTE_NUM {
   static const ProcThreadAttributeDesktopAppPolicy = 18;
   static const ProcThreadAttributePseudoConsole = 22;
 }
+
+// Process dwCreationFlags info
+
+/// @nodoc
+const DEBUG_PROCESS = 0x00000001;
+
+/// @nodoc
+const DEBUG_ONLY_THIS_PROCESS = 0x00000002;
+
+/// @nodoc
+const CREATE_SUSPENDED = 0x00000004;
+
+/// @nodoc
+const DETACHED_PROCESS = 0x00000008;
+
+/// @nodoc
+const CREATE_NEW_CONSOLE = 0x00000010;
+
+/// @nodoc
+const NORMAL_PRIORITY_CLASS = 0x00000020;
+
+/// @nodoc
+const IDLE_PRIORITY_CLASS = 0x00000040;
+
+/// @nodoc
+const HIGH_PRIORITY_CLASS = 0x00000080;
+
+/// @nodoc
+const REALTIME_PRIORITY_CLASS = 0x00000100;
+
+/// @nodoc
+const CREATE_NEW_PROCESS_GROUP = 0x00000200;
+
+/// @nodoc
+const CREATE_UNICODE_ENVIRONMENT = 0x00000400;
+
+/// @nodoc
+const CREATE_SEPARATE_WOW_VDM = 0x00000800;
+
+/// @nodoc
+const CREATE_SHARED_WOW_VDM = 0x00001000;
+
+/// @nodoc
+const CREATE_FORCEDOS = 0x00002000;
+
+/// @nodoc
+const BELOW_NORMAL_PRIORITY_CLASS = 0x00004000;
+
+/// @nodoc
+const ABOVE_NORMAL_PRIORITY_CLASS = 0x00008000;
+
+/// @nodoc
+const INHERIT_PARENT_AFFINITY = 0x00010000;
+
+/// @nodoc
+const INHERIT_CALLER_PRIORITY = 0x00020000;
+
+/// @nodoc
+const CREATE_PROTECTED_PROCESS = 0x00040000;
+
+/// @nodoc
+const EXTENDED_STARTUPINFO_PRESENT = 0x00080000;
+
+/// @nodoc
+const PROCESS_MODE_BACKGROUND_BEGIN = 0x00100000;
+
+/// @nodoc
+const PROCESS_MODE_BACKGROUND_END = 0x00200000;
+
+/// @nodoc
+const CREATE_SECURE_PROCESS = 0x00400000;
+
+/// @nodoc
+const CREATE_BREAKAWAY_FROM_JOB = 0x01000000;
+
+/// @nodoc
+const CREATE_PRESERVE_CODE_AUTHZ_LEVEL = 0x02000000;
+
+/// @nodoc
+const CREATE_DEFAULT_ERROR_MODE = 0x04000000;
+
+/// @nodoc
+const CREATE_NO_WINDOW = 0x08000000;
+
+/// @nodoc
+const PROFILE_USER = 0x10000000;
+
+/// @nodoc
+const PROFILE_KERNEL = 0x20000000;
+
+/// @nodoc
+const PROFILE_SERVER = 0x40000000;
+
+/// @nodoc
+const CREATE_IGNORE_SYSTEM_DEFAULT = 0x80000000;
 
 // Process masks
 
