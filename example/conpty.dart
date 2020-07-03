@@ -1,3 +1,7 @@
+// conpty.dart
+
+// Doesn't work yet.
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
