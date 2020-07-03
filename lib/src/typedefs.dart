@@ -667,6 +667,10 @@ typedef getProcAddressNative = IntPtr Function(
 typedef getProcAddressDart = int Function(
     int hModule, Pointer<Uint8> lpProcName);
 
+// HANDLE GetProcessHeap();
+typedef getProcessHeapNative = IntPtr Function();
+typedef getProcessHeapDart = int Function();
+
 // BOOL GetSaveFileNameW(
 //   LPOPENFILENAMEW Arg1
 // );

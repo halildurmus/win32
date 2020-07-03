@@ -99,6 +99,10 @@ final GetConsoleWindow =
         'GetConsoleWindow');
 
 /// {@category kernel32}
+final GetProcessHeap = _kernel32
+    .lookupFunction<getProcessHeapNative, getProcessHeapDart>('GetProcessHeap');
+
+/// {@category kernel32}
 final GetLastError = _kernel32
     .lookupFunction<getLastErrorNative, getLastErrorDart>('GetLastError');
 
