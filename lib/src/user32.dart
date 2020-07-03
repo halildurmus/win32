@@ -56,6 +56,11 @@ final EndPaint =
     _user32.lookupFunction<endPaintNative, endPaintDart>('EndPaint');
 
 /// {@category user32}
+final EnumDisplayMonitors =
+    _user32.lookupFunction<enumDisplayMonitorsNative, enumDisplayMonitorsDart>(
+        'EnumDisplayMonitors');
+
+/// {@category user32}
 final EnumWindows =
     _user32.lookupFunction<enumWindowsNative, enumWindowsDart>('EnumWindows');
 

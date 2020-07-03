@@ -393,6 +393,17 @@ typedef endPaintNative = Int32 Function(
     IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint);
 typedef endPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
 
+// BOOL EnumDisplayMonitors(
+//   HDC             hdc,
+//   LPCRECT         lprcClip,
+//   MONITORENUMPROC lpfnEnum,
+//   LPARAM          dwData
+// );
+typedef enumDisplayMonitorsNative = Int32 Function(IntPtr hdc, Pointer lprcClip,
+    Pointer<NativeFunction> lpfnEnum, IntPtr dwData);
+typedef enumDisplayMonitorsDart = int Function(
+    int hdc, Pointer lprcClip, Pointer<NativeFunction> lpfnEnum, int dwData);
+
 // BOOL EnumProcesses(
 //   DWORD   *lpidProcess,
 //   DWORD   cb,
