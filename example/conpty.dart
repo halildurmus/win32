@@ -7,15 +7,17 @@ import 'console.dart';
 
 Pointer<IntPtr> pseudoConsoleHandle;
 Pointer attributeListPtr;
+Pointer<IntPtr> inputReadSideHandle, inputWriteSideHandle;
+Pointer<IntPtr> outputReadSideHandle, outputWriteSideHandle;
 
 final stdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 final stdIn = GetStdHandle(STD_INPUT_HANDLE);
 
 void initPseudoConsole() {
-  final inputReadSideHandle = allocate<IntPtr>();
-  final inputWriteSideHandle = allocate<IntPtr>();
-  final outputReadSideHandle = allocate<IntPtr>();
-  final outputWriteSideHandle = allocate<IntPtr>();
+  inputReadSideHandle = allocate<IntPtr>();
+  inputWriteSideHandle = allocate<IntPtr>();
+  outputReadSideHandle = allocate<IntPtr>();
+  outputWriteSideHandle = allocate<IntPtr>();
 
   if (CreatePipe(inputReadSideHandle, inputWriteSideHandle, nullptr, 0) == 0) {
     throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
@@ -92,7 +94,25 @@ void doStuff() {
   final echoString = 'echo Hello, World!\n\x1b[A\n';
   final echoStringPtr = toCString(echoString);
   final dwCharsWritten = allocate<Uint32>();
-  WriteFile(stdIn, echoStringPtr, echoString.length, dwCharsWritten, nullptr);
+  if (WriteFile(
+          stdIn, echoStringPtr, echoString.length, dwCharsWritten, nullptr) ==
+      FALSE) {
+    throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
+  }
+}
+
+void getStuff() {
+  final bufferSize = 10;
+  final buffer = allocate<Uint8>(count: bufferSize);
+  final bytesRead = allocate<Uint32>();
+  if (ReadFile(
+          inputReadSideHandle.value, buffer, bufferSize, bytesRead, nullptr) ==
+      TRUE) {
+    final read = fromCString(buffer, bytesRead.value);
+    print('Read: $read');
+  } else {
+    throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
+  }
 }
 
 void closePseudoConsole() {
@@ -113,34 +133,27 @@ void pty() {
   prepareStartupInformation();
   setupPseudoConsole();
   doStuff();
+  getStuff();
   closePseudoConsole();
 
   print('all done');
 }
 
 void test() {
-  final procInfo = PROCESS_INFORMATION.allocate();
-  final cmdString = TEXT('notepad.exe');
-  final startupInfo = STARTUPINFOEX.allocate();
-  startupInfo.lpAttributeList = nullptr;
-
-  if (CreateProcess(
-          nullptr,
-          cmdString,
-          nullptr,
-          nullptr,
-          FALSE,
-          EXTENDED_STARTUPINFO_PRESENT,
-          nullptr,
-          nullptr,
-          startupInfo.addressOf,
-          procInfo.addressOf) ==
-      0) {
+  // input an up arrow (to get the previous command), and enter again to execute.
+  final echoString = 'echo Hello, World!\n';
+  final echoStringPtr = toCString(echoString);
+  final dwCharsWritten = allocate<Uint32>();
+  print(echoString.length);
+  if (WriteFile(
+          stdIn, echoStringPtr, echoString.length, dwCharsWritten, nullptr) ==
+      FALSE) {
     throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
   }
+  print(dwCharsWritten.value);
 }
 
 void main() {
-  // test();
-  pty();
+  test();
+  // pty();
 }
