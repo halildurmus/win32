@@ -153,7 +153,7 @@ final ResizePseudoConsole = _kernel32.lookupFunction<resizePseudoConsoleNative,
 /// {@category kernel32}
 final ScrollConsoleScreenBuffer = _kernel32.lookupFunction<
     scrollConsoleScreenBufferNative,
-    scrollConsoleScreenBufferDart>('ScrollConsoleScreenBuffer');
+    scrollConsoleScreenBufferDart>('ScrollConsoleScreenBufferW');
 
 /// {@category kernel32}
 final SetConsoleCtrlHandler = _kernel32.lookupFunction<
