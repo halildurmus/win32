@@ -735,6 +735,15 @@ typedef getVolumePathNamesForVolumeNameDart = int Function(
     int cchBufferLength,
     Pointer<Uint32> lpcchReturnLength);
 
+// DECLSPEC_ALLOCATOR LPVOID HeapAlloc(
+//   HANDLE hHeap,
+//   DWORD  dwFlags,
+//   SIZE_T dwBytes
+// );
+typedef heapAllocNative = Pointer Function(
+    IntPtr hHeap, Uint32 dwflags, Uint32 dwBytes);
+typedef heapAllocDart = Pointer Function(int hHeap, int dwflags, int dwBytes);
+
 // BOOL InvalidateRect(
 //   HWND       hWnd,
 //   const RECT *lpRect,

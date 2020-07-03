@@ -129,6 +129,10 @@ final GetVolumePathNamesForVolumeName = _kernel32.lookupFunction<
     getVolumePathNamesForVolumeNameDart>('GetVolumePathNamesForVolumeNameW');
 
 /// {@category kernel32}
+final HeapAlloc =
+    _kernel32.lookupFunction<heapAllocNative, heapAllocDart>('HeapAlloc');
+
+/// {@category kernel32}
 final InitializeProcThreadAttributeList = _kernel32.lookupFunction<
     initializeProcThreadAttributeListNative,
     initializeProcThreadAttributeListDart>('InitializeProcThreadAttributeList');
