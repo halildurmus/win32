@@ -748,6 +748,15 @@ typedef heapAllocNative = Pointer Function(
     IntPtr hHeap, Uint32 dwflags, Uint32 dwBytes);
 typedef heapAllocDart = Pointer Function(int hHeap, int dwflags, int dwBytes);
 
+// BOOL HeapFree(
+//   HANDLE                 hHeap,
+//   DWORD                  dwFlags,
+//   _Frees_ptr_opt_ LPVOID lpMem
+// );
+typedef heapFreeNative = Int32 Function(
+    IntPtr hHeap, Uint32 dwFlags, Pointer lpMem);
+typedef heapFreeDart = int Function(int hHeap, int dwFlags, Pointer lpMem);
+
 // BOOL InvalidateRect(
 //   HWND       hWnd,
 //   const RECT *lpRect,

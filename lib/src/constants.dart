@@ -3241,6 +3241,42 @@ const PROCESS_SET_LIMITED_INFORMATION = 0x2000;
 /// @nodoc
 const PROCESS_ALL_ACCESS = STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | 0xFFFF;
 
+/// @nodoc
+const PROC_THREAD_ATTRIBUTE_NUMBER = 0x0000FFFF;
+
+/// @nodoc
+const PROC_THREAD_ATTRIBUTE_THREAD = 0x00010000;
+
+/// @nodoc
+const PROC_THREAD_ATTRIBUTE_INPUT = 0x00020000;
+
+/// @nodoc
+const PROC_THREAD_ATTRIBUTE_ADDITIVE = 0x00040000;
+
+/// @nodoc
+const PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE =
+    (PROC_THREAD_ATTRIBUTE_NUM.ProcThreadAttributePseudoConsole &
+            PROC_THREAD_ATTRIBUTE_NUMBER) |
+        PROC_THREAD_ATTRIBUTE_INPUT;
+
+class PROC_THREAD_ATTRIBUTE_NUM {
+  static const ProcThreadAttributeParentProcess = 0;
+  static const ProcThreadAttributeHandleList = 2;
+  static const ProcThreadAttributeGroupAffinity = 3;
+  static const ProcThreadAttributePreferredNode = 4;
+  static const ProcThreadAttributeIdealProcessor = 5;
+  static const ProcThreadAttributeUmsThread = 6;
+  static const ProcThreadAttributeMitigationPolicy = 7;
+  static const ProcThreadAttributeSecurityCapabilities = 9;
+  static const ProcThreadAttributeJobList = 13;
+  static const ProcThreadAttributeChildProcessPolicy = 14;
+  static const ProcThreadAttributeAllApplicationPackagesPolicy = 15;
+  static const ProcThreadAttributeWin32kFilter = 16;
+  static const ProcThreadAttributeSafeOpenPromptOriginClaim = 17;
+  static const ProcThreadAttributeDesktopAppPolicy = 18;
+  static const ProcThreadAttributePseudoConsole = 22;
+}
+
 // Process masks
 
 /// @nodoc

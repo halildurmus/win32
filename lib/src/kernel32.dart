@@ -137,6 +137,10 @@ final HeapAlloc =
     _kernel32.lookupFunction<heapAllocNative, heapAllocDart>('HeapAlloc');
 
 /// {@category kernel32}
+final HeapFree =
+    _kernel32.lookupFunction<heapFreeNative, heapFreeDart>('HeapFree');
+
+/// {@category kernel32}
 final InitializeProcThreadAttributeList = _kernel32.lookupFunction<
     initializeProcThreadAttributeListNative,
     initializeProcThreadAttributeListDart>('InitializeProcThreadAttributeList');
