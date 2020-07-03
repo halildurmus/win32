@@ -130,6 +130,108 @@ class SYSTEM_INFO extends Struct {
     ..wProcessorRevision = 0;
 }
 
+// typedef struct _PROCESS_INFORMATION {
+//   HANDLE hProcess;
+//   HANDLE hThread;
+//   DWORD  dwProcessId;
+//   DWORD  dwThreadId;
+// } PROCESS_INFORMATION, *PPROCESS_INFORMATION, *LPPROCESS_INFORMATION;
+class PROCESS_INFORMATION extends Struct {
+  @IntPtr()
+  int hProcess;
+  @IntPtr()
+  int hThread;
+  @Uint32()
+  int dwProcessId;
+  @Uint32()
+  int dwThreadId;
+
+  factory PROCESS_INFORMATION.allocate() => allocate<PROCESS_INFORMATION>().ref
+    ..hProcess = 0
+    ..hThread = 0
+    ..dwProcessId = 0
+    ..dwThreadId = 0;
+}
+
+// typedef struct _STARTUPINFOW {
+//   DWORD  cb;
+//   LPWSTR lpReserved;
+//   LPWSTR lpDesktop;
+//   LPWSTR lpTitle;
+//   DWORD  dwX;
+//   DWORD  dwY;
+//   DWORD  dwXSize;
+//   DWORD  dwYSize;
+//   DWORD  dwXCountChars;
+//   DWORD  dwYCountChars;
+//   DWORD  dwFillAttribute;
+//   DWORD  dwFlags;
+//   WORD   wShowWindow;
+//   WORD   cbReserved2;
+//   LPBYTE lpReserved2;
+//   HANDLE hStdInput;
+//   HANDLE hStdOutput;
+//   HANDLE hStdError;
+// } STARTUPINFOW, *LPSTARTUPINFOW;
+
+/// STARTUPINFO
+///
+/// {@category Struct}
+class STARTUPINFO extends Struct {
+  @Uint32()
+  int cb;
+  Pointer<Utf16> lpReserved;
+  Pointer<Utf16> lpDesktop;
+  Pointer<Utf16> lpTitle;
+  @Uint32()
+  int dwX;
+  @Uint32()
+  int dwY;
+  @Uint32()
+  int dwXSize;
+  @Uint32()
+  int dwYSize;
+  @Uint32()
+  int dwXCountChars;
+  @Uint32()
+  int dwYCountChars;
+  @Uint32()
+  int dwFillAttribute;
+  @Uint32()
+  int dwFlags;
+  @Uint16()
+  int wShowWindow;
+  @Uint16()
+  int cbReserved2;
+  Pointer<Uint8> lpReserved2;
+  @IntPtr()
+  int hStdInput;
+  @IntPtr()
+  int hStdOutput;
+  @IntPtr()
+  int hStdError;
+
+  factory STARTUPINFO.allocate() => allocate<STARTUPINFO>().ref
+    ..cb = 0
+    ..lpReserved = nullptr
+    ..lpDesktop = nullptr
+    ..lpTitle = nullptr
+    ..dwX = 0
+    ..dwY = 0
+    ..dwXSize = 0
+    ..dwYSize = 0
+    ..dwXCountChars = 0
+    ..dwYCountChars = 0
+    ..dwFillAttribute = 0
+    ..dwFlags = 0
+    ..wShowWindow = 0
+    ..cbReserved2 = 0
+    ..lpReserved2 = nullptr
+    ..hStdInput = 0
+    ..hStdOutput = 0
+    ..hStdError = 0;
+}
+
 // typedef struct _SECURITY_ATTRIBUTES {
 //   DWORD  nLength;
 //   LPVOID lpSecurityDescriptor;

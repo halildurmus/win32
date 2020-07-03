@@ -233,6 +233,41 @@ typedef createPipeDart = int Function(
     Pointer<SECURITY_ATTRIBUTES> lpPipeAttributes,
     int nSize);
 
+// BOOL CreateProcessW(
+//   LPCWSTR               lpApplicationName,
+//   LPWSTR                lpCommandLine,
+//   LPSECURITY_ATTRIBUTES lpProcessAttributes,
+//   LPSECURITY_ATTRIBUTES lpThreadAttributes,
+//   BOOL                  bInheritHandles,
+//   DWORD                 dwCreationFlags,
+//   LPVOID                lpEnvironment,
+//   LPCWSTR               lpCurrentDirectory,
+//   LPSTARTUPINFOW        lpStartupInfo,
+//   LPPROCESS_INFORMATION lpProcessInformation
+// );
+typedef createProcessNative = Int32 Function(
+    Pointer<Utf16> lpApplicationName,
+    Pointer<Utf16> lpCommandLine,
+    Pointer<SECURITY_ATTRIBUTES> lpProcessAttributes,
+    Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+    Int32 bInheritHandles,
+    Uint32 dwCreationFlags,
+    Pointer lpEnvironment,
+    Pointer<Utf16> lpCurrentDirectory,
+    Pointer<STARTUPINFO> lpStartupInfo,
+    Pointer<PROCESS_INFORMATION> lpProcessInformation);
+typedef createProcessDart = int Function(
+    Pointer<Utf16> lpApplicationName,
+    Pointer<Utf16> lpCommandLine,
+    Pointer<SECURITY_ATTRIBUTES> lpProcessAttributes,
+    Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+    int bInheritHandles,
+    int dwCreationFlags,
+    Pointer lpEnvironment,
+    Pointer<Utf16> lpCurrentDirectory,
+    Pointer<STARTUPINFO> lpStartupInfo,
+    Pointer<PROCESS_INFORMATION> lpProcessInformation);
+
 // HRESULT WINAPI CreatePseudoConsole(
 //   _In_ COORD size,
 //   _In_ HANDLE hInput,
@@ -734,6 +769,23 @@ typedef iidFromStringNative = Int32 Function(
     Pointer<Utf16> lpsz, Pointer<GUID> lpiid);
 typedef iidFromStringDart = int Function(
     Pointer<Utf16> lpsz, Pointer<GUID> lpiid);
+
+// BOOL InitializeProcThreadAttributeList(
+//   LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,
+//   DWORD                        dwAttributeCount,
+//   DWORD                        dwFlags,
+//   PSIZE_T                      lpSize
+// );
+typedef initializeProcThreadAttributeListNative = Int32 Function(
+    Pointer lpAttributeList,
+    Uint32 dwAttributeCount,
+    Uint32 dwFlags,
+    Pointer<IntPtr> lpSize);
+typedef initializeProcThreadAttributeListDart = int Function(
+    Pointer lpAttributeList,
+    int dwAttributeCount,
+    int dwFlags,
+    Pointer<IntPtr> lpSize);
 
 // BOOL IsClipboardFormatAvailable(
 //   UINT format
@@ -1299,6 +1351,32 @@ typedef translateMessageDart = int Function(Pointer<MSG> lpMsg);
 // );
 typedef postQuitMessageNative = Void Function(Int32 nExitCode);
 typedef postQuitMessageDart = void Function(int nExitCode);
+
+// BOOL UpdateProcThreadAttribute(
+//   LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,
+//   DWORD                        dwFlags,
+//   DWORD_PTR                    Attribute,
+//   PVOID                        lpValue,
+//   SIZE_T                       cbSize,
+//   PVOID                        lpPreviousValue,
+//   PSIZE_T                      lpReturnSize
+// );
+typedef updateProcThreadAttributeNative = Int32 Function(
+    Pointer lpAttributeList,
+    Uint32 dwFlags,
+    Pointer<Uint32> Attribute,
+    Pointer lpValue,
+    IntPtr cbSize,
+    Pointer lpPreviousValue,
+    Pointer<IntPtr> lpReturnSize);
+typedef updateProcThreadAttributeDart = int Function(
+    Pointer lpAttributeList,
+    int dwFlags,
+    Pointer<Uint32> Attribute,
+    Pointer lpValue,
+    int cbSize,
+    Pointer lpPreviousValue,
+    Pointer<IntPtr> lpReturnSize);
 
 // BOOL UpdateWindow(
 //   HWND hWnd

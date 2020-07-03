@@ -34,7 +34,7 @@
   EnumProcessModules, GetModuleBaseName, GetModuleFileNameExt, OpenProcess,
   ReadProcessMemory and WriteProcessMemory.
 - Add modules.dart sample
-- Lots of refactoring and tidy up work. 
+- Lots of refactoring and tidy up work.
 
 ## 1.5.1
 
@@ -85,7 +85,7 @@
 
 ## 1.2.6
 
-- Add window enumeration (FindWindowEx, EnumWindows, IsWindowVisible, 
+- Add window enumeration (FindWindowEx, EnumWindows, IsWindowVisible,
   GetWindowText, GetWindowTextLength) and example
 
 ## 1.2.5
