@@ -14,6 +14,11 @@ final DestroyPhysicalMonitor = _dxva2.lookupFunction<
     destroyPhysicalMonitorDart>('DestroyPhysicalMonitor');
 
 /// {@category dxva2}
+final DestroyPhysicalMonitors = _dxva2.lookupFunction<
+    destroyPhysicalMonitorsNative,
+    destroyPhysicalMonitorsDart>('DestroyPhysicalMonitors');
+
+/// {@category dxva2}
 final GetMonitorBrightness =
     _dxva2.lookupFunction<getMonitorBrightnessNative, getMonitorBrightnessDart>(
         'GetMonitorBrightness');
@@ -57,6 +62,12 @@ final GetMonitorRedGreenOrBlueGain = _dxva2.lookupFunction<
 final GetMonitorTechnologyType = _dxva2.lookupFunction<
     getMonitorTechnologyTypeNative,
     getMonitorTechnologyTypeDart>('GetMonitorTechnologyType');
+
+/// {@category dxva2}
+final GetNumberOfPhysicalMonitorsFromHMONITOR = _dxva2.lookupFunction<
+        getNumberOfPhysicalMonitorsFromHMONITORNative,
+        getNumberOfPhysicalMonitorsFromHMONITORDart>(
+    'GetNumberOfPhysicalMonitorsFromHMONITOR');
 
 /// {@category dxva2}
 final GetPhysicalMonitorsFromHMONITOR = _dxva2.lookupFunction<

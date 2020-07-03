@@ -51,58 +51,92 @@ void main() {
   final primaryMonitorHandle = findPrimaryMonitor(monitors);
   print('primary monitor: $primaryMonitorHandle');
 
-  final monitorCapabilities = allocate<Uint32>();
-  final monitorColorTemperatures = allocate<Uint32>();
+  final physicalMonitorCountPtr = allocate<Uint32>();
+  result = GetNumberOfPhysicalMonitorsFromHMONITOR(
+      primaryMonitorHandle, physicalMonitorCountPtr);
+  if (result == FALSE) {
+    throw WindowsException(result);
+  }
+  print('number of physical monitors: ${physicalMonitorCountPtr.value}');
 
-  result = GetMonitorCapabilities(
-      primaryMonitorHandle, monitorCapabilities, monitorColorTemperatures);
+  // We need to allocate space for a PHYSICAL_MONITOR struct for each physical
+  // monitor. Each struct comprises a HANDLE and a 128-character UTF-16 array.
+  // Since fixed-size arrays are difficult to allocate with Dart FFI at present,
+  // and since we only need the first entry, we can manually allocate space of
+  // the right size.
+  final physicalMonitorArray = allocate<Uint8>(
+      count: physicalMonitorCountPtr.value * (sizeOf<IntPtr>() + 256));
+
+  GetPhysicalMonitorsFromHMONITOR(primaryMonitorHandle,
+      physicalMonitorCountPtr.value, physicalMonitorArray);
+
+  // Retrieve the monitor handle for the first physical monitor in the returned
+  // array.
+  final physicalMonitorHandle = physicalMonitorArray.cast<IntPtr>().value;
+
+  final monitorCapabilitiesPtr = allocate<Uint32>();
+  final monitorColorTemperaturesPtr = allocate<Uint32>();
+
+  result = GetMonitorCapabilities(physicalMonitorHandle, monitorCapabilitiesPtr,
+      monitorColorTemperaturesPtr);
   if (result == TRUE) {
-    print('capabilities: ${monitorCapabilities.value}');
+    print('capabilities: ${monitorCapabilitiesPtr.value}');
   }
 
-  final minimumBrightness = allocate<Uint32>();
-  final currentBrightness = allocate<Uint32>();
-  final maximumBrightness = allocate<Uint32>();
-  result = GetMonitorBrightness(primaryMonitorHandle, minimumBrightness,
-      currentBrightness, maximumBrightness);
+  final minimumBrightnessPtr = allocate<Uint32>();
+  final currentBrightnessPtr = allocate<Uint32>();
+  final maximumBrightnessPtr = allocate<Uint32>();
+  result = GetMonitorBrightness(physicalMonitorHandle, minimumBrightnessPtr,
+      currentBrightnessPtr, maximumBrightnessPtr);
   if (result == TRUE) {
-    print('brightness: minimum(${minimumBrightness.value}), '
-        'current(${currentBrightness.value}), '
-        'maximum(${maximumBrightness.value})');
+    print('brightness: minimum(${minimumBrightnessPtr.value}), '
+        'current(${currentBrightnessPtr.value}), '
+        'maximum(${maximumBrightnessPtr.value})');
   }
 
-  final minimumHeight = allocate<Uint32>();
-  final currentHeight = allocate<Uint32>();
-  final maximumHeight = allocate<Uint32>();
-  result = GetMonitorDisplayAreaSize(primaryMonitorHandle,
-      MC_SIZE_TYPE.MC_HEIGHT, minimumHeight, currentHeight, maximumHeight);
+  final minimumHeightPtr = allocate<Uint32>();
+  final currentHeightPtr = allocate<Uint32>();
+  final maximumHeightPtr = allocate<Uint32>();
+  result = GetMonitorDisplayAreaSize(
+      physicalMonitorHandle,
+      MC_SIZE_TYPE.MC_HEIGHT,
+      minimumHeightPtr,
+      currentHeightPtr,
+      maximumHeightPtr);
   if (result == TRUE) {
-    print('height: minimum(${minimumHeight.value}), '
-        'current(${currentHeight.value}), '
-        'maximum(${maximumHeight.value})');
+    print('height: minimum(${minimumHeightPtr.value}), '
+        'current(${currentHeightPtr.value}), '
+        'maximum(${maximumHeightPtr.value})');
   }
 
-  final minimumWidth = allocate<Uint32>();
-  final currentWidth = allocate<Uint32>();
-  final maximumWidth = allocate<Uint32>();
-  result = GetMonitorDisplayAreaSize(primaryMonitorHandle,
-      MC_SIZE_TYPE.MC_HEIGHT, minimumWidth, currentWidth, maximumWidth);
+  final minimumWidthPtr = allocate<Uint32>();
+  final currentWidthPtr = allocate<Uint32>();
+  final maximumWidthPtr = allocate<Uint32>();
+  result = GetMonitorDisplayAreaSize(
+      physicalMonitorHandle,
+      MC_SIZE_TYPE.MC_HEIGHT,
+      minimumWidthPtr,
+      currentWidthPtr,
+      maximumWidthPtr);
   if (result == TRUE) {
-    print('width: minimum(${minimumWidth.value}), '
-        'current(${currentWidth.value}), '
-        'maximum(${maximumWidth.value})');
+    print('width: minimum(${minimumWidthPtr.value}), '
+        'current(${currentWidthPtr.value}), '
+        'maximum(${maximumWidthPtr.value})');
   }
+
+  DestroyPhysicalMonitors(physicalMonitorCountPtr.value, physicalMonitorArray);
 
   // free all the heap-allocated variables
-  free(monitorCapabilities);
-  free(monitorColorTemperatures);
-  free(minimumBrightness);
-  free(currentBrightness);
-  free(maximumBrightness);
-  free(minimumHeight);
-  free(currentHeight);
-  free(maximumHeight);
-  free(minimumWidth);
-  free(currentWidth);
-  free(maximumWidth);
+  free(physicalMonitorCountPtr);
+  free(monitorCapabilitiesPtr);
+  free(monitorColorTemperaturesPtr);
+  free(minimumBrightnessPtr);
+  free(currentBrightnessPtr);
+  free(maximumBrightnessPtr);
+  free(minimumHeightPtr);
+  free(currentHeightPtr);
+  free(maximumHeightPtr);
+  free(minimumWidthPtr);
+  free(currentWidthPtr);
+  free(maximumWidthPtr);
 }

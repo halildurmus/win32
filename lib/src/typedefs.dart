@@ -351,6 +351,15 @@ typedef deleteObjectDart = int Function(int ho);
 typedef destroyPhysicalMonitorNative = Int32 Function(IntPtr hMonitor);
 typedef destroyPhysicalMonitorDart = int Function(int hMonitor);
 
+// _BOOL DestroyPhysicalMonitors(
+//   DWORD              dwPhysicalMonitorArraySize,
+//   LPPHYSICAL_MONITOR pPhysicalMonitorArray
+// );
+typedef destroyPhysicalMonitorsNative = Int32 Function(
+    Uint32 dwPhysicalMonitorArraySize, Pointer pPhysicalMonitorArray);
+typedef destroyPhysicalMonitorsDart = int Function(
+    int dwPhysicalMonitorArraySize, Pointer pPhysicalMonitorArray);
+
 // BOOL DestroyWindow(
 //   HWND hWnd
 // );
@@ -815,6 +824,15 @@ typedef getMonitorInfoNative = Int32 Function(
     IntPtr hMonitor, Pointer<MONITORINFO> lpmi);
 typedef getMonitorInfoDart = int Function(
     int hMonitor, Pointer<MONITORINFO> lpmi);
+
+// _BOOL GetNumberOfPhysicalMonitorsFromHMONITOR(
+//   HMONITOR hMonitor,
+//   LPDWORD  pdwNumberOfPhysicalMonitors
+// );
+typedef getNumberOfPhysicalMonitorsFromHMONITORNative = Int32 Function(
+    IntPtr hMonitor, Pointer<Uint32> pdwNumberOfPhysicalMonitors);
+typedef getNumberOfPhysicalMonitorsFromHMONITORDart = int Function(
+    int hMonitor, Pointer<Uint32> pdwNumberOfPhysicalMonitors);
 
 // int GetObject(
 //   HANDLE h,
