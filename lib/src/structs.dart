@@ -232,6 +232,71 @@ class STARTUPINFO extends Struct {
     ..hStdError = 0;
 }
 
+// typedef struct _STARTUPINFOEXW {
+//   STARTUPINFOW                 StartupInfo;
+//   LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList;
+// } STARTUPINFOEXW, *LPSTARTUPINFOEXW;
+
+/// STARTUPINFOEX
+///
+/// {@category Struct}
+class STARTUPINFOEX extends Struct {
+  @Uint32()
+  int cb;
+  Pointer<Utf16> lpReserved;
+  Pointer<Utf16> lpDesktop;
+  Pointer<Utf16> lpTitle;
+  @Uint32()
+  int dwX;
+  @Uint32()
+  int dwY;
+  @Uint32()
+  int dwXSize;
+  @Uint32()
+  int dwYSize;
+  @Uint32()
+  int dwXCountChars;
+  @Uint32()
+  int dwYCountChars;
+  @Uint32()
+  int dwFillAttribute;
+  @Uint32()
+  int dwFlags;
+  @Uint16()
+  int wShowWindow;
+  @Uint16()
+  int cbReserved2;
+  Pointer<Uint8> lpReserved2;
+  @IntPtr()
+  int hStdInput;
+  @IntPtr()
+  int hStdOutput;
+  @IntPtr()
+  int hStdError;
+  Pointer lpAttributeList;
+
+  factory STARTUPINFOEX.allocate() => allocate<STARTUPINFOEX>().ref
+    ..cb = 0
+    ..lpReserved = nullptr
+    ..lpDesktop = nullptr
+    ..lpTitle = nullptr
+    ..dwX = 0
+    ..dwY = 0
+    ..dwXSize = 0
+    ..dwYSize = 0
+    ..dwXCountChars = 0
+    ..dwYCountChars = 0
+    ..dwFillAttribute = 0
+    ..dwFlags = 0
+    ..wShowWindow = 0
+    ..cbReserved2 = 0
+    ..lpReserved2 = nullptr
+    ..hStdInput = 0
+    ..hStdOutput = 0
+    ..hStdError = 0
+    ..lpAttributeList = nullptr;
+}
+
 // typedef struct _SECURITY_ATTRIBUTES {
 //   DWORD  nLength;
 //   LPVOID lpSecurityDescriptor;
