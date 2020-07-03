@@ -3501,6 +3501,58 @@ const MONITOR_DEFAULTTONEAREST = 0x00000002;
 
 const MONITORINFOF_PRIMARY = 0x00000001;
 
+/// {@category Enum}
+class MC_COLOR_TEMPERATURE {
+  static const MC_COLOR_TEMPERATURE_UNKNOWN = 0;
+  static const MC_COLOR_TEMPERATURE_4000K = 1;
+  static const MC_COLOR_TEMPERATURE_5000K = 2;
+  static const MC_COLOR_TEMPERATURE_6500K = 3;
+  static const MC_COLOR_TEMPERATURE_7500K = 4;
+  static const MC_COLOR_TEMPERATURE_8200K = 5;
+  static const MC_COLOR_TEMPERATURE_9300K = 6;
+  static const MC_COLOR_TEMPERATURE_10000K = 7;
+  static const MC_COLOR_TEMPERATURE_11500K = 8;
+}
+
+/// {@category Enum}
+class MC_DISPLAY_TECHNOLOGY_TYPE {
+  static const MC_SHADOW_MASK_CATHODE_RAY_TUBE = 0;
+  static const MC_APERTURE_GRILL_CATHODE_RAY_TUBE = 1;
+  static const MC_THIN_FILM_TRANSISTOR = 2;
+  static const MC_LIQUID_CRYSTAL_ON_SILICON = 3;
+  static const MC_PLASMA = 4;
+  static const MC_ORGANIC_LIGHT_EMITTING_DIODE = 5;
+  static const MC_ELECTROLUMINESCENT = 6;
+  static const MC_MICROELECTROMECHANICAL = 7;
+  static const MC_FIELD_EMISSION_DEVICE = 8;
+}
+
+/// {@category Enum}
+class MC_DRIVE_TYPE {
+  static const MC_RED_DRIVE = 0;
+  static const MC_GREEN_DRIVE = 1;
+  static const MC_BLUE_DRIVE = 2;
+}
+
+/// {@category Enum}
+class MC_GAIN_TYPE {
+  static const MC_RED_GAIN = 0;
+  static const MC_GREEN_GAIN = 1;
+  static const MC_BLUE_GAIN = 2;
+}
+
+/// {@category Enum}
+class MC_POSITION_TYPE {
+  static const MC_HORIZONTAL_POSITION = 0;
+  static const MC_VERTICAL_POSITION = 1;
+}
+
+/// {@category Enum}
+class MC_SIZE_TYPE {
+  static const MC_WIDTH = 0;
+  static const MC_HEIGHT = 1;
+}
+
 // *** COM CONSTANTS ***
 
 /// @nodoc

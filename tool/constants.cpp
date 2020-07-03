@@ -13,10 +13,10 @@
 #include <ShlObj_core.h>
 #include <wbemidl.h>
 #include <netlistmgr.h>
+#include <highlevelmonitorconfigurationapi.h>
 
 void main()
 {
-    auto c = MONITORINFOF_PRIMARY;
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));
     printf("sizeof(long) is %zu\n", sizeof(long));
