@@ -85,7 +85,7 @@
 
 ## 1.2.6
 
-- Add window enumeration (FindWindowEx, EnumWindows, IsWindowVisible, 
+- Add window enumeration (FindWindowEx, EnumWindows, IsWindowVisible,
   GetWindowText, GetWindowTextLength) and example
 
 ## 1.2.5
