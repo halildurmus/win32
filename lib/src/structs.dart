@@ -212,7 +212,7 @@ class STARTUPINFO extends Struct {
   int hStdError;
 
   factory STARTUPINFO.allocate() => allocate<STARTUPINFO>().ref
-    ..cb = 0
+    ..cb = sizeOf<STARTUPINFO>()
     ..lpReserved = nullptr
     ..lpDesktop = nullptr
     ..lpTitle = nullptr
@@ -276,7 +276,7 @@ class STARTUPINFOEX extends Struct {
   Pointer lpAttributeList;
 
   factory STARTUPINFOEX.allocate() => allocate<STARTUPINFOEX>().ref
-    ..cb = 0
+    ..cb = sizeOf<STARTUPINFOEX>()
     ..lpReserved = nullptr
     ..lpDesktop = nullptr
     ..lpTitle = nullptr

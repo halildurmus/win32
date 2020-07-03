@@ -1386,7 +1386,7 @@ typedef postQuitMessageDart = void Function(int nExitCode);
 typedef updateProcThreadAttributeNative = Int32 Function(
     Pointer lpAttributeList,
     Uint32 dwFlags,
-    Pointer<Uint32> Attribute,
+    IntPtr Attribute,
     Pointer lpValue,
     IntPtr cbSize,
     Pointer lpPreviousValue,
@@ -1394,7 +1394,7 @@ typedef updateProcThreadAttributeNative = Int32 Function(
 typedef updateProcThreadAttributeDart = int Function(
     Pointer lpAttributeList,
     int dwFlags,
-    Pointer<Uint32> Attribute,
+    int Attribute,
     Pointer lpValue,
     int cbSize,
     Pointer lpPreviousValue,

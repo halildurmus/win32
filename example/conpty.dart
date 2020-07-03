@@ -36,34 +36,38 @@ void initPseudoConsole() {
 
 void prepareStartupInformation() {
   final bytesRequired = allocate<IntPtr>();
-  InitializeProcThreadAttributeList(nullptr, 1, 0, bytesRequired);
 
-  attributeListPtr = HeapAlloc(GetProcessHeap(), 0, bytesRequired.value);
-  if (attributeListPtr.address == 0) {
-    throw OutOfMemoryError();
-  }
+  // returns an error by design on the first call, per Win32 docs
+  InitializeProcThreadAttributeList(nullptr, 1, 0, bytesRequired);
+  print('required: ${bytesRequired.value}');
+
+  attributeListPtr = allocate<Uint8>(count: bytesRequired.value);
 
   if (InitializeProcThreadAttributeList(
           attributeListPtr, 1, 0, bytesRequired) ==
       0) {
-    HeapFree(GetProcessHeap(), 0, attributeListPtr);
     throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
   }
 
-  UpdateProcThreadAttribute(
-      attributeListPtr,
-      0,
-      Pointer.fromAddress(PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE),
-      pseudoConsoleHandle,
-      sizeOf<IntPtr>(),
-      nullptr,
-      nullptr);
+  print('pseudoConsoleHandle: ${pseudoConsoleHandle.value}');
+  if (UpdateProcThreadAttribute(
+          attributeListPtr,
+          0,
+          PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE,
+          pseudoConsoleHandle,
+          sizeOf<IntPtr>(),
+          nullptr,
+          nullptr) ==
+      0) {
+    throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
+  }
 }
 
 void setupPseudoConsole() {
   final procInfo = PROCESS_INFORMATION.allocate();
-  final cmdString = TEXT('c:\\windows\\system32\\cmd.exe');
+  final cmdString = TEXT('cmd.exe');
   final startupInfo = STARTUPINFOEX.allocate();
+  print('STARTUPINFOEX is ${sizeOf<STARTUPINFOEX>()}');
   startupInfo.lpAttributeList = attributeListPtr;
 
   if (CreateProcess(
@@ -92,10 +96,11 @@ void doStuff() {
 }
 
 void closePseudoConsole() {
+  // DeleteProcThreadAttributeList(attributeListPtr);
   ClosePseudoConsole(pseudoConsoleHandle);
 }
 
-void main() {
+void pty() {
   final consoleMode = allocate<Uint32>();
   GetConsoleMode(stdOut, consoleMode);
   var hr = SetConsoleMode(
@@ -111,4 +116,31 @@ void main() {
   closePseudoConsole();
 
   print('all done');
+}
+
+void test() {
+  final procInfo = PROCESS_INFORMATION.allocate();
+  final cmdString = TEXT('notepad.exe');
+  final startupInfo = STARTUPINFOEX.allocate();
+  startupInfo.lpAttributeList = nullptr;
+
+  if (CreateProcess(
+          nullptr,
+          cmdString,
+          nullptr,
+          nullptr,
+          FALSE,
+          EXTENDED_STARTUPINFO_PRESENT,
+          nullptr,
+          nullptr,
+          startupInfo.addressOf,
+          procInfo.addressOf) ==
+      0) {
+    throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
+  }
+}
+
+void main() {
+  // test();
+  pty();
 }
