@@ -32,6 +32,26 @@ int findPrimaryMonitor(List<int> monitors) {
   return 0;
 }
 
+bool testBitmask(int bitmask, int value) => bitmask & value == value;
+
+void printMonitorCapabilities(int capabilitiesBitmask) {
+  if (capabilitiesBitmask == MC_CAPS_NONE) {
+    print(' - No capabilities supported');
+  }
+  if (testBitmask(capabilitiesBitmask, MC_CAPS_MONITOR_TECHNOLOGY_TYPE)) {
+    print(' - Supports technology type functions');
+  }
+  if (testBitmask(capabilitiesBitmask, MC_CAPS_BRIGHTNESS)) {
+    print(' - Supports brightness functions');
+  }
+  if (testBitmask(capabilitiesBitmask, MC_CAPS_CONTRAST)) {
+    print(' - Supports contrast functions');
+  }
+  if (testBitmask(capabilitiesBitmask, MC_CAPS_COLOR_TEMPERATURE)) {
+    print(' - Supports color temperature functions');
+  }
+}
+
 void main() {
   var result = FALSE;
 
@@ -49,7 +69,7 @@ void main() {
   print('number of monitors: ${monitors.length}');
 
   final primaryMonitorHandle = findPrimaryMonitor(monitors);
-  print('primary monitor: $primaryMonitorHandle');
+  print('primary monitor handle: $primaryMonitorHandle');
 
   final physicalMonitorCountPtr = allocate<Uint32>();
   result = GetNumberOfPhysicalMonitorsFromHMONITOR(
@@ -67,12 +87,21 @@ void main() {
   final physicalMonitorArray = allocate<Uint8>(
       count: physicalMonitorCountPtr.value * (sizeOf<IntPtr>() + 256));
 
-  GetPhysicalMonitorsFromHMONITOR(primaryMonitorHandle,
+  result = GetPhysicalMonitorsFromHMONITOR(primaryMonitorHandle,
       physicalMonitorCountPtr.value, physicalMonitorArray);
+  if (result == FALSE) {
+    throw WindowsException(result);
+  }
 
   // Retrieve the monitor handle for the first physical monitor in the returned
   // array.
   final physicalMonitorHandle = physicalMonitorArray.cast<IntPtr>().value;
+  print('physical monitor handle: $physicalMonitorHandle');
+  final physicalMonitorDescription = physicalMonitorArray
+      .elementAt(sizeOf<IntPtr>())
+      .cast<Utf16>()
+      .unpackString(128);
+  print('physical monitor description: $physicalMonitorDescription');
 
   final monitorCapabilitiesPtr = allocate<Uint32>();
   final monitorColorTemperaturesPtr = allocate<Uint32>();
@@ -80,7 +109,10 @@ void main() {
   result = GetMonitorCapabilities(physicalMonitorHandle, monitorCapabilitiesPtr,
       monitorColorTemperaturesPtr);
   if (result == TRUE) {
-    print('capabilities: ${monitorCapabilitiesPtr.value}');
+    print('capabilities: ');
+    printMonitorCapabilities(monitorCapabilitiesPtr.value);
+  } else {
+    print('Monitor does not support DDC/CI.');
   }
 
   final minimumBrightnessPtr = allocate<Uint32>();
@@ -94,49 +126,14 @@ void main() {
         'maximum(${maximumBrightnessPtr.value})');
   }
 
-  final minimumHeightPtr = allocate<Uint32>();
-  final currentHeightPtr = allocate<Uint32>();
-  final maximumHeightPtr = allocate<Uint32>();
-  result = GetMonitorDisplayAreaSize(
-      physicalMonitorHandle,
-      MC_SIZE_TYPE.MC_HEIGHT,
-      minimumHeightPtr,
-      currentHeightPtr,
-      maximumHeightPtr);
-  if (result == TRUE) {
-    print('height: minimum(${minimumHeightPtr.value}), '
-        'current(${currentHeightPtr.value}), '
-        'maximum(${maximumHeightPtr.value})');
-  }
-
-  final minimumWidthPtr = allocate<Uint32>();
-  final currentWidthPtr = allocate<Uint32>();
-  final maximumWidthPtr = allocate<Uint32>();
-  result = GetMonitorDisplayAreaSize(
-      physicalMonitorHandle,
-      MC_SIZE_TYPE.MC_HEIGHT,
-      minimumWidthPtr,
-      currentWidthPtr,
-      maximumWidthPtr);
-  if (result == TRUE) {
-    print('width: minimum(${minimumWidthPtr.value}), '
-        'current(${currentWidthPtr.value}), '
-        'maximum(${maximumWidthPtr.value})');
-  }
-
   DestroyPhysicalMonitors(physicalMonitorCountPtr.value, physicalMonitorArray);
 
   // free all the heap-allocated variables
   free(physicalMonitorCountPtr);
+  free(physicalMonitorArray);
   free(monitorCapabilitiesPtr);
   free(monitorColorTemperaturesPtr);
   free(minimumBrightnessPtr);
   free(currentBrightnessPtr);
   free(maximumBrightnessPtr);
-  free(minimumHeightPtr);
-  free(currentHeightPtr);
-  free(maximumHeightPtr);
-  free(minimumWidthPtr);
-  free(currentWidthPtr);
-  free(maximumWidthPtr);
 }
