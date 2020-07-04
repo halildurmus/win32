@@ -51,13 +51,15 @@ int enumMonitorCallback(int hMonitor, int hDC, Pointer lpRect, int lParam) {
   return TRUE;
 }
 
+bool testBitmask(int bitmask, int value) => bitmask & value == value;
+
 int findPrimaryMonitor(List<int> monitors) {
   final monitorInfo = MONITORINFO.allocate();
 
   for (var monitor in monitors) {
     final result = GetMonitorInfo(monitor, monitorInfo.addressOf);
     if (result == TRUE) {
-      if (monitorInfo.dwFlags & MONITORINFOF_PRIMARY == MONITORINFOF_PRIMARY) {
+      if (testBitmask(monitorInfo.dwFlags, MONITORINFOF_PRIMARY)) {
         free(monitorInfo.addressOf);
         return monitor;
       }
@@ -67,8 +69,6 @@ int findPrimaryMonitor(List<int> monitors) {
   free(monitorInfo.addressOf);
   return 0;
 }
-
-bool testBitmask(int bitmask, int value) => bitmask & value == value;
 
 void printMonitorCapabilities(int capabilitiesBitmask) {
   if (capabilitiesBitmask == MC_CAPS_NONE) {
