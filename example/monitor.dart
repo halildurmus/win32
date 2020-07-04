@@ -3,6 +3,34 @@
 // Shows retrieval of various information from the high-level monitor
 // configuration API.
 
+// Some examples of output:
+//
+// 1) two physical monitors connected in extended mode
+// ```
+// C:\src\win32> dart example\monitor.dart
+// number of monitors: 2
+// primary monitor handle: 132205
+// number of physical monitors: 1
+// physical monitor handle: 0
+// physical monitor description: Generic PnP Monitor
+// capabilities:
+//  - Supports technology type functions
+//  - Supports brightness functions
+//  - Supports contrast functions
+// brightness: minimum(0), current(75), maximum(100)
+// ```
+//
+// 2) a single LCD monitor that does not support DDC
+// ```
+// C:\src\win32> dart example\monitor.dart
+// number of monitors: 1
+// primary monitor handle: 1312117
+// number of physical monitors: 1
+// physical monitor handle: 0
+// physical monitor description: LCD 1366x768
+// Monitor does not support DDC/CI.
+// ```
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
