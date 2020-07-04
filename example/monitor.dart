@@ -8,27 +8,35 @@
 // 1) two physical monitors connected in extended mode
 // ```
 // C:\src\win32> dart example\monitor.dart
-// number of monitors: 2
-// primary monitor handle: 132205
-// number of physical monitors: 1
-// physical monitor handle: 0
-// physical monitor description: Generic PnP Monitor
-// capabilities:
+// Number of monitors: 2
+// Primary monitor handle: 132205
+// Number of physical monitors: 1
+// Physical monitor handle: 0
+// Physical monitor description: Generic PnP Monitor
+// Capabilities:
 //  - Supports technology type functions
 //  - Supports brightness functions
 //  - Supports contrast functions
-// brightness: minimum(0), current(75), maximum(100)
+// Brightness: minimum(0), current(75), maximum(100)
 // ```
 //
 // 2) a single LCD monitor that does not support DDC
 // ```
 // C:\src\win32> dart example\monitor.dart
-// number of monitors: 1
-// primary monitor handle: 1312117
-// number of physical monitors: 1
-// physical monitor handle: 0
-// physical monitor description: LCD 1366x768
+// Number of monitors: 1
+// Primary monitor handle: 1312117
+// Number of physical monitors: 1
+// Physical monitor handle: 0
+// Physical monitor description: LCD 1366x768
 // Monitor does not support DDC/CI.
+// ```
+//
+// 3) connected via SSH to a remote machine
+// ```
+// C:\src\win32> dart example\monitor.dart
+// Number of monitors: 1
+// Primary monitor handle: 65537
+// No physical monitors attached.
 // ```
 
 import 'dart:ffi';
@@ -94,18 +102,21 @@ void main() {
     throw WindowsException(result);
   }
 
-  print('number of monitors: ${monitors.length}');
+  print('Number of monitors: ${monitors.length}');
 
   final primaryMonitorHandle = findPrimaryMonitor(monitors);
-  print('primary monitor handle: $primaryMonitorHandle');
+  print('Primary monitor handle: $primaryMonitorHandle');
 
   final physicalMonitorCountPtr = allocate<Uint32>();
   result = GetNumberOfPhysicalMonitorsFromHMONITOR(
       primaryMonitorHandle, physicalMonitorCountPtr);
   if (result == FALSE) {
-    throw WindowsException(result);
+    print('No physical monitors attached.');
+    free(physicalMonitorCountPtr);
+    return;
   }
-  print('number of physical monitors: ${physicalMonitorCountPtr.value}');
+
+  print('Number of physical monitors: ${physicalMonitorCountPtr.value}');
 
   // We need to allocate space for a PHYSICAL_MONITOR struct for each physical
   // monitor. Each struct comprises a HANDLE and a 128-character UTF-16 array.
@@ -120,16 +131,15 @@ void main() {
   if (result == FALSE) {
     throw WindowsException(result);
   }
-
   // Retrieve the monitor handle for the first physical monitor in the returned
   // array.
   final physicalMonitorHandle = physicalMonitorArray.cast<IntPtr>().value;
-  print('physical monitor handle: $physicalMonitorHandle');
+  print('Physical monitor handle: $physicalMonitorHandle');
   final physicalMonitorDescription = physicalMonitorArray
       .elementAt(sizeOf<IntPtr>())
       .cast<Utf16>()
       .unpackString(128);
-  print('physical monitor description: $physicalMonitorDescription');
+  print('Physical monitor description: $physicalMonitorDescription');
 
   final monitorCapabilitiesPtr = allocate<Uint32>();
   final monitorColorTemperaturesPtr = allocate<Uint32>();
@@ -137,7 +147,7 @@ void main() {
   result = GetMonitorCapabilities(physicalMonitorHandle, monitorCapabilitiesPtr,
       monitorColorTemperaturesPtr);
   if (result == TRUE) {
-    print('capabilities: ');
+    print('Capabilities: ');
     printMonitorCapabilities(monitorCapabilitiesPtr.value);
   } else {
     print('Monitor does not support DDC/CI.');
@@ -149,7 +159,7 @@ void main() {
   result = GetMonitorBrightness(physicalMonitorHandle, minimumBrightnessPtr,
       currentBrightnessPtr, maximumBrightnessPtr);
   if (result == TRUE) {
-    print('brightness: minimum(${minimumBrightnessPtr.value}), '
+    print('Brightness: minimum(${minimumBrightnessPtr.value}), '
         'current(${currentBrightnessPtr.value}), '
         'maximum(${maximumBrightnessPtr.value})');
   }
@@ -157,8 +167,8 @@ void main() {
   DestroyPhysicalMonitors(physicalMonitorCountPtr.value, physicalMonitorArray);
 
   // free all the heap-allocated variables
-  free(physicalMonitorCountPtr);
   free(physicalMonitorArray);
+  free(physicalMonitorCountPtr);
   free(monitorCapabilitiesPtr);
   free(monitorColorTemperaturesPtr);
   free(minimumBrightnessPtr);
