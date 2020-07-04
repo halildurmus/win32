@@ -43,8 +43,8 @@ String getFolderPath() {
 
 /// Get the path for a known Windows folder, using the modern API
 String getKnownFolderPath() {
-  GUID knownFolderID = GUID.fromString(FOLDERID_Documents);
-  Pointer<IntPtr> pathPtrPtr = allocate<IntPtr>();
+  final knownFolderID = GUID.fromString(FOLDERID_Documents);
+  final pathPtrPtr = allocate<IntPtr>();
 
   final hr = SHGetKnownFolderPath(
       knownFolderID.addressOf, KF_FLAG_DEFAULT, NULL, pathPtrPtr);

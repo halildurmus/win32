@@ -9,7 +9,7 @@ linter:
   rules:
     avoid_function_literals_in_foreach_calls: true
     directives_ordering: true
-    omit_local_variable_types: false
+    omit_local_variable_types: true
     prefer_expression_function_bodies: true
     prefer_initializing_formals: true
     prefer_interpolation_to_compose_strings: true

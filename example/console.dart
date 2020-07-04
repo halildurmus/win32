@@ -32,7 +32,7 @@ String fromCString(Pointer<Uint8> buffer, int maxLength) =>
 /// The returned string is _not_ null-terminated.
 Pointer<Uint8> toCString(String buffer) {
   final units = utf8.encode(buffer);
-  final Pointer<Uint8> result = allocate<Uint8>(count: units.length);
+  final result = allocate<Uint8>(count: units.length);
   final nativeString = result.asTypedList(units.length);
   nativeString.setAll(0, units);
   return result.cast();

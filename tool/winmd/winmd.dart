@@ -26,7 +26,7 @@ void listMethods([String type = 'Windows.Globalization.Calendar']) {
   final winTypeDef = winmdFile.findTypeDef(type);
   final methods = winTypeDef.methods;
 
-  int i = 0;
+  var i = 0;
   for (var method in methods) {
     print('$i ${method.isPublic ? 'public ' : ''}'
         '${method.isPrivate ? 'private ' : ''}'
@@ -52,7 +52,7 @@ void listParameters([String type = 'Windows.Globalization.Calendar']) {
       '${parameters.length - 1} parameter(s).');
 
   // the zeroth parameter is the return type
-  for (int i = 1; i < parameters.length; i++) {
+  for (var i = 1; i < parameters.length; i++) {
     print('[${parameters[i].sequence}] ${parameters[i].name}');
   }
 

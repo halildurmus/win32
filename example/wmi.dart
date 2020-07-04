@@ -38,7 +38,7 @@ void main() {
 
   // Obtain the initial locator to Windows Management
   // on a particular host computer.
-  IWbemLocator pLoc = IWbemLocator(COMObject.allocate().addressOf);
+  final pLoc = IWbemLocator(COMObject.allocate().addressOf);
 
   hr = CoCreateInstance(
       GUID.fromString(CLSID_WbemLocator).addressOf,
@@ -135,7 +135,7 @@ void main() {
 
     final uReturn = allocate<Uint32>();
 
-    int idx = 0;
+    var idx = 0;
     while (enumerator.ptr.address > 0) {
       final pClsObj = allocate<IntPtr>();
 

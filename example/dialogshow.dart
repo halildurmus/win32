@@ -18,7 +18,7 @@ void main() {
     hr = fileDialog.GetOptions(pfos);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-    int options = pfos.value | FILEOPENDIALOGOPTIONS.FOS_FORCEFILESYSTEM;
+    final options = pfos.value | FILEOPENDIALOGOPTIONS.FOS_FORCEFILESYSTEM;
     hr = fileDialog.SetOptions(options);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
 

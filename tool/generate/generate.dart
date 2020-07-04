@@ -23,7 +23,7 @@ void main(List<String> args) {
       print('Parsing:    ${inputFile.path}');
       final parsedFile = loadSource(inputFile);
 
-      File outputFile =
+      final outputFile =
           File('${outputDirectory.uri.toFilePath()}${parsedFile.name}.dart');
       print('Writing:    ${outputFile.path}');
       outputFile.writeAsStringSync(parsedFile.toString());

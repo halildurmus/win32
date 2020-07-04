@@ -99,7 +99,7 @@ Method parseIdlMethod(String line, int lineIndex) {
 }
 
 Interface loadSource(File file) {
-  bool inMethod = false;
+  var isInMethod = false;
   final interface = Interface();
   interface.methods = [];
   Method method;
@@ -118,7 +118,7 @@ Interface loadSource(File file) {
   for (var line in lines) {
     line = line.trim();
     lineIndex++;
-    if (!inMethod) {
+    if (!isInMethod) {
       if (line.startsWith('// vtable_start ')) {
         interface.vtableStart = int.parse(line.split(' ').last);
       }
@@ -167,19 +167,19 @@ Interface loadSource(File file) {
           method.name = lastKeyword.substring(0, lastKeyword.length - 1);
           method.returnType = 'Int32';
           method.parameters = [];
-          inMethod = true;
+          isInMethod = true;
 
           // Special case for void methods
           if (line.contains('( void) = 0;')) {
             method.name = keywords[keywords.indexOf('void)') - 1];
             method.name = method.name.substring(0, method.name.length - 1);
             interface.methods.add(method);
-            inMethod = false;
+            isInMethod = false;
           }
         } else if (interface.sourceType == SourceType.idl) {
           final method = parseIdlMethod(line, lineIndex);
           interface.methods.add(method);
-          inMethod = false;
+          isInMethod = false;
         }
       }
     } else {
@@ -234,7 +234,7 @@ Interface loadSource(File file) {
           trimPointer(parameter);
           method.parameters.add(parameter);
           interface.methods.add(method);
-          inMethod = false;
+          isInMethod = false;
         } else {
           print('Line: $lineIndex');
           throw Exception('Can\'t find parameter name');

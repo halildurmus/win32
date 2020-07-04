@@ -38,7 +38,7 @@ class WindowsException extends COMException {
 
     // If FormatMessage fails, it returns 0; otherwise it returns the number of
     // characters in the buffer.
-    int result = FormatMessage(
+    final result = FormatMessage(
         FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
         nullptr,
         windowsError,
