@@ -13,10 +13,10 @@
 #include <ShlObj_core.h>
 #include <wbemidl.h>
 #include <netlistmgr.h>
+#include <highlevelmonitorconfigurationapi.h>
 
 void main()
 {
-    auto c = PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE;
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));
     printf("sizeof(long) is %zu\n", sizeof(long));

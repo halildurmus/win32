@@ -56,6 +56,11 @@ final EndPaint =
     _user32.lookupFunction<endPaintNative, endPaintDart>('EndPaint');
 
 /// {@category user32}
+final EnumDisplayMonitors =
+    _user32.lookupFunction<enumDisplayMonitorsNative, enumDisplayMonitorsDart>(
+        'EnumDisplayMonitors');
+
+/// {@category user32}
 final EnumWindows =
     _user32.lookupFunction<enumWindowsNative, enumWindowsDart>('EnumWindows');
 
@@ -77,6 +82,11 @@ final GetDC = _user32.lookupFunction<getDCNative, getDCDart>('GetDC');
 /// {@category user32}
 final GetMessage =
     _user32.lookupFunction<getMessageNative, getMessageDart>('GetMessageW');
+
+/// {@category user32}
+final GetMonitorInfo =
+    _user32.lookupFunction<getMonitorInfoNative, getMonitorInfoDart>(
+        'GetMonitorInfoW');
 
 /// {@category user32}
 final GetScrollInfo = _user32
@@ -129,6 +139,11 @@ final MessageBox =
 /// {@category user32}
 final MoveWindow =
     _user32.lookupFunction<moveWindowNative, moveWindowDart>('MoveWindow');
+
+/// {@category user32}
+final MonitorFromWindow =
+    _user32.lookupFunction<monitorFromWindowNative, monitorFromWindowDart>(
+        'MonitorFromWindow');
 
 /// {@category user32}
 final PeekMessage =

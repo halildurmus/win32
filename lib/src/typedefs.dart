@@ -345,6 +345,21 @@ typedef defWindowProcDart = int Function(
 typedef deleteObjectNative = Int32 Function(IntPtr ho);
 typedef deleteObjectDart = int Function(int ho);
 
+// _BOOL DestroyPhysicalMonitor(
+//   HANDLE hMonitor
+// );
+typedef destroyPhysicalMonitorNative = Int32 Function(IntPtr hMonitor);
+typedef destroyPhysicalMonitorDart = int Function(int hMonitor);
+
+// _BOOL DestroyPhysicalMonitors(
+//   DWORD              dwPhysicalMonitorArraySize,
+//   LPPHYSICAL_MONITOR pPhysicalMonitorArray
+// );
+typedef destroyPhysicalMonitorsNative = Int32 Function(
+    Uint32 dwPhysicalMonitorArraySize, Pointer pPhysicalMonitorArray);
+typedef destroyPhysicalMonitorsDart = int Function(
+    int dwPhysicalMonitorArraySize, Pointer pPhysicalMonitorArray);
+
 // BOOL DestroyWindow(
 //   HWND hWnd
 // );
@@ -386,6 +401,17 @@ typedef enableMenuItemDart = int Function(
 typedef endPaintNative = Int32 Function(
     IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint);
 typedef endPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
+
+// BOOL EnumDisplayMonitors(
+//   HDC             hdc,
+//   LPCRECT         lprcClip,
+//   MONITORENUMPROC lpfnEnum,
+//   LPARAM          dwData
+// );
+typedef enumDisplayMonitorsNative = Int32 Function(IntPtr hdc, Pointer lprcClip,
+    Pointer<NativeFunction> lpfnEnum, IntPtr dwData);
+typedef enumDisplayMonitorsDart = int Function(
+    int hdc, Pointer lprcClip, Pointer<NativeFunction> lpfnEnum, int dwData);
 
 // BOOL EnumProcesses(
 //   DWORD   *lpidProcess,
@@ -644,6 +670,170 @@ typedef getModuleFileNameExDart = int Function(
 typedef getModuleHandleNative = IntPtr Function(Pointer<Utf16> lpModuleName);
 typedef getModuleHandleDart = int Function(Pointer<Utf16> lpModuleName);
 
+// _BOOL GetMonitorBrightness(
+//   HANDLE  hMonitor,
+//   LPDWORD pdwMinimumBrightness,
+//   LPDWORD pdwCurrentBrightness,
+//   LPDWORD pdwMaximumBrightness
+// );
+typedef getMonitorBrightnessNative = Int32 Function(
+    IntPtr hMonitor,
+    Pointer<Uint32> pdwMinimumBrightness,
+    Pointer<Uint32> pdwCurrentBrightness,
+    Pointer<Uint32> pdwMaximumBrightness);
+typedef getMonitorBrightnessDart = int Function(
+    int hMonitor,
+    Pointer<Uint32> pdwMinimumBrightness,
+    Pointer<Uint32> pdwCurrentBrightness,
+    Pointer<Uint32> pdwMaximumBrightness);
+
+// _BOOL GetMonitorCapabilities(
+//   HANDLE  hMonitor,
+//   LPDWORD pdwMonitorCapabilities,
+//   LPDWORD pdwSupportedColorTemperatures
+// );
+typedef getMonitorCapabilitiesNative = Int32 Function(
+    IntPtr hMonitor,
+    Pointer<Uint32> pdwMonitorCapabilities,
+    Pointer<Uint32> pdwSupportedColorTemperatures);
+typedef getMonitorCapabilitiesDart = int Function(
+    int hMonitor,
+    Pointer<Uint32> pdwMonitorCapabilities,
+    Pointer<Uint32> pdwSupportedColorTemperatures);
+
+// _BOOL GetMonitorColorTemperature(
+//   HANDLE                 hMonitor,
+//   LPMC_COLOR_TEMPERATURE pctCurrentColorTemperature
+// );
+typedef getMonitorColorTemperatureNative = Int32 Function(
+    IntPtr hMonitor, Pointer<Int32> pctCurrentColorTemperature);
+typedef getMonitorColorTemperatureDart = int Function(
+    int hMonitor, Pointer<Int32> pctCurrentColorTemperature);
+
+// _BOOL GetMonitorContrast(
+//   HANDLE  hMonitor,
+//   LPDWORD pdwMinimumContrast,
+//   LPDWORD pdwCurrentContrast,
+//   LPDWORD pdwMaximumContrast
+// );
+typedef getMonitorContrastNative = Int32 Function(
+    IntPtr hMonitor,
+    Pointer<Uint32> pdwMinimumContrast,
+    Pointer<Uint32> pdwCurrentContrast,
+    Pointer<Uint32> pdwMaximumContrast);
+typedef getMonitorContrastDart = int Function(
+    int hMonitor,
+    Pointer<Uint32> pdwMinimumContrast,
+    Pointer<Uint32> pdwCurrentContrast,
+    Pointer<Uint32> pdwMaximumContrast);
+
+// _BOOL GetMonitorDisplayAreaPosition(
+//   HANDLE           hMonitor,
+//   MC_POSITION_TYPE ptPositionType,
+//   LPDWORD          pdwMinimumPosition,
+//   LPDWORD          pdwCurrentPosition,
+//   LPDWORD          pdwMaximumPosition
+// );
+typedef getMonitorDisplayAreaPositionNative = Int32 Function(
+    IntPtr hMonitor,
+    Int32 ptPositionType,
+    Pointer<Uint32> pdwMinimumPosition,
+    Pointer<Uint32> pdwCurrentPosition,
+    Pointer<Uint32> pdwMaximumPosition);
+typedef getMonitorDisplayAreaPositionDart = int Function(
+    int hMonitor,
+    int ptPositionType,
+    Pointer<Uint32> pdwMinimumPosition,
+    Pointer<Uint32> pdwCurrentPosition,
+    Pointer<Uint32> pdwMaximumPosition);
+
+// _BOOL GetMonitorDisplayAreaSize(
+//   HANDLE       hMonitor,
+//   MC_SIZE_TYPE stSizeType,
+//   LPDWORD      pdwMinimumWidthOrHeight,
+//   LPDWORD      pdwCurrentWidthOrHeight,
+//   LPDWORD      pdwMaximumWidthOrHeight
+// );
+typedef getMonitorDisplayAreaSizeNative = Int32 Function(
+    IntPtr hMonitor,
+    Int32 stSizeType,
+    Pointer<Uint32> pdwMinimumWidthOrHeight,
+    Pointer<Uint32> pdwCurrentWidthOrHeight,
+    Pointer<Uint32> pdwMaximumWidthOrHeight);
+typedef getMonitorDisplayAreaSizeDart = int Function(
+    int hMonitor,
+    int stSizeType,
+    Pointer<Uint32> pdwMinimumWidthOrHeight,
+    Pointer<Uint32> pdwCurrentWidthOrHeight,
+    Pointer<Uint32> pdwMaximumWidthOrHeight);
+
+// _BOOL GetMonitorRedGreenOrBlueDrive(
+//   HANDLE        hMonitor,
+//   MC_DRIVE_TYPE dtDriveType,
+//   LPDWORD       pdwMinimumDrive,
+//   LPDWORD       pdwCurrentDrive,
+//   LPDWORD       pdwMaximumDrive
+// );
+typedef getMonitorRedGreenOrBlueDriveNative = Int32 Function(
+    IntPtr hMonitor,
+    Int32 dtDriveType,
+    Pointer<Uint32> pdwMinimumDrive,
+    Pointer<Uint32> pdwCurrentDrive,
+    Pointer<Uint32> pdwMaximumDrive);
+typedef getMonitorRedGreenOrBlueDriveDart = int Function(
+    int hMonitor,
+    int dtDriveType,
+    Pointer<Uint32> pdwMinimumDrive,
+    Pointer<Uint32> pdwCurrentDrive,
+    Pointer<Uint32> pdwMaximumDrive);
+
+// _BOOL GetMonitorRedGreenOrBlueGain(
+//   HANDLE       hMonitor,
+//   MC_GAIN_TYPE gtGainType,
+//   LPDWORD      pdwMinimumGain,
+//   LPDWORD      pdwCurrentGain,
+//   LPDWORD      pdwMaximumGain
+// );
+typedef getMonitorRedGreenOrBlueGainNative = Int32 Function(
+    IntPtr hMonitor,
+    Int32 gtGainType,
+    Pointer<Uint32> pdwMinimumGain,
+    Pointer<Uint32> pdwCurrentGain,
+    Pointer<Uint32> pdwMaximumGain);
+typedef getMonitorRedGreenOrBlueGainDart = int Function(
+    int hMonitor,
+    int gtGainType,
+    Pointer<Uint32> pdwMinimumGain,
+    Pointer<Uint32> pdwCurrentGain,
+    Pointer<Uint32> pdwMaximumGain);
+
+// _BOOL GetMonitorTechnologyType(
+//   HANDLE                       hMonitor,
+//   LPMC_DISPLAY_TECHNOLOGY_TYPE pdtyDisplayTechnologyType
+// );
+typedef getMonitorTechnologyTypeNative = Int32 Function(
+    IntPtr hMonitor, Pointer<Int32> pdtyDisplayTechnologyType);
+typedef getMonitorTechnologyTypeDart = int Function(
+    int hMonitor, Pointer<Int32> pdtyDisplayTechnologyType);
+
+// BOOL GetMonitorInfoW(
+//   HMONITOR      hMonitor,
+//   LPMONITORINFO lpmi
+// );
+typedef getMonitorInfoNative = Int32 Function(
+    IntPtr hMonitor, Pointer<MONITORINFO> lpmi);
+typedef getMonitorInfoDart = int Function(
+    int hMonitor, Pointer<MONITORINFO> lpmi);
+
+// _BOOL GetNumberOfPhysicalMonitorsFromHMONITOR(
+//   HMONITOR hMonitor,
+//   LPDWORD  pdwNumberOfPhysicalMonitors
+// );
+typedef getNumberOfPhysicalMonitorsFromHMONITORNative = Int32 Function(
+    IntPtr hMonitor, Pointer<Uint32> pdwNumberOfPhysicalMonitors);
+typedef getNumberOfPhysicalMonitorsFromHMONITORDart = int Function(
+    int hMonitor, Pointer<Uint32> pdwNumberOfPhysicalMonitors);
+
 // int GetObject(
 //   HANDLE h,
 //   int    c,
@@ -657,6 +847,16 @@ typedef getObjectDart = int Function(int h, int c, Pointer pv);
 // );
 typedef getOpenFileNameNative = Int32 Function(Pointer<OPENFILENAME> arg1);
 typedef getOpenFileNameDart = int Function(Pointer<OPENFILENAME> arg1);
+
+// _BOOL GetPhysicalMonitorsFromHMONITOR(
+//   HMONITOR           hMonitor,
+//   DWORD              dwPhysicalMonitorArraySize,
+//   LPPHYSICAL_MONITOR pPhysicalMonitorArray
+// );
+typedef getPhysicalMonitorsFromHMONITORNative = Int32 Function(IntPtr hMonitor,
+    Uint32 dwPhysicalMonitorArraySize, Pointer pPhysicalMonitorArray);
+typedef getPhysicalMonitorsFromHMONITORDart = int Function(int hMonitor,
+    int dwPhysicalMonitorArraySize, Pointer pPhysicalMonitorArray);
 
 // FARPROC GetProcAddress(
 //   HMODULE hModule,
@@ -877,6 +1077,13 @@ typedef messageBoxNative = Int32 Function(
 typedef messageBoxDart = int Function(
     int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption, int uType);
 
+// HMONITOR MonitorFromWindow(
+//   HWND  hwnd,
+//   DWORD dwFlags
+// );
+typedef monitorFromWindowNative = IntPtr Function(IntPtr hwnd, Uint32 dwFlags);
+typedef monitorFromWindowDart = int Function(int hwnd, int dwFlags);
+
 // BOOL MoveWindow(
 //   HWND hWnd,
 //   int  X,
@@ -1004,6 +1211,12 @@ typedef replaceTextDart = int Function(Pointer<FINDREPLACE> Arg1);
 typedef resizePseudoConsoleNative = Int32 Function(
     Pointer<IntPtr> hPC, Int32 size);
 typedef resizePseudoConsoleDart = int Function(Pointer<IntPtr> hPC, int size);
+
+// _BOOL SaveCurrentMonitorSettings(
+//   HANDLE hMonitor
+// );
+typedef saveCurrentMonitorSettingsNative = Int32 Function(IntPtr hMonitor);
+typedef saveCurrentMonitorSettingsDart = int Function(int hMonitor);
 
 // int SaveDC(
 //   HDC hdc
@@ -1137,6 +1350,72 @@ typedef setFocusDart = int Function(int hWnd);
 // );
 typedef setMapModeNative = Int32 Function(IntPtr hdc, Int32 iMode);
 typedef setMapModeDart = int Function(int hdc, int iMode);
+
+// _BOOL SetMonitorBrightness(
+//   HANDLE hMonitor,
+//   DWORD  dwNewBrightness
+// );
+typedef setMonitorBrightnessNative = Int32 Function(
+    IntPtr hMonitor, Uint32 dwNewBrightness);
+typedef setMonitorBrightnessDart = int Function(
+    int hMonitor, int dwNewBrightness);
+
+// _BOOL SetMonitorColorTemperature(
+//   HANDLE               hMonitor,
+//   MC_COLOR_TEMPERATURE ctCurrentColorTemperature
+// );
+typedef setMonitorColorTemperatureNative = Int32 Function(
+    IntPtr hMonitor, Int32 ctCurrentColorTemperature);
+typedef setMonitorColorTemperatureDart = int Function(
+    int hMonitor, int ctCurrentColorTemperature);
+
+// _BOOL SetMonitorContrast(
+//   HANDLE hMonitor,
+//   DWORD  dwNewContrast
+// );
+typedef setMonitorContrastNative = Int32 Function(
+    IntPtr hMonitor, Uint32 dwNewContrast);
+typedef setMonitorContrastDart = int Function(int hMonitor, int dwNewContrast);
+
+// _BOOL SetMonitorDisplayAreaPosition(
+//   HANDLE           hMonitor,
+//   MC_POSITION_TYPE ptPositionType,
+//   DWORD            dwNewPosition
+// );
+typedef setMonitorDisplayAreaPositionNative = Int32 Function(
+    IntPtr hMonitor, Int32 ptPositionType, Uint32 dwNewPosition);
+typedef setMonitorDisplayAreaPositionDart = int Function(
+    int hMonitor, int ptPositionType, int dwNewPosition);
+
+// _BOOL SetMonitorDisplayAreaSize(
+//   HANDLE       hMonitor,
+//   MC_SIZE_TYPE stSizeType,
+//   DWORD        dwNewDisplayAreaWidthOrHeight
+// );
+typedef setMonitorDisplayAreaSizeNative = Int32 Function(
+    IntPtr hMonitor, Int32 stSizeType, Uint32 dwNewDisplayAreaWidthOrHeight);
+typedef setMonitorDisplayAreaSizeDart = int Function(
+    int hMonitor, int stSizeType, int dwNewDisplayAreaWidthOrHeight);
+
+// _BOOL SetMonitorRedGreenOrBlueDrive(
+//   HANDLE        hMonitor,
+//   MC_DRIVE_TYPE dtDriveType,
+//   DWORD         dwNewDrive
+// );
+typedef setMonitorRedGreenOrBlueDriveNative = Int32 Function(
+    IntPtr hMonitor, Int32 dtDriveType, Uint32 dwNewDrive);
+typedef setMonitorRedGreenOrBlueDriveDart = int Function(
+    int hMonitor, int dtDriveType, int dwNewDrive);
+
+// _BOOL SetMonitorRedGreenOrBlueGain(
+//   HANDLE       hMonitor,
+//   MC_GAIN_TYPE gtGainType,
+//   DWORD        dwNewGain
+// );
+typedef setMonitorRedGreenOrBlueGainNative = Int32 Function(
+    IntPtr hMonitor, Int32 gtGainType, Uint32 dwNewGain);
+typedef setMonitorRedGreenOrBlueGainDart = int Function(
+    int hMonitor, int gtGainType, int dwNewGain);
 
 // int SetScrollInfo(
 //   HWND          hwnd,

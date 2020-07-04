@@ -1,3 +1,7 @@
+## 1.6.6
+- Add more process management APIs
+- Add high level monitor configuration API
+
 ## 1.6.5
 
 - Add a broader array of console APIs

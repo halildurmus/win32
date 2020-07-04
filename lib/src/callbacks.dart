@@ -7,5 +7,7 @@ import 'dart:ffi';
 typedef LPFRHookProc = Pointer<Uint32> Function(IntPtr, Int32, IntPtr, IntPtr);
 typedef TimerProc = Void Function(IntPtr, Uint32, Pointer<Uint32>, Int32);
 typedef EnumWindowsProc = Int32 Function(IntPtr hwnd, IntPtr lParam);
+typedef MonitorEnumProc = Int32 Function(
+    IntPtr hMonitor, IntPtr hDC, Pointer lpRect, IntPtr lParam);
 typedef WindowProc = IntPtr Function(
     IntPtr hwnd, Int32 uMsg, IntPtr wParam, IntPtr lParam);

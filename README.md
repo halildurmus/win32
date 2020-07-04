@@ -57,6 +57,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `sendinput.dart`   | Sends keyboard and mouse input to another window          |
 | `knownfolder.dart` | Retrieves known folders from the current user profile     |
 | `window.dart`      | Enumerates open windows and basic window manipulation     |
+| `monitor.dart`     | Uses DDC and monitor-config API to get monitor caps       |
 | `wallpaper.dart`   | Shows what wallpaper and background color are set         |
 | `guid.dart`        | Creates a globally unique identifier (GUID)               |
 | `devices.dart`     | Uses volume management APIs to list all disk devices      |
