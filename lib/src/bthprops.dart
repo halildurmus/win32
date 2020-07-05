@@ -56,3 +56,8 @@ final BluetoothIsConnectable = _bthprops.lookupFunction<
 final BluetoothIsDiscoverable = _bthprops.lookupFunction<
     bluetoothIsDiscoverableNative,
     bluetoothIsDiscoverableDart>('BluetoothIsDiscoverable');
+
+/// {@category bthprops}
+final BluetoothUpdateDeviceRecord = _bthprops.lookupFunction<
+    bluetoothUpdateDeviceRecordNative,
+    bluetoothUpdateDeviceRecordDart>('BluetoothUpdateDeviceRecord');

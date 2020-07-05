@@ -115,6 +115,14 @@ typedef bluetoothIsConnectableDart = int Function(int hRadio);
 typedef bluetoothIsDiscoverableNative = Int32 Function(IntPtr hRadio);
 typedef bluetoothIsDiscoverableDart = int Function(int hRadio);
 
+// DWORD BluetoothUpdateDeviceRecord(
+//   const BLUETOOTH_DEVICE_INFO *pbtdi
+// );
+typedef bluetoothUpdateDeviceRecordNative = Uint32 Function(
+    Pointer<BLUETOOTH_DEVICE_INFO> pbtdi);
+typedef bluetoothUpdateDeviceRecordDart = int Function(
+    Pointer<BLUETOOTH_DEVICE_INFO> pbtdi);
+
 // BOOL WINAPI ChooseColor(
 //   _Inout_ LPCHOOSECOLOR lpcc
 // );
