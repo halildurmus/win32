@@ -3925,12 +3925,12 @@ final TD_SHIELD_ICON = Pointer<Utf16>.fromAddress(0xFFFC);
 
 /// {@category Enum}
 class TASKDIALOG_COMMON_BUTTON_FLAGS {
-  static final int TDCBF_OK_BUTTON = 0x0001;
-  static final int TDCBF_YES_BUTTON = 0x0002;
-  static final int TDCBF_NO_BUTTON = 0x0004;
-  static final int TDCBF_CANCEL_BUTTON = 0x0008;
-  static final int TDCBF_RETRY_BUTTON = 0x0010;
-  static final int TDCBF_CLOSE_BUTTON = 0x0020;
+  static const int TDCBF_OK_BUTTON = 0x0001;
+  static const int TDCBF_YES_BUTTON = 0x0002;
+  static const int TDCBF_NO_BUTTON = 0x0004;
+  static const int TDCBF_CANCEL_BUTTON = 0x0008;
+  static const int TDCBF_RETRY_BUTTON = 0x0010;
+  static const int TDCBF_CLOSE_BUTTON = 0x0020;
 }
 
 // Folder IDs
@@ -4614,190 +4614,190 @@ class BLUETOOTH_IO_CAPABILITY {
 
 /// {@category Enum}
 class FILEOPENDIALOGOPTIONS {
-  static final FOS_OVERWRITEPROMPT = 0x2;
-  static final FOS_STRICTFILETYPES = 0x4;
-  static final FOS_NOCHANGEDIR = 0x8;
-  static final FOS_PICKFOLDERS = 0x20;
-  static final FOS_FORCEFILESYSTEM = 0x40;
-  static final FOS_ALLNONSTORAGEITEMS = 0x80;
-  static final FOS_NOVALIDATE = 0x100;
-  static final FOS_ALLOWMULTISELECT = 0x200;
-  static final FOS_PATHMUSTEXIST = 0x800;
-  static final FOS_FILEMUSTEXIST = 0x1000;
-  static final FOS_CREATEPROMPT = 0x2000;
-  static final FOS_SHAREAWARE = 0x4000;
-  static final FOS_NOREADONLYRETURN = 0x8000;
-  static final FOS_NOTESTFILECREATE = 0x10000;
-  static final FOS_HIDEMRUPLACES = 0x20000;
-  static final FOS_HIDEPINNEDPLACES = 0x40000;
-  static final FOS_NODEREFERENCELINKS = 0x100000;
-  static final FOS_OKBUTTONNEEDSINTERACTION = 0x200000;
-  static final FOS_DONTADDTORECENT = 0x2000000;
-  static final FOS_FORCESHOWHIDDEN = 0x10000000;
-  static final FOS_DEFAULTNOMINIMODE = 0x20000000;
-  static final FOS_FORCEPREVIEWPANEON = 0x40000000;
-  static final FOS_SUPPORTSTREAMABLEITEMS = 0x80000000;
+  static const FOS_OVERWRITEPROMPT = 0x2;
+  static const FOS_STRICTFILETYPES = 0x4;
+  static const FOS_NOCHANGEDIR = 0x8;
+  static const FOS_PICKFOLDERS = 0x20;
+  static const FOS_FORCEFILESYSTEM = 0x40;
+  static const FOS_ALLNONSTORAGEITEMS = 0x80;
+  static const FOS_NOVALIDATE = 0x100;
+  static const FOS_ALLOWMULTISELECT = 0x200;
+  static const FOS_PATHMUSTEXIST = 0x800;
+  static const FOS_FILEMUSTEXIST = 0x1000;
+  static const FOS_CREATEPROMPT = 0x2000;
+  static const FOS_SHAREAWARE = 0x4000;
+  static const FOS_NOREADONLYRETURN = 0x8000;
+  static const FOS_NOTESTFILECREATE = 0x10000;
+  static const FOS_HIDEMRUPLACES = 0x20000;
+  static const FOS_HIDEPINNEDPLACES = 0x40000;
+  static const FOS_NODEREFERENCELINKS = 0x100000;
+  static const FOS_OKBUTTONNEEDSINTERACTION = 0x200000;
+  static const FOS_DONTADDTORECENT = 0x2000000;
+  static const FOS_FORCESHOWHIDDEN = 0x10000000;
+  static const FOS_DEFAULTNOMINIMODE = 0x20000000;
+  static const FOS_FORCEPREVIEWPANEON = 0x40000000;
+  static const FOS_SUPPORTSTREAMABLEITEMS = 0x80000000;
 }
 
 /// {@category Enum}
 class FFFP_MODE {
-  static final FFFP_EXACTMATCH = 0;
-  static final FFFP_NEARESTPARENTMATCH = (FFFP_EXACTMATCH + 1);
+  static const FFFP_EXACTMATCH = 0;
+  static const FFFP_NEARESTPARENTMATCH = (FFFP_EXACTMATCH + 1);
 }
 
 /// {@category Enum}
 class FDAP {
-  static final FDAP_BOTTOM = 0;
-  static final FDAP_TOP = 1;
+  static const FDAP_BOTTOM = 0;
+  static const FDAP_TOP = 1;
 }
 
 /// {@category Enum}
 class KF_CATEGORY {
-  static final KF_CATEGORY_VIRTUAL = 1;
-  static final KF_CATEGORY_FIXED = 2;
-  static final KF_CATEGORY_COMMON = 3;
-  static final KF_CATEGORY_PERUSER = 4;
+  static const KF_CATEGORY_VIRTUAL = 1;
+  static const KF_CATEGORY_FIXED = 2;
+  static const KF_CATEGORY_COMMON = 3;
+  static const KF_CATEGORY_PERUSER = 4;
 }
 
 /// {@category Enum}
 class KF_DEFINITION_FLAGS {
-  static final KFDF_LOCAL_REDIRECT_ONLY = 0x2;
-  static final KFDF_ROAMABLE = 0x4;
-  static final KFDF_PRECREATE = 0x8;
-  static final KFDF_STREAM = 0x10;
-  static final KFDF_PUBLISHEXPANDEDPATH = 0x20;
-  static final KFDF_NO_REDIRECT_UI = 0x4;
+  static const KFDF_LOCAL_REDIRECT_ONLY = 0x2;
+  static const KFDF_ROAMABLE = 0x4;
+  static const KFDF_PRECREATE = 0x8;
+  static const KFDF_STREAM = 0x10;
+  static const KFDF_PUBLISHEXPANDEDPATH = 0x20;
+  static const KFDF_NO_REDIRECT_UI = 0x4;
 }
 
 /// {@category Enum}
 class KF_REDIRECT_FLAGS {
-  static final KF_REDIRECT_USER_EXCLUSIVE = 0x1;
-  static final KF_REDIRECT_COPY_SOURCE_DACL = 0x2;
-  static final KF_REDIRECT_OWNER_USER = 0x4;
-  static final KF_REDIRECT_SET_OWNER_EXPLICIT = 0x8;
-  static final KF_REDIRECT_CHECK_ONLY = 0x10;
-  static final KF_REDIRECT_WITH_UI = 0x20;
-  static final KF_REDIRECT_UNPIN = 0x40;
-  static final KF_REDIRECT_PIN = 0x80;
-  static final KF_REDIRECT_COPY_CONTENTS = 0x200;
-  static final KF_REDIRECT_DEL_SOURCE_CONTENTS = 0x400;
-  static final KF_REDIRECT_EXCLUDE_ALL_KNOWN_SUBFOLDERS = 0x800;
+  static const KF_REDIRECT_USER_EXCLUSIVE = 0x1;
+  static const KF_REDIRECT_COPY_SOURCE_DACL = 0x2;
+  static const KF_REDIRECT_OWNER_USER = 0x4;
+  static const KF_REDIRECT_SET_OWNER_EXPLICIT = 0x8;
+  static const KF_REDIRECT_CHECK_ONLY = 0x10;
+  static const KF_REDIRECT_WITH_UI = 0x20;
+  static const KF_REDIRECT_UNPIN = 0x40;
+  static const KF_REDIRECT_PIN = 0x80;
+  static const KF_REDIRECT_COPY_CONTENTS = 0x200;
+  static const KF_REDIRECT_DEL_SOURCE_CONTENTS = 0x400;
+  static const KF_REDIRECT_EXCLUDE_ALL_KNOWN_SUBFOLDERS = 0x800;
 }
 
 /// {@category Enum}
 class KF_REDIRECTION_CAPABILITIES {
-  static final KF_REDIRECTION_CAPABILITIES_ALLOW_ALL = 0xff;
-  static final KF_REDIRECTION_CAPABILITIES_REDIRECTABLE = 0x1;
-  static final KF_REDIRECTION_CAPABILITIES_DENY_ALL = 0xfff00;
-  static final KF_REDIRECTION_CAPABILITIES_DENY_POLICY_REDIRECTED = 0x100;
-  static final KF_REDIRECTION_CAPABILITIES_DENY_POLICY = 0x200;
-  static final KF_REDIRECTION_CAPABILITIES_DENY_PERMISSIONS = 0x400;
+  static const KF_REDIRECTION_CAPABILITIES_ALLOW_ALL = 0xff;
+  static const KF_REDIRECTION_CAPABILITIES_REDIRECTABLE = 0x1;
+  static const KF_REDIRECTION_CAPABILITIES_DENY_ALL = 0xfff00;
+  static const KF_REDIRECTION_CAPABILITIES_DENY_POLICY_REDIRECTED = 0x100;
+  static const KF_REDIRECTION_CAPABILITIES_DENY_POLICY = 0x200;
+  static const KF_REDIRECTION_CAPABILITIES_DENY_PERMISSIONS = 0x400;
 }
 
 /// {@category Enum}
 class SIGDN {
-  static final SIGDN_NORMALDISPLAY = 0;
-  static final SIGDN_PARENTRELATIVEPARSING = 0x80018001;
-  static final SIGDN_DESKTOPABSOLUTEPARSING = 0x80028000;
-  static final SIGDN_PARENTRELATIVEEDITING = 0x80031001;
-  static final SIGDN_DESKTOPABSOLUTEEDITING = 0x8004c000;
-  static final SIGDN_FILESYSPATH = 0x80058000;
-  static final SIGDN_URL = 0x80068000;
-  static final SIGDN_PARENTRELATIVEFORADDRESSBAR = 0x8007c001;
-  static final SIGDN_PARENTRELATIVE = 0x80080001;
-  static final SIGDN_PARENTRELATIVEFORUI = 0x8009400;
+  static const SIGDN_NORMALDISPLAY = 0;
+  static const SIGDN_PARENTRELATIVEPARSING = 0x80018001;
+  static const SIGDN_DESKTOPABSOLUTEPARSING = 0x80028000;
+  static const SIGDN_PARENTRELATIVEEDITING = 0x80031001;
+  static const SIGDN_DESKTOPABSOLUTEEDITING = 0x8004c000;
+  static const SIGDN_FILESYSPATH = 0x80058000;
+  static const SIGDN_URL = 0x80068000;
+  static const SIGDN_PARENTRELATIVEFORADDRESSBAR = 0x8007c001;
+  static const SIGDN_PARENTRELATIVE = 0x80080001;
+  static const SIGDN_PARENTRELATIVEFORUI = 0x8009400;
 }
 
 /// {@category Enum}
 class EOLE_AUTHENTICATION_CAPABILITIES {
-  static final EOAC_NONE = 0;
-  static final EOAC_MUTUAL_AUTH = 0x1;
-  static final EOAC_STATIC_CLOAKING = 0x20;
-  static final EOAC_DYNAMIC_CLOAKING = 0x40;
-  static final EOAC_ANY_AUTHORITY = 0x80;
-  static final EOAC_MAKE_FULLSIC = 0x100;
-  static final EOAC_DEFAULT = 0x800;
-  static final EOAC_SECURE_REFS = 0x2;
-  static final EOAC_ACCESS_CONTROL = 0x4;
-  static final EOAC_APPID = 0x8;
-  static final EOAC_DYNAMIC = 0x10;
-  static final EOAC_REQUIRE_FULLSIC = 0x200;
-  static final EOAC_AUTO_IMPERSONATE = 0x400;
-  static final EOAC_DISABLE_AAA = 0x1000;
-  static final EOAC_NO_CUSTOM_MARSHAL = 0x2000;
-  static final EOAC_RESERVED1 = 0x4000;
+  static const EOAC_NONE = 0;
+  static const EOAC_MUTUAL_AUTH = 0x1;
+  static const EOAC_STATIC_CLOAKING = 0x20;
+  static const EOAC_DYNAMIC_CLOAKING = 0x40;
+  static const EOAC_ANY_AUTHORITY = 0x80;
+  static const EOAC_MAKE_FULLSIC = 0x100;
+  static const EOAC_DEFAULT = 0x800;
+  static const EOAC_SECURE_REFS = 0x2;
+  static const EOAC_ACCESS_CONTROL = 0x4;
+  static const EOAC_APPID = 0x8;
+  static const EOAC_DYNAMIC = 0x10;
+  static const EOAC_REQUIRE_FULLSIC = 0x200;
+  static const EOAC_AUTO_IMPERSONATE = 0x400;
+  static const EOAC_DISABLE_AAA = 0x1000;
+  static const EOAC_NO_CUSTOM_MARSHAL = 0x2000;
+  static const EOAC_RESERVED1 = 0x4000;
 }
 
 /// {@category Enum}
 class WBEM_GENERIC_FLAG_TYPE {
-  static final WBEM_FLAG_RETURN_IMMEDIATELY = 0x10;
-  static final WBEM_FLAG_RETURN_WBEM_COMPLETE = 0;
-  static final WBEM_FLAG_BIDIRECTIONAL = 0;
-  static final WBEM_FLAG_FORWARD_ONLY = 0x20;
-  static final WBEM_FLAG_NO_ERROR_OBJECT = 0x40;
-  static final WBEM_FLAG_RETURN_ERROR_OBJECT = 0;
-  static final WBEM_FLAG_SEND_STATUS = 0x80;
-  static final WBEM_FLAG_DONT_SEND_STATUS = 0;
-  static final WBEM_FLAG_ENSURE_LOCATABLE = 0x100;
-  static final WBEM_FLAG_DIRECT_READ = 0x200;
-  static final WBEM_FLAG_SEND_ONLY_SELECTED = 0;
-  static final WBEM_RETURN_WHEN_COMPLETE = 0;
-  static final WBEM_RETURN_IMMEDIATELY = 0x10;
-  static final WBEM_MASK_RESERVED_FLAGS = 0x1f000;
-  static final WBEM_FLAG_USE_AMENDED_QUALIFIERS = 0x20000;
-  static final WBEM_FLAG_STRONG_VALIDATION = 0x100000;
+  static const WBEM_FLAG_RETURN_IMMEDIATELY = 0x10;
+  static const WBEM_FLAG_RETURN_WBEM_COMPLETE = 0;
+  static const WBEM_FLAG_BIDIRECTIONAL = 0;
+  static const WBEM_FLAG_FORWARD_ONLY = 0x20;
+  static const WBEM_FLAG_NO_ERROR_OBJECT = 0x40;
+  static const WBEM_FLAG_RETURN_ERROR_OBJECT = 0;
+  static const WBEM_FLAG_SEND_STATUS = 0x80;
+  static const WBEM_FLAG_DONT_SEND_STATUS = 0;
+  static const WBEM_FLAG_ENSURE_LOCATABLE = 0x100;
+  static const WBEM_FLAG_DIRECT_READ = 0x200;
+  static const WBEM_FLAG_SEND_ONLY_SELECTED = 0;
+  static const WBEM_RETURN_WHEN_COMPLETE = 0;
+  static const WBEM_RETURN_IMMEDIATELY = 0x10;
+  static const WBEM_MASK_RESERVED_FLAGS = 0x1f000;
+  static const WBEM_FLAG_USE_AMENDED_QUALIFIERS = 0x20000;
+  static const WBEM_FLAG_STRONG_VALIDATION = 0x100000;
 }
 
 /// {@category Enum}
 class WBEM_TIMEOUT_TYPE {
-  static final WBEM_NO_WAIT = 0;
-  static final WBEM_INFINITE = 0xffffffff;
+  static const WBEM_NO_WAIT = 0;
+  static const WBEM_INFINITE = 0xffffffff;
 }
 
 /// {@category Enum}
 class DESKTOP_SLIDESHOW_OPTIONS {
-  static final DSO_SHUFFLEIMAGES = 0x1;
+  static const DSO_SHUFFLEIMAGES = 0x1;
 }
 
 /// {@category Enum}
 class DESKTOP_SLIDESHOW_STATE {
-  static final DSS_ENABLED = 0x1;
-  static final DSS_SLIDESHOW = 0x2;
-  static final DSS_DISABLED_BY_REMOTE_SESSION = 0x4;
+  static const DSS_ENABLED = 0x1;
+  static const DSS_SLIDESHOW = 0x2;
+  static const DSS_DISABLED_BY_REMOTE_SESSION = 0x4;
 }
 
 /// {@category Enum}
 class DESKTOP_SLIDESHOW_DIRECTION {
-  static final DSD_FORWARD = 0;
-  static final DSD_BACKWARD = 1;
+  static const DSD_FORWARD = 0;
+  static const DSD_BACKWARD = 1;
 }
 
 /// {@category Enum}
 class DESKTOP_WALLPAPER_POSITION {
-  static final DWPOS_CENTER = 0;
-  static final DWPOS_TILE = 1;
-  static final DWPOS_STRETCH = 2;
-  static final DWPOS_FIT = 3;
-  static final DWPOS_FILL = 4;
-  static final DWPOS_SPAN = 5;
+  static const DWPOS_CENTER = 0;
+  static const DWPOS_TILE = 1;
+  static const DWPOS_STRETCH = 2;
+  static const DWPOS_FIT = 3;
+  static const DWPOS_FILL = 4;
+  static const DWPOS_SPAN = 5;
 }
 
 /// {@category Enum}
 class NLM_CONNECTIVITY {
-  static final NLM_CONNECTIVITY_DISCONNECTED = 0;
-  static final NLM_CONNECTIVITY_IPV4_NOTRAFFIC = 0x1;
-  static final NLM_CONNECTIVITY_IPV6_NOTRAFFIC = 0x2;
-  static final NLM_CONNECTIVITY_IPV4_SUBNET = 0x10;
-  static final NLM_CONNECTIVITY_IPV4_LOCALNETWORK = 0x20;
-  static final NLM_CONNECTIVITY_IPV4_INTERNET = 0x40;
-  static final NLM_CONNECTIVITY_IPV6_SUBNET = 0x100;
-  static final NLM_CONNECTIVITY_IPV6_LOCALNETWORK = 0x200;
-  static final NLM_CONNECTIVITY_IPV6_INTERNET = 0x400;
+  static const NLM_CONNECTIVITY_DISCONNECTED = 0;
+  static const NLM_CONNECTIVITY_IPV4_NOTRAFFIC = 0x1;
+  static const NLM_CONNECTIVITY_IPV6_NOTRAFFIC = 0x2;
+  static const NLM_CONNECTIVITY_IPV4_SUBNET = 0x10;
+  static const NLM_CONNECTIVITY_IPV4_LOCALNETWORK = 0x20;
+  static const NLM_CONNECTIVITY_IPV4_INTERNET = 0x40;
+  static const NLM_CONNECTIVITY_IPV6_SUBNET = 0x100;
+  static const NLM_CONNECTIVITY_IPV6_LOCALNETWORK = 0x200;
+  static const NLM_CONNECTIVITY_IPV6_INTERNET = 0x400;
 }
 
 /// {@category Enum}
 class NLM_ENUM_NETWORK {
-  static final NLM_ENUM_NETWORK_CONNECTED = 0x1;
-  static final NLM_ENUM_NETWORK_DISCONNECTED = 0x2;
-  static final NLM_ENUM_NETWORK_ALL = 0x3;
+  static const NLM_ENUM_NETWORK_CONNECTED = 0x1;
+  static const NLM_ENUM_NETWORK_DISCONNECTED = 0x2;
+  static const NLM_ENUM_NETWORK_ALL = 0x3;
 }
