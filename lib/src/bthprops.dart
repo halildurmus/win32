@@ -13,6 +13,16 @@ import 'typedefs.dart';
 final _bthprops = DynamicLibrary.open('bthprops.cpl');
 
 /// {@category bthprops}
+final BluetoothFindDeviceClose = _bthprops.lookupFunction<
+    bluetoothFindDeviceCloseNative,
+    bluetoothFindDeviceCloseDart>('BluetoothFindDeviceClose');
+
+/// {@category bthprops}
+final BluetoothFindFirstDevice = _bthprops.lookupFunction<
+    bluetoothFindFirstDeviceNative,
+    bluetoothFindFirstDeviceDart>('BluetoothFindFirstDevice');
+
+/// {@category bthprops}
 final BluetoothFindFirstRadio = _bthprops.lookupFunction<
     bluetoothFindFirstRadioNative,
     bluetoothFindFirstRadioDart>('BluetoothFindFirstRadio');

@@ -18,7 +18,6 @@
 
 void main()
 {
-    auto size = BLUETOOTH_MAX_NAME_SIZE;
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));
     printf("sizeof(long) is %zu\n", sizeof(long));
@@ -41,6 +40,7 @@ void main()
     printf("sizeof(LRESULT) is %zu\n", sizeof(LRESULT));
 
     printf("sizeof(BITMAPINFO) is %zu\n", sizeof(BITMAPINFO));
+    printf("sizeof(BLUETOOTH_DEVICE_INFO_STRUCT) is %zu\n", sizeof(BLUETOOTH_DEVICE_INFO_STRUCT));
     printf("sizeof(WNDCLASS) is %zu\n", sizeof(WNDCLASS));
     printf("sizeof(WNDPROC) is %zu\n", sizeof(WNDPROC));
     printf("sizeof(POINT) is %zu\n", sizeof(POINT));

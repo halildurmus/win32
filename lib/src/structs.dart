@@ -7,6 +7,7 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 import 'constants.dart';
+import 'exceptions.dart';
 
 // typedef struct tagWNDCLASSW {
 //   UINT      style;
@@ -1922,6 +1923,65 @@ class SMALL_RECT extends Struct {
     ..Bottom = 0;
 }
 
+// typedef struct _BLUETOOTH_DEVICE_INFO {
+//   DWORD             dwSize;
+//   BLUETOOTH_ADDRESS Address;
+//   ULONG             ulClassofDevice;
+//   BOOL              fConnected;
+//   BOOL              fRemembered;
+//   BOOL              fAuthenticated;
+//   SYSTEMTIME        stLastSeen;
+//   SYSTEMTIME        stLastUsed;
+//   WCHAR             szName[BLUETOOTH_MAX_NAME_SIZE];
+// } BLUETOOTH_DEVICE_INFO_STRUCT;
+
+/// BLUETOOTH_DEVICE_INFO
+///
+/// {@category Struct}
+class BLUETOOTH_DEVICE_INFO extends Struct {
+  @Uint32()
+  int dwSize;
+  @Uint64()
+  int Address;
+  @Uint32()
+  int ulClassofDevice;
+  @Int32()
+  int fConnected;
+  @Int32()
+  int fRemembered;
+  @Int32()
+  int fAuthenticated;
+
+  // SYSTEMTIME is 128-bit
+  @Int64()
+  int stLastSeenDate;
+  @Int64()
+  int stLastSeenTime;
+
+  // SYSTEMTIME is 128-bit
+  @Int64()
+  int stLastUsedDate;
+  @Int64()
+  int stLastUsedTime;
+
+  @Uint8()
+  int szName; // [BLUETOOTH_MAX_NAME_SIZE]
+
+  factory BLUETOOTH_DEVICE_INFO.allocate() =>
+      allocate<Uint8>(count: 560).cast<BLUETOOTH_DEVICE_INFO>().ref
+        ..dwSize = 560
+        ..Address = 0
+        ..ulClassofDevice = 0
+        ..fConnected = 0
+        ..fRemembered = 0
+        ..fAuthenticated = 0
+        ..stLastSeenDate = 0
+        ..stLastSeenTime = 0
+        ..stLastUsedDate = 0
+        ..stLastUsedTime = 0
+        ..szName = 0;
+}
+
 // typedef struct _BLUETOOTH_DEVICE_SEARCH_PARAMS {
 //   DWORD  dwSize;
 //   BOOL   fReturnAuthenticated;
@@ -1997,6 +2057,10 @@ class BLUETOOTH_PIN_INFO extends Struct {
   int pin2;
   @Uint8()
   int pinLength;
+
+  String get pin {
+    throw WindowsException(ERROR_CALL_NOT_IMPLEMENTED);
+  }
 
   set pin(String value) {
     final pinData = ByteData.sublistView(Uint8List.fromList(value.codeUnits));

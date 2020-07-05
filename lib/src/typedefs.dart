@@ -33,6 +33,23 @@ typedef beginPaintNative = IntPtr Function(
     IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint);
 typedef beginPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
 
+// BOOL BluetoothFindDeviceClose(
+//   HBLUETOOTH_DEVICE_FIND hFind
+// );
+typedef bluetoothFindDeviceCloseNative = Int32 Function(IntPtr hFind);
+typedef bluetoothFindDeviceCloseDart = int Function(int hFind);
+
+// HBLUETOOTH_DEVICE_FIND BluetoothFindFirstDevice(
+//   const BLUETOOTH_DEVICE_SEARCH_PARAMS *pbtsp,
+//   BLUETOOTH_DEVICE_INFO                *pbtdi
+// );
+typedef bluetoothFindFirstDeviceNative = Int32 Function(
+    Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp,
+    Pointer<BLUETOOTH_DEVICE_INFO> pbtdi);
+typedef bluetoothFindFirstDeviceDart = int Function(
+    Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp,
+    Pointer<BLUETOOTH_DEVICE_INFO> pbtdi);
+
 // HBLUETOOTH_RADIO_FIND BluetoothFindFirstRadio(
 //   const BLUETOOTH_FIND_RADIO_PARAMS *pbtfrp,
 //   HANDLE                            *phRadio
