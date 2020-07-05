@@ -26,3 +26,8 @@ final BluetoothFindFirstDevice = _bthprops.lookupFunction<
 final BluetoothFindFirstRadio = _bthprops.lookupFunction<
     bluetoothFindFirstRadioNative,
     bluetoothFindFirstRadioDart>('BluetoothFindFirstRadio');
+
+/// {@category bthprops}
+final BluetoothFindRadioClose = _bthprops.lookupFunction<
+    bluetoothFindRadioCloseNative,
+    bluetoothFindRadioCloseDart>('BluetoothFindRadioClose');

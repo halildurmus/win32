@@ -59,6 +59,12 @@ typedef bluetoothFindFirstRadioNative = IntPtr Function(
 typedef bluetoothFindFirstRadioDart = int Function(
     Pointer<BLUETOOTH_FIND_RADIO_PARAMS> pbtfrp, Pointer<IntPtr> phRadio);
 
+// BOOL BluetoothFindRadioClose(
+//   HBLUETOOTH_RADIO_FIND hFind
+// );
+typedef bluetoothFindRadioCloseNative = Int32 Function(IntPtr hFind);
+typedef bluetoothFindRadioCloseDart = int Function(int hFind);
+
 // BOOL WINAPI ChooseColor(
 //   _Inout_ LPCHOOSECOLOR lpcc
 // );

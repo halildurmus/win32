@@ -1964,8 +1964,8 @@ class BLUETOOTH_DEVICE_INFO extends Struct {
   @Int64()
   int stLastUsedTime;
 
-  @Uint8()
-  int szName; // [BLUETOOTH_MAX_NAME_SIZE]
+  Pointer<Utf16> get szName =>
+      addressOf.cast<Uint8>().elementAt(60).cast<Utf16>();
 
   factory BLUETOOTH_DEVICE_INFO.allocate() =>
       allocate<Uint8>(count: 560).cast<BLUETOOTH_DEVICE_INFO>().ref
@@ -1978,8 +1978,7 @@ class BLUETOOTH_DEVICE_INFO extends Struct {
         ..stLastSeenDate = 0
         ..stLastSeenTime = 0
         ..stLastUsedDate = 0
-        ..stLastUsedTime = 0
-        ..szName = 0;
+        ..stLastUsedTime = 0;
 }
 
 // typedef struct _BLUETOOTH_DEVICE_SEARCH_PARAMS {

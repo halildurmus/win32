@@ -4568,6 +4568,21 @@ const DISPID_DESTRUCTOR = -7;
 /// @nodoc
 const DISPID_COLLECT = -8;
 
+/// @nodoc
+const BLUETOOTH_MAX_NAME_SIZE = (248);
+
+/// @nodoc
+const BLUETOOTH_MAX_PASSKEY_SIZE = (16);
+
+/// @nodoc
+const BLUETOOTH_MAX_PASSKEY_BUFFER_SIZE = (BLUETOOTH_MAX_PASSKEY_SIZE + 1);
+
+/// @nodoc
+const BLUETOOTH_MAX_SERVICE_NAME_SIZE = (256);
+
+/// @nodoc
+const BLUETOOTH_DEVICE_NAME_SIZE = (256);
+
 /// {@category Enum}
 class FILEOPENDIALOGOPTIONS {
   static final FOS_OVERWRITEPROMPT = 0x2;
