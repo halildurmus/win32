@@ -8,6 +8,7 @@ import 'package:ffi/ffi.dart';
 
 import 'constants.dart';
 import 'exceptions.dart';
+import 'string.dart';
 
 // typedef struct tagWNDCLASSW {
 //   UINT      style;
@@ -1964,8 +1965,11 @@ class BLUETOOTH_DEVICE_INFO extends Struct {
   @Int64()
   int stLastUsedTime;
 
-  Pointer<Utf16> get szName =>
-      addressOf.cast<Uint8>().elementAt(60).cast<Utf16>();
+  String get szName => addressOf
+      .cast<Uint8>()
+      .elementAt(60)
+      .cast<Utf16>()
+      .unpackString(BLUETOOTH_MAX_NAME_SIZE);
 
   factory BLUETOOTH_DEVICE_INFO.allocate() =>
       allocate<Uint8>(count: 560).cast<BLUETOOTH_DEVICE_INFO>().ref

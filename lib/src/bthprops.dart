@@ -13,6 +13,11 @@ import 'typedefs.dart';
 final _bthprops = DynamicLibrary.open('bthprops.cpl');
 
 /// {@category bthprops}
+final BluetoothAuthenticateDeviceEx = _bthprops.lookupFunction<
+    bluetoothAuthenticateDeviceExNative,
+    bluetoothAuthenticateDeviceExDart>('BluetoothAuthenticateDeviceEx');
+
+/// {@category bthprops}
 final BluetoothFindDeviceClose = _bthprops.lookupFunction<
     bluetoothFindDeviceCloseNative,
     bluetoothFindDeviceCloseDart>('BluetoothFindDeviceClose');
@@ -28,6 +33,26 @@ final BluetoothFindFirstRadio = _bthprops.lookupFunction<
     bluetoothFindFirstRadioDart>('BluetoothFindFirstRadio');
 
 /// {@category bthprops}
+final BluetoothFindNextDevice = _bthprops.lookupFunction<
+    bluetoothFindNextDeviceNative,
+    bluetoothFindNextDeviceDart>('BluetoothFindNextDevice');
+
+/// {@category bthprops}
+final BluetoothFindNextRadio = _bthprops.lookupFunction<
+    bluetoothFindNextRadioNative,
+    bluetoothFindNextRadioDart>('BluetoothFindNextRadio');
+
+/// {@category bthprops}
 final BluetoothFindRadioClose = _bthprops.lookupFunction<
     bluetoothFindRadioCloseNative,
     bluetoothFindRadioCloseDart>('BluetoothFindRadioClose');
+
+/// {@category bthprops}
+final BluetoothIsConnectable = _bthprops.lookupFunction<
+    bluetoothIsConnectableNative,
+    bluetoothIsConnectableDart>('BluetoothIsConnectable');
+
+/// {@category bthprops}
+final BluetoothIsDiscoverable = _bthprops.lookupFunction<
+    bluetoothIsDiscoverableNative,
+    bluetoothIsDiscoverableDart>('BluetoothIsDiscoverable');

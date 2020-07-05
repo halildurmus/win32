@@ -33,6 +33,26 @@ typedef beginPaintNative = IntPtr Function(
     IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint);
 typedef beginPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
 
+// DWORD BluetoothAuthenticateDeviceEx(
+//   HWND                        hwndParentIn,
+//   HANDLE                      hRadioIn,
+//   BLUETOOTH_DEVICE_INFO       *pbtdiInout,
+//   PBLUETOOTH_OOB_DATA_INFO    pbtOobData,
+//   AUTHENTICATION_REQUIREMENTS authenticationRequirement
+// );
+typedef bluetoothAuthenticateDeviceExNative = Uint32 Function(
+    IntPtr hwndParentIn,
+    IntPtr hRadioIn,
+    Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
+    IntPtr pbtOobData,
+    Int32 authenticationRequirement);
+typedef bluetoothAuthenticateDeviceExDart = int Function(
+    int hwndParentIn,
+    int hRadioIn,
+    Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
+    int pbtOobData,
+    int authenticationRequirement);
+
 // BOOL BluetoothFindDeviceClose(
 //   HBLUETOOTH_DEVICE_FIND hFind
 // );
@@ -59,11 +79,41 @@ typedef bluetoothFindFirstRadioNative = IntPtr Function(
 typedef bluetoothFindFirstRadioDart = int Function(
     Pointer<BLUETOOTH_FIND_RADIO_PARAMS> pbtfrp, Pointer<IntPtr> phRadio);
 
+// BOOL BluetoothFindNextDevice(
+//   HBLUETOOTH_DEVICE_FIND hFind,
+//   BLUETOOTH_DEVICE_INFO  *pbtdi
+// );
+typedef bluetoothFindNextDeviceNative = Int32 Function(
+    IntPtr hFind, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi);
+typedef bluetoothFindNextDeviceDart = int Function(
+    int hFind, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi);
+
+// BOOL BluetoothFindNextRadio(
+//   HBLUETOOTH_RADIO_FIND hFind,
+//   HANDLE                *phRadio
+// );
+typedef bluetoothFindNextRadioNative = Int32 Function(
+    IntPtr hFind, Pointer<IntPtr> phRadio);
+typedef bluetoothFindNextRadioDart = int Function(
+    int hFind, Pointer<IntPtr> phRadio);
+
 // BOOL BluetoothFindRadioClose(
 //   HBLUETOOTH_RADIO_FIND hFind
 // );
 typedef bluetoothFindRadioCloseNative = Int32 Function(IntPtr hFind);
 typedef bluetoothFindRadioCloseDart = int Function(int hFind);
+
+// BOOL BluetoothIsConnectable(
+//   HANDLE hRadio
+// );
+typedef bluetoothIsConnectableNative = Int32 Function(IntPtr hRadio);
+typedef bluetoothIsConnectableDart = int Function(int hRadio);
+
+// BOOL BluetoothIsDiscoverable(
+//   HANDLE hRadio
+// );
+typedef bluetoothIsDiscoverableNative = Int32 Function(IntPtr hRadio);
+typedef bluetoothIsDiscoverableDart = int Function(int hRadio);
 
 // BOOL WINAPI ChooseColor(
 //   _Inout_ LPCHOOSECOLOR lpcc

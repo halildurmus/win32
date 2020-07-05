@@ -4584,6 +4584,26 @@ const BLUETOOTH_MAX_SERVICE_NAME_SIZE = (256);
 const BLUETOOTH_DEVICE_NAME_SIZE = (256);
 
 /// {@category Enum}
+class BLUETOOTH_AUTHENTICATION_METHOD {
+  static const BLUETOOTH_AUTHENTICATION_METHOD_LEGACY = 0;
+  static const BLUETOOTH_AUTHENTICATION_METHOD_OOB = 1;
+  static const BLUETOOTH_AUTHENTICATION_METHOD_NUMERIC_COMPARISON = 2;
+  static const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY_NOTIFICATION = 3;
+  static const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY = 4;
+}
+
+/// {@category Enum}
+class BLUETOOTH_AUTHENTICATION_REQUIREMENTS {
+  static const BLUETOOTH_MITM_ProtectionNotRequired = 0;
+  static const BLUETOOTH_MITM_ProtectionRequired = 1;
+  static const BLUETOOTH_MITM_ProtectionNotRequiredBonding = 2;
+  static const BLUETOOTH_MITM_ProtectionRequiredBonding = 3;
+  static const BLUETOOTH_MITM_ProtectionNotRequiredGeneralBonding = 4;
+  static const BLUETOOTH_MITM_ProtectionRequiredGeneralBonding = 5;
+  static const BLUETOOTH_MITM_ProtectionNotDefined = 6;
+}
+
+/// {@category Enum}
 class FILEOPENDIALOGOPTIONS {
   static final FOS_OVERWRITEPROMPT = 0x2;
   static final FOS_STRICTFILETYPES = 0x4;
