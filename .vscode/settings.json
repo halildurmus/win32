@@ -44,5 +44,8 @@
     },
     "editor.codeActionsOnSave": {
         "source.fixAll.markdownlint": true
-    }
+    },
+    "copyrightInserter.holder": "Dart project authors",
+    "copyrightInserter.license": "bsd",
+    "copyrightInserter.year": "2020",
 }

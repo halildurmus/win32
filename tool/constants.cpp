@@ -14,9 +14,11 @@
 #include <wbemidl.h>
 #include <netlistmgr.h>
 #include <highlevelmonitorconfigurationapi.h>
+#include <bluetoothapis.h>
 
 void main()
 {
+    auto size = BLUETOOTH_MAX_NAME_SIZE;
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));
     printf("sizeof(long) is %zu\n", sizeof(long));

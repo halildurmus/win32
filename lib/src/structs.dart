@@ -3,6 +3,7 @@
 // Dart representations of common structs used in the Win32 API
 
 import 'dart:ffi';
+import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 import 'constants.dart';
@@ -1919,6 +1920,94 @@ class SMALL_RECT extends Struct {
     ..Top = 0
     ..Right = 0
     ..Bottom = 0;
+}
+
+// typedef struct _BLUETOOTH_DEVICE_SEARCH_PARAMS {
+//   DWORD  dwSize;
+//   BOOL   fReturnAuthenticated;
+//   BOOL   fReturnRemembered;
+//   BOOL   fReturnUnknown;
+//   BOOL   fReturnConnected;
+//   BOOL   fIssueInquiry;
+//   UCHAR  cTimeoutMultiplier;
+//   HANDLE hRadio;
+// } BLUETOOTH_DEVICE_SEARCH_PARAMS;
+
+/// BLUETOOTH_DEVICE_SEARCH_PARAMS
+///
+/// {@category Struct}
+class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
+  @Int32()
+  int dwSize;
+  @Int32()
+  int fReturnAuthenticated;
+  @Int32()
+  int fReturnRemembered;
+  @Int32()
+  int fReturnUnknown;
+  @Int32()
+  int fReturnConnected;
+  @Int32()
+  int fIssueInquiry;
+  @Uint8()
+  int cTimeoutMultiplier;
+  @IntPtr()
+  int hRadio;
+
+  factory BLUETOOTH_DEVICE_SEARCH_PARAMS.allocate() =>
+      allocate<BLUETOOTH_DEVICE_SEARCH_PARAMS>().ref
+        ..dwSize = sizeOf<BLUETOOTH_DEVICE_SEARCH_PARAMS>()
+        ..fReturnAuthenticated = 0
+        ..fReturnRemembered = 0
+        ..fReturnUnknown = 0
+        ..fReturnConnected = 0
+        ..fIssueInquiry = 0
+        ..cTimeoutMultiplier = 0
+        ..hRadio = 0;
+}
+
+// typedef struct BLUETOOTH_FIND_RADIO_PARAMS {
+//   DWORD dwSize;
+// } BLUETOOTH_FIND_RADIO_PARAMS;
+
+/// BLUETOOTH_FIND_RADIO_PARAMS
+///
+/// {@category Struct}
+class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
+  @Uint32()
+  int dwSize;
+
+  factory BLUETOOTH_FIND_RADIO_PARAMS.allocate() =>
+      allocate<BLUETOOTH_FIND_RADIO_PARAMS>().ref
+        ..dwSize = sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>();
+}
+
+// typedef struct _BLUETOOTH_PIN_INFO {
+//   UCHAR pin[BTH_MAX_PIN_SIZE];
+//   UCHAR pinLength;
+// } BLUETOOTH_PIN_INFO, *PBLUETOOTH_PIN_INFO;
+
+/// BLUETOOTH_PIN_INFO
+///
+/// {@category Struct}
+class BLUETOOTH_PIN_INFO extends Struct {
+  @Uint64()
+  int pin1;
+  @Uint64()
+  int pin2;
+  @Uint8()
+  int pinLength;
+
+  set pin(String value) {
+    final pinData = ByteData.sublistView(Uint8List.fromList(value.codeUnits));
+    pin1 = pinData.getUint64(0);
+    pin2 = pinData.getUint64(8);
+  }
+
+  factory BLUETOOTH_PIN_INFO.allocate() => allocate<BLUETOOTH_PIN_INFO>().ref
+    ..pin1 = 0
+    ..pin2 = 0
+    ..pinLength = 0;
 }
 
 // typedef struct COR_FIELD_OFFSET

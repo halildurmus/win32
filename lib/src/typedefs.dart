@@ -33,6 +33,15 @@ typedef beginPaintNative = IntPtr Function(
     IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint);
 typedef beginPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
 
+// HBLUETOOTH_RADIO_FIND BluetoothFindFirstRadio(
+//   const BLUETOOTH_FIND_RADIO_PARAMS *pbtfrp,
+//   HANDLE                            *phRadio
+// );
+typedef bluetoothFindFirstRadioNative = IntPtr Function(
+    Pointer<BLUETOOTH_FIND_RADIO_PARAMS> pbtfrp, Pointer<IntPtr> phRadio);
+typedef bluetoothFindFirstRadioDart = int Function(
+    Pointer<BLUETOOTH_FIND_RADIO_PARAMS> pbtfrp, Pointer<IntPtr> phRadio);
+
 // BOOL WINAPI ChooseColor(
 //   _Inout_ LPCHOOSECOLOR lpcc
 // );
