@@ -7,7 +7,6 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 import 'constants.dart';
-import 'exceptions.dart';
 import 'string.dart';
 
 // typedef struct tagWNDCLASSW {
@@ -2054,27 +2053,34 @@ class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
 ///
 /// {@category Struct}
 class BLUETOOTH_PIN_INFO extends Struct {
-  @Uint64()
-  int pin1;
-  @Uint64()
-  int pin2;
   @Uint8()
   int pinLength;
 
-  String get pin {
-    throw WindowsException(ERROR_CALL_NOT_IMPLEMENTED);
-  }
+  String fromCString(Pointer<Uint8> buffer, int maxLength) =>
+      String.fromCharCodes(buffer.asTypedList(maxLength), 0, maxLength);
+
+  String get pin => String.fromCharCodes(
+      addressOf.cast<Uint8>().asTypedList(BTH_MAX_PIN_SIZE),
+      0,
+      BTH_MAX_PIN_SIZE);
 
   set pin(String value) {
-    final pinData = ByteData.sublistView(Uint8List.fromList(value.codeUnits));
-    pin1 = pinData.getUint64(0);
-    pin2 = pinData.getUint64(8);
+    var pinData = Uint8List.fromList(value.codeUnits);
+    if (pinData.length > BTH_MAX_PIN_SIZE) {
+      pinData = pinData.sublist(0, BTH_MAX_PIN_SIZE);
+    }
+    for (var idx = 0; idx < pinData.length; idx++) {
+      addressOf.cast<Uint8>().elementAt(idx).value = pinData[idx];
+    }
   }
 
-  factory BLUETOOTH_PIN_INFO.allocate() => allocate<BLUETOOTH_PIN_INFO>().ref
-    ..pin1 = 0
-    ..pin2 = 0
-    ..pinLength = 0;
+  factory BLUETOOTH_PIN_INFO.allocate() {
+    final ptr = allocate<Uint8>(count: BTH_MAX_PIN_SIZE + 1);
+    for (var idx = 0; idx < sizeOf<BLUETOOTH_PIN_INFO>(); idx++) {
+      ptr.elementAt(idx).value = 0;
+    }
+    return ptr.cast<BLUETOOTH_PIN_INFO>().ref;
+  }
 }
 
 // typedef struct COR_FIELD_OFFSET

@@ -4586,6 +4586,12 @@ const BLUETOOTH_MAX_SERVICE_NAME_SIZE = (256);
 /// @nodoc
 const BLUETOOTH_DEVICE_NAME_SIZE = (256);
 
+/// @nodoc
+const BTH_MAX_PIN_SIZE = (16);
+
+/// @nodoc
+const BTH_LINK_KEY_LENGTH = (16);
+
 /// {@category Enum}
 class BLUETOOTH_AUTHENTICATION_METHOD {
   static const BLUETOOTH_AUTHENTICATION_METHOD_LEGACY = 0;

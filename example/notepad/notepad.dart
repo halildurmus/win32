@@ -28,7 +28,7 @@ class Notepad {
   static int messageFindReplace;
   static int hDlgModeless = NULL;
 
-  static const iOffset = allocate<Uint32>()..value = 0;
+  static final iOffset = allocate<Uint32>()..value = 0;
 
   static int MainWindowProc(int hwnd, int message, int wParam, int lParam) {
     switch (message) {

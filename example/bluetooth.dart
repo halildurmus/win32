@@ -23,7 +23,7 @@ void findBluetoothDevices(int btRadioHandle) {
   if (firstDeviceHandle == NULL) {
     print('No devices found.');
   } else {
-    print(info.szName.unpackString(BLUETOOTH_MAX_NAME_SIZE));
+    print(info.szName);
     BluetoothFindDeviceClose(firstDeviceHandle);
   }
 }
