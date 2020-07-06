@@ -3,6 +3,7 @@
 // Dart representations of common structs used in the Win32 API
 
 import 'dart:ffi';
+import 'dart:math' show min;
 import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
@@ -2053,30 +2054,31 @@ class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
 ///
 /// {@category Struct}
 class BLUETOOTH_PIN_INFO extends Struct {
-  @Uint8()
-  int pinLength;
+  int get pinLength =>
+      addressOf.cast<Uint8>().elementAt(BTH_MAX_PIN_SIZE).value;
 
-  String fromCString(Pointer<Uint8> buffer, int maxLength) =>
-      String.fromCharCodes(buffer.asTypedList(maxLength), 0, maxLength);
+  set pinLength(int length) {
+    addressOf.cast<Uint8>().elementAt(BTH_MAX_PIN_SIZE).value =
+        min(length, BTH_MAX_PIN_SIZE);
+  }
 
-  String get pin => String.fromCharCodes(
-      addressOf.cast<Uint8>().asTypedList(BTH_MAX_PIN_SIZE),
-      0,
-      BTH_MAX_PIN_SIZE);
+  String get pin =>
+      String.fromCharCodes(addressOf.cast<Uint8>().asTypedList(pinLength));
 
-  set pin(String value) {
-    var pinData = Uint8List.fromList(value.codeUnits);
-    if (pinData.length > BTH_MAX_PIN_SIZE) {
-      pinData = pinData.sublist(0, BTH_MAX_PIN_SIZE);
-    }
-    for (var idx = 0; idx < pinData.length; idx++) {
+  set pin(String pinString) {
+    var pinData = Uint8List.fromList(pinString.codeUnits);
+
+    // Set up to the length of the string, even if longer than pinLength, since
+    // user may set pin then pinLength.
+    for (var idx = 0; idx < min(pinData.length, BTH_MAX_PIN_SIZE); idx++) {
       addressOf.cast<Uint8>().elementAt(idx).value = pinData[idx];
     }
   }
 
   factory BLUETOOTH_PIN_INFO.allocate() {
-    final ptr = allocate<Uint8>(count: BTH_MAX_PIN_SIZE + 1);
-    for (var idx = 0; idx < sizeOf<BLUETOOTH_PIN_INFO>(); idx++) {
+    final structSize = BTH_MAX_PIN_SIZE + 1;
+    final ptr = allocate<Uint8>(count: structSize);
+    for (var idx = 0; idx < structSize; idx++) {
       ptr.elementAt(idx).value = 0;
     }
     return ptr.cast<BLUETOOTH_PIN_INFO>().ref;
