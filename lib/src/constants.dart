@@ -3625,6 +3625,9 @@ class MC_SIZE_TYPE {
   static const MC_HEIGHT = 1;
 }
 
+/// @nodoc
+const DEACTIVATE_ACTCTX_FLAG_FORCE_EARLY_DEACTIVATION = 1
+
 // *** COM CONSTANTS ***
 
 /// @nodoc

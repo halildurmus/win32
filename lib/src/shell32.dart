@@ -9,6 +9,15 @@ import 'typedefs.dart';
 final _shell32 = DynamicLibrary.open('shell32.dll');
 
 /// {@category shell32}
+final FindExecutable =
+    _shell32.lookupFunction<findExecutableNative, findExecutableDart>(
+        'FindExecutableW');
+
+/// {@category shell32}
+final ShellAbout =
+    _shell32.lookupFunction<shellAboutNative, shellAboutDart>('ShellAboutW');
+
+/// {@category shell32}
 final ShellExecute = _shell32
     .lookupFunction<shellExecuteNative, shellExecuteDart>('ShellExecuteW');
 

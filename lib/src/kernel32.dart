@@ -9,6 +9,10 @@ import 'typedefs.dart';
 final _kernel32 = DynamicLibrary.open('kernel32.dll');
 
 /// {@category kernel32}
+final ActivateActCtx = _kernel32
+    .lookupFunction<activateActCtxNative, activateActCtxDart>('ActivateActCtx');
+
+/// {@category kernel32}
 final Beep = _kernel32.lookupFunction<beepNative, beepDart>('Beep');
 
 /// {@category kernel32}
@@ -35,6 +39,11 @@ final CreateProcess = _kernel32
 /// {@category kernel32}
 final CreatePseudoConsole = _kernel32.lookupFunction<createPseudoConsoleNative,
     createPseudoConsoleDart>('CreatePseudoConsole');
+
+/// {@category kernel32}
+final DeactivateActCtx =
+    _kernel32.lookupFunction<deactivateActCtxNative, deactivateActCtxDart>(
+        'DeactivateActCtx');
 
 /// {@category kernel32}
 final FillConsoleOutputAttribute = _kernel32.lookupFunction<

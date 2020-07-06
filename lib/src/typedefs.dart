@@ -7,6 +7,15 @@ import 'package:ffi/ffi.dart';
 
 import 'structs.dart';
 
+// BOOL ActivateActCtx(
+//   HANDLE    hActCtx,
+//   ULONG_PTR *lpCookie
+// );
+typedef activateActCtxNative = Int32 Function(
+    IntPtr hActCtx, Pointer<IntPtr> lpCookie);
+typedef activateActCtxDart = int Function(
+    int hActCtx, Pointer<IntPtr> lpCookie);
+
 // BOOL AppendMenuW(
 //   HMENU    hMenu,
 //   UINT     uFlags,
@@ -418,6 +427,14 @@ typedef createWindowExDart = int Function(
     int hInstance,
     Pointer<Void> lpParam);
 
+// BOOL DeactivateActCtx(
+//   DWORD     dwFlags,
+//   ULONG_PTR ulCookie
+// );
+typedef deactivateActCtxNative = Int32 Function(
+    Uint32 dwFlags, IntPtr ulCookie);
+typedef deactivateActCtxDart = int Function(int dwFlags, int ulCookie);
+
 // LRESULT LRESULT DefWindowProcW(
 //   HWND   hWnd,
 //   UINT   Msg,
@@ -581,6 +598,16 @@ typedef fillConsoleOutputAttributeDart = int Function(
 typedef fillRectNative = Int32 Function(
     IntPtr hDC, Pointer<RECT> lprc, IntPtr hbr);
 typedef fillRectDart = int Function(int hDC, Pointer<RECT> lprc, int hbr);
+
+// HINSTANCE FindExecutableW(
+//   LPCWSTR lpFile,
+//   LPCWSTR lpDirectory,
+//   LPWSTR  lpResult
+// );
+typedef findExecutableNative = IntPtr Function(
+    Pointer<Utf16> lpFile, Pointer<Utf16> lpDirectory, Pointer<Utf16> lpResult);
+typedef findExecutableDart = int Function(
+    Pointer<Utf16> lpFile, Pointer<Utf16> lpDirectory, Pointer<Utf16> lpResult);
 
 // HANDLE FindFirstVolumeW(
 //   LPWSTR lpszVolumeName,
@@ -1599,6 +1626,17 @@ typedef shGetKnownFolderPathNative = Int32 Function(Pointer<GUID> rfid,
     Uint32 dwFlags, IntPtr hToken, Pointer<IntPtr> ppszPath);
 typedef shGetKnownFolderPathDart = int Function(
     Pointer<GUID> rfid, int dwFlags, int hToken, Pointer<IntPtr> ppszPath);
+
+// INT ShellAboutW(
+//   HWND    hWnd,
+//   LPCWSTR szApp,
+//   LPCWSTR szOtherStuff,
+//   HICON   hIcon
+// );
+typedef shellAboutNative = Int32 Function(IntPtr hWnd, Pointer<Utf16> szApp,
+    Pointer<Utf16> szOtherStuff, IntPtr hIcon);
+typedef shellAboutDart = int Function(
+    int hWnd, Pointer<Utf16> szApp, Pointer<Utf16> szOtherStuff, int hIcon);
 
 // HINSTANCE ShellExecuteW(
 //   HWND    hwnd,
