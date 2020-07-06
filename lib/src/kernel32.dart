@@ -84,6 +84,11 @@ final GetConsoleCursorInfo = _kernel32.lookupFunction<
     getConsoleCursorInfoDart>('GetConsoleCursorInfo');
 
 /// {@category kernel32}
+final GetComputerNameEx =
+    _kernel32.lookupFunction<getComputerNameExNative, getComputerNameExDart>(
+        'GetComputerNameExW');
+
+/// {@category kernel32}
 final GetConsoleMode = _kernel32
     .lookupFunction<getConsoleModeNative, getConsoleModeDart>('GetConsoleMode');
 
@@ -112,6 +117,10 @@ final GetProcessHeap = _kernel32
     .lookupFunction<getProcessHeapNative, getProcessHeapDart>('GetProcessHeap');
 
 /// {@category kernel32}
+final GetProductInfo = _kernel32
+    .lookupFunction<getProductInfoNative, getProductInfoDart>('GetProductInfo');
+
+/// {@category kernel32}
 final GetLastError = _kernel32
     .lookupFunction<getLastErrorNative, getLastErrorDart>('GetLastError');
 
@@ -119,6 +128,12 @@ final GetLastError = _kernel32
 final GetModuleHandle =
     _kernel32.lookupFunction<getModuleHandleNative, getModuleHandleDart>(
         'GetModuleHandleW');
+
+/// {@category kernel32}
+final GetPhysicallyInstalledSystemMemory = _kernel32.lookupFunction<
+        getPhysicallyInstalledSystemMemoryNative,
+        getPhysicallyInstalledSystemMemoryDart>(
+    'GetPhysicallyInstalledSystemMemory');
 
 /// {@category kernel32}
 final GetProcAddress = _kernel32
@@ -135,6 +150,10 @@ final GetSystemInfo = _kernel32
 /// {@category kernel32}
 final GetTempPath = _kernel32
     .lookupFunction<getTempPathNative, getTempPathDart>('GetTempPathW');
+
+/// {@category kernel32}
+final GetVersionEx = _kernel32
+    .lookupFunction<getVersionExNative, getVersionExDart>('GetVersionExW');
 
 /// {@category kernel32}
 final GetVolumePathNamesForVolumeName = _kernel32.lookupFunction<

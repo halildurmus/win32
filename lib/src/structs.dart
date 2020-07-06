@@ -1924,6 +1924,47 @@ class SMALL_RECT extends Struct {
     ..Bottom = 0;
 }
 
+// typedef struct _OSVERSIONINFOW {
+//   DWORD dwOSVersionInfoSize;
+//   DWORD dwMajorVersion;
+//   DWORD dwMinorVersion;
+//   DWORD dwBuildNumber;
+//   DWORD dwPlatformId;
+//   WCHAR szCSDVersion[128];
+// } OSVERSIONINFOW, *POSVERSIONINFOW, *LPOSVERSIONINFOW, RTL_OSVERSIONINFOW, *PRTL_OSVERSIONINFOW;
+
+const _OSVERSIONINFO_STRUCT_SIZE = (20 + (128 * 2));
+
+/// OSVERSIONINFO
+///
+/// {@category Struct}
+class OSVERSIONINFO extends Struct {
+  @Uint32()
+  int dwOSVersionInfoSize;
+  @Uint32()
+  int dwMajorVersion;
+  @Uint32()
+  int dwMinorVersion;
+  @Uint32()
+  int dwBuildNumber;
+  @Uint32()
+  int dwPlatformId;
+
+  String get szCSDVersion =>
+      addressOf.cast<Uint8>().elementAt(20).cast<Utf16>().unpackString(128);
+
+  factory OSVERSIONINFO.allocate() =>
+      allocate<Uint8>(count: _OSVERSIONINFO_STRUCT_SIZE)
+          .cast<OSVERSIONINFO>()
+          .ref
+        ..dwOSVersionInfoSize = _OSVERSIONINFO_STRUCT_SIZE
+        ..dwMajorVersion = 0
+        ..dwMinorVersion = 0
+        ..dwBuildNumber = 0
+        ..dwPlatformId = 0
+        ..addressOf.cast<Uint8>().elementAt(20).value = 0;
+}
+
 // typedef struct _BLUETOOTH_DEVICE_INFO {
 //   DWORD             dwSize;
 //   BLUETOOTH_ADDRESS Address;

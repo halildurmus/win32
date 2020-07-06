@@ -15,6 +15,7 @@
 #include <netlistmgr.h>
 #include <highlevelmonitorconfigurationapi.h>
 #include <bluetoothapis.h>
+#include <VersionHelpers.h>
 
 void main()
 {
@@ -53,6 +54,7 @@ void main()
     printf("sizeof(CHOOSECOLORW) is %zu\n", sizeof(CHOOSECOLORW));
     printf("sizeof(MSG) is %zu\n", sizeof(MSG));
     printf("sizeof(SIZE_T) is %zu\n", sizeof(SIZE_T));
+    printf("sizeof(OSVERSIONINFOW) is %zu\n", sizeof(OSVERSIONINFOW));
 
     printf("sizeof(WCHAR) is %zu\n", sizeof(WCHAR));
     printf("sizeof(TCHAR) is %zu\n", sizeof(TCHAR));

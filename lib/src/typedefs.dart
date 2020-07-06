@@ -690,6 +690,16 @@ typedef freeLibraryDart = int Function(int hLibModule);
 typedef getClientRectNative = Int32 Function(IntPtr hwnd, Pointer<RECT> lpRect);
 typedef getClientRectDart = int Function(int hwnd, Pointer<RECT> lpRect);
 
+// BOOL GetComputerNameExW(
+//   COMPUTER_NAME_FORMAT NameType,
+//   LPWSTR               lpBuffer,
+//   LPDWORD              nSize
+// );
+typedef getComputerNameExNative = Int32 Function(
+    Int32 NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize);
+typedef getComputerNameExDart = int Function(
+    int NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize);
+
 // BOOL WINAPI GetConsoleCursorInfo(
 //   _In_  HANDLE               hConsoleOutput,
 //   _Out_ PCONSOLE_CURSOR_INFO lpConsoleCursorInfo
@@ -965,6 +975,14 @@ typedef getObjectDart = int Function(int h, int c, Pointer pv);
 typedef getOpenFileNameNative = Int32 Function(Pointer<OPENFILENAME> arg1);
 typedef getOpenFileNameDart = int Function(Pointer<OPENFILENAME> arg1);
 
+// BOOL GetPhysicallyInstalledSystemMemory(
+//   PULONGLONG TotalMemoryInKilobytes
+// );
+typedef getPhysicallyInstalledSystemMemoryNative = Int32 Function(
+    Pointer<Uint64> TotalMemoryInKilobytes);
+typedef getPhysicallyInstalledSystemMemoryDart = int Function(
+    Pointer<Uint64> TotalMemoryInKilobytes);
+
 // _BOOL GetPhysicalMonitorsFromHMONITOR(
 //   HMONITOR           hMonitor,
 //   DWORD              dwPhysicalMonitorArraySize,
@@ -987,6 +1005,26 @@ typedef getProcAddressDart = int Function(
 // HANDLE GetProcessHeap();
 typedef getProcessHeapNative = IntPtr Function();
 typedef getProcessHeapDart = int Function();
+
+// BOOL GetProductInfo(
+//   DWORD  dwOSMajorVersion,
+//   DWORD  dwOSMinorVersion,
+//   DWORD  dwSpMajorVersion,
+//   DWORD  dwSpMinorVersion,
+//   PDWORD pdwReturnedProductType
+// );
+typedef getProductInfoNative = Int32 Function(
+    Uint32 dwOSMajorVersion,
+    Uint32 dwOSMinorVersion,
+    Uint32 dwSpMajorVersion,
+    Uint32 dwSpMinorVersion,
+    Pointer<Uint32> pdwReturnedProductType);
+typedef getProductInfoDart = int Function(
+    int dwOSMajorVersion,
+    int dwOSMinorVersion,
+    int dwSpMajorVersion,
+    int dwSpMinorVersion,
+    Pointer<Uint32> pdwReturnedProductType);
 
 // BOOL GetSaveFileNameW(
 //   LPOPENFILENAMEW Arg1
@@ -1038,6 +1076,14 @@ typedef getTempPathDart = int Function(
 typedef getTextMetricsNative = Int32 Function(
     IntPtr hdc, Pointer<TEXTMETRIC> lptm);
 typedef getTextMetricsDart = int Function(int hdc, Pointer<TEXTMETRIC> lptm);
+
+// NOT_BUILD_WINDOWS_DEPRECATE BOOL GetVersionExW(
+//   LPOSVERSIONINFOW lpVersionInformation
+// );
+typedef getVersionExNative = Int32 Function(
+    Pointer<OSVERSIONINFO> lpVersionInformation);
+typedef getVersionExDart = int Function(
+    Pointer<OSVERSIONINFO> lpVersionInformation);
 
 // BOOL GetVolumePathNamesForVolumeNameW(
 //   LPCWSTR lpszVolumeName,
