@@ -7,7 +7,7 @@ bool isWindows10OrGreater() {
   var isAtLeastWindows10 = false;
 
   final subKeyPtr = TEXT('SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\');
-  final valueNamePtr = TEXT('CurrentMajorVersionNumber');
+  final valueNamePtr = TEXT('CurrentBuildNumber');
   final openKeyPtr = allocate<IntPtr>();
   final dataType = allocate<Uint32>();
 
@@ -24,8 +24,10 @@ bool isWindows10OrGreater() {
           dataType, data.cast(), dataSize);
 
       if (result == ERROR_SUCCESS) {
-        if (dataType.value == REG_DWORD) {
-          isAtLeastWindows10 = data.value >= 10;
+        if (dataType.value == REG_SZ) {
+          final buildNumberString = data.cast<Utf16>().unpackString(128);
+          final buildNumber = int.parse(buildNumberString);
+          return buildNumber >= 10240; // TH1
         } else {
           isAtLeastWindows10 = false;
         }
