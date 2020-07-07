@@ -1,4 +1,12 @@
+## 1.6.7
+
+- Add basic registry cheks
+- Add initial Bluetooth discovery support
+- Add a system information sample
+- Guard tests so that they work on Windows 7
+
 ## 1.6.6
+
 - Add more process management APIs
 - Add high level monitor configuration API
 

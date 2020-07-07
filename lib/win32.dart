@@ -86,6 +86,7 @@ export 'src/string.dart';
 export 'src/callbacks.dart';
 
 // Traditional C-style Windows APIs
+export 'src/advapi32.dart';
 export 'src/bthprops.dart';
 export 'src/comctl32.dart';
 export 'src/comdlg32.dart';

@@ -525,6 +525,9 @@ const ERROR_INVALID_SEGDPL = 198;
 const ERROR_AUTODATASEG_EXCEEDS_64k = 199;
 
 /// @nodoc
+const ERROR_MORE_DATA = 234;
+
+/// @nodoc
 const ERROR_CANCELLED = 1223;
 
 /// @nodoc
@@ -3407,6 +3410,177 @@ const STANDARD_RIGHTS_ALL = 0x001F0000;
 
 /// @nodoc
 const SPECIFIC_RIGHTS_ALL = 0x0000FFFF;
+
+// Registry keys
+
+/// @nodoc
+const HKEY_CLASSES_ROOT = 0x80000000;
+
+/// @nodoc
+const HKEY_CURRENT_USER = 0x80000001;
+
+/// @nodoc
+const HKEY_LOCAL_MACHINE = 0x80000002;
+
+/// @nodoc
+const HKEY_USERS = 0x80000003;
+
+/// @nodoc
+const HKEY_PERFORMANCE_DATA = 0x80000004;
+
+/// @nodoc
+const HKEY_PERFORMANCE_TEXT = 0x80000050;
+
+/// @nodoc
+const HKEY_PERFORMANCE_NLSTEXT = 0x80000060;
+
+/// @nodoc
+const HKEY_CURRENT_CONFIG = 0x80000005;
+
+/// @nodoc
+const HKEY_DYN_DATA = 0x80000006;
+
+/// @nodoc
+const HKEY_CURRENT_USER_LOCAL_SETTINGS = 0x80000007;
+
+/// @nodoc
+const RRF_RT_REG_NONE = 0x00000001;
+
+/// @nodoc
+const RRF_RT_REG_SZ = 0x00000002;
+
+/// @nodoc
+const RRF_RT_REG_EXPAND_SZ = 0x00000004;
+
+/// @nodoc
+const RRF_RT_REG_BINARY = 0x00000008;
+
+/// @nodoc
+const RRF_RT_REG_DWORD = 0x00000010;
+
+/// @nodoc
+const RRF_RT_REG_MULTI_SZ = 0x00000020;
+
+/// @nodoc
+const RRF_RT_REG_QWORD = 0x00000040;
+
+/// @nodoc
+const RRF_RT_DWORD = (RRF_RT_REG_BINARY | RRF_RT_REG_DWORD);
+
+/// @nodoc
+const RRF_RT_QWORD = (RRF_RT_REG_BINARY | RRF_RT_REG_QWORD);
+
+/// @nodoc
+const RRF_RT_ANY = 0x0000ffff;
+
+/// @nodoc
+const RRF_SUBKEY_WOW6464KEY = 0x00010000;
+
+/// @nodoc
+const RRF_SUBKEY_WOW6432KEY = 0x00020000;
+
+/// @nodoc
+const RRF_WOW64_MASK = 0x00030000;
+
+/// @nodoc
+const RRF_NOEXPAND = 0x10000000;
+
+/// @nodoc
+const RRF_ZEROONFAILURE = 0x20000000;
+
+/// @nodoc
+const REG_NONE = (0);
+
+/// @nodoc
+const REG_SZ = (1);
+
+/// @nodoc
+const REG_EXPAND_SZ = (2);
+
+/// @nodoc
+const REG_BINARY = (3);
+
+/// @nodoc
+const REG_DWORD = (4);
+
+/// @nodoc
+const REG_DWORD_LITTLE_ENDIAN = (4);
+
+/// @nodoc
+const REG_DWORD_BIG_ENDIAN = (5);
+
+/// @nodoc
+const REG_LINK = (6);
+
+/// @nodoc
+const REG_MULTI_SZ = (7);
+
+/// @nodoc
+const REG_RESOURCE_LIST = (8);
+
+/// @nodoc
+const REG_FULL_RESOURCE_DESCRIPTOR = (9);
+
+/// @nodoc
+const REG_RESOURCE_REQUIREMENTS_LIST = (10);
+
+/// @nodoc
+const REG_QWORD = (11);
+
+/// @nodoc
+const REG_QWORD_LITTLE_ENDIAN = (11);
+
+/// @nodoc
+const KEY_QUERY_VALUE = (0x0001);
+
+/// @nodoc
+const KEY_SET_VALUE = (0x0002);
+
+/// @nodoc
+const KEY_CREATE_SUB_KEY = (0x0004);
+
+/// @nodoc
+const KEY_ENUMERATE_SUB_KEYS = (0x0008);
+
+/// @nodoc
+const KEY_NOTIFY = (0x0010);
+
+/// @nodoc
+const KEY_CREATE_LINK = (0x0020);
+
+/// @nodoc
+const KEY_WOW64_32KEY = (0x0200);
+
+/// @nodoc
+const KEY_WOW64_64KEY = (0x0100);
+
+/// @nodoc
+const KEY_WOW64_RES = (0x0300);
+
+/// @nodoc
+const KEY_READ = ((STANDARD_RIGHTS_READ |
+        KEY_QUERY_VALUE |
+        KEY_ENUMERATE_SUB_KEYS |
+        KEY_NOTIFY) &
+    (~SYNCHRONIZE));
+
+/// @nodoc
+const KEY_WRITE =
+    ((STANDARD_RIGHTS_WRITE | KEY_SET_VALUE | KEY_CREATE_SUB_KEY) &
+        (~SYNCHRONIZE));
+
+/// @nodoc
+const KEY_EXECUTE = ((KEY_READ) & (~SYNCHRONIZE));
+
+/// @nodoc
+const KEY_ALL_ACCESS = ((STANDARD_RIGHTS_ALL |
+        KEY_QUERY_VALUE |
+        KEY_SET_VALUE |
+        KEY_CREATE_SUB_KEY |
+        KEY_ENUMERATE_SUB_KEYS |
+        KEY_NOTIFY |
+        KEY_CREATE_LINK) &
+    (~SYNCHRONIZE));
 
 // *** CONSOLE CONSTANTS ***
 

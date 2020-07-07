@@ -1342,6 +1342,51 @@ typedef readProcessMemoryDart = int Function(
     int nSize,
     Pointer<IntPtr> lpNumberOfBytesRead);
 
+// LSTATUS RegCloseKey(
+//   HKEY hKey
+// );
+typedef regCloseKeyNative = Int32 Function(IntPtr hKey);
+typedef regCloseKeyDart = int Function(int hKey);
+
+// LSTATUS RegOpenKeyExW(
+//   HKEY    hKey,
+//   LPCWSTR lpSubKey,
+//   DWORD   ulOptions,
+//   REGSAM  samDesired,
+//   PHKEY   phkResult
+// );
+typedef regOpenKeyExNative = Int32 Function(
+    IntPtr hKey,
+    Pointer<Utf16> lpSubKey,
+    Uint32 ulOptions,
+    Int32 samDesired,
+    Pointer<IntPtr> phkResult);
+typedef regOpenKeyExDart = int Function(int hKey, Pointer<Utf16> lpSubKey,
+    int ulOptions, int samDesired, Pointer<IntPtr> phkResult);
+
+// LSTATUS RegQueryValueExW(
+//   HKEY    hKey,
+//   LPCWSTR lpValueName,
+//   LPDWORD lpReserved,
+//   LPDWORD lpType,
+//   LPBYTE  lpData,
+//   LPDWORD lpcbData
+// );
+typedef regQueryValueExNative = Int32 Function(
+    IntPtr hKey,
+    Pointer<Utf16> lpValueName,
+    Pointer<Uint32> lpReserved,
+    Pointer<Uint32> lpType,
+    Pointer<Uint8> lpData,
+    Pointer<Uint32> lpcbData);
+typedef regQueryValueExDart = int Function(
+    int hKey,
+    Pointer<Utf16> lpValueName,
+    Pointer<Uint32> lpReserved,
+    Pointer<Uint32> lpType,
+    Pointer<Uint8> lpData,
+    Pointer<Uint32> lpcbData);
+
 // ATOM RegisterClassW(
 //   const WNDCLASSW *lpWndClass
 // );
