@@ -134,27 +134,18 @@ void main() {
   if (isWindows7OrGreater()) print(' - Windows 7');
   if (isWindows8OrGreater()) print(' - Windows 8');
 
-  print(
-      '\nRAM physically installed on this computer: ${getSystemMemoryInMegabytes()}MB');
-  print('\nComputer full DNS name is: ${getComputerName()}');
-
   // Microsoft strongly recommends that developers avoid version testing, but
   // there's not a great way otherwise to guard against use of things like
   // Windows Runtime.
-  final majorVersion = getRegistryValue(
+  final buildNumber = int.parse(getRegistryValue(
       HKEY_LOCAL_MACHINE,
       'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\',
-      'CurrentMajorVersionNumber') as int;
-  final minorVersion = getRegistryValue(
-      HKEY_LOCAL_MACHINE,
-      'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\',
-      'CurrentMinorVersionNumber') as int;
+      'CurrentBuildNumber') as String);
+  if (buildNumber >= 10240) print(' - Windows 10');
 
-  final buildNumber = getRegistryValue(
-      HKEY_LOCAL_MACHINE,
-      'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\',
-      'CurrentBuildNumber') as String;
+  print('\nWindows build number is: $buildNumber');
 
-  print('\nWindows version is: $majorVersion.$minorVersion');
-  print('Windows build number is: $buildNumber');
+  print(
+      '\nRAM physically installed on this computer: ${getSystemMemoryInMegabytes()}MB');
+  print('\nComputer full DNS name is: ${getComputerName()}');
 }
