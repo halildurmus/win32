@@ -4,6 +4,7 @@
 - Add initial Bluetooth discovery support
 - Add a system information sample
 - Guard tests so that they work on Windows 7
+- Add some shell APIs and more tests
 
 ## 1.6.6
 
