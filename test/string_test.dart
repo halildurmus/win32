@@ -67,36 +67,36 @@ void main() {
     });
   });
 
-if (isWindows10OrGreater()) {
-  group('HSTRING tests', () {
-    test('String to HSTRING conversion', () {
-      for (var i = 0; i < TEST_RUNS; i++) {
-        final string = 'This is a string to convert.\n';
-        final hstring = convertToHString(string);
+  if (isWindows10OrGreater()) {
+    group('HSTRING tests', () {
+      test('String to HSTRING conversion', () {
+        for (var i = 0; i < TEST_RUNS; i++) {
+          final string = 'This is a string to convert.\n';
+          final hstring = convertToHString(string);
 
-        final string2 = convertFromHString(hstring);
-        expect(string, equals(string2));
+          final string2 = convertFromHString(hstring);
+          expect(string, equals(string2));
 
-        WindowsDeleteString(hstring.value);
-        free(hstring);
-      }
-    });
-    test('String to HSTRING conversion -- more complex', () {
-      for (var i = 0; i < TEST_RUNS; i++) {
-        final string = '''
+          WindowsDeleteString(hstring.value);
+          free(hstring);
+        }
+      });
+      test('String to HSTRING conversion -- more complex', () {
+        for (var i = 0; i < TEST_RUNS; i++) {
+          final string = '''
 Some emojis: 💼📃👩🏾‍💻🛀🏼🤗
 Some Hangul: 이력서
 Some accented text: Résumé
     ''';
-        final hstring = convertToHString(string);
+          final hstring = convertToHString(string);
 
-        final string2 = convertFromHString(hstring);
-        expect(string, equals(string2));
+          final string2 = convertFromHString(hstring);
+          expect(string, equals(string2));
 
-        WindowsDeleteString(hstring.value);
-        free(hstring);
-      }
+          WindowsDeleteString(hstring.value);
+          free(hstring);
+        }
+      });
     });
-  });
-}
+  }
 }
