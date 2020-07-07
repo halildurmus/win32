@@ -3,9 +3,12 @@
 // Dart representations of common structs used in the Win32 API
 
 import 'dart:ffi';
+import 'dart:math' show min;
+import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 import 'constants.dart';
+import 'string.dart';
 
 // typedef struct tagWNDCLASSW {
 //   UINT      style;
@@ -1919,6 +1922,208 @@ class SMALL_RECT extends Struct {
     ..Top = 0
     ..Right = 0
     ..Bottom = 0;
+}
+
+// typedef struct _OSVERSIONINFOW {
+//   DWORD dwOSVersionInfoSize;
+//   DWORD dwMajorVersion;
+//   DWORD dwMinorVersion;
+//   DWORD dwBuildNumber;
+//   DWORD dwPlatformId;
+//   WCHAR szCSDVersion[128];
+// } OSVERSIONINFOW, *POSVERSIONINFOW, *LPOSVERSIONINFOW, RTL_OSVERSIONINFOW, *PRTL_OSVERSIONINFOW;
+
+const _OSVERSIONINFO_STRUCT_SIZE = (20 + (128 * 2));
+
+/// OSVERSIONINFO
+///
+/// {@category Struct}
+class OSVERSIONINFO extends Struct {
+  @Uint32()
+  int dwOSVersionInfoSize;
+  @Uint32()
+  int dwMajorVersion;
+  @Uint32()
+  int dwMinorVersion;
+  @Uint32()
+  int dwBuildNumber;
+  @Uint32()
+  int dwPlatformId;
+
+  String get szCSDVersion =>
+      addressOf.cast<Uint8>().elementAt(20).cast<Utf16>().unpackString(128);
+
+  factory OSVERSIONINFO.allocate() =>
+      allocate<Uint8>(count: _OSVERSIONINFO_STRUCT_SIZE)
+          .cast<OSVERSIONINFO>()
+          .ref
+        ..dwOSVersionInfoSize = _OSVERSIONINFO_STRUCT_SIZE
+        ..dwMajorVersion = 0
+        ..dwMinorVersion = 0
+        ..dwBuildNumber = 0
+        ..dwPlatformId = 0
+        ..addressOf.cast<Uint8>().elementAt(20).value = 0;
+}
+
+// typedef struct _BLUETOOTH_DEVICE_INFO {
+//   DWORD             dwSize;
+//   BLUETOOTH_ADDRESS Address;
+//   ULONG             ulClassofDevice;
+//   BOOL              fConnected;
+//   BOOL              fRemembered;
+//   BOOL              fAuthenticated;
+//   SYSTEMTIME        stLastSeen;
+//   SYSTEMTIME        stLastUsed;
+//   WCHAR             szName[BLUETOOTH_MAX_NAME_SIZE];
+// } BLUETOOTH_DEVICE_INFO_STRUCT;
+
+/// BLUETOOTH_DEVICE_INFO
+///
+/// {@category Struct}
+class BLUETOOTH_DEVICE_INFO extends Struct {
+  @Uint32()
+  int dwSize;
+  @Uint64()
+  int Address;
+  @Uint32()
+  int ulClassofDevice;
+  @Int32()
+  int fConnected;
+  @Int32()
+  int fRemembered;
+  @Int32()
+  int fAuthenticated;
+
+  // SYSTEMTIME is 128-bit
+  @Int64()
+  int stLastSeenDate;
+  @Int64()
+  int stLastSeenTime;
+
+  // SYSTEMTIME is 128-bit
+  @Int64()
+  int stLastUsedDate;
+  @Int64()
+  int stLastUsedTime;
+
+  String get szName => addressOf
+      .cast<Uint8>()
+      .elementAt(60)
+      .cast<Utf16>()
+      .unpackString(BLUETOOTH_MAX_NAME_SIZE);
+
+  factory BLUETOOTH_DEVICE_INFO.allocate() =>
+      allocate<Uint8>(count: 560).cast<BLUETOOTH_DEVICE_INFO>().ref
+        ..dwSize = 560
+        ..Address = 0
+        ..ulClassofDevice = 0
+        ..fConnected = 0
+        ..fRemembered = 0
+        ..fAuthenticated = 0
+        ..stLastSeenDate = 0
+        ..stLastSeenTime = 0
+        ..stLastUsedDate = 0
+        ..stLastUsedTime = 0;
+}
+
+// typedef struct _BLUETOOTH_DEVICE_SEARCH_PARAMS {
+//   DWORD  dwSize;
+//   BOOL   fReturnAuthenticated;
+//   BOOL   fReturnRemembered;
+//   BOOL   fReturnUnknown;
+//   BOOL   fReturnConnected;
+//   BOOL   fIssueInquiry;
+//   UCHAR  cTimeoutMultiplier;
+//   HANDLE hRadio;
+// } BLUETOOTH_DEVICE_SEARCH_PARAMS;
+
+/// BLUETOOTH_DEVICE_SEARCH_PARAMS
+///
+/// {@category Struct}
+class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
+  @Int32()
+  int dwSize;
+  @Int32()
+  int fReturnAuthenticated;
+  @Int32()
+  int fReturnRemembered;
+  @Int32()
+  int fReturnUnknown;
+  @Int32()
+  int fReturnConnected;
+  @Int32()
+  int fIssueInquiry;
+  @Uint8()
+  int cTimeoutMultiplier;
+  @IntPtr()
+  int hRadio;
+
+  factory BLUETOOTH_DEVICE_SEARCH_PARAMS.allocate() =>
+      allocate<BLUETOOTH_DEVICE_SEARCH_PARAMS>().ref
+        ..dwSize = sizeOf<BLUETOOTH_DEVICE_SEARCH_PARAMS>()
+        ..fReturnAuthenticated = 0
+        ..fReturnRemembered = 0
+        ..fReturnUnknown = 0
+        ..fReturnConnected = 0
+        ..fIssueInquiry = 0
+        ..cTimeoutMultiplier = 0
+        ..hRadio = 0;
+}
+
+// typedef struct BLUETOOTH_FIND_RADIO_PARAMS {
+//   DWORD dwSize;
+// } BLUETOOTH_FIND_RADIO_PARAMS;
+
+/// BLUETOOTH_FIND_RADIO_PARAMS
+///
+/// {@category Struct}
+class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
+  @Uint32()
+  int dwSize;
+
+  factory BLUETOOTH_FIND_RADIO_PARAMS.allocate() =>
+      allocate<BLUETOOTH_FIND_RADIO_PARAMS>().ref
+        ..dwSize = sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>();
+}
+
+// typedef struct _BLUETOOTH_PIN_INFO {
+//   UCHAR pin[BTH_MAX_PIN_SIZE];
+//   UCHAR pinLength;
+// } BLUETOOTH_PIN_INFO, *PBLUETOOTH_PIN_INFO;
+
+/// BLUETOOTH_PIN_INFO
+///
+/// {@category Struct}
+class BLUETOOTH_PIN_INFO extends Struct {
+  int get pinLength =>
+      addressOf.cast<Uint8>().elementAt(BTH_MAX_PIN_SIZE).value;
+
+  set pinLength(int length) {
+    addressOf.cast<Uint8>().elementAt(BTH_MAX_PIN_SIZE).value =
+        min(length, BTH_MAX_PIN_SIZE);
+  }
+
+  String get pin =>
+      String.fromCharCodes(addressOf.cast<Uint8>().asTypedList(pinLength));
+
+  set pin(String pinString) {
+    var pinData = Uint8List.fromList(pinString.codeUnits);
+
+    // Set up to the length of the string, even if longer than pinLength, since
+    // user may set pin then pinLength.
+    for (var idx = 0; idx < min(pinData.length, BTH_MAX_PIN_SIZE); idx++) {
+      addressOf.cast<Uint8>().elementAt(idx).value = pinData[idx];
+    }
+  }
+
+  factory BLUETOOTH_PIN_INFO.allocate() {
+    final structSize = BTH_MAX_PIN_SIZE + 1;
+    final ptr = allocate<Uint8>(count: structSize);
+    for (var idx = 0; idx < structSize; idx++) {
+      ptr.elementAt(idx).value = 0;
+    }
+    return ptr.cast<BLUETOOTH_PIN_INFO>().ref;
+  }
 }
 
 // typedef struct COR_FIELD_OFFSET

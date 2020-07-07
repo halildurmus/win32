@@ -1,5 +1,9 @@
 dartdoc:
   categories:
+    "advapi32":
+      markdown: doc/advapi32.md
+    "bthprops":
+      markdown: doc/bthprops.md
     "comctl32":
       markdown: doc/comctl32.md
     "comdlg32":

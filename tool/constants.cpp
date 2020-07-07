@@ -14,6 +14,8 @@
 #include <wbemidl.h>
 #include <netlistmgr.h>
 #include <highlevelmonitorconfigurationapi.h>
+#include <bluetoothapis.h>
+#include <VersionHelpers.h>
 
 void main()
 {
@@ -39,6 +41,7 @@ void main()
     printf("sizeof(LRESULT) is %zu\n", sizeof(LRESULT));
 
     printf("sizeof(BITMAPINFO) is %zu\n", sizeof(BITMAPINFO));
+    printf("sizeof(BLUETOOTH_DEVICE_INFO_STRUCT) is %zu\n", sizeof(BLUETOOTH_DEVICE_INFO_STRUCT));
     printf("sizeof(WNDCLASS) is %zu\n", sizeof(WNDCLASS));
     printf("sizeof(WNDPROC) is %zu\n", sizeof(WNDPROC));
     printf("sizeof(POINT) is %zu\n", sizeof(POINT));
@@ -51,6 +54,8 @@ void main()
     printf("sizeof(CHOOSECOLORW) is %zu\n", sizeof(CHOOSECOLORW));
     printf("sizeof(MSG) is %zu\n", sizeof(MSG));
     printf("sizeof(SIZE_T) is %zu\n", sizeof(SIZE_T));
+    printf("sizeof(OSVERSIONINFOW) is %zu\n", sizeof(OSVERSIONINFOW));
+    printf("sizeof(LSTATUS) is %zu\n", sizeof(LSTATUS));
 
     printf("sizeof(WCHAR) is %zu\n", sizeof(WCHAR));
     printf("sizeof(TCHAR) is %zu\n", sizeof(TCHAR));

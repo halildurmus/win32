@@ -65,6 +65,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `snake.dart`       | Snake game using various GDI features                     |
 | `dialogshow.dart`  | Creates a common item dialog (file picker) using COM      |
 | `wmi.dart`         | Using WMI from COM to retrieve device/OS information      |
+| `sysinfo.dart`     | Examples of getting device information from native C APIs |
 | `winmd.dart`       | Interrogate Windows Runtime types                         |
 | `dynamic_load.dart`| Demonstrate loading a DLL and calling it at runtime       |
 | `tetris\main.dart` | Port of an open-source Tetris game to Dart                |

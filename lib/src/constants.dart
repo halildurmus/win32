@@ -525,6 +525,9 @@ const ERROR_INVALID_SEGDPL = 198;
 const ERROR_AUTODATASEG_EXCEEDS_64k = 199;
 
 /// @nodoc
+const ERROR_MORE_DATA = 234;
+
+/// @nodoc
 const ERROR_CANCELLED = 1223;
 
 /// @nodoc
@@ -3408,6 +3411,177 @@ const STANDARD_RIGHTS_ALL = 0x001F0000;
 /// @nodoc
 const SPECIFIC_RIGHTS_ALL = 0x0000FFFF;
 
+// Registry keys
+
+/// @nodoc
+const HKEY_CLASSES_ROOT = 0x80000000;
+
+/// @nodoc
+const HKEY_CURRENT_USER = 0x80000001;
+
+/// @nodoc
+const HKEY_LOCAL_MACHINE = 0x80000002;
+
+/// @nodoc
+const HKEY_USERS = 0x80000003;
+
+/// @nodoc
+const HKEY_PERFORMANCE_DATA = 0x80000004;
+
+/// @nodoc
+const HKEY_PERFORMANCE_TEXT = 0x80000050;
+
+/// @nodoc
+const HKEY_PERFORMANCE_NLSTEXT = 0x80000060;
+
+/// @nodoc
+const HKEY_CURRENT_CONFIG = 0x80000005;
+
+/// @nodoc
+const HKEY_DYN_DATA = 0x80000006;
+
+/// @nodoc
+const HKEY_CURRENT_USER_LOCAL_SETTINGS = 0x80000007;
+
+/// @nodoc
+const RRF_RT_REG_NONE = 0x00000001;
+
+/// @nodoc
+const RRF_RT_REG_SZ = 0x00000002;
+
+/// @nodoc
+const RRF_RT_REG_EXPAND_SZ = 0x00000004;
+
+/// @nodoc
+const RRF_RT_REG_BINARY = 0x00000008;
+
+/// @nodoc
+const RRF_RT_REG_DWORD = 0x00000010;
+
+/// @nodoc
+const RRF_RT_REG_MULTI_SZ = 0x00000020;
+
+/// @nodoc
+const RRF_RT_REG_QWORD = 0x00000040;
+
+/// @nodoc
+const RRF_RT_DWORD = (RRF_RT_REG_BINARY | RRF_RT_REG_DWORD);
+
+/// @nodoc
+const RRF_RT_QWORD = (RRF_RT_REG_BINARY | RRF_RT_REG_QWORD);
+
+/// @nodoc
+const RRF_RT_ANY = 0x0000ffff;
+
+/// @nodoc
+const RRF_SUBKEY_WOW6464KEY = 0x00010000;
+
+/// @nodoc
+const RRF_SUBKEY_WOW6432KEY = 0x00020000;
+
+/// @nodoc
+const RRF_WOW64_MASK = 0x00030000;
+
+/// @nodoc
+const RRF_NOEXPAND = 0x10000000;
+
+/// @nodoc
+const RRF_ZEROONFAILURE = 0x20000000;
+
+/// @nodoc
+const REG_NONE = (0);
+
+/// @nodoc
+const REG_SZ = (1);
+
+/// @nodoc
+const REG_EXPAND_SZ = (2);
+
+/// @nodoc
+const REG_BINARY = (3);
+
+/// @nodoc
+const REG_DWORD = (4);
+
+/// @nodoc
+const REG_DWORD_LITTLE_ENDIAN = (4);
+
+/// @nodoc
+const REG_DWORD_BIG_ENDIAN = (5);
+
+/// @nodoc
+const REG_LINK = (6);
+
+/// @nodoc
+const REG_MULTI_SZ = (7);
+
+/// @nodoc
+const REG_RESOURCE_LIST = (8);
+
+/// @nodoc
+const REG_FULL_RESOURCE_DESCRIPTOR = (9);
+
+/// @nodoc
+const REG_RESOURCE_REQUIREMENTS_LIST = (10);
+
+/// @nodoc
+const REG_QWORD = (11);
+
+/// @nodoc
+const REG_QWORD_LITTLE_ENDIAN = (11);
+
+/// @nodoc
+const KEY_QUERY_VALUE = (0x0001);
+
+/// @nodoc
+const KEY_SET_VALUE = (0x0002);
+
+/// @nodoc
+const KEY_CREATE_SUB_KEY = (0x0004);
+
+/// @nodoc
+const KEY_ENUMERATE_SUB_KEYS = (0x0008);
+
+/// @nodoc
+const KEY_NOTIFY = (0x0010);
+
+/// @nodoc
+const KEY_CREATE_LINK = (0x0020);
+
+/// @nodoc
+const KEY_WOW64_32KEY = (0x0200);
+
+/// @nodoc
+const KEY_WOW64_64KEY = (0x0100);
+
+/// @nodoc
+const KEY_WOW64_RES = (0x0300);
+
+/// @nodoc
+const KEY_READ = ((STANDARD_RIGHTS_READ |
+        KEY_QUERY_VALUE |
+        KEY_ENUMERATE_SUB_KEYS |
+        KEY_NOTIFY) &
+    (~SYNCHRONIZE));
+
+/// @nodoc
+const KEY_WRITE =
+    ((STANDARD_RIGHTS_WRITE | KEY_SET_VALUE | KEY_CREATE_SUB_KEY) &
+        (~SYNCHRONIZE));
+
+/// @nodoc
+const KEY_EXECUTE = ((KEY_READ) & (~SYNCHRONIZE));
+
+/// @nodoc
+const KEY_ALL_ACCESS = ((STANDARD_RIGHTS_ALL |
+        KEY_QUERY_VALUE |
+        KEY_SET_VALUE |
+        KEY_CREATE_SUB_KEY |
+        KEY_ENUMERATE_SUB_KEYS |
+        KEY_NOTIFY |
+        KEY_CREATE_LINK) &
+    (~SYNCHRONIZE));
+
 // *** CONSOLE CONSTANTS ***
 
 // Handles
@@ -3624,6 +3798,9 @@ class MC_SIZE_TYPE {
   static const MC_WIDTH = 0;
   static const MC_HEIGHT = 1;
 }
+
+/// @nodoc
+const DEACTIVATE_ACTCTX_FLAG_FORCE_EARLY_DEACTIVATION = 1;
 
 // *** COM CONSTANTS ***
 
@@ -3925,12 +4102,12 @@ final TD_SHIELD_ICON = Pointer<Utf16>.fromAddress(0xFFFC);
 
 /// {@category Enum}
 class TASKDIALOG_COMMON_BUTTON_FLAGS {
-  static final int TDCBF_OK_BUTTON = 0x0001;
-  static final int TDCBF_YES_BUTTON = 0x0002;
-  static final int TDCBF_NO_BUTTON = 0x0004;
-  static final int TDCBF_CANCEL_BUTTON = 0x0008;
-  static final int TDCBF_RETRY_BUTTON = 0x0010;
-  static final int TDCBF_CLOSE_BUTTON = 0x0020;
+  static const int TDCBF_OK_BUTTON = 0x0001;
+  static const int TDCBF_YES_BUTTON = 0x0002;
+  static const int TDCBF_NO_BUTTON = 0x0004;
+  static const int TDCBF_CANCEL_BUTTON = 0x0008;
+  static const int TDCBF_RETRY_BUTTON = 0x0010;
+  static const int TDCBF_CLOSE_BUTTON = 0x0020;
 }
 
 // Folder IDs
@@ -4568,192 +4745,744 @@ const DISPID_DESTRUCTOR = -7;
 /// @nodoc
 const DISPID_COLLECT = -8;
 
+/// @nodoc
+const BLUETOOTH_MAX_NAME_SIZE = (248);
+
+/// @nodoc
+const BLUETOOTH_MAX_PASSKEY_SIZE = (16);
+
+/// @nodoc
+const BLUETOOTH_MAX_PASSKEY_BUFFER_SIZE = (BLUETOOTH_MAX_PASSKEY_SIZE + 1);
+
+/// @nodoc
+const BLUETOOTH_MAX_SERVICE_NAME_SIZE = (256);
+
+/// @nodoc
+const BLUETOOTH_DEVICE_NAME_SIZE = (256);
+
+/// @nodoc
+const BTH_MAX_PIN_SIZE = (16);
+
+/// @nodoc
+const BTH_LINK_KEY_LENGTH = (16);
+
+/// {@category Enum}
+class BLUETOOTH_AUTHENTICATION_METHOD {
+  static const BLUETOOTH_AUTHENTICATION_METHOD_LEGACY = 0;
+  static const BLUETOOTH_AUTHENTICATION_METHOD_OOB = 1;
+  static const BLUETOOTH_AUTHENTICATION_METHOD_NUMERIC_COMPARISON = 2;
+  static const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY_NOTIFICATION = 3;
+  static const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY = 4;
+}
+
+/// {@category Enum}
+class BLUETOOTH_AUTHENTICATION_REQUIREMENTS {
+  static const BLUETOOTH_MITM_ProtectionNotRequired = 0;
+  static const BLUETOOTH_MITM_ProtectionRequired = 1;
+  static const BLUETOOTH_MITM_ProtectionNotRequiredBonding = 2;
+  static const BLUETOOTH_MITM_ProtectionRequiredBonding = 3;
+  static const BLUETOOTH_MITM_ProtectionNotRequiredGeneralBonding = 4;
+  static const BLUETOOTH_MITM_ProtectionRequiredGeneralBonding = 5;
+  static const BLUETOOTH_MITM_ProtectionNotDefined = 6;
+}
+
+/// {@category Enum}
+class BLUETOOTH_IO_CAPABILITY {
+  static const BLUETOOTH_IO_CAPABILITY_DISPLAYONLY = 0;
+  static const BLUETOOTH_IO_CAPABILITY_DISPLAYYESNO = 1;
+  static const BLUETOOTH_IO_CAPABILITY_KEYBOARDONLY = 2;
+  static const BLUETOOTH_IO_CAPABILITY_NOINPUTNOOUTPUT = 3;
+  static const BLUETOOTH_IO_CAPABILITY_UNDEFINED = 4;
+}
+
 /// {@category Enum}
 class FILEOPENDIALOGOPTIONS {
-  static final FOS_OVERWRITEPROMPT = 0x2;
-  static final FOS_STRICTFILETYPES = 0x4;
-  static final FOS_NOCHANGEDIR = 0x8;
-  static final FOS_PICKFOLDERS = 0x20;
-  static final FOS_FORCEFILESYSTEM = 0x40;
-  static final FOS_ALLNONSTORAGEITEMS = 0x80;
-  static final FOS_NOVALIDATE = 0x100;
-  static final FOS_ALLOWMULTISELECT = 0x200;
-  static final FOS_PATHMUSTEXIST = 0x800;
-  static final FOS_FILEMUSTEXIST = 0x1000;
-  static final FOS_CREATEPROMPT = 0x2000;
-  static final FOS_SHAREAWARE = 0x4000;
-  static final FOS_NOREADONLYRETURN = 0x8000;
-  static final FOS_NOTESTFILECREATE = 0x10000;
-  static final FOS_HIDEMRUPLACES = 0x20000;
-  static final FOS_HIDEPINNEDPLACES = 0x40000;
-  static final FOS_NODEREFERENCELINKS = 0x100000;
-  static final FOS_OKBUTTONNEEDSINTERACTION = 0x200000;
-  static final FOS_DONTADDTORECENT = 0x2000000;
-  static final FOS_FORCESHOWHIDDEN = 0x10000000;
-  static final FOS_DEFAULTNOMINIMODE = 0x20000000;
-  static final FOS_FORCEPREVIEWPANEON = 0x40000000;
-  static final FOS_SUPPORTSTREAMABLEITEMS = 0x80000000;
+  static const FOS_OVERWRITEPROMPT = 0x2;
+  static const FOS_STRICTFILETYPES = 0x4;
+  static const FOS_NOCHANGEDIR = 0x8;
+  static const FOS_PICKFOLDERS = 0x20;
+  static const FOS_FORCEFILESYSTEM = 0x40;
+  static const FOS_ALLNONSTORAGEITEMS = 0x80;
+  static const FOS_NOVALIDATE = 0x100;
+  static const FOS_ALLOWMULTISELECT = 0x200;
+  static const FOS_PATHMUSTEXIST = 0x800;
+  static const FOS_FILEMUSTEXIST = 0x1000;
+  static const FOS_CREATEPROMPT = 0x2000;
+  static const FOS_SHAREAWARE = 0x4000;
+  static const FOS_NOREADONLYRETURN = 0x8000;
+  static const FOS_NOTESTFILECREATE = 0x10000;
+  static const FOS_HIDEMRUPLACES = 0x20000;
+  static const FOS_HIDEPINNEDPLACES = 0x40000;
+  static const FOS_NODEREFERENCELINKS = 0x100000;
+  static const FOS_OKBUTTONNEEDSINTERACTION = 0x200000;
+  static const FOS_DONTADDTORECENT = 0x2000000;
+  static const FOS_FORCESHOWHIDDEN = 0x10000000;
+  static const FOS_DEFAULTNOMINIMODE = 0x20000000;
+  static const FOS_FORCEPREVIEWPANEON = 0x40000000;
+  static const FOS_SUPPORTSTREAMABLEITEMS = 0x80000000;
 }
 
 /// {@category Enum}
 class FFFP_MODE {
-  static final FFFP_EXACTMATCH = 0;
-  static final FFFP_NEARESTPARENTMATCH = (FFFP_EXACTMATCH + 1);
+  static const FFFP_EXACTMATCH = 0;
+  static const FFFP_NEARESTPARENTMATCH = (FFFP_EXACTMATCH + 1);
 }
 
 /// {@category Enum}
 class FDAP {
-  static final FDAP_BOTTOM = 0;
-  static final FDAP_TOP = 1;
+  static const FDAP_BOTTOM = 0;
+  static const FDAP_TOP = 1;
 }
 
 /// {@category Enum}
 class KF_CATEGORY {
-  static final KF_CATEGORY_VIRTUAL = 1;
-  static final KF_CATEGORY_FIXED = 2;
-  static final KF_CATEGORY_COMMON = 3;
-  static final KF_CATEGORY_PERUSER = 4;
+  static const KF_CATEGORY_VIRTUAL = 1;
+  static const KF_CATEGORY_FIXED = 2;
+  static const KF_CATEGORY_COMMON = 3;
+  static const KF_CATEGORY_PERUSER = 4;
 }
 
 /// {@category Enum}
 class KF_DEFINITION_FLAGS {
-  static final KFDF_LOCAL_REDIRECT_ONLY = 0x2;
-  static final KFDF_ROAMABLE = 0x4;
-  static final KFDF_PRECREATE = 0x8;
-  static final KFDF_STREAM = 0x10;
-  static final KFDF_PUBLISHEXPANDEDPATH = 0x20;
-  static final KFDF_NO_REDIRECT_UI = 0x4;
+  static const KFDF_LOCAL_REDIRECT_ONLY = 0x2;
+  static const KFDF_ROAMABLE = 0x4;
+  static const KFDF_PRECREATE = 0x8;
+  static const KFDF_STREAM = 0x10;
+  static const KFDF_PUBLISHEXPANDEDPATH = 0x20;
+  static const KFDF_NO_REDIRECT_UI = 0x4;
 }
 
 /// {@category Enum}
 class KF_REDIRECT_FLAGS {
-  static final KF_REDIRECT_USER_EXCLUSIVE = 0x1;
-  static final KF_REDIRECT_COPY_SOURCE_DACL = 0x2;
-  static final KF_REDIRECT_OWNER_USER = 0x4;
-  static final KF_REDIRECT_SET_OWNER_EXPLICIT = 0x8;
-  static final KF_REDIRECT_CHECK_ONLY = 0x10;
-  static final KF_REDIRECT_WITH_UI = 0x20;
-  static final KF_REDIRECT_UNPIN = 0x40;
-  static final KF_REDIRECT_PIN = 0x80;
-  static final KF_REDIRECT_COPY_CONTENTS = 0x200;
-  static final KF_REDIRECT_DEL_SOURCE_CONTENTS = 0x400;
-  static final KF_REDIRECT_EXCLUDE_ALL_KNOWN_SUBFOLDERS = 0x800;
+  static const KF_REDIRECT_USER_EXCLUSIVE = 0x1;
+  static const KF_REDIRECT_COPY_SOURCE_DACL = 0x2;
+  static const KF_REDIRECT_OWNER_USER = 0x4;
+  static const KF_REDIRECT_SET_OWNER_EXPLICIT = 0x8;
+  static const KF_REDIRECT_CHECK_ONLY = 0x10;
+  static const KF_REDIRECT_WITH_UI = 0x20;
+  static const KF_REDIRECT_UNPIN = 0x40;
+  static const KF_REDIRECT_PIN = 0x80;
+  static const KF_REDIRECT_COPY_CONTENTS = 0x200;
+  static const KF_REDIRECT_DEL_SOURCE_CONTENTS = 0x400;
+  static const KF_REDIRECT_EXCLUDE_ALL_KNOWN_SUBFOLDERS = 0x800;
+}
+
+/// {@category Enum}
+class COMPUTER_NAME_FORMAT {
+  static const ComputerNameNetBIOS = 0;
+  static const ComputerNameDnsHostname = 1;
+  static const ComputerNameDnsDomain = 2;
+  static const ComputerNameDnsFullyQualified = 3;
+  static const ComputerNamePhysicalNetBIOS = 4;
+  static const ComputerNamePhysicalDnsHostname = 5;
+  static const ComputerNamePhysicalDnsDomain = 6;
+  static const ComputerNamePhysicalDnsFullyQualified = 7;
+  static const ComputerNameMax = 8;
 }
 
 /// {@category Enum}
 class KF_REDIRECTION_CAPABILITIES {
-  static final KF_REDIRECTION_CAPABILITIES_ALLOW_ALL = 0xff;
-  static final KF_REDIRECTION_CAPABILITIES_REDIRECTABLE = 0x1;
-  static final KF_REDIRECTION_CAPABILITIES_DENY_ALL = 0xfff00;
-  static final KF_REDIRECTION_CAPABILITIES_DENY_POLICY_REDIRECTED = 0x100;
-  static final KF_REDIRECTION_CAPABILITIES_DENY_POLICY = 0x200;
-  static final KF_REDIRECTION_CAPABILITIES_DENY_PERMISSIONS = 0x400;
+  static const KF_REDIRECTION_CAPABILITIES_ALLOW_ALL = 0xff;
+  static const KF_REDIRECTION_CAPABILITIES_REDIRECTABLE = 0x1;
+  static const KF_REDIRECTION_CAPABILITIES_DENY_ALL = 0xfff00;
+  static const KF_REDIRECTION_CAPABILITIES_DENY_POLICY_REDIRECTED = 0x100;
+  static const KF_REDIRECTION_CAPABILITIES_DENY_POLICY = 0x200;
+  static const KF_REDIRECTION_CAPABILITIES_DENY_PERMISSIONS = 0x400;
 }
 
 /// {@category Enum}
 class SIGDN {
-  static final SIGDN_NORMALDISPLAY = 0;
-  static final SIGDN_PARENTRELATIVEPARSING = 0x80018001;
-  static final SIGDN_DESKTOPABSOLUTEPARSING = 0x80028000;
-  static final SIGDN_PARENTRELATIVEEDITING = 0x80031001;
-  static final SIGDN_DESKTOPABSOLUTEEDITING = 0x8004c000;
-  static final SIGDN_FILESYSPATH = 0x80058000;
-  static final SIGDN_URL = 0x80068000;
-  static final SIGDN_PARENTRELATIVEFORADDRESSBAR = 0x8007c001;
-  static final SIGDN_PARENTRELATIVE = 0x80080001;
-  static final SIGDN_PARENTRELATIVEFORUI = 0x8009400;
+  static const SIGDN_NORMALDISPLAY = 0;
+  static const SIGDN_PARENTRELATIVEPARSING = 0x80018001;
+  static const SIGDN_DESKTOPABSOLUTEPARSING = 0x80028000;
+  static const SIGDN_PARENTRELATIVEEDITING = 0x80031001;
+  static const SIGDN_DESKTOPABSOLUTEEDITING = 0x8004c000;
+  static const SIGDN_FILESYSPATH = 0x80058000;
+  static const SIGDN_URL = 0x80068000;
+  static const SIGDN_PARENTRELATIVEFORADDRESSBAR = 0x8007c001;
+  static const SIGDN_PARENTRELATIVE = 0x80080001;
+  static const SIGDN_PARENTRELATIVEFORUI = 0x8009400;
 }
 
 /// {@category Enum}
 class EOLE_AUTHENTICATION_CAPABILITIES {
-  static final EOAC_NONE = 0;
-  static final EOAC_MUTUAL_AUTH = 0x1;
-  static final EOAC_STATIC_CLOAKING = 0x20;
-  static final EOAC_DYNAMIC_CLOAKING = 0x40;
-  static final EOAC_ANY_AUTHORITY = 0x80;
-  static final EOAC_MAKE_FULLSIC = 0x100;
-  static final EOAC_DEFAULT = 0x800;
-  static final EOAC_SECURE_REFS = 0x2;
-  static final EOAC_ACCESS_CONTROL = 0x4;
-  static final EOAC_APPID = 0x8;
-  static final EOAC_DYNAMIC = 0x10;
-  static final EOAC_REQUIRE_FULLSIC = 0x200;
-  static final EOAC_AUTO_IMPERSONATE = 0x400;
-  static final EOAC_DISABLE_AAA = 0x1000;
-  static final EOAC_NO_CUSTOM_MARSHAL = 0x2000;
-  static final EOAC_RESERVED1 = 0x4000;
+  static const EOAC_NONE = 0;
+  static const EOAC_MUTUAL_AUTH = 0x1;
+  static const EOAC_STATIC_CLOAKING = 0x20;
+  static const EOAC_DYNAMIC_CLOAKING = 0x40;
+  static const EOAC_ANY_AUTHORITY = 0x80;
+  static const EOAC_MAKE_FULLSIC = 0x100;
+  static const EOAC_DEFAULT = 0x800;
+  static const EOAC_SECURE_REFS = 0x2;
+  static const EOAC_ACCESS_CONTROL = 0x4;
+  static const EOAC_APPID = 0x8;
+  static const EOAC_DYNAMIC = 0x10;
+  static const EOAC_REQUIRE_FULLSIC = 0x200;
+  static const EOAC_AUTO_IMPERSONATE = 0x400;
+  static const EOAC_DISABLE_AAA = 0x1000;
+  static const EOAC_NO_CUSTOM_MARSHAL = 0x2000;
+  static const EOAC_RESERVED1 = 0x4000;
 }
 
 /// {@category Enum}
 class WBEM_GENERIC_FLAG_TYPE {
-  static final WBEM_FLAG_RETURN_IMMEDIATELY = 0x10;
-  static final WBEM_FLAG_RETURN_WBEM_COMPLETE = 0;
-  static final WBEM_FLAG_BIDIRECTIONAL = 0;
-  static final WBEM_FLAG_FORWARD_ONLY = 0x20;
-  static final WBEM_FLAG_NO_ERROR_OBJECT = 0x40;
-  static final WBEM_FLAG_RETURN_ERROR_OBJECT = 0;
-  static final WBEM_FLAG_SEND_STATUS = 0x80;
-  static final WBEM_FLAG_DONT_SEND_STATUS = 0;
-  static final WBEM_FLAG_ENSURE_LOCATABLE = 0x100;
-  static final WBEM_FLAG_DIRECT_READ = 0x200;
-  static final WBEM_FLAG_SEND_ONLY_SELECTED = 0;
-  static final WBEM_RETURN_WHEN_COMPLETE = 0;
-  static final WBEM_RETURN_IMMEDIATELY = 0x10;
-  static final WBEM_MASK_RESERVED_FLAGS = 0x1f000;
-  static final WBEM_FLAG_USE_AMENDED_QUALIFIERS = 0x20000;
-  static final WBEM_FLAG_STRONG_VALIDATION = 0x100000;
+  static const WBEM_FLAG_RETURN_IMMEDIATELY = 0x10;
+  static const WBEM_FLAG_RETURN_WBEM_COMPLETE = 0;
+  static const WBEM_FLAG_BIDIRECTIONAL = 0;
+  static const WBEM_FLAG_FORWARD_ONLY = 0x20;
+  static const WBEM_FLAG_NO_ERROR_OBJECT = 0x40;
+  static const WBEM_FLAG_RETURN_ERROR_OBJECT = 0;
+  static const WBEM_FLAG_SEND_STATUS = 0x80;
+  static const WBEM_FLAG_DONT_SEND_STATUS = 0;
+  static const WBEM_FLAG_ENSURE_LOCATABLE = 0x100;
+  static const WBEM_FLAG_DIRECT_READ = 0x200;
+  static const WBEM_FLAG_SEND_ONLY_SELECTED = 0;
+  static const WBEM_RETURN_WHEN_COMPLETE = 0;
+  static const WBEM_RETURN_IMMEDIATELY = 0x10;
+  static const WBEM_MASK_RESERVED_FLAGS = 0x1f000;
+  static const WBEM_FLAG_USE_AMENDED_QUALIFIERS = 0x20000;
+  static const WBEM_FLAG_STRONG_VALIDATION = 0x100000;
 }
 
 /// {@category Enum}
 class WBEM_TIMEOUT_TYPE {
-  static final WBEM_NO_WAIT = 0;
-  static final WBEM_INFINITE = 0xffffffff;
+  static const WBEM_NO_WAIT = 0;
+  static const WBEM_INFINITE = 0xffffffff;
 }
 
 /// {@category Enum}
 class DESKTOP_SLIDESHOW_OPTIONS {
-  static final DSO_SHUFFLEIMAGES = 0x1;
+  static const DSO_SHUFFLEIMAGES = 0x1;
 }
 
 /// {@category Enum}
 class DESKTOP_SLIDESHOW_STATE {
-  static final DSS_ENABLED = 0x1;
-  static final DSS_SLIDESHOW = 0x2;
-  static final DSS_DISABLED_BY_REMOTE_SESSION = 0x4;
+  static const DSS_ENABLED = 0x1;
+  static const DSS_SLIDESHOW = 0x2;
+  static const DSS_DISABLED_BY_REMOTE_SESSION = 0x4;
 }
 
 /// {@category Enum}
 class DESKTOP_SLIDESHOW_DIRECTION {
-  static final DSD_FORWARD = 0;
-  static final DSD_BACKWARD = 1;
+  static const DSD_FORWARD = 0;
+  static const DSD_BACKWARD = 1;
 }
 
 /// {@category Enum}
 class DESKTOP_WALLPAPER_POSITION {
-  static final DWPOS_CENTER = 0;
-  static final DWPOS_TILE = 1;
-  static final DWPOS_STRETCH = 2;
-  static final DWPOS_FIT = 3;
-  static final DWPOS_FILL = 4;
-  static final DWPOS_SPAN = 5;
+  static const DWPOS_CENTER = 0;
+  static const DWPOS_TILE = 1;
+  static const DWPOS_STRETCH = 2;
+  static const DWPOS_FIT = 3;
+  static const DWPOS_FILL = 4;
+  static const DWPOS_SPAN = 5;
 }
 
 /// {@category Enum}
 class NLM_CONNECTIVITY {
-  static final NLM_CONNECTIVITY_DISCONNECTED = 0;
-  static final NLM_CONNECTIVITY_IPV4_NOTRAFFIC = 0x1;
-  static final NLM_CONNECTIVITY_IPV6_NOTRAFFIC = 0x2;
-  static final NLM_CONNECTIVITY_IPV4_SUBNET = 0x10;
-  static final NLM_CONNECTIVITY_IPV4_LOCALNETWORK = 0x20;
-  static final NLM_CONNECTIVITY_IPV4_INTERNET = 0x40;
-  static final NLM_CONNECTIVITY_IPV6_SUBNET = 0x100;
-  static final NLM_CONNECTIVITY_IPV6_LOCALNETWORK = 0x200;
-  static final NLM_CONNECTIVITY_IPV6_INTERNET = 0x400;
+  static const NLM_CONNECTIVITY_DISCONNECTED = 0;
+  static const NLM_CONNECTIVITY_IPV4_NOTRAFFIC = 0x1;
+  static const NLM_CONNECTIVITY_IPV6_NOTRAFFIC = 0x2;
+  static const NLM_CONNECTIVITY_IPV4_SUBNET = 0x10;
+  static const NLM_CONNECTIVITY_IPV4_LOCALNETWORK = 0x20;
+  static const NLM_CONNECTIVITY_IPV4_INTERNET = 0x40;
+  static const NLM_CONNECTIVITY_IPV6_SUBNET = 0x100;
+  static const NLM_CONNECTIVITY_IPV6_LOCALNETWORK = 0x200;
+  static const NLM_CONNECTIVITY_IPV6_INTERNET = 0x400;
 }
 
 /// {@category Enum}
 class NLM_ENUM_NETWORK {
-  static final NLM_ENUM_NETWORK_CONNECTED = 0x1;
-  static final NLM_ENUM_NETWORK_DISCONNECTED = 0x2;
-  static final NLM_ENUM_NETWORK_ALL = 0x3;
+  static const NLM_ENUM_NETWORK_CONNECTED = 0x1;
+  static const NLM_ENUM_NETWORK_DISCONNECTED = 0x2;
+  static const NLM_ENUM_NETWORK_ALL = 0x3;
 }
+
+/// @nodoc
+const PRODUCT_UNDEFINED = 0x00000000;
+
+/// @nodoc
+const PRODUCT_ULTIMATE = 0x00000001;
+
+/// @nodoc
+const PRODUCT_HOME_BASIC = 0x00000002;
+
+/// @nodoc
+const PRODUCT_HOME_PREMIUM = 0x00000003;
+
+/// @nodoc
+const PRODUCT_ENTERPRISE = 0x00000004;
+
+/// @nodoc
+const PRODUCT_HOME_BASIC_N = 0x00000005;
+
+/// @nodoc
+const PRODUCT_BUSINESS = 0x00000006;
+
+/// @nodoc
+const PRODUCT_STANDARD_SERVER = 0x00000007;
+
+/// @nodoc
+const PRODUCT_DATACENTER_SERVER = 0x00000008;
+
+/// @nodoc
+const PRODUCT_SMALLBUSINESS_SERVER = 0x00000009;
+
+/// @nodoc
+const PRODUCT_ENTERPRISE_SERVER = 0x0000000A;
+
+/// @nodoc
+const PRODUCT_STARTER = 0x0000000B;
+
+/// @nodoc
+const PRODUCT_DATACENTER_SERVER_CORE = 0x0000000C;
+
+/// @nodoc
+const PRODUCT_STANDARD_SERVER_CORE = 0x0000000D;
+
+/// @nodoc
+const PRODUCT_ENTERPRISE_SERVER_CORE = 0x0000000E;
+
+/// @nodoc
+const PRODUCT_ENTERPRISE_SERVER_IA64 = 0x0000000F;
+
+/// @nodoc
+const PRODUCT_BUSINESS_N = 0x00000010;
+
+/// @nodoc
+const PRODUCT_WEB_SERVER = 0x00000011;
+
+/// @nodoc
+const PRODUCT_CLUSTER_SERVER = 0x00000012;
+
+/// @nodoc
+const PRODUCT_HOME_SERVER = 0x00000013;
+
+/// @nodoc
+const PRODUCT_STORAGE_EXPRESS_SERVER = 0x00000014;
+
+/// @nodoc
+const PRODUCT_STORAGE_STANDARD_SERVER = 0x00000015;
+
+/// @nodoc
+const PRODUCT_STORAGE_WORKGROUP_SERVER = 0x00000016;
+
+/// @nodoc
+const PRODUCT_STORAGE_ENTERPRISE_SERVER = 0x00000017;
+
+/// @nodoc
+const PRODUCT_SERVER_FOR_SMALLBUSINESS = 0x00000018;
+
+/// @nodoc
+const PRODUCT_SMALLBUSINESS_SERVER_PREMIUM = 0x00000019;
+
+/// @nodoc
+const PRODUCT_HOME_PREMIUM_N = 0x0000001A;
+
+/// @nodoc
+const PRODUCT_ENTERPRISE_N = 0x0000001B;
+
+/// @nodoc
+const PRODUCT_ULTIMATE_N = 0x0000001C;
+
+/// @nodoc
+const PRODUCT_WEB_SERVER_CORE = 0x0000001D;
+
+/// @nodoc
+const PRODUCT_MEDIUMBUSINESS_SERVER_MANAGEMENT = 0x0000001E;
+
+/// @nodoc
+const PRODUCT_MEDIUMBUSINESS_SERVER_SECURITY = 0x0000001F;
+
+/// @nodoc
+const PRODUCT_MEDIUMBUSINESS_SERVER_MESSAGING = 0x00000020;
+
+/// @nodoc
+const PRODUCT_SERVER_FOUNDATION = 0x00000021;
+
+/// @nodoc
+const PRODUCT_HOME_PREMIUM_SERVER = 0x00000022;
+
+/// @nodoc
+const PRODUCT_SERVER_FOR_SMALLBUSINESS_V = 0x00000023;
+
+/// @nodoc
+const PRODUCT_STANDARD_SERVER_V = 0x00000024;
+
+/// @nodoc
+const PRODUCT_DATACENTER_SERVER_V = 0x00000025;
+
+/// @nodoc
+const PRODUCT_ENTERPRISE_SERVER_V = 0x00000026;
+
+/// @nodoc
+const PRODUCT_DATACENTER_SERVER_CORE_V = 0x00000027;
+
+/// @nodoc
+const PRODUCT_STANDARD_SERVER_CORE_V = 0x00000028;
+
+/// @nodoc
+const PRODUCT_ENTERPRISE_SERVER_CORE_V = 0x00000029;
+
+/// @nodoc
+const PRODUCT_HYPERV = 0x0000002A;
+
+/// @nodoc
+const PRODUCT_STORAGE_EXPRESS_SERVER_CORE = 0x0000002B;
+
+/// @nodoc
+const PRODUCT_STORAGE_STANDARD_SERVER_CORE = 0x0000002C;
+
+/// @nodoc
+const PRODUCT_STORAGE_WORKGROUP_SERVER_CORE = 0x0000002D;
+
+/// @nodoc
+const PRODUCT_STORAGE_ENTERPRISE_SERVER_CORE = 0x0000002E;
+
+/// @nodoc
+const PRODUCT_STARTER_N = 0x0000002F;
+
+/// @nodoc
+const PRODUCT_PROFESSIONAL = 0x00000030;
+
+/// @nodoc
+const PRODUCT_PROFESSIONAL_N = 0x00000031;
+
+/// @nodoc
+const PRODUCT_SB_SOLUTION_SERVER = 0x00000032;
+
+/// @nodoc
+const PRODUCT_SERVER_FOR_SB_SOLUTIONS = 0x00000033;
+
+/// @nodoc
+const PRODUCT_STANDARD_SERVER_SOLUTIONS = 0x00000034;
+
+/// @nodoc
+const PRODUCT_STANDARD_SERVER_SOLUTIONS_CORE = 0x00000035;
+
+/// @nodoc
+const PRODUCT_SB_SOLUTION_SERVER_EM = 0x00000036;
+
+/// @nodoc
+const PRODUCT_SERVER_FOR_SB_SOLUTIONS_EM = 0x00000037;
+
+/// @nodoc
+const PRODUCT_SOLUTION_EMBEDDEDSERVER = 0x00000038;
+
+/// @nodoc
+const PRODUCT_SOLUTION_EMBEDDEDSERVER_CORE = 0x00000039;
+
+/// @nodoc
+const PRODUCT_PROFESSIONAL_EMBEDDED = 0x0000003A;
+
+/// @nodoc
+const PRODUCT_ESSENTIALBUSINESS_SERVER_MGMT = 0x0000003B;
+
+/// @nodoc
+const PRODUCT_ESSENTIALBUSINESS_SERVER_ADDL = 0x0000003C;
+
+/// @nodoc
+const PRODUCT_ESSENTIALBUSINESS_SERVER_MGMTSVC = 0x0000003D;
+
+/// @nodoc
+const PRODUCT_ESSENTIALBUSINESS_SERVER_ADDLSVC = 0x0000003E;
+
+/// @nodoc
+const PRODUCT_SMALLBUSINESS_SERVER_PREMIUM_CORE = 0x0000003F;
+
+/// @nodoc
+const PRODUCT_CLUSTER_SERVER_V = 0x00000040;
+
+/// @nodoc
+const PRODUCT_EMBEDDED = 0x00000041;
+
+/// @nodoc
+const PRODUCT_STARTER_E = 0x00000042;
+
+/// @nodoc
+const PRODUCT_HOME_BASIC_E = 0x00000043;
+
+/// @nodoc
+const PRODUCT_HOME_PREMIUM_E = 0x00000044;
+
+/// @nodoc
+const PRODUCT_PROFESSIONAL_E = 0x00000045;
+
+/// @nodoc
+const PRODUCT_ENTERPRISE_E = 0x00000046;
+
+/// @nodoc
+const PRODUCT_ULTIMATE_E = 0x00000047;
+
+/// @nodoc
+const PRODUCT_ENTERPRISE_EVALUATION = 0x00000048;
+
+/// @nodoc
+const PRODUCT_MULTIPOINT_STANDARD_SERVER = 0x0000004C;
+
+/// @nodoc
+const PRODUCT_MULTIPOINT_PREMIUM_SERVER = 0x0000004D;
+
+/// @nodoc
+const PRODUCT_STANDARD_EVALUATION_SERVER = 0x0000004F;
+
+/// @nodoc
+const PRODUCT_DATACENTER_EVALUATION_SERVER = 0x00000050;
+
+/// @nodoc
+const PRODUCT_ENTERPRISE_N_EVALUATION = 0x00000054;
+
+/// @nodoc
+const PRODUCT_EMBEDDED_AUTOMOTIVE = 0x00000055;
+
+/// @nodoc
+const PRODUCT_EMBEDDED_INDUSTRY_A = 0x00000056;
+
+/// @nodoc
+const PRODUCT_THINPC = 0x00000057;
+
+/// @nodoc
+const PRODUCT_EMBEDDED_A = 0x00000058;
+
+/// @nodoc
+const PRODUCT_EMBEDDED_INDUSTRY = 0x00000059;
+
+/// @nodoc
+const PRODUCT_EMBEDDED_E = 0x0000005A;
+
+/// @nodoc
+const PRODUCT_EMBEDDED_INDUSTRY_E = 0x0000005B;
+
+/// @nodoc
+const PRODUCT_EMBEDDED_INDUSTRY_A_E = 0x0000005C;
+
+/// @nodoc
+const PRODUCT_STORAGE_WORKGROUP_EVALUATION_SERVER = 0x0000005F;
+
+/// @nodoc
+const PRODUCT_STORAGE_STANDARD_EVALUATION_SERVER = 0x00000060;
+
+/// @nodoc
+const PRODUCT_CORE_ARM = 0x00000061;
+
+/// @nodoc
+const PRODUCT_CORE_N = 0x00000062;
+
+/// @nodoc
+const PRODUCT_CORE_COUNTRYSPECIFIC = 0x00000063;
+
+/// @nodoc
+const PRODUCT_CORE_SINGLELANGUAGE = 0x00000064;
+
+/// @nodoc
+const PRODUCT_CORE = 0x00000065;
+
+/// @nodoc
+const PRODUCT_PROFESSIONAL_WMC = 0x00000067;
+
+/// @nodoc
+const PRODUCT_EMBEDDED_INDUSTRY_EVAL = 0x00000069;
+
+/// @nodoc
+const PRODUCT_EMBEDDED_INDUSTRY_E_EVAL = 0x0000006A;
+
+/// @nodoc
+const PRODUCT_EMBEDDED_EVAL = 0x0000006B;
+
+/// @nodoc
+const PRODUCT_EMBEDDED_E_EVAL = 0x0000006C;
+
+/// @nodoc
+const PRODUCT_NANO_SERVER = 0x0000006D;
+
+/// @nodoc
+const PRODUCT_CLOUD_STORAGE_SERVER = 0x0000006E;
+
+/// @nodoc
+const PRODUCT_CORE_CONNECTED = 0x0000006F;
+
+/// @nodoc
+const PRODUCT_PROFESSIONAL_STUDENT = 0x00000070;
+
+/// @nodoc
+const PRODUCT_CORE_CONNECTED_N = 0x00000071;
+
+/// @nodoc
+const PRODUCT_PROFESSIONAL_STUDENT_N = 0x00000072;
+
+/// @nodoc
+const PRODUCT_CORE_CONNECTED_SINGLELANGUAGE = 0x00000073;
+
+/// @nodoc
+const PRODUCT_CORE_CONNECTED_COUNTRYSPECIFIC = 0x00000074;
+
+/// @nodoc
+const PRODUCT_CONNECTED_CAR = 0x00000075;
+
+/// @nodoc
+const PRODUCT_INDUSTRY_HANDHELD = 0x00000076;
+
+/// @nodoc
+const PRODUCT_PPI_PRO = 0x00000077;
+
+/// @nodoc
+const PRODUCT_ARM64_SERVER = 0x00000078;
+
+/// @nodoc
+const PRODUCT_EDUCATION = 0x00000079;
+
+/// @nodoc
+const PRODUCT_EDUCATION_N = 0x0000007A;
+
+/// @nodoc
+const PRODUCT_IOTUAP = 0x0000007B;
+
+/// @nodoc
+const PRODUCT_CLOUD_HOST_INFRASTRUCTURE_SERVER = 0x0000007C;
+
+/// @nodoc
+const PRODUCT_ENTERPRISE_S = 0x0000007D;
+
+/// @nodoc
+const PRODUCT_ENTERPRISE_S_N = 0x0000007E;
+
+/// @nodoc
+const PRODUCT_PROFESSIONAL_S = 0x0000007F;
+
+/// @nodoc
+const PRODUCT_PROFESSIONAL_S_N = 0x00000080;
+
+/// @nodoc
+const PRODUCT_ENTERPRISE_S_EVALUATION = 0x00000081;
+
+/// @nodoc
+const PRODUCT_ENTERPRISE_S_N_EVALUATION = 0x00000082;
+
+/// @nodoc
+const PRODUCT_HOLOGRAPHIC = 0x00000087;
+
+/// @nodoc
+const PRODUCT_HOLOGRAPHIC_BUSINESS = 0x00000088;
+
+/// @nodoc
+const PRODUCT_PRO_SINGLE_LANGUAGE = 0x0000008A;
+
+/// @nodoc
+const PRODUCT_PRO_CHINA = 0x0000008B;
+
+/// @nodoc
+const PRODUCT_ENTERPRISE_SUBSCRIPTION = 0x0000008C;
+
+/// @nodoc
+const PRODUCT_ENTERPRISE_SUBSCRIPTION_N = 0x0000008D;
+
+/// @nodoc
+const PRODUCT_DATACENTER_NANO_SERVER = 0x0000008F;
+
+/// @nodoc
+const PRODUCT_STANDARD_NANO_SERVER = 0x00000090;
+
+/// @nodoc
+const PRODUCT_DATACENTER_A_SERVER_CORE = 0x00000091;
+
+/// @nodoc
+const PRODUCT_STANDARD_A_SERVER_CORE = 0x00000092;
+
+/// @nodoc
+const PRODUCT_DATACENTER_WS_SERVER_CORE = 0x00000093;
+
+/// @nodoc
+const PRODUCT_STANDARD_WS_SERVER_CORE = 0x00000094;
+
+/// @nodoc
+const PRODUCT_UTILITY_VM = 0x00000095;
+
+/// @nodoc
+const PRODUCT_DATACENTER_EVALUATION_SERVER_CORE = 0x0000009F;
+
+/// @nodoc
+const PRODUCT_STANDARD_EVALUATION_SERVER_CORE = 0x000000A0;
+
+/// @nodoc
+const PRODUCT_PRO_WORKSTATION = 0x000000A1;
+
+/// @nodoc
+const PRODUCT_PRO_WORKSTATION_N = 0x000000A2;
+
+/// @nodoc
+const PRODUCT_PRO_FOR_EDUCATION = 0x000000A4;
+
+/// @nodoc
+const PRODUCT_PRO_FOR_EDUCATION_N = 0x000000A5;
+
+/// @nodoc
+const PRODUCT_AZURE_SERVER_CORE = 0x000000A8;
+
+/// @nodoc
+const PRODUCT_AZURE_NANO_SERVER = 0x000000A9;
+
+/// @nodoc
+const PRODUCT_ENTERPRISEG = 0x000000AB;
+
+/// @nodoc
+const PRODUCT_ENTERPRISEGN = 0x000000AC;
+
+/// @nodoc
+const PRODUCT_SERVERRDSH = 0x000000AF;
+
+/// @nodoc
+const PRODUCT_CLOUD = 0x000000B2;
+
+/// @nodoc
+const PRODUCT_CLOUDN = 0x000000B3;
+
+/// @nodoc
+const PRODUCT_HUBOS = 0x000000B4;
+
+/// @nodoc
+const PRODUCT_ONECOREUPDATEOS = 0x000000B6;
+
+/// @nodoc
+const PRODUCT_CLOUDE = 0x000000B7;
+
+/// @nodoc
+const PRODUCT_ANDROMEDA = 0x000000B8;
+
+/// @nodoc
+const PRODUCT_IOTOS = 0x000000B9;
+
+/// @nodoc
+const PRODUCT_CLOUDEN = 0x000000BA;
+
+/// @nodoc
+const PRODUCT_IOTEDGEOS = 0x000000BB;
+
+/// @nodoc
+const PRODUCT_IOTENTERPRISE = 0x000000BC;
+
+/// @nodoc
+const PRODUCT_LITE = 0x000000BD;
+
+/// @nodoc
+const PRODUCT_IOTENTERPRISES = 0x000000BF;
+
+/// @nodoc
+const PRODUCT_XBOX_SYSTEMOS = 0x000000C0;
+
+/// @nodoc
+const PRODUCT_XBOX_NATIVEOS = 0x000000C1;
+
+/// @nodoc
+const PRODUCT_XBOX_GAMEOS = 0x000000C2;
+
+/// @nodoc
+const PRODUCT_XBOX_ERAOS = 0x000000C3;
+
+/// @nodoc
+const PRODUCT_XBOX_DURANGOHOSTOS = 0x000000C4;
+
+/// @nodoc
+const PRODUCT_XBOX_SCARLETTHOSTOS = 0x000000C5;
+
+/// @nodoc
+const PRODUCT_UNLICENSED = 0xABCDABCD;

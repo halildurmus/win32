@@ -1,4 +1,6 @@
-// win32.dart
+// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
 
 // ignore_for_file: directives_ordering
 
@@ -22,7 +24,7 @@
 /// ## Strings (Win32 and COM)
 ///
 /// Win32 strings are typically stored as null-terminated arrays of UTF-16 code
-/// units. (Many older Windows APIs also offer an ANSI, or 8-bit representation,
+/// units. (Some older Windows APIs also offer an ANSI, or 8-bit representation,
 /// but we use the wide versions, which are suffixed with a capital 'W' (e.g.
 /// `FormatMessageW`).
 ///
@@ -47,9 +49,9 @@
 ///   print(buffer.unpackString(length));
 /// ```
 ///
-/// A very small number of APIs offer no wide version (e.g. `GetProcAddress`),
-/// and so the [convertToANSIString] method may be of use to convert a Dart
-/// string to a `Pointer<Uint8>`, which represents this format:
+/// A small number of APIs offer no wide version (e.g. `GetProcAddress`), and so
+/// the [convertToANSIString] method may be of use to convert a Dart string to a
+/// `Pointer<Uint8>`, which represents this format:
 /// ```
 ///   final ansi = convertToANSIString('Beep');
 ///   final pGetNativeSystemInfo = GetProcAddress(hModule, ansi);
@@ -73,7 +75,6 @@
 ///
 /// Make sure you dispose of `HSTRING`s by calling `WindowsDeleteString` and
 /// passing the string address itself, not the pointer, as shown above.
-
 library win32;
 
 // Core Win32 APIs, constants and macros
@@ -85,6 +86,8 @@ export 'src/string.dart';
 export 'src/callbacks.dart';
 
 // Traditional C-style Windows APIs
+export 'src/advapi32.dart';
+export 'src/bthprops.dart';
 export 'src/comctl32.dart';
 export 'src/comdlg32.dart';
 export 'src/dxva2.dart';

@@ -7,6 +7,15 @@ import 'package:ffi/ffi.dart';
 
 import 'structs.dart';
 
+// BOOL ActivateActCtx(
+//   HANDLE    hActCtx,
+//   ULONG_PTR *lpCookie
+// );
+typedef activateActCtxNative = Int32 Function(
+    IntPtr hActCtx, Pointer<IntPtr> lpCookie);
+typedef activateActCtxDart = int Function(
+    int hActCtx, Pointer<IntPtr> lpCookie);
+
 // BOOL AppendMenuW(
 //   HMENU    hMenu,
 //   UINT     uFlags,
@@ -32,6 +41,96 @@ typedef beepDart = int Function(int dwFreq, int dwDuration);
 typedef beginPaintNative = IntPtr Function(
     IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint);
 typedef beginPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
+
+// DWORD BluetoothAuthenticateDeviceEx(
+//   HWND                        hwndParentIn,
+//   HANDLE                      hRadioIn,
+//   BLUETOOTH_DEVICE_INFO       *pbtdiInout,
+//   PBLUETOOTH_OOB_DATA_INFO    pbtOobData,
+//   AUTHENTICATION_REQUIREMENTS authenticationRequirement
+// );
+typedef bluetoothAuthenticateDeviceExNative = Uint32 Function(
+    IntPtr hwndParentIn,
+    IntPtr hRadioIn,
+    Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
+    IntPtr pbtOobData,
+    Int32 authenticationRequirement);
+typedef bluetoothAuthenticateDeviceExDart = int Function(
+    int hwndParentIn,
+    int hRadioIn,
+    Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
+    int pbtOobData,
+    int authenticationRequirement);
+
+// BOOL BluetoothFindDeviceClose(
+//   HBLUETOOTH_DEVICE_FIND hFind
+// );
+typedef bluetoothFindDeviceCloseNative = Int32 Function(IntPtr hFind);
+typedef bluetoothFindDeviceCloseDart = int Function(int hFind);
+
+// HBLUETOOTH_DEVICE_FIND BluetoothFindFirstDevice(
+//   const BLUETOOTH_DEVICE_SEARCH_PARAMS *pbtsp,
+//   BLUETOOTH_DEVICE_INFO                *pbtdi
+// );
+typedef bluetoothFindFirstDeviceNative = Int32 Function(
+    Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp,
+    Pointer<BLUETOOTH_DEVICE_INFO> pbtdi);
+typedef bluetoothFindFirstDeviceDart = int Function(
+    Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp,
+    Pointer<BLUETOOTH_DEVICE_INFO> pbtdi);
+
+// HBLUETOOTH_RADIO_FIND BluetoothFindFirstRadio(
+//   const BLUETOOTH_FIND_RADIO_PARAMS *pbtfrp,
+//   HANDLE                            *phRadio
+// );
+typedef bluetoothFindFirstRadioNative = IntPtr Function(
+    Pointer<BLUETOOTH_FIND_RADIO_PARAMS> pbtfrp, Pointer<IntPtr> phRadio);
+typedef bluetoothFindFirstRadioDart = int Function(
+    Pointer<BLUETOOTH_FIND_RADIO_PARAMS> pbtfrp, Pointer<IntPtr> phRadio);
+
+// BOOL BluetoothFindNextDevice(
+//   HBLUETOOTH_DEVICE_FIND hFind,
+//   BLUETOOTH_DEVICE_INFO  *pbtdi
+// );
+typedef bluetoothFindNextDeviceNative = Int32 Function(
+    IntPtr hFind, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi);
+typedef bluetoothFindNextDeviceDart = int Function(
+    int hFind, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi);
+
+// BOOL BluetoothFindNextRadio(
+//   HBLUETOOTH_RADIO_FIND hFind,
+//   HANDLE                *phRadio
+// );
+typedef bluetoothFindNextRadioNative = Int32 Function(
+    IntPtr hFind, Pointer<IntPtr> phRadio);
+typedef bluetoothFindNextRadioDart = int Function(
+    int hFind, Pointer<IntPtr> phRadio);
+
+// BOOL BluetoothFindRadioClose(
+//   HBLUETOOTH_RADIO_FIND hFind
+// );
+typedef bluetoothFindRadioCloseNative = Int32 Function(IntPtr hFind);
+typedef bluetoothFindRadioCloseDart = int Function(int hFind);
+
+// BOOL BluetoothIsConnectable(
+//   HANDLE hRadio
+// );
+typedef bluetoothIsConnectableNative = Int32 Function(IntPtr hRadio);
+typedef bluetoothIsConnectableDart = int Function(int hRadio);
+
+// BOOL BluetoothIsDiscoverable(
+//   HANDLE hRadio
+// );
+typedef bluetoothIsDiscoverableNative = Int32 Function(IntPtr hRadio);
+typedef bluetoothIsDiscoverableDart = int Function(int hRadio);
+
+// DWORD BluetoothUpdateDeviceRecord(
+//   const BLUETOOTH_DEVICE_INFO *pbtdi
+// );
+typedef bluetoothUpdateDeviceRecordNative = Uint32 Function(
+    Pointer<BLUETOOTH_DEVICE_INFO> pbtdi);
+typedef bluetoothUpdateDeviceRecordDart = int Function(
+    Pointer<BLUETOOTH_DEVICE_INFO> pbtdi);
 
 // BOOL WINAPI ChooseColor(
 //   _Inout_ LPCHOOSECOLOR lpcc
@@ -328,6 +427,14 @@ typedef createWindowExDart = int Function(
     int hInstance,
     Pointer<Void> lpParam);
 
+// BOOL DeactivateActCtx(
+//   DWORD     dwFlags,
+//   ULONG_PTR ulCookie
+// );
+typedef deactivateActCtxNative = Int32 Function(
+    Uint32 dwFlags, IntPtr ulCookie);
+typedef deactivateActCtxDart = int Function(int dwFlags, int ulCookie);
+
 // LRESULT LRESULT DefWindowProcW(
 //   HWND   hWnd,
 //   UINT   Msg,
@@ -492,6 +599,16 @@ typedef fillRectNative = Int32 Function(
     IntPtr hDC, Pointer<RECT> lprc, IntPtr hbr);
 typedef fillRectDart = int Function(int hDC, Pointer<RECT> lprc, int hbr);
 
+// HINSTANCE FindExecutableW(
+//   LPCWSTR lpFile,
+//   LPCWSTR lpDirectory,
+//   LPWSTR  lpResult
+// );
+typedef findExecutableNative = IntPtr Function(
+    Pointer<Utf16> lpFile, Pointer<Utf16> lpDirectory, Pointer<Utf16> lpResult);
+typedef findExecutableDart = int Function(
+    Pointer<Utf16> lpFile, Pointer<Utf16> lpDirectory, Pointer<Utf16> lpResult);
+
 // HANDLE FindFirstVolumeW(
 //   LPWSTR lpszVolumeName,
 //   DWORD  cchBufferLength
@@ -572,6 +689,16 @@ typedef freeLibraryDart = int Function(int hLibModule);
 // );
 typedef getClientRectNative = Int32 Function(IntPtr hwnd, Pointer<RECT> lpRect);
 typedef getClientRectDart = int Function(int hwnd, Pointer<RECT> lpRect);
+
+// BOOL GetComputerNameExW(
+//   COMPUTER_NAME_FORMAT NameType,
+//   LPWSTR               lpBuffer,
+//   LPDWORD              nSize
+// );
+typedef getComputerNameExNative = Int32 Function(
+    Int32 NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize);
+typedef getComputerNameExDart = int Function(
+    int NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize);
 
 // BOOL WINAPI GetConsoleCursorInfo(
 //   _In_  HANDLE               hConsoleOutput,
@@ -848,6 +975,14 @@ typedef getObjectDart = int Function(int h, int c, Pointer pv);
 typedef getOpenFileNameNative = Int32 Function(Pointer<OPENFILENAME> arg1);
 typedef getOpenFileNameDart = int Function(Pointer<OPENFILENAME> arg1);
 
+// BOOL GetPhysicallyInstalledSystemMemory(
+//   PULONGLONG TotalMemoryInKilobytes
+// );
+typedef getPhysicallyInstalledSystemMemoryNative = Int32 Function(
+    Pointer<Uint64> TotalMemoryInKilobytes);
+typedef getPhysicallyInstalledSystemMemoryDart = int Function(
+    Pointer<Uint64> TotalMemoryInKilobytes);
+
 // _BOOL GetPhysicalMonitorsFromHMONITOR(
 //   HMONITOR           hMonitor,
 //   DWORD              dwPhysicalMonitorArraySize,
@@ -870,6 +1005,26 @@ typedef getProcAddressDart = int Function(
 // HANDLE GetProcessHeap();
 typedef getProcessHeapNative = IntPtr Function();
 typedef getProcessHeapDart = int Function();
+
+// BOOL GetProductInfo(
+//   DWORD  dwOSMajorVersion,
+//   DWORD  dwOSMinorVersion,
+//   DWORD  dwSpMajorVersion,
+//   DWORD  dwSpMinorVersion,
+//   PDWORD pdwReturnedProductType
+// );
+typedef getProductInfoNative = Int32 Function(
+    Uint32 dwOSMajorVersion,
+    Uint32 dwOSMinorVersion,
+    Uint32 dwSpMajorVersion,
+    Uint32 dwSpMinorVersion,
+    Pointer<Uint32> pdwReturnedProductType);
+typedef getProductInfoDart = int Function(
+    int dwOSMajorVersion,
+    int dwOSMinorVersion,
+    int dwSpMajorVersion,
+    int dwSpMinorVersion,
+    Pointer<Uint32> pdwReturnedProductType);
 
 // BOOL GetSaveFileNameW(
 //   LPOPENFILENAMEW Arg1
@@ -921,6 +1076,14 @@ typedef getTempPathDart = int Function(
 typedef getTextMetricsNative = Int32 Function(
     IntPtr hdc, Pointer<TEXTMETRIC> lptm);
 typedef getTextMetricsDart = int Function(int hdc, Pointer<TEXTMETRIC> lptm);
+
+// NOT_BUILD_WINDOWS_DEPRECATE BOOL GetVersionExW(
+//   LPOSVERSIONINFOW lpVersionInformation
+// );
+typedef getVersionExNative = Int32 Function(
+    Pointer<OSVERSIONINFO> lpVersionInformation);
+typedef getVersionExDart = int Function(
+    Pointer<OSVERSIONINFO> lpVersionInformation);
 
 // BOOL GetVolumePathNamesForVolumeNameW(
 //   LPCWSTR lpszVolumeName,
@@ -1178,6 +1341,51 @@ typedef readProcessMemoryDart = int Function(
     Pointer<Void> lpBuffer,
     int nSize,
     Pointer<IntPtr> lpNumberOfBytesRead);
+
+// LSTATUS RegCloseKey(
+//   HKEY hKey
+// );
+typedef regCloseKeyNative = Int32 Function(IntPtr hKey);
+typedef regCloseKeyDart = int Function(int hKey);
+
+// LSTATUS RegOpenKeyExW(
+//   HKEY    hKey,
+//   LPCWSTR lpSubKey,
+//   DWORD   ulOptions,
+//   REGSAM  samDesired,
+//   PHKEY   phkResult
+// );
+typedef regOpenKeyExNative = Int32 Function(
+    IntPtr hKey,
+    Pointer<Utf16> lpSubKey,
+    Uint32 ulOptions,
+    Int32 samDesired,
+    Pointer<IntPtr> phkResult);
+typedef regOpenKeyExDart = int Function(int hKey, Pointer<Utf16> lpSubKey,
+    int ulOptions, int samDesired, Pointer<IntPtr> phkResult);
+
+// LSTATUS RegQueryValueExW(
+//   HKEY    hKey,
+//   LPCWSTR lpValueName,
+//   LPDWORD lpReserved,
+//   LPDWORD lpType,
+//   LPBYTE  lpData,
+//   LPDWORD lpcbData
+// );
+typedef regQueryValueExNative = Int32 Function(
+    IntPtr hKey,
+    Pointer<Utf16> lpValueName,
+    Pointer<Uint32> lpReserved,
+    Pointer<Uint32> lpType,
+    Pointer<Uint8> lpData,
+    Pointer<Uint32> lpcbData);
+typedef regQueryValueExDart = int Function(
+    int hKey,
+    Pointer<Utf16> lpValueName,
+    Pointer<Uint32> lpReserved,
+    Pointer<Uint32> lpType,
+    Pointer<Uint8> lpData,
+    Pointer<Uint32> lpcbData);
 
 // ATOM RegisterClassW(
 //   const WNDCLASSW *lpWndClass
@@ -1509,6 +1717,17 @@ typedef shGetKnownFolderPathNative = Int32 Function(Pointer<GUID> rfid,
     Uint32 dwFlags, IntPtr hToken, Pointer<IntPtr> ppszPath);
 typedef shGetKnownFolderPathDart = int Function(
     Pointer<GUID> rfid, int dwFlags, int hToken, Pointer<IntPtr> ppszPath);
+
+// INT ShellAboutW(
+//   HWND    hWnd,
+//   LPCWSTR szApp,
+//   LPCWSTR szOtherStuff,
+//   HICON   hIcon
+// );
+typedef shellAboutNative = Int32 Function(IntPtr hWnd, Pointer<Utf16> szApp,
+    Pointer<Utf16> szOtherStuff, IntPtr hIcon);
+typedef shellAboutDart = int Function(
+    int hWnd, Pointer<Utf16> szApp, Pointer<Utf16> szOtherStuff, int hIcon);
 
 // HINSTANCE ShellExecuteW(
 //   HWND    hwnd,
