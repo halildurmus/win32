@@ -1,6 +1,10 @@
+## 1.6.8
+
+- Add font enumeration example
+
 ## 1.6.7
 
-- Add basic registry cheks
+- Add basic registry checks
 - Add initial Bluetooth discovery support
 - Add a system information sample
 - Guard tests so that they work on Windows 7

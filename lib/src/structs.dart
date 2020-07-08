@@ -924,13 +924,13 @@ class ENUMLOGFONTEX extends Struct {
 
   String get elfStyle => addressOf
       .cast<Uint8>()
-      .elementAt(sizeOf<LOGFONT>() + LF_FULLFACESIZE)
+      .elementAt(sizeOf<LOGFONT>() + LF_FULLFACESIZE * 2)
       .cast<Utf16>()
       .unpackString(LF_FACESIZE);
 
   String get elfScript => addressOf
       .cast<Uint8>()
-      .elementAt(sizeOf<LOGFONT>() + LF_FULLFACESIZE + LF_FACESIZE)
+      .elementAt(sizeOf<LOGFONT>() + ((LF_FULLFACESIZE + LF_FACESIZE) * 2))
       .cast<Utf16>()
       .unpackString(LF_FACESIZE);
 }

@@ -13,6 +13,7 @@ final fontNames = <String>[];
 
 int EnumerateFont(Pointer<LOGFONT> logFontPtr,
     Pointer<TEXTMETRIC> textMetricPtr, int FontType, int lParam) {
+  // Get extended information from the font
   final logFont = logFontPtr.cast<ENUMLOGFONTEX>().ref;
 
   fontNames.add(logFont.elfFullName);
