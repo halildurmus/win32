@@ -83,8 +83,4 @@ void main() {
     TranslateMessage(msg.addressOf);
     DispatchMessage(msg.addressOf);
   }
-
-  free(CLASS_NAME);
-  free(wc.addressOf);
-  free(msg.addressOf);
 }
