@@ -870,6 +870,9 @@ class LOGFONT extends Struct {
   @Int32()
   int lfFaceName16;
 
+  Pointer<Utf16> get lfFaceName =>
+      addressOf.cast<Uint8>().elementAt(28).cast<Utf16>();
+
   factory LOGFONT.allocate() => allocate<LOGFONT>().ref
     ..lfHeight = 0
     ..lfWidth = 0
