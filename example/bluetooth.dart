@@ -2,8 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// bluetooth.dart
-
 // Shows retrieval of various information from the high-level monitor
 // configuration API.
 
@@ -18,14 +16,19 @@ String toHex(int value32) =>
 void findBluetoothDevices(int btRadioHandle) {
   final params = BLUETOOTH_DEVICE_SEARCH_PARAMS.allocate();
   final info = BLUETOOTH_DEVICE_INFO.allocate();
+
   final firstDeviceHandle =
       BluetoothFindFirstDevice(params.addressOf, info.addressOf);
-  if (firstDeviceHandle == NULL) {
-    print('No devices found.');
-  } else {
+
+  if (firstDeviceHandle != NULL) {
     print(info.szName);
     BluetoothFindDeviceClose(firstDeviceHandle);
+  } else {
+    print('No devices found.');
   }
+
+  free(params.addressOf);
+  free(info.addressOf);
 }
 
 void main() {
@@ -34,18 +37,16 @@ void main() {
 
   final btFindRadioHandle =
       BluetoothFindFirstRadio(params.addressOf, btRadioHandlePtr);
-  if (btFindRadioHandle == NULL) {
-    print('No Bluetooth radios found.');
 
-    free(params.addressOf);
-    free(btRadioHandlePtr);
-    return;
-  } else {
+  if (btFindRadioHandle != NULL) {
     print('Handle: ${toHex(btRadioHandlePtr.value)}');
+
     findBluetoothDevices(btRadioHandlePtr.value);
     BluetoothFindRadioClose(btRadioHandlePtr.value);
-
-    free(params.addressOf);
-    free(btRadioHandlePtr);
+  } else {
+    print('No Bluetooth radios found.');
   }
+
+  free(params.addressOf);
+  free(btRadioHandlePtr);
 }
