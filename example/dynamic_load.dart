@@ -18,8 +18,10 @@ typedef getNativeSystemInfoDart = void Function(
 void main() {
   final systemInfo = SYSTEM_INFO.allocate();
 
-  final hModule = GetModuleHandle(TEXT('kernel32.dll'));
+  final kernel32 = TEXT('kernel32.dll');
+  final hModule = GetModuleHandle(kernel32);
   if (hModule == NULL) throw Exception('Could not load kernel32.dll');
+  free(kernel32);
 
   final ansi = convertToANSIString('GetNativeSystemInfo');
   final pGetNativeSystemInfo = GetProcAddress(hModule, ansi);
