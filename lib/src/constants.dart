@@ -1236,6 +1236,9 @@ const FALT = 0x10;
 /// @nodoc
 const LF_FACESIZE = 32;
 
+/// @nodoc
+const LF_FULLFACESIZE = 64;
+
 // ShowWindow constants
 
 /// @nodoc
@@ -1573,6 +1576,60 @@ const MF_MOUSESELECT = 0x00008000;
 
 /// @nodoc
 const MF_END = 0x00000080;
+
+/// @nodoc
+const ANSI_CHARSET = 0;
+
+/// @nodoc
+const DEFAULT_CHARSET = 1;
+
+/// @nodoc
+const SYMBOL_CHARSET = 2;
+
+/// @nodoc
+const SHIFTJIS_CHARSET = 128;
+
+/// @nodoc
+const HANGEUL_CHARSET = 129;
+
+/// @nodoc
+const HANGUL_CHARSET = 129;
+
+/// @nodoc
+const GB2312_CHARSET = 134;
+
+/// @nodoc
+const CHINESEBIG5_CHARSET = 136;
+
+/// @nodoc
+const OEM_CHARSET = 255;
+
+/// @nodoc
+const JOHAB_CHARSET = 130;
+
+/// @nodoc
+const HEBREW_CHARSET = 177;
+
+/// @nodoc
+const ARABIC_CHARSET = 178;
+
+/// @nodoc
+const GREEK_CHARSET = 161;
+
+/// @nodoc
+const TURKISH_CHARSET = 162;
+
+/// @nodoc
+const VIETNAMESE_CHARSET = 163;
+
+/// @nodoc
+const THAI_CHARSET = 222;
+
+/// @nodoc
+const EASTEUROPE_CHARSET = 238;
+
+/// @nodoc
+const RUSSIAN_CHARSET = 204;
 
 // ScrollInfo constants
 

@@ -907,6 +907,34 @@ class LOGFONT extends Struct {
     ..lfFaceName16 = 0;
 }
 
+// typedef struct tagENUMLOGFONTEXW {
+//   LOGFONTW elfLogFont;
+//   WCHAR    elfFullName[LF_FULLFACESIZE];
+//   WCHAR    elfStyle[LF_FACESIZE];
+//   WCHAR    elfScript[LF_FACESIZE];
+// } ENUMLOGFONTEXW, *LPENUMLOGFONTEXW;
+class ENUMLOGFONTEX extends Struct {
+  LOGFONT get elfLogFont => addressOf.cast<LOGFONT>().ref;
+
+  String get elfFullName => addressOf
+      .cast<Uint8>()
+      .elementAt(sizeOf<LOGFONT>())
+      .cast<Utf16>()
+      .unpackString(LF_FULLFACESIZE);
+
+  String get elfStyle => addressOf
+      .cast<Uint8>()
+      .elementAt(sizeOf<LOGFONT>() + LF_FULLFACESIZE)
+      .cast<Utf16>()
+      .unpackString(LF_FACESIZE);
+
+  String get elfScript => addressOf
+      .cast<Uint8>()
+      .elementAt(sizeOf<LOGFONT>() + LF_FULLFACESIZE + LF_FACESIZE)
+      .cast<Utf16>()
+      .unpackString(LF_FACESIZE);
+}
+
 // typedef struct tagCREATESTRUCTW {
 //   LPVOID    lpCreateParams;
 //   HINSTANCE hInstance;

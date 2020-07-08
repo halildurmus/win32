@@ -522,6 +522,26 @@ typedef enumDisplayMonitorsNative = Int32 Function(IntPtr hdc, Pointer lprcClip,
 typedef enumDisplayMonitorsDart = int Function(
     int hdc, Pointer lprcClip, Pointer<NativeFunction> lpfnEnum, int dwData);
 
+// int EnumFontFamiliesExW(
+//   HDC           hdc,
+//   LPLOGFONTW    lpLogfont,
+//   FONTENUMPROCW lpProc,
+//   LPARAM        lParam,
+//   DWORD         dwFlags
+// );
+typedef enumFontFamiliesExNative = Int32 Function(
+    IntPtr hdc,
+    Pointer<LOGFONT> lpLogFont,
+    Pointer<NativeFunction> lpProc,
+    IntPtr lParam,
+    Uint32 dwFlags);
+typedef enumFontFamiliesExDart = int Function(
+    int hdc,
+    Pointer<LOGFONT> lpLogFont,
+    Pointer<NativeFunction> lpProc,
+    int lParam,
+    int dwFlags);
+
 // BOOL EnumProcesses(
 //   DWORD   *lpidProcess,
 //   DWORD   cb,

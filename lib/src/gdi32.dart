@@ -25,6 +25,11 @@ final DeleteObject =
     _gdi32.lookupFunction<deleteObjectNative, deleteObjectDart>('DeleteObject');
 
 /// {@category gdi32}
+final EnumFontFamiliesEx =
+    _gdi32.lookupFunction<enumFontFamiliesExNative, enumFontFamiliesExDart>(
+        'EnumFontFamiliesExW');
+
+/// {@category gdi32}
 final GetObject =
     _gdi32.lookupFunction<getObjectNative, getObjectDart>('GetObjectW');
 
