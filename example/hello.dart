@@ -3,12 +3,13 @@
 // Basic Petzoldian "hello world" Win32 app
 
 import 'dart:ffi';
+import 'package:ffi/ffi.dart';
 
 import 'package:win32/win32.dart';
 
 final hInstance = GetModuleHandle(nullptr);
 
-int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
+int MainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
   switch (uMsg) {
     case WM_DESTROY:
       PostQuitMessage(0);
@@ -16,18 +17,22 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
     case WM_PAINT:
       final ps = PAINTSTRUCT.allocate();
-      final hdc = BeginPaint(hwnd, ps.addressOf);
+      final hdc = BeginPaint(hWnd, ps.addressOf);
       final rect = RECT.allocate();
       final msg = TEXT('Hello, Dart!');
 
-      GetClientRect(hwnd, rect.addressOf);
+      GetClientRect(hWnd, rect.addressOf);
       DrawText(
           hdc, msg, -1, rect.addressOf, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
-      EndPaint(hwnd, ps.addressOf);
+      EndPaint(hWnd, ps.addressOf);
+
+      free(ps.addressOf);
+      free(rect.addressOf);
+      free(msg);
 
       return 0;
   }
-  return DefWindowProc(hwnd, uMsg, wParam, lParam);
+  return DefWindowProc(hWnd, uMsg, wParam, lParam);
 }
 
 void main() {
