@@ -7,8 +7,6 @@ import 'package:test/test.dart';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'version.dart';
-
 const testString = "If my grandmother had wheels, she'd be a motorbike";
 
 // String arrays are delimited with NUL characters, and ended with a double NUL.
@@ -67,7 +65,7 @@ void main() {
     });
   });
 
-  if (isWindows10OrGreater()) {
+  if (isWindowsRuntimeAvailable()) {
     group('HSTRING tests', () {
       test('String to HSTRING conversion', () {
         for (var i = 0; i < TEST_RUNS; i++) {

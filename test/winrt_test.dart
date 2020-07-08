@@ -3,10 +3,9 @@
 import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
-import 'version.dart';
 
 void main() {
-  if (isWindows10OrGreater()) {
+  if (isWindowsRuntimeAvailable()) {
     test('WinRT simple test', () {
       winrtInitialize();
 

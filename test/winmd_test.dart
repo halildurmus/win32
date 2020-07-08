@@ -6,10 +6,8 @@ import 'package:win32/win32.dart';
 import '../tool/winmd/mdFile.dart';
 import '../tool/winmd/utils.dart';
 
-import 'version.dart';
-
 void main() {
-  if (isWindows10OrGreater()) {
+  if (isWindowsRuntimeAvailable()) {
     test('List all tokens in a file', () {
       final file = metadataFileContainingType('Windows.Globalization.Calendar');
       final winmdFile = WinmdFile(file);
