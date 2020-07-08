@@ -1,9 +1,7 @@
-// main.dart
-
 // Trivial example showing Win32 common dialog box invocation.
 
 // More sophisticated examples can be found in the `example\` subdirectory
-// of the package.
+// of this package.
 
 import 'dart:ffi';
 

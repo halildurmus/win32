@@ -1,4 +1,6 @@
-// msgbox.dart
+// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
 
 // Demonstrates a MessageBox from the console
 
@@ -64,5 +66,5 @@ void main() {
 
   // Commenting out for general purposes, since this needs a Dart2Native
   // executable with an app manifest to work.
-  showTaskDialog();
+  // showTaskDialog();
 }
