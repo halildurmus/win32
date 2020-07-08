@@ -1,6 +1,7 @@
-## 1.6.8 (in development)
+## 1.6.8
 
 - Add font enumeration example
+- Experiment with hosting documentation on GitHub
 
 ## 1.6.7
 
