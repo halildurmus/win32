@@ -66,6 +66,17 @@ class WNDCLASS extends Struct {
     ..hbrBackground = 0
     ..lpszMenuName = nullptr
     ..lpszClassName = nullptr;
+
+  static T managed<T>(T Function(WNDCLASS) func) {
+    final wc = WNDCLASS.allocate();
+    T t;
+    try {
+      t = func(wc);
+    } finally {
+      free(wc.addressOf);
+    }
+    return t;
+  }
 }
 
 // typedef struct _SYSTEM_INFO {
@@ -1041,6 +1052,17 @@ class MSG extends Struct {
     ..ptX = 0
     ..ptY = 0
     ..lPrivate = 0;
+
+  static T managed<T>(T Function(MSG) func) {
+    final msg = MSG.allocate();
+    T t;
+    try {
+      t = func(msg);
+    } finally {
+      free(msg.addressOf);
+    }
+    return t;
+  }
 }
 
 // typedef struct tagSIZE {
@@ -1172,6 +1194,17 @@ class PAINTSTRUCT extends Struct {
     ..rgb2 = 0
     ..rgb3 = 0
     ..rgb4 = 0;
+
+  static T managed<T>(T Function(PAINTSTRUCT) func) {
+    final ps = PAINTSTRUCT.allocate();
+    T t;
+    try {
+      t = func(ps);
+    } finally {
+      free(ps.addressOf);
+    }
+    return t;
+  }
 }
 
 // typedef struct tagRECT {
@@ -1199,6 +1232,17 @@ class RECT extends Struct {
     ..top = 0
     ..right = 0
     ..bottom = 0;
+
+  static T managed<T>(T Function(RECT) func) {
+    final rect = RECT.allocate();
+    T t;
+    try {
+      t = func(rect);
+    } finally {
+      free(rect.addressOf);
+    }
+    return t;
+  }
 }
 
 // typedef struct tagINPUT {
