@@ -19,6 +19,7 @@ import 'package:win32/win32.dart';
 
 // Win32-specific vars
 final hInstance = GetModuleHandle(nullptr);
+
 int hWnd;
 const IDT_TIMER1 = 1;
 const IDT_TIMER2 = 2;
@@ -152,8 +153,6 @@ void moveSnake() {
 
   // set
   for (var i = 0; i < snakePoints.length; i++) {
-    //std::cout << snakePoints[i].x << ", " << snakePoints[i].y << std::endl;
-
     final tempX = snakePoints[i].x;
     final tempY = snakePoints[i].y;
 
@@ -289,11 +288,6 @@ void setVectorToMemory() {
 
         ptr.elementAt(pixelOffset).value = 0;
         pixelOffset++;
-        // move along
-        //++Pixel;
-        //++Pixel;
-        //++Pixel;
-        //++Pixel;
       }
       vecX = (x / 10).floor();
     }
@@ -473,6 +467,7 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       final height = rect.bottom - rect.top;
 
       init(width, height);
+
       free(rect.addressOf);
       break;
 
@@ -606,11 +601,16 @@ void main() {
 
         final dc = GetDC(hWnd);
         final rect = RECT.allocate();
+
         GetClientRect(hWnd, rect.addressOf);
+
         final windowWidth = rect.right - rect.left;
         final windowHeight = rect.bottom - rect.top;
+
         draw(dc, rect, 0, 0, windowWidth, windowHeight);
+
         ReleaseDC(hWnd, dc);
+        free(rect.addressOf);
       }
     } else {
       MessageBox(0, TEXT('Failed to create window'), TEXT('Error'),

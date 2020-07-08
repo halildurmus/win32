@@ -1,4 +1,4 @@
-## 1.6.8
+## 1.6.8 (in development)
 
 - Add font enumeration example
 
