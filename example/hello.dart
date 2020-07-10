@@ -5,9 +5,7 @@
 // Basic Petzoldian "hello world" Win32 app
 
 import 'dart:ffi';
-import 'package:ffi/ffi.dart';
-
-import 'package:win32/win32.dart';
+import 'package:win32/with_win32.dart';
 
 final hInstance = GetModuleHandle(nullptr);
 
@@ -18,20 +16,12 @@ int MainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
       return 0;
 
     case WM_PAINT:
-      final ps = PAINTSTRUCT.allocate();
-      final hdc = BeginPaint(hWnd, ps.addressOf);
-      final rect = RECT.allocate();
-      final msg = TEXT('Hello, Dart!');
-
-      GetClientRect(hWnd, rect.addressOf);
-      DrawText(
-          hdc, msg, -1, rect.addressOf, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
-      EndPaint(hWnd, ps.addressOf);
-
-      free(ps.addressOf);
-      free(rect.addressOf);
-      free(msg);
-
+      BeginPaint(hWnd, (hdc) {
+        GetClientRect(hWnd, (rect) {
+          DrawText(hdc, 'Hello, Dart!', -1, rect,
+              DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+        });
+      });
       return 0;
   }
   return DefWindowProc(hWnd, uMsg, wParam, lParam);
@@ -39,50 +29,48 @@ int MainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
 
 void main() {
   // Register the window class.
+  const CLASS_NAME = 'Sample Window Class';
 
-  final CLASS_NAME = TEXT('Sample Window Class');
-
-  final wc = WNDCLASS.allocate();
-  wc.style = CS_HREDRAW | CS_VREDRAW;
-  wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(MainWindowProc, 0);
-  wc.hInstance = hInstance;
-  wc.lpszClassName = CLASS_NAME;
-  wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-  wc.hbrBackground = GetStockObject(WHITE_BRUSH);
-  RegisterClass(wc.addressOf);
+  withTEXT(CLASS_NAME, (CLASS_NAME) {
+    RegisterClass((wc) {
+      wc
+        ..style = CS_HREDRAW | CS_VREDRAW
+        ..lpfnWndProc = Pointer.fromFunction<WindowProc>(MainWindowProc, 0)
+        ..hInstance = hInstance
+        ..lpszClassName = CLASS_NAME
+        ..hCursor = LoadCursor(NULL, IDC_ARROW)
+        ..hbrBackground = GetStockObject(WHITE_BRUSH);
+    });
+  });
 
   // Create the window.
 
   final hWnd = CreateWindowEx(
-      0, // Optional window styles.
-      CLASS_NAME, // Window class
-      TEXT('Dart Native Win32 window'), // Window caption
-      WS_OVERLAPPEDWINDOW, // Window style
+    0, // Optional window styles.
+    CLASS_NAME, // Window class
+    'Dart Native Win32 window', // Window caption
+    WS_OVERLAPPEDWINDOW, // Window style
 
-      // Size and position
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      CW_USEDEFAULT,
-      NULL, // Parent window
-      NULL, // Menu
-      hInstance, // Instance handle
-      nullptr // Additional application data
-      );
-
-  if (hWnd == 0) {
-    final error = GetLastError();
-    throw WindowsException(HRESULT_FROM_WIN32(error));
-  }
+    // Size and position
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    NULL, // Parent window
+    NULL, // Menu
+    hInstance, // Instance handle
+    nullptr, // Additional application data
+  );
 
   ShowWindow(hWnd, SW_SHOWNORMAL);
   UpdateWindow(hWnd);
 
   // Run the message loop.
 
-  final msg = MSG.allocate();
-  while (GetMessage(msg.addressOf, NULL, 0, 0) != 0) {
-    TranslateMessage(msg.addressOf);
-    DispatchMessage(msg.addressOf);
-  }
+  withMSG((msg) {
+    while (GetMessage(msg, NULL, 0, 0) != 0) {
+      TranslateMessage(msg);
+      DispatchMessage(msg);
+    }
+  });
 }
