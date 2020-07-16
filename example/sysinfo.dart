@@ -173,7 +173,7 @@ void printBatteryInfo() {
           print(
               ' - ${powerStatus.BatteryLifePercent}% percent battery remaining.');
           print(
-              ' - ${powerStatus.BatteryLifeTime / 60} minutes of power estimated to remain.');
+              ' - ${powerStatus.BatteryLifeTime} seconds of power estimated to remain.');
           if (powerStatus.SystemStatusFlag == 1) {
             print(' - Battery saver is on. Save energy where possible.');
           }
@@ -209,7 +209,7 @@ void main() {
 
   print(
       '\nRAM physically installed on this computer: ${getSystemMemoryInMegabytes()}MB');
-  print('\nComputer full DNS name is: ${getComputerName()}\n');
+  print('\nComputer name is: ${getComputerName()}\n');
 
   printBatteryInfo();
 }
