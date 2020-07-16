@@ -150,6 +150,11 @@ final GetSystemInfo = _kernel32
     .lookupFunction<getSystemInfoNative, getSystemInfoDart>('GetSystemInfo');
 
 /// {@category kernel32}
+final GetSystemPowerStatus = _kernel32.lookupFunction<
+    getSystemPowerStatusNative,
+    getSystemPowerStatusDart>('GetSystemPowerStatus');
+
+/// {@category kernel32}
 final GetTempPath = _kernel32
     .lookupFunction<getTempPathNative, getTempPathDart>('GetTempPathW');
 

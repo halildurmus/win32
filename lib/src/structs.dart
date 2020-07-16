@@ -237,6 +237,41 @@ class STARTUPINFO extends Struct {
     ..hStdError = 0;
 }
 
+// typedef struct _SYSTEM_POWER_STATUS {
+//   BYTE  ACLineStatus;
+//   BYTE  BatteryFlag;
+//   BYTE  BatteryLifePercent;
+//   BYTE  SystemStatusFlag;
+//   DWORD BatteryLifeTime;
+//   DWORD BatteryFullLifeTime;
+// } SYSTEM_POWER_STATUS, *LPSYSTEM_POWER_STATUS;
+
+/// SYSTEM_POWER_STATUS
+///
+/// {@category Struct}
+class SYSTEM_POWER_STATUS extends Struct {
+  @Uint8()
+  int ACLineStatus;
+  @Uint8()
+  int BatteryFlag;
+  @Uint8()
+  int BatteryLifePercent;
+  @Uint8()
+  int SystemStatusFlag;
+  @Uint8()
+  int BatteryLifeTime;
+  @Uint8()
+  int BatteryFullLifeTime;
+
+  factory SYSTEM_POWER_STATUS.allocate() => allocate<SYSTEM_POWER_STATUS>().ref
+    ..ACLineStatus = 0
+    ..BatteryFlag = 0
+    ..BatteryLifePercent = 0
+    ..SystemStatusFlag = 0
+    ..BatteryLifeTime = 0
+    ..BatteryFullLifeTime = 0;
+}
+
 // typedef struct _STARTUPINFOEXW {
 //   STARTUPINFOW                 StartupInfo;
 //   LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList;

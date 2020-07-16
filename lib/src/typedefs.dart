@@ -1076,6 +1076,14 @@ typedef getStdHandleDart = int Function(int nStdHandle);
 typedef getStockObjectNative = IntPtr Function(Int32 i);
 typedef getStockObjectDart = int Function(int i);
 
+// BOOL GetSystemPowerStatus(
+//   LPSYSTEM_POWER_STATUS lpSystemPowerStatus
+// );
+typedef getSystemPowerStatusNative = Int32 Function(
+    Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus);
+typedef getSystemPowerStatusDart = int Function(
+    Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus);
+
 // void GetSystemInfo(
 //   LPSYSTEM_INFO lpSystemInfo
 // );
