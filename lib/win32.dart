@@ -78,6 +78,7 @@
 library win32;
 
 // Core Win32 APIs, constants and macros
+export 'src/blob.dart';
 export 'src/callbacks.dart';
 export 'src/constants.dart';
 export 'src/exceptions.dart';

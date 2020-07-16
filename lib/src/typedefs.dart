@@ -2024,13 +2024,13 @@ typedef credReadNative = Int32 Function(
   Pointer<Utf16> TargetName,
   Uint32 Type,
   Uint32 Flags,
-  Pointer<CREDENTIAL> Credential,
+  Pointer<Pointer<CREDENTIAL>> Credential,
 );
 typedef credReadDart = int Function(
   Pointer<Utf16> TargetName,
   int Type,
   int Flags,
-  Pointer<CREDENTIAL> Credential,
+  Pointer<Pointer<CREDENTIAL>> Credential,
 );
 
 // void CredFree(
@@ -2038,3 +2038,19 @@ typedef credReadDart = int Function(
 // );
 typedef credFreeNative = Void Function(Pointer Buffer);
 typedef credFreeDart = void Function(Pointer Buffer);
+
+// BOOL CredDeleteW(
+//   LPCWSTR TargetName,
+//   DWORD   Type,
+//   DWORD   Flags
+// );
+typedef credDeleteNative = Int32 Function(
+  Pointer<Utf16> TargetName,
+  Uint32 Type,
+  Uint32 Flags,
+);
+typedef credDeleteDart = int Function(
+  Pointer<Utf16> TargetName,
+  int Type,
+  int Flags,
+);

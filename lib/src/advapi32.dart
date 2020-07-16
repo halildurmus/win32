@@ -34,3 +34,7 @@ final CredRead =
 /// {@category advapi32}
 final CredFree =
     _advapi32.lookupFunction<credFreeNative, credFreeDart>('CredFree');
+
+/// {@category advapi32}
+final CredDelete =
+    _advapi32.lookupFunction<credDeleteNative, credDeleteDart>('CredDeleteW');
