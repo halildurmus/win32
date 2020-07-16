@@ -200,7 +200,12 @@ void printBatteryStatusInfo() {
 
   try {
     final result = CallNtPowerInformation(
-        5, nullptr, 0, batteryStatus.addressOf, sizeOf<SYSTEM_BATTERY_STATE>());
+        POWER_INFORMATION_LEVEL.SystemBatteryState,
+        nullptr,
+        0,
+        batteryStatus.addressOf,
+        sizeOf<SYSTEM_BATTERY_STATE>());
+
     if (result == STATUS_SUCCESS) {
       print('Power status from CallNtPowerInformation():');
 

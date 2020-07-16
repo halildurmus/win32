@@ -42,7 +42,11 @@ void main() {
     final batteryStatus = SYSTEM_BATTERY_STATE.allocate();
 
     final result = CallNtPowerInformation(
-        5, nullptr, 0, batteryStatus.addressOf, sizeOf<SYSTEM_BATTERY_STATE>());
+        POWER_INFORMATION_LEVEL.SystemBatteryState,
+        nullptr,
+        0,
+        batteryStatus.addressOf,
+        sizeOf<SYSTEM_BATTERY_STATE>());
 
     // Sanity check results against some API provided ranges
     expect(result, equals(STATUS_SUCCESS));
