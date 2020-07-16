@@ -18,6 +18,9 @@ const FALSE = 0;
 /// Boolean true value returned from the Win32 API
 const TRUE = 1;
 
+/// Success status
+const STATUS_SUCCESS = 0;
+
 // Path length
 const MAX_PATH = 260;
 

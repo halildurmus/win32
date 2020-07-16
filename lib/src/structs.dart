@@ -272,6 +272,75 @@ class SYSTEM_POWER_STATUS extends Struct {
     ..BatteryFullLifeTime = 0;
 }
 
+// typedef struct {
+//     BOOLEAN             AcOnLine;
+//     BOOLEAN             BatteryPresent;
+//     BOOLEAN             Charging;
+//     BOOLEAN             Discharging;
+//     BOOLEAN             Spare1[3];
+
+//     BYTE                Tag;
+
+//     DWORD               MaxCapacity;
+//     DWORD               RemainingCapacity;
+//     DWORD               Rate;
+//     DWORD               EstimatedTime;
+
+//     DWORD               DefaultAlert1;
+//     DWORD               DefaultAlert2;
+// } SYSTEM_BATTERY_STATE, *PSYSTEM_BATTERY_STATE;
+class SYSTEM_BATTERY_STATE extends Struct {
+  @Uint8()
+  int AcOnLine;
+  @Uint8()
+  int BatteryPresent;
+  @Uint8()
+  int Charging;
+  @Uint8()
+  int Discharging;
+
+  @Uint8()
+  int Spare1a;
+  @Uint8()
+  int Spare1b;
+  @Uint8()
+  int Spare1c;
+
+  @Uint8()
+  int Tag;
+
+  @Uint32()
+  int MaxCapacity;
+  @Uint32()
+  int RemainingCapacity;
+  @Uint32()
+  int Rate;
+  @Uint32()
+  int EstimatedTime;
+
+  @Uint32()
+  int DefaultAlert1;
+  @Uint32()
+  int DefaultAlert2;
+
+  factory SYSTEM_BATTERY_STATE.allocate() =>
+      allocate<SYSTEM_BATTERY_STATE>().ref
+        ..AcOnLine = 0
+        ..BatteryPresent = 0
+        ..Charging = 0
+        ..Discharging = 0
+        ..Spare1a = 0
+        ..Spare1b = 0
+        ..Spare1c = 0
+        ..Tag = 0
+        ..MaxCapacity = 0
+        ..RemainingCapacity = 0
+        ..Rate = 0
+        ..EstimatedTime = 0
+        ..DefaultAlert1 = 0
+        ..DefaultAlert2 = 0;
+}
+
 // typedef struct _STARTUPINFOEXW {
 //   STARTUPINFOW                 StartupInfo;
 //   LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList;

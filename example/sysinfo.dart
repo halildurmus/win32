@@ -141,44 +141,45 @@ Object getRegistryValue(int key, String subKey, String valueName) {
   return dataValue;
 }
 
-/// Print battery information.
+/// Print system power status information.
 ///
 /// Uses the GetSystemPowerStatus API call to get information about the battery.
 /// More information on the reported values can be found in the Windows API
 /// documentation, here:
 /// https://docs.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status
-void printBatteryInfo() {
+void printPowerInfo() {
   final powerStatus = SYSTEM_POWER_STATUS.allocate();
 
   try {
     final result = GetSystemPowerStatus(powerStatus.addressOf);
     if (result != 0) {
-      print('Power status:');
+      print('Power status from GetSystemPowerStatus():');
 
       if (powerStatus.ACLineStatus == 0) {
-        print(' - Disconnected from AC power');
+        print(' - Disconnected from AC power.');
       } else if (powerStatus.ACLineStatus == 1) {
-        print(' - Connected to AC power');
+        print(' - Connected to AC power.');
       } else {
-        print(' - AC power status unknown');
+        print(' - AC power status unknown.');
       }
 
-      if (powerStatus.BatteryLifePercent == 255) {
-        print(' - Battery status unknown.');
+      if (testFlag(powerStatus.BatteryFlag, 128)) {
+        print(' - No battery installed.');
       } else {
-        if (testFlag(powerStatus.BatteryFlag, 128)) {
-          print(' - No battery installed');
+        if (powerStatus.BatteryLifePercent == 255) {
+          print(' - Battery status unknown.');
         } else {
-          // We know we have a battery
           print(
               ' - ${powerStatus.BatteryLifePercent}% percent battery remaining.');
-          if (powerStatus.BatteryLifeTime != 0xFFFFFFFF) {
-            print(
-                ' - ${powerStatus.BatteryLifeTime / 60} minutes of power estimated to remain.');
-          }
-          if (powerStatus.SystemStatusFlag == 1) {
-            print(' - Battery saver is on. Save energy where possible.');
-          }
+        }
+
+        if (powerStatus.BatteryLifeTime != 0xFFFFFFFF) {
+          print(
+              ' - ${powerStatus.BatteryLifeTime / 60} minutes of power estimated to remain.');
+        }
+        // New in Windows 10, but should report 0 on older systems
+        if (powerStatus.SystemStatusFlag == 1) {
+          print(' - Battery saver is on. Save energy where possible.');
         }
       }
     } else {
@@ -186,6 +187,60 @@ void printBatteryInfo() {
     }
   } finally {
     free(powerStatus.addressOf);
+  }
+}
+
+/// Print battery status information.
+///
+/// This uses a different, slightly lower-level API to [printPowerInfo] to
+/// report more detailed system battery status from the power management
+/// library.
+void printBatteryStatusInfo() {
+  final batteryStatus = SYSTEM_BATTERY_STATE.allocate();
+
+  try {
+    final result = CallNtPowerInformation(
+        5, nullptr, 0, batteryStatus.addressOf, sizeOf<SYSTEM_BATTERY_STATE>());
+    if (result == STATUS_SUCCESS) {
+      print('Power status from CallNtPowerInformation():');
+
+      print(batteryStatus.AcOnLine == TRUE
+          ? ' - System is currently operating on external power.'
+          : ' - System is not currently operating on external power.');
+
+      print(batteryStatus.BatteryPresent == TRUE
+          ? ' - At least one battery is present in the system.'
+          : ' - No batteries detected in the system.');
+
+      if (batteryStatus.BatteryPresent == TRUE) {
+        print(batteryStatus.Charging == TRUE
+            ? ' - Battery is charging.'
+            : ' - Battery is not charging.');
+
+        print(batteryStatus.Discharging == TRUE
+            ? ' - Battery is discharging.'
+            : ' - Battery is not discharging.');
+
+        print(
+            ' - Theoretical max capacity of the battery is ${batteryStatus.MaxCapacity}.');
+
+        print(
+            ' - Estimated remaining capacity of the battery is ${batteryStatus.RemainingCapacity}.');
+
+        print(
+            ' - Charge/discharge rate of the battery is ${batteryStatus.EstimatedTime.abs()} mW.');
+
+        print(
+            ' - Estimated time remaining on the battery is ${batteryStatus.EstimatedTime} seconds.');
+
+        print(
+            ' - Manufacturer suggested low battery alert is at ${batteryStatus.DefaultAlert1} mWh.');
+        print(
+            ' - Manufacturer suggested warning battery alert is at ${batteryStatus.DefaultAlert2} mWh.');
+      }
+    }
+  } finally {
+    free(batteryStatus.addressOf);
   }
 }
 
@@ -211,7 +266,11 @@ void main() {
 
   print(
       '\nRAM physically installed on this computer: ${getSystemMemoryInMegabytes()}MB');
-  print('\nComputer name is: ${getComputerName()}\n');
+  print('Computer name is: ${getComputerName()}\n');
 
-  printBatteryInfo();
+  printPowerInfo();
+
+  print('');
+
+  printBatteryStatusInfo();
 }
