@@ -172,8 +172,10 @@ void printBatteryInfo() {
           // We know we have a battery
           print(
               ' - ${powerStatus.BatteryLifePercent}% percent battery remaining.');
-          print(
-              ' - ${powerStatus.BatteryLifeTime} seconds of power estimated to remain.');
+          if (powerStatus.BatteryLifeTime != 255) {
+            print(
+                ' - ${powerStatus.BatteryLifeTime / 60} minutes of power estimated to remain.');
+          }
           if (powerStatus.SystemStatusFlag == 1) {
             print(' - Battery saver is on. Save energy where possible.');
           }

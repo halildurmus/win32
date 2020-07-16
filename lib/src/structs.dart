@@ -258,9 +258,9 @@ class SYSTEM_POWER_STATUS extends Struct {
   int BatteryLifePercent;
   @Uint8()
   int SystemStatusFlag;
-  @Uint8()
+  @Uint32()
   int BatteryLifeTime;
-  @Uint8()
+  @Uint32()
   int BatteryFullLifeTime;
 
   factory SYSTEM_POWER_STATUS.allocate() => allocate<SYSTEM_POWER_STATUS>().ref
