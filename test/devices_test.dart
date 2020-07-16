@@ -16,7 +16,7 @@ void main() {
 
     final volume = volumeNamePtr.unpackString(MAX_PATH);
 
-    expect(volume, startsWith('\\\\?\\'));
+    expect(volume, startsWith(r'\\?\'));
 
     free(volumeNamePtr);
   });
