@@ -134,6 +134,26 @@ typedef bluetoothUpdateDeviceRecordNative = Uint32 Function(
 typedef bluetoothUpdateDeviceRecordDart = int Function(
     Pointer<BLUETOOTH_DEVICE_INFO> pbtdi);
 
+// NTSTATUS CallNtPowerInformation(
+//   POWER_INFORMATION_LEVEL InformationLevel,
+//   PVOID                   InputBuffer,
+//   ULONG                   InputBufferLength,
+//   PVOID                   OutputBuffer,
+//   ULONG                   OutputBufferLength
+// );
+typedef callNtPowerInformationNative = Int32 Function(
+    Int32 InformationLevel,
+    Pointer InputBuffer,
+    Uint32 InputBufferLength,
+    Pointer OutputBuffer,
+    Uint32 OutputBufferLength);
+typedef callNtPowerInformationDart = int Function(
+    int InformationLevel,
+    Pointer InputBuffer,
+    int InputBufferLength,
+    Pointer OutputBuffer,
+    int OutputBufferLength);
+
 // BOOL WINAPI ChooseColor(
 //   _Inout_ LPCHOOSECOLOR lpcc
 // );

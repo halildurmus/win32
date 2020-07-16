@@ -18,6 +18,8 @@ dartdoc:
       markdown: doc/ole32.md
     "oleaut32":
       markdown: doc/oleaut32.md
+    "powrprof":
+      markdown: doc/powrprof.md
     "psapi":
       markdown: doc/psapi.md
     "shell32":
@@ -30,7 +32,7 @@ dartdoc:
     "winrt":
       name: "WinRT APIs"
       markdown: doc/winrt.md
-  categoryOrder: ["kernel32", "user32", "gdi32", "shell32", "ole32", "oleaut32", "comctl32", "comdlg32", "psapi", "advapi32", "bthprops", "dxva2", "com", "winrt"]
+  categoryOrder: ["kernel32", "user32", "gdi32", "shell32", "ole32", "oleaut32", "comctl32", "comdlg32", "psapi", "advapi32", "bthprops", "powrprof", "dxva2", "com", "winrt"]
   showUndocumentedCategories: true
   ignore:
     - broken-link

@@ -16,6 +16,7 @@
 #include <highlevelmonitorconfigurationapi.h>
 #include <bluetoothapis.h>
 #include <VersionHelpers.h>
+#include <ntstatus.h>
 
 void main()
 {
@@ -67,6 +68,7 @@ void main()
     printf("sizeof(LONG) is %zu\n", sizeof(LONG));
     printf("sizeof(BYTE) is %zu\n", sizeof(BYTE));
     printf("sizeof(BOOL) is %zu\n", sizeof(BOOL));
+    printf("sizeof(BOOLEAN) is %zu\n", sizeof(BOOLEAN));
 
     printf("sizeof(COORD) is %zu\n", sizeof(COORD));
     printf("sizeof(SMALL_RECT) is %zu\n", sizeof(SMALL_RECT));

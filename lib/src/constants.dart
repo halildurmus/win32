@@ -18,6 +18,9 @@ const FALSE = 0;
 /// Boolean true value returned from the Win32 API
 const TRUE = 1;
 
+/// Success status
+const STATUS_SUCCESS = 0;
+
 // Path length
 const MAX_PATH = 260;
 
@@ -4879,6 +4882,107 @@ class FILEOPENDIALOGOPTIONS {
   static const FOS_DEFAULTNOMINIMODE = 0x20000000;
   static const FOS_FORCEPREVIEWPANEON = 0x40000000;
   static const FOS_SUPPORTSTREAMABLEITEMS = 0x80000000;
+}
+
+/// {@category Enum}
+class POWER_INFORMATION_LEVEL {
+  static const SystemPowerPolicyAc = 0;
+  static const SystemPowerPolicyDc = 1;
+  static const VerifySystemPolicyAc = 2;
+  static const VerifySystemPolicyDc = 3;
+  static const SystemPowerCapabilities = 4;
+  static const SystemBatteryState = 5;
+  static const SystemPowerStateHandler = 6;
+  static const ProcessorStateHandler = 7;
+  static const SystemPowerPolicyCurrent = 8;
+  static const AdministratorPowerPolicy = 9;
+  static const SystemReserveHiberFile = 10;
+  static const ProcessorInformation = 11;
+  static const SystemPowerInformation = 12;
+  static const ProcessorStateHandler2 = 13;
+  static const LastWakeTime = 14;
+  static const LastSleepTime = 15;
+  static const SystemExecutionState = 16;
+  static const SystemPowerStateNotifyHandler = 17;
+  static const ProcessorPowerPolicyAc = 18;
+  static const ProcessorPowerPolicyDc = 19;
+  static const VerifyProcessorPowerPolicyAc = 20;
+  static const VerifyProcessorPowerPolicyDc = 21;
+  static const ProcessorPowerPolicyCurrent = 22;
+  static const SystemPowerStateLogging = 23;
+  static const SystemPowerLoggingEntry = 24;
+  static const SetPowerSettingValue = 25;
+  static const NotifyUserPowerSetting = 26;
+  static const PowerInformationLevelUnused0 = 27;
+  static const SystemMonitorHiberBootPowerOff = 28;
+  static const SystemVideoState = 29;
+  static const TraceApplicationPowerMessage = 30;
+  static const TraceApplicationPowerMessageEnd = 31;
+  static const ProcessorPerfStates = 32;
+  static const ProcessorIdleStates = 33;
+  static const ProcessorCap = 34;
+  static const SystemWakeSource = 35;
+  static const SystemHiberFileInformation = 36;
+  static const TraceServicePowerMessage = 37;
+  static const ProcessorLoad = 38;
+  static const PowerShutdownNotification = 39;
+  static const MonitorCapabilities = 40;
+  static const SessionPowerInit = 41;
+  static const SessionDisplayState = 42;
+  static const PowerRequestCreate = 43;
+  static const PowerRequestAction = 44;
+  static const GetPowerRequestList = 45;
+  static const ProcessorInformationEx = 46;
+  static const NotifyUserModeLegacyPowerEvent = 47;
+  static const GroupPark = 48;
+  static const ProcessorIdleDomains = 49;
+  static const WakeTimerList = 50;
+  static const SystemHiberFileSize = 51;
+  static const ProcessorIdleStatesHv = 52;
+  static const ProcessorPerfStatesHv = 53;
+  static const ProcessorPerfCapHv = 54;
+  static const ProcessorSetIdle = 55;
+  static const LogicalProcessorIdling = 56;
+  static const UserPresence = 57;
+  static const PowerSettingNotificationName = 58;
+  static const GetPowerSettingValue = 59;
+  static const IdleResiliency = 60;
+  static const SessionRITState = 61;
+  static const SessionConnectNotification = 62;
+  static const SessionPowerCleanup = 63;
+  static const SessionLockState = 64;
+  static const SystemHiberbootState = 65;
+  static const PlatformInformation = 66;
+  static const PdcInvocation = 67;
+  static const MonitorInvocation = 68;
+  static const FirmwareTableInformationRegistered = 69;
+  static const SetShutdownSelectedTime = 70;
+  static const SuspendResumeInvocation = 71;
+  static const PlmPowerRequestCreate = 72;
+  static const ScreenOff = 73;
+  static const CsDeviceNotification = 74;
+  static const PlatformRole = 75;
+  static const LastResumePerformance = 76;
+  static const DisplayBurst = 77;
+  static const ExitLatencySamplingPercentage = 78;
+  static const RegisterSpmPowerSettings = 79;
+  static const PlatformIdleStates = 80;
+  static const ProcessorIdleVeto = 81;
+  static const PlatformIdleVeto = 82;
+  static const SystemBatteryStatePrecise = 83;
+  static const ThermalEvent = 84;
+  static const PowerRequestActionInternal = 85;
+  static const BatteryDeviceState = 86;
+  static const PowerInformationInternal = 87;
+  static const ThermalStandby = 88;
+  static const SystemHiberFileType = 89;
+  static const PhysicalPowerButtonPress = 90;
+  static const QueryPotentialDripsConstraint = 91;
+  static const EnergyTrackerCreate = 92;
+  static const EnergyTrackerQuery = 93;
+  static const UpdateBlackBoxRecorder = 94;
+  static const SessionAllowExternalDmaDevices = 95;
+  static const PowerInformationLevelMaximum = 96;
 }
 
 /// {@category Enum}
