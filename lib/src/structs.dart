@@ -1579,6 +1579,96 @@ class GUID extends Struct {
   }
 }
 
+// typedef struct _CREDENTIAL_ATTRIBUTEW {
+// #if ...
+//   wchar_t *Keyword;
+// #else
+//   LPWSTR  Keyword;
+// #endif
+//   DWORD   Flags;
+//   DWORD   ValueSize;
+//   LPBYTE  Value;
+// } CREDENTIAL_ATTRIBUTEW, *PCREDENTIAL_ATTRIBUTEW;
+class CREDENTIAL_ATTRIBUTE extends Struct {
+  Pointer<Utf16> Keyword;
+  @Uint32()
+  int Flags;
+  @Uint32()
+  int ValueSize;
+  Pointer<Uint8> Value;
+
+  factory CREDENTIAL_ATTRIBUTE.allocate() =>
+      allocate<CREDENTIAL_ATTRIBUTE>().ref
+        ..Keyword = nullptr
+        ..Flags = 0
+        ..ValueSize = 0
+        ..Value = nullptr;
+}
+
+// typedef struct _CREDENTIALW {
+//   DWORD                  Flags;
+//   DWORD                  Type;
+// #if ...
+//   wchar_t                *TargetName;
+// #else
+//   LPWSTR                 TargetName;
+// #endif
+// #if ...
+//   wchar_t                *Comment;
+// #else
+//   LPWSTR                 Comment;
+// #endif
+//   FILETIME               LastWritten;
+//   DWORD                  CredentialBlobSize;
+//   LPBYTE                 CredentialBlob;
+//   DWORD                  Persist;
+//   DWORD                  AttributeCount;
+//   PCREDENTIAL_ATTRIBUTEW Attributes;
+// #if ...
+//   wchar_t                *TargetAlias;
+// #else
+//   LPWSTR                 TargetAlias;
+// #endif
+// #if ...
+//   wchar_t                *UserName;
+// #else
+//   LPWSTR                 UserName;
+// #endif
+// } CREDENTIALW, *PCREDENTIALW;
+class CREDENTIAL extends Struct {
+  @Uint32()
+  int Flags;
+  @Uint32()
+  int Type;
+  Pointer<Utf16> TargetName;
+  Pointer<Utf16> Comment;
+  Pointer<FILETIME> LastWritten;
+  @Uint32()
+  int CredentialBlobSize;
+  Pointer<Uint8> CredentialBlob;
+  @Uint32()
+  int Persist;
+  @Uint32()
+  int AttributeCount;
+  Pointer<CREDENTIAL_ATTRIBUTE> Attributes;
+  Pointer<Utf16> TargetAlias;
+  Pointer<Utf16> UserName;
+
+  factory CREDENTIAL.allocate() => allocate<CREDENTIAL>().ref
+    ..Flags = 0
+    ..Type = 0
+    ..TargetName = nullptr
+    ..Comment = nullptr
+    ..LastWritten = nullptr
+    ..CredentialBlobSize = 0
+    ..CredentialBlob = nullptr
+    ..Persist = 0
+    ..AttributeCount = 0
+    ..Attributes = nullptr
+    ..TargetAlias = nullptr
+    ..UserName = nullptr;
+}
+
 // *** CONSOLE STRUCTS ***
 
 // Dart FFI does not yet have support for nested structs, so there's extra

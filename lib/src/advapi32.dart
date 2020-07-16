@@ -22,3 +22,15 @@ final RegOpenKeyEx = _advapi32
 final RegQueryValueEx =
     _advapi32.lookupFunction<regQueryValueExNative, regQueryValueExDart>(
         'RegQueryValueExW');
+
+/// {@category advapi32}
+final CredWrite =
+    _advapi32.lookupFunction<credWriteNative, credWriteDart>('CredWriteW');
+
+/// {@category advapi32}
+final CredRead =
+    _advapi32.lookupFunction<credReadNative, credReadDart>('CredReadW');
+
+/// {@category advapi32}
+final CredFree =
+    _advapi32.lookupFunction<credFreeNative, credFreeDart>('CredFree');

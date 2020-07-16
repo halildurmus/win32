@@ -533,6 +533,30 @@ const ERROR_MORE_DATA = 234;
 const ERROR_CANCELLED = 1223;
 
 /// @nodoc
+const ERROR_NO_SUCH_LOGON_SESSION = 1312;
+
+/// @nodoc
+const ERROR_INVALID_FLAGS = 1004;
+
+/// @nodoc
+const ERROR_BAD_USERNAME = 2202;
+
+/// @nodoc
+const ERROR_NOT_FOUND = 1168;
+
+/// @nodoc
+const SCARD_E_NO_READERS_AVAILABLE = 2148532270;
+
+/// @nodoc
+const SCARD_E_NO_SMARTCARD = 0x8010000C;
+
+/// @nodoc
+const SCARD_W_REMOVED_CARD = 0x80100069;
+
+/// @nodoc
+const SCARD_W_WRONG_CHV = 0x8010006B;
+
+/// @nodoc
 const APPMODEL_ERROR_NO_PACKAGE = 15700;
 
 /// @nodoc
@@ -5545,3 +5569,45 @@ const PRODUCT_XBOX_SCARLETTHOSTOS = 0x000000C5;
 
 /// @nodoc
 const PRODUCT_UNLICENSED = 0xABCDABCD;
+
+/// @nodoc
+const CRED_PRESERVE_CREDENTIAL_BLOB = 0x1;
+
+/// @nodoc
+const CRED_FLAGS_PROMPT_NOW = 0x2;
+
+/// @nodoc
+const CRED_FLAGS_USERNAME_TARGET = 0x4;
+
+/// @nodoc
+const CRED_TYPE_GENERIC = 0x1;
+
+/// @nodoc
+const CRED_TYPE_DOMAIN_PASSWORD = 0x2;
+
+/// @nodoc
+const CRED_TYPE_DOMAIN_CERTIFICATE = 0x3;
+
+/// @nodoc
+const CRED_TYPE_DOMAIN_VISIBLE_PASSWORD = 0x4;
+
+/// @nodoc
+const CRED_TYPE_GENERIC_CERTIFICATE = 0x5;
+
+/// @nodoc
+const CRED_TYPE_DOMAIN_EXTENDED = 0x6;
+
+/// @nodoc
+const CRED_TYPE_MAXIMUM = 0x7;
+
+/// @nodoc
+const CRED_TYPE_MAXIMUM_EX = CRED_TYPE_MAXIMUM + 1000;
+
+/// @nodoc
+const CRED_PERSIST_SESSION = 0x1;
+
+/// @nodoc
+const CRED_PERSIST_LOCAL_MACHINE = 0x2;
+
+/// @nodoc
+const CRED_PERSIST_ENTERPRISE = 0x3;
