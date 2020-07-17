@@ -33,7 +33,7 @@ class WinmdParameter {
     var hr = reader.GetParamProps(token, pmd, pulSequence, szName, 256, pchName,
         pdwAttr, pdwCPlusTypeFlag, ppValue, pcchValue);
 
-    if (hr == S_OK) {
+    if (SUCCEEDED(hr)) {
       if (pcchValue.value == 0) {
         parameter = WinmdParameter(
             reader,

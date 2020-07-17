@@ -32,7 +32,7 @@ File metadataFileContainingType(String typeName) {
     // third-party types) in an app that is not a Windows Store app.
     var hr = RoGetMetaDataFile(hstrTypeName.value, nullptr,
         hstrMetaDataFilePath.address, spMetaDataImport, typeDef);
-    if (hr == S_OK) {
+    if (SUCCEEDED(hr)) {
       path = File(convertFromHString(hstrMetaDataFilePath));
     } else {
       throw WindowsException(hr);

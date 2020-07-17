@@ -46,7 +46,7 @@ class WinmdMethod {
       final hr = reader.GetMethodProps(token, pClass, szMethod, 256, pchMethod,
           pdwAttr, ppvSigBlob.cast(), pcbSigBlob, pulCodeRVA, pdwImplFlags);
 
-      if (hr == S_OK) {
+      if (SUCCEEDED(hr)) {
         final signature = Pointer<Uint8>.fromAddress(ppvSigBlob.value)
             .asTypedList(pcbSigBlob.value);
         method = WinmdMethod(
