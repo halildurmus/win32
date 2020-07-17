@@ -9,7 +9,7 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-extension Uint8ListBlob on Uint8List {
+extension Uint8ListBlobConversion on Uint8List {
   /// Allocates a pointer filled with the Uint8List data.
   Pointer<Uint8> allocatePointer() {
     final blob = allocate<Uint8>(count: length);

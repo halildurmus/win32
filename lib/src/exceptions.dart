@@ -9,9 +9,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'constants.dart';
-import 'int.dart';
+import 'extensions/intToHexString.dart';
+import 'extensions/unpackUtf16.dart';
 import 'kernel32.dart';
-import 'string.dart';
 
 /// Generic COM Exception
 class COMException implements Exception {
@@ -66,5 +66,5 @@ class WindowsException extends COMException {
 
   @override
   String toString() =>
-      'Error ${hr.toHex(32)}: ${convertWindowsErrorToString(hr)}';
+      'Error ${hr.toHexString(32)}: ${convertWindowsErrorToString(hr)}';
 }

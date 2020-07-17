@@ -10,7 +10,7 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 import 'constants.dart';
-import 'string.dart';
+import 'extensions/unpackUtf16.dart';
 
 // typedef struct tagWNDCLASSW {
 //   UINT      style;
@@ -1649,21 +1649,24 @@ class GUID extends Struct {
 }
 
 // typedef struct _CREDENTIAL_ATTRIBUTEW {
-// #if ...
-//   wchar_t *Keyword;
-// #else
-//   LPWSTR  Keyword;
-// #endif
-//   DWORD   Flags;
-//   DWORD   ValueSize;
-//   LPBYTE  Value;
+//     LPWSTR  Keyword;
+//     DWORD   Flags;
+//     DWORD   ValueSize;
+//     LPBYTE  Value;
 // } CREDENTIAL_ATTRIBUTEW, *PCREDENTIAL_ATTRIBUTEW;
+
+/// CREDENTIAL_ATTRIBUTE
+///
+/// {@category Struct}
 class CREDENTIAL_ATTRIBUTE extends Struct {
   Pointer<Utf16> Keyword;
+
   @Uint32()
   int Flags;
+
   @Uint32()
   int ValueSize;
+
   Pointer<Uint8> Value;
 
   factory CREDENTIAL_ATTRIBUTE.allocate() =>
@@ -1675,50 +1678,44 @@ class CREDENTIAL_ATTRIBUTE extends Struct {
 }
 
 // typedef struct _CREDENTIALW {
-//   DWORD                  Flags;
-//   DWORD                  Type;
-// #if ...
-//   wchar_t                *TargetName;
-// #else
-//   LPWSTR                 TargetName;
-// #endif
-// #if ...
-//   wchar_t                *Comment;
-// #else
-//   LPWSTR                 Comment;
-// #endif
-//   FILETIME               LastWritten;
-//   DWORD                  CredentialBlobSize;
-//   LPBYTE                 CredentialBlob;
-//   DWORD                  Persist;
-//   DWORD                  AttributeCount;
-//   PCREDENTIAL_ATTRIBUTEW Attributes;
-// #if ...
-//   wchar_t                *TargetAlias;
-// #else
-//   LPWSTR                 TargetAlias;
-// #endif
-// #if ...
-//   wchar_t                *UserName;
-// #else
-//   LPWSTR                 UserName;
-// #endif
+//     DWORD Flags;
+//     DWORD Type;
+//     LPWSTR TargetName;
+//     LPWSTR Comment;
+//     FILETIME LastWritten;
+//     DWORD CredentialBlobSize;
+//     LPBYTE CredentialBlob;
+//     DWORD Persist;
+//     DWORD AttributeCount;
+//     PCREDENTIAL_ATTRIBUTEW Attributes;
+//     LPWSTR TargetAlias;
+//     LPWSTR UserName;
 // } CREDENTIALW, *PCREDENTIALW;
+
+/// CREDENTIAL
+///
+/// {@category Struct}
 class CREDENTIAL extends Struct {
   @Uint32()
   int Flags;
   @Uint32()
   int Type;
+
   Pointer<Utf16> TargetName;
   Pointer<Utf16> Comment;
   Pointer<FILETIME> LastWritten;
+
   @Uint32()
   int CredentialBlobSize;
+
   Pointer<Uint8> CredentialBlob;
+
   @Uint32()
   int Persist;
+
   @Uint32()
   int AttributeCount;
+
   Pointer<CREDENTIAL_ATTRIBUTE> Attributes;
   Pointer<Utf16> TargetAlias;
   Pointer<Utf16> UserName;

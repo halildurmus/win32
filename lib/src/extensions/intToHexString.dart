@@ -13,7 +13,7 @@ extension HexConversion on int {
   /// Takes a parameter `bits` indicating the width of the number. Normally
   /// this value will be 8, 16, 32 or 64, but other integers that are divisible
   /// by 8 are permissible.
-  String toHex(int bits) {
+  String toHexString(int bits) {
     if ((bits % 8) != 0) return '';
 
     // Need to cast to a BigInt because Dart integers are signed 64-bit values

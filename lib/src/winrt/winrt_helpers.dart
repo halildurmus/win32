@@ -9,11 +9,13 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import '../exceptions.dart';
+import '../extensions/unpackUtf16.dart';
 import '../generated/IInspectable.dart';
 import '../macros.dart';
 import '../ole32.dart';
-import '../string.dart';
 import '../structs.dart';
+import '../utils.dart';
+
 import 'winrt_constants.dart';
 import 'winrt_prototypes.dart';
 

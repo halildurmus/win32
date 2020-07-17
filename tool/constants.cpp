@@ -17,6 +17,7 @@
 #include <bluetoothapis.h>
 #include <VersionHelpers.h>
 #include <ntstatus.h>
+#include <wincred.h>
 
 void main()
 {

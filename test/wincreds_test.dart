@@ -1,3 +1,5 @@
+@TestOn('windows')
+
 import 'dart:convert';
 import 'dart:ffi';
 import 'dart:typed_data';
@@ -62,23 +64,30 @@ void main() {
     const credentialValue = 'secretValue';
     const credentialValue2 = 'anotherSecret';
 
+    print(1);
     // create credential
     writeCredential(
         credentialName: credentialName,
         userName: 'userName',
         password: credentialValue);
+    print(2);
 
     // read
-    expect(readCredential(credentialName), credentialValue);
+    expect(readCredential(credentialName), equals(credentialValue));
+    print(3);
 
     // update
     writeCredential(
         credentialName: credentialName,
         userName: 'userName',
         password: credentialValue2);
-    expect(readCredential(credentialName), credentialValue2);
+    print(4);
+
+    expect(readCredential(credentialName), equals(credentialValue2));
+    print(5);
 
     // delete
     deleteCredential(credentialName);
+    print(6);
   });
 }

@@ -78,14 +78,17 @@
 library win32;
 
 // Core Win32 APIs, constants and macros
-export 'src/blob.dart';
 export 'src/callbacks.dart';
 export 'src/constants.dart';
 export 'src/exceptions.dart';
 export 'src/macros.dart';
 export 'src/structs.dart';
-export 'src/string.dart';
 export 'src/utils.dart';
+
+// Useful extension methods
+export 'src/extensions/intToHexString.dart';
+export 'src/extensions/listToBlob.dart';
+export 'src/extensions/unpackUtf16.dart';
 
 // Traditional C-style Windows APIs
 export 'src/advapi32.dart';

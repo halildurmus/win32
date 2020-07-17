@@ -548,18 +548,6 @@ const ERROR_BAD_USERNAME = 2202;
 const ERROR_NOT_FOUND = 1168;
 
 /// @nodoc
-const SCARD_E_NO_READERS_AVAILABLE = 2148532270;
-
-/// @nodoc
-const SCARD_E_NO_SMARTCARD = 0x8010000C;
-
-/// @nodoc
-const SCARD_W_REMOVED_CARD = 0x80100069;
-
-/// @nodoc
-const SCARD_W_WRONG_CHV = 0x8010006B;
-
-/// @nodoc
 const APPMODEL_ERROR_NO_PACKAGE = 15700;
 
 /// @nodoc
@@ -3940,6 +3928,24 @@ final REGDB_E_CLASSNOTREG = 0x80040154.toSigned(32);
 
 /// @nodoc
 final REGDB_E_IIDNOTREG = 0x80040155.toSigned(32);
+
+/// @nodoc
+final SCARD_S_SUCCESS = 0;
+
+/// @nodoc
+final SCARD_E_NO_SMARTCARD = 0x8010000C.toSigned(32);
+
+/// @nodoc
+final SCARD_E_READER_UNAVAILABLE = 0x80100017.toSigned(32);
+
+/// @nodoc
+final SCARD_E_NO_READERS_AVAILABLE = 0x8010002E.toSigned(32);
+
+/// @nodoc
+final SCARD_W_REMOVED_CARD = 0x80100069.toSigned(32);
+
+/// @nodoc
+final SCARD_W_WRONG_CHV = 0x8010006B.toSigned(32);
 
 /// @nodoc
 const COINITBASE_MULTITHREADED = 0x0;
