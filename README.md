@@ -67,6 +67,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `wmi.dart`         | Using WMI from COM to retrieve device/OS information      |
 | `sysinfo.dart`     | Examples of getting device information from native C APIs |
 | `winmd.dart`       | Interrogate Windows Runtime types                         |
+| `credentials.dart` | Adds a credential to the store and retrieves it           |
 | `dynamic_load.dart`| Demonstrate loading a DLL and calling it at runtime       |
 | `tetris\main.dart` | Port of an open-source Tetris game to Dart                |
 | `notepad\notepad.dart` | Lightweight replica of the Windows notepad applet     |

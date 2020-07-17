@@ -1,3 +1,9 @@
+## 1.6.9
+
+- Add credential management APIs (thanks @hpoul)
+- Add battery and power management APIs
+- Overhaul HRESULTs and add more tests
+
 ## 1.6.8
 
 - Add font enumeration example
