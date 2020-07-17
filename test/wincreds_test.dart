@@ -45,7 +45,7 @@ String readCredential(String credentialName) {
   final cred = credPointer.value.ref;
   final blob = cred.CredentialBlob.asTypedList(cred.CredentialBlobSize);
   final password = utf8.decode(blob);
-  CredFree(credPointer);
+  CredFree(credPointer.value);
   free(credPointer);
   return password;
 }
@@ -64,30 +64,24 @@ void main() {
     const credentialValue = 'secretValue';
     const credentialValue2 = 'anotherSecret';
 
-    print(1);
     // create credential
     writeCredential(
         credentialName: credentialName,
         userName: 'userName',
         password: credentialValue);
-    print(2);
 
     // read
     expect(readCredential(credentialName), equals(credentialValue));
-    print(3);
 
     // update
     writeCredential(
         credentialName: credentialName,
         userName: 'userName',
         password: credentialValue2);
-    print(4);
 
     expect(readCredential(credentialName), equals(credentialValue2));
-    print(5);
 
     // delete
     deleteCredential(credentialName);
-    print(6);
   });
 }

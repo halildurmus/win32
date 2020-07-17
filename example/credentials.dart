@@ -23,7 +23,9 @@ void write({String credentialName, String userName, String password}) {
     ..UserName = TEXT(userName)
     ..CredentialBlob = blob
     ..CredentialBlobSize = examplePassword.length;
+
   final result = CredWrite(credential.addressOf, 0);
+
   if (result != TRUE) {
     final errorCode = GetLastError();
     print('Error ($result): $errorCode');
@@ -55,7 +57,7 @@ void read(String credentialName) {
   final blob = cred.CredentialBlob.asTypedList(cred.CredentialBlobSize);
   final password = utf8.decode(blob);
   print('read password: $password');
-  CredFree(credPointer);
+  CredFree(credPointer.value);
   print('done.');
   free(credPointer);
   print('returning');
