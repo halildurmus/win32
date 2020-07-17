@@ -58,21 +58,24 @@ class IMetaDataDispenser extends IUnknown {
   int DefineScope(Pointer<GUID> rclsid, int dwCreateFlags, Pointer<GUID> riid,
           Pointer<IntPtr> ppIUnk) =>
       Pointer<NativeFunction<_DefineScope_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(3).value)
-              .asFunction<_DefineScope_Dart>()(
-          ptr.ref.lpVtbl, rclsid, dwCreateFlags, riid, ppIUnk);
+              ptr.ref.vtable.elementAt(3).value)
+          .asFunction<_DefineScope_Dart>()
+          (ptr.ref.lpVtbl, rclsid, dwCreateFlags, riid, ppIUnk)
+          .toUnsigned(32);
 
   int OpenScope(Pointer<Utf16> szScope, int dwOpenFlags, Pointer<GUID> riid,
           Pointer<IntPtr> ppIUnk) =>
       Pointer<NativeFunction<_OpenScope_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(4).value)
-              .asFunction<_OpenScope_Dart>()(
-          ptr.ref.lpVtbl, szScope, dwOpenFlags, riid, ppIUnk);
+              ptr.ref.vtable.elementAt(4).value)
+          .asFunction<_OpenScope_Dart>()
+          (ptr.ref.lpVtbl, szScope, dwOpenFlags, riid, ppIUnk)
+          .toUnsigned(32);
 
   int OpenScopeOnMemory(Pointer<Uint8> pData, int cbData, int dwOpenFlags,
           Pointer<GUID> riid, Pointer<IntPtr> ppIUnk) =>
       Pointer<NativeFunction<_OpenScopeOnMemory_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(5).value)
-              .asFunction<_OpenScopeOnMemory_Dart>()(
-          ptr.ref.lpVtbl, pData, cbData, dwOpenFlags, riid, ppIUnk);
+              ptr.ref.vtable.elementAt(5).value)
+          .asFunction<_OpenScopeOnMemory_Dart>()
+          (ptr.ref.lpVtbl, pData, cbData, dwOpenFlags, riid, ppIUnk)
+          .toUnsigned(32);
 }

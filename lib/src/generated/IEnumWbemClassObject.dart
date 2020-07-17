@@ -52,27 +52,32 @@ class IEnumWbemClassObject extends IUnknown {
 
   int Reset() => Pointer<NativeFunction<_Reset_Native>>.fromAddress(
           ptr.ref.vtable.elementAt(3).value)
-      .asFunction<_Reset_Dart>()(ptr.ref.lpVtbl);
+      .asFunction<_Reset_Dart>()(ptr.ref.lpVtbl)
+      .toUnsigned(32);
 
   int Next(int lTimeout, int uCount, Pointer<IntPtr> apObjects,
           Pointer<Uint32> puReturned) =>
       Pointer<NativeFunction<_Next_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(4).value)
-              .asFunction<_Next_Dart>()(
-          ptr.ref.lpVtbl, lTimeout, uCount, apObjects, puReturned);
+              ptr.ref.vtable.elementAt(4).value)
+          .asFunction<_Next_Dart>()
+          (ptr.ref.lpVtbl, lTimeout, uCount, apObjects, puReturned)
+          .toUnsigned(32);
 
   int NextAsync(int uCount, Pointer<COMObject> pSink) =>
       Pointer<NativeFunction<_NextAsync_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_NextAsync_Dart>()(ptr.ref.lpVtbl, uCount, pSink);
+          .asFunction<_NextAsync_Dart>()(ptr.ref.lpVtbl, uCount, pSink)
+          .toUnsigned(32);
 
   int Clone(Pointer<IntPtr> ppEnum) =>
       Pointer<NativeFunction<_Clone_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppEnum);
+          .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppEnum)
+          .toUnsigned(32);
 
   int Skip(int lTimeout, int nCount) =>
       Pointer<NativeFunction<_Skip_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_Skip_Dart>()(ptr.ref.lpVtbl, lTimeout, nCount);
+          .asFunction<_Skip_Dart>()(ptr.ref.lpVtbl, lTimeout, nCount)
+          .toUnsigned(32);
 }

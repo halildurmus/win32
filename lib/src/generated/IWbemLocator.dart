@@ -64,17 +64,18 @@ class IWbemLocator extends IUnknown {
           Pointer<COMObject> pCtx,
           Pointer<IntPtr> ppNamespace) =>
       Pointer<NativeFunction<_ConnectServer_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(3).value)
-              .asFunction<_ConnectServer_Dart>()(
-          ptr.ref.lpVtbl,
-          strNetworkResource,
-          strUser,
-          strPassword,
-          strLocale,
-          lSecurityFlags,
-          strAuthority,
-          pCtx,
-          ppNamespace);
+              ptr.ref.vtable.elementAt(3).value)
+          .asFunction<_ConnectServer_Dart>()(
+              ptr.ref.lpVtbl,
+              strNetworkResource,
+              strUser,
+              strPassword,
+              strLocale,
+              lSecurityFlags,
+              strAuthority,
+              pCtx,
+              ppNamespace)
+          .toUnsigned(32);
 }
 
 /// {@category com}
@@ -86,13 +87,14 @@ class WbemLocator extends IWbemLocator {
     final ptr = COMObject.allocate().addressOf;
 
     var hr = CoCreateInstance(
-        GUID.fromString(CLSID_WbemLocator).addressOf,
-        nullptr,
-        CLSCTX_ALL,
-        GUID.fromString(IID_IWbemLocator).addressOf,
-        ptr.cast());
+            GUID.fromString(CLSID_WbemLocator).addressOf,
+            nullptr,
+            CLSCTX_ALL,
+            GUID.fromString(IID_IWbemLocator).addressOf,
+            ptr.cast())
+        .toUnsigned(32);
 
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
     return WbemLocator(ptr);
   }
 

@@ -157,150 +157,175 @@ class IFileDialogCustomize extends IUnknown {
   int EnableOpenDropDown(int dwIDCtl) =>
       Pointer<NativeFunction<_EnableOpenDropDown_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_EnableOpenDropDown_Dart>()(ptr.ref.lpVtbl, dwIDCtl);
+          .asFunction<_EnableOpenDropDown_Dart>()(ptr.ref.lpVtbl, dwIDCtl)
+          .toUnsigned(32);
 
   int AddMenu(int dwIDCtl, Pointer<Utf16> pszLabel) =>
       Pointer<NativeFunction<_AddMenu_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_AddMenu_Dart>()(ptr.ref.lpVtbl, dwIDCtl, pszLabel);
+          .asFunction<_AddMenu_Dart>()(ptr.ref.lpVtbl, dwIDCtl, pszLabel)
+          .toUnsigned(32);
 
   int AddPushButton(int dwIDCtl, Pointer<Utf16> pszLabel) =>
       Pointer<NativeFunction<_AddPushButton_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_AddPushButton_Dart>()(ptr.ref.lpVtbl, dwIDCtl, pszLabel);
+          .asFunction<_AddPushButton_Dart>()(ptr.ref.lpVtbl, dwIDCtl, pszLabel)
+          .toUnsigned(32);
 
   int AddComboBox(int dwIDCtl) =>
       Pointer<NativeFunction<_AddComboBox_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_AddComboBox_Dart>()(ptr.ref.lpVtbl, dwIDCtl);
+          .asFunction<_AddComboBox_Dart>()(ptr.ref.lpVtbl, dwIDCtl)
+          .toUnsigned(32);
 
   int AddRadioButtonList(int dwIDCtl) =>
       Pointer<NativeFunction<_AddRadioButtonList_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_AddRadioButtonList_Dart>()(ptr.ref.lpVtbl, dwIDCtl);
+          .asFunction<_AddRadioButtonList_Dart>()(ptr.ref.lpVtbl, dwIDCtl)
+          .toUnsigned(32);
 
   int AddCheckButton(int dwIDCtl, Pointer<Utf16> pszLabel, int bChecked) =>
       Pointer<NativeFunction<_AddCheckButton_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(8).value)
-              .asFunction<_AddCheckButton_Dart>()(
-          ptr.ref.lpVtbl, dwIDCtl, pszLabel, bChecked);
+              ptr.ref.vtable.elementAt(8).value)
+          .asFunction<_AddCheckButton_Dart>()
+          (ptr.ref.lpVtbl, dwIDCtl, pszLabel, bChecked)
+          .toUnsigned(32);
 
   int AddEditBox(int dwIDCtl, Pointer<Utf16> pszText) =>
       Pointer<NativeFunction<_AddEditBox_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(9).value)
-          .asFunction<_AddEditBox_Dart>()(ptr.ref.lpVtbl, dwIDCtl, pszText);
+          .asFunction<_AddEditBox_Dart>()(ptr.ref.lpVtbl, dwIDCtl, pszText)
+          .toUnsigned(32);
 
   int AddSeparator(int dwIDCtl) =>
       Pointer<NativeFunction<_AddSeparator_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(10).value)
-          .asFunction<_AddSeparator_Dart>()(ptr.ref.lpVtbl, dwIDCtl);
+          .asFunction<_AddSeparator_Dart>()(ptr.ref.lpVtbl, dwIDCtl)
+          .toUnsigned(32);
 
   int AddText(int dwIDCtl, Pointer<Utf16> pszText) =>
       Pointer<NativeFunction<_AddText_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(11).value)
-          .asFunction<_AddText_Dart>()(ptr.ref.lpVtbl, dwIDCtl, pszText);
+          .asFunction<_AddText_Dart>()(ptr.ref.lpVtbl, dwIDCtl, pszText)
+          .toUnsigned(32);
 
   int SetControlLabel(int dwIDCtl, Pointer<Utf16> pszLabel) =>
       Pointer<NativeFunction<_SetControlLabel_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(12).value)
-              .asFunction<_SetControlLabel_Dart>()(
-          ptr.ref.lpVtbl, dwIDCtl, pszLabel);
+              ptr.ref.vtable.elementAt(12).value)
+          .asFunction<_SetControlLabel_Dart>()
+          (ptr.ref.lpVtbl, dwIDCtl, pszLabel)
+          .toUnsigned(32);
 
   int GetControlState(int dwIDCtl, Pointer<Int32> pdwState) =>
       Pointer<NativeFunction<_GetControlState_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(13).value)
-              .asFunction<_GetControlState_Dart>()(
-          ptr.ref.lpVtbl, dwIDCtl, pdwState);
+              ptr.ref.vtable.elementAt(13).value)
+          .asFunction<_GetControlState_Dart>()
+          (ptr.ref.lpVtbl, dwIDCtl, pdwState)
+          .toUnsigned(32);
 
   int SetControlState(int dwIDCtl, int dwState) =>
       Pointer<NativeFunction<_SetControlState_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(14).value)
-              .asFunction<_SetControlState_Dart>()(
-          ptr.ref.lpVtbl, dwIDCtl, dwState);
+              ptr.ref.vtable.elementAt(14).value)
+          .asFunction<_SetControlState_Dart>()(ptr.ref.lpVtbl, dwIDCtl, dwState)
+          .toUnsigned(32);
 
   int GetEditBoxText(int dwIDCtl, Pointer<IntPtr> ppszText) =>
       Pointer<NativeFunction<_GetEditBoxText_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(15).value)
-              .asFunction<_GetEditBoxText_Dart>()(
-          ptr.ref.lpVtbl, dwIDCtl, ppszText);
+              ptr.ref.vtable.elementAt(15).value)
+          .asFunction<_GetEditBoxText_Dart>()(ptr.ref.lpVtbl, dwIDCtl, ppszText)
+          .toUnsigned(32);
 
   int SetEditBoxText(int dwIDCtl, Pointer<Utf16> pszText) =>
       Pointer<NativeFunction<_SetEditBoxText_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(16).value)
-          .asFunction<_SetEditBoxText_Dart>()(ptr.ref.lpVtbl, dwIDCtl, pszText);
+          .asFunction<_SetEditBoxText_Dart>()(ptr.ref.lpVtbl, dwIDCtl, pszText)
+          .toUnsigned(32);
 
   int GetCheckButtonState(int dwIDCtl, Pointer<Int32> pbChecked) =>
       Pointer<NativeFunction<_GetCheckButtonState_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(17).value)
-              .asFunction<_GetCheckButtonState_Dart>()(
-          ptr.ref.lpVtbl, dwIDCtl, pbChecked);
+              ptr.ref.vtable.elementAt(17).value)
+          .asFunction<_GetCheckButtonState_Dart>()
+          (ptr.ref.lpVtbl, dwIDCtl, pbChecked)
+          .toUnsigned(32);
 
   int SetCheckButtonState(int dwIDCtl, int bChecked) =>
       Pointer<NativeFunction<_SetCheckButtonState_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(18).value)
-              .asFunction<_SetCheckButtonState_Dart>()(
-          ptr.ref.lpVtbl, dwIDCtl, bChecked);
+              ptr.ref.vtable.elementAt(18).value)
+          .asFunction<_SetCheckButtonState_Dart>()
+          (ptr.ref.lpVtbl, dwIDCtl, bChecked)
+          .toUnsigned(32);
 
   int AddControlItem(int dwIDCtl, int dwIDItem, Pointer<Utf16> pszLabel) =>
       Pointer<NativeFunction<_AddControlItem_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(19).value)
-              .asFunction<_AddControlItem_Dart>()(
-          ptr.ref.lpVtbl, dwIDCtl, dwIDItem, pszLabel);
+              ptr.ref.vtable.elementAt(19).value)
+          .asFunction<_AddControlItem_Dart>()
+          (ptr.ref.lpVtbl, dwIDCtl, dwIDItem, pszLabel)
+          .toUnsigned(32);
 
   int RemoveControlItem(int dwIDCtl, int dwIDItem) =>
       Pointer<NativeFunction<_RemoveControlItem_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(20).value)
-              .asFunction<_RemoveControlItem_Dart>()(
-          ptr.ref.lpVtbl, dwIDCtl, dwIDItem);
+              ptr.ref.vtable.elementAt(20).value)
+          .asFunction<_RemoveControlItem_Dart>()
+          (ptr.ref.lpVtbl, dwIDCtl, dwIDItem)
+          .toUnsigned(32);
 
   int RemoveAllControlItems(int dwIDCtl) =>
       Pointer<NativeFunction<_RemoveAllControlItems_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(21).value)
-          .asFunction<_RemoveAllControlItems_Dart>()(ptr.ref.lpVtbl, dwIDCtl);
+          .asFunction<_RemoveAllControlItems_Dart>()(ptr.ref.lpVtbl, dwIDCtl)
+          .toUnsigned(32);
 
   int GetControlItemState(int dwIDCtl, int dwIDItem, Pointer<Int32> pdwState) =>
       Pointer<NativeFunction<_GetControlItemState_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(22).value)
-              .asFunction<_GetControlItemState_Dart>()(
-          ptr.ref.lpVtbl, dwIDCtl, dwIDItem, pdwState);
+              ptr.ref.vtable.elementAt(22).value)
+          .asFunction<_GetControlItemState_Dart>()
+          (ptr.ref.lpVtbl, dwIDCtl, dwIDItem, pdwState)
+          .toUnsigned(32);
 
   int SetControlItemState(int dwIDCtl, int dwIDItem, int dwState) =>
       Pointer<NativeFunction<_SetControlItemState_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(23).value)
-              .asFunction<_SetControlItemState_Dart>()(
-          ptr.ref.lpVtbl, dwIDCtl, dwIDItem, dwState);
+              ptr.ref.vtable.elementAt(23).value)
+          .asFunction<_SetControlItemState_Dart>()
+          (ptr.ref.lpVtbl, dwIDCtl, dwIDItem, dwState)
+          .toUnsigned(32);
 
   int GetSelectedControlItem(int dwIDCtl, Pointer<Uint32> pdwIDItem) =>
       Pointer<NativeFunction<_GetSelectedControlItem_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(24).value)
-              .asFunction<_GetSelectedControlItem_Dart>()(
-          ptr.ref.lpVtbl, dwIDCtl, pdwIDItem);
+              ptr.ref.vtable.elementAt(24).value)
+          .asFunction<_GetSelectedControlItem_Dart>()
+          (ptr.ref.lpVtbl, dwIDCtl, pdwIDItem)
+          .toUnsigned(32);
 
   int SetSelectedControlItem(int dwIDCtl, int dwIDItem) =>
       Pointer<NativeFunction<_SetSelectedControlItem_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(25).value)
-              .asFunction<_SetSelectedControlItem_Dart>()(
-          ptr.ref.lpVtbl, dwIDCtl, dwIDItem);
+              ptr.ref.vtable.elementAt(25).value)
+          .asFunction<_SetSelectedControlItem_Dart>()
+          (ptr.ref.lpVtbl, dwIDCtl, dwIDItem)
+          .toUnsigned(32);
 
   int StartVisualGroup(int dwIDCtl, Pointer<Utf16> pszLabel) =>
       Pointer<NativeFunction<_StartVisualGroup_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(26).value)
-              .asFunction<_StartVisualGroup_Dart>()(
-          ptr.ref.lpVtbl, dwIDCtl, pszLabel);
+              ptr.ref.vtable.elementAt(26).value)
+          .asFunction<_StartVisualGroup_Dart>()
+          (ptr.ref.lpVtbl, dwIDCtl, pszLabel)
+          .toUnsigned(32);
 
   int EndVisualGroup() =>
       Pointer<NativeFunction<_EndVisualGroup_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(27).value)
-          .asFunction<_EndVisualGroup_Dart>()(ptr.ref.lpVtbl);
+          .asFunction<_EndVisualGroup_Dart>()(ptr.ref.lpVtbl)
+          .toUnsigned(32);
 
   int MakeProminent(int dwIDCtl) =>
       Pointer<NativeFunction<_MakeProminent_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(28).value)
-          .asFunction<_MakeProminent_Dart>()(ptr.ref.lpVtbl, dwIDCtl);
+          .asFunction<_MakeProminent_Dart>()(ptr.ref.lpVtbl, dwIDCtl)
+          .toUnsigned(32);
 
   int SetControlItemText(int dwIDCtl, int dwIDItem, Pointer<Utf16> pszLabel) =>
       Pointer<NativeFunction<_SetControlItemText_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(29).value)
-              .asFunction<_SetControlItemText_Dart>()(
-          ptr.ref.lpVtbl, dwIDCtl, dwIDItem, pszLabel);
+              ptr.ref.vtable.elementAt(29).value)
+          .asFunction<_SetControlItemText_Dart>()
+          (ptr.ref.lpVtbl, dwIDCtl, dwIDItem, pszLabel)
+          .toUnsigned(32);
 }

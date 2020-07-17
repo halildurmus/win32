@@ -70,49 +70,56 @@ class IWbemContext extends IUnknown {
   int Clone(Pointer<IntPtr> ppNewCopy) =>
       Pointer<NativeFunction<_Clone_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppNewCopy);
+          .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppNewCopy)
+          .toUnsigned(32);
 
   int GetNames(int lFlags, Pointer<SAFEARRAY> pNames) =>
       Pointer<NativeFunction<_GetNames_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_GetNames_Dart>()(ptr.ref.lpVtbl, lFlags, pNames);
+          .asFunction<_GetNames_Dart>()(ptr.ref.lpVtbl, lFlags, pNames)
+          .toUnsigned(32);
 
   int BeginEnumeration(int lFlags) =>
       Pointer<NativeFunction<_BeginEnumeration_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_BeginEnumeration_Dart>()(ptr.ref.lpVtbl, lFlags);
+          .asFunction<_BeginEnumeration_Dart>()(ptr.ref.lpVtbl, lFlags)
+          .toUnsigned(32);
 
   int Next(int lFlags, Pointer<Utf16> pstrName,
           Pointer<VARIANT_POINTER> pValue) =>
       Pointer<NativeFunction<_Next_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_Next_Dart>()(ptr.ref.lpVtbl, lFlags, pstrName, pValue);
+          .asFunction<_Next_Dart>()(ptr.ref.lpVtbl, lFlags, pstrName, pValue)
+          .toUnsigned(32);
 
   int EndEnumeration() =>
       Pointer<NativeFunction<_EndEnumeration_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_EndEnumeration_Dart>()(ptr.ref.lpVtbl);
+          .asFunction<_EndEnumeration_Dart>()(ptr.ref.lpVtbl)
+          .toUnsigned(32);
 
   int SetValue(Pointer<Utf16> wszName, int lFlags,
           Pointer<VARIANT_POINTER> pValue) =>
       Pointer<NativeFunction<_SetValue_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(8).value)
-              .asFunction<_SetValue_Dart>()(
-          ptr.ref.lpVtbl, wszName, lFlags, pValue);
+              ptr.ref.vtable.elementAt(8).value)
+          .asFunction<_SetValue_Dart>()(ptr.ref.lpVtbl, wszName, lFlags, pValue)
+          .toUnsigned(32);
 
   int GetValue(Pointer<Utf16> wszName, int lFlags,
           Pointer<VARIANT_POINTER> pValue) =>
       Pointer<NativeFunction<_GetValue_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(9).value)
-              .asFunction<_GetValue_Dart>()(
-          ptr.ref.lpVtbl, wszName, lFlags, pValue);
+              ptr.ref.vtable.elementAt(9).value)
+          .asFunction<_GetValue_Dart>()(ptr.ref.lpVtbl, wszName, lFlags, pValue)
+          .toUnsigned(32);
 
   int DeleteValue(Pointer<Utf16> wszName, int lFlags) =>
       Pointer<NativeFunction<_DeleteValue_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(10).value)
-          .asFunction<_DeleteValue_Dart>()(ptr.ref.lpVtbl, wszName, lFlags);
+          .asFunction<_DeleteValue_Dart>()(ptr.ref.lpVtbl, wszName, lFlags)
+          .toUnsigned(32);
 
   int DeleteAll() => Pointer<NativeFunction<_DeleteAll_Native>>.fromAddress(
           ptr.ref.vtable.elementAt(11).value)
-      .asFunction<_DeleteAll_Dart>()(ptr.ref.lpVtbl);
+      .asFunction<_DeleteAll_Dart>()(ptr.ref.lpVtbl)
+      .toUnsigned(32);
 }

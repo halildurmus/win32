@@ -99,51 +99,60 @@ class IKnownFolderManager extends IUnknown {
   int FolderIdFromCsidl(int nCsidl, Pointer<GUID> pfid) =>
       Pointer<NativeFunction<_FolderIdFromCsidl_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_FolderIdFromCsidl_Dart>()(ptr.ref.lpVtbl, nCsidl, pfid);
+          .asFunction<_FolderIdFromCsidl_Dart>()(ptr.ref.lpVtbl, nCsidl, pfid)
+          .toUnsigned(32);
 
   int FolderIdToCsidl(Pointer<GUID> rfid, Pointer<Int32> pnCsidl) =>
       Pointer<NativeFunction<_FolderIdToCsidl_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_FolderIdToCsidl_Dart>()(ptr.ref.lpVtbl, rfid, pnCsidl);
+          .asFunction<_FolderIdToCsidl_Dart>()(ptr.ref.lpVtbl, rfid, pnCsidl)
+          .toUnsigned(32);
 
   int GetFolderIds(Pointer<IntPtr> ppKFId, Pointer<Uint32> pCount) =>
       Pointer<NativeFunction<_GetFolderIds_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_GetFolderIds_Dart>()(ptr.ref.lpVtbl, ppKFId, pCount);
+          .asFunction<_GetFolderIds_Dart>()(ptr.ref.lpVtbl, ppKFId, pCount)
+          .toUnsigned(32);
 
   int GetFolder(Pointer<GUID> rfid, Pointer<IntPtr> ppkf) =>
       Pointer<NativeFunction<_GetFolder_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_GetFolder_Dart>()(ptr.ref.lpVtbl, rfid, ppkf);
+          .asFunction<_GetFolder_Dart>()(ptr.ref.lpVtbl, rfid, ppkf)
+          .toUnsigned(32);
 
   int GetFolderByName(Pointer<Utf16> pszCanonicalName, Pointer<IntPtr> ppkf) =>
       Pointer<NativeFunction<_GetFolderByName_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(7).value)
-              .asFunction<_GetFolderByName_Dart>()(
-          ptr.ref.lpVtbl, pszCanonicalName, ppkf);
+              ptr.ref.vtable.elementAt(7).value)
+          .asFunction<_GetFolderByName_Dart>()
+          (ptr.ref.lpVtbl, pszCanonicalName, ppkf)
+          .toUnsigned(32);
 
   int RegisterFolder(
           Pointer<GUID> rfid, Pointer<KNOWNFOLDER_DEFINITION> pKFD) =>
       Pointer<NativeFunction<_RegisterFolder_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(8).value)
-          .asFunction<_RegisterFolder_Dart>()(ptr.ref.lpVtbl, rfid, pKFD);
+          .asFunction<_RegisterFolder_Dart>()(ptr.ref.lpVtbl, rfid, pKFD)
+          .toUnsigned(32);
 
   int UnregisterFolder(Pointer<GUID> rfid) =>
       Pointer<NativeFunction<_UnregisterFolder_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(9).value)
-          .asFunction<_UnregisterFolder_Dart>()(ptr.ref.lpVtbl, rfid);
+          .asFunction<_UnregisterFolder_Dart>()(ptr.ref.lpVtbl, rfid)
+          .toUnsigned(32);
 
   int FindFolderFromPath(
           Pointer<Utf16> pszPath, int mode, Pointer<IntPtr> ppkf) =>
       Pointer<NativeFunction<_FindFolderFromPath_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(10).value)
-              .asFunction<_FindFolderFromPath_Dart>()(
-          ptr.ref.lpVtbl, pszPath, mode, ppkf);
+              ptr.ref.vtable.elementAt(10).value)
+          .asFunction<_FindFolderFromPath_Dart>()
+          (ptr.ref.lpVtbl, pszPath, mode, ppkf)
+          .toUnsigned(32);
 
   int FindFolderFromIDList(Pointer<SHITEMID> pidl, Pointer<IntPtr> ppkf) =>
       Pointer<NativeFunction<_FindFolderFromIDList_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(11).value)
-          .asFunction<_FindFolderFromIDList_Dart>()(ptr.ref.lpVtbl, pidl, ppkf);
+          .asFunction<_FindFolderFromIDList_Dart>()(ptr.ref.lpVtbl, pidl, ppkf)
+          .toUnsigned(32);
 
   int Redirect(
           Pointer<GUID> rfid,
@@ -154,9 +163,10 @@ class IKnownFolderManager extends IUnknown {
           Pointer<GUID> pExclusion,
           Pointer<Utf16> ppszError) =>
       Pointer<NativeFunction<_Redirect_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(12).value)
-              .asFunction<_Redirect_Dart>()(ptr.ref.lpVtbl, rfid, hwnd, flags,
-          pszTargetPath, cFolders, pExclusion, ppszError);
+              ptr.ref.vtable.elementAt(12).value)
+          .asFunction<_Redirect_Dart>()(ptr.ref.lpVtbl, rfid, hwnd, flags,
+              pszTargetPath, cFolders, pExclusion, ppszError)
+          .toUnsigned(32);
 }
 
 /// {@category com}
@@ -168,13 +178,14 @@ class KnownFolderManager extends IKnownFolderManager {
     final ptr = COMObject.allocate().addressOf;
 
     var hr = CoCreateInstance(
-        GUID.fromString(CLSID_KnownFolderManager).addressOf,
-        nullptr,
-        CLSCTX_ALL,
-        GUID.fromString(IID_IKnownFolderManager).addressOf,
-        ptr.cast());
+            GUID.fromString(CLSID_KnownFolderManager).addressOf,
+            nullptr,
+            CLSCTX_ALL,
+            GUID.fromString(IID_IKnownFolderManager).addressOf,
+            ptr.cast())
+        .toUnsigned(32);
 
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
     return KnownFolderManager(ptr);
   }
 

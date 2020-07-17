@@ -191,144 +191,168 @@ class IWbemClassObject extends IUnknown {
   int GetQualifierSet(Pointer<IntPtr> ppQualSet) =>
       Pointer<NativeFunction<_GetQualifierSet_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_GetQualifierSet_Dart>()(ptr.ref.lpVtbl, ppQualSet);
+          .asFunction<_GetQualifierSet_Dart>()(ptr.ref.lpVtbl, ppQualSet)
+          .toUnsigned(32);
 
   int Get(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT_POINTER> pVal,
           Pointer<Int32> pType, Pointer<Int32> plFlavor) =>
       Pointer<NativeFunction<_Get_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(4).value)
-              .asFunction<_Get_Dart>()(
-          ptr.ref.lpVtbl, wszName, lFlags, pVal, pType, plFlavor);
+              ptr.ref.vtable.elementAt(4).value)
+          .asFunction<_Get_Dart>()
+          (ptr.ref.lpVtbl, wszName, lFlags, pVal, pType, plFlavor)
+          .toUnsigned(32);
 
   int Put(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT_POINTER> pVal,
           int Type) =>
       Pointer<NativeFunction<_Put_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_Put_Dart>()(ptr.ref.lpVtbl, wszName, lFlags, pVal, Type);
+          .asFunction<_Put_Dart>()(ptr.ref.lpVtbl, wszName, lFlags, pVal, Type)
+          .toUnsigned(32);
 
   int Delete(Pointer<Utf16> wszName) =>
       Pointer<NativeFunction<_Delete_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_Delete_Dart>()(ptr.ref.lpVtbl, wszName);
+          .asFunction<_Delete_Dart>()(ptr.ref.lpVtbl, wszName)
+          .toUnsigned(32);
 
   int GetNames(Pointer<Utf16> wszQualifierName, int lFlags,
           Pointer<VARIANT_POINTER> pQualifierVal, Pointer<SAFEARRAY> pNames) =>
       Pointer<NativeFunction<_GetNames_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(7).value)
-              .asFunction<_GetNames_Dart>()(
-          ptr.ref.lpVtbl, wszQualifierName, lFlags, pQualifierVal, pNames);
+              ptr.ref.vtable.elementAt(7).value)
+          .asFunction<_GetNames_Dart>()
+          (ptr.ref.lpVtbl, wszQualifierName, lFlags, pQualifierVal, pNames)
+          .toUnsigned(32);
 
   int BeginEnumeration(int lEnumFlags) =>
       Pointer<NativeFunction<_BeginEnumeration_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(8).value)
-          .asFunction<_BeginEnumeration_Dart>()(ptr.ref.lpVtbl, lEnumFlags);
+          .asFunction<_BeginEnumeration_Dart>()(ptr.ref.lpVtbl, lEnumFlags)
+          .toUnsigned(32);
 
   int Next(int lFlags, Pointer<Utf16> strName, Pointer<VARIANT_POINTER> pVal,
           Pointer<Int32> pType, Pointer<Int32> plFlavor) =>
       Pointer<NativeFunction<_Next_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(9).value)
-              .asFunction<_Next_Dart>()(
-          ptr.ref.lpVtbl, lFlags, strName, pVal, pType, plFlavor);
+              ptr.ref.vtable.elementAt(9).value)
+          .asFunction<_Next_Dart>()
+          (ptr.ref.lpVtbl, lFlags, strName, pVal, pType, plFlavor)
+          .toUnsigned(32);
 
   int EndEnumeration() =>
       Pointer<NativeFunction<_EndEnumeration_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(10).value)
-          .asFunction<_EndEnumeration_Dart>()(ptr.ref.lpVtbl);
+          .asFunction<_EndEnumeration_Dart>()(ptr.ref.lpVtbl)
+          .toUnsigned(32);
 
   int GetPropertyQualifierSet(
           Pointer<Utf16> wszProperty, Pointer<IntPtr> ppQualSet) =>
       Pointer<NativeFunction<_GetPropertyQualifierSet_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(11).value)
-              .asFunction<_GetPropertyQualifierSet_Dart>()(
-          ptr.ref.lpVtbl, wszProperty, ppQualSet);
+              ptr.ref.vtable.elementAt(11).value)
+          .asFunction<_GetPropertyQualifierSet_Dart>()
+          (ptr.ref.lpVtbl, wszProperty, ppQualSet)
+          .toUnsigned(32);
 
   int Clone(Pointer<IntPtr> ppCopy) =>
       Pointer<NativeFunction<_Clone_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(12).value)
-          .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppCopy);
+          .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppCopy)
+          .toUnsigned(32);
 
   int GetObjectText(int lFlags, Pointer<Utf16> pstrObjectText) =>
       Pointer<NativeFunction<_GetObjectText_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(13).value)
-              .asFunction<_GetObjectText_Dart>()(
-          ptr.ref.lpVtbl, lFlags, pstrObjectText);
+              ptr.ref.vtable.elementAt(13).value)
+          .asFunction<_GetObjectText_Dart>()
+          (ptr.ref.lpVtbl, lFlags, pstrObjectText)
+          .toUnsigned(32);
 
   int SpawnDerivedClass(int lFlags, Pointer<IntPtr> ppNewClass) =>
       Pointer<NativeFunction<_SpawnDerivedClass_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(14).value)
-              .asFunction<_SpawnDerivedClass_Dart>()(
-          ptr.ref.lpVtbl, lFlags, ppNewClass);
+              ptr.ref.vtable.elementAt(14).value)
+          .asFunction<_SpawnDerivedClass_Dart>()
+          (ptr.ref.lpVtbl, lFlags, ppNewClass)
+          .toUnsigned(32);
 
   int SpawnInstance(int lFlags, Pointer<IntPtr> ppNewInstance) =>
       Pointer<NativeFunction<_SpawnInstance_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(15).value)
-              .asFunction<_SpawnInstance_Dart>()(
-          ptr.ref.lpVtbl, lFlags, ppNewInstance);
+              ptr.ref.vtable.elementAt(15).value)
+          .asFunction<_SpawnInstance_Dart>()
+          (ptr.ref.lpVtbl, lFlags, ppNewInstance)
+          .toUnsigned(32);
 
   int CompareTo(int lFlags, Pointer<COMObject> pCompareTo) =>
       Pointer<NativeFunction<_CompareTo_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(16).value)
-          .asFunction<_CompareTo_Dart>()(ptr.ref.lpVtbl, lFlags, pCompareTo);
+          .asFunction<_CompareTo_Dart>()(ptr.ref.lpVtbl, lFlags, pCompareTo)
+          .toUnsigned(32);
 
   int GetPropertyOrigin(Pointer<Utf16> wszName, Pointer<Utf16> pstrClassName) =>
       Pointer<NativeFunction<_GetPropertyOrigin_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(17).value)
-              .asFunction<_GetPropertyOrigin_Dart>()(
-          ptr.ref.lpVtbl, wszName, pstrClassName);
+              ptr.ref.vtable.elementAt(17).value)
+          .asFunction<_GetPropertyOrigin_Dart>()
+          (ptr.ref.lpVtbl, wszName, pstrClassName)
+          .toUnsigned(32);
 
   int InheritsFrom(Pointer<Utf16> strAncestor) =>
       Pointer<NativeFunction<_InheritsFrom_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(18).value)
-          .asFunction<_InheritsFrom_Dart>()(ptr.ref.lpVtbl, strAncestor);
+          .asFunction<_InheritsFrom_Dart>()(ptr.ref.lpVtbl, strAncestor)
+          .toUnsigned(32);
 
   int GetMethod(Pointer<Utf16> wszName, int lFlags,
           Pointer<IntPtr> ppInSignature, Pointer<IntPtr> ppOutSignature) =>
       Pointer<NativeFunction<_GetMethod_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(19).value)
-              .asFunction<_GetMethod_Dart>()(
-          ptr.ref.lpVtbl, wszName, lFlags, ppInSignature, ppOutSignature);
+              ptr.ref.vtable.elementAt(19).value)
+          .asFunction<_GetMethod_Dart>()
+          (ptr.ref.lpVtbl, wszName, lFlags, ppInSignature, ppOutSignature)
+          .toUnsigned(32);
 
   int PutMethod(Pointer<Utf16> wszName, int lFlags,
           Pointer<COMObject> pInSignature, Pointer<COMObject> pOutSignature) =>
       Pointer<NativeFunction<_PutMethod_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(20).value)
-              .asFunction<_PutMethod_Dart>()(
-          ptr.ref.lpVtbl, wszName, lFlags, pInSignature, pOutSignature);
+              ptr.ref.vtable.elementAt(20).value)
+          .asFunction<_PutMethod_Dart>()
+          (ptr.ref.lpVtbl, wszName, lFlags, pInSignature, pOutSignature)
+          .toUnsigned(32);
 
   int DeleteMethod(Pointer<Utf16> wszName) =>
       Pointer<NativeFunction<_DeleteMethod_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(21).value)
-          .asFunction<_DeleteMethod_Dart>()(ptr.ref.lpVtbl, wszName);
+          .asFunction<_DeleteMethod_Dart>()(ptr.ref.lpVtbl, wszName)
+          .toUnsigned(32);
 
   int BeginMethodEnumeration(int lEnumFlags) =>
       Pointer<NativeFunction<_BeginMethodEnumeration_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(22).value)
-              .asFunction<_BeginMethodEnumeration_Dart>()(
-          ptr.ref.lpVtbl, lEnumFlags);
+              ptr.ref.vtable.elementAt(22).value)
+          .asFunction<_BeginMethodEnumeration_Dart>()
+          (ptr.ref.lpVtbl, lEnumFlags)
+          .toUnsigned(32);
 
   int NextMethod(int lFlags, Pointer<Utf16> pstrName,
           Pointer<IntPtr> ppInSignature, Pointer<IntPtr> ppOutSignature) =>
       Pointer<NativeFunction<_NextMethod_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(23).value)
-              .asFunction<_NextMethod_Dart>()(
-          ptr.ref.lpVtbl, lFlags, pstrName, ppInSignature, ppOutSignature);
+              ptr.ref.vtable.elementAt(23).value)
+          .asFunction<_NextMethod_Dart>()
+          (ptr.ref.lpVtbl, lFlags, pstrName, ppInSignature, ppOutSignature)
+          .toUnsigned(32);
 
   int EndMethodEnumeration() =>
       Pointer<NativeFunction<_EndMethodEnumeration_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(24).value)
-          .asFunction<_EndMethodEnumeration_Dart>()(ptr.ref.lpVtbl);
+          .asFunction<_EndMethodEnumeration_Dart>()(ptr.ref.lpVtbl)
+          .toUnsigned(32);
 
   int GetMethodQualifierSet(
           Pointer<Utf16> wszMethod, Pointer<IntPtr> ppQualSet) =>
       Pointer<NativeFunction<_GetMethodQualifierSet_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(25).value)
-              .asFunction<_GetMethodQualifierSet_Dart>()(
-          ptr.ref.lpVtbl, wszMethod, ppQualSet);
+              ptr.ref.vtable.elementAt(25).value)
+          .asFunction<_GetMethodQualifierSet_Dart>()
+          (ptr.ref.lpVtbl, wszMethod, ppQualSet)
+          .toUnsigned(32);
 
   int GetMethodOrigin(
           Pointer<Utf16> wszMethodName, Pointer<Utf16> pstrClassName) =>
       Pointer<NativeFunction<_GetMethodOrigin_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(26).value)
-              .asFunction<_GetMethodOrigin_Dart>()(
-          ptr.ref.lpVtbl, wszMethodName, pstrClassName);
+              ptr.ref.vtable.elementAt(26).value)
+          .asFunction<_GetMethodOrigin_Dart>()
+          (ptr.ref.lpVtbl, wszMethodName, pstrClassName)
+          .toUnsigned(32);
 }

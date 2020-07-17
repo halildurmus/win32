@@ -67,7 +67,8 @@ class INetworkConnection extends IDispatch {
   int GetNetwork(Pointer<IntPtr> ppNetwork) =>
       Pointer<NativeFunction<_GetNetwork_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_GetNetwork_Dart>()(ptr.ref.lpVtbl, ppNetwork);
+          .asFunction<_GetNetwork_Dart>()(ptr.ref.lpVtbl, ppNetwork)
+          .toUnsigned(32);
 
   int get IsConnectedToInternet {
     final retValuePtr = allocate<Int16>();
@@ -100,20 +101,24 @@ class INetworkConnection extends IDispatch {
   int GetConnectivity(Pointer<Uint32> pConnectivity) =>
       Pointer<NativeFunction<_GetConnectivity_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(10).value)
-          .asFunction<_GetConnectivity_Dart>()(ptr.ref.lpVtbl, pConnectivity);
+          .asFunction<_GetConnectivity_Dart>()(ptr.ref.lpVtbl, pConnectivity)
+          .toUnsigned(32);
 
   int GetConnectionId(Pointer<GUID> pgdConnectionId) =>
       Pointer<NativeFunction<_GetConnectionId_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(11).value)
-          .asFunction<_GetConnectionId_Dart>()(ptr.ref.lpVtbl, pgdConnectionId);
+          .asFunction<_GetConnectionId_Dart>()(ptr.ref.lpVtbl, pgdConnectionId)
+          .toUnsigned(32);
 
   int GetAdapterId(Pointer<GUID> pgdAdapterId) =>
       Pointer<NativeFunction<_GetAdapterId_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(12).value)
-          .asFunction<_GetAdapterId_Dart>()(ptr.ref.lpVtbl, pgdAdapterId);
+          .asFunction<_GetAdapterId_Dart>()(ptr.ref.lpVtbl, pgdAdapterId)
+          .toUnsigned(32);
 
   int GetDomainType(Pointer<Uint32> pDomainType) =>
       Pointer<NativeFunction<_GetDomainType_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(13).value)
-          .asFunction<_GetDomainType_Dart>()(ptr.ref.lpVtbl, pDomainType);
+          .asFunction<_GetDomainType_Dart>()(ptr.ref.lpVtbl, pDomainType)
+          .toUnsigned(32);
 }

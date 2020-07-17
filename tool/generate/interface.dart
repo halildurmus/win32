@@ -214,7 +214,7 @@ import '../winrt/winrt_constants.dart';
         buffer.write(', ');
       }
     }
-    buffer.write(');\n\n');
+    buffer.write(').toUnsigned(32);\n\n');
     return buffer.toString();
   }
 
@@ -287,9 +287,9 @@ class $className extends $name {
         nullptr,
         CLSCTX_ALL,
         GUID.fromString(IID_$name).addressOf,
-        ptr.cast());
+        ptr.cast()).toUnsigned(32);
 
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
     return $className(ptr);
   }
 

@@ -101,26 +101,30 @@ class IMetaDataDispenserEx extends IMetaDataDispenser {
   int SetOption(Pointer<GUID> optionId, Pointer<VARIANT_POINTER> pValue) =>
       Pointer<NativeFunction<_SetOption_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_SetOption_Dart>()(ptr.ref.lpVtbl, optionId, pValue);
+          .asFunction<_SetOption_Dart>()(ptr.ref.lpVtbl, optionId, pValue)
+          .toUnsigned(32);
 
   int GetOption(Pointer<GUID> optionId, Pointer<VARIANT_POINTER> pValue) =>
       Pointer<NativeFunction<_GetOption_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_GetOption_Dart>()(ptr.ref.lpVtbl, optionId, pValue);
+          .asFunction<_GetOption_Dart>()(ptr.ref.lpVtbl, optionId, pValue)
+          .toUnsigned(32);
 
   int OpenScopeOnITypeInfo(Pointer<COMObject> pITI, int dwOpenFlags,
           Pointer<GUID> riid, Pointer<IntPtr> ppIUnk) =>
       Pointer<NativeFunction<_OpenScopeOnITypeInfo_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(8).value)
-              .asFunction<_OpenScopeOnITypeInfo_Dart>()(
-          ptr.ref.lpVtbl, pITI, dwOpenFlags, riid, ppIUnk);
+              ptr.ref.vtable.elementAt(8).value)
+          .asFunction<_OpenScopeOnITypeInfo_Dart>()
+          (ptr.ref.lpVtbl, pITI, dwOpenFlags, riid, ppIUnk)
+          .toUnsigned(32);
 
   int GetCORSystemDirectory(
           Pointer<Utf16> szBuffer, int cchBuffer, Pointer<Uint32> pchBuffer) =>
       Pointer<NativeFunction<_GetCORSystemDirectory_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(9).value)
-              .asFunction<_GetCORSystemDirectory_Dart>()(
-          ptr.ref.lpVtbl, szBuffer, cchBuffer, pchBuffer);
+              ptr.ref.vtable.elementAt(9).value)
+          .asFunction<_GetCORSystemDirectory_Dart>()
+          (ptr.ref.lpVtbl, szBuffer, cchBuffer, pchBuffer)
+          .toUnsigned(32);
 
   int FindAssembly(
           Pointer<Utf16> szAppBase,
@@ -131,9 +135,17 @@ class IMetaDataDispenserEx extends IMetaDataDispenser {
           int cchName,
           Pointer<Uint32> pchName) =>
       Pointer<NativeFunction<_FindAssembly_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(10).value)
-              .asFunction<_FindAssembly_Dart>()(ptr.ref.lpVtbl, szAppBase,
-          szPrivateBin, szGlobalBin, szAssemblyName, szName, cchName, pchName);
+              ptr.ref.vtable.elementAt(10).value)
+          .asFunction<_FindAssembly_Dart>()(
+              ptr.ref.lpVtbl,
+              szAppBase,
+              szPrivateBin,
+              szGlobalBin,
+              szAssemblyName,
+              szName,
+              cchName,
+              pchName)
+          .toUnsigned(32);
 
   int FindAssemblyModule(
           Pointer<Utf16> szAppBase,
@@ -145,15 +157,16 @@ class IMetaDataDispenserEx extends IMetaDataDispenser {
           int cchName,
           Pointer<Uint32> pcName) =>
       Pointer<NativeFunction<_FindAssemblyModule_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(11).value)
-              .asFunction<_FindAssemblyModule_Dart>()(
-          ptr.ref.lpVtbl,
-          szAppBase,
-          szPrivateBin,
-          szGlobalBin,
-          szAssemblyName,
-          szModuleName,
-          szName,
-          cchName,
-          pcName);
+              ptr.ref.vtable.elementAt(11).value)
+          .asFunction<_FindAssemblyModule_Dart>()(
+              ptr.ref.lpVtbl,
+              szAppBase,
+              szPrivateBin,
+              szGlobalBin,
+              szAssemblyName,
+              szModuleName,
+              szName,
+              cchName,
+              pcName)
+          .toUnsigned(32);
 }

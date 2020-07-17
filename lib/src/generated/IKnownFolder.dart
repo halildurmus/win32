@@ -74,46 +74,55 @@ class IKnownFolder extends IUnknown {
   int GetId(Pointer<GUID> pkfid) =>
       Pointer<NativeFunction<_GetId_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_GetId_Dart>()(ptr.ref.lpVtbl, pkfid);
+          .asFunction<_GetId_Dart>()(ptr.ref.lpVtbl, pkfid)
+          .toUnsigned(32);
 
   int GetCategory(Pointer<Int32> pCategory) =>
       Pointer<NativeFunction<_GetCategory_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_GetCategory_Dart>()(ptr.ref.lpVtbl, pCategory);
+          .asFunction<_GetCategory_Dart>()(ptr.ref.lpVtbl, pCategory)
+          .toUnsigned(32);
 
   int GetShellItem(int dwFlags, Pointer<GUID> riid, Pointer<IntPtr> ppv) =>
       Pointer<NativeFunction<_GetShellItem_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_GetShellItem_Dart>()(ptr.ref.lpVtbl, dwFlags, riid, ppv);
+          .asFunction<_GetShellItem_Dart>()(ptr.ref.lpVtbl, dwFlags, riid, ppv)
+          .toUnsigned(32);
 
   int GetPath(int dwFlags, Pointer<Utf16> ppszPath) =>
       Pointer<NativeFunction<_GetPath_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_GetPath_Dart>()(ptr.ref.lpVtbl, dwFlags, ppszPath);
+          .asFunction<_GetPath_Dart>()(ptr.ref.lpVtbl, dwFlags, ppszPath)
+          .toUnsigned(32);
 
   int SetPath(int dwFlags, Pointer<Utf16> pszPath) =>
       Pointer<NativeFunction<_SetPath_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_SetPath_Dart>()(ptr.ref.lpVtbl, dwFlags, pszPath);
+          .asFunction<_SetPath_Dart>()(ptr.ref.lpVtbl, dwFlags, pszPath)
+          .toUnsigned(32);
 
   int GetIDList(int dwFlags, Pointer<SHITEMID> ppidl) =>
       Pointer<NativeFunction<_GetIDList_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(8).value)
-          .asFunction<_GetIDList_Dart>()(ptr.ref.lpVtbl, dwFlags, ppidl);
+          .asFunction<_GetIDList_Dart>()(ptr.ref.lpVtbl, dwFlags, ppidl)
+          .toUnsigned(32);
 
   int GetFolderType(Pointer<GUID> pftid) =>
       Pointer<NativeFunction<_GetFolderType_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(9).value)
-          .asFunction<_GetFolderType_Dart>()(ptr.ref.lpVtbl, pftid);
+          .asFunction<_GetFolderType_Dart>()(ptr.ref.lpVtbl, pftid)
+          .toUnsigned(32);
 
   int GetRedirectionCapabilities(Pointer<Uint32> pCapabilities) =>
       Pointer<NativeFunction<_GetRedirectionCapabilities_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(10).value)
-              .asFunction<_GetRedirectionCapabilities_Dart>()(
-          ptr.ref.lpVtbl, pCapabilities);
+              ptr.ref.vtable.elementAt(10).value)
+          .asFunction<_GetRedirectionCapabilities_Dart>()
+          (ptr.ref.lpVtbl, pCapabilities)
+          .toUnsigned(32);
 
   int GetFolderDefinition(Pointer<KNOWNFOLDER_DEFINITION> pKFD) =>
       Pointer<NativeFunction<_GetFolderDefinition_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(11).value)
-          .asFunction<_GetFolderDefinition_Dart>()(ptr.ref.lpVtbl, pKFD);
+          .asFunction<_GetFolderDefinition_Dart>()(ptr.ref.lpVtbl, pKFD)
+          .toUnsigned(32);
 }

@@ -71,42 +71,49 @@ class IShellItemArray extends IUnknown {
   int BindToHandler(Pointer<COMObject> pbc, Pointer<GUID> bhid,
           Pointer<GUID> riid, Pointer<IntPtr> ppvOut) =>
       Pointer<NativeFunction<_BindToHandler_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(3).value)
-              .asFunction<_BindToHandler_Dart>()(
-          ptr.ref.lpVtbl, pbc, bhid, riid, ppvOut);
+              ptr.ref.vtable.elementAt(3).value)
+          .asFunction<_BindToHandler_Dart>()
+          (ptr.ref.lpVtbl, pbc, bhid, riid, ppvOut)
+          .toUnsigned(32);
 
   int GetPropertyStore(int flags, Pointer<GUID> riid, Pointer<IntPtr> ppv) =>
       Pointer<NativeFunction<_GetPropertyStore_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(4).value)
-              .asFunction<_GetPropertyStore_Dart>()(
-          ptr.ref.lpVtbl, flags, riid, ppv);
+              ptr.ref.vtable.elementAt(4).value)
+          .asFunction<_GetPropertyStore_Dart>()
+          (ptr.ref.lpVtbl, flags, riid, ppv)
+          .toUnsigned(32);
 
   int GetPropertyDescriptionList(Pointer<PROPERTYKEY> keyType,
           Pointer<GUID> riid, Pointer<IntPtr> ppv) =>
       Pointer<NativeFunction<_GetPropertyDescriptionList_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(5).value)
-              .asFunction<_GetPropertyDescriptionList_Dart>()(
-          ptr.ref.lpVtbl, keyType, riid, ppv);
+              ptr.ref.vtable.elementAt(5).value)
+          .asFunction<_GetPropertyDescriptionList_Dart>()
+          (ptr.ref.lpVtbl, keyType, riid, ppv)
+          .toUnsigned(32);
 
   int GetAttributes(
           int AttribFlags, int sfgaoMask, Pointer<Uint32> psfgaoAttribs) =>
       Pointer<NativeFunction<_GetAttributes_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(6).value)
-              .asFunction<_GetAttributes_Dart>()(
-          ptr.ref.lpVtbl, AttribFlags, sfgaoMask, psfgaoAttribs);
+              ptr.ref.vtable.elementAt(6).value)
+          .asFunction<_GetAttributes_Dart>()
+          (ptr.ref.lpVtbl, AttribFlags, sfgaoMask, psfgaoAttribs)
+          .toUnsigned(32);
 
   int GetCount(Pointer<Uint32> pdwNumItems) =>
       Pointer<NativeFunction<_GetCount_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_GetCount_Dart>()(ptr.ref.lpVtbl, pdwNumItems);
+          .asFunction<_GetCount_Dart>()(ptr.ref.lpVtbl, pdwNumItems)
+          .toUnsigned(32);
 
   int GetItemAt(int dwIndex, Pointer<IntPtr> ppsi) =>
       Pointer<NativeFunction<_GetItemAt_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(8).value)
-          .asFunction<_GetItemAt_Dart>()(ptr.ref.lpVtbl, dwIndex, ppsi);
+          .asFunction<_GetItemAt_Dart>()(ptr.ref.lpVtbl, dwIndex, ppsi)
+          .toUnsigned(32);
 
   int EnumItems(Pointer<IntPtr> ppenumShellItems) =>
       Pointer<NativeFunction<_EnumItems_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(9).value)
-          .asFunction<_EnumItems_Dart>()(ptr.ref.lpVtbl, ppenumShellItems);
+          .asFunction<_EnumItems_Dart>()(ptr.ref.lpVtbl, ppenumShellItems)
+          .toUnsigned(32);
 }

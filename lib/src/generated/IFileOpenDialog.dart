@@ -45,12 +45,14 @@ class IFileOpenDialog extends IFileDialog {
   int GetResults(Pointer<IntPtr> ppenum) =>
       Pointer<NativeFunction<_GetResults_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(27).value)
-          .asFunction<_GetResults_Dart>()(ptr.ref.lpVtbl, ppenum);
+          .asFunction<_GetResults_Dart>()(ptr.ref.lpVtbl, ppenum)
+          .toUnsigned(32);
 
   int GetSelectedItems(Pointer<IntPtr> ppsai) =>
       Pointer<NativeFunction<_GetSelectedItems_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(28).value)
-          .asFunction<_GetSelectedItems_Dart>()(ptr.ref.lpVtbl, ppsai);
+          .asFunction<_GetSelectedItems_Dart>()(ptr.ref.lpVtbl, ppsai)
+          .toUnsigned(32);
 }
 
 /// {@category com}
@@ -62,13 +64,14 @@ class FileOpenDialog extends IFileOpenDialog {
     final ptr = COMObject.allocate().addressOf;
 
     var hr = CoCreateInstance(
-        GUID.fromString(CLSID_FileOpenDialog).addressOf,
-        nullptr,
-        CLSCTX_ALL,
-        GUID.fromString(IID_IFileOpenDialog).addressOf,
-        ptr.cast());
+            GUID.fromString(CLSID_FileOpenDialog).addressOf,
+            nullptr,
+            CLSCTX_ALL,
+            GUID.fromString(IID_IFileOpenDialog).addressOf,
+            ptr.cast())
+        .toUnsigned(32);
 
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
     return FileOpenDialog(ptr);
   }
 
