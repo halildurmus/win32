@@ -289,7 +289,7 @@ class $className extends $name {
         GUID.fromString(IID_$name).addressOf,
         ptr.cast());
 
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
     return $className(ptr);
   }
 

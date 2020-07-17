@@ -207,7 +207,7 @@ class DesktopWallpaper extends IDesktopWallpaper {
         GUID.fromString(IID_IDesktopWallpaper).addressOf,
         ptr.cast());
 
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
     return DesktopWallpaper(ptr);
   }
 

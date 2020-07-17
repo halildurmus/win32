@@ -31,10 +31,10 @@ int GetGValue(int rgb) => LOBYTE(rgb >> 8);
 int GetBValue(int rgb) => LOBYTE(rgb >> 16);
 
 // #define SUCCEEDED(hr) (((HRESULT)(hr)) >= 0)
-bool SUCCEEDED(int result) => (result >= 0);
+bool SUCCEEDED(int result) => result >= 0;
 
 // #define FAILED(hr) (((HRESULT)(hr)) < 0)
-bool FAILED(int result) => (result < 0);
+bool FAILED(int result) => result < 0;
 
 // #define __HRESULT_FROM_WIN32(x) ((HRESULT)(x) <= 0 ? ((HRESULT)(x)) :
 //       ((HRESULT) (((x) & 0x0000FFFF) | (FACILITY_WIN32 << 16) | 0x80000000)))

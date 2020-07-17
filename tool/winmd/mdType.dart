@@ -50,7 +50,7 @@ class WinmdType {
       final hr = reader.GetTypeDefProps(
           typeDefToken, typeName, 256, nRead, tdFlags, baseClassToken);
 
-      if (hr == S_OK) {
+      if (SUCCEEDED(hr)) {
         type = WinmdType(
             reader,
             typeDefToken,
@@ -84,7 +84,7 @@ class WinmdType {
     try {
       var hr = refReader.GetTypeRefProps(
           typeRefToken, ptkResolutionScope, szName, 256, pchName);
-      if (hr == S_OK) {
+      if (SUCCEEDED(hr)) {
         final typeName = szName.unpackString(pchName.value);
         final file = metadataFileContainingType(typeName);
         final winmdFile = WinmdFile(file);
@@ -110,7 +110,7 @@ class WinmdType {
 
     try {
       final hr = reader.GetInterfaceImplProps(token, pClass, ptkIface);
-      if (hr == S_OK) {
+      if (SUCCEEDED(hr)) {
         if (tokenIsTypeRef(ptkIface.value)) {
           interfaceTypeDef = WinmdType.fromTypeRef(reader, ptkIface.value);
         } else if (tokenIsTypeDef(pClass.value)) {
@@ -188,7 +188,7 @@ class WinmdType {
 
     try {
       final hr = reader.FindMethod(token, szName, nullptr, 0, pmb);
-      if (hr == S_OK) {
+      if (SUCCEEDED(hr)) {
         methodToken = WinmdMethod.fromToken(reader, pmb.value);
       } else {
         throw COMException(hr);
@@ -213,7 +213,7 @@ class WinmdType {
     try {
       final hr = reader.GetCustomAttributeByName(
           token, attributeName, ppData, pcbData);
-      if (hr == S_OK && pcbData.value == 20) {
+      if (SUCCEEDED(hr) && pcbData.value == 20) {
         final blob = Pointer<Uint8>.fromAddress(ppData.value);
         final guid = blob.elementAt(2).cast<GUID>();
         guidAsString = guid.ref.toString();

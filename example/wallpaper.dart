@@ -44,7 +44,7 @@ void printBackgroundColor() {
   try {
     final hr = wallpaper.GetBackgroundColor(colorPtr);
 
-    if (hr == S_OK) {
+    if (SUCCEEDED(hr)) {
       final color = colorPtr.value;
       print('Background color is: RGB(${GetRValue(color)}, '
           '${GetGValue(color)}, ${GetBValue(color)})');

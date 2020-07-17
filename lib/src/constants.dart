@@ -18,6 +18,9 @@ const FALSE = 0;
 /// Boolean true value returned from the Win32 API
 const TRUE = 1;
 
+/// Success status
+const STATUS_SUCCESS = 0;
+
 // Path length
 const MAX_PATH = 260;
 
@@ -597,60 +600,6 @@ const FORMAT_MESSAGE_ARGUMENT_ARRAY = 0x00002000;
 
 /// @nodoc
 const FORMAT_MESSAGE_MAX_WIDTH_MASK = 0x000000FF;
-
-/// @nodoc
-const CO_E_NOTINITIALIZED = 0x800401F0;
-
-/// @nodoc
-const CO_E_ALREADYINITIALIZED = 0x800401F1;
-
-/// @nodoc
-const CO_E_CANTDETERMINECLASS = 0x800401F2;
-
-/// @nodoc
-const CO_E_CLASSSTRING = 0x800401F3;
-
-/// @nodoc
-const CO_E_IIDSTRING = 0x800401F4;
-
-/// @nodoc
-const CO_E_APPNOTFOUND = 0x800401F5;
-
-/// @nodoc
-const CO_E_APPSINGLEUSE = 0x800401F6;
-
-/// @nodoc
-const CO_E_ERRORINAPP = 0x800401F7;
-
-/// @nodoc
-const CO_E_DLLNOTFOUND = 0x800401F8;
-
-/// @nodoc
-const CO_E_ERRORINDLL = 0x800401F9;
-
-/// @nodoc
-const CO_E_WRONGOSFORAPP = 0x800401FA;
-
-/// @nodoc
-const CO_E_OBJNOTREG = 0x800401FB;
-
-/// @nodoc
-const CO_E_OBJISREG = 0x800401FC;
-
-/// @nodoc
-const CO_E_OBJNOTCONNECTED = 0x800401FD;
-
-/// @nodoc
-const CO_E_APPDIDNTREG = 0x800401FE;
-
-/// @nodoc
-const CLASS_E_NOAGGREGATION = 0x80040110;
-
-/// @nodoc
-const CLASS_E_CLASSNOTAVAILABLE = 0x80040111;
-
-/// @nodoc
-const CLASS_E_NOTLICENSED = 0x80040112;
 
 // WindowStyle constants
 
@@ -3894,46 +3843,103 @@ const S_OK = 0;
 const S_FALSE = 1;
 
 /// @nodoc
-const E_UNEXPECTED = 0x8000FFFF;
+final CO_E_NOTINITIALIZED = 0x800401F0.toSigned(32);
 
 /// @nodoc
-const E_NOTIMPL = 0x80004001;
+final CO_E_ALREADYINITIALIZED = 0x800401F1.toSigned(32);
 
 /// @nodoc
-const E_OUTOFMEMORY = 0x8007000E;
+final CO_E_CANTDETERMINECLASS = 0x800401F2.toSigned(32);
 
 /// @nodoc
-const E_INVALIDARG = 0x80070057;
+final CO_E_CLASSSTRING = 0x800401F3.toSigned(32);
 
 /// @nodoc
-const E_NOINTERFACE = 0x80004002;
+final CO_E_IIDSTRING = 0x800401F4.toSigned(32);
 
 /// @nodoc
-const E_POINTER = 0x80004003;
+final CO_E_APPNOTFOUND = 0x800401F5.toSigned(32);
 
 /// @nodoc
-const E_HANDLE = 0x80070006;
+final CO_E_APPSINGLEUSE = 0x800401F6.toSigned(32);
 
 /// @nodoc
-const E_ABORT = 0x80004004;
+final CO_E_ERRORINAPP = 0x800401F7.toSigned(32);
 
 /// @nodoc
-const E_FAIL = 0x80004005;
+final CO_E_DLLNOTFOUND = 0x800401F8.toSigned(32);
 
 /// @nodoc
-const E_ACCESSDENIED = 0x80070005;
+final CO_E_ERRORINDLL = 0x800401F9.toSigned(32);
 
 /// @nodoc
-const E_PENDING = 0x8000000A;
+final CO_E_WRONGOSFORAPP = 0x800401FA.toSigned(32);
 
 /// @nodoc
-const RPC_E_TOO_LATE = 0x80010119;
+final CO_E_OBJNOTREG = 0x800401FB.toSigned(32);
 
 /// @nodoc
-const REGDB_E_CLASSNOTREG = 0x80040154;
+final CO_E_OBJISREG = 0x800401FC.toSigned(32);
 
 /// @nodoc
-const REGDB_E_IIDNOTREG = 0x80040155;
+final CO_E_OBJNOTCONNECTED = 0x800401FD.toSigned(32);
+
+/// @nodoc
+final CO_E_APPDIDNTREG = 0x800401FE.toSigned(32);
+
+/// @nodoc
+final CLASS_E_NOAGGREGATION = 0x80040110.toSigned(32);
+
+/// @nodoc
+final CLASS_E_CLASSNOTAVAILABLE = 0x80040111.toSigned(32);
+
+/// @nodoc
+final CLASS_E_NOTLICENSED = 0x80040112.toSigned(32);
+
+/// @nodoc
+final E_UNEXPECTED = 0x8000FFFF.toSigned(32);
+
+/// @nodoc
+final E_NOTIMPL = 0x80004001.toSigned(32);
+
+/// @nodoc
+final E_OUTOFMEMORY = 0x8007000E.toSigned(32);
+
+/// @nodoc
+final E_INVALIDARG = 0x80070057.toSigned(32);
+
+/// @nodoc
+final E_NOINTERFACE = 0x80004002.toSigned(32);
+
+/// @nodoc
+final E_POINTER = 0x80004003.toSigned(32);
+
+/// @nodoc
+final E_HANDLE = 0x80070006.toSigned(32);
+
+/// @nodoc
+final E_ABORT = 0x80004004.toSigned(32);
+
+/// @nodoc
+final E_FAIL = 0x80004005.toSigned(32);
+
+/// @nodoc
+final E_ACCESSDENIED = 0x80070005.toSigned(32);
+
+/// @nodoc
+final E_PENDING = 0x8000000A.toSigned(32);
+
+/// @nodoc
+final RPC_E_CHANGED_MODE = 0x80010106.toSigned(32);
+
+/// @nodoc
+final RPC_E_TOO_LATE = 0x80010119.toSigned(32);
+
+/// @nodoc
+final REGDB_E_CLASSNOTREG = 0x80040154.toSigned(32);
+
+/// @nodoc
+final REGDB_E_IIDNOTREG = 0x80040155.toSigned(32);
 
 /// @nodoc
 const COINITBASE_MULTITHREADED = 0x0;
@@ -4903,6 +4909,107 @@ class FILEOPENDIALOGOPTIONS {
   static const FOS_DEFAULTNOMINIMODE = 0x20000000;
   static const FOS_FORCEPREVIEWPANEON = 0x40000000;
   static const FOS_SUPPORTSTREAMABLEITEMS = 0x80000000;
+}
+
+/// {@category Enum}
+class POWER_INFORMATION_LEVEL {
+  static const SystemPowerPolicyAc = 0;
+  static const SystemPowerPolicyDc = 1;
+  static const VerifySystemPolicyAc = 2;
+  static const VerifySystemPolicyDc = 3;
+  static const SystemPowerCapabilities = 4;
+  static const SystemBatteryState = 5;
+  static const SystemPowerStateHandler = 6;
+  static const ProcessorStateHandler = 7;
+  static const SystemPowerPolicyCurrent = 8;
+  static const AdministratorPowerPolicy = 9;
+  static const SystemReserveHiberFile = 10;
+  static const ProcessorInformation = 11;
+  static const SystemPowerInformation = 12;
+  static const ProcessorStateHandler2 = 13;
+  static const LastWakeTime = 14;
+  static const LastSleepTime = 15;
+  static const SystemExecutionState = 16;
+  static const SystemPowerStateNotifyHandler = 17;
+  static const ProcessorPowerPolicyAc = 18;
+  static const ProcessorPowerPolicyDc = 19;
+  static const VerifyProcessorPowerPolicyAc = 20;
+  static const VerifyProcessorPowerPolicyDc = 21;
+  static const ProcessorPowerPolicyCurrent = 22;
+  static const SystemPowerStateLogging = 23;
+  static const SystemPowerLoggingEntry = 24;
+  static const SetPowerSettingValue = 25;
+  static const NotifyUserPowerSetting = 26;
+  static const PowerInformationLevelUnused0 = 27;
+  static const SystemMonitorHiberBootPowerOff = 28;
+  static const SystemVideoState = 29;
+  static const TraceApplicationPowerMessage = 30;
+  static const TraceApplicationPowerMessageEnd = 31;
+  static const ProcessorPerfStates = 32;
+  static const ProcessorIdleStates = 33;
+  static const ProcessorCap = 34;
+  static const SystemWakeSource = 35;
+  static const SystemHiberFileInformation = 36;
+  static const TraceServicePowerMessage = 37;
+  static const ProcessorLoad = 38;
+  static const PowerShutdownNotification = 39;
+  static const MonitorCapabilities = 40;
+  static const SessionPowerInit = 41;
+  static const SessionDisplayState = 42;
+  static const PowerRequestCreate = 43;
+  static const PowerRequestAction = 44;
+  static const GetPowerRequestList = 45;
+  static const ProcessorInformationEx = 46;
+  static const NotifyUserModeLegacyPowerEvent = 47;
+  static const GroupPark = 48;
+  static const ProcessorIdleDomains = 49;
+  static const WakeTimerList = 50;
+  static const SystemHiberFileSize = 51;
+  static const ProcessorIdleStatesHv = 52;
+  static const ProcessorPerfStatesHv = 53;
+  static const ProcessorPerfCapHv = 54;
+  static const ProcessorSetIdle = 55;
+  static const LogicalProcessorIdling = 56;
+  static const UserPresence = 57;
+  static const PowerSettingNotificationName = 58;
+  static const GetPowerSettingValue = 59;
+  static const IdleResiliency = 60;
+  static const SessionRITState = 61;
+  static const SessionConnectNotification = 62;
+  static const SessionPowerCleanup = 63;
+  static const SessionLockState = 64;
+  static const SystemHiberbootState = 65;
+  static const PlatformInformation = 66;
+  static const PdcInvocation = 67;
+  static const MonitorInvocation = 68;
+  static const FirmwareTableInformationRegistered = 69;
+  static const SetShutdownSelectedTime = 70;
+  static const SuspendResumeInvocation = 71;
+  static const PlmPowerRequestCreate = 72;
+  static const ScreenOff = 73;
+  static const CsDeviceNotification = 74;
+  static const PlatformRole = 75;
+  static const LastResumePerformance = 76;
+  static const DisplayBurst = 77;
+  static const ExitLatencySamplingPercentage = 78;
+  static const RegisterSpmPowerSettings = 79;
+  static const PlatformIdleStates = 80;
+  static const ProcessorIdleVeto = 81;
+  static const PlatformIdleVeto = 82;
+  static const SystemBatteryStatePrecise = 83;
+  static const ThermalEvent = 84;
+  static const PowerRequestActionInternal = 85;
+  static const BatteryDeviceState = 86;
+  static const PowerInformationInternal = 87;
+  static const ThermalStandby = 88;
+  static const SystemHiberFileType = 89;
+  static const PhysicalPowerButtonPress = 90;
+  static const QueryPotentialDripsConstraint = 91;
+  static const EnergyTrackerCreate = 92;
+  static const EnergyTrackerQuery = 93;
+  static const UpdateBlackBoxRecorder = 94;
+  static const SessionAllowExternalDmaDevices = 95;
+  static const PowerInformationLevelMaximum = 96;
 }
 
 /// {@category Enum}

@@ -37,4 +37,24 @@ void main() {
 
     free(powerStatus.addressOf);
   });
+
+  test('CallNtPowerInformation() sanity check', () {
+    final batteryStatus = SYSTEM_BATTERY_STATE.allocate();
+
+    final result = CallNtPowerInformation(
+        POWER_INFORMATION_LEVEL.SystemBatteryState,
+        nullptr,
+        0,
+        batteryStatus.addressOf,
+        sizeOf<SYSTEM_BATTERY_STATE>());
+
+    // Sanity check results against some API provided ranges
+    expect(result, equals(STATUS_SUCCESS));
+    expect(batteryStatus.AcOnLine, isIn([FALSE, TRUE]));
+    expect(batteryStatus.BatteryPresent, isIn([FALSE, TRUE]));
+    expect(batteryStatus.Charging, isIn([FALSE, TRUE]));
+    expect(batteryStatus.Discharging, isIn([FALSE, TRUE]));
+
+    free(batteryStatus.addressOf);
+  });
 }
