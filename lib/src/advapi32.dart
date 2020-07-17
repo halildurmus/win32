@@ -11,6 +11,22 @@ import 'typedefs.dart';
 final _advapi32 = DynamicLibrary.open('advapi32.dll');
 
 /// {@category advapi32}
+final CredWrite =
+    _advapi32.lookupFunction<credWriteNative, credWriteDart>('CredWriteW');
+
+/// {@category advapi32}
+final CredRead =
+    _advapi32.lookupFunction<credReadNative, credReadDart>('CredReadW');
+
+/// {@category advapi32}
+final CredFree =
+    _advapi32.lookupFunction<credFreeNative, credFreeDart>('CredFree');
+
+/// {@category advapi32}
+final CredDelete =
+    _advapi32.lookupFunction<credDeleteNative, credDeleteDart>('CredDeleteW');
+
+/// {@category advapi32}
 final RegCloseKey =
     _advapi32.lookupFunction<regCloseKeyNative, regCloseKeyDart>('RegCloseKey');
 

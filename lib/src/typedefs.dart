@@ -449,6 +449,60 @@ typedef createWindowExDart = int Function(
     int hInstance,
     Pointer<Void> lpParam);
 
+// BOOL CredDeleteW(
+//   LPCWSTR TargetName,
+//   DWORD   Type,
+//   DWORD   Flags
+// );
+typedef credDeleteNative = Int32 Function(
+  Pointer<Utf16> TargetName,
+  Uint32 Type,
+  Uint32 Flags,
+);
+typedef credDeleteDart = int Function(
+  Pointer<Utf16> TargetName,
+  int Type,
+  int Flags,
+);
+
+// void CredFree(
+//   PVOID Buffer
+// );
+typedef credFreeNative = Void Function(Pointer Buffer);
+typedef credFreeDart = void Function(Pointer Buffer);
+
+// BOOL CredReadW(
+//   LPCWSTR      TargetName,
+//   DWORD        Type,
+//   DWORD        Flags,
+//   PCREDENTIALW *Credential
+// );
+typedef credReadNative = Int32 Function(
+  Pointer<Utf16> TargetName,
+  Uint32 Type,
+  Uint32 Flags,
+  Pointer<Pointer<CREDENTIAL>> Credential,
+);
+typedef credReadDart = int Function(
+  Pointer<Utf16> TargetName,
+  int Type,
+  int Flags,
+  Pointer<Pointer<CREDENTIAL>> Credential,
+);
+
+// BOOL CredWriteW(
+//   PCREDENTIALW Credential,
+//   DWORD        Flags
+// );
+typedef credWriteNative = Int32 Function(
+  Pointer<CREDENTIAL> Credential,
+  Uint32 Flags,
+);
+typedef credWriteDart = int Function(
+  Pointer<CREDENTIAL> Credential,
+  int Flags,
+);
+
 // BOOL DeactivateActCtx(
 //   DWORD     dwFlags,
 //   ULONG_PTR ulCookie
