@@ -66,22 +66,18 @@ class IEnumNetworkConnections extends IDispatch {
   int Next(int celt, Pointer<IntPtr> rgelt, Pointer<Uint32> pceltFetched) =>
       Pointer<NativeFunction<_Next_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(8).value)
-          .asFunction<_Next_Dart>()(ptr.ref.lpVtbl, celt, rgelt, pceltFetched)
-          .toUnsigned(32);
+          .asFunction<_Next_Dart>()(ptr.ref.lpVtbl, celt, rgelt, pceltFetched);
 
   int Skip(int celt) => Pointer<NativeFunction<_Skip_Native>>.fromAddress(
           ptr.ref.vtable.elementAt(9).value)
-      .asFunction<_Skip_Dart>()(ptr.ref.lpVtbl, celt)
-      .toUnsigned(32);
+      .asFunction<_Skip_Dart>()(ptr.ref.lpVtbl, celt);
 
   int Reset() => Pointer<NativeFunction<_Reset_Native>>.fromAddress(
           ptr.ref.vtable.elementAt(10).value)
-      .asFunction<_Reset_Dart>()(ptr.ref.lpVtbl)
-      .toUnsigned(32);
+      .asFunction<_Reset_Dart>()(ptr.ref.lpVtbl);
 
   int Clone(Pointer<IntPtr> ppEnumNetwork) =>
       Pointer<NativeFunction<_Clone_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(11).value)
-          .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppEnumNetwork)
-          .toUnsigned(32);
+          .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppEnumNetwork);
 }

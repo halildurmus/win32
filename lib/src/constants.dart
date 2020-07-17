@@ -577,60 +577,6 @@ const FORMAT_MESSAGE_ARGUMENT_ARRAY = 0x00002000;
 /// @nodoc
 const FORMAT_MESSAGE_MAX_WIDTH_MASK = 0x000000FF;
 
-/// @nodoc
-const CO_E_NOTINITIALIZED = 0x800401F0;
-
-/// @nodoc
-const CO_E_ALREADYINITIALIZED = 0x800401F1;
-
-/// @nodoc
-const CO_E_CANTDETERMINECLASS = 0x800401F2;
-
-/// @nodoc
-const CO_E_CLASSSTRING = 0x800401F3;
-
-/// @nodoc
-const CO_E_IIDSTRING = 0x800401F4;
-
-/// @nodoc
-const CO_E_APPNOTFOUND = 0x800401F5;
-
-/// @nodoc
-const CO_E_APPSINGLEUSE = 0x800401F6;
-
-/// @nodoc
-const CO_E_ERRORINAPP = 0x800401F7;
-
-/// @nodoc
-const CO_E_DLLNOTFOUND = 0x800401F8;
-
-/// @nodoc
-const CO_E_ERRORINDLL = 0x800401F9;
-
-/// @nodoc
-const CO_E_WRONGOSFORAPP = 0x800401FA;
-
-/// @nodoc
-const CO_E_OBJNOTREG = 0x800401FB;
-
-/// @nodoc
-const CO_E_OBJISREG = 0x800401FC;
-
-/// @nodoc
-const CO_E_OBJNOTCONNECTED = 0x800401FD;
-
-/// @nodoc
-const CO_E_APPDIDNTREG = 0x800401FE;
-
-/// @nodoc
-const CLASS_E_NOAGGREGATION = 0x80040110;
-
-/// @nodoc
-const CLASS_E_CLASSNOTAVAILABLE = 0x80040111;
-
-/// @nodoc
-const CLASS_E_NOTLICENSED = 0x80040112;
-
 // WindowStyle constants
 
 /// @nodoc
@@ -3873,46 +3819,103 @@ const S_OK = 0;
 const S_FALSE = 1;
 
 /// @nodoc
-const E_UNEXPECTED = 0x8000FFFF;
+final CO_E_NOTINITIALIZED = 0x800401F0.toSigned(32);
 
 /// @nodoc
-const E_NOTIMPL = 0x80004001;
+final CO_E_ALREADYINITIALIZED = 0x800401F1.toSigned(32);
 
 /// @nodoc
-const E_OUTOFMEMORY = 0x8007000E;
+final CO_E_CANTDETERMINECLASS = 0x800401F2.toSigned(32);
 
 /// @nodoc
-const E_INVALIDARG = 0x80070057;
+final CO_E_CLASSSTRING = 0x800401F3.toSigned(32);
 
 /// @nodoc
-const E_NOINTERFACE = 0x80004002;
+final CO_E_IIDSTRING = 0x800401F4.toSigned(32);
 
 /// @nodoc
-const E_POINTER = 0x80004003;
+final CO_E_APPNOTFOUND = 0x800401F5.toSigned(32);
 
 /// @nodoc
-const E_HANDLE = 0x80070006;
+final CO_E_APPSINGLEUSE = 0x800401F6.toSigned(32);
 
 /// @nodoc
-const E_ABORT = 0x80004004;
+final CO_E_ERRORINAPP = 0x800401F7.toSigned(32);
 
 /// @nodoc
-const E_FAIL = 0x80004005;
+final CO_E_DLLNOTFOUND = 0x800401F8.toSigned(32);
 
 /// @nodoc
-const E_ACCESSDENIED = 0x80070005;
+final CO_E_ERRORINDLL = 0x800401F9.toSigned(32);
 
 /// @nodoc
-const E_PENDING = 0x8000000A;
+final CO_E_WRONGOSFORAPP = 0x800401FA.toSigned(32);
 
 /// @nodoc
-const RPC_E_TOO_LATE = 0x80010119;
+final CO_E_OBJNOTREG = 0x800401FB.toSigned(32);
 
 /// @nodoc
-const REGDB_E_CLASSNOTREG = 0x80040154;
+final CO_E_OBJISREG = 0x800401FC.toSigned(32);
 
 /// @nodoc
-const REGDB_E_IIDNOTREG = 0x80040155;
+final CO_E_OBJNOTCONNECTED = 0x800401FD.toSigned(32);
+
+/// @nodoc
+final CO_E_APPDIDNTREG = 0x800401FE.toSigned(32);
+
+/// @nodoc
+final CLASS_E_NOAGGREGATION = 0x80040110.toSigned(32);
+
+/// @nodoc
+final CLASS_E_CLASSNOTAVAILABLE = 0x80040111.toSigned(32);
+
+/// @nodoc
+final CLASS_E_NOTLICENSED = 0x80040112.toSigned(32);
+
+/// @nodoc
+final E_UNEXPECTED = 0x8000FFFF.toSigned(32);
+
+/// @nodoc
+final E_NOTIMPL = 0x80004001.toSigned(32);
+
+/// @nodoc
+final E_OUTOFMEMORY = 0x8007000E.toSigned(32);
+
+/// @nodoc
+final E_INVALIDARG = 0x80070057.toSigned(32);
+
+/// @nodoc
+final E_NOINTERFACE = 0x80004002.toSigned(32);
+
+/// @nodoc
+final E_POINTER = 0x80004003.toSigned(32);
+
+/// @nodoc
+final E_HANDLE = 0x80070006.toSigned(32);
+
+/// @nodoc
+final E_ABORT = 0x80004004.toSigned(32);
+
+/// @nodoc
+final E_FAIL = 0x80004005.toSigned(32);
+
+/// @nodoc
+final E_ACCESSDENIED = 0x80070005.toSigned(32);
+
+/// @nodoc
+final E_PENDING = 0x8000000A.toSigned(32);
+
+/// @nodoc
+final RPC_E_CHANGED_MODE = 0x80010106.toSigned(32);
+
+/// @nodoc
+final RPC_E_TOO_LATE = 0x80010119.toSigned(32);
+
+/// @nodoc
+final REGDB_E_CLASSNOTREG = 0x80040154.toSigned(32);
+
+/// @nodoc
+final REGDB_E_IIDNOTREG = 0x80040155.toSigned(32);
 
 /// @nodoc
 const COINITBASE_MULTITHREADED = 0x0;

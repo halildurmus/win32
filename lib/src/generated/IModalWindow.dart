@@ -35,6 +35,5 @@ class IModalWindow extends IUnknown {
 
   int Show(int hwndOwner) => Pointer<NativeFunction<_Show_Native>>.fromAddress(
           ptr.ref.vtable.elementAt(3).value)
-      .asFunction<_Show_Dart>()(ptr.ref.lpVtbl, hwndOwner)
-      .toUnsigned(32);
+      .asFunction<_Show_Dart>()(ptr.ref.lpVtbl, hwndOwner);
 }

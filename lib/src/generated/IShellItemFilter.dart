@@ -42,13 +42,11 @@ class IShellItemFilter extends IUnknown {
   int IncludeItem(Pointer<COMObject> psi) =>
       Pointer<NativeFunction<_IncludeItem_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_IncludeItem_Dart>()(ptr.ref.lpVtbl, psi)
-          .toUnsigned(32);
+          .asFunction<_IncludeItem_Dart>()(ptr.ref.lpVtbl, psi);
 
   int GetEnumFlagsForItem(Pointer<COMObject> psi, Pointer<Uint32> pgrfFlags) =>
       Pointer<NativeFunction<_GetEnumFlagsForItem_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_GetEnumFlagsForItem_Dart>()
-          (ptr.ref.lpVtbl, psi, pgrfFlags)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(4).value)
+              .asFunction<_GetEnumFlagsForItem_Dart>()(
+          ptr.ref.lpVtbl, psi, pgrfFlags);
 }

@@ -48,22 +48,18 @@ class IEnumVARIANT extends IUnknown {
           Pointer<Uint32> pCeltFetched) =>
       Pointer<NativeFunction<_Next_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_Next_Dart>()(ptr.ref.lpVtbl, celt, rgVar, pCeltFetched)
-          .toUnsigned(32);
+          .asFunction<_Next_Dart>()(ptr.ref.lpVtbl, celt, rgVar, pCeltFetched);
 
   int Skip(int celt) => Pointer<NativeFunction<_Skip_Native>>.fromAddress(
           ptr.ref.vtable.elementAt(4).value)
-      .asFunction<_Skip_Dart>()(ptr.ref.lpVtbl, celt)
-      .toUnsigned(32);
+      .asFunction<_Skip_Dart>()(ptr.ref.lpVtbl, celt);
 
   int Reset() => Pointer<NativeFunction<_Reset_Native>>.fromAddress(
           ptr.ref.vtable.elementAt(5).value)
-      .asFunction<_Reset_Dart>()(ptr.ref.lpVtbl)
-      .toUnsigned(32);
+      .asFunction<_Reset_Dart>()(ptr.ref.lpVtbl);
 
   int Clone(Pointer<IntPtr> ppEnum) =>
       Pointer<NativeFunction<_Clone_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppEnum)
-          .toUnsigned(32);
+          .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppEnum);
 }

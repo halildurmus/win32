@@ -41,16 +41,13 @@ class IUnknown {
   int QueryInterface(Pointer<GUID> riid, Pointer<IntPtr> ppvObject) =>
       Pointer<NativeFunction<_QueryInterface_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(0).value)
-          .asFunction<_QueryInterface_Dart>()(ptr.ref.lpVtbl, riid, ppvObject)
-          .toUnsigned(32);
+          .asFunction<_QueryInterface_Dart>()(ptr.ref.lpVtbl, riid, ppvObject);
 
   int AddRef() => Pointer<NativeFunction<_AddRef_Native>>.fromAddress(
           ptr.ref.vtable.elementAt(1).value)
-      .asFunction<_AddRef_Dart>()(ptr.ref.lpVtbl)
-      .toUnsigned(32);
+      .asFunction<_AddRef_Dart>()(ptr.ref.lpVtbl);
 
   int Release() => Pointer<NativeFunction<_Release_Native>>.fromAddress(
           ptr.ref.vtable.elementAt(2).value)
-      .asFunction<_Release_Dart>()(ptr.ref.lpVtbl)
-      .toUnsigned(32);
+      .asFunction<_Release_Dart>()(ptr.ref.lpVtbl);
 }

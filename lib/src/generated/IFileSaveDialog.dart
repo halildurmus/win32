@@ -68,35 +68,30 @@ class IFileSaveDialog extends IFileDialog {
   int SetSaveAsItem(Pointer<COMObject> psi) =>
       Pointer<NativeFunction<_SetSaveAsItem_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(27).value)
-          .asFunction<_SetSaveAsItem_Dart>()(ptr.ref.lpVtbl, psi)
-          .toUnsigned(32);
+          .asFunction<_SetSaveAsItem_Dart>()(ptr.ref.lpVtbl, psi);
 
   int SetProperties(Pointer<COMObject> pStore) =>
       Pointer<NativeFunction<_SetProperties_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(28).value)
-          .asFunction<_SetProperties_Dart>()(ptr.ref.lpVtbl, pStore)
-          .toUnsigned(32);
+          .asFunction<_SetProperties_Dart>()(ptr.ref.lpVtbl, pStore);
 
   int SetCollectedProperties(Pointer<COMObject> pList, int fAppendDefault) =>
       Pointer<NativeFunction<_SetCollectedProperties_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(29).value)
-          .asFunction<_SetCollectedProperties_Dart>()
-          (ptr.ref.lpVtbl, pList, fAppendDefault)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(29).value)
+              .asFunction<_SetCollectedProperties_Dart>()(
+          ptr.ref.lpVtbl, pList, fAppendDefault);
 
   int GetProperties(Pointer<IntPtr> ppStore) =>
       Pointer<NativeFunction<_GetProperties_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(30).value)
-          .asFunction<_GetProperties_Dart>()(ptr.ref.lpVtbl, ppStore)
-          .toUnsigned(32);
+          .asFunction<_GetProperties_Dart>()(ptr.ref.lpVtbl, ppStore);
 
   int ApplyProperties(Pointer<COMObject> psi, Pointer<COMObject> pStore,
           int hwnd, Pointer<COMObject> pSink) =>
       Pointer<NativeFunction<_ApplyProperties_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(31).value)
-          .asFunction<_ApplyProperties_Dart>()
-          (ptr.ref.lpVtbl, psi, pStore, hwnd, pSink)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(31).value)
+              .asFunction<_ApplyProperties_Dart>()(
+          ptr.ref.lpVtbl, psi, pStore, hwnd, pSink);
 }
 
 /// {@category com}
@@ -108,12 +103,11 @@ class FileSaveDialog extends IFileSaveDialog {
     final ptr = COMObject.allocate().addressOf;
 
     var hr = CoCreateInstance(
-            GUID.fromString(CLSID_FileSaveDialog).addressOf,
-            nullptr,
-            CLSCTX_ALL,
-            GUID.fromString(IID_IFileSaveDialog).addressOf,
-            ptr.cast())
-        .toUnsigned(32);
+        GUID.fromString(CLSID_FileSaveDialog).addressOf,
+        nullptr,
+        CLSCTX_ALL,
+        GUID.fromString(IID_IFileSaveDialog).addressOf,
+        ptr.cast());
 
     if (FAILED(hr)) throw WindowsException(hr);
     return FileSaveDialog(ptr);

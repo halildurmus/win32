@@ -104,45 +104,38 @@ class INetwork extends IDispatch {
   int GetName(Pointer<Utf16> pszNetworkName) =>
       Pointer<NativeFunction<_GetName_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_GetName_Dart>()(ptr.ref.lpVtbl, pszNetworkName)
-          .toUnsigned(32);
+          .asFunction<_GetName_Dart>()(ptr.ref.lpVtbl, pszNetworkName);
 
   int SetName(Pointer<Utf16> szNetworkNewName) =>
       Pointer<NativeFunction<_SetName_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(8).value)
-          .asFunction<_SetName_Dart>()(ptr.ref.lpVtbl, szNetworkNewName)
-          .toUnsigned(32);
+          .asFunction<_SetName_Dart>()(ptr.ref.lpVtbl, szNetworkNewName);
 
   int GetDescription(Pointer<Utf16> pszDescription) =>
       Pointer<NativeFunction<_GetDescription_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(9).value)
-          .asFunction<_GetDescription_Dart>()(ptr.ref.lpVtbl, pszDescription)
-          .toUnsigned(32);
+          .asFunction<_GetDescription_Dart>()(ptr.ref.lpVtbl, pszDescription);
 
   int SetDescription(Pointer<Utf16> szDescription) =>
       Pointer<NativeFunction<_SetDescription_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(10).value)
-          .asFunction<_SetDescription_Dart>()(ptr.ref.lpVtbl, szDescription)
-          .toUnsigned(32);
+          .asFunction<_SetDescription_Dart>()(ptr.ref.lpVtbl, szDescription);
 
   int GetNetworkId(Pointer<GUID> pgdGuidNetworkId) =>
       Pointer<NativeFunction<_GetNetworkId_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(11).value)
-          .asFunction<_GetNetworkId_Dart>()(ptr.ref.lpVtbl, pgdGuidNetworkId)
-          .toUnsigned(32);
+          .asFunction<_GetNetworkId_Dart>()(ptr.ref.lpVtbl, pgdGuidNetworkId);
 
   int GetDomainType(Pointer<Uint32> pNetworkType) =>
       Pointer<NativeFunction<_GetDomainType_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(12).value)
-          .asFunction<_GetDomainType_Dart>()(ptr.ref.lpVtbl, pNetworkType)
-          .toUnsigned(32);
+          .asFunction<_GetDomainType_Dart>()(ptr.ref.lpVtbl, pNetworkType);
 
   int GetNetworkConnections(Pointer<IntPtr> ppEnumNetworkConnection) =>
       Pointer<NativeFunction<_GetNetworkConnections_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(13).value)
-          .asFunction<_GetNetworkConnections_Dart>()
-          (ptr.ref.lpVtbl, ppEnumNetworkConnection)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(13).value)
+              .asFunction<_GetNetworkConnections_Dart>()(
+          ptr.ref.lpVtbl, ppEnumNetworkConnection);
 
   int GetTimeCreatedAndConnected(
           Pointer<Uint32> pdwLowDateTimeCreated,
@@ -150,14 +143,13 @@ class INetwork extends IDispatch {
           Pointer<Uint32> pdwLowDateTimeConnected,
           Pointer<Uint32> pdwHighDateTimeConnected) =>
       Pointer<NativeFunction<_GetTimeCreatedAndConnected_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(14).value)
-          .asFunction<_GetTimeCreatedAndConnected_Dart>()(
-              ptr.ref.lpVtbl,
-              pdwLowDateTimeCreated,
-              pdwHighDateTimeCreated,
-              pdwLowDateTimeConnected,
-              pdwHighDateTimeConnected)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(14).value)
+              .asFunction<_GetTimeCreatedAndConnected_Dart>()(
+          ptr.ref.lpVtbl,
+          pdwLowDateTimeCreated,
+          pdwHighDateTimeCreated,
+          pdwLowDateTimeConnected,
+          pdwHighDateTimeConnected);
 
   int get IsConnectedToInternet {
     final retValuePtr = allocate<Int16>();
@@ -190,18 +182,15 @@ class INetwork extends IDispatch {
   int GetConnectivity(Pointer<Uint32> pConnectivity) =>
       Pointer<NativeFunction<_GetConnectivity_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(17).value)
-          .asFunction<_GetConnectivity_Dart>()(ptr.ref.lpVtbl, pConnectivity)
-          .toUnsigned(32);
+          .asFunction<_GetConnectivity_Dart>()(ptr.ref.lpVtbl, pConnectivity);
 
   int GetCategory(Pointer<Uint32> pCategory) =>
       Pointer<NativeFunction<_GetCategory_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(18).value)
-          .asFunction<_GetCategory_Dart>()(ptr.ref.lpVtbl, pCategory)
-          .toUnsigned(32);
+          .asFunction<_GetCategory_Dart>()(ptr.ref.lpVtbl, pCategory);
 
   int SetCategory(int NewCategory) =>
       Pointer<NativeFunction<_SetCategory_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(19).value)
-          .asFunction<_SetCategory_Dart>()(ptr.ref.lpVtbl, NewCategory)
-          .toUnsigned(32);
+          .asFunction<_SetCategory_Dart>()(ptr.ref.lpVtbl, NewCategory);
 }

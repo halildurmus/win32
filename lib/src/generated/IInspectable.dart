@@ -48,18 +48,15 @@ class IInspectable extends IUnknown {
   int GetIids(Pointer<Uint32> iidCount, Pointer<IntPtr> iids) =>
       Pointer<NativeFunction<_GetIids_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_GetIids_Dart>()(ptr.ref.lpVtbl, iidCount, iids)
-          .toUnsigned(32);
+          .asFunction<_GetIids_Dart>()(ptr.ref.lpVtbl, iidCount, iids);
 
   int GetRuntimeClassName(Pointer<IntPtr> className) =>
       Pointer<NativeFunction<_GetRuntimeClassName_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_GetRuntimeClassName_Dart>()(ptr.ref.lpVtbl, className)
-          .toUnsigned(32);
+          .asFunction<_GetRuntimeClassName_Dart>()(ptr.ref.lpVtbl, className);
 
   int GetTrustLevel(Pointer<Int32> trustLevel) =>
       Pointer<NativeFunction<_GetTrustLevel_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_GetTrustLevel_Dart>()(ptr.ref.lpVtbl, trustLevel)
-          .toUnsigned(32);
+          .asFunction<_GetTrustLevel_Dart>()(ptr.ref.lpVtbl, trustLevel);
 }

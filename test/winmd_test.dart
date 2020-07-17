@@ -6,6 +6,8 @@ import 'package:win32/win32.dart';
 import '../tool/winmd/mdFile.dart';
 import '../tool/winmd/utils.dart';
 
+final CLDB_E_RECORD_NOTFOUND = 0x80131130.toSigned(32);
+
 void main() {
   if (isWindowsRuntimeAvailable()) {
     test('List all tokens in a file', () {
@@ -77,8 +79,8 @@ void main() {
 
       expect(
           () => winTypeDef.findMethod('HourAsPaddedString2'),
-          throwsA(isA<COMException>()
-              .having((error) => error.hr, 'HRESULT', equals(0x80131130))));
+          throwsA(isA<COMException>().having(
+              (error) => error.hr, 'HRESULT', equals(CLDB_E_RECORD_NOTFOUND))));
     });
 
     test('Find interfaces returns sane results', () {

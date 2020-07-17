@@ -74,23 +74,20 @@ class IDispatch extends IUnknown {
   int GetTypeInfoCount(Pointer<Uint32> pctinfo) =>
       Pointer<NativeFunction<_GetTypeInfoCount_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_GetTypeInfoCount_Dart>()(ptr.ref.lpVtbl, pctinfo)
-          .toUnsigned(32);
+          .asFunction<_GetTypeInfoCount_Dart>()(ptr.ref.lpVtbl, pctinfo);
 
   int GetTypeInfo(int iTInfo, int lcid, Pointer<IntPtr> ppTInfo) =>
       Pointer<NativeFunction<_GetTypeInfo_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_GetTypeInfo_Dart>()
-          (ptr.ref.lpVtbl, iTInfo, lcid, ppTInfo)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(4).value)
+              .asFunction<_GetTypeInfo_Dart>()(
+          ptr.ref.lpVtbl, iTInfo, lcid, ppTInfo);
 
   int GetIDsOfNames(Pointer<GUID> riid, Pointer<Utf16> rgszNames, int cNames,
           int lcid, Pointer<Int32> rgDispId) =>
       Pointer<NativeFunction<_GetIDsOfNames_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_GetIDsOfNames_Dart>()
-          (ptr.ref.lpVtbl, riid, rgszNames, cNames, lcid, rgDispId)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(5).value)
+              .asFunction<_GetIDsOfNames_Dart>()(
+          ptr.ref.lpVtbl, riid, rgszNames, cNames, lcid, rgDispId);
 
   int Invoke(
           int dispIdMember,
@@ -102,8 +99,7 @@ class IDispatch extends IUnknown {
           Pointer<EXCEPINFO> pExcepInfo,
           Pointer<Uint32> puArgErr) =>
       Pointer<NativeFunction<_Invoke_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_Invoke_Dart>()(ptr.ref.lpVtbl, dispIdMember, riid, lcid,
-              wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(6).value)
+              .asFunction<_Invoke_Dart>()(ptr.ref.lpVtbl, dispIdMember, riid,
+          lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr);
 }

@@ -810,66 +810,57 @@ class IMetaDataImport extends IUnknown {
   int CloseEnum(int hEnum) =>
       Pointer<NativeFunction<_CloseEnum_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_CloseEnum_Dart>()(ptr.ref.lpVtbl, hEnum)
-          .toUnsigned(32);
+          .asFunction<_CloseEnum_Dart>()(ptr.ref.lpVtbl, hEnum);
 
   int CountEnum(int hEnum, Pointer<Uint32> pulCount) =>
       Pointer<NativeFunction<_CountEnum_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_CountEnum_Dart>()(ptr.ref.lpVtbl, hEnum, pulCount)
-          .toUnsigned(32);
+          .asFunction<_CountEnum_Dart>()(ptr.ref.lpVtbl, hEnum, pulCount);
 
   int ResetEnum(int hEnum, int ulPos) =>
       Pointer<NativeFunction<_ResetEnum_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_ResetEnum_Dart>()(ptr.ref.lpVtbl, hEnum, ulPos)
-          .toUnsigned(32);
+          .asFunction<_ResetEnum_Dart>()(ptr.ref.lpVtbl, hEnum, ulPos);
 
   int EnumTypeDefs(Pointer<IntPtr> phEnum, Pointer<Uint32> rgTypeDefs, int cMax,
           Pointer<Uint32> pcTypeDefs) =>
       Pointer<NativeFunction<_EnumTypeDefs_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_EnumTypeDefs_Dart>()
-          (ptr.ref.lpVtbl, phEnum, rgTypeDefs, cMax, pcTypeDefs)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(6).value)
+              .asFunction<_EnumTypeDefs_Dart>()(
+          ptr.ref.lpVtbl, phEnum, rgTypeDefs, cMax, pcTypeDefs);
 
   int EnumInterfaceImpls(Pointer<IntPtr> phEnum, int td, Pointer<Uint32> rImpls,
           int cMax, Pointer<Uint32> pcImpls) =>
       Pointer<NativeFunction<_EnumInterfaceImpls_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_EnumInterfaceImpls_Dart>()
-          (ptr.ref.lpVtbl, phEnum, td, rImpls, cMax, pcImpls)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(7).value)
+              .asFunction<_EnumInterfaceImpls_Dart>()(
+          ptr.ref.lpVtbl, phEnum, td, rImpls, cMax, pcImpls);
 
   int EnumTypeRefs(Pointer<IntPtr> phEnum, Pointer<Uint32> rgTypeRefs, int cMax,
           Pointer<Uint32> pcTypeRefs) =>
       Pointer<NativeFunction<_EnumTypeRefs_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(8).value)
-          .asFunction<_EnumTypeRefs_Dart>()
-          (ptr.ref.lpVtbl, phEnum, rgTypeRefs, cMax, pcTypeRefs)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(8).value)
+              .asFunction<_EnumTypeRefs_Dart>()(
+          ptr.ref.lpVtbl, phEnum, rgTypeRefs, cMax, pcTypeRefs);
 
   int FindTypeDefByName(Pointer<Utf16> szTypeDef, int tkEnclosingClass,
           Pointer<Uint32> ptkTypeDef) =>
       Pointer<NativeFunction<_FindTypeDefByName_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(9).value)
-          .asFunction<_FindTypeDefByName_Dart>()
-          (ptr.ref.lpVtbl, szTypeDef, tkEnclosingClass, ptkTypeDef)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(9).value)
+              .asFunction<_FindTypeDefByName_Dart>()(
+          ptr.ref.lpVtbl, szTypeDef, tkEnclosingClass, ptkTypeDef);
 
   int GetScopeProps(Pointer<Utf16> szName, int cchName, Pointer<Uint32> pchName,
           Pointer<GUID> pmvid) =>
       Pointer<NativeFunction<_GetScopeProps_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(10).value)
-          .asFunction<_GetScopeProps_Dart>()
-          (ptr.ref.lpVtbl, szName, cchName, pchName, pmvid)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(10).value)
+              .asFunction<_GetScopeProps_Dart>()(
+          ptr.ref.lpVtbl, szName, cchName, pchName, pmvid);
 
   int GetModuleFromScope(Pointer<Uint32> ptkModule) =>
       Pointer<NativeFunction<_GetModuleFromScope_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(11).value)
-          .asFunction<_GetModuleFromScope_Dart>()(ptr.ref.lpVtbl, ptkModule)
-          .toUnsigned(32);
+          .asFunction<_GetModuleFromScope_Dart>()(ptr.ref.lpVtbl, ptkModule);
 
   int GetTypeDefProps(
           int tkTypeDef,
@@ -879,42 +870,37 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint32> pdwTypeDefFlags,
           Pointer<Uint32> ptkExtends) =>
       Pointer<NativeFunction<_GetTypeDefProps_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(12).value)
-          .asFunction<_GetTypeDefProps_Dart>()(ptr.ref.lpVtbl, tkTypeDef,
-              szTypeDef, cchTypeDef, pchTypeDef, pdwTypeDefFlags, ptkExtends)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(12).value)
+              .asFunction<_GetTypeDefProps_Dart>()(ptr.ref.lpVtbl, tkTypeDef,
+          szTypeDef, cchTypeDef, pchTypeDef, pdwTypeDefFlags, ptkExtends);
 
   int GetInterfaceImplProps(int tkInterfaceImpl, Pointer<Uint32> ptkClass,
           Pointer<Uint32> ptkIface) =>
       Pointer<NativeFunction<_GetInterfaceImplProps_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(13).value)
-          .asFunction<_GetInterfaceImplProps_Dart>()
-          (ptr.ref.lpVtbl, tkInterfaceImpl, ptkClass, ptkIface)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(13).value)
+              .asFunction<_GetInterfaceImplProps_Dart>()(
+          ptr.ref.lpVtbl, tkInterfaceImpl, ptkClass, ptkIface);
 
   int GetTypeRefProps(int tkTypeRef, Pointer<Uint32> ptkResolutionScope,
           Pointer<Utf16> szName, int cchName, Pointer<Uint32> pchName) =>
       Pointer<NativeFunction<_GetTypeRefProps_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(14).value)
-          .asFunction<_GetTypeRefProps_Dart>()(ptr.ref.lpVtbl, tkTypeRef,
-              ptkResolutionScope, szName, cchName, pchName)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(14).value)
+              .asFunction<_GetTypeRefProps_Dart>()(ptr.ref.lpVtbl, tkTypeRef,
+          ptkResolutionScope, szName, cchName, pchName);
 
   int ResolveTypeRef(int tkTypeRef, Pointer<GUID> riid,
           Pointer<IntPtr> ppIScope, Pointer<Uint32> ptkTypeDef) =>
       Pointer<NativeFunction<_ResolveTypeRef_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(15).value)
-          .asFunction<_ResolveTypeRef_Dart>()
-          (ptr.ref.lpVtbl, tkTypeRef, riid, ppIScope, ptkTypeDef)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(15).value)
+              .asFunction<_ResolveTypeRef_Dart>()(
+          ptr.ref.lpVtbl, tkTypeRef, riid, ppIScope, ptkTypeDef);
 
   int EnumMembers(Pointer<IntPtr> phEnum, int tkTypeDef,
           Pointer<Uint32> rgMembers, int cMax, Pointer<Uint32> pcTokens) =>
       Pointer<NativeFunction<_EnumMembers_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(16).value)
-          .asFunction<_EnumMembers_Dart>()
-          (ptr.ref.lpVtbl, phEnum, tkTypeDef, rgMembers, cMax, pcTokens)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(16).value)
+              .asFunction<_EnumMembers_Dart>()(
+          ptr.ref.lpVtbl, phEnum, tkTypeDef, rgMembers, cMax, pcTokens);
 
   int EnumMembersWithName(
           Pointer<IntPtr> phEnum,
@@ -924,18 +910,16 @@ class IMetaDataImport extends IUnknown {
           int cMax,
           Pointer<Uint32> pcTokens) =>
       Pointer<NativeFunction<_EnumMembersWithName_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(17).value)
-          .asFunction<_EnumMembersWithName_Dart>()
-          (ptr.ref.lpVtbl, phEnum, tkTypeDef, szName, rgMembers, cMax, pcTokens)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(17).value)
+              .asFunction<_EnumMembersWithName_Dart>()(
+          ptr.ref.lpVtbl, phEnum, tkTypeDef, szName, rgMembers, cMax, pcTokens);
 
   int EnumMethods(Pointer<IntPtr> phEnum, int tkTypeDef,
           Pointer<Uint32> rgMethods, int cMax, Pointer<Uint32> pcTokens) =>
       Pointer<NativeFunction<_EnumMethods_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(18).value)
-          .asFunction<_EnumMethods_Dart>()
-          (ptr.ref.lpVtbl, phEnum, tkTypeDef, rgMethods, cMax, pcTokens)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(18).value)
+              .asFunction<_EnumMethods_Dart>()(
+          ptr.ref.lpVtbl, phEnum, tkTypeDef, rgMethods, cMax, pcTokens);
 
   int EnumMethodsWithName(
           Pointer<IntPtr> phEnum,
@@ -945,18 +929,16 @@ class IMetaDataImport extends IUnknown {
           int cMax,
           Pointer<Uint32> pcTokens) =>
       Pointer<NativeFunction<_EnumMethodsWithName_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(19).value)
-          .asFunction<_EnumMethodsWithName_Dart>()
-          (ptr.ref.lpVtbl, phEnum, tkTypeDef, szName, rgMethods, cMax, pcTokens)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(19).value)
+              .asFunction<_EnumMethodsWithName_Dart>()(
+          ptr.ref.lpVtbl, phEnum, tkTypeDef, szName, rgMethods, cMax, pcTokens);
 
   int EnumFields(Pointer<IntPtr> phEnum, int tkTypeDef,
           Pointer<Uint32> rgFields, int cMax, Pointer<Uint32> pcTokens) =>
       Pointer<NativeFunction<_EnumFields_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(20).value)
-          .asFunction<_EnumFields_Dart>()
-          (ptr.ref.lpVtbl, phEnum, tkTypeDef, rgFields, cMax, pcTokens)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(20).value)
+              .asFunction<_EnumFields_Dart>()(
+          ptr.ref.lpVtbl, phEnum, tkTypeDef, rgFields, cMax, pcTokens);
 
   int EnumFieldsWithName(
           Pointer<IntPtr> phEnum,
@@ -966,26 +948,23 @@ class IMetaDataImport extends IUnknown {
           int cMax,
           Pointer<Uint32> pcTokens) =>
       Pointer<NativeFunction<_EnumFieldsWithName_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(21).value)
-          .asFunction<_EnumFieldsWithName_Dart>()
-          (ptr.ref.lpVtbl, phEnum, tkTypeDef, szName, rFields, cMax, pcTokens)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(21).value)
+              .asFunction<_EnumFieldsWithName_Dart>()(
+          ptr.ref.lpVtbl, phEnum, tkTypeDef, szName, rFields, cMax, pcTokens);
 
   int EnumParams(Pointer<IntPtr> phEnum, int tkMethodDef,
           Pointer<Uint32> rParams, int cMax, Pointer<Uint32> pcTokens) =>
       Pointer<NativeFunction<_EnumParams_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(22).value)
-          .asFunction<_EnumParams_Dart>()
-          (ptr.ref.lpVtbl, phEnum, tkMethodDef, rParams, cMax, pcTokens)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(22).value)
+              .asFunction<_EnumParams_Dart>()(
+          ptr.ref.lpVtbl, phEnum, tkMethodDef, rParams, cMax, pcTokens);
 
   int EnumMemberRefs(Pointer<IntPtr> phEnum, int tkParent,
           Pointer<Uint32> rgMemberRefs, int cMax, Pointer<Uint32> pcTokens) =>
       Pointer<NativeFunction<_EnumMemberRefs_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(23).value)
-          .asFunction<_EnumMemberRefs_Dart>()
-          (ptr.ref.lpVtbl, phEnum, tkParent, rgMemberRefs, cMax, pcTokens)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(23).value)
+              .asFunction<_EnumMemberRefs_Dart>()(
+          ptr.ref.lpVtbl, phEnum, tkParent, rgMemberRefs, cMax, pcTokens);
 
   int EnumMethodImpls(
           Pointer<IntPtr> phEnum,
@@ -995,42 +974,37 @@ class IMetaDataImport extends IUnknown {
           int cMax,
           Pointer<Uint32> pcTokens) =>
       Pointer<NativeFunction<_EnumMethodImpls_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(24).value)
-          .asFunction<_EnumMethodImpls_Dart>()(ptr.ref.lpVtbl, phEnum,
-              tkTypeDef, rMethodBody, rMethodDecl, cMax, pcTokens)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(24).value)
+              .asFunction<_EnumMethodImpls_Dart>()(ptr.ref.lpVtbl, phEnum,
+          tkTypeDef, rMethodBody, rMethodDecl, cMax, pcTokens);
 
   int EnumPermissionSets(Pointer<IntPtr> phEnum, int tk, int dwActions,
           Pointer<Uint32> rPermission, int cMax, Pointer<Uint32> pcTokens) =>
       Pointer<NativeFunction<_EnumPermissionSets_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(25).value)
-          .asFunction<_EnumPermissionSets_Dart>()
-          (ptr.ref.lpVtbl, phEnum, tk, dwActions, rPermission, cMax, pcTokens)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(25).value)
+              .asFunction<_EnumPermissionSets_Dart>()(
+          ptr.ref.lpVtbl, phEnum, tk, dwActions, rPermission, cMax, pcTokens);
 
   int FindMember(int tkTypeDef, Pointer<Utf16> szName, Pointer<Uint8> pvSigBlob,
           int cbSigBlob, Pointer<Uint32> pmb) =>
       Pointer<NativeFunction<_FindMember_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(26).value)
-          .asFunction<_FindMember_Dart>()
-          (ptr.ref.lpVtbl, tkTypeDef, szName, pvSigBlob, cbSigBlob, pmb)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(26).value)
+              .asFunction<_FindMember_Dart>()(
+          ptr.ref.lpVtbl, tkTypeDef, szName, pvSigBlob, cbSigBlob, pmb);
 
   int FindMethod(int tkTypeDef, Pointer<Utf16> szName, Pointer<Uint8> pvSigBlob,
           int cbSigBlob, Pointer<Uint32> ptkMethodDef) =>
       Pointer<NativeFunction<_FindMethod_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(27).value)
-          .asFunction<_FindMethod_Dart>()(ptr.ref.lpVtbl, tkTypeDef, szName,
-              pvSigBlob, cbSigBlob, ptkMethodDef)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(27).value)
+              .asFunction<_FindMethod_Dart>()(ptr.ref.lpVtbl, tkTypeDef, szName,
+          pvSigBlob, cbSigBlob, ptkMethodDef);
 
   int FindField(int tkTypeDef, Pointer<Utf16> szName, Pointer<Uint8> pvSigBlob,
           int cbSigBlob, Pointer<Uint32> ptkFieldDef) =>
       Pointer<NativeFunction<_FindField_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(28).value)
-          .asFunction<_FindField_Dart>()
-          (ptr.ref.lpVtbl, tkTypeDef, szName, pvSigBlob, cbSigBlob, ptkFieldDef)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(28).value)
+              .asFunction<_FindField_Dart>()(
+          ptr.ref.lpVtbl, tkTypeDef, szName, pvSigBlob, cbSigBlob, ptkFieldDef);
 
   int FindMemberRef(
           int tkTypeRef,
@@ -1039,10 +1013,9 @@ class IMetaDataImport extends IUnknown {
           int cbSigBlob,
           Pointer<Uint32> pMemberRef) =>
       Pointer<NativeFunction<_FindMemberRef_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(29).value)
-          .asFunction<_FindMemberRef_Dart>()
-          (ptr.ref.lpVtbl, tkTypeRef, szName, pvSigBlob, cbSigBlob, pMemberRef)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(29).value)
+              .asFunction<_FindMemberRef_Dart>()(
+          ptr.ref.lpVtbl, tkTypeRef, szName, pvSigBlob, cbSigBlob, pMemberRef);
 
   int GetMethodProps(
           int tkMethodDef,
@@ -1056,20 +1029,19 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint32> pulCodeRVA,
           Pointer<Uint32> pdwImplFlags) =>
       Pointer<NativeFunction<_GetMethodProps_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(30).value)
-          .asFunction<_GetMethodProps_Dart>()(
-              ptr.ref.lpVtbl,
-              tkMethodDef,
-              ptkClass,
-              szMethod,
-              cchMethod,
-              pchMethod,
-              pdwAttr,
-              ppvSigBlob,
-              pcbSigBlob,
-              pulCodeRVA,
-              pdwImplFlags)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(30).value)
+              .asFunction<_GetMethodProps_Dart>()(
+          ptr.ref.lpVtbl,
+          tkMethodDef,
+          ptkClass,
+          szMethod,
+          cchMethod,
+          pchMethod,
+          pdwAttr,
+          ppvSigBlob,
+          pcbSigBlob,
+          pulCodeRVA,
+          pdwImplFlags);
 
   int GetMemberRefProps(
           int tkMemberRef,
@@ -1080,10 +1052,16 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint8> ppvSigBlob,
           Pointer<Uint32> pcbSigBlob) =>
       Pointer<NativeFunction<_GetMemberRefProps_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(31).value)
-          .asFunction<_GetMemberRefProps_Dart>()(ptr.ref.lpVtbl, tkMemberRef,
-              ptk, szMember, cchMember, pchMember, ppvSigBlob, pcbSigBlob)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(31).value)
+              .asFunction<_GetMemberRefProps_Dart>()(
+          ptr.ref.lpVtbl,
+          tkMemberRef,
+          ptk,
+          szMember,
+          cchMember,
+          pchMember,
+          ppvSigBlob,
+          pcbSigBlob);
 
   int EnumProperties(
           Pointer<IntPtr> phEnum,
@@ -1092,18 +1070,16 @@ class IMetaDataImport extends IUnknown {
           int cMax,
           Pointer<Uint32> pcProperties) =>
       Pointer<NativeFunction<_EnumProperties_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(32).value)
-          .asFunction<_EnumProperties_Dart>()
-          (ptr.ref.lpVtbl, phEnum, tkTypDef, rgProperties, cMax, pcProperties)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(32).value)
+              .asFunction<_EnumProperties_Dart>()(
+          ptr.ref.lpVtbl, phEnum, tkTypDef, rgProperties, cMax, pcProperties);
 
   int EnumEvents(Pointer<IntPtr> phEnum, int tkTypDef, Pointer<Uint32> rgEvents,
           int cMax, Pointer<Uint32> pcEvents) =>
       Pointer<NativeFunction<_EnumEvents_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(33).value)
-          .asFunction<_EnumEvents_Dart>()
-          (ptr.ref.lpVtbl, phEnum, tkTypDef, rgEvents, cMax, pcEvents)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(33).value)
+              .asFunction<_EnumEvents_Dart>()(
+          ptr.ref.lpVtbl, phEnum, tkTypDef, rgEvents, cMax, pcEvents);
 
   int GetEventProps(
           int tkEvent,
@@ -1120,39 +1096,36 @@ class IMetaDataImport extends IUnknown {
           int cMax,
           Pointer<Uint32> pcOtherMethod) =>
       Pointer<NativeFunction<_GetEventProps_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(34).value)
-          .asFunction<_GetEventProps_Dart>()(
-              ptr.ref.lpVtbl,
-              tkEvent,
-              ptkClass,
-              szEvent,
-              cchEvent,
-              pchEvent,
-              pdwEventFlags,
-              ptkEventType,
-              ptkAddOn,
-              ptkRemoveOn,
-              tkkFire,
-              rgOtherMethod,
-              cMax,
-              pcOtherMethod)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(34).value)
+              .asFunction<_GetEventProps_Dart>()(
+          ptr.ref.lpVtbl,
+          tkEvent,
+          ptkClass,
+          szEvent,
+          cchEvent,
+          pchEvent,
+          pdwEventFlags,
+          ptkEventType,
+          ptkAddOn,
+          ptkRemoveOn,
+          tkkFire,
+          rgOtherMethod,
+          cMax,
+          pcOtherMethod);
 
   int EnumMethodSemantics(Pointer<IntPtr> phEnum, int tkMethodDef,
           Pointer<Uint32> rgEventProp, int cMax, Pointer<Uint32> pcEventProp) =>
       Pointer<NativeFunction<_EnumMethodSemantics_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(35).value)
-          .asFunction<_EnumMethodSemantics_Dart>()
-          (ptr.ref.lpVtbl, phEnum, tkMethodDef, rgEventProp, cMax, pcEventProp)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(35).value)
+              .asFunction<_EnumMethodSemantics_Dart>()(
+          ptr.ref.lpVtbl, phEnum, tkMethodDef, rgEventProp, cMax, pcEventProp);
 
   int GetMethodSemantics(int tkMethodDef, int tkEventProp,
           Pointer<Uint32> pdwSemanticsFlags) =>
       Pointer<NativeFunction<_GetMethodSemantics_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(36).value)
-          .asFunction<_GetMethodSemantics_Dart>()
-          (ptr.ref.lpVtbl, tkMethodDef, tkEventProp, pdwSemanticsFlags)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(36).value)
+              .asFunction<_GetMethodSemantics_Dart>()(
+          ptr.ref.lpVtbl, tkMethodDef, tkEventProp, pdwSemanticsFlags);
 
   int GetClassLayout(
           int tkTypeDef,
@@ -1162,89 +1135,78 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint32> pcFieldOffset,
           Pointer<Uint32> pulClassSize) =>
       Pointer<NativeFunction<_GetClassLayout_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(37).value)
-          .asFunction<_GetClassLayout_Dart>()(ptr.ref.lpVtbl, tkTypeDef,
-              pdwPackSize, rgFieldOffset, cMax, pcFieldOffset, pulClassSize)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(37).value)
+              .asFunction<_GetClassLayout_Dart>()(ptr.ref.lpVtbl, tkTypeDef,
+          pdwPackSize, rgFieldOffset, cMax, pcFieldOffset, pulClassSize);
 
   int GetFieldMarshal(int tk, Pointer<Uint8> ppvNativeType,
           Pointer<Uint32> pcbNativeType) =>
       Pointer<NativeFunction<_GetFieldMarshal_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(38).value)
-          .asFunction<_GetFieldMarshal_Dart>()
-          (ptr.ref.lpVtbl, tk, ppvNativeType, pcbNativeType)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(38).value)
+              .asFunction<_GetFieldMarshal_Dart>()(
+          ptr.ref.lpVtbl, tk, ppvNativeType, pcbNativeType);
 
   int GetRVA(
           int tk, Pointer<Uint32> pulCodeRVA, Pointer<Uint32> pdwImplFlags) =>
       Pointer<NativeFunction<_GetRVA_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(39).value)
-          .asFunction<_GetRVA_Dart>()
-          (ptr.ref.lpVtbl, tk, pulCodeRVA, pdwImplFlags)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(39).value)
+              .asFunction<_GetRVA_Dart>()(
+          ptr.ref.lpVtbl, tk, pulCodeRVA, pdwImplFlags);
 
   int GetPermissionSetProps(int tk, Pointer<Uint32> pdwAction,
           Pointer<IntPtr> ppvPermission, Pointer<Uint32> pcbPermission) =>
       Pointer<NativeFunction<_GetPermissionSetProps_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(40).value)
-          .asFunction<_GetPermissionSetProps_Dart>()
-          (ptr.ref.lpVtbl, tk, pdwAction, ppvPermission, pcbPermission)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(40).value)
+              .asFunction<_GetPermissionSetProps_Dart>()(
+          ptr.ref.lpVtbl, tk, pdwAction, ppvPermission, pcbPermission);
 
   int GetSigFromToken(
           int tkSignature, Pointer<Uint8> ppvSig, Pointer<Uint32> pcbSig) =>
       Pointer<NativeFunction<_GetSigFromToken_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(41).value)
-          .asFunction<_GetSigFromToken_Dart>()
-          (ptr.ref.lpVtbl, tkSignature, ppvSig, pcbSig)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(41).value)
+              .asFunction<_GetSigFromToken_Dart>()(
+          ptr.ref.lpVtbl, tkSignature, ppvSig, pcbSig);
 
   int GetModuleRefProps(int tkModuleRef, Pointer<Utf16> szName, int cchName,
           Pointer<Uint32> pchName) =>
       Pointer<NativeFunction<_GetModuleRefProps_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(42).value)
-          .asFunction<_GetModuleRefProps_Dart>()
-          (ptr.ref.lpVtbl, tkModuleRef, szName, cchName, pchName)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(42).value)
+              .asFunction<_GetModuleRefProps_Dart>()(
+          ptr.ref.lpVtbl, tkModuleRef, szName, cchName, pchName);
 
   int EnumModuleRefs(Pointer<IntPtr> phEnum, Pointer<Uint32> rgModuleRefs,
           int cMax, Pointer<Uint32> pcModuleRefs) =>
       Pointer<NativeFunction<_EnumModuleRefs_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(43).value)
-          .asFunction<_EnumModuleRefs_Dart>()
-          (ptr.ref.lpVtbl, phEnum, rgModuleRefs, cMax, pcModuleRefs)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(43).value)
+              .asFunction<_EnumModuleRefs_Dart>()(
+          ptr.ref.lpVtbl, phEnum, rgModuleRefs, cMax, pcModuleRefs);
 
   int GetTypeSpecFromToken(
           int tkTypeSpec, Pointer<Uint8> ppvSig, Pointer<Uint32> pcbSig) =>
       Pointer<NativeFunction<_GetTypeSpecFromToken_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(44).value)
-          .asFunction<_GetTypeSpecFromToken_Dart>()
-          (ptr.ref.lpVtbl, tkTypeSpec, ppvSig, pcbSig)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(44).value)
+              .asFunction<_GetTypeSpecFromToken_Dart>()(
+          ptr.ref.lpVtbl, tkTypeSpec, ppvSig, pcbSig);
 
   int GetNameFromToken(int tk, Pointer<Uint8> pszUtf8NamePtr) =>
       Pointer<NativeFunction<_GetNameFromToken_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(45).value)
-          .asFunction<_GetNameFromToken_Dart>()
-          (ptr.ref.lpVtbl, tk, pszUtf8NamePtr)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(45).value)
+              .asFunction<_GetNameFromToken_Dart>()(
+          ptr.ref.lpVtbl, tk, pszUtf8NamePtr);
 
   int EnumUnresolvedMethods(Pointer<IntPtr> phEnum, Pointer<Uint32> rgMethods,
           int cMax, Pointer<Uint32> pcTokens) =>
       Pointer<NativeFunction<_EnumUnresolvedMethods_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(46).value)
-          .asFunction<_EnumUnresolvedMethods_Dart>()
-          (ptr.ref.lpVtbl, phEnum, rgMethods, cMax, pcTokens)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(46).value)
+              .asFunction<_EnumUnresolvedMethods_Dart>()(
+          ptr.ref.lpVtbl, phEnum, rgMethods, cMax, pcTokens);
 
   int GetUserString(int tkString, Pointer<Utf16> szString, int cchString,
           Pointer<Uint32> pchString) =>
       Pointer<NativeFunction<_GetUserString_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(47).value)
-          .asFunction<_GetUserString_Dart>()
-          (ptr.ref.lpVtbl, tkString, szString, cchString, pchString)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(47).value)
+              .asFunction<_GetUserString_Dart>()(
+          ptr.ref.lpVtbl, tkString, szString, cchString, pchString);
 
   int GetPinvokeMap(
           int tk,
@@ -1254,48 +1216,43 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint32> pchImportName,
           Pointer<Uint32> ptkImportDLL) =>
       Pointer<NativeFunction<_GetPinvokeMap_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(48).value)
-          .asFunction<_GetPinvokeMap_Dart>()(
-              ptr.ref.lpVtbl,
-              tk,
-              pdwMappingFlags,
-              szImportName,
-              cchImportName,
-              pchImportName,
-              ptkImportDLL)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(48).value)
+              .asFunction<_GetPinvokeMap_Dart>()(
+          ptr.ref.lpVtbl,
+          tk,
+          pdwMappingFlags,
+          szImportName,
+          cchImportName,
+          pchImportName,
+          ptkImportDLL);
 
   int EnumSignatures(Pointer<IntPtr> phEnum, Pointer<Uint32> rgSignatures,
           int cMax, Pointer<Uint32> pcSignatures) =>
       Pointer<NativeFunction<_EnumSignatures_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(49).value)
-          .asFunction<_EnumSignatures_Dart>()
-          (ptr.ref.lpVtbl, phEnum, rgSignatures, cMax, pcSignatures)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(49).value)
+              .asFunction<_EnumSignatures_Dart>()(
+          ptr.ref.lpVtbl, phEnum, rgSignatures, cMax, pcSignatures);
 
   int EnumTypeSpecs(Pointer<IntPtr> phEnum, Pointer<Uint32> rgTypeSpecs,
           int cMax, Pointer<Uint32> pcTypeSpecs) =>
       Pointer<NativeFunction<_EnumTypeSpecs_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(50).value)
-          .asFunction<_EnumTypeSpecs_Dart>()
-          (ptr.ref.lpVtbl, phEnum, rgTypeSpecs, cMax, pcTypeSpecs)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(50).value)
+              .asFunction<_EnumTypeSpecs_Dart>()(
+          ptr.ref.lpVtbl, phEnum, rgTypeSpecs, cMax, pcTypeSpecs);
 
   int EnumUserStrings(Pointer<IntPtr> phEnum, Pointer<Uint32> rgStrings,
           int cMax, Pointer<Uint32> pcStrings) =>
       Pointer<NativeFunction<_EnumUserStrings_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(51).value)
-          .asFunction<_EnumUserStrings_Dart>()
-          (ptr.ref.lpVtbl, phEnum, rgStrings, cMax, pcStrings)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(51).value)
+              .asFunction<_EnumUserStrings_Dart>()(
+          ptr.ref.lpVtbl, phEnum, rgStrings, cMax, pcStrings);
 
   int GetParamForMethodIndex(
           int tkMethodDef, int ulParamSeq, Pointer<Uint32> ptkParamDef) =>
       Pointer<NativeFunction<_GetParamForMethodIndex_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(52).value)
-          .asFunction<_GetParamForMethodIndex_Dart>()
-          (ptr.ref.lpVtbl, tkMethodDef, ulParamSeq, ptkParamDef)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(52).value)
+              .asFunction<_GetParamForMethodIndex_Dart>()(
+          ptr.ref.lpVtbl, tkMethodDef, ulParamSeq, ptkParamDef);
 
   int EnumCustomAttributes(
           Pointer<IntPtr> phEnum,
@@ -1305,10 +1262,9 @@ class IMetaDataImport extends IUnknown {
           int cMax,
           Pointer<Uint32> pcCustomAttributes) =>
       Pointer<NativeFunction<_EnumCustomAttributes_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(53).value)
-          .asFunction<_EnumCustomAttributes_Dart>()(ptr.ref.lpVtbl, phEnum, tk,
-              tkType, rgCustomAttributes, cMax, pcCustomAttributes)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(53).value)
+              .asFunction<_EnumCustomAttributes_Dart>()(ptr.ref.lpVtbl, phEnum,
+          tk, tkType, rgCustomAttributes, cMax, pcCustomAttributes);
 
   int GetCustomAttributeProps(
           int cv,
@@ -1317,18 +1273,16 @@ class IMetaDataImport extends IUnknown {
           Pointer<IntPtr> ppBlob,
           Pointer<Uint32> pcbBlob) =>
       Pointer<NativeFunction<_GetCustomAttributeProps_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(54).value)
-          .asFunction<_GetCustomAttributeProps_Dart>()
-          (ptr.ref.lpVtbl, cv, ptkObj, ptkType, ppBlob, pcbBlob)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(54).value)
+              .asFunction<_GetCustomAttributeProps_Dart>()(
+          ptr.ref.lpVtbl, cv, ptkObj, ptkType, ppBlob, pcbBlob);
 
   int FindTypeRef(int tkResolutionScope, Pointer<Utf16> szName,
           Pointer<Uint32> tkTypeRef) =>
       Pointer<NativeFunction<_FindTypeRef_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(55).value)
-          .asFunction<_FindTypeRef_Dart>()
-          (ptr.ref.lpVtbl, tkResolutionScope, szName, tkTypeRef)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(55).value)
+              .asFunction<_FindTypeRef_Dart>()(
+          ptr.ref.lpVtbl, tkResolutionScope, szName, tkTypeRef);
 
   int GetMemberProps(
           int tkMember,
@@ -1345,23 +1299,22 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint8> ppValue,
           Pointer<Uint32> pcchValue) =>
       Pointer<NativeFunction<_GetMemberProps_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(56).value)
-          .asFunction<_GetMemberProps_Dart>()(
-              ptr.ref.lpVtbl,
-              tkMember,
-              ptkTypeDef,
-              szMember,
-              cchMember,
-              pchMember,
-              pdwAttr,
-              ppvSigBlob,
-              pcbSigBlob,
-              pulCodeRVA,
-              pdwImplFlags,
-              pdwCPlusTypeFlag,
-              ppValue,
-              pcchValue)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(56).value)
+              .asFunction<_GetMemberProps_Dart>()(
+          ptr.ref.lpVtbl,
+          tkMember,
+          ptkTypeDef,
+          szMember,
+          cchMember,
+          pchMember,
+          pdwAttr,
+          ppvSigBlob,
+          pcbSigBlob,
+          pulCodeRVA,
+          pdwImplFlags,
+          pdwCPlusTypeFlag,
+          ppValue,
+          pcchValue);
 
   int GetFieldProps(
           int tkFieldDef,
@@ -1376,21 +1329,20 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint8> ppValue,
           Pointer<Uint32> pcchValue) =>
       Pointer<NativeFunction<_GetFieldProps_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(57).value)
-          .asFunction<_GetFieldProps_Dart>()(
-              ptr.ref.lpVtbl,
-              tkFieldDef,
-              ptkTypeDef,
-              szField,
-              cchField,
-              pchField,
-              pdwAttr,
-              ppvSigBlob,
-              pcbSigBlob,
-              pdwCPlusTypeFlag,
-              ppValue,
-              pcchValue)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(57).value)
+              .asFunction<_GetFieldProps_Dart>()(
+          ptr.ref.lpVtbl,
+          tkFieldDef,
+          ptkTypeDef,
+          szField,
+          cchField,
+          pchField,
+          pdwAttr,
+          ppvSigBlob,
+          pcbSigBlob,
+          pdwCPlusTypeFlag,
+          ppValue,
+          pcchValue);
 
   int GetPropertyProps(
           int prop,
@@ -1410,26 +1362,25 @@ class IMetaDataImport extends IUnknown {
           int cMax,
           Pointer<Uint32> pcOtherMethod) =>
       Pointer<NativeFunction<_GetPropertyProps_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(58).value)
-          .asFunction<_GetPropertyProps_Dart>()(
-              ptr.ref.lpVtbl,
-              prop,
-              ptkTypeDef,
-              szProperty,
-              cchProperty,
-              pchProperty,
-              pdwPropFlags,
-              ppvSigBlob,
-              pcbSigBlob,
-              pdwCPlusTypeFlag,
-              ppDefaultValue,
-              pcchDefaultValue,
-              ptkSetter,
-              ptkGetter,
-              rgOtherMethod,
-              cMax,
-              pcOtherMethod)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(58).value)
+              .asFunction<_GetPropertyProps_Dart>()(
+          ptr.ref.lpVtbl,
+          prop,
+          ptkTypeDef,
+          szProperty,
+          cchProperty,
+          pchProperty,
+          pdwPropFlags,
+          ppvSigBlob,
+          pcbSigBlob,
+          pdwCPlusTypeFlag,
+          ppDefaultValue,
+          pcchDefaultValue,
+          ptkSetter,
+          ptkGetter,
+          rgOtherMethod,
+          cMax,
+          pcOtherMethod);
 
   int GetParamProps(
           int tkParamDef,
@@ -1443,54 +1394,48 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint8> ppValue,
           Pointer<Uint32> pcchValue) =>
       Pointer<NativeFunction<_GetParamProps_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(59).value)
-          .asFunction<_GetParamProps_Dart>()(
-              ptr.ref.lpVtbl,
-              tkParamDef,
-              ptkMethodDef,
-              pulSequence,
-              szName,
-              cchName,
-              pchName,
-              pdwAttr,
-              pdwCPlusTypeFlag,
-              ppValue,
-              pcchValue)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(59).value)
+              .asFunction<_GetParamProps_Dart>()(
+          ptr.ref.lpVtbl,
+          tkParamDef,
+          ptkMethodDef,
+          pulSequence,
+          szName,
+          cchName,
+          pchName,
+          pdwAttr,
+          pdwCPlusTypeFlag,
+          ppValue,
+          pcchValue);
 
   int GetCustomAttributeByName(int tkObj, Pointer<Utf16> szName,
           Pointer<IntPtr> ppData, Pointer<Uint32> pcbData) =>
       Pointer<NativeFunction<_GetCustomAttributeByName_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(60).value)
-          .asFunction<_GetCustomAttributeByName_Dart>()
-          (ptr.ref.lpVtbl, tkObj, szName, ppData, pcbData)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(60).value)
+              .asFunction<_GetCustomAttributeByName_Dart>()(
+          ptr.ref.lpVtbl, tkObj, szName, ppData, pcbData);
 
   int IsValidToken(int tk) =>
       Pointer<NativeFunction<_IsValidToken_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(61).value)
-          .asFunction<_IsValidToken_Dart>()(ptr.ref.lpVtbl, tk)
-          .toUnsigned(32);
+          .asFunction<_IsValidToken_Dart>()(ptr.ref.lpVtbl, tk);
 
   int GetNestedClassProps(
           int tdNestedClass, Pointer<Uint32> ptdEnclosingClass) =>
       Pointer<NativeFunction<_GetNestedClassProps_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(62).value)
-          .asFunction<_GetNestedClassProps_Dart>()
-          (ptr.ref.lpVtbl, tdNestedClass, ptdEnclosingClass)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(62).value)
+              .asFunction<_GetNestedClassProps_Dart>()(
+          ptr.ref.lpVtbl, tdNestedClass, ptdEnclosingClass);
 
   int GetNativeCallConvFromSig(
           Pointer<Uint8> pvSig, int cbSig, Pointer<Uint32> pCallConv) =>
       Pointer<NativeFunction<_GetNativeCallConvFromSig_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(63).value)
-          .asFunction<_GetNativeCallConvFromSig_Dart>()
-          (ptr.ref.lpVtbl, pvSig, cbSig, pCallConv)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(63).value)
+              .asFunction<_GetNativeCallConvFromSig_Dart>()(
+          ptr.ref.lpVtbl, pvSig, cbSig, pCallConv);
 
   int IsGlobal(int tk, Pointer<Int32> pbIsGlobal) =>
       Pointer<NativeFunction<_IsGlobal_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(64).value)
-          .asFunction<_IsGlobal_Dart>()(ptr.ref.lpVtbl, tk, pbIsGlobal)
-          .toUnsigned(32);
+          .asFunction<_IsGlobal_Dart>()(ptr.ref.lpVtbl, tk, pbIsGlobal);
 }

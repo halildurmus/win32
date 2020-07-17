@@ -60,34 +60,29 @@ class IShellItem extends IUnknown {
   int BindToHandler(Pointer<COMObject> pbc, Pointer<GUID> bhid,
           Pointer<GUID> riid, Pointer<IntPtr> ppv) =>
       Pointer<NativeFunction<_BindToHandler_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_BindToHandler_Dart>()
-          (ptr.ref.lpVtbl, pbc, bhid, riid, ppv)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(3).value)
+              .asFunction<_BindToHandler_Dart>()(
+          ptr.ref.lpVtbl, pbc, bhid, riid, ppv);
 
   int GetParent(Pointer<IntPtr> ppsi) =>
       Pointer<NativeFunction<_GetParent_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(4).value)
-          .asFunction<_GetParent_Dart>()(ptr.ref.lpVtbl, ppsi)
-          .toUnsigned(32);
+          .asFunction<_GetParent_Dart>()(ptr.ref.lpVtbl, ppsi);
 
   int GetDisplayName(int sigdnName, Pointer<Utf16> ppszName) =>
       Pointer<NativeFunction<_GetDisplayName_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_GetDisplayName_Dart>()
-          (ptr.ref.lpVtbl, sigdnName, ppszName)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(5).value)
+              .asFunction<_GetDisplayName_Dart>()(
+          ptr.ref.lpVtbl, sigdnName, ppszName);
 
   int GetAttributes(int sfgaoMask, Pointer<Uint32> psfgaoAttribs) =>
       Pointer<NativeFunction<_GetAttributes_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_GetAttributes_Dart>()
-          (ptr.ref.lpVtbl, sfgaoMask, psfgaoAttribs)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(6).value)
+              .asFunction<_GetAttributes_Dart>()(
+          ptr.ref.lpVtbl, sfgaoMask, psfgaoAttribs);
 
   int Compare(Pointer<COMObject> psi, int hint, Pointer<Int32> piOrder) =>
       Pointer<NativeFunction<_Compare_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_Compare_Dart>()(ptr.ref.lpVtbl, psi, hint, piOrder)
-          .toUnsigned(32);
+          .asFunction<_Compare_Dart>()(ptr.ref.lpVtbl, psi, hint, piOrder);
 }

@@ -68,15 +68,14 @@ class INetworkListManager extends IDispatch {
 
   int GetNetworks(int Flags, Pointer<IntPtr> ppEnumNetwork) =>
       Pointer<NativeFunction<_GetNetworks_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_GetNetworks_Dart>()(ptr.ref.lpVtbl, Flags, ppEnumNetwork)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(7).value)
+              .asFunction<_GetNetworks_Dart>()(
+          ptr.ref.lpVtbl, Flags, ppEnumNetwork);
 
   int GetNetworkConnections(Pointer<IntPtr> ppEnum) =>
       Pointer<NativeFunction<_GetNetworkConnections_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(9).value)
-          .asFunction<_GetNetworkConnections_Dart>()(ptr.ref.lpVtbl, ppEnum)
-          .toUnsigned(32);
+          .asFunction<_GetNetworkConnections_Dart>()(ptr.ref.lpVtbl, ppEnum);
 
   int get IsConnectedToInternet {
     final retValuePtr = allocate<Int16>();
@@ -109,22 +108,19 @@ class INetworkListManager extends IDispatch {
   int GetConnectivity(Pointer<Uint32> pConnectivity) =>
       Pointer<NativeFunction<_GetConnectivity_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(13).value)
-          .asFunction<_GetConnectivity_Dart>()(ptr.ref.lpVtbl, pConnectivity)
-          .toUnsigned(32);
+          .asFunction<_GetConnectivity_Dart>()(ptr.ref.lpVtbl, pConnectivity);
 
   int SetSimulatedProfileInfo(
           Pointer<NLM_SIMULATED_PROFILE_INFO> pSimulatedInfo) =>
       Pointer<NativeFunction<_SetSimulatedProfileInfo_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(14).value)
-          .asFunction<_SetSimulatedProfileInfo_Dart>()
-          (ptr.ref.lpVtbl, pSimulatedInfo)
-          .toUnsigned(32);
+                  ptr.ref.vtable.elementAt(14).value)
+              .asFunction<_SetSimulatedProfileInfo_Dart>()(
+          ptr.ref.lpVtbl, pSimulatedInfo);
 
   int ClearSimulatedProfileInfo() =>
       Pointer<NativeFunction<_ClearSimulatedProfileInfo_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(15).value)
-          .asFunction<_ClearSimulatedProfileInfo_Dart>()(ptr.ref.lpVtbl)
-          .toUnsigned(32);
+          .asFunction<_ClearSimulatedProfileInfo_Dart>()(ptr.ref.lpVtbl);
 }
 
 /// {@category com}
@@ -136,12 +132,11 @@ class NetworkListManager extends INetworkListManager {
     final ptr = COMObject.allocate().addressOf;
 
     var hr = CoCreateInstance(
-            GUID.fromString(CLSID_NetworkListManager).addressOf,
-            nullptr,
-            CLSCTX_ALL,
-            GUID.fromString(IID_INetworkListManager).addressOf,
-            ptr.cast())
-        .toUnsigned(32);
+        GUID.fromString(CLSID_NetworkListManager).addressOf,
+        nullptr,
+        CLSCTX_ALL,
+        GUID.fromString(IID_INetworkListManager).addressOf,
+        ptr.cast());
 
     if (FAILED(hr)) throw WindowsException(hr);
     return NetworkListManager(ptr);
