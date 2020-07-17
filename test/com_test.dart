@@ -94,7 +94,7 @@ void main() {
 
       final classPtr = allocate<IntPtr>();
       final hr = dialog.QueryInterface(riid.cast(), classPtr);
-      expect(HRESULT(hr), equals(E_NOINTERFACE));
+      expect(hr, equals(E_NOINTERFACE));
 
       free(classPtr);
       free(riid);

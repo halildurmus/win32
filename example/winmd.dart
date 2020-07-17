@@ -108,7 +108,7 @@ WindowsRuntimeType ProcessToken(IMetaDataImport reader, int token) {
   var hr = reader.GetTypeDefProps(
       token, typeName, 256, nRead, tdFlags, baseClassToken);
 
-  if (hr == S_OK) {
+  if (SUCCEEDED(hr)) {
     type = WindowsRuntimeType(token, typeName.unpackString(nRead.value),
         tdFlags.value, baseClassToken.value);
 

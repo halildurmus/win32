@@ -92,7 +92,7 @@ class WbemLocator extends IWbemLocator {
         GUID.fromString(IID_IWbemLocator).addressOf,
         ptr.cast());
 
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
     return WbemLocator(ptr);
   }
 

@@ -138,7 +138,7 @@ class NetworkListManager extends INetworkListManager {
         GUID.fromString(IID_INetworkListManager).addressOf,
         ptr.cast());
 
-    if (!SUCCEEDED(hr)) throw WindowsException(hr);
+    if (FAILED(hr)) throw WindowsException(hr);
     return NetworkListManager(ptr);
   }
 
