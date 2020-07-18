@@ -67,7 +67,7 @@ void main() {
         nullptr,
         CLSCTX_ALL,
         GUID.fromString(IID_IFileSaveDialog).addressOf,
-        ptr.cast());
+        ptr);
     expect(hr, equals(S_OK));
     expect(ptr.address, isNonZero);
 
@@ -87,7 +87,7 @@ void main() {
         CLSCTX_ALL,
         nullptr,
         GUID.fromString(IID_IClassFactory).addressOf,
-        ptrFactory.cast());
+        ptrFactory);
     expect(hr, equals(S_OK));
     expect(ptrFactory.address, isNonZero);
 
