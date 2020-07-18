@@ -12,117 +12,7 @@ import 'dart:io';
 import 'dartProjection.dart';
 import 'enums.dart';
 import 'mdFile.dart';
-import 'mdMethod.dart';
 import 'utils.dart';
-
-void listTokens() {
-  final file = metadataFileContainingType('Windows.Globalization.Calendar');
-  final winmdFile = WinmdFile(file);
-
-  for (var type in winmdFile.typeDefs) {
-    print(
-        '[${toHex(type.token)}] ${type.typeName} (baseType: ${toHex(type.baseTypeToken)})');
-  }
-}
-
-void listMethods([String type = 'Windows.Globalization.Calendar']) {
-  final file = metadataFileContainingType(type);
-  final winmdFile = WinmdFile(file);
-
-  final winTypeDef = winmdFile.findTypeDef(type);
-  final methods = winTypeDef.methods;
-
-  print(methods.map(methodSignature));
-}
-
-void listParameters([String type = 'Windows.Globalization.Calendar']) {
-  final file = metadataFileContainingType(type);
-  final winmdFile = WinmdFile(file);
-
-  final winTypeDef = winmdFile.findTypeDef(type);
-  final method = winTypeDef.findMethod('HourAsPaddedString');
-
-  print('${method.methodName} has '
-      '${method.parameters.length - 1} parameter(s).');
-
-  // the zeroth parameter is the return type
-  for (var i = 1; i < method.parameters.length; i++) {
-    print('[${method.parameters[i].sequence}] ${method.parameters[i].name}');
-  }
-
-  final returnType = method.returnType;
-  print('\nreturns: ${returnType.name}');
-}
-
-void listInterfaces([String type = 'Windows.Globalization.Calendar']) {
-  final file = metadataFileContainingType(type);
-  final winmdFile = WinmdFile(file);
-
-  final winTypeDef = winmdFile.findTypeDef(type);
-
-  final interfaces = winTypeDef.interfaces;
-
-  print('$type implements:');
-  for (var interface in interfaces) {
-    print('  ${interface.typeName}');
-    listMethods(interface.typeName);
-  }
-}
-
-// [uuid(CA30221D-86D9-40FB-A26B-D44EB7CF08EA)]
-void listGUID([String type = 'Windows.Globalization.ICalendar']) {
-  final file = metadataFileContainingType(type);
-  final winmdFile = WinmdFile(file);
-
-  final winTypeDef = winmdFile.findTypeDef(type);
-  print(winTypeDef.guid);
-}
-
-String methodSignature(WinmdMethod method) {
-  final buffer = StringBuffer();
-  buffer.write('   ${method.isStatic ? 'static ' : ''}'
-      '${method.isFinal ? 'final ' : ''}'
-      '${method.isGetProperty ? '[propget] ' : ''}'
-      '${method.isSetProperty ? '[propset] ' : ''}'
-      '${method.isRTSpecialName ? 'rt_special ' : ''}'
-      '${method.returnType.typeFlag.nativeType} '
-      '${method.isProperty ? method.methodName.substring(4) : method.methodName}');
-
-  if (!method.isGetProperty) {
-    buffer.write('(${typeParams(method)})');
-  }
-
-  buffer.write(';');
-  return buffer.toString();
-}
-
-String typeParams(WinmdMethod method) => method.parameters
-    .map((param) => '${param.typeFlag.nativeType} ${param.name}')
-    .join(', ');
-
-String convertTypeToProjection(
-    [String type = 'Windows.Foundation.IAsyncInfo']) {
-  final idlProjection = StringBuffer();
-
-  final file = metadataFileContainingType(type);
-  final winTypeDef = WinmdFile(file).findTypeDef(type);
-
-  if (winTypeDef.parent.typeName == 'IInspectable') {
-    idlProjection.writeln('// vtable_start 6');
-  } else {
-    idlProjection.writeln('// vtable_start UNKNOWN');
-  }
-
-  idlProjection.writeln('[uuid(${winTypeDef.guid}]');
-  idlProjection.writeln(
-      'interface ${winTypeDef.typeName} : ${winTypeDef.parent.typeName}');
-  idlProjection.writeln('{');
-
-  idlProjection.writeln(winTypeDef.methods.map(methodSignature).join('\n'));
-  idlProjection.writeln('}');
-
-  return idlProjection.toString();
-}
 
 /// Convert enums to ints
 Parameter tidyParam(String type, Parameter param) {
@@ -171,7 +61,6 @@ Interface projectWinMdType(String type) {
       }
       retParam.nativeType = mdMethod.returnType.typeFlag.nativeType;
       retParam = tidyParam(mdMethod.returnType.typeFlag.nativeType, retParam);
-      retParam.nativeType = retParam.nativeType;
       retParam.dartType = retParam.nativeType;
       method.parameters.add(retParam);
     }
@@ -194,15 +83,20 @@ Interface projectWinMdType(String type) {
 }
 
 void main(List<String> args) {
-  final outputDirectory = Directory(args.first);
-  final types = ['Windows.Foundation.IAsyncInfo'];
-  for (var type in types) {
-    final dartProjection = projectWinMdType(type);
-    final outputFilename = type.split('.').last;
+  if (args.length == 1) {
+    final outputDirectory = Directory(args.first);
+    final types = ['Windows.Foundation.IAsyncInfo'];
+    for (var type in types) {
+      final dartProjection = projectWinMdType(type);
+      final outputFilename = type.split('.').last;
 
-    final outputFile =
-        File('${outputDirectory.uri.toFilePath()}$outputFilename.dart');
-    print('Writing:    ${outputFile.path}');
-    outputFile.writeAsStringSync(dartProjection.toString());
+      final outputFile =
+          File('${outputDirectory.uri.toFilePath()}$outputFilename.dart');
+      print('Writing:    ${outputFile.path}');
+      outputFile.writeAsStringSync(dartProjection.toString());
+    }
+  } else {
+    print('winmd <output_dir>'
+        ' -- creates a Dart projection of the types into an output directory.');
   }
 }
