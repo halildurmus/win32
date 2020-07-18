@@ -10,59 +10,68 @@ import 'package:win32/win32.dart';
 
 void writeCredential(
     {String credentialName, String userName, String password}) {
+  final userNamePtr = TEXT(userName);
+  final credNamePtr = TEXT(credentialName);
   final examplePassword = utf8.encode(password) as Uint8List;
   final blob = examplePassword.allocatePointer();
 
   final credential = CREDENTIAL.allocate()
     ..Type = CRED_TYPE_GENERIC
-    ..TargetName = TEXT(credentialName)
+    ..TargetName = credNamePtr
     ..Persist = CRED_PERSIST_LOCAL_MACHINE
-    ..UserName = TEXT(userName)
+    ..UserName = userNamePtr
     ..CredentialBlob = blob
     ..CredentialBlobSize = examplePassword.length;
-  final result = CredWrite(credential.addressOf, 0);
-  if (result != TRUE) {
-    final errorCode = GetLastError();
-    fail('Error while writing credential: $errorCode');
-  }
 
-  free(blob);
-  free(credential.addressOf);
+  try {
+    if (CredWrite(credential.addressOf, 0) != TRUE) {
+      throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
+    }
+  } finally {
+    free(blob);
+    free(credential.addressOf);
+    free(userNamePtr);
+    free(credNamePtr);
+  }
 }
 
 String readCredential(String credentialName) {
   final credPointer = allocate<Pointer<CREDENTIAL>>();
-  final result =
-      CredRead(TEXT(credentialName), CRED_TYPE_GENERIC, 0, credPointer);
-  if (result != TRUE) {
-    final errorCode = GetLastError();
-    var errorText = '$errorCode';
-    if (errorCode == ERROR_NOT_FOUND) {
-      errorText += ' Not found.';
+  final credNamePtr = TEXT(credentialName);
+
+  try {
+    if (CredRead(credNamePtr, CRED_TYPE_GENERIC, 0, credPointer) != TRUE) {
+      throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
     }
-    fail('Error ($result): $errorText');
+
+    final cred = credPointer.value.ref;
+    final blob = cred.CredentialBlob.asTypedList(cred.CredentialBlobSize);
+    final password = utf8.decode(blob);
+
+    return password;
+  } finally {
+    if (credPointer.value.address != 0) CredFree(credPointer.value);
+    free(credPointer);
+    free(credNamePtr);
   }
-  final cred = credPointer.value.ref;
-  final blob = cred.CredentialBlob.asTypedList(cred.CredentialBlobSize);
-  final password = utf8.decode(blob);
-  CredFree(credPointer.value);
-  free(credPointer);
-  return password;
 }
 
 void deleteCredential(String credentialName) {
-  final result = CredDelete(TEXT(credentialName), CRED_TYPE_GENERIC, 0);
-  if (result != TRUE) {
-    final errorCode = GetLastError();
-    fail('Error ($result): $errorCode');
+  final credNamePtr = TEXT(credentialName);
+
+  try {
+    if (CredDelete(credNamePtr, CRED_TYPE_GENERIC, 0) != TRUE) {
+      throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
+    }
+  } finally {
+    free(credNamePtr);
   }
 }
 
 void main() {
-  test('CRUD credential test', () {
+  test('Credential write / read succeeds', () {
     const credentialName = 'dart.win32.test.credential';
     const credentialValue = 'secretValue';
-    const credentialValue2 = 'anotherSecret';
 
     // create credential
     writeCredential(
@@ -73,7 +82,22 @@ void main() {
     // read
     expect(readCredential(credentialName), equals(credentialValue));
 
-    // update
+    // delete
+    deleteCredential(credentialName);
+  });
+
+  test('Credential can be updated', () {
+    const credentialName = 'dart.win32.test.credential';
+    const credentialValue = 'secretValue';
+    const credentialValue2 = 'anotherSecret';
+
+    // create credential
+    writeCredential(
+        credentialName: credentialName,
+        userName: 'userName',
+        password: credentialValue);
+
+    // update credential with a new value
     writeCredential(
         credentialName: credentialName,
         userName: 'userName',

@@ -4,6 +4,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
+import 'package:win32/src/generated/IClassFactory.dart';
 import 'package:win32/win32.dart';
 
 void main() {
@@ -69,6 +70,32 @@ void main() {
         ptr.cast());
     expect(hr, equals(S_OK));
     expect(ptr.address, isNonZero);
+
+    CoUninitialize();
+  });
+
+  test('Create COM object with CoGetClassObject', () {
+    var hr = CoInitializeEx(
+        nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+    expect(hr, equals(S_OK));
+
+    final ptrFactory = COMObject.allocate().addressOf;
+    final ptrSaveDialog = COMObject.allocate().addressOf;
+
+    hr = CoGetClassObject(
+        GUID.fromString(CLSID_FileSaveDialog).addressOf,
+        CLSCTX_ALL,
+        nullptr,
+        GUID.fromString(IID_IClassFactory).addressOf,
+        ptrFactory.cast());
+    expect(hr, equals(S_OK));
+    expect(ptrFactory.address, isNonZero);
+
+    final classFactory = IClassFactory(ptrFactory);
+    hr = classFactory.CreateInstance(nullptr,
+        GUID.fromString(IID_IFileSaveDialog).addressOf, ptrSaveDialog.cast());
+    expect(hr, equals(S_OK));
+    expect(ptrSaveDialog.address, isNonZero);
 
     CoUninitialize();
   });
