@@ -28,7 +28,7 @@ void listMethods([String type = 'Windows.Globalization.Calendar']) {
   final winTypeDef = winmdFile.findTypeDef(type);
   final methods = winTypeDef.methods;
 
-  print(methods.map(methodSignature));
+  print(methods.map(methodSignature).join('\n'));
 }
 
 void listParameters([String type = 'Windows.Globalization.Calendar']) {

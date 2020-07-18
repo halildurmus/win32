@@ -184,13 +184,13 @@ class WinmdMethod {
   void _parseParameters() {
     var paramNames = _parameterNames;
 
-    if (_parameterNames.isNotEmpty) {
+    if (paramNames.isNotEmpty) {
       final sublist = signature.sublist(hasGenericParameters == false ? 3 : 4);
       final paramTypes = ListQueue<int>.from(sublist);
 
-      // For non-void methods, paramNames includes a 0 index "result" which is the
-      // return type token. We can discard that.
-      if (paramNames.first.name == 'result') {
+      // For non-void methods, paramNames includes a return type token with a
+      // sequence of 0. We can discard that.
+      if (paramNames.first.sequence == 0) {
         paramNames = paramNames.sublist(1);
       }
 
