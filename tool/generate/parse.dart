@@ -175,6 +175,12 @@ Interface loadSource(File file) {
             method.name = method.name.substring(0, method.name.length - 1);
             interface.methods.add(method);
             isInMethod = false;
+          } else if (line.contains('(void) = 0;')) {
+            method.name = keywords[
+                keywords.indexWhere((keyword) => keyword.contains('(void)'))];
+            method.name = method.name.substring(0, method.name.length - 6);
+            interface.methods.add(method);
+            isInMethod = false;
           }
         } else if (interface.sourceType == SourceType.idl) {
           final method = parseIdlMethod(line, lineIndex);

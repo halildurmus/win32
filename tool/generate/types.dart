@@ -17,8 +17,8 @@ const typeMappings = <String, String>{
   'char': 'Int8',
 
   // Windows numerics
-  'LONGLONG': 'Int64', 'INT64': 'Int64',
-  'ULONGLONG': 'Uint64', 'UINT64': 'Uint64',
+  'LONGLONG': 'Int64', 'INT64': 'Int64', 'LARGE_INTEGER': 'Int64',
+  'ULONGLONG': 'Uint64', 'UINT64': 'Uint64', 'ULARGE_INTEGER': 'Uint64',
   'LONG': 'Int32', 'INT': 'Int32', 'INT32': 'Int32',
   'UINT': 'Uint32', 'UINT32': 'Uint32', 'DWORD': 'Uint32', 'ULONG': 'Uint32',
   'SHORT': 'Int16', 'INT16': 'Int16', 'WORD': 'Uint16', 'UINT16': 'Uint16',
@@ -53,6 +53,7 @@ const typeMappings = <String, String>{
   'WNDPROC': 'IntPtr',
 
   // Structs and enums
+  'BIND_OPTS': 'BIND_OPTS',
   'CDCONTROLSTATEF': 'Int32',
   'CIMTYPE': 'Int32',
   'CLSID': 'CLSID',
@@ -67,6 +68,7 @@ const typeMappings = <String, String>{
   'EXCEPINFO': 'EXCEPINFO',
   'FDAP': 'Uint32',
   'FFFP_MODE': 'Int32',
+  'FILE_USAGE_TYPE': 'Int32',
   'FILEOPENDIALOGOPTIONS': 'Uint32',
   'FILETIME': 'FILETIME',
   'FOLDERTYPEID': 'GUID',
@@ -97,6 +99,7 @@ const typeMappings = <String, String>{
   'SICHINTF': 'Uint32',
   'SIGDN': 'Uint32',
   'SIATTRIBFLAGS': 'Uint32',
+  'STATSTG': 'STATSTG',
   'VARIANT': 'VARIANT_POINTER', // NOTE: This projection is incomplete
   'VARIANT_BOOL': 'Int16',
 
@@ -149,22 +152,28 @@ const typeMappings = <String, String>{
 
   // Interfaces
   'IBindCtx': 'COMObject',
+  'IEnumMoniker': 'COMObject',
   'IEnumNetworks': 'COMObject',
   'IEnumNetworkConnections': 'COMObject',
   'IEnumShellItems': 'COMObject',
+  'IEnumString': 'COMObject',
   'IEnumVARIANT': 'COMObject',
   'IEnumWbemClassObject': 'COMObject',
   'IFileDialogEvents': 'COMObject',
   'IFileOperationProgressSink': 'COMObject',
   'IKnownFolder': 'COMObject',
+  'IMoniker': 'COMObject',
   'INetwork': 'COMObject',
   'INetworkConnection': 'COMObject',
   'INetworkListManager': 'COMObject',
+  'IPersist': 'COMObject',
   'IPropertyDescriptionList': 'COMObject',
   'IPropertyStore': 'COMObject',
+  'IRunningObjectTable': 'COMObject',
   'IShellItem': 'COMObject',
   'IShellItemArray': 'COMObject',
   'IShellItemFilter': 'COMObject',
+  'IStream': 'COMObject',
   'ITypeInfo': 'COMObject',
   'IUnknown': 'COMObject',
   'IWbemCallResult': 'COMObject',

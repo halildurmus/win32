@@ -64,6 +64,16 @@ void main() {
     CoUninitialize();
   });
 
+  test('Create COM object through class method', () {
+    var hr = CoInitializeEx(
+        nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+    expect(hr, equals(S_OK));
+
+    expect(() => FileOpenDialog.createInstance(), returnsNormally);
+
+    CoUninitialize();
+  });
+
   group('COM object tests', () {
     FileOpenDialog dialog;
     setUp(() {
