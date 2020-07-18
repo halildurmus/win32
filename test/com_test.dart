@@ -45,7 +45,7 @@ void main() {
     free(guid.addressOf);
   });
 
-  test('Create COM object without calling CoInitialize()', () {
+  test('Create COM object without calling CoInitialize should fail', () {
     expect(
         () => FileOpenDialog.createInstance(),
         throwsA(isA<WindowsException>()
@@ -54,12 +54,21 @@ void main() {
                 contains('CoInitialize has not been called.'))));
   });
 
-  test('Create COM object successfully', () {
+  test('Create COM object with CoCreateInstance', () {
     var hr = CoInitializeEx(
         nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
     expect(hr, equals(S_OK));
 
-    expect(() => FileOpenDialog.createInstance(), returnsNormally);
+    final ptr = COMObject.allocate().addressOf;
+
+    hr = CoCreateInstance(
+        GUID.fromString(CLSID_FileSaveDialog).addressOf,
+        nullptr,
+        CLSCTX_ALL,
+        GUID.fromString(IID_IFileSaveDialog).addressOf,
+        ptr.cast());
+    expect(hr, equals(S_OK));
+    expect(ptr.address, isNonZero);
 
     CoUninitialize();
   });
