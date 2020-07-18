@@ -25,6 +25,11 @@ final CoCreateInstance =
         'CoCreateInstance');
 
 /// {@category ole32}
+final CoGetClassObject =
+    _ole32.lookupFunction<coGetClassObjectNative, coGetClassObjectDart>(
+        'CoGetClassObject');
+
+/// {@category ole32}
 final CoInitializeEx = _ole32
     .lookupFunction<coInitializeExNative, coInitializeExDart>('CoInitializeEx');
 

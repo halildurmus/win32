@@ -237,6 +237,30 @@ class STARTUPINFO extends Struct {
     ..hStdError = 0;
 }
 
+// typedef struct tagBIND_OPTS
+//     {
+//     DWORD cbStruct;
+//     DWORD grfFlags;
+//     DWORD grfMode;
+//     DWORD dwTickCountDeadline;
+//     } 	BIND_OPTS;
+class BIND_OPTS extends Struct {
+  @Uint32()
+  int cbStruct;
+  @Uint32()
+  int grfFlags;
+  @Uint32()
+  int grfMode;
+  @Uint32()
+  int dwTickCountDeadline;
+
+  factory BIND_OPTS.allocate() => allocate<BIND_OPTS>().ref
+    ..cbStruct = 0
+    ..grfFlags = 0
+    ..grfMode = 0
+    ..dwTickCountDeadline = 0;
+}
+
 // typedef struct _SYSTEM_POWER_STATUS {
 //   BYTE  ACLineStatus;
 //   BYTE  BatteryFlag;
@@ -2387,6 +2411,8 @@ class SAFEARRAY extends Struct {}
 
 /// {@category Struct}
 class CLSID extends Struct {}
+
+class STATSTG extends Struct {}
 
 /// {@category Struct}
 class NLM_SIMULATED_PROFILE_INFO extends Struct {}

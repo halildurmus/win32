@@ -4,6 +4,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
+import 'package:win32/src/generated/IClassFactory.dart';
 import 'package:win32/win32.dart';
 
 void main() {
@@ -45,7 +46,7 @@ void main() {
     free(guid.addressOf);
   });
 
-  test('Create COM object without calling CoInitialize()', () {
+  test('Create COM object without calling CoInitialize should fail', () {
     expect(
         () => FileOpenDialog.createInstance(),
         throwsA(isA<WindowsException>()
@@ -54,7 +55,52 @@ void main() {
                 contains('CoInitialize has not been called.'))));
   });
 
-  test('Create COM object successfully', () {
+  test('Create COM object with CoCreateInstance', () {
+    var hr = CoInitializeEx(
+        nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+    expect(hr, equals(S_OK));
+
+    final ptr = COMObject.allocate().addressOf;
+
+    hr = CoCreateInstance(
+        GUID.fromString(CLSID_FileSaveDialog).addressOf,
+        nullptr,
+        CLSCTX_ALL,
+        GUID.fromString(IID_IFileSaveDialog).addressOf,
+        ptr);
+    expect(hr, equals(S_OK));
+    expect(ptr.address, isNonZero);
+
+    CoUninitialize();
+  });
+
+  test('Create COM object with CoGetClassObject', () {
+    var hr = CoInitializeEx(
+        nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+    expect(hr, equals(S_OK));
+
+    final ptrFactory = COMObject.allocate().addressOf;
+    final ptrSaveDialog = COMObject.allocate().addressOf;
+
+    hr = CoGetClassObject(
+        GUID.fromString(CLSID_FileSaveDialog).addressOf,
+        CLSCTX_ALL,
+        nullptr,
+        GUID.fromString(IID_IClassFactory).addressOf,
+        ptrFactory);
+    expect(hr, equals(S_OK));
+    expect(ptrFactory.address, isNonZero);
+
+    final classFactory = IClassFactory(ptrFactory);
+    hr = classFactory.CreateInstance(nullptr,
+        GUID.fromString(IID_IFileSaveDialog).addressOf, ptrSaveDialog.cast());
+    expect(hr, equals(S_OK));
+    expect(ptrSaveDialog.address, isNonZero);
+
+    CoUninitialize();
+  });
+
+  test('Create COM object through class method', () {
     var hr = CoInitializeEx(
         nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
     expect(hr, equals(S_OK));

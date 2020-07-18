@@ -7,6 +7,7 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
+import 'com/combase.dart';
 import 'structs.dart';
 
 // BOOL ActivateActCtx(
@@ -205,13 +206,33 @@ typedef coCreateInstanceNative = Int32 Function(
     Pointer<IntPtr> pUnkOuter,
     Uint32 dwClsContext,
     Pointer<GUID> riid,
-    Pointer<IntPtr> ppv);
+    Pointer<COMObject> ppv);
 typedef coCreateInstanceDart = int Function(
     Pointer<GUID> rclsid,
     Pointer<IntPtr> pUnkOuter,
     int dwClsContext,
     Pointer<GUID> riid,
-    Pointer<IntPtr> ppv);
+    Pointer<COMObject> ppv);
+
+// HRESULT CoGetClassObject(
+//   REFCLSID rclsid,
+//   DWORD    dwClsContext,
+//   LPVOID   pvReserved,
+//   REFIID   riid,
+//   LPVOID   *ppv
+// );
+typedef coGetClassObjectNative = Int32 Function(
+    Pointer<GUID> rclsid,
+    Uint32 dwClsContext,
+    Pointer pvReserved,
+    Pointer<GUID> riid,
+    Pointer<COMObject> ppv);
+typedef coGetClassObjectDart = int Function(
+    Pointer<GUID> rclsid,
+    int dwClsContext,
+    Pointer pvReserved,
+    Pointer<GUID> riid,
+    Pointer<COMObject> ppv);
 
 // HRESULT CoInitializeEx(
 //   LPVOID pvReserved,
