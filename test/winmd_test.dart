@@ -56,7 +56,7 @@ void main() {
       expect(methods[75].isVirtual, isTrue);
       expect(methods[75].isSpecialName, isFalse);
       expect(methods[75].isRTSpecialName, isFalse);
-    }, skip: "Can't yet parse entire Calendar class");
+    });
 
     test('Find interfaces returns sane results', () {
       final type = 'Windows.UI.Xaml.Controls.Button';
