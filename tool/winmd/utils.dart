@@ -15,6 +15,11 @@ class WinmdException implements Exception {
   String toString() => 'WinmdException: $message';
 }
 
+extension CamelCaseConversion on String {
+  String toCamelCase() =>
+      length >= 2 ? substring(0, 1).toLowerCase() + substring(1) : this;
+}
+
 String toHex(int value32) =>
     '0x${value32.toUnsigned(32).toRadixString(16).padLeft(8, '0')}';
 

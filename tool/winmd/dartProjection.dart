@@ -37,7 +37,7 @@ class Interface {
   String get headerAsString {
     final buffer = StringBuffer();
     buffer.writeln('''
-// $name.dart
+// $shortName.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -99,11 +99,16 @@ import '../winrt/winrt_constants.dart';
         if (method.parameters.isNotEmpty) {
           buffer.writeln(',');
         }
-        for (var idx = 0; idx < method.parameters.length; idx++) {
+        if (method.name.startsWith('get_')) {
           buffer.write(
-              '  ${method.parameters[idx].nativeType} ${method.parameters[idx].name}');
-          if (idx < method.parameters.length - 1) buffer.write(', ');
-          buffer.writeln();
+              '  Pointer<${method.parameters.first.nativeType}> ${method.parameters.first.name}');
+        } else {
+          for (var idx = 0; idx < method.parameters.length; idx++) {
+            buffer.write(
+                '  ${method.parameters[idx].nativeType} ${method.parameters[idx].name}');
+            if (idx < method.parameters.length - 1) buffer.write(', ');
+            buffer.writeln();
+          }
         }
         buffer.writeln(');');
 
@@ -114,11 +119,16 @@ import '../winrt/winrt_constants.dart';
         if (method.parameters.isNotEmpty) {
           buffer.writeln(',');
         }
-        for (var idx = 0; idx < method.parameters.length; idx++) {
+        if (method.name.startsWith('get_')) {
           buffer.write(
-              '  ${method.parameters[idx].dartType} ${method.parameters[idx].name}');
-          if (idx < method.parameters.length - 1) buffer.write(', ');
-          buffer.writeln();
+              '  Pointer<${method.parameters.first.nativeType}> ${method.parameters.first.name}');
+        } else {
+          for (var idx = 0; idx < method.parameters.length; idx++) {
+            buffer.write(
+                '  ${method.parameters[idx].dartType} ${method.parameters[idx].name}');
+            if (idx < method.parameters.length - 1) buffer.write(', ');
+            buffer.writeln();
+          }
         }
         buffer.writeln(');');
         buffer.writeln();
@@ -225,7 +235,7 @@ import '../winrt/winrt_constants.dart';
 
     buffer.writeln('  ${method.returnTypeDart} get $exposedMethodName {');
     buffer.writeln(
-        '    final retValuePtr = allocate<${method.returnTypeNative}>();');
+        '    final retValuePtr = allocate<${method.parameters.first.nativeType}>();');
     buffer.writeln();
     buffer.writeln(
         '    final hr = Pointer<NativeFunction<_${method.name}_Native>>.fromAddress(');

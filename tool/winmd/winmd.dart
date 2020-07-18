@@ -10,6 +10,7 @@
 import 'dart:io';
 
 import 'dartProjection.dart';
+import 'enums.dart';
 import 'mdFile.dart';
 import 'mdMethod.dart';
 import 'utils.dart';
@@ -123,6 +124,25 @@ String convertTypeToProjection(
   return idlProjection.toString();
 }
 
+/// Convert enums to ints
+Parameter tidyParam(String type, Parameter param) {
+  // TODO: This shouldn't be done by inspecting the type; we should be checking
+  // whether the type is an enum, and if so, what it corresponds to. This is a
+  // quick and dirty hack to get us up and running.
+
+  if (['Windows.Foundation.AsyncStatus'].contains(type)) {
+    param.dartType = 'int';
+    param.nativeType = 'Int32';
+  }
+
+  if (['Windows.Foundation.HResult'].contains(type)) {
+    param.dartType = 'int';
+    param.nativeType = 'Uint32';
+  }
+
+  return param;
+}
+
 Interface projectWinMdType(String type) {
   final mdFile = metadataFileContainingType(type);
   final mdTypeDef = WinmdFile(mdFile).findTypeDef(type);
@@ -137,14 +157,32 @@ Interface projectWinMdType(String type) {
   for (var mdMethod in mdTypeDef.methods) {
     final method = Method();
     method.name = mdMethod.methodName;
-    method.returnTypeDart = mdMethod.returnType.typeFlag.dartType;
-    method.returnTypeNative = mdMethod.returnType.typeFlag.nativeType;
+    method.returnTypeNative = 'Int32';
+    method.returnTypeDart = 'int';
+
+    // return value is passed as an outparam
+    if (mdMethod.returnType.typeFlag.corType !=
+        CorElementType.ELEMENT_TYPE_VOID) {
+      var retParam = Parameter();
+      if (mdMethod.isProperty) {
+        retParam.name = method.name.substring(4).toCamelCase();
+      } else {
+        retParam.name = method.name;
+      }
+      retParam.nativeType = mdMethod.returnType.typeFlag.nativeType;
+      retParam = tidyParam(mdMethod.returnType.typeFlag.nativeType, retParam);
+      retParam.nativeType = retParam.nativeType;
+      retParam.dartType = retParam.nativeType;
+      method.parameters.add(retParam);
+    }
 
     for (var mdParam in mdMethod.parameters) {
-      final param = Parameter();
+      var param = Parameter();
       param.name = mdParam.name;
+
       param.dartType = mdParam.typeFlag.dartType;
       param.nativeType = mdParam.typeFlag.nativeType;
+      param = tidyParam(mdParam.typeFlag.dartType, param);
 
       method.parameters.add(param);
     }
@@ -155,18 +193,16 @@ Interface projectWinMdType(String type) {
   return interface;
 }
 
-void main() {
-  // print(convertTypeToProjection());
-  final type = 'Windows.Foundation.IAsyncInfo';
-  final dartProjection = projectWinMdType(type);
-  final outputDirectory = Directory('lib/src/generated2');
-  final outputFilename = type.split('.').last;
+void main(List<String> args) {
+  final outputDirectory = Directory(args.first);
+  final types = ['Windows.Foundation.IAsyncInfo'];
+  for (var type in types) {
+    final dartProjection = projectWinMdType(type);
+    final outputFilename = type.split('.').last;
 
-  final outputFile =
-      File('${outputDirectory.uri.toFilePath()}$outputFilename.dart');
-  print('Writing:    ${outputFile.path}');
-  outputFile.writeAsStringSync(dartProjection.toString());
-
-  print('Formatting: ${outputFile.path}');
-  Process.runSync('dart format', [outputFile.path], runInShell: true);
+    final outputFile =
+        File('${outputDirectory.uri.toFilePath()}$outputFilename.dart');
+    print('Writing:    ${outputFile.path}');
+    outputFile.writeAsStringSync(dartProjection.toString());
+  }
 }
