@@ -102,7 +102,7 @@ void printMethod(WinmdMethod method) {
       '${method.isSpecialName ? 'special ' : ''}'
       '${method.isRTSpecialName ? 'rt_special ' : ''}'
       '${method.callingConvention}'
-      '${method.returnType.typeFlag.toNativeType} '
+      '${method.returnType.typeFlag.nativeType} '
       '${method.methodName} (');
 
   // if (method.parameters.length != method.parameterNames.length - 1) {
@@ -119,19 +119,31 @@ void printMethod(WinmdMethod method) {
   // }
 }
 
-void main() {
+void printTypeParams() {
   final type = 'Windows.Foundation.IAsyncInfo';
   final file = metadataFileContainingType(type);
   final winmdFile = WinmdFile(file);
 
   final winTypeDef = winmdFile.findTypeDef(type);
   print(winTypeDef.typeName);
-  final mapns = winTypeDef.findMethod('get_Id');
+  final mapns = winTypeDef.findMethod('get_ErrorCode');
   print(mapns.methodName);
   print(mapns.parameters.length);
   print(mapns.signature.map((entry) => entry.toHexString(8)));
-  print('returns ${mapns.returnType.typeFlag.toNativeType}');
+  print('returns ${mapns.returnType.typeFlag.nativeType}');
   for (var param in mapns.parameters) {
-    print('${param.typeFlag.toNativeType} ${param.name}');
+    print('${param.typeFlag.nativeType} ${param.name}');
   }
+}
+
+void getAsyncStatusToken() {
+  final file = metadataFileContainingType('Windows.Foundation.AsyncStatus');
+  final winmdFile = WinmdFile(file);
+
+  final type = winmdFile.findTypeDef('Windows.Foundation.AsyncStatus');
+  print(type.token.toHexString(32));
+}
+
+void main() {
+  printTypeParams();
 }

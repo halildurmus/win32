@@ -3,7 +3,6 @@
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
-import '../tool/winmd/constants.dart';
 import '../tool/winmd/enums.dart';
 import '../tool/winmd/mdFile.dart';
 import '../tool/winmd/utils.dart';
@@ -58,19 +57,6 @@ void main() {
       expect(methods[75].isSpecialName, isFalse);
       expect(methods[75].isRTSpecialName, isFalse);
     }, skip: "Can't yet parse entire Calendar class");
-
-    test('findMethod lookup failure', () {
-      final file = metadataFileContainingType('Windows.Globalization.Calendar');
-      final winmdFile = WinmdFile(file);
-
-      final winTypeDef =
-          winmdFile.findTypeDef('Windows.Globalization.Calendar');
-
-      expect(
-          () => winTypeDef.findMethod('HourAsPaddedString2'),
-          throwsA(isA<COMException>().having(
-              (error) => error.hr, 'HRESULT', equals(CLDB_E_RECORD_NOTFOUND))));
-    });
 
     test('Find interfaces returns sane results', () {
       final type = 'Windows.UI.Xaml.Controls.Button';
@@ -196,6 +182,37 @@ void main() {
       expect(method.isSetProperty, isFalse);
       expect(method.isGetProperty, isTrue);
       expect(method.parameters.length, equals(0));
+    });
+
+    test('IAsyncInfo.Status get property is correct', () {
+      final type = 'Windows.Foundation.IAsyncInfo';
+      final file = metadataFileContainingType(type);
+      final winmdFile = WinmdFile(file);
+
+      final winTypeDef = winmdFile.findTypeDef(type);
+      final method = winTypeDef.findMethod('get_Status');
+
+      expect(method.returnType.typeFlag.corType,
+          equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+      expect(method.returnType.typeFlag.nativeType,
+          equals('Windows.Foundation.AsyncStatus'));
+      expect(method.returnType.typeFlag.dartType,
+          equals('Windows.Foundation.AsyncStatus'));
+      expect(method.isSpecialName, isTrue);
+      expect(method.isProperty, isTrue);
+      expect(method.isSetProperty, isFalse);
+      expect(method.isGetProperty, isTrue);
+      expect(method.parameters.length, equals(0));
+    });
+
+    test('findMethod() fails gracefully', () {
+      final type = 'Windows.Globalization.ICalendar';
+      final file = metadataFileContainingType(type);
+      final winmdFile = WinmdFile(file);
+
+      final winTypeDef = winmdFile.findTypeDef(type);
+      final method = winTypeDef.findMethod('whoLetTheDogsOut');
+      expect(method, isNull);
     });
   }
 }

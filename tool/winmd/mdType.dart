@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+import 'constants.dart';
 import 'enums.dart';
 import 'mdFile.dart';
 import 'mdMethod.dart';
@@ -190,6 +191,8 @@ class WinmdType {
       final hr = reader.FindMethod(token, szName, nullptr, 0, pmb);
       if (SUCCEEDED(hr)) {
         methodToken = WinmdMethod.fromToken(reader, pmb.value);
+      } else if (hr == CLDB_E_RECORD_NOTFOUND) {
+        return null;
       } else {
         throw COMException(hr);
       }

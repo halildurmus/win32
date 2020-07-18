@@ -1,6 +1,5 @@
 import 'dart:ffi';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
@@ -11,6 +10,9 @@ class WinmdException implements Exception {
   final String message;
 
   WinmdException(this.message);
+
+  @override
+  String toString() => 'WinmdException: $message';
 }
 
 String toHex(int value32) =>
@@ -52,37 +54,65 @@ bool tokenIsTypeRef(int token) =>
     token & CorTokenType.mdtTypeRef == CorTokenType.mdtTypeRef;
 bool tokenIsTypeDef(int token) =>
     token & CorTokenType.mdtTypeDef == CorTokenType.mdtTypeDef;
+bool tokenIsTypeSpec(int token) =>
+    token & CorTokenType.mdtTypeSpec == CorTokenType.mdtTypeSpec;
 
-int corSigUncompressData(Uint8List pBytes) {
-  int pDataOut;
+class UncompressedData {
+  int data;
+  int dataLength;
 
-  // Smallest.
+  UncompressedData(this.data, this.dataLength);
+}
+
+UncompressedData corSigUncompressData(List<int> pBytes) {
+  // Smallest -- one byte
   if ((pBytes[0] & 0x80) == 0x00) // 0??? ????
   {
-    pDataOut = pBytes[0];
+    return UncompressedData(pBytes[0], 1);
   }
-  // Medium.
+  // Medium -- two bytes
   else if ((pBytes[0] & 0xC0) == 0x80) // 10?? ????
   {
     if (pBytes.length < 2) {
       throw WinmdException('Bad signature');
     } else {
-      pDataOut = (((pBytes[0] & 0x3f) << 8 | pBytes[1]));
+      return UncompressedData((((pBytes[0] & 0x3f) << 8 | pBytes[1])), 2);
     }
-  } else if ((pBytes[0] & 0xE0) == 0xC0) // 110? ????
+  }
+  // Large -- four bytes
+  else if ((pBytes[0] & 0xE0) == 0xC0) // 110? ????
   {
     if (pBytes.length < 4) {
       throw WinmdException('Bad signature');
     } else {
-      pDataOut = (((pBytes[0] & 0x1f) << 24 |
-          (pBytes[1]) << 16 |
-          (pBytes[2]) << 8 |
-          (pBytes[3])));
+      return UncompressedData(
+          ((pBytes[0] & 0x1f) << 24 |
+              (pBytes[1]) << 16 |
+              (pBytes[2]) << 8 |
+              (pBytes[3])),
+          4);
     }
   } else // We don't recognize this encoding
   {
     throw WinmdException('Bad signature');
   }
+}
 
-  return pDataOut;
+int unencodeDefRefSpecToken(int encoded) {
+  var token = encoded >> 2;
+
+  if (encoded & 0x03 == 0x00) {
+    // typedef
+    return CorTokenType.mdtTypeDef | token;
+  }
+  if (encoded & 0x03 == 0x01) {
+    // typeref
+    return CorTokenType.mdtTypeRef | token;
+  }
+  if (encoded & 0x03 == 0x02) {
+    // typespec
+    return CorTokenType.mdtTypeSpec | token;
+  } else {
+    return 0;
+  }
 }

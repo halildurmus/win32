@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:ffi';
 import 'dart:typed_data';
 
@@ -7,6 +8,8 @@ import 'package:win32/win32.dart';
 import 'constants.dart';
 import 'enums.dart';
 import 'mdParameter.dart';
+import 'mdType.dart';
+import 'utils.dart';
 import 'windowsType.dart';
 
 class WinmdMethod {
@@ -103,8 +106,7 @@ class WinmdMethod {
     WinmdParameter parameter;
 
     if (isGetProperty) {
-      returnType =
-          WinmdParameter.fromType(reader, WindowsRuntimeType(signature[2]));
+      returnType = _parseBlob(signature.sublist(2));
     } else if (isSetProperty) {
       returnType = WinmdParameter.fromVoid(reader);
     } else {
@@ -142,6 +144,30 @@ class WinmdMethod {
     }
   }
 
+  WinmdParameter _parseBlob(Uint8List blob) {
+    final paramTypes = ListQueue<int>.from(blob);
+
+    final paramType = paramTypes.removeFirst();
+    if (paramType == 0x11) {
+      // valuetype
+      final uncompressed = corSigUncompressData(paramTypes.toList());
+      for (var idx = 0; idx < uncompressed.dataLength; idx++) {
+        paramTypes.removeFirst();
+      }
+      // print(uncompressed.data.toHexString(uncompressed.dataLength * 8));
+      final token = unencodeDefRefSpecToken(uncompressed.data);
+      // print(token.toHexString(32));
+      final tokenAsType = WinmdType.fromToken(reader, token);
+      // print(tokenAsType.typeName);
+      return WinmdParameter.fromType(
+          reader,
+          WindowsRuntimeType(paramType)
+            ..dartType = tokenAsType.typeName
+            ..nativeType = tokenAsType.typeName);
+    }
+    return WinmdParameter.fromType(reader, WindowsRuntimeType(paramType));
+  }
+
   String get callingConvention {
     final retVal = StringBuffer();
     final cc = signature[0];
@@ -155,20 +181,12 @@ class WinmdMethod {
     return retVal.toString();
   }
 
-  // void _setReturnType() {
-  //   returnType = (hasGenericParameters == false
-  //       ? WindowsRuntimeType(signature[2])
-  //       : WindowsRuntimeType(signature[3]));
-  // }
-
   void _parseParameters() {
     var paramNames = _parameterNames;
 
     if (_parameterNames.isNotEmpty) {
-      var paramTypes = signature
-          .sublist(hasGenericParameters == false ? 3 : 4)
-          .map((e) => WindowsRuntimeType(e))
-          .toList();
+      final sublist = signature.sublist(hasGenericParameters == false ? 3 : 4);
+      final paramTypes = ListQueue<int>.from(sublist);
 
       // For non-void methods, paramNames includes a 0 index "result" which is the
       // return type token. We can discard that.
@@ -177,7 +195,14 @@ class WinmdMethod {
       }
 
       for (var idx = 0; idx < paramNames.length; idx++) {
-        paramNames[idx].typeFlag = paramTypes[idx];
+        final paramType = paramTypes.removeFirst();
+        if (paramType == 0x11) {
+          // final uncompressed = corSigUncompressData(paramTypes.toList());
+          // final token = unencodeDefRefSpecToken(uncompressed);
+          // final tokenAsType = WinmdType.fromToken(reader, token);
+          // print(tokenAsType.typeName);
+        }
+        paramNames[idx].typeFlag = WindowsRuntimeType(paramType);
       }
     }
 
