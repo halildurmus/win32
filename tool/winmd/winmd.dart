@@ -1,13 +1,15 @@
 // winmd.dart
 
-// Parse the WinMD file and interpret its metadata
+// Parse the Windows Metadata for a type and interpret its metadata
 
 // Sources of inspiration:
 // https://stackoverflow.com/questions/54375771/how-to-read-a-winmd-winrt-metadata-file
 // https://docs.microsoft.com/en-us/windows/win32/api/rometadataresolution/nf-rometadataresolution-rogetmetadatafile
+// https://www.ecma-international.org/publications/files/ECMA-ST/ECMA-335.pdf
 
-import 'package:win32/src/extensions/intToHexString.dart';
+import 'dart:io';
 
+import 'dartProjection.dart';
 import 'mdFile.dart';
 import 'mdMethod.dart';
 import 'utils.dart';
@@ -29,9 +31,7 @@ void listMethods([String type = 'Windows.Globalization.Calendar']) {
   final winTypeDef = winmdFile.findTypeDef(type);
   final methods = winTypeDef.methods;
 
-  for (var method in methods) {
-    printMethod(method);
-  }
+  print(methods.map(methodSignature));
 }
 
 void listParameters([String type = 'Windows.Globalization.Calendar']) {
@@ -77,73 +77,96 @@ void listGUID([String type = 'Windows.Globalization.ICalendar']) {
   print(winTypeDef.guid);
 }
 
-void printInterface() {
-  final type = 'Windows.Globalization.ICalendar';
-  final file = metadataFileContainingType(type);
-  final winmdFile = WinmdFile(file);
-
-  final winTypeDef = winmdFile.findTypeDef(type);
-  print(winTypeDef.typeName);
-  print(winTypeDef.guid);
-  print('inherits ${winTypeDef.parent.typeName}');
-
-  for (var method in winTypeDef.methods) {
-    printMethod(method);
-  }
-}
-
-void printMethod(WinmdMethod method) {
+String methodSignature(WinmdMethod method) {
   final buffer = StringBuffer();
-  buffer.write('${method.isPublic ? 'public ' : ''}'
-      '${method.isPrivate ? 'private ' : ''}'
-      '${method.isStatic ? 'static ' : ''}'
+  buffer.write('   ${method.isStatic ? 'static ' : ''}'
       '${method.isFinal ? 'final ' : ''}'
-      '${method.isVirtual ? 'virtual ' : ''}'
-      '${method.isSpecialName ? 'special ' : ''}'
+      '${method.isGetProperty ? '[propget] ' : ''}'
+      '${method.isSetProperty ? '[propset] ' : ''}'
       '${method.isRTSpecialName ? 'rt_special ' : ''}'
-      '${method.callingConvention}'
       '${method.returnType.typeFlag.nativeType} '
-      '${method.methodName} (');
+      '${method.isProperty ? method.methodName.substring(4) : method.methodName}');
 
-  // if (method.parameters.length != method.parameterNames.length - 1) {
-  //   print('failed trying to print method ${method.methodName}');
-  //   print(
-  //       'signparams: ${method.parameters.length} / methparams: ${method.parameterNames.length}');
-  //   return;
-  // } else {
-  //   for (var idx = 0; idx < method.parameters.length; idx++) {
-  //     buffer.write('${method.parameters[idx].toNativeType} ');
-  //     buffer.write('${method.parameterNames[idx + 1].name}, ');
-  //   }
-  //   print('${buffer.toString().substring(0, buffer.length - 2)});');
-  // }
-}
-
-void printTypeParams() {
-  final type = 'Windows.Foundation.IAsyncInfo';
-  final file = metadataFileContainingType(type);
-  final winmdFile = WinmdFile(file);
-
-  final winTypeDef = winmdFile.findTypeDef(type);
-  print(winTypeDef.typeName);
-  final mapns = winTypeDef.findMethod('get_ErrorCode');
-  print(mapns.methodName);
-  print(mapns.parameters.length);
-  print(mapns.signature.map((entry) => entry.toHexString(8)));
-  print('returns ${mapns.returnType.typeFlag.nativeType}');
-  for (var param in mapns.parameters) {
-    print('${param.typeFlag.nativeType} ${param.name}');
+  if (!method.isGetProperty) {
+    buffer.write('(${typeParams(method)})');
   }
+
+  buffer.write(';');
+  return buffer.toString();
 }
 
-void getAsyncStatusToken() {
-  final file = metadataFileContainingType('Windows.Foundation.AsyncStatus');
-  final winmdFile = WinmdFile(file);
+String typeParams(WinmdMethod method) => method.parameters
+    .map((param) => '${param.typeFlag.nativeType} ${param.name}')
+    .join(', ');
 
-  final type = winmdFile.findTypeDef('Windows.Foundation.AsyncStatus');
-  print(type.token.toHexString(32));
+String convertTypeToProjection(
+    [String type = 'Windows.Foundation.IAsyncInfo']) {
+  final idlProjection = StringBuffer();
+
+  final file = metadataFileContainingType(type);
+  final winTypeDef = WinmdFile(file).findTypeDef(type);
+
+  if (winTypeDef.parent.typeName == 'IInspectable') {
+    idlProjection.writeln('// vtable_start 6');
+  } else {
+    idlProjection.writeln('// vtable_start UNKNOWN');
+  }
+
+  idlProjection.writeln('[uuid(${winTypeDef.guid}]');
+  idlProjection.writeln(
+      'interface ${winTypeDef.typeName} : ${winTypeDef.parent.typeName}');
+  idlProjection.writeln('{');
+
+  idlProjection.writeln(winTypeDef.methods.map(methodSignature).join('\n'));
+  idlProjection.writeln('}');
+
+  return idlProjection.toString();
+}
+
+Interface projectWinMdType(String type) {
+  final mdFile = metadataFileContainingType(type);
+  final mdTypeDef = WinmdFile(mdFile).findTypeDef(type);
+
+  final interface = Interface();
+  interface.sourceType = SourceType.idl; // for now
+  interface.iid = mdTypeDef.guid;
+  interface.name = mdTypeDef.typeName;
+  interface.inherits = mdTypeDef.parent.typeName;
+  interface.vtableStart = 6; // For now, hardcode to IInspectable subclass
+
+  for (var mdMethod in mdTypeDef.methods) {
+    final method = Method();
+    method.name = mdMethod.methodName;
+    method.returnTypeDart = mdMethod.returnType.typeFlag.dartType;
+    method.returnTypeNative = mdMethod.returnType.typeFlag.nativeType;
+
+    for (var mdParam in mdMethod.parameters) {
+      final param = Parameter();
+      param.name = mdParam.name;
+      param.dartType = mdParam.typeFlag.dartType;
+      param.nativeType = mdParam.typeFlag.nativeType;
+
+      method.parameters.add(param);
+    }
+
+    interface.methods.add(method);
+  }
+
+  return interface;
 }
 
 void main() {
-  printTypeParams();
+  // print(convertTypeToProjection());
+  final type = 'Windows.Foundation.IAsyncInfo';
+  final dartProjection = projectWinMdType(type);
+  final outputDirectory = Directory('lib/src/generated');
+  final outputFilename = type.split('.').last;
+
+  final outputFile =
+      File('${outputDirectory.uri.toFilePath()}$outputFilename.dart');
+  print('Writing:    ${outputFile.path}');
+  outputFile.writeAsStringSync(dartProjection.toString());
+
+  print('Formatting: ${outputFile.path}');
+  Process.runSync('dart format', [outputFile.path], runInShell: true);
 }

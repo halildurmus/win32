@@ -29,8 +29,7 @@ void main(List<String> args) {
       outputFile.writeAsStringSync(parsedFile.toString());
 
       print('Formatting: ${outputFile.path}');
-      Process.runSync('dartfmt', ['--overwrite', '--fix', outputFile.path],
-          runInShell: true);
+      Process.runSync('dart format', [outputFile.path], runInShell: true);
 
       print('');
     }
