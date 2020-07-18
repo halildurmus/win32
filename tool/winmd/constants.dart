@@ -1,0 +1,1 @@
+final CLDB_E_RECORD_NOTFOUND = 0x80131130.toSigned(32);

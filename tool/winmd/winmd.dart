@@ -6,6 +6,8 @@
 // https://stackoverflow.com/questions/54375771/how-to-read-a-winmd-winrt-metadata-file
 // https://docs.microsoft.com/en-us/windows/win32/api/rometadataresolution/nf-rometadataresolution-rogetmetadatafile
 
+import 'package:win32/src/extensions/intToHexString.dart';
+
 import 'mdFile.dart';
 import 'mdMethod.dart';
 import 'utils.dart';
@@ -39,13 +41,12 @@ void listParameters([String type = 'Windows.Globalization.Calendar']) {
   final winTypeDef = winmdFile.findTypeDef(type);
   final method = winTypeDef.findMethod('HourAsPaddedString');
 
-  final parameters = method.parameterNames;
   print('${method.methodName} has '
-      '${parameters.length - 1} parameter(s).');
+      '${method.parameters.length - 1} parameter(s).');
 
   // the zeroth parameter is the return type
-  for (var i = 1; i < parameters.length; i++) {
-    print('[${parameters[i].sequence}] ${parameters[i].name}');
+  for (var i = 1; i < method.parameters.length; i++) {
+    print('[${method.parameters[i].sequence}] ${method.parameters[i].name}');
   }
 
   final returnType = method.returnType;
@@ -101,23 +102,36 @@ void printMethod(WinmdMethod method) {
       '${method.isSpecialName ? 'special ' : ''}'
       '${method.isRTSpecialName ? 'rt_special ' : ''}'
       '${method.callingConvention}'
-      '${method.returnTypeNative.toNativeType} '
+      '${method.returnType.typeFlag.toNativeType} '
       '${method.methodName} (');
 
-  if (method.parameters.length != method.parameterNames.length - 1) {
-    print('failed trying to print method ${method.methodName}');
-    print(
-        'signparams: ${method.parameters.length} / methparams: ${method.parameterNames.length}');
-    return;
-  } else {
-    for (var idx = 0; idx < method.parameters.length; idx++) {
-      buffer.write('${method.parameters[idx].toNativeType} ');
-      buffer.write('${method.parameterNames[idx + 1].name}, ');
-    }
-    print('${buffer.toString().substring(0, buffer.length - 2)});');
-  }
+  // if (method.parameters.length != method.parameterNames.length - 1) {
+  //   print('failed trying to print method ${method.methodName}');
+  //   print(
+  //       'signparams: ${method.parameters.length} / methparams: ${method.parameterNames.length}');
+  //   return;
+  // } else {
+  //   for (var idx = 0; idx < method.parameters.length; idx++) {
+  //     buffer.write('${method.parameters[idx].toNativeType} ');
+  //     buffer.write('${method.parameterNames[idx + 1].name}, ');
+  //   }
+  //   print('${buffer.toString().substring(0, buffer.length - 2)});');
+  // }
 }
 
 void main() {
-  printInterface();
+  final type = 'Windows.Foundation.IAsyncInfo';
+  final file = metadataFileContainingType(type);
+  final winmdFile = WinmdFile(file);
+
+  final winTypeDef = winmdFile.findTypeDef(type);
+  print(winTypeDef.typeName);
+  final mapns = winTypeDef.findMethod('get_Id');
+  print(mapns.methodName);
+  print(mapns.parameters.length);
+  print(mapns.signature.map((entry) => entry.toHexString(8)));
+  print('returns ${mapns.returnType.typeFlag.toNativeType}');
+  for (var param in mapns.parameters) {
+    print('${param.typeFlag.toNativeType} ${param.name}');
+  }
 }
