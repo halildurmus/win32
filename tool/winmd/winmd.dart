@@ -159,7 +159,7 @@ void main() {
   // print(convertTypeToProjection());
   final type = 'Windows.Foundation.IAsyncInfo';
   final dartProjection = projectWinMdType(type);
-  final outputDirectory = Directory('lib/src/generated');
+  final outputDirectory = Directory('lib/src/generated2');
   final outputFilename = type.split('.').last;
 
   final outputFile =

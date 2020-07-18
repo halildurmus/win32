@@ -72,10 +72,10 @@ import '../winrt/winrt_constants.dart';
     final buffer = StringBuffer();
     if (generateClass) {
       buffer.writeln('/// @nodoc');
-      buffer.writeln("const CLSID_$className = '{${clsid.toString()}}';");
+      buffer.writeln("const CLSID_$className = '${clsid.toString()}';");
     }
     buffer.writeln('/// @nodoc');
-    buffer.writeln("const IID_$shortName = '{${iid.toString()}}';\n");
+    buffer.writeln("const IID_$shortName = '${iid.toString()}';\n");
     return buffer.toString();
   }
 
@@ -139,9 +139,9 @@ import '../winrt/winrt_constants.dart';
       buffer.writeln('/// {@category com}');
     }
     if (inherits == '') {
-      buffer.writeln('class $name {');
+      buffer.writeln('class $shortName {');
     } else {
-      buffer.writeln('class $name extends $inherits {');
+      buffer.writeln('class $shortName extends $inherits {');
     }
 
     buffer.writeln('''
@@ -153,7 +153,7 @@ import '../winrt/winrt_constants.dart';
     buffer.write('''
   Pointer<COMObject> ptr;
 
-  $name(this.ptr)''');
+  $shortName(this.ptr)''');
     if (inherits.isNotEmpty) {
       buffer.write(': super(ptr)');
     }
