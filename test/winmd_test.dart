@@ -64,7 +64,7 @@ void main() {
           winmdFile.findTypeDef('Windows.Globalization.Calendar');
       final method = winTypeDef.findMethod('HourAsPaddedString');
 
-      final parameters = method.parameters;
+      final parameters = method.parameterNames;
       expect(parameters.length, equals(2));
       expect(parameters[0].name, equals('result'));
       expect(parameters[1].name, equals('minDigits'));
