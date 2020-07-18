@@ -32,6 +32,8 @@ class Interface {
 
   final methods = <Method>[];
 
+  String get shortName => name.split('.').last;
+
   String get headerAsString {
     final buffer = StringBuffer();
     buffer.writeln('''
@@ -73,7 +75,7 @@ import '../winrt/winrt_constants.dart';
       buffer.writeln("const CLSID_$className = '{${clsid.toString()}}';");
     }
     buffer.writeln('/// @nodoc');
-    buffer.writeln("const IID_$name = '{${iid.toString()}}';\n");
+    buffer.writeln("const IID_$shortName = '{${iid.toString()}}';\n");
     return buffer.toString();
   }
 
