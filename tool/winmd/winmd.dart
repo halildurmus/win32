@@ -7,6 +7,7 @@
 // https://docs.microsoft.com/en-us/windows/win32/api/rometadataresolution/nf-rometadataresolution-rogetmetadatafile
 
 import 'mdFile.dart';
+import 'mdMethod.dart';
 import 'utils.dart';
 
 void listTokens() {
@@ -26,17 +27,8 @@ void listMethods([String type = 'Windows.Globalization.Calendar']) {
   final winTypeDef = winmdFile.findTypeDef(type);
   final methods = winTypeDef.methods;
 
-  var i = 0;
   for (var method in methods) {
-    print('$i ${method.isPublic ? 'public ' : ''}'
-        '${method.isPrivate ? 'private ' : ''}'
-        '${method.isStatic ? 'static ' : ''}'
-        '${method.isFinal ? 'final ' : ''}'
-        '${method.isVirtual ? 'virtual ' : ''}'
-        '${method.isSpecialName ? 'special ' : ''}'
-        '${method.isRTSpecialName ? 'rt_special ' : ''}'
-        '${method.methodName} ');
-    i++;
+    printMethod(method);
   }
 }
 
@@ -47,7 +39,7 @@ void listParameters([String type = 'Windows.Globalization.Calendar']) {
   final winTypeDef = winmdFile.findTypeDef(type);
   final method = winTypeDef.findMethod('HourAsPaddedString');
 
-  final parameters = method.parameters;
+  final parameters = method.parameterNames;
   print('${method.methodName} has '
       '${parameters.length - 1} parameter(s).');
 
@@ -95,30 +87,37 @@ void printInterface() {
   print('inherits ${winTypeDef.parent.typeName}');
 
   for (var method in winTypeDef.methods) {
-    final buffer = StringBuffer();
-    buffer.write('${method.isPublic ? 'public ' : ''}'
-        '${method.isPrivate ? 'private ' : ''}'
-        '${method.isStatic ? 'static ' : ''}'
-        '${method.isFinal ? 'final ' : ''}'
-        '${method.isVirtual ? 'virtual ' : ''}'
-        '${method.isSpecialName ? 'special ' : ''}'
-        '${method.isRTSpecialName ? 'rt_special ' : ''}'
-        '${method.methodName} (');
+    printMethod(method);
+  }
+}
 
-    buffer.write(method.parameters.map((e) => e.name).join(', '));
-    buffer.write(')');
-    print(buffer.toString());
+void printMethod(WinmdMethod method) {
+  final buffer = StringBuffer();
+  buffer.write('${method.isPublic ? 'public ' : ''}'
+      '${method.isPrivate ? 'private ' : ''}'
+      '${method.isStatic ? 'static ' : ''}'
+      '${method.isFinal ? 'final ' : ''}'
+      '${method.isVirtual ? 'virtual ' : ''}'
+      '${method.isSpecialName ? 'special ' : ''}'
+      '${method.isRTSpecialName ? 'rt_special ' : ''}'
+      '${method.callingConvention}'
+      '${method.returnTypeNative.toNativeType} '
+      '${method.methodName} (');
+
+  if (method.parameters.length != method.parameterNames.length - 1) {
+    print('failed trying to print method ${method.methodName}');
+    print(
+        'signparams: ${method.parameters.length} / methparams: ${method.parameterNames.length}');
+    return;
+  } else {
+    for (var idx = 0; idx < method.parameters.length; idx++) {
+      buffer.write('${method.parameters[idx].toNativeType} ');
+      buffer.write('${method.parameterNames[idx + 1].name}, ');
+    }
+    print('${buffer.toString().substring(0, buffer.length - 2)});');
   }
 }
 
 void main() {
-  final type = 'Windows.Globalization.ICalendar';
-  final file = metadataFileContainingType(type);
-  final winmdFile = WinmdFile(file);
-
-  final winTypeDef = winmdFile.findTypeDef(type);
-  print(winTypeDef.typeName);
-  final mapns = winTypeDef.findMethod('MonthAsPaddedNumericString');
-  print(mapns.parameters.length);
-  print(mapns.signature);
+  printInterface();
 }

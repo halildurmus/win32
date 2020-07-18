@@ -132,7 +132,7 @@ class CorElementType {
   static const ELEMENT_TYPE_FNPTR = 0x1B;
   static const ELEMENT_TYPE_OBJECT = 0x1C;
   static const ELEMENT_TYPE_SZARRAY = 0x1D;
-  static const ELEMENT_TYPE_MVAR = 0x1e;
+  static const ELEMENT_TYPE_MVAR = 0x1E;
   static const ELEMENT_TYPE_CMOD_REQD = 0x1F;
   static const ELEMENT_TYPE_CMOD_OPT = 0x20;
   static const ELEMENT_TYPE_INTERNAL = 0x21;

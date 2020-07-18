@@ -6,6 +6,7 @@ import 'package:win32/win32.dart';
 
 import 'enums.dart';
 import 'mdParameter.dart';
+import 'windowsType.dart';
 
 class WinmdMethod {
   IMetaDataImport2 reader;
@@ -13,7 +14,7 @@ class WinmdMethod {
   int token;
   String methodName;
   int methodFlags;
-  Uint8List methodSignature;
+  Uint8List signature;
   int relativeVirtualAddress;
   int implFlags;
 
@@ -28,7 +29,7 @@ class WinmdMethod {
   bool get isRTSpecialName => _testFlag(CorMethodAttr.mdRTSpecialName);
 
   WinmdMethod(this.reader, this.token, this.methodName, this.methodFlags,
-      this.methodSignature, this.relativeVirtualAddress, this.implFlags);
+      this.signature, this.relativeVirtualAddress, this.implFlags);
 
   factory WinmdMethod.fromToken(IMetaDataImport2 reader, int token) {
     WinmdMethod method;
@@ -74,6 +75,8 @@ class WinmdMethod {
     }
   }
 
+  bool get hasGenericParameters => (signature[0] & 0x10 == 0x10);
+
   WinmdParameter get returnType {
     WinmdParameter parameter;
 
@@ -94,7 +97,29 @@ class WinmdMethod {
     return parameter;
   }
 
-  List<WinmdParameter> get parameters {
+  String get callingConvention {
+    final retVal = StringBuffer();
+    final cc = signature[0];
+
+    retVal.write('default ');
+    if (cc & 0x05 == 0x05) retVal.write('vararg ');
+    if (cc & 0x10 == 0x10) retVal.write('generic ');
+    if (cc & 0x20 == 0x20) retVal.write('instance ');
+    if (cc & 0x40 == 0x40) retVal.write('explicit ');
+
+    return retVal.toString();
+  }
+
+  WindowsRuntimeType get returnTypeNative => hasGenericParameters == false
+      ? WindowsRuntimeType(signature[2])
+      : WindowsRuntimeType(signature[3]);
+
+  List<WindowsRuntimeType> get parameters => signature
+      .sublist(hasGenericParameters == false ? 3 : 4)
+      .map((e) => WindowsRuntimeType(e))
+      .toList();
+
+  List<WinmdParameter> get parameterNames {
     final parameters = <WinmdParameter>[];
 
     final phEnum = allocate<IntPtr>()..value = 0;
@@ -117,6 +142,4 @@ class WinmdMethod {
 
     return parameters;
   }
-
-  String get signature => methodSignature.toString();
 }
