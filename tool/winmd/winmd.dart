@@ -90,7 +90,7 @@ void main(List<String> args) {
       'Windows.Foundation.IAsyncInfo',
       'Windows.Foundation.IClosable',
       'Windows.Foundation.IStringable',
-      // 'Windows.Globalization.ICalendar',
+      'Windows.Globalization.ICalendar',
       // 'Windows.Storage.Pickers.IFileOpenPicker'
     ];
     for (var type in types) {
