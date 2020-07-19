@@ -85,7 +85,14 @@ Interface projectWinMdType(String type) {
 void main(List<String> args) {
   if (args.length == 1) {
     final outputDirectory = Directory(args.first);
-    final types = ['Windows.Foundation.IAsyncInfo'];
+    final types = [
+      // 'Windows.Foundation.IAsyncAction',
+      'Windows.Foundation.IAsyncInfo',
+      'Windows.Foundation.IClosable',
+      'Windows.Foundation.IStringable',
+      // 'Windows.Globalization.ICalendar',
+      // 'Windows.Storage.Pickers.IFileOpenPicker'
+    ];
     for (var type in types) {
       final dartProjection = projectWinMdType(type);
       final outputFilename = type.split('.').last;

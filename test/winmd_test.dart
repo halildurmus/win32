@@ -184,6 +184,24 @@ void main() {
       expect(method.parameters.length, equals(0));
     });
 
+    test('Calendar.YearAsTruncatedString get property is correct', () {
+      final type = 'Windows.Globalization.ICalendar';
+      final file = metadataFileContainingType(type);
+      final winmdFile = WinmdFile(file);
+
+      final winTypeDef = winmdFile.findTypeDef(type);
+      final method = winTypeDef.findMethod('YearAsTruncatedString');
+
+      expect(method.returnType.typeFlag.corType,
+          equals(CorElementType.ELEMENT_TYPE_STRING));
+      expect(method.isSpecialName, isFalse);
+      expect(method.isProperty, isFalse);
+      expect(method.parameters.length, equals(1));
+      expect(method.parameters.first.name, equals('remainingDigits'));
+      expect(method.parameters.first.typeFlag.dartType, equals('int'));
+      expect(method.parameters.first.typeFlag.nativeType, equals('Int32'));
+    });
+
     test('IAsyncInfo.Status get property is correct', () {
       final type = 'Windows.Foundation.IAsyncInfo';
       final file = metadataFileContainingType(type);

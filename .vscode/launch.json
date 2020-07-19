@@ -6,9 +6,9 @@
     "configurations": [
         {
             "name": "Dart",
-            "program": "tool\\generate\\generate.dart",
+            "program": "tool\\winmd\\winmd.dart",
             "request": "launch",
-            "args": ["tool\\generate\\winrt", "lib\\src\\generated"],
+            "args": ["lib\\src\\generated"],
             "type": "dart"
         }
     ]
