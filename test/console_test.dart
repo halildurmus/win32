@@ -23,10 +23,15 @@ void main() {
     final bufferInfo = CONSOLE_SCREEN_BUFFER_INFO.allocate();
     final result =
         GetConsoleScreenBufferInfo(outputHandle, bufferInfo.addressOf);
-    expect(result, isNonZero);
 
-    expect(bufferInfo.dwCursorPositionX, lessThanOrEqualTo(bufferInfo.dwSizeX));
-    expect(bufferInfo.dwCursorPositionY, lessThanOrEqualTo(bufferInfo.dwSizeY));
+    // This will not be supported on a non-interactive console; skip the test if
+    // so.
+    if (result != FALSE) {
+      expect(
+          bufferInfo.dwCursorPositionX, lessThanOrEqualTo(bufferInfo.dwSizeX));
+      expect(
+          bufferInfo.dwCursorPositionY, lessThanOrEqualTo(bufferInfo.dwSizeY));
+    }
   });
 
   test('SHGetKnownFolderPath', () {
