@@ -7,6 +7,8 @@
 // https://docs.microsoft.com/en-us/windows/win32/api/rometadataresolution/nf-rometadataresolution-rogetmetadatafile
 // https://www.ecma-international.org/publications/files/ECMA-ST/ECMA-335.pdf
 
+import 'package:win32/src/extensions/intToHexString.dart';
+
 import 'mdFile.dart';
 import 'mdMethod.dart';
 import 'utils.dart';
@@ -16,8 +18,8 @@ void listTokens() {
   final winmdFile = WinmdFile(file);
 
   for (var type in winmdFile.typeDefs) {
-    print(
-        '[${toHex(type.token)}] ${type.typeName} (baseType: ${toHex(type.baseTypeToken)})');
+    print('[${type.token.toHexString(32)}] ${type.typeName} '
+        '(baseType: ${type.baseTypeToken.toHexString(32)})');
   }
 }
 

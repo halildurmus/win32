@@ -124,9 +124,9 @@ class WinmdMethod {
             // For a standard method, the return type is index 2, unless the
             // method signature includes generic parameters, in which case there
             // is an additional value in the blob.
-            parameter.typeFlag = (hasGenericParameters == false
-                ? WindowsRuntimeType(signature[2])
-                : WindowsRuntimeType(signature[3]));
+            parameter.typeFlag =
+                _parseBlob(signature.sublist(hasGenericParameters ? 3 : 2))
+                    .typeFlag;
           } else {
             print('ERROR: Invalid token');
           }
@@ -148,8 +148,8 @@ class WinmdMethod {
     final paramTypes = ListQueue<int>.from(blob);
 
     final paramType = paramTypes.removeFirst();
-    if (paramType == 0x11) {
-      // valuetype
+    if (paramType == CorElementType.ELEMENT_TYPE_VALUETYPE ||
+        paramType == CorElementType.ELEMENT_TYPE_CLASS) {
       final uncompressed = corSigUncompressData(paramTypes.toList());
       for (var idx = 0; idx < uncompressed.dataLength; idx++) {
         paramTypes.removeFirst();
@@ -159,11 +159,22 @@ class WinmdMethod {
       // print(token.toHexString(32));
       final tokenAsType = WinmdType.fromToken(reader, token);
       // print(tokenAsType.typeName);
-      return WinmdParameter.fromType(
-          reader,
-          WindowsRuntimeType(paramType)
-            ..dartType = tokenAsType.typeName
-            ..nativeType = tokenAsType.typeName);
+
+      if (paramType == CorElementType.ELEMENT_TYPE_CLASS) {
+        return WinmdParameter.fromType(
+            reader,
+            WindowsRuntimeType(paramType)
+              ..nativeType =
+                  'Pointer<${tokenAsType.parent.typeName.split('.').last}>'
+              ..dartType =
+                  'Pointer<${tokenAsType.parent.typeName.split('.').last}>');
+      } else {
+        return WinmdParameter.fromType(
+            reader,
+            WindowsRuntimeType(paramType)
+              ..nativeType = '${tokenAsType.typeName.split('.').last}'
+              ..dartType = '${tokenAsType.typeName.split('.').last}');
+      }
     }
     return WinmdParameter.fromType(reader, WindowsRuntimeType(paramType));
   }

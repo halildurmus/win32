@@ -83,27 +83,27 @@ Interface projectWinMdType(String type) {
 }
 
 void main(List<String> args) {
+  Directory outputDirectory;
   if (args.length == 1) {
-    final outputDirectory = Directory(args.first);
-    final types = [
-      // 'Windows.Foundation.IAsyncAction',
-      'Windows.Foundation.IAsyncInfo',
-      'Windows.Foundation.IClosable',
-      'Windows.Foundation.IStringable',
-      'Windows.Globalization.ICalendar',
-      // 'Windows.Storage.Pickers.IFileOpenPicker'
-    ];
-    for (var type in types) {
-      final dartProjection = projectWinMdType(type);
-      final outputFilename = type.split('.').last;
-
-      final outputFile =
-          File('${outputDirectory.uri.toFilePath()}$outputFilename.dart');
-      print('Writing:    ${outputFile.path}');
-      outputFile.writeAsStringSync(dartProjection.toString());
-    }
+    outputDirectory = Directory(args.first);
   } else {
-    print('winmd <output_dir>'
-        ' -- creates a Dart projection of the types into an output directory.');
+    outputDirectory = Directory('lib/src/generated2');
+  }
+  final types = [
+    // 'Windows.Foundation.IAsyncAction',
+    'Windows.Foundation.IAsyncInfo',
+    'Windows.Foundation.IClosable',
+    'Windows.Foundation.IStringable',
+    'Windows.Globalization.ICalendar',
+    // 'Windows.Storage.Pickers.IFileOpenPicker'
+  ];
+  for (var type in types) {
+    final dartProjection = projectWinMdType(type);
+    final outputFilename = type.split('.').last;
+
+    final outputFile =
+        File('${outputDirectory.uri.toFilePath()}$outputFilename.dart');
+    print('Writing:    ${outputFile.path}');
+    outputFile.writeAsStringSync(dartProjection.toString());
   }
 }

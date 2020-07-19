@@ -202,6 +202,22 @@ void main() {
       expect(method.parameters.first.typeFlag.nativeType, equals('Int32'));
     });
 
+    test('Calendar.Clone method is correct', () {
+      final type = 'Windows.Globalization.ICalendar';
+      final file = metadataFileContainingType(type);
+      final winmdFile = WinmdFile(file);
+
+      final winTypeDef = winmdFile.findTypeDef(type);
+      final method = winTypeDef.findMethod('Clone');
+
+      expect(method.returnType.typeFlag.corType,
+          equals(CorElementType.ELEMENT_TYPE_CLASS));
+      expect(method.returnType.name, equals('value'));
+      expect(method.isSpecialName, isFalse);
+      expect(method.isProperty, isFalse);
+      expect(method.parameters.length, equals(0));
+    });
+
     test('IAsyncInfo.Status get property is correct', () {
       final type = 'Windows.Foundation.IAsyncInfo';
       final file = metadataFileContainingType(type);
