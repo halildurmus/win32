@@ -1,43 +1,35 @@
-// winmd.dart
+// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
 
 // Parse the Windows Metadata for a type and interpret its metadata
 
-// Sources of inspiration:
-// https://stackoverflow.com/questions/54375771/how-to-read-a-winmd-winrt-metadata-file
-// https://docs.microsoft.com/en-us/windows/win32/api/rometadataresolution/nf-rometadataresolution-rogetmetadatafile
-// https://www.ecma-international.org/publications/files/ECMA-ST/ECMA-335.pdf
-
 import 'package:win32/src/extensions/intToHexString.dart';
 
-import 'mdFile.dart';
 import 'mdMethod.dart';
-import 'utils.dart';
+import 'mdReader.dart';
 
 void listTokens() {
-  final file = metadataFileContainingType('Windows.Globalization.Calendar');
-  final winmdFile = WinmdFile(file);
+  final mdScope = WinmdReader.getScopeForType('Windows.Globalization.Calendar');
 
-  for (var type in winmdFile.typeDefs) {
+  for (var type in mdScope.typeDefs) {
     print('[${type.token.toHexString(32)}] ${type.typeName} '
         '(baseType: ${type.baseTypeToken.toHexString(32)})');
   }
 }
 
 void listMethods([String type = 'Windows.Globalization.Calendar']) {
-  final file = metadataFileContainingType(type);
-  final winmdFile = WinmdFile(file);
-
-  final winTypeDef = winmdFile.findTypeDef(type);
+  final mdScope = WinmdReader.getScopeForType(type);
+  final winTypeDef = mdScope.findTypeDef(type);
   final methods = winTypeDef.methods;
 
   print(methods.map(methodSignature).join('\n'));
 }
 
 void listParameters([String type = 'Windows.Globalization.Calendar']) {
-  final file = metadataFileContainingType(type);
-  final winmdFile = WinmdFile(file);
+  final mdScope = WinmdReader.getScopeForType(type);
 
-  final winTypeDef = winmdFile.findTypeDef(type);
+  final winTypeDef = mdScope.findTypeDef(type);
   final method = winTypeDef.findMethod('HourAsPaddedString');
 
   print('${method.methodName} has '
@@ -53,10 +45,9 @@ void listParameters([String type = 'Windows.Globalization.Calendar']) {
 }
 
 void listInterfaces([String type = 'Windows.Globalization.Calendar']) {
-  final file = metadataFileContainingType(type);
-  final winmdFile = WinmdFile(file);
+  final mdScope = WinmdReader.getScopeForType(type);
 
-  final winTypeDef = winmdFile.findTypeDef(type);
+  final winTypeDef = mdScope.findTypeDef(type);
 
   final interfaces = winTypeDef.interfaces;
 
@@ -69,10 +60,9 @@ void listInterfaces([String type = 'Windows.Globalization.Calendar']) {
 
 // [uuid(CA30221D-86D9-40FB-A26B-D44EB7CF08EA)]
 void listGUID([String type = 'Windows.Globalization.ICalendar']) {
-  final file = metadataFileContainingType(type);
-  final winmdFile = WinmdFile(file);
+  final mdScope = WinmdReader.getScopeForType(type);
+  final winTypeDef = mdScope.findTypeDef(type);
 
-  final winTypeDef = winmdFile.findTypeDef(type);
   print(winTypeDef.guid);
 }
 
@@ -83,7 +73,7 @@ String methodSignature(WinmdMethod method) {
       '${method.isGetProperty ? '[propget] ' : ''}'
       '${method.isSetProperty ? '[propset] ' : ''}'
       '${method.isRTSpecialName ? 'rt_special ' : ''}'
-      '${method.returnType.typeFlag.nativeType} '
+      '${method.returnType.typeFlag.typeName} '
       '${method.isProperty ? method.methodName.substring(4) : method.methodName}');
 
   if (!method.isGetProperty) {
@@ -95,15 +85,15 @@ String methodSignature(WinmdMethod method) {
 }
 
 String typeParams(WinmdMethod method) => method.parameters
-    .map((param) => '${param.typeFlag.nativeType} ${param.name}')
+    .map((param) => '${param.typeFlag.typeName} ${param.name}')
     .join(', ');
 
 String convertTypeToProjection(
     [String type = 'Windows.Foundation.IAsyncInfo']) {
   final idlProjection = StringBuffer();
 
-  final file = metadataFileContainingType(type);
-  final winTypeDef = WinmdFile(file).findTypeDef(type);
+  final mdScope = WinmdReader.getScopeForType(type);
+  final winTypeDef = mdScope.findTypeDef(type);
 
   if (winTypeDef.parent.typeName == 'IInspectable') {
     idlProjection.writeln('// vtable_start 6');

@@ -1,3 +1,7 @@
+// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
 import 'enums.dart';
 
 final CorTypeToDartStringMapping = <int, String>{
@@ -74,11 +78,9 @@ final CorTypeToNativeStringMapping = <int, String>{
 
 class WindowsRuntimeType {
   final int corType;
-  String nativeType;
-  String dartType;
+  String typeName;
 
   WindowsRuntimeType(this.corType) {
-    nativeType = CorTypeToNativeStringMapping[corType];
-    dartType = CorTypeToDartStringMapping[corType];
+    typeName = CorTypeToNativeStringMapping[corType];
   }
 }

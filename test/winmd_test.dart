@@ -4,33 +4,31 @@ import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
 import '../tool/winmd/enums.dart';
-import '../tool/winmd/mdFile.dart';
-import '../tool/winmd/utils.dart';
+import '../tool/winmd/mdReader.dart';
 
 void main() {
   if (isWindowsRuntimeAvailable()) {
     test('List all tokens in a file', () {
-      final file = metadataFileContainingType('Windows.Globalization.Calendar');
-      final winmdFile = WinmdFile(file);
-      expect(winmdFile.typeDefs.length,
-          equals(104)); // at least, on Windows 10 2004
+      final mdScope =
+          WinmdReader.getScopeForType('Windows.Globalization.Calendar');
+
+      expect(
+          mdScope.typeDefs.length, equals(104)); // at least, on Windows 10 2004
     });
 
     test('Find a specific WinMD token', () {
-      final file =
-          metadataFileContainingType('Windows.Globalization.ICalendarFactory');
-      final winmdFile = WinmdFile(file);
+      final mdScope =
+          WinmdReader.getScopeForType('Windows.Globalization.ICalendarFactory');
 
-      final type = winmdFile.findTypeDef('Windows.Globalization.Calendar');
+      final type = mdScope.findTypeDef('Windows.Globalization.Calendar');
       expect(type.token, equals(0x02000003));
     });
 
     test('Get IAsyncInfo methods', () {
-      final file =
-          metadataFileContainingType('Windows.Foundation.IPropertyValue');
-      final winmdFile = WinmdFile(file);
+      final mdScope =
+          WinmdReader.getScopeForType('Windows.Foundation.IPropertyValue');
 
-      final winTypeDef = winmdFile.findTypeDef('Windows.Foundation.IAsyncInfo');
+      final winTypeDef = mdScope.findTypeDef('Windows.Foundation.IAsyncInfo');
       final methods = winTypeDef.methods;
 
       expect(methods[0].methodName, equals('get_Id'));
@@ -41,11 +39,9 @@ void main() {
     });
 
     test('Calendar.HourAsPaddedString method properties', () {
-      final file = metadataFileContainingType('Windows.Globalization.Calendar');
-      final winmdFile = WinmdFile(file);
-
-      final winTypeDef =
-          winmdFile.findTypeDef('Windows.Globalization.Calendar');
+      final type = 'Windows.Globalization.Calendar';
+      final mdScope = WinmdReader.getScopeForType(type);
+      final winTypeDef = mdScope.findTypeDef(type);
       final methods = winTypeDef.methods;
 
       expect(methods[75].methodName, equals('HourAsPaddedString'));
@@ -60,9 +56,8 @@ void main() {
 
     test('Find interfaces returns sane results', () {
       final type = 'Windows.UI.Xaml.Controls.Button';
-      final file = metadataFileContainingType(type);
-      final winmdFile = WinmdFile(file);
-      final winTypeDef = winmdFile.findTypeDef(type);
+      final mdScope = WinmdReader.getScopeForType(type);
+      final winTypeDef = mdScope.findTypeDef(type);
 
       final interfaces = winTypeDef.interfaces;
       expect(interfaces.length, equals(2));
@@ -74,44 +69,38 @@ void main() {
     });
 
     test('Interface GUID is correct', () {
-      final file =
-          metadataFileContainingType('Windows.Globalization.ICalendar');
-      final winmdFile = WinmdFile(file);
+      final type = 'Windows.Globalization.ICalendar';
+      final mdScope = WinmdReader.getScopeForType(type);
+      final winTypeDef = mdScope.findTypeDef(type);
 
-      final winTypeDef =
-          winmdFile.findTypeDef('Windows.Globalization.ICalendar');
       final guid = winTypeDef.guid;
       expect(guid, isNotNull);
       expect(guid, equals('{CA30221D-86D9-40FB-A26B-D44EB7CF08EA}'));
     });
 
     test('Interface is correctly identified', () {
-      final file =
-          metadataFileContainingType('Windows.Globalization.ICalendar');
-      final winmdFile = WinmdFile(file);
+      final type = 'Windows.Globalization.ICalendar';
+      final mdScope = WinmdReader.getScopeForType(type);
+      final winTypeDef = mdScope.findTypeDef(type);
 
-      final winTypeDef =
-          winmdFile.findTypeDef('Windows.Globalization.ICalendar');
       expect(winTypeDef.isInterface, isTrue);
       expect(winTypeDef.isClass, isFalse);
     });
 
     test('Class is correctly identified', () {
-      final file = metadataFileContainingType('Windows.Globalization.Calendar');
-      final winmdFile = WinmdFile(file);
+      final type = 'Windows.Globalization.Calendar';
+      final mdScope = WinmdReader.getScopeForType(type);
+      final winTypeDef = mdScope.findTypeDef(type);
 
-      final winTypeDef =
-          winmdFile.findTypeDef('Windows.Globalization.Calendar');
       expect(winTypeDef.isInterface, isFalse);
       expect(winTypeDef.isClass, isTrue);
     });
 
     test('Calendar.AddDays() method is correct', () {
       final type = 'Windows.Globalization.ICalendar';
-      final file = metadataFileContainingType(type);
-      final winmdFile = WinmdFile(file);
+      final mdScope = WinmdReader.getScopeForType(type);
+      final winTypeDef = mdScope.findTypeDef(type);
 
-      final winTypeDef = winmdFile.findTypeDef(type);
       final method = winTypeDef.findMethod('AddDays');
 
       expect(method.isProperty, isFalse);
@@ -125,10 +114,9 @@ void main() {
 
     test('Calendar.YearAsString() method is correct', () {
       final type = 'Windows.Globalization.ICalendar';
-      final file = metadataFileContainingType(type);
-      final winmdFile = WinmdFile(file);
+      final mdScope = WinmdReader.getScopeForType(type);
+      final winTypeDef = mdScope.findTypeDef(type);
 
-      final winTypeDef = winmdFile.findTypeDef(type);
       final method = winTypeDef.findMethod('YearAsString');
 
       expect(method.isProperty, isFalse);
@@ -139,10 +127,9 @@ void main() {
 
     test('Calendar.MonthAsPaddedNumericString() method is correct', () {
       final type = 'Windows.Globalization.ICalendar';
-      final file = metadataFileContainingType(type);
-      final winmdFile = WinmdFile(file);
+      final mdScope = WinmdReader.getScopeForType(type);
+      final winTypeDef = mdScope.findTypeDef(type);
 
-      final winTypeDef = winmdFile.findTypeDef(type);
       final method = winTypeDef.findMethod('MonthAsPaddedNumericString');
 
       expect(method.isProperty, isFalse);
@@ -156,10 +143,9 @@ void main() {
 
     test('Calendar.SetToNow() method is correct', () {
       final type = 'Windows.Globalization.ICalendar';
-      final file = metadataFileContainingType(type);
-      final winmdFile = WinmdFile(file);
+      final mdScope = WinmdReader.getScopeForType(type);
+      final winTypeDef = mdScope.findTypeDef(type);
 
-      final winTypeDef = winmdFile.findTypeDef(type);
       final method = winTypeDef.findMethod('SetToNow');
 
       expect(method.isProperty, isFalse);
@@ -169,10 +155,9 @@ void main() {
     });
     test('Calendar.Day get property is correct', () {
       final type = 'Windows.Globalization.ICalendar';
-      final file = metadataFileContainingType(type);
-      final winmdFile = WinmdFile(file);
+      final mdScope = WinmdReader.getScopeForType(type);
+      final winTypeDef = mdScope.findTypeDef(type);
 
-      final winTypeDef = winmdFile.findTypeDef(type);
       final method = winTypeDef.findMethod('get_Day');
 
       expect(method.returnType.typeFlag.corType,
@@ -186,10 +171,9 @@ void main() {
 
     test('Calendar.YearAsTruncatedString get property is correct', () {
       final type = 'Windows.Globalization.ICalendar';
-      final file = metadataFileContainingType(type);
-      final winmdFile = WinmdFile(file);
+      final mdScope = WinmdReader.getScopeForType(type);
+      final winTypeDef = mdScope.findTypeDef(type);
 
-      final winTypeDef = winmdFile.findTypeDef(type);
       final method = winTypeDef.findMethod('YearAsTruncatedString');
 
       expect(method.returnType.typeFlag.corType,
@@ -198,16 +182,14 @@ void main() {
       expect(method.isProperty, isFalse);
       expect(method.parameters.length, equals(1));
       expect(method.parameters.first.name, equals('remainingDigits'));
-      expect(method.parameters.first.typeFlag.dartType, equals('int'));
-      expect(method.parameters.first.typeFlag.nativeType, equals('Int32'));
+      expect(method.parameters.first.typeFlag.typeName, equals('Int32'));
     });
 
     test('Calendar.Clone method is correct', () {
       final type = 'Windows.Globalization.ICalendar';
-      final file = metadataFileContainingType(type);
-      final winmdFile = WinmdFile(file);
+      final mdScope = WinmdReader.getScopeForType(type);
+      final winTypeDef = mdScope.findTypeDef(type);
 
-      final winTypeDef = winmdFile.findTypeDef(type);
       final method = winTypeDef.findMethod('Clone');
 
       expect(method.returnType.typeFlag.corType,
@@ -220,17 +202,13 @@ void main() {
 
     test('IAsyncInfo.Status get property is correct', () {
       final type = 'Windows.Foundation.IAsyncInfo';
-      final file = metadataFileContainingType(type);
-      final winmdFile = WinmdFile(file);
-
-      final winTypeDef = winmdFile.findTypeDef(type);
+      final mdScope = WinmdReader.getScopeForType(type);
+      final winTypeDef = mdScope.findTypeDef(type);
       final method = winTypeDef.findMethod('get_Status');
 
       expect(method.returnType.typeFlag.corType,
           equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
-      expect(method.returnType.typeFlag.nativeType,
-          equals('Windows.Foundation.AsyncStatus'));
-      expect(method.returnType.typeFlag.dartType,
+      expect(method.returnType.typeFlag.typeName,
           equals('Windows.Foundation.AsyncStatus'));
       expect(method.isSpecialName, isTrue);
       expect(method.isProperty, isTrue);
@@ -241,10 +219,9 @@ void main() {
 
     test('findMethod() fails gracefully', () {
       final type = 'Windows.Globalization.ICalendar';
-      final file = metadataFileContainingType(type);
-      final winmdFile = WinmdFile(file);
+      final mdScope = WinmdReader.getScopeForType(type);
+      final winTypeDef = mdScope.findTypeDef(type);
 
-      final winTypeDef = winmdFile.findTypeDef(type);
       final method = winTypeDef.findMethod('whoLetTheDogsOut');
       expect(method, isNull);
     });

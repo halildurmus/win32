@@ -1,8 +1,8 @@
-import 'dart:ffi';
-import 'dart:io';
+// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
 
-import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
+// Useful shared utility methods.
 
 import 'enums.dart';
 
@@ -18,41 +18,6 @@ class WinmdException implements Exception {
 extension CamelCaseConversion on String {
   String toCamelCase() =>
       length >= 2 ? substring(0, 1).toLowerCase() + substring(1) : this;
-}
-
-String toHex(int value32) =>
-    '0x${value32.toUnsigned(32).toRadixString(16).padLeft(8, '0')}';
-
-/// Takes a typename (e.g. `Windows.Globalization.Calendar`) and returns the
-/// metadata file that contains the type.
-File metadataFileContainingType(String typeName) {
-  File path;
-
-  final hstrTypeName = convertToHString(typeName);
-
-  final hstrMetaDataFilePath = allocate<IntPtr>();
-  final spMetaDataImport = allocate<IntPtr>();
-  final typeDef = allocate<Uint32>();
-
-  try {
-    // RoGetMetaDataFile can only be used for Windows Runtime classes (i.e. not
-    // third-party types) in an app that is not a Windows Store app.
-    var hr = RoGetMetaDataFile(hstrTypeName.value, nullptr,
-        hstrMetaDataFilePath.address, spMetaDataImport, typeDef);
-    if (SUCCEEDED(hr)) {
-      path = File(convertFromHString(hstrMetaDataFilePath));
-    } else {
-      throw WindowsException(hr);
-    }
-  } finally {
-    WindowsDeleteString(hstrTypeName.value);
-    WindowsDeleteString(hstrMetaDataFilePath.value);
-
-    free(hstrTypeName);
-    free(hstrMetaDataFilePath);
-  }
-
-  return path;
 }
 
 bool tokenIsTypeRef(int token) =>

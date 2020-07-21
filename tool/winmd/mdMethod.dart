@@ -1,3 +1,7 @@
+// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
 import 'dart:collection';
 import 'dart:ffi';
 import 'dart:typed_data';
@@ -148,6 +152,8 @@ class WinmdMethod {
     final paramTypes = ListQueue<int>.from(blob);
 
     final paramType = paramTypes.removeFirst();
+    final runtimeType = WindowsRuntimeType(paramType);
+
     if (paramType == CorElementType.ELEMENT_TYPE_VALUETYPE ||
         paramType == CorElementType.ELEMENT_TYPE_CLASS) {
       final uncompressed = corSigUncompressData(paramTypes.toList());
@@ -159,24 +165,9 @@ class WinmdMethod {
       // print(token.toHexString(32));
       final tokenAsType = WinmdType.fromToken(reader, token);
       // print(tokenAsType.typeName);
-
-      if (paramType == CorElementType.ELEMENT_TYPE_CLASS) {
-        return WinmdParameter.fromType(
-            reader,
-            WindowsRuntimeType(paramType)
-              ..nativeType =
-                  'Pointer<${tokenAsType.parent.typeName.split('.').last}>'
-              ..dartType =
-                  'Pointer<${tokenAsType.parent.typeName.split('.').last}>');
-      } else {
-        return WinmdParameter.fromType(
-            reader,
-            WindowsRuntimeType(paramType)
-              ..nativeType = '${tokenAsType.typeName.split('.').last}'
-              ..dartType = '${tokenAsType.typeName.split('.').last}');
-      }
+      runtimeType.typeName = tokenAsType.typeName;
     }
-    return WinmdParameter.fromType(reader, WindowsRuntimeType(paramType));
+    return WinmdParameter.fromType(reader, runtimeType);
   }
 
   String get callingConvention {

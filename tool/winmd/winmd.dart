@@ -1,4 +1,6 @@
-// winmd.dart
+// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
 
 // Parse the Windows Metadata for a type and interpret its metadata
 
@@ -11,7 +13,7 @@ import 'dart:io';
 
 import 'dartProjection.dart';
 import 'enums.dart';
-import 'mdFile.dart';
+import 'mdReader.dart';
 import 'utils.dart';
 
 /// Convert enums to ints
@@ -34,8 +36,8 @@ Parameter tidyParam(String type, Parameter param) {
 }
 
 Interface projectWinMdType(String type) {
-  final mdFile = metadataFileContainingType(type);
-  final mdTypeDef = WinmdFile(mdFile).findTypeDef(type);
+  final mdScope = WinmdReader.getScopeForType(type);
+  final mdTypeDef = mdScope.findTypeDef(type);
 
   final interface = Interface();
   interface.sourceType = SourceType.idl; // for now
@@ -59,8 +61,8 @@ Interface projectWinMdType(String type) {
       } else {
         retParam.name = method.name;
       }
-      retParam.nativeType = mdMethod.returnType.typeFlag.nativeType;
-      retParam = tidyParam(mdMethod.returnType.typeFlag.nativeType, retParam);
+      retParam.nativeType = mdMethod.returnType.typeFlag.typeName;
+      retParam = tidyParam(mdMethod.returnType.typeFlag.typeName, retParam);
       retParam.dartType = retParam.nativeType;
       method.parameters.add(retParam);
     }
@@ -69,9 +71,8 @@ Interface projectWinMdType(String type) {
       var param = Parameter();
       param.name = mdParam.name;
 
-      param.dartType = mdParam.typeFlag.dartType;
-      param.nativeType = mdParam.typeFlag.nativeType;
-      param = tidyParam(mdParam.typeFlag.dartType, param);
+      param.nativeType = mdParam.typeFlag.typeName;
+      param = tidyParam(mdParam.typeFlag.typeName, param);
 
       method.parameters.add(param);
     }
@@ -83,6 +84,8 @@ Interface projectWinMdType(String type) {
 }
 
 void main(List<String> args) {
+  WinmdReader.printCacheInfo();
+
   Directory outputDirectory;
   if (args.length == 1) {
     outputDirectory = Directory(args.first);
@@ -106,4 +109,8 @@ void main(List<String> args) {
     print('Writing:    ${outputFile.path}');
     outputFile.writeAsStringSync(dartProjection.toString());
   }
+
+  WinmdReader.printCacheInfo();
+  WinmdReader.close();
+  WinmdReader.printCacheInfo();
 }
