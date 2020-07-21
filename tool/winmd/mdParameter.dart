@@ -1,8 +1,13 @@
+// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+import 'enums.dart';
 import 'windowsType.dart';
 
 class WinmdParameter {
@@ -59,4 +64,17 @@ class WinmdParameter {
       throw WindowsException(hr);
     }
   }
+
+  factory WinmdParameter.fromType(
+          IMetaDataImport2 reader, WindowsRuntimeType runtimeType) =>
+      WinmdParameter(reader, 0, null, 0, runtimeType, null, 0);
+
+  factory WinmdParameter.fromVoid(IMetaDataImport2 reader) => WinmdParameter(
+      reader,
+      0,
+      null,
+      0,
+      WindowsRuntimeType(CorElementType.ELEMENT_TYPE_VOID),
+      null,
+      0);
 }

@@ -1,11 +1,19 @@
+// Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
+// for details. All rights reserved. Use of this source code is governed by a
+// BSD-style license that can be found in the LICENSE file.
+
+import 'dart:collection';
 import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+import 'constants.dart';
 import 'enums.dart';
 import 'mdParameter.dart';
+import 'mdType.dart';
+import 'utils.dart';
 import 'windowsType.dart';
 
 class WinmdMethod {
@@ -18,6 +26,13 @@ class WinmdMethod {
   int relativeVirtualAddress;
   int implFlags;
 
+  bool get isProperty => isGetProperty | isSetProperty;
+  bool isGetProperty = false;
+  bool isSetProperty = false;
+
+  List<WinmdParameter> parameters;
+  WinmdParameter returnType;
+
   bool _testFlag(int attribute) => methodFlags & attribute == attribute;
 
   bool get isPrivate => _testFlag(CorMethodAttr.mdPrivate);
@@ -29,7 +44,11 @@ class WinmdMethod {
   bool get isRTSpecialName => _testFlag(CorMethodAttr.mdRTSpecialName);
 
   WinmdMethod(this.reader, this.token, this.methodName, this.methodFlags,
-      this.signature, this.relativeVirtualAddress, this.implFlags);
+      this.signature, this.relativeVirtualAddress, this.implFlags) {
+    _parseMethodType();
+    _parseReturnType();
+    _parseParameters();
+  }
 
   factory WinmdMethod.fromToken(IMetaDataImport2 reader, int token) {
     WinmdMethod method;
@@ -77,24 +96,78 @@ class WinmdMethod {
 
   bool get hasGenericParameters => (signature[0] & 0x10 == 0x10);
 
-  WinmdParameter get returnType {
+  void _parseMethodType() {
+    if (isSpecialName && methodName.startsWith('get_')) {
+      // Property getter
+      isGetProperty = true;
+    } else if (isSpecialName && methodName.startsWith('set_')) {
+      // Property setter
+      isSetProperty = true;
+    }
+  }
+
+  void _parseReturnType() {
     WinmdParameter parameter;
 
-    final ptkParamDef = allocate<Uint32>();
-    var hr = reader.GetParamForMethodIndex(token, 0, ptkParamDef);
-    if (SUCCEEDED(hr)) {
-      final token = ptkParamDef.value;
+    if (isGetProperty) {
+      returnType = _parseBlob(signature.sublist(2));
+    } else if (isSetProperty) {
+      returnType = WinmdParameter.fromVoid(reader);
+    } else {
+      // Regular method
+      final ptkParamDef = allocate<Uint32>();
 
-      if (reader.IsValidToken(token) != 0) {
-        parameter = WinmdParameter.fromToken(reader, token);
-      } else {
-        print('ERROR: Invalid token');
+      try {
+        var hr = reader.GetParamForMethodIndex(token, 0, ptkParamDef);
+        if (SUCCEEDED(hr)) {
+          final token = ptkParamDef.value;
+
+          if (reader.IsValidToken(token) != 0) {
+            parameter = WinmdParameter.fromToken(reader, token);
+
+            // For a standard method, the return type is index 2, unless the
+            // method signature includes generic parameters, in which case there
+            // is an additional value in the blob.
+            parameter.typeFlag =
+                _parseBlob(signature.sublist(hasGenericParameters ? 3 : 2))
+                    .typeFlag;
+          } else {
+            print('ERROR: Invalid token');
+          }
+
+          returnType = parameter;
+        } else if (hr == CLDB_E_RECORD_NOTFOUND) {
+          // return type is void
+          returnType = WinmdParameter.fromVoid(reader);
+        } else {
+          throw WindowsException(hr);
+        }
+      } finally {
+        free(ptkParamDef);
       }
     }
+  }
 
-    free(ptkParamDef);
+  WinmdParameter _parseBlob(Uint8List blob) {
+    final paramTypes = ListQueue<int>.from(blob);
 
-    return parameter;
+    final paramType = paramTypes.removeFirst();
+    final runtimeType = WindowsRuntimeType(paramType);
+
+    if (paramType == CorElementType.ELEMENT_TYPE_VALUETYPE ||
+        paramType == CorElementType.ELEMENT_TYPE_CLASS) {
+      final uncompressed = corSigUncompressData(paramTypes.toList());
+      for (var idx = 0; idx < uncompressed.dataLength; idx++) {
+        paramTypes.removeFirst();
+      }
+      // print(uncompressed.data.toHexString(uncompressed.dataLength * 8));
+      final token = unencodeDefRefSpecToken(uncompressed.data);
+      // print(token.toHexString(32));
+      final tokenAsType = WinmdType.fromToken(reader, token);
+      // print(tokenAsType.typeName);
+      runtimeType.typeName = tokenAsType.typeName;
+    }
+    return WinmdParameter.fromType(reader, runtimeType);
   }
 
   String get callingConvention {
@@ -110,36 +183,61 @@ class WinmdMethod {
     return retVal.toString();
   }
 
-  WindowsRuntimeType get returnTypeNative => hasGenericParameters == false
-      ? WindowsRuntimeType(signature[2])
-      : WindowsRuntimeType(signature[3]);
+  void _parseParameters() {
+    var paramNames = _parameterNames;
 
-  List<WindowsRuntimeType> get parameters => signature
-      .sublist(hasGenericParameters == false ? 3 : 4)
-      .map((e) => WindowsRuntimeType(e))
-      .toList();
+    if (paramNames.isNotEmpty) {
+      final sublist = signature.sublist(hasGenericParameters == false ? 3 : 4);
+      final paramTypes = ListQueue<int>.from(sublist);
 
-  List<WinmdParameter> get parameterNames {
+      // For non-void methods, paramNames includes a return type token with a
+      // sequence of 0. We can discard that.
+      if (paramNames.first.sequence == 0) {
+        paramNames = paramNames.sublist(1);
+      }
+
+      for (var idx = 0; idx < paramNames.length; idx++) {
+        final paramType = paramTypes.removeFirst();
+        if (paramType == 0x11) {
+          // final uncompressed = corSigUncompressData(paramTypes.toList());
+          // final token = unencodeDefRefSpecToken(uncompressed);
+          // final tokenAsType = WinmdType.fromToken(reader, token);
+          // print(tokenAsType.typeName);
+        }
+        paramNames[idx].typeFlag = WindowsRuntimeType(paramType);
+      }
+    }
+
+    parameters = paramNames;
+  }
+
+  List<WinmdParameter> get _parameterNames {
+    if (isGetProperty) {
+      return [];
+    }
+
     final parameters = <WinmdParameter>[];
 
     final phEnum = allocate<IntPtr>()..value = 0;
     final ptkParamDef = allocate<Uint32>();
     final pcTokens = allocate<Uint32>();
 
-    var hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
-    while (hr == S_OK) {
-      final token = ptkParamDef.value;
+    try {
+      var hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
+      while (hr == S_OK) {
+        final token = ptkParamDef.value;
 
-      parameters.add(WinmdParameter.fromToken(reader, token));
-      hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
+        parameters.add(WinmdParameter.fromToken(reader, token));
+        hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
+      }
+
+      return parameters;
+    } finally {
+      free(ptkParamDef);
+      free(pcTokens);
+
+      reader.CloseEnum(phEnum.address);
+      // dispose phEnum crashes here, so leave it allocated
     }
-    reader.CloseEnum(phEnum.address);
-
-    free(ptkParamDef);
-    free(pcTokens);
-
-    // dispose phEnum crashes here, so leave it allocated
-
-    return parameters;
   }
 }

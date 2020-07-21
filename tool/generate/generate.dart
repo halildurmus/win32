@@ -28,10 +28,6 @@ void main(List<String> args) {
       print('Writing:    ${outputFile.path}');
       outputFile.writeAsStringSync(parsedFile.toString());
 
-      print('Formatting: ${outputFile.path}');
-      Process.runSync('dartfmt', ['--overwrite', '--fix', outputFile.path],
-          runInShell: true);
-
       print('');
     }
   }
