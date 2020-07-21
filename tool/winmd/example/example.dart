@@ -4,13 +4,22 @@
 
 // Parse the Windows Metadata for a type and interpret its metadata
 
-import 'package:win32/src/extensions/intToHexString.dart';
+import 'package:win32/win32.dart';
 
-import 'mdMethod.dart';
-import 'mdReader.dart';
+import '../mdMethod.dart';
+import '../mdReader.dart';
 
-void listTokens() {
-  final mdScope = WinmdReader.getScopeForType('Windows.Globalization.Calendar');
+void printHeading(String heading) {
+  print('');
+  print('-' * heading.length);
+  print(heading);
+  print('-' * heading.length);
+}
+
+void listTokens([String type = 'Windows.Devices.Bluetooth.BluetoothAdapter']) {
+  printHeading('Typedefs in the metadata file containing $type');
+
+  final mdScope = WinmdReader.getScopeForType(type);
 
   for (var type in mdScope.typeDefs) {
     print('[${type.token.toHexString(32)}] ${type.typeName} '
@@ -18,7 +27,10 @@ void listTokens() {
   }
 }
 
-void listMethods([String type = 'Windows.Globalization.Calendar']) {
+void listMethods(
+    [String type = 'Windows.Networking.Connectivity.NetworkInformation']) {
+  printHeading('Methods of $type');
+
   final mdScope = WinmdReader.getScopeForType(type);
   final winTypeDef = mdScope.findTypeDef(type);
   final methods = winTypeDef.methods;
@@ -26,25 +38,33 @@ void listMethods([String type = 'Windows.Globalization.Calendar']) {
   print(methods.map(methodSignature).join('\n'));
 }
 
-void listParameters([String type = 'Windows.Globalization.Calendar']) {
+void listParameters(
+    [String type = 'Windows.Globalization.Calendar',
+    String methodName = 'CompareDateTime']) {
+  printHeading('Parameters of $methodName in $type');
+
   final mdScope = WinmdReader.getScopeForType(type);
 
   final winTypeDef = mdScope.findTypeDef(type);
-  final method = winTypeDef.findMethod('HourAsPaddedString');
+  final method = winTypeDef.findMethod(methodName);
 
   print('${method.methodName} has '
-      '${method.parameters.length - 1} parameter(s).');
+      '${method.parameters.length} parameter(s).');
 
   // the zeroth parameter is the return type
-  for (var i = 1; i < method.parameters.length; i++) {
-    print('[${method.parameters[i].sequence}] ${method.parameters[i].name}');
+  for (var i = 0; i < method.parameters.length; i++) {
+    print('[${method.parameters[i].sequence}] '
+        '${method.parameters[i].typeFlag.typeName} '
+        '${method.parameters[i].name}');
   }
 
   final returnType = method.returnType;
-  print('\nreturns: ${returnType.name}');
+  print('\nreturns: ${returnType.typeFlag.typeName}');
 }
 
-void listInterfaces([String type = 'Windows.Globalization.Calendar']) {
+void listInterfaces([String type = 'Windows.Storage.Pickers.FolderPicker']) {
+  printHeading('Interfaces implemented by $type');
+
   final mdScope = WinmdReader.getScopeForType(type);
 
   final winTypeDef = mdScope.findTypeDef(type);
@@ -54,12 +74,13 @@ void listInterfaces([String type = 'Windows.Globalization.Calendar']) {
   print('$type implements:');
   for (var interface in interfaces) {
     print('  ${interface.typeName}');
-    listMethods(interface.typeName);
   }
 }
 
 // [uuid(CA30221D-86D9-40FB-A26B-D44EB7CF08EA)]
-void listGUID([String type = 'Windows.Globalization.ICalendar']) {
+void listGUID([String type = 'Windows.UI.Shell.IAdaptiveCard']) {
+  printHeading('GUID for $type');
+
   final mdScope = WinmdReader.getScopeForType(type);
   final winTypeDef = mdScope.findTypeDef(type);
 
@@ -90,6 +111,8 @@ String typeParams(WinmdMethod method) => method.parameters
 
 String convertTypeToProjection(
     [String type = 'Windows.Foundation.IAsyncInfo']) {
+  printHeading('A pseudo-code representation of the $type type');
+
   final idlProjection = StringBuffer();
 
   final mdScope = WinmdReader.getScopeForType(type);
@@ -113,7 +136,11 @@ String convertTypeToProjection(
 }
 
 void main(List<String> args) {
+  listTokens();
+  listInterfaces();
+  listGUID();
   listMethods();
-  // final projection = convertTypeToProjection('Windows.Globalization.ICalendar');
-  // print(projection);
+  listParameters();
+
+  print(convertTypeToProjection());
 }
