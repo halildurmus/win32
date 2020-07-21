@@ -199,12 +199,12 @@ class WinmdMethod {
       for (var idx = 0; idx < paramNames.length; idx++) {
         final paramType = paramTypes.removeFirst();
         if (paramType == 0x11) {
-          // final uncompressed = corSigUncompressData(paramTypes.toList());
-          // final token = unencodeDefRefSpecToken(uncompressed);
-          // final tokenAsType = WinmdType.fromToken(reader, token);
-          // print(tokenAsType.typeName);
+          final param = _parseBlob(sublist);
+          paramNames[idx].typeFlag = param.typeFlag;
+          ;
+        } else {
+          paramNames[idx].typeFlag = WindowsRuntimeType(paramType);
         }
-        paramNames[idx].typeFlag = WindowsRuntimeType(paramType);
       }
     }
 

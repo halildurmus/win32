@@ -79,6 +79,8 @@ class WinmdReader {
       if (SUCCEEDED(hr)) {
         final filePath = convertFromHString(hstrMetaDataFilePath);
         return getScopeForFile(filePath);
+      } else if (hr == HRESULT_FROM_WIN32(APPMODEL_ERROR_NO_PACKAGE)) {
+        return null;
       } else {
         throw WindowsException(hr);
       }

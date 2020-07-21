@@ -111,12 +111,15 @@ class WinmdType {
       if (SUCCEEDED(hr)) {
         final typeName = szName.unpackString(pchName.value);
 
-        // print(
-        //     'Finding scope for $typeName [${typeRefToken.toHexString(32)}]...');
-
         // TODO: Can we shortcut something by using the resolution scope token?
         final newScope = WinmdReader.getScopeForType(typeName);
-        return newScope.findTypeDef(typeName);
+
+        if (newScope != null) {
+          return newScope.findTypeDef(typeName);
+        } else {
+          throw WinmdException(
+              'Unable to find scope for $typeName [${typeRefToken.toHexString(32)}]...');
+        }
       } else {
         throw WindowsException(hr);
       }

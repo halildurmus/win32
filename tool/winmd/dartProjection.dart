@@ -2,13 +2,11 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// dartProjection.dart
-
 // Contains the data classes for the representation of interfaces, methods and
 // parameters, as well as the logic necessary to emit a Dart language
 // representation (a projection) of the underlying API.
 
-enum SourceType { header, idl, unknown }
+enum SourceType { com, winrt, unknown }
 
 class Parameter {
   String name;
@@ -60,7 +58,7 @@ import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
 ''');
-    if (sourceType == SourceType.idl) {
+    if (sourceType == SourceType.winrt) {
       buffer.writeln('''
 import '../winrt/winrt_constants.dart';
 ''');
@@ -147,7 +145,7 @@ import '../winrt/winrt_constants.dart';
     var vtableIndex = vtableStart;
 
     buffer.writeln('/// {@category Interface}');
-    if (sourceType == SourceType.idl) {
+    if (sourceType == SourceType.winrt) {
       buffer.writeln('/// {@category winrt}');
     } else {
       buffer.writeln('/// {@category com}');
@@ -277,7 +275,7 @@ import '../winrt/winrt_constants.dart';
     if (generateClass) {
       final buffer = StringBuffer();
 
-      if (sourceType == SourceType.idl) {
+      if (sourceType == SourceType.winrt) {
         buffer.writeln('/// {@category winrt}');
       } else {
         buffer.writeln('/// {@category com}');
