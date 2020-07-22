@@ -87,9 +87,7 @@ class WindowsRuntimeType {
       case 0x45:
         return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_PINNED);
       default:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_VOID);
-      // throw WinmdException(
-      //     'Unrecognized type ${corElementTypeValue.toHexString(8)}');
+        throw WinmdException('Unrecognized type $corElementTypeValue');
     }
   }
 
