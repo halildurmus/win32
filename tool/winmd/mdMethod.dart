@@ -125,6 +125,10 @@ class WinmdMethod {
       dataLength = uncompressed.dataLength + 1;
       runtimeType.name = tokenAsType.typeName;
       runtimeType.type = tokenAsType;
+    } else if (runtimeType.corType == CorElementType.ELEMENT_TYPE_BYREF &&
+        signatureBlob[1] == 0x1D) {
+      // array
+      runtimeType.corType = CorElementType.ELEMENT_TYPE_ARRAY;
     } else if (runtimeType.corType == CorElementType.ELEMENT_TYPE_GENERICINST) {
       final classTuple = _parseTypeFromSignature(signatureBlob.sublist(1));
       runtimeType.name = classTuple.item1.name;
@@ -168,8 +172,9 @@ class WinmdMethod {
     var blobPtr = hasGenericParameters == false ? 2 : 3;
 
     if (isGetProperty) {
-      returnType = WinmdParameter.fromType(
-          reader, _parseTypeFromSignature(signatureBlob.sublist(2)).item1);
+      returnType = WinmdParameter.fromTypeIdentifier(
+          reader, _parseTypeFromSignature(signatureBlob.sublist(2)).item1)
+        ..name = 'value';
     } else if (isSetProperty) {
       returnType = WinmdParameter.fromVoid(reader);
     } else {
@@ -193,9 +198,15 @@ class WinmdMethod {
         while (paramsIndex < parameters.length) {
           final runtimeType =
               _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
-          parameters[paramsIndex].typeIdentifier = runtimeType.item1;
-
-          blobPtr += runtimeType.item2;
+          if (runtimeType.item1.corType == CorElementType.ELEMENT_TYPE_ARRAY) {
+            blobPtr +=
+                _parseArray(signatureBlob.sublist(blobPtr + 1), paramsIndex) +
+                    2;
+            paramsIndex++; //we've added two parameters here
+          } else {
+            parameters[paramsIndex].typeIdentifier = runtimeType.item1;
+            blobPtr += runtimeType.item2;
+          }
           paramsIndex++;
         }
       } else {
@@ -228,5 +239,18 @@ class WinmdMethod {
         // dispose phEnum crashes here, so leave it allocated
       }
     }
+  }
+
+  int _parseArray(Uint8List sublist, int paramsIndex) {
+    final typeTuple = _parseTypeFromSignature(sublist.sublist(1));
+
+    parameters[paramsIndex].name = '__valueSize';
+    parameters[paramsIndex].typeIdentifier.name = 'Pointer<Uint32>';
+    parameters.insert(paramsIndex + 1,
+        WinmdParameter.fromTypeIdentifier(reader, typeTuple.item1));
+    parameters[paramsIndex + 1].name = 'value';
+    parameters[paramsIndex + 1].typeIdentifier.name = 'Pointer<IntPtr>';
+
+    return typeTuple.item2;
   }
 }

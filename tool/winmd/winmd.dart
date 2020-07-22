@@ -17,9 +17,9 @@ import 'typePrinter.dart';
 
 final typesToGenerate = [
   'Windows.Foundation.IPropertyValue',
-  // 'Windows.Foundation.IAsyncInfo',
-  // 'Windows.Foundation.IClosable',
-  // 'Windows.Foundation.IStringable',
+  'Windows.Foundation.IAsyncInfo',
+  'Windows.Foundation.IClosable',
+  'Windows.Foundation.IStringable',
 ];
 
 void main(List<String> args) {

@@ -13,8 +13,13 @@ class TypeBuilder {
   static bool isTypeAnEnum(WinmdTypeIdentifier typeIdentifier) =>
       typeIdentifier.type?.parent?.typeName == 'System.Enum';
 
+  static bool isTypeValueType(WinmdTypeIdentifier typeIdentifier) =>
+      typeIdentifier.type?.parent?.typeName == 'System.ValueType';
+
   static String dartType(WinmdTypeIdentifier typeIdentifier) {
     if (isTypeAnEnum(typeIdentifier)) {
+      return 'int';
+    } else if (isTypeValueType(typeIdentifier)) {
       return 'int';
     } else {
       return typeIdentifier.name;
@@ -25,6 +30,9 @@ class TypeBuilder {
     // TODO: ECMA-335 II.14.3 does not guarantee that an enum is a Uint32.
     // Need to parse the enum and figure out its real type.
     if (isTypeAnEnum(typeIdentifier)) {
+      return 'Uint32';
+    } else if (isTypeValueType(typeIdentifier)) {
+      // TODO: This needs figuring out -- a struct could have anything in it.
       return 'Uint32';
     } else {
       return typeIdentifier.name;
@@ -45,17 +53,23 @@ class TypeBuilder {
       method.returnTypeNative = 'Int32';
       method.returnTypeDart = 'int';
 
-      // return value is passed as an outparam
+      // return value is passed as an pointer
       if (mdMethod.returnType.typeIdentifier.corType !=
           CorElementType.ELEMENT_TYPE_VOID) {
         var retParam = Parameter();
-        if (mdMethod.isProperty) {
+        if (mdMethod.isSetProperty) {
           retParam.name = method.name.substring(4).toCamelCase();
+        } else if (mdMethod.isGetProperty) {
+          retParam.name = 'value';
+          retParam.nativeType = nativeType(mdMethod.returnType.typeIdentifier);
+          retParam.dartType = dartType(mdMethod.returnType.typeIdentifier);
         } else {
-          retParam.name = method.name;
+          retParam.name = 'value';
+          retParam.nativeType =
+              'Pointer<${nativeType(mdMethod.returnType.typeIdentifier)}>';
+          retParam.dartType =
+              'Pointer<${nativeType(mdMethod.returnType.typeIdentifier)}>';
         }
-        retParam.nativeType = nativeType(mdMethod.returnType.typeIdentifier);
-        retParam.dartType = dartType(mdMethod.returnType.typeIdentifier);
         method.parameters.add(retParam);
       }
 

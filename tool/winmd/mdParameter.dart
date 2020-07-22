@@ -65,7 +65,7 @@ class WinmdParameter {
     }
   }
 
-  factory WinmdParameter.fromType(
+  factory WinmdParameter.fromTypeIdentifier(
           IMetaDataImport2 reader, WinmdTypeIdentifier runtimeType) =>
       WinmdParameter(reader, 0, null, 0, runtimeType, null, 0);
 

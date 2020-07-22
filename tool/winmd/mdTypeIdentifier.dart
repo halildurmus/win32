@@ -7,7 +7,7 @@ import 'mdType.dart';
 import 'utils.dart';
 
 class WinmdTypeIdentifier {
-  final CorElementType corType;
+  CorElementType corType;
   String name;
   WinmdType type;
   final typeArgs = <WinmdTypeIdentifier>[];
@@ -99,9 +99,9 @@ class WinmdTypeIdentifier {
         return 'void';
       case CorElementType.ELEMENT_TYPE_BOOLEAN:
         return 'bool';
-      case CorElementType.ELEMENT_TYPE_CHAR:
       case CorElementType.ELEMENT_TYPE_STRING:
-        return 'String';
+        return 'Utf16';
+      case CorElementType.ELEMENT_TYPE_CHAR:
       case CorElementType.ELEMENT_TYPE_I1:
       case CorElementType.ELEMENT_TYPE_U1:
       case CorElementType.ELEMENT_TYPE_I2:
@@ -114,8 +114,9 @@ class WinmdTypeIdentifier {
       case CorElementType.ELEMENT_TYPE_U:
         return 'int';
       case CorElementType.ELEMENT_TYPE_R4:
-      case CorElementType.ELEMENT_TYPE_R8:
         return 'float';
+      case CorElementType.ELEMENT_TYPE_R8:
+        return 'double';
       case CorElementType.ELEMENT_TYPE_PTR:
       case CorElementType.ELEMENT_TYPE_FNPTR:
         return 'Pointer';
@@ -129,7 +130,6 @@ class WinmdTypeIdentifier {
       case CorElementType.ELEMENT_TYPE_VOID:
         return 'Void';
       case CorElementType.ELEMENT_TYPE_BOOLEAN:
-        return 'Int32';
       case CorElementType.ELEMENT_TYPE_CHAR:
       case CorElementType.ELEMENT_TYPE_U1:
         return 'Uint8';
@@ -148,10 +148,11 @@ class WinmdTypeIdentifier {
       case CorElementType.ELEMENT_TYPE_U8:
         return 'Uint64';
       case CorElementType.ELEMENT_TYPE_R4:
-      case CorElementType.ELEMENT_TYPE_R8:
         return 'Float';
+      case CorElementType.ELEMENT_TYPE_R8:
+        return 'Double';
       case CorElementType.ELEMENT_TYPE_STRING:
-        return 'String';
+        return 'Utf16';
       case CorElementType.ELEMENT_TYPE_PTR:
       case CorElementType.ELEMENT_TYPE_FNPTR:
         return 'Pointer';
