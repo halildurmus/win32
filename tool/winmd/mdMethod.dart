@@ -11,8 +11,8 @@ import 'package:win32/win32.dart';
 import 'enums.dart';
 import 'mdParameter.dart';
 import 'mdType.dart';
+import 'mdTypeIdentifier.dart';
 import 'utils.dart';
-import 'windowsType.dart';
 
 class WinmdMethod {
   IMetaDataImport2 reader;
@@ -110,10 +110,10 @@ class WinmdMethod {
   /// consumed.
   ///
   /// Details on the blob format can be found at §II.23.1.16 of ECMA-335.
-  Tuple<WindowsRuntimeType, int> _parseTypeFromSignature(
+  Tuple<WinmdTypeIdentifier, int> _parseTypeFromSignature(
       Uint8List signatureBlob) {
     final paramType = signatureBlob.first;
-    final runtimeType = WindowsRuntimeType.fromValue(paramType);
+    final runtimeType = WinmdTypeIdentifier.fromValue(paramType);
     int dataLength;
 
     if (runtimeType.corType == CorElementType.ELEMENT_TYPE_VALUETYPE ||
@@ -139,7 +139,7 @@ class WinmdMethod {
       dataLength = 1;
       runtimeType.name = runtimeType.nativeType;
     }
-    return Tuple<WindowsRuntimeType, int>(runtimeType, dataLength);
+    return Tuple<WinmdTypeIdentifier, int>(runtimeType, dataLength);
   }
 
   String get callingConvention {

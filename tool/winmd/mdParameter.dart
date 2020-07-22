@@ -8,7 +8,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'enums.dart';
-import 'windowsType.dart';
+import 'mdTypeIdentifier.dart';
 
 class WinmdParameter {
   IMetaDataImport2 reader;
@@ -16,7 +16,7 @@ class WinmdParameter {
   int token;
   int sequence;
   int attributes;
-  WindowsRuntimeType typeIdentifier;
+  WinmdTypeIdentifier typeIdentifier;
   String name;
   int paramValueLength;
 
@@ -45,7 +45,7 @@ class WinmdParameter {
             token,
             pulSequence.value,
             pdwAttr.value,
-            WindowsRuntimeType.fromValue(pdwCPlusTypeFlag.value),
+            WinmdTypeIdentifier.fromValue(pdwCPlusTypeFlag.value),
             szName.unpackString(pchName.value),
             pcchValue.value);
       }
@@ -66,7 +66,7 @@ class WinmdParameter {
   }
 
   factory WinmdParameter.fromType(
-          IMetaDataImport2 reader, WindowsRuntimeType runtimeType) =>
+          IMetaDataImport2 reader, WinmdTypeIdentifier runtimeType) =>
       WinmdParameter(reader, 0, null, 0, runtimeType, null, 0);
 
   factory WinmdParameter.fromVoid(IMetaDataImport2 reader) => WinmdParameter(
@@ -74,7 +74,7 @@ class WinmdParameter {
       0,
       null,
       0,
-      WindowsRuntimeType(CorElementType.ELEMENT_TYPE_VOID),
+      WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_VOID),
       null,
       0);
 }

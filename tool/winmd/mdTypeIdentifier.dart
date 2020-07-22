@@ -5,87 +5,87 @@
 import 'enums.dart';
 import 'utils.dart';
 
-class WindowsRuntimeType {
+class WinmdTypeIdentifier {
   final CorElementType corType;
   String name;
-  final typeArgs = <WindowsRuntimeType>[];
+  final typeArgs = <WinmdTypeIdentifier>[];
 
-  WindowsRuntimeType(this.corType);
+  WinmdTypeIdentifier(this.corType);
 
-  factory WindowsRuntimeType.fromValue(int corElementTypeValue) {
+  factory WinmdTypeIdentifier.fromValue(int corElementTypeValue) {
     switch (corElementTypeValue) {
       case 0x0:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_END);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_END);
       case 0x1:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_VOID);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_VOID);
       case 0x2:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_BOOLEAN);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_BOOLEAN);
       case 0x3:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_CHAR);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_CHAR);
       case 0x4:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_I1);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_I1);
       case 0x5:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_U1);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_U1);
       case 0x6:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_I2);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_I2);
       case 0x7:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_U2);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_U2);
       case 0x8:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_I4);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_I4);
       case 0x9:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_U4);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_U4);
       case 0xa:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_I8);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_I8);
       case 0xb:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_U8);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_U8);
       case 0xc:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_R4);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_R4);
       case 0xd:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_R8);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_R8);
       case 0xe:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_STRING);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_STRING);
       case 0xf:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_PTR);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_PTR);
       case 0x10:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_BYREF);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_BYREF);
       case 0x11:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_VALUETYPE);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_VALUETYPE);
       case 0x12:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_CLASS);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_CLASS);
       case 0x13:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_VAR);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_VAR);
       case 0x14:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_ARRAY);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_ARRAY);
       case 0x15:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_GENERICINST);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_GENERICINST);
       case 0x16:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_TYPEDBYREF);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_TYPEDBYREF);
       case 0x18:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_I);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_I);
       case 0x19:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_U);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_U);
       case 0x1B:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_FNPTR);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_FNPTR);
       case 0x1C:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_OBJECT);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_OBJECT);
       case 0x1D:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_SZARRAY);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_SZARRAY);
       case 0x1E:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_MVAR);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_MVAR);
       case 0x1F:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_CMOD_REQD);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_CMOD_REQD);
       case 0x20:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_CMOD_OPT);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_CMOD_OPT);
       case 0x21:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_INTERNAL);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_INTERNAL);
       case 0x22:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_MAX);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_MAX);
       case 0x40:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_MODIFIER);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_MODIFIER);
       case 0x41:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_SENTINEL);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_SENTINEL);
       case 0x45:
-        return WindowsRuntimeType(CorElementType.ELEMENT_TYPE_PINNED);
+        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_PINNED);
       default:
         throw WinmdException('Unrecognized type $corElementTypeValue');
     }
