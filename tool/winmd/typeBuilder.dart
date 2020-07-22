@@ -2,13 +2,13 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'dartProjection.dart';
 import 'enums.dart';
 import 'mdReader.dart';
+import 'types.dart';
 import 'utils.dart';
 
 /// Takes a WinMD type and builds a Dart representation of it.
-class Convert {
+class TypeBuilder {
   /// Convert enums to ints
   static Parameter tidyParam(String type, Parameter param) {
     // TODO: This shouldn't be done by inspecting the type; we should be checking
@@ -46,7 +46,7 @@ class Convert {
       method.returnTypeDart = 'int';
 
       // return value is passed as an outparam
-      if (mdMethod.returnType.typeFlag.corType !=
+      if (mdMethod.returnType.typeIdentifier.corType !=
           CorElementType.ELEMENT_TYPE_VOID) {
         var retParam = Parameter();
         if (mdMethod.isProperty) {
@@ -54,8 +54,8 @@ class Convert {
         } else {
           retParam.name = method.name;
         }
-        retParam.nativeType = mdMethod.returnType.typeFlag.typeName;
-        retParam = tidyParam(mdMethod.returnType.typeFlag.typeName, retParam);
+        retParam.nativeType = mdMethod.returnType.typeIdentifier.name;
+        retParam = tidyParam(mdMethod.returnType.typeIdentifier.name, retParam);
         retParam.dartType = retParam.nativeType;
         method.parameters.add(retParam);
       }
@@ -64,8 +64,8 @@ class Convert {
         var param = Parameter();
         param.name = mdParam.name;
 
-        param.nativeType = mdParam.typeFlag.typeName;
-        param = tidyParam(mdParam.typeFlag.typeName, param);
+        param.nativeType = mdParam.typeIdentifier.name;
+        param = tidyParam(mdParam.typeIdentifier.name, param);
 
         method.parameters.add(param);
       }

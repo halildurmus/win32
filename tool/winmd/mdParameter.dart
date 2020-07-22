@@ -16,12 +16,12 @@ class WinmdParameter {
   int token;
   int sequence;
   int attributes;
-  WindowsRuntimeType typeFlag;
+  WindowsRuntimeType typeIdentifier;
   String name;
   int paramValueLength;
 
   WinmdParameter(this.reader, this.token, this.sequence, this.attributes,
-      this.typeFlag, this.name, this.paramValueLength);
+      this.typeIdentifier, this.name, this.paramValueLength);
 
   factory WinmdParameter.fromToken(IMetaDataImport2 reader, int token) {
     WinmdParameter parameter;
@@ -45,7 +45,7 @@ class WinmdParameter {
             token,
             pulSequence.value,
             pdwAttr.value,
-            WindowsRuntimeType(pdwCPlusTypeFlag.value),
+            WindowsRuntimeType.fromValue(pdwCPlusTypeFlag.value),
             szName.unpackString(pchName.value),
             pcchValue.value);
       }

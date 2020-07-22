@@ -6,40 +6,13 @@
 // parameters, as well as the logic necessary to emit a Dart language
 // representation (a projection) of the underlying API.
 
-enum SourceType { com, winrt, unknown }
+import 'types.dart';
 
-class Parameter {
-  String name;
-  String nativeType;
-  String dartType;
-  bool supported = true;
-}
-
-class Method {
-  String name;
-  String returnTypeNative;
-  String returnTypeDart;
-  final parameters = <Parameter>[];
-}
-
-class Interface {
-  SourceType sourceType;
-  String iid;
-  String name;
-  bool generateClass = false;
-  String clsid;
-  String className;
-  String inherits;
-  int vtableStart;
-
-  final methods = <Method>[];
-
-  String get shortName => name.split('.').last;
-
-  String get headerAsString {
+class TypePrinter {
+  static String headerAsString(Interface type) {
     final buffer = StringBuffer();
     buffer.writeln('''
-// $shortName.dart
+// ${type.shortName}.dart
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
@@ -58,32 +31,33 @@ import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
 ''');
-    if (sourceType == SourceType.winrt) {
+    if (type.sourceType == SourceType.winrt) {
       buffer.writeln('''
 import '../winrt/winrt_constants.dart';
 ''');
     }
 
-    if (inherits != '') {
-      buffer.writeln("import '$inherits.dart';");
+    if (type.inherits != '') {
+      buffer.writeln("import '${type.inherits}.dart';");
     }
     return buffer.toString();
   }
 
-  String get guidConstantsAsString {
+  static String guidConstantsAsString(Interface type) {
     final buffer = StringBuffer();
-    if (generateClass) {
+    if (type.generateClass) {
       buffer.writeln('/// @nodoc');
-      buffer.writeln("const CLSID_$className = '${clsid.toString()}';");
+      buffer.writeln(
+          "const CLSID_${type.className} = '${type.clsid.toString()}';");
     }
     buffer.writeln('/// @nodoc');
-    buffer.writeln("const IID_$shortName = '${iid.toString()}';\n");
+    buffer.writeln("const IID_${type.shortName} = '${type.iid.toString()}';\n");
     return buffer.toString();
   }
 
-  String get typedefsAsString {
+  static String typedefsAsString(Interface type) {
     final buffer = StringBuffer();
-    for (var method in methods) {
+    for (var method in type.methods) {
       var generateTypedef = true;
 
       // Check all params are supported
@@ -140,38 +114,38 @@ import '../winrt/winrt_constants.dart';
     return buffer.toString();
   }
 
-  String get interfaceAsString {
+  static String interfaceAsString(Interface type) {
     final buffer = StringBuffer();
-    var vtableIndex = vtableStart;
+    var vtableIndex = type.vtableStart;
 
     buffer.writeln('/// {@category Interface}');
-    if (sourceType == SourceType.winrt) {
+    if (type.sourceType == SourceType.winrt) {
       buffer.writeln('/// {@category winrt}');
     } else {
       buffer.writeln('/// {@category com}');
     }
-    if (inherits == '') {
-      buffer.writeln('class $shortName {');
+    if (type.inherits == '') {
+      buffer.writeln('class ${type.shortName} {');
     } else {
-      buffer.writeln('class $shortName extends $inherits {');
+      buffer.writeln('class ${type.shortName} extends ${type.inherits} {');
     }
 
     buffer.writeln('''
-  // vtable begins at $vtableStart, ends at ${vtableStart + methods.length - 1}
+  // vtable begins at ${type.vtableStart}, ends at ${type.vtableStart + type.methods.length - 1}
 ''');
-    if (inherits.isNotEmpty) {
+    if (type.inherits.isNotEmpty) {
       buffer.writeln('  @override');
     }
     buffer.write('''
   Pointer<COMObject> ptr;
 
-  $shortName(this.ptr)''');
-    if (inherits.isNotEmpty) {
+  ${type.shortName}(this.ptr)''');
+    if (type.inherits.isNotEmpty) {
       buffer.write(': super(ptr)');
     }
     buffer.writeln(';\n');
 
-    for (var method in methods) {
+    for (var method in type.methods) {
       var generateMethod = true;
 
       // Check all params are supported
@@ -199,7 +173,7 @@ import '../winrt/winrt_constants.dart';
     return buffer.toString();
   }
 
-  String dartMethod(Method method, int vtableIndex) {
+  static String dartMethod(Method method, int vtableIndex) {
     final buffer = StringBuffer();
     buffer.write('  ${method.returnTypeDart} ${method.name}(');
     for (var idx = 0; idx < method.parameters.length; idx++) {
@@ -230,7 +204,7 @@ import '../winrt/winrt_constants.dart';
     return buffer.toString();
   }
 
-  String dartGetProperty(Method method, int vtableIndex) {
+  static String dartGetProperty(Method method, int vtableIndex) {
     final buffer = StringBuffer();
 
     var exposedMethodName = method.name.substring(4);
@@ -256,7 +230,7 @@ import '../winrt/winrt_constants.dart';
     return buffer.toString();
   }
 
-  String dartSetProperty(Method method, int vtableIndex) {
+  static String dartSetProperty(Method method, int vtableIndex) {
     final buffer = StringBuffer();
 
     buffer.writeln('''
@@ -271,35 +245,35 @@ import '../winrt/winrt_constants.dart';
     return buffer.toString();
   }
 
-  String get classAsString {
-    if (generateClass) {
+  static String classAsString(Interface type) {
+    if (type.generateClass) {
       final buffer = StringBuffer();
 
-      if (sourceType == SourceType.winrt) {
+      if (type.sourceType == SourceType.winrt) {
         buffer.writeln('/// {@category winrt}');
       } else {
         buffer.writeln('/// {@category com}');
       }
       buffer.write('''
-class $className extends $name {
+class ${type.className} extends ${type.name} {
   @override
   Pointer<COMObject> ptr;
 
-  factory $className.createInstance() {
+  factory ${type.className}.createInstance() {
     final ptr = COMObject.allocate().addressOf;
 
     var hr = CoCreateInstance(
-        GUID.fromString(CLSID_$className).addressOf,
+        GUID.fromString(CLSID_${type.className}).addressOf,
         nullptr,
         CLSCTX_ALL,
-        GUID.fromString(IID_$name).addressOf,
+        GUID.fromString(IID_${type.name}).addressOf,
         ptr);
 
     if (FAILED(hr)) throw WindowsException(hr);
-    return $className(ptr);
+    return ${type.className}(ptr);
   }
 
-  $className(this.ptr) : super(ptr);
+  ${type.className}(this.ptr) : super(ptr);
 }
 ''');
       return buffer.toString();
@@ -308,11 +282,10 @@ class $className extends $name {
     }
   }
 
-  @override
-  String toString() =>
-      headerAsString +
-      guidConstantsAsString +
-      typedefsAsString +
-      interfaceAsString +
-      classAsString;
+  static String printType(Interface type) =>
+      headerAsString(type) +
+      guidConstantsAsString(type) +
+      typedefsAsString(type) +
+      interfaceAsString(type) +
+      classAsString(type);
 }

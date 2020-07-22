@@ -54,12 +54,12 @@ void listParameters(
   // the zeroth parameter is the return type
   for (var i = 0; i < method.parameters.length; i++) {
     print('[${method.parameters[i].sequence}] '
-        '${method.parameters[i].typeFlag.typeName} '
+        '${method.parameters[i].typeIdentifier.name} '
         '${method.parameters[i].name}');
   }
 
   final returnType = method.returnType;
-  print('\nreturns: ${returnType.typeFlag.typeName}');
+  print('\nreturns: ${returnType.typeIdentifier.name}');
 }
 
 void listInterfaces([String type = 'Windows.Storage.Pickers.FolderPicker']) {
@@ -94,7 +94,7 @@ String methodSignature(WinmdMethod method) {
       '${method.isGetProperty ? '[propget] ' : ''}'
       '${method.isSetProperty ? '[propset] ' : ''}'
       '${method.isRTSpecialName ? 'rt_special ' : ''}'
-      '${method.returnType.typeFlag.typeName} '
+      '${method.returnType.typeIdentifier.name} '
       '${method.isProperty ? method.methodName.substring(4) : method.methodName}');
 
   if (!method.isGetProperty) {
@@ -106,7 +106,7 @@ String methodSignature(WinmdMethod method) {
 }
 
 String typeParams(WinmdMethod method) => method.parameters
-    .map((param) => '${param.typeFlag.typeName} ${param.name}')
+    .map((param) => '${param.typeIdentifier.name} ${param.name}')
     .join(', ');
 
 String convertTypeToProjection(

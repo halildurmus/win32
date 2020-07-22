@@ -104,10 +104,10 @@ void main() {
       final method = winTypeDef.findMethod('AddDays');
 
       expect(method.isProperty, isFalse);
-      expect(method.returnType.typeFlag.corType,
+      expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_VOID));
       expect(method.parameters.length, equals(1));
-      expect(method.parameters.first.typeFlag.corType,
+      expect(method.parameters.first.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_I4));
       expect(method.parameters.first.name, equals('days'));
     });
@@ -120,7 +120,7 @@ void main() {
       final method = winTypeDef.findMethod('YearAsString');
 
       expect(method.isProperty, isFalse);
-      expect(method.returnType.typeFlag.corType,
+      expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_STRING));
       expect(method.parameters.length, equals(0));
     });
@@ -133,10 +133,10 @@ void main() {
       final method = winTypeDef.findMethod('MonthAsPaddedNumericString');
 
       expect(method.isProperty, isFalse);
-      expect(method.returnType.typeFlag.corType,
+      expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_STRING));
       expect(method.parameters.length, equals(1));
-      expect(method.parameters.first.typeFlag.corType,
+      expect(method.parameters.first.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_I4));
       expect(method.parameters.first.name, equals('minDigits'));
     });
@@ -149,7 +149,7 @@ void main() {
       final method = winTypeDef.findMethod('SetToNow');
 
       expect(method.isProperty, isFalse);
-      expect(method.returnType.typeFlag.corType,
+      expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_VOID));
       expect(method.parameters.length, equals(0));
     });
@@ -160,7 +160,7 @@ void main() {
 
       final method = winTypeDef.findMethod('get_Day');
 
-      expect(method.returnType.typeFlag.corType,
+      expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_I4));
       expect(method.isSpecialName, isTrue);
       expect(method.isProperty, isTrue);
@@ -176,13 +176,14 @@ void main() {
 
       final method = winTypeDef.findMethod('YearAsTruncatedString');
 
-      expect(method.returnType.typeFlag.corType,
+      expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_STRING));
       expect(method.isSpecialName, isFalse);
       expect(method.isProperty, isFalse);
       expect(method.parameters.length, equals(1));
       expect(method.parameters.first.name, equals('remainingDigits'));
-      expect(method.parameters.first.typeFlag.typeName, equals('Int32'));
+      expect(
+          method.parameters.first.typeIdentifier.nativeType, equals('Int32'));
     });
 
     test('Calendar.Clone method is correct', () {
@@ -192,7 +193,7 @@ void main() {
 
       final method = winTypeDef.findMethod('Clone');
 
-      expect(method.returnType.typeFlag.corType,
+      expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_CLASS));
       expect(method.returnType.name, equals('value'));
       expect(method.isSpecialName, isFalse);
@@ -206,9 +207,9 @@ void main() {
       final winTypeDef = mdScope.findTypeDef(type);
       final method = winTypeDef.findMethod('get_Status');
 
-      expect(method.returnType.typeFlag.corType,
+      expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
-      expect(method.returnType.typeFlag.typeName,
+      expect(method.returnType.typeIdentifier.name,
           equals('Windows.Foundation.AsyncStatus'));
       expect(method.isSpecialName, isTrue);
       expect(method.isProperty, isTrue);

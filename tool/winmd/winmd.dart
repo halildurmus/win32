@@ -11,8 +11,8 @@
 
 import 'dart:io';
 
-import 'convert.dart';
-import 'mdReader.dart';
+import 'typeBuilder.dart';
+import 'typePrinter.dart';
 
 final typesToGenerate = [
   'Windows.Foundation.IAsyncInfo',
@@ -27,15 +27,14 @@ void main(List<String> args) {
       : Directory('lib/src/generated2');
 
   for (var type in typesToGenerate) {
-    final dartProjection = Convert.projectWinMdType(type);
+    final projection = TypeBuilder.projectWinMdType(type);
+    final dartClass = TypePrinter.printType(projection);
 
     final outputFilename = type.split('.').last;
     final outputFile =
         File('${outputDirectory.uri.toFilePath()}$outputFilename.dart');
 
     print('Writing:    ${outputFile.path}');
-    outputFile.writeAsStringSync(dartProjection.toString());
+    outputFile.writeAsStringSync(dartClass);
   }
-
-  WinmdReader.close();
 }

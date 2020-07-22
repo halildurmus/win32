@@ -128,9 +128,9 @@ class WinmdMethod {
             // For a standard method, the return type is index 2, unless the
             // method signature includes generic parameters, in which case there
             // is an additional value in the blob.
-            parameter.typeFlag =
+            parameter.typeIdentifier =
                 _parseBlob(signature.sublist(hasGenericParameters ? 3 : 2))
-                    .typeFlag;
+                    .typeIdentifier;
           } else {
             print('ERROR: Invalid token');
           }
@@ -152,10 +152,10 @@ class WinmdMethod {
     final paramTypes = ListQueue<int>.from(blob);
 
     final paramType = paramTypes.removeFirst();
-    final runtimeType = WindowsRuntimeType(paramType);
+    final runtimeType = WindowsRuntimeType.fromValue(paramType);
 
-    if (paramType == CorElementType.ELEMENT_TYPE_VALUETYPE ||
-        paramType == CorElementType.ELEMENT_TYPE_CLASS) {
+    if (runtimeType.corType == CorElementType.ELEMENT_TYPE_VALUETYPE ||
+        runtimeType.corType == CorElementType.ELEMENT_TYPE_CLASS) {
       final uncompressed = corSigUncompressData(paramTypes.toList());
       for (var idx = 0; idx < uncompressed.dataLength; idx++) {
         paramTypes.removeFirst();
@@ -165,7 +165,7 @@ class WinmdMethod {
       // print(token.toHexString(32));
       final tokenAsType = WinmdType.fromToken(reader, token);
       // print(tokenAsType.typeName);
-      runtimeType.typeName = tokenAsType.typeName;
+      runtimeType.name = tokenAsType.typeName;
     }
     return WinmdParameter.fromType(reader, runtimeType);
   }
@@ -200,10 +200,11 @@ class WinmdMethod {
         final paramType = paramTypes.removeFirst();
         if (paramType == 0x11) {
           final param = _parseBlob(sublist);
-          paramNames[idx].typeFlag = param.typeFlag;
+          paramNames[idx].typeIdentifier = param.typeIdentifier;
           ;
         } else {
-          paramNames[idx].typeFlag = WindowsRuntimeType(paramType);
+          paramNames[idx].typeIdentifier =
+              WindowsRuntimeType.fromValue(paramType);
         }
       }
     }
