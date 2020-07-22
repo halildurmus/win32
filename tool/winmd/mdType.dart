@@ -54,9 +54,10 @@ class WinmdType {
       return WinmdType.fromTypeRef(reader, token);
     } else if (tokenIsTypeDef(token)) {
       return WinmdType.fromTypeDef(reader, token);
+    } else {
+      print('Unrecognized token $token');
+      return WinmdType(reader, false);
     }
-
-    throw WinmdException('Unrecognized token.');
   }
 
   /// Instantiate a typedef from a TypeDef token.
@@ -228,7 +229,8 @@ class WinmdType {
   }
 
   /// Gets the type referencing this type's superclass.
-  WinmdType get parent => WinmdType.fromToken(reader, baseTypeToken);
+  WinmdType get parent =>
+      token == 0 ? null : WinmdType.fromToken(reader, baseTypeToken);
 
   /// Get the GUID for this type.
   ///

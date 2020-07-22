@@ -124,6 +124,7 @@ class WinmdMethod {
 
       dataLength = uncompressed.dataLength + 1;
       runtimeType.name = tokenAsType.typeName;
+      runtimeType.type = tokenAsType;
     } else if (runtimeType.corType == CorElementType.ELEMENT_TYPE_GENERICINST) {
       final classTuple = _parseTypeFromSignature(signatureBlob.sublist(1));
       runtimeType.name = classTuple.item1.name;

@@ -3,11 +3,13 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'enums.dart';
+import 'mdType.dart';
 import 'utils.dart';
 
 class WinmdTypeIdentifier {
   final CorElementType corType;
   String name;
+  WinmdType type;
   final typeArgs = <WinmdTypeIdentifier>[];
 
   WinmdTypeIdentifier(this.corType);
