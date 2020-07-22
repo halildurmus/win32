@@ -4,13 +4,13 @@ import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
 import '../tool/winmd/enums.dart';
-import '../tool/winmd/mdReader.dart';
+import '../tool/winmd/mdStore.dart';
 
 void main() {
   if (isWindowsRuntimeAvailable()) {
     test('List all tokens in a file', () {
       final mdScope =
-          WinmdReader.getScopeForType('Windows.Globalization.Calendar');
+          WinmdStore.getScopeForType('Windows.Globalization.Calendar');
 
       expect(
           mdScope.typeDefs.length, equals(104)); // at least, on Windows 10 2004
@@ -18,7 +18,7 @@ void main() {
 
     test('Find a specific WinMD token', () {
       final mdScope =
-          WinmdReader.getScopeForType('Windows.Globalization.ICalendarFactory');
+          WinmdStore.getScopeForType('Windows.Globalization.ICalendarFactory');
 
       final type = mdScope.findTypeDef('Windows.Globalization.Calendar');
       expect(type.token, equals(0x02000003));
@@ -26,7 +26,7 @@ void main() {
 
     test('Get IAsyncInfo methods', () {
       final mdScope =
-          WinmdReader.getScopeForType('Windows.Foundation.IPropertyValue');
+          WinmdStore.getScopeForType('Windows.Foundation.IPropertyValue');
 
       final winTypeDef = mdScope.findTypeDef('Windows.Foundation.IAsyncInfo');
       final methods = winTypeDef.methods;
@@ -39,9 +39,8 @@ void main() {
     });
 
     test('Calendar.HourAsPaddedString method properties', () {
-      final type = 'Windows.Globalization.Calendar';
-      final mdScope = WinmdReader.getScopeForType(type);
-      final winTypeDef = mdScope.findTypeDef(type);
+      final winTypeDef =
+          WinmdStore.getMetadataForType('Windows.Globalization.Calendar');
       final methods = winTypeDef.methods;
 
       expect(methods[75].methodName, equals('HourAsPaddedString'));
@@ -55,9 +54,8 @@ void main() {
     });
 
     test('Find interfaces returns sane results', () {
-      final type = 'Windows.UI.Xaml.Controls.Button';
-      final mdScope = WinmdReader.getScopeForType(type);
-      final winTypeDef = mdScope.findTypeDef(type);
+      final winTypeDef =
+          WinmdStore.getMetadataForType('Windows.UI.Xaml.Controls.Button');
 
       final interfaces = winTypeDef.interfaces;
       expect(interfaces.length, equals(2));
@@ -69,9 +67,8 @@ void main() {
     });
 
     test('Interface GUID is correct', () {
-      final type = 'Windows.Globalization.ICalendar';
-      final mdScope = WinmdReader.getScopeForType(type);
-      final winTypeDef = mdScope.findTypeDef(type);
+      final winTypeDef =
+          WinmdStore.getMetadataForType('Windows.Globalization.ICalendar');
 
       final guid = winTypeDef.guid;
       expect(guid, isNotNull);
@@ -79,27 +76,24 @@ void main() {
     });
 
     test('Interface is correctly identified', () {
-      final type = 'Windows.Globalization.ICalendar';
-      final mdScope = WinmdReader.getScopeForType(type);
-      final winTypeDef = mdScope.findTypeDef(type);
+      final winTypeDef =
+          WinmdStore.getMetadataForType('Windows.Globalization.ICalendar');
 
       expect(winTypeDef.isInterface, isTrue);
       expect(winTypeDef.isClass, isFalse);
     });
 
     test('Class is correctly identified', () {
-      final type = 'Windows.Globalization.Calendar';
-      final mdScope = WinmdReader.getScopeForType(type);
-      final winTypeDef = mdScope.findTypeDef(type);
+      final winTypeDef =
+          WinmdStore.getMetadataForType('Windows.Globalization.Calendar');
 
       expect(winTypeDef.isInterface, isFalse);
       expect(winTypeDef.isClass, isTrue);
     });
 
     test('Calendar.AddDays() method is correct', () {
-      final type = 'Windows.Globalization.ICalendar';
-      final mdScope = WinmdReader.getScopeForType(type);
-      final winTypeDef = mdScope.findTypeDef(type);
+      final winTypeDef =
+          WinmdStore.getMetadataForType('Windows.Globalization.ICalendar');
 
       final method = winTypeDef.findMethod('AddDays');
 
@@ -113,9 +107,8 @@ void main() {
     });
 
     test('Calendar.YearAsString() method is correct', () {
-      final type = 'Windows.Globalization.ICalendar';
-      final mdScope = WinmdReader.getScopeForType(type);
-      final winTypeDef = mdScope.findTypeDef(type);
+      final winTypeDef =
+          WinmdStore.getMetadataForType('Windows.Globalization.ICalendar');
 
       final method = winTypeDef.findMethod('YearAsString');
 
@@ -126,9 +119,8 @@ void main() {
     });
 
     test('Calendar.MonthAsPaddedNumericString() method is correct', () {
-      final type = 'Windows.Globalization.ICalendar';
-      final mdScope = WinmdReader.getScopeForType(type);
-      final winTypeDef = mdScope.findTypeDef(type);
+      final winTypeDef =
+          WinmdStore.getMetadataForType('Windows.Globalization.ICalendar');
 
       final method = winTypeDef.findMethod('MonthAsPaddedNumericString');
 
@@ -142,9 +134,8 @@ void main() {
     });
 
     test('Calendar.SetToNow() method is correct', () {
-      final type = 'Windows.Globalization.ICalendar';
-      final mdScope = WinmdReader.getScopeForType(type);
-      final winTypeDef = mdScope.findTypeDef(type);
+      final winTypeDef =
+          WinmdStore.getMetadataForType('Windows.Globalization.ICalendar');
 
       final method = winTypeDef.findMethod('SetToNow');
 
@@ -154,9 +145,8 @@ void main() {
       expect(method.parameters.length, equals(0));
     });
     test('Calendar.Day get property is correct', () {
-      final type = 'Windows.Globalization.ICalendar';
-      final mdScope = WinmdReader.getScopeForType(type);
-      final winTypeDef = mdScope.findTypeDef(type);
+      final winTypeDef =
+          WinmdStore.getMetadataForType('Windows.Globalization.ICalendar');
 
       final method = winTypeDef.findMethod('get_Day');
 
@@ -170,9 +160,8 @@ void main() {
     });
 
     test('Calendar.YearAsTruncatedString get property is correct', () {
-      final type = 'Windows.Globalization.ICalendar';
-      final mdScope = WinmdReader.getScopeForType(type);
-      final winTypeDef = mdScope.findTypeDef(type);
+      final winTypeDef =
+          WinmdStore.getMetadataForType('Windows.Globalization.ICalendar');
 
       final method = winTypeDef.findMethod('YearAsTruncatedString');
 
@@ -187,9 +176,8 @@ void main() {
     });
 
     test('Method with multiple parameters and no return value is correct', () {
-      final type = 'Windows.Storage.Provider.CachedFileUpdater';
-      final mdScope = WinmdReader.getScopeForType(type);
-      final winTypeDef = mdScope.findTypeDef(type);
+      final winTypeDef = WinmdStore.getMetadataForType(
+          'Windows.Storage.Provider.CachedFileUpdater');
 
       final method = winTypeDef.findMethod('SetUpdateInformation');
 
@@ -214,9 +202,8 @@ void main() {
     });
 
     test('Method with generic return value is correct', () {
-      final type = 'Windows.Globalization.JapanesePhoneticAnalyzer';
-      final mdScope = WinmdReader.getScopeForType(type);
-      final winTypeDef = mdScope.findTypeDef(type);
+      final winTypeDef = WinmdStore.getMetadataForType(
+          'Windows.Globalization.JapanesePhoneticAnalyzer');
 
       final method = winTypeDef.findMethod('GetWords');
       expect(method.parameters.length, equals(2));
@@ -230,9 +217,8 @@ void main() {
     });
 
     test('Calendar.Clone method is correct', () {
-      final type = 'Windows.Globalization.ICalendar';
-      final mdScope = WinmdReader.getScopeForType(type);
-      final winTypeDef = mdScope.findTypeDef(type);
+      final winTypeDef =
+          WinmdStore.getMetadataForType('Windows.Globalization.ICalendar');
 
       final method = winTypeDef.findMethod('Clone');
 
@@ -245,9 +231,8 @@ void main() {
     });
 
     test('IAsyncInfo.Status get property is correct', () {
-      final type = 'Windows.Foundation.IAsyncInfo';
-      final mdScope = WinmdReader.getScopeForType(type);
-      final winTypeDef = mdScope.findTypeDef(type);
+      final winTypeDef =
+          WinmdStore.getMetadataForType('Windows.Foundation.IAsyncInfo');
       final method = winTypeDef.findMethod('get_Status');
 
       expect(method.returnType.typeIdentifier.corType,
@@ -262,9 +247,8 @@ void main() {
     });
 
     test('findMethod() fails gracefully', () {
-      final type = 'Windows.Globalization.ICalendar';
-      final mdScope = WinmdReader.getScopeForType(type);
-      final winTypeDef = mdScope.findTypeDef(type);
+      final winTypeDef =
+          WinmdStore.getMetadataForType('Windows.Globalization.ICalendar');
 
       final method = winTypeDef.findMethod('whoLetTheDogsOut');
       expect(method, isNull);

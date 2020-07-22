@@ -8,12 +8,13 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'mdScope.dart';
+import 'mdType.dart';
 
 /// Caches a reader for each file scope.
 ///
 /// Use this to obtain a reference of a scope without creating unnecessary
 /// copies or cycles.
-class WinmdReader {
+class WinmdStore {
   static IMetaDataDispenser dispenser;
   static final cache = <String, IMetaDataImport2>{};
 
@@ -93,6 +94,13 @@ class WinmdReader {
     }
   }
 
+  static WinmdType getMetadataForType(String typeName) {
+    if (!isInitialized) initialize();
+
+    final scope = getScopeForType(typeName);
+    return scope.findTypeDef(typeName);
+  }
+
   /// Dispose of all objects.
   ///
   /// The readers and dispensers should be automatically torn down with the end
@@ -112,8 +120,8 @@ class WinmdReader {
 
   /// Print information about the cache for debugging purposes.
   static void printCacheInfo() {
-    print('Cache stores ${WinmdReader.cache.length} entries:');
-    for (var cachedItem in WinmdReader.cache.keys) {
+    print('Cache stores ${WinmdStore.cache.length} entries:');
+    for (var cachedItem in WinmdStore.cache.keys) {
       print(' - $cachedItem');
     }
   }

@@ -3,7 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'enums.dart';
-import 'mdReader.dart';
+import 'mdType.dart';
 import 'types.dart';
 import 'utils.dart';
 
@@ -28,10 +28,7 @@ class TypeBuilder {
     return param;
   }
 
-  static Interface projectWinMdType(String type) {
-    final mdScope = WinmdReader.getScopeForType(type);
-    final mdTypeDef = mdScope.findTypeDef(type);
-
+  static Interface projectWinMdType(WinmdType mdTypeDef) {
     final interface = Interface();
     interface.sourceType = SourceType.winrt; // for now
     interface.iid = mdTypeDef.guid;

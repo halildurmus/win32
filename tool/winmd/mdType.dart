@@ -10,7 +10,7 @@ import 'package:win32/win32.dart';
 import 'constants.dart';
 import 'enums.dart';
 import 'mdMethod.dart';
-import 'mdReader.dart';
+import 'mdStore.dart';
 import 'utils.dart';
 
 /// Represents a TypeDef in the Windows Metadata file
@@ -112,7 +112,7 @@ class WinmdType {
         final typeName = szName.unpackString(pchName.value);
 
         // TODO: Can we shortcut something by using the resolution scope token?
-        final newScope = WinmdReader.getScopeForType(typeName);
+        final newScope = WinmdStore.getScopeForType(typeName);
 
         if (newScope != null) {
           return newScope.findTypeDef(typeName);

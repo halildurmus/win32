@@ -7,7 +7,7 @@
 import 'package:win32/win32.dart';
 
 import '../mdMethod.dart';
-import '../mdReader.dart';
+import '../mdStore.dart';
 
 void printHeading(String heading) {
   print('');
@@ -19,7 +19,7 @@ void printHeading(String heading) {
 void listTokens([String type = 'Windows.Devices.Bluetooth.BluetoothAdapter']) {
   printHeading('Typedefs in the metadata file containing $type');
 
-  final mdScope = WinmdReader.getScopeForType(type);
+  final mdScope = WinmdStore.getScopeForType(type);
 
   for (var type in mdScope.typeDefs) {
     print('[${type.token.toHexString(32)}] ${type.typeName} '
@@ -31,7 +31,7 @@ void listMethods(
     [String type = 'Windows.Networking.Connectivity.NetworkInformation']) {
   printHeading('Methods of $type');
 
-  final mdScope = WinmdReader.getScopeForType(type);
+  final mdScope = WinmdStore.getScopeForType(type);
   final winTypeDef = mdScope.findTypeDef(type);
   final methods = winTypeDef.methods;
 
@@ -43,7 +43,7 @@ void listParameters(
     String methodName = 'CompareDateTime']) {
   printHeading('Parameters of $methodName in $type');
 
-  final mdScope = WinmdReader.getScopeForType(type);
+  final mdScope = WinmdStore.getScopeForType(type);
 
   final winTypeDef = mdScope.findTypeDef(type);
   final method = winTypeDef.findMethod(methodName);
@@ -65,7 +65,7 @@ void listParameters(
 void listInterfaces([String type = 'Windows.Storage.Pickers.FolderPicker']) {
   printHeading('Interfaces implemented by $type');
 
-  final mdScope = WinmdReader.getScopeForType(type);
+  final mdScope = WinmdStore.getScopeForType(type);
 
   final winTypeDef = mdScope.findTypeDef(type);
 
@@ -81,7 +81,7 @@ void listInterfaces([String type = 'Windows.Storage.Pickers.FolderPicker']) {
 void listGUID([String type = 'Windows.UI.Shell.IAdaptiveCard']) {
   printHeading('GUID for $type');
 
-  final mdScope = WinmdReader.getScopeForType(type);
+  final mdScope = WinmdStore.getScopeForType(type);
   final winTypeDef = mdScope.findTypeDef(type);
 
   print(winTypeDef.guid);
@@ -115,7 +115,7 @@ String convertTypeToProjection(
 
   final idlProjection = StringBuffer();
 
-  final mdScope = WinmdReader.getScopeForType(type);
+  final mdScope = WinmdStore.getScopeForType(type);
   final winTypeDef = mdScope.findTypeDef(type);
 
   if (winTypeDef.parent.typeName == 'IInspectable') {

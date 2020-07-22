@@ -4,6 +4,7 @@
 
 final CLDB_E_RECORD_NOTFOUND = 0x80131130.toSigned(32);
 
+// TODO: Is there a way to look these up rather than encode them here?
 final systemTokens = <int, String>{
   0x01000000: 'IInspectable',
   0x01000001: 'System.Object',
