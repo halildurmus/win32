@@ -104,10 +104,10 @@ void main() {
       final method = winTypeDef.findMethod('AddDays');
 
       expect(method.isProperty, isFalse);
-      expect(method.returnType.typeFlag.corType,
+      expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_VOID));
       expect(method.parameters.length, equals(1));
-      expect(method.parameters.first.typeFlag.corType,
+      expect(method.parameters.first.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_I4));
       expect(method.parameters.first.name, equals('days'));
     });
@@ -120,7 +120,7 @@ void main() {
       final method = winTypeDef.findMethod('YearAsString');
 
       expect(method.isProperty, isFalse);
-      expect(method.returnType.typeFlag.corType,
+      expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_STRING));
       expect(method.parameters.length, equals(0));
     });
@@ -133,10 +133,10 @@ void main() {
       final method = winTypeDef.findMethod('MonthAsPaddedNumericString');
 
       expect(method.isProperty, isFalse);
-      expect(method.returnType.typeFlag.corType,
+      expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_STRING));
       expect(method.parameters.length, equals(1));
-      expect(method.parameters.first.typeFlag.corType,
+      expect(method.parameters.first.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_I4));
       expect(method.parameters.first.name, equals('minDigits'));
     });
@@ -149,7 +149,7 @@ void main() {
       final method = winTypeDef.findMethod('SetToNow');
 
       expect(method.isProperty, isFalse);
-      expect(method.returnType.typeFlag.corType,
+      expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_VOID));
       expect(method.parameters.length, equals(0));
     });
@@ -160,7 +160,7 @@ void main() {
 
       final method = winTypeDef.findMethod('get_Day');
 
-      expect(method.returnType.typeFlag.corType,
+      expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_I4));
       expect(method.isSpecialName, isTrue);
       expect(method.isProperty, isTrue);
@@ -176,13 +176,57 @@ void main() {
 
       final method = winTypeDef.findMethod('YearAsTruncatedString');
 
-      expect(method.returnType.typeFlag.corType,
+      expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_STRING));
       expect(method.isSpecialName, isFalse);
       expect(method.isProperty, isFalse);
       expect(method.parameters.length, equals(1));
       expect(method.parameters.first.name, equals('remainingDigits'));
-      expect(method.parameters.first.typeFlag.typeName, equals('Int32'));
+      expect(
+          method.parameters.first.typeIdentifier.nativeType, equals('Int32'));
+    });
+
+    test('Method with multiple parameters and no return value is correct', () {
+      final type = 'Windows.Storage.Provider.CachedFileUpdater';
+      final mdScope = WinmdReader.getScopeForType(type);
+      final winTypeDef = mdScope.findTypeDef(type);
+
+      final method = winTypeDef.findMethod('SetUpdateInformation');
+
+      expect(method.returnType.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_VOID));
+      expect(method.isProperty, isFalse);
+      expect(method.parameters.length, equals(5));
+      expect(method.parameters[0].typeIdentifier.name,
+          equals('Windows.Storage.IStorageFile'));
+      expect(method.parameters[0].name, equals('file'));
+      expect(method.parameters[1].typeIdentifier.name, equals('String'));
+      expect(method.parameters[1].name, equals('contentId'));
+      expect(method.parameters[2].typeIdentifier.name,
+          equals('Windows.Storage.Provider.ReadActivationMode'));
+      expect(method.parameters[2].name, equals('readMode'));
+      expect(method.parameters[3].typeIdentifier.name,
+          equals('Windows.Storage.Provider.WriteActivationMode'));
+      expect(method.parameters[3].name, equals('writeMode'));
+      expect(method.parameters[4].typeIdentifier.name,
+          equals('Windows.Storage.Provider.CachedFileOptions'));
+      expect(method.parameters[4].name, equals('options'));
+    });
+
+    test('Method with generic return value is correct', () {
+      final type = 'Windows.Globalization.JapanesePhoneticAnalyzer';
+      final mdScope = WinmdReader.getScopeForType(type);
+      final winTypeDef = mdScope.findTypeDef(type);
+
+      final method = winTypeDef.findMethod('GetWords');
+      expect(method.parameters.length, equals(2));
+      expect(method.returnType.typeIdentifier.name,
+          equals('Windows.Foundation.Collections.IVectorView`1'));
+      expect(method.returnType.typeIdentifier.typeArgs.length, equals(1));
+      expect(method.returnType.typeIdentifier.typeArgs.first.name,
+          equals('Windows.Globalization.JapanesePhoneme'));
+      expect(method.parameters.first.name, equals('input'));
+      expect(method.parameters.first.typeIdentifier.name, equals('String'));
     });
 
     test('Calendar.Clone method is correct', () {
@@ -192,7 +236,7 @@ void main() {
 
       final method = winTypeDef.findMethod('Clone');
 
-      expect(method.returnType.typeFlag.corType,
+      expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_CLASS));
       expect(method.returnType.name, equals('value'));
       expect(method.isSpecialName, isFalse);
@@ -206,9 +250,9 @@ void main() {
       final winTypeDef = mdScope.findTypeDef(type);
       final method = winTypeDef.findMethod('get_Status');
 
-      expect(method.returnType.typeFlag.corType,
+      expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
-      expect(method.returnType.typeFlag.typeName,
+      expect(method.returnType.typeIdentifier.name,
           equals('Windows.Foundation.AsyncStatus'));
       expect(method.isSpecialName, isTrue);
       expect(method.isProperty, isTrue);

@@ -15,6 +15,27 @@ class WinmdException implements Exception {
   String toString() => 'WinmdException: $message';
 }
 
+class Tuple<T1, T2> {
+  /// Returns the first item of the tuple
+  final T1 item1;
+
+  /// Returns the second item of the tuple
+  final T2 item2;
+
+  /// Creates a new tuple value with the specified items.
+  const Tuple(this.item1, this.item2);
+
+  @override
+  String toString() => '[$item1, $item2]';
+
+  @override
+  bool operator ==(Object other) =>
+      other is Tuple && other.item1 == item1 && other.item2 == item2;
+
+  @override
+  int get hashCode => item1.hashCode * item2.hashCode;
+}
+
 extension CamelCaseConversion on String {
   String toCamelCase() =>
       length >= 2 ? substring(0, 1).toLowerCase() + substring(1) : this;
