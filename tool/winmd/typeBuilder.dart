@@ -8,6 +8,8 @@ import 'mdTypeIdentifier.dart';
 import 'types.dart';
 import 'utils.dart';
 
+const Map<String, String> specialTypes = {'System.Guid': 'GUID'};
+
 /// Takes a WinMD type and builds a Dart representation of it.
 class TypeBuilder {
   static bool isTypeAnEnum(WinmdTypeIdentifier typeIdentifier) =>
@@ -21,6 +23,8 @@ class TypeBuilder {
       return 'int';
     } else if (isTypeValueType(typeIdentifier)) {
       return 'int';
+    } else if (specialTypes.containsKey(typeIdentifier.name)) {
+      return specialTypes[typeIdentifier.name];
     } else {
       return typeIdentifier.name;
     }
@@ -34,6 +38,8 @@ class TypeBuilder {
     } else if (isTypeValueType(typeIdentifier)) {
       // TODO: This needs figuring out -- a struct could have anything in it.
       return 'Uint32';
+    } else if (specialTypes.containsKey(typeIdentifier.name)) {
+      return specialTypes[typeIdentifier.name];
     } else {
       return typeIdentifier.name;
     }

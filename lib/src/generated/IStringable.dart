@@ -22,8 +22,8 @@ import 'IInspectable.dart';
 /// @nodoc
 const IID_IStringable = '{96369F54-8EB6-48F0-ABCE-C1B211E627C3}';
 
-typedef _ToString_Native = Int32 Function(Pointer obj, Pointer<Utf16> value);
-typedef _ToString_Dart = int Function(Pointer obj, Pointer<Utf16> value);
+typedef _ToString_Native = Int32 Function(Pointer obj, Pointer<IntPtr> value);
+typedef _ToString_Dart = int Function(Pointer obj, Pointer<IntPtr> value);
 
 /// {@category Interface}
 /// {@category winrt}
@@ -35,7 +35,7 @@ class IStringable extends IInspectable {
 
   IStringable(this.ptr) : super(ptr);
 
-  int ToString(Pointer<Utf16> value) =>
+  int ToString(Pointer<IntPtr> value) =>
       Pointer<NativeFunction<_ToString_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(6).value)
           .asFunction<_ToString_Dart>()(ptr.ref.lpVtbl, value);

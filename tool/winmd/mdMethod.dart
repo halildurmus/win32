@@ -246,8 +246,7 @@ class WinmdMethod {
 
     parameters[paramsIndex].name = '__valueSize';
     parameters[paramsIndex].typeIdentifier.name = 'Pointer<Uint32>';
-    parameters.insert(paramsIndex + 1,
-        WinmdParameter.fromTypeIdentifier(reader, typeTuple.item1));
+    parameters.insert(paramsIndex + 1, WinmdParameter.fromVoid(reader));
     parameters[paramsIndex + 1].name = 'value';
     parameters[paramsIndex + 1].typeIdentifier.name = 'Pointer<IntPtr>';
 
