@@ -22,9 +22,6 @@ class WinmdType {
   int flags;
   int baseTypeToken;
 
-  // Is the type a non-Windows Runtime type, such as System.Object or IInspectable?
-  bool isWindowsRuntimeType = true;
-
   /// Is the type a class?
   bool get isClass =>
       (flags & CorTypeAttr.tdClass == CorTypeAttr.tdClass) &&
@@ -34,11 +31,19 @@ class WinmdType {
   bool get isInterface =>
       flags & CorTypeAttr.tdInterface == CorTypeAttr.tdInterface;
 
+  /// Is the type a non-Windows Runtime type, such as System.Object or
+  /// IInspectable?
+  ///
+  /// More information at:
+  /// https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#type-system-encoding
+  bool get isSystemType =>
+      typeName.startsWith('System') || typeName == 'IInspectable';
+
   /// Create a typedef.
   ///
   /// Typically, typedefs should be obtained from a [WinmdScope] object rather
   /// than being created directly.
-  WinmdType(this.reader, this.isWindowsRuntimeType,
+  WinmdType(this.reader,
       [this.token = 0,
       this.typeName = '',
       this.flags = 0,
@@ -51,12 +56,16 @@ class WinmdType {
   /// typedef from the new scope.
   factory WinmdType.fromToken(IMetaDataImport2 reader, int token) {
     if (tokenIsTypeRef(token)) {
-      return WinmdType.fromTypeRef(reader, token);
+      try {
+        return WinmdType.fromTypeRef(reader, token);
+      } on WinmdException {
+        return null;
+      }
     } else if (tokenIsTypeDef(token)) {
       return WinmdType.fromTypeDef(reader, token);
     } else {
       print('Unrecognized token $token');
-      return WinmdType(reader, false);
+      return WinmdType(reader);
     }
   }
 
@@ -74,7 +83,6 @@ class WinmdType {
       if (SUCCEEDED(hr)) {
         return WinmdType(
             reader,
-            true,
             typeDefToken,
             typeName.unpackString(nRead.value),
             tdFlags.value,
@@ -103,7 +111,7 @@ class WinmdType {
     // a token like IInspectable is out of reach of GetTypeRefProps, since it is
     // a plain COM object. These objects are returned as system types.
     if (systemTokens.containsKey(typeRefToken)) {
-      return WinmdType(reader, false, 0, systemTokens[typeRefToken]);
+      return WinmdType(reader, 0, systemTokens[typeRefToken]);
     }
 
     try {

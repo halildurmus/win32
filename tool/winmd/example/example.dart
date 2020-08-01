@@ -8,6 +8,7 @@ import 'package:win32/win32.dart';
 
 import '../mdMethod.dart';
 import '../mdStore.dart';
+import '../utils.dart';
 
 void printHeading(String heading) {
   print('');
@@ -21,19 +22,31 @@ void listTokens([String type = 'Windows.Devices.Bluetooth.BluetoothAdapter']) {
 
   final mdScope = WinmdStore.getScopeForType(type);
 
-  for (var type in mdScope.typeDefs) {
+  for (var type in mdScope.typeDefs.take(10)) {
     print('[${type.token.toHexString(32)}] ${type.typeName} '
         '(baseType: ${type.baseTypeToken.toHexString(32)})');
   }
 }
 
+void listEnums([String type = 'Windows.Globalization']) {
+  printHeading('Enums implemented by $type');
+
+  final file = metadataFileContainingType('Windows.Globalization.DayOfWeek');
+  final mdScope = WinmdStore.getScopeForFile(file.path);
+  final enums = mdScope.enums;
+
+  for (var enumEntry in enums) {
+    print('${enumEntry.typeName} has ${enumEntry.fields.length} entries.');
+  }
+}
+
 void listMethods(
     [String type = 'Windows.Networking.Connectivity.NetworkInformation']) {
-  printHeading('Methods of $type');
+  printHeading('First ten methods of $type');
 
   final mdScope = WinmdStore.getScopeForType(type);
   final winTypeDef = mdScope.findTypeDef(type);
-  final methods = winTypeDef.methods;
+  final methods = winTypeDef.methods.take(10);
 
   print(methods.map(methodSignature).join('\n'));
 }
@@ -63,13 +76,13 @@ void listParameters(
 }
 
 void listInterfaces([String type = 'Windows.Storage.Pickers.FolderPicker']) {
-  printHeading('Interfaces implemented by $type');
+  printHeading('First 5 interfaces implemented by $type');
 
   final mdScope = WinmdStore.getScopeForType(type);
 
   final winTypeDef = mdScope.findTypeDef(type);
 
-  final interfaces = winTypeDef.interfaces;
+  final interfaces = winTypeDef.interfaces.take(5);
 
   print('$type implements:');
   for (var interface in interfaces) {
@@ -141,6 +154,7 @@ void main(List<String> args) {
   listGUID();
   listMethods();
   listParameters();
+  listEnums();
 
   print(convertTypeToProjection());
 }

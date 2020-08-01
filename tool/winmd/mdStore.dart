@@ -119,10 +119,6 @@ class WinmdStore {
   }
 
   /// Print information about the cache for debugging purposes.
-  static void printCacheInfo() {
-    print('Cache stores ${WinmdStore.cache.length} entries:');
-    for (var cachedItem in WinmdStore.cache.keys) {
-      print(' - $cachedItem');
-    }
-  }
+  @override
+  String toString() => 'Store: [${WinmdStore.cache.keys.join(', ')}]';
 }

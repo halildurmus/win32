@@ -31,10 +31,11 @@ class TypeBuilder {
   }
 
   static String nativeType(WinmdTypeIdentifier typeIdentifier) {
-    // TODO: ECMA-335 II.14.3 does not guarantee that an enum is a Uint32.
-    // Need to parse the enum and figure out its real type.
+    // ECMA-335 II.14.3 does not guarantee that an enum is 32-bit, but
+    // per https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#enums,
+    // enums are always signed or unsigned 32-bit values.
     if (isTypeAnEnum(typeIdentifier)) {
-      return 'Uint32';
+      return 'Int32';
     } else if (isTypeValueType(typeIdentifier)) {
       // TODO: This needs figuring out -- a struct could have anything in it.
       return 'Uint32';
