@@ -25,8 +25,8 @@ const IID_IAsyncInfo = '{00000036-0000-0000-C000-000000000046}';
 typedef _get_Id_Native = Int32 Function(Pointer obj, Pointer<Uint32> value);
 typedef _get_Id_Dart = int Function(Pointer obj, Pointer<Uint32> value);
 
-typedef _get_Status_Native = Int32 Function(Pointer obj, Pointer<Uint32> value);
-typedef _get_Status_Dart = int Function(Pointer obj, Pointer<Uint32> value);
+typedef _get_Status_Native = Int32 Function(Pointer obj, Pointer<Int32> value);
+typedef _get_Status_Dart = int Function(Pointer obj, Pointer<Int32> value);
 
 typedef _get_ErrorCode_Native = Int32 Function(
     Pointer obj, Pointer<Uint32> value);
@@ -62,7 +62,7 @@ class IAsyncInfo extends IInspectable {
   }
 
   int get Status {
-    final retValuePtr = allocate<Uint32>();
+    final retValuePtr = allocate<Int32>();
 
     final hr = Pointer<NativeFunction<_get_Status_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(7).value)
