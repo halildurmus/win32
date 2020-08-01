@@ -1877,6 +1877,14 @@ typedef shellExecuteDart = int Function(
     Pointer<Utf16> lpDirectory,
     int nShowCmd);
 
+// BOOL ShellExecuteExW(
+//   SHELLEXECUTEINFOW *pExecInfo
+// );
+typedef shellExecuteExNative = Int32 Function(
+    Pointer<SHELLEXECUTEINFO> pExecuteInfo);
+typedef shellExecuteExDart = int Function(
+    Pointer<SHELLEXECUTEINFO> pExecuteInfo);
+
 // BOOL ShowWindow(
 //   HWND hWnd,
 //   int  nCmdShow

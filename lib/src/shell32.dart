@@ -24,6 +24,11 @@ final ShellExecute = _shell32
     .lookupFunction<shellExecuteNative, shellExecuteDart>('ShellExecuteW');
 
 /// {@category shell32}
+final ShellExecuteEx =
+    _shell32.lookupFunction<shellExecuteExNative, shellExecuteExDart>(
+        'ShellExecuteExW');
+
+/// {@category shell32}
 final SHGetFolderPath =
     _shell32.lookupFunction<shGetFolderPathNative, shGetFolderPathDart>(
         'SHGetFolderPathW');
