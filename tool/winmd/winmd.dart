@@ -11,23 +11,27 @@
 
 import 'dart:io';
 
+import 'mdStore.dart';
 import 'typeBuilder.dart';
 import 'typePrinter.dart';
 
 final typesToGenerate = [
+  'Windows.Storage.Pickers.IFileOpenPicker',
+  // 'Windows.Globalization.ICalendar',
+  'Windows.Foundation.IPropertyValue',
   'Windows.Foundation.IAsyncInfo',
   'Windows.Foundation.IClosable',
   'Windows.Foundation.IStringable',
-  // 'Windows.Foundation.IPropertyValue',
 ];
 
 void main(List<String> args) {
   final outputDirectory = (args.length == 1)
       ? Directory(args.first)
-      : Directory('lib/src/generated2');
+      : Directory('lib/src/generated');
 
   for (var type in typesToGenerate) {
-    final projection = TypeBuilder.projectWinMdType(type);
+    final mdTypeDef = WinmdStore.getMetadataForType(type);
+    final projection = TypeBuilder.projectWinMdType(mdTypeDef);
     final dartClass = TypePrinter.printType(projection);
 
     final outputFilename = type.split('.').last;

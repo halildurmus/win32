@@ -3,35 +3,50 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'enums.dart';
-import 'mdReader.dart';
+import 'mdType.dart';
+import 'mdTypeIdentifier.dart';
 import 'types.dart';
 import 'utils.dart';
 
+const Map<String, String> specialTypes = {'System.Guid': 'GUID'};
+
 /// Takes a WinMD type and builds a Dart representation of it.
 class TypeBuilder {
-  /// Convert enums to ints
-  static Parameter tidyParam(String type, Parameter param) {
-    // TODO: This shouldn't be done by inspecting the type; we should be checking
-    // whether the type is an enum, and if so, what it corresponds to. This is a
-    // quick and dirty hack to get us up and running.
+  static bool isTypeAnEnum(WinmdTypeIdentifier typeIdentifier) =>
+      typeIdentifier.type?.parent?.typeName == 'System.Enum';
 
-    if (['Windows.Foundation.AsyncStatus'].contains(type)) {
-      param.dartType = 'int';
-      param.nativeType = 'Int32';
+  static bool isTypeValueType(WinmdTypeIdentifier typeIdentifier) =>
+      typeIdentifier.type?.parent?.typeName == 'System.ValueType';
+
+  static String dartType(WinmdTypeIdentifier typeIdentifier) {
+    if (isTypeAnEnum(typeIdentifier)) {
+      return 'int';
+    } else if (isTypeValueType(typeIdentifier)) {
+      return 'int';
+    } else if (specialTypes.containsKey(typeIdentifier.name)) {
+      return specialTypes[typeIdentifier.name];
+    } else {
+      return typeIdentifier.name;
     }
-
-    if (['Windows.Foundation.HResult'].contains(type)) {
-      param.dartType = 'int';
-      param.nativeType = 'Uint32';
-    }
-
-    return param;
   }
 
-  static Interface projectWinMdType(String type) {
-    final mdScope = WinmdReader.getScopeForType(type);
-    final mdTypeDef = mdScope.findTypeDef(type);
+  static String nativeType(WinmdTypeIdentifier typeIdentifier) {
+    // ECMA-335 II.14.3 does not guarantee that an enum is 32-bit, but
+    // per https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#enums,
+    // enums are always signed or unsigned 32-bit values.
+    if (isTypeAnEnum(typeIdentifier)) {
+      return 'Int32';
+    } else if (isTypeValueType(typeIdentifier)) {
+      // TODO: This needs figuring out -- a struct could have anything in it.
+      return 'Uint32';
+    } else if (specialTypes.containsKey(typeIdentifier.name)) {
+      return specialTypes[typeIdentifier.name];
+    } else {
+      return typeIdentifier.name;
+    }
+  }
 
+  static Interface projectWinMdType(WinmdType mdTypeDef) {
     final interface = Interface();
     interface.sourceType = SourceType.winrt; // for now
     interface.iid = mdTypeDef.guid;
@@ -45,27 +60,32 @@ class TypeBuilder {
       method.returnTypeNative = 'Int32';
       method.returnTypeDart = 'int';
 
-      // return value is passed as an outparam
+      // return value is passed as an pointer
       if (mdMethod.returnType.typeIdentifier.corType !=
           CorElementType.ELEMENT_TYPE_VOID) {
         var retParam = Parameter();
-        if (mdMethod.isProperty) {
+        if (mdMethod.isSetProperty) {
           retParam.name = method.name.substring(4).toCamelCase();
+        } else if (mdMethod.isGetProperty) {
+          retParam.name = 'value';
+          retParam.nativeType = nativeType(mdMethod.returnType.typeIdentifier);
+          retParam.dartType = dartType(mdMethod.returnType.typeIdentifier);
         } else {
-          retParam.name = method.name;
+          retParam.name = 'value';
+          retParam.nativeType =
+              'Pointer<${nativeType(mdMethod.returnType.typeIdentifier)}>';
+          retParam.dartType =
+              'Pointer<${nativeType(mdMethod.returnType.typeIdentifier)}>';
         }
-        retParam.nativeType = mdMethod.returnType.typeIdentifier.name;
-        retParam = tidyParam(mdMethod.returnType.typeIdentifier.name, retParam);
-        retParam.dartType = retParam.nativeType;
         method.parameters.add(retParam);
       }
 
       for (var mdParam in mdMethod.parameters) {
         var param = Parameter();
-        param.name = mdParam.name;
 
-        param.nativeType = mdParam.typeIdentifier.name;
-        param = tidyParam(mdParam.typeIdentifier.name, param);
+        param.name = mdParam.name;
+        param.nativeType = nativeType(mdParam.typeIdentifier);
+        param.dartType = dartType(mdParam.typeIdentifier);
 
         method.parameters.add(param);
       }

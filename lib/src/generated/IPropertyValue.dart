@@ -22,8 +22,8 @@ import 'IInspectable.dart';
 /// @nodoc
 const IID_IPropertyValue = '{4BD682DD-7554-40E9-9A9B-82654EDE7E62}';
 
-typedef _get_Type_Native = Int32 Function(Pointer obj, Pointer<IntPtr> value);
-typedef _get_Type_Dart = int Function(Pointer obj, Pointer<IntPtr> value);
+typedef _get_Type_Native = Int32 Function(Pointer obj, Pointer<Int32> value);
+typedef _get_Type_Dart = int Function(Pointer obj, Pointer<Int32> value);
 
 typedef _get_IsNumericScalar_Native = Int32 Function(
     Pointer obj, Pointer<Uint8> value);
@@ -57,10 +57,8 @@ typedef _GetSingle_Dart = int Function(Pointer obj, Pointer<Float> value);
 typedef _GetDouble_Native = Int32 Function(Pointer obj, Pointer<Double> value);
 typedef _GetDouble_Dart = int Function(Pointer obj, Pointer<Double> value);
 
-typedef _GetChar16_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer<Utf16>> value);
-typedef _GetChar16_Dart = int Function(
-    Pointer obj, Pointer<Pointer<Utf16>> value);
+typedef _GetChar16_Native = Int32 Function(Pointer obj, Pointer<Uint8> value);
+typedef _GetChar16_Dart = int Function(Pointer obj, Pointer<Uint8> value);
 
 typedef _GetBoolean_Native = Int32 Function(Pointer obj, Pointer<Uint8> value);
 typedef _GetBoolean_Dart = int Function(Pointer obj, Pointer<Uint8> value);
@@ -71,21 +69,22 @@ typedef _GetString_Dart = int Function(Pointer obj, Pointer<IntPtr> value);
 typedef _GetGuid_Native = Int32 Function(Pointer obj, Pointer<GUID> value);
 typedef _GetGuid_Dart = int Function(Pointer obj, Pointer<GUID> value);
 
-typedef _GetDateTime_Native = Int32 Function(Pointer obj, Pointer<Int64> value);
-typedef _GetDateTime_Dart = int Function(Pointer obj, Pointer<Int64> value);
+typedef _GetDateTime_Native = Int32 Function(
+    Pointer obj, Pointer<Uint32> value);
+typedef _GetDateTime_Dart = int Function(Pointer obj, Pointer<Uint32> value);
 
 typedef _GetTimeSpan_Native = Int32 Function(
-    Pointer obj, Pointer<IntPtr> value);
-typedef _GetTimeSpan_Dart = int Function(Pointer obj, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> value);
+typedef _GetTimeSpan_Dart = int Function(Pointer obj, Pointer<Uint32> value);
 
-typedef _GetPoint_Native = Int32 Function(Pointer obj, Pointer<IntPtr> value);
-typedef _GetPoint_Dart = int Function(Pointer obj, Pointer<IntPtr> value);
+typedef _GetPoint_Native = Int32 Function(Pointer obj, Pointer<Uint32> value);
+typedef _GetPoint_Dart = int Function(Pointer obj, Pointer<Uint32> value);
 
-typedef _GetSize_Native = Int32 Function(Pointer obj, Pointer<IntPtr> value);
-typedef _GetSize_Dart = int Function(Pointer obj, Pointer<IntPtr> value);
+typedef _GetSize_Native = Int32 Function(Pointer obj, Pointer<Uint32> value);
+typedef _GetSize_Dart = int Function(Pointer obj, Pointer<Uint32> value);
 
-typedef _GetRect_Native = Int32 Function(Pointer obj, Pointer<IntPtr> value);
-typedef _GetRect_Dart = int Function(Pointer obj, Pointer<IntPtr> value);
+typedef _GetRect_Native = Int32 Function(Pointer obj, Pointer<Uint32> value);
+typedef _GetRect_Dart = int Function(Pointer obj, Pointer<Uint32> value);
 
 typedef _GetUInt8Array_Native = Int32 Function(
     Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
@@ -193,7 +192,7 @@ class IPropertyValue extends IInspectable {
   IPropertyValue(this.ptr) : super(ptr);
 
   int get Type {
-    final retValuePtr = allocate<IntPtr>();
+    final retValuePtr = allocate<Int32>();
 
     final hr = Pointer<NativeFunction<_get_Type_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(6).value)
@@ -263,7 +262,7 @@ class IPropertyValue extends IInspectable {
               ptr.ref.vtable.elementAt(16).value)
           .asFunction<_GetDouble_Dart>()(ptr.ref.lpVtbl, value);
 
-  int GetChar16(Pointer<Pointer<Utf16>> value) =>
+  int GetChar16(Pointer<Uint8> value) =>
       Pointer<NativeFunction<_GetChar16_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(17).value)
           .asFunction<_GetChar16_Dart>()(ptr.ref.lpVtbl, value);
@@ -283,27 +282,27 @@ class IPropertyValue extends IInspectable {
               ptr.ref.vtable.elementAt(20).value)
           .asFunction<_GetGuid_Dart>()(ptr.ref.lpVtbl, value);
 
-  int GetDateTime(Pointer<Int64> value) =>
+  int GetDateTime(Pointer<Uint32> value) =>
       Pointer<NativeFunction<_GetDateTime_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(21).value)
           .asFunction<_GetDateTime_Dart>()(ptr.ref.lpVtbl, value);
 
-  int GetTimeSpan(Pointer<IntPtr> value) =>
+  int GetTimeSpan(Pointer<Uint32> value) =>
       Pointer<NativeFunction<_GetTimeSpan_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(22).value)
           .asFunction<_GetTimeSpan_Dart>()(ptr.ref.lpVtbl, value);
 
-  int GetPoint(Pointer<IntPtr> value) =>
+  int GetPoint(Pointer<Uint32> value) =>
       Pointer<NativeFunction<_GetPoint_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(23).value)
           .asFunction<_GetPoint_Dart>()(ptr.ref.lpVtbl, value);
 
-  int GetSize(Pointer<IntPtr> value) =>
+  int GetSize(Pointer<Uint32> value) =>
       Pointer<NativeFunction<_GetSize_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(24).value)
           .asFunction<_GetSize_Dart>()(ptr.ref.lpVtbl, value);
 
-  int GetRect(Pointer<IntPtr> value) =>
+  int GetRect(Pointer<Uint32> value) =>
       Pointer<NativeFunction<_GetRect_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(25).value)
           .asFunction<_GetRect_Dart>()(ptr.ref.lpVtbl, value);

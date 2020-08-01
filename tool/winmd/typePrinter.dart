@@ -58,57 +58,46 @@ import '../winrt/winrt_constants.dart';
   static String typedefsAsString(Interface type) {
     final buffer = StringBuffer();
     for (var method in type.methods) {
-      var generateTypedef = true;
-
-      // Check all params are supported
-      for (var params in method.parameters) {
-        if (!params.supported) {
-          generateTypedef = false;
+      // Native typedef
+      buffer.writeln(
+          'typedef _${method.name}_Native = ${method.returnTypeNative} Function(');
+      buffer.write('  Pointer obj');
+      if (method.parameters.isNotEmpty) {
+        buffer.writeln(',');
+      }
+      if (method.name.startsWith('get_')) {
+        buffer.write(
+            '  Pointer<${method.parameters.first.nativeType}> ${method.parameters.first.name}');
+      } else {
+        for (var idx = 0; idx < method.parameters.length; idx++) {
+          buffer.write(
+              '  ${method.parameters[idx].nativeType} ${method.parameters[idx].name}');
+          if (idx < method.parameters.length - 1) buffer.write(', ');
+          buffer.writeln();
         }
       }
+      buffer.writeln(');');
 
-      if (generateTypedef) {
-        // Native typedef
-        buffer.writeln(
-            'typedef _${method.name}_Native = ${method.returnTypeNative} Function(');
-        buffer.write('  Pointer obj');
-        if (method.parameters.isNotEmpty) {
-          buffer.writeln(',');
-        }
-        if (method.name.startsWith('get_')) {
-          buffer.write(
-              '  Pointer<${method.parameters.first.nativeType}> ${method.parameters.first.name}');
-        } else {
-          for (var idx = 0; idx < method.parameters.length; idx++) {
-            buffer.write(
-                '  ${method.parameters[idx].nativeType} ${method.parameters[idx].name}');
-            if (idx < method.parameters.length - 1) buffer.write(', ');
-            buffer.writeln();
-          }
-        }
-        buffer.writeln(');');
-
-        // Dart typedef
-        buffer.writeln(
-            'typedef _${method.name}_Dart = ${method.returnTypeDart} Function(');
-        buffer.write('  Pointer obj');
-        if (method.parameters.isNotEmpty) {
-          buffer.writeln(',');
-        }
-        if (method.name.startsWith('get_')) {
-          buffer.write(
-              '  Pointer<${method.parameters.first.nativeType}> ${method.parameters.first.name}');
-        } else {
-          for (var idx = 0; idx < method.parameters.length; idx++) {
-            buffer.write(
-                '  ${method.parameters[idx].dartType} ${method.parameters[idx].name}');
-            if (idx < method.parameters.length - 1) buffer.write(', ');
-            buffer.writeln();
-          }
-        }
-        buffer.writeln(');');
-        buffer.writeln();
+      // Dart typedef
+      buffer.writeln(
+          'typedef _${method.name}_Dart = ${method.returnTypeDart} Function(');
+      buffer.write('  Pointer obj');
+      if (method.parameters.isNotEmpty) {
+        buffer.writeln(',');
       }
+      if (method.name.startsWith('get_')) {
+        buffer.write(
+            '  Pointer<${method.parameters.first.nativeType}> ${method.parameters.first.name}');
+      } else {
+        for (var idx = 0; idx < method.parameters.length; idx++) {
+          buffer.write(
+              '  ${method.parameters[idx].dartType} ${method.parameters[idx].name}');
+          if (idx < method.parameters.length - 1) buffer.write(', ');
+          buffer.writeln();
+        }
+      }
+      buffer.writeln(');');
+      buffer.writeln();
     }
 
     return buffer.toString();
@@ -146,23 +135,12 @@ import '../winrt/winrt_constants.dart';
     buffer.writeln(';\n');
 
     for (var method in type.methods) {
-      var generateMethod = true;
-
-      // Check all params are supported
-      for (var params in method.parameters) {
-        if (!params.supported) {
-          generateMethod = false;
-        }
-      }
-
-      if (generateMethod) {
-        if (method.name.startsWith('get_')) {
-          buffer.write(dartGetProperty(method, vtableIndex));
-        } else if (method.name.startsWith('put_')) {
-          buffer.write(dartSetProperty(method, vtableIndex));
-        } else {
-          buffer.write(dartMethod(method, vtableIndex));
-        }
+      if (method.name.startsWith('get_')) {
+        buffer.write(dartGetProperty(method, vtableIndex));
+      } else if (method.name.startsWith('put_')) {
+        buffer.write(dartSetProperty(method, vtableIndex));
+      } else {
+        buffer.write(dartMethod(method, vtableIndex));
       }
 
       // Always increment vtable even if we don't generate method

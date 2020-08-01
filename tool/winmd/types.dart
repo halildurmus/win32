@@ -12,7 +12,9 @@ class Parameter {
   String name;
   String nativeType;
   String dartType;
-  bool supported = true;
+
+  @override
+  String toString() => '$name (dart: $dartType, native: $nativeType)';
 }
 
 class Method {
@@ -20,6 +22,10 @@ class Method {
   String returnTypeNative;
   String returnTypeDart;
   final parameters = <Parameter>[];
+
+  @override
+  String toString() =>
+      '$name (params: ${parameters.length}, returns: $returnTypeNative)';
 }
 
 class Interface {
@@ -35,4 +41,8 @@ class Interface {
   final methods = <Method>[];
 
   String get shortName => name.split('.').last;
+
+  @override
+  String toString() =>
+      '$name (methods: ${methods.length}, inherits: $inherits)';
 }
