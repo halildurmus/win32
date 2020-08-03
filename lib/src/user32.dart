@@ -135,6 +135,11 @@ final LoadIcon =
     _user32.lookupFunction<loadIconNative, loadIconDart>('LoadIconW');
 
 /// {@category user32}
+final LockWorkStation =
+    _user32.lookupFunction<lockWorkStationNative, lockWorkStationDart>(
+        'LockWorkStation');
+
+/// {@category user32}
 final MessageBox =
     _user32.lookupFunction<messageBoxNative, messageBoxDart>('MessageBoxW');
 

@@ -1646,7 +1646,7 @@ class SHELLEXECUTEINFO extends Struct {
   int hProcess;
 
   factory SHELLEXECUTEINFO.allocate() => allocate<SHELLEXECUTEINFO>().ref
-    ..cbSize = 0
+    ..cbSize = sizeOf<SHELLEXECUTEINFO>()
     ..fMask = 0
     ..hwnd = 0
     ..lpVerb = nullptr
@@ -1661,6 +1661,30 @@ class SHELLEXECUTEINFO extends Struct {
     ..dwHotKey = 0
     ..hMonitor = 0
     ..hProcess = 0;
+}
+
+// typedef struct _SHQUERYRBINFO {
+//     DWORD   cbSize;
+//     __int64 i64Size;
+//     __int64 i64NumItems;
+// #endif
+// } SHQUERYRBINFO, *LPSHQUERYRBINFO;
+
+/// SHQUERYRBINFO
+///
+/// {@category Struct}
+class SHQUERYRBINFO extends Struct {
+  @Int32()
+  int cbSize;
+  @Int64()
+  int i64Size;
+  @Int64()
+  int i64NumItems;
+
+  factory SHQUERYRBINFO.allocate() => allocate<SHQUERYRBINFO>().ref
+    ..cbSize = sizeOf<SHQUERYRBINFO>()
+    ..i64Size = 0
+    ..i64NumItems = 0;
 }
 
 // *** COM STRUCTS ***

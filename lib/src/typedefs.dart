@@ -1354,6 +1354,10 @@ typedef loadIconDart = int Function(int hInstance, Pointer<Utf16> lpIconName);
 typedef loadLibraryNative = IntPtr Function(Pointer<Utf16> lpLibFileName);
 typedef loadLibraryDart = int Function(Pointer<Utf16> lpLibFileName);
 
+// BOOL LockWorkStation();
+typedef lockWorkStationNative = Int32 Function();
+typedef lockWorkStationDart = int Function();
+
 // int MessageBoxW(
 //   HWND    hWnd,
 //   LPCWSTR lpText,
@@ -1820,29 +1824,6 @@ typedef setWindowTextNative = Int32 Function(
     IntPtr hWnd, Pointer<Utf16> lpString);
 typedef setWindowTextDart = int Function(int hWnd, Pointer<Utf16> lpString);
 
-// SHFOLDERAPI SHGetFolderPathW(
-//   HWND   hwnd,
-//   int    csidl,
-//   HANDLE hToken,
-//   DWORD  dwFlags,
-//   LPWSTR pszPath
-// );
-typedef shGetFolderPathNative = Int32 Function(IntPtr hwnd, Int32 csidl,
-    IntPtr hToken, Uint32 dwFlags, Pointer<Utf16> pszPath);
-typedef shGetFolderPathDart = int Function(
-    int hwnd, int csidl, int hToken, int dwFlags, Pointer<Utf16> pszPath);
-
-// HRESULT SHGetKnownFolderPath(
-//   REFKNOWNFOLDERID rfid,
-//   DWORD            dwFlags,
-//   HANDLE           hToken,
-//   PWSTR            *ppszPath
-// );
-typedef shGetKnownFolderPathNative = Int32 Function(Pointer<GUID> rfid,
-    Uint32 dwFlags, IntPtr hToken, Pointer<IntPtr> ppszPath);
-typedef shGetKnownFolderPathDart = int Function(
-    Pointer<GUID> rfid, int dwFlags, int hToken, Pointer<IntPtr> ppszPath);
-
 // INT ShellAboutW(
 //   HWND    hWnd,
 //   LPCWSTR szApp,
@@ -1885,12 +1866,80 @@ typedef shellExecuteExNative = Int32 Function(
 typedef shellExecuteExDart = int Function(
     Pointer<SHELLEXECUTEINFO> pExecuteInfo);
 
+// SHSTDAPI SHEmptyRecycleBinW(
+//   HWND    hwnd,
+//   LPCWSTR pszRootPath,
+//   DWORD   dwFlags
+// );
+typedef shEmptyRecycleBinNative = Int32 Function(
+    IntPtr hwnd, Pointer<Utf16> pszRootPath, Uint32 dwFlags);
+typedef shEmptyRecycleBinDart = int Function(
+    int hwnd, Pointer<Utf16> pszRootPath, int dwFlags);
+
+// BOOL SHGetDiskFreeSpaceExW(
+//   LPCWSTR        pszDirectoryName,
+//   ULARGE_INTEGER *pulFreeBytesAvailableToCaller,
+//   ULARGE_INTEGER *pulTotalNumberOfBytes,
+//   ULARGE_INTEGER *pulTotalNumberOfFreeBytes
+// );
+typedef shGetDiskFreeSpaceExNative = Int32 Function(
+    Pointer<Utf16> pszDirectoryName,
+    Pointer<Uint64> pulFreeBytesAvailableToCaller,
+    Pointer<Uint64> pulTotalNumberOfBytes,
+    Pointer<Uint64> pulTotalNumberOfFreeBytes);
+typedef shGetDiskFreeSpaceExDart = int Function(
+    Pointer<Utf16> pszDirectoryName,
+    Pointer<Uint64> pulFreeBytesAvailableToCaller,
+    Pointer<Uint64> pulTotalNumberOfBytes,
+    Pointer<Uint64> pulTotalNumberOfFreeBytes);
+
+// HRESULT SHGetDriveMedia(
+//   PCWSTR pszDrive,
+//   DWORD  *pdwMediaContent
+// );
+typedef shGetDriveMediaNative = Int32 Function(
+    Pointer<Utf16> pszDrive, Pointer<Uint32> pdwMediaContent);
+typedef shGetDriveMediaDart = int Function(
+    Pointer<Utf16> pszDrive, Pointer<Uint32> pdwMediaContent);
+
+// SHFOLDERAPI SHGetFolderPathW(
+//   HWND   hwnd,
+//   int    csidl,
+//   HANDLE hToken,
+//   DWORD  dwFlags,
+//   LPWSTR pszPath
+// );
+typedef shGetFolderPathNative = Int32 Function(IntPtr hwnd, Int32 csidl,
+    IntPtr hToken, Uint32 dwFlags, Pointer<Utf16> pszPath);
+typedef shGetFolderPathDart = int Function(
+    int hwnd, int csidl, int hToken, int dwFlags, Pointer<Utf16> pszPath);
+
+// HRESULT SHGetKnownFolderPath(
+//   REFKNOWNFOLDERID rfid,
+//   DWORD            dwFlags,
+//   HANDLE           hToken,
+//   PWSTR            *ppszPath
+// );
+typedef shGetKnownFolderPathNative = Int32 Function(Pointer<GUID> rfid,
+    Uint32 dwFlags, IntPtr hToken, Pointer<IntPtr> ppszPath);
+typedef shGetKnownFolderPathDart = int Function(
+    Pointer<GUID> rfid, int dwFlags, int hToken, Pointer<IntPtr> ppszPath);
+
 // BOOL ShowWindow(
 //   HWND hWnd,
 //   int  nCmdShow
 // );
 typedef showWindowNative = Int32 Function(IntPtr hWnd, Int32 nCmdShow);
 typedef showWindowDart = int Function(int hWnd, int nCmdShow);
+
+// SHSTDAPI SHQueryRecycleBinW(
+//   LPCWSTR         pszRootPath,
+//   LPSHQUERYRBINFO pSHQueryRBInfo
+// );
+typedef shQueryRecycleBinNative = Int32 Function(
+    Pointer<Utf16> pszRootPath, Pointer<SHQUERYRBINFO> pSHQueryRBInfo);
+typedef shQueryRecycleBinDart = int Function(
+    Pointer<Utf16> pszRootPath, Pointer<SHQUERYRBINFO> pSHQueryRBInfo);
 
 // void Sleep(
 //   DWORD dwMilliseconds
