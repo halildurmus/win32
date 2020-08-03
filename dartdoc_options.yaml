@@ -32,7 +32,10 @@ dartdoc:
     "winrt":
       name: "WinRT APIs"
       markdown: doc/winrt.md
-  categoryOrder: ["kernel32", "user32", "gdi32", "shell32", "ole32", "oleaut32", "comctl32", "comdlg32", "psapi", "advapi32", "bthprops", "powrprof", "dxva2", "com", "winrt"]
+    "examples":
+      name: "Sample apps"
+      markdown: doc/examples.md
+  categoryOrder: ["kernel32", "user32", "gdi32", "shell32", "ole32", "oleaut32", "comctl32", "comdlg32", "psapi", "advapi32", "bthprops", "powrprof", "dxva2", "com", "winrt", "examples"]
   showUndocumentedCategories: true
   ignore:
     - broken-link

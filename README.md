@@ -14,12 +14,7 @@ Flutter developers. A good example of that is
 [filepicker_windows](https://pub.dev/packages/filepicker_windows), which offers a
 common item dialog suitable for incorporation into an existing Flutter app.
 
-## Requirements
-
-This package assumes the [Dart 32-bit or 64-bit compiler](https://dart.dev/get-dart),
-running on Windows.
-
-## Usage
+## What does this package do
 
 This package lets you write apps that use the Windows API directly from Dart, by
 wrapping common Win32, COM and Windows Runtime APIs using Dart FFI.
@@ -27,30 +22,34 @@ wrapping common Win32, COM and Windows Runtime APIs using Dart FFI.
 You could use it to call a Win32 API like
 [EnumFontFamiliesEx](https://docs.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-enumfontfamiliesexw)
 to enumerate all locally-installed fonts:
-![](https://github.com/timsneath/win32/blob/master/doc/images/fonts.png?raw=true)
+![Fonts screenshot](https://github.com/timsneath/win32/blob/master/doc/images/fonts.png?raw=true)
 
 or access system information that is not exposed directly by the Dart framework libraries:
-![](https://github.com/timsneath/win32/blob/master/doc/images/power.png?raw=true)
+![System information screenshot](https://github.com/timsneath/win32/blob/master/doc/images/power.png?raw=true)
 
 You could use it to build a Windows app with Flutter that relies on Win32 APIs:
-![](https://github.com/timsneath/win32/blob/master/doc/images/disk_explorer.png?raw=true)
+![Disk explorer screenshot](https://github.com/timsneath/win32/blob/master/doc/images/disk_explorer.png?raw=true)
 
 You could even use it to build a traditional Win32 app that could have come straight out of a classic Charles Petzold book on programming Windows apps:
-![](https://github.com/timsneath/win32/blob/master/doc/images/notepad.png?raw=true)
+![Dart notepad screenshot](https://github.com/timsneath/win32/blob/master/doc/images/notepad.png?raw=true)
 
 or even perhaps a game:
-![](https://github.com/timsneath/win32/blob/master/doc/images/tetris.png?raw=true)
+![Dart Tetris for Win32 screenshot](https://github.com/timsneath/win32/blob/master/doc/images/tetris.png?raw=true)
 
 You might even build a package that depends upon it, like [dart_console](https://pub.dev/packages/dart_console), which enables advanced console manipulation:
-![](https://github.com/timsneath/win32/blob/master/doc/images/console.png?raw=true)
+![Dart console ANSI color demo screenshot](https://github.com/timsneath/win32/blob/master/doc/images/console.png?raw=true)
 
-or [filepicker_windows](), which provides a modern Windows file picker:
-![](https://github.com/timsneath/win32/blob/master/doc/images/filepicker.png?raw=true)
+or [filepicker_windows](https://pub.dev/packages/filepicker_windows), which provides a modern Windows file picker:
+![Windows file picker screenshot](https://github.com/timsneath/win32/blob/master/doc/images/filepicker.png?raw=true)
 
-You could use it to
-A simple Petzoldian Hello World example can be found in the `example`
-subdirectory. This example demonstrates creating a Win32 window and responding
-to common messages such as `WM_PAINT` through a `WindowProc` callback function.
+## Usage
+
+Many more samples can be found in the `example\` subdirectory, along with a test
+suite in the `test\` subdirectory that shows other API calls.
+
+A good starting point is `hello.dart`. This example demonstrates creating a
+Win32 window and responding to common messages such as `WM_PAINT` through a
+`WindowProc` callback function.
 
 To run it, type:
 
@@ -63,7 +62,7 @@ This should display a window with a text message.
 This can be compiled into a standalone Win32 executable by running:
 
 ```cmd
-dart2native example\hello.dart -o example\bin\hello.exe
+dart compile exe example\hello.dart -o example\bin\hello.exe
 ```
 
 ## Samples
@@ -105,6 +104,11 @@ examples use the Win32 API for all UI display and do not require Flutter.
 The `explorer\` subdirectory contains an example of a simple Flutter app that
 uses the volume management Win32 APIs to find the disk drives connected to your
 computer and their volume IDs and attached paths.
+
+## Requirements
+
+This package assumes the [Dart 32-bit or 64-bit compiler](https://dart.dev/get-dart),
+running on Windows.
 
 ## Features and bugs
 
