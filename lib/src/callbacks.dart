@@ -13,6 +13,9 @@ import 'structs.dart';
 typedef EnumFontFamExProc = Int32 Function(Pointer<LOGFONT> lpelfe,
     Pointer<TEXTMETRIC> lpntme, Uint32 FontType, IntPtr lParam);
 
+typedef EnumResNameProc = Int32 Function(IntPtr hModule, Pointer<Utf16> lpType,
+    Pointer<Utf16> lpName, IntPtr lParam);
+
 typedef EnumResTypeProc = Int32 Function(
     IntPtr hModule, Pointer<Utf16> lpszType, IntPtr lParam);
 
