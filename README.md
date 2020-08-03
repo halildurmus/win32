@@ -21,6 +21,30 @@ running on Windows.
 
 ## Usage
 
+This package lets you write apps that use the Windows API directly from Dart, by
+wrapping common Win32, COM and Windows Runtime APIs using Dart FFI.
+
+You could use it to call a Win32 API like
+[EnumFontFamiliesEx](https://docs.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-enumfontfamiliesexw)
+to enumerate all locally-installed fonts:
+![](https://github.com/timsneath/win32/blob/master/doc/images/fonts.png?raw=true)
+
+or access system information that is not exposed directly by the Dart framework libraries:
+![](https://github.com/timsneath/win32/blob/master/doc/images/power.png?raw=true)
+
+You could use it to build a Windows app with Flutter that relies on Win32 APIs:
+![](https://github.com/timsneath/win32/blob/master/doc/images/disk_explorer.png?raw=true)
+
+You could even use it to build a traditional Win32 app that could have come straight out of a classic Charles Petzold book on programming Windows apps:
+![](https://github.com/timsneath/win32/blob/master/doc/images/notepad.png?raw=true)
+
+or even perhaps a game:
+![](https://github.com/timsneath/win32/blob/master/doc/images/tetris.png?raw=true)
+
+You might even build a package that depends upon it, like [dart_console](https://pub.dev/packages/dart_console), which enables advanced console manipulation:
+![](https://github.com/timsneath/win32/blob/master/doc/images/console.png?raw=true)
+
+You could use it to
 A simple Petzoldian Hello World example can be found in the `example`
 subdirectory. This example demonstrates creating a Win32 window and responding
 to common messages such as `WM_PAINT` through a `WindowProc` callback function.
