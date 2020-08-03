@@ -3,7 +3,7 @@
     <assemblyIdentity
         type="win32"
         name="win32.Version"
-        processorArchitecture="x86" 
+        processorArchitecture="amd64" 
         version="1.0.0.0"
     />
     <description>Version</description>
