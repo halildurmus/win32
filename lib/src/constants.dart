@@ -4205,6 +4205,15 @@ class TASKDIALOG_COMMON_BUTTON_FLAGS {
   static const int TDCBF_CLOSE_BUTTON = 0x0020;
 }
 
+/// @nodoc
+const SHERB_NOCONFIRMATION = 0x00000001;
+
+/// @nodoc
+const SHERB_NOPROGRESSUI = 0x00000002;
+
+/// @nodoc
+const SHERB_NOSOUND = 0x00000004;
+
 // Folder IDs
 
 /// @nodoc

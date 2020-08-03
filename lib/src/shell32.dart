@@ -24,6 +24,25 @@ final ShellExecute = _shell32
     .lookupFunction<shellExecuteNative, shellExecuteDart>('ShellExecuteW');
 
 /// {@category shell32}
+final ShellExecuteEx =
+    _shell32.lookupFunction<shellExecuteExNative, shellExecuteExDart>(
+        'ShellExecuteExW');
+
+/// {@category shell32}
+final SHEmptyRecycleBin =
+    _shell32.lookupFunction<shEmptyRecycleBinNative, shEmptyRecycleBinDart>(
+        'SHEmptyRecycleBinW');
+
+/// {@category shell32}
+final SHGetDiskFreeSpaceEx = _shell32.lookupFunction<shGetDiskFreeSpaceExNative,
+    shGetDiskFreeSpaceExDart>('SHGetDiskFreeSpaceExW');
+
+/// {@category shell32}
+final SHGetDriveMedia =
+    _shell32.lookupFunction<shGetDriveMediaNative, shGetDriveMediaDart>(
+        'SHGetDriveMedia');
+
+/// {@category shell32}
 final SHGetFolderPath =
     _shell32.lookupFunction<shGetFolderPathNative, shGetFolderPathDart>(
         'SHGetFolderPathW');
@@ -31,3 +50,8 @@ final SHGetFolderPath =
 /// {@category shell32}
 final SHGetKnownFolderPath = _shell32.lookupFunction<shGetKnownFolderPathNative,
     shGetKnownFolderPathDart>('SHGetKnownFolderPath');
+
+/// {@category shell32}
+final SHQueryRecycleBin =
+    _shell32.lookupFunction<shQueryRecycleBinNative, shQueryRecycleBinDart>(
+        'SHQueryRecycleBinW');

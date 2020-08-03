@@ -1593,6 +1593,100 @@ class SCROLLINFO extends Struct {
     ..nTrackPos = 0;
 }
 
+// typedef struct _SHELLEXECUTEINFOW {
+//   DWORD     cbSize;
+//   ULONG     fMask;
+//   HWND      hwnd;
+//   LPCWSTR   lpVerb;
+//   LPCWSTR   lpFile;
+//   LPCWSTR   lpParameters;
+//   LPCWSTR   lpDirectory;
+//   int       nShow;
+//   HINSTANCE hInstApp;
+//   void      *lpIDList;
+//   LPCWSTR   lpClass;
+//   HKEY      hkeyClass;
+//   DWORD     dwHotKey;
+//   union {
+//     HANDLE hIcon;
+//     HANDLE hMonitor;
+//   } DUMMYUNIONNAME;
+//   HANDLE    hProcess;
+// } SHELLEXECUTEINFOW, *LPSHELLEXECUTEINFOW;
+
+/// SHELLEXECUTEINFOW
+///
+/// {@category Struct}
+class SHELLEXECUTEINFO extends Struct {
+  @Uint32()
+  int cbSize;
+  @Uint32()
+  int fMask;
+  @IntPtr()
+  int hwnd;
+
+  Pointer<Utf16> lpVerb;
+  Pointer<Utf16> lpFile;
+  Pointer<Utf16> lpParameters;
+  Pointer<Utf16> lpDirectory;
+
+  @Int32()
+  int nShow;
+  @IntPtr()
+  int hInstApp;
+  Pointer lpIDList;
+  Pointer<Utf16> lpClass;
+  @IntPtr()
+  int hkeyClass;
+  @Uint32()
+  int dwHotKey;
+  @IntPtr()
+  int hMonitor;
+  @IntPtr()
+  int hProcess;
+
+  factory SHELLEXECUTEINFO.allocate() => allocate<SHELLEXECUTEINFO>().ref
+    ..cbSize = sizeOf<SHELLEXECUTEINFO>()
+    ..fMask = 0
+    ..hwnd = 0
+    ..lpVerb = nullptr
+    ..lpFile = nullptr
+    ..lpParameters = nullptr
+    ..lpDirectory = nullptr
+    ..nShow = 0
+    ..hInstApp = 0
+    ..lpIDList = nullptr
+    ..lpClass = nullptr
+    ..hkeyClass = 0
+    ..dwHotKey = 0
+    ..hMonitor = 0
+    ..hProcess = 0;
+}
+
+// typedef struct _SHQUERYRBINFO {
+//     DWORD   cbSize;
+//     __int64 i64Size;
+//     __int64 i64NumItems;
+// #endif
+// } SHQUERYRBINFO, *LPSHQUERYRBINFO;
+
+/// SHQUERYRBINFO
+///
+/// {@category Struct}
+class SHQUERYRBINFO extends Struct {
+  @Int32()
+  int cbSize;
+  @Int64()
+  int i64Size;
+  @Int64()
+  int i64NumItems;
+
+  factory SHQUERYRBINFO.allocate() => allocate<SHQUERYRBINFO>().ref
+    ..cbSize = sizeOf<SHQUERYRBINFO>()
+    ..i64Size = 0
+    ..i64NumItems = 0;
+}
+
 // *** COM STRUCTS ***
 
 // typedef struct _GUID {
