@@ -30,7 +30,7 @@ or access system information that is not exposed directly by the Dart framework 
 You could use it to build a Windows app with Flutter that relies on Win32 APIs:
 ![Disk explorer screenshot](https://github.com/timsneath/win32/blob/master/doc/images/disk_explorer.png?raw=true)
 
-You could even use it to build a traditional Win32 app that could have come straight out of a classic Charles Petzold book on programming Windows apps:
+You could even use it to build a traditional Win32 app, written purely in Dart, that could have come straight out of a classic Charles Petzold book on programming Windows apps:
 ![Dart notepad screenshot](https://github.com/timsneath/win32/blob/master/doc/images/notepad.png?raw=true)
 
 or even, perhaps, a fully-fledged game using GDI:
@@ -39,7 +39,7 @@ or even, perhaps, a fully-fledged game using GDI:
 You might even build a package that depends upon it, like [dart_console](https://pub.dev/packages/dart_console), which enables advanced console manipulation:
 ![Dart console ANSI color demo screenshot](https://github.com/timsneath/win32/blob/master/doc/images/console.png?raw=true)
 
-or [filepicker_windows](https://pub.dev/packages/filepicker_windows), which provides a modern Windows file picker:
+or [filepicker_windows](https://pub.dev/packages/filepicker_windows), which provides a modern Windows file picker for Flutter:
 ![Windows file picker screenshot](https://github.com/timsneath/win32/blob/master/doc/images/filepicker.png?raw=true)
 
 ## Usage
