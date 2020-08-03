@@ -44,6 +44,9 @@ or even perhaps a game:
 You might even build a package that depends upon it, like [dart_console](https://pub.dev/packages/dart_console), which enables advanced console manipulation:
 ![](https://github.com/timsneath/win32/blob/master/doc/images/console.png?raw=true)
 
+or [filepicker_windows](), which provides a modern Windows file picker:
+![](https://github.com/timsneath/win32/blob/master/doc/images/filepicker.png?raw=true)
+
 You could use it to
 A simple Petzoldian Hello World example can be found in the `example`
 subdirectory. This example demonstrates creating a Win32 window and responding
