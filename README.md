@@ -33,7 +33,7 @@ You could use it to build a Windows app with Flutter that relies on Win32 APIs:
 You could even use it to build a traditional Win32 app that could have come straight out of a classic Charles Petzold book on programming Windows apps:
 ![Dart notepad screenshot](https://github.com/timsneath/win32/blob/master/doc/images/notepad.png?raw=true)
 
-or even perhaps a game:
+or even, perhaps, a fully-fledged game using GDI:
 ![Dart Tetris for Win32 screenshot](https://github.com/timsneath/win32/blob/master/doc/images/tetris.png?raw=true)
 
 You might even build a package that depends upon it, like [dart_console](https://pub.dev/packages/dart_console), which enables advanced console manipulation:
