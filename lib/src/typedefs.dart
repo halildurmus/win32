@@ -45,6 +45,15 @@ typedef beginPaintNative = IntPtr Function(
     IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint);
 typedef beginPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
 
+// HANDLE BeginUpdateResourceW(
+//   LPCWSTR pFileName,
+//   BOOL    bDeleteExistingResources
+// );
+typedef beginUpdateResourceNative = IntPtr Function(
+    Pointer<Utf16> pFilename, Int32 bDeleteExistingResources);
+typedef beginUpdateResourceDart = int Function(
+    Pointer<Utf16> pFilename, int bDeleteExistingResources);
+
 // DWORD BluetoothAuthenticateDeviceEx(
 //   HWND                        hwndParentIn,
 //   HANDLE                      hRadioIn,
@@ -606,6 +615,14 @@ typedef endPaintNative = Int32 Function(
     IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint);
 typedef endPaintDart = int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint);
 
+// BOOL EndUpdateResourceW(
+//   HANDLE hUpdate,
+//   BOOL   fDiscard
+// );
+typedef endUpdateResourceNative = Int32 Function(
+    IntPtr hUpdate, Int32 fDiscard);
+typedef endUpdateResourceDart = int Function(int hUpdate, int fDiscard);
+
 // BOOL EnumDisplayMonitors(
 //   HDC             hdc,
 //   LPCRECT         lprcClip,
@@ -657,6 +674,27 @@ typedef enumProcessModulesNative = Int32 Function(IntPtr hProcess,
     Pointer<IntPtr> lphModule, Uint32 cb, Pointer<Uint32> lpcbNeeded);
 typedef enumProcessModulesDart = int Function(int hProcess,
     Pointer<IntPtr> lphModule, int cb, Pointer<Uint32> lpcbNeeded);
+
+// BOOL EnumResourceNamesW(
+//   HMODULE          hModule,
+//   LPCWSTR          lpType,
+//   ENUMRESNAMEPROCW lpEnumFunc,
+//   LONG_PTR         lParam
+// );
+typedef enumResourceNamesNative = Int32 Function(IntPtr hModule,
+    Pointer<Utf16> lpType, Pointer<NativeFunction> lpEnumFunc, IntPtr lParam);
+typedef enumResourceNamesDart = int Function(int hModule, Pointer<Utf16> lpType,
+    Pointer<NativeFunction> lpEnumFunc, int lParam);
+
+// BOOL EnumResourceTypesW(
+//   HMODULE          hModule,
+//   ENUMRESTYPEPROCW lpEnumFunc,
+//   LONG_PTR         lParam
+// );
+typedef enumResourceTypesNative = Int32 Function(
+    IntPtr hModule, Pointer<NativeFunction> lpEnumFunc, IntPtr lParam);
+typedef enumResourceTypesDart = int Function(
+    int hModule, Pointer<NativeFunction> lpEnumFunc, int lParam);
 
 // BOOL EnumWindows(
 //   WNDENUMPROC lpEnumFunc,
@@ -2079,6 +2117,24 @@ typedef updateProcThreadAttributeDart = int Function(
     int cbSize,
     Pointer lpPreviousValue,
     Pointer<IntPtr> lpReturnSize);
+
+// BOOL UpdateResourceW(
+//   HANDLE  hUpdate,
+//   LPCWSTR lpType,
+//   LPCWSTR lpName,
+//   WORD    wLanguage,
+//   LPVOID  lpData,
+//   DWORD   cb
+// );
+typedef updateResourceNative = Int32 Function(
+    IntPtr hUpdate,
+    Pointer<Utf16> lpType,
+    Pointer<Utf16> lpName,
+    Uint16 wLanguage,
+    Pointer lpData,
+    Uint32 cb);
+typedef updateResourceDart = int Function(int hUpdate, Pointer<Utf16> lpType,
+    Pointer<Utf16> lpName, int wLanguage, Pointer lpData, int cb);
 
 // BOOL UpdateWindow(
 //   HWND hWnd

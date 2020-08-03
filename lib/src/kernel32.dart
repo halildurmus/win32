@@ -18,6 +18,10 @@ final ActivateActCtx = _kernel32
 final Beep = _kernel32.lookupFunction<beepNative, beepDart>('Beep');
 
 /// {@category kernel32}
+final BeginUpdateResource = _kernel32.lookupFunction<beginUpdateResourceNative,
+    beginUpdateResourceDart>('BeginUpdateResourceW');
+
+/// {@category kernel32}
 final CloseHandle =
     _kernel32.lookupFunction<closeHandleNative, closeHandleDart>('CloseHandle');
 
@@ -46,6 +50,21 @@ final CreatePseudoConsole = _kernel32.lookupFunction<createPseudoConsoleNative,
 final DeactivateActCtx =
     _kernel32.lookupFunction<deactivateActCtxNative, deactivateActCtxDart>(
         'DeactivateActCtx');
+
+/// {@category kernel32}
+final EndUpdateResource =
+    _kernel32.lookupFunction<endUpdateResourceNative, endUpdateResourceDart>(
+        'EndUpdateResourceW');
+
+/// {@category kernel32}
+final EnumResourceNames =
+    _kernel32.lookupFunction<enumResourceNamesNative, enumResourceNamesDart>(
+        'EnumResourceNamesW');
+
+/// {@category kernel32}
+final EnumResourceTypes =
+    _kernel32.lookupFunction<enumResourceTypesNative, enumResourceTypesDart>(
+        'EnumResourceTypesW');
 
 /// {@category kernel32}
 final FillConsoleOutputAttribute = _kernel32.lookupFunction<
@@ -246,6 +265,11 @@ final VirtualAlloc = _kernel32
 final UpdateProcThreadAttribute = _kernel32.lookupFunction<
     updateProcThreadAttributeNative,
     updateProcThreadAttributeDart>('UpdateProcThreadAttribute');
+
+/// {@category kernel32}
+final UpdateResource =
+    _kernel32.lookupFunction<updateResourceNative, updateResourceDart>(
+        'UpdateResourceW');
 
 /// {@category kernel32}
 final VirtualFree =
