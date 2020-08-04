@@ -2319,6 +2319,11 @@ class INITCOMMONCONTROLSEX extends Struct {
 //   UINT                           cxWidth;
 // } TASKDIALOGCONFIG;
 
+// TODO: This struct is packed (#include <pshpack1.h> before the struct
+// declaration in CommCtrl.h. Unfortunately Dart FFI does not yet support packed
+// structs (https://github.com/dart-lang/sdk/issues/38158), so this cannot yet
+// be used.
+
 /// TASKDIALOGCONFIG
 ///
 /// {@category Struct}
