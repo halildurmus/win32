@@ -2,75 +2,114 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// Demonstrates a MessageBox from the console
+// Demonstrates a task dialog from the console.
+
+// Requires a reference to comctl32.dll v6 in the manifest to work. An example
+// is included in taskdialog.exe.manifest, but this will only be loaded if
+// you first compile this example with a command such as:
+//   dart compile exe taskdialog.dart
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-typedef dllGetVersionNative = Int32 Function(Pointer<DLLVERSIONINFO>);
-typedef dllGetVersionDart = int Function(Pointer<DLLVERSIONINFO>);
+void showSimpleTaskDialog() {
+  final windowTitle = TEXT('Dart TaskDialog Sample');
+  final mainInstruction = TEXT('Please read this important message');
+  final content = TEXT(
+      'Task dialogs are great for sharing a longer string of explanatory '
+      'content, where you need a user to read an instruction before making a '
+      'decision. Of course, you cannot guarantee that the user will actually '
+      'read the text, so it\'s important that you also provide an undo function '
+      'for when the wrong choice is selected.');
+  final buttonSelected = allocate<Int32>();
 
-void showTaskDialog() {
-  final message =
-      TEXT('Some text that will be displayed in the task dialog goes here.');
-  final title = TEXT('Title message goes here');
-
-  // Requires a reference to comctl32.dll v6 in the manifest to work
-  final hr = TaskDialog(
-      NULL,
-      NULL,
-      title,
-      message,
-      nullptr,
-      TASKDIALOG_COMMON_BUTTON_FLAGS.TDCBF_OK_BUTTON,
-      TD_INFORMATION_ICON,
-      nullptr);
-  print(hr);
-
-  free(title);
-  free(message);
-}
-
-int getVersion(String dllName) {
-  var dwVersion = 0;
-
-  final lpszDllName = TEXT(dllName);
-  final hInstance = LoadLibrary(lpszDllName);
-
-  if (hInstance != 0) {
-    final dllGetVersion = convertToANSIString('DllGetVersion');
-    final pDllGetVersion = GetProcAddress(hInstance, dllGetVersion);
-
-    if (pDllGetVersion != 0) {
-      final dllVersionInfo = DLLVERSIONINFO.allocate();
-
-      final DllGetVersion =
-          Pointer<NativeFunction<dllGetVersionNative>>.fromAddress(
-                  pDllGetVersion)
-              .asFunction<dllGetVersionDart>();
-
-      final hr = DllGetVersion(dllVersionInfo.addressOf);
-
-      if (SUCCEEDED(hr)) {
-        dwVersion = MAKELONG(
-            dllVersionInfo.dwMajorVersion, dllVersionInfo.dwMinorVersion);
+  try {
+    final hr = TaskDialog(
+        NULL,
+        NULL,
+        windowTitle,
+        mainInstruction,
+        content,
+        TASKDIALOG_COMMON_BUTTON_FLAGS.TDCBF_OK_BUTTON |
+            TASKDIALOG_COMMON_BUTTON_FLAGS.TDCBF_CANCEL_BUTTON,
+        TD_INFORMATION_ICON,
+        buttonSelected);
+    if (SUCCEEDED(hr)) {
+      switch (buttonSelected.value) {
+        case IDOK:
+          print('User clicked on the OK button.');
+          break;
+        default:
+          print('User canceled the task dialog.');
       }
     }
-    FreeLibrary(hInstance);
+  } on ArgumentError {
+    print(
+        'If you see an error "Failed to lookup symbol", it\'s likely because the '
+        'app manifest\ndeclaring a dependency on comctl32.dll v6 is missing.\n');
+    rethrow;
+  } finally {
+    free(windowTitle);
+    free(mainInstruction);
+    free(content);
   }
-  return dwVersion;
+}
+
+// Broken until https://github.com/dart-lang/sdk/issues/38158 is fixed.
+void showCustomTaskDialog() {
+  final config = TASKDIALOGCONFIG.allocate();
+  print(sizeOf<TASKDIALOGCONFIG>());
+  final buttonSelected = allocate<Int32>();
+
+  final buttons = allocate<TASKDIALOG_BUTTON>(count: 2);
+  buttons[0]
+    ..nButtonID = 100
+    ..pszButtonText =
+        TEXT('Take the blue pill\nThe story ends, you wake up in your bed and '
+            'believe whatever you want to believe.');
+  buttons[1]
+    ..nButtonID = 101
+    ..pszButtonText = TEXT(
+        'Take the red pill\nYou stay in Wonderland, and I show you how deep '
+        'the rabbit hole goes.');
+
+  config.pszWindowTitle = TEXT('TaskDialogIndirect Sample');
+  config.pszMainInstruction = TEXT('Which pill will you take?');
+  config.pszContent =
+      TEXT('This is your last chance. There is no turning back.');
+  config.hMainIcon = TD_WARNING_ICON.address;
+
+  config.pszCollapsedControlText = TEXT('See more details.');
+  config.pszExpandedControlText = TEXT(
+      'In The Matrix, the main character Neo is offered the choice between a '
+      'red pill and a blue pill by rebel leader Morpheus. The red pill represents '
+      'an uncertain future: it would free him from the enslaving control of the '
+      'machine-generated dream world and allow him to escape into the real world, '
+      'but living the "truth of reality" is harsher and more difficult. On the '
+      'other hand, the blue pill represents a beautiful prison: it would lead him '
+      'back to ignorance, living in confined comfort without want or fear within '
+      'the simulated reality of the Matrix.');
+  config.cButtons = 2;
+  config.pButtons = buttons;
+
+  print('Here we go.');
+  final hr =
+      TaskDialogIndirect(config.addressOf, buttonSelected, nullptr, nullptr);
+
+  if (SUCCEEDED(hr)) {
+    if (buttonSelected.value == 100) {
+      print('Ignorance is bliss.');
+    } else {
+      print('I\'ve been expecting you, Mr Anderson.');
+    }
+  } else {
+    print('that failed.');
+  }
 }
 
 void main() {
-  final dwVer = getVersion(r'C:\Windows\System32\ComCtl32.dll');
-  final dwTarget = MAKELONG(6, 0);
-  if (dwVer >= dwTarget) {
-    print('comctl32.dll is v6.0 or later');
-    showTaskDialog();
-  } else {
-    print('comctl32.dll is less than 6.0: ${dwVer.toHexString(32)}');
-    showTaskDialog();
-  }
+  showSimpleTaskDialog();
+  // showCustomTaskDialog();
 }

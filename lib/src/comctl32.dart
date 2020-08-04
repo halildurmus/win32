@@ -23,3 +23,8 @@ final InitCommonControlsEx = _comctl32.lookupFunction<
 /// {@category comctl32}
 final TaskDialog =
     _comctl32.lookupFunction<taskDialogNative, taskDialogDart>('TaskDialog');
+
+/// {@category comctl32}
+final TaskDialogIndirect =
+    _comctl32.lookupFunction<taskDialogIndirectNative, taskDialogIndirectDart>(
+        'TaskDialogIndirect');

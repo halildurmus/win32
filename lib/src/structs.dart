@@ -2285,6 +2285,139 @@ class INITCOMMONCONTROLSEX extends Struct {
         ..dwICC = 0;
 }
 
+// typedef struct _TASKDIALOGCONFIG {
+//   UINT                           cbSize;
+//   HWND                           hwndParent;
+//   HINSTANCE                      hInstance;
+//   TASKDIALOG_FLAGS               dwFlags;
+//   TASKDIALOG_COMMON_BUTTON_FLAGS dwCommonButtons;
+//   PCWSTR                         pszWindowTitle;
+//   union {
+//     HICON  hMainIcon;
+//     PCWSTR pszMainIcon;
+//   } DUMMYUNIONNAME;
+//   PCWSTR                         pszMainInstruction;
+
+//   PCWSTR                         pszContent;
+//   UINT                           cButtons;
+//   const TASKDIALOG_BUTTON        *pButtons;
+//   int                            nDefaultButton;
+//   UINT                           cRadioButtons;
+//   const TASKDIALOG_BUTTON        *pRadioButtons;
+//   int                            nDefaultRadioButton;
+//   PCWSTR                         pszVerificationText;
+//   PCWSTR                         pszExpandedInformation;
+//   PCWSTR                         pszExpandedControlText;
+//   PCWSTR                         pszCollapsedControlText;
+//   union {
+//     HICON  hFooterIcon;
+//     PCWSTR pszFooterIcon;
+//   } DUMMYUNIONNAME2;
+//   PCWSTR                         pszFooter;
+//   PFTASKDIALOGCALLBACK           pfCallback;
+//   LONG_PTR                       lpCallbackData;
+//   UINT                           cxWidth;
+// } TASKDIALOGCONFIG;
+
+/// TASKDIALOGCONFIG
+///
+/// {@category Struct}
+class TASKDIALOGCONFIG extends Struct {
+  @Uint32()
+  int cbSize;
+  @IntPtr()
+  int hwndParent;
+  @IntPtr()
+  int hInstance;
+  @Uint32()
+  int dwFlags;
+  @Uint32()
+  int dwCommonButtons;
+  Pointer<Utf16> pszWindowTitle;
+  @IntPtr()
+  int hMainIcon;
+
+  Pointer<Utf16> pszMainInstruction;
+  Pointer<Utf16> pszContent;
+
+  @Uint32()
+  int cButtons;
+
+  Pointer<TASKDIALOG_BUTTON> pButtons;
+
+  @Int32()
+  int nDefaultButton;
+  @Uint32()
+  int cRadioButtons;
+
+  Pointer<TASKDIALOG_BUTTON> pRadioButtons;
+
+  @Int32()
+  int nDefaultRadioButton;
+
+  Pointer<Utf16> pszVerificationText;
+  Pointer<Utf16> pszExpandedInformation;
+  Pointer<Utf16> pszExpandedControlText;
+  Pointer<Utf16> pszCollapsedControlText;
+
+  @IntPtr()
+  int hFooterIcon;
+
+  Pointer<Utf16> pszFooter;
+  Pointer<NativeFunction> pfCallback;
+
+  @IntPtr()
+  int lpCallbackData;
+  @Uint32()
+  int cxWidth;
+
+  factory TASKDIALOGCONFIG.allocate() => allocate<TASKDIALOGCONFIG>().ref
+    ..cbSize = sizeOf<TASKDIALOGCONFIG>()
+    ..hwndParent = 0
+    ..hInstance = 0
+    ..dwFlags = 0
+    ..dwCommonButtons = 0
+    ..pszWindowTitle = nullptr
+    ..hMainIcon = 0
+    ..pszMainInstruction = nullptr
+    ..pszContent = nullptr
+    ..cButtons = 0
+    ..pButtons = nullptr
+    ..nDefaultButton = 0
+    ..cRadioButtons = 0
+    ..pRadioButtons = nullptr
+    ..nDefaultRadioButton = 0
+    ..pszVerificationText = nullptr
+    ..pszExpandedInformation = nullptr
+    ..pszExpandedControlText = nullptr
+    ..pszCollapsedControlText = nullptr
+    ..hFooterIcon = 0
+    ..pszFooter = nullptr
+    ..pfCallback = nullptr
+    ..lpCallbackData = 0
+    ..cxWidth = 0;
+}
+
+// typedef struct _TASKDIALOG_BUTTON
+// {
+//     int     nButtonID;
+//     PCWSTR  pszButtonText;
+// } TASKDIALOG_BUTTON;
+
+/// TASKDIALOG_BUTTON
+///
+/// {@category Struct}
+class TASKDIALOG_BUTTON extends Struct {
+  @Int32()
+  int nButtonID;
+
+  Pointer<Utf16> pszButtonText;
+
+  factory TASKDIALOG_BUTTON.allocate() => allocate<TASKDIALOG_BUTTON>().ref
+    ..nButtonID = 0
+    ..pszButtonText = nullptr;
+}
+
 // typedef struct _DLLVERSIONINFO
 // {
 //     DWORD cbSize;

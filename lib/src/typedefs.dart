@@ -2077,6 +2077,23 @@ typedef taskDialogDart = int Function(
     Pointer<Utf16> pszIcon,
     Pointer<Int32> pnButton);
 
+// HRESULT TaskDialogIndirect(
+//   const TASKDIALOGCONFIG *pTaskConfig,
+//   int                    *pnButton,
+//   int                    *pnRadioButton,
+//   BOOL                   *pfVerificationFlagChecked
+// );
+typedef taskDialogIndirectNative = Int32 Function(
+    Pointer<TASKDIALOGCONFIG> pTaskConfig,
+    Pointer<Int32> pnButton,
+    Pointer<Int32> pnRadioButton,
+    Pointer<Int32> pfVerificationFlagChecked);
+typedef taskDialogIndirectDart = int Function(
+    Pointer<TASKDIALOGCONFIG> pTaskConfig,
+    Pointer<Int32> pnButton,
+    Pointer<Int32> pnRadioButton,
+    Pointer<Int32> pfVerificationFlagChecked);
+
 // BOOL TextOutW(
 //   HDC     hdc,
 //   int     x,

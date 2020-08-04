@@ -16,7 +16,6 @@
 #include <highlevelmonitorconfigurationapi.h>
 #include <bluetoothapis.h>
 #include <VersionHelpers.h>
-#include <ntstatus.h>
 #include <wincred.h>
 
 void main()
@@ -49,6 +48,7 @@ void main()
     printf("sizeof(POINT) is %zu\n", sizeof(POINT));
     printf("sizeof(RECT) is %zu\n", sizeof(RECT));
     printf("sizeof(COLORREF) is %zu\n", sizeof(COLORREF));
+    printf("sizeof(TASKDIALOGCONFIG) is %zu\n", sizeof(TASKDIALOGCONFIG));
     printf("sizeof(FINDREPLACE) is %zu\n", sizeof(FINDREPLACE));
     printf("sizeof(LOGFONTW) is %zu\n", sizeof(LOGFONTW));
     printf("sizeof(CHOOSEFONT) is %zu\n", sizeof(CHOOSEFONTW));
