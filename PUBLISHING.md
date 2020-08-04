@@ -12,8 +12,8 @@ Rough notes on steps I take to publish a new version of win32:
 3. Run `dartdoc` from the root of the repo and make sure that it completes
    successfully.
 
-4. Run `tool/deploy.sh` from a Bash prompt to copy the `doc/api` files to the
-   `gh-pages` branch.
+4. Run `tool/deploy/deploy.sh` from a Bash prompt to copy the `doc/api` files to
+   the `gh-pages` branch.
 
 5. Bump the version in `pubspec.yaml` and update `CHANGELOG.md`.
 
