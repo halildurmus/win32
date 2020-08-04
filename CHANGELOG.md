@@ -1,3 +1,16 @@
+## 1.6.10-dev.1
+
+- Update README with screenshots and examples
+- Update Flutter Windows templates to the new CMAKE-based model
+- Add more shell APIs: LockWorkstation, SHEmptyRecycleBin, SHGetDiskFreeSpaceEx,
+  SHGetDriveMedia, SHQueryRecycleBin
+- Add example of using app manifests to declare support for UAC permissions and
+  Windows 10 opt-in behavior
+- Add more tests
+- Greatly expand WinMD utility to generate APIs directly from Windows Metadata
+- Autogenerate all Windows Runtime classes except ICalendar and IFileOpenPicker
+  from metadata
+
 ## 1.6.9
 
 - Add credential management APIs (thanks @hpoul)
