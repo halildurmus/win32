@@ -14,7 +14,7 @@ Flutter developers. A good example of that is
 [filepicker_windows](https://pub.dev/packages/filepicker_windows), which offers a
 common item dialog suitable for incorporation into an existing Flutter app.
 
-## What does this package do
+## Usage
 
 This package lets you write apps that use the Windows API directly from Dart, by
 wrapping common Win32, COM and Windows Runtime APIs using Dart FFI.
@@ -22,27 +22,34 @@ wrapping common Win32, COM and Windows Runtime APIs using Dart FFI.
 You could use it to call a Win32 API like
 [EnumFontFamiliesEx](https://docs.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-enumfontfamiliesexw)
 to enumerate all locally-installed fonts:
+
 ![Fonts screenshot](https://github.com/timsneath/win32/blob/master/doc/images/fonts.png?raw=true)
 
 or access system information that is not exposed directly by the Dart framework libraries:
+
 ![System information screenshot](https://github.com/timsneath/win32/blob/master/doc/images/power.png?raw=true)
 
 You could use it to build a Windows app with Flutter that relies on Win32 APIs:
+
 ![Disk explorer screenshot](https://github.com/timsneath/win32/blob/master/doc/images/disk_explorer.png?raw=true)
 
 You could even use it to build a traditional Win32 app, written purely in Dart, that could have come straight out of a classic Charles Petzold book on programming Windows apps:
+
 ![Dart notepad screenshot](https://github.com/timsneath/win32/blob/master/doc/images/notepad.png?raw=true)
 
 or even, perhaps, a fully-fledged game using GDI:
+
 ![Dart Tetris for Win32 screenshot](https://github.com/timsneath/win32/blob/master/doc/images/tetris.png?raw=true)
 
 You might even build a package that depends upon it, like [dart_console](https://pub.dev/packages/dart_console), which enables advanced console manipulation:
+
 ![Dart console ANSI color demo screenshot](https://github.com/timsneath/win32/blob/master/doc/images/console.png?raw=true)
 
 or [filepicker_windows](https://pub.dev/packages/filepicker_windows), which provides a modern Windows file picker for Flutter:
+
 ![Windows file picker screenshot](https://github.com/timsneath/win32/blob/master/doc/images/filepicker.png?raw=true)
 
-## Usage
+## Getting started
 
 Many more samples can be found in the `example\` subdirectory, along with a test
 suite in the `test\` subdirectory that shows other API calls.
