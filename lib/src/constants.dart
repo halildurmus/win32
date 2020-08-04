@@ -4179,6 +4179,58 @@ const KF_FLAG_SIMPLE_IDLIST = 0x00000100;
 /// @nodoc
 const KF_FLAG_ALIAS_ONLY = 0x80000000;
 
+// Init common controls bitflag
+/// @nodoc
+const ICC_LISTVIEW_CLASSES = 0x00000001;
+
+/// @nodoc
+const ICC_TREEVIEW_CLASSES = 0x00000002;
+
+/// @nodoc
+const ICC_BAR_CLASSES = 0x00000004;
+
+/// @nodoc
+const ICC_TAB_CLASSES = 0x00000008;
+
+/// @nodoc
+const ICC_UPDOWN_CLASS = 0x00000010;
+
+/// @nodoc
+const ICC_PROGRESS_CLASS = 0x00000020;
+
+/// @nodoc
+const ICC_HOTKEY_CLASS = 0x00000040;
+
+/// @nodoc
+const ICC_ANIMATE_CLASS = 0x00000080;
+
+/// @nodoc
+const ICC_WIN95_CLASSES = 0x000000FF;
+
+/// @nodoc
+const ICC_DATE_CLASSES = 0x00000100;
+
+/// @nodoc
+const ICC_USEREX_CLASSES = 0x00000200;
+
+/// @nodoc
+const ICC_COOL_CLASSES = 0x00000400;
+
+/// @nodoc
+const ICC_INTERNET_CLASSES = 0x00000800;
+
+/// @nodoc
+const ICC_PAGESCROLLER_CLASS = 0x00001000;
+
+/// @nodoc
+const ICC_NATIVEFNTCTL_CLASS = 0x00002000;
+
+/// @nodoc
+const ICC_STANDARD_CLASSES = 0x00004000;
+
+/// @nodoc
+const ICC_LINK_CLASS = 0x00008000;
+
 // Task dialog icons.
 //
 // In the Windows header files, these are defined in the following format:

@@ -11,5 +11,15 @@ import 'typedefs.dart';
 final _comctl32 = DynamicLibrary.open('comctl32.dll');
 
 /// {@category comctl32}
+final DrawStatusText =
+    _comctl32.lookupFunction<drawStatusTextNative, drawStatusTextDart>(
+        'DrawStatusTextW');
+
+/// {@category comctl32}
+final InitCommonControlsEx = _comctl32.lookupFunction<
+    initCommonControlsExNative,
+    initCommonControlsExDart>('InitCommonControlsEx');
+
+/// {@category comctl32}
 final TaskDialog =
     _comctl32.lookupFunction<taskDialogNative, taskDialogDart>('TaskDialog');

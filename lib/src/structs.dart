@@ -2265,6 +2265,57 @@ class SMALL_RECT extends Struct {
     ..Right = 0
     ..Bottom = 0;
 }
+// typedef struct tagINITCOMMONCONTROLSEX {
+//   DWORD dwSize;
+//   DWORD dwICC;
+// } INITCOMMONCONTROLSEX, *LPINITCOMMONCONTROLSEX;
+
+/// INITCOMMONCONTROLSEX
+///
+/// {@category Struct}
+class INITCOMMONCONTROLSEX extends Struct {
+  @Uint32()
+  int dwSize;
+  @Uint32()
+  int dwICC;
+
+  factory INITCOMMONCONTROLSEX.allocate() =>
+      allocate<INITCOMMONCONTROLSEX>().ref
+        ..dwSize = sizeOf<INITCOMMONCONTROLSEX>()
+        ..dwICC = 0;
+}
+
+// typedef struct _DLLVERSIONINFO
+// {
+//     DWORD cbSize;
+//     DWORD dwMajorVersion;                   // Major version
+//     DWORD dwMinorVersion;                   // Minor version
+//     DWORD dwBuildNumber;                    // Build number
+//     DWORD dwPlatformID;                     // DLLVER_PLATFORM_*
+// } DLLVERSIONINFO;
+
+/// DLLVERSIONINFO
+///
+/// {@category Struct}
+class DLLVERSIONINFO extends Struct {
+  @Uint32()
+  int cbSize;
+  @Uint32()
+  int dwMajorVersion;
+  @Uint32()
+  int dwMinorVersion;
+  @Uint32()
+  int dwBuildNumber;
+  @Uint32()
+  int dwPlatformID;
+
+  factory DLLVERSIONINFO.allocate() => allocate<DLLVERSIONINFO>().ref
+    ..cbSize = sizeOf<DLLVERSIONINFO>()
+    ..dwMajorVersion = 0
+    ..dwMinorVersion = 0
+    ..dwBuildNumber = 0
+    ..dwPlatformID = 0;
+}
 
 // typedef struct _OSVERSIONINFOW {
 //   DWORD dwOSVersionInfoSize;

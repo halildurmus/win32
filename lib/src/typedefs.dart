@@ -585,6 +585,17 @@ typedef destroyWindowDart = int Function(int hWnd);
 typedef dispatchMessageNative = IntPtr Function(Pointer<MSG> lpMsg);
 typedef dispatchMessageDart = int Function(Pointer<MSG> lpMsg);
 
+// void DrawStatusTextW(
+//   HDC     hDC,
+//   LPCRECT lprc,
+//   LPCWSTR pszText,
+//   UINT    uFlags
+// );
+typedef drawStatusTextNative = Void Function(
+    IntPtr hdc, Pointer<RECT> lprc, Pointer<Utf16> pszText, Uint32 uFlags);
+typedef drawStatusTextDart = void Function(
+    int hdc, Pointer<RECT> lprc, Pointer<Utf16> pszText, int uFlags);
+
 // int DrawTextW(
 //   HDC     hdc,
 //   LPCWSTR lpchText,
@@ -1317,6 +1328,14 @@ typedef iidFromStringNative = Int32 Function(
     Pointer<Utf16> lpsz, Pointer<GUID> lpiid);
 typedef iidFromStringDart = int Function(
     Pointer<Utf16> lpsz, Pointer<GUID> lpiid);
+
+// BOOL InitCommonControlsEx(
+//   const INITCOMMONCONTROLSEX *picce
+// );
+typedef initCommonControlsExNative = Int32 Function(
+    Pointer<INITCOMMONCONTROLSEX> picce);
+typedef initCommonControlsExDart = int Function(
+    Pointer<INITCOMMONCONTROLSEX> picce);
 
 // BOOL InitializeProcThreadAttributeList(
 //   LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,

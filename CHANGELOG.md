@@ -3,7 +3,7 @@
 - Update README with screenshots and examples
 - Update Flutter Windows templates to the new CMAKE-based model
 - Add more shell APIs: LockWorkstation, SHEmptyRecycleBin, SHGetDiskFreeSpaceEx,
-  SHGetDriveMedia, SHQueryRecycleBin
+  SHGetDriveMedia, SHQueryRecycleBin, InitCommonControlsEx, DrawStatusText
 - Add example of using app manifests to declare support for UAC permissions and
   Windows 10 opt-in behavior
 - Add more tests
