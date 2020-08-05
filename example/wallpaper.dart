@@ -57,7 +57,7 @@ void printBackgroundColor() {
 }
 
 void main() {
-  var hr = CoInitializeEx(
+  final hr = CoInitializeEx(
       nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
 
   if (FAILED(hr)) {

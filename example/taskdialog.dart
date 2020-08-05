@@ -21,7 +21,7 @@ void showSimpleTaskDialog() {
       'Task dialogs are great for sharing a longer string of explanatory '
       'content, where you need a user to read an instruction before making a '
       'decision. Of course, you cannot guarantee that the user will actually '
-      'read the text, so it\'s important that you also provide an undo function '
+      "read the text, so it's important that you also provide an undo function "
       'for when the wrong choice is selected.');
   final buttonSelected = allocate<Int32>();
 
@@ -45,6 +45,7 @@ void showSimpleTaskDialog() {
           print('User canceled the task dialog.');
       }
     }
+    // ignore: avoid_catching_errors
   } on ArgumentError {
     print(
         'If you see an error "Failed to lookup symbol", it\'s likely because the '
@@ -102,7 +103,7 @@ void showCustomTaskDialog() {
     if (buttonSelected.value == 100) {
       print('Ignorance is bliss.');
     } else {
-      print('I\'ve been expecting you, Mr Anderson.');
+      print("I've been expecting you, Mr Anderson.");
     }
   } else {
     print('that failed.');

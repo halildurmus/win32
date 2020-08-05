@@ -456,7 +456,7 @@ void gameTick() {
   setVectorToMemory();
 }
 
-int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
+int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
   var result = 0;
 
   switch (uMsg) {
@@ -556,18 +556,18 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 void main() {
   // Register the window class.
 
-  final CLASS_NAME = TEXT('WinSnakeWindowClass');
+  final className = TEXT('WinSnakeWindowClass');
 
   final wc = WNDCLASS.allocate();
-  wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(MainWindowProc, 0);
+  wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0);
   wc.hInstance = hInstance;
-  wc.lpszClassName = CLASS_NAME;
+  wc.lpszClassName = className;
   if (RegisterClass(wc.addressOf) != 0) {
     // Create the window.
 
     hWnd = CreateWindowEx(
         0, // Optional window styles.
-        CLASS_NAME, // Window class
+        className, // Window class
         TEXT('Dart WinSnake'), // Window caption
         WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_VISIBLE,
 

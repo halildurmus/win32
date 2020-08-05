@@ -39,7 +39,7 @@ class DrawEngine {
   }
 
   void drawBlock(int x, int y, int color) {
-    var hBrush = CreateSolidBrush(color);
+    final hBrush = CreateSolidBrush(color);
     rect.left = x;
     rect.right = x + 1;
     rect.top = y;
@@ -55,7 +55,7 @@ class DrawEngine {
   }
 
   void drawInterface() {
-    var hBrush = CreateSolidBrush(RGB(70, 70, 70));
+    final hBrush = CreateSolidBrush(RGB(70, 70, 70));
     rect.top = height;
     rect.left = width;
     rect.bottom = 0;
@@ -69,23 +69,23 @@ class DrawEngine {
   }
 
   void drawScore(int score, int x, int y) {
-    var scoreText = 'Score: $score';
+    final scoreText = 'Score: $score';
     SetBkMode(hdc, OPAQUE);
     TextOut(hdc, x, y, TEXT(scoreText), scoreText.length);
     SetBkMode(hdc, TRANSPARENT);
   }
 
   void drawSpeed(int speed, int x, int y) {
-    var speedText = 'Speed: $speed';
+    final speedText = 'Speed: $speed';
     SetBkMode(hdc, OPAQUE);
     TextOut(hdc, x, y, TEXT(speedText), speedText.length);
     SetBkMode(hdc, TRANSPARENT);
   }
 
   void drawNextPiece(Piece piece, int x, int y) {
-    var nextText = 'Next:';
+    const nextText = 'Next:';
     TextOut(hdc, x, y + 5, TEXT(nextText), nextText.length);
-    var color = piece.color;
+    final color = piece.color;
 
     // Draw the piece in a 4x4 square area
     for (var i = 0; i < 4; i++) {

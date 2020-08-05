@@ -32,7 +32,7 @@ String getTemporaryPath() {
 
 /// Get the path for a known Windows folder, using the classic (deprecated) API
 String getFolderPath() {
-  var path = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
+  final path = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
 
   final result = SHGetFolderPath(NULL, CSIDL_MYDOCUMENTS, NULL, 0, path);
 

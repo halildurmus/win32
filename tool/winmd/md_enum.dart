@@ -7,7 +7,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'mdType.dart';
+import 'md_type.dart';
 
 class WinmdField {
   String name;
@@ -91,7 +91,7 @@ class WinmdEnum extends WinmdType {
         hr = reader.EnumFields(phEnum, token, rgTypeDefs, 1, pcTokens);
       }
 
-      for (var fieldToken in fieldTokens) {
+      for (final fieldToken in fieldTokens) {
         final field = processFieldToken(fieldToken);
         fields[field.name] = field.value;
       }

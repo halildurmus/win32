@@ -14,7 +14,7 @@ class Game {
   bool isPaused;
 
   Game(this.de) : isPaused = false {
-    level = Level(de, 10, 20);
+    level = Level(de);
   }
 
   bool get isGameOver => level.isGameOver();
@@ -41,7 +41,11 @@ class Game {
         level.rotate();
         break;
       case VK_PAUSE:
-        pause(!isPaused);
+        if (isPaused) {
+          resumeGame();
+        } else {
+          pauseGame();
+        }
         break;
       case VK_RETURN:
         // You can only restart on game over
@@ -55,13 +59,20 @@ class Game {
     return true;
   }
 
-  /// Pass true to pause, pass false to resume
-  void pause(bool paused) {
+  void pauseGame() {
     // Don't pause if game is over
     if (isGameOver) return;
 
-    isPaused = paused;
-    if (paused) drawPause();
+    isPaused = true;
+    drawPause();
+    level.drawScore();
+    level.drawSpeed();
+  }
+
+  void resumeGame() {
+    if (isGameOver) return;
+
+    isPaused = false;
     level.drawScore();
     level.drawSpeed();
   }
@@ -103,7 +114,7 @@ class Game {
 
   /// Restarts the game
   void restart() {
-    level = Level(de, 10, 20);
+    level = Level(de);
     isPaused = false;
     repaint();
   }

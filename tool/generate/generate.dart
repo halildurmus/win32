@@ -18,7 +18,7 @@ void main(List<String> args) {
   final inputDirectory = Directory(args[0]);
   final outputDirectory = Directory(args[1]);
 
-  for (var inputFile in inputDirectory.listSync()) {
+  for (final inputFile in inputDirectory.listSync()) {
     if (inputFile is File) {
       print('Parsing:    ${inputFile.path}');
       final parsedFile = loadSource(inputFile);

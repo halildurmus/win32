@@ -81,11 +81,11 @@ import '../winrt/winrt_constants.dart';
 
   String get typedefsAsString {
     final buffer = StringBuffer();
-    for (var method in methods) {
+    for (final method in methods) {
       var generateTypedef = true;
 
       // Check all params are supported
-      for (var params in method.parameters) {
+      for (final params in method.parameters) {
         if (!params.supported) {
           generateTypedef = false;
         }
@@ -159,11 +159,11 @@ import '../winrt/winrt_constants.dart';
     }
     buffer.writeln(';\n');
 
-    for (var method in methods) {
+    for (final method in methods) {
       var generateMethod = true;
 
       // Check all params are supported
-      for (var params in method.parameters) {
+      for (final params in method.parameters) {
         if (!params.supported) {
           generateMethod = false;
         }
@@ -209,7 +209,7 @@ import '../winrt/winrt_constants.dart';
     }
 
     for (var idx = 0; idx < method.parameters.length; idx++) {
-      buffer.write('${method.parameters[idx].name}');
+      buffer.write(method.parameters[idx].name);
       if (idx < method.parameters.length - 1) {
         buffer.write(', ');
       }

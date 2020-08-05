@@ -4,13 +4,15 @@
 
 // Dart representations of common structs used in the Win32 API
 
+// ignore_for_file: camel_case_types
+
 import 'dart:ffi';
 import 'dart:math' show min;
 import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 import 'constants.dart';
-import 'extensions/unpackUtf16.dart';
+import 'extensions/unpack_utf16.dart';
 
 // typedef struct tagWNDCLASSW {
 //   UINT      style;
@@ -1719,9 +1721,9 @@ class GUID extends Struct {
   factory GUID.fromString(String guidString) {
     assert(guidString.length == 38);
     final guid = allocate<GUID>().ref;
-    guid.Data1 = int.parse('${guidString.substring(1, 9)}', radix: 16);
-    guid.Data2 = int.parse('${guidString.substring(10, 14)}', radix: 16);
-    guid.Data3 = int.parse('${guidString.substring(15, 19)}', radix: 16);
+    guid.Data1 = int.parse(guidString.substring(1, 9), radix: 16);
+    guid.Data2 = int.parse(guidString.substring(10, 14), radix: 16);
+    guid.Data3 = int.parse(guidString.substring(15, 19), radix: 16);
 
     // final component is pushed on the stack in reverse order per x64
     // calling convention. This is a funky workaround until FFI supports
@@ -1736,8 +1738,8 @@ class GUID extends Struct {
         guidString.substring(20, 22);
 
     // We need to split this to avoid overflowing a signed int.parse()
-    guid.Data4 = (int.parse('${rawString.substring(0, 4)}', radix: 16) << 48) +
-        int.parse('${rawString.substring(4, 16)}', radix: 16);
+    guid.Data4 = (int.parse(rawString.substring(0, 4), radix: 16) << 48) +
+        int.parse(rawString.substring(4, 16), radix: 16);
 
     return guid;
   }
@@ -2464,7 +2466,7 @@ class DLLVERSIONINFO extends Struct {
 //   WCHAR szCSDVersion[128];
 // } OSVERSIONINFOW, *POSVERSIONINFOW, *LPOSVERSIONINFOW, RTL_OSVERSIONINFOW, *PRTL_OSVERSIONINFOW;
 
-const _OSVERSIONINFO_STRUCT_SIZE = (20 + (128 * 2));
+const _OSVERSIONINFO_STRUCT_SIZE = 20 + (128 * 2);
 
 /// OSVERSIONINFO
 ///
@@ -2638,7 +2640,7 @@ class BLUETOOTH_PIN_INFO extends Struct {
       String.fromCharCodes(addressOf.cast<Uint8>().asTypedList(pinLength));
 
   set pin(String pinString) {
-    var pinData = Uint8List.fromList(pinString.codeUnits);
+    final pinData = Uint8List.fromList(pinString.codeUnits);
 
     // Set up to the length of the string, even if longer than pinLength, since
     // user may set pin then pinLength.

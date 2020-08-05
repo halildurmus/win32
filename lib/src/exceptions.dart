@@ -9,8 +9,8 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'constants.dart';
-import 'extensions/intToHexString.dart';
-import 'extensions/unpackUtf16.dart';
+import 'extensions/int_to_hexstring.dart';
+import 'extensions/unpack_utf16.dart';
 import 'kernel32.dart';
 
 /// Generic COM Exception

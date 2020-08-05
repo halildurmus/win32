@@ -19,7 +19,7 @@ class NotepadFont {
     SendMessage(hwndEdit, WM_SETFONT, hFont, 0);
   }
 
-  bool NotepadChooseFont(int hwnd) {
+  bool notepadChooseFont(int hwnd) {
     final cf = CHOOSEFONT.allocate();
 
     cf.lStructSize = sizeOf<CHOOSEFONT>();
@@ -39,10 +39,10 @@ class NotepadFont {
     cf.nSizeMax = 0;
 
     final result = ChooseFont(cf.addressOf);
-    return (result == TRUE);
+    return result == TRUE;
   }
 
-  void NotepadSetFont(int hwndEdit) {
+  void notepadSetFont(int hwndEdit) {
     int hFontNew;
     final rect = RECT.allocate();
 
@@ -58,7 +58,7 @@ class NotepadFont {
     free(rect.addressOf);
   }
 
-  void Dispose() {
+  void dispose() {
     DeleteObject(hFont);
   }
 }

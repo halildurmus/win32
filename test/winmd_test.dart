@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
 import '../tool/winmd/enums.dart';
-import '../tool/winmd/mdStore.dart';
+import '../tool/winmd/md_store.dart';
 
 void main() {
   if (isWindowsRuntimeAvailable()) {

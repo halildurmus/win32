@@ -68,7 +68,7 @@ File metadataFileContainingType(String typeName) {
   try {
     // RoGetMetaDataFile can only be used for Windows Runtime classes (i.e. not
     // third-party types) in an app that is not a Windows Store app.
-    var hr = RoGetMetaDataFile(hstrTypeName.value, nullptr,
+    final hr = RoGetMetaDataFile(hstrTypeName.value, nullptr,
         hstrMetaDataFilePath.address, spMetaDataImport, typeDef);
     if (SUCCEEDED(hr)) {
       path = File(convertFromHString(hstrMetaDataFilePath));
@@ -105,7 +105,7 @@ UncompressedData corSigUncompressData(List<int> pBytes) {
     if (pBytes.length < 2) {
       throw WinmdException('Bad signature');
     } else {
-      return UncompressedData((((pBytes[0] & 0x3f) << 8 | pBytes[1])), 2);
+      return UncompressedData((pBytes[0] & 0x3f) << 8 | pBytes[1], 2);
     }
   }
   // Large -- four bytes
@@ -115,10 +115,10 @@ UncompressedData corSigUncompressData(List<int> pBytes) {
       throw WinmdException('Bad signature');
     } else {
       return UncompressedData(
-          ((pBytes[0] & 0x1f) << 24 |
+          (pBytes[0] & 0x1f) << 24 |
               (pBytes[1]) << 16 |
               (pBytes[2]) << 8 |
-              (pBytes[3])),
+              (pBytes[3]),
           4);
     }
   } else // We don't recognize this encoding
@@ -128,7 +128,7 @@ UncompressedData corSigUncompressData(List<int> pBytes) {
 }
 
 int unencodeDefRefSpecToken(int encoded) {
-  var token = encoded >> 2;
+  final token = encoded >> 2;
 
   if (encoded & 0x03 == 0x00) {
     // typedef

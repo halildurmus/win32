@@ -17,319 +17,315 @@ const APP_NAME = 'DartNote'; // DartPad was taken :)
 /// Win32 handle to the current window instance
 final hInstance = GetModuleHandle(nullptr);
 
-class Notepad {
-  static NotepadEditor editor;
-  static NotepadFind find;
+NotepadEditor editor;
+NotepadFind find;
 
-  /// The handle of the Notepad window's text edit control
-  static int hwndEdit;
+/// The handle of the Notepad window's text edit control
+int hwndEdit;
 
-  static FINDREPLACE findReplace;
-  static int messageFindReplace;
-  static int hDlgModeless = NULL;
+FINDREPLACE findReplace;
+int messageFindReplace;
+int hDlgModeless = NULL;
 
-  static final iOffset = allocate<Uint32>()..value = 0;
+final iOffset = allocate<Uint32>()..value = 0;
 
-  static int MainWindowProc(int hwnd, int message, int wParam, int lParam) {
-    switch (message) {
-      case WM_CREATE:
-        hwndEdit = CreateWindowEx(
-            0,
-            TEXT('edit'),
-            nullptr,
-            WS_CHILD |
-                WS_VISIBLE |
-                WS_HSCROLL |
-                WS_VSCROLL |
-                WS_BORDER |
-                ES_LEFT |
-                ES_MULTILINE |
-                ES_NOHIDESEL |
-                ES_AUTOHSCROLL |
-                ES_AUTOVSCROLL,
-            0,
-            0,
-            0,
-            0,
-            hwnd,
-            EDITID,
-            hInstance,
-            nullptr);
+int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
+  switch (message) {
+    case WM_CREATE:
+      hwndEdit = CreateWindowEx(
+          0,
+          TEXT('edit'),
+          nullptr,
+          WS_CHILD |
+              WS_VISIBLE |
+              WS_HSCROLL |
+              WS_VSCROLL |
+              WS_BORDER |
+              ES_LEFT |
+              ES_MULTILINE |
+              ES_NOHIDESEL |
+              ES_AUTOHSCROLL |
+              ES_AUTOVSCROLL,
+          0,
+          0,
+          0,
+          0,
+          hwnd,
+          EDITID,
+          hInstance,
+          nullptr);
 
-        SendMessage(hwndEdit, EM_LIMITTEXT, 32767, 0);
+      SendMessage(hwndEdit, EM_LIMITTEXT, 32767, 0);
 
-        editor = NotepadEditor(hwnd, hwndEdit);
-        find = NotepadFind();
+      editor = NotepadEditor(hwnd, hwndEdit);
+      find = NotepadFind();
 
-        messageFindReplace = RegisterWindowMessage(TEXT(FINDMSGSTRING));
+      messageFindReplace = RegisterWindowMessage(TEXT(FINDMSGSTRING));
 
-        editor.UpdateWindowTitle();
-        return 0;
+      editor.updateWindowTitle();
+      return 0;
 
-      case WM_SETFOCUS:
-        SetFocus(hwndEdit);
-        return 0;
+    case WM_SETFOCUS:
+      SetFocus(hwndEdit);
+      return 0;
 
-      case WM_SIZE:
-        MoveWindow(hwndEdit, 0, 0, LOWORD(lParam), HIWORD(lParam), TRUE);
-        return 0;
+    case WM_SIZE:
+      MoveWindow(hwndEdit, 0, 0, LOWORD(lParam), HIWORD(lParam), TRUE);
+      return 0;
 
-      case WM_INITMENUPOPUP:
-        switch (lParam) {
-          case 1: // Edit menu
+    case WM_INITMENUPOPUP:
+      switch (lParam) {
+        case 1: // Edit menu
 
-            // Enable Undo if edit control can do it
-            EnableMenuItem(
-                wParam,
-                IDM_EDIT_UNDO,
-                SendMessage(hwndEdit, EM_CANUNDO, 0, 0) != FALSE
-                    ? MF_ENABLED
-                    : MF_GRAYED);
+          // Enable Undo if edit control can do it
+          EnableMenuItem(
+              wParam,
+              IDM_EDIT_UNDO,
+              SendMessage(hwndEdit, EM_CANUNDO, 0, 0) != FALSE
+                  ? MF_ENABLED
+                  : MF_GRAYED);
 
-            // Enable Paste if clipboard contains text
-            EnableMenuItem(
-                wParam,
-                IDM_EDIT_PASTE,
-                IsClipboardFormatAvailable(CF_TEXT) != FALSE
-                    ? MF_ENABLED
-                    : MF_GRAYED);
+          // Enable Paste if clipboard contains text
+          EnableMenuItem(
+              wParam,
+              IDM_EDIT_PASTE,
+              IsClipboardFormatAvailable(CF_TEXT) != FALSE
+                  ? MF_ENABLED
+                  : MF_GRAYED);
 
-            // Enable Cut / Copy / Clear if there is a selection
-            final menuStyle = editor.isTextSelected ? MF_ENABLED : MF_GRAYED;
+          // Enable Cut / Copy / Clear if there is a selection
+          final menuStyle = editor.isTextSelected ? MF_ENABLED : MF_GRAYED;
 
-            EnableMenuItem(wParam, IDM_EDIT_CUT, menuStyle);
-            EnableMenuItem(wParam, IDM_EDIT_COPY, menuStyle);
-            EnableMenuItem(wParam, IDM_EDIT_CLEAR, menuStyle);
-            break;
-
-          case 2: // Search menu
-            final menuStyle = hDlgModeless == NULL ? MF_ENABLED : MF_GRAYED;
-
-            EnableMenuItem(wParam, IDM_SEARCH_FIND, menuStyle);
-            EnableMenuItem(wParam, IDM_SEARCH_NEXT, menuStyle);
-            EnableMenuItem(wParam, IDM_SEARCH_REPLACE, menuStyle);
-            break;
-        }
-        return 0;
-
-      case WM_COMMAND:
-        // Messages from edit control
-        if ((lParam != 0) && (LOWORD(wParam) == EDITID)) {
-          switch (HIWORD(wParam)) {
-            case EN_UPDATE:
-              editor.isFileDirty = true;
-              return 0;
-            case EN_ERRSPACE:
-            case EN_MAXTEXT:
-              MessageBox(hwnd, TEXT('Edit control out of space.'),
-                  TEXT(APP_NAME), MB_OK | MB_ICONSTOP);
-              return 0;
-          }
+          EnableMenuItem(wParam, IDM_EDIT_CUT, menuStyle);
+          EnableMenuItem(wParam, IDM_EDIT_COPY, menuStyle);
+          EnableMenuItem(wParam, IDM_EDIT_CLEAR, menuStyle);
           break;
-        }
 
-        // Messages from menu system
-        switch (LOWORD(wParam)) {
-          case IDM_FILE_NEW:
-            if (editor.isFileDirty && editor.OfferSave() == IDCANCEL) {
-              return 0;
-            }
+        case 2: // Search menu
+          final menuStyle = hDlgModeless == NULL ? MF_ENABLED : MF_GRAYED;
 
-            // Empty edit control
-            SetWindowText(hwndEdit, TEXT('\u{0}'));
+          EnableMenuItem(wParam, IDM_SEARCH_FIND, menuStyle);
+          EnableMenuItem(wParam, IDM_SEARCH_NEXT, menuStyle);
+          EnableMenuItem(wParam, IDM_SEARCH_REPLACE, menuStyle);
+          break;
+      }
+      return 0;
 
-            editor.NewFile();
+    case WM_COMMAND:
+      // Messages from edit control
+      if ((lParam != 0) && (LOWORD(wParam) == EDITID)) {
+        switch (HIWORD(wParam)) {
+          case EN_UPDATE:
+            editor.isFileDirty = true;
             return 0;
-
-          case IDM_FILE_OPEN:
-            editor.OpenFile();
+          case EN_ERRSPACE:
+          case EN_MAXTEXT:
+            MessageBox(hwnd, TEXT('Edit control out of space.'), TEXT(APP_NAME),
+                MB_OK | MB_ICONSTOP);
             return 0;
-
-          case IDM_FILE_SAVE:
-            return editor.SaveFile() ? 1 : 0;
-
-          case IDM_FILE_SAVE_AS:
-            return editor.SaveAsFile() ? 1 : 0;
-
-          case IDM_FILE_PRINT:
-            editor.ShowMessage('Print not yet implemented!');
-            return 0;
-
-          case IDM_APP_EXIT:
-            SendMessage(hwnd, WM_CLOSE, 0, 0);
-            return 0;
-
-          case IDM_EDIT_UNDO:
-            SendMessage(hwndEdit, WM_UNDO, 0, 0);
-            return 0;
-
-          case IDM_EDIT_CUT:
-            SendMessage(hwndEdit, WM_CUT, 0, 0);
-            return 0;
-
-          case IDM_EDIT_COPY:
-            SendMessage(hwndEdit, WM_COPY, 0, 0);
-            return 0;
-
-          case IDM_EDIT_PASTE:
-            SendMessage(hwndEdit, WM_PASTE, 0, 0);
-            return 0;
-
-          case IDM_EDIT_CLEAR:
-            SendMessage(hwndEdit, WM_CLEAR, 0, 0);
-            return 0;
-
-          case IDM_EDIT_SELECT_ALL:
-            SendMessage(hwndEdit, EM_SETSEL, 0, -1);
-            return 0;
-
-          case IDM_SEARCH_FIND:
-            SendMessage(hwndEdit, EM_GETSEL, 0, iOffset.address);
-            hDlgModeless = find.ShowFindDialog(hwnd);
-            return 0;
-
-          case IDM_SEARCH_NEXT:
-            SendMessage(hwndEdit, EM_GETSEL, 0, iOffset.address);
-
-            if (find.FindValidFind()) {
-              find.FindNextTextInEditWindow(hwndEdit, iOffset);
-            } else {
-              hDlgModeless = find.ShowFindDialog(hwnd);
-            }
-            return 0;
-
-          case IDM_SEARCH_REPLACE:
-            SendMessage(hwndEdit, EM_GETSEL, 0, iOffset.address);
-            hDlgModeless = find.ShowReplaceDialog(hwnd);
-            return 0;
-
-          case IDM_FORMAT_FONT:
-            editor.SetFont();
-            return 0;
-
-          case IDM_HELP:
-            editor.ShowMessage('Help not yet implemented!');
-            return 0;
-
-          case IDM_APP_ABOUT:
-            editor.ShowMessage('About not yet implemented!');
-            return 0;
-        }
-        return 0;
-
-      case WM_CLOSE:
-        if (!editor.isFileDirty || editor.OfferSave() != IDCANCEL) {
-          DestroyWindow(hwnd);
-        }
-        return 0;
-
-      case WM_QUERYENDSESSION:
-        if (!editor.isFileDirty || editor.OfferSave() != IDCANCEL) {
-          return 1;
-        }
-        return 0;
-
-      case WM_DESTROY:
-        editor.Dispose();
-        PostQuitMessage(0);
-        return 0;
-
-      default:
-        // Process "Find/Replace" messages
-
-        if (message == messageFindReplace) {
-          findReplace = Pointer<FINDREPLACE>.fromAddress(lParam).ref;
-
-          if (findReplace.Flags & FR_DIALOGTERM == FR_DIALOGTERM) {
-            hDlgModeless = NULL;
-          }
-
-          if (findReplace.Flags & FR_FINDNEXT == FR_FINDNEXT) {
-            if (!find.FindTextInEditWindow(
-                hwndEdit, iOffset, findReplace.addressOf)) {
-              editor.ShowMessage('Text not found!');
-            }
-          }
-
-          if ((findReplace.Flags & FR_REPLACE == FR_REPLACE) ||
-              (findReplace.Flags & FR_REPLACEALL == FR_REPLACEALL)) {
-            if (!find.ReplaceTextInEditWindow(
-                hwndEdit, iOffset, findReplace.addressOf)) {
-              editor.ShowMessage('Text not found!');
-            }
-          }
-
-          if (findReplace.Flags & FR_REPLACEALL == FR_REPLACEALL) {
-            while (find.ReplaceTextInEditWindow(
-                hwndEdit, iOffset, findReplace.addressOf)) {}
-          }
-
-          return 0;
         }
         break;
-    }
-    return DefWindowProc(hwnd, message, wParam, lParam);
-  }
-
-  static void runApp() {
-    // Register the window class.
-    final wc = WNDCLASS.allocate();
-
-    wc.style = CS_HREDRAW | CS_VREDRAW;
-    wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(MainWindowProc, 0);
-    wc.hInstance = hInstance;
-    wc.lpszClassName = TEXT(APP_NAME);
-    wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-    wc.hbrBackground = GetStockObject(WHITE_BRUSH);
-
-    RegisterClass(wc.addressOf);
-
-    final hMenu = NotepadResources.LoadMenus();
-
-    // Create the window.
-    final hWnd = CreateWindowEx(
-        0, // Optional window styles.
-        TEXT(APP_NAME), // Window class
-        TEXT(APP_NAME),
-        WS_OVERLAPPEDWINDOW, // Window style
-
-        // Size and position
-        CW_USEDEFAULT,
-        CW_USEDEFAULT,
-        CW_USEDEFAULT,
-        CW_USEDEFAULT,
-        NULL, // Parent window
-        hMenu, // Menu
-        hInstance, // Instance handle
-        nullptr // Additional application data
-        );
-
-    if (hWnd == 0) {
-      stderr.writeln('CreateWindowEx failed with error: ${GetLastError()}');
-      exit(-1);
-    }
-
-    ShowWindow(hWnd, SW_SHOWNORMAL);
-    UpdateWindow(hWnd);
-
-    final hAccel = NotepadResources.LoadAccelerators();
-
-    // Run the message loop.
-
-    final msg = MSG.allocate();
-    while (GetMessage(msg.addressOf, NULL, 0, 0) != 0) {
-      // Translate dialog messages
-      if ((hDlgModeless == NULL) ||
-          (IsDialogMessage(hDlgModeless, msg.addressOf) == FALSE)) {
-        // Translate window accelerators and messages
-        if (TranslateAccelerator(hWnd, hAccel, msg.addressOf) == FALSE) {
-          TranslateMessage(msg.addressOf);
-          DispatchMessage(msg.addressOf);
-        }
       }
-    }
-    free(msg.addressOf);
+
+      // Messages from menu system
+      switch (LOWORD(wParam)) {
+        case IDM_FILE_NEW:
+          if (editor.isFileDirty && editor.offerSave() == IDCANCEL) {
+            return 0;
+          }
+
+          // Empty edit control
+          SetWindowText(hwndEdit, TEXT('\u{0}'));
+
+          editor.newFile();
+          return 0;
+
+        case IDM_FILE_OPEN:
+          editor.openFile();
+          return 0;
+
+        case IDM_FILE_SAVE:
+          return editor.saveFile() ? 1 : 0;
+
+        case IDM_FILE_SAVE_AS:
+          return editor.saveAsFile() ? 1 : 0;
+
+        case IDM_FILE_PRINT:
+          editor.showMessage('Print not yet implemented!');
+          return 0;
+
+        case IDM_APP_EXIT:
+          SendMessage(hwnd, WM_CLOSE, 0, 0);
+          return 0;
+
+        case IDM_EDIT_UNDO:
+          SendMessage(hwndEdit, WM_UNDO, 0, 0);
+          return 0;
+
+        case IDM_EDIT_CUT:
+          SendMessage(hwndEdit, WM_CUT, 0, 0);
+          return 0;
+
+        case IDM_EDIT_COPY:
+          SendMessage(hwndEdit, WM_COPY, 0, 0);
+          return 0;
+
+        case IDM_EDIT_PASTE:
+          SendMessage(hwndEdit, WM_PASTE, 0, 0);
+          return 0;
+
+        case IDM_EDIT_CLEAR:
+          SendMessage(hwndEdit, WM_CLEAR, 0, 0);
+          return 0;
+
+        case IDM_EDIT_SELECT_ALL:
+          SendMessage(hwndEdit, EM_SETSEL, 0, -1);
+          return 0;
+
+        case IDM_SEARCH_FIND:
+          SendMessage(hwndEdit, EM_GETSEL, 0, iOffset.address);
+          hDlgModeless = find.showFindDialog(hwnd);
+          return 0;
+
+        case IDM_SEARCH_NEXT:
+          SendMessage(hwndEdit, EM_GETSEL, 0, iOffset.address);
+
+          if (find.findValidFind()) {
+            find.findNextTextInEditWindow(hwndEdit, iOffset);
+          } else {
+            hDlgModeless = find.showFindDialog(hwnd);
+          }
+          return 0;
+
+        case IDM_SEARCH_REPLACE:
+          SendMessage(hwndEdit, EM_GETSEL, 0, iOffset.address);
+          hDlgModeless = find.showReplaceDialog(hwnd);
+          return 0;
+
+        case IDM_FORMAT_FONT:
+          editor.setFont();
+          return 0;
+
+        case IDM_HELP:
+          editor.showMessage('Help not yet implemented!');
+          return 0;
+
+        case IDM_APP_ABOUT:
+          editor.showMessage('About not yet implemented!');
+          return 0;
+      }
+      return 0;
+
+    case WM_CLOSE:
+      if (!editor.isFileDirty || editor.offerSave() != IDCANCEL) {
+        DestroyWindow(hwnd);
+      }
+      return 0;
+
+    case WM_QUERYENDSESSION:
+      if (!editor.isFileDirty || editor.offerSave() != IDCANCEL) {
+        return 1;
+      }
+      return 0;
+
+    case WM_DESTROY:
+      editor.dispose();
+      PostQuitMessage(0);
+      return 0;
+
+    default:
+      // Process "Find/Replace" messages
+
+      if (message == messageFindReplace) {
+        findReplace = Pointer<FINDREPLACE>.fromAddress(lParam).ref;
+
+        if (findReplace.Flags & FR_DIALOGTERM == FR_DIALOGTERM) {
+          hDlgModeless = NULL;
+        }
+
+        if (findReplace.Flags & FR_FINDNEXT == FR_FINDNEXT) {
+          if (!find.findTextInEditWindow(
+              hwndEdit, iOffset, findReplace.addressOf)) {
+            editor.showMessage('Text not found!');
+          }
+        }
+
+        if ((findReplace.Flags & FR_REPLACE == FR_REPLACE) ||
+            (findReplace.Flags & FR_REPLACEALL == FR_REPLACEALL)) {
+          if (!find.replaceTextInEditWindow(
+              hwndEdit, iOffset, findReplace.addressOf)) {
+            editor.showMessage('Text not found!');
+          }
+        }
+
+        if (findReplace.Flags & FR_REPLACEALL == FR_REPLACEALL) {
+          while (find.replaceTextInEditWindow(
+              hwndEdit, iOffset, findReplace.addressOf)) {}
+        }
+
+        return 0;
+      }
+      break;
   }
+  return DefWindowProc(hwnd, message, wParam, lParam);
 }
 
-void main() => Notepad.runApp();
+void main() {
+  // Register the window class.
+  final wc = WNDCLASS.allocate();
+
+  wc.style = CS_HREDRAW | CS_VREDRAW;
+  wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0);
+  wc.hInstance = hInstance;
+  wc.lpszClassName = TEXT(APP_NAME);
+  wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+  wc.hbrBackground = GetStockObject(WHITE_BRUSH);
+
+  RegisterClass(wc.addressOf);
+
+  final hMenu = NotepadResources.loadMenus();
+
+  // Create the window.
+  final hWnd = CreateWindowEx(
+      0, // Optional window styles.
+      TEXT(APP_NAME), // Window class
+      TEXT(APP_NAME),
+      WS_OVERLAPPEDWINDOW, // Window style
+
+      // Size and position
+      CW_USEDEFAULT,
+      CW_USEDEFAULT,
+      CW_USEDEFAULT,
+      CW_USEDEFAULT,
+      NULL, // Parent window
+      hMenu, // Menu
+      hInstance, // Instance handle
+      nullptr // Additional application data
+      );
+
+  if (hWnd == 0) {
+    stderr.writeln('CreateWindowEx failed with error: ${GetLastError()}');
+    exit(-1);
+  }
+
+  ShowWindow(hWnd, SW_SHOWNORMAL);
+  UpdateWindow(hWnd);
+
+  final hAccel = NotepadResources.loadAccelerators();
+
+  // Run the message loop.
+
+  final msg = MSG.allocate();
+  while (GetMessage(msg.addressOf, NULL, 0, 0) != 0) {
+    // Translate dialog messages
+    if ((hDlgModeless == NULL) ||
+        (IsDialogMessage(hDlgModeless, msg.addressOf) == FALSE)) {
+      // Translate window accelerators and messages
+      if (TranslateAccelerator(hWnd, hAccel, msg.addressOf) == FALSE) {
+        TranslateMessage(msg.addressOf);
+        DispatchMessage(msg.addressOf);
+      }
+    }
+  }
+  free(msg.addressOf);
+}

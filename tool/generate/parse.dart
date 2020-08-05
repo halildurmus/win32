@@ -73,10 +73,10 @@ Method parseIdlMethod(String line, int lineIndex) {
       }
 
       // deal with pointers
-      if ((typePrimitive.contains('*') ||
+      if (typePrimitive.contains('*') ||
           (items[1].contains('*')) &&
               (!typePrimitive.contains('Pointer')) &&
-              (!(['LPWSTR', 'LPCWSTR'].contains(typePrimitive))))) {
+              (!['LPWSTR', 'LPCWSTR'].contains(typePrimitive))) {
         // double pointers
         if (typePrimitive.contains('**')) {
           typePrimitive = 'Pointer<IntPtr>';
@@ -112,7 +112,7 @@ Interface loadSource(File file) {
     interface.sourceType = SourceType.unknown;
   }
 
-  var lines = file.readAsLinesSync();
+  final lines = file.readAsLinesSync();
   var lineIndex = 0;
 
   for (var line in lines) {
@@ -202,8 +202,8 @@ Interface loadSource(File file) {
         }
 
         // don't know which field contains the return param, so we just search
-        for (var type in typeMappings.entries) {
-          for (var keyword in keywords) {
+        for (final type in typeMappings.entries) {
+          for (final keyword in keywords) {
             if (keyword == type.key) {
               win32Keyword = keyword;
               parameter.type = type.value;
@@ -212,12 +212,12 @@ Interface loadSource(File file) {
           }
         }
         if (parameter.type == null) {
-          throw Exception('Can\'t find type in line $lineIndex.');
+          throw Exception("Can't find type in line $lineIndex.");
         }
         if ((line.contains('*', line.indexOf(win32Keyword)) ||
                 (line.contains('[  ]', line.indexOf(win32Keyword)))) &&
             (!parameter.type.contains('Pointer')) &&
-            (!(['LPWSTR', 'LPCWSTR'].contains(parameter.type)))) {
+            (!['LPWSTR', 'LPCWSTR'].contains(parameter.type))) {
           parameter.type = 'Pointer<${parameter.type}>';
 
           // resplit the keywords
@@ -243,7 +243,7 @@ Interface loadSource(File file) {
           isInMethod = false;
         } else {
           print('Line: $lineIndex');
-          throw Exception('Can\'t find parameter name');
+          throw Exception("Can't find parameter name");
         } // end param processing
       } // end no-comment line processing
     } // end method processing

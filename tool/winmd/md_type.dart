@@ -9,8 +9,8 @@ import 'package:win32/win32.dart';
 
 import 'constants.dart';
 import 'enums.dart';
-import 'mdMethod.dart';
-import 'mdStore.dart';
+import 'md_method.dart';
+import 'md_store.dart';
 import 'utils.dart';
 
 /// Represents a TypeDef in the Windows Metadata file
@@ -115,7 +115,7 @@ class WinmdType {
     }
 
     try {
-      var hr = reader.GetTypeRefProps(
+      final hr = reader.GetTypeRefProps(
           typeRefToken, ptkResolutionScope, szName, 256, pchName);
       if (SUCCEEDED(hr)) {
         final typeName = szName.unpackString(pchName.value);

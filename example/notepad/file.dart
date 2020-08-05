@@ -48,7 +48,7 @@ class NotepadFile {
   ///
   /// Returns `true` if the the user selects a file and the common dialog
   /// is successful.
-  bool ShowOpenDialog(int hwnd) {
+  bool showOpenDialog(int hwnd) {
     final strFile =
         path != null ? Utf16String.fromString(path) : Utf16String(MAX_PATH);
 
@@ -75,7 +75,7 @@ class NotepadFile {
   ///
   /// Returns `true` if the the user selects a file and the common dialog
   /// is successful.
-  bool ShowSaveDialog(int hwnd) {
+  bool showSaveDialog(int hwnd) {
     final strFile =
         path != null ? Utf16String.fromString(path) : Utf16String(MAX_PATH);
 
@@ -97,7 +97,7 @@ class NotepadFile {
     }
   }
 
-  void ReadFileIntoEditControl(int hwndEdit) {
+  void readFileIntoEditControl(int hwndEdit) {
     // Fairly naive implementation that doesn't account for
     // string encoding. That's fine -- this is a toy app!
     final file = File(path);
@@ -106,7 +106,7 @@ class NotepadFile {
     SetWindowText(hwndEdit, TEXT(contents));
   }
 
-  void WriteFileFromEditControl(int hwndEdit) {
+  void writeFileFromEditControl(int hwndEdit) {
     final file = File(path);
     final iLength = GetWindowTextLength(hwndEdit);
     final buffer = Utf16String(iLength);

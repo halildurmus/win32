@@ -39,7 +39,7 @@ File metadataFileContainingType(String typeName) {
 
   // RoGetMetaDataFile can only be used for Windows Runtime classes in an app
   // that is not a Windows Store app.
-  var hr = RoGetMetaDataFile(hstrTypeName.value, nullptr,
+  final hr = RoGetMetaDataFile(hstrTypeName.value, nullptr,
       hstrMetaDataFilePath.address, spMetaDataImport, typeDef);
   if (SUCCEEDED(hr)) {
     path = File(convertFromHString(hstrMetaDataFilePath));
@@ -105,7 +105,7 @@ WindowsRuntimeType ProcessToken(IMetaDataImport reader, int token) {
   final baseClassToken = allocate<Uint32>();
   final typeName = allocate<Uint16>(count: 256).cast<Utf16>();
 
-  var hr = reader.GetTypeDefProps(
+  final hr = reader.GetTypeDefProps(
       token, typeName, 256, nRead, tdFlags, baseClassToken);
 
   if (SUCCEEDED(hr)) {
@@ -140,7 +140,7 @@ void main(List<String> args) {
 
     final types = metadataTypesInFile(winmdFile);
     print('Found ${types.length} types:');
-    for (var type in types) {
+    for (final type in types) {
       print(
           '[${toHex(type.token)}] ${type.typeName} (baseType: ${toHex(type.baseTypeToken)})');
     }

@@ -3,8 +3,8 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'enums.dart';
-import 'mdType.dart';
-import 'mdTypeIdentifier.dart';
+import 'md_type.dart';
+import 'md_typeidentifier.dart';
 import 'types.dart';
 import 'utils.dart';
 
@@ -54,7 +54,7 @@ class TypeBuilder {
     interface.inherits = mdTypeDef.parent.typeName;
     interface.vtableStart = 6; // For now, hardcode to IInspectable subclass
 
-    for (var mdMethod in mdTypeDef.methods) {
+    for (final mdMethod in mdTypeDef.methods) {
       final method = Method();
       method.name = mdMethod.methodName;
       method.returnTypeNative = 'Int32';
@@ -63,7 +63,7 @@ class TypeBuilder {
       // return value is passed as an pointer
       if (mdMethod.returnType.typeIdentifier.corType !=
           CorElementType.ELEMENT_TYPE_VOID) {
-        var retParam = Parameter();
+        final retParam = Parameter();
         if (mdMethod.isSetProperty) {
           retParam.name = method.name.substring(4).toCamelCase();
         } else if (mdMethod.isGetProperty) {
@@ -80,8 +80,8 @@ class TypeBuilder {
         method.parameters.add(retParam);
       }
 
-      for (var mdParam in mdMethod.parameters) {
-        var param = Parameter();
+      for (final mdParam in mdMethod.parameters) {
+        final param = Parameter();
 
         param.name = mdParam.name;
         param.nativeType = nativeType(mdParam.typeIdentifier);

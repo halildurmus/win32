@@ -11,9 +11,9 @@
 
 import 'dart:io';
 
-import 'mdStore.dart';
-import 'typeBuilder.dart';
-import 'typePrinter.dart';
+import 'md_store.dart';
+import 'type_builder.dart';
+import 'type_printer.dart';
 
 final typesToGenerate = [
   'Windows.Storage.Pickers.IFileOpenPicker',
@@ -29,7 +29,7 @@ void main(List<String> args) {
       ? Directory(args.first)
       : Directory('lib/src/generated');
 
-  for (var type in typesToGenerate) {
+  for (final type in typesToGenerate) {
     final mdTypeDef = WinmdStore.getMetadataForType(type);
     final projection = TypeBuilder.projectWinMdType(mdTypeDef);
     final dartClass = TypePrinter.printType(projection);
