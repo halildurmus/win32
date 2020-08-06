@@ -10,7 +10,7 @@ linter:
     # redundancy is good if it leads to better documentation
     avoid_redundant_argument_values: false
 
-    # Print is useful for examples
+    # print is useful for examples
     avoid_print: false
 
     # disable for now per https://github.com/timsneath/win32/issues/87
@@ -22,15 +22,23 @@ linter:
     # deliberately name generated files after their COM equivalents
     file_names: false
 
+    # seems to trigger false positives
+    invariant_booleans: false
+
     # while(true) is useful for Win32 enumerations
     literal_only_boolean_expressions: false
+
+    # doesn't make sense if adjacent strings are not human language
+    missing_whitespace_between_adjacent_strings: false
 
     # Win32 parity requires TitleCase method names
     non_constant_identifier_names: false
 
+    # Some of these may be enabled already, but explicitly enabled here in case
+    # lint decides to change its defaults.
     avoid_function_literals_in_foreach_calls: true
-    directives_ordering: true
     omit_local_variable_types: true
+    directives_ordering: true
     prefer_expression_function_bodies: true
     prefer_initializing_formals: true
     prefer_interpolation_to_compose_strings: true
