@@ -19,6 +19,10 @@ typedef activateActCtxNative = Int32 Function(
 typedef activateActCtxDart = int Function(
     int hActCtx, Pointer<IntPtr> lpCookie);
 
+// BOOL WINAPI AllocConsole(void);
+typedef allocConsoleNative = Int32 Function();
+typedef allocConsoleDart = int Function();
+
 // BOOL AppendMenuW(
 //   HMENU    hMenu,
 //   UINT     uFlags,
@@ -29,6 +33,12 @@ typedef appendMenuNative = Int32 Function(
     IntPtr hMenu, Uint32 uFlags, IntPtr uIDNewItem, Pointer<Utf16> lpNewItem);
 typedef appendMenuDart = int Function(
     int hMenu, int uFlags, int uIDNewItem, Pointer<Utf16> lpNewItem);
+
+// BOOL WINAPI AttachConsole(
+//   _In_ DWORD dwProcessId
+// );
+typedef attachConsoleNative = Int32 Function(Uint32 dwProcessId);
+typedef attachConsoleDart = int Function(int dwProcessId);
 
 // BOOL Beep(
 //   DWORD dwFreq,
@@ -843,6 +853,10 @@ typedef formatMessageDart = int Function(
     int nSize,
     Pointer arguments);
 
+// BOOL WINAPI FreeConsole(void);
+typedef freeConsoleNative = Int32 Function();
+typedef freeConsoleDart = int Function();
+
 // BOOL FreeLibrary(
 //   HMODULE hLibModule
 // );
@@ -1360,6 +1374,10 @@ typedef initializeProcThreadAttributeListDart = int Function(
 typedef isClipboardFormatAvailableNative = Int32 Function(Uint32 format);
 typedef isClipboardFormatAvailableDart = int Function(int format);
 
+// BOOL IsDebuggerPresent();
+typedef isDebuggerPresentNative = Int32 Function();
+typedef isDebuggerPresentDart = int Function();
+
 // BOOL IsDialogMessageW(
 //   HWND  hDlg,
 //   LPMSG lpMsg
@@ -1455,6 +1473,22 @@ typedef moveWindowDart = int Function(
 typedef moveToExNative = Int32 Function(
     IntPtr hdc, Int32 x, Int32 y, Pointer<POINT> lppt);
 typedef moveToExDart = int Function(int hdc, int x, int y, Pointer<POINT> lppt);
+
+// DWORD MsgWaitForMultipleObjects(
+//   DWORD        nCount,
+//   const HANDLE *pHandles,
+//   BOOL         fWaitAll,
+//   DWORD        dwMilliseconds,
+//   DWORD        dwWakeMask
+// );
+typedef msgWaitForMultipleObjectsNative = Uint32 Function(
+    Uint32 count,
+    Pointer<IntPtr> pHandles,
+    Int32 fWaitAll,
+    Uint32 dwMilliseconds,
+    Uint32 dwWakeMask);
+typedef msgWaitForMultipleObjectsDart = int Function(int count,
+    Pointer<IntPtr> pHandles, int fWaitAll, int dwMilliseconds, int dwWakeMask);
 
 // HANDLE OpenProcess(
 //   DWORD dwDesiredAccess,

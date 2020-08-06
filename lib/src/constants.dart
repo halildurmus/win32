@@ -3620,6 +3620,9 @@ const STD_ERROR_HANDLE = -12;
 const INVALID_HANDLE_VALUE = -1;
 
 /// @nodoc
+const ATTACH_PARENT_PROCESS = -1;
+
+/// @nodoc
 const FOREGROUND_BLUE = 0x0001;
 
 /// @nodoc
