@@ -34,7 +34,6 @@ typedef _Release_Dart = int Function(Pointer obj);
 class IUnknown {
   // vtable begins at 0, ends at 2
 
-  @override
   Pointer<COMObject> ptr;
 
   IUnknown(this.ptr);

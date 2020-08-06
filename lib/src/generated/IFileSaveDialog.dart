@@ -93,13 +93,12 @@ class IFileSaveDialog extends IFileDialog {
 
 /// {@category com}
 class FileSaveDialog extends IFileSaveDialog {
-  @override
-  Pointer<COMObject> ptr;
+  FileSaveDialog(Pointer<COMObject> ptr) : super(ptr);
 
   factory FileSaveDialog.createInstance() {
     final ptr = COMObject.allocate().addressOf;
 
-    var hr = CoCreateInstance(
+    final hr = CoCreateInstance(
         GUID.fromString(CLSID_FileSaveDialog).addressOf,
         nullptr,
         CLSCTX_ALL,
@@ -109,6 +108,4 @@ class FileSaveDialog extends IFileSaveDialog {
     if (FAILED(hr)) throw WindowsException(hr);
     return FileSaveDialog(ptr);
   }
-
-  FileSaveDialog(this.ptr) : super(ptr);
 }

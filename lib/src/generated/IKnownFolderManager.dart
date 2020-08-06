@@ -158,13 +158,12 @@ class IKnownFolderManager extends IUnknown {
 
 /// {@category com}
 class KnownFolderManager extends IKnownFolderManager {
-  @override
-  Pointer<COMObject> ptr;
+  KnownFolderManager(Pointer<COMObject> ptr) : super(ptr);
 
   factory KnownFolderManager.createInstance() {
     final ptr = COMObject.allocate().addressOf;
 
-    var hr = CoCreateInstance(
+    final hr = CoCreateInstance(
         GUID.fromString(CLSID_KnownFolderManager).addressOf,
         nullptr,
         CLSCTX_ALL,
@@ -174,6 +173,4 @@ class KnownFolderManager extends IKnownFolderManager {
     if (FAILED(hr)) throw WindowsException(hr);
     return KnownFolderManager(ptr);
   }
-
-  KnownFolderManager(this.ptr) : super(ptr);
 }

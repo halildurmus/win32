@@ -76,18 +76,15 @@ class IWbemLocator extends IUnknown {
 
 /// {@category com}
 class WbemLocator extends IWbemLocator {
-  @override
-  Pointer<COMObject> ptr;
+  WbemLocator(Pointer<COMObject> ptr) : super(ptr);
 
   factory WbemLocator.createInstance() {
     final ptr = COMObject.allocate().addressOf;
 
-    var hr = CoCreateInstance(GUID.fromString(CLSID_WbemLocator).addressOf,
+    final hr = CoCreateInstance(GUID.fromString(CLSID_WbemLocator).addressOf,
         nullptr, CLSCTX_ALL, GUID.fromString(IID_IWbemLocator).addressOf, ptr);
 
     if (FAILED(hr)) throw WindowsException(hr);
     return WbemLocator(ptr);
   }
-
-  WbemLocator(this.ptr) : super(ptr);
 }

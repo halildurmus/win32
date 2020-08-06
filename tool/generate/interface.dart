@@ -153,7 +153,6 @@ import '../winrt/winrt_constants.dart';
 ''');
     } else {
       buffer.write('''
-  @override  
   Pointer<COMObject> ptr;
 
   $name(this.ptr);\n
@@ -277,13 +276,12 @@ import '../winrt/winrt_constants.dart';
       }
       buffer.write('''
 class $className extends $name {
-  @override
-  Pointer<COMObject> ptr;
+  $className(Pointer<COMObject> ptr) : super(ptr);
 
   factory $className.createInstance() {
     final ptr = COMObject.allocate().addressOf;
 
-    var hr = CoCreateInstance(
+    final hr = CoCreateInstance(
         GUID.fromString(CLSID_$className).addressOf,
         nullptr,
         CLSCTX_ALL,
@@ -293,8 +291,6 @@ class $className extends $name {
     if (FAILED(hr)) throw WindowsException(hr);
     return $className(ptr);
   }
-
-  $className(this.ptr) : super(ptr);
 }
 ''');
       return buffer.toString();

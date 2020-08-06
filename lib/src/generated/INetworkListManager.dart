@@ -122,13 +122,12 @@ class INetworkListManager extends IDispatch {
 
 /// {@category com}
 class NetworkListManager extends INetworkListManager {
-  @override
-  Pointer<COMObject> ptr;
+  NetworkListManager(Pointer<COMObject> ptr) : super(ptr);
 
   factory NetworkListManager.createInstance() {
     final ptr = COMObject.allocate().addressOf;
 
-    var hr = CoCreateInstance(
+    final hr = CoCreateInstance(
         GUID.fromString(CLSID_NetworkListManager).addressOf,
         nullptr,
         CLSCTX_ALL,
@@ -138,6 +137,4 @@ class NetworkListManager extends INetworkListManager {
     if (FAILED(hr)) throw WindowsException(hr);
     return NetworkListManager(ptr);
   }
-
-  NetworkListManager(this.ptr) : super(ptr);
 }
