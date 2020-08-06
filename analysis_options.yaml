@@ -34,15 +34,9 @@ linter:
     # Win32 parity requires TitleCase method names
     non_constant_identifier_names: false
 
-    # Some of these may be enabled already, but explicitly enabled here in case
-    # lint decides to change its defaults.
-    avoid_function_literals_in_foreach_calls: true
+    # Some additional lints we want to enforce
     omit_local_variable_types: true
-    directives_ordering: true
     prefer_expression_function_bodies: true
-    prefer_initializing_formals: true
     prefer_interpolation_to_compose_strings: true
     prefer_relative_imports: true
-    prefer_typing_uninitialized_variables: true
-    unnecessary_brace_in_string_interps: true
     unnecessary_lambdas: true
