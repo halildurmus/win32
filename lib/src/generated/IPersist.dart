@@ -29,10 +29,7 @@ typedef _GetClassID_Dart = int Function(Pointer obj, Pointer<CLSID> pClassID);
 class IPersist extends IUnknown {
   // vtable begins at 3, ends at 3
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IPersist(this.ptr) : super(ptr);
+  IPersist(Pointer<COMObject> ptr) : super(ptr);
 
   int GetClassID(Pointer<CLSID> pClassID) =>
       Pointer<NativeFunction<_GetClassID_Native>>.fromAddress(

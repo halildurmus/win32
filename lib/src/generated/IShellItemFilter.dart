@@ -34,10 +34,7 @@ typedef _GetEnumFlagsForItem_Dart = int Function(
 class IShellItemFilter extends IUnknown {
   // vtable begins at 3, ends at 4
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IShellItemFilter(this.ptr) : super(ptr);
+  IShellItemFilter(Pointer<COMObject> ptr) : super(ptr);
 
   int IncludeItem(Pointer<COMObject> psi) =>
       Pointer<NativeFunction<_IncludeItem_Native>>.fromAddress(

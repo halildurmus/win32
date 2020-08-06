@@ -60,10 +60,7 @@ typedef _ApplyProperties_Dart = int Function(
 class IFileSaveDialog extends IFileDialog {
   // vtable begins at 27, ends at 31
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IFileSaveDialog(this.ptr) : super(ptr);
+  IFileSaveDialog(Pointer<COMObject> ptr) : super(ptr);
 
   int SetSaveAsItem(Pointer<COMObject> psi) =>
       Pointer<NativeFunction<_SetSaveAsItem_Native>>.fromAddress(

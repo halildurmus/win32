@@ -66,10 +66,7 @@ typedef _Invoke_Dart = int Function(
 class IDispatch extends IUnknown {
   // vtable begins at 3, ends at 6
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IDispatch(this.ptr) : super(ptr);
+  IDispatch(Pointer<COMObject> ptr) : super(ptr);
 
   int GetTypeInfoCount(Pointer<Uint32> pctinfo) =>
       Pointer<NativeFunction<_GetTypeInfoCount_Native>>.fromAddress(

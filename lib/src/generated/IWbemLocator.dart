@@ -49,10 +49,7 @@ typedef _ConnectServer_Dart = int Function(
 class IWbemLocator extends IUnknown {
   // vtable begins at 3, ends at 3
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IWbemLocator(this.ptr) : super(ptr);
+  IWbemLocator(Pointer<COMObject> ptr) : super(ptr);
 
   int ConnectServer(
           Pointer<Utf16> strNetworkResource,

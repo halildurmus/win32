@@ -59,10 +59,7 @@ typedef _GetDomainType_Dart = int Function(
 class INetworkConnection extends IDispatch {
   // vtable begins at 7, ends at 13
 
-  @override
-  Pointer<COMObject> ptr;
-
-  INetworkConnection(this.ptr) : super(ptr);
+  INetworkConnection(Pointer<COMObject> ptr) : super(ptr);
 
   int GetNetwork(Pointer<IntPtr> ppNetwork) =>
       Pointer<NativeFunction<_GetNetwork_Native>>.fromAddress(

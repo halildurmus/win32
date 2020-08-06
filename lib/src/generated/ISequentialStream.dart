@@ -35,10 +35,7 @@ typedef _Write_Dart = int Function(
 class ISequentialStream extends IUnknown {
   // vtable begins at 3, ends at 4
 
-  @override
-  Pointer<COMObject> ptr;
-
-  ISequentialStream(this.ptr) : super(ptr);
+  ISequentialStream(Pointer<COMObject> ptr) : super(ptr);
 
   int Read(Pointer<void> pv, int cb, Pointer<Uint32> pcbRead) =>
       Pointer<NativeFunction<_Read_Native>>.fromAddress(

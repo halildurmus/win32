@@ -318,10 +318,7 @@ typedef _ExecMethodAsync_Dart = int Function(
 class IWbemServices extends IUnknown {
   // vtable begins at 3, ends at 25
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IWbemServices(this.ptr) : super(ptr);
+  IWbemServices(Pointer<COMObject> ptr) : super(ptr);
 
   int OpenNamespace(
           Pointer<Utf16> strNamespace,

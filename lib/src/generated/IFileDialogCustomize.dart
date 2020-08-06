@@ -149,10 +149,7 @@ typedef _SetControlItemText_Dart = int Function(
 class IFileDialogCustomize extends IUnknown {
   // vtable begins at 3, ends at 29
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IFileDialogCustomize(this.ptr) : super(ptr);
+  IFileDialogCustomize(Pointer<COMObject> ptr) : super(ptr);
 
   int EnableOpenDropDown(int dwIDCtl) =>
       Pointer<NativeFunction<_EnableOpenDropDown_Native>>.fromAddress(

@@ -45,10 +45,7 @@ typedef _Clone_Dart = int Function(Pointer obj, Pointer<IntPtr> ppEnumNetwork);
 class IEnumNetworkConnections extends IDispatch {
   // vtable begins at 7, ends at 11
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IEnumNetworkConnections(this.ptr) : super(ptr);
+  IEnumNetworkConnections(Pointer<COMObject> ptr) : super(ptr);
 
   int get NewEnum {
     final retValuePtr = allocate<IntPtr>();

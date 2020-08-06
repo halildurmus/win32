@@ -35,10 +35,7 @@ typedef _SetNavigationRoot_Dart = int Function(
 class IFileDialog2 extends IFileDialog {
   // vtable begins at 27, ends at 28
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IFileDialog2(this.ptr) : super(ptr);
+  IFileDialog2(Pointer<COMObject> ptr) : super(ptr);
 
   int SetCancelButtonLabel(Pointer<Utf16> pszLabel) =>
       Pointer<NativeFunction<_SetCancelButtonLabel_Native>>.fromAddress(

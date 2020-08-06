@@ -62,10 +62,7 @@ typedef _Clone_Dart = int Function(Pointer obj, Pointer<IntPtr> ppstm);
 class IStream extends ISequentialStream {
   // vtable begins at 5, ends at 13
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IStream(this.ptr) : super(ptr);
+  IStream(Pointer<COMObject> ptr) : super(ptr);
 
   int Seek(int dlibMove, int dwOrigin, Pointer<Uint64> plibNewPosition) =>
       Pointer<NativeFunction<_Seek_Native>>.fromAddress(

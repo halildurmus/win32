@@ -66,10 +66,7 @@ typedef _GetFolderDefinition_Dart = int Function(
 class IKnownFolder extends IUnknown {
   // vtable begins at 3, ends at 11
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IKnownFolder(this.ptr) : super(ptr);
+  IKnownFolder(Pointer<COMObject> ptr) : super(ptr);
 
   int GetId(Pointer<GUID> pkfid) =>
       Pointer<NativeFunction<_GetId_Native>>.fromAddress(

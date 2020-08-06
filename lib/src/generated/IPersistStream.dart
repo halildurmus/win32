@@ -40,10 +40,7 @@ typedef _GetSizeMax_Dart = int Function(Pointer obj, Pointer<Uint64> pcbSize);
 class IPersistStream extends IPersist {
   // vtable begins at 4, ends at 7
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IPersistStream(this.ptr) : super(ptr);
+  IPersistStream(Pointer<COMObject> ptr) : super(ptr);
 
   int IsDirty() => Pointer<NativeFunction<_IsDirty_Native>>.fromAddress(
           ptr.ref.vtable.elementAt(4).value)

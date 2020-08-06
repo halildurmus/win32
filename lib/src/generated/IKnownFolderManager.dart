@@ -91,10 +91,7 @@ typedef _Redirect_Dart = int Function(
 class IKnownFolderManager extends IUnknown {
   // vtable begins at 3, ends at 12
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IKnownFolderManager(this.ptr) : super(ptr);
+  IKnownFolderManager(Pointer<COMObject> ptr) : super(ptr);
 
   int FolderIdFromCsidl(int nCsidl, Pointer<GUID> pfid) =>
       Pointer<NativeFunction<_FolderIdFromCsidl_Native>>.fromAddress(

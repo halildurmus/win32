@@ -39,10 +39,7 @@ typedef _Clone_Dart = int Function(Pointer obj, Pointer<IntPtr> ppEnum);
 class IEnumVARIANT extends IUnknown {
   // vtable begins at 3, ends at 6
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IEnumVARIANT(this.ptr) : super(ptr);
+  IEnumVARIANT(Pointer<COMObject> ptr) : super(ptr);
 
   int Next(int celt, Pointer<VARIANT_POINTER> rgVar,
           Pointer<Uint32> pCeltFetched) =>

@@ -40,10 +40,7 @@ typedef _GetTrustLevel_Dart = int Function(
 class IInspectable extends IUnknown {
   // vtable begins at 3, ends at 5
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IInspectable(this.ptr) : super(ptr);
+  IInspectable(Pointer<COMObject> ptr) : super(ptr);
 
   int GetIids(Pointer<Uint32> iidCount, Pointer<IntPtr> iids) =>
       Pointer<NativeFunction<_GetIids_Native>>.fromAddress(

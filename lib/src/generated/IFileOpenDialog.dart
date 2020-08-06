@@ -37,10 +37,7 @@ typedef _GetSelectedItems_Dart = int Function(
 class IFileOpenDialog extends IFileDialog {
   // vtable begins at 27, ends at 28
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IFileOpenDialog(this.ptr) : super(ptr);
+  IFileOpenDialog(Pointer<COMObject> ptr) : super(ptr);
 
   int GetResults(Pointer<IntPtr> ppenum) =>
       Pointer<NativeFunction<_GetResults_Native>>.fromAddress(

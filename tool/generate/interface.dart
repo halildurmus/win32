@@ -148,16 +148,17 @@ import '../winrt/winrt_constants.dart';
   // vtable begins at $vtableStart, ends at ${vtableStart + methods.length - 1}
 ''');
     if (inherits.isNotEmpty) {
-      buffer.writeln('  @override');
-    }
-    buffer.write('''
+      buffer.write('''
+   $name(Pointer<COMObject> ptr) : super(ptr);\n
+''');
+    } else {
+      buffer.write('''
+  @override  
   Pointer<COMObject> ptr;
 
-  $name(this.ptr)''');
-    if (inherits.isNotEmpty) {
-      buffer.write(': super(ptr)');
+  $name(this.ptr);
+''');
     }
-    buffer.writeln(';\n');
 
     for (final method in methods) {
       var generateMethod = true;

@@ -96,10 +96,7 @@ typedef _SetCategory_Dart = int Function(Pointer obj, int NewCategory);
 class INetwork extends IDispatch {
   // vtable begins at 7, ends at 19
 
-  @override
-  Pointer<COMObject> ptr;
-
-  INetwork(this.ptr) : super(ptr);
+  INetwork(Pointer<COMObject> ptr) : super(ptr);
 
   int GetName(Pointer<Utf16> pszNetworkName) =>
       Pointer<NativeFunction<_GetName_Native>>.fromAddress(

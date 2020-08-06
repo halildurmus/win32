@@ -61,10 +61,7 @@ typedef _ClearSimulatedProfileInfo_Dart = int Function(Pointer obj);
 class INetworkListManager extends IDispatch {
   // vtable begins at 7, ends at 15
 
-  @override
-  Pointer<COMObject> ptr;
-
-  INetworkListManager(this.ptr) : super(ptr);
+  INetworkListManager(Pointer<COMObject> ptr) : super(ptr);
 
   int GetNetworks(int Flags, Pointer<IntPtr> ppEnumNetwork) =>
       Pointer<NativeFunction<_GetNetworks_Native>>.fromAddress(

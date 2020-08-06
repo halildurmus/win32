@@ -62,10 +62,7 @@ typedef _DeleteAll_Dart = int Function(Pointer obj);
 class IWbemContext extends IUnknown {
   // vtable begins at 3, ends at 11
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IWbemContext(this.ptr) : super(ptr);
+  IWbemContext(Pointer<COMObject> ptr) : super(ptr);
 
   int Clone(Pointer<IntPtr> ppNewCopy) =>
       Pointer<NativeFunction<_Clone_Native>>.fromAddress(
