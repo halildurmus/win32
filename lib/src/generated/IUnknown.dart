@@ -38,6 +38,7 @@ class IUnknown {
   Pointer<COMObject> ptr;
 
   IUnknown(this.ptr);
+
   int QueryInterface(Pointer<GUID> riid, Pointer<IntPtr> ppvObject) =>
       Pointer<NativeFunction<_QueryInterface_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(0).value)

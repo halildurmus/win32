@@ -43,10 +43,7 @@ typedef _Close_Dart = int Function(Pointer obj);
 class IAsyncInfo extends IInspectable {
   // vtable begins at 6, ends at 10
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IAsyncInfo(this.ptr) : super(ptr);
+  IAsyncInfo(Pointer<COMObject> ptr) : super(ptr);
 
   int get Id {
     final retValuePtr = allocate<Uint32>();

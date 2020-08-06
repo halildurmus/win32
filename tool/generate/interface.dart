@@ -156,7 +156,7 @@ import '../winrt/winrt_constants.dart';
   @override  
   Pointer<COMObject> ptr;
 
-  $name(this.ptr);
+  $name(this.ptr);\n
 ''');
     }
 

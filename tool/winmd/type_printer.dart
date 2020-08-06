@@ -123,16 +123,17 @@ import '../winrt/winrt_constants.dart';
   // vtable begins at ${type.vtableStart}, ends at ${type.vtableStart + type.methods.length - 1}
 ''');
     if (type.inherits.isNotEmpty) {
-      buffer.writeln('  @override');
-    }
-    buffer.write('''
+      buffer.write('''
+   ${type.shortName}(Pointer<COMObject> ptr) : super(ptr);\n
+''');
+    } else {
+      buffer.write('''
+  @override  
   Pointer<COMObject> ptr;
 
-  ${type.shortName}(this.ptr)''');
-    if (type.inherits.isNotEmpty) {
-      buffer.write(': super(ptr)');
+   ${type.shortName}(this.ptr);\n
+''');
     }
-    buffer.writeln(';\n');
 
     for (final method in type.methods) {
       if (method.name.startsWith('get_')) {

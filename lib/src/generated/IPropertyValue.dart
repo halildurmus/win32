@@ -186,10 +186,7 @@ typedef _GetRectArray_Dart = int Function(
 class IPropertyValue extends IInspectable {
   // vtable begins at 6, ends at 44
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IPropertyValue(this.ptr) : super(ptr);
+  IPropertyValue(Pointer<COMObject> ptr) : super(ptr);
 
   int get Type {
     final retValuePtr = allocate<Int32>();
