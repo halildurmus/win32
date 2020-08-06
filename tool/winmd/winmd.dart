@@ -16,7 +16,7 @@ import 'type_builder.dart';
 import 'type_printer.dart';
 
 final typesToGenerate = [
-  'Windows.Storage.Pickers.IFileOpenPicker',
+  // 'Windows.Storage.Pickers.IFileOpenPicker',
   // 'Windows.Globalization.ICalendar',
   'Windows.Foundation.IPropertyValue',
   'Windows.Foundation.IAsyncInfo',
