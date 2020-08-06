@@ -99,10 +99,7 @@ typedef _Enable_Dart = int Function(Pointer obj, int enable);
 class IDesktopWallpaper extends IUnknown {
   // vtable begins at 3, ends at 18
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IDesktopWallpaper(this.ptr) : super(ptr);
+  IDesktopWallpaper(Pointer<COMObject> ptr) : super(ptr);
 
   int SetWallpaper(Pointer<Utf16> monitorID, Pointer<Utf16> wallpaper) =>
       Pointer<NativeFunction<_SetWallpaper_Native>>.fromAddress(
@@ -194,13 +191,12 @@ class IDesktopWallpaper extends IUnknown {
 
 /// {@category com}
 class DesktopWallpaper extends IDesktopWallpaper {
-  @override
-  Pointer<COMObject> ptr;
+  DesktopWallpaper(Pointer<COMObject> ptr) : super(ptr);
 
   factory DesktopWallpaper.createInstance() {
     final ptr = COMObject.allocate().addressOf;
 
-    var hr = CoCreateInstance(
+    final hr = CoCreateInstance(
         GUID.fromString(CLSID_DesktopWallpaper).addressOf,
         nullptr,
         CLSCTX_ALL,
@@ -210,6 +206,4 @@ class DesktopWallpaper extends IDesktopWallpaper {
     if (FAILED(hr)) throw WindowsException(hr);
     return DesktopWallpaper(ptr);
   }
-
-  DesktopWallpaper(this.ptr) : super(ptr);
 }

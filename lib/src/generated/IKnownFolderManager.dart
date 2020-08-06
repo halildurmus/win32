@@ -91,10 +91,7 @@ typedef _Redirect_Dart = int Function(
 class IKnownFolderManager extends IUnknown {
   // vtable begins at 3, ends at 12
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IKnownFolderManager(this.ptr) : super(ptr);
+  IKnownFolderManager(Pointer<COMObject> ptr) : super(ptr);
 
   int FolderIdFromCsidl(int nCsidl, Pointer<GUID> pfid) =>
       Pointer<NativeFunction<_FolderIdFromCsidl_Native>>.fromAddress(
@@ -161,13 +158,12 @@ class IKnownFolderManager extends IUnknown {
 
 /// {@category com}
 class KnownFolderManager extends IKnownFolderManager {
-  @override
-  Pointer<COMObject> ptr;
+  KnownFolderManager(Pointer<COMObject> ptr) : super(ptr);
 
   factory KnownFolderManager.createInstance() {
     final ptr = COMObject.allocate().addressOf;
 
-    var hr = CoCreateInstance(
+    final hr = CoCreateInstance(
         GUID.fromString(CLSID_KnownFolderManager).addressOf,
         nullptr,
         CLSCTX_ALL,
@@ -177,6 +173,4 @@ class KnownFolderManager extends IKnownFolderManager {
     if (FAILED(hr)) throw WindowsException(hr);
     return KnownFolderManager(ptr);
   }
-
-  KnownFolderManager(this.ptr) : super(ptr);
 }

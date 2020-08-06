@@ -57,7 +57,7 @@ import '../winrt/winrt_constants.dart';
 
   static String typedefsAsString(Interface type) {
     final buffer = StringBuffer();
-    for (var method in type.methods) {
+    for (final method in type.methods) {
       // Native typedef
       buffer.writeln(
           'typedef _${method.name}_Native = ${method.returnTypeNative} Function(');
@@ -123,18 +123,19 @@ import '../winrt/winrt_constants.dart';
   // vtable begins at ${type.vtableStart}, ends at ${type.vtableStart + type.methods.length - 1}
 ''');
     if (type.inherits.isNotEmpty) {
-      buffer.writeln('  @override');
-    }
-    buffer.write('''
+      buffer.write('''
+   ${type.shortName}(Pointer<COMObject> ptr) : super(ptr);\n
+''');
+    } else {
+      buffer.write('''
+  @override  
   Pointer<COMObject> ptr;
 
-  ${type.shortName}(this.ptr)''');
-    if (type.inherits.isNotEmpty) {
-      buffer.write(': super(ptr)');
+   ${type.shortName}(this.ptr);\n
+''');
     }
-    buffer.writeln(';\n');
 
-    for (var method in type.methods) {
+    for (final method in type.methods) {
       if (method.name.startsWith('get_')) {
         buffer.write(dartGetProperty(method, vtableIndex));
       } else if (method.name.startsWith('put_')) {
@@ -173,7 +174,7 @@ import '../winrt/winrt_constants.dart';
     }
 
     for (var idx = 0; idx < method.parameters.length; idx++) {
-      buffer.write('${method.parameters[idx].name}');
+      buffer.write(method.parameters[idx].name);
       if (idx < method.parameters.length - 1) {
         buffer.write(', ');
       }
@@ -185,7 +186,7 @@ import '../winrt/winrt_constants.dart';
   static String dartGetProperty(Method method, int vtableIndex) {
     final buffer = StringBuffer();
 
-    var exposedMethodName = method.name.substring(4);
+    final exposedMethodName = method.name.substring(4);
 
     buffer.writeln('  ${method.returnTypeDart} get $exposedMethodName {');
     buffer.writeln(

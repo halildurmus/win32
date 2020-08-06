@@ -58,7 +58,7 @@ bool testBitmask(int bitmask, int value) => bitmask & value == value;
 int findPrimaryMonitor(List<int> monitors) {
   final monitorInfo = MONITORINFO.allocate();
 
-  for (var monitor in monitors) {
+  for (final monitor in monitors) {
     final result = GetMonitorInfo(monitor, monitorInfo.addressOf);
     if (result == TRUE) {
       if (testBitmask(monitorInfo.dwFlags, MONITORINFOF_PRIMARY)) {

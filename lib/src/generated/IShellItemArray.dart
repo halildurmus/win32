@@ -63,10 +63,7 @@ typedef _EnumItems_Dart = int Function(
 class IShellItemArray extends IUnknown {
   // vtable begins at 3, ends at 9
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IShellItemArray(this.ptr) : super(ptr);
+  IShellItemArray(Pointer<COMObject> ptr) : super(ptr);
 
   int BindToHandler(Pointer<COMObject> pbc, Pointer<GUID> bhid,
           Pointer<GUID> riid, Pointer<IntPtr> ppvOut) =>

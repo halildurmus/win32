@@ -11,6 +11,7 @@ import 'package:ffi/ffi.dart';
 bool isWindowsRuntimeAvailable() {
   try {
     DynamicLibrary.open('api-ms-win-core-winrt-l1-1-0.dll');
+    // ignore: avoid_catching_errors
   } on ArgumentError {
     return false;
   }
@@ -27,4 +28,4 @@ Pointer<Uint8> convertToANSIString(String str) {
   return pStr;
 }
 
-final TEXT = Utf16.toUtf16;
+const TEXT = Utf16.toUtf16;

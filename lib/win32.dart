@@ -86,9 +86,9 @@ export 'src/structs.dart';
 export 'src/utils.dart';
 
 // Useful extension methods
-export 'src/extensions/intToHexString.dart';
-export 'src/extensions/listToBlob.dart';
-export 'src/extensions/unpackUtf16.dart';
+export 'src/extensions/int_to_hexstring.dart';
+export 'src/extensions/list_to_blob.dart';
+export 'src/extensions/unpack_utf16.dart';
 
 // Traditional C-style Windows APIs
 export 'src/advapi32.dart';

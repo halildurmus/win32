@@ -53,7 +53,7 @@ class Piece {
       [this.pointCount = 4])
       : width = 0,
         height = 0 {
-    var bottomLeft = Point.clone(points[0]);
+    final bottomLeft = Point.clone(points[0]);
 
     for (var i = 1; i < pointCount; i++) {
       bottomLeft.x = min(points[i].x, bottomLeft.x);
@@ -72,12 +72,12 @@ class Piece {
 
   /// Gets the bottom part of points of the piece
   List<Point> get Skirt {
-    var points = <Point>[];
+    final points = <Point>[];
 
     for (var x = 0; x < width; x++) {
       for (var y = 0; y < height; y++) {
         if (isPointExists(x, y)) {
-          var p = Point();
+          final p = Point();
           p.x = x;
           p.y = y;
           points.add(p);
@@ -90,11 +90,11 @@ class Piece {
 
   /// Gets the left part of points of the piece
   List<Point> get LeftSide {
-    var points = <Point>[];
+    final points = <Point>[];
     for (var y = 0; y < height; y++) {
       for (var x = 0; x < height; x++) {
         if (isPointExists(x, y)) {
-          var p = Point();
+          final p = Point();
           p.x = x;
           p.y = y;
           points.add(p);
@@ -107,11 +107,11 @@ class Piece {
 
   /// Gets the right part of points of the piece
   List<Point> get RightSide {
-    var points = <Point>[];
+    final points = <Point>[];
     for (var y = 0; y < height; y++) {
       for (var x = width - 1; x >= 0; x--) {
         if (isPointExists(x, y)) {
-          var p = Point();
+          final p = Point();
           p.x = x;
           p.y = y;
           points.add(p);
@@ -125,7 +125,7 @@ class Piece {
   /// String representation of a piece (for debugging)
   @override
   String toString() {
-    var buffer = StringBuffer();
+    final buffer = StringBuffer();
     buffer.write('width = $width | ');
     buffer.write('height = $height | ');
     buffer.write('nPoints = $pointCount | ');

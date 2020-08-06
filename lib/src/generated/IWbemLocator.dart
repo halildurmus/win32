@@ -49,10 +49,7 @@ typedef _ConnectServer_Dart = int Function(
 class IWbemLocator extends IUnknown {
   // vtable begins at 3, ends at 3
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IWbemLocator(this.ptr) : super(ptr);
+  IWbemLocator(Pointer<COMObject> ptr) : super(ptr);
 
   int ConnectServer(
           Pointer<Utf16> strNetworkResource,
@@ -79,18 +76,15 @@ class IWbemLocator extends IUnknown {
 
 /// {@category com}
 class WbemLocator extends IWbemLocator {
-  @override
-  Pointer<COMObject> ptr;
+  WbemLocator(Pointer<COMObject> ptr) : super(ptr);
 
   factory WbemLocator.createInstance() {
     final ptr = COMObject.allocate().addressOf;
 
-    var hr = CoCreateInstance(GUID.fromString(CLSID_WbemLocator).addressOf,
+    final hr = CoCreateInstance(GUID.fromString(CLSID_WbemLocator).addressOf,
         nullptr, CLSCTX_ALL, GUID.fromString(IID_IWbemLocator).addressOf, ptr);
 
     if (FAILED(hr)) throw WindowsException(hr);
     return WbemLocator(ptr);
   }
-
-  WbemLocator(this.ptr) : super(ptr);
 }

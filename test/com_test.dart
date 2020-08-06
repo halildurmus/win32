@@ -101,7 +101,7 @@ void main() {
   });
 
   test('Create COM object through class method', () {
-    var hr = CoInitializeEx(
+    final hr = CoInitializeEx(
         nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
     expect(hr, equals(S_OK));
 

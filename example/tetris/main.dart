@@ -22,7 +22,7 @@ void main() {
 
   final wc = WNDCLASS.allocate();
   wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-  wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(MainWindowProc, 0);
+  wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0);
   wc.hInstance = hInstance;
   wc.hIcon = LoadIcon(NULL, IDI_APPLICATION);
   wc.hCursor = LoadCursor(NULL, IDC_ARROW);
@@ -64,7 +64,7 @@ void main() {
   }
 }
 
-int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
+int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
   int hdc;
   var result = 0;
 
@@ -91,7 +91,7 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
     case WM_KILLFOCUS:
       KillTimer(hwnd, TIMER_ID);
-      game.pause(true);
+      game.pauseGame();
       break;
 
     case WM_SETFOCUS:

@@ -37,10 +37,7 @@ typedef _GetSelectedItems_Dart = int Function(
 class IFileOpenDialog extends IFileDialog {
   // vtable begins at 27, ends at 28
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IFileOpenDialog(this.ptr) : super(ptr);
+  IFileOpenDialog(Pointer<COMObject> ptr) : super(ptr);
 
   int GetResults(Pointer<IntPtr> ppenum) =>
       Pointer<NativeFunction<_GetResults_Native>>.fromAddress(
@@ -55,13 +52,12 @@ class IFileOpenDialog extends IFileDialog {
 
 /// {@category com}
 class FileOpenDialog extends IFileOpenDialog {
-  @override
-  Pointer<COMObject> ptr;
+  FileOpenDialog(Pointer<COMObject> ptr) : super(ptr);
 
   factory FileOpenDialog.createInstance() {
     final ptr = COMObject.allocate().addressOf;
 
-    var hr = CoCreateInstance(
+    final hr = CoCreateInstance(
         GUID.fromString(CLSID_FileOpenDialog).addressOf,
         nullptr,
         CLSCTX_ALL,
@@ -71,6 +67,4 @@ class FileOpenDialog extends IFileOpenDialog {
     if (FAILED(hr)) throw WindowsException(hr);
     return FileOpenDialog(ptr);
   }
-
-  FileOpenDialog(this.ptr) : super(ptr);
 }

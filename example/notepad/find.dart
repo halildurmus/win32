@@ -22,7 +22,7 @@ class NotepadFind {
     find = FINDREPLACE.allocate();
   }
 
-  int ShowFindDialog(int hwnd) {
+  int showFindDialog(int hwnd) {
     find.lStructSize = sizeOf<FINDREPLACE>();
     find.hwndOwner = hwnd;
     find.hInstance = NULL;
@@ -38,7 +38,7 @@ class NotepadFind {
     return FindText(find.addressOf);
   }
 
-  int ShowReplaceDialog(int hwnd) {
+  int showReplaceDialog(int hwnd) {
     find.lStructSize = sizeOf<FINDREPLACE>();
     find.hwndOwner = hwnd;
     find.hInstance = NULL;
@@ -54,7 +54,7 @@ class NotepadFind {
     return ReplaceText(find.addressOf);
   }
 
-  bool FindTextInEditWindow(
+  bool findTextInEditWindow(
       int hwndEdit, Pointer<Uint32> piSearchOffset, Pointer<FINDREPLACE> pfr) {
     int iLength;
 
@@ -81,17 +81,17 @@ class NotepadFind {
     return true;
   }
 
-  bool FindNextTextInEditWindow(int hwndEdit, Pointer<Uint32> piSearchOffset) {
+  bool findNextTextInEditWindow(int hwndEdit, Pointer<Uint32> piSearchOffset) {
     final fr = FINDREPLACE.allocate();
 
     fr.lpstrFindWhat = szFindText.pointer;
 
-    return FindTextInEditWindow(hwndEdit, piSearchOffset, fr.addressOf);
+    return findTextInEditWindow(hwndEdit, piSearchOffset, fr.addressOf);
   }
 
-  bool ReplaceTextInEditWindow(
+  bool replaceTextInEditWindow(
       int hwndEdit, Pointer<Uint32> piSearchOffset, Pointer<FINDREPLACE> fr) {
-    if (!FindTextInEditWindow(hwndEdit, piSearchOffset, fr)) {
+    if (!findTextInEditWindow(hwndEdit, piSearchOffset, fr)) {
       return false;
     }
     SendMessage(hwndEdit, EM_REPLACESEL, 0, fr.ref.lpstrReplaceWith.address);
@@ -99,5 +99,5 @@ class NotepadFind {
     return true;
   }
 
-  bool FindValidFind() => !szFindText.isEmpty;
+  bool findValidFind() => !szFindText.isEmpty;
 }

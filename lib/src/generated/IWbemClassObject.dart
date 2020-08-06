@@ -183,10 +183,7 @@ typedef _GetMethodOrigin_Dart = int Function(
 class IWbemClassObject extends IUnknown {
   // vtable begins at 3, ends at 26
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IWbemClassObject(this.ptr) : super(ptr);
+  IWbemClassObject(Pointer<COMObject> ptr) : super(ptr);
 
   int GetQualifierSet(Pointer<IntPtr> ppQualSet) =>
       Pointer<NativeFunction<_GetQualifierSet_Native>>.fromAddress(

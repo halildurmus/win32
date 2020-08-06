@@ -82,7 +82,7 @@ class PieceSet {
   }
 
   List<Point> rotate(List<Point> apt, [int numPoints = 4]) {
-    var rotated = <Point>[];
+    final rotated = <Point>[];
 
     // X' = -Y
     // Y' = X

@@ -43,12 +43,8 @@ class Utf16String {
 
   /// Returns the referenced string as a Dart `String`
   @override
-  String toString({int maxLength = -1}) {
-    if (maxLength == -1) {
-      maxLength = length;
-    }
-    return pointer.unpackString(length);
-  }
+  String toString({int maxLength = -1}) =>
+      pointer.unpackString(maxLength == -1 ? length : maxLength);
 
   /// Unpacks the string into a `List`.
   ///

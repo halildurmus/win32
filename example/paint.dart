@@ -11,7 +11,7 @@ import 'package:win32/win32.dart';
 
 final hInstance = GetModuleHandle(nullptr);
 
-int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
+int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
   switch (uMsg) {
     case WM_DESTROY:
       PostQuitMessage(0);
@@ -53,13 +53,13 @@ int MainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 void main() {
   // Register the window class.
 
-  final CLASS_NAME = TEXT('Simple Paint Sample');
+  final className = TEXT('Simple Paint Sample');
 
   final wc = WNDCLASS.allocate();
   wc.style = CS_HREDRAW | CS_VREDRAW;
-  wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(MainWindowProc, 0);
+  wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0);
   wc.hInstance = hInstance;
-  wc.lpszClassName = CLASS_NAME;
+  wc.lpszClassName = className;
   wc.hCursor = LoadCursor(NULL, IDC_ARROW);
   wc.hbrBackground = GetStockObject(WHITE_BRUSH);
   RegisterClass(wc.addressOf);
@@ -68,8 +68,8 @@ void main() {
 
   final hWnd = CreateWindowEx(
       0, // Optional window styles.
-      CLASS_NAME, // Window class
-      CLASS_NAME, // Window caption
+      className, // Window class
+      className, // Window caption
       WS_OVERLAPPEDWINDOW, // Window style
 
       // Size and position

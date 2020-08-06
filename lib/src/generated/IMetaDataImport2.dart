@@ -122,10 +122,7 @@ typedef _EnumMethodSpecs_Dart = int Function(
 class IMetaDataImport2 extends IMetaDataImport {
   // vtable begins at 65, ends at 72
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IMetaDataImport2(this.ptr) : super(ptr);
+  IMetaDataImport2(Pointer<COMObject> ptr) : super(ptr);
 
   int EnumGenericParams(
           Pointer<IntPtr> phEnum,

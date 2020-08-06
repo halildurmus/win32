@@ -25,9 +25,9 @@ class NotepadEditor {
     file = NotepadFile(_hwnd);
   }
 
-  void Dispose() {
+  void dispose() {
     if (font != null) {
-      font.Dispose();
+      font.dispose();
     }
   }
 
@@ -42,7 +42,7 @@ class NotepadEditor {
 
     SendMessage(_hwndEdit, EM_GETSEL, iSelBeg.address, iSelEnd.address);
 
-    result = (iSelBeg.value != iSelEnd.value);
+    result = iSelBeg.value != iSelEnd.value;
 
     free(iSelBeg);
     free(iSelEnd);
@@ -50,41 +50,41 @@ class NotepadEditor {
     return result;
   }
 
-  void NewFile() {
+  void newFile() {
     file.title = null;
     file.path = null;
     isFileDirty = false;
-    UpdateWindowTitle();
+    updateWindowTitle();
   }
 
-  void OpenFile() {
-    if (isFileDirty && OfferSave() == IDCANCEL) {
+  void openFile() {
+    if (isFileDirty && offerSave() == IDCANCEL) {
       return;
     }
 
-    if (file.ShowOpenDialog(_hwnd)) {
-      file.ReadFileIntoEditControl(_hwndEdit);
+    if (file.showOpenDialog(_hwnd)) {
+      file.readFileIntoEditControl(_hwndEdit);
     }
 
-    UpdateWindowTitle();
+    updateWindowTitle();
     isFileDirty = false;
   }
 
-  bool SaveFile() {
+  bool saveFile() {
     if (file.path != null) {
-      file.WriteFileFromEditControl(_hwndEdit);
+      file.writeFileFromEditControl(_hwndEdit);
       isFileDirty = false;
       return true;
     }
 
-    return SaveAsFile();
+    return saveAsFile();
   }
 
-  bool SaveAsFile() {
-    if (file.ShowSaveDialog(_hwnd)) {
-      UpdateWindowTitle();
+  bool saveAsFile() {
+    if (file.showSaveDialog(_hwnd)) {
+      updateWindowTitle();
 
-      file.WriteFileFromEditControl(_hwndEdit);
+      file.writeFileFromEditControl(_hwndEdit);
       isFileDirty = false;
       return true;
     }
@@ -92,25 +92,25 @@ class NotepadEditor {
     return false;
   }
 
-  void SetFont() {
+  void setFont() {
     font ??= NotepadFont(_hwnd);
 
-    if (font.NotepadChooseFont(_hwnd)) {
-      font.NotepadSetFont(_hwndEdit);
+    if (font.notepadChooseFont(_hwnd)) {
+      font.notepadSetFont(_hwndEdit);
     }
   }
 
-  void UpdateWindowTitle() {
+  void updateWindowTitle() {
     final caption = '$APP_NAME - ${file.title ?? '(untitled)'}';
     SetWindowText(_hwnd, TEXT(caption));
   }
 
-  void ShowMessage(String szMessage) {
+  void showMessage(String szMessage) {
     MessageBox(
         _hwnd, TEXT(szMessage), TEXT(APP_NAME), MB_OK | MB_ICONEXCLAMATION);
   }
 
-  int OfferSave() {
+  int offerSave() {
     final buffer = TEXT(file.title != null
         ? 'Save current changes in ${file.title}?'
         : 'Save changes to file?');

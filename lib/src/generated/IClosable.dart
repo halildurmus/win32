@@ -30,10 +30,7 @@ typedef _Close_Dart = int Function(Pointer obj);
 class IClosable extends IInspectable {
   // vtable begins at 6, ends at 6
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IClosable(this.ptr) : super(ptr);
+  IClosable(Pointer<COMObject> ptr) : super(ptr);
 
   int Close() => Pointer<NativeFunction<_Close_Native>>.fromAddress(
           ptr.ref.vtable.elementAt(6).value)

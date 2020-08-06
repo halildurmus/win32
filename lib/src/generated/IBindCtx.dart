@@ -73,10 +73,7 @@ typedef _RevokeObjectParam_Dart = int Function(
 class IBindCtx extends IUnknown {
   // vtable begins at 3, ends at 12
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IBindCtx(this.ptr) : super(ptr);
+  IBindCtx(Pointer<COMObject> ptr) : super(ptr);
 
   int RegisterObjectBound(Pointer<COMObject> punk) =>
       Pointer<NativeFunction<_RegisterObjectBound_Native>>.fromAddress(

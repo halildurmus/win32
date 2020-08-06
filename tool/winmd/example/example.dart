@@ -6,8 +6,8 @@
 
 import 'package:win32/win32.dart';
 
-import '../mdMethod.dart';
-import '../mdStore.dart';
+import '../md_method.dart';
+import '../md_store.dart';
 import '../utils.dart';
 
 void printHeading(String heading) {
@@ -22,7 +22,7 @@ void listTokens([String type = 'Windows.Devices.Bluetooth.BluetoothAdapter']) {
 
   final mdScope = WinmdStore.getScopeForType(type);
 
-  for (var type in mdScope.typeDefs.take(10)) {
+  for (final type in mdScope.typeDefs.take(10)) {
     print('[${type.token.toHexString(32)}] ${type.typeName} '
         '(baseType: ${type.baseTypeToken.toHexString(32)})');
   }
@@ -35,7 +35,7 @@ void listEnums([String type = 'Windows.Globalization']) {
   final mdScope = WinmdStore.getScopeForFile(file.path);
   final enums = mdScope.enums;
 
-  for (var enumEntry in enums) {
+  for (final enumEntry in enums) {
     print('${enumEntry.typeName} has ${enumEntry.fields.length} entries.');
   }
 }
@@ -85,7 +85,7 @@ void listInterfaces([String type = 'Windows.Storage.Pickers.FolderPicker']) {
   final interfaces = winTypeDef.interfaces.take(5);
 
   print('$type implements:');
-  for (var interface in interfaces) {
+  for (final interface in interfaces) {
     print('  ${interface.typeName}');
   }
 }

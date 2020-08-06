@@ -3,7 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'enums.dart';
-import 'mdType.dart';
+import 'md_type.dart';
 import 'utils.dart';
 
 class WinmdTypeIdentifier {

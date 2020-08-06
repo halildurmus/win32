@@ -66,10 +66,7 @@ typedef _EnumRunning_Dart = int Function(
 class IRunningObjectTable extends IUnknown {
   // vtable begins at 3, ends at 9
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IRunningObjectTable(this.ptr) : super(ptr);
+  IRunningObjectTable(Pointer<COMObject> ptr) : super(ptr);
 
   int Register(int grfFlags, Pointer<COMObject> punkObject,
           Pointer<COMObject> pmkObjectName, Pointer<Uint32> pdwRegister) =>

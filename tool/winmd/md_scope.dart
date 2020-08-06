@@ -7,8 +7,8 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'mdEnum.dart';
-import 'mdType.dart';
+import 'md_enum.dart';
+import 'md_type.dart';
 
 /// A metadata scope, which typically matches an on-disk file.
 ///
@@ -48,7 +48,7 @@ class WinmdScope {
 
   List<WinmdEnum> get enums {
     final enums = <WinmdEnum>[];
-    for (var typeDef in typeDefs) {
+    for (final typeDef in typeDefs) {
       if (typeDef.parent?.typeName == 'System.Enum') {
         enums.add(WinmdEnum(typeDef));
       }

@@ -52,10 +52,7 @@ typedef _Compare_Dart = int Function(
 class IShellItem extends IUnknown {
   // vtable begins at 3, ends at 7
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IShellItem(this.ptr) : super(ptr);
+  IShellItem(Pointer<COMObject> ptr) : super(ptr);
 
   int BindToHandler(Pointer<COMObject> pbc, Pointer<GUID> bhid,
           Pointer<GUID> riid, Pointer<IntPtr> ppv) =>

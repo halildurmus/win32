@@ -4,6 +4,8 @@
 
 // Standard constants exposed by the Win32 API
 
+// ignore_for_file: camel_case_types
+
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
@@ -1610,7 +1612,7 @@ const SIF_DISABLENOSCROLL = 0x0008;
 const SIF_TRACKPOS = 0x0010;
 
 /// @nodoc
-const SIF_ALL = (SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS);
+const SIF_ALL = SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS;
 
 // Scrollbar constants
 
@@ -1775,7 +1777,7 @@ const CF_SCREENFONTS = 0x00000001;
 const CF_PRINTERFONTS = 0x00000002;
 
 /// @nodoc
-const CF_BOTH = (CF_SCREENFONTS | CF_PRINTERFONTS);
+const CF_BOTH = CF_SCREENFONTS | CF_PRINTERFONTS;
 
 /// @nodoc
 const CF_SHOWHELP = 0x00000004;
@@ -3485,10 +3487,10 @@ const RRF_RT_REG_MULTI_SZ = 0x00000020;
 const RRF_RT_REG_QWORD = 0x00000040;
 
 /// @nodoc
-const RRF_RT_DWORD = (RRF_RT_REG_BINARY | RRF_RT_REG_DWORD);
+const RRF_RT_DWORD = RRF_RT_REG_BINARY | RRF_RT_REG_DWORD;
 
 /// @nodoc
-const RRF_RT_QWORD = (RRF_RT_REG_BINARY | RRF_RT_REG_QWORD);
+const RRF_RT_QWORD = RRF_RT_REG_BINARY | RRF_RT_REG_QWORD;
 
 /// @nodoc
 const RRF_RT_ANY = 0x0000ffff;
@@ -3509,98 +3511,97 @@ const RRF_NOEXPAND = 0x10000000;
 const RRF_ZEROONFAILURE = 0x20000000;
 
 /// @nodoc
-const REG_NONE = (0);
+const REG_NONE = 0;
 
 /// @nodoc
-const REG_SZ = (1);
+const REG_SZ = 1;
 
 /// @nodoc
-const REG_EXPAND_SZ = (2);
+const REG_EXPAND_SZ = 2;
 
 /// @nodoc
-const REG_BINARY = (3);
+const REG_BINARY = 3;
 
 /// @nodoc
-const REG_DWORD = (4);
+const REG_DWORD = 4;
 
 /// @nodoc
-const REG_DWORD_LITTLE_ENDIAN = (4);
+const REG_DWORD_LITTLE_ENDIAN = 4;
 
 /// @nodoc
-const REG_DWORD_BIG_ENDIAN = (5);
+const REG_DWORD_BIG_ENDIAN = 5;
 
 /// @nodoc
-const REG_LINK = (6);
+const REG_LINK = 6;
 
 /// @nodoc
-const REG_MULTI_SZ = (7);
+const REG_MULTI_SZ = 7;
 
 /// @nodoc
-const REG_RESOURCE_LIST = (8);
+const REG_RESOURCE_LIST = 8;
 
 /// @nodoc
-const REG_FULL_RESOURCE_DESCRIPTOR = (9);
+const REG_FULL_RESOURCE_DESCRIPTOR = 9;
 
 /// @nodoc
-const REG_RESOURCE_REQUIREMENTS_LIST = (10);
+const REG_RESOURCE_REQUIREMENTS_LIST = 10;
 
 /// @nodoc
-const REG_QWORD = (11);
+const REG_QWORD = 11;
 
 /// @nodoc
-const REG_QWORD_LITTLE_ENDIAN = (11);
+const REG_QWORD_LITTLE_ENDIAN = 11;
 
 /// @nodoc
-const KEY_QUERY_VALUE = (0x0001);
+const KEY_QUERY_VALUE = 0x0001;
 
 /// @nodoc
-const KEY_SET_VALUE = (0x0002);
+const KEY_SET_VALUE = 0x0002;
 
 /// @nodoc
-const KEY_CREATE_SUB_KEY = (0x0004);
+const KEY_CREATE_SUB_KEY = 0x0004;
 
 /// @nodoc
-const KEY_ENUMERATE_SUB_KEYS = (0x0008);
+const KEY_ENUMERATE_SUB_KEYS = 0x0008;
 
 /// @nodoc
-const KEY_NOTIFY = (0x0010);
+const KEY_NOTIFY = 0x0010;
 
 /// @nodoc
-const KEY_CREATE_LINK = (0x0020);
+const KEY_CREATE_LINK = 0x0020;
 
 /// @nodoc
-const KEY_WOW64_32KEY = (0x0200);
+const KEY_WOW64_32KEY = 0x0200;
 
 /// @nodoc
-const KEY_WOW64_64KEY = (0x0100);
+const KEY_WOW64_64KEY = 0x0100;
 
 /// @nodoc
-const KEY_WOW64_RES = (0x0300);
+const KEY_WOW64_RES = 0x0300;
 
 /// @nodoc
-const KEY_READ = ((STANDARD_RIGHTS_READ |
+const KEY_READ = (STANDARD_RIGHTS_READ |
         KEY_QUERY_VALUE |
         KEY_ENUMERATE_SUB_KEYS |
         KEY_NOTIFY) &
-    (~SYNCHRONIZE));
+    (~SYNCHRONIZE);
 
 /// @nodoc
-const KEY_WRITE =
-    ((STANDARD_RIGHTS_WRITE | KEY_SET_VALUE | KEY_CREATE_SUB_KEY) &
-        (~SYNCHRONIZE));
+const KEY_WRITE = (STANDARD_RIGHTS_WRITE | KEY_SET_VALUE | KEY_CREATE_SUB_KEY) &
+    (~SYNCHRONIZE);
 
 /// @nodoc
-const KEY_EXECUTE = ((KEY_READ) & (~SYNCHRONIZE));
+const KEY_EXECUTE = KEY_READ & (~SYNCHRONIZE);
 
 /// @nodoc
-const KEY_ALL_ACCESS = ((STANDARD_RIGHTS_ALL |
+const KEY_ALL_ACCESS = (STANDARD_RIGHTS_ALL |
         KEY_QUERY_VALUE |
         KEY_SET_VALUE |
         KEY_CREATE_SUB_KEY |
         KEY_ENUMERATE_SUB_KEYS |
         KEY_NOTIFY |
         KEY_CREATE_LINK) &
-    (~SYNCHRONIZE));
+    (~SYNCHRONIZE);
 
 // *** CONSOLE CONSTANTS ***
 
@@ -3930,6 +3931,7 @@ final REGDB_E_CLASSNOTREG = 0x80040154.toSigned(32);
 final REGDB_E_IIDNOTREG = 0x80040155.toSigned(32);
 
 /// @nodoc
+// ignore: prefer_const_declarations
 final SCARD_S_SUCCESS = 0;
 
 /// @nodoc
@@ -4044,10 +4046,10 @@ const CLSCTX_ACTIVATE_ARM32_SERVER = 0x2000000;
 const CLSCTX_PS_DLL = 0x80000000;
 
 /// @nodoc
-const CLSCTX_ALL = (CLSCTX_INPROC_SERVER |
+const CLSCTX_ALL = CLSCTX_INPROC_SERVER |
     CLSCTX_INPROC_HANDLER |
     CLSCTX_LOCAL_SERVER |
-    CLSCTX_REMOTE_SERVER);
+    CLSCTX_REMOTE_SERVER;
 
 // RPC authentication
 
@@ -4808,7 +4810,7 @@ const MEM_LARGE_PAGES = 0x20000000;
 const MEM_4MB_PAGES = 0x80000000;
 
 /// @nodoc
-const MEM_64K_PAGES = (MEM_LARGE_PAGES | MEM_PHYSICAL);
+const MEM_64K_PAGES = MEM_LARGE_PAGES | MEM_PHYSICAL;
 
 /// @nodoc
 const MEM_UNMAP_WITH_TRANSIENT_BOOST = 0x00000001;
@@ -4902,25 +4904,25 @@ const DISPID_DESTRUCTOR = -7;
 const DISPID_COLLECT = -8;
 
 /// @nodoc
-const BLUETOOTH_MAX_NAME_SIZE = (248);
+const BLUETOOTH_MAX_NAME_SIZE = 248;
 
 /// @nodoc
-const BLUETOOTH_MAX_PASSKEY_SIZE = (16);
+const BLUETOOTH_MAX_PASSKEY_SIZE = 16;
 
 /// @nodoc
-const BLUETOOTH_MAX_PASSKEY_BUFFER_SIZE = (BLUETOOTH_MAX_PASSKEY_SIZE + 1);
+const BLUETOOTH_MAX_PASSKEY_BUFFER_SIZE = BLUETOOTH_MAX_PASSKEY_SIZE + 1;
 
 /// @nodoc
-const BLUETOOTH_MAX_SERVICE_NAME_SIZE = (256);
+const BLUETOOTH_MAX_SERVICE_NAME_SIZE = 256;
 
 /// @nodoc
-const BLUETOOTH_DEVICE_NAME_SIZE = (256);
+const BLUETOOTH_DEVICE_NAME_SIZE = 256;
 
 /// @nodoc
-const BTH_MAX_PIN_SIZE = (16);
+const BTH_MAX_PIN_SIZE = 16;
 
 /// @nodoc
-const BTH_LINK_KEY_LENGTH = (16);
+const BTH_LINK_KEY_LENGTH = 16;
 
 /// {@category Enum}
 class BLUETOOTH_AUTHENTICATION_METHOD {
@@ -5082,7 +5084,7 @@ class POWER_INFORMATION_LEVEL {
 /// {@category Enum}
 class FFFP_MODE {
   static const FFFP_EXACTMATCH = 0;
-  static const FFFP_NEARESTPARENTMATCH = (FFFP_EXACTMATCH + 1);
+  static const FFFP_NEARESTPARENTMATCH = FFFP_EXACTMATCH + 1;
 }
 
 /// {@category Enum}

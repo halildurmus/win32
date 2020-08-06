@@ -141,10 +141,7 @@ typedef _IsSystemMoniker_Dart = int Function(
 class IMoniker extends IPersistStream {
   // vtable begins at 8, ends at 22
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IMoniker(this.ptr) : super(ptr);
+  IMoniker(Pointer<COMObject> ptr) : super(ptr);
 
   int BindToObject(Pointer<COMObject> pbc, Pointer<COMObject> pmkToLeft,
           Pointer<GUID> riidResult, Pointer<IntPtr> ppvResult) =>

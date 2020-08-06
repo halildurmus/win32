@@ -45,10 +45,7 @@ typedef _CloseFile_Dart = int Function(Pointer obj);
 class IFileIsInUse extends IUnknown {
   // vtable begins at 3, ends at 7
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IFileIsInUse(this.ptr) : super(ptr);
+  IFileIsInUse(Pointer<COMObject> ptr) : super(ptr);
 
   int GetAppName(Pointer<Utf16> ppszName) =>
       Pointer<NativeFunction<_GetAppName_Native>>.fromAddress(

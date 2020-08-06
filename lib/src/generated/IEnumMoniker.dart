@@ -39,10 +39,7 @@ typedef _Clone_Dart = int Function(Pointer obj, Pointer<IntPtr> ppenum);
 class IEnumMoniker extends IUnknown {
   // vtable begins at 3, ends at 6
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IEnumMoniker(this.ptr) : super(ptr);
+  IEnumMoniker(Pointer<COMObject> ptr) : super(ptr);
 
   int Next(int celt, Pointer<IntPtr> rgelt, Pointer<Uint32> pceltFetched) =>
       Pointer<NativeFunction<_Next_Native>>.fromAddress(

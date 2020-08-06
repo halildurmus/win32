@@ -39,10 +39,7 @@ typedef _LockServer_Dart = int Function(Pointer obj, int fLock);
 class IClassFactory extends IUnknown {
   // vtable begins at 3, ends at 4
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IClassFactory(this.ptr) : super(ptr);
+  IClassFactory(Pointer<COMObject> ptr) : super(ptr);
 
   int CreateInstance(Pointer<COMObject> pUnkOuter, Pointer<GUID> riid,
           Pointer<IntPtr> ppvObject) =>

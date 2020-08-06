@@ -9,9 +9,9 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'enums.dart';
-import 'mdParameter.dart';
-import 'mdType.dart';
-import 'mdTypeIdentifier.dart';
+import 'md_parameter.dart';
+import 'md_type.dart';
+import 'md_typeidentifier.dart';
 import 'utils.dart';
 
 class WinmdMethod {
@@ -49,8 +49,6 @@ class WinmdMethod {
   }
 
   factory WinmdMethod.fromToken(IMetaDataImport2 reader, int token) {
-    WinmdMethod method;
-
     final pClass = allocate<Uint32>();
     final szMethod = allocate<Uint16>(count: 256).cast<Utf16>();
     final pchMethod = allocate<Uint32>();
@@ -67,7 +65,7 @@ class WinmdMethod {
       if (SUCCEEDED(hr)) {
         final signature = Pointer<Uint8>.fromAddress(ppvSigBlob.value)
             .asTypedList(pcbSigBlob.value);
-        method = WinmdMethod(
+        return WinmdMethod(
             reader,
             token,
             szMethod.unpackString(pchMethod.value),
@@ -75,8 +73,6 @@ class WinmdMethod {
             signature,
             pulCodeRVA.value,
             pdwImplFlags.value);
-
-        return method;
       } else {
         throw WindowsException(hr);
       }
@@ -92,7 +88,7 @@ class WinmdMethod {
     }
   }
 
-  bool get hasGenericParameters => (signatureBlob[0] & 0x10 == 0x10);
+  bool get hasGenericParameters => signatureBlob[0] & 0x10 == 0x10;
 
   void _parseMethodType() {
     if (isSpecialName && methodName.startsWith('get_')) {

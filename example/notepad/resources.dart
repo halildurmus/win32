@@ -34,7 +34,7 @@ const IDM_APP_ABOUT = 40018;
 const EDITID = 1;
 
 class NotepadResources {
-  static int LoadMenus() {
+  static int loadMenus() {
     final hMenu = CreateMenu();
 
     var hMenuPopup = CreateMenu();
@@ -81,7 +81,7 @@ class NotepadResources {
     return hMenu;
   }
 
-  static int LoadAccelerators() {
+  static int loadAccelerators() {
     final pTable = allocate<ACCEL>(count: 18);
 
     pTable[0]

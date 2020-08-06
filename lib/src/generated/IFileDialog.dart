@@ -116,10 +116,7 @@ typedef _SetFilter_Dart = int Function(Pointer obj, Pointer<COMObject> pFilter);
 class IFileDialog extends IModalWindow {
   // vtable begins at 4, ends at 26
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IFileDialog(this.ptr) : super(ptr);
+  IFileDialog(Pointer<COMObject> ptr) : super(ptr);
 
   int SetFileTypes(int cFileTypes, Pointer<COMDLG_FILTERSPEC> rgFilterSpec) =>
       Pointer<NativeFunction<_SetFileTypes_Native>>.fromAddress(

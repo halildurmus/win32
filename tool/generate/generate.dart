@@ -12,13 +12,10 @@ import 'dart:io';
 import 'parse.dart';
 
 void main(List<String> args) {
-  if (args.length != 2) {
-    args = <String>['input', 'output'];
-  }
-  final inputDirectory = Directory(args[0]);
-  final outputDirectory = Directory(args[1]);
+  final inputDirectory = Directory(args.length == 2 ? args[0] : 'input');
+  final outputDirectory = Directory(args.length == 2 ? args[1] : 'output');
 
-  for (var inputFile in inputDirectory.listSync()) {
+  for (final inputFile in inputDirectory.listSync()) {
     if (inputFile is File) {
       print('Parsing:    ${inputFile.path}');
       final parsedFile = loadSource(inputFile);

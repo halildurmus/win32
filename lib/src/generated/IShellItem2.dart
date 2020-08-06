@@ -106,10 +106,7 @@ typedef _GetBool_Dart = int Function(
 class IShellItem2 extends IShellItem {
   // vtable begins at 8, ends at 20
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IShellItem2(this.ptr) : super(ptr);
+  IShellItem2(Pointer<COMObject> ptr) : super(ptr);
 
   int GetPropertyStore(int flags, Pointer<GUID> riid, Pointer<IntPtr> ppv) =>
       Pointer<NativeFunction<_GetPropertyStore_Native>>.fromAddress(

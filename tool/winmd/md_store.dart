@@ -7,8 +7,8 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'mdScope.dart';
-import 'mdType.dart';
+import 'md_scope.dart';
+import 'md_type.dart';
 
 /// Caches a reader for each file scope.
 ///
@@ -23,7 +23,7 @@ class WinmdStore {
   static void initialize() {
     final dispenserObject = allocate<IntPtr>();
 
-    var hr = MetaDataGetDispenser(
+    final hr = MetaDataGetDispenser(
         convertToCLSID(CLSID_CorMetaDataDispenser).cast(),
         convertToIID(IID_IMetaDataDispenser).cast(),
         dispenserObject);
@@ -75,7 +75,7 @@ class WinmdStore {
       // For apps that are not Windows Store apps, RoGetMetaDataFile can only be
       // used for classes that are part of the Windows Runtime itself (i.e. not
       // third-party types).
-      var hr = RoGetMetaDataFile(hstrTypeName.value, nullptr,
+      final hr = RoGetMetaDataFile(hstrTypeName.value, nullptr,
           hstrMetaDataFilePath.address, spMetaDataImport, typeDef);
       if (SUCCEEDED(hr)) {
         final filePath = convertFromHString(hstrMetaDataFilePath);
@@ -109,7 +109,7 @@ class WinmdStore {
   static void close() {
     if (!isInitialized) return;
 
-    for (var reader in cache.values) {
+    for (final reader in cache.values) {
       free(reader.ptr);
     }
     free(dispenser.ptr);

@@ -93,10 +93,7 @@ typedef _FindAssemblyModule_Dart = int Function(
 class IMetaDataDispenserEx extends IMetaDataDispenser {
   // vtable begins at 6, ends at 11
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IMetaDataDispenserEx(this.ptr) : super(ptr);
+  IMetaDataDispenserEx(Pointer<COMObject> ptr) : super(ptr);
 
   int SetOption(Pointer<GUID> optionId, Pointer<VARIANT_POINTER> pValue) =>
       Pointer<NativeFunction<_SetOption_Native>>.fromAddress(

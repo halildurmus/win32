@@ -30,10 +30,7 @@ typedef _ToString_Dart = int Function(Pointer obj, Pointer<IntPtr> value);
 class IStringable extends IInspectable {
   // vtable begins at 6, ends at 6
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IStringable(this.ptr) : super(ptr);
+  IStringable(Pointer<COMObject> ptr) : super(ptr);
 
   int ToString(Pointer<IntPtr> value) =>
       Pointer<NativeFunction<_ToString_Native>>.fromAddress(

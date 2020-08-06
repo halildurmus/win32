@@ -802,10 +802,7 @@ typedef _IsGlobal_Dart = int Function(
 class IMetaDataImport extends IUnknown {
   // vtable begins at 3, ends at 64
 
-  @override
-  Pointer<COMObject> ptr;
-
-  IMetaDataImport(this.ptr) : super(ptr);
+  IMetaDataImport(Pointer<COMObject> ptr) : super(ptr);
 
   int CloseEnum(int hEnum) =>
       Pointer<NativeFunction<_CloseEnum_Native>>.fromAddress(

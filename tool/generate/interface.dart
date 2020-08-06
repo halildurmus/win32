@@ -81,11 +81,11 @@ import '../winrt/winrt_constants.dart';
 
   String get typedefsAsString {
     final buffer = StringBuffer();
-    for (var method in methods) {
+    for (final method in methods) {
       var generateTypedef = true;
 
       // Check all params are supported
-      for (var params in method.parameters) {
+      for (final params in method.parameters) {
         if (!params.supported) {
           generateTypedef = false;
         }
@@ -148,22 +148,22 @@ import '../winrt/winrt_constants.dart';
   // vtable begins at $vtableStart, ends at ${vtableStart + methods.length - 1}
 ''');
     if (inherits.isNotEmpty) {
-      buffer.writeln('  @override');
-    }
-    buffer.write('''
+      buffer.write('''
+   $name(Pointer<COMObject> ptr) : super(ptr);\n
+''');
+    } else {
+      buffer.write('''
   Pointer<COMObject> ptr;
 
-  $name(this.ptr)''');
-    if (inherits.isNotEmpty) {
-      buffer.write(': super(ptr)');
+  $name(this.ptr);\n
+''');
     }
-    buffer.writeln(';\n');
 
-    for (var method in methods) {
+    for (final method in methods) {
       var generateMethod = true;
 
       // Check all params are supported
-      for (var params in method.parameters) {
+      for (final params in method.parameters) {
         if (!params.supported) {
           generateMethod = false;
         }
@@ -209,7 +209,7 @@ import '../winrt/winrt_constants.dart';
     }
 
     for (var idx = 0; idx < method.parameters.length; idx++) {
-      buffer.write('${method.parameters[idx].name}');
+      buffer.write(method.parameters[idx].name);
       if (idx < method.parameters.length - 1) {
         buffer.write(', ');
       }
@@ -276,13 +276,12 @@ import '../winrt/winrt_constants.dart';
       }
       buffer.write('''
 class $className extends $name {
-  @override
-  Pointer<COMObject> ptr;
+  $className(Pointer<COMObject> ptr) : super(ptr);
 
   factory $className.createInstance() {
     final ptr = COMObject.allocate().addressOf;
 
-    var hr = CoCreateInstance(
+    final hr = CoCreateInstance(
         GUID.fromString(CLSID_$className).addressOf,
         nullptr,
         CLSCTX_ALL,
@@ -292,8 +291,6 @@ class $className extends $name {
     if (FAILED(hr)) throw WindowsException(hr);
     return $className(ptr);
   }
-
-  $className(this.ptr) : super(ptr);
 }
 ''');
       return buffer.toString();

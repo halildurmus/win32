@@ -27,8 +27,7 @@ void main() {
     final result = GetSystemPowerStatus(powerStatus.addressOf);
 
     // Sanity check results against some API provided ranges
-    final validBatteryPercentages = [for (var i = 0; i <= 100; i += 1) i]
-      ..add(255); // [0..100, 255]
+    final validBatteryPercentages = [for (var i = 0; i <= 100; i += 1) i, 255];
 
     expect(result, isNonZero);
     expect(powerStatus.ACLineStatus, isIn([0, 1, 255]));

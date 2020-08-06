@@ -53,7 +53,7 @@ class Level {
     // piece, increase speed, redraw info
     // If player gets score, increase more speed
     if (current == null || !move(0, -1)) {
-      var lines = clearRows();
+      final lines = clearRows();
       speed = max(speed - 2 * lines, 100);
       score += 1 + lines * lines * 5;
       dropRandomPiece();
@@ -74,8 +74,8 @@ class Level {
     posX = x;
     posY = y;
 
-    var apt = piece.body;
-    var color = piece.color;
+    final apt = piece.body;
+    final color = piece.color;
 
     for (var i = 0; i < 4; i++) {
       if (y + apt[i].y > height - 1) continue;

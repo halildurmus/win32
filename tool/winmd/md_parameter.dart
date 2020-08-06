@@ -8,7 +8,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'enums.dart';
-import 'mdTypeIdentifier.dart';
+import 'md_typeidentifier.dart';
 
 class WinmdParameter {
   IMetaDataImport2 reader;
@@ -35,8 +35,8 @@ class WinmdParameter {
     final ppValue = allocate<Uint8>();
     final pcchValue = allocate<Uint32>();
 
-    var hr = reader.GetParamProps(token, pmd, pulSequence, szName, 256, pchName,
-        pdwAttr, pdwCPlusTypeFlag, ppValue, pcchValue);
+    final hr = reader.GetParamProps(token, pmd, pulSequence, szName, 256,
+        pchName, pdwAttr, pdwCPlusTypeFlag, ppValue, pcchValue);
 
     if (SUCCEEDED(hr)) {
       if (pcchValue.value == 0) {
