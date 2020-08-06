@@ -153,6 +153,11 @@ final MonitorFromWindow =
         'MonitorFromWindow');
 
 /// {@category user32}
+final MsgWaitForMultipleObjects = _user32.lookupFunction<
+    msgWaitForMultipleObjectsNative,
+    msgWaitForMultipleObjectsDart>('MsgWaitForMultipleObjects');
+
+/// {@category user32}
 final PeekMessage =
     _user32.lookupFunction<peekMessageNative, peekMessageDart>('PeekMessageW');
 

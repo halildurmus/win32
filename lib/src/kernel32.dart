@@ -15,6 +15,14 @@ final ActivateActCtx = _kernel32
     .lookupFunction<activateActCtxNative, activateActCtxDart>('ActivateActCtx');
 
 /// {@category kernel32}
+final AllocConsole = _kernel32
+    .lookupFunction<allocConsoleNative, allocConsoleDart>('AllocConsole');
+
+/// {@category kernel32}
+final AttachConsole = _kernel32
+    .lookupFunction<attachConsoleNative, attachConsoleDart>('AttachConsole');
+
+/// {@category kernel32}
 final Beep = _kernel32.lookupFunction<beepNative, beepDart>('Beep');
 
 /// {@category kernel32}
@@ -94,6 +102,10 @@ final FindVolumeClose =
 /// {@category kernel32}
 final FormatMessage = _kernel32
     .lookupFunction<formatMessageNative, formatMessageDart>('FormatMessageW');
+
+/// {@category kernel32}
+final FreeConsole =
+    _kernel32.lookupFunction<freeConsoleNative, freeConsoleDart>('FreeConsole');
 
 /// {@category kernel32}
 final FreeLibrary =
@@ -198,6 +210,11 @@ final HeapFree =
 final InitializeProcThreadAttributeList = _kernel32.lookupFunction<
     initializeProcThreadAttributeListNative,
     initializeProcThreadAttributeListDart>('InitializeProcThreadAttributeList');
+
+/// {@category kernel32}
+final IsDebuggerPresent =
+    _kernel32.lookupFunction<isDebuggerPresentNative, isDebuggerPresentDart>(
+        'IsDebuggerPresent');
 
 /// {@category kernel32}
 final LoadLibrary = _kernel32
