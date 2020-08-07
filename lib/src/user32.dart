@@ -148,6 +148,11 @@ final MoveWindow =
     _user32.lookupFunction<moveWindowNative, moveWindowDart>('MoveWindow');
 
 /// {@category user32}
+final MonitorFromPoint =
+    _user32.lookupFunction<monitorFromPointNative, monitorFromPointDart>(
+        'MonitorFromPoint');
+
+/// {@category user32}
 final MonitorFromWindow =
     _user32.lookupFunction<monitorFromWindowNative, monitorFromWindowDart>(
         'MonitorFromWindow');
@@ -204,12 +209,21 @@ final SetTimer =
     _user32.lookupFunction<setTimerNative, setTimerDart>('SetTimer');
 
 /// {@category user32}
+final SetWindowLongPtr =
+    _user32.lookupFunction<setWindowLongPtrNative, setWindowLongPtrDart>(
+        'SetWindowLongPtrW');
+
+/// {@category user32}
 final SetWindowText = _user32
     .lookupFunction<setWindowTextNative, setWindowTextDart>('SetWindowTextW');
 
 /// {@category user32}
 final ShowWindow =
     _user32.lookupFunction<showWindowNative, showWindowDart>('ShowWindow');
+
+/// {@category user32}
+final SystemParametersInfo = _user32.lookupFunction<systemParametersInfoNative,
+    systemParametersInfoDart>('SystemParametersInfoW');
 
 /// {@category user32}
 final TranslateAccelerator = _user32.lookupFunction<translateAcceleratorNative,

@@ -1444,6 +1444,13 @@ typedef messageBoxNative = Int32 Function(
 typedef messageBoxDart = int Function(
     int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption, int uType);
 
+// HMONITOR MonitorFromPoint(
+//   POINT pt,
+//   DWORD dwFlags
+// );
+typedef monitorFromPointNative = IntPtr Function(Int64 pt, Uint32 dwFlags);
+typedef monitorFromPointDart = int Function(int hwnd, int dwFlags);
+
 // HMONITOR MonitorFromWindow(
 //   HWND  hwnd,
 //   DWORD dwFlags
@@ -1923,6 +1930,16 @@ typedef setWindowExtExNative = Int32 Function(
 typedef setWindowExtExDart = int Function(
     int hdc, int x, int y, Pointer<SIZE> lpsz);
 
+// LONG_PTR SetWindowLongPtrW(
+//   HWND     hWnd,
+//   int      nIndex,
+//   LONG_PTR dwNewLong
+// );
+typedef setWindowLongPtrNative = IntPtr Function(
+    IntPtr hWnd, Int32 nIndex, IntPtr dwNewLong);
+typedef setWindowLongPtrDart = int Function(
+    int hWnd, int nIndex, int dwNewLong);
+
 // BOOL SetWindowTextW(
 //   HWND    hWnd,
 //   LPCWSTR lpString
@@ -2097,6 +2114,17 @@ typedef stretchDIBitsDart = int Function(
     Pointer<BITMAPINFO> lpbmi,
     int iUsage,
     int rop);
+
+// BOOL SystemParametersInfoW(
+//   UINT  uiAction,
+//   UINT  uiParam,
+//   PVOID pvParam,
+//   UINT  fWinIni
+// );
+typedef systemParametersInfoNative = Int32 Function(
+    Uint32 uiAction, Uint32 uiParam, Pointer pvParam, Uint32 fWinIni);
+typedef systemParametersInfoDart = int Function(
+    int uiAction, int uiParam, Pointer pvParam, int fWinIni);
 
 // HRESULT TaskDialog(
 //   HWND                           hwndOwner,
