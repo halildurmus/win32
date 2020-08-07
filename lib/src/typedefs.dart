@@ -696,13 +696,13 @@ typedef enumProcessModulesNative = Int32 Function(IntPtr hProcess,
 typedef enumProcessModulesDart = int Function(int hProcess,
     Pointer<IntPtr> lphModule, int cb, Pointer<Uint32> lpcbNeeded);
 
-//  BOOL EnumProcessModulesEx(
-//  HANDLE  hProcess,
-//      HMODULE *lphModule,
-//  DWORD   cb,
-//      LPDWORD lpcbNeeded,
-//  DWORD   dwFilterFlag
-//);
+// BOOL EnumProcessModulesEx(
+//   HANDLE  hProcess,
+//   HMODULE *lphModule,
+//   DWORD   cb,
+//   LPDWORD lpcbNeeded,
+//   DWORD   dwFilterFlag
+// );
 typedef enumProcessModulesExNative = Int32 Function(
     IntPtr hProcess,
     Pointer<IntPtr> lphModule,
