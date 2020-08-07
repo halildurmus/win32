@@ -1510,6 +1510,22 @@ typedef queryDosDeviceNative = Uint32 Function(
 typedef queryDosDeviceDart = int Function(
     Pointer<Utf16> lpDeviceName, Pointer<Utf16> lpTargetPath, int ucchMax);
 
+// BOOL QueryPerformanceCounter(
+//   LARGE_INTEGER *lpPerformanceCount
+// );
+typedef queryPerformanceCounterNative = Int32 Function(
+    Pointer<Int64> lpPerformanceCount);
+typedef queryPerformanceCounterDart = int Function(
+    Pointer<Int64> lpPerformanceCount);
+
+// BOOL QueryPerformanceFrequency(
+//   LARGE_INTEGER *lpFrequency
+// );
+typedef queryPerformanceFrequencyNative = Int32 Function(
+    Pointer<Int64> lpPerformanceCount);
+typedef queryPerformanceFrequencyDart = int Function(
+    Pointer<Int64> lpPerformanceCount);
+
 // BOOL PeekMessageW(
 //   LPMSG lpMsg,
 //   HWND  hWnd,

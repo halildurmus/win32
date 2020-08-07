@@ -225,6 +225,16 @@ final OpenProcess =
     _kernel32.lookupFunction<openProcessNative, openProcessDart>('OpenProcess');
 
 /// {@category kernel32}
+final QueryPerformanceCounter = _kernel32.lookupFunction<
+    queryPerformanceCounterNative,
+    queryPerformanceCounterDart>('QueryPerformanceCounter');
+
+/// {@category kernel32}
+final QueryPerformanceFrequency = _kernel32.lookupFunction<
+    queryPerformanceFrequencyNative,
+    queryPerformanceFrequencyDart>('QueryPerformanceFrequency');
+
+/// {@category kernel32}
 final ReadFile =
     _kernel32.lookupFunction<readFileNative, readFileDart>('ReadFile');
 

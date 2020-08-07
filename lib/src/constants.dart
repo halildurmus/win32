@@ -1181,6 +1181,61 @@ const WM_PALETTECHANGED = 0x0311;
 /// @nodoc
 const WM_HOTKEY = 0x0312;
 
+// Queue status flags
+/// @nodoc
+const QS_KEY = 0x0001;
+
+/// @nodoc
+const QS_MOUSEMOVE = 0x0002;
+
+/// @nodoc
+const QS_MOUSEBUTTON = 0x0004;
+
+/// @nodoc
+const QS_POSTMESSAGE = 0x0008;
+
+/// @nodoc
+const QS_TIMER = 0x0010;
+
+/// @nodoc
+const QS_PAINT = 0x0020;
+
+/// @nodoc
+const QS_SENDMESSAGE = 0x0040;
+
+/// @nodoc
+const QS_HOTKEY = 0x0080;
+
+/// @nodoc
+const QS_ALLPOSTMESSAGE = 0x0100;
+
+/// @nodoc
+const QS_RAWINPUT = 0x0400;
+
+/// @nodoc
+const QS_TOUCH = 0x0800;
+
+/// @nodoc
+const QS_POINTER = 0x1000;
+
+/// @nodoc
+const QS_MOUSE = QS_MOUSEMOVE | QS_MOUSEBUTTON;
+
+/// @nodoc
+const QS_INPUT = QS_MOUSE | QS_KEY | QS_RAWINPUT | QS_TOUCH | QS_POINTER;
+
+/// @nodoc
+const QS_ALLEVENTS =
+    QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY;
+
+/// @nodoc
+const QS_ALLINPUT = QS_INPUT |
+    QS_POSTMESSAGE |
+    QS_TIMER |
+    QS_PAINT |
+    QS_HOTKEY |
+    QS_SENDMESSAGE;
+
 /// @nodoc
 const FVIRTKEY = TRUE;
 
