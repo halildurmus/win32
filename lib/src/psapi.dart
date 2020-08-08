@@ -20,6 +20,11 @@ final EnumProcessModules =
         'EnumProcessModules');
 
 /// {@category psapi}
+final EnumProcessModulesEx =
+    _psapi.lookupFunction<enumProcessModulesExNative, enumProcessModulesExDart>(
+        'EnumProcessModulesEx');
+
+/// {@category psapi}
 final GetModuleBaseName =
     _psapi.lookupFunction<getModuleBaseNameNative, getModuleBaseNameDart>(
         'GetModuleBaseNameW');

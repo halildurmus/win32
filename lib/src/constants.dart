@@ -6270,3 +6270,15 @@ const CRED_PERSIST_LOCAL_MACHINE = 0x2;
 
 /// @nodoc
 const CRED_PERSIST_ENTERPRISE = 0x3;
+
+/// @nodoc
+const LIST_MODULES_32BIT = 0x01;
+
+/// @nodoc
+const LIST_MODULES_64BIT = 0x02;
+
+/// @nodoc
+const LIST_MODULES_ALL = 0x03;
+
+/// @nodoc
+const LIST_MODULES_DEFAULT = 0x0;
