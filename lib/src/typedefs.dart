@@ -1444,6 +1444,13 @@ typedef messageBoxNative = Int32 Function(
 typedef messageBoxDart = int Function(
     int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption, int uType);
 
+// HMONITOR MonitorFromPoint(
+//   POINT pt,
+//   DWORD dwFlags
+// );
+typedef monitorFromPointNative = IntPtr Function(Int64 pt, Uint32 dwFlags);
+typedef monitorFromPointDart = int Function(int hwnd, int dwFlags);
+
 // HMONITOR MonitorFromWindow(
 //   HWND  hwnd,
 //   DWORD dwFlags
@@ -1509,6 +1516,22 @@ typedef queryDosDeviceNative = Uint32 Function(
     Pointer<Utf16> lpDeviceName, Pointer<Utf16> lpTargetPath, Uint32 ucchMax);
 typedef queryDosDeviceDart = int Function(
     Pointer<Utf16> lpDeviceName, Pointer<Utf16> lpTargetPath, int ucchMax);
+
+// BOOL QueryPerformanceCounter(
+//   LARGE_INTEGER *lpPerformanceCount
+// );
+typedef queryPerformanceCounterNative = Int32 Function(
+    Pointer<Int64> lpPerformanceCount);
+typedef queryPerformanceCounterDart = int Function(
+    Pointer<Int64> lpPerformanceCount);
+
+// BOOL QueryPerformanceFrequency(
+//   LARGE_INTEGER *lpFrequency
+// );
+typedef queryPerformanceFrequencyNative = Int32 Function(
+    Pointer<Int64> lpPerformanceCount);
+typedef queryPerformanceFrequencyDart = int Function(
+    Pointer<Int64> lpPerformanceCount);
 
 // BOOL PeekMessageW(
 //   LPMSG lpMsg,
@@ -1845,6 +1868,14 @@ typedef setMonitorRedGreenOrBlueGainNative = Int32 Function(
 typedef setMonitorRedGreenOrBlueGainDart = int Function(
     int hMonitor, int gtGainType, int dwNewGain);
 
+// HWND SetParent(
+//   HWND hWndChild,
+//   HWND hWndNewParent
+// );
+typedef setParentNative = IntPtr Function(
+    IntPtr hWndChild, IntPtr hWndNewParent);
+typedef setParentDart = int Function(int hWndChild, int hWndNewParent);
+
 // int SetScrollInfo(
 //   HWND          hwnd,
 //   int           nBar,
@@ -1906,6 +1937,16 @@ typedef setWindowExtExNative = Int32 Function(
     IntPtr hdc, Int32 x, Int32 y, Pointer<SIZE> lpsz);
 typedef setWindowExtExDart = int Function(
     int hdc, int x, int y, Pointer<SIZE> lpsz);
+
+// LONG_PTR SetWindowLongPtrW(
+//   HWND     hWnd,
+//   int      nIndex,
+//   LONG_PTR dwNewLong
+// );
+typedef setWindowLongPtrNative = IntPtr Function(
+    IntPtr hWnd, Int32 nIndex, IntPtr dwNewLong);
+typedef setWindowLongPtrDart = int Function(
+    int hWnd, int nIndex, int dwNewLong);
 
 // BOOL SetWindowTextW(
 //   HWND    hWnd,
@@ -2081,6 +2122,17 @@ typedef stretchDIBitsDart = int Function(
     Pointer<BITMAPINFO> lpbmi,
     int iUsage,
     int rop);
+
+// BOOL SystemParametersInfoW(
+//   UINT  uiAction,
+//   UINT  uiParam,
+//   PVOID pvParam,
+//   UINT  fWinIni
+// );
+typedef systemParametersInfoNative = Int32 Function(
+    Uint32 uiAction, Uint32 uiParam, Pointer pvParam, Uint32 fWinIni);
+typedef systemParametersInfoDart = int Function(
+    int uiAction, int uiParam, Pointer pvParam, int fWinIni);
 
 // HRESULT TaskDialog(
 //   HWND                           hwndOwner,

@@ -1181,6 +1181,61 @@ const WM_PALETTECHANGED = 0x0311;
 /// @nodoc
 const WM_HOTKEY = 0x0312;
 
+// Queue status flags
+/// @nodoc
+const QS_KEY = 0x0001;
+
+/// @nodoc
+const QS_MOUSEMOVE = 0x0002;
+
+/// @nodoc
+const QS_MOUSEBUTTON = 0x0004;
+
+/// @nodoc
+const QS_POSTMESSAGE = 0x0008;
+
+/// @nodoc
+const QS_TIMER = 0x0010;
+
+/// @nodoc
+const QS_PAINT = 0x0020;
+
+/// @nodoc
+const QS_SENDMESSAGE = 0x0040;
+
+/// @nodoc
+const QS_HOTKEY = 0x0080;
+
+/// @nodoc
+const QS_ALLPOSTMESSAGE = 0x0100;
+
+/// @nodoc
+const QS_RAWINPUT = 0x0400;
+
+/// @nodoc
+const QS_TOUCH = 0x0800;
+
+/// @nodoc
+const QS_POINTER = 0x1000;
+
+/// @nodoc
+const QS_MOUSE = QS_MOUSEMOVE | QS_MOUSEBUTTON;
+
+/// @nodoc
+const QS_INPUT = QS_MOUSE | QS_KEY | QS_RAWINPUT | QS_TOUCH | QS_POINTER;
+
+/// @nodoc
+const QS_ALLEVENTS =
+    QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY;
+
+/// @nodoc
+const QS_ALLINPUT = QS_INPUT |
+    QS_POSTMESSAGE |
+    QS_TIMER |
+    QS_PAINT |
+    QS_HOTKEY |
+    QS_SENDMESSAGE;
+
 /// @nodoc
 const FVIRTKEY = TRUE;
 
@@ -1201,6 +1256,431 @@ const LF_FACESIZE = 32;
 
 /// @nodoc
 const LF_FULLFACESIZE = 64;
+
+// System-wide parameters
+
+/// @nodoc
+const SPI_GETBEEP = 0x0001;
+
+/// @nodoc
+const SPI_SETBEEP = 0x0002;
+
+/// @nodoc
+const SPI_GETMOUSE = 0x0003;
+
+/// @nodoc
+const SPI_SETMOUSE = 0x0004;
+
+/// @nodoc
+const SPI_GETBORDER = 0x0005;
+
+/// @nodoc
+const SPI_SETBORDER = 0x0006;
+
+/// @nodoc
+const SPI_GETKEYBOARDSPEED = 0x000A;
+
+/// @nodoc
+const SPI_SETKEYBOARDSPEED = 0x000B;
+
+/// @nodoc
+const SPI_LANGDRIVER = 0x000C;
+
+/// @nodoc
+const SPI_ICONHORIZONTALSPACING = 0x000D;
+
+/// @nodoc
+const SPI_GETSCREENSAVETIMEOUT = 0x000E;
+
+/// @nodoc
+const SPI_SETSCREENSAVETIMEOUT = 0x000F;
+
+/// @nodoc
+const SPI_GETSCREENSAVEACTIVE = 0x0010;
+
+/// @nodoc
+const SPI_SETSCREENSAVEACTIVE = 0x0011;
+
+/// @nodoc
+const SPI_GETGRIDGRANULARITY = 0x0012;
+
+/// @nodoc
+const SPI_SETGRIDGRANULARITY = 0x0013;
+
+/// @nodoc
+const SPI_SETDESKWALLPAPER = 0x0014;
+
+/// @nodoc
+const SPI_SETDESKPATTERN = 0x0015;
+
+/// @nodoc
+const SPI_GETKEYBOARDDELAY = 0x0016;
+
+/// @nodoc
+const SPI_SETKEYBOARDDELAY = 0x0017;
+
+/// @nodoc
+const SPI_ICONVERTICALSPACING = 0x0018;
+
+/// @nodoc
+const SPI_GETICONTITLEWRAP = 0x0019;
+
+/// @nodoc
+const SPI_SETICONTITLEWRAP = 0x001A;
+
+/// @nodoc
+const SPI_GETMENUDROPALIGNMENT = 0x001B;
+
+/// @nodoc
+const SPI_SETMENUDROPALIGNMENT = 0x001C;
+
+/// @nodoc
+const SPI_SETDOUBLECLKWIDTH = 0x001D;
+
+/// @nodoc
+const SPI_SETDOUBLECLKHEIGHT = 0x001E;
+
+/// @nodoc
+const SPI_GETICONTITLELOGFONT = 0x001F;
+
+/// @nodoc
+const SPI_SETDOUBLECLICKTIME = 0x0020;
+
+/// @nodoc
+const SPI_SETMOUSEBUTTONSWAP = 0x0021;
+
+/// @nodoc
+const SPI_SETICONTITLELOGFONT = 0x0022;
+
+/// @nodoc
+const SPI_GETFASTTASKSWITCH = 0x0023;
+
+/// @nodoc
+const SPI_SETFASTTASKSWITCH = 0x0024;
+
+/// @nodoc
+const SPI_SETDRAGFULLWINDOWS = 0x0025;
+
+/// @nodoc
+const SPI_GETDRAGFULLWINDOWS = 0x0026;
+
+/// @nodoc
+const SPI_GETNONCLIENTMETRICS = 0x0029;
+
+/// @nodoc
+const SPI_SETNONCLIENTMETRICS = 0x002A;
+
+/// @nodoc
+const SPI_GETMINIMIZEDMETRICS = 0x002B;
+
+/// @nodoc
+const SPI_SETMINIMIZEDMETRICS = 0x002C;
+
+/// @nodoc
+const SPI_GETICONMETRICS = 0x002D;
+
+/// @nodoc
+const SPI_SETICONMETRICS = 0x002E;
+
+/// @nodoc
+const SPI_SETWORKAREA = 0x002F;
+
+/// @nodoc
+const SPI_GETWORKAREA = 0x0030;
+
+/// @nodoc
+const SPI_SETPENWINDOWS = 0x0031;
+
+/// @nodoc
+const SPI_GETHIGHCONTRAST = 0x0042;
+
+/// @nodoc
+const SPI_SETHIGHCONTRAST = 0x0043;
+
+/// @nodoc
+const SPI_GETKEYBOARDPREF = 0x0044;
+
+/// @nodoc
+const SPI_SETKEYBOARDPREF = 0x0045;
+
+/// @nodoc
+const SPI_GETSCREENREADER = 0x0046;
+
+/// @nodoc
+const SPI_SETSCREENREADER = 0x0047;
+
+/// @nodoc
+const SPI_GETANIMATION = 0x0048;
+
+/// @nodoc
+const SPI_SETANIMATION = 0x0049;
+
+/// @nodoc
+const SPI_GETFONTSMOOTHING = 0x004A;
+
+/// @nodoc
+const SPI_SETFONTSMOOTHING = 0x004B;
+
+/// @nodoc
+const SPI_SETDRAGWIDTH = 0x004C;
+
+/// @nodoc
+const SPI_SETDRAGHEIGHT = 0x004D;
+
+/// @nodoc
+const SPI_SETHANDHELD = 0x004E;
+
+/// @nodoc
+const SPI_GETLOWPOWERTIMEOUT = 0x004F;
+
+/// @nodoc
+const SPI_GETPOWEROFFTIMEOUT = 0x0050;
+
+/// @nodoc
+const SPI_SETLOWPOWERTIMEOUT = 0x0051;
+
+/// @nodoc
+const SPI_SETPOWEROFFTIMEOUT = 0x0052;
+
+/// @nodoc
+const SPI_GETLOWPOWERACTIVE = 0x0053;
+
+/// @nodoc
+const SPI_GETPOWEROFFACTIVE = 0x0054;
+
+/// @nodoc
+const SPI_SETLOWPOWERACTIVE = 0x0055;
+
+/// @nodoc
+const SPI_SETPOWEROFFACTIVE = 0x0056;
+
+/// @nodoc
+const SPI_SETCURSORS = 0x0057;
+
+/// @nodoc
+const SPI_SETICONS = 0x0058;
+
+/// @nodoc
+const SPI_GETDEFAULTINPUTLANG = 0x0059;
+
+/// @nodoc
+const SPI_SETDEFAULTINPUTLANG = 0x005A;
+
+/// @nodoc
+const SPI_SETLANGTOGGLE = 0x005B;
+
+/// @nodoc
+const SPI_GETWINDOWSEXTENSION = 0x005C;
+
+/// @nodoc
+const SPI_SETMOUSETRAILS = 0x005D;
+
+/// @nodoc
+const SPI_GETMOUSETRAILS = 0x005E;
+
+/// @nodoc
+const SPI_SETSCREENSAVERRUNNING = 0x0061;
+
+/// @nodoc
+const SPI_SCREENSAVERRUNNING = SPI_SETSCREENSAVERRUNNING;
+
+/// @nodoc
+const SPI_GETFILTERKEYS = 0x0032;
+
+/// @nodoc
+const SPI_SETFILTERKEYS = 0x0033;
+
+/// @nodoc
+const SPI_GETTOGGLEKEYS = 0x0034;
+
+/// @nodoc
+const SPI_SETTOGGLEKEYS = 0x0035;
+
+/// @nodoc
+const SPI_GETMOUSEKEYS = 0x0036;
+
+/// @nodoc
+const SPI_SETMOUSEKEYS = 0x0037;
+
+/// @nodoc
+const SPI_GETSHOWSOUNDS = 0x0038;
+
+/// @nodoc
+const SPI_SETSHOWSOUNDS = 0x0039;
+
+/// @nodoc
+const SPI_GETSTICKYKEYS = 0x003A;
+
+/// @nodoc
+const SPI_SETSTICKYKEYS = 0x003B;
+
+/// @nodoc
+const SPI_GETACCESSTIMEOUT = 0x003C;
+
+/// @nodoc
+const SPI_SETACCESSTIMEOUT = 0x003D;
+
+/// @nodoc
+const SPI_GETSERIALKEYS = 0x003E;
+
+/// @nodoc
+const SPI_SETSERIALKEYS = 0x003F;
+
+/// @nodoc
+const SPI_GETSOUNDSENTRY = 0x0040;
+
+/// @nodoc
+const SPI_SETSOUNDSENTRY = 0x0041;
+
+/// @nodoc
+const SPI_GETSNAPTODEFBUTTON = 0x005F;
+
+/// @nodoc
+const SPI_SETSNAPTODEFBUTTON = 0x0060;
+
+/// @nodoc
+const SPI_GETMOUSEHOVERWIDTH = 0x0062;
+
+/// @nodoc
+const SPI_SETMOUSEHOVERWIDTH = 0x0063;
+
+/// @nodoc
+const SPI_GETMOUSEHOVERHEIGHT = 0x0064;
+
+/// @nodoc
+const SPI_SETMOUSEHOVERHEIGHT = 0x0065;
+
+/// @nodoc
+const SPI_GETMOUSEHOVERTIME = 0x0066;
+
+/// @nodoc
+const SPI_SETMOUSEHOVERTIME = 0x0067;
+
+/// @nodoc
+const SPI_GETWHEELSCROLLLINES = 0x0068;
+
+/// @nodoc
+const SPI_SETWHEELSCROLLLINES = 0x0069;
+
+/// @nodoc
+const SPI_GETMENUSHOWDELAY = 0x006A;
+
+/// @nodoc
+const SPI_SETMENUSHOWDELAY = 0x006B;
+
+/// @nodoc
+const SPI_GETWHEELSCROLLCHARS = 0x006C;
+
+/// @nodoc
+const SPI_SETWHEELSCROLLCHARS = 0x006D;
+
+/// @nodoc
+const SPI_GETSHOWIMEUI = 0x006E;
+
+/// @nodoc
+const SPI_SETSHOWIMEUI = 0x006F;
+
+/// @nodoc
+const SPI_GETMOUSESPEED = 0x0070;
+
+/// @nodoc
+const SPI_SETMOUSESPEED = 0x0071;
+
+/// @nodoc
+const SPI_GETSCREENSAVERRUNNING = 0x0072;
+
+/// @nodoc
+const SPI_GETDESKWALLPAPER = 0x0073;
+
+/// @nodoc
+const SPI_GETAUDIODESCRIPTION = 0x0074;
+
+/// @nodoc
+const SPI_SETAUDIODESCRIPTION = 0x0075;
+
+/// @nodoc
+const SPI_GETSCREENSAVESECURE = 0x0076;
+
+/// @nodoc
+const SPI_SETSCREENSAVESECURE = 0x0077;
+
+/// @nodoc
+const SPI_GETHUNGAPPTIMEOUT = 0x0078;
+
+/// @nodoc
+const SPI_SETHUNGAPPTIMEOUT = 0x0079;
+
+/// @nodoc
+const SPI_GETWAITTOKILLTIMEOUT = 0x007A;
+
+/// @nodoc
+const SPI_SETWAITTOKILLTIMEOUT = 0x007B;
+
+/// @nodoc
+const SPI_GETWAITTOKILLSERVICETIMEOUT = 0x007C;
+
+/// @nodoc
+const SPI_SETWAITTOKILLSERVICETIMEOUT = 0x007D;
+
+/// @nodoc
+const SPI_GETMOUSEDOCKTHRESHOLD = 0x007E;
+
+/// @nodoc
+const SPI_SETMOUSEDOCKTHRESHOLD = 0x007F;
+
+/// @nodoc
+const SPI_GETPENDOCKTHRESHOLD = 0x0080;
+
+/// @nodoc
+const SPI_SETPENDOCKTHRESHOLD = 0x0081;
+
+/// @nodoc
+const SPI_GETWINARRANGING = 0x0082;
+
+/// @nodoc
+const SPI_SETWINARRANGING = 0x0083;
+
+/// @nodoc
+const SPI_GETMOUSEDRAGOUTTHRESHOLD = 0x0084;
+
+/// @nodoc
+const SPI_SETMOUSEDRAGOUTTHRESHOLD = 0x0085;
+
+/// @nodoc
+const SPI_GETPENDRAGOUTTHRESHOLD = 0x0086;
+
+/// @nodoc
+const SPI_SETPENDRAGOUTTHRESHOLD = 0x0087;
+
+/// @nodoc
+const SPI_GETMOUSESIDEMOVETHRESHOLD = 0x0088;
+
+/// @nodoc
+const SPI_SETMOUSESIDEMOVETHRESHOLD = 0x0089;
+
+/// @nodoc
+const SPI_GETPENSIDEMOVETHRESHOLD = 0x008A;
+
+/// @nodoc
+const SPI_SETPENSIDEMOVETHRESHOLD = 0x008B;
+
+/// @nodoc
+const SPI_GETDRAGFROMMAXIMIZE = 0x008C;
+
+/// @nodoc
+const SPI_SETDRAGFROMMAXIMIZE = 0x008D;
+
+/// @nodoc
+const SPI_GETSNAPSIZING = 0x008E;
+
+/// @nodoc
+const SPI_SETSNAPSIZING = 0x008F;
+
+/// @nodoc
+const SPI_GETDOCKMOVING = 0x0090;
+
+/// @nodoc
+const SPI_SETDOCKMOVING = 0x0091;
 
 // ShowWindow constants
 

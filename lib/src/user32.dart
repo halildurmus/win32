@@ -6,6 +6,8 @@
 
 import 'dart:ffi';
 
+import 'package:ffi/ffi.dart';
+
 import 'typedefs.dart';
 
 final _user32 = DynamicLibrary.open('user32.dll');
@@ -26,6 +28,22 @@ final CreateAcceleratorTable = _user32.lookupFunction<
 /// {@category user32}
 final CreateMenu =
     _user32.lookupFunction<createMenuNative, createMenuDart>('CreateMenu');
+
+/// {@category user32}
+void CreateWindow(
+        Pointer<Utf16> lpClassName,
+        Pointer<Utf16> lpWindowName,
+        int dwStyle,
+        int X,
+        int Y,
+        int nWidth,
+        int nHeight,
+        int hWndParent,
+        int hMenu,
+        int hInstance,
+        Pointer<Void> lpParam) =>
+    CreateWindowEx(0, lpClassName, lpWindowName, dwStyle, X, Y, nWidth, nHeight,
+        hWndParent, hMenu, hInstance, lpParam);
 
 /// {@category user32}
 final CreateWindowEx =
@@ -148,6 +166,11 @@ final MoveWindow =
     _user32.lookupFunction<moveWindowNative, moveWindowDart>('MoveWindow');
 
 /// {@category user32}
+final MonitorFromPoint =
+    _user32.lookupFunction<monitorFromPointNative, monitorFromPointDart>(
+        'MonitorFromPoint');
+
+/// {@category user32}
 final MonitorFromWindow =
     _user32.lookupFunction<monitorFromWindowNative, monitorFromWindowDart>(
         'MonitorFromWindow');
@@ -196,6 +219,10 @@ final SetFocus =
     _user32.lookupFunction<setFocusNative, setFocusDart>('SetFocus');
 
 /// {@category user32}
+final SetParent =
+    _user32.lookupFunction<setParentNative, setParentDart>('SetParent');
+
+/// {@category user32}
 final SetScrollInfo = _user32
     .lookupFunction<setScrollInfoNative, setScrollInfoDart>('SetScrollInfo');
 
@@ -204,12 +231,21 @@ final SetTimer =
     _user32.lookupFunction<setTimerNative, setTimerDart>('SetTimer');
 
 /// {@category user32}
+final SetWindowLongPtr =
+    _user32.lookupFunction<setWindowLongPtrNative, setWindowLongPtrDart>(
+        'SetWindowLongPtrW');
+
+/// {@category user32}
 final SetWindowText = _user32
     .lookupFunction<setWindowTextNative, setWindowTextDart>('SetWindowTextW');
 
 /// {@category user32}
 final ShowWindow =
     _user32.lookupFunction<showWindowNative, showWindowDart>('ShowWindow');
+
+/// {@category user32}
+final SystemParametersInfo = _user32.lookupFunction<systemParametersInfoNative,
+    systemParametersInfoDart>('SystemParametersInfoW');
 
 /// {@category user32}
 final TranslateAccelerator = _user32.lookupFunction<translateAcceleratorNative,

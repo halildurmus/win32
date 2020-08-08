@@ -2650,7 +2650,7 @@ class BLUETOOTH_PIN_INFO extends Struct {
   }
 
   factory BLUETOOTH_PIN_INFO.allocate() {
-    final structSize = BTH_MAX_PIN_SIZE + 1;
+    const structSize = BTH_MAX_PIN_SIZE + 1;
     final ptr = allocate<Uint8>(count: structSize);
     for (var idx = 0; idx < structSize; idx++) {
       ptr.elementAt(idx).value = 0;
