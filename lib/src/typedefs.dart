@@ -1868,6 +1868,14 @@ typedef setMonitorRedGreenOrBlueGainNative = Int32 Function(
 typedef setMonitorRedGreenOrBlueGainDart = int Function(
     int hMonitor, int gtGainType, int dwNewGain);
 
+// HWND SetParent(
+//   HWND hWndChild,
+//   HWND hWndNewParent
+// );
+typedef setParentNative = IntPtr Function(
+    IntPtr hWndChild, IntPtr hWndNewParent);
+typedef setParentDart = int Function(int hWndChild, int hWndNewParent);
+
 // int SetScrollInfo(
 //   HWND          hwnd,
 //   int           nBar,

@@ -6,6 +6,8 @@
 
 import 'dart:ffi';
 
+import 'package:ffi/ffi.dart';
+
 import 'typedefs.dart';
 
 final _user32 = DynamicLibrary.open('user32.dll');
@@ -26,6 +28,22 @@ final CreateAcceleratorTable = _user32.lookupFunction<
 /// {@category user32}
 final CreateMenu =
     _user32.lookupFunction<createMenuNative, createMenuDart>('CreateMenu');
+
+/// {@category user32}
+void CreateWindow(
+        Pointer<Utf16> lpClassName,
+        Pointer<Utf16> lpWindowName,
+        int dwStyle,
+        int X,
+        int Y,
+        int nWidth,
+        int nHeight,
+        int hWndParent,
+        int hMenu,
+        int hInstance,
+        Pointer<Void> lpParam) =>
+    CreateWindowEx(0, lpClassName, lpWindowName, dwStyle, X, Y, nWidth, nHeight,
+        hWndParent, hMenu, hInstance, lpParam);
 
 /// {@category user32}
 final CreateWindowEx =
@@ -199,6 +217,10 @@ final SendMessage =
 /// {@category user32}
 final SetFocus =
     _user32.lookupFunction<setFocusNative, setFocusDart>('SetFocus');
+
+/// {@category user32}
+final SetParent =
+    _user32.lookupFunction<setParentNative, setParentDart>('SetParent');
 
 /// {@category user32}
 final SetScrollInfo = _user32
