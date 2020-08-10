@@ -112,15 +112,19 @@ GetProcessHeap, GetProcessHeap, kernel32, "HANDLE GetProcessHeap();", IntPtr, in
 GetProductInfo, GetProductInfo, kernel32, "BOOL GetProductInfo(\n  DWORD  dwOSMajorVersion,\n  DWORD  dwOSMinorVersion,\n  DWORD  dwSpMajorVersion,\n  DWORD  dwSpMinorVersion,\n  PDWORD pdwReturnedProductType\n);", Int32, int, 5, dwOSMajorVersion, Uint32, int, dwOSMinorVersion, Uint32, int, dwSpMajorVersion, Uint32, int, dwSpMinorVersion, Uint32, int, pdwReturnedProductType, Pointer<Uint32>, Pointer<Uint32>
 GetSaveFileNameW, GetSaveFileName, comdlg32, "BOOL GetSaveFileNameW(\n  LPOPENFILENAMEW Arg1\n);", Int32, int, 1, arg1, Pointer<OPENFILENAME>, Pointer<OPENFILENAME>
 GetScrollInfo, GetScrollInfo, user32, "BOOL GetScrollInfo(\n  HWND         hwnd,\n  int          nBar,\n  LPSCROLLINFO lpsi\n);", Int32, int, 3, hwnd, IntPtr, int, nBar, Int32, int, lpsi, Pointer<SCROLLINFO>, Pointer<SCROLLINFO>
+GetShellWindow, GetShellWindow, user32, "HWND GetShellWindow();", IntPtr, int, 0
 GetStdHandle, GetStdHandle, kernel32, "HANDLE WINAPI GetStdHandle(\n  _In_ DWORD nStdHandle\n);", IntPtr, int, 1, nStdHandle, Uint32, int
 GetStockObject, GetStockObject, gdi32, "HGDIOBJ GetStockObject(\n  int i\n);", IntPtr, int, 1, i, Int32, int
+GetSysColor, GetSysColor, user32, "DWORD GetSysColor(\n  int nIndex\n);", Uint32, int, 1, nIndex, Int32, int
 GetSystemDpiForProcess, GetSystemDpiForProcess, user32, "UINT GetSystemDpiForProcess(\n  HANDLE hProcess\n);", Uint32, int, 1, hProcess, IntPtr, int
+GetSystemMetrics, GetSystemMetrics, user32, "int GetSystemMetrics(\n  int nIndex\n);", Int32, int, 1, nIndex, Int32, int
 GetSystemPowerStatus, GetSystemPowerStatus, kernel32, "BOOL GetSystemPowerStatus(\n  LPSYSTEM_POWER_STATUS lpSystemPowerStatus\n);", Int32, int, 1, lpSystemPowerStatus, Pointer<SYSTEM_POWER_STATUS>, Pointer<SYSTEM_POWER_STATUS>
 GetSystemInfo, GetSystemInfo, kernel32, "void GetSystemInfo(\n  LPSYSTEM_INFO lpSystemInfo\n);", Void, void, 1, lpSystemInfo, Pointer<SYSTEM_INFO>, Pointer<SYSTEM_INFO>
 GetTempPathW, GetTempPath, kernel32, "DWORD GetTempPathW(\n  DWORD  nBufferLength,\n  LPWSTR lpBuffer\n);", Uint32, int, 2, nBufferLength, Uint32, int, lpBuffer, Pointer<Utf16>, Pointer<Utf16>
 GetTextMetricsW, GetTextMetrics, gdi32, "BOOL GetTextMetrics(\n  HDC          hdc,\n  LPTEXTMETRIC lptm\n);", Int32, int, 2, hdc, IntPtr, int, lptm, Pointer<TEXTMETRIC>, Pointer<TEXTMETRIC>
 GetVersionExW, GetVersionEx, kernel32, "NOT_BUILD_WINDOWS_DEPRECATE BOOL GetVersionExW(\n  LPOSVERSIONINFOW lpVersionInformation\n);", Int32, int, 1, lpVersionInformation, Pointer<OSVERSIONINFO>, Pointer<OSVERSIONINFO>
 GetVolumePathNamesForVolumeNameW, GetVolumePathNamesForVolumeName, kernel32, "BOOL GetVolumePathNamesForVolumeNameW(\n  LPCWSTR lpszVolumeName,\n  LPWCH   lpszVolumePathNames,\n  DWORD   cchBufferLength,\n  PDWORD  lpcchReturnLength\n);", Int32, int, 4, lpszVolumeName, Pointer<Utf16>, Pointer<Utf16>, lpszVolumePathNames, Pointer<Utf16>, Pointer<Utf16>, cchBufferLength, Uint32, int, lpcchReturnLength, Pointer<Uint32>, Pointer<Uint32>
+GetWindow, GetWindow, user32, "HWND GetWindow(\n  HWND hWnd,\n  UINT uCmd\n);", IntPtr, int, 2, hWnd, IntPtr, int, uCmd, Uint32, int
 HeapAlloc, HeapAlloc, kernel32, "DECLSPEC_ALLOCATOR LPVOID HeapAlloc(\n  HANDLE hHeap,\n  DWORD  dwFlags,\n  SIZE_T dwBytes\n);", Pointer, Pointer, 3, hHeap, IntPtr, int, dwflags, Uint32, int, dwBytes, Uint32, int
 HeapFree, HeapFree, kernel32, "BOOL HeapFree(\n  HANDLE                 hHeap,\n  DWORD                  dwFlags,\n  _Frees_ptr_opt_ LPVOID lpMem\n);", Int32, int, 3, hHeap, IntPtr, int, dwFlags, Uint32, int, lpMem, Pointer, Pointer
 InvalidateRect, InvalidateRect, user32, "BOOL InvalidateRect(\n  HWND       hWnd,\n  const RECT *lpRect,\n  BOOL       bErase\n);", Int32, int, 3, hWnd, IntPtr, int, lpRect, Pointer<RECT>, Pointer<RECT>, bErase, Int32, int

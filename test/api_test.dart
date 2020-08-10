@@ -370,8 +370,24 @@ void main() {
       final function = GetScrollInfo;
       expect(function, isA<Function>());
     });
+    test('Can instantiate GetShellWindow', () {
+      final function = GetShellWindow;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate GetSysColor', () {
+      final function = GetSysColor;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate GetSystemDpiForProcess', () {
       final function = GetSystemDpiForProcess;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate GetSystemMetrics', () {
+      final function = GetSystemMetrics;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate GetWindow', () {
+      final function = GetWindow;
       expect(function, isA<Function>());
     });
     test('Can instantiate InvalidateRect', () {

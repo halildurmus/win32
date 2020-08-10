@@ -277,6 +277,20 @@ final GetScrollInfo = _user32.lookupFunction<
     int Function(
         int hwnd, int nBar, Pointer<SCROLLINFO> lpsi)>('GetScrollInfo');
 
+// HWND GetShellWindow();
+
+/// {@category user32}
+final GetShellWindow =
+    _user32.lookupFunction<IntPtr Function(), int Function()>('GetShellWindow');
+
+// DWORD GetSysColor(
+//   int nIndex
+// );
+
+/// {@category user32}
+final GetSysColor = _user32.lookupFunction<Uint32 Function(Int32 nIndex),
+    int Function(int nIndex)>('GetSysColor');
+
 // UINT GetSystemDpiForProcess(
 //   HANDLE hProcess
 // );
@@ -285,6 +299,24 @@ final GetScrollInfo = _user32.lookupFunction<
 final GetSystemDpiForProcess = _user32.lookupFunction<
     Uint32 Function(IntPtr hProcess),
     int Function(int hProcess)>('GetSystemDpiForProcess');
+
+// int GetSystemMetrics(
+//   int nIndex
+// );
+
+/// {@category user32}
+final GetSystemMetrics = _user32.lookupFunction<Int32 Function(Int32 nIndex),
+    int Function(int nIndex)>('GetSystemMetrics');
+
+// HWND GetWindow(
+//   HWND hWnd,
+//   UINT uCmd
+// );
+
+/// {@category user32}
+final GetWindow = _user32.lookupFunction<
+    IntPtr Function(IntPtr hWnd, Uint32 uCmd),
+    int Function(int hWnd, int uCmd)>('GetWindow');
 
 // BOOL InvalidateRect(
 //   HWND       hWnd,
