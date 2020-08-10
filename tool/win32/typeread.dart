@@ -72,13 +72,36 @@ final _$library = DynamicLibrary.open('$library.dll');
     final libProtos = prototypes.values.where((p) => p.dllLibrary == library);
 
     for (final proto in libProtos) {
-      writer.writeStringSync('''
-/// {@category $library}
-final ${proto.neutralApiName} = _$library.lookupFunction<${proto.}
-''');
+      final apiName = prototypes.keys.firstWhere(
+          (k) => prototypes[k].neutralApiName == proto.neutralApiName);
+      writer.writeStringSync('/// {@category $library}\n');
+      writer.writeStringSync('// ${proto.prototype.join('// ')}');
+      writer.writeStringSync(
+          'final ${proto.neutralApiName} = _$library.lookupFunction<');
+      writer.writeStringSync('${proto.nativeReturn} Function(');
+      writer.writeStringSync(proto.nativeParams.keys
+          .map((param) => '${proto.nativeParams[param]} $param')
+          .join(', '));
+      writer.writeStringSync('), \n');
+      writer.writeStringSync('${proto.dartReturn} Function(');
+      writer.writeStringSync(proto.dartParams.keys
+          .map((param) => '${proto.dartParams[param]} $param')
+          .join(', '));
+      writer.writeStringSync(")>('$apiName');\n\n");
     }
+
+    writer.closeSync();
   }
 }
+
+/// {@category kernel32}
+// BOOL Beep(
+//   DWORD dwFreq,
+//   DWORD dwDuration
+// );
+// final Beep = _kernel32.lookupFunction<
+//     Int32 Function(Uint32 dwFreq, Uint32 dwDuration),
+//     int Function(int dwFreq, int dwDuration)>('Beep');
 
 void main() {
   loadCsv('win32types_loaded.csv');
