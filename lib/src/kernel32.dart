@@ -243,7 +243,7 @@ final FillConsoleOutputCharacter = _kernel32.lookupFunction<
         int cCharacter,
         int nLength,
         int dwWriteCoord,
-        Pointer<Uint32> lpNumberOfCharsWritten)>('FillConsoleOutputCharacter');
+        Pointer<Uint32> lpNumberOfCharsWritten)>('FillConsoleOutputCharacterW');
 
 // BOOL WINAPI FillConsoleOutputAttribute(
 //   _In_  HANDLE  hConsoleOutput,
@@ -407,7 +407,7 @@ final GetConsoleSelectionInfo = _kernel32.lookupFunction<
 /// {@category kernel32}
 final GetConsoleTitle = _kernel32.lookupFunction<
     Uint32 Function(Pointer<Utf16> lpConsoleTitle, Uint32 nSize),
-    int Function(Pointer<Utf16> lpConsoleTitle, int nSize)>('GetConsoleTitle');
+    int Function(Pointer<Utf16> lpConsoleTitle, int nSize)>('GetConsoleTitleW');
 
 // HWND WINAPI GetConsoleWindow(void);
 
@@ -711,7 +711,7 @@ final ScrollConsoleScreenBuffer = _kernel32.lookupFunction<
         Pointer<SMALL_RECT> lpScrollRectangle,
         Pointer<SMALL_RECT> lpClipRectangle,
         int dwDestinationOrigin,
-        Pointer<CHAR_INFO> lpFill)>('ScrollConsoleScreenBuffer');
+        Pointer<CHAR_INFO> lpFill)>('ScrollConsoleScreenBufferW');
 
 // BOOL WINAPI SetConsoleCtrlHandler(
 //   _In_opt_ PHANDLER_ROUTINE HandlerRoutine,

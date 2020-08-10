@@ -71,7 +71,7 @@ final EnumFontFamiliesEx = _gdi32.lookupFunction<
 /// {@category gdi32}
 final GetObject = _gdi32.lookupFunction<
     Int32 Function(IntPtr h, Int32 c, Pointer pv),
-    int Function(int h, int c, Pointer pv)>('GetObject');
+    int Function(int h, int c, Pointer pv)>('GetObjectW');
 
 // HGDIOBJ GetStockObject(
 //   int i
@@ -90,7 +90,7 @@ final GetStockObject =
 /// {@category gdi32}
 final GetTextMetrics = _gdi32.lookupFunction<
     Int32 Function(IntPtr hdc, Pointer<TEXTMETRIC> lptm),
-    int Function(int hdc, Pointer<TEXTMETRIC> lptm)>('GetTextMetrics');
+    int Function(int hdc, Pointer<TEXTMETRIC> lptm)>('GetTextMetricsW');
 
 // BOOL LineTo(
 //   HDC hdc,

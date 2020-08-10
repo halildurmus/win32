@@ -24,7 +24,7 @@ final _comdlg32 = DynamicLibrary.open('comdlg32.dll');
 /// {@category comdlg32}
 final ChooseColor = _comdlg32.lookupFunction<
     Int32 Function(Pointer<CHOOSECOLOR> lpcc),
-    int Function(Pointer<CHOOSECOLOR> lpcc)>('ChooseColor');
+    int Function(Pointer<CHOOSECOLOR> lpcc)>('ChooseColorW');
 
 // BOOL WINAPI ChooseFont(
 //   _Inout_ LPCHOOSEFONT lpcf
@@ -33,7 +33,7 @@ final ChooseColor = _comdlg32.lookupFunction<
 /// {@category comdlg32}
 final ChooseFont = _comdlg32.lookupFunction<
     Int32 Function(Pointer<CHOOSEFONT> lpcf),
-    int Function(Pointer<CHOOSEFONT> lpcf)>('ChooseFont');
+    int Function(Pointer<CHOOSEFONT> lpcf)>('ChooseFontW');
 
 // HWND FindTextW(
 //   LPFINDREPLACEW Arg1

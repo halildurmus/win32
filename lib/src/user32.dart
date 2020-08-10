@@ -511,7 +511,7 @@ final SendInput = _user32.lookupFunction<
 /// {@category user32}
 final SendMessage = _user32.lookupFunction<
     IntPtr Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
-    int Function(int hWnd, int Msg, int wParam, int lParam)>('SendMessage');
+    int Function(int hWnd, int Msg, int wParam, int lParam)>('SendMessageW');
 
 // HWND SetFocus(
 //   HWND hWnd
