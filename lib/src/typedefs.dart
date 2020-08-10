@@ -589,7 +589,7 @@ typedef destroyPhysicalMonitorsDart = int Function(
 typedef destroyWindowNative = Int32 Function(IntPtr hWnd);
 typedef destroyWindowDart = int Function(int hWnd);
 
-// LRESULT DispatchMessage(
+// LRESULT DispatchMessageW(
 //   const MSG *lpMsg
 // );
 typedef dispatchMessageNative = IntPtr Function(Pointer<MSG> lpMsg);
@@ -958,7 +958,7 @@ typedef getDCDart = int Function(int hwnd);
 typedef getLastErrorNative = Uint32 Function();
 typedef getLastErrorDart = int Function();
 
-// BOOL GetMessage(
+// BOOL GetMessageW(
 //   LPMSG lpMsg,
 //   HWND  hWnd,
 //   UINT  wMsgFilterMin,

@@ -129,7 +129,7 @@ final DestroyWindow =
 /// {@category user32}
 final DispatchMessage = _user32.lookupFunction<
     IntPtr Function(Pointer<MSG> lpMsg),
-    int Function(Pointer<MSG> lpMsg)>('DispatchMessage');
+    int Function(Pointer<MSG> lpMsg)>('DispatchMessageW');
 
 // int DrawTextW(
 //   HDC     hdc,
@@ -235,7 +235,7 @@ final GetClientRect = _user32.lookupFunction<
 final GetDC = _user32.lookupFunction<IntPtr Function(IntPtr hwnd),
     int Function(int hwnd)>('GetDC');
 
-// BOOL GetMessage(
+// BOOL GetMessageW(
 //   LPMSG lpMsg,
 //   HWND  hWnd,
 //   UINT  wMsgFilterMin,
@@ -247,7 +247,7 @@ final GetMessage = _user32.lookupFunction<
     Int32 Function(Pointer<MSG> lpMsg, IntPtr hWnd, Uint32 wMsgFilterMin,
         Uint32 wMsgFilterMax),
     int Function(Pointer<MSG> lpMsg, int hWnd, int wMsgFilterMin,
-        int wMsgFilterMax)>('GetMessage');
+        int wMsgFilterMax)>('GetMessageW');
 
 // BOOL GetMonitorInfoW(
 //   HMONITOR      hMonitor,

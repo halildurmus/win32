@@ -49,7 +49,7 @@ DeleteObject, DeleteObject, gdi32, "BOOL DeleteObject(\n  HGDIOBJ ho\n);", Int32
 DestroyPhysicalMonitor, DestroyPhysicalMonitor, dxva2, "_BOOL DestroyPhysicalMonitor(\n  HANDLE hMonitor\n);", Int32, int, 1, hMonitor, IntPtr, int
 DestroyPhysicalMonitors, DestroyPhysicalMonitors, dxva2, "_BOOL DestroyPhysicalMonitors(\n  DWORD              dwPhysicalMonitorArraySize,\n  LPPHYSICAL_MONITOR pPhysicalMonitorArray\n);", Int32, int, 2, dwPhysicalMonitorArraySize, Uint32, int, pPhysicalMonitorArray, Pointer, Pointer
 DestroyWindow, DestroyWindow, user32, "BOOL DestroyWindow(\n  HWND hWnd\n);", Int32, int, 1, hWnd, IntPtr, int
-DispatchMessage, DispatchMessage, user32, "LRESULT DispatchMessage(\n  const MSG *lpMsg\n);", IntPtr, int, 1, lpMsg, Pointer<MSG>, Pointer<MSG>
+DispatchMessageW, DispatchMessage, user32, "LRESULT DispatchMessage(\n  const MSG *lpMsg\n);", IntPtr, int, 1, lpMsg, Pointer<MSG>, Pointer<MSG>
 DrawStatusTextW, DrawStatusText, comctl32, "void DrawStatusTextW(\n  HDC     hDC,\n  LPCRECT lprc,\n  LPCWSTR pszText,\n  UINT    uFlags\n);", Void, void, 4, hdc, IntPtr, int, lprc, Pointer<RECT>, Pointer<RECT>, pszText, Pointer<Utf16>, Pointer<Utf16>, uFlags, Uint32, int
 DrawTextW, DrawText, user32, "int DrawTextW(\n  HDC     hdc,\n  LPCWSTR lpchText,\n  int     cchText,\n  LPRECT  lprc,\n  UINT    format\n);", Int32, int, 5, hdc, IntPtr, int, lpchText, Pointer<Utf16>, Pointer<Utf16>, cchText, Int32, int, lprc, Pointer<RECT>, Pointer<RECT>, format, Uint32, int
 EnableMenuItem, EnableMenuItem, user32, "BOOL EnableMenuItem(\n  HMENU hMenu,\n  UINT  uIDEnableItem,\n  UINT  uEnable\n);", Int32, int, 3, hMenu, IntPtr, int, uIDEnableItem, Uint32, int, uEnable, Uint32, int
@@ -85,7 +85,7 @@ GetConsoleTitle, GetConsoleTitle, kernel32, "DWORD WINAPI GetConsoleTitle(\n  _O
 GetConsoleWindow, GetConsoleWindow, kernel32, "HWND WINAPI GetConsoleWindow(void);", IntPtr, int, 0
 GetDC, GetDC, user32, "HDC GetDC(\n  HWND hWnd\n);", IntPtr, int, 1, hwnd, IntPtr, int
 GetLastError, GetLastError, kernel32, "_Post_equals_last_error_ DWORD GetLastError();", Uint32, int, 0
-GetMessage, GetMessage, user32, "BOOL GetMessage(\n  LPMSG lpMsg,\n  HWND  hWnd,\n  UINT  wMsgFilterMin,\n  UINT  wMsgFilterMax\n);", Int32, int, 4, lpMsg, Pointer<MSG>, Pointer<MSG>, hWnd, IntPtr, int, wMsgFilterMin, Uint32, int, wMsgFilterMax, Uint32, int
+GetMessageW, GetMessage, user32, "BOOL GetMessageW(\n  LPMSG lpMsg,\n  HWND  hWnd,\n  UINT  wMsgFilterMin,\n  UINT  wMsgFilterMax\n);", Int32, int, 4, lpMsg, Pointer<MSG>, Pointer<MSG>, hWnd, IntPtr, int, wMsgFilterMin, Uint32, int, wMsgFilterMax, Uint32, int
 GetModuleBaseNameW, GetModuleBaseName, psapi, "DWORD GetModuleBaseNameW(\n  HANDLE  hProcess,\n  HMODULE hModule,\n  LPWSTR  lpBaseName,\n  DWORD   nSize\n);", Uint32, int, 4, hProcess, IntPtr, int, hModule, IntPtr, int, lpBaseName, Pointer<Utf16>, Pointer<Utf16>, nSize, Uint32, int
 GetModuleFileNameExW, GetModuleFileNameEx, psapi, "DWORD GetModuleFileNameExW(\n  HANDLE  hProcess,\n  HMODULE hModule,\n  LPWSTR  lpFilename,\n  DWORD   nSize\n);", Uint32, int, 4, hProcess, IntPtr, int, hModule, IntPtr, int, lpFilename, Pointer<Utf16>, Pointer<Utf16>, nSize, Uint32, int
 GetModuleHandleW, GetModuleHandle, kernel32, "HMODULE GetModuleHandleW(\n  LPCWSTR lpModuleName\n);", IntPtr, int, 1, lpModuleName, Pointer<Utf16>, Pointer<Utf16>
