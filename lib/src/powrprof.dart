@@ -4,13 +4,38 @@
 
 // Maps FFI prototypes onto the corresponding Win32 API function calls
 
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+// ignore_for_file: unused_import
+
 import 'dart:ffi';
 
-import 'typedefs.dart';
+import 'package:ffi/ffi.dart';
 
-final _powrprof = DynamicLibrary.open('PowrProf.dll');
+import 'com/combase.dart';
+import 'structs.dart';
+
+final _powrprof = DynamicLibrary.open('powrprof.dll');
+
+// NTSTATUS CallNtPowerInformation(
+//   POWER_INFORMATION_LEVEL InformationLevel,
+//   PVOID                   InputBuffer,
+//   ULONG                   InputBufferLength,
+//   PVOID                   OutputBuffer,
+//   ULONG                   OutputBufferLength
+// );
 
 /// {@category powrprof}
 final CallNtPowerInformation = _powrprof.lookupFunction<
-    callNtPowerInformationNative,
-    callNtPowerInformationDart>('CallNtPowerInformation');
+    Int32 Function(
+        Int32 InformationLevel,
+        Pointer InputBuffer,
+        Uint32 InputBufferLength,
+        Pointer OutputBuffer,
+        Uint32 OutputBufferLength),
+    int Function(
+        int InformationLevel,
+        Pointer InputBuffer,
+        int InputBufferLength,
+        Pointer OutputBuffer,
+        int OutputBufferLength)>('CallNtPowerInformation');

@@ -4,12 +4,23 @@
 
 // Maps FFI prototypes onto the corresponding Win32 API function calls
 
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+// ignore_for_file: unused_import
+
 import 'dart:ffi';
 
-import 'typedefs.dart';
+import 'package:ffi/ffi.dart';
+
+import 'com/combase.dart';
+import 'structs.dart';
 
 final _oleaut32 = DynamicLibrary.open('oleaut32.dll');
 
+// HRESULT VariantClear(
+//   VARIANTARG *pvarg
+// );
+
 /// {@category oleaut32}
-final VariantClear = _oleaut32
-    .lookupFunction<variantClearNative, variantClearDart>('VariantClear');
+final VariantClear = _oleaut32.lookupFunction<Int32 Function(Pointer pvarg),
+    int Function(Pointer pvarg)>('VariantClear');

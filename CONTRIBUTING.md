@@ -16,9 +16,11 @@ Some tips:
   rather than
   [CredWriteA](https://docs.microsoft.com/en-us/windows/win32/api/wincred/nf-wincred-credwritea).
 
-- Typedefs go in `typedefs.dart`, and the exported function mapping goes in Dart
-  files matching their DLL names. For example, the export above goes in
-  `advapi32.dart`, since the function can be found in `advapi32.dll`.
+- To create a new API, *don't* edit the main library files themselves; these get
+  overwritten. Instead, edit `tool\win32\win32api.csv` and run
+  `tool\generate.cmd` to update the library files. This might seem a pain, but
+  it gives protection against any changes to dart:ffi, since the typedef syntax
+  can be easily recreated as necessary.
 
 - Structs belong in `structs.dart` and constants belong in `constants.dart`.
 
