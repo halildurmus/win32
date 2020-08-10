@@ -55,7 +55,7 @@ void generateFfiFiles() {
   final libraries = prototypes.values.map((e) => e.dllLibrary).toSet().toList();
 
   for (final library in libraries) {
-    final writer = File('lib/src/$library.dart').openSync();
+    final writer = File('lib/src/$library.dart').openSync(mode: FileMode.write);
     writer.writeStringSync('''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
@@ -63,47 +63,44 @@ void generateFfiFiles() {
 
 // Maps FFI prototypes onto the corresponding Win32 API function calls
 
+// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
+
+// ignore_for_file: unused_import
+
 import 'dart:ffi';
 
-import 'typedefs.dart';
+import 'package:ffi/ffi.dart';
 
-final _$library = DynamicLibrary.open('$library.dll');
+import 'com/combase.dart';
+import 'structs.dart';
+
+final _$library = DynamicLibrary.open('$library.dll');\n
 ''');
     final libProtos = prototypes.values.where((p) => p.dllLibrary == library);
 
     for (final proto in libProtos) {
       final apiName = prototypes.keys.firstWhere(
           (k) => prototypes[k].neutralApiName == proto.neutralApiName);
-      writer.writeStringSync('/// {@category $library}\n');
-      writer.writeStringSync('// ${proto.prototype.join('// ')}');
-      writer.writeStringSync(
-          'final ${proto.neutralApiName} = _$library.lookupFunction<');
-      writer.writeStringSync('${proto.nativeReturn} Function(');
-      writer.writeStringSync(proto.nativeParams.keys
-          .map((param) => '${proto.nativeParams[param]} $param')
-          .join(', '));
-      writer.writeStringSync('), \n');
-      writer.writeStringSync('${proto.dartReturn} Function(');
-      writer.writeStringSync(proto.dartParams.keys
-          .map((param) => '${proto.dartParams[param]} $param')
-          .join(', '));
-      writer.writeStringSync(")>('$apiName');\n\n");
+      writer.writeStringSync('''
+// ${proto.prototype.first.split('\\n').join('\n// ')}
+
+/// {@category $library}
+final ${proto.neutralApiName} = _$library.lookupFunction<\n
+  ${proto.nativeReturn} Function(
+    ${proto.nativeParams.keys.map((param) => '${proto.nativeParams[param]} $param').join(', ')}),
+  ${proto.dartReturn} Function(
+    ${proto.dartParams.keys.map((param) => '${proto.dartParams[param]} $param').join(', ')})>
+  ('$apiName');
+
+  
+''');
     }
 
     writer.closeSync();
   }
 }
 
-/// {@category kernel32}
-// BOOL Beep(
-//   DWORD dwFreq,
-//   DWORD dwDuration
-// );
-// final Beep = _kernel32.lookupFunction<
-//     Int32 Function(Uint32 dwFreq, Uint32 dwDuration),
-//     int Function(int dwFreq, int dwDuration)>('Beep');
-
 void main() {
-  loadCsv('win32types_loaded.csv');
+  loadCsv('tool/win32/win32api.csv');
   generateFfiFiles();
 }

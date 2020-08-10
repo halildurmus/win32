@@ -6,6 +6,7 @@ final typedefsAsLines = File('lib/src/typedefs.dart').readAsLinesSync();
 final typedefsAsString = File('lib/src/typedefs.dart').readAsStringSync();
 
 class TypeDef {
+  String apiName;
   String neutralApiName;
   final List<String> prototype;
   String nativeReturn;
@@ -55,7 +56,7 @@ void getParams(String apiName) {
       '${neutralApiName[0].toLowerCase()}${neutralApiName.substring(1)}Dart';
 
   final nativeTypedefStart =
-      typedefsAsString.toLowerCase().indexOf(nativeApiName.toLowerCase());
+      typedefsAsString.toLowerCase().indexOf(' ${nativeApiName.toLowerCase()}');
   final nativeTypedefBracketStart =
       typedefsAsString.indexOf('(', nativeTypedefStart) + 1;
   final nativeTypedefEnd = typedefsAsString.indexOf(')', nativeTypedefStart);
@@ -82,7 +83,7 @@ void getParams(String apiName) {
   }
 
   final dartTypedefStart =
-      typedefsAsString.toLowerCase().indexOf(dartApiName.toLowerCase());
+      typedefsAsString.toLowerCase().indexOf(' ${dartApiName.toLowerCase()}');
   final dartTypedefBracketStart =
       typedefsAsString.indexOf('(', dartTypedefStart) + 1;
   final dartTypedefEnd = typedefsAsString.indexOf(')', dartTypedefStart);
@@ -158,52 +159,10 @@ void printCsv(String filename) {
   writeHandle.closeSync();
 }
 
-void loadCsv() {
-  final file = File('win32types_original.csv');
-  final lines = file.readAsLinesSync().skip(1);
-  for (final line in lines) {
-    final fields = line.split(', ');
-    final apiName = fields[0];
-    final neutralApiName = fields[1];
-    final dllLibrary = fields[2];
-
-    var prototype = fields[3];
-    var idx = 4;
-    // keep consuming until we have a quoted string
-    while (prototype.allMatches('"').length == 1) {
-      // ignore: use_string_buffers
-      prototype += ', ${fields[idx++]}';
-    }
-    prototype = prototype.replaceAll('"', '');
-
-    prototypes[apiName] = TypeDef(prototype.split('\n'))
-      ..neutralApiName = neutralApiName
-      ..dllLibrary = dllLibrary
-      ..nativeReturn = fields[idx++]
-      ..dartReturn = fields[idx++];
-
-    final numParams = int.parse(fields[idx++]);
-
-    for (var i = 0; i < numParams; i++) {
-      final paramName = fields[idx++];
-      final paramNativeType = fields[idx++];
-      final paramDartType = fields[idx++];
-
-      prototypes[apiName].dartParams[paramName] = paramDartType;
-      prototypes[apiName].nativeParams[paramName] = paramNativeType;
-    }
-  }
-}
-
 void main() {
   getPrototypes();
   getLibraries();
 
-  printCsv('win32types_original.csv');
-
-  prototypes.clear();
-  loadCsv();
+  printCsv('tool/win32/win32api.csv');
   print('${prototypes.length} entries written.');
-
-  printCsv('win32types_loaded.csv');
 }
