@@ -24,4 +24,9 @@ void main() {
     expect(pGetNativeSystemInfo, isNonZero);
     free(ansi);
   });
+
+  test('Basic library function load', () {
+    final beepFunction = Beep;
+    expect(beepFunction.toString, equals('Beep'));
+  });
 }
