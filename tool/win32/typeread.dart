@@ -74,7 +74,7 @@ import 'package:ffi/ffi.dart';
 import 'com/combase.dart';
 import 'structs.dart';
 
-final _$library = DynamicLibrary.open('$library.dll');\n
+final _$library = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');\n
 ''');
     final libProtos = prototypes.values.where((p) => p.dllLibrary == library);
 

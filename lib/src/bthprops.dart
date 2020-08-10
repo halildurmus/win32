@@ -15,7 +15,7 @@ import 'package:ffi/ffi.dart';
 import 'com/combase.dart';
 import 'structs.dart';
 
-final _bthprops = DynamicLibrary.open('bthprops.dll');
+final _bthprops = DynamicLibrary.open('bthprops.cpl');
 
 // DWORD BluetoothAuthenticateDeviceEx(
 //   HWND                        hwndParentIn,
