@@ -32,12 +32,7 @@ void getPrototypes() {
 
     if (!inComment && nativePrototype.isNotEmpty) {
       var apiName = nativePrototype.first.split(' ').last;
-      apiName =
-          // if (apiName.contains(')')) {
-          apiName.split('(').first;
-      // } else {
-      //   apiName = apiName.substring(0, apiName.length - 1);
-      // }
+      apiName = apiName.split('(').first;
       prototypes[apiName] = TypeDef(nativePrototype);
       getParams(apiName);
       nativePrototype = [];
@@ -142,8 +137,11 @@ void getLibraries() {
   }
 }
 
-void printCsv() {
-  print('ApiName, NeutralApiName, DllLibrary');
+Future<void> printCsv(String filename) async {
+  final csvFile = File(filename);
+  final writeHandle = csvFile.openWrite(mode: FileMode.append);
+  writeHandle.write(
+      'ApiName, NeutralApiName, DllLibrary, WindowsPrototype, ReturnNative, ReturnDart, ParamCount, Param1Native, Param1Dart');
   for (final prototype in prototypes.keys) {
     final buffer = StringBuffer();
     final td = prototypes[prototype];
@@ -156,13 +154,56 @@ void printCsv() {
           '$param, ${td.nativeParams[param]}, ${td.dartParams[param]}, ');
     }
     final str = buffer.toString();
-    print(str.substring(0, str.length - 2));
+    writeHandle.write(str.substring(0, str.length - 2));
+  }
+  writeHandle.close();
+  await writeHandle.done;
+}
+
+void loadCsv() {
+  final file = File('win32types_original.csv');
+  for (final line in file.readAsLinesSync().skip(1)) {
+    final fields = line.split(', ');
+    final apiName = fields[0];
+    final neutralApiName = fields[1];
+    final dllLibrary = fields[2];
+
+    var prototype = fields[3];
+    var idx = 4;
+    // keep consuming until we have a quoted string
+    while (prototype.allMatches('"').length == 1) {
+      // ignore: use_string_buffers
+      prototype += ', ${fields[idx++]}';
+    }
+    prototype.replaceAll('"', '');
+
+    prototypes[apiName] = TypeDef(prototype.split('\n'))
+      ..neutralApiName = neutralApiName
+      ..dllLibrary = dllLibrary
+      ..nativeReturn = fields[idx++]
+      ..dartReturn = fields[idx++];
+
+    final numParams = int.parse(fields[idx++]);
+
+    for (var i = 0; i < numParams; i++) {
+      final paramName = fields[idx++];
+      final paramNativeType = fields[idx++];
+      final paramDartType = fields[idx++];
+
+      prototypes[apiName].dartParams[paramName] = paramDartType;
+      prototypes[apiName].nativeParams[paramName] = paramNativeType;
+    }
   }
 }
 
-void main() {
+void main() async {
   getPrototypes();
   getLibraries();
 
-  printCsv();
+  await printCsv('win32types_original.csv');
+
+  prototypes.clear();
+  loadCsv();
+
+  await printCsv('win32types_loaded.csv');
 }
