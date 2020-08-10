@@ -23,6 +23,10 @@ Calls the above two utilities to generate the COM and Windows Runtime classes.
 Used from a Bash shell to deploy the generated dartdoc documentation to the
 `gh-pages` branch of the repo.
 
+# win32/typeread.dart
+
+Updates the various library files from win32api.csv.
+
 # build.cmd
 
 Generates EXE files for some of the Dart samples
