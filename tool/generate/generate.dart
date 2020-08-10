@@ -17,15 +17,11 @@ void main(List<String> args) {
 
   for (final inputFile in inputDirectory.listSync()) {
     if (inputFile is File) {
-      print('Parsing:    ${inputFile.path}');
+      print('Converting:    ${inputFile.path}');
       final parsedFile = loadSource(inputFile);
-
       final outputFile =
           File('${outputDirectory.uri.toFilePath()}${parsedFile.name}.dart');
-      print('Writing:    ${outputFile.path}');
       outputFile.writeAsStringSync(parsedFile.toString());
-
-      print('');
     }
   }
 }

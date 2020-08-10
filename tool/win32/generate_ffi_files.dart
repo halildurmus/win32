@@ -60,4 +60,5 @@ final ${proto.neutralApiName} = _$library.lookupFunction<\n
 void main() {
   loadCsv('tool/win32/win32api.csv');
   generateFfiFiles();
+  print('${prototypes.length} typedefs generated.');
 }
