@@ -2,13 +2,17 @@ import 'dart:io';
 
 final prototypes = <String, TypeDef>{};
 
-final lines = File('lib/src/typedefs.dart').readAsLinesSync();
-final string = File('lib/src/typedefs.dart').readAsStringSync();
+final typedefsAsLines = File('lib/src/typedefs.dart').readAsLinesSync();
+final typedefsAsString = File('lib/src/typedefs.dart').readAsStringSync();
 
 class TypeDef {
+  String neutralApiName;
   final List<String> prototype;
+  String nativeReturn;
+  String dartReturn;
   final Map<String, String> nativeParams = {};
   final Map<String, String> dartParams = {};
+  String dllLibrary;
 
   TypeDef(this.prototype);
 }
@@ -18,9 +22,9 @@ void getPrototypes() {
 
   var nativePrototype = <String>[];
 
-  for (var idx = 10; idx < lines.length; idx++) {
-    if (lines[idx].trim().startsWith('//')) {
-      nativePrototype.add(lines[idx].substring(3));
+  for (var idx = 10; idx < typedefsAsLines.length; idx++) {
+    if (typedefsAsLines[idx].trim().startsWith('//')) {
+      nativePrototype.add(typedefsAsLines[idx].substring(3));
       inComment = true;
     } else {
       inComment = false;
@@ -39,45 +43,126 @@ void getPrototypes() {
       nativePrototype = [];
     }
   }
-
-  for (final prototypeKey in prototypes.keys) {
-    print(prototypeKey);
-  }
 }
 
 void getParams(String apiName) {
+  String neutralApiName;
   if (apiName.endsWith('W')) {
     // ignore: parameter_assignments
-    apiName = apiName.substring(0, apiName.length - 1);
+    neutralApiName = apiName.substring(0, apiName.length - 1);
+  } else {
+    neutralApiName = apiName;
   }
+  prototypes[apiName].neutralApiName = neutralApiName;
 
   final nativeApiName =
-      '${apiName[0].toLowerCase()}${apiName.substring(1)}Native';
-  final dartApiName = '${apiName[0].toLowerCase()}${apiName.substring(1)}Dart';
+      '${neutralApiName[0].toLowerCase()}${neutralApiName.substring(1)}Native';
+  final dartApiName =
+      '${neutralApiName[0].toLowerCase()}${neutralApiName.substring(1)}Dart';
 
-  final nativeTypedefStart = string.indexOf(nativeApiName);
-  final nativeTypedefEnd = string.indexOf(')', nativeTypedefStart);
-  final nativeTypedef = string.substring(nativeTypedefStart, nativeTypedefEnd);
+  final nativeTypedefStart =
+      typedefsAsString.toLowerCase().indexOf(nativeApiName.toLowerCase());
+  final nativeTypedefBracketStart =
+      typedefsAsString.indexOf('(', nativeTypedefStart) + 1;
+  final nativeTypedefEnd = typedefsAsString.indexOf(')', nativeTypedefStart);
+  final nativeTypedefReturn = typedefsAsString
+      .substring(nativeTypedefStart, nativeTypedefEnd)
+      .split('=')
+      .last
+      .trim()
+      .split(' ')
+      .first;
+  prototypes[apiName].nativeReturn = nativeTypedefReturn;
+  var nativeTypedef =
+      typedefsAsString.substring(nativeTypedefBracketStart, nativeTypedefEnd);
+  nativeTypedef = nativeTypedef.replaceAll('\n', ' ').trim();
 
   final nativeParams = nativeTypedef.split(',');
   for (final param in nativeParams) {
-    final ab = param.split(' ');
-    prototypes[apiName].nativeParams[ab.first] = ab.last;
+    final ab = param.trim().split(' ');
+    if (ab.length == 2) {
+      prototypes[apiName].nativeParams[ab.last] = ab.first;
+    } else if (ab.isNotEmpty && ab.first != '') {
+      print(ab);
+    }
   }
 
-  final dartTypedefStart = string.indexOf(dartApiName);
-  final dartTypedefEnd = string.indexOf(')', dartTypedefStart);
-  final dartTypedef = string.substring(dartTypedefStart, dartTypedefEnd);
+  final dartTypedefStart =
+      typedefsAsString.toLowerCase().indexOf(dartApiName.toLowerCase());
+  final dartTypedefBracketStart =
+      typedefsAsString.indexOf('(', dartTypedefStart) + 1;
+  final dartTypedefEnd = typedefsAsString.indexOf(')', dartTypedefStart);
+  final dartTypedefReturn = typedefsAsString
+      .substring(dartTypedefStart, dartTypedefEnd)
+      .split('=')
+      .last
+      .trim()
+      .split(' ')
+      .first;
+  prototypes[apiName].dartReturn = dartTypedefReturn;
+  var dartTypedef =
+      typedefsAsString.substring(dartTypedefBracketStart, dartTypedefEnd);
+  dartTypedef = dartTypedef.replaceAll('\n', ' ').trim();
 
   final dartParams = dartTypedef.split(',');
   for (final param in dartParams) {
-    final ab = param.split(' ');
-    prototypes[apiName].dartParams[ab.first] = ab.last;
+    final ab = param.trim().split(' ');
+    if (ab.length == 2) {
+      prototypes[apiName].dartParams[ab.last] = ab.first;
+    } else if (ab.isNotEmpty && ab.first != '') {
+      print(ab.length);
+    }
+  }
+}
+
+void getLibraries() {
+  for (final filename in [
+    "kernel32",
+    "user32",
+    "gdi32",
+    "shell32",
+    "ole32",
+    "oleaut32",
+    "comctl32",
+    "comdlg32",
+    "psapi",
+    "advapi32",
+    "bthprops",
+    "powrprof",
+    "dxva2"
+  ]) {
+    final file = File('lib/src/$filename.dart');
+    final fileAsString = file.readAsStringSync();
+
+    for (final prototype in prototypes.keys) {
+      if (fileAsString.contains(prototype)) {
+        prototypes[prototype].dllLibrary = filename;
+      }
+    }
+  }
+}
+
+void printCsv() {
+  print('ApiName, NeutralApiName, DllLibrary');
+  for (final prototype in prototypes.keys) {
+    final buffer = StringBuffer();
+    final td = prototypes[prototype];
+    buffer.write('$prototype, ${td.neutralApiName}, ${td.dllLibrary}, ');
+    buffer.write('"${td.prototype.join("\\n")}", ');
+    buffer.write('${td.nativeReturn}, ${td.dartReturn}, ');
+    buffer.write('${td.dartParams.length}, ');
+    for (final param in td.dartParams.keys) {
+      buffer.write(
+          '$param, ${td.nativeParams[param]}, ${td.dartParams[param]}, ');
+    }
+    final str = buffer.toString();
+    print(str.substring(0, str.length - 2));
   }
 }
 
 void main() {
   getPrototypes();
+  getLibraries();
 
-  print(prototypes.length);
+  printCsv();
 }

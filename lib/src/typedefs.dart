@@ -415,7 +415,7 @@ typedef createProcessNative = Int32 Function(
     Uint32 dwCreationFlags,
     Pointer lpEnvironment,
     Pointer<Utf16> lpCurrentDirectory,
-    Pointer lpStartupInfo, // could be STARTUPINFO or STARTUPINFOEX
+    Pointer lpStartupInfo,
     Pointer<PROCESS_INFORMATION> lpProcessInformation);
 typedef createProcessDart = int Function(
     Pointer<Utf16> lpApplicationName,
@@ -426,7 +426,7 @@ typedef createProcessDart = int Function(
     int dwCreationFlags,
     Pointer lpEnvironment,
     Pointer<Utf16> lpCurrentDirectory,
-    Pointer lpStartupInfo, // could be STARTUPINFO or STARTUPINFOEX
+    Pointer lpStartupInfo,
     Pointer<PROCESS_INFORMATION> lpProcessInformation);
 
 // HRESULT WINAPI CreatePseudoConsole(
@@ -1726,9 +1726,6 @@ typedef scrollWindowNative = Int32 Function(IntPtr hWnd, Int32 XAmount,
     Int32 YAmount, Pointer<RECT> lpRect, Pointer<RECT> lpClipRect);
 typedef scrollWindowDart = int Function(int hWnd, int XAmount, int YAmount,
     Pointer<RECT> lpRect, Pointer<RECT> lpClipRect);
-
-// In the following typedef, we use Pointer<Void> since pInputs can take
-// an array of input messages, and Pointer<List<INPUT>> isn't possible.
 
 // UINT SendInput(
 //   UINT    cInputs,
