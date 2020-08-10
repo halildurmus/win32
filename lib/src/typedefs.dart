@@ -1469,7 +1469,7 @@ typedef messageBoxDart = int Function(
 //   DWORD dwFlags
 // );
 typedef monitorFromPointNative = IntPtr Function(Int64 pt, Uint32 dwFlags);
-typedef monitorFromPointDart = int Function(int hwnd, int dwFlags);
+typedef monitorFromPointDart = int Function(int pt, int dwFlags);
 
 // HMONITOR MonitorFromWindow(
 //   HWND  hwnd,
