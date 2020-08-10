@@ -294,6 +294,10 @@ void main() {
       final function = BeginPaint;
       expect(function, isA<Function>());
     });
+    test('Can instantiate BringWindowToTop', () {
+      final function = BringWindowToTop;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate CreateAcceleratorTable', () {
       final function = CreateAcceleratorTable;
       expect(function, isA<Function>());
@@ -358,12 +362,20 @@ void main() {
       final function = GetDpiForSystem;
       expect(function, isA<Function>());
     });
+    test('Can instantiate GetForegroundWindow', () {
+      final function = GetForegroundWindow;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate GetMessage', () {
       final function = GetMessage;
       expect(function, isA<Function>());
     });
     test('Can instantiate GetMonitorInfo', () {
       final function = GetMonitorInfo;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate GetParent', () {
+      final function = GetParent;
       expect(function, isA<Function>());
     });
     test('Can instantiate GetScrollInfo', () {
@@ -490,6 +502,10 @@ void main() {
       final function = SetScrollInfo;
       expect(function, isA<Function>());
     });
+    test('Can instantiate SetProcessDPIAware', () {
+      final function = SetProcessDPIAware;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate SetTimer', () {
       final function = SetTimer;
       expect(function, isA<Function>());
@@ -498,12 +514,20 @@ void main() {
       final function = SetWindowLongPtr;
       expect(function, isA<Function>());
     });
+    test('Can instantiate SetWindowPos', () {
+      final function = SetWindowPos;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate SetWindowText', () {
       final function = SetWindowText;
       expect(function, isA<Function>());
     });
     test('Can instantiate ShowWindow', () {
       final function = ShowWindow;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate ShowWindowAsync', () {
+      final function = ShowWindowAsync;
       expect(function, isA<Function>());
     });
     test('Can instantiate SystemParametersInfo', () {
@@ -524,6 +548,14 @@ void main() {
     });
     test('Can instantiate UpdateWindow', () {
       final function = UpdateWindow;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate WindowFromPhysicalPoint', () {
+      final function = WindowFromPhysicalPoint;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate WindowFromPoint', () {
+      final function = WindowFromPoint;
       expect(function, isA<Function>());
     });
   });

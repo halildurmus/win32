@@ -17,3 +17,6 @@ echo Formatting generated source code
 call dart format %~dp0..\lib\src
 call dart format %~dp0..\lib\src\generated
 call dart format %~dp0..\test\api_test.dart
+
+echo Running tests
+call dart pub run test

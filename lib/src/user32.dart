@@ -41,6 +41,15 @@ final BeginPaint = _user32.lookupFunction<
     IntPtr Function(IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint),
     int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint)>('BeginPaint');
 
+// BOOL BringWindowToTop(
+//   HWND hWnd
+// );
+
+/// {@category user32}
+final BringWindowToTop =
+    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
+        'BringWindowToTop');
+
 // HACCEL CreateAcceleratorTableW(
 //   LPACCEL paccel,
 //   int     cAccel
@@ -241,6 +250,12 @@ final GetDC = _user32.lookupFunction<IntPtr Function(IntPtr hwnd),
 final GetDpiForSystem =
     _user32.lookupFunction<Int32 Function(), int Function()>('GetDpiForSystem');
 
+// HWND GetForegroundWindow();
+
+/// {@category user32}
+final GetForegroundWindow = _user32
+    .lookupFunction<IntPtr Function(), int Function()>('GetForegroundWindow');
+
 // BOOL GetMessageW(
 //   LPMSG lpMsg,
 //   HWND  hWnd,
@@ -264,6 +279,14 @@ final GetMessage = _user32.lookupFunction<
 final GetMonitorInfo = _user32.lookupFunction<
     Int32 Function(IntPtr hMonitor, Pointer<MONITORINFO> lpmi),
     int Function(int hMonitor, Pointer<MONITORINFO> lpmi)>('GetMonitorInfoW');
+
+// HWND GetParent(
+//   HWND hWnd
+// );
+
+/// {@category user32}
+final GetParent = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
+    int Function(int hWnd)>('GetParent');
 
 // BOOL GetScrollInfo(
 //   HWND         hwnd,
@@ -592,6 +615,12 @@ final SetScrollInfo = _user32.lookupFunction<
     int Function(int hwnd, int nBar, Pointer<SCROLLINFO> lpsi,
         int redraw)>('SetScrollInfo');
 
+// BOOL SetProcessDPIAware();
+
+/// {@category user32}
+final SetProcessDPIAware = _user32
+    .lookupFunction<Int32 Function(), int Function()>('SetProcessDPIAware');
+
 // UINT_PTR SetTimer(
 //   HWND      hWnd,
 //   UINT_PTR  nIDEvent,
@@ -617,6 +646,23 @@ final SetWindowLongPtr = _user32.lookupFunction<
     IntPtr Function(IntPtr hWnd, Int32 nIndex, IntPtr dwNewLong),
     int Function(int hWnd, int nIndex, int dwNewLong)>('SetWindowLongPtrW');
 
+// BOOL SetWindowPos(
+//   HWND hWnd,
+//   HWND hWndInsertAfter,
+//   int  X,
+//   int  Y,
+//   int  cx,
+//   int  cy,
+//   UINT uFlags,
+// );
+
+/// {@category user32}
+final SetWindowPos = _user32.lookupFunction<
+    Int32 Function(IntPtr hWnd, IntPtr hWndInsertAfter, Int32 X, Int32 Y,
+        Int32 cx, Int32 cy, Uint32 uFlags),
+    int Function(int hWnd, int hWndInsertAfter, int X, int Y, int cx, int cy,
+        int uFlags)>('SetWindowPos');
+
 // BOOL SetWindowTextW(
 //   HWND    hWnd,
 //   LPCWSTR lpString
@@ -636,6 +682,16 @@ final SetWindowText = _user32.lookupFunction<
 final ShowWindow = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, Int32 nCmdShow),
     int Function(int hWnd, int nCmdShow)>('ShowWindow');
+
+// BOOL ShowWindowAsync(
+//   HWND hWnd,
+//   int  nCmdShow
+// );
+
+/// {@category user32}
+final ShowWindowAsync = _user32.lookupFunction<
+    Int32 Function(IntPtr hWnd, Int32 nCmdShow),
+    int Function(int hWnd, int nCmdShow)>('ShowWindowAsync');
 
 // BOOL SystemParametersInfoW(
 //   UINT  uiAction,
@@ -688,3 +744,20 @@ final PostQuitMessage = _user32.lookupFunction<Void Function(Int32 nExitCode),
 final UpdateWindow =
     _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
         'UpdateWindow');
+
+// HWND WindowFromPhysicalPoint(
+//   POINT Point
+// );
+
+/// {@category user32}
+final WindowFromPhysicalPoint = _user32.lookupFunction<
+    IntPtr Function(Int64 Point),
+    int Function(int Point)>('WindowFromPhysicalPoint');
+
+// HWND WindowFromPoint(
+//   POINT Point
+// );
+
+/// {@category user32}
+final WindowFromPoint = _user32.lookupFunction<IntPtr Function(Int64 Point),
+    int Function(int Point)>('WindowFromPoint');
