@@ -9,9 +9,7 @@ import 'dart:io';
 
 import 'shared.dart';
 
-final prototypes = <String, TypeDef>{};
-
-void generateFfiFiles() {
+void generateTests() {
   final writer = File('test/api_test.dart').openSync(mode: FileMode.write);
 
   writer.writeStringSync('''
@@ -35,25 +33,30 @@ void main() {
   final libraries = prototypes.values.map((e) => e.dllLibrary).toSet().toList();
 
   for (final library in libraries) {
-    writer.writeStringSync("group('Test $library ', () {\n");
+    writer.writeStringSync("group('Test $library functions', () {\n");
 
-    final libProtos = prototypes.values.where((p) => p.dllLibrary == library);
+    // TaskDialog* is a special case since it requires comctl32.dll v6. This is
+    // not available to dart pub run test because of
+    // https://github.com/dart-lang/sdk/issues/42598
+    final libProtos = prototypes.values
+        .where((td) => td.dllLibrary == library)
+        .where((td) => !td.neutralApiName.startsWith('TaskDialog'));
 
     for (final proto in libProtos) {
-      final apiName = prototypes.keys.firstWhere(
-          (k) => prototypes[k].neutralApiName == proto.neutralApiName);
       writer.writeStringSync('''
-      test('Dialog object exists', () {
-        final prototype = 
-      }
+      test('Can instantiate ${proto.neutralApiName}', () {
+        final function = ${proto.neutralApiName};
+        expect(function, isA<Function>());
+      });
 ''');
     }
-    writer.writeStringSync('}');
+    writer.writeStringSync('});\n\n');
   }
+  writer.writeStringSync('}');
   writer.closeSync();
 }
 
 void main() {
   loadCsv('tool/win32/win32api.csv');
-  generateFfiFiles();
+  generateTests();
 }
