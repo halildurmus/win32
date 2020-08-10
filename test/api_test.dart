@@ -354,6 +354,10 @@ void main() {
       final function = GetDC;
       expect(function, isA<Function>());
     });
+    test('Can instantiate GetDpiForSystem', () {
+      final function = GetDpiForSystem;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate GetMessage', () {
       final function = GetMessage;
       expect(function, isA<Function>());
@@ -364,6 +368,10 @@ void main() {
     });
     test('Can instantiate GetScrollInfo', () {
       final function = GetScrollInfo;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate GetSystemDpiForProcess', () {
+      final function = GetSystemDpiForProcess;
       expect(function, isA<Function>());
     });
     test('Can instantiate InvalidateRect', () {
@@ -894,6 +902,21 @@ void main() {
     });
     test('Can instantiate SHQueryRecycleBin', () {
       final function = SHQueryRecycleBin;
+      expect(function, isA<Function>());
+    });
+  });
+
+  group('Test shcore functions', () {
+    test('Can instantiate GetDpiForMonitor', () {
+      final function = GetDpiForMonitor;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate GetProcessDpiAwareness', () {
+      final function = GetProcessDpiAwareness;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate SetProcessDpiAwareness', () {
+      final function = SetProcessDpiAwareness;
       expect(function, isA<Function>());
     });
   });

@@ -22,6 +22,8 @@ dartdoc:
       markdown: doc/powrprof.md
     "psapi":
       markdown: doc/psapi.md
+    "shcore":
+      markdown: doc/shcore.md
     "shell32":
       markdown: doc/shell32.md
     "user32":
@@ -35,7 +37,7 @@ dartdoc:
     "examples":
       name: "Sample apps"
       markdown: doc/examples.md
-  categoryOrder: ["kernel32", "user32", "gdi32", "shell32", "ole32", "oleaut32", "comctl32", "comdlg32", "psapi", "advapi32", "bthprops", "powrprof", "dxva2", "com", "winrt", "examples"]
+  categoryOrder: ["kernel32", "user32", "gdi32", "shell32", "ole32", "oleaut32", "comctl32", "comdlg32", "shcore", "psapi", "advapi32", "bthprops", "powrprof", "dxva2", "com", "winrt", "examples"]
   showUndocumentedCategories: true
   ignore:
     - broken-link

@@ -8,8 +8,6 @@ import 'dart:io';
 
 import 'shared.dart';
 
-final prototypes = <String, TypeDef>{};
-
 void generateFfiFiles() {
   final libraries = prototypes.values.map((e) => e.dllLibrary).toSet().toList();
 

@@ -84,6 +84,8 @@ GetConsoleSelectionInfo, GetConsoleSelectionInfo, kernel32, "BOOL WINAPI GetCons
 GetConsoleTitleW, GetConsoleTitle, kernel32, "DWORD WINAPI GetConsoleTitle(\n  _Out_ LPTSTR lpConsoleTitle,\n  _In_  DWORD  nSize\n);", Uint32, int, 2, lpConsoleTitle, Pointer<Utf16>, Pointer<Utf16>, nSize, Uint32, int
 GetConsoleWindow, GetConsoleWindow, kernel32, "HWND WINAPI GetConsoleWindow(void);", IntPtr, int, 0
 GetDC, GetDC, user32, "HDC GetDC(\n  HWND hWnd\n);", IntPtr, int, 1, hwnd, IntPtr, int
+GetDpiForMonitor, GetDpiForMonitor, shcore, "HRESULT GetDpiForMonitor(\n  HMONITOR         hmonitor,\n  MONITOR_DPI_TYPE dpiType,\n  UINT             *dpiX,\n  UINT             *dpiY\n  );", IntPtr, int, 4, hMonitor, IntPtr, int, dpiType, Int32, int, dpiX, Pointer<Int32>, Pointer<Int32>, dpiY, Pointer<Int32>, Pointer<Int32>
+GetDpiForSystem, GetDpiForSystem, user32, "UINT GetDpiForSystem();", Int32, int, 0
 GetLastError, GetLastError, kernel32, "_Post_equals_last_error_ DWORD GetLastError();", Uint32, int, 0
 GetMessageW, GetMessage, user32, "BOOL GetMessageW(\n  LPMSG lpMsg,\n  HWND  hWnd,\n  UINT  wMsgFilterMin,\n  UINT  wMsgFilterMax\n);", Int32, int, 4, lpMsg, Pointer<MSG>, Pointer<MSG>, hWnd, IntPtr, int, wMsgFilterMin, Uint32, int, wMsgFilterMax, Uint32, int
 GetModuleBaseNameW, GetModuleBaseName, psapi, "DWORD GetModuleBaseNameW(\n  HANDLE  hProcess,\n  HMODULE hModule,\n  LPWSTR  lpBaseName,\n  DWORD   nSize\n);", Uint32, int, 4, hProcess, IntPtr, int, hModule, IntPtr, int, lpBaseName, Pointer<Utf16>, Pointer<Utf16>, nSize, Uint32, int
@@ -105,12 +107,14 @@ GetOpenFileNameW, GetOpenFileName, comdlg32, "BOOL GetOpenFileNameW(\n  LPOPENFI
 GetPhysicallyInstalledSystemMemory, GetPhysicallyInstalledSystemMemory, kernel32, "BOOL GetPhysicallyInstalledSystemMemory(\n  PULONGLONG TotalMemoryInKilobytes\n);", Int32, int, 1, TotalMemoryInKilobytes, Pointer<Uint64>, Pointer<Uint64>
 GetPhysicalMonitorsFromHMONITOR, GetPhysicalMonitorsFromHMONITOR, dxva2, "_BOOL GetPhysicalMonitorsFromHMONITOR(\n  HMONITOR           hMonitor,\n  DWORD              dwPhysicalMonitorArraySize,\n  LPPHYSICAL_MONITOR pPhysicalMonitorArray\n);", Int32, int, 3, hMonitor, IntPtr, int, dwPhysicalMonitorArraySize, Uint32, int, pPhysicalMonitorArray, Pointer, Pointer
 GetProcAddress, GetProcAddress, kernel32, "FARPROC GetProcAddress(\n  HMODULE hModule,\n  LPCSTR  lpProcName\n);", IntPtr, int, 2, hModule, IntPtr, int, lpProcName, Pointer<Uint8>, Pointer<Uint8>
+GetProcessDpiAwareness, GetProcessDpiAwareness, shcore, "HRESULT GetProcessDpiAwareness(\n  HANDLE                hprocess,\n  PROCESS_DPI_AWARENESS *value\n);", IntPtr, int, 2, hprocess, IntPtr, int, value, Pointer<Int32>, Pointer<Int32>
 GetProcessHeap, GetProcessHeap, kernel32, "HANDLE GetProcessHeap();", IntPtr, int, 0
 GetProductInfo, GetProductInfo, kernel32, "BOOL GetProductInfo(\n  DWORD  dwOSMajorVersion,\n  DWORD  dwOSMinorVersion,\n  DWORD  dwSpMajorVersion,\n  DWORD  dwSpMinorVersion,\n  PDWORD pdwReturnedProductType\n);", Int32, int, 5, dwOSMajorVersion, Uint32, int, dwOSMinorVersion, Uint32, int, dwSpMajorVersion, Uint32, int, dwSpMinorVersion, Uint32, int, pdwReturnedProductType, Pointer<Uint32>, Pointer<Uint32>
 GetSaveFileNameW, GetSaveFileName, comdlg32, "BOOL GetSaveFileNameW(\n  LPOPENFILENAMEW Arg1\n);", Int32, int, 1, arg1, Pointer<OPENFILENAME>, Pointer<OPENFILENAME>
 GetScrollInfo, GetScrollInfo, user32, "BOOL GetScrollInfo(\n  HWND         hwnd,\n  int          nBar,\n  LPSCROLLINFO lpsi\n);", Int32, int, 3, hwnd, IntPtr, int, nBar, Int32, int, lpsi, Pointer<SCROLLINFO>, Pointer<SCROLLINFO>
 GetStdHandle, GetStdHandle, kernel32, "HANDLE WINAPI GetStdHandle(\n  _In_ DWORD nStdHandle\n);", IntPtr, int, 1, nStdHandle, Uint32, int
 GetStockObject, GetStockObject, gdi32, "HGDIOBJ GetStockObject(\n  int i\n);", IntPtr, int, 1, i, Int32, int
+GetSystemDpiForProcess, GetSystemDpiForProcess, user32, "UINT GetSystemDpiForProcess(\n  HANDLE hProcess\n);", Uint32, int, 1, hProcess, IntPtr, int
 GetSystemPowerStatus, GetSystemPowerStatus, kernel32, "BOOL GetSystemPowerStatus(\n  LPSYSTEM_POWER_STATUS lpSystemPowerStatus\n);", Int32, int, 1, lpSystemPowerStatus, Pointer<SYSTEM_POWER_STATUS>, Pointer<SYSTEM_POWER_STATUS>
 GetSystemInfo, GetSystemInfo, kernel32, "void GetSystemInfo(\n  LPSYSTEM_INFO lpSystemInfo\n);", Void, void, 1, lpSystemInfo, Pointer<SYSTEM_INFO>, Pointer<SYSTEM_INFO>
 GetTempPathW, GetTempPath, kernel32, "DWORD GetTempPathW(\n  DWORD  nBufferLength,\n  LPWSTR lpBuffer\n);", Uint32, int, 2, nBufferLength, Uint32, int, lpBuffer, Pointer<Utf16>, Pointer<Utf16>
@@ -180,6 +184,7 @@ SetMonitorRedGreenOrBlueDrive, SetMonitorRedGreenOrBlueDrive, dxva2, "_BOOL SetM
 SetMonitorRedGreenOrBlueGain, SetMonitorRedGreenOrBlueGain, dxva2, "_BOOL SetMonitorRedGreenOrBlueGain(\n  HANDLE       hMonitor,\n  MC_GAIN_TYPE gtGainType,\n  DWORD        dwNewGain\n);", Int32, int, 3, hMonitor, IntPtr, int, gtGainType, Int32, int, dwNewGain, Uint32, int
 SetParent, SetParent, user32, "HWND SetParent(\n  HWND hWndChild,\n  HWND hWndNewParent\n);", IntPtr, int, 2, hWndChild, IntPtr, int, hWndNewParent, IntPtr, int
 SetScrollInfo, SetScrollInfo, user32, "int SetScrollInfo(\n  HWND          hwnd,\n  int           nBar,\n  LPCSCROLLINFO lpsi,\n  BOOL          redraw\n);", Int32, int, 4, hwnd, IntPtr, int, nBar, Int32, int, lpsi, Pointer<SCROLLINFO>, Pointer<SCROLLINFO>, redraw, Int32, int
+SetProcessDpiAwareness, SetProcessDpiAwareness, shcore, "HRESULT SetProcessDpiAwareness(\n  PROCESS_DPI_AWARENESS value\n);", IntPtr, int, 1, value, Int32, int
 SetTextColor, SetTextColor, gdi32, "COLORREF SetTextColor(\n  HDC      hdc,\n  COLORREF color\n);", Int32, int, 2, hdc, IntPtr, int, color, Int32, int
 SetTimer, SetTimer, user32, "UINT_PTR SetTimer(\n  HWND      hWnd,\n  UINT_PTR  nIDEvent,\n  UINT      uElapse,\n  TIMERPROC lpTimerFunc\n);", IntPtr, int, 4, hWnd, IntPtr, int, nIDEvent, IntPtr, int, uElapse, Uint32, int, lpTimerFunc, Pointer<NativeFunction>, Pointer<NativeFunction>
 SetViewportExtEx, SetViewportExtEx, gdi32, "BOOL SetViewportExtEx(\n  HDC    hdc,\n  int    x,\n  int    y,\n  LPSIZE lpsz\n);", Int32, int, 4, hdc, IntPtr, int, x, Int32, int, y, Int32, int, lpsz, Pointer<SIZE>, Pointer<SIZE>

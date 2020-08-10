@@ -235,6 +235,12 @@ final GetClientRect = _user32.lookupFunction<
 final GetDC = _user32.lookupFunction<IntPtr Function(IntPtr hwnd),
     int Function(int hwnd)>('GetDC');
 
+// UINT GetDpiForSystem();
+
+/// {@category user32}
+final GetDpiForSystem =
+    _user32.lookupFunction<Int32 Function(), int Function()>('GetDpiForSystem');
+
 // BOOL GetMessageW(
 //   LPMSG lpMsg,
 //   HWND  hWnd,
@@ -270,6 +276,15 @@ final GetScrollInfo = _user32.lookupFunction<
     Int32 Function(IntPtr hwnd, Int32 nBar, Pointer<SCROLLINFO> lpsi),
     int Function(
         int hwnd, int nBar, Pointer<SCROLLINFO> lpsi)>('GetScrollInfo');
+
+// UINT GetSystemDpiForProcess(
+//   HANDLE hProcess
+// );
+
+/// {@category user32}
+final GetSystemDpiForProcess = _user32.lookupFunction<
+    Uint32 Function(IntPtr hProcess),
+    int Function(int hProcess)>('GetSystemDpiForProcess');
 
 // BOOL InvalidateRect(
 //   HWND       hWnd,

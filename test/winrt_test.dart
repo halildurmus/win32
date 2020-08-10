@@ -19,7 +19,7 @@ void main() {
       final hr2 = RoInitialize(RO_INIT_TYPE.RO_INIT_MULTITHREADED);
       expect(hr2, equals(S_FALSE));
 
-      // balance out uninitialization
+      // Balance out uninitialization. This is deliberately called twice.
       RoUninitialize();
       RoUninitialize();
     });
