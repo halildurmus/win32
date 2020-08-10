@@ -43,7 +43,6 @@ void getPrototypes() {
 void getParams(String apiName) {
   String neutralApiName;
   if (apiName.endsWith('W')) {
-    // ignore: parameter_assignments
     neutralApiName = apiName.substring(0, apiName.length - 1);
   } else {
     neutralApiName = apiName;
@@ -137,11 +136,11 @@ void getLibraries() {
   }
 }
 
-Future<void> printCsv(String filename) async {
+void printCsv(String filename) {
   final csvFile = File(filename);
-  final writeHandle = csvFile.openWrite(mode: FileMode.append);
-  writeHandle.write(
-      'ApiName, NeutralApiName, DllLibrary, WindowsPrototype, ReturnNative, ReturnDart, ParamCount, Param1Native, Param1Dart');
+  final writeHandle = csvFile.openSync(mode: FileMode.write);
+  writeHandle.writeStringSync(
+      'ApiName, NeutralApiName, DllLibrary, WindowsPrototype, ReturnNative, ReturnDart, ParamCount, Param1Native, Param1Dart\n');
   for (final prototype in prototypes.keys) {
     final buffer = StringBuffer();
     final td = prototypes[prototype];
@@ -154,15 +153,15 @@ Future<void> printCsv(String filename) async {
           '$param, ${td.nativeParams[param]}, ${td.dartParams[param]}, ');
     }
     final str = buffer.toString();
-    writeHandle.write(str.substring(0, str.length - 2));
+    writeHandle.writeStringSync('${str.substring(0, str.length - 2)}\n');
   }
-  writeHandle.close();
-  await writeHandle.done;
+  writeHandle.closeSync();
 }
 
 void loadCsv() {
   final file = File('win32types_original.csv');
-  for (final line in file.readAsLinesSync().skip(1)) {
+  final lines = file.readAsLinesSync().skip(1);
+  for (final line in lines) {
     final fields = line.split(', ');
     final apiName = fields[0];
     final neutralApiName = fields[1];
@@ -175,7 +174,7 @@ void loadCsv() {
       // ignore: use_string_buffers
       prototype += ', ${fields[idx++]}';
     }
-    prototype.replaceAll('"', '');
+    prototype = prototype.replaceAll('"', '');
 
     prototypes[apiName] = TypeDef(prototype.split('\n'))
       ..neutralApiName = neutralApiName
@@ -196,14 +195,15 @@ void loadCsv() {
   }
 }
 
-void main() async {
+void main() {
   getPrototypes();
   getLibraries();
 
-  await printCsv('win32types_original.csv');
+  printCsv('win32types_original.csv');
 
   prototypes.clear();
   loadCsv();
+  print('${prototypes.length} entries written.');
 
-  await printCsv('win32types_loaded.csv');
+  printCsv('win32types_loaded.csv');
 }
