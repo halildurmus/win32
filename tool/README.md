@@ -15,6 +15,7 @@ files:
 |               | types and generates Dart representations of them. This      |
 |               | approach is fragile, but was an effective quick and dirty   |
 |               | solution.                                                   |
+|               |                                                             |
 | winmd         | Reads the ECMA-335 metadata for Windows Runtime types and   |
 |               | creates a Dart representation. Still very preliminary, but  |
 |               | used for some basic Windows Runtime metadata.               |
