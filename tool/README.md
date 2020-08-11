@@ -7,15 +7,14 @@ files:
 
 | Folder        | Description                                                 |
 |---------------|-------------------------------------------------------------|
-| win32         | Reads a CSV file containing metadata for classic C-style    |
+| win32         | Reads a CSV file containing metadata for classic C-style  
 |               | APIs, and generates both the Dart files (kernel32.dart      |
 |               | (etc.) and a set of basic verification tests for them.      |
-|---------------|-------------------------------------------------------------|
+|               |                                                             |
 | generate      | Reads IDL or C header fragments for COM and Windows Runtime |
 |               | types and generates Dart representations of them. This      |
 |               | approach is fragile, but was an effective quick and dirty   |
 |               | solution.                                                   |
-|---------------|-------------------------------------------------------------|
 | winmd         | Reads the ECMA-335 metadata for Windows Runtime types and   |
 |               | creates a Dart representation. Still very preliminary, but  |
 |               | used for some basic Windows Runtime metadata.               |
