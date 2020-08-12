@@ -65,26 +65,38 @@ class DrawEngine {
   }
 
   void drawText(String text, int x, int y) {
-    TextOut(hdc, x, y, TEXT(text), text.length);
+    final textPtr = TEXT(text);
+    TextOut(hdc, x, y, textPtr, text.length);
+    free(textPtr);
   }
 
   void drawScore(int score, int x, int y) {
     final scoreText = 'Score: $score';
+    final scoreTextPtr = TEXT(scoreText);
+
     SetBkMode(hdc, OPAQUE);
-    TextOut(hdc, x, y, TEXT(scoreText), scoreText.length);
+    TextOut(hdc, x, y, scoreTextPtr, scoreText.length);
     SetBkMode(hdc, TRANSPARENT);
+
+    free(scoreTextPtr);
   }
 
   void drawSpeed(int speed, int x, int y) {
     final speedText = 'Speed: $speed';
+    final speedTextPtr = TEXT(speedText);
+
     SetBkMode(hdc, OPAQUE);
-    TextOut(hdc, x, y, TEXT(speedText), speedText.length);
+    TextOut(hdc, x, y, speedTextPtr, speedText.length);
     SetBkMode(hdc, TRANSPARENT);
+
+    free(speedTextPtr);
   }
 
   void drawNextPiece(Piece piece, int x, int y) {
     const nextText = 'Next:';
-    TextOut(hdc, x, y + 5, TEXT(nextText), nextText.length);
+    final nextTextPtr = TEXT(nextText);
+
+    TextOut(hdc, x, y + 5, nextTextPtr, nextText.length);
     final color = piece.color;
 
     // Draw the piece in a 4x4 square area
@@ -97,5 +109,7 @@ class DrawEngine {
         }
       }
     }
+
+    free(nextTextPtr);
   }
 }
