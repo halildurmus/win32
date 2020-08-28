@@ -43,6 +43,10 @@ void main() {
       final function = ClosePseudoConsole;
       expect(function, isA<Function>());
     });
+    test('Can instantiate CreateConsoleScreenBuffer', () {
+      final function = CreateConsoleScreenBuffer;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate CreateFile', () {
       final function = CreateFile;
       expect(function, isA<Function>());
@@ -95,6 +99,10 @@ void main() {
       final function = FindVolumeClose;
       expect(function, isA<Function>());
     });
+    test('Can instantiate FlushConsoleInputBuffer', () {
+      final function = FlushConsoleInputBuffer;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate FormatMessage', () {
       final function = FormatMessage;
       expect(function, isA<Function>());
@@ -133,6 +141,10 @@ void main() {
     });
     test('Can instantiate GetConsoleWindow', () {
       final function = GetConsoleWindow;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate GetLargestConsoleWindowSize', () {
+      final function = GetLargestConsoleWindowSize;
       expect(function, isA<Function>());
     });
     test('Can instantiate GetLastError', () {
@@ -219,6 +231,10 @@ void main() {
       final function = QueryPerformanceFrequency;
       expect(function, isA<Function>());
     });
+    test('Can instantiate ReadConsole', () {
+      final function = ReadConsole;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate ReadFile', () {
       final function = ReadFile;
       expect(function, isA<Function>());
@@ -247,12 +263,20 @@ void main() {
       final function = SetConsoleCursorPosition;
       expect(function, isA<Function>());
     });
+    test('Can instantiate SetConsoleDisplayMode', () {
+      final function = SetConsoleDisplayMode;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate SetConsoleMode', () {
       final function = SetConsoleMode;
       expect(function, isA<Function>());
     });
     test('Can instantiate SetConsoleTextAttribute', () {
       final function = SetConsoleTextAttribute;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate SetConsoleWindowInfo', () {
+      final function = SetConsoleWindowInfo;
       expect(function, isA<Function>());
     });
     test('Can instantiate Sleep', () {
@@ -273,6 +297,10 @@ void main() {
     });
     test('Can instantiate VirtualFree', () {
       final function = VirtualFree;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate WriteConsole', () {
+      final function = WriteConsole;
       expect(function, isA<Function>());
     });
     test('Can instantiate WriteFile', () {
