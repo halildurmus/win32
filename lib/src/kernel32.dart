@@ -80,6 +80,29 @@ final ClosePseudoConsole = _kernel32.lookupFunction<
     Void Function(Pointer<IntPtr> hPC),
     void Function(Pointer<IntPtr> hPC)>('ClosePseudoConsole');
 
+// HANDLE WINAPI CreateConsoleScreenBuffer(
+//   _In_             DWORD               dwDesiredAccess,
+//   _In_             DWORD               dwShareMode,
+//   _In_opt_   const SECURITY_ATTRIBUTES *lpSecurityAttributes,
+//   _In_             DWORD               dwFlags,
+//   _Reserved_       LPVOID              lpScreenBufferData
+// );
+
+/// {@category kernel32}
+final CreateConsoleScreenBuffer = _kernel32.lookupFunction<
+    IntPtr Function(
+        Uint32 dwDesiredAccess,
+        Uint32 dwShareMode,
+        Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
+        Uint32 dwFlags,
+        Pointer lpScreenBufferData),
+    int Function(
+        int dwDesiredAccess,
+        int dwShareMode,
+        Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
+        int dwFlags,
+        Pointer lpScreenBufferData)>('CreateConsoleScreenBuffer');
+
 // HANDLE CreateFileW(
 //   LPCWSTR               lpFileName,
 //   DWORD                 dwDesiredAccess,
@@ -297,6 +320,15 @@ final FindVolumeClose = _kernel32.lookupFunction<
     Int32 Function(IntPtr hFindVolume),
     int Function(int hFindVolume)>('FindVolumeClose');
 
+// BOOL WINAPI FlushConsoleInputBuffer(
+//   _In_ HANDLE hConsoleInput
+// );
+
+/// {@category kernel32}
+final FlushConsoleInputBuffer = _kernel32.lookupFunction<
+    Int32 Function(IntPtr hConsoleInput),
+    int Function(int hConsoleInput)>('FlushConsoleInputBuffer');
+
 // DWORD FormatMessageW(
 //   DWORD   dwFlags,
 //   LPCVOID lpSource,
@@ -414,6 +446,15 @@ final GetConsoleTitle = _kernel32.lookupFunction<
 /// {@category kernel32}
 final GetConsoleWindow = _kernel32
     .lookupFunction<IntPtr Function(), int Function()>('GetConsoleWindow');
+
+// COORD WINAPI GetLargestConsoleWindowSize(
+//   _In_ HANDLE hConsoleOutput
+// );
+
+/// {@category kernel32}
+final GetLargestConsoleWindowSize = _kernel32.lookupFunction<
+    Int32 Function(IntPtr hConsoleOutput),
+    int Function(int hConsoleOutput)>('GetLargestConsoleWindowSize');
 
 // _Post_equals_last_error_ DWORD GetLastError();
 
@@ -642,6 +683,29 @@ final QueryPerformanceFrequency = _kernel32.lookupFunction<
     int Function(
         Pointer<Int64> lpPerformanceCount)>('QueryPerformanceFrequency');
 
+// BOOL WINAPI ReadConsole(
+//   _In_     HANDLE  hConsoleInput,
+//   _Out_    LPVOID  lpBuffer,
+//   _In_     DWORD   nNumberOfCharsToRead,
+//   _Out_    LPDWORD lpNumberOfCharsRead,
+//   _In_opt_ LPVOID  pInputControl
+// );
+
+/// {@category kernel32}
+final ReadConsole = _kernel32.lookupFunction<
+    Int32 Function(
+        IntPtr hConsoleInput,
+        Pointer lpBuffer,
+        Uint32 nNumberOfCharsToRead,
+        Pointer<Uint32> lpNumberOfCharsRead,
+        Pointer pInputControl),
+    int Function(
+        int hConsoleInput,
+        Pointer lpBuffer,
+        int nNumberOfCharsToRead,
+        Pointer<Uint32> lpNumberOfCharsRead,
+        Pointer pInputControl)>('ReadConsoleW');
+
 // BOOL ReadFile(
 //   HANDLE       hFile,
 //   LPVOID       lpBuffer,
@@ -748,6 +812,19 @@ final SetConsoleCursorPosition = _kernel32.lookupFunction<
     int Function(
         int hConsoleOutput, int dwCursorPosition)>('SetConsoleCursorPosition');
 
+// BOOL WINAPI SetConsoleDisplayMode(
+//   _In_      HANDLE hConsoleOutput,
+//   _In_      DWORD  dwFlags,
+//   _Out_opt_ PCOORD lpNewScreenBufferDimensions
+// );
+
+/// {@category kernel32}
+final SetConsoleDisplayMode = _kernel32.lookupFunction<
+    Int32 Function(IntPtr hConsoleOutput, Uint32 dwFlags,
+        Pointer<COORD> lpNewScreenBufferDimensions),
+    int Function(int hConsoleOutput, int dwFlags,
+        Pointer<COORD> lpNewScreenBufferDimensions)>('SetConsoleDisplayMode');
+
 // BOOL WINAPI SetConsoleMode(
 //   _In_ HANDLE hConsoleHandle,
 //   _In_ DWORD  dwMode
@@ -768,6 +845,19 @@ final SetConsoleTextAttribute = _kernel32.lookupFunction<
     Int32 Function(IntPtr hConsoleOutput, Uint16 wAttributes),
     int Function(
         int hConsoleOutput, int wAttributes)>('SetConsoleTextAttribute');
+
+// BOOL WINAPI SetConsoleWindowInfo(
+//   _In_       HANDLE     hConsoleOutput,
+//   _In_       BOOL       bAbsolute,
+//   _In_ const SMALL_RECT *lpConsoleWindow
+// );
+
+/// {@category kernel32}
+final SetConsoleWindowInfo = _kernel32.lookupFunction<
+    Int32 Function(IntPtr hConsoleOutput, Int32 bAbsolute,
+        Pointer<SMALL_RECT> lpConsoleWindow),
+    int Function(int hConsoleOutput, int bAbsolute,
+        Pointer<SMALL_RECT> lpConsoleWindow)>('SetConsoleWindowInfo');
 
 // void Sleep(
 //   DWORD dwMilliseconds
@@ -847,6 +937,29 @@ final VirtualFree = _kernel32.lookupFunction<
     Int32 Function(Pointer<Void> lpAddress, IntPtr dwSize, Uint32 dwFreeType),
     int Function(
         Pointer<Void> lpAddress, int dwSize, int dwFreeType)>('VirtualFree');
+
+// BOOL WINAPI WriteConsole(
+//   _In_             HANDLE  hConsoleOutput,
+//   _In_       const VOID    *lpBuffer,
+//   _In_             DWORD   nNumberOfCharsToWrite,
+//   _Out_opt_        LPDWORD lpNumberOfCharsWritten,
+//   _Reserved_       LPVOID  lpReserved
+// );
+
+/// {@category kernel32}
+final WriteConsole = _kernel32.lookupFunction<
+    Int32 Function(
+        IntPtr hConsoleOutput,
+        Pointer lpBuffer,
+        Uint32 nNumberOfCharsToWrite,
+        Pointer<Uint32> lpNumberOfCharsWritten,
+        Pointer lpReserved),
+    int Function(
+        int hConsoleOutput,
+        Pointer lpBuffer,
+        int nNumberOfCharsToWrite,
+        Pointer<Uint32> lpNumberOfCharsWritten,
+        Pointer lpReserved)>('WriteConsoleW');
 
 // BOOL WriteFile(
 //   HANDLE       hFile,
