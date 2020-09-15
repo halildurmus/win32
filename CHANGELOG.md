@@ -3,6 +3,7 @@
 - Changed how the C-style APIs are generated. This should result in far better
   code smarts in your editor, as well as major improvements to the
   auto-generated documentation.
+- Added many new APIs, including GetCurrentProcess and GetModuleFileName
 
 ## 1.6.10
 

@@ -143,12 +143,20 @@ void main() {
       final function = GetConsoleWindow;
       expect(function, isA<Function>());
     });
+    test('Can instantiate GetCurrentProcess', () {
+      final function = GetCurrentProcess;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate GetLargestConsoleWindowSize', () {
       final function = GetLargestConsoleWindowSize;
       expect(function, isA<Function>());
     });
     test('Can instantiate GetLastError', () {
       final function = GetLastError;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate GetModuleFileName', () {
+      final function = GetModuleFileName;
       expect(function, isA<Function>());
     });
     test('Can instantiate GetModuleHandle', () {

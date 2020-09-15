@@ -86,6 +86,7 @@ GetConsoleScreenBufferInfo, GetConsoleScreenBufferInfo, kernel32, "BOOL WINAPI G
 GetConsoleSelectionInfo, GetConsoleSelectionInfo, kernel32, "BOOL WINAPI GetConsoleSelectionInfo(\n  _Out_ PCONSOLE_SELECTION_INFO lpConsoleSelectionInfo\n);", Int32, int, 1, lpConsoleSelectionInfo, Pointer<CONSOLE_SELECTION_INFO>, Pointer<CONSOLE_SELECTION_INFO>
 GetConsoleTitleW, GetConsoleTitle, kernel32, "DWORD WINAPI GetConsoleTitle(\n  _Out_ LPTSTR lpConsoleTitle,\n  _In_  DWORD  nSize\n);", Uint32, int, 2, lpConsoleTitle, Pointer<Utf16>, Pointer<Utf16>, nSize, Uint32, int
 GetConsoleWindow, GetConsoleWindow, kernel32, "HWND WINAPI GetConsoleWindow(void);", IntPtr, int, 0
+GetCurrentProcess, GetCurrentProcess, kernel32, "HANDLE GetCurrentProcess();", IntPtr, int, 0
 GetDC, GetDC, user32, "HDC GetDC(\n  HWND hWnd\n);", IntPtr, int, 1, hwnd, IntPtr, int
 GetDpiForMonitor, GetDpiForMonitor, shcore, "HRESULT GetDpiForMonitor(\n  HMONITOR         hmonitor,\n  MONITOR_DPI_TYPE dpiType,\n  UINT             *dpiX,\n  UINT             *dpiY\n  );", IntPtr, int, 4, hMonitor, IntPtr, int, dpiType, Int32, int, dpiX, Pointer<Int32>, Pointer<Int32>, dpiY, Pointer<Int32>, Pointer<Int32>
 GetDpiForSystem, GetDpiForSystem, user32, "UINT GetDpiForSystem();", Int32, int, 0
@@ -94,6 +95,7 @@ GetLargestConsoleWindowSize, GetLargestConsoleWindowSize, kernel32, "COORD WINAP
 GetLastError, GetLastError, kernel32, "_Post_equals_last_error_ DWORD GetLastError();", Uint32, int, 0
 GetMessageW, GetMessage, user32, "BOOL GetMessageW(\n  LPMSG lpMsg,\n  HWND  hWnd,\n  UINT  wMsgFilterMin,\n  UINT  wMsgFilterMax\n);", Int32, int, 4, lpMsg, Pointer<MSG>, Pointer<MSG>, hWnd, IntPtr, int, wMsgFilterMin, Uint32, int, wMsgFilterMax, Uint32, int
 GetModuleBaseNameW, GetModuleBaseName, psapi, "DWORD GetModuleBaseNameW(\n  HANDLE  hProcess,\n  HMODULE hModule,\n  LPWSTR  lpBaseName,\n  DWORD   nSize\n);", Uint32, int, 4, hProcess, IntPtr, int, hModule, IntPtr, int, lpBaseName, Pointer<Utf16>, Pointer<Utf16>, nSize, Uint32, int
+GetModuleFileNameW, GetModuleFileName, kernel32, "DWORD GetModuleFileNameW(\n  HMODULE hModule,\n  LPWSTR  lpFilename,\n  DWORD   nSize\n);", Int32, int, 3, hModule, IntPtr, int, lpFilename, Pointer<Utf16>, Pointer<Utf16>, nSize, Uint32, int
 GetModuleFileNameExW, GetModuleFileNameEx, psapi, "DWORD GetModuleFileNameExW(\n  HANDLE  hProcess,\n  HMODULE hModule,\n  LPWSTR  lpFilename,\n  DWORD   nSize\n);", Uint32, int, 4, hProcess, IntPtr, int, hModule, IntPtr, int, lpFilename, Pointer<Utf16>, Pointer<Utf16>, nSize, Uint32, int
 GetModuleHandleW, GetModuleHandle, kernel32, "HMODULE GetModuleHandleW(\n  LPCWSTR lpModuleName\n);", IntPtr, int, 1, lpModuleName, Pointer<Utf16>, Pointer<Utf16>
 GetMonitorBrightness, GetMonitorBrightness, dxva2, "_BOOL GetMonitorBrightness(\n  HANDLE  hMonitor,\n  LPDWORD pdwMinimumBrightness,\n  LPDWORD pdwCurrentBrightness,\n  LPDWORD pdwMaximumBrightness\n);", Int32, int, 4, hMonitor, IntPtr, int, pdwMinimumBrightness, Pointer<Uint32>, Pointer<Uint32>, pdwCurrentBrightness, Pointer<Uint32>, Pointer<Uint32>, pdwMaximumBrightness, Pointer<Uint32>, Pointer<Uint32>
