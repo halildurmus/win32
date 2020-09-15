@@ -447,6 +447,12 @@ final GetConsoleTitle = _kernel32.lookupFunction<
 final GetConsoleWindow = _kernel32
     .lookupFunction<IntPtr Function(), int Function()>('GetConsoleWindow');
 
+// HANDLE GetCurrentProcess();
+
+/// {@category kernel32}
+final GetCurrentProcess = _kernel32
+    .lookupFunction<IntPtr Function(), int Function()>('GetCurrentProcess');
+
 // COORD WINAPI GetLargestConsoleWindowSize(
 //   _In_ HANDLE hConsoleOutput
 // );
@@ -461,6 +467,18 @@ final GetLargestConsoleWindowSize = _kernel32.lookupFunction<
 /// {@category kernel32}
 final GetLastError =
     _kernel32.lookupFunction<Uint32 Function(), int Function()>('GetLastError');
+
+// DWORD GetModuleFileNameW(
+//   HMODULE hModule,
+//   LPWSTR  lpFilename,
+//   DWORD   nSize
+// );
+
+/// {@category kernel32}
+final GetModuleFileName = _kernel32.lookupFunction<
+    Int32 Function(IntPtr hModule, Pointer<Utf16> lpFilename, Uint32 nSize),
+    int Function(int hModule, Pointer<Utf16> lpFilename,
+        int nSize)>('GetModuleFileNameW');
 
 // HMODULE GetModuleHandleW(
 //   LPCWSTR lpModuleName

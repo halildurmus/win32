@@ -24,4 +24,13 @@ void main() {
     expect(pGetNativeSystemInfo, isNonZero);
     free(ansi);
   });
+
+  test('Successful GetCurrentProcess', () {
+    // In all current versions of Windows, this returns -1. In theory, a future
+    // version of Windows could change this value. This is a pseudo-handle, and
+    // so CloseHandle is not required.
+    final hProcess = GetCurrentProcess();
+
+    expect(hProcess, equals(-1));
+  });
 }

@@ -7,7 +7,7 @@ Rough notes on steps I take to publish a new version of win32:
    automated tests are still working. Optionally, also run it from Windows 7 to
    make sure nothing downlevel has failed. Some tests may fail or be skipped
    from a SSH window (e.g. credential saving, console buffer info); this is
-   expected.
+   expected. (Note: generate.cmd now runs this automatically.)
 
 3. Run `dartdoc` from the root of the repo and make sure that it completes
    successfully.
