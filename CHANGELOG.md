@@ -1,3 +1,7 @@
+## 1.7.1
+
+- Add version information APIs
+
 ## 1.7.0
 
 - Changed how the C-style APIs are generated. This should result in far better

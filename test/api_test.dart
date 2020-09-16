@@ -1005,6 +1005,41 @@ void main() {
     });
   });
 
+  group('Test version functions', () {
+    test('Can instantiate GetFileVersionInfoEx', () {
+      final function = GetFileVersionInfoEx;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate GetFileVersionInfoSizeEx', () {
+      final function = GetFileVersionInfoSizeEx;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate GetFileVersionInfoSize', () {
+      final function = GetFileVersionInfoSize;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate GetFileVersionInfo', () {
+      final function = GetFileVersionInfo;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate VerFindFile', () {
+      final function = VerFindFile;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate VerInstallFile', () {
+      final function = VerInstallFile;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate VerLanguageName', () {
+      final function = VerLanguageName;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate VerQueryValue', () {
+      final function = VerQueryValue;
+      expect(function, isA<Function>());
+    });
+  });
+
   group('Test oleaut32 functions', () {
     test('Can instantiate VariantClear', () {
       final function = VariantClear;

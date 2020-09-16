@@ -105,6 +105,7 @@ export 'src/psapi.dart';
 export 'src/shcore.dart';
 export 'src/shell32.dart';
 export 'src/user32.dart';
+export 'src/version.dart';
 
 // COM foundational exports
 export 'src/com/combase.dart';

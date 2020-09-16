@@ -3699,6 +3699,26 @@ const CSIDL_FLAG_PER_USER_INIT = 0x0800;
 /// @nodoc
 const CSIDL_FLAG_MASK = 0xFF00;
 
+// Version info constants
+
+/// @nodoc
+const FILE_VER_GET_LOCALISED = 0x01;
+
+/// @nodoc
+const FILE_VER_GET_NEUTRAL = 0x02;
+
+/// @nodoc
+const FILE_VER_GET_PREFETCHED = 0x04;
+
+/// @nodoc
+const VFFF_ISSHAREDFILE = 0x0001;
+
+/// @nodoc
+const VIFF_FORCEINSTALL = 0x0001;
+
+/// @nodoc
+const VIFF_DONTDELETEOLD = 0x0002;
+
 // Process constants
 
 /// @nodoc
