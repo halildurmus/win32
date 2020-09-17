@@ -2680,6 +2680,70 @@ class COR_FIELD_OFFSET extends Struct {
     ..ulOffset = 0;
 }
 
+// typedef struct tagVS_FIXEDFILEINFO
+// {
+//     DWORD   dwSignature;
+//     DWORD   dwStrucVersion;
+//     DWORD   dwFileVersionMS;
+//     DWORD   dwFileVersionLS;
+//     DWORD   dwProductVersionMS;
+//     DWORD   dwProductVersionLS;
+//     DWORD   dwFileFlagsMask;
+//     DWORD   dwFileFlags;
+//     DWORD   dwFileOS;
+//     DWORD   dwFileType;
+//     DWORD   dwFileSubtype;
+//     DWORD   dwFileDateMS;
+//     DWORD   dwFileDateLS;
+// } VS_FIXEDFILEINFO;
+
+/// VS_FIXEDFILEINFO
+///
+/// {@category Struct}
+class VS_FIXEDFILEINFO extends Struct {
+  @Uint32()
+  int dwSignature;
+  @Uint32()
+  int dwStrucVersion;
+  @Uint32()
+  int dwFileVersionMS;
+  @Uint32()
+  int dwFileVersionLS;
+  @Uint32()
+  int dwProductVersionMS;
+  @Uint32()
+  int dwProductVersionLS;
+  @Uint32()
+  int dwFileFlagsMask;
+  @Uint32()
+  int dwFileFlags;
+  @Uint32()
+  int dwFileOS;
+  @Uint32()
+  int dwFileType;
+  @Uint32()
+  int dwFileSubtype;
+  @Uint32()
+  int dwFileDateMS;
+  @Uint32()
+  int dwFileDateLS;
+
+  factory VS_FIXEDFILEINFO.allocate() => allocate<VS_FIXEDFILEINFO>().ref
+    ..dwSignature = 0
+    ..dwStrucVersion = 0
+    ..dwFileVersionMS = 0
+    ..dwFileVersionLS = 0
+    ..dwProductVersionMS = 0
+    ..dwProductVersionLS = 0
+    ..dwFileFlagsMask = 0
+    ..dwFileFlags = 0
+    ..dwFileOS = 0
+    ..dwFileType = 0
+    ..dwFileSubtype = 0
+    ..dwFileDateMS = 0
+    ..dwFileDateLS = 0;
+}
+
 // UNIMPLEMENTED CLASSES THAT ARE INCLUDED SO THAT COM OBJECTS CAN BE GENERATED
 
 /// {@category Struct}

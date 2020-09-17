@@ -28,9 +28,9 @@ final _version = DynamicLibrary.open('version.dll');
 /// {@category version}
 final GetFileVersionInfoEx = _version.lookupFunction<
     Int32 Function(Uint32 dwFlags, Pointer<Utf16> lpwstrFilename,
-        Uint32 dwHandle, Uint32 dwLen, Pointer<Void> lpData),
+        Uint32 dwHandle, Uint32 dwLen, Pointer lpData),
     int Function(int dwFlags, Pointer<Utf16> lpwstrFilename, int dwHandle,
-        int dwLen, Pointer<Void> lpData)>('GetFileVersionInfoExW');
+        int dwLen, Pointer lpData)>('GetFileVersionInfoExW');
 
 // DWORD GetFileVersionInfoSizeExW(
 //   DWORD   dwFlags,
@@ -66,9 +66,9 @@ final GetFileVersionInfoSize = _version.lookupFunction<
 /// {@category version}
 final GetFileVersionInfo = _version.lookupFunction<
     Int32 Function(Pointer<Utf16> lptstrFilename, Uint32 dwHandle, Uint32 dwLen,
-        Pointer<Void> lpData),
+        Pointer lpData),
     int Function(Pointer<Utf16> lptstrFilename, int dwHandle, int dwLen,
-        Pointer<Void> lpData)>('GetFileVersionInfoW');
+        Pointer lpData)>('GetFileVersionInfoW');
 
 // DWORD VerFindFileW(
 //   DWORD   uFlags,
@@ -155,7 +155,7 @@ final VerLanguageName = _version.lookupFunction<
 
 /// {@category version}
 final VerQueryValue = _version.lookupFunction<
-    Int32 Function(Pointer<Void> pBlock, Pointer<Utf16> lpSubBlock,
+    Int32 Function(Pointer pBlock, Pointer<Utf16> lpSubBlock,
         Pointer<IntPtr> lplpBuffer, Pointer<Uint32> puLen),
-    int Function(Pointer<Void> pBlock, Pointer<Utf16> lpSubBlock,
+    int Function(Pointer pBlock, Pointer<Utf16> lpSubBlock,
         Pointer<IntPtr> lplpBuffer, Pointer<Uint32> puLen)>('VerQueryValueW');

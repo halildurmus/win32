@@ -1,6 +1,6 @@
 ## 1.7.1
 
-- Add version information APIs
+- Add version information APIs and example.
 
 ## 1.7.0
 
