@@ -99,6 +99,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `dialogshow.dart`  | Creates a common item dialog (file picker) using COM      |
 | `wmi.dart`         | Using WMI from COM to retrieve device/OS information      |
 | `sysinfo.dart`     | Examples of getting device information from native C APIs |
+| `filever.dart`     | Getting file version information from the file resource   |
 | `manifest\`        | Demonstrates the use of app manifests for compiled apps   |
 | `winmd.dart`       | Interrogate Windows Runtime types                         |
 | `credentials.dart` | Adds a credential to the store and retrieves it           |
