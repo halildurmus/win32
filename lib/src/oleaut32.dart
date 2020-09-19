@@ -17,10 +17,13 @@ import 'structs.dart';
 
 final _oleaut32 = DynamicLibrary.open('oleaut32.dll');
 
-// HRESULT VariantClear(
-//   VARIANTARG *pvarg
-// );
-
+/// Clears a variant.
+///
+/// ```c
+/// HRESULT VariantClear(
+///   VARIANTARG *pvarg
+/// );
+/// ```
 /// {@category oleaut32}
 final VariantClear = _oleaut32.lookupFunction<Int32 Function(Pointer pvarg),
     int Function(Pointer pvarg)>('VariantClear');

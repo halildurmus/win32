@@ -79,12 +79,12 @@ void main() {
       final function = EnumResourceTypes;
       expect(function, isA<Function>());
     });
-    test('Can instantiate FillConsoleOutputCharacter', () {
-      final function = FillConsoleOutputCharacter;
-      expect(function, isA<Function>());
-    });
     test('Can instantiate FillConsoleOutputAttribute', () {
       final function = FillConsoleOutputAttribute;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate FillConsoleOutputCharacter', () {
+      final function = FillConsoleOutputCharacter;
       expect(function, isA<Function>());
     });
     test('Can instantiate FindFirstVolume', () {
@@ -163,6 +163,10 @@ void main() {
       final function = GetModuleHandle;
       expect(function, isA<Function>());
     });
+    test('Can instantiate GetNativeSystemInfo', () {
+      final function = GetNativeSystemInfo;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate GetPhysicallyInstalledSystemMemory', () {
       final function = GetPhysicallyInstalledSystemMemory;
       expect(function, isA<Function>());
@@ -183,12 +187,12 @@ void main() {
       final function = GetStdHandle;
       expect(function, isA<Function>());
     });
-    test('Can instantiate GetSystemPowerStatus', () {
-      final function = GetSystemPowerStatus;
-      expect(function, isA<Function>());
-    });
     test('Can instantiate GetSystemInfo', () {
       final function = GetSystemInfo;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate GetSystemPowerStatus', () {
+      final function = GetSystemPowerStatus;
       expect(function, isA<Function>());
     });
     test('Can instantiate GetTempPath', () {
@@ -285,6 +289,10 @@ void main() {
     });
     test('Can instantiate SetConsoleWindowInfo', () {
       final function = SetConsoleWindowInfo;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate SetStdHandle', () {
+      final function = SetStdHandle;
       expect(function, isA<Function>());
     });
     test('Can instantiate Sleep', () {
@@ -438,16 +446,16 @@ void main() {
       final function = GetWindow;
       expect(function, isA<Function>());
     });
-    test('Can instantiate InvalidateRect', () {
-      final function = InvalidateRect;
+    test('Can instantiate GetWindowTextLength', () {
+      final function = GetWindowTextLength;
       expect(function, isA<Function>());
     });
     test('Can instantiate GetWindowText', () {
       final function = GetWindowText;
       expect(function, isA<Function>());
     });
-    test('Can instantiate GetWindowTextLength', () {
-      final function = GetWindowTextLength;
+    test('Can instantiate InvalidateRect', () {
+      final function = InvalidateRect;
       expect(function, isA<Function>());
     });
     test('Can instantiate IsClipboardFormatAvailable', () {
@@ -472,6 +480,10 @@ void main() {
     });
     test('Can instantiate LoadIcon', () {
       final function = LoadIcon;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate LoadImage', () {
+      final function = LoadImage;
       expect(function, isA<Function>());
     });
     test('Can instantiate LockWorkStation', () {
@@ -500,6 +512,10 @@ void main() {
     });
     test('Can instantiate PeekMessage', () {
       final function = PeekMessage;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate PostQuitMessage', () {
+      final function = PostQuitMessage;
       expect(function, isA<Function>());
     });
     test('Can instantiate RegisterClass', () {
@@ -534,12 +550,12 @@ void main() {
       final function = SetParent;
       expect(function, isA<Function>());
     });
-    test('Can instantiate SetScrollInfo', () {
-      final function = SetScrollInfo;
-      expect(function, isA<Function>());
-    });
     test('Can instantiate SetProcessDPIAware', () {
       final function = SetProcessDPIAware;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate SetScrollInfo', () {
+      final function = SetScrollInfo;
       expect(function, isA<Function>());
     });
     test('Can instantiate SetTimer', () {
@@ -576,10 +592,6 @@ void main() {
     });
     test('Can instantiate TranslateMessage', () {
       final function = TranslateMessage;
-      expect(function, isA<Function>());
-    });
-    test('Can instantiate PostQuitMessage', () {
-      final function = PostQuitMessage;
       expect(function, isA<Function>());
     });
     test('Can instantiate UpdateWindow', () {
@@ -956,12 +968,12 @@ void main() {
       final function = ShellAbout;
       expect(function, isA<Function>());
     });
-    test('Can instantiate ShellExecute', () {
-      final function = ShellExecute;
-      expect(function, isA<Function>());
-    });
     test('Can instantiate ShellExecuteEx', () {
       final function = ShellExecuteEx;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate ShellExecute', () {
+      final function = ShellExecute;
       expect(function, isA<Function>());
     });
     test('Can instantiate SHEmptyRecycleBin', () {

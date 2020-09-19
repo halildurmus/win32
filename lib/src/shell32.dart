@@ -17,12 +17,16 @@ import 'structs.dart';
 
 final _shell32 = DynamicLibrary.open('shell32.dll');
 
-// HINSTANCE FindExecutableW(
-//   LPCWSTR lpFile,
-//   LPCWSTR lpDirectory,
-//   LPWSTR  lpResult
-// );
-
+/// Retrieves the name of and handle to the executable (.exe) file
+/// associated with a specific document file.
+///
+/// ```c
+/// HINSTANCE FindExecutableW(
+///   LPCWSTR lpFile,
+///   LPCWSTR lpDirectory,
+///   LPWSTR  lpResult
+/// );
+/// ```
 /// {@category shell32}
 final FindExecutable = _shell32.lookupFunction<
     IntPtr Function(Pointer<Utf16> lpFile, Pointer<Utf16> lpDirectory,
@@ -30,13 +34,16 @@ final FindExecutable = _shell32.lookupFunction<
     int Function(Pointer<Utf16> lpFile, Pointer<Utf16> lpDirectory,
         Pointer<Utf16> lpResult)>('FindExecutableW');
 
-// INT ShellAboutW(
-//   HWND    hWnd,
-//   LPCWSTR szApp,
-//   LPCWSTR szOtherStuff,
-//   HICON   hIcon
-// );
-
+/// Displays a ShellAbout dialog box.
+///
+/// ```c
+/// INT ShellAboutW(
+///   HWND    hWnd,
+///   LPCWSTR szApp,
+///   LPCWSTR szOtherStuff,
+///   HICON   hIcon
+/// );
+/// ```
 /// {@category shell32}
 final ShellAbout = _shell32.lookupFunction<
     Int32 Function(IntPtr hWnd, Pointer<Utf16> szApp,
@@ -44,15 +51,30 @@ final ShellAbout = _shell32.lookupFunction<
     int Function(int hWnd, Pointer<Utf16> szApp, Pointer<Utf16> szOtherStuff,
         int hIcon)>('ShellAboutW');
 
-// HINSTANCE ShellExecuteW(
-//   HWND    hwnd,
-//   LPCWSTR lpOperation,
-//   LPCWSTR lpFile,
-//   LPCWSTR lpParameters,
-//   LPCWSTR lpDirectory,
-//   INT     nShowCmd
-// );
+/// Performs an operation on a specified file.
+///
+/// ```c
+/// BOOL ShellExecuteExW(
+///   SHELLEXECUTEINFOW *pExecInfo
+/// );
+/// ```
+/// {@category shell32}
+final ShellExecuteEx = _shell32.lookupFunction<
+    Int32 Function(Pointer<SHELLEXECUTEINFO> pExecuteInfo),
+    int Function(Pointer<SHELLEXECUTEINFO> pExecuteInfo)>('ShellExecuteExW');
 
+/// Performs an operation on a specified file.
+///
+/// ```c
+/// HINSTANCE ShellExecuteW(
+///   HWND    hwnd,
+///   LPCWSTR lpOperation,
+///   LPCWSTR lpFile,
+///   LPCWSTR lpParameters,
+///   LPCWSTR lpDirectory,
+///   INT     nShowCmd
+/// );
+/// ```
 /// {@category shell32}
 final ShellExecute = _shell32.lookupFunction<
     IntPtr Function(
@@ -70,34 +92,31 @@ final ShellExecute = _shell32.lookupFunction<
         Pointer<Utf16> lpDirectory,
         int nShowCmd)>('ShellExecuteW');
 
-// BOOL ShellExecuteExW(
-//   SHELLEXECUTEINFOW *pExecInfo
-// );
-
-/// {@category shell32}
-final ShellExecuteEx = _shell32.lookupFunction<
-    Int32 Function(Pointer<SHELLEXECUTEINFO> pExecuteInfo),
-    int Function(Pointer<SHELLEXECUTEINFO> pExecuteInfo)>('ShellExecuteExW');
-
-// SHSTDAPI SHEmptyRecycleBinW(
-//   HWND    hwnd,
-//   LPCWSTR pszRootPath,
-//   DWORD   dwFlags
-// );
-
+/// Empties the Recycle Bin on the specified drive.
+///
+/// ```c
+/// SHSTDAPI SHEmptyRecycleBinW(
+///   HWND    hwnd,
+///   LPCWSTR pszRootPath,
+///   DWORD   dwFlags
+/// );
+/// ```
 /// {@category shell32}
 final SHEmptyRecycleBin = _shell32.lookupFunction<
     Int32 Function(IntPtr hwnd, Pointer<Utf16> pszRootPath, Uint32 dwFlags),
     int Function(int hwnd, Pointer<Utf16> pszRootPath,
         int dwFlags)>('SHEmptyRecycleBinW');
 
-// BOOL SHGetDiskFreeSpaceExW(
-//   LPCWSTR        pszDirectoryName,
-//   ULARGE_INTEGER *pulFreeBytesAvailableToCaller,
-//   ULARGE_INTEGER *pulTotalNumberOfBytes,
-//   ULARGE_INTEGER *pulTotalNumberOfFreeBytes
-// );
-
+/// Retrieves disk space information for a disk volume.
+///
+/// ```c
+/// BOOL SHGetDiskFreeSpaceExW(
+///   LPCWSTR        pszDirectoryName,
+///   ULARGE_INTEGER *pulFreeBytesAvailableToCaller,
+///   ULARGE_INTEGER *pulTotalNumberOfBytes,
+///   ULARGE_INTEGER *pulTotalNumberOfFreeBytes
+/// );
+/// ```
 /// {@category shell32}
 final SHGetDiskFreeSpaceEx = _shell32.lookupFunction<
     Int32 Function(
@@ -111,25 +130,31 @@ final SHGetDiskFreeSpaceEx = _shell32.lookupFunction<
         Pointer<Uint64> pulTotalNumberOfBytes,
         Pointer<Uint64> pulTotalNumberOfFreeBytes)>('SHGetDiskFreeSpaceExW');
 
-// HRESULT SHGetDriveMedia(
-//   PCWSTR pszDrive,
-//   DWORD  *pdwMediaContent
-// );
-
+/// Returns the type of media that is in the given drive.
+///
+/// ```c
+/// HRESULT SHGetDriveMedia(
+///   PCWSTR pszDrive,
+///   DWORD  *pdwMediaContent
+/// );
+/// ```
 /// {@category shell32}
 final SHGetDriveMedia = _shell32.lookupFunction<
     Int32 Function(Pointer<Utf16> pszDrive, Pointer<Uint32> pdwMediaContent),
     int Function(Pointer<Utf16> pszDrive,
         Pointer<Uint32> pdwMediaContent)>('SHGetDriveMedia');
 
-// SHFOLDERAPI SHGetFolderPathW(
-//   HWND   hwnd,
-//   int    csidl,
-//   HANDLE hToken,
-//   DWORD  dwFlags,
-//   LPWSTR pszPath
-// );
-
+/// Gets the path of a folder identified by a CSIDL value.
+///
+/// ```c
+/// SHFOLDERAPI SHGetFolderPathW(
+///   HWND   hwnd,
+///   int    csidl,
+///   HANDLE hToken,
+///   DWORD  dwFlags,
+///   LPWSTR pszPath
+/// );
+/// ```
 /// {@category shell32}
 final SHGetFolderPath = _shell32.lookupFunction<
     Int32 Function(IntPtr hwnd, Int32 csidl, IntPtr hToken, Uint32 dwFlags,
@@ -137,13 +162,17 @@ final SHGetFolderPath = _shell32.lookupFunction<
     int Function(int hwnd, int csidl, int hToken, int dwFlags,
         Pointer<Utf16> pszPath)>('SHGetFolderPathW');
 
-// HRESULT SHGetKnownFolderPath(
-//   REFKNOWNFOLDERID rfid,
-//   DWORD            dwFlags,
-//   HANDLE           hToken,
-//   PWSTR            *ppszPath
-// );
-
+/// Retrieves the full path of a known folder identified by the folder's
+/// KNOWNFOLDERID.
+///
+/// ```c
+/// HRESULT SHGetKnownFolderPath(
+///   REFKNOWNFOLDERID rfid,
+///   DWORD            dwFlags,
+///   HANDLE           hToken,
+///   PWSTR            *ppszPath
+/// );
+/// ```
 /// {@category shell32}
 final SHGetKnownFolderPath = _shell32.lookupFunction<
     Int32 Function(Pointer<GUID> rfid, Uint32 dwFlags, IntPtr hToken,
@@ -151,11 +180,15 @@ final SHGetKnownFolderPath = _shell32.lookupFunction<
     int Function(Pointer<GUID> rfid, int dwFlags, int hToken,
         Pointer<IntPtr> ppszPath)>('SHGetKnownFolderPath');
 
-// SHSTDAPI SHQueryRecycleBinW(
-//   LPCWSTR         pszRootPath,
-//   LPSHQUERYRBINFO pSHQueryRBInfo
-// );
-
+/// Retrieves the size of the Recycle Bin and the number of items in it,
+/// for a specified drive.
+///
+/// ```c
+/// SHSTDAPI SHQueryRecycleBinW(
+///   LPCWSTR         pszRootPath,
+///   LPSHQUERYRBINFO pSHQueryRBInfo
+/// );
+/// ```
 /// {@category shell32}
 final SHQueryRecycleBin = _shell32.lookupFunction<
     Int32 Function(

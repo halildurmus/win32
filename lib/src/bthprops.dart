@@ -17,14 +17,20 @@ import 'structs.dart';
 
 final _bthprops = DynamicLibrary.open('bthprops.cpl');
 
-// DWORD BluetoothAuthenticateDeviceEx(
-//   HWND                        hwndParentIn,
-//   HANDLE                      hRadioIn,
-//   BLUETOOTH_DEVICE_INFO       *pbtdiInout,
-//   PBLUETOOTH_OOB_DATA_INFO    pbtOobData,
-//   AUTHENTICATION_REQUIREMENTS authenticationRequirement
-// );
-
+/// The BluetoothAuthenticateDeviceEx function sends an authentication
+/// request to a remote Bluetooth device. Additionally, this function
+/// allows for out-of-band data to be passed into the function call for the
+/// device being authenticated.
+///
+/// ```c
+/// DWORD BluetoothAuthenticateDeviceEx(
+///   HWND                        hwndParentIn,
+///   HANDLE                      hRadioIn,
+///   BLUETOOTH_DEVICE_INFO       *pbtdiInout,
+///   PBLUETOOTH_OOB_DATA_INFO    pbtOobData,
+///   AUTHENTICATION_REQUIREMENTS authenticationRequirement
+/// );
+/// ```
 /// {@category bthprops}
 final BluetoothAuthenticateDeviceEx = _bthprops.lookupFunction<
     Uint32 Function(
@@ -40,20 +46,28 @@ final BluetoothAuthenticateDeviceEx = _bthprops.lookupFunction<
         int pbtOobData,
         int authenticationRequirement)>('BluetoothAuthenticateDeviceEx');
 
-// BOOL BluetoothFindDeviceClose(
-//   HBLUETOOTH_DEVICE_FIND hFind
-// );
-
+/// The BluetoothFindDeviceClose function closes an enumeration handle
+/// associated with a device query.
+///
+/// ```c
+/// BOOL BluetoothFindDeviceClose(
+///   HBLUETOOTH_DEVICE_FIND hFind
+/// );
+/// ```
 /// {@category bthprops}
 final BluetoothFindDeviceClose = _bthprops.lookupFunction<
     Int32 Function(IntPtr hFind),
     int Function(int hFind)>('BluetoothFindDeviceClose');
 
-// HBLUETOOTH_DEVICE_FIND BluetoothFindFirstDevice(
-//   const BLUETOOTH_DEVICE_SEARCH_PARAMS *pbtsp,
-//   BLUETOOTH_DEVICE_INFO                *pbtdi
-// );
-
+/// The BluetoothFindFirstDevice function begins the enumeration Bluetooth
+/// devices.
+///
+/// ```c
+/// HBLUETOOTH_DEVICE_FIND BluetoothFindFirstDevice(
+///   const BLUETOOTH_DEVICE_SEARCH_PARAMS *pbtsp,
+///   BLUETOOTH_DEVICE_INFO                *pbtdi
+/// );
+/// ```
 /// {@category bthprops}
 final BluetoothFindFirstDevice = _bthprops.lookupFunction<
     Int32 Function(Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp,
@@ -61,11 +75,15 @@ final BluetoothFindFirstDevice = _bthprops.lookupFunction<
     int Function(Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp,
         Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)>('BluetoothFindFirstDevice');
 
-// HBLUETOOTH_RADIO_FIND BluetoothFindFirstRadio(
-//   const BLUETOOTH_FIND_RADIO_PARAMS *pbtfrp,
-//   HANDLE                            *phRadio
-// );
-
+/// The BluetoothFindFirstRadio function begins the enumeration of local
+/// Bluetooth radios.
+///
+/// ```c
+/// HBLUETOOTH_RADIO_FIND BluetoothFindFirstRadio(
+///   const BLUETOOTH_FIND_RADIO_PARAMS *pbtfrp,
+///   HANDLE                            *phRadio
+/// );
+/// ```
 /// {@category bthprops}
 final BluetoothFindFirstRadio = _bthprops.lookupFunction<
     IntPtr Function(
@@ -73,58 +91,80 @@ final BluetoothFindFirstRadio = _bthprops.lookupFunction<
     int Function(Pointer<BLUETOOTH_FIND_RADIO_PARAMS> pbtfrp,
         Pointer<IntPtr> phRadio)>('BluetoothFindFirstRadio');
 
-// BOOL BluetoothFindNextDevice(
-//   HBLUETOOTH_DEVICE_FIND hFind,
-//   BLUETOOTH_DEVICE_INFO  *pbtdi
-// );
-
+/// The BluetoothFindNextDevice function finds the next Bluetooth device.
+///
+/// ```c
+/// BOOL BluetoothFindNextDevice(
+///   HBLUETOOTH_DEVICE_FIND hFind,
+///   BLUETOOTH_DEVICE_INFO  *pbtdi
+/// );
+/// ```
 /// {@category bthprops}
 final BluetoothFindNextDevice = _bthprops.lookupFunction<
     Int32 Function(IntPtr hFind, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
     int Function(int hFind,
         Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)>('BluetoothFindNextDevice');
 
-// BOOL BluetoothFindNextRadio(
-//   HBLUETOOTH_RADIO_FIND hFind,
-//   HANDLE                *phRadio
-// );
-
+/// The BluetoothFindNextRadio function finds the next Bluetooth radio.
+///
+/// ```c
+/// BOOL BluetoothFindNextRadio(
+///   HBLUETOOTH_RADIO_FIND hFind,
+///   HANDLE                *phRadio
+/// );
+/// ```
 /// {@category bthprops}
 final BluetoothFindNextRadio = _bthprops.lookupFunction<
     Int32 Function(IntPtr hFind, Pointer<IntPtr> phRadio),
     int Function(int hFind, Pointer<IntPtr> phRadio)>('BluetoothFindNextRadio');
 
-// BOOL BluetoothFindRadioClose(
-//   HBLUETOOTH_RADIO_FIND hFind
-// );
-
+/// The BluetoothFindRadioClose function closes the enumeration handle
+/// associated with finding Bluetooth radios.
+///
+/// ```c
+/// BOOL BluetoothFindRadioClose(
+///   HBLUETOOTH_RADIO_FIND hFind
+/// );
+/// ```
 /// {@category bthprops}
 final BluetoothFindRadioClose = _bthprops.lookupFunction<
     Int32 Function(IntPtr hFind),
     int Function(int hFind)>('BluetoothFindRadioClose');
 
-// BOOL BluetoothIsConnectable(
-//   HANDLE hRadio
-// );
-
+/// The BluetoothIsConnectable function determines whether a Bluetooth
+/// radio or radios is connectable.
+///
+/// ```c
+/// BOOL BluetoothIsConnectable(
+///   HANDLE hRadio
+/// );
+/// ```
 /// {@category bthprops}
 final BluetoothIsConnectable = _bthprops.lookupFunction<
     Int32 Function(IntPtr hRadio),
     int Function(int hRadio)>('BluetoothIsConnectable');
 
-// BOOL BluetoothIsDiscoverable(
-//   HANDLE hRadio
-// );
-
+/// The BluetoothIsDiscoverable function determines whether a Bluetooth
+/// radio or radios is discoverable.
+///
+/// ```c
+/// BOOL BluetoothIsDiscoverable(
+///   HANDLE hRadio
+/// );
+/// ```
 /// {@category bthprops}
 final BluetoothIsDiscoverable = _bthprops.lookupFunction<
     Int32 Function(IntPtr hRadio),
     int Function(int hRadio)>('BluetoothIsDiscoverable');
 
-// DWORD BluetoothUpdateDeviceRecord(
-//   const BLUETOOTH_DEVICE_INFO *pbtdi
-// );
-
+/// The BluetoothUpdateDeviceRecord function updates the local computer
+/// cache about a Bluetooth device.
+///
+/// ```c
+/// DWORD BluetoothUpdateDeviceRecord(
+///   const BLUETOOTH_DEVICE_INFO *pbtdi
+/// );
+/// ```
 /// {@category bthprops}
 final BluetoothUpdateDeviceRecord = _bthprops.lookupFunction<
     Uint32 Function(Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),

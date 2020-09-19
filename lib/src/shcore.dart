@@ -17,13 +17,16 @@ import 'structs.dart';
 
 final _shcore = DynamicLibrary.open('shcore.dll');
 
-// HRESULT GetDpiForMonitor(
-//   HMONITOR         hmonitor,
-//   MONITOR_DPI_TYPE dpiType,
-//   UINT             *dpiX,
-//   UINT             *dpiY
-//   );
-
+/// Queries the dots per inch (dpi) of a display.
+///
+/// ```c
+/// HRESULT GetDpiForMonitor(
+///   HMONITOR         hmonitor,
+///   MONITOR_DPI_TYPE dpiType,
+///   UINT             *dpiX,
+///   UINT             *dpiY
+///   );
+/// ```
 /// {@category shcore}
 final GetDpiForMonitor = _shcore.lookupFunction<
     IntPtr Function(IntPtr hMonitor, Int32 dpiType, Pointer<Int32> dpiX,
@@ -31,20 +34,28 @@ final GetDpiForMonitor = _shcore.lookupFunction<
     int Function(int hMonitor, int dpiType, Pointer<Int32> dpiX,
         Pointer<Int32> dpiY)>('GetDpiForMonitor');
 
-// HRESULT GetProcessDpiAwareness(
-//   HANDLE                hprocess,
-//   PROCESS_DPI_AWARENESS *value
-// );
-
+/// Retrieves the dots per inch (dpi) awareness of the specified process.
+///
+/// ```c
+/// HRESULT GetProcessDpiAwareness(
+///   HANDLE                hprocess,
+///   PROCESS_DPI_AWARENESS *value
+/// );
+/// ```
 /// {@category shcore}
 final GetProcessDpiAwareness = _shcore.lookupFunction<
     IntPtr Function(IntPtr hprocess, Pointer<Int32> value),
     int Function(int hprocess, Pointer<Int32> value)>('GetProcessDpiAwareness');
 
-// HRESULT SetProcessDpiAwareness(
-//   PROCESS_DPI_AWARENESS value
-// );
-
+/// Sets the process-default DPI awareness level. This is equivalent to
+/// calling SetProcessDpiAwarenessContext with the corresponding
+/// DPI_AWARENESS_CONTEXT value.
+///
+/// ```c
+/// HRESULT SetProcessDpiAwareness(
+///   PROCESS_DPI_AWARENESS value
+/// );
+/// ```
 /// {@category shcore}
 final SetProcessDpiAwareness = _shcore.lookupFunction<
     IntPtr Function(Int32 value),

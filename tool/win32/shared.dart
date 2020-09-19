@@ -10,6 +10,7 @@ class TypeDef {
   final Map<String, String> nativeParams = {};
   final Map<String, String> dartParams = {};
   String dllLibrary;
+  String comment;
 
   TypeDef(this.prototype);
 }
@@ -52,6 +53,20 @@ void loadCsv(String filename) {
         print('Error processing $apiName');
         rethrow;
       }
+    }
+
+    // last field is the comment
+    // keep consuming until we have a quoted string
+    if (fields.length > idx) {
+      prototypes[apiName].comment = fields[idx++];
+      while (prototypes[apiName].comment.indexOf('"') == 0 &&
+          prototypes[apiName].comment.lastIndexOf('"') == 0) {
+        prototypes[apiName].comment += ', ${fields[idx++]}';
+      }
+      prototypes[apiName].comment =
+          prototypes[apiName].comment.replaceAll('"', '');
+    } else {
+      prototypes[apiName].comment = '';
     }
   }
 }
