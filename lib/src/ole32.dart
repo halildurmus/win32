@@ -151,8 +151,9 @@ final CoSetProxyBlanket = _ole32.lookupFunction<
 // );
 
 /// {@category ole32}
-final CoTaskMemFree = _ole32.lookupFunction<Void Function(Pointer<Void> pv),
-    void Function(Pointer<Void> pv)>('CoTaskMemFree');
+final CoTaskMemFree =
+    _ole32.lookupFunction<Void Function(Pointer pv), void Function(Pointer pv)>(
+        'CoTaskMemFree');
 
 // void CoUninitialize();
 

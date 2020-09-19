@@ -47,21 +47,26 @@ String getFolderPath() {
 String getKnownFolderPath() {
   final knownFolderID = GUID.fromString(FOLDERID_Documents);
   final pathPtrPtr = allocate<IntPtr>();
+  Pointer<Utf16> pathPtr;
 
-  final hr = SHGetKnownFolderPath(
-      knownFolderID.addressOf, KF_FLAG_DEFAULT, NULL, pathPtrPtr);
+  try {
+    final hr = SHGetKnownFolderPath(
+        knownFolderID.addressOf, KF_FLAG_DEFAULT, NULL, pathPtrPtr);
 
-  if (FAILED(hr)) {
-    throw WindowsException(hr);
+    if (FAILED(hr)) {
+      throw WindowsException(hr);
+    }
+
+    pathPtr = Pointer<Utf16>.fromAddress(pathPtrPtr.value);
+    final path = pathPtr.unpackString(MAX_PATH);
+    return path;
+  } finally {
+    if (pathPtr != null) {
+      CoTaskMemFree(pathPtr);
+    }
+    free(knownFolderID.addressOf);
+    free(pathPtrPtr);
   }
-
-  final pathPtr = Pointer<Utf16>.fromAddress(pathPtrPtr.value);
-  final path = pathPtr.unpackString(MAX_PATH);
-
-  CoTaskMemFree(pathPtr.cast());
-  free(pathPtrPtr);
-
-  return path;
 }
 
 void main() {
