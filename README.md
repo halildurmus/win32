@@ -143,4 +143,9 @@ The original C version of the Notepad example was originally authored by Charles
 Petzold, and is kindly [licensed by him](https://www.charlespetzold.com/faq.html)
 without restriction.
 
+The summary Win32 API documentation comments are [licensed by Microsoft][] under
+the [Creative Commons Attribution 4.0 International Public License][license].
+
 [tracker]: https://github.com/timsneath/win32
+[licensed by Microsoft]: https://github.com/MicrosoftDocs/win32/blob/7b49862e8d58cfad5d4e5e22104c9fca7fd6db2f/ThirdPartyNotices
+[license]: https://github.com/MicrosoftDocs/win32/blob/7b49862e8d58cfad5d4e5e22104c9fca7fd6db2f/LICENSE
