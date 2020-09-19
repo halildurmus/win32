@@ -58,6 +58,11 @@ final DeleteObject =
     _gdi32.lookupFunction<Int32 Function(IntPtr ho), int Function(int ho)>(
         'DeleteObject');
 
+/// The EnumFontFamiliesEx function enumerates all uniquely-named fonts in
+/// the system that match the font characteristics specified by the LOGFONT
+/// structure. EnumFontFamiliesEx enumerates fonts based on typeface name,
+/// character set, or both.
+///
 /// ```c
 /// int EnumFontFamiliesExW(
 ///   HDC           hdc,
@@ -78,6 +83,9 @@ final EnumFontFamiliesEx = _gdi32.lookupFunction<
         int lParam,
         int dwFlags)>('EnumFontFamiliesExW');
 
+/// The GetObject function retrieves information for the specified graphics
+/// object.
+///
 /// ```c
 /// int GetObject(
 ///   HANDLE h,
@@ -90,6 +98,9 @@ final GetObject = _gdi32.lookupFunction<
     Int32 Function(IntPtr h, Int32 c, Pointer pv),
     int Function(int h, int c, Pointer pv)>('GetObjectW');
 
+/// The GetStockObject function retrieves a handle to one of the stock
+/// pens, brushes, fonts, or palettes.
+///
 /// ```c
 /// HGDIOBJ GetStockObject(
 ///   int i
@@ -100,6 +111,9 @@ final GetStockObject =
     _gdi32.lookupFunction<IntPtr Function(Int32 i), int Function(int i)>(
         'GetStockObject');
 
+/// The GetTextMetrics function fills the specified buffer with the metrics
+/// for the currently selected font.
+///
 /// ```c
 /// BOOL GetTextMetrics(
 ///   HDC          hdc,
@@ -111,6 +125,9 @@ final GetTextMetrics = _gdi32.lookupFunction<
     Int32 Function(IntPtr hdc, Pointer<TEXTMETRIC> lptm),
     int Function(int hdc, Pointer<TEXTMETRIC> lptm)>('GetTextMetricsW');
 
+/// The LineTo function draws a line from the current position up to, but
+/// not including, the specified point.
+///
 /// ```c
 /// BOOL LineTo(
 ///   HDC hdc,
@@ -123,6 +140,9 @@ final LineTo = _gdi32.lookupFunction<
     Int32 Function(IntPtr hdc, Int32 x, Int32 y),
     int Function(int hdc, int x, int y)>('LineTo');
 
+/// The MoveToEx function updates the current position to the specified
+/// point and optionally returns the previous position.
+///
 /// ```c
 /// BOOL MoveToEx(
 ///   HDC     hdc,

@@ -207,6 +207,8 @@ final DrawText = _user32.lookupFunction<
     int Function(int hdc, Pointer<Utf16> lpchText, int cchText,
         Pointer<RECT> lprc, int format)>('DrawTextW');
 
+/// Enables, disables, or grays the specified menu item.
+///
 /// ```c
 /// BOOL EnableMenuItem(
 ///   HMENU hMenu,
@@ -219,6 +221,10 @@ final EnableMenuItem = _user32.lookupFunction<
     Int32 Function(IntPtr hMenu, Uint32 uIDEnableItem, Uint32 uEnable),
     int Function(int hMenu, int uIDEnableItem, int uEnable)>('EnableMenuItem');
 
+/// The EndPaint function marks the end of painting in the specified
+/// window. This function is required for each call to the BeginPaint
+/// function, but only after painting is complete.
+///
 /// ```c
 /// BOOL EndPaint(
 ///   HWND              hWnd,
@@ -230,6 +236,14 @@ final EndPaint = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint),
     int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint)>('EndPaint');
 
+/// The EnumDisplayMonitors function enumerates display monitors (including
+/// invisible pseudo-monitors associated with the mirroring drivers) that
+/// intersect a region formed by the intersection of a specified clipping
+/// rectangle and the visible region of a device context.
+/// EnumDisplayMonitors calls an application-defined MonitorEnumProc
+/// callback function once for each monitor that is enumerated. Note that
+/// GetSystemMetrics (SM_CMONITORS) counts only the display monitors.
+///
 /// ```c
 /// BOOL EnumDisplayMonitors(
 ///   HDC             hdc,
@@ -245,6 +259,11 @@ final EnumDisplayMonitors = _user32.lookupFunction<
     int Function(int hdc, Pointer lprcClip, Pointer<NativeFunction> lpfnEnum,
         int dwData)>('EnumDisplayMonitors');
 
+/// Enumerates all top-level windows on the screen by passing the handle to
+/// each window, in turn, to an application-defined callback function.
+/// EnumWindows continues until the last top-level window is enumerated or
+/// the callback function returns FALSE.
+///
 /// ```c
 /// BOOL EnumWindows(
 ///   WNDENUMPROC lpEnumFunc,
@@ -257,6 +276,10 @@ final EnumWindows = _user32.lookupFunction<
     int Function(
         Pointer<NativeFunction> lpEnumFunc, int lParam)>('EnumWindows');
 
+/// The FillRect function fills a rectangle by using the specified brush.
+/// This function includes the left and top borders, but excludes the right
+/// and bottom borders of the rectangle.
+///
 /// ```c
 /// int FillRect(
 ///   HDC        hDC,
@@ -269,6 +292,11 @@ final FillRect = _user32.lookupFunction<
     Int32 Function(IntPtr hDC, Pointer<RECT> lprc, IntPtr hbr),
     int Function(int hDC, Pointer<RECT> lprc, int hbr)>('FillRect');
 
+/// Retrieves a handle to a window whose class name and window name match
+/// the specified strings. The function searches child windows, beginning
+/// with the one following the specified child window. This function does
+/// not perform a case-sensitive search.
+///
 /// ```c
 /// HWND FindWindowExW(
 ///   HWND    hWndParent,
@@ -284,6 +312,12 @@ final FindWindowEx = _user32.lookupFunction<
     int Function(int hWndParent, int hWndChildAfter, Pointer<Utf16> lpszClass,
         Pointer<Utf16> lpszWindow)>('FindWindowExW');
 
+/// Retrieves the coordinates of a window's client area. The client
+/// coordinates specify the upper-left and lower-right corners of the
+/// client area. Because client coordinates are relative to the upper-left
+/// corner of a window's client area, the coordinates of the upper-left
+/// corner are (0,0).
+///
 /// ```c
 /// BOOL GetClientRect(
 ///   HWND   hWnd,
@@ -295,6 +329,12 @@ final GetClientRect = _user32.lookupFunction<
     Int32 Function(IntPtr hwnd, Pointer<RECT> lpRect),
     int Function(int hwnd, Pointer<RECT> lpRect)>('GetClientRect');
 
+/// The GetDC function retrieves a handle to a device context (DC) for the
+/// client area of a specified window or for the entire screen. You can use
+/// the returned handle in subsequent GDI functions to draw in the DC. The
+/// device context is an opaque data structure, whose values are used
+/// internally by GDI.
+///
 /// ```c
 /// HDC GetDC(
 ///   HWND hWnd
@@ -304,6 +344,8 @@ final GetClientRect = _user32.lookupFunction<
 final GetDC = _user32.lookupFunction<IntPtr Function(IntPtr hwnd),
     int Function(int hwnd)>('GetDC');
 
+/// Returns the system DPI.
+///
 /// ```c
 /// UINT GetDpiForSystem();
 /// ```
@@ -311,6 +353,11 @@ final GetDC = _user32.lookupFunction<IntPtr Function(IntPtr hwnd),
 final GetDpiForSystem =
     _user32.lookupFunction<Int32 Function(), int Function()>('GetDpiForSystem');
 
+/// Retrieves a handle to the foreground window (the window with which the
+/// user is currently working). The system assigns a slightly higher
+/// priority to the thread that creates the foreground window than it does
+/// to other threads.
+///
 /// ```c
 /// HWND GetForegroundWindow();
 /// ```
@@ -318,6 +365,10 @@ final GetDpiForSystem =
 final GetForegroundWindow = _user32
     .lookupFunction<IntPtr Function(), int Function()>('GetForegroundWindow');
 
+/// Retrieves a message from the calling thread's message queue. The
+/// function dispatches incoming sent messages until a posted message is
+/// available for retrieval.
+///
 /// ```c
 /// BOOL GetMessageW(
 ///   LPMSG lpMsg,
@@ -333,6 +384,9 @@ final GetMessage = _user32.lookupFunction<
     int Function(Pointer<MSG> lpMsg, int hWnd, int wMsgFilterMin,
         int wMsgFilterMax)>('GetMessageW');
 
+/// The GetMonitorInfo function retrieves information about a display
+/// monitor.
+///
 /// ```c
 /// BOOL GetMonitorInfoW(
 ///   HMONITOR      hMonitor,
@@ -344,6 +398,8 @@ final GetMonitorInfo = _user32.lookupFunction<
     Int32 Function(IntPtr hMonitor, Pointer<MONITORINFO> lpmi),
     int Function(int hMonitor, Pointer<MONITORINFO> lpmi)>('GetMonitorInfoW');
 
+/// Retrieves a handle to the specified window's parent or owner.
+///
 /// ```c
 /// HWND GetParent(
 ///   HWND hWnd
@@ -353,6 +409,10 @@ final GetMonitorInfo = _user32.lookupFunction<
 final GetParent = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
     int Function(int hWnd)>('GetParent');
 
+/// The GetScrollInfo function retrieves the parameters of a scroll bar,
+/// including the minimum and maximum scrolling positions, the page size,
+/// and the position of the scroll box (thumb).
+///
 /// ```c
 /// BOOL GetScrollInfo(
 ///   HWND         hwnd,
@@ -366,6 +426,8 @@ final GetScrollInfo = _user32.lookupFunction<
     int Function(
         int hwnd, int nBar, Pointer<SCROLLINFO> lpsi)>('GetScrollInfo');
 
+/// Retrieves a handle to the Shell's desktop window.
+///
 /// ```c
 /// HWND GetShellWindow();
 /// ```
@@ -373,6 +435,10 @@ final GetScrollInfo = _user32.lookupFunction<
 final GetShellWindow =
     _user32.lookupFunction<IntPtr Function(), int Function()>('GetShellWindow');
 
+/// Retrieves the current color of the specified display element. Display
+/// elements are the parts of a window and the display that appear on the
+/// system display screen.
+///
 /// ```c
 /// DWORD GetSysColor(
 ///   int nIndex
@@ -382,6 +448,11 @@ final GetShellWindow =
 final GetSysColor = _user32.lookupFunction<Uint32 Function(Int32 nIndex),
     int Function(int nIndex)>('GetSysColor');
 
+/// Retrieves the system DPI associated with a given process. This is
+/// useful for avoiding compatibility issues that arise from sharing
+/// DPI-sensitive information between multiple system-aware processes with
+/// different system DPI values.
+///
 /// ```c
 /// UINT GetSystemDpiForProcess(
 ///   HANDLE hProcess
@@ -392,6 +463,9 @@ final GetSystemDpiForProcess = _user32.lookupFunction<
     Uint32 Function(IntPtr hProcess),
     int Function(int hProcess)>('GetSystemDpiForProcess');
 
+/// Retrieves the specified system metric or system configuration setting.
+/// Note that all dimensions retrieved by GetSystemMetrics are in pixels.
+///
 /// ```c
 /// int GetSystemMetrics(
 ///   int nIndex
@@ -401,6 +475,9 @@ final GetSystemDpiForProcess = _user32.lookupFunction<
 final GetSystemMetrics = _user32.lookupFunction<Int32 Function(Int32 nIndex),
     int Function(int nIndex)>('GetSystemMetrics');
 
+/// Retrieves a handle to a window that has the specified relationship
+/// (Z-Order or owner) to the specified window.
+///
 /// ```c
 /// HWND GetWindow(
 ///   HWND hWnd,
@@ -412,18 +489,11 @@ final GetWindow = _user32.lookupFunction<
     IntPtr Function(IntPtr hWnd, Uint32 uCmd),
     int Function(int hWnd, int uCmd)>('GetWindow');
 
-/// ```c
-/// BOOL InvalidateRect(
-///   HWND       hWnd,
-///   const RECT *lpRect,
-///   BOOL       bErase
-/// );
-/// ```
-/// {@category user32}
-final InvalidateRect = _user32.lookupFunction<
-    Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect, Int32 bErase),
-    int Function(int hWnd, Pointer<RECT> lpRect, int bErase)>('InvalidateRect');
-
+/// Copies the text of the specified window's title bar (if it has one)
+/// into a buffer. If the specified window is a control, the text of the
+/// control is copied. However, GetWindowText cannot retrieve the text of a
+/// control in another application.
+///
 /// ```c
 /// int GetWindowTextW(
 ///   HWND   hWnd,
@@ -437,6 +507,12 @@ final GetWindowText = _user32.lookupFunction<
     int Function(
         int hWnd, Pointer<Utf16> lpString, int nMaxCount)>('GetWindowTextW');
 
+/// Retrieves the length, in characters, of the specified window's title
+/// bar text (if the window has a title bar). If the specified window is a
+/// control, the function retrieves the length of the text within the
+/// control. However, GetWindowTextLength cannot retrieve the length of the
+/// text of an edit control in another application.
+///
 /// ```c
 /// int GetWindowTextLengthW(
 ///   HWND hWnd
@@ -447,6 +523,24 @@ final GetWindowTextLength =
     _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
         'GetWindowTextLengthW');
 
+/// The InvalidateRect function adds a rectangle to the specified window's
+/// update region. The update region represents the portion of the window's
+/// client area that must be redrawn.
+///
+/// ```c
+/// BOOL InvalidateRect(
+///   HWND       hWnd,
+///   const RECT *lpRect,
+///   BOOL       bErase
+/// );
+/// ```
+/// {@category user32}
+final InvalidateRect = _user32.lookupFunction<
+    Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect, Int32 bErase),
+    int Function(int hWnd, Pointer<RECT> lpRect, int bErase)>('InvalidateRect');
+
+/// Determines whether the clipboard contains data in the specified format.
+///
 /// ```c
 /// BOOL IsClipboardFormatAvailable(
 ///   UINT format
@@ -457,6 +551,9 @@ final IsClipboardFormatAvailable = _user32.lookupFunction<
     Int32 Function(Uint32 format),
     int Function(int format)>('IsClipboardFormatAvailable');
 
+/// Determines whether a message is intended for the specified dialog box
+/// and, if it is, processes the message.
+///
 /// ```c
 /// BOOL IsDialogMessageW(
 ///   HWND  hDlg,
@@ -468,6 +565,8 @@ final IsDialogMessage = _user32.lookupFunction<
     Int32 Function(IntPtr hDlg, Pointer<MSG> lpMsg),
     int Function(int hDlg, Pointer<MSG> lpMsg)>('IsDialogMessageW');
 
+/// Determines the visibility state of the specified window.
+///
 /// ```c
 /// BOOL IsWindowVisible(
 ///   HWND hWnd
@@ -478,6 +577,8 @@ final IsWindowVisible =
     _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
         'IsWindowVisible');
 
+/// Destroys the specified timer.
+///
 /// ```c
 /// BOOL KillTimer(
 ///   HWND     hWnd,
@@ -489,6 +590,10 @@ final KillTimer = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, IntPtr uIDEvent),
     int Function(int hWnd, int uIDEvent)>('KillTimer');
 
+/// Loads the specified cursor resource from the executable (.EXE) file
+/// associated with an application instance. Note: this function has been
+/// superseded by the LoadImage function.
+///
 /// ```c
 /// HCURSOR LoadCursorW(
 ///   HINSTANCE hInstance,
@@ -511,6 +616,28 @@ final LoadIcon = _user32.lookupFunction<
     IntPtr Function(IntPtr hInstance, Pointer<Utf16> lpIconName),
     int Function(int hInstance, Pointer<Utf16> lpIconName)>('LoadIconW');
 
+/// Loads an icon, cursor, animated cursor, or bitmap.
+///
+/// ```c
+/// HANDLE LoadImageW(
+///   HINSTANCE hInst,
+///   LPCWSTR   name,
+///   UINT      type,
+///   int       cx,
+///   int       cy,
+///   UINT      fuLoad
+/// );
+/// ```
+/// {@category user32}
+final LoadImage = _user32.lookupFunction<
+    IntPtr Function(IntPtr hInst, Pointer<Utf16> name, Uint32 type, Int32 cx,
+        Int32 cy, Uint32 fuLoad),
+    int Function(int hInst, Pointer<Utf16> name, int type, int cx, int cy,
+        int fuLoad)>('LoadImageW');
+
+/// Locks the workstation's display. Locking a workstation protects it from
+/// unauthorized use.
+///
 /// ```c
 /// BOOL LockWorkStation();
 /// ```
@@ -518,6 +645,11 @@ final LoadIcon = _user32.lookupFunction<
 final LockWorkStation =
     _user32.lookupFunction<Int32 Function(), int Function()>('LockWorkStation');
 
+/// Displays a modal dialog box that contains a system icon, a set of
+/// buttons, and a brief application-specific message, such as status or
+/// error information. The message box returns an integer value that
+/// indicates which button the user clicked.
+///
 /// ```c
 /// int MessageBoxW(
 ///   HWND    hWnd,
@@ -533,6 +665,9 @@ final MessageBox = _user32.lookupFunction<
     int Function(int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption,
         int uType)>('MessageBoxW');
 
+/// The MonitorFromPoint function retrieves a handle to the display monitor
+/// that contains a specified point.
+///
 /// ```c
 /// HMONITOR MonitorFromPoint(
 ///   POINT pt,
@@ -544,6 +679,10 @@ final MonitorFromPoint = _user32.lookupFunction<
     IntPtr Function(Int64 pt, Uint32 dwFlags),
     int Function(int pt, int dwFlags)>('MonitorFromPoint');
 
+/// The MonitorFromWindow function retrieves a handle to the display
+/// monitor that has the largest area of intersection with the bounding
+/// rectangle of a specified window.
+///
 /// ```c
 /// HMONITOR MonitorFromWindow(
 ///   HWND  hwnd,
@@ -555,6 +694,11 @@ final MonitorFromWindow = _user32.lookupFunction<
     IntPtr Function(IntPtr hwnd, Uint32 dwFlags),
     int Function(int hwnd, int dwFlags)>('MonitorFromWindow');
 
+/// Changes the position and dimensions of the specified window. For a
+/// top-level window, the position and dimensions are relative to the
+/// upper-left corner of the screen. For a child window, they are relative
+/// to the upper-left corner of the parent window's client area.
+///
 /// ```c
 /// BOOL MoveWindow(
 ///   HWND hWnd,
@@ -572,6 +716,10 @@ final MoveWindow = _user32.lookupFunction<
     int Function(int hWnd, int X, int Y, int nWidth, int nHeight,
         int bRepaint)>('MoveWindow');
 
+/// Waits until one or all of the specified objects are in the signaled
+/// state or the time-out interval elapses. The objects can include input
+/// event objects, which you specify using the dwWakeMask parameter.
+///
 /// ```c
 /// DWORD MsgWaitForMultipleObjects(
 ///   DWORD        nCount,

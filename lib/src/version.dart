@@ -17,6 +17,8 @@ import 'structs.dart';
 
 final _version = DynamicLibrary.open('version.dll');
 
+/// Retrieves version information for the specified file.
+///
 /// ```c
 /// BOOL GetFileVersionInfoExW(
 ///   DWORD   dwFlags,
@@ -33,6 +35,11 @@ final GetFileVersionInfoEx = _version.lookupFunction<
     int Function(int dwFlags, Pointer<Utf16> lpwstrFilename, int dwHandle,
         int dwLen, Pointer lpData)>('GetFileVersionInfoExW');
 
+/// Determines whether the operating system can retrieve version
+/// information for a specified file. If version information is available,
+/// GetFileVersionInfoSizeEx returns the size, in bytes, of that
+/// information.
+///
 /// ```c
 /// DWORD GetFileVersionInfoSizeExW(
 ///   DWORD   dwFlags,
@@ -47,6 +54,10 @@ final GetFileVersionInfoSizeEx = _version.lookupFunction<
     int Function(int dwFlags, Pointer<Utf16> lpwstrFilename,
         Pointer<Uint32> lpdwHandle)>('GetFileVersionInfoSizeExW');
 
+/// Determines whether the operating system can retrieve version
+/// information for a specified file. If version information is available,
+/// GetFileVersionInfoSize returns the size, in bytes, of that information.
+///
 /// ```c
 /// DWORD GetFileVersionInfoSizeW(
 ///   LPCWSTR lptstrFilename,
@@ -59,6 +70,8 @@ final GetFileVersionInfoSize = _version.lookupFunction<
     int Function(Pointer<Utf16> lptstrFilename,
         Pointer<Uint32> lpdwHandle)>('GetFileVersionInfoSizeW');
 
+/// Retrieves version information for the specified file.
+///
 /// ```c
 /// BOOL GetFileVersionInfoW(
 ///   LPCWSTR lptstrFilename,

@@ -35,6 +35,10 @@ final DrawStatusText = _comctl32.lookupFunction<
     void Function(int hdc, Pointer<RECT> lprc, Pointer<Utf16> pszText,
         int uFlags)>('DrawStatusTextW');
 
+/// Ensures that the common control DLL (Comctl32.dll) is loaded, and
+/// registers specific common control classes from the DLL. An application
+/// must call this function before creating a common control.
+///
 /// ```c
 /// BOOL InitCommonControlsEx(
 ///   const INITCOMMONCONTROLSEX *picce

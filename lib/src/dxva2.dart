@@ -49,6 +49,9 @@ final DestroyPhysicalMonitors = _dxva2.lookupFunction<
     int Function(int dwPhysicalMonitorArraySize,
         Pointer pPhysicalMonitorArray)>('DestroyPhysicalMonitors');
 
+/// Retrieves a monitor's minimum, maximum, and current brightness
+/// settings.
+///
 /// ```c
 /// _BOOL GetMonitorBrightness(
 ///   HANDLE  hMonitor,
@@ -70,6 +73,10 @@ final GetMonitorBrightness = _dxva2.lookupFunction<
         Pointer<Uint32> pdwCurrentBrightness,
         Pointer<Uint32> pdwMaximumBrightness)>('GetMonitorBrightness');
 
+/// Retrieves the configuration capabilities of a monitor. Call this
+/// function to find out which high-level monitor configuration functions
+/// are supported by the monitor.
+///
 /// ```c
 /// _BOOL GetMonitorCapabilities(
 ///   HANDLE  hMonitor,
@@ -85,6 +92,8 @@ final GetMonitorCapabilities = _dxva2.lookupFunction<
             Pointer<Uint32> pdwSupportedColorTemperatures)>(
     'GetMonitorCapabilities');
 
+/// Retrieves a monitor's current color temperature.
+///
 /// ```c
 /// _BOOL GetMonitorColorTemperature(
 ///   HANDLE                 hMonitor,
@@ -99,6 +108,8 @@ final GetMonitorColorTemperature = _dxva2.lookupFunction<
         Pointer<Int32>
             pctCurrentColorTemperature)>('GetMonitorColorTemperature');
 
+/// Retrieves a monitor's minimum, maximum, and current contrast settings.
+///
 /// ```c
 /// _BOOL GetMonitorContrast(
 ///   HANDLE  hMonitor,
@@ -117,6 +128,9 @@ final GetMonitorContrast = _dxva2.lookupFunction<
         Pointer<Uint32> pdwCurrentContrast,
         Pointer<Uint32> pdwMaximumContrast)>('GetMonitorContrast');
 
+/// Retrieves a monitor's minimum, maximum, and current horizontal or
+/// vertical position.
+///
 /// ```c
 /// _BOOL GetMonitorDisplayAreaPosition(
 ///   HANDLE           hMonitor,
@@ -141,6 +155,8 @@ final GetMonitorDisplayAreaPosition = _dxva2.lookupFunction<
         Pointer<Uint32> pdwCurrentPosition,
         Pointer<Uint32> pdwMaximumPosition)>('GetMonitorDisplayAreaPosition');
 
+/// Retrieves a monitor's minimum, maximum, and current width or height.
+///
 /// ```c
 /// _BOOL GetMonitorDisplayAreaSize(
 ///   HANDLE       hMonitor,
@@ -165,6 +181,8 @@ final GetMonitorDisplayAreaSize = _dxva2.lookupFunction<
         Pointer<Uint32> pdwCurrentWidthOrHeight,
         Pointer<Uint32> pdwMaximumWidthOrHeight)>('GetMonitorDisplayAreaSize');
 
+/// Retrieves a monitor's red, green, or blue drive value.
+///
 /// ```c
 /// _BOOL GetMonitorRedGreenOrBlueDrive(
 ///   HANDLE        hMonitor,
@@ -189,6 +207,8 @@ final GetMonitorRedGreenOrBlueDrive = _dxva2.lookupFunction<
         Pointer<Uint32> pdwCurrentDrive,
         Pointer<Uint32> pdwMaximumDrive)>('GetMonitorRedGreenOrBlueDrive');
 
+/// Retrieves a monitor's red, green, or blue gain value.
+///
 /// ```c
 /// _BOOL GetMonitorRedGreenOrBlueGain(
 ///   HANDLE       hMonitor,
@@ -213,6 +233,8 @@ final GetMonitorRedGreenOrBlueGain = _dxva2.lookupFunction<
         Pointer<Uint32> pdwCurrentGain,
         Pointer<Uint32> pdwMaximumGain)>('GetMonitorRedGreenOrBlueGain');
 
+/// Retrieves the type of technology used by a monitor.
+///
 /// ```c
 /// _BOOL GetMonitorTechnologyType(
 ///   HANDLE                       hMonitor,
@@ -225,6 +247,10 @@ final GetMonitorTechnologyType = _dxva2.lookupFunction<
     int Function(int hMonitor,
         Pointer<Int32> pdtyDisplayTechnologyType)>('GetMonitorTechnologyType');
 
+/// Retrieves the number of physical monitors associated with an HMONITOR
+/// monitor handle. Call this function before calling
+/// GetPhysicalMonitorsFromHMONITOR.
+///
 /// ```c
 /// _BOOL GetNumberOfPhysicalMonitorsFromHMONITOR(
 ///   HMONITOR hMonitor,
@@ -239,6 +265,9 @@ final GetNumberOfPhysicalMonitorsFromHMONITOR = _dxva2.lookupFunction<
             int hMonitor, Pointer<Uint32> pdwNumberOfPhysicalMonitors)>(
     'GetNumberOfPhysicalMonitorsFromHMONITOR');
 
+/// Retrieves the physical monitors associated with an HMONITOR monitor
+/// handle.
+///
 /// ```c
 /// _BOOL GetPhysicalMonitorsFromHMONITOR(
 ///   HMONITOR           hMonitor,

@@ -44,6 +44,10 @@ final ChooseFont = _comdlg32.lookupFunction<
     Int32 Function(Pointer<CHOOSEFONT> lpcf),
     int Function(Pointer<CHOOSEFONT> lpcf)>('ChooseFontW');
 
+/// Creates a system-defined modeless Find dialog box that lets the user
+/// specify a string to search for and options to use when searching for
+/// text in a document.
+///
 /// ```c
 /// HWND FindTextW(
 ///   LPFINDREPLACEW Arg1
@@ -54,6 +58,9 @@ final FindText = _comdlg32.lookupFunction<
     IntPtr Function(Pointer<FINDREPLACE> Arg1),
     int Function(Pointer<FINDREPLACE> Arg1)>('FindTextW');
 
+/// Creates an Open dialog box that lets the user specify the drive,
+/// directory, and the name of a file or set of files to be opened.
+///
 /// ```c
 /// BOOL GetOpenFileNameW(
 ///   LPOPENFILENAMEW Arg1
@@ -64,6 +71,9 @@ final GetOpenFileName = _comdlg32.lookupFunction<
     Int32 Function(Pointer<OPENFILENAME> arg1),
     int Function(Pointer<OPENFILENAME> arg1)>('GetOpenFileNameW');
 
+/// Creates a Save dialog box that lets the user specify the drive,
+/// directory, and name of a file to save.
+///
 /// ```c
 /// BOOL GetSaveFileNameW(
 ///   LPOPENFILENAMEW Arg1

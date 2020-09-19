@@ -17,6 +17,9 @@ import 'structs.dart';
 
 final _shell32 = DynamicLibrary.open('shell32.dll');
 
+/// Retrieves the name of and handle to the executable (.exe) file
+/// associated with a specific document file.
+///
 /// ```c
 /// HINSTANCE FindExecutableW(
 ///   LPCWSTR lpFile,

@@ -163,6 +163,10 @@ void main() {
       final function = GetModuleHandle;
       expect(function, isA<Function>());
     });
+    test('Can instantiate GetNativeSystemInfo', () {
+      final function = GetNativeSystemInfo;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate GetPhysicallyInstalledSystemMemory', () {
       final function = GetPhysicallyInstalledSystemMemory;
       expect(function, isA<Function>());
@@ -442,16 +446,16 @@ void main() {
       final function = GetWindow;
       expect(function, isA<Function>());
     });
-    test('Can instantiate InvalidateRect', () {
-      final function = InvalidateRect;
-      expect(function, isA<Function>());
-    });
     test('Can instantiate GetWindowText', () {
       final function = GetWindowText;
       expect(function, isA<Function>());
     });
     test('Can instantiate GetWindowTextLength', () {
       final function = GetWindowTextLength;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate InvalidateRect', () {
+      final function = InvalidateRect;
       expect(function, isA<Function>());
     });
     test('Can instantiate IsClipboardFormatAvailable', () {
@@ -476,6 +480,10 @@ void main() {
     });
     test('Can instantiate LoadIcon', () {
       final function = LoadIcon;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate LoadImage', () {
+      final function = LoadImage;
       expect(function, isA<Function>());
     });
     test('Can instantiate LockWorkStation', () {

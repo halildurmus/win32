@@ -17,6 +17,8 @@ import 'structs.dart';
 
 final _shcore = DynamicLibrary.open('shcore.dll');
 
+/// Queries the dots per inch (dpi) of a display.
+///
 /// ```c
 /// HRESULT GetDpiForMonitor(
 ///   HMONITOR         hmonitor,
@@ -32,6 +34,8 @@ final GetDpiForMonitor = _shcore.lookupFunction<
     int Function(int hMonitor, int dpiType, Pointer<Int32> dpiX,
         Pointer<Int32> dpiY)>('GetDpiForMonitor');
 
+/// Retrieves the dots per inch (dpi) awareness of the specified process.
+///
 /// ```c
 /// HRESULT GetProcessDpiAwareness(
 ///   HANDLE                hprocess,

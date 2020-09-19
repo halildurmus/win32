@@ -17,6 +17,8 @@ import 'structs.dart';
 
 final _psapi = DynamicLibrary.open('psapi.dll');
 
+/// Retrieves the process identifier for each process object in the system.
+///
 /// ```c
 /// BOOL EnumProcesses(
 ///   DWORD   *lpidProcess,
@@ -31,6 +33,8 @@ final EnumProcesses = _psapi.lookupFunction<
     int Function(Pointer<Uint32> lpidProcess, int cb,
         Pointer<Uint32> lpcbNeeded)>('EnumProcesses');
 
+/// Retrieves a handle for each module in the specified process.
+///
 /// ```c
 /// BOOL EnumProcessModules(
 ///   HANDLE  hProcess,
@@ -46,6 +50,9 @@ final EnumProcessModules = _psapi.lookupFunction<
     int Function(int hProcess, Pointer<IntPtr> lphModule, int cb,
         Pointer<Uint32> lpcbNeeded)>('EnumProcessModules');
 
+/// Retrieves a handle for each module in the specified process that meets
+/// the specified filter criteria.
+///
 /// ```c
 /// BOOL EnumProcessModulesEx(
 ///   HANDLE  hProcess,
@@ -62,6 +69,8 @@ final EnumProcessModulesEx = _psapi.lookupFunction<
     int Function(int hProcess, Pointer<IntPtr> lphModule, int cb,
         Pointer<Uint32> lpcbNeeded, int dwFilterFlag)>('EnumProcessModulesEx');
 
+/// Retrieves the base name of the specified module.
+///
 /// ```c
 /// DWORD GetModuleBaseNameW(
 ///   HANDLE  hProcess,
@@ -77,6 +86,9 @@ final GetModuleBaseName = _psapi.lookupFunction<
     int Function(int hProcess, int hModule, Pointer<Utf16> lpBaseName,
         int nSize)>('GetModuleBaseNameW');
 
+/// Retrieves the fully qualified path for the file containing the
+/// specified module.
+///
 /// ```c
 /// DWORD GetModuleFileNameExW(
 ///   HANDLE  hProcess,

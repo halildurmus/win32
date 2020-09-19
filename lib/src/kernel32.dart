@@ -266,6 +266,8 @@ final DeactivateActCtx = _kernel32.lookupFunction<
     Int32 Function(Uint32 dwFlags, IntPtr ulCookie),
     int Function(int dwFlags, int ulCookie)>('DeactivateActCtx');
 
+/// Commits or discards changes made prior to a call to UpdateResource.
+///
 /// ```c
 /// BOOL EndUpdateResourceW(
 ///   HANDLE hUpdate,
@@ -277,6 +279,14 @@ final EndUpdateResource = _kernel32.lookupFunction<
     Int32 Function(IntPtr hUpdate, Int32 fDiscard),
     int Function(int hUpdate, int fDiscard)>('EndUpdateResourceW');
 
+/// Enumerates resources of a specified type within a binary module. For
+/// Windows Vista and later, this is typically a language-neutral Portable
+/// Executable (LN file), and the enumeration will also include resources
+/// from the corresponding language-specific resource files (.mui files)
+/// that contain localizable language resources. It is also possible for
+/// hModule to specify an .mui file, in which case only that file is
+/// searched for resources.
+///
 /// ```c
 /// BOOL EnumResourceNamesW(
 ///   HMODULE          hModule,
@@ -292,6 +302,14 @@ final EnumResourceNames = _kernel32.lookupFunction<
     int Function(int hModule, Pointer<Utf16> lpType,
         Pointer<NativeFunction> lpEnumFunc, int lParam)>('EnumResourceNamesW');
 
+/// Enumerates resource types within a binary module. Starting with Windows
+/// Vista, this is typically a language-neutral Portable Executable (LN
+/// file), and the enumeration also includes resources from one of the
+/// corresponding language-specific resource files (.mui files)—if one
+/// exists—that contain localizable language resources. It is also possible
+/// to use hModule to specify a .mui file, in which case only that file is
+/// searched for resource types.
+///
 /// ```c
 /// BOOL EnumResourceTypesW(
 ///   HMODULE          hModule,
@@ -306,7 +324,8 @@ final EnumResourceTypes = _kernel32.lookupFunction<
     int Function(int hModule, Pointer<NativeFunction> lpEnumFunc,
         int lParam)>('EnumResourceTypesW');
 
-/// Sets the character attributes for a specified number of character cells
+/// Sets the character attributes for a specified number of character
+/// cells, beginning at the specified coordinates in a screen buffer.
 ///
 /// ```c
 /// BOOL WINAPI FillConsoleOutputAttribute(
@@ -329,7 +348,7 @@ final FillConsoleOutputAttribute = _kernel32.lookupFunction<
         Pointer<Uint32> lpNumberOfAttrsWritten)>('FillConsoleOutputAttribute');
 
 /// Writes a character to the console screen buffer a specified number of
-/// times
+/// times, beginning at the specified coordinates.
 ///
 /// ```c
 /// BOOL WINAPI FillConsoleOutputCharacter(
@@ -351,6 +370,9 @@ final FillConsoleOutputCharacter = _kernel32.lookupFunction<
         int dwWriteCoord,
         Pointer<Uint32> lpNumberOfCharsWritten)>('FillConsoleOutputCharacterW');
 
+/// Retrieves the name of a volume on a computer. FindFirstVolume is used
+/// to begin scanning the volumes of a computer.
+///
 /// ```c
 /// HANDLE FindFirstVolumeW(
 ///   LPWSTR lpszVolumeName,
@@ -363,6 +385,9 @@ final FindFirstVolume = _kernel32.lookupFunction<
     int Function(Pointer<Utf16> lpszVolumeName,
         int cchBufferLength)>('FindFirstVolumeW');
 
+/// Continues a volume search started by a call to the FindFirstVolume
+/// function. FindNextVolume finds one volume per call.
+///
 /// ```c
 /// BOOL FindNextVolumeW(
 ///   HANDLE hFindVolume,
@@ -377,6 +402,9 @@ final FindNextVolume = _kernel32.lookupFunction<
     int Function(int hFindVolume, Pointer<Utf16> lpszVolumeName,
         int cchBufferLength)>('FindNextVolumeW');
 
+/// Closes the specified volume search handle. The FindFirstVolume and
+/// FindNextVolume functions use this search handle to locate volumes.
+///
 /// ```c
 /// BOOL FindVolumeClose(
 ///   HANDLE hFindVolume
@@ -400,6 +428,16 @@ final FlushConsoleInputBuffer = _kernel32.lookupFunction<
     Int32 Function(IntPtr hConsoleInput),
     int Function(int hConsoleInput)>('FlushConsoleInputBuffer');
 
+/// Formats a message string. The function requires a message definition as
+/// input. The message definition can come from a buffer passed into the
+/// function. It can come from a message table resource in an
+/// already-loaded module. Or the caller can ask the function to search the
+/// system's message table resource(s) for the message definition. The
+/// function finds the message definition in a message table resource based
+/// on a message identifier and a language identifier. The function copies
+/// the formatted message text to an output buffer, processing any embedded
+/// insert sequences if requested.
+///
 /// ```c
 /// DWORD FormatMessageW(
 ///   DWORD   dwFlags,
@@ -439,6 +477,11 @@ final FormatMessage = _kernel32.lookupFunction<
 final FreeConsole =
     _kernel32.lookupFunction<Int32 Function(), int Function()>('FreeConsole');
 
+/// Frees the loaded dynamic-link library (DLL) module and, if necessary,
+/// decrements its reference count. When the reference count reaches zero,
+/// the module is unloaded from the address space of the calling process
+/// and the handle is no longer valid.
+///
 /// ```c
 /// BOOL FreeLibrary(
 ///   HMODULE hLibModule
@@ -448,6 +491,10 @@ final FreeConsole =
 final FreeLibrary = _kernel32.lookupFunction<Int32 Function(IntPtr hLibModule),
     int Function(int hLibModule)>('FreeLibrary');
 
+/// Retrieves a NetBIOS or DNS name associated with the local computer. The
+/// names are established at system startup, when the system reads them
+/// from the registry.
+///
 /// ```c
 /// BOOL GetComputerNameExW(
 ///   COMPUTER_NAME_FORMAT NameType,
@@ -545,6 +592,8 @@ final GetConsoleTitle = _kernel32.lookupFunction<
 final GetConsoleWindow = _kernel32
     .lookupFunction<IntPtr Function(), int Function()>('GetConsoleWindow');
 
+/// Retrieves a pseudo handle for the current process.
+///
 /// ```c
 /// HANDLE GetCurrentProcess();
 /// ```
@@ -565,6 +614,10 @@ final GetLargestConsoleWindowSize = _kernel32.lookupFunction<
     Int32 Function(IntPtr hConsoleOutput),
     int Function(int hConsoleOutput)>('GetLargestConsoleWindowSize');
 
+/// Retrieves the calling thread's last-error code value. The last-error
+/// code is maintained on a per-thread basis. Multiple threads do not
+/// overwrite each other's last-error code.
+///
 /// ```c
 /// _Post_equals_last_error_ DWORD GetLastError();
 /// ```
@@ -572,6 +625,10 @@ final GetLargestConsoleWindowSize = _kernel32.lookupFunction<
 final GetLastError =
     _kernel32.lookupFunction<Uint32 Function(), int Function()>('GetLastError');
 
+/// Retrieves the fully qualified path for the file that contains the
+/// specified module. The module must have been loaded by the current
+/// process.
+///
 /// ```c
 /// DWORD GetModuleFileNameW(
 ///   HMODULE hModule,
@@ -585,6 +642,9 @@ final GetModuleFileName = _kernel32.lookupFunction<
     int Function(int hModule, Pointer<Utf16> lpFilename,
         int nSize)>('GetModuleFileNameW');
 
+/// Retrieves a module handle for the specified module. The module must
+/// have been loaded by the calling process.
+///
 /// ```c
 /// HMODULE GetModuleHandleW(
 ///   LPCWSTR lpModuleName
@@ -595,6 +655,25 @@ final GetModuleHandle = _kernel32.lookupFunction<
     IntPtr Function(Pointer<Utf16> lpModuleName),
     int Function(Pointer<Utf16> lpModuleName)>('GetModuleHandleW');
 
+/// Retrieves information about the current system to an application
+/// running under WOW64. If the function is called from a 64-bit
+/// application, or on a 64-bit system that does not have an Intel64 or x64
+/// processor (such as ARM64), it is equivalent to the GetSystemInfo
+/// function.
+///
+/// ```c
+/// void GetNativeSystemInfo(
+///   LPSYSTEM_INFO lpSystemInfo
+/// );
+/// ```
+/// {@category kernel32}
+final GetNativeSystemInfo = _kernel32.lookupFunction<
+    Void Function(Pointer<SYSTEM_INFO> lpSystemInfo),
+    void Function(Pointer<SYSTEM_INFO> lpSystemInfo)>('GetNativeSystemInfo');
+
+/// Retrieves the amount of RAM that is physically installed on the
+/// computer.
+///
 /// ```c
 /// BOOL GetPhysicallyInstalledSystemMemory(
 ///   PULONGLONG TotalMemoryInKilobytes
@@ -606,6 +685,9 @@ final GetPhysicallyInstalledSystemMemory = _kernel32.lookupFunction<
         int Function(Pointer<Uint64> TotalMemoryInKilobytes)>(
     'GetPhysicallyInstalledSystemMemory');
 
+/// Retrieves the address of an exported function or variable from the
+/// specified dynamic-link library (DLL).
+///
 /// ```c
 /// FARPROC GetProcAddress(
 ///   HMODULE hModule,
@@ -617,6 +699,9 @@ final GetProcAddress = _kernel32.lookupFunction<
     IntPtr Function(IntPtr hModule, Pointer<Uint8> lpProcName),
     int Function(int hModule, Pointer<Uint8> lpProcName)>('GetProcAddress');
 
+/// Retrieves a handle to the default heap of the calling process. This
+/// handle can then be used in subsequent calls to the heap functions.
+///
 /// ```c
 /// HANDLE GetProcessHeap();
 /// ```
@@ -624,6 +709,10 @@ final GetProcAddress = _kernel32.lookupFunction<
 final GetProcessHeap = _kernel32
     .lookupFunction<IntPtr Function(), int Function()>('GetProcessHeap');
 
+/// Retrieves the product type for the operating system on the local
+/// computer, and maps the type to the product types supported by the
+/// specified operating system.
+///
 /// ```c
 /// BOOL GetProductInfo(
 ///   DWORD  dwOSMajorVersion,
@@ -661,6 +750,11 @@ final GetStdHandle = _kernel32.lookupFunction<
     IntPtr Function(Uint32 nStdHandle),
     int Function(int nStdHandle)>('GetStdHandle');
 
+/// Retrieves the power status of the system. The status indicates whether
+/// the system is running on AC or DC power, whether the battery is
+/// currently charging, how much battery life remains, and if battery saver
+/// is on or off.
+///
 /// ```c
 /// BOOL GetSystemPowerStatus(
 ///   LPSYSTEM_POWER_STATUS lpSystemPowerStatus
@@ -672,6 +766,10 @@ final GetSystemPowerStatus = _kernel32.lookupFunction<
         int Function(Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus)>(
     'GetSystemPowerStatus');
 
+/// Retrieves information about the current system. To retrieve accurate
+/// information for an application running on WOW64, call the
+/// GetNativeSystemInfo function.
+///
 /// ```c
 /// void GetSystemInfo(
 ///   LPSYSTEM_INFO lpSystemInfo
@@ -682,6 +780,8 @@ final GetSystemInfo = _kernel32.lookupFunction<
     Void Function(Pointer<SYSTEM_INFO> lpSystemInfo),
     void Function(Pointer<SYSTEM_INFO> lpSystemInfo)>('GetSystemInfo');
 
+/// Retrieves the path of the directory designated for temporary files.
+///
 /// ```c
 /// DWORD GetTempPathW(
 ///   DWORD  nBufferLength,
@@ -693,6 +793,15 @@ final GetTempPath = _kernel32.lookupFunction<
     Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
     int Function(int nBufferLength, Pointer<Utf16> lpBuffer)>('GetTempPathW');
 
+/// With the release of Windows 8.1, the behavior of the GetVersionEx API
+/// has changed in the value it will return for the operating system
+/// version. The value returned by the GetVersionEx function now depends on
+/// how the application is manifested. Applications not manifested for
+/// Windows 8.1 or Windows 10 will return the Windows 8 OS version value
+/// (6.2). Once an application is manifested for a given operating system
+/// version, GetVersionEx will always return the version that the
+/// application is manifested for in future releases.
+///
 /// ```c
 /// NOT_BUILD_WINDOWS_DEPRECATE BOOL GetVersionExW(
 ///   LPOSVERSIONINFOW lpVersionInformation
@@ -703,6 +812,9 @@ final GetVersionEx = _kernel32.lookupFunction<
     Int32 Function(Pointer<OSVERSIONINFO> lpVersionInformation),
     int Function(Pointer<OSVERSIONINFO> lpVersionInformation)>('GetVersionExW');
 
+/// Retrieves a list of drive letters and mounted folder paths for the
+/// specified volume.
+///
 /// ```c
 /// BOOL GetVolumePathNamesForVolumeNameW(
 ///   LPCWSTR lpszVolumeName,
@@ -724,6 +836,9 @@ final GetVolumePathNamesForVolumeName = _kernel32.lookupFunction<
         int cchBufferLength,
         Pointer<Uint32> lpcchReturnLength)>('GetVolumePathNamesForVolumeNameW');
 
+/// Allocates a block of memory from a heap. The allocated memory is not
+/// movable.
+///
 /// ```c
 /// DECLSPEC_ALLOCATOR LPVOID HeapAlloc(
 ///   HANDLE hHeap,
@@ -736,6 +851,9 @@ final HeapAlloc = _kernel32.lookupFunction<
     Pointer Function(IntPtr hHeap, Uint32 dwflags, Uint32 dwBytes),
     Pointer Function(int hHeap, int dwflags, int dwBytes)>('HeapAlloc');
 
+/// Frees a memory block allocated from a heap by the HeapAlloc or
+/// HeapReAlloc function.
+///
 /// ```c
 /// BOOL HeapFree(
 ///   HANDLE                 hHeap,
@@ -748,6 +866,9 @@ final HeapFree = _kernel32.lookupFunction<
     Int32 Function(IntPtr hHeap, Uint32 dwFlags, Pointer lpMem),
     int Function(int hHeap, int dwFlags, Pointer lpMem)>('HeapFree');
 
+/// Initializes the specified list of attributes for process and thread
+/// creation.
+///
 /// ```c
 /// BOOL InitializeProcThreadAttributeList(
 ///   LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,
@@ -763,6 +884,9 @@ final InitializeProcThreadAttributeList = _kernel32.lookupFunction<
     int Function(Pointer lpAttributeList, int dwAttributeCount, int dwFlags,
         Pointer<IntPtr> lpSize)>('InitializeProcThreadAttributeList');
 
+/// Determines whether the calling process is being debugged by a user-mode
+/// debugger.
+///
 /// ```c
 /// BOOL IsDebuggerPresent();
 /// ```
@@ -770,6 +894,9 @@ final InitializeProcThreadAttributeList = _kernel32.lookupFunction<
 final IsDebuggerPresent = _kernel32
     .lookupFunction<Int32 Function(), int Function()>('IsDebuggerPresent');
 
+/// Loads the specified module into the address space of the calling
+/// process. The specified module may cause other modules to be loaded.
+///
 /// ```c
 /// HMODULE LoadLibraryW(
 ///   LPCWSTR lpLibFileName
@@ -780,6 +907,8 @@ final LoadLibrary = _kernel32.lookupFunction<
     IntPtr Function(Pointer<Utf16> lpLibFileName),
     int Function(Pointer<Utf16> lpLibFileName)>('LoadLibraryW');
 
+/// Opens an existing local process object.
+///
 /// ```c
 /// HANDLE OpenProcess(
 ///   DWORD dwDesiredAccess,
