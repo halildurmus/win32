@@ -1,3 +1,7 @@
+## 1.7.2
+
+- Add Win32 API documentation and a couple of minor APIs.
+
 ## 1.7.1
 
 - Add version information APIs and example.
