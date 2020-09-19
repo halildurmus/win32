@@ -84,6 +84,10 @@ final GetSaveFileName = _comdlg32.lookupFunction<
     Int32 Function(Pointer<OPENFILENAME> arg1),
     int Function(Pointer<OPENFILENAME> arg1)>('GetSaveFileNameW');
 
+/// Creates a system-defined modeless dialog box that lets the user specify
+/// a string to search for and a replacement string, as well as options to
+/// control the find and replace operations.
+///
 /// ```c
 /// HWND ReplaceTextW(
 ///   LPFINDREPLACEW Arg1

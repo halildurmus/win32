@@ -47,6 +47,10 @@ final GetProcessDpiAwareness = _shcore.lookupFunction<
     IntPtr Function(IntPtr hprocess, Pointer<Int32> value),
     int Function(int hprocess, Pointer<Int32> value)>('GetProcessDpiAwareness');
 
+/// Sets the process-default DPI awareness level. This is equivalent to
+/// calling SetProcessDpiAwarenessContext with the corresponding
+/// DPI_AWARENESS_CONTEXT value.
+///
 /// ```c
 /// HRESULT SetProcessDpiAwareness(
 ///   PROCESS_DPI_AWARENESS value

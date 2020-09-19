@@ -923,6 +923,10 @@ final OpenProcess = _kernel32.lookupFunction<
     int Function(int dwDesiredAccess, int bInheritHandle,
         int dwProcessId)>('OpenProcess');
 
+/// Retrieves information about MS-DOS device names. The function can
+/// obtain the current mapping for a particular MS-DOS device name. The
+/// function can also obtain a list of all existing MS-DOS device names.
+///
 /// ```c
 /// DWORD QueryDosDeviceW(
 ///   LPCWSTR lpDeviceName,
@@ -937,6 +941,10 @@ final QueryDosDevice = _kernel32.lookupFunction<
     int Function(Pointer<Utf16> lpDeviceName, Pointer<Utf16> lpTargetPath,
         int ucchMax)>('QueryDosDeviceW');
 
+/// Retrieves the current value of the performance counter, which is a high
+/// resolution (<1us) time stamp that can be used for time-interval
+/// measurements.
+///
 /// ```c
 /// BOOL QueryPerformanceCounter(
 ///   LARGE_INTEGER *lpPerformanceCount
@@ -947,6 +955,11 @@ final QueryPerformanceCounter = _kernel32.lookupFunction<
     Int32 Function(Pointer<Int64> lpPerformanceCount),
     int Function(Pointer<Int64> lpPerformanceCount)>('QueryPerformanceCounter');
 
+/// Retrieves the frequency of the performance counter. The frequency of
+/// the performance counter is fixed at system boot and is consistent
+/// across all processors. Therefore, the frequency need only be queried
+/// upon application initialization, and the result can be cached.
+///
 /// ```c
 /// BOOL QueryPerformanceFrequency(
 ///   LARGE_INTEGER *lpFrequency
@@ -985,6 +998,10 @@ final ReadConsole = _kernel32.lookupFunction<
         Pointer<Uint32> lpNumberOfCharsRead,
         Pointer pInputControl)>('ReadConsoleW');
 
+/// Reads data from the specified file or input/output (I/O) device. Reads
+/// occur at the position specified by the file pointer if supported by the
+/// device.
+///
 /// ```c
 /// BOOL ReadFile(
 ///   HANDLE       hFile,
@@ -1001,6 +1018,11 @@ final ReadFile = _kernel32.lookupFunction<
     int Function(int hFile, Pointer lpBuffer, int nNumberOfBytesToRead,
         Pointer<Uint32> lpNumberOfBytesRead, Pointer lpOverlapped)>('ReadFile');
 
+/// ReadProcessMemory copies the data in the specified address range from
+/// the address space of the specified process into the specified buffer of
+/// the current process. Any process that has a handle with PROCESS_VM_READ
+/// access can call the function.
+///
 /// ```c
 /// BOOL ReadProcessMemory(
 ///   HANDLE  hProcess,
@@ -1025,6 +1047,8 @@ final ReadProcessMemory = _kernel32.lookupFunction<
         int nSize,
         Pointer<IntPtr> lpNumberOfBytesRead)>('ReadProcessMemory');
 
+/// Resizes the internal buffers for a pseudoconsole to the given size.
+///
 /// ```c
 /// HRESULT WINAPI ResizePseudoConsole(
 ///     _In_ HPCON hPC ,
@@ -1036,6 +1060,10 @@ final ResizePseudoConsole = _kernel32.lookupFunction<
     Int32 Function(Pointer<IntPtr> hPC, Int32 size),
     int Function(Pointer<IntPtr> hPC, int size)>('ResizePseudoConsole');
 
+/// Moves a block of data in a screen buffer. The effects of the move can
+/// be limited by specifying a clipping rectangle, so the contents of the
+/// console screen buffer outside the clipping rectangle are unchanged.
+///
 /// ```c
 /// BOOL WINAPI ScrollConsoleScreenBuffer(
 ///   _In_           HANDLE     hConsoleOutput,
@@ -1137,7 +1165,9 @@ final SetConsoleMode = _kernel32.lookupFunction<
     int Function(int hConsoleHandle, int dwMode)>('SetConsoleMode');
 
 /// Sets the attributes of characters written to the console screen buffer
-/// by the WriteFile or WriteConsole function
+/// by the WriteFile or WriteConsole function, or echoed by the ReadFile or
+/// ReadConsole function. This function affects text written after the
+/// function call.
 ///
 /// ```c
 /// BOOL WINAPI SetConsoleTextAttribute(
@@ -1167,7 +1197,8 @@ final SetConsoleWindowInfo = _kernel32.lookupFunction<
     int Function(int hConsoleOutput, int bAbsolute,
         Pointer<SMALL_RECT> lpConsoleWindow)>('SetConsoleWindowInfo');
 
-/// Sets the handle for the specified standard device (standard input
+/// Sets the handle for the specified standard device (standard input,
+/// standard output, or standard error).
 ///
 /// ```c
 /// BOOL WINAPI SetStdHandle(
@@ -1180,6 +1211,9 @@ final SetStdHandle = _kernel32.lookupFunction<
     Int32 Function(Uint32 nStdHandle, IntPtr hHandle),
     int Function(int nStdHandle, int hHandle)>('SetStdHandle');
 
+/// Suspends the execution of the current thread until the time-out
+/// interval elapses.
+///
 /// ```c
 /// void Sleep(
 ///   DWORD dwMilliseconds
@@ -1189,6 +1223,9 @@ final SetStdHandle = _kernel32.lookupFunction<
 final Sleep = _kernel32.lookupFunction<Void Function(Uint32 dwMilliseconds),
     void Function(int dwMilliseconds)>('Sleep');
 
+/// Updates the specified attribute in a list of attributes for process and
+/// thread creation.
+///
 /// ```c
 /// BOOL UpdateProcThreadAttribute(
 ///   LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,
@@ -1219,6 +1256,9 @@ final UpdateProcThreadAttribute = _kernel32.lookupFunction<
         Pointer lpPreviousValue,
         Pointer<IntPtr> lpReturnSize)>('UpdateProcThreadAttribute');
 
+/// Adds, deletes, or replaces a resource in a portable executable (PE)
+/// file.
+///
 /// ```c
 /// BOOL UpdateResourceW(
 ///   HANDLE  hUpdate,
@@ -1236,6 +1276,10 @@ final UpdateResource = _kernel32.lookupFunction<
     int Function(int hUpdate, Pointer<Utf16> lpType, Pointer<Utf16> lpName,
         int wLanguage, Pointer lpData, int cb)>('UpdateResourceW');
 
+/// Reserves, commits, or changes the state of a region of pages in the
+/// virtual address space of the calling process. Memory allocated by this
+/// function is automatically initialized to zero.
+///
 /// ```c
 /// LPVOID VirtualAlloc(
 ///   LPVOID lpAddress,
@@ -1251,6 +1295,9 @@ final VirtualAlloc = _kernel32.lookupFunction<
     Pointer<Void> Function(Pointer<Void> lpAddress, int dwSize,
         int flAllocationType, int flProtect)>('VirtualAlloc');
 
+/// Releases, decommits, or releases and decommits a region of pages within
+/// the virtual address space of the calling process.
+///
 /// ```c
 /// BOOL VirtualFree(
 ///   LPVOID lpAddress,
@@ -1291,6 +1338,8 @@ final WriteConsole = _kernel32.lookupFunction<
         Pointer<Uint32> lpNumberOfCharsWritten,
         Pointer lpReserved)>('WriteConsoleW');
 
+/// Writes data to the specified file or input/output (I/O) device.
+///
 /// ```c
 /// BOOL WriteFile(
 ///   HANDLE       hFile,
@@ -1311,6 +1360,9 @@ final WriteFile = _kernel32.lookupFunction<
         Pointer<Uint32> lpNumberOfBytesWritten,
         Pointer lpOverlapped)>('WriteFile');
 
+/// Writes data to an area of memory in a specified process. The entire
+/// area to be written to must be accessible or the operation fails.
+///
 /// ```c
 /// BOOL WriteProcessMemory(
 ///   HANDLE  hProcess,

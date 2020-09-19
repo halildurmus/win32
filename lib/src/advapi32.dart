@@ -83,6 +83,8 @@ final CredWrite = _advapi32.lookupFunction<
     Int32 Function(Pointer<CREDENTIAL> Credential, Uint32 Flags),
     int Function(Pointer<CREDENTIAL> Credential, int Flags)>('CredWriteW');
 
+/// Closes a handle to the specified registry key.
+///
 /// ```c
 /// LSTATUS RegCloseKey(
 ///   HKEY hKey
@@ -92,6 +94,9 @@ final CredWrite = _advapi32.lookupFunction<
 final RegCloseKey = _advapi32.lookupFunction<Int32 Function(IntPtr hKey),
     int Function(int hKey)>('RegCloseKey');
 
+/// Opens the specified registry key. Note that key names are not case
+/// sensitive.
+///
 /// ```c
 /// LSTATUS RegOpenKeyExW(
 ///   HKEY    hKey,
@@ -108,6 +113,11 @@ final RegOpenKeyEx = _advapi32.lookupFunction<
     int Function(int hKey, Pointer<Utf16> lpSubKey, int ulOptions,
         int samDesired, Pointer<IntPtr> phkResult)>('RegOpenKeyExW');
 
+/// Retrieves the type and data for the specified value name associated
+/// with an open registry key. To ensure that any string values (REG_SZ,
+/// REG_MULTI_SZ, and REG_EXPAND_SZ) returned are null-terminated, use the
+/// RegGetValue function.
+///
 /// ```c
 /// LSTATUS RegQueryValueExW(
 ///   HKEY    hKey,

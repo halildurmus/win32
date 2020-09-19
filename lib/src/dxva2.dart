@@ -282,6 +282,9 @@ final GetPhysicalMonitorsFromHMONITOR = _dxva2.lookupFunction<
     int Function(int hMonitor, int dwPhysicalMonitorArraySize,
         Pointer pPhysicalMonitorArray)>('GetPhysicalMonitorsFromHMONITOR');
 
+/// Saves the current monitor settings to the display's nonvolatile
+/// storage.
+///
 /// ```c
 /// _BOOL SaveCurrentMonitorSettings(
 ///   HANDLE hMonitor
@@ -292,6 +295,10 @@ final SaveCurrentMonitorSettings = _dxva2.lookupFunction<
     Int32 Function(IntPtr hMonitor),
     int Function(int hMonitor)>('SaveCurrentMonitorSettings');
 
+/// Sets a monitor's brightness value. Increasing the brightness value
+/// makes the display on the monitor brighter, and decreasing it makes the
+/// display dimmer.
+///
 /// ```c
 /// _BOOL SetMonitorBrightness(
 ///   HANDLE hMonitor,
@@ -303,6 +310,8 @@ final SetMonitorBrightness = _dxva2.lookupFunction<
     Int32 Function(IntPtr hMonitor, Uint32 dwNewBrightness),
     int Function(int hMonitor, int dwNewBrightness)>('SetMonitorBrightness');
 
+/// Sets a monitor's color temperature.
+///
 /// ```c
 /// _BOOL SetMonitorColorTemperature(
 ///   HANDLE               hMonitor,
@@ -315,6 +324,8 @@ final SetMonitorColorTemperature = _dxva2.lookupFunction<
     int Function(int hMonitor,
         int ctCurrentColorTemperature)>('SetMonitorColorTemperature');
 
+/// Sets a monitor's contrast value.
+///
 /// ```c
 /// _BOOL SetMonitorContrast(
 ///   HANDLE hMonitor,
@@ -326,6 +337,13 @@ final SetMonitorContrast = _dxva2.lookupFunction<
     Int32 Function(IntPtr hMonitor, Uint32 dwNewContrast),
     int Function(int hMonitor, int dwNewContrast)>('SetMonitorContrast');
 
+/// Sets the horizontal or vertical position of a monitor's display area.
+/// Increasing the horizontal position moves the display area toward the
+/// right side of the screen; decreasing it moves the display area toward
+/// the left. Increasing the vertical position moves the display area
+/// toward the top of the screen; decreasing it moves the display area
+/// toward the bottom.
+///
 /// ```c
 /// _BOOL SetMonitorDisplayAreaPosition(
 ///   HANDLE           hMonitor,
@@ -339,6 +357,8 @@ final SetMonitorDisplayAreaPosition = _dxva2.lookupFunction<
     int Function(int hMonitor, int ptPositionType,
         int dwNewPosition)>('SetMonitorDisplayAreaPosition');
 
+/// Sets the width or height of a monitor's display area.
+///
 /// ```c
 /// _BOOL SetMonitorDisplayAreaSize(
 ///   HANDLE       hMonitor,
@@ -353,6 +373,8 @@ final SetMonitorDisplayAreaSize = _dxva2.lookupFunction<
     int Function(int hMonitor, int stSizeType,
         int dwNewDisplayAreaWidthOrHeight)>('SetMonitorDisplayAreaSize');
 
+/// Sets a monitor's red, green, or blue drive value.
+///
 /// ```c
 /// _BOOL SetMonitorRedGreenOrBlueDrive(
 ///   HANDLE        hMonitor,
@@ -366,6 +388,8 @@ final SetMonitorRedGreenOrBlueDrive = _dxva2.lookupFunction<
     int Function(int hMonitor, int dtDriveType,
         int dwNewDrive)>('SetMonitorRedGreenOrBlueDrive');
 
+/// Sets a monitor's red, green, or blue gain value.
+///
 /// ```c
 /// _BOOL SetMonitorRedGreenOrBlueGain(
 ///   HANDLE       hMonitor,

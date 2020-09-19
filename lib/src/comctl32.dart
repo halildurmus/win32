@@ -49,6 +49,12 @@ final InitCommonControlsEx = _comctl32.lookupFunction<
     Int32 Function(Pointer<INITCOMMONCONTROLSEX> picce),
     int Function(Pointer<INITCOMMONCONTROLSEX> picce)>('InitCommonControlsEx');
 
+/// The TaskDialog function creates, displays, and operates a task dialog.
+/// The task dialog contains application-defined message text and title,
+/// icons, and any combination of predefined push buttons. This function
+/// does not support the registration of a callback function to receive
+/// notifications.
+///
 /// ```c
 /// HRESULT TaskDialog(
 ///   HWND                           hwndOwner,
@@ -82,6 +88,12 @@ final TaskDialog = _comctl32.lookupFunction<
         Pointer<Utf16> pszIcon,
         Pointer<Int32> pnButton)>('TaskDialog');
 
+/// The TaskDialogIndirect function creates, displays, and operates a task
+/// dialog. The task dialog contains application-defined icons, messages,
+/// title, verification check box, command links, push buttons, and radio
+/// buttons. This function can register a callback function to receive
+/// notification messages.
+///
 /// ```c
 /// HRESULT TaskDialogIndirect(
 ///   const TASKDIALOGCONFIG *pTaskConfig,

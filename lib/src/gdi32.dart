@@ -156,6 +156,11 @@ final MoveToEx = _gdi32.lookupFunction<
     Int32 Function(IntPtr hdc, Int32 x, Int32 y, Pointer<POINT> lppt),
     int Function(int hdc, int x, int y, Pointer<POINT> lppt)>('MoveToEx');
 
+/// The SaveDC function saves the current state of the specified device
+/// context (DC) by copying data describing selected objects and graphic
+/// modes (such as the bitmap, brush, palette, font, pen, region, drawing
+/// mode, and mapping mode) to a context stack.
+///
 /// ```c
 /// int SaveDC(
 ///   HDC hdc
@@ -166,6 +171,10 @@ final SaveDC =
     _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
         'SaveDC');
 
+/// The SetBkColor function sets the current background color to the
+/// specified color value, or to the nearest physical color if the device
+/// cannot represent the specified color value.
+///
 /// ```c
 /// COLORREF SetBkColor(
 ///   HDC      hdc,
@@ -177,6 +186,10 @@ final SetBkColor = _gdi32.lookupFunction<
     Int32 Function(IntPtr hdc, Int32 color),
     int Function(int hdc, int color)>('SetBkColor');
 
+/// The SetBkMode function sets the background mix mode of the specified
+/// device context. The background mix mode is used with text, hatched
+/// brushes, and pen styles that are not solid lines.
+///
 /// ```c
 /// int SetBkMode(
 ///   HDC hdc,
@@ -187,6 +200,11 @@ final SetBkColor = _gdi32.lookupFunction<
 final SetBkMode = _gdi32.lookupFunction<Int32 Function(IntPtr hdc, Int32 mode),
     int Function(int hdc, int mode)>('SetBkMode');
 
+/// The SetMapMode function sets the mapping mode of the specified device
+/// context. The mapping mode defines the unit of measure used to transform
+/// page-space units into device-space units, and also defines the
+/// orientation of the device's x and y axes.
+///
 /// ```c
 /// int SetMapMode(
 ///   HDC hdc,
@@ -198,6 +216,9 @@ final SetMapMode = _gdi32.lookupFunction<
     Int32 Function(IntPtr hdc, Int32 iMode),
     int Function(int hdc, int iMode)>('SetMapMode');
 
+/// The SetTextColor function sets the text color for the specified device
+/// context to the specified color.
+///
 /// ```c
 /// COLORREF SetTextColor(
 ///   HDC      hdc,
@@ -209,6 +230,9 @@ final SetTextColor = _gdi32.lookupFunction<
     Int32 Function(IntPtr hdc, Int32 color),
     int Function(int hdc, int color)>('SetTextColor');
 
+/// The SetViewportExtEx function sets the horizontal and vertical extents
+/// of the viewport for a device context by using the specified values.
+///
 /// ```c
 /// BOOL SetViewportExtEx(
 ///   HDC    hdc,
@@ -223,6 +247,9 @@ final SetViewportExtEx = _gdi32.lookupFunction<
     int Function(
         int hdc, int x, int y, Pointer<SIZE> lpsz)>('SetViewportExtEx');
 
+/// The SetViewportOrgEx function specifies which device point maps to the
+/// window origin (0,0).
+///
 /// ```c
 /// BOOL SetViewportOrgEx(
 ///   HDC     hdc,
@@ -237,6 +264,9 @@ final SetViewportOrgEx = _gdi32.lookupFunction<
     int Function(
         int hdc, int x, int y, Pointer<POINT> lppt)>('SetViewportOrgEx');
 
+/// The SetWindowExtEx function sets the horizontal and vertical extents of
+/// the window for a device context by using the specified values.
+///
 /// ```c
 /// BOOL SetWindowExtEx(
 ///   HDC    hdc,
@@ -250,6 +280,14 @@ final SetWindowExtEx = _gdi32.lookupFunction<
     Int32 Function(IntPtr hdc, Int32 x, Int32 y, Pointer<SIZE> lpsz),
     int Function(int hdc, int x, int y, Pointer<SIZE> lpsz)>('SetWindowExtEx');
 
+/// The StretchDIBits function copies the color data for a rectangle of
+/// pixels in a DIB, JPEG, or PNG image to the specified destination
+/// rectangle. If the destination rectangle is larger than the source
+/// rectangle, this function stretches the rows and columns of color data
+/// to fit the destination rectangle. If the destination rectangle is
+/// smaller than the source rectangle, this function compresses the rows
+/// and columns by using the specified raster operation.
+///
 /// ```c
 /// int StretchDIBits(
 ///   HDC              hdc,
@@ -298,6 +336,10 @@ final StretchDIBits = _gdi32.lookupFunction<
         int iUsage,
         int rop)>('StretchDIBits');
 
+/// The TextOut function writes a character string at the specified
+/// location, using the currently selected font, background color, and text
+/// color.
+///
 /// ```c
 /// BOOL TextOutW(
 ///   HDC     hdc,

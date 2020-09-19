@@ -736,6 +736,9 @@ final MsgWaitForMultipleObjects = _user32.lookupFunction<
     int Function(int count, Pointer<IntPtr> pHandles, int fWaitAll,
         int dwMilliseconds, int dwWakeMask)>('MsgWaitForMultipleObjects');
 
+/// Dispatches incoming sent messages, checks the thread message queue for
+/// a posted message, and retrieves the message (if any exist).
+///
 /// ```c
 /// BOOL PeekMessageW(
 ///   LPMSG lpMsg,
@@ -752,6 +755,9 @@ final PeekMessage = _user32.lookupFunction<
     int Function(Pointer<MSG> lpMsg, int hWnd, int wMsgFilterMin,
         int wMsgFilterMax, int wRemoveMsg)>('PeekMessageW');
 
+/// Registers a window class for subsequent use in calls to the
+/// CreateWindow or CreateWindowEx function.
+///
 /// ```c
 /// ATOM RegisterClassW(
 ///   const WNDCLASSW *lpWndClass
@@ -762,6 +768,10 @@ final RegisterClass = _user32.lookupFunction<
     Int16 Function(Pointer<WNDCLASS> lpWndClass),
     int Function(Pointer<WNDCLASS> lpWndClass)>('RegisterClassW');
 
+/// Defines a new window message that is guaranteed to be unique throughout
+/// the system. The message value can be used when sending or posting
+/// messages.
+///
 /// ```c
 /// UINT RegisterWindowMessageW(
 ///   LPCWSTR lpString
@@ -772,6 +782,11 @@ final RegisterWindowMessage = _user32.lookupFunction<
     Uint32 Function(Pointer<Utf16> lpString),
     int Function(Pointer<Utf16> lpString)>('RegisterWindowMessageW');
 
+/// The ReleaseDC function releases a device context (DC), freeing it for
+/// use by other applications. The effect of the ReleaseDC function depends
+/// on the type of DC. It frees only common and window DCs. It has no
+/// effect on class or private DCs.
+///
 /// ```c
 /// int ReleaseDC(
 ///   HWND hWnd,
@@ -783,6 +798,9 @@ final ReleaseDC = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, IntPtr hDC),
     int Function(int hWnd, int hDC)>('ReleaseDC');
 
+/// The ScrollWindow function scrolls the contents of the specified
+/// window's client area.
+///
 /// ```c
 /// BOOL ScrollWindow(
 ///   HWND       hWnd,
@@ -799,6 +817,8 @@ final ScrollWindow = _user32.lookupFunction<
     int Function(int hWnd, int XAmount, int YAmount, Pointer<RECT> lpRect,
         Pointer<RECT> lpClipRect)>('ScrollWindow');
 
+/// Synthesizes keystrokes, mouse motions, and button clicks.
+///
 /// ```c
 /// UINT SendInput(
 ///   UINT    cInputs,
@@ -811,6 +831,10 @@ final SendInput = _user32.lookupFunction<
     Uint32 Function(Uint32 cInputs, Pointer<Void> pInputs, Int32 cbSize),
     int Function(int cInputs, Pointer<Void> pInputs, int cbSize)>('SendInput');
 
+/// Sends the specified message to a window or windows. The SendMessage
+/// function calls the window procedure for the specified window and does
+/// not return until the window procedure has processed the message.
+///
 /// ```c
 /// LRESULT SendMessage(
 ///   HWND   hWnd,
@@ -824,6 +848,9 @@ final SendMessage = _user32.lookupFunction<
     IntPtr Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
     int Function(int hWnd, int Msg, int wParam, int lParam)>('SendMessageW');
 
+/// Sets the keyboard focus to the specified window. The window must be
+/// attached to the calling thread's message queue.
+///
 /// ```c
 /// HWND SetFocus(
 ///   HWND hWnd
@@ -833,6 +860,8 @@ final SendMessage = _user32.lookupFunction<
 final SetFocus = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
     int Function(int hWnd)>('SetFocus');
 
+/// Changes the parent window of the specified child window.
+///
 /// ```c
 /// HWND SetParent(
 ///   HWND hWndChild,
@@ -844,6 +873,8 @@ final SetParent = _user32.lookupFunction<
     IntPtr Function(IntPtr hWndChild, IntPtr hWndNewParent),
     int Function(int hWndChild, int hWndNewParent)>('SetParent');
 
+/// Sets the process-default DPI awareness to system-DPI awareness.
+///
 /// ```c
 /// BOOL SetProcessDPIAware();
 /// ```
@@ -851,6 +882,11 @@ final SetParent = _user32.lookupFunction<
 final SetProcessDPIAware = _user32
     .lookupFunction<Int32 Function(), int Function()>('SetProcessDPIAware');
 
+/// The SetScrollInfo function sets the parameters of a scroll bar,
+/// including the minimum and maximum scrolling positions, the page size,
+/// and the position of the scroll box (thumb). The function also redraws
+/// the scroll bar, if requested.
+///
 /// ```c
 /// int SetScrollInfo(
 ///   HWND          hwnd,
@@ -866,6 +902,8 @@ final SetScrollInfo = _user32.lookupFunction<
     int Function(int hwnd, int nBar, Pointer<SCROLLINFO> lpsi,
         int redraw)>('SetScrollInfo');
 
+/// Creates a timer with the specified time-out value.
+///
 /// ```c
 /// UINT_PTR SetTimer(
 ///   HWND      hWnd,
@@ -881,6 +919,9 @@ final SetTimer = _user32.lookupFunction<
     int Function(int hWnd, int nIDEvent, int uElapse,
         Pointer<NativeFunction> lpTimerFunc)>('SetTimer');
 
+/// Changes an attribute of the specified window. The function also sets a
+/// value at the specified offset in the extra window memory.
+///
 /// ```c
 /// LONG_PTR SetWindowLongPtrW(
 ///   HWND     hWnd,
@@ -893,6 +934,11 @@ final SetWindowLongPtr = _user32.lookupFunction<
     IntPtr Function(IntPtr hWnd, Int32 nIndex, IntPtr dwNewLong),
     int Function(int hWnd, int nIndex, int dwNewLong)>('SetWindowLongPtrW');
 
+/// Changes the size, position, and Z order of a child, pop-up, or
+/// top-level window. These windows are ordered according to their
+/// appearance on the screen. The topmost window receives the highest rank
+/// and is the first window in the Z order.
+///
 /// ```c
 /// BOOL SetWindowPos(
 ///   HWND hWnd,
@@ -911,6 +957,11 @@ final SetWindowPos = _user32.lookupFunction<
     int Function(int hWnd, int hWndInsertAfter, int X, int Y, int cx, int cy,
         int uFlags)>('SetWindowPos');
 
+/// Changes the text of the specified window's title bar (if it has one).
+/// If the specified window is a control, the text of the control is
+/// changed. However, SetWindowText cannot change the text of a control in
+/// another application.
+///
 /// ```c
 /// BOOL SetWindowTextW(
 ///   HWND    hWnd,
@@ -922,6 +973,8 @@ final SetWindowText = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, Pointer<Utf16> lpString),
     int Function(int hWnd, Pointer<Utf16> lpString)>('SetWindowTextW');
 
+/// Sets the specified window's show state.
+///
 /// ```c
 /// BOOL ShowWindow(
 ///   HWND hWnd,
@@ -933,6 +986,9 @@ final ShowWindow = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, Int32 nCmdShow),
     int Function(int hWnd, int nCmdShow)>('ShowWindow');
 
+/// Sets the show state of a window without waiting for the operation to
+/// complete.
+///
 /// ```c
 /// BOOL ShowWindowAsync(
 ///   HWND hWnd,
@@ -944,6 +1000,9 @@ final ShowWindowAsync = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, Int32 nCmdShow),
     int Function(int hWnd, int nCmdShow)>('ShowWindowAsync');
 
+/// Retrieves or sets the value of one of the system-wide parameters. This
+/// function can also update the user profile while setting a parameter.
+///
 /// ```c
 /// BOOL SystemParametersInfoW(
 ///   UINT  uiAction,
@@ -959,6 +1018,13 @@ final SystemParametersInfo = _user32.lookupFunction<
     int Function(int uiAction, int uiParam, Pointer pvParam,
         int fWinIni)>('SystemParametersInfoW');
 
+/// Processes accelerator keys for menu commands. The function translates a
+/// WM_KEYDOWN or WM_SYSKEYDOWN message to a WM_COMMAND or WM_SYSCOMMAND
+/// message (if there is an entry for the key in the specified accelerator
+/// table) and then sends the WM_COMMAND or WM_SYSCOMMAND message directly
+/// to the specified window procedure. TranslateAccelerator does not return
+/// until the window procedure has processed the message.
+///
 /// ```c
 /// int TranslateAcceleratorW(
 ///   HWND   hWnd,
@@ -972,6 +1038,10 @@ final TranslateAccelerator = _user32.lookupFunction<
     int Function(
         int hWnd, int hAccTable, Pointer<MSG> lpMsg)>('TranslateAcceleratorW');
 
+/// Translates virtual-key messages into character messages. The character
+/// messages are posted to the calling thread's message queue, to be read
+/// the next time the thread calls the GetMessage or PeekMessage function.
+///
 /// ```c
 /// BOOL TranslateMessage(
 ///   const MSG *lpMsg
@@ -982,6 +1052,9 @@ final TranslateMessage = _user32.lookupFunction<
     Int32 Function(Pointer<MSG> lpMsg),
     int Function(Pointer<MSG> lpMsg)>('TranslateMessage');
 
+/// Indicates to the system that a thread has made a request to terminate
+/// (quit). It is typically used in response to a WM_DESTROY message.
+///
 /// ```c
 /// void PostQuitMessage(
 ///   int nExitCode
@@ -991,6 +1064,12 @@ final TranslateMessage = _user32.lookupFunction<
 final PostQuitMessage = _user32.lookupFunction<Void Function(Int32 nExitCode),
     void Function(int nExitCode)>('PostQuitMessage');
 
+/// The UpdateWindow function updates the client area of the specified
+/// window by sending a WM_PAINT message to the window if the window's
+/// update region is not empty. The function sends a WM_PAINT message
+/// directly to the window procedure of the specified window, bypassing the
+/// application queue. If the update region is empty, no message is sent.
+///
 /// ```c
 /// BOOL UpdateWindow(
 ///   HWND hWnd
@@ -1001,6 +1080,9 @@ final UpdateWindow =
     _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
         'UpdateWindow');
 
+/// Retrieves a handle to the window that contains the specified physical
+/// point.
+///
 /// ```c
 /// HWND WindowFromPhysicalPoint(
 ///   POINT Point
@@ -1011,6 +1093,8 @@ final WindowFromPhysicalPoint = _user32.lookupFunction<
     IntPtr Function(Int64 Point),
     int Function(int Point)>('WindowFromPhysicalPoint');
 
+/// Retrieves a handle to the window that contains the specified point.
+///
 /// ```c
 /// HWND WindowFromPoint(
 ///   POINT Point

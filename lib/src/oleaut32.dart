@@ -17,6 +17,8 @@ import 'structs.dart';
 
 final _oleaut32 = DynamicLibrary.open('oleaut32.dll');
 
+/// Clears a variant.
+///
 /// ```c
 /// HRESULT VariantClear(
 ///   VARIANTARG *pvarg

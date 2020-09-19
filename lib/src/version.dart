@@ -87,6 +87,11 @@ final GetFileVersionInfo = _version.lookupFunction<
     int Function(Pointer<Utf16> lptstrFilename, int dwHandle, int dwLen,
         Pointer lpData)>('GetFileVersionInfoW');
 
+/// Determines where to install a file based on whether it locates another
+/// version of the file in the system. The values VerFindFile returns in
+/// the specified buffers are used in a subsequent call to the
+/// VerInstallFile function.
+///
 /// ```c
 /// DWORD VerFindFileW(
 ///   DWORD   uFlags,
@@ -120,6 +125,11 @@ final VerFindFile = _version.lookupFunction<
         Pointer<Utf16> szDestDir,
         Pointer<Uint32> puDestDirLen)>('VerFindFileW');
 
+/// Installs the specified file based on information returned from the
+/// VerFindFile function. VerInstallFile decompresses the file, if
+/// necessary, assigns a unique filename, and checks for errors, such as
+/// outdated files.
+///
 /// ```c
 /// DWORD VerInstallFileW(
 ///   DWORD   uFlags,
@@ -153,6 +163,9 @@ final VerInstallFile = _version.lookupFunction<
         Pointer<Utf16> szTmpFile,
         Pointer<Uint32> puTmpFileLen)>('VerInstallFileW');
 
+/// Retrieves a description string for the language associated with a
+/// specified binary Microsoft language identifier.
+///
 /// ```c
 /// DWORD VerLanguageNameW(
 ///   DWORD  wLang,
@@ -166,6 +179,12 @@ final VerLanguageName = _version.lookupFunction<
     int Function(
         int wLang, Pointer<Utf16> szLang, int cchLang)>('VerLanguageNameW');
 
+/// Retrieves specified version information from the specified
+/// version-information resource. To retrieve the appropriate resource,
+/// before you call VerQueryValue, you must first call the
+/// GetFileVersionInfoSize function, and then the GetFileVersionInfo
+/// function.
+///
 /// ```c
 /// BOOL VerQueryValueW(
 ///   LPCVOID pBlock,
