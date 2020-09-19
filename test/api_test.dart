@@ -187,12 +187,12 @@ void main() {
       final function = GetStdHandle;
       expect(function, isA<Function>());
     });
-    test('Can instantiate GetSystemPowerStatus', () {
-      final function = GetSystemPowerStatus;
-      expect(function, isA<Function>());
-    });
     test('Can instantiate GetSystemInfo', () {
       final function = GetSystemInfo;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate GetSystemPowerStatus', () {
+      final function = GetSystemPowerStatus;
       expect(function, isA<Function>());
     });
     test('Can instantiate GetTempPath', () {
@@ -446,12 +446,12 @@ void main() {
       final function = GetWindow;
       expect(function, isA<Function>());
     });
-    test('Can instantiate GetWindowText', () {
-      final function = GetWindowText;
-      expect(function, isA<Function>());
-    });
     test('Can instantiate GetWindowTextLength', () {
       final function = GetWindowTextLength;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate GetWindowText', () {
+      final function = GetWindowText;
       expect(function, isA<Function>());
     });
     test('Can instantiate InvalidateRect', () {
@@ -512,6 +512,10 @@ void main() {
     });
     test('Can instantiate PeekMessage', () {
       final function = PeekMessage;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate PostQuitMessage', () {
+      final function = PostQuitMessage;
       expect(function, isA<Function>());
     });
     test('Can instantiate RegisterClass', () {
@@ -588,10 +592,6 @@ void main() {
     });
     test('Can instantiate TranslateMessage', () {
       final function = TranslateMessage;
-      expect(function, isA<Function>());
-    });
-    test('Can instantiate PostQuitMessage', () {
-      final function = PostQuitMessage;
       expect(function, isA<Function>());
     });
     test('Can instantiate UpdateWindow', () {
@@ -968,12 +968,12 @@ void main() {
       final function = ShellAbout;
       expect(function, isA<Function>());
     });
-    test('Can instantiate ShellExecute', () {
-      final function = ShellExecute;
-      expect(function, isA<Function>());
-    });
     test('Can instantiate ShellExecuteEx', () {
       final function = ShellExecuteEx;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate ShellExecute', () {
+      final function = ShellExecute;
       expect(function, isA<Function>());
     });
     test('Can instantiate SHEmptyRecycleBin', () {

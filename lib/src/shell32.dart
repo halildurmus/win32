@@ -54,6 +54,18 @@ final ShellAbout = _shell32.lookupFunction<
 /// Performs an operation on a specified file.
 ///
 /// ```c
+/// BOOL ShellExecuteExW(
+///   SHELLEXECUTEINFOW *pExecInfo
+/// );
+/// ```
+/// {@category shell32}
+final ShellExecuteEx = _shell32.lookupFunction<
+    Int32 Function(Pointer<SHELLEXECUTEINFO> pExecuteInfo),
+    int Function(Pointer<SHELLEXECUTEINFO> pExecuteInfo)>('ShellExecuteExW');
+
+/// Performs an operation on a specified file.
+///
+/// ```c
 /// HINSTANCE ShellExecuteW(
 ///   HWND    hwnd,
 ///   LPCWSTR lpOperation,
@@ -79,18 +91,6 @@ final ShellExecute = _shell32.lookupFunction<
         Pointer<Utf16> lpParameters,
         Pointer<Utf16> lpDirectory,
         int nShowCmd)>('ShellExecuteW');
-
-/// Performs an operation on a specified file.
-///
-/// ```c
-/// BOOL ShellExecuteExW(
-///   SHELLEXECUTEINFOW *pExecInfo
-/// );
-/// ```
-/// {@category shell32}
-final ShellExecuteEx = _shell32.lookupFunction<
-    Int32 Function(Pointer<SHELLEXECUTEINFO> pExecuteInfo),
-    int Function(Pointer<SHELLEXECUTEINFO> pExecuteInfo)>('ShellExecuteExW');
 
 /// Empties the Recycle Bin on the specified drive.
 ///

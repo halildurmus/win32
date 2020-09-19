@@ -489,6 +489,22 @@ final GetWindow = _user32.lookupFunction<
     IntPtr Function(IntPtr hWnd, Uint32 uCmd),
     int Function(int hWnd, int uCmd)>('GetWindow');
 
+/// Retrieves the length, in characters, of the specified window's title
+/// bar text (if the window has a title bar). If the specified window is a
+/// control, the function retrieves the length of the text within the
+/// control. However, GetWindowTextLength cannot retrieve the length of the
+/// text of an edit control in another application.
+///
+/// ```c
+/// int GetWindowTextLengthW(
+///   HWND hWnd
+/// );
+/// ```
+/// {@category user32}
+final GetWindowTextLength =
+    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
+        'GetWindowTextLengthW');
+
 /// Copies the text of the specified window's title bar (if it has one)
 /// into a buffer. If the specified window is a control, the text of the
 /// control is copied. However, GetWindowText cannot retrieve the text of a
@@ -506,22 +522,6 @@ final GetWindowText = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, Pointer<Utf16> lpString, Int32 nMaxCount),
     int Function(
         int hWnd, Pointer<Utf16> lpString, int nMaxCount)>('GetWindowTextW');
-
-/// Retrieves the length, in characters, of the specified window's title
-/// bar text (if the window has a title bar). If the specified window is a
-/// control, the function retrieves the length of the text within the
-/// control. However, GetWindowTextLength cannot retrieve the length of the
-/// text of an edit control in another application.
-///
-/// ```c
-/// int GetWindowTextLengthW(
-///   HWND hWnd
-/// );
-/// ```
-/// {@category user32}
-final GetWindowTextLength =
-    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
-        'GetWindowTextLengthW');
 
 /// The InvalidateRect function adds a rectangle to the specified window's
 /// update region. The update region represents the portion of the window's
@@ -754,6 +754,18 @@ final PeekMessage = _user32.lookupFunction<
         Uint32 wMsgFilterMax, Uint32 wRemoveMsg),
     int Function(Pointer<MSG> lpMsg, int hWnd, int wMsgFilterMin,
         int wMsgFilterMax, int wRemoveMsg)>('PeekMessageW');
+
+/// Indicates to the system that a thread has made a request to terminate
+/// (quit). It is typically used in response to a WM_DESTROY message.
+///
+/// ```c
+/// void PostQuitMessage(
+///   int nExitCode
+/// );
+/// ```
+/// {@category user32}
+final PostQuitMessage = _user32.lookupFunction<Void Function(Int32 nExitCode),
+    void Function(int nExitCode)>('PostQuitMessage');
 
 /// Registers a window class for subsequent use in calls to the
 /// CreateWindow or CreateWindowEx function.
@@ -1051,18 +1063,6 @@ final TranslateAccelerator = _user32.lookupFunction<
 final TranslateMessage = _user32.lookupFunction<
     Int32 Function(Pointer<MSG> lpMsg),
     int Function(Pointer<MSG> lpMsg)>('TranslateMessage');
-
-/// Indicates to the system that a thread has made a request to terminate
-/// (quit). It is typically used in response to a WM_DESTROY message.
-///
-/// ```c
-/// void PostQuitMessage(
-///   int nExitCode
-/// );
-/// ```
-/// {@category user32}
-final PostQuitMessage = _user32.lookupFunction<Void Function(Int32 nExitCode),
-    void Function(int nExitCode)>('PostQuitMessage');
 
 /// The UpdateWindow function updates the client area of the specified
 /// window by sending a WM_PAINT message to the window if the window's

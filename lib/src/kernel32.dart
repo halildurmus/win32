@@ -750,6 +750,20 @@ final GetStdHandle = _kernel32.lookupFunction<
     IntPtr Function(Uint32 nStdHandle),
     int Function(int nStdHandle)>('GetStdHandle');
 
+/// Retrieves information about the current system. To retrieve accurate
+/// information for an application running on WOW64, call the
+/// GetNativeSystemInfo function.
+///
+/// ```c
+/// void GetSystemInfo(
+///   LPSYSTEM_INFO lpSystemInfo
+/// );
+/// ```
+/// {@category kernel32}
+final GetSystemInfo = _kernel32.lookupFunction<
+    Void Function(Pointer<SYSTEM_INFO> lpSystemInfo),
+    void Function(Pointer<SYSTEM_INFO> lpSystemInfo)>('GetSystemInfo');
+
 /// Retrieves the power status of the system. The status indicates whether
 /// the system is running on AC or DC power, whether the battery is
 /// currently charging, how much battery life remains, and if battery saver
@@ -765,20 +779,6 @@ final GetSystemPowerStatus = _kernel32.lookupFunction<
         Int32 Function(Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus),
         int Function(Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus)>(
     'GetSystemPowerStatus');
-
-/// Retrieves information about the current system. To retrieve accurate
-/// information for an application running on WOW64, call the
-/// GetNativeSystemInfo function.
-///
-/// ```c
-/// void GetSystemInfo(
-///   LPSYSTEM_INFO lpSystemInfo
-/// );
-/// ```
-/// {@category kernel32}
-final GetSystemInfo = _kernel32.lookupFunction<
-    Void Function(Pointer<SYSTEM_INFO> lpSystemInfo),
-    void Function(Pointer<SYSTEM_INFO> lpSystemInfo)>('GetSystemInfo');
 
 /// Retrieves the path of the directory designated for temporary files.
 ///
