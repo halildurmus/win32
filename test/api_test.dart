@@ -79,12 +79,12 @@ void main() {
       final function = EnumResourceTypes;
       expect(function, isA<Function>());
     });
-    test('Can instantiate FillConsoleOutputCharacter', () {
-      final function = FillConsoleOutputCharacter;
-      expect(function, isA<Function>());
-    });
     test('Can instantiate FillConsoleOutputAttribute', () {
       final function = FillConsoleOutputAttribute;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate FillConsoleOutputCharacter', () {
+      final function = FillConsoleOutputCharacter;
       expect(function, isA<Function>());
     });
     test('Can instantiate FindFirstVolume', () {
@@ -285,6 +285,10 @@ void main() {
     });
     test('Can instantiate SetConsoleWindowInfo', () {
       final function = SetConsoleWindowInfo;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate SetStdHandle', () {
+      final function = SetStdHandle;
       expect(function, isA<Function>());
     });
     test('Can instantiate Sleep', () {
@@ -534,12 +538,12 @@ void main() {
       final function = SetParent;
       expect(function, isA<Function>());
     });
-    test('Can instantiate SetScrollInfo', () {
-      final function = SetScrollInfo;
-      expect(function, isA<Function>());
-    });
     test('Can instantiate SetProcessDPIAware', () {
       final function = SetProcessDPIAware;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate SetScrollInfo', () {
+      final function = SetScrollInfo;
       expect(function, isA<Function>());
     });
     test('Can instantiate SetTimer', () {

@@ -10,6 +10,7 @@ class TypeDef {
   final Map<String, String> nativeParams = {};
   final Map<String, String> dartParams = {};
   String dllLibrary;
+  String comment;
 
   TypeDef(this.prototype);
 }
@@ -53,5 +54,8 @@ void loadCsv(String filename) {
         rethrow;
       }
     }
+
+    // last field is the comment
+    prototypes[apiName].comment = fields.length == idx + 1 ? fields[idx] : '';
   }
 }

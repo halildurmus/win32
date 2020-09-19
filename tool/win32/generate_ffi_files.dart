@@ -8,6 +8,38 @@ import 'dart:io';
 
 import 'shared.dart';
 
+String wrapCommentText(String inputText, [int wrapLength = 76]) {
+  final words = inputText.split(' ');
+  final textLine = StringBuffer('/// ');
+  final outputText = StringBuffer();
+
+  for (final word in words) {
+    if ((textLine.length + word.length) >= wrapLength) {
+      textLine.write('\n');
+      outputText.write(textLine);
+      textLine.clear();
+      textLine.write('/// $word ');
+    } else {
+      textLine.write('$word ');
+    }
+  }
+
+  outputText.write(textLine);
+  return outputText.toString().trimRight();
+}
+
+String generateDocComment(String library, String apiComment) {
+  final comment = StringBuffer();
+
+  if (apiComment.isNotEmpty) {
+    comment.writeln(wrapCommentText(apiComment));
+    comment.writeln('///');
+  }
+
+  comment.write('/// {@category $library}');
+  return comment.toString();
+}
+
 void generateFfiFiles() {
   final libraries = prototypes.values.map((e) => e.dllLibrary).toSet().toList();
 
@@ -41,7 +73,7 @@ final _$library = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' 
       writer.writeStringSync('''
 // ${proto.prototype.first.split('\\n').join('\n// ')}
 
-/// {@category $library}
+${generateDocComment(library, proto.comment)}
 final ${proto.neutralApiName} = _$library.lookupFunction<\n
   ${proto.nativeReturn} Function(
     ${proto.nativeParams.keys.map((param) => '${proto.nativeParams[param]} $param').join(', ')}),

@@ -601,6 +601,12 @@ final SetParent = _user32.lookupFunction<
     IntPtr Function(IntPtr hWndChild, IntPtr hWndNewParent),
     int Function(int hWndChild, int hWndNewParent)>('SetParent');
 
+// BOOL SetProcessDPIAware();
+
+/// {@category user32}
+final SetProcessDPIAware = _user32
+    .lookupFunction<Int32 Function(), int Function()>('SetProcessDPIAware');
+
 // int SetScrollInfo(
 //   HWND          hwnd,
 //   int           nBar,
@@ -614,12 +620,6 @@ final SetScrollInfo = _user32.lookupFunction<
         IntPtr hwnd, Int32 nBar, Pointer<SCROLLINFO> lpsi, Int32 redraw),
     int Function(int hwnd, int nBar, Pointer<SCROLLINFO> lpsi,
         int redraw)>('SetScrollInfo');
-
-// BOOL SetProcessDPIAware();
-
-/// {@category user32}
-final SetProcessDPIAware = _user32
-    .lookupFunction<Int32 Function(), int Function()>('SetProcessDPIAware');
 
 // UINT_PTR SetTimer(
 //   HWND      hWnd,
