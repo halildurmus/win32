@@ -17,13 +17,17 @@ import 'structs.dart';
 
 final _comctl32 = DynamicLibrary.open('comctl32.dll');
 
-// void DrawStatusTextW(
-//   HDC     hDC,
-//   LPCRECT lprc,
-//   LPCWSTR pszText,
-//   UINT    uFlags
-// );
-
+/// The DrawStatusText function draws the specified text in the style of a
+/// status window with borders.
+///
+/// ```c
+/// void DrawStatusTextW(
+///   HDC     hDC,
+///   LPCRECT lprc,
+///   LPCWSTR pszText,
+///   UINT    uFlags
+/// );
+/// ```
 /// {@category comctl32}
 final DrawStatusText = _comctl32.lookupFunction<
     Void Function(
@@ -31,26 +35,28 @@ final DrawStatusText = _comctl32.lookupFunction<
     void Function(int hdc, Pointer<RECT> lprc, Pointer<Utf16> pszText,
         int uFlags)>('DrawStatusTextW');
 
-// BOOL InitCommonControlsEx(
-//   const INITCOMMONCONTROLSEX *picce
-// );
-
+/// ```c
+/// BOOL InitCommonControlsEx(
+///   const INITCOMMONCONTROLSEX *picce
+/// );
+/// ```
 /// {@category comctl32}
 final InitCommonControlsEx = _comctl32.lookupFunction<
     Int32 Function(Pointer<INITCOMMONCONTROLSEX> picce),
     int Function(Pointer<INITCOMMONCONTROLSEX> picce)>('InitCommonControlsEx');
 
-// HRESULT TaskDialog(
-//   HWND                           hwndOwner,
-//   HINSTANCE                      hInstance,
-//   PCWSTR                         pszWindowTitle,
-//   PCWSTR                         pszMainInstruction,
-//   PCWSTR                         pszContent,
-//   TASKDIALOG_COMMON_BUTTON_FLAGS dwCommonButtons,
-//   PCWSTR                         pszIcon,
-//   int                            *pnButton
-// );
-
+/// ```c
+/// HRESULT TaskDialog(
+///   HWND                           hwndOwner,
+///   HINSTANCE                      hInstance,
+///   PCWSTR                         pszWindowTitle,
+///   PCWSTR                         pszMainInstruction,
+///   PCWSTR                         pszContent,
+///   TASKDIALOG_COMMON_BUTTON_FLAGS dwCommonButtons,
+///   PCWSTR                         pszIcon,
+///   int                            *pnButton
+/// );
+/// ```
 /// {@category comctl32}
 final TaskDialog = _comctl32.lookupFunction<
     Int32 Function(
@@ -72,13 +78,14 @@ final TaskDialog = _comctl32.lookupFunction<
         Pointer<Utf16> pszIcon,
         Pointer<Int32> pnButton)>('TaskDialog');
 
-// HRESULT TaskDialogIndirect(
-//   const TASKDIALOGCONFIG *pTaskConfig,
-//   int                    *pnButton,
-//   int                    *pnRadioButton,
-//   BOOL                   *pfVerificationFlagChecked
-// );
-
+/// ```c
+/// HRESULT TaskDialogIndirect(
+///   const TASKDIALOGCONFIG *pTaskConfig,
+///   int                    *pnButton,
+///   int                    *pnRadioButton,
+///   BOOL                   *pfVerificationFlagChecked
+/// );
+/// ```
 /// {@category comctl32}
 final TaskDialogIndirect = _comctl32.lookupFunction<
     Int32 Function(

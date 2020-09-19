@@ -17,14 +17,17 @@ import 'structs.dart';
 
 final _powrprof = DynamicLibrary.open('powrprof.dll');
 
-// NTSTATUS CallNtPowerInformation(
-//   POWER_INFORMATION_LEVEL InformationLevel,
-//   PVOID                   InputBuffer,
-//   ULONG                   InputBufferLength,
-//   PVOID                   OutputBuffer,
-//   ULONG                   OutputBufferLength
-// );
-
+/// Sets or retrieves power information.
+///
+/// ```c
+/// NTSTATUS CallNtPowerInformation(
+///   POWER_INFORMATION_LEVEL InformationLevel,
+///   PVOID                   InputBuffer,
+///   ULONG                   InputBufferLength,
+///   PVOID                   OutputBuffer,
+///   ULONG                   OutputBufferLength
+/// );
+/// ```
 /// {@category powrprof}
 final CallNtPowerInformation = _powrprof.lookupFunction<
     Int32 Function(

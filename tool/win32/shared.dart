@@ -56,6 +56,17 @@ void loadCsv(String filename) {
     }
 
     // last field is the comment
-    prototypes[apiName].comment = fields.length == idx + 1 ? fields[idx] : '';
+    // keep consuming until we have a quoted string
+    if (fields.length > idx) {
+      prototypes[apiName].comment = fields[idx++];
+      while (prototypes[apiName].comment.indexOf('"') == 0 &&
+          prototypes[apiName].comment.lastIndexOf('"') == 0) {
+        prototypes[apiName].comment += ', ${fields[idx++]}';
+      }
+      prototypes[apiName].comment =
+          prototypes[apiName].comment.replaceAll('"', '');
+    } else {
+      prototypes[apiName].comment = '';
+    }
   }
 }

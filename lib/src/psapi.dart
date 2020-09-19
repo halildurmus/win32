@@ -17,12 +17,13 @@ import 'structs.dart';
 
 final _psapi = DynamicLibrary.open('psapi.dll');
 
-// BOOL EnumProcesses(
-//   DWORD   *lpidProcess,
-//   DWORD   cb,
-//   LPDWORD lpcbNeeded
-// );
-
+/// ```c
+/// BOOL EnumProcesses(
+///   DWORD   *lpidProcess,
+///   DWORD   cb,
+///   LPDWORD lpcbNeeded
+/// );
+/// ```
 /// {@category psapi}
 final EnumProcesses = _psapi.lookupFunction<
     Int32 Function(
@@ -30,13 +31,14 @@ final EnumProcesses = _psapi.lookupFunction<
     int Function(Pointer<Uint32> lpidProcess, int cb,
         Pointer<Uint32> lpcbNeeded)>('EnumProcesses');
 
-// BOOL EnumProcessModules(
-//   HANDLE  hProcess,
-//   HMODULE *lphModule,
-//   DWORD   cb,
-//   LPDWORD lpcbNeeded
-// );
-
+/// ```c
+/// BOOL EnumProcessModules(
+///   HANDLE  hProcess,
+///   HMODULE *lphModule,
+///   DWORD   cb,
+///   LPDWORD lpcbNeeded
+/// );
+/// ```
 /// {@category psapi}
 final EnumProcessModules = _psapi.lookupFunction<
     Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
@@ -44,14 +46,15 @@ final EnumProcessModules = _psapi.lookupFunction<
     int Function(int hProcess, Pointer<IntPtr> lphModule, int cb,
         Pointer<Uint32> lpcbNeeded)>('EnumProcessModules');
 
-// BOOL EnumProcessModulesEx(
-//   HANDLE  hProcess,
-//   HMODULE *lphModule,
-//   DWORD   cb,
-//   LPDWORD lpcbNeeded,
-//   DWORD   dwFilterFlag
-// );
-
+/// ```c
+/// BOOL EnumProcessModulesEx(
+///   HANDLE  hProcess,
+///   HMODULE *lphModule,
+///   DWORD   cb,
+///   LPDWORD lpcbNeeded,
+///   DWORD   dwFilterFlag
+/// );
+/// ```
 /// {@category psapi}
 final EnumProcessModulesEx = _psapi.lookupFunction<
     Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
@@ -59,13 +62,14 @@ final EnumProcessModulesEx = _psapi.lookupFunction<
     int Function(int hProcess, Pointer<IntPtr> lphModule, int cb,
         Pointer<Uint32> lpcbNeeded, int dwFilterFlag)>('EnumProcessModulesEx');
 
-// DWORD GetModuleBaseNameW(
-//   HANDLE  hProcess,
-//   HMODULE hModule,
-//   LPWSTR  lpBaseName,
-//   DWORD   nSize
-// );
-
+/// ```c
+/// DWORD GetModuleBaseNameW(
+///   HANDLE  hProcess,
+///   HMODULE hModule,
+///   LPWSTR  lpBaseName,
+///   DWORD   nSize
+/// );
+/// ```
 /// {@category psapi}
 final GetModuleBaseName = _psapi.lookupFunction<
     Uint32 Function(IntPtr hProcess, IntPtr hModule, Pointer<Utf16> lpBaseName,
@@ -73,13 +77,14 @@ final GetModuleBaseName = _psapi.lookupFunction<
     int Function(int hProcess, int hModule, Pointer<Utf16> lpBaseName,
         int nSize)>('GetModuleBaseNameW');
 
-// DWORD GetModuleFileNameExW(
-//   HANDLE  hProcess,
-//   HMODULE hModule,
-//   LPWSTR  lpFilename,
-//   DWORD   nSize
-// );
-
+/// ```c
+/// DWORD GetModuleFileNameExW(
+///   HANDLE  hProcess,
+///   HMODULE hModule,
+///   LPWSTR  lpFilename,
+///   DWORD   nSize
+/// );
+/// ```
 /// {@category psapi}
 final GetModuleFileNameEx = _psapi.lookupFunction<
     Uint32 Function(IntPtr hProcess, IntPtr hModule, Pointer<Utf16> lpFilename,

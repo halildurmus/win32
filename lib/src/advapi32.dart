@@ -17,33 +17,49 @@ import 'structs.dart';
 
 final _advapi32 = DynamicLibrary.open('advapi32.dll');
 
-// BOOL CredDeleteW(
-//   LPCWSTR TargetName,
-//   DWORD   Type,
-//   DWORD   Flags
-// );
-
+/// The CredDelete function deletes a credential from the user's credential
+/// set. The credential set used is the one associated with the logon
+/// session of the current token. The token must not have the user's SID
+/// disabled.
+///
+/// ```c
+/// BOOL CredDeleteW(
+///   LPCWSTR TargetName,
+///   DWORD   Type,
+///   DWORD   Flags
+/// );
+/// ```
 /// {@category advapi32}
 final CredDelete = _advapi32.lookupFunction<
     Int32 Function(Pointer<Utf16> TargetName, Uint32 Type, Uint32 Flags),
     int Function(
         Pointer<Utf16> TargetName, int Type, int Flags)>('CredDeleteW');
 
-// void CredFree(
-//   PVOID Buffer
-// );
-
+/// The CredFree function frees a buffer returned by any of the credentials
+/// management functions.
+///
+/// ```c
+/// void CredFree(
+///   PVOID Buffer
+/// );
+/// ```
 /// {@category advapi32}
 final CredFree = _advapi32.lookupFunction<Void Function(Pointer Buffer),
     void Function(Pointer Buffer)>('CredFree');
 
-// BOOL CredReadW(
-//   LPCWSTR      TargetName,
-//   DWORD        Type,
-//   DWORD        Flags,
-//   PCREDENTIALW *Credential
-// );
-
+/// The CredRead function reads a credential from the user's credential
+/// set. The credential set used is the one associated with the logon
+/// session of the current token. The token must not have the user's SID
+/// disabled.
+///
+/// ```c
+/// BOOL CredReadW(
+///   LPCWSTR      TargetName,
+///   DWORD        Type,
+///   DWORD        Flags,
+///   PCREDENTIALW *Credential
+/// );
+/// ```
 /// {@category advapi32}
 final CredRead = _advapi32.lookupFunction<
     Int32 Function(Pointer<Utf16> TargetName, Uint32 Type, Uint32 Flags,
@@ -51,32 +67,40 @@ final CredRead = _advapi32.lookupFunction<
     int Function(Pointer<Utf16> TargetName, int Type, int Flags,
         Pointer<Pointer<CREDENTIAL>> Credential)>('CredReadW');
 
-// BOOL CredWriteW(
-//   PCREDENTIALW Credential,
-//   DWORD        Flags
-// );
-
+/// The CredWrite function creates a new credential or modifies an existing
+/// credential in the user's credential set. The new credential is
+/// associated with the logon session of the current token. The token must
+/// not have the user's security identifier (SID) disabled.
+///
+/// ```c
+/// BOOL CredWriteW(
+///   PCREDENTIALW Credential,
+///   DWORD        Flags
+/// );
+/// ```
 /// {@category advapi32}
 final CredWrite = _advapi32.lookupFunction<
     Int32 Function(Pointer<CREDENTIAL> Credential, Uint32 Flags),
     int Function(Pointer<CREDENTIAL> Credential, int Flags)>('CredWriteW');
 
-// LSTATUS RegCloseKey(
-//   HKEY hKey
-// );
-
+/// ```c
+/// LSTATUS RegCloseKey(
+///   HKEY hKey
+/// );
+/// ```
 /// {@category advapi32}
 final RegCloseKey = _advapi32.lookupFunction<Int32 Function(IntPtr hKey),
     int Function(int hKey)>('RegCloseKey');
 
-// LSTATUS RegOpenKeyExW(
-//   HKEY    hKey,
-//   LPCWSTR lpSubKey,
-//   DWORD   ulOptions,
-//   REGSAM  samDesired,
-//   PHKEY   phkResult
-// );
-
+/// ```c
+/// LSTATUS RegOpenKeyExW(
+///   HKEY    hKey,
+///   LPCWSTR lpSubKey,
+///   DWORD   ulOptions,
+///   REGSAM  samDesired,
+///   PHKEY   phkResult
+/// );
+/// ```
 /// {@category advapi32}
 final RegOpenKeyEx = _advapi32.lookupFunction<
     Int32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey, Uint32 ulOptions,
@@ -84,15 +108,16 @@ final RegOpenKeyEx = _advapi32.lookupFunction<
     int Function(int hKey, Pointer<Utf16> lpSubKey, int ulOptions,
         int samDesired, Pointer<IntPtr> phkResult)>('RegOpenKeyExW');
 
-// LSTATUS RegQueryValueExW(
-//   HKEY    hKey,
-//   LPCWSTR lpValueName,
-//   LPDWORD lpReserved,
-//   LPDWORD lpType,
-//   LPBYTE  lpData,
-//   LPDWORD lpcbData
-// );
-
+/// ```c
+/// LSTATUS RegQueryValueExW(
+///   HKEY    hKey,
+///   LPCWSTR lpValueName,
+///   LPDWORD lpReserved,
+///   LPDWORD lpType,
+///   LPBYTE  lpData,
+///   LPDWORD lpcbData
+/// );
+/// ```
 /// {@category advapi32}
 final RegQueryValueEx = _advapi32.lookupFunction<
     Int32 Function(

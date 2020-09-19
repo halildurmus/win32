@@ -28,13 +28,19 @@ String wrapCommentText(String inputText, [int wrapLength = 76]) {
   return outputText.toString().trimRight();
 }
 
-String generateDocComment(String library, String apiComment) {
+String generateDocComment(
+    String library, String cPrototype, String apiComment) {
   final comment = StringBuffer();
 
   if (apiComment.isNotEmpty) {
     comment.writeln(wrapCommentText(apiComment));
     comment.writeln('///');
   }
+
+  comment.writeln('/// ```c');
+  comment.write('/// ');
+  comment.writeln(cPrototype.split('\\n').join('\n/// '));
+  comment.writeln('/// ```');
 
   comment.write('/// {@category $library}');
   return comment.toString();
@@ -71,9 +77,7 @@ final _$library = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' 
       final apiName = prototypes.keys.firstWhere(
           (k) => prototypes[k].neutralApiName == proto.neutralApiName);
       writer.writeStringSync('''
-// ${proto.prototype.first.split('\\n').join('\n// ')}
-
-${generateDocComment(library, proto.comment)}
+${generateDocComment(library, proto.prototype.first, proto.comment)}
 final ${proto.neutralApiName} = _$library.lookupFunction<\n
   ${proto.nativeReturn} Function(
     ${proto.nativeParams.keys.map((param) => '${proto.nativeParams[param]} $param').join(', ')}),
