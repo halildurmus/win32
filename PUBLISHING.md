@@ -4,10 +4,14 @@ Rough notes on steps I take to publish a new version of win32:
    the latest.
 
 2. Run `dart pub run test` from a Windows 10 machine to make sure all the
-   automated tests are still working. Optionally, also run it from Windows 7 to
-   make sure nothing downlevel has failed. Some tests may fail or be skipped
-   from a SSH window (e.g. credential saving, console buffer info); this is
-   expected. (Note: generate.cmd now runs this automatically.)
+   automated tests are still working.
+
+   - Optionally, also run it from Windows 7 to make sure nothing downlevel has
+     failed.
+   - Optionally, test from macOS or Linux to make sure that tests don't fail
+     even when run on an inappropriate device.
+   - Some tests may fail or be skipped from a SSH window (e.g. credential
+     saving, console buffer info); this is expected.
 
 3. Run `dartdoc` from the root of the repo and make sure that it completes
    successfully.
