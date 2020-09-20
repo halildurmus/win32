@@ -2623,71 +2623,105 @@ const SB_RIGHT = 7;
 /// @nodoc
 const SB_ENDSCROLL = 8;
 
+// ------------------
 // DrawText constants
+// ------------------
 
-/// @nodoc
+/// Justifies the text to the top of the rectangle.
 const DT_TOP = 0x000;
 
-/// @nodoc
+/// Aligns text to the left.
 const DT_LEFT = 0x000;
 
-/// @nodoc
+/// Centers text horizontally in the rectangle.
 const DT_CENTER = 0x001;
 
-/// @nodoc
+/// Aligns text to the right.
 const DT_RIGHT = 0x002;
 
-/// @nodoc
+/// Centers text vertically. This value is used only with the DT_SINGLELINE value.
 const DT_VCENTER = 0x004;
 
-/// @nodoc
+/// Justifies the text to the bottom of the rectangle. This value is used only
+/// with the DT_SINGLELINE value.
 const DT_BOTTOM = 0x008;
 
-/// @nodoc
+/// Breaks words. Lines are automatically broken between words if a word would
+/// extend past the edge of the rectangle specified by the lpRect parameter. A
+/// carriage return-line feed sequence also breaks the line.
 const DT_WORDBREAK = 0x0010;
 
-/// @nodoc
+/// Displays text on a single line only. Carriage returns and line feeds do not
+/// break the line.
 const DT_SINGLELINE = 0x0020;
 
+// ------------
 // Class styles
+// ------------
 
-/// @nodoc
+/// Redraws the entire window if a movement or size adjustment changes the
+/// height of the client area.
 const CS_VREDRAW = 0x0001;
 
-/// @nodoc
+/// Redraws the entire window if a movement or size adjustment changes the width
+/// of the client area.
 const CS_HREDRAW = 0x0002;
 
-/// @nodoc
+/// Sends a double-click message to the window procedure when the user
+/// double-clicks the mouse while the cursor is within a window belonging to the
+/// class.
 const CS_DBLCLKS = 0x0008;
 
-/// @nodoc
+/// Allocates a unique device context for each window in the class.
 const CS_OWNDC = 0x0020;
 
-/// @nodoc
+/// Allocates one device context to be shared by all windows in the class.
+/// Because window classes are process specific, it is possible for multiple
+/// threads of an application to create a window of the same class. It is also
+/// possible for the threads to attempt to use the device context
+/// simultaneously. When this happens, the system allows only one thread to
+/// successfully finish its drawing operation.
 const CS_CLASSDC = 0x0040;
 
-/// @nodoc
+/// Sets the clipping rectangle of the child window to that of the parent window
+/// so that the child can draw on the parent. A window with the CS_PARENTDC
+/// style bit receives a regular device context from the system's cache of
+/// device contexts. It does not give the child the parent's device context or
+/// device context settings. Specifying CS_PARENTDC enhances an application's
+/// performance.
 const CS_PARENTDC = 0x0080;
 
-/// @nodoc
+/// Disables Close on the window menu.
 const CS_NOCLOSE = 0x0200;
 
-/// @nodoc
+/// Saves, as a bitmap, the portion of the screen image obscured by a window of
+/// this class. When the window is removed, the system uses the saved bitmap to
+/// restore the screen image, including other windows that were obscured.
+/// Therefore, the system does not send WM_PAINT messages to windows that were
+/// obscured if the memory used by the bitmap has not been discarded and if
+/// other screen actions have not invalidated the stored image.
 const CS_SAVEBITS = 0x0800;
 
-/// @nodoc
+/// Aligns the window's client area on a byte boundary (in the x direction).
+/// This style affects the width of the window and its horizontal placement on
+/// the display.
 const CS_BYTEALIGNCLIENT = 0x1000;
 
-/// @nodoc
+/// Aligns the window on a byte boundary (in the x direction). This style
+/// affects the width of the window and its horizontal placement on the display.
 const CS_BYTEALIGNWINDOW = 0x2000;
 
-/// @nodoc
+/// Indicates that the window class is an application global class.
 const CS_GLOBALCLASS = 0x4000;
 
 /// @nodoc
 const CS_IME = 0x00010000;
 
-/// @nodoc
+/// Enables the drop shadow effect on a window. The effect is turned on and off
+/// through SPI_SETDROPSHADOW. Typically, this is enabled for small, short-lived
+/// windows such as menus to emphasize their Z-order relationship to other
+/// windows. Windows created from a class with this style must be top-level
+/// windows; they may not be child windows.
 const CS_DROPSHADOW = 0x00020000;
 
 // ControlWord constant
