@@ -872,6 +872,23 @@ final SendMessage = _user32.lookupFunction<
 final SetFocus = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
     int Function(int hWnd)>('SetFocus');
 
+/// Changes information about a menu item.
+///
+/// ```c
+/// BOOL SetMenuItemInfoW(
+///   HMENU            hmenu,
+///   UINT             item,
+///   BOOL             fByPositon,
+///   LPCMENUITEMINFOW lpmii
+/// );
+/// ```
+/// {@category user32}
+final SetMenuItemInfo = _user32.lookupFunction<
+    Int32 Function(IntPtr hmenu, Uint32 item, Int32 fByPositon,
+        Pointer<MENUITEMINFO> lpmii),
+    int Function(int hmenu, int item, int fByPositon,
+        Pointer<MENUITEMINFO> lpmii)>('SetMenuItemInfoW');
+
 /// Changes the parent window of the specified child window.
 ///
 /// ```c

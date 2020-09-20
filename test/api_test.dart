@@ -546,6 +546,10 @@ void main() {
       final function = SetFocus;
       expect(function, isA<Function>());
     });
+    test('Can instantiate SetMenuItemInfo', () {
+      final function = SetMenuItemInfo;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate SetParent', () {
       final function = SetParent;
       expect(function, isA<Function>());

@@ -6417,6 +6417,64 @@ class BLUETOOTH_AUTHENTICATION_METHOD {
   static const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY = 4;
 }
 
+/// Specifies the variant types.
+///
+/// {@category Enum}
+class VARENUM {
+  static const VT_EMPTY = 0;
+  static const VT_NULL = 1;
+  static const VT_I2 = 2;
+  static const VT_I4 = 3;
+  static const VT_R4 = 4;
+  static const VT_R8 = 5;
+  static const VT_CY = 6;
+  static const VT_DATE = 7;
+  static const VT_BSTR = 8;
+  static const VT_DISPATCH = 9;
+  static const VT_ERROR = 10;
+  static const VT_BOOL = 11;
+  static const VT_VARIANT = 12;
+  static const VT_UNKNOWN = 13;
+  static const VT_DECIMAL = 14;
+  static const VT_I1 = 16;
+  static const VT_UI1 = 17;
+  static const VT_UI2 = 18;
+  static const VT_UI4 = 19;
+  static const VT_I8 = 20;
+  static const VT_UI8 = 21;
+  static const VT_INT = 22;
+  static const VT_UINT = 23;
+  static const VT_VOID = 24;
+  static const VT_HRESULT = 25;
+  static const VT_PTR = 26;
+  static const VT_SAFEARRAY = 27;
+  static const VT_CARRAY = 28;
+  static const VT_USERDEFINED = 29;
+  static const VT_LPSTR = 30;
+  static const VT_LPWSTR = 31;
+  static const VT_RECORD = 36;
+  static const VT_INT_PTR = 37;
+  static const VT_UINT_PTR = 38;
+  static const VT_FILETIME = 64;
+  static const VT_BLOB = 65;
+  static const VT_STREAM = 66;
+  static const VT_STORAGE = 67;
+  static const VT_STREAMED_OBJECT = 68;
+  static const VT_STORED_OBJECT = 69;
+  static const VT_BLOB_OBJECT = 70;
+  static const VT_CF = 71;
+  static const VT_CLSID = 72;
+  static const VT_VERSIONED_STREAM = 73;
+  static const VT_BSTR_BLOB = 0xfff;
+  static const VT_VECTOR = 0x1000;
+  static const VT_ARRAY = 0x2000;
+  static const VT_BYREF = 0x4000;
+  static const VT_RESERVED = 0x8000;
+  static const VT_ILLEGAL = 0xffff;
+  static const VT_ILLEGALMASKED = 0xfff;
+  static const VT_TYPEMASK = 0xff;
+}
+
 /// The BLUETOOTH_AUTHENTICATION_REQUIREMENTS enumeration specifies the 'Man in
 /// the Middle' protection required for authentication.
 ///
