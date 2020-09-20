@@ -595,22 +595,43 @@ const APPMODEL_ERROR_PACKAGE_NOT_AVAILABLE = 15706;
 /// @nodoc
 const APPMODEL_ERROR_NO_MUTABLE_DIRECTORY = 15707;
 
-/// @nodoc
+// --------------------
+// Format message flags
+// --------------------
+
+/// Insert sequences in the message definition are to be ignored and passed
+/// through to the output buffer unchanged. This flag is useful for fetching a
+/// message for later formatting. If this flag is set, the Arguments parameter
+/// is ignored.
 const FORMAT_MESSAGE_IGNORE_INSERTS = 0x00000200;
 
-/// @nodoc
+/// The lpSource parameter is a pointer to a null-terminated string that
+/// contains a message definition. The message definition may contain insert
+/// sequences, just as the message text in a message table resource may. This
+/// flag cannot be used with FORMAT_MESSAGE_FROM_HMODULE or
+/// FORMAT_MESSAGE_FROM_SYSTEM.
 const FORMAT_MESSAGE_FROM_STRING = 0x00000400;
 
-/// @nodoc
+/// The lpSource parameter is a module handle containing the message-table
+/// resource(s) to search. If this lpSource handle is NULL, the current
+/// process's application image file will be searched. This flag cannot be used
+/// with FORMAT_MESSAGE_FROM_STRING.
 const FORMAT_MESSAGE_FROM_HMODULE = 0x00000800;
 
-/// @nodoc
+/// The function should search the system message-table resource(s) for the
+/// requested message. If this flag is specified with
+/// FORMAT_MESSAGE_FROM_HMODULE, the function searches the system message table
+/// if the message is not found in the module specified by lpSource. This flag
+/// cannot be used with FORMAT_MESSAGE_FROM_STRING.
 const FORMAT_MESSAGE_FROM_SYSTEM = 0x00001000;
 
-/// @nodoc
+/// The Arguments parameter is not a va_list structure, but is a pointer to an
+/// array of values that represent the arguments.
 const FORMAT_MESSAGE_ARGUMENT_ARRAY = 0x00002000;
 
-/// @nodoc
+/// The function ignores regular line breaks in the message definition text. The
+/// function stores hard-coded line breaks in the message definition text into
+/// the output buffer. The function generates no new line breaks.
 const FORMAT_MESSAGE_MAX_WIDTH_MASK = 0x000000FF;
 
 // ---------------------
@@ -1587,54 +1608,59 @@ const WM_PALETTECHANGED = 0x0311;
 /// with the thread that registered the hot key.
 const WM_HOTKEY = 0x0312;
 
+// ------------------
 // Queue status flags
-/// @nodoc
+// ------------------
+
+/// A WM_KEYUP, WM_KEYDOWN, WM_SYSKEYUP, or WM_SYSKEYDOWN message is in the
+/// queue.
 const QS_KEY = 0x0001;
 
-/// @nodoc
+/// A WM_MOUSEMOVE message is in the queue.
 const QS_MOUSEMOVE = 0x0002;
 
-/// @nodoc
+/// A mouse-button message (WM_LBUTTONUP, WM_RBUTTONDOWN, and so on).
 const QS_MOUSEBUTTON = 0x0004;
 
-/// @nodoc
+/// A posted message (other than those listed here) is in the queue.
 const QS_POSTMESSAGE = 0x0008;
 
-/// @nodoc
+/// A WM_TIMER message is in the queue.
 const QS_TIMER = 0x0010;
 
-/// @nodoc
+/// A WM_PAINT message is in the queue.
 const QS_PAINT = 0x0020;
 
-/// @nodoc
+/// A message sent by another thread or application is in the queue.
 const QS_SENDMESSAGE = 0x0040;
 
-/// @nodoc
+/// A WM_HOTKEY message is in the queue.
 const QS_HOTKEY = 0x0080;
 
-/// @nodoc
+/// A posted message (other than those listed here) is in the queue.
 const QS_ALLPOSTMESSAGE = 0x0100;
 
-/// @nodoc
+/// A raw input message is in the queue.
 const QS_RAWINPUT = 0x0400;
 
-/// @nodoc
+/// A touch message is in the queue.
 const QS_TOUCH = 0x0800;
 
-/// @nodoc
+/// A pointer message is in the queue.
 const QS_POINTER = 0x1000;
 
-/// @nodoc
+/// A WM_MOUSEMOVE message or mouse-button message (WM_LBUTTONUP,
+/// WM_RBUTTONDOWN, and so on).
 const QS_MOUSE = QS_MOUSEMOVE | QS_MOUSEBUTTON;
 
-/// @nodoc
+/// An input message is in the queue.
 const QS_INPUT = QS_MOUSE | QS_KEY | QS_RAWINPUT | QS_TOUCH | QS_POINTER;
 
-/// @nodoc
+/// An input, WM_TIMER, WM_PAINT, WM_HOTKEY, or posted message is in the queue.
 const QS_ALLEVENTS =
     QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY;
 
-/// @nodoc
+/// Any message is in the queue.
 const QS_ALLINPUT = QS_INPUT |
     QS_POSTMESSAGE |
     QS_TIMER |
@@ -2511,24 +2537,31 @@ const EASTEUROPE_CHARSET = 238;
 /// @nodoc
 const RUSSIAN_CHARSET = 204;
 
+// --------------------
 // ScrollInfo constants
+// --------------------
 
-/// @nodoc
+/// Copies the scroll range to the nMin and nMax members of the SCROLLINFO
+/// structure pointed to by lpsi.
 const SIF_RANGE = 0x0001;
 
-/// @nodoc
+/// Copies the scroll page to the nPage member of the SCROLLINFO structure
+/// pointed to by lpsi.
 const SIF_PAGE = 0x0002;
 
-/// @nodoc
+/// Copies the scroll position to the nPos member of the SCROLLINFO structure
+/// pointed to by lpsi.
 const SIF_POS = 0x0004;
 
-/// @nodoc
+/// Disables the scroll bar instead of removing it, if the scroll bar's new
+/// parameters make the scroll bar unnecessary.
 const SIF_DISABLENOSCROLL = 0x0008;
 
-/// @nodoc
+/// Copies the current scroll box tracking position to the nTrackPos member of
+/// the SCROLLINFO structure pointed to by lpsi.
 const SIF_TRACKPOS = 0x0010;
 
-/// @nodoc
+/// Combines SIF_RANGE,  SIF_PAGE, SIF_POS and SIF_TRACKPOS.
 const SIF_ALL = SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS;
 
 // Scrollbar constants
@@ -3139,99 +3172,130 @@ final IDC_CROSS = Pointer<Utf16>.fromAddress(32515);
 /// @nodoc
 final IDC_UPARROW = Pointer<Utf16>.fromAddress(32516);
 
+// ----------------
 // MessageBox flags
+// ----------------
 
-/// @nodoc
+/// The message box contains one push button: OK. This is the default.
 const MB_OK = 0x00000000;
 
-/// @nodoc
+/// The message box contains two push buttons: OK and Cancel.
 const MB_OKCANCEL = 0x00000001;
 
-/// @nodoc
+/// The message box contains three push buttons: Abort, Retry, and Ignore.
 const MB_ABORTRETRYIGNORE = 0x00000002;
 
-/// @nodoc
+/// The message box contains three push buttons: Yes, No, and Cancel.
 const MB_YESNOCANCEL = 0x00000003;
 
-/// @nodoc
+/// The message box contains two push buttons: Yes and No.
 const MB_YESNO = 0x00000004;
 
-/// @nodoc
+/// The message box contains two push buttons: Retry and Cancel.
 const MB_RETRYCANCEL = 0x00000005;
 
-/// @nodoc
+/// The message box contains three push buttons: Cancel, Try Again, Continue.
+/// Use this message box type instead of MB_ABORTRETRYIGNORE.
 const MB_CANCELTRYCONTINUE = 0x00000006;
 
-/// @nodoc
+/// A stop-sign icon appears in the message box.
 const MB_ICONHAND = 0x00000010;
 
-/// @nodoc
+/// A question-mark icon appears in the message box.
+///
+/// The question-mark message icon is no longer recommended because it does not
+/// clearly represent a specific type of message and because the phrasing of a
+/// message as a question could apply to any message type. In addition, users
+/// can confuse the message symbol question mark with Help information.
+/// Therefore, do not use this question mark message symbol in your message
+/// boxes. The system continues to support its inclusion only for backward
+/// compatibility.
 const MB_ICONQUESTION = 0x00000020;
 
-/// @nodoc
+/// An exclamation-point icon appears in the message box.
 const MB_ICONEXCLAMATION = 0x00000030;
 
-/// @nodoc
+/// An icon consisting of a lowercase letter i in a circle appears in the
+/// message box.
 const MB_ICONASTERISK = 0x00000040;
 
-/// @nodoc
-const MB_USERICON = 0x00000080;
-
-/// @nodoc
+/// An exclamation-point icon appears in the message box.
 const MB_ICONWARNING = MB_ICONEXCLAMATION;
 
-/// @nodoc
+/// A stop-sign icon appears in the message box.
 const MB_ICONERROR = MB_ICONHAND;
 
-/// @nodoc
+/// An icon consisting of a lowercase letter i in a circle appears in the
+/// message box.
 const MB_ICONINFORMATION = MB_ICONASTERISK;
 
-/// @nodoc
+/// A stop-sign icon appears in the message box.
 const MB_ICONSTOP = MB_ICONHAND;
 
-/// @nodoc
+/// The first button is the default button.
+///
+/// MB_DEFBUTTON1 is the default unless MB_DEFBUTTON2, MB_DEFBUTTON3, or
+/// MB_DEFBUTTON4 is specified.
 const MB_DEFBUTTON1 = 0x00000000;
 
-/// @nodoc
+/// The second button is the default button.
 const MB_DEFBUTTON2 = 0x00000100;
 
-/// @nodoc
+/// The third button is the default button.
 const MB_DEFBUTTON3 = 0x00000200;
 
-/// @nodoc
+/// The fourth button is the default button.
 const MB_DEFBUTTON4 = 0x00000300;
 
-/// @nodoc
+/// The user must respond to the message box before continuing work in the
+/// window identified by the hWnd parameter. However, the user can move to the
+/// windows of other threads and work in those windows.
 const MB_APPLMODAL = 0x00000000;
 
-/// @nodoc
+/// Same as MB_APPLMODAL except that the message box has the WS_EX_TOPMOST
+/// style.
+///
+/// Use system-modal message boxes to notify the user of serious, potentially
+/// damaging errors that require immediate attention (for example, running out
+/// of memory). This flag has no effect on the user's ability to interact with
+/// windows other than those associated with hWnd.
 const MB_SYSTEMMODAL = 0x00001000;
 
-/// @nodoc
+/// Same as MB_APPLMODAL except that all the top-level windows belonging to the
+/// current thread are disabled if the hWnd parameter is NULL.
+///
+/// Use this flag when the calling application or library does not have a window
+/// handle available but still needs to prevent input to other windows in the
+/// calling thread without suspending other threads.
 const MB_TASKMODAL = 0x00002000;
 
-/// @nodoc
+/// Adds a Help button to the message box. When the user clicks the Help button
+/// or presses F1, the system sends a WM_HELP message to the owner.
 const MB_HELP = 0x00004000;
 
-/// @nodoc
-const MB_NOFOCUS = 0x00008000;
-
-/// @nodoc
+/// The message box becomes the foreground window. Internally, the system calls
+/// the SetForegroundWindow function for the message box.
 const MB_SETFOREGROUND = 0x00010000;
 
-/// @nodoc
+/// Same as desktop of the interactive window station.
+///
+/// If the current input desktop is not the default desktop, MessageBox does not
+/// return until the user switches to the default desktop.
 const MB_DEFAULT_DESKTOP_ONLY = 0x00020000;
 
-/// @nodoc
+/// The message box is created with the WS_EX_TOPMOST window style.
 const MB_TOPMOST = 0x00040000;
 
-/// @nodoc
+/// The text is right-justified.
 const MB_RIGHT = 0x00080000;
 
-/// @nodoc
+/// Displays message and caption text using right-to-left reading order on
+/// Hebrew and Arabic systems.
 const MB_RTLREADING = 0x00100000;
 
-/// @nodoc
+/// The caller is a service notifying the user of an event. The function
+/// displays a message box on the current active desktop, even if there is no
+/// user logged on to the computer.
 const MB_SERVICE_NOTIFICATION = 0x00200000;
 
 // Mapping modes
@@ -4544,13 +4608,16 @@ const KEY_ALL_ACCESS = (STANDARD_RIGHTS_ALL |
 
 // Handles
 
-/// @nodoc
+/// The standard input device. Initially, this is the console input buffer,
+/// CONIN$.
 const STD_INPUT_HANDLE = -10;
 
-/// @nodoc
+/// The standard output device. Initially, this is the active console screen
+/// buffer, CONOUT$.
 const STD_OUTPUT_HANDLE = -11;
 
-/// @nodoc
+/// The standard error device. Initially, this is the active console screen
+/// buffer, CONOUT$.
 const STD_ERROR_HANDLE = -12;
 
 /// @nodoc
@@ -4585,48 +4652,101 @@ const BACKGROUND_INTENSITY = 0x0080;
 
 // input flags
 
-/// @nodoc
+/// Characters read by the ReadFile or ReadConsole function are written to the
+/// active screen buffer as they are read. This mode can be used only if the
+/// ENABLE_LINE_INPUT mode is also enabled.
 const ENABLE_ECHO_INPUT = 0x0004;
 
-/// @nodoc
+/// Required to enable or disable extended flags. See ENABLE_INSERT_MODE and
+/// ENABLE_QUICK_EDIT_MODE.
 const ENABLE_EXTENDED_FLAGS = 0x0080;
 
-/// @nodoc
+/// When enabled, text entered in a console window will be inserted at the
+/// current cursor location and all text following that location will not be
+/// overwritten. When disabled, all following text will be overwritten.
+///
+/// To enable this mode, use ENABLE_INSERT_MODE | ENABLE_EXTENDED_FLAGS. To
+/// disable this mode, use ENABLE_EXTENDED_FLAGS without this flag.
 const ENABLE_INSERT_MODE = 0x0020;
 
-/// @nodoc
+/// The ReadFile or ReadConsole function returns only when a carriage return
+/// character is read. If this mode is disabled, the functions return when one
+/// or more characters are available.
 const ENABLE_LINE_INPUT = 0x0002;
 
-/// @nodoc
+/// If the mouse pointer is within the borders of the console window and the
+/// window has the keyboard focus, mouse events generated by mouse movement and
+/// button presses are placed in the input buffer. These events are discarded by
+/// ReadFile or ReadConsole, even when this mode is enabled.
 const ENABLE_MOUSE_INPUT = 0x0010;
 
-/// @nodoc
+/// CTRL+C is processed by the system and is not placed in the input buffer. If
+/// the input buffer is being read by ReadFile or ReadConsole, other control
+/// keys are processed by the system and are not returned in the ReadFile or
+/// ReadConsole buffer. If the ENABLE_LINE_INPUT mode is also enabled,
+/// backspace, carriage return, and line feed characters are handled by the
+/// system.
 const ENABLE_PROCESSED_INPUT = 0x0001;
 
-/// @nodoc
+/// This flag enables the user to use the mouse to select and edit text.
+///
+/// To enable this mode, use ENABLE_QUICK_EDIT_MODE | ENABLE_EXTENDED_FLAGS. To
+/// disable this mode, use ENABLE_EXTENDED_FLAGS without this flag.
 const ENABLE_QUICK_EDIT_MODE = 0x0040;
 
-/// @nodoc
+/// User interactions that change the size of the console screen buffer are
+/// reported in the console's input buffer. Information about these events can
+/// be read from the input buffer by applications using the ReadConsoleInput
+/// function, but not by those using ReadFile or ReadConsole.
 const ENABLE_WINDOW_INPUT = 0x0008;
 
-/// @nodoc
+/// Setting this flag directs the Virtual Terminal processing engine to convert
+/// user input received by the console window into Console Virtual Terminal
+/// Sequences that can be retrieved by a supporting application through ReadFile
+/// or ReadConsole functions.
+///
+/// The typical usage of this flag is intended in conjunction with
+/// ENABLE_VIRTUAL_TERMINAL_PROCESSING on the output handle to connect to an
+/// application that communicates exclusively via virtual terminal sequences.
 const ENABLE_VIRTUAL_TERMINAL_INPUT = 0x0200;
 
 // output flags
 
-/// @nodoc
+/// Characters written by the WriteFile or WriteConsole function or echoed by
+/// the ReadFile or ReadConsole function are examined for ASCII control
+/// sequences and the correct action is performed. Backspace, tab, bell,
+/// carriage return, and line feed characters are processed.
 const ENABLE_PROCESSED_OUTPUT = 0x0001;
 
-/// @nodoc
+/// When writing with WriteFile or WriteConsole or echoing with ReadFile or
+/// ReadConsole, the cursor moves to the beginning of the next row when it
+/// reaches the end of the current row. This causes the rows displayed in the
+/// console window to scroll up automatically when the cursor advances beyond
+/// the last row in the window. It also causes the contents of the console
+/// screen buffer to scroll up (discarding the top row of the console screen
+/// buffer) when the cursor advances beyond the last row in the console screen
+/// buffer. If this mode is disabled, the last character in the row is
+/// overwritten with any subsequent characters.
 const ENABLE_WRAP_AT_EOL_OUTPUT = 0x0002;
 
-/// @nodoc
+/// When writing with WriteFile or WriteConsole, characters are parsed for VT100
+/// and similar control character sequences that control cursor movement,
+/// color/font mode, and other operations that can also be performed via the
+/// existing Console APIs. For more information, see Console Virtual Terminal
+/// Sequences.
 const ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004;
 
-/// @nodoc
+/// When writing with WriteFile or WriteConsole, this adds an additional state
+/// to end-of-line wrapping that can delay the cursor move and buffer scroll
+/// operations.
 const DISABLE_NEWLINE_AUTO_RETURN = 0x0008;
 
-/// @nodoc
+/// The APIs for writing character attributes including WriteConsoleOutput and
+/// WriteConsoleOutputAttribute allow the usage of flags from character
+/// attributes to adjust the color of the foreground and background of text.
+/// Additionally, a range of DBCS flags was specified with the COMMON_LVB
+/// prefix. Historically, these flags only functioned in DBCS code pages for
+/// Chinese, Japanese, and Korean languages.
 const ENABLE_LVB_GRID_WORLDWIDE = 0x0010;
 
 // Monitor APIs
