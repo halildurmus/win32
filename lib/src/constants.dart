@@ -613,57 +613,83 @@ const FORMAT_MESSAGE_ARGUMENT_ARRAY = 0x00002000;
 /// @nodoc
 const FORMAT_MESSAGE_MAX_WIDTH_MASK = 0x000000FF;
 
+// ---------------------
 // WindowStyle constants
+// ---------------------
 
-/// @nodoc
+/// The window has a thin-line border.
 const WS_BORDER = 0x00800000;
 
-/// @nodoc
+/// The window has a title bar (includes the WS_BORDER style).
 const WS_CAPTION = 0x00C00000;
 
-/// @nodoc
+/// The window is a child window. A window with this style cannot have a menu
+/// bar. This style cannot be used with the WS_POPUP style.
 const WS_CHILD = 0x40000000;
 
-/// @nodoc
+/// Same as the WS_CHILD style.
 const WS_CHILDWINDOW = 0x40000000;
 
-/// @nodoc
+/// Excludes the area occupied by child windows when drawing occurs within the
+/// parent window. This style is used when creating the parent window.
 const WS_CLIPCHILDREN = 0x02000000;
 
-/// @nodoc
+/// Clips child windows relative to each other; that is, when a particular child
+/// window receives a WM_PAINT message, the WS_CLIPSIBLINGS style clips all
+/// other overlapping child windows out of the region of the child window to be
+/// updated. If WS_CLIPSIBLINGS is not specified and child windows overlap, it
+/// is possible, when drawing within the client area of a child window, to draw
+/// within the client area of a neighboring child window.
 const WS_CLIPSIBLINGS = 0x04000000;
 
-/// @nodoc
+/// The window is initially disabled. A disabled window cannot receive input
+/// from the user. To change this after a window has been created, use the
+/// EnableWindow function.
 const WS_DISABLED = 0x08000000;
 
-/// @nodoc
+/// The window has a border of a style typically used with dialog boxes. A
+/// window with this style cannot have a title bar.
 const WS_DLGFRAME = 0x00400000;
 
-/// @nodoc
+/// The window is the first control of a group of controls.
+///
+/// The group consists of this first control and all controls defined after it,
+/// up to the next control with the WS_GROUP style. The first control in each
+/// group usually has the WS_TABSTOP style so that the user can move from group
+/// to group. The user can subsequently change the keyboard focus from one
+/// control in the group to the next control in the group by using the direction
+/// keys.
+///
+/// You can turn this style on and off to change dialog box navigation. To
+/// change this style after a window has been created, use the SetWindowLong
+/// function.
 const WS_GROUP = 0x00020000;
 
-/// @nodoc
+/// The window has a horizontal scroll bar.
 const WS_HSCROLL = 0x00100000;
 
-/// @nodoc
+/// The window is initially minimized. Same as the WS_MINIMIZE style.
 const WS_ICONIC = 0x20000000;
 
-/// @nodoc
+/// The window is initially maximized.
 const WS_MAXIMIZE = 0x01000000;
 
-/// @nodoc
+/// The window has a maximize button. Cannot be combined with the
+/// WS_EX_CONTEXTHELP style. The WS_SYSMENU style must also be specified.
 const WS_MAXIMIZEBOX = 0x00010000;
 
-/// @nodoc
+/// The window is initially minimized. Same as the WS_ICONIC style.
 const WS_MINIMIZE = 0x20000000;
 
-/// @nodoc
+/// The window has a minimize button. Cannot be combined with the
+/// WS_EX_CONTEXTHELP style. The WS_SYSMENU style must also be specified.
 const WS_MINIMIZEBOX = 0x00020000;
 
-/// @nodoc
+/// The window is an overlapped window. An overlapped window has a title bar and
+/// a border. Same as the WS_TILED style.
 const WS_OVERLAPPED = 0x00000000;
 
-/// @nodoc
+/// The window is an overlapped window. Same as the WS_TILEDWINDOW style.
 const WS_OVERLAPPEDWINDOW = WS_OVERLAPPED |
     WS_CAPTION |
     WS_SYSMENU |
@@ -671,28 +697,41 @@ const WS_OVERLAPPEDWINDOW = WS_OVERLAPPED |
     WS_MINIMIZEBOX |
     WS_MAXIMIZEBOX;
 
-/// @nodoc
+/// The window is a pop-up window. This style cannot be used with the WS_CHILD
+/// style.
 const WS_POPUP = 0x80000000;
 
-/// @nodoc
+/// The window is a pop-up window. The WS_CAPTION and WS_POPUPWINDOW styles must
+/// be combined to make the window menu visible.
 const WS_POPUPWINDOW = WS_POPUP | WS_BORDER | WS_SYSMENU;
 
-/// @nodoc
+/// The window has a sizing border. Same as the WS_THICKFRAME style.
 const WS_SIZEBOX = 0x00040000;
 
-/// @nodoc
+/// The window has a window menu on its title bar. The WS_CAPTION style must
+/// also be specified.
 const WS_SYSMENU = 0x00080000;
 
-/// @nodoc
+/// The window is a control that can receive the keyboard focus when the user
+/// presses the TAB key.
+///
+/// Pressing the TAB key changes the keyboard focus to the next control with the
+/// WS_TABSTOP style.
+///
+/// You can turn this style on and off to change dialog box navigation. To
+/// change this style after a window has been created, use the SetWindowLong
+/// function. For user-created windows and modeless dialogs to work with tab
+/// stops, alter the message loop to call the IsDialogMessage function.
 const WS_TABSTOP = 0x00010000;
 
-/// @nodoc
+/// The window has a sizing border. Same as the WS_SIZEBOX style.
 const WS_THICKFRAME = 0x00040000;
 
-/// @nodoc
+/// The window is an overlapped window. An overlapped window has a title bar and
+/// a border. Same as the WS_OVERLAPPED style.
 const WS_TILED = 0x00000000;
 
-/// @nodoc
+/// The window is an overlapped window. Same as the WS_OVERLAPPEDWINDOW style.
 const WS_TILEDWINDOW = WS_OVERLAPPED |
     WS_CAPTION |
     WS_SYSMENU |
@@ -700,10 +739,13 @@ const WS_TILEDWINDOW = WS_OVERLAPPED |
     WS_MINIMIZEBOX |
     WS_MAXIMIZEBOX;
 
-/// @nodoc
+/// The window is initially visible.
+///
+/// This style can be turned on and off by using the ShowWindow or SetWindowPos
+/// function.
 const WS_VISIBLE = 0x10000000;
 
-/// @nodoc
+/// The window has a vertical scroll bar.
 const WS_VSCROLL = 0x00200000;
 
 // -----------------------
@@ -2087,85 +2129,116 @@ const SW_SHOWDEFAULT = 10;
 /// @nodoc
 const SW_FORCEMINIMIZE = 11;
 
+// ----------------------
 // Edit Control constants
+// ----------------------
 
-/// @nodoc
+/// Aligns text with the left margin.
 const ES_LEFT = 0x0000;
 
-/// @nodoc
+/// Centers text in a single-line or multiline edit control.
 const ES_CENTER = 0x0001;
 
-/// @nodoc
+/// Right-aligns text in a single-line or multiline edit control.
 const ES_RIGHT = 0x0002;
 
-/// @nodoc
+/// Designates a multiline edit control. The default is single-line edit
+/// control.
 const ES_MULTILINE = 0x0004;
 
-/// @nodoc
+/// Converts all characters to uppercase as they are typed into the edit
+/// control.
 const ES_UPPERCASE = 0x0008;
 
-/// @nodoc
+/// Converts all characters to lowercase as they are typed into the edit
+/// control.
 const ES_LOWERCASE = 0x0010;
 
-/// @nodoc
+/// Displays an asterisk (*) for each character typed into the edit control.
+/// This style is valid only for single-line edit controls.
 const ES_PASSWORD = 0x0020;
 
-/// @nodoc
+/// Automatically scrolls text up one page when the user presses the ENTER key
+/// on the last line.
 const ES_AUTOVSCROLL = 0x0040;
 
-/// @nodoc
+/// Automatically scrolls text to the right by 10 characters when the user types
+/// a character at the end of the line. When the user presses the ENTER key, the
+/// control scrolls all text back to position zero.
 const ES_AUTOHSCROLL = 0x0080;
 
-/// @nodoc
+/// Negates the default behavior for an edit control. The default behavior hides
+/// the selection when the control loses the input focus and inverts the
+/// selection when the control receives the input focus. If you specify
+/// ES_NOHIDESEL, the selected text is inverted, even if the control does not
+/// have the focus.
 const ES_NOHIDESEL = 0x0100;
 
-/// @nodoc
+/// Converts text entered in the edit control. The text is converted from the
+/// Windows character set to the OEM character set and then back to the Windows
+/// character set. This ensures proper character conversion when the application
+/// calls the CharToOem function to convert a Windows string in the edit control
+/// to OEM characters. This style is most useful for edit controls that contain
+/// file names that will be used on file systems that do not support Unicode.
 const ES_OEMCONVERT = 0x0400;
 
-/// @nodoc
+/// Prevents the user from typing or editing text in the edit control.
 const ES_READONLY = 0x0800;
 
-/// @nodoc
+/// Specifies that a carriage return be inserted when the user presses the ENTER
+/// key while entering text into a multiline edit control in a dialog box. If
+/// you do not specify this style, pressing the ENTER key has the same effect as
+/// pressing the dialog box's default push button. This style has no effect on a
+/// single-line edit control.
 const ES_WANTRETURN = 0x1000;
 
-/// @nodoc
+/// Allows only digits to be entered into the edit control. Note that, even with
+/// this set, it is still possible to paste non-digits into the edit control.
 const ES_NUMBER = 0x2000;
 
-/// @nodoc
+// --------------------------
+// Edit control notifications
+// --------------------------
+
+/// Sent when an edit control receives the keyboard focus.
 const EN_SETFOCUS = 0x0100;
 
-/// @nodoc
+/// Sent when an edit control loses the keyboard focus.
 const EN_KILLFOCUS = 0x0200;
 
-/// @nodoc
+/// Sent when the user has taken an action that may have altered text in an edit
+/// control.
+///
+/// Unlike the EN_UPDATE notification code, this notification code is sent after
+/// the system updates the screen.
 const EN_CHANGE = 0x0300;
 
-/// @nodoc
+/// Sent when an edit control is about to redraw itself. This notification code
+/// is sent after the control has formatted the text, but before it displays the
+/// text. This makes it possible to resize the edit control window, if
+/// necessary.
 const EN_UPDATE = 0x0400;
 
-/// @nodoc
+/// Sent when an edit control cannot allocate enough memory to meet a specific
+/// request.
 const EN_ERRSPACE = 0x0500;
 
-/// @nodoc
+/// Sent when the current text insertion has exceeded the specified number of
+/// characters for the edit control. The text insertion has been truncated.
 const EN_MAXTEXT = 0x0501;
 
-/// @nodoc
+/// Sent when the user clicks an edit control's horizontal scroll bar.
 const EN_HSCROLL = 0x0601;
 
-/// @nodoc
+/// Sent when the user clicks an edit control's vertical scroll bar or when the
+/// user scrolls the mouse wheel over the edit control.
 const EN_VSCROLL = 0x0602;
 
-/// @nodoc
+/// Sent when the user has changed the edit control direction to left-to-right.
 const EN_ALIGN_LTR_EC = 0x0700;
 
-/// @nodoc
+/// Sent when the user has changed the edit control direction to right-to-left.
 const EN_ALIGN_RTL_EC = 0x0701;
-
-/// @nodoc
-const EN_BEFORE_PASTE = 0x0800;
-
-/// @nodoc
-const EN_AFTER_PASTE = 0x0801;
 
 /// @nodoc
 const EC_LEFTMARGIN = 0x0001;
