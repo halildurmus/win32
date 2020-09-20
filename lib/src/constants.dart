@@ -26,272 +26,294 @@ const STATUS_SUCCESS = 0;
 // Path length
 const MAX_PATH = 260;
 
-/// @nodoc
+// ---------------
+// COM Error Codes
+// ---------------
+
+/// For broadly applicable common status codes such as S_OK.
 const FACILITY_NULL = 0;
 
-/// @nodoc
+/// For status codes returned from remote procedure calls.
 const FACILITY_RPC = 1;
 
-/// @nodoc
+/// For late-binding IDispatch interface errors.
 const FACILITY_DISPATCH = 2;
 
-/// @nodoc
+/// For status codes returned from IStorage or IStream method calls relating to
+/// structured storage. Status codes whose code (lower 16 bits) value is in the
+/// range of MS-DOS error codes (that is, less than 256) have the same meaning
+/// as the corresponding MS-DOS error.
 const FACILITY_STORAGE = 3;
 
-/// @nodoc
+/// For most status codes returned from interface methods. The actual meaning of
+/// the error is defined by the interface. That is, two HRESULTs with exactly
+/// the same 32-bit value returned from two different interfaces might have
+/// different meanings.
 const FACILITY_ITF = 4;
 
-/// @nodoc
+/// Used to provide a means of handling error codes from functions in the
+/// Windows API as an HRESULT. Error codes in 16-bit OLE that duplicated system
+/// error codes have also been changed to FACILITY_WIN32.
 const FACILITY_WIN32 = 7;
 
-/// @nodoc
+/// Used for additional error codes from Microsoft-defined interfaces.
 const FACILITY_WINDOWS = 8;
 
-/// @nodoc
+/// The source of the error code is the Security API layer.
 const FACILITY_SSPI = 9;
 
-/// @nodoc
+/// The source of the error code is the Security API layer.
 const FACILITY_SECURITY = 9;
 
-/// @nodoc
+/// The source of the error code is the control mechanism.
 const FACILITY_CONTROL = 10;
 
-/// @nodoc
+/// The source of the error code is a certificate client or server
 const FACILITY_CERT = 11;
 
-/// @nodoc
+/// The source of the error code is Wininet related.
 const FACILITY_INTERNET = 12;
 
+// ---------------
 // Error constants
-/// @nodoc
+// ---------------
+
+/// The operation completed successfully.
 const ERROR_SUCCESS = 0;
 
-/// @nodoc
+/// The operation completed successfully.
 const NO_ERROR = 0;
 
-/// @nodoc
+/// The operation completed successfully.
 const SEC_E_OK = 0;
 
-/// @nodoc
+/// Incorrect function.
 const ERROR_INVALID_FUNCTION = 1;
 
-/// @nodoc
+/// The system cannot find the file specified.
 const ERROR_FILE_NOT_FOUND = 2;
 
-/// @nodoc
+/// The system cannot find the path specified.
 const ERROR_PATH_NOT_FOUND = 3;
 
-/// @nodoc
+/// The system cannot open the file.
 const ERROR_TOO_MANY_OPEN_FILES = 4;
 
-/// @nodoc
+/// Access is denied.
 const ERROR_ACCESS_DENIED = 5;
 
-/// @nodoc
+/// The handle is invalid.
 const ERROR_INVALID_HANDLE = 6;
 
-/// @nodoc
+/// The storage control blocks were destroyed.
 const ERROR_ARENA_TRASHED = 7;
 
-/// @nodoc
+/// Not enough memory resources are available to process this command.
 const ERROR_NOT_ENOUGH_MEMORY = 8;
 
-/// @nodoc
+/// The storage control block address is invalid.
 const ERROR_INVALID_BLOCK = 9;
 
-/// @nodoc
+/// The environment is incorrect.
 const ERROR_BAD_ENVIRONMENT = 10;
 
-/// @nodoc
+/// An attempt was made to load a program with an incorrect format.
 const ERROR_BAD_FORMAT = 11;
 
-/// @nodoc
+/// The access code is invalid.
 const ERROR_INVALID_ACCESS = 12;
 
-/// @nodoc
+/// The data is invalid.
 const ERROR_INVALID_DATA = 13;
 
-/// @nodoc
+/// Not enough storage is available to complete this operation.
 const ERROR_OUTOFMEMORY = 14;
 
-/// @nodoc
+/// The system cannot find the drive specified.
 const ERROR_INVALID_DRIVE = 15;
 
-/// @nodoc
+/// The directory cannot be removed.
 const ERROR_CURRENT_DIRECTORY = 16;
 
-/// @nodoc
+/// The system cannot move the file to a different disk drive.
 const ERROR_NOT_SAME_DEVICE = 17;
 
-/// @nodoc
+/// There are no more files.
 const ERROR_NO_MORE_FILES = 18;
 
-/// @nodoc
+/// The media is write protected.
 const ERROR_WRITE_PROTECT = 19;
 
-/// @nodoc
+/// The system cannot find the device specified.
 const ERROR_BAD_UNIT = 20;
 
-/// @nodoc
+/// The device is not ready.
 const ERROR_NOT_READY = 21;
 
-/// @nodoc
+/// The device does not recognize the command.
 const ERROR_BAD_COMMAND = 22;
 
-/// @nodoc
+/// Data error (cyclic redundancy check).
 const ERROR_CRC = 23;
 
-/// @nodoc
+/// The program issued a command but the command length is incorrect.
 const ERROR_BAD_LENGTH = 24;
 
-/// @nodoc
+/// The drive cannot locate a specific area or track on the disk.
 const ERROR_SEEK = 25;
 
-/// @nodoc
+/// The specified disk or diskette cannot be accessed.
 const ERROR_NOT_DOS_DISK = 26;
 
-/// @nodoc
+/// The drive cannot find the sector requested.
 const ERROR_SECTOR_NOT_FOUND = 27;
 
-/// @nodoc
+/// The printer is out of paper.
 const ERROR_OUT_OF_PAPER = 28;
 
-/// @nodoc
+/// The system cannot write to the specified device.
 const ERROR_WRITE_FAULT = 29;
 
-/// @nodoc
+/// The system cannot read from the specified device.
 const ERROR_READ_FAULT = 30;
 
-/// @nodoc
+/// A device attached to the system is not functioning.
 const ERROR_GEN_FAILURE = 31;
 
-/// @nodoc
+/// The process cannot access the file because it is being used by another
+/// process.
 const ERROR_SHARING_VIOLATION = 32;
 
-/// @nodoc
+/// The process cannot access the file because another process has locked a
+/// portion of the file.
 const ERROR_LOCK_VIOLATION = 33;
 
-/// @nodoc
+/// The wrong diskette is in the drive.
 const ERROR_WRONG_DISK = 34;
 
-/// @nodoc
+/// Too many files opened for sharing.
 const ERROR_SHARING_BUFFER_EXCEEDED = 36;
 
-/// @nodoc
+/// Reached the end of the file.
 const ERROR_HANDLE_EOF = 38;
 
-/// @nodoc
+/// The disk is full.
 const ERROR_HANDLE_DISK_FULL = 39;
 
-/// @nodoc
+/// The request is not supported.
 const ERROR_NOT_SUPPORTED = 50;
 
-/// @nodoc
+/// Windows cannot find the network path. Verify that the network path is
+/// correct and the destination computer is not busy or turned off. If Windows
+/// still cannot find the network path, contact your network administrator.
 const ERROR_REM_NOT_LIST = 51;
 
-/// @nodoc
+/// You were not connected because a duplicate name exists on the network. If
+/// joining a domain, go to System in Control Panel to change the computer name
+/// and try again. If joining a workgroup, choose another workgroup name.
 const ERROR_DUP_NAME = 52;
 
-/// @nodoc
+/// The network path was not found.
 const ERROR_BAD_NETPATH = 53;
 
-/// @nodoc
+/// The network is busy.
 const ERROR_NETWORK_BUSY = 54;
 
-/// @nodoc
+/// The specified network resource or device is no longer available.
 const ERROR_DEV_NOT_EXIST = 55;
 
-/// @nodoc
+/// The network BIOS command limit has been reached.
 const ERROR_TOO_MANY_CMDS = 56;
 
-/// @nodoc
+/// A network adapter hardware error occurred.
 const ERROR_ADAP_HDW_ERR = 57;
 
-/// @nodoc
+/// The specified server cannot perform the requested operation.
 const ERROR_BAD_NET_RESP = 58;
 
-/// @nodoc
+/// An unexpected network error occurred.
 const ERROR_UNEXP_NET_ERR = 59;
 
-/// @nodoc
+/// The remote adapter is not compatible.
 const ERROR_BAD_REM_ADAP = 60;
 
-/// @nodoc
+/// The printer queue is full.
 const ERROR_PRINTQ_FULL = 61;
 
-/// @nodoc
+/// Space to store the file waiting to be printed is not available on the server.
 const ERROR_NO_SPOOL_SPACE = 62;
 
-/// @nodoc
+/// Your file waiting to be printed was deleted.
 const ERROR_PRINT_CANCELLED = 63;
 
-/// @nodoc
+/// The specified network name is no longer available.
 const ERROR_NETNAME_DELETED = 64;
 
-/// @nodoc
+/// Network access is denied.
 const ERROR_NETWORK_ACCESS_DENIED = 65;
 
-/// @nodoc
+/// The network resource type is not correct.
 const ERROR_BAD_DEV_TYPE = 66;
 
-/// @nodoc
+/// The network name cannot be found.
 const ERROR_BAD_NET_NAME = 67;
 
-/// @nodoc
+/// The name limit for the local computer network adapter card was exceeded.
 const ERROR_TOO_MANY_NAMES = 68;
 
-/// @nodoc
+/// The network BIOS session limit was exceeded.
 const ERROR_TOO_MANY_SESS = 69;
 
-/// @nodoc
+/// The remote server has been paused or is in the process of being started.
 const ERROR_SHARING_PAUSED = 70;
 
-/// @nodoc
+/// No more connections can be made to this remote computer at this time because
+/// there are already as many connections as the computer can accept.
 const ERROR_REQ_NOT_ACCEP = 71;
 
-/// @nodoc
+/// The specified printer or disk device has been paused.
 const ERROR_REDIR_PAUSED = 72;
 
-/// @nodoc
+/// The file exists.
 const ERROR_FILE_EXISTS = 80;
 
-/// @nodoc
+/// The directory or file cannot be created.
 const ERROR_CANNOT_MAKE = 82;
 
-/// @nodoc
+/// Fail on INT 24.
 const ERROR_FAIL_I24 = 83;
 
-/// @nodoc
+/// Storage to process this request is not available.
 const ERROR_OUT_OF_STRUCTURES = 84;
 
-/// @nodoc
+/// The local device name is already in use.
 const ERROR_ALREADY_ASSIGNED = 85;
 
-/// @nodoc
+/// The specified network password is not correct.
 const ERROR_INVALID_PASSWORD = 86;
 
-/// @nodoc
+/// The parameter is incorrect.
 const ERROR_INVALID_PARAMETER = 87;
 
-/// @nodoc
+/// A write fault occurred on the network.
 const ERROR_NET_WRITE_FAULT = 88;
 
-/// @nodoc
+/// The system cannot start another process at this time.
 const ERROR_NO_PROC_SLOTS = 89;
 
-/// @nodoc
+/// Cannot create another system semaphore.
 const ERROR_TOO_MANY_SEMAPHORES = 100;
 
-/// @nodoc
+/// The exclusive semaphore is owned by another process.
 const ERROR_EXCL_SEM_ALREADY_OWNED = 101;
 
-/// @nodoc
+/// The semaphore is set and cannot be closed.
 const ERROR_SEM_IS_SET = 102;
 
-/// @nodoc
+/// The semaphore cannot be set again.
 const ERROR_TOO_MANY_SEM_REQUESTS = 103;
 
-/// @nodoc
+/// Cannot request exclusive semaphores at interrupt time.
 const ERROR_INVALID_AT_INTERRUPT_TIME = 104;
 
 /// @nodoc
@@ -684,369 +706,632 @@ const WS_VISIBLE = 0x10000000;
 /// @nodoc
 const WS_VSCROLL = 0x00200000;
 
+// -----------------------
 // WindowMessage constants
+// -----------------------
 
-/// @nodoc
+/// Performs no operation.
+///
+/// An application sends the WM_NULL message if it wants to post a message that
+/// the recipient window will ignore.
 const WM_NULL = 0x0000;
 
-/// @nodoc
+/// Sent when an application requests that a window be created by calling the
+/// CreateWindowEx or CreateWindow function.
+///
+/// (The message is sent before the function returns.) The window procedure of
+/// the new window receives this message after the window is created, but before
+/// the window becomes visible.
 const WM_CREATE = 0x0001;
 
-/// @nodoc
+/// Sent when a window is being destroyed.
+///
+/// It is sent to the window procedure of the window being destroyed after the
+/// window is removed from the screen.
+///
+/// This message is sent first to the window being destroyed and then to the
+/// child windows (if any) as they are destroyed. During the processing of the
+/// message, it can be assumed that all child windows still exist.
 const WM_DESTROY = 0x0002;
 
-/// @nodoc
+/// Sent after a window has been moved.
 const WM_MOVE = 0x0003;
 
-/// @nodoc
+/// Sent to a window after its size has changed.
 const WM_SIZE = 0x0005;
 
-/// @nodoc
+/// Sent to both the window being activated and the window being deactivated.
+///
+/// If the windows use the same input queue, the message is sent synchronously,
+/// first to the window procedure of the top-level window being deactivated,
+/// then to the window procedure of the top-level window being activated. If the
+/// windows use different input queues, the message is sent asynchronously, so
+/// the window is activated immediately.
 const WM_ACTIVATE = 0x0006;
 
-/// @nodoc
+/// Sent to a window after it has gained the keyboard focus.
 const WM_SETFOCUS = 0x0007;
 
-/// @nodoc
+/// Sent to a window immediately before it loses the keyboard focus.
 const WM_KILLFOCUS = 0x0008;
 
-/// @nodoc
+/// Sent when an application changes the enabled state of a window.
+///
+/// It is sent to the window whose enabled state is changing. This message is
+/// sent before the EnableWindow function returns, but after the enabled state
+/// (WS_DISABLED style bit) of the window has changed.
 const WM_ENABLE = 0x000A;
 
-/// @nodoc
+/// An application sends the WM_SETREDRAW message to a window to allow changes
+/// in that window to be redrawn or to prevent changes in that window from being
+/// redrawn.
 const WM_SETREDRAW = 0x000B;
 
-/// @nodoc
+/// Sets the text of a window.
 const WM_SETTEXT = 0x000C;
 
-/// @nodoc
+/// Copies the text that corresponds to a window into a buffer provided by the
+/// caller.
 const WM_GETTEXT = 0x000D;
 
-/// @nodoc
+/// Determines the length, in characters, of the text associated with a window.
 const WM_GETTEXTLENGTH = 0x000E;
 
-/// @nodoc
+/// The WM_PAINT message is sent when the system or another application makes a
+/// request to paint a portion of an application's window.
+///
+/// The message is sent when the UpdateWindow or RedrawWindow function is
+/// called, or by the DispatchMessage function when the application obtains a
+/// WM_PAINT message by using the GetMessage or PeekMessage function.
 const WM_PAINT = 0x000F;
 
-/// @nodoc
+/// Sent as a signal that a window or an application should terminate.
 const WM_CLOSE = 0x0010;
 
-/// @nodoc
+/// The WM_QUERYENDSESSION message is sent when the user chooses to end the
+/// session or when an application calls one of the system shutdown functions.
+///
+/// If any application returns zero, the session is not ended. The system stops
+/// sending WM_QUERYENDSESSION messages as soon as one application returns zero.
+///
+/// After processing this message, the system sends the WM_ENDSESSION message
+/// with the wParam parameter set to the results of the WM_QUERYENDSESSION
+/// message.
 const WM_QUERYENDSESSION = 0x0011;
 
-/// @nodoc
+/// Sent to an icon when the user requests that the window be restored to its
+/// previous size and position.
 const WM_QUERYOPEN = 0x0013;
 
-/// @nodoc
+/// The WM_ENDSESSION message is sent to an application after the system
+/// processes the results of the WM_QUERYENDSESSION message. The WM_ENDSESSION
+/// message informs the application whether the session is ending.
 const WM_ENDSESSION = 0x0016;
 
-/// @nodoc
+/// Indicates a request to terminate an application, and is generated when the
+/// application calls the PostQuitMessage function. This message causes the
+/// GetMessage function to return zero.
 const WM_QUIT = 0x0012;
 
-/// @nodoc
+/// Sent when the window background must be erased (for example, when a window
+/// is resized). The message is sent to prepare an invalidated portion of a
+/// window for painting.
 const WM_ERASEBKGND = 0x0014;
 
-/// @nodoc
+/// The WM_SYSCOLORCHANGE message is sent to all top-level windows when a change
+/// is made to a system color setting.
 const WM_SYSCOLORCHANGE = 0x0015;
 
-/// @nodoc
+/// Sent to a window when the window is about to be hidden or shown.
 const WM_SHOWWINDOW = 0x0018;
 
-/// @nodoc
+/// An application sends the WM_WININICHANGE message to all top-level windows
+/// after making a change to the WIN.INI file. The SystemParametersInfo function
+/// sends this message after an application uses the function to change a
+/// setting in WIN.INI.
 const WM_WININICHANGE = 0x001A;
 
-/// @nodoc
+/// A message that is sent to all top-level windows when the
+/// SystemParametersInfo function changes a system-wide setting or when policy
+/// settings have changed.
+///
+/// Applications should send WM_SETTINGCHANGE to all top-level windows when they
+/// make changes to system parameters. (This message cannot be sent directly to
+/// a window.) To send the WM_SETTINGCHANGE message to all top-level windows,
+/// use the SendMessageTimeout function with the hwnd parameter set to
+/// HWND_BROADCAST.
 const WM_SETTINGCHANGE = WM_WININICHANGE;
 
-/// @nodoc
+/// The WM_DEVMODECHANGE message is sent to all top-level windows whenever the
+/// user changes device-mode settings.
 const WM_DEVMODECHANGE = 0x001B;
 
-/// @nodoc
+/// Sent when a window belonging to a different application than the active
+/// window is about to be activated. The message is sent to the application
+/// whose window is being activated and to the application whose window is being
+/// deactivated.
 const WM_ACTIVATEAPP = 0x001C;
 
-/// @nodoc
+/// An application sends the WM_FONTCHANGE message to all top-level windows in
+/// the system after changing the pool of font resources.
 const WM_FONTCHANGE = 0x001D;
 
-/// @nodoc
+/// A message that is sent whenever there is a change in the system time.
 const WM_TIMECHANGE = 0x001E;
 
-/// @nodoc
+/// Sent to cancel certain modes, such as mouse capture. For example, the system
+/// sends this message to the active window when a dialog box or message box is
+/// displayed. Certain functions also send this message explicitly to the
+/// specified window regardless of whether it is the active window. For example,
+/// the EnableWindow function sends this message when disabling the specified
+/// window.
 const WM_CANCELMODE = 0x001F;
 
-/// @nodoc
+/// Sent to a window if the mouse causes the cursor to move within a window and
+/// mouse input is not captured.
 const WM_SETCURSOR = 0x0020;
 
-/// @nodoc
+/// Sent when the cursor is in an inactive window and the user presses a mouse
+/// button. The parent window receives this message only if the child window
+/// passes it to the DefWindowProc function.
 const WM_MOUSEACTIVATE = 0x0021;
 
-/// @nodoc
+/// Sent to a child window when the user clicks the window's title bar or when
+/// the window is activated, moved, or sized.
 const WM_CHILDACTIVATE = 0x0022;
 
-/// @nodoc
+/// Sent by a computer-based training (CBT) application to separate user-input
+/// messages from other messages sent through the WH_JOURNALPLAYBACK procedure.
 const WM_QUEUESYNC = 0x0023;
 
-/// @nodoc
+/// Sent to a window when the size or position of the window is about to change.
+/// An application can use this message to override the window's default
+/// maximized size and position, or its default minimum or maximum tracking
+/// size.
 const WM_GETMINMAXINFO = 0x0024;
 
-/// @nodoc
+/// Deprecated. This message is not sent in modern versions of Windows.
 const WM_PAINTICON = 0x0026;
 
-/// @nodoc
+/// Deprecated. This message is not sent in modern versions of Windows.
 const WM_ICONERASEBKGND = 0x0027;
 
-/// @nodoc
+/// Sent to a dialog box procedure to set the keyboard focus to a different
+/// control in the dialog box.
 const WM_NEXTDLGCTL = 0x0028;
 
-/// @nodoc
+/// The WM_SPOOLERSTATUS message is sent from Print Manager whenever a job is
+/// added to or removed from the Print Manager queue.
 const WM_SPOOLERSTATUS = 0x002A;
 
-/// @nodoc
+/// Sent to the parent window of an owner-drawn button, combo box, list box, or
+/// menu when a visual aspect of the button, combo box, list box, or menu has
+/// changed.
 const WM_DRAWITEM = 0x002B;
 
-/// @nodoc
+/// Sent to the owner window of a combo box, list box, list-view control, or
+/// menu item when the control or menu is created.
 const WM_MEASUREITEM = 0x002C;
 
-/// @nodoc
+/// Sent to the owner of a list box or combo box when the list box or combo box
+/// is destroyed or when items are removed by the LB_DELETESTRING,
+/// LB_RESETCONTENT, CB_DELETESTRING, or CB_RESETCONTENT message. The system
+/// sends a WM_DELETEITEM message for each deleted item. The system sends the
+/// WM_DELETEITEM message for any deleted list box or combo box item with
+/// nonzero item data.
 const WM_DELETEITEM = 0x002D;
 
-/// @nodoc
+/// Sent by a list box with the LBS_WANTKEYBOARDINPUT style to its owner in
+/// response to a WM_KEYDOWN message.
 const WM_VKEYTOITEM = 0x002E;
 
-/// @nodoc
+/// Sent by a list box with the LBS_WANTKEYBOARDINPUT style to its owner in
+/// response to a WM_CHAR message.
 const WM_CHARTOITEM = 0x002F;
 
-/// @nodoc
+/// Sets the font that a control is to use when drawing text.
 const WM_SETFONT = 0x0030;
 
-/// @nodoc
+/// Retrieves the font with which the control is currently drawing its text.
 const WM_GETFONT = 0x0031;
 
-/// @nodoc
+/// Sent to a window to associate a hot key with the window. When the user
+/// presses the hot key, the system activates the window.
 const WM_SETHOTKEY = 0x0032;
 
-/// @nodoc
+/// Sent to determine the hot key associated with a window.
 const WM_GETHOTKEY = 0x0033;
 
-/// @nodoc
+/// Sent to a minimized (iconic) window. The window is about to be dragged by
+/// the user but does not have an icon defined for its class. An application can
+/// return a handle to an icon or cursor. The system displays this cursor or
+/// icon while the user drags the icon.
 const WM_QUERYDRAGICON = 0x0037;
 
-/// @nodoc
+/// Sent to determine the relative position of a new item in the sorted list of
+/// an owner-drawn combo box or list box. Whenever the application adds a new
+/// item, the system sends this message to the owner of a combo box or list box
+/// created with the CBS_SORT or LBS_SORT style.
 const WM_COMPAREITEM = 0x0039;
 
-/// @nodoc
+/// Sent by both Microsoft Active Accessibility and Microsoft UI Automation to
+/// obtain information about an accessible object contained in a server
+/// application.
+///
+/// Applications never send this message directly. Microsoft Active
+/// Accessibility sends this message in response to calls to
+/// AccessibleObjectFromPoint, AccessibleObjectFromEvent, or
+/// AccessibleObjectFromWindow. However, server applications handle this
+/// message. UI Automation sends this message in response to calls to
+/// IUIAutomation::ElementFromHandle, ElementFromPoint, and GetFocusedElement,
+/// and when handling events for which a client has registered.
 const WM_GETOBJECT = 0x003D;
 
-/// @nodoc
+/// Sent to all top-level windows when the system detects more than 12.5 percent
+/// of system time over a 30- to 60-second interval is being spent compacting
+/// memory. This indicates that system memory is low.
 const WM_COMPACTING = 0x0041;
 
-/// @nodoc
+/// Deprecated. This message is not sent in modern versions of Windows.
 const WM_COMMNOTIFY = 0x0044;
 
-/// @nodoc
+/// Sent to a window whose size, position, or place in the Z order is about to
+/// change as a result of a call to the SetWindowPos function or another
+/// window-management function.
 const WM_WINDOWPOSCHANGING = 0x0046;
 
-/// @nodoc
+/// Sent to a window whose size, position, or place in the Z order has changed
+/// as a result of a call to the SetWindowPos function or another
+/// window-management function.
 const WM_WINDOWPOSCHANGED = 0x0047;
 
-/// @nodoc
+/// Notifies applications that the system, typically a battery-powered personal
+/// computer, is about to enter a suspended mode.
 const WM_POWER = 0x0048;
 
-/// @nodoc
+/// Sent by a common control to its parent window when an event has occurred or
+/// the control requires some information.
 const WM_NOTIFY = 0x004E;
 
-/// @nodoc
+/// Posted to the window with the focus when the user chooses a new input
+/// language, either with the hotkey (specified in the Keyboard control panel
+/// application) or from the indicator on the system taskbar. An application can
+/// accept the change by passing the message to the DefWindowProc function or
+/// reject the change (and prevent it from taking place) by returning
+/// immediately.
 const WM_INPUTLANGCHANGEREQUEST = 0x0050;
 
-/// @nodoc
+/// Sent to the topmost affected window after an application's input language
+/// has been changed. You should make any application-specific settings and pass
+/// the message to the DefWindowProc function, which passes the message to all
+/// first-level child windows. These child windows can pass the message to
+/// DefWindowProc to have it pass the message to their child windows, and so on.
 const WM_INPUTLANGCHANGE = 0x0051;
 
-/// @nodoc
+/// Sent to an application that has initiated a training card with Windows Help.
+/// The message informs the application when the user clicks an authorable
+/// button. An application initiates a training card by specifying the
+/// HELP_TCARD command in a call to the WinHelp function.
 const WM_TCARD = 0x0052;
 
-/// @nodoc
+/// Indicates that the user pressed the F1 key. If a menu is active when F1 is
+/// pressed, WM_HELP is sent to the window associated with the menu; otherwise,
+/// WM_HELP is sent to the window that has the keyboard focus. If no window has
+/// the keyboard focus, WM_HELP is sent to the currently active window.
 const WM_HELP = 0x0053;
 
-/// @nodoc
+/// Sent to all windows after the user has logged on or off. When the user logs
+/// on or off, the system updates the user-specific settings. The system sends
+/// this message immediately after updating the settings.
 const WM_USERCHANGED = 0x0054;
 
-/// @nodoc
+/// Determines if a window accepts ANSI or Unicode structures in the WM_NOTIFY
+/// notification message. WM_NOTIFYFORMAT messages are sent from a common
+/// control to its parent window and from the parent window to the common
+/// control.
 const WM_NOTIFYFORMAT = 0x0055;
 
-/// @nodoc
+/// Notifies a window that the user clicked the right mouse button
+/// (right-clicked) in the window.
 const WM_CONTEXTMENU = 0x007B;
 
-/// @nodoc
+/// Sent to a window when the SetWindowLong function is about to change one or
+/// more of the window's styles.
 const WM_STYLECHANGING = 0x007C;
 
-/// @nodoc
+/// Sent to a window after the SetWindowLong function has changed one or more of
+/// the window's styles.
 const WM_STYLECHANGED = 0x007D;
 
-/// @nodoc
+/// The WM_DISPLAYCHANGE message is sent to all windows when the display
+/// resolution has changed.
 const WM_DISPLAYCHANGE = 0x007E;
 
-/// @nodoc
+/// Sent to a window to retrieve a handle to the large or small icon associated
+/// with a window. The system displays the large icon in the ALT+TAB dialog, and
+/// the small icon in the window caption.
 const WM_GETICON = 0x007F;
 
-/// @nodoc
+/// Associates a new large or small icon with a window. The system displays the
+/// large icon in the ALT+TAB dialog box, and the small icon in the window
+/// caption.
 const WM_SETICON = 0x0080;
 
-/// @nodoc
+/// Sent prior to the WM_CREATE message when a window is first created.
 const WM_NCCREATE = 0x0081;
 
-/// @nodoc
+/// Notifies a window that its nonclient area is being destroyed. The
+/// DestroyWindow function sends the WM_NCDESTROY message to the window
+/// following the WM_DESTROY message.WM_DESTROY is used to free the allocated
+/// memory object associated with the window.
+///
+/// The WM_NCDESTROY message is sent after the child windows have been
+/// destroyed. In contrast, WM_DESTROY is sent before the child windows are
+/// destroyed.
 const WM_NCDESTROY = 0x0082;
 
-/// @nodoc
+/// Sent when the size and position of a window's client area must be
+/// calculated. By processing this message, an application can control the
+/// content of the window's client area when the size or position of the window
+/// changes.
 const WM_NCCALCSIZE = 0x0083;
 
-/// @nodoc
+/// Sent to a window in order to determine what part of the window corresponds
+/// to a particular screen coordinate. This can happen, for example, when the
+/// cursor moves, when a mouse button is pressed or released, or in response to
+/// a call to a function such as WindowFromPoint. If the mouse is not captured,
+/// the message is sent to the window beneath the cursor. Otherwise, the message
+/// is sent to the window that has captured the mouse.
 const WM_NCHITTEST = 0x0084;
 
-/// @nodoc
+/// The WM_NCPAINT message is sent to a window when its frame must be painted.
 const WM_NCPAINT = 0x0085;
 
-/// @nodoc
+/// Sent to a window when its nonclient area needs to be changed to indicate an
+/// active or inactive state.
 const WM_NCACTIVATE = 0x0086;
 
-/// @nodoc
+/// Sent to the window procedure associated with a control. By default, the
+/// system handles all keyboard input to the control; the system interprets
+/// certain types of keyboard input as dialog box navigation keys. To override
+/// this default behavior, the control can respond to the WM_GETDLGCODE message
+/// to indicate the types of input it wants to process itself.
 const WM_GETDLGCODE = 0x0087;
 
-/// @nodoc
+/// The WM_SYNCPAINT message is used to synchronize painting while avoiding
+/// linking independent GUI threads.
 const WM_SYNCPAINT = 0x0088;
 
-/// @nodoc
+/// Posted to a window when the cursor is moved within the nonclient area of the
+/// window. This message is posted to the window that contains the cursor. If a
+/// window has captured the mouse, this message is not posted.
 const WM_NCMOUSEMOVE = 0x00A0;
 
-/// @nodoc
+/// Posted when the user presses the left mouse button while the cursor is
+/// within the nonclient area of a window. This message is posted to the window
+/// that contains the cursor. If a window has captured the mouse, this message
+/// is not posted.
 const WM_NCLBUTTONDOWN = 0x00A1;
 
-/// @nodoc
+/// Posted when the user releases the left mouse button while the cursor is
+/// within the nonclient area of a window. This message is posted to the window
+/// that contains the cursor. If a window has captured the mouse, this message
+/// is not posted.
 const WM_NCLBUTTONUP = 0x00A2;
 
-/// @nodoc
+/// Posted when the user double-clicks the left mouse button while the cursor is
+/// within the nonclient area of a window. This message is posted to the window
+/// that contains the cursor. If a window has captured the mouse, this message
+/// is not posted.
 const WM_NCLBUTTONDBLCLK = 0x00A3;
 
-/// @nodoc
+/// Posted when the user presses the right mouse button while the cursor is
+/// within the nonclient area of a window. This message is posted to the window
+/// that contains the cursor. If a window has captured the mouse, this message
+/// is not posted.
 const WM_NCRBUTTONDOWN = 0x00A4;
 
-/// @nodoc
+/// Posted when the user releases the right mouse button while the cursor is
+/// within the nonclient area of a window. This message is posted to the window
+/// that contains the cursor. If a window has captured the mouse, this message
+/// is not posted.
 const WM_NCRBUTTONUP = 0x00A5;
 
-/// @nodoc
+/// Posted when the user double-clicks the middle mouse button while the cursor
+/// is within the nonclient area of a window. This message is posted to the
+/// window that contains the cursor. If a window has captured the mouse, this
+/// message is not posted.
 const WM_NCRBUTTONDBLCLK = 0x00A6;
 
-/// @nodoc
+/// Posted when the user presses the middle mouse button while the cursor is
+/// within the nonclient area of a window. This message is posted to the window
+/// that contains the cursor. If a window has captured the mouse, this message
+/// is not posted.
 const WM_NCMBUTTONDOWN = 0x00A7;
 
-/// @nodoc
+/// Posted when the user releases the middle mouse button while the cursor is
+/// within the nonclient area of a window. This message is posted to the window
+/// that contains the cursor. If a window has captured the mouse, this message
+/// is not posted.
 const WM_NCMBUTTONUP = 0x00A8;
 
-/// @nodoc
+/// Posted when the user double-clicks the middle mouse button while the cursor
+/// is within the nonclient area of a window. This message is posted to the
+/// window that contains the cursor. If a window has captured the mouse, this
+/// message is not posted.
 const WM_NCMBUTTONDBLCLK = 0x00A9;
 
-/// @nodoc
+/// Posted when the user presses the first or second X button while the cursor
+/// is in the nonclient area of a window. This message is posted to the window
+/// that contains the cursor. If a window has captured the mouse, this message
+/// is not posted.
 const WM_NCXBUTTONDOWN = 0x00AB;
 
-/// @nodoc
+/// Posted when the user releases the first or second X button while the cursor
+/// is in the nonclient area of a window. This message is posted to the window
+/// that contains the cursor. If a window has captured the mouse, this message
+/// is not posted.
 const WM_NCXBUTTONUP = 0x00AC;
 
-/// @nodoc
+/// Posted when the user double-clicks the first or second X button while the
+/// cursor is in the nonclient area of a window. This message is posted to the
+/// window that contains the cursor. If a window has captured the mouse, this
+/// message is not posted.
 const WM_NCXBUTTONDBLCLK = 0x00AD;
 
-/// @nodoc
+/// Sent to the window that registered to receive raw input.
+///
+/// Raw input notifications are available only after the application calls
+/// RegisterRawInputDevices with RIDEV_DEVNOTIFY flag.
 const WM_INPUT_DEVICE_CHANGE = 0x00FE;
 
-/// @nodoc
+/// Sent to the window that is getting raw input.
 const WM_INPUT = 0x00FF;
 
-/// @nodoc
-const WM_KEYFIRST = 0x0100;
-
-/// @nodoc
+/// Posted to the window with the keyboard focus when a nonsystem key is
+/// pressed. A nonsystem key is a key that is pressed when the ALT key is not
+/// pressed.
 const WM_KEYDOWN = 0x0100;
 
-/// @nodoc
+/// Posted to the window with the keyboard focus when a nonsystem key is
+/// released. A nonsystem key is a key that is pressed when the ALT key is not
+/// pressed, or a keyboard key that is pressed when a window has the keyboard
+/// focus.
 const WM_KEYUP = 0x0101;
 
-/// @nodoc
+/// Posted to the window with the keyboard focus when a WM_KEYDOWN message is
+/// translated by the TranslateMessage function. The WM_CHAR message contains
+/// the character code of the key that was pressed.
 const WM_CHAR = 0x0102;
 
-/// @nodoc
+/// Posted to the window with the keyboard focus when a WM_KEYUP message is
+/// translated by the TranslateMessage function. WM_DEADCHAR specifies a
+/// character code generated by a dead key. A dead key is a key that generates a
+/// character, such as the umlaut (double-dot), that is combined with another
+/// character to form a composite character. For example, the umlaut-O character
+/// (Ö) is generated by typing the dead key for the umlaut character, and then
+/// typing the O key.
 const WM_DEADCHAR = 0x0103;
 
-/// @nodoc
+/// Posted to the window with the keyboard focus when the user presses the F10
+/// key (which activates the menu bar) or holds down the ALT key and then
+/// presses another key. It also occurs when no window currently has the
+/// keyboard focus; in this case, the WM_SYSKEYDOWN message is sent to the
+/// active window. The window that receives the message can distinguish between
+/// these two contexts by checking the context code in the lParam parameter.
 const WM_SYSKEYDOWN = 0x0104;
 
-/// @nodoc
+/// Posted to the window with the keyboard focus when the user releases a key
+/// that was pressed while the ALT key was held down. It also occurs when no
+/// window currently has the keyboard focus; in this case, the WM_SYSKEYUP
+/// message is sent to the active window. The window that receives the message
+/// can distinguish between these two contexts by checking the context code in
+/// the lParam parameter.
 const WM_SYSKEYUP = 0x0105;
 
-/// @nodoc
+/// Posted to the window with the keyboard focus when a WM_SYSKEYDOWN message is
+/// translated by the TranslateMessage function. It specifies the character code
+/// of a system character key that is, a character key that is pressed while the
+/// ALT key is down.
 const WM_SYSCHAR = 0x0106;
 
-/// @nodoc
+/// Sent to the window with the keyboard focus when a WM_SYSKEYDOWN message is
+/// translated by the TranslateMessage function. WM_SYSDEADCHAR specifies the
+/// character code of a system dead key that is, a dead key that is pressed
+/// while holding down the ALT key.
 const WM_SYSDEADCHAR = 0x0107;
 
-/// @nodoc
+/// Sent to the dialog box procedure immediately before a dialog box is
+/// displayed. Dialog box procedures typically use this message to initialize
+/// controls and carry out any other initialization tasks that affect the
+/// appearance of the dialog box.
 const WM_INITDIALOG = 0x0110;
 
-/// @nodoc
+/// Sent when the user selects a command item from a menu, when a control sends
+/// a notification message to its parent window, or when an accelerator
+/// keystroke is translated.
 const WM_COMMAND = 0x0111;
 
-/// @nodoc
+/// A window receives this message when the user chooses a command from the
+/// Window menu (formerly known as the system or control menu) or when the user
+/// chooses the maximize button, minimize button, restore button, or close
+/// button.
 const WM_SYSCOMMAND = 0x0112;
 
-/// @nodoc
+/// Posted to the installing thread's message queue when a timer expires. The
+/// message is posted by the GetMessage or PeekMessage function.
 const WM_TIMER = 0x0113;
 
-/// @nodoc
+/// The WM_HSCROLL message is sent to a window when a scroll event occurs in the
+/// window's standard horizontal scroll bar. This message is also sent to the
+/// owner of a horizontal scroll bar control when a scroll event occurs in the
+/// control.
 const WM_HSCROLL = 0x0114;
 
-/// @nodoc
+/// The WM_VSCROLL message is sent to a window when a scroll event occurs in the
+/// window's standard vertical scroll bar. This message is also sent to the
+/// owner of a vertical scroll bar control when a scroll event occurs in the
+/// control.
 const WM_VSCROLL = 0x0115;
 
-/// @nodoc
+/// Sent when a menu is about to become active. It occurs when the user clicks
+/// an item on the menu bar or presses a menu key. This allows the application
+/// to modify the menu before it is displayed.
 const WM_INITMENU = 0x0116;
 
-/// @nodoc
+/// Sent when a drop-down menu or submenu is about to become active. This allows
+/// an application to modify the menu before it is displayed, without changing
+/// the entire menu.
 const WM_INITMENUPOPUP = 0x0117;
 
-/// @nodoc
+/// Passes information about a gesture.
 const WM_GESTURE = 0x0119;
 
-/// @nodoc
+/// Gives you a chance to set the gesture configuration.
 const WM_GESTURENOTIFY = 0x011A;
 
-/// @nodoc
+/// Sent to a menu's owner window when the user selects a menu item.
 const WM_MENUSELECT = 0x011F;
 
-/// @nodoc
+/// Sent when a menu is active and the user presses a key that does not
+/// correspond to any mnemonic or accelerator key. This message is sent to the
+/// window that owns the menu.
 const WM_MENUCHAR = 0x0120;
 
-/// @nodoc
+/// Sent to the owner window of a modal dialog box or menu that is entering an
+/// idle state. A modal dialog box or menu enters an idle state when no messages
+/// are waiting in its queue after it has processed one or more previous
+/// messages.
 const WM_ENTERIDLE = 0x0121;
 
-/// @nodoc
+/// Sent when the user releases the right mouse button while the cursor is on a
+/// menu item.
 const WM_MENURBUTTONUP = 0x0122;
 
-/// @nodoc
+/// Sent to the owner of a drag-and-drop menu when the user drags a menu item.
 const WM_MENUDRAG = 0x0123;
 
-/// @nodoc
+/// Sent to the owner of a drag-and-drop menu when the mouse cursor enters a
+/// menu item or moves from the center of the item to the top or bottom of the
+/// item.
 const WM_MENUGETOBJECT = 0x0124;
 
-/// @nodoc
+/// Sent when a drop-down menu or submenu has been destroyed.
 const WM_UNINITMENUPOPUP = 0x0125;
 
-/// @nodoc
+/// Sent when the user makes a selection from a menu.c
 const WM_MENUCOMMAND = 0x0126;
 
-/// @nodoc
+/// An application sends the WM_CHANGEUISTATE message to indicate that the UI
+/// state should be changed.
 const WM_CHANGEUISTATE = 0x0127;
 
-/// @nodoc
+/// An application sends the WM_UPDATEUISTATE message to change the UI state for
+/// the specified window and all its child windows.
 const WM_UPDATEUISTATE = 0x0128;
 
-/// @nodoc
+/// An application sends the WM_QUERYUISTATE message to retrieve the UI state
+/// for a window.
 const WM_QUERYUISTATE = 0x0129;
 
 /// @nodoc
@@ -1073,112 +1358,191 @@ const WM_CTLCOLORSTATIC = 0x0138;
 /// @nodoc
 const MN_GETHMENU = 0x01E1;
 
-/// @nodoc
-const WM_MOUSEFIRST = 0x0200;
-
-/// @nodoc
+/// Posted to a window when the cursor moves. If the mouse is not captured, the
+/// message is posted to the window that contains the cursor. Otherwise, the
+/// message is posted to the window that has captured the mouse.
 const WM_MOUSEMOVE = 0x0200;
 
-/// @nodoc
+/// Posted when the user presses the left mouse button while the cursor is in
+/// the client area of a window. If the mouse is not captured, the message is
+/// posted to the window beneath the cursor. Otherwise, the message is posted to
+/// the window that has captured the mouse.
 const WM_LBUTTONDOWN = 0x0201;
 
-/// @nodoc
+/// Posted when the user releases the left mouse button while the cursor is in
+/// the client area of a window. If the mouse is not captured, the message is
+/// posted to the window beneath the cursor. Otherwise, the message is posted to
+/// the window that has captured the mouse.
 const WM_LBUTTONUP = 0x0202;
 
-/// @nodoc
+/// Posted when the user double-clicks the left mouse button while the cursor is
+/// in the client area of a window. If the mouse is not captured, the message is
+/// posted to the window beneath the cursor. Otherwise, the message is posted to
+/// the window that has captured the mouse.
 const WM_LBUTTONDBLCLK = 0x0203;
 
-/// @nodoc
+/// Posted when the user presses the right mouse button while the cursor is in
+/// the client area of a window. If the mouse is not captured, the message is
+/// posted to the window beneath the cursor. Otherwise, the message is posted to
+/// the window that has captured the mouse.
 const WM_RBUTTONDOWN = 0x0204;
 
-/// @nodoc
+/// Posted when the user releases the right mouse button while the cursor is in
+/// the client area of a window. If the mouse is not captured, the message is
+/// posted to the window beneath the cursor. Otherwise, the message is posted to
+/// the window that has captured the mouse.
 const WM_RBUTTONUP = 0x0205;
 
-/// @nodoc
+/// Posted when the user double-clicks the right mouse button while the cursor
+/// is in the client area of a window. If the mouse is not captured, the message
+/// is posted to the window beneath the cursor. Otherwise, the message is posted
+/// to the window that has captured the mouse.
 const WM_RBUTTONDBLCLK = 0x0206;
 
-/// @nodoc
+/// Posted when the user presses the middle mouse button while the cursor is
+/// within the nonclient area of a window. This message is posted to the window
+/// that contains the cursor. If a window has captured the mouse, this message
+/// is not posted.
 const WM_MBUTTONDOWN = 0x0207;
 
-/// @nodoc
+/// Posted when the user releases the middle mouse button while the cursor is
+/// within the nonclient area of a window. This message is posted to the window
+/// that contains the cursor. If a window has captured the mouse, this message
+/// is not posted.
 const WM_MBUTTONUP = 0x0208;
 
-/// @nodoc
+/// Posted when the user double-clicks the middle mouse button while the cursor
+/// is within the nonclient area of a window. This message is posted to the
+/// window that contains the cursor. If a window has captured the mouse, this
+/// message is not posted.
 const WM_MBUTTONDBLCLK = 0x0209;
 
-/// @nodoc
+/// Sent to the focus window when the mouse wheel is rotated. The DefWindowProc
+/// function propagates the message to the window's parent. There should be no
+/// internal forwarding of the message, since DefWindowProc propagates it up the
+/// parent chain until it finds a window that processes it.
 const WM_MOUSEWHEEL = 0x020A;
 
-/// @nodoc
+/// Posted when the user presses the first or second X button while the cursor
+/// is in the client area of a window. If the mouse is not captured, the message
+/// is posted to the window beneath the cursor. Otherwise, the message is posted
+/// to the window that has captured the mouse.
 const WM_XBUTTONDOWN = 0x020B;
 
-/// @nodoc
+/// Posted when the user releases the first or second X button while the cursor
+/// is in the client area of a window. If the mouse is not captured, the message
+/// is posted to the window beneath the cursor. Otherwise, the message is posted
+/// to the window that has captured the mouse.
 const WM_XBUTTONUP = 0x020C;
 
-/// @nodoc
+/// Posted when the user double-clicks the first or second X button while the
+/// cursor is in the client area of a window. If the mouse is not captured, the
+/// message is posted to the window beneath the cursor. Otherwise, the message
+/// is posted to the window that has captured the mouse.
 const WM_XBUTTONDBLCLK = 0x020D;
 
-/// @nodoc
+/// Sent to the active window when the mouse's horizontal scroll wheel is tilted
+/// or rotated. The DefWindowProc function propagates the message to the
+/// window's parent. There should be no internal forwarding of the message,
+/// since DefWindowProc propagates it up the parent chain until it finds a
+/// window that processes it.
 const WM_MOUSEHWHEEL = 0x020E;
 
-/// @nodoc
-const WM_MOUSELAST = 0x020E;
-
-/// @nodoc
+/// An application sends a WM_CUT message to an edit control or combo box to
+/// delete (cut) the current selection, if any, in the edit control and copy the
+/// deleted text to the clipboard in CF_TEXT format.
 const WM_CUT = 0x0300;
 
-/// @nodoc
+/// An application sends the WM_COPY message to an edit control or combo box to
+/// copy the current selection to the clipboard in CF_TEXT format.
 const WM_COPY = 0x0301;
 
-/// @nodoc
+/// An application sends a WM_PASTE message to an edit control or combo box to
+/// copy the current content of the clipboard to the edit control at the current
+/// caret position. Data is inserted only if the clipboard contains data in
+/// CF_TEXT format.
 const WM_PASTE = 0x0302;
 
-/// @nodoc
+/// An application sends a WM_CLEAR message to an edit control or combo box to
+/// delete (clear) the current selection, if any, from the edit control.
 const WM_CLEAR = 0x0303;
 
-/// @nodoc
+/// An application sends a WM_UNDO message to an edit control to undo the last
+/// operation. When this message is sent to an edit control, the previously
+/// deleted text is restored or the previously added text is deleted.
 const WM_UNDO = 0x0304;
 
-/// @nodoc
+/// Sent to the clipboard owner if it has delayed rendering a specific clipboard
+/// format and if an application has requested data in that format. The
+/// clipboard owner must render data in the specified format and place it on the
+/// clipboard by calling the SetClipboardData function.
 const WM_RENDERFORMAT = 0x0305;
 
-/// @nodoc
+/// Sent to the clipboard owner before it is destroyed, if the clipboard owner
+/// has delayed rendering one or more clipboard formats. For the content of the
+/// clipboard to remain available to other applications, the clipboard owner
+/// must render data in all the formats it is capable of generating, and place
+/// the data on the clipboard by calling the SetClipboardData function.
 const WM_RENDERALLFORMATS = 0x0306;
 
-/// @nodoc
+/// Sent to the clipboard owner when a call to the EmptyClipboard function
+/// empties the clipboard.
 const WM_DESTROYCLIPBOARD = 0x0307;
 
-/// @nodoc
+/// Sent to the first window in the clipboard viewer chain when the content of
+/// the clipboard changes. This enables a clipboard viewer window to display the
+/// new content of the clipboard.
 const WM_DRAWCLIPBOARD = 0x0308;
 
-/// @nodoc
+/// Sent to the clipboard owner by a clipboard viewer window when the clipboard
+/// contains data in the CF_OWNERDISPLAY format and the clipboard viewer's
+/// client area needs repainting.
 const WM_PAINTCLIPBOARD = 0x0309;
 
-/// @nodoc
+/// Sent to the clipboard owner by a clipboard viewer window when the clipboard
+/// contains data in the CF_OWNERDISPLAY format and an event occurs in the
+/// clipboard viewer's vertical scroll bar. The owner should scroll the
+/// clipboard image and update the scroll bar values.
 const WM_VSCROLLCLIPBOARD = 0x030A;
 
-/// @nodoc
+/// Sent to the clipboard owner by a clipboard viewer window when the clipboard
+/// contains data in the CF_OWNERDISPLAY format and the clipboard viewer's
+/// client area has changed size.
 const WM_SIZECLIPBOARD = 0x030B;
 
-/// @nodoc
+/// Sent to the clipboard owner by a clipboard viewer window to request the name
+/// of a CF_OWNERDISPLAY clipboard format.
 const WM_ASKCBFORMATNAME = 0x030C;
 
-/// @nodoc
+/// Sent to the first window in the clipboard viewer chain when a window is
+/// being removed from the chain.
 const WM_CHANGECBCHAIN = 0x030D;
 
-/// @nodoc
+/// Sent to the clipboard owner by a clipboard viewer window. This occurs when
+/// the clipboard contains data in the CF_OWNERDISPLAY format and an event
+/// occurs in the clipboard viewer's horizontal scroll bar. The owner should
+/// scroll the clipboard image and update the scroll bar values.
 const WM_HSCROLLCLIPBOARD = 0x030E;
 
-/// @nodoc
+/// The WM_QUERYNEWPALETTE message informs a window that it is about to receive
+/// the keyboard focus, giving the window the opportunity to realize its logical
+/// palette when it receives the focus.
 const WM_QUERYNEWPALETTE = 0x030F;
 
-/// @nodoc
+/// The WM_PALETTEISCHANGING message informs applications that an application is
+/// going to realize its logical palette.
 const WM_PALETTEISCHANGING = 0x0310;
 
-/// @nodoc
+/// The WM_PALETTECHANGED message is sent to all top-level and overlapped
+/// windows after the window with the keyboard focus has realized its logical
+/// palette, thereby changing the system palette. This message enables a window
+/// that uses a color palette but does not have the keyboard focus to realize
+/// its logical palette and update its client area.
 const WM_PALETTECHANGED = 0x0311;
 
-/// @nodoc
+/// Posted when the user presses a hot key registered by the RegisterHotKey
+/// function. The message is placed at the top of the message queue associated
+/// with the thread that registered the hot key.
 const WM_HOTKEY = 0x0312;
 
 // Queue status flags
@@ -4323,15 +4687,33 @@ class MC_SIZE_TYPE {
   static const MC_HEIGHT = 1;
 }
 
-/// @nodoc
+/// Indicates how the activation context is to be deactivated.
+///
+/// If this value is set and the cookie specified in the ulCookie parameter is
+/// in the top frame of the activation stack, the function returns an
+/// ERROR_INVALID_PARAMETER error code. Call GetLastError to obtain this code.
+///
+/// If this value is set and the cookie is not on the activation stack, a
+/// STATUS_SXS_INVALID_DEACTIVATION exception will be thrown.
+///
+/// If this value is set and the cookie is in a lower frame of the activation
+/// stack, all of the frames down to and including the frame the cookie is in is
+/// popped from the stack.
 const DEACTIVATE_ACTCTX_FLAG_FORCE_EARLY_DEACTIVATION = 1;
 
 // *** COM CONSTANTS ***
 
-/// @nodoc
+/// Operation successful
 const S_OK = 0;
 
-/// @nodoc
+/// Operation successful
+///
+/// Some methods use S_FALSE to mean, roughly, a negative condition that is not
+/// a failure. It can also indicate a "no-op"—the method succeeded, but had no
+/// effect. For example, the CoInitializeEx function returns S_FALSE if you call
+/// it a second time from the same thread. If you need to differentiate between
+/// S_OK and S_FALSE in your code, you should test the value directly, but still
+/// use FAILED or SUCCEEDED to handle the remaining cases.
 const S_FALSE = 1;
 
 /// @nodoc
@@ -4388,37 +4770,37 @@ final CLASS_E_CLASSNOTAVAILABLE = 0x80040111.toSigned(32);
 /// @nodoc
 final CLASS_E_NOTLICENSED = 0x80040112.toSigned(32);
 
-/// @nodoc
+/// Unexpected failure
 final E_UNEXPECTED = 0x8000FFFF.toSigned(32);
 
-/// @nodoc
+/// Not implemented
 final E_NOTIMPL = 0x80004001.toSigned(32);
 
-/// @nodoc
+/// Failed to allocate necessary memory
 final E_OUTOFMEMORY = 0x8007000E.toSigned(32);
 
-/// @nodoc
+/// One or more arguments are not valid
 final E_INVALIDARG = 0x80070057.toSigned(32);
 
-/// @nodoc
+/// No such interface supported
 final E_NOINTERFACE = 0x80004002.toSigned(32);
 
-/// @nodoc
+/// Pointer that is not valid
 final E_POINTER = 0x80004003.toSigned(32);
 
-/// @nodoc
+/// Handle that is not valid
 final E_HANDLE = 0x80070006.toSigned(32);
 
-/// @nodoc
+/// Operation aborted
 final E_ABORT = 0x80004004.toSigned(32);
 
-/// @nodoc
+/// Unspecified failure
 final E_FAIL = 0x80004005.toSigned(32);
 
-/// @nodoc
+/// General access denied error
 final E_ACCESSDENIED = 0x80070005.toSigned(32);
 
-/// @nodoc
+/// The data necessary to complete this operation is not yet available.
 final E_PENDING = 0x8000000A.toSigned(32);
 
 /// @nodoc
@@ -5427,6 +5809,9 @@ const BTH_MAX_PIN_SIZE = 16;
 /// @nodoc
 const BTH_LINK_KEY_LENGTH = 16;
 
+/// The BLUETOOTH_AUTHENTICATION_METHOD enumeration defines the supported
+/// authentication types during device pairing.
+///
 /// {@category Enum}
 class BLUETOOTH_AUTHENTICATION_METHOD {
   static const BLUETOOTH_AUTHENTICATION_METHOD_LEGACY = 0;
@@ -5436,6 +5821,9 @@ class BLUETOOTH_AUTHENTICATION_METHOD {
   static const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY = 4;
 }
 
+/// The BLUETOOTH_AUTHENTICATION_REQUIREMENTS enumeration specifies the 'Man in
+/// the Middle' protection required for authentication.
+///
 /// {@category Enum}
 class BLUETOOTH_AUTHENTICATION_REQUIREMENTS {
   static const BLUETOOTH_MITM_ProtectionNotRequired = 0;
@@ -5447,6 +5835,9 @@ class BLUETOOTH_AUTHENTICATION_REQUIREMENTS {
   static const BLUETOOTH_MITM_ProtectionNotDefined = 6;
 }
 
+/// The BLUETOOTH_IO_CAPABILITY enumeration defines the input/output
+/// capabilities of a Bluetooth Device.
+///
 /// {@category Enum}
 class BLUETOOTH_IO_CAPABILITY {
   static const BLUETOOTH_IO_CAPABILITY_DISPLAYONLY = 0;
@@ -5456,6 +5847,8 @@ class BLUETOOTH_IO_CAPABILITY {
   static const BLUETOOTH_IO_CAPABILITY_UNDEFINED = 4;
 }
 
+/// Defines the set of options available to an Open or Save dialog.
+///
 /// {@category Enum}
 class FILEOPENDIALOGOPTIONS {
   static const FOS_OVERWRITEPROMPT = 0x2;
