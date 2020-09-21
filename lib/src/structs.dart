@@ -1163,6 +1163,44 @@ class CREATESTRUCT extends Struct {
     ..dwExStyle = 0;
 }
 
+// typedef struct tagMENUINFO {
+//   DWORD     cbSize;
+//   DWORD     fMask;
+//   DWORD     dwStyle;
+//   UINT      cyMax;
+//   HBRUSH    hbrBack;
+//   DWORD     dwContextHelpID;
+//   ULONG_PTR dwMenuData;
+// } MENUINFO, *LPMENUINFO;
+
+/// Contains information about a menu.
+///
+/// {@category Struct}
+class MENUINFO extends Struct {
+  @Uint32()
+  int cbSize;
+  @Uint32()
+  int fMask;
+  @Uint32()
+  int dwStyle;
+  @Uint32()
+  int cyMax;
+  @IntPtr()
+  int hbrBack;
+  @Uint32()
+  int dwContextHelpID;
+  Pointer<Uint32> dwMenuData;
+
+  factory MENUINFO.allocate() => allocate<MENUINFO>().ref
+    ..cbSize = 0
+    ..fMask = 0
+    ..dwStyle = 0
+    ..cyMax = 0
+    ..hbrBack = 0
+    ..dwContextHelpID = 0
+    ..dwMenuData = nullptr;
+}
+
 // typedef struct tagMENUITEMINFOW {
 //   UINT      cbSize;
 //   UINT      fMask;

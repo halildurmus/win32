@@ -342,6 +342,14 @@ void main() {
       final function = BringWindowToTop;
       expect(function, isA<Function>());
     });
+    test('Can instantiate ClipCursor', () {
+      final function = ClipCursor;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate CopyIcon', () {
+      final function = CopyIcon;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate CreateAcceleratorTable', () {
       final function = CreateAcceleratorTable;
       expect(function, isA<Function>());
@@ -358,12 +366,20 @@ void main() {
       final function = DefWindowProc;
       expect(function, isA<Function>());
     });
+    test('Can instantiate DestroyIcon', () {
+      final function = DestroyIcon;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate DestroyWindow', () {
       final function = DestroyWindow;
       expect(function, isA<Function>());
     });
     test('Can instantiate DispatchMessage', () {
       final function = DispatchMessage;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate DrawIcon', () {
+      final function = DrawIcon;
       expect(function, isA<Function>());
     });
     test('Can instantiate DrawText', () {
@@ -396,6 +412,14 @@ void main() {
     });
     test('Can instantiate GetClientRect', () {
       final function = GetClientRect;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate GetCursor', () {
+      final function = GetCursor;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate GetCursorPos', () {
+      final function = GetCursorPos;
       expect(function, isA<Function>());
     });
     test('Can instantiate GetDC', () {
@@ -436,6 +460,10 @@ void main() {
     });
     test('Can instantiate GetSystemDpiForProcess', () {
       final function = GetSystemDpiForProcess;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate GetSystemMenu', () {
+      final function = GetSystemMenu;
       expect(function, isA<Function>());
     });
     test('Can instantiate GetSystemMetrics', () {
@@ -546,6 +574,10 @@ void main() {
       final function = SetFocus;
       expect(function, isA<Function>());
     });
+    test('Can instantiate SetMenuInfo', () {
+      final function = SetMenuInfo;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate SetMenuItemInfo', () {
       final function = SetMenuItemInfo;
       expect(function, isA<Function>());
@@ -576,6 +608,10 @@ void main() {
     });
     test('Can instantiate SetWindowText', () {
       final function = SetWindowText;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate ShowCursor', () {
+      final function = ShowCursor;
       expect(function, isA<Function>());
     });
     test('Can instantiate ShowWindow', () {
