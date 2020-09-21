@@ -1,3 +1,10 @@
+## 1.7.3
+
+- Expand Win32 API documentation.
+- New APIs:
+  - User32: ClipCursor, CopyIcon, DestroyIcon, DrawIcon, GetCursor,
+    GetCursorPos, GetSystemMenu, SetMenuInfo, SetMenuItemInfo, ShowCursor
+
 ## 1.7.2
 
 - Add Win32 API documentation and a couple of minor APIs.
