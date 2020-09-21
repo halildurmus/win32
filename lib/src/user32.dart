@@ -65,6 +65,31 @@ final BringWindowToTop =
     _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
         'BringWindowToTop');
 
+/// Confines the cursor to a rectangular area on the screen. If a
+/// subsequent cursor position (set by the SetCursorPos function or the
+/// mouse) lies outside the rectangle, the system automatically adjusts the
+/// position to keep the cursor inside the rectangular area.
+///
+/// ```c
+/// BOOL ClipCursor(
+///   const RECT *lpRect
+/// );
+/// ```
+/// {@category user32}
+final ClipCursor = _user32.lookupFunction<Int32 Function(Pointer<RECT> lpRect),
+    int Function(Pointer<RECT> lpRect)>('ClipCursor');
+
+/// Copies the specified icon from another module to the current module.
+///
+/// ```c
+/// HICON CopyIcon(
+///   HICON hIcon
+/// );
+/// ```
+/// {@category user32}
+final CopyIcon = _user32.lookupFunction<IntPtr Function(IntPtr hIcon),
+    int Function(int hIcon)>('CopyIcon');
+
 /// Creates an accelerator table.
 ///
 /// ```c
@@ -157,6 +182,17 @@ final DefWindowProc = _user32.lookupFunction<
     IntPtr Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
     int Function(int hWnd, int Msg, int wParam, int lParam)>('DefWindowProcW');
 
+/// Destroys an icon and frees any memory the icon occupied.
+///
+/// ```c
+/// BOOL DestroyIcon(
+///   HICON hIcon
+/// );
+/// ```
+/// {@category user32}
+final DestroyIcon = _user32.lookupFunction<Int32 Function(IntPtr hIcon),
+    int Function(int hIcon)>('DestroyIcon');
+
 /// Destroys the specified window. The function sends WM_DESTROY and
 /// WM_NCDESTROY messages to the window to deactivate it and remove the
 /// keyboard focus from it. The function also destroys the window's menu,
@@ -186,6 +222,21 @@ final DestroyWindow =
 final DispatchMessage = _user32.lookupFunction<
     IntPtr Function(Pointer<MSG> lpMsg),
     int Function(Pointer<MSG> lpMsg)>('DispatchMessageW');
+
+/// Draws an icon or cursor into the specified device context.
+///
+/// ```c
+/// BOOL DrawIcon(
+///   HDC   hDC,
+///   int   X,
+///   int   Y,
+///   HICON hIcon
+/// );
+/// ```
+/// {@category user32}
+final DrawIcon = _user32.lookupFunction<
+    Int32 Function(IntPtr hDC, Int32 X, Int32 Y, IntPtr hIcon),
+    int Function(int hDC, int X, int Y, int hIcon)>('DrawIcon');
 
 /// The DrawText function draws formatted text in the specified rectangle.
 /// It formats the text according to the specified method (expanding tabs,
@@ -329,6 +380,27 @@ final GetClientRect = _user32.lookupFunction<
     Int32 Function(IntPtr hwnd, Pointer<RECT> lpRect),
     int Function(int hwnd, Pointer<RECT> lpRect)>('GetClientRect');
 
+/// Retrieves a handle to the current cursor.
+///
+/// ```c
+/// HCURSOR GetCursor();
+/// ```
+/// {@category user32}
+final GetCursor =
+    _user32.lookupFunction<IntPtr Function(), int Function()>('GetCursor');
+
+/// Retrieves the position of the mouse cursor, in screen coordinates.
+///
+/// ```c
+/// BOOL GetCursorPos(
+///   LPPOINT lpPoint
+/// );
+/// ```
+/// {@category user32}
+final GetCursorPos = _user32.lookupFunction<
+    Int32 Function(Pointer<POINT> lpPoint),
+    int Function(Pointer<POINT> lpPoint)>('GetCursorPos');
+
 /// The GetDC function retrieves a handle to a device context (DC) for the
 /// client area of a specified window or for the entire screen. You can use
 /// the returned handle in subsequent GDI functions to draw in the DC. The
@@ -462,6 +534,20 @@ final GetSysColor = _user32.lookupFunction<Uint32 Function(Int32 nIndex),
 final GetSystemDpiForProcess = _user32.lookupFunction<
     Uint32 Function(IntPtr hProcess),
     int Function(int hProcess)>('GetSystemDpiForProcess');
+
+/// Enables the application to access the window menu (also known as the
+/// system menu or the control menu) for copying and modifying.
+///
+/// ```c
+/// HMENU GetSystemMenu(
+///   HWND hWnd,
+///   BOOL bRevert
+/// );
+/// ```
+/// {@category user32}
+final GetSystemMenu = _user32.lookupFunction<
+    IntPtr Function(IntPtr hWnd, Int32 bRevert),
+    int Function(int hWnd, int bRevert)>('GetSystemMenu');
 
 /// Retrieves the specified system metric or system configuration setting.
 /// Note that all dimensions retrieved by GetSystemMetrics are in pixels.
@@ -872,6 +958,36 @@ final SendMessage = _user32.lookupFunction<
 final SetFocus = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
     int Function(int hWnd)>('SetFocus');
 
+/// Sets information for a specified menu.
+///
+/// ```c
+/// BOOL SetMenuInfo(
+///   HMENU       ,
+///   LPCMENUINFO
+/// );
+/// ```
+/// {@category user32}
+final SetMenuInfo = _user32.lookupFunction<
+    Int32 Function(IntPtr hMenu, Pointer<MENUINFO> lpMenuInfo),
+    int Function(int hMenu, Pointer<MENUINFO> lpMenuInfo)>('SetMenuInfo');
+
+/// Changes information about a menu item.
+///
+/// ```c
+/// BOOL SetMenuItemInfoW(
+///   HMENU            hmenu,
+///   UINT             item,
+///   BOOL             fByPositon,
+///   LPCMENUITEMINFOW lpmii
+/// );
+/// ```
+/// {@category user32}
+final SetMenuItemInfo = _user32.lookupFunction<
+    Int32 Function(IntPtr hmenu, Uint32 item, Int32 fByPositon,
+        Pointer<MENUITEMINFO> lpmii),
+    int Function(int hmenu, int item, int fByPositon,
+        Pointer<MENUITEMINFO> lpmii)>('SetMenuItemInfoW');
+
 /// Changes the parent window of the specified child window.
 ///
 /// ```c
@@ -984,6 +1100,17 @@ final SetWindowPos = _user32.lookupFunction<
 final SetWindowText = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, Pointer<Utf16> lpString),
     int Function(int hWnd, Pointer<Utf16> lpString)>('SetWindowTextW');
+
+/// Displays or hides the cursor.
+///
+/// ```c
+/// int ShowCursor(
+///   BOOL bShow
+/// );
+/// ```
+/// {@category user32}
+final ShowCursor = _user32.lookupFunction<Int32 Function(Int32 bShow),
+    int Function(int bShow)>('ShowCursor');
 
 /// Sets the specified window's show state.
 ///

@@ -27,7 +27,8 @@ import 'extensions/unpack_utf16.dart';
 //   LPCWSTR   lpszClassName;
 // } WNDCLASSW, *PWNDCLASSW, *NPWNDCLASSW, *LPWNDCLASSW;
 
-/// WNDCLASS
+/// Contains the window class attributes that are registered by the
+/// RegisterClass function.
 ///
 /// {@category Struct}
 class WNDCLASS extends Struct {
@@ -89,7 +90,9 @@ class WNDCLASS extends Struct {
 //   WORD      wProcessorRevision;
 // } SYSTEM_INFO, *LPSYSTEM_INFO;
 
-/// SYSTEM_INFO
+/// Contains information about the current computer system. This includes the
+/// architecture and type of the processor, the number of processors in the
+/// system, the page size, and other such information.
 ///
 /// {@category Struct}
 class SYSTEM_INFO extends Struct {
@@ -143,6 +146,12 @@ class SYSTEM_INFO extends Struct {
 //   DWORD  dwProcessId;
 //   DWORD  dwThreadId;
 // } PROCESS_INFORMATION, *PPROCESS_INFORMATION, *LPPROCESS_INFORMATION;
+
+/// Contains information about a newly created process and its primary thread.
+/// It is used with the CreateProcess, CreateProcessAsUser,
+/// CreateProcessWithLogonW, or CreateProcessWithTokenW function.
+///
+/// {@category Struct}
 class PROCESS_INFORMATION extends Struct {
   @IntPtr()
   int hProcess;
@@ -181,7 +190,8 @@ class PROCESS_INFORMATION extends Struct {
 //   HANDLE hStdError;
 // } STARTUPINFOW, *LPSTARTUPINFOW;
 
-/// STARTUPINFO
+/// Specifies the window station, desktop, standard handles, and appearance of
+/// the main window for a process at creation time.
 ///
 /// {@category Struct}
 class STARTUPINFO extends Struct {
@@ -246,6 +256,10 @@ class STARTUPINFO extends Struct {
 //     DWORD grfMode;
 //     DWORD dwTickCountDeadline;
 //     } 	BIND_OPTS;
+
+/// Contains parameters used during a moniker-binding operation.
+///
+/// {@Category Struct}
 class BIND_OPTS extends Struct {
   @Uint32()
   int cbStruct;
@@ -272,7 +286,7 @@ class BIND_OPTS extends Struct {
 //   DWORD BatteryFullLifeTime;
 // } SYSTEM_POWER_STATUS, *LPSYSTEM_POWER_STATUS;
 
-/// SYSTEM_POWER_STATUS
+/// Contains information about the power status of the system.
 ///
 /// {@category Struct}
 class SYSTEM_POWER_STATUS extends Struct {
@@ -315,6 +329,10 @@ class SYSTEM_POWER_STATUS extends Struct {
 //     DWORD               DefaultAlert1;
 //     DWORD               DefaultAlert2;
 // } SYSTEM_BATTERY_STATE, *PSYSTEM_BATTERY_STATE;
+
+/// Contains information about the current state of the system battery.
+///
+/// {@category Struct}
 class SYSTEM_BATTERY_STATE extends Struct {
   @Uint8()
   int AcOnLine;
@@ -372,7 +390,9 @@ class SYSTEM_BATTERY_STATE extends Struct {
 //   LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList;
 // } STARTUPINFOEXW, *LPSTARTUPINFOEXW;
 
-/// STARTUPINFOEX
+/// Specifies the window station, desktop, standard handles, and attributes for
+/// a new process. It is used with the CreateProcess and CreateProcessAsUser
+/// functions.
 ///
 /// {@category Struct}
 class STARTUPINFOEX extends Struct {
@@ -438,7 +458,13 @@ class STARTUPINFOEX extends Struct {
 //   BOOL   bInheritHandle;
 // } SECURITY_ATTRIBUTES, *PSECURITY_ATTRIBUTES, *LPSECURITY_ATTRIBUTES;
 
-/// SECURITY_ATTRIBUTES
+/// The SECURITY_ATTRIBUTES structure contains the security descriptor for an
+/// object and specifies whether the handle retrieved by specifying this
+/// structure is inheritable.
+///
+/// This structure provides security settings for objects created by various
+/// functions, such as CreateFile, CreatePipe, CreateProcess, RegCreateKeyEx, or
+/// RegSaveKeyEx.
 ///
 /// {@category Struct}
 class SECURITY_ATTRIBUTES extends Struct {
@@ -461,7 +487,9 @@ class SECURITY_ATTRIBUTES extends Struct {
 //   PACL                        Dacl;
 // } SECURITY_DESCRIPTOR, *PISECURITY_DESCRIPTOR;
 
-/// SECURITY_DESCRIPTOR
+/// The SECURITY_DESCRIPTOR structure contains the security information
+/// associated with an object. Applications use this structure to set and query
+/// an object's security status.
 ///
 /// {@category Struct}
 class SECURITY_DESCRIPTOR extends Struct {
@@ -496,7 +524,8 @@ class SECURITY_DESCRIPTOR extends Struct {
 //   HRESULT hr;
 // } SOLE_AUTHENTICATION_SERVICE;
 
-/// SOLE_AUTHENTICATION_SERVICE
+/// Identifies an authentication service that a server is willing to use to
+/// communicate to a client.
 ///
 /// {@category Struct}
 class SOLE_AUTHENTICATION_SERVICE extends Struct {
@@ -519,15 +548,10 @@ class SOLE_AUTHENTICATION_SERVICE extends Struct {
         ..hr = 0;
 }
 
-// The VARIANT type is used in Win32 to represent a dynamic type. It is
-// represented as a struct containing a union of the types that could be
-// stored. At the time this code was authored, Dart FFI does not support union
-// types. However, in many scenarios, it is possible to guarantee that the
-// returned value will be a Pointer, and so this struct is available for that
-// usage. This class will be replaced as/when FFI supports a more comprehensive
-// projection of this type.
-
-/// VARIANT_POINTER
+/// The VARIANT type is used in Win32 to represent a dynamic type. It is
+/// represented as a struct containing a union of the types that could be
+/// stored. This is a specialization of that class for VARIANTs that contain
+/// pointers.
 ///
 /// {@category Struct}
 class VARIANT_POINTER extends Struct {
@@ -543,7 +567,7 @@ class VARIANT_POINTER extends Struct {
   Pointer<IntPtr> ptr;
 
   factory VARIANT_POINTER.allocate() => allocate<VARIANT_POINTER>().ref
-    ..vt = 0
+    ..vt = VARENUM.VT_PTR
     ..wReserved1 = 0
     ..wReserved2 = 0
     ..wReserved3 = 0
@@ -555,7 +579,7 @@ class VARIANT_POINTER extends Struct {
 //   LPCWSTR pszSpec;
 // } COMDLG_FILTERSPEC;
 
-/// COMDLG_FILTERSPEC
+/// Used generically to filter elements.
 ///
 /// {@category Struct}
 class COMDLG_FILTERSPEC extends Struct {
@@ -573,7 +597,7 @@ class COMDLG_FILTERSPEC extends Struct {
 //     WORD  cmd;
 // } ACCEL, *LPACCEL;
 
-/// ACCEL
+/// Defines an accelerator key used in an accelerator table.
 ///
 /// {@category Struct}
 class ACCEL extends Struct {
@@ -597,7 +621,7 @@ class ACCEL extends Struct {
 //   DWORD dwFlags;
 // } MONITORINFO, *LPMONITORINFO;
 
-/// MONITORINFO
+/// The MONITORINFO structure contains information about a display monitor.
 ///
 /// {@category Struct}
 class MONITORINFO extends Struct {
@@ -635,9 +659,6 @@ class MONITORINFO extends Struct {
     ..dwFlags = 0;
 }
 
-// In the following struct, COLORREF is a DWORD that contains RGB values
-// in the form 0x00bbggrr
-
 // typedef struct tagCHOOSECOLORW {
 //   DWORD        lStructSize;
 //   HWND         hwndOwner;
@@ -650,7 +671,9 @@ class MONITORINFO extends Struct {
 //   LPCWSTR      lpTemplateName;
 // } CHOOSECOLORW, *LPCHOOSECOLORW;
 
-/// CHOOSECOLOR
+/// Contains information the ChooseColor function uses to initialize the Color
+/// dialog box. After the user closes the dialog box, the system returns
+/// information about the user's selection in this structure.
 ///
 /// {@category Struct}
 class CHOOSECOLOR extends Struct {
@@ -663,9 +686,11 @@ class CHOOSECOLOR extends Struct {
   @IntPtr()
   int hInstance;
 
+  /// COLORREF is a DWORD that contains RGB values in the form 0x00bbggrr
   @Int32()
   int rgbResult;
 
+  /// COLORREF is a DWORD that contains RGB values in the form 0x00bbggrr
   Pointer<Uint32> lpCustColors;
 
   @Uint32()
@@ -703,7 +728,10 @@ class CHOOSECOLOR extends Struct {
 //   LPCWSTR      lpTemplateName;
 // } FINDREPLACEW, *LPFINDREPLACEW;
 
-/// FINDREPLACE
+/// Contains information that the FindText and ReplaceText functions use to
+/// initialize the Find and Replace dialog boxes. The FINDMSGSTRING registered
+/// message uses this structure to pass the user's search or replacement input
+/// to the owner window of a Find or Replace dialog box.
 ///
 /// {@category Struct}
 class FINDREPLACE extends Struct {
@@ -759,7 +787,9 @@ class FINDREPLACE extends Struct {
 //   INT          nSizeMax;
 // } CHOOSEFONTW;
 
-/// CHOOSEFONT
+/// Contains information that the ChooseFont function uses to initialize the
+/// Font dialog box. After the user closes the dialog box, the system returns
+/// information about the user's selection in this structure.
 ///
 /// {@category Struct}
 class CHOOSEFONT extends Struct {
@@ -842,7 +872,10 @@ class CHOOSEFONT extends Struct {
 //    DWORD        FlagsEx;
 // } OPENFILENAMEW, *LPOPENFILENAMEW;
 
-/// OPENFILENAME
+/// Contains information that the GetOpenFileName and GetSaveFileName functions
+/// use to initialize an Open or Save As dialog box. After the user closes the
+/// dialog box, the system returns information about the user's selection in
+/// this structure.
 ///
 /// {@category Struct}
 class OPENFILENAME extends Struct {
@@ -936,7 +969,7 @@ class OPENFILENAME extends Struct {
 //   WCHAR lfFaceName[LF_FACESIZE];
 // } LOGFONTW;
 
-/// LOGFONT
+/// The LOGFONT structure defines the attributes of a font.
 ///
 /// {@category Struct}
 class LOGFONT extends Struct {
@@ -1043,6 +1076,10 @@ class LOGFONT extends Struct {
 //   WCHAR    elfStyle[LF_FACESIZE];
 //   WCHAR    elfScript[LF_FACESIZE];
 // } ENUMLOGFONTEXW, *LPENUMLOGFONTEXW;
+
+/// The ENUMLOGFONTEX structure contains information about an enumerated font.
+///
+/// {@category Struct}
 class ENUMLOGFONTEX extends Struct {
   LOGFONT get elfLogFont => addressOf.cast<LOGFONT>().ref;
 
@@ -1080,7 +1117,9 @@ class ENUMLOGFONTEX extends Struct {
 //   DWORD     dwExStyle;
 // } CREATESTRUCTW, *LPCREATESTRUCTW;
 
-/// CREATESTRUCT
+/// Defines the initialization parameters passed to the window procedure of an
+/// application. These members are identical to the parameters of the
+/// CreateWindowEx function.
 ///
 /// {@category Struct}
 class CREATESTRUCT extends Struct {
@@ -1124,6 +1163,110 @@ class CREATESTRUCT extends Struct {
     ..dwExStyle = 0;
 }
 
+// typedef struct tagMENUINFO {
+//   DWORD     cbSize;
+//   DWORD     fMask;
+//   DWORD     dwStyle;
+//   UINT      cyMax;
+//   HBRUSH    hbrBack;
+//   DWORD     dwContextHelpID;
+//   ULONG_PTR dwMenuData;
+// } MENUINFO, *LPMENUINFO;
+
+/// Contains information about a menu.
+///
+/// {@category Struct}
+class MENUINFO extends Struct {
+  @Uint32()
+  int cbSize;
+  @Uint32()
+  int fMask;
+  @Uint32()
+  int dwStyle;
+  @Uint32()
+  int cyMax;
+  @IntPtr()
+  int hbrBack;
+  @Uint32()
+  int dwContextHelpID;
+  Pointer<Uint32> dwMenuData;
+
+  factory MENUINFO.allocate() => allocate<MENUINFO>().ref
+    ..cbSize = 0
+    ..fMask = 0
+    ..dwStyle = 0
+    ..cyMax = 0
+    ..hbrBack = 0
+    ..dwContextHelpID = 0
+    ..dwMenuData = nullptr;
+}
+
+// typedef struct tagMENUITEMINFOW {
+//   UINT      cbSize;
+//   UINT      fMask;
+//   UINT      fType;
+//   UINT      fState;
+//   UINT      wID;
+//   HMENU     hSubMenu;
+//   HBITMAP   hbmpChecked;
+//   HBITMAP   hbmpUnchecked;
+//   ULONG_PTR dwItemData;
+//   LPWSTR    dwTypeData;
+//   UINT      cch;
+//   HBITMAP   hbmpItem;
+// } MENUITEMINFOW, *LPMENUITEMINFOW;
+
+/// Contains information about a menu item.
+///
+/// {@category Struct}
+class MENUITEMINFO extends Struct {
+  @Uint32()
+  int cbSize;
+
+  @Uint32()
+  int fMask;
+
+  @Uint32()
+  int fType;
+
+  @Uint32()
+  int fState;
+
+  @Uint32()
+  int wID;
+
+  @IntPtr()
+  int hSubMenu;
+
+  @IntPtr()
+  int hbmpChecked;
+  @IntPtr()
+  int hbmpUnchecked;
+
+  Pointer<Uint32> dwItemData;
+  Pointer<Utf16> dwTypeData;
+
+  @Uint32()
+  int cch;
+
+  @IntPtr()
+  int hbmpItem;
+
+  factory MENUITEMINFO.allocate() => allocate<MENUITEMINFO>().ref
+    ..cbSize = 0
+    ..fMask = 0
+    ..fType = 0
+    ..fState = 0
+    ..wID = 0
+    ..hSubMenu = 0
+    ..hbmpChecked = 0
+    ..hbmpUnchecked = 0
+    ..dwItemData = nullptr
+    ..dwTypeData = nullptr
+    ..cch = 0
+    ..hbmpItem = 0;
+}
+
 // typedef struct tagMSG {
 //   HWND   hwnd;
 //   UINT   message;
@@ -1134,7 +1277,7 @@ class CREATESTRUCT extends Struct {
 //   DWORD  lPrivate;
 // } MSG, *PMSG, *NPMSG, *LPMSG;
 
-/// MSG
+/// Contains message information from a thread's message queue.
 ///
 /// {@category Struct}
 class MSG extends Struct {
@@ -1178,7 +1321,7 @@ class MSG extends Struct {
 //   LONG cy;
 // } SIZE, *PSIZE;
 
-/// SIZE
+/// The SIZE structure defines the width and height of a rectangle.
 ///
 /// {@category Struct}
 class SIZE extends Struct {
@@ -1201,7 +1344,8 @@ class SIZE extends Struct {
 //   POINT ptMaxTrackSize;
 // } MINMAXINFO, *PMINMAXINFO, *LPMINMAXINFO;
 
-/// MINMAXINFO
+/// Contains information about a window's maximized size and position and its
+/// minimum and maximum tracking size.
 ///
 /// {@category Struct}
 class MINMAXINFO extends Struct {
@@ -1236,7 +1380,7 @@ class MINMAXINFO extends Struct {
 //   LONG y;
 // } POINT, *PPOINT, *NPPOINT, *LPPOINT;
 
-/// POINT
+/// The POINT structure defines the x- and y-coordinates of a point.
 ///
 /// {@category Struct}
 class POINT extends Struct {
@@ -1260,7 +1404,9 @@ class POINT extends Struct {
 //   BYTE rgbReserved[32];
 // } PAINTSTRUCT, *PPAINTSTRUCT, *NPPAINTSTRUCT, *LPPAINTSTRUCT;
 
-/// PAINTSTRUCT
+/// The PAINTSTRUCT structure contains information for an application. This
+/// information can be used to paint the client area of a window owned by that
+/// application.
 ///
 /// {@category Struct}
 class PAINTSTRUCT extends Struct {
@@ -1311,7 +1457,8 @@ class PAINTSTRUCT extends Struct {
 //   LONG bottom;
 // } RECT, *PRECT, *NPRECT, *LPRECT;
 
-/// RECT
+/// The RECT structure defines a rectangle by the coordinates of its upper-left
+/// and lower-right corners.
 ///
 /// {@category Struct}
 class RECT extends Struct {
@@ -1354,7 +1501,7 @@ class RECT extends Struct {
 //   ULONG_PTR dwExtraInfo;
 // } MOUSEINPUT, *PMOUSEINPUT, *LPMOUSEINPUT;
 
-/// MOUSEINPUT
+/// Contains information about a simulated mouse event.
 ///
 /// {@category Struct}
 class MOUSEINPUT extends Struct {
@@ -1398,7 +1545,7 @@ class MOUSEINPUT extends Struct {
 //   ULONG_PTR dwExtraInfo;
 // } KEYBDINPUT, *PKEYBDINPUT, *LPKEYBDINPUT;
 
-/// KEYBDINPUT
+/// Contains information about a simulated keyboard event.
 ///
 /// {@category Struct}
 class KEYBDINPUT extends Struct {
@@ -1440,7 +1587,8 @@ class KEYBDINPUT extends Struct {
 //   WORD  wParamH;
 // } HARDWAREINPUT, *PHARDWAREINPUT, *LPHARDWAREINPUT;
 
-/// HARDWAREINPUT
+/// Contains information about a simulated message generated by an input device
+/// other than a keyboard or mouse.
 ///
 /// {@category Struct}
 class HARDWAREINPUT extends Struct {
@@ -1488,7 +1636,9 @@ class HARDWAREINPUT extends Struct {
 //   BYTE  tmCharSet;
 // } TEXTMETRICW, *PTEXTMETRICW, *NPTEXTMETRICW, *LPTEXTMETRICW;
 
-/// TEXTMETRIC
+/// The TEXTMETRIC structure contains basic information about a physical font.
+/// All sizes are specified in logical units; that is, they depend on the
+/// current mapping mode of the display context.
 ///
 /// {@category Struct}
 class TEXTMETRIC extends Struct {
@@ -1566,7 +1716,9 @@ class TEXTMETRIC extends Struct {
 //   int  nTrackPos;
 // } SCROLLINFO, *LPSCROLLINFO;
 
-/// SCROLLINFO
+/// The SCROLLINFO structure contains scroll bar parameters to be set by the
+/// SetScrollInfo function (or SBM_SETSCROLLINFO message), or retrieved by the
+/// GetScrollInfo function (or SBM_GETSCROLLINFO message).
 ///
 /// {@category Struct}
 class SCROLLINFO extends Struct {
@@ -1616,7 +1768,7 @@ class SCROLLINFO extends Struct {
 //   HANDLE    hProcess;
 // } SHELLEXECUTEINFOW, *LPSHELLEXECUTEINFOW;
 
-/// SHELLEXECUTEINFOW
+/// Contains information used by ShellExecuteEx.
 ///
 /// {@category Struct}
 class SHELLEXECUTEINFO extends Struct {
@@ -1672,7 +1824,8 @@ class SHELLEXECUTEINFO extends Struct {
 // #endif
 // } SHQUERYRBINFO, *LPSHQUERYRBINFO;
 
-/// SHQUERYRBINFO
+/// Contains the size and item count information retrieved by the
+/// SHQueryRecycleBin function.
 ///
 /// {@category Struct}
 class SHQUERYRBINFO extends Struct {
@@ -1698,7 +1851,7 @@ class SHQUERYRBINFO extends Struct {
 //     unsigned char  Data4[ 8 ];
 // } GUID;
 
-/// GUID
+/// Represents a globally unique identifier (GUID).
 ///
 /// {@category Struct}
 class GUID extends Struct {
@@ -1775,7 +1928,9 @@ class GUID extends Struct {
 //     LPBYTE  Value;
 // } CREDENTIAL_ATTRIBUTEW, *PCREDENTIAL_ATTRIBUTEW;
 
-/// CREDENTIAL_ATTRIBUTE
+/// The CREDENTIAL_ATTRIBUTE structure contains an application-defined attribute
+/// of the credential. An attribute is a keyword-value pair. It is up to the
+/// application to define the meaning of the attribute.
 ///
 /// {@category Struct}
 class CREDENTIAL_ATTRIBUTE extends Struct {
@@ -1812,7 +1967,7 @@ class CREDENTIAL_ATTRIBUTE extends Struct {
 //     LPWSTR UserName;
 // } CREDENTIALW, *PCREDENTIALW;
 
-/// CREDENTIAL
+/// The CREDENTIAL structure contains an individual credential.
 ///
 /// {@category Struct}
 class CREDENTIAL extends Struct {
@@ -1887,7 +2042,8 @@ class CREDENTIAL extends Struct {
 //   BYTE rgbReserved;
 // } RGBQUAD;
 
-/// BITMAPINFO
+/// The BITMAPINFO structure defines the dimensions and color information for a
+/// device-independent bitmap (DIB).
 ///
 /// {@category Struct}
 class BITMAPINFO extends Struct {
@@ -1945,7 +2101,8 @@ class BITMAPINFO extends Struct {
 //     DWORD dwHighDateTime;
 // } FILETIME, *PFILETIME, *LPFILETIME;
 
-/// FILETIME
+/// Contains a 64-bit value representing the number of 100-nanosecond intervals
+/// since January 1, 1601 (UTC).
 ///
 /// {@category Struct}
 class FILETIME extends Struct {
@@ -1976,7 +2133,7 @@ class FILETIME extends Struct {
 //     FOLDERTYPEID ftidType;
 //     } 	KNOWNFOLDER_DEFINITION;
 
-/// KNOWNFOLDER_DEFINITION
+/// Defines the specifics of a known folder.
 ///
 /// {@category Struct}
 class KNOWNFOLDER_DEFINITION extends Struct {
@@ -2044,7 +2201,7 @@ class KNOWNFOLDER_DEFINITION extends Struct {
 //     BYTE abID[ 1 ];
 //     }
 
-/// SHITEMID
+/// Defines an item identifier.
 ///
 /// {@category Struct}
 class SHITEMID extends Struct {
@@ -2065,7 +2222,7 @@ class SHITEMID extends Struct {
 //   UINT       cNamedArgs;
 // } DISPPARAMS;
 
-/// DISPPARAMS
+/// Contains the arguments passed to a method or property.
 ///
 /// {@category Struct}
 class DISPPARAMS extends Struct {
@@ -2092,7 +2249,7 @@ class DISPPARAMS extends Struct {
 //   BOOL  bVisible;
 // } CONSOLE_CURSOR_INFO, *PCONSOLE_CURSOR_INFO;
 
-/// CONSOLE_CURSOR_INFO
+/// Contains information about the console cursor.
 ///
 /// {@category Struct}
 class CONSOLE_CURSOR_INFO extends Struct {
@@ -2114,7 +2271,7 @@ class CONSOLE_CURSOR_INFO extends Struct {
 //   COORD      dwMaximumWindowSize;
 // } CONSOLE_SCREEN_BUFFER_INFO;
 
-/// CONSOLE_SCREEN_BUFFER_INFO
+/// Contains information about a console screen buffer.
 ///
 /// {@category Struct}
 class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
@@ -2167,7 +2324,7 @@ class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
 //   SMALL_RECT srSelection;
 // } CONSOLE_SELECTION_INFO, *PCONSOLE_SELECTION_INFO;
 
-/// CONSOLE_SELECTION_INFO
+/// Contains information for a console selection.
 ///
 /// {@category Struct}
 class CONSOLE_SELECTION_INFO extends Struct {
@@ -2204,7 +2361,9 @@ class CONSOLE_SELECTION_INFO extends Struct {
 //   SHORT Y;
 // } COORD, *PCOORD;
 
-/// COORD
+/// Defines the coordinates of a character cell in a console screen buffer. The
+/// origin of the coordinate system (0,0) is at the top, left cell of the
+/// buffer.
 ///
 /// {@category Struct}
 class COORD extends Struct {
@@ -2226,6 +2385,11 @@ class COORD extends Struct {
 //   } Char;
 //   WORD  Attributes;
 // } CHAR_INFO, *PCHAR_INFO;
+
+/// Specifies a Unicode or ANSI character and its attributes. This structure is
+/// used by console functions to read from and write to a console screen buffer.
+///
+/// {@category Struct}
 class CHAR_INFO extends Struct {
   @Int16()
   int UnicodeChar;
@@ -2245,7 +2409,8 @@ class CHAR_INFO extends Struct {
 //   SHORT Bottom;
 // } SMALL_RECT;
 
-/// SMALL_RECT
+/// Defines the coordinates of the upper left and lower right corners of a
+/// rectangle.
 ///
 /// {@category Struct}
 class SMALL_RECT extends Struct {
@@ -2272,7 +2437,9 @@ class SMALL_RECT extends Struct {
 //   DWORD dwICC;
 // } INITCOMMONCONTROLSEX, *LPINITCOMMONCONTROLSEX;
 
-/// INITCOMMONCONTROLSEX
+/// Carries information used to load common control classes from the
+/// dynamic-link library (DLL). This structure is used with the
+/// InitCommonControlsEx function.
 ///
 /// {@category Struct}
 class INITCOMMONCONTROLSEX extends Struct {
@@ -2326,7 +2493,8 @@ class INITCOMMONCONTROLSEX extends Struct {
 // structs (https://github.com/dart-lang/sdk/issues/38158), so this cannot yet
 // be used.
 
-/// TASKDIALOGCONFIG
+/// The TASKDIALOGCONFIG structure contains information used to display a task
+/// dialog. The TaskDialogIndirect function uses this structure.
 ///
 /// {@category Struct}
 class TASKDIALOGCONFIG extends Struct {
@@ -2411,7 +2579,8 @@ class TASKDIALOGCONFIG extends Struct {
 //     PCWSTR  pszButtonText;
 // } TASKDIALOG_BUTTON;
 
-/// TASKDIALOG_BUTTON
+/// The TASKDIALOG_BUTTON structure contains information used to display a
+/// button in a task dialog. The TASKDIALOGCONFIG structure uses this structure.
 ///
 /// {@category Struct}
 class TASKDIALOG_BUTTON extends Struct {
@@ -2434,7 +2603,8 @@ class TASKDIALOG_BUTTON extends Struct {
 //     DWORD dwPlatformID;                     // DLLVER_PLATFORM_*
 // } DLLVERSIONINFO;
 
-/// DLLVERSIONINFO
+/// Receives DLL-specific version information. It is used with the DllGetVersion
+/// function.
 ///
 /// {@category Struct}
 class DLLVERSIONINFO extends Struct {
@@ -2468,7 +2638,10 @@ class DLLVERSIONINFO extends Struct {
 
 const _OSVERSIONINFO_STRUCT_SIZE = 20 + (128 * 2);
 
-/// OSVERSIONINFO
+/// Contains operating system version information. The information includes
+/// major and minor version numbers, a build number, a platform identifier, and
+/// descriptive text about the operating system. This structure is used with the
+/// GetVersionEx function.
 ///
 /// {@category Struct}
 class OSVERSIONINFO extends Struct {
@@ -2510,7 +2683,8 @@ class OSVERSIONINFO extends Struct {
 //   WCHAR             szName[BLUETOOTH_MAX_NAME_SIZE];
 // } BLUETOOTH_DEVICE_INFO_STRUCT;
 
-/// BLUETOOTH_DEVICE_INFO
+/// The BLUETOOTH_DEVICE_INFO structure provides information about a Bluetooth
+/// device.
 ///
 /// {@category Struct}
 class BLUETOOTH_DEVICE_INFO extends Struct {
@@ -2570,7 +2744,8 @@ class BLUETOOTH_DEVICE_INFO extends Struct {
 //   HANDLE hRadio;
 // } BLUETOOTH_DEVICE_SEARCH_PARAMS;
 
-/// BLUETOOTH_DEVICE_SEARCH_PARAMS
+/// The BLUETOOTH_DEVICE_SEARCH_PARAMS structure specifies search criteria for
+/// Bluetooth device searches.
 ///
 /// {@category Struct}
 class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
@@ -2607,7 +2782,8 @@ class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
 //   DWORD dwSize;
 // } BLUETOOTH_FIND_RADIO_PARAMS;
 
-/// BLUETOOTH_FIND_RADIO_PARAMS
+/// The BLUETOOTH_FIND_RADIO_PARAMS structure facilitates enumerating installed
+/// Bluetooth radios.
 ///
 /// {@category Struct}
 class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
@@ -2624,7 +2800,8 @@ class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
 //   UCHAR pinLength;
 // } BLUETOOTH_PIN_INFO, *PBLUETOOTH_PIN_INFO;
 
-/// BLUETOOTH_PIN_INFO
+/// The BLUETOOTH_PIN_INFO structure contains information used for
+/// authentication via PIN.
 ///
 /// {@category Struct}
 class BLUETOOTH_PIN_INFO extends Struct {
@@ -2665,7 +2842,7 @@ class BLUETOOTH_PIN_INFO extends Struct {
 //     ULONG32 ulOffset;
 //     } 	COR_FIELD_OFFSET;
 
-/// COR_FIELD_OFFSET
+/// Stores the offset, within a class, of the specified field.
 ///
 /// {@category Struct}
 class COR_FIELD_OFFSET extends Struct {
@@ -2697,7 +2874,8 @@ class COR_FIELD_OFFSET extends Struct {
 //     DWORD   dwFileDateLS;
 // } VS_FIXEDFILEINFO;
 
-/// VS_FIXEDFILEINFO
+/// Contains version information for a file. This information is language and
+/// code page independent.
 ///
 /// {@category Struct}
 class VS_FIXEDFILEINFO extends Struct {
@@ -2744,24 +2922,50 @@ class VS_FIXEDFILEINFO extends Struct {
     ..dwFileDateLS = 0;
 }
 
+// -----------------------------------------------------------------------------
 // UNIMPLEMENTED CLASSES THAT ARE INCLUDED SO THAT COM OBJECTS CAN BE GENERATED
+// -----------------------------------------------------------------------------
 
+/// Describes an exception that occurred during IDispatch::Invoke.
+///
 /// {@category Struct}
 class EXCEPINFO extends Struct {}
 
+/// Specifies the FMTID/PID identifier that programmatically identifies a
+/// property. Replaces SHCOLUMNID.
+///
 /// {@category Struct}
 class PROPERTYKEY extends Struct {}
 
+/// The PROPVARIANT structure is used in the ReadMultiple and WriteMultiple
+/// methods of IPropertyStorage to define the type tag and the value of a
+/// property in a property set.
+///
 /// {@category Struct}
 class PROPVARIANT extends Struct {}
 
+/// Represents a safe array.
+///
 /// {@category Struct}
 class SAFEARRAY extends Struct {}
 
+/// A CLSID is a globally unique identifier that identifies a COM class object.
+/// If your server or container allows linking to its embedded objects, you need
+/// to register a CLSID for each supported class of objects.
+///
 /// {@category Struct}
 class CLSID extends Struct {}
 
+/// The STATSTG structure contains statistical data about an open storage,
+/// stream, or byte-array object. This structure is used in the IEnumSTATSTG,
+/// ILockBytes, IStorage, and IStream interfaces.
+///
+/// {@category Struct}
 class STATSTG extends Struct {}
 
+/// Used to specify values that are used by SetSimulatedProfileInfo to override
+/// current internet connection profile values in an RDP Child Session to
+/// support the simulation of specific metered internet connection conditions.
+///
 /// {@category Struct}
 class NLM_SIMULATED_PROFILE_INFO extends Struct {}

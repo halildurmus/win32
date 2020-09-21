@@ -9,7 +9,9 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
+// -----------------------------------------------------------------------------
 // General constants
+// -----------------------------------------------------------------------------
 
 /// A zero value; used to represent an empty bitmask.
 const NULL = 0;
@@ -26,9 +28,9 @@ const STATUS_SUCCESS = 0;
 // Path length
 const MAX_PATH = 260;
 
-// ---------------
+// -----------------------------------------------------------------------------
 // COM Error Codes
-// ---------------
+// -----------------------------------------------------------------------------
 
 /// For broadly applicable common status codes such as S_OK.
 const FACILITY_NULL = 0;
@@ -74,9 +76,9 @@ const FACILITY_CERT = 11;
 /// The source of the error code is Wininet related.
 const FACILITY_INTERNET = 12;
 
-// ---------------
+// -----------------------------------------------------------------------------
 // Error constants
-// ---------------
+// -----------------------------------------------------------------------------
 
 /// The operation completed successfully.
 const ERROR_SUCCESS = 0;
@@ -595,27 +597,48 @@ const APPMODEL_ERROR_PACKAGE_NOT_AVAILABLE = 15706;
 /// @nodoc
 const APPMODEL_ERROR_NO_MUTABLE_DIRECTORY = 15707;
 
-/// @nodoc
+// -----------------------------------------------------------------------------
+// Format message flags
+// -----------------------------------------------------------------------------
+
+/// Insert sequences in the message definition are to be ignored and passed
+/// through to the output buffer unchanged. This flag is useful for fetching a
+/// message for later formatting. If this flag is set, the Arguments parameter
+/// is ignored.
 const FORMAT_MESSAGE_IGNORE_INSERTS = 0x00000200;
 
-/// @nodoc
+/// The lpSource parameter is a pointer to a null-terminated string that
+/// contains a message definition. The message definition may contain insert
+/// sequences, just as the message text in a message table resource may. This
+/// flag cannot be used with FORMAT_MESSAGE_FROM_HMODULE or
+/// FORMAT_MESSAGE_FROM_SYSTEM.
 const FORMAT_MESSAGE_FROM_STRING = 0x00000400;
 
-/// @nodoc
+/// The lpSource parameter is a module handle containing the message-table
+/// resource(s) to search. If this lpSource handle is NULL, the current
+/// process's application image file will be searched. This flag cannot be used
+/// with FORMAT_MESSAGE_FROM_STRING.
 const FORMAT_MESSAGE_FROM_HMODULE = 0x00000800;
 
-/// @nodoc
+/// The function should search the system message-table resource(s) for the
+/// requested message. If this flag is specified with
+/// FORMAT_MESSAGE_FROM_HMODULE, the function searches the system message table
+/// if the message is not found in the module specified by lpSource. This flag
+/// cannot be used with FORMAT_MESSAGE_FROM_STRING.
 const FORMAT_MESSAGE_FROM_SYSTEM = 0x00001000;
 
-/// @nodoc
+/// The Arguments parameter is not a va_list structure, but is a pointer to an
+/// array of values that represent the arguments.
 const FORMAT_MESSAGE_ARGUMENT_ARRAY = 0x00002000;
 
-/// @nodoc
+/// The function ignores regular line breaks in the message definition text. The
+/// function stores hard-coded line breaks in the message definition text into
+/// the output buffer. The function generates no new line breaks.
 const FORMAT_MESSAGE_MAX_WIDTH_MASK = 0x000000FF;
 
-// ---------------------
+// -----------------------------------------------------------------------------
 // WindowStyle constants
-// ---------------------
+// -----------------------------------------------------------------------------
 
 /// The window has a thin-line border.
 const WS_BORDER = 0x00800000;
@@ -748,9 +771,9 @@ const WS_VISIBLE = 0x10000000;
 /// The window has a vertical scroll bar.
 const WS_VSCROLL = 0x00200000;
 
-// -----------------------
+// -----------------------------------------------------------------------------
 // WindowMessage constants
-// -----------------------
+// -----------------------------------------------------------------------------
 
 /// Performs no operation.
 ///
@@ -1587,54 +1610,59 @@ const WM_PALETTECHANGED = 0x0311;
 /// with the thread that registered the hot key.
 const WM_HOTKEY = 0x0312;
 
+// -----------------------------------------------------------------------------
 // Queue status flags
-/// @nodoc
+// -----------------------------------------------------------------------------
+
+/// A WM_KEYUP, WM_KEYDOWN, WM_SYSKEYUP, or WM_SYSKEYDOWN message is in the
+/// queue.
 const QS_KEY = 0x0001;
 
-/// @nodoc
+/// A WM_MOUSEMOVE message is in the queue.
 const QS_MOUSEMOVE = 0x0002;
 
-/// @nodoc
+/// A mouse-button message (WM_LBUTTONUP, WM_RBUTTONDOWN, and so on).
 const QS_MOUSEBUTTON = 0x0004;
 
-/// @nodoc
+/// A posted message (other than those listed here) is in the queue.
 const QS_POSTMESSAGE = 0x0008;
 
-/// @nodoc
+/// A WM_TIMER message is in the queue.
 const QS_TIMER = 0x0010;
 
-/// @nodoc
+/// A WM_PAINT message is in the queue.
 const QS_PAINT = 0x0020;
 
-/// @nodoc
+/// A message sent by another thread or application is in the queue.
 const QS_SENDMESSAGE = 0x0040;
 
-/// @nodoc
+/// A WM_HOTKEY message is in the queue.
 const QS_HOTKEY = 0x0080;
 
-/// @nodoc
+/// A posted message (other than those listed here) is in the queue.
 const QS_ALLPOSTMESSAGE = 0x0100;
 
-/// @nodoc
+/// A raw input message is in the queue.
 const QS_RAWINPUT = 0x0400;
 
-/// @nodoc
+/// A touch message is in the queue.
 const QS_TOUCH = 0x0800;
 
-/// @nodoc
+/// A pointer message is in the queue.
 const QS_POINTER = 0x1000;
 
-/// @nodoc
+/// A WM_MOUSEMOVE message or mouse-button message (WM_LBUTTONUP,
+/// WM_RBUTTONDOWN, and so on).
 const QS_MOUSE = QS_MOUSEMOVE | QS_MOUSEBUTTON;
 
-/// @nodoc
+/// An input message is in the queue.
 const QS_INPUT = QS_MOUSE | QS_KEY | QS_RAWINPUT | QS_TOUCH | QS_POINTER;
 
-/// @nodoc
+/// An input, WM_TIMER, WM_PAINT, WM_HOTKEY, or posted message is in the queue.
 const QS_ALLEVENTS =
     QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY;
 
-/// @nodoc
+/// Any message is in the queue.
 const QS_ALLINPUT = QS_INPUT |
     QS_POSTMESSAGE |
     QS_TIMER |
@@ -1663,48 +1691,80 @@ const LF_FACESIZE = 32;
 /// @nodoc
 const LF_FULLFACESIZE = 64;
 
+// -----------------------------------------------------------------------------
 // System-wide parameters
+// -----------------------------------------------------------------------------
 
-/// @nodoc
+/// Determines whether the warning beeper is on.
 const SPI_GETBEEP = 0x0001;
 
-/// @nodoc
+/// Turns the warning beeper on or off. The uiParam parameter specifies TRUE for
+/// on, or FALSE for off.
 const SPI_SETBEEP = 0x0002;
 
-/// @nodoc
+/// Retrieves the two mouse threshold values and the mouse acceleration. The
+/// pvParam parameter must point to an array of three integers that receives
+/// these values. See mouse_event for further information.
 const SPI_GETMOUSE = 0x0003;
 
-/// @nodoc
+/// Sets the two mouse threshold values and the mouse acceleration. The pvParam
+/// parameter must point to an array of three integers that specifies these
+/// values. See mouse_event for further information.
 const SPI_SETMOUSE = 0x0004;
 
-/// @nodoc
+/// Retrieves the border multiplier factor that determines the width of a
+/// window's sizing border. The pvParamparameter must point to an integer
+/// variable that receives this value.
 const SPI_GETBORDER = 0x0005;
 
-/// @nodoc
+/// Sets the border multiplier factor that determines the width of a window's
+/// sizing border. The uiParam parameter specifies the new value.
 const SPI_SETBORDER = 0x0006;
 
-/// @nodoc
+/// Retrieves the keyboard repeat-speed setting, which is a value in the range
+/// from 0 (approximately 2.5 repetitions per second) through 31 (approximately
+/// 30 repetitions per second). The actual repeat rates are hardware-dependent
+/// and may vary from a linear scale by as much as 20%. The pvParam parameter
+/// must point to a DWORD variable that receives the setting.
 const SPI_GETKEYBOARDSPEED = 0x000A;
 
-/// @nodoc
+/// Sets the keyboard repeat-speed setting. The uiParam parameter must specify a
+/// value in the range from 0 (approximately 2.5 repetitions per second) through
+/// 31 (approximately 30 repetitions per second). The actual repeat rates are
+/// hardware-dependent and may vary from a linear scale by as much as 20%. If
+/// uiParam is greater than 31, the parameter is set to 31.
 const SPI_SETKEYBOARDSPEED = 0x000B;
 
-/// @nodoc
-const SPI_LANGDRIVER = 0x000C;
-
-/// @nodoc
+/// Sets or retrieves the width, in pixels, of an icon cell.
+///
+/// The system uses this rectangle to arrange icons in large icon view.
+///
+/// To set this value, set uiParam to the new value and set pvParam to NULL. You
+/// cannot set this value to less than SM_CXICON.
+///
+/// To retrieve this value, pvParam must point to an integer that receives the
+/// current value.
 const SPI_ICONHORIZONTALSPACING = 0x000D;
 
-/// @nodoc
+/// Retrieves the screen saver time-out value, in seconds. The pvParam parameter
+/// must point to an integer variable that receives the value.
 const SPI_GETSCREENSAVETIMEOUT = 0x000E;
 
-/// @nodoc
+/// Sets the screen saver time-out value to the value of the uiParam parameter.
+/// This value is the amount of time, in seconds, that the system must be idle
+/// before the screen saver activates.
+///
+/// If the machine has entered power saving mode or system lock state, an
+/// ERROR_OPERATION_IN_PROGRESS exception occurs.
 const SPI_SETSCREENSAVETIMEOUT = 0x000F;
 
-/// @nodoc
+/// Determines whether screen saving is enabled. The pvParam parameter must
+/// point to a BOOL variable that receives TRUE if screen saving is enabled, or
+/// FALSE otherwise.
 const SPI_GETSCREENSAVEACTIVE = 0x0010;
 
-/// @nodoc
+/// Sets the state of the screen saver. The uiParam parameter specifies TRUE to
+/// activate screen saving, or FALSE to deactivate it.
 const SPI_SETSCREENSAVEACTIVE = 0x0011;
 
 /// @nodoc
@@ -1713,49 +1773,102 @@ const SPI_GETGRIDGRANULARITY = 0x0012;
 /// @nodoc
 const SPI_SETGRIDGRANULARITY = 0x0013;
 
-/// @nodoc
+/// Sets the desktop wallpaper.
 const SPI_SETDESKWALLPAPER = 0x0014;
 
-/// @nodoc
+/// Sets the current desktop pattern.
 const SPI_SETDESKPATTERN = 0x0015;
 
-/// @nodoc
+/// Retrieves the keyboard repeat-delay setting, which is a value in the range
+/// from 0 (approximately 250 ms delay) through 3 (approximately 1 second
+/// delay).
+///
+/// The actual delay associated with each value may vary depending on the
+/// hardware. The pvParam parameter must point to an integer variable that
+/// receives the setting.
 const SPI_GETKEYBOARDDELAY = 0x0016;
 
-/// @nodoc
+/// Sets the keyboard repeat-delay setting.
+///
+/// The uiParam parameter must specify 0, 1, 2, or 3, where zero sets the
+/// shortest delay approximately 250 ms) and 3 sets the longest delay
+/// (approximately 1 second). The actual delay associated with each value may
+/// vary depending on the hardware.
 const SPI_SETKEYBOARDDELAY = 0x0017;
 
-/// @nodoc
+/// Sets or retrieves the height, in pixels, of an icon cell.
+///
+/// To set this value, set uiParam to the new value and set pvParam to NULL. You
+/// cannot set this value to less than SM_CYICON.
+///
+/// To retrieve this value, pvParam must point to an integer that receives the
+/// current value.
 const SPI_ICONVERTICALSPACING = 0x0018;
 
-/// @nodoc
+/// Determines whether icon-title wrapping is enabled. The pvParam parameter
+/// must point to a BOOL variable that receives TRUE if enabled, or FALSE
+/// otherwise.
 const SPI_GETICONTITLEWRAP = 0x0019;
 
-/// @nodoc
+/// Turns icon-title wrapping on or off. The uiParam parameter specifies TRUE
+/// for on, or FALSE for off.
 const SPI_SETICONTITLEWRAP = 0x001A;
 
-/// @nodoc
+/// Determines whether pop-up menus are left-aligned or right-aligned, relative
+/// to the corresponding menu-bar item. The pvParam parameter must point to a
+/// BOOL variable that receives TRUE if right-aligned, or FALSE otherwise.
 const SPI_GETMENUDROPALIGNMENT = 0x001B;
 
-/// @nodoc
+/// Sets the alignment value of pop-up menus. The uiParam parameter specifies
+/// TRUE for right alignment, or FALSE for left alignment.
 const SPI_SETMENUDROPALIGNMENT = 0x001C;
 
-/// @nodoc
+/// Sets the width of the double-click rectangle to the value of the uiParam
+/// parameter.
+///
+/// The double-click rectangle is the rectangle within which the second click of
+/// a double-click must fall for it to be registered as a double-click.
+///
+/// To retrieve the width of the double-click rectangle, call GetSystemMetrics
+/// with the SM_CXDOUBLECLK flag.
 const SPI_SETDOUBLECLKWIDTH = 0x001D;
 
-/// @nodoc
+/// Sets the height of the double-click rectangle to the value of the uiParam
+/// parameter.
+///
+/// The double-click rectangle is the rectangle within which the second click of
+/// a double-click must fall for it to be registered as a double-click.
+///
+/// To retrieve the height of the double-click rectangle, call GetSystemMetrics
+/// with the SM_CYDOUBLECLK flag.
 const SPI_SETDOUBLECLKHEIGHT = 0x001E;
 
-/// @nodoc
+/// Retrieves the logical font information for the current icon-title font. The
+/// uiParam parameter specifies the size of a LOGFONT structure, and the pvParam
+/// parameter must point to the LOGFONT structure to fill in.
 const SPI_GETICONTITLELOGFONT = 0x001F;
 
-/// @nodoc
+/// Sets the double-click time for the mouse to the value of the uiParam
+/// parameter. If the uiParam value is greater than 5000 milliseconds, the
+/// system sets the double-click time to 5000 milliseconds.
+///
+/// The double-click time is the maximum number of milliseconds that can occur
+/// between the first and second clicks of a double-click. You can also call the
+/// SetDoubleClickTime function to set the double-click time. To get the current
+/// double-click time, call the GetDoubleClickTime function.
 const SPI_SETDOUBLECLICKTIME = 0x0020;
 
-/// @nodoc
+/// Swaps or restores the meaning of the left and right mouse buttons. The
+/// uiParam parameter specifies TRUE to swap the meanings of the buttons, or
+/// FALSE to restore their original meanings.
+///
+/// To retrieve the current setting, call GetSystemMetrics with the
+/// SM_SWAPBUTTON flag.
 const SPI_SETMOUSEBUTTONSWAP = 0x0021;
 
-/// @nodoc
+/// Sets the font that is used for icon titles. The uiParam parameter specifies
+/// the size of a LOGFONT structure, and the pvParam parameter must point to a
+/// LOGFONT structure.
 const SPI_SETICONTITLELOGFONT = 0x0022;
 
 /// @nodoc
@@ -1764,124 +1877,233 @@ const SPI_GETFASTTASKSWITCH = 0x0023;
 /// @nodoc
 const SPI_SETFASTTASKSWITCH = 0x0024;
 
-/// @nodoc
+/// Sets dragging of full windows either on or off. The uiParam parameter
+/// specifies TRUE for on, or FALSE for off.
 const SPI_SETDRAGFULLWINDOWS = 0x0025;
 
-/// @nodoc
+/// Determines whether dragging of full windows is enabled. The pvParam
+/// parameter must point to a BOOL variable that receives TRUE if enabled, or
+/// FALSE otherwise.
 const SPI_GETDRAGFULLWINDOWS = 0x0026;
 
-/// @nodoc
+/// Retrieves the metrics associated with the nonclient area of nonminimized
+/// windows. The pvParam parameter must point to a NONCLIENTMETRICS structure
+/// that receives the information. Set the cbSize member of this structure and
+/// the uiParam parameter to sizeof(NONCLIENTMETRICS).
 const SPI_GETNONCLIENTMETRICS = 0x0029;
 
-/// @nodoc
+/// Sets the metrics associated with the nonclient area of nonminimized windows.
+/// The pvParam parameter must point to a NONCLIENTMETRICS structure that
+/// contains the new parameters. Set the cbSize member of this structure and the
+/// uiParam parameter to sizeof(NONCLIENTMETRICS). Also, the lfHeight member of
+/// the LOGFONT structure must be a negative value.
 const SPI_SETNONCLIENTMETRICS = 0x002A;
 
-/// @nodoc
+/// Retrieves the metrics associated with minimized windows. The pvParam
+/// parameter must point to a MINIMIZEDMETRICS structure that receives the
+/// information. Set the cbSize member of this structure and the uiParam
+/// parameter to sizeof(MINIMIZEDMETRICS).
 const SPI_GETMINIMIZEDMETRICS = 0x002B;
 
-/// @nodoc
+/// Sets the metrics associated with minimized windows. The pvParam parameter
+/// must point to a MINIMIZEDMETRICS structure that contains the new parameters.
+/// Set the cbSize member of this structure and the uiParam parameter to
+/// sizeof(MINIMIZEDMETRICS).
 const SPI_SETMINIMIZEDMETRICS = 0x002C;
 
-/// @nodoc
+/// Retrieves the metrics associated with icons. The pvParam parameter must
+/// point to an ICONMETRICS structure that receives the information. Set the
+/// cbSize member of this structure and the uiParam parameter to
+/// sizeof(ICONMETRICS).
 const SPI_GETICONMETRICS = 0x002D;
 
-/// @nodoc
+/// Sets the metrics associated with icons. The pvParam parameter must point to
+/// an ICONMETRICS structure that contains the new parameters. Set the cbSize
+/// member of this structure and the uiParam parameter to sizeof(ICONMETRICS).
 const SPI_SETICONMETRICS = 0x002E;
 
-/// @nodoc
+/// Sets the size of the work area. The work area is the portion of the screen
+/// not obscured by the system taskbar or by application desktop toolbars. The
+/// pvParam parameter is a pointer to a RECT structure that specifies the new
+/// work area rectangle, expressed in virtual screen coordinates. In a system
+/// with multiple display monitors, the function sets the work area of the
+/// monitor that contains the specified rectangle.
 const SPI_SETWORKAREA = 0x002F;
 
-/// @nodoc
+/// Retrieves the size of the work area on the primary display monitor. The work
+/// area is the portion of the screen not obscured by the system taskbar or by
+/// application desktop toolbars. The pvParam parameter must point to a RECT
+/// structure that receives the coordinates of the work area, expressed in
+/// physical pixel size. Any DPI virtualization mode of the caller has no effect
+/// on this output.
+///
+/// To get the work area of a monitor other than the primary display monitor,
+/// call the GetMonitorInfo function.
 const SPI_GETWORKAREA = 0x0030;
 
 /// @nodoc
 const SPI_SETPENWINDOWS = 0x0031;
 
-/// @nodoc
+/// Retrieves information about the HighContrast accessibility feature. The
+/// pvParam parameter must point to a HIGHCONTRAST structure that receives the
+/// information. Set the cbSize member of this structure and the uiParam
+/// parameter to sizeof(HIGHCONTRAST).
 const SPI_GETHIGHCONTRAST = 0x0042;
 
-/// @nodoc
+/// Sets the parameters of the HighContrast accessibility feature. The pvParam
+/// parameter must point to a HIGHCONTRAST structure that contains the new
+/// parameters. Set the cbSize member of this structure and the uiParam
+/// parameter to sizeof(HIGHCONTRAST).
 const SPI_SETHIGHCONTRAST = 0x0043;
 
-/// @nodoc
+/// Determines whether the user relies on the keyboard instead of the mouse, and
+/// wants applications to display keyboard interfaces that would otherwise be
+/// hidden. The pvParam parameter must point to a BOOL variable that receives
+/// TRUE if the user relies on the keyboard; or FALSE otherwise.
 const SPI_GETKEYBOARDPREF = 0x0044;
 
-/// @nodoc
+/// Sets the keyboard preference. The uiParam parameter specifies TRUE if the
+/// user relies on the keyboard instead of the mouse, and wants applications to
+/// display keyboard interfaces that would otherwise be hidden; uiParam is FALSE
+/// otherwise.
 const SPI_SETKEYBOARDPREF = 0x0045;
 
-/// @nodoc
+/// Determines whether a screen reviewer utility is running. A screen reviewer
+/// utility directs textual information to an output device, such as a speech
+/// synthesizer or Braille display. When this flag is set, an application should
+/// provide textual information in situations where it would otherwise present
+/// the information graphically.
+///
+/// The pvParam parameter is a pointer to a BOOL variable that receives TRUE if
+/// a screen reviewer utility is running, or FALSE otherwise.
+///
+/// Note: Narrator, the screen reader that is included with Windows, does not
+/// set the SPI_SETSCREENREADER or SPI_GETSCREENREADER flags.
 const SPI_GETSCREENREADER = 0x0046;
 
-/// @nodoc
+/// Determines whether a screen review utility is running. The uiParam parameter
+/// specifies TRUE for on, or FALSE for off.
+///
+/// Note: Narrator, the screen reader that is included with Windows, does not
+/// set the SPI_SETSCREENREADER or SPI_GETSCREENREADER flags.
 const SPI_SETSCREENREADER = 0x0047;
 
-/// @nodoc
+/// Retrieves the animation effects associated with user actions. The pvParam
+/// parameter must point to an ANIMATIONINFO structure that receives the
+/// information. Set the cbSize member of this structure and the uiParam
+/// parameter to sizeof(ANIMATIONINFO).
 const SPI_GETANIMATION = 0x0048;
 
-/// @nodoc
+/// Sets the animation effects associated with user actions. The pvParam
+/// parameter must point to an ANIMATIONINFO structure that contains the new
+/// parameters. Set the cbSize member of this structure and the uiParam
+/// parameter to sizeof(ANIMATIONINFO).
 const SPI_SETANIMATION = 0x0049;
 
-/// @nodoc
+/// Determines whether the font smoothing feature is enabled. This feature uses
+/// font antialiasing to make font curves appear smoother by painting pixels at
+/// different gray levels.
+///
+/// The pvParam parameter must point to a BOOL variable that receives TRUE if
+/// the feature is enabled, or FALSE if it is not.
 const SPI_GETFONTSMOOTHING = 0x004A;
 
-/// @nodoc
+/// Enables or disables the font smoothing feature, which uses font antialiasing
+/// to make font curves appear smoother by painting pixels at different gray
+/// levels.
+///
+/// To enable the feature, set the uiParam parameter to TRUE. To disable the
+/// feature, set uiParam to FALSE.
 const SPI_SETFONTSMOOTHING = 0x004B;
 
-/// @nodoc
+/// Sets the width, in pixels, of the rectangle used to detect the start of a
+/// drag operation. Set uiParam to the new value. To retrieve the drag width,
+/// call GetSystemMetrics with the SM_CXDRAG flag.
 const SPI_SETDRAGWIDTH = 0x004C;
 
-/// @nodoc
+/// Sets the height, in pixels, of the rectangle used to detect the start of a
+/// drag operation. Set uiParam to the new value. To retrieve the drag height,
+/// call GetSystemMetrics with the SM_CYDRAG flag.
 const SPI_SETDRAGHEIGHT = 0x004D;
 
 /// @nodoc
 const SPI_SETHANDHELD = 0x004E;
 
-/// @nodoc
+/// This parameter is not supported.
 const SPI_GETLOWPOWERTIMEOUT = 0x004F;
 
-/// @nodoc
+/// This parameter is not supported.
 const SPI_GETPOWEROFFTIMEOUT = 0x0050;
 
-/// @nodoc
+/// This parameter is not supported.
 const SPI_SETLOWPOWERTIMEOUT = 0x0051;
 
-/// @nodoc
+/// This parameter is not supported.
 const SPI_SETPOWEROFFTIMEOUT = 0x0052;
 
 /// @nodoc
 const SPI_GETLOWPOWERACTIVE = 0x0053;
 
-/// @nodoc
+/// This parameter is not supported.
 const SPI_GETPOWEROFFACTIVE = 0x0054;
 
-/// @nodoc
+/// This parameter is not supported.
 const SPI_SETLOWPOWERACTIVE = 0x0055;
 
-/// @nodoc
+/// This parameter is not supported.
 const SPI_SETPOWEROFFACTIVE = 0x0056;
 
-/// @nodoc
+/// Reloads the system cursors. Set the uiParam parameter to zero and the
+/// pvParam parameter to NULL.
 const SPI_SETCURSORS = 0x0057;
 
-/// @nodoc
+/// Reloads the system icons. Set the uiParam parameter to zero and the pvParam
+/// parameter to NULL.
 const SPI_SETICONS = 0x0058;
 
-/// @nodoc
+/// Retrieves the input locale identifier for the system default input language.
+///
+/// The pvParam parameter must point to an HKL variable that receives this
+/// value.
 const SPI_GETDEFAULTINPUTLANG = 0x0059;
 
-/// @nodoc
+/// Sets the default input language for the system shell and applications.
+///
+/// The specified language must be displayable using the current system
+/// character set. The pvParam parameter must point to an HKL variable that
+/// contains the input locale identifier for the default language.
 const SPI_SETDEFAULTINPUTLANG = 0x005A;
 
-/// @nodoc
+/// Sets the hot key set for switching between input languages.
+///
+/// The uiParam and pvParam parameters are not used. The value sets the shortcut
+/// keys in the keyboard property sheets by reading the registry again. The
+/// registry must be set before this flag is used.
+///
+/// The path in the registry is HKEY_CURRENT_USER\Keyboard Layout\Toggle. Valid
+/// values are "1" = ALT+SHIFT, "2" = CTRL+SHIFT, and "3" = none.
 const SPI_SETLANGTOGGLE = 0x005B;
 
 /// @nodoc
 const SPI_GETWINDOWSEXTENSION = 0x005C;
 
-/// @nodoc
+/// Enables or disables the Mouse Trails feature, which improves the visibility
+/// of mouse cursor movements by briefly showing a trail of cursors and quickly
+/// erasing them.
+///
+/// To disable the feature, set the uiParam parameter to zero or 1. To enable
+/// the feature, set uiParam to a value greater than 1 to indicate the number of
+/// cursors drawn in the trail.
 const SPI_SETMOUSETRAILS = 0x005D;
 
-/// @nodoc
+/// Determines whether the Mouse Trails feature is enabled. This feature
+/// improves the visibility of mouse cursor movements by briefly showing a trail
+/// of cursors and quickly erasing them.
+///
+/// The pvParam parameter must point to an integer variable that receives a
+/// value. if the value is zero or 1, the feature is disabled. If the value is
+/// greater than 1, the feature is enabled and the value indicates the number of
+/// cursors drawn in the trail. The uiParam parameter is not used.
 const SPI_GETMOUSETRAILS = 0x005E;
 
 /// @nodoc
@@ -1890,22 +2112,40 @@ const SPI_SETSCREENSAVERRUNNING = 0x0061;
 /// @nodoc
 const SPI_SCREENSAVERRUNNING = SPI_SETSCREENSAVERRUNNING;
 
-/// @nodoc
+/// Retrieves information about the FilterKeys accessibility feature. The
+/// pvParam parameter must point to a FILTERKEYS structure that receives the
+/// information. Set the cbSize member of this structure and the uiParam
+/// parameter to sizeof(FILTERKEYS).
 const SPI_GETFILTERKEYS = 0x0032;
 
-/// @nodoc
+/// Sets the parameters of the FilterKeys accessibility feature. The pvParam
+/// parameter must point to a FILTERKEYS structure that contains the new
+/// parameters. Set the cbSize member of this structure and the uiParam
+/// parameter to sizeof(FILTERKEYS).
 const SPI_SETFILTERKEYS = 0x0033;
 
-/// @nodoc
+/// Retrieves information about the ToggleKeys accessibility feature. The
+/// pvParam parameter must point to a TOGGLEKEYS structure that receives the
+/// information. Set the cbSize member of this structure and the uiParam
+/// parameter to sizeof(TOGGLEKEYS).
 const SPI_GETTOGGLEKEYS = 0x0034;
 
-/// @nodoc
+/// Sets the parameters of the ToggleKeys accessibility feature. The pvParam
+/// parameter must point to a TOGGLEKEYS structure that contains the new
+/// parameters. Set the cbSize member of this structure and the uiParam
+/// parameter to sizeof(TOGGLEKEYS).
 const SPI_SETTOGGLEKEYS = 0x0035;
 
-/// @nodoc
+/// Retrieves information about the MouseKeys accessibility feature. The pvParam
+/// parameter must point to a MOUSEKEYS structure that receives the information.
+/// Set the cbSize member of this structure and the uiParam parameter to
+/// sizeof(MOUSEKEYS).
 const SPI_GETMOUSEKEYS = 0x0036;
 
-/// @nodoc
+/// Sets the parameters of the MouseKeys accessibility feature. The pvParam
+/// parameter must point to a MOUSEKEYS structure that contains the new
+/// parameters. Set the cbSize member of this structure and the uiParam
+/// parameter to sizeof(MOUSEKEYS).
 const SPI_SETMOUSEKEYS = 0x0037;
 
 /// @nodoc
@@ -2088,50 +2328,75 @@ const SPI_GETDOCKMOVING = 0x0090;
 /// @nodoc
 const SPI_SETDOCKMOVING = 0x0091;
 
+// -----------------------------------------------------------------------------
 // ShowWindow constants
+// -----------------------------------------------------------------------------
 
-/// @nodoc
+/// Hides the window and activates another window.
 const SW_HIDE = 0;
 
-/// @nodoc
+/// Activates and displays a window.
+///
+/// If the window is minimized or maximized, the system restores it to its
+/// original size and position. An application should specify this flag when
+/// displaying the window for the first time.
 const SW_SHOWNORMAL = 1;
 
-/// @nodoc
+/// Activates the window and displays it as a minimized window.
 const SW_SHOWMINIMIZED = 2;
 
-/// @nodoc
+/// Maximizes the specified window.
 const SW_MAXIMIZE = 3;
 
-/// @nodoc
+/// Activates the window and displays it as a maximized window.
 const SW_SHOWMAXIMIZED = 3;
 
-/// @nodoc
+/// Displays a window in its most recent size and position.
+///
+/// This value is similar to SW_SHOWNORMAL, except that the window is not
+/// activated.
 const SW_SHOWNOACTIVATE = 4;
 
-/// @nodoc
+/// Activates the window and displays it in its current size and position.
 const SW_SHOW = 5;
 
-/// @nodoc
+/// Minimizes the specified window and activates the next top-level window in
+/// the Z order.
 const SW_MINIMIZE = 6;
 
-/// @nodoc
+/// Displays the window as a minimized window.
+///
+/// This value is similar to SW_SHOWMINIMIZED, except the window is not
+/// activated.
 const SW_SHOWMINNOACTIVE = 7;
 
-/// @nodoc
+/// Displays the window in its current size and position.
+///
+/// This value is similar to SW_SHOW, except that the window is not activated.
 const SW_SHOWNA = 8;
 
-/// @nodoc
+/// Activates and displays the window.
+///
+/// If the window is minimized or maximized, the system restores it to its
+/// original size and position. An application should specify this flag when
+/// restoring a minimized window.
 const SW_RESTORE = 9;
 
-/// @nodoc
+/// Sets the show state based on the SW_ value specified in the STARTUPINFO
+/// structure passed to the CreateProcess function by the program that started
+/// the application.
 const SW_SHOWDEFAULT = 10;
 
-/// @nodoc
+/// Minimizes a window, even if the thread that owns the window is not
+/// responding.
+///
+/// This flag should only be used when minimizing windows from a different
+/// thread.
 const SW_FORCEMINIMIZE = 11;
 
-// ----------------------
+// -----------------------------------------------------------------------------
 // Edit Control constants
-// ----------------------
+// -----------------------------------------------------------------------------
 
 /// Aligns text with the left margin.
 const ES_LEFT = 0x0000;
@@ -2196,9 +2461,9 @@ const ES_WANTRETURN = 0x1000;
 /// this set, it is still possible to paste non-digits into the edit control.
 const ES_NUMBER = 0x2000;
 
-// --------------------------
+// -----------------------------------------------------------------------------
 // Edit control notifications
-// --------------------------
+// -----------------------------------------------------------------------------
 
 /// Sent when an edit control receives the keyboard focus.
 const EN_SETFOCUS = 0x0100;
@@ -2240,135 +2505,260 @@ const EN_ALIGN_LTR_EC = 0x0700;
 /// Sent when the user has changed the edit control direction to right-to-left.
 const EN_ALIGN_RTL_EC = 0x0701;
 
-/// @nodoc
+// -----------------------------------------------------------------------------
+// Edit Control messages
+// -----------------------------------------------------------------------------
+
+/// Sets the left margin.
 const EC_LEFTMARGIN = 0x0001;
 
-/// @nodoc
+/// Sets the right margin.
 const EC_RIGHTMARGIN = 0x0002;
 
-/// @nodoc
+/// Rich edit controls: Sets the left and right margins to a narrow width
+/// calculated using the text metrics of the control's current font.
+///
+/// If no font has been set for the control, the margins are set to zero. The
+/// lParam parameter is ignored.
 const EC_USEFONTINFO = 0xffff;
 
-// Edit Control messages
-
-/// @nodoc
+/// Gets the starting and ending character positions (in TCHARs) of the current
+/// selection in an edit control.
+///
+/// You can send this message to either an edit control or a rich edit control.
 const EM_GETSEL = 0x00B0;
 
-/// @nodoc
+/// Selects a range of characters in an edit control.
+///
+/// You can send this message to either an edit control or a rich edit control.
 const EM_SETSEL = 0x00B1;
 
-/// @nodoc
+/// Gets the formatting rectangle of an edit control.
+///
+/// The formatting rectangle is the limiting rectangle into which the control
+/// draws the text. The limiting rectangle is independent of the size of the
+/// edit-control window. You can send this message to either an edit control or
+/// a rich edit control.
 const EM_GETRECT = 0x00B2;
 
-/// @nodoc
+/// Sets the formatting rectangle of a multiline edit control.
+///
+/// The formatting rectangle is the limiting rectangle into which the control
+/// draws the text. The limiting rectangle is independent of the size of the
+/// edit control window.
+///
+/// This message is processed only by multiline edit controls. You can send this
+/// message to either an edit control or a rich edit control.
 const EM_SETRECT = 0x00B3;
 
-/// @nodoc
+/// Sets the formatting rectangle of a multiline edit control.
+///
+/// The EM_SETRECTNP message is identical to the EM_SETRECT message, except that
+/// EM_SETRECTNP does not redraw the edit control window.
+///
+/// The formatting rectangle is the limiting rectangle into which the control
+/// draws the text. The limiting rectangle is independent of the size of the
+/// edit control window.
+///
+/// This message is processed only by multiline edit controls. You can send this
+/// message to either an edit control or a rich edit control.
 const EM_SETRECTNP = 0x00B4;
 
-/// @nodoc
+/// Scrolls the text vertically in a multiline edit control.
+///
+/// This message is equivalent to sending a WM_VSCROLL message to the edit
+/// control. You can send this message to either an edit control or a rich edit
+/// control.
 const EM_SCROLL = 0x00B5;
 
-/// @nodoc
+/// Scrolls the text in a multiline edit control.
 const EM_LINESCROLL = 0x00B6;
 
-/// @nodoc
+/// Scrolls the caret into view in an edit control.
+///
+/// You can send this message to either an edit control or a rich edit control.
 const EM_SCROLLCARET = 0x00B7;
 
-/// @nodoc
+/// Gets the state of an edit control's modification flag.
+///
+/// The flag indicates whether the contents of the edit control have been
+/// modified. You can send this message to either an edit control or a rich edit
+/// control.
 const EM_GETMODIFY = 0x00B8;
 
-/// @nodoc
+/// Sets or clears the modification flag for an edit control.
+///
+/// The modification flag indicates whether the text within the edit control has
+/// been modified. You can send this message to either an edit control or a rich
+/// edit control.
 const EM_SETMODIFY = 0x00B9;
 
-/// @nodoc
+/// Gets the number of lines in a multiline edit control.
+///
+/// You can send this message to either an edit control or a rich edit control.
 const EM_GETLINECOUNT = 0x00BA;
 
-/// @nodoc
+/// Gets the character index of the first character of a specified line in a
+/// multiline edit control.
+///
+/// A character index is the zero-based index of the character from the
+/// beginning of the edit control. You can send this message to either an edit
+/// control or a rich edit control.
 const EM_LINEINDEX = 0x00BB;
 
-/// @nodoc
+/// Sets the handle of the memory that will be used by a multiline edit control.
 const EM_SETHANDLE = 0x00BC;
 
-/// @nodoc
+/// Gets a handle of the memory currently allocated for a multiline edit
+/// control's text.
 const EM_GETHANDLE = 0x00BD;
 
-/// @nodoc
+/// Gets the position of the scroll box (thumb) in the vertical scroll bar of a
+/// multiline edit control.
+///
+/// You can send this message to either an edit control or a rich edit control.
 const EM_GETTHUMB = 0x00BE;
 
-/// @nodoc
+/// Retrieves the length, in characters, of a line in an edit control.
+///
+/// You can send this message to either an edit control or a rich edit control.
 const EM_LINELENGTH = 0x00C1;
 
-/// @nodoc
+/// Replaces the selected text in an edit control or a rich edit control with
+/// the specified text.
 const EM_REPLACESEL = 0x00C2;
 
-/// @nodoc
+/// Copies a line of text from an edit control and places it in a specified
+/// buffer.
+///
+/// You can send this message to either an edit control or a rich edit control.
 const EM_GETLINE = 0x00C4;
 
-/// @nodoc
+/// Sets the text limit of an edit control.
+///
+/// The text limit is the maximum amount
+/// of text, in TCHARs, that the user can type into the edit control. You can
+/// send this message to either an edit control or a rich edit control.
 const EM_LIMITTEXT = 0x00C5;
 
-/// @nodoc
+/// Determines whether there are any actions in an edit control's undo queue.
+///
+/// You can send this message to either an edit control or a rich edit control.
 const EM_CANUNDO = 0x00C6;
 
-/// @nodoc
+/// This message undoes the last edit control operation in the control's undo
+/// queue.
+///
+/// You can send this message to either an edit control or a rich edit control.
 const EM_UNDO = 0x00C7;
 
-/// @nodoc
+/// Sets a flag that determines whether a multiline edit control includes soft
+/// line-break characters.
+///
+/// A soft line break consists of two carriage returns and a line feed and is
+/// inserted at the end of a line that is broken because of wordwrapping.
 const EM_FMTLINES = 0x00C8;
 
-/// @nodoc
+/// Gets the index of the line that contains the specified character index in a
+/// multiline edit control.
+///
+/// A character index is the zero-based index of the character from the
+/// beginning of the edit control. You can send this message to either an edit
+/// control or a rich edit control.
 const EM_LINEFROMCHAR = 0x00C9;
 
-/// @nodoc
+/// The EM_SETTABSTOPS message sets the tab stops in a multiline edit control.
+/// When text is copied to the control, any tab character in the text causes
+/// space to be generated up to the next tab stop.
+///
+/// This message is processed only by multiline edit controls. You can send this
+/// message to either an edit control or a rich edit control.
 const EM_SETTABSTOPS = 0x00CB;
 
-/// @nodoc
+/// Sets or removes the password character for an edit control.
+///
+/// When a password character is set, that character is displayed in place of
+/// the characters typed by the user. You can send this message to either an
+/// edit control or a rich edit control.
 const EM_SETPASSWORDCHAR = 0x00CC;
 
-/// @nodoc
+/// Resets the undo flag of an edit control.
+///
+/// The undo flag is set whenever an
+/// operation within the edit control can be undone. You can send this message
+/// to either an edit control or a rich edit control.
 const EM_EMPTYUNDOBUFFER = 0x00CD;
 
-/// @nodoc
+/// Gets the zero-based index of the uppermost visible line in a multiline edit
+/// control.
+///
+/// You can send this message to either an edit control or a rich edit control.
 const EM_GETFIRSTVISIBLELINE = 0x00CE;
 
-/// @nodoc
+/// Sets or removes the read-only style (ES_READONLY) of an edit control.
+///
+/// You can send this message to either an edit control or a rich edit control.
 const EM_SETREADONLY = 0x00CF;
 
-/// @nodoc
+/// Replaces an edit control's default Wordwrap function with an
+/// application-defined Wordwrap function.
+///
+/// You can send this message to either an edit control or a rich edit control.
 const EM_SETWORDBREAKPROC = 0x00D0;
 
-/// @nodoc
+/// Gets the address of the current Wordwrap function.
+///
+/// You can send this message to either an edit control or a rich edit control.
 const EM_GETWORDBREAKPROC = 0x00D1;
 
-/// @nodoc
+/// Gets the password character that an edit control displays when the user
+/// enters text.
+///
+/// You can send this message to either an edit control or a rich edit control.
 const EM_GETPASSWORDCHAR = 0x00D2;
 
-/// @nodoc
+/// Sets the widths of the left and right margins for an edit control.
+///
+/// The message redraws the control to reflect the new margins. You can send
+/// this message to either an edit control or a rich edit control.
 const EM_SETMARGINS = 0x00D3;
 
-/// @nodoc
+/// Gets the widths of the left and right margins for an edit control.
 const EM_GETMARGINS = 0x00D4;
 
-/// @nodoc
+/// Sets the text limit of an edit control.
+///
+/// The text limit is the maximum amount of text, in TCHARs, that the user can
+/// type into the edit control. You can send this message to either an edit
+/// control or a rich edit control.
 const EM_SETLIMITTEXT = EM_LIMITTEXT;
 
-/// @nodoc
+/// Gets the current text limit for an edit control.
+///
+/// You can send this message to either an edit control or a rich edit control.
 const EM_GETLIMITTEXT = 0x00D5;
 
-/// @nodoc
+/// Retrieves the client area coordinates of a specified character in an edit
+/// control.
+///
+/// You can send this message to either an edit control or a rich edit control.
 const EM_POSFROMCHAR = 0x00D6;
 
-/// @nodoc
+/// Gets information about the character closest to a specified point in the
+/// client area of an edit control.
+///
+/// You can send this message to either an edit control or a rich edit control.
 const EM_CHARFROMPOS = 0x00D7;
 
-/// @nodoc
+/// Sets the status flags that determine how an edit control interacts with the
+/// Input Method Editor (IME).
 const EM_SETIMESTATUS = 0x00D8;
 
-/// @nodoc
+/// Gets a set of status flags that indicate how the edit control interacts with
+/// the Input Method Editor (IME).
 const EM_GETIMESTATUS = 0x00D9;
 
-/// @nodoc
+/// Allows enterprise data protection support and paste notifications to be set.
 const EM_ENABLEFEATURE = 0x00DA;
 
 // Menu flags
@@ -2511,24 +2901,31 @@ const EASTEUROPE_CHARSET = 238;
 /// @nodoc
 const RUSSIAN_CHARSET = 204;
 
+// -----------------------------------------------------------------------------
 // ScrollInfo constants
+// -----------------------------------------------------------------------------
 
-/// @nodoc
+/// Copies the scroll range to the nMin and nMax members of the SCROLLINFO
+/// structure pointed to by lpsi.
 const SIF_RANGE = 0x0001;
 
-/// @nodoc
+/// Copies the scroll page to the nPage member of the SCROLLINFO structure
+/// pointed to by lpsi.
 const SIF_PAGE = 0x0002;
 
-/// @nodoc
+/// Copies the scroll position to the nPos member of the SCROLLINFO structure
+/// pointed to by lpsi.
 const SIF_POS = 0x0004;
 
-/// @nodoc
+/// Disables the scroll bar instead of removing it, if the scroll bar's new
+/// parameters make the scroll bar unnecessary.
 const SIF_DISABLENOSCROLL = 0x0008;
 
-/// @nodoc
+/// Copies the current scroll box tracking position to the nTrackPos member of
+/// the SCROLLINFO structure pointed to by lpsi.
 const SIF_TRACKPOS = 0x0010;
 
-/// @nodoc
+/// Combines SIF_RANGE,  SIF_PAGE, SIF_POS and SIF_TRACKPOS.
 const SIF_ALL = SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS;
 
 // Scrollbar constants
@@ -2590,71 +2987,105 @@ const SB_RIGHT = 7;
 /// @nodoc
 const SB_ENDSCROLL = 8;
 
+// -----------------------------------------------------------------------------
 // DrawText constants
+// -----------------------------------------------------------------------------
 
-/// @nodoc
+/// Justifies the text to the top of the rectangle.
 const DT_TOP = 0x000;
 
-/// @nodoc
+/// Aligns text to the left.
 const DT_LEFT = 0x000;
 
-/// @nodoc
+/// Centers text horizontally in the rectangle.
 const DT_CENTER = 0x001;
 
-/// @nodoc
+/// Aligns text to the right.
 const DT_RIGHT = 0x002;
 
-/// @nodoc
+/// Centers text vertically. This value is used only with the DT_SINGLELINE value.
 const DT_VCENTER = 0x004;
 
-/// @nodoc
+/// Justifies the text to the bottom of the rectangle. This value is used only
+/// with the DT_SINGLELINE value.
 const DT_BOTTOM = 0x008;
 
-/// @nodoc
+/// Breaks words. Lines are automatically broken between words if a word would
+/// extend past the edge of the rectangle specified by the lpRect parameter. A
+/// carriage return-line feed sequence also breaks the line.
 const DT_WORDBREAK = 0x0010;
 
-/// @nodoc
+/// Displays text on a single line only. Carriage returns and line feeds do not
+/// break the line.
 const DT_SINGLELINE = 0x0020;
 
+// -----------------------------------------------------------------------------
 // Class styles
+// -----------------------------------------------------------------------------
 
-/// @nodoc
+/// Redraws the entire window if a movement or size adjustment changes the
+/// height of the client area.
 const CS_VREDRAW = 0x0001;
 
-/// @nodoc
+/// Redraws the entire window if a movement or size adjustment changes the width
+/// of the client area.
 const CS_HREDRAW = 0x0002;
 
-/// @nodoc
+/// Sends a double-click message to the window procedure when the user
+/// double-clicks the mouse while the cursor is within a window belonging to the
+/// class.
 const CS_DBLCLKS = 0x0008;
 
-/// @nodoc
+/// Allocates a unique device context for each window in the class.
 const CS_OWNDC = 0x0020;
 
-/// @nodoc
+/// Allocates one device context to be shared by all windows in the class.
+/// Because window classes are process specific, it is possible for multiple
+/// threads of an application to create a window of the same class. It is also
+/// possible for the threads to attempt to use the device context
+/// simultaneously. When this happens, the system allows only one thread to
+/// successfully finish its drawing operation.
 const CS_CLASSDC = 0x0040;
 
-/// @nodoc
+/// Sets the clipping rectangle of the child window to that of the parent window
+/// so that the child can draw on the parent. A window with the CS_PARENTDC
+/// style bit receives a regular device context from the system's cache of
+/// device contexts. It does not give the child the parent's device context or
+/// device context settings. Specifying CS_PARENTDC enhances an application's
+/// performance.
 const CS_PARENTDC = 0x0080;
 
-/// @nodoc
+/// Disables Close on the window menu.
 const CS_NOCLOSE = 0x0200;
 
-/// @nodoc
+/// Saves, as a bitmap, the portion of the screen image obscured by a window of
+/// this class. When the window is removed, the system uses the saved bitmap to
+/// restore the screen image, including other windows that were obscured.
+/// Therefore, the system does not send WM_PAINT messages to windows that were
+/// obscured if the memory used by the bitmap has not been discarded and if
+/// other screen actions have not invalidated the stored image.
 const CS_SAVEBITS = 0x0800;
 
-/// @nodoc
+/// Aligns the window's client area on a byte boundary (in the x direction).
+/// This style affects the width of the window and its horizontal placement on
+/// the display.
 const CS_BYTEALIGNCLIENT = 0x1000;
 
-/// @nodoc
+/// Aligns the window on a byte boundary (in the x direction). This style
+/// affects the width of the window and its horizontal placement on the display.
 const CS_BYTEALIGNWINDOW = 0x2000;
 
-/// @nodoc
+/// Indicates that the window class is an application global class.
 const CS_GLOBALCLASS = 0x4000;
 
 /// @nodoc
 const CS_IME = 0x00010000;
 
-/// @nodoc
+/// Enables the drop shadow effect on a window. The effect is turned on and off
+/// through SPI_SETDROPSHADOW. Typically, this is enabled for small, short-lived
+/// windows such as menus to emphasize their Z-order relationship to other
+/// windows. Windows created from a class with this style must be top-level
+/// windows; they may not be child windows.
 const CS_DROPSHADOW = 0x00020000;
 
 // ControlWord constant
@@ -3139,99 +3570,130 @@ final IDC_CROSS = Pointer<Utf16>.fromAddress(32515);
 /// @nodoc
 final IDC_UPARROW = Pointer<Utf16>.fromAddress(32516);
 
+// -----------------------------------------------------------------------------
 // MessageBox flags
+// -----------------------------------------------------------------------------
 
-/// @nodoc
+/// The message box contains one push button: OK. This is the default.
 const MB_OK = 0x00000000;
 
-/// @nodoc
+/// The message box contains two push buttons: OK and Cancel.
 const MB_OKCANCEL = 0x00000001;
 
-/// @nodoc
+/// The message box contains three push buttons: Abort, Retry, and Ignore.
 const MB_ABORTRETRYIGNORE = 0x00000002;
 
-/// @nodoc
+/// The message box contains three push buttons: Yes, No, and Cancel.
 const MB_YESNOCANCEL = 0x00000003;
 
-/// @nodoc
+/// The message box contains two push buttons: Yes and No.
 const MB_YESNO = 0x00000004;
 
-/// @nodoc
+/// The message box contains two push buttons: Retry and Cancel.
 const MB_RETRYCANCEL = 0x00000005;
 
-/// @nodoc
+/// The message box contains three push buttons: Cancel, Try Again, Continue.
+/// Use this message box type instead of MB_ABORTRETRYIGNORE.
 const MB_CANCELTRYCONTINUE = 0x00000006;
 
-/// @nodoc
+/// A stop-sign icon appears in the message box.
 const MB_ICONHAND = 0x00000010;
 
-/// @nodoc
+/// A question-mark icon appears in the message box.
+///
+/// The question-mark message icon is no longer recommended because it does not
+/// clearly represent a specific type of message and because the phrasing of a
+/// message as a question could apply to any message type. In addition, users
+/// can confuse the message symbol question mark with Help information.
+/// Therefore, do not use this question mark message symbol in your message
+/// boxes. The system continues to support its inclusion only for backward
+/// compatibility.
 const MB_ICONQUESTION = 0x00000020;
 
-/// @nodoc
+/// An exclamation-point icon appears in the message box.
 const MB_ICONEXCLAMATION = 0x00000030;
 
-/// @nodoc
+/// An icon consisting of a lowercase letter i in a circle appears in the
+/// message box.
 const MB_ICONASTERISK = 0x00000040;
 
-/// @nodoc
-const MB_USERICON = 0x00000080;
-
-/// @nodoc
+/// An exclamation-point icon appears in the message box.
 const MB_ICONWARNING = MB_ICONEXCLAMATION;
 
-/// @nodoc
+/// A stop-sign icon appears in the message box.
 const MB_ICONERROR = MB_ICONHAND;
 
-/// @nodoc
+/// An icon consisting of a lowercase letter i in a circle appears in the
+/// message box.
 const MB_ICONINFORMATION = MB_ICONASTERISK;
 
-/// @nodoc
+/// A stop-sign icon appears in the message box.
 const MB_ICONSTOP = MB_ICONHAND;
 
-/// @nodoc
+/// The first button is the default button.
+///
+/// MB_DEFBUTTON1 is the default unless MB_DEFBUTTON2, MB_DEFBUTTON3, or
+/// MB_DEFBUTTON4 is specified.
 const MB_DEFBUTTON1 = 0x00000000;
 
-/// @nodoc
+/// The second button is the default button.
 const MB_DEFBUTTON2 = 0x00000100;
 
-/// @nodoc
+/// The third button is the default button.
 const MB_DEFBUTTON3 = 0x00000200;
 
-/// @nodoc
+/// The fourth button is the default button.
 const MB_DEFBUTTON4 = 0x00000300;
 
-/// @nodoc
+/// The user must respond to the message box before continuing work in the
+/// window identified by the hWnd parameter. However, the user can move to the
+/// windows of other threads and work in those windows.
 const MB_APPLMODAL = 0x00000000;
 
-/// @nodoc
+/// Same as MB_APPLMODAL except that the message box has the WS_EX_TOPMOST
+/// style.
+///
+/// Use system-modal message boxes to notify the user of serious, potentially
+/// damaging errors that require immediate attention (for example, running out
+/// of memory). This flag has no effect on the user's ability to interact with
+/// windows other than those associated with hWnd.
 const MB_SYSTEMMODAL = 0x00001000;
 
-/// @nodoc
+/// Same as MB_APPLMODAL except that all the top-level windows belonging to the
+/// current thread are disabled if the hWnd parameter is NULL.
+///
+/// Use this flag when the calling application or library does not have a window
+/// handle available but still needs to prevent input to other windows in the
+/// calling thread without suspending other threads.
 const MB_TASKMODAL = 0x00002000;
 
-/// @nodoc
+/// Adds a Help button to the message box. When the user clicks the Help button
+/// or presses F1, the system sends a WM_HELP message to the owner.
 const MB_HELP = 0x00004000;
 
-/// @nodoc
-const MB_NOFOCUS = 0x00008000;
-
-/// @nodoc
+/// The message box becomes the foreground window. Internally, the system calls
+/// the SetForegroundWindow function for the message box.
 const MB_SETFOREGROUND = 0x00010000;
 
-/// @nodoc
+/// Same as desktop of the interactive window station.
+///
+/// If the current input desktop is not the default desktop, MessageBox does not
+/// return until the user switches to the default desktop.
 const MB_DEFAULT_DESKTOP_ONLY = 0x00020000;
 
-/// @nodoc
+/// The message box is created with the WS_EX_TOPMOST window style.
 const MB_TOPMOST = 0x00040000;
 
-/// @nodoc
+/// The text is right-justified.
 const MB_RIGHT = 0x00080000;
 
-/// @nodoc
+/// Displays message and caption text using right-to-left reading order on
+/// Hebrew and Arabic systems.
 const MB_RTLREADING = 0x00100000;
 
-/// @nodoc
+/// The caller is a service notifying the user of an event. The function
+/// displays a message box on the current active desktop, even if there is no
+/// user logged on to the computer.
 const MB_SERVICE_NOTIFICATION = 0x00200000;
 
 // Mapping modes
@@ -4540,17 +5002,22 @@ const KEY_ALL_ACCESS = (STANDARD_RIGHTS_ALL |
         KEY_CREATE_LINK) &
     (~SYNCHRONIZE);
 
-// *** CONSOLE CONSTANTS ***
+// -----------------------------------------------------------------------------
+// Console constants
+// -----------------------------------------------------------------------------
 
 // Handles
 
-/// @nodoc
+/// The standard input device. Initially, this is the console input buffer,
+/// CONIN$.
 const STD_INPUT_HANDLE = -10;
 
-/// @nodoc
+/// The standard output device. Initially, this is the active console screen
+/// buffer, CONOUT$.
 const STD_OUTPUT_HANDLE = -11;
 
-/// @nodoc
+/// The standard error device. Initially, this is the active console screen
+/// buffer, CONOUT$.
 const STD_ERROR_HANDLE = -12;
 
 /// @nodoc
@@ -4583,53 +5050,109 @@ const BACKGROUND_RED = 0x0040;
 /// @nodoc
 const BACKGROUND_INTENSITY = 0x0080;
 
-// input flags
+// Input flags
 
-/// @nodoc
+/// Characters read by the ReadFile or ReadConsole function are written to the
+/// active screen buffer as they are read. This mode can be used only if the
+/// ENABLE_LINE_INPUT mode is also enabled.
 const ENABLE_ECHO_INPUT = 0x0004;
 
-/// @nodoc
+/// Required to enable or disable extended flags. See ENABLE_INSERT_MODE and
+/// ENABLE_QUICK_EDIT_MODE.
 const ENABLE_EXTENDED_FLAGS = 0x0080;
 
-/// @nodoc
+/// When enabled, text entered in a console window will be inserted at the
+/// current cursor location and all text following that location will not be
+/// overwritten. When disabled, all following text will be overwritten.
+///
+/// To enable this mode, use ENABLE_INSERT_MODE | ENABLE_EXTENDED_FLAGS. To
+/// disable this mode, use ENABLE_EXTENDED_FLAGS without this flag.
 const ENABLE_INSERT_MODE = 0x0020;
 
-/// @nodoc
+/// The ReadFile or ReadConsole function returns only when a carriage return
+/// character is read. If this mode is disabled, the functions return when one
+/// or more characters are available.
 const ENABLE_LINE_INPUT = 0x0002;
 
-/// @nodoc
+/// If the mouse pointer is within the borders of the console window and the
+/// window has the keyboard focus, mouse events generated by mouse movement and
+/// button presses are placed in the input buffer. These events are discarded by
+/// ReadFile or ReadConsole, even when this mode is enabled.
 const ENABLE_MOUSE_INPUT = 0x0010;
 
-/// @nodoc
+/// CTRL+C is processed by the system and is not placed in the input buffer. If
+/// the input buffer is being read by ReadFile or ReadConsole, other control
+/// keys are processed by the system and are not returned in the ReadFile or
+/// ReadConsole buffer. If the ENABLE_LINE_INPUT mode is also enabled,
+/// backspace, carriage return, and line feed characters are handled by the
+/// system.
 const ENABLE_PROCESSED_INPUT = 0x0001;
 
-/// @nodoc
+/// This flag enables the user to use the mouse to select and edit text.
+///
+/// To enable this mode, use ENABLE_QUICK_EDIT_MODE | ENABLE_EXTENDED_FLAGS. To
+/// disable this mode, use ENABLE_EXTENDED_FLAGS without this flag.
 const ENABLE_QUICK_EDIT_MODE = 0x0040;
 
-/// @nodoc
+/// User interactions that change the size of the console screen buffer are
+/// reported in the console's input buffer. Information about these events can
+/// be read from the input buffer by applications using the ReadConsoleInput
+/// function, but not by those using ReadFile or ReadConsole.
 const ENABLE_WINDOW_INPUT = 0x0008;
 
-/// @nodoc
+/// Setting this flag directs the Virtual Terminal processing engine to convert
+/// user input received by the console window into Console Virtual Terminal
+/// Sequences that can be retrieved by a supporting application through ReadFile
+/// or ReadConsole functions.
+///
+/// The typical usage of this flag is intended in conjunction with
+/// ENABLE_VIRTUAL_TERMINAL_PROCESSING on the output handle to connect to an
+/// application that communicates exclusively via virtual terminal sequences.
 const ENABLE_VIRTUAL_TERMINAL_INPUT = 0x0200;
 
-// output flags
+// Output flags
 
-/// @nodoc
+/// Characters written by the WriteFile or WriteConsole function or echoed by
+/// the ReadFile or ReadConsole function are examined for ASCII control
+/// sequences and the correct action is performed. Backspace, tab, bell,
+/// carriage return, and line feed characters are processed.
 const ENABLE_PROCESSED_OUTPUT = 0x0001;
 
-/// @nodoc
+/// When writing with WriteFile or WriteConsole or echoing with ReadFile or
+/// ReadConsole, the cursor moves to the beginning of the next row when it
+/// reaches the end of the current row. This causes the rows displayed in the
+/// console window to scroll up automatically when the cursor advances beyond
+/// the last row in the window. It also causes the contents of the console
+/// screen buffer to scroll up (discarding the top row of the console screen
+/// buffer) when the cursor advances beyond the last row in the console screen
+/// buffer. If this mode is disabled, the last character in the row is
+/// overwritten with any subsequent characters.
 const ENABLE_WRAP_AT_EOL_OUTPUT = 0x0002;
 
-/// @nodoc
+/// When writing with WriteFile or WriteConsole, characters are parsed for VT100
+/// and similar control character sequences that control cursor movement,
+/// color/font mode, and other operations that can also be performed via the
+/// existing Console APIs. For more information, see Console Virtual Terminal
+/// Sequences.
 const ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004;
 
-/// @nodoc
+/// When writing with WriteFile or WriteConsole, this adds an additional state
+/// to end-of-line wrapping that can delay the cursor move and buffer scroll
+/// operations.
 const DISABLE_NEWLINE_AUTO_RETURN = 0x0008;
 
-/// @nodoc
+/// The APIs for writing character attributes including WriteConsoleOutput and
+/// WriteConsoleOutputAttribute allow the usage of flags from character
+/// attributes to adjust the color of the foreground and background of text.
+/// Additionally, a range of DBCS flags was specified with the COMMON_LVB
+/// prefix. Historically, these flags only functioned in DBCS code pages for
+/// Chinese, Japanese, and Korean languages.
 const ENABLE_LVB_GRID_WORLDWIDE = 0x0010;
 
+// -----------------------------------------------------------------------------
 // Monitor APIs
+// -----------------------------------------------------------------------------
+
 /// @nodoc
 const MONITOR_DEFAULTTONULL = 0x00000000;
 
@@ -5892,6 +6415,64 @@ class BLUETOOTH_AUTHENTICATION_METHOD {
   static const BLUETOOTH_AUTHENTICATION_METHOD_NUMERIC_COMPARISON = 2;
   static const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY_NOTIFICATION = 3;
   static const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY = 4;
+}
+
+/// Specifies the variant types.
+///
+/// {@category Enum}
+class VARENUM {
+  static const VT_EMPTY = 0;
+  static const VT_NULL = 1;
+  static const VT_I2 = 2;
+  static const VT_I4 = 3;
+  static const VT_R4 = 4;
+  static const VT_R8 = 5;
+  static const VT_CY = 6;
+  static const VT_DATE = 7;
+  static const VT_BSTR = 8;
+  static const VT_DISPATCH = 9;
+  static const VT_ERROR = 10;
+  static const VT_BOOL = 11;
+  static const VT_VARIANT = 12;
+  static const VT_UNKNOWN = 13;
+  static const VT_DECIMAL = 14;
+  static const VT_I1 = 16;
+  static const VT_UI1 = 17;
+  static const VT_UI2 = 18;
+  static const VT_UI4 = 19;
+  static const VT_I8 = 20;
+  static const VT_UI8 = 21;
+  static const VT_INT = 22;
+  static const VT_UINT = 23;
+  static const VT_VOID = 24;
+  static const VT_HRESULT = 25;
+  static const VT_PTR = 26;
+  static const VT_SAFEARRAY = 27;
+  static const VT_CARRAY = 28;
+  static const VT_USERDEFINED = 29;
+  static const VT_LPSTR = 30;
+  static const VT_LPWSTR = 31;
+  static const VT_RECORD = 36;
+  static const VT_INT_PTR = 37;
+  static const VT_UINT_PTR = 38;
+  static const VT_FILETIME = 64;
+  static const VT_BLOB = 65;
+  static const VT_STREAM = 66;
+  static const VT_STORAGE = 67;
+  static const VT_STREAMED_OBJECT = 68;
+  static const VT_STORED_OBJECT = 69;
+  static const VT_BLOB_OBJECT = 70;
+  static const VT_CF = 71;
+  static const VT_CLSID = 72;
+  static const VT_VERSIONED_STREAM = 73;
+  static const VT_BSTR_BLOB = 0xfff;
+  static const VT_VECTOR = 0x1000;
+  static const VT_ARRAY = 0x2000;
+  static const VT_BYREF = 0x4000;
+  static const VT_RESERVED = 0x8000;
+  static const VT_ILLEGAL = 0xffff;
+  static const VT_ILLEGALMASKED = 0xfff;
+  static const VT_TYPEMASK = 0xff;
 }
 
 /// The BLUETOOTH_AUTHENTICATION_REQUIREMENTS enumeration specifies the 'Man in
