@@ -14,7 +14,7 @@ class OpenFilePicker extends FileDialog {
 
   /// Returns a `File` object from the selected file path.
   File getFile() {
-    bool didUserCancel = false;
+    var didUserCancel = false;
     String filePath;
 
     var hr = CoInitializeEx(
@@ -23,11 +23,11 @@ class OpenFilePicker extends FileDialog {
 
     final fileDialog = FileOpenDialog.createInstance();
 
-    Pointer<Uint32> pfos = allocate<Uint32>();
+    final pfos = allocate<Uint32>();
     hr = fileDialog.GetOptions(pfos);
     if (FAILED(hr)) throw WindowsException(hr);
 
-    int options = pfos.value;
+    var options = pfos.value;
     if (hidePinnedPlaces ?? false) {
       options |= FILEOPENDIALOGOPTIONS.FOS_HIDEPINNEDPLACES;
     }
@@ -70,8 +70,8 @@ class OpenFilePicker extends FileDialog {
       final rgSpec =
           allocate<COMDLG_FILTERSPEC>(count: filterSpecification.length);
 
-      int index = 0;
-      for (var key in filterSpecification.keys) {
+      var index = 0;
+      for (final key in filterSpecification.keys) {
         rgSpec[index]
           ..pszName = TEXT(key)
           ..pszSpec = TEXT(filterSpecification[key]);
@@ -90,7 +90,7 @@ class OpenFilePicker extends FileDialog {
       }
     }
 
-    for (var place in customPlaces) {
+    for (final place in customPlaces) {
       final shellItem =
           Pointer.fromAddress(place.item.ptr.cast<IntPtr>().value);
       if (place.place == Place.bottom) {

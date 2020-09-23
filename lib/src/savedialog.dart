@@ -9,7 +9,7 @@ import 'filedialog.dart';
 class SaveFilePicker extends FileDialog {
   /// Returns a `File` object from the selected file path.
   File getFile() {
-    bool didUserCancel = false;
+    var didUserCancel = false;
     String filePath;
 
     var hr = CoInitializeEx(
@@ -18,11 +18,11 @@ class SaveFilePicker extends FileDialog {
 
     final fileDialog = FileSaveDialog.createInstance();
 
-    Pointer<Uint32> pfos = allocate<Uint32>();
+    final pfos = allocate<Uint32>();
     hr = fileDialog.GetOptions(pfos);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-    int options = pfos.value;
+    var options = pfos.value;
     if (hidePinnedPlaces ?? false) {
       options |= FILEOPENDIALOGOPTIONS.FOS_HIDEPINNEDPLACES;
     }
@@ -63,8 +63,8 @@ class SaveFilePicker extends FileDialog {
       final rgSpec =
           allocate<COMDLG_FILTERSPEC>(count: filterSpecification.length);
 
-      int index = 0;
-      for (var key in filterSpecification.keys) {
+      var index = 0;
+      for (final key in filterSpecification.keys) {
         rgSpec[index]
           ..pszName = TEXT(key)
           ..pszSpec = TEXT(filterSpecification[key]);
