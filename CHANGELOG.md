@@ -1,3 +1,9 @@
+## 1.0.0
+
+* Mark as stable version
+* Update to new Windows template for example application
+* Update package dependencies
+
 ## 0.1.2
 
 * Update APIs
