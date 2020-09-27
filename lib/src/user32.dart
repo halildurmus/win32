@@ -946,6 +946,21 @@ final SendMessage = _user32.lookupFunction<
     IntPtr Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
     int Function(int hWnd, int Msg, int wParam, int lParam)>('SendMessageW');
 
+/// Moves the cursor to the specified screen coordinates. If the new
+/// coordinates are not within the screen rectangle set by the most recent
+/// ClipCursor function call, the system automatically adjusts the
+/// coordinates so that the cursor stays within the rectangle.
+///
+/// ```c
+/// BOOL SetCursorPos(
+///   int X,
+///   int Y
+/// );
+/// ```
+/// {@category user32}
+final SetCursorPos = _user32.lookupFunction<Int32 Function(Int32 X, Int32 Y),
+    int Function(int X, int Y)>('SetCursorPos');
+
 /// Sets the keyboard focus to the specified window. The window must be
 /// attached to the calling thread's message queue.
 ///
