@@ -570,6 +570,10 @@ void main() {
       final function = SendMessage;
       expect(function, isA<Function>());
     });
+    test('Can instantiate SetCursorPos', () {
+      final function = SetCursorPos;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate SetFocus', () {
       final function = SetFocus;
       expect(function, isA<Function>());
