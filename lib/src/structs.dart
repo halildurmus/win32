@@ -550,28 +550,54 @@ class SOLE_AUTHENTICATION_SERVICE extends Struct {
 
 /// The VARIANT type is used in Win32 to represent a dynamic type. It is
 /// represented as a struct containing a union of the types that could be
-/// stored. This is a specialization of that class for VARIANTs that contain
-/// pointers.
+/// stored.
 ///
+/// ```c
+/// struct tagVARIANT
+///    {
+///        VARTYPE vt;
+///        WORD wReserved1;
+///        WORD wReserved2;
+///        WORD wReserved3;
+///        union
+///            {
+///            LONGLONG llVal;
+///            LONG lVal;
+///            BYTE bVal;
+///            SHORT iVal;
+///            ...
+///    } ;
+/// ```
+///
+///
+
 /// {@category Struct}
 class VARIANT_POINTER extends Struct {
-  @Int16()
+  @Uint16()
   int vt;
-  @Int16()
+  @Uint16()
   int wReserved1;
-  @Int16()
+  @Uint16()
   int wReserved2;
-  @Int16()
+  @Uint16()
   int wReserved3;
 
-  Pointer<IntPtr> ptr;
+  bool get isPointer => vt == VARENUM.VT_PTR;
+  Pointer<IntPtr> get ptr => Pointer.fromAddress(
+      addressOf.cast<Uint8>().elementAt(8).cast<IntPtr>().value);
 
-  factory VARIANT_POINTER.allocate() => allocate<VARIANT_POINTER>().ref
-    ..vt = VARENUM.VT_PTR
-    ..wReserved1 = 0
-    ..wReserved2 = 0
-    ..wReserved3 = 0
-    ..ptr = nullptr;
+  factory VARIANT_POINTER.allocate() {
+    final structSize = 8 + sizeOf<IntPtr>();
+    final varptr =
+        allocate<Uint8>(count: structSize).cast<VARIANT_POINTER>().ref
+          ..vt = VARENUM.VT_PTR
+          ..wReserved1 = 0
+          ..wReserved2 = 0
+          ..wReserved3 = 0;
+    varptr.addressOf.cast<Uint8>().elementAt(8).cast<IntPtr>().value = 0;
+
+    return varptr;
+  }
 }
 
 // typedef struct _COMDLG_FILTERSPEC {

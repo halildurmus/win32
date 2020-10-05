@@ -27,3 +27,14 @@ final _oleaut32 = DynamicLibrary.open('oleaut32.dll');
 /// {@category oleaut32}
 final VariantClear = _oleaut32.lookupFunction<Int32 Function(Pointer pvarg),
     int Function(Pointer pvarg)>('VariantClear');
+
+/// Initializes a variant.
+///
+/// ```c
+/// void VariantInit(
+///   VARIANTARG *pvarg
+/// );
+/// ```
+/// {@category oleaut32}
+final VariantInit = _oleaut32.lookupFunction<Void Function(Pointer pvarg),
+    void Function(Pointer pvarg)>('VariantInit');

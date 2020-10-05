@@ -1101,5 +1101,9 @@ void main() {
       final function = VariantClear;
       expect(function, isA<Function>());
     });
+    test('Can instantiate VariantInit', () {
+      final function = VariantInit;
+      expect(function, isA<Function>());
+    });
   });
 }
