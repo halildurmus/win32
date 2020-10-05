@@ -159,7 +159,9 @@ void main() {
       if (SUCCEEDED(hr)) {
         print('Process: ${vtProp.ptr.cast<Utf16>().unpackString(256)}');
       }
+      // Free BSTRs in the returned variants
       VariantClear(vtProp.addressOf);
+      free(vtProp.addressOf);
 
       clsObj.Release();
     }
