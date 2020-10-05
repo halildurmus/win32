@@ -8,7 +8,7 @@ import 'package:win32/win32.dart';
 
 void main() {
   test('Variant creation', () {
-    final variant = VARIANT_POINTER.allocate();
+    final variant = VARIANT.allocate();
     VariantInit(variant.addressOf);
     expect(variant.vt, equals(VARENUM.VT_EMPTY));
     free(variant.addressOf);

@@ -47,7 +47,7 @@ typedef _Invoke_Native = Int32 Function(
     Uint32 lcid,
     Uint16 wFlags,
     Pointer<DISPPARAMS> pDispParams,
-    Pointer<VARIANT_POINTER> pVarResult,
+    Pointer<VARIANT> pVarResult,
     Pointer<EXCEPINFO> pExcepInfo,
     Pointer<Uint32> puArgErr);
 typedef _Invoke_Dart = int Function(
@@ -57,7 +57,7 @@ typedef _Invoke_Dart = int Function(
     int lcid,
     int wFlags,
     Pointer<DISPPARAMS> pDispParams,
-    Pointer<VARIANT_POINTER> pVarResult,
+    Pointer<VARIANT> pVarResult,
     Pointer<EXCEPINFO> pExcepInfo,
     Pointer<Uint32> puArgErr);
 
@@ -92,7 +92,7 @@ class IDispatch extends IUnknown {
           int lcid,
           int wFlags,
           Pointer<DISPPARAMS> pDispParams,
-          Pointer<VARIANT_POINTER> pVarResult,
+          Pointer<VARIANT> pVarResult,
           Pointer<EXCEPINFO> pExcepInfo,
           Pointer<Uint32> puArgErr) =>
       Pointer<NativeFunction<_Invoke_Native>>.fromAddress(
