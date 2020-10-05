@@ -569,7 +569,7 @@ class SOLE_AUTHENTICATION_SERVICE extends Struct {
 /// stored.
 ///
 /// VARIANTs must be initialized with [VariantInit] before their use.
-///
+
 /// {@category Struct}
 class VARIANT extends Struct {
   // The size of a union type equals the largest member it can contain, which in
