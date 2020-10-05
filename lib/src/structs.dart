@@ -584,8 +584,8 @@ class VARIANT extends Struct {
   @Uint16()
   int wReserved3;
 
-  Pointer<IntPtr> ptr;
-  Pointer<IntPtr> ptr2;
+  Pointer ptr;
+  Pointer ptr2;
 
   bool get isPointer => vt & VARENUM.VT_PTR == VARENUM.VT_PTR;
 
@@ -596,6 +596,10 @@ class VARIANT extends Struct {
     ..wReserved3 = 0
     ..ptr = nullptr
     ..ptr2 = nullptr;
+
+  factory VARIANT.fromPointer(Pointer ptr) => VARIANT.allocate()
+    ..vt = VARENUM.VT_PTR
+    ..ptr = ptr;
 }
 
 // typedef struct _COMDLG_FILTERSPEC {
