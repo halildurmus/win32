@@ -55,7 +55,7 @@ class NotepadFind {
   }
 
   bool findTextInEditWindow(
-      int hwndEdit, Pointer<Uint32> piSearchOffset, Pointer<FINDREPLACE> pfr) {
+      int/*!*/ hwndEdit, Pointer<Uint32>/*!*/ piSearchOffset, Pointer<FINDREPLACE> pfr) {
     int iLength;
 
     // Read in the edit document
@@ -81,7 +81,7 @@ class NotepadFind {
     return true;
   }
 
-  bool findNextTextInEditWindow(int hwndEdit, Pointer<Uint32> piSearchOffset) {
+  bool findNextTextInEditWindow(int/*!*/ hwndEdit, Pointer<Uint32> piSearchOffset) {
     final fr = FINDREPLACE.allocate();
 
     fr.lpstrFindWhat = szFindText.pointer;
@@ -90,7 +90,7 @@ class NotepadFind {
   }
 
   bool replaceTextInEditWindow(
-      int hwndEdit, Pointer<Uint32> piSearchOffset, Pointer<FINDREPLACE> fr) {
+      int/*!*/ hwndEdit, Pointer<Uint32> piSearchOffset, Pointer<FINDREPLACE> fr) {
     if (!findTextInEditWindow(hwndEdit, piSearchOffset, fr)) {
       return false;
     }

@@ -9,7 +9,7 @@ import 'package:win32/win32.dart';
 
 class NotepadFont {
   LOGFONT logfont = LOGFONT.allocate();
-  int hFont;
+  int/*!*/ hFont;
 
   NotepadFont(int hwndEdit) {
     final hSysFont = GetStockObject(SYSTEM_FONT);
@@ -42,7 +42,7 @@ class NotepadFont {
     return result == TRUE;
   }
 
-  void notepadSetFont(int hwndEdit) {
+  void notepadSetFont(int/*!*//*!*/ hwndEdit) {
     int hFontNew;
     final rect = RECT.allocate();
 

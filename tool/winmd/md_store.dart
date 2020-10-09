@@ -64,7 +64,7 @@ class WinmdStore {
 
   /// Takes a typename (e.g. `Windows.Globalization.Calendar`) and returns the
   /// metadata scope that contains the type.
-  static WinmdScope getScopeForType(String typeName) {
+  static WinmdScope/*!*/ getScopeForType(String typeName) {
     final hstrTypeName = convertToHString(typeName);
 
     final hstrMetaDataFilePath = allocate<IntPtr>();

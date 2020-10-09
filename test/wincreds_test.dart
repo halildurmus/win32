@@ -9,7 +9,7 @@ import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
 void writeCredential(
-    {String credentialName, String userName, String password}) {
+    {String /*!*/ credentialName, String /*!*/ userName, String /*!*/ password}) {
   final userNamePtr = TEXT(userName);
   final credNamePtr = TEXT(credentialName);
   final examplePassword = utf8.encode(password) as Uint8List;

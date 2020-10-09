@@ -16,7 +16,7 @@ class NotepadEditor {
   // are instantiated, so we take a copy here to minimize ceremony while an
   // instance is being used.
   final int _hwnd;
-  final int _hwndEdit;
+  final int/*!*/ _hwndEdit;
 
   NotepadFile file;
   NotepadFont font;

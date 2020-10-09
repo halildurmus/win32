@@ -97,7 +97,7 @@ class NotepadFile {
     }
   }
 
-  void readFileIntoEditControl(int hwndEdit) {
+  void readFileIntoEditControl(int/*!*/ hwndEdit) {
     // Fairly naive implementation that doesn't account for
     // string encoding. That's fine -- this is a toy app!
     final file = File(path);

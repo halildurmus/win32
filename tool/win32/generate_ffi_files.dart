@@ -29,7 +29,7 @@ String wrapCommentText(String inputText, [int wrapLength = 76]) {
 }
 
 String generateDocComment(
-    String library, String cPrototype, String apiComment) {
+    String/*!*/ library, String cPrototype, String apiComment) {
   final comment = StringBuffer();
 
   if (apiComment.isNotEmpty) {

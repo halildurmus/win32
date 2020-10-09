@@ -21,7 +21,7 @@ NotepadEditor editor;
 NotepadFind find;
 
 /// The handle of the Notepad window's text edit control
-int hwndEdit;
+int/*!*/ hwndEdit;
 
 FINDREPLACE findReplace;
 int messageFindReplace;

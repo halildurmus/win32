@@ -9,7 +9,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-extension Utf16Conversion on Pointer<Utf16> {
+extension Utf16Conversion on Pointer<Utf16>/*!*/ {
   String unpackString(int maxLength) {
     final pathData = cast<Uint16>().asTypedList(maxLength);
 
