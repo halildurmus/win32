@@ -21,7 +21,7 @@ late NotepadEditor editor;
 late NotepadFind find;
 
 /// The handle of the Notepad window's text edit control
-int hwndEdit;
+late int hwndEdit;
 
 late FINDREPLACE findReplace;
 int? messageFindReplace;

@@ -15,8 +15,8 @@ class PieceSet {
 
   final rng = Random();
 
-  List<List<Piece?>> pieces =
-      List.generate(NUM_PIECES, (i) => List<Piece?>(NUM_ROTATIONS));
+  List<List<Piece?>> pieces = List.generate(
+      NUM_PIECES, (i) => List<Piece?>.filled(NUM_ROTATIONS, null));
 
   PieceSet() {
     List<Point> tetrimino;
