@@ -55,7 +55,7 @@ final CreateSolidBrush = _gdi32.lookupFunction<IntPtr Function(Int32 color),
 /// ```
 /// {@category gdi32}
 final DeleteObject =
-    _gdi32.lookupFunction<Int32 Function(IntPtr ho), int Function(int/*!*/ ho)>(
+    _gdi32.lookupFunction<Int32 Function(IntPtr ho), int Function(int ho)>(
         'DeleteObject');
 
 /// The EnumFontFamiliesEx function enumerates all uniquely-named fonts in
@@ -325,8 +325,8 @@ final StretchDIBits = _gdi32.lookupFunction<
         int hdc,
         int xDest,
         int yDest,
-        int/*!*/ DestWidth,
-        int/*!*/ DestHeight,
+        int DestWidth,
+        int DestHeight,
         int xSrc,
         int ySrc,
         int SrcWidth,

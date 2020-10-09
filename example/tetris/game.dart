@@ -8,8 +8,8 @@ import 'level.dart';
 // Only Game and DrawEngine are exposed to main().
 //
 class Game {
-  DrawEngine de;
-  Level level;
+  DrawEngine? de;
+  late Level level;
 
   bool isPaused;
 
@@ -79,7 +79,7 @@ class Game {
 
   /// Called on WM_PAINT
   void repaint() {
-    de.drawInterface();
+    de!.drawInterface();
     level.drawScore();
     level.drawSpeed();
     level.drawNextPiece();
@@ -121,13 +121,13 @@ class Game {
 
   /// Shows GAME OVER message
   void drawGameOver() {
-    de.drawText('GAME OVER', 3, 10);
-    de.drawText('Press ENTER to restart', 2, 9);
+    de!.drawText('GAME OVER', 3, 10);
+    de!.drawText('Press ENTER to restart', 2, 9);
   }
 
   /// Shows PAUSE message
   void drawPause() {
-    de.drawText('PAUSE', 4, 10);
-    de.drawText('Press PAUSE again to continue', 1, 9);
+    de!.drawText('PAUSE', 4, 10);
+    de!.drawText('Press PAUSE again to continue', 1, 9);
   }
 }

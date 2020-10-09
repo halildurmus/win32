@@ -43,16 +43,16 @@ final abc = [
   ''
 ];
 
-int xClient; // width of client area
-int yClient; // height of client area
-int xClientMax; // maximum width of client area
+late int xClient; // width of client area
+late int yClient; // height of client area
+late int xClientMax; // maximum width of client area
 
-int xChar; // horizontal scrolling unit
-int yChar; // vertical scrolling unit
-int xUpper; // average width of uppercase letters
+late int xChar; // horizontal scrolling unit
+late int yChar; // vertical scrolling unit
+late int xUpper; // average width of uppercase letters
 
-int xPos; // current horizontal scrolling position
-int yPos; // current vertical scrolling position
+int? xPos; // current horizontal scrolling position
+int? yPos; // current vertical scrolling position
 
 int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
   switch (uMsg) {
@@ -154,7 +154,7 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
       // If the position has changed, scroll the window.
       if (si.nPos != xPos) {
-        ScrollWindow(hwnd, xChar * (xPos - si.nPos), 0, nullptr, nullptr);
+        ScrollWindow(hwnd, xChar * (xPos! - si.nPos), 0, nullptr, nullptr);
       }
 
       free(si.addressOf);
@@ -219,7 +219,7 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
       // If the position has changed, scroll window and update it.
       if (si.nPos != yPos) {
-        ScrollWindow(hwnd, 0, yChar * (yPos - si.nPos), nullptr, nullptr);
+        ScrollWindow(hwnd, 0, yChar * (yPos! - si.nPos), nullptr, nullptr);
         UpdateWindow(hwnd);
       }
 
@@ -244,13 +244,13 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       xPos = si.nPos;
 
       // Find painting limits.
-      final firstLine = max(0, yPos + (ps.rcPaintT / yChar).floor());
+      final firstLine = max(0, yPos! + (ps.rcPaintT / yChar).floor());
       final lastLine =
-          min(abc.length - 1, yPos + (ps.rcPaintB / yChar).floor());
+          min(abc.length - 1, yPos! + (ps.rcPaintB / yChar).floor());
 
       for (var i = firstLine; i <= lastLine; i++) {
-        final x = xChar * (1 - xPos);
-        final y = yChar * (i - yPos);
+        final x = xChar * (1 - xPos!);
+        final y = yChar * (i - yPos!);
 
         // Write a line of text to the client area.
         TextOut(hdc, x, y, TEXT(abc[i]), abc[i].length);

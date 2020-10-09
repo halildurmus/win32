@@ -378,7 +378,7 @@ final FindWindowEx = _user32.lookupFunction<
 /// {@category user32}
 final GetClientRect = _user32.lookupFunction<
     Int32 Function(IntPtr hwnd, Pointer<RECT> lpRect),
-    int Function(int/*!*/ hwnd, Pointer<RECT> lpRect)>('GetClientRect');
+    int Function(int hwnd, Pointer<RECT> lpRect)>('GetClientRect');
 
 /// Retrieves a handle to the current cursor.
 ///
@@ -414,7 +414,7 @@ final GetCursorPos = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 final GetDC = _user32.lookupFunction<IntPtr Function(IntPtr hwnd),
-    int Function(int/*!*/ hwnd)>('GetDC');
+    int Function(int hwnd)>('GetDC');
 
 /// Returns the system DPI.
 ///
@@ -588,7 +588,7 @@ final GetWindow = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 final GetWindowTextLength =
-    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int/*!*/ hWnd)>(
+    _user32.lookupFunction<Int32 Function(IntPtr hWnd), int Function(int hWnd)>(
         'GetWindowTextLengthW');
 
 /// Copies the text of the specified window's title bar (if it has one)
@@ -607,7 +607,7 @@ final GetWindowTextLength =
 final GetWindowText = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, Pointer<Utf16> lpString, Int32 nMaxCount),
     int Function(
-        int/*!*/ hWnd, Pointer<Utf16>/*!*/ lpString, int nMaxCount)>('GetWindowTextW');
+        int hWnd, Pointer<Utf16> lpString, int nMaxCount)>('GetWindowTextW');
 
 /// The InvalidateRect function adds a rectangle to the specified window's
 /// update region. The update region represents the portion of the window's
@@ -623,7 +623,7 @@ final GetWindowText = _user32.lookupFunction<
 /// {@category user32}
 final InvalidateRect = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect, Int32 bErase),
-    int Function(int/*!*/ hWnd, Pointer<RECT> lpRect, int bErase)>('InvalidateRect');
+    int Function(int hWnd, Pointer<RECT> lpRect, int bErase)>('InvalidateRect');
 
 /// Determines whether the clipboard contains data in the specified format.
 ///
@@ -674,7 +674,7 @@ final IsWindowVisible =
 /// {@category user32}
 final KillTimer = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, IntPtr uIDEvent),
-    int Function(int/*!*/ hWnd, int uIDEvent)>('KillTimer');
+    int Function(int hWnd, int uIDEvent)>('KillTimer');
 
 /// Loads the specified cursor resource from the executable (.EXE) file
 /// associated with an application instance. Note: this function has been
@@ -799,7 +799,7 @@ final MonitorFromWindow = _user32.lookupFunction<
 final MoveWindow = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, Int32 X, Int32 Y, Int32 nWidth, Int32 nHeight,
         Int32 bRepaint),
-    int Function(int/*!*/ hWnd, int X, int Y, int nWidth, int nHeight,
+    int Function(int hWnd, int X, int Y, int nWidth, int nHeight,
         int bRepaint)>('MoveWindow');
 
 /// Waits until one or all of the specified objects are in the signaled
@@ -894,7 +894,7 @@ final RegisterWindowMessage = _user32.lookupFunction<
 /// {@category user32}
 final ReleaseDC = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, IntPtr hDC),
-    int Function(int/*!*/ hWnd, int hDC)>('ReleaseDC');
+    int Function(int hWnd, int hDC)>('ReleaseDC');
 
 /// The ScrollWindow function scrolls the contents of the specified
 /// window's client area.
@@ -944,7 +944,7 @@ final SendInput = _user32.lookupFunction<
 /// {@category user32}
 final SendMessage = _user32.lookupFunction<
     IntPtr Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
-    int Function(int/*!*/ hWnd, int Msg, int/*!*/ wParam, int lParam)>('SendMessageW');
+    int Function(int hWnd, int Msg, int wParam, int lParam)>('SendMessageW');
 
 /// Moves the cursor to the specified screen coordinates. If the new
 /// coordinates are not within the screen rectangle set by the most recent
@@ -971,7 +971,7 @@ final SetCursorPos = _user32.lookupFunction<Int32 Function(Int32 X, Int32 Y),
 /// ```
 /// {@category user32}
 final SetFocus = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
-    int Function(int/*!*/ hWnd)>('SetFocus');
+    int Function(int hWnd)>('SetFocus');
 
 /// Sets information for a specified menu.
 ///
@@ -1059,7 +1059,7 @@ final SetScrollInfo = _user32.lookupFunction<
 final SetTimer = _user32.lookupFunction<
     IntPtr Function(IntPtr hWnd, IntPtr nIDEvent, Uint32 uElapse,
         Pointer<NativeFunction> lpTimerFunc),
-    int Function(int/*!*/ hWnd, int nIDEvent, int uElapse,
+    int Function(int hWnd, int nIDEvent, int uElapse,
         Pointer<NativeFunction> lpTimerFunc)>('SetTimer');
 
 /// Changes an attribute of the specified window. The function also sets a
@@ -1114,7 +1114,7 @@ final SetWindowPos = _user32.lookupFunction<
 /// {@category user32}
 final SetWindowText = _user32.lookupFunction<
     Int32 Function(IntPtr hWnd, Pointer<Utf16> lpString),
-    int Function(int/*!*/ hWnd, Pointer<Utf16> lpString)>('SetWindowTextW');
+    int Function(int hWnd, Pointer<Utf16> lpString)>('SetWindowTextW');
 
 /// Displays or hides the cursor.
 ///

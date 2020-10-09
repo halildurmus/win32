@@ -29,7 +29,7 @@ class WinmdMethod {
   bool isSetProperty = false;
 
   List<WinmdParameter> parameters = <WinmdParameter>[];
-  WinmdParameter returnType;
+  late WinmdParameter returnType;
 
   bool _testFlag(int attribute) => methodFlags & attribute == attribute;
 
@@ -106,11 +106,11 @@ class WinmdMethod {
   /// consumed.
   ///
   /// Details on the blob format can be found at §II.23.1.16 of ECMA-335.
-  Tuple<WinmdTypeIdentifier, int> _parseTypeFromSignature(
+  Tuple<WinmdTypeIdentifier, int?> _parseTypeFromSignature(
       Uint8List signatureBlob) {
     final paramType = signatureBlob.first;
     final runtimeType = WinmdTypeIdentifier.fromValue(paramType);
-    int dataLength;
+    int? dataLength;
 
     if (runtimeType.corType == CorElementType.ELEMENT_TYPE_VALUETYPE ||
         runtimeType.corType == CorElementType.ELEMENT_TYPE_CLASS) {
@@ -129,18 +129,18 @@ class WinmdMethod {
       final classTuple = _parseTypeFromSignature(signatureBlob.sublist(1));
       runtimeType.name = classTuple.item1.name;
       final argsCount =
-          signatureBlob[1 + classTuple.item2]; // GENERICINST + class
-      dataLength = classTuple.item2 + 2; // GENERICINST + class + argsCount
+          signatureBlob[1 + classTuple.item2!]; // GENERICINST + class
+      dataLength = classTuple.item2! + 2; // GENERICINST + class + argsCount
       for (var idx = 0; idx < argsCount; idx++) {
-        final arg = _parseTypeFromSignature(signatureBlob.sublist(dataLength));
-        dataLength += arg.item2;
+        final arg = _parseTypeFromSignature(signatureBlob.sublist(dataLength!));
+        dataLength += arg.item2!;
         runtimeType.typeArgs.add(arg.item1);
       }
     } else {
       dataLength = 1;
       runtimeType.name = runtimeType.nativeType;
     }
-    return Tuple<WinmdTypeIdentifier, int>(runtimeType, dataLength);
+    return Tuple<WinmdTypeIdentifier, int?>(runtimeType, dataLength);
   }
 
   String get callingConvention {
@@ -183,7 +183,7 @@ class WinmdMethod {
           final returnTypeTuple =
               _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
           returnType.typeIdentifier = returnTypeTuple.item1;
-          blobPtr += returnTypeTuple.item2;
+          blobPtr += returnTypeTuple.item2!;
         } else {
           // Set return type to void
           returnType = WinmdParameter.fromVoid(reader);
@@ -196,12 +196,12 @@ class WinmdMethod {
               _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
           if (runtimeType.item1.corType == CorElementType.ELEMENT_TYPE_ARRAY) {
             blobPtr +=
-                _parseArray(signatureBlob.sublist(blobPtr + 1), paramsIndex) +
+                _parseArray(signatureBlob.sublist(blobPtr + 1), paramsIndex)! +
                     2;
             paramsIndex++; //we've added two parameters here
           } else {
             parameters[paramsIndex].typeIdentifier = runtimeType.item1;
-            blobPtr += runtimeType.item2;
+            blobPtr += runtimeType.item2!;
           }
           paramsIndex++;
         }
@@ -237,7 +237,7 @@ class WinmdMethod {
     }
   }
 
-  int _parseArray(Uint8List sublist, int paramsIndex) {
+  int? _parseArray(Uint8List sublist, int paramsIndex) {
     final typeTuple = _parseTypeFromSignature(sublist.sublist(1));
 
     parameters[paramsIndex].name = '__valueSize';

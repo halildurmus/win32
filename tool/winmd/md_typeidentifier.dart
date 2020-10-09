@@ -8,8 +8,8 @@ import 'utils.dart';
 
 class WinmdTypeIdentifier {
   CorElementType corType;
-  String name;
-  WinmdType type;
+  String? name;
+  WinmdType? type;
   final typeArgs = <WinmdTypeIdentifier>[];
 
   WinmdTypeIdentifier(this.corType);
@@ -93,7 +93,7 @@ class WinmdTypeIdentifier {
     }
   }
 
-  String get dartType {
+  String? get dartType {
     switch (corType) {
       case CorElementType.ELEMENT_TYPE_VOID:
         return 'void';
@@ -125,7 +125,7 @@ class WinmdTypeIdentifier {
     }
   }
 
-  String get nativeType {
+  String? get nativeType {
     switch (corType) {
       case CorElementType.ELEMENT_TYPE_VOID:
         return 'Void';

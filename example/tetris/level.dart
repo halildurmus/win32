@@ -7,19 +7,19 @@ import 'piece.dart';
 import 'pieceset.dart';
 
 class Level {
-  List<List<int>> board; // The canvas / drawing board
-  DrawEngine de; // Does graphic rendering
+  late List<List<int>> board; // The canvas / drawing board
+  DrawEngine? de; // Does graphic rendering
   PieceSet pieceSet = PieceSet(); // Piece generator
-  Piece current; // Current dropping piece
-  Piece next; // Next piece
+  Piece? current; // Current dropping piece
+  Piece? next; // Next piece
 
   int width; // Level width (in cells)
   int height; // Level height
-  int posX; // X coordinate of dropping piece (Cartesian system)
-  int posY; // Y coordinate of dropping piece
+  late int posX; // X coordinate of dropping piece (Cartesian system)
+  int? posY; // Y coordinate of dropping piece
   int speed; // Drop a cell every _speed_ millisecs
   int lastTime; // Last time updated
-  int currentTime; // Current update time
+  late int currentTime; // Current update time
   int score; // Player's score
 
   // de: used to draw the level
@@ -37,7 +37,7 @@ class Level {
   void drawBoard() {
     for (var i = 0; i < width; i++) {
       for (var j = 0; j < height; j++) {
-        de.drawBlock(i, j, board[i][j]);
+        de!.drawBlock(i, j, board[i][j]);
       }
     }
   }
@@ -65,7 +65,7 @@ class Level {
     lastTime = DateTime.now().millisecondsSinceEpoch;
   }
 
-  bool place(int x, int y, Piece piece) {
+  bool place(int x, int? y, Piece piece) {
     // Out of boundary or the position has been filled
     if (x + piece.width > width || isCovered(piece, x, y)) {
       return false;
@@ -78,7 +78,7 @@ class Level {
     final color = piece.color;
 
     for (var i = 0; i < 4; i++) {
-      if (y + apt[i].y > height - 1) continue;
+      if (y! + apt![i].y > height - 1) continue;
       board[x + apt[i].x][y + apt[i].y] = color;
     }
     return true;
@@ -89,22 +89,22 @@ class Level {
     final tmp = current;
 
     // Move the piece if it needs some space to rotate
-    final disX = max(posX + current.height - width, 0);
+    final disX = max(posX + current!.height - width, 0);
 
     // Go to next rotation state (0-3)
-    final rotation = (current.rotation + 1) % PieceSet.NUM_ROTATIONS;
+    final rotation = (current!.rotation + 1) % PieceSet.NUM_ROTATIONS;
 
-    clear(current);
-    current = pieceSet.getPiece(current.id, rotation);
+    clear(current!);
+    current = pieceSet.getPiece(current!.id, rotation);
 
     // Rotate successfully
-    if (place(posX - disX, posY, current)) {
+    if (place(posX - disX, posY, current!)) {
       return true;
     }
 
     // If the piece cannot rotate due to insufficient space, undo it
     current = tmp;
-    place(posX, posY, current);
+    place(posX, posY, current!);
     return false;
   }
 
@@ -114,8 +114,8 @@ class Level {
   // negaive)
   bool move(int cxDistance, int cyDistance) {
     if (posX + cxDistance < 0 ||
-        posY + cyDistance < 0 ||
-        posX + current.width + cxDistance > width) {
+        posY! + cyDistance < 0 ||
+        posX + current!.width + cxDistance > width) {
       return false;
     }
     if (cxDistance < 0 && isHitLeft()) {
@@ -127,36 +127,36 @@ class Level {
     if (cyDistance < 0 && isHitBottom()) {
       return false;
     }
-    clear(current);
-    return place(posX + cxDistance, posY + cyDistance, current);
+    clear(current!);
+    return place(posX + cxDistance, posY! + cyDistance, current!);
   }
 
   void clear(Piece piece) {
     final apt = piece.body;
     int x, y;
     for (var i = 0; i < 4; i++) {
-      x = posX + apt[i].x;
-      y = posY + apt[i].y;
+      x = posX + apt![i].x;
+      y = posY! + apt[i].y;
 
       if (x > width - 1 || y > height - 1) {
         continue;
       }
-      board[posX + apt[i].x][posY + apt[i].y] = RGB(0, 0, 0);
+      board[posX + apt[i].x][posY! + apt[i].y] = RGB(0, 0, 0);
     }
   }
 
   void dropRandomPiece() {
     current = next;
     next = pieceSet.randomPiece;
-    place(3, height - 1, current);
+    place(3, height - 1, current!);
   }
 
   bool isHitBottom() {
-    final apt = current.Skirt;
+    final apt = current!.Skirt;
     int x, y;
     for (var i = 0; i < apt.length; i++) {
       x = posX + apt[i].x;
-      y = posY + apt[i].y;
+      y = posY! + apt[i].y;
       if (y < height && (y == 0 || board[x][y - 1] != RGB(0, 0, 0))) {
         return true;
       }
@@ -165,11 +165,11 @@ class Level {
   }
 
   bool isHitLeft() {
-    final apt = current.LeftSide;
+    final apt = current!.LeftSide;
     int x, y;
     for (var i = 0; i < apt.length; i++) {
       x = posX + apt[i].x;
-      y = posY + apt[i].y;
+      y = posY! + apt[i].y;
       if (y > height - 1) {
         continue;
       }
@@ -181,11 +181,11 @@ class Level {
   }
 
   bool isHitRight() {
-    final apt = current.RightSide;
+    final apt = current!.RightSide;
     int x, y;
     for (var i = 0; i < apt.length; i++) {
       x = posX + apt[i].x;
-      y = posY + apt[i].y;
+      y = posY! + apt[i].y;
       if (y > height - 1) {
         continue;
       }
@@ -196,12 +196,12 @@ class Level {
     return false;
   }
 
-  bool isCovered(Piece piece, int x, int y) {
+  bool isCovered(Piece piece, int x, int? y) {
     final apt = piece.body;
     int tmpX, tmpY;
     for (var i = 0; i < 4; i++) {
-      tmpX = apt[i].x + x;
-      tmpY = apt[i].y + y;
+      tmpX = apt![i].x + x;
+      tmpY = apt[i].y + y!;
       if (tmpX > width - 1 || tmpY > height - 1) {
         continue;
       }
@@ -213,7 +213,7 @@ class Level {
   }
 
   int clearRows() {
-    bool isComplete;
+    late bool isComplete;
     var rows = 0;
 
     for (var i = 0; i < height; i++) {
@@ -247,32 +247,32 @@ class Level {
   bool isGameOver() {
     // Exclude the current piece
     if (current != null) {
-      clear(current);
+      clear(current!);
     }
 
     // If there's a piece on the top, game over
     for (var i = 0; i < width; i++) {
       if (board[i][height - 1] != 0) {
-        if (current != null) place(posX, posY, current);
+        if (current != null) place(posX, posY, current!);
         return true;
       }
     }
 
     // Put the current piece back
-    if (current != null) place(posX, posY, current);
+    if (current != null) place(posX, posY, current!);
     return false;
   }
 
   // Draw different kinds of info
   void drawSpeed() {
-    de.drawSpeed(((500 - speed) / 2).floor(), width + 1, 12);
+    de!.drawSpeed(((500 - speed) / 2).floor(), width + 1, 12);
   }
 
   void drawScore() {
-    de.drawScore(score, width + 1, 13);
+    de!.drawScore(score, width + 1, 13);
   }
 
   void drawNextPiece() {
-    de.drawNextPiece(next, width + 1, 14);
+    de!.drawNextPiece(next!, width + 1, 14);
   }
 }

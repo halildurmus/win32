@@ -96,8 +96,8 @@ String getComputerName() {
 }
 
 /// Retrieve a value from the registry.
-Object/*!*/ getRegistryValue(int key, String subKey, String valueName) {
-  Object/*!*/ dataValue;
+Object getRegistryValue(int key, String subKey, String valueName) {
+  Object dataValue;
 
   final subKeyPtr = TEXT(subKey);
   final valueNamePtr = TEXT(valueName);

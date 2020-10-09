@@ -15,7 +15,7 @@ import 'md_type.dart';
 /// Rather than being created directly, you should obtain a scope from a
 /// [WinmdReader], which caches scopes to avoid duplication.
 class WinmdScope {
-  IMetaDataImport2 reader;
+  IMetaDataImport2? reader;
 
   WinmdScope(this.reader);
 
@@ -28,16 +28,16 @@ class WinmdScope {
     final pcTypeDefs = allocate<Uint32>();
 
     try {
-      var hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
+      var hr = reader!.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
       while (hr == S_OK) {
         final token = rgTypeDefs.value;
 
         types.add(WinmdType.fromToken(reader, token));
-        hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
+        hr = reader!.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
       }
       return types;
     } finally {
-      reader.CloseEnum(phEnum.address);
+      reader!.CloseEnum(phEnum.address);
 
       free(rgTypeDefs);
       free(pcTypeDefs);
@@ -62,7 +62,7 @@ class WinmdScope {
     final ptkTypeDef = allocate<Uint32>();
 
     try {
-      reader.FindTypeDefByName(szTypeDef, NULL, ptkTypeDef);
+      reader!.FindTypeDefByName(szTypeDef, NULL, ptkTypeDef);
       return WinmdType.fromToken(reader, ptkTypeDef.value);
     } finally {
       free(szTypeDef);

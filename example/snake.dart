@@ -20,7 +20,7 @@ import 'package:win32/win32.dart';
 // Win32-specific vars
 final hInstance = GetModuleHandle(nullptr);
 
-int/*!*/ hWnd;
+int hWnd;
 const IDT_TIMER1 = 1;
 const IDT_TIMER2 = 2;
 
@@ -29,8 +29,8 @@ final rng = Random();
 final bitmapInfo = BITMAPINFO.allocate();
 
 Pointer<Void> bitmapMemory = nullptr;
-int/*!*/ bitmapWidth;
-int/*!*/ bitmapHeight;
+int bitmapWidth;
+int bitmapHeight;
 const bytesPerPixel = 4;
 
 bool isRunning = false;

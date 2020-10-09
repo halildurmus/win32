@@ -22,7 +22,7 @@ const echoOffPrompt = 'Type any key, or q to quit: ';
 final stdin = GetStdHandle(STD_INPUT_HANDLE);
 final stdout = GetStdHandle(STD_OUTPUT_HANDLE);
 
-CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
+late CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
 
 /// Convert a byte array pointer into a Dart string
 String fromCString(Pointer<Uint8> buffer, int maxLength) =>

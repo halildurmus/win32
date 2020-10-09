@@ -18,19 +18,19 @@ class TypeBuilder {
   static bool isTypeValueType(WinmdTypeIdentifier typeIdentifier) =>
       typeIdentifier.type?.parent?.typeName == 'System.ValueType';
 
-  static String dartType(WinmdTypeIdentifier typeIdentifier) {
+  static String? dartType(WinmdTypeIdentifier typeIdentifier) {
     if (isTypeAnEnum(typeIdentifier)) {
       return 'int';
     } else if (isTypeValueType(typeIdentifier)) {
       return 'int';
     } else if (specialTypes.containsKey(typeIdentifier.name)) {
-      return specialTypes[typeIdentifier.name];
+      return specialTypes[typeIdentifier.name!];
     } else {
       return typeIdentifier.name;
     }
   }
 
-  static String nativeType(WinmdTypeIdentifier typeIdentifier) {
+  static String? nativeType(WinmdTypeIdentifier typeIdentifier) {
     // ECMA-335 II.14.3 does not guarantee that an enum is 32-bit, but
     // per https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#enums,
     // enums are always signed or unsigned 32-bit values.
@@ -40,7 +40,7 @@ class TypeBuilder {
       // TODO: This needs figuring out -- a struct could have anything in it.
       return 'Uint32';
     } else if (specialTypes.containsKey(typeIdentifier.name)) {
-      return specialTypes[typeIdentifier.name];
+      return specialTypes[typeIdentifier.name!];
     } else {
       return typeIdentifier.name;
     }
@@ -51,7 +51,7 @@ class TypeBuilder {
     interface.sourceType = SourceType.winrt; // for now
     interface.iid = mdTypeDef.guid;
     interface.name = mdTypeDef.typeName;
-    interface.inherits = mdTypeDef.parent.typeName;
+    interface.inherits = mdTypeDef.parent!.typeName;
     interface.vtableStart = 6; // For now, hardcode to IInspectable subclass
 
     for (final mdMethod in mdTypeDef.methods) {

@@ -120,9 +120,9 @@ import '../winrt/winrt_constants.dart';
     }
 
     buffer.writeln('''
-  // vtable begins at ${type.vtableStart}, ends at ${type.vtableStart + type.methods.length - 1}
+  // vtable begins at ${type.vtableStart}, ends at ${type.vtableStart! + type.methods.length - 1}
 ''');
-    if (type.inherits.isNotEmpty) {
+    if (type.inherits!.isNotEmpty) {
       buffer.write('''
    ${type.shortName}(Pointer<COMObject> ptr) : super(ptr);\n
 ''');
@@ -152,7 +152,7 @@ import '../winrt/winrt_constants.dart';
     return buffer.toString();
   }
 
-  static String dartMethod(Method method, int vtableIndex) {
+  static String dartMethod(Method method, int? vtableIndex) {
     final buffer = StringBuffer();
     buffer.write('  ${method.returnTypeDart} ${method.name}(');
     for (var idx = 0; idx < method.parameters.length; idx++) {
@@ -183,7 +183,7 @@ import '../winrt/winrt_constants.dart';
     return buffer.toString();
   }
 
-  static String dartGetProperty(Method method, int vtableIndex) {
+  static String dartGetProperty(Method method, int? vtableIndex) {
     final buffer = StringBuffer();
 
     final exposedMethodName = method.name.substring(4);
@@ -209,7 +209,7 @@ import '../winrt/winrt_constants.dart';
     return buffer.toString();
   }
 
-  static String dartSetProperty(Method method, int vtableIndex) {
+  static String dartSetProperty(Method method, int? vtableIndex) {
     final buffer = StringBuffer();
 
     buffer.writeln('''

@@ -17,14 +17,14 @@ const APP_NAME = 'DartNote'; // DartPad was taken :)
 /// Win32 handle to the current window instance
 final hInstance = GetModuleHandle(nullptr);
 
-NotepadEditor editor;
-NotepadFind find;
+late NotepadEditor editor;
+late NotepadFind find;
 
 /// The handle of the Notepad window's text edit control
-int/*!*/ hwndEdit;
+int hwndEdit;
 
-FINDREPLACE findReplace;
-int messageFindReplace;
+late FINDREPLACE findReplace;
+int? messageFindReplace;
 int hDlgModeless = NULL;
 
 final iOffset = allocate<Uint32>()..value = 0;

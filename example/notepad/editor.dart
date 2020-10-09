@@ -16,10 +16,10 @@ class NotepadEditor {
   // are instantiated, so we take a copy here to minimize ceremony while an
   // instance is being used.
   final int _hwnd;
-  final int/*!*/ _hwndEdit;
+  final int _hwndEdit;
 
-  NotepadFile file;
-  NotepadFont font;
+  late NotepadFile file;
+  NotepadFont? font;
 
   NotepadEditor(this._hwnd, this._hwndEdit) {
     file = NotepadFile(_hwnd);
@@ -27,7 +27,7 @@ class NotepadEditor {
 
   void dispose() {
     if (font != null) {
-      font.dispose();
+      font!.dispose();
     }
   }
 
@@ -95,8 +95,8 @@ class NotepadEditor {
   void setFont() {
     font ??= NotepadFont(_hwnd);
 
-    if (font.notepadChooseFont(_hwnd)) {
-      font.notepadSetFont(_hwndEdit);
+    if (font!.notepadChooseFont(_hwnd)) {
+      font!.notepadSetFont(_hwndEdit);
     }
   }
 

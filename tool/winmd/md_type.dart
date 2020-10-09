@@ -15,10 +15,10 @@ import 'utils.dart';
 
 /// Represents a TypeDef in the Windows Metadata file
 class WinmdType {
-  IMetaDataImport2 reader;
+  IMetaDataImport2? reader;
 
   int token;
-  String typeName;
+  String? typeName;
   int flags;
   int baseTypeToken;
 
@@ -37,7 +37,7 @@ class WinmdType {
   /// More information at:
   /// https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#type-system-encoding
   bool get isSystemType =>
-      typeName.startsWith('System') || typeName == 'IInspectable';
+      typeName!.startsWith('System') || typeName == 'IInspectable';
 
   /// Create a typedef.
   ///
@@ -54,15 +54,15 @@ class WinmdType {
   /// If the token is a TypeDef, it will be created directly; otherwise it will
   /// be retrieved by finding the scope that it comes from and returning a
   /// typedef from the new scope.
-  factory WinmdType.fromToken(IMetaDataImport2 reader, int token) {
+  factory WinmdType.fromToken(IMetaDataImport2? reader, int token) {
     if (tokenIsTypeRef(token)) {
       try {
         return WinmdType.fromTypeRef(reader, token);
       } on WinmdException {
-        return null;
+        return null!;
       }
     } else if (tokenIsTypeDef(token)) {
-      return WinmdType.fromTypeDef(reader, token);
+      return WinmdType.fromTypeDef(reader!, token);
     } else {
       print('Unrecognized token $token');
       return WinmdType(reader);
@@ -103,7 +103,7 @@ class WinmdType {
   /// Unless the TypeRef token is `IInspectable`, the COM parent interface for
   /// Windows Runtime classes, the TypeRef is used to obtain the host scope
   /// metadata file, from which the TypeDef can be found and returned.
-  factory WinmdType.fromTypeRef(IMetaDataImport2 reader, int typeRefToken) {
+  factory WinmdType.fromTypeRef(IMetaDataImport2? reader, int typeRefToken) {
     final ptkResolutionScope = allocate<Uint32>();
     final szName = allocate<Uint16>(count: 256).cast<Utf16>();
     final pchName = allocate<Uint32>();
@@ -115,7 +115,7 @@ class WinmdType {
     }
 
     try {
-      final hr = reader.GetTypeRefProps(
+      final hr = reader!.GetTypeRefProps(
           typeRefToken, ptkResolutionScope, szName, 256, pchName);
       if (SUCCEEDED(hr)) {
         final typeName = szName.unpackString(pchName.value);
@@ -145,12 +145,12 @@ class WinmdType {
     final ptkIface = allocate<Uint32>();
 
     try {
-      final hr = reader.GetInterfaceImplProps(token, pClass, ptkIface);
+      final hr = reader!.GetInterfaceImplProps(token, pClass, ptkIface);
       if (SUCCEEDED(hr)) {
         if (tokenIsTypeRef(ptkIface.value)) {
           return WinmdType.fromTypeRef(reader, ptkIface.value);
         } else if (tokenIsTypeDef(pClass.value)) {
-          return WinmdType.fromTypeDef(reader, ptkIface.value);
+          return WinmdType.fromTypeDef(reader!, ptkIface.value);
         }
       }
 
@@ -170,16 +170,16 @@ class WinmdType {
     final pcImpls = allocate<Uint32>();
 
     try {
-      var hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
+      var hr = reader!.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
       while (hr == S_OK) {
         final token = rImpls.value;
 
         interfaces.add(processInterfaceToken(token));
-        hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
+        hr = reader!.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
       }
       return interfaces;
     } finally {
-      reader.CloseEnum(phEnum.address);
+      reader!.CloseEnum(phEnum.address);
 
       free(rImpls);
       free(pcImpls);
@@ -197,16 +197,16 @@ class WinmdType {
     final pcTokens = allocate<Uint32>();
 
     try {
-      var hr = reader.EnumMethods(phEnum, token, mdMethodDef, 1, pcTokens);
+      var hr = reader!.EnumMethods(phEnum, token, mdMethodDef, 1, pcTokens);
       while (hr == S_OK) {
         final token = mdMethodDef.value;
 
-        methods.add(WinmdMethod.fromToken(reader, token));
-        hr = reader.EnumMethods(phEnum, token, mdMethodDef, 1, pcTokens);
+        methods.add(WinmdMethod.fromToken(reader!, token));
+        hr = reader!.EnumMethods(phEnum, token, mdMethodDef, 1, pcTokens);
       }
       return methods;
     } finally {
-      reader.CloseEnum(phEnum.address);
+      reader!.CloseEnum(phEnum.address);
 
       free(mdMethodDef);
       free(pcTokens);
@@ -217,14 +217,14 @@ class WinmdType {
   /// Get a method matching the name, if one exists.
   ///
   /// Returns [null] if the method is not found.
-  WinmdMethod findMethod(String methodName) {
+  WinmdMethod? findMethod(String methodName) {
     final szName = TEXT(methodName);
     final pmb = allocate<Uint32>();
 
     try {
-      final hr = reader.FindMethod(token, szName, nullptr, 0, pmb);
+      final hr = reader!.FindMethod(token, szName, nullptr, 0, pmb);
       if (SUCCEEDED(hr)) {
-        return WinmdMethod.fromToken(reader, pmb.value);
+        return WinmdMethod.fromToken(reader!, pmb.value);
       } else if (hr == CLDB_E_RECORD_NOTFOUND) {
         return null;
       } else {
@@ -237,19 +237,19 @@ class WinmdType {
   }
 
   /// Gets the type referencing this type's superclass.
-  WinmdType get parent =>
+  WinmdType? get parent =>
       token == 0 ? null : WinmdType.fromToken(reader, baseTypeToken);
 
   /// Get the GUID for this type.
   ///
   /// Returns null if a GUID couldn't be found.
-  String get guid {
+  String? get guid {
     final attributeName = TEXT('Windows.Foundation.Metadata.GuidAttribute');
     final ppData = allocate<IntPtr>();
     final pcbData = allocate<Uint32>();
 
     try {
-      final hr = reader.GetCustomAttributeByName(
+      final hr = reader!.GetCustomAttributeByName(
           token, attributeName, ppData, pcbData);
       if (SUCCEEDED(hr) && pcbData.value == 20) {
         final blob = Pointer<Uint8>.fromAddress(ppData.value);

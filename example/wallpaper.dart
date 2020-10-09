@@ -9,7 +9,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-DesktopWallpaper wallpaper;
+late DesktopWallpaper wallpaper;
 
 void printWallpaper() {
   final pathPtr = allocate<IntPtr>();
