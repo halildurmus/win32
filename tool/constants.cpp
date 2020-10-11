@@ -70,6 +70,7 @@ void main()
     printf("sizeof(BYTE) is %zu\n", sizeof(BYTE));
     printf("sizeof(BOOL) is %zu\n", sizeof(BOOL));
     printf("sizeof(BOOLEAN) is %zu\n", sizeof(BOOLEAN));
+    printf("sizeof(VARIANT) is %zu\n", sizeof(VARIANT));
 
     printf("sizeof(COORD) is %zu\n", sizeof(COORD));
     printf("sizeof(SMALL_RECT) is %zu\n", sizeof(SMALL_RECT));
