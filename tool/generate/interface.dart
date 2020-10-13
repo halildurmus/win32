@@ -145,7 +145,7 @@ import '../winrt/winrt_constants.dart';
     }
 
     buffer.writeln('''
-  // vtable begins at $vtableStart, ends at ${vtableStart! + methods.length - 1}
+  // vtable begins at $vtableStart, ends at ${vtableStart + methods.length - 1}
 ''');
     if (inherits!.isNotEmpty) {
       buffer.write('''
