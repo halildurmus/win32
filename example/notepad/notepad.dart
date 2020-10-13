@@ -24,7 +24,7 @@ late NotepadFind find;
 late int hwndEdit;
 
 late FINDREPLACE findReplace;
-int? messageFindReplace;
+late int messageFindReplace;
 int hDlgModeless = NULL;
 
 final iOffset = allocate<Uint32>()..value = 0;

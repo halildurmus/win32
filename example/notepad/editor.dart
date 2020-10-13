@@ -19,7 +19,7 @@ class NotepadEditor {
   final int _hwndEdit;
 
   late NotepadFile file;
-  NotepadFont? font;
+  late NotepadFont font;
 
   NotepadEditor(this._hwnd, this._hwndEdit) {
     file = NotepadFile(_hwnd);
@@ -27,7 +27,7 @@ class NotepadEditor {
 
   void dispose() {
     if (font != null) {
-      font!.dispose();
+      font.dispose();
     }
   }
 
@@ -93,10 +93,10 @@ class NotepadEditor {
   }
 
   void setFont() {
-    font ??= NotepadFont(_hwnd);
+    font = NotepadFont(_hwnd);
 
-    if (font!.notepadChooseFont(_hwnd)) {
-      font!.notepadSetFont(_hwndEdit);
+    if (font.notepadChooseFont(_hwnd)) {
+      font.notepadSetFont(_hwndEdit);
     }
   }
 
