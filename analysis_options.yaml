@@ -1,13 +1,13 @@
 include: package:lint/analysis_options_package.yaml
 
 analyzer:
+  enable-experiment:
+    - non-nullable
+    
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false
     
-  enable-experiment:
-    - non-nullable
-
 linter:
   rules:
     # redundancy is good if it leads to better documentation
