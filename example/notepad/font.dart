@@ -42,7 +42,7 @@ class NotepadFont {
     return result == TRUE;
   }
 
-  void notepadSetFont(int /*!*/ hwndEdit) {
+  void notepadSetFont(int hwndEdit) {
     int hFontNew;
     final rect = RECT.allocate();
 
