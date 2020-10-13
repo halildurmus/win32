@@ -15,7 +15,7 @@ const TIMER_ID = 1;
 
 final hInstance = GetModuleHandle(nullptr);
 late Game game;
-DrawEngine? de;
+late DrawEngine de;
 
 void main() {
   final szAppName = TEXT('Tetris');

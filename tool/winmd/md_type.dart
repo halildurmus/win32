@@ -249,8 +249,8 @@ class WinmdType {
     final pcbData = allocate<Uint32>();
 
     try {
-      final hr = reader!.GetCustomAttributeByName(
-          token, attributeName, ppData, pcbData);
+      final hr = reader!
+          .GetCustomAttributeByName(token, attributeName, ppData, pcbData);
       if (SUCCEEDED(hr) && pcbData.value == 20) {
         final blob = Pointer<Uint8>.fromAddress(ppData.value);
         final guid = blob.elementAt(2).cast<GUID>();

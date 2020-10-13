@@ -22,13 +22,11 @@ class NotepadEditor {
   late NotepadFont font;
 
   NotepadEditor(this._hwnd, this._hwndEdit) {
-    file = NotepadFile(_hwnd);
+    file = NotepadFile(_hwnd, '', '');
   }
 
   void dispose() {
-    if (font != null) {
-      font.dispose();
-    }
+    font.dispose();
   }
 
   /// Does the current file in memory contain unsaved changes?
@@ -51,8 +49,8 @@ class NotepadEditor {
   }
 
   void newFile() {
-    file.title = null;
-    file.path = null;
+    file.title = '';
+    file.path = '';
     isFileDirty = false;
     updateWindowTitle();
   }
@@ -71,7 +69,7 @@ class NotepadEditor {
   }
 
   bool saveFile() {
-    if (file.path != null) {
+    if (file.path.isNotEmpty) {
       file.writeFileFromEditControl(_hwndEdit);
       isFileDirty = false;
       return true;
@@ -101,7 +99,8 @@ class NotepadEditor {
   }
 
   void updateWindowTitle() {
-    final caption = '$APP_NAME - ${file.title ?? '(untitled)'}';
+    final caption =
+        '$APP_NAME - ${file.title.isNotEmpty ? file.title : '(untitled)'}';
     SetWindowText(_hwnd, TEXT(caption));
   }
 
@@ -111,7 +110,7 @@ class NotepadEditor {
   }
 
   int offerSave() {
-    final buffer = TEXT(file.title != null
+    final buffer = TEXT(file.title.isNotEmpty
         ? 'Save current changes in ${file.title}?'
         : 'Save changes to file?');
     final res = MessageBox(

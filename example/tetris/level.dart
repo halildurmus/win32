@@ -8,7 +8,7 @@ import 'pieceset.dart';
 
 class Level {
   late List<List<int>> board; // The canvas / drawing board
-  DrawEngine? de; // Does graphic rendering
+  late DrawEngine de; // Does graphic rendering
   PieceSet pieceSet = PieceSet(); // Piece generator
   Piece? current; // Current dropping piece
   Piece? next; // Next piece
@@ -37,7 +37,7 @@ class Level {
   void drawBoard() {
     for (var i = 0; i < width; i++) {
       for (var j = 0; j < height; j++) {
-        de!.drawBlock(i, j, board[i][j]);
+        de.drawBlock(i, j, board[i][j]);
       }
     }
   }
@@ -265,14 +265,14 @@ class Level {
 
   // Draw different kinds of info
   void drawSpeed() {
-    de!.drawSpeed(((500 - speed) / 2).floor(), width + 1, 12);
+    de.drawSpeed(((500 - speed) / 2).floor(), width + 1, 12);
   }
 
   void drawScore() {
-    de!.drawScore(score, width + 1, 13);
+    de.drawScore(score, width + 1, 13);
   }
 
   void drawNextPiece() {
-    de!.drawNextPiece(next!, width + 1, 14);
+    de.drawNextPiece(next!, width + 1, 14);
   }
 }

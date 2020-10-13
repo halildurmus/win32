@@ -64,7 +64,7 @@ class WinmdStore {
 
   /// Takes a typename (e.g. `Windows.Globalization.Calendar`) and returns the
   /// metadata scope that contains the type.
-  static WinmdScope getScopeForType(String typeName) {
+  static WinmdScope? getScopeForType(String typeName) {
     final hstrTypeName = convertToHString(typeName);
 
     final hstrMetaDataFilePath = allocate<IntPtr>();
@@ -81,7 +81,7 @@ class WinmdStore {
         final filePath = convertFromHString(hstrMetaDataFilePath);
         return getScopeForFile(filePath);
       } else if (hr == HRESULT_FROM_WIN32(APPMODEL_ERROR_NO_PACKAGE)) {
-        return null!;
+        return null;
       } else {
         throw WindowsException(hr);
       }
@@ -98,7 +98,7 @@ class WinmdStore {
     if (!isInitialized) initialize();
 
     final scope = getScopeForType(typeName);
-    return scope.findTypeDef(typeName);
+    return scope!.findTypeDef(typeName);
   }
 
   /// Dispose of all objects.

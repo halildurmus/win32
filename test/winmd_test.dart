@@ -12,15 +12,15 @@ void main() {
       final mdScope =
           WinmdStore.getScopeForType('Windows.Globalization.Calendar');
 
-      expect(
-          mdScope.typeDefs.length, equals(104)); // at least, on Windows 10 2004
+      expect(mdScope!.typeDefs.length,
+          equals(104)); // at least, on Windows 10 2004
     });
 
     test('Find a specific WinMD token', () {
       final mdScope =
           WinmdStore.getScopeForType('Windows.Globalization.ICalendarFactory');
 
-      final type = mdScope.findTypeDef('Windows.Globalization.Calendar');
+      final type = mdScope!.findTypeDef('Windows.Globalization.Calendar');
       expect(type.token, equals(0x02000003));
     });
 
@@ -28,7 +28,7 @@ void main() {
       final mdScope =
           WinmdStore.getScopeForType('Windows.Foundation.IPropertyValue');
 
-      final winTypeDef = mdScope.findTypeDef('Windows.Foundation.IAsyncInfo');
+      final winTypeDef = mdScope!.findTypeDef('Windows.Foundation.IAsyncInfo');
       final methods = winTypeDef.methods;
 
       expect(methods[0].methodName, equals('get_Id'));
