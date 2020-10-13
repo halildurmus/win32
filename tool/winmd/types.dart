@@ -36,7 +36,7 @@ class Interface {
   String? clsid;
   String? className;
   String? inherits;
-  int? vtableStart;
+  late int vtableStart;
 
   final methods = <Method>[];
 
