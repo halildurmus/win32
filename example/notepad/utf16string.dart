@@ -28,7 +28,7 @@ class Utf16String {
   int get address => pointer.address;
 
   /// Returns true if this string is empty
-  bool get isEmpty => pointer == null || pointer.cast<Uint16>().value == 0;
+  bool get isEmpty => pointer.cast<Uint16>().value == 0;
 
   /// Clears the string.
   void clear() {
