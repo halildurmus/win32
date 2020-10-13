@@ -29,21 +29,21 @@ typedef _Get_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> wszName,
     Int32 lFlags,
-    Pointer<VARIANT_POINTER> pVal,
+    Pointer<VARIANT> pVal,
     Pointer<Int32> pType,
     Pointer<Int32> plFlavor);
 typedef _Get_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> wszName,
     int lFlags,
-    Pointer<VARIANT_POINTER> pVal,
+    Pointer<VARIANT> pVal,
     Pointer<Int32> pType,
     Pointer<Int32> plFlavor);
 
 typedef _Put_Native = Int32 Function(Pointer obj, Pointer<Utf16> wszName,
-    Int32 lFlags, Pointer<VARIANT_POINTER> pVal, Int32 Type);
+    Int32 lFlags, Pointer<VARIANT> pVal, Int32 Type);
 typedef _Put_Dart = int Function(Pointer obj, Pointer<Utf16> wszName,
-    int lFlags, Pointer<VARIANT_POINTER> pVal, int Type);
+    int lFlags, Pointer<VARIANT> pVal, int Type);
 
 typedef _Delete_Native = Int32 Function(Pointer obj, Pointer<Utf16> wszName);
 typedef _Delete_Dart = int Function(Pointer obj, Pointer<Utf16> wszName);
@@ -52,13 +52,13 @@ typedef _GetNames_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> wszQualifierName,
     Int32 lFlags,
-    Pointer<VARIANT_POINTER> pQualifierVal,
+    Pointer<VARIANT> pQualifierVal,
     Pointer<SAFEARRAY> pNames);
 typedef _GetNames_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> wszQualifierName,
     int lFlags,
-    Pointer<VARIANT_POINTER> pQualifierVal,
+    Pointer<VARIANT> pQualifierVal,
     Pointer<SAFEARRAY> pNames);
 
 typedef _BeginEnumeration_Native = Int32 Function(
@@ -69,14 +69,14 @@ typedef _Next_Native = Int32 Function(
     Pointer obj,
     Int32 lFlags,
     Pointer<Utf16> strName,
-    Pointer<VARIANT_POINTER> pVal,
+    Pointer<VARIANT> pVal,
     Pointer<Int32> pType,
     Pointer<Int32> plFlavor);
 typedef _Next_Dart = int Function(
     Pointer obj,
     int lFlags,
     Pointer<Utf16> strName,
-    Pointer<VARIANT_POINTER> pVal,
+    Pointer<VARIANT> pVal,
     Pointer<Int32> pType,
     Pointer<Int32> plFlavor);
 
@@ -190,14 +190,14 @@ class IWbemClassObject extends IUnknown {
               ptr.ref.vtable.elementAt(3).value)
           .asFunction<_GetQualifierSet_Dart>()(ptr.ref.lpVtbl, ppQualSet);
 
-  int Get(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT_POINTER> pVal,
+  int Get(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pVal,
           Pointer<Int32> pType, Pointer<Int32> plFlavor) =>
       Pointer<NativeFunction<_Get_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(4).value)
               .asFunction<_Get_Dart>()(
           ptr.ref.lpVtbl, wszName, lFlags, pVal, pType, plFlavor);
 
-  int Put(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT_POINTER> pVal,
+  int Put(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pVal,
           int Type) =>
       Pointer<NativeFunction<_Put_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(5).value)
@@ -209,7 +209,7 @@ class IWbemClassObject extends IUnknown {
           .asFunction<_Delete_Dart>()(ptr.ref.lpVtbl, wszName);
 
   int GetNames(Pointer<Utf16> wszQualifierName, int lFlags,
-          Pointer<VARIANT_POINTER> pQualifierVal, Pointer<SAFEARRAY> pNames) =>
+          Pointer<VARIANT> pQualifierVal, Pointer<SAFEARRAY> pNames) =>
       Pointer<NativeFunction<_GetNames_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(7).value)
               .asFunction<_GetNames_Dart>()(
@@ -220,7 +220,7 @@ class IWbemClassObject extends IUnknown {
               ptr.ref.vtable.elementAt(8).value)
           .asFunction<_BeginEnumeration_Dart>()(ptr.ref.lpVtbl, lEnumFlags);
 
-  int Next(int lFlags, Pointer<Utf16> strName, Pointer<VARIANT_POINTER> pVal,
+  int Next(int lFlags, Pointer<Utf16> strName, Pointer<VARIANT> pVal,
           Pointer<Int32> pType, Pointer<Int32> plFlavor) =>
       Pointer<NativeFunction<_Next_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(9).value)

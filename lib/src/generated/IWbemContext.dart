@@ -32,22 +32,22 @@ typedef _BeginEnumeration_Native = Int32 Function(Pointer obj, Int32 lFlags);
 typedef _BeginEnumeration_Dart = int Function(Pointer obj, int lFlags);
 
 typedef _Next_Native = Int32 Function(Pointer obj, Int32 lFlags,
-    Pointer<Utf16> pstrName, Pointer<VARIANT_POINTER> pValue);
-typedef _Next_Dart = int Function(Pointer obj, int lFlags,
-    Pointer<Utf16> pstrName, Pointer<VARIANT_POINTER> pValue);
+    Pointer<Utf16> pstrName, Pointer<VARIANT> pValue);
+typedef _Next_Dart = int Function(
+    Pointer obj, int lFlags, Pointer<Utf16> pstrName, Pointer<VARIANT> pValue);
 
 typedef _EndEnumeration_Native = Int32 Function(Pointer obj);
 typedef _EndEnumeration_Dart = int Function(Pointer obj);
 
-typedef _SetValue_Native = Int32 Function(Pointer obj, Pointer<Utf16> wszName,
-    Int32 lFlags, Pointer<VARIANT_POINTER> pValue);
-typedef _SetValue_Dart = int Function(Pointer obj, Pointer<Utf16> wszName,
-    int lFlags, Pointer<VARIANT_POINTER> pValue);
+typedef _SetValue_Native = Int32 Function(
+    Pointer obj, Pointer<Utf16> wszName, Int32 lFlags, Pointer<VARIANT> pValue);
+typedef _SetValue_Dart = int Function(
+    Pointer obj, Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pValue);
 
-typedef _GetValue_Native = Int32 Function(Pointer obj, Pointer<Utf16> wszName,
-    Int32 lFlags, Pointer<VARIANT_POINTER> pValue);
-typedef _GetValue_Dart = int Function(Pointer obj, Pointer<Utf16> wszName,
-    int lFlags, Pointer<VARIANT_POINTER> pValue);
+typedef _GetValue_Native = Int32 Function(
+    Pointer obj, Pointer<Utf16> wszName, Int32 lFlags, Pointer<VARIANT> pValue);
+typedef _GetValue_Dart = int Function(
+    Pointer obj, Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pValue);
 
 typedef _DeleteValue_Native = Int32 Function(
     Pointer obj, Pointer<Utf16> wszName, Int32 lFlags);
@@ -79,8 +79,7 @@ class IWbemContext extends IUnknown {
               ptr.ref.vtable.elementAt(5).value)
           .asFunction<_BeginEnumeration_Dart>()(ptr.ref.lpVtbl, lFlags);
 
-  int Next(int lFlags, Pointer<Utf16> pstrName,
-          Pointer<VARIANT_POINTER> pValue) =>
+  int Next(int lFlags, Pointer<Utf16> pstrName, Pointer<VARIANT> pValue) =>
       Pointer<NativeFunction<_Next_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(6).value)
           .asFunction<_Next_Dart>()(ptr.ref.lpVtbl, lFlags, pstrName, pValue);
@@ -90,15 +89,13 @@ class IWbemContext extends IUnknown {
               ptr.ref.vtable.elementAt(7).value)
           .asFunction<_EndEnumeration_Dart>()(ptr.ref.lpVtbl);
 
-  int SetValue(Pointer<Utf16> wszName, int lFlags,
-          Pointer<VARIANT_POINTER> pValue) =>
+  int SetValue(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pValue) =>
       Pointer<NativeFunction<_SetValue_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(8).value)
               .asFunction<_SetValue_Dart>()(
           ptr.ref.lpVtbl, wszName, lFlags, pValue);
 
-  int GetValue(Pointer<Utf16> wszName, int lFlags,
-          Pointer<VARIANT_POINTER> pValue) =>
+  int GetValue(Pointer<Utf16> wszName, int lFlags, Pointer<VARIANT> pValue) =>
       Pointer<NativeFunction<_GetValue_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(9).value)
               .asFunction<_GetValue_Dart>()(

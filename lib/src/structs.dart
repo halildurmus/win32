@@ -13,6 +13,7 @@ import 'package:ffi/ffi.dart';
 
 import 'constants.dart';
 import 'extensions/unpack_utf16.dart';
+import 'oleaut32.dart';
 
 // typedef struct tagWNDCLASSW {
 //   UINT      style;
@@ -548,30 +549,58 @@ class SOLE_AUTHENTICATION_SERVICE extends Struct {
         ..hr = 0;
 }
 
+// struct tagVARIANT
+//    {
+//        VARTYPE vt;
+//        WORD wReserved1;
+//        WORD wReserved2;
+//        WORD wReserved3;
+//        union
+//            {
+//            LONGLONG llVal;
+//            LONG lVal;
+//            BYTE bVal;
+//            SHORT iVal;
+//            ...
+//    } ;
+
 /// The VARIANT type is used in Win32 to represent a dynamic type. It is
 /// represented as a struct containing a union of the types that could be
-/// stored. This is a specialization of that class for VARIANTs that contain
-/// pointers.
+/// stored.
 ///
+/// VARIANTs must be initialized with [VariantInit] before their use.
+
 /// {@category Struct}
-class VARIANT_POINTER extends Struct {
-  @Int16()
+
+class VARIANT extends Struct {
+  // The size of a union type equals the largest member it can contain, which in
+  // the case of VARIANT is a struct of two pointers (BRECORD).
+
+  @Uint16()
   external int vt;
-  @Int16()
+  @Uint16()
   external int wReserved1;
-  @Int16()
+  @Uint16()
   external int wReserved2;
-  @Int16()
+  @Uint16()
   external int wReserved3;
 
-  external Pointer<IntPtr> ptr;
+  external Pointer ptr;
+  external Pointer ptr2;
 
-  factory VARIANT_POINTER.allocate() => allocate<VARIANT_POINTER>().ref
-    ..vt = VARENUM.VT_PTR
+  bool get isPointer => vt & VARENUM.VT_PTR == VARENUM.VT_PTR;
+
+  factory VARIANT.allocate() => allocate<VARIANT>().ref
+    ..vt = 0
     ..wReserved1 = 0
     ..wReserved2 = 0
     ..wReserved3 = 0
-    ..ptr = nullptr;
+    ..ptr = nullptr
+    ..ptr2 = nullptr;
+
+  factory VARIANT.fromPointer(Pointer ptr) => VARIANT.allocate()
+    ..vt = VARENUM.VT_PTR
+    ..ptr = ptr;
 }
 
 // typedef struct _COMDLG_FILTERSPEC {

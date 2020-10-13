@@ -1097,8 +1097,28 @@ void main() {
   });
 
   group('Test oleaut32 functions', () {
+    test('Can instantiate SysAllocString', () {
+      final function = SysAllocString;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate SysFreeString', () {
+      final function = SysFreeString;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate SysStringByteLen', () {
+      final function = SysStringByteLen;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate SysStringLen', () {
+      final function = SysStringLen;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate VariantClear', () {
       final function = VariantClear;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate VariantInit', () {
+      final function = VariantInit;
       expect(function, isA<Function>());
     });
   });
