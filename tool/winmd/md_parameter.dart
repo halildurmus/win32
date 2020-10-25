@@ -14,7 +14,7 @@ class WinmdParameter {
   IMetaDataImport2 reader;
 
   int token;
-  int? sequence;
+  late int? sequence;
   int attributes;
   WinmdTypeIdentifier typeIdentifier;
   String? name;

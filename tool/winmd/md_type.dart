@@ -15,7 +15,7 @@ import 'utils.dart';
 
 /// Represents a TypeDef in the Windows Metadata file
 class WinmdType {
-  IMetaDataImport2? reader;
+  late IMetaDataImport2 reader;
 
   int token;
   String? typeName;
@@ -65,7 +65,7 @@ class WinmdType {
       return WinmdType.fromTypeDef(reader!, token);
     } else {
       print('Unrecognized token $token');
-      return WinmdType(reader);
+      return WinmdType(reader!);
     }
   }
 
@@ -111,21 +111,21 @@ class WinmdType {
     // a token like IInspectable is out of reach of GetTypeRefProps, since it is
     // a plain COM object. These objects are returned as system types.
     if (systemTokens.containsKey(typeRefToken)) {
-      return WinmdType(reader, 0, systemTokens[typeRefToken]);
+      return WinmdType(reader!, 0, systemTokens[typeRefToken]);
     }
 
     try {
       final hr = reader!.GetTypeRefProps(
           typeRefToken, ptkResolutionScope, szName, 256, pchName);
+
       if (SUCCEEDED(hr)) {
         final typeName = szName.unpackString(pchName.value);
 
         // TODO: Can we shortcut something by using the resolution scope token?
-        final newScope = WinmdStore.getScopeForType(typeName);
-
-        if (newScope != null) {
+        try {
+          final newScope = WinmdStore.getScopeForType(typeName);
           return newScope.findTypeDef(typeName);
-        } else {
+        } catch (exception) {
           throw WinmdException(
               'Unable to find scope for $typeName [${typeRefToken.toHexString(32)}]...');
         }
@@ -145,12 +145,12 @@ class WinmdType {
     final ptkIface = allocate<Uint32>();
 
     try {
-      final hr = reader!.GetInterfaceImplProps(token, pClass, ptkIface);
+      final hr = reader.GetInterfaceImplProps(token, pClass, ptkIface);
       if (SUCCEEDED(hr)) {
         if (tokenIsTypeRef(ptkIface.value)) {
           return WinmdType.fromTypeRef(reader, ptkIface.value);
         } else if (tokenIsTypeDef(pClass.value)) {
-          return WinmdType.fromTypeDef(reader!, ptkIface.value);
+          return WinmdType.fromTypeDef(reader, ptkIface.value);
         }
       }
 
@@ -170,16 +170,16 @@ class WinmdType {
     final pcImpls = allocate<Uint32>();
 
     try {
-      var hr = reader!.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
+      var hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
       while (hr == S_OK) {
         final token = rImpls.value;
 
         interfaces.add(processInterfaceToken(token));
-        hr = reader!.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
+        hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
       }
       return interfaces;
     } finally {
-      reader!.CloseEnum(phEnum.address);
+      reader.CloseEnum(phEnum.address);
 
       free(rImpls);
       free(pcImpls);
@@ -197,16 +197,16 @@ class WinmdType {
     final pcTokens = allocate<Uint32>();
 
     try {
-      var hr = reader!.EnumMethods(phEnum, token, mdMethodDef, 1, pcTokens);
+      var hr = reader.EnumMethods(phEnum, token, mdMethodDef, 1, pcTokens);
       while (hr == S_OK) {
         final token = mdMethodDef.value;
 
-        methods.add(WinmdMethod.fromToken(reader!, token));
-        hr = reader!.EnumMethods(phEnum, token, mdMethodDef, 1, pcTokens);
+        methods.add(WinmdMethod.fromToken(reader, token));
+        hr = reader.EnumMethods(phEnum, token, mdMethodDef, 1, pcTokens);
       }
       return methods;
     } finally {
-      reader!.CloseEnum(phEnum.address);
+      reader.CloseEnum(phEnum.address);
 
       free(mdMethodDef);
       free(pcTokens);
@@ -222,9 +222,9 @@ class WinmdType {
     final pmb = allocate<Uint32>();
 
     try {
-      final hr = reader!.FindMethod(token, szName, nullptr, 0, pmb);
+      final hr = reader.FindMethod(token, szName, nullptr, 0, pmb);
       if (SUCCEEDED(hr)) {
-        return WinmdMethod.fromToken(reader!, pmb.value);
+        return WinmdMethod.fromToken(reader, pmb.value);
       } else if (hr == CLDB_E_RECORD_NOTFOUND) {
         return null;
       } else {
@@ -249,8 +249,8 @@ class WinmdType {
     final pcbData = allocate<Uint32>();
 
     try {
-      final hr = reader!
-          .GetCustomAttributeByName(token, attributeName, ppData, pcbData);
+      final hr = reader.GetCustomAttributeByName(
+          token, attributeName, ppData, pcbData);
       if (SUCCEEDED(hr) && pcbData.value == 20) {
         final blob = Pointer<Uint8>.fromAddress(ppData.value);
         final guid = blob.elementAt(2).cast<GUID>();

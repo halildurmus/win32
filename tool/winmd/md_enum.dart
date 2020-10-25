@@ -35,7 +35,7 @@ class WinmdEnum extends WinmdType {
     final pcchValue = allocate<Uint32>();
 
     try {
-      final hr = reader!.GetFieldProps(
+      final hr = reader.GetFieldProps(
           token,
           ptkTypeDef,
           szField,
@@ -85,10 +85,10 @@ class WinmdEnum extends WinmdType {
     final pcTokens = allocate<Uint32>();
 
     try {
-      var hr = reader!.EnumFields(phEnum, token, rgTypeDefs, 1, pcTokens);
+      var hr = reader.EnumFields(phEnum, token, rgTypeDefs, 1, pcTokens);
       while (hr == S_OK) {
         fieldTokens.add(rgTypeDefs.value);
-        hr = reader!.EnumFields(phEnum, token, rgTypeDefs, 1, pcTokens);
+        hr = reader.EnumFields(phEnum, token, rgTypeDefs, 1, pcTokens);
       }
 
       for (final fieldToken in fieldTokens) {
@@ -98,7 +98,7 @@ class WinmdEnum extends WinmdType {
 
       return fields;
     } finally {
-      reader!.CloseEnum(phEnum.address);
+      reader.CloseEnum(phEnum.address);
 
       free(rgTypeDefs);
       free(pcTokens);

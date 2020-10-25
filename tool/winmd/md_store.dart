@@ -23,10 +23,8 @@ class WinmdStore {
   static void initialize() {
     final dispenserObject = allocate<IntPtr>();
 
-    final hr = MetaDataGetDispenser(
-        convertToCLSID(CLSID_CorMetaDataDispenser).cast(),
-        convertToIID(IID_IMetaDataDispenser).cast(),
-        dispenserObject);
+    final hr = MetaDataGetDispenser(convertToCLSID(CLSID_CorMetaDataDispenser),
+        convertToIID(IID_IMetaDataDispenser), dispenserObject);
 
     if (FAILED(hr)) {
       throw WindowsException(hr);
@@ -42,7 +40,7 @@ class WinmdStore {
     if (!isInitialized) initialize();
 
     if (cache.containsKey(fileScope)) {
-      return WinmdScope(cache[fileScope]);
+      return WinmdScope(cache[fileScope]!);
     } else {
       final szFile = TEXT(fileScope);
       final pReader = allocate<IntPtr>();
@@ -54,7 +52,7 @@ class WinmdStore {
           throw WindowsException(hr);
         } else {
           cache[fileScope] = IMetaDataImport2(pReader.cast());
-          return WinmdScope(cache[fileScope]);
+          return WinmdScope(cache[fileScope]!);
         }
       } finally {
         free(szFile);
@@ -64,7 +62,7 @@ class WinmdStore {
 
   /// Takes a typename (e.g. `Windows.Globalization.Calendar`) and returns the
   /// metadata scope that contains the type.
-  static WinmdScope? getScopeForType(String typeName) {
+  static WinmdScope getScopeForType(String typeName) {
     final hstrTypeName = convertToHString(typeName);
 
     final hstrMetaDataFilePath = allocate<IntPtr>();
@@ -80,8 +78,6 @@ class WinmdStore {
       if (SUCCEEDED(hr)) {
         final filePath = convertFromHString(hstrMetaDataFilePath);
         return getScopeForFile(filePath);
-      } else if (hr == HRESULT_FROM_WIN32(APPMODEL_ERROR_NO_PACKAGE)) {
-        return null;
       } else {
         throw WindowsException(hr);
       }
@@ -98,7 +94,7 @@ class WinmdStore {
     if (!isInitialized) initialize();
 
     final scope = getScopeForType(typeName);
-    return scope!.findTypeDef(typeName);
+    return scope.findTypeDef(typeName);
   }
 
   /// Dispose of all objects.

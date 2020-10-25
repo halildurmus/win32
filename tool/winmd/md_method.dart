@@ -110,7 +110,7 @@ class WinmdMethod {
       Uint8List signatureBlob) {
     final paramType = signatureBlob.first;
     final runtimeType = WinmdTypeIdentifier.fromValue(paramType);
-    int? dataLength;
+    late int dataLength;
 
     if (runtimeType.corType == CorElementType.ELEMENT_TYPE_VALUETYPE ||
         runtimeType.corType == CorElementType.ELEMENT_TYPE_CLASS) {
@@ -132,7 +132,7 @@ class WinmdMethod {
           signatureBlob[1 + classTuple.item2!]; // GENERICINST + class
       dataLength = classTuple.item2! + 2; // GENERICINST + class + argsCount
       for (var idx = 0; idx < argsCount; idx++) {
-        final arg = _parseTypeFromSignature(signatureBlob.sublist(dataLength!));
+        final arg = _parseTypeFromSignature(signatureBlob.sublist(dataLength));
         dataLength += arg.item2!;
         runtimeType.typeArgs.add(arg.item1);
       }
@@ -140,7 +140,7 @@ class WinmdMethod {
       dataLength = 1;
       runtimeType.name = runtimeType.nativeType;
     }
-    return Tuple<WinmdTypeIdentifier, int?>(runtimeType, dataLength);
+    return Tuple<WinmdTypeIdentifier, int>(runtimeType, dataLength);
   }
 
   String get callingConvention {
