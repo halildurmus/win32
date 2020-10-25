@@ -18,7 +18,7 @@ class WinmdType {
   late IMetaDataImport2 reader;
 
   int token;
-  String? typeName;
+  late String typeName;
   int flags;
   int baseTypeToken;
 
@@ -36,8 +36,7 @@ class WinmdType {
   ///
   /// More information at:
   /// https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#type-system-encoding
-  bool get isSystemType =>
-      typeName!.startsWith('System') || typeName == 'IInspectable';
+  bool get isSystemType => systemTokens.containsValue(typeName);
 
   /// Create a typedef.
   ///
@@ -54,18 +53,14 @@ class WinmdType {
   /// If the token is a TypeDef, it will be created directly; otherwise it will
   /// be retrieved by finding the scope that it comes from and returning a
   /// typedef from the new scope.
-  factory WinmdType.fromToken(IMetaDataImport2? reader, int token) {
+  factory WinmdType.fromToken(IMetaDataImport2 reader, int token) {
     if (tokenIsTypeRef(token)) {
-      try {
-        return WinmdType.fromTypeRef(reader, token);
-      } on WinmdException {
-        return null!;
-      }
+      return WinmdType.fromTypeRef(reader, token);
     } else if (tokenIsTypeDef(token)) {
-      return WinmdType.fromTypeDef(reader!, token);
+      return WinmdType.fromTypeDef(reader, token);
     } else {
       print('Unrecognized token $token');
-      return WinmdType(reader!);
+      return WinmdType(reader);
     }
   }
 
@@ -103,7 +98,7 @@ class WinmdType {
   /// Unless the TypeRef token is `IInspectable`, the COM parent interface for
   /// Windows Runtime classes, the TypeRef is used to obtain the host scope
   /// metadata file, from which the TypeDef can be found and returned.
-  factory WinmdType.fromTypeRef(IMetaDataImport2? reader, int typeRefToken) {
+  factory WinmdType.fromTypeRef(IMetaDataImport2 reader, int typeRefToken) {
     final ptkResolutionScope = allocate<Uint32>();
     final szName = allocate<Uint16>(count: 256).cast<Utf16>();
     final pchName = allocate<Uint32>();
@@ -111,11 +106,11 @@ class WinmdType {
     // a token like IInspectable is out of reach of GetTypeRefProps, since it is
     // a plain COM object. These objects are returned as system types.
     if (systemTokens.containsKey(typeRefToken)) {
-      return WinmdType(reader!, 0, systemTokens[typeRefToken]);
+      return WinmdType(reader, 0, systemTokens[typeRefToken]!);
     }
 
     try {
-      final hr = reader!.GetTypeRefProps(
+      final hr = reader.GetTypeRefProps(
           typeRefToken, ptkResolutionScope, szName, 256, pchName);
 
       if (SUCCEEDED(hr)) {
@@ -126,8 +121,12 @@ class WinmdType {
           final newScope = WinmdStore.getScopeForType(typeName);
           return newScope.findTypeDef(typeName);
         } catch (exception) {
-          throw WinmdException(
-              'Unable to find scope for $typeName [${typeRefToken.toHexString(32)}]...');
+          if (systemTokens.containsValue(typeName)) {
+            return WinmdType(reader, 0, typeName);
+          } else {
+            throw WinmdException(
+                'Unable to find scope for $typeName [${typeRefToken.toHexString(32)}]...');
+          }
         }
       } else {
         throw WindowsException(hr);
