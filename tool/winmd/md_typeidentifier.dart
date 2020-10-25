@@ -9,7 +9,7 @@ import 'utils.dart';
 class WinmdTypeIdentifier {
   CorElementType corType;
   String? name;
-  WinmdType? type;
+  late WinmdType type;
   final typeArgs = <WinmdTypeIdentifier>[];
 
   WinmdTypeIdentifier(this.corType);
