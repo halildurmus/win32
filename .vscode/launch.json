@@ -10,7 +10,7 @@
         "args": ["lib\\src\\generated"],
         "type": "dart",
         "vmAdditionalArgs": [
-            "--enable-experiment=non-nullable",
-        ],
+            "--enable-experiment=non-nullable"
+        ]
     }]
 }
