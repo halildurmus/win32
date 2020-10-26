@@ -10,8 +10,8 @@ import 'package:win32/win32.dart';
 import 'md_type.dart';
 
 class WinmdField {
-  String? name;
-  int? value;
+  late String name;
+  late int value;
 }
 
 /// Represents an enum in the Windows Metadata file
@@ -50,7 +50,7 @@ class WinmdEnum extends WinmdType {
 
       if (SUCCEEDED(hr)) {
         field.name = szField.unpackString(pchField.value);
-        print(field.name! +
+        print(field.name +
             ppvSigBlob
                 .cast<Uint8>()
                 .asTypedList(pcbSigBlob.value)

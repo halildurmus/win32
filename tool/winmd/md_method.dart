@@ -106,7 +106,7 @@ class WinmdMethod {
   /// consumed.
   ///
   /// Details on the blob format can be found at §II.23.1.16 of ECMA-335.
-  Tuple<WinmdTypeIdentifier, int?> _parseTypeFromSignature(
+  Tuple<WinmdTypeIdentifier, int> _parseTypeFromSignature(
       Uint8List signatureBlob) {
     final paramType = signatureBlob.first;
     final runtimeType = WinmdTypeIdentifier.fromValue(paramType);
@@ -129,11 +129,11 @@ class WinmdMethod {
       final classTuple = _parseTypeFromSignature(signatureBlob.sublist(1));
       runtimeType.name = classTuple.item1.name;
       final argsCount =
-          signatureBlob[1 + classTuple.item2!]; // GENERICINST + class
-      dataLength = classTuple.item2! + 2; // GENERICINST + class + argsCount
+          signatureBlob[1 + classTuple.item2]; // GENERICINST + class
+      dataLength = classTuple.item2 + 2; // GENERICINST + class + argsCount
       for (var idx = 0; idx < argsCount; idx++) {
         final arg = _parseTypeFromSignature(signatureBlob.sublist(dataLength));
-        dataLength += arg.item2!;
+        dataLength += arg.item2;
         runtimeType.typeArgs.add(arg.item1);
       }
     } else {
@@ -183,7 +183,7 @@ class WinmdMethod {
           final returnTypeTuple =
               _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
           returnType.typeIdentifier = returnTypeTuple.item1;
-          blobPtr += returnTypeTuple.item2!;
+          blobPtr += returnTypeTuple.item2;
         } else {
           // Set return type to void
           returnType = WinmdParameter.fromVoid(reader);
@@ -201,7 +201,7 @@ class WinmdMethod {
             paramsIndex++; //we've added two parameters here
           } else {
             parameters[paramsIndex].typeIdentifier = runtimeType.item1;
-            blobPtr += runtimeType.item2!;
+            blobPtr += runtimeType.item2;
           }
           paramsIndex++;
         }

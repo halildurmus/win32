@@ -122,7 +122,7 @@ import '../winrt/winrt_constants.dart';
     buffer.writeln('''
   // vtable begins at ${type.vtableStart}, ends at ${type.vtableStart + type.methods.length - 1}
 ''');
-    if (type.inherits!.isNotEmpty) {
+    if (type.inherits.isNotEmpty) {
       buffer.write('''
    ${type.shortName}(Pointer<COMObject> ptr) : super(ptr);\n
 ''');

@@ -215,7 +215,7 @@ class WinmdType {
 
   /// Get a method matching the name, if one exists.
   ///
-  /// Returns [null] if the method is not found.
+  /// Returns null if the method is not found.
   WinmdMethod? findMethod(String methodName) {
     final szName = TEXT(methodName);
     final pmb = allocate<Uint32>();
