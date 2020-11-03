@@ -1,9 +1,6 @@
 include: package:lint/analysis_options_package.yaml
 
 analyzer:
-  enable-experiment:
-    - non-nullable
-    
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false
