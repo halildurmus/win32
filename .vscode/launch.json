@@ -8,9 +8,6 @@
         "program": "tool\\winmd\\winmd.dart",
         "request": "launch",
         "args": ["lib\\src\\generated"],
-        "type": "dart",
-        "vmAdditionalArgs": [
-            "--enable-experiment=non-nullable"
-        ]
+        "type": "dart"
     }]
 }
