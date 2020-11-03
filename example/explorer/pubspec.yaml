@@ -4,7 +4,7 @@ description: Drive explorer, built with Flutter
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.12.0-0.dev <3.0.0'
 
 dependencies:
   flutter:
@@ -14,4 +14,7 @@ dependencies:
     path: ../../
 
 dev_dependencies:
-  pedantic: ^1.9.0
+  lint: ^1.4.0-dev.d210.1
+
+## This package is not intended for publishing; it's just an example.
+publish_to: none

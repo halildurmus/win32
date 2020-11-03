@@ -22,7 +22,7 @@ class Volumes {
   List<Volume> getVolumes() => _volumes;
 
   List<String> GetVolumePaths(String volumeName) {
-    var paths = <String>[];
+    final paths = <String>[];
     var error = 0;
 
     // Could be arbitrarily long, but 4*MAX_PATH is a reasonable default.
@@ -35,7 +35,7 @@ class Volumes {
 
     if (error != 0) {
       if (charCount.value > 1) {
-        for (var path in pathNamePtr.unpackStringArray(charCount.value)) {
+        for (final path in pathNamePtr.unpackStringArray(charCount.value)) {
           paths.add(path);
         }
       }
@@ -53,23 +53,24 @@ class Volumes {
 
   Volumes() {
     var error = 0;
-    var volumeNamePtr = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
+    final volumeNamePtr = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
 
-    var hFindVolume = FindFirstVolume(volumeNamePtr, MAX_PATH);
+    final hFindVolume = FindFirstVolume(volumeNamePtr, MAX_PATH);
     if (hFindVolume == INVALID_HANDLE_VALUE) {
       error = GetLastError();
       throw Exception('FindFirstVolume failed with error code $error');
     }
 
     while (true) {
-      var volumeName = volumeNamePtr.unpackString(MAX_PATH);
+      final volumeName = volumeNamePtr.unpackString(MAX_PATH);
 
       //  Skip the \\?\ prefix and remove the trailing backslash.
       final shortVolumeName = volumeName.substring(4, volumeName.length - 1);
       final shortVolumeNamePtr = Utf16.toUtf16(shortVolumeName);
 
-      var deviceName = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
-      var charCount = QueryDosDevice(shortVolumeNamePtr, deviceName, MAX_PATH);
+      final deviceName = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
+      final charCount =
+          QueryDosDevice(shortVolumeNamePtr, deviceName, MAX_PATH);
 
       if (charCount == 0) {
         error = GetLastError();

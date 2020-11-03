@@ -9,17 +9,15 @@ void main() {
 
 class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      themeMode: ThemeMode.light,
-      home: Scaffold(
-        body: VolumeListView(),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => MaterialApp(
+        theme: ThemeData(
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        themeMode: ThemeMode.light,
+        home: Scaffold(
+          body: VolumeListView(),
+        ),
+      );
 }
 
 class VolumeListView extends StatefulWidget {
@@ -38,22 +36,19 @@ class _VolumeListViewState extends State<VolumeListView> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(5),
-      child: ListView.builder(
+  Widget build(BuildContext context) => Container(
+        margin: const EdgeInsets.all(5),
+        child: ListView.builder(
           itemCount: _volumes.length,
-          itemBuilder: (context, position) {
-            return VolumeCard(
-              volume: _volumes[position],
-            );
-          }),
-    );
-  }
+          itemBuilder: (context, position) => VolumeCard(
+            volume: _volumes[position],
+          ),
+        ),
+      );
 }
 
 class VolumeCard extends StatefulWidget {
-  VolumeCard({Key key, this.volume}) : super(key: key);
+  const VolumeCard({required this.volume});
 
   final Volume volume;
 
@@ -63,52 +58,56 @@ class VolumeCard extends StatefulWidget {
 
 class _VolumeCardState extends State<VolumeCard> {
   @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(5),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  FaIcon(FontAwesomeIcons.hdd,
-                      size: 32, color: Colors.blueGrey),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 5, 5, 5),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.volume.deviceName,
-                          style: Theme.of(context).textTheme.subtitle1,
-                        ),
-                        Text(
-                          widget.volume.volumeName,
-                          style: Theme.of(context).textTheme.bodyText2.copyWith(
-                              color: Theme.of(context).textTheme.caption.color),
-                        ),
-                        Divider(height: 5),
-                        Column(
-                          children: [
-                            for (var path in widget.volume.paths)
-                              Text(
-                                path,
-                                style: Theme.of(context).textTheme.bodyText2,
-                              ),
-                          ],
-                        ),
-                      ],
+  Widget build(BuildContext context) => Card(
+        child: Padding(
+          padding: const EdgeInsets.all(5),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const FaIcon(FontAwesomeIcons.hdd,
+                        size: 32, color: Colors.blueGrey),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 5, 5, 5),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.volume.deviceName,
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                          Text(
+                            widget.volume.volumeName,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2!
+                                .copyWith(
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .caption
+                                        ?.color),
+                          ),
+                          const Divider(height: 5),
+                          Column(
+                            children: [
+                              for (var path in widget.volume.paths)
+                                Text(
+                                  path,
+                                  style: Theme.of(context).textTheme.bodyText2,
+                                ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
 }
