@@ -34,6 +34,9 @@ linter:
     # Win32 parity requires TitleCase method names
     non_constant_identifier_names: false
 
+    # This seems incompatible with NNDB
+    use_key_in_widget_constructors: false
+
     # Some additional lints we want to enforce
     omit_local_variable_types: true
     prefer_expression_function_bodies: true
