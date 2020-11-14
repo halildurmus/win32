@@ -3,7 +3,7 @@ Rough notes on steps I take to publish a new version of win32:
 1. Run `tool\generate.cmd` to make sure that the machine-generated classes are
    the latest.
 
-2. Run `dart pub run test` from a Windows 10 machine to make sure all the
+2. Run `dart test` from a Windows 10 machine to make sure all the
    automated tests are still working.
 
    - Optionally, also run it from Windows 7 to make sure nothing downlevel has
