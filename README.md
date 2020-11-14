@@ -1,3 +1,5 @@
+![Dart/Win32](https://github.com/timsneath/win32/blob/master/doc/images/win32.png?raw=true)
+
 A package that wraps some of the most common Win32 API calls using FFI to make
 them accessible to Dart code without requiring a C compiler or the Windows SDK.
 
