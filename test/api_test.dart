@@ -1020,6 +1020,10 @@ void main() {
       final function = ShellExecute;
       expect(function, isA<Function>());
     });
+    test('Can instantiate SHCreateItemFromParsingName', () {
+      final function = SHCreateItemFromParsingName;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate SHEmptyRecycleBin', () {
       final function = SHEmptyRecycleBin;
       expect(function, isA<Function>());
