@@ -1,15 +1,15 @@
 name: explorer
 description: Drive explorer, built with Flutter
 
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
-  sdk: '>=2.12.0-0.dev <3.0.0'
+  sdk: '>=2.12.0-0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  font_awesome_flutter: ^8.8.1
+  font_awesome_flutter: ^8.10.0
   win32:
     path: ../../
 
