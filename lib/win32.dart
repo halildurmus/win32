@@ -106,6 +106,7 @@ export 'src/shcore.dart';
 export 'src/shell32.dart';
 export 'src/user32.dart';
 export 'src/version.dart';
+export 'src/winmm.dart';
 
 // COM foundational exports
 export 'src/com/combase.dart';
