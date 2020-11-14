@@ -14,7 +14,7 @@ Rough notes on steps I take to publish a new version of win32:
      saving, console buffer info); this is expected.
 
 3. Run `dartdoc` from the root of the repo and make sure that it completes
-   successfully.
+   successfully. (I do this and the next step from WSL or a macOS machine.)
 
 4. Run `tool/deploy/deploy.sh` from a Bash prompt to copy the `doc/api` files to
    the `gh-pages` branch.

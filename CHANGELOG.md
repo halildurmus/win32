@@ -1,3 +1,9 @@
+## 1.7.4
+
+- Add SysAllocString, SysFreeString, SysStringByteLen, SysStringLen,
+  SHCreateItemFromParsingName
+- Rename VARIANT_POINTER to VARIANT
+
 ## 1.7.3
 
 - Expand Win32 API documentation.
