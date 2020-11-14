@@ -92,6 +92,23 @@ final ShellExecute = _shell32.lookupFunction<
         Pointer<Utf16> lpDirectory,
         int nShowCmd)>('ShellExecuteW');
 
+/// Creates and initializes a Shell item object from a parsing name.
+///
+/// ```c
+/// SHSTDAPI SHCreateItemFromParsingName(
+///   PCWSTR   pszPath,
+///   IBindCtx *pbc,
+///   REFIID   riid,
+///   void     **ppv
+/// );
+/// ```
+/// {@category shell32}
+final SHCreateItemFromParsingName = _shell32.lookupFunction<
+    Int32 Function(Pointer<Utf16> pszPath, Pointer pbc, Pointer<GUID> riid,
+        Pointer<COMObject> ppv),
+    int Function(Pointer<Utf16> pszPath, Pointer pbc, Pointer<GUID> riid,
+        Pointer<COMObject> ppv)>('SHCreateItemFromParsingName');
+
 /// Empties the Recycle Bin on the specified drive.
 ///
 /// ```c
