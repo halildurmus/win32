@@ -110,7 +110,7 @@ class WinmdMethod {
       Uint8List signatureBlob) {
     final paramType = signatureBlob.first;
     final runtimeType = WinmdTypeIdentifier.fromValue(paramType);
-    late int dataLength;
+    var dataLength = 0;
 
     if (runtimeType.corType == CorElementType.ELEMENT_TYPE_VALUETYPE ||
         runtimeType.corType == CorElementType.ELEMENT_TYPE_CLASS) {

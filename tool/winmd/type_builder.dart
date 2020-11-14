@@ -13,10 +13,10 @@ const Map<String, String> specialTypes = {'System.Guid': 'GUID'};
 /// Takes a WinMD type and builds a Dart representation of it.
 class TypeBuilder {
   static bool isTypeAnEnum(WinmdTypeIdentifier typeIdentifier) =>
-      typeIdentifier.type.parent?.typeName == 'System.Enum';
+      typeIdentifier.type?.parent?.typeName == 'System.Enum';
 
   static bool isTypeValueType(WinmdTypeIdentifier typeIdentifier) =>
-      typeIdentifier.type.parent?.typeName == 'System.ValueType';
+      typeIdentifier.type?.parent?.typeName == 'System.ValueType';
 
   static String? dartType(WinmdTypeIdentifier typeIdentifier) {
     if (isTypeAnEnum(typeIdentifier)) {
