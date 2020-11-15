@@ -1126,4 +1126,11 @@ void main() {
       expect(function, isA<Function>());
     });
   });
+
+  group('Test winmm functions', () {
+    test('Can instantiate PlaySound', () {
+      final function = PlaySound;
+      expect(function, isA<Function>());
+    });
+  });
 }
