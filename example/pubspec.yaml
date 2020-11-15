@@ -10,5 +10,4 @@ environment:
 dependencies:
   filepicker_windows:
     path: ../
-  win32:
-    path: ../../win32
+  win32: ^1.7.4
