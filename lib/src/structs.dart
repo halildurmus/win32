@@ -2950,6 +2950,107 @@ class VS_FIXEDFILEINFO extends Struct {
     ..dwFileDateLS = 0;
 }
 
+// typedef struct tagMCI_OPEN_PARMSW {
+//     DWORD_PTR   dwCallback;
+//     MCIDEVICEID wDeviceID;
+//     LPCWSTR    lpstrDeviceType;
+//     LPCWSTR    lpstrElementName;
+//     LPCWSTR    lpstrAlias;
+// } MCI_OPEN_PARMSW, *PMCI_OPEN_PARMSW, *LPMCI_OPEN_PARMSW;
+
+/// The MCI_OPEN_PARMS structure contains information for the MCI_OPEN command.
+///
+/// {@category Struct}
+///
+/// Packed struct -- 36 bytes on 64-bit, 20 bytes on 32-bit
+class MCI_OPEN_PARMS extends Struct {
+  @IntPtr()
+  int dwCallback;
+  @Uint32()
+  int wDeviceID;
+  Pointer<Utf16> lpstrDeviceType;
+  Pointer<Utf16> lpstrElementName;
+  Pointer<Utf16> lpstrAlias;
+
+  factory MCI_OPEN_PARMS.allocate() => allocate<MCI_OPEN_PARMS>().ref
+    ..dwCallback = 0
+    ..wDeviceID = 0
+    ..lpstrDeviceType = nullptr
+    ..lpstrElementName = nullptr
+    ..lpstrAlias = nullptr;
+}
+
+// typedef struct {
+//   DWORD_PTR dwCallback;
+//   DWORD     dwFrom;
+//   DWORD     dwTo;
+// } MCI_PLAY_PARMS, *PMCI_PLAY_PARMS, FAR *LPMCI_PLAY_PARMS;
+
+/// The MCI_PLAY_PARMS structure contains positioning information for the
+/// MCI_PLAY command.
+///
+/// {@category Struct}
+class MCI_PLAY_PARMS extends Struct {
+  @IntPtr()
+  int dwCallback;
+  @Uint32()
+  int dwFrom;
+  @Uint32()
+  int dwTo;
+
+  factory MCI_PLAY_PARMS.allocate() => allocate<MCI_PLAY_PARMS>().ref
+    ..dwCallback = 0
+    ..dwFrom = 0
+    ..dwTo = 0;
+}
+
+// typedef struct tagMCI_SEEK_PARMS {
+//     DWORD_PTR   dwCallback;
+//     DWORD       dwTo;
+// } MCI_SEEK_PARMS, *PMCI_SEEK_PARMS, FAR *LPMCI_SEEK_PARMS;
+
+/// The MCI_SEEK_PARMS structure contains positioning information for the
+/// MCI_SEEK command.
+///
+/// {@category Struct}
+class MCI_SEEK_PARMS extends Struct {
+  @IntPtr()
+  int dwCallback;
+  @Uint32()
+  int dwTo;
+
+  factory MCI_SEEK_PARMS.allocate() => allocate<MCI_SEEK_PARMS>().ref
+    ..dwCallback = 0
+    ..dwTo = 0;
+}
+
+// typedef struct tagMCI_STATUS_PARMS {
+//     DWORD_PTR   dwCallback;
+//     DWORD_PTR   dwReturn;
+//     DWORD       dwItem;
+//     DWORD       dwTrack;
+// } MCI_STATUS_PARMS, *PMCI_STATUS_PARMS, FAR * LPMCI_STATUS_PARMS;
+
+/// The MCI_STATUS_PARMS structure contains information for the MCI_STATUS command.
+///
+/// {@category Struct}
+class MCI_STATUS_PARMS extends Struct {
+  @IntPtr()
+  int dwCallback;
+  @IntPtr()
+  int dwReturn;
+  @Uint32()
+  int dwItem;
+  @Uint32()
+  int dwTrack;
+
+  factory MCI_STATUS_PARMS.allocate() => allocate<MCI_STATUS_PARMS>().ref
+    ..dwCallback = 0
+    ..dwReturn = 0
+    ..dwItem = 0
+    ..dwTrack = 0;
+}
+
 // -----------------------------------------------------------------------------
 // UNIMPLEMENTED CLASSES THAT ARE INCLUDED SO THAT COM OBJECTS CAN BE GENERATED
 // -----------------------------------------------------------------------------

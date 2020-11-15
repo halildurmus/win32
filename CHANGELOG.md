@@ -1,3 +1,7 @@
+## 1.7.5
+
+- WinMM: Add PlaySound (thanks @Hexer10)
+
 ## 1.7.4
 
 - Add SysAllocString, SysFreeString, SysStringByteLen, SysStringLen,

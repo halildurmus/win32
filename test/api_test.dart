@@ -1100,6 +1100,33 @@ void main() {
     });
   });
 
+  group('Test winmm functions', () {
+    test('Can instantiate mciGetDeviceID', () {
+      final function = mciGetDeviceID;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate mciGetDeviceIDFromElementID', () {
+      final function = mciGetDeviceIDFromElementID;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate mciGetErrorString', () {
+      final function = mciGetErrorString;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate mciSendCommand', () {
+      final function = mciSendCommand;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate mciSendString', () {
+      final function = mciSendString;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate midiOutGetNumDevs', () {
+      final function = midiOutGetNumDevs;
+      expect(function, isA<Function>());
+    });
+  });
+
   group('Test oleaut32 functions', () {
     test('Can instantiate SysAllocString', () {
       final function = SysAllocString;

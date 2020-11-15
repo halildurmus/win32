@@ -42,6 +42,7 @@ void main()
     printf("sizeof(LRESULT) is %zu\n", sizeof(LRESULT));
 
     printf("sizeof(BITMAPINFO) is %zu\n", sizeof(BITMAPINFO));
+    printf("sizeof(MCI_OPEN_PARMS) is %zu\n", sizeof(MCI_OPEN_PARMS));
     printf("sizeof(BLUETOOTH_DEVICE_INFO_STRUCT) is %zu\n", sizeof(BLUETOOTH_DEVICE_INFO_STRUCT));
     printf("sizeof(WNDCLASS) is %zu\n", sizeof(WNDCLASS));
     printf("sizeof(WNDPROC) is %zu\n", sizeof(WNDPROC));
