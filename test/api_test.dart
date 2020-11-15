@@ -1125,6 +1125,10 @@ void main() {
       final function = midiOutGetNumDevs;
       expect(function, isA<Function>());
     });
+    test('Can instantiate PlaySound', () {
+      final function = PlaySound;
+      expect(function, isA<Function>());
+    });
   });
 
   group('Test oleaut32 functions', () {
@@ -1150,13 +1154,6 @@ void main() {
     });
     test('Can instantiate VariantInit', () {
       final function = VariantInit;
-      expect(function, isA<Function>());
-    });
-  });
-
-  group('Test winmm functions', () {
-    test('Can instantiate PlaySound', () {
-      final function = PlaySound;
       expect(function, isA<Function>());
     });
   });
