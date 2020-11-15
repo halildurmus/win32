@@ -107,3 +107,18 @@ final mciSendString = _winmm.lookupFunction<
 /// {@category winmm}
 final midiOutGetNumDevs = _winmm
     .lookupFunction<Uint32 Function(), int Function()>('midiOutGetNumDevs');
+
+/// The PlaySound function plays a sound specified by the given file name,
+/// resource, or system event.
+///
+/// ```c
+/// BOOL PlaySound(
+///   LPCTSTR pszSound,
+///   HMODULE hmod,
+///   DWORD fdwSound);
+/// ```
+/// {@category winmm}
+final PlaySound = _winmm.lookupFunction<
+    Int32 Function(Pointer<Utf16> pszSound, IntPtr hmod, Uint32 fdwSound),
+    int Function(
+        Pointer<Utf16> pszSound, int hmod, int fdwSound)>('PlaySoundW');
