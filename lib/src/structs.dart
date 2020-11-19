@@ -2966,12 +2966,12 @@ class VS_FIXEDFILEINFO extends Struct {
 /// Packed struct -- 36 bytes on 64-bit, 20 bytes on 32-bit
 class MCI_OPEN_PARMS extends Struct {
   @IntPtr()
-  int dwCallback;
+  external int dwCallback;
   @Uint32()
-  int wDeviceID;
-  Pointer<Utf16> lpstrDeviceType;
-  Pointer<Utf16> lpstrElementName;
-  Pointer<Utf16> lpstrAlias;
+  external int wDeviceID;
+  external Pointer<Utf16> lpstrDeviceType;
+  external Pointer<Utf16> lpstrElementName;
+  external Pointer<Utf16> lpstrAlias;
 
   factory MCI_OPEN_PARMS.allocate() => allocate<MCI_OPEN_PARMS>().ref
     ..dwCallback = 0
@@ -2993,11 +2993,11 @@ class MCI_OPEN_PARMS extends Struct {
 /// {@category Struct}
 class MCI_PLAY_PARMS extends Struct {
   @IntPtr()
-  int dwCallback;
+  external int dwCallback;
   @Uint32()
-  int dwFrom;
+  external int dwFrom;
   @Uint32()
-  int dwTo;
+  external int dwTo;
 
   factory MCI_PLAY_PARMS.allocate() => allocate<MCI_PLAY_PARMS>().ref
     ..dwCallback = 0
@@ -3016,9 +3016,9 @@ class MCI_PLAY_PARMS extends Struct {
 /// {@category Struct}
 class MCI_SEEK_PARMS extends Struct {
   @IntPtr()
-  int dwCallback;
+  external int dwCallback;
   @Uint32()
-  int dwTo;
+  external int dwTo;
 
   factory MCI_SEEK_PARMS.allocate() => allocate<MCI_SEEK_PARMS>().ref
     ..dwCallback = 0
@@ -3037,13 +3037,13 @@ class MCI_SEEK_PARMS extends Struct {
 /// {@category Struct}
 class MCI_STATUS_PARMS extends Struct {
   @IntPtr()
-  int dwCallback;
+  external int dwCallback;
   @IntPtr()
-  int dwReturn;
+  external int dwReturn;
   @Uint32()
-  int dwItem;
+  external int dwItem;
   @Uint32()
-  int dwTrack;
+  external int dwTrack;
 
   factory MCI_STATUS_PARMS.allocate() => allocate<MCI_STATUS_PARMS>().ref
     ..dwCallback = 0
