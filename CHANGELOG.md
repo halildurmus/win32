@@ -1,3 +1,7 @@
+## 2.0.0-nullsafety.0
+
+- Enable sound null safety
+
 ## 1.7.5
 
 - WinMM: Add PlaySound (thanks @Hexer10)
