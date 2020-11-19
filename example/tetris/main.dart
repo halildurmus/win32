@@ -14,8 +14,8 @@ const GAME_SPEED = 33; // Update the game every GAME_SPEED ms (= 1000/fps)
 const TIMER_ID = 1;
 
 final hInstance = GetModuleHandle(nullptr);
-Game game;
-DrawEngine de;
+late Game game;
+late DrawEngine de;
 
 void main() {
   final szAppName = TEXT('Tetris');

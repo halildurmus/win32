@@ -11,8 +11,6 @@ import 'package:win32/win32.dart';
 
 // Callback for each window found
 int enumWindowsProc(int hWnd, int lParam) {
-  if (hWnd == null) print('hWnd is null');
-
   // Don't enumerate windows unless they are marked as WS_VISIBLE
   if (IsWindowVisible(hWnd) == FALSE) return TRUE;
 
@@ -21,7 +19,6 @@ int enumWindowsProc(int hWnd, int lParam) {
     return TRUE;
   }
 
-  print('length is $length');
   final buffer = allocate<Uint16>(count: length + 1).cast<Utf16>();
   GetWindowText(hWnd, buffer, length + 1);
   print('hWnd $hWnd: ${buffer.unpackString(length)}');

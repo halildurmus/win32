@@ -11,10 +11,10 @@ import 'utf16string.dart';
 const MAX_STRING_LEN = 256;
 
 class NotepadFind {
-  FINDREPLACE find;
+  late FINDREPLACE find;
 
-  Utf16String szFindText;
-  Utf16String szReplText;
+  late Utf16String szFindText;
+  late Utf16String szReplText;
 
   NotepadFind() {
     szFindText = Utf16String(MAX_STRING_LEN);

@@ -18,7 +18,7 @@ class TypeBuilder {
   static bool isTypeValueType(WinmdTypeIdentifier typeIdentifier) =>
       typeIdentifier.type?.parent?.typeName == 'System.ValueType';
 
-  static String dartType(WinmdTypeIdentifier typeIdentifier) {
+  static String? dartType(WinmdTypeIdentifier typeIdentifier) {
     if (isTypeAnEnum(typeIdentifier)) {
       return 'int';
     } else if (isTypeValueType(typeIdentifier)) {
@@ -40,7 +40,7 @@ class TypeBuilder {
       // TODO: This needs figuring out -- a struct could have anything in it.
       return 'Uint32';
     } else if (specialTypes.containsKey(typeIdentifier.name)) {
-      return specialTypes[typeIdentifier.name];
+      return specialTypes[typeIdentifier.name]!;
     } else {
       return typeIdentifier.name;
     }
@@ -51,7 +51,7 @@ class TypeBuilder {
     interface.sourceType = SourceType.winrt; // for now
     interface.iid = mdTypeDef.guid;
     interface.name = mdTypeDef.typeName;
-    interface.inherits = mdTypeDef.parent.typeName;
+    interface.inherits = mdTypeDef.parent!.typeName;
     interface.vtableStart = 6; // For now, hardcode to IInspectable subclass
 
     for (final mdMethod in mdTypeDef.methods) {
@@ -69,7 +69,7 @@ class TypeBuilder {
         } else if (mdMethod.isGetProperty) {
           retParam.name = 'value';
           retParam.nativeType = nativeType(mdMethod.returnType.typeIdentifier);
-          retParam.dartType = dartType(mdMethod.returnType.typeIdentifier);
+          retParam.dartType = dartType(mdMethod.returnType.typeIdentifier)!;
         } else {
           retParam.name = 'value';
           retParam.nativeType =
@@ -83,9 +83,9 @@ class TypeBuilder {
       for (final mdParam in mdMethod.parameters) {
         final param = Parameter();
 
-        param.name = mdParam.name;
+        param.name = mdParam.name!;
         param.nativeType = nativeType(mdParam.typeIdentifier);
-        param.dartType = dartType(mdParam.typeIdentifier);
+        param.dartType = dartType(mdParam.typeIdentifier)!;
 
         method.parameters.add(param);
       }

@@ -34,30 +34,30 @@ import 'oleaut32.dart';
 /// {@category Struct}
 class WNDCLASS extends Struct {
   @Uint32()
-  int style;
+  external int style;
 
-  Pointer<NativeFunction> lpfnWndProc;
-
-  @Int32()
-  int cbClsExtra;
+  external Pointer<NativeFunction> lpfnWndProc;
 
   @Int32()
-  int cbWndExtra;
+  external int cbClsExtra;
+
+  @Int32()
+  external int cbWndExtra;
 
   @IntPtr()
-  int hInstance;
+  external int hInstance;
 
   @IntPtr()
-  int hIcon;
+  external int hIcon;
 
   @IntPtr()
-  int hCursor;
+  external int hCursor;
 
   @IntPtr()
-  int hbrBackground;
+  external int hbrBackground;
 
-  Pointer<Utf16> lpszMenuName;
-  Pointer<Utf16> lpszClassName;
+  external Pointer<Utf16> lpszMenuName;
+  external Pointer<Utf16> lpszClassName;
 
   factory WNDCLASS.allocate() => allocate<WNDCLASS>().ref
     ..style = 0
@@ -98,34 +98,34 @@ class WNDCLASS extends Struct {
 /// {@category Struct}
 class SYSTEM_INFO extends Struct {
   @Uint16()
-  int wProcessorArchitecture;
+  external int wProcessorArchitecture;
 
   @Uint16()
-  int wReserved;
+  external int wReserved;
 
   @Uint32()
-  int dwPageSize;
+  external int dwPageSize;
 
-  Pointer lpMinimumApplicationAddress;
-  Pointer lpMaximumApplicationAddress;
+  external Pointer lpMinimumApplicationAddress;
+  external Pointer lpMaximumApplicationAddress;
 
   @IntPtr()
-  int dwActiveProcessorMask;
+  external int dwActiveProcessorMask;
 
   @Uint32()
-  int dwNumberOfProcessors;
+  external int dwNumberOfProcessors;
 
   @Uint32()
-  int dwProcessorType;
+  external int dwProcessorType;
 
   @Uint32()
-  int dwAllocationGranularity;
+  external int dwAllocationGranularity;
 
   @Uint16()
-  int wProcessorLevel;
+  external int wProcessorLevel;
 
   @Uint16()
-  int wProcessorRevision;
+  external int wProcessorRevision;
 
   factory SYSTEM_INFO.allocate() => allocate<SYSTEM_INFO>().ref
     ..wProcessorArchitecture = 0
@@ -155,13 +155,13 @@ class SYSTEM_INFO extends Struct {
 /// {@category Struct}
 class PROCESS_INFORMATION extends Struct {
   @IntPtr()
-  int hProcess;
+  external int hProcess;
   @IntPtr()
-  int hThread;
+  external int hThread;
   @Uint32()
-  int dwProcessId;
+  external int dwProcessId;
   @Uint32()
-  int dwThreadId;
+  external int dwThreadId;
 
   factory PROCESS_INFORMATION.allocate() => allocate<PROCESS_INFORMATION>().ref
     ..hProcess = 0
@@ -197,37 +197,37 @@ class PROCESS_INFORMATION extends Struct {
 /// {@category Struct}
 class STARTUPINFO extends Struct {
   @Uint32()
-  int cb;
-  Pointer<Utf16> lpReserved;
-  Pointer<Utf16> lpDesktop;
-  Pointer<Utf16> lpTitle;
+  external int cb;
+  external Pointer<Utf16> lpReserved;
+  external Pointer<Utf16> lpDesktop;
+  external Pointer<Utf16> lpTitle;
   @Uint32()
-  int dwX;
+  external int dwX;
   @Uint32()
-  int dwY;
+  external int dwY;
   @Uint32()
-  int dwXSize;
+  external int dwXSize;
   @Uint32()
-  int dwYSize;
+  external int dwYSize;
   @Uint32()
-  int dwXCountChars;
+  external int dwXCountChars;
   @Uint32()
-  int dwYCountChars;
+  external int dwYCountChars;
   @Uint32()
-  int dwFillAttribute;
+  external int dwFillAttribute;
   @Uint32()
-  int dwFlags;
+  external int dwFlags;
   @Uint16()
-  int wShowWindow;
+  external int wShowWindow;
   @Uint16()
-  int cbReserved2;
-  Pointer<Uint8> lpReserved2;
+  external int cbReserved2;
+  external Pointer<Uint8> lpReserved2;
   @IntPtr()
-  int hStdInput;
+  external int hStdInput;
   @IntPtr()
-  int hStdOutput;
+  external int hStdOutput;
   @IntPtr()
-  int hStdError;
+  external int hStdError;
 
   factory STARTUPINFO.allocate() => allocate<STARTUPINFO>().ref
     ..cb = sizeOf<STARTUPINFO>()
@@ -263,13 +263,13 @@ class STARTUPINFO extends Struct {
 /// {@Category Struct}
 class BIND_OPTS extends Struct {
   @Uint32()
-  int cbStruct;
+  external int cbStruct;
   @Uint32()
-  int grfFlags;
+  external int grfFlags;
   @Uint32()
-  int grfMode;
+  external int grfMode;
   @Uint32()
-  int dwTickCountDeadline;
+  external int dwTickCountDeadline;
 
   factory BIND_OPTS.allocate() => allocate<BIND_OPTS>().ref
     ..cbStruct = 0
@@ -292,17 +292,17 @@ class BIND_OPTS extends Struct {
 /// {@category Struct}
 class SYSTEM_POWER_STATUS extends Struct {
   @Uint8()
-  int ACLineStatus;
+  external int ACLineStatus;
   @Uint8()
-  int BatteryFlag;
+  external int BatteryFlag;
   @Uint8()
-  int BatteryLifePercent;
+  external int BatteryLifePercent;
   @Uint8()
-  int SystemStatusFlag;
+  external int SystemStatusFlag;
   @Uint32()
-  int BatteryLifeTime;
+  external int BatteryLifeTime;
   @Uint32()
-  int BatteryFullLifeTime;
+  external int BatteryFullLifeTime;
 
   factory SYSTEM_POWER_STATUS.allocate() => allocate<SYSTEM_POWER_STATUS>().ref
     ..ACLineStatus = 0
@@ -336,37 +336,37 @@ class SYSTEM_POWER_STATUS extends Struct {
 /// {@category Struct}
 class SYSTEM_BATTERY_STATE extends Struct {
   @Uint8()
-  int AcOnLine;
+  external int AcOnLine;
   @Uint8()
-  int BatteryPresent;
+  external int BatteryPresent;
   @Uint8()
-  int Charging;
+  external int Charging;
   @Uint8()
-  int Discharging;
+  external int Discharging;
 
   @Uint8()
-  int Spare1a;
+  external int Spare1a;
   @Uint8()
-  int Spare1b;
+  external int Spare1b;
   @Uint8()
-  int Spare1c;
+  external int Spare1c;
 
   @Uint8()
-  int Tag;
+  external int Tag;
 
   @Uint32()
-  int MaxCapacity;
+  external int MaxCapacity;
   @Uint32()
-  int RemainingCapacity;
+  external int RemainingCapacity;
   @Uint32()
-  int Rate;
+  external int Rate;
   @Uint32()
-  int EstimatedTime;
+  external int EstimatedTime;
 
   @Uint32()
-  int DefaultAlert1;
+  external int DefaultAlert1;
   @Uint32()
-  int DefaultAlert2;
+  external int DefaultAlert2;
 
   factory SYSTEM_BATTERY_STATE.allocate() =>
       allocate<SYSTEM_BATTERY_STATE>().ref
@@ -398,38 +398,38 @@ class SYSTEM_BATTERY_STATE extends Struct {
 /// {@category Struct}
 class STARTUPINFOEX extends Struct {
   @Uint32()
-  int cb;
-  Pointer<Utf16> lpReserved;
-  Pointer<Utf16> lpDesktop;
-  Pointer<Utf16> lpTitle;
+  external int cb;
+  external Pointer<Utf16> lpReserved;
+  external Pointer<Utf16> lpDesktop;
+  external Pointer<Utf16> lpTitle;
   @Uint32()
-  int dwX;
+  external int dwX;
   @Uint32()
-  int dwY;
+  external int dwY;
   @Uint32()
-  int dwXSize;
+  external int dwXSize;
   @Uint32()
-  int dwYSize;
+  external int dwYSize;
   @Uint32()
-  int dwXCountChars;
+  external int dwXCountChars;
   @Uint32()
-  int dwYCountChars;
+  external int dwYCountChars;
   @Uint32()
-  int dwFillAttribute;
+  external int dwFillAttribute;
   @Uint32()
-  int dwFlags;
+  external int dwFlags;
   @Uint16()
-  int wShowWindow;
+  external int wShowWindow;
   @Uint16()
-  int cbReserved2;
-  Pointer<Uint8> lpReserved2;
+  external int cbReserved2;
+  external Pointer<Uint8> lpReserved2;
   @IntPtr()
-  int hStdInput;
+  external int hStdInput;
   @IntPtr()
-  int hStdOutput;
+  external int hStdOutput;
   @IntPtr()
-  int hStdError;
-  Pointer lpAttributeList;
+  external int hStdError;
+  external Pointer lpAttributeList;
 
   factory STARTUPINFOEX.allocate() => allocate<STARTUPINFOEX>().ref
     ..cb = sizeOf<STARTUPINFOEX>()
@@ -470,12 +470,12 @@ class STARTUPINFOEX extends Struct {
 /// {@category Struct}
 class SECURITY_ATTRIBUTES extends Struct {
   @Uint32()
-  int nLength;
+  external int nLength;
 
-  Pointer<Void> lpSecurityDescriptor;
+  external Pointer<Void> lpSecurityDescriptor;
 
   @Int32()
-  int bInheritHandle;
+  external int bInheritHandle;
 }
 
 // typedef struct _SECURITY_DESCRIPTOR {
@@ -495,18 +495,18 @@ class SECURITY_ATTRIBUTES extends Struct {
 /// {@category Struct}
 class SECURITY_DESCRIPTOR extends Struct {
   @Uint8()
-  int Revision;
+  external int Revision;
 
   @Uint8()
-  int Sbz1;
+  external int Sbz1;
 
   @Int16()
-  int Control;
+  external int Control;
 
-  Pointer<IntPtr> Owner;
-  Pointer<IntPtr> Group;
-  Pointer<IntPtr> Sacl;
-  Pointer<IntPtr> Dacl;
+  external Pointer<IntPtr> Owner;
+  external Pointer<IntPtr> Group;
+  external Pointer<IntPtr> Sacl;
+  external Pointer<IntPtr> Dacl;
 
   factory SECURITY_DESCRIPTOR.allocate() => allocate<SECURITY_DESCRIPTOR>().ref
     ..Revision = 0
@@ -531,15 +531,15 @@ class SECURITY_DESCRIPTOR extends Struct {
 /// {@category Struct}
 class SOLE_AUTHENTICATION_SERVICE extends Struct {
   @Uint32()
-  int dwAuthnSvc;
+  external int dwAuthnSvc;
 
   @Uint32()
-  int dwAuthzSvc;
+  external int dwAuthzSvc;
 
-  Pointer<Utf16> pPrincipalName;
+  external Pointer<Utf16> pPrincipalName;
 
   @Int32()
-  int hr;
+  external int hr;
 
   factory SOLE_AUTHENTICATION_SERVICE.allocate() =>
       allocate<SOLE_AUTHENTICATION_SERVICE>().ref
@@ -571,21 +571,22 @@ class SOLE_AUTHENTICATION_SERVICE extends Struct {
 /// VARIANTs must be initialized with [VariantInit] before their use.
 
 /// {@category Struct}
+
 class VARIANT extends Struct {
   // The size of a union type equals the largest member it can contain, which in
   // the case of VARIANT is a struct of two pointers (BRECORD).
 
   @Uint16()
-  int vt;
+  external int vt;
   @Uint16()
-  int wReserved1;
+  external int wReserved1;
   @Uint16()
-  int wReserved2;
+  external int wReserved2;
   @Uint16()
-  int wReserved3;
+  external int wReserved3;
 
-  Pointer ptr;
-  Pointer ptr2;
+  external Pointer ptr;
+  external Pointer ptr2;
 
   bool get isPointer => vt & VARENUM.VT_PTR == VARENUM.VT_PTR;
 
@@ -611,8 +612,8 @@ class VARIANT extends Struct {
 ///
 /// {@category Struct}
 class COMDLG_FILTERSPEC extends Struct {
-  Pointer<Utf16> pszName;
-  Pointer<Utf16> pszSpec;
+  external Pointer<Utf16> pszName;
+  external Pointer<Utf16> pszSpec;
 
   factory COMDLG_FILTERSPEC.allocate() => allocate<COMDLG_FILTERSPEC>().ref
     ..pszName = nullptr
@@ -630,11 +631,11 @@ class COMDLG_FILTERSPEC extends Struct {
 /// {@category Struct}
 class ACCEL extends Struct {
   @Uint8()
-  int fVirt;
+  external int fVirt;
   @Uint16()
-  int key;
+  external int key;
   @Uint16()
-  int cmd;
+  external int cmd;
 
   factory ACCEL.allocate() => allocate<ACCEL>().ref
     ..fVirt = 0
@@ -654,25 +655,25 @@ class ACCEL extends Struct {
 /// {@category Struct}
 class MONITORINFO extends Struct {
   @Uint32()
-  int cbSize;
+  external int cbSize;
   @Int32()
-  int rcMonitorLeft;
+  external int rcMonitorLeft;
   @Int32()
-  int rcMonitorTop;
+  external int rcMonitorTop;
   @Int32()
-  int rcMonitorRight;
+  external int rcMonitorRight;
   @Int32()
-  int rcMonitorBottom;
+  external int rcMonitorBottom;
   @Int32()
-  int rcWorkLeft;
+  external int rcWorkLeft;
   @Int32()
-  int rcWorkTop;
+  external int rcWorkTop;
   @Int32()
-  int rcWorkRight;
+  external int rcWorkRight;
   @Int32()
-  int rcWorkBottom;
+  external int rcWorkBottom;
   @Uint32()
-  int dwFlags;
+  external int dwFlags;
 
   factory MONITORINFO.allocate() => allocate<MONITORINFO>().ref
     ..cbSize = sizeOf<MONITORINFO>()
@@ -706,29 +707,29 @@ class MONITORINFO extends Struct {
 /// {@category Struct}
 class CHOOSECOLOR extends Struct {
   @Uint32()
-  int lStructSize;
+  external int lStructSize;
 
   @IntPtr()
-  int hwndOwner;
+  external int hwndOwner;
 
   @IntPtr()
-  int hInstance;
+  external int hInstance;
 
   /// COLORREF is a DWORD that contains RGB values in the form 0x00bbggrr
   @Int32()
-  int rgbResult;
+  external int rgbResult;
 
   /// COLORREF is a DWORD that contains RGB values in the form 0x00bbggrr
-  Pointer<Uint32> lpCustColors;
+  external Pointer<Uint32> lpCustColors;
 
   @Uint32()
-  int Flags;
+  external int Flags;
 
   @IntPtr()
-  int lCustData;
+  external int lCustData;
 
-  Pointer<IntPtr> lpfnHook;
-  Pointer<Uint16> lpTemplateName;
+  external Pointer<IntPtr> lpfnHook;
+  external Pointer<Uint16> lpTemplateName;
 
   factory CHOOSECOLOR.allocate() => allocate<CHOOSECOLOR>().ref
     ..lStructSize = sizeOf<CHOOSECOLOR>()
@@ -764,23 +765,23 @@ class CHOOSECOLOR extends Struct {
 /// {@category Struct}
 class FINDREPLACE extends Struct {
   @Uint32()
-  int lStructSize;
+  external int lStructSize;
   @IntPtr()
-  int hwndOwner;
+  external int hwndOwner;
   @IntPtr()
-  int hInstance;
+  external int hInstance;
   @Uint32()
-  int Flags;
-  Pointer<Utf16> lpstrFindWhat;
-  Pointer<Utf16> lpstrReplaceWith;
+  external int Flags;
+  external Pointer<Utf16> lpstrFindWhat;
+  external Pointer<Utf16> lpstrReplaceWith;
   @Uint16()
-  int wFindWhatLen;
+  external int wFindWhatLen;
   @Uint16()
-  int wReplaceWithLen;
+  external int wReplaceWithLen;
   @IntPtr()
-  int lCustData;
-  Pointer<NativeFunction> lpfnHook;
-  Pointer<Utf16> lpTemplateName;
+  external int lCustData;
+  external Pointer<NativeFunction> lpfnHook;
+  external Pointer<Utf16> lpTemplateName;
 
   factory FINDREPLACE.allocate() => allocate<FINDREPLACE>().ref
     ..lStructSize = 0
@@ -822,38 +823,38 @@ class FINDREPLACE extends Struct {
 /// {@category Struct}
 class CHOOSEFONT extends Struct {
   @Uint32()
-  int lStructSize;
+  external int lStructSize;
   @IntPtr()
-  int hwndOwner;
+  external int hwndOwner;
   @IntPtr()
-  int hDC;
+  external int hDC;
 
-  Pointer<LOGFONT> lpLogFont;
+  external Pointer<LOGFONT> lpLogFont;
 
   @Int32()
-  int iPointSize;
+  external int iPointSize;
 
   @Uint32()
-  int Flags;
+  external int Flags;
 
   @Int32()
-  int rgbColors;
+  external int rgbColors;
   @IntPtr()
-  int lCustData;
+  external int lCustData;
 
-  Pointer<NativeFunction> lpfnHook;
-  Pointer<Utf16> lpTemplateName;
+  external Pointer<NativeFunction> lpfnHook;
+  external Pointer<Utf16> lpTemplateName;
   @IntPtr()
-  int hInstance;
-  Pointer<Utf16> lpszStyle;
+  external int hInstance;
+  external Pointer<Utf16> lpszStyle;
   @Uint16()
-  int nFontType;
+  external int nFontType;
   @Uint16()
-  int reserved;
+  external int reserved;
   @Int32()
-  int nSizeMin;
+  external int nSizeMin;
   @Int32()
-  int nSizeMax;
+  external int nSizeMax;
 
   factory CHOOSEFONT.allocate() => allocate<CHOOSEFONT>().ref
     ..lStructSize = 0
@@ -908,51 +909,51 @@ class CHOOSEFONT extends Struct {
 /// {@category Struct}
 class OPENFILENAME extends Struct {
   @Uint32()
-  int lStructSize;
+  external int lStructSize;
   @IntPtr()
-  int hwndOwner;
+  external int hwndOwner;
   @IntPtr()
-  int hInstance;
+  external int hInstance;
 
-  Pointer<Utf16> lpstrFilter;
-  Pointer<Utf16> lpstrCustomFilter;
-
-  @Uint32()
-  int nMaxCustFilter;
-  @Uint32()
-  int nFilterIndex;
-
-  Pointer<Utf16> lpstrFile;
-  @Uint32()
-  int nMaxFile;
-
-  Pointer<Utf16> lpstrFileTitle;
-  @Uint32()
-  int nMaxFileTitle;
-
-  Pointer<Utf16> lpstrInitialDir;
-  Pointer<Utf16> lpstrTitle;
+  external Pointer<Utf16> lpstrFilter;
+  external Pointer<Utf16> lpstrCustomFilter;
 
   @Uint32()
-  int Flags;
+  external int nMaxCustFilter;
+  @Uint32()
+  external int nFilterIndex;
+
+  external Pointer<Utf16> lpstrFile;
+  @Uint32()
+  external int nMaxFile;
+
+  external Pointer<Utf16> lpstrFileTitle;
+  @Uint32()
+  external int nMaxFileTitle;
+
+  external Pointer<Utf16> lpstrInitialDir;
+  external Pointer<Utf16> lpstrTitle;
+
+  @Uint32()
+  external int Flags;
   @Uint16()
-  int nFileOffset;
+  external int nFileOffset;
   @Uint16()
-  int nFileExtension;
+  external int nFileExtension;
 
-  Pointer<Utf16> lpstrDefExt;
+  external Pointer<Utf16> lpstrDefExt;
 
   @IntPtr()
-  int lCustData;
+  external int lCustData;
 
-  Pointer<NativeFunction> lpfnHook;
-  Pointer<Utf16> lpTemplateName;
-  Pointer<Void> pvReserved;
+  external Pointer<NativeFunction> lpfnHook;
+  external Pointer<Utf16> lpTemplateName;
+  external Pointer<Void> pvReserved;
 
   @Uint32()
-  int dwReserved;
+  external int dwReserved;
   @Uint32()
-  int FlagsEx;
+  external int FlagsEx;
 
   factory OPENFILENAME.allocate() => allocate<OPENFILENAME>().ref
     ..lStructSize = 0
@@ -1002,66 +1003,66 @@ class OPENFILENAME extends Struct {
 /// {@category Struct}
 class LOGFONT extends Struct {
   @Int32()
-  int lfHeight;
+  external int lfHeight;
   @Int32()
-  int lfWidth;
+  external int lfWidth;
   @Int32()
-  int lfEscapement;
+  external int lfEscapement;
   @Int32()
-  int lfOrientation;
+  external int lfOrientation;
   @Int32()
-  int lfWeight;
+  external int lfWeight;
   @Uint8()
-  int lfItalic;
+  external int lfItalic;
   @Uint8()
-  int lfUnderline;
+  external int lfUnderline;
   @Uint8()
-  int lfStrikeOut;
+  external int lfStrikeOut;
   @Uint8()
-  int lfCharSet;
+  external int lfCharSet;
   @Uint8()
-  int lfOutPrecision;
+  external int lfOutPrecision;
   @Uint8()
-  int lfClipPrecision;
+  external int lfClipPrecision;
   @Uint8()
-  int lfQuality;
+  external int lfQuality;
   @Uint8()
-  int lfPitchAndFamily;
+  external int lfPitchAndFamily;
 
   // Need to use @Int32() here, both because of the lack of fixed-size
   // arrays, and because @Int64() doesn't line up with word boundaries
   @Int32()
-  int lfFaceName1;
+  external int lfFaceName1;
   @Int32()
-  int lfFaceName2;
+  external int lfFaceName2;
   @Int32()
-  int lfFaceName3;
+  external int lfFaceName3;
   @Int32()
-  int lfFaceName4;
+  external int lfFaceName4;
   @Int32()
-  int lfFaceName5;
+  external int lfFaceName5;
   @Int32()
-  int lfFaceName6;
+  external int lfFaceName6;
   @Int32()
-  int lfFaceName7;
+  external int lfFaceName7;
   @Int32()
-  int lfFaceName8;
+  external int lfFaceName8;
   @Int32()
-  int lfFaceName9;
+  external int lfFaceName9;
   @Int32()
-  int lfFaceName10;
+  external int lfFaceName10;
   @Int32()
-  int lfFaceName11;
+  external int lfFaceName11;
   @Int32()
-  int lfFaceName12;
+  external int lfFaceName12;
   @Int32()
-  int lfFaceName13;
+  external int lfFaceName13;
   @Int32()
-  int lfFaceName14;
+  external int lfFaceName14;
   @Int32()
-  int lfFaceName15;
+  external int lfFaceName15;
   @Int32()
-  int lfFaceName16;
+  external int lfFaceName16;
 
   Pointer<Utf16> get lfFaceName =>
       addressOf.cast<Uint8>().elementAt(28).cast<Utf16>();
@@ -1151,30 +1152,30 @@ class ENUMLOGFONTEX extends Struct {
 ///
 /// {@category Struct}
 class CREATESTRUCT extends Struct {
-  Pointer<Void> lpCreateParams;
+  external Pointer<Void> lpCreateParams;
 
   @IntPtr()
-  int hInstance;
+  external int hInstance;
   @IntPtr()
-  int hMenu;
+  external int hMenu;
   @IntPtr()
-  int hwndParent;
+  external int hwndParent;
   @Int32()
-  int cy;
+  external int cy;
   @Int32()
-  int cx;
+  external int cx;
   @Int32()
-  int y;
+  external int y;
   @Int32()
-  int x;
+  external int x;
   @Int32()
-  int style;
+  external int style;
 
-  Pointer<Utf16> lpszName;
-  Pointer<Utf16> lpszClass;
+  external Pointer<Utf16> lpszName;
+  external Pointer<Utf16> lpszClass;
 
   @Uint32()
-  int dwExStyle;
+  external int dwExStyle;
 
   factory CREATESTRUCT.allocate() => allocate<CREATESTRUCT>().ref
     ..lpCreateParams = nullptr
@@ -1206,18 +1207,18 @@ class CREATESTRUCT extends Struct {
 /// {@category Struct}
 class MENUINFO extends Struct {
   @Uint32()
-  int cbSize;
+  external int cbSize;
   @Uint32()
-  int fMask;
+  external int fMask;
   @Uint32()
-  int dwStyle;
+  external int dwStyle;
   @Uint32()
-  int cyMax;
+  external int cyMax;
   @IntPtr()
-  int hbrBack;
+  external int hbrBack;
   @Uint32()
-  int dwContextHelpID;
-  Pointer<Uint32> dwMenuData;
+  external int dwContextHelpID;
+  external Pointer<Uint32> dwMenuData;
 
   factory MENUINFO.allocate() => allocate<MENUINFO>().ref
     ..cbSize = 0
@@ -1249,36 +1250,36 @@ class MENUINFO extends Struct {
 /// {@category Struct}
 class MENUITEMINFO extends Struct {
   @Uint32()
-  int cbSize;
+  external int cbSize;
 
   @Uint32()
-  int fMask;
+  external int fMask;
 
   @Uint32()
-  int fType;
+  external int fType;
 
   @Uint32()
-  int fState;
+  external int fState;
 
   @Uint32()
-  int wID;
+  external int wID;
 
   @IntPtr()
-  int hSubMenu;
+  external int hSubMenu;
 
   @IntPtr()
-  int hbmpChecked;
+  external int hbmpChecked;
   @IntPtr()
-  int hbmpUnchecked;
+  external int hbmpUnchecked;
 
-  Pointer<Uint32> dwItemData;
-  Pointer<Utf16> dwTypeData;
+  external Pointer<Uint32> dwItemData;
+  external Pointer<Utf16> dwTypeData;
 
   @Uint32()
-  int cch;
+  external int cch;
 
   @IntPtr()
-  int hbmpItem;
+  external int hbmpItem;
 
   factory MENUITEMINFO.allocate() => allocate<MENUITEMINFO>().ref
     ..cbSize = 0
@@ -1310,28 +1311,28 @@ class MENUITEMINFO extends Struct {
 /// {@category Struct}
 class MSG extends Struct {
   @IntPtr()
-  int hwnd;
+  external int hwnd;
 
   @Uint32()
-  int message;
+  external int message;
 
   @IntPtr()
-  int wParam;
+  external int wParam;
 
   @IntPtr()
-  int lParam;
+  external int lParam;
 
   @Uint32()
-  int time;
+  external int time;
 
   @Int32()
-  int ptX;
+  external int ptX;
 
   @Int32()
-  int ptY;
+  external int ptY;
 
   @Uint32()
-  int lPrivate;
+  external int lPrivate;
 
   factory MSG.allocate() => allocate<MSG>().ref
     ..hwnd = 0
@@ -1354,10 +1355,10 @@ class MSG extends Struct {
 /// {@category Struct}
 class SIZE extends Struct {
   @Int32()
-  int cx;
+  external int cx;
 
   @Int32()
-  int cy;
+  external int cy;
 
   factory SIZE.allocate() => allocate<SIZE>().ref
     ..cx = 0
@@ -1378,29 +1379,29 @@ class SIZE extends Struct {
 /// {@category Struct}
 class MINMAXINFO extends Struct {
   @Int32()
-  int ptReservedX;
+  external int ptReservedX;
   @Int32()
-  int ptReservedY;
+  external int ptReservedY;
 
   @Int32()
-  int ptMaxSizeX;
+  external int ptMaxSizeX;
   @Int32()
-  int ptMaxSizeY;
+  external int ptMaxSizeY;
 
   @Int32()
-  int ptMaxPositionX;
+  external int ptMaxPositionX;
   @Int32()
-  int ptMaxPositionY;
+  external int ptMaxPositionY;
 
   @Int32()
-  int ptMinTrackSizeX;
+  external int ptMinTrackSizeX;
   @Int32()
-  int ptMinTrackSizeY;
+  external int ptMinTrackSizeY;
 
   @Int32()
-  int ptMaxTrackSizeX;
+  external int ptMaxTrackSizeX;
   @Int32()
-  int ptMaxTrackSizeY;
+  external int ptMaxTrackSizeY;
 }
 
 // typedef struct tagPOINT {
@@ -1413,10 +1414,10 @@ class MINMAXINFO extends Struct {
 /// {@category Struct}
 class POINT extends Struct {
   @Int32()
-  int x;
+  external int x;
 
   @Int32()
-  int y;
+  external int y;
 
   factory POINT.allocate() => allocate<POINT>().ref
     ..x = 0
@@ -1439,29 +1440,29 @@ class POINT extends Struct {
 /// {@category Struct}
 class PAINTSTRUCT extends Struct {
   @IntPtr()
-  int hdc;
+  external int hdc;
   @Int32()
-  int fErase;
+  external int fErase;
   @Int32()
-  int rcPaintL;
+  external int rcPaintL;
   @Int32()
-  int rcPaintT;
+  external int rcPaintT;
   @Int32()
-  int rcPaintR;
+  external int rcPaintR;
   @Int32()
-  int rcPaintB;
+  external int rcPaintB;
   @Int32()
-  int fRestore;
+  external int fRestore;
   @Int32()
-  int fIncUpdate;
+  external int fIncUpdate;
   @Uint64()
-  int rgb1;
+  external int rgb1;
   @Uint64()
-  int rgb2;
+  external int rgb2;
   @Uint64()
-  int rgb3;
+  external int rgb3;
   @Uint64()
-  int rgb4;
+  external int rgb4;
 
   factory PAINTSTRUCT.allocate() => allocate<PAINTSTRUCT>().ref
     ..hdc = 0
@@ -1491,13 +1492,13 @@ class PAINTSTRUCT extends Struct {
 /// {@category Struct}
 class RECT extends Struct {
   @Int32()
-  int left;
+  external int left;
   @Int32()
-  int top;
+  external int top;
   @Int32()
-  int right;
+  external int right;
   @Int32()
-  int bottom;
+  external int bottom;
 
   factory RECT.allocate() => allocate<RECT>().ref
     ..left = 0
@@ -1534,26 +1535,26 @@ class RECT extends Struct {
 /// {@category Struct}
 class MOUSEINPUT extends Struct {
   @Uint32()
-  int type;
+  external int type;
 
   @Int32()
-  int padding;
+  external int padding;
 
   @Int32()
-  int dx;
+  external int dx;
   @Int32()
-  int dy;
+  external int dy;
 
   @Uint32()
-  int mouseData;
+  external int mouseData;
 
   @Uint32()
-  int dwFlags;
+  external int dwFlags;
 
   @Uint32()
-  int time;
+  external int time;
 
-  Pointer<Uint32> dwExtraInfo;
+  external Pointer<Uint32> dwExtraInfo;
 
   factory MOUSEINPUT.allocate() => allocate<MOUSEINPUT>().ref
     ..type = INPUT_MOUSE
@@ -1578,27 +1579,27 @@ class MOUSEINPUT extends Struct {
 /// {@category Struct}
 class KEYBDINPUT extends Struct {
   @Int32()
-  int type;
+  external int type;
 
   @Int32()
-  int padding1;
+  external int padding1;
 
   @Uint16()
-  int wVk;
+  external int wVk;
 
   @Uint16()
-  int wScan;
+  external int wScan;
 
   @Uint32()
-  int dwFlags;
+  external int dwFlags;
 
   @Uint32()
-  int time;
+  external int time;
 
-  Pointer<Uint32> dwExtraInfo;
+  external Pointer<Uint32> dwExtraInfo;
 
   @Int64()
-  int padding2;
+  external int padding2;
 
   factory KEYBDINPUT.allocate() => allocate<KEYBDINPUT>().ref
     ..type = INPUT_KEYBOARD
@@ -1621,18 +1622,18 @@ class KEYBDINPUT extends Struct {
 /// {@category Struct}
 class HARDWAREINPUT extends Struct {
   @Int32()
-  int type;
+  external int type;
 
   @Int32()
-  int padding;
+  external int padding;
 
   @Uint32()
-  int uMsg;
+  external int uMsg;
 
   @Uint16()
-  int wParamL;
+  external int wParamL;
   @Uint16()
-  int wParamH;
+  external int wParamH;
 
   factory HARDWAREINPUT.allocate() => allocate<HARDWAREINPUT>().ref
     ..type = INPUT_HARDWARE
@@ -1671,45 +1672,45 @@ class HARDWAREINPUT extends Struct {
 /// {@category Struct}
 class TEXTMETRIC extends Struct {
   @Int32()
-  int tmHeight;
+  external int tmHeight;
   @Int32()
-  int tmAscent;
+  external int tmAscent;
   @Int32()
-  int tmDescent;
+  external int tmDescent;
   @Int32()
-  int tmInternalLeading;
+  external int tmInternalLeading;
   @Int32()
-  int tmExternalLeading;
+  external int tmExternalLeading;
   @Int32()
-  int tmAveCharWidth;
+  external int tmAveCharWidth;
   @Int32()
-  int tmMaxCharWidth;
+  external int tmMaxCharWidth;
   @Int32()
-  int tmWeight;
+  external int tmWeight;
   @Int32()
-  int tmOverhang;
+  external int tmOverhang;
   @Int32()
-  int tmDigitizedAspectX;
+  external int tmDigitizedAspectX;
   @Int32()
-  int tmDigitizedAspectY;
+  external int tmDigitizedAspectY;
   @Int16()
-  int tmFirstChar;
+  external int tmFirstChar;
   @Int16()
-  int tmLastChar;
+  external int tmLastChar;
   @Int16()
-  int tmDefaultChar;
+  external int tmDefaultChar;
   @Int16()
-  int tmBreakChar;
+  external int tmBreakChar;
   @Uint8()
-  int tmItalic;
+  external int tmItalic;
   @Uint8()
-  int tmUnderlined;
+  external int tmUnderlined;
   @Uint8()
-  int tmStruckOut;
+  external int tmStruckOut;
   @Uint8()
-  int tmPitchAndFamily;
+  external int tmPitchAndFamily;
   @Uint8()
-  int tmCharSet;
+  external int tmCharSet;
 
   factory TEXTMETRIC.allocate() => allocate<TEXTMETRIC>().ref
     ..tmHeight = 0
@@ -1751,19 +1752,19 @@ class TEXTMETRIC extends Struct {
 /// {@category Struct}
 class SCROLLINFO extends Struct {
   @Uint32()
-  int cbSize;
+  external int cbSize;
   @Uint32()
-  int fMask;
+  external int fMask;
   @Int32()
-  int nMin;
+  external int nMin;
   @Int32()
-  int nMax;
+  external int nMax;
   @Uint32()
-  int nPage;
+  external int nPage;
   @Int32()
-  int nPos;
+  external int nPos;
   @Int32()
-  int nTrackPos;
+  external int nTrackPos;
 
   factory SCROLLINFO.allocate() => allocate<SCROLLINFO>().ref
     ..cbSize = 0
@@ -1801,31 +1802,31 @@ class SCROLLINFO extends Struct {
 /// {@category Struct}
 class SHELLEXECUTEINFO extends Struct {
   @Uint32()
-  int cbSize;
+  external int cbSize;
   @Uint32()
-  int fMask;
+  external int fMask;
   @IntPtr()
-  int hwnd;
+  external int hwnd;
 
-  Pointer<Utf16> lpVerb;
-  Pointer<Utf16> lpFile;
-  Pointer<Utf16> lpParameters;
-  Pointer<Utf16> lpDirectory;
+  external Pointer<Utf16> lpVerb;
+  external Pointer<Utf16> lpFile;
+  external Pointer<Utf16> lpParameters;
+  external Pointer<Utf16> lpDirectory;
 
   @Int32()
-  int nShow;
+  external int nShow;
   @IntPtr()
-  int hInstApp;
-  Pointer lpIDList;
-  Pointer<Utf16> lpClass;
+  external int hInstApp;
+  external Pointer lpIDList;
+  external Pointer<Utf16> lpClass;
   @IntPtr()
-  int hkeyClass;
+  external int hkeyClass;
   @Uint32()
-  int dwHotKey;
+  external int dwHotKey;
   @IntPtr()
-  int hMonitor;
+  external int hMonitor;
   @IntPtr()
-  int hProcess;
+  external int hProcess;
 
   factory SHELLEXECUTEINFO.allocate() => allocate<SHELLEXECUTEINFO>().ref
     ..cbSize = sizeOf<SHELLEXECUTEINFO>()
@@ -1858,11 +1859,11 @@ class SHELLEXECUTEINFO extends Struct {
 /// {@category Struct}
 class SHQUERYRBINFO extends Struct {
   @Int32()
-  int cbSize;
+  external int cbSize;
   @Int64()
-  int i64Size;
+  external int i64Size;
   @Int64()
-  int i64NumItems;
+  external int i64NumItems;
 
   factory SHQUERYRBINFO.allocate() => allocate<SHQUERYRBINFO>().ref
     ..cbSize = sizeOf<SHQUERYRBINFO>()
@@ -1884,13 +1885,13 @@ class SHQUERYRBINFO extends Struct {
 /// {@category Struct}
 class GUID extends Struct {
   @Uint32()
-  int Data1;
+  external int Data1;
   @Uint16()
-  int Data2;
+  external int Data2;
   @Uint16()
-  int Data3;
+  external int Data3;
   @Uint64()
-  int Data4;
+  external int Data4;
 
   factory GUID.allocate() => allocate<GUID>().ref
     ..Data1 = 0
@@ -1962,15 +1963,15 @@ class GUID extends Struct {
 ///
 /// {@category Struct}
 class CREDENTIAL_ATTRIBUTE extends Struct {
-  Pointer<Utf16> Keyword;
+  external Pointer<Utf16> Keyword;
 
   @Uint32()
-  int Flags;
+  external int Flags;
 
   @Uint32()
-  int ValueSize;
+  external int ValueSize;
 
-  Pointer<Uint8> Value;
+  external Pointer<Uint8> Value;
 
   factory CREDENTIAL_ATTRIBUTE.allocate() =>
       allocate<CREDENTIAL_ATTRIBUTE>().ref
@@ -2000,28 +2001,28 @@ class CREDENTIAL_ATTRIBUTE extends Struct {
 /// {@category Struct}
 class CREDENTIAL extends Struct {
   @Uint32()
-  int Flags;
+  external int Flags;
   @Uint32()
-  int Type;
+  external int Type;
 
-  Pointer<Utf16> TargetName;
-  Pointer<Utf16> Comment;
-  Pointer<FILETIME> LastWritten;
-
-  @Uint32()
-  int CredentialBlobSize;
-
-  Pointer<Uint8> CredentialBlob;
+  external Pointer<Utf16> TargetName;
+  external Pointer<Utf16> Comment;
+  external Pointer<FILETIME> LastWritten;
 
   @Uint32()
-  int Persist;
+  external int CredentialBlobSize;
+
+  external Pointer<Uint8> CredentialBlob;
 
   @Uint32()
-  int AttributeCount;
+  external int Persist;
 
-  Pointer<CREDENTIAL_ATTRIBUTE> Attributes;
-  Pointer<Utf16> TargetAlias;
-  Pointer<Utf16> UserName;
+  @Uint32()
+  external int AttributeCount;
+
+  external Pointer<CREDENTIAL_ATTRIBUTE> Attributes;
+  external Pointer<Utf16> TargetAlias;
+  external Pointer<Utf16> UserName;
 
   factory CREDENTIAL.allocate() => allocate<CREDENTIAL>().ref
     ..Flags = 0
@@ -2076,35 +2077,35 @@ class CREDENTIAL extends Struct {
 /// {@category Struct}
 class BITMAPINFO extends Struct {
   @Uint32()
-  int biSize;
+  external int biSize;
   @Int32()
-  int biWidth;
+  external int biWidth;
   @Int32()
-  int biHeight;
+  external int biHeight;
   @Uint16()
-  int biPlanes;
+  external int biPlanes;
   @Uint16()
-  int biBitCount;
+  external int biBitCount;
   @Uint32()
-  int biCompression;
+  external int biCompression;
   @Uint32()
-  int biSizeImage;
+  external int biSizeImage;
   @Int32()
-  int biXPelsPerMeter;
+  external int biXPelsPerMeter;
   @Int32()
-  int biYPelsPerMeter;
+  external int biYPelsPerMeter;
   @Uint32()
-  int biClrUsed;
+  external int biClrUsed;
   @Uint32()
-  int biClrImportant;
+  external int biClrImportant;
   @Uint8()
-  int rgbBlue;
+  external int rgbBlue;
   @Uint8()
-  int rgbGreen;
+  external int rgbGreen;
   @Uint8()
-  int rgbRed;
+  external int rgbRed;
   @Uint8()
-  int rgbReserved;
+  external int rgbReserved;
 
   factory BITMAPINFO.allocate() => allocate<BITMAPINFO>().ref
     ..biSize = 44 // default to single element RGBQUAD
@@ -2135,9 +2136,9 @@ class BITMAPINFO extends Struct {
 /// {@category Struct}
 class FILETIME extends Struct {
   @Uint32()
-  int dwLowDateTime;
+  external int dwLowDateTime;
   @Uint32()
-  int dwHighDateTime;
+  external int dwHighDateTime;
 
   factory FILETIME.allocate() => allocate<FILETIME>().ref
     ..dwLowDateTime = 0
@@ -2166,39 +2167,39 @@ class FILETIME extends Struct {
 /// {@category Struct}
 class KNOWNFOLDER_DEFINITION extends Struct {
   @Int32()
-  int category;
-  Pointer<Utf16> pszName;
-  Pointer<Utf16> pszDescription;
+  external int category;
+  external Pointer<Utf16> pszName;
+  external Pointer<Utf16> pszDescription;
 
   @Uint32()
-  int fidParent_guid1;
+  external int fidParent_guid1;
   @Uint16()
-  int fidParent_guid2;
+  external int fidParent_guid2;
   @Uint16()
-  int fidParent_guid3;
+  external int fidParent_guid3;
   @Uint64()
-  int fidParent_guid4;
+  external int fidParent_guid4;
 
-  Pointer<Utf16> pszRelativePath;
-  Pointer<Utf16> pszParsingName;
-  Pointer<Utf16> pszTooltip;
-  Pointer<Utf16> pszLocalizedName;
-  Pointer<Utf16> pszIcon;
-  Pointer<Utf16> pszSecurity;
-
-  @Uint32()
-  int dwAttributes;
-  @Uint32()
-  int kfdFlags;
+  external Pointer<Utf16> pszRelativePath;
+  external Pointer<Utf16> pszParsingName;
+  external Pointer<Utf16> pszTooltip;
+  external Pointer<Utf16> pszLocalizedName;
+  external Pointer<Utf16> pszIcon;
+  external Pointer<Utf16> pszSecurity;
 
   @Uint32()
-  int ftidType_guid1;
+  external int dwAttributes;
+  @Uint32()
+  external int kfdFlags;
+
+  @Uint32()
+  external int ftidType_guid1;
   @Uint16()
-  int ftidType_guid2;
+  external int ftidType_guid2;
   @Uint16()
-  int ftidType_guid3;
+  external int ftidType_guid3;
   @Uint64()
-  int ftidType_guid4;
+  external int ftidType_guid4;
 
   factory KNOWNFOLDER_DEFINITION.allocate() =>
       allocate<KNOWNFOLDER_DEFINITION>().ref
@@ -2234,9 +2235,9 @@ class KNOWNFOLDER_DEFINITION extends Struct {
 /// {@category Struct}
 class SHITEMID extends Struct {
   @Uint16()
-  int cb;
+  external int cb;
   @Uint8()
-  int abID;
+  external int abID;
 
   factory SHITEMID.allocate() => allocate<SHITEMID>().ref
     ..cb = 0
@@ -2254,14 +2255,14 @@ class SHITEMID extends Struct {
 ///
 /// {@category Struct}
 class DISPPARAMS extends Struct {
-  Pointer rgvarg;
-  Pointer<Int32> rgdispidNamedArgs;
+  external Pointer rgvarg;
+  external Pointer<Int32> rgdispidNamedArgs;
 
   @Int16()
-  int cArgs;
+  external int cArgs;
 
   @Int16()
-  int cNamedArgs;
+  external int cNamedArgs;
 
   factory DISPPARAMS.allocate() => allocate<DISPPARAMS>().ref
     ..rgvarg = nullptr
@@ -2282,9 +2283,9 @@ class DISPPARAMS extends Struct {
 /// {@category Struct}
 class CONSOLE_CURSOR_INFO extends Struct {
   @Uint32()
-  int dwSize;
+  external int dwSize;
   @Int32()
-  int bVisible;
+  external int bVisible;
 
   factory CONSOLE_CURSOR_INFO.allocate() => allocate<CONSOLE_CURSOR_INFO>().ref
     ..dwSize = 0
@@ -2304,32 +2305,32 @@ class CONSOLE_CURSOR_INFO extends Struct {
 /// {@category Struct}
 class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
   @Int16()
-  int dwSizeX;
+  external int dwSizeX;
 
   @Int16()
-  int dwSizeY;
+  external int dwSizeY;
 
   @Int16()
-  int dwCursorPositionX;
+  external int dwCursorPositionX;
   @Int16()
-  int dwCursorPositionY;
+  external int dwCursorPositionY;
 
   @Uint16()
-  int wAttributes;
+  external int wAttributes;
 
   @Int16()
-  int srWindowLeft;
+  external int srWindowLeft;
   @Int16()
-  int srWindowTop;
+  external int srWindowTop;
   @Int16()
-  int srWindowRight;
+  external int srWindowRight;
   @Int16()
-  int srWindowBottom;
+  external int srWindowBottom;
 
   @Int16()
-  int dwMaximumWindowSizeX;
+  external int dwMaximumWindowSizeX;
   @Int16()
-  int dwMaximumWindowSizeY;
+  external int dwMaximumWindowSizeY;
 
   factory CONSOLE_SCREEN_BUFFER_INFO.allocate() =>
       allocate<CONSOLE_SCREEN_BUFFER_INFO>().ref
@@ -2357,21 +2358,21 @@ class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
 /// {@category Struct}
 class CONSOLE_SELECTION_INFO extends Struct {
   @Uint32()
-  int dwFlags;
+  external int dwFlags;
 
   @Int16()
-  int dwSelectionAnchorX;
+  external int dwSelectionAnchorX;
   @Int16()
-  int dwSelectionAnchorY;
+  external int dwSelectionAnchorY;
 
   @Int16()
-  int srSelectionLeft;
+  external int srSelectionLeft;
   @Int16()
-  int srSelectionTop;
+  external int srSelectionTop;
   @Int16()
-  int srSelectionRight;
+  external int srSelectionRight;
   @Int16()
-  int srSelectionBottom;
+  external int srSelectionBottom;
 
   factory CONSOLE_SELECTION_INFO.allocate() =>
       allocate<CONSOLE_SELECTION_INFO>().ref
@@ -2396,10 +2397,10 @@ class CONSOLE_SELECTION_INFO extends Struct {
 /// {@category Struct}
 class COORD extends Struct {
   @Int16()
-  int X;
+  external int X;
 
   @Int16()
-  int Y;
+  external int Y;
 
   factory COORD.allocate() => allocate<COORD>().ref
     ..X = 0
@@ -2420,10 +2421,10 @@ class COORD extends Struct {
 /// {@category Struct}
 class CHAR_INFO extends Struct {
   @Int16()
-  int UnicodeChar;
+  external int UnicodeChar;
 
   @Int16()
-  int Attributes;
+  external int Attributes;
 
   factory CHAR_INFO.allocate() => allocate<CHAR_INFO>().ref
     ..UnicodeChar = 0
@@ -2443,16 +2444,16 @@ class CHAR_INFO extends Struct {
 /// {@category Struct}
 class SMALL_RECT extends Struct {
   @Int16()
-  int Left;
+  external int Left;
 
   @Int16()
-  int Top;
+  external int Top;
 
   @Int16()
-  int Right;
+  external int Right;
 
   @Int16()
-  int Bottom;
+  external int Bottom;
 
   factory SMALL_RECT.allocate() => allocate<SMALL_RECT>().ref
     ..Left = 0
@@ -2472,9 +2473,9 @@ class SMALL_RECT extends Struct {
 /// {@category Struct}
 class INITCOMMONCONTROLSEX extends Struct {
   @Uint32()
-  int dwSize;
+  external int dwSize;
   @Uint32()
-  int dwICC;
+  external int dwICC;
 
   factory INITCOMMONCONTROLSEX.allocate() =>
       allocate<INITCOMMONCONTROLSEX>().ref
@@ -2527,52 +2528,52 @@ class INITCOMMONCONTROLSEX extends Struct {
 /// {@category Struct}
 class TASKDIALOGCONFIG extends Struct {
   @Uint32()
-  int cbSize;
+  external int cbSize;
   @IntPtr()
-  int hwndParent;
+  external int hwndParent;
   @IntPtr()
-  int hInstance;
+  external int hInstance;
   @Uint32()
-  int dwFlags;
+  external int dwFlags;
   @Uint32()
-  int dwCommonButtons;
-  Pointer<Utf16> pszWindowTitle;
+  external int dwCommonButtons;
+  external Pointer<Utf16> pszWindowTitle;
   @IntPtr()
-  int hMainIcon;
+  external int hMainIcon;
 
-  Pointer<Utf16> pszMainInstruction;
-  Pointer<Utf16> pszContent;
+  external Pointer<Utf16> pszMainInstruction;
+  external Pointer<Utf16> pszContent;
 
   @Uint32()
-  int cButtons;
+  external int cButtons;
 
-  Pointer<TASKDIALOG_BUTTON> pButtons;
+  external Pointer<TASKDIALOG_BUTTON> pButtons;
 
   @Int32()
-  int nDefaultButton;
+  external int nDefaultButton;
   @Uint32()
-  int cRadioButtons;
+  external int cRadioButtons;
 
-  Pointer<TASKDIALOG_BUTTON> pRadioButtons;
+  external Pointer<TASKDIALOG_BUTTON> pRadioButtons;
 
   @Int32()
-  int nDefaultRadioButton;
+  external int nDefaultRadioButton;
 
-  Pointer<Utf16> pszVerificationText;
-  Pointer<Utf16> pszExpandedInformation;
-  Pointer<Utf16> pszExpandedControlText;
-  Pointer<Utf16> pszCollapsedControlText;
-
-  @IntPtr()
-  int hFooterIcon;
-
-  Pointer<Utf16> pszFooter;
-  Pointer<NativeFunction> pfCallback;
+  external Pointer<Utf16> pszVerificationText;
+  external Pointer<Utf16> pszExpandedInformation;
+  external Pointer<Utf16> pszExpandedControlText;
+  external Pointer<Utf16> pszCollapsedControlText;
 
   @IntPtr()
-  int lpCallbackData;
+  external int hFooterIcon;
+
+  external Pointer<Utf16> pszFooter;
+  external Pointer<NativeFunction> pfCallback;
+
+  @IntPtr()
+  external int lpCallbackData;
   @Uint32()
-  int cxWidth;
+  external int cxWidth;
 
   factory TASKDIALOGCONFIG.allocate() => allocate<TASKDIALOGCONFIG>().ref
     ..cbSize = sizeOf<TASKDIALOGCONFIG>()
@@ -2613,9 +2614,9 @@ class TASKDIALOGCONFIG extends Struct {
 /// {@category Struct}
 class TASKDIALOG_BUTTON extends Struct {
   @Int32()
-  int nButtonID;
+  external int nButtonID;
 
-  Pointer<Utf16> pszButtonText;
+  external Pointer<Utf16> pszButtonText;
 
   factory TASKDIALOG_BUTTON.allocate() => allocate<TASKDIALOG_BUTTON>().ref
     ..nButtonID = 0
@@ -2637,15 +2638,15 @@ class TASKDIALOG_BUTTON extends Struct {
 /// {@category Struct}
 class DLLVERSIONINFO extends Struct {
   @Uint32()
-  int cbSize;
+  external int cbSize;
   @Uint32()
-  int dwMajorVersion;
+  external int dwMajorVersion;
   @Uint32()
-  int dwMinorVersion;
+  external int dwMinorVersion;
   @Uint32()
-  int dwBuildNumber;
+  external int dwBuildNumber;
   @Uint32()
-  int dwPlatformID;
+  external int dwPlatformID;
 
   factory DLLVERSIONINFO.allocate() => allocate<DLLVERSIONINFO>().ref
     ..cbSize = sizeOf<DLLVERSIONINFO>()
@@ -2674,15 +2675,15 @@ const _OSVERSIONINFO_STRUCT_SIZE = 20 + (128 * 2);
 /// {@category Struct}
 class OSVERSIONINFO extends Struct {
   @Uint32()
-  int dwOSVersionInfoSize;
+  external int dwOSVersionInfoSize;
   @Uint32()
-  int dwMajorVersion;
+  external int dwMajorVersion;
   @Uint32()
-  int dwMinorVersion;
+  external int dwMinorVersion;
   @Uint32()
-  int dwBuildNumber;
+  external int dwBuildNumber;
   @Uint32()
-  int dwPlatformId;
+  external int dwPlatformId;
 
   String get szCSDVersion =>
       addressOf.cast<Uint8>().elementAt(20).cast<Utf16>().unpackString(128);
@@ -2717,29 +2718,29 @@ class OSVERSIONINFO extends Struct {
 /// {@category Struct}
 class BLUETOOTH_DEVICE_INFO extends Struct {
   @Uint32()
-  int dwSize;
+  external int dwSize;
   @Uint64()
-  int Address;
+  external int Address;
   @Uint32()
-  int ulClassofDevice;
+  external int ulClassofDevice;
   @Int32()
-  int fConnected;
+  external int fConnected;
   @Int32()
-  int fRemembered;
+  external int fRemembered;
   @Int32()
-  int fAuthenticated;
+  external int fAuthenticated;
 
   // SYSTEMTIME is 128-bit
   @Int64()
-  int stLastSeenDate;
+  external int stLastSeenDate;
   @Int64()
-  int stLastSeenTime;
+  external int stLastSeenTime;
 
   // SYSTEMTIME is 128-bit
   @Int64()
-  int stLastUsedDate;
+  external int stLastUsedDate;
   @Int64()
-  int stLastUsedTime;
+  external int stLastUsedTime;
 
   String get szName => addressOf
       .cast<Uint8>()
@@ -2778,21 +2779,21 @@ class BLUETOOTH_DEVICE_INFO extends Struct {
 /// {@category Struct}
 class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
   @Int32()
-  int dwSize;
+  external int dwSize;
   @Int32()
-  int fReturnAuthenticated;
+  external int fReturnAuthenticated;
   @Int32()
-  int fReturnRemembered;
+  external int fReturnRemembered;
   @Int32()
-  int fReturnUnknown;
+  external int fReturnUnknown;
   @Int32()
-  int fReturnConnected;
+  external int fReturnConnected;
   @Int32()
-  int fIssueInquiry;
+  external int fIssueInquiry;
   @Uint8()
-  int cTimeoutMultiplier;
+  external int cTimeoutMultiplier;
   @IntPtr()
-  int hRadio;
+  external int hRadio;
 
   factory BLUETOOTH_DEVICE_SEARCH_PARAMS.allocate() =>
       allocate<BLUETOOTH_DEVICE_SEARCH_PARAMS>().ref
@@ -2816,7 +2817,7 @@ class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
 /// {@category Struct}
 class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
   @Uint32()
-  int dwSize;
+  external int dwSize;
 
   factory BLUETOOTH_FIND_RADIO_PARAMS.allocate() =>
       allocate<BLUETOOTH_FIND_RADIO_PARAMS>().ref
@@ -2875,10 +2876,10 @@ class BLUETOOTH_PIN_INFO extends Struct {
 /// {@category Struct}
 class COR_FIELD_OFFSET extends Struct {
   @Uint32()
-  int ridOfField;
+  external int ridOfField;
 
   @Uint32()
-  int ulOffset;
+  external int ulOffset;
 
   factory COR_FIELD_OFFSET.allocate() => allocate<COR_FIELD_OFFSET>().ref
     ..ridOfField = 0
@@ -2908,31 +2909,31 @@ class COR_FIELD_OFFSET extends Struct {
 /// {@category Struct}
 class VS_FIXEDFILEINFO extends Struct {
   @Uint32()
-  int dwSignature;
+  external int dwSignature;
   @Uint32()
-  int dwStrucVersion;
+  external int dwStrucVersion;
   @Uint32()
-  int dwFileVersionMS;
+  external int dwFileVersionMS;
   @Uint32()
-  int dwFileVersionLS;
+  external int dwFileVersionLS;
   @Uint32()
-  int dwProductVersionMS;
+  external int dwProductVersionMS;
   @Uint32()
-  int dwProductVersionLS;
+  external int dwProductVersionLS;
   @Uint32()
-  int dwFileFlagsMask;
+  external int dwFileFlagsMask;
   @Uint32()
-  int dwFileFlags;
+  external int dwFileFlags;
   @Uint32()
-  int dwFileOS;
+  external int dwFileOS;
   @Uint32()
-  int dwFileType;
+  external int dwFileType;
   @Uint32()
-  int dwFileSubtype;
+  external int dwFileSubtype;
   @Uint32()
-  int dwFileDateMS;
+  external int dwFileDateMS;
   @Uint32()
-  int dwFileDateLS;
+  external int dwFileDateLS;
 
   factory VS_FIXEDFILEINFO.allocate() => allocate<VS_FIXEDFILEINFO>().ref
     ..dwSignature = 0

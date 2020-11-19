@@ -8,8 +8,8 @@ import 'level.dart';
 // Only Game and DrawEngine are exposed to main().
 //
 class Game {
-  DrawEngine de;
-  Level level;
+  late DrawEngine de;
+  late Level level;
 
   bool isPaused;
 

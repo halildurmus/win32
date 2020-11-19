@@ -15,7 +15,7 @@ import 'md_type.dart';
 /// Rather than being created directly, you should obtain a scope from a
 /// [WinmdReader], which caches scopes to avoid duplication.
 class WinmdScope {
-  IMetaDataImport2 reader;
+  late IMetaDataImport2 reader;
 
   WinmdScope(this.reader);
 

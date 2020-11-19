@@ -4,7 +4,7 @@ analyzer:
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false
-
+    
 linter:
   rules:
     # redundancy is good if it leads to better documentation
@@ -33,6 +33,9 @@ linter:
 
     # Win32 parity requires TitleCase method names
     non_constant_identifier_names: false
+
+    # Resolving this prevents us from caching metadata in a parent object
+    prefer_constructors_over_static_methods: false
 
     # Some additional lints we want to enforce
     omit_local_variable_types: true

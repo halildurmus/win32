@@ -75,9 +75,9 @@ final _$library = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' 
 
     for (final proto in libProtos) {
       final apiName = prototypes.keys.firstWhere(
-          (k) => prototypes[k].neutralApiName == proto.neutralApiName);
+          (k) => prototypes[k]!.neutralApiName == proto.neutralApiName);
       writer.writeStringSync('''
-${generateDocComment(library, proto.prototype.first, proto.comment)}
+${generateDocComment(library!, proto.prototype.first, proto.comment)}
 final ${proto.neutralApiName} = _$library.lookupFunction<\n
   ${proto.nativeReturn} Function(
     ${proto.nativeParams.keys.map((param) => '${proto.nativeParams[param]} $param').join(', ')}),

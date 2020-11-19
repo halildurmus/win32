@@ -39,7 +39,6 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
 
 void main() {
   // Register the window class.
-
   final className = TEXT('Sample Window Class');
 
   final wc = WNDCLASS.allocate();

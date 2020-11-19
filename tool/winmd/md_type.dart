@@ -15,10 +15,10 @@ import 'utils.dart';
 
 /// Represents a TypeDef in the Windows Metadata file
 class WinmdType {
-  IMetaDataImport2 reader;
+  late IMetaDataImport2 reader;
 
   int token;
-  String typeName;
+  late String typeName;
   int flags;
   int baseTypeToken;
 
@@ -36,8 +36,7 @@ class WinmdType {
   ///
   /// More information at:
   /// https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#type-system-encoding
-  bool get isSystemType =>
-      typeName.startsWith('System') || typeName == 'IInspectable';
+  bool get isSystemType => systemTokens.containsValue(typeName);
 
   /// Create a typedef.
   ///
@@ -56,11 +55,7 @@ class WinmdType {
   /// typedef from the new scope.
   factory WinmdType.fromToken(IMetaDataImport2 reader, int token) {
     if (tokenIsTypeRef(token)) {
-      try {
-        return WinmdType.fromTypeRef(reader, token);
-      } on WinmdException {
-        return null;
-      }
+      return WinmdType.fromTypeRef(reader, token);
     } else if (tokenIsTypeDef(token)) {
       return WinmdType.fromTypeDef(reader, token);
     } else {
@@ -111,23 +106,27 @@ class WinmdType {
     // a token like IInspectable is out of reach of GetTypeRefProps, since it is
     // a plain COM object. These objects are returned as system types.
     if (systemTokens.containsKey(typeRefToken)) {
-      return WinmdType(reader, 0, systemTokens[typeRefToken]);
+      return WinmdType(reader, 0, systemTokens[typeRefToken]!);
     }
 
     try {
       final hr = reader.GetTypeRefProps(
           typeRefToken, ptkResolutionScope, szName, 256, pchName);
+
       if (SUCCEEDED(hr)) {
         final typeName = szName.unpackString(pchName.value);
 
         // TODO: Can we shortcut something by using the resolution scope token?
-        final newScope = WinmdStore.getScopeForType(typeName);
-
-        if (newScope != null) {
+        try {
+          final newScope = WinmdStore.getScopeForType(typeName);
           return newScope.findTypeDef(typeName);
-        } else {
-          throw WinmdException(
-              'Unable to find scope for $typeName [${typeRefToken.toHexString(32)}]...');
+        } catch (exception) {
+          if (systemTokens.containsValue(typeName)) {
+            return WinmdType(reader, 0, typeName);
+          } else {
+            throw WinmdException(
+                'Unable to find scope for $typeName [${typeRefToken.toHexString(32)}]...');
+          }
         }
       } else {
         throw WindowsException(hr);
@@ -216,8 +215,8 @@ class WinmdType {
 
   /// Get a method matching the name, if one exists.
   ///
-  /// Returns [null] if the method is not found.
-  WinmdMethod findMethod(String methodName) {
+  /// Returns null if the method is not found.
+  WinmdMethod? findMethod(String methodName) {
     final szName = TEXT(methodName);
     final pmb = allocate<Uint32>();
 
@@ -237,13 +236,13 @@ class WinmdType {
   }
 
   /// Gets the type referencing this type's superclass.
-  WinmdType get parent =>
+  WinmdType? get parent =>
       token == 0 ? null : WinmdType.fromToken(reader, baseTypeToken);
 
   /// Get the GUID for this type.
   ///
   /// Returns null if a GUID couldn't be found.
-  String get guid {
+  String? get guid {
     final attributeName = TEXT('Windows.Foundation.Metadata.GuidAttribute');
     final ppData = allocate<IntPtr>();
     final pcbData = allocate<Uint32>();

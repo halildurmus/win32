@@ -23,4 +23,4 @@ call dart format %~dp0..\test\api_test.dart
 echo.
 
 echo Running tests
-call dart pub run test
+call dart test

@@ -59,7 +59,7 @@ void listParameters(
   final mdScope = WinmdStore.getScopeForType(type);
 
   final winTypeDef = mdScope.findTypeDef(type);
-  final method = winTypeDef.findMethod(methodName);
+  final method = winTypeDef.findMethod(methodName)!;
 
   print('${method.methodName} has '
       '${method.parameters.length} parameter(s).');
@@ -131,7 +131,7 @@ String convertTypeToProjection(
   final mdScope = WinmdStore.getScopeForType(type);
   final winTypeDef = mdScope.findTypeDef(type);
 
-  if (winTypeDef.parent.typeName == 'IInspectable') {
+  if (winTypeDef.parent!.typeName == 'IInspectable') {
     idlProjection.writeln('// vtable_start 6');
   } else {
     idlProjection.writeln('// vtable_start UNKNOWN');
@@ -139,7 +139,7 @@ String convertTypeToProjection(
 
   idlProjection.writeln('[uuid(${winTypeDef.guid}]');
   idlProjection.writeln(
-      'interface ${winTypeDef.typeName} : ${winTypeDef.parent.typeName}');
+      'interface ${winTypeDef.typeName} : ${winTypeDef.parent!.typeName}');
   idlProjection.writeln('{');
 
   idlProjection.writeln(winTypeDef.methods.map(methodSignature).join('\n'));
