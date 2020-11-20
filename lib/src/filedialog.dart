@@ -74,14 +74,14 @@ abstract class FileDialog {
   final customPlaces = <CustomPlace>[];
 
   /// Sets the title of the dialog.
-  String? title;
+  String title = '';
 
   /// Sets the text of the label next to the file name edit box.
-  String? fileNameLabel;
+  String fileNameLabel = '';
 
   /// Sets the file name that appears in the File name edit box when that dialog
   /// box is opened.
-  String? fileName;
+  String fileName = '';
 
   /// Sets the default extension to be added to file names.
   ///
@@ -99,7 +99,7 @@ abstract class FileDialog {
   /// The first value is the "friendly" name which is shown to the user (e.g.
   /// `JPEG Files`); the second value is a filter, which may be a semicolon-
   /// separated list (for example `*.jpg;*.jpeg`).
-  Map<String, String>? filterSpecification;
+  Map<String, String> filterSpecification = {};
 
   /// Which entry in the [filterSpecification] is shown by default. Typically
   /// this is the first entry shown.
@@ -107,7 +107,7 @@ abstract class FileDialog {
 
   /// Hide all of the standard namespace locations (such as Favorites,
   /// Libraries, Computer, and Network) shown in the navigation pane.
-  bool? hidePinnedPlaces;
+  bool hidePinnedPlaces = false;
 
   /// Ensures that returned items are file system items.
   ///
@@ -115,10 +115,10 @@ abstract class FileDialog {
   bool forceFileSystemItems = true;
 
   /// The item returned must exist. This is a default value for the Open dialog.
-  bool? fileMustExist;
+  bool fileMustExist = false;
 
   /// Don't change the current working directory.
-  bool? isDirectoryFixed;
+  bool isDirectoryFixed = false;
 
   /// Add a known folder to the 'Quick Access' list.
   void addPlace(WindowsKnownFolder folder, Place location) {

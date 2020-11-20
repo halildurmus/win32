@@ -26,27 +26,27 @@ class DirectoryPicker extends FileDialog {
 
     options |= FILEOPENDIALOGOPTIONS.FOS_PICKFOLDERS;
 
-    if (hidePinnedPlaces ?? false) {
+    if (hidePinnedPlaces) {
       options |= FILEOPENDIALOGOPTIONS.FOS_HIDEPINNEDPLACES;
     }
 
-    if (fileMustExist ?? false) {
+    if (fileMustExist) {
       options |= FILEOPENDIALOGOPTIONS.FOS_PATHMUSTEXIST;
     }
 
-    if (forceFileSystemItems ?? false) {
+    if (forceFileSystemItems) {
       options |= FILEOPENDIALOGOPTIONS.FOS_FORCEFILESYSTEM;
     }
 
-    if (isDirectoryFixed ?? false) {
+    if (isDirectoryFixed) {
       options |= FILEOPENDIALOGOPTIONS.FOS_NOCHANGEDIR;
     }
 
     hr = dialog.SetOptions(options);
     if (FAILED(hr)) throw WindowsException(hr);
 
-    if (title != null && title!.isNotEmpty) {
-      hr = dialog.SetTitle(TEXT(title!));
+    if (title.isNotEmpty) {
+      hr = dialog.SetTitle(TEXT(title));
       if (FAILED(hr)) throw WindowsException(hr);
     }
 
