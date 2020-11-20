@@ -8,9 +8,9 @@ import 'filedialog.dart';
 import 'place.dart';
 
 class DirectoryPicker extends FileDialog {
-  Directory getDirectory() {
+  Directory? getDirectory() {
     var didUserCancel = false;
-    String path;
+    late String path;
 
     var hr = CoInitializeEx(
         nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
@@ -45,8 +45,8 @@ class DirectoryPicker extends FileDialog {
     hr = dialog.SetOptions(options);
     if (FAILED(hr)) throw WindowsException(hr);
 
-    if (title != null && title.isNotEmpty) {
-      hr = dialog.SetTitle(TEXT(title));
+    if (title != null && title!.isNotEmpty) {
+      hr = dialog.SetTitle(TEXT(title!));
       if (FAILED(hr)) throw WindowsException(hr);
     }
 

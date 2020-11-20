@@ -10,12 +10,12 @@ import 'place.dart';
 class OpenFilePicker extends FileDialog {
   /// Indicates to the Open dialog box that the preview pane should always be
   /// displayed.
-  bool forcePreviewPaneOn;
+  bool? forcePreviewPaneOn;
 
   /// Returns a `File` object from the selected file path.
-  File getFile() {
+  File? getFile() {
     var didUserCancel = false;
-    String filePath;
+    late String filePath;
 
     var hr = CoInitializeEx(
         nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
@@ -46,46 +46,46 @@ class OpenFilePicker extends FileDialog {
     hr = fileDialog.SetOptions(options);
     if (FAILED(hr)) throw WindowsException(hr);
 
-    if (defaultExtension != null && defaultExtension.isNotEmpty) {
-      hr = fileDialog.SetDefaultExtension(TEXT(defaultExtension));
+    if (defaultExtension != null && defaultExtension!.isNotEmpty) {
+      hr = fileDialog.SetDefaultExtension(TEXT(defaultExtension!));
       if (FAILED(hr)) throw WindowsException(hr);
     }
 
-    if (fileName != null && fileName.isNotEmpty) {
-      hr = fileDialog.SetFileName(TEXT(fileName));
+    if (fileName != null && fileName!.isNotEmpty) {
+      hr = fileDialog.SetFileName(TEXT(fileName!));
       if (FAILED(hr)) throw WindowsException(hr);
     }
 
-    if (fileNameLabel != null && fileNameLabel.isNotEmpty) {
-      hr = fileDialog.SetFileNameLabel(TEXT(fileNameLabel));
+    if (fileNameLabel != null && fileNameLabel!.isNotEmpty) {
+      hr = fileDialog.SetFileNameLabel(TEXT(fileNameLabel!));
       if (FAILED(hr)) throw WindowsException(hr);
     }
 
-    if (title != null && title.isNotEmpty) {
-      hr = fileDialog.SetTitle(TEXT(title));
+    if (title != null && title!.isNotEmpty) {
+      hr = fileDialog.SetTitle(TEXT(title!));
       if (FAILED(hr)) throw WindowsException(hr);
     }
 
-    if (filterSpecification != null && filterSpecification.isNotEmpty) {
+    if (filterSpecification != null && filterSpecification!.isNotEmpty) {
       final rgSpec =
-          allocate<COMDLG_FILTERSPEC>(count: filterSpecification.length);
+          allocate<COMDLG_FILTERSPEC>(count: filterSpecification!.length);
 
       var index = 0;
-      for (final key in filterSpecification.keys) {
+      for (final key in filterSpecification!.keys) {
         rgSpec[index]
           ..pszName = TEXT(key)
-          ..pszSpec = TEXT(filterSpecification[key]);
+          ..pszSpec = TEXT(filterSpecification![key]!);
         index++;
       }
-      hr = fileDialog.SetFileTypes(filterSpecification.length, rgSpec);
+      hr = fileDialog.SetFileTypes(filterSpecification!.length, rgSpec);
       if (FAILED(hr)) throw WindowsException(hr);
     }
 
     if (defaultFilterIndex != null) {
-      if (defaultFilterIndex > 0 &&
-          defaultFilterIndex < filterSpecification.length) {
+      if (defaultFilterIndex! > 0 &&
+          defaultFilterIndex! < filterSpecification!.length) {
         // SetFileTypeIndex is one-based, not zero-based
-        hr = fileDialog.SetFileTypeIndex(defaultFilterIndex + 1);
+        hr = fileDialog.SetFileTypeIndex(defaultFilterIndex! + 1);
         if (FAILED(hr)) throw WindowsException(hr);
       }
     }
