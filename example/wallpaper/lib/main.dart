@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  File path;
+  File? path;
 
   @override
   void initState() {
@@ -37,13 +37,12 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: MediaQuery.of(context).size.height / 2,
                 width: MediaQuery.of(context).size.width - 100,
-                child: path == null ? Placeholder() : Image.file(path),
+                child: path == null ? const Placeholder() : Image.file(path!),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   RaisedButton(
-                    child: Text('Open file dialog'),
                     onPressed: () {
                       final file = picker.OpenFilePicker();
                       file.hidePinnedPlaces = true;
@@ -61,12 +60,13 @@ class _HomePageState extends State<HomePage> {
                         });
                       }
                     },
+                    child: const Text('Open file dialog'),
                   ),
                   RaisedButton(
-                    child: Text('Set Wallpaper'),
                     onPressed: () {
-                      Wallpaper.set(path);
+                      Wallpaper.set(path!);
                     },
+                    child: const Text('Set Wallpaper'),
                   )
                 ],
               ),

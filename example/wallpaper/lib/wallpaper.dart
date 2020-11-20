@@ -5,7 +5,7 @@ import 'package:win32/win32.dart';
 
 class Wallpaper {
   static void set(File wallpaperFile) {
-    var hr = CoInitializeEx(
+    final hr = CoInitializeEx(
         nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
     if (FAILED(hr)) throw WindowsException(hr);
 
