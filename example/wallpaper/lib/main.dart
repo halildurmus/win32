@@ -39,36 +39,41 @@ class _HomePageState extends State<HomePage> {
                 width: MediaQuery.of(context).size.width - 100,
                 child: path == null ? const Placeholder() : Image.file(path!),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  RaisedButton(
-                    onPressed: () {
-                      final file = picker.OpenFilePicker();
-                      file.hidePinnedPlaces = true;
-                      file.forcePreviewPaneOn = true;
-                      file.filterSpecification = {
-                        'JPEG Files': '*.jpg;*.jpeg',
-                        'Bitmap Files': '*.bmp',
-                        'All Files (*.*)': '*.*'
-                      };
-                      file.title = 'Select an image';
-                      final result = file.getFile();
-                      if (result != null) {
-                        setState(() {
-                          path = result;
-                        });
-                      }
-                    },
-                    child: const Text('Open file dialog'),
-                  ),
-                  RaisedButton(
-                    onPressed: () {
-                      Wallpaper.set(path!);
-                    },
-                    child: const Text('Set Wallpaper'),
-                  )
-                ],
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    RaisedButton(
+                      onPressed: () {
+                        final file = picker.OpenFilePicker();
+                        file.hidePinnedPlaces = true;
+                        file.forcePreviewPaneOn = true;
+                        file.filterSpecification = {
+                          'JPEG Files': '*.jpg;*.jpeg',
+                          'Bitmap Files': '*.bmp',
+                          'All Files (*.*)': '*.*'
+                        };
+                        file.title = 'Select an image';
+                        final result = file.getFile();
+                        if (result != null) {
+                          setState(() {
+                            path = result;
+                          });
+                        }
+                      },
+                      child: const Text('Open file dialog'),
+                    ),
+                    RaisedButton(
+                      onPressed: () {
+                        if (path != null) {
+                          Wallpaper.set(path!);
+                        }
+                      },
+                      child: const Text('Set Wallpaper'),
+                    )
+                  ],
+                ),
               ),
             ],
           ),
