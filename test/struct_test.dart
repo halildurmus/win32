@@ -542,6 +542,14 @@ void main() {
       expect(sizeOf<MCI_STATUS_PARMS>(), equals(16));
     }
   });
+  test('Struct LOGBRUSH is the right size', () {
+    if (sizeOf<IntPtr>() == 8) {
+      expect(sizeOf<LOGBRUSH>(), equals(16));
+    }
+    else {
+      expect(sizeOf<LOGBRUSH>(), equals(12));
+    }
+  });
   test('Struct EXCEPINFO is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
       expect(sizeOf<EXCEPINFO>(), equals(64));

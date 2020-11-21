@@ -3025,6 +3025,29 @@ class MCI_SEEK_PARMS extends Struct {
     ..dwTo = 0;
 }
 
+// typedef struct tagLOGBRUSH {
+//   UINT      lbStyle;
+//   COLORREF  lbColor;
+//   ULONG_PTR lbHatch;
+// } LOGBRUSH, *PLOGBRUSH, *NPLOGBRUSH, *LPLOGBRUSH;
+
+/// The LOGBRUSH structure defines the style, color, and pattern of a physical
+/// brush. It is used by the CreateBrushIndirect and ExtCreatePen functions.
+///
+/// {@category Struct}
+class LOGBRUSH extends Struct {
+  @Uint32()
+  external int lbStyle;
+  @Int32()
+  external int lbColor;
+  external Pointer<Uint32> lbHatch;
+
+  factory LOGBRUSH.allocate() => allocate<LOGBRUSH>().ref
+    ..lbStyle = 0
+    ..lbColor = 0
+    ..lbHatch = nullptr;
+}
+
 // typedef struct tagMCI_STATUS_PARMS {
 //     DWORD_PTR   dwCallback;
 //     DWORD_PTR   dwReturn;

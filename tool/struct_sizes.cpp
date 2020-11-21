@@ -87,6 +87,7 @@ void main()
     printf("'MCI_PLAY_PARMS': %zu,\n", sizeof(MCI_PLAY_PARMS));
     printf("'MCI_SEEK_PARMS': %zu,\n", sizeof(MCI_SEEK_PARMS));
     printf("'MCI_STATUS_PARMS': %zu,\n", sizeof(MCI_STATUS_PARMS));
+    printf("'LOGBRUSH': %zu,\n", sizeof(LOGBRUSH));
     printf("'EXCEPINFO': %zu,\n", sizeof(EXCEPINFO));
     printf("'PROPERTYKEY': %zu,\n", sizeof(PROPERTYKEY));
     printf("'PROPVARIANT': %zu,\n", sizeof(PROPVARIANT));

@@ -777,6 +777,10 @@ void main() {
       final function = CreateFontIndirect;
       expect(function, isA<Function>());
     });
+    test('Can instantiate CreatePen', () {
+      final function = CreatePen;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate CreateSolidBrush', () {
       final function = CreateSolidBrush;
       expect(function, isA<Function>());
@@ -787,6 +791,10 @@ void main() {
     });
     test('Can instantiate EnumFontFamiliesEx', () {
       final function = EnumFontFamiliesEx;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate ExtCreatePen', () {
+      final function = ExtCreatePen;
       expect(function, isA<Function>());
     });
     test('Can instantiate GetObject', () {
@@ -809,8 +817,20 @@ void main() {
       final function = MoveToEx;
       expect(function, isA<Function>());
     });
+    test('Can instantiate PolyBezier', () {
+      final function = PolyBezier;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate Rectangle', () {
+      final function = Rectangle;
+      expect(function, isA<Function>());
+    });
     test('Can instantiate SaveDC', () {
       final function = SaveDC;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate SelectObject', () {
+      final function = SelectObject;
       expect(function, isA<Function>());
     });
     test('Can instantiate SetBkColor', () {
@@ -823,6 +843,10 @@ void main() {
     });
     test('Can instantiate SetMapMode', () {
       final function = SetMapMode;
+      expect(function, isA<Function>());
+    });
+    test('Can instantiate SetPixel', () {
+      final function = SetPixel;
       expect(function, isA<Function>());
     });
     test('Can instantiate SetTextColor', () {

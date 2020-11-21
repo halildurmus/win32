@@ -31,6 +31,22 @@ final CreateFontIndirect = _gdi32.lookupFunction<
     IntPtr Function(Pointer<LOGFONT> lplf),
     int Function(Pointer<LOGFONT> lplf)>('CreateFontIndirectW');
 
+/// The CreatePen function creates a logical pen that has the specified
+/// style, width, and color. The pen can subsequently be selected into a
+/// device context and used to draw lines and curves.
+///
+/// ```c
+/// HPEN CreatePen(
+///   int      iStyle,
+///   int      cWidth,
+///   COLORREF color
+/// );
+/// ```
+/// {@category gdi32}
+final CreatePen = _gdi32.lookupFunction<
+    IntPtr Function(Int32 iStyle, Int32 cWidth, Int32 color),
+    int Function(int iStyle, int cWidth, int color)>('CreatePen');
+
 /// The CreateSolidBrush function creates a logical brush that has the
 /// specified solid color.
 ///
@@ -82,6 +98,25 @@ final EnumFontFamiliesEx = _gdi32.lookupFunction<
         Pointer<NativeFunction> lpProc,
         int lParam,
         int dwFlags)>('EnumFontFamiliesExW');
+
+/// The ExtCreatePen function creates a logical cosmetic or geometric pen
+/// that has the specified style, width, and brush attributes.
+///
+/// ```c
+/// HPEN ExtCreatePen(
+///   DWORD          iPenStyle,
+///   DWORD          cWidth,
+///   const LOGBRUSH *plbrush,
+///   DWORD          cStyle,
+///   const DWORD    *pstyle
+/// );
+/// ```
+/// {@category gdi32}
+final ExtCreatePen = _gdi32.lookupFunction<
+    IntPtr Function(Uint32 iPenStyle, Uint32 cWidth, Pointer<LOGFONT> plBrush,
+        Uint32 cStyle, Pointer<Uint32> pStyle),
+    int Function(int iPenStyle, int cWidth, Pointer<LOGFONT> plBrush,
+        int cStyle, Pointer<Uint32> pStyle)>('ExtCreatePen');
 
 /// The GetObject function retrieves information for the specified graphics
 /// object.
@@ -156,6 +191,39 @@ final MoveToEx = _gdi32.lookupFunction<
     Int32 Function(IntPtr hdc, Int32 x, Int32 y, Pointer<POINT> lppt),
     int Function(int hdc, int x, int y, Pointer<POINT> lppt)>('MoveToEx');
 
+/// The PolyBezier function draws one or more Bézier curves.
+///
+/// ```c
+/// BOOL PolyBezier(
+///   HDC         hdc,
+///   const POINT *apt,
+///   DWORD       cpt
+/// );
+/// ```
+/// {@category gdi32}
+final PolyBezier = _gdi32.lookupFunction<
+    Int32 Function(IntPtr hdc, Pointer<POINT> apt, Uint32 cpt),
+    int Function(int hdc, Pointer<POINT> apt, int cpt)>('PolyBezier');
+
+/// The Rectangle function draws a rectangle. The rectangle is outlined by
+/// using the current pen and filled by using the current brush.
+///
+/// ```c
+/// BOOL Rectangle(
+///   HDC hdc,
+///   int left,
+///   int top,
+///   int right,
+///   int bottom
+/// );
+/// ```
+/// {@category gdi32}
+final Rectangle = _gdi32.lookupFunction<
+    Int32 Function(
+        IntPtr hdc, Int32 left, Int32 top, Int32 right, Int32 bottom),
+    int Function(
+        int hdc, int left, int top, int right, int bottom)>('Rectangle');
+
 /// The SaveDC function saves the current state of the specified device
 /// context (DC) by copying data describing selected objects and graphic
 /// modes (such as the bitmap, brush, palette, font, pen, region, drawing
@@ -170,6 +238,21 @@ final MoveToEx = _gdi32.lookupFunction<
 final SaveDC =
     _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
         'SaveDC');
+
+/// The SelectObject function selects an object into the specified device
+/// context (DC). The new object replaces the previous object of the same
+/// type.
+///
+/// ```c
+/// HGDIOBJ SelectObject(
+///   HDC     hdc,
+///   HGDIOBJ h
+/// );
+/// ```
+/// {@category gdi32}
+final SelectObject = _gdi32.lookupFunction<
+    IntPtr Function(IntPtr hdc, IntPtr h),
+    int Function(int hdc, int h)>('SelectObject');
 
 /// The SetBkColor function sets the current background color to the
 /// specified color value, or to the nearest physical color if the device
@@ -215,6 +298,22 @@ final SetBkMode = _gdi32.lookupFunction<Int32 Function(IntPtr hdc, Int32 mode),
 final SetMapMode = _gdi32.lookupFunction<
     Int32 Function(IntPtr hdc, Int32 iMode),
     int Function(int hdc, int iMode)>('SetMapMode');
+
+/// The SetPixel function sets the pixel at the specified coordinates to
+/// the specified color.
+///
+/// ```c
+/// COLORREF SetPixel(
+///   HDC      hdc,
+///   int      x,
+///   int      y,
+///   COLORREF color
+/// );
+/// ```
+/// {@category gdi32}
+final SetPixel = _gdi32.lookupFunction<
+    Int32 Function(IntPtr hdc, Int32 x, Int32 y, Int32 color),
+    int Function(int hdc, int x, int y, int color)>('SetPixel');
 
 /// The SetTextColor function sets the text color for the specified device
 /// context to the specified color.
