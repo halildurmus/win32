@@ -12,6 +12,7 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 import 'constants.dart';
+import 'constants_nodoc.dart';
 import 'extensions/unpack_utf16.dart';
 import 'oleaut32.dart';
 

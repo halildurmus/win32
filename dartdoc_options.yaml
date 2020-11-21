@@ -43,6 +43,7 @@ dartdoc:
       markdown: doc/examples.md
   categoryOrder: ["kernel32", "user32", "gdi32", "shell32", "ole32", "oleaut32", "comctl32", "comdlg32", "shcore", "psapi", "version", "advapi32", "bthprops", "powrprof", "dxva2", "winmm", "com", "winrt", "examples"]
   showUndocumentedCategories: true
+  nodoc: lib/src/constants_nodoc.dart
   ignore:
     - broken-link
     - missing-from-search-index
