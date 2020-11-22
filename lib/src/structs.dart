@@ -2585,6 +2585,58 @@ class INITCOMMONCONTROLSEX extends Struct {
         ..dwICC = 0;
 }
 
+class DLGTEMPLATE extends Struct {
+  @Uint32()
+  external int style;
+  @Uint32()
+  external int dwExtendedStyle;
+  @Uint16()
+  external int cdit;
+  @Uint16()
+  external int x;
+  @Uint16()
+  external int y;
+  @Uint16()
+  external int cx;
+  @Uint16()
+  external int cy;
+}
+
+class DLGITEMTEMPLATE extends Struct {
+  @Uint32()
+  external int style;
+
+  @Uint32()
+  external int dwExtendedStyle;
+
+  @Int16()
+  external int x;
+
+  @Int16()
+  external int y;
+
+  @Int16()
+  external int cx;
+
+  @Int16()
+  external int cy;
+
+  @Uint16()
+  external int id;
+
+  // sizeOf returns 20, because Dart over-allocates to DWORD boundaries. Instead
+  // we allocate the *actual* size of this.
+  factory DLGITEMTEMPLATE.allocate() =>
+      allocate<Uint8>(count: 18).cast<DLGITEMTEMPLATE>().ref
+        ..style = 0
+        ..dwExtendedStyle = 0
+        ..x = 0
+        ..y = 0
+        ..cx = 0
+        ..cy = 0
+        ..id = 0;
+}
+
 // typedef struct _TASKDIALOGCONFIG {
 //   UINT                           cbSize;
 //   HWND                           hwndParent;

@@ -74,6 +74,8 @@ void main()
     printf("'CHAR_INFO': %zu,\n", sizeof(CHAR_INFO));
     printf("'SMALL_RECT': %zu,\n", sizeof(SMALL_RECT));
     printf("'INITCOMMONCONTROLSEX': %zu,\n", sizeof(INITCOMMONCONTROLSEX));
+    printf("'DLGTEMPLATE': %zu,\n", sizeof(DLGTEMPLATE));
+    printf("'DLGITEMTEMPLATE': %zu,\n", sizeof(DLGITEMTEMPLATE));
     printf("'TASKDIALOGCONFIG': %zu,\n", sizeof(TASKDIALOGCONFIG));
     printf("'TASKDIALOG_BUTTON': %zu,\n", sizeof(TASKDIALOG_BUTTON));
     printf("'DLLVERSIONINFO': %zu,\n", sizeof(DLLVERSIONINFO));

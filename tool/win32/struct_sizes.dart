@@ -54,6 +54,8 @@ const structSize64 = {
   'CHAR_INFO': 4,
   'SMALL_RECT': 8,
   'INITCOMMONCONTROLSEX': 8,
+  'DLGTEMPLATE': 18,
+  'DLGITEMTEMPLATE': 18,
   'TASKDIALOGCONFIG': 160,
   'TASKDIALOG_BUTTON': 12,
   'DLLVERSIONINFO': 20,
@@ -129,6 +131,8 @@ const structSize32 = {
   'CHAR_INFO': 4,
   'SMALL_RECT': 8,
   'INITCOMMONCONTROLSEX': 8,
+  'DLGTEMPLATE': 18,
+  'DLGITEMTEMPLATE': 18,
   'TASKDIALOGCONFIG': 96,
   'TASKDIALOG_BUTTON': 8,
   'DLLVERSIONINFO': 20,
@@ -162,6 +166,9 @@ const skipStructs = [
 
   // sizeOf<OSVERSIONINFO> returns 280 because Dart over-allocates storage.
   'OSVERSIONINFO',
+
+  // Should be allocated manually, rather than using sizeOf
+  'DLGTEMPLATE', 'DLGITEMTEMPLATE',
 
   // TODO: Doesn't contain magic data field
   'BLUETOOTH_DEVICE_INFO', 'BLUETOOTH_PIN_INFO',

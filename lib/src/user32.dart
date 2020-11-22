@@ -122,6 +122,37 @@ int CreateAcceleratorTable(Pointer paccel, int cAccel) {
   return _CreateAcceleratorTable(paccel, cAccel);
 }
 
+/// Creates a modeless dialog box from a dialog box template in memory.
+/// Before displaying the dialog box, the function passes an
+/// application-defined value to the dialog box procedure as the lParam
+/// parameter of the WM_INITDIALOG message. An application can use this
+/// value to initialize dialog box controls.
+///
+/// ```c
+/// HWND CreateDialogIndirectParamW(
+///   HINSTANCE       hInstance,
+///   LPCDLGTEMPLATEW lpTemplate,
+///   HWND            hWndParent,
+///   DLGPROC         lpDialogFunc,
+///   LPARAM          dwInitParam
+/// );
+/// ```
+/// {@category user32}
+int CreateDialogIndirectParam(int hInstance, Pointer<DLGTEMPLATE> lpTemplate,
+    int hWndParent, Pointer lpDialogFunc, int dwInitParam) {
+  final _CreateDialogIndirectParam = _user32.lookupFunction<
+      IntPtr Function(IntPtr hInstance, Pointer<DLGTEMPLATE> lpTemplate,
+          IntPtr hWndParent, Pointer lpDialogFunc, IntPtr dwInitParam),
+      int Function(
+          int hInstance,
+          Pointer<DLGTEMPLATE> lpTemplate,
+          int hWndParent,
+          Pointer lpDialogFunc,
+          int dwInitParam)>('CreateDialogIndirectParamW');
+  return _CreateDialogIndirectParam(
+      hInstance, lpTemplate, hWndParent, lpDialogFunc, dwInitParam);
+}
+
 /// Creates a menu. The menu is initially empty, but it can be filled with
 /// menu items by using the InsertMenuItem, AppendMenu, and InsertMenu
 /// functions.
@@ -331,6 +362,23 @@ int EnableMenuItem(int hMenu, int uIDEnableItem, int uEnable) {
       int Function(
           int hMenu, int uIDEnableItem, int uEnable)>('EnableMenuItem');
   return _EnableMenuItem(hMenu, uIDEnableItem, uEnable);
+}
+
+/// Destroys a modal dialog box, causing the system to end any processing
+/// for the dialog box.
+///
+/// ```c
+/// BOOL EndDialog(
+///   HWND    hDlg,
+///   INT_PTR nResult
+/// );
+/// ```
+/// {@category user32}
+int EndDialog(int hDlg, int nResult) {
+  final _EndDialog = _user32.lookupFunction<
+      Int32 Function(IntPtr hDlg, IntPtr nResult),
+      int Function(int hDlg, int nResult)>('EndDialog');
+  return _EndDialog(hDlg, nResult);
 }
 
 /// The EndPaint function marks the end of painting in the specified

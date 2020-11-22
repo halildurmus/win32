@@ -945,6 +945,20 @@ void main() {
       expect(CreateAcceleratorTable, isA<Function>());
     });
 
+    test('Can instantiate CreateDialogIndirectParam', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final CreateDialogIndirectParam = user32.lookupFunction<
+          IntPtr Function(IntPtr hInstance, Pointer<DLGTEMPLATE> lpTemplate,
+              IntPtr hWndParent, Pointer lpDialogFunc, IntPtr dwInitParam),
+          int Function(
+              int hInstance,
+              Pointer<DLGTEMPLATE> lpTemplate,
+              int hWndParent,
+              Pointer lpDialogFunc,
+              int dwInitParam)>('CreateDialogIndirectParamW');
+      expect(CreateDialogIndirectParam, isA<Function>());
+    });
+
     test('Can instantiate CreateMenu', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final CreateMenu = user32
@@ -1041,6 +1055,14 @@ void main() {
           int Function(
               int hMenu, int uIDEnableItem, int uEnable)>('EnableMenuItem');
       expect(EnableMenuItem, isA<Function>());
+    });
+
+    test('Can instantiate EndDialog', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final EndDialog = user32.lookupFunction<
+          Int32 Function(IntPtr hDlg, IntPtr nResult),
+          int Function(int hDlg, int nResult)>('EndDialog');
+      expect(EndDialog, isA<Function>());
     });
 
     test('Can instantiate EndPaint', () {

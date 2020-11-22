@@ -10,6 +10,8 @@ import 'package:ffi/ffi.dart';
 
 import 'structs.dart';
 
+typedef DlgProc = IntPtr Function(IntPtr, Uint32, IntPtr, IntPtr);
+
 typedef EnumFontFamExProc = Int32 Function(Pointer<LOGFONT> lpelfe,
     Pointer<TEXTMETRIC> lpntme, Uint32 FontType, IntPtr lParam);
 
