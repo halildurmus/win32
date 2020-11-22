@@ -2282,6 +2282,20 @@ const SIF_TRACKPOS = 0x0010;
 const SIF_ALL = SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS;
 
 // -----------------------------------------------------------------------------
+// PeekMessage options
+// -----------------------------------------------------------------------------
+
+/// Messages are not removed from the queue after processing by PeekMessage.
+const PM_NOREMOVE = 0x0000;
+
+/// Messages are removed from the queue after processing by PeekMessage.
+const PM_REMOVE = 0x0001;
+
+/// Prevents the system from releasing any thread that is waiting for the caller
+/// to go idle.
+const PM_NOYIELD = 0x0002;
+
+// -----------------------------------------------------------------------------
 // DrawText constants
 // -----------------------------------------------------------------------------
 
@@ -2512,6 +2526,77 @@ const MB_RTLREADING = 0x00100000;
 /// displays a message box on the current active desktop, even if there is no
 /// user logged on to the computer.
 const MB_SERVICE_NOTIFICATION = 0x00200000;
+
+// -----------------------------------------------------------------------------
+// Menu flags
+// -----------------------------------------------------------------------------
+
+/// Indicates that flag gives the identifier of the menu item.
+const MF_BYCOMMAND = 0x00000000;
+
+/// Indicates that flag gives the zero-based relative position of the menu item.
+const MF_BYPOSITION = 0x00000400;
+
+/// Draws a horizontal dividing line. This flag is used only in a drop-down
+/// menu, submenu, or shortcut menu. The line cannot be grayed, disabled, or
+/// highlighted. The lpNewItem and uIDNewItem parameters are ignored.
+const MF_SEPARATOR = 0x00000800;
+
+/// Enables the menu item so that it can be selected, and restores it from its
+/// grayed state.
+const MF_ENABLED = 0x00000000;
+
+/// Disables the menu item and grays it so that it cannot be selected.
+const MF_GRAYED = 0x00000001;
+
+/// Disables the menu item so that it cannot be selected, but the flag does not
+/// gray it.
+const MF_DISABLED = 0x00000002;
+
+/// Does not place a check mark next to the item (default). If the application
+/// supplies check-mark bitmaps (see SetMenuItemBitmaps), this flag displays the
+/// clear bitmap next to the menu item.
+const MF_UNCHECKED = 0x00000000;
+
+/// Places a check mark next to the menu item.
+const MF_CHECKED = 0x00000008;
+
+/// Specifies that the menu item is a text string; the lpNewItem parameter is a
+/// pointer to the string.
+const MF_STRING = 0x00000000;
+
+/// Uses a bitmap as the menu item. The lpNewItem parameter contains a handle to
+/// the bitmap.
+const MF_BITMAP = 0x00000004;
+
+/// Specifies that the item is an owner-drawn item. Before the menu is displayed
+/// for the first time, the window that owns the menu receives a WM_MEASUREITEM
+/// message to retrieve the width and height of the menu item. The WM_DRAWITEM
+/// message is then sent to the window procedure of the owner window whenever
+/// the appearance of the menu item must be updated.
+const MF_OWNERDRAW = 0x00000100;
+
+/// Specifies that the menu item opens a drop-down menu or submenu. The
+/// uIDNewItem parameter specifies a handle to the drop-down menu or submenu.
+/// This flag is used to add a menu name to a menu bar, or a menu item that
+/// opens a submenu to a drop-down menu, submenu, or shortcut menu.
+const MF_POPUP = 0x00000010;
+
+/// Functions the same as the MF_MENUBREAK flag for a menu bar. For a drop-down
+/// menu, submenu, or shortcut menu, the new column is separated from the old
+/// column by a vertical line.
+const MF_MENUBARBREAK = 0x00000020;
+
+/// Places the item on a new line (for a menu bar) or in a new column (for a
+/// drop-down menu, submenu, or shortcut menu) without separating columns.
+const MF_MENUBREAK = 0x00000040;
+
+/// Removes highlighting from the menu item.
+const MF_UNHILITE = 0x00000000;
+
+/// Highlights the menu item. If this flag is not specified, the highlighting is
+/// removed from the item.
+const MF_HILITE = 0x00000080;
 
 // -----------------------------------------------------------------------------
 // Console constants
