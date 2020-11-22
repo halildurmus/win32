@@ -132,6 +132,27 @@ is a hobby project, and should not be viewed as having the same level of
 quality assurance as an official package from the Dart team. I'm a product
 manager having fun on my weekends!
 
+## Backwards compatibility
+
+The library version uses a loose semver model, but you should not assume a
+strict guarantee of no breaking changes between minor versions. That guarantee
+is not possible to make, for several reasons:
+
+- The underlying FFI library has not yet reached v1.0 and breaking changes at
+  that level may be difficult to encapsulate.
+- Several times, my fixing a bug in the fidelity of the Win32 API has tightened
+  the constraints over a parameter (for example, `Pointer` becomes
+  `Pointer<INPUT>`). These changes should be signalled in the log.
+- Adding new features may itself cause a breaking change. For example, if you
+  declare a missing Windows constant in your own code that is then added, Dart
+  will complain about the duplicate definition.
+
+One solution is to pin to a specific version of Win32, or declare a more
+tightly-bounded version dependency (e.g. `'>=1.7.0 <1.8.0'` rather than merely
+`^1.7.0`). But the best approach is simply to test regularly with the latest
+version of this package, and continue to move your minimum forward. As the
+package matures, these issues should gradually fade into the distance.
+
 ## Acknowledgements
 
 The Tetris example listed above is a fuller worked example of a reasonably
