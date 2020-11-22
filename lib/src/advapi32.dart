@@ -30,10 +30,13 @@ final _advapi32 = DynamicLibrary.open('advapi32.dll');
 /// );
 /// ```
 /// {@category advapi32}
-final CredDelete = _advapi32.lookupFunction<
-    Int32 Function(Pointer<Utf16> TargetName, Uint32 Type, Uint32 Flags),
-    int Function(
-        Pointer<Utf16> TargetName, int Type, int Flags)>('CredDeleteW');
+int CredDelete(Pointer<Utf16> TargetName, int Type, int Flags) {
+  final _CredDelete = _advapi32.lookupFunction<
+      Int32 Function(Pointer<Utf16> TargetName, Uint32 Type, Uint32 Flags),
+      int Function(
+          Pointer<Utf16> TargetName, int Type, int Flags)>('CredDeleteW');
+  return _CredDelete(TargetName, Type, Flags);
+}
 
 /// The CredFree function frees a buffer returned by any of the credentials
 /// management functions.
@@ -44,8 +47,11 @@ final CredDelete = _advapi32.lookupFunction<
 /// );
 /// ```
 /// {@category advapi32}
-final CredFree = _advapi32.lookupFunction<Void Function(Pointer Buffer),
-    void Function(Pointer Buffer)>('CredFree');
+void CredFree(Pointer Buffer) {
+  final _CredFree = _advapi32.lookupFunction<Void Function(Pointer Buffer),
+      void Function(Pointer Buffer)>('CredFree');
+  return _CredFree(Buffer);
+}
 
 /// The CredRead function reads a credential from the user's credential
 /// set. The credential set used is the one associated with the logon
@@ -61,11 +67,15 @@ final CredFree = _advapi32.lookupFunction<Void Function(Pointer Buffer),
 /// );
 /// ```
 /// {@category advapi32}
-final CredRead = _advapi32.lookupFunction<
-    Int32 Function(Pointer<Utf16> TargetName, Uint32 Type, Uint32 Flags,
-        Pointer<Pointer<CREDENTIAL>> Credential),
-    int Function(Pointer<Utf16> TargetName, int Type, int Flags,
-        Pointer<Pointer<CREDENTIAL>> Credential)>('CredReadW');
+int CredRead(Pointer<Utf16> TargetName, int Type, int Flags,
+    Pointer<Pointer<CREDENTIAL>> Credential) {
+  final _CredRead = _advapi32.lookupFunction<
+      Int32 Function(Pointer<Utf16> TargetName, Uint32 Type, Uint32 Flags,
+          Pointer<Pointer<CREDENTIAL>> Credential),
+      int Function(Pointer<Utf16> TargetName, int Type, int Flags,
+          Pointer<Pointer<CREDENTIAL>> Credential)>('CredReadW');
+  return _CredRead(TargetName, Type, Flags, Credential);
+}
 
 /// The CredWrite function creates a new credential or modifies an existing
 /// credential in the user's credential set. The new credential is
@@ -79,9 +89,12 @@ final CredRead = _advapi32.lookupFunction<
 /// );
 /// ```
 /// {@category advapi32}
-final CredWrite = _advapi32.lookupFunction<
-    Int32 Function(Pointer<CREDENTIAL> Credential, Uint32 Flags),
-    int Function(Pointer<CREDENTIAL> Credential, int Flags)>('CredWriteW');
+int CredWrite(Pointer<CREDENTIAL> Credential, int Flags) {
+  final _CredWrite = _advapi32.lookupFunction<
+      Int32 Function(Pointer<CREDENTIAL> Credential, Uint32 Flags),
+      int Function(Pointer<CREDENTIAL> Credential, int Flags)>('CredWriteW');
+  return _CredWrite(Credential, Flags);
+}
 
 /// Closes a handle to the specified registry key.
 ///
@@ -91,8 +104,11 @@ final CredWrite = _advapi32.lookupFunction<
 /// );
 /// ```
 /// {@category advapi32}
-final RegCloseKey = _advapi32.lookupFunction<Int32 Function(IntPtr hKey),
-    int Function(int hKey)>('RegCloseKey');
+int RegCloseKey(int hKey) {
+  final _RegCloseKey = _advapi32.lookupFunction<Int32 Function(IntPtr hKey),
+      int Function(int hKey)>('RegCloseKey');
+  return _RegCloseKey(hKey);
+}
 
 /// Opens the specified registry key. Note that key names are not case
 /// sensitive.
@@ -107,11 +123,15 @@ final RegCloseKey = _advapi32.lookupFunction<Int32 Function(IntPtr hKey),
 /// );
 /// ```
 /// {@category advapi32}
-final RegOpenKeyEx = _advapi32.lookupFunction<
-    Int32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey, Uint32 ulOptions,
-        Int32 samDesired, Pointer<IntPtr> phkResult),
-    int Function(int hKey, Pointer<Utf16> lpSubKey, int ulOptions,
-        int samDesired, Pointer<IntPtr> phkResult)>('RegOpenKeyExW');
+int RegOpenKeyEx(int hKey, Pointer<Utf16> lpSubKey, int ulOptions,
+    int samDesired, Pointer<IntPtr> phkResult) {
+  final _RegOpenKeyEx = _advapi32.lookupFunction<
+      Int32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey, Uint32 ulOptions,
+          Int32 samDesired, Pointer<IntPtr> phkResult),
+      int Function(int hKey, Pointer<Utf16> lpSubKey, int ulOptions,
+          int samDesired, Pointer<IntPtr> phkResult)>('RegOpenKeyExW');
+  return _RegOpenKeyEx(hKey, lpSubKey, ulOptions, samDesired, phkResult);
+}
 
 /// Retrieves the type and data for the specified value name associated
 /// with an open registry key. To ensure that any string values (REG_SZ,
@@ -129,18 +149,28 @@ final RegOpenKeyEx = _advapi32.lookupFunction<
 /// );
 /// ```
 /// {@category advapi32}
-final RegQueryValueEx = _advapi32.lookupFunction<
-    Int32 Function(
-        IntPtr hKey,
-        Pointer<Utf16> lpValueName,
-        Pointer<Uint32> lpReserved,
-        Pointer<Uint32> lpType,
-        Pointer<Uint8> lpData,
-        Pointer<Uint32> lpcbData),
-    int Function(
-        int hKey,
-        Pointer<Utf16> lpValueName,
-        Pointer<Uint32> lpReserved,
-        Pointer<Uint32> lpType,
-        Pointer<Uint8> lpData,
-        Pointer<Uint32> lpcbData)>('RegQueryValueExW');
+int RegQueryValueEx(
+    int hKey,
+    Pointer<Utf16> lpValueName,
+    Pointer<Uint32> lpReserved,
+    Pointer<Uint32> lpType,
+    Pointer<Uint8> lpData,
+    Pointer<Uint32> lpcbData) {
+  final _RegQueryValueEx = _advapi32.lookupFunction<
+      Int32 Function(
+          IntPtr hKey,
+          Pointer<Utf16> lpValueName,
+          Pointer<Uint32> lpReserved,
+          Pointer<Uint32> lpType,
+          Pointer<Uint8> lpData,
+          Pointer<Uint32> lpcbData),
+      int Function(
+          int hKey,
+          Pointer<Utf16> lpValueName,
+          Pointer<Uint32> lpReserved,
+          Pointer<Uint32> lpType,
+          Pointer<Uint8> lpData,
+          Pointer<Uint32> lpcbData)>('RegQueryValueExW');
+  return _RegQueryValueEx(
+      hKey, lpValueName, lpReserved, lpType, lpData, lpcbData);
+}

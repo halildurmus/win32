@@ -30,9 +30,12 @@ final _kernel32 = DynamicLibrary.open('kernel32.dll');
 /// );
 /// ```
 /// {@category kernel32}
-final ActivateActCtx = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hActCtx, Pointer<IntPtr> lpCookie),
-    int Function(int hActCtx, Pointer<IntPtr> lpCookie)>('ActivateActCtx');
+int ActivateActCtx(int hActCtx, Pointer<IntPtr> lpCookie) {
+  final _ActivateActCtx = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hActCtx, Pointer<IntPtr> lpCookie),
+      int Function(int hActCtx, Pointer<IntPtr> lpCookie)>('ActivateActCtx');
+  return _ActivateActCtx(hActCtx, lpCookie);
+}
 
 /// Allocates a new console for the calling process.
 ///
@@ -40,8 +43,11 @@ final ActivateActCtx = _kernel32.lookupFunction<
 /// BOOL WINAPI AllocConsole(void);
 /// ```
 /// {@category kernel32}
-final AllocConsole =
-    _kernel32.lookupFunction<Int32 Function(), int Function()>('AllocConsole');
+int AllocConsole() {
+  final _AllocConsole = _kernel32
+      .lookupFunction<Int32 Function(), int Function()>('AllocConsole');
+  return _AllocConsole();
+}
 
 /// Attaches the calling process to the console of the specified process.
 ///
@@ -51,9 +57,12 @@ final AllocConsole =
 /// );
 /// ```
 /// {@category kernel32}
-final AttachConsole = _kernel32.lookupFunction<
-    Int32 Function(Uint32 dwProcessId),
-    int Function(int dwProcessId)>('AttachConsole');
+int AttachConsole(int dwProcessId) {
+  final _AttachConsole = _kernel32.lookupFunction<
+      Int32 Function(Uint32 dwProcessId),
+      int Function(int dwProcessId)>('AttachConsole');
+  return _AttachConsole(dwProcessId);
+}
 
 /// Generates simple tones on the speaker. The function is synchronous; it
 /// performs an alertable wait and does not return control to its caller
@@ -66,9 +75,12 @@ final AttachConsole = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final Beep = _kernel32.lookupFunction<
-    Int32 Function(Uint32 dwFreq, Uint32 dwDuration),
-    int Function(int dwFreq, int dwDuration)>('Beep');
+int Beep(int dwFreq, int dwDuration) {
+  final _Beep = _kernel32.lookupFunction<
+      Int32 Function(Uint32 dwFreq, Uint32 dwDuration),
+      int Function(int dwFreq, int dwDuration)>('Beep');
+  return _Beep(dwFreq, dwDuration);
+}
 
 /// Retrieves a handle that can be used by the UpdateResource function to
 /// add, delete, or replace resources in a binary module.
@@ -80,10 +92,14 @@ final Beep = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final BeginUpdateResource = _kernel32.lookupFunction<
-    IntPtr Function(Pointer<Utf16> pFilename, Int32 bDeleteExistingResources),
-    int Function(Pointer<Utf16> pFilename,
-        int bDeleteExistingResources)>('BeginUpdateResourceW');
+int BeginUpdateResource(
+    Pointer<Utf16> pFilename, int bDeleteExistingResources) {
+  final _BeginUpdateResource = _kernel32.lookupFunction<
+      IntPtr Function(Pointer<Utf16> pFilename, Int32 bDeleteExistingResources),
+      int Function(Pointer<Utf16> pFilename,
+          int bDeleteExistingResources)>('BeginUpdateResourceW');
+  return _BeginUpdateResource(pFilename, bDeleteExistingResources);
+}
 
 /// Closes an open object handle.
 ///
@@ -93,8 +109,11 @@ final BeginUpdateResource = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final CloseHandle = _kernel32.lookupFunction<Int32 Function(IntPtr hObject),
-    int Function(int hObject)>('CloseHandle');
+int CloseHandle(int hObject) {
+  final _CloseHandle = _kernel32.lookupFunction<Int32 Function(IntPtr hObject),
+      int Function(int hObject)>('CloseHandle');
+  return _CloseHandle(hObject);
+}
 
 /// Closes a pseudoconsole from the given handle.
 ///
@@ -104,9 +123,12 @@ final CloseHandle = _kernel32.lookupFunction<Int32 Function(IntPtr hObject),
 /// );
 /// ```
 /// {@category kernel32}
-final ClosePseudoConsole = _kernel32.lookupFunction<
-    Void Function(Pointer<IntPtr> hPC),
-    void Function(Pointer<IntPtr> hPC)>('ClosePseudoConsole');
+void ClosePseudoConsole(Pointer<IntPtr> hPC) {
+  final _ClosePseudoConsole = _kernel32.lookupFunction<
+      Void Function(Pointer<IntPtr> hPC),
+      void Function(Pointer<IntPtr> hPC)>('ClosePseudoConsole');
+  return _ClosePseudoConsole(hPC);
+}
 
 /// Creates a console screen buffer.
 ///
@@ -120,19 +142,28 @@ final ClosePseudoConsole = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final CreateConsoleScreenBuffer = _kernel32.lookupFunction<
-    IntPtr Function(
-        Uint32 dwDesiredAccess,
-        Uint32 dwShareMode,
-        Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
-        Uint32 dwFlags,
-        Pointer lpScreenBufferData),
-    int Function(
-        int dwDesiredAccess,
-        int dwShareMode,
-        Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
-        int dwFlags,
-        Pointer lpScreenBufferData)>('CreateConsoleScreenBuffer');
+int CreateConsoleScreenBuffer(
+    int dwDesiredAccess,
+    int dwShareMode,
+    Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
+    int dwFlags,
+    Pointer lpScreenBufferData) {
+  final _CreateConsoleScreenBuffer = _kernel32.lookupFunction<
+      IntPtr Function(
+          Uint32 dwDesiredAccess,
+          Uint32 dwShareMode,
+          Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
+          Uint32 dwFlags,
+          Pointer lpScreenBufferData),
+      int Function(
+          int dwDesiredAccess,
+          int dwShareMode,
+          Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
+          int dwFlags,
+          Pointer lpScreenBufferData)>('CreateConsoleScreenBuffer');
+  return _CreateConsoleScreenBuffer(dwDesiredAccess, dwShareMode,
+      lpSecurityAttributes, dwFlags, lpScreenBufferData);
+}
 
 /// Creates or opens a file or I/O device. The most commonly used I/O
 /// devices are as follows: file, file stream, directory, physical disk,
@@ -153,23 +184,40 @@ final CreateConsoleScreenBuffer = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final CreateFile = _kernel32.lookupFunction<
-    IntPtr Function(
-        Pointer<Utf16> lpFileName,
-        Uint32 dwDesiredAccess,
-        Uint32 dwShareMode,
-        Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
-        Uint32 dwCreationDisposition,
-        Uint32 dwFlagsAndAttributes,
-        IntPtr hTemplateFile),
-    int Function(
-        Pointer<Utf16> lpFileName,
-        int dwDesiredAccess,
-        int dwShareMode,
-        Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
-        int dwCreationDisposition,
-        int dwFlagsAndAttributes,
-        int hTemplateFile)>('CreateFileW');
+int CreateFile(
+    Pointer<Utf16> lpFileName,
+    int dwDesiredAccess,
+    int dwShareMode,
+    Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
+    int dwCreationDisposition,
+    int dwFlagsAndAttributes,
+    int hTemplateFile) {
+  final _CreateFile = _kernel32.lookupFunction<
+      IntPtr Function(
+          Pointer<Utf16> lpFileName,
+          Uint32 dwDesiredAccess,
+          Uint32 dwShareMode,
+          Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
+          Uint32 dwCreationDisposition,
+          Uint32 dwFlagsAndAttributes,
+          IntPtr hTemplateFile),
+      int Function(
+          Pointer<Utf16> lpFileName,
+          int dwDesiredAccess,
+          int dwShareMode,
+          Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
+          int dwCreationDisposition,
+          int dwFlagsAndAttributes,
+          int hTemplateFile)>('CreateFileW');
+  return _CreateFile(
+      lpFileName,
+      dwDesiredAccess,
+      dwShareMode,
+      lpSecurityAttributes,
+      dwCreationDisposition,
+      dwFlagsAndAttributes,
+      hTemplateFile);
+}
 
 /// Creates an anonymous pipe, and returns handles to the read and write
 /// ends of the pipe.
@@ -183,14 +231,18 @@ final CreateFile = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final CreatePipe = _kernel32.lookupFunction<
-    Int32 Function(Pointer<IntPtr> hReadPipe, Pointer<IntPtr> hWritePipe,
-        Pointer<SECURITY_ATTRIBUTES> lpPipeAttributes, Uint32 nSize),
-    int Function(
-        Pointer<IntPtr> hReadPipe,
-        Pointer<IntPtr> hWritePipe,
-        Pointer<SECURITY_ATTRIBUTES> lpPipeAttributes,
-        int nSize)>('CreatePipe');
+int CreatePipe(Pointer<IntPtr> hReadPipe, Pointer<IntPtr> hWritePipe,
+    Pointer<SECURITY_ATTRIBUTES> lpPipeAttributes, int nSize) {
+  final _CreatePipe = _kernel32.lookupFunction<
+      Int32 Function(Pointer<IntPtr> hReadPipe, Pointer<IntPtr> hWritePipe,
+          Pointer<SECURITY_ATTRIBUTES> lpPipeAttributes, Uint32 nSize),
+      int Function(
+          Pointer<IntPtr> hReadPipe,
+          Pointer<IntPtr> hWritePipe,
+          Pointer<SECURITY_ATTRIBUTES> lpPipeAttributes,
+          int nSize)>('CreatePipe');
+  return _CreatePipe(hReadPipe, hWritePipe, lpPipeAttributes, nSize);
+}
 
 /// Creates a new process and its primary thread. The new process runs in
 /// the security context of the calling process.
@@ -210,29 +262,52 @@ final CreatePipe = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final CreateProcess = _kernel32.lookupFunction<
-    Int32 Function(
-        Pointer<Utf16> lpApplicationName,
-        Pointer<Utf16> lpCommandLine,
-        Pointer<SECURITY_ATTRIBUTES> lpProcessAttributes,
-        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
-        Int32 bInheritHandles,
-        Uint32 dwCreationFlags,
-        Pointer lpEnvironment,
-        Pointer<Utf16> lpCurrentDirectory,
-        Pointer lpStartupInfo,
-        Pointer<PROCESS_INFORMATION> lpProcessInformation),
-    int Function(
-        Pointer<Utf16> lpApplicationName,
-        Pointer<Utf16> lpCommandLine,
-        Pointer<SECURITY_ATTRIBUTES> lpProcessAttributes,
-        Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
-        int bInheritHandles,
-        int dwCreationFlags,
-        Pointer lpEnvironment,
-        Pointer<Utf16> lpCurrentDirectory,
-        Pointer lpStartupInfo,
-        Pointer<PROCESS_INFORMATION> lpProcessInformation)>('CreateProcessW');
+int CreateProcess(
+    Pointer<Utf16> lpApplicationName,
+    Pointer<Utf16> lpCommandLine,
+    Pointer<SECURITY_ATTRIBUTES> lpProcessAttributes,
+    Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+    int bInheritHandles,
+    int dwCreationFlags,
+    Pointer lpEnvironment,
+    Pointer<Utf16> lpCurrentDirectory,
+    Pointer lpStartupInfo,
+    Pointer<PROCESS_INFORMATION> lpProcessInformation) {
+  final _CreateProcess = _kernel32.lookupFunction<
+      Int32 Function(
+          Pointer<Utf16> lpApplicationName,
+          Pointer<Utf16> lpCommandLine,
+          Pointer<SECURITY_ATTRIBUTES> lpProcessAttributes,
+          Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+          Int32 bInheritHandles,
+          Uint32 dwCreationFlags,
+          Pointer lpEnvironment,
+          Pointer<Utf16> lpCurrentDirectory,
+          Pointer lpStartupInfo,
+          Pointer<PROCESS_INFORMATION> lpProcessInformation),
+      int Function(
+          Pointer<Utf16> lpApplicationName,
+          Pointer<Utf16> lpCommandLine,
+          Pointer<SECURITY_ATTRIBUTES> lpProcessAttributes,
+          Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes,
+          int bInheritHandles,
+          int dwCreationFlags,
+          Pointer lpEnvironment,
+          Pointer<Utf16> lpCurrentDirectory,
+          Pointer lpStartupInfo,
+          Pointer<PROCESS_INFORMATION> lpProcessInformation)>('CreateProcessW');
+  return _CreateProcess(
+      lpApplicationName,
+      lpCommandLine,
+      lpProcessAttributes,
+      lpThreadAttributes,
+      bInheritHandles,
+      dwCreationFlags,
+      lpEnvironment,
+      lpCurrentDirectory,
+      lpStartupInfo,
+      lpProcessInformation);
+}
 
 /// Creates a new pseudoconsole object for the calling process.
 ///
@@ -246,11 +321,15 @@ final CreateProcess = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final CreatePseudoConsole = _kernel32.lookupFunction<
-    Int32 Function(Int32 size, IntPtr hInput, IntPtr hOutput, Int32 dwFlags,
-        Pointer<IntPtr> phPC),
-    int Function(int size, int hInput, int hOutput, int dwFlags,
-        Pointer<IntPtr> phPC)>('CreatePseudoConsole');
+int CreatePseudoConsole(
+    int size, int hInput, int hOutput, int dwFlags, Pointer<IntPtr> phPC) {
+  final _CreatePseudoConsole = _kernel32.lookupFunction<
+      Int32 Function(Int32 size, IntPtr hInput, IntPtr hOutput, Int32 dwFlags,
+          Pointer<IntPtr> phPC),
+      int Function(int size, int hInput, int hOutput, int dwFlags,
+          Pointer<IntPtr> phPC)>('CreatePseudoConsole');
+  return _CreatePseudoConsole(size, hInput, hOutput, dwFlags, phPC);
+}
 
 /// The DeactivateActCtx function deactivates the activation context
 /// corresponding to the specified cookie.
@@ -262,9 +341,12 @@ final CreatePseudoConsole = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final DeactivateActCtx = _kernel32.lookupFunction<
-    Int32 Function(Uint32 dwFlags, IntPtr ulCookie),
-    int Function(int dwFlags, int ulCookie)>('DeactivateActCtx');
+int DeactivateActCtx(int dwFlags, int ulCookie) {
+  final _DeactivateActCtx = _kernel32.lookupFunction<
+      Int32 Function(Uint32 dwFlags, IntPtr ulCookie),
+      int Function(int dwFlags, int ulCookie)>('DeactivateActCtx');
+  return _DeactivateActCtx(dwFlags, ulCookie);
+}
 
 /// Commits or discards changes made prior to a call to UpdateResource.
 ///
@@ -275,9 +357,12 @@ final DeactivateActCtx = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final EndUpdateResource = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hUpdate, Int32 fDiscard),
-    int Function(int hUpdate, int fDiscard)>('EndUpdateResourceW');
+int EndUpdateResource(int hUpdate, int fDiscard) {
+  final _EndUpdateResource = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hUpdate, Int32 fDiscard),
+      int Function(int hUpdate, int fDiscard)>('EndUpdateResourceW');
+  return _EndUpdateResource(hUpdate, fDiscard);
+}
 
 /// Enumerates resources of a specified type within a binary module. For
 /// Windows Vista and later, this is typically a language-neutral Portable
@@ -296,11 +381,18 @@ final EndUpdateResource = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final EnumResourceNames = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hModule, Pointer<Utf16> lpType,
-        Pointer<NativeFunction> lpEnumFunc, IntPtr lParam),
-    int Function(int hModule, Pointer<Utf16> lpType,
-        Pointer<NativeFunction> lpEnumFunc, int lParam)>('EnumResourceNamesW');
+int EnumResourceNames(int hModule, Pointer<Utf16> lpType,
+    Pointer<NativeFunction> lpEnumFunc, int lParam) {
+  final _EnumResourceNames = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hModule, Pointer<Utf16> lpType,
+          Pointer<NativeFunction> lpEnumFunc, IntPtr lParam),
+      int Function(
+          int hModule,
+          Pointer<Utf16> lpType,
+          Pointer<NativeFunction> lpEnumFunc,
+          int lParam)>('EnumResourceNamesW');
+  return _EnumResourceNames(hModule, lpType, lpEnumFunc, lParam);
+}
 
 /// Enumerates resource types within a binary module. Starting with Windows
 /// Vista, this is typically a language-neutral Portable Executable (LN
@@ -318,11 +410,15 @@ final EnumResourceNames = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final EnumResourceTypes = _kernel32.lookupFunction<
-    Int32 Function(
-        IntPtr hModule, Pointer<NativeFunction> lpEnumFunc, IntPtr lParam),
-    int Function(int hModule, Pointer<NativeFunction> lpEnumFunc,
-        int lParam)>('EnumResourceTypesW');
+int EnumResourceTypes(
+    int hModule, Pointer<NativeFunction> lpEnumFunc, int lParam) {
+  final _EnumResourceTypes = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hModule, Pointer<NativeFunction> lpEnumFunc, IntPtr lParam),
+      int Function(int hModule, Pointer<NativeFunction> lpEnumFunc,
+          int lParam)>('EnumResourceTypesW');
+  return _EnumResourceTypes(hModule, lpEnumFunc, lParam);
+}
 
 /// Sets the character attributes for a specified number of character
 /// cells, beginning at the specified coordinates in a screen buffer.
@@ -337,15 +433,21 @@ final EnumResourceTypes = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final FillConsoleOutputAttribute = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hConsoleOutput, Uint16 wAttribute, Uint32 nLength,
-        Int32 dwWriteCoord, Pointer<Uint32> lpNumberOfAttrsWritten),
-    int Function(
-        int hConsoleOutput,
-        int wAttribute,
-        int nLength,
-        int dwWriteCoord,
-        Pointer<Uint32> lpNumberOfAttrsWritten)>('FillConsoleOutputAttribute');
+int FillConsoleOutputAttribute(int hConsoleOutput, int wAttribute, int nLength,
+    int dwWriteCoord, Pointer<Uint32> lpNumberOfAttrsWritten) {
+  final _FillConsoleOutputAttribute = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hConsoleOutput, Uint16 wAttribute, Uint32 nLength,
+          Int32 dwWriteCoord, Pointer<Uint32> lpNumberOfAttrsWritten),
+      int Function(
+          int hConsoleOutput,
+          int wAttribute,
+          int nLength,
+          int dwWriteCoord,
+          Pointer<Uint32>
+              lpNumberOfAttrsWritten)>('FillConsoleOutputAttribute');
+  return _FillConsoleOutputAttribute(hConsoleOutput, wAttribute, nLength,
+      dwWriteCoord, lpNumberOfAttrsWritten);
+}
 
 /// Writes a character to the console screen buffer a specified number of
 /// times, beginning at the specified coordinates.
@@ -360,15 +462,21 @@ final FillConsoleOutputAttribute = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final FillConsoleOutputCharacter = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hConsoleOutput, Uint8 cCharacter, Uint32 nLength,
-        Int32 dwWriteCoord, Pointer<Uint32> lpNumberOfCharsWritten),
-    int Function(
-        int hConsoleOutput,
-        int cCharacter,
-        int nLength,
-        int dwWriteCoord,
-        Pointer<Uint32> lpNumberOfCharsWritten)>('FillConsoleOutputCharacterW');
+int FillConsoleOutputCharacter(int hConsoleOutput, int cCharacter, int nLength,
+    int dwWriteCoord, Pointer<Uint32> lpNumberOfCharsWritten) {
+  final _FillConsoleOutputCharacter = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hConsoleOutput, Uint8 cCharacter, Uint32 nLength,
+          Int32 dwWriteCoord, Pointer<Uint32> lpNumberOfCharsWritten),
+      int Function(
+          int hConsoleOutput,
+          int cCharacter,
+          int nLength,
+          int dwWriteCoord,
+          Pointer<Uint32>
+              lpNumberOfCharsWritten)>('FillConsoleOutputCharacterW');
+  return _FillConsoleOutputCharacter(hConsoleOutput, cCharacter, nLength,
+      dwWriteCoord, lpNumberOfCharsWritten);
+}
 
 /// Retrieves the name of a volume on a computer. FindFirstVolume is used
 /// to begin scanning the volumes of a computer.
@@ -380,10 +488,13 @@ final FillConsoleOutputCharacter = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final FindFirstVolume = _kernel32.lookupFunction<
-    IntPtr Function(Pointer<Utf16> lpszVolumeName, Uint32 cchBufferLength),
-    int Function(Pointer<Utf16> lpszVolumeName,
-        int cchBufferLength)>('FindFirstVolumeW');
+int FindFirstVolume(Pointer<Utf16> lpszVolumeName, int cchBufferLength) {
+  final _FindFirstVolume = _kernel32.lookupFunction<
+      IntPtr Function(Pointer<Utf16> lpszVolumeName, Uint32 cchBufferLength),
+      int Function(Pointer<Utf16> lpszVolumeName,
+          int cchBufferLength)>('FindFirstVolumeW');
+  return _FindFirstVolume(lpszVolumeName, cchBufferLength);
+}
 
 /// Continues a volume search started by a call to the FindFirstVolume
 /// function. FindNextVolume finds one volume per call.
@@ -396,11 +507,15 @@ final FindFirstVolume = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final FindNextVolume = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hFindVolume, Pointer<Utf16> lpszVolumeName,
-        Uint32 cchBufferLength),
-    int Function(int hFindVolume, Pointer<Utf16> lpszVolumeName,
-        int cchBufferLength)>('FindNextVolumeW');
+int FindNextVolume(
+    int hFindVolume, Pointer<Utf16> lpszVolumeName, int cchBufferLength) {
+  final _FindNextVolume = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFindVolume, Pointer<Utf16> lpszVolumeName,
+          Uint32 cchBufferLength),
+      int Function(int hFindVolume, Pointer<Utf16> lpszVolumeName,
+          int cchBufferLength)>('FindNextVolumeW');
+  return _FindNextVolume(hFindVolume, lpszVolumeName, cchBufferLength);
+}
 
 /// Closes the specified volume search handle. The FindFirstVolume and
 /// FindNextVolume functions use this search handle to locate volumes.
@@ -411,9 +526,12 @@ final FindNextVolume = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final FindVolumeClose = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hFindVolume),
-    int Function(int hFindVolume)>('FindVolumeClose');
+int FindVolumeClose(int hFindVolume) {
+  final _FindVolumeClose = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFindVolume),
+      int Function(int hFindVolume)>('FindVolumeClose');
+  return _FindVolumeClose(hFindVolume);
+}
 
 /// Flushes the console input buffer. All input records currently in the
 /// input buffer are discarded.
@@ -424,9 +542,12 @@ final FindVolumeClose = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final FlushConsoleInputBuffer = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hConsoleInput),
-    int Function(int hConsoleInput)>('FlushConsoleInputBuffer');
+int FlushConsoleInputBuffer(int hConsoleInput) {
+  final _FlushConsoleInputBuffer = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hConsoleInput),
+      int Function(int hConsoleInput)>('FlushConsoleInputBuffer');
+  return _FlushConsoleInputBuffer(hConsoleInput);
+}
 
 /// Formats a message string. The function requires a message definition as
 /// input. The message definition can come from a buffer passed into the
@@ -450,23 +571,28 @@ final FlushConsoleInputBuffer = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final FormatMessage = _kernel32.lookupFunction<
-    Int32 Function(
-        Uint32 dwFlags,
-        Pointer<Void> lpSource,
-        Uint32 dwMessageId,
-        Uint32 dwLanguageId,
-        Pointer<Utf16> lpBuffer,
-        Uint32 nSize,
-        Pointer arguments),
-    int Function(
-        int dwFlags,
-        Pointer<Void> lpSource,
-        int dwMessageId,
-        int dwLanguageId,
-        Pointer<Utf16> lpBuffer,
-        int nSize,
-        Pointer arguments)>('FormatMessageW');
+int FormatMessage(int dwFlags, Pointer<Void> lpSource, int dwMessageId,
+    int dwLanguageId, Pointer<Utf16> lpBuffer, int nSize, Pointer arguments) {
+  final _FormatMessage = _kernel32.lookupFunction<
+      Int32 Function(
+          Uint32 dwFlags,
+          Pointer<Void> lpSource,
+          Uint32 dwMessageId,
+          Uint32 dwLanguageId,
+          Pointer<Utf16> lpBuffer,
+          Uint32 nSize,
+          Pointer arguments),
+      int Function(
+          int dwFlags,
+          Pointer<Void> lpSource,
+          int dwMessageId,
+          int dwLanguageId,
+          Pointer<Utf16> lpBuffer,
+          int nSize,
+          Pointer arguments)>('FormatMessageW');
+  return _FormatMessage(
+      dwFlags, lpSource, dwMessageId, dwLanguageId, lpBuffer, nSize, arguments);
+}
 
 /// Detaches the calling process from its console.
 ///
@@ -474,8 +600,11 @@ final FormatMessage = _kernel32.lookupFunction<
 /// BOOL WINAPI FreeConsole(void);
 /// ```
 /// {@category kernel32}
-final FreeConsole =
-    _kernel32.lookupFunction<Int32 Function(), int Function()>('FreeConsole');
+int FreeConsole() {
+  final _FreeConsole =
+      _kernel32.lookupFunction<Int32 Function(), int Function()>('FreeConsole');
+  return _FreeConsole();
+}
 
 /// Frees the loaded dynamic-link library (DLL) module and, if necessary,
 /// decrements its reference count. When the reference count reaches zero,
@@ -488,8 +617,12 @@ final FreeConsole =
 /// );
 /// ```
 /// {@category kernel32}
-final FreeLibrary = _kernel32.lookupFunction<Int32 Function(IntPtr hLibModule),
-    int Function(int hLibModule)>('FreeLibrary');
+int FreeLibrary(int hLibModule) {
+  final _FreeLibrary = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hLibModule),
+      int Function(int hLibModule)>('FreeLibrary');
+  return _FreeLibrary(hLibModule);
+}
 
 /// Retrieves a NetBIOS or DNS name associated with the local computer. The
 /// names are established at system startup, when the system reads them
@@ -503,11 +636,15 @@ final FreeLibrary = _kernel32.lookupFunction<Int32 Function(IntPtr hLibModule),
 /// );
 /// ```
 /// {@category kernel32}
-final GetComputerNameEx = _kernel32.lookupFunction<
-    Int32 Function(
-        Int32 NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize),
-    int Function(int NameType, Pointer<Utf16> lpBuffer,
-        Pointer<Uint32> nSize)>('GetComputerNameExW');
+int GetComputerNameEx(
+    int NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize) {
+  final _GetComputerNameEx = _kernel32.lookupFunction<
+      Int32 Function(
+          Int32 NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize),
+      int Function(int NameType, Pointer<Utf16> lpBuffer,
+          Pointer<Uint32> nSize)>('GetComputerNameExW');
+  return _GetComputerNameEx(NameType, lpBuffer, nSize);
+}
 
 /// Retrieves information about the size and visibility of the cursor for
 /// the specified console screen buffer.
@@ -519,12 +656,16 @@ final GetComputerNameEx = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final GetConsoleCursorInfo = _kernel32.lookupFunction<
-        Int32 Function(IntPtr hConsoleOutput,
-            Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo),
-        int Function(int hConsoleOutput,
-            Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo)>(
-    'GetConsoleCursorInfo');
+int GetConsoleCursorInfo(
+    int hConsoleOutput, Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo) {
+  final _GetConsoleCursorInfo = _kernel32.lookupFunction<
+          Int32 Function(IntPtr hConsoleOutput,
+              Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo),
+          int Function(int hConsoleOutput,
+              Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo)>(
+      'GetConsoleCursorInfo');
+  return _GetConsoleCursorInfo(hConsoleOutput, lpConsoleCursorInfo);
+}
 
 /// Retrieves the current input mode of a console's input buffer or the
 /// current output mode of a console screen buffer.
@@ -536,9 +677,13 @@ final GetConsoleCursorInfo = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final GetConsoleMode = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hConsoleHandle, Pointer<Uint32> lpMode),
-    int Function(int hConsoleHandle, Pointer<Uint32> lpMode)>('GetConsoleMode');
+int GetConsoleMode(int hConsoleHandle, Pointer<Uint32> lpMode) {
+  final _GetConsoleMode = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hConsoleHandle, Pointer<Uint32> lpMode),
+      int Function(
+          int hConsoleHandle, Pointer<Uint32> lpMode)>('GetConsoleMode');
+  return _GetConsoleMode(hConsoleHandle, lpMode);
+}
 
 /// Retrieves information about the specified console screen buffer.
 ///
@@ -549,12 +694,16 @@ final GetConsoleMode = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final GetConsoleScreenBufferInfo = _kernel32.lookupFunction<
-        Int32 Function(IntPtr hConsoleOutput,
-            Pointer<CONSOLE_SCREEN_BUFFER_INFO> lpConsoleScreenBufferInfo),
-        int Function(int hConsoleOutput,
-            Pointer<CONSOLE_SCREEN_BUFFER_INFO> lpConsoleScreenBufferInfo)>(
-    'GetConsoleScreenBufferInfo');
+int GetConsoleScreenBufferInfo(int hConsoleOutput,
+    Pointer<CONSOLE_SCREEN_BUFFER_INFO> lpConsoleScreenBufferInfo) {
+  final _GetConsoleScreenBufferInfo = _kernel32.lookupFunction<
+          Int32 Function(IntPtr hConsoleOutput,
+              Pointer<CONSOLE_SCREEN_BUFFER_INFO> lpConsoleScreenBufferInfo),
+          int Function(int hConsoleOutput,
+              Pointer<CONSOLE_SCREEN_BUFFER_INFO> lpConsoleScreenBufferInfo)>(
+      'GetConsoleScreenBufferInfo');
+  return _GetConsoleScreenBufferInfo(hConsoleOutput, lpConsoleScreenBufferInfo);
+}
 
 /// Retrieves information about the current console selection.
 ///
@@ -564,10 +713,15 @@ final GetConsoleScreenBufferInfo = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final GetConsoleSelectionInfo = _kernel32.lookupFunction<
-        Int32 Function(Pointer<CONSOLE_SELECTION_INFO> lpConsoleSelectionInfo),
-        int Function(Pointer<CONSOLE_SELECTION_INFO> lpConsoleSelectionInfo)>(
-    'GetConsoleSelectionInfo');
+int GetConsoleSelectionInfo(
+    Pointer<CONSOLE_SELECTION_INFO> lpConsoleSelectionInfo) {
+  final _GetConsoleSelectionInfo = _kernel32.lookupFunction<
+      Int32 Function(Pointer<CONSOLE_SELECTION_INFO> lpConsoleSelectionInfo),
+      int Function(
+          Pointer<CONSOLE_SELECTION_INFO>
+              lpConsoleSelectionInfo)>('GetConsoleSelectionInfo');
+  return _GetConsoleSelectionInfo(lpConsoleSelectionInfo);
+}
 
 /// Retrieves the title for the current console window.
 ///
@@ -578,9 +732,13 @@ final GetConsoleSelectionInfo = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final GetConsoleTitle = _kernel32.lookupFunction<
-    Uint32 Function(Pointer<Utf16> lpConsoleTitle, Uint32 nSize),
-    int Function(Pointer<Utf16> lpConsoleTitle, int nSize)>('GetConsoleTitleW');
+int GetConsoleTitle(Pointer<Utf16> lpConsoleTitle, int nSize) {
+  final _GetConsoleTitle = _kernel32.lookupFunction<
+      Uint32 Function(Pointer<Utf16> lpConsoleTitle, Uint32 nSize),
+      int Function(
+          Pointer<Utf16> lpConsoleTitle, int nSize)>('GetConsoleTitleW');
+  return _GetConsoleTitle(lpConsoleTitle, nSize);
+}
 
 /// Retrieves the window handle used by the console associated with the
 /// calling process.
@@ -589,8 +747,11 @@ final GetConsoleTitle = _kernel32.lookupFunction<
 /// HWND WINAPI GetConsoleWindow(void);
 /// ```
 /// {@category kernel32}
-final GetConsoleWindow = _kernel32
-    .lookupFunction<IntPtr Function(), int Function()>('GetConsoleWindow');
+int GetConsoleWindow() {
+  final _GetConsoleWindow = _kernel32
+      .lookupFunction<IntPtr Function(), int Function()>('GetConsoleWindow');
+  return _GetConsoleWindow();
+}
 
 /// Retrieves a pseudo handle for the current process.
 ///
@@ -598,8 +759,11 @@ final GetConsoleWindow = _kernel32
 /// HANDLE GetCurrentProcess();
 /// ```
 /// {@category kernel32}
-final GetCurrentProcess = _kernel32
-    .lookupFunction<IntPtr Function(), int Function()>('GetCurrentProcess');
+int GetCurrentProcess() {
+  final _GetCurrentProcess = _kernel32
+      .lookupFunction<IntPtr Function(), int Function()>('GetCurrentProcess');
+  return _GetCurrentProcess();
+}
 
 /// Retrieves the size of the largest possible console window, based on the
 /// current font and the size of the display.
@@ -610,9 +774,12 @@ final GetCurrentProcess = _kernel32
 /// );
 /// ```
 /// {@category kernel32}
-final GetLargestConsoleWindowSize = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hConsoleOutput),
-    int Function(int hConsoleOutput)>('GetLargestConsoleWindowSize');
+int GetLargestConsoleWindowSize(int hConsoleOutput) {
+  final _GetLargestConsoleWindowSize = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hConsoleOutput),
+      int Function(int hConsoleOutput)>('GetLargestConsoleWindowSize');
+  return _GetLargestConsoleWindowSize(hConsoleOutput);
+}
 
 /// Retrieves the calling thread's last-error code value. The last-error
 /// code is maintained on a per-thread basis. Multiple threads do not
@@ -622,8 +789,11 @@ final GetLargestConsoleWindowSize = _kernel32.lookupFunction<
 /// _Post_equals_last_error_ DWORD GetLastError();
 /// ```
 /// {@category kernel32}
-final GetLastError =
-    _kernel32.lookupFunction<Uint32 Function(), int Function()>('GetLastError');
+int GetLastError() {
+  final _GetLastError = _kernel32
+      .lookupFunction<Uint32 Function(), int Function()>('GetLastError');
+  return _GetLastError();
+}
 
 /// Retrieves the fully qualified path for the file that contains the
 /// specified module. The module must have been loaded by the current
@@ -637,10 +807,13 @@ final GetLastError =
 /// );
 /// ```
 /// {@category kernel32}
-final GetModuleFileName = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hModule, Pointer<Utf16> lpFilename, Uint32 nSize),
-    int Function(int hModule, Pointer<Utf16> lpFilename,
-        int nSize)>('GetModuleFileNameW');
+int GetModuleFileName(int hModule, Pointer<Utf16> lpFilename, int nSize) {
+  final _GetModuleFileName = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hModule, Pointer<Utf16> lpFilename, Uint32 nSize),
+      int Function(int hModule, Pointer<Utf16> lpFilename,
+          int nSize)>('GetModuleFileNameW');
+  return _GetModuleFileName(hModule, lpFilename, nSize);
+}
 
 /// Retrieves a module handle for the specified module. The module must
 /// have been loaded by the calling process.
@@ -651,9 +824,12 @@ final GetModuleFileName = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final GetModuleHandle = _kernel32.lookupFunction<
-    IntPtr Function(Pointer<Utf16> lpModuleName),
-    int Function(Pointer<Utf16> lpModuleName)>('GetModuleHandleW');
+int GetModuleHandle(Pointer<Utf16> lpModuleName) {
+  final _GetModuleHandle = _kernel32.lookupFunction<
+      IntPtr Function(Pointer<Utf16> lpModuleName),
+      int Function(Pointer<Utf16> lpModuleName)>('GetModuleHandleW');
+  return _GetModuleHandle(lpModuleName);
+}
 
 /// Retrieves information about the current system to an application
 /// running under WOW64. If the function is called from a 64-bit
@@ -667,9 +843,12 @@ final GetModuleHandle = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final GetNativeSystemInfo = _kernel32.lookupFunction<
-    Void Function(Pointer<SYSTEM_INFO> lpSystemInfo),
-    void Function(Pointer<SYSTEM_INFO> lpSystemInfo)>('GetNativeSystemInfo');
+void GetNativeSystemInfo(Pointer<SYSTEM_INFO> lpSystemInfo) {
+  final _GetNativeSystemInfo = _kernel32.lookupFunction<
+      Void Function(Pointer<SYSTEM_INFO> lpSystemInfo),
+      void Function(Pointer<SYSTEM_INFO> lpSystemInfo)>('GetNativeSystemInfo');
+  return _GetNativeSystemInfo(lpSystemInfo);
+}
 
 /// Retrieves the amount of RAM that is physically installed on the
 /// computer.
@@ -680,10 +859,13 @@ final GetNativeSystemInfo = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final GetPhysicallyInstalledSystemMemory = _kernel32.lookupFunction<
-        Int32 Function(Pointer<Uint64> TotalMemoryInKilobytes),
-        int Function(Pointer<Uint64> TotalMemoryInKilobytes)>(
-    'GetPhysicallyInstalledSystemMemory');
+int GetPhysicallyInstalledSystemMemory(Pointer<Uint64> TotalMemoryInKilobytes) {
+  final _GetPhysicallyInstalledSystemMemory = _kernel32.lookupFunction<
+          Int32 Function(Pointer<Uint64> TotalMemoryInKilobytes),
+          int Function(Pointer<Uint64> TotalMemoryInKilobytes)>(
+      'GetPhysicallyInstalledSystemMemory');
+  return _GetPhysicallyInstalledSystemMemory(TotalMemoryInKilobytes);
+}
 
 /// Retrieves the address of an exported function or variable from the
 /// specified dynamic-link library (DLL).
@@ -695,9 +877,12 @@ final GetPhysicallyInstalledSystemMemory = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final GetProcAddress = _kernel32.lookupFunction<
-    IntPtr Function(IntPtr hModule, Pointer<Uint8> lpProcName),
-    int Function(int hModule, Pointer<Uint8> lpProcName)>('GetProcAddress');
+int GetProcAddress(int hModule, Pointer<Uint8> lpProcName) {
+  final _GetProcAddress = _kernel32.lookupFunction<
+      IntPtr Function(IntPtr hModule, Pointer<Uint8> lpProcName),
+      int Function(int hModule, Pointer<Uint8> lpProcName)>('GetProcAddress');
+  return _GetProcAddress(hModule, lpProcName);
+}
 
 /// Retrieves a handle to the default heap of the calling process. This
 /// handle can then be used in subsequent calls to the heap functions.
@@ -706,8 +891,11 @@ final GetProcAddress = _kernel32.lookupFunction<
 /// HANDLE GetProcessHeap();
 /// ```
 /// {@category kernel32}
-final GetProcessHeap = _kernel32
-    .lookupFunction<IntPtr Function(), int Function()>('GetProcessHeap');
+int GetProcessHeap() {
+  final _GetProcessHeap = _kernel32
+      .lookupFunction<IntPtr Function(), int Function()>('GetProcessHeap');
+  return _GetProcessHeap();
+}
 
 /// Retrieves the product type for the operating system on the local
 /// computer, and maps the type to the product types supported by the
@@ -723,19 +911,28 @@ final GetProcessHeap = _kernel32
 /// );
 /// ```
 /// {@category kernel32}
-final GetProductInfo = _kernel32.lookupFunction<
-    Int32 Function(
-        Uint32 dwOSMajorVersion,
-        Uint32 dwOSMinorVersion,
-        Uint32 dwSpMajorVersion,
-        Uint32 dwSpMinorVersion,
-        Pointer<Uint32> pdwReturnedProductType),
-    int Function(
-        int dwOSMajorVersion,
-        int dwOSMinorVersion,
-        int dwSpMajorVersion,
-        int dwSpMinorVersion,
-        Pointer<Uint32> pdwReturnedProductType)>('GetProductInfo');
+int GetProductInfo(
+    int dwOSMajorVersion,
+    int dwOSMinorVersion,
+    int dwSpMajorVersion,
+    int dwSpMinorVersion,
+    Pointer<Uint32> pdwReturnedProductType) {
+  final _GetProductInfo = _kernel32.lookupFunction<
+      Int32 Function(
+          Uint32 dwOSMajorVersion,
+          Uint32 dwOSMinorVersion,
+          Uint32 dwSpMajorVersion,
+          Uint32 dwSpMinorVersion,
+          Pointer<Uint32> pdwReturnedProductType),
+      int Function(
+          int dwOSMajorVersion,
+          int dwOSMinorVersion,
+          int dwSpMajorVersion,
+          int dwSpMinorVersion,
+          Pointer<Uint32> pdwReturnedProductType)>('GetProductInfo');
+  return _GetProductInfo(dwOSMajorVersion, dwOSMinorVersion, dwSpMajorVersion,
+      dwSpMinorVersion, pdwReturnedProductType);
+}
 
 /// Retrieves a handle to the specified standard device (standard input,
 /// standard output, or standard error).
@@ -746,9 +943,12 @@ final GetProductInfo = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final GetStdHandle = _kernel32.lookupFunction<
-    IntPtr Function(Uint32 nStdHandle),
-    int Function(int nStdHandle)>('GetStdHandle');
+int GetStdHandle(int nStdHandle) {
+  final _GetStdHandle = _kernel32.lookupFunction<
+      IntPtr Function(Uint32 nStdHandle),
+      int Function(int nStdHandle)>('GetStdHandle');
+  return _GetStdHandle(nStdHandle);
+}
 
 /// Retrieves information about the current system. To retrieve accurate
 /// information for an application running on WOW64, call the
@@ -760,9 +960,12 @@ final GetStdHandle = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final GetSystemInfo = _kernel32.lookupFunction<
-    Void Function(Pointer<SYSTEM_INFO> lpSystemInfo),
-    void Function(Pointer<SYSTEM_INFO> lpSystemInfo)>('GetSystemInfo');
+void GetSystemInfo(Pointer<SYSTEM_INFO> lpSystemInfo) {
+  final _GetSystemInfo = _kernel32.lookupFunction<
+      Void Function(Pointer<SYSTEM_INFO> lpSystemInfo),
+      void Function(Pointer<SYSTEM_INFO> lpSystemInfo)>('GetSystemInfo');
+  return _GetSystemInfo(lpSystemInfo);
+}
 
 /// Retrieves the power status of the system. The status indicates whether
 /// the system is running on AC or DC power, whether the battery is
@@ -775,10 +978,13 @@ final GetSystemInfo = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final GetSystemPowerStatus = _kernel32.lookupFunction<
-        Int32 Function(Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus),
-        int Function(Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus)>(
-    'GetSystemPowerStatus');
+int GetSystemPowerStatus(Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus) {
+  final _GetSystemPowerStatus = _kernel32.lookupFunction<
+          Int32 Function(Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus),
+          int Function(Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus)>(
+      'GetSystemPowerStatus');
+  return _GetSystemPowerStatus(lpSystemPowerStatus);
+}
 
 /// Retrieves the path of the directory designated for temporary files.
 ///
@@ -789,9 +995,12 @@ final GetSystemPowerStatus = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final GetTempPath = _kernel32.lookupFunction<
-    Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
-    int Function(int nBufferLength, Pointer<Utf16> lpBuffer)>('GetTempPathW');
+int GetTempPath(int nBufferLength, Pointer<Utf16> lpBuffer) {
+  final _GetTempPath = _kernel32.lookupFunction<
+      Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
+      int Function(int nBufferLength, Pointer<Utf16> lpBuffer)>('GetTempPathW');
+  return _GetTempPath(nBufferLength, lpBuffer);
+}
 
 /// With the release of Windows 8.1, the behavior of the GetVersionEx API
 /// has changed in the value it will return for the operating system
@@ -808,9 +1017,13 @@ final GetTempPath = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final GetVersionEx = _kernel32.lookupFunction<
-    Int32 Function(Pointer<OSVERSIONINFO> lpVersionInformation),
-    int Function(Pointer<OSVERSIONINFO> lpVersionInformation)>('GetVersionExW');
+int GetVersionEx(Pointer<OSVERSIONINFO> lpVersionInformation) {
+  final _GetVersionEx = _kernel32.lookupFunction<
+      Int32 Function(Pointer<OSVERSIONINFO> lpVersionInformation),
+      int Function(
+          Pointer<OSVERSIONINFO> lpVersionInformation)>('GetVersionExW');
+  return _GetVersionEx(lpVersionInformation);
+}
 
 /// Retrieves a list of drive letters and mounted folder paths for the
 /// specified volume.
@@ -824,17 +1037,26 @@ final GetVersionEx = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final GetVolumePathNamesForVolumeName = _kernel32.lookupFunction<
-    Int32 Function(
-        Pointer<Utf16> lpszVolumeName,
-        Pointer<Utf16> lpszVolumePathNames,
-        Uint32 cchBufferLength,
-        Pointer<Uint32> lpcchReturnLength),
-    int Function(
-        Pointer<Utf16> lpszVolumeName,
-        Pointer<Utf16> lpszVolumePathNames,
-        int cchBufferLength,
-        Pointer<Uint32> lpcchReturnLength)>('GetVolumePathNamesForVolumeNameW');
+int GetVolumePathNamesForVolumeName(
+    Pointer<Utf16> lpszVolumeName,
+    Pointer<Utf16> lpszVolumePathNames,
+    int cchBufferLength,
+    Pointer<Uint32> lpcchReturnLength) {
+  final _GetVolumePathNamesForVolumeName = _kernel32.lookupFunction<
+          Int32 Function(
+              Pointer<Utf16> lpszVolumeName,
+              Pointer<Utf16> lpszVolumePathNames,
+              Uint32 cchBufferLength,
+              Pointer<Uint32> lpcchReturnLength),
+          int Function(
+              Pointer<Utf16> lpszVolumeName,
+              Pointer<Utf16> lpszVolumePathNames,
+              int cchBufferLength,
+              Pointer<Uint32> lpcchReturnLength)>(
+      'GetVolumePathNamesForVolumeNameW');
+  return _GetVolumePathNamesForVolumeName(
+      lpszVolumeName, lpszVolumePathNames, cchBufferLength, lpcchReturnLength);
+}
 
 /// Allocates a block of memory from a heap. The allocated memory is not
 /// movable.
@@ -847,9 +1069,12 @@ final GetVolumePathNamesForVolumeName = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final HeapAlloc = _kernel32.lookupFunction<
-    Pointer Function(IntPtr hHeap, Uint32 dwflags, Uint32 dwBytes),
-    Pointer Function(int hHeap, int dwflags, int dwBytes)>('HeapAlloc');
+Pointer HeapAlloc(int hHeap, int dwflags, int dwBytes) {
+  final _HeapAlloc = _kernel32.lookupFunction<
+      Pointer Function(IntPtr hHeap, Uint32 dwflags, Uint32 dwBytes),
+      Pointer Function(int hHeap, int dwflags, int dwBytes)>('HeapAlloc');
+  return _HeapAlloc(hHeap, dwflags, dwBytes);
+}
 
 /// Frees a memory block allocated from a heap by the HeapAlloc or
 /// HeapReAlloc function.
@@ -862,9 +1087,12 @@ final HeapAlloc = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final HeapFree = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hHeap, Uint32 dwFlags, Pointer lpMem),
-    int Function(int hHeap, int dwFlags, Pointer lpMem)>('HeapFree');
+int HeapFree(int hHeap, int dwFlags, Pointer lpMem) {
+  final _HeapFree = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hHeap, Uint32 dwFlags, Pointer lpMem),
+      int Function(int hHeap, int dwFlags, Pointer lpMem)>('HeapFree');
+  return _HeapFree(hHeap, dwFlags, lpMem);
+}
 
 /// Initializes the specified list of attributes for process and thread
 /// creation.
@@ -878,11 +1106,16 @@ final HeapFree = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final InitializeProcThreadAttributeList = _kernel32.lookupFunction<
-    Int32 Function(Pointer lpAttributeList, Uint32 dwAttributeCount,
-        Uint32 dwFlags, Pointer<IntPtr> lpSize),
-    int Function(Pointer lpAttributeList, int dwAttributeCount, int dwFlags,
-        Pointer<IntPtr> lpSize)>('InitializeProcThreadAttributeList');
+int InitializeProcThreadAttributeList(Pointer lpAttributeList,
+    int dwAttributeCount, int dwFlags, Pointer<IntPtr> lpSize) {
+  final _InitializeProcThreadAttributeList = _kernel32.lookupFunction<
+      Int32 Function(Pointer lpAttributeList, Uint32 dwAttributeCount,
+          Uint32 dwFlags, Pointer<IntPtr> lpSize),
+      int Function(Pointer lpAttributeList, int dwAttributeCount, int dwFlags,
+          Pointer<IntPtr> lpSize)>('InitializeProcThreadAttributeList');
+  return _InitializeProcThreadAttributeList(
+      lpAttributeList, dwAttributeCount, dwFlags, lpSize);
+}
 
 /// Determines whether the calling process is being debugged by a user-mode
 /// debugger.
@@ -891,8 +1124,11 @@ final InitializeProcThreadAttributeList = _kernel32.lookupFunction<
 /// BOOL IsDebuggerPresent();
 /// ```
 /// {@category kernel32}
-final IsDebuggerPresent = _kernel32
-    .lookupFunction<Int32 Function(), int Function()>('IsDebuggerPresent');
+int IsDebuggerPresent() {
+  final _IsDebuggerPresent = _kernel32
+      .lookupFunction<Int32 Function(), int Function()>('IsDebuggerPresent');
+  return _IsDebuggerPresent();
+}
 
 /// Loads the specified module into the address space of the calling
 /// process. The specified module may cause other modules to be loaded.
@@ -903,9 +1139,12 @@ final IsDebuggerPresent = _kernel32
 /// );
 /// ```
 /// {@category kernel32}
-final LoadLibrary = _kernel32.lookupFunction<
-    IntPtr Function(Pointer<Utf16> lpLibFileName),
-    int Function(Pointer<Utf16> lpLibFileName)>('LoadLibraryW');
+int LoadLibrary(Pointer<Utf16> lpLibFileName) {
+  final _LoadLibrary = _kernel32.lookupFunction<
+      IntPtr Function(Pointer<Utf16> lpLibFileName),
+      int Function(Pointer<Utf16> lpLibFileName)>('LoadLibraryW');
+  return _LoadLibrary(lpLibFileName);
+}
 
 /// Opens an existing local process object.
 ///
@@ -917,11 +1156,14 @@ final LoadLibrary = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final OpenProcess = _kernel32.lookupFunction<
-    Int32 Function(
-        Uint32 dwDesiredAccess, Int32 bInheritHandle, Uint32 dwProcessId),
-    int Function(int dwDesiredAccess, int bInheritHandle,
-        int dwProcessId)>('OpenProcess');
+int OpenProcess(int dwDesiredAccess, int bInheritHandle, int dwProcessId) {
+  final _OpenProcess = _kernel32.lookupFunction<
+      Int32 Function(
+          Uint32 dwDesiredAccess, Int32 bInheritHandle, Uint32 dwProcessId),
+      int Function(int dwDesiredAccess, int bInheritHandle,
+          int dwProcessId)>('OpenProcess');
+  return _OpenProcess(dwDesiredAccess, bInheritHandle, dwProcessId);
+}
 
 /// Retrieves information about MS-DOS device names. The function can
 /// obtain the current mapping for a particular MS-DOS device name. The
@@ -935,11 +1177,15 @@ final OpenProcess = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final QueryDosDevice = _kernel32.lookupFunction<
-    Uint32 Function(Pointer<Utf16> lpDeviceName, Pointer<Utf16> lpTargetPath,
-        Uint32 ucchMax),
-    int Function(Pointer<Utf16> lpDeviceName, Pointer<Utf16> lpTargetPath,
-        int ucchMax)>('QueryDosDeviceW');
+int QueryDosDevice(
+    Pointer<Utf16> lpDeviceName, Pointer<Utf16> lpTargetPath, int ucchMax) {
+  final _QueryDosDevice = _kernel32.lookupFunction<
+      Uint32 Function(Pointer<Utf16> lpDeviceName, Pointer<Utf16> lpTargetPath,
+          Uint32 ucchMax),
+      int Function(Pointer<Utf16> lpDeviceName, Pointer<Utf16> lpTargetPath,
+          int ucchMax)>('QueryDosDeviceW');
+  return _QueryDosDevice(lpDeviceName, lpTargetPath, ucchMax);
+}
 
 /// Retrieves the current value of the performance counter, which is a high
 /// resolution (<1us) time stamp that can be used for time-interval
@@ -951,9 +1197,13 @@ final QueryDosDevice = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final QueryPerformanceCounter = _kernel32.lookupFunction<
-    Int32 Function(Pointer<Int64> lpPerformanceCount),
-    int Function(Pointer<Int64> lpPerformanceCount)>('QueryPerformanceCounter');
+int QueryPerformanceCounter(Pointer<Int64> lpPerformanceCount) {
+  final _QueryPerformanceCounter = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Int64> lpPerformanceCount),
+      int Function(
+          Pointer<Int64> lpPerformanceCount)>('QueryPerformanceCounter');
+  return _QueryPerformanceCounter(lpPerformanceCount);
+}
 
 /// Retrieves the frequency of the performance counter. The frequency of
 /// the performance counter is fixed at system boot and is consistent
@@ -966,10 +1216,13 @@ final QueryPerformanceCounter = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final QueryPerformanceFrequency = _kernel32.lookupFunction<
-    Int32 Function(Pointer<Int64> lpPerformanceCount),
-    int Function(
-        Pointer<Int64> lpPerformanceCount)>('QueryPerformanceFrequency');
+int QueryPerformanceFrequency(Pointer<Int64> lpPerformanceCount) {
+  final _QueryPerformanceFrequency = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Int64> lpPerformanceCount),
+      int Function(
+          Pointer<Int64> lpPerformanceCount)>('QueryPerformanceFrequency');
+  return _QueryPerformanceFrequency(lpPerformanceCount);
+}
 
 /// Reads character input from the console input buffer and removes it from
 /// the buffer.
@@ -984,19 +1237,24 @@ final QueryPerformanceFrequency = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final ReadConsole = _kernel32.lookupFunction<
-    Int32 Function(
-        IntPtr hConsoleInput,
-        Pointer lpBuffer,
-        Uint32 nNumberOfCharsToRead,
-        Pointer<Uint32> lpNumberOfCharsRead,
-        Pointer pInputControl),
-    int Function(
-        int hConsoleInput,
-        Pointer lpBuffer,
-        int nNumberOfCharsToRead,
-        Pointer<Uint32> lpNumberOfCharsRead,
-        Pointer pInputControl)>('ReadConsoleW');
+int ReadConsole(int hConsoleInput, Pointer lpBuffer, int nNumberOfCharsToRead,
+    Pointer<Uint32> lpNumberOfCharsRead, Pointer pInputControl) {
+  final _ReadConsole = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hConsoleInput,
+          Pointer lpBuffer,
+          Uint32 nNumberOfCharsToRead,
+          Pointer<Uint32> lpNumberOfCharsRead,
+          Pointer pInputControl),
+      int Function(
+          int hConsoleInput,
+          Pointer lpBuffer,
+          int nNumberOfCharsToRead,
+          Pointer<Uint32> lpNumberOfCharsRead,
+          Pointer pInputControl)>('ReadConsoleW');
+  return _ReadConsole(hConsoleInput, lpBuffer, nNumberOfCharsToRead,
+      lpNumberOfCharsRead, pInputControl);
+}
 
 /// Reads data from the specified file or input/output (I/O) device. Reads
 /// occur at the position specified by the file pointer if supported by the
@@ -1012,11 +1270,24 @@ final ReadConsole = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final ReadFile = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hFile, Pointer lpBuffer, Uint32 nNumberOfBytesToRead,
-        Pointer<Uint32> lpNumberOfBytesRead, Pointer lpOverlapped),
-    int Function(int hFile, Pointer lpBuffer, int nNumberOfBytesToRead,
-        Pointer<Uint32> lpNumberOfBytesRead, Pointer lpOverlapped)>('ReadFile');
+int ReadFile(int hFile, Pointer lpBuffer, int nNumberOfBytesToRead,
+    Pointer<Uint32> lpNumberOfBytesRead, Pointer lpOverlapped) {
+  final _ReadFile = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hFile,
+          Pointer lpBuffer,
+          Uint32 nNumberOfBytesToRead,
+          Pointer<Uint32> lpNumberOfBytesRead,
+          Pointer lpOverlapped),
+      int Function(
+          int hFile,
+          Pointer lpBuffer,
+          int nNumberOfBytesToRead,
+          Pointer<Uint32> lpNumberOfBytesRead,
+          Pointer lpOverlapped)>('ReadFile');
+  return _ReadFile(
+      hFile, lpBuffer, nNumberOfBytesToRead, lpNumberOfBytesRead, lpOverlapped);
+}
 
 /// ReadProcessMemory copies the data in the specified address range from
 /// the address space of the specified process into the specified buffer of
@@ -1033,19 +1304,24 @@ final ReadFile = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final ReadProcessMemory = _kernel32.lookupFunction<
-    Int32 Function(
-        IntPtr hProcess,
-        Pointer<Void> lpBaseAddress,
-        Pointer<Void> lpBuffer,
-        IntPtr nSize,
-        Pointer<IntPtr> lpNumberOfBytesRead),
-    int Function(
-        int hProcess,
-        Pointer<Void> lpBaseAddress,
-        Pointer<Void> lpBuffer,
-        int nSize,
-        Pointer<IntPtr> lpNumberOfBytesRead)>('ReadProcessMemory');
+int ReadProcessMemory(int hProcess, Pointer<Void> lpBaseAddress,
+    Pointer<Void> lpBuffer, int nSize, Pointer<IntPtr> lpNumberOfBytesRead) {
+  final _ReadProcessMemory = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hProcess,
+          Pointer<Void> lpBaseAddress,
+          Pointer<Void> lpBuffer,
+          IntPtr nSize,
+          Pointer<IntPtr> lpNumberOfBytesRead),
+      int Function(
+          int hProcess,
+          Pointer<Void> lpBaseAddress,
+          Pointer<Void> lpBuffer,
+          int nSize,
+          Pointer<IntPtr> lpNumberOfBytesRead)>('ReadProcessMemory');
+  return _ReadProcessMemory(
+      hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesRead);
+}
 
 /// Resizes the internal buffers for a pseudoconsole to the given size.
 ///
@@ -1056,9 +1332,12 @@ final ReadProcessMemory = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final ResizePseudoConsole = _kernel32.lookupFunction<
-    Int32 Function(Pointer<IntPtr> hPC, Int32 size),
-    int Function(Pointer<IntPtr> hPC, int size)>('ResizePseudoConsole');
+int ResizePseudoConsole(Pointer<IntPtr> hPC, int size) {
+  final _ResizePseudoConsole = _kernel32.lookupFunction<
+      Int32 Function(Pointer<IntPtr> hPC, Int32 size),
+      int Function(Pointer<IntPtr> hPC, int size)>('ResizePseudoConsole');
+  return _ResizePseudoConsole(hPC, size);
+}
 
 /// Moves a block of data in a screen buffer. The effects of the move can
 /// be limited by specifying a clipping rectangle, so the contents of the
@@ -1074,19 +1353,28 @@ final ResizePseudoConsole = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final ScrollConsoleScreenBuffer = _kernel32.lookupFunction<
-    Int32 Function(
-        IntPtr hConsoleOutput,
-        Pointer<SMALL_RECT> lpScrollRectangle,
-        Pointer<SMALL_RECT> lpClipRectangle,
-        Int32 dwDestinationOrigin,
-        Pointer<CHAR_INFO> lpFill),
-    int Function(
-        int hConsoleOutput,
-        Pointer<SMALL_RECT> lpScrollRectangle,
-        Pointer<SMALL_RECT> lpClipRectangle,
-        int dwDestinationOrigin,
-        Pointer<CHAR_INFO> lpFill)>('ScrollConsoleScreenBufferW');
+int ScrollConsoleScreenBuffer(
+    int hConsoleOutput,
+    Pointer<SMALL_RECT> lpScrollRectangle,
+    Pointer<SMALL_RECT> lpClipRectangle,
+    int dwDestinationOrigin,
+    Pointer<CHAR_INFO> lpFill) {
+  final _ScrollConsoleScreenBuffer = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hConsoleOutput,
+          Pointer<SMALL_RECT> lpScrollRectangle,
+          Pointer<SMALL_RECT> lpClipRectangle,
+          Int32 dwDestinationOrigin,
+          Pointer<CHAR_INFO> lpFill),
+      int Function(
+          int hConsoleOutput,
+          Pointer<SMALL_RECT> lpScrollRectangle,
+          Pointer<SMALL_RECT> lpClipRectangle,
+          int dwDestinationOrigin,
+          Pointer<CHAR_INFO> lpFill)>('ScrollConsoleScreenBufferW');
+  return _ScrollConsoleScreenBuffer(hConsoleOutput, lpScrollRectangle,
+      lpClipRectangle, dwDestinationOrigin, lpFill);
+}
 
 /// Adds or removes an application-defined HandlerRoutine function from the
 /// list of handler functions for the calling process.
@@ -1098,10 +1386,13 @@ final ScrollConsoleScreenBuffer = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final SetConsoleCtrlHandler = _kernel32.lookupFunction<
-    Int32 Function(Pointer<NativeFunction> HandlerRoutine, Int32 Add),
-    int Function(Pointer<NativeFunction> HandlerRoutine,
-        int Add)>('SetConsoleCtrlHandler');
+int SetConsoleCtrlHandler(Pointer<NativeFunction> HandlerRoutine, int Add) {
+  final _SetConsoleCtrlHandler = _kernel32.lookupFunction<
+      Int32 Function(Pointer<NativeFunction> HandlerRoutine, Int32 Add),
+      int Function(Pointer<NativeFunction> HandlerRoutine,
+          int Add)>('SetConsoleCtrlHandler');
+  return _SetConsoleCtrlHandler(HandlerRoutine, Add);
+}
 
 /// Sets the size and visibility of the cursor for the specified console
 /// screen buffer.
@@ -1113,12 +1404,16 @@ final SetConsoleCtrlHandler = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final SetConsoleCursorInfo = _kernel32.lookupFunction<
-        Int32 Function(IntPtr hConsoleOutput,
-            Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo),
-        int Function(int hConsoleOutput,
-            Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo)>(
-    'SetConsoleCursorInfo');
+int SetConsoleCursorInfo(
+    int hConsoleOutput, Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo) {
+  final _SetConsoleCursorInfo = _kernel32.lookupFunction<
+          Int32 Function(IntPtr hConsoleOutput,
+              Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo),
+          int Function(int hConsoleOutput,
+              Pointer<CONSOLE_CURSOR_INFO> lpConsoleCursorInfo)>(
+      'SetConsoleCursorInfo');
+  return _SetConsoleCursorInfo(hConsoleOutput, lpConsoleCursorInfo);
+}
 
 /// Sets the cursor position in the specified console screen buffer.
 ///
@@ -1129,10 +1424,13 @@ final SetConsoleCursorInfo = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final SetConsoleCursorPosition = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hConsoleOutput, Int32 dwCursorPosition),
-    int Function(
-        int hConsoleOutput, int dwCursorPosition)>('SetConsoleCursorPosition');
+int SetConsoleCursorPosition(int hConsoleOutput, int dwCursorPosition) {
+  final _SetConsoleCursorPosition = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hConsoleOutput, Int32 dwCursorPosition),
+      int Function(int hConsoleOutput,
+          int dwCursorPosition)>('SetConsoleCursorPosition');
+  return _SetConsoleCursorPosition(hConsoleOutput, dwCursorPosition);
+}
 
 /// Sets the display mode of the specified console screen buffer.
 ///
@@ -1144,11 +1442,16 @@ final SetConsoleCursorPosition = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final SetConsoleDisplayMode = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hConsoleOutput, Uint32 dwFlags,
-        Pointer<COORD> lpNewScreenBufferDimensions),
-    int Function(int hConsoleOutput, int dwFlags,
-        Pointer<COORD> lpNewScreenBufferDimensions)>('SetConsoleDisplayMode');
+int SetConsoleDisplayMode(int hConsoleOutput, int dwFlags,
+    Pointer<COORD> lpNewScreenBufferDimensions) {
+  final _SetConsoleDisplayMode = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hConsoleOutput, Uint32 dwFlags,
+          Pointer<COORD> lpNewScreenBufferDimensions),
+      int Function(int hConsoleOutput, int dwFlags,
+          Pointer<COORD> lpNewScreenBufferDimensions)>('SetConsoleDisplayMode');
+  return _SetConsoleDisplayMode(
+      hConsoleOutput, dwFlags, lpNewScreenBufferDimensions);
+}
 
 /// Sets the input mode of a console's input buffer or the output mode of a
 /// console screen buffer.
@@ -1160,9 +1463,12 @@ final SetConsoleDisplayMode = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final SetConsoleMode = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hConsoleHandle, Uint32 dwMode),
-    int Function(int hConsoleHandle, int dwMode)>('SetConsoleMode');
+int SetConsoleMode(int hConsoleHandle, int dwMode) {
+  final _SetConsoleMode = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hConsoleHandle, Uint32 dwMode),
+      int Function(int hConsoleHandle, int dwMode)>('SetConsoleMode');
+  return _SetConsoleMode(hConsoleHandle, dwMode);
+}
 
 /// Sets the attributes of characters written to the console screen buffer
 /// by the WriteFile or WriteConsole function, or echoed by the ReadFile or
@@ -1176,10 +1482,13 @@ final SetConsoleMode = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final SetConsoleTextAttribute = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hConsoleOutput, Uint16 wAttributes),
-    int Function(
-        int hConsoleOutput, int wAttributes)>('SetConsoleTextAttribute');
+int SetConsoleTextAttribute(int hConsoleOutput, int wAttributes) {
+  final _SetConsoleTextAttribute = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hConsoleOutput, Uint16 wAttributes),
+      int Function(
+          int hConsoleOutput, int wAttributes)>('SetConsoleTextAttribute');
+  return _SetConsoleTextAttribute(hConsoleOutput, wAttributes);
+}
 
 /// Sets the current size and position of a console screen buffer's window.
 ///
@@ -1191,11 +1500,15 @@ final SetConsoleTextAttribute = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final SetConsoleWindowInfo = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hConsoleOutput, Int32 bAbsolute,
-        Pointer<SMALL_RECT> lpConsoleWindow),
-    int Function(int hConsoleOutput, int bAbsolute,
-        Pointer<SMALL_RECT> lpConsoleWindow)>('SetConsoleWindowInfo');
+int SetConsoleWindowInfo(
+    int hConsoleOutput, int bAbsolute, Pointer<SMALL_RECT> lpConsoleWindow) {
+  final _SetConsoleWindowInfo = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hConsoleOutput, Int32 bAbsolute,
+          Pointer<SMALL_RECT> lpConsoleWindow),
+      int Function(int hConsoleOutput, int bAbsolute,
+          Pointer<SMALL_RECT> lpConsoleWindow)>('SetConsoleWindowInfo');
+  return _SetConsoleWindowInfo(hConsoleOutput, bAbsolute, lpConsoleWindow);
+}
 
 /// Sets the handle for the specified standard device (standard input,
 /// standard output, or standard error).
@@ -1207,9 +1520,12 @@ final SetConsoleWindowInfo = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final SetStdHandle = _kernel32.lookupFunction<
-    Int32 Function(Uint32 nStdHandle, IntPtr hHandle),
-    int Function(int nStdHandle, int hHandle)>('SetStdHandle');
+int SetStdHandle(int nStdHandle, int hHandle) {
+  final _SetStdHandle = _kernel32.lookupFunction<
+      Int32 Function(Uint32 nStdHandle, IntPtr hHandle),
+      int Function(int nStdHandle, int hHandle)>('SetStdHandle');
+  return _SetStdHandle(nStdHandle, hHandle);
+}
 
 /// Suspends the execution of the current thread until the time-out
 /// interval elapses.
@@ -1220,8 +1536,11 @@ final SetStdHandle = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final Sleep = _kernel32.lookupFunction<Void Function(Uint32 dwMilliseconds),
-    void Function(int dwMilliseconds)>('Sleep');
+void Sleep(int dwMilliseconds) {
+  final _Sleep = _kernel32.lookupFunction<Void Function(Uint32 dwMilliseconds),
+      void Function(int dwMilliseconds)>('Sleep');
+  return _Sleep(dwMilliseconds);
+}
 
 /// Updates the specified attribute in a list of attributes for process and
 /// thread creation.
@@ -1238,23 +1557,34 @@ final Sleep = _kernel32.lookupFunction<Void Function(Uint32 dwMilliseconds),
 /// );
 /// ```
 /// {@category kernel32}
-final UpdateProcThreadAttribute = _kernel32.lookupFunction<
-    Int32 Function(
-        Pointer lpAttributeList,
-        Uint32 dwFlags,
-        IntPtr Attribute,
-        Pointer lpValue,
-        IntPtr cbSize,
-        Pointer lpPreviousValue,
-        Pointer<IntPtr> lpReturnSize),
-    int Function(
-        Pointer lpAttributeList,
-        int dwFlags,
-        int Attribute,
-        Pointer lpValue,
-        int cbSize,
-        Pointer lpPreviousValue,
-        Pointer<IntPtr> lpReturnSize)>('UpdateProcThreadAttribute');
+int UpdateProcThreadAttribute(
+    Pointer lpAttributeList,
+    int dwFlags,
+    int Attribute,
+    Pointer lpValue,
+    int cbSize,
+    Pointer lpPreviousValue,
+    Pointer<IntPtr> lpReturnSize) {
+  final _UpdateProcThreadAttribute = _kernel32.lookupFunction<
+      Int32 Function(
+          Pointer lpAttributeList,
+          Uint32 dwFlags,
+          IntPtr Attribute,
+          Pointer lpValue,
+          IntPtr cbSize,
+          Pointer lpPreviousValue,
+          Pointer<IntPtr> lpReturnSize),
+      int Function(
+          Pointer lpAttributeList,
+          int dwFlags,
+          int Attribute,
+          Pointer lpValue,
+          int cbSize,
+          Pointer lpPreviousValue,
+          Pointer<IntPtr> lpReturnSize)>('UpdateProcThreadAttribute');
+  return _UpdateProcThreadAttribute(lpAttributeList, dwFlags, Attribute,
+      lpValue, cbSize, lpPreviousValue, lpReturnSize);
+}
 
 /// Adds, deletes, or replaces a resource in a portable executable (PE)
 /// file.
@@ -1270,11 +1600,15 @@ final UpdateProcThreadAttribute = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final UpdateResource = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hUpdate, Pointer<Utf16> lpType, Pointer<Utf16> lpName,
-        Uint16 wLanguage, Pointer lpData, Uint32 cb),
-    int Function(int hUpdate, Pointer<Utf16> lpType, Pointer<Utf16> lpName,
-        int wLanguage, Pointer lpData, int cb)>('UpdateResourceW');
+int UpdateResource(int hUpdate, Pointer<Utf16> lpType, Pointer<Utf16> lpName,
+    int wLanguage, Pointer lpData, int cb) {
+  final _UpdateResource = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hUpdate, Pointer<Utf16> lpType,
+          Pointer<Utf16> lpName, Uint16 wLanguage, Pointer lpData, Uint32 cb),
+      int Function(int hUpdate, Pointer<Utf16> lpType, Pointer<Utf16> lpName,
+          int wLanguage, Pointer lpData, int cb)>('UpdateResourceW');
+  return _UpdateResource(hUpdate, lpType, lpName, wLanguage, lpData, cb);
+}
 
 /// Reserves, commits, or changes the state of a region of pages in the
 /// virtual address space of the calling process. Memory allocated by this
@@ -1289,11 +1623,15 @@ final UpdateResource = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final VirtualAlloc = _kernel32.lookupFunction<
-    Pointer<Void> Function(Pointer<Void> lpAddress, IntPtr dwSize,
-        Uint32 flAllocationType, Uint32 flProtect),
-    Pointer<Void> Function(Pointer<Void> lpAddress, int dwSize,
-        int flAllocationType, int flProtect)>('VirtualAlloc');
+Pointer<Void> VirtualAlloc(
+    Pointer<Void> lpAddress, int dwSize, int flAllocationType, int flProtect) {
+  final _VirtualAlloc = _kernel32.lookupFunction<
+      Pointer<Void> Function(Pointer<Void> lpAddress, IntPtr dwSize,
+          Uint32 flAllocationType, Uint32 flProtect),
+      Pointer<Void> Function(Pointer<Void> lpAddress, int dwSize,
+          int flAllocationType, int flProtect)>('VirtualAlloc');
+  return _VirtualAlloc(lpAddress, dwSize, flAllocationType, flProtect);
+}
 
 /// Releases, decommits, or releases and decommits a region of pages within
 /// the virtual address space of the calling process.
@@ -1306,10 +1644,13 @@ final VirtualAlloc = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final VirtualFree = _kernel32.lookupFunction<
-    Int32 Function(Pointer<Void> lpAddress, IntPtr dwSize, Uint32 dwFreeType),
-    int Function(
-        Pointer<Void> lpAddress, int dwSize, int dwFreeType)>('VirtualFree');
+int VirtualFree(Pointer<Void> lpAddress, int dwSize, int dwFreeType) {
+  final _VirtualFree = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Void> lpAddress, IntPtr dwSize, Uint32 dwFreeType),
+      int Function(
+          Pointer<Void> lpAddress, int dwSize, int dwFreeType)>('VirtualFree');
+  return _VirtualFree(lpAddress, dwSize, dwFreeType);
+}
 
 /// Writes a character string to a console screen buffer beginning at the
 /// current cursor location.
@@ -1324,19 +1665,28 @@ final VirtualFree = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final WriteConsole = _kernel32.lookupFunction<
-    Int32 Function(
-        IntPtr hConsoleOutput,
-        Pointer lpBuffer,
-        Uint32 nNumberOfCharsToWrite,
-        Pointer<Uint32> lpNumberOfCharsWritten,
-        Pointer lpReserved),
-    int Function(
-        int hConsoleOutput,
-        Pointer lpBuffer,
-        int nNumberOfCharsToWrite,
-        Pointer<Uint32> lpNumberOfCharsWritten,
-        Pointer lpReserved)>('WriteConsoleW');
+int WriteConsole(
+    int hConsoleOutput,
+    Pointer lpBuffer,
+    int nNumberOfCharsToWrite,
+    Pointer<Uint32> lpNumberOfCharsWritten,
+    Pointer lpReserved) {
+  final _WriteConsole = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hConsoleOutput,
+          Pointer lpBuffer,
+          Uint32 nNumberOfCharsToWrite,
+          Pointer<Uint32> lpNumberOfCharsWritten,
+          Pointer lpReserved),
+      int Function(
+          int hConsoleOutput,
+          Pointer lpBuffer,
+          int nNumberOfCharsToWrite,
+          Pointer<Uint32> lpNumberOfCharsWritten,
+          Pointer lpReserved)>('WriteConsoleW');
+  return _WriteConsole(hConsoleOutput, lpBuffer, nNumberOfCharsToWrite,
+      lpNumberOfCharsWritten, lpReserved);
+}
 
 /// Writes data to the specified file or input/output (I/O) device.
 ///
@@ -1350,15 +1700,24 @@ final WriteConsole = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final WriteFile = _kernel32.lookupFunction<
-    Int32 Function(IntPtr hFile, Pointer lpBuffer, Uint32 nNumberOfBytesToWrite,
-        Pointer<Uint32> lpNumberOfBytesWritten, Pointer lpOverlapped),
-    int Function(
-        int hFile,
-        Pointer lpBuffer,
-        int nNumberOfBytesToWrite,
-        Pointer<Uint32> lpNumberOfBytesWritten,
-        Pointer lpOverlapped)>('WriteFile');
+int WriteFile(int hFile, Pointer lpBuffer, int nNumberOfBytesToWrite,
+    Pointer<Uint32> lpNumberOfBytesWritten, Pointer lpOverlapped) {
+  final _WriteFile = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hFile,
+          Pointer lpBuffer,
+          Uint32 nNumberOfBytesToWrite,
+          Pointer<Uint32> lpNumberOfBytesWritten,
+          Pointer lpOverlapped),
+      int Function(
+          int hFile,
+          Pointer lpBuffer,
+          int nNumberOfBytesToWrite,
+          Pointer<Uint32> lpNumberOfBytesWritten,
+          Pointer lpOverlapped)>('WriteFile');
+  return _WriteFile(hFile, lpBuffer, nNumberOfBytesToWrite,
+      lpNumberOfBytesWritten, lpOverlapped);
+}
 
 /// Writes data to an area of memory in a specified process. The entire
 /// area to be written to must be accessible or the operation fails.
@@ -1373,16 +1732,21 @@ final WriteFile = _kernel32.lookupFunction<
 /// );
 /// ```
 /// {@category kernel32}
-final WriteProcessMemory = _kernel32.lookupFunction<
-    Int32 Function(
-        IntPtr hProcess,
-        Pointer<Void> lpBaseAddress,
-        Pointer<Void> lpBuffer,
-        IntPtr nSize,
-        Pointer<IntPtr> lpNumberOfBytesWritten),
-    int Function(
-        int hProcess,
-        Pointer<Void> lpBaseAddress,
-        Pointer<Void> lpBuffer,
-        int nSize,
-        Pointer<IntPtr> lpNumberOfBytesWritten)>('WriteProcessMemory');
+int WriteProcessMemory(int hProcess, Pointer<Void> lpBaseAddress,
+    Pointer<Void> lpBuffer, int nSize, Pointer<IntPtr> lpNumberOfBytesWritten) {
+  final _WriteProcessMemory = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hProcess,
+          Pointer<Void> lpBaseAddress,
+          Pointer<Void> lpBuffer,
+          IntPtr nSize,
+          Pointer<IntPtr> lpNumberOfBytesWritten),
+      int Function(
+          int hProcess,
+          Pointer<Void> lpBaseAddress,
+          Pointer<Void> lpBuffer,
+          int nSize,
+          Pointer<IntPtr> lpNumberOfBytesWritten)>('WriteProcessMemory');
+  return _WriteProcessMemory(
+      hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesWritten);
+}

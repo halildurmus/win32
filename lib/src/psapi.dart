@@ -27,11 +27,15 @@ final _psapi = DynamicLibrary.open('psapi.dll');
 /// );
 /// ```
 /// {@category psapi}
-final EnumProcesses = _psapi.lookupFunction<
-    Int32 Function(
-        Pointer<Uint32> lpidProcess, Uint32 cb, Pointer<Uint32> lpcbNeeded),
-    int Function(Pointer<Uint32> lpidProcess, int cb,
-        Pointer<Uint32> lpcbNeeded)>('EnumProcesses');
+int EnumProcesses(
+    Pointer<Uint32> lpidProcess, int cb, Pointer<Uint32> lpcbNeeded) {
+  final _EnumProcesses = _psapi.lookupFunction<
+      Int32 Function(
+          Pointer<Uint32> lpidProcess, Uint32 cb, Pointer<Uint32> lpcbNeeded),
+      int Function(Pointer<Uint32> lpidProcess, int cb,
+          Pointer<Uint32> lpcbNeeded)>('EnumProcesses');
+  return _EnumProcesses(lpidProcess, cb, lpcbNeeded);
+}
 
 /// Retrieves a handle for each module in the specified process.
 ///
@@ -44,11 +48,15 @@ final EnumProcesses = _psapi.lookupFunction<
 /// );
 /// ```
 /// {@category psapi}
-final EnumProcessModules = _psapi.lookupFunction<
-    Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
-        Pointer<Uint32> lpcbNeeded),
-    int Function(int hProcess, Pointer<IntPtr> lphModule, int cb,
-        Pointer<Uint32> lpcbNeeded)>('EnumProcessModules');
+int EnumProcessModules(int hProcess, Pointer<IntPtr> lphModule, int cb,
+    Pointer<Uint32> lpcbNeeded) {
+  final _EnumProcessModules = _psapi.lookupFunction<
+      Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
+          Pointer<Uint32> lpcbNeeded),
+      int Function(int hProcess, Pointer<IntPtr> lphModule, int cb,
+          Pointer<Uint32> lpcbNeeded)>('EnumProcessModules');
+  return _EnumProcessModules(hProcess, lphModule, cb, lpcbNeeded);
+}
 
 /// Retrieves a handle for each module in the specified process that meets
 /// the specified filter criteria.
@@ -63,11 +71,20 @@ final EnumProcessModules = _psapi.lookupFunction<
 /// );
 /// ```
 /// {@category psapi}
-final EnumProcessModulesEx = _psapi.lookupFunction<
-    Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
-        Pointer<Uint32> lpcbNeeded, Uint32 dwFilterFlag),
-    int Function(int hProcess, Pointer<IntPtr> lphModule, int cb,
-        Pointer<Uint32> lpcbNeeded, int dwFilterFlag)>('EnumProcessModulesEx');
+int EnumProcessModulesEx(int hProcess, Pointer<IntPtr> lphModule, int cb,
+    Pointer<Uint32> lpcbNeeded, int dwFilterFlag) {
+  final _EnumProcessModulesEx = _psapi.lookupFunction<
+      Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
+          Pointer<Uint32> lpcbNeeded, Uint32 dwFilterFlag),
+      int Function(
+          int hProcess,
+          Pointer<IntPtr> lphModule,
+          int cb,
+          Pointer<Uint32> lpcbNeeded,
+          int dwFilterFlag)>('EnumProcessModulesEx');
+  return _EnumProcessModulesEx(
+      hProcess, lphModule, cb, lpcbNeeded, dwFilterFlag);
+}
 
 /// Retrieves the base name of the specified module.
 ///
@@ -80,11 +97,15 @@ final EnumProcessModulesEx = _psapi.lookupFunction<
 /// );
 /// ```
 /// {@category psapi}
-final GetModuleBaseName = _psapi.lookupFunction<
-    Uint32 Function(IntPtr hProcess, IntPtr hModule, Pointer<Utf16> lpBaseName,
-        Uint32 nSize),
-    int Function(int hProcess, int hModule, Pointer<Utf16> lpBaseName,
-        int nSize)>('GetModuleBaseNameW');
+int GetModuleBaseName(
+    int hProcess, int hModule, Pointer<Utf16> lpBaseName, int nSize) {
+  final _GetModuleBaseName = _psapi.lookupFunction<
+      Uint32 Function(IntPtr hProcess, IntPtr hModule,
+          Pointer<Utf16> lpBaseName, Uint32 nSize),
+      int Function(int hProcess, int hModule, Pointer<Utf16> lpBaseName,
+          int nSize)>('GetModuleBaseNameW');
+  return _GetModuleBaseName(hProcess, hModule, lpBaseName, nSize);
+}
 
 /// Retrieves the fully qualified path for the file containing the
 /// specified module.
@@ -98,8 +119,12 @@ final GetModuleBaseName = _psapi.lookupFunction<
 /// );
 /// ```
 /// {@category psapi}
-final GetModuleFileNameEx = _psapi.lookupFunction<
-    Uint32 Function(IntPtr hProcess, IntPtr hModule, Pointer<Utf16> lpFilename,
-        Uint32 nSize),
-    int Function(int hProcess, int hModule, Pointer<Utf16> lpFilename,
-        int nSize)>('GetModuleFileNameExW');
+int GetModuleFileNameEx(
+    int hProcess, int hModule, Pointer<Utf16> lpFilename, int nSize) {
+  final _GetModuleFileNameEx = _psapi.lookupFunction<
+      Uint32 Function(IntPtr hProcess, IntPtr hModule,
+          Pointer<Utf16> lpFilename, Uint32 nSize),
+      int Function(int hProcess, int hModule, Pointer<Utf16> lpFilename,
+          int nSize)>('GetModuleFileNameExW');
+  return _GetModuleFileNameEx(hProcess, hModule, lpFilename, nSize);
+}

@@ -25,9 +25,12 @@ final _oleaut32 = DynamicLibrary.open('oleaut32.dll');
 /// );
 /// ```
 /// {@category oleaut32}
-final SysAllocString = _oleaut32.lookupFunction<
-    Pointer Function(Pointer<Utf16> psz),
-    Pointer Function(Pointer<Utf16> psz)>('SysAllocString');
+Pointer SysAllocString(Pointer<Utf16> psz) {
+  final _SysAllocString = _oleaut32.lookupFunction<
+      Pointer Function(Pointer<Utf16> psz),
+      Pointer Function(Pointer<Utf16> psz)>('SysAllocString');
+  return _SysAllocString(psz);
+}
 
 /// Deallocates a string allocated previously by SysAllocString,
 /// SysAllocStringByteLen, SysReAllocString, SysAllocStringLen, or
@@ -39,9 +42,12 @@ final SysAllocString = _oleaut32.lookupFunction<
 /// );
 /// ```
 /// {@category oleaut32}
-final SysFreeString = _oleaut32.lookupFunction<
-    Void Function(Pointer bstrString),
-    void Function(Pointer bstrString)>('SysFreeString');
+void SysFreeString(Pointer bstrString) {
+  final _SysFreeString = _oleaut32.lookupFunction<
+      Void Function(Pointer bstrString),
+      void Function(Pointer bstrString)>('SysFreeString');
+  return _SysFreeString(bstrString);
+}
 
 /// Returns the length (in bytes) of a BSTR.
 ///
@@ -51,8 +57,12 @@ final SysFreeString = _oleaut32.lookupFunction<
 /// );
 /// ```
 /// {@category oleaut32}
-final SysStringByteLen = _oleaut32.lookupFunction<Uint32 Function(Pointer bstr),
-    int Function(Pointer bstr)>('SysStringByteLen');
+int SysStringByteLen(Pointer bstr) {
+  final _SysStringByteLen = _oleaut32.lookupFunction<
+      Uint32 Function(Pointer bstr),
+      int Function(Pointer bstr)>('SysStringByteLen');
+  return _SysStringByteLen(bstr);
+}
 
 /// Returns the length of a BSTR.
 ///
@@ -62,8 +72,11 @@ final SysStringByteLen = _oleaut32.lookupFunction<Uint32 Function(Pointer bstr),
 /// );
 /// ```
 /// {@category oleaut32}
-final SysStringLen = _oleaut32.lookupFunction<Uint32 Function(Pointer pbstr),
-    int Function(Pointer pbstr)>('SysStringLen');
+int SysStringLen(Pointer pbstr) {
+  final _SysStringLen = _oleaut32.lookupFunction<Uint32 Function(Pointer pbstr),
+      int Function(Pointer pbstr)>('SysStringLen');
+  return _SysStringLen(pbstr);
+}
 
 /// Clears a variant.
 ///
@@ -73,8 +86,11 @@ final SysStringLen = _oleaut32.lookupFunction<Uint32 Function(Pointer pbstr),
 /// );
 /// ```
 /// {@category oleaut32}
-final VariantClear = _oleaut32.lookupFunction<Int32 Function(Pointer pvarg),
-    int Function(Pointer pvarg)>('VariantClear');
+int VariantClear(Pointer pvarg) {
+  final _VariantClear = _oleaut32.lookupFunction<Int32 Function(Pointer pvarg),
+      int Function(Pointer pvarg)>('VariantClear');
+  return _VariantClear(pvarg);
+}
 
 /// Initializes a variant.
 ///
@@ -84,5 +100,8 @@ final VariantClear = _oleaut32.lookupFunction<Int32 Function(Pointer pvarg),
 /// );
 /// ```
 /// {@category oleaut32}
-final VariantInit = _oleaut32.lookupFunction<Void Function(Pointer pvarg),
-    void Function(Pointer pvarg)>('VariantInit');
+void VariantInit(Pointer pvarg) {
+  final _VariantInit = _oleaut32.lookupFunction<Void Function(Pointer pvarg),
+      void Function(Pointer pvarg)>('VariantInit');
+  return _VariantInit(pvarg);
+}

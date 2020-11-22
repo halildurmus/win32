@@ -26,9 +26,12 @@ final _winmm = DynamicLibrary.open('winmm.dll');
 /// );
 /// ```
 /// {@category winmm}
-final mciGetDeviceID = _winmm.lookupFunction<
-    Uint32 Function(Pointer<Utf16> lpszDevice),
-    int Function(Pointer<Utf16> lpszDevice)>('mciGetDeviceIDW');
+int mciGetDeviceID(Pointer<Utf16> lpszDevice) {
+  final _mciGetDeviceID = _winmm.lookupFunction<
+      Uint32 Function(Pointer<Utf16> lpszDevice),
+      int Function(Pointer<Utf16> lpszDevice)>('mciGetDeviceIDW');
+  return _mciGetDeviceID(lpszDevice);
+}
 
 /// The mciGetDeviceIDFromElementID function retrieves the MCI device
 /// identifier corresponding to an element identifier.
@@ -40,10 +43,13 @@ final mciGetDeviceID = _winmm.lookupFunction<
 /// );
 /// ```
 /// {@category winmm}
-final mciGetDeviceIDFromElementID = _winmm.lookupFunction<
-    Uint32 Function(Uint32 dwElementID, Pointer<Utf16> lpstrType),
-    int Function(int dwElementID,
-        Pointer<Utf16> lpstrType)>('mciGetDeviceIDFromElementIDW');
+int mciGetDeviceIDFromElementID(int dwElementID, Pointer<Utf16> lpstrType) {
+  final _mciGetDeviceIDFromElementID = _winmm.lookupFunction<
+      Uint32 Function(Uint32 dwElementID, Pointer<Utf16> lpstrType),
+      int Function(int dwElementID,
+          Pointer<Utf16> lpstrType)>('mciGetDeviceIDFromElementIDW');
+  return _mciGetDeviceIDFromElementID(dwElementID, lpstrType);
+}
 
 /// The mciGetErrorString function retrieves a string that describes the
 /// specified MCI error code.
@@ -56,11 +62,15 @@ final mciGetDeviceIDFromElementID = _winmm.lookupFunction<
 /// );
 /// ```
 /// {@category winmm}
-final mciGetErrorString = _winmm.lookupFunction<
-    Int32 Function(
-        Uint32 fdwError, Pointer<Utf16> lpszErrorText, Uint32 cchErrorText),
-    int Function(int fdwError, Pointer<Utf16> lpszErrorText,
-        int cchErrorText)>('mciGetErrorStringW');
+int mciGetErrorString(
+    int fdwError, Pointer<Utf16> lpszErrorText, int cchErrorText) {
+  final _mciGetErrorString = _winmm.lookupFunction<
+      Int32 Function(
+          Uint32 fdwError, Pointer<Utf16> lpszErrorText, Uint32 cchErrorText),
+      int Function(int fdwError, Pointer<Utf16> lpszErrorText,
+          int cchErrorText)>('mciGetErrorStringW');
+  return _mciGetErrorString(fdwError, lpszErrorText, cchErrorText);
+}
 
 /// The mciSendCommand function sends a command message to the specified
 /// MCI device.
@@ -74,11 +84,14 @@ final mciGetErrorString = _winmm.lookupFunction<
 /// );
 /// ```
 /// {@category winmm}
-final mciSendCommand = _winmm.lookupFunction<
-    Uint32 Function(
-        Uint32 IDDevice, Uint32 uMsg, IntPtr fdwCommand, IntPtr dwParam),
-    int Function(int IDDevice, int uMsg, int fdwCommand,
-        int dwParam)>('mciSendCommandW');
+int mciSendCommand(int IDDevice, int uMsg, int fdwCommand, int dwParam) {
+  final _mciSendCommand = _winmm.lookupFunction<
+      Uint32 Function(
+          Uint32 IDDevice, Uint32 uMsg, IntPtr fdwCommand, IntPtr dwParam),
+      int Function(int IDDevice, int uMsg, int fdwCommand,
+          int dwParam)>('mciSendCommandW');
+  return _mciSendCommand(IDDevice, uMsg, fdwCommand, dwParam);
+}
 
 /// The mciSendString function sends a command string to an MCI device. The
 /// device that the command is sent to is specified in the command string.
@@ -92,11 +105,18 @@ final mciSendCommand = _winmm.lookupFunction<
 /// );
 /// ```
 /// {@category winmm}
-final mciSendString = _winmm.lookupFunction<
-    Uint32 Function(Pointer<Utf16> lpszCommand, Pointer<Utf16> lpszReturnString,
-        Uint32 cchReturn, IntPtr hwndCallback),
-    int Function(Pointer<Utf16> lpszCommand, Pointer<Utf16> lpszReturnString,
-        int cchReturn, int hwndCallback)>('mciSendStringW');
+int mciSendString(Pointer<Utf16> lpszCommand, Pointer<Utf16> lpszReturnString,
+    int cchReturn, int hwndCallback) {
+  final _mciSendString = _winmm.lookupFunction<
+      Uint32 Function(
+          Pointer<Utf16> lpszCommand,
+          Pointer<Utf16> lpszReturnString,
+          Uint32 cchReturn,
+          IntPtr hwndCallback),
+      int Function(Pointer<Utf16> lpszCommand, Pointer<Utf16> lpszReturnString,
+          int cchReturn, int hwndCallback)>('mciSendStringW');
+  return _mciSendString(lpszCommand, lpszReturnString, cchReturn, hwndCallback);
+}
 
 /// The midiOutGetNumDevs function retrieves the number of MIDI output
 /// devices present in the system.
@@ -105,8 +125,11 @@ final mciSendString = _winmm.lookupFunction<
 /// UINT midiOutGetNumDevs();
 /// ```
 /// {@category winmm}
-final midiOutGetNumDevs = _winmm
-    .lookupFunction<Uint32 Function(), int Function()>('midiOutGetNumDevs');
+int midiOutGetNumDevs() {
+  final _midiOutGetNumDevs = _winmm
+      .lookupFunction<Uint32 Function(), int Function()>('midiOutGetNumDevs');
+  return _midiOutGetNumDevs();
+}
 
 /// The PlaySound function plays a sound specified by the given file name,
 /// resource, or system event.
@@ -118,7 +141,10 @@ final midiOutGetNumDevs = _winmm
 ///   DWORD fdwSound);
 /// ```
 /// {@category winmm}
-final PlaySound = _winmm.lookupFunction<
-    Int32 Function(Pointer<Utf16> pszSound, IntPtr hmod, Uint32 fdwSound),
-    int Function(
-        Pointer<Utf16> pszSound, int hmod, int fdwSound)>('PlaySoundW');
+int PlaySound(Pointer<Utf16> pszSound, int hmod, int fdwSound) {
+  final _PlaySound = _winmm.lookupFunction<
+      Int32 Function(Pointer<Utf16> pszSound, IntPtr hmod, Uint32 fdwSound),
+      int Function(
+          Pointer<Utf16> pszSound, int hmod, int fdwSound)>('PlaySoundW');
+  return _PlaySound(pszSound, hmod, fdwSound);
+}
