@@ -1,3 +1,7 @@
+## 2.0.0-nullsafety.2
+
+- Add extended window style constants (WM_EX_*)
+
 ## 2.0.0-nullsafety.1
 
 - Add a number of GDI calls
