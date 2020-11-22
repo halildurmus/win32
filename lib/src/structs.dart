@@ -4,7 +4,21 @@
 
 // Dart representations of common structs used in the Win32 API
 
+// -----------------------------------------------------------------------------
+// Linter exceptions
+// -----------------------------------------------------------------------------
 // ignore_for_file: camel_case_types
+// Why? The linter defaults to throw a warning for types not named as camel
+// case. We deliberately break this convention to match the Win32 underlying
+// types.
+//
+// ignore_for_file: unused_field
+// Why? The linter complains about unused fields (e.g. a class that contains
+// underscore-prefixed members that are not used in the library. In this class,
+// we use this feature to ensure that sizeOf<STRUCT_NAME> returns a size at
+// least as large as the underlying native struct. See, for example,
+// ENUMLOGFONTEX.
+// -----------------------------------------------------------------------------
 
 import 'dart:ffi';
 import 'dart:math' show min;
@@ -1111,6 +1125,95 @@ class LOGFONT extends Struct {
 ///
 /// {@category Struct}
 class ENUMLOGFONTEX extends Struct {
+  @Uint64()
+  external int _data0;
+  @Uint64()
+  external int _data1;
+  @Uint64()
+  external int _data2;
+  @Uint64()
+  external int _data3;
+  @Uint64()
+  external int _data4;
+  @Uint64()
+  external int _data5;
+  @Uint64()
+  external int _data6;
+  @Uint64()
+  external int _data7;
+  @Uint64()
+  external int _data8;
+  @Uint64()
+  external int _data9;
+  @Uint64()
+  external int _data10;
+  @Uint64()
+  external int _data11;
+  @Uint64()
+  external int _data12;
+  @Uint64()
+  external int _data13;
+  @Uint64()
+  external int _data14;
+  @Uint64()
+  external int _data15;
+  @Uint64()
+  external int _data16;
+  @Uint64()
+  external int _data17;
+  @Uint64()
+  external int _data18;
+  @Uint64()
+  external int _data19;
+  @Uint64()
+  external int _data20;
+  @Uint64()
+  external int _data21;
+  @Uint64()
+  external int _data22;
+  @Uint64()
+  external int _data23;
+  @Uint64()
+  external int _data24;
+  @Uint64()
+  external int _data25;
+  @Uint64()
+  external int _data26;
+  @Uint64()
+  external int _data27;
+  @Uint64()
+  external int _data28;
+  @Uint64()
+  external int _data29;
+  @Uint64()
+  external int _data30;
+  @Uint64()
+  external int _data31;
+  @Uint64()
+  external int _data32;
+  @Uint64()
+  external int _data33;
+  @Uint64()
+  external int _data34;
+  @Uint64()
+  external int _data35;
+  @Uint64()
+  external int _data36;
+  @Uint64()
+  external int _data37;
+  @Uint64()
+  external int _data38;
+  @Uint64()
+  external int _data39;
+  @Uint64()
+  external int _data40;
+  @Uint64()
+  external int _data41;
+  @Uint64()
+  external int _data42;
+  @Uint32()
+  external int _data43;
+
   LOGFONT get elfLogFont => addressOf.cast<LOGFONT>().ref;
 
   String get elfFullName => addressOf
@@ -1130,6 +1233,9 @@ class ENUMLOGFONTEX extends Struct {
       .elementAt(sizeOf<LOGFONT>() + ((LF_FULLFACESIZE + LF_FACESIZE) * 2))
       .cast<Utf16>()
       .unpackString(LF_FACESIZE);
+
+  factory ENUMLOGFONTEX.allocate() =>
+      allocate<Uint8>(count: 348).cast<ENUMLOGFONTEX>().ref;
 }
 
 // typedef struct tagCREATESTRUCTW {
