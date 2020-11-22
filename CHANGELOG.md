@@ -1,3 +1,8 @@
+## 2.0.0-nullsafety.3
+
+- Add button and dialog style constants
+- Add DLGTEMPLATE and DLGITEMTEMPLATE
+
 ## 2.0.0-nullsafety.2
 
 - Add extended window style constants (WM_EX_*)
