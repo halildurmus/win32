@@ -17,45 +17,39 @@ void main() {
   Sleep(1000);
 
   print('Sending the "A" key and the Unicode character "€".');
-  final kbd = KEYBDINPUT.allocate();
+  final kbd = INPUT.allocate();
+  kbd.type = INPUT_KEYBOARD;
+  kbd.ki.wVk = VK_A;
+  var result = SendInput(1, kbd.addressOf, sizeOf<INPUT>());
+  if (result != TRUE) print('Error: ${GetLastError()}');
 
-  kbd.wVk = VK_A;
-  var result = SendInput(
-      1, Pointer.fromAddress(kbd.addressOf.address), sizeOf<KEYBDINPUT>());
-  if (result != 1) print('Error: ${GetLastError()}');
+  kbd.ki.dwFlags = KEYEVENTF_KEYUP;
+  result = SendInput(1, kbd.addressOf, sizeOf<INPUT>());
+  if (result != TRUE) print('Error: ${GetLastError()}');
 
-  kbd.dwFlags = KEYEVENTF_KEYUP;
-  result = SendInput(
-      1, Pointer.fromAddress(kbd.addressOf.address), sizeOf<KEYBDINPUT>());
-  if (result != 1) print('Error: ${GetLastError()}');
+  kbd.ki.wVk = 0;
+  kbd.ki.wScan = 0x20AC; // euro sign
+  kbd.ki.dwFlags = KEYEVENTF_UNICODE;
+  result = SendInput(1, kbd.addressOf, sizeOf<INPUT>());
+  if (result != TRUE) print('Error: ${GetLastError()}');
 
-  kbd.wVk = 0;
-  kbd.wScan = 0x20AC; // euro sign
-  kbd.dwFlags = KEYEVENTF_UNICODE;
-  result = SendInput(
-      1, Pointer.fromAddress(kbd.addressOf.address), sizeOf<KEYBDINPUT>());
-  if (result != 1) print('Error: ${GetLastError()}');
-
-  kbd.dwFlags = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
-  result = SendInput(
-      1, Pointer.fromAddress(kbd.addressOf.address), sizeOf<KEYBDINPUT>());
-  if (result != 1) print('Error: ${GetLastError()}');
+  kbd.ki.dwFlags = KEYEVENTF_UNICODE | KEYEVENTF_KEYUP;
+  result = SendInput(1, kbd.addressOf, sizeOf<INPUT>());
+  if (result != TRUE) print('Error: ${GetLastError()}');
 
   free(kbd.addressOf);
 
   print('Sending a right-click mouse event.');
-  final mouse = MOUSEINPUT.allocate();
-
-  mouse.dwFlags = MOUSEEVENTF_RIGHTDOWN;
-  result = SendInput(
-      1, Pointer.fromAddress(mouse.addressOf.address), sizeOf<MOUSEINPUT>());
-  if (result != 1) print('Error: ${GetLastError()}');
+  final mouse = INPUT.allocate();
+  mouse.type = INPUT_MOUSE;
+  mouse.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
+  result = SendInput(1, mouse.addressOf, sizeOf<INPUT>());
+  if (result != TRUE) print('Error: ${GetLastError()}');
 
   Sleep(1000);
-  mouse.dwFlags = MOUSEEVENTF_RIGHTUP;
-  result = SendInput(
-      1, Pointer.fromAddress(mouse.addressOf.address), sizeOf<MOUSEINPUT>());
-  if (result != 1) print('Error: ${GetLastError()}');
+  mouse.mi.dwFlags = MOUSEEVENTF_RIGHTUP;
+  result = SendInput(1, mouse.addressOf, sizeOf<INPUT>());
+  if (result != TRUE) print('Error: ${GetLastError()}');
 
   free(mouse.addressOf);
 }

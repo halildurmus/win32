@@ -168,20 +168,12 @@ void main() {
   });
   test('Struct LOGFONT is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<LOGFONT>(), equals(60));
+      expect(sizeOf<LOGFONT>(), equals(92));
     }
     else {
-      expect(sizeOf<LOGFONT>(), equals(60));
+      expect(sizeOf<LOGFONT>(), equals(92));
     }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
-  test('Struct ENUMLOGFONTEX is the right size', () {
-    if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<ENUMLOGFONTEX>(), equals(188));
-    }
-    else {
-      expect(sizeOf<ENUMLOGFONTEX>(), equals(188));
-    }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
+  });
   test('Struct CREATESTRUCT is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
       expect(sizeOf<CREATESTRUCT>(), equals(80));
@@ -254,38 +246,22 @@ void main() {
       expect(sizeOf<RECT>(), equals(16));
     }
   });
-  test('Struct MOUSEINPUT is the right size', () {
+  test('Struct INPUT is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<MOUSEINPUT>(), equals(32));
+      expect(sizeOf<INPUT>(), equals(40));
     }
     else {
-      expect(sizeOf<MOUSEINPUT>(), equals(24));
+      expect(sizeOf<INPUT>(), equals(28));
     }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
-  test('Struct KEYBDINPUT is the right size', () {
-    if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<KEYBDINPUT>(), equals(24));
-    }
-    else {
-      expect(sizeOf<KEYBDINPUT>(), equals(16));
-    }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
-  test('Struct HARDWAREINPUT is the right size', () {
-    if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<HARDWAREINPUT>(), equals(8));
-    }
-    else {
-      expect(sizeOf<HARDWAREINPUT>(), equals(8));
-    }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
+  });
   test('Struct TEXTMETRIC is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<TEXTMETRIC>(), equals(56));
+      expect(sizeOf<TEXTMETRIC>(), equals(60));
     }
     else {
-      expect(sizeOf<TEXTMETRIC>(), equals(56));
+      expect(sizeOf<TEXTMETRIC>(), equals(60));
     }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
+  });
   test('Struct SCROLLINFO is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
       expect(sizeOf<SCROLLINFO>(), equals(28));
@@ -358,14 +334,6 @@ void main() {
       expect(sizeOf<KNOWNFOLDER_DEFINITION>(), equals(76));
     }
   });
-  test('Struct SHITEMID is the right size', () {
-    if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<SHITEMID>(), equals(3));
-    }
-    else {
-      expect(sizeOf<SHITEMID>(), equals(3));
-    }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
   test('Struct DISPPARAMS is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
       expect(sizeOf<DISPPARAMS>(), equals(24));
@@ -437,7 +405,7 @@ void main() {
     else {
       expect(sizeOf<TASKDIALOGCONFIG>(), equals(96));
     }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
+  });
   test('Struct TASKDIALOG_BUTTON is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
       expect(sizeOf<TASKDIALOG_BUTTON>(), equals(12));
@@ -445,7 +413,7 @@ void main() {
     else {
       expect(sizeOf<TASKDIALOG_BUTTON>(), equals(8));
     }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
+  });
   test('Struct DLLVERSIONINFO is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
       expect(sizeOf<DLLVERSIONINFO>(), equals(20));
@@ -461,7 +429,7 @@ void main() {
     else {
       expect(sizeOf<OSVERSIONINFO>(), equals(148));
     }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
+  });
   test('Struct BLUETOOTH_DEVICE_INFO is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
       expect(sizeOf<BLUETOOTH_DEVICE_INFO>(), equals(560));
@@ -469,7 +437,7 @@ void main() {
     else {
       expect(sizeOf<BLUETOOTH_DEVICE_INFO>(), equals(560));
     }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
+  });
   test('Struct BLUETOOTH_DEVICE_SEARCH_PARAMS is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
       expect(sizeOf<BLUETOOTH_DEVICE_SEARCH_PARAMS>(), equals(40));
@@ -493,7 +461,7 @@ void main() {
     else {
       expect(sizeOf<BLUETOOTH_PIN_INFO>(), equals(17));
     }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
+  });
   test('Struct COR_FIELD_OFFSET is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
       expect(sizeOf<COR_FIELD_OFFSET>(), equals(8));
@@ -510,14 +478,6 @@ void main() {
       expect(sizeOf<VS_FIXEDFILEINFO>(), equals(52));
     }
   });
-  test('Struct MCI_OPEN_PARMS is the right size', () {
-    if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<MCI_OPEN_PARMS>(), equals(36));
-    }
-    else {
-      expect(sizeOf<MCI_OPEN_PARMS>(), equals(20));
-    }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
   test('Struct MCI_PLAY_PARMS is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
       expect(sizeOf<MCI_PLAY_PARMS>(), equals(16));
@@ -526,14 +486,6 @@ void main() {
       expect(sizeOf<MCI_PLAY_PARMS>(), equals(12));
     }
   });
-  test('Struct MCI_SEEK_PARMS is the right size', () {
-    if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<MCI_SEEK_PARMS>(), equals(12));
-    }
-    else {
-      expect(sizeOf<MCI_SEEK_PARMS>(), equals(8));
-    }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
   test('Struct MCI_STATUS_PARMS is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
       expect(sizeOf<MCI_STATUS_PARMS>(), equals(24));
@@ -550,60 +502,4 @@ void main() {
       expect(sizeOf<LOGBRUSH>(), equals(12));
     }
   });
-  test('Struct EXCEPINFO is the right size', () {
-    if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<EXCEPINFO>(), equals(64));
-    }
-    else {
-      expect(sizeOf<EXCEPINFO>(), equals(32));
-    }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
-  test('Struct PROPERTYKEY is the right size', () {
-    if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<PROPERTYKEY>(), equals(20));
-    }
-    else {
-      expect(sizeOf<PROPERTYKEY>(), equals(20));
-    }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
-  test('Struct PROPVARIANT is the right size', () {
-    if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<PROPVARIANT>(), equals(24));
-    }
-    else {
-      expect(sizeOf<PROPVARIANT>(), equals(16));
-    }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
-  test('Struct SAFEARRAY is the right size', () {
-    if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<SAFEARRAY>(), equals(32));
-    }
-    else {
-      expect(sizeOf<SAFEARRAY>(), equals(24));
-    }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
-  test('Struct CLSID is the right size', () {
-    if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<CLSID>(), equals(16));
-    }
-    else {
-      expect(sizeOf<CLSID>(), equals(16));
-    }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
-  test('Struct STATSTG is the right size', () {
-    if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<STATSTG>(), equals(80));
-    }
-    else {
-      expect(sizeOf<STATSTG>(), equals(72));
-    }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
-  test('Struct NLM_SIMULATED_PROFILE_INFO is the right size', () {
-    if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<NLM_SIMULATED_PROFILE_INFO>(), equals(524));
-    }
-    else {
-      expect(sizeOf<NLM_SIMULATED_PROFILE_INFO>(), equals(524));
-    }
-  }, skip: 'This struct is known to have an incorrect sizeOf.');
 }

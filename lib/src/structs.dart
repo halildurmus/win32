@@ -1623,8 +1623,37 @@ class RECT extends Struct {
 //   } DUMMYUNIONNAME;
 // } INPUT, *PINPUT, *LPINPUT;
 
-// We embed this type directly into the union types below, since nested structs
-// are unavailable in Dart FFI at present.
+/// Used by SendInput to store information for synthesizing input events such as
+/// keystrokes, mouse movement, and mouse clicks.
+///
+/// {@category Struct}
+class INPUT extends Struct {
+  @Uint64()
+  external int _data0;
+  @Uint64()
+  external int _data1;
+  @Uint64()
+  external int _data2;
+  @Uint64()
+  external int _data3;
+  @Uint64()
+  external int _data4;
+
+  int get type => addressOf.cast<Uint32>().value;
+  set type(int value) => addressOf.cast<Uint32>().value = value;
+
+  MOUSEINPUT get mi => MOUSEINPUT(addressOf.cast<Uint8>().elementAt(8).cast());
+  KEYBDINPUT get ki => KEYBDINPUT(addressOf.cast<Uint8>().elementAt(8).cast());
+  HARDWAREINPUT get hi =>
+      HARDWAREINPUT(addressOf.cast<Uint8>().elementAt(8).cast());
+
+  factory INPUT.allocate() => allocate<INPUT>().ref
+    .._data0 = 0
+    .._data1 = 0
+    .._data2 = 0
+    .._data3 = 0
+    .._data4 = 0;
+}
 
 // BUG: Unfortunately this is broken on 32-bit Dart at present.
 
@@ -1640,37 +1669,26 @@ class RECT extends Struct {
 /// Contains information about a simulated mouse event.
 ///
 /// {@category Struct}
-class MOUSEINPUT extends Struct {
-  @Uint32()
-  external int type;
+class MOUSEINPUT {
+  Pointer<Uint32> ptr;
 
-  @Int32()
-  external int padding;
+  MOUSEINPUT(this.ptr);
 
-  @Int32()
-  external int dx;
-  @Int32()
-  external int dy;
+  int get dx => ptr.value;
+  int get dy => ptr.elementAt(1).value;
 
-  @Uint32()
-  external int mouseData;
+  set dx(int value) => ptr.value = value;
+  set dy(int value) => ptr.elementAt(1).value = value;
 
-  @Uint32()
-  external int dwFlags;
+  int get mouseData => ptr.elementAt(2).value;
+  int get dwFlags => ptr.elementAt(3).value;
+  int get time => ptr.elementAt(4).value;
+  int get dwExtraInfo => ptr.elementAt(5).value;
 
-  @Uint32()
-  external int time;
-
-  external Pointer<Uint32> dwExtraInfo;
-
-  factory MOUSEINPUT.allocate() => allocate<MOUSEINPUT>().ref
-    ..type = INPUT_MOUSE
-    ..dx = 0
-    ..dy = 0
-    ..mouseData = 0
-    ..dwFlags = 0
-    ..time = 0
-    ..dwExtraInfo = nullptr;
+  set mouseData(int value) => ptr.elementAt(2).value = value;
+  set dwFlags(int value) => ptr.elementAt(3).value = value;
+  set time(int value) => ptr.elementAt(4).value = value;
+  set dwExtraInfo(int value) => ptr.elementAt(5).value = value;
 }
 
 // typedef struct tagKEYBDINPUT {
@@ -1684,37 +1702,22 @@ class MOUSEINPUT extends Struct {
 /// Contains information about a simulated keyboard event.
 ///
 /// {@category Struct}
-class KEYBDINPUT extends Struct {
-  @Int32()
-  external int type;
+class KEYBDINPUT {
+  Pointer<Uint16> ptr;
 
-  @Int32()
-  external int padding1;
+  KEYBDINPUT(this.ptr);
 
-  @Uint16()
-  external int wVk;
+  int get wVk => ptr.value;
+  int get wScan => ptr.elementAt(1).value;
+  int get dwFlags => ptr.elementAt(2).cast<Uint32>().value;
+  int get time => ptr.elementAt(4).cast<Uint32>().value;
+  int get dwExtraInfo => ptr.elementAt(6).cast<Uint32>().value;
 
-  @Uint16()
-  external int wScan;
-
-  @Uint32()
-  external int dwFlags;
-
-  @Uint32()
-  external int time;
-
-  external Pointer<Uint32> dwExtraInfo;
-
-  @Int64()
-  external int padding2;
-
-  factory KEYBDINPUT.allocate() => allocate<KEYBDINPUT>().ref
-    ..type = INPUT_KEYBOARD
-    ..wVk = 0
-    ..wScan = 0
-    ..dwFlags = 0
-    ..time = 0
-    ..dwExtraInfo = nullptr;
+  set wVk(int value) => ptr.value = value;
+  set wScan(int value) => ptr.elementAt(1).value = value;
+  set dwFlags(int value) => ptr.elementAt(2).cast<Uint32>().value = value;
+  set time(int value) => ptr.elementAt(4).cast<Uint32>().value = value;
+  set dwExtraInfo(int value) => ptr.elementAt(6).cast<Uint32>().value = value;
 }
 
 // typedef struct tagHARDWAREINPUT {
@@ -1727,26 +1730,18 @@ class KEYBDINPUT extends Struct {
 /// other than a keyboard or mouse.
 ///
 /// {@category Struct}
-class HARDWAREINPUT extends Struct {
-  @Int32()
-  external int type;
+class HARDWAREINPUT {
+  Pointer<Uint16> ptr;
 
-  @Int32()
-  external int padding;
+  HARDWAREINPUT(this.ptr);
 
-  @Uint32()
-  external int uMsg;
+  int get uMsg => ptr.cast<Uint32>().value;
+  int get wParamL => ptr.elementAt(2).value;
+  int get wParamH => ptr.elementAt(3).value;
 
-  @Uint16()
-  external int wParamL;
-  @Uint16()
-  external int wParamH;
-
-  factory HARDWAREINPUT.allocate() => allocate<HARDWAREINPUT>().ref
-    ..type = INPUT_HARDWARE
-    ..uMsg = 0
-    ..wParamL = 0
-    ..wParamH = 0;
+  set uMsg(int value) => ptr.cast<Uint32>().value = value;
+  set wParamL(int value) => ptr.elementAt(2).value = value;
+  set wParamH(int value) => ptr.elementAt(3).value = value;
 }
 
 // typedef struct tagTEXTMETRICW {

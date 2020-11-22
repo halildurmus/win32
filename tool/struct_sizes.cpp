@@ -40,8 +40,8 @@ void main()
     printf("'FINDREPLACE': %zu,\n", sizeof(FINDREPLACE));
     printf("'CHOOSEFONT': %zu,\n", sizeof(CHOOSEFONT));
     printf("'OPENFILENAME': %zu,\n", sizeof(OPENFILENAME));
-    printf("'LOGFONT': %zu,\n", sizeof(LOGFONT));
-    printf("'ENUMLOGFONTEX': %zu,\n", sizeof(ENUMLOGFONTEX));
+    printf("'LOGFONTW': %zu,\n", sizeof(LOGFONTW));
+    printf("'ENUMLOGFONTEXW': %zu,\n", sizeof(ENUMLOGFONTEXW));
     printf("'CREATESTRUCT': %zu,\n", sizeof(CREATESTRUCT));
     printf("'MENUINFO': %zu,\n", sizeof(MENUINFO));
     printf("'MENUITEMINFO': %zu,\n", sizeof(MENUITEMINFO));
@@ -51,10 +51,11 @@ void main()
     printf("'POINT': %zu,\n", sizeof(POINT));
     printf("'PAINTSTRUCT': %zu,\n", sizeof(PAINTSTRUCT));
     printf("'RECT': %zu,\n", sizeof(RECT));
+    printf("'INPUT': %zu,\n", sizeof(INPUT));
     printf("'MOUSEINPUT': %zu,\n", sizeof(MOUSEINPUT));
     printf("'KEYBDINPUT': %zu,\n", sizeof(KEYBDINPUT));
     printf("'HARDWAREINPUT': %zu,\n", sizeof(HARDWAREINPUT));
-    printf("'TEXTMETRIC': %zu,\n", sizeof(TEXTMETRIC));
+    printf("'TEXTMETRICW': %zu,\n", sizeof(TEXTMETRICW));
     printf("'SCROLLINFO': %zu,\n", sizeof(SCROLLINFO));
     printf("'SHELLEXECUTEINFO': %zu,\n", sizeof(SHELLEXECUTEINFO));
     printf("'SHQUERYRBINFO': %zu,\n", sizeof(SHQUERYRBINFO));

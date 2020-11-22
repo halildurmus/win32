@@ -83,7 +83,8 @@ import 'package:win32/win32.dart';
 void main() {
 ''');
 
-  for (final struct in structSize64.keys) {
+  for (final struct
+      in structSize64.keys.where((struct) => !skipStructs.contains(struct))) {
     writer.writeStringSync('''
   test('Struct $struct is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
@@ -92,7 +93,7 @@ void main() {
     else {
       expect(sizeOf<$struct>(), equals(${structSize32[struct]}));
     }
-  }${skipStructTest(struct)});
+  });
 ''');
     tests++;
   }
@@ -101,10 +102,6 @@ void main() {
   writer.closeSync();
   print('$tests struct tests generated.');
 }
-
-String skipStructTest(String struct) => skipStructs.contains(struct)
-    ? ", skip: 'This struct is known to have an incorrect sizeOf.'"
-    : '';
 
 void main() {
   loadCsv('tool/win32/win32api.csv');

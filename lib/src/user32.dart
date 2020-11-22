@@ -926,8 +926,8 @@ final ScrollWindow = _user32.lookupFunction<
 /// ```
 /// {@category user32}
 final SendInput = _user32.lookupFunction<
-    Uint32 Function(Uint32 cInputs, Pointer<Void> pInputs, Int32 cbSize),
-    int Function(int cInputs, Pointer<Void> pInputs, int cbSize)>('SendInput');
+    Uint32 Function(Uint32 cInputs, Pointer<INPUT> pInputs, Int32 cbSize),
+    int Function(int cInputs, Pointer<INPUT> pInputs, int cbSize)>('SendInput');
 
 /// Sends the specified message to a window or windows. The SendMessage
 /// function calls the window procedure for the specified window and does
