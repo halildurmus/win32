@@ -77,7 +77,7 @@ void main()
     printf("'TASKDIALOGCONFIG': %zu,\n", sizeof(TASKDIALOGCONFIG));
     printf("'TASKDIALOG_BUTTON': %zu,\n", sizeof(TASKDIALOG_BUTTON));
     printf("'DLLVERSIONINFO': %zu,\n", sizeof(DLLVERSIONINFO));
-    printf("'OSVERSIONINFO': %zu,\n", sizeof(OSVERSIONINFO));
+    printf("'OSVERSIONINFOW': %zu,\n", sizeof(OSVERSIONINFOW));
     printf("'BLUETOOTH_DEVICE_INFO': %zu,\n", sizeof(BLUETOOTH_DEVICE_INFO));
     printf("'BLUETOOTH_DEVICE_SEARCH_PARAMS': %zu,\n", sizeof(BLUETOOTH_DEVICE_SEARCH_PARAMS));
     printf("'BLUETOOTH_FIND_RADIO_PARAMS': %zu,\n", sizeof(BLUETOOTH_FIND_RADIO_PARAMS));

@@ -398,44 +398,12 @@ void main() {
       expect(sizeOf<INITCOMMONCONTROLSEX>(), equals(8));
     }
   });
-  test('Struct TASKDIALOGCONFIG is the right size', () {
-    if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<TASKDIALOGCONFIG>(), equals(160));
-    }
-    else {
-      expect(sizeOf<TASKDIALOGCONFIG>(), equals(96));
-    }
-  });
-  test('Struct TASKDIALOG_BUTTON is the right size', () {
-    if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<TASKDIALOG_BUTTON>(), equals(12));
-    }
-    else {
-      expect(sizeOf<TASKDIALOG_BUTTON>(), equals(8));
-    }
-  });
   test('Struct DLLVERSIONINFO is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
       expect(sizeOf<DLLVERSIONINFO>(), equals(20));
     }
     else {
       expect(sizeOf<DLLVERSIONINFO>(), equals(20));
-    }
-  });
-  test('Struct OSVERSIONINFO is the right size', () {
-    if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<OSVERSIONINFO>(), equals(148));
-    }
-    else {
-      expect(sizeOf<OSVERSIONINFO>(), equals(148));
-    }
-  });
-  test('Struct BLUETOOTH_DEVICE_INFO is the right size', () {
-    if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<BLUETOOTH_DEVICE_INFO>(), equals(560));
-    }
-    else {
-      expect(sizeOf<BLUETOOTH_DEVICE_INFO>(), equals(560));
     }
   });
   test('Struct BLUETOOTH_DEVICE_SEARCH_PARAMS is the right size', () {
@@ -452,14 +420,6 @@ void main() {
     }
     else {
       expect(sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>(), equals(4));
-    }
-  });
-  test('Struct BLUETOOTH_PIN_INFO is the right size', () {
-    if (sizeOf<IntPtr>() == 8) {
-      expect(sizeOf<BLUETOOTH_PIN_INFO>(), equals(17));
-    }
-    else {
-      expect(sizeOf<BLUETOOTH_PIN_INFO>(), equals(17));
     }
   });
   test('Struct COR_FIELD_OFFSET is the right size', () {

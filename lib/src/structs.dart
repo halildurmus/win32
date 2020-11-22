@@ -2787,6 +2787,73 @@ class OSVERSIONINFO extends Struct {
   @Uint32()
   external int dwPlatformId;
 
+  // These fields are never used directly, but ensure that sizeOf returns at
+  // least the right size, so heap allocations are sufficient.
+  @Uint64()
+  external int _data0;
+  @Uint64()
+  external int _data1;
+  @Uint64()
+  external int _data2;
+  @Uint64()
+  external int _data3;
+  @Uint64()
+  external int _data4;
+  @Uint64()
+  external int _data5;
+  @Uint64()
+  external int _data6;
+  @Uint64()
+  external int _data7;
+  @Uint64()
+  external int _data8;
+  @Uint64()
+  external int _data9;
+  @Uint64()
+  external int _data10;
+  @Uint64()
+  external int _data11;
+  @Uint64()
+  external int _data12;
+  @Uint64()
+  external int _data13;
+  @Uint64()
+  external int _data14;
+  @Uint64()
+  external int _data15;
+  @Uint64()
+  external int _data16;
+  @Uint64()
+  external int _data17;
+  @Uint64()
+  external int _data18;
+  @Uint64()
+  external int _data19;
+  @Uint64()
+  external int _data20;
+  @Uint64()
+  external int _data21;
+  @Uint64()
+  external int _data22;
+  @Uint64()
+  external int _data23;
+  @Uint64()
+  external int _data24;
+  @Uint64()
+  external int _data25;
+  @Uint64()
+  external int _data26;
+  @Uint64()
+  external int _data27;
+  @Uint64()
+  external int _data28;
+  @Uint64()
+  external int _data29;
+  @Uint64()
+  external int _data30;
+  @Uint64()
+  external int _data31;
+
   String get szCSDVersion =>
       addressOf.cast<Uint8>().elementAt(20).cast<Utf16>().unpackString(128);
 

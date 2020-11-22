@@ -26,6 +26,8 @@ void generateTests() {
 
 @TestOn('windows')
 
+import 'dart:ffi';
+import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 
 import 'package:win32/win32.dart';
@@ -45,11 +47,20 @@ void main() {
         .where((td) => !td.neutralApiName!.startsWith('TaskDialog'));
 
     for (final proto in libProtos) {
+      final apiName = prototypes.keys.firstWhere(
+          (k) => prototypes[k]!.neutralApiName == proto.neutralApiName);
       writer.writeStringSync('''
       test('Can instantiate ${proto.neutralApiName}', () {
-        final function = ${proto.neutralApiName};
-        expect(function, isA<Function>());
+        final $library = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');
+        final ${proto.neutralApiName} = $library.lookupFunction<\n
+          ${proto.nativeReturn} Function(
+            ${proto.nativeParams.keys.map((param) => '${proto.nativeParams[param]} $param').join(', ')}),
+          ${proto.dartReturn} Function(
+            ${proto.dartParams.keys.map((param) => '${proto.dartParams[param]} $param').join(', ')})>
+          ('$apiName');
+        expect(${proto.neutralApiName}, isA<Function>());
       });
+      
 ''');
       tests++;
     }

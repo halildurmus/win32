@@ -990,15 +990,15 @@ int MoveWindow(int hWnd, int X, int Y, int nWidth, int nHeight, int bRepaint) {
 /// );
 /// ```
 /// {@category user32}
-int MsgWaitForMultipleObjects(int count, Pointer<IntPtr> pHandles, int fWaitAll,
-    int dwMilliseconds, int dwWakeMask) {
+int MsgWaitForMultipleObjects(int nCount, Pointer<IntPtr> pHandles,
+    int fWaitAll, int dwMilliseconds, int dwWakeMask) {
   final _MsgWaitForMultipleObjects = _user32.lookupFunction<
-      Uint32 Function(Uint32 count, Pointer<IntPtr> pHandles, Int32 fWaitAll,
+      Uint32 Function(Uint32 nCount, Pointer<IntPtr> pHandles, Int32 fWaitAll,
           Uint32 dwMilliseconds, Uint32 dwWakeMask),
-      int Function(int count, Pointer<IntPtr> pHandles, int fWaitAll,
+      int Function(int nCount, Pointer<IntPtr> pHandles, int fWaitAll,
           int dwMilliseconds, int dwWakeMask)>('MsgWaitForMultipleObjects');
   return _MsgWaitForMultipleObjects(
-      count, pHandles, fWaitAll, dwMilliseconds, dwWakeMask);
+      nCount, pHandles, fWaitAll, dwMilliseconds, dwWakeMask);
 }
 
 /// Dispatches incoming sent messages, checks the thread message queue for
