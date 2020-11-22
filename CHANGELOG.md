@@ -1,3 +1,12 @@
+## 2.0.0-nullsafety.1
+
+- Add a number of GDI calls
+- Rework API wrapper to use functions instead of properties
+- Convert API tests support reworked API wrapper
+- High-fidelity INPUT struct that demonstrates an approach for union structs in
+  Dart FFI
+- Document some more constants
+
 ## 2.0.0-nullsafety.0
 
 - Enable sound null safety
