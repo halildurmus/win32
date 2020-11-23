@@ -69,7 +69,7 @@ Method parseIdlMethod(String line, int lineIndex) {
 
       // convert IDL type to Dart
       if (typeMappings.containsKey(dartTypePrimitive)) {
-        dartTypePrimitive = typeMappings[dartTypePrimitive];
+        dartTypePrimitive = typeMappings[dartTypePrimitive]!;
       }
 
       // deal with pointers
@@ -102,7 +102,7 @@ Interface loadSource(File file) {
   var isInMethod = false;
   final interface = Interface();
   interface.methods = [];
-  Method method;
+  Method? method;
 
   if (file.path.endsWith('.h')) {
     interface.sourceType = SourceType.header;
@@ -195,7 +195,7 @@ Interface loadSource(File file) {
       if (!(line.startsWith('/*') && line.endsWith('*/'))) {
         var keywords = line.split(' ');
         final parameter = Parameter();
-        String win32Keyword;
+        late String win32Keyword;
 
         if (line.contains('/* broken(struct_by_value) */')) {
           parameter.supported = false;
@@ -216,7 +216,7 @@ Interface loadSource(File file) {
         }
         if ((line.contains('*', line.indexOf(win32Keyword)) ||
                 (line.contains('[  ]', line.indexOf(win32Keyword)))) &&
-            (!parameter.type.contains('Pointer')) &&
+            (!parameter.type!.contains('Pointer')) &&
             (!['LPWSTR', 'LPCWSTR'].contains(parameter.type))) {
           parameter.type = 'Pointer<${parameter.type}>';
 
@@ -231,14 +231,14 @@ Interface loadSource(File file) {
           parameter.name =
               parameterKeyword.substring(0, parameterKeyword.length - 1);
           trimPointer(parameter);
-          method.parameters.add(parameter);
+          method!.parameters.add(parameter);
         } else if (line.contains(';')) {
           // parameter is third keyword from last, minus trailing parenthesis
           final parameterKeyword = keywords[keywords.length - 3];
           parameter.name =
               parameterKeyword.substring(0, parameterKeyword.length - 1);
           trimPointer(parameter);
-          method.parameters.add(parameter);
+          method!.parameters.add(parameter);
           interface.methods.add(method);
           isInMethod = false;
         } else {
@@ -253,13 +253,13 @@ Interface loadSource(File file) {
 }
 
 void trimPointer(Parameter parameter) {
-  if (parameter.name.startsWith('**')) {
+  if (parameter.name!.startsWith('**')) {
     // double pointer
     parameter.type = 'Pointer<IntPtr>';
-    parameter.name = parameter.name.substring(2);
+    parameter.name = parameter.name!.substring(2);
   }
-  if (parameter.name.startsWith('*')) {
+  if (parameter.name!.startsWith('*')) {
     // pointer
-    parameter.name = parameter.name.substring(1);
+    parameter.name = parameter.name!.substring(1);
   }
 }

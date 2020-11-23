@@ -29,7 +29,7 @@ class WinmdMethod {
   bool isSetProperty = false;
 
   List<WinmdParameter> parameters = <WinmdParameter>[];
-  WinmdParameter returnType;
+  late WinmdParameter returnType;
 
   bool _testFlag(int attribute) => methodFlags & attribute == attribute;
 
@@ -110,7 +110,7 @@ class WinmdMethod {
       Uint8List signatureBlob) {
     final paramType = signatureBlob.first;
     final runtimeType = WinmdTypeIdentifier.fromValue(paramType);
-    int dataLength;
+    var dataLength = 0;
 
     if (runtimeType.corType == CorElementType.ELEMENT_TYPE_VALUETYPE ||
         runtimeType.corType == CorElementType.ELEMENT_TYPE_CLASS) {
@@ -196,7 +196,7 @@ class WinmdMethod {
               _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
           if (runtimeType.item1.corType == CorElementType.ELEMENT_TYPE_ARRAY) {
             blobPtr +=
-                _parseArray(signatureBlob.sublist(blobPtr + 1), paramsIndex) +
+                _parseArray(signatureBlob.sublist(blobPtr + 1), paramsIndex)! +
                     2;
             paramsIndex++; //we've added two parameters here
           } else {
@@ -237,7 +237,7 @@ class WinmdMethod {
     }
   }
 
-  int _parseArray(Uint8List sublist, int paramsIndex) {
+  int? _parseArray(Uint8List sublist, int paramsIndex) {
     final typeTuple = _parseTypeFromSignature(sublist.sublist(1));
 
     parameters[paramsIndex].name = '__valueSize';

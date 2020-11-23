@@ -28,11 +28,15 @@ final _shcore = DynamicLibrary.open('shcore.dll');
 ///   );
 /// ```
 /// {@category shcore}
-final GetDpiForMonitor = _shcore.lookupFunction<
-    IntPtr Function(IntPtr hMonitor, Int32 dpiType, Pointer<Int32> dpiX,
-        Pointer<Int32> dpiY),
-    int Function(int hMonitor, int dpiType, Pointer<Int32> dpiX,
-        Pointer<Int32> dpiY)>('GetDpiForMonitor');
+int GetDpiForMonitor(
+    int hMonitor, int dpiType, Pointer<Int32> dpiX, Pointer<Int32> dpiY) {
+  final _GetDpiForMonitor = _shcore.lookupFunction<
+      IntPtr Function(IntPtr hMonitor, Int32 dpiType, Pointer<Int32> dpiX,
+          Pointer<Int32> dpiY),
+      int Function(int hMonitor, int dpiType, Pointer<Int32> dpiX,
+          Pointer<Int32> dpiY)>('GetDpiForMonitor');
+  return _GetDpiForMonitor(hMonitor, dpiType, dpiX, dpiY);
+}
 
 /// Retrieves the dots per inch (dpi) awareness of the specified process.
 ///
@@ -43,9 +47,13 @@ final GetDpiForMonitor = _shcore.lookupFunction<
 /// );
 /// ```
 /// {@category shcore}
-final GetProcessDpiAwareness = _shcore.lookupFunction<
-    IntPtr Function(IntPtr hprocess, Pointer<Int32> value),
-    int Function(int hprocess, Pointer<Int32> value)>('GetProcessDpiAwareness');
+int GetProcessDpiAwareness(int hprocess, Pointer<Int32> value) {
+  final _GetProcessDpiAwareness = _shcore.lookupFunction<
+      IntPtr Function(IntPtr hprocess, Pointer<Int32> value),
+      int Function(
+          int hprocess, Pointer<Int32> value)>('GetProcessDpiAwareness');
+  return _GetProcessDpiAwareness(hprocess, value);
+}
 
 /// Sets the process-default DPI awareness level. This is equivalent to
 /// calling SetProcessDpiAwarenessContext with the corresponding
@@ -57,6 +65,9 @@ final GetProcessDpiAwareness = _shcore.lookupFunction<
 /// );
 /// ```
 /// {@category shcore}
-final SetProcessDpiAwareness = _shcore.lookupFunction<
-    IntPtr Function(Int32 value),
-    int Function(int value)>('SetProcessDpiAwareness');
+int SetProcessDpiAwareness(int value) {
+  final _SetProcessDpiAwareness = _shcore.lookupFunction<
+      IntPtr Function(Int32 value),
+      int Function(int value)>('SetProcessDpiAwareness');
+  return _SetProcessDpiAwareness(value);
+}

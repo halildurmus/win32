@@ -25,9 +25,12 @@ final _comdlg32 = DynamicLibrary.open('comdlg32.dll');
 /// );
 /// ```
 /// {@category comdlg32}
-final ChooseColor = _comdlg32.lookupFunction<
-    Int32 Function(Pointer<CHOOSECOLOR> lpcc),
-    int Function(Pointer<CHOOSECOLOR> lpcc)>('ChooseColorW');
+int ChooseColor(Pointer<CHOOSECOLOR> lpcc) {
+  final _ChooseColor = _comdlg32.lookupFunction<
+      Int32 Function(Pointer<CHOOSECOLOR> lpcc),
+      int Function(Pointer<CHOOSECOLOR> lpcc)>('ChooseColorW');
+  return _ChooseColor(lpcc);
+}
 
 /// Creates a Font dialog box that enables the user to choose attributes
 /// for a logical font. These attributes include a font family and
@@ -40,9 +43,12 @@ final ChooseColor = _comdlg32.lookupFunction<
 /// );
 /// ```
 /// {@category comdlg32}
-final ChooseFont = _comdlg32.lookupFunction<
-    Int32 Function(Pointer<CHOOSEFONT> lpcf),
-    int Function(Pointer<CHOOSEFONT> lpcf)>('ChooseFontW');
+int ChooseFont(Pointer<CHOOSEFONT> lpcf) {
+  final _ChooseFont = _comdlg32.lookupFunction<
+      Int32 Function(Pointer<CHOOSEFONT> lpcf),
+      int Function(Pointer<CHOOSEFONT> lpcf)>('ChooseFontW');
+  return _ChooseFont(lpcf);
+}
 
 /// Creates a system-defined modeless Find dialog box that lets the user
 /// specify a string to search for and options to use when searching for
@@ -54,9 +60,12 @@ final ChooseFont = _comdlg32.lookupFunction<
 /// );
 /// ```
 /// {@category comdlg32}
-final FindText = _comdlg32.lookupFunction<
-    IntPtr Function(Pointer<FINDREPLACE> Arg1),
-    int Function(Pointer<FINDREPLACE> Arg1)>('FindTextW');
+int FindText(Pointer<FINDREPLACE> Arg1) {
+  final _FindText = _comdlg32.lookupFunction<
+      IntPtr Function(Pointer<FINDREPLACE> Arg1),
+      int Function(Pointer<FINDREPLACE> Arg1)>('FindTextW');
+  return _FindText(Arg1);
+}
 
 /// Creates an Open dialog box that lets the user specify the drive,
 /// directory, and the name of a file or set of files to be opened.
@@ -67,9 +76,12 @@ final FindText = _comdlg32.lookupFunction<
 /// );
 /// ```
 /// {@category comdlg32}
-final GetOpenFileName = _comdlg32.lookupFunction<
-    Int32 Function(Pointer<OPENFILENAME> arg1),
-    int Function(Pointer<OPENFILENAME> arg1)>('GetOpenFileNameW');
+int GetOpenFileName(Pointer<OPENFILENAME> arg1) {
+  final _GetOpenFileName = _comdlg32.lookupFunction<
+      Int32 Function(Pointer<OPENFILENAME> arg1),
+      int Function(Pointer<OPENFILENAME> arg1)>('GetOpenFileNameW');
+  return _GetOpenFileName(arg1);
+}
 
 /// Creates a Save dialog box that lets the user specify the drive,
 /// directory, and name of a file to save.
@@ -80,9 +92,12 @@ final GetOpenFileName = _comdlg32.lookupFunction<
 /// );
 /// ```
 /// {@category comdlg32}
-final GetSaveFileName = _comdlg32.lookupFunction<
-    Int32 Function(Pointer<OPENFILENAME> arg1),
-    int Function(Pointer<OPENFILENAME> arg1)>('GetSaveFileNameW');
+int GetSaveFileName(Pointer<OPENFILENAME> arg1) {
+  final _GetSaveFileName = _comdlg32.lookupFunction<
+      Int32 Function(Pointer<OPENFILENAME> arg1),
+      int Function(Pointer<OPENFILENAME> arg1)>('GetSaveFileNameW');
+  return _GetSaveFileName(arg1);
+}
 
 /// Creates a system-defined modeless dialog box that lets the user specify
 /// a string to search for and a replacement string, as well as options to
@@ -94,6 +109,9 @@ final GetSaveFileName = _comdlg32.lookupFunction<
 /// );
 /// ```
 /// {@category comdlg32}
-final ReplaceText = _comdlg32.lookupFunction<
-    IntPtr Function(Pointer<FINDREPLACE> Arg1),
-    int Function(Pointer<FINDREPLACE> Arg1)>('ReplaceTextW');
+int ReplaceText(Pointer<FINDREPLACE> Arg1) {
+  final _ReplaceText = _comdlg32.lookupFunction<
+      IntPtr Function(Pointer<FINDREPLACE> Arg1),
+      int Function(Pointer<FINDREPLACE> Arg1)>('ReplaceTextW');
+  return _ReplaceText(Arg1);
+}

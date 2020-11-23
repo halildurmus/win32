@@ -27,9 +27,13 @@ final _ole32 = DynamicLibrary.open('ole32.dll');
 /// );
 /// ```
 /// {@category ole32}
-final CLSIDFromString = _ole32.lookupFunction<
-    Int32 Function(Pointer<Utf16> lpsz, Pointer<GUID> pclsid),
-    int Function(Pointer<Utf16> lpsz, Pointer<GUID> pclsid)>('CLSIDFromString');
+int CLSIDFromString(Pointer<Utf16> lpsz, Pointer<GUID> pclsid) {
+  final _CLSIDFromString = _ole32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpsz, Pointer<GUID> pclsid),
+      int Function(
+          Pointer<Utf16> lpsz, Pointer<GUID> pclsid)>('CLSIDFromString');
+  return _CLSIDFromString(lpsz, pclsid);
+}
 
 /// Creates a GUID, a unique 128-bit integer used for CLSIDs and interface
 /// identifiers.
@@ -40,8 +44,12 @@ final CLSIDFromString = _ole32.lookupFunction<
 /// );
 /// ```
 /// {@category ole32}
-final CoCreateGuid = _ole32.lookupFunction<Int32 Function(Pointer<GUID> pguid),
-    int Function(Pointer<GUID> pguid)>('CoCreateGuid');
+int CoCreateGuid(Pointer<GUID> pguid) {
+  final _CoCreateGuid = _ole32.lookupFunction<
+      Int32 Function(Pointer<GUID> pguid),
+      int Function(Pointer<GUID> pguid)>('CoCreateGuid');
+  return _CoCreateGuid(pguid);
+}
 
 /// Creates a single uninitialized object of the class associated with a
 /// specified CLSID. Call CoCreateInstance when you want to create only one
@@ -59,15 +67,19 @@ final CoCreateGuid = _ole32.lookupFunction<Int32 Function(Pointer<GUID> pguid),
 /// );
 /// ```
 /// {@category ole32}
-final CoCreateInstance = _ole32.lookupFunction<
-    Int32 Function(Pointer<GUID> rclsid, Pointer<IntPtr> pUnkOuter,
-        Uint32 dwClsContext, Pointer<GUID> riid, Pointer<COMObject> ppv),
-    int Function(
-        Pointer<GUID> rclsid,
-        Pointer<IntPtr> pUnkOuter,
-        int dwClsContext,
-        Pointer<GUID> riid,
-        Pointer<COMObject> ppv)>('CoCreateInstance');
+int CoCreateInstance(Pointer<GUID> rclsid, Pointer<IntPtr> pUnkOuter,
+    int dwClsContext, Pointer<GUID> riid, Pointer<COMObject> ppv) {
+  final _CoCreateInstance = _ole32.lookupFunction<
+      Int32 Function(Pointer<GUID> rclsid, Pointer<IntPtr> pUnkOuter,
+          Uint32 dwClsContext, Pointer<GUID> riid, Pointer<COMObject> ppv),
+      int Function(
+          Pointer<GUID> rclsid,
+          Pointer<IntPtr> pUnkOuter,
+          int dwClsContext,
+          Pointer<GUID> riid,
+          Pointer<COMObject> ppv)>('CoCreateInstance');
+  return _CoCreateInstance(rclsid, pUnkOuter, dwClsContext, riid, ppv);
+}
 
 /// Provides a pointer to an interface on a class object associated with a
 /// specified CLSID. CoGetClassObject locates, and if necessary,
@@ -83,11 +95,15 @@ final CoCreateInstance = _ole32.lookupFunction<
 /// );
 /// ```
 /// {@category ole32}
-final CoGetClassObject = _ole32.lookupFunction<
-    Int32 Function(Pointer<GUID> rclsid, Uint32 dwClsContext,
-        Pointer pvReserved, Pointer<GUID> riid, Pointer<COMObject> ppv),
-    int Function(Pointer<GUID> rclsid, int dwClsContext, Pointer pvReserved,
-        Pointer<GUID> riid, Pointer<COMObject> ppv)>('CoGetClassObject');
+int CoGetClassObject(Pointer<GUID> rclsid, int dwClsContext, Pointer pvReserved,
+    Pointer<GUID> riid, Pointer<COMObject> ppv) {
+  final _CoGetClassObject = _ole32.lookupFunction<
+      Int32 Function(Pointer<GUID> rclsid, Uint32 dwClsContext,
+          Pointer pvReserved, Pointer<GUID> riid, Pointer<COMObject> ppv),
+      int Function(Pointer<GUID> rclsid, int dwClsContext, Pointer pvReserved,
+          Pointer<GUID> riid, Pointer<COMObject> ppv)>('CoGetClassObject');
+  return _CoGetClassObject(rclsid, dwClsContext, pvReserved, riid, ppv);
+}
 
 /// Initializes the COM library for use by the calling thread, sets the
 /// thread's concurrency model, and creates a new apartment for the thread
@@ -100,9 +116,12 @@ final CoGetClassObject = _ole32.lookupFunction<
 /// );
 /// ```
 /// {@category ole32}
-final CoInitializeEx = _ole32.lookupFunction<
-    Int32 Function(Pointer<Void> pvReserved, Uint32 dwCoInit),
-    int Function(Pointer<Void> pvReserved, int dwCoInit)>('CoInitializeEx');
+int CoInitializeEx(Pointer<Void> pvReserved, int dwCoInit) {
+  final _CoInitializeEx = _ole32.lookupFunction<
+      Int32 Function(Pointer<Void> pvReserved, Uint32 dwCoInit),
+      int Function(Pointer<Void> pvReserved, int dwCoInit)>('CoInitializeEx');
+  return _CoInitializeEx(pvReserved, dwCoInit);
+}
 
 /// Registers security and sets the default security values for the
 /// process.
@@ -121,27 +140,40 @@ final CoInitializeEx = _ole32.lookupFunction<
 /// );
 /// ```
 /// {@category ole32}
-final CoInitializeSecurity = _ole32.lookupFunction<
-    Int32 Function(
-        Pointer<SECURITY_DESCRIPTOR> pSecDesc,
-        Int32 cAuthSvc,
-        Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
-        Pointer<Void> pReserved1,
-        Uint32 dwAuthnLevel,
-        Uint32 dwImpLevel,
-        Pointer<Void> pAuthList,
-        Uint32 dwCapabilities,
-        Pointer<Void> pReserved3),
-    int Function(
-        Pointer<SECURITY_DESCRIPTOR> pSecDesc,
-        int cAuthSvc,
-        Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
-        Pointer<Void> pReserved1,
-        int dwAuthnLevel,
-        int dwImpLevel,
-        Pointer<Void> pAuthList,
-        int dwCapabilities,
-        Pointer<Void> pReserved3)>('CoInitializeSecurity');
+int CoInitializeSecurity(
+    Pointer<SECURITY_DESCRIPTOR> pSecDesc,
+    int cAuthSvc,
+    Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
+    Pointer<Void> pReserved1,
+    int dwAuthnLevel,
+    int dwImpLevel,
+    Pointer<Void> pAuthList,
+    int dwCapabilities,
+    Pointer<Void> pReserved3) {
+  final _CoInitializeSecurity = _ole32.lookupFunction<
+      Int32 Function(
+          Pointer<SECURITY_DESCRIPTOR> pSecDesc,
+          Int32 cAuthSvc,
+          Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
+          Pointer<Void> pReserved1,
+          Uint32 dwAuthnLevel,
+          Uint32 dwImpLevel,
+          Pointer<Void> pAuthList,
+          Uint32 dwCapabilities,
+          Pointer<Void> pReserved3),
+      int Function(
+          Pointer<SECURITY_DESCRIPTOR> pSecDesc,
+          int cAuthSvc,
+          Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
+          Pointer<Void> pReserved1,
+          int dwAuthnLevel,
+          int dwImpLevel,
+          Pointer<Void> pAuthList,
+          int dwCapabilities,
+          Pointer<Void> pReserved3)>('CoInitializeSecurity');
+  return _CoInitializeSecurity(pSecDesc, cAuthSvc, asAuthSvc, pReserved1,
+      dwAuthnLevel, dwImpLevel, pAuthList, dwCapabilities, pReserved3);
+}
 
 /// Sets the authentication information that will be used to make calls on
 /// the specified proxy. This is a helper function for
@@ -160,25 +192,37 @@ final CoInitializeSecurity = _ole32.lookupFunction<
 /// );
 /// ```
 /// {@category ole32}
-final CoSetProxyBlanket = _ole32.lookupFunction<
-    Int32 Function(
-        Pointer pProxy,
-        Uint32 dwAuthnSvc,
-        Uint32 dwAuthzSvc,
-        Pointer<Utf16> pServerPrincName,
-        Uint32 dwAuthnLevel,
-        Uint32 dwImpLevel,
-        Pointer<Void> pAuthInfo,
-        Uint32 dwCapabilities),
-    int Function(
-        Pointer pProxy,
-        int dwAuthnSvc,
-        int dwAuthzSvc,
-        Pointer<Utf16> pServerPrincName,
-        int dwAuthnLevel,
-        int dwImpLevel,
-        Pointer<Void> pAuthInfo,
-        int dwCapabilities)>('CoSetProxyBlanket');
+int CoSetProxyBlanket(
+    Pointer pProxy,
+    int dwAuthnSvc,
+    int dwAuthzSvc,
+    Pointer<Utf16> pServerPrincName,
+    int dwAuthnLevel,
+    int dwImpLevel,
+    Pointer<Void> pAuthInfo,
+    int dwCapabilities) {
+  final _CoSetProxyBlanket = _ole32.lookupFunction<
+      Int32 Function(
+          Pointer pProxy,
+          Uint32 dwAuthnSvc,
+          Uint32 dwAuthzSvc,
+          Pointer<Utf16> pServerPrincName,
+          Uint32 dwAuthnLevel,
+          Uint32 dwImpLevel,
+          Pointer<Void> pAuthInfo,
+          Uint32 dwCapabilities),
+      int Function(
+          Pointer pProxy,
+          int dwAuthnSvc,
+          int dwAuthzSvc,
+          Pointer<Utf16> pServerPrincName,
+          int dwAuthnLevel,
+          int dwImpLevel,
+          Pointer<Void> pAuthInfo,
+          int dwCapabilities)>('CoSetProxyBlanket');
+  return _CoSetProxyBlanket(pProxy, dwAuthnSvc, dwAuthzSvc, pServerPrincName,
+      dwAuthnLevel, dwImpLevel, pAuthInfo, dwCapabilities);
+}
 
 /// Frees a block of task memory previously allocated through a call to the
 /// CoTaskMemAlloc or CoTaskMemRealloc function.
@@ -189,9 +233,11 @@ final CoSetProxyBlanket = _ole32.lookupFunction<
 /// );
 /// ```
 /// {@category ole32}
-final CoTaskMemFree =
-    _ole32.lookupFunction<Void Function(Pointer pv), void Function(Pointer pv)>(
-        'CoTaskMemFree');
+void CoTaskMemFree(Pointer pv) {
+  final _CoTaskMemFree = _ole32.lookupFunction<Void Function(Pointer pv),
+      void Function(Pointer pv)>('CoTaskMemFree');
+  return _CoTaskMemFree(pv);
+}
 
 /// Closes the COM library on the current thread, unloads all DLLs loaded
 /// by the thread, frees any other resources that the thread maintains, and
@@ -201,8 +247,11 @@ final CoTaskMemFree =
 /// void CoUninitialize();
 /// ```
 /// {@category ole32}
-final CoUninitialize =
-    _ole32.lookupFunction<Void Function(), void Function()>('CoUninitialize');
+void CoUninitialize() {
+  final _CoUninitialize =
+      _ole32.lookupFunction<Void Function(), void Function()>('CoUninitialize');
+  return _CoUninitialize();
+}
 
 /// Converts a string generated by the StringFromIID function back into the
 /// original interface identifier (IID).
@@ -214,6 +263,9 @@ final CoUninitialize =
 /// );
 /// ```
 /// {@category ole32}
-final IIDFromString = _ole32.lookupFunction<
-    Int32 Function(Pointer<Utf16> lpsz, Pointer<GUID> lpiid),
-    int Function(Pointer<Utf16> lpsz, Pointer<GUID> lpiid)>('IIDFromString');
+int IIDFromString(Pointer<Utf16> lpsz, Pointer<GUID> lpiid) {
+  final _IIDFromString = _ole32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpsz, Pointer<GUID> lpiid),
+      int Function(Pointer<Utf16> lpsz, Pointer<GUID> lpiid)>('IIDFromString');
+  return _IIDFromString(lpsz, lpiid);
+}

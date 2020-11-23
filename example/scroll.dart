@@ -43,16 +43,16 @@ final abc = [
   ''
 ];
 
-int xClient; // width of client area
-int yClient; // height of client area
-int xClientMax; // maximum width of client area
+late int xClient; // width of client area
+late int yClient; // height of client area
+late int xClientMax; // maximum width of client area
 
-int xChar; // horizontal scrolling unit
-int yChar; // vertical scrolling unit
-int xUpper; // average width of uppercase letters
+late int xChar; // horizontal scrolling unit
+late int yChar; // vertical scrolling unit
+late int xUpper; // average width of uppercase letters
 
-int xPos; // current horizontal scrolling position
-int yPos; // current vertical scrolling position
+late int xPos; // current horizontal scrolling position
+late int yPos; // current vertical scrolling position
 
 int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
   switch (uMsg) {

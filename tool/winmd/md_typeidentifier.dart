@@ -8,8 +8,8 @@ import 'utils.dart';
 
 class WinmdTypeIdentifier {
   CorElementType corType;
-  String name;
-  WinmdType type;
+  String name = ''; // TODO: Should this be lazy?
+  WinmdType? type;
   final typeArgs = <WinmdTypeIdentifier>[];
 
   WinmdTypeIdentifier(this.corType);
@@ -121,7 +121,7 @@ class WinmdTypeIdentifier {
       case CorElementType.ELEMENT_TYPE_FNPTR:
         return 'Pointer';
       default:
-        return null;
+        return '';
     }
   }
 
@@ -160,7 +160,7 @@ class WinmdTypeIdentifier {
       case CorElementType.ELEMENT_TYPE_U:
         return 'IntPtr';
       default:
-        return null;
+        return '';
     }
   }
 

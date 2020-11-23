@@ -11,6 +11,8 @@ import 'notepad.dart';
 
 // Resource IDs
 const IDC_FILENAME = 1000;
+const IDC_STATIC = 1001;
+
 const IDM_FILE_NEW = 40001;
 const IDM_FILE_OPEN = 40002;
 const IDM_FILE_SAVE = 40003;
@@ -79,6 +81,73 @@ class NotepadResources {
     AppendMenu(hMenu, MF_POPUP, hMenuPopup, TEXT('&Help'));
 
     return hMenu;
+  }
+
+  static Pointer<DLGTEMPLATE> loadAboutBox() {
+    final pDialog = allocate<Uint16>(count: 1024).cast<Uint16>();
+    var idx = 0;
+
+    idx += pDialog.cast<DLGTEMPLATE>().setDialog(
+        style: DS_MODALFRAME | WS_POPUP | DS_SETFONT,
+        x: 32,
+        y: 32,
+        cx: 180,
+        cy: 100,
+        cdit: 5,
+        fontName: 'MS Sans Serif',
+        fontSize: 8);
+
+    idx += pDialog.elementAt(idx).cast<DLGITEMTEMPLATE>().setDialogItem(
+        style: WS_CHILD | WS_VISIBLE | BS_DEFPUSHBUTTON | WS_TABSTOP,
+        x: 66,
+        y: 80,
+        cx: 50,
+        cy: 14,
+        id: IDOK,
+        windowSystemClass: 0x0080,
+        text: 'OK');
+
+    idx += pDialog.elementAt(idx).cast<DLGITEMTEMPLATE>().setDialogItem(
+        style: WS_CHILD | WS_VISIBLE | SS_ICON,
+        x: 7,
+        y: 7,
+        cx: 20,
+        cy: 20,
+        windowSystemClass: 0x0082,
+        text: 'POPPAD',
+        id: IDC_STATIC);
+
+    idx += pDialog.elementAt(idx).cast<DLGITEMTEMPLATE>().setDialogItem(
+        style: WS_CHILD | WS_VISIBLE | SS_CENTER | WS_GROUP,
+        x: 40,
+        y: 12,
+        cx: 100,
+        cy: 8,
+        windowSystemClass: 0x0082,
+        text: 'DartNote',
+        id: IDC_STATIC);
+
+    idx += pDialog.elementAt(idx).cast<DLGITEMTEMPLATE>().setDialogItem(
+        style: WS_CHILD | WS_VISIBLE | SS_CENTER | WS_GROUP,
+        x: 7,
+        y: 40,
+        cx: 166,
+        cy: 8,
+        windowSystemClass: 0x0082,
+        text: 'Dart-based Notepad for Windows',
+        id: IDC_STATIC);
+
+    idx += pDialog.elementAt(idx).cast<DLGITEMTEMPLATE>().setDialogItem(
+        style: WS_CHILD | WS_VISIBLE | SS_CENTER | WS_GROUP,
+        x: 27,
+        y: 52,
+        cx: 126,
+        cy: 20,
+        windowSystemClass: 0x0082,
+        text: 'Copyright (C) 1998 Charles Petzold and (C) 2020 Tim Sneath',
+        id: IDC_STATIC);
+
+    return pDialog.cast();
   }
 
   static int loadAccelerators() {

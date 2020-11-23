@@ -1,3 +1,43 @@
+## 2.0.0-nullsafety.5
+
+- Add dialog box example and supporting extension methods
+
+## 2.0.0-nullsafety.4
+
+- Add remaining Win32 dialog calls
+
+## 2.0.0-nullsafety.3
+
+- Add button and dialog style constants
+- Add DLGTEMPLATE and DLGITEMTEMPLATE
+
+## 2.0.0-nullsafety.2
+
+- Add extended window style constants (WM_EX_*)
+
+## 2.0.0-nullsafety.1
+
+- Add a number of GDI calls
+- Rework API wrapper to use functions instead of properties
+- Convert API tests support reworked API wrapper
+- High-fidelity INPUT struct that demonstrates an approach for union structs in
+  Dart FFI
+- Document some more constants
+
+## 2.0.0-nullsafety.0
+
+- Enable sound null safety
+
+## 1.7.5
+
+- WinMM: Add PlaySound (thanks @Hexer10)
+
+## 1.7.4
+
+- Add SysAllocString, SysFreeString, SysStringByteLen, SysStringLen,
+  SHCreateItemFromParsingName
+- Rename VARIANT_POINTER to VARIANT
+
 ## 1.7.3
 
 - Expand Win32 API documentation.

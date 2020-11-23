@@ -14,17 +14,17 @@ class WinmdParameter {
   IMetaDataImport2 reader;
 
   int token;
-  int sequence;
+  int? sequence;
   int attributes;
   WinmdTypeIdentifier typeIdentifier;
-  String name;
+  String? name;
   int paramValueLength;
 
   WinmdParameter(this.reader, this.token, this.sequence, this.attributes,
       this.typeIdentifier, this.name, this.paramValueLength);
 
   factory WinmdParameter.fromToken(IMetaDataImport2 reader, int token) {
-    WinmdParameter parameter;
+    late WinmdParameter parameter;
 
     final pmd = allocate<Uint32>();
     final pulSequence = allocate<Uint32>();

@@ -11,7 +11,7 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-void write({String credentialName, String userName, String password}) {
+void write({required String credentialName, required String userName, required String password}) {
   print('Writing $credentialName ...');
   final examplePassword = utf8.encode(password) as Uint8List;
   final blob = examplePassword.allocatePointer();

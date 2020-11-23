@@ -9,18 +9,18 @@
 enum SourceType { com, winrt, unknown }
 
 class Parameter {
-  String name;
-  String nativeType;
-  String dartType;
+  late String name;
+  late String nativeType;
+  late String dartType;
 
   @override
   String toString() => '$name (dart: $dartType, native: $nativeType)';
 }
 
 class Method {
-  String name;
-  String returnTypeNative;
-  String returnTypeDart;
+  late String name;
+  late String returnTypeNative;
+  late String returnTypeDart;
   final parameters = <Parameter>[];
 
   @override
@@ -29,14 +29,14 @@ class Method {
 }
 
 class Interface {
-  SourceType sourceType;
-  String iid;
-  String name;
+  late SourceType sourceType;
+  String? iid;
+  late String name;
   bool generateClass = false;
-  String clsid;
-  String className;
-  String inherits;
-  int vtableStart;
+  late String clsid;
+  late String className;
+  late String inherits;
+  late int vtableStart;
 
   final methods = <Method>[];
 

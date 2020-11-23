@@ -37,7 +37,8 @@
         "xstddef": "cpp",
         "xstring": "cpp",
         "xtr1common": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "*.rh": "cpp"
     },
     "markdownlint.config": {
         "MD041": false,

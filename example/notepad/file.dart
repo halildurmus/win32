@@ -17,9 +17,9 @@ class NotepadFile {
   /// The filename and extension of the current working file (e.g. `myfile.txt`)
   String title;
 
-  OPENFILENAME ofn;
+  late OPENFILENAME ofn;
 
-  NotepadFile(int hwnd) {
+  NotepadFile(int hwnd, this.path, this.title) {
     ofn = OPENFILENAME.allocate();
     ofn.lStructSize = sizeOf<OPENFILENAME>();
     ofn.hwndOwner = hwnd;
@@ -50,12 +50,12 @@ class NotepadFile {
   /// is successful.
   bool showOpenDialog(int hwnd) {
     final strFile =
-        path != null ? Utf16String.fromString(path) : Utf16String(MAX_PATH);
+        path.isNotEmpty ? Utf16String.fromString(path) : Utf16String(MAX_PATH);
 
-    final strFileTitle =
-        title != null ? Utf16String.fromString(title) : Utf16String(MAX_PATH);
+    final strFileTitle = title.isNotEmpty
+        ? Utf16String.fromString(title)
+        : Utf16String(MAX_PATH);
 
-    ofn.hwndOwner = hwnd;
     ofn.lpstrFile = strFile.pointer;
     ofn.lpstrFileTitle = strFileTitle.pointer;
     ofn.Flags = OFN_HIDEREADONLY | OFN_CREATEPROMPT;
@@ -77,12 +77,12 @@ class NotepadFile {
   /// is successful.
   bool showSaveDialog(int hwnd) {
     final strFile =
-        path != null ? Utf16String.fromString(path) : Utf16String(MAX_PATH);
+        path.isNotEmpty ? Utf16String.fromString(path) : Utf16String(MAX_PATH);
 
-    final strFileTitle =
-        title != null ? Utf16String.fromString(title) : Utf16String(MAX_PATH);
+    final strFileTitle = title.isNotEmpty
+        ? Utf16String.fromString(title)
+        : Utf16String(MAX_PATH);
 
-    ofn.hwndOwner = hwnd;
     ofn.lpstrFile = strFile.pointer;
     ofn.lpstrFileTitle = strFileTitle.pointer;
     ofn.Flags = OFN_OVERWRITEPROMPT;

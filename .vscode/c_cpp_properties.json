@@ -1,18 +1,17 @@
 {
-    "configurations": [
-        {
-            "name": "Win32",
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
-            ],
-            "windowsSdkVersion": "10.0.19041.0",
-            "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/VC/Tools/MSVC/14.25.28610/bin/Hostx64/x64/cl.exe",
-            "cStandard": "c11",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "msvc-x64"
-        }
-    ],
+    "configurations": [{
+        "name": "Win32",
+        "defines": [
+            "_DEBUG",
+            "UNICODE",
+            "_UNICODE"
+        ],
+        "windowsSdkVersion": "10.0.19041.0",
+        "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/VC/Tools/MSVC/14.25.28610/bin/Hostx64/x64/cl.exe",
+        "cStandard": "c11",
+        "cppStandard": "c++17",
+        "intelliSenseMode": "msvc-x64",
+        "includePath": ["C:/Program Files (x86)/Windows Kits/NETFXSDK/4.8/Include/um"]
+    }],
     "version": 4
 }

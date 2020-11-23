@@ -100,7 +100,7 @@ const typeMappings = <String, String>{
   'SIGDN': 'Uint32',
   'SIATTRIBFLAGS': 'Uint32',
   'STATSTG': 'STATSTG',
-  'VARIANT': 'VARIANT_POINTER', // NOTE: This projection is incomplete
+  'VARIANT': 'VARIANT',
   'VARIANT_BOOL': 'Int16',
 
   // WinRT types

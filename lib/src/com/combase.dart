@@ -19,7 +19,7 @@ import '../utils.dart';
 ///
 /// {@category com}
 class COMObject extends Struct {
-  Pointer<IntPtr> lpVtbl;
+  external Pointer<IntPtr> lpVtbl;
 
   Pointer<IntPtr> get vtable => Pointer.fromAddress(lpVtbl.value);
 

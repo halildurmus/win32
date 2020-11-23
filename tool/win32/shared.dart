@@ -3,14 +3,14 @@ import 'dart:io';
 final prototypes = <String, TypeDef>{};
 
 class TypeDef {
-  String neutralApiName;
+  String? neutralApiName;
   final List<String> prototype;
-  String nativeReturn;
-  String dartReturn;
+  String? nativeReturn;
+  String? dartReturn;
   final Map<String, String> nativeParams = {};
   final Map<String, String> dartParams = {};
-  String dllLibrary;
-  String comment;
+  String? dllLibrary;
+  late String comment;
 
   TypeDef(this.prototype);
 }
@@ -47,8 +47,8 @@ void loadCsv(String filename) {
         final paramNativeType = fields[idx++];
         final paramDartType = fields[idx++];
 
-        prototypes[apiName].dartParams[paramName] = paramDartType;
-        prototypes[apiName].nativeParams[paramName] = paramNativeType;
+        prototypes[apiName]!.dartParams[paramName] = paramDartType;
+        prototypes[apiName]!.nativeParams[paramName] = paramNativeType;
       } catch (e) {
         print('Error processing $apiName');
         rethrow;
@@ -58,15 +58,15 @@ void loadCsv(String filename) {
     // last field is the comment
     // keep consuming until we have a quoted string
     if (fields.length > idx) {
-      prototypes[apiName].comment = fields[idx++];
-      while (prototypes[apiName].comment.indexOf('"') == 0 &&
-          prototypes[apiName].comment.lastIndexOf('"') == 0) {
-        prototypes[apiName].comment += ', ${fields[idx++]}';
+      prototypes[apiName]!.comment = fields[idx++];
+      while (prototypes[apiName]!.comment.indexOf('"') == 0 &&
+          prototypes[apiName]!.comment.lastIndexOf('"') == 0) {
+        prototypes[apiName]!.comment += ', ${fields[idx++]}';
       }
-      prototypes[apiName].comment =
-          prototypes[apiName].comment.replaceAll('"', '');
+      prototypes[apiName]!.comment =
+          prototypes[apiName]!.comment.replaceAll('"', '');
     } else {
-      prototypes[apiName].comment = '';
+      prototypes[apiName]!.comment = '';
     }
   }
 }

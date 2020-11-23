@@ -3,7 +3,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 class Utf16String {
-  Pointer<Utf16> pointer;
+  late Pointer<Utf16> pointer;
 
   /// Represents the length set. This value is only accurate if you don't
   /// pass the `pointer` value to other functions. In that event, you will need
@@ -28,7 +28,7 @@ class Utf16String {
   int get address => pointer.address;
 
   /// Returns true if this string is empty
-  bool get isEmpty => pointer == null || pointer.cast<Uint16>().value == 0;
+  bool get isEmpty => pointer.cast<Uint16>().value == 0;
 
   /// Clears the string.
   void clear() {

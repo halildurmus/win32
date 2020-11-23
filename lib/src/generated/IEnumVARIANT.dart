@@ -10,6 +10,7 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
+import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
@@ -21,9 +22,9 @@ import 'IUnknown.dart';
 const IID_IEnumVARIANT = '{00020404-0000-0000-C000-000000000046}';
 
 typedef _Next_Native = Int32 Function(Pointer obj, Uint32 celt,
-    Pointer<VARIANT_POINTER> rgVar, Pointer<Uint32> pCeltFetched);
-typedef _Next_Dart = int Function(Pointer obj, int celt,
-    Pointer<VARIANT_POINTER> rgVar, Pointer<Uint32> pCeltFetched);
+    Pointer<VARIANT> rgVar, Pointer<Uint32> pCeltFetched);
+typedef _Next_Dart = int Function(Pointer obj, int celt, Pointer<VARIANT> rgVar,
+    Pointer<Uint32> pCeltFetched);
 
 typedef _Skip_Native = Int32 Function(Pointer obj, Uint32 celt);
 typedef _Skip_Dart = int Function(Pointer obj, int celt);
@@ -41,8 +42,7 @@ class IEnumVARIANT extends IUnknown {
 
   IEnumVARIANT(Pointer<COMObject> ptr) : super(ptr);
 
-  int Next(int celt, Pointer<VARIANT_POINTER> rgVar,
-          Pointer<Uint32> pCeltFetched) =>
+  int Next(int celt, Pointer<VARIANT> rgVar, Pointer<Uint32> pCeltFetched) =>
       Pointer<NativeFunction<_Next_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
           .asFunction<_Next_Dart>()(ptr.ref.lpVtbl, celt, rgVar, pCeltFetched);

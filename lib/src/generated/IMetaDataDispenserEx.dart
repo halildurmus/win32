@@ -10,6 +10,7 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
+import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
@@ -21,14 +22,14 @@ import 'IMetaDataDispenser.dart';
 const IID_IMetaDataDispenserEx = '{31BCFCE2-DAFB-11D2-9F81-00C04F79A0A3}';
 
 typedef _SetOption_Native = Int32 Function(
-    Pointer obj, Pointer<GUID> optionId, Pointer<VARIANT_POINTER> pValue);
+    Pointer obj, Pointer<GUID> optionId, Pointer<VARIANT> pValue);
 typedef _SetOption_Dart = int Function(
-    Pointer obj, Pointer<GUID> optionId, Pointer<VARIANT_POINTER> pValue);
+    Pointer obj, Pointer<GUID> optionId, Pointer<VARIANT> pValue);
 
 typedef _GetOption_Native = Int32 Function(
-    Pointer obj, Pointer<GUID> optionId, Pointer<VARIANT_POINTER> pValue);
+    Pointer obj, Pointer<GUID> optionId, Pointer<VARIANT> pValue);
 typedef _GetOption_Dart = int Function(
-    Pointer obj, Pointer<GUID> optionId, Pointer<VARIANT_POINTER> pValue);
+    Pointer obj, Pointer<GUID> optionId, Pointer<VARIANT> pValue);
 
 typedef _OpenScopeOnITypeInfo_Native = Int32 Function(
     Pointer obj,
@@ -95,12 +96,12 @@ class IMetaDataDispenserEx extends IMetaDataDispenser {
 
   IMetaDataDispenserEx(Pointer<COMObject> ptr) : super(ptr);
 
-  int SetOption(Pointer<GUID> optionId, Pointer<VARIANT_POINTER> pValue) =>
+  int SetOption(Pointer<GUID> optionId, Pointer<VARIANT> pValue) =>
       Pointer<NativeFunction<_SetOption_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(6).value)
           .asFunction<_SetOption_Dart>()(ptr.ref.lpVtbl, optionId, pValue);
 
-  int GetOption(Pointer<GUID> optionId, Pointer<VARIANT_POINTER> pValue) =>
+  int GetOption(Pointer<GUID> optionId, Pointer<VARIANT> pValue) =>
       Pointer<NativeFunction<_GetOption_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(7).value)
           .asFunction<_GetOption_Dart>()(ptr.ref.lpVtbl, optionId, pValue);

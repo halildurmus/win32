@@ -4,7 +4,11 @@
 
 // Dart representations of Win32 C macros
 
+import 'dart:ffi';
+
 import 'constants.dart';
+import 'structs.dart';
+import 'user32.dart';
 
 // #define MAKEWORD(a, b)   ((WORD)(((BYTE)(((DWORD_PTR)(a)) & 0xff)) |
 //                          ((WORD)((BYTE)(((DWORD_PTR)(b)) & 0xff))) << 8))
@@ -49,3 +53,23 @@ bool FAILED(int result) => result < 0;
 int HRESULT_FROM_WIN32(int x) =>
     (x <= 0 ? x : (x & 0x0000FFFF | (FACILITY_WIN32 << 16) | 0x80000000))
         .toSigned(32);
+
+/// Creates a modal dialog box from a dialog box template in memory.
+/// DialogBoxIndirect does not return control until the specified callback
+/// function terminates the modal dialog box by calling the EndDialog function.
+///
+/// DialogBoxIndirect is implemented as a call to the DialogBoxIndirectParam
+/// function.
+///
+/// ```c
+/// void DialogBoxIndirectW(
+///    hInstance,
+///    lpTemplate,
+///    hWndParent,
+///    lpDialogFunc
+/// );
+/// ```
+/// {@category user32}
+void DialogBoxIndirect(int hInstance, Pointer<DLGTEMPLATE> lpTemplate,
+        int hWndParent, Pointer<NativeFunction> lpDialogFunc) =>
+    DialogBoxIndirectParam(hInstance, lpTemplate, hWndParent, lpDialogFunc, 0);

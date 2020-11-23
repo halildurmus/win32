@@ -1,3 +1,5 @@
+![Dart/Win32](https://github.com/timsneath/win32/blob/master/doc/images/win32.png?raw=true)
+
 A package that wraps some of the most common Win32 API calls using FFI to make
 them accessible to Dart code without requiring a C compiler or the Windows SDK.
 
@@ -96,6 +98,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `devices.dart`     | Uses volume management APIs to list all disk devices      |
 | `modules.dart`     | Enumerates all loaded modules on the current system       |
 | `snake.dart`       | Snake game using various GDI features                     |
+| `dialog.dart`      | Create a custom dialog box in code                        |
 | `dialogshow.dart`  | Creates a common item dialog (file picker) using COM      |
 | `wmi.dart`         | Using WMI from COM to retrieve device/OS information      |
 | `sysinfo.dart`     | Examples of getting device information from native C APIs |
@@ -129,6 +132,27 @@ Please file feature requests and bugs at the [issue tracker][tracker]. This
 is a hobby project, and should not be viewed as having the same level of
 quality assurance as an official package from the Dart team. I'm a product
 manager having fun on my weekends!
+
+## Backwards compatibility
+
+The library version uses a loose semver model, but you should not assume a
+strict guarantee of no breaking changes between minor versions. That guarantee
+is not possible to make, for several reasons:
+
+- The underlying FFI library has not yet reached v1.0 and breaking changes at
+  that level may be difficult to encapsulate.
+- Several times, my fixing a bug in the fidelity of the Win32 API has tightened
+  the constraints over a parameter (for example, `Pointer` becomes
+  `Pointer<INPUT>`). These changes should be signalled in the log.
+- Adding new features may itself cause a breaking change. For example, if you
+  declare a missing Windows constant in your own code that is then added, Dart
+  will complain about the duplicate definition.
+
+One solution is to pin to a specific version of Win32, or declare a more
+tightly-bounded version dependency (e.g. `'>=1.7.0 <1.8.0'` rather than merely
+`^1.7.0`). But the best approach is simply to test regularly with the latest
+version of this package, and continue to move your minimum forward. As the
+package matures, these issues should gradually fade into the distance.
 
 ## Acknowledgements
 

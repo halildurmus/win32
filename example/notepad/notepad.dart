@@ -3,7 +3,6 @@
 // Comprehensive example of Win32 APIs for a non-game scenario.
 
 import 'dart:ffi';
-import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
@@ -17,14 +16,14 @@ const APP_NAME = 'DartNote'; // DartPad was taken :)
 /// Win32 handle to the current window instance
 final hInstance = GetModuleHandle(nullptr);
 
-NotepadEditor editor;
-NotepadFind find;
+late NotepadEditor editor;
+late NotepadFind find;
 
 /// The handle of the Notepad window's text edit control
-int hwndEdit;
+late int hwndEdit;
 
-FINDREPLACE findReplace;
-int messageFindReplace;
+late FINDREPLACE findReplace;
+int messageFindReplace = 0;
 int hDlgModeless = NULL;
 
 final iOffset = allocate<Uint32>()..value = 0;
@@ -211,7 +210,11 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
           return 0;
 
         case IDM_APP_ABOUT:
-          editor.showMessage('About not yet implemented!');
+          final pDialog = NotepadResources.loadAboutBox();
+
+          final lpDialogFunc =
+              Pointer.fromFunction<DlgProc>(dialogReturnProc, 0);
+          DialogBoxIndirect(hInstance, pDialog, hwnd, lpDialogFunc);
           return 0;
       }
       return 0;
@@ -235,7 +238,6 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
 
     default:
       // Process "Find/Replace" messages
-
       if (message == messageFindReplace) {
         findReplace = Pointer<FINDREPLACE>.fromAddress(lParam).ref;
 
@@ -265,22 +267,36 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
 
         return 0;
       }
-      break;
   }
   return DefWindowProc(hwnd, message, wParam, lParam);
 }
 
+int dialogReturnProc(int hDlg, int msg, int wParam, int lParam) {
+  switch (msg) {
+    case WM_INITDIALOG:
+      return TRUE;
+    case WM_COMMAND:
+      switch (LOWORD(wParam)) {
+        case IDOK:
+          EndDialog(hDlg, 0);
+          return TRUE;
+      }
+      break;
+  }
+  return FALSE;
+}
+
 void main() {
   // Register the window class.
-  final wc = WNDCLASS.allocate();
+  final className = TEXT(APP_NAME);
 
+  final wc = WNDCLASS.allocate();
   wc.style = CS_HREDRAW | CS_VREDRAW;
   wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0);
   wc.hInstance = hInstance;
-  wc.lpszClassName = TEXT(APP_NAME);
+  wc.lpszClassName = className;
   wc.hCursor = LoadCursor(NULL, IDC_ARROW);
   wc.hbrBackground = GetStockObject(WHITE_BRUSH);
-
   RegisterClass(wc.addressOf);
 
   final hMenu = NotepadResources.loadMenus();
@@ -288,7 +304,7 @@ void main() {
   // Create the window.
   final hWnd = CreateWindowEx(
       0, // Optional window styles.
-      TEXT(APP_NAME), // Window class
+      className, // Window class
       TEXT(APP_NAME),
       WS_OVERLAPPEDWINDOW, // Window style
 
@@ -304,8 +320,8 @@ void main() {
       );
 
   if (hWnd == 0) {
-    stderr.writeln('CreateWindowEx failed with error: ${GetLastError()}');
-    exit(-1);
+    final error = GetLastError();
+    throw WindowsException(HRESULT_FROM_WIN32(error));
   }
 
   ShowWindow(hWnd, SW_SHOWNORMAL);

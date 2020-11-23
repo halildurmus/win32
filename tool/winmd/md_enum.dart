@@ -10,8 +10,8 @@ import 'package:win32/win32.dart';
 import 'md_type.dart';
 
 class WinmdField {
-  String name;
-  int value;
+  late String name;
+  late int value;
 }
 
 /// Represents an enum in the Windows Metadata file
@@ -76,8 +76,8 @@ class WinmdEnum extends WinmdType {
   }
 
   /// Get the fields for this enum.
-  Map<String, int> get fields {
-    final fields = <String, int>{};
+  Map<String?, int?> get fields {
+    final fields = <String?, int?>{};
     final fieldTokens = <int>[];
 
     final phEnum = allocate<IntPtr>()..value = 0;

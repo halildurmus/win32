@@ -95,7 +95,7 @@ void main() {
       final winTypeDef =
           WinmdStore.getMetadataForType('Windows.Globalization.ICalendar');
 
-      final method = winTypeDef.findMethod('AddDays');
+      final method = winTypeDef.findMethod('AddDays')!;
 
       expect(method.isProperty, isFalse);
       expect(method.returnType.typeIdentifier.corType,
@@ -110,7 +110,7 @@ void main() {
       final winTypeDef =
           WinmdStore.getMetadataForType('Windows.Globalization.ICalendar');
 
-      final method = winTypeDef.findMethod('YearAsString');
+      final method = winTypeDef.findMethod('YearAsString')!;
 
       expect(method.isProperty, isFalse);
       expect(method.returnType.typeIdentifier.corType,
@@ -122,7 +122,7 @@ void main() {
       final winTypeDef =
           WinmdStore.getMetadataForType('Windows.Globalization.ICalendar');
 
-      final method = winTypeDef.findMethod('MonthAsPaddedNumericString');
+      final method = winTypeDef.findMethod('MonthAsPaddedNumericString')!;
 
       expect(method.isProperty, isFalse);
       expect(method.returnType.typeIdentifier.corType,
@@ -137,7 +137,7 @@ void main() {
       final winTypeDef =
           WinmdStore.getMetadataForType('Windows.Globalization.ICalendar');
 
-      final method = winTypeDef.findMethod('SetToNow');
+      final method = winTypeDef.findMethod('SetToNow')!;
 
       expect(method.isProperty, isFalse);
       expect(method.returnType.typeIdentifier.corType,
@@ -148,7 +148,7 @@ void main() {
       final winTypeDef =
           WinmdStore.getMetadataForType('Windows.Globalization.ICalendar');
 
-      final method = winTypeDef.findMethod('get_Day');
+      final method = winTypeDef.findMethod('get_Day')!;
 
       expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_I4));
@@ -163,7 +163,7 @@ void main() {
       final winTypeDef =
           WinmdStore.getMetadataForType('Windows.Globalization.ICalendar');
 
-      final method = winTypeDef.findMethod('YearAsTruncatedString');
+      final method = winTypeDef.findMethod('YearAsTruncatedString')!;
 
       expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_STRING));
@@ -179,7 +179,7 @@ void main() {
       final winTypeDef = WinmdStore.getMetadataForType(
           'Windows.Storage.Provider.CachedFileUpdater');
 
-      final method = winTypeDef.findMethod('SetUpdateInformation');
+      final method = winTypeDef.findMethod('SetUpdateInformation')!;
 
       expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_VOID));
@@ -205,7 +205,7 @@ void main() {
       final winTypeDef = WinmdStore.getMetadataForType(
           'Windows.Globalization.JapanesePhoneticAnalyzer');
 
-      final method = winTypeDef.findMethod('GetWords');
+      final method = winTypeDef.findMethod('GetWords')!;
       expect(method.parameters.length, equals(2));
       expect(method.returnType.typeIdentifier.name,
           equals('Windows.Foundation.Collections.IVectorView`1'));
@@ -220,7 +220,7 @@ void main() {
       final winTypeDef =
           WinmdStore.getMetadataForType('Windows.Globalization.ICalendar');
 
-      final method = winTypeDef.findMethod('Clone');
+      final method = winTypeDef.findMethod('Clone')!;
 
       expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_CLASS));
@@ -233,7 +233,7 @@ void main() {
     test('IAsyncInfo.Status get property is correct', () {
       final winTypeDef =
           WinmdStore.getMetadataForType('Windows.Foundation.IAsyncInfo');
-      final method = winTypeDef.findMethod('get_Status');
+      final method = winTypeDef.findMethod('get_Status')!;
 
       expect(method.returnType.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
