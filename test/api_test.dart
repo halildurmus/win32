@@ -256,6 +256,26 @@ void main() {
       expect(FindNextVolume, isA<Function>());
     });
 
+    test('Can instantiate FindResource', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final FindResource = kernel32.lookupFunction<
+          IntPtr Function(
+              IntPtr hModule, Pointer<Utf16> lpName, Pointer<Utf16> lpType),
+          int Function(int hModule, Pointer<Utf16> lpName,
+              Pointer<Utf16> lpType)>('FindResourceW');
+      expect(FindResource, isA<Function>());
+    });
+
+    test('Can instantiate FindResourceEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final FindResourceEx = kernel32.lookupFunction<
+          IntPtr Function(IntPtr hModule, Pointer<Utf16> lpName,
+              Pointer<Utf16> lpType, Int16 wLanguage),
+          int Function(int hModule, Pointer<Utf16> lpName,
+              Pointer<Utf16> lpType, int wLanguage)>('FindResourceExW');
+      expect(FindResourceEx, isA<Function>());
+    });
+
     test('Can instantiate FindVolumeClose', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final FindVolumeClose = kernel32.lookupFunction<
@@ -575,6 +595,22 @@ void main() {
           IntPtr Function(Pointer<Utf16> lpLibFileName),
           int Function(Pointer<Utf16> lpLibFileName)>('LoadLibraryW');
       expect(LoadLibrary, isA<Function>());
+    });
+
+    test('Can instantiate LoadResource', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final LoadResource = kernel32.lookupFunction<
+          IntPtr Function(IntPtr hModule, IntPtr hResInfo),
+          int Function(int hModule, int hResInfo)>('LoadResource');
+      expect(LoadResource, isA<Function>());
+    });
+
+    test('Can instantiate LockResource', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final LockResource = kernel32.lookupFunction<
+          Pointer Function(IntPtr hResData),
+          Pointer Function(int hResData)>('LockResource');
+      expect(LockResource, isA<Function>());
     });
 
     test('Can instantiate OpenProcess', () {
