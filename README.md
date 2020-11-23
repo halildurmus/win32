@@ -98,6 +98,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `devices.dart`     | Uses volume management APIs to list all disk devices      |
 | `modules.dart`     | Enumerates all loaded modules on the current system       |
 | `snake.dart`       | Snake game using various GDI features                     |
+| `dialog.dart`      | Create a custom dialog box in code                        |
 | `dialogshow.dart`  | Creates a common item dialog (file picker) using COM      |
 | `wmi.dart`         | Using WMI from COM to retrieve device/OS information      |
 | `sysinfo.dart`     | Examples of getting device information from native C APIs |
