@@ -210,7 +210,11 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
           return 0;
 
         case IDM_APP_ABOUT:
-          editor.showMessage('About not yet implemented!');
+          final pDialog = NotepadResources.loadAboutBox();
+
+          final lpDialogFunc =
+              Pointer.fromFunction<DlgProc>(dialogReturnProc, 0);
+          DialogBoxIndirectParam(hInstance, pDialog, hwnd, lpDialogFunc, 0);
           return 0;
       }
       return 0;
@@ -265,6 +269,21 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
       }
   }
   return DefWindowProc(hwnd, message, wParam, lParam);
+}
+
+int dialogReturnProc(int hDlg, int msg, int wParam, int lParam) {
+  switch (msg) {
+    case WM_INITDIALOG:
+      return TRUE;
+    case WM_COMMAND:
+      switch (LOWORD(wParam)) {
+        case IDOK:
+          EndDialog(hDlg, 0);
+          return TRUE;
+      }
+      break;
+  }
+  return FALSE;
 }
 
 void main() {
