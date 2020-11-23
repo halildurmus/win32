@@ -13,8 +13,9 @@ Rough notes on steps I take to publish a new version of win32:
    - Some tests may fail or be skipped from a SSH window (e.g. credential
      saving, console buffer info); this is expected.
 
-3. Run `dartdoc` from the root of the repo and make sure that it completes
-   successfully. (I do this and the next step from WSL or a macOS machine.)
+3. Run `dartdoc --enable-experiment=non-nullable` from the root of the repo and
+   make sure that it completes successfully. (I do this and the next step from
+   WSL or a macOS machine.)
 
 4. Run `tool/deploy/deploy.sh` from a Bash prompt to copy the `doc/api` files to
    the `gh-pages` branch.
