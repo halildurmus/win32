@@ -214,7 +214,7 @@ int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
 
           final lpDialogFunc =
               Pointer.fromFunction<DlgProc>(dialogReturnProc, 0);
-          DialogBoxIndirectParam(hInstance, pDialog, hwnd, lpDialogFunc, 0);
+          DialogBoxIndirect(hInstance, pDialog, hwnd, lpDialogFunc);
           return 0;
       }
       return 0;
