@@ -948,13 +948,17 @@ void main() {
     test('Can instantiate CreateDialogIndirectParam', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final CreateDialogIndirectParam = user32.lookupFunction<
-          IntPtr Function(IntPtr hInstance, Pointer<DLGTEMPLATE> lpTemplate,
-              IntPtr hWndParent, Pointer lpDialogFunc, IntPtr dwInitParam),
+          IntPtr Function(
+              IntPtr hInstance,
+              Pointer<DLGTEMPLATE> lpTemplate,
+              IntPtr hWndParent,
+              Pointer<NativeFunction> lpDialogFunc,
+              IntPtr dwInitParam),
           int Function(
               int hInstance,
               Pointer<DLGTEMPLATE> lpTemplate,
               int hWndParent,
-              Pointer lpDialogFunc,
+              Pointer<NativeFunction> lpDialogFunc,
               int dwInitParam)>('CreateDialogIndirectParamW');
       expect(CreateDialogIndirectParam, isA<Function>());
     });
@@ -1020,6 +1024,24 @@ void main() {
       final DestroyWindow = user32.lookupFunction<Int32 Function(IntPtr hWnd),
           int Function(int hWnd)>('DestroyWindow');
       expect(DestroyWindow, isA<Function>());
+    });
+
+    test('Can instantiate DialogBoxIndirectParam', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final DialogBoxIndirectParam = user32.lookupFunction<
+          IntPtr Function(
+              IntPtr hInstance,
+              Pointer<DLGTEMPLATE> hDialogTemplate,
+              IntPtr hWndParent,
+              Pointer<NativeFunction> lpDialogFunc,
+              IntPtr dwInitParam),
+          int Function(
+              int hInstance,
+              Pointer<DLGTEMPLATE> hDialogTemplate,
+              int hWndParent,
+              Pointer<NativeFunction> lpDialogFunc,
+              int dwInitParam)>('DialogBoxIndirectParamW');
+      expect(DialogBoxIndirectParam, isA<Function>());
     });
 
     test('Can instantiate DispatchMessage', () {
@@ -1146,6 +1168,42 @@ void main() {
       expect(GetDC, isA<Function>());
     });
 
+    test('Can instantiate GetDialogBaseUnits', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetDialogBaseUnits =
+          user32.lookupFunction<Int32 Function(), int Function()>(
+              'GetDialogBaseUnits');
+      expect(GetDialogBaseUnits, isA<Function>());
+    });
+
+    test('Can instantiate GetDlgItem', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetDlgItem = user32.lookupFunction<
+          IntPtr Function(IntPtr hDlg, Int32 nIDDlgItem),
+          int Function(int hDlg, int nIDDlgItem)>('GetDlgItem');
+      expect(GetDlgItem, isA<Function>());
+    });
+
+    test('Can instantiate GetDlgItemInt', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetDlgItemInt = user32.lookupFunction<
+          Uint32 Function(IntPtr hDlg, Int32 nIDDlgItem,
+              Pointer<Int32> lpTranslated, Int32 bSigned),
+          int Function(int hDlg, int nIDDlgItem, Pointer<Int32> lpTranslated,
+              int bSigned)>('GetDlgItemInt');
+      expect(GetDlgItemInt, isA<Function>());
+    });
+
+    test('Can instantiate GetDlgItemText', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetDlgItemText = user32.lookupFunction<
+          Uint32 Function(IntPtr hDlg, Int32 nIDDlgItem,
+              Pointer<Utf16> lpString, Int32 cchMax),
+          int Function(int hDlg, int nIDDlgItem, Pointer<Utf16> lpString,
+              int cchMax)>('GetDlgItemTextW');
+      expect(GetDlgItemText, isA<Function>());
+    });
+
     test('Can instantiate GetDpiForSystem', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetDpiForSystem = user32
@@ -1178,6 +1236,23 @@ void main() {
           int Function(
               int hMonitor, Pointer<MONITORINFO> lpmi)>('GetMonitorInfoW');
       expect(GetMonitorInfo, isA<Function>());
+    });
+
+    test('Can instantiate GetNextDlgGroupItem', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetNextDlgGroupItem = user32.lookupFunction<
+          IntPtr Function(IntPtr hDlg, IntPtr hCtl, Int32 bPrevious),
+          int Function(
+              int hDlg, int hCtl, int bPrevious)>('GetNextDlgGroupItem');
+      expect(GetNextDlgGroupItem, isA<Function>());
+    });
+
+    test('Can instantiate GetNextDlgTabItem', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetNextDlgTabItem = user32.lookupFunction<
+          IntPtr Function(IntPtr hDlg, IntPtr hCtl, Int32 bPrevious),
+          int Function(int hDlg, int hCtl, int bPrevious)>('GetNextDlgTabItem');
+      expect(GetNextDlgTabItem, isA<Function>());
     });
 
     test('Can instantiate GetParent', () {
@@ -1333,6 +1408,14 @@ void main() {
       expect(LockWorkStation, isA<Function>());
     });
 
+    test('Can instantiate MapDialogRect', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final MapDialogRect = user32.lookupFunction<
+          Int32 Function(IntPtr hDlg, Pointer<RECT> lpRect),
+          int Function(int hDlg, Pointer<RECT> lpRect)>('MapDialogRect');
+      expect(MapDialogRect, isA<Function>());
+    });
+
     test('Can instantiate MessageBox', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final MessageBox = user32.lookupFunction<
@@ -1431,6 +1514,16 @@ void main() {
       expect(ScrollWindow, isA<Function>());
     });
 
+    test('Can instantiate SendDlgItemMessage', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final SendDlgItemMessage = user32.lookupFunction<
+          IntPtr Function(IntPtr hDlg, Int32 nIDDlgItem, Uint32 Msg,
+              IntPtr wParam, IntPtr lParam),
+          int Function(int hDlg, int nIDDlgItem, int Msg, int wParam,
+              int lParam)>('SendDlgItemMessageW');
+      expect(SendDlgItemMessage, isA<Function>());
+    });
+
     test('Can instantiate SendInput', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final SendInput = user32.lookupFunction<
@@ -1456,6 +1549,26 @@ void main() {
           Int32 Function(Int32 X, Int32 Y),
           int Function(int X, int Y)>('SetCursorPos');
       expect(SetCursorPos, isA<Function>());
+    });
+
+    test('Can instantiate SetDlgItemInt', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final SetDlgItemInt = user32.lookupFunction<
+          Int32 Function(
+              IntPtr hDlg, Int32 nIDDlgItem, Uint32 uValue, Int32 bSigned),
+          int Function(int hDlg, int nIDDlgItem, int uValue,
+              int bSigned)>('SetDlgItemInt');
+      expect(SetDlgItemInt, isA<Function>());
+    });
+
+    test('Can instantiate SetDlgItemText', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final SetDlgItemText = user32.lookupFunction<
+          Int32 Function(
+              IntPtr hDlg, Int32 nIDDlgItem, Pointer<Utf16> lpString),
+          int Function(int hDlg, int nIDDlgItem,
+              Pointer<Utf16> lpString)>('SetDlgItemTextW');
+      expect(SetDlgItemText, isA<Function>());
     });
 
     test('Can instantiate SetFocus', () {

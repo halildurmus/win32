@@ -139,15 +139,19 @@ int CreateAcceleratorTable(Pointer paccel, int cAccel) {
 /// ```
 /// {@category user32}
 int CreateDialogIndirectParam(int hInstance, Pointer<DLGTEMPLATE> lpTemplate,
-    int hWndParent, Pointer lpDialogFunc, int dwInitParam) {
+    int hWndParent, Pointer<NativeFunction> lpDialogFunc, int dwInitParam) {
   final _CreateDialogIndirectParam = _user32.lookupFunction<
-      IntPtr Function(IntPtr hInstance, Pointer<DLGTEMPLATE> lpTemplate,
-          IntPtr hWndParent, Pointer lpDialogFunc, IntPtr dwInitParam),
+      IntPtr Function(
+          IntPtr hInstance,
+          Pointer<DLGTEMPLATE> lpTemplate,
+          IntPtr hWndParent,
+          Pointer<NativeFunction> lpDialogFunc,
+          IntPtr dwInitParam),
       int Function(
           int hInstance,
           Pointer<DLGTEMPLATE> lpTemplate,
           int hWndParent,
-          Pointer lpDialogFunc,
+          Pointer<NativeFunction> lpDialogFunc,
           int dwInitParam)>('CreateDialogIndirectParamW');
   return _CreateDialogIndirectParam(
       hInstance, lpTemplate, hWndParent, lpDialogFunc, dwInitParam);
@@ -286,6 +290,41 @@ int DestroyWindow(int hWnd) {
   final _DestroyWindow = _user32.lookupFunction<Int32 Function(IntPtr hWnd),
       int Function(int hWnd)>('DestroyWindow');
   return _DestroyWindow(hWnd);
+}
+
+/// Creates a modal dialog box from a dialog box template in memory. Before
+/// displaying the dialog box, the function passes an application-defined
+/// value to the dialog box procedure as the lParam parameter of the
+/// WM_INITDIALOG message. An application can use this value to initialize
+/// dialog box controls.
+///
+/// ```c
+/// INT_PTR DialogBoxIndirectParamW(
+///   HINSTANCE       hInstance,
+///   LPCDLGTEMPLATEW hDialogTemplate,
+///   HWND            hWndParent,
+///   DLGPROC         lpDialogFunc,
+///   LPARAM          dwInitParam
+/// )
+/// ```
+/// {@category user32}
+int DialogBoxIndirectParam(int hInstance, Pointer<DLGTEMPLATE> hDialogTemplate,
+    int hWndParent, Pointer<NativeFunction> lpDialogFunc, int dwInitParam) {
+  final _DialogBoxIndirectParam = _user32.lookupFunction<
+      IntPtr Function(
+          IntPtr hInstance,
+          Pointer<DLGTEMPLATE> hDialogTemplate,
+          IntPtr hWndParent,
+          Pointer<NativeFunction> lpDialogFunc,
+          IntPtr dwInitParam),
+      int Function(
+          int hInstance,
+          Pointer<DLGTEMPLATE> hDialogTemplate,
+          int hWndParent,
+          Pointer<NativeFunction> lpDialogFunc,
+          int dwInitParam)>('DialogBoxIndirectParamW');
+  return _DialogBoxIndirectParam(
+      hInstance, hDialogTemplate, hWndParent, lpDialogFunc, dwInitParam);
 }
 
 /// Dispatches a message to a window procedure. It is typically used to
@@ -554,6 +593,83 @@ int GetDC(int hwnd) {
   return _GetDC(hwnd);
 }
 
+/// Retrieves the system's dialog base units, which are the average width
+/// and height of characters in the system font. For dialog boxes that use
+/// the system font, you can use these values to convert between dialog
+/// template units, as specified in dialog box templates, and pixels. For
+/// dialog boxes that do not use the system font, the conversion from
+/// dialog template units to pixels depends on the font used by the dialog
+/// box.
+///
+/// ```c
+/// long GetDialogBaseUnits();
+/// ```
+/// {@category user32}
+int GetDialogBaseUnits() {
+  final _GetDialogBaseUnits = _user32
+      .lookupFunction<Int32 Function(), int Function()>('GetDialogBaseUnits');
+  return _GetDialogBaseUnits();
+}
+
+/// Retrieves a handle to a control in the specified dialog box.
+///
+/// ```c
+/// HWND GetDlgItem(
+///   HWND hDlg,
+///   int  nIDDlgItem
+/// );
+/// ```
+/// {@category user32}
+int GetDlgItem(int hDlg, int nIDDlgItem) {
+  final _GetDlgItem = _user32.lookupFunction<
+      IntPtr Function(IntPtr hDlg, Int32 nIDDlgItem),
+      int Function(int hDlg, int nIDDlgItem)>('GetDlgItem');
+  return _GetDlgItem(hDlg, nIDDlgItem);
+}
+
+/// Translates the text of a specified control in a dialog box into an
+/// integer value.
+///
+/// ```c
+/// UINT GetDlgItemInt(
+///   HWND hDlg,
+///   int  nIDDlgItem,
+///   BOOL *lpTranslated,
+///   BOOL bSigned
+/// );
+/// ```
+/// {@category user32}
+int GetDlgItemInt(
+    int hDlg, int nIDDlgItem, Pointer<Int32> lpTranslated, int bSigned) {
+  final _GetDlgItemInt = _user32.lookupFunction<
+      Uint32 Function(IntPtr hDlg, Int32 nIDDlgItem,
+          Pointer<Int32> lpTranslated, Int32 bSigned),
+      int Function(int hDlg, int nIDDlgItem, Pointer<Int32> lpTranslated,
+          int bSigned)>('GetDlgItemInt');
+  return _GetDlgItemInt(hDlg, nIDDlgItem, lpTranslated, bSigned);
+}
+
+/// Retrieves the title or text associated with a control in a dialog box.
+///
+/// ```c
+/// UINT GetDlgItemTextW(
+///   HWND   hDlg,
+///   int    nIDDlgItem,
+///   LPWSTR lpString,
+///   int    cchMax
+/// );
+/// ```
+/// {@category user32}
+int GetDlgItemText(
+    int hDlg, int nIDDlgItem, Pointer<Utf16> lpString, int cchMax) {
+  final _GetDlgItemText = _user32.lookupFunction<
+      Uint32 Function(
+          IntPtr hDlg, Int32 nIDDlgItem, Pointer<Utf16> lpString, Int32 cchMax),
+      int Function(int hDlg, int nIDDlgItem, Pointer<Utf16> lpString,
+          int cchMax)>('GetDlgItemTextW');
+  return _GetDlgItemText(hDlg, nIDDlgItem, lpString, cchMax);
+}
+
 /// Returns the system DPI.
 ///
 /// ```c
@@ -619,6 +735,42 @@ int GetMonitorInfo(int hMonitor, Pointer<MONITORINFO> lpmi) {
       Int32 Function(IntPtr hMonitor, Pointer<MONITORINFO> lpmi),
       int Function(int hMonitor, Pointer<MONITORINFO> lpmi)>('GetMonitorInfoW');
   return _GetMonitorInfo(hMonitor, lpmi);
+}
+
+/// Retrieves a handle to the first control in a group of controls that
+/// precedes (or follows) the specified control in a dialog box.
+///
+/// ```c
+/// HWND GetNextDlgGroupItem(
+///   HWND hDlg,
+///   HWND hCtl,
+///   BOOL bPrevious
+/// );
+/// ```
+/// {@category user32}
+int GetNextDlgGroupItem(int hDlg, int hCtl, int bPrevious) {
+  final _GetNextDlgGroupItem = _user32.lookupFunction<
+      IntPtr Function(IntPtr hDlg, IntPtr hCtl, Int32 bPrevious),
+      int Function(int hDlg, int hCtl, int bPrevious)>('GetNextDlgGroupItem');
+  return _GetNextDlgGroupItem(hDlg, hCtl, bPrevious);
+}
+
+/// Retrieves a handle to the first control that has the WS_TABSTOP style
+/// that precedes (or follows) the specified control.
+///
+/// ```c
+/// HWND GetNextDlgTabItem(
+///   HWND hDlg,
+///   HWND hCtl,
+///   BOOL bPrevious
+/// );
+/// ```
+/// {@category user32}
+int GetNextDlgTabItem(int hDlg, int hCtl, int bPrevious) {
+  final _GetNextDlgTabItem = _user32.lookupFunction<
+      IntPtr Function(IntPtr hDlg, IntPtr hCtl, Int32 bPrevious),
+      int Function(int hDlg, int hCtl, int bPrevious)>('GetNextDlgTabItem');
+  return _GetNextDlgTabItem(hDlg, hCtl, bPrevious);
 }
 
 /// Retrieves a handle to the specified window's parent or owner.
@@ -940,6 +1092,25 @@ int LockWorkStation() {
   return _LockWorkStation();
 }
 
+/// Converts the specified dialog box units to screen units (pixels). The
+/// function replaces the coordinates in the specified RECT structure with
+/// the converted coordinates, which allows the structure to be used to
+/// create a dialog box or position a control within a dialog box.
+///
+/// ```c
+/// BOOL MapDialogRect(
+///   HWND   hDlg,
+///   LPRECT lpRect
+/// );
+/// ```
+/// {@category user32}
+int MapDialogRect(int hDlg, Pointer<RECT> lpRect) {
+  final _MapDialogRect = _user32.lookupFunction<
+      Int32 Function(IntPtr hDlg, Pointer<RECT> lpRect),
+      int Function(int hDlg, Pointer<RECT> lpRect)>('MapDialogRect');
+  return _MapDialogRect(hDlg, lpRect);
+}
+
 /// Displays a modal dialog box that contains a system icon, a set of
 /// buttons, and a brief application-specific message, such as status or
 /// error information. The message box returns an integer value that
@@ -1163,6 +1334,28 @@ int ScrollWindow(int hWnd, int XAmount, int YAmount, Pointer<RECT> lpRect,
   return _ScrollWindow(hWnd, XAmount, YAmount, lpRect, lpClipRect);
 }
 
+/// Sends a message to the specified control in a dialog box.
+///
+/// ```c
+/// LRESULT SendDlgItemMessageW(
+///   HWND   hDlg,
+///   int    nIDDlgItem,
+///   UINT   Msg,
+///   WPARAM wParam,
+///   LPARAM lParam
+/// );
+/// ```
+/// {@category user32}
+int SendDlgItemMessage(
+    int hDlg, int nIDDlgItem, int Msg, int wParam, int lParam) {
+  final _SendDlgItemMessage = _user32.lookupFunction<
+      IntPtr Function(IntPtr hDlg, Int32 nIDDlgItem, Uint32 Msg, IntPtr wParam,
+          IntPtr lParam),
+      int Function(int hDlg, int nIDDlgItem, int Msg, int wParam,
+          int lParam)>('SendDlgItemMessageW');
+  return _SendDlgItemMessage(hDlg, nIDDlgItem, Msg, wParam, lParam);
+}
+
 /// Synthesizes keystrokes, mouse motions, and button clicks.
 ///
 /// ```c
@@ -1217,6 +1410,45 @@ int SetCursorPos(int X, int Y) {
   final _SetCursorPos = _user32.lookupFunction<Int32 Function(Int32 X, Int32 Y),
       int Function(int X, int Y)>('SetCursorPos');
   return _SetCursorPos(X, Y);
+}
+
+/// Sets the text of a control in a dialog box to the string representation
+/// of a specified integer value.
+///
+/// ```c
+/// BOOL SetDlgItemInt(
+///   HWND hDlg,
+///   int  nIDDlgItem,
+///   UINT uValue,
+///   BOOL bSigned
+/// );
+/// ```
+/// {@category user32}
+int SetDlgItemInt(int hDlg, int nIDDlgItem, int uValue, int bSigned) {
+  final _SetDlgItemInt = _user32.lookupFunction<
+      Int32 Function(
+          IntPtr hDlg, Int32 nIDDlgItem, Uint32 uValue, Int32 bSigned),
+      int Function(
+          int hDlg, int nIDDlgItem, int uValue, int bSigned)>('SetDlgItemInt');
+  return _SetDlgItemInt(hDlg, nIDDlgItem, uValue, bSigned);
+}
+
+/// Sets the title or text of a control in a dialog box.
+///
+/// ```c
+/// BOOL SetDlgItemTextW(
+///   HWND    hDlg,
+///   int     nIDDlgItem,
+///   LPCWSTR lpString
+/// );
+/// ```
+/// {@category user32}
+int SetDlgItemText(int hDlg, int nIDDlgItem, Pointer<Utf16> lpString) {
+  final _SetDlgItemText = _user32.lookupFunction<
+      Int32 Function(IntPtr hDlg, Int32 nIDDlgItem, Pointer<Utf16> lpString),
+      int Function(int hDlg, int nIDDlgItem,
+          Pointer<Utf16> lpString)>('SetDlgItemTextW');
+  return _SetDlgItemText(hDlg, nIDDlgItem, lpString);
 }
 
 /// Sets the keyboard focus to the specified window. The window must be

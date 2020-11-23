@@ -1,3 +1,7 @@
+## 2.0.0-nullsafety.4
+
+- Add remaining Win32 dialog calls
+
 ## 2.0.0-nullsafety.3
 
 - Add button and dialog style constants
