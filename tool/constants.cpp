@@ -30,11 +30,7 @@ void main()
     printf("sizeof(LPCWSTR) is %zu\n", sizeof(LPCWSTR));
 
     printf("sizeof(HANDLE) is %zu\n", sizeof(HANDLE));
-    printf("sizeof(HINSTANCE) is %zu\n", sizeof(HINSTANCE));
-    printf("sizeof(HWND) is %zu\n", sizeof(HWND));
     printf("sizeof(HRESULT) is %zu\n", sizeof(HRESULT));
-    printf("sizeof(HDC) is %zu\n", sizeof(HDC));
-    printf("sizeof(HBRUSH) is %zu\n", sizeof(HBRUSH));
 
     printf("sizeof(ATOM) is %zu\n", sizeof(ATOM));
     printf("sizeof(WPARAM) is %zu\n", sizeof(WPARAM));
@@ -54,8 +50,6 @@ void main()
     printf("sizeof(BOOLEAN) is %zu\n", sizeof(BOOLEAN));
     printf("sizeof(VARIANT) is %zu\n", sizeof(VARIANT));
 
-    printf("sizeof(COORD) is %zu\n", sizeof(COORD));
-    printf("sizeof(SMALL_RECT) is %zu\n", sizeof(SMALL_RECT));
     printf("sizeof(UINT_PTR) is %zu\n", sizeof(UINT_PTR));
     printf("sizeof(DWORD_PTR) is %zu\n", sizeof(DWORD_PTR));
 }

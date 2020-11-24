@@ -1410,7 +1410,6 @@ class MENUITEMINFO extends Struct {
 //   LPARAM lParam;
 //   DWORD  time;
 //   POINT  pt;
-//   DWORD  lPrivate;
 // } MSG, *PMSG, *NPMSG, *LPMSG;
 
 /// Contains message information from a thread's message queue.
@@ -1438,9 +1437,6 @@ class MSG extends Struct {
   @Int32()
   external int ptY;
 
-  @Uint32()
-  external int lPrivate;
-
   factory MSG.allocate() => allocate<MSG>().ref
     ..hwnd = 0
     ..message = 0
@@ -1448,8 +1444,7 @@ class MSG extends Struct {
     ..lParam = 0
     ..time = 0
     ..ptX = 0
-    ..ptY = 0
-    ..lPrivate = 0;
+    ..ptY = 0;
 }
 
 // typedef struct tagSIZE {
