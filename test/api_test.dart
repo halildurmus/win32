@@ -3022,6 +3022,22 @@ void main() {
     });
   });
 
+  group('Test ntdll functions', () {
+    test('Can instantiate NtResumeProcess', () {
+      final ntdll = DynamicLibrary.open('ntdll.dll');
+      final NtResumeProcess = ntdll.lookupFunction<Void Function(IntPtr hWnd),
+          void Function(int hWnd)>('NtResumeProcess');
+      expect(NtResumeProcess, isA<Function>());
+    });
+
+    test('Can instantiate NtSuspendProcess', () {
+      final ntdll = DynamicLibrary.open('ntdll.dll');
+      final NtSuspendProcess = ntdll.lookupFunction<Void Function(IntPtr hWnd),
+          void Function(int hWnd)>('NtSuspendProcess');
+      expect(NtSuspendProcess, isA<Function>());
+    });
+  });
+
   group('Test oleaut32 functions', () {
     test('Can instantiate SysAllocString', () {
       final oleaut32 = DynamicLibrary.open('oleaut32.dll');
