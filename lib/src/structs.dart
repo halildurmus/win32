@@ -1623,11 +1623,12 @@ class RECT extends Struct {
 ///
 /// {@category Struct}
 class INPUT extends Struct {
-  @Uint64()
+  // 28 bytes on 32-bit, 40 bytes on 64-bit
+  @IntPtr()
   external int _data0;
-  @Uint64()
+  @IntPtr()
   external int _data1;
-  @Uint64()
+  @IntPtr()
   external int _data2;
   @Uint64()
   external int _data3;
@@ -1637,10 +1638,13 @@ class INPUT extends Struct {
   int get type => addressOf.cast<Uint32>().value;
   set type(int value) => addressOf.cast<Uint32>().value = value;
 
-  MOUSEINPUT get mi => MOUSEINPUT(addressOf.cast<Uint8>().elementAt(8).cast());
-  KEYBDINPUT get ki => KEYBDINPUT(addressOf.cast<Uint8>().elementAt(8).cast());
+  // Location adjusts for padding on 32-bit or 64-bit
+  MOUSEINPUT get mi =>
+      MOUSEINPUT(addressOf.cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
+  KEYBDINPUT get ki =>
+      KEYBDINPUT(addressOf.cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
   HARDWAREINPUT get hi =>
-      HARDWAREINPUT(addressOf.cast<Uint8>().elementAt(8).cast());
+      HARDWAREINPUT(addressOf.cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
 
   factory INPUT.allocate() => allocate<INPUT>().ref
     .._data0 = 0
@@ -1649,8 +1653,6 @@ class INPUT extends Struct {
     .._data3 = 0
     .._data4 = 0;
 }
-
-// BUG: Unfortunately this is broken on 32-bit Dart at present.
 
 // typedef struct tagMOUSEINPUT {
 //   LONG      dx;
@@ -1706,13 +1708,13 @@ class KEYBDINPUT {
   int get wScan => ptr.elementAt(1).value;
   int get dwFlags => ptr.elementAt(2).cast<Uint32>().value;
   int get time => ptr.elementAt(4).cast<Uint32>().value;
-  int get dwExtraInfo => ptr.elementAt(6).cast<Uint32>().value;
+  int get dwExtraInfo => ptr.elementAt(6).cast<IntPtr>().value;
 
   set wVk(int value) => ptr.value = value;
   set wScan(int value) => ptr.elementAt(1).value = value;
   set dwFlags(int value) => ptr.elementAt(2).cast<Uint32>().value = value;
   set time(int value) => ptr.elementAt(4).cast<Uint32>().value = value;
-  set dwExtraInfo(int value) => ptr.elementAt(6).cast<Uint32>().value = value;
+  set dwExtraInfo(int value) => ptr.elementAt(6).cast<IntPtr>().value = value;
 }
 
 // typedef struct tagHARDWAREINPUT {
