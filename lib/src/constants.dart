@@ -1491,6 +1491,76 @@ const QS_ALLINPUT = QS_INPUT |
     QS_SENDMESSAGE;
 
 // -----------------------------------------------------------------------------
+// System colors
+// -----------------------------------------------------------------------------
+
+/// Scroll bar gray area.
+const COLOR_SCROLLBAR = 0;
+
+/// Desktop.
+const COLOR_BACKGROUND = 1;
+
+/// Active window title bar.
+const COLOR_ACTIVECAPTION = 2;
+
+/// Inactive window caption.
+const COLOR_INACTIVECAPTION = 3;
+
+/// Menu background.
+const COLOR_MENU = 4;
+
+/// Window background.
+const COLOR_WINDOW = 5;
+
+/// Window frame.
+const COLOR_WINDOWFRAME = 6;
+
+/// Text in menus.
+const COLOR_MENUTEXT = 7;
+
+/// Text in windows.
+const COLOR_WINDOWTEXT = 8;
+
+/// Text in caption, size box, and scroll bar arrow box.
+const COLOR_CAPTIONTEXT = 9;
+
+/// Active window border.
+const COLOR_ACTIVEBORDER = 10;
+
+/// Inactive window border.
+const COLOR_INACTIVEBORDER = 11;
+
+/// Background color of multiple document interface (MDI) applications.
+const COLOR_APPWORKSPACE = 12;
+
+/// Item(s) selected in a control.
+const COLOR_HIGHLIGHT = 13;
+
+/// Text of item(s) selected in a control.
+const COLOR_HIGHLIGHTTEXT = 14;
+
+/// Face color for three-dimensional display elements and for dialog box
+/// backgrounds.
+const COLOR_BTNFACE = 15;
+
+/// Shadow color for three-dimensional display elements (for edges facing away
+/// from the light source).
+const COLOR_BTNSHADOW = 16;
+
+/// Grayed (disabled) text.
+const COLOR_GRAYTEXT = 17;
+
+/// Text on push buttons.
+const COLOR_BTNTEXT = 18;
+
+/// Color of text in an inactive caption.
+const COLOR_INACTIVECAPTIONTEXT = 19;
+
+/// Highlight color for three-dimensional display elements (for edges facing the
+/// light source.)
+const COLOR_BTNHIGHLIGHT = 20;
+
+// -----------------------------------------------------------------------------
 // System-wide parameters
 // -----------------------------------------------------------------------------
 
@@ -2014,6 +2084,48 @@ const SW_SHOWDEFAULT = 10;
 const SW_FORCEMINIMIZE = 11;
 
 // -----------------------------------------------------------------------------
+// Mapping mode constants
+// -----------------------------------------------------------------------------
+
+/// Each logical unit is mapped to one device pixel. Positive x is to the right;
+/// positive y is down.
+const MM_TEXT = 1;
+
+/// Each logical unit is mapped to 0.1 millimeter. Positive x is to the right;
+/// positive y is up.
+const MM_LOMETRIC = 2;
+
+/// Each logical unit is mapped to 0.01 millimeter. Positive x is to the right;
+/// positive y is up.
+const MM_HIMETRIC = 3;
+
+/// Each logical unit is mapped to 0.01 inch. Positive x is to the right;
+/// positive y is up.
+const MM_LOENGLISH = 4;
+
+/// Each logical unit is mapped to 0.001 inch. Positive x is to the right;
+/// positive y is up.
+const MM_HIENGLISH = 5;
+
+/// Each logical unit is mapped to one twentieth of a printer's point (1/1440
+/// inch, also called a twip). Positive x is to the right; positive y is up.
+const MM_TWIPS = 6;
+
+/// Logical units are mapped to arbitrary units with equally scaled axes; that
+/// is, one unit along the x-axis is equal to one unit along the y-axis. Use the
+/// SetWindowExtEx and SetViewportExtEx functions to specify the units and the
+/// orientation of the axes. Graphics device interface (GDI) makes adjustments
+/// as necessary to ensure the x and y units remain the same size (When the
+/// window extent is set, the viewport will be adjusted to keep the units
+/// isotropic).
+const MM_ISOTROPIC = 7;
+
+/// Logical units are mapped to arbitrary units with arbitrarily scaled axes.
+/// Use the SetWindowExtEx and SetViewportExtEx functions to specify the units,
+/// orientation, and scaling.
+const MM_ANISOTROPIC = 8;
+
+// -----------------------------------------------------------------------------
 // Edit Control constants
 // -----------------------------------------------------------------------------
 
@@ -2379,6 +2491,139 @@ const EM_GETIMESTATUS = 0x00D9;
 
 /// Allows enterprise data protection support and paste notifications to be set.
 const EM_ENABLEFEATURE = 0x00DA;
+
+// -----------------------------------------------------------------------------
+// Button Style constants
+// -----------------------------------------------------------------------------
+
+/// Creates a push button that posts a WM_COMMAND message to the owner window
+/// when the user selects the button.
+const BS_PUSHBUTTON = 0x00000000;
+
+/// Creates a push button that behaves like a BS_PUSHBUTTON style button, but
+/// has a distinct appearance. If the button is in a dialog box, the user can
+/// select the button by pressing the ENTER key, even when the button does not
+/// have the input focus. This style is useful for enabling the user to quickly
+/// select the most likely (default) option.
+const BS_DEFPUSHBUTTON = 0x00000001;
+
+/// Creates a small, empty check box with text. By default, the text is
+/// displayed to the right of the check box. To display the text to the left of
+/// the check box, combine this flag with the BS_LEFTTEXT style (or with the
+/// equivalent BS_RIGHTBUTTON style).
+const BS_CHECKBOX = 0x00000002;
+
+/// Creates a button that is the same as a check box, except that the check
+/// state automatically toggles between checked and cleared each time the user
+/// selects the check box.
+const BS_AUTOCHECKBOX = 0x00000003;
+
+/// Creates a small circle with text. By default, the text is displayed to the
+/// right of the circle. To display the text to the left of the circle, combine
+/// this flag with the BS_LEFTTEXT style (or with the equivalent BS_RIGHTBUTTON
+/// style). Use radio buttons for groups of related, but mutually exclusive
+/// choices.
+const BS_RADIOBUTTON = 0x00000004;
+
+/// Creates a button that is the same as a check box, except that the box can be
+/// grayed as well as checked or cleared. Use the grayed state to show that the
+/// state of the check box is not determined.
+const BS_3STATE = 0x00000005;
+
+/// Creates a button that is the same as a three-state check box, except that
+/// the box changes its state when the user selects it. The state cycles through
+/// checked, indeterminate, and cleared.
+const BS_AUTO3STATE = 0x00000006;
+
+/// Creates a rectangle in which other controls can be grouped. Any text
+/// associated with this style is displayed in the rectangle's upper left
+/// corner.
+const BS_GROUPBOX = 0x00000007;
+
+/// Obsolete, but provided for compatibility with 16-bit versions of Windows.
+/// Applications should use BS_OWNERDRAW instead.
+const BS_USERBUTTON = 0x00000008;
+
+/// Creates a button that is the same as a radio button, except that when the
+/// user selects it, the system automatically sets the button's check state to
+/// checked and automatically sets the check state for all other buttons in the
+/// same group to cleared.
+const BS_AUTORADIOBUTTON = 0x00000009;
+
+/// Defines a push-box control, which is identical to a PUSHBUTTON, except that
+/// it does not display a button face or frame; only the text appears.
+const BS_PUSHBOX = 0x0000000A;
+
+/// Creates an owner-drawn button. The owner window receives a WM_DRAWITEM
+/// message when a visual aspect of the button has changed. Do not combine the
+/// BS_OWNERDRAW style with any other button styles.
+const BS_OWNERDRAW = 0x0000000B;
+
+/// Do not use this style. A composite style bit that results from using the OR
+/// operator on BS_* style bits. It can be used to mask out valid BS_* bits from
+/// a given bitmask. Note that this is out of date and does not correctly
+/// include all valid styles. Thus, you should not use this style.
+const BS_TYPEMASK = 0x0000000F;
+
+/// Places text on the left side of the radio button or check box when combined
+/// with a radio button or check box style. Same as the BS_RIGHTBUTTON style.
+const BS_LEFTTEXT = 0x00000020;
+
+/// Specifies that the button displays text.
+const BS_TEXT = 0x00000000;
+
+/// Specifies that the button displays an icon. See the Remarks section for its
+/// interaction with BS_BITMAP.
+const BS_ICON = 0x00000040;
+
+/// Specifies that the button displays a bitmap. See the Remarks section for its
+/// interaction with BS_ICON.
+const BS_BITMAP = 0x00000080;
+
+/// Left-justifies the text in the button rectangle. However, if the button is a
+/// check box or radio button that does not have the BS_RIGHTBUTTON style, the
+/// text is left justified on the right side of the check box or radio button.
+const BS_LEFT = 0x00000100;
+
+/// Right-justifies text in the button rectangle. However, if the button is a
+/// check box or radio button that does not have the BS_RIGHTBUTTON style, the
+/// text is right justified on the right side of the check box or radio button.
+const BS_RIGHT = 0x00000200;
+
+/// Centers text horizontally in the button rectangle.
+const BS_CENTER = 0x00000300;
+
+/// Places text at the top of the button rectangle.
+const BS_TOP = 0x00000400;
+
+/// Places text at the bottom of the button rectangle.
+const BS_BOTTOM = 0x00000800;
+
+/// Places text in the middle (vertically) of the button rectangle.
+const BS_VCENTER = 0x00000C00;
+
+/// Makes a button (such as a check box, three-state check box, or radio button)
+/// look and act like a push button. The button looks raised when it isn't
+/// pushed or checked, and sunken when it is pushed or checked.
+const BS_PUSHLIKE = 0x00001000;
+
+/// Wraps the button text to multiple lines if the text string is too long to
+/// fit on a single line in the button rectangle.
+const BS_MULTILINE = 0x00002000;
+
+/// Enables a button to send BN_KILLFOCUS and BN_SETFOCUS notification codes to
+/// its parent window. Note that buttons send the BN_CLICKED notification code
+/// regardless of whether it has this style. To get BN_DBLCLK notification
+/// codes, the button must have the BS_RADIOBUTTON or BS_OWNERDRAW style.
+const BS_NOTIFY = 0x00004000;
+
+/// Specifies that the button is two-dimensional; it does not use the default
+/// shading to create a 3-D image.
+const BS_FLAT = 0x00008000;
+
+/// Positions a radio button's circle or a check box's square on the right side
+/// of the button rectangle. Same as the BS_LEFTTEXT style.
+const BS_RIGHTBUTTON = BS_LEFTTEXT;
 
 // -----------------------------------------------------------------------------
 // ScrollInfo constants

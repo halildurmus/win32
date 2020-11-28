@@ -363,29 +363,6 @@ const CC_ENABLETEMPLATEHANDLE = 0x00000040;
 const CC_SOLIDCOLOR = 0x00000080;
 const CC_ANYCOLOR = 0x00000100;
 
-// System colors
-const COLOR_SCROLLBAR = 0;
-const COLOR_BACKGROUND = 1;
-const COLOR_ACTIVECAPTION = 2;
-const COLOR_INACTIVECAPTION = 3;
-const COLOR_MENU = 4;
-const COLOR_WINDOW = 5;
-const COLOR_WINDOWFRAME = 6;
-const COLOR_MENUTEXT = 7;
-const COLOR_WINDOWTEXT = 8;
-const COLOR_CAPTIONTEXT = 9;
-const COLOR_ACTIVEBORDER = 10;
-const COLOR_INACTIVEBORDER = 11;
-const COLOR_APPWORKSPACE = 12;
-const COLOR_HIGHLIGHT = 13;
-const COLOR_HIGHLIGHTTEXT = 14;
-const COLOR_BTNFACE = 15;
-const COLOR_BTNSHADOW = 16;
-const COLOR_GRAYTEXT = 17;
-const COLOR_BTNTEXT = 18;
-const COLOR_INACTIVECAPTIONTEXT = 19;
-const COLOR_BTNHIGHLIGHT = 20;
-
 // Stock logical objects
 const WHITE_BRUSH = 0;
 const LTGRAY_BRUSH = 1;
@@ -411,48 +388,22 @@ const SYSTEM_FIXED_FONT = 16;
 // address itself has no meaning other than as a marker.
 
 final IDI_APPLICATION = Pointer<Utf16>.fromAddress(32512);
-
 final IDI_HAND = Pointer<Utf16>.fromAddress(32513);
-
 final IDI_QUESTION = Pointer<Utf16>.fromAddress(32514);
-
 final IDI_EXCLAMATION = Pointer<Utf16>.fromAddress(32515);
-
 final IDI_ASTERISK = Pointer<Utf16>.fromAddress(32516);
-
 final IDI_WINLOGO = Pointer<Utf16>.fromAddress(32517);
-
 final IDI_SHIELD = Pointer<Utf16>.fromAddress(32518);
-
 final IDI_WARNING = IDI_EXCLAMATION;
-
 final IDI_ERROR = IDI_HAND;
-
 final IDI_INFORMATION = IDI_ASTERISK;
 
 // Stock cursors
 final IDC_ARROW = Pointer<Utf16>.fromAddress(32512);
-
 final IDC_IBEAM = Pointer<Utf16>.fromAddress(32513);
-
 final IDC_WAIT = Pointer<Utf16>.fromAddress(32514);
-
 final IDC_CROSS = Pointer<Utf16>.fromAddress(32515);
-
 final IDC_UPARROW = Pointer<Utf16>.fromAddress(32516);
-
-// Mapping modes
-const MM_TEXT = 1;
-const MM_LOMETRIC = 2;
-const MM_HIMETRIC = 3;
-const MM_LOENGLISH = 4;
-const MM_HIENGLISH = 5;
-const MM_TWIPS = 6;
-const MM_ISOTROPIC = 7;
-const MM_ANISOTROPIC = 8;
-const MM_MIN = MM_TEXT;
-const MM_MAX = MM_ANISOTROPIC;
-const MM_MAX_FIXEDSCALE = MM_TWIPS;
 
 // Background modes
 const TRANSPARENT = 1;
@@ -1547,6 +1498,8 @@ class KF_REDIRECT_FLAGS {
   static const KF_REDIRECT_EXCLUDE_ALL_KNOWN_SUBFOLDERS = 0x800;
 }
 
+/// Specifies a type of computer name.
+///
 /// {@category Enum}
 class COMPUTER_NAME_FORMAT {
   static const ComputerNameNetBIOS = 0;
@@ -2054,35 +2007,6 @@ const PS_JOIN_MASK = 0x0000F000;
 const PS_COSMETIC = 0x00000000;
 const PS_GEOMETRIC = 0x00010000;
 const PS_TYPE_MASK = 0x000F0000;
-
-const BS_PUSHBUTTON = 0x00000000;
-const BS_DEFPUSHBUTTON = 0x00000001;
-const BS_CHECKBOX = 0x00000002;
-const BS_AUTOCHECKBOX = 0x00000003;
-const BS_RADIOBUTTON = 0x00000004;
-const BS_3STATE = 0x00000005;
-const BS_AUTO3STATE = 0x00000006;
-const BS_GROUPBOX = 0x00000007;
-const BS_USERBUTTON = 0x00000008;
-const BS_AUTORADIOBUTTON = 0x00000009;
-const BS_PUSHBOX = 0x0000000A;
-const BS_OWNERDRAW = 0x0000000B;
-const BS_TYPEMASK = 0x0000000F;
-const BS_LEFTTEXT = 0x00000020;
-const BS_TEXT = 0x00000000;
-const BS_ICON = 0x00000040;
-const BS_BITMAP = 0x00000080;
-const BS_LEFT = 0x00000100;
-const BS_RIGHT = 0x00000200;
-const BS_CENTER = 0x00000300;
-const BS_TOP = 0x00000400;
-const BS_BOTTOM = 0x00000800;
-const BS_VCENTER = 0x00000C00;
-const BS_PUSHLIKE = 0x00001000;
-const BS_MULTILINE = 0x00002000;
-const BS_NOTIFY = 0x00004000;
-const BS_FLAT = 0x00008000;
-const BS_RIGHTBUTTON = BS_LEFTTEXT;
 
 const DS_ABSALIGN = 0x01;
 const DS_SYSMODAL = 0x02;
