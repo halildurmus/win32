@@ -1,3 +1,8 @@
+## 2.0.0-nullsafety.6
+
+- Add GetDpiForWindow, GetSystemMetricsForDpi, GetWindowRect, IsZoomed,
+  PostMessage user32 APIs for @callmebit
+
 ## 2.0.0-nullsafety.5
 
 - Add dialog box example and supporting extension methods
