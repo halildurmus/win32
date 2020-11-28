@@ -2970,6 +2970,99 @@ const MF_UNHILITE = 0x00000000;
 const MF_HILITE = 0x00000080;
 
 // -----------------------------------------------------------------------------
+// Pen Styles
+// -----------------------------------------------------------------------------
+/// The pen is solid.
+const PS_SOLID = 0;
+
+/// The pen is dashed.
+const PS_DASH = 1;
+
+/// The pen is dotted.
+const PS_DOT = 2;
+
+/// The pen has alternating dashes and dots.
+const PS_DASHDOT = 3;
+
+/// The pen has alternating dashes and double dots.
+const PS_DASHDOTDOT = 4;
+
+/// The pen is invisible.
+const PS_NULL = 5;
+
+/// The pen is solid. When this pen is used in any GDI drawing function that
+/// takes a bounding rectangle, the dimensions of the figure are shrunk so that
+/// it fits entirely in the bounding rectangle, taking into account the width of
+/// the pen. This applies only to geometric pens.
+const PS_INSIDEFRAME = 6;
+
+/// The pen uses a styling array supplied by the user.
+const PS_USERSTYLE = 7;
+
+/// The pen sets every other pixel. (This style is applicable only for cosmetic
+/// pens.)
+const PS_ALTERNATE = 8;
+
+// Mask for pen styles.
+const PS_STYLE_MASK = 0x0000000F;
+
+/// End caps are round.
+const PS_ENDCAP_ROUND = 0x00000000;
+
+/// End caps are square.
+const PS_ENDCAP_SQUARE = 0x00000100;
+
+/// End caps are flat.
+const PS_ENDCAP_FLAT = 0x00000200;
+
+/// Mask for pen endcap styles.
+const PS_ENDCAP_MASK = 0x00000F00;
+
+/// Line joins are round.
+const PS_JOIN_ROUND = 0x00000000;
+
+/// Line joins are beveled.
+const PS_JOIN_BEVEL = 0x00001000;
+
+/// Line joins are mitered when they are within the current limit set by the
+/// SetMiterLimit function. A join is beveled when it would exceed the limit.
+const PS_JOIN_MITER = 0x00002000;
+
+/// Mask for pen join values.
+const PS_JOIN_MASK = 0x0000F000;
+
+/// The pen is cosmetic.
+const PS_COSMETIC = 0x00000000;
+
+/// The pen is geometric.
+const PS_GEOMETRIC = 0x00010000;
+
+/// Mask for pen types.
+const PS_TYPE_MASK = 0x000F0000;
+
+// -----------------------------------------------------------------------------
+// Hatch Styles
+// -----------------------------------------------------------------------------
+
+/// Horizontal hatch
+const HS_HORIZONTAL = 0;
+
+/// Vertical hatch
+const HS_VERTICAL = 1;
+
+/// 45-degree downward left-to-right hatch
+const HS_FDIAGONAL = 2;
+
+/// 45-degree upward left-to-right hatch
+const HS_BDIAGONAL = 3;
+
+/// Horizontal and vertical crosshatch
+const HS_CROSS = 4;
+
+/// 45-degree crosshatch
+const HS_DIAGCROSS = 5;
+
+// -----------------------------------------------------------------------------
 // Console constants
 // -----------------------------------------------------------------------------
 

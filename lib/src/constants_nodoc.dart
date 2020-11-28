@@ -1976,38 +1976,6 @@ const BS_PATTERN8X8 = 7;
 const BS_DIBPATTERN8X8 = 8;
 const BS_MONOPATTERN = 9;
 
-/* Hatch Styles */
-const HS_HORIZONTAL = 0;
-const HS_VERTICAL = 1;
-const HS_FDIAGONAL = 2;
-const HS_BDIAGONAL = 3;
-const HS_CROSS = 4;
-const HS_DIAGCROSS = 5;
-const HS_API_MAX = 12;
-
-/* Pen Styles */
-const PS_SOLID = 0;
-const PS_DASH = 1;
-const PS_DOT = 2;
-const PS_DASHDOT = 3;
-const PS_DASHDOTDOT = 4;
-const PS_NULL = 5;
-const PS_INSIDEFRAME = 6;
-const PS_USERSTYLE = 7;
-const PS_ALTERNATE = 8;
-const PS_STYLE_MASK = 0x0000000F;
-const PS_ENDCAP_ROUND = 0x00000000;
-const PS_ENDCAP_SQUARE = 0x00000100;
-const PS_ENDCAP_FLAT = 0x00000200;
-const PS_ENDCAP_MASK = 0x00000F00;
-const PS_JOIN_ROUND = 0x00000000;
-const PS_JOIN_BEVEL = 0x00001000;
-const PS_JOIN_MITER = 0x00002000;
-const PS_JOIN_MASK = 0x0000F000;
-const PS_COSMETIC = 0x00000000;
-const PS_GEOMETRIC = 0x00010000;
-const PS_TYPE_MASK = 0x000F0000;
-
 const DS_ABSALIGN = 0x01;
 const DS_SYSMODAL = 0x02;
 const DS_LOCALEDIT = 0x20;
