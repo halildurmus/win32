@@ -682,6 +682,20 @@ int GetDpiForSystem() {
   return _GetDpiForSystem();
 }
 
+/// Returns the dots per inch (dpi) value for the associated window.
+///
+/// ```c
+/// UINT GetDpiForWindow(
+///   HWND hwnd
+/// );
+/// ```
+/// {@category user32}
+int GetDpiForWindow(int hwnd) {
+  final _GetDpiForWindow = _user32.lookupFunction<Int32 Function(IntPtr hwnd),
+      int Function(int hwnd)>('GetDpiForWindow');
+  return _GetDpiForWindow(hwnd);
+}
+
 /// Retrieves a handle to the foreground window (the window with which the
 /// user is currently working). The system assigns a slightly higher
 /// priority to the thread that creates the foreground window than it does
@@ -885,6 +899,23 @@ int GetSystemMetrics(int nIndex) {
   return _GetSystemMetrics(nIndex);
 }
 
+/// Retrieves the specified system metric or system configuration setting
+/// taking into account a provided DPI.
+///
+/// ```c
+/// int GetSystemMetricsForDpi(
+///   int  nIndex,
+///   UINT dpi
+/// );
+/// ```
+/// {@category user32}
+int GetSystemMetricsForDpi(int nIndex, int dpi) {
+  final _GetSystemMetricsForDpi = _user32.lookupFunction<
+      Int32 Function(Int32 nIndex, Uint32 dpi),
+      int Function(int nIndex, int dpi)>('GetSystemMetricsForDpi');
+  return _GetSystemMetricsForDpi(nIndex, dpi);
+}
+
 /// Retrieves a handle to a window that has the specified relationship
 /// (Z-Order or owner) to the specified window.
 ///
@@ -900,6 +931,24 @@ int GetWindow(int hWnd, int uCmd) {
       IntPtr Function(IntPtr hWnd, Uint32 uCmd),
       int Function(int hWnd, int uCmd)>('GetWindow');
   return _GetWindow(hWnd, uCmd);
+}
+
+/// Retrieves the dimensions of the bounding rectangle of the specified
+/// window. The dimensions are given in screen coordinates that are
+/// relative to the upper-left corner of the screen.
+///
+/// ```c
+/// BOOL GetWindowRect(
+///   HWND   hWnd,
+///   LPRECT lpRect
+/// );
+/// ```
+/// {@category user32}
+int GetWindowRect(int hWnd, Pointer<RECT> lpRect) {
+  final _GetWindowRect = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect),
+      int Function(int hWnd, Pointer<RECT> lpRect)>('GetWindowRect');
+  return _GetWindowRect(hWnd, lpRect);
 }
 
 /// Retrieves the length, in characters, of the specified window's title
@@ -1006,6 +1055,20 @@ int IsWindowVisible(int hWnd) {
   final _IsWindowVisible = _user32.lookupFunction<Int32 Function(IntPtr hWnd),
       int Function(int hWnd)>('IsWindowVisible');
   return _IsWindowVisible(hWnd);
+}
+
+/// Determines whether a window is maximized.
+///
+/// ```c
+/// BOOL IsZoomed(
+///  HWND hWnd
+/// );
+/// ```
+/// {@category user32}
+int IsZoomed(int hWnd) {
+  final _IsZoomed = _user32.lookupFunction<Int32 Function(IntPtr hWnd),
+      int Function(int hWnd)>('IsZoomed');
+  return _IsZoomed(hWnd);
 }
 
 /// Destroys the specified timer.
@@ -1241,6 +1304,26 @@ int PeekMessage(Pointer<MSG> lpMsg, int hWnd, int wMsgFilterMin,
       int Function(Pointer<MSG> lpMsg, int hWnd, int wMsgFilterMin,
           int wMsgFilterMax, int wRemoveMsg)>('PeekMessageW');
   return _PeekMessage(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax, wRemoveMsg);
+}
+
+/// Places (posts) a message in the message queue associated with the
+/// thread that created the specified window and returns without waiting
+/// for the thread to process the message.
+///
+/// ```c
+/// BOOL PostMessageW(
+///   HWND   hWnd,
+///   UINT   Msg,
+///   WPARAM wParam,
+///   LPARAM lParam
+/// );
+/// ```
+/// {@category user32}
+int PostMessage(int hWnd, int Msg, int wParam, int lParam) {
+  final _PostMessage = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
+      int Function(int hWnd, int Msg, int wParam, int lParam)>('PostMessageW');
+  return _PostMessage(hWnd, Msg, wParam, lParam);
 }
 
 /// Indicates to the system that a thread has made a request to terminate

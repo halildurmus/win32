@@ -1247,6 +1247,13 @@ void main() {
       expect(GetDpiForSystem, isA<Function>());
     });
 
+    test('Can instantiate GetDpiForWindow', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetDpiForWindow = user32.lookupFunction<Int32 Function(IntPtr hwnd),
+          int Function(int hwnd)>('GetDpiForWindow');
+      expect(GetDpiForWindow, isA<Function>());
+    });
+
     test('Can instantiate GetForegroundWindow', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetForegroundWindow =
@@ -1345,12 +1352,28 @@ void main() {
       expect(GetSystemMetrics, isA<Function>());
     });
 
+    test('Can instantiate GetSystemMetricsForDpi', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetSystemMetricsForDpi = user32.lookupFunction<
+          Int32 Function(Int32 nIndex, Uint32 dpi),
+          int Function(int nIndex, int dpi)>('GetSystemMetricsForDpi');
+      expect(GetSystemMetricsForDpi, isA<Function>());
+    });
+
     test('Can instantiate GetWindow', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetWindow = user32.lookupFunction<
           IntPtr Function(IntPtr hWnd, Uint32 uCmd),
           int Function(int hWnd, int uCmd)>('GetWindow');
       expect(GetWindow, isA<Function>());
+    });
+
+    test('Can instantiate GetWindowRect', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetWindowRect = user32.lookupFunction<
+          Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect),
+          int Function(int hWnd, Pointer<RECT> lpRect)>('GetWindowRect');
+      expect(GetWindowRect, isA<Function>());
     });
 
     test('Can instantiate GetWindowTextLength', () {
@@ -1400,6 +1423,13 @@ void main() {
       final IsWindowVisible = user32.lookupFunction<Int32 Function(IntPtr hWnd),
           int Function(int hWnd)>('IsWindowVisible');
       expect(IsWindowVisible, isA<Function>());
+    });
+
+    test('Can instantiate IsZoomed', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final IsZoomed = user32.lookupFunction<Int32 Function(IntPtr hWnd),
+          int Function(int hWnd)>('IsZoomed');
+      expect(IsZoomed, isA<Function>());
     });
 
     test('Can instantiate KillTimer', () {
@@ -1506,6 +1536,15 @@ void main() {
           int Function(Pointer<MSG> lpMsg, int hWnd, int wMsgFilterMin,
               int wMsgFilterMax, int wRemoveMsg)>('PeekMessageW');
       expect(PeekMessage, isA<Function>());
+    });
+
+    test('Can instantiate PostMessage', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final PostMessage = user32.lookupFunction<
+          Int32 Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
+          int Function(
+              int hWnd, int Msg, int wParam, int lParam)>('PostMessageW');
+      expect(PostMessage, isA<Function>());
     });
 
     test('Can instantiate PostQuitMessage', () {
