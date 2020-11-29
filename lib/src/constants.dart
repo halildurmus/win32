@@ -3625,6 +3625,265 @@ const MF_UNHILITE = 0x00000000;
 const MF_HILITE = 0x00000080;
 
 // -----------------------------------------------------------------------------
+// Dialog Box styles
+// -----------------------------------------------------------------------------
+
+/// Indicates that the coordinates of the dialog box are screen coordinates. If
+/// this style is not specified, the coordinates are client coordinates.
+const DS_ABSALIGN = 0x01;
+
+/// Obsolete. Do not use.
+const DS_SYSMODAL = 0x02;
+
+/// Obsolete. Do not use.
+const DS_LOCALEDIT = 0x20;
+
+/// Indicates that the header of the dialog box template (either standard or
+/// extended) contains additional data specifying the font to use for text in
+/// the client area and controls of the dialog box.
+const DS_SETFONT = 0x40;
+
+/// Creates a dialog box with a modal dialog-box frame that can be combined with
+/// a title bar and window menu by specifying the WS_CAPTION and WS_SYSMENU
+/// styles.
+const DS_MODALFRAME = 0x80;
+
+/// Suppresses WM_ENTERIDLE messages that the system would otherwise send to the
+/// owner of the dialog box while the dialog box is displayed.
+const DS_NOIDLEMSG = 0x100;
+
+/// Causes the system to use the SetForegroundWindow function to bring the
+/// dialog box to the foreground. This style is useful for modal dialog boxes
+/// that require immediate attention from the user regardless of whether the
+/// owner window is the foreground window.
+const DS_SETFOREGROUND = 0x200;
+
+/// Obsolete. Do not use.
+const DS_3DLOOK = 0x0004;
+
+/// Causes the dialog box to use the monospace SYSTEM_FIXED_FONT instead of the
+/// default SYSTEM_FONT.
+const DS_FIXEDSYS = 0x0008;
+
+/// Creates the dialog box even if errors occur for example, if a child window
+/// cannot be created or if the system cannot create a special data segment for
+/// an edit control.
+const DS_NOFAILCREATE = 0x0010;
+
+/// Creates a dialog box that works well as a child window of another dialog
+/// box, much like a page in a property sheet. This style allows the user to tab
+/// among the control windows of a child dialog box, use its accelerator keys,
+/// and so on.
+const DS_CONTROL = 0x0400;
+
+/// Centers the dialog box in the working area of the monitor that contains the
+/// owner window. If no owner window is specified, the dialog box is centered in
+/// the working area of a monitor determined by the system. The working area is
+/// the area not obscured by the taskbar or any appbars.
+const DS_CENTER = 0x0800;
+
+/// Centers the dialog box on the mouse cursor.
+const DS_CENTERMOUSE = 0x1000;
+
+/// Includes a question mark in the title bar of the dialog box. When the user
+/// clicks the question mark, the cursor changes to a question mark with a
+/// pointer.
+const DS_CONTEXTHELP = 0x2000;
+
+/// Indicates that the dialog box should use the system font. The typeface
+/// member of the extended dialog box template must be set to MS Shell Dlg.
+/// Otherwise, this style has no effect.
+const DS_SHELLFONT = DS_SETFONT | DS_FIXEDSYS;
+
+// -----------------------------------------------------------------------------
+// Static control styles
+// -----------------------------------------------------------------------------
+
+/// A simple rectangle and left-aligns the text in the rectangle.
+///
+/// The text is formatted before it is displayed. Words that extend past the end
+/// of a line are automatically wrapped to the beginning of the next
+/// left-aligned line. Words that are longer than the width of the control are
+/// truncated.
+const SS_LEFT = 0x00000000;
+
+/// A simple rectangle and centers the text in the rectangle.
+///
+/// The text is formatted before it is displayed. Words that extend past the end
+/// of a line are automatically wrapped to the beginning of the next centered
+/// line. Words that are longer than the width of the control are truncated.
+const SS_CENTER = 0x00000001;
+
+/// A simple rectangle and right-aligns the text in the rectangle.
+///
+/// The text is formatted before it is displayed. Words that extend past the end
+/// of a line are automatically wrapped to the beginning of the next
+/// right-aligned line. Words that are longer than the width of the control are
+/// truncated.
+const SS_RIGHT = 0x00000002;
+
+/// An icon to be displayed in the dialog box.
+///
+/// If the control is created as part of a dialog box, the text is the name of
+/// an icon (not a filename) defined elsewhere in the resource file. If the
+/// control is created via CreateWindow or a related function, the text is the
+/// name of an icon (not a filename) defined in the resource file associated
+/// with the module specified by the hInstance parameter to CreateWindow.
+const SS_ICON = 0x00000003;
+
+/// A rectangle filled with the current window frame color. This color is black
+/// in the default color scheme.
+const SS_BLACKRECT = 0x00000004;
+
+/// A rectangle filled with the current screen background color. This color is
+/// gray in the default color scheme.
+const SS_GRAYRECT = 0x00000005;
+
+/// A rectangle filled with the current window background color. This color is
+/// white in the default color scheme.
+const SS_WHITERECT = 0x00000006;
+
+/// A box with a frame drawn in the same color as the window frames. This color
+/// is black in the default color scheme.
+const SS_BLACKFRAME = 0x00000007;
+
+/// A box with a frame drawn with the same color as the screen background
+/// (desktop). This color is gray in the default color scheme.
+const SS_GRAYFRAME = 0x00000008;
+
+/// A box with a frame drawn with the same color as the window background. This
+/// color is white in the default color scheme.
+const SS_WHITEFRAME = 0x00000009;
+
+/// Specifies a user-defined item.
+const SS_USERITEM = 0x0000000A;
+
+/// A simple rectangle and displays a single line of left-aligned text in the
+/// rectangle.
+const SS_SIMPLE = 0x0000000B;
+
+/// A simple rectangle and left-aligns the text in the rectangle.
+///
+/// Tabs are expanded, but words are not wrapped. Text that extends past the
+/// end of a line is clipped.
+const SS_LEFTNOWORDWRAP = 0x0000000C;
+
+/// The owner of the static control is responsible for drawing the control. The
+/// owner window receives a WM_DRAWITEM message whenever the control needs to be
+/// drawn.
+const SS_OWNERDRAW = 0x0000000D;
+
+/// A bitmap is to be displayed in the static control.
+///
+/// The text is the name of a bitmap (not a filename) defined elsewhere in the
+/// resource file. The style ignores the nWidth and nHeight parameters; the
+/// control automatically sizes itself to accommodate the bitmap.
+const SS_BITMAP = 0x0000000E;
+
+/// An enhanced metafile is to be displayed in the static control.
+///
+/// The text is the name of a metafile. An enhanced metafile static control has
+/// a fixed size; the metafile is scaled to fit the static control's client
+/// area.
+const SS_ENHMETAFILE = 0x0000000F;
+
+/// Draws the top and bottom edges of the static control using the EDGE_ETCHED
+/// edge style.
+const SS_ETCHEDHORZ = 0x00000010;
+
+/// Draws the left and right edges of the static control using the EDGE_ETCHED
+/// edge style.
+const SS_ETCHEDVERT = 0x00000011;
+
+/// Draws the frame of the static control using the EDGE_ETCHED edge style.
+const SS_ETCHEDFRAME = 0x00000012;
+
+/// A composite style bit that results from using the OR operator on SS_* style
+/// bits.
+///
+/// Can be used to mask out valid SS_* bits from a given bitmask. Note that this
+/// is out of date and does not correctly include all valid styles. Thus, you
+/// should not use this style.
+const SS_TYPEMASK = 0x0000001F;
+
+/// Adjusts the bitmap to fit the size of the static control.
+///
+/// For example, changing the locale can change the system font, and thus
+/// controls might be resized. If a static control had a bitmap, the bitmap
+/// would no longer fit the control. This style bit dictates automatic
+/// redimensioning of bitmaps to fit their controls.
+const SS_REALSIZECONTROL = 0x00000040;
+
+/// Prevents interpretation of any ampersand (&) characters in the control's
+/// text as accelerator prefix characters.
+///
+/// These are displayed with the ampersand removed and the next character in the
+/// string underlined. This static control style may be included with any of the
+/// defined static controls. You can combine SS_NOPREFIX with other styles. This
+/// can be useful when filenames or other strings that may contain an ampersand
+/// (&) must be displayed in a static control in a dialog box.
+const SS_NOPREFIX = 0x00000080;
+
+/// Sends the parent window STN_CLICKED, STN_DBLCLK, STN_DISABLE, and STN_ENABLE
+/// notification codes when the user clicks or double-clicks the control.
+const SS_NOTIFY = 0x00000100;
+
+/// A bitmap is centered in the static control that contains it.
+///
+/// The control is not resized, so that a bitmap too large for the control will
+/// be clipped. If the static control contains a single line of text, the text
+/// is centered vertically in the client area of the control.
+const SS_CENTERIMAGE = 0x00000200;
+
+/// The lower right corner of a static control with the SS_BITMAP or SS_ICON
+/// style is to remain fixed when the control is resized.
+///
+/// Only the top and left sides are adjusted to accommodate a new bitmap or
+/// icon.
+const SS_RIGHTJUST = 0x00000400;
+
+/// Specifies that the actual resource width is used and the icon is loaded
+/// using LoadImage. SS_REALSIZEIMAGE is always used in conjunction with
+/// SS_ICON.
+const SS_REALSIZEIMAGE = 0x00000800;
+
+/// Draws a half-sunken border around a static control.
+const SS_SUNKEN = 0x00001000;
+
+/// The static control duplicates the text-displaying characteristics of a
+/// multiline edit control.
+///
+/// Specifically, the average character width is calculated in the same manner
+/// as with an edit control, and the function does not display a partially
+/// visible last line.
+const SS_EDITCONTROL = 0x00002000;
+
+/// If the end of a string does not fit in the rectangle, it is truncated and
+/// ellipses are added.
+///
+/// If a word that is not at the end of the string goes beyond the limits of the
+/// rectangle, it is truncated without ellipses. Using this style will force the
+/// control's text to be on one line with no word wrap. Compare with
+/// SS_PATHELLIPSIS and SS_WORDELLIPSIS.
+const SS_ENDELLIPSIS = 0x00004000;
+
+/// Replaces characters in the middle of the string with ellipses so that the
+/// result fits in the specified rectangle.
+///
+/// If the string contains backslash (\) characters, SS_PATHELLIPSIS preserves
+/// as much as possible of the text after the last backslash. Using this style
+/// will force the control's text to be on one line with no word wrap.
+const SS_PATHELLIPSIS = 0x00008000;
+
+/// Truncates any word that does not fit in the rectangle and adds ellipses.
+/// Using this style will force the control s text to be on one line with no
+/// word wrap.
+const SS_WORDELLIPSIS = 0x0000C000;
+
+/// Mask for text ellipsis styles.
+const SS_ELLIPSISMASK = 0x0000C000;
+
+// -----------------------------------------------------------------------------
 // Pen Styles
 // -----------------------------------------------------------------------------
 
