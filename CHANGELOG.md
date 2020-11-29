@@ -1,3 +1,12 @@
+## 2.0.0-nullsafety.7
+
+- Documented more constants and callbacks
+- Add AnimateWindow, ChildWindowFromPoint, ChildWindowFromPointEx,
+  EnumChildWindows, LogicalToPhysicalPoint, OpenIcon, PhysicalToLogicalPoint,
+  PostThreadMessage, ReplyMessage, SetForegroundWindow, SoundSentry, WaitMessage
+  user32 APIs
+- Add CreateHatchBrush gdi32 API
+
 ## 2.0.0-nullsafety.6
 
 - Add GetDpiForWindow, GetSystemMetricsForDpi, GetWindowRect, IsZoomed,

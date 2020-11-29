@@ -588,33 +588,6 @@ const VK_ICO_00 = 0xE4;
 const VK_PROCESSKEY = 0xE5;
 const VK_ICO_CLEAR = 0xE6;
 const VK_PACKET = 0xE7;
-const CF_TEXT = 1;
-const CF_BITMAP = 2;
-const CF_METAFILEPICT = 3;
-const CF_SYLK = 4;
-const CF_DIF = 5;
-const CF_TIFF = 6;
-const CF_OEMTEXT = 7;
-const CF_DIB = 8;
-const CF_PALETTE = 9;
-const CF_PENDATA = 10;
-const CF_RIFF = 11;
-const CF_WAVE = 12;
-const CF_UNICODETEXT = 13;
-const CF_ENHMETAFILE = 14;
-const CF_HDROP = 15;
-const CF_LOCALE = 16;
-const CF_DIBV5 = 17;
-const CF_MAX = 18;
-const CF_OWNERDISPLAY = 0x0080;
-const CF_DSPTEXT = 0x0081;
-const CF_DSPBITMAP = 0x0082;
-const CF_DSPMETAFILEPICT = 0x0083;
-const CF_DSPENHMETAFILE = 0x008E;
-const CF_PRIVATEFIRST = 0x0200;
-const CF_PRIVATELAST = 0x02FF;
-const CF_GDIOBJFIRST = 0x0300;
-const CF_GDIOBJLAST = 0x03FF;
 
 // Input types
 const INPUT_MOUSE = 0;
@@ -1106,11 +1079,8 @@ const ICC_LINK_CLASS = 0x00008000;
 // In the Windows header files, these are defined in the following format:
 //   #define TD_WARNING_ICON         MAKEINTRESOURCEW(-1)
 final TD_WARNING_ICON = Pointer<Utf16>.fromAddress(0xFFFF);
-
 final TD_ERROR_ICON = Pointer<Utf16>.fromAddress(0xFFFE);
-
 final TD_INFORMATION_ICON = Pointer<Utf16>.fromAddress(0xFFFD);
-
 final TD_SHIELD_ICON = Pointer<Utf16>.fromAddress(0xFFFC);
 
 /// {@category Enum}
@@ -1963,19 +1933,6 @@ const MCIERR_NO_IDENTITY = MCIERR_BASE + 94;
 const MCIERR_CUSTOM_DRIVER_BASE = MCIERR_BASE + 256;
 const MIDI_MAPPER = -1;
 
-/* Brush Styles */
-const BS_SOLID = 0;
-const BS_NULL = 1;
-const BS_HOLLOW = BS_NULL;
-const BS_HATCHED = 2;
-const BS_PATTERN = 3;
-const BS_INDEXED = 4;
-const BS_DIBPATTERN = 5;
-const BS_DIBPATTERNPT = 6;
-const BS_PATTERN8X8 = 7;
-const BS_DIBPATTERN8X8 = 8;
-const BS_MONOPATTERN = 9;
-
 const DS_ABSALIGN = 0x01;
 const DS_SYSMODAL = 0x02;
 const DS_LOCALEDIT = 0x20;
@@ -2024,8 +1981,6 @@ const SS_ENDELLIPSIS = 0x00004000;
 const SS_PATHELLIPSIS = 0x00008000;
 const SS_WORDELLIPSIS = 0x0000C000;
 const SS_ELLIPSISMASK = 0x0000C000;
-
-const WM_USER = 0x0400;
 
 const PBS_SMOOTH = 0x01;
 const PBS_VERTICAL = 0x04;

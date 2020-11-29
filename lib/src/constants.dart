@@ -1430,6 +1430,10 @@ const WM_PALETTECHANGED = 0x0311;
 /// with the thread that registered the hot key.
 const WM_HOTKEY = 0x0312;
 
+/// Used to define private messages for use by private window classes, usually
+/// in the form WM_USER+x, where x is an integer value.
+const WM_USER = 0x0400;
+
 // -----------------------------------------------------------------------------
 // Queue status flags
 // -----------------------------------------------------------------------------
@@ -2190,6 +2194,43 @@ const SWP_DEFERERASE = 0x2000;
 const SWP_ASYNCWINDOWPOS = 0x4000;
 
 // -----------------------------------------------------------------------------
+// Animate Window constants
+// -----------------------------------------------------------------------------
+
+/// Animates the window from left to right. This flag can be used with roll or
+/// slide animation.
+const AW_HOR_POSITIVE = 0x00000001;
+
+/// Animates the window from right to left. This flag can be used with roll or
+/// slide animation
+const AW_HOR_NEGATIVE = 0x00000002;
+
+/// Animates the window from top to bottom. This flag can be used with roll or
+/// slide animation.
+const AW_VER_POSITIVE = 0x00000004;
+
+/// Animates the window from bottom to top. This flag can be used with roll or
+/// slide animation.
+const AW_VER_NEGATIVE = 0x00000008;
+
+/// Makes the window appear to collapse inward if AW_HIDE is used or expand
+/// outward if the AW_HIDE is not used. The various direction flags have no
+/// effect.
+const AW_CENTER = 0x00000010;
+
+/// Hides the window. By default, the window is shown.
+const AW_HIDE = 0x00010000;
+
+/// Activates the window.
+const AW_ACTIVATE = 0x00020000;
+
+/// Uses slide animation. By default, roll animation is used.
+const AW_SLIDE = 0x00040000;
+
+/// Uses a fade effect.
+const AW_BLEND = 0x00080000;
+
+// -----------------------------------------------------------------------------
 // System Command messages
 // -----------------------------------------------------------------------------
 
@@ -2630,6 +2671,114 @@ const SM_CONVERTIBLESLATEMODE = 0x2003;
 /// Reflects the state of the docking mode, 0 for Undocked Mode and non-zero
 /// otherwise.
 const SM_SYSTEMDOCKED = 0x2004;
+
+// -----------------------------------------------------------------------------
+// Clipboard Format constants
+// -----------------------------------------------------------------------------
+
+/// Text format. Each line ends with a carriage return/linefeed (CR-LF)
+/// combination. A null character signals the end of the data. Use this format
+/// for ANSI text.
+const CF_TEXT = 1;
+
+/// A handle to a bitmap (HBITMAP).
+const CF_BITMAP = 2;
+
+/// Handle to a metafile picture format as defined by the METAFILEPICT
+/// structure. When passing a CF_METAFILEPICT handle by means of DDE, the
+/// application responsible for deleting hMem should also free the metafile
+/// referred to by the CF_METAFILEPICT handle.
+const CF_METAFILEPICT = 3;
+
+/// Microsoft Symbolic Link (SYLK) format.
+const CF_SYLK = 4;
+
+/// Software Arts' Data Interchange Format.
+const CF_DIF = 5;
+
+// Tagged-image file format.
+const CF_TIFF = 6;
+
+/// Text format containing characters in the OEM character set. Each line ends
+/// with a carriage return/linefeed (CR-LF) combination. A null character
+/// signals the end of the data.
+const CF_OEMTEXT = 7;
+
+/// A memory object containing a BITMAPINFO structure followed by the bitmap
+/// bits.
+const CF_DIB = 8;
+
+/// Handle to a color palette. Whenever an application places data in the
+/// clipboard that depends on or assumes a color palette, it should place the
+/// palette on the clipboard as well.
+const CF_PALETTE = 9;
+
+/// Data for the pen extensions to the Microsoft Windows for Pen Computing.
+const CF_PENDATA = 10;
+
+/// Represents audio data more complex than can be represented in a CF_WAVE
+/// standard wave format.
+const CF_RIFF = 11;
+
+/// Represents audio data in one of the standard wave formats, such as 11 kHz or
+/// 22 kHz PCM.
+const CF_WAVE = 12;
+
+/// Unicode text format. Each line ends with a carriage return/linefeed (CR-LF)
+/// combination. A null character signals the end of the data.
+const CF_UNICODETEXT = 13;
+
+/// A handle to an enhanced metafile (HENHMETAFILE).
+const CF_ENHMETAFILE = 14;
+
+/// A handle to type HDROP that identifies a list of files. An application can
+/// retrieve information about the files by passing the handle to the
+/// DragQueryFile function.
+const CF_HDROP = 15;
+
+/// The data is a handle (HGLOBAL) to the locale identifier (LCID) associated
+/// with text in the clipboard. When you close the clipboard, if it contains
+/// CF_TEXT data but no CF_LOCALE data, the system automatically sets the
+/// CF_LOCALE format to the current input language. You can use the CF_LOCALE
+/// format to associate a different locale with the clipboard text.
+const CF_LOCALE = 16;
+
+/// A memory object containing a BITMAPV5HEADER structure followed by the bitmap
+/// color space information and the bitmap bits.
+const CF_DIBV5 = 17;
+
+/// Owner-display format. The clipboard owner must display and update the
+/// clipboard viewer window, and receive the WM_ASKCBFORMATNAME,
+/// WM_HSCROLLCLIPBOARD, WM_PAINTCLIPBOARD, WM_SIZECLIPBOARD, and
+/// WM_VSCROLLCLIPBOARD messages.
+const CF_OWNERDISPLAY = 0x0080;
+
+/// Text display format associated with a private format.
+const CF_DSPTEXT = 0x0081;
+
+/// Bitmap display format associated with a private format.
+const CF_DSPBITMAP = 0x0082;
+
+/// Metafile-picture display format associated with a private format.
+const CF_DSPMETAFILEPICT = 0x0083;
+
+/// Enhanced metafile display format associated with a private format.
+const CF_DSPENHMETAFILE = 0x008E;
+
+/// Start of a range of integer values for private clipboard formats. The range
+/// ends with CF_PRIVATELAST.
+const CF_PRIVATEFIRST = 0x0200;
+
+/// End of a range of integer values for private clipboard formats.
+const CF_PRIVATELAST = 0x02FF;
+
+/// Start of a range of integer values for application-defined GDI object
+/// clipboard formats. The range ends with CF_GDIOBJLAST.
+const CF_GDIOBJFIRST = 0x0300;
+
+/// End of a range of integer values for application-defined GDI object
+/// clipboard formats.
+const CF_GDIOBJLAST = 0x03FF;
 
 // -----------------------------------------------------------------------------
 // Edit Control constants
@@ -3478,6 +3627,7 @@ const MF_HILITE = 0x00000080;
 // -----------------------------------------------------------------------------
 // Pen Styles
 // -----------------------------------------------------------------------------
+
 /// The pen is solid.
 const PS_SOLID = 0;
 
@@ -3545,6 +3695,37 @@ const PS_GEOMETRIC = 0x00010000;
 
 /// Mask for pen types.
 const PS_TYPE_MASK = 0x000F0000;
+
+// -----------------------------------------------------------------------------
+// Brush Styles
+// -----------------------------------------------------------------------------
+
+/// Solid brush.
+const BS_SOLID = 0;
+
+/// Hollow brush.
+const BS_NULL = 1;
+
+/// Hollow brush.
+const BS_HOLLOW = BS_NULL;
+
+/// Hatched brush.
+const BS_HATCHED = 2;
+
+/// Pattern brush defined by a memory bitmap.
+const BS_PATTERN = 3;
+
+/// A pattern brush defined by a device-independent bitmap (DIB) specification.
+const BS_DIBPATTERN = 5;
+
+/// A pattern brush defined by a device-independent bitmap (DIB) specification.
+const BS_DIBPATTERNPT = 6;
+
+/// Pattern brush defined by a memory bitmap.
+const BS_PATTERN8X8 = 7;
+
+/// A pattern brush defined by a device-independent bitmap (DIB) specification.
+const BS_DIBPATTERN8X8 = 8;
 
 // -----------------------------------------------------------------------------
 // Hatch Styles

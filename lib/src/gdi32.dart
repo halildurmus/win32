@@ -34,6 +34,23 @@ int CreateFontIndirect(Pointer<LOGFONT> lplf) {
   return _CreateFontIndirect(lplf);
 }
 
+/// The CreateHatchBrush function creates a logical brush that has the
+/// specified hatch pattern and color.
+///
+/// ```c
+/// HBRUSH CreateHatchBrush(
+///   int      iHatch,
+///   COLORREF color
+/// );
+/// ```
+/// {@category gdi32}
+int CreateHatchBrush(int iHatch, int color) {
+  final _CreateHatchBrush = _gdi32.lookupFunction<
+      IntPtr Function(Int32 iHatch, Int32 color),
+      int Function(int iHatch, int color)>('CreateHatchBrush');
+  return _CreateHatchBrush(iHatch, color);
+}
+
 /// The CreatePen function creates a logical pen that has the specified
 /// style, width, and color. The pen can subsequently be selected into a
 /// device context and used to draw lines and curves.

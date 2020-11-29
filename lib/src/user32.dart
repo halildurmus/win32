@@ -17,6 +17,25 @@ import 'structs.dart';
 
 final _user32 = DynamicLibrary.open('user32.dll');
 
+/// Enables you to produce special effects when showing or hiding windows.
+/// There are four types of animation: roll, slide, collapse or expand, and
+/// alpha-blended fade.
+///
+/// ```c
+/// BOOL AnimateWindow(
+///   HWND  hWnd,
+///   DWORD dwTime,
+///   DWORD dwFlags
+/// );
+/// ```
+/// {@category user32}
+int AnimateWindow(int hWnd, int dwTime, int dwFlags) {
+  final _AnimateWindow = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Uint32 dwTime, Uint32 dwFlags),
+      int Function(int hWnd, int dwTime, int dwFlags)>('AnimateWindow');
+  return _AnimateWindow(hWnd, dwTime, dwFlags);
+}
+
 /// Appends a new item to the end of the specified menu bar, drop-down
 /// menu, submenu, or shortcut menu. You can use this function to specify
 /// the content, appearance, and behavior of the menu item.
@@ -72,6 +91,46 @@ int BringWindowToTop(int hWnd) {
   final _BringWindowToTop = _user32.lookupFunction<Int32 Function(IntPtr hWnd),
       int Function(int hWnd)>('BringWindowToTop');
   return _BringWindowToTop(hWnd);
+}
+
+/// Determines which, if any, of the child windows belonging to a parent
+/// window contains the specified point. The search is restricted to
+/// immediate child windows. Grandchildren, and deeper descendant windows
+/// are not searched.
+///
+/// ```c
+/// HWND ChildWindowFromPoint(
+///   HWND  hWndParent,
+///   POINT Point
+/// );
+/// ```
+/// {@category user32}
+int ChildWindowFromPoint(int hWndParent, int Point) {
+  final _ChildWindowFromPoint = _user32.lookupFunction<
+      IntPtr Function(IntPtr hWndParent, Int64 Point),
+      int Function(int hWndParent, int Point)>('ChildWindowFromPoint');
+  return _ChildWindowFromPoint(hWndParent, Point);
+}
+
+/// Determines which, if any, of the child windows belonging to the
+/// specified parent window contains the specified point. The function can
+/// ignore invisible, disabled, and transparent child windows.
+/// Grandchildren and deeper descendants are not searched.
+///
+/// ```c
+/// HWND ChildWindowFromPoint(
+///   HWND  hWndParent,
+///   POINT Point
+///   UINT  flags
+/// );
+/// ```
+/// {@category user32}
+int ChildWindowFromPointEx(int hWndParent, int Point, int flags) {
+  final _ChildWindowFromPointEx = _user32.lookupFunction<
+      IntPtr Function(IntPtr hWndParent, Int64 Point, Uint32 flags),
+      int Function(
+          int hWndParent, int Point, int flags)>('ChildWindowFromPointEx');
+  return _ChildWindowFromPointEx(hWndParent, Point, flags);
 }
 
 /// Confines the cursor to a rectangular area on the screen. If a
@@ -436,6 +495,30 @@ int EndPaint(int hWnd, Pointer<PAINTSTRUCT> lpPaint) {
       Int32 Function(IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint),
       int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint)>('EndPaint');
   return _EndPaint(hWnd, lpPaint);
+}
+
+/// Enumerates the child windows that belong to the specified parent window
+/// by passing the handle to each child window, in turn, to an
+/// application-defined callback function. EnumChildWindows continues until
+/// the last child window is enumerated or the callback function returns
+/// FALSE.
+///
+/// ```c
+/// BOOL EnumChildWindows(
+///   HWND        hWndParent,
+///   WNDENUMPROC lpEnumFunc,
+///   LPARAM      lParam
+/// );
+/// ```
+/// {@category user32}
+int EnumChildWindows(
+    int hWndParent, Pointer<NativeFunction> lpEnumFunc, int lParam) {
+  final _EnumChildWindows = _user32.lookupFunction<
+      Int32 Function(
+          IntPtr hWndParent, Pointer<NativeFunction> lpEnumFunc, IntPtr lParam),
+      int Function(int hWndParent, Pointer<NativeFunction> lpEnumFunc,
+          int lParam)>('EnumChildWindows');
+  return _EnumChildWindows(hWndParent, lpEnumFunc, lParam);
 }
 
 /// The EnumDisplayMonitors function enumerates display monitors (including
@@ -1155,6 +1238,23 @@ int LockWorkStation() {
   return _LockWorkStation();
 }
 
+/// Converts the logical coordinates of a point in a window to physical
+/// coordinates.
+///
+/// ```c
+/// BOOL LogicalToPhysicalPoint(
+///   HWND    hWnd,
+///   LPPOINT lpPoint
+/// );
+/// ```
+/// {@category user32}
+int LogicalToPhysicalPoint(int hWnd, Pointer<POINT> lpPoint) {
+  final _LogicalToPhysicalPoint = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
+      int Function(int hWnd, Pointer<POINT> lpPoint)>('LogicalToPhysicalPoint');
+  return _LogicalToPhysicalPoint(hWnd, lpPoint);
+}
+
 /// Converts the specified dialog box units to screen units (pixels). The
 /// function replaces the coordinates in the specified RECT structure with
 /// the converted coordinates, which allows the structure to be used to
@@ -1283,6 +1383,21 @@ int MsgWaitForMultipleObjects(int nCount, Pointer<IntPtr> pHandles,
       nCount, pHandles, fWaitAll, dwMilliseconds, dwWakeMask);
 }
 
+/// Restores a minimized (iconic) window to its previous size and position;
+/// it then activates the window.
+///
+/// ```c
+/// BOOL OpenIcon(
+///   HWND hWnd
+/// );
+/// ```
+/// {@category user32}
+int OpenIcon(int hWnd) {
+  final _OpenIcon = _user32.lookupFunction<Int32 Function(IntPtr hWnd),
+      int Function(int hWnd)>('OpenIcon');
+  return _OpenIcon(hWnd);
+}
+
 /// Dispatches incoming sent messages, checks the thread message queue for
 /// a posted message, and retrieves the message (if any exist).
 ///
@@ -1306,6 +1421,23 @@ int PeekMessage(Pointer<MSG> lpMsg, int hWnd, int wMsgFilterMin,
   return _PeekMessage(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax, wRemoveMsg);
 }
 
+/// Converts the physical coordinates of a point in a window to logical
+/// coordinates.
+///
+/// ```c
+/// BOOL PhysicalToLogicalPoint(
+///   HWND    hWnd,
+///   LPPOINT lpPoint
+/// );
+/// ```
+/// {@category user32}
+int PhysicalToLogicalPoint(int hWnd, Pointer<POINT> lpPoint) {
+  final _PhysicalToLogicalPoint = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
+      int Function(int hWnd, Pointer<POINT> lpPoint)>('PhysicalToLogicalPoint');
+  return _PhysicalToLogicalPoint(hWnd, lpPoint);
+}
+
 /// Places (posts) a message in the message queue associated with the
 /// thread that created the specified window and returns without waiting
 /// for the thread to process the message.
@@ -1324,6 +1456,26 @@ int PostMessage(int hWnd, int Msg, int wParam, int lParam) {
       Int32 Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
       int Function(int hWnd, int Msg, int wParam, int lParam)>('PostMessageW');
   return _PostMessage(hWnd, Msg, wParam, lParam);
+}
+
+/// Posts a message to the message queue of the specified thread. It
+/// returns without waiting for the thread to process the message.
+///
+/// ```c
+/// BOOL PostThreadMessageW(
+///   DWORD  idThread,
+///   UINT   Msg,
+///   WPARAM wParam,
+///   LPARAM lParam
+/// );
+/// ```
+/// {@category user32}
+int PostThreadMessage(int idThread, int Msg, int wParam, int lParam) {
+  final _PostThreadMessage = _user32.lookupFunction<
+      Int32 Function(Uint32 idThread, Uint32 Msg, IntPtr wParam, IntPtr lParam),
+      int Function(
+          int idThread, int Msg, int wParam, int lParam)>('PostThreadMessageW');
+  return _PostThreadMessage(idThread, Msg, wParam, lParam);
 }
 
 /// Indicates to the system that a thread has made a request to terminate
@@ -1392,6 +1544,21 @@ int ReleaseDC(int hWnd, int hDC) {
       Int32 Function(IntPtr hWnd, IntPtr hDC),
       int Function(int hWnd, int hDC)>('ReleaseDC');
   return _ReleaseDC(hWnd, hDC);
+}
+
+/// Replies to a message sent from another thread by the SendMessage
+/// function.
+///
+/// ```c
+/// BOOL ReplyMessage(
+///   LRESULT lResult
+/// );
+/// ```
+/// {@category user32}
+int ReplyMessage(int lResult) {
+  final _ReplyMessage = _user32.lookupFunction<Int32 Function(IntPtr lResult),
+      int Function(int lResult)>('ReplyMessage');
+  return _ReplyMessage(lResult);
 }
 
 /// The ScrollWindow function scrolls the contents of the specified
@@ -1547,6 +1714,25 @@ int SetFocus(int hWnd) {
   final _SetFocus = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
       int Function(int hWnd)>('SetFocus');
   return _SetFocus(hWnd);
+}
+
+/// Brings the thread that created the specified window into the foreground
+/// and activates the window. Keyboard input is directed to the window, and
+/// various visual cues are changed for the user. The system assigns a
+/// slightly higher priority to the thread that created the foreground
+/// window than it does to other threads.
+///
+/// ```c
+/// BOOL SetForegroundWindow(
+///   HWND hWnd
+/// );
+/// ```
+/// {@category user32}
+int SetForegroundWindow(int hWnd) {
+  final _SetForegroundWindow = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd),
+      int Function(int hWnd)>('SetForegroundWindow');
+  return _SetForegroundWindow(hWnd);
 }
 
 /// Sets information for a specified menu.
@@ -1769,6 +1955,18 @@ int ShowWindowAsync(int hWnd, int nCmdShow) {
   return _ShowWindowAsync(hWnd, nCmdShow);
 }
 
+/// Triggers a visual signal to indicate that a sound is playing.
+///
+/// ```c
+/// BOOL SoundSentry();
+/// ```
+/// {@category user32}
+int SoundSentry() {
+  final _SoundSentry =
+      _user32.lookupFunction<Int32 Function(), int Function()>('SoundSentry');
+  return _SoundSentry();
+}
+
 /// Retrieves or sets the value of one of the system-wide parameters. This
 /// function can also update the user profile while setting a parameter.
 ///
@@ -1847,6 +2045,21 @@ int UpdateWindow(int hWnd) {
   final _UpdateWindow = _user32.lookupFunction<Int32 Function(IntPtr hWnd),
       int Function(int hWnd)>('UpdateWindow');
   return _UpdateWindow(hWnd);
+}
+
+/// Yields control to other threads when a thread has no other messages in
+/// its message queue. The WaitMessage function suspends the thread and
+/// does not return until a new message is placed in the thread's message
+/// queue.
+///
+/// ```c
+/// BOOL WaitMessage();
+/// ```
+/// {@category user32}
+int WaitMessage() {
+  final _WaitMessage =
+      _user32.lookupFunction<Int32 Function(), int Function()>('WaitMessage');
+  return _WaitMessage();
 }
 
 /// Retrieves a handle to the window that contains the specified physical
