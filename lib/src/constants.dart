@@ -4139,7 +4139,9 @@ const ENABLE_LVB_GRID_WORLDWIDE = 0x0010;
 /// popped from the stack.
 const DEACTIVATE_ACTCTX_FLAG_FORCE_EARLY_DEACTIVATION = 1;
 
-// *** COM CONSTANTS ***
+// -----------------------------------------------------------------------------
+// COM Constants
+// -----------------------------------------------------------------------------
 
 /// Operation successful
 const S_OK = 0;
@@ -4186,18 +4188,6 @@ final E_ACCESSDENIED = 0x80070005.toSigned(32);
 
 /// The data necessary to complete this operation is not yet available.
 final E_PENDING = 0x8000000A.toSigned(32);
-
-/// The BLUETOOTH_AUTHENTICATION_METHOD enumeration defines the supported
-/// authentication types during device pairing.
-///
-/// {@category Enum}
-class BLUETOOTH_AUTHENTICATION_METHOD {
-  static const BLUETOOTH_AUTHENTICATION_METHOD_LEGACY = 0;
-  static const BLUETOOTH_AUTHENTICATION_METHOD_OOB = 1;
-  static const BLUETOOTH_AUTHENTICATION_METHOD_NUMERIC_COMPARISON = 2;
-  static const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY_NOTIFICATION = 3;
-  static const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY = 4;
-}
 
 /// Specifies the variant types.
 ///
@@ -4257,6 +4247,106 @@ class VARENUM {
   static const VT_TYPEMASK = 0xff;
 }
 
+// -----------------------------------------------------------------------------
+/// Monitor Configuration constants & enumerations
+// -----------------------------------------------------------------------------
+
+/// If the point is not contained within any display monitor, return NULL.
+const MONITOR_DEFAULTTONULL = 0x00000000;
+
+/// If the point is not contained within any display monitor, return a handle to
+/// the primary display monitor.
+const MONITOR_DEFAULTTOPRIMARY = 0x00000001;
+
+/// If the point is not contained within any display monitor, return a handle to
+/// the display monitor that is nearest to the point.
+const MONITOR_DEFAULTTONEAREST = 0x00000002;
+
+/// This is the primary display monitor.
+const MONITORINFOF_PRIMARY = 0x00000001;
+
+/// Describes a monitor's color temperature.
+///
+/// {@category Enum}
+class MC_COLOR_TEMPERATURE {
+  static const MC_COLOR_TEMPERATURE_UNKNOWN = 0;
+  static const MC_COLOR_TEMPERATURE_4000K = 1;
+  static const MC_COLOR_TEMPERATURE_5000K = 2;
+  static const MC_COLOR_TEMPERATURE_6500K = 3;
+  static const MC_COLOR_TEMPERATURE_7500K = 4;
+  static const MC_COLOR_TEMPERATURE_8200K = 5;
+  static const MC_COLOR_TEMPERATURE_9300K = 6;
+  static const MC_COLOR_TEMPERATURE_10000K = 7;
+  static const MC_COLOR_TEMPERATURE_11500K = 8;
+}
+
+/// Identifies monitor display technologies.
+///
+////// {@category Enum}
+class MC_DISPLAY_TECHNOLOGY_TYPE {
+  static const MC_SHADOW_MASK_CATHODE_RAY_TUBE = 0;
+  static const MC_APERTURE_GRILL_CATHODE_RAY_TUBE = 1;
+  static const MC_THIN_FILM_TRANSISTOR = 2;
+  static const MC_LIQUID_CRYSTAL_ON_SILICON = 3;
+  static const MC_PLASMA = 4;
+  static const MC_ORGANIC_LIGHT_EMITTING_DIODE = 5;
+  static const MC_ELECTROLUMINESCENT = 6;
+  static const MC_MICROELECTROMECHANICAL = 7;
+  static const MC_FIELD_EMISSION_DEVICE = 8;
+}
+
+/// Specifies whether to set or get a monitor's red, green, or blue drive.
+///
+////// {@category Enum}
+class MC_DRIVE_TYPE {
+  static const MC_RED_DRIVE = 0;
+  static const MC_GREEN_DRIVE = 1;
+  static const MC_BLUE_DRIVE = 2;
+}
+
+/// Specifies whether to get or set a monitor's red, green, or blue gain.
+///
+/// {@category Enum}
+class MC_GAIN_TYPE {
+  static const MC_RED_GAIN = 0;
+  static const MC_GREEN_GAIN = 1;
+  static const MC_BLUE_GAIN = 2;
+}
+
+/// Specifies whether to get or set the vertical or horizontal position of a
+/// monitor's display area.
+///
+/// {@category Enum}
+class MC_POSITION_TYPE {
+  static const MC_HORIZONTAL_POSITION = 0;
+  static const MC_VERTICAL_POSITION = 1;
+}
+
+/// Specifies whether to get or set the width or height of a monitor's display
+/// area.
+///
+/// {@category Enum}
+class MC_SIZE_TYPE {
+  static const MC_WIDTH = 0;
+  static const MC_HEIGHT = 1;
+}
+
+// -----------------------------------------------------------------------------
+/// Bluetooth constants & enumerations
+// -----------------------------------------------------------------------------
+
+/// The BLUETOOTH_AUTHENTICATION_METHOD enumeration defines the supported
+/// authentication types during device pairing.
+///
+/// {@category Enum}
+class BLUETOOTH_AUTHENTICATION_METHOD {
+  static const BLUETOOTH_AUTHENTICATION_METHOD_LEGACY = 0;
+  static const BLUETOOTH_AUTHENTICATION_METHOD_OOB = 1;
+  static const BLUETOOTH_AUTHENTICATION_METHOD_NUMERIC_COMPARISON = 2;
+  static const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY_NOTIFICATION = 3;
+  static const BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY = 4;
+}
+
 /// The BLUETOOTH_AUTHENTICATION_REQUIREMENTS enumeration specifies the 'Man in
 /// the Middle' protection required for authentication.
 ///
@@ -4282,6 +4372,10 @@ class BLUETOOTH_IO_CAPABILITY {
   static const BLUETOOTH_IO_CAPABILITY_NOINPUTNOOUTPUT = 3;
   static const BLUETOOTH_IO_CAPABILITY_UNDEFINED = 4;
 }
+
+// -----------------------------------------------------------------------------
+/// Common dialog constants & enumerations
+// -----------------------------------------------------------------------------
 
 /// Defines the set of options available to an Open or Save dialog.
 ///
@@ -4310,6 +4404,68 @@ class FILEOPENDIALOGOPTIONS {
   static const FOS_DEFAULTNOMINIMODE = 0x20000000;
   static const FOS_FORCEPREVIEWPANEON = 0x40000000;
   static const FOS_SUPPORTSTREAMABLEITEMS = 0x80000000;
+}
+
+// -----------------------------------------------------------------------------
+// Desktop shell constants & enumerations
+// -----------------------------------------------------------------------------
+
+/// Desktop wallpaper slideshow settings for shuffling images.
+///
+/// {@category Enum}
+class DESKTOP_SLIDESHOW_OPTIONS {
+  /// Shuffle is enabled; the images are shown in a random order.
+  static const DSO_SHUFFLEIMAGES = 0x1;
+}
+
+/// Gets the current status of the slideshow.
+///
+/// {@category Enum}
+class DESKTOP_SLIDESHOW_STATE {
+  /// Slideshows are enabled.
+  static const DSS_ENABLED = 0x1;
+
+  /// A slideshow is currently configured.
+  static const DSS_SLIDESHOW = 0x2;
+
+  /// A remote session has temporarily disabled the slideshow.
+  static const DSS_DISABLED_BY_REMOTE_SESSION = 0x4;
+}
+
+/// The direction that the slideshow should advance.
+///
+/// {@category Enum}
+class DESKTOP_SLIDESHOW_DIRECTION {
+  /// Advance the slideshow forward.
+  static const DSD_FORWARD = 0;
+
+  /// Advance the slideshow backward.
+  static const DSD_BACKWARD = 1;
+}
+
+/// Specifies how the desktop wallpaper should be displayed.
+///
+/// {@category Enum}
+class DESKTOP_WALLPAPER_POSITION {
+  /// Center the image; do not stretch.
+  static const DWPOS_CENTER = 0;
+
+  /// Tile the image across all monitors.
+  static const DWPOS_TILE = 1;
+
+  /// Stretch the image to exactly fit on the monitor.
+  static const DWPOS_STRETCH = 2;
+
+  /// Stretch the image to exactly the height or width of the monitor without
+  /// changing its aspect ratio or cropping the image.
+  static const DWPOS_FIT = 3;
+
+  /// Stretch the image to fill the screen, cropping the image as necessary to
+  /// avoid letterbox bars.
+  static const DWPOS_FILL = 4;
+
+  /// Spans a single image across all monitors attached to the system.
+  static const DWPOS_SPAN = 5;
 }
 
 // -----------------------------------------------------------------------------

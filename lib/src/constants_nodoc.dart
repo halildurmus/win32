@@ -4,11 +4,13 @@
 
 // Standard constants exposed by the Win32 API.
 
-// *** NOTE: This file contains constants that are not undocumented, mostly
-// because they are self-documenting. This file (only) is excluded from dartdoc
-// in `dartdoc_options.yaml`. By keeping undocumented constants in a separate
-// file, we save ourselves the need to add the /// @nodoc modifier to every
-// single constant in this file.
+// *** NOTE: This file contains constants that we have chosen not to document,
+// mostly because their function is obvious, or because they are documented in
+// the public Microsoft Windows documentation online.
+//
+// This file (only) is excluded from dartdoc in `dartdoc_options.yaml`. By
+// keeping non-documented constants in a separate file, we save ourselves the
+// need to add the /// @nodoc modifier to every single constant in this file.
 
 // Contributors are invited and encouraged to submit comments for these
 // constants from the open source Microsoft documentation, such as
@@ -862,10 +864,7 @@ const BACKGROUND_INTENSITY = 0x0080;
 // -----------------------------------------------------------------------------
 // Monitor APIs
 // -----------------------------------------------------------------------------
-const MONITOR_DEFAULTTONULL = 0x00000000;
-const MONITOR_DEFAULTTOPRIMARY = 0x00000001;
-const MONITOR_DEFAULTTONEAREST = 0x00000002;
-const MONITORINFOF_PRIMARY = 0x00000001;
+
 const MC_CAPS_NONE = 0x00000000;
 const MC_CAPS_MONITOR_TECHNOLOGY_TYPE = 0x00000001;
 const MC_CAPS_BRIGHTNESS = 0x00000002;
@@ -888,58 +887,6 @@ const MC_SUPPORTED_COLOR_TEMPERATURE_8200K = 0x00000010;
 const MC_SUPPORTED_COLOR_TEMPERATURE_9300K = 0x00000020;
 const MC_SUPPORTED_COLOR_TEMPERATURE_10000K = 0x00000040;
 const MC_SUPPORTED_COLOR_TEMPERATURE_11500K = 0x00000080;
-
-/// {@category Enum}
-class MC_COLOR_TEMPERATURE {
-  static const MC_COLOR_TEMPERATURE_UNKNOWN = 0;
-  static const MC_COLOR_TEMPERATURE_4000K = 1;
-  static const MC_COLOR_TEMPERATURE_5000K = 2;
-  static const MC_COLOR_TEMPERATURE_6500K = 3;
-  static const MC_COLOR_TEMPERATURE_7500K = 4;
-  static const MC_COLOR_TEMPERATURE_8200K = 5;
-  static const MC_COLOR_TEMPERATURE_9300K = 6;
-  static const MC_COLOR_TEMPERATURE_10000K = 7;
-  static const MC_COLOR_TEMPERATURE_11500K = 8;
-}
-
-/// {@category Enum}
-class MC_DISPLAY_TECHNOLOGY_TYPE {
-  static const MC_SHADOW_MASK_CATHODE_RAY_TUBE = 0;
-  static const MC_APERTURE_GRILL_CATHODE_RAY_TUBE = 1;
-  static const MC_THIN_FILM_TRANSISTOR = 2;
-  static const MC_LIQUID_CRYSTAL_ON_SILICON = 3;
-  static const MC_PLASMA = 4;
-  static const MC_ORGANIC_LIGHT_EMITTING_DIODE = 5;
-  static const MC_ELECTROLUMINESCENT = 6;
-  static const MC_MICROELECTROMECHANICAL = 7;
-  static const MC_FIELD_EMISSION_DEVICE = 8;
-}
-
-/// {@category Enum}
-class MC_DRIVE_TYPE {
-  static const MC_RED_DRIVE = 0;
-  static const MC_GREEN_DRIVE = 1;
-  static const MC_BLUE_DRIVE = 2;
-}
-
-/// {@category Enum}
-class MC_GAIN_TYPE {
-  static const MC_RED_GAIN = 0;
-  static const MC_GREEN_GAIN = 1;
-  static const MC_BLUE_GAIN = 2;
-}
-
-/// {@category Enum}
-class MC_POSITION_TYPE {
-  static const MC_HORIZONTAL_POSITION = 0;
-  static const MC_VERTICAL_POSITION = 1;
-}
-
-/// {@category Enum}
-class MC_SIZE_TYPE {
-  static const MC_WIDTH = 0;
-  static const MC_HEIGHT = 1;
-}
 // *** COM CONSTANTS ***
 
 final CO_E_NOTINITIALIZED = 0x800401F0.toSigned(32);
@@ -1306,6 +1253,8 @@ const PROCESSOR_ARCHITECTURE_ARM64 = 12;
 const PROCESSOR_ARCHITECTURE_ARM32_ON_WIN64 = 13;
 const PROCESSOR_ARCHITECTURE_IA32_ON_ARM64 = 14;
 const PROCESSOR_ARCHITECTURE_UNKNOWN = 0xFFFF;
+
+// DISPID constants
 const DISPID_UNKNOWN = -1;
 const DISPID_VALUE = 0;
 const DISPID_PROPERTYPUT = -3;
@@ -1314,6 +1263,8 @@ const DISPID_EVALUATE = -5;
 const DISPID_CONSTRUCTOR = -6;
 const DISPID_DESTRUCTOR = -7;
 const DISPID_COLLECT = -8;
+
+// Bluetooth constants
 const BLUETOOTH_MAX_NAME_SIZE = 248;
 const BLUETOOTH_MAX_PASSKEY_SIZE = 16;
 const BLUETOOTH_MAX_PASSKEY_BUFFER_SIZE = BLUETOOTH_MAX_PASSKEY_SIZE + 1;
@@ -1551,34 +1502,6 @@ class WBEM_GENERIC_FLAG_TYPE {
 class WBEM_TIMEOUT_TYPE {
   static const WBEM_NO_WAIT = 0;
   static const WBEM_INFINITE = 0xffffffff;
-}
-
-/// {@category Enum}
-class DESKTOP_SLIDESHOW_OPTIONS {
-  static const DSO_SHUFFLEIMAGES = 0x1;
-}
-
-/// {@category Enum}
-class DESKTOP_SLIDESHOW_STATE {
-  static const DSS_ENABLED = 0x1;
-  static const DSS_SLIDESHOW = 0x2;
-  static const DSS_DISABLED_BY_REMOTE_SESSION = 0x4;
-}
-
-/// {@category Enum}
-class DESKTOP_SLIDESHOW_DIRECTION {
-  static const DSD_FORWARD = 0;
-  static const DSD_BACKWARD = 1;
-}
-
-/// {@category Enum}
-class DESKTOP_WALLPAPER_POSITION {
-  static const DWPOS_CENTER = 0;
-  static const DWPOS_TILE = 1;
-  static const DWPOS_STRETCH = 2;
-  static const DWPOS_FIT = 3;
-  static const DWPOS_FILL = 4;
-  static const DWPOS_SPAN = 5;
 }
 
 /// {@category Enum}
