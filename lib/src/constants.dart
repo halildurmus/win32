@@ -2126,6 +2126,512 @@ const MM_ISOTROPIC = 7;
 const MM_ANISOTROPIC = 8;
 
 // -----------------------------------------------------------------------------
+// SetWindowPos flags
+// -----------------------------------------------------------------------------
+
+/// Retains the current size (ignores the cx and cy parameters).
+const SWP_NOSIZE = 0x0001;
+
+/// Retains the current position (ignores X and Y parameters).
+const SWP_NOMOVE = 0x0002;
+
+/// Retains the current Z order (ignores the hWndInsertAfter parameter).
+const SWP_NOZORDER = 0x0004;
+
+/// Does not redraw changes. If this flag is set, no repainting of any kind
+/// occurs. This applies to the client area, the nonclient area (including the
+/// title bar and scroll bars), and any part of the parent window uncovered as a
+/// result of the window being moved. When this flag is set, the application
+/// must explicitly invalidate or redraw any parts of the window and parent
+/// window that need redrawing.
+const SWP_NOREDRAW = 0x0008;
+
+/// Does not activate the window. If this flag is not set, the window is
+/// activated and moved to the top of either the topmost or non-topmost group
+/// (depending on the setting of the hWndInsertAfter parameter).
+const SWP_NOACTIVATE = 0x0010;
+
+/// Applies new frame styles set using the SetWindowLong function. Sends a
+/// WM_NCCALCSIZE message to the window, even if the window's size is not being
+/// changed. If this flag is not specified, WM_NCCALCSIZE is sent only when the
+/// window's size is being changed.
+const SWP_FRAMECHANGED = 0x0020;
+
+/// Displays the window.
+const SWP_SHOWWINDOW = 0x0040;
+
+/// Hides the window.
+const SWP_HIDEWINDOW = 0x0080;
+
+/// Discards the entire contents of the client area. If this flag is not
+/// specified, the valid contents of the client area are saved and copied back
+/// into the client area after the window is sized or repositioned.
+const SWP_NOCOPYBITS = 0x0100;
+
+/// Does not change the owner window's position in the Z order.
+const SWP_NOOWNERZORDER = 0x0200;
+
+/// Prevents the window from receiving the WM_WINDOWPOSCHANGING message.
+const SWP_NOSENDCHANGING = 0x0400;
+
+/// Draws a frame (defined in the window's class description) around the window.
+const SWP_DRAWFRAME = SWP_FRAMECHANGED;
+
+/// Same as the SWP_NOOWNERZORDER flag.
+const SWP_NOREPOSITION = SWP_NOOWNERZORDER;
+
+/// Prevents generation of the WM_SYNCPAINT message.
+const SWP_DEFERERASE = 0x2000;
+
+/// If the calling thread and the thread that owns the window are attached to
+/// different input queues, the system posts the request to the thread that owns
+/// the window. This prevents the calling thread from blocking its execution
+/// while other threads process the request.
+const SWP_ASYNCWINDOWPOS = 0x4000;
+
+// -----------------------------------------------------------------------------
+// System Command messages
+// -----------------------------------------------------------------------------
+
+/// Sizes the window.
+const SC_SIZE = 0xF000;
+
+/// Moves the window.
+const SC_MOVE = 0xF010;
+
+/// Minimizes the window.
+const SC_MINIMIZE = 0xF020;
+
+/// Maximizes the window.
+const SC_MAXIMIZE = 0xF030;
+
+/// Moves to the next window.
+const SC_NEXTWINDOW = 0xF040;
+
+/// Moves to the previous window.
+const SC_PREVWINDOW = 0xF050;
+
+/// Closes the window.
+const SC_CLOSE = 0xF060;
+
+/// Scrolls vertically.
+const SC_VSCROLL = 0xF070;
+
+/// Scrolls horizontally.
+const SC_HSCROLL = 0xF080;
+
+/// Retrieves the window menu as a result of a mouse click.
+const SC_MOUSEMENU = 0xF090;
+
+/// Retrieves the window menu as a result of a keystroke.
+const SC_KEYMENU = 0xF100;
+
+/// Restores the window to its normal position and size.
+const SC_RESTORE = 0xF120;
+
+/// Activates the Start menu.
+const SC_TASKLIST = 0xF130;
+
+/// Executes the screen saver application.
+const SC_SCREENSAVE = 0xF140;
+
+/// Activates the window associated with the application-specified hot key. The
+/// lParam parameter identifies the window to activate.
+const SC_HOTKEY = 0xF150;
+
+/// Selects the default item; the user double-clicked the window menu.
+const SC_DEFAULT = 0xF160;
+
+/// Sets the state of the display. This command supports devices that have
+/// power-saving features, such as a battery-powered personal computer.
+const SC_MONITORPOWER = 0xF170;
+
+/// Changes the cursor to a question mark with a pointer. If the user then
+/// clicks a control in the dialog box, the control receives a WM_HELP message.
+const SC_CONTEXTHELP = 0xF180;
+
+/// Indicates whether the screen saver is secure.
+const SCF_ISSECURE = 0x00000001;
+
+// -----------------------------------------------------------------------------
+// System Metrics constants
+// -----------------------------------------------------------------------------
+
+/// The width of the screen of the primary display monitor, in pixels.
+const SM_CXSCREEN = 0;
+
+/// The height of the screen of the primary display monitor, in pixels.
+const SM_CYSCREEN = 1;
+
+/// The width of a vertical scroll bar, in pixels.
+const SM_CXVSCROLL = 2;
+
+/// The height of a horizontal scroll bar, in pixels.
+const SM_CYHSCROLL = 3;
+
+/// The height of a caption area, in pixels.
+const SM_CYCAPTION = 4;
+
+/// The width of a window border, in pixels.
+const SM_CXBORDER = 5;
+
+/// The height of a window border, in pixels.
+const SM_CYBORDER = 6;
+
+/// This value is the same as SM_CXFIXEDFRAME.
+const SM_CXDLGFRAME = 7;
+
+/// This value is the same as SM_CYFIXEDFRAME.
+const SM_CYDLGFRAME = 8;
+
+/// The height of the thumb box in a vertical scroll bar, in pixels.
+const SM_CYVTHUMB = 9;
+
+/// The width of the thumb box in a horizontal scroll bar, in pixels.
+const SM_CXHTHUMB = 10;
+
+/// The default width of an icon, in pixels.
+const SM_CXICON = 11;
+
+/// The default height of an icon, in pixels.
+const SM_CYICON = 12;
+
+/// The width of a cursor, in pixels.
+const SM_CXCURSOR = 13;
+
+/// The height of a cursor, in pixels.
+const SM_CYCURSOR = 14;
+
+/// The height of a single-line menu bar, in pixels.
+const SM_CYMENU = 15;
+
+/// The width of the client area for a full-screen window on the primary display
+/// monitor, in pixels.
+const SM_CXFULLSCREEN = 16;
+
+/// The height of the client area for a full-screen window on the primary
+/// display monitor, in pixels.
+const SM_CYFULLSCREEN = 17;
+
+/// For double byte character set versions of the system, this is the height of
+/// the Kanji window at the bottom of the screen, in pixels.
+const SM_CYKANJIWINDOW = 18;
+
+/// Nonzero if a mouse is installed; otherwise, 0. This value is rarely zero,
+/// because of support for virtual mice and because some systems detect the
+/// presence of the port instead of the presence of a mouse.
+const SM_MOUSEPRESENT = 19;
+
+/// The height of the arrow bitmap on a vertical scroll bar, in pixels.
+const SM_CYVSCROLL = 20;
+
+/// The width of the arrow bitmap on a horizontal scroll bar, in pixels.
+const SM_CXHSCROLL = 21;
+
+/// Nonzero if the debug version of User.exe is installed; otherwise, 0.
+const SM_DEBUG = 22;
+
+/// Nonzero if the meanings of the left and right mouse buttons are swapped;
+/// otherwise, 0.
+const SM_SWAPBUTTON = 23;
+
+/// The minimum width of a window, in pixels.
+const SM_CXMIN = 28;
+
+/// The minimum height of a window, in pixels.
+const SM_CYMIN = 29;
+
+/// The width of a button in a window caption or title bar, in pixels.
+const SM_CXSIZE = 30;
+
+/// The height of a button in a window caption or title bar, in pixels.
+const SM_CYSIZE = 31;
+
+/// This value is the same as SM_CXSIZEFRAME.
+const SM_CXFRAME = 32;
+
+/// This value is the same as SM_CYSIZEFRAME.
+const SM_CYFRAME = 33;
+
+/// The minimum tracking width of a window, in pixels. The user cannot drag the
+/// window frame to a size smaller than these dimensions.
+const SM_CXMINTRACK = 34;
+
+/// The minimum tracking height of a window, in pixels. The user cannot drag the
+/// window frame to a size smaller than these dimensions.
+const SM_CYMINTRACK = 35;
+
+/// The width of the rectangle around the location of a first click in a
+/// double-click sequence, in pixels. The second click must occur within the
+/// rectangle that is defined by SM_CXDOUBLECLK and SM_CYDOUBLECLK for the
+/// system to consider the two clicks a double-click.
+const SM_CXDOUBLECLK = 36;
+
+/// The height of the rectangle around the location of a first click in a
+/// double-click sequence, in pixels. The second click must occur within the
+/// rectangle defined by SM_CXDOUBLECLK and SM_CYDOUBLECLK for the system to
+/// consider the two clicks a double-click. The two clicks must also occur
+/// within a specified time.
+const SM_CYDOUBLECLK = 37;
+
+/// The width of a grid cell for items in large icon view, in pixels. Each item
+/// fits into a rectangle of size SM_CXICONSPACING by SM_CYICONSPACING when
+/// arranged. This value is always greater than or equal to SM_CXICON.
+const SM_CXICONSPACING = 38;
+
+/// The height of a grid cell for items in large icon view, in pixels. Each item
+/// fits into a rectangle of size SM_CXICONSPACING by SM_CYICONSPACING when
+/// arranged. This value is always greater than or equal to SM_CYICON.
+const SM_CYICONSPACING = 39;
+
+/// Nonzero if drop-down menus are right-aligned with the corresponding menu-bar
+/// item; 0 if the menus are left-aligned.
+const SM_MENUDROPALIGNMENT = 40;
+
+/// Nonzero if the Microsoft Windows for Pen computing extensions are installed;
+/// zero otherwise.
+const SM_PENWINDOWS = 41;
+
+/// Nonzero if User32.dll supports DBCS; otherwise, 0.
+const SM_DBCSENABLED = 42;
+
+/// The number of buttons on a mouse, or zero if no mouse is installed.
+const SM_CMOUSEBUTTONS = 43;
+
+/// The thickness of the frame around the perimeter of a window that has a
+/// caption but is not sizable, in pixels. SM_CXFIXEDFRAME is the height of the
+/// horizontal border, and SM_CYFIXEDFRAME is the width of the vertical border.
+const SM_CXFIXEDFRAME = SM_CXDLGFRAME;
+
+/// The thickness of the frame around the perimeter of a window that has a
+/// caption but is not sizable, in pixels. SM_CXFIXEDFRAME is the height of the
+/// horizontal border, and SM_CYFIXEDFRAME is the width of the vertical border.
+const SM_CYFIXEDFRAME = SM_CYDLGFRAME;
+
+/// The thickness of the sizing border around the perimeter of a window that can
+/// be resized, in pixels. SM_CXSIZEFRAME is the width of the horizontal border,
+/// and SM_CYSIZEFRAME is the height of the vertical border.
+const SM_CXSIZEFRAME = SM_CXFRAME;
+
+/// The thickness of the sizing border around the perimeter of a window that can
+/// be resized, in pixels. SM_CXSIZEFRAME is the width of the horizontal border,
+/// and SM_CYSIZEFRAME is the height of the vertical border.
+const SM_CYSIZEFRAME = SM_CYFRAME;
+
+/// This system metric should be ignored; it always returns 0.
+const SM_SECURE = 44;
+
+/// The width of a 3-D border, in pixels.
+const SM_CXEDGE = 45;
+
+/// The height of a 3-D border, in pixels.
+const SM_CYEDGE = 46;
+
+/// The width of a grid cell for a minimized window, in pixels. Each minimized
+/// window fits into a rectangle this size when arranged. This value is always
+/// greater than or equal to SM_CXMINIMIZED.
+const SM_CXMINSPACING = 47;
+
+/// The height of a grid cell for a minimized window, in pixels. Each minimized
+/// window fits into a rectangle this size when arranged. This value is always
+/// greater than or equal to SM_CYMINIMIZED.
+const SM_CYMINSPACING = 48;
+
+/// The recommended width of a small icon, in pixels. Small icons typically
+/// appear in window captions and in small icon view.
+const SM_CXSMICON = 49;
+
+/// The recommended height of a small icon, in pixels. Small icons typically
+/// appear in window captions and in small icon view.
+const SM_CYSMICON = 50;
+
+/// The height of a small caption, in pixels.
+const SM_CYSMCAPTION = 51;
+
+/// The width of small caption buttons, in pixels.
+const SM_CXSMSIZE = 52;
+
+/// The height of small caption buttons, in pixels.
+const SM_CYSMSIZE = 53;
+
+/// The width of menu bar buttons, such as the child window close button that is
+/// used in the multiple document interface, in pixels.
+const SM_CXMENUSIZE = 54;
+
+/// The height of menu bar buttons, such as the child window close button that
+/// is used in the multiple document interface, in pixels.
+const SM_CYMENUSIZE = 55;
+
+/// The flags that specify how the system arranged minimized windows.
+const SM_ARRANGE = 56;
+
+/// The width of a minimized window, in pixels.
+const SM_CXMINIMIZED = 57;
+
+/// The height of a minimized window, in pixels.
+const SM_CYMINIMIZED = 58;
+
+/// The default maximum width of a window that has a caption and sizing borders,
+/// in pixels. This metric refers to the entire desktop. The user cannot drag
+/// the window frame to a size larger than these dimensions.
+const SM_CXMAXTRACK = 59;
+
+/// The default maximum height of a window that has a caption and sizing
+/// borders, in pixels. This metric refers to the entire desktop. The user
+/// cannot drag the window frame to a size larger than these dimensions.
+const SM_CYMAXTRACK = 60;
+
+/// The default width, in pixels, of a maximized top-level window on the primary
+/// display monitor.
+const SM_CXMAXIMIZED = 61;
+
+/// The default height, in pixels, of a maximized top-level window on the
+/// primary display monitor.
+const SM_CYMAXIMIZED = 62;
+
+/// The least significant bit is set if a network is present; otherwise, it is
+/// cleared.
+const SM_NETWORK = 63;
+
+/// The value that specifies how the system is started.
+const SM_CLEANBOOT = 67;
+
+/// The number of pixels on either side of a mouse-down point that the mouse
+/// pointer can move before a drag operation begins. This allows the user to
+/// click and release the mouse button easily without unintentionally starting a
+/// drag operation. If this value is negative, it is subtracted from the left of
+/// the mouse-down point and added to the right of it.
+const SM_CXDRAG = 68;
+
+/// The number of pixels above and below a mouse-down point that the mouse
+/// pointer can move before a drag operation begins. This allows the user to
+/// click and release the mouse button easily without unintentionally starting a
+/// drag operation. If this value is negative, it is subtracted from above the
+/// mouse-down point and added below it.
+const SM_CYDRAG = 69;
+
+/// Nonzero if the user requires an application to present information visually
+/// in situations where it would otherwise present the information only in
+/// audible form; otherwise, 0.
+const SM_SHOWSOUNDS = 70;
+
+/// The width of the default menu check-mark bitmap, in pixels.
+const SM_CXMENUCHECK = 71;
+
+/// The height of the default menu check-mark bitmap, in pixels.
+const SM_CYMENUCHECK = 72;
+
+/// Nonzero if the computer has a low-end (slow) processor; otherwise, 0.
+const SM_SLOWMACHINE = 73;
+
+/// Nonzero if the system is enabled for Hebrew and Arabic languages, 0 if not.
+const SM_MIDEASTENABLED = 74;
+
+/// Nonzero if a mouse with a vertical scroll wheel is installed; otherwise 0.
+const SM_MOUSEWHEELPRESENT = 75;
+
+/// The coordinates for the left side of the virtual screen. The virtual screen
+/// is the bounding rectangle of all display monitors. The SM_CXVIRTUALSCREEN
+/// metric is the width of the virtual screen.
+const SM_XVIRTUALSCREEN = 76;
+
+/// The coordinates for the top of the virtual screen. The virtual screen is the
+/// bounding rectangle of all display monitors. The SM_CYVIRTUALSCREEN metric is
+/// the height of the virtual screen.
+const SM_YVIRTUALSCREEN = 77;
+
+/// The width of the virtual screen, in pixels. The virtual screen is the
+/// bounding rectangle of all display monitors. The SM_XVIRTUALSCREEN metric is
+/// the coordinates for the left side of the virtual screen.
+const SM_CXVIRTUALSCREEN = 78;
+
+/// The height of the virtual screen, in pixels. The virtual screen is the
+/// bounding rectangle of all display monitors. The SM_YVIRTUALSCREEN metric is
+/// the coordinates for the top of the virtual screen.
+const SM_CYVIRTUALSCREEN = 79;
+
+/// The number of display monitors on a desktop.
+const SM_CMONITORS = 80;
+
+/// Nonzero if all the display monitors have the same color format, otherwise,
+/// 0. Two displays can have the same bit depth, but different color formats.
+/// For example, the red, green, and blue pixels can be encoded with different
+/// numbers of bits, or those bits can be located in different places in a pixel
+/// color value.
+const SM_SAMEDISPLAYFORMAT = 81;
+
+/// Nonzero if Input Method Manager/Input Method Editor features are enabled;
+/// otherwise, 0.
+const SM_IMMENABLED = 82;
+
+/// The width of the left and right edges of the focus rectangle that the
+/// DrawFocusRect draws. This value is in pixels.
+const SM_CXFOCUSBORDER = 83;
+
+/// The height of the top and bottom edges of the focus rectangle drawn by
+/// DrawFocusRect. This value is in pixels.
+const SM_CYFOCUSBORDER = 84;
+
+/// Nonzero if the current operating system is the Windows XP Tablet PC edition
+/// or if the current operating system is Windows Vista or Windows 7 and the
+/// Tablet PC Input service is started; otherwise, 0.
+const SM_TABLETPC = 86;
+
+/// Nonzero if the current operating system is the Windows XP, Media Center
+/// Edition, 0 if not.
+const SM_MEDIACENTER = 87;
+
+/// Nonzero if the current operating system is Windows 7 Starter Edition,
+/// Windows Vista Starter, or Windows XP Starter Edition; otherwise, 0.
+const SM_STARTER = 88;
+
+/// The build number if the system is Windows Server 2003 R2; otherwise, 0.
+const SM_SERVERR2 = 89;
+
+/// Nonzero if a mouse with a horizontal scroll wheel is installed; otherwise 0.
+const SM_MOUSEHORIZONTALWHEELPRESENT = 91;
+
+/// The amount of border padding for captioned windows, in pixels.
+const SM_CXPADDEDBORDER = 92;
+
+/// Nonzero if the current operating system is Windows 7 or Windows Server 2008
+/// R2 and the Tablet PC Input service is started; otherwise, 0. The return
+/// value is a bitmask that specifies the type of digitizer input supported by
+/// the device.
+const SM_DIGITIZER = 94;
+
+/// Nonzero if there are digitizers in the system; otherwise, 0.
+/// SM_MAXIMUMTOUCHES returns the aggregate maximum of the maximum number of
+/// contacts supported by every digitizer in the system. If the system has only
+/// single-touch digitizers, the return value is 1. If the system has
+/// multi-touch digitizers, the return value is the number of simultaneous
+/// contacts the hardware can provide.
+const SM_MAXIMUMTOUCHES = 95;
+
+/// This system metric is used in a Terminal Services environment. If the
+/// calling process is associated with a Terminal Services client session, the
+/// return value is nonzero. If the calling process is associated with the
+/// Terminal Services console session, the return value is 0
+const SM_REMOTESESSION = 0x1000;
+
+/// Nonzero if the current session is shutting down; otherwise, 0.
+const SM_SHUTTINGDOWN = 0x2000;
+
+/// This system metric is used in a Terminal Services environment to determine
+/// if the current Terminal Server session is being remotely controlled. Its
+/// value is nonzero if the current session is remotely controlled; otherwise,
+/// 0.
+const SM_REMOTECONTROL = 0x2001;
+
+/// Reflects the state of the laptop or slate mode, 0 for Slate Mode and
+/// non-zero otherwise.
+const SM_CONVERTIBLESLATEMODE = 0x2003;
+
+/// Reflects the state of the docking mode, 0 for Undocked Mode and non-zero
+/// otherwise.
+const SM_SYSTEMDOCKED = 0x2004;
+
+// -----------------------------------------------------------------------------
 // Edit Control constants
 // -----------------------------------------------------------------------------
 
