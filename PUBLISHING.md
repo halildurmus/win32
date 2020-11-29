@@ -24,7 +24,8 @@ Rough notes on steps I take to publish a new version of win32:
 
 6. Update `README.md` as appropriate with any changed examples.
 
-7. If ready, run `git tag v1.2.3` to tag the release.
+7. If ready, run `git tag v1.2.3` (with the appropriate version number) to tag
+   the release.
 
 8. Run `git push` and `git push --tags` to push both the release and the tag to
    GitHub.
