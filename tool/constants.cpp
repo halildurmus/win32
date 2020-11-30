@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2020 the Dart project authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style
+ * license that can be found in the LICENSE file.
+ */
+
 // constants.cpp
 
 // Development utility to confirm the width of various Win32 objects.
