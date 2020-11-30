@@ -46,7 +46,7 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.markdownlint": true
     },
-    "copyrightInserter.holder": "Dart project authors",
+    "dart.analysisExcludedFolders": ["example/explorer"],
     "copyrightInserter.license": "bsd",
     "copyrightInserter.year": "2020",
 }
