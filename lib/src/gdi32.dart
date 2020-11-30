@@ -17,6 +17,144 @@ import 'structs.dart';
 
 final _gdi32 = DynamicLibrary.open('gdi32.dll');
 
+/// The AngleArc function draws a line segment and an arc. The line segment
+/// is drawn from the current position to the beginning of the arc. The arc
+/// is drawn along the perimeter of a circle with the given radius and
+/// center. The length of the arc is defined by the given start and sweep
+/// angles.
+///
+/// ```c
+/// BOOL AngleArc(
+///   HDC   hdc,
+///   int   x,
+///   int   y,
+///   DWORD r,
+///   FLOAT StartAngle,
+///   FLOAT SweepAngle
+/// );
+/// ```
+/// {@category gdi32}
+int AngleArc(
+    int hdc, int x, int y, int r, double StartAngle, double SweepAngle) {
+  final _AngleArc = _gdi32.lookupFunction<
+      Int32 Function(IntPtr hdc, Int32 x, Int32 y, Uint32 r, Float StartAngle,
+          Float SweepAngle),
+      int Function(int hdc, int x, int y, int r, double StartAngle,
+          double SweepAngle)>('AngleArc');
+  return _AngleArc(hdc, x, y, r, StartAngle, SweepAngle);
+}
+
+/// The Arc function draws an elliptical arc.
+///
+/// ```c
+/// BOOL Arc(
+///   HDC hdc,
+///   int x1,
+///   int y1,
+///   int x2,
+///   int y2,
+///   int x3,
+///   int y3,
+///   int x4,
+///   int y4
+/// );
+/// ```
+/// {@category gdi32}
+int Arc(
+    int hdc, int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
+  final _Arc = _gdi32.lookupFunction<
+      Int32 Function(IntPtr hdc, Int32 x1, Int32 y1, Int32 x2, Int32 y2,
+          Int32 x3, Int32 y3, Int32 x4, Int32 y4),
+      int Function(int hdc, int x1, int y1, int x2, int y2, int x3, int y3,
+          int x4, int y4)>('Arc');
+  return _Arc(hdc, x1, y1, x2, y2, x3, y3, x4, y4);
+}
+
+/// The ArcTo function draws an elliptical arc.
+///
+/// ```c
+/// BOOL ArcTo(
+///   HDC hdc,
+///   int left,
+///   int top,
+///   int right,
+///   int bottom,
+///   int xr1,
+///   int yr1,
+///   int xr2,
+///   int yr2
+/// );
+/// ```
+/// {@category gdi32}
+int ArcTo(int hdc, int left, int top, int right, int bottom, int xr1, int yr1,
+    int xr2, int yr2) {
+  final _ArcTo = _gdi32.lookupFunction<
+      Int32 Function(IntPtr hdc, Int32 left, Int32 top, Int32 right,
+          Int32 bottom, Int32 xr1, Int32 yr1, Int32 xr2, Int32 yr2),
+      int Function(int hdc, int left, int top, int right, int bottom, int xr1,
+          int yr1, int xr2, int yr2)>('ArcTo');
+  return _ArcTo(hdc, left, top, right, bottom, xr1, yr1, xr2, yr2);
+}
+
+/// The BeginPath function opens a path bracket in the specified device
+/// context.
+///
+/// ```c
+/// BOOL BeginPath(
+///   HDC hdc
+/// );
+/// ```
+/// {@category gdi32}
+int BeginPath(int hdc) {
+  final _BeginPath =
+      _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+          'BeginPath');
+  return _BeginPath(hdc);
+}
+
+/// The Chord function draws a chord (a region bounded by the intersection
+/// of an ellipse and a line segment, called a secant). The chord is
+/// outlined by using the current pen and filled by using the current
+/// brush.
+///
+/// ```c
+/// BOOL Chord(
+///   HDC hdc,
+///   int x1,
+///   int y1,
+///   int x2,
+///   int y2,
+///   int x3,
+///   int y3,
+///   int x4,
+///   int y4
+/// );
+/// ```
+/// {@category gdi32}
+int Chord(
+    int hdc, int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
+  final _Chord = _gdi32.lookupFunction<
+      Int32 Function(IntPtr hdc, Int32 x1, Int32 y1, Int32 x2, Int32 y2,
+          Int32 x3, Int32 y3, Int32 x4, Int32 y4),
+      int Function(int hdc, int x1, int y1, int x2, int y2, int x3, int y3,
+          int x4, int y4)>('Chord');
+  return _Chord(hdc, x1, y1, x2, y2, x3, y3, x4, y4);
+}
+
+/// The CloseFigure function closes an open figure in a path.
+///
+/// ```c
+/// BOOL CloseFigure(
+///   HDC hdc);
+/// ```
+/// {@category gdi32}
+int CloseFigure(int hdc) {
+  final _CloseFigure =
+      _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+          'CloseFigure');
+  return _CloseFigure(hdc);
+}
+
 /// The CreateFontIndirect function creates a logical font that has the
 /// specified characteristics. The font can subsequently be selected as the
 /// current font for any device context.
@@ -103,6 +241,45 @@ int DeleteObject(int ho) {
   return _DeleteObject(ho);
 }
 
+/// The Ellipse function draws an ellipse. The center of the ellipse is the
+/// center of the specified bounding rectangle. The ellipse is outlined by
+/// using the current pen and is filled by using the current brush.
+///
+/// ```c
+/// BOOL Ellipse(
+///   HDC hdc,
+///   int left,
+///   int top,
+///   int right,
+///   int bottom
+/// );
+/// ```
+/// {@category gdi32}
+int Ellipse(int hdc, int left, int top, int right, int bottom) {
+  final _Ellipse = _gdi32.lookupFunction<
+      Int32 Function(
+          IntPtr hdc, Int32 left, Int32 top, Int32 right, Int32 bottom),
+      int Function(
+          int hdc, int left, int top, int right, int bottom)>('Ellipse');
+  return _Ellipse(hdc, left, top, right, bottom);
+}
+
+/// The EndPath function closes a path bracket and selects the path defined
+/// by the bracket into the specified device context.
+///
+/// ```c
+/// BOOL EndPath(
+///   HDC hdc
+/// );
+/// ```
+/// {@category gdi32}
+int EndPath(int hdc) {
+  final _EndPath =
+      _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+          'EndPath');
+  return _EndPath(hdc);
+}
+
 /// The EnumFontFamiliesEx function enumerates all uniquely-named fonts in
 /// the system that match the font characteristics specified by the LOGFONT
 /// structure. EnumFontFamiliesEx enumerates fonts based on typeface name,
@@ -153,6 +330,40 @@ int ExtCreatePen(int iPenStyle, int cWidth, Pointer<LOGFONT> plBrush,
       int Function(int iPenStyle, int cWidth, Pointer<LOGFONT> plBrush,
           int cStyle, Pointer<Uint32> pStyle)>('ExtCreatePen');
   return _ExtCreatePen(iPenStyle, cWidth, plBrush, cStyle, pStyle);
+}
+
+/// The ExtTextOut function draws text using the currently selected font,
+/// background color, and text color. You can optionally provide dimensions
+/// to be used for clipping, opaquing, or both.
+///
+/// ```c
+/// BOOL ExtTextOutW(
+///   HDC        hdc,
+///   int        x,
+///   int        y,
+///   UINT       options,
+///   const RECT *lprect,
+///   LPCWSTR    lpString,
+///   UINT       c,
+///   const INT  *lpDx
+/// );
+/// ```
+/// {@category gdi32}
+int ExtTextOut(int hdc, int x, int y, int options, Pointer<RECT> lprect,
+    Pointer<Utf16> lpString, int c, Pointer<Int32> lpDx) {
+  final _ExtTextOut = _gdi32.lookupFunction<
+      Int32 Function(
+          IntPtr hdc,
+          Int32 x,
+          Int32 y,
+          Uint32 options,
+          Pointer<RECT> lprect,
+          Pointer<Utf16> lpString,
+          Uint32 c,
+          Pointer<Int32> lpDx),
+      int Function(int hdc, int x, int y, int options, Pointer<RECT> lprect,
+          Pointer<Utf16> lpString, int c, Pointer<Int32> lpDx)>('ExtTextOutW');
+  return _ExtTextOut(hdc, x, y, options, lprect, lpString, c, lpDx);
 }
 
 /// The GetObject function retrieves information for the specified graphics
@@ -243,6 +454,34 @@ int MoveToEx(int hdc, int x, int y, Pointer<POINT> lppt) {
   return _MoveToEx(hdc, x, y, lppt);
 }
 
+/// The Pie function draws a pie-shaped wedge bounded by the intersection
+/// of an ellipse and two radials. The pie is outlined by using the current
+/// pen and filled by using the current brush.
+///
+/// ```c
+/// BOOL Pie(
+///   HDC hdc,
+///   int left,
+///   int top,
+///   int right,
+///   int bottom,
+///   int xr1,
+///   int yr1,
+///   int xr2,
+///   int yr2
+/// );
+/// ```
+/// {@category gdi32}
+int Pie(int hdc, int left, int top, int right, int bottom, int xr1, int yr1,
+    int xr2, int yr2) {
+  final _Pie = _gdi32.lookupFunction<
+      Int32 Function(IntPtr hdc, Int32 left, Int32 top, Int32 right,
+          Int32 bottom, Int32 xr1, Int32 yr1, Int32 xr2, Int32 yr2),
+      int Function(int hdc, int left, int top, int right, int bottom, int xr1,
+          int yr1, int xr2, int yr2)>('Pie');
+  return _Pie(hdc, left, top, right, bottom, xr1, yr1, xr2, yr2);
+}
+
 /// The PolyBezier function draws one or more Bézier curves.
 ///
 /// ```c
@@ -258,6 +497,160 @@ int PolyBezier(int hdc, Pointer<POINT> apt, int cpt) {
       Int32 Function(IntPtr hdc, Pointer<POINT> apt, Uint32 cpt),
       int Function(int hdc, Pointer<POINT> apt, int cpt)>('PolyBezier');
   return _PolyBezier(hdc, apt, cpt);
+}
+
+/// The PolyBezierTo function draws one or more Bézier curves.
+///
+/// ```c
+/// BOOL PolyBezierTo(
+///   HDC         hdc,
+///   const POINT *apt,
+///   DWORD       cpt
+/// );
+/// ```
+/// {@category gdi32}
+int PolyBezierTo(int hdc, Pointer<POINT> apt, int cpt) {
+  final _PolyBezierTo = _gdi32.lookupFunction<
+      Int32 Function(IntPtr hdc, Pointer<POINT> apt, Uint32 cpt),
+      int Function(int hdc, Pointer<POINT> apt, int cpt)>('PolyBezierTo');
+  return _PolyBezierTo(hdc, apt, cpt);
+}
+
+/// The PolyDraw function draws a set of line segments and Bézier curves.
+///
+/// ```c
+/// BOOL PolyDraw(
+///   HDC         hdc,
+///   const POINT *apt,
+///   const BYTE  *aj,
+///   int         cpt
+/// );
+/// ```
+/// {@category gdi32}
+int PolyDraw(int hdc, Pointer<POINT> apt, Pointer<Uint8> aj, int cpt) {
+  final _PolyDraw = _gdi32.lookupFunction<
+      Int32 Function(
+          IntPtr hdc, Pointer<POINT> apt, Pointer<Uint8> aj, Int32 cpt),
+      int Function(
+          int hdc, Pointer<POINT> apt, Pointer<Uint8> aj, int cpt)>('PolyDraw');
+  return _PolyDraw(hdc, apt, aj, cpt);
+}
+
+/// The Polygon function draws a polygon consisting of two or more vertices
+/// connected by straight lines. The polygon is outlined by using the
+/// current pen and filled by using the current brush and polygon fill
+/// mode.
+///
+/// ```c
+/// BOOL Polygon(
+///   HDC         hdc,
+///   const POINT *apt,
+///   int         cpt
+/// );
+/// ```
+/// {@category gdi32}
+int Polygon(int hdc, Pointer<POINT> apt, int cpt) {
+  final _Polygon = _gdi32.lookupFunction<
+      Int32 Function(IntPtr hdc, Pointer<POINT> apt, Int32 cpt),
+      int Function(int hdc, Pointer<POINT> apt, int cpt)>('Polygon');
+  return _Polygon(hdc, apt, cpt);
+}
+
+/// The Polyline function draws a series of line segments by connecting the
+/// points in the specified array.
+///
+/// ```c
+/// BOOL Polyline(
+///   HDC         hdc,
+///   const POINT *apt,
+///   int         cpt
+/// );
+/// ```
+/// {@category gdi32}
+int Polyline(int hdc, Pointer<POINT> apt, int cpt) {
+  final _Polyline = _gdi32.lookupFunction<
+      Int32 Function(IntPtr hdc, Pointer<POINT> apt, Int32 cpt),
+      int Function(int hdc, Pointer<POINT> apt, int cpt)>('Polyline');
+  return _Polyline(hdc, apt, cpt);
+}
+
+/// The PolylineTo function draws one or more straight lines.
+///
+/// ```c
+/// BOOL PolylineTo(
+///   HDC         hdc,
+///   const POINT *apt,
+///   DWORD         cpt
+/// );
+/// ```
+/// {@category gdi32}
+int PolylineTo(int hdc, Pointer<POINT> apt, int cpt) {
+  final _PolylineTo = _gdi32.lookupFunction<
+      Int32 Function(IntPtr hdc, Pointer<POINT> apt, Uint32 cpt),
+      int Function(int hdc, Pointer<POINT> apt, int cpt)>('PolylineTo');
+  return _PolylineTo(hdc, apt, cpt);
+}
+
+/// The PolyPolygon function draws a series of closed polygons. Each
+/// polygon is outlined by using the current pen and filled by using the
+/// current brush and polygon fill mode. The polygons drawn by this
+/// function can overlap.
+///
+/// ```c
+/// BOOL PolyPolygon(
+///   HDC         hdc,
+///   const POINT *apt,
+///   const INT   *asz,
+///   int         csz
+/// );
+/// ```
+/// {@category gdi32}
+int PolyPolygon(int hdc, Pointer<POINT> apt, Pointer<Int32> asz, int csz) {
+  final _PolyPolygon = _gdi32.lookupFunction<
+      Int32 Function(
+          IntPtr hdc, Pointer<POINT> apt, Pointer<Int32> asz, Int32 csz),
+      int Function(int hdc, Pointer<POINT> apt, Pointer<Int32> asz,
+          int csz)>('PolyPolygon');
+  return _PolyPolygon(hdc, apt, asz, csz);
+}
+
+/// The PolyPolyline function draws multiple series of connected line
+/// segments.
+///
+/// ```c
+/// BOOL PolyPolyline(
+///   HDC         hdc,
+///   const POINT *apt,
+///   const DWORD *asz,
+///   DWORD       csz
+/// );
+/// ```
+/// {@category gdi32}
+int PolyPolyline(int hdc, Pointer<POINT> apt, Pointer<Int32> asz, int csz) {
+  final _PolyPolyline = _gdi32.lookupFunction<
+      Int32 Function(
+          IntPtr hdc, Pointer<POINT> apt, Pointer<Int32> asz, Uint32 csz),
+      int Function(int hdc, Pointer<POINT> apt, Pointer<Int32> asz,
+          int csz)>('PolyPolyline');
+  return _PolyPolyline(hdc, apt, asz, csz);
+}
+
+/// The PtInRegion function determines whether the specified point is
+/// inside the specified region.
+///
+/// ```c
+/// BOOL PtInRegion(
+///   HRGN hrgn,
+///   int  x,
+///   int  y
+/// );
+/// ```
+/// {@category gdi32}
+int PtInRegion(int hrgn, int x, int y) {
+  final _PtInRegion = _gdi32.lookupFunction<
+      Int32 Function(IntPtr hrgn, Int32 x, Int32 y),
+      int Function(int hrgn, int x, int y)>('PtInRegion');
+  return _PtInRegion(hrgn, x, y);
 }
 
 /// The Rectangle function draws a rectangle. The rectangle is outlined by
@@ -280,6 +673,49 @@ int Rectangle(int hdc, int left, int top, int right, int bottom) {
       int Function(
           int hdc, int left, int top, int right, int bottom)>('Rectangle');
   return _Rectangle(hdc, left, top, right, bottom);
+}
+
+/// The RectInRegion function determines whether any part of the specified
+/// rectangle is within the boundaries of a region.
+///
+/// ```c
+/// BOOL RectInRegion(
+///   HRGN       hrgn,
+///   const RECT *lprect
+/// );
+/// ```
+/// {@category gdi32}
+int RectInRegion(int hrgn, Pointer<RECT> lprect) {
+  final _RectInRegion = _gdi32.lookupFunction<
+      Int32 Function(IntPtr hrgn, Pointer<RECT> lprect),
+      int Function(int hrgn, Pointer<RECT> lprect)>('RectInRegion');
+  return _RectInRegion(hrgn, lprect);
+}
+
+/// The RoundRect function draws a rectangle with rounded corners. The
+/// rectangle is outlined by using the current pen and filled by using the
+/// current brush.
+///
+/// ```c
+/// BOOL RoundRect(
+///   HDC hdc,
+///   int left,
+///   int top,
+///   int right,
+///   int bottom,
+///   int width,
+///   int height
+/// );
+/// ```
+/// {@category gdi32}
+int RoundRect(
+    int hdc, int left, int top, int right, int bottom, int width, int height) {
+  final _RoundRect = _gdi32.lookupFunction<
+      Int32 Function(IntPtr hdc, Int32 left, Int32 top, Int32 right,
+          Int32 bottom, Int32 width, Int32 height),
+      int Function(int hdc, int left, int top, int right, int bottom, int width,
+          int height)>('RoundRect');
+  return _RoundRect(hdc, left, top, right, bottom, width, height);
 }
 
 /// The SaveDC function saves the current state of the specified device

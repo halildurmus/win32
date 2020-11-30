@@ -39,20 +39,19 @@ void loadCsv(String filename) {
       ..nativeReturn = fields[idx++]
       ..dartReturn = fields[idx++];
 
-    final numParams = int.parse(fields[idx++]);
-
-    for (var i = 0; i < numParams; i++) {
-      try {
+    try {
+      final numParams = int.parse(fields[idx++]);
+      for (var i = 0; i < numParams; i++) {
         final paramName = fields[idx++];
         final paramNativeType = fields[idx++];
         final paramDartType = fields[idx++];
 
         prototypes[apiName]!.dartParams[paramName] = paramDartType;
         prototypes[apiName]!.nativeParams[paramName] = paramNativeType;
-      } catch (e) {
-        print('Error processing $apiName');
-        rethrow;
       }
+    } catch (e) {
+      print('Error processing parameters for $apiName at index $idx.');
+      rethrow;
     }
 
     // last field is the comment

@@ -1,3 +1,9 @@
+## 2.0.0-nullsafety.8
+
+- Add AngleArc, Arc, ArcTo, BeginPath, Chord, CloseFigure, Ellipse, EndPath,
+  ExtTextOutW, Pie, PolyBezierTo, PolyDraw, Polygon, Polyline, PolylineTo,
+  PolyPolygon, PolyPolyline, PtInRegion, RectInRegion, RoundRect gdi32 APIs
+
 ## 2.0.0-nullsafety.7
 
 - Documented more constants and callbacks
