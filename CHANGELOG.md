@@ -1,8 +1,10 @@
 ## 2.0.0-nullsafety.8
 
-- Add AngleArc, Arc, ArcTo, BeginPath, Chord, CloseFigure, Ellipse, EndPath,
-  ExtTextOutW, Pie, PolyBezierTo, PolyDraw, Polygon, Polyline, PolylineTo,
-  PolyPolygon, PolyPolyline, PtInRegion, RectInRegion, RoundRect gdi32 APIs
+- Add AngleArc, Arc, ArcTo, BeginPath, Chord, CloseFigure,
+  CreateCompatibleBitmap, CreateCompatibleDC, Ellipse, EndPath, ExtTextOutW,
+  Pie, PolyBezierTo, PolyDraw, Polygon, Polyline, PolylineTo, PolyPolygon,
+  PolyPolyline, PtInRegion, RectInRegion, RoundRect, SetStretchBltMode,
+  StretchBlt gdi32 APIs
 
 ## 2.0.0-nullsafety.7
 

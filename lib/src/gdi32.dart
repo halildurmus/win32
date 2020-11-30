@@ -155,6 +155,40 @@ int CloseFigure(int hdc) {
   return _CloseFigure(hdc);
 }
 
+/// The CreateCompatibleBitmap function creates a bitmap compatible with
+/// the device that is associated with the specified device context.
+///
+/// ```c
+/// HBITMAP CreateCompatibleBitmap(
+///   HDC hdc,
+///   int cx,
+///   int cy
+/// );
+/// ```
+/// {@category gdi32}
+int CreateCompatibleBitmap(int hdc, int cx, int cy) {
+  final _CreateCompatibleBitmap = _gdi32.lookupFunction<
+      IntPtr Function(IntPtr hdc, Int32 cx, Int32 cy),
+      int Function(int hdc, int cx, int cy)>('CreateCompatibleBitmap');
+  return _CreateCompatibleBitmap(hdc, cx, cy);
+}
+
+/// The CreateCompatibleDC function creates a memory device context (DC)
+/// compatible with the specified device.
+///
+/// ```c
+/// HDC CreateCompatibleDC(
+///   HDC hdc
+/// );
+/// ```
+/// {@category gdi32}
+int CreateCompatibleDC(int hdc) {
+  final _CreateCompatibleDC =
+      _gdi32.lookupFunction<IntPtr Function(IntPtr hdc), int Function(int hdc)>(
+          'CreateCompatibleDC');
+  return _CreateCompatibleDC(hdc);
+}
+
 /// The CreateFontIndirect function creates a logical font that has the
 /// specified characteristics. The font can subsequently be selected as the
 /// current font for any device context.
@@ -828,6 +862,23 @@ int SetPixel(int hdc, int x, int y, int color) {
   return _SetPixel(hdc, x, y, color);
 }
 
+/// The SetStretchBltMode function sets the bitmap stretching mode in the
+/// specified device context.
+///
+/// ```c
+/// int SetStretchBltMode(
+///   HDC hdc,
+///   int mode
+/// );
+/// ```
+/// {@category gdi32}
+int SetStretchBltMode(int hdc, int mode) {
+  final _SetStretchBltMode = _gdi32.lookupFunction<
+      Int32 Function(IntPtr hdc, Int32 mode),
+      int Function(int hdc, int mode)>('SetStretchBltMode');
+  return _SetStretchBltMode(hdc, mode);
+}
+
 /// The SetTextColor function sets the text color for the specified device
 /// context to the specified color.
 ///
@@ -903,6 +954,59 @@ int SetWindowExtEx(int hdc, int x, int y, Pointer<SIZE> lpsz) {
       int Function(
           int hdc, int x, int y, Pointer<SIZE> lpsz)>('SetWindowExtEx');
   return _SetWindowExtEx(hdc, x, y, lpsz);
+}
+
+/// The StretchBlt function copies a bitmap from a source rectangle into a
+/// destination rectangle, stretching or compressing the bitmap to fit the
+/// dimensions of the destination rectangle, if necessary. The system
+/// stretches or compresses the bitmap according to the stretching mode
+/// currently set in the destination device context.
+///
+/// ```c
+/// BOOL StretchBlt(
+///   HDC   hdcDest,
+///   int   xDest,
+///   int   yDest,
+///   int   wDest,
+///   int   hDest,
+///   HDC   hdcSrc,
+///   int   xSrc,
+///   int   ySrc,
+///   int   wSrc,
+///   int   hSrc,
+///   DWORD rop
+/// );
+/// ```
+/// {@category gdi32}
+int StretchBlt(int hdcDest, int xDest, int yDest, int wDest, int hDest,
+    int hdcSrc, int xSrc, int ySrc, int wSrc, int hSrc, int rop) {
+  final _StretchBlt = _gdi32.lookupFunction<
+      Int32 Function(
+          IntPtr hdcDest,
+          Int32 xDest,
+          Int32 yDest,
+          Int32 wDest,
+          Int32 hDest,
+          IntPtr hdcSrc,
+          Int32 xSrc,
+          Int32 ySrc,
+          Int32 wSrc,
+          Int32 hSrc,
+          Uint32 rop),
+      int Function(
+          int hdcDest,
+          int xDest,
+          int yDest,
+          int wDest,
+          int hDest,
+          int hdcSrc,
+          int xSrc,
+          int ySrc,
+          int wSrc,
+          int hSrc,
+          int rop)>('StretchBlt');
+  return _StretchBlt(
+      hdcDest, xDest, yDest, wDest, hDest, hdcSrc, xSrc, ySrc, wSrc, hSrc, rop);
 }
 
 /// The StretchDIBits function copies the color data for a rectangle of

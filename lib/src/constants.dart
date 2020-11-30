@@ -4009,6 +4009,48 @@ const HS_CROSS = 4;
 const HS_DIAGCROSS = 5;
 
 // -----------------------------------------------------------------------------
+// Stretching mode constants
+// -----------------------------------------------------------------------------
+
+/// Performs a Boolean AND operation using the color values for the eliminated
+/// and existing pixels. If the bitmap is a monochrome bitmap, this mode
+/// preserves black pixels at the expense of white pixels.
+const BLACKONWHITE = 1;
+
+/// Performs a Boolean OR operation using the color values for the eliminated
+/// and existing pixels. If the bitmap is a monochrome bitmap, this mode
+/// preserves white pixels at the expense of black pixels.
+const WHITEONBLACK = 2;
+
+/// Deletes the pixels. This mode deletes all eliminated lines of pixels without
+/// trying to preserve their information.
+const COLORONCOLOR = 3;
+
+/// Maps pixels from the source rectangle into blocks of pixels in the
+/// destination rectangle. The average color over the destination block of
+/// pixels approximates the color of the source pixels.
+const HALFTONE = 4;
+
+/// Performs a Boolean AND operation using the color values for the eliminated
+/// and existing pixels. If the bitmap is a monochrome bitmap, this mode
+/// preserves black pixels at the expense of white pixels.
+const STRETCH_ANDSCANS = BLACKONWHITE;
+
+/// Performs a Boolean OR operation using the color values for the eliminated
+/// and existing pixels. If the bitmap is a monochrome bitmap, this mode
+/// preserves white pixels at the expense of black pixels.
+const STRETCH_ORSCANS = WHITEONBLACK;
+
+/// Deletes the pixels. This mode deletes all eliminated lines of pixels without
+/// trying to preserve their information.
+const STRETCH_DELETESCANS = COLORONCOLOR;
+
+/// Maps pixels from the source rectangle into blocks of pixels in the
+/// destination rectangle. The average color over the destination block of
+/// pixels approximates the color of the source pixels.
+const STRETCH_HALFTONE = HALFTONE;
+
+// -----------------------------------------------------------------------------
 // Console constants
 // -----------------------------------------------------------------------------
 

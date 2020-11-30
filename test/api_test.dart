@@ -986,6 +986,22 @@ void main() {
       expect(CloseFigure, isA<Function>());
     });
 
+    test('Can instantiate CreateCompatibleBitmap', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final CreateCompatibleBitmap = gdi32.lookupFunction<
+          IntPtr Function(IntPtr hdc, Int32 cx, Int32 cy),
+          int Function(int hdc, int cx, int cy)>('CreateCompatibleBitmap');
+      expect(CreateCompatibleBitmap, isA<Function>());
+    });
+
+    test('Can instantiate CreateCompatibleDC', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final CreateCompatibleDC = gdi32.lookupFunction<
+          IntPtr Function(IntPtr hdc),
+          int Function(int hdc)>('CreateCompatibleDC');
+      expect(CreateCompatibleDC, isA<Function>());
+    });
+
     test('Can instantiate CreateFontIndirect', () {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final CreateFontIndirect = gdi32.lookupFunction<
@@ -1294,6 +1310,14 @@ void main() {
       expect(SetPixel, isA<Function>());
     });
 
+    test('Can instantiate SetStretchBltMode', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final SetStretchBltMode = gdi32.lookupFunction<
+          Int32 Function(IntPtr hdc, Int32 mode),
+          int Function(int hdc, int mode)>('SetStretchBltMode');
+      expect(SetStretchBltMode, isA<Function>());
+    });
+
     test('Can instantiate SetTextColor', () {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final SetTextColor = gdi32.lookupFunction<
@@ -1327,6 +1351,36 @@ void main() {
           int Function(
               int hdc, int x, int y, Pointer<SIZE> lpsz)>('SetWindowExtEx');
       expect(SetWindowExtEx, isA<Function>());
+    });
+
+    test('Can instantiate StretchBlt', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final StretchBlt = gdi32.lookupFunction<
+          Int32 Function(
+              IntPtr hdcDest,
+              Int32 xDest,
+              Int32 yDest,
+              Int32 wDest,
+              Int32 hDest,
+              IntPtr hdcSrc,
+              Int32 xSrc,
+              Int32 ySrc,
+              Int32 wSrc,
+              Int32 hSrc,
+              Uint32 rop),
+          int Function(
+              int hdcDest,
+              int xDest,
+              int yDest,
+              int wDest,
+              int hDest,
+              int hdcSrc,
+              int xSrc,
+              int ySrc,
+              int wSrc,
+              int hSrc,
+              int rop)>('StretchBlt');
+      expect(StretchBlt, isA<Function>());
     });
 
     test('Can instantiate StretchDIBits', () {
