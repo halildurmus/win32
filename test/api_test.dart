@@ -552,6 +552,35 @@ void main() {
       expect(GetVolumePathNamesForVolumeName, isA<Function>());
     });
 
+    test('Can instantiate GlobalAlloc', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GlobalAlloc = kernel32.lookupFunction<
+          IntPtr Function(Uint32 uFlags, IntPtr dwBytes),
+          int Function(int uFlags, int dwBytes)>('GlobalAlloc');
+      expect(GlobalAlloc, isA<Function>());
+    });
+
+    test('Can instantiate GlobalFree', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GlobalFree = kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
+          int Function(int hMem)>('GlobalFree');
+      expect(GlobalFree, isA<Function>());
+    });
+
+    test('Can instantiate GlobalLock', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GlobalLock = kernel32.lookupFunction<Pointer Function(IntPtr hMem),
+          Pointer Function(int hMem)>('GlobalLock');
+      expect(GlobalLock, isA<Function>());
+    });
+
+    test('Can instantiate GlobalUnlock', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GlobalUnlock = kernel32.lookupFunction<Int32 Function(IntPtr hMem),
+          int Function(int hMem)>('GlobalUnlock');
+      expect(GlobalUnlock, isA<Function>());
+    });
+
     test('Can instantiate HeapAlloc', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final HeapAlloc = kernel32.lookupFunction<
@@ -969,6 +998,16 @@ void main() {
       expect(BeginPath, isA<Function>());
     });
 
+    test('Can instantiate BitBlt', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final BitBlt = gdi32.lookupFunction<
+          Int32 Function(IntPtr hdc, Int32 x, Int32 y, Int32 cx, Int32 cy,
+              IntPtr hdcSrc, Int32 x1, Int32 y1, Uint32 rop),
+          int Function(int hdc, int x, int y, int cx, int cy, int hdcSrc,
+              int x1, int y1, int rop)>('BitBlt');
+      expect(BitBlt, isA<Function>());
+    });
+
     test('Can instantiate Chord', () {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final Chord = gdi32.lookupFunction<
@@ -1105,6 +1144,16 @@ void main() {
               int c,
               Pointer<Int32> lpDx)>('ExtTextOutW');
       expect(ExtTextOut, isA<Function>());
+    });
+
+    test('Can instantiate GetDIBits', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final GetDIBits = gdi32.lookupFunction<
+          Int32 Function(IntPtr hdc, IntPtr hbm, Uint32 start, Uint32 cLines,
+              Pointer lpvBits, Pointer<BITMAPINFO> lpbmi, Uint32 usage),
+          int Function(int hdc, int hbm, int start, int cLines, Pointer lpvBits,
+              Pointer<BITMAPINFO> lpbmi, int usage)>('GetDIBits');
+      expect(GetDIBits, isA<Function>());
     });
 
     test('Can instantiate GetObject', () {

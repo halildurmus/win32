@@ -63,6 +63,9 @@ void main()
     printf("'CREDENTIAL_ATTRIBUTE': %zu,\n", sizeof(CREDENTIAL_ATTRIBUTE));
     printf("'CREDENTIAL': %zu,\n", sizeof(CREDENTIAL));
     printf("'BITMAPINFO': %zu,\n", sizeof(BITMAPINFO));
+    printf("'BITMAP': %zu,\n", sizeof(BITMAP));
+    printf("'BITMAPFILEHEADER': %zu,\n", sizeof(BITMAPFILEHEADER));
+    printf("'BITMAPINFOHEADER': %zu,\n", sizeof(BITMAPINFOHEADER));
     printf("'FILETIME': %zu,\n", sizeof(FILETIME));
     printf("'KNOWNFOLDER_DEFINITION': %zu,\n", sizeof(KNOWNFOLDER_DEFINITION));
     printf("'SHITEMID': %zu,\n", sizeof(SHITEMID));

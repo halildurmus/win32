@@ -318,6 +318,22 @@ void main() {
       expect(sizeOf<BITMAPINFO>(), equals(44));
     }
   });
+  test('Struct BITMAP is the right size', () {
+    if (sizeOf<IntPtr>() == 8) {
+      expect(sizeOf<BITMAP>(), equals(32));
+    }
+    else {
+      expect(sizeOf<BITMAP>(), equals(24));
+    }
+  });
+  test('Struct BITMAPINFOHEADER is the right size', () {
+    if (sizeOf<IntPtr>() == 8) {
+      expect(sizeOf<BITMAPINFOHEADER>(), equals(40));
+    }
+    else {
+      expect(sizeOf<BITMAPINFOHEADER>(), equals(40));
+    }
+  });
   test('Struct FILETIME is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
       expect(sizeOf<FILETIME>(), equals(8));

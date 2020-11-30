@@ -1100,6 +1100,67 @@ int GetVolumePathNamesForVolumeName(
       lpszVolumeName, lpszVolumePathNames, cchBufferLength, lpcchReturnLength);
 }
 
+/// Allocates the specified number of bytes from the heap.
+///
+/// ```c
+/// DECLSPEC_ALLOCATOR HGLOBAL GlobalAlloc(
+///   UINT   uFlags,
+///   SIZE_T dwBytes
+/// );
+/// ```
+/// {@category kernel32}
+int GlobalAlloc(int uFlags, int dwBytes) {
+  final _GlobalAlloc = _kernel32.lookupFunction<
+      IntPtr Function(Uint32 uFlags, IntPtr dwBytes),
+      int Function(int uFlags, int dwBytes)>('GlobalAlloc');
+  return _GlobalAlloc(uFlags, dwBytes);
+}
+
+/// Frees the specified global memory object and invalidates its handle.
+///
+/// ```c
+/// HGLOBAL GlobalFree(
+///   _Frees_ptr_opt_ HGLOBAL hMem
+/// );
+/// ```
+/// {@category kernel32}
+int GlobalFree(int hMem) {
+  final _GlobalFree = _kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
+      int Function(int hMem)>('GlobalFree');
+  return _GlobalFree(hMem);
+}
+
+/// Locks a global memory object and returns a pointer to the first byte of
+/// the object's memory block.
+///
+/// ```c
+/// LPVOID GlobalLock(
+///   HGLOBAL hMem
+/// );
+/// ```
+/// {@category kernel32}
+Pointer GlobalLock(int hMem) {
+  final _GlobalLock = _kernel32.lookupFunction<Pointer Function(IntPtr hMem),
+      Pointer Function(int hMem)>('GlobalLock');
+  return _GlobalLock(hMem);
+}
+
+/// Decrements the lock count associated with a memory object that was
+/// allocated with GMEM_MOVEABLE. This function has no effect on memory
+/// objects allocated with GMEM_FIXED.
+///
+/// ```c
+/// BOOL GlobalUnlock(
+///   HGLOBAL hMem
+/// );
+/// ```
+/// {@category kernel32}
+int GlobalUnlock(int hMem) {
+  final _GlobalUnlock = _kernel32.lookupFunction<Int32 Function(IntPtr hMem),
+      int Function(int hMem)>('GlobalUnlock');
+  return _GlobalUnlock(hMem);
+}
+
 /// Allocates a block of memory from a heap. The allocated memory is not
 /// movable.
 ///

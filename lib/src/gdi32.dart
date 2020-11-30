@@ -112,6 +112,34 @@ int BeginPath(int hdc) {
   return _BeginPath(hdc);
 }
 
+/// The BitBlt function performs a bit-block transfer of the color data
+/// corresponding to a rectangle of pixels from the specified source device
+/// context into a destination device context.
+///
+/// ```c
+/// BOOL BitBlt(
+///   HDC   hdc,
+///   int   x,
+///   int   y,
+///   int   cx,
+///   int   cy,
+///   HDC   hdcSrc,
+///   int   x1,
+///   int   y1,
+///   DWORD rop
+/// );
+/// ```
+/// {@category gdi32}
+int BitBlt(int hdc, int x, int y, int cx, int cy, int hdcSrc, int x1, int y1,
+    int rop) {
+  final _BitBlt = _gdi32.lookupFunction<
+      Int32 Function(IntPtr hdc, Int32 x, Int32 y, Int32 cx, Int32 cy,
+          IntPtr hdcSrc, Int32 x1, Int32 y1, Uint32 rop),
+      int Function(int hdc, int x, int y, int cx, int cy, int hdcSrc, int x1,
+          int y1, int rop)>('BitBlt');
+  return _BitBlt(hdc, x, y, cx, cy, hdcSrc, x1, y1, rop);
+}
+
 /// The Chord function draws a chord (a region bounded by the intersection
 /// of an ellipse and a line segment, called a secant). The chord is
 /// outlined by using the current pen and filled by using the current
@@ -398,6 +426,32 @@ int ExtTextOut(int hdc, int x, int y, int options, Pointer<RECT> lprect,
       int Function(int hdc, int x, int y, int options, Pointer<RECT> lprect,
           Pointer<Utf16> lpString, int c, Pointer<Int32> lpDx)>('ExtTextOutW');
   return _ExtTextOut(hdc, x, y, options, lprect, lpString, c, lpDx);
+}
+
+/// The GetDIBits function retrieves the bits of the specified compatible
+/// bitmap and copies them into a buffer as a DIB using the specified
+/// format.
+///
+/// ```c
+/// int GetDIBits(
+///   HDC          hdc,
+///   HBITMAP      hbm,
+///   UINT         start,
+///   UINT         cLines,
+///   LPVOID       lpvBits,
+///   LPBITMAPINFO lpbmi,
+///   UINT         usage
+/// );
+/// ```
+/// {@category gdi32}
+int GetDIBits(int hdc, int hbm, int start, int cLines, Pointer lpvBits,
+    Pointer<BITMAPINFO> lpbmi, int usage) {
+  final _GetDIBits = _gdi32.lookupFunction<
+      Int32 Function(IntPtr hdc, IntPtr hbm, Uint32 start, Uint32 cLines,
+          Pointer lpvBits, Pointer<BITMAPINFO> lpbmi, Uint32 usage),
+      int Function(int hdc, int hbm, int start, int cLines, Pointer lpvBits,
+          Pointer<BITMAPINFO> lpbmi, int usage)>('GetDIBits');
+  return _GetDIBits(hdc, hbm, start, cLines, lpvBits, lpbmi, usage);
 }
 
 /// The GetObject function retrieves information for the specified graphics

@@ -2224,6 +2224,133 @@ class BITMAPINFO extends Struct {
     ..rgbReserved = 0;
 }
 
+// typedef struct tagBITMAP {
+//   LONG   bmType;
+//   LONG   bmWidth;
+//   LONG   bmHeight;
+//   LONG   bmWidthBytes;
+//   WORD   bmPlanes;
+//   WORD   bmBitsPixel;
+//   LPVOID bmBits;
+// } BITMAP, *PBITMAP, *NPBITMAP, *LPBITMAP;
+
+/// The BITMAP structure defines the type, width, height, color format, and bit
+/// values of a bitmap.
+///
+/// {@category Struct}
+class BITMAP extends Struct {
+  @Int32()
+  external int bmType;
+  @Int32()
+  external int bmWidth;
+  @Int32()
+  external int bmHeight;
+  @Int32()
+  external int bmWidthBytes;
+  @Int16()
+  external int bmPlanes;
+  @Int16()
+  external int bmBitsPixel;
+  external Pointer bmBits;
+
+  factory BITMAP.allocate() => allocate<BITMAP>().ref
+    ..bmType = 0
+    ..bmWidth = 0
+    ..bmHeight = 0
+    ..bmWidthBytes = 0
+    ..bmPlanes = 0
+    ..bmBitsPixel = 0
+    ..bmBits = nullptr;
+}
+
+// typedef struct tagBITMAPFILEHEADER {
+//   WORD  bfType;
+//   DWORD bfSize;
+//   WORD  bfReserved1;
+//   WORD  bfReserved2;
+//   DWORD bfOffBits;
+// } BITMAPFILEHEADER, *LPBITMAPFILEHEADER, *PBITMAPFILEHEADER;
+
+/// The BITMAPFILEHEADER structure contains information about the type, size,
+/// and layout of a file that contains a DIB.
+///
+/// {@category Struct}
+class BITMAPFILEHEADER extends Struct {
+  @Int16()
+  external int bfType;
+  @Int32()
+  external int bfSize;
+  @Int16()
+  external int bfReserved1;
+  @Int16()
+  external int bfReserved2;
+  @Int32()
+  external int bfOffBits;
+
+  factory BITMAPFILEHEADER.allocate() => allocate<BITMAPFILEHEADER>().ref
+    ..bfType = 0
+    ..bfSize = 0
+    ..bfReserved1 = 0
+    ..bfReserved2 = 0
+    ..bfOffBits = 0;
+}
+
+// typedef struct tagBITMAPINFOHEADER {
+//   DWORD biSize;
+//   LONG  biWidth;
+//   LONG  biHeight;
+//   WORD  biPlanes;
+//   WORD  biBitCount;
+//   DWORD biCompression;
+//   DWORD biSizeImage;
+//   LONG  biXPelsPerMeter;
+//   LONG  biYPelsPerMeter;
+//   DWORD biClrUsed;
+//   DWORD biClrImportant;
+// } BITMAPINFOHEADER, *LPBITMAPINFOHEADER, *PBITMAPINFOHEADER;
+
+/// The BITMAPINFOHEADER structure contains information about the dimensions and
+/// color format of a device-independent bitmap (DIB).
+///
+/// {@category Struct}
+class BITMAPINFOHEADER extends Struct {
+  @Uint32()
+  external int biSize;
+  @Int32()
+  external int biWidth;
+  @Int32()
+  external int biHeight;
+  @Uint16()
+  external int biPlanes;
+  @Uint16()
+  external int biBitCount;
+  @Uint32()
+  external int biCompression;
+  @Uint32()
+  external int biSizeImage;
+  @Int32()
+  external int biXPelsPerMeter;
+  @Int32()
+  external int biYPelsPerMeter;
+  @Uint32()
+  external int biClrUsed;
+  @Uint32()
+  external int biClrImportant;
+
+  factory BITMAPINFOHEADER.allocate() => allocate<BITMAPINFOHEADER>().ref
+    ..biSize = 0
+    ..biWidth = 0
+    ..biHeight = 0
+    ..biPlanes = 0
+    ..biBitCount = 0
+    ..biCompression = 0
+    ..biSizeImage = 0
+    ..biXPelsPerMeter = 0
+    ..biYPelsPerMeter = 0
+    ..biClrUsed = 0
+    ..biClrImportant = 0;
+}
+
 // typedef struct _FILETIME {
 //     DWORD dwLowDateTime;
 //     DWORD dwHighDateTime;
