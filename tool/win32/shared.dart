@@ -3,13 +3,14 @@ import 'dart:io';
 final prototypes = <String, TypeDef>{};
 
 class TypeDef {
-  String? neutralApiName;
+  late String neutralApiName;
   final List<String> prototype;
-  String? nativeReturn;
-  String? dartReturn;
-  final Map<String, String> nativeParams = {};
-  final Map<String, String> dartParams = {};
-  String? dllLibrary;
+  late String nativeReturn;
+  late String dartReturn;
+
+  Map<String, String> nativeParams = {};
+  Map<String, String> dartParams = {};
+  late String dllLibrary;
   late String comment;
 
   TypeDef(this.prototype);

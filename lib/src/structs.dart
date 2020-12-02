@@ -2351,6 +2351,34 @@ class BITMAPINFOHEADER extends Struct {
     ..biClrImportant = 0;
 }
 
+// typedef struct tagPALETTEENTRY {
+//   BYTE peRed;
+//   BYTE peGreen;
+//   BYTE peBlue;
+//   BYTE peFlags;
+// } PALETTEENTRY;
+
+/// The PALETTEENTRY structure specifies the color and usage of an entry in a
+/// logical palette. A logical palette is defined by a LOGPALETTE structure.
+///
+/// {@category Struct}
+class PALETTEENTRY extends Struct {
+  @Uint8()
+  external int peRed;
+  @Uint8()
+  external int peGreen;
+  @Uint8()
+  external int peBlue;
+  @Uint8()
+  external int peFlags;
+
+  factory PALETTEENTRY.allocate() => allocate<PALETTEENTRY>().ref
+    ..peRed = 0
+    ..peGreen = 0
+    ..peBlue = 0
+    ..peFlags = 0;
+}
+
 // typedef struct _FILETIME {
 //     DWORD dwLowDateTime;
 //     DWORD dwHighDateTime;

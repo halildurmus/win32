@@ -44,7 +44,7 @@ void main() {
     // https://github.com/dart-lang/sdk/issues/42598
     final libProtos = prototypes.values
         .where((td) => td.dllLibrary == library)
-        .where((td) => !td.neutralApiName!.startsWith('TaskDialog'));
+        .where((td) => !td.neutralApiName.startsWith('TaskDialog'));
 
     for (final proto in libProtos) {
       final apiName = prototypes.keys.firstWhere(

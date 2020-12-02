@@ -77,7 +77,7 @@ final _$library = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' 
       final apiName = prototypes.keys.firstWhere(
           (k) => prototypes[k]!.neutralApiName == proto.neutralApiName);
       writer.writeStringSync('''
-${generateDocComment(library!, proto.prototype.first, proto.comment)}
+${generateDocComment(library, proto.prototype.first, proto.comment)}
 ${proto.dartReturn} ${proto.neutralApiName}(${proto.dartParams.keys.map((param) => '${proto.dartParams[param]} $param').join(', ')}) {
   final _${proto.neutralApiName} = _$library.lookupFunction<\n
     ${proto.nativeReturn} Function(

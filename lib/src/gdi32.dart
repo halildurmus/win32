@@ -44,6 +44,28 @@ int AngleArc(
   return _AngleArc(hdc, x, y, r, StartAngle, SweepAngle);
 }
 
+/// The AnimatePalette function replaces entries in the specified logical
+/// palette.
+///
+/// ```c
+/// BOOL AnimatePalette(
+///   HPALETTE           hPal,
+///   UINT               iStartIndex,
+///   UINT               cEntries,
+///   const PALETTEENTRY *ppe
+/// );
+/// ```
+/// {@category gdi32}
+int AnimatePalette(
+    int hPal, int iStartIndex, int cEntries, Pointer<PALETTEENTRY> ppe) {
+  final _AnimatePalette = _gdi32.lookupFunction<
+      Int32 Function(IntPtr hPal, Uint32 iStartIndex, Uint32 cEntries,
+          Pointer<PALETTEENTRY> ppe),
+      int Function(int hPal, int iStartIndex, int cEntries,
+          Pointer<PALETTEENTRY> ppe)>('AnimatePalette');
+  return _AnimatePalette(hPal, iStartIndex, cEntries, ppe);
+}
+
 /// The Arc function draws an elliptical arc.
 ///
 /// ```c
@@ -217,6 +239,57 @@ int CreateCompatibleDC(int hdc) {
   return _CreateCompatibleDC(hdc);
 }
 
+/// The CreateDIBitmap function creates a compatible bitmap (DDB) from a
+/// DIB and, optionally, sets the bitmap bits.
+///
+/// ```c
+/// HBITMAP CreateDIBitmap(
+///   HDC                    hdc,
+///   const BITMAPINFOHEADER *pbmih,
+///   DWORD                  flInit,
+///   const VOID             *pjBits,
+///   const BITMAPINFO       *pbmi,
+///   UINT                   iUsage
+/// );
+/// ```
+/// {@category gdi32}
+int CreateDIBitmap(int hdc, Pointer<BITMAPINFOHEADER> pbmih, int flInit,
+    Pointer pjBits, Pointer<BITMAPINFO> pbmi, int iUsage) {
+  final _CreateDIBitmap = _gdi32.lookupFunction<
+      IntPtr Function(
+          IntPtr hdc,
+          Pointer<BITMAPINFOHEADER> pbmih,
+          Uint32 flInit,
+          Pointer pjBits,
+          Pointer<BITMAPINFO> pbmi,
+          Uint32 iUsage),
+      int Function(
+          int hdc,
+          Pointer<BITMAPINFOHEADER> pbmih,
+          int flInit,
+          Pointer pjBits,
+          Pointer<BITMAPINFO> pbmi,
+          int iUsage)>('CreateDIBitmap');
+  return _CreateDIBitmap(hdc, pbmih, flInit, pjBits, pbmi, iUsage);
+}
+
+/// The CreateDIBPatternBrushPt function creates a logical brush that has
+/// the pattern specified by the device-independent bitmap (DIB).
+///
+/// ```c
+/// HBRUSH CreateDIBPatternBrushPt(
+///   const VOID *lpPackedDIB,
+///   UINT       iUsage
+/// );
+/// ```
+/// {@category gdi32}
+int CreateDIBPatternBrushPt(Pointer lpPackedDIB, int iUsage) {
+  final _CreateDIBPatternBrushPt = _gdi32.lookupFunction<
+      IntPtr Function(Pointer lpPackedDIB, Uint32 iUsage),
+      int Function(Pointer lpPackedDIB, int iUsage)>('CreateDIBPatternBrushPt');
+  return _CreateDIBPatternBrushPt(lpPackedDIB, iUsage);
+}
+
 /// The CreateFontIndirect function creates a logical font that has the
 /// specified characteristics. The font can subsequently be selected as the
 /// current font for any device context.
@@ -232,6 +305,22 @@ int CreateFontIndirect(Pointer<LOGFONT> lplf) {
       IntPtr Function(Pointer<LOGFONT> lplf),
       int Function(Pointer<LOGFONT> lplf)>('CreateFontIndirectW');
   return _CreateFontIndirect(lplf);
+}
+
+/// The CreateHalftonePalette function creates a halftone palette for the
+/// specified device context (DC).
+///
+/// ```c
+/// HPALETTE CreateHalftonePalette(
+///   HDC hdc
+/// );
+/// ```
+/// {@category gdi32}
+int CreateHalftonePalette(int hdc) {
+  final _CreateHalftonePalette =
+      _gdi32.lookupFunction<IntPtr Function(IntPtr hdc), int Function(int hdc)>(
+          'CreateHalftonePalette');
+  return _CreateHalftonePalette(hdc);
 }
 
 /// The CreateHatchBrush function creates a logical brush that has the
@@ -301,6 +390,26 @@ int DeleteObject(int ho) {
       _gdi32.lookupFunction<Int32 Function(IntPtr ho), int Function(int ho)>(
           'DeleteObject');
   return _DeleteObject(ho);
+}
+
+/// The DrawEscape function provides drawing capabilities of the specified
+/// video display that are not directly available through the graphics
+/// device interface (GDI).
+///
+/// ```c
+/// int DrawEscape(
+///   HDC    hdc,
+///   int    iEscape,
+///   int    cjIn,
+///   LPCSTR lpIn
+/// );
+/// ```
+/// {@category gdi32}
+int DrawEscape(int hdc, int iEscape, int cjIn, Pointer lpIn) {
+  final _DrawEscape = _gdi32.lookupFunction<
+      Int32 Function(IntPtr hdc, Int32 iEscape, Int32 cjIn, Pointer lpIn),
+      int Function(int hdc, int iEscape, int cjIn, Pointer lpIn)>('DrawEscape');
+  return _DrawEscape(hdc, iEscape, cjIn, lpIn);
 }
 
 /// The Ellipse function draws an ellipse. The center of the ellipse is the

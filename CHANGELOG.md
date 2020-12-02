@@ -1,11 +1,12 @@
 ## 2.0.0-nullsafety.8
 
 - New APIs:
-  - gdi32: AngleArc, Arc, ArcTo, BeginPath, BitBlt, Chord, CloseFigure,
-    CreateCompatibleBitmap, CreateCompatibleDC, Ellipse, EndPath, ExtTextOutW,
-    GetDIBits, Pie, PolyBezierTo, PolyDraw, Polygon, Polyline, PolylineTo,
-    PolyPolygon, PolyPolyline, PtInRegion, RectInRegion, RoundRect,
-    SetStretchBltMode, StretchBlt
+  - gdi32: AngleArc, AnimatePalette, Arc, ArcTo, BeginPath, BitBlt, Chord,
+    CloseFigure, CreateCompatibleBitmap, CreateCompatibleDC,
+    CreateDIBPatternBrushPt, CreateDIBitmap, CreateHalftonePalette, DrawEscape,
+    Ellipse, EndPath, ExtTextOutW, GetDIBits, Pie, PolyBezierTo, PolyDraw,
+    Polygon, Polyline, PolylineTo, PolyPolygon, PolyPolyline, PtInRegion,
+    RectInRegion, RoundRect, SetStretchBltMode, StretchBlt
   - kernel32: GlobalAlloc, GlobalFree, GlobalLock, GlobalUnlock
   - Add BITMAP, BITMAPINFOHEADER, BITMAPFILEHEADER structs
 

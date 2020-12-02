@@ -971,6 +971,16 @@ void main() {
       expect(AngleArc, isA<Function>());
     });
 
+    test('Can instantiate AnimatePalette', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final AnimatePalette = gdi32.lookupFunction<
+          Int32 Function(IntPtr hPal, Uint32 iStartIndex, Uint32 cEntries,
+              Pointer<PALETTEENTRY> ppe),
+          int Function(int hPal, int iStartIndex, int cEntries,
+              Pointer<PALETTEENTRY> ppe)>('AnimatePalette');
+      expect(AnimatePalette, isA<Function>());
+    });
+
     test('Can instantiate Arc', () {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final Arc = gdi32.lookupFunction<
@@ -1041,12 +1051,49 @@ void main() {
       expect(CreateCompatibleDC, isA<Function>());
     });
 
+    test('Can instantiate CreateDIBitmap', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final CreateDIBitmap = gdi32.lookupFunction<
+          IntPtr Function(
+              IntPtr hdc,
+              Pointer<BITMAPINFOHEADER> pbmih,
+              Uint32 flInit,
+              Pointer pjBits,
+              Pointer<BITMAPINFO> pbmi,
+              Uint32 iUsage),
+          int Function(
+              int hdc,
+              Pointer<BITMAPINFOHEADER> pbmih,
+              int flInit,
+              Pointer pjBits,
+              Pointer<BITMAPINFO> pbmi,
+              int iUsage)>('CreateDIBitmap');
+      expect(CreateDIBitmap, isA<Function>());
+    });
+
+    test('Can instantiate CreateDIBPatternBrushPt', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final CreateDIBPatternBrushPt = gdi32.lookupFunction<
+          IntPtr Function(Pointer lpPackedDIB, Uint32 iUsage),
+          int Function(
+              Pointer lpPackedDIB, int iUsage)>('CreateDIBPatternBrushPt');
+      expect(CreateDIBPatternBrushPt, isA<Function>());
+    });
+
     test('Can instantiate CreateFontIndirect', () {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final CreateFontIndirect = gdi32.lookupFunction<
           IntPtr Function(Pointer<LOGFONT> lplf),
           int Function(Pointer<LOGFONT> lplf)>('CreateFontIndirectW');
       expect(CreateFontIndirect, isA<Function>());
+    });
+
+    test('Can instantiate CreateHalftonePalette', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final CreateHalftonePalette = gdi32.lookupFunction<
+          IntPtr Function(IntPtr hdc),
+          int Function(int hdc)>('CreateHalftonePalette');
+      expect(CreateHalftonePalette, isA<Function>());
     });
 
     test('Can instantiate CreateHatchBrush', () {
@@ -1079,6 +1126,15 @@ void main() {
           gdi32.lookupFunction<Int32 Function(IntPtr ho), int Function(int ho)>(
               'DeleteObject');
       expect(DeleteObject, isA<Function>());
+    });
+
+    test('Can instantiate DrawEscape', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final DrawEscape = gdi32.lookupFunction<
+          Int32 Function(IntPtr hdc, Int32 iEscape, Int32 cjIn, Pointer lpIn),
+          int Function(
+              int hdc, int iEscape, int cjIn, Pointer lpIn)>('DrawEscape');
+      expect(DrawEscape, isA<Function>());
     });
 
     test('Can instantiate Ellipse', () {
