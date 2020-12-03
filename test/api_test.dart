@@ -961,6 +961,23 @@ void main() {
   });
 
   group('Test gdi32 functions', () {
+    test('Can instantiate AddFontResource', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final AddFontResource = gdi32.lookupFunction<
+          Int32 Function(Pointer<Utf16> Arg1),
+          int Function(Pointer<Utf16> Arg1)>('AddFontResourceW');
+      expect(AddFontResource, isA<Function>());
+    });
+
+    test('Can instantiate AddFontResourceEx', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final AddFontResourceEx = gdi32.lookupFunction<
+          Int32 Function(Pointer<Utf16> name, Uint32 fl, Pointer res),
+          int Function(
+              Pointer<Utf16> name, int fl, Pointer res)>('AddFontResourceExW');
+      expect(AddFontResourceEx, isA<Function>());
+    });
+
     test('Can instantiate AngleArc', () {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final AngleArc = gdi32.lookupFunction<
@@ -1016,6 +1033,13 @@ void main() {
           int Function(int hdc, int x, int y, int cx, int cy, int hdcSrc,
               int x1, int y1, int rop)>('BitBlt');
       expect(BitBlt, isA<Function>());
+    });
+
+    test('Can instantiate CancelDC', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final CancelDC = gdi32.lookupFunction<Int32 Function(IntPtr hdc),
+          int Function(int hdc)>('CancelDC');
+      expect(CancelDC, isA<Function>());
     });
 
     test('Can instantiate Chord', () {
@@ -1120,6 +1144,13 @@ void main() {
       expect(CreateSolidBrush, isA<Function>());
     });
 
+    test('Can instantiate DeleteDC', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final DeleteDC = gdi32.lookupFunction<Int32 Function(IntPtr hdc),
+          int Function(int hdc)>('DeleteDC');
+      expect(DeleteDC, isA<Function>());
+    });
+
     test('Can instantiate DeleteObject', () {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final DeleteObject =
@@ -1210,6 +1241,14 @@ void main() {
           int Function(int hdc, int hbm, int start, int cLines, Pointer lpvBits,
               Pointer<BITMAPINFO> lpbmi, int usage)>('GetDIBits');
       expect(GetDIBits, isA<Function>());
+    });
+
+    test('Can instantiate GetNearestColor', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final GetNearestColor = gdi32.lookupFunction<
+          Int32 Function(IntPtr hdc, Int32 color),
+          int Function(int hdc, int color)>('GetNearestColor');
+      expect(GetNearestColor, isA<Function>());
     });
 
     test('Can instantiate GetObject', () {
@@ -1585,6 +1624,14 @@ void main() {
       expect(ChildWindowFromPointEx, isA<Function>());
     });
 
+    test('Can instantiate ClientToScreen', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final ClientToScreen = user32.lookupFunction<
+          Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
+          int Function(int hWnd, Pointer<POINT> lpPoint)>('ClientToScreen');
+      expect(ClientToScreen, isA<Function>());
+    });
+
     test('Can instantiate ClipCursor', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final ClipCursor = user32.lookupFunction<
@@ -1598,6 +1645,15 @@ void main() {
       final CopyIcon = user32.lookupFunction<IntPtr Function(IntPtr hIcon),
           int Function(int hIcon)>('CopyIcon');
       expect(CopyIcon, isA<Function>());
+    });
+
+    test('Can instantiate CopyRect', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final CopyRect = user32.lookupFunction<
+          Int32 Function(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc),
+          int Function(
+              Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc)>('CopyRect');
+      expect(CopyRect, isA<Function>());
     });
 
     test('Can instantiate CreateAcceleratorTable', () {
@@ -1715,6 +1771,16 @@ void main() {
       expect(DispatchMessage, isA<Function>());
     });
 
+    test('Can instantiate DrawCaption', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final DrawCaption = user32.lookupFunction<
+          Int32 Function(
+              IntPtr hwnd, IntPtr hdc, Pointer<RECT> lprect, Uint32 flags),
+          int Function(int hwnd, int hdc, Pointer<RECT> lprect,
+              int flags)>('DrawCaption');
+      expect(DrawCaption, isA<Function>());
+    });
+
     test('Can instantiate DrawIcon', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final DrawIcon = user32.lookupFunction<
@@ -1731,6 +1797,21 @@ void main() {
           int Function(int hdc, Pointer<Utf16> lpchText, int cchText,
               Pointer<RECT> lprc, int format)>('DrawTextW');
       expect(DrawText, isA<Function>());
+    });
+
+    test('Can instantiate DrawTextEx', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final DrawTextEx = user32.lookupFunction<
+          Int32 Function(IntPtr hdc, Pointer<Utf16> lpchText, Int32 cchText,
+              Pointer<RECT> lprc, Uint32 format, Pointer<DRAWTEXTPARAMS> lpdtp),
+          int Function(
+              int hdc,
+              Pointer<Utf16> lpchText,
+              int cchText,
+              Pointer<RECT> lprc,
+              int format,
+              Pointer<DRAWTEXTPARAMS> lpdtp)>('DrawTextExW');
+      expect(DrawTextEx, isA<Function>());
     });
 
     test('Can instantiate EnableMenuItem', () {
@@ -1790,6 +1871,22 @@ void main() {
       expect(EnumWindows, isA<Function>());
     });
 
+    test('Can instantiate EqualRect', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final EqualRect = user32.lookupFunction<
+          Int32 Function(Pointer<RECT> lprc1, Pointer<RECT> lprc2),
+          int Function(Pointer<RECT> lprc1, Pointer<RECT> lprc2)>('EqualRect');
+      expect(EqualRect, isA<Function>());
+    });
+
+    test('Can instantiate ExcludeUpdateRgn', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final ExcludeUpdateRgn = user32.lookupFunction<
+          Int32 Function(IntPtr hDC, IntPtr hWnd),
+          int Function(int hDC, int hWnd)>('ExcludeUpdateRgn');
+      expect(ExcludeUpdateRgn, isA<Function>());
+    });
+
     test('Can instantiate FillRect', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final FillRect = user32.lookupFunction<
@@ -1809,6 +1906,14 @@ void main() {
               Pointer<Utf16> lpszClass,
               Pointer<Utf16> lpszWindow)>('FindWindowExW');
       expect(FindWindowEx, isA<Function>());
+    });
+
+    test('Can instantiate FrameRect', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final FrameRect = user32.lookupFunction<
+          Int32 Function(IntPtr hDC, Pointer<RECT> lprc, IntPtr hbr),
+          int Function(int hDC, Pointer<RECT> lprc, int hbr)>('FrameRect');
+      expect(FrameRect, isA<Function>());
     });
 
     test('Can instantiate GetClientRect', () {
@@ -1839,6 +1944,14 @@ void main() {
       final GetDC = user32.lookupFunction<IntPtr Function(IntPtr hwnd),
           int Function(int hwnd)>('GetDC');
       expect(GetDC, isA<Function>());
+    });
+
+    test('Can instantiate GetDCEx', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetDCEx = user32.lookupFunction<
+          IntPtr Function(IntPtr hWnd, IntPtr hrgnClip, Uint32 flags),
+          int Function(int hWnd, int hrgnClip, int flags)>('GetDCEx');
+      expect(GetDCEx, isA<Function>());
     });
 
     test('Can instantiate GetDialogBaseUnits', () {
@@ -1965,6 +2078,14 @@ void main() {
       expect(GetSysColor, isA<Function>());
     });
 
+    test('Can instantiate GetSysColorBrush', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetSysColorBrush = user32.lookupFunction<
+          IntPtr Function(Int32 nIndex),
+          int Function(int nIndex)>('GetSysColorBrush');
+      expect(GetSysColorBrush, isA<Function>());
+    });
+
     test('Can instantiate GetSystemDpiForProcess', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetSystemDpiForProcess = user32.lookupFunction<
@@ -1997,6 +2118,37 @@ void main() {
       expect(GetSystemMetricsForDpi, isA<Function>());
     });
 
+    test('Can instantiate GetTabbedTextExtent', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetTabbedTextExtent = user32.lookupFunction<
+          Uint32 Function(IntPtr hdc, Pointer<Utf16> lpString, Int32 chCount,
+              Int32 nTabPosition, Pointer<Int32> lpnTabStopPositions),
+          int Function(
+              int hdc,
+              Pointer<Utf16> lpString,
+              int chCount,
+              int nTabPosition,
+              Pointer<Int32> lpnTabStopPositions)>('GetTabbedTextExtentW');
+      expect(GetTabbedTextExtent, isA<Function>());
+    });
+
+    test('Can instantiate GetUpdateRect', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetUpdateRect = user32.lookupFunction<
+          Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect, Int32 bErase),
+          int Function(
+              int hWnd, Pointer<RECT> lpRect, int bErase)>('GetUpdateRect');
+      expect(GetUpdateRect, isA<Function>());
+    });
+
+    test('Can instantiate GetUpdateRgn', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetUpdateRgn = user32.lookupFunction<
+          Int32 Function(IntPtr hWnd, IntPtr hRgn, Int32 bErase),
+          int Function(int hWnd, int hRgn, int bErase)>('GetUpdateRgn');
+      expect(GetUpdateRgn, isA<Function>());
+    });
+
     test('Can instantiate GetWindow', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetWindow = user32.lookupFunction<
@@ -2005,12 +2157,27 @@ void main() {
       expect(GetWindow, isA<Function>());
     });
 
+    test('Can instantiate GetWindowDC', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetWindowDC = user32.lookupFunction<IntPtr Function(IntPtr hWnd),
+          int Function(int hWnd)>('GetWindowDC');
+      expect(GetWindowDC, isA<Function>());
+    });
+
     test('Can instantiate GetWindowRect', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetWindowRect = user32.lookupFunction<
           Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect),
           int Function(int hWnd, Pointer<RECT> lpRect)>('GetWindowRect');
       expect(GetWindowRect, isA<Function>());
+    });
+
+    test('Can instantiate GetWindowRgnBox', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetWindowRgnBox = user32.lookupFunction<
+          Int32 Function(IntPtr hWnd, Pointer<RECT> lprc),
+          int Function(int hWnd, Pointer<RECT> lprc)>('GetWindowRgnBox');
+      expect(GetWindowRgnBox, isA<Function>());
     });
 
     test('Can instantiate GetWindowTextLength', () {
@@ -2028,6 +2195,32 @@ void main() {
           int Function(int hWnd, Pointer<Utf16> lpString,
               int nMaxCount)>('GetWindowTextW');
       expect(GetWindowText, isA<Function>());
+    });
+
+    test('Can instantiate GrayString', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GrayString = user32.lookupFunction<
+          Int32 Function(
+              IntPtr hDC,
+              IntPtr hBrush,
+              Pointer<NativeFunction> lpOutputFunc,
+              IntPtr lpData,
+              Int32 nCount,
+              Int32 X,
+              Int32 Y,
+              Int32 nWidth,
+              Int32 nHeight),
+          int Function(
+              int hDC,
+              int hBrush,
+              Pointer<NativeFunction> lpOutputFunc,
+              int lpData,
+              int nCount,
+              int X,
+              int Y,
+              int nWidth,
+              int nHeight)>('GrayStringW');
+      expect(GrayString, isA<Function>());
     });
 
     test('Can instantiate InflateRect', () {

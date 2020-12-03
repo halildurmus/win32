@@ -17,6 +17,43 @@ import 'structs.dart';
 
 final _gdi32 = DynamicLibrary.open('gdi32.dll');
 
+/// The AddFontResource function adds the font resource from the specified
+/// file to the system font table. The font can subsequently be used for
+/// text output by any application.
+///
+/// ```c
+/// int AddFontResourceW(
+///   LPCWSTR Arg1
+/// );
+/// ```
+/// {@category gdi32}
+int AddFontResource(Pointer<Utf16> Arg1) {
+  final _AddFontResource = _gdi32.lookupFunction<
+      Int32 Function(Pointer<Utf16> Arg1),
+      int Function(Pointer<Utf16> Arg1)>('AddFontResourceW');
+  return _AddFontResource(Arg1);
+}
+
+/// The AddFontResourceEx function adds the font resource from the
+/// specified file to the system. Fonts added with the AddFontResourceEx
+/// function can be marked as private and not enumerable.
+///
+/// ```c
+/// int AddFontResourceExW(
+///   LPCWSTR name,
+///   DWORD   fl,
+///   PVOID   res
+/// );
+/// ```
+/// {@category gdi32}
+int AddFontResourceEx(Pointer<Utf16> name, int fl, Pointer res) {
+  final _AddFontResourceEx = _gdi32.lookupFunction<
+      Int32 Function(Pointer<Utf16> name, Uint32 fl, Pointer res),
+      int Function(
+          Pointer<Utf16> name, int fl, Pointer res)>('AddFontResourceExW');
+  return _AddFontResourceEx(name, fl, res);
+}
+
 /// The AngleArc function draws a line segment and an arc. The line segment
 /// is drawn from the current position to the beginning of the arc. The arc
 /// is drawn along the perimeter of a circle with the given radius and
@@ -160,6 +197,22 @@ int BitBlt(int hdc, int x, int y, int cx, int cy, int hdcSrc, int x1, int y1,
       int Function(int hdc, int x, int y, int cx, int cy, int hdcSrc, int x1,
           int y1, int rop)>('BitBlt');
   return _BitBlt(hdc, x, y, cx, cy, hdcSrc, x1, y1, rop);
+}
+
+/// The CancelDC function cancels any pending operation on the specified
+/// device context (DC).
+///
+/// ```c
+/// BOOL CancelDC(
+///   HDC hdc
+/// );
+/// ```
+/// {@category gdi32}
+int CancelDC(int hdc) {
+  final _CancelDC =
+      _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+          'CancelDC');
+  return _CancelDC(hdc);
 }
 
 /// The Chord function draws a chord (a region bounded by the intersection
@@ -374,6 +427,21 @@ int CreateSolidBrush(int color) {
   return _CreateSolidBrush(color);
 }
 
+/// The DeleteDC function deletes the specified device context (DC).
+///
+/// ```c
+/// BOOL DeleteDC(
+///   HDC hdc
+/// );
+/// ```
+/// {@category gdi32}
+int DeleteDC(int hdc) {
+  final _DeleteDC =
+      _gdi32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+          'DeleteDC');
+  return _DeleteDC(hdc);
+}
+
 /// The DeleteObject function deletes a logical pen, brush, font, bitmap,
 /// region, or palette, freeing all system resources associated with the
 /// object. After the object is deleted, the specified handle is no longer
@@ -561,6 +629,24 @@ int GetDIBits(int hdc, int hbm, int start, int cLines, Pointer lpvBits,
       int Function(int hdc, int hbm, int start, int cLines, Pointer lpvBits,
           Pointer<BITMAPINFO> lpbmi, int usage)>('GetDIBits');
   return _GetDIBits(hdc, hbm, start, cLines, lpvBits, lpbmi, usage);
+}
+
+/// The GetNearestColor function retrieves a color value identifying a
+/// color from the system palette that will be displayed when the specified
+/// color value is used.
+///
+/// ```c
+/// COLORREF GetNearestColor(
+///   HDC      hdc,
+///   COLORREF color
+/// );
+/// ```
+/// {@category gdi32}
+int GetNearestColor(int hdc, int color) {
+  final _GetNearestColor = _gdi32.lookupFunction<
+      Int32 Function(IntPtr hdc, Int32 color),
+      int Function(int hdc, int color)>('GetNearestColor');
+  return _GetNearestColor(hdc, color);
 }
 
 /// The GetObject function retrieves information for the specified graphics

@@ -2379,6 +2379,38 @@ class PALETTEENTRY extends Struct {
     ..peFlags = 0;
 }
 
+// typedef struct tagDRAWTEXTPARAMS {
+//   UINT cbSize;
+//   int  iTabLength;
+//   int  iLeftMargin;
+//   int  iRightMargin;
+//   UINT uiLengthDrawn;
+// } DRAWTEXTPARAMS, *LPDRAWTEXTPARAMS;
+
+/// The DRAWTEXTPARAMS structure contains extended formatting options for the
+/// DrawTextEx function.
+///
+/// {@category Struct}
+class DRAWTEXTPARAMS extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Int32()
+  external int iTabLength;
+  @Int32()
+  external int iLeftMargin;
+  @Int32()
+  external int iRightMargin;
+  @Uint32()
+  external int uiLengthDrawn;
+
+  factory DRAWTEXTPARAMS.allocate() => allocate<DRAWTEXTPARAMS>().ref
+    ..cbSize = 0
+    ..iTabLength = 0
+    ..iLeftMargin = 0
+    ..iRightMargin = 0
+    ..uiLengthDrawn = 0;
+}
+
 // typedef struct _FILETIME {
 //     DWORD dwLowDateTime;
 //     DWORD dwHighDateTime;

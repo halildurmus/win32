@@ -334,6 +334,22 @@ void main() {
       expect(sizeOf<BITMAPINFOHEADER>(), equals(40));
     }
   });
+  test('Struct PALETTEENTRY is the right size', () {
+    if (sizeOf<IntPtr>() == 8) {
+      expect(sizeOf<PALETTEENTRY>(), equals(4));
+    }
+    else {
+      expect(sizeOf<PALETTEENTRY>(), equals(4));
+    }
+  });
+  test('Struct DRAWTEXTPARAMS is the right size', () {
+    if (sizeOf<IntPtr>() == 8) {
+      expect(sizeOf<DRAWTEXTPARAMS>(), equals(20));
+    }
+    else {
+      expect(sizeOf<DRAWTEXTPARAMS>(), equals(20));
+    }
+  });
   test('Struct FILETIME is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
       expect(sizeOf<FILETIME>(), equals(8));

@@ -72,6 +72,8 @@ void main()
     printf("'BITMAP': %zu,\n", sizeof(BITMAP));
     printf("'BITMAPFILEHEADER': %zu,\n", sizeof(BITMAPFILEHEADER));
     printf("'BITMAPINFOHEADER': %zu,\n", sizeof(BITMAPINFOHEADER));
+    printf("'PALETTEENTRY': %zu,\n", sizeof(PALETTEENTRY));
+    printf("'DRAWTEXTPARAMS': %zu,\n", sizeof(DRAWTEXTPARAMS));
     printf("'FILETIME': %zu,\n", sizeof(FILETIME));
     printf("'KNOWNFOLDER_DEFINITION': %zu,\n", sizeof(KNOWNFOLDER_DEFINITION));
     printf("'SHITEMID': %zu,\n", sizeof(SHITEMID));

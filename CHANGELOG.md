@@ -1,19 +1,24 @@
 ## 2.0.0-nullsafety.8
 
 - New APIs:
-  - gdi32: AngleArc, AnimatePalette, Arc, ArcTo, BeginPath, BitBlt, Chord,
-    CloseFigure, CreateCompatibleBitmap, CreateCompatibleDC,
-    CreateDIBPatternBrushPt, CreateDIBitmap, CreateHalftonePalette, DrawEscape,
-    Ellipse, EndPath, ExtTextOutW, GetDIBits, Pie, PolyBezierTo, PolyDraw,
-    Polygon, Polyline, PolylineTo, PolyPolygon, PolyPolyline, PtInRegion,
-    RectInRegion, RoundRect, SetStretchBltMode, StretchBlt
+  - gdi32: AddFontResource, AddFontResourceEx, AngleArc, AnimatePalette, Arc,
+    ArcTo, BeginPath, BitBlt, CancelDC, Chord, CloseFigure,
+    CreateCompatibleBitmap, CreateCompatibleDC, CreateDIBPatternBrushPt,
+    CreateDIBitmap, CreateHalftonePalette, DeleteDC, DrawEscape, Ellipse,
+    EndPath, ExtTextOutW, GetDIBits, GetNearestColor, Pie, PolyBezierTo,
+    PolyDraw, Polygon, Polyline, PolylineTo, PolyPolygon, PolyPolyline,
+    PtInRegion, RectInRegion, RoundRect, SetStretchBltMode, StretchBlt
   - kernel32: GlobalAlloc, GlobalFree, GlobalLock, GlobalUnlock
-  - user32: InflateRect, IntersectRect, InvalidateRgn, InvertRect, IsRectEmpty,
+  - user32: ClientToScreen, CopyRect, DrawCaption, DrawTextEx, EqualRect,
+    ExcludeUpdateRgn, FrameRect, GetDCEx, GetSysColorBrush, GetTabbedTextExtent,
+    GetUpdateRect, GetUpdateRgn, GetWindowDC, GetWindowRgnBox, GrayString,
+    InflateRect, IntersectRect, InvalidateRgn, InvertRect, IsRectEmpty,
     LockWindowUpdate, MapWindowPoints, MonitorFromRect, OffsetRect,
     PaintDesktop, PtInRect, RedrawWindow, ScreenToClient, SetRect, SetRectEmpty,
     SetWindowRgn, SubtractRect, TabbedTextOut, UnionRect, ValidateRect,
     ValidateRgn, WindowFromDC
-  - Add BITMAP, BITMAPINFOHEADER, BITMAPFILEHEADER structs
+  - Add BITMAP, BITMAPINFOHEADER, BITMAPFILEHEADER, PALETTEENTRY, DRAWTEXTPARAMS
+    structs
 
 ## 2.0.0-nullsafety.7
 

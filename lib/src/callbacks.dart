@@ -43,11 +43,14 @@ typedef EnumWindowsProc = Int32 Function(IntPtr hwnd, IntPtr lParam);
 /// dialog box procedure of the Find or Replace dialog box.
 typedef LPFRHookProc = Pointer<Uint32> Function(IntPtr, Int32, IntPtr, IntPtr);
 
-/// Application-defined callback function that is called by the
-/// EnumDisplayMonitors function. It receives display monitors in the calculated
-/// enumeration set.
+/// Application-defined callback function used with the EnumDisplayMonitors
+/// function. It receives display monitors in the calculated enumeration set.
 typedef MonitorEnumProc = Int32 Function(
     IntPtr hMonitor, IntPtr hDC, Pointer lpRect, IntPtr lParam);
+
+/// Application-defined callback function used with the GrayString function. It
+/// is used to draw a string.
+typedef OutputProc = Int32 Function(IntPtr Arg1, IntPtr Arg2, Int32 Arg3);
 
 /// Application-defined callback function that processes WM_TIMER messages.
 typedef TimerProc = Void Function(IntPtr, Uint32, Pointer<Uint32>, Int32);

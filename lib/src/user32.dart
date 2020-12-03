@@ -133,6 +133,23 @@ int ChildWindowFromPointEx(int hWndParent, int Point, int flags) {
   return _ChildWindowFromPointEx(hWndParent, Point, flags);
 }
 
+/// The ClientToScreen function converts the client-area coordinates of a
+/// specified point to screen coordinates.
+///
+/// ```c
+/// BOOL ClientToScreen(
+///   HWND    hWnd,
+///   LPPOINT lpPoint
+/// );
+/// ```
+/// {@category user32}
+int ClientToScreen(int hWnd, Pointer<POINT> lpPoint) {
+  final _ClientToScreen = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
+      int Function(int hWnd, Pointer<POINT> lpPoint)>('ClientToScreen');
+  return _ClientToScreen(hWnd, lpPoint);
+}
+
 /// Confines the cursor to a rectangular area on the screen. If a
 /// subsequent cursor position (set by the SetCursorPos function or the
 /// mouse) lies outside the rectangle, the system automatically adjusts the
@@ -163,6 +180,23 @@ int CopyIcon(int hIcon) {
   final _CopyIcon = _user32.lookupFunction<IntPtr Function(IntPtr hIcon),
       int Function(int hIcon)>('CopyIcon');
   return _CopyIcon(hIcon);
+}
+
+/// The CopyRect function copies the coordinates of one rectangle to
+/// another.
+///
+/// ```c
+/// BOOL CopyRect(
+///   LPRECT     lprcDst,
+///   const RECT *lprcSrc
+/// );
+/// ```
+/// {@category user32}
+int CopyRect(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc) {
+  final _CopyRect = _user32.lookupFunction<
+      Int32 Function(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc),
+      int Function(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc)>('CopyRect');
+  return _CopyRect(lprcDst, lprcSrc);
 }
 
 /// Creates an accelerator table.
@@ -402,6 +436,26 @@ int DispatchMessage(Pointer<MSG> lpMsg) {
   return _DispatchMessage(lpMsg);
 }
 
+/// The DrawCaption function draws a window caption.
+///
+/// ```c
+/// BOOL DrawCaption(
+///   HWND       hwnd,
+///   HDC        hdc,
+///   const RECT *lprect,
+///   UINT       flags
+/// );
+/// ```
+/// {@category user32}
+int DrawCaption(int hwnd, int hdc, Pointer<RECT> lprect, int flags) {
+  final _DrawCaption = _user32.lookupFunction<
+      Int32 Function(
+          IntPtr hwnd, IntPtr hdc, Pointer<RECT> lprect, Uint32 flags),
+      int Function(
+          int hwnd, int hdc, Pointer<RECT> lprect, int flags)>('DrawCaption');
+  return _DrawCaption(hwnd, hdc, lprect, flags);
+}
+
 /// Draws an icon or cursor into the specified device context.
 ///
 /// ```c
@@ -442,6 +496,35 @@ int DrawText(int hdc, Pointer<Utf16> lpchText, int cchText, Pointer<RECT> lprc,
       int Function(int hdc, Pointer<Utf16> lpchText, int cchText,
           Pointer<RECT> lprc, int format)>('DrawTextW');
   return _DrawText(hdc, lpchText, cchText, lprc, format);
+}
+
+/// The DrawTextEx function draws formatted text in the specified
+/// rectangle.
+///
+/// ```c
+/// int DrawTextExW(
+///   HDC              hdc,
+///   LPWSTR           lpchText,
+///   int              cchText,
+///   LPRECT           lprc,
+///   UINT             format,
+///   LPDRAWTEXTPARAMS lpdtp
+/// );
+/// ```
+/// {@category user32}
+int DrawTextEx(int hdc, Pointer<Utf16> lpchText, int cchText,
+    Pointer<RECT> lprc, int format, Pointer<DRAWTEXTPARAMS> lpdtp) {
+  final _DrawTextEx = _user32.lookupFunction<
+      Int32 Function(IntPtr hdc, Pointer<Utf16> lpchText, Int32 cchText,
+          Pointer<RECT> lprc, Uint32 format, Pointer<DRAWTEXTPARAMS> lpdtp),
+      int Function(
+          int hdc,
+          Pointer<Utf16> lpchText,
+          int cchText,
+          Pointer<RECT> lprc,
+          int format,
+          Pointer<DRAWTEXTPARAMS> lpdtp)>('DrawTextExW');
+  return _DrawTextEx(hdc, lpchText, cchText, lprc, format, lpdtp);
 }
 
 /// Enables, disables, or grays the specified menu item.
@@ -568,6 +651,42 @@ int EnumWindows(Pointer<NativeFunction> lpEnumFunc, int lParam) {
   return _EnumWindows(lpEnumFunc, lParam);
 }
 
+/// The EqualRect function determines whether the two specified rectangles
+/// are equal by comparing the coordinates of their upper-left and
+/// lower-right corners.
+///
+/// ```c
+/// BOOL EqualRect(
+///   const RECT *lprc1,
+///   const RECT *lprc2
+/// );
+/// ```
+/// {@category user32}
+int EqualRect(Pointer<RECT> lprc1, Pointer<RECT> lprc2) {
+  final _EqualRect = _user32.lookupFunction<
+      Int32 Function(Pointer<RECT> lprc1, Pointer<RECT> lprc2),
+      int Function(Pointer<RECT> lprc1, Pointer<RECT> lprc2)>('EqualRect');
+  return _EqualRect(lprc1, lprc2);
+}
+
+/// The ExcludeUpdateRgn function prevents drawing within invalid areas of
+/// a window by excluding an updated region in the window from a clipping
+/// region.
+///
+/// ```c
+/// int ExcludeUpdateRgn(
+///   HDC  hDC,
+///   HWND hWnd
+/// );
+/// ```
+/// {@category user32}
+int ExcludeUpdateRgn(int hDC, int hWnd) {
+  final _ExcludeUpdateRgn = _user32.lookupFunction<
+      Int32 Function(IntPtr hDC, IntPtr hWnd),
+      int Function(int hDC, int hWnd)>('ExcludeUpdateRgn');
+  return _ExcludeUpdateRgn(hDC, hWnd);
+}
+
 /// The FillRect function fills a rectangle by using the specified brush.
 /// This function includes the left and top borders, but excludes the right
 /// and bottom borders of the rectangle.
@@ -609,6 +728,25 @@ int FindWindowEx(int hWndParent, int hWndChildAfter, Pointer<Utf16> lpszClass,
       int Function(int hWndParent, int hWndChildAfter, Pointer<Utf16> lpszClass,
           Pointer<Utf16> lpszWindow)>('FindWindowExW');
   return _FindWindowEx(hWndParent, hWndChildAfter, lpszClass, lpszWindow);
+}
+
+/// The FrameRect function draws a border around the specified rectangle by
+/// using the specified brush. The width and height of the border are
+/// always one logical unit.
+///
+/// ```c
+/// int FrameRect(
+///   HDC        hDC,
+///   const RECT *lprc,
+///   HBRUSH     hbr
+/// );
+/// ```
+/// {@category user32}
+int FrameRect(int hDC, Pointer<RECT> lprc, int hbr) {
+  final _FrameRect = _user32.lookupFunction<
+      Int32 Function(IntPtr hDC, Pointer<RECT> lprc, IntPtr hbr),
+      int Function(int hDC, Pointer<RECT> lprc, int hbr)>('FrameRect');
+  return _FrameRect(hDC, lprc, hbr);
 }
 
 /// Retrieves the coordinates of a window's client area. The client
@@ -674,6 +812,27 @@ int GetDC(int hwnd) {
   final _GetDC = _user32.lookupFunction<IntPtr Function(IntPtr hwnd),
       int Function(int hwnd)>('GetDC');
   return _GetDC(hwnd);
+}
+
+/// The GetDCEx function retrieves a handle to a device context (DC) for
+/// the client area of a specified window or for the entire screen. You can
+/// use the returned handle in subsequent GDI functions to draw in the DC.
+/// The device context is an opaque data structure, whose values are used
+/// internally by GDI.
+///
+/// ```c
+/// HDC GetDCEx(
+///   HWND  hWnd,
+///   HRGN  hrgnClip,
+///   DWORD flags
+/// );
+/// ```
+/// {@category user32}
+int GetDCEx(int hWnd, int hrgnClip, int flags) {
+  final _GetDCEx = _user32.lookupFunction<
+      IntPtr Function(IntPtr hWnd, IntPtr hrgnClip, Uint32 flags),
+      int Function(int hWnd, int hrgnClip, int flags)>('GetDCEx');
+  return _GetDCEx(hWnd, hrgnClip, flags);
 }
 
 /// Retrieves the system's dialog base units, which are the average width
@@ -932,6 +1091,22 @@ int GetSysColor(int nIndex) {
   return _GetSysColor(nIndex);
 }
 
+/// The GetSysColorBrush function retrieves a handle identifying a logical
+/// brush that corresponds to the specified color index.
+///
+/// ```c
+/// HBRUSH GetSysColorBrush(
+///   int nIndex
+/// );
+/// ```
+/// {@category user32}
+int GetSysColorBrush(int nIndex) {
+  final _GetSysColorBrush = _user32.lookupFunction<
+      IntPtr Function(Int32 nIndex),
+      int Function(int nIndex)>('GetSysColorBrush');
+  return _GetSysColorBrush(nIndex);
+}
+
 /// Retrieves the system DPI associated with a given process. This is
 /// useful for avoiding compatibility issues that arise from sharing
 /// DPI-sensitive information between multiple system-aware processes with
@@ -999,6 +1174,79 @@ int GetSystemMetricsForDpi(int nIndex, int dpi) {
   return _GetSystemMetricsForDpi(nIndex, dpi);
 }
 
+/// The GetTabbedTextExtent function computes the width and height of a
+/// character string. If the string contains one or more tab characters,
+/// the width of the string is based upon the specified tab stops. The
+/// GetTabbedTextExtent function uses the currently selected font to
+/// compute the dimensions of the string.
+///
+/// ```c
+/// DWORD GetTabbedTextExtentW(
+///   HDC       hdc,
+///   LPCWSTR   lpString,
+///   int       chCount,
+///   int       nTabPositions,
+///   const INT *lpnTabStopPositions
+/// );
+/// ```
+/// {@category user32}
+int GetTabbedTextExtent(int hdc, Pointer<Utf16> lpString, int chCount,
+    int nTabPosition, Pointer<Int32> lpnTabStopPositions) {
+  final _GetTabbedTextExtent = _user32.lookupFunction<
+      Uint32 Function(IntPtr hdc, Pointer<Utf16> lpString, Int32 chCount,
+          Int32 nTabPosition, Pointer<Int32> lpnTabStopPositions),
+      int Function(
+          int hdc,
+          Pointer<Utf16> lpString,
+          int chCount,
+          int nTabPosition,
+          Pointer<Int32> lpnTabStopPositions)>('GetTabbedTextExtentW');
+  return _GetTabbedTextExtent(
+      hdc, lpString, chCount, nTabPosition, lpnTabStopPositions);
+}
+
+/// The GetUpdateRect function retrieves the coordinates of the smallest
+/// rectangle that completely encloses the update region of the specified
+/// window. GetUpdateRect retrieves the rectangle in logical coordinates.
+/// If there is no update region, GetUpdateRect retrieves an empty
+/// rectangle (sets all coordinates to zero).
+///
+/// ```c
+/// BOOL GetUpdateRect(
+///   HWND   hWnd,
+///   LPRECT lpRect,
+///   BOOL   bErase
+/// );
+/// ```
+/// {@category user32}
+int GetUpdateRect(int hWnd, Pointer<RECT> lpRect, int bErase) {
+  final _GetUpdateRect = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect, Int32 bErase),
+      int Function(
+          int hWnd, Pointer<RECT> lpRect, int bErase)>('GetUpdateRect');
+  return _GetUpdateRect(hWnd, lpRect, bErase);
+}
+
+/// The GetUpdateRgn function retrieves the update region of a window by
+/// copying it into the specified region. The coordinates of the update
+/// region are relative to the upper-left corner of the window (that is,
+/// they are client coordinates).
+///
+/// ```c
+/// int GetUpdateRgn(
+///   HWND hWnd,
+///   HRGN hRgn,
+///   BOOL bErase
+/// );
+/// ```
+/// {@category user32}
+int GetUpdateRgn(int hWnd, int hRgn, int bErase) {
+  final _GetUpdateRgn = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, IntPtr hRgn, Int32 bErase),
+      int Function(int hWnd, int hRgn, int bErase)>('GetUpdateRgn');
+  return _GetUpdateRgn(hWnd, hRgn, bErase);
+}
+
 /// Retrieves a handle to a window that has the specified relationship
 /// (Z-Order or owner) to the specified window.
 ///
@@ -1014,6 +1262,24 @@ int GetWindow(int hWnd, int uCmd) {
       IntPtr Function(IntPtr hWnd, Uint32 uCmd),
       int Function(int hWnd, int uCmd)>('GetWindow');
   return _GetWindow(hWnd, uCmd);
+}
+
+/// The GetWindowDC function retrieves the device context (DC) for the
+/// entire window, including title bar, menus, and scroll bars. A window
+/// device context permits painting anywhere in a window, because the
+/// origin of the device context is the upper-left corner of the window
+/// instead of the client area.
+///
+/// ```c
+/// HDC GetWindowDC(
+///   HWND hWnd
+/// );
+/// ```
+/// {@category user32}
+int GetWindowDC(int hWnd) {
+  final _GetWindowDC = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
+      int Function(int hWnd)>('GetWindowDC');
+  return _GetWindowDC(hWnd);
 }
 
 /// Retrieves the dimensions of the bounding rectangle of the specified
@@ -1032,6 +1298,23 @@ int GetWindowRect(int hWnd, Pointer<RECT> lpRect) {
       Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect),
       int Function(int hWnd, Pointer<RECT> lpRect)>('GetWindowRect');
   return _GetWindowRect(hWnd, lpRect);
+}
+
+/// The GetWindowRgnBox function retrieves the dimensions of the tightest
+/// bounding rectangle for the window region of a window.
+///
+/// ```c
+/// int GetWindowRgnBox(
+///   HWND   hWnd,
+///   LPRECT lprc
+/// );
+/// ```
+/// {@category user32}
+int GetWindowRgnBox(int hWnd, Pointer<RECT> lprc) {
+  final _GetWindowRgnBox = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Pointer<RECT> lprc),
+      int Function(int hWnd, Pointer<RECT> lprc)>('GetWindowRgnBox');
+  return _GetWindowRgnBox(hWnd, lprc);
 }
 
 /// Retrieves the length, in characters, of the specified window's title
@@ -1072,6 +1355,53 @@ int GetWindowText(int hWnd, Pointer<Utf16> lpString, int nMaxCount) {
       int Function(
           int hWnd, Pointer<Utf16> lpString, int nMaxCount)>('GetWindowTextW');
   return _GetWindowText(hWnd, lpString, nMaxCount);
+}
+
+/// The GrayString function draws gray text at the specified location. The
+/// function draws the text by copying it into a memory bitmap, graying the
+/// bitmap, and then copying the bitmap to the screen. The function grays
+/// the text regardless of the selected brush and background. GrayString
+/// uses the font currently selected for the specified device context.
+///
+/// ```c
+/// BOOL GrayStringW(
+///   HDC            hDC,
+///   HBRUSH         hBrush,
+///   GRAYSTRINGPROC lpOutputFunc,
+///   LPARAM         lpData,
+///   int            nCount,
+///   int            X,
+///   int            Y,
+///   int            nWidth,
+///   int            nHeight
+/// )
+/// ```
+/// {@category user32}
+int GrayString(int hDC, int hBrush, Pointer<NativeFunction> lpOutputFunc,
+    int lpData, int nCount, int X, int Y, int nWidth, int nHeight) {
+  final _GrayString = _user32.lookupFunction<
+      Int32 Function(
+          IntPtr hDC,
+          IntPtr hBrush,
+          Pointer<NativeFunction> lpOutputFunc,
+          IntPtr lpData,
+          Int32 nCount,
+          Int32 X,
+          Int32 Y,
+          Int32 nWidth,
+          Int32 nHeight),
+      int Function(
+          int hDC,
+          int hBrush,
+          Pointer<NativeFunction> lpOutputFunc,
+          int lpData,
+          int nCount,
+          int X,
+          int Y,
+          int nWidth,
+          int nHeight)>('GrayStringW');
+  return _GrayString(
+      hDC, hBrush, lpOutputFunc, lpData, nCount, X, Y, nWidth, nHeight);
 }
 
 /// The InflateRect function increases or decreases the width and height of
