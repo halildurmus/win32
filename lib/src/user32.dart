@@ -1074,6 +1074,52 @@ int GetWindowText(int hWnd, Pointer<Utf16> lpString, int nMaxCount) {
   return _GetWindowText(hWnd, lpString, nMaxCount);
 }
 
+/// The InflateRect function increases or decreases the width and height of
+/// the specified rectangle. The InflateRect function adds -dx units to the
+/// left end and dx to the right end of the rectangle and -dy units to the
+/// top and dy to the bottom. The dx and dy parameters are signed values;
+/// positive values increase the width and height, and negative values
+/// decrease them.
+///
+/// ```c
+/// BOOL InflateRect(
+///   LPRECT lprc,
+///   int    dx,
+///   int    dy
+/// );
+/// ```
+/// {@category user32}
+int InflateRect(Pointer<RECT> lprc, int dx, int dy) {
+  final _InflateRect = _user32.lookupFunction<
+      Int32 Function(Pointer<RECT> lprc, Int32 dx, Int32 dy),
+      int Function(Pointer<RECT> lprc, int dx, int dy)>('InflateRect');
+  return _InflateRect(lprc, dx, dy);
+}
+
+/// The IntersectRect function calculates the intersection of two source
+/// rectangles and places the coordinates of the intersection rectangle
+/// into the destination rectangle. If the source rectangles do not
+/// intersect, an empty rectangle (in which all coordinates are set to
+/// zero) is placed into the destination rectangle.
+///
+/// ```c
+/// BOOL IntersectRect(
+///   LPRECT     lprcDst,
+///   const RECT *lprcSrc1,
+///   const RECT *lprcSrc2
+/// );
+/// ```
+/// {@category user32}
+int IntersectRect(
+    Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc1, Pointer<RECT> lprcSrc2) {
+  final _IntersectRect = _user32.lookupFunction<
+      Int32 Function(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc1,
+          Pointer<RECT> lprcSrc2),
+      int Function(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc1,
+          Pointer<RECT> lprcSrc2)>('IntersectRect');
+  return _IntersectRect(lprcDst, lprcSrc1, lprcSrc2);
+}
+
 /// The InvalidateRect function adds a rectangle to the specified window's
 /// update region. The update region represents the portion of the window's
 /// client area that must be redrawn.
@@ -1092,6 +1138,44 @@ int InvalidateRect(int hWnd, Pointer<RECT> lpRect, int bErase) {
       int Function(
           int hWnd, Pointer<RECT> lpRect, int bErase)>('InvalidateRect');
   return _InvalidateRect(hWnd, lpRect, bErase);
+}
+
+/// The InvalidateRgn function invalidates the client area within the
+/// specified region by adding it to the current update region of a window.
+/// The invalidated region, along with all other areas in the update
+/// region, is marked for painting when the next WM_PAINT message occurs.
+///
+/// ```c
+/// BOOL InvalidateRgn(
+///   HWND hWnd,
+///   HRGN hRgn,
+///   BOOL bErase
+/// );
+/// ```
+/// {@category user32}
+int InvalidateRgn(int hWnd, int hRgn, int bErase) {
+  final _InvalidateRgn = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, IntPtr hRgn, Int32 bErase),
+      int Function(int hWnd, int hRgn, int bErase)>('InvalidateRgn');
+  return _InvalidateRgn(hWnd, hRgn, bErase);
+}
+
+/// The InvertRect function inverts a rectangle in a window by performing a
+/// logical NOT operation on the color values for each pixel in the
+/// rectangle's interior.
+///
+/// ```c
+/// BOOL InvertRect(
+///   HDC        hDC,
+///   const RECT *lprc
+/// );
+/// ```
+/// {@category user32}
+int InvertRect(int hDC, Pointer<RECT> lprc) {
+  final _InvertRect = _user32.lookupFunction<
+      Int32 Function(IntPtr hDC, Pointer<RECT> lprc),
+      int Function(int hDC, Pointer<RECT> lprc)>('InvertRect');
+  return _InvertRect(hDC, lprc);
 }
 
 /// Determines whether the clipboard contains data in the specified format.
@@ -1124,6 +1208,25 @@ int IsDialogMessage(int hDlg, Pointer<MSG> lpMsg) {
       Int32 Function(IntPtr hDlg, Pointer<MSG> lpMsg),
       int Function(int hDlg, Pointer<MSG> lpMsg)>('IsDialogMessageW');
   return _IsDialogMessage(hDlg, lpMsg);
+}
+
+/// The IsRectEmpty function determines whether the specified rectangle is
+/// empty. An empty rectangle is one that has no area; that is, the
+/// coordinate of the right side is less than or equal to the coordinate of
+/// the left side, or the coordinate of the bottom side is less than or
+/// equal to the coordinate of the top side.
+///
+/// ```c
+/// BOOL IsRectEmpty(
+///   const RECT *lprc
+/// );
+/// ```
+/// {@category user32}
+int IsRectEmpty(Pointer<RECT> lprc) {
+  final _IsRectEmpty = _user32.lookupFunction<
+      Int32 Function(Pointer<RECT> lprc),
+      int Function(Pointer<RECT> lprc)>('IsRectEmpty');
+  return _IsRectEmpty(lprc);
 }
 
 /// Determines the visibility state of the specified window.
@@ -1225,6 +1328,22 @@ int LoadImage(
   return _LoadImage(hInst, name, type, cx, cy, fuLoad);
 }
 
+/// The LockWindowUpdate function disables or enables drawing in the
+/// specified window. Only one window can be locked at a time.
+///
+/// ```c
+/// BOOL LockWindowUpdate(
+///   HWND hWndLock
+/// );
+/// ```
+/// {@category user32}
+int LockWindowUpdate(int hWndLock) {
+  final _LockWindowUpdate = _user32.lookupFunction<
+      Int32 Function(IntPtr hWndLock),
+      int Function(int hWndLock)>('LockWindowUpdate');
+  return _LockWindowUpdate(hWndLock);
+}
+
 /// Locks the workstation's display. Locking a workstation protects it from
 /// unauthorized use.
 ///
@@ -1274,6 +1393,29 @@ int MapDialogRect(int hDlg, Pointer<RECT> lpRect) {
   return _MapDialogRect(hDlg, lpRect);
 }
 
+/// The MapWindowPoints function converts (maps) a set of points from a
+/// coordinate space relative to one window to a coordinate space relative
+/// to another window.
+///
+/// ```c
+/// int MapWindowPoints(
+///   HWND    hWndFrom,
+///   HWND    hWndTo,
+///   LPPOINT lpPoints,
+///   UINT    cPoints
+/// );
+/// ```
+/// {@category user32}
+int MapWindowPoints(
+    int hWndFrom, int hWndTo, Pointer<POINT> lpPoints, int cPoints) {
+  final _MapWindowPoints = _user32.lookupFunction<
+      Int32 Function(IntPtr hWndFrom, IntPtr hWndTo, Pointer<POINT> lpPoints,
+          Uint32 cPoints),
+      int Function(int hWndFrom, int hWndTo, Pointer<POINT> lpPoints,
+          int cPoints)>('MapWindowPoints');
+  return _MapWindowPoints(hWndFrom, hWndTo, lpPoints, cPoints);
+}
+
 /// Displays a modal dialog box that contains a system icon, a set of
 /// buttons, and a brief application-specific message, such as status or
 /// error information. The message box returns an integer value that
@@ -1313,6 +1455,23 @@ int MonitorFromPoint(int pt, int dwFlags) {
       IntPtr Function(Int64 pt, Uint32 dwFlags),
       int Function(int pt, int dwFlags)>('MonitorFromPoint');
   return _MonitorFromPoint(pt, dwFlags);
+}
+
+/// The MonitorFromRect function retrieves a handle to the display monitor
+/// that has the largest area of intersection with a specified rectangle.
+///
+/// ```c
+/// HMONITOR MonitorFromRect(
+///   LPCRECT lprc,
+///   DWORD   dwFlags
+/// );
+/// ```
+/// {@category user32}
+int MonitorFromRect(Pointer<RECT> lprc, int dwFlags) {
+  final _MonitorFromRect = _user32.lookupFunction<
+      IntPtr Function(Pointer<RECT> lprc, Uint32 dwFlags),
+      int Function(Pointer<RECT> lprc, int dwFlags)>('MonitorFromRect');
+  return _MonitorFromRect(lprc, dwFlags);
 }
 
 /// The MonitorFromWindow function retrieves a handle to the display
@@ -1383,6 +1542,24 @@ int MsgWaitForMultipleObjects(int nCount, Pointer<IntPtr> pHandles,
       nCount, pHandles, fWaitAll, dwMilliseconds, dwWakeMask);
 }
 
+/// The OffsetRect function moves the specified rectangle by the specified
+/// offsets.
+///
+/// ```c
+/// BOOL OffsetRect(
+///   LPRECT lprc,
+///   int    dx,
+///   int    dy
+/// );
+/// ```
+/// {@category user32}
+int OffsetRect(Pointer<RECT> lprc, int dx, int dy) {
+  final _OffsetRect = _user32.lookupFunction<
+      Int32 Function(Pointer<RECT> lprc, Int32 dx, Int32 dy),
+      int Function(Pointer<RECT> lprc, int dx, int dy)>('OffsetRect');
+  return _OffsetRect(lprc, dx, dy);
+}
+
 /// Restores a minimized (iconic) window to its previous size and position;
 /// it then activates the window.
 ///
@@ -1396,6 +1573,23 @@ int OpenIcon(int hWnd) {
   final _OpenIcon = _user32.lookupFunction<Int32 Function(IntPtr hWnd),
       int Function(int hWnd)>('OpenIcon');
   return _OpenIcon(hWnd);
+}
+
+/// The PaintDesktop function fills the clipping region in the specified
+/// device context with the desktop pattern or wallpaper. The function is
+/// provided primarily for shell desktops.
+///
+/// ```c
+/// BOOL PaintDesktop(
+///   HDC hdc
+/// );
+/// ```
+/// {@category user32}
+int PaintDesktop(int hdc) {
+  final _PaintDesktop =
+      _user32.lookupFunction<Int32 Function(IntPtr hdc), int Function(int hdc)>(
+          'PaintDesktop');
+  return _PaintDesktop(hdc);
 }
 
 /// Dispatches incoming sent messages, checks the thread message queue for
@@ -1494,6 +1688,47 @@ void PostQuitMessage(int nExitCode) {
   return _PostQuitMessage(nExitCode);
 }
 
+/// The PtInRect function determines whether the specified point lies
+/// within the specified rectangle. A point is within a rectangle if it
+/// lies on the left or top side or is within all four sides. A point on
+/// the right or bottom side is considered outside the rectangle.
+///
+/// ```c
+/// BOOL PtInRect(
+///   const RECT *lprc,
+///   POINT      pt
+/// );
+/// ```
+/// {@category user32}
+int PtInRect(Pointer<RECT> lprc, int pt) {
+  final _PtInRect = _user32.lookupFunction<
+      Int32 Function(Pointer<RECT> lprc, Int64 pt),
+      int Function(Pointer<RECT> lprc, int pt)>('PtInRect');
+  return _PtInRect(lprc, pt);
+}
+
+/// The RedrawWindow function updates the specified rectangle or region in
+/// a window's client area.
+///
+/// ```c
+/// BOOL RedrawWindow(
+///   HWND       hWnd,
+///   const RECT *lprcUpdate,
+///   HRGN       hrgnUpdate,
+///   UINT       flags
+/// );
+/// ```
+/// {@category user32}
+int RedrawWindow(
+    int hWnd, Pointer<RECT> lprcUpdate, int hrgnUpdate, int flags) {
+  final _RedrawWindow = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Pointer<RECT> lprcUpdate, IntPtr hrgnUpdate,
+          Uint32 flags),
+      int Function(int hWnd, Pointer<RECT> lprcUpdate, int hrgnUpdate,
+          int flags)>('RedrawWindow');
+  return _RedrawWindow(hWnd, lprcUpdate, hrgnUpdate, flags);
+}
+
 /// Registers a window class for subsequent use in calls to the
 /// CreateWindow or CreateWindowEx function.
 ///
@@ -1559,6 +1794,23 @@ int ReplyMessage(int lResult) {
   final _ReplyMessage = _user32.lookupFunction<Int32 Function(IntPtr lResult),
       int Function(int lResult)>('ReplyMessage');
   return _ReplyMessage(lResult);
+}
+
+/// The ScreenToClient function converts the screen coordinates of a
+/// specified point on the screen to client-area coordinates.
+///
+/// ```c
+/// BOOL ScreenToClient(
+///   HWND    hWnd,
+///   LPPOINT lpPoint
+/// );
+/// ```
+/// {@category user32}
+int ScreenToClient(int hWnd, Pointer<POINT> lpPoint) {
+  final _ScreenToClient = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
+      int Function(int hWnd, Pointer<POINT> lpPoint)>('ScreenToClient');
+  return _ScreenToClient(hWnd, lpPoint);
 }
 
 /// The ScrollWindow function scrolls the contents of the specified
@@ -1800,6 +2052,45 @@ int SetProcessDPIAware() {
   return _SetProcessDPIAware();
 }
 
+/// The SetRect function sets the coordinates of the specified rectangle.
+/// This is equivalent to assigning the left, top, right, and bottom
+/// arguments to the appropriate members of the RECT structure.
+///
+/// ```c
+/// BOOL SetRect(
+///   LPRECT lprc,
+///   int    xLeft,
+///   int    yTop,
+///   int    xRight,
+///   int    yBottom
+/// );
+/// ```
+/// {@category user32}
+int SetRect(Pointer<RECT> lprc, int xLeft, int yTop, int xRight, int yBottom) {
+  final _SetRect = _user32.lookupFunction<
+      Int32 Function(Pointer<RECT> lprc, Int32 xLeft, Int32 yTop, Int32 xRight,
+          Int32 yBottom),
+      int Function(Pointer<RECT> lprc, int xLeft, int yTop, int xRight,
+          int yBottom)>('SetRect');
+  return _SetRect(lprc, xLeft, yTop, xRight, yBottom);
+}
+
+/// The SetRectEmpty function creates an empty rectangle in which all
+/// coordinates are set to zero.
+///
+/// ```c
+/// BOOL SetRectEmpty(
+///   LPRECT lprc
+/// );
+/// ```
+/// {@category user32}
+int SetRectEmpty(Pointer<RECT> lprc) {
+  final _SetRectEmpty = _user32.lookupFunction<
+      Int32 Function(Pointer<RECT> lprc),
+      int Function(Pointer<RECT> lprc)>('SetRectEmpty');
+  return _SetRectEmpty(lprc);
+}
+
 /// The SetScrollInfo function sets the parameters of a scroll bar,
 /// including the minimum and maximum scrolling positions, the page size,
 /// and the position of the scroll box (thumb). The function also redraws
@@ -1889,6 +2180,26 @@ int SetWindowPos(
   return _SetWindowPos(hWnd, hWndInsertAfter, X, Y, cx, cy, uFlags);
 }
 
+/// The SetWindowRgn function sets the window region of a window. The
+/// window region determines the area within the window where the system
+/// permits drawing. The system does not display any portion of a window
+/// that lies outside of the window region
+///
+/// ```c
+/// int SetWindowRgn(
+///   HWND hWnd,
+///   HRGN hRgn,
+///   BOOL bRedraw
+/// );
+/// ```
+/// {@category user32}
+int SetWindowRgn(int hWnd, int hRgn, int bRedraw) {
+  final _SetWindowRgn = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, IntPtr hRgn, Int32 bRedraw),
+      int Function(int hWnd, int hRgn, int bRedraw)>('SetWindowRgn');
+  return _SetWindowRgn(hWnd, hRgn, bRedraw);
+}
+
 /// Changes the text of the specified window's title bar (if it has one).
 /// If the specified window is a control, the text of the control is
 /// changed. However, SetWindowText cannot change the text of a control in
@@ -1967,6 +2278,27 @@ int SoundSentry() {
   return _SoundSentry();
 }
 
+/// The SubtractRect function determines the coordinates of a rectangle
+/// formed by subtracting one rectangle from another.
+///
+/// ```c
+/// BOOL SubtractRect(
+///   LPRECT     lprcDst,
+///   const RECT *lprcSrc1,
+///   const RECT *lprcSrc2
+/// );
+/// ```
+/// {@category user32}
+int SubtractRect(
+    Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc1, Pointer<RECT> lprcSrc2) {
+  final _SubtractRect = _user32.lookupFunction<
+      Int32 Function(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc1,
+          Pointer<RECT> lprcSrc2),
+      int Function(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc1,
+          Pointer<RECT> lprcSrc2)>('SubtractRect');
+  return _SubtractRect(lprcDst, lprcSrc1, lprcSrc2);
+}
+
 /// Retrieves or sets the value of one of the system-wide parameters. This
 /// function can also update the user profile while setting a parameter.
 ///
@@ -1987,6 +2319,49 @@ int SystemParametersInfo(
       int Function(int uiAction, int uiParam, Pointer pvParam,
           int fWinIni)>('SystemParametersInfoW');
   return _SystemParametersInfo(uiAction, uiParam, pvParam, fWinIni);
+}
+
+/// The TabbedTextOut function writes a character string at a specified
+/// location, expanding tabs to the values specified in an array of
+/// tab-stop positions. Text is written in the currently selected font,
+/// background color, and text color.
+///
+/// ```c
+/// LONG TabbedTextOutW(
+///   HDC       hdc,
+///   int       x,
+///   int       y,
+///   LPCWSTR   lpString,
+///   int       chCount,
+///   int       nTabPositions,
+///   const INT *lpnTabStopPositions,
+///   int       nTabOrigin
+/// );
+/// ```
+/// {@category user32}
+int TabbedTextOut(int hdc, int x, int y, Pointer<Utf16> lpString, int chCount,
+    int nTabPositions, Pointer<Int32> lpnTabStopPositions, int nTabOrigin) {
+  final _TabbedTextOut = _user32.lookupFunction<
+      Int32 Function(
+          IntPtr hdc,
+          Int32 x,
+          Int32 y,
+          Pointer<Utf16> lpString,
+          Int32 chCount,
+          Int32 nTabPositions,
+          Pointer<Int32> lpnTabStopPositions,
+          Int32 nTabOrigin),
+      int Function(
+          int hdc,
+          int x,
+          int y,
+          Pointer<Utf16> lpString,
+          int chCount,
+          int nTabPositions,
+          Pointer<Int32> lpnTabStopPositions,
+          int nTabOrigin)>('TabbedTextOutW');
+  return _TabbedTextOut(hdc, x, y, lpString, chCount, nTabPositions,
+      lpnTabStopPositions, nTabOrigin);
 }
 
 /// Processes accelerator keys for menu commands. The function translates a
@@ -2029,6 +2404,27 @@ int TranslateMessage(Pointer<MSG> lpMsg) {
   return _TranslateMessage(lpMsg);
 }
 
+/// The UnionRect function creates the union of two rectangles. The union
+/// is the smallest rectangle that contains both source rectangles.
+///
+/// ```c
+/// BOOL UnionRect(
+///   LPRECT     lprcDst,
+///   const RECT *lprcSrc1,
+///   const RECT *lprcSrc2
+/// );
+/// ```
+/// {@category user32}
+int UnionRect(
+    Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc1, Pointer<RECT> lprcSrc2) {
+  final _UnionRect = _user32.lookupFunction<
+      Int32 Function(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc1,
+          Pointer<RECT> lprcSrc2),
+      int Function(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc1,
+          Pointer<RECT> lprcSrc2)>('UnionRect');
+  return _UnionRect(lprcDst, lprcSrc1, lprcSrc2);
+}
+
 /// The UpdateWindow function updates the client area of the specified
 /// window by sending a WM_PAINT message to the window if the window's
 /// update region is not empty. The function sends a WM_PAINT message
@@ -2047,6 +2443,42 @@ int UpdateWindow(int hWnd) {
   return _UpdateWindow(hWnd);
 }
 
+/// The ValidateRect function validates the client area within a rectangle
+/// by removing the rectangle from the update region of the specified
+/// window.
+///
+/// ```c
+/// BOOL ValidateRect(
+///   HWND       hWnd,
+///   const RECT *lpRect
+/// );
+/// ```
+/// {@category user32}
+int ValidateRect(int hWnd, Pointer<RECT> lpRect) {
+  final _ValidateRect = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect),
+      int Function(int hWnd, Pointer<RECT> lpRect)>('ValidateRect');
+  return _ValidateRect(hWnd, lpRect);
+}
+
+/// The ValidateRgn function validates the client area within a region by
+/// removing the region from the current update region of the specified
+/// window.
+///
+/// ```c
+/// BOOL ValidateRgn(
+///   HWND hWnd,
+///   HRGN hRgn
+/// );
+/// ```
+/// {@category user32}
+int ValidateRgn(int hWnd, int hRgn) {
+  final _ValidateRgn = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, IntPtr hRgn),
+      int Function(int hWnd, int hRgn)>('ValidateRgn');
+  return _ValidateRgn(hWnd, hRgn);
+}
+
 /// Yields control to other threads when a thread has no other messages in
 /// its message queue. The WaitMessage function suspends the thread and
 /// does not return until a new message is placed in the thread's message
@@ -2060,6 +2492,22 @@ int WaitMessage() {
   final _WaitMessage =
       _user32.lookupFunction<Int32 Function(), int Function()>('WaitMessage');
   return _WaitMessage();
+}
+
+/// The WindowFromDC function returns a handle to the window associated
+/// with the specified display device context (DC). Output functions that
+/// use the specified device context draw into this window.
+///
+/// ```c
+/// HWND WindowFromDC(
+///   HDC hDC
+/// );
+/// ```
+/// {@category user32}
+int WindowFromDC(int hDC) {
+  final _WindowFromDC = _user32.lookupFunction<IntPtr Function(IntPtr hDC),
+      int Function(int hDC)>('WindowFromDC');
+  return _WindowFromDC(hDC);
 }
 
 /// Retrieves a handle to the window that contains the specified physical
