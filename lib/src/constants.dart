@@ -316,6 +316,79 @@ const ERROR_TOO_MANY_SEM_REQUESTS = 103;
 const ERROR_INVALID_AT_INTERRUPT_TIME = 104;
 
 // -----------------------------------------------------------------------------
+// Process and file access types
+// -----------------------------------------------------------------------------
+
+/// The right to delete the object.
+const DELETE = 0x00010000;
+
+/// The right to read the information in the object's security descriptor, not
+/// including the information in the system access control list (SACL).
+const READ_CONTROL = 0x00020000;
+
+/// The right to modify the discretionary access control list (DACL) in the
+/// object's security descriptor.
+const WRITE_DAC = 0x00040000;
+
+/// The right to change the owner in the object's security descriptor.
+const WRITE_OWNER = 0x00080000;
+
+/// The right to use the object for synchronization. This enables a thread to
+/// wait until the object is in the signaled state.
+const SYNCHRONIZE = 0x00100000;
+
+/// Combines DELETE, READ_CONTROL, WRITE_DAC, and WRITE_OWNER access.
+const STANDARD_RIGHTS_REQUIRED = 0x000F0000;
+
+/// Currently defined to equal READ_CONTROL.
+const STANDARD_RIGHTS_READ = READ_CONTROL;
+
+/// Currently defined to equal READ_CONTROL.
+const STANDARD_RIGHTS_WRITE = READ_CONTROL;
+
+/// Currently defined to equal READ_CONTROL.
+const STANDARD_RIGHTS_EXECUTE = READ_CONTROL;
+
+/// Combines DELETE, READ_CONTROL, WRITE_DAC, WRITE_OWNER, and SYNCHRONIZE
+/// access.
+const STANDARD_RIGHTS_ALL = 0x001F0000;
+
+/// Specifies access to the system security portion of the security descriptor.
+const ACCESS_SYSTEM_SECURITY = 0x01000000;
+
+/// Indicates that the caller is requesting the most access possible to the
+/// object.
+const MAXIMUM_ALLOWED = 0x02000000;
+
+/// Specifies access control suitable for reading the object.
+const GENERIC_READ = 0x80000000;
+
+/// Specifies access control suitable for updating attributes on the object.
+const GENERIC_WRITE = 0x40000000;
+
+/// Specifies access control suitable for executing an action on the object.
+const GENERIC_EXECUTE = 0x20000000;
+
+/// Specifies all defined access control on the object.
+const GENERIC_ALL = 0x10000000;
+
+/// Creates a new file, only if it does not already exist.
+const CREATE_NEW = 1;
+
+/// Creates a new file, always.
+const CREATE_ALWAYS = 2;
+
+/// Opens a file or device, only if it exists.
+const OPEN_EXISTING = 3;
+
+/// Opens a file, always.
+const OPEN_ALWAYS = 4;
+
+/// Opens a file and truncates it so that its size is zero bytes, only if it
+/// exists.
+const TRUNCATE_EXISTING = 5;
+
+// -----------------------------------------------------------------------------
 // Format message flags
 // -----------------------------------------------------------------------------
 

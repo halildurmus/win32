@@ -54,6 +54,46 @@ void captureImage(int hwnd) {
         rcClient.bottom - rcClient.top, hdcWindow, 0, 0, SRCCOPY);
 
     GetObject(hbmScreen, sizeOf<BITMAP>(), bmpScreen.addressOf);
+
+    final bitmapFileHeader = BITMAPFILEHEADER.allocate();
+    final bitmapInfoHeader = BITMAPINFOHEADER.allocate()
+      ..biSize = sizeOf<BITMAPINFOHEADER>()
+      ..biWidth = bmpScreen.bmWidth
+      ..biHeight = bmpScreen.bmHeight
+      ..biPlanes = 1
+      ..biBitCount = 32
+      ..biCompression = BI_RGB;
+
+    final dwBmpSize = ((bmpScreen.bmWidth * bitmapInfoHeader.biBitCount + 31) /
+            32 *
+            4 *
+            bmpScreen.bmHeight)
+        .toInt();
+
+    final lpBitmap = allocate<Uint8>(count: dwBmpSize);
+
+    GetDIBits(hdcWindow, hbmScreen, 0, bmpScreen.bmHeight, lpBitmap,
+        bitmapInfoHeader.addressOf.cast(), DIB_RGB_COLORS);
+
+    final hFile = CreateFile(TEXT('captureqwsz.bmp'), GENERIC_WRITE, 0, nullptr,
+        CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+
+    final dwSizeOfDIB =
+        dwBmpSize + sizeOf<BITMAPFILEHEADER>() + sizeOf<BITMAPINFOHEADER>();
+    bitmapFileHeader.bfOffBits =
+        sizeOf<BITMAPFILEHEADER>() + sizeOf<BITMAPINFOHEADER>();
+
+    bitmapFileHeader.bfSize = dwSizeOfDIB;
+    bitmapFileHeader.bfType = 0x4D42; // BM
+
+    final dwBytesWritten = allocate<Uint32>();
+    WriteFile(hFile, bitmapFileHeader.addressOf, sizeOf<BITMAPFILEHEADER>(),
+        dwBytesWritten, nullptr);
+    WriteFile(hFile, bitmapInfoHeader.addressOf, sizeOf<BITMAPINFOHEADER>(),
+        dwBytesWritten, nullptr);
+    WriteFile(hFile, lpBitmap, dwBmpSize, dwBytesWritten, nullptr);
+
+    CloseHandle(hFile);
   } finally {
     DeleteObject(hdcMemDC);
     ReleaseDC(NULL, hdcScreen);
