@@ -7,6 +7,7 @@
 //   https://docs.microsoft.com/en-us/windows/win32/gdi/capturing-an-image
 
 import 'dart:ffi';
+import 'dart:io';
 import 'package:ffi/ffi.dart';
 
 import 'package:win32/win32.dart';
@@ -103,25 +104,23 @@ void captureImage(int hwnd) {
 
 int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
   switch (uMsg) {
+    case WM_COMMAND:
+      final wmid = LOWORD(wParam);
+      switch (wmid) {
+        default:
+          return DefWindowProc(hWnd, uMsg, wParam, lParam);
+      }
     case WM_DESTROY:
       PostQuitMessage(0);
       return 0;
 
     case WM_PAINT:
       final ps = PAINTSTRUCT.allocate();
-      final hdc = BeginPaint(hWnd, ps.addressOf);
-      final rect = RECT.allocate();
-      final msg = TEXT('Hello, Dart!');
-
-      GetClientRect(hWnd, rect.addressOf);
-      DrawText(
-          hdc, msg, -1, rect.addressOf, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+      BeginPaint(hWnd, ps.addressOf);
+      captureImage(hWnd);
       EndPaint(hWnd, ps.addressOf);
 
       free(ps.addressOf);
-      free(rect.addressOf);
-      free(msg);
-
       return 0;
   }
   return DefWindowProc(hWnd, uMsg, wParam, lParam);
@@ -129,7 +128,7 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
 
 void main() {
   // Register the window class.
-  final className = TEXT('Sample Window Class');
+  final className = TEXT('GDI Image Capture');
 
   final wc = WNDCLASS.allocate();
   wc.style = CS_HREDRAW | CS_VREDRAW;
@@ -145,7 +144,7 @@ void main() {
   final hWnd = CreateWindowEx(
       0, // Optional window styles.
       className, // Window class
-      TEXT('Dart Native Win32 window'), // Window caption
+      className, // Window caption
       WS_OVERLAPPEDWINDOW, // Window style
 
       // Size and position
@@ -159,19 +158,17 @@ void main() {
       nullptr // Additional application data
       );
 
-  if (hWnd == 0) {
-    final error = GetLastError();
-    throw WindowsException(HRESULT_FROM_WIN32(error));
+  if (hWnd == FALSE) {
+    exit(-1);
   }
 
   ShowWindow(hWnd, SW_SHOWNORMAL);
   UpdateWindow(hWnd);
 
-  // Run the message loop.
-
-  final msg = MSG.allocate();
-  while (GetMessage(msg.addressOf, NULL, 0, 0) != 0) {
-    TranslateMessage(msg.addressOf);
-    DispatchMessage(msg.addressOf);
+  // Run the message loop
+  final msg = allocate<MSG>();
+  while (GetMessage(msg, NULL, 0, 0) != FALSE) {
+    TranslateMessage(msg);
+    DispatchMessage(msg);
   }
 }
