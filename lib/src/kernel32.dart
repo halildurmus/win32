@@ -546,7 +546,7 @@ int FindResource(int hModule, Pointer<Utf16> lpName, Pointer<Utf16> lpType) {
 ///   LPCWSTR  lpType,
 ///   LPCWSTR  lpName,
 ///   WORD    wLanguage
-/// ););
+/// );
 /// ```
 /// {@category kernel32}
 int FindResourceEx(
