@@ -2276,15 +2276,15 @@ class BITMAP extends Struct {
 ///
 /// {@category Struct}
 class BITMAPFILEHEADER extends Struct {
-  @Int16()
+  @Uint16()
   external int bfType;
-  @Int32()
+  @Uint32()
   external int bfSize;
-  @Int16()
+  @Uint16()
   external int bfReserved1;
-  @Int16()
+  @Uint16()
   external int bfReserved2;
-  @Int32()
+  @Uint32()
   external int bfOffBits;
 
   factory BITMAPFILEHEADER.allocate() => allocate<BITMAPFILEHEADER>().ref
@@ -3254,7 +3254,7 @@ class BLUETOOTH_PIN_INFO extends Struct {
     final pinData = Uint8List.fromList(pinString.codeUnits);
 
     // Set up to the length of the string, even if longer than pinLength, since
-    // user may set pin then pinLength.
+    // user may set pin before pinLength.
     for (var idx = 0; idx < min(pinData.length, BTH_MAX_PIN_SIZE); idx++) {
       addressOf.cast<Uint8>().elementAt(idx).value = pinData[idx];
     }
