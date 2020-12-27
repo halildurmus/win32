@@ -174,3 +174,44 @@ int RegQueryValueEx(
   return _RegQueryValueEx(
       hKey, lpValueName, lpReserved, lpType, lpData, lpcbData);
 }
+
+/// Sets the data and type of a specified value under a registry key.
+/// To ensure that any string values (REG_SZ,
+/// REG_MULTI_SZ, and REG_EXPAND_SZ) returned are null-terminated, use the
+/// RegGetValue function.
+///
+/// ```c
+/// LSTATUS RegSetValueEx(
+///   HKEY    hKey,
+///   LPCWSTR lpValueName,
+///   LPDWORD lpReserved,
+///   LPDWORD lpType,
+///   LPBYTE  lpData,
+///   LPDWORD lpcbData
+/// );
+/// ```
+/// {@category advapi32}
+int RegSetValueEx(
+    int hKey,
+    Pointer<Utf16> lpValueName,
+    Pointer<Uint32> lpReserved,
+    Pointer<Uint32> lpType,
+    Pointer<Uint8> lpData,
+    Pointer<Uint32> lpcbData) {
+  final RegSetValueEx = _advapi32.lookupFunction<
+      Int32 Function(
+          IntPtr hKey,
+          Pointer<Utf16> lpValueName,
+          Pointer<Uint32> lpReserved,
+          Pointer<Uint32> lpType,
+          Pointer<Uint8> lpData,
+          Pointer<Uint32> lpcbData),
+      int Function(
+          int hKey,
+          Pointer<Utf16> lpValueName,
+          Pointer<Uint32> lpReserved,
+          Pointer<Uint32> lpType,
+          Pointer<Uint8> lpData,
+          Pointer<Uint32> lpcbData)>('RegSetValueEx');
+  return RegSetValueEx(hKey, lpValueName, lpReserved, lpType, lpData, lpcbData);
+}

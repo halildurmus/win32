@@ -3275,6 +3275,26 @@ void main() {
               Pointer<Uint32> lpcbData)>('RegQueryValueExW');
       expect(RegQueryValueEx, isA<Function>());
     });
+
+    test('Can instantiate RegSetValueEx', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegSetValueEx = advapi32.lookupFunction<
+          Int32 Function(
+              IntPtr hKey,
+              Pointer<Utf16> lpValueName,
+              Pointer<Uint32> lpReserved,
+              Pointer<Uint32> lpType,
+              Pointer<Uint8> lpData,
+              Pointer<Uint32> lpcbData),
+          int Function(
+              int hKey,
+              Pointer<Utf16> lpValueName,
+              Pointer<Uint32> lpReserved,
+              Pointer<Uint32> lpType,
+              Pointer<Uint8> lpData,
+              Pointer<Uint32> lpcbData)>('RegSetValueEx');
+      expect(RegSetValueEx, isA<Function>());
+    });
   });
 
   group('Test dxva2 functions', () {
