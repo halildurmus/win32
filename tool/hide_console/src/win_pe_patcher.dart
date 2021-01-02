@@ -28,13 +28,13 @@ class WinPePatcher {
 
   static RandomAccessFile open(String fileName) {
     final entry = File(fileName);
-    verifiPEHeader(entry);
+    verifyPEHeader(entry);
     final file = entry.openSync(mode: FileMode.append);
     file.setPositionSync(START_PE + SUBSYSTEM_PE);
     return file;
   }
 
-  static void verifiPEHeader(File fileEntry) {
+  static void verifyPEHeader(File fileEntry) {
     final file = fileEntry.openSync(mode: FileMode.read);
     final Mark_Zbikowski =  Uint8List.fromList([0x4D, 0x5A]);
     final magicNumbers = file.readSync(2);
