@@ -1,0 +1,5 @@
+
+enum SubSystem {
+  CONSOLE,
+  GUI
+}
