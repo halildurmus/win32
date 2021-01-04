@@ -12,8 +12,9 @@ void main() {
       final mdScope =
           WinmdStore.getScopeForType('Windows.Globalization.Calendar');
 
-      expect(
-          mdScope.typeDefs.length, equals(104)); // at least, on Windows 10 2004
+      // This is 99 on Windows Server 2019, 104 on Windows 10 2004. The exact
+      // number is less critical than that this returns a sane result.
+      expect(mdScope.typeDefs.length, greaterThan(50));
     });
 
     test('Find a specific WinMD token', () {
