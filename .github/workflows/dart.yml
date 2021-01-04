@@ -8,7 +8,16 @@ on:
 
 jobs:
   test:
-    runs-on: windows-latest
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        # Include newest and latest versions of Windows, plus Ubuntu (to make
+        # sure that tests don't fail on a non-supported platform).
+        os: [windows-latest, windows-2016, ubuntu-latest]
+        # Stable does not support null safety yet.
+        # sdk: [stable, beta, dev, edge]
+        sdk: [beta, dev, edge]
+      fail-fast: false
 
     steps:
       - name: Fetch sources
@@ -18,7 +27,7 @@ jobs:
         uses: cedx/setup-dart@v2
         with:
           architecture: x64
-          release-channel: dev
+          release-channel: ${{matrix.sdk}}
           version: latest
 
       - name: Print Dart SDK version
