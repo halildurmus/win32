@@ -19,13 +19,19 @@ jobs:
         # defensively test for missing APIs. See
         # https://github.com/timsneath/win32/issues/130
 
-
         # os: [windows-latest, windows-2016, ubuntu-latest]
         os: [windows-latest, ubuntu-latest]
 
         # Stable does not support null safety yet.
         # sdk: [stable, beta, dev, edge]
         sdk: [beta, dev, edge]
+
+        # One SDK version is plenty on Ubuntu. It's a safety test.
+        exclude:
+          - os: ubuntu-latest
+            sdk: dev
+          - os: ubuntu-latest
+            sdk: edge
 
     steps:
       - name: Fetch sources
