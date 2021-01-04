@@ -1,3 +1,8 @@
+## 2.0.0-nullsafety.9
+
+- New APIs:
+  - kernel32: IsWow64Process2
+
 ## 2.0.0-nullsafety.8
 
 - New APIs:
