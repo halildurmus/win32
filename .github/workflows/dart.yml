@@ -10,14 +10,22 @@ jobs:
   test:
     runs-on: ${{matrix.os}}
     strategy:
+      fail-fast: false
       matrix:
         # Include newest and latest versions of Windows, plus Ubuntu (to make
         # sure that tests don't fail on a non-supported platform).
-        os: [windows-latest, windows-2016, ubuntu-latest]
+        
+        # Six tests currently fail on windows-2016 because they don't
+        # defensively test for missing APIs. See
+        # https://github.com/timsneath/win32/issues/130
+
+
+        # os: [windows-latest, windows-2016, ubuntu-latest]
+        os: [windows-latest, ubuntu-latest]
+
         # Stable does not support null safety yet.
         # sdk: [stable, beta, dev, edge]
         sdk: [beta, dev, edge]
-      fail-fast: false
 
     steps:
       - name: Fetch sources
@@ -36,9 +44,8 @@ jobs:
       - name: Install dependencies
         run: dart pub get
 
-      # Uncomment this step to verify the use of 'dart format' on each commit.
-      # - name: Verify formatting
-      #   run: dart format --output=none --set-exit-if-changed .
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
 
       # Consider passing '--fatal-infos' for slightly stricter analysis.
       # - name: Analyze project source
