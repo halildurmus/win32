@@ -96,6 +96,28 @@ int CredWrite(Pointer<CREDENTIAL> Credential, int Flags) {
   return _CredWrite(Credential, Flags);
 }
 
+/// Initiates a shutdown and restart of the specified computer, and
+/// restarts any applications that have been registered for restart.
+///
+/// ```c
+/// Initiates a shutdown and restart of the specified computer and restarts any applications that have been registered for restart.
+/// ```
+/// {@category advapi32}
+int InitiateShutdown(Pointer<Utf16> lpMachineName, Pointer<Utf16> lpMessage,
+    int dwGracePeriod, int dwShutdownFlags, int dwReason) {
+  final _InitiateShutdown = _advapi32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpMachineName, Pointer<Utf16> lpMessage,
+          Uint32 dwGracePeriod, Uint32 dwShutdownFlags, Uint32 dwReason),
+      int Function(
+          Pointer<Utf16> lpMachineName,
+          Pointer<Utf16> lpMessage,
+          int dwGracePeriod,
+          int dwShutdownFlags,
+          int dwReason)>('InitiateShutdownW');
+  return _InitiateShutdown(
+      lpMachineName, lpMessage, dwGracePeriod, dwShutdownFlags, dwReason);
+}
+
 /// Closes a handle to the specified registry key.
 ///
 /// ```c
@@ -173,4 +195,27 @@ int RegQueryValueEx(
           Pointer<Uint32> lpcbData)>('RegQueryValueExW');
   return _RegQueryValueEx(
       hKey, lpValueName, lpReserved, lpType, lpData, lpcbData);
+}
+
+/// Sets the data and type of a specified value under a registry key.
+///
+/// ```c
+/// LSTATUS RegSetValueExW(
+///   HKEY       hKey,
+///   LPCWSTR    lpValueName,
+///   DWORD      Reserved,
+///   DWORD      dwType,
+///   const BYTE *lpData,
+///   DWORD      cbData
+/// );
+/// ```
+/// {@category advapi32}
+int RegSetValueEx(int hKey, Pointer<Utf16> lpValueName, int Reserved,
+    int dwType, Pointer<Uint8> lpData, int cbData) {
+  final _RegSetValueEx = _advapi32.lookupFunction<
+      Int32 Function(IntPtr hKey, Pointer<Utf16> lpValueName, Uint32 Reserved,
+          Uint32 dwType, Pointer<Uint8> lpData, Uint32 cbData),
+      int Function(int hKey, Pointer<Utf16> lpValueName, int Reserved,
+          int dwType, Pointer<Uint8> lpData, int cbData)>('RegSetValueExW');
+  return _RegSetValueEx(hKey, lpValueName, Reserved, dwType, lpData, cbData);
 }

@@ -1,7 +1,8 @@
 ## 2.0.0-nullsafety.9
 
 - New APIs:
-  - kernel32: IsWow64Process2
+  - advapi32: InitiateShutdownW, RegSetValueExW
+  - kernel32: IsWow64Process2, Wow64SuspendThread
 
 ## 2.0.0-nullsafety.8
 

@@ -4634,3 +4634,43 @@ const int SND_RING = 0x00100000;
 
 /// Treat this as a system sound
 const int SND_SYSTEM = 0x00200000;
+
+// -----------------------------------------------------------------------------
+// Shutdown constants
+// -----------------------------------------------------------------------------
+
+/// All sessions are forcefully logged off. If this flag is not set and users
+/// other than the current user are logged on to the computer specified by the
+/// lpMachineName parameter, this function fails with a return value of
+/// ERROR_SHUTDOWN_USERS_LOGGED_ON.
+const SHUTDOWN_FORCE_OTHERS = 0x0000001;
+
+/// Specifies that the originating session is logged off forcefully. If this
+/// flag is not set, the originating session is shut down interactively, so a
+/// shutdown is not guaranteed even if the function returns successfully.
+const SHUTDOWN_FORCE_SELF = 0x0000002;
+
+/// The computer is shut down and rebooted.
+const SHUTDOWN_RESTART = 0x0000004;
+
+/// The computer is shut down and powered down.
+const SHUTDOWN_POWEROFF = 0x0000008;
+
+/// The computer is shut down but is not powered down or rebooted.
+const SHUTDOWN_NOREBOOT = 0x0000010;
+
+/// Overrides the grace period so that the computer is shut down immediately.
+const SHUTDOWN_GRACE_OVERRIDE = 0x0000020;
+
+/// The computer installs any updates before starting the shutdown.
+const SHUTDOWN_INSTALL_UPDATES = 0x0000040;
+
+/// The system is rebooted using the ExitWindowsEx function with the
+/// EWX_RESTARTAPPS flag. This restarts any applications that have been
+/// registered for restart using the RegisterApplicationRestart function.
+const SHUTDOWN_RESTARTAPPS = 0x0000080;
+
+/// Beginning with InitiateShutdown running on Windows 8, you must include the
+/// SHUTDOWN_HYBRID flag with one or more of the flags in this table to specify
+/// options for the shutdown.
+const SHUTDOWN_HYBRID = 0x0000200;

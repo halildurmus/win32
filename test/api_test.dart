@@ -618,6 +618,16 @@ void main() {
       expect(IsDebuggerPresent, isA<Function>());
     });
 
+    test('Can instantiate IsWow64Process2', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final IsWow64Process2 = kernel32.lookupFunction<
+          Int32 Function(IntPtr hProcess, Pointer<Uint16> pProcessMachine,
+              Pointer<Uint16> pNativeMachine),
+          int Function(int hProcess, Pointer<Uint16> pProcessMachine,
+              Pointer<Uint16> pNativeMachine)>('IsWow64Process2');
+      expect(IsWow64Process2, isA<Function>());
+    });
+
     test('Can instantiate LoadLibrary', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final LoadLibrary = kernel32.lookupFunction<
@@ -903,6 +913,14 @@ void main() {
           int Function(Pointer<Void> lpAddress, int dwSize,
               int dwFreeType)>('VirtualFree');
       expect(VirtualFree, isA<Function>());
+    });
+
+    test('Can instantiate Wow64SuspendThread', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final Wow64SuspendThread = kernel32.lookupFunction<
+          Uint32 Function(IntPtr hThread),
+          int Function(int hThread)>('Wow64SuspendThread');
+      expect(Wow64SuspendThread, isA<Function>());
     });
 
     test('Can instantiate WriteConsole', () {
@@ -3239,6 +3257,20 @@ void main() {
       expect(CredWrite, isA<Function>());
     });
 
+    test('Can instantiate InitiateShutdown', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final InitiateShutdown = advapi32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpMachineName, Pointer<Utf16> lpMessage,
+              Uint32 dwGracePeriod, Uint32 dwShutdownFlags, Uint32 dwReason),
+          int Function(
+              Pointer<Utf16> lpMachineName,
+              Pointer<Utf16> lpMessage,
+              int dwGracePeriod,
+              int dwShutdownFlags,
+              int dwReason)>('InitiateShutdownW');
+      expect(InitiateShutdown, isA<Function>());
+    });
+
     test('Can instantiate RegCloseKey', () {
       final advapi32 = DynamicLibrary.open('advapi32.dll');
       final RegCloseKey = advapi32.lookupFunction<Int32 Function(IntPtr hKey),
@@ -3274,6 +3306,21 @@ void main() {
               Pointer<Uint8> lpData,
               Pointer<Uint32> lpcbData)>('RegQueryValueExW');
       expect(RegQueryValueEx, isA<Function>());
+    });
+
+    test('Can instantiate RegSetValueEx', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegSetValueEx = advapi32.lookupFunction<
+          Int32 Function(
+              IntPtr hKey,
+              Pointer<Utf16> lpValueName,
+              Uint32 Reserved,
+              Uint32 dwType,
+              Pointer<Uint8> lpData,
+              Uint32 cbData),
+          int Function(int hKey, Pointer<Utf16> lpValueName, int Reserved,
+              int dwType, Pointer<Uint8> lpData, int cbData)>('RegSetValueExW');
+      expect(RegSetValueEx, isA<Function>());
     });
   });
 

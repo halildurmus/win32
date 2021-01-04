@@ -1233,6 +1233,27 @@ int IsDebuggerPresent() {
   return _IsDebuggerPresent();
 }
 
+/// Determines whether the specified process is running under WOW64. Also
+/// returns additional machine process and architecture information.
+///
+/// ```c
+/// BOOL IsWow64Process2(
+///   HANDLE hProcess,
+///   USHORT *pProcessMachine,
+///   USHORT *pNativeMachine
+/// );
+/// ```
+/// {@category kernel32}
+int IsWow64Process2(int hProcess, Pointer<Uint16> pProcessMachine,
+    Pointer<Uint16> pNativeMachine) {
+  final _IsWow64Process2 = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hProcess, Pointer<Uint16> pProcessMachine,
+          Pointer<Uint16> pNativeMachine),
+      int Function(int hProcess, Pointer<Uint16> pProcessMachine,
+          Pointer<Uint16> pNativeMachine)>('IsWow64Process2');
+  return _IsWow64Process2(hProcess, pProcessMachine, pNativeMachine);
+}
+
 /// Loads the specified module into the address space of the calling
 /// process. The specified module may cause other modules to be loaded.
 ///
@@ -1785,6 +1806,21 @@ int VirtualFree(Pointer<Void> lpAddress, int dwSize, int dwFreeType) {
       int Function(
           Pointer<Void> lpAddress, int dwSize, int dwFreeType)>('VirtualFree');
   return _VirtualFree(lpAddress, dwSize, dwFreeType);
+}
+
+/// Suspends the specified WOW64 thread.
+///
+/// ```c
+/// DWORD Wow64SuspendThread(
+///   HANDLE hThread
+/// );
+/// ```
+/// {@category kernel32}
+int Wow64SuspendThread(int hThread) {
+  final _Wow64SuspendThread = _kernel32.lookupFunction<
+      Uint32 Function(IntPtr hThread),
+      int Function(int hThread)>('Wow64SuspendThread');
+  return _Wow64SuspendThread(hThread);
 }
 
 /// Writes a character string to a console screen buffer beginning at the
