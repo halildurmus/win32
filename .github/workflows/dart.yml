@@ -7,18 +7,19 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  test:
     runs-on: windows-latest
-    
-    # Note that this workflow uses the latest stable version of the Dart SDK.
-    # Docker images for other release channels - like dev and beta - are also
-    # available. See https://hub.docker.com/r/google/dart/ for the available
-    # images.
-    container:
-      image:  google/dart:dev
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Fetch sources
+        uses: actions/checkout@v2
+
+      - name: Set up Dart
+        uses: vanesyan/setup-dart@v1
+        with:
+          architecture: x64
+          release-channel: dev
+          version: latest
 
       - name: Print Dart SDK version
         run: dart --version
@@ -31,11 +32,8 @@ jobs:
       #   run: dart format --output=none --set-exit-if-changed .
 
       # Consider passing '--fatal-infos' for slightly stricter analysis.
-      - name: Analyze project source
-        run: dart analyze
+      # - name: Analyze project source
+      #   run: dart analyze
 
-      # Your project will need to have tests in test/ and a dependency on
-      # package:test for this step to succeed. Note that Flutter projects will
-      # want to change this to 'flutter test'.
       - name: Run tests
         run: dart test
