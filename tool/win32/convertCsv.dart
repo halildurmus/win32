@@ -21,15 +21,11 @@ void saveCsv(String filename) {
       proto.dllLibrary,
       '"${proto.prototype.first}"',
       proto.nativeReturn,
-      // To delete
-      proto.dartReturn,
       proto.nativeParams.length.toString(),
     ];
     for (final key in proto.nativeParams.keys) {
       fields.add(key);
       fields.add(proto.nativeParams[key]!);
-      // To delete
-      fields.add(proto.dartParams[key]!);
     }
     fields.add('"${proto.comment}"');
     buffer.writeln(fields.join(", "));

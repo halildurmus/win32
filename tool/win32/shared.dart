@@ -83,7 +83,6 @@ void loadCsv(String filename) {
     prototype = prototype.replaceAll('"', '');
 
     final nativeReturn = fields[idx++];
-    final dartReturn = fields[idx++];
 
     prototypes[apiName] = TypeDef(prototype.split('\n'))
       ..neutralApiName = neutralApiName
@@ -96,8 +95,6 @@ void loadCsv(String filename) {
       for (var i = 0; i < numParams; i++) {
         final paramName = fields[idx++];
         final paramNativeType = fields[idx++];
-        idx++;
-        // final paramDartType = fields[idx++];
 
         prototypes[apiName]!.dartParams[paramName] =
             dartFromFFI(paramNativeType);
