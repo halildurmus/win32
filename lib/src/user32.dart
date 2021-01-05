@@ -1621,6 +1621,9 @@ int LoadCursor(int hInstance, Pointer<Utf16> lpCursorName) {
   return _LoadCursor(hInstance, lpCursorName);
 }
 
+/// Loads the specified icon resource from the executable (.exe) file
+/// associated with an application instance.
+///
 /// ```c
 /// HICON LoadIconW(
 ///   HINSTANCE hInstance,
