@@ -1,5 +1,21 @@
 import 'dart:io';
 
+final prototypes = <String, TypeDef>{};
+
+class TypeDef {
+  late String neutralApiName;
+  final List<String> prototype;
+  late String nativeReturn;
+  late String dartReturn;
+
+  Map<String, String> nativeParams = {};
+  Map<String, String> dartParams = {};
+  late String dllLibrary;
+  late String comment;
+
+  TypeDef(this.prototype);
+}
+
 String ffiFromWin32(String win32Type) {
   const mapping = <String, String>{
     // Base C types
@@ -46,22 +62,6 @@ String dartFromFFI(String ffiType) {
   }
 
   throw Exception('Unknown FFI Type.');
-}
-
-final prototypes = <String, TypeDef>{};
-
-class TypeDef {
-  late String neutralApiName;
-  final List<String> prototype;
-  late String nativeReturn;
-  late String dartReturn;
-
-  Map<String, String> nativeParams = {};
-  Map<String, String> dartParams = {};
-  late String dllLibrary;
-  late String comment;
-
-  TypeDef(this.prototype);
 }
 
 void loadCsv(String filename) {
@@ -119,4 +119,31 @@ void loadCsv(String filename) {
       prototypes[apiName]!.comment = '';
     }
   }
+}
+
+void saveCsv(String filename) {
+  final file = File(filename);
+  final buffer = StringBuffer();
+  buffer.writeln(
+      'ApiName, NeutralApiName, DllLibrary, WindowsPrototype, ReturnNative, '
+      'ReturnDart, ParamCount, Param1Native, Param1Dart, Comment');
+
+  for (final protoKey in prototypes.keys) {
+    final proto = prototypes[protoKey]!;
+    final fields = <String>[
+      protoKey,
+      proto.neutralApiName,
+      proto.dllLibrary,
+      '"${proto.prototype.first}"',
+      proto.nativeReturn,
+      proto.nativeParams.length.toString(),
+    ];
+    for (final key in proto.nativeParams.keys) {
+      fields.add(key);
+      fields.add(proto.nativeParams[key]!);
+    }
+    fields.add('"${proto.comment}"');
+    buffer.writeln(fields.join(", "));
+  }
+  file.writeAsStringSync(buffer.toString());
 }
