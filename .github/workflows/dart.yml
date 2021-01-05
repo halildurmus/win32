@@ -14,23 +14,23 @@ jobs:
       matrix:
         # Include newest and latest versions of Windows, plus Ubuntu (to make
         # sure that tests don't fail on a non-supported platform).
-        
-        # Six tests currently fail on windows-2016 because they don't
-        # defensively test for missing APIs. See
-        # https://github.com/timsneath/win32/issues/130
 
-        # os: [windows-latest, windows-2016, ubuntu-latest]
-        os: [windows-latest, ubuntu-latest]
+        os: [windows-latest, windows-2016, ubuntu-latest]
 
         # Stable does not support null safety yet.
         # sdk: [stable, beta, dev, edge]
         sdk: [beta, dev, edge]
 
-        # One SDK version is plenty on Ubuntu. It's a safety test.
+        # One SDK version is plenty on Ubuntu. It's a safety test. Similarly,
+        # nobody is running the oldest Windows on leading-edge Dart releases.
         exclude:
           - os: ubuntu-latest
             sdk: dev
           - os: ubuntu-latest
+            sdk: edge
+          - os: windows-2016
+            sdk: dev
+          - os: windows-2016
             sdk: edge
 
     steps:

@@ -7,6 +7,7 @@
 
 import 'dart:io';
 
+import 'new_apis.dart';
 import 'shared.dart';
 import 'struct_sizes.dart';
 
@@ -14,7 +15,7 @@ void generateTests() {
   var tests = 0;
   final writer = File('test/api_test.dart').openSync(mode: FileMode.write);
 
-  writer.writeStringSync('''
+  writer.writeStringSync(r'''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
@@ -32,7 +33,13 @@ import 'package:test/test.dart';
 
 import 'package:win32/win32.dart';
 
+import 'helpers.dart';
+
 void main() {
+  final windowsBuildNumber = int.parse(getRegistryValue(
+    HKEY_LOCAL_MACHINE,
+    'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\',
+    'CurrentBuildNumber') as String);
 ''');
   final libraries = prototypes.values.map((e) => e.dllLibrary).toSet().toList();
 
@@ -49,7 +56,8 @@ void main() {
     for (final proto in libProtos) {
       final apiName = prototypes.keys.firstWhere(
           (k) => prototypes[k]!.neutralApiName == proto.neutralApiName);
-      writer.writeStringSync('''
+
+      final test = '''
       test('Can instantiate ${proto.neutralApiName}', () {
         final $library = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');
         final ${proto.neutralApiName} = $library.lookupFunction<\n
@@ -59,9 +67,17 @@ void main() {
             ${proto.dartParams.keys.map((param) => '${proto.dartParams[param]} $param').join(', ')})>
           ('$apiName');
         expect(${proto.neutralApiName}, isA<Function>());
-      });
-      
-''');
+      });''';
+
+      if (versionedAPIs.keys.contains(apiName)) {
+        writer.writeStringSync('''
+        if (windowsBuildNumber >= ${versionedAPIs[apiName]}) {
+          $test
+        }''');
+      } else {
+        writer.writeStringSync(test);
+      }
+      writer.writeStringSync('\n');
       tests++;
     }
     writer.writeStringSync('});\n\n');
