@@ -18,10 +18,7 @@ import 'package:win32/win32.dart';
 import 'helpers.dart';
 
 void main() {
-  final windowsBuildNumber = int.parse(getRegistryValue(
-      HKEY_LOCAL_MACHINE,
-      'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\',
-      'CurrentBuildNumber') as String);
+  final windowsBuildNumber = getWindowsBuildNumber();
   group('Test kernel32 functions', () {
     test('Can instantiate ActivateActCtx', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -570,7 +567,7 @@ void main() {
               'IsDebuggerPresent');
       expect(IsDebuggerPresent, isA<Function>());
     });
-    if (windowsBuildNumber >= 10586) {
+    if (windowsBuildNumber >= 16299) {
       test('Can instantiate IsWow64Process2', () {
         final kernel32 = DynamicLibrary.open('kernel32.dll');
         final IsWow64Process2 = kernel32.lookupFunction<

@@ -15,7 +15,7 @@ void generateTests() {
   var tests = 0;
   final writer = File('test/api_test.dart').openSync(mode: FileMode.write);
 
-  writer.writeStringSync(r'''
+  writer.writeStringSync('''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
@@ -36,10 +36,7 @@ import 'package:win32/win32.dart';
 import 'helpers.dart';
 
 void main() {
-  final windowsBuildNumber = int.parse(getRegistryValue(
-    HKEY_LOCAL_MACHINE,
-    'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\',
-    'CurrentBuildNumber') as String);
+  final windowsBuildNumber = getWindowsBuildNumber();
 ''');
   final libraries = prototypes.values.map((e) => e.dllLibrary).toSet().toList();
 

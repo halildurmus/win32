@@ -2,6 +2,11 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+int getWindowsBuildNumber() => int.parse(getRegistryValue(
+    HKEY_LOCAL_MACHINE,
+    'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\',
+    'CurrentBuildNumber') as String);
+
 Object getRegistryValue(int key, String subKey, String valueName) {
   late Object dataValue;
 

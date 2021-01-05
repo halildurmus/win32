@@ -22,7 +22,10 @@ void main() {
           WinmdStore.getScopeForType('Windows.Globalization.ICalendarFactory');
 
       final type = mdScope.findTypeDef('Windows.Globalization.Calendar');
-      expect(type.token, equals(0x02000003));
+
+      // The number token ID may change from build to build, but the highest
+      // order byte should always be 0x02
+      expect(type.token & 0x02000000, equals(0x02000000));
     });
 
     test('Get IAsyncInfo methods', () {
