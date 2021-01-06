@@ -34,7 +34,7 @@ String getTemporaryPath() {
 String getFolderPath() {
   final path = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
 
-  final result = SHGetFolderPath(NULL, CSIDL_MYDOCUMENTS, NULL, 0, path);
+  final result = SHGetFolderPath(NULL, CSIDL_DESKTOP, NULL, 0, path);
 
   if (SUCCEEDED(result)) {
     return path.unpackString(MAX_PATH);
@@ -45,7 +45,7 @@ String getFolderPath() {
 
 /// Get the path for a known Windows folder, using the modern API
 String getKnownFolderPath() {
-  final knownFolderID = GUID.fromString(FOLDERID_Documents);
+  final knownFolderID = GUID.fromString(FOLDERID_Desktop);
   final pathPtrPtr = allocate<IntPtr>();
   Pointer<Utf16> pathPtr = nullptr;
 
