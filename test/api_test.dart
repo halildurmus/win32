@@ -2968,6 +2968,14 @@ void main() {
           int Function(int hKey)>('RegCloseKey');
       expect(RegCloseKey, isA<Function>());
     });
+    test('Can instantiate RegConnectRegistry', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegConnectRegistry = advapi32.lookupFunction<
+          Int16 Function(Pointer<Utf16> lpMachineName, IntPtr hKey),
+          int Function(
+              Pointer<Utf16> lpMachineName, int hKey)>('RegConnectRegistryW');
+      expect(RegConnectRegistry, isA<Function>());
+    });
     test('Can instantiate RegOpenKeyEx', () {
       final advapi32 = DynamicLibrary.open('advapi32.dll');
       final RegOpenKeyEx = advapi32.lookupFunction<

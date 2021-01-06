@@ -132,6 +132,25 @@ int RegCloseKey(int hKey) {
   return _RegCloseKey(hKey);
 }
 
+/// Establishes a connection to a predefined registry key on another
+/// computer.
+///
+/// ```c
+/// LSTATUS RegConnectRegistryW(
+///   LPCWSTR lpMachineName,
+///   HKEY    hKey,
+///   PHKEY   phkResult
+/// );
+/// ```
+/// {@category advapi32}
+int RegConnectRegistry(Pointer<Utf16> lpMachineName, int hKey) {
+  final _RegConnectRegistry = _advapi32.lookupFunction<
+      Int16 Function(Pointer<Utf16> lpMachineName, IntPtr hKey),
+      int Function(
+          Pointer<Utf16> lpMachineName, int hKey)>('RegConnectRegistryW');
+  return _RegConnectRegistry(lpMachineName, hKey);
+}
+
 /// Opens the specified registry key. Note that key names are not case
 /// sensitive.
 ///
