@@ -10,7 +10,7 @@
 
 const typeMappings = <String, String>{
   // Base C types
-  'void': 'void',
+  'void': 'Void',
   'int': 'Int32',
   'long': 'Int32',
   'short': 'Int16',

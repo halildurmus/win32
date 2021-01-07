@@ -22,14 +22,14 @@ import 'IUnknown.dart';
 const IID_ISequentialStream = '{0c733a30-2a1c-11ce-ade5-00aa0044773d}';
 
 typedef _Read_Native = Int32 Function(
-    Pointer obj, Pointer<void> pv, Uint32 cb, Pointer<Uint32> pcbRead);
+    Pointer obj, Pointer<Void> pv, Uint32 cb, Pointer<Uint32> pcbRead);
 typedef _Read_Dart = int Function(
-    Pointer obj, Pointer<void> pv, int cb, Pointer<Uint32> pcbRead);
+    Pointer obj, Pointer<Void> pv, int cb, Pointer<Uint32> pcbRead);
 
 typedef _Write_Native = Int32 Function(
-    Pointer obj, Pointer<void> pv, Uint32 cb, Pointer<Uint32> pcbWritten);
+    Pointer obj, Pointer<Void> pv, Uint32 cb, Pointer<Uint32> pcbWritten);
 typedef _Write_Dart = int Function(
-    Pointer obj, Pointer<void> pv, int cb, Pointer<Uint32> pcbWritten);
+    Pointer obj, Pointer<Void> pv, int cb, Pointer<Uint32> pcbWritten);
 
 /// {@category Interface}
 /// {@category com}
@@ -38,12 +38,12 @@ class ISequentialStream extends IUnknown {
 
   ISequentialStream(Pointer<COMObject> ptr) : super(ptr);
 
-  int Read(Pointer<void> pv, int cb, Pointer<Uint32> pcbRead) =>
+  int Read(Pointer<Void> pv, int cb, Pointer<Uint32> pcbRead) =>
       Pointer<NativeFunction<_Read_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
           .asFunction<_Read_Dart>()(ptr.ref.lpVtbl, pv, cb, pcbRead);
 
-  int Write(Pointer<void> pv, int cb, Pointer<Uint32> pcbWritten) =>
+  int Write(Pointer<Void> pv, int cb, Pointer<Uint32> pcbWritten) =>
       Pointer<NativeFunction<_Write_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(4).value)
           .asFunction<_Write_Dart>()(ptr.ref.lpVtbl, pv, cb, pcbWritten);
