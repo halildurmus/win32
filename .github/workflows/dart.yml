@@ -19,17 +19,16 @@ jobs:
 
         # Stable does not support null safety yet.
         # sdk: [stable, beta, dev, edge]
-        sdk: [beta, dev, edge]
+
+        # Beta does not support structs by value or nested structs.
+        # sdk: [beta, dev, edge]
+        sdk: [dev, edge]
 
         # One SDK version is plenty on Ubuntu. It's a safety test. Similarly,
         # nobody is running the oldest Windows on leading-edge Dart releases.
         exclude:
           - os: ubuntu-latest
-            sdk: dev
-          - os: ubuntu-latest
             sdk: edge
-          - os: windows-2016
-            sdk: dev
           - os: windows-2016
             sdk: edge
 
