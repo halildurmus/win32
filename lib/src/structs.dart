@@ -671,35 +671,17 @@ class ACCEL extends Struct {
 class MONITORINFO extends Struct {
   @Uint32()
   external int cbSize;
-  @Int32()
-  external int rcMonitorLeft;
-  @Int32()
-  external int rcMonitorTop;
-  @Int32()
-  external int rcMonitorRight;
-  @Int32()
-  external int rcMonitorBottom;
-  @Int32()
-  external int rcWorkLeft;
-  @Int32()
-  external int rcWorkTop;
-  @Int32()
-  external int rcWorkRight;
-  @Int32()
-  external int rcWorkBottom;
+
+  external RECT rcMonitor;
+  external RECT rcWork;
+
   @Uint32()
   external int dwFlags;
 
   factory MONITORINFO.allocate() => allocate<MONITORINFO>().ref
     ..cbSize = sizeOf<MONITORINFO>()
-    ..rcMonitorLeft = 0
-    ..rcMonitorTop = 0
-    ..rcMonitorRight = 0
-    ..rcMonitorBottom = 0
-    ..rcWorkLeft = 0
-    ..rcWorkTop = 0
-    ..rcWorkRight = 0
-    ..rcWorkBottom = 0
+    ..rcMonitor = RECT.allocate()
+    ..rcWork = RECT.allocate()
     ..dwFlags = 0;
 }
 
@@ -1431,11 +1413,7 @@ class MSG extends Struct {
   @Uint32()
   external int time;
 
-  @Int32()
-  external int ptX;
-
-  @Int32()
-  external int ptY;
+  external POINT pt;
 
   factory MSG.allocate() => allocate<MSG>().ref
     ..hwnd = 0
@@ -1443,8 +1421,7 @@ class MSG extends Struct {
     ..wParam = 0
     ..lParam = 0
     ..time = 0
-    ..ptX = 0
-    ..ptY = 0;
+    ..pt = POINT.allocate();
 }
 
 // typedef struct tagSIZE {
@@ -1480,30 +1457,13 @@ class SIZE extends Struct {
 ///
 /// {@category Struct}
 class MINMAXINFO extends Struct {
-  @Int32()
-  external int ptReservedX;
-  @Int32()
-  external int ptReservedY;
+  external POINT ptReserved;
+  external POINT ptMaxSize;
+  external POINT ptMaxPosition;
+  external POINT ptMinTrackSize;
+  external POINT ptMaxTrackSize;
 
-  @Int32()
-  external int ptMaxSizeX;
-  @Int32()
-  external int ptMaxSizeY;
-
-  @Int32()
-  external int ptMaxPositionX;
-  @Int32()
-  external int ptMaxPositionY;
-
-  @Int32()
-  external int ptMinTrackSizeX;
-  @Int32()
-  external int ptMinTrackSizeY;
-
-  @Int32()
-  external int ptMaxTrackSizeX;
-  @Int32()
-  external int ptMaxTrackSizeY;
+  factory MINMAXINFO.allocate() => allocate<MINMAXINFO>().ref;
 }
 
 // typedef struct tagPOINT {
@@ -1545,14 +1505,9 @@ class PAINTSTRUCT extends Struct {
   external int hdc;
   @Int32()
   external int fErase;
-  @Int32()
-  external int rcPaintL;
-  @Int32()
-  external int rcPaintT;
-  @Int32()
-  external int rcPaintR;
-  @Int32()
-  external int rcPaintB;
+
+  external RECT rcPaint;
+
   @Int32()
   external int fRestore;
   @Int32()
@@ -1569,10 +1524,7 @@ class PAINTSTRUCT extends Struct {
   factory PAINTSTRUCT.allocate() => allocate<PAINTSTRUCT>().ref
     ..hdc = 0
     ..fErase = 0
-    ..rcPaintL = 0
-    ..rcPaintT = 0
-    ..rcPaintR = 0
-    ..rcPaintB = 0
+    ..rcPaint = RECT.allocate()
     ..fRestore = 0
     ..fIncUpdate = 0
     ..rgb1 = 0
@@ -2590,47 +2542,20 @@ class CONSOLE_CURSOR_INFO extends Struct {
 ///
 /// {@category Struct}
 class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
-  @Int16()
-  external int dwSizeX;
-
-  @Int16()
-  external int dwSizeY;
-
-  @Int16()
-  external int dwCursorPositionX;
-  @Int16()
-  external int dwCursorPositionY;
-
+  external COORD dwSize;
+  external COORD dwCursorPosition;
   @Uint16()
   external int wAttributes;
-
-  @Int16()
-  external int srWindowLeft;
-  @Int16()
-  external int srWindowTop;
-  @Int16()
-  external int srWindowRight;
-  @Int16()
-  external int srWindowBottom;
-
-  @Int16()
-  external int dwMaximumWindowSizeX;
-  @Int16()
-  external int dwMaximumWindowSizeY;
+  external SMALL_RECT srWindow;
+  external COORD dwMaximumWindowSize;
 
   factory CONSOLE_SCREEN_BUFFER_INFO.allocate() =>
       allocate<CONSOLE_SCREEN_BUFFER_INFO>().ref
-        ..dwSizeX = 0
-        ..dwSizeY = 0
-        ..dwCursorPositionX = 0
-        ..dwCursorPositionY = 0
+        ..dwSize = COORD.allocate()
+        ..dwCursorPosition = COORD.allocate()
         ..wAttributes = 0
-        ..srWindowLeft = 0
-        ..srWindowTop = 0
-        ..srWindowRight = 0
-        ..srWindowBottom = 0
-        ..dwMaximumWindowSizeX = 0
-        ..dwMaximumWindowSizeY = 0;
+        ..srWindow = SMALL_RECT.allocate()
+        ..dwMaximumWindowSize = COORD.allocate();
 }
 
 // typedef struct _CONSOLE_SELECTION_INFO {
@@ -2646,29 +2571,14 @@ class CONSOLE_SELECTION_INFO extends Struct {
   @Uint32()
   external int dwFlags;
 
-  @Int16()
-  external int dwSelectionAnchorX;
-  @Int16()
-  external int dwSelectionAnchorY;
-
-  @Int16()
-  external int srSelectionLeft;
-  @Int16()
-  external int srSelectionTop;
-  @Int16()
-  external int srSelectionRight;
-  @Int16()
-  external int srSelectionBottom;
+  external COORD dwSelectionAnchor;
+  external SMALL_RECT srSelection;
 
   factory CONSOLE_SELECTION_INFO.allocate() =>
       allocate<CONSOLE_SELECTION_INFO>().ref
         ..dwFlags = 0
-        ..dwSelectionAnchorX = 0
-        ..dwSelectionAnchorY = 0
-        ..srSelectionLeft = 0
-        ..srSelectionTop = 0
-        ..srSelectionRight = 0
-        ..srSelectionBottom = 0;
+        ..dwSelectionAnchor = COORD.allocate()
+        ..srSelection = SMALL_RECT.allocate();
 }
 
 // typedef struct _COORD {

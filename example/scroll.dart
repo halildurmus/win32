@@ -244,9 +244,9 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       xPos = si.nPos;
 
       // Find painting limits.
-      final firstLine = max(0, yPos + (ps.rcPaintT / yChar).floor());
+      final firstLine = max(0, yPos + (ps.rcPaint.top / yChar).floor());
       final lastLine =
-          min(abc.length - 1, yPos + (ps.rcPaintB / yChar).floor());
+          min(abc.length - 1, yPos + (ps.rcPaint.bottom / yChar).floor());
 
       for (var i = firstLine; i <= lastLine; i++) {
         final x = xChar * (1 - xPos);

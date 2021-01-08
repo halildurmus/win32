@@ -19,8 +19,8 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
     case WM_GETMINMAXINFO:
       final info = Pointer<MINMAXINFO>.fromAddress(lParam).ref;
-      info.ptMinTrackSizeX = 400;
-      info.ptMinTrackSizeY = 400;
+      info.ptMinTrackSize.x = 400;
+      info.ptMinTrackSize.y = 400;
       return 0;
 
     case WM_PAINT:
