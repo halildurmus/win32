@@ -6,7 +6,7 @@ call dart %~dp0win32\generate_tests.dart
 echo.
 
 echo Generating COM classes
-call dart %~dp0generate\generate.dart %~dp0generate\com %~dp0..\lib\src\generated
+call dart %~dp0generate\generate.dart %~dp0generate\com %~dp0..\lib\src\generated %~dp0..\test\com
 echo.
 
 echo Generating Windows Runtime classes from IDL
@@ -21,6 +21,7 @@ echo Formatting generated source code
 call dart format %~dp0..\lib\src
 call dart format %~dp0..\test\api_test.dart
 call dart format %~dp0..\test\struct_test.dart
+call dart format %~dp0..\test\com
 echo.
 
 echo Running tests

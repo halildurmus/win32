@@ -197,9 +197,9 @@ Interface loadSource(File file) {
         final parameter = Parameter();
         late String win32Keyword;
 
-        if (line.contains('/* broken(struct_by_value) */')) {
-          parameter.supported = false;
-        }
+        // if (line.contains('/* broken(struct_by_value) */')) {
+        //   parameter.supported = false;
+        // }
 
         // don't know which field contains the return param, so we just search
         for (final type in typeMappings.entries) {
