@@ -13,7 +13,6 @@ enum SourceType { header, idl, unknown }
 class Parameter {
   String? type;
   String? name;
-  bool supported = true;
 }
 
 class Method {
@@ -32,7 +31,7 @@ class Interface {
   String? inherits;
   late int vtableStart;
 
-  late List<Method?> methods;
+  late List<Method> methods;
 
   String get headerAsString {
     final buffer = StringBuffer();
@@ -83,47 +82,36 @@ import '../winrt/winrt_constants.dart';
   String get typedefsAsString {
     final buffer = StringBuffer();
     for (final method in methods) {
-      var generateTypedef = true;
-
-      // Check all params are supported
-      for (final params in method!.parameters) {
-        if (!params.supported) {
-          generateTypedef = false;
-        }
+      // Native typedef
+      buffer.writeln(
+          'typedef _${method.name}_Native = ${method.returnType} Function(');
+      buffer.write('  Pointer obj');
+      if (method.parameters.isNotEmpty) {
+        buffer.writeln(',');
       }
-
-      if (generateTypedef) {
-        // Native typedef
-        buffer.writeln(
-            'typedef _${method.name}_Native = ${method.returnType} Function(');
-        buffer.write('  Pointer obj');
-        if (method.parameters.isNotEmpty) {
-          buffer.writeln(',');
-        }
-        for (var idx = 0; idx < method.parameters.length; idx++) {
-          buffer.write(
-              '  ${method.parameters[idx].type} ${method.parameters[idx].name}');
-          if (idx < method.parameters.length - 1) buffer.write(', ');
-          buffer.writeln();
-        }
-        buffer.writeln(');');
-
-        // Dart typedef
-        buffer.writeln(
-            'typedef _${method.name}_Dart = ${dartType(method.returnType)} Function(');
-        buffer.write('  Pointer obj');
-        if (method.parameters.isNotEmpty) {
-          buffer.writeln(',');
-        }
-        for (var idx = 0; idx < method.parameters.length; idx++) {
-          buffer.write(
-              '  ${dartType(method.parameters[idx].type!)} ${method.parameters[idx].name}');
-          if (idx < method.parameters.length - 1) buffer.write(', ');
-          buffer.writeln();
-        }
-        buffer.writeln(');');
+      for (var idx = 0; idx < method.parameters.length; idx++) {
+        buffer.write(
+            '  ${method.parameters[idx].type} ${method.parameters[idx].name}');
+        if (idx < method.parameters.length - 1) buffer.write(', ');
         buffer.writeln();
       }
+      buffer.writeln(');');
+
+      // Dart typedef
+      buffer.writeln(
+          'typedef _${method.name}_Dart = ${dartType(method.returnType)} Function(');
+      buffer.write('  Pointer obj');
+      if (method.parameters.isNotEmpty) {
+        buffer.writeln(',');
+      }
+      for (var idx = 0; idx < method.parameters.length; idx++) {
+        buffer.write(
+            '  ${dartType(method.parameters[idx].type!)} ${method.parameters[idx].name}');
+        if (idx < method.parameters.length - 1) buffer.write(', ');
+        buffer.writeln();
+      }
+      buffer.writeln(');');
+      buffer.writeln();
     }
 
     return buffer.toString();
@@ -161,23 +149,12 @@ import '../winrt/winrt_constants.dart';
     }
 
     for (final method in methods) {
-      var generateMethod = true;
-
-      // Check all params are supported
-      for (final params in method!.parameters) {
-        if (!params.supported) {
-          generateMethod = false;
-        }
-      }
-
-      if (generateMethod) {
-        if (method.name.startsWith('get_')) {
-          buffer.write(dartGetProperty(method, vtableIndex));
-        } else if (method.name.startsWith('put_')) {
-          buffer.write(dartSetProperty(method, vtableIndex));
-        } else {
-          buffer.write(dartMethod(method, vtableIndex));
-        }
+      if (method.name.startsWith('get_')) {
+        buffer.write(dartGetProperty(method, vtableIndex));
+      } else if (method.name.startsWith('put_')) {
+        buffer.write(dartSetProperty(method, vtableIndex));
+      } else {
+        buffer.write(dartMethod(method, vtableIndex));
       }
 
       // Always increment vtable even if we don't generate method
