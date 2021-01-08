@@ -38,19 +38,8 @@ void main() {
     if (method != null) {
       final className = interface.name!;
 
+      // TODO: Add tests for properties
       if (!method.name.startsWith('get_') && !method.name.startsWith('set_')) {
-        //     buffer.write('''
-        // test('Can access $className.${method.name.substring(5)} getter property', () {
-        //   expect(${interface.name!.substring(1).toLowerCase()}.${method.name.substring(5)}, isA<Function>());
-        //   });
-        //   ''');
-        //   } else if (method.name.startsWith('set_')) {
-        //     buffer.write('''
-        // test('Can access $className.${method.name.substring(5)} setter property', () {
-        //   expect(${interface.name!.substring(1).toLowerCase()}.${method.name.substring(5)}, isA<Function>());
-        //   });
-        //   ''');
-        //   } else {
         buffer.write('''
     test('Can instantiate $className.${method.name}', () {
       expect(${interface.name!.substring(1).toLowerCase()}.${method.name}, isA<Function>());
