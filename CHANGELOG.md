@@ -21,6 +21,7 @@
     ValidateRgn, WindowFromDC
   - Add BITMAP, BITMAPINFOHEADER, BITMAPFILEHEADER, PALETTEENTRY, DRAWTEXTPARAMS
     structs
+- Adds COM tests and exports several COM interfaces that weree missing
 
 ## 2.0.0-nullsafety.7
 
