@@ -101,6 +101,7 @@ export 'src/comdlg32.dart';
 export 'src/dxva2.dart';
 export 'src/gdi32.dart';
 export 'src/kernel32.dart';
+export 'src/kernelbase.dart';
 export 'src/ole32.dart';
 export 'src/oleaut32.dart';
 export 'src/powrprof.dart';

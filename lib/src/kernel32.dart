@@ -908,6 +908,21 @@ int GetLastError() {
   return _GetLastError();
 }
 
+/// Retrieves the current local date and time.
+///
+/// ```c
+/// void GetLocalTime(
+///   LPSYSTEMTIME lpSystemTime
+/// );
+/// ```
+/// {@category kernel32}
+void GetLocalTime(Pointer<SYSTEMTIME> lpSystemTime) {
+  final _GetLocalTime = _kernel32.lookupFunction<
+      Void Function(Pointer<SYSTEMTIME> lpSystemTime),
+      void Function(Pointer<SYSTEMTIME> lpSystemTime)>('GetLocalTime');
+  return _GetLocalTime(lpSystemTime);
+}
+
 /// Retrieves the fully qualified path for the file that contains the
 /// specified module. The module must have been loaded by the current
 /// process.
@@ -1063,6 +1078,23 @@ int GetStdHandle(int nStdHandle) {
   return _GetStdHandle(nStdHandle);
 }
 
+/// Retrieves the path of the system directory. The system directory
+/// contains system files such as dynamic-link libraries and drivers.
+///
+/// ```c
+/// UINT GetSystemDirectoryW(
+///   LPWSTR lpBuffer,
+///   UINT   uSize
+/// );
+/// ```
+/// {@category kernel32}
+int GetSystemDirectory(Pointer<Utf16> lpBuffer, int uSize) {
+  final _GetSystemDirectory = _kernel32.lookupFunction<
+      Uint32 Function(Pointer<Utf16> lpBuffer, Uint32 uSize),
+      int Function(Pointer<Utf16> lpBuffer, int uSize)>('GetSystemDirectoryW');
+  return _GetSystemDirectory(lpBuffer, uSize);
+}
+
 /// Retrieves information about the current system. To retrieve accurate
 /// information for an application running on WOW64, call the
 /// GetNativeSystemInfo function.
@@ -1097,6 +1129,21 @@ int GetSystemPowerStatus(Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus) {
           int Function(Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus)>(
       'GetSystemPowerStatus');
   return _GetSystemPowerStatus(lpSystemPowerStatus);
+}
+
+/// Retrieves the current local date and time.
+///
+/// ```c
+/// void GetSystemTime(
+///   LPSYSTEMTIME lpSystemTime
+/// );
+/// ```
+/// {@category kernel32}
+void GetSystemTime(Pointer<SYSTEMTIME> lpSystemTime) {
+  final _GetSystemTime = _kernel32.lookupFunction<
+      Void Function(Pointer<SYSTEMTIME> lpSystemTime),
+      void Function(Pointer<SYSTEMTIME> lpSystemTime)>('GetSystemTime');
+  return _GetSystemTime(lpSystemTime);
 }
 
 /// Retrieves the path of the directory designated for temporary files.

@@ -23,6 +23,7 @@
 #include <bluetoothapis.h>
 #include <VersionHelpers.h>
 #include <wincred.h>
+#include <sysinfoapi.h>
 
 void main()
 {

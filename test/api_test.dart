@@ -425,6 +425,13 @@ void main() {
           .lookupFunction<Uint32 Function(), int Function()>('GetLastError');
       expect(GetLastError, isA<Function>());
     });
+    test('Can instantiate GetLocalTime', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetLocalTime = kernel32.lookupFunction<
+          Void Function(Pointer<SYSTEMTIME> lpSystemTime),
+          void Function(Pointer<SYSTEMTIME> lpSystemTime)>('GetLocalTime');
+      expect(GetLocalTime, isA<Function>());
+    });
     test('Can instantiate GetModuleFileName', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetModuleFileName = kernel32.lookupFunction<
@@ -495,6 +502,14 @@ void main() {
           int Function(int nStdHandle)>('GetStdHandle');
       expect(GetStdHandle, isA<Function>());
     });
+    test('Can instantiate GetSystemDirectory', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetSystemDirectory = kernel32.lookupFunction<
+          Uint32 Function(Pointer<Utf16> lpBuffer, Uint32 uSize),
+          int Function(
+              Pointer<Utf16> lpBuffer, int uSize)>('GetSystemDirectoryW');
+      expect(GetSystemDirectory, isA<Function>());
+    });
     test('Can instantiate GetSystemInfo', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetSystemInfo = kernel32.lookupFunction<
@@ -509,6 +524,13 @@ void main() {
               int Function(Pointer<SYSTEM_POWER_STATUS> lpSystemPowerStatus)>(
           'GetSystemPowerStatus');
       expect(GetSystemPowerStatus, isA<Function>());
+    });
+    test('Can instantiate GetSystemTime', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetSystemTime = kernel32.lookupFunction<
+          Void Function(Pointer<SYSTEMTIME> lpSystemTime),
+          void Function(Pointer<SYSTEMTIME> lpSystemTime)>('GetSystemTime');
+      expect(GetSystemTime, isA<Function>());
     });
     test('Can instantiate GetTempPath', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -3654,6 +3676,19 @@ void main() {
               Pointer<Uint32> puLen)>('VerQueryValueW');
       expect(VerQueryValue, isA<Function>());
     });
+  });
+
+  group('Test kernelbase functions', () {
+    if (windowsBuildNumber >= 10240) {
+      test('Can instantiate GetIntegratedDisplaySize', () {
+        final kernelbase = DynamicLibrary.open('kernelbase.dll');
+        final GetIntegratedDisplaySize = kernelbase.lookupFunction<
+            Int32 Function(Pointer<Double> sizeInInches),
+            int Function(
+                Pointer<Double> sizeInInches)>('GetIntegratedDisplaySize');
+        expect(GetIntegratedDisplaySize, isA<Function>());
+      });
+    }
   });
 
   group('Test winmm functions', () {

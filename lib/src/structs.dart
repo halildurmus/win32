@@ -2657,8 +2657,8 @@ class BLUETOOTH_DEVICE_INFO extends Struct {
   @Int32()
   external int fAuthenticated;
 
-  SYSTEMTIME stLastSeen;
-  SYSTEMTIME stLastUsed;
+  external SYSTEMTIME stLastSeen;
+  external SYSTEMTIME stLastUsed;
 
   String get szName => addressOf
       .cast<Uint8>()
