@@ -165,6 +165,28 @@ int CreateConsoleScreenBuffer(
       lpSecurityAttributes, dwFlags, lpScreenBufferData);
 }
 
+/// Creates a new directory. If the underlying file system supports
+/// security on files and directories, the function applies a specified
+/// security descriptor to the new directory.
+///
+/// ```c
+/// BOOL CreateDirectoryW(
+///   LPCWSTR               lpPathName,
+///   LPSECURITY_ATTRIBUTES lpSecurityAttributes
+/// );
+/// ```
+/// {@category kernel32}
+int CreateDirectory(Pointer<Utf16> lpPathName,
+    Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes) {
+  final _CreateDirectory = _kernel32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpPathName,
+              Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes),
+          int Function(Pointer<Utf16> lpPathName,
+              Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes)>(
+      'CreateDirectoryW');
+  return _CreateDirectory(lpPathName, lpSecurityAttributes);
+}
+
 /// Creates or opens a file or I/O device. The most commonly used I/O
 /// devices are as follows: file, file stream, directory, physical disk,
 /// volume, console buffer, tape drive, communications resource, mailslot,
@@ -348,6 +370,21 @@ int DeactivateActCtx(int dwFlags, int ulCookie) {
   return _DeactivateActCtx(dwFlags, ulCookie);
 }
 
+/// Deletes an existing file.
+///
+/// ```c
+/// BOOL DeleteFileW(
+///   LPCWSTR lpFileName
+/// );
+/// ```
+/// {@category kernel32}
+int DeleteFile(Pointer<Utf16> lpFileName) {
+  final _DeleteFile = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpFileName),
+      int Function(Pointer<Utf16> lpFileName)>('DeleteFileW');
+  return _DeleteFile(lpFileName);
+}
+
 /// Commits or discards changes made prior to a call to UpdateResource.
 ///
 /// ```c
@@ -418,6 +455,20 @@ int EnumResourceTypes(
       int Function(int hModule, Pointer<NativeFunction> lpEnumFunc,
           int lParam)>('EnumResourceTypesW');
   return _EnumResourceTypes(hModule, lpEnumFunc, lParam);
+}
+
+/// Ends the calling process and all its threads.
+///
+/// ```c
+/// void ExitProcess(
+///   UINT uExitCode
+/// );
+/// ```
+/// {@category kernel32}
+void ExitProcess(int uExitCode) {
+  final _ExitProcess = _kernel32.lookupFunction<Void Function(Uint32 uExitCode),
+      void Function(int uExitCode)>('ExitProcess');
+  return _ExitProcess(uExitCode);
 }
 
 /// Sets the character attributes for a specified number of character
@@ -805,6 +856,26 @@ int GetCurrentProcess() {
   final _GetCurrentProcess = _kernel32
       .lookupFunction<IntPtr Function(), int Function()>('GetCurrentProcess');
   return _GetCurrentProcess();
+}
+
+/// Retrieves attributes for a specified file or directory.
+///
+/// ```c
+/// BOOL GetFileAttributesExW(
+///   LPCWSTR                lpFileName,
+///   GET_FILEEX_INFO_LEVELS fInfoLevelId,
+///   LPVOID                 lpFileInformation
+/// );
+/// ```
+/// {@category kernel32}
+int GetFileAttributesEx(
+    Pointer<Utf16> lpFileName, int fInfoLevelId, Pointer lpFileInformation) {
+  final _GetFileAttributesEx = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpFileName, Int32 fInfoLevelId,
+          Pointer lpFileInformation),
+      int Function(Pointer<Utf16> lpFileName, int fInfoLevelId,
+          Pointer lpFileInformation)>('GetFileAttributesExW');
+  return _GetFileAttributesEx(lpFileName, fInfoLevelId, lpFileInformation);
 }
 
 /// Retrieves the size of the largest possible console window, based on the
@@ -1479,6 +1550,21 @@ int ReadProcessMemory(int hProcess, Pointer<Void> lpBaseAddress,
       hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesRead);
 }
 
+/// Deletes an existing empty directory.
+///
+/// ```c
+/// BOOL RemoveDirectoryW(
+///   LPCWSTR lpPathName
+/// );
+/// ```
+/// {@category kernel32}
+int RemoveDirectory(Pointer<Utf16> lpPathName) {
+  final _RemoveDirectory = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpPathName),
+      int Function(Pointer<Utf16> lpPathName)>('RemoveDirectoryW');
+  return _RemoveDirectory(lpPathName);
+}
+
 /// Resizes the internal buffers for a pseudoconsole to the given size.
 ///
 /// ```c
@@ -1666,6 +1752,71 @@ int SetConsoleWindowInfo(
   return _SetConsoleWindowInfo(hConsoleOutput, bAbsolute, lpConsoleWindow);
 }
 
+/// Changes the current directory for the current process.
+///
+/// ```c
+/// BOOL SetCurrentDirectory(
+///   LPCTSTR lpPathName
+/// );
+/// ```
+/// {@category kernel32}
+int SetCurrentDirectory(Pointer<Utf16> lpPathName) {
+  final _SetCurrentDirectory = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpPathName),
+      int Function(Pointer<Utf16> lpPathName)>('SetCurrentDirectoryW');
+  return _SetCurrentDirectory(lpPathName);
+}
+
+/// Moves the file pointer of the specified file.
+///
+/// ```c
+/// DWORD SetFilePointer(
+///   HANDLE hFile,
+///   LONG   lDistanceToMove,
+///   PLONG  lpDistanceToMoveHigh,
+///   DWORD  dwMoveMethod
+/// );
+/// ```
+/// {@category kernel32}
+int SetFilePointer(int hFile, int lDistanceToMove,
+    Pointer<Int32> lpDistanceToMoveHigh, int dwMoveMethod) {
+  final _SetFilePointer = _kernel32.lookupFunction<
+      Uint32 Function(IntPtr hFile, Int32 lDistanceToMove,
+          Pointer<Int32> lpDistanceToMoveHigh, Uint32 dwMoveMethod),
+      int Function(
+          int hFile,
+          int lDistanceToMove,
+          Pointer<Int32> lpDistanceToMoveHigh,
+          int dwMoveMethod)>('SetFilePointer');
+  return _SetFilePointer(
+      hFile, lDistanceToMove, lpDistanceToMoveHigh, dwMoveMethod);
+}
+
+/// Moves the file pointer of the specified file.
+///
+/// ```c
+/// BOOL SetFilePointerEx(
+///   HANDLE         hFile,
+///   LARGE_INTEGER  liDistanceToMove,
+///   PLARGE_INTEGER lpNewFilePointer,
+///   DWORD          dwMoveMethod
+/// );
+/// ```
+/// {@category kernel32}
+int SetFilePointerEx(int hFile, int liDistanceToMove,
+    Pointer<Int64> lpNewFilePointer, int dwMoveMethod) {
+  final _SetFilePointerEx = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFile, Int64 liDistanceToMove,
+          Pointer<Int64> lpNewFilePointer, Uint32 dwMoveMethod),
+      int Function(
+          int hFile,
+          int liDistanceToMove,
+          Pointer<Int64> lpNewFilePointer,
+          int dwMoveMethod)>('SetFilePointerEx');
+  return _SetFilePointerEx(
+      hFile, liDistanceToMove, lpNewFilePointer, dwMoveMethod);
+}
+
 /// Sets the handle for the specified standard device (standard input,
 /// standard output, or standard error).
 ///
@@ -1806,6 +1957,23 @@ int VirtualFree(Pointer<Void> lpAddress, int dwSize, int dwFreeType) {
       int Function(
           Pointer<Void> lpAddress, int dwSize, int dwFreeType)>('VirtualFree');
   return _VirtualFree(lpAddress, dwSize, dwFreeType);
+}
+
+/// Waits until the specified object is in the signaled state or the
+/// time-out interval elapses.
+///
+/// ```c
+/// DWORD WaitForSingleObject(
+///   HANDLE hHandle,
+///   DWORD  dwMilliseconds
+/// );
+/// ```
+/// {@category kernel32}
+int WaitForSingleObject(int hHandle, int dwMilliseconds) {
+  final _WaitForSingleObject = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hHandle, Int32 dwMilliseconds),
+      int Function(int hHandle, int dwMilliseconds)>('WaitForSingleObject');
+  return _WaitForSingleObject(hHandle, dwMilliseconds);
 }
 
 /// Suspends the specified WOW64 thread.

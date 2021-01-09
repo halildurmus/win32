@@ -90,6 +90,16 @@ void main() {
               Pointer lpScreenBufferData)>('CreateConsoleScreenBuffer');
       expect(CreateConsoleScreenBuffer, isA<Function>());
     });
+    test('Can instantiate CreateDirectory', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CreateDirectory = kernel32.lookupFunction<
+              Int32 Function(Pointer<Utf16> lpPathName,
+                  Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes),
+              int Function(Pointer<Utf16> lpPathName,
+                  Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes)>(
+          'CreateDirectoryW');
+      expect(CreateDirectory, isA<Function>());
+    });
     test('Can instantiate CreateFile', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final CreateFile = kernel32.lookupFunction<
@@ -169,6 +179,13 @@ void main() {
           int Function(int dwFlags, int ulCookie)>('DeactivateActCtx');
       expect(DeactivateActCtx, isA<Function>());
     });
+    test('Can instantiate DeleteFile', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final DeleteFile = kernel32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpFileName),
+          int Function(Pointer<Utf16> lpFileName)>('DeleteFileW');
+      expect(DeleteFile, isA<Function>());
+    });
     test('Can instantiate EndUpdateResource', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final EndUpdateResource = kernel32.lookupFunction<
@@ -196,6 +213,13 @@ void main() {
           int Function(int hModule, Pointer<NativeFunction> lpEnumFunc,
               int lParam)>('EnumResourceTypesW');
       expect(EnumResourceTypes, isA<Function>());
+    });
+    test('Can instantiate ExitProcess', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final ExitProcess = kernel32.lookupFunction<
+          Void Function(Uint32 uExitCode),
+          void Function(int uExitCode)>('ExitProcess');
+      expect(ExitProcess, isA<Function>());
     });
     test('Can instantiate FillConsoleOutputAttribute', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -378,6 +402,15 @@ void main() {
           kernel32.lookupFunction<IntPtr Function(), int Function()>(
               'GetCurrentProcess');
       expect(GetCurrentProcess, isA<Function>());
+    });
+    test('Can instantiate GetFileAttributesEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetFileAttributesEx = kernel32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpFileName, Int32 fInfoLevelId,
+              Pointer lpFileInformation),
+          int Function(Pointer<Utf16> lpFileName, int fInfoLevelId,
+              Pointer lpFileInformation)>('GetFileAttributesExW');
+      expect(GetFileAttributesEx, isA<Function>());
     });
     test('Can instantiate GetLargestConsoleWindowSize', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -684,6 +717,13 @@ void main() {
               Pointer<IntPtr> lpNumberOfBytesRead)>('ReadProcessMemory');
       expect(ReadProcessMemory, isA<Function>());
     });
+    test('Can instantiate RemoveDirectory', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final RemoveDirectory = kernel32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpPathName),
+          int Function(Pointer<Utf16> lpPathName)>('RemoveDirectoryW');
+      expect(RemoveDirectory, isA<Function>());
+    });
     if (windowsBuildNumber >= 17763) {
       test('Can instantiate ResizePseudoConsole', () {
         final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -770,6 +810,37 @@ void main() {
               Pointer<SMALL_RECT> lpConsoleWindow)>('SetConsoleWindowInfo');
       expect(SetConsoleWindowInfo, isA<Function>());
     });
+    test('Can instantiate SetCurrentDirectory', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetCurrentDirectory = kernel32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpPathName),
+          int Function(Pointer<Utf16> lpPathName)>('SetCurrentDirectoryW');
+      expect(SetCurrentDirectory, isA<Function>());
+    });
+    test('Can instantiate SetFilePointer', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetFilePointer = kernel32.lookupFunction<
+          Uint32 Function(IntPtr hFile, Int32 lDistanceToMove,
+              Pointer<Int32> lpDistanceToMoveHigh, Uint32 dwMoveMethod),
+          int Function(
+              int hFile,
+              int lDistanceToMove,
+              Pointer<Int32> lpDistanceToMoveHigh,
+              int dwMoveMethod)>('SetFilePointer');
+      expect(SetFilePointer, isA<Function>());
+    });
+    test('Can instantiate SetFilePointerEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetFilePointerEx = kernel32.lookupFunction<
+          Int32 Function(IntPtr hFile, Int64 liDistanceToMove,
+              Pointer<Int64> lpNewFilePointer, Uint32 dwMoveMethod),
+          int Function(
+              int hFile,
+              int liDistanceToMove,
+              Pointer<Int64> lpNewFilePointer,
+              int dwMoveMethod)>('SetFilePointerEx');
+      expect(SetFilePointerEx, isA<Function>());
+    });
     test('Can instantiate SetStdHandle', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final SetStdHandle = kernel32.lookupFunction<
@@ -841,6 +912,13 @@ void main() {
           int Function(Pointer<Void> lpAddress, int dwSize,
               int dwFreeType)>('VirtualFree');
       expect(VirtualFree, isA<Function>());
+    });
+    test('Can instantiate WaitForSingleObject', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final WaitForSingleObject = kernel32.lookupFunction<
+          Int32 Function(IntPtr hHandle, Int32 dwMilliseconds),
+          int Function(int hHandle, int dwMilliseconds)>('WaitForSingleObject');
+      expect(WaitForSingleObject, isA<Function>());
     });
     test('Can instantiate Wow64SuspendThread', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
