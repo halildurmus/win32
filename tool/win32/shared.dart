@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:io';
 
 final prototypes = <String, TypeDef>{};
@@ -63,6 +64,60 @@ String dartFromFFI(String ffiType) {
 
   // Must be a struct passed by value, e.g. COORD in SetConsoleCursorPosition
   return ffiType;
+}
+
+final win32APIs = <Win32Function>[];
+
+class Win32Function {
+  final String name;
+  final String returnType;
+  final List<List<String>> params;
+
+  const Win32Function(this.name, this.returnType, this.params);
+}
+
+Win32Function loadFunction(String rawFunction) {
+  final paramsStart = rawFunction.indexOf('(');
+  final preamble = rawFunction
+      .substring(0, paramsStart)
+      .replaceAll('WINAPI ', '')
+      .split(' ')
+      .map((s) => s.trim())
+      .toList();
+
+  if (preamble.length != 2) {
+    throw Exception('preamble != 2');
+  }
+  final returnType = preamble[0];
+  final apiName = preamble[1];
+
+  final params = rawFunction
+      .substring(paramsStart + 1, rawFunction.length - 2)
+      .split(',')
+      .map((s) => s.replaceAll(r'\n', ''))
+      .map((s) => s.replaceAll('_In_', ''))
+      .map((s) => s.replaceAll('_Out_', ''))
+      .map((s) => s.replaceAll('opt_', ''))
+      .map((s) => s.replaceAll('_Reserved_', ''))
+      .map((s) => s.replaceAll('_Inout_', ''))
+      .map((s) => s.replaceAll('_Frees_ptr_', ''))
+      .map((s) => s.replaceAll('const', ''))
+      .map((s) => s.trim())
+      .map((s) => s.split(RegExp(' +')))
+      .map((s) => s.map((p) => p.trim()).toList())
+      .toList();
+  print(params);
+
+  for (final param in params) {
+    if ((param.length != 2) &&
+        (param[0].isNotEmpty) &&
+        (!(param.length == 1 && param[0] == 'void'))) {
+      throw Exception('params != 2');
+    }
+  }
+
+  final func = Win32Function(returnType, apiName, params);
+  return func;
 }
 
 void loadCsv(String filename) {

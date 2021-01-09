@@ -100,7 +100,13 @@ int CredWrite(Pointer<CREDENTIAL> Credential, int Flags) {
 /// restarts any applications that have been registered for restart.
 ///
 /// ```c
-/// Initiates a shutdown and restart of the specified computer and restarts any applications that have been registered for restart.
+/// DWORD InitiateShutdownW(
+///   LPWSTR lpMachineName,
+///   LPWSTR lpMessage,
+///   DWORD  dwGracePeriod,
+///   DWORD  dwShutdownFlags,
+///   DWORD  dwReason
+/// );
 /// ```
 /// {@category advapi32}
 int InitiateShutdown(Pointer<Utf16> lpMachineName, Pointer<Utf16> lpMessage,
