@@ -11,7 +11,7 @@
         "cStandard": "c11",
         "cppStandard": "c++17",
         "intelliSenseMode": "msvc-x64",
-        "includePath": ["C:/Program Files (x86)/Windows Kits/NETFXSDK/4.8/Include/um"]
+        "includePath": []
     }],
     "version": 4
 }

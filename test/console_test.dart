@@ -27,10 +27,10 @@ void main() {
     // This will not be supported on a non-interactive console; skip the test if
     // so.
     if (result != FALSE) {
-      expect(
-          bufferInfo.dwCursorPositionX, lessThanOrEqualTo(bufferInfo.dwSizeX));
-      expect(
-          bufferInfo.dwCursorPositionY, lessThanOrEqualTo(bufferInfo.dwSizeY));
+      expect(bufferInfo.dwCursorPosition.X,
+          lessThanOrEqualTo(bufferInfo.dwSize.X));
+      expect(bufferInfo.dwCursorPosition.Y,
+          lessThanOrEqualTo(bufferInfo.dwSize.Y));
     }
   });
 

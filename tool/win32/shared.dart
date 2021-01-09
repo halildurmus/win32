@@ -61,7 +61,8 @@ String dartFromFFI(String ffiType) {
     return 'void';
   }
 
-  throw Exception('Unknown FFI Type.');
+  // Must be a struct passed by value, e.g. COORD in SetConsoleCursorPosition
+  return ffiType;
 }
 
 void loadCsv(String filename) {

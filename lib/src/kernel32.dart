@@ -1580,11 +1580,11 @@ int SetConsoleCursorInfo(
 /// );
 /// ```
 /// {@category kernel32}
-int SetConsoleCursorPosition(int hConsoleOutput, int dwCursorPosition) {
+int SetConsoleCursorPosition(int hConsoleOutput, COORD dwCursorPosition) {
   final _SetConsoleCursorPosition = _kernel32.lookupFunction<
-      Int32 Function(IntPtr hConsoleOutput, Int32 dwCursorPosition),
+      Int32 Function(IntPtr hConsoleOutput, COORD dwCursorPosition),
       int Function(int hConsoleOutput,
-          int dwCursorPosition)>('SetConsoleCursorPosition');
+          COORD dwCursorPosition)>('SetConsoleCursorPosition');
   return _SetConsoleCursorPosition(hConsoleOutput, dwCursorPosition);
 }
 

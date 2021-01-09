@@ -28,7 +28,23 @@ import 'package:ffi/ffi.dart';
 import 'constants.dart';
 import 'constants_nodoc.dart';
 import 'extensions/unpack_utf16.dart';
+import 'kernel32.dart';
 import 'oleaut32.dart';
+
+Pointer<T> zeroAllocate<T extends NativeType>({int count = 1}) {
+  final totalSize = count * sizeOf<T>();
+  final heap = GetProcessHeap();
+
+  if (heap != NULL) {
+    final result = HeapAlloc(heap, HEAP_ZERO_MEMORY, totalSize);
+
+    if (result.address != 0) {
+      return result.cast<T>();
+    }
+  }
+
+  throw ArgumentError('Unable to allocate required memory.');
+}
 
 // typedef struct tagWNDCLASSW {
 //   UINT      style;
@@ -74,17 +90,7 @@ class WNDCLASS extends Struct {
   external Pointer<Utf16> lpszMenuName;
   external Pointer<Utf16> lpszClassName;
 
-  factory WNDCLASS.allocate() => allocate<WNDCLASS>().ref
-    ..style = 0
-    ..lpfnWndProc = nullptr
-    ..cbClsExtra = 0
-    ..cbWndExtra = 0
-    ..hInstance = 0
-    ..hIcon = 0
-    ..hCursor = 0
-    ..hbrBackground = 0
-    ..lpszMenuName = nullptr
-    ..lpszClassName = nullptr;
+  factory WNDCLASS.allocate() => zeroAllocate<WNDCLASS>().ref;
 }
 
 // typedef struct _SYSTEM_INFO {
@@ -142,18 +148,7 @@ class SYSTEM_INFO extends Struct {
   @Uint16()
   external int wProcessorRevision;
 
-  factory SYSTEM_INFO.allocate() => allocate<SYSTEM_INFO>().ref
-    ..wProcessorArchitecture = 0
-    ..wReserved = 0
-    ..dwPageSize = 0
-    ..lpMaximumApplicationAddress = nullptr
-    ..lpMaximumApplicationAddress = nullptr
-    ..dwActiveProcessorMask = 0
-    ..dwNumberOfProcessors = 0
-    ..dwProcessorType = 0
-    ..dwAllocationGranularity = 0
-    ..wProcessorLevel = 0
-    ..wProcessorRevision = 0;
+  factory SYSTEM_INFO.allocate() => zeroAllocate<SYSTEM_INFO>().ref;
 }
 
 // typedef struct _PROCESS_INFORMATION {
@@ -178,11 +173,8 @@ class PROCESS_INFORMATION extends Struct {
   @Uint32()
   external int dwThreadId;
 
-  factory PROCESS_INFORMATION.allocate() => allocate<PROCESS_INFORMATION>().ref
-    ..hProcess = 0
-    ..hThread = 0
-    ..dwProcessId = 0
-    ..dwThreadId = 0;
+  factory PROCESS_INFORMATION.allocate() =>
+      zeroAllocate<PROCESS_INFORMATION>().ref;
 }
 
 // typedef struct _STARTUPINFOW {
@@ -244,25 +236,8 @@ class STARTUPINFO extends Struct {
   @IntPtr()
   external int hStdError;
 
-  factory STARTUPINFO.allocate() => allocate<STARTUPINFO>().ref
-    ..cb = sizeOf<STARTUPINFO>()
-    ..lpReserved = nullptr
-    ..lpDesktop = nullptr
-    ..lpTitle = nullptr
-    ..dwX = 0
-    ..dwY = 0
-    ..dwXSize = 0
-    ..dwYSize = 0
-    ..dwXCountChars = 0
-    ..dwYCountChars = 0
-    ..dwFillAttribute = 0
-    ..dwFlags = 0
-    ..wShowWindow = 0
-    ..cbReserved2 = 0
-    ..lpReserved2 = nullptr
-    ..hStdInput = 0
-    ..hStdOutput = 0
-    ..hStdError = 0;
+  factory STARTUPINFO.allocate() =>
+      zeroAllocate<STARTUPINFO>().ref..cb = sizeOf<STARTUPINFO>();
 }
 
 // typedef struct tagBIND_OPTS
@@ -286,11 +261,7 @@ class BIND_OPTS extends Struct {
   @Uint32()
   external int dwTickCountDeadline;
 
-  factory BIND_OPTS.allocate() => allocate<BIND_OPTS>().ref
-    ..cbStruct = 0
-    ..grfFlags = 0
-    ..grfMode = 0
-    ..dwTickCountDeadline = 0;
+  factory BIND_OPTS.allocate() => zeroAllocate<BIND_OPTS>().ref;
 }
 
 // typedef struct _SYSTEM_POWER_STATUS {
@@ -319,13 +290,8 @@ class SYSTEM_POWER_STATUS extends Struct {
   @Uint32()
   external int BatteryFullLifeTime;
 
-  factory SYSTEM_POWER_STATUS.allocate() => allocate<SYSTEM_POWER_STATUS>().ref
-    ..ACLineStatus = 0
-    ..BatteryFlag = 0
-    ..BatteryLifePercent = 0
-    ..SystemStatusFlag = 0
-    ..BatteryLifeTime = 0
-    ..BatteryFullLifeTime = 0;
+  factory SYSTEM_POWER_STATUS.allocate() =>
+      zeroAllocate<SYSTEM_POWER_STATUS>().ref;
 }
 
 // typedef struct {
@@ -384,21 +350,7 @@ class SYSTEM_BATTERY_STATE extends Struct {
   external int DefaultAlert2;
 
   factory SYSTEM_BATTERY_STATE.allocate() =>
-      allocate<SYSTEM_BATTERY_STATE>().ref
-        ..AcOnLine = 0
-        ..BatteryPresent = 0
-        ..Charging = 0
-        ..Discharging = 0
-        ..Spare1a = 0
-        ..Spare1b = 0
-        ..Spare1c = 0
-        ..Tag = 0
-        ..MaxCapacity = 0
-        ..RemainingCapacity = 0
-        ..Rate = 0
-        ..EstimatedTime = 0
-        ..DefaultAlert1 = 0
-        ..DefaultAlert2 = 0;
+      zeroAllocate<SYSTEM_BATTERY_STATE>().ref;
 }
 
 // typedef struct _STARTUPINFOEXW {
@@ -446,26 +398,8 @@ class STARTUPINFOEX extends Struct {
   external int hStdError;
   external Pointer lpAttributeList;
 
-  factory STARTUPINFOEX.allocate() => allocate<STARTUPINFOEX>().ref
-    ..cb = sizeOf<STARTUPINFOEX>()
-    ..lpReserved = nullptr
-    ..lpDesktop = nullptr
-    ..lpTitle = nullptr
-    ..dwX = 0
-    ..dwY = 0
-    ..dwXSize = 0
-    ..dwYSize = 0
-    ..dwXCountChars = 0
-    ..dwYCountChars = 0
-    ..dwFillAttribute = 0
-    ..dwFlags = 0
-    ..wShowWindow = 0
-    ..cbReserved2 = 0
-    ..lpReserved2 = nullptr
-    ..hStdInput = 0
-    ..hStdOutput = 0
-    ..hStdError = 0
-    ..lpAttributeList = nullptr;
+  factory STARTUPINFOEX.allocate() =>
+      zeroAllocate<STARTUPINFOEX>().ref..cb = sizeOf<STARTUPINFOEX>();
 }
 
 // typedef struct _SECURITY_ATTRIBUTES {
@@ -491,6 +425,9 @@ class SECURITY_ATTRIBUTES extends Struct {
 
   @Int32()
   external int bInheritHandle;
+
+  factory SECURITY_ATTRIBUTES.allocate() =>
+      zeroAllocate<SECURITY_ATTRIBUTES>().ref;
 }
 
 // typedef struct _SECURITY_DESCRIPTOR {
@@ -523,14 +460,8 @@ class SECURITY_DESCRIPTOR extends Struct {
   external Pointer<IntPtr> Sacl;
   external Pointer<IntPtr> Dacl;
 
-  factory SECURITY_DESCRIPTOR.allocate() => allocate<SECURITY_DESCRIPTOR>().ref
-    ..Revision = 0
-    ..Sbz1 = 0
-    ..Control = 0
-    ..Owner = nullptr
-    ..Group = nullptr
-    ..Sacl = nullptr
-    ..Dacl = nullptr;
+  factory SECURITY_DESCRIPTOR.allocate() =>
+      zeroAllocate<SECURITY_DESCRIPTOR>().ref;
 }
 
 // typedef struct tagSOLE_AUTHENTICATION_SERVICE {
@@ -557,11 +488,7 @@ class SOLE_AUTHENTICATION_SERVICE extends Struct {
   external int hr;
 
   factory SOLE_AUTHENTICATION_SERVICE.allocate() =>
-      allocate<SOLE_AUTHENTICATION_SERVICE>().ref
-        ..dwAuthnSvc = 0
-        ..dwAuthzSvc = 0
-        ..pPrincipalName = nullptr
-        ..hr = 0;
+      zeroAllocate<SOLE_AUTHENTICATION_SERVICE>().ref;
 }
 
 // struct tagVARIANT
@@ -605,13 +532,7 @@ class VARIANT extends Struct {
 
   bool get isPointer => vt & VARENUM.VT_PTR == VARENUM.VT_PTR;
 
-  factory VARIANT.allocate() => allocate<VARIANT>().ref
-    ..vt = 0
-    ..wReserved1 = 0
-    ..wReserved2 = 0
-    ..wReserved3 = 0
-    ..ptr = nullptr
-    ..ptr2 = nullptr;
+  factory VARIANT.allocate() => zeroAllocate<VARIANT>().ref;
 
   factory VARIANT.fromPointer(Pointer ptr) => VARIANT.allocate()
     ..vt = VARENUM.VT_PTR
@@ -630,9 +551,7 @@ class COMDLG_FILTERSPEC extends Struct {
   external Pointer<Utf16> pszName;
   external Pointer<Utf16> pszSpec;
 
-  factory COMDLG_FILTERSPEC.allocate() => allocate<COMDLG_FILTERSPEC>().ref
-    ..pszName = nullptr
-    ..pszSpec = nullptr;
+  factory COMDLG_FILTERSPEC.allocate() => zeroAllocate<COMDLG_FILTERSPEC>().ref;
 }
 
 // typedef struct tagACCEL {
@@ -652,10 +571,7 @@ class ACCEL extends Struct {
   @Uint16()
   external int cmd;
 
-  factory ACCEL.allocate() => allocate<ACCEL>().ref
-    ..fVirt = 0
-    ..key = 0
-    ..cmd = 0;
+  factory ACCEL.allocate() => zeroAllocate<ACCEL>().ref;
 }
 
 // typedef struct tagMONITORINFO {
@@ -671,36 +587,15 @@ class ACCEL extends Struct {
 class MONITORINFO extends Struct {
   @Uint32()
   external int cbSize;
-  @Int32()
-  external int rcMonitorLeft;
-  @Int32()
-  external int rcMonitorTop;
-  @Int32()
-  external int rcMonitorRight;
-  @Int32()
-  external int rcMonitorBottom;
-  @Int32()
-  external int rcWorkLeft;
-  @Int32()
-  external int rcWorkTop;
-  @Int32()
-  external int rcWorkRight;
-  @Int32()
-  external int rcWorkBottom;
+
+  external RECT rcMonitor;
+  external RECT rcWork;
+
   @Uint32()
   external int dwFlags;
 
-  factory MONITORINFO.allocate() => allocate<MONITORINFO>().ref
-    ..cbSize = sizeOf<MONITORINFO>()
-    ..rcMonitorLeft = 0
-    ..rcMonitorTop = 0
-    ..rcMonitorRight = 0
-    ..rcMonitorBottom = 0
-    ..rcWorkLeft = 0
-    ..rcWorkTop = 0
-    ..rcWorkRight = 0
-    ..rcWorkBottom = 0
-    ..dwFlags = 0;
+  factory MONITORINFO.allocate() =>
+      zeroAllocate<MONITORINFO>().ref..cbSize = sizeOf<MONITORINFO>();
 }
 
 // typedef struct tagCHOOSECOLORW {
@@ -746,16 +641,8 @@ class CHOOSECOLOR extends Struct {
   external Pointer<IntPtr> lpfnHook;
   external Pointer<Uint16> lpTemplateName;
 
-  factory CHOOSECOLOR.allocate() => allocate<CHOOSECOLOR>().ref
-    ..lStructSize = sizeOf<CHOOSECOLOR>()
-    ..hwndOwner = NULL
-    ..hInstance = NULL
-    ..rgbResult = 0
-    ..lpCustColors = allocate<Uint32>(count: 16)
-    ..Flags = 0
-    ..lCustData = 0
-    ..lpfnHook = nullptr
-    ..lpTemplateName = nullptr;
+  factory CHOOSECOLOR.allocate() =>
+      zeroAllocate<CHOOSECOLOR>().ref..lStructSize = sizeOf<CHOOSECOLOR>();
 }
 
 // typedef struct tagFINDREPLACEW {
@@ -798,18 +685,7 @@ class FINDREPLACE extends Struct {
   external Pointer<NativeFunction> lpfnHook;
   external Pointer<Utf16> lpTemplateName;
 
-  factory FINDREPLACE.allocate() => allocate<FINDREPLACE>().ref
-    ..lStructSize = 0
-    ..hwndOwner = 0
-    ..hInstance = 0
-    ..Flags = 0
-    ..lpstrFindWhat = nullptr
-    ..lpstrReplaceWith = nullptr
-    ..wFindWhatLen = 0
-    ..wReplaceWithLen = 0
-    ..lCustData = 0
-    ..lpfnHook = nullptr
-    ..lpTemplateName = nullptr;
+  factory FINDREPLACE.allocate() => zeroAllocate<FINDREPLACE>().ref;
 }
 
 // typedef struct tagCHOOSEFONTW {
@@ -871,23 +747,7 @@ class CHOOSEFONT extends Struct {
   @Int32()
   external int nSizeMax;
 
-  factory CHOOSEFONT.allocate() => allocate<CHOOSEFONT>().ref
-    ..lStructSize = 0
-    ..hwndOwner = 0
-    ..hDC = 0
-    ..lpLogFont = nullptr
-    ..iPointSize = 0
-    ..Flags = 0
-    ..rgbColors = 0
-    ..lCustData = 0
-    ..lpfnHook = nullptr
-    ..lpTemplateName = nullptr
-    ..hInstance = 0
-    ..lpszStyle = nullptr
-    ..nFontType = 0
-    ..reserved = 0
-    ..nSizeMin = 0
-    ..nSizeMax = 0;
+  factory CHOOSEFONT.allocate() => zeroAllocate<CHOOSEFONT>().ref;
 }
 
 // typedef struct tagOFNW {
@@ -970,30 +830,7 @@ class OPENFILENAME extends Struct {
   @Uint32()
   external int FlagsEx;
 
-  factory OPENFILENAME.allocate() => allocate<OPENFILENAME>().ref
-    ..lStructSize = 0
-    ..hwndOwner = 0
-    ..hInstance = 0
-    ..lpstrFilter = nullptr
-    ..lpstrCustomFilter = nullptr
-    ..nMaxCustFilter = 0
-    ..nFilterIndex = 0
-    ..lpstrFile = nullptr
-    ..nMaxFile = 0
-    ..lpstrFileTitle = nullptr
-    ..nMaxFileTitle = 0
-    ..lpstrInitialDir = nullptr
-    ..lpstrTitle = nullptr
-    ..Flags = 0
-    ..nFileOffset = 0
-    ..nFileExtension = 0
-    ..lpstrDefExt = nullptr
-    ..lCustData = 0
-    ..lpfnHook = nullptr
-    ..lpTemplateName = nullptr
-    ..pvReserved = nullptr
-    ..dwReserved = 0
-    ..FlagsEx = 0;
+  factory OPENFILENAME.allocate() => zeroAllocate<OPENFILENAME>().ref;
 }
 
 // typedef struct {
@@ -1082,36 +919,7 @@ class LOGFONT extends Struct {
   Pointer<Utf16> get lfFaceName =>
       addressOf.cast<Uint8>().elementAt(28).cast<Utf16>();
 
-  factory LOGFONT.allocate() => allocate<LOGFONT>().ref
-    ..lfHeight = 0
-    ..lfWidth = 0
-    ..lfEscapement = 0
-    ..lfOrientation = 0
-    ..lfWeight = 0
-    ..lfItalic = 0
-    ..lfUnderline = 0
-    ..lfStrikeOut = 0
-    ..lfCharSet = 0
-    ..lfOutPrecision = 0
-    ..lfClipPrecision = 0
-    ..lfQuality = 0
-    ..lfPitchAndFamily = 0
-    ..lfFaceName1 = 0
-    ..lfFaceName2 = 0
-    ..lfFaceName3 = 0
-    ..lfFaceName4 = 0
-    ..lfFaceName5 = 0
-    ..lfFaceName6 = 0
-    ..lfFaceName7 = 0
-    ..lfFaceName8 = 0
-    ..lfFaceName9 = 0
-    ..lfFaceName10 = 0
-    ..lfFaceName11 = 0
-    ..lfFaceName12 = 0
-    ..lfFaceName13 = 0
-    ..lfFaceName14 = 0
-    ..lfFaceName15 = 0
-    ..lfFaceName16 = 0;
+  factory LOGFONT.allocate() => zeroAllocate<LOGFONT>().ref;
 }
 
 // typedef struct tagENUMLOGFONTEXW {
@@ -1235,7 +1043,7 @@ class ENUMLOGFONTEX extends Struct {
       .unpackString(LF_FACESIZE);
 
   factory ENUMLOGFONTEX.allocate() =>
-      allocate<Uint8>(count: 348).cast<ENUMLOGFONTEX>().ref;
+      zeroAllocate<Uint8>(count: 348).cast<ENUMLOGFONTEX>().ref;
 }
 
 // typedef struct tagCREATESTRUCTW {
@@ -1284,19 +1092,7 @@ class CREATESTRUCT extends Struct {
   @Uint32()
   external int dwExStyle;
 
-  factory CREATESTRUCT.allocate() => allocate<CREATESTRUCT>().ref
-    ..lpCreateParams = nullptr
-    ..hInstance = 0
-    ..hMenu = 0
-    ..hwndParent = 0
-    ..cy = 0
-    ..cx = 0
-    ..y = 0
-    ..x = 0
-    ..style = 0
-    ..lpszName = nullptr
-    ..lpszClass = nullptr
-    ..dwExStyle = 0;
+  factory CREATESTRUCT.allocate() => zeroAllocate<CREATESTRUCT>().ref;
 }
 
 // typedef struct tagMENUINFO {
@@ -1327,14 +1123,7 @@ class MENUINFO extends Struct {
   external int dwContextHelpID;
   external Pointer<Uint32> dwMenuData;
 
-  factory MENUINFO.allocate() => allocate<MENUINFO>().ref
-    ..cbSize = 0
-    ..fMask = 0
-    ..dwStyle = 0
-    ..cyMax = 0
-    ..hbrBack = 0
-    ..dwContextHelpID = 0
-    ..dwMenuData = nullptr;
+  factory MENUINFO.allocate() => zeroAllocate<MENUINFO>().ref;
 }
 
 // typedef struct tagMENUITEMINFOW {
@@ -1388,19 +1177,7 @@ class MENUITEMINFO extends Struct {
   @IntPtr()
   external int hbmpItem;
 
-  factory MENUITEMINFO.allocate() => allocate<MENUITEMINFO>().ref
-    ..cbSize = 0
-    ..fMask = 0
-    ..fType = 0
-    ..fState = 0
-    ..wID = 0
-    ..hSubMenu = 0
-    ..hbmpChecked = 0
-    ..hbmpUnchecked = 0
-    ..dwItemData = nullptr
-    ..dwTypeData = nullptr
-    ..cch = 0
-    ..hbmpItem = 0;
+  factory MENUITEMINFO.allocate() => zeroAllocate<MENUITEMINFO>().ref;
 }
 
 // typedef struct tagMSG {
@@ -1431,20 +1208,9 @@ class MSG extends Struct {
   @Uint32()
   external int time;
 
-  @Int32()
-  external int ptX;
+  external POINT pt;
 
-  @Int32()
-  external int ptY;
-
-  factory MSG.allocate() => allocate<MSG>().ref
-    ..hwnd = 0
-    ..message = 0
-    ..wParam = 0
-    ..lParam = 0
-    ..time = 0
-    ..ptX = 0
-    ..ptY = 0;
+  factory MSG.allocate() => zeroAllocate<MSG>().ref;
 }
 
 // typedef struct tagSIZE {
@@ -1462,9 +1228,7 @@ class SIZE extends Struct {
   @Int32()
   external int cy;
 
-  factory SIZE.allocate() => allocate<SIZE>().ref
-    ..cx = 0
-    ..cy = 0;
+  factory SIZE.allocate() => zeroAllocate<SIZE>().ref;
 }
 
 // typedef struct tagMINMAXINFO {
@@ -1480,30 +1244,13 @@ class SIZE extends Struct {
 ///
 /// {@category Struct}
 class MINMAXINFO extends Struct {
-  @Int32()
-  external int ptReservedX;
-  @Int32()
-  external int ptReservedY;
+  external POINT ptReserved;
+  external POINT ptMaxSize;
+  external POINT ptMaxPosition;
+  external POINT ptMinTrackSize;
+  external POINT ptMaxTrackSize;
 
-  @Int32()
-  external int ptMaxSizeX;
-  @Int32()
-  external int ptMaxSizeY;
-
-  @Int32()
-  external int ptMaxPositionX;
-  @Int32()
-  external int ptMaxPositionY;
-
-  @Int32()
-  external int ptMinTrackSizeX;
-  @Int32()
-  external int ptMinTrackSizeY;
-
-  @Int32()
-  external int ptMaxTrackSizeX;
-  @Int32()
-  external int ptMaxTrackSizeY;
+  factory MINMAXINFO.allocate() => zeroAllocate<MINMAXINFO>().ref;
 }
 
 // typedef struct tagPOINT {
@@ -1521,9 +1268,7 @@ class POINT extends Struct {
   @Int32()
   external int y;
 
-  factory POINT.allocate() => allocate<POINT>().ref
-    ..x = 0
-    ..y = 0;
+  factory POINT.allocate() => zeroAllocate<POINT>().ref;
 }
 
 // typedef struct tagPAINTSTRUCT {
@@ -1545,14 +1290,9 @@ class PAINTSTRUCT extends Struct {
   external int hdc;
   @Int32()
   external int fErase;
-  @Int32()
-  external int rcPaintL;
-  @Int32()
-  external int rcPaintT;
-  @Int32()
-  external int rcPaintR;
-  @Int32()
-  external int rcPaintB;
+
+  external RECT rcPaint;
+
   @Int32()
   external int fRestore;
   @Int32()
@@ -1566,19 +1306,7 @@ class PAINTSTRUCT extends Struct {
   @Uint64()
   external int rgb4;
 
-  factory PAINTSTRUCT.allocate() => allocate<PAINTSTRUCT>().ref
-    ..hdc = 0
-    ..fErase = 0
-    ..rcPaintL = 0
-    ..rcPaintT = 0
-    ..rcPaintR = 0
-    ..rcPaintB = 0
-    ..fRestore = 0
-    ..fIncUpdate = 0
-    ..rgb1 = 0
-    ..rgb2 = 0
-    ..rgb3 = 0
-    ..rgb4 = 0;
+  factory PAINTSTRUCT.allocate() => zeroAllocate<PAINTSTRUCT>().ref;
 }
 
 // typedef struct tagRECT {
@@ -1602,11 +1330,7 @@ class RECT extends Struct {
   @Int32()
   external int bottom;
 
-  factory RECT.allocate() => allocate<RECT>().ref
-    ..left = 0
-    ..top = 0
-    ..right = 0
-    ..bottom = 0;
+  factory RECT.allocate() => zeroAllocate<RECT>().ref;
 }
 
 // typedef struct tagINPUT {
@@ -1646,12 +1370,7 @@ class INPUT extends Struct {
   HARDWAREINPUT get hi =>
       HARDWAREINPUT(addressOf.cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
 
-  factory INPUT.allocate() => allocate<INPUT>().ref
-    .._data0 = 0
-    .._data1 = 0
-    .._data2 = 0
-    .._data3 = 0
-    .._data4 = 0;
+  factory INPUT.allocate() => zeroAllocate<INPUT>().ref;
 }
 
 // typedef struct tagMOUSEINPUT {
@@ -1811,27 +1530,7 @@ class TEXTMETRIC extends Struct {
   @Uint8()
   external int tmCharSet;
 
-  factory TEXTMETRIC.allocate() => allocate<TEXTMETRIC>().ref
-    ..tmHeight = 0
-    ..tmAscent = 0
-    ..tmDescent = 0
-    ..tmInternalLeading = 0
-    ..tmExternalLeading = 0
-    ..tmAveCharWidth = 0
-    ..tmMaxCharWidth = 0
-    ..tmWeight = 0
-    ..tmOverhang = 0
-    ..tmDigitizedAspectX = 0
-    ..tmDigitizedAspectY = 0
-    ..tmFirstChar = 0
-    ..tmLastChar = 0
-    ..tmDefaultChar = 0
-    ..tmBreakChar = 0
-    ..tmItalic = 0
-    ..tmUnderlined = 0
-    ..tmStruckOut = 0
-    ..tmPitchAndFamily = 0
-    ..tmCharSet = 0;
+  factory TEXTMETRIC.allocate() => zeroAllocate<TEXTMETRIC>().ref;
 }
 
 // typedef struct tagSCROLLINFO {
@@ -1865,14 +1564,7 @@ class SCROLLINFO extends Struct {
   @Int32()
   external int nTrackPos;
 
-  factory SCROLLINFO.allocate() => allocate<SCROLLINFO>().ref
-    ..cbSize = 0
-    ..fMask = 0
-    ..nMin = 0
-    ..nMax = 0
-    ..nPage = 0
-    ..nPos = 0
-    ..nTrackPos = 0;
+  factory SCROLLINFO.allocate() => zeroAllocate<SCROLLINFO>().ref;
 }
 
 // typedef struct _SHELLEXECUTEINFOW {
@@ -1927,22 +1619,8 @@ class SHELLEXECUTEINFO extends Struct {
   @IntPtr()
   external int hProcess;
 
-  factory SHELLEXECUTEINFO.allocate() => allocate<SHELLEXECUTEINFO>().ref
-    ..cbSize = sizeOf<SHELLEXECUTEINFO>()
-    ..fMask = 0
-    ..hwnd = 0
-    ..lpVerb = nullptr
-    ..lpFile = nullptr
-    ..lpParameters = nullptr
-    ..lpDirectory = nullptr
-    ..nShow = 0
-    ..hInstApp = 0
-    ..lpIDList = nullptr
-    ..lpClass = nullptr
-    ..hkeyClass = 0
-    ..dwHotKey = 0
-    ..hMonitor = 0
-    ..hProcess = 0;
+  factory SHELLEXECUTEINFO.allocate() =>
+      zeroAllocate<SHELLEXECUTEINFO>().ref..cbSize = sizeOf<SHELLEXECUTEINFO>();
 }
 
 // typedef struct _SHQUERYRBINFO {
@@ -1964,10 +1642,8 @@ class SHQUERYRBINFO extends Struct {
   @Int64()
   external int i64NumItems;
 
-  factory SHQUERYRBINFO.allocate() => allocate<SHQUERYRBINFO>().ref
-    ..cbSize = sizeOf<SHQUERYRBINFO>()
-    ..i64Size = 0
-    ..i64NumItems = 0;
+  factory SHQUERYRBINFO.allocate() =>
+      zeroAllocate<SHQUERYRBINFO>().ref..cbSize = sizeOf<SHQUERYRBINFO>();
 }
 
 // *** COM STRUCTS ***
@@ -1992,16 +1668,12 @@ class GUID extends Struct {
   @Uint64()
   external int Data4;
 
-  factory GUID.allocate() => allocate<GUID>().ref
-    ..Data1 = 0
-    ..Data2 = 0
-    ..Data3 = 0
-    ..Data4 = 0;
+  factory GUID.allocate() => zeroAllocate<GUID>().ref;
 
   /// Create GUID from common {FDD39AD0-238F-46AF-ADB4-6C85480369C7} format
   factory GUID.fromString(String guidString) {
     assert(guidString.length == 38);
-    final guid = allocate<GUID>().ref;
+    final guid = zeroAllocate<GUID>().ref;
     guid.Data1 = int.parse(guidString.substring(1, 9), radix: 16);
     guid.Data2 = int.parse(guidString.substring(10, 14), radix: 16);
     guid.Data3 = int.parse(guidString.substring(15, 19), radix: 16);
@@ -2073,11 +1745,7 @@ class CREDENTIAL_ATTRIBUTE extends Struct {
   external Pointer<Uint8> Value;
 
   factory CREDENTIAL_ATTRIBUTE.allocate() =>
-      allocate<CREDENTIAL_ATTRIBUTE>().ref
-        ..Keyword = nullptr
-        ..Flags = 0
-        ..ValueSize = 0
-        ..Value = nullptr;
+      zeroAllocate<CREDENTIAL_ATTRIBUTE>().ref;
 }
 
 // typedef struct _CREDENTIALW {
@@ -2123,19 +1791,7 @@ class CREDENTIAL extends Struct {
   external Pointer<Utf16> TargetAlias;
   external Pointer<Utf16> UserName;
 
-  factory CREDENTIAL.allocate() => allocate<CREDENTIAL>().ref
-    ..Flags = 0
-    ..Type = 0
-    ..TargetName = nullptr
-    ..Comment = nullptr
-    ..LastWritten = nullptr
-    ..CredentialBlobSize = 0
-    ..CredentialBlob = nullptr
-    ..Persist = 0
-    ..AttributeCount = 0
-    ..Attributes = nullptr
-    ..TargetAlias = nullptr
-    ..UserName = nullptr;
+  factory CREDENTIAL.allocate() => zeroAllocate<CREDENTIAL>().ref;
 }
 
 // *** CONSOLE STRUCTS ***
@@ -2206,22 +1862,7 @@ class BITMAPINFO extends Struct {
   @Uint8()
   external int rgbReserved;
 
-  factory BITMAPINFO.allocate() => allocate<BITMAPINFO>().ref
-    ..biSize = 44 // default to single element RGBQUAD
-    ..biWidth = 0
-    ..biHeight = 0
-    ..biPlanes = 0
-    ..biBitCount = 0
-    ..biCompression = 0
-    ..biSizeImage = 0
-    ..biXPelsPerMeter = 0
-    ..biYPelsPerMeter = 0
-    ..biClrUsed = 0
-    ..biClrImportant = 0
-    ..rgbBlue = 0
-    ..rgbGreen = 0
-    ..rgbRed = 0
-    ..rgbReserved = 0;
+  factory BITMAPINFO.allocate() => zeroAllocate<BITMAPINFO>().ref..biSize = 44;
 }
 
 // typedef struct tagBITMAP {
@@ -2253,14 +1894,7 @@ class BITMAP extends Struct {
   external int bmBitsPixel;
   external Pointer bmBits;
 
-  factory BITMAP.allocate() => allocate<BITMAP>().ref
-    ..bmType = 0
-    ..bmWidth = 0
-    ..bmHeight = 0
-    ..bmWidthBytes = 0
-    ..bmPlanes = 0
-    ..bmBitsPixel = 0
-    ..bmBits = nullptr;
+  factory BITMAP.allocate() => zeroAllocate<BITMAP>().ref;
 }
 
 // typedef struct tagBITMAPFILEHEADER {
@@ -2287,12 +1921,7 @@ class BITMAPFILEHEADER extends Struct {
   @Uint32()
   external int bfOffBits;
 
-  factory BITMAPFILEHEADER.allocate() => allocate<BITMAPFILEHEADER>().ref
-    ..bfType = 0
-    ..bfSize = 0
-    ..bfReserved1 = 0
-    ..bfReserved2 = 0
-    ..bfOffBits = 0;
+  factory BITMAPFILEHEADER.allocate() => zeroAllocate<BITMAPFILEHEADER>().ref;
 }
 
 // typedef struct tagBITMAPINFOHEADER {
@@ -2337,18 +1966,8 @@ class BITMAPINFOHEADER extends Struct {
   @Uint32()
   external int biClrImportant;
 
-  factory BITMAPINFOHEADER.allocate() => allocate<BITMAPINFOHEADER>().ref
-    ..biSize = 0
-    ..biWidth = 0
-    ..biHeight = 0
-    ..biPlanes = 0
-    ..biBitCount = 0
-    ..biCompression = 0
-    ..biSizeImage = 0
-    ..biXPelsPerMeter = 0
-    ..biYPelsPerMeter = 0
-    ..biClrUsed = 0
-    ..biClrImportant = 0;
+  factory BITMAPINFOHEADER.allocate() =>
+      zeroAllocate<BITMAPINFOHEADER>().ref..biSize = sizeOf<BITMAPINFOHEADER>();
 }
 
 // typedef struct tagPALETTEENTRY {
@@ -2372,11 +1991,7 @@ class PALETTEENTRY extends Struct {
   @Uint8()
   external int peFlags;
 
-  factory PALETTEENTRY.allocate() => allocate<PALETTEENTRY>().ref
-    ..peRed = 0
-    ..peGreen = 0
-    ..peBlue = 0
-    ..peFlags = 0;
+  factory PALETTEENTRY.allocate() => zeroAllocate<PALETTEENTRY>().ref;
 }
 
 // typedef struct tagDRAWTEXTPARAMS {
@@ -2403,12 +2018,7 @@ class DRAWTEXTPARAMS extends Struct {
   @Uint32()
   external int uiLengthDrawn;
 
-  factory DRAWTEXTPARAMS.allocate() => allocate<DRAWTEXTPARAMS>().ref
-    ..cbSize = 0
-    ..iTabLength = 0
-    ..iLeftMargin = 0
-    ..iRightMargin = 0
-    ..uiLengthDrawn = 0;
+  factory DRAWTEXTPARAMS.allocate() => zeroAllocate<DRAWTEXTPARAMS>().ref;
 }
 
 // typedef struct _FILETIME {
@@ -2426,9 +2036,7 @@ class FILETIME extends Struct {
   @Uint32()
   external int dwHighDateTime;
 
-  factory FILETIME.allocate() => allocate<FILETIME>().ref
-    ..dwLowDateTime = 0
-    ..dwHighDateTime = 0;
+  factory FILETIME.allocate() => zeroAllocate<FILETIME>().ref;
 }
 
 // typedef struct KNOWNFOLDER_DEFINITION
@@ -2488,26 +2096,7 @@ class KNOWNFOLDER_DEFINITION extends Struct {
   external int ftidType_guid4;
 
   factory KNOWNFOLDER_DEFINITION.allocate() =>
-      allocate<KNOWNFOLDER_DEFINITION>().ref
-        ..category = 0
-        ..pszName = nullptr
-        ..pszDescription = nullptr
-        ..fidParent_guid1 = 0
-        ..fidParent_guid2 = 0
-        ..fidParent_guid3 = 0
-        ..fidParent_guid4 = 0
-        ..pszRelativePath = nullptr
-        ..pszParsingName = nullptr
-        ..pszTooltip = nullptr
-        ..pszLocalizedName = nullptr
-        ..pszIcon = nullptr
-        ..pszSecurity = nullptr
-        ..dwAttributes = 0
-        ..kfdFlags = 0
-        ..ftidType_guid1 = 0
-        ..ftidType_guid2 = 0
-        ..ftidType_guid3 = 0
-        ..ftidType_guid4 = 0;
+      zeroAllocate<KNOWNFOLDER_DEFINITION>().ref;
 }
 
 // typedef struct _SHITEMID
@@ -2525,9 +2114,7 @@ class SHITEMID extends Struct {
   @Uint8()
   external int abID;
 
-  factory SHITEMID.allocate() => allocate<SHITEMID>().ref
-    ..cb = 0
-    ..abID = 0;
+  factory SHITEMID.allocate() => zeroAllocate<SHITEMID>().ref;
 }
 
 // typedef struct tagDISPPARAMS {
@@ -2550,11 +2137,7 @@ class DISPPARAMS extends Struct {
   @Int16()
   external int cNamedArgs;
 
-  factory DISPPARAMS.allocate() => allocate<DISPPARAMS>().ref
-    ..rgvarg = nullptr
-    ..rgdispidNamedArgs = nullptr
-    ..cArgs = 0
-    ..cNamedArgs = 0;
+  factory DISPPARAMS.allocate() => zeroAllocate<DISPPARAMS>().ref;
 }
 
 // *** CONSOLE STRUCTS ***
@@ -2573,9 +2156,8 @@ class CONSOLE_CURSOR_INFO extends Struct {
   @Int32()
   external int bVisible;
 
-  factory CONSOLE_CURSOR_INFO.allocate() => allocate<CONSOLE_CURSOR_INFO>().ref
-    ..dwSize = 0
-    ..bVisible = 0;
+  factory CONSOLE_CURSOR_INFO.allocate() =>
+      zeroAllocate<CONSOLE_CURSOR_INFO>().ref;
 }
 
 // typedef struct _CONSOLE_SCREEN_BUFFER_INFO {
@@ -2590,47 +2172,15 @@ class CONSOLE_CURSOR_INFO extends Struct {
 ///
 /// {@category Struct}
 class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
-  @Int16()
-  external int dwSizeX;
-
-  @Int16()
-  external int dwSizeY;
-
-  @Int16()
-  external int dwCursorPositionX;
-  @Int16()
-  external int dwCursorPositionY;
-
+  external COORD dwSize;
+  external COORD dwCursorPosition;
   @Uint16()
   external int wAttributes;
-
-  @Int16()
-  external int srWindowLeft;
-  @Int16()
-  external int srWindowTop;
-  @Int16()
-  external int srWindowRight;
-  @Int16()
-  external int srWindowBottom;
-
-  @Int16()
-  external int dwMaximumWindowSizeX;
-  @Int16()
-  external int dwMaximumWindowSizeY;
+  external SMALL_RECT srWindow;
+  external COORD dwMaximumWindowSize;
 
   factory CONSOLE_SCREEN_BUFFER_INFO.allocate() =>
-      allocate<CONSOLE_SCREEN_BUFFER_INFO>().ref
-        ..dwSizeX = 0
-        ..dwSizeY = 0
-        ..dwCursorPositionX = 0
-        ..dwCursorPositionY = 0
-        ..wAttributes = 0
-        ..srWindowLeft = 0
-        ..srWindowTop = 0
-        ..srWindowRight = 0
-        ..srWindowBottom = 0
-        ..dwMaximumWindowSizeX = 0
-        ..dwMaximumWindowSizeY = 0;
+      zeroAllocate<CONSOLE_SCREEN_BUFFER_INFO>().ref;
 }
 
 // typedef struct _CONSOLE_SELECTION_INFO {
@@ -2646,29 +2196,11 @@ class CONSOLE_SELECTION_INFO extends Struct {
   @Uint32()
   external int dwFlags;
 
-  @Int16()
-  external int dwSelectionAnchorX;
-  @Int16()
-  external int dwSelectionAnchorY;
-
-  @Int16()
-  external int srSelectionLeft;
-  @Int16()
-  external int srSelectionTop;
-  @Int16()
-  external int srSelectionRight;
-  @Int16()
-  external int srSelectionBottom;
+  external COORD dwSelectionAnchor;
+  external SMALL_RECT srSelection;
 
   factory CONSOLE_SELECTION_INFO.allocate() =>
-      allocate<CONSOLE_SELECTION_INFO>().ref
-        ..dwFlags = 0
-        ..dwSelectionAnchorX = 0
-        ..dwSelectionAnchorY = 0
-        ..srSelectionLeft = 0
-        ..srSelectionTop = 0
-        ..srSelectionRight = 0
-        ..srSelectionBottom = 0;
+      zeroAllocate<CONSOLE_SELECTION_INFO>().ref;
 }
 
 // typedef struct _COORD {
@@ -2688,9 +2220,7 @@ class COORD extends Struct {
   @Int16()
   external int Y;
 
-  factory COORD.allocate() => allocate<COORD>().ref
-    ..X = 0
-    ..Y = 0;
+  factory COORD.allocate() => zeroAllocate<COORD>().ref;
 }
 
 // typedef struct _CHAR_INFO {
@@ -2712,9 +2242,7 @@ class CHAR_INFO extends Struct {
   @Int16()
   external int Attributes;
 
-  factory CHAR_INFO.allocate() => allocate<CHAR_INFO>().ref
-    ..UnicodeChar = 0
-    ..Attributes = 0;
+  factory CHAR_INFO.allocate() => zeroAllocate<CHAR_INFO>().ref;
 }
 
 // typedef struct _SMALL_RECT {
@@ -2741,11 +2269,7 @@ class SMALL_RECT extends Struct {
   @Int16()
   external int Bottom;
 
-  factory SMALL_RECT.allocate() => allocate<SMALL_RECT>().ref
-    ..Left = 0
-    ..Top = 0
-    ..Right = 0
-    ..Bottom = 0;
+  factory SMALL_RECT.allocate() => zeroAllocate<SMALL_RECT>().ref;
 }
 // typedef struct tagINITCOMMONCONTROLSEX {
 //   DWORD dwSize;
@@ -2764,9 +2288,8 @@ class INITCOMMONCONTROLSEX extends Struct {
   external int dwICC;
 
   factory INITCOMMONCONTROLSEX.allocate() =>
-      allocate<INITCOMMONCONTROLSEX>().ref
-        ..dwSize = sizeOf<INITCOMMONCONTROLSEX>()
-        ..dwICC = 0;
+      zeroAllocate<INITCOMMONCONTROLSEX>().ref
+        ..dwSize = sizeOf<INITCOMMONCONTROLSEX>();
 }
 
 class DLGTEMPLATE extends Struct {
@@ -2784,6 +2307,8 @@ class DLGTEMPLATE extends Struct {
   external int cx;
   @Uint16()
   external int cy;
+
+  factory DLGTEMPLATE.allocate() => zeroAllocate<DLGTEMPLATE>().ref;
 }
 
 class DLGITEMTEMPLATE extends Struct {
@@ -2811,14 +2336,7 @@ class DLGITEMTEMPLATE extends Struct {
   // sizeOf returns 20, because Dart over-allocates to DWORD boundaries. Instead
   // we allocate the *actual* size of this.
   factory DLGITEMTEMPLATE.allocate() =>
-      allocate<Uint8>(count: 18).cast<DLGITEMTEMPLATE>().ref
-        ..style = 0
-        ..dwExtendedStyle = 0
-        ..x = 0
-        ..y = 0
-        ..cx = 0
-        ..cy = 0
-        ..id = 0;
+      zeroAllocate<Uint8>(count: 18).cast<DLGITEMTEMPLATE>().ref;
 }
 
 // typedef struct _TASKDIALOGCONFIG {
@@ -2913,31 +2431,8 @@ class TASKDIALOGCONFIG extends Struct {
   @Uint32()
   external int cxWidth;
 
-  factory TASKDIALOGCONFIG.allocate() => allocate<TASKDIALOGCONFIG>().ref
-    ..cbSize = sizeOf<TASKDIALOGCONFIG>()
-    ..hwndParent = 0
-    ..hInstance = 0
-    ..dwFlags = 0
-    ..dwCommonButtons = 0
-    ..pszWindowTitle = nullptr
-    ..hMainIcon = 0
-    ..pszMainInstruction = nullptr
-    ..pszContent = nullptr
-    ..cButtons = 0
-    ..pButtons = nullptr
-    ..nDefaultButton = 0
-    ..cRadioButtons = 0
-    ..pRadioButtons = nullptr
-    ..nDefaultRadioButton = 0
-    ..pszVerificationText = nullptr
-    ..pszExpandedInformation = nullptr
-    ..pszExpandedControlText = nullptr
-    ..pszCollapsedControlText = nullptr
-    ..hFooterIcon = 0
-    ..pszFooter = nullptr
-    ..pfCallback = nullptr
-    ..lpCallbackData = 0
-    ..cxWidth = 0;
+  factory TASKDIALOGCONFIG.allocate() =>
+      zeroAllocate<TASKDIALOGCONFIG>().ref..cbSize = sizeOf<TASKDIALOGCONFIG>();
 }
 
 // typedef struct _TASKDIALOG_BUTTON
@@ -2956,9 +2451,7 @@ class TASKDIALOG_BUTTON extends Struct {
 
   external Pointer<Utf16> pszButtonText;
 
-  factory TASKDIALOG_BUTTON.allocate() => allocate<TASKDIALOG_BUTTON>().ref
-    ..nButtonID = 0
-    ..pszButtonText = nullptr;
+  factory TASKDIALOG_BUTTON.allocate() => zeroAllocate<TASKDIALOG_BUTTON>().ref;
 }
 
 // typedef struct _DLLVERSIONINFO
@@ -2986,12 +2479,8 @@ class DLLVERSIONINFO extends Struct {
   @Uint32()
   external int dwPlatformID;
 
-  factory DLLVERSIONINFO.allocate() => allocate<DLLVERSIONINFO>().ref
-    ..cbSize = sizeOf<DLLVERSIONINFO>()
-    ..dwMajorVersion = 0
-    ..dwMinorVersion = 0
-    ..dwBuildNumber = 0
-    ..dwPlatformID = 0;
+  factory DLLVERSIONINFO.allocate() =>
+      zeroAllocate<DLLVERSIONINFO>().ref..cbSize = sizeOf<DLLVERSIONINFO>();
 }
 
 // typedef struct _OSVERSIONINFOW {
@@ -3094,15 +2583,10 @@ class OSVERSIONINFO extends Struct {
       addressOf.cast<Uint8>().elementAt(20).cast<Utf16>().unpackString(128);
 
   factory OSVERSIONINFO.allocate() =>
-      allocate<Uint8>(count: _OSVERSIONINFO_STRUCT_SIZE)
+      zeroAllocate<Uint8>(count: _OSVERSIONINFO_STRUCT_SIZE)
           .cast<OSVERSIONINFO>()
           .ref
-        ..dwOSVersionInfoSize = _OSVERSIONINFO_STRUCT_SIZE
-        ..dwMajorVersion = 0
-        ..dwMinorVersion = 0
-        ..dwBuildNumber = 0
-        ..dwPlatformId = 0
-        ..addressOf.cast<Uint8>().elementAt(20).value = 0;
+        ..dwOSVersionInfoSize = _OSVERSIONINFO_STRUCT_SIZE;
 }
 
 // typedef struct _BLUETOOTH_DEVICE_INFO {
@@ -3154,17 +2638,8 @@ class BLUETOOTH_DEVICE_INFO extends Struct {
       .unpackString(BLUETOOTH_MAX_NAME_SIZE);
 
   factory BLUETOOTH_DEVICE_INFO.allocate() =>
-      allocate<Uint8>(count: 560).cast<BLUETOOTH_DEVICE_INFO>().ref
-        ..dwSize = 560
-        ..Address = 0
-        ..ulClassofDevice = 0
-        ..fConnected = 0
-        ..fRemembered = 0
-        ..fAuthenticated = 0
-        ..stLastSeenDate = 0
-        ..stLastSeenTime = 0
-        ..stLastUsedDate = 0
-        ..stLastUsedTime = 0;
+      zeroAllocate<Uint8>(count: 560).cast<BLUETOOTH_DEVICE_INFO>().ref
+        ..dwSize = 560;
 }
 
 // typedef struct _BLUETOOTH_DEVICE_SEARCH_PARAMS {
@@ -3201,15 +2676,8 @@ class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
   external int hRadio;
 
   factory BLUETOOTH_DEVICE_SEARCH_PARAMS.allocate() =>
-      allocate<BLUETOOTH_DEVICE_SEARCH_PARAMS>().ref
-        ..dwSize = sizeOf<BLUETOOTH_DEVICE_SEARCH_PARAMS>()
-        ..fReturnAuthenticated = 0
-        ..fReturnRemembered = 0
-        ..fReturnUnknown = 0
-        ..fReturnConnected = 0
-        ..fIssueInquiry = 0
-        ..cTimeoutMultiplier = 0
-        ..hRadio = 0;
+      zeroAllocate<BLUETOOTH_DEVICE_SEARCH_PARAMS>().ref
+        ..dwSize = sizeOf<BLUETOOTH_DEVICE_SEARCH_PARAMS>();
 }
 
 // typedef struct BLUETOOTH_FIND_RADIO_PARAMS {
@@ -3225,7 +2693,7 @@ class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
   external int dwSize;
 
   factory BLUETOOTH_FIND_RADIO_PARAMS.allocate() =>
-      allocate<BLUETOOTH_FIND_RADIO_PARAMS>().ref
+      zeroAllocate<BLUETOOTH_FIND_RADIO_PARAMS>().ref
         ..dwSize = sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>();
 }
 
@@ -3262,11 +2730,9 @@ class BLUETOOTH_PIN_INFO extends Struct {
 
   factory BLUETOOTH_PIN_INFO.allocate() {
     const structSize = BTH_MAX_PIN_SIZE + 1;
-    final ptr = allocate<Uint8>(count: structSize);
-    for (var idx = 0; idx < structSize; idx++) {
-      ptr.elementAt(idx).value = 0;
-    }
-    return ptr.cast<BLUETOOTH_PIN_INFO>().ref;
+    return zeroAllocate<Uint8>(count: structSize)
+        .cast<BLUETOOTH_PIN_INFO>()
+        .ref;
   }
 }
 
@@ -3286,9 +2752,7 @@ class COR_FIELD_OFFSET extends Struct {
   @Uint32()
   external int ulOffset;
 
-  factory COR_FIELD_OFFSET.allocate() => allocate<COR_FIELD_OFFSET>().ref
-    ..ridOfField = 0
-    ..ulOffset = 0;
+  factory COR_FIELD_OFFSET.allocate() => zeroAllocate<COR_FIELD_OFFSET>().ref;
 }
 
 // typedef struct tagVS_FIXEDFILEINFO
@@ -3340,20 +2804,7 @@ class VS_FIXEDFILEINFO extends Struct {
   @Uint32()
   external int dwFileDateLS;
 
-  factory VS_FIXEDFILEINFO.allocate() => allocate<VS_FIXEDFILEINFO>().ref
-    ..dwSignature = 0
-    ..dwStrucVersion = 0
-    ..dwFileVersionMS = 0
-    ..dwFileVersionLS = 0
-    ..dwProductVersionMS = 0
-    ..dwProductVersionLS = 0
-    ..dwFileFlagsMask = 0
-    ..dwFileFlags = 0
-    ..dwFileOS = 0
-    ..dwFileType = 0
-    ..dwFileSubtype = 0
-    ..dwFileDateMS = 0
-    ..dwFileDateLS = 0;
+  factory VS_FIXEDFILEINFO.allocate() => zeroAllocate<VS_FIXEDFILEINFO>().ref;
 }
 
 // typedef struct tagMCI_OPEN_PARMSW {
@@ -3378,12 +2829,7 @@ class MCI_OPEN_PARMS extends Struct {
   external Pointer<Utf16> lpstrElementName;
   external Pointer<Utf16> lpstrAlias;
 
-  factory MCI_OPEN_PARMS.allocate() => allocate<MCI_OPEN_PARMS>().ref
-    ..dwCallback = 0
-    ..wDeviceID = 0
-    ..lpstrDeviceType = nullptr
-    ..lpstrElementName = nullptr
-    ..lpstrAlias = nullptr;
+  factory MCI_OPEN_PARMS.allocate() => zeroAllocate<MCI_OPEN_PARMS>().ref;
 }
 
 // typedef struct {
@@ -3404,10 +2850,7 @@ class MCI_PLAY_PARMS extends Struct {
   @Uint32()
   external int dwTo;
 
-  factory MCI_PLAY_PARMS.allocate() => allocate<MCI_PLAY_PARMS>().ref
-    ..dwCallback = 0
-    ..dwFrom = 0
-    ..dwTo = 0;
+  factory MCI_PLAY_PARMS.allocate() => zeroAllocate<MCI_PLAY_PARMS>().ref;
 }
 
 // typedef struct tagMCI_SEEK_PARMS {
@@ -3425,9 +2868,7 @@ class MCI_SEEK_PARMS extends Struct {
   @Uint32()
   external int dwTo;
 
-  factory MCI_SEEK_PARMS.allocate() => allocate<MCI_SEEK_PARMS>().ref
-    ..dwCallback = 0
-    ..dwTo = 0;
+  factory MCI_SEEK_PARMS.allocate() => zeroAllocate<MCI_SEEK_PARMS>().ref;
 }
 
 // typedef struct tagLOGBRUSH {
@@ -3447,10 +2888,7 @@ class LOGBRUSH extends Struct {
   external int lbColor;
   external Pointer<Uint32> lbHatch;
 
-  factory LOGBRUSH.allocate() => allocate<LOGBRUSH>().ref
-    ..lbStyle = 0
-    ..lbColor = 0
-    ..lbHatch = nullptr;
+  factory LOGBRUSH.allocate() => zeroAllocate<LOGBRUSH>().ref;
 }
 
 // typedef struct tagMCI_STATUS_PARMS {
@@ -3473,11 +2911,7 @@ class MCI_STATUS_PARMS extends Struct {
   @Uint32()
   external int dwTrack;
 
-  factory MCI_STATUS_PARMS.allocate() => allocate<MCI_STATUS_PARMS>().ref
-    ..dwCallback = 0
-    ..dwReturn = 0
-    ..dwItem = 0
-    ..dwTrack = 0;
+  factory MCI_STATUS_PARMS.allocate() => zeroAllocate<MCI_STATUS_PARMS>().ref;
 }
 
 // -----------------------------------------------------------------------------

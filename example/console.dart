@@ -46,25 +46,22 @@ Pointer<Uint8> toCString(String buffer) {
 void newLine() {
   GetConsoleScreenBufferInfo(stdout, bufferInfo.addressOf);
 
-  bufferInfo.dwCursorPositionX = 0;
-  if (bufferInfo.dwSizeY - 1 == bufferInfo.dwCursorPositionY) {
+  bufferInfo.dwCursorPosition.X = 0;
+  if (bufferInfo.dwSize.Y - 1 == bufferInfo.dwCursorPosition.Y) {
     scrollScreenBuffer(stdout, 1);
   } else {
-    bufferInfo.dwCursorPositionY += 1;
+    bufferInfo.dwCursorPosition.Y += 1;
   }
 
-  // When nested structs are supported, the second parameter will be
-  // bufferInfo.dwCursorPosition instead of the current one.
-  SetConsoleCursorPosition(stdout,
-      bufferInfo.dwCursorPositionY << 16 + bufferInfo.dwCursorPositionX);
+  SetConsoleCursorPosition(stdout, bufferInfo.dwCursorPosition);
 }
 
 void scrollScreenBuffer(int handle, int x) {
   final scrollRect = SMALL_RECT.allocate();
   scrollRect.Left = 0;
   scrollRect.Top = 1;
-  scrollRect.Right = bufferInfo.dwSizeX - x;
-  scrollRect.Bottom = bufferInfo.dwSizeY - x;
+  scrollRect.Right = bufferInfo.dwSize.X - x;
+  scrollRect.Bottom = bufferInfo.dwSize.Y - x;
 
   // The destination for the scroll rectangle is one row up.
   final coordDest = COORD.allocate();
@@ -90,14 +87,14 @@ void main() {
   GetConsoleScreenBufferInfo(stdout, bufferInfo.addressOf);
 
   print('Some console metrics:');
-  print('  Window dimensions LTRB: (${bufferInfo.srWindowLeft}, '
-      '${bufferInfo.srWindowTop}, ${bufferInfo.srWindowRight}, '
-      '${bufferInfo.srWindowBottom})');
-  print('  Cursor position X/Y: (${bufferInfo.dwCursorPositionX}, '
-      '${bufferInfo.dwCursorPositionY})');
-  print('  Window size X/Y: (${bufferInfo.dwSizeX}, ${bufferInfo.dwSizeY})');
-  print('  Maximum window size X/Y: (${bufferInfo.dwMaximumWindowSizeX}, '
-      '${bufferInfo.dwMaximumWindowSizeY})\n');
+  print('  Window dimensions LTRB: (${bufferInfo.srWindow.Left}, '
+      '${bufferInfo.srWindow.Top}, ${bufferInfo.srWindow.Right}, '
+      '${bufferInfo.srWindow.Bottom})');
+  print('  Cursor position X/Y: (${bufferInfo.dwCursorPosition.X}, '
+      '${bufferInfo.dwCursorPosition.Y})');
+  print('  Window size X/Y: (${bufferInfo.dwSize.Y}, ${bufferInfo.dwSize.Y})');
+  print('  Maximum window size X/Y: (${bufferInfo.dwMaximumWindowSize.X}, '
+      '${bufferInfo.dwMaximumWindowSize.Y})\n');
 
   // Set the text attributes to draw red text on black background.
   final originalAttributes = bufferInfo.wAttributes;

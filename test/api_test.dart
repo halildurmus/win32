@@ -731,9 +731,9 @@ void main() {
     test('Can instantiate SetConsoleCursorPosition', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final SetConsoleCursorPosition = kernel32.lookupFunction<
-          Int32 Function(IntPtr hConsoleOutput, Int32 dwCursorPosition),
+          Int32 Function(IntPtr hConsoleOutput, COORD dwCursorPosition),
           int Function(int hConsoleOutput,
-              int dwCursorPosition)>('SetConsoleCursorPosition');
+              COORD dwCursorPosition)>('SetConsoleCursorPosition');
       expect(SetConsoleCursorPosition, isA<Function>());
     });
     test('Can instantiate SetConsoleDisplayMode', () {

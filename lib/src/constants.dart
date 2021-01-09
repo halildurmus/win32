@@ -389,6 +389,28 @@ const OPEN_ALWAYS = 4;
 const TRUNCATE_EXISTING = 5;
 
 // -----------------------------------------------------------------------------
+// Heap allocation flags
+// -----------------------------------------------------------------------------
+
+/// Serialized access will not be used for this allocation.
+const HEAP_NO_SERIALIZE = 0x00000001;
+
+/// The system will raise an exception to indicate a function failure, such as
+/// an out-of-memory condition, instead of returning NULL.
+const HEAP_GENERATE_EXCEPTIONS = 0x00000004;
+
+/// The allocated memory will be initialized to zero. Otherwise, the memory is
+/// not initialized to zero.
+const HEAP_ZERO_MEMORY = 0x00000008;
+
+/// There can be no movement when reallocating a memory block.
+const HEAP_REALLOC_IN_PLACE_ONLY = 0x00000010;
+
+/// All memory blocks that are allocated from this heap allow code execution, if
+/// the hardware enforces data execution prevention.
+const HEAP_CREATE_ENABLE_EXECUTE = 0x00040000;
+
+// -----------------------------------------------------------------------------
 // Format message flags
 // -----------------------------------------------------------------------------
 

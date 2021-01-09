@@ -483,10 +483,10 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
     case WM_PAINT:
       final ps = PAINTSTRUCT.allocate();
       final dc = BeginPaint(hwnd, ps.addressOf);
-      final x = ps.rcPaintL;
-      final y = ps.rcPaintT;
-      final width = ps.rcPaintR - ps.rcPaintL;
-      final height = ps.rcPaintB - ps.rcPaintT;
+      final x = ps.rcPaint.left;
+      final y = ps.rcPaint.top;
+      final width = ps.rcPaint.right - ps.rcPaint.left;
+      final height = ps.rcPaint.bottom - ps.rcPaint.top;
 
       final rect = RECT.allocate();
       GetClientRect(hwnd, rect.addressOf);
