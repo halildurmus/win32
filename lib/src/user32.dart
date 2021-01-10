@@ -12,6 +12,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import 'callbacks.dart';
 import 'com/combase.dart';
 import 'structs.dart';
 
@@ -231,20 +232,24 @@ int CreateAcceleratorTable(Pointer<ACCEL> paccel, int cAccel) {
 /// );
 /// ```
 /// {@category user32}
-int CreateDialogIndirectParam(int hInstance, Pointer<DLGTEMPLATE> lpTemplate,
-    int hWndParent, Pointer<NativeFunction> lpDialogFunc, int dwInitParam) {
+int CreateDialogIndirectParam(
+    int hInstance,
+    Pointer<DLGTEMPLATE> lpTemplate,
+    int hWndParent,
+    Pointer<NativeFunction<DlgProc>> lpDialogFunc,
+    int dwInitParam) {
   final _CreateDialogIndirectParam = _user32.lookupFunction<
       IntPtr Function(
           IntPtr hInstance,
           Pointer<DLGTEMPLATE> lpTemplate,
           IntPtr hWndParent,
-          Pointer<NativeFunction> lpDialogFunc,
+          Pointer<NativeFunction<DlgProc>> lpDialogFunc,
           IntPtr dwInitParam),
       int Function(
           int hInstance,
           Pointer<DLGTEMPLATE> lpTemplate,
           int hWndParent,
-          Pointer<NativeFunction> lpDialogFunc,
+          Pointer<NativeFunction<DlgProc>> lpDialogFunc,
           int dwInitParam)>('CreateDialogIndirectParamW');
   return _CreateDialogIndirectParam(
       hInstance, lpTemplate, hWndParent, lpDialogFunc, dwInitParam);
@@ -401,20 +406,24 @@ int DestroyWindow(int hWnd) {
 /// );
 /// ```
 /// {@category user32}
-int DialogBoxIndirectParam(int hInstance, Pointer<DLGTEMPLATE> hDialogTemplate,
-    int hWndParent, Pointer<NativeFunction> lpDialogFunc, int dwInitParam) {
+int DialogBoxIndirectParam(
+    int hInstance,
+    Pointer<DLGTEMPLATE> hDialogTemplate,
+    int hWndParent,
+    Pointer<NativeFunction<DlgProc>> lpDialogFunc,
+    int dwInitParam) {
   final _DialogBoxIndirectParam = _user32.lookupFunction<
       IntPtr Function(
           IntPtr hInstance,
           Pointer<DLGTEMPLATE> hDialogTemplate,
           IntPtr hWndParent,
-          Pointer<NativeFunction> lpDialogFunc,
+          Pointer<NativeFunction<DlgProc>> lpDialogFunc,
           IntPtr dwInitParam),
       int Function(
           int hInstance,
           Pointer<DLGTEMPLATE> hDialogTemplate,
           int hWndParent,
-          Pointer<NativeFunction> lpDialogFunc,
+          Pointer<NativeFunction<DlgProc>> lpDialogFunc,
           int dwInitParam)>('DialogBoxIndirectParamW');
   return _DialogBoxIndirectParam(
       hInstance, hDialogTemplate, hWndParent, lpDialogFunc, dwInitParam);
@@ -594,12 +603,14 @@ int EndPaint(int hWnd, Pointer<PAINTSTRUCT> lpPaint) {
 /// );
 /// ```
 /// {@category user32}
-int EnumChildWindows(
-    int hWndParent, Pointer<NativeFunction> lpEnumFunc, int lParam) {
+int EnumChildWindows(int hWndParent,
+    Pointer<NativeFunction<EnumWindowsProc>> lpEnumFunc, int lParam) {
   final _EnumChildWindows = _user32.lookupFunction<
-      Int32 Function(
-          IntPtr hWndParent, Pointer<NativeFunction> lpEnumFunc, IntPtr lParam),
-      int Function(int hWndParent, Pointer<NativeFunction> lpEnumFunc,
+      Int32 Function(IntPtr hWndParent,
+          Pointer<NativeFunction<EnumWindowsProc>> lpEnumFunc, IntPtr lParam),
+      int Function(
+          int hWndParent,
+          Pointer<NativeFunction<EnumWindowsProc>> lpEnumFunc,
           int lParam)>('EnumChildWindows');
   return _EnumChildWindows(hWndParent, lpEnumFunc, lParam);
 }
@@ -622,12 +633,15 @@ int EnumChildWindows(
 /// ```
 /// {@category user32}
 int EnumDisplayMonitors(int hdc, Pointer<RECT> lprcClip,
-    Pointer<NativeFunction> lpfnEnum, int dwData) {
+    Pointer<NativeFunction<MonitorEnumProc>> lpfnEnum, int dwData) {
   final _EnumDisplayMonitors = _user32.lookupFunction<
       Int32 Function(IntPtr hdc, Pointer<RECT> lprcClip,
-          Pointer<NativeFunction> lpfnEnum, IntPtr dwData),
-      int Function(int hdc, Pointer<RECT> lprcClip,
-          Pointer<NativeFunction> lpfnEnum, int dwData)>('EnumDisplayMonitors');
+          Pointer<NativeFunction<MonitorEnumProc>> lpfnEnum, IntPtr dwData),
+      int Function(
+          int hdc,
+          Pointer<RECT> lprcClip,
+          Pointer<NativeFunction<MonitorEnumProc>> lpfnEnum,
+          int dwData)>('EnumDisplayMonitors');
   return _EnumDisplayMonitors(hdc, lprcClip, lpfnEnum, dwData);
 }
 
@@ -643,11 +657,13 @@ int EnumDisplayMonitors(int hdc, Pointer<RECT> lprcClip,
 /// );
 /// ```
 /// {@category user32}
-int EnumWindows(Pointer<NativeFunction> lpEnumFunc, int lParam) {
+int EnumWindows(
+    Pointer<NativeFunction<EnumWindowsProc>> lpEnumFunc, int lParam) {
   final _EnumWindows = _user32.lookupFunction<
-      Int32 Function(Pointer<NativeFunction> lpEnumFunc, IntPtr lParam),
-      int Function(
-          Pointer<NativeFunction> lpEnumFunc, int lParam)>('EnumWindows');
+      Int32 Function(
+          Pointer<NativeFunction<EnumWindowsProc>> lpEnumFunc, IntPtr lParam),
+      int Function(Pointer<NativeFunction<EnumWindowsProc>> lpEnumFunc,
+          int lParam)>('EnumWindows');
   return _EnumWindows(lpEnumFunc, lParam);
 }
 
@@ -1377,13 +1393,21 @@ int GetWindowText(int hWnd, Pointer<Utf16> lpString, int nMaxCount) {
 /// );
 /// ```
 /// {@category user32}
-int GrayString(int hDC, int hBrush, Pointer<NativeFunction> lpOutputFunc,
-    int lpData, int nCount, int X, int Y, int nWidth, int nHeight) {
+int GrayString(
+    int hDC,
+    int hBrush,
+    Pointer<NativeFunction<OutputProc>> lpOutputFunc,
+    int lpData,
+    int nCount,
+    int X,
+    int Y,
+    int nWidth,
+    int nHeight) {
   final _GrayString = _user32.lookupFunction<
       Int32 Function(
           IntPtr hDC,
           IntPtr hBrush,
-          Pointer<NativeFunction> lpOutputFunc,
+          Pointer<NativeFunction<OutputProc>> lpOutputFunc,
           IntPtr lpData,
           Int32 nCount,
           Int32 X,
@@ -1393,7 +1417,7 @@ int GrayString(int hDC, int hBrush, Pointer<NativeFunction> lpOutputFunc,
       int Function(
           int hDC,
           int hBrush,
-          Pointer<NativeFunction> lpOutputFunc,
+          Pointer<NativeFunction<OutputProc>> lpOutputFunc,
           int lpData,
           int nCount,
           int X,
@@ -2458,13 +2482,13 @@ int SetScrollInfo(int hwnd, int nBar, Pointer<SCROLLINFO> lpsi, int redraw) {
 /// );
 /// ```
 /// {@category user32}
-int SetTimer(
-    int hWnd, int nIDEvent, int uElapse, Pointer<NativeFunction> lpTimerFunc) {
+int SetTimer(int hWnd, int nIDEvent, int uElapse,
+    Pointer<NativeFunction<TimerProc>> lpTimerFunc) {
   final _SetTimer = _user32.lookupFunction<
       IntPtr Function(IntPtr hWnd, IntPtr nIDEvent, Uint32 uElapse,
-          Pointer<NativeFunction> lpTimerFunc),
+          Pointer<NativeFunction<TimerProc>> lpTimerFunc),
       int Function(int hWnd, int nIDEvent, int uElapse,
-          Pointer<NativeFunction> lpTimerFunc)>('SetTimer');
+          Pointer<NativeFunction<TimerProc>> lpTimerFunc)>('SetTimer');
   return _SetTimer(hWnd, nIDEvent, uElapse, lpTimerFunc);
 }
 

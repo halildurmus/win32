@@ -17,7 +17,7 @@ typedef DlgProc = IntPtr Function(IntPtr, Uint32, IntPtr, IntPtr);
 
 /// Application-defined callback function used with the EnumChildWindows
 /// function. It receives the child window handles.
-typedef EnumChildProc = Int32 Function(IntPtr hwnd, IntPtr lParam);
+typedef EnumWindowsProc = Int32 Function(IntPtr hwnd, IntPtr lParam);
 
 /// Application defined callback function used with the EnumFontFamiliesEx
 /// function. It is used to process the fonts.
@@ -33,10 +33,6 @@ typedef EnumResNameProc = Int32 Function(IntPtr hModule, Pointer<Utf16> lpType,
 /// EnumResourceTypesEx functions. It receives resource types.
 typedef EnumResTypeProc = Int32 Function(
     IntPtr hModule, Pointer<Utf16> lpszType, IntPtr lParam);
-
-/// Application-defined callback function used with the EnumWindows or
-/// EnumDesktopWindows function. It receives top-level window handles.
-typedef EnumWindowsProc = Int32 Function(IntPtr hwnd, IntPtr lParam);
 
 /// Application-defined callback function used with the FindText or ReplaceText
 /// function. It receives messages or notifications intended for the default
@@ -55,6 +51,13 @@ typedef OutputProc = Int32 Function(IntPtr Arg1, IntPtr Arg2, Int32 Arg3);
 /// Application-defined callback function that processes WM_TIMER messages.
 typedef TimerProc = Void Function(IntPtr, Uint32, Pointer<Uint32>, Int32);
 
-/// An application-defined function that processes messages sent to a window.
+/// Application-defined callback function that processes messages sent to a
+/// window.
 typedef WindowProc = IntPtr Function(
     IntPtr hwnd, Int32 uMsg, IntPtr wParam, IntPtr lParam);
+
+/// Application-defined function used with the SetConsoleCtrlHandler
+/// function. A console process uses this function to handle control signals
+/// received by the process. When the signal is received, the system creates a
+/// new thread in the process to execute the function.
+typedef HandlerProc = Int32 Function(Uint32 dwCtrlType);

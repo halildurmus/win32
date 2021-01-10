@@ -25,6 +25,7 @@ import 'dart:math' show min;
 import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
+import 'callbacks.dart';
 import 'constants.dart';
 import 'constants_nodoc.dart';
 import 'extensions/unpack_utf16.dart';
@@ -682,7 +683,7 @@ class FINDREPLACE extends Struct {
   external int wReplaceWithLen;
   @IntPtr()
   external int lCustData;
-  external Pointer<NativeFunction> lpfnHook;
+  external Pointer<NativeFunction<LPFRHookProc>> lpfnHook;
   external Pointer<Utf16> lpTemplateName;
 
   factory FINDREPLACE.allocate() => zeroAllocate<FINDREPLACE>().ref;

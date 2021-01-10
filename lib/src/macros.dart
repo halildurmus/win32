@@ -6,6 +6,7 @@
 
 import 'dart:ffi';
 
+import 'callbacks.dart';
 import 'constants.dart';
 import 'structs.dart';
 import 'user32.dart';
@@ -108,5 +109,5 @@ int GET_SC_WPARAM(int wParam) => wParam & 0xFFF0;
 /// ```
 /// {@category user32}
 void DialogBoxIndirect(int hInstance, Pointer<DLGTEMPLATE> lpTemplate,
-        int hWndParent, Pointer<NativeFunction> lpDialogFunc) =>
+        int hWndParent, Pointer<NativeFunction<DlgProc>> lpDialogFunc) =>
     DialogBoxIndirectParam(hInstance, lpTemplate, hWndParent, lpDialogFunc, 0);
