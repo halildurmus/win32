@@ -2990,3 +2990,9 @@ class STATSTG extends Struct {}
 ///
 /// {@category Struct}
 class NLM_SIMULATED_PROFILE_INFO extends Struct {}
+
+class BLUETOOTH_OOB_DATA_INFO extends Struct {}
+
+class PHYSICAL_MONITOR extends Struct {}
+
+class OVERLAPPED extends Struct {}

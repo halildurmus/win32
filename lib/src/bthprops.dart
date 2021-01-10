@@ -36,20 +36,20 @@ int BluetoothAuthenticateDeviceEx(
     int hwndParentIn,
     int hRadioIn,
     Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
-    int pbtOobData,
+    Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
     int authenticationRequirement) {
   final _BluetoothAuthenticateDeviceEx = _bthprops.lookupFunction<
       Uint32 Function(
           IntPtr hwndParentIn,
           IntPtr hRadioIn,
           Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
-          IntPtr pbtOobData,
+          Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
           Int32 authenticationRequirement),
       int Function(
           int hwndParentIn,
           int hRadioIn,
           Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
-          int pbtOobData,
+          Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
           int authenticationRequirement)>('BluetoothAuthenticateDeviceEx');
   return _BluetoothAuthenticateDeviceEx(hwndParentIn, hRadioIn, pbtdiInout,
       pbtOobData, authenticationRequirement);

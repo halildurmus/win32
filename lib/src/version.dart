@@ -125,7 +125,7 @@ int GetFileVersionInfo(
 /// {@category version}
 int VerFindFile(
     int uFlags,
-    Pointer<Utf16> szFilename,
+    Pointer<Utf16> szFileName,
     Pointer<Utf16> szWinDir,
     Pointer<Utf16> szAppDir,
     Pointer<Utf16> szCurDir,
@@ -135,7 +135,7 @@ int VerFindFile(
   final _VerFindFile = _version.lookupFunction<
       Uint32 Function(
           Uint32 uFlags,
-          Pointer<Utf16> szFilename,
+          Pointer<Utf16> szFileName,
           Pointer<Utf16> szWinDir,
           Pointer<Utf16> szAppDir,
           Pointer<Utf16> szCurDir,
@@ -144,14 +144,14 @@ int VerFindFile(
           Pointer<Uint32> puDestDirLen),
       int Function(
           int uFlags,
-          Pointer<Utf16> szFilename,
+          Pointer<Utf16> szFileName,
           Pointer<Utf16> szWinDir,
           Pointer<Utf16> szAppDir,
           Pointer<Utf16> szCurDir,
           Pointer<Uint32> puCurDirLen,
           Pointer<Utf16> szDestDir,
           Pointer<Uint32> puDestDirLen)>('VerFindFileW');
-  return _VerFindFile(uFlags, szFilename, szWinDir, szAppDir, szCurDir,
+  return _VerFindFile(uFlags, szFileName, szWinDir, szAppDir, szCurDir,
       puCurDirLen, szDestDir, puDestDirLen);
 }
 
@@ -174,7 +174,7 @@ int VerFindFile(
 /// ```
 /// {@category version}
 int VerInstallFile(
-    int dwFlags,
+    int uFlags,
     Pointer<Utf16> szSrcFileName,
     Pointer<Utf16> szDestFileName,
     Pointer<Utf16> szSrcDir,
@@ -184,7 +184,7 @@ int VerInstallFile(
     Pointer<Uint32> puTmpFileLen) {
   final _VerInstallFile = _version.lookupFunction<
       Uint32 Function(
-          Uint32 dwFlags,
+          Uint32 uFlags,
           Pointer<Utf16> szSrcFileName,
           Pointer<Utf16> szDestFileName,
           Pointer<Utf16> szSrcDir,
@@ -193,7 +193,7 @@ int VerInstallFile(
           Pointer<Utf16> szTmpFile,
           Pointer<Uint32> puTmpFileLen),
       int Function(
-          int dwFlags,
+          int uFlags,
           Pointer<Utf16> szSrcFileName,
           Pointer<Utf16> szDestFileName,
           Pointer<Utf16> szSrcDir,
@@ -201,7 +201,7 @@ int VerInstallFile(
           Pointer<Utf16> szCurDir,
           Pointer<Utf16> szTmpFile,
           Pointer<Uint32> puTmpFileLen)>('VerInstallFileW');
-  return _VerInstallFile(dwFlags, szSrcFileName, szDestFileName, szSrcDir,
+  return _VerInstallFile(uFlags, szSrcFileName, szDestFileName, szSrcDir,
       szDestDir, szCurDir, szTmpFile, puTmpFileLen);
 }
 
@@ -240,11 +240,14 @@ int VerLanguageName(int wLang, Pointer<Utf16> szLang, int cchLang) {
 /// ```
 /// {@category version}
 int VerQueryValue(Pointer pBlock, Pointer<Utf16> lpSubBlock,
-    Pointer<IntPtr> lplpBuffer, Pointer<Uint32> puLen) {
+    Pointer<Pointer> lplpBuffer, Pointer<Uint32> puLen) {
   final _VerQueryValue = _version.lookupFunction<
       Int32 Function(Pointer pBlock, Pointer<Utf16> lpSubBlock,
-          Pointer<IntPtr> lplpBuffer, Pointer<Uint32> puLen),
-      int Function(Pointer pBlock, Pointer<Utf16> lpSubBlock,
-          Pointer<IntPtr> lplpBuffer, Pointer<Uint32> puLen)>('VerQueryValueW');
+          Pointer<Pointer> lplpBuffer, Pointer<Uint32> puLen),
+      int Function(
+          Pointer pBlock,
+          Pointer<Utf16> lpSubBlock,
+          Pointer<Pointer> lplpBuffer,
+          Pointer<Uint32> puLen)>('VerQueryValueW');
   return _VerQueryValue(pBlock, lpSubBlock, lplpBuffer, puLen);
 }

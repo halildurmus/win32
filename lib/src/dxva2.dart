@@ -46,13 +46,14 @@ int DestroyPhysicalMonitor(int hMonitor) {
 /// );
 /// ```
 /// {@category dxva2}
-int DestroyPhysicalMonitors(
-    int dwPhysicalMonitorArraySize, Pointer pPhysicalMonitorArray) {
+int DestroyPhysicalMonitors(int dwPhysicalMonitorArraySize,
+    Pointer<PHYSICAL_MONITOR> pPhysicalMonitorArray) {
   final _DestroyPhysicalMonitors = _dxva2.lookupFunction<
-      Int32 Function(
-          Uint32 dwPhysicalMonitorArraySize, Pointer pPhysicalMonitorArray),
-      int Function(int dwPhysicalMonitorArraySize,
-          Pointer pPhysicalMonitorArray)>('DestroyPhysicalMonitors');
+          Int32 Function(Uint32 dwPhysicalMonitorArraySize,
+              Pointer<PHYSICAL_MONITOR> pPhysicalMonitorArray),
+          int Function(int dwPhysicalMonitorArraySize,
+              Pointer<PHYSICAL_MONITOR> pPhysicalMonitorArray)>(
+      'DestroyPhysicalMonitors');
   return _DestroyPhysicalMonitors(
       dwPhysicalMonitorArraySize, pPhysicalMonitorArray);
 }
@@ -363,13 +364,16 @@ int GetNumberOfPhysicalMonitorsFromHMONITOR(
 /// );
 /// ```
 /// {@category dxva2}
-int GetPhysicalMonitorsFromHMONITOR(int hMonitor,
-    int dwPhysicalMonitorArraySize, Pointer pPhysicalMonitorArray) {
+int GetPhysicalMonitorsFromHMONITOR(
+    int hMonitor,
+    int dwPhysicalMonitorArraySize,
+    Pointer<PHYSICAL_MONITOR> pPhysicalMonitorArray) {
   final _GetPhysicalMonitorsFromHMONITOR = _dxva2.lookupFunction<
-      Int32 Function(IntPtr hMonitor, Uint32 dwPhysicalMonitorArraySize,
-          Pointer pPhysicalMonitorArray),
-      int Function(int hMonitor, int dwPhysicalMonitorArraySize,
-          Pointer pPhysicalMonitorArray)>('GetPhysicalMonitorsFromHMONITOR');
+          Int32 Function(IntPtr hMonitor, Uint32 dwPhysicalMonitorArraySize,
+              Pointer<PHYSICAL_MONITOR> pPhysicalMonitorArray),
+          int Function(int hMonitor, int dwPhysicalMonitorArraySize,
+              Pointer<PHYSICAL_MONITOR> pPhysicalMonitorArray)>(
+      'GetPhysicalMonitorsFromHMONITOR');
   return _GetPhysicalMonitorsFromHMONITOR(
       hMonitor, dwPhysicalMonitorArraySize, pPhysicalMonitorArray);
 }
