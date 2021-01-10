@@ -1257,10 +1257,9 @@ int GlobalFree(int hMem) {
 /// );
 /// ```
 /// {@category kernel32}
-Pointer<Void> GlobalLock(int hMem) {
-  final _GlobalLock = _kernel32.lookupFunction<
-      Pointer<Void> Function(IntPtr hMem),
-      Pointer<Void> Function(int hMem)>('GlobalLock');
+Pointer GlobalLock(int hMem) {
+  final _GlobalLock = _kernel32.lookupFunction<Pointer Function(IntPtr hMem),
+      Pointer Function(int hMem)>('GlobalLock');
   return _GlobalLock(hMem);
 }
 
@@ -1291,10 +1290,10 @@ int GlobalUnlock(int hMem) {
 /// );
 /// ```
 /// {@category kernel32}
-Pointer<Void> HeapAlloc(int hHeap, int dwflags, int dwBytes) {
+Pointer HeapAlloc(int hHeap, int dwflags, int dwBytes) {
   final _HeapAlloc = _kernel32.lookupFunction<
-      Pointer<Void> Function(IntPtr hHeap, Uint32 dwflags, Uint32 dwBytes),
-      Pointer<Void> Function(int hHeap, int dwflags, int dwBytes)>('HeapAlloc');
+      Pointer Function(IntPtr hHeap, Uint32 dwflags, Uint32 dwBytes),
+      Pointer Function(int hHeap, int dwflags, int dwBytes)>('HeapAlloc');
   return _HeapAlloc(hHeap, dwflags, dwBytes);
 }
 
@@ -1414,10 +1413,10 @@ int LoadResource(int hModule, int hResInfo) {
 /// );
 /// ```
 /// {@category kernel32}
-Pointer<Void> LockResource(int hResData) {
+Pointer LockResource(int hResData) {
   final _LockResource = _kernel32.lookupFunction<
-      Pointer<Void> Function(IntPtr hResData),
-      Pointer<Void> Function(int hResData)>('LockResource');
+      Pointer Function(IntPtr hResData),
+      Pointer Function(int hResData)>('LockResource');
   return _LockResource(hResData);
 }
 
@@ -1978,12 +1977,12 @@ int UpdateResource(int hUpdate, Pointer<Utf16> lpType, Pointer<Utf16> lpName,
 /// );
 /// ```
 /// {@category kernel32}
-Pointer<Void> VirtualAlloc(
+Pointer VirtualAlloc(
     Pointer<Void> lpAddress, int dwSize, int flAllocationType, int flProtect) {
   final _VirtualAlloc = _kernel32.lookupFunction<
-      Pointer<Void> Function(Pointer<Void> lpAddress, IntPtr dwSize,
+      Pointer Function(Pointer<Void> lpAddress, IntPtr dwSize,
           Uint32 flAllocationType, Uint32 flProtect),
-      Pointer<Void> Function(Pointer<Void> lpAddress, int dwSize,
+      Pointer Function(Pointer<Void> lpAddress, int dwSize,
           int flAllocationType, int flProtect)>('VirtualAlloc');
   return _VirtualAlloc(lpAddress, dwSize, flAllocationType, flProtect);
 }
