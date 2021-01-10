@@ -1,5 +1,7 @@
 import 'dart:io';
 
+// THIS IS TERRIBLE CODE AND I NEED TO UNTANGLE IT
+
 final prototypes = <String, TypeDef>{};
 
 class TypeDef {
