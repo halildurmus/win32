@@ -60,7 +60,8 @@ int getSystemMemoryInMegabytes() {
     if (result != 0) {
       return (memory.value / 1024).floor();
     } else {
-      throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
+      final error = GetLastError();
+      throw WindowsException(HRESULT_FROM_WIN32(error));
     }
   } finally {
     free(memory);
