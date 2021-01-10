@@ -599,6 +599,27 @@ class MONITORINFO extends Struct {
       zeroAllocate<MONITORINFO>().ref..cbSize = sizeOf<MONITORINFO>();
 }
 
+const PHYSICAL_MONITOR_DESCRIPTION_SIZE = 128;
+
+// typedef struct _PHYSICAL_MONITOR {
+//   HANDLE hPhysicalMonitor;
+//   WCHAR  szPhysicalMonitorDescription[PHYSICAL_MONITOR_DESCRIPTION_SIZE];
+// } PHYSICAL_MONITOR, *LPPHYSICAL_MONITOR;
+
+/// Contains a handle and text description corresponding to a physical monitor.
+///
+/// {@category Struct}
+class PHYSICAL_MONITOR extends Struct {
+  @IntPtr()
+  int hPhysicalMonitor;
+
+  String get szPhysicalMonitorDescription => addressOf
+      .cast<IntPtr>()
+      .elementAt(1)
+      .cast<Utf16>()
+      .unpackString(PHYSICAL_MONITOR_DESCRIPTION_SIZE);
+}
+
 // typedef struct tagCHOOSECOLORW {
 //   DWORD        lStructSize;
 //   HWND         hwndOwner;
@@ -2968,8 +2989,41 @@ class MCI_STATUS_PARMS extends Struct {
   factory MCI_STATUS_PARMS.allocate() => zeroAllocate<MCI_STATUS_PARMS>().ref;
 }
 
+// typedef struct _OVERLAPPED {
+//   ULONG_PTR Internal;
+//   ULONG_PTR InternalHigh;
+//   union {
+//     struct {
+//       DWORD Offset;
+//       DWORD OffsetHigh;
+//     } DUMMYSTRUCTNAME;
+//     PVOID Pointer;
+//   } DUMMYUNIONNAME;
+//   HANDLE    hEvent;
+// } OVERLAPPED, *LPOVERLAPPED;
+
+/// Contains information used in asynchronous (or overlapped) input and output
+/// (I/O).
+///
+/// {@category Struct}
+class OVERLAPPED extends Struct {
+  @IntPtr()
+  int Internal;
+
+  @IntPtr()
+  int InternalHigh;
+
+  Pointer pointer;
+
+  @IntPtr()
+  int hEvent;
+
+  factory OVERLAPPED.allocate() => zeroAllocate<OVERLAPPED>().ref;
+}
+
 // -----------------------------------------------------------------------------
-// UNIMPLEMENTED CLASSES THAT ARE INCLUDED SO THAT COM OBJECTS CAN BE GENERATED
+// UNIMPLEMENTED OR PARTIALLY IMPLEMENTED CLASSES THAT ARE INCLUDED SO THAT COM
+// OBJECTS CAN BE GENERATED
 // -----------------------------------------------------------------------------
 
 /// Describes an exception that occurred during IDispatch::Invoke.
@@ -3036,33 +3090,45 @@ class NLM_SIMULATED_PROFILE_INFO extends Struct {}
 /// FindFirstFileEx, or FindNextFile function.
 ///
 /// {@category Struct}
-class WIN32_FIND_DATA extends Struct {}
+class WIN32_FIND_DATA extends Struct {
+  @Uint32()
+  external int dwFileAttributes;
+  external FILETIME ftCreationTime;
 
-// typedef struct _PHYSICAL_MONITOR {
-//   HANDLE hPhysicalMonitor;
-//   WCHAR  szPhysicalMonitorDescription[PHYSICAL_MONITOR_DESCRIPTION_SIZE];
-// } PHYSICAL_MONITOR, *LPPHYSICAL_MONITOR;
+  external FILETIME ftLastAccessTime;
+  external FILETIME ftLastWriteTime;
+  @Uint32()
+  external int nFileSizeHigh;
+  @Uint32()
+  external int nFileSizeLow;
+  @Uint32()
+  external int dwReserved0;
+  @Uint32()
+  external int dwReserved1;
+  String get cFileName => addressOf
+      .cast<Uint8>()
+      .elementAt(44)
+      .cast<Utf16>()
+      .unpackString(MAX_PATH);
+  String get cAlternateFileName => addressOf
+      .cast<Uint8>()
+      .elementAt(44 + MAX_PATH * 2)
+      .cast<Utf16>()
+      .unpackString(14);
 
-/// Contains a handle and text description corresponding to a physical monitor.
-///
-/// {@category Struct}
-class PHYSICAL_MONITOR extends Struct {}
-
-// typedef struct _OVERLAPPED {
-//   ULONG_PTR Internal;
-//   ULONG_PTR InternalHigh;
-//   union {
-//     struct {
-//       DWORD Offset;
-//       DWORD OffsetHigh;
-//     } DUMMYSTRUCTNAME;
-//     PVOID Pointer;
-//   } DUMMYUNIONNAME;
-//   HANDLE    hEvent;
-// } OVERLAPPED, *LPOVERLAPPED;
-
-/// Contains information used in asynchronous (or overlapped) input and output
-/// (I/O).
-///
-/// {@category Struct}
-class OVERLAPPED extends Struct {}
+  int get dwFileType => addressOf
+      .cast<Uint8>()
+      .elementAt(44 + (MAX_PATH + 14) * 2)
+      .cast<Uint32>()
+      .value;
+  int get dwCreatorType => addressOf
+      .cast<Uint8>()
+      .elementAt(48 + (MAX_PATH + 14) * 2)
+      .cast<Uint32>()
+      .value;
+  int get wFinderFlags => addressOf
+      .cast<Uint8>()
+      .elementAt(52 + (MAX_PATH + 14) * 2)
+      .cast<Uint16>()
+      .value;
+}
