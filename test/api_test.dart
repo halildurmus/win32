@@ -256,6 +256,38 @@ void main() {
           'FillConsoleOutputCharacterW');
       expect(FillConsoleOutputCharacter, isA<Function>());
     });
+    test('Can instantiate FindClose', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final FindClose = kernel32.lookupFunction<
+          Int32 Function(IntPtr hFindFile),
+          int Function(int hFindFile)>('FindClose');
+      expect(FindClose, isA<Function>());
+    });
+    test('Can instantiate FindCloseChangeNotification', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final FindCloseChangeNotification = kernel32.lookupFunction<
+          Int32 Function(IntPtr hChangeHandle),
+          int Function(int hChangeHandle)>('FindCloseChangeNotification');
+      expect(FindCloseChangeNotification, isA<Function>());
+    });
+    test('Can instantiate FindFirstChangeNotification', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final FindFirstChangeNotification = kernel32.lookupFunction<
+          IntPtr Function(Pointer<Utf16> lpPathName, Int32 bWatchSubtree,
+              Uint32 dwNotifyFilter),
+          int Function(Pointer<Utf16> lpPathName, int bWatchSubtree,
+              int dwNotifyFilter)>('FindFirstChangeNotificationW');
+      expect(FindFirstChangeNotification, isA<Function>());
+    });
+    test('Can instantiate FindFirstFile', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final FindFirstFile = kernel32.lookupFunction<
+          IntPtr Function(Pointer<Utf16> lpFileName,
+              Pointer<WIN32_FIND_DATA> lpFindFileData),
+          int Function(Pointer<Utf16> lpFileName,
+              Pointer<WIN32_FIND_DATA> lpFindFileData)>('FindFirstFileW');
+      expect(FindFirstFile, isA<Function>());
+    });
     test('Can instantiate FindFirstVolume', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final FindFirstVolume = kernel32.lookupFunction<
@@ -264,6 +296,22 @@ void main() {
           int Function(Pointer<Utf16> lpszVolumeName,
               int cchBufferLength)>('FindFirstVolumeW');
       expect(FindFirstVolume, isA<Function>());
+    });
+    test('Can instantiate FindNextFile', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final FindNextFile = kernel32.lookupFunction<
+          Int32 Function(
+              IntPtr hFindFile, Pointer<WIN32_FIND_DATA> lpFindFileData),
+          int Function(int hFindFile,
+              Pointer<WIN32_FIND_DATA> lpFindFileData)>('FindNextFileW');
+      expect(FindNextFile, isA<Function>());
+    });
+    test('Can instantiate FindNextChangeNotification', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final FindNextChangeNotification = kernel32.lookupFunction<
+          Int32 Function(IntPtr hChangeHandle),
+          int Function(int hChangeHandle)>('FindNextChangeNotification');
+      expect(FindNextChangeNotification, isA<Function>());
     });
     test('Can instantiate FindNextVolume', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');

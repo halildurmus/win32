@@ -531,6 +531,83 @@ int FillConsoleOutputCharacter(int hConsoleOutput, int cCharacter, int nLength,
       dwWriteCoord, lpNumberOfCharsWritten);
 }
 
+/// Closes a file search handle opened by the FindFirstFile,
+/// FindFirstFileEx, FindFirstFileNameW, FindFirstFileNameTransactedW,
+/// FindFirstFileTransacted, FindFirstStreamTransactedW, or
+/// FindFirstStreamW functions.
+///
+/// ```c
+/// BOOL FindClose(
+///   HANDLE hFindFile
+/// );
+/// ```
+/// {@category kernel32}
+int FindClose(int hFindFile) {
+  final _FindClose = _kernel32.lookupFunction<Int32 Function(IntPtr hFindFile),
+      int Function(int hFindFile)>('FindClose');
+  return _FindClose(hFindFile);
+}
+
+/// Stops change notification handle monitoring.
+///
+/// ```c
+/// BOOL FindCloseChangeNotification(
+///   HANDLE hChangeHandle
+/// );
+/// ```
+/// {@category kernel32}
+int FindCloseChangeNotification(int hChangeHandle) {
+  final _FindCloseChangeNotification = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hChangeHandle),
+      int Function(int hChangeHandle)>('FindCloseChangeNotification');
+  return _FindCloseChangeNotification(hChangeHandle);
+}
+
+/// Creates a change notification handle and sets up initial change
+/// notification filter conditions. A wait on a notification handle
+/// succeeds when a change matching the filter conditions occurs in the
+/// specified directory or subtree. The function does not report changes to
+/// the specified directory itself.
+///
+/// ```c
+/// HANDLE FindFirstChangeNotificationW(
+///   LPCWSTR lpPathName,
+///   BOOL    bWatchSubtree,
+///   DWORD   dwNotifyFilter
+/// );
+/// ```
+/// {@category kernel32}
+int FindFirstChangeNotification(
+    Pointer<Utf16> lpPathName, int bWatchSubtree, int dwNotifyFilter) {
+  final _FindFirstChangeNotification = _kernel32.lookupFunction<
+      IntPtr Function(Pointer<Utf16> lpPathName, Int32 bWatchSubtree,
+          Uint32 dwNotifyFilter),
+      int Function(Pointer<Utf16> lpPathName, int bWatchSubtree,
+          int dwNotifyFilter)>('FindFirstChangeNotificationW');
+  return _FindFirstChangeNotification(
+      lpPathName, bWatchSubtree, dwNotifyFilter);
+}
+
+/// Searches a directory for a file or subdirectory with a name that
+/// matches a specific name (or partial name if wildcards are used).
+///
+/// ```c
+/// HANDLE FindFirstFileW(
+///   LPCWSTR            lpFileName,
+///   LPWIN32_FIND_DATAW lpFindFileData
+/// );
+/// ```
+/// {@category kernel32}
+int FindFirstFile(
+    Pointer<Utf16> lpFileName, Pointer<WIN32_FIND_DATA> lpFindFileData) {
+  final _FindFirstFile = _kernel32.lookupFunction<
+      IntPtr Function(
+          Pointer<Utf16> lpFileName, Pointer<WIN32_FIND_DATA> lpFindFileData),
+      int Function(Pointer<Utf16> lpFileName,
+          Pointer<WIN32_FIND_DATA> lpFindFileData)>('FindFirstFileW');
+  return _FindFirstFile(lpFileName, lpFindFileData);
+}
+
 /// Retrieves the name of a volume on a computer. FindFirstVolume is used
 /// to begin scanning the volumes of a computer.
 ///
@@ -547,6 +624,40 @@ int FindFirstVolume(Pointer<Utf16> lpszVolumeName, int cchBufferLength) {
       int Function(Pointer<Utf16> lpszVolumeName,
           int cchBufferLength)>('FindFirstVolumeW');
   return _FindFirstVolume(lpszVolumeName, cchBufferLength);
+}
+
+/// Continues a file search from a previous call to the FindFirstFile,
+/// FindFirstFileEx, or FindFirstFileTransacted functions.
+///
+/// ```c
+/// BOOL FindNextFileW(
+///   HANDLE             hFindFile,
+///   LPWIN32_FIND_DATAW lpFindFileData
+/// );
+/// ```
+/// {@category kernel32}
+int FindNextFile(int hFindFile, Pointer<WIN32_FIND_DATA> lpFindFileData) {
+  final _FindNextFile = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFindFile, Pointer<WIN32_FIND_DATA> lpFindFileData),
+      int Function(int hFindFile,
+          Pointer<WIN32_FIND_DATA> lpFindFileData)>('FindNextFileW');
+  return _FindNextFile(hFindFile, lpFindFileData);
+}
+
+/// Requests that the operating system signal a change notification handle
+/// the next time it detects an appropriate change.
+///
+/// ```c
+/// BOOL FindNextChangeNotification(
+///   HANDLE hChangeHandle
+/// );
+/// ```
+/// {@category kernel32}
+int FindNextChangeNotification(int hChangeHandle) {
+  final _FindNextChangeNotification = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hChangeHandle),
+      int Function(int hChangeHandle)>('FindNextChangeNotification');
+  return _FindNextChangeNotification(hChangeHandle);
 }
 
 /// Continues a volume search started by a call to the FindFirstVolume

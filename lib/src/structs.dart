@@ -2766,6 +2766,30 @@ class BLUETOOTH_PIN_INFO extends Struct {
   }
 }
 
+// typedef struct _BLUETOOTH_OOB_DATA_INFO {
+//   UCHAR C[16];
+//   UCHAR R[16];
+// } BLUETOOTH_OOB_DATA_INFO, *PBLUETOOTH_OOB_DATA_INFO;
+
+/// The BLUETOOTH_OOB_DATA_INFO structure contains data used to authenticate
+/// prior to establishing an Out-of-Band device pairing.
+///
+/// {@category Struct}
+class BLUETOOTH_OOB_DATA_INFO extends Struct {
+  Uint8ClampedList get C =>
+      addressOf.cast<Uint8>().asTypedList(16) as Uint8ClampedList;
+  set C(Uint8ClampedList value) =>
+      addressOf.cast<Uint8>().asTypedList(16).setAll(0, value);
+
+  Uint8ClampedList get R =>
+      addressOf.cast<Uint8>().elementAt(16).asTypedList(16) as Uint8ClampedList;
+  set R(Uint8ClampedList value) =>
+      addressOf.cast<Uint8>().elementAt(16).asTypedList(16).setAll(0, value);
+
+  factory BLUETOOTH_OOB_DATA_INFO.allocate() =>
+      zeroAllocate<Uint8>(count: 32).cast<BLUETOOTH_OOB_DATA_INFO>().ref;
+}
+
 // typedef struct COR_FIELD_OFFSET
 //     {
 //     mdFieldDef ridOfField;
@@ -2992,8 +3016,53 @@ class STATSTG extends Struct {}
 /// {@category Struct}
 class NLM_SIMULATED_PROFILE_INFO extends Struct {}
 
-class BLUETOOTH_OOB_DATA_INFO extends Struct {}
+// typedef struct _WIN32_FIND_DATAW {
+//   DWORD    dwFileAttributes;
+//   FILETIME ftCreationTime;
+//   FILETIME ftLastAccessTime;
+//   FILETIME ftLastWriteTime;
+//   DWORD    nFileSizeHigh;
+//   DWORD    nFileSizeLow;
+//   DWORD    dwReserved0;
+//   DWORD    dwReserved1;
+//   WCHAR    cFileName[MAX_PATH];
+//   WCHAR    cAlternateFileName[14];
+//   DWORD    dwFileType;
+//   DWORD    dwCreatorType;
+//   WORD     wFinderFlags;
+// } WIN32_FIND_DATAW, *PWIN32_FIND_DATAW, *LPWIN32_FIND_DATAW;
 
+/// Contains information about the file that is found by the FindFirstFile,
+/// FindFirstFileEx, or FindNextFile function.
+///
+/// {@category Struct}
+class WIN32_FIND_DATA extends Struct {}
+
+// typedef struct _PHYSICAL_MONITOR {
+//   HANDLE hPhysicalMonitor;
+//   WCHAR  szPhysicalMonitorDescription[PHYSICAL_MONITOR_DESCRIPTION_SIZE];
+// } PHYSICAL_MONITOR, *LPPHYSICAL_MONITOR;
+
+/// Contains a handle and text description corresponding to a physical monitor.
+///
+/// {@category Struct}
 class PHYSICAL_MONITOR extends Struct {}
 
+// typedef struct _OVERLAPPED {
+//   ULONG_PTR Internal;
+//   ULONG_PTR InternalHigh;
+//   union {
+//     struct {
+//       DWORD Offset;
+//       DWORD OffsetHigh;
+//     } DUMMYSTRUCTNAME;
+//     PVOID Pointer;
+//   } DUMMYUNIONNAME;
+//   HANDLE    hEvent;
+// } OVERLAPPED, *LPOVERLAPPED;
+
+/// Contains information used in asynchronous (or overlapped) input and output
+/// (I/O).
+///
+/// {@category Struct}
 class OVERLAPPED extends Struct {}

@@ -122,6 +122,7 @@ String ffiFromWin32(String win32Type) {
     'LPSTARTUPINFOW': 'Pointer<STARTUPINFO>',
     'LPOSVERSIONINFOW': 'Pointer<OSVERSIONINFO>',
     'LPCDLGTEMPLATEW': 'Pointer<DLGTEMPLATE>',
+    'LPWIN32_FIND_DATAW': 'Pointer<WIN32_FIND_DATA>',
 
     // Special cases
     'RPC_AUTH_IDENTITY_HANDLE': 'Pointer',
