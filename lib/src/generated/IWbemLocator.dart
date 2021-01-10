@@ -82,8 +82,12 @@ class WbemLocator extends IWbemLocator {
   factory WbemLocator.createInstance() {
     final ptr = COMObject.allocate().addressOf;
 
-    final hr = CoCreateInstance(GUID.fromString(CLSID_WbemLocator).addressOf,
-        nullptr, CLSCTX_ALL, GUID.fromString(IID_IWbemLocator).addressOf, ptr);
+    final hr = CoCreateInstance(
+        GUID.fromString(CLSID_WbemLocator).addressOf,
+        nullptr,
+        CLSCTX_ALL,
+        GUID.fromString(IID_IWbemLocator).addressOf,
+        ptr.cast());
 
     if (FAILED(hr)) throw WindowsException(hr);
     return WbemLocator(ptr);

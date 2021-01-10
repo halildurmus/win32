@@ -169,7 +169,7 @@ class KnownFolderManager extends IKnownFolderManager {
         nullptr,
         CLSCTX_ALL,
         GUID.fromString(IID_IKnownFolderManager).addressOf,
-        ptr);
+        ptr.cast());
 
     if (FAILED(hr)) throw WindowsException(hr);
     return KnownFolderManager(ptr);
