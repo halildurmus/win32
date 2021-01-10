@@ -12,6 +12,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import 'callbacks.dart';
 import 'com/combase.dart';
 import 'structs.dart';
 
@@ -418,14 +419,14 @@ int EndUpdateResource(int hUpdate, int fDiscard) {
 /// ```
 /// {@category kernel32}
 int EnumResourceNames(int hModule, Pointer<Utf16> lpType,
-    Pointer<NativeFunction> lpEnumFunc, int lParam) {
+    Pointer<NativeFunction<EnumResNameProc>> lpEnumFunc, int lParam) {
   final _EnumResourceNames = _kernel32.lookupFunction<
       Int32 Function(IntPtr hModule, Pointer<Utf16> lpType,
-          Pointer<NativeFunction> lpEnumFunc, IntPtr lParam),
+          Pointer<NativeFunction<EnumResNameProc>> lpEnumFunc, IntPtr lParam),
       int Function(
           int hModule,
           Pointer<Utf16> lpType,
-          Pointer<NativeFunction> lpEnumFunc,
+          Pointer<NativeFunction<EnumResNameProc>> lpEnumFunc,
           int lParam)>('EnumResourceNamesW');
   return _EnumResourceNames(hModule, lpType, lpEnumFunc, lParam);
 }
@@ -446,12 +447,14 @@ int EnumResourceNames(int hModule, Pointer<Utf16> lpType,
 /// );
 /// ```
 /// {@category kernel32}
-int EnumResourceTypes(
-    int hModule, Pointer<NativeFunction> lpEnumFunc, int lParam) {
+int EnumResourceTypes(int hModule,
+    Pointer<NativeFunction<EnumResTypeProc>> lpEnumFunc, int lParam) {
   final _EnumResourceTypes = _kernel32.lookupFunction<
-      Int32 Function(
-          IntPtr hModule, Pointer<NativeFunction> lpEnumFunc, IntPtr lParam),
-      int Function(int hModule, Pointer<NativeFunction> lpEnumFunc,
+      Int32 Function(IntPtr hModule,
+          Pointer<NativeFunction<EnumResTypeProc>> lpEnumFunc, IntPtr lParam),
+      int Function(
+          int hModule,
+          Pointer<NativeFunction<EnumResTypeProc>> lpEnumFunc,
           int lParam)>('EnumResourceTypesW');
   return _EnumResourceTypes(hModule, lpEnumFunc, lParam);
 }
@@ -1665,10 +1668,12 @@ int ScrollConsoleScreenBuffer(
 /// );
 /// ```
 /// {@category kernel32}
-int SetConsoleCtrlHandler(Pointer<NativeFunction> HandlerRoutine, int Add) {
+int SetConsoleCtrlHandler(
+    Pointer<NativeFunction<HandlerProc>> HandlerRoutine, int Add) {
   final _SetConsoleCtrlHandler = _kernel32.lookupFunction<
-      Int32 Function(Pointer<NativeFunction> HandlerRoutine, Int32 Add),
-      int Function(Pointer<NativeFunction> HandlerRoutine,
+      Int32 Function(
+          Pointer<NativeFunction<HandlerProc>> HandlerRoutine, Int32 Add),
+      int Function(Pointer<NativeFunction<HandlerProc>> HandlerRoutine,
           int Add)>('SetConsoleCtrlHandler');
   return _SetConsoleCtrlHandler(HandlerRoutine, Add);
 }

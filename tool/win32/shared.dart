@@ -71,15 +71,15 @@ String ffiFromWin32(String win32Type) {
     'GET_FILEEX_INFO_LEVELS': 'Int32',
 
     // Callbacks
-    'FONTENUMPROCW': 'Pointer<NativeFunction>',
-    'ENUMRESTYPEPROCW': 'Pointer<NativeFunction>',
-    'ENUMRESNAMEPROCW': 'Pointer<NativeFunction>',
-    'MONITORENUMPROC': 'Pointer<NativeFunction>',
-    'GRAYSTRINGPROC': 'Pointer<NativeFunction>',
-    'WNDENUMPROC': 'Pointer<NativeFunction>',
-    'PHANDLER_ROUTINE': 'Pointer<NativeFunction>',
-    'TIMERPROC': 'Pointer<NativeFunction>',
-    'DLGPROC': 'Pointer<NativeFunction>',
+    'DLGPROC': 'Pointer<NativeFunction<DlgProc>>',
+    'WNDENUMPROC': 'Pointer<NativeFunction<EnumWindowsProc>>',
+    'FONTENUMPROCW': 'Pointer<NativeFunction<EnumFontFamExProc>>',
+    'ENUMRESNAMEPROCW': 'Pointer<NativeFunction<EnumResNameProc>>',
+    'ENUMRESTYPEPROCW': 'Pointer<NativeFunction<EnumResTypeProc>>',
+    'MONITORENUMPROC': 'Pointer<NativeFunction<MonitorEnumProc>>',
+    'GRAYSTRINGPROC': 'Pointer<NativeFunction<OutputProc>>',
+    'PHANDLER_ROUTINE': 'Pointer<NativeFunction<HandlerProc>>',
+    'TIMERPROC': 'Pointer<NativeFunction<TimerProc>>',
 
     // Void pointers
     'LPVOID': 'Pointer', 'PVOID': 'Pointer', 'LPCVOID': 'Pointer',

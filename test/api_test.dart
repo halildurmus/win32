@@ -196,21 +196,28 @@ void main() {
     test('Can instantiate EnumResourceNames', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final EnumResourceNames = kernel32.lookupFunction<
-          Int32 Function(IntPtr hModule, Pointer<Utf16> lpType,
-              Pointer<NativeFunction> lpEnumFunc, IntPtr lParam),
+          Int32 Function(
+              IntPtr hModule,
+              Pointer<Utf16> lpType,
+              Pointer<NativeFunction<EnumResNameProc>> lpEnumFunc,
+              IntPtr lParam),
           int Function(
               int hModule,
               Pointer<Utf16> lpType,
-              Pointer<NativeFunction> lpEnumFunc,
+              Pointer<NativeFunction<EnumResNameProc>> lpEnumFunc,
               int lParam)>('EnumResourceNamesW');
       expect(EnumResourceNames, isA<Function>());
     });
     test('Can instantiate EnumResourceTypes', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final EnumResourceTypes = kernel32.lookupFunction<
-          Int32 Function(IntPtr hModule, Pointer<NativeFunction> lpEnumFunc,
+          Int32 Function(
+              IntPtr hModule,
+              Pointer<NativeFunction<EnumResTypeProc>> lpEnumFunc,
               IntPtr lParam),
-          int Function(int hModule, Pointer<NativeFunction> lpEnumFunc,
+          int Function(
+              int hModule,
+              Pointer<NativeFunction<EnumResTypeProc>> lpEnumFunc,
               int lParam)>('EnumResourceTypesW');
       expect(EnumResourceTypes, isA<Function>());
     });
@@ -775,8 +782,9 @@ void main() {
     test('Can instantiate SetConsoleCtrlHandler', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final SetConsoleCtrlHandler = kernel32.lookupFunction<
-          Int32 Function(Pointer<NativeFunction> HandlerRoutine, Int32 Add),
-          int Function(Pointer<NativeFunction> HandlerRoutine,
+          Int32 Function(
+              Pointer<NativeFunction<HandlerProc>> HandlerRoutine, Int32 Add),
+          int Function(Pointer<NativeFunction<HandlerProc>> HandlerRoutine,
               int Add)>('SetConsoleCtrlHandler');
       expect(SetConsoleCtrlHandler, isA<Function>());
     });
@@ -1205,12 +1213,16 @@ void main() {
     test('Can instantiate EnumFontFamiliesEx', () {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final EnumFontFamiliesEx = gdi32.lookupFunction<
-          Int32 Function(IntPtr hdc, Pointer<LOGFONT> lpLogfont,
-              Pointer<NativeFunction> lpProc, IntPtr lParam, Uint32 dwFlags),
+          Int32 Function(
+              IntPtr hdc,
+              Pointer<LOGFONT> lpLogfont,
+              Pointer<NativeFunction<EnumFontFamExProc>> lpProc,
+              IntPtr lParam,
+              Uint32 dwFlags),
           int Function(
               int hdc,
               Pointer<LOGFONT> lpLogfont,
-              Pointer<NativeFunction> lpProc,
+              Pointer<NativeFunction<EnumFontFamExProc>> lpProc,
               int lParam,
               int dwFlags)>('EnumFontFamiliesExW');
       expect(EnumFontFamiliesEx, isA<Function>());
@@ -1642,13 +1654,13 @@ void main() {
               IntPtr hInstance,
               Pointer<DLGTEMPLATE> lpTemplate,
               IntPtr hWndParent,
-              Pointer<NativeFunction> lpDialogFunc,
+              Pointer<NativeFunction<DlgProc>> lpDialogFunc,
               IntPtr dwInitParam),
           int Function(
               int hInstance,
               Pointer<DLGTEMPLATE> lpTemplate,
               int hWndParent,
-              Pointer<NativeFunction> lpDialogFunc,
+              Pointer<NativeFunction<DlgProc>> lpDialogFunc,
               int dwInitParam)>('CreateDialogIndirectParamW');
       expect(CreateDialogIndirectParam, isA<Function>());
     });
@@ -1717,13 +1729,13 @@ void main() {
               IntPtr hInstance,
               Pointer<DLGTEMPLATE> hDialogTemplate,
               IntPtr hWndParent,
-              Pointer<NativeFunction> lpDialogFunc,
+              Pointer<NativeFunction<DlgProc>> lpDialogFunc,
               IntPtr dwInitParam),
           int Function(
               int hInstance,
               Pointer<DLGTEMPLATE> hDialogTemplate,
               int hWndParent,
-              Pointer<NativeFunction> lpDialogFunc,
+              Pointer<NativeFunction<DlgProc>> lpDialogFunc,
               int dwInitParam)>('DialogBoxIndirectParamW');
       expect(DialogBoxIndirectParam, isA<Function>());
     });
@@ -1798,9 +1810,13 @@ void main() {
     test('Can instantiate EnumChildWindows', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final EnumChildWindows = user32.lookupFunction<
-          Int32 Function(IntPtr hWndParent, Pointer<NativeFunction> lpEnumFunc,
+          Int32 Function(
+              IntPtr hWndParent,
+              Pointer<NativeFunction<EnumWindowsProc>> lpEnumFunc,
               IntPtr lParam),
-          int Function(int hWndParent, Pointer<NativeFunction> lpEnumFunc,
+          int Function(
+              int hWndParent,
+              Pointer<NativeFunction<EnumWindowsProc>> lpEnumFunc,
               int lParam)>('EnumChildWindows');
       expect(EnumChildWindows, isA<Function>());
     });
@@ -1808,20 +1824,21 @@ void main() {
       final user32 = DynamicLibrary.open('user32.dll');
       final EnumDisplayMonitors = user32.lookupFunction<
           Int32 Function(IntPtr hdc, Pointer<RECT> lprcClip,
-              Pointer<NativeFunction> lpfnEnum, IntPtr dwData),
+              Pointer<NativeFunction<MonitorEnumProc>> lpfnEnum, IntPtr dwData),
           int Function(
               int hdc,
               Pointer<RECT> lprcClip,
-              Pointer<NativeFunction> lpfnEnum,
+              Pointer<NativeFunction<MonitorEnumProc>> lpfnEnum,
               int dwData)>('EnumDisplayMonitors');
       expect(EnumDisplayMonitors, isA<Function>());
     });
     test('Can instantiate EnumWindows', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final EnumWindows = user32.lookupFunction<
-          Int32 Function(Pointer<NativeFunction> lpEnumFunc, IntPtr lParam),
-          int Function(
-              Pointer<NativeFunction> lpEnumFunc, int lParam)>('EnumWindows');
+          Int32 Function(Pointer<NativeFunction<EnumWindowsProc>> lpEnumFunc,
+              IntPtr lParam),
+          int Function(Pointer<NativeFunction<EnumWindowsProc>> lpEnumFunc,
+              int lParam)>('EnumWindows');
       expect(EnumWindows, isA<Function>());
     });
     test('Can instantiate EqualRect', () {
@@ -2120,7 +2137,7 @@ void main() {
           Int32 Function(
               IntPtr hDC,
               IntPtr hBrush,
-              Pointer<NativeFunction> lpOutputFunc,
+              Pointer<NativeFunction<OutputProc>> lpOutputFunc,
               IntPtr lpData,
               Int32 nCount,
               Int32 X,
@@ -2130,7 +2147,7 @@ void main() {
           int Function(
               int hDC,
               int hBrush,
-              Pointer<NativeFunction> lpOutputFunc,
+              Pointer<NativeFunction<OutputProc>> lpOutputFunc,
               int lpData,
               int nCount,
               int X,
@@ -2568,9 +2585,9 @@ void main() {
       final user32 = DynamicLibrary.open('user32.dll');
       final SetTimer = user32.lookupFunction<
           IntPtr Function(IntPtr hWnd, IntPtr nIDEvent, Uint32 uElapse,
-              Pointer<NativeFunction> lpTimerFunc),
+              Pointer<NativeFunction<TimerProc>> lpTimerFunc),
           int Function(int hWnd, int nIDEvent, int uElapse,
-              Pointer<NativeFunction> lpTimerFunc)>('SetTimer');
+              Pointer<NativeFunction<TimerProc>> lpTimerFunc)>('SetTimer');
       expect(SetTimer, isA<Function>());
     });
     test('Can instantiate SetWindowLongPtr', () {

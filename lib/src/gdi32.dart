@@ -12,6 +12,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import 'callbacks.dart';
 import 'com/combase.dart';
 import 'structs.dart';
 
@@ -536,15 +537,23 @@ int EndPath(int hdc) {
 /// );
 /// ```
 /// {@category gdi32}
-int EnumFontFamiliesEx(int hdc, Pointer<LOGFONT> lpLogfont,
-    Pointer<NativeFunction> lpProc, int lParam, int dwFlags) {
+int EnumFontFamiliesEx(
+    int hdc,
+    Pointer<LOGFONT> lpLogfont,
+    Pointer<NativeFunction<EnumFontFamExProc>> lpProc,
+    int lParam,
+    int dwFlags) {
   final _EnumFontFamiliesEx = _gdi32.lookupFunction<
-      Int32 Function(IntPtr hdc, Pointer<LOGFONT> lpLogfont,
-          Pointer<NativeFunction> lpProc, IntPtr lParam, Uint32 dwFlags),
+      Int32 Function(
+          IntPtr hdc,
+          Pointer<LOGFONT> lpLogfont,
+          Pointer<NativeFunction<EnumFontFamExProc>> lpProc,
+          IntPtr lParam,
+          Uint32 dwFlags),
       int Function(
           int hdc,
           Pointer<LOGFONT> lpLogfont,
-          Pointer<NativeFunction> lpProc,
+          Pointer<NativeFunction<EnumFontFamExProc>> lpProc,
           int lParam,
           int dwFlags)>('EnumFontFamiliesExW');
   return _EnumFontFamiliesEx(hdc, lpLogfont, lpProc, lParam, dwFlags);
