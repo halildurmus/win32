@@ -52,7 +52,6 @@ String ffiFromWin32(String win32Type) {
     'HCURSOR': 'IntPtr', 'HBLUETOOTH_DEVICE_FIND': 'IntPtr',
     'HBLUETOOTH_RADIO_FIND': 'IntPtr', 'HINSTANCE': 'IntPtr',
     'HPCON': 'IntPtr',
-    'RPC_AUTH_IDENTITY_HANDLE': 'IntPtr',
 
     'HRESULT': 'Int32',
     'NTSTATUS': 'Int32',
@@ -127,6 +126,7 @@ String ffiFromWin32(String win32Type) {
     'LPCDLGTEMPLATEW': 'Pointer<DLGTEMPLATE>',
 
     // Special cases
+    'RPC_AUTH_IDENTITY_HANDLE': 'Pointer',
     'LPCRECT': 'Pointer<RECT>',
     'LPCMENUINFO': 'Pointer<MENUINFO>',
     'LPCMENUITEMINFOW': 'Pointer<MENUITEMINFO>',

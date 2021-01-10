@@ -199,7 +199,7 @@ int CoSetProxyBlanket(
     Pointer<Utf16> pServerPrincName,
     int dwAuthnLevel,
     int dwImpLevel,
-    int pAuthInfo,
+    Pointer pAuthInfo,
     int dwCapabilities) {
   final _CoSetProxyBlanket = _ole32.lookupFunction<
       Int32 Function(
@@ -209,7 +209,7 @@ int CoSetProxyBlanket(
           Pointer<Utf16> pServerPrincName,
           Uint32 dwAuthnLevel,
           Uint32 dwImpLevel,
-          IntPtr pAuthInfo,
+          Pointer pAuthInfo,
           Uint32 dwCapabilities),
       int Function(
           Pointer pProxy,
@@ -218,7 +218,7 @@ int CoSetProxyBlanket(
           Pointer<Utf16> pServerPrincName,
           int dwAuthnLevel,
           int dwImpLevel,
-          int pAuthInfo,
+          Pointer pAuthInfo,
           int dwCapabilities)>('CoSetProxyBlanket');
   return _CoSetProxyBlanket(pProxy, dwAuthnSvc, dwAuthzSvc, pServerPrincName,
       dwAuthnLevel, dwImpLevel, pAuthInfo, dwCapabilities);
