@@ -24,7 +24,8 @@ void main() {
       throw Exception('GetFileVersionInfo failed.');
     }
 
-    result = VerQueryValue(pBlock, subBlock, lpFixedFileVersionInfo, uLen);
+    result =
+        VerQueryValue(pBlock, subBlock, lpFixedFileVersionInfo.cast(), uLen);
     if (result == 0) {
       throw Exception('VerQueryValue failed.');
     }
