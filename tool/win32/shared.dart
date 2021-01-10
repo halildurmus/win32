@@ -5,11 +5,7 @@ final prototypes = <String, TypeDef>{};
 class TypeDef {
   late String neutralApiName;
   final List<String> prototype;
-  late String nativeReturn;
-  late String dartReturn;
 
-  Map<String, String> nativeParams = {};
-  Map<String, String> dartParams = {};
   late String dllLibrary;
   late String comment;
 
@@ -290,42 +286,19 @@ void loadCsv(String filename) {
     }
     prototype = prototype.replaceAll('"', '');
 
-    final nativeReturn = fields[idx++];
-
     prototypes[apiName] = TypeDef(prototype.split('\n'))
       ..neutralApiName = neutralApiName
-      ..dllLibrary = dllLibrary
-      ..nativeReturn = nativeReturn
-      ..dartReturn = dartFromFFI(nativeReturn);
-
-    try {
-      final numParams = int.parse(fields[idx++]);
-      for (var i = 0; i < numParams; i++) {
-        final paramName = fields[idx++];
-        final paramNativeType = fields[idx++];
-
-        prototypes[apiName]!.dartParams[paramName] =
-            dartFromFFI(paramNativeType);
-        prototypes[apiName]!.nativeParams[paramName] = paramNativeType;
-      }
-    } catch (e) {
-      print('Error processing parameters for $apiName at index $idx.');
-      rethrow;
-    }
+      ..dllLibrary = dllLibrary;
 
     // last field is the comment
     // keep consuming until we have a quoted string
-    if (fields.length > idx) {
-      prototypes[apiName]!.comment = fields[idx++];
-      while (prototypes[apiName]!.comment.indexOf('"') == 0 &&
-          prototypes[apiName]!.comment.lastIndexOf('"') == 0) {
-        prototypes[apiName]!.comment += ', ${fields[idx++]}';
-      }
-      prototypes[apiName]!.comment =
-          prototypes[apiName]!.comment.replaceAll('"', '');
-    } else {
-      prototypes[apiName]!.comment = '';
+    prototypes[apiName]!.comment = fields[idx++];
+    while (prototypes[apiName]!.comment.indexOf('"') == 0 &&
+        prototypes[apiName]!.comment.lastIndexOf('"') == 0) {
+      prototypes[apiName]!.comment += ', ${fields[idx++]}';
     }
+    prototypes[apiName]!.comment =
+        prototypes[apiName]!.comment.replaceAll('"', '');
   }
 
   for (final func in prototypes.keys) {
