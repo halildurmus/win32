@@ -18,6 +18,7 @@ void main() {
   // Allocates memory on the native heap for the struct that will be used to
   // configure the dialog box and return values
   final cc = CHOOSECOLOR.allocate();
+  final custColors = allocate<Uint32>(count: 16);
 
   // Default color is mid-gray
   cc.rgbResult = RGB(0x80, 0x80, 0x80);
@@ -25,8 +26,9 @@ void main() {
   // Set custom colors to a palette of blues and purples
   // elementAt(x).value dereferences the pointer at addr+x
   for (var i = 0; i < 16; i++) {
-    cc.lpCustColors.elementAt(i).value = RGB(i * 16, 0x80, 0xFF);
+    custColors.elementAt(i).value = RGB(i * 16, 0x80, 0xFF);
   }
+  cc.lpCustColors = custColors;
 
   // Set dialog flags:
   //   CC_RGBINIT: use rgbResult for the dialog default value
@@ -40,5 +42,6 @@ void main() {
   print('Color chosen: ${toHexColor(cc.rgbResult)}');
 
   // Free the memory allocated on the native heap
+  free(custColors);
   free(cc.addressOf);
 }
