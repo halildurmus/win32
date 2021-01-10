@@ -52,8 +52,8 @@ void main() {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final BeginUpdateResource = kernel32.lookupFunction<
           IntPtr Function(
-              Pointer<Utf16> pFilename, Int32 bDeleteExistingResources),
-          int Function(Pointer<Utf16> pFilename,
+              Pointer<Utf16> pFileName, Int32 bDeleteExistingResources),
+          int Function(Pointer<Utf16> pFileName,
               int bDeleteExistingResources)>('BeginUpdateResourceW');
       expect(BeginUpdateResource, isA<Function>());
     });
@@ -68,8 +68,8 @@ void main() {
       test('Can instantiate ClosePseudoConsole', () {
         final kernel32 = DynamicLibrary.open('kernel32.dll');
         final ClosePseudoConsole = kernel32.lookupFunction<
-            Void Function(Pointer<IntPtr> hPC),
-            void Function(Pointer<IntPtr> hPC)>('ClosePseudoConsole');
+            Void Function(IntPtr hPC),
+            void Function(int hPC)>('ClosePseudoConsole');
         expect(ClosePseudoConsole, isA<Function>());
       });
     }
@@ -145,7 +145,7 @@ void main() {
                   Uint32 dwCreationFlags,
                   Pointer lpEnvironment,
                   Pointer<Utf16> lpCurrentDirectory,
-                  Pointer lpStartupInfo,
+                  Pointer<STARTUPINFO> lpStartupInfo,
                   Pointer<PROCESS_INFORMATION> lpProcessInformation),
               int Function(
                   Pointer<Utf16> lpApplicationName,
@@ -156,7 +156,7 @@ void main() {
                   int dwCreationFlags,
                   Pointer lpEnvironment,
                   Pointer<Utf16> lpCurrentDirectory,
-                  Pointer lpStartupInfo,
+                  Pointer<STARTUPINFO> lpStartupInfo,
                   Pointer<PROCESS_INFORMATION> lpProcessInformation)>(
           'CreateProcessW');
       expect(CreateProcess, isA<Function>());
@@ -165,9 +165,9 @@ void main() {
       test('Can instantiate CreatePseudoConsole', () {
         final kernel32 = DynamicLibrary.open('kernel32.dll');
         final CreatePseudoConsole = kernel32.lookupFunction<
-            Int32 Function(Int32 size, IntPtr hInput, IntPtr hOutput,
-                Int32 dwFlags, Pointer<IntPtr> phPC),
-            int Function(int size, int hInput, int hOutput, int dwFlags,
+            Int32 Function(COORD size, IntPtr hInput, IntPtr hOutput,
+                Uint32 dwFlags, Pointer<IntPtr> phPC),
+            int Function(COORD size, int hInput, int hOutput, int dwFlags,
                 Pointer<IntPtr> phPC)>('CreatePseudoConsole');
         expect(CreatePseudoConsole, isA<Function>());
       });
@@ -228,10 +228,10 @@ void main() {
                   IntPtr hConsoleOutput,
                   Uint16 wAttribute,
                   Uint32 nLength,
-                  Int32 dwWriteCoord,
+                  COORD dwWriteCoord,
                   Pointer<Uint32> lpNumberOfAttrsWritten),
               int Function(int hConsoleOutput, int wAttribute, int nLength,
-                  int dwWriteCoord, Pointer<Uint32> lpNumberOfAttrsWritten)>(
+                  COORD dwWriteCoord, Pointer<Uint32> lpNumberOfAttrsWritten)>(
           'FillConsoleOutputAttribute');
       expect(FillConsoleOutputAttribute, isA<Function>());
     });
@@ -240,12 +240,12 @@ void main() {
       final FillConsoleOutputCharacter = kernel32.lookupFunction<
               Int32 Function(
                   IntPtr hConsoleOutput,
-                  Uint8 cCharacter,
+                  Uint16 cCharacter,
                   Uint32 nLength,
-                  Int32 dwWriteCoord,
+                  COORD dwWriteCoord,
                   Pointer<Uint32> lpNumberOfCharsWritten),
               int Function(int hConsoleOutput, int cCharacter, int nLength,
-                  int dwWriteCoord, Pointer<Uint32> lpNumberOfCharsWritten)>(
+                  COORD dwWriteCoord, Pointer<Uint32> lpNumberOfCharsWritten)>(
           'FillConsoleOutputCharacterW');
       expect(FillConsoleOutputCharacter, isA<Function>());
     });
@@ -279,10 +279,10 @@ void main() {
     test('Can instantiate FindResourceEx', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final FindResourceEx = kernel32.lookupFunction<
-          IntPtr Function(IntPtr hModule, Pointer<Utf16> lpName,
-              Pointer<Utf16> lpType, Int16 wLanguage),
-          int Function(int hModule, Pointer<Utf16> lpName,
-              Pointer<Utf16> lpType, int wLanguage)>('FindResourceExW');
+          IntPtr Function(IntPtr hModule, Pointer<Utf16> lpType,
+              Pointer<Utf16> lpName, Uint16 wLanguage),
+          int Function(int hModule, Pointer<Utf16> lpType,
+              Pointer<Utf16> lpName, int wLanguage)>('FindResourceExW');
       expect(FindResourceEx, isA<Function>());
     });
     test('Can instantiate FindVolumeClose', () {
@@ -302,22 +302,22 @@ void main() {
     test('Can instantiate FormatMessage', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final FormatMessage = kernel32.lookupFunction<
-          Int32 Function(
+          Uint32 Function(
               Uint32 dwFlags,
-              Pointer<Void> lpSource,
+              Pointer lpSource,
               Uint32 dwMessageId,
               Uint32 dwLanguageId,
               Pointer<Utf16> lpBuffer,
               Uint32 nSize,
-              Pointer arguments),
+              Pointer Arguments),
           int Function(
               int dwFlags,
-              Pointer<Void> lpSource,
+              Pointer lpSource,
               int dwMessageId,
               int dwLanguageId,
               Pointer<Utf16> lpBuffer,
               int nSize,
-              Pointer arguments)>('FormatMessageW');
+              Pointer Arguments)>('FormatMessageW');
       expect(FormatMessage, isA<Function>());
     });
     test('Can instantiate FreeConsole', () {
@@ -415,8 +415,8 @@ void main() {
     test('Can instantiate GetLargestConsoleWindowSize', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetLargestConsoleWindowSize = kernel32.lookupFunction<
-          Int32 Function(IntPtr hConsoleOutput),
-          int Function(int hConsoleOutput)>('GetLargestConsoleWindowSize');
+          COORD Function(IntPtr hConsoleOutput),
+          COORD Function(int hConsoleOutput)>('GetLargestConsoleWindowSize');
       expect(GetLargestConsoleWindowSize, isA<Function>());
     });
     test('Can instantiate GetLastError', () {
@@ -435,7 +435,7 @@ void main() {
     test('Can instantiate GetModuleFileName', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetModuleFileName = kernel32.lookupFunction<
-          Int32 Function(
+          Uint32 Function(
               IntPtr hModule, Pointer<Utf16> lpFilename, Uint32 nSize),
           int Function(int hModule, Pointer<Utf16> lpFilename,
               int nSize)>('GetModuleFileNameW');
@@ -592,8 +592,8 @@ void main() {
     test('Can instantiate HeapAlloc', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final HeapAlloc = kernel32.lookupFunction<
-          Pointer Function(IntPtr hHeap, Uint32 dwflags, Uint32 dwBytes),
-          Pointer Function(int hHeap, int dwflags, int dwBytes)>('HeapAlloc');
+          Pointer Function(IntPtr hHeap, Uint32 dwFlags, IntPtr dwBytes),
+          Pointer Function(int hHeap, int dwFlags, int dwBytes)>('HeapAlloc');
       expect(HeapAlloc, isA<Function>());
     });
     test('Can instantiate HeapFree', () {
@@ -657,7 +657,7 @@ void main() {
     test('Can instantiate OpenProcess', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final OpenProcess = kernel32.lookupFunction<
-          Int32 Function(
+          IntPtr Function(
               Uint32 dwDesiredAccess, Int32 bInheritHandle, Uint32 dwProcessId),
           int Function(int dwDesiredAccess, int bInheritHandle,
               int dwProcessId)>('OpenProcess');
@@ -683,9 +683,9 @@ void main() {
     test('Can instantiate QueryPerformanceFrequency', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final QueryPerformanceFrequency = kernel32.lookupFunction<
-          Int32 Function(Pointer<Int64> lpPerformanceCount),
+          Int32 Function(Pointer<Int64> lpFrequency),
           int Function(
-              Pointer<Int64> lpPerformanceCount)>('QueryPerformanceFrequency');
+              Pointer<Int64> lpFrequency)>('QueryPerformanceFrequency');
       expect(QueryPerformanceFrequency, isA<Function>());
     });
     test('Can instantiate ReadConsole', () {
@@ -713,13 +713,13 @@ void main() {
               Pointer lpBuffer,
               Uint32 nNumberOfBytesToRead,
               Pointer<Uint32> lpNumberOfBytesRead,
-              Pointer lpOverlapped),
+              Pointer<OVERLAPPED> lpOverlapped),
           int Function(
               int hFile,
               Pointer lpBuffer,
               int nNumberOfBytesToRead,
               Pointer<Uint32> lpNumberOfBytesRead,
-              Pointer lpOverlapped)>('ReadFile');
+              Pointer<OVERLAPPED> lpOverlapped)>('ReadFile');
       expect(ReadFile, isA<Function>());
     });
     test('Can instantiate ReadProcessMemory', () {
@@ -727,14 +727,14 @@ void main() {
       final ReadProcessMemory = kernel32.lookupFunction<
           Int32 Function(
               IntPtr hProcess,
-              Pointer<Void> lpBaseAddress,
-              Pointer<Void> lpBuffer,
+              Pointer lpBaseAddress,
+              Pointer lpBuffer,
               IntPtr nSize,
               Pointer<IntPtr> lpNumberOfBytesRead),
           int Function(
               int hProcess,
-              Pointer<Void> lpBaseAddress,
-              Pointer<Void> lpBuffer,
+              Pointer lpBaseAddress,
+              Pointer lpBuffer,
               int nSize,
               Pointer<IntPtr> lpNumberOfBytesRead)>('ReadProcessMemory');
       expect(ReadProcessMemory, isA<Function>());
@@ -750,8 +750,8 @@ void main() {
       test('Can instantiate ResizePseudoConsole', () {
         final kernel32 = DynamicLibrary.open('kernel32.dll');
         final ResizePseudoConsole = kernel32.lookupFunction<
-            Int32 Function(Pointer<IntPtr> hPC, Int32 size),
-            int Function(Pointer<IntPtr> hPC, int size)>('ResizePseudoConsole');
+            Int32 Function(IntPtr hPC, COORD size),
+            int Function(int hPC, COORD size)>('ResizePseudoConsole');
         expect(ResizePseudoConsole, isA<Function>());
       });
     }
@@ -762,13 +762,13 @@ void main() {
               IntPtr hConsoleOutput,
               Pointer<SMALL_RECT> lpScrollRectangle,
               Pointer<SMALL_RECT> lpClipRectangle,
-              Int32 dwDestinationOrigin,
+              COORD dwDestinationOrigin,
               Pointer<CHAR_INFO> lpFill),
           int Function(
               int hConsoleOutput,
               Pointer<SMALL_RECT> lpScrollRectangle,
               Pointer<SMALL_RECT> lpClipRectangle,
-              int dwDestinationOrigin,
+              COORD dwDestinationOrigin,
               Pointer<CHAR_INFO> lpFill)>('ScrollConsoleScreenBufferW');
       expect(ScrollConsoleScreenBuffer, isA<Function>());
     });
@@ -920,25 +920,24 @@ void main() {
     test('Can instantiate VirtualAlloc', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final VirtualAlloc = kernel32.lookupFunction<
-          Pointer<Void> Function(Pointer<Void> lpAddress, IntPtr dwSize,
+          Pointer Function(Pointer lpAddress, IntPtr dwSize,
               Uint32 flAllocationType, Uint32 flProtect),
-          Pointer<Void> Function(Pointer<Void> lpAddress, int dwSize,
-              int flAllocationType, int flProtect)>('VirtualAlloc');
+          Pointer Function(Pointer lpAddress, int dwSize, int flAllocationType,
+              int flProtect)>('VirtualAlloc');
       expect(VirtualAlloc, isA<Function>());
     });
     test('Can instantiate VirtualFree', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final VirtualFree = kernel32.lookupFunction<
-          Int32 Function(
-              Pointer<Void> lpAddress, IntPtr dwSize, Uint32 dwFreeType),
-          int Function(Pointer<Void> lpAddress, int dwSize,
-              int dwFreeType)>('VirtualFree');
+          Int32 Function(Pointer lpAddress, IntPtr dwSize, Uint32 dwFreeType),
+          int Function(
+              Pointer lpAddress, int dwSize, int dwFreeType)>('VirtualFree');
       expect(VirtualFree, isA<Function>());
     });
     test('Can instantiate WaitForSingleObject', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final WaitForSingleObject = kernel32.lookupFunction<
-          Int32 Function(IntPtr hHandle, Int32 dwMilliseconds),
+          Uint32 Function(IntPtr hHandle, Uint32 dwMilliseconds),
           int Function(int hHandle, int dwMilliseconds)>('WaitForSingleObject');
       expect(WaitForSingleObject, isA<Function>());
     });
@@ -974,13 +973,13 @@ void main() {
               Pointer lpBuffer,
               Uint32 nNumberOfBytesToWrite,
               Pointer<Uint32> lpNumberOfBytesWritten,
-              Pointer lpOverlapped),
+              Pointer<OVERLAPPED> lpOverlapped),
           int Function(
               int hFile,
               Pointer lpBuffer,
               int nNumberOfBytesToWrite,
               Pointer<Uint32> lpNumberOfBytesWritten,
-              Pointer lpOverlapped)>('WriteFile');
+              Pointer<OVERLAPPED> lpOverlapped)>('WriteFile');
       expect(WriteFile, isA<Function>());
     });
     test('Can instantiate WriteProcessMemory', () {
@@ -988,14 +987,14 @@ void main() {
       final WriteProcessMemory = kernel32.lookupFunction<
           Int32 Function(
               IntPtr hProcess,
-              Pointer<Void> lpBaseAddress,
-              Pointer<Void> lpBuffer,
+              Pointer lpBaseAddress,
+              Pointer lpBuffer,
               IntPtr nSize,
               Pointer<IntPtr> lpNumberOfBytesWritten),
           int Function(
               int hProcess,
-              Pointer<Void> lpBaseAddress,
-              Pointer<Void> lpBuffer,
+              Pointer lpBaseAddress,
+              Pointer lpBuffer,
               int nSize,
               Pointer<IntPtr> lpNumberOfBytesWritten)>('WriteProcessMemory');
       expect(WriteProcessMemory, isA<Function>());
@@ -1182,9 +1181,10 @@ void main() {
     test('Can instantiate DrawEscape', () {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final DrawEscape = gdi32.lookupFunction<
-          Int32 Function(IntPtr hdc, Int32 iEscape, Int32 cjIn, Pointer lpIn),
-          int Function(
-              int hdc, int iEscape, int cjIn, Pointer lpIn)>('DrawEscape');
+          Int32 Function(
+              IntPtr hdc, Int32 iEscape, Int32 cjIn, Pointer<Uint8> lpIn),
+          int Function(int hdc, int iEscape, int cjIn,
+              Pointer<Uint8> lpIn)>('DrawEscape');
       expect(DrawEscape, isA<Function>());
     });
     test('Can instantiate Ellipse', () {
@@ -1205,11 +1205,11 @@ void main() {
     test('Can instantiate EnumFontFamiliesEx', () {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final EnumFontFamiliesEx = gdi32.lookupFunction<
-          Int32 Function(IntPtr hdc, Pointer<LOGFONT> lpLogFont,
+          Int32 Function(IntPtr hdc, Pointer<LOGFONT> lpLogfont,
               Pointer<NativeFunction> lpProc, IntPtr lParam, Uint32 dwFlags),
           int Function(
               int hdc,
-              Pointer<LOGFONT> lpLogFont,
+              Pointer<LOGFONT> lpLogfont,
               Pointer<NativeFunction> lpProc,
               int lParam,
               int dwFlags)>('EnumFontFamiliesExW');
@@ -1219,9 +1219,9 @@ void main() {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final ExtCreatePen = gdi32.lookupFunction<
           IntPtr Function(Uint32 iPenStyle, Uint32 cWidth,
-              Pointer<LOGFONT> plBrush, Uint32 cStyle, Pointer<Uint32> pStyle),
-          int Function(int iPenStyle, int cWidth, Pointer<LOGFONT> plBrush,
-              int cStyle, Pointer<Uint32> pStyle)>('ExtCreatePen');
+              Pointer<LOGBRUSH> plbrush, Uint32 cStyle, Pointer<Uint32> pstyle),
+          int Function(int iPenStyle, int cWidth, Pointer<LOGBRUSH> plbrush,
+              int cStyle, Pointer<Uint32> pstyle)>('ExtCreatePen');
       expect(ExtCreatePen, isA<Function>());
     });
     test('Can instantiate ExtTextOut', () {
@@ -1364,8 +1364,8 @@ void main() {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final PolyPolyline = gdi32.lookupFunction<
           Int32 Function(
-              IntPtr hdc, Pointer<POINT> apt, Pointer<Int32> asz, Uint32 csz),
-          int Function(int hdc, Pointer<POINT> apt, Pointer<Int32> asz,
+              IntPtr hdc, Pointer<POINT> apt, Pointer<Uint32> asz, Uint32 csz),
+          int Function(int hdc, Pointer<POINT> apt, Pointer<Uint32> asz,
               int csz)>('PolyPolyline');
       expect(PolyPolyline, isA<Function>());
     });
@@ -1522,7 +1522,7 @@ void main() {
               Int32 ySrc,
               Int32 SrcWidth,
               Int32 SrcHeight,
-              Pointer<Void> lpBits,
+              Pointer lpBits,
               Pointer<BITMAPINFO> lpbmi,
               Uint32 iUsage,
               Uint32 rop),
@@ -1536,7 +1536,7 @@ void main() {
               int ySrc,
               int SrcWidth,
               int SrcHeight,
-              Pointer<Void> lpBits,
+              Pointer lpBits,
               Pointer<BITMAPINFO> lpbmi,
               int iUsage,
               int rop)>('StretchDIBits');
@@ -1587,16 +1587,16 @@ void main() {
     test('Can instantiate ChildWindowFromPoint', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final ChildWindowFromPoint = user32.lookupFunction<
-          IntPtr Function(IntPtr hWndParent, Int64 Point),
-          int Function(int hWndParent, int Point)>('ChildWindowFromPoint');
+          IntPtr Function(IntPtr hWndParent, POINT Point),
+          int Function(int hWndParent, POINT Point)>('ChildWindowFromPoint');
       expect(ChildWindowFromPoint, isA<Function>());
     });
     test('Can instantiate ChildWindowFromPointEx', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final ChildWindowFromPointEx = user32.lookupFunction<
-          IntPtr Function(IntPtr hWndParent, Int64 Point, Uint32 flags),
+          IntPtr Function(IntPtr hwnd, POINT pt, Uint32 flags),
           int Function(
-              int hWndParent, int Point, int flags)>('ChildWindowFromPointEx');
+              int hwnd, POINT pt, int flags)>('ChildWindowFromPointEx');
       expect(ChildWindowFromPointEx, isA<Function>());
     });
     test('Can instantiate ClientToScreen', () {
@@ -1630,8 +1630,9 @@ void main() {
     test('Can instantiate CreateAcceleratorTable', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final CreateAcceleratorTable = user32.lookupFunction<
-          IntPtr Function(Pointer paccel, Int32 cAccel),
-          int Function(Pointer paccel, int cAccel)>('CreateAcceleratorTableW');
+          IntPtr Function(Pointer<ACCEL> paccel, Int32 cAccel),
+          int Function(
+              Pointer<ACCEL> paccel, int cAccel)>('CreateAcceleratorTableW');
       expect(CreateAcceleratorTable, isA<Function>());
     });
     test('Can instantiate CreateDialogIndirectParam', () {
@@ -1660,7 +1661,7 @@ void main() {
     test('Can instantiate CreateWindowEx', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final CreateWindowEx = user32.lookupFunction<
-          Int32 Function(
+          IntPtr Function(
               Uint32 dwExStyle,
               Pointer<Utf16> lpClassName,
               Pointer<Utf16> lpWindowName,
@@ -1672,7 +1673,7 @@ void main() {
               IntPtr hWndParent,
               IntPtr hMenu,
               IntPtr hInstance,
-              Pointer<Void> lpParam),
+              Pointer lpParam),
           int Function(
               int dwExStyle,
               Pointer<Utf16> lpClassName,
@@ -1685,7 +1686,7 @@ void main() {
               int hWndParent,
               int hMenu,
               int hInstance,
-              Pointer<Void> lpParam)>('CreateWindowExW');
+              Pointer lpParam)>('CreateWindowExW');
       expect(CreateWindowEx, isA<Function>());
     });
     test('Can instantiate DefWindowProc', () {
@@ -1806,11 +1807,11 @@ void main() {
     test('Can instantiate EnumDisplayMonitors', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final EnumDisplayMonitors = user32.lookupFunction<
-          Int32 Function(IntPtr hdc, Pointer lprcClip,
+          Int32 Function(IntPtr hdc, Pointer<RECT> lprcClip,
               Pointer<NativeFunction> lpfnEnum, IntPtr dwData),
           int Function(
               int hdc,
-              Pointer lprcClip,
+              Pointer<RECT> lprcClip,
               Pointer<NativeFunction> lpfnEnum,
               int dwData)>('EnumDisplayMonitors');
       expect(EnumDisplayMonitors, isA<Function>());
@@ -1866,8 +1867,8 @@ void main() {
     test('Can instantiate GetClientRect', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetClientRect = user32.lookupFunction<
-          Int32 Function(IntPtr hwnd, Pointer<RECT> lpRect),
-          int Function(int hwnd, Pointer<RECT> lpRect)>('GetClientRect');
+          Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect),
+          int Function(int hWnd, Pointer<RECT> lpRect)>('GetClientRect');
       expect(GetClientRect, isA<Function>());
     });
     test('Can instantiate GetCursor', () {
@@ -1885,8 +1886,8 @@ void main() {
     });
     test('Can instantiate GetDC', () {
       final user32 = DynamicLibrary.open('user32.dll');
-      final GetDC = user32.lookupFunction<IntPtr Function(IntPtr hwnd),
-          int Function(int hwnd)>('GetDC');
+      final GetDC = user32.lookupFunction<IntPtr Function(IntPtr hWnd),
+          int Function(int hWnd)>('GetDC');
       expect(GetDC, isA<Function>());
     });
     test('Can instantiate GetDCEx', () {
@@ -1931,12 +1932,13 @@ void main() {
     test('Can instantiate GetDpiForSystem', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetDpiForSystem = user32
-          .lookupFunction<Int32 Function(), int Function()>('GetDpiForSystem');
+          .lookupFunction<Uint32 Function(), int Function()>('GetDpiForSystem');
       expect(GetDpiForSystem, isA<Function>());
     });
     test('Can instantiate GetDpiForWindow', () {
       final user32 = DynamicLibrary.open('user32.dll');
-      final GetDpiForWindow = user32.lookupFunction<Int32 Function(IntPtr hwnd),
+      final GetDpiForWindow = user32.lookupFunction<
+          Uint32 Function(IntPtr hwnd),
           int Function(int hwnd)>('GetDpiForWindow');
       expect(GetDpiForWindow, isA<Function>());
     });
@@ -2046,12 +2048,12 @@ void main() {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetTabbedTextExtent = user32.lookupFunction<
           Uint32 Function(IntPtr hdc, Pointer<Utf16> lpString, Int32 chCount,
-              Int32 nTabPosition, Pointer<Int32> lpnTabStopPositions),
+              Int32 nTabPositions, Pointer<Int32> lpnTabStopPositions),
           int Function(
               int hdc,
               Pointer<Utf16> lpString,
               int chCount,
-              int nTabPosition,
+              int nTabPositions,
               Pointer<Int32> lpnTabStopPositions)>('GetTabbedTextExtentW');
       expect(GetTabbedTextExtent, isA<Function>());
     });
@@ -2288,8 +2290,8 @@ void main() {
     test('Can instantiate MonitorFromPoint', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final MonitorFromPoint = user32.lookupFunction<
-          IntPtr Function(Int64 pt, Uint32 dwFlags),
-          int Function(int pt, int dwFlags)>('MonitorFromPoint');
+          IntPtr Function(POINT pt, Uint32 dwFlags),
+          int Function(POINT pt, int dwFlags)>('MonitorFromPoint');
       expect(MonitorFromPoint, isA<Function>());
     });
     test('Can instantiate MonitorFromRect', () {
@@ -2387,8 +2389,8 @@ void main() {
     test('Can instantiate PtInRect', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final PtInRect = user32.lookupFunction<
-          Int32 Function(Pointer<RECT> lprc, Int64 pt),
-          int Function(Pointer<RECT> lprc, int pt)>('PtInRect');
+          Int32 Function(Pointer<RECT> lprc, POINT pt),
+          int Function(Pointer<RECT> lprc, POINT pt)>('PtInRect');
       expect(PtInRect, isA<Function>());
     });
     test('Can instantiate RedrawWindow', () {
@@ -2403,7 +2405,7 @@ void main() {
     test('Can instantiate RegisterClass', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final RegisterClass = user32.lookupFunction<
-          Int16 Function(Pointer<WNDCLASS> lpWndClass),
+          Uint16 Function(Pointer<WNDCLASS> lpWndClass),
           int Function(Pointer<WNDCLASS> lpWndClass)>('RegisterClassW');
       expect(RegisterClass, isA<Function>());
     });
@@ -2510,8 +2512,8 @@ void main() {
     test('Can instantiate SetMenuInfo', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final SetMenuInfo = user32.lookupFunction<
-          Int32 Function(IntPtr hMenu, Pointer<MENUINFO> lpMenuInfo),
-          int Function(int hMenu, Pointer<MENUINFO> lpMenuInfo)>('SetMenuInfo');
+          Int32 Function(IntPtr hmenu, Pointer<MENUINFO> lpmi),
+          int Function(int hmenu, Pointer<MENUINFO> lpmi)>('SetMenuInfo');
       expect(SetMenuInfo, isA<Function>());
     });
     test('Can instantiate SetMenuItemInfo', () {
@@ -2728,15 +2730,15 @@ void main() {
     test('Can instantiate WindowFromPhysicalPoint', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final WindowFromPhysicalPoint = user32.lookupFunction<
-          IntPtr Function(Int64 Point),
-          int Function(int Point)>('WindowFromPhysicalPoint');
+          IntPtr Function(POINT Point),
+          int Function(POINT Point)>('WindowFromPhysicalPoint');
       expect(WindowFromPhysicalPoint, isA<Function>());
     });
     test('Can instantiate WindowFromPoint', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final WindowFromPoint = user32.lookupFunction<
-          IntPtr Function(Int64 Point),
-          int Function(int Point)>('WindowFromPoint');
+          IntPtr Function(POINT Point),
+          int Function(POINT Point)>('WindowFromPoint');
       expect(WindowFromPoint, isA<Function>());
     });
   });
@@ -2749,13 +2751,13 @@ void main() {
               IntPtr hwndParentIn,
               IntPtr hRadioIn,
               Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
-              IntPtr pbtOobData,
+              Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
               Int32 authenticationRequirement),
           int Function(
               int hwndParentIn,
               int hRadioIn,
               Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
-              int pbtOobData,
+              Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
               int authenticationRequirement)>('BluetoothAuthenticateDeviceEx');
       expect(BluetoothAuthenticateDeviceEx, isA<Function>());
     });
@@ -2769,7 +2771,7 @@ void main() {
     test('Can instantiate BluetoothFindFirstDevice', () {
       final bthprops = DynamicLibrary.open('bthprops.cpl');
       final BluetoothFindFirstDevice = bthprops.lookupFunction<
-              Int32 Function(Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp,
+              IntPtr Function(Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp,
                   Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
               int Function(Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp,
                   Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)>(
@@ -2877,15 +2879,15 @@ void main() {
     test('Can instantiate GetOpenFileName', () {
       final comdlg32 = DynamicLibrary.open('comdlg32.dll');
       final GetOpenFileName = comdlg32.lookupFunction<
-          Int32 Function(Pointer<OPENFILENAME> arg1),
-          int Function(Pointer<OPENFILENAME> arg1)>('GetOpenFileNameW');
+          Int32 Function(Pointer<OPENFILENAME> Arg1),
+          int Function(Pointer<OPENFILENAME> Arg1)>('GetOpenFileNameW');
       expect(GetOpenFileName, isA<Function>());
     });
     test('Can instantiate GetSaveFileName', () {
       final comdlg32 = DynamicLibrary.open('comdlg32.dll');
       final GetSaveFileName = comdlg32.lookupFunction<
-          Int32 Function(Pointer<OPENFILENAME> arg1),
-          int Function(Pointer<OPENFILENAME> arg1)>('GetSaveFileNameW');
+          Int32 Function(Pointer<OPENFILENAME> Arg1),
+          int Function(Pointer<OPENFILENAME> Arg1)>('GetSaveFileNameW');
       expect(GetSaveFileName, isA<Function>());
     });
     test('Can instantiate ReplaceText', () {
@@ -2917,34 +2919,33 @@ void main() {
       final ole32 = DynamicLibrary.open('ole32.dll');
       final CoCreateInstance = ole32.lookupFunction<
           Int32 Function(Pointer<GUID> rclsid, Pointer<IntPtr> pUnkOuter,
-              Uint32 dwClsContext, Pointer<GUID> riid, Pointer<COMObject> ppv),
+              Uint32 dwClsContext, Pointer<GUID> riid, Pointer<Pointer> ppv),
           int Function(
               Pointer<GUID> rclsid,
               Pointer<IntPtr> pUnkOuter,
               int dwClsContext,
               Pointer<GUID> riid,
-              Pointer<COMObject> ppv)>('CoCreateInstance');
+              Pointer<Pointer> ppv)>('CoCreateInstance');
       expect(CoCreateInstance, isA<Function>());
     });
     test('Can instantiate CoGetClassObject', () {
       final ole32 = DynamicLibrary.open('ole32.dll');
       final CoGetClassObject = ole32.lookupFunction<
           Int32 Function(Pointer<GUID> rclsid, Uint32 dwClsContext,
-              Pointer pvReserved, Pointer<GUID> riid, Pointer<COMObject> ppv),
+              Pointer pvReserved, Pointer<GUID> riid, Pointer<Pointer> ppv),
           int Function(
               Pointer<GUID> rclsid,
               int dwClsContext,
               Pointer pvReserved,
               Pointer<GUID> riid,
-              Pointer<COMObject> ppv)>('CoGetClassObject');
+              Pointer<Pointer> ppv)>('CoGetClassObject');
       expect(CoGetClassObject, isA<Function>());
     });
     test('Can instantiate CoInitializeEx', () {
       final ole32 = DynamicLibrary.open('ole32.dll');
       final CoInitializeEx = ole32.lookupFunction<
-          Int32 Function(Pointer<Void> pvReserved, Uint32 dwCoInit),
-          int Function(
-              Pointer<Void> pvReserved, int dwCoInit)>('CoInitializeEx');
+          Int32 Function(Pointer pvReserved, Uint32 dwCoInit),
+          int Function(Pointer pvReserved, int dwCoInit)>('CoInitializeEx');
       expect(CoInitializeEx, isA<Function>());
     });
     test('Can instantiate CoInitializeSecurity', () {
@@ -2954,22 +2955,22 @@ void main() {
               Pointer<SECURITY_DESCRIPTOR> pSecDesc,
               Int32 cAuthSvc,
               Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
-              Pointer<Void> pReserved1,
+              Pointer pReserved1,
               Uint32 dwAuthnLevel,
               Uint32 dwImpLevel,
-              Pointer<Void> pAuthList,
+              Pointer pAuthList,
               Uint32 dwCapabilities,
-              Pointer<Void> pReserved3),
+              Pointer pReserved3),
           int Function(
               Pointer<SECURITY_DESCRIPTOR> pSecDesc,
               int cAuthSvc,
               Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
-              Pointer<Void> pReserved1,
+              Pointer pReserved1,
               int dwAuthnLevel,
               int dwImpLevel,
-              Pointer<Void> pAuthList,
+              Pointer pAuthList,
               int dwCapabilities,
-              Pointer<Void> pReserved3)>('CoInitializeSecurity');
+              Pointer pReserved3)>('CoInitializeSecurity');
       expect(CoInitializeSecurity, isA<Function>());
     });
     test('Can instantiate CoSetProxyBlanket', () {
@@ -2982,7 +2983,7 @@ void main() {
               Pointer<Utf16> pServerPrincName,
               Uint32 dwAuthnLevel,
               Uint32 dwImpLevel,
-              Pointer<Void> pAuthInfo,
+              Pointer pAuthInfo,
               Uint32 dwCapabilities),
           int Function(
               Pointer pProxy,
@@ -2991,7 +2992,7 @@ void main() {
               Pointer<Utf16> pServerPrincName,
               int dwAuthnLevel,
               int dwImpLevel,
-              Pointer<Void> pAuthInfo,
+              Pointer pAuthInfo,
               int dwCapabilities)>('CoSetProxyBlanket');
       expect(CoSetProxyBlanket, isA<Function>());
     });
@@ -3052,8 +3053,12 @@ void main() {
     test('Can instantiate InitiateShutdown', () {
       final advapi32 = DynamicLibrary.open('advapi32.dll');
       final InitiateShutdown = advapi32.lookupFunction<
-          Int32 Function(Pointer<Utf16> lpMachineName, Pointer<Utf16> lpMessage,
-              Uint32 dwGracePeriod, Uint32 dwShutdownFlags, Uint32 dwReason),
+          Uint32 Function(
+              Pointer<Utf16> lpMachineName,
+              Pointer<Utf16> lpMessage,
+              Uint32 dwGracePeriod,
+              Uint32 dwShutdownFlags,
+              Uint32 dwReason),
           int Function(
               Pointer<Utf16> lpMachineName,
               Pointer<Utf16> lpMessage,
@@ -3071,16 +3076,17 @@ void main() {
     test('Can instantiate RegConnectRegistry', () {
       final advapi32 = DynamicLibrary.open('advapi32.dll');
       final RegConnectRegistry = advapi32.lookupFunction<
-          Int16 Function(Pointer<Utf16> lpMachineName, IntPtr hKey),
-          int Function(
-              Pointer<Utf16> lpMachineName, int hKey)>('RegConnectRegistryW');
+          Int32 Function(Pointer<Utf16> lpMachineName, IntPtr hKey,
+              Pointer<IntPtr> phkResult),
+          int Function(Pointer<Utf16> lpMachineName, int hKey,
+              Pointer<IntPtr> phkResult)>('RegConnectRegistryW');
       expect(RegConnectRegistry, isA<Function>());
     });
     test('Can instantiate RegOpenKeyEx', () {
       final advapi32 = DynamicLibrary.open('advapi32.dll');
       final RegOpenKeyEx = advapi32.lookupFunction<
           Int32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey, Uint32 ulOptions,
-              Int32 samDesired, Pointer<IntPtr> phkResult),
+              Uint32 samDesired, Pointer<IntPtr> phkResult),
           int Function(int hKey, Pointer<Utf16> lpSubKey, int ulOptions,
               int samDesired, Pointer<IntPtr> phkResult)>('RegOpenKeyExW');
       expect(RegOpenKeyEx, isA<Function>());
@@ -3131,10 +3137,11 @@ void main() {
     test('Can instantiate DestroyPhysicalMonitors', () {
       final dxva2 = DynamicLibrary.open('dxva2.dll');
       final DestroyPhysicalMonitors = dxva2.lookupFunction<
-          Int32 Function(
-              Uint32 dwPhysicalMonitorArraySize, Pointer pPhysicalMonitorArray),
-          int Function(int dwPhysicalMonitorArraySize,
-              Pointer pPhysicalMonitorArray)>('DestroyPhysicalMonitors');
+              Int32 Function(Uint32 dwPhysicalMonitorArraySize,
+                  Pointer<PHYSICAL_MONITOR> pPhysicalMonitorArray),
+              int Function(int dwPhysicalMonitorArraySize,
+                  Pointer<PHYSICAL_MONITOR> pPhysicalMonitorArray)>(
+          'DestroyPhysicalMonitors');
       expect(DestroyPhysicalMonitors, isA<Function>());
     });
     test('Can instantiate GetMonitorBrightness', () {
@@ -3284,9 +3291,9 @@ void main() {
       final dxva2 = DynamicLibrary.open('dxva2.dll');
       final GetPhysicalMonitorsFromHMONITOR = dxva2.lookupFunction<
               Int32 Function(IntPtr hMonitor, Uint32 dwPhysicalMonitorArraySize,
-                  Pointer pPhysicalMonitorArray),
+                  Pointer<PHYSICAL_MONITOR> pPhysicalMonitorArray),
               int Function(int hMonitor, int dwPhysicalMonitorArraySize,
-                  Pointer pPhysicalMonitorArray)>(
+                  Pointer<PHYSICAL_MONITOR> pPhysicalMonitorArray)>(
           'GetPhysicalMonitorsFromHMONITOR');
       expect(GetPhysicalMonitorsFromHMONITOR, isA<Function>());
     });
@@ -3360,9 +3367,9 @@ void main() {
     test('Can instantiate DrawStatusText', () {
       final comctl32 = DynamicLibrary.open('comctl32.dll');
       final DrawStatusText = comctl32.lookupFunction<
-          Void Function(IntPtr hdc, Pointer<RECT> lprc, Pointer<Utf16> pszText,
+          Void Function(IntPtr hDC, Pointer<RECT> lprc, Pointer<Utf16> pszText,
               Uint32 uFlags),
-          void Function(int hdc, Pointer<RECT> lprc, Pointer<Utf16> pszText,
+          void Function(int hDC, Pointer<RECT> lprc, Pointer<Utf16> pszText,
               int uFlags)>('DrawStatusTextW');
       expect(DrawStatusText, isA<Function>());
     });
@@ -3450,9 +3457,8 @@ void main() {
     test('Can instantiate ShellExecuteEx', () {
       final shell32 = DynamicLibrary.open('shell32.dll');
       final ShellExecuteEx = shell32.lookupFunction<
-          Int32 Function(Pointer<SHELLEXECUTEINFO> pExecuteInfo),
-          int Function(
-              Pointer<SHELLEXECUTEINFO> pExecuteInfo)>('ShellExecuteExW');
+          Int32 Function(Pointer<SHELLEXECUTEINFO> pExecInfo),
+          int Function(Pointer<SHELLEXECUTEINFO> pExecInfo)>('ShellExecuteExW');
       expect(ShellExecuteEx, isA<Function>());
     });
     test('Can instantiate ShellExecute', () {
@@ -3478,9 +3484,9 @@ void main() {
       final shell32 = DynamicLibrary.open('shell32.dll');
       final SHCreateItemFromParsingName = shell32.lookupFunction<
           Int32 Function(Pointer<Utf16> pszPath, Pointer pbc,
-              Pointer<GUID> riid, Pointer<COMObject> ppv),
+              Pointer<GUID> riid, Pointer<Pointer> ppv),
           int Function(Pointer<Utf16> pszPath, Pointer pbc, Pointer<GUID> riid,
-              Pointer<COMObject> ppv)>('SHCreateItemFromParsingName');
+              Pointer<Pointer> ppv)>('SHCreateItemFromParsingName');
       expect(SHCreateItemFromParsingName, isA<Function>());
     });
     test('Can instantiate SHEmptyRecycleBin', () {
@@ -3530,9 +3536,9 @@ void main() {
       final shell32 = DynamicLibrary.open('shell32.dll');
       final SHGetKnownFolderPath = shell32.lookupFunction<
           Int32 Function(Pointer<GUID> rfid, Uint32 dwFlags, IntPtr hToken,
-              Pointer<IntPtr> ppszPath),
+              Pointer<Pointer<Utf16>> ppszPath),
           int Function(Pointer<GUID> rfid, int dwFlags, int hToken,
-              Pointer<IntPtr> ppszPath)>('SHGetKnownFolderPath');
+              Pointer<Pointer<Utf16>> ppszPath)>('SHGetKnownFolderPath');
       expect(SHGetKnownFolderPath, isA<Function>());
     });
     test('Can instantiate SHQueryRecycleBin', () {
@@ -3550,16 +3556,16 @@ void main() {
     test('Can instantiate GetDpiForMonitor', () {
       final shcore = DynamicLibrary.open('shcore.dll');
       final GetDpiForMonitor = shcore.lookupFunction<
-          IntPtr Function(IntPtr hMonitor, Int32 dpiType, Pointer<Int32> dpiX,
-              Pointer<Int32> dpiY),
-          int Function(int hMonitor, int dpiType, Pointer<Int32> dpiX,
-              Pointer<Int32> dpiY)>('GetDpiForMonitor');
+          Int32 Function(IntPtr hmonitor, Int32 dpiType, Pointer<Uint32> dpiX,
+              Pointer<Uint32> dpiY),
+          int Function(int hmonitor, int dpiType, Pointer<Uint32> dpiX,
+              Pointer<Uint32> dpiY)>('GetDpiForMonitor');
       expect(GetDpiForMonitor, isA<Function>());
     });
     test('Can instantiate GetProcessDpiAwareness', () {
       final shcore = DynamicLibrary.open('shcore.dll');
       final GetProcessDpiAwareness = shcore.lookupFunction<
-          IntPtr Function(IntPtr hprocess, Pointer<Int32> value),
+          Int32 Function(IntPtr hprocess, Pointer<Int32> value),
           int Function(
               int hprocess, Pointer<Int32> value)>('GetProcessDpiAwareness');
       expect(GetProcessDpiAwareness, isA<Function>());
@@ -3567,7 +3573,7 @@ void main() {
     test('Can instantiate SetProcessDpiAwareness', () {
       final shcore = DynamicLibrary.open('shcore.dll');
       final SetProcessDpiAwareness = shcore.lookupFunction<
-          IntPtr Function(Int32 value),
+          Int32 Function(Int32 value),
           int Function(int value)>('SetProcessDpiAwareness');
       expect(SetProcessDpiAwareness, isA<Function>());
     });
@@ -3615,7 +3621,7 @@ void main() {
       final VerFindFile = version.lookupFunction<
           Uint32 Function(
               Uint32 uFlags,
-              Pointer<Utf16> szFilename,
+              Pointer<Utf16> szFileName,
               Pointer<Utf16> szWinDir,
               Pointer<Utf16> szAppDir,
               Pointer<Utf16> szCurDir,
@@ -3624,7 +3630,7 @@ void main() {
               Pointer<Uint32> puDestDirLen),
           int Function(
               int uFlags,
-              Pointer<Utf16> szFilename,
+              Pointer<Utf16> szFileName,
               Pointer<Utf16> szWinDir,
               Pointer<Utf16> szAppDir,
               Pointer<Utf16> szCurDir,
@@ -3637,7 +3643,7 @@ void main() {
       final version = DynamicLibrary.open('version.dll');
       final VerInstallFile = version.lookupFunction<
           Uint32 Function(
-              Uint32 dwFlags,
+              Uint32 uFlags,
               Pointer<Utf16> szSrcFileName,
               Pointer<Utf16> szDestFileName,
               Pointer<Utf16> szSrcDir,
@@ -3646,7 +3652,7 @@ void main() {
               Pointer<Utf16> szTmpFile,
               Pointer<Uint32> puTmpFileLen),
           int Function(
-              int dwFlags,
+              int uFlags,
               Pointer<Utf16> szSrcFileName,
               Pointer<Utf16> szDestFileName,
               Pointer<Utf16> szSrcDir,
@@ -3668,11 +3674,11 @@ void main() {
       final version = DynamicLibrary.open('version.dll');
       final VerQueryValue = version.lookupFunction<
           Int32 Function(Pointer pBlock, Pointer<Utf16> lpSubBlock,
-              Pointer<IntPtr> lplpBuffer, Pointer<Uint32> puLen),
+              Pointer<Pointer> lplpBuffer, Pointer<Uint32> puLen),
           int Function(
               Pointer pBlock,
               Pointer<Utf16> lpSubBlock,
-              Pointer<IntPtr> lplpBuffer,
+              Pointer<Pointer> lplpBuffer,
               Pointer<Uint32> puLen)>('VerQueryValueW');
       expect(VerQueryValue, isA<Function>());
     });
