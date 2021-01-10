@@ -337,8 +337,7 @@ void saveCsv(String filename) {
   final file = File(filename);
   final buffer = StringBuffer();
   buffer.writeln(
-      'ApiName, NeutralApiName, DllLibrary, WindowsPrototype, ReturnNative, '
-      'ReturnDart, ParamCount, Param1Native, Param1Dart, Comment');
+      'ApiName, NeutralApiName, DllLibrary, WindowsPrototype, Comment');
 
   for (final protoKey in prototypes.keys) {
     final proto = prototypes[protoKey]!;
@@ -347,14 +346,9 @@ void saveCsv(String filename) {
       proto.neutralApiName,
       proto.dllLibrary,
       '"${proto.prototype.first}"',
-      proto.nativeReturn,
-      proto.nativeParams.length.toString(),
+      '"${proto.comment}"'
     ];
-    for (final key in proto.nativeParams.keys) {
-      fields.add(key);
-      fields.add(proto.nativeParams[key]!);
-    }
-    fields.add('"${proto.comment}"');
+
     buffer.writeln(fields.join(", "));
   }
   file.writeAsStringSync(buffer.toString());
