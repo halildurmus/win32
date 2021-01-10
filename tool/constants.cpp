@@ -24,6 +24,8 @@
 #include <VersionHelpers.h>
 #include <wincred.h>
 #include <sysinfoapi.h>
+#include <shellscalingapi.h>
+#include <processthreadsapi.h>
 
 void main()
 {

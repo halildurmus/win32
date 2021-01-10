@@ -76,22 +76,34 @@ final _$library = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' 
     for (final proto in libProtos) {
       final apiName = prototypes.keys.firstWhere(
           (k) => prototypes[k]!.neutralApiName == proto.neutralApiName);
-      // print('Generating $apiName');
       final win32Func = win32APIs.where((api) => api.name == apiName).first;
       final returnFFIType = ffiFromWin32(win32Func.returnType);
       final returnDartType = dartFromFFI(returnFFIType);
-      print('$returnDartType ${win32Func.name}');
 
       writer.writeStringSync('''
 ${generateDocComment(library, proto.prototype.first, proto.comment)}
-$returnDartType ${proto.neutralApiName}(${proto.dartParams.keys.map((param) => '${proto.dartParams[param]} $param').join(', ')}) {
-  final _${proto.neutralApiName} = _$library.lookupFunction<\n
+$returnDartType ${win32Func.nameWithoutEncoding}(${win32Func.params.map((param) {
+        final convertedParams = win32Func.convertParamType(param);
+        final dartType = dartFromFFI(convertedParams.first);
+        return '$dartType ${convertedParams.last}';
+      }).join(', ')}) {
+  final _${win32Func.nameWithoutEncoding} = _$library.lookupFunction<\n
     $returnFFIType Function(
-      ${proto.nativeParams.keys.map((param) => '${proto.nativeParams[param]} $param').join(', ')}),
+      ${win32Func.params.map((param) {
+        final convertedParams = win32Func.convertParamType(param);
+        return '${convertedParams.first} ${convertedParams.last}';
+      }).join(', ')}),
     $returnDartType Function(
-      ${proto.dartParams.keys.map((param) => '${proto.dartParams[param]} $param').join(', ')})>
+      ${win32Func.params.map((param) {
+        final convertedParams = win32Func.convertParamType(param);
+        final dartType = dartFromFFI(convertedParams.first);
+        return '$dartType ${convertedParams.last}';
+      }).join(', ')})>
     ('$apiName');
-  return _${proto.neutralApiName}(${proto.dartParams.keys.join(', ')});
+  return _${win32Func.nameWithoutEncoding}(${win32Func.params.map((param) {
+        final convertedParams = win32Func.convertParamType(param);
+        return convertedParams.last;
+      }).join(', ')});
 }
 ''');
     }

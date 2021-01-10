@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:io';
 
 final prototypes = <String, TypeDef>{};
@@ -28,41 +27,130 @@ String ffiFromWin32(String win32Type) {
 
     // Windows numerics
     'INT_PTR': 'IntPtr', 'UINT_PTR': 'IntPtr', 'LONG_PTR': 'IntPtr',
+    'DWORD_PTR': 'IntPtr', 'ULONG_PTR': 'IntPtr',
+    'WPARAM': 'IntPtr', 'LPARAM': 'IntPtr',
+    'SIZE_T': 'IntPtr',
     'LRESULT': 'IntPtr', 'FARPROC': 'IntPtr',
     'LONGLONG': 'Int64', 'INT64': 'Int64', 'LARGE_INTEGER': 'Int64',
     'ULONGLONG': 'Uint64', 'UINT64': 'Uint64', 'ULARGE_INTEGER': 'Uint64',
     'LONG': 'Int32', 'INT': 'Int32', 'INT32': 'Int32', 'LSTATUS': 'Int32',
     'UINT': 'Uint32', 'UINT32': 'Uint32', 'DWORD': 'Uint32', 'ULONG': 'Uint32',
     'SHORT': 'Int16', 'INT16': 'Int16',
-    'WORD': 'Uint16', 'UINT16': 'Uint16', 'ATOM': 'Uint16',
+    'WORD': 'Uint16', 'UINT16': 'Uint16', 'ATOM': 'Uint16', 'USHORT': 'Uint16',
     'BYTE': 'Uint8',
     'BOOL': 'Int32', '_BOOL': 'Int32',
     'FLOAT': 'Float',
-    'DOUBLE': 'Double',
+    'DOUBLE': 'Double', 'double': 'Double',
+    'VOID': 'Void',
 
     'HANDLE': 'IntPtr', 'HRSRC': 'IntPtr', 'HWND': 'IntPtr',
     'HMODULE': 'IntPtr', 'HGLOBAL': 'IntPtr', 'HDC': 'IntPtr',
     'HBITMAP': 'IntPtr', 'HPEN': 'IntPtr', 'HBRUSH': 'IntPtr',
-    'HACCEL': 'IntPtr',
+    'HACCEL': 'IntPtr', 'HKEY': 'IntPtr', 'HRGN': 'IntPtr',
     'HFONT': 'IntPtr', 'HPALETTE': 'IntPtr', 'HGDIOBJ': 'IntPtr',
     'HMENU': 'IntPtr', 'HICON': 'IntPtr', 'HMONITOR': 'IntPtr',
     'HCURSOR': 'IntPtr', 'HBLUETOOTH_DEVICE_FIND': 'IntPtr',
     'HBLUETOOTH_RADIO_FIND': 'IntPtr', 'HINSTANCE': 'IntPtr',
+    'HPCON': 'IntPtr',
+    'RPC_AUTH_IDENTITY_HANDLE': 'IntPtr',
 
     'HRESULT': 'Int32',
     'NTSTATUS': 'Int32',
     'SHSTDAPI': 'Int32', 'SHFOLDERAPI': 'Int32',
     'COLORREF': 'Int32',
     'MCIDEVICEID': 'Uint32', 'MCIERROR': 'Uint32',
+    'REGSAM': 'Uint32',
 
-    'LPVOID': 'Pointer',
+    // Enums
+    'AUTHENTICATION_REQUIREMENTS': 'Int32',
+    'TASKDIALOG_COMMON_BUTTON_FLAGS': 'Int32',
+    'POWER_INFORMATION_LEVEL': 'Int32',
+    'MC_GAIN_TYPE': 'Int32', 'MC_DRIVE_TYPE': 'Int32', 'MC_SIZE_TYPE': 'Int32',
+    'MC_COLOR_TEMPERATURE': 'Int32', 'MC_DISPLAY_TECHNOLOGY_TYPE': 'Int32',
+    'MC_POSITION_TYPE': 'Int32',
+    'MONITOR_DPI_TYPE': 'Int32',
+    'PROCESS_DPI_AWARENESS': 'Int32',
+    'COMPUTER_NAME_FORMAT': 'Int32',
+    'GET_FILEEX_INFO_LEVELS': 'Int32',
 
+    // Callbacks
+    'FONTENUMPROCW': 'Pointer<NativeFunction>',
+    'ENUMRESTYPEPROCW': 'Pointer<NativeFunction>',
+    'ENUMRESNAMEPROCW': 'Pointer<NativeFunction>',
+    'MONITORENUMPROC': 'Pointer<NativeFunction>',
+    'GRAYSTRINGPROC': 'Pointer<NativeFunction>',
+    'WNDENUMPROC': 'Pointer<NativeFunction>',
+    'PHANDLER_ROUTINE': 'Pointer<NativeFunction>',
+    'TIMERPROC': 'Pointer<NativeFunction>',
+    'DLGPROC': 'Pointer<NativeFunction>',
+
+    // Void pointers
+    'LPVOID': 'Pointer', 'PVOID': 'Pointer', 'LPCVOID': 'Pointer',
+    'LPUNKNOWN': 'Pointer<IntPtr>',
+
+    // Pointers to ints
+    'LPDWORD': 'Pointer<Uint32>', 'LPBYTE': 'Pointer<Uint8>',
+
+    // Strings
+    'LPWSTR': 'Pointer<Utf16>', 'LPCWSTR': 'Pointer<Utf16>',
+    'PCWSTR': 'Pointer<Utf16>', 'LPCTSTR': 'Pointer<Utf16>',
+    'LPTSTR': 'Pointer<Utf16>', 'LPWCH': 'Pointer<Utf16>',
+    'LPCOLESTR': 'Pointer<Utf16>',
+    'LPCSTR': 'Pointer<Uint8>', // This is an ANSI type string
+    'TCHAR': 'Uint16', 'PWSTR': 'Pointer<Utf16>',
+
+    // Pointers not prefixed with LP*
+    'PUINT': 'Pointer<Uint32>', 'PHANDLE': 'Pointer<IntPtr>',
+    'PULONGLONG': 'Pointer<Uint64>', 'PDWORD': 'Pointer<Uint32>',
+    'PLONG': 'Pointer<Int32>',
+    'PLARGE_INTEGER': 'Pointer<Int64>', 'PSIZE_T': 'Pointer<IntPtr>',
+    'PBLUETOOTH_OOB_DATA_INFO': 'Pointer<BLUETOOTH_OOB_DATA_INFO>',
+    'PCREDENTIALW': 'Pointer<CREDENTIAL>', 'PHKEY': 'Pointer<IntPtr>',
+    'PCOORD': 'Pointer<COORD>',
+    'PSECURITY_DESCRIPTOR': 'Pointer<SECURITY_DESCRIPTOR>',
+    'PCONSOLE_CURSOR_INFO': 'Pointer<CONSOLE_CURSOR_INFO>',
+    'PCONSOLE_SELECTION_INFO': 'Pointer<CONSOLE_SELECTION_INFO>',
+    'PCONSOLE_SCREEN_BUFFER_INFO': 'Pointer<CONSOLE_SCREEN_BUFFER_INFO>',
+
+    // Pointers to enums
+    'LPMC_COLOR_TEMPERATURE': 'Pointer<Int32>',
+    'LPMC_DISPLAY_TECHNOLOGY_TYPE': 'Pointer<Int32>',
+
+    // Pointers to Unicode structs
+    'LPFINDREPLACEW': 'Pointer<FINDREPLACE>',
+    'LPOPENFILENAMEW': 'Pointer<OPENFILENAME>',
+    'LPLOGFONTW': 'Pointer<LOGFONT>',
+    'LPTEXTMETRICW': 'Pointer<TEXTMETRIC>',
+    'LPSHELLEXECUTEINFOW': 'Pointer<SHELLEXECUTEINFO>',
+    'LPSTARTUPINFOW': 'Pointer<STARTUPINFO>',
+    'LPOSVERSIONINFOW': 'Pointer<OSVERSIONINFO>',
+    'LPCDLGTEMPLATEW': 'Pointer<DLGTEMPLATE>',
+
+    // Special cases
+    'LPCRECT': 'Pointer<RECT>',
+    'LPCMENUINFO': 'Pointer<MENUINFO>',
+    'LPCMENUITEMINFOW': 'Pointer<MENUITEMINFO>',
+    'LPCSCROLLINFO': 'Pointer<SCROLLINFO>',
+    'LPCLSID': 'Pointer<GUID>', 'REFCLSID': 'Pointer<GUID>',
+    'REFIID': 'Pointer<GUID>', 'LPIID': 'Pointer<GUID>',
+    'REFKNOWNFOLDERID': 'Pointer<GUID>',
     'BSTR': 'Pointer',
+    'OLECHAR': 'Utf16',
+    'VARIANTARG': 'Void', 'va_list': 'Void',
+    'IUnknown': 'Void', 'IBindCtx': 'Void',
+    'HPCON*': 'Pointer<IntPtr>',
+    'LOGFONTW': 'LOGFONT',
+    'SHELLEXECUTEINFOW': 'SHELLEXECUTEINFO',
+    'WNDCLASSW': 'WNDCLASS',
+    'LPPROC_THREAD_ATTRIBUTE_LIST': 'Pointer',
   };
 
   if (mapping.containsKey(win32Type)) {
     return mapping[win32Type]!;
   } else {
+    if (win32Type.startsWith('LP')) {
+      return 'Pointer<${win32Type.substring(2)}>';
+    }
     // It's a STRUCT (or an unknown type, in which case it will fail Dart
     // analysis.)
     return win32Type;
@@ -91,6 +179,19 @@ String dartFromFFI(String ffiType) {
 
 final win32APIs = <Win32Function>[];
 
+class Win32Param {
+  late final String name;
+  late final String returnType;
+
+  Win32Param(List<String> param) {
+    if (param.length != 2) {
+      throw ArgumentError('Constructor list must have length of two.');
+    }
+    name = param.first;
+    returnType = param.last;
+  }
+}
+
 class Win32Function {
   final String name;
   final String returnType;
@@ -98,7 +199,29 @@ class Win32Function {
 
   const Win32Function(this.returnType, this.name, this.params);
 
-  String convertParamType(List<String> param) => ffiFromWin32(param.first);
+  String get nameWithoutEncoding =>
+      name.endsWith('W') ? name.substring(0, name.length - 1) : name;
+
+  List<String> convertParamType(List<String> param) {
+    var paramType = ffiFromWin32(param.first);
+    var paramName = param.last;
+
+    while (paramName.startsWith('*')) {
+      if (paramType == 'Void') {
+        paramType = 'Pointer';
+      } else {
+        paramType = 'Pointer<$paramType>';
+      }
+      paramName = paramName.substring(1);
+
+      // // Double pointers are always of type Pointer<IntPtr>
+      // if (paramType.startsWith('Pointer<Pointer<')) {
+      //   paramType = 'Pointer<IntPtr>';
+      // }
+    }
+
+    return [paramType, paramName];
+  }
 }
 
 Win32Function loadFunction(String rawFunction) {
@@ -116,7 +239,7 @@ Win32Function loadFunction(String rawFunction) {
   final returnType = preamble[0];
   final apiName = preamble[1];
 
-  final params = rawFunction
+  var params = rawFunction
       .substring(paramsStart + 1, rawFunction.length - 2)
       .split(',')
       .map((s) => s.replaceAll(r'\n', ''))
@@ -131,7 +254,6 @@ Win32Function loadFunction(String rawFunction) {
       .map((s) => s.split(RegExp(' +')))
       .map((s) => s.map((p) => p.trim()).toList())
       .toList();
-  // print(params);
 
   for (final param in params) {
     if ((param.length != 2) &&
@@ -139,6 +261,10 @@ Win32Function loadFunction(String rawFunction) {
         (!(param.length == 1 && param[0] == 'void'))) {
       throw Exception('params != 2');
     }
+  }
+
+  if (params.first.length == 1) {
+    params = [];
   }
 
   final func = Win32Function(returnType, apiName, params);
@@ -203,7 +329,6 @@ void loadCsv(String filename) {
   }
 
   for (final func in prototypes.keys) {
-    // print('Loading $func');
     loadFunction(prototypes[func]!.prototype[0]);
   }
 }
