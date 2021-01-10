@@ -76,13 +76,19 @@ final _$library = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' 
     for (final proto in libProtos) {
       final apiName = prototypes.keys.firstWhere(
           (k) => prototypes[k]!.neutralApiName == proto.neutralApiName);
+      // print('Generating $apiName');
+      final win32Func = win32APIs.where((api) => api.name == apiName).first;
+      final returnFFIType = ffiFromWin32(win32Func.returnType);
+      final returnDartType = dartFromFFI(returnFFIType);
+      print('$returnDartType ${win32Func.name}');
+
       writer.writeStringSync('''
 ${generateDocComment(library, proto.prototype.first, proto.comment)}
-${proto.dartReturn} ${proto.neutralApiName}(${proto.dartParams.keys.map((param) => '${proto.dartParams[param]} $param').join(', ')}) {
+$returnDartType ${proto.neutralApiName}(${proto.dartParams.keys.map((param) => '${proto.dartParams[param]} $param').join(', ')}) {
   final _${proto.neutralApiName} = _$library.lookupFunction<\n
-    ${proto.nativeReturn} Function(
+    $returnFFIType Function(
       ${proto.nativeParams.keys.map((param) => '${proto.nativeParams[param]} $param').join(', ')}),
-    ${proto.dartReturn} Function(
+    $returnDartType Function(
       ${proto.dartParams.keys.map((param) => '${proto.dartParams[param]} $param').join(', ')})>
     ('$apiName');
   return _${proto.neutralApiName}(${proto.dartParams.keys.join(', ')});

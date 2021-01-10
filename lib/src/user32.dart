@@ -118,9 +118,9 @@ int ChildWindowFromPoint(int hWndParent, int Point) {
 /// Grandchildren and deeper descendants are not searched.
 ///
 /// ```c
-/// HWND ChildWindowFromPoint(
-///   HWND  hWndParent,
-///   POINT Point
+/// HWND ChildWindowFromPointEx(
+///   HWND  hwnd,
+///   POINT pt,
 ///   UINT  flags
 /// );
 /// ```
@@ -300,7 +300,7 @@ int CreateWindowEx(
     int hInstance,
     Pointer<Void> lpParam) {
   final _CreateWindowEx = _user32.lookupFunction<
-      Int32 Function(
+      IntPtr Function(
           Uint32 dwExStyle,
           Pointer<Utf16> lpClassName,
           Pointer<Utf16> lpWindowName,
@@ -336,7 +336,7 @@ int CreateWindowEx(
 /// the same parameters received by the window procedure.
 ///
 /// ```c
-/// LRESULT LRESULT DefWindowProcW(
+/// LRESULT DefWindowProcW(
 ///   HWND   hWnd,
 ///   UINT   Msg,
 ///   WPARAM wParam,
@@ -424,7 +424,7 @@ int DialogBoxIndirectParam(int hInstance, Pointer<DLGTEMPLATE> hDialogTemplate,
 /// dispatch a message retrieved by the GetMessage function.
 ///
 /// ```c
-/// LRESULT DispatchMessage(
+/// LRESULT DispatchMessageW(
 ///   const MSG *lpMsg
 /// );
 /// ```
@@ -920,7 +920,7 @@ int GetDlgItemText(
 /// {@category user32}
 int GetDpiForSystem() {
   final _GetDpiForSystem = _user32
-      .lookupFunction<Int32 Function(), int Function()>('GetDpiForSystem');
+      .lookupFunction<Uint32 Function(), int Function()>('GetDpiForSystem');
   return _GetDpiForSystem();
 }
 
@@ -933,7 +933,7 @@ int GetDpiForSystem() {
 /// ```
 /// {@category user32}
 int GetDpiForWindow(int hwnd) {
-  final _GetDpiForWindow = _user32.lookupFunction<Int32 Function(IntPtr hwnd),
+  final _GetDpiForWindow = _user32.lookupFunction<Uint32 Function(IntPtr hwnd),
       int Function(int hwnd)>('GetDpiForWindow');
   return _GetDpiForWindow(hwnd);
 }
@@ -2073,7 +2073,7 @@ int RedrawWindow(
 /// {@category user32}
 int RegisterClass(Pointer<WNDCLASS> lpWndClass) {
   final _RegisterClass = _user32.lookupFunction<
-      Int16 Function(Pointer<WNDCLASS> lpWndClass),
+      Uint16 Function(Pointer<WNDCLASS> lpWndClass),
       int Function(Pointer<WNDCLASS> lpWndClass)>('RegisterClassW');
   return _RegisterClass(lpWndClass);
 }
@@ -2214,7 +2214,7 @@ int SendInput(int cInputs, Pointer<INPUT> pInputs, int cbSize) {
 /// not return until the window procedure has processed the message.
 ///
 /// ```c
-/// LRESULT SendMessage(
+/// LRESULT SendMessageW(
 ///   HWND   hWnd,
 ///   UINT   Msg,
 ///   WPARAM wParam,
@@ -2324,8 +2324,8 @@ int SetForegroundWindow(int hWnd) {
 ///
 /// ```c
 /// BOOL SetMenuInfo(
-///   HMENU       ,
-///   LPCMENUINFO
+///   HMENU       hmenu,
+///   LPCMENUINFO lpmi
 /// );
 /// ```
 /// {@category user32}

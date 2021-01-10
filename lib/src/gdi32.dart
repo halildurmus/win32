@@ -653,7 +653,7 @@ int GetNearestColor(int hdc, int color) {
 /// object.
 ///
 /// ```c
-/// int GetObject(
+/// int GetObjectW(
 ///   HANDLE h,
 ///   int    c,
 ///   LPVOID pv
@@ -687,9 +687,9 @@ int GetStockObject(int i) {
 /// for the currently selected font.
 ///
 /// ```c
-/// BOOL GetTextMetrics(
+/// BOOL GetTextMetricsW(
 ///   HDC          hdc,
-///   LPTEXTMETRIC lptm
+///   LPTEXTMETRICW lptm
 /// );
 /// ```
 /// {@category gdi32}

@@ -20,28 +20,51 @@ class TypeDef {
 String ffiFromWin32(String win32Type) {
   const mapping = <String, String>{
     // Base C types
-    'void': 'void',
+    'void': 'Void',
     'int': 'Int32',
     'long': 'Int32',
     'short': 'Int16',
     'char': 'Int8',
 
     // Windows numerics
+    'INT_PTR': 'IntPtr', 'UINT_PTR': 'IntPtr', 'LONG_PTR': 'IntPtr',
+    'LRESULT': 'IntPtr', 'FARPROC': 'IntPtr',
     'LONGLONG': 'Int64', 'INT64': 'Int64', 'LARGE_INTEGER': 'Int64',
     'ULONGLONG': 'Uint64', 'UINT64': 'Uint64', 'ULARGE_INTEGER': 'Uint64',
-    'LONG': 'Int32', 'INT': 'Int32', 'INT32': 'Int32',
+    'LONG': 'Int32', 'INT': 'Int32', 'INT32': 'Int32', 'LSTATUS': 'Int32',
     'UINT': 'Uint32', 'UINT32': 'Uint32', 'DWORD': 'Uint32', 'ULONG': 'Uint32',
-    'SHORT': 'Int16', 'INT16': 'Int16', 'WORD': 'Uint16', 'UINT16': 'Uint16',
+    'SHORT': 'Int16', 'INT16': 'Int16',
+    'WORD': 'Uint16', 'UINT16': 'Uint16', 'ATOM': 'Uint16',
     'BYTE': 'Uint8',
-    'BOOL': 'Int32',
+    'BOOL': 'Int32', '_BOOL': 'Int32',
     'FLOAT': 'Float',
     'DOUBLE': 'Double',
+
+    'HANDLE': 'IntPtr', 'HRSRC': 'IntPtr', 'HWND': 'IntPtr',
+    'HMODULE': 'IntPtr', 'HGLOBAL': 'IntPtr', 'HDC': 'IntPtr',
+    'HBITMAP': 'IntPtr', 'HPEN': 'IntPtr', 'HBRUSH': 'IntPtr',
+    'HACCEL': 'IntPtr',
+    'HFONT': 'IntPtr', 'HPALETTE': 'IntPtr', 'HGDIOBJ': 'IntPtr',
+    'HMENU': 'IntPtr', 'HICON': 'IntPtr', 'HMONITOR': 'IntPtr',
+    'HCURSOR': 'IntPtr', 'HBLUETOOTH_DEVICE_FIND': 'IntPtr',
+    'HBLUETOOTH_RADIO_FIND': 'IntPtr', 'HINSTANCE': 'IntPtr',
+
+    'HRESULT': 'Int32',
+    'NTSTATUS': 'Int32',
+    'SHSTDAPI': 'Int32', 'SHFOLDERAPI': 'Int32',
+    'COLORREF': 'Int32',
+    'MCIDEVICEID': 'Uint32', 'MCIERROR': 'Uint32',
+
+    'LPVOID': 'Pointer',
+
+    'BSTR': 'Pointer',
   };
 
   if (mapping.containsKey(win32Type)) {
     return mapping[win32Type]!;
   } else {
-    print('Need a mapping for $win32Type');
+    // It's a STRUCT (or an unknown type, in which case it will fail Dart
+    // analysis.)
     return win32Type;
   }
 }
@@ -73,7 +96,9 @@ class Win32Function {
   final String returnType;
   final List<List<String>> params;
 
-  const Win32Function(this.name, this.returnType, this.params);
+  const Win32Function(this.returnType, this.name, this.params);
+
+  String convertParamType(List<String> param) => ffiFromWin32(param.first);
 }
 
 Win32Function loadFunction(String rawFunction) {
@@ -106,7 +131,7 @@ Win32Function loadFunction(String rawFunction) {
       .map((s) => s.split(RegExp(' +')))
       .map((s) => s.map((p) => p.trim()).toList())
       .toList();
-  print(params);
+  // print(params);
 
   for (final param in params) {
     if ((param.length != 2) &&
@@ -117,6 +142,7 @@ Win32Function loadFunction(String rawFunction) {
   }
 
   final func = Win32Function(returnType, apiName, params);
+  win32APIs.add(func);
   return func;
 }
 
@@ -174,6 +200,11 @@ void loadCsv(String filename) {
     } else {
       prototypes[apiName]!.comment = '';
     }
+  }
+
+  for (final func in prototypes.keys) {
+    // print('Loading $func');
+    loadFunction(prototypes[func]!.prototype[0]);
   }
 }
 

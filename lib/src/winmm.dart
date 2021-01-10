@@ -21,7 +21,7 @@ final _winmm = DynamicLibrary.open('winmm.dll');
 /// corresponding to the name of an open device.
 ///
 /// ```c
-/// MCIDEVICEID mciGetDeviceID(
+/// MCIDEVICEID mciGetDeviceIDW(
 ///    LPCTSTR lpszDevice
 /// );
 /// ```
@@ -37,7 +37,7 @@ int mciGetDeviceID(Pointer<Utf16> lpszDevice) {
 /// identifier corresponding to an element identifier.
 ///
 /// ```c
-/// MCIDEVICEID mciGetDeviceIDFromElementID(
+/// MCIDEVICEID mciGetDeviceIDFromElementIDW(
 ///    DWORD   dwElementID,
 ///    LPCTSTR lpstrType
 /// );
@@ -55,7 +55,7 @@ int mciGetDeviceIDFromElementID(int dwElementID, Pointer<Utf16> lpstrType) {
 /// specified MCI error code.
 ///
 /// ```c
-/// BOOL mciGetErrorString(
+/// BOOL mciGetErrorStringW(
 ///    DWORD  fdwError,
 ///    LPTSTR lpszErrorText,
 ///    UINT   cchErrorText
@@ -76,7 +76,7 @@ int mciGetErrorString(
 /// MCI device.
 ///
 /// ```c
-/// MCIERROR mciSendCommand(
+/// MCIERROR mciSendCommandW(
 ///    MCIDEVICEID IDDevice,
 ///    UINT        uMsg,
 ///    DWORD_PTR   fdwCommand,
@@ -97,7 +97,7 @@ int mciSendCommand(int IDDevice, int uMsg, int fdwCommand, int dwParam) {
 /// device that the command is sent to is specified in the command string.
 ///
 /// ```c
-/// MCIERROR mciSendString(
+/// MCIERROR mciSendStringW(
 ///    LPCTSTR lpszCommand,
 ///    LPTSTR  lpszReturnString,
 ///    UINT    cchReturn,
@@ -135,7 +135,7 @@ int midiOutGetNumDevs() {
 /// resource, or system event.
 ///
 /// ```c
-/// BOOL PlaySound(
+/// BOOL PlaySoundW(
 ///   LPCTSTR pszSound,
 ///   HMODULE hmod,
 ///   DWORD fdwSound);

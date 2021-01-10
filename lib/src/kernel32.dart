@@ -504,7 +504,7 @@ int FillConsoleOutputAttribute(int hConsoleOutput, int wAttribute, int nLength,
 /// times, beginning at the specified coordinates.
 ///
 /// ```c
-/// BOOL WINAPI FillConsoleOutputCharacter(
+/// BOOL WINAPI FillConsoleOutputCharacterW(
 ///   _In_  HANDLE  hConsoleOutput,
 ///   _In_  TCHAR   cCharacter,
 ///   _In_  DWORD   nLength,
@@ -667,7 +667,7 @@ int FlushConsoleInputBuffer(int hConsoleInput) {
 int FormatMessage(int dwFlags, Pointer<Void> lpSource, int dwMessageId,
     int dwLanguageId, Pointer<Utf16> lpBuffer, int nSize, Pointer arguments) {
   final _FormatMessage = _kernel32.lookupFunction<
-      Int32 Function(
+      Uint32 Function(
           Uint32 dwFlags,
           Pointer<Void> lpSource,
           Uint32 dwMessageId,
@@ -819,7 +819,7 @@ int GetConsoleSelectionInfo(
 /// Retrieves the title for the current console window.
 ///
 /// ```c
-/// DWORD WINAPI GetConsoleTitle(
+/// DWORD WINAPI GetConsoleTitleW(
 ///   _Out_ LPTSTR lpConsoleTitle,
 ///   _In_  DWORD  nSize
 /// );
@@ -887,10 +887,10 @@ int GetFileAttributesEx(
 /// );
 /// ```
 /// {@category kernel32}
-int GetLargestConsoleWindowSize(int hConsoleOutput) {
+COORD GetLargestConsoleWindowSize(int hConsoleOutput) {
   final _GetLargestConsoleWindowSize = _kernel32.lookupFunction<
-      Int32 Function(IntPtr hConsoleOutput),
-      int Function(int hConsoleOutput)>('GetLargestConsoleWindowSize');
+      COORD Function(IntPtr hConsoleOutput),
+      COORD Function(int hConsoleOutput)>('GetLargestConsoleWindowSize');
   return _GetLargestConsoleWindowSize(hConsoleOutput);
 }
 
@@ -899,7 +899,7 @@ int GetLargestConsoleWindowSize(int hConsoleOutput) {
 /// overwrite each other's last-error code.
 ///
 /// ```c
-/// _Post_equals_last_error_ DWORD GetLastError();
+/// DWORD GetLastError();
 /// ```
 /// {@category kernel32}
 int GetLastError() {
@@ -937,7 +937,7 @@ void GetLocalTime(Pointer<SYSTEMTIME> lpSystemTime) {
 /// {@category kernel32}
 int GetModuleFileName(int hModule, Pointer<Utf16> lpFilename, int nSize) {
   final _GetModuleFileName = _kernel32.lookupFunction<
-      Int32 Function(IntPtr hModule, Pointer<Utf16> lpFilename, Uint32 nSize),
+      Uint32 Function(IntPtr hModule, Pointer<Utf16> lpFilename, Uint32 nSize),
       int Function(int hModule, Pointer<Utf16> lpFilename,
           int nSize)>('GetModuleFileNameW');
   return _GetModuleFileName(hModule, lpFilename, nSize);
@@ -1172,7 +1172,7 @@ int GetTempPath(int nBufferLength, Pointer<Utf16> lpBuffer) {
 /// application is manifested for in future releases.
 ///
 /// ```c
-/// NOT_BUILD_WINDOWS_DEPRECATE BOOL GetVersionExW(
+/// BOOL GetVersionExW(
 ///   LPOSVERSIONINFOW lpVersionInformation
 /// );
 /// ```
@@ -1221,7 +1221,7 @@ int GetVolumePathNamesForVolumeName(
 /// Allocates the specified number of bytes from the heap.
 ///
 /// ```c
-/// DECLSPEC_ALLOCATOR HGLOBAL GlobalAlloc(
+/// HGLOBAL GlobalAlloc(
 ///   UINT   uFlags,
 ///   SIZE_T dwBytes
 /// );
@@ -1257,9 +1257,10 @@ int GlobalFree(int hMem) {
 /// );
 /// ```
 /// {@category kernel32}
-Pointer GlobalLock(int hMem) {
-  final _GlobalLock = _kernel32.lookupFunction<Pointer Function(IntPtr hMem),
-      Pointer Function(int hMem)>('GlobalLock');
+Pointer<Void> GlobalLock(int hMem) {
+  final _GlobalLock = _kernel32.lookupFunction<
+      Pointer<Void> Function(IntPtr hMem),
+      Pointer<Void> Function(int hMem)>('GlobalLock');
   return _GlobalLock(hMem);
 }
 
@@ -1283,17 +1284,17 @@ int GlobalUnlock(int hMem) {
 /// movable.
 ///
 /// ```c
-/// DECLSPEC_ALLOCATOR LPVOID HeapAlloc(
+/// LPVOID HeapAlloc(
 ///   HANDLE hHeap,
 ///   DWORD  dwFlags,
 ///   SIZE_T dwBytes
 /// );
 /// ```
 /// {@category kernel32}
-Pointer HeapAlloc(int hHeap, int dwflags, int dwBytes) {
+Pointer<Void> HeapAlloc(int hHeap, int dwflags, int dwBytes) {
   final _HeapAlloc = _kernel32.lookupFunction<
-      Pointer Function(IntPtr hHeap, Uint32 dwflags, Uint32 dwBytes),
-      Pointer Function(int hHeap, int dwflags, int dwBytes)>('HeapAlloc');
+      Pointer<Void> Function(IntPtr hHeap, Uint32 dwflags, Uint32 dwBytes),
+      Pointer<Void> Function(int hHeap, int dwflags, int dwBytes)>('HeapAlloc');
   return _HeapAlloc(hHeap, dwflags, dwBytes);
 }
 
@@ -1413,10 +1414,10 @@ int LoadResource(int hModule, int hResInfo) {
 /// );
 /// ```
 /// {@category kernel32}
-Pointer LockResource(int hResData) {
+Pointer<Void> LockResource(int hResData) {
   final _LockResource = _kernel32.lookupFunction<
-      Pointer Function(IntPtr hResData),
-      Pointer Function(int hResData)>('LockResource');
+      Pointer<Void> Function(IntPtr hResData),
+      Pointer<Void> Function(int hResData)>('LockResource');
   return _LockResource(hResData);
 }
 
@@ -1432,7 +1433,7 @@ Pointer LockResource(int hResData) {
 /// {@category kernel32}
 int OpenProcess(int dwDesiredAccess, int bInheritHandle, int dwProcessId) {
   final _OpenProcess = _kernel32.lookupFunction<
-      Int32 Function(
+      IntPtr Function(
           Uint32 dwDesiredAccess, Int32 bInheritHandle, Uint32 dwProcessId),
       int Function(int dwDesiredAccess, int bInheritHandle,
           int dwProcessId)>('OpenProcess');
@@ -1502,7 +1503,7 @@ int QueryPerformanceFrequency(Pointer<Int64> lpPerformanceCount) {
 /// the buffer.
 ///
 /// ```c
-/// BOOL WINAPI ReadConsole(
+/// BOOL WINAPI ReadConsoleW(
 ///   _In_     HANDLE  hConsoleInput,
 ///   _Out_    LPVOID  lpBuffer,
 ///   _In_     DWORD   nNumberOfCharsToRead,
@@ -1633,7 +1634,7 @@ int ResizePseudoConsole(Pointer<IntPtr> hPC, int size) {
 /// console screen buffer outside the clipping rectangle are unchanged.
 ///
 /// ```c
-/// BOOL WINAPI ScrollConsoleScreenBuffer(
+/// BOOL WINAPI ScrollConsoleScreenBufferW(
 ///   _In_           HANDLE     hConsoleOutput,
 ///   _In_     const SMALL_RECT *lpScrollRectangle,
 ///   _In_opt_ const SMALL_RECT *lpClipRectangle,
@@ -1802,7 +1803,7 @@ int SetConsoleWindowInfo(
 /// Changes the current directory for the current process.
 ///
 /// ```c
-/// BOOL SetCurrentDirectory(
+/// BOOL SetCurrentDirectoryW(
 ///   LPCTSTR lpPathName
 /// );
 /// ```
@@ -1869,7 +1870,7 @@ int SetFilePointerEx(int hFile, int liDistanceToMove,
 ///
 /// ```c
 /// BOOL WINAPI SetStdHandle(
-///   _In_ DWORD  nStdHandle
+///   _In_ DWORD  nStdHandle,
 ///   _In_ HANDLE hHandle
 /// );
 /// ```
@@ -2018,7 +2019,7 @@ int VirtualFree(Pointer<Void> lpAddress, int dwSize, int dwFreeType) {
 /// {@category kernel32}
 int WaitForSingleObject(int hHandle, int dwMilliseconds) {
   final _WaitForSingleObject = _kernel32.lookupFunction<
-      Int32 Function(IntPtr hHandle, Int32 dwMilliseconds),
+      Uint32 Function(IntPtr hHandle, Int32 dwMilliseconds),
       int Function(int hHandle, int dwMilliseconds)>('WaitForSingleObject');
   return _WaitForSingleObject(hHandle, dwMilliseconds);
 }
@@ -2042,7 +2043,7 @@ int Wow64SuspendThread(int hThread) {
 /// current cursor location.
 ///
 /// ```c
-/// BOOL WINAPI WriteConsole(
+/// BOOL WINAPI WriteConsoleW(
 ///   _In_             HANDLE  hConsoleOutput,
 ///   _In_       const VOID    *lpBuffer,
 ///   _In_             DWORD   nNumberOfCharsToWrite,

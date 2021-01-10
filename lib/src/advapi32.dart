@@ -112,7 +112,7 @@ int CredWrite(Pointer<CREDENTIAL> Credential, int Flags) {
 int InitiateShutdown(Pointer<Utf16> lpMachineName, Pointer<Utf16> lpMessage,
     int dwGracePeriod, int dwShutdownFlags, int dwReason) {
   final _InitiateShutdown = _advapi32.lookupFunction<
-      Int32 Function(Pointer<Utf16> lpMachineName, Pointer<Utf16> lpMessage,
+      Uint32 Function(Pointer<Utf16> lpMachineName, Pointer<Utf16> lpMessage,
           Uint32 dwGracePeriod, Uint32 dwShutdownFlags, Uint32 dwReason),
       int Function(
           Pointer<Utf16> lpMachineName,
@@ -151,7 +151,7 @@ int RegCloseKey(int hKey) {
 /// {@category advapi32}
 int RegConnectRegistry(Pointer<Utf16> lpMachineName, int hKey) {
   final _RegConnectRegistry = _advapi32.lookupFunction<
-      Int16 Function(Pointer<Utf16> lpMachineName, IntPtr hKey),
+      Int32 Function(Pointer<Utf16> lpMachineName, IntPtr hKey),
       int Function(
           Pointer<Utf16> lpMachineName, int hKey)>('RegConnectRegistryW');
   return _RegConnectRegistry(lpMachineName, hKey);
