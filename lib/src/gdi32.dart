@@ -473,10 +473,12 @@ int DeleteObject(int ho) {
 /// );
 /// ```
 /// {@category gdi32}
-int DrawEscape(int hdc, int iEscape, int cjIn, Pointer lpIn) {
+int DrawEscape(int hdc, int iEscape, int cjIn, Pointer<Uint8> lpIn) {
   final _DrawEscape = _gdi32.lookupFunction<
-      Int32 Function(IntPtr hdc, Int32 iEscape, Int32 cjIn, Pointer lpIn),
-      int Function(int hdc, int iEscape, int cjIn, Pointer lpIn)>('DrawEscape');
+      Int32 Function(
+          IntPtr hdc, Int32 iEscape, Int32 cjIn, Pointer<Uint8> lpIn),
+      int Function(
+          int hdc, int iEscape, int cjIn, Pointer<Uint8> lpIn)>('DrawEscape');
   return _DrawEscape(hdc, iEscape, cjIn, lpIn);
 }
 
@@ -534,18 +536,18 @@ int EndPath(int hdc) {
 /// );
 /// ```
 /// {@category gdi32}
-int EnumFontFamiliesEx(int hdc, Pointer<LOGFONT> lpLogFont,
+int EnumFontFamiliesEx(int hdc, Pointer<LOGFONT> lpLogfont,
     Pointer<NativeFunction> lpProc, int lParam, int dwFlags) {
   final _EnumFontFamiliesEx = _gdi32.lookupFunction<
-      Int32 Function(IntPtr hdc, Pointer<LOGFONT> lpLogFont,
+      Int32 Function(IntPtr hdc, Pointer<LOGFONT> lpLogfont,
           Pointer<NativeFunction> lpProc, IntPtr lParam, Uint32 dwFlags),
       int Function(
           int hdc,
-          Pointer<LOGFONT> lpLogFont,
+          Pointer<LOGFONT> lpLogfont,
           Pointer<NativeFunction> lpProc,
           int lParam,
           int dwFlags)>('EnumFontFamiliesExW');
-  return _EnumFontFamiliesEx(hdc, lpLogFont, lpProc, lParam, dwFlags);
+  return _EnumFontFamiliesEx(hdc, lpLogfont, lpProc, lParam, dwFlags);
 }
 
 /// The ExtCreatePen function creates a logical cosmetic or geometric pen
@@ -561,14 +563,14 @@ int EnumFontFamiliesEx(int hdc, Pointer<LOGFONT> lpLogFont,
 /// );
 /// ```
 /// {@category gdi32}
-int ExtCreatePen(int iPenStyle, int cWidth, Pointer<LOGFONT> plBrush,
-    int cStyle, Pointer<Uint32> pStyle) {
+int ExtCreatePen(int iPenStyle, int cWidth, Pointer<LOGBRUSH> plbrush,
+    int cStyle, Pointer<Uint32> pstyle) {
   final _ExtCreatePen = _gdi32.lookupFunction<
-      IntPtr Function(Uint32 iPenStyle, Uint32 cWidth, Pointer<LOGFONT> plBrush,
-          Uint32 cStyle, Pointer<Uint32> pStyle),
-      int Function(int iPenStyle, int cWidth, Pointer<LOGFONT> plBrush,
-          int cStyle, Pointer<Uint32> pStyle)>('ExtCreatePen');
-  return _ExtCreatePen(iPenStyle, cWidth, plBrush, cStyle, pStyle);
+      IntPtr Function(Uint32 iPenStyle, Uint32 cWidth,
+          Pointer<LOGBRUSH> plbrush, Uint32 cStyle, Pointer<Uint32> pstyle),
+      int Function(int iPenStyle, int cWidth, Pointer<LOGBRUSH> plbrush,
+          int cStyle, Pointer<Uint32> pstyle)>('ExtCreatePen');
+  return _ExtCreatePen(iPenStyle, cWidth, plbrush, cStyle, pstyle);
 }
 
 /// The ExtTextOut function draws text using the currently selected font,
@@ -653,7 +655,7 @@ int GetNearestColor(int hdc, int color) {
 /// object.
 ///
 /// ```c
-/// int GetObject(
+/// int GetObjectW(
 ///   HANDLE h,
 ///   int    c,
 ///   LPVOID pv
@@ -687,9 +689,9 @@ int GetStockObject(int i) {
 /// for the currently selected font.
 ///
 /// ```c
-/// BOOL GetTextMetrics(
+/// BOOL GetTextMetricsW(
 ///   HDC          hdc,
-///   LPTEXTMETRIC lptm
+///   LPTEXTMETRICW lptm
 /// );
 /// ```
 /// {@category gdi32}
@@ -909,11 +911,11 @@ int PolyPolygon(int hdc, Pointer<POINT> apt, Pointer<Int32> asz, int csz) {
 /// );
 /// ```
 /// {@category gdi32}
-int PolyPolyline(int hdc, Pointer<POINT> apt, Pointer<Int32> asz, int csz) {
+int PolyPolyline(int hdc, Pointer<POINT> apt, Pointer<Uint32> asz, int csz) {
   final _PolyPolyline = _gdi32.lookupFunction<
       Int32 Function(
-          IntPtr hdc, Pointer<POINT> apt, Pointer<Int32> asz, Uint32 csz),
-      int Function(int hdc, Pointer<POINT> apt, Pointer<Int32> asz,
+          IntPtr hdc, Pointer<POINT> apt, Pointer<Uint32> asz, Uint32 csz),
+      int Function(int hdc, Pointer<POINT> apt, Pointer<Uint32> asz,
           int csz)>('PolyPolyline');
   return _PolyPolyline(hdc, apt, asz, csz);
 }
@@ -1294,7 +1296,7 @@ int StretchDIBits(
     int ySrc,
     int SrcWidth,
     int SrcHeight,
-    Pointer<Void> lpBits,
+    Pointer lpBits,
     Pointer<BITMAPINFO> lpbmi,
     int iUsage,
     int rop) {
@@ -1309,7 +1311,7 @@ int StretchDIBits(
           Int32 ySrc,
           Int32 SrcWidth,
           Int32 SrcHeight,
-          Pointer<Void> lpBits,
+          Pointer lpBits,
           Pointer<BITMAPINFO> lpbmi,
           Uint32 iUsage,
           Uint32 rop),
@@ -1323,7 +1325,7 @@ int StretchDIBits(
           int ySrc,
           int SrcWidth,
           int SrcHeight,
-          Pointer<Void> lpBits,
+          Pointer lpBits,
           Pointer<BITMAPINFO> lpbmi,
           int iUsage,
           int rop)>('StretchDIBits');

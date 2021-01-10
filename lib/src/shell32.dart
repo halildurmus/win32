@@ -67,11 +67,11 @@ int ShellAbout(
 /// );
 /// ```
 /// {@category shell32}
-int ShellExecuteEx(Pointer<SHELLEXECUTEINFO> pExecuteInfo) {
+int ShellExecuteEx(Pointer<SHELLEXECUTEINFO> pExecInfo) {
   final _ShellExecuteEx = _shell32.lookupFunction<
-      Int32 Function(Pointer<SHELLEXECUTEINFO> pExecuteInfo),
-      int Function(Pointer<SHELLEXECUTEINFO> pExecuteInfo)>('ShellExecuteExW');
-  return _ShellExecuteEx(pExecuteInfo);
+      Int32 Function(Pointer<SHELLEXECUTEINFO> pExecInfo),
+      int Function(Pointer<SHELLEXECUTEINFO> pExecInfo)>('ShellExecuteExW');
+  return _ShellExecuteEx(pExecInfo);
 }
 
 /// Performs an operation on a specified file.
@@ -120,12 +120,12 @@ int ShellExecute(int hwnd, Pointer<Utf16> lpOperation, Pointer<Utf16> lpFile,
 /// ```
 /// {@category shell32}
 int SHCreateItemFromParsingName(Pointer<Utf16> pszPath, Pointer pbc,
-    Pointer<GUID> riid, Pointer<COMObject> ppv) {
+    Pointer<GUID> riid, Pointer<Pointer> ppv) {
   final _SHCreateItemFromParsingName = _shell32.lookupFunction<
       Int32 Function(Pointer<Utf16> pszPath, Pointer pbc, Pointer<GUID> riid,
-          Pointer<COMObject> ppv),
+          Pointer<Pointer> ppv),
       int Function(Pointer<Utf16> pszPath, Pointer pbc, Pointer<GUID> riid,
-          Pointer<COMObject> ppv)>('SHCreateItemFromParsingName');
+          Pointer<Pointer> ppv)>('SHCreateItemFromParsingName');
   return _SHCreateItemFromParsingName(pszPath, pbc, riid, ppv);
 }
 
@@ -229,13 +229,13 @@ int SHGetFolderPath(
 /// );
 /// ```
 /// {@category shell32}
-int SHGetKnownFolderPath(
-    Pointer<GUID> rfid, int dwFlags, int hToken, Pointer<IntPtr> ppszPath) {
+int SHGetKnownFolderPath(Pointer<GUID> rfid, int dwFlags, int hToken,
+    Pointer<Pointer<Utf16>> ppszPath) {
   final _SHGetKnownFolderPath = _shell32.lookupFunction<
       Int32 Function(Pointer<GUID> rfid, Uint32 dwFlags, IntPtr hToken,
-          Pointer<IntPtr> ppszPath),
+          Pointer<Pointer<Utf16>> ppszPath),
       int Function(Pointer<GUID> rfid, int dwFlags, int hToken,
-          Pointer<IntPtr> ppszPath)>('SHGetKnownFolderPath');
+          Pointer<Pointer<Utf16>> ppszPath)>('SHGetKnownFolderPath');
   return _SHGetKnownFolderPath(rfid, dwFlags, hToken, ppszPath);
 }
 

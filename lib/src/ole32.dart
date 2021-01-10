@@ -68,16 +68,16 @@ int CoCreateGuid(Pointer<GUID> pguid) {
 /// ```
 /// {@category ole32}
 int CoCreateInstance(Pointer<GUID> rclsid, Pointer<IntPtr> pUnkOuter,
-    int dwClsContext, Pointer<GUID> riid, Pointer<COMObject> ppv) {
+    int dwClsContext, Pointer<GUID> riid, Pointer<Pointer> ppv) {
   final _CoCreateInstance = _ole32.lookupFunction<
       Int32 Function(Pointer<GUID> rclsid, Pointer<IntPtr> pUnkOuter,
-          Uint32 dwClsContext, Pointer<GUID> riid, Pointer<COMObject> ppv),
+          Uint32 dwClsContext, Pointer<GUID> riid, Pointer<Pointer> ppv),
       int Function(
           Pointer<GUID> rclsid,
           Pointer<IntPtr> pUnkOuter,
           int dwClsContext,
           Pointer<GUID> riid,
-          Pointer<COMObject> ppv)>('CoCreateInstance');
+          Pointer<Pointer> ppv)>('CoCreateInstance');
   return _CoCreateInstance(rclsid, pUnkOuter, dwClsContext, riid, ppv);
 }
 
@@ -96,12 +96,12 @@ int CoCreateInstance(Pointer<GUID> rclsid, Pointer<IntPtr> pUnkOuter,
 /// ```
 /// {@category ole32}
 int CoGetClassObject(Pointer<GUID> rclsid, int dwClsContext, Pointer pvReserved,
-    Pointer<GUID> riid, Pointer<COMObject> ppv) {
+    Pointer<GUID> riid, Pointer<Pointer> ppv) {
   final _CoGetClassObject = _ole32.lookupFunction<
       Int32 Function(Pointer<GUID> rclsid, Uint32 dwClsContext,
-          Pointer pvReserved, Pointer<GUID> riid, Pointer<COMObject> ppv),
+          Pointer pvReserved, Pointer<GUID> riid, Pointer<Pointer> ppv),
       int Function(Pointer<GUID> rclsid, int dwClsContext, Pointer pvReserved,
-          Pointer<GUID> riid, Pointer<COMObject> ppv)>('CoGetClassObject');
+          Pointer<GUID> riid, Pointer<Pointer> ppv)>('CoGetClassObject');
   return _CoGetClassObject(rclsid, dwClsContext, pvReserved, riid, ppv);
 }
 
@@ -116,10 +116,10 @@ int CoGetClassObject(Pointer<GUID> rclsid, int dwClsContext, Pointer pvReserved,
 /// );
 /// ```
 /// {@category ole32}
-int CoInitializeEx(Pointer<Void> pvReserved, int dwCoInit) {
+int CoInitializeEx(Pointer pvReserved, int dwCoInit) {
   final _CoInitializeEx = _ole32.lookupFunction<
-      Int32 Function(Pointer<Void> pvReserved, Uint32 dwCoInit),
-      int Function(Pointer<Void> pvReserved, int dwCoInit)>('CoInitializeEx');
+      Int32 Function(Pointer pvReserved, Uint32 dwCoInit),
+      int Function(Pointer pvReserved, int dwCoInit)>('CoInitializeEx');
   return _CoInitializeEx(pvReserved, dwCoInit);
 }
 
@@ -144,33 +144,33 @@ int CoInitializeSecurity(
     Pointer<SECURITY_DESCRIPTOR> pSecDesc,
     int cAuthSvc,
     Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
-    Pointer<Void> pReserved1,
+    Pointer pReserved1,
     int dwAuthnLevel,
     int dwImpLevel,
-    Pointer<Void> pAuthList,
+    Pointer pAuthList,
     int dwCapabilities,
-    Pointer<Void> pReserved3) {
+    Pointer pReserved3) {
   final _CoInitializeSecurity = _ole32.lookupFunction<
       Int32 Function(
           Pointer<SECURITY_DESCRIPTOR> pSecDesc,
           Int32 cAuthSvc,
           Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
-          Pointer<Void> pReserved1,
+          Pointer pReserved1,
           Uint32 dwAuthnLevel,
           Uint32 dwImpLevel,
-          Pointer<Void> pAuthList,
+          Pointer pAuthList,
           Uint32 dwCapabilities,
-          Pointer<Void> pReserved3),
+          Pointer pReserved3),
       int Function(
           Pointer<SECURITY_DESCRIPTOR> pSecDesc,
           int cAuthSvc,
           Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
-          Pointer<Void> pReserved1,
+          Pointer pReserved1,
           int dwAuthnLevel,
           int dwImpLevel,
-          Pointer<Void> pAuthList,
+          Pointer pAuthList,
           int dwCapabilities,
-          Pointer<Void> pReserved3)>('CoInitializeSecurity');
+          Pointer pReserved3)>('CoInitializeSecurity');
   return _CoInitializeSecurity(pSecDesc, cAuthSvc, asAuthSvc, pReserved1,
       dwAuthnLevel, dwImpLevel, pAuthList, dwCapabilities, pReserved3);
 }
@@ -199,7 +199,7 @@ int CoSetProxyBlanket(
     Pointer<Utf16> pServerPrincName,
     int dwAuthnLevel,
     int dwImpLevel,
-    Pointer<Void> pAuthInfo,
+    Pointer pAuthInfo,
     int dwCapabilities) {
   final _CoSetProxyBlanket = _ole32.lookupFunction<
       Int32 Function(
@@ -209,7 +209,7 @@ int CoSetProxyBlanket(
           Pointer<Utf16> pServerPrincName,
           Uint32 dwAuthnLevel,
           Uint32 dwImpLevel,
-          Pointer<Void> pAuthInfo,
+          Pointer pAuthInfo,
           Uint32 dwCapabilities),
       int Function(
           Pointer pProxy,
@@ -218,7 +218,7 @@ int CoSetProxyBlanket(
           Pointer<Utf16> pServerPrincName,
           int dwAuthnLevel,
           int dwImpLevel,
-          Pointer<Void> pAuthInfo,
+          Pointer pAuthInfo,
           int dwCapabilities)>('CoSetProxyBlanket');
   return _CoSetProxyBlanket(pProxy, dwAuthnSvc, dwAuthzSvc, pServerPrincName,
       dwAuthnLevel, dwImpLevel, pAuthInfo, dwCapabilities);

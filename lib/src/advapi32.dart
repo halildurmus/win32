@@ -100,13 +100,19 @@ int CredWrite(Pointer<CREDENTIAL> Credential, int Flags) {
 /// restarts any applications that have been registered for restart.
 ///
 /// ```c
-/// Initiates a shutdown and restart of the specified computer and restarts any applications that have been registered for restart.
+/// DWORD InitiateShutdownW(
+///   LPWSTR lpMachineName,
+///   LPWSTR lpMessage,
+///   DWORD  dwGracePeriod,
+///   DWORD  dwShutdownFlags,
+///   DWORD  dwReason
+/// );
 /// ```
 /// {@category advapi32}
 int InitiateShutdown(Pointer<Utf16> lpMachineName, Pointer<Utf16> lpMessage,
     int dwGracePeriod, int dwShutdownFlags, int dwReason) {
   final _InitiateShutdown = _advapi32.lookupFunction<
-      Int32 Function(Pointer<Utf16> lpMachineName, Pointer<Utf16> lpMessage,
+      Uint32 Function(Pointer<Utf16> lpMachineName, Pointer<Utf16> lpMessage,
           Uint32 dwGracePeriod, Uint32 dwShutdownFlags, Uint32 dwReason),
       int Function(
           Pointer<Utf16> lpMachineName,
@@ -143,12 +149,14 @@ int RegCloseKey(int hKey) {
 /// );
 /// ```
 /// {@category advapi32}
-int RegConnectRegistry(Pointer<Utf16> lpMachineName, int hKey) {
+int RegConnectRegistry(
+    Pointer<Utf16> lpMachineName, int hKey, Pointer<IntPtr> phkResult) {
   final _RegConnectRegistry = _advapi32.lookupFunction<
-      Int16 Function(Pointer<Utf16> lpMachineName, IntPtr hKey),
-      int Function(
-          Pointer<Utf16> lpMachineName, int hKey)>('RegConnectRegistryW');
-  return _RegConnectRegistry(lpMachineName, hKey);
+      Int32 Function(
+          Pointer<Utf16> lpMachineName, IntPtr hKey, Pointer<IntPtr> phkResult),
+      int Function(Pointer<Utf16> lpMachineName, int hKey,
+          Pointer<IntPtr> phkResult)>('RegConnectRegistryW');
+  return _RegConnectRegistry(lpMachineName, hKey, phkResult);
 }
 
 /// Opens the specified registry key. Note that key names are not case
@@ -168,7 +176,7 @@ int RegOpenKeyEx(int hKey, Pointer<Utf16> lpSubKey, int ulOptions,
     int samDesired, Pointer<IntPtr> phkResult) {
   final _RegOpenKeyEx = _advapi32.lookupFunction<
       Int32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey, Uint32 ulOptions,
-          Int32 samDesired, Pointer<IntPtr> phkResult),
+          Uint32 samDesired, Pointer<IntPtr> phkResult),
       int Function(int hKey, Pointer<Utf16> lpSubKey, int ulOptions,
           int samDesired, Pointer<IntPtr> phkResult)>('RegOpenKeyExW');
   return _RegOpenKeyEx(hKey, lpSubKey, ulOptions, samDesired, phkResult);

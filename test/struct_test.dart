@@ -385,6 +385,13 @@ void main() {
       expect(sizeOf<DLLVERSIONINFO>(), equals(20));
     }
   });
+  test('Struct SYSTEMTIME is the right size', () {
+    if (sizeOf<IntPtr>() == 8) {
+      expect(sizeOf<SYSTEMTIME>(), equals(16));
+    } else {
+      expect(sizeOf<SYSTEMTIME>(), equals(16));
+    }
+  });
   test('Struct BLUETOOTH_DEVICE_SEARCH_PARAMS is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
       expect(sizeOf<BLUETOOTH_DEVICE_SEARCH_PARAMS>(), equals(40));

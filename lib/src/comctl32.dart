@@ -30,13 +30,13 @@ final _comctl32 = DynamicLibrary.open('comctl32.dll');
 /// ```
 /// {@category comctl32}
 void DrawStatusText(
-    int hdc, Pointer<RECT> lprc, Pointer<Utf16> pszText, int uFlags) {
+    int hDC, Pointer<RECT> lprc, Pointer<Utf16> pszText, int uFlags) {
   final _DrawStatusText = _comctl32.lookupFunction<
-      Void Function(IntPtr hdc, Pointer<RECT> lprc, Pointer<Utf16> pszText,
+      Void Function(IntPtr hDC, Pointer<RECT> lprc, Pointer<Utf16> pszText,
           Uint32 uFlags),
-      void Function(int hdc, Pointer<RECT> lprc, Pointer<Utf16> pszText,
+      void Function(int hDC, Pointer<RECT> lprc, Pointer<Utf16> pszText,
           int uFlags)>('DrawStatusTextW');
-  return _DrawStatusText(hdc, lprc, pszText, uFlags);
+  return _DrawStatusText(hDC, lprc, pszText, uFlags);
 }
 
 /// Ensures that the common control DLL (Comctl32.dll) is loaded, and
@@ -87,8 +87,8 @@ int TaskDialog(
     Pointer<Int32> pnButton) {
   final _TaskDialog = _comctl32.lookupFunction<
       Int32 Function(
-          Int32 hwndOwner,
-          Int32 hInstance,
+          IntPtr hwndOwner,
+          IntPtr hInstance,
           Pointer<Utf16> pszWindowTitle,
           Pointer<Utf16> pszMainInstruction,
           Pointer<Utf16> pszContent,

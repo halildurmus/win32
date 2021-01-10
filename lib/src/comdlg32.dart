@@ -20,7 +20,7 @@ final _comdlg32 = DynamicLibrary.open('comdlg32.dll');
 /// Creates a Color dialog box that enables the user to select a color.
 ///
 /// ```c
-/// BOOL WINAPI ChooseColor(
+/// BOOL WINAPI ChooseColorW(
 ///   _Inout_ LPCHOOSECOLOR lpcc
 /// );
 /// ```
@@ -38,7 +38,7 @@ int ChooseColor(Pointer<CHOOSECOLOR> lpcc) {
 /// text color), and a script (or character set).
 ///
 /// ```c
-/// BOOL WINAPI ChooseFont(
+/// BOOL WINAPI ChooseFontW(
 ///   _Inout_ LPCHOOSEFONT lpcf
 /// );
 /// ```
@@ -76,11 +76,11 @@ int FindText(Pointer<FINDREPLACE> Arg1) {
 /// );
 /// ```
 /// {@category comdlg32}
-int GetOpenFileName(Pointer<OPENFILENAME> arg1) {
+int GetOpenFileName(Pointer<OPENFILENAME> Arg1) {
   final _GetOpenFileName = _comdlg32.lookupFunction<
-      Int32 Function(Pointer<OPENFILENAME> arg1),
-      int Function(Pointer<OPENFILENAME> arg1)>('GetOpenFileNameW');
-  return _GetOpenFileName(arg1);
+      Int32 Function(Pointer<OPENFILENAME> Arg1),
+      int Function(Pointer<OPENFILENAME> Arg1)>('GetOpenFileNameW');
+  return _GetOpenFileName(Arg1);
 }
 
 /// Creates a Save dialog box that lets the user specify the drive,
@@ -92,11 +92,11 @@ int GetOpenFileName(Pointer<OPENFILENAME> arg1) {
 /// );
 /// ```
 /// {@category comdlg32}
-int GetSaveFileName(Pointer<OPENFILENAME> arg1) {
+int GetSaveFileName(Pointer<OPENFILENAME> Arg1) {
   final _GetSaveFileName = _comdlg32.lookupFunction<
-      Int32 Function(Pointer<OPENFILENAME> arg1),
-      int Function(Pointer<OPENFILENAME> arg1)>('GetSaveFileNameW');
-  return _GetSaveFileName(arg1);
+      Int32 Function(Pointer<OPENFILENAME> Arg1),
+      int Function(Pointer<OPENFILENAME> Arg1)>('GetSaveFileNameW');
+  return _GetSaveFileName(Arg1);
 }
 
 /// Creates a system-defined modeless dialog box that lets the user specify

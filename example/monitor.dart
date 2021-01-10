@@ -129,7 +129,7 @@ void main() {
       count: physicalMonitorCountPtr.value * (sizeOf<IntPtr>() + 256));
 
   result = GetPhysicalMonitorsFromHMONITOR(primaryMonitorHandle,
-      physicalMonitorCountPtr.value, physicalMonitorArray);
+      physicalMonitorCountPtr.value, physicalMonitorArray.cast());
   if (result == FALSE) {
     throw WindowsException(result);
   }
@@ -166,7 +166,8 @@ void main() {
         'maximum(${maximumBrightnessPtr.value})');
   }
 
-  DestroyPhysicalMonitors(physicalMonitorCountPtr.value, physicalMonitorArray);
+  DestroyPhysicalMonitors(
+      physicalMonitorCountPtr.value, physicalMonitorArray.cast());
 
   // free all the heap-allocated variables
   free(physicalMonitorArray);

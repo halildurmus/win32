@@ -29,13 +29,13 @@ final _shcore = DynamicLibrary.open('shcore.dll');
 /// ```
 /// {@category shcore}
 int GetDpiForMonitor(
-    int hMonitor, int dpiType, Pointer<Int32> dpiX, Pointer<Int32> dpiY) {
+    int hmonitor, int dpiType, Pointer<Uint32> dpiX, Pointer<Uint32> dpiY) {
   final _GetDpiForMonitor = _shcore.lookupFunction<
-      IntPtr Function(IntPtr hMonitor, Int32 dpiType, Pointer<Int32> dpiX,
-          Pointer<Int32> dpiY),
-      int Function(int hMonitor, int dpiType, Pointer<Int32> dpiX,
-          Pointer<Int32> dpiY)>('GetDpiForMonitor');
-  return _GetDpiForMonitor(hMonitor, dpiType, dpiX, dpiY);
+      Int32 Function(IntPtr hmonitor, Int32 dpiType, Pointer<Uint32> dpiX,
+          Pointer<Uint32> dpiY),
+      int Function(int hmonitor, int dpiType, Pointer<Uint32> dpiX,
+          Pointer<Uint32> dpiY)>('GetDpiForMonitor');
+  return _GetDpiForMonitor(hmonitor, dpiType, dpiX, dpiY);
 }
 
 /// Retrieves the dots per inch (dpi) awareness of the specified process.
@@ -49,7 +49,7 @@ int GetDpiForMonitor(
 /// {@category shcore}
 int GetProcessDpiAwareness(int hprocess, Pointer<Int32> value) {
   final _GetProcessDpiAwareness = _shcore.lookupFunction<
-      IntPtr Function(IntPtr hprocess, Pointer<Int32> value),
+      Int32 Function(IntPtr hprocess, Pointer<Int32> value),
       int Function(
           int hprocess, Pointer<Int32> value)>('GetProcessDpiAwareness');
   return _GetProcessDpiAwareness(hprocess, value);
@@ -67,7 +67,7 @@ int GetProcessDpiAwareness(int hprocess, Pointer<Int32> value) {
 /// {@category shcore}
 int SetProcessDpiAwareness(int value) {
   final _SetProcessDpiAwareness = _shcore.lookupFunction<
-      IntPtr Function(Int32 value),
+      Int32 Function(Int32 value),
       int Function(int value)>('SetProcessDpiAwareness');
   return _SetProcessDpiAwareness(value);
 }

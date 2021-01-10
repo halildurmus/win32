@@ -128,10 +128,11 @@ WindowsRuntimeType ProcessToken(IMetaDataImport reader, int token) {
 ///   dart winmd.dart Windows.Storage.Pickers.FileOpenPicker
 /// ```
 void main(List<String> args) {
-  final winmdFile = metadataFileContainingType(
-      args.length == 1 ? args.first : 'Windows.Globalization.Calendar');
+  final type = args.length == 1 ? args.first : 'Windows.Globalization.Calendar';
 
-  print('Type ${args.first} can be found in ${winmdFile.path}.');
+  final winmdFile = metadataFileContainingType(type);
+
+  print('Type $type can be found in ${winmdFile.path}.');
 
   print('\nLooking for other types in the same file...\n');
 

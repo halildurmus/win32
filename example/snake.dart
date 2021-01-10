@@ -28,7 +28,7 @@ final rng = Random();
 
 final bitmapInfo = BITMAPINFO.allocate();
 
-Pointer<Void> bitmapMemory = nullptr;
+Pointer bitmapMemory = nullptr;
 late int bitmapWidth;
 late int bitmapHeight;
 const bytesPerPixel = 4;

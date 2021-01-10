@@ -2589,6 +2589,44 @@ class OSVERSIONINFO extends Struct {
         ..dwOSVersionInfoSize = _OSVERSIONINFO_STRUCT_SIZE;
 }
 
+// typedef struct _SYSTEMTIME {
+//   WORD wYear;
+//   WORD wMonth;
+//   WORD wDayOfWeek;
+//   WORD wDay;
+//   WORD wHour;
+//   WORD wMinute;
+//   WORD wSecond;
+//   WORD wMilliseconds;
+// } SYSTEMTIME, *PSYSTEMTIME, *LPSYSTEMTIME;
+
+/// Specifies a date and time, using individual members for the month, day,
+/// year, weekday, hour, minute, second, and millisecond. The time is either in
+/// coordinated universal time (UTC) or local time, depending on the function
+/// that is being called.
+///
+/// {@category Struct}
+class SYSTEMTIME extends Struct {
+  @Uint16()
+  external int wYear;
+  @Uint16()
+  external int wMonth;
+  @Uint16()
+  external int wDayOfWeek;
+  @Uint16()
+  external int wDay;
+  @Uint16()
+  external int wHour;
+  @Uint16()
+  external int wMinute;
+  @Uint16()
+  external int wSecond;
+  @Uint16()
+  external int wMilliseconds;
+
+  factory SYSTEMTIME.allocate() => zeroAllocate<SYSTEMTIME>().ref;
+}
+
 // typedef struct _BLUETOOTH_DEVICE_INFO {
 //   DWORD             dwSize;
 //   BLUETOOTH_ADDRESS Address;
@@ -2619,17 +2657,8 @@ class BLUETOOTH_DEVICE_INFO extends Struct {
   @Int32()
   external int fAuthenticated;
 
-  // SYSTEMTIME is 128-bit
-  @Int64()
-  external int stLastSeenDate;
-  @Int64()
-  external int stLastSeenTime;
-
-  // SYSTEMTIME is 128-bit
-  @Int64()
-  external int stLastUsedDate;
-  @Int64()
-  external int stLastUsedTime;
+  external SYSTEMTIME stLastSeen;
+  external SYSTEMTIME stLastUsed;
 
   String get szName => addressOf
       .cast<Uint8>()
@@ -2961,3 +2990,9 @@ class STATSTG extends Struct {}
 ///
 /// {@category Struct}
 class NLM_SIMULATED_PROFILE_INFO extends Struct {}
+
+class BLUETOOTH_OOB_DATA_INFO extends Struct {}
+
+class PHYSICAL_MONITOR extends Struct {}
+
+class OVERLAPPED extends Struct {}

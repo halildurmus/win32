@@ -264,7 +264,7 @@ class $className extends $name {
         nullptr,
         CLSCTX_ALL,
         GUID.fromString(IID_$name).addressOf,
-        ptr);
+        ptr.cast());
 
     if (FAILED(hr)) throw WindowsException(hr);
     return $className(ptr);

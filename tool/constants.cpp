@@ -23,6 +23,9 @@
 #include <bluetoothapis.h>
 #include <VersionHelpers.h>
 #include <wincred.h>
+#include <sysinfoapi.h>
+#include <shellscalingapi.h>
+#include <processthreadsapi.h>
 
 void main()
 {
@@ -42,6 +45,7 @@ void main()
     printf("sizeof(WPARAM) is %zu\n", sizeof(WPARAM));
     printf("sizeof(LPARAM) is %zu\n", sizeof(LPARAM));
     printf("sizeof(LRESULT) is %zu\n", sizeof(LRESULT));
+    printf("sizeof(LSTATUS) is %zu\n", sizeof(LSTATUS));
 
     printf("sizeof(WCHAR) is %zu\n", sizeof(WCHAR));
     printf("sizeof(TCHAR) is %zu\n", sizeof(TCHAR));
