@@ -611,7 +611,7 @@ const PHYSICAL_MONITOR_DESCRIPTION_SIZE = 128;
 /// {@category Struct}
 class PHYSICAL_MONITOR extends Struct {
   @IntPtr()
-  int hPhysicalMonitor;
+  external int hPhysicalMonitor;
 
   String get szPhysicalMonitorDescription => addressOf
       .cast<IntPtr>()
@@ -3008,15 +3008,15 @@ class MCI_STATUS_PARMS extends Struct {
 /// {@category Struct}
 class OVERLAPPED extends Struct {
   @IntPtr()
-  int Internal;
+  external int Internal;
 
   @IntPtr()
-  int InternalHigh;
+  external int InternalHigh;
 
-  Pointer pointer;
+  external Pointer pointer;
 
   @IntPtr()
-  int hEvent;
+  external int hEvent;
 
   factory OVERLAPPED.allocate() => zeroAllocate<OVERLAPPED>().ref;
 }
@@ -3131,4 +3131,372 @@ class WIN32_FIND_DATA extends Struct {
       .elementAt(52 + (MAX_PATH + 14) * 2)
       .cast<Uint16>()
       .value;
+}
+
+// typedef struct _NOTIFYICONDATAW {
+//   DWORD cbSize;
+//   HWND hWnd;
+//   UINT uID;
+//   UINT uFlags;
+//   UINT uCallbackMessage;
+//   HICON hIcon;
+//   WCHAR  szTip[128];
+//   DWORD dwState;
+//   DWORD dwStateMask;
+//   WCHAR  szInfo[256];
+//   union {
+//   UINT  uTimeout;
+//   UINT  uVersion;  // used with NIM_SETVERSION, values 0, 3 and 4
+//   } DUMMYUNIONNAME;
+//   WCHAR  szInfoTitle[64];
+//   DWORD dwInfoFlags;
+//   #endif
+//   GUID guidItem;
+//   HICON hBalloonIcon;
+//   #endif
+// } NOTIFYICONDATAW, *PNOTIFYICONDATAW;
+
+// TODO: This struct does not yet support uVersion
+// FFI support for packed structs https://github.com/dart-lang/sdk/issues/38158
+
+/// The NOTIFYICONDATA contains information that the system needs to display
+/// notifications in the notification area. Used by Shell_NotifyIcon.
+///
+/// {@category Struct}
+class NOTIFYICONDATA extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  @IntPtr()
+  external int hWnd;
+
+  @Uint32()
+  external int uID;
+
+  @Uint32()
+  external int uFlags;
+
+  @Uint32()
+  external int uCallbackMessage;
+
+  @IntPtr()
+  external int hIcon;
+
+  // WCHAR szTip[128]
+  @Uint64()
+  external int _wchar0_szTip;
+  @Uint64()
+  external int _wchar4_szTip;
+  @Uint64()
+  external int _wchar8_szTip;
+  @Uint64()
+  external int _wchar12_szTip;
+  @Uint64()
+  external int _wchar16_szTip;
+  @Uint64()
+  external int _wchar20_szTip;
+  @Uint64()
+  external int _wchar24_szTip;
+  @Uint64()
+  external int _wchar28_szTip;
+  @Uint64()
+  external int _wchar32_szTip;
+  @Uint64()
+  external int _wchar36_szTip;
+  @Uint64()
+  external int _wchar40_szTip;
+  @Uint64()
+  external int _wchar44_szTip;
+  @Uint64()
+  external int _wchar48_szTip;
+  @Uint64()
+  external int _wchar52_szTip;
+  @Uint64()
+  external int _wchar56_szTip;
+  @Uint64()
+  external int _wchar60_szTip;
+  @Uint64()
+  external int _wchar64_szTip;
+  @Uint64()
+  external int _wchar68_szTip;
+  @Uint64()
+  external int _wchar72_szTip;
+  @Uint64()
+  external int _wchar76_szTip;
+  @Uint64()
+  external int _wchar80_szTip;
+  @Uint64()
+  external int _wchar84_szTip;
+  @Uint64()
+  external int _wchar88_szTip;
+  @Uint64()
+  external int _wchar92_szTip;
+  @Uint64()
+  external int _wchar96_szTip;
+  @Uint64()
+  external int _wchar100_szTip;
+  @Uint64()
+  external int _wchar104_szTip;
+  @Uint64()
+  external int _wchar108_szTip;
+  @Uint64()
+  external int _wchar112_szTip;
+  @Uint64()
+  external int _wchar116_szTip;
+  @Uint64()
+  external int _wchar120_szTip;
+  @Uint64()
+  external int _wchar124_szTip;
+
+  String get szTip =>
+      addressOf.cast<Uint8>().elementAt(40).cast<Utf16>().unpackString(128);
+
+  set szTip(String text63chars) {
+    if (text63chars.length > 63) {
+      throw ArgumentError('Argument "text64chars" should be less 63 char');
+    }
+    _wchar_cpy(addressOf, 40, text63chars);
+  }
+
+  @Uint32()
+  external int dwState;
+
+  @Uint32()
+  external int dwStateMask;
+
+  // WCHAR szInfo[256]
+  @Uint64()
+  external int _wchar0_szInfo;
+  @Uint64()
+  external int _wchar4_szInfo;
+  @Uint64()
+  external int _wchar8_szInfo;
+  @Uint64()
+  external int _wchar12_szInfo;
+  @Uint64()
+  external int _wchar16_szInfo;
+  @Uint64()
+  external int _wchar20_szInfo;
+  @Uint64()
+  external int _wchar24_szInfo;
+  @Uint64()
+  external int _wchar28_szInfo;
+  @Uint64()
+  external int _wchar32_szInfo;
+  @Uint64()
+  external int _wchar36_szInfo;
+  @Uint64()
+  external int _wchar40_szInfo;
+  @Uint64()
+  external int _wchar44_szInfo;
+  @Uint64()
+  external int _wchar48_szInfo;
+  @Uint64()
+  external int _wchar52_szInfo;
+  @Uint64()
+  external int _wchar56_szInfo;
+  @Uint64()
+  external int _wchar60_szInfo;
+  @Uint64()
+  external int _wchar64_szInfo;
+  @Uint64()
+  external int _wchar68_szInfo;
+  @Uint64()
+  external int _wchar72_szInfo;
+  @Uint64()
+  external int _wchar76_szInfo;
+  @Uint64()
+  external int _wchar80_szInfo;
+  @Uint64()
+  external int _wchar84_szInfo;
+  @Uint64()
+  external int _wchar88_szInfo;
+  @Uint64()
+  external int _wchar92_szInfo;
+  @Uint64()
+  external int _wchar96_szInfo;
+  @Uint64()
+  external int _wchar100_szInfo;
+  @Uint64()
+  external int _wchar104_szInfo;
+  @Uint64()
+  external int _wchar108_szInfo;
+  @Uint64()
+  external int _wchar112_szInfo;
+  @Uint64()
+  external int _wchar116_szInfo;
+  @Uint64()
+  external int _wchar120_szInfo;
+  @Uint64()
+  external int _wchar124_szInfo;
+  @Uint64()
+  external int _wchar128_szInfo;
+  @Uint64()
+  external int _wchar132_szInfo;
+  @Uint64()
+  external int _wchar136_szInfo;
+  @Uint64()
+  external int _wchar140_szInfo;
+  @Uint64()
+  external int _wchar144_szInfo;
+  @Uint64()
+  external int _wchar148_szInfo;
+  @Uint64()
+  external int _wchar152_szInfo;
+  @Uint64()
+  external int _wchar156_szInfo;
+  @Uint64()
+  external int _wchar160_szInfo;
+  @Uint64()
+  external int _wchar164_szInfo;
+  @Uint64()
+  external int _wchar168_szInfo;
+  @Uint64()
+  external int _wchar172_szInfo;
+  @Uint64()
+  external int _wchar176_szInfo;
+  @Uint64()
+  external int _wchar180_szInfo;
+  @Uint64()
+  external int _wchar184_szInfo;
+  @Uint64()
+  external int _wchar188_szInfo;
+  @Uint64()
+  external int _wchar192_szInfo;
+  @Uint64()
+  external int _wchar196_szInfo;
+  @Uint64()
+  external int _wchar200_szInfo;
+  @Uint64()
+  external int _wchar204_szInfo;
+  @Uint64()
+  external int _wchar208_szInfo;
+  @Uint64()
+  external int _wchar212_szInfo;
+  @Uint64()
+  external int _wchar216_szInfo;
+  @Uint64()
+  external int _wchar220_szInfo;
+  @Uint64()
+  external int _wchar224_szInfo;
+  @Uint64()
+  external int _wchar228_szInfo;
+  @Uint64()
+  external int _wchar232_szInfo;
+  @Uint64()
+  external int _wchar236_szInfo;
+  @Uint64()
+  external int _wchar240_szInfo;
+  @Uint64()
+  external int _wchar244_szInfo;
+  @Uint64()
+  external int _wchar248_szInfo;
+  @Uint64()
+  external int _wchar252_szInfo;
+
+  String get szInfo =>
+      addressOf.cast<Uint8>().elementAt(304).cast<Utf16>().unpackString(256);
+
+  set szInfo(String text255chars) {
+    if (text255chars.length > 255) {
+      throw ArgumentError('Argument "text255chars" should be less 255 chars');
+    }
+    _wchar_cpy(addressOf, 304, text255chars);
+  }
+
+  @Uint32()
+  external int uTimeout;
+
+  @Uint32()
+  external int uVersion; // used with NIM_SETVERSION, values 0, 3 and 4
+
+  // WCHAR szInfoTitle[64]
+  @Uint64()
+  external int _wchar0_szInfoTitle;
+  @Uint64()
+  external int _wchar4_szInfoTitle;
+  @Uint64()
+  external int _wchar8_szInfoTitle;
+  @Uint64()
+  external int _wchar12_szInfoTitle;
+  @Uint64()
+  external int _wchar16_szInfoTitle;
+  @Uint64()
+  external int _wchar20_szInfoTitle;
+  @Uint64()
+  external int _wchar24_szInfoTitle;
+  @Uint64()
+  external int _wchar28_szInfoTitle;
+  @Uint64()
+  external int _wchar32_szInfoTitle;
+  @Uint64()
+  external int _wchar36_szInfoTitle;
+  @Uint64()
+  external int _wchar40_szInfoTitle;
+  @Uint64()
+  external int _wchar44_szInfoTitle;
+  @Uint64()
+  external int _wchar48_szInfoTitle;
+  @Uint64()
+  external int _wchar52_szInfoTitle;
+  @Uint64()
+  external int _wchar56_szInfoTitle;
+  @Uint64()
+  external int _wchar60_szInfoTitle;
+
+  String get szInfoTitle =>
+      addressOf.cast<Uint8>().elementAt(824).cast<Utf16>().unpackString(64);
+
+  set szInfoTitle(String text63chars) {
+    if (text63chars.length > 63) {
+      throw ArgumentError('Argument "text63chars" should be less 63 chars');
+    }
+    _wchar_cpy(addressOf, 824, text63chars);
+  }
+
+  @Uint32()
+  external int dwInfoFlags;
+
+  @Uint32()
+  external int guidItem1;
+  @Uint16()
+  external int guidItem2;
+  @Uint16()
+  external int guidItem3;
+  @Uint64()
+  external int guidItem4;
+
+  @IntPtr()
+  external int hBalloonIcon;
+
+  factory NOTIFYICONDATA.allocate() =>
+      zeroAllocate<NOTIFYICONDATA>().ref..cbSize = sizeOf<NOTIFYICONDATA>();
+
+  static void _wchar_cpy(Pointer pointer, int memStart, String source) {
+    final units = source.codeUnits;
+    final szMemory = pointer.cast<Uint8>();
+
+    for (var i = 0; i < units.length; i++) {
+      szMemory.elementAt(memStart + i * 2).value = units[i];
+    }
+    szMemory.elementAt(memStart + units.length * 2).value = 0;
+  }
+}
+
+// typedef struct tagTPMPARAMS {
+//   UINT cbSize;
+//   RECT rcExclude;
+// } TPMPARAMS;
+
+/// Contains extended parameters for the TrackPopupMenuEx function.
+///
+/// {@category Struct}
+class TPMPARAMS extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  external RECT rcExclude;
+
+  factory TPMPARAMS.allocate() =>
+      zeroAllocate<TPMPARAMS>().ref..cbSize = sizeOf<TPMPARAMS>();
 }

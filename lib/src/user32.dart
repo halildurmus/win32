@@ -2896,3 +2896,60 @@ int WindowFromPoint(POINT Point) {
       int Function(POINT Point)>('WindowFromPoint');
   return _WindowFromPoint(Point);
 }
+
+/// Retrieves a handle to the drop-down menu or submenu activated by the
+/// specified menu item.
+///
+/// ```c
+/// HMENU GetSubMenu(
+///  HMENU hMenu,
+///  int nPos
+/// );
+/// ```
+/// {@category user32}
+int GetSubMenu(int hMenu, int nPos) {
+  final _GetSubMenu = _user32.lookupFunction<
+      IntPtr Function(IntPtr hMenu, Int32 nPos),
+      int Function(int hMenu, int nPos)>('GetSubMenu');
+  return _GetSubMenu(hMenu, nPos);
+}
+
+/// Destroys the specified menu and frees any memory that the menu
+/// occupies.
+///
+/// ```c
+/// BOOL DestroyMenu(
+///  HMENU hMenu
+/// );
+/// ```
+/// {@category user32}
+int DestroyMenu(int hMenu) {
+  final _DestroyMenu = _user32.lookupFunction<Int32 Function(IntPtr hMenu),
+      int Function(int hMenu)>('DestroyMenu');
+  return _DestroyMenu(hMenu);
+}
+
+/// Displays a shortcut menu at the specified location and tracks the
+/// selection of items on the shortcut menu. The shortcut menu can appear
+/// anywhere on the screen.
+///
+/// ```c
+/// BOOL TrackPopupMenuEx(
+///  HMENU hMenu,
+///  UINT uFlags,
+///  int x,
+///  int y,
+///  HWND hwnd,
+///  TPMPARAMS *lptpm
+/// );
+/// ```
+/// {@category user32}
+int TrackPopupMenuEx(
+    int hMenu, int uFlags, int x, int y, int hwnd, Pointer<TPMPARAMS> lptpm) {
+  final _TrackPopupMenuEx = _user32.lookupFunction<
+      Int32 Function(IntPtr hMenu, Uint32 uFlags, Int32 x, Int32 y, IntPtr hwnd,
+          Pointer<TPMPARAMS> lptpm),
+      int Function(int hMenu, int uFlags, int x, int y, int hwnd,
+          Pointer<TPMPARAMS> lptpm)>('TrackPopupMenuEx');
+  return _TrackPopupMenuEx(hMenu, uFlags, x, y, hwnd, lptpm);
+}
