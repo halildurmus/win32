@@ -2768,10 +2768,6 @@ class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
   external int cTimeoutMultiplier;
   @IntPtr()
   external int hRadio;
-
-  factory BLUETOOTH_DEVICE_SEARCH_PARAMS.allocate() =>
-      calloc<BLUETOOTH_DEVICE_SEARCH_PARAMS>().ref
-        ..dwSize = sizeOf<BLUETOOTH_DEVICE_SEARCH_PARAMS>();
 }
 
 // typedef struct BLUETOOTH_FIND_RADIO_PARAMS {
