@@ -14,29 +14,27 @@ String toHex(int value32) =>
     '0x${value32.toUnsigned(32).toRadixString(16).padLeft(8, '0')}';
 
 void findBluetoothDevices(int btRadioHandle) {
-  final params = BLUETOOTH_DEVICE_SEARCH_PARAMS.allocate();
-  final info = BLUETOOTH_DEVICE_INFO.allocate();
+  final params = zeroAllocate<BLUETOOTH_DEVICE_SEARCH_PARAMS>();
+  final info = zeroAllocate<BLUETOOTH_DEVICE_INFO>();
 
-  final firstDeviceHandle =
-      BluetoothFindFirstDevice(params.addressOf, info.addressOf);
+  final firstDeviceHandle = BluetoothFindFirstDevice(params, info);
 
   if (firstDeviceHandle != NULL) {
-    print(info.szName);
+    print(info.ref.szName);
     BluetoothFindDeviceClose(firstDeviceHandle);
   } else {
     print('No devices found.');
   }
 
-  free(params.addressOf);
-  free(info.addressOf);
+  free(params);
+  free(info);
 }
 
 void main() {
-  final params = BLUETOOTH_FIND_RADIO_PARAMS.allocate();
+  final params = zeroAllocate<BLUETOOTH_FIND_RADIO_PARAMS>();
   final btRadioHandlePtr = allocate<IntPtr>();
 
-  final btFindRadioHandle =
-      BluetoothFindFirstRadio(params.addressOf, btRadioHandlePtr);
+  final btFindRadioHandle = BluetoothFindFirstRadio(params, btRadioHandlePtr);
 
   if (btFindRadioHandle != NULL) {
     print('Handle: ${toHex(btRadioHandlePtr.value)}');
@@ -47,6 +45,6 @@ void main() {
     print('No Bluetooth radios found.');
   }
 
-  free(params.addressOf);
+  free(params);
   free(btRadioHandlePtr);
 }
