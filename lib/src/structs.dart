@@ -8,6 +8,7 @@
 // Linter exceptions
 // -----------------------------------------------------------------------------
 // ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_extensions
 // Why? The linter defaults to throw a warning for types not named as camel
 // case. We deliberately break this convention to match the Win32 underlying
 // types.
@@ -903,11 +904,10 @@ class LOGFONT extends Struct {
   external int lfFaceName15;
   @Int32()
   external int lfFaceName16;
+}
 
-  Pointer<Utf16> get lfFaceName =>
-      addressOf.cast<Uint8>().elementAt(28).cast<Utf16>();
-
-  factory LOGFONT.allocate() => zeroAllocate<LOGFONT>().ref;
+extension PointerLOGFONTExtension on Pointer<LOGFONT> {
+  Pointer<Utf16> get lfFaceName => cast<Uint8>().elementAt(28).cast<Utf16>();
 }
 
 // typedef struct tagENUMLOGFONTEXW {
@@ -1009,29 +1009,23 @@ class ENUMLOGFONTEX extends Struct {
   external int _data42;
   @Uint32()
   external int _data43;
+}
 
-  LOGFONT get elfLogFont => addressOf.cast<LOGFONT>().ref;
-
-  String get elfFullName => addressOf
-      .cast<Uint8>()
+extension PointerENUMLOGFONTEXExtension on Pointer<ENUMLOGFONTEX> {
+  String get elfFullName => cast<Uint8>()
       .elementAt(sizeOf<LOGFONT>())
       .cast<Utf16>()
       .unpackString(LF_FULLFACESIZE);
 
-  String get elfStyle => addressOf
-      .cast<Uint8>()
+  String get elfStyle => cast<Uint8>()
       .elementAt(sizeOf<LOGFONT>() + LF_FULLFACESIZE * 2)
       .cast<Utf16>()
       .unpackString(LF_FACESIZE);
 
-  String get elfScript => addressOf
-      .cast<Uint8>()
+  String get elfScript => cast<Uint8>()
       .elementAt(sizeOf<LOGFONT>() + ((LF_FULLFACESIZE + LF_FACESIZE) * 2))
       .cast<Utf16>()
       .unpackString(LF_FACESIZE);
-
-  factory ENUMLOGFONTEX.allocate() =>
-      zeroAllocate<Uint8>(count: 348).cast<ENUMLOGFONTEX>().ref;
 }
 
 // typedef struct tagCREATESTRUCTW {
@@ -1318,27 +1312,28 @@ class RECT extends Struct {
 /// {@category Struct}
 class INPUT extends Struct {
   // 28 bytes on 32-bit, 40 bytes on 64-bit
-  @IntPtr()
+  @Uint32()
+  external int type;
+  @Int32()
   external int _data0;
   @IntPtr()
   external int _data1;
   @IntPtr()
   external int _data2;
-  @Uint64()
+  @IntPtr()
   external int _data3;
   @Uint64()
   external int _data4;
+}
 
-  int get type => addressOf.cast<Uint32>().value;
-  set type(int value) => addressOf.cast<Uint32>().value = value;
-
+extension PointerINPUTExtension on Pointer<INPUT> {
   // Location adjusts for padding on 32-bit or 64-bit
   MOUSEINPUT get mi =>
-      MOUSEINPUT(addressOf.cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
+      MOUSEINPUT(cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
   KEYBDINPUT get ki =>
-      KEYBDINPUT(addressOf.cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
+      KEYBDINPUT(cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
   HARDWAREINPUT get hi =>
-      HARDWAREINPUT(addressOf.cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
+      HARDWAREINPUT(cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
 }
 
 // typedef struct tagMOUSEINPUT {
@@ -1656,7 +1651,7 @@ class GUID extends Struct {
   }
 }
 
-extension GUIDFactory on Pointer<GUID> {
+extension PointerGUIDExtension on Pointer<GUID> {
   /// Create GUID from common {FDD39AD0-238F-46AF-ADB4-6C85480369C7} format
   void setGUID(String guidString) {
     assert(guidString.length == 38);
@@ -2974,32 +2969,22 @@ class WIN32_FIND_DATA extends Struct {
   external int dwReserved0;
   @Uint32()
   external int dwReserved1;
-  String get cFileName => addressOf
-      .cast<Uint8>()
-      .elementAt(44)
-      .cast<Utf16>()
-      .unpackString(MAX_PATH);
-  String get cAlternateFileName => addressOf
-      .cast<Uint8>()
-      .elementAt(44 + MAX_PATH * 2)
-      .cast<Utf16>()
-      .unpackString(14);
 
-  int get dwFileType => addressOf
-      .cast<Uint8>()
-      .elementAt(44 + (MAX_PATH + 14) * 2)
-      .cast<Uint32>()
-      .value;
-  int get dwCreatorType => addressOf
-      .cast<Uint8>()
-      .elementAt(48 + (MAX_PATH + 14) * 2)
-      .cast<Uint32>()
-      .value;
-  int get wFinderFlags => addressOf
-      .cast<Uint8>()
-      .elementAt(52 + (MAX_PATH + 14) * 2)
-      .cast<Uint16>()
-      .value;
+  // TODO: Pad for sizeOf
+}
+
+extension PointerWIN32_FIND_DATAExtension on Pointer<WIN32_FIND_DATA> {
+  String get cFileName =>
+      cast<Uint8>().elementAt(44).cast<Utf16>().unpackString(MAX_PATH);
+  String get cAlternateFileName =>
+      cast<Uint8>().elementAt(44 + MAX_PATH * 2).cast<Utf16>().unpackString(14);
+
+  int get dwFileType =>
+      cast<Uint8>().elementAt(44 + (MAX_PATH + 14) * 2).cast<Uint32>().value;
+  int get dwCreatorType =>
+      cast<Uint8>().elementAt(48 + (MAX_PATH + 14) * 2).cast<Uint32>().value;
+  int get wFinderFlags =>
+      cast<Uint8>().elementAt(52 + (MAX_PATH + 14) * 2).cast<Uint16>().value;
 }
 
 // -----------------------------------------------------------------------------

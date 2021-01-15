@@ -12,11 +12,11 @@ import 'package:win32/win32.dart';
 final fontNames = <String>[];
 
 int enumerateFonts(
-    Pointer<LOGFONT> logFontPtr, Pointer<TEXTMETRIC> _, int __, int ___) {
+    Pointer<LOGFONT> logFont, Pointer<TEXTMETRIC> _, int __, int ___) {
   // Get extended information from the font
-  final logFont = logFontPtr.cast<ENUMLOGFONTEX>().ref;
+  final logFontEx = logFont.cast<ENUMLOGFONTEX>();
 
-  fontNames.add(logFont.elfFullName);
+  fontNames.add(logFontEx.elfFullName);
   return TRUE; // continue enumeration
 }
 
