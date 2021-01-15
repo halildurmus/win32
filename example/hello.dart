@@ -18,9 +18,9 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
       return 0;
 
     case WM_PAINT:
-      final ps = zeroAllocate<PAINTSTRUCT>();
+      final ps = calloc<PAINTSTRUCT>();
       final hdc = BeginPaint(hWnd, ps);
-      final rect = zeroAllocate<RECT>();
+      final rect = calloc<RECT>();
       final msg = TEXT('Hello, Dart!');
 
       GetClientRect(hWnd, rect);
@@ -40,7 +40,7 @@ void main() {
   // Register the window class.
   final className = TEXT('Sample Window Class');
 
-  final wc = zeroAllocate<WNDCLASS>()
+  final wc = calloc<WNDCLASS>()
     ..ref.style = CS_HREDRAW | CS_VREDRAW
     ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
     ..ref.hInstance = hInstance
@@ -78,7 +78,7 @@ void main() {
 
   // Run the message loop.
 
-  final msg = zeroAllocate<MSG>();
+  final msg = calloc<MSG>();
   while (GetMessage(msg, NULL, 0, 0) != 0) {
     TranslateMessage(msg);
     DispatchMessage(msg);

@@ -22,7 +22,7 @@ int enumerateFonts(
 
 void main() {
   final hDC = GetDC(NULL);
-  final searchFont = zeroAllocate<LOGFONT>()..ref.lfCharSet = ANSI_CHARSET;
+  final searchFont = calloc<LOGFONT>()..ref.lfCharSet = ANSI_CHARSET;
   final callback = Pointer.fromFunction<EnumFontFamExProc>(enumerateFonts, 0);
 
   EnumFontFamiliesEx(hDC, searchFont, callback, 0, 0);

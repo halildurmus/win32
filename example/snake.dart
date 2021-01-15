@@ -26,7 +26,7 @@ const IDT_TIMER2 = 2;
 
 final rng = Random();
 
-final bitmapInfo = zeroAllocate<BITMAPINFO>();
+final bitmapInfo = calloc<BITMAPINFO>();
 
 Pointer bitmapMemory = nullptr;
 late int bitmapWidth;
@@ -456,7 +456,7 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
   switch (uMsg) {
     case WM_SIZE:
-      final rect = zeroAllocate<RECT>();
+      final rect = calloc<RECT>();
       GetClientRect(hwnd, rect);
       final width = rect.ref.right - rect.ref.left;
       final height = rect.ref.bottom - rect.ref.top;
@@ -476,14 +476,14 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       break;
 
     case WM_PAINT:
-      final ps = zeroAllocate<PAINTSTRUCT>();
+      final ps = calloc<PAINTSTRUCT>();
       final dc = BeginPaint(hwnd, ps);
       final x = ps.ref.rcPaint.left;
       final y = ps.ref.rcPaint.top;
       final width = ps.ref.rcPaint.right - ps.ref.rcPaint.left;
       final height = ps.ref.rcPaint.bottom - ps.ref.rcPaint.top;
 
-      final rect = zeroAllocate<RECT>();
+      final rect = calloc<RECT>();
       GetClientRect(hwnd, rect);
       gameTick();
       draw(dc, rect.ref, x, y, width, height);
@@ -553,7 +553,7 @@ void main() {
 
   final className = TEXT('WinSnakeWindowClass');
 
-  final wc = zeroAllocate<WNDCLASS>()
+  final wc = calloc<WNDCLASS>()
     ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
     ..ref.hInstance = hInstance
     ..ref.lpszClassName = className;
@@ -584,7 +584,7 @@ void main() {
       while (isRunning) {
         // Run the message loop.
 
-        final msg = zeroAllocate<MSG>();
+        final msg = calloc<MSG>();
         while (PeekMessage(msg, 0, 0, 0, PM_REMOVE) != 0) {
           if (msg.ref.message == WM_QUIT) {
             isRunning = false;
@@ -595,7 +595,7 @@ void main() {
         free(msg);
 
         final dc = GetDC(hWnd);
-        final rect = zeroAllocate<RECT>();
+        final rect = calloc<RECT>();
 
         GetClientRect(hWnd, rect);
 

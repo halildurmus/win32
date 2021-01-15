@@ -19,7 +19,7 @@ class NotepadFind {
   NotepadFind() {
     szFindText = Utf16String(MAX_STRING_LEN);
     szReplText = Utf16String(MAX_STRING_LEN);
-    find = zeroAllocate<FINDREPLACE>();
+    find = calloc<FINDREPLACE>();
   }
 
   int showFindDialog(int hwnd) {
@@ -72,8 +72,7 @@ class NotepadFind {
   }
 
   bool findNextTextInEditWindow(int hwndEdit, Pointer<Uint32> piSearchOffset) {
-    final fr = zeroAllocate<FINDREPLACE>()
-      ..ref.lpstrFindWhat = szFindText.pointer;
+    final fr = calloc<FINDREPLACE>()..ref.lpstrFindWhat = szFindText.pointer;
 
     return findTextInEditWindow(hwndEdit, piSearchOffset, fr);
   }

@@ -8,7 +8,7 @@ import 'package:win32/win32.dart';
 
 void main() {
   test('Variant creation', () {
-    final variant = zeroAllocate<VARIANT>();
+    final variant = calloc<VARIANT>();
     VariantInit(variant);
     expect(variant.ref.vt, equals(VARENUM.VT_EMPTY));
     free(variant);

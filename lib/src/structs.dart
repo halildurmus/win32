@@ -33,7 +33,7 @@ import 'extensions/unpack_utf16.dart';
 import 'kernel32.dart';
 import 'oleaut32.dart';
 
-Pointer<T> zeroAllocate<T extends NativeType>({int count = 1}) {
+Pointer<T> calloc<T extends NativeType>({int count = 1}) {
   final totalSize = count * sizeOf<T>();
   final heap = GetProcessHeap();
 
@@ -232,7 +232,7 @@ class STARTUPINFO extends Struct {
   external int hStdError;
 
   factory STARTUPINFO.allocate() =>
-      zeroAllocate<STARTUPINFO>().ref..cb = sizeOf<STARTUPINFO>();
+      calloc<STARTUPINFO>().ref..cb = sizeOf<STARTUPINFO>();
 }
 
 // typedef struct tagBIND_OPTS
@@ -386,7 +386,7 @@ class STARTUPINFOEX extends Struct {
   external Pointer lpAttributeList;
 
   factory STARTUPINFOEX.allocate() =>
-      zeroAllocate<STARTUPINFOEX>().ref..cb = sizeOf<STARTUPINFOEX>();
+      calloc<STARTUPINFOEX>().ref..cb = sizeOf<STARTUPINFOEX>();
 }
 
 // typedef struct _SECURITY_ATTRIBUTES {
@@ -510,7 +510,7 @@ class VARIANT extends Struct {
 
   bool get isPointer => vt & VARENUM.VT_PTR == VARENUM.VT_PTR;
 
-  factory VARIANT.allocate() => zeroAllocate<VARIANT>().ref;
+  factory VARIANT.allocate() => calloc<VARIANT>().ref;
 
   factory VARIANT.fromPointer(Pointer ptr) => VARIANT.allocate()
     ..vt = VARENUM.VT_PTR
@@ -569,7 +569,7 @@ class MONITORINFO extends Struct {
   external int dwFlags;
 
   factory MONITORINFO.allocate() =>
-      zeroAllocate<MONITORINFO>().ref..cbSize = sizeOf<MONITORINFO>();
+      calloc<MONITORINFO>().ref..cbSize = sizeOf<MONITORINFO>();
 }
 
 const PHYSICAL_MONITOR_DESCRIPTION_SIZE = 128;
@@ -637,7 +637,7 @@ class CHOOSECOLOR extends Struct {
   external Pointer<Uint16> lpTemplateName;
 
   factory CHOOSECOLOR.allocate() =>
-      zeroAllocate<CHOOSECOLOR>().ref..lStructSize = sizeOf<CHOOSECOLOR>();
+      calloc<CHOOSECOLOR>().ref..lStructSize = sizeOf<CHOOSECOLOR>();
 }
 
 // typedef struct tagFINDREPLACEW {
@@ -1579,7 +1579,7 @@ class SHELLEXECUTEINFO extends Struct {
   external int hProcess;
 
   factory SHELLEXECUTEINFO.allocate() =>
-      zeroAllocate<SHELLEXECUTEINFO>().ref..cbSize = sizeOf<SHELLEXECUTEINFO>();
+      calloc<SHELLEXECUTEINFO>().ref..cbSize = sizeOf<SHELLEXECUTEINFO>();
 }
 
 // typedef struct _SHQUERYRBINFO {
@@ -1602,7 +1602,7 @@ class SHQUERYRBINFO extends Struct {
   external int i64NumItems;
 
   factory SHQUERYRBINFO.allocate() =>
-      zeroAllocate<SHQUERYRBINFO>().ref..cbSize = sizeOf<SHQUERYRBINFO>();
+      calloc<SHQUERYRBINFO>().ref..cbSize = sizeOf<SHQUERYRBINFO>();
 }
 
 // *** COM STRUCTS ***
@@ -1812,7 +1812,7 @@ class BITMAPINFO extends Struct {
   @Uint8()
   external int rgbReserved;
 
-  factory BITMAPINFO.allocate() => zeroAllocate<BITMAPINFO>().ref..biSize = 44;
+  factory BITMAPINFO.allocate() => calloc<BITMAPINFO>().ref..biSize = 44;
 }
 
 // typedef struct tagBITMAP {
@@ -1913,7 +1913,7 @@ class BITMAPINFOHEADER extends Struct {
   external int biClrImportant;
 
   factory BITMAPINFOHEADER.allocate() =>
-      zeroAllocate<BITMAPINFOHEADER>().ref..biSize = sizeOf<BITMAPINFOHEADER>();
+      calloc<BITMAPINFOHEADER>().ref..biSize = sizeOf<BITMAPINFOHEADER>();
 }
 
 // typedef struct tagPALETTEENTRY {
@@ -2205,9 +2205,8 @@ class INITCOMMONCONTROLSEX extends Struct {
   @Uint32()
   external int dwICC;
 
-  factory INITCOMMONCONTROLSEX.allocate() =>
-      zeroAllocate<INITCOMMONCONTROLSEX>().ref
-        ..dwSize = sizeOf<INITCOMMONCONTROLSEX>();
+  factory INITCOMMONCONTROLSEX.allocate() => calloc<INITCOMMONCONTROLSEX>().ref
+    ..dwSize = sizeOf<INITCOMMONCONTROLSEX>();
 }
 
 class DLGTEMPLATE extends Struct {
@@ -2252,7 +2251,7 @@ class DLGITEMTEMPLATE extends Struct {
   // sizeOf returns 20, because Dart over-allocates to DWORD boundaries. Instead
   // we allocate the *actual* size of this.
   factory DLGITEMTEMPLATE.allocate() =>
-      zeroAllocate<Uint8>(count: 18).cast<DLGITEMTEMPLATE>().ref;
+      calloc<Uint8>(count: 18).cast<DLGITEMTEMPLATE>().ref;
 }
 
 // typedef struct _TASKDIALOGCONFIG {
@@ -2348,7 +2347,7 @@ class TASKDIALOGCONFIG extends Struct {
   external int cxWidth;
 
   factory TASKDIALOGCONFIG.allocate() =>
-      zeroAllocate<TASKDIALOGCONFIG>().ref..cbSize = sizeOf<TASKDIALOGCONFIG>();
+      calloc<TASKDIALOGCONFIG>().ref..cbSize = sizeOf<TASKDIALOGCONFIG>();
 }
 
 // typedef struct _TASKDIALOG_BUTTON
@@ -2394,7 +2393,7 @@ class DLLVERSIONINFO extends Struct {
   external int dwPlatformID;
 
   factory DLLVERSIONINFO.allocate() =>
-      zeroAllocate<DLLVERSIONINFO>().ref..cbSize = sizeOf<DLLVERSIONINFO>();
+      calloc<DLLVERSIONINFO>().ref..cbSize = sizeOf<DLLVERSIONINFO>();
 }
 
 // typedef struct _OSVERSIONINFOW {
@@ -2490,17 +2489,15 @@ class OSVERSIONINFO extends Struct {
   external int _data29;
   @Uint64()
   external int _data30;
-  @Uint64()
-  external int _data31;
-
-  String get szCSDVersion =>
-      addressOf.cast<Uint8>().elementAt(20).cast<Utf16>().unpackString(128);
 
   factory OSVERSIONINFO.allocate() =>
-      zeroAllocate<Uint8>(count: _OSVERSIONINFO_STRUCT_SIZE)
-          .cast<OSVERSIONINFO>()
-          .ref
+      calloc<Uint8>(count: _OSVERSIONINFO_STRUCT_SIZE).cast<OSVERSIONINFO>().ref
         ..dwOSVersionInfoSize = _OSVERSIONINFO_STRUCT_SIZE;
+}
+
+extension PointerOSVERSIONINFOExtension on Pointer<OSVERSIONINFO> {
+  String get szCSDVersion =>
+      cast<Uint8>().elementAt(20).cast<Utf16>().unpackString(128);
 }
 
 // typedef struct _SYSTEMTIME {
@@ -2579,8 +2576,7 @@ class BLUETOOTH_DEVICE_INFO extends Struct {
       .unpackString(BLUETOOTH_MAX_NAME_SIZE);
 
   factory BLUETOOTH_DEVICE_INFO.allocate() =>
-      zeroAllocate<Uint8>(count: 560).cast<BLUETOOTH_DEVICE_INFO>().ref
-        ..dwSize = 560;
+      calloc<Uint8>(count: 560).cast<BLUETOOTH_DEVICE_INFO>().ref..dwSize = 560;
 }
 
 // typedef struct _BLUETOOTH_DEVICE_SEARCH_PARAMS {
@@ -2617,7 +2613,7 @@ class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
   external int hRadio;
 
   factory BLUETOOTH_DEVICE_SEARCH_PARAMS.allocate() =>
-      zeroAllocate<BLUETOOTH_DEVICE_SEARCH_PARAMS>().ref
+      calloc<BLUETOOTH_DEVICE_SEARCH_PARAMS>().ref
         ..dwSize = sizeOf<BLUETOOTH_DEVICE_SEARCH_PARAMS>();
 }
 
@@ -2634,7 +2630,7 @@ class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
   external int dwSize;
 
   factory BLUETOOTH_FIND_RADIO_PARAMS.allocate() =>
-      zeroAllocate<BLUETOOTH_FIND_RADIO_PARAMS>().ref
+      calloc<BLUETOOTH_FIND_RADIO_PARAMS>().ref
         ..dwSize = sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>();
 }
 
@@ -2671,9 +2667,7 @@ class BLUETOOTH_PIN_INFO extends Struct {
 
   factory BLUETOOTH_PIN_INFO.allocate() {
     const structSize = BTH_MAX_PIN_SIZE + 1;
-    return zeroAllocate<Uint8>(count: structSize)
-        .cast<BLUETOOTH_PIN_INFO>()
-        .ref;
+    return calloc<Uint8>(count: structSize).cast<BLUETOOTH_PIN_INFO>().ref;
   }
 }
 
@@ -2698,7 +2692,7 @@ class BLUETOOTH_OOB_DATA_INFO extends Struct {
       addressOf.cast<Uint8>().elementAt(16).asTypedList(16).setAll(0, value);
 
   factory BLUETOOTH_OOB_DATA_INFO.allocate() =>
-      zeroAllocate<Uint8>(count: 32).cast<BLUETOOTH_OOB_DATA_INFO>().ref;
+      calloc<Uint8>(count: 32).cast<BLUETOOTH_OOB_DATA_INFO>().ref;
 }
 
 // typedef struct COR_FIELD_OFFSET
@@ -2995,43 +2989,43 @@ extension PointerWIN32_FIND_DATAExtension on Pointer<WIN32_FIND_DATA> {
 /// Describes an exception that occurred during IDispatch::Invoke.
 ///
 /// {@category Struct}
-class EXCEPINFO extends Struct {}
+class EXCEPINFO extends Opaque {}
 
 /// Specifies the FMTID/PID identifier that programmatically identifies a
 /// property. Replaces SHCOLUMNID.
 ///
 /// {@category Struct}
-class PROPERTYKEY extends Struct {}
+class PROPERTYKEY extends Opaque {}
 
 /// The PROPVARIANT structure is used in the ReadMultiple and WriteMultiple
 /// methods of IPropertyStorage to define the type tag and the value of a
 /// property in a property set.
 ///
 /// {@category Struct}
-class PROPVARIANT extends Struct {}
+class PROPVARIANT extends Opaque {}
 
 /// Represents a safe array.
 ///
 /// {@category Struct}
-class SAFEARRAY extends Struct {}
+class SAFEARRAY extends Opaque {}
 
 /// A CLSID is a globally unique identifier that identifies a COM class object.
 /// If your server or container allows linking to its embedded objects, you need
 /// to register a CLSID for each supported class of objects.
 ///
 /// {@category Struct}
-class CLSID extends Struct {}
+class CLSID extends Opaque {}
 
 /// The STATSTG structure contains statistical data about an open storage,
 /// stream, or byte-array object. This structure is used in the IEnumSTATSTG,
 /// ILockBytes, IStorage, and IStream interfaces.
 ///
 /// {@category Struct}
-class STATSTG extends Struct {}
+class STATSTG extends Opaque {}
 
 /// Used to specify values that are used by SetSimulatedProfileInfo to override
 /// current internet connection profile values in an RDP Child Session to
 /// support the simulation of specific metered internet connection conditions.
 ///
 /// {@category Struct}
-class NLM_SIMULATED_PROFILE_INFO extends Struct {}
+class NLM_SIMULATED_PROFILE_INFO extends Opaque {}

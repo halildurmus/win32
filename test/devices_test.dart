@@ -22,7 +22,7 @@ void main() {
   });
 
   test('Power management API', () {
-    final powerStatus = zeroAllocate<SYSTEM_POWER_STATUS>();
+    final powerStatus = calloc<SYSTEM_POWER_STATUS>();
 
     final result = GetSystemPowerStatus(powerStatus);
 
@@ -38,7 +38,7 @@ void main() {
   });
 
   test('CallNtPowerInformation() sanity check', () {
-    final batteryStatus = zeroAllocate<SYSTEM_BATTERY_STATE>();
+    final batteryStatus = calloc<SYSTEM_BATTERY_STATE>();
 
     final result = CallNtPowerInformation(
         POWER_INFORMATION_LEVEL.SystemBatteryState,

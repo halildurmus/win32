@@ -19,7 +19,7 @@ void captureImage(int hwnd) {
   final hdcWindow = GetDC(hwnd);
 
   final hdcMemDC = CreateCompatibleDC(hdcWindow);
-  final bmpScreen = zeroAllocate<BITMAP>();
+  final bmpScreen = calloc<BITMAP>();
 
   try {
     if (hdcMemDC == 0) {
@@ -28,7 +28,7 @@ void captureImage(int hwnd) {
       return;
     }
 
-    final rcClient = zeroAllocate<RECT>();
+    final rcClient = calloc<RECT>();
     GetClientRect(hwnd, rcClient);
 
     SetStretchBltMode(hdcWindow, HALFTONE);
@@ -58,8 +58,8 @@ void captureImage(int hwnd) {
 
     GetObject(hbmScreen, sizeOf<BITMAP>(), bmpScreen);
 
-    final bitmapFileHeader = zeroAllocate<BITMAPFILEHEADER>();
-    final bitmapInfoHeader = zeroAllocate<BITMAPINFOHEADER>()
+    final bitmapFileHeader = calloc<BITMAPFILEHEADER>();
+    final bitmapInfoHeader = calloc<BITMAPINFOHEADER>()
       ..ref.biSize = sizeOf<BITMAPINFOHEADER>()
       ..ref.biWidth = bmpScreen.ref.bmWidth
       ..ref.biHeight = bmpScreen.ref.bmHeight
@@ -118,7 +118,7 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
       return 0;
 
     case WM_PAINT:
-      final ps = zeroAllocate<PAINTSTRUCT>();
+      final ps = calloc<PAINTSTRUCT>();
       BeginPaint(hWnd, ps);
       captureImage(hWnd);
       EndPaint(hWnd, ps);
@@ -133,7 +133,7 @@ void main() {
   // Register the window class.
   final className = TEXT('GDI Image Capture');
 
-  final wc = zeroAllocate<WNDCLASS>()
+  final wc = calloc<WNDCLASS>()
     ..ref.style = CS_HREDRAW | CS_VREDRAW
     ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
     ..ref.hInstance = hInstance
@@ -169,7 +169,7 @@ void main() {
   UpdateWindow(hWnd);
 
   // Run the message loop
-  final msg = zeroAllocate<MSG>();
+  final msg = calloc<MSG>();
   while (GetMessage(msg, NULL, 0, 0) != FALSE) {
     TranslateMessage(msg);
     DispatchMessage(msg);

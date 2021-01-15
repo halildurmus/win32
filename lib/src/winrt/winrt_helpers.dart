@@ -83,7 +83,7 @@ Pointer<IntPtr> CreateObject(String className, String iid) {
   }
 
   // Create an IID for the interface required
-  final riidCalendar = zeroAllocate<GUID>();
+  final riidCalendar = calloc<GUID>();
   hr = IIDFromString(TEXT(iid), riidCalendar);
   if (FAILED(hr)) {
     throw WindowsException(hr);

@@ -18,7 +18,7 @@ void main() {
 
     final CLASS_NAME = TEXT('CLASS_NAME');
 
-    final wc = zeroAllocate<WNDCLASS>()
+    final wc = calloc<WNDCLASS>()
       ..ref.style = CS_HREDRAW | CS_VREDRAW
       ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(MainWindowProc, 0)
       ..ref.hInstance = hInstance

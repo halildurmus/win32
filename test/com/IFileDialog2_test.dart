@@ -15,7 +15,7 @@ import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
 void main() {
-  final ptr = zeroAllocate<COMObject>();
+  final ptr = calloc<COMObject>();
 
   final filedialog2 = IFileDialog2(ptr);
   test('Can instantiate IFileDialog2.SetCancelButtonLabel', () {

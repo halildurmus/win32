@@ -257,9 +257,9 @@ class $className extends $name {
   $className(Pointer<COMObject> ptr) : super(ptr);
 
   factory $className.createInstance() {
-    final ptr = zeroAllocate<COMObject>();
-    final clsid = zeroAllocate<GUID>()..setGUID(CLSID_$className);
-    final iid = zeroAllocate<GUID>()..setGUID(IID_$name);
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..setGUID(CLSID_$className);
+    final iid = calloc<GUID>()..setGUID(IID_$name);
 
     try {
       final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());

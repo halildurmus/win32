@@ -18,7 +18,8 @@ bool testFlag(int value, int attribute) => value & attribute == attribute;
 /// applications not manifested for Windows 8.1 or Windows 10 will return the
 /// Windows 8 OS version value (6.2).
 bool isWindowsVersionAtLeast(int majorVersion, int minorVersion) {
-  final versionInfo = zeroAllocate<OSVERSIONINFO>();
+  final versionInfo = calloc<OSVERSIONINFO>();
+  versionInfo.ref.dwOSVersionInfoSize = sizeOf<OSVERSIONINFO>();
 
   try {
     final result = GetVersionEx(versionInfo);
@@ -149,7 +150,7 @@ Object getRegistryValue(int key, String subKey, String valueName) {
 /// documentation, here:
 /// https://docs.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status
 void printPowerInfo() {
-  final powerStatus = zeroAllocate<SYSTEM_POWER_STATUS>();
+  final powerStatus = calloc<SYSTEM_POWER_STATUS>();
 
   try {
     final result = GetSystemPowerStatus(powerStatus);
@@ -197,7 +198,7 @@ void printPowerInfo() {
 /// report more detailed system battery status from the power management
 /// library.
 void printBatteryStatusInfo() {
-  final batteryStatus = zeroAllocate<SYSTEM_BATTERY_STATE>();
+  final batteryStatus = calloc<SYSTEM_BATTERY_STATE>();
 
   try {
     final result = CallNtPowerInformation(

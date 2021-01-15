@@ -80,9 +80,9 @@ class WbemLocator extends IWbemLocator {
   WbemLocator(Pointer<COMObject> ptr) : super(ptr);
 
   factory WbemLocator.createInstance() {
-    final ptr = zeroAllocate<COMObject>();
-    final clsid = zeroAllocate<GUID>()..setGUID(CLSID_WbemLocator);
-    final iid = zeroAllocate<GUID>()..setGUID(IID_IWbemLocator);
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..setGUID(CLSID_WbemLocator);
+    final iid = calloc<GUID>()..setGUID(IID_IWbemLocator);
 
     try {
       final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());

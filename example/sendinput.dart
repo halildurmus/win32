@@ -17,7 +17,7 @@ void main() {
   Sleep(1000);
 
   print('Sending the "A" key and the Unicode character "€".');
-  final kbd = zeroAllocate<INPUT>();
+  final kbd = calloc<INPUT>();
   kbd.ref.type = INPUT_KEYBOARD;
   kbd.ki.wVk = VK_A;
   var result = SendInput(1, kbd, sizeOf<INPUT>());
@@ -40,7 +40,7 @@ void main() {
   free(kbd);
 
   print('Sending a right-click mouse event.');
-  final mouse = zeroAllocate<INPUT>();
+  final mouse = calloc<INPUT>();
   mouse.ref.type = INPUT_MOUSE;
   mouse.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
   result = SendInput(1, mouse, sizeOf<INPUT>());

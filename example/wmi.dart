@@ -40,10 +40,10 @@ void main() {
 
   // Obtain the initial locator to Windows Management
   // on a particular host computer.
-  final pLoc = IWbemLocator(zeroAllocate<COMObject>());
+  final pLoc = IWbemLocator(calloc<COMObject>());
 
-  final clsid = zeroAllocate<GUID>()..setGUID(CLSID_WbemLocator);
-  final iid = zeroAllocate<GUID>()..setGUID(IID_IWbemLocator);
+  final clsid = calloc<GUID>()..setGUID(CLSID_WbemLocator);
+  final iid = calloc<GUID>()..setGUID(IID_IWbemLocator);
 
   hr = CoCreateInstance(
       clsid, nullptr, CLSCTX_INPROC_SERVER, iid, pLoc.ptr.cast());
@@ -153,7 +153,7 @@ void main() {
       // A VARIANT is a union struct, which can't be directly represented by
       // FFI yet. In this case we know that the VARIANT can only contain a BSTR
       // so we are able to use a specialized variant.
-      final vtProp = zeroAllocate<VARIANT>();
+      final vtProp = calloc<VARIANT>();
       hr = clsObj.Get(TEXT('Name'), 0, vtProp, nullptr, nullptr);
       if (SUCCEEDED(hr)) {
         print('Process: ${vtProp.ref.ptr.cast<Utf16>().unpackString(256)}');

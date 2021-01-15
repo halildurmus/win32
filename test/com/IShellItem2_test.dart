@@ -15,7 +15,7 @@ import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
 void main() {
-  final ptr = zeroAllocate<COMObject>();
+  final ptr = calloc<COMObject>();
 
   final shellitem2 = IShellItem2(ptr);
   test('Can instantiate IShellItem2.GetPropertyStore', () {

@@ -17,7 +17,7 @@ String toHexColor(int color) => '0x'
 void main() {
   // Allocates memory on the native heap for the struct that will be used to
   // configure the dialog box and return values
-  final cc = zeroAllocate<CHOOSECOLOR>();
+  final cc = calloc<CHOOSECOLOR>();
   final custColors = allocate<Uint32>(count: 16);
 
   // Default color is mid-gray

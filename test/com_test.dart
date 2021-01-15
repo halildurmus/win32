@@ -9,11 +9,11 @@ import 'package:win32/win32.dart';
 
 void main() {
   test('GUID creation', () {
-    final guid = zeroAllocate<GUID>();
+    final guid = calloc<GUID>();
     final hr = CoCreateGuid(guid);
     expect(hr, equals(S_OK));
 
-    final guid2 = zeroAllocate<GUID>()..setGUID(guid.ref.toString());
+    final guid2 = calloc<GUID>()..setGUID(guid.ref.toString());
     expect(guid.ref.toString(), equals(guid2.ref.toString()));
 
     free(guid2);
@@ -23,13 +23,12 @@ void main() {
   test('GUID creation failure', () {
     // Note the rogue 'X' here
     expect(
-        () => zeroAllocate<GUID>()
-          ..setGUID('{X161CA9B-9409-4A77-7327-8B8D3363C6B9}'),
+        () => calloc<GUID>()..setGUID('{X161CA9B-9409-4A77-7327-8B8D3363C6B9}'),
         throwsFormatException);
   });
 
   test('CLSIDFromString', () {
-    final guid = zeroAllocate<GUID>();
+    final guid = calloc<GUID>();
     final hr = CLSIDFromString(TEXT(CLSID_FileSaveDialog), guid);
     expect(hr, equals(S_OK));
 
@@ -39,7 +38,7 @@ void main() {
   });
 
   test('IIDFromString', () {
-    final guid = zeroAllocate<GUID>();
+    final guid = calloc<GUID>();
     final hr = IIDFromString(TEXT(IID_IShellItem2), guid);
     expect(hr, equals(S_OK));
 
@@ -62,9 +61,9 @@ void main() {
         nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
     expect(hr, equals(S_OK));
 
-    final ptr = zeroAllocate<COMObject>();
-    final clsid = zeroAllocate<GUID>()..setGUID(CLSID_FileSaveDialog);
-    final iid = zeroAllocate<GUID>()..setGUID(IID_IFileSaveDialog);
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..setGUID(CLSID_FileSaveDialog);
+    final iid = calloc<GUID>()..setGUID(IID_IFileSaveDialog);
 
     hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
     expect(hr, equals(S_OK));
@@ -82,12 +81,11 @@ void main() {
         nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
     expect(hr, equals(S_OK));
 
-    final ptrFactory = zeroAllocate<COMObject>();
-    final ptrSaveDialog = zeroAllocate<COMObject>();
-    final clsid = zeroAllocate<GUID>()..setGUID(CLSID_FileSaveDialog);
-    final iidClassFactory = zeroAllocate<GUID>()..setGUID(IID_IClassFactory);
-    final iidFileSaveDialog = zeroAllocate<GUID>()
-      ..setGUID(IID_IFileSaveDialog);
+    final ptrFactory = calloc<COMObject>();
+    final ptrSaveDialog = calloc<COMObject>();
+    final clsid = calloc<GUID>()..setGUID(CLSID_FileSaveDialog);
+    final iidClassFactory = calloc<GUID>()..setGUID(IID_IClassFactory);
+    final iidFileSaveDialog = calloc<GUID>()..setGUID(IID_IFileSaveDialog);
 
     hr = CoGetClassObject(
         clsid, CLSCTX_ALL, nullptr, iidClassFactory, ptrFactory.cast());

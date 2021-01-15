@@ -14,8 +14,8 @@ String toHex(int value32) =>
     '0x${value32.toUnsigned(32).toRadixString(16).padLeft(8, '0')}';
 
 void findBluetoothDevices(int btRadioHandle) {
-  final params = zeroAllocate<BLUETOOTH_DEVICE_SEARCH_PARAMS>();
-  final info = zeroAllocate<BLUETOOTH_DEVICE_INFO>();
+  final params = calloc<BLUETOOTH_DEVICE_SEARCH_PARAMS>();
+  final info = calloc<BLUETOOTH_DEVICE_INFO>();
 
   final firstDeviceHandle = BluetoothFindFirstDevice(params, info);
 
@@ -31,7 +31,7 @@ void findBluetoothDevices(int btRadioHandle) {
 }
 
 void main() {
-  final params = zeroAllocate<BLUETOOTH_FIND_RADIO_PARAMS>();
+  final params = calloc<BLUETOOTH_FIND_RADIO_PARAMS>();
   final btRadioHandlePtr = allocate<IntPtr>();
 
   final btFindRadioHandle = BluetoothFindFirstRadio(params, btRadioHandlePtr);

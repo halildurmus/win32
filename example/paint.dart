@@ -24,9 +24,9 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       return 0;
 
     case WM_PAINT:
-      final ps = zeroAllocate<PAINTSTRUCT>();
+      final ps = calloc<PAINTSTRUCT>();
       final hdc = BeginPaint(hwnd, ps);
-      final rect = zeroAllocate<RECT>();
+      final rect = calloc<RECT>();
 
       GetClientRect(hwnd, rect);
       for (var i = 1; i <= 20; i++) {
@@ -55,7 +55,7 @@ void main() {
 
   final className = TEXT('Simple Paint Sample');
 
-  final wc = zeroAllocate<WNDCLASS>()
+  final wc = calloc<WNDCLASS>()
     ..ref.style = CS_HREDRAW | CS_VREDRAW
     ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
     ..ref.hInstance = hInstance
@@ -93,7 +93,7 @@ void main() {
 
   // Run the message loop.
 
-  final msg = zeroAllocate<MSG>();
+  final msg = calloc<MSG>();
   while (GetMessage(msg, NULL, 0, 0) != 0) {
     TranslateMessage(msg);
     DispatchMessage(msg);

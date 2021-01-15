@@ -13,7 +13,7 @@ class DrawEngine {
   int hwnd;
 
   /// rectangle for drawing
-  final rect = zeroAllocate<RECT>();
+  final rect = calloc<RECT>();
 
   /// level width
   int width;

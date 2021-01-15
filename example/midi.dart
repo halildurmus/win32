@@ -14,7 +14,7 @@ import 'package:win32/win32.dart';
 void main() {
   // Open the device by specifying the device and filename.
   // MCI will attempt to choose the MIDI mapper as the output port.
-  final mciOpenParams = zeroAllocate<MCI_OPEN_PARMS>()
+  final mciOpenParams = calloc<MCI_OPEN_PARMS>()
     ..ref.lpstrDeviceType = TEXT('sequencer')
     ..ref.lpstrElementName = TEXT(r'c:\Windows\Media\flourish.mid');
 
@@ -31,7 +31,7 @@ void main() {
   final deviceID = mciOpenParams.ref.wDeviceID;
 
   // Check if the output port is the MIDI mapper.
-  final mciStatusParams = zeroAllocate<MCI_STATUS_PARMS>()
+  final mciStatusParams = calloc<MCI_STATUS_PARMS>()
     ..ref.dwItem = MCI_SEQ_STATUS_PORT;
 
   dwReturn = mciSendCommand(
@@ -57,7 +57,7 @@ void main() {
 
   // Begin playback. The command will not return until playback has finished,
   // unless Ctrl+Break is pressed.
-  final mciPlayParams = zeroAllocate<MCI_PLAY_PARMS>();
+  final mciPlayParams = calloc<MCI_PLAY_PARMS>();
   dwReturn =
       mciSendCommand(deviceID, MCI_PLAY, MCI_WAIT, mciPlayParams.address);
 

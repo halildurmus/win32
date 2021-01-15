@@ -61,7 +61,7 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       final hdc = GetDC(hwnd);
 
       // Extract font dimensions from the text metrics.
-      final tm = zeroAllocate<TEXTMETRIC>();
+      final tm = calloc<TEXTMETRIC>();
       GetTextMetrics(hdc, tm);
       xChar = tm.ref.tmAveCharWidth;
       xUpper = ((tm.ref.tmPitchAndFamily & 1 == 1 ? 3 : 2) * xChar / 2).floor();
@@ -86,7 +86,7 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       xClient = LOWORD(lParam);
 
       // Set the vertical scrolling range and page size
-      final si = zeroAllocate<SCROLLINFO>()
+      final si = calloc<SCROLLINFO>()
         ..ref.cbSize = sizeOf<SCROLLINFO>()
         ..ref.fMask = SIF_RANGE | SIF_PAGE
         ..ref.nMin = 0
@@ -107,7 +107,7 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       return 0;
 
     case WM_HSCROLL:
-      final si = zeroAllocate<SCROLLINFO>();
+      final si = calloc<SCROLLINFO>();
 
       // Get all the vertial scroll bar information.
       si.ref.cbSize = sizeOf<SCROLLINFO>();
@@ -161,7 +161,7 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       return 0;
 
     case WM_VSCROLL:
-      final si = zeroAllocate<SCROLLINFO>();
+      final si = calloc<SCROLLINFO>();
 
       // Get all the vertial scroll bar information.
       si.ref.cbSize = sizeOf<SCROLLINFO>();
@@ -227,8 +227,8 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       return 0;
 
     case WM_PAINT:
-      final ps = zeroAllocate<PAINTSTRUCT>();
-      final si = zeroAllocate<SCROLLINFO>();
+      final ps = calloc<PAINTSTRUCT>();
+      final si = calloc<SCROLLINFO>();
 
       // Prepare the window for painting.
       final hdc = BeginPaint(hwnd, ps);
@@ -275,7 +275,7 @@ void main() {
 
   final className = TEXT('Scrollbar Sample');
 
-  final wc = zeroAllocate<WNDCLASS>()
+  final wc = calloc<WNDCLASS>()
     ..ref.style = CS_HREDRAW | CS_VREDRAW
     ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
     ..ref.hInstance = hInstance
@@ -313,7 +313,7 @@ void main() {
 
   // Run the message loop.
 
-  final msg = zeroAllocate<MSG>();
+  final msg = calloc<MSG>();
   while (GetMessage(msg, NULL, 0, 0) != 0) {
     TranslateMessage(msg);
     DispatchMessage(msg);

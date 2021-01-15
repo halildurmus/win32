@@ -27,7 +27,7 @@ import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
 void main() {
-  final ptr = zeroAllocate<COMObject>();
+  final ptr = calloc<COMObject>();
 
   final ${interface.name!.substring(1).toLowerCase()} = ${interface.name!}(ptr);
 ''');

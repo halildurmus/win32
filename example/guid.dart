@@ -10,7 +10,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main() {
-  final guid = zeroAllocate<GUID>();
+  final guid = calloc<GUID>();
 
   final hr = CoCreateGuid(guid);
   if (SUCCEEDED(hr)) {

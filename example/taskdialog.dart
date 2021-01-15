@@ -75,7 +75,7 @@ void showCustomTaskDialog() {
         'Take the red pill\nYou stay in Wonderland, and I show you how deep '
         'the rabbit hole goes.');
 
-  final config = zeroAllocate<TASKDIALOGCONFIG>()
+  final config = calloc<TASKDIALOGCONFIG>()
     ..ref.pszWindowTitle = TEXT('TaskDialogIndirect Sample')
     ..ref.pszMainInstruction = TEXT('Which pill will you take?')
     ..ref.pszContent =

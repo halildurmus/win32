@@ -195,9 +195,9 @@ class DesktopWallpaper extends IDesktopWallpaper {
   DesktopWallpaper(Pointer<COMObject> ptr) : super(ptr);
 
   factory DesktopWallpaper.createInstance() {
-    final ptr = zeroAllocate<COMObject>();
-    final clsid = zeroAllocate<GUID>()..setGUID(CLSID_DesktopWallpaper);
-    final iid = zeroAllocate<GUID>()..setGUID(IID_IDesktopWallpaper);
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..setGUID(CLSID_DesktopWallpaper);
+    final iid = calloc<GUID>()..setGUID(IID_IDesktopWallpaper);
 
     try {
       final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());

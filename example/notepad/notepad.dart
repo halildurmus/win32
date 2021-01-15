@@ -288,7 +288,7 @@ void main() {
   // Register the window class.
   final className = TEXT(APP_NAME);
 
-  final wc = zeroAllocate<WNDCLASS>()
+  final wc = calloc<WNDCLASS>()
     ..ref.style = CS_HREDRAW | CS_VREDRAW
     ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
     ..ref.hInstance = hInstance
@@ -329,7 +329,7 @@ void main() {
 
   // Run the message loop.
 
-  final msg = zeroAllocate<MSG>();
+  final msg = calloc<MSG>();
   while (GetMessage(msg, NULL, 0, 0) != 0) {
     // Translate dialog messages
     if ((hDlgModeless == NULL) ||

@@ -16,7 +16,7 @@ typedef getNativeSystemInfoDart = void Function(
     Pointer<SYSTEM_INFO> lpSystemInfo);
 
 void main() {
-  final systemInfo = zeroAllocate<SYSTEM_INFO>();
+  final systemInfo = calloc<SYSTEM_INFO>();
 
   final kernel32 = TEXT('kernel32.dll');
   final hModule = GetModuleHandle(kernel32);

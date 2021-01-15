@@ -8,7 +8,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 class NotepadFont {
-  final logfont = zeroAllocate<LOGFONT>();
+  final logfont = calloc<LOGFONT>();
   late int hFont;
 
   NotepadFont(int hwndEdit) {
@@ -20,7 +20,7 @@ class NotepadFont {
   }
 
   bool notepadChooseFont(int hwnd) {
-    final cf = zeroAllocate<CHOOSEFONT>()
+    final cf = calloc<CHOOSEFONT>()
       ..ref.lStructSize = sizeOf<CHOOSEFONT>()
       ..ref.hwndOwner = hwnd
       ..ref.lpLogFont = logfont
@@ -32,7 +32,7 @@ class NotepadFont {
 
   void notepadSetFont(int hwndEdit) {
     int hFontNew;
-    final rect = zeroAllocate<RECT>();
+    final rect = calloc<RECT>();
 
     hFontNew = CreateFontIndirect(logfont);
 

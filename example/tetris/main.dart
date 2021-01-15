@@ -20,7 +20,7 @@ late DrawEngine de;
 void main() {
   final szAppName = TEXT('Tetris');
 
-  final wc = zeroAllocate<WNDCLASS>()
+  final wc = calloc<WNDCLASS>()
     ..ref.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC
     ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
     ..ref.hInstance = hInstance
@@ -57,7 +57,7 @@ void main() {
 
   // Run the message loop.
 
-  final msg = zeroAllocate<MSG>();
+  final msg = calloc<MSG>();
   while (GetMessage(msg, NULL, 0, 0) != 0) {
     TranslateMessage(msg);
     DispatchMessage(msg);
@@ -68,7 +68,7 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
   int hdc;
   var result = 0;
 
-  final ps = zeroAllocate<PAINTSTRUCT>();
+  final ps = calloc<PAINTSTRUCT>();
 
   switch (uMsg) {
     case WM_CREATE:

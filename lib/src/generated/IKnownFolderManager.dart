@@ -162,9 +162,9 @@ class KnownFolderManager extends IKnownFolderManager {
   KnownFolderManager(Pointer<COMObject> ptr) : super(ptr);
 
   factory KnownFolderManager.createInstance() {
-    final ptr = zeroAllocate<COMObject>();
-    final clsid = zeroAllocate<GUID>()..setGUID(CLSID_KnownFolderManager);
-    final iid = zeroAllocate<GUID>()..setGUID(IID_IKnownFolderManager);
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..setGUID(CLSID_KnownFolderManager);
+    final iid = calloc<GUID>()..setGUID(IID_IKnownFolderManager);
 
     try {
       final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());

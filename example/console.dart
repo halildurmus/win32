@@ -57,20 +57,20 @@ void newLine() {
 }
 
 void scrollScreenBuffer(int handle, int x) {
-  final scrollRect = zeroAllocate<SMALL_RECT>()
+  final scrollRect = calloc<SMALL_RECT>()
     ..ref.Left = 0
     ..ref.Top = 1
     ..ref.Right = bufferInfo.ref.dwSize.X - x
     ..ref.Bottom = bufferInfo.ref.dwSize.Y - x;
 
   // The destination for the scroll rectangle is one row up.
-  final coordDest = zeroAllocate<COORD>()
+  final coordDest = calloc<COORD>()
     ..ref.X = 0
     ..ref.Y = 0;
 
   final clipRect = scrollRect;
 
-  final fillChar = zeroAllocate<CHAR_INFO>()
+  final fillChar = calloc<CHAR_INFO>()
     ..ref.Attributes = FOREGROUND_RED | FOREGROUND_INTENSITY
     ..ref.UnicodeChar = ' '.codeUnits.first;
 
@@ -83,7 +83,7 @@ void scrollScreenBuffer(int handle, int x) {
 }
 
 void main() {
-  bufferInfo = zeroAllocate<CONSOLE_SCREEN_BUFFER_INFO>();
+  bufferInfo = calloc<CONSOLE_SCREEN_BUFFER_INFO>();
   GetConsoleScreenBufferInfo(stdout, bufferInfo);
 
   print('Some console metrics:');

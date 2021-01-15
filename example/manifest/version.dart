@@ -3,7 +3,8 @@ import 'dart:ffi';
 import 'package:win32/win32.dart';
 
 void main() {
-  final osVersionInfo = zeroAllocate<OSVERSIONINFO>();
+  final osVersionInfo = calloc<OSVERSIONINFO>();
+  osVersionInfo.ref.dwOSVersionInfoSize = sizeOf<OSVERSIONINFO>();
 
   final result = GetVersionEx(osVersionInfo);
   if (result != 0) {

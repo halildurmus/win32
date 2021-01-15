@@ -17,7 +17,7 @@ void writeCredential(
   final examplePassword = utf8.encode(password) as Uint8List;
   final blob = examplePassword.allocatePointer();
 
-  final credential = zeroAllocate<CREDENTIAL>()
+  final credential = calloc<CREDENTIAL>()
     ..ref.Type = CRED_TYPE_GENERIC
     ..ref.TargetName = credNamePtr
     ..ref.Persist = CRED_PERSIST_LOCAL_MACHINE

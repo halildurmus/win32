@@ -20,7 +20,7 @@ class NotepadFile {
   late Pointer<OPENFILENAME> ofn;
 
   NotepadFile(int hwnd, this.path, this.title) {
-    ofn = zeroAllocate<OPENFILENAME>()
+    ofn = calloc<OPENFILENAME>()
       ..ref.lStructSize = sizeOf<OPENFILENAME>()
       ..ref.hwndOwner = hwnd
       ..ref.lpstrFilter = TEXT(
