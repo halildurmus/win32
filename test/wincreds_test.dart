@@ -17,21 +17,21 @@ void writeCredential(
   final examplePassword = utf8.encode(password) as Uint8List;
   final blob = examplePassword.allocatePointer();
 
-  final credential = CREDENTIAL.allocate()
-    ..Type = CRED_TYPE_GENERIC
-    ..TargetName = credNamePtr
-    ..Persist = CRED_PERSIST_LOCAL_MACHINE
-    ..UserName = userNamePtr
-    ..CredentialBlob = blob
-    ..CredentialBlobSize = examplePassword.length;
+  final credential = zeroAllocate<CREDENTIAL>()
+    ..ref.Type = CRED_TYPE_GENERIC
+    ..ref.TargetName = credNamePtr
+    ..ref.Persist = CRED_PERSIST_LOCAL_MACHINE
+    ..ref.UserName = userNamePtr
+    ..ref.CredentialBlob = blob
+    ..ref.CredentialBlobSize = examplePassword.length;
 
   try {
-    if (CredWrite(credential.addressOf, 0) != TRUE) {
+    if (CredWrite(credential, 0) != TRUE) {
       throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
     }
   } finally {
     free(blob);
-    free(credential.addressOf);
+    free(credential);
     free(userNamePtr);
     free(credNamePtr);
   }

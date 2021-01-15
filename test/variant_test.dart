@@ -8,10 +8,10 @@ import 'package:win32/win32.dart';
 
 void main() {
   test('Variant creation', () {
-    final variant = VARIANT.allocate();
-    VariantInit(variant.addressOf);
-    expect(variant.vt, equals(VARENUM.VT_EMPTY));
-    free(variant.addressOf);
+    final variant = zeroAllocate<VARIANT>();
+    VariantInit(variant);
+    expect(variant.ref.vt, equals(VARENUM.VT_EMPTY));
+    free(variant);
   });
 
   test('BSTR allocation', () {

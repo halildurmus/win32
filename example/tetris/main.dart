@@ -20,15 +20,15 @@ late DrawEngine de;
 void main() {
   final szAppName = TEXT('Tetris');
 
-  final wc = WNDCLASS.allocate();
-  wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-  wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0);
-  wc.hInstance = hInstance;
-  wc.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-  wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-  wc.hbrBackground = GetStockObject(BLACK_BRUSH);
-  wc.lpszClassName = szAppName;
-  RegisterClass(wc.addressOf);
+  final wc = zeroAllocate<WNDCLASS>()
+    ..ref.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC
+    ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
+    ..ref.hInstance = hInstance
+    ..ref.hIcon = LoadIcon(NULL, IDI_APPLICATION)
+    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+    ..ref.hbrBackground = GetStockObject(BLACK_BRUSH)
+    ..ref.lpszClassName = szAppName;
+  RegisterClass(wc);
 
   final hWnd = CreateWindowEx(
       0, // Optional window styles.
@@ -57,10 +57,10 @@ void main() {
 
   // Run the message loop.
 
-  final msg = MSG.allocate();
-  while (GetMessage(msg.addressOf, NULL, 0, 0) != 0) {
-    TranslateMessage(msg.addressOf);
-    DispatchMessage(msg.addressOf);
+  final msg = zeroAllocate<MSG>();
+  while (GetMessage(msg, NULL, 0, 0) != 0) {
+    TranslateMessage(msg);
+    DispatchMessage(msg);
   }
 }
 
@@ -68,7 +68,7 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
   int hdc;
   var result = 0;
 
-  final ps = PAINTSTRUCT.allocate();
+  final ps = zeroAllocate<PAINTSTRUCT>();
 
   switch (uMsg) {
     case WM_CREATE:
@@ -99,9 +99,9 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       break;
 
     case WM_PAINT:
-      hdc = BeginPaint(hwnd, ps.addressOf);
+      hdc = BeginPaint(hwnd, ps);
       game.repaint();
-      EndPaint(hwnd, ps.addressOf);
+      EndPaint(hwnd, ps);
       break;
 
     case WM_DESTROY:
@@ -113,7 +113,7 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       result = DefWindowProc(hwnd, uMsg, wParam, lParam);
   }
 
-  free(ps.addressOf);
+  free(ps);
 
   return result;
 }

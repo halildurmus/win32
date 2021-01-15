@@ -20,17 +20,16 @@ void main() {
   test('GetConsoleScreenBufferInfo', () {
     final outputHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 
-    final bufferInfo = CONSOLE_SCREEN_BUFFER_INFO.allocate();
-    final result =
-        GetConsoleScreenBufferInfo(outputHandle, bufferInfo.addressOf);
+    final bufferInfo = zeroAllocate<CONSOLE_SCREEN_BUFFER_INFO>();
+    final result = GetConsoleScreenBufferInfo(outputHandle, bufferInfo);
 
     // This will not be supported on a non-interactive console; skip the test if
     // so.
     if (result != FALSE) {
-      expect(bufferInfo.dwCursorPosition.X,
-          lessThanOrEqualTo(bufferInfo.dwSize.X));
-      expect(bufferInfo.dwCursorPosition.Y,
-          lessThanOrEqualTo(bufferInfo.dwSize.Y));
+      expect(bufferInfo.ref.dwCursorPosition.X,
+          lessThanOrEqualTo(bufferInfo.ref.dwSize.X));
+      expect(bufferInfo.ref.dwCursorPosition.Y,
+          lessThanOrEqualTo(bufferInfo.ref.dwSize.Y));
     }
   });
 

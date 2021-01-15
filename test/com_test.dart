@@ -9,14 +9,14 @@ import 'package:win32/win32.dart';
 
 void main() {
   test('GUID creation', () {
-    final guid = GUID.allocate();
-    final hr = CoCreateGuid(guid.addressOf);
+    final guid = zeroAllocate<GUID>();
+    final hr = CoCreateGuid(guid);
     expect(hr, equals(S_OK));
 
-    final guid2 = GUID.fromString(guid.toString());
-    expect(guid.toString(), equals(guid2.toString()));
+    final guid2 = GUID.fromString(guid.ref.toString());
+    expect(guid.ref.toString(), equals(guid2.toString()));
 
-    free(guid.addressOf);
+    free(guid);
     free(guid2.addressOf);
   });
 
@@ -27,13 +27,13 @@ void main() {
   });
 
   test('CLSIDFromString', () {
-    final guid = GUID.allocate();
-    final hr = CLSIDFromString(TEXT(CLSID_FileSaveDialog), guid.addressOf);
+    final guid = zeroAllocate<GUID>();
+    final hr = CLSIDFromString(TEXT(CLSID_FileSaveDialog), guid);
     expect(hr, equals(S_OK));
 
-    expect(guid.toString(), equalsIgnoringCase(CLSID_FileSaveDialog));
+    expect(guid.ref.toString(), equalsIgnoringCase(CLSID_FileSaveDialog));
 
-    free(guid.addressOf);
+    free(guid);
   });
 
   test('IIDFromString', () {

@@ -18,14 +18,14 @@ bool testFlag(int value, int attribute) => value & attribute == attribute;
 /// applications not manifested for Windows 8.1 or Windows 10 will return the
 /// Windows 8 OS version value (6.2).
 bool isWindowsVersionAtLeast(int majorVersion, int minorVersion) {
-  final versionInfo = OSVERSIONINFO.allocate();
+  final versionInfo = zeroAllocate<OSVERSIONINFO>();
 
   try {
-    final result = GetVersionEx(versionInfo.addressOf);
+    final result = GetVersionEx(versionInfo);
 
     if (result != 0) {
-      if (versionInfo.dwMajorVersion >= majorVersion) {
-        if (versionInfo.dwMinorVersion >= minorVersion) {
+      if (versionInfo.ref.dwMajorVersion >= majorVersion) {
+        if (versionInfo.ref.dwMinorVersion >= minorVersion) {
           return true;
         }
       }
@@ -34,7 +34,7 @@ bool isWindowsVersionAtLeast(int majorVersion, int minorVersion) {
       throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
     }
   } finally {
-    free(versionInfo.addressOf);
+    free(versionInfo);
   }
 }
 
@@ -149,37 +149,37 @@ Object getRegistryValue(int key, String subKey, String valueName) {
 /// documentation, here:
 /// https://docs.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status
 void printPowerInfo() {
-  final powerStatus = SYSTEM_POWER_STATUS.allocate();
+  final powerStatus = zeroAllocate<SYSTEM_POWER_STATUS>();
 
   try {
-    final result = GetSystemPowerStatus(powerStatus.addressOf);
+    final result = GetSystemPowerStatus(powerStatus);
     if (result != 0) {
       print('Power status from GetSystemPowerStatus():');
 
-      if (powerStatus.ACLineStatus == 0) {
+      if (powerStatus.ref.ACLineStatus == 0) {
         print(' - Disconnected from AC power.');
-      } else if (powerStatus.ACLineStatus == 1) {
+      } else if (powerStatus.ref.ACLineStatus == 1) {
         print(' - Connected to AC power.');
       } else {
         print(' - AC power status unknown.');
       }
 
-      if (testFlag(powerStatus.BatteryFlag, 128)) {
+      if (testFlag(powerStatus.ref.BatteryFlag, 128)) {
         print(' - No battery installed.');
       } else {
-        if (powerStatus.BatteryLifePercent == 255) {
+        if (powerStatus.ref.BatteryLifePercent == 255) {
           print(' - Battery status unknown.');
         } else {
           print(
-              ' - ${powerStatus.BatteryLifePercent}% percent battery remaining.');
+              ' - ${powerStatus.ref.BatteryLifePercent}% percent battery remaining.');
         }
 
-        if (powerStatus.BatteryLifeTime != 0xFFFFFFFF) {
+        if (powerStatus.ref.BatteryLifeTime != 0xFFFFFFFF) {
           print(
-              ' - ${powerStatus.BatteryLifeTime / 60} minutes of power estimated to remain.');
+              ' - ${powerStatus.ref.BatteryLifeTime / 60} minutes of power estimated to remain.');
         }
         // New in Windows 10, but should report 0 on older systems
-        if (powerStatus.SystemStatusFlag == 1) {
+        if (powerStatus.ref.SystemStatusFlag == 1) {
           print(' - Battery saver is on. Save energy where possible.');
         }
       }
@@ -187,7 +187,7 @@ void printPowerInfo() {
       throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
     }
   } finally {
-    free(powerStatus.addressOf);
+    free(powerStatus);
   }
 }
 
@@ -197,56 +197,56 @@ void printPowerInfo() {
 /// report more detailed system battery status from the power management
 /// library.
 void printBatteryStatusInfo() {
-  final batteryStatus = SYSTEM_BATTERY_STATE.allocate();
+  final batteryStatus = zeroAllocate<SYSTEM_BATTERY_STATE>();
 
   try {
     final result = CallNtPowerInformation(
         POWER_INFORMATION_LEVEL.SystemBatteryState,
         nullptr,
         0,
-        batteryStatus.addressOf,
+        batteryStatus,
         sizeOf<SYSTEM_BATTERY_STATE>());
 
     if (result == STATUS_SUCCESS) {
       print('Power status from CallNtPowerInformation():');
 
-      print(batteryStatus.AcOnLine == TRUE
+      print(batteryStatus.ref.AcOnLine == TRUE
           ? ' - System is currently operating on external power.'
           : ' - System is not currently operating on external power.');
 
-      print(batteryStatus.BatteryPresent == TRUE
+      print(batteryStatus.ref.BatteryPresent == TRUE
           ? ' - At least one battery is present in the system.'
           : ' - No batteries detected in the system.');
 
-      if (batteryStatus.BatteryPresent == TRUE) {
-        print(batteryStatus.Charging == TRUE
+      if (batteryStatus.ref.BatteryPresent == TRUE) {
+        print(batteryStatus.ref.Charging == TRUE
             ? ' - Battery is charging.'
             : ' - Battery is not charging.');
 
-        print(batteryStatus.Discharging == TRUE
+        print(batteryStatus.ref.Discharging == TRUE
             ? ' - Battery is discharging.'
             : ' - Battery is not discharging.');
 
         print(
-            ' - Theoretical max capacity of the battery is ${batteryStatus.MaxCapacity}.');
+            ' - Theoretical max capacity of the battery is ${batteryStatus.ref.MaxCapacity}.');
 
         print(
-            ' - Estimated remaining capacity of the battery is ${batteryStatus.RemainingCapacity}.');
+            ' - Estimated remaining capacity of the battery is ${batteryStatus.ref.RemainingCapacity}.');
 
         print(
-            ' - Charge/discharge rate of the battery is ${batteryStatus.EstimatedTime.abs()} mW.');
+            ' - Charge/discharge rate of the battery is ${batteryStatus.ref.EstimatedTime.abs()} mW.');
 
         print(
-            ' - Estimated time remaining on the battery is ${batteryStatus.EstimatedTime} seconds.');
+            ' - Estimated time remaining on the battery is ${batteryStatus.ref.EstimatedTime} seconds.');
 
         print(
-            ' - Manufacturer suggested low battery alert is at ${batteryStatus.DefaultAlert1} mWh.');
+            ' - Manufacturer suggested low battery alert is at ${batteryStatus.ref.DefaultAlert1} mWh.');
         print(
-            ' - Manufacturer suggested warning battery alert is at ${batteryStatus.DefaultAlert2} mWh.');
+            ' - Manufacturer suggested warning battery alert is at ${batteryStatus.ref.DefaultAlert2} mWh.');
       }
     }
   } finally {
-    free(batteryStatus.addressOf);
+    free(batteryStatus);
   }
 }
 
