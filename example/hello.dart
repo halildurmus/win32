@@ -18,18 +18,17 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
       return 0;
 
     case WM_PAINT:
-      final ps = PAINTSTRUCT.allocate();
-      final hdc = BeginPaint(hWnd, ps.addressOf);
-      final rect = RECT.allocate();
+      final ps = zeroAllocate<PAINTSTRUCT>();
+      final hdc = BeginPaint(hWnd, ps);
+      final rect = zeroAllocate<RECT>();
       final msg = TEXT('Hello, Dart!');
 
-      GetClientRect(hWnd, rect.addressOf);
-      DrawText(
-          hdc, msg, -1, rect.addressOf, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
-      EndPaint(hWnd, ps.addressOf);
+      GetClientRect(hWnd, rect);
+      DrawText(hdc, msg, -1, rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+      EndPaint(hWnd, ps);
 
-      free(ps.addressOf);
-      free(rect.addressOf);
+      free(ps);
+      free(rect);
       free(msg);
 
       return 0;
@@ -41,14 +40,14 @@ void main() {
   // Register the window class.
   final className = TEXT('Sample Window Class');
 
-  final wc = WNDCLASS.allocate();
-  wc.style = CS_HREDRAW | CS_VREDRAW;
-  wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0);
-  wc.hInstance = hInstance;
-  wc.lpszClassName = className;
-  wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-  wc.hbrBackground = GetStockObject(WHITE_BRUSH);
-  RegisterClass(wc.addressOf);
+  final wc = zeroAllocate<WNDCLASS>()
+    ..ref.style = CS_HREDRAW | CS_VREDRAW
+    ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
+    ..ref.hInstance = hInstance
+    ..ref.lpszClassName = className
+    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+    ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
+  RegisterClass(wc);
 
   // Create the window.
 
@@ -79,9 +78,9 @@ void main() {
 
   // Run the message loop.
 
-  final msg = MSG.allocate();
-  while (GetMessage(msg.addressOf, NULL, 0, 0) != 0) {
-    TranslateMessage(msg.addressOf);
-    DispatchMessage(msg.addressOf);
+  final msg = zeroAllocate<MSG>();
+  while (GetMessage(msg, NULL, 0, 0) != 0) {
+    TranslateMessage(msg);
+    DispatchMessage(msg);
   }
 }

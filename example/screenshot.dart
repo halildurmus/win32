@@ -19,7 +19,7 @@ void captureImage(int hwnd) {
   final hdcWindow = GetDC(hwnd);
 
   final hdcMemDC = CreateCompatibleDC(hdcWindow);
-  final bmpScreen = BITMAP.allocate();
+  final bmpScreen = zeroAllocate<BITMAP>();
 
   try {
     if (hdcMemDC == 0) {
@@ -28,8 +28,8 @@ void captureImage(int hwnd) {
       return;
     }
 
-    final rcClient = RECT.allocate();
-    GetClientRect(hwnd, rcClient.addressOf);
+    final rcClient = zeroAllocate<RECT>();
+    GetClientRect(hwnd, rcClient);
 
     SetStretchBltMode(hdcWindow, HALFTONE);
 
@@ -37,8 +37,8 @@ void captureImage(int hwnd) {
         hdcWindow,
         0,
         0,
-        rcClient.right,
-        rcClient.bottom,
+        rcClient.ref.right,
+        rcClient.ref.bottom,
         hdcScreen,
         0,
         0,
@@ -46,51 +46,54 @@ void captureImage(int hwnd) {
         GetSystemMetrics(SM_CYSCREEN),
         SRCCOPY);
 
-    final hbmScreen = CreateCompatibleBitmap(hdcWindow,
-        rcClient.right - rcClient.left, rcClient.bottom - rcClient.top);
+    final hbmScreen = CreateCompatibleBitmap(
+        hdcWindow,
+        rcClient.ref.right - rcClient.ref.left,
+        rcClient.ref.bottom - rcClient.ref.top);
 
     SelectObject(hdcMemDC, hbmScreen);
 
-    BitBlt(hdcMemDC, 0, 0, rcClient.right - rcClient.left,
-        rcClient.bottom - rcClient.top, hdcWindow, 0, 0, SRCCOPY);
+    BitBlt(hdcMemDC, 0, 0, rcClient.ref.right - rcClient.ref.left,
+        rcClient.ref.bottom - rcClient.ref.top, hdcWindow, 0, 0, SRCCOPY);
 
-    GetObject(hbmScreen, sizeOf<BITMAP>(), bmpScreen.addressOf);
+    GetObject(hbmScreen, sizeOf<BITMAP>(), bmpScreen);
 
-    final bitmapFileHeader = BITMAPFILEHEADER.allocate();
-    final bitmapInfoHeader = BITMAPINFOHEADER.allocate()
-      ..biSize = sizeOf<BITMAPINFOHEADER>()
-      ..biWidth = bmpScreen.bmWidth
-      ..biHeight = bmpScreen.bmHeight
-      ..biPlanes = 1
-      ..biBitCount = 32
-      ..biCompression = BI_RGB;
+    final bitmapFileHeader = zeroAllocate<BITMAPFILEHEADER>();
+    final bitmapInfoHeader = zeroAllocate<BITMAPINFOHEADER>()
+      ..ref.biSize = sizeOf<BITMAPINFOHEADER>()
+      ..ref.biWidth = bmpScreen.ref.bmWidth
+      ..ref.biHeight = bmpScreen.ref.bmHeight
+      ..ref.biPlanes = 1
+      ..ref.biBitCount = 32
+      ..ref.biCompression = BI_RGB;
 
-    final dwBmpSize = ((bmpScreen.bmWidth * bitmapInfoHeader.biBitCount + 31) /
-            32 *
-            4 *
-            bmpScreen.bmHeight)
-        .toInt();
+    final dwBmpSize =
+        ((bmpScreen.ref.bmWidth * bitmapInfoHeader.ref.biBitCount + 31) /
+                32 *
+                4 *
+                bmpScreen.ref.bmHeight)
+            .toInt();
 
     final lpBitmap = allocate<Uint8>(count: dwBmpSize);
 
-    GetDIBits(hdcWindow, hbmScreen, 0, bmpScreen.bmHeight, lpBitmap,
-        bitmapInfoHeader.addressOf.cast(), DIB_RGB_COLORS);
+    GetDIBits(hdcWindow, hbmScreen, 0, bmpScreen.ref.bmHeight, lpBitmap,
+        bitmapInfoHeader.cast(), DIB_RGB_COLORS);
 
     final hFile = CreateFile(TEXT('captureqwsz.bmp'), GENERIC_WRITE, 0, nullptr,
         CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
     final dwSizeOfDIB =
         dwBmpSize + sizeOf<BITMAPFILEHEADER>() + sizeOf<BITMAPINFOHEADER>();
-    bitmapFileHeader.bfOffBits =
+    bitmapFileHeader.ref.bfOffBits =
         sizeOf<BITMAPFILEHEADER>() + sizeOf<BITMAPINFOHEADER>();
 
-    bitmapFileHeader.bfSize = dwSizeOfDIB;
-    bitmapFileHeader.bfType = 0x4D42; // BM
+    bitmapFileHeader.ref.bfSize = dwSizeOfDIB;
+    bitmapFileHeader.ref.bfType = 0x4D42; // BM
 
     final dwBytesWritten = allocate<Uint32>();
-    WriteFile(hFile, bitmapFileHeader.addressOf, sizeOf<BITMAPFILEHEADER>(),
+    WriteFile(hFile, bitmapFileHeader, sizeOf<BITMAPFILEHEADER>(),
         dwBytesWritten, nullptr);
-    WriteFile(hFile, bitmapInfoHeader.addressOf, sizeOf<BITMAPINFOHEADER>(),
+    WriteFile(hFile, bitmapInfoHeader, sizeOf<BITMAPINFOHEADER>(),
         dwBytesWritten, nullptr);
     WriteFile(hFile, lpBitmap, dwBmpSize, dwBytesWritten, nullptr);
 
@@ -115,12 +118,12 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
       return 0;
 
     case WM_PAINT:
-      final ps = PAINTSTRUCT.allocate();
-      BeginPaint(hWnd, ps.addressOf);
+      final ps = zeroAllocate<PAINTSTRUCT>();
+      BeginPaint(hWnd, ps);
       captureImage(hWnd);
-      EndPaint(hWnd, ps.addressOf);
+      EndPaint(hWnd, ps);
 
-      free(ps.addressOf);
+      free(ps);
       return 0;
   }
   return DefWindowProc(hWnd, uMsg, wParam, lParam);
@@ -130,14 +133,14 @@ void main() {
   // Register the window class.
   final className = TEXT('GDI Image Capture');
 
-  final wc = WNDCLASS.allocate();
-  wc.style = CS_HREDRAW | CS_VREDRAW;
-  wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0);
-  wc.hInstance = hInstance;
-  wc.lpszClassName = className;
-  wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-  wc.hbrBackground = GetStockObject(WHITE_BRUSH);
-  RegisterClass(wc.addressOf);
+  final wc = zeroAllocate<WNDCLASS>()
+    ..ref.style = CS_HREDRAW | CS_VREDRAW
+    ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
+    ..ref.hInstance = hInstance
+    ..ref.lpszClassName = className
+    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+    ..ref.hbrBackground = GetStockObject(WHITE_BRUSH);
+  RegisterClass(wc);
 
   // Create the window.
 
@@ -166,7 +169,7 @@ void main() {
   UpdateWindow(hWnd);
 
   // Run the message loop
-  final msg = allocate<MSG>();
+  final msg = zeroAllocate<MSG>();
   while (GetMessage(msg, NULL, 0, 0) != FALSE) {
     TranslateMessage(msg);
     DispatchMessage(msg);

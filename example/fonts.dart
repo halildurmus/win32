@@ -22,11 +22,10 @@ int enumerateFonts(
 
 void main() {
   final hDC = GetDC(NULL);
-  final searchFont = LOGFONT.allocate();
+  final searchFont = zeroAllocate<LOGFONT>()..ref.lfCharSet = ANSI_CHARSET;
   final callback = Pointer.fromFunction<EnumFontFamExProc>(enumerateFonts, 0);
 
-  searchFont.lfCharSet = ANSI_CHARSET;
-  EnumFontFamiliesEx(hDC, searchFont.addressOf, callback, 0, 0);
+  EnumFontFamiliesEx(hDC, searchFont, callback, 0, 0);
   fontNames.sort();
 
   print('${fontNames.length} font families discovered.');
@@ -34,5 +33,5 @@ void main() {
     print(font);
   }
 
-  free(searchFont.addressOf);
+  free(searchFont);
 }

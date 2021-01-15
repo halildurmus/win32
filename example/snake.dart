@@ -26,7 +26,7 @@ const IDT_TIMER2 = 2;
 
 final rng = Random();
 
-final bitmapInfo = BITMAPINFO.allocate();
+final bitmapInfo = zeroAllocate<BITMAPINFO>();
 
 Pointer bitmapMemory = nullptr;
 late int bitmapWidth;
@@ -382,17 +382,12 @@ void init(int width, int height) {
   bitmapWidth = width;
   bitmapHeight = height;
 
-  bitmapInfo.biSize = sizeOf<BITMAPINFO>();
-  bitmapInfo.biWidth = width;
-  bitmapInfo.biHeight = height;
-  bitmapInfo.biPlanes = 1;
-  bitmapInfo.biBitCount = 32;
-  bitmapInfo.biCompression = BI_RGB;
-  bitmapInfo.biSizeImage = 0;
-  bitmapInfo.biXPelsPerMeter = 0;
-  bitmapInfo.biYPelsPerMeter = 0;
-  bitmapInfo.biClrUsed = 0;
-  bitmapInfo.biClrImportant = 0;
+  bitmapInfo.ref.biSize = sizeOf<BITMAPINFO>();
+  bitmapInfo.ref.biWidth = width;
+  bitmapInfo.ref.biHeight = height;
+  bitmapInfo.ref.biPlanes = 1;
+  bitmapInfo.ref.biBitCount = 32;
+  bitmapInfo.ref.biCompression = BI_RGB;
 
   final bitmapMemorySize = (width * height) * bytesPerPixel;
   bitmapMemory =
@@ -424,7 +419,7 @@ void draw(int hdc, RECT rect, int x, int y, int width, int height) {
       windowWidth, // source width in pixels
       -windowHeight, // source height in pixels
       bitmapMemory, // pointer to the image bits
-      bitmapInfo.addressOf, // pointer to DIB
+      bitmapInfo, // pointer to DIB
       DIB_RGB_COLORS, // color table is literal RGB values
       SRCCOPY // copy directly to dest rectangle
       );
@@ -461,14 +456,14 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
   switch (uMsg) {
     case WM_SIZE:
-      final rect = RECT.allocate();
-      GetClientRect(hwnd, rect.addressOf);
-      final width = rect.right - rect.left;
-      final height = rect.bottom - rect.top;
+      final rect = zeroAllocate<RECT>();
+      GetClientRect(hwnd, rect);
+      final width = rect.ref.right - rect.ref.left;
+      final height = rect.ref.bottom - rect.ref.top;
 
       init(width, height);
 
-      free(rect.addressOf);
+      free(rect);
       break;
 
     case WM_CLOSE:
@@ -481,21 +476,21 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       break;
 
     case WM_PAINT:
-      final ps = PAINTSTRUCT.allocate();
-      final dc = BeginPaint(hwnd, ps.addressOf);
-      final x = ps.rcPaint.left;
-      final y = ps.rcPaint.top;
-      final width = ps.rcPaint.right - ps.rcPaint.left;
-      final height = ps.rcPaint.bottom - ps.rcPaint.top;
+      final ps = zeroAllocate<PAINTSTRUCT>();
+      final dc = BeginPaint(hwnd, ps);
+      final x = ps.ref.rcPaint.left;
+      final y = ps.ref.rcPaint.top;
+      final width = ps.ref.rcPaint.right - ps.ref.rcPaint.left;
+      final height = ps.ref.rcPaint.bottom - ps.ref.rcPaint.top;
 
-      final rect = RECT.allocate();
-      GetClientRect(hwnd, rect.addressOf);
+      final rect = zeroAllocate<RECT>();
+      GetClientRect(hwnd, rect);
       gameTick();
-      draw(dc, rect, x, y, width, height);
-      EndPaint(hwnd, ps.addressOf);
+      draw(dc, rect.ref, x, y, width, height);
+      EndPaint(hwnd, ps);
 
-      free(rect.addressOf);
-      free(ps.addressOf);
+      free(rect);
+      free(ps);
       break;
 
     case WM_KEYDOWN:
@@ -558,11 +553,11 @@ void main() {
 
   final className = TEXT('WinSnakeWindowClass');
 
-  final wc = WNDCLASS.allocate();
-  wc.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0);
-  wc.hInstance = hInstance;
-  wc.lpszClassName = className;
-  if (RegisterClass(wc.addressOf) != 0) {
+  final wc = zeroAllocate<WNDCLASS>()
+    ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
+    ..ref.hInstance = hInstance
+    ..ref.lpszClassName = className;
+  if (RegisterClass(wc) != 0) {
     // Create the window.
 
     hWnd = CreateWindowEx(
@@ -589,28 +584,28 @@ void main() {
       while (isRunning) {
         // Run the message loop.
 
-        final msg = MSG.allocate();
-        while (PeekMessage(msg.addressOf, 0, 0, 0, PM_REMOVE) != 0) {
-          if (msg.message == WM_QUIT) {
+        final msg = zeroAllocate<MSG>();
+        while (PeekMessage(msg, 0, 0, 0, PM_REMOVE) != 0) {
+          if (msg.ref.message == WM_QUIT) {
             isRunning = false;
           }
-          TranslateMessage(msg.addressOf);
-          DispatchMessage(msg.addressOf);
+          TranslateMessage(msg);
+          DispatchMessage(msg);
         }
-        free(msg.addressOf);
+        free(msg);
 
         final dc = GetDC(hWnd);
-        final rect = RECT.allocate();
+        final rect = zeroAllocate<RECT>();
 
-        GetClientRect(hWnd, rect.addressOf);
+        GetClientRect(hWnd, rect);
 
-        final windowWidth = rect.right - rect.left;
-        final windowHeight = rect.bottom - rect.top;
+        final windowWidth = rect.ref.right - rect.ref.left;
+        final windowHeight = rect.ref.bottom - rect.ref.top;
 
-        draw(dc, rect, 0, 0, windowWidth, windowHeight);
+        draw(dc, rect.ref, 0, 0, windowWidth, windowHeight);
 
         ReleaseDC(hWnd, dc);
-        free(rect.addressOf);
+        free(rect);
       }
     } else {
       MessageBox(0, TEXT('Failed to create window'), TEXT('Error'),

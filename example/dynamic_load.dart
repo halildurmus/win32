@@ -16,7 +16,7 @@ typedef getNativeSystemInfoDart = void Function(
     Pointer<SYSTEM_INFO> lpSystemInfo);
 
 void main() {
-  final systemInfo = SYSTEM_INFO.allocate();
+  final systemInfo = zeroAllocate<SYSTEM_INFO>();
 
   final kernel32 = TEXT('kernel32.dll');
   final hModule = GetModuleHandle(kernel32);
@@ -34,13 +34,13 @@ void main() {
                 pGetNativeSystemInfo)
             .asFunction<getNativeSystemInfoDart>();
 
-    funcGetNativeSystemInfo(systemInfo.addressOf);
+    funcGetNativeSystemInfo(systemInfo);
   } else {
     print(
         'GetNativeSystemInfo() not available on this system. Falling back to GetSystemInfo().');
 
-    GetSystemInfo(systemInfo.addressOf);
+    GetSystemInfo(systemInfo);
   }
 
-  print('This system has ${systemInfo.dwNumberOfProcessors} processors.');
+  print('This system has ${systemInfo.ref.dwNumberOfProcessors} processors.');
 }
