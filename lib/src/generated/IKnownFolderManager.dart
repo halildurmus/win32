@@ -163,15 +163,18 @@ class KnownFolderManager extends IKnownFolderManager {
 
   factory KnownFolderManager.createInstance() {
     final ptr = zeroAllocate<COMObject>();
+    final clsid = zeroAllocate<GUID>()..setGUID(CLSID_KnownFolderManager);
+    final iid = zeroAllocate<GUID>()..setGUID(IID_IKnownFolderManager);
 
-    final hr = CoCreateInstance(
-        GUID.fromString(CLSID_KnownFolderManager).addressOf,
-        nullptr,
-        CLSCTX_ALL,
-        GUID.fromString(IID_IKnownFolderManager).addressOf,
-        ptr.cast());
+    try {
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
 
-    if (FAILED(hr)) throw WindowsException(hr);
-    return KnownFolderManager(ptr);
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return KnownFolderManager(ptr);
+    } finally {
+      free(clsid);
+      free(iid);
+    }
   }
 }

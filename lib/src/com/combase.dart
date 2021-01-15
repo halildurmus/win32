@@ -35,7 +35,7 @@ class COMObject extends Struct {
 /// {@category com}
 Pointer<GUID> convertToIID(String strIID) {
   final lpszIID = TEXT(strIID);
-  final iid = GUID.allocate().addressOf;
+  final iid = zeroAllocate<GUID>();
 
   final hr = IIDFromString(lpszIID, iid);
   if (FAILED(hr)) {
@@ -53,7 +53,7 @@ Pointer<GUID> convertToIID(String strIID) {
 /// {@category com}
 Pointer<GUID> convertToCLSID(String strCLSID) {
   final lpszCLSID = TEXT(strCLSID);
-  final clsid = GUID.allocate().addressOf;
+  final clsid = zeroAllocate<GUID>();
 
   final hr = CLSIDFromString(lpszCLSID, clsid);
   if (FAILED(hr)) {

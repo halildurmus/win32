@@ -196,15 +196,18 @@ class DesktopWallpaper extends IDesktopWallpaper {
 
   factory DesktopWallpaper.createInstance() {
     final ptr = zeroAllocate<COMObject>();
+    final clsid = zeroAllocate<GUID>()..setGUID(CLSID_DesktopWallpaper);
+    final iid = zeroAllocate<GUID>()..setGUID(IID_IDesktopWallpaper);
 
-    final hr = CoCreateInstance(
-        GUID.fromString(CLSID_DesktopWallpaper).addressOf,
-        nullptr,
-        CLSCTX_ALL,
-        GUID.fromString(IID_IDesktopWallpaper).addressOf,
-        ptr.cast());
+    try {
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
 
-    if (FAILED(hr)) throw WindowsException(hr);
-    return DesktopWallpaper(ptr);
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return DesktopWallpaper(ptr);
+    } finally {
+      free(clsid);
+      free(iid);
+    }
   }
 }

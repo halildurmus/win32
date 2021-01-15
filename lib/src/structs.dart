@@ -90,8 +90,6 @@ class WNDCLASS extends Struct {
 
   external Pointer<Utf16> lpszMenuName;
   external Pointer<Utf16> lpszClassName;
-
-  factory WNDCLASS.allocate() => zeroAllocate<WNDCLASS>().ref;
 }
 
 // typedef struct _SYSTEM_INFO {
@@ -148,8 +146,6 @@ class SYSTEM_INFO extends Struct {
 
   @Uint16()
   external int wProcessorRevision;
-
-  factory SYSTEM_INFO.allocate() => zeroAllocate<SYSTEM_INFO>().ref;
 }
 
 // typedef struct _PROCESS_INFORMATION {
@@ -173,9 +169,6 @@ class PROCESS_INFORMATION extends Struct {
   external int dwProcessId;
   @Uint32()
   external int dwThreadId;
-
-  factory PROCESS_INFORMATION.allocate() =>
-      zeroAllocate<PROCESS_INFORMATION>().ref;
 }
 
 // typedef struct _STARTUPINFOW {
@@ -261,8 +254,6 @@ class BIND_OPTS extends Struct {
   external int grfMode;
   @Uint32()
   external int dwTickCountDeadline;
-
-  factory BIND_OPTS.allocate() => zeroAllocate<BIND_OPTS>().ref;
 }
 
 // typedef struct _SYSTEM_POWER_STATUS {
@@ -290,9 +281,6 @@ class SYSTEM_POWER_STATUS extends Struct {
   external int BatteryLifeTime;
   @Uint32()
   external int BatteryFullLifeTime;
-
-  factory SYSTEM_POWER_STATUS.allocate() =>
-      zeroAllocate<SYSTEM_POWER_STATUS>().ref;
 }
 
 // typedef struct {
@@ -349,9 +337,6 @@ class SYSTEM_BATTERY_STATE extends Struct {
   external int DefaultAlert1;
   @Uint32()
   external int DefaultAlert2;
-
-  factory SYSTEM_BATTERY_STATE.allocate() =>
-      zeroAllocate<SYSTEM_BATTERY_STATE>().ref;
 }
 
 // typedef struct _STARTUPINFOEXW {
@@ -426,9 +411,6 @@ class SECURITY_ATTRIBUTES extends Struct {
 
   @Int32()
   external int bInheritHandle;
-
-  factory SECURITY_ATTRIBUTES.allocate() =>
-      zeroAllocate<SECURITY_ATTRIBUTES>().ref;
 }
 
 // typedef struct _SECURITY_DESCRIPTOR {
@@ -460,9 +442,6 @@ class SECURITY_DESCRIPTOR extends Struct {
   external Pointer<IntPtr> Group;
   external Pointer<IntPtr> Sacl;
   external Pointer<IntPtr> Dacl;
-
-  factory SECURITY_DESCRIPTOR.allocate() =>
-      zeroAllocate<SECURITY_DESCRIPTOR>().ref;
 }
 
 // typedef struct tagSOLE_AUTHENTICATION_SERVICE {
@@ -487,9 +466,6 @@ class SOLE_AUTHENTICATION_SERVICE extends Struct {
 
   @Int32()
   external int hr;
-
-  factory SOLE_AUTHENTICATION_SERVICE.allocate() =>
-      zeroAllocate<SOLE_AUTHENTICATION_SERVICE>().ref;
 }
 
 // struct tagVARIANT
@@ -551,8 +527,6 @@ class VARIANT extends Struct {
 class COMDLG_FILTERSPEC extends Struct {
   external Pointer<Utf16> pszName;
   external Pointer<Utf16> pszSpec;
-
-  factory COMDLG_FILTERSPEC.allocate() => zeroAllocate<COMDLG_FILTERSPEC>().ref;
 }
 
 // typedef struct tagACCEL {
@@ -571,8 +545,6 @@ class ACCEL extends Struct {
   external int key;
   @Uint16()
   external int cmd;
-
-  factory ACCEL.allocate() => zeroAllocate<ACCEL>().ref;
 }
 
 // typedef struct tagMONITORINFO {
@@ -706,8 +678,6 @@ class FINDREPLACE extends Struct {
   external int lCustData;
   external Pointer<NativeFunction<LPFRHookProc>> lpfnHook;
   external Pointer<Utf16> lpTemplateName;
-
-  factory FINDREPLACE.allocate() => zeroAllocate<FINDREPLACE>().ref;
 }
 
 // typedef struct tagCHOOSEFONTW {
@@ -768,8 +738,6 @@ class CHOOSEFONT extends Struct {
   external int nSizeMin;
   @Int32()
   external int nSizeMax;
-
-  factory CHOOSEFONT.allocate() => zeroAllocate<CHOOSEFONT>().ref;
 }
 
 // typedef struct tagOFNW {
@@ -851,8 +819,6 @@ class OPENFILENAME extends Struct {
   external int dwReserved;
   @Uint32()
   external int FlagsEx;
-
-  factory OPENFILENAME.allocate() => zeroAllocate<OPENFILENAME>().ref;
 }
 
 // typedef struct {
@@ -1113,8 +1079,6 @@ class CREATESTRUCT extends Struct {
 
   @Uint32()
   external int dwExStyle;
-
-  factory CREATESTRUCT.allocate() => zeroAllocate<CREATESTRUCT>().ref;
 }
 
 // typedef struct tagMENUINFO {
@@ -1144,8 +1108,6 @@ class MENUINFO extends Struct {
   @Uint32()
   external int dwContextHelpID;
   external Pointer<Uint32> dwMenuData;
-
-  factory MENUINFO.allocate() => zeroAllocate<MENUINFO>().ref;
 }
 
 // typedef struct tagMENUITEMINFOW {
@@ -1198,8 +1160,6 @@ class MENUITEMINFO extends Struct {
 
   @IntPtr()
   external int hbmpItem;
-
-  factory MENUITEMINFO.allocate() => zeroAllocate<MENUITEMINFO>().ref;
 }
 
 // typedef struct tagMSG {
@@ -1231,8 +1191,6 @@ class MSG extends Struct {
   external int time;
 
   external POINT pt;
-
-  factory MSG.allocate() => zeroAllocate<MSG>().ref;
 }
 
 // typedef struct tagSIZE {
@@ -1249,8 +1207,6 @@ class SIZE extends Struct {
 
   @Int32()
   external int cy;
-
-  factory SIZE.allocate() => zeroAllocate<SIZE>().ref;
 }
 
 // typedef struct tagMINMAXINFO {
@@ -1271,8 +1227,6 @@ class MINMAXINFO extends Struct {
   external POINT ptMaxPosition;
   external POINT ptMinTrackSize;
   external POINT ptMaxTrackSize;
-
-  factory MINMAXINFO.allocate() => zeroAllocate<MINMAXINFO>().ref;
 }
 
 // typedef struct tagPOINT {
@@ -1289,8 +1243,6 @@ class POINT extends Struct {
 
   @Int32()
   external int y;
-
-  factory POINT.allocate() => zeroAllocate<POINT>().ref;
 }
 
 // typedef struct tagPAINTSTRUCT {
@@ -1327,8 +1279,6 @@ class PAINTSTRUCT extends Struct {
   external int rgb3;
   @Uint64()
   external int rgb4;
-
-  factory PAINTSTRUCT.allocate() => zeroAllocate<PAINTSTRUCT>().ref;
 }
 
 // typedef struct tagRECT {
@@ -1351,8 +1301,6 @@ class RECT extends Struct {
   external int right;
   @Int32()
   external int bottom;
-
-  factory RECT.allocate() => zeroAllocate<RECT>().ref;
 }
 
 // typedef struct tagINPUT {
@@ -1391,8 +1339,6 @@ class INPUT extends Struct {
       KEYBDINPUT(addressOf.cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
   HARDWAREINPUT get hi =>
       HARDWAREINPUT(addressOf.cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
-
-  factory INPUT.allocate() => zeroAllocate<INPUT>().ref;
 }
 
 // typedef struct tagMOUSEINPUT {
@@ -1551,8 +1497,6 @@ class TEXTMETRIC extends Struct {
   external int tmPitchAndFamily;
   @Uint8()
   external int tmCharSet;
-
-  factory TEXTMETRIC.allocate() => zeroAllocate<TEXTMETRIC>().ref;
 }
 
 // typedef struct tagSCROLLINFO {
@@ -1585,8 +1529,6 @@ class SCROLLINFO extends Struct {
   external int nPos;
   @Int32()
   external int nTrackPos;
-
-  factory SCROLLINFO.allocate() => zeroAllocate<SCROLLINFO>().ref;
 }
 
 // typedef struct _SHELLEXECUTEINFOW {
@@ -1690,35 +1632,6 @@ class GUID extends Struct {
   @Uint64()
   external int Data4;
 
-  factory GUID.allocate() => zeroAllocate<GUID>().ref;
-
-  /// Create GUID from common {FDD39AD0-238F-46AF-ADB4-6C85480369C7} format
-  factory GUID.fromString(String guidString) {
-    assert(guidString.length == 38);
-    final guid = zeroAllocate<GUID>().ref;
-    guid.Data1 = int.parse(guidString.substring(1, 9), radix: 16);
-    guid.Data2 = int.parse(guidString.substring(10, 14), radix: 16);
-    guid.Data3 = int.parse(guidString.substring(15, 19), radix: 16);
-
-    // final component is pushed on the stack in reverse order per x64
-    // calling convention. This is a funky workaround until FFI supports
-    // passing structs by value.
-    final rawString = guidString.substring(35, 37) +
-        guidString.substring(33, 35) +
-        guidString.substring(31, 33) +
-        guidString.substring(29, 31) +
-        guidString.substring(27, 29) +
-        guidString.substring(25, 27) +
-        guidString.substring(22, 24) +
-        guidString.substring(20, 22);
-
-    // We need to split this to avoid overflowing a signed int.parse()
-    guid.Data4 = (int.parse(rawString.substring(0, 4), radix: 16) << 48) +
-        int.parse(rawString.substring(4, 16), radix: 16);
-
-    return guid;
-  }
-
   /// Print GUID in common {FDD39AD0-238F-46AF-ADB4-6C85480369C7} format
   @override
   String toString() {
@@ -1740,6 +1653,31 @@ class GUID extends Struct {
         '${Data3.toRadixString(16).padLeft(4, '0').toUpperCase()}-'
         '${comp1.toUpperCase()}-'
         '${comp2.toUpperCase()}}';
+  }
+}
+
+extension GUIDFactory on Pointer<GUID> {
+  /// Create GUID from common {FDD39AD0-238F-46AF-ADB4-6C85480369C7} format
+  void setGUID(String guidString) {
+    assert(guidString.length == 38);
+    ref.Data1 = int.parse(guidString.substring(1, 9), radix: 16);
+    ref.Data2 = int.parse(guidString.substring(10, 14), radix: 16);
+    ref.Data3 = int.parse(guidString.substring(15, 19), radix: 16);
+
+    // Final component is pushed on the stack in reverse order per x64
+    // calling convention.
+    final rawString = guidString.substring(35, 37) +
+        guidString.substring(33, 35) +
+        guidString.substring(31, 33) +
+        guidString.substring(29, 31) +
+        guidString.substring(27, 29) +
+        guidString.substring(25, 27) +
+        guidString.substring(22, 24) +
+        guidString.substring(20, 22);
+
+    // We need to split this to avoid overflowing a signed int.parse()
+    ref.Data4 = (int.parse(rawString.substring(0, 4), radix: 16) << 48) +
+        int.parse(rawString.substring(4, 16), radix: 16);
   }
 }
 
@@ -1765,9 +1703,6 @@ class CREDENTIAL_ATTRIBUTE extends Struct {
   external int ValueSize;
 
   external Pointer<Uint8> Value;
-
-  factory CREDENTIAL_ATTRIBUTE.allocate() =>
-      zeroAllocate<CREDENTIAL_ATTRIBUTE>().ref;
 }
 
 // typedef struct _CREDENTIALW {
@@ -1812,8 +1747,6 @@ class CREDENTIAL extends Struct {
   external Pointer<CREDENTIAL_ATTRIBUTE> Attributes;
   external Pointer<Utf16> TargetAlias;
   external Pointer<Utf16> UserName;
-
-  factory CREDENTIAL.allocate() => zeroAllocate<CREDENTIAL>().ref;
 }
 
 // *** CONSOLE STRUCTS ***
@@ -1915,8 +1848,6 @@ class BITMAP extends Struct {
   @Int16()
   external int bmBitsPixel;
   external Pointer bmBits;
-
-  factory BITMAP.allocate() => zeroAllocate<BITMAP>().ref;
 }
 
 // typedef struct tagBITMAPFILEHEADER {
@@ -1942,8 +1873,6 @@ class BITMAPFILEHEADER extends Struct {
   external int bfReserved2;
   @Uint32()
   external int bfOffBits;
-
-  factory BITMAPFILEHEADER.allocate() => zeroAllocate<BITMAPFILEHEADER>().ref;
 }
 
 // typedef struct tagBITMAPINFOHEADER {
@@ -2012,8 +1941,6 @@ class PALETTEENTRY extends Struct {
   external int peBlue;
   @Uint8()
   external int peFlags;
-
-  factory PALETTEENTRY.allocate() => zeroAllocate<PALETTEENTRY>().ref;
 }
 
 // typedef struct tagDRAWTEXTPARAMS {
@@ -2039,8 +1966,6 @@ class DRAWTEXTPARAMS extends Struct {
   external int iRightMargin;
   @Uint32()
   external int uiLengthDrawn;
-
-  factory DRAWTEXTPARAMS.allocate() => zeroAllocate<DRAWTEXTPARAMS>().ref;
 }
 
 // typedef struct _FILETIME {
@@ -2057,8 +1982,6 @@ class FILETIME extends Struct {
   external int dwLowDateTime;
   @Uint32()
   external int dwHighDateTime;
-
-  factory FILETIME.allocate() => zeroAllocate<FILETIME>().ref;
 }
 
 // typedef struct KNOWNFOLDER_DEFINITION
@@ -2116,9 +2039,6 @@ class KNOWNFOLDER_DEFINITION extends Struct {
   external int ftidType_guid3;
   @Uint64()
   external int ftidType_guid4;
-
-  factory KNOWNFOLDER_DEFINITION.allocate() =>
-      zeroAllocate<KNOWNFOLDER_DEFINITION>().ref;
 }
 
 // typedef struct _SHITEMID
@@ -2135,8 +2055,6 @@ class SHITEMID extends Struct {
   external int cb;
   @Uint8()
   external int abID;
-
-  factory SHITEMID.allocate() => zeroAllocate<SHITEMID>().ref;
 }
 
 // typedef struct tagDISPPARAMS {
@@ -2158,8 +2076,6 @@ class DISPPARAMS extends Struct {
 
   @Int16()
   external int cNamedArgs;
-
-  factory DISPPARAMS.allocate() => zeroAllocate<DISPPARAMS>().ref;
 }
 
 // *** CONSOLE STRUCTS ***
@@ -2177,9 +2093,6 @@ class CONSOLE_CURSOR_INFO extends Struct {
   external int dwSize;
   @Int32()
   external int bVisible;
-
-  factory CONSOLE_CURSOR_INFO.allocate() =>
-      zeroAllocate<CONSOLE_CURSOR_INFO>().ref;
 }
 
 // typedef struct _CONSOLE_SCREEN_BUFFER_INFO {
@@ -2200,9 +2113,6 @@ class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
   external int wAttributes;
   external SMALL_RECT srWindow;
   external COORD dwMaximumWindowSize;
-
-  factory CONSOLE_SCREEN_BUFFER_INFO.allocate() =>
-      zeroAllocate<CONSOLE_SCREEN_BUFFER_INFO>().ref;
 }
 
 // typedef struct _CONSOLE_SELECTION_INFO {
@@ -2220,9 +2130,6 @@ class CONSOLE_SELECTION_INFO extends Struct {
 
   external COORD dwSelectionAnchor;
   external SMALL_RECT srSelection;
-
-  factory CONSOLE_SELECTION_INFO.allocate() =>
-      zeroAllocate<CONSOLE_SELECTION_INFO>().ref;
 }
 
 // typedef struct _COORD {
@@ -2241,8 +2148,6 @@ class COORD extends Struct {
 
   @Int16()
   external int Y;
-
-  factory COORD.allocate() => zeroAllocate<COORD>().ref;
 }
 
 // typedef struct _CHAR_INFO {
@@ -2263,8 +2168,6 @@ class CHAR_INFO extends Struct {
 
   @Int16()
   external int Attributes;
-
-  factory CHAR_INFO.allocate() => zeroAllocate<CHAR_INFO>().ref;
 }
 
 // typedef struct _SMALL_RECT {
@@ -2290,8 +2193,6 @@ class SMALL_RECT extends Struct {
 
   @Int16()
   external int Bottom;
-
-  factory SMALL_RECT.allocate() => zeroAllocate<SMALL_RECT>().ref;
 }
 // typedef struct tagINITCOMMONCONTROLSEX {
 //   DWORD dwSize;
@@ -2329,8 +2230,6 @@ class DLGTEMPLATE extends Struct {
   external int cx;
   @Uint16()
   external int cy;
-
-  factory DLGTEMPLATE.allocate() => zeroAllocate<DLGTEMPLATE>().ref;
 }
 
 class DLGITEMTEMPLATE extends Struct {
@@ -2472,8 +2371,6 @@ class TASKDIALOG_BUTTON extends Struct {
   external int nButtonID;
 
   external Pointer<Utf16> pszButtonText;
-
-  factory TASKDIALOG_BUTTON.allocate() => zeroAllocate<TASKDIALOG_BUTTON>().ref;
 }
 
 // typedef struct _DLLVERSIONINFO
@@ -2645,8 +2542,6 @@ class SYSTEMTIME extends Struct {
   external int wSecond;
   @Uint16()
   external int wMilliseconds;
-
-  factory SYSTEMTIME.allocate() => zeroAllocate<SYSTEMTIME>().ref;
 }
 
 // typedef struct _BLUETOOTH_DEVICE_INFO {
@@ -2826,8 +2721,6 @@ class COR_FIELD_OFFSET extends Struct {
 
   @Uint32()
   external int ulOffset;
-
-  factory COR_FIELD_OFFSET.allocate() => zeroAllocate<COR_FIELD_OFFSET>().ref;
 }
 
 // typedef struct tagVS_FIXEDFILEINFO
@@ -2878,8 +2771,6 @@ class VS_FIXEDFILEINFO extends Struct {
   external int dwFileDateMS;
   @Uint32()
   external int dwFileDateLS;
-
-  factory VS_FIXEDFILEINFO.allocate() => zeroAllocate<VS_FIXEDFILEINFO>().ref;
 }
 
 // typedef struct tagMCI_OPEN_PARMSW {
@@ -2903,8 +2794,6 @@ class MCI_OPEN_PARMS extends Struct {
   external Pointer<Utf16> lpstrDeviceType;
   external Pointer<Utf16> lpstrElementName;
   external Pointer<Utf16> lpstrAlias;
-
-  factory MCI_OPEN_PARMS.allocate() => zeroAllocate<MCI_OPEN_PARMS>().ref;
 }
 
 // typedef struct {
@@ -2924,8 +2813,6 @@ class MCI_PLAY_PARMS extends Struct {
   external int dwFrom;
   @Uint32()
   external int dwTo;
-
-  factory MCI_PLAY_PARMS.allocate() => zeroAllocate<MCI_PLAY_PARMS>().ref;
 }
 
 // typedef struct tagMCI_SEEK_PARMS {
@@ -2942,8 +2829,6 @@ class MCI_SEEK_PARMS extends Struct {
   external int dwCallback;
   @Uint32()
   external int dwTo;
-
-  factory MCI_SEEK_PARMS.allocate() => zeroAllocate<MCI_SEEK_PARMS>().ref;
 }
 
 // typedef struct tagLOGBRUSH {
@@ -2962,8 +2847,6 @@ class LOGBRUSH extends Struct {
   @Int32()
   external int lbColor;
   external Pointer<Uint32> lbHatch;
-
-  factory LOGBRUSH.allocate() => zeroAllocate<LOGBRUSH>().ref;
 }
 
 // typedef struct tagMCI_STATUS_PARMS {
@@ -2985,8 +2868,6 @@ class MCI_STATUS_PARMS extends Struct {
   external int dwItem;
   @Uint32()
   external int dwTrack;
-
-  factory MCI_STATUS_PARMS.allocate() => zeroAllocate<MCI_STATUS_PARMS>().ref;
 }
 
 // typedef struct _OVERLAPPED {
@@ -3017,8 +2898,6 @@ class OVERLAPPED extends Struct {
 
   @IntPtr()
   external int hEvent;
-
-  factory OVERLAPPED.allocate() => zeroAllocate<OVERLAPPED>().ref;
 }
 
 // typedef struct tagACTCTXW {
@@ -3058,58 +2937,7 @@ class ACTCTX extends Struct {
 
   @IntPtr()
   external int hModule;
-
-  factory ACTCTX.allocate() => zeroAllocate<ACTCTX>().ref;
 }
-
-// -----------------------------------------------------------------------------
-// UNIMPLEMENTED OR PARTIALLY IMPLEMENTED CLASSES THAT ARE INCLUDED SO THAT COM
-// OBJECTS CAN BE GENERATED
-// -----------------------------------------------------------------------------
-
-/// Describes an exception that occurred during IDispatch::Invoke.
-///
-/// {@category Struct}
-class EXCEPINFO extends Struct {}
-
-/// Specifies the FMTID/PID identifier that programmatically identifies a
-/// property. Replaces SHCOLUMNID.
-///
-/// {@category Struct}
-class PROPERTYKEY extends Struct {}
-
-/// The PROPVARIANT structure is used in the ReadMultiple and WriteMultiple
-/// methods of IPropertyStorage to define the type tag and the value of a
-/// property in a property set.
-///
-/// {@category Struct}
-class PROPVARIANT extends Struct {}
-
-/// Represents a safe array.
-///
-/// {@category Struct}
-class SAFEARRAY extends Struct {}
-
-/// A CLSID is a globally unique identifier that identifies a COM class object.
-/// If your server or container allows linking to its embedded objects, you need
-/// to register a CLSID for each supported class of objects.
-///
-/// {@category Struct}
-class CLSID extends Struct {}
-
-/// The STATSTG structure contains statistical data about an open storage,
-/// stream, or byte-array object. This structure is used in the IEnumSTATSTG,
-/// ILockBytes, IStorage, and IStream interfaces.
-///
-/// {@category Struct}
-class STATSTG extends Struct {}
-
-/// Used to specify values that are used by SetSimulatedProfileInfo to override
-/// current internet connection profile values in an RDP Child Session to
-/// support the simulation of specific metered internet connection conditions.
-///
-/// {@category Struct}
-class NLM_SIMULATED_PROFILE_INFO extends Struct {}
 
 // typedef struct _WIN32_FIND_DATAW {
 //   DWORD    dwFileAttributes;
@@ -3173,3 +3001,52 @@ class WIN32_FIND_DATA extends Struct {
       .cast<Uint16>()
       .value;
 }
+
+// -----------------------------------------------------------------------------
+// UNIMPLEMENTED OR PARTIALLY IMPLEMENTED CLASSES THAT ARE INCLUDED SO THAT COM
+// OBJECTS CAN BE GENERATED
+// -----------------------------------------------------------------------------
+
+/// Describes an exception that occurred during IDispatch::Invoke.
+///
+/// {@category Struct}
+class EXCEPINFO extends Struct {}
+
+/// Specifies the FMTID/PID identifier that programmatically identifies a
+/// property. Replaces SHCOLUMNID.
+///
+/// {@category Struct}
+class PROPERTYKEY extends Struct {}
+
+/// The PROPVARIANT structure is used in the ReadMultiple and WriteMultiple
+/// methods of IPropertyStorage to define the type tag and the value of a
+/// property in a property set.
+///
+/// {@category Struct}
+class PROPVARIANT extends Struct {}
+
+/// Represents a safe array.
+///
+/// {@category Struct}
+class SAFEARRAY extends Struct {}
+
+/// A CLSID is a globally unique identifier that identifies a COM class object.
+/// If your server or container allows linking to its embedded objects, you need
+/// to register a CLSID for each supported class of objects.
+///
+/// {@category Struct}
+class CLSID extends Struct {}
+
+/// The STATSTG structure contains statistical data about an open storage,
+/// stream, or byte-array object. This structure is used in the IEnumSTATSTG,
+/// ILockBytes, IStorage, and IStream interfaces.
+///
+/// {@category Struct}
+class STATSTG extends Struct {}
+
+/// Used to specify values that are used by SetSimulatedProfileInfo to override
+/// current internet connection profile values in an RDP Child Session to
+/// support the simulation of specific metered internet connection conditions.
+///
+/// {@category Struct}
+class NLM_SIMULATED_PROFILE_INFO extends Struct {}

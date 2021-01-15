@@ -9,15 +9,13 @@
 
 @TestOn('windows')
 
-import 'dart:ffi';
-
 import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 
 import 'package:win32/win32.dart';
 
 void main() {
-  final ptr = COMObject.allocate().addressOf;
+  final ptr = zeroAllocate<COMObject>();
 
   final desktopwallpaper = IDesktopWallpaper(ptr);
   test('Can instantiate IDesktopWallpaper.SetWallpaper', () {

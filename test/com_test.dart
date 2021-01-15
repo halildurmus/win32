@@ -13,16 +13,18 @@ void main() {
     final hr = CoCreateGuid(guid);
     expect(hr, equals(S_OK));
 
-    final guid2 = GUID.fromString(guid.ref.toString());
-    expect(guid.ref.toString(), equals(guid2.toString()));
+    final guid2 = zeroAllocate<GUID>()..setGUID(guid.ref.toString());
+    expect(guid.ref.toString(), equals(guid2.ref.toString()));
 
+    free(guid2);
     free(guid);
-    free(guid2.addressOf);
   });
 
   test('GUID creation failure', () {
     // Note the rogue 'X' here
-    expect(() => GUID.fromString('{X161CA9B-9409-4A77-7327-8B8D3363C6B9}'),
+    expect(
+        () => zeroAllocate<GUID>()
+          ..setGUID('{X161CA9B-9409-4A77-7327-8B8D3363C6B9}'),
         throwsFormatException);
   });
 
@@ -61,15 +63,16 @@ void main() {
     expect(hr, equals(S_OK));
 
     final ptr = zeroAllocate<COMObject>();
+    final clsid = zeroAllocate<GUID>()..setGUID(CLSID_FileSaveDialog);
+    final iid = zeroAllocate<GUID>()..setGUID(IID_IFileSaveDialog);
 
-    hr = CoCreateInstance(
-        GUID.fromString(CLSID_FileSaveDialog).addressOf,
-        nullptr,
-        CLSCTX_ALL,
-        GUID.fromString(IID_IFileSaveDialog).addressOf,
-        ptr.cast());
+    hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
     expect(hr, equals(S_OK));
     expect(ptr.address, isNonZero);
+
+    free(iid);
+    free(clsid);
+    free(ptr);
 
     CoUninitialize();
   });
@@ -81,21 +84,27 @@ void main() {
 
     final ptrFactory = zeroAllocate<COMObject>();
     final ptrSaveDialog = zeroAllocate<COMObject>();
+    final clsid = zeroAllocate<GUID>()..setGUID(CLSID_FileSaveDialog);
+    final iidClassFactory = zeroAllocate<GUID>()..setGUID(IID_IClassFactory);
+    final iidFileSaveDialog = zeroAllocate<GUID>()
+      ..setGUID(IID_IFileSaveDialog);
 
     hr = CoGetClassObject(
-        GUID.fromString(CLSID_FileSaveDialog).addressOf,
-        CLSCTX_ALL,
-        nullptr,
-        GUID.fromString(IID_IClassFactory).addressOf,
-        ptrFactory.cast());
+        clsid, CLSCTX_ALL, nullptr, iidClassFactory, ptrFactory.cast());
     expect(hr, equals(S_OK));
     expect(ptrFactory.address, isNonZero);
 
     final classFactory = IClassFactory(ptrFactory);
-    hr = classFactory.CreateInstance(nullptr,
-        GUID.fromString(IID_IFileSaveDialog).addressOf, ptrSaveDialog.cast());
+    hr = classFactory.CreateInstance(
+        nullptr, iidFileSaveDialog, ptrSaveDialog.cast());
     expect(hr, equals(S_OK));
     expect(ptrSaveDialog.address, isNonZero);
+
+    free(iidFileSaveDialog);
+    free(iidClassFactory);
+    free(clsid);
+    free(ptrSaveDialog);
+    free(ptrFactory);
 
     CoUninitialize();
   });

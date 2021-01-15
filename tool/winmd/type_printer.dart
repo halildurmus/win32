@@ -239,7 +239,7 @@ class ${type.className} extends ${type.name} {
   Pointer<COMObject> ptr;
 
   factory ${type.className}.createInstance() {
-    final ptr = COMObject.allocate().addressOf;
+    final ptr = zeroAllocate<COMObject>();
 
     var hr = CoCreateInstance(
         GUID.fromString(CLSID_${type.className}).addressOf,

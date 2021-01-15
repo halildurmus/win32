@@ -258,16 +258,19 @@ class $className extends $name {
 
   factory $className.createInstance() {
     final ptr = zeroAllocate<COMObject>();
+    final clsid = zeroAllocate<GUID>()..setGUID(CLSID_$className);
+    final iid = zeroAllocate<GUID>()..setGUID(IID_$name);
 
-    final hr = CoCreateInstance(
-        GUID.fromString(CLSID_$className).addressOf,
-        nullptr,
-        CLSCTX_ALL,
-        GUID.fromString(IID_$name).addressOf,
-        ptr.cast());
+    try {
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
 
-    if (FAILED(hr)) throw WindowsException(hr);
-    return $className(ptr);
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return $className(ptr);
+    } finally {
+      free(clsid);
+      free(iid);
+    }
   }
 }
 ''');

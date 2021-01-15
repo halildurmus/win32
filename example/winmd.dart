@@ -59,7 +59,7 @@ File metadataFileContainingType(String typeName) {
 List<WindowsRuntimeType> metadataTypesInFile(File file) {
   final types = <WindowsRuntimeType>[];
 
-  final pDispenser = COMObject.allocate().addressOf;
+  final pDispenser = zeroAllocate<COMObject>();
   var hr = MetaDataGetDispenser(
       convertToCLSID(CLSID_CorMetaDataDispenser).cast(),
       convertToIID(IID_IMetaDataDispenser).cast(),

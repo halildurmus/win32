@@ -40,14 +40,13 @@ void main() {
 
   // Obtain the initial locator to Windows Management
   // on a particular host computer.
-  final pLoc = IWbemLocator(COMObject.allocate().addressOf);
+  final pLoc = IWbemLocator(zeroAllocate<COMObject>());
+
+  final clsid = zeroAllocate<GUID>()..setGUID(CLSID_WbemLocator);
+  final iid = zeroAllocate<GUID>()..setGUID(IID_IWbemLocator);
 
   hr = CoCreateInstance(
-      GUID.fromString(CLSID_WbemLocator).addressOf,
-      nullptr,
-      CLSCTX_INPROC_SERVER,
-      GUID.fromString(IID_IWbemLocator).addressOf,
-      pLoc.ptr.cast());
+      clsid, nullptr, CLSCTX_INPROC_SERVER, iid, pLoc.ptr.cast());
 
   if (FAILED(hr)) {
     final exception = WindowsException(hr);
@@ -154,14 +153,14 @@ void main() {
       // A VARIANT is a union struct, which can't be directly represented by
       // FFI yet. In this case we know that the VARIANT can only contain a BSTR
       // so we are able to use a specialized variant.
-      final vtProp = VARIANT.allocate();
-      hr = clsObj.Get(TEXT('Name'), 0, vtProp.addressOf, nullptr, nullptr);
+      final vtProp = zeroAllocate<VARIANT>();
+      hr = clsObj.Get(TEXT('Name'), 0, vtProp, nullptr, nullptr);
       if (SUCCEEDED(hr)) {
-        print('Process: ${vtProp.ptr.cast<Utf16>().unpackString(256)}');
+        print('Process: ${vtProp.ref.ptr.cast<Utf16>().unpackString(256)}');
       }
       // Free BSTRs in the returned variants
-      VariantClear(vtProp.addressOf);
-      free(vtProp.addressOf);
+      VariantClear(vtProp);
+      free(vtProp);
 
       clsObj.Release();
     }

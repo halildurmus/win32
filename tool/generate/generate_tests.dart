@@ -21,15 +21,13 @@ String generateTests(Interface interface) {
 
 @TestOn('windows')
 
-import 'dart:ffi';
-
 import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 
 import 'package:win32/win32.dart';
 
 void main() {
-  final ptr = COMObject.allocate().addressOf;
+  final ptr = zeroAllocate<COMObject>();
 
   final ${interface.name!.substring(1).toLowerCase()} = ${interface.name!}(ptr);
 ''');

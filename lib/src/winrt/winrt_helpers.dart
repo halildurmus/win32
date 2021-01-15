@@ -83,7 +83,7 @@ Pointer<IntPtr> CreateObject(String className, String iid) {
   }
 
   // Create an IID for the interface required
-  final riidCalendar = GUID.allocate().addressOf;
+  final riidCalendar = zeroAllocate<GUID>();
   hr = IIDFromString(TEXT(iid), riidCalendar);
   if (FAILED(hr)) {
     throw WindowsException(hr);
