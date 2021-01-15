@@ -37,13 +37,13 @@ void main() {
   });
 
   test('IIDFromString', () {
-    final guid = GUID.allocate();
-    final hr = IIDFromString(TEXT(IID_IShellItem2), guid.addressOf);
+    final guid = zeroAllocate<GUID>();
+    final hr = IIDFromString(TEXT(IID_IShellItem2), guid);
     expect(hr, equals(S_OK));
 
-    expect(guid.toString(), equalsIgnoringCase(IID_IShellItem2));
+    expect(guid.ref.toString(), equalsIgnoringCase(IID_IShellItem2));
 
-    free(guid.addressOf);
+    free(guid);
   });
 
   test('Create COM object without calling CoInitialize should fail', () {
@@ -60,7 +60,7 @@ void main() {
         nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
     expect(hr, equals(S_OK));
 
-    final ptr = COMObject.allocate().addressOf;
+    final ptr = zeroAllocate<COMObject>();
 
     hr = CoCreateInstance(
         GUID.fromString(CLSID_FileSaveDialog).addressOf,
@@ -79,8 +79,8 @@ void main() {
         nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
     expect(hr, equals(S_OK));
 
-    final ptrFactory = COMObject.allocate().addressOf;
-    final ptrSaveDialog = COMObject.allocate().addressOf;
+    final ptrFactory = zeroAllocate<COMObject>();
+    final ptrSaveDialog = zeroAllocate<COMObject>();
 
     hr = CoGetClassObject(
         GUID.fromString(CLSID_FileSaveDialog).addressOf,
