@@ -20,7 +20,7 @@ void findBluetoothDevices(int btRadioHandle) {
   final firstDeviceHandle = BluetoothFindFirstDevice(params, info);
 
   if (firstDeviceHandle != NULL) {
-    print(info.ref.szName);
+    print(info.szName);
     BluetoothFindDeviceClose(firstDeviceHandle);
   } else {
     print('No devices found.');

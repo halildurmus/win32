@@ -585,9 +585,42 @@ const PHYSICAL_MONITOR_DESCRIPTION_SIZE = 128;
 class PHYSICAL_MONITOR extends Struct {
   @IntPtr()
   external int hPhysicalMonitor;
+  @Uint64()
+  external int _data0;
+  @Uint64()
+  external int _data1;
+  @Uint64()
+  external int _data2;
+  @Uint64()
+  external int _data3;
+  @Uint64()
+  external int _data4;
+  @Uint64()
+  external int _data5;
+  @Uint64()
+  external int _data6;
+  @Uint64()
+  external int _data7;
+  @Uint64()
+  external int _data8;
+  @Uint64()
+  external int _data9;
+  @Uint64()
+  external int _data10;
+  @Uint64()
+  external int _data11;
+  @Uint64()
+  external int _data12;
+  @Uint64()
+  external int _data13;
+  @Uint64()
+  external int _data14;
+  @Uint64()
+  external int _data15;
+}
 
-  String get szPhysicalMonitorDescription => addressOf
-      .cast<IntPtr>()
+extension PointerPHYSICAL_MONITORExtension on Pointer<PHYSICAL_MONITOR> {
+  String get szPhysicalMonitorDescription => cast<IntPtr>()
       .elementAt(1)
       .cast<Utf16>()
       .unpackString(PHYSICAL_MONITOR_DESCRIPTION_SIZE);
@@ -2569,14 +2602,138 @@ class BLUETOOTH_DEVICE_INFO extends Struct {
   external SYSTEMTIME stLastSeen;
   external SYSTEMTIME stLastUsed;
 
-  String get szName => addressOf
-      .cast<Uint8>()
+  @Uint64()
+  external int _data0;
+  @Uint64()
+  external int _data1;
+  @Uint64()
+  external int _data2;
+  @Uint64()
+  external int _data3;
+  @Uint64()
+  external int _data4;
+  @Uint64()
+  external int _data5;
+  @Uint64()
+  external int _data6;
+  @Uint64()
+  external int _data7;
+  @Uint64()
+  external int _data8;
+  @Uint64()
+  external int _data9;
+  @Uint64()
+  external int _data10;
+  @Uint64()
+  external int _data11;
+  @Uint64()
+  external int _data12;
+  @Uint64()
+  external int _data13;
+  @Uint64()
+  external int _data14;
+  @Uint64()
+  external int _data15;
+  @Uint64()
+  external int _data16;
+  @Uint64()
+  external int _data17;
+  @Uint64()
+  external int _data18;
+  @Uint64()
+  external int _data19;
+  @Uint64()
+  external int _data20;
+  @Uint64()
+  external int _data21;
+  @Uint64()
+  external int _data22;
+  @Uint64()
+  external int _data23;
+  @Uint64()
+  external int _data24;
+  @Uint64()
+  external int _data25;
+  @Uint64()
+  external int _data26;
+  @Uint64()
+  external int _data27;
+  @Uint64()
+  external int _data28;
+  @Uint64()
+  external int _data29;
+  @Uint64()
+  external int _data30;
+  @Uint64()
+  external int _data31;
+  @Uint64()
+  external int _data32;
+  @Uint64()
+  external int _data33;
+  @Uint64()
+  external int _data34;
+  @Uint64()
+  external int _data35;
+  @Uint64()
+  external int _data36;
+  @Uint64()
+  external int _data37;
+  @Uint64()
+  external int _data38;
+  @Uint64()
+  external int _data39;
+  @Uint64()
+  external int _data40;
+  @Uint64()
+  external int _data41;
+  @Uint64()
+  external int _data42;
+  @Uint32()
+  external int _data43;
+  @Uint64()
+  external int _data44;
+  @Uint64()
+  external int _data45;
+  @Uint64()
+  external int _data46;
+  @Uint64()
+  external int _data47;
+  @Uint64()
+  external int _data48;
+  @Uint64()
+  external int _data49;
+  @Uint64()
+  external int _data50;
+  @Uint64()
+  external int _data51;
+  @Uint64()
+  external int _data52;
+  @Uint32()
+  external int _data53;
+  @Uint64()
+  external int _data54;
+  @Uint64()
+  external int _data55;
+  @Uint64()
+  external int _data56;
+  @Uint64()
+  external int _data57;
+  @Uint64()
+  external int _data58;
+  @Uint64()
+  external int _data59;
+  @Uint64()
+  external int _data60;
+  @Uint64()
+  external int _data61;
+}
+
+extension PointerBLUETOOTH_DEVICE_INFOExtension
+    on Pointer<BLUETOOTH_DEVICE_INFO> {
+  String get szName => cast<Uint8>()
       .elementAt(60)
       .cast<Utf16>()
       .unpackString(BLUETOOTH_MAX_NAME_SIZE);
-
-  factory BLUETOOTH_DEVICE_INFO.allocate() =>
-      calloc<Uint8>(count: 560).cast<BLUETOOTH_DEVICE_INFO>().ref..dwSize = 560;
 }
 
 // typedef struct _BLUETOOTH_DEVICE_SEARCH_PARAMS {
@@ -2644,16 +2801,23 @@ class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
 ///
 /// {@category Struct}
 class BLUETOOTH_PIN_INFO extends Struct {
-  int get pinLength =>
-      addressOf.cast<Uint8>().elementAt(BTH_MAX_PIN_SIZE).value;
+  @Int64()
+  external int _data0;
+  @Int64()
+  external int _data1;
+  @Int8()
+  external int _data8;
+}
+
+extension PointerBLUETOOTH_PIN_INFOExtension on Pointer<BLUETOOTH_PIN_INFO> {
+  int get pinLength => cast<Uint8>().elementAt(BTH_MAX_PIN_SIZE).value;
 
   set pinLength(int length) {
-    addressOf.cast<Uint8>().elementAt(BTH_MAX_PIN_SIZE).value =
+    cast<Uint8>().elementAt(BTH_MAX_PIN_SIZE).value =
         min(length, BTH_MAX_PIN_SIZE);
   }
 
-  String get pin =>
-      String.fromCharCodes(addressOf.cast<Uint8>().asTypedList(pinLength));
+  String get pin => String.fromCharCodes(cast<Uint8>().asTypedList(pinLength));
 
   set pin(String pinString) {
     final pinData = Uint8List.fromList(pinString.codeUnits);
@@ -2661,13 +2825,8 @@ class BLUETOOTH_PIN_INFO extends Struct {
     // Set up to the length of the string, even if longer than pinLength, since
     // user may set pin before pinLength.
     for (var idx = 0; idx < min(pinData.length, BTH_MAX_PIN_SIZE); idx++) {
-      addressOf.cast<Uint8>().elementAt(idx).value = pinData[idx];
+      cast<Uint8>().elementAt(idx).value = pinData[idx];
     }
-  }
-
-  factory BLUETOOTH_PIN_INFO.allocate() {
-    const structSize = BTH_MAX_PIN_SIZE + 1;
-    return calloc<Uint8>(count: structSize).cast<BLUETOOTH_PIN_INFO>().ref;
   }
 }
 
@@ -2681,18 +2840,26 @@ class BLUETOOTH_PIN_INFO extends Struct {
 ///
 /// {@category Struct}
 class BLUETOOTH_OOB_DATA_INFO extends Struct {
-  Uint8ClampedList get C =>
-      addressOf.cast<Uint8>().asTypedList(16) as Uint8ClampedList;
+  @Int64()
+  external int _data0;
+  @Int64()
+  external int _data1;
+  @Int64()
+  external int _data2;
+  @Int64()
+  external int _data3;
+}
+
+extension PointerBLUETOOTH_OOB_DATA_INFOExtension
+    on Pointer<BLUETOOTH_OOB_DATA_INFO> {
+  Uint8ClampedList get C => cast<Uint8>().asTypedList(16) as Uint8ClampedList;
   set C(Uint8ClampedList value) =>
-      addressOf.cast<Uint8>().asTypedList(16).setAll(0, value);
+      cast<Uint8>().asTypedList(16).setAll(0, value);
 
   Uint8ClampedList get R =>
-      addressOf.cast<Uint8>().elementAt(16).asTypedList(16) as Uint8ClampedList;
+      cast<Uint8>().elementAt(16).asTypedList(16) as Uint8ClampedList;
   set R(Uint8ClampedList value) =>
-      addressOf.cast<Uint8>().elementAt(16).asTypedList(16).setAll(0, value);
-
-  factory BLUETOOTH_OOB_DATA_INFO.allocate() =>
-      calloc<Uint8>(count: 32).cast<BLUETOOTH_OOB_DATA_INFO>().ref;
+      cast<Uint8>().elementAt(16).asTypedList(16).setAll(0, value);
 }
 
 // typedef struct COR_FIELD_OFFSET

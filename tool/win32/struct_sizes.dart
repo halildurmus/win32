@@ -19,6 +19,7 @@ const structSize64 = {
   'COMDLG_FILTERSPEC': 16,
   'ACCEL': 6,
   'MONITORINFO': 40,
+  'PHYSICAL_MONITOR': 136,
   'CHOOSECOLOR': 72,
   'FINDREPLACE': 80,
   'CHOOSEFONT': 104,
@@ -70,6 +71,7 @@ const structSize64 = {
   'BLUETOOTH_DEVICE_SEARCH_PARAMS': 40,
   'BLUETOOTH_FIND_RADIO_PARAMS': 4,
   'BLUETOOTH_PIN_INFO': 17,
+  'BLUETOOTH_OOB_DATA_INFO': 32,
   'COR_FIELD_OFFSET': 8,
   'VS_FIXEDFILEINFO': 52,
   'MCI_OPEN_PARMS': 36,
@@ -102,6 +104,7 @@ const structSize32 = {
   'COMDLG_FILTERSPEC': 8,
   'ACCEL': 6,
   'MONITORINFO': 40,
+  'PHYSICAL_MONITOR': 136,
   'CHOOSECOLOR': 36,
   'FINDREPLACE': 40,
   'CHOOSEFONT': 60,
@@ -153,6 +156,7 @@ const structSize32 = {
   'BLUETOOTH_DEVICE_SEARCH_PARAMS': 32,
   'BLUETOOTH_FIND_RADIO_PARAMS': 4,
   'BLUETOOTH_PIN_INFO': 17,
+  'BLUETOOTH_OOB_DATA_INFO': 32,
   'COR_FIELD_OFFSET': 8,
   'VS_FIXEDFILEINFO': 52,
   'MCI_OPEN_PARMS': 20,
@@ -179,11 +183,11 @@ const skipStructs = [
   // sizeOf<OSVERSIONINFO> returns 280 because Dart over-allocates storage.
   'OSVERSIONINFO',
 
+  // sizeOf<BLUETOOTH_PIN_INFO> returns 24 because Dart over-allocates storage.
+  'BLUETOOTH_PIN_INFO',
+
   // Should be allocated manually, rather than using sizeOf
   'DLGTEMPLATE', 'DLGITEMTEMPLATE',
-
-  // TODO: Doesn't contain magic data field
-  'BLUETOOTH_DEVICE_INFO', 'BLUETOOTH_PIN_INFO',
 
   // TODO: Packed structs
   'MCI_OPEN_PARMS', 'MCI_SEEK_PARMS',
