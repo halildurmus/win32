@@ -80,7 +80,7 @@ class WbemLocator extends IWbemLocator {
   WbemLocator(Pointer<COMObject> ptr) : super(ptr);
 
   factory WbemLocator.createInstance() {
-    final ptr = COMObject.allocate().addressOf;
+    final ptr = zeroAllocate<COMObject>();
 
     final hr = CoCreateInstance(
         GUID.fromString(CLSID_WbemLocator).addressOf,

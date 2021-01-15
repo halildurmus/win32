@@ -149,7 +149,7 @@ class NetworkListManager extends INetworkListManager {
   NetworkListManager(Pointer<COMObject> ptr) : super(ptr);
 
   factory NetworkListManager.createInstance() {
-    final ptr = COMObject.allocate().addressOf;
+    final ptr = zeroAllocate<COMObject>();
 
     final hr = CoCreateInstance(
         GUID.fromString(CLSID_NetworkListManager).addressOf,

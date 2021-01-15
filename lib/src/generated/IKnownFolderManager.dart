@@ -162,7 +162,7 @@ class KnownFolderManager extends IKnownFolderManager {
   KnownFolderManager(Pointer<COMObject> ptr) : super(ptr);
 
   factory KnownFolderManager.createInstance() {
-    final ptr = COMObject.allocate().addressOf;
+    final ptr = zeroAllocate<COMObject>();
 
     final hr = CoCreateInstance(
         GUID.fromString(CLSID_KnownFolderManager).addressOf,

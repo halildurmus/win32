@@ -257,7 +257,7 @@ class $className extends $name {
   $className(Pointer<COMObject> ptr) : super(ptr);
 
   factory $className.createInstance() {
-    final ptr = COMObject.allocate().addressOf;
+    final ptr = zeroAllocate<COMObject>();
 
     final hr = CoCreateInstance(
         GUID.fromString(CLSID_$className).addressOf,

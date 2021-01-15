@@ -97,7 +97,7 @@ class FileSaveDialog extends IFileSaveDialog {
   FileSaveDialog(Pointer<COMObject> ptr) : super(ptr);
 
   factory FileSaveDialog.createInstance() {
-    final ptr = COMObject.allocate().addressOf;
+    final ptr = zeroAllocate<COMObject>();
 
     final hr = CoCreateInstance(
         GUID.fromString(CLSID_FileSaveDialog).addressOf,

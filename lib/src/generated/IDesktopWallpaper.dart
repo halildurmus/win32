@@ -195,7 +195,7 @@ class DesktopWallpaper extends IDesktopWallpaper {
   DesktopWallpaper(Pointer<COMObject> ptr) : super(ptr);
 
   factory DesktopWallpaper.createInstance() {
-    final ptr = COMObject.allocate().addressOf;
+    final ptr = zeroAllocate<COMObject>();
 
     final hr = CoCreateInstance(
         GUID.fromString(CLSID_DesktopWallpaper).addressOf,
