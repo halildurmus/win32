@@ -31,7 +31,8 @@ void findBluetoothDevices(int btRadioHandle) {
 }
 
 void main() {
-  final params = calloc<BLUETOOTH_FIND_RADIO_PARAMS>();
+  final params = calloc<BLUETOOTH_FIND_RADIO_PARAMS>()
+    ..ref.dwSize = sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>();
   final btRadioHandlePtr = allocate<IntPtr>();
 
   final btFindRadioHandle = BluetoothFindFirstRadio(params, btRadioHandlePtr);

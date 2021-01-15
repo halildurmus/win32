@@ -2785,10 +2785,6 @@ class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
 class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
   @Uint32()
   external int dwSize;
-
-  factory BLUETOOTH_FIND_RADIO_PARAMS.allocate() =>
-      calloc<BLUETOOTH_FIND_RADIO_PARAMS>().ref
-        ..dwSize = sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>();
 }
 
 // typedef struct _BLUETOOTH_PIN_INFO {
