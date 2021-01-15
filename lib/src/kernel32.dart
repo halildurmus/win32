@@ -38,6 +38,21 @@ int ActivateActCtx(int hActCtx, Pointer<IntPtr> lpCookie) {
   return _ActivateActCtx(hActCtx, lpCookie);
 }
 
+/// The AddRefActCtx function increments the reference count of the
+/// specified activation context.
+///
+/// ```c
+/// void AddRefActCtx(
+///   HANDLE hActCtx
+/// );
+/// ```
+/// {@category kernel32}
+void AddRefActCtx(int hActCtx) {
+  final _AddRefActCtx = _kernel32.lookupFunction<Void Function(IntPtr hActCtx),
+      void Function(int hActCtx)>('AddRefActCtx');
+  return _AddRefActCtx(hActCtx);
+}
+
 /// Allocates a new console for the calling process.
 ///
 /// ```c
@@ -128,6 +143,21 @@ void ClosePseudoConsole(int hPC) {
   final _ClosePseudoConsole = _kernel32.lookupFunction<
       Void Function(IntPtr hPC), void Function(int hPC)>('ClosePseudoConsole');
   return _ClosePseudoConsole(hPC);
+}
+
+/// The CreateActCtx function creates an activation context.
+///
+/// ```c
+/// HANDLE CreateActCtxW(
+///   PCACTCTXW pActCtx
+/// );
+/// ```
+/// {@category kernel32}
+int CreateActCtx(Pointer<ACTCTX> pActCtx) {
+  final _CreateActCtx = _kernel32.lookupFunction<
+      IntPtr Function(Pointer<ACTCTX> pActCtx),
+      int Function(Pointer<ACTCTX> pActCtx)>('CreateActCtxW');
+  return _CreateActCtx(pActCtx);
 }
 
 /// Creates a console screen buffer.
@@ -959,6 +989,22 @@ int GetConsoleWindow() {
   return _GetConsoleWindow();
 }
 
+/// The GetCurrentActCtx function returns the handle to the active
+/// activation context of the calling thread.
+///
+/// ```c
+/// BOOL GetCurrentActCtx(
+///   HANDLE *lphActCtx
+/// );
+/// ```
+/// {@category kernel32}
+int GetCurrentActCtx(Pointer<IntPtr> lphActCtx) {
+  final _GetCurrentActCtx = _kernel32.lookupFunction<
+      Int32 Function(Pointer<IntPtr> lphActCtx),
+      int Function(Pointer<IntPtr> lphActCtx)>('GetCurrentActCtx');
+  return _GetCurrentActCtx(lphActCtx);
+}
+
 /// Retrieves a pseudo handle for the current process.
 ///
 /// ```c
@@ -1714,6 +1760,21 @@ int RemoveDirectory(Pointer<Utf16> lpPathName) {
       Int32 Function(Pointer<Utf16> lpPathName),
       int Function(Pointer<Utf16> lpPathName)>('RemoveDirectoryW');
   return _RemoveDirectory(lpPathName);
+}
+
+/// The ReleaseActCtx function decrements the reference count of the
+/// specified activation context.
+///
+/// ```c
+/// void ReleaseActCtx(
+///   HANDLE hActCtx
+/// );
+/// ```
+/// {@category kernel32}
+void ReleaseActCtx(int hActCtx) {
+  final _ReleaseActCtx = _kernel32.lookupFunction<Void Function(IntPtr hActCtx),
+      void Function(int hActCtx)>('ReleaseActCtx');
+  return _ReleaseActCtx(hActCtx);
 }
 
 /// Resizes the internal buffers for a pseudoconsole to the given size.

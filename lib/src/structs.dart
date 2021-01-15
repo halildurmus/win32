@@ -611,7 +611,7 @@ const PHYSICAL_MONITOR_DESCRIPTION_SIZE = 128;
 /// {@category Struct}
 class PHYSICAL_MONITOR extends Struct {
   @IntPtr()
-  int hPhysicalMonitor;
+  external int hPhysicalMonitor;
 
   String get szPhysicalMonitorDescription => addressOf
       .cast<IntPtr>()
@@ -3008,17 +3008,58 @@ class MCI_STATUS_PARMS extends Struct {
 /// {@category Struct}
 class OVERLAPPED extends Struct {
   @IntPtr()
-  int Internal;
+  external int Internal;
 
   @IntPtr()
-  int InternalHigh;
+  external int InternalHigh;
 
-  Pointer pointer;
+  external Pointer pointer;
 
   @IntPtr()
-  int hEvent;
+  external int hEvent;
 
   factory OVERLAPPED.allocate() => zeroAllocate<OVERLAPPED>().ref;
+}
+
+// typedef struct tagACTCTXW {
+//   ULONG   cbSize;
+//   DWORD   dwFlags;
+//   LPCWSTR lpSource;
+//   USHORT  wProcessorArchitecture;
+//   LANGID  wLangId;
+//   LPCWSTR lpAssemblyDirectory;
+//   LPCWSTR lpResourceName;
+//   LPCWSTR lpApplicationName;
+//   HMODULE hModule;
+// } ACTCTXW, *PACTCTXW;
+
+/// The ACTCTX structure is used by the CreateActCtx function to create the
+/// activation context.
+///
+/// {@category Struct}
+class ACTCTX extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  @Uint32()
+  external int dwFlags;
+
+  external Pointer<Utf16> lpSource;
+
+  @Uint16()
+  external int wProcessorArchitecture;
+
+  @Uint16()
+  external int wLangId;
+
+  external Pointer<Utf16> lpAssemblyDirectory;
+  external Pointer<Utf16> lpResourceName;
+  external Pointer<Utf16> lpApplicationName;
+
+  @IntPtr()
+  external int hModule;
+
+  factory ACTCTX.allocate() => zeroAllocate<ACTCTX>().ref;
 }
 
 // -----------------------------------------------------------------------------

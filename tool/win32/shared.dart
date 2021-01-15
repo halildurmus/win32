@@ -108,6 +108,7 @@ String ffiFromWin32(String win32Type) {
     'PCONSOLE_CURSOR_INFO': 'Pointer<CONSOLE_CURSOR_INFO>',
     'PCONSOLE_SELECTION_INFO': 'Pointer<CONSOLE_SELECTION_INFO>',
     'PCONSOLE_SCREEN_BUFFER_INFO': 'Pointer<CONSOLE_SCREEN_BUFFER_INFO>',
+    'PCACTCTXW': 'Pointer<ACTCTX>',
 
     // Pointers to enums
     'LPMC_COLOR_TEMPERATURE': 'Pointer<Int32>',

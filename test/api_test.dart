@@ -28,6 +28,13 @@ void main() {
               int hActCtx, Pointer<IntPtr> lpCookie)>('ActivateActCtx');
       expect(ActivateActCtx, isA<Function>());
     });
+    test('Can instantiate AddRefActCtx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final AddRefActCtx = kernel32.lookupFunction<
+          Void Function(IntPtr hActCtx),
+          void Function(int hActCtx)>('AddRefActCtx');
+      expect(AddRefActCtx, isA<Function>());
+    });
     test('Can instantiate AllocConsole', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final AllocConsole = kernel32
@@ -73,6 +80,13 @@ void main() {
         expect(ClosePseudoConsole, isA<Function>());
       });
     }
+    test('Can instantiate CreateActCtx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CreateActCtx = kernel32.lookupFunction<
+          IntPtr Function(Pointer<ACTCTX> pActCtx),
+          int Function(Pointer<ACTCTX> pActCtx)>('CreateActCtxW');
+      expect(CreateActCtx, isA<Function>());
+    });
     test('Can instantiate CreateConsoleScreenBuffer', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final CreateConsoleScreenBuffer = kernel32.lookupFunction<
@@ -451,6 +465,13 @@ void main() {
               'GetConsoleWindow');
       expect(GetConsoleWindow, isA<Function>());
     });
+    test('Can instantiate GetCurrentActCtx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetCurrentActCtx = kernel32.lookupFunction<
+          Int32 Function(Pointer<IntPtr> lphActCtx),
+          int Function(Pointer<IntPtr> lphActCtx)>('GetCurrentActCtx');
+      expect(GetCurrentActCtx, isA<Function>());
+    });
     test('Can instantiate GetCurrentProcess', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetCurrentProcess =
@@ -800,6 +821,13 @@ void main() {
           Int32 Function(Pointer<Utf16> lpPathName),
           int Function(Pointer<Utf16> lpPathName)>('RemoveDirectoryW');
       expect(RemoveDirectory, isA<Function>());
+    });
+    test('Can instantiate ReleaseActCtx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final ReleaseActCtx = kernel32.lookupFunction<
+          Void Function(IntPtr hActCtx),
+          void Function(int hActCtx)>('ReleaseActCtx');
+      expect(ReleaseActCtx, isA<Function>());
     });
     if (windowsBuildNumber >= 17763) {
       test('Can instantiate ResizePseudoConsole', () {
