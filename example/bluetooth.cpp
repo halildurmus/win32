@@ -10,15 +10,6 @@
 
 void main()
 {
-    BLUETOOTH_ADDRESS addr;
-    addr.ullLong = 0x0123456789ABCDEF;
-    printf("[%x, ", addr.rgBytes[0]);
-    printf("%x, ", addr.rgBytes[1]);
-    printf("%x, ", addr.rgBytes[2]);
-    printf("%x, ", addr.rgBytes[3]);
-    printf("%x, ", addr.rgBytes[4]);
-    printf("%x]\n", addr.rgBytes[5]);
-
     // Get a handle to the first Bluetooth radio
     BLUETOOTH_FIND_RADIO_PARAMS findRadioParams;
     findRadioParams.dwSize = sizeof(BLUETOOTH_FIND_RADIO_PARAMS);
@@ -27,7 +18,7 @@ void main()
     auto hEnum = BluetoothFindFirstRadio(&findRadioParams, &hRadio);
     if (hEnum != NULL)
     {
-        printf("Found a radio.\n");
+        printf("Found a radio with handle %p.\n", hRadio);
     }
     else
     {
@@ -50,7 +41,7 @@ void main()
     auto res = BluetoothGetRadioInfo(hRadio, &radioInfo);
     if (res == ERROR_SUCCESS)
     {
-        printf("Got radio info.\n");
+        printf("Got radio info.\n\n");
         printf("Radio name: %ws", radioInfo.szName);
     }
 }

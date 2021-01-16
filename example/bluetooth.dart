@@ -48,7 +48,7 @@ void main() {
       final res = BluetoothGetRadioInfo(hRadio.value, radioInfo);
       if (res == ERROR_SUCCESS) {
         print('Got radio info.\n');
-        print('Radio name: ${radioInfo.ref.manufacturer}');
+        print('Radio name: ${radioInfo.szName}');
       }
 
       findBluetoothDevices(hRadio.value);

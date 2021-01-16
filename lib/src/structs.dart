@@ -2783,6 +2783,16 @@ class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
   external int dwSize;
 }
 
+// typedef struct _BLUETOOTH_ADDRESS {
+//   union {
+//     BTH_ADDR ullLong;
+//     BYTE     rgBytes[6];
+//   };
+// } BLUETOOTH_ADDRESS_STRUCT;
+
+/// The BLUETOOTH_ADDRESS structure provides the address of a Bluetooth device.
+///
+/// {@category Struct}
 class BLUETOOTH_ADDRESS extends Struct {
   @Uint64()
   external int ullLong;
@@ -2797,13 +2807,26 @@ class BLUETOOTH_ADDRESS extends Struct {
       ];
 }
 
+// // typedef struct _BLUETOOTH_RADIO_INFO {
+//   DWORD             dwSize;
+//   BLUETOOTH_ADDRESS address;
+//   WCHAR             szName[BLUETOOTH_MAX_NAME_SIZE];
+//   ULONG             ulClassofDevice;
+//   USHORT            lmpSubversion;
+//   USHORT            manufacturer;
+// } BLUETOOTH_RADIO_INFO, *PBLUETOOTH_RADIO_INFO;
+
+/// The BLUETOOTH_RADIO_INFO structure contains information about a Bluetooth
+/// radio.
+///
+/// {@category Struct}
 class BLUETOOTH_RADIO_INFO extends Struct {
   @Uint32()
   external int dwSize;
 
   external BLUETOOTH_ADDRESS address;
 
-  //     WCHAR szName[ BLUETOOTH_MAX_NAME_SIZE ];    // Name of the local radio
+  // WCHAR szName[ BLUETOOTH_MAX_NAME_SIZE ];
   @Uint64()
   external int _data0;
   @Uint64()
@@ -2935,6 +2958,14 @@ class BLUETOOTH_RADIO_INFO extends Struct {
   external int lmpSubversion;
   @Uint16()
   external int manufacturer;
+}
+
+extension PointerBLUETOOTH_RADIO_INFOExtension
+    on Pointer<BLUETOOTH_RADIO_INFO> {
+  String get szName => cast<Uint8>()
+      .elementAt(16)
+      .cast<Utf16>()
+      .unpackString(BLUETOOTH_MAX_NAME_SIZE);
 }
 
 // typedef struct _BLUETOOTH_PIN_INFO {
