@@ -10,6 +10,15 @@
 
 void main()
 {
+    BLUETOOTH_ADDRESS addr;
+    addr.ullLong = 0x0123456789ABCDEF;
+    printf("[%x, ", addr.rgBytes[0]);
+    printf("%x, ", addr.rgBytes[1]);
+    printf("%x, ", addr.rgBytes[2]);
+    printf("%x, ", addr.rgBytes[3]);
+    printf("%x, ", addr.rgBytes[4]);
+    printf("%x]\n", addr.rgBytes[5]);
+
     // Get a handle to the first Bluetooth radio
     BLUETOOTH_FIND_RADIO_PARAMS findRadioParams;
     findRadioParams.dwSize = sizeof(BLUETOOTH_FIND_RADIO_PARAMS);

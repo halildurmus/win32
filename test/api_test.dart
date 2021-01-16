@@ -2903,6 +2903,16 @@ void main() {
           int Function(int hFind)>('BluetoothFindRadioClose');
       expect(BluetoothFindRadioClose, isA<Function>());
     });
+    test('Can instantiate BluetoothGetRadioInfo', () {
+      final bthprops = DynamicLibrary.open('bthprops.cpl');
+      final BluetoothGetRadioInfo = bthprops.lookupFunction<
+              Uint32 Function(
+                  IntPtr hRadio, Pointer<BLUETOOTH_RADIO_INFO> pRadioInfo),
+              int Function(
+                  int hRadio, Pointer<BLUETOOTH_RADIO_INFO> pRadioInfo)>(
+          'BluetoothGetRadioInfo');
+      expect(BluetoothGetRadioInfo, isA<Function>());
+    });
     test('Can instantiate BluetoothIsConnectable', () {
       final bthprops = DynamicLibrary.open('bthprops.cpl');
       final BluetoothIsConnectable = bthprops.lookupFunction<

@@ -102,6 +102,7 @@ String ffiFromWin32(String win32Type) {
     'PLONG': 'Pointer<Int32>',
     'PLARGE_INTEGER': 'Pointer<Int64>', 'PSIZE_T': 'Pointer<IntPtr>',
     'PBLUETOOTH_OOB_DATA_INFO': 'Pointer<BLUETOOTH_OOB_DATA_INFO>',
+    'PBLUETOOTH_RADIO_INFO': 'Pointer<BLUETOOTH_RADIO_INFO>',
     'PCREDENTIALW': 'Pointer<CREDENTIAL>', 'PHKEY': 'Pointer<IntPtr>',
     'PCOORD': 'Pointer<COORD>',
     'PSECURITY_DESCRIPTOR': 'Pointer<SECURITY_DESCRIPTOR>',

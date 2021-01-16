@@ -2783,6 +2783,160 @@ class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
   external int dwSize;
 }
 
+class BLUETOOTH_ADDRESS extends Struct {
+  @Uint64()
+  external int ullLong;
+
+  List<int> get rgBytes => [
+        (ullLong & 0xFF),
+        (ullLong & 0xFF00) >> 8,
+        (ullLong & 0xFF0000) >> 16,
+        (ullLong & 0xFF000000) >> 24,
+        (ullLong & 0xFF00000000) >> 32,
+        (ullLong & 0xFF0000000000) >> 40
+      ];
+}
+
+class BLUETOOTH_RADIO_INFO extends Struct {
+  @Uint32()
+  external int dwSize;
+
+  external BLUETOOTH_ADDRESS address;
+
+  //     WCHAR szName[ BLUETOOTH_MAX_NAME_SIZE ];    // Name of the local radio
+  @Uint64()
+  external int _data0;
+  @Uint64()
+  external int _data1;
+  @Uint64()
+  external int _data2;
+  @Uint64()
+  external int _data3;
+  @Uint64()
+  external int _data4;
+  @Uint64()
+  external int _data5;
+  @Uint64()
+  external int _data6;
+  @Uint64()
+  external int _data7;
+  @Uint64()
+  external int _data8;
+  @Uint64()
+  external int _data9;
+  @Uint64()
+  external int _data10;
+  @Uint64()
+  external int _data11;
+  @Uint64()
+  external int _data12;
+  @Uint64()
+  external int _data13;
+  @Uint64()
+  external int _data14;
+  @Uint64()
+  external int _data15;
+  @Uint64()
+  external int _data16;
+  @Uint64()
+  external int _data17;
+  @Uint64()
+  external int _data18;
+  @Uint64()
+  external int _data19;
+  @Uint64()
+  external int _data20;
+  @Uint64()
+  external int _data21;
+  @Uint64()
+  external int _data22;
+  @Uint64()
+  external int _data23;
+  @Uint64()
+  external int _data24;
+  @Uint64()
+  external int _data25;
+  @Uint64()
+  external int _data26;
+  @Uint64()
+  external int _data27;
+  @Uint64()
+  external int _data28;
+  @Uint64()
+  external int _data29;
+  @Uint64()
+  external int _data30;
+  @Uint64()
+  external int _data31;
+  @Uint64()
+  external int _data32;
+  @Uint64()
+  external int _data33;
+  @Uint64()
+  external int _data34;
+  @Uint64()
+  external int _data35;
+  @Uint64()
+  external int _data36;
+  @Uint64()
+  external int _data37;
+  @Uint64()
+  external int _data38;
+  @Uint64()
+  external int _data39;
+  @Uint64()
+  external int _data40;
+  @Uint64()
+  external int _data41;
+  @Uint64()
+  external int _data42;
+  @Uint32()
+  external int _data43;
+  @Uint64()
+  external int _data44;
+  @Uint64()
+  external int _data45;
+  @Uint64()
+  external int _data46;
+  @Uint64()
+  external int _data47;
+  @Uint64()
+  external int _data48;
+  @Uint64()
+  external int _data49;
+  @Uint64()
+  external int _data50;
+  @Uint64()
+  external int _data51;
+  @Uint64()
+  external int _data52;
+  @Uint32()
+  external int _data53;
+  @Uint64()
+  external int _data54;
+  @Uint64()
+  external int _data55;
+  @Uint64()
+  external int _data56;
+  @Uint64()
+  external int _data57;
+  @Uint64()
+  external int _data58;
+  @Uint64()
+  external int _data59;
+  @Uint64()
+  external int _data60;
+  @Uint64()
+  external int _data61;
+
+  @Uint32()
+  external int ulClassOfDevice;
+  @Uint16()
+  external int lmpSubversion;
+  @Uint16()
+  external int manufacturer;
+}
+
 // typedef struct _BLUETOOTH_PIN_INFO {
 //   UCHAR pin[BTH_MAX_PIN_SIZE];
 //   UCHAR pinLength;

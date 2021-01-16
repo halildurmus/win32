@@ -162,6 +162,25 @@ int BluetoothFindRadioClose(int hFind) {
   return _BluetoothFindRadioClose(hFind);
 }
 
+/// The BluetoothGetRadioInfo function obtains information about a
+/// Bluetooth radio.
+///
+/// ```c
+/// DWORD BluetoothGetRadioInfo(
+///   HANDLE                hRadio,
+///   PBLUETOOTH_RADIO_INFO pRadioInfo
+/// );
+/// ```
+/// {@category bthprops}
+int BluetoothGetRadioInfo(
+    int hRadio, Pointer<BLUETOOTH_RADIO_INFO> pRadioInfo) {
+  final _BluetoothGetRadioInfo = _bthprops.lookupFunction<
+      Uint32 Function(IntPtr hRadio, Pointer<BLUETOOTH_RADIO_INFO> pRadioInfo),
+      int Function(int hRadio,
+          Pointer<BLUETOOTH_RADIO_INFO> pRadioInfo)>('BluetoothGetRadioInfo');
+  return _BluetoothGetRadioInfo(hRadio, pRadioInfo);
+}
+
 /// The BluetoothIsConnectable function determines whether a Bluetooth
 /// radio or radios is connectable.
 ///

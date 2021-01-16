@@ -399,6 +399,20 @@ void main() {
       expect(sizeOf<SYSTEMTIME>(), equals(16));
     }
   });
+  test('Struct BLUETOOTH_ADDRESS is the right size', () {
+    if (sizeOf<IntPtr>() == 8) {
+      expect(sizeOf<BLUETOOTH_ADDRESS>(), equals(8));
+    } else {
+      expect(sizeOf<BLUETOOTH_ADDRESS>(), equals(8));
+    }
+  });
+  test('Struct BLUETOOTH_RADIO_INFO is the right size', () {
+    if (sizeOf<IntPtr>() == 8) {
+      expect(sizeOf<BLUETOOTH_RADIO_INFO>(), equals(520));
+    } else {
+      expect(sizeOf<BLUETOOTH_RADIO_INFO>(), equals(520));
+    }
+  });
   test('Struct BLUETOOTH_DEVICE_INFO is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
       expect(sizeOf<BLUETOOTH_DEVICE_INFO>(), equals(560));

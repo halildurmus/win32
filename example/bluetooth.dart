@@ -18,35 +18,46 @@ void findBluetoothDevices(int btRadioHandle) {
     ..ref.dwSize = sizeOf<BLUETOOTH_DEVICE_SEARCH_PARAMS>();
   final info = calloc<BLUETOOTH_DEVICE_INFO>();
 
-  final firstDeviceHandle = BluetoothFindFirstDevice(params, info);
+  try {
+    final firstDeviceHandle = BluetoothFindFirstDevice(params, info);
 
-  if (firstDeviceHandle != NULL) {
-    print(info.szName);
-    BluetoothFindDeviceClose(firstDeviceHandle);
-  } else {
-    print('No devices found.');
+    if (firstDeviceHandle != NULL) {
+      print(info.szName);
+      BluetoothFindDeviceClose(firstDeviceHandle);
+    } else {
+      print('No devices found.');
+    }
+  } finally {
+    free(params);
+    free(info);
   }
-
-  free(params);
-  free(info);
 }
 
 void main() {
-  final params = calloc<BLUETOOTH_FIND_RADIO_PARAMS>()
+  final findRadioParams = calloc<BLUETOOTH_FIND_RADIO_PARAMS>()
     ..ref.dwSize = sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>();
-  final btRadioHandlePtr = allocate<IntPtr>();
+  final radioInfo = calloc<BLUETOOTH_RADIO_INFO>()
+    ..ref.dwSize = sizeOf<BLUETOOTH_RADIO_INFO>();
+  final hRadio = allocate<IntPtr>();
 
-  final btFindRadioHandle = BluetoothFindFirstRadio(params, btRadioHandlePtr);
+  try {
+    final hEnum = BluetoothFindFirstRadio(findRadioParams, hRadio);
+    if (hEnum != NULL) {
+      print('Found a radio with handle: ${toHex(hRadio.value)}');
 
-  if (btFindRadioHandle != NULL) {
-    print('Handle: ${toHex(btRadioHandlePtr.value)}');
+      final res = BluetoothGetRadioInfo(hRadio.value, radioInfo);
+      if (res == ERROR_SUCCESS) {
+        print('Got radio info.\n');
+        print('Radio name: ${radioInfo.ref.manufacturer}');
+      }
 
-    findBluetoothDevices(btRadioHandlePtr.value);
-    BluetoothFindRadioClose(btRadioHandlePtr.value);
-  } else {
-    print('No Bluetooth radios found.');
+      findBluetoothDevices(hRadio.value);
+      BluetoothFindRadioClose(hRadio.value);
+    } else {
+      print('No Bluetooth radios found.');
+    }
+  } finally {
+    free(findRadioParams);
+    free(hRadio);
   }
-
-  free(params);
-  free(btRadioHandlePtr);
 }
