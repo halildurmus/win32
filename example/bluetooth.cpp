@@ -5,26 +5,40 @@
 #include "bluetoothapis.h"
 #include "bthsdpdef.h"
 
-BLUETOOTH_FIND_RADIO_PARAMS findRadioParams = {sizeof(BLUETOOTH_FIND_RADIO_PARAMS)};
-BLUETOOTH_RADIO_INFO radioInfo = {
-    sizeof(BLUETOOTH_RADIO_INFO),
-    0,
-};
-
 void main()
 {
+    // Get a handle to the first Bluetooth radio
+    BLUETOOTH_FIND_RADIO_PARAMS findRadioParams;
+    findRadioParams.dwSize = sizeof(BLUETOOTH_FIND_RADIO_PARAMS);
     HANDLE hRadio;
-    BLUETOOTH_RADIO_INFO radioInfo;
-    HBLUETOOTH_RADIO_FIND m_bt = NULL;
 
-    auto hr = BluetoothFindFirstRadio(&findRadioParams, &hRadio);
-    if (SUCCEEDED(hr))
+    auto hEnum = BluetoothFindFirstRadio(&findRadioParams, &hRadio);
+    if (hEnum != NULL)
     {
         printf("Found a radio.\n");
     }
+    else
+    {
+        auto error = GetLastError();
+        if (error == ERROR_NO_MORE_ITEMS)
+        {
+            printf("No Bluetooth radios found on this device.\n");
+        }
+        else
+        {
+            printf("Error %d finding radios.\n", error);
+        }
+        exit(1);
+    }
+
+    // Interrogate the Bluetooth radio
+    BLUETOOTH_RADIO_INFO radioInfo;
+    radioInfo.dwSize = sizeof(BLUETOOTH_RADIO_INFO);
+
     auto res = BluetoothGetRadioInfo(hRadio, &radioInfo);
     if (res == ERROR_SUCCESS)
     {
         printf("Got radio info.\n");
+        printf("Radio name: %ws", radioInfo.szName);
     }
 }
