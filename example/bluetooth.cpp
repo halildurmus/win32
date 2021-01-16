@@ -1,3 +1,6 @@
+// Compile with:
+//   cl bluetooth.cpp /link bthprops.lib
+
 #include <stdio.h>
 #include <stdlib.h>
 
