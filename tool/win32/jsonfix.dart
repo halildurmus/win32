@@ -1,4 +1,4 @@
-import 'shared.dart';
+import 'model.dart';
 
 void main() {
   loadJson('tool/win32/win32api.json');

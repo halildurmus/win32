@@ -7,7 +7,8 @@
 
 import 'dart:io';
 
-import 'shared.dart';
+import 'converter.dart';
+import 'model.dart';
 import 'struct_sizes.dart';
 import 'versioned_apis.dart';
 import 'win32types.dart';

@@ -6,7 +6,8 @@
 
 import 'dart:io';
 
-import 'shared.dart';
+import 'converter.dart';
+import 'model.dart';
 import 'win32types.dart';
 
 String wrapCommentText(String inputText, [int wrapLength = 76]) {
