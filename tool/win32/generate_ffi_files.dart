@@ -49,6 +49,7 @@ String generateDocComment(
 }
 
 void generateFfiFiles() {
+  // Generate a list of libs, e.g. [kernel32, gdi32, ...]
   final libraries = prototypes.values.map((e) => e.dllLibrary).toSet().toList();
 
   for (final library in libraries) {
@@ -74,12 +75,15 @@ import 'structs.dart';
 
 final _$library = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');\n
 ''');
+
+    // Iterable<TypeDef>
     final libProtos = prototypes.values.where((p) => p.dllLibrary == library);
 
     for (final proto in libProtos) {
-      final apiName = prototypes.keys.firstWhere(
-          (k) => prototypes[k]!.neutralApiName == proto.neutralApiName);
-      final win32Func = win32APIs.where((api) => api.name == apiName).first;
+      // final genericName = prototypes.keys
+      //     .firstWhere((k) => prototypes[k]!.exportName == proto.exportName);
+      final win32Func =
+          win32APIs.where((api) => api.name == proto.exportName).first;
       final returnFFIType = ffiFromWin32(win32Func.returnType);
       final returnDartType = dartFromFFI(returnFFIType);
 
@@ -102,7 +106,7 @@ $returnDartType ${win32Func.nameWithoutEncoding}(${win32Func.params.map((param) 
         final dartType = dartFromFFI(convertedParams.first);
         return '$dartType ${convertedParams.last}';
       }).join(', ')})>
-    ('$apiName');
+    ('${win32Func.name}');
   return _${win32Func.nameWithoutEncoding}(${win32Func.params.map((param) {
         final convertedParams = win32Func.convertParamType(param);
         return convertedParams.last;

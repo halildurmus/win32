@@ -1,27 +1,27 @@
 import 'dart:convert';
 import 'dart:io';
 
+// Mapping of the generic API name to the TypeDef
 final prototypes = <String, TypeDef>{};
 
 class TypeDef {
-  final String neutralApiName;
+  final String exportName;
   final List<String> prototype;
 
   final String dllLibrary;
   final String comment;
 
-  const TypeDef(
-      this.neutralApiName, this.dllLibrary, this.prototype, this.comment);
+  const TypeDef(this.exportName, this.dllLibrary, this.prototype, this.comment);
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'neutralApiName': neutralApiName,
+        'exportName': exportName,
         'prototype': prototype.first,
         'dllLibrary': dllLibrary,
         'comment': comment
       };
 
   TypeDef.fromJson(Map<String, dynamic> json)
-      : neutralApiName = json['neutralApiName'] as String,
+      : exportName = json['exportName'] as String,
         prototype = [json['prototype'] as String],
         dllLibrary = json['dllLibrary'] as String,
         comment = json['comment'] as String;

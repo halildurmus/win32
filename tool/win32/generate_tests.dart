@@ -50,12 +50,13 @@ void main() {
     // https://github.com/dart-lang/sdk/issues/42598
     final libProtos = prototypes.values
         .where((td) => td.dllLibrary == library)
-        .where((td) => !td.neutralApiName.startsWith('TaskDialog'));
+        .where((td) => !td.exportName.startsWith('TaskDialog'));
 
     for (final proto in libProtos) {
-      final apiName = prototypes.keys.firstWhere(
-          (k) => prototypes[k]!.neutralApiName == proto.neutralApiName);
-      final win32Func = win32APIs.where((api) => api.name == apiName).first;
+      // final apiName = prototypes.keys.firstWhere(
+      //     (k) => prototypes[k]!.neutralApiName == proto.neutralApiName);
+      final win32Func =
+          win32APIs.where((api) => api.name == proto.exportName).first;
       final returnFFIType = ffiFromWin32(win32Func.returnType);
       final returnDartType = dartFromFFI(returnFFIType);
 
@@ -74,13 +75,13 @@ void main() {
         final dartType = dartFromFFI(convertedParams.first);
         return '$dartType ${convertedParams.last}';
       }).join(', ')})>
-          ('$apiName');
-        expect(${proto.neutralApiName}, isA<Function>());
+          ('${proto.exportName}');
+        expect(${win32Func.nameWithoutEncoding}, isA<Function>());
       });''';
 
-      if (versionedAPIs.keys.contains(apiName)) {
+      if (versionedAPIs.keys.contains(win32Func.name)) {
         writer.writeStringSync('''
-        if (windowsBuildNumber >= ${versionedAPIs[apiName]}) {
+        if (windowsBuildNumber >= ${versionedAPIs[win32Func.name]}) {
           $test
         }''');
       } else {
