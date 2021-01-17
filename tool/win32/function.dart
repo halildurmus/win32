@@ -1,13 +1,20 @@
-import 'dart:convert';
-import 'dart:io';
+import 'signature.dart';
 
-import 'converter.dart';
-import 'versioned_apis.dart';
+const windowsBuilds = <String, int>{
+  'WIN10_TH1': 10240,
+  'WIN10_TH2': 10586,
+  'WIN10_RS1': 14393,
+  'WIN10_RS2': 15063,
+  'WIN10_RS3': 16299,
+  'WIN10_RS4': 17134,
+  'WIN10_RS5': 17763,
+  'WIN10_19H1': 18362,
+  'WIN10_19H2': 18363,
+  'WIN10_20H1': 19041,
+  'WIN10_20H2': 19042,
+};
 
-// Mapping of the generic API name to the TypeDef
-final prototypes = <String, TypeDef>{};
-
-class TypeDef {
+class Win32Function {
   final List<String> prototype;
 
   final String dllLibrary;
@@ -23,7 +30,7 @@ class TypeDef {
         'comment': comment
       };
 
-  TypeDef.fromJson(Map<String, dynamic> json)
+  Win32Function.fromJson(Map<String, dynamic> json)
       : prototype = [json['prototype'] as String],
         dllLibrary = json['dllLibrary'] as String,
         comment = json['comment'] as String,
@@ -33,19 +40,4 @@ class TypeDef {
         test = json['test'] as bool? ?? true,
         signature =
             Win32Signature.fromSyntaxString(json['prototype'] as String);
-}
-
-void saveJson(String filename) {
-  final file = File(filename);
-  file.writeAsStringSync(json.encode(prototypes).replaceAll(r'\\n', r'\n'));
-}
-
-void loadJson(String filename) {
-  final file = File(filename);
-  final fileContents = file.readAsStringSync().replaceAll(r'\n', r'\\n');
-
-  final decoded = json.decode(fileContents) as Map<String, dynamic>;
-  for (final api in decoded.keys) {
-    prototypes[api] = TypeDef.fromJson(decoded[api] as Map<String, dynamic>);
-  }
 }

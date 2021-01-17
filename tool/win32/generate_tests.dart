@@ -7,12 +7,13 @@
 
 import 'dart:io';
 
-import 'converter.dart';
-import 'model.dart';
+import 'signature.dart';
 import 'struct_sizes.dart';
+import 'win32api.dart';
 import 'win32types.dart';
 
-void generateTests() {
+void generateTests(Win32API apiSet) {
+  final prototypes = apiSet.prototypes;
   var tests = 0;
   final writer = File('test/api_test.dart').openSync(mode: FileMode.write);
 
@@ -136,7 +137,8 @@ void main() {
 }
 
 void main() {
-  loadJson('tool/win32/win32api.json');
-  generateTests();
+  final apiSet = Win32API('tool/win32/win32api.json');
+
+  generateTests(apiSet);
   generateStructSizeTests();
 }

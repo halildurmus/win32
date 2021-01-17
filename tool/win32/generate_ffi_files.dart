@@ -6,8 +6,8 @@
 
 import 'dart:io';
 
-import 'converter.dart';
-import 'model.dart';
+import 'signature.dart';
+import 'win32api.dart';
 import 'win32types.dart';
 
 String wrapCommentText(String inputText, [int wrapLength = 76]) {
@@ -48,7 +48,8 @@ String generateDocComment(
   return comment.toString();
 }
 
-void generateFfiFiles() {
+void generateFfiFiles(Win32API apiSet) {
+  final prototypes = apiSet.prototypes;
   // Generate a list of libs, e.g. [kernel32, gdi32, ...]
   final libraries = prototypes.values.map((e) => e.dllLibrary).toSet().toList();
 
@@ -80,33 +81,33 @@ final _$library = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' 
     final libProtos = prototypes.values.where((p) => p.dllLibrary == library);
 
     for (final proto in libProtos) {
-      final win32Func = proto.signature;
+      final sig = proto.signature;
 
-      final returnFFIType = ffiFromWin32(win32Func.returnType);
+      final returnFFIType = ffiFromWin32(sig.returnType);
       final returnDartType = dartFromFFI(returnFFIType);
 
       writer.writeStringSync('''
 ${generateDocComment(library, proto.prototype.first, proto.comment)}
-$returnDartType ${win32Func.nameWithoutEncoding}(${win32Func.params.map((param) {
-        final convertedParams = win32Func.convertParamType(param);
+$returnDartType ${sig.nameWithoutEncoding}(${sig.params.map((param) {
+        final convertedParams = sig.convertParamType(param);
         final dartType = dartFromFFI(convertedParams.first);
         return '$dartType ${convertedParams.last}';
       }).join(', ')}) {
-  final _${win32Func.nameWithoutEncoding} = _$library.lookupFunction<\n
+  final _${sig.nameWithoutEncoding} = _$library.lookupFunction<\n
     $returnFFIType Function(
-      ${win32Func.params.map((param) {
-        final convertedParams = win32Func.convertParamType(param);
+      ${sig.params.map((param) {
+        final convertedParams = sig.convertParamType(param);
         return '${convertedParams.first} ${convertedParams.last}';
       }).join(', ')}),
     $returnDartType Function(
-      ${win32Func.params.map((param) {
-        final convertedParams = win32Func.convertParamType(param);
+      ${sig.params.map((param) {
+        final convertedParams = sig.convertParamType(param);
         final dartType = dartFromFFI(convertedParams.first);
         return '$dartType ${convertedParams.last}';
       }).join(', ')})>
-    ('${win32Func.name}');
-  return _${win32Func.nameWithoutEncoding}(${win32Func.params.map((param) {
-        final convertedParams = win32Func.convertParamType(param);
+    ('${sig.name}');
+  return _${sig.nameWithoutEncoding}(${sig.params.map((param) {
+        final convertedParams = sig.convertParamType(param);
         return convertedParams.last;
       }).join(', ')});
 }
@@ -118,7 +119,8 @@ $returnDartType ${win32Func.nameWithoutEncoding}(${win32Func.params.map((param) 
 }
 
 void main() {
-  loadJson('tool/win32/win32api.json');
-  generateFfiFiles();
-  print('${prototypes.length} typedefs generated.');
+  final apiSet = Win32API('tool/win32/win32api.json');
+
+  generateFfiFiles(apiSet);
+  print('${apiSet.prototypes.length} typedefs generated.');
 }

@@ -11,8 +11,6 @@
 
 import 'win32types.dart';
 
-final win32APIs = <Win32Signature>[];
-
 class Win32Signature {
   final String name;
   final String returnType;
@@ -87,16 +85,13 @@ class Win32Signature {
 }
 
 class Win32Param {
-  late final String name;
-  late final String returnType;
+  final String name;
+  final String returnType;
 
-  Win32Param(List<String> param) {
-    if (param.length != 2) {
-      throw ArgumentError('Constructor list must have length of two.');
-    }
-    name = param.first;
-    returnType = param.last;
-  }
+  Win32Param(List<String> param)
+      : assert(param.length == 2),
+        name = param.first,
+        returnType = param.last;
 }
 
 String dartFromFFI(String ffiType) {
