@@ -7,6 +7,7 @@
 import 'dart:io';
 
 import 'shared.dart';
+import 'win32types.dart';
 
 String wrapCommentText(String inputText, [int wrapLength = 76]) {
   final words = inputText.split(' ');

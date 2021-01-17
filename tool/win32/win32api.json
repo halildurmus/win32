@@ -1,0 +1,2594 @@
+{
+    "ActivateActCtx": {
+        "neutralApiName": "ActivateActCtx",
+        "prototype": "BOOL ActivateActCtx(\n  HANDLE    hActCtx,\n  ULONG_PTR *lpCookie\n);",
+        "dllLibrary": "kernel32",
+        "comment": "The ActivateActCtx function activates the specified activation context. It does this by pushing the specified activation context to the top of the activation stack. The specified activation context is thus associated with the current thread and any appropriate side-by-side API functions."
+    },
+    "AddFontResourceW": {
+        "neutralApiName": "AddFontResource",
+        "prototype": "int AddFontResourceW(\n  LPCWSTR Arg1\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The AddFontResource function adds the font resource from the specified file to the system font table. The font can subsequently be used for text output by any application."
+    },
+    "AddFontResourceExW": {
+        "neutralApiName": "AddFontResourceEx",
+        "prototype": "int AddFontResourceExW(\n  LPCWSTR name,\n  DWORD   fl,\n  PVOID   res\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The AddFontResourceEx function adds the font resource from the specified file to the system. Fonts added with the AddFontResourceEx function can be marked as private and not enumerable."
+    },
+    "AddRefActCtx": {
+        "neutralApiName": "AddRefActCtx",
+        "prototype": "void AddRefActCtx(\n  HANDLE hActCtx\n);",
+        "dllLibrary": "kernel32",
+        "comment": "The AddRefActCtx function increments the reference count of the specified activation context."
+    },
+    "AllocConsole": {
+        "neutralApiName": "AllocConsole",
+        "prototype": "BOOL WINAPI AllocConsole(void);",
+        "dllLibrary": "kernel32",
+        "comment": "Allocates a new console for the calling process."
+    },
+    "AngleArc": {
+        "neutralApiName": "AngleArc",
+        "prototype": "BOOL AngleArc(\n  HDC   hdc,\n  int   x,\n  int   y,\n  DWORD r,\n  FLOAT StartAngle,\n  FLOAT SweepAngle\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The AngleArc function draws a line segment and an arc. The line segment is drawn from the current position to the beginning of the arc. The arc is drawn along the perimeter of a circle with the given radius and center. The length of the arc is defined by the given start and sweep angles."
+    },
+    "AnimatePalette": {
+        "neutralApiName": "AnimatePalette",
+        "prototype": "BOOL AnimatePalette(\n  HPALETTE           hPal,\n  UINT               iStartIndex,\n  UINT               cEntries,\n  const PALETTEENTRY *ppe\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The AnimatePalette function replaces entries in the specified logical palette."
+    },
+    "AnimateWindow": {
+        "neutralApiName": "AnimateWindow",
+        "prototype": "BOOL AnimateWindow(\n  HWND  hWnd,\n  DWORD dwTime,\n  DWORD dwFlags\n);",
+        "dllLibrary": "user32",
+        "comment": "Enables you to produce special effects when showing or hiding windows. There are four types of animation: roll, slide, collapse or expand, and alpha-blended fade."
+    },
+    "AppendMenuW": {
+        "neutralApiName": "AppendMenu",
+        "prototype": "BOOL AppendMenuW(\n  HMENU    hMenu,\n  UINT     uFlags,\n  UINT_PTR uIDNewItem,\n  LPCWSTR  lpNewItem\n);",
+        "dllLibrary": "user32",
+        "comment": "Appends a new item to the end of the specified menu bar, drop-down menu, submenu, or shortcut menu. You can use this function to specify the content, appearance, and behavior of the menu item."
+    },
+    "Arc": {
+        "neutralApiName": "Arc",
+        "prototype": "BOOL Arc(\n  HDC hdc,\n  int x1,\n  int y1,\n  int x2,\n  int y2,\n  int x3,\n  int y3,\n  int x4,\n  int y4\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The Arc function draws an elliptical arc."
+    },
+    "ArcTo": {
+        "neutralApiName": "ArcTo",
+        "prototype": "BOOL ArcTo(\n  HDC hdc,\n  int left,\n  int top,\n  int right,\n  int bottom,\n  int xr1,\n  int yr1,\n  int xr2,\n  int yr2\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The ArcTo function draws an elliptical arc."
+    },
+    "AttachConsole": {
+        "neutralApiName": "AttachConsole",
+        "prototype": "BOOL WINAPI AttachConsole(\n  _In_ DWORD dwProcessId\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Attaches the calling process to the console of the specified process."
+    },
+    "Beep": {
+        "neutralApiName": "Beep",
+        "prototype": "BOOL Beep(\n  DWORD dwFreq,\n  DWORD dwDuration\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Generates simple tones on the speaker. The function is synchronous; it performs an alertable wait and does not return control to its caller until the sound finishes."
+    },
+    "BeginPaint": {
+        "neutralApiName": "BeginPaint",
+        "prototype": "HDC BeginPaint(\n  HWND          hWnd,\n  LPPAINTSTRUCT lpPaint\n);",
+        "dllLibrary": "user32",
+        "comment": "The BeginPaint function prepares the specified window for painting and fills a PAINTSTRUCT structure with information about the painting."
+    },
+    "BeginPath": {
+        "neutralApiName": "BeginPath",
+        "prototype": "BOOL BeginPath(\n  HDC hdc\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The BeginPath function opens a path bracket in the specified device context."
+    },
+    "BeginUpdateResourceW": {
+        "neutralApiName": "BeginUpdateResource",
+        "prototype": "HANDLE BeginUpdateResourceW(\n  LPCWSTR pFileName,\n  BOOL    bDeleteExistingResources\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves a handle that can be used by the UpdateResource function to add, delete, or replace resources in a binary module."
+    },
+    "BitBlt": {
+        "neutralApiName": "BitBlt",
+        "prototype": "BOOL BitBlt(\n  HDC   hdc,\n  int   x,\n  int   y,\n  int   cx,\n  int   cy,\n  HDC   hdcSrc,\n  int   x1,\n  int   y1,\n  DWORD rop\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The BitBlt function performs a bit-block transfer of the color data corresponding to a rectangle of pixels from the specified source device context into a destination device context."
+    },
+    "BluetoothAuthenticateDeviceEx": {
+        "neutralApiName": "BluetoothAuthenticateDeviceEx",
+        "prototype": "DWORD BluetoothAuthenticateDeviceEx(\n  HWND                        hwndParentIn,\n  HANDLE                      hRadioIn,\n  BLUETOOTH_DEVICE_INFO       *pbtdiInout,\n  PBLUETOOTH_OOB_DATA_INFO    pbtOobData,\n  AUTHENTICATION_REQUIREMENTS authenticationRequirement\n);",
+        "dllLibrary": "bthprops",
+        "comment": "The BluetoothAuthenticateDeviceEx function sends an authentication request to a remote Bluetooth device. Additionally, this function allows for out-of-band data to be passed into the function call for the device being authenticated."
+    },
+    "BluetoothDisplayDeviceProperties": {
+        "neutralApiName": "BluetoothDisplayDeviceProperties",
+        "prototype": "BOOL BluetoothDisplayDeviceProperties(\n  HWND                  hwndParent,\n  BLUETOOTH_DEVICE_INFO *pbtdi\n);",
+        "dllLibrary": "bthprops",
+        "comment": "The BluetoothDisplayDeviceProperties function opens the Control Panel device information property sheet."
+    },
+    "BluetoothEnableDiscovery": {
+        "neutralApiName": "BluetoothEnableDiscovery",
+        "prototype": "BOOL BluetoothEnableDiscovery(\n  HANDLE hRadio,\n  BOOL   fEnabled\n);",
+        "dllLibrary": "bthprops",
+        "comment": "The BluetoothEnableDiscovery function changes the discovery state of a local Bluetooth radio or radios."
+    },
+    "BluetoothEnableIncomingConnections": {
+        "neutralApiName": "BluetoothEnableIncomingConnections",
+        "prototype": "BOOL BluetoothEnableIncomingConnections(\n  HANDLE hRadio,\n  BOOL   fEnabled\n);",
+        "dllLibrary": "bthprops",
+        "comment": "The BluetoothEnableIncomingConnections function modifies whether a local Bluetooth radio accepts incoming connections."
+    },
+    "BluetoothEnumerateInstalledServices": {
+        "neutralApiName": "BluetoothEnumerateInstalledServices",
+        "prototype": "DWORD BluetoothEnumerateInstalledServices(\n  HANDLE                      hRadio,\n  const BLUETOOTH_DEVICE_INFO *pbtdi,\n  DWORD                       *pcServiceInout,\n  GUID                        *pGuidServices\n);",
+        "dllLibrary": "bthprops",
+        "comment": "The BluetoothEnumerateInstalledServices function enumerates the services GUIDs (Globally Unique Identifiers) enabled on a Bluetooth device."
+    },
+    "BluetoothFindDeviceClose": {
+        "neutralApiName": "BluetoothFindDeviceClose",
+        "prototype": "BOOL BluetoothFindDeviceClose(\n  HBLUETOOTH_DEVICE_FIND hFind\n);",
+        "dllLibrary": "bthprops",
+        "comment": "The BluetoothFindDeviceClose function closes an enumeration handle associated with a device query."
+    },
+    "BluetoothFindFirstDevice": {
+        "neutralApiName": "BluetoothFindFirstDevice",
+        "prototype": "HBLUETOOTH_DEVICE_FIND BluetoothFindFirstDevice(\n  const BLUETOOTH_DEVICE_SEARCH_PARAMS *pbtsp,\n  BLUETOOTH_DEVICE_INFO                *pbtdi\n);",
+        "dllLibrary": "bthprops",
+        "comment": "The BluetoothFindFirstDevice function begins the enumeration Bluetooth devices."
+    },
+    "BluetoothFindFirstRadio": {
+        "neutralApiName": "BluetoothFindFirstRadio",
+        "prototype": "HBLUETOOTH_RADIO_FIND BluetoothFindFirstRadio(\n  const BLUETOOTH_FIND_RADIO_PARAMS *pbtfrp,\n  HANDLE                            *phRadio\n);",
+        "dllLibrary": "bthprops",
+        "comment": "The BluetoothFindFirstRadio function begins the enumeration of local Bluetooth radios."
+    },
+    "BluetoothFindNextDevice": {
+        "neutralApiName": "BluetoothFindNextDevice",
+        "prototype": "BOOL BluetoothFindNextDevice(\n  HBLUETOOTH_DEVICE_FIND hFind,\n  BLUETOOTH_DEVICE_INFO  *pbtdi\n);",
+        "dllLibrary": "bthprops",
+        "comment": "The BluetoothFindNextDevice function finds the next Bluetooth device."
+    },
+    "BluetoothFindNextRadio": {
+        "neutralApiName": "BluetoothFindNextRadio",
+        "prototype": "BOOL BluetoothFindNextRadio(\n  HBLUETOOTH_RADIO_FIND hFind,\n  HANDLE                *phRadio\n);",
+        "dllLibrary": "bthprops",
+        "comment": "The BluetoothFindNextRadio function finds the next Bluetooth radio."
+    },
+    "BluetoothFindRadioClose": {
+        "neutralApiName": "BluetoothFindRadioClose",
+        "prototype": "BOOL BluetoothFindRadioClose(\n  HBLUETOOTH_RADIO_FIND hFind\n);",
+        "dllLibrary": "bthprops",
+        "comment": "The BluetoothFindRadioClose function closes the enumeration handle associated with finding Bluetooth radios."
+    },
+    "BluetoothGetRadioInfo": {
+        "neutralApiName": "BluetoothGetRadioInfo",
+        "prototype": "DWORD BluetoothGetRadioInfo(\n  HANDLE                hRadio,\n  PBLUETOOTH_RADIO_INFO pRadioInfo\n);",
+        "dllLibrary": "bthprops",
+        "comment": "The BluetoothGetRadioInfo function obtains information about a Bluetooth radio."
+    },
+    "BluetoothIsConnectable": {
+        "neutralApiName": "BluetoothIsConnectable",
+        "prototype": "BOOL BluetoothIsConnectable(\n  HANDLE hRadio\n);",
+        "dllLibrary": "bthprops",
+        "comment": "The BluetoothIsConnectable function determines whether a Bluetooth radio or radios is connectable."
+    },
+    "BluetoothIsDiscoverable": {
+        "neutralApiName": "BluetoothIsDiscoverable",
+        "prototype": "BOOL BluetoothIsDiscoverable(\n  HANDLE hRadio\n);",
+        "dllLibrary": "bthprops",
+        "comment": "The BluetoothIsDiscoverable function determines whether a Bluetooth radio or radios is discoverable."
+    },
+    "BluetoothIsVersionAvailable": {
+        "neutralApiName": "BluetoothIsVersionAvailable",
+        "prototype": "BOOL BluetoothIsVersionAvailable(\n  UCHAR MajorVersion,\n  UCHAR MinorVersion\n);",
+        "dllLibrary": "bthprops",
+        "comment": "The BluetoothIsVersionAvailable function indicates if the installed Bluetooth binary set supports the requested version."
+    },
+    "BluetoothRegisterForAuthenticationEx": {
+        "neutralApiName": "BluetoothRegisterForAuthenticationEx",
+        "prototype": "DWORD BluetoothRegisterForAuthenticationEx(\n  const BLUETOOTH_DEVICE_INFO            *pbtdiIn,\n  HBLUETOOTH_AUTHENTICATION_REGISTRATION *phRegHandleOut,\n  PFN_AUTHENTICATION_CALLBACK_EX         pfnCallbackIn,\n  PVOID                                  pvParam\n);",
+        "dllLibrary": "bthprops",
+        "comment": "The BluetoothRegisterForAuthenticationEx function registers an application for a pin request, numeric comparison and callback function."
+    },
+    "BluetoothRemoveDevice": {
+        "neutralApiName": "BluetoothRemoveDevice",
+        "prototype": "DWORD BluetoothRemoveDevice(\n  const BLUETOOTH_ADDRESS *pAddress\n);",
+        "dllLibrary": "bthprops",
+        "comment": "The BluetoothRemoveDevice function removes authentication between a Bluetooth device and the computer and clears cached service information for the device."
+    },
+    "BluetoothSetServiceState": {
+        "neutralApiName": "BluetoothSetServiceState",
+        "prototype": "DWORD BluetoothSetServiceState(\n  HANDLE                      hRadio,\n  const BLUETOOTH_DEVICE_INFO *pbtdi,\n  const GUID                  *pGuidService,\n  DWORD                       dwServiceFlags\n);",
+        "dllLibrary": "bthprops",
+        "comment": "The BluetoothSetServiceState function enables or disables services for a Bluetooth device."
+    },
+    "BluetoothUnregisterAuthentication": {
+        "neutralApiName": "BluetoothUnregisterAuthentication",
+        "prototype": "BOOL BluetoothUnregisterAuthentication(\n  HBLUETOOTH_AUTHENTICATION_REGISTRATION hRegHandle\n);",
+        "dllLibrary": "bthprops",
+        "comment": "The BluetoothUnregisterAuthentication function removes registration for a callback routine that was previously registered with a call to the BluetoothRegisterForAuthentication function."
+    },
+    "BluetoothUpdateDeviceRecord": {
+        "neutralApiName": "BluetoothUpdateDeviceRecord",
+        "prototype": "DWORD BluetoothUpdateDeviceRecord(\n  const BLUETOOTH_DEVICE_INFO *pbtdi\n);",
+        "dllLibrary": "bthprops",
+        "comment": "The BluetoothUpdateDeviceRecord function updates the local computer cache about a Bluetooth device."
+    },
+    "BringWindowToTop": {
+        "neutralApiName": "BringWindowToTop",
+        "prototype": "BOOL BringWindowToTop(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Brings the specified window to the top of the Z order. If the window is a top-level window, it is activated. If the window is a child window, the top-level parent window associated with the child window is activated."
+    },
+    "CallNtPowerInformation": {
+        "neutralApiName": "CallNtPowerInformation",
+        "prototype": "NTSTATUS CallNtPowerInformation(\n  POWER_INFORMATION_LEVEL InformationLevel,\n  PVOID                   InputBuffer,\n  ULONG                   InputBufferLength,\n  PVOID                   OutputBuffer,\n  ULONG                   OutputBufferLength\n);",
+        "dllLibrary": "powrprof",
+        "comment": "Sets or retrieves power information."
+    },
+    "CancelDC": {
+        "neutralApiName": "CancelDC",
+        "prototype": "BOOL CancelDC(\n  HDC hdc\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The CancelDC function cancels any pending operation on the specified device context (DC)."
+    },
+    "ChildWindowFromPoint": {
+        "neutralApiName": "ChildWindowFromPoint",
+        "prototype": "HWND ChildWindowFromPoint(\n  HWND  hWndParent,\n  POINT Point\n);",
+        "dllLibrary": "user32",
+        "comment": "Determines which, if any, of the child windows belonging to a parent window contains the specified point. The search is restricted to immediate child windows. Grandchildren, and deeper descendant windows are not searched."
+    },
+    "ChildWindowFromPointEx": {
+        "neutralApiName": "ChildWindowFromPointEx",
+        "prototype": "HWND ChildWindowFromPointEx(\n  HWND  hwnd,\n  POINT pt,\n  UINT  flags\n);",
+        "dllLibrary": "user32",
+        "comment": "Determines which, if any, of the child windows belonging to the specified parent window contains the specified point. The function can ignore invisible, disabled, and transparent child windows. Grandchildren and deeper descendants are not searched."
+    },
+    "ChooseColorW": {
+        "neutralApiName": "ChooseColor",
+        "prototype": "BOOL WINAPI ChooseColorW(\n  _Inout_ LPCHOOSECOLOR lpcc\n);",
+        "dllLibrary": "comdlg32",
+        "comment": "Creates a Color dialog box that enables the user to select a color."
+    },
+    "ChooseFontW": {
+        "neutralApiName": "ChooseFont",
+        "prototype": "BOOL WINAPI ChooseFontW(\n  _Inout_ LPCHOOSEFONT lpcf\n);",
+        "dllLibrary": "comdlg32",
+        "comment": "Creates a Font dialog box that enables the user to choose attributes for a logical font. These attributes include a font family and associated font style, a point size, effects (underline, strikeout, and text color), and a script (or character set)."
+    },
+    "Chord": {
+        "neutralApiName": "Chord",
+        "prototype": "BOOL Chord(\n  HDC hdc,\n  int x1,\n  int y1,\n  int x2,\n  int y2,\n  int x3,\n  int y3,\n  int x4,\n  int y4\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The Chord function draws a chord (a region bounded by the intersection of an ellipse and a line segment, called a secant). The chord is outlined by using the current pen and filled by using the current brush."
+    },
+    "ClientToScreen": {
+        "neutralApiName": "ClientToScreen",
+        "prototype": "BOOL ClientToScreen(\n  HWND    hWnd,\n  LPPOINT lpPoint\n);",
+        "dllLibrary": "user32",
+        "comment": "The ClientToScreen function converts the client-area coordinates of a specified point to screen coordinates."
+    },
+    "ClipCursor": {
+        "neutralApiName": "ClipCursor",
+        "prototype": "BOOL ClipCursor(\n  const RECT *lpRect\n);",
+        "dllLibrary": "user32",
+        "comment": "Confines the cursor to a rectangular area on the screen. If a subsequent cursor position (set by the SetCursorPos function or the mouse) lies outside the rectangle, the system automatically adjusts the position to keep the cursor inside the rectangular area."
+    },
+    "CloseFigure": {
+        "neutralApiName": "CloseFigure",
+        "prototype": "BOOL CloseFigure(\n  HDC hdc);",
+        "dllLibrary": "gdi32",
+        "comment": "The CloseFigure function closes an open figure in a path."
+    },
+    "CloseHandle": {
+        "neutralApiName": "CloseHandle",
+        "prototype": "BOOL CloseHandle(\n  HANDLE hObject\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Closes an open object handle."
+    },
+    "ClosePseudoConsole": {
+        "neutralApiName": "ClosePseudoConsole",
+        "prototype": "void WINAPI ClosePseudoConsole(\n    _In_ HPCON hPC\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Closes a pseudoconsole from the given handle."
+    },
+    "CLSIDFromString": {
+        "neutralApiName": "CLSIDFromString",
+        "prototype": "HRESULT CLSIDFromString(\n  LPCOLESTR lpsz,\n  LPCLSID   pclsid\n);",
+        "dllLibrary": "ole32",
+        "comment": "Converts a string generated by the StringFromCLSID function back into the original CLSID."
+    },
+    "CoCreateGuid": {
+        "neutralApiName": "CoCreateGuid",
+        "prototype": "HRESULT CoCreateGuid(\n  GUID *pguid\n);",
+        "dllLibrary": "ole32",
+        "comment": "Creates a GUID, a unique 128-bit integer used for CLSIDs and interface identifiers."
+    },
+    "CoCreateInstance": {
+        "neutralApiName": "CoCreateInstance",
+        "prototype": "HRESULT CoCreateInstance(\n  REFCLSID  rclsid,\n  LPUNKNOWN pUnkOuter,\n  DWORD     dwClsContext,\n  REFIID    riid,\n  LPVOID    *ppv\n);",
+        "dllLibrary": "ole32",
+        "comment": "Creates a single uninitialized object of the class associated with a specified CLSID. Call CoCreateInstance when you want to create only one object on the local system. To create a single object on a remote system, call the CoCreateInstanceEx function. To create multiple objects based on a single CLSID, call the CoGetClassObject function."
+    },
+    "CoGetClassObject": {
+        "neutralApiName": "CoGetClassObject",
+        "prototype": "HRESULT CoGetClassObject(\n  REFCLSID rclsid,\n  DWORD    dwClsContext,\n  LPVOID   pvReserved,\n  REFIID   riid,\n  LPVOID   *ppv\n);",
+        "dllLibrary": "ole32",
+        "comment": "Provides a pointer to an interface on a class object associated with a specified CLSID. CoGetClassObject locates, and if necessary, dynamically loads the executable code required to do this."
+    },
+    "CoInitializeEx": {
+        "neutralApiName": "CoInitializeEx",
+        "prototype": "HRESULT CoInitializeEx(\n  LPVOID pvReserved,\n  DWORD  dwCoInit\n);",
+        "dllLibrary": "ole32",
+        "comment": "Initializes the COM library for use by the calling thread, sets the thread's concurrency model, and creates a new apartment for the thread if one is required."
+    },
+    "CoInitializeSecurity": {
+        "neutralApiName": "CoInitializeSecurity",
+        "prototype": "HRESULT CoInitializeSecurity(\n  PSECURITY_DESCRIPTOR        pSecDesc,\n  LONG                        cAuthSvc,\n  SOLE_AUTHENTICATION_SERVICE *asAuthSvc,\n  void                        *pReserved1,\n  DWORD                       dwAuthnLevel,\n  DWORD                       dwImpLevel,\n  void                        *pAuthList,\n  DWORD                       dwCapabilities,\n  void                        *pReserved3\n);",
+        "dllLibrary": "ole32",
+        "comment": "Registers security and sets the default security values for the process."
+    },
+    "CopyIcon": {
+        "neutralApiName": "CopyIcon",
+        "prototype": "HICON CopyIcon(\n  HICON hIcon\n);",
+        "dllLibrary": "user32",
+        "comment": "Copies the specified icon from another module to the current module."
+    },
+    "CopyRect": {
+        "neutralApiName": "CopyRect",
+        "prototype": "BOOL CopyRect(\n  LPRECT     lprcDst,\n  const RECT *lprcSrc\n);",
+        "dllLibrary": "user32",
+        "comment": "The CopyRect function copies the coordinates of one rectangle to another."
+    },
+    "CoSetProxyBlanket": {
+        "neutralApiName": "CoSetProxyBlanket",
+        "prototype": "HRESULT CoSetProxyBlanket(\n  IUnknown                 *pProxy,\n  DWORD                    dwAuthnSvc,\n  DWORD                    dwAuthzSvc,\n  OLECHAR                  *pServerPrincName,\n  DWORD                    dwAuthnLevel,\n  DWORD                    dwImpLevel,\n  RPC_AUTH_IDENTITY_HANDLE pAuthInfo,\n  DWORD                    dwCapabilities\n);",
+        "dllLibrary": "ole32",
+        "comment": "Sets the authentication information that will be used to make calls on the specified proxy. This is a helper function for IClientSecurity::SetBlanket."
+    },
+    "CoTaskMemFree": {
+        "neutralApiName": "CoTaskMemFree",
+        "prototype": "void CoTaskMemFree(\n  _Frees_ptr_opt_ LPVOID pv\n);",
+        "dllLibrary": "ole32",
+        "comment": "Frees a block of task memory previously allocated through a call to the CoTaskMemAlloc or CoTaskMemRealloc function."
+    },
+    "CoUninitialize": {
+        "neutralApiName": "CoUninitialize",
+        "prototype": "void CoUninitialize();",
+        "dllLibrary": "ole32",
+        "comment": "Closes the COM library on the current thread, unloads all DLLs loaded by the thread, frees any other resources that the thread maintains, and forces all RPC connections on the thread to close."
+    },
+    "CreateAcceleratorTableW": {
+        "neutralApiName": "CreateAcceleratorTable",
+        "prototype": "HACCEL CreateAcceleratorTableW(\n  LPACCEL paccel,\n  int     cAccel\n);",
+        "dllLibrary": "user32",
+        "comment": "Creates an accelerator table."
+    },
+    "CreateActCtxW": {
+        "neutralApiName": "CreateActCtx",
+        "prototype": "HANDLE CreateActCtxW(\n  PCACTCTXW pActCtx\n);",
+        "dllLibrary": "kernel32",
+        "comment": "The CreateActCtx function creates an activation context."
+    },
+    "CreateCompatibleBitmap": {
+        "neutralApiName": "CreateCompatibleBitmap",
+        "prototype": "HBITMAP CreateCompatibleBitmap(\n  HDC hdc,\n  int cx,\n  int cy\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The CreateCompatibleBitmap function creates a bitmap compatible with the device that is associated with the specified device context."
+    },
+    "CreateCompatibleDC": {
+        "neutralApiName": "CreateCompatibleDC",
+        "prototype": "HDC CreateCompatibleDC(\n  HDC hdc\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The CreateCompatibleDC function creates a memory device context (DC) compatible with the specified device."
+    },
+    "CreateConsoleScreenBuffer": {
+        "neutralApiName": "CreateConsoleScreenBuffer",
+        "prototype": "HANDLE WINAPI CreateConsoleScreenBuffer(\n  _In_             DWORD               dwDesiredAccess,\n  _In_             DWORD               dwShareMode,\n  _In_opt_   const SECURITY_ATTRIBUTES *lpSecurityAttributes,\n  _In_             DWORD               dwFlags,\n  _Reserved_       LPVOID              lpScreenBufferData\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates a console screen buffer."
+    },
+    "CreateDialogIndirectParamW": {
+        "neutralApiName": "CreateDialogIndirectParam",
+        "prototype": "HWND CreateDialogIndirectParamW(\n  HINSTANCE       hInstance,\n  LPCDLGTEMPLATEW lpTemplate,\n  HWND            hWndParent,\n  DLGPROC         lpDialogFunc,\n  LPARAM          dwInitParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Creates a modeless dialog box from a dialog box template in memory. Before displaying the dialog box, the function passes an application-defined value to the dialog box procedure as the lParam parameter of the WM_INITDIALOG message. An application can use this value to initialize dialog box controls."
+    },
+    "CreateDIBitmap": {
+        "neutralApiName": "CreateDIBitmap",
+        "prototype": "HBITMAP CreateDIBitmap(\n  HDC                    hdc,\n  const BITMAPINFOHEADER *pbmih,\n  DWORD                  flInit,\n  const VOID             *pjBits,\n  const BITMAPINFO       *pbmi,\n  UINT                   iUsage\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The CreateDIBitmap function creates a compatible bitmap (DDB) from a DIB and, optionally, sets the bitmap bits."
+    },
+    "CreateDIBPatternBrushPt": {
+        "neutralApiName": "CreateDIBPatternBrushPt",
+        "prototype": "HBRUSH CreateDIBPatternBrushPt(\n  const VOID *lpPackedDIB,\n  UINT       iUsage\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The CreateDIBPatternBrushPt function creates a logical brush that has the pattern specified by the device-independent bitmap (DIB)."
+    },
+    "CreateDirectoryW": {
+        "neutralApiName": "CreateDirectory",
+        "prototype": "BOOL CreateDirectoryW(\n  LPCWSTR               lpPathName,\n  LPSECURITY_ATTRIBUTES lpSecurityAttributes\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates a new directory. If the underlying file system supports security on files and directories, the function applies a specified security descriptor to the new directory."
+    },
+    "CreateFileW": {
+        "neutralApiName": "CreateFile",
+        "prototype": "HANDLE CreateFileW(\n  LPCWSTR               lpFileName,\n  DWORD                 dwDesiredAccess,\n  DWORD                 dwShareMode,\n  LPSECURITY_ATTRIBUTES lpSecurityAttributes,\n  DWORD                 dwCreationDisposition,\n  DWORD                 dwFlagsAndAttributes,\n  HANDLE                hTemplateFile\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates or opens a file or I/O device. The most commonly used I/O devices are as follows: file, file stream, directory, physical disk, volume, console buffer, tape drive, communications resource, mailslot, and pipe. The function returns a handle that can be used to access the file or device for various types of I/O depending on the file or device and the flags and attributes specified."
+    },
+    "CreateFontIndirectW": {
+        "neutralApiName": "CreateFontIndirect",
+        "prototype": "HFONT CreateFontIndirectW(\n  const LOGFONTW *lplf\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The CreateFontIndirect function creates a logical font that has the specified characteristics. The font can subsequently be selected as the current font for any device context."
+    },
+    "CreateHalftonePalette": {
+        "neutralApiName": "CreateHalftonePalette",
+        "prototype": "HPALETTE CreateHalftonePalette(\n  HDC hdc\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The CreateHalftonePalette function creates a halftone palette for the specified device context (DC)."
+    },
+    "CreateHatchBrush": {
+        "neutralApiName": "CreateHatchBrush",
+        "prototype": "HBRUSH CreateHatchBrush(\n  int      iHatch,\n  COLORREF color\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The CreateHatchBrush function creates a logical brush that has the specified hatch pattern and color."
+    },
+    "CreateMenu": {
+        "neutralApiName": "CreateMenu",
+        "prototype": "HMENU CreateMenu();",
+        "dllLibrary": "user32",
+        "comment": "Creates a menu. The menu is initially empty, but it can be filled with menu items by using the InsertMenuItem, AppendMenu, and InsertMenu functions."
+    },
+    "CreatePen": {
+        "neutralApiName": "CreatePen",
+        "prototype": "HPEN CreatePen(\n  int      iStyle,\n  int      cWidth,\n  COLORREF color\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The CreatePen function creates a logical pen that has the specified style, width, and color. The pen can subsequently be selected into a device context and used to draw lines and curves."
+    },
+    "CreatePipe": {
+        "neutralApiName": "CreatePipe",
+        "prototype": "BOOL CreatePipe(\n  PHANDLE               hReadPipe,\n  PHANDLE               hWritePipe,\n  LPSECURITY_ATTRIBUTES lpPipeAttributes,\n  DWORD                 nSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates an anonymous pipe, and returns handles to the read and write ends of the pipe."
+    },
+    "CreateProcessW": {
+        "neutralApiName": "CreateProcess",
+        "prototype": "BOOL CreateProcessW(\n  LPCWSTR               lpApplicationName,\n  LPWSTR                lpCommandLine,\n  LPSECURITY_ATTRIBUTES lpProcessAttributes,\n  LPSECURITY_ATTRIBUTES lpThreadAttributes,\n  BOOL                  bInheritHandles,\n  DWORD                 dwCreationFlags,\n  LPVOID                lpEnvironment,\n  LPCWSTR               lpCurrentDirectory,\n  LPSTARTUPINFOW        lpStartupInfo,\n  LPPROCESS_INFORMATION lpProcessInformation\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates a new process and its primary thread. The new process runs in the security context of the calling process."
+    },
+    "CreatePseudoConsole": {
+        "neutralApiName": "CreatePseudoConsole",
+        "prototype": "HRESULT WINAPI CreatePseudoConsole(\n  _In_ COORD size,\n  _In_ HANDLE hInput,\n  _In_ HANDLE hOutput,\n  _In_ DWORD dwFlags,\n  _Out_ HPCON* phPC\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates a new pseudoconsole object for the calling process."
+    },
+    "CreateSolidBrush": {
+        "neutralApiName": "CreateSolidBrush",
+        "prototype": "HBRUSH CreateSolidBrush(\n  COLORREF color\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The CreateSolidBrush function creates a logical brush that has the specified solid color."
+    },
+    "CreateWindowExW": {
+        "neutralApiName": "CreateWindowEx",
+        "prototype": "HWND CreateWindowExW(\n  DWORD     dwExStyle,\n  LPCWSTR   lpClassName,\n  LPCWSTR   lpWindowName,\n  DWORD     dwStyle,\n  int       X,\n  int       Y,\n  int       nWidth,\n  int       nHeight,\n  HWND      hWndParent,\n  HMENU     hMenu,\n  HINSTANCE hInstance,\n  LPVOID    lpParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Creates an overlapped, pop-up, or child window. It specifies the window class, window title, window style, and (optionally) the initial position and size of the window. The function also specifies the window's parent or owner, if any, and the window's menu."
+    },
+    "CredDeleteW": {
+        "neutralApiName": "CredDelete",
+        "prototype": "BOOL CredDeleteW(\n  LPCWSTR TargetName,\n  DWORD   Type,\n  DWORD   Flags\n);",
+        "dllLibrary": "advapi32",
+        "comment": "The CredDelete function deletes a credential from the user's credential set. The credential set used is the one associated with the logon session of the current token. The token must not have the user's SID disabled."
+    },
+    "CredFree": {
+        "neutralApiName": "CredFree",
+        "prototype": "void CredFree(\n  PVOID Buffer\n);",
+        "dllLibrary": "advapi32",
+        "comment": "The CredFree function frees a buffer returned by any of the credentials management functions."
+    },
+    "CredReadW": {
+        "neutralApiName": "CredRead",
+        "prototype": "BOOL CredReadW(\n  LPCWSTR      TargetName,\n  DWORD        Type,\n  DWORD        Flags,\n  PCREDENTIALW *Credential\n);",
+        "dllLibrary": "advapi32",
+        "comment": "The CredRead function reads a credential from the user's credential set. The credential set used is the one associated with the logon session of the current token. The token must not have the user's SID disabled."
+    },
+    "CredWriteW": {
+        "neutralApiName": "CredWrite",
+        "prototype": "BOOL CredWriteW(\n  PCREDENTIALW Credential,\n  DWORD        Flags\n);",
+        "dllLibrary": "advapi32",
+        "comment": "The CredWrite function creates a new credential or modifies an existing credential in the user's credential set. The new credential is associated with the logon session of the current token. The token must not have the user's security identifier (SID) disabled."
+    },
+    "DeactivateActCtx": {
+        "neutralApiName": "DeactivateActCtx",
+        "prototype": "BOOL DeactivateActCtx(\n  DWORD     dwFlags,\n  ULONG_PTR ulCookie\n);",
+        "dllLibrary": "kernel32",
+        "comment": "The DeactivateActCtx function deactivates the activation context corresponding to the specified cookie."
+    },
+    "DefWindowProcW": {
+        "neutralApiName": "DefWindowProc",
+        "prototype": "LRESULT DefWindowProcW(\n  HWND   hWnd,\n  UINT   Msg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Calls the default window procedure to provide default processing for any window messages that an application does not process. This function ensures that every message is processed. DefWindowProc is called with the same parameters received by the window procedure."
+    },
+    "DeleteDC": {
+        "neutralApiName": "DeleteDC",
+        "prototype": "BOOL DeleteDC(\n  HDC hdc\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The DeleteDC function deletes the specified device context (DC)."
+    },
+    "DeleteFileW": {
+        "neutralApiName": "DeleteFile",
+        "prototype": "BOOL DeleteFileW(\n  LPCWSTR lpFileName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Deletes an existing file."
+    },
+    "DeleteObject": {
+        "neutralApiName": "DeleteObject",
+        "prototype": "BOOL DeleteObject(\n  HGDIOBJ ho\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The DeleteObject function deletes a logical pen, brush, font, bitmap, region, or palette, freeing all system resources associated with the object. After the object is deleted, the specified handle is no longer valid."
+    },
+    "DestroyIcon": {
+        "neutralApiName": "DestroyIcon",
+        "prototype": "BOOL DestroyIcon(\n  HICON hIcon\n);",
+        "dllLibrary": "user32",
+        "comment": "Destroys an icon and frees any memory the icon occupied."
+    },
+    "DestroyPhysicalMonitor": {
+        "neutralApiName": "DestroyPhysicalMonitor",
+        "prototype": "_BOOL DestroyPhysicalMonitor(\n  HANDLE hMonitor\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Closes a handle to a physical monitor. Call this function to close a monitor handle obtained from the GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9 function."
+    },
+    "DestroyPhysicalMonitors": {
+        "neutralApiName": "DestroyPhysicalMonitors",
+        "prototype": "_BOOL DestroyPhysicalMonitors(\n  DWORD              dwPhysicalMonitorArraySize,\n  LPPHYSICAL_MONITOR pPhysicalMonitorArray\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Closes an array of physical monitor handles. Call this function to close an array of monitor handles obtained from the GetPhysicalMonitorsFromHMONITOR or GetPhysicalMonitorsFromIDirect3DDevice9 function."
+    },
+    "DestroyWindow": {
+        "neutralApiName": "DestroyWindow",
+        "prototype": "BOOL DestroyWindow(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Destroys the specified window. The function sends WM_DESTROY and WM_NCDESTROY messages to the window to deactivate it and remove the keyboard focus from it. The function also destroys the window's menu, flushes the thread message queue, destroys timers, removes clipboard ownership, and breaks the clipboard viewer chain (if the window is at the top of the viewer chain)."
+    },
+    "DialogBoxIndirectParamW": {
+        "neutralApiName": "DialogBoxIndirectParam",
+        "prototype": "INT_PTR DialogBoxIndirectParamW(\n  HINSTANCE       hInstance,\n  LPCDLGTEMPLATEW hDialogTemplate,\n  HWND            hWndParent,\n  DLGPROC         lpDialogFunc,\n  LPARAM          dwInitParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Creates a modal dialog box from a dialog box template in memory. Before displaying the dialog box, the function passes an application-defined value to the dialog box procedure as the lParam parameter of the WM_INITDIALOG message. An application can use this value to initialize dialog box controls."
+    },
+    "DispatchMessageW": {
+        "neutralApiName": "DispatchMessage",
+        "prototype": "LRESULT DispatchMessageW(\n  const MSG *lpMsg\n);",
+        "dllLibrary": "user32",
+        "comment": "Dispatches a message to a window procedure. It is typically used to dispatch a message retrieved by the GetMessage function."
+    },
+    "DrawCaption": {
+        "neutralApiName": "DrawCaption",
+        "prototype": "BOOL DrawCaption(\n  HWND       hwnd,\n  HDC        hdc,\n  const RECT *lprect,\n  UINT       flags\n);",
+        "dllLibrary": "user32",
+        "comment": "The DrawCaption function draws a window caption."
+    },
+    "DrawEscape": {
+        "neutralApiName": "DrawEscape",
+        "prototype": "int DrawEscape(\n  HDC    hdc,\n  int    iEscape,\n  int    cjIn,\n  LPCSTR lpIn\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The DrawEscape function provides drawing capabilities of the specified video display that are not directly available through the graphics device interface (GDI)."
+    },
+    "DrawIcon": {
+        "neutralApiName": "DrawIcon",
+        "prototype": "BOOL DrawIcon(\n  HDC   hDC,\n  int   X,\n  int   Y,\n  HICON hIcon\n);",
+        "dllLibrary": "user32",
+        "comment": "Draws an icon or cursor into the specified device context."
+    },
+    "DrawStatusTextW": {
+        "neutralApiName": "DrawStatusText",
+        "prototype": "void DrawStatusTextW(\n  HDC     hDC,\n  LPCRECT lprc,\n  LPCWSTR pszText,\n  UINT    uFlags\n);",
+        "dllLibrary": "comctl32",
+        "comment": "The DrawStatusText function draws the specified text in the style of a status window with borders."
+    },
+    "DrawTextW": {
+        "neutralApiName": "DrawText",
+        "prototype": "int DrawTextW(\n  HDC     hdc,\n  LPCWSTR lpchText,\n  int     cchText,\n  LPRECT  lprc,\n  UINT    format\n);",
+        "dllLibrary": "user32",
+        "comment": "The DrawText function draws formatted text in the specified rectangle. It formats the text according to the specified method (expanding tabs, justifying characters, breaking lines, and so forth)."
+    },
+    "DrawTextExW": {
+        "neutralApiName": "DrawTextEx",
+        "prototype": "int DrawTextExW(\n  HDC              hdc,\n  LPWSTR           lpchText,\n  int              cchText,\n  LPRECT           lprc,\n  UINT             format,\n  LPDRAWTEXTPARAMS lpdtp\n);",
+        "dllLibrary": "user32",
+        "comment": "The DrawTextEx function draws formatted text in the specified rectangle."
+    },
+    "Ellipse": {
+        "neutralApiName": "Ellipse",
+        "prototype": "BOOL Ellipse(\n  HDC hdc,\n  int left,\n  int top,\n  int right,\n  int bottom\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The Ellipse function draws an ellipse. The center of the ellipse is the center of the specified bounding rectangle. The ellipse is outlined by using the current pen and is filled by using the current brush."
+    },
+    "EnableMenuItem": {
+        "neutralApiName": "EnableMenuItem",
+        "prototype": "BOOL EnableMenuItem(\n  HMENU hMenu,\n  UINT  uIDEnableItem,\n  UINT  uEnable\n);",
+        "dllLibrary": "user32",
+        "comment": "Enables, disables, or grays the specified menu item."
+    },
+    "EndDialog": {
+        "neutralApiName": "EndDialog",
+        "prototype": "BOOL EndDialog(\n  HWND    hDlg,\n  INT_PTR nResult\n);",
+        "dllLibrary": "user32",
+        "comment": "Destroys a modal dialog box, causing the system to end any processing for the dialog box."
+    },
+    "EndPaint": {
+        "neutralApiName": "EndPaint",
+        "prototype": "BOOL EndPaint(\n  HWND              hWnd,\n  const PAINTSTRUCT *lpPaint\n);",
+        "dllLibrary": "user32",
+        "comment": "The EndPaint function marks the end of painting in the specified window. This function is required for each call to the BeginPaint function, but only after painting is complete."
+    },
+    "EndPath": {
+        "neutralApiName": "EndPath",
+        "prototype": "BOOL EndPath(\n  HDC hdc\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The EndPath function closes a path bracket and selects the path defined by the bracket into the specified device context."
+    },
+    "EndUpdateResourceW": {
+        "neutralApiName": "EndUpdateResource",
+        "prototype": "BOOL EndUpdateResourceW(\n  HANDLE hUpdate,\n  BOOL   fDiscard\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Commits or discards changes made prior to a call to UpdateResource."
+    },
+    "EnumChildWindows": {
+        "neutralApiName": "EnumChildWindows",
+        "prototype": "BOOL EnumChildWindows(\n  HWND        hWndParent,\n  WNDENUMPROC lpEnumFunc,\n  LPARAM      lParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Enumerates the child windows that belong to the specified parent window by passing the handle to each child window, in turn, to an application-defined callback function. EnumChildWindows continues until the last child window is enumerated or the callback function returns FALSE."
+    },
+    "EnumDisplayMonitors": {
+        "neutralApiName": "EnumDisplayMonitors",
+        "prototype": "BOOL EnumDisplayMonitors(\n  HDC             hdc,\n  LPCRECT         lprcClip,\n  MONITORENUMPROC lpfnEnum,\n  LPARAM          dwData\n);",
+        "dllLibrary": "user32",
+        "comment": "The EnumDisplayMonitors function enumerates display monitors (including invisible pseudo-monitors associated with the mirroring drivers) that intersect a region formed by the intersection of a specified clipping rectangle and the visible region of a device context. EnumDisplayMonitors calls an application-defined MonitorEnumProc callback function once for each monitor that is enumerated. Note that GetSystemMetrics (SM_CMONITORS) counts only the display monitors."
+    },
+    "EnumFontFamiliesExW": {
+        "neutralApiName": "EnumFontFamiliesEx",
+        "prototype": "int EnumFontFamiliesExW(\n  HDC           hdc,\n  LPLOGFONTW    lpLogfont,\n  FONTENUMPROCW lpProc,\n  LPARAM        lParam,\n  DWORD         dwFlags\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The EnumFontFamiliesEx function enumerates all uniquely-named fonts in the system that match the font characteristics specified by the LOGFONT structure. EnumFontFamiliesEx enumerates fonts based on typeface name, character set, or both."
+    },
+    "EnumProcesses": {
+        "neutralApiName": "EnumProcesses",
+        "prototype": "BOOL EnumProcesses(\n  DWORD   *lpidProcess,\n  DWORD   cb,\n  LPDWORD lpcbNeeded\n);",
+        "dllLibrary": "psapi",
+        "comment": "Retrieves the process identifier for each process object in the system."
+    },
+    "EnumProcessModules": {
+        "neutralApiName": "EnumProcessModules",
+        "prototype": "BOOL EnumProcessModules(\n  HANDLE  hProcess,\n  HMODULE *lphModule,\n  DWORD   cb,\n  LPDWORD lpcbNeeded\n);",
+        "dllLibrary": "psapi",
+        "comment": "Retrieves a handle for each module in the specified process."
+    },
+    "EnumProcessModulesEx": {
+        "neutralApiName": "EnumProcessModulesEx",
+        "prototype": "BOOL EnumProcessModulesEx(\n  HANDLE  hProcess,\n  HMODULE *lphModule,\n  DWORD   cb,\n  LPDWORD lpcbNeeded,\n  DWORD   dwFilterFlag\n);",
+        "dllLibrary": "psapi",
+        "comment": "Retrieves a handle for each module in the specified process that meets the specified filter criteria."
+    },
+    "EnumResourceNamesW": {
+        "neutralApiName": "EnumResourceNames",
+        "prototype": "BOOL EnumResourceNamesW(\n  HMODULE          hModule,\n  LPCWSTR          lpType,\n  ENUMRESNAMEPROCW lpEnumFunc,\n  LONG_PTR         lParam\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Enumerates resources of a specified type within a binary module. For Windows Vista and later, this is typically a language-neutral Portable Executable (LN file), and the enumeration will also include resources from the corresponding language-specific resource files (.mui files) that contain localizable language resources. It is also possible for hModule to specify an .mui file, in which case only that file is searched for resources."
+    },
+    "EnumResourceTypesW": {
+        "neutralApiName": "EnumResourceTypes",
+        "prototype": "BOOL EnumResourceTypesW(\n  HMODULE          hModule,\n  ENUMRESTYPEPROCW lpEnumFunc,\n  LONG_PTR         lParam\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Enumerates resource types within a binary module. Starting with Windows Vista, this is typically a language-neutral Portable Executable (LN file), and the enumeration also includes resources from one of the corresponding language-specific resource files (.mui files)—if one exists—that contain localizable language resources. It is also possible to use hModule to specify a .mui file, in which case only that file is searched for resource types."
+    },
+    "EnumWindows": {
+        "neutralApiName": "EnumWindows",
+        "prototype": "BOOL EnumWindows(\n  WNDENUMPROC lpEnumFunc,\n  LPARAM      lParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Enumerates all top-level windows on the screen by passing the handle to each window, in turn, to an application-defined callback function. EnumWindows continues until the last top-level window is enumerated or the callback function returns FALSE."
+    },
+    "EqualRect": {
+        "neutralApiName": "EqualRect",
+        "prototype": "BOOL EqualRect(\n  const RECT *lprc1,\n  const RECT *lprc2\n);",
+        "dllLibrary": "user32",
+        "comment": "The EqualRect function determines whether the two specified rectangles are equal by comparing the coordinates of their upper-left and lower-right corners."
+    },
+    "ExcludeUpdateRgn": {
+        "neutralApiName": "ExcludeUpdateRgn",
+        "prototype": "int ExcludeUpdateRgn(\n  HDC  hDC,\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "The ExcludeUpdateRgn function prevents drawing within invalid areas of a window by excluding an updated region in the window from a clipping region."
+    },
+    "ExitProcess": {
+        "neutralApiName": "ExitProcess",
+        "prototype": "void ExitProcess(\n  UINT uExitCode\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Ends the calling process and all its threads."
+    },
+    "ExtCreatePen": {
+        "neutralApiName": "ExtCreatePen",
+        "prototype": "HPEN ExtCreatePen(\n  DWORD          iPenStyle,\n  DWORD          cWidth,\n  const LOGBRUSH *plbrush,\n  DWORD          cStyle,\n  const DWORD    *pstyle\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The ExtCreatePen function creates a logical cosmetic or geometric pen that has the specified style, width, and brush attributes."
+    },
+    "ExtTextOutW": {
+        "neutralApiName": "ExtTextOut",
+        "prototype": "BOOL ExtTextOutW(\n  HDC        hdc,\n  int        x,\n  int        y,\n  UINT       options,\n  const RECT *lprect,\n  LPCWSTR    lpString,\n  UINT       c,\n  const INT  *lpDx\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The ExtTextOut function draws text using the currently selected font, background color, and text color. You can optionally provide dimensions to be used for clipping, opaquing, or both."
+    },
+    "FillConsoleOutputAttribute": {
+        "neutralApiName": "FillConsoleOutputAttribute",
+        "prototype": "BOOL WINAPI FillConsoleOutputAttribute(\n  _In_  HANDLE  hConsoleOutput,\n  _In_  WORD    wAttribute,\n  _In_  DWORD   nLength,\n  _In_  COORD   dwWriteCoord,\n  _Out_ LPDWORD lpNumberOfAttrsWritten\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the character attributes for a specified number of character cells, beginning at the specified coordinates in a screen buffer."
+    },
+    "FillConsoleOutputCharacterW": {
+        "neutralApiName": "FillConsoleOutputCharacter",
+        "prototype": "BOOL WINAPI FillConsoleOutputCharacterW(\n  _In_  HANDLE  hConsoleOutput,\n  _In_  TCHAR   cCharacter,\n  _In_  DWORD   nLength,\n  _In_  COORD   dwWriteCoord,\n  _Out_ LPDWORD lpNumberOfCharsWritten\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Writes a character to the console screen buffer a specified number of times, beginning at the specified coordinates."
+    },
+    "FillRect": {
+        "neutralApiName": "FillRect",
+        "prototype": "int FillRect(\n  HDC        hDC,\n  const RECT *lprc,\n  HBRUSH     hbr\n);",
+        "dllLibrary": "user32",
+        "comment": "The FillRect function fills a rectangle by using the specified brush. This function includes the left and top borders, but excludes the right and bottom borders of the rectangle."
+    },
+    "FindClose": {
+        "neutralApiName": "FindClose",
+        "prototype": "BOOL FindClose(\n  HANDLE hFindFile\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Closes a file search handle opened by the FindFirstFile, FindFirstFileEx, FindFirstFileNameW, FindFirstFileNameTransactedW, FindFirstFileTransacted, FindFirstStreamTransactedW, or FindFirstStreamW functions."
+    },
+    "FindCloseChangeNotification": {
+        "neutralApiName": "FindCloseChangeNotification",
+        "prototype": "BOOL FindCloseChangeNotification(\n  HANDLE hChangeHandle\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Stops change notification handle monitoring."
+    },
+    "FindExecutableW": {
+        "neutralApiName": "FindExecutable",
+        "prototype": "HINSTANCE FindExecutableW(\n  LPCWSTR lpFile,\n  LPCWSTR lpDirectory,\n  LPWSTR  lpResult\n);",
+        "dllLibrary": "shell32",
+        "comment": "Retrieves the name of and handle to the executable (.exe) file associated with a specific document file."
+    },
+    "FindFirstChangeNotificationW": {
+        "neutralApiName": "FindFirstChangeNotification",
+        "prototype": "HANDLE FindFirstChangeNotificationW(\n  LPCWSTR lpPathName,\n  BOOL    bWatchSubtree,\n  DWORD   dwNotifyFilter\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates a change notification handle and sets up initial change notification filter conditions. A wait on a notification handle succeeds when a change matching the filter conditions occurs in the specified directory or subtree. The function does not report changes to the specified directory itself."
+    },
+    "FindFirstFileW": {
+        "neutralApiName": "FindFirstFile",
+        "prototype": "HANDLE FindFirstFileW(\n  LPCWSTR            lpFileName,\n  LPWIN32_FIND_DATAW lpFindFileData\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Searches a directory for a file or subdirectory with a name that matches a specific name (or partial name if wildcards are used)."
+    },
+    "FindFirstVolumeW": {
+        "neutralApiName": "FindFirstVolume",
+        "prototype": "HANDLE FindFirstVolumeW(\n  LPWSTR lpszVolumeName,\n  DWORD  cchBufferLength\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the name of a volume on a computer. FindFirstVolume is used to begin scanning the volumes of a computer."
+    },
+    "FindNextFileW": {
+        "neutralApiName": "FindNextFile",
+        "prototype": "BOOL FindNextFileW(\n  HANDLE             hFindFile,\n  LPWIN32_FIND_DATAW lpFindFileData\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Continues a file search from a previous call to the FindFirstFile, FindFirstFileEx, or FindFirstFileTransacted functions."
+    },
+    "FindNextChangeNotification": {
+        "neutralApiName": "FindNextChangeNotification",
+        "prototype": "BOOL FindNextChangeNotification(\n  HANDLE hChangeHandle\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Requests that the operating system signal a change notification handle the next time it detects an appropriate change."
+    },
+    "FindNextVolumeW": {
+        "neutralApiName": "FindNextVolume",
+        "prototype": "BOOL FindNextVolumeW(\n  HANDLE hFindVolume,\n  LPWSTR lpszVolumeName,\n  DWORD  cchBufferLength\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Continues a volume search started by a call to the FindFirstVolume function. FindNextVolume finds one volume per call."
+    },
+    "FindResourceW": {
+        "neutralApiName": "FindResource",
+        "prototype": "HRSRC FindResourceW(\n  HMODULE hModule,\n  LPCWSTR  lpName,\n  LPCWSTR  lpType\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Determines the location of a resource with the specified type and name in the specified module."
+    },
+    "FindResourceExW": {
+        "neutralApiName": "FindResourceEx",
+        "prototype": "HRSRC FindResourceExW(\n  HMODULE hModule,\n  LPCWSTR  lpType,\n  LPCWSTR  lpName,\n  WORD    wLanguage\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Determines the location of the resource with the specified type, name, and language in the specified module."
+    },
+    "FindTextW": {
+        "neutralApiName": "FindText",
+        "prototype": "HWND FindTextW(\n  LPFINDREPLACEW Arg1\n);",
+        "dllLibrary": "comdlg32",
+        "comment": "Creates a system-defined modeless Find dialog box that lets the user specify a string to search for and options to use when searching for text in a document."
+    },
+    "FindVolumeClose": {
+        "neutralApiName": "FindVolumeClose",
+        "prototype": "BOOL FindVolumeClose(\n  HANDLE hFindVolume\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Closes the specified volume search handle. The FindFirstVolume and FindNextVolume functions use this search handle to locate volumes."
+    },
+    "FindWindowExW": {
+        "neutralApiName": "FindWindowEx",
+        "prototype": "HWND FindWindowExW(\n  HWND    hWndParent,\n  HWND    hWndChildAfter,\n  LPCWSTR lpszClass,\n  LPCWSTR lpszWindow\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a handle to a window whose class name and window name match the specified strings. The function searches child windows, beginning with the one following the specified child window. This function does not perform a case-sensitive search."
+    },
+    "FlushConsoleInputBuffer": {
+        "neutralApiName": "FlushConsoleInputBuffer",
+        "prototype": "BOOL WINAPI FlushConsoleInputBuffer(\n  _In_ HANDLE hConsoleInput\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Flushes the console input buffer. All input records currently in the input buffer are discarded."
+    },
+    "FormatMessageW": {
+        "neutralApiName": "FormatMessage",
+        "prototype": "DWORD FormatMessageW(\n  DWORD   dwFlags,\n  LPCVOID lpSource,\n  DWORD   dwMessageId,\n  DWORD   dwLanguageId,\n  LPWSTR  lpBuffer,\n  DWORD   nSize,\n  va_list *Arguments\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Formats a message string. The function requires a message definition as input. The message definition can come from a buffer passed into the function. It can come from a message table resource in an already-loaded module. Or the caller can ask the function to search the system's message table resource(s) for the message definition. The function finds the message definition in a message table resource based on a message identifier and a language identifier. The function copies the formatted message text to an output buffer, processing any embedded insert sequences if requested."
+    },
+    "FrameRect": {
+        "neutralApiName": "FrameRect",
+        "prototype": "int FrameRect(\n  HDC        hDC,\n  const RECT *lprc,\n  HBRUSH     hbr\n);",
+        "dllLibrary": "user32",
+        "comment": "The FrameRect function draws a border around the specified rectangle by using the specified brush. The width and height of the border are always one logical unit."
+    },
+    "FreeConsole": {
+        "neutralApiName": "FreeConsole",
+        "prototype": "BOOL WINAPI FreeConsole(void);",
+        "dllLibrary": "kernel32",
+        "comment": "Detaches the calling process from its console."
+    },
+    "FreeLibrary": {
+        "neutralApiName": "FreeLibrary",
+        "prototype": "BOOL FreeLibrary(\n  HMODULE hLibModule\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Frees the loaded dynamic-link library (DLL) module and, if necessary, decrements its reference count. When the reference count reaches zero, the module is unloaded from the address space of the calling process and the handle is no longer valid."
+    },
+    "GetClientRect": {
+        "neutralApiName": "GetClientRect",
+        "prototype": "BOOL GetClientRect(\n  HWND   hWnd,\n  LPRECT lpRect\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the coordinates of a window's client area. The client coordinates specify the upper-left and lower-right corners of the client area. Because client coordinates are relative to the upper-left corner of a window's client area, the coordinates of the upper-left corner are (0,0)."
+    },
+    "GetComputerNameExW": {
+        "neutralApiName": "GetComputerNameEx",
+        "prototype": "BOOL GetComputerNameExW(\n  COMPUTER_NAME_FORMAT NameType,\n  LPWSTR               lpBuffer,\n  LPDWORD              nSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves a NetBIOS or DNS name associated with the local computer. The names are established at system startup, when the system reads them from the registry."
+    },
+    "GetConsoleCursorInfo": {
+        "neutralApiName": "GetConsoleCursorInfo",
+        "prototype": "BOOL WINAPI GetConsoleCursorInfo(\n  _In_  HANDLE               hConsoleOutput,\n  _Out_ PCONSOLE_CURSOR_INFO lpConsoleCursorInfo\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves information about the size and visibility of the cursor for the specified console screen buffer."
+    },
+    "GetConsoleMode": {
+        "neutralApiName": "GetConsoleMode",
+        "prototype": "BOOL WINAPI GetConsoleMode(\n  _In_  HANDLE  hConsoleHandle,\n  _Out_ LPDWORD lpMode\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the current input mode of a console's input buffer or the current output mode of a console screen buffer."
+    },
+    "GetConsoleScreenBufferInfo": {
+        "neutralApiName": "GetConsoleScreenBufferInfo",
+        "prototype": "BOOL WINAPI GetConsoleScreenBufferInfo(\n  _In_  HANDLE                      hConsoleOutput,\n  _Out_ PCONSOLE_SCREEN_BUFFER_INFO lpConsoleScreenBufferInfo\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves information about the specified console screen buffer."
+    },
+    "GetConsoleSelectionInfo": {
+        "neutralApiName": "GetConsoleSelectionInfo",
+        "prototype": "BOOL WINAPI GetConsoleSelectionInfo(\n  _Out_ PCONSOLE_SELECTION_INFO lpConsoleSelectionInfo\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves information about the current console selection."
+    },
+    "GetConsoleTitleW": {
+        "neutralApiName": "GetConsoleTitle",
+        "prototype": "DWORD WINAPI GetConsoleTitleW(\n  _Out_ LPTSTR lpConsoleTitle,\n  _In_  DWORD  nSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the title for the current console window."
+    },
+    "GetConsoleWindow": {
+        "neutralApiName": "GetConsoleWindow",
+        "prototype": "HWND WINAPI GetConsoleWindow(void);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the window handle used by the console associated with the calling process."
+    },
+    "GetCurrentActCtx": {
+        "neutralApiName": "GetCurrentActCtx",
+        "prototype": "BOOL GetCurrentActCtx(\n  HANDLE *lphActCtx\n);",
+        "dllLibrary": "kernel32",
+        "comment": "The GetCurrentActCtx function returns the handle to the active activation context of the calling thread."
+    },
+    "GetCurrentProcess": {
+        "neutralApiName": "GetCurrentProcess",
+        "prototype": "HANDLE GetCurrentProcess();",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves a pseudo handle for the current process."
+    },
+    "GetCursor": {
+        "neutralApiName": "GetCursor",
+        "prototype": "HCURSOR GetCursor();",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a handle to the current cursor."
+    },
+    "GetCursorPos": {
+        "neutralApiName": "GetCursorPos",
+        "prototype": "BOOL GetCursorPos(\n  LPPOINT lpPoint\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the position of the mouse cursor, in screen coordinates."
+    },
+    "GetDC": {
+        "neutralApiName": "GetDC",
+        "prototype": "HDC GetDC(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "The GetDC function retrieves a handle to a device context (DC) for the client area of a specified window or for the entire screen. You can use the returned handle in subsequent GDI functions to draw in the DC. The device context is an opaque data structure, whose values are used internally by GDI."
+    },
+    "GetDCEx": {
+        "neutralApiName": "GetDCEx",
+        "prototype": "HDC GetDCEx(\n  HWND  hWnd,\n  HRGN  hrgnClip,\n  DWORD flags\n);",
+        "dllLibrary": "user32",
+        "comment": "The GetDCEx function retrieves a handle to a device context (DC) for the client area of a specified window or for the entire screen. You can use the returned handle in subsequent GDI functions to draw in the DC. The device context is an opaque data structure, whose values are used internally by GDI."
+    },
+    "GetDialogBaseUnits": {
+        "neutralApiName": "GetDialogBaseUnits",
+        "prototype": "long GetDialogBaseUnits();",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the system's dialog base units, which are the average width and height of characters in the system font. For dialog boxes that use the system font, you can use these values to convert between dialog template units, as specified in dialog box templates, and pixels. For dialog boxes that do not use the system font, the conversion from dialog template units to pixels depends on the font used by the dialog box."
+    },
+    "GetDIBits": {
+        "neutralApiName": "GetDIBits",
+        "prototype": "int GetDIBits(\n  HDC          hdc,\n  HBITMAP      hbm,\n  UINT         start,\n  UINT         cLines,\n  LPVOID       lpvBits,\n  LPBITMAPINFO lpbmi,\n  UINT         usage\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The GetDIBits function retrieves the bits of the specified compatible bitmap and copies them into a buffer as a DIB using the specified format."
+    },
+    "GetDlgItem": {
+        "neutralApiName": "GetDlgItem",
+        "prototype": "HWND GetDlgItem(\n  HWND hDlg,\n  int  nIDDlgItem\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a handle to a control in the specified dialog box."
+    },
+    "GetDlgItemInt": {
+        "neutralApiName": "GetDlgItemInt",
+        "prototype": "UINT GetDlgItemInt(\n  HWND hDlg,\n  int  nIDDlgItem,\n  BOOL *lpTranslated,\n  BOOL bSigned\n);",
+        "dllLibrary": "user32",
+        "comment": "Translates the text of a specified control in a dialog box into an integer value."
+    },
+    "GetDlgItemTextW": {
+        "neutralApiName": "GetDlgItemText",
+        "prototype": "UINT GetDlgItemTextW(\n  HWND   hDlg,\n  int    nIDDlgItem,\n  LPWSTR lpString,\n  int    cchMax\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the title or text associated with a control in a dialog box."
+    },
+    "GetDpiForMonitor": {
+        "neutralApiName": "GetDpiForMonitor",
+        "prototype": "HRESULT GetDpiForMonitor(\n  HMONITOR         hmonitor,\n  MONITOR_DPI_TYPE dpiType,\n  UINT             *dpiX,\n  UINT             *dpiY\n  );",
+        "dllLibrary": "shcore",
+        "comment": "Queries the dots per inch (dpi) of a display."
+    },
+    "GetDpiForSystem": {
+        "neutralApiName": "GetDpiForSystem",
+        "prototype": "UINT GetDpiForSystem();",
+        "dllLibrary": "user32",
+        "comment": "Returns the system DPI."
+    },
+    "GetDpiForWindow": {
+        "neutralApiName": "GetDpiForWindow",
+        "prototype": "UINT GetDpiForWindow(\n  HWND hwnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Returns the dots per inch (dpi) value for the associated window."
+    },
+    "GetFileAttributesExW": {
+        "neutralApiName": "GetFileAttributesEx",
+        "prototype": "BOOL GetFileAttributesExW(\n  LPCWSTR                lpFileName,\n  GET_FILEEX_INFO_LEVELS fInfoLevelId,\n  LPVOID                 lpFileInformation\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves attributes for a specified file or directory."
+    },
+    "GetFileVersionInfoExW": {
+        "neutralApiName": "GetFileVersionInfoEx",
+        "prototype": "BOOL GetFileVersionInfoExW(\n  DWORD   dwFlags,\n  LPCWSTR lpwstrFilename,\n  DWORD   dwHandle,\n  DWORD   dwLen,\n  LPVOID  lpData\n);",
+        "dllLibrary": "version",
+        "comment": "Retrieves version information for the specified file."
+    },
+    "GetFileVersionInfoSizeExW": {
+        "neutralApiName": "GetFileVersionInfoSizeEx",
+        "prototype": "DWORD GetFileVersionInfoSizeExW(\n  DWORD   dwFlags,\n  LPCWSTR lpwstrFilename,\n  LPDWORD lpdwHandle\n);",
+        "dllLibrary": "version",
+        "comment": "Determines whether the operating system can retrieve version information for a specified file. If version information is available, GetFileVersionInfoSizeEx returns the size, in bytes, of that information."
+    },
+    "GetFileVersionInfoSizeW": {
+        "neutralApiName": "GetFileVersionInfoSize",
+        "prototype": "DWORD GetFileVersionInfoSizeW(\n  LPCWSTR lptstrFilename,\n  LPDWORD lpdwHandle\n);",
+        "dllLibrary": "version",
+        "comment": "Determines whether the operating system can retrieve version information for a specified file. If version information is available, GetFileVersionInfoSize returns the size, in bytes, of that information."
+    },
+    "GetFileVersionInfoW": {
+        "neutralApiName": "GetFileVersionInfo",
+        "prototype": "BOOL GetFileVersionInfoW(\n  LPCWSTR lptstrFilename,\n  DWORD   dwHandle,\n  DWORD   dwLen,\n  LPVOID  lpData\n);",
+        "dllLibrary": "version",
+        "comment": "Retrieves version information for the specified file."
+    },
+    "GetForegroundWindow": {
+        "neutralApiName": "GetForegroundWindow",
+        "prototype": "HWND GetForegroundWindow();",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a handle to the foreground window (the window with which the user is currently working). The system assigns a slightly higher priority to the thread that creates the foreground window than it does to other threads."
+    },
+    "GetIntegratedDisplaySize": {
+        "neutralApiName": "GetIntegratedDisplaySize",
+        "prototype": "HRESULT GetIntegratedDisplaySize(\n  double *sizeInInches\n);",
+        "dllLibrary": "kernelbase",
+        "comment": "Retrieves the best estimate of the diagonal size of the built-in screen, in inches."
+    },
+    "GetLargestConsoleWindowSize": {
+        "neutralApiName": "GetLargestConsoleWindowSize",
+        "prototype": "COORD WINAPI GetLargestConsoleWindowSize(\n  _In_ HANDLE hConsoleOutput\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the size of the largest possible console window, based on the current font and the size of the display."
+    },
+    "GetLastError": {
+        "neutralApiName": "GetLastError",
+        "prototype": "DWORD GetLastError();",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the calling thread's last-error code value. The last-error code is maintained on a per-thread basis. Multiple threads do not overwrite each other's last-error code."
+    },
+    "GetLocalTime": {
+        "neutralApiName": "GetLocalTime",
+        "prototype": "void GetLocalTime(\n  LPSYSTEMTIME lpSystemTime\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the current local date and time."
+    },
+    "GetMessageW": {
+        "neutralApiName": "GetMessage",
+        "prototype": "BOOL GetMessageW(\n  LPMSG lpMsg,\n  HWND  hWnd,\n  UINT  wMsgFilterMin,\n  UINT  wMsgFilterMax\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a message from the calling thread's message queue. The function dispatches incoming sent messages until a posted message is available for retrieval."
+    },
+    "GetModuleBaseNameW": {
+        "neutralApiName": "GetModuleBaseName",
+        "prototype": "DWORD GetModuleBaseNameW(\n  HANDLE  hProcess,\n  HMODULE hModule,\n  LPWSTR  lpBaseName,\n  DWORD   nSize\n);",
+        "dllLibrary": "psapi",
+        "comment": "Retrieves the base name of the specified module."
+    },
+    "GetModuleFileNameExW": {
+        "neutralApiName": "GetModuleFileNameEx",
+        "prototype": "DWORD GetModuleFileNameExW(\n  HANDLE  hProcess,\n  HMODULE hModule,\n  LPWSTR  lpFilename,\n  DWORD   nSize\n);",
+        "dllLibrary": "psapi",
+        "comment": "Retrieves the fully qualified path for the file containing the specified module."
+    },
+    "GetModuleFileNameW": {
+        "neutralApiName": "GetModuleFileName",
+        "prototype": "DWORD GetModuleFileNameW(\n  HMODULE hModule,\n  LPWSTR  lpFilename,\n  DWORD   nSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the fully qualified path for the file that contains the specified module. The module must have been loaded by the current process."
+    },
+    "GetModuleHandleW": {
+        "neutralApiName": "GetModuleHandle",
+        "prototype": "HMODULE GetModuleHandleW(\n  LPCWSTR lpModuleName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves a module handle for the specified module. The module must have been loaded by the calling process."
+    },
+    "GetMonitorBrightness": {
+        "neutralApiName": "GetMonitorBrightness",
+        "prototype": "_BOOL GetMonitorBrightness(\n  HANDLE  hMonitor,\n  LPDWORD pdwMinimumBrightness,\n  LPDWORD pdwCurrentBrightness,\n  LPDWORD pdwMaximumBrightness\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Retrieves a monitor's minimum, maximum, and current brightness settings."
+    },
+    "GetMonitorCapabilities": {
+        "neutralApiName": "GetMonitorCapabilities",
+        "prototype": "_BOOL GetMonitorCapabilities(\n  HANDLE  hMonitor,\n  LPDWORD pdwMonitorCapabilities,\n  LPDWORD pdwSupportedColorTemperatures\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Retrieves the configuration capabilities of a monitor. Call this function to find out which high-level monitor configuration functions are supported by the monitor."
+    },
+    "GetMonitorColorTemperature": {
+        "neutralApiName": "GetMonitorColorTemperature",
+        "prototype": "_BOOL GetMonitorColorTemperature(\n  HANDLE                 hMonitor,\n  LPMC_COLOR_TEMPERATURE pctCurrentColorTemperature\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Retrieves a monitor's current color temperature."
+    },
+    "GetMonitorContrast": {
+        "neutralApiName": "GetMonitorContrast",
+        "prototype": "_BOOL GetMonitorContrast(\n  HANDLE  hMonitor,\n  LPDWORD pdwMinimumContrast,\n  LPDWORD pdwCurrentContrast,\n  LPDWORD pdwMaximumContrast\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Retrieves a monitor's minimum, maximum, and current contrast settings."
+    },
+    "GetMonitorDisplayAreaPosition": {
+        "neutralApiName": "GetMonitorDisplayAreaPosition",
+        "prototype": "_BOOL GetMonitorDisplayAreaPosition(\n  HANDLE           hMonitor,\n  MC_POSITION_TYPE ptPositionType,\n  LPDWORD          pdwMinimumPosition,\n  LPDWORD          pdwCurrentPosition,\n  LPDWORD          pdwMaximumPosition\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Retrieves a monitor's minimum, maximum, and current horizontal or vertical position."
+    },
+    "GetMonitorDisplayAreaSize": {
+        "neutralApiName": "GetMonitorDisplayAreaSize",
+        "prototype": "_BOOL GetMonitorDisplayAreaSize(\n  HANDLE       hMonitor,\n  MC_SIZE_TYPE stSizeType,\n  LPDWORD      pdwMinimumWidthOrHeight,\n  LPDWORD      pdwCurrentWidthOrHeight,\n  LPDWORD      pdwMaximumWidthOrHeight\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Retrieves a monitor's minimum, maximum, and current width or height."
+    },
+    "GetMonitorInfoW": {
+        "neutralApiName": "GetMonitorInfo",
+        "prototype": "BOOL GetMonitorInfoW(\n  HMONITOR      hMonitor,\n  LPMONITORINFO lpmi\n);",
+        "dllLibrary": "user32",
+        "comment": "The GetMonitorInfo function retrieves information about a display monitor."
+    },
+    "GetMonitorRedGreenOrBlueDrive": {
+        "neutralApiName": "GetMonitorRedGreenOrBlueDrive",
+        "prototype": "_BOOL GetMonitorRedGreenOrBlueDrive(\n  HANDLE        hMonitor,\n  MC_DRIVE_TYPE dtDriveType,\n  LPDWORD       pdwMinimumDrive,\n  LPDWORD       pdwCurrentDrive,\n  LPDWORD       pdwMaximumDrive\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Retrieves a monitor's red, green, or blue drive value."
+    },
+    "GetMonitorRedGreenOrBlueGain": {
+        "neutralApiName": "GetMonitorRedGreenOrBlueGain",
+        "prototype": "_BOOL GetMonitorRedGreenOrBlueGain(\n  HANDLE       hMonitor,\n  MC_GAIN_TYPE gtGainType,\n  LPDWORD      pdwMinimumGain,\n  LPDWORD      pdwCurrentGain,\n  LPDWORD      pdwMaximumGain\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Retrieves a monitor's red, green, or blue gain value."
+    },
+    "GetMonitorTechnologyType": {
+        "neutralApiName": "GetMonitorTechnologyType",
+        "prototype": "_BOOL GetMonitorTechnologyType(\n  HANDLE                       hMonitor,\n  LPMC_DISPLAY_TECHNOLOGY_TYPE pdtyDisplayTechnologyType\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Retrieves the type of technology used by a monitor."
+    },
+    "GetNativeSystemInfo": {
+        "neutralApiName": "GetNativeSystemInfo",
+        "prototype": "void GetNativeSystemInfo(\n  LPSYSTEM_INFO lpSystemInfo\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves information about the current system to an application running under WOW64. If the function is called from a 64-bit application, or on a 64-bit system that does not have an Intel64 or x64 processor (such as ARM64), it is equivalent to the GetSystemInfo function."
+    },
+    "GetNearestColor": {
+        "neutralApiName": "GetNearestColor",
+        "prototype": "COLORREF GetNearestColor(\n  HDC      hdc,\n  COLORREF color\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The GetNearestColor function retrieves a color value identifying a color from the system palette that will be displayed when the specified color value is used."
+    },
+    "GetNextDlgGroupItem": {
+        "neutralApiName": "GetNextDlgGroupItem",
+        "prototype": "HWND GetNextDlgGroupItem(\n  HWND hDlg,\n  HWND hCtl,\n  BOOL bPrevious\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a handle to the first control in a group of controls that precedes (or follows) the specified control in a dialog box."
+    },
+    "GetNextDlgTabItem": {
+        "neutralApiName": "GetNextDlgTabItem",
+        "prototype": "HWND GetNextDlgTabItem(\n  HWND hDlg,\n  HWND hCtl,\n  BOOL bPrevious\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a handle to the first control that has the WS_TABSTOP style that precedes (or follows) the specified control."
+    },
+    "GetNumberOfPhysicalMonitorsFromHMONITOR": {
+        "neutralApiName": "GetNumberOfPhysicalMonitorsFromHMONITOR",
+        "prototype": "_BOOL GetNumberOfPhysicalMonitorsFromHMONITOR(\n  HMONITOR hMonitor,\n  LPDWORD  pdwNumberOfPhysicalMonitors\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Retrieves the number of physical monitors associated with an HMONITOR monitor handle. Call this function before calling GetPhysicalMonitorsFromHMONITOR."
+    },
+    "GetObjectW": {
+        "neutralApiName": "GetObject",
+        "prototype": "int GetObjectW(\n  HANDLE h,\n  int    c,\n  LPVOID pv\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The GetObject function retrieves information for the specified graphics object."
+    },
+    "GetOpenFileNameW": {
+        "neutralApiName": "GetOpenFileName",
+        "prototype": "BOOL GetOpenFileNameW(\n  LPOPENFILENAMEW Arg1\n);",
+        "dllLibrary": "comdlg32",
+        "comment": "Creates an Open dialog box that lets the user specify the drive, directory, and the name of a file or set of files to be opened."
+    },
+    "GetParent": {
+        "neutralApiName": "GetParent",
+        "prototype": "HWND GetParent(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a handle to the specified window's parent or owner."
+    },
+    "GetPhysicallyInstalledSystemMemory": {
+        "neutralApiName": "GetPhysicallyInstalledSystemMemory",
+        "prototype": "BOOL GetPhysicallyInstalledSystemMemory(\n  PULONGLONG TotalMemoryInKilobytes\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the amount of RAM that is physically installed on the computer."
+    },
+    "GetPhysicalMonitorsFromHMONITOR": {
+        "neutralApiName": "GetPhysicalMonitorsFromHMONITOR",
+        "prototype": "_BOOL GetPhysicalMonitorsFromHMONITOR(\n  HMONITOR           hMonitor,\n  DWORD              dwPhysicalMonitorArraySize,\n  LPPHYSICAL_MONITOR pPhysicalMonitorArray\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Retrieves the physical monitors associated with an HMONITOR monitor handle."
+    },
+    "GetProcAddress": {
+        "neutralApiName": "GetProcAddress",
+        "prototype": "FARPROC GetProcAddress(\n  HMODULE hModule,\n  LPCSTR  lpProcName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the address of an exported function or variable from the specified dynamic-link library (DLL)."
+    },
+    "GetProcessDpiAwareness": {
+        "neutralApiName": "GetProcessDpiAwareness",
+        "prototype": "HRESULT GetProcessDpiAwareness(\n  HANDLE                hprocess,\n  PROCESS_DPI_AWARENESS *value\n);",
+        "dllLibrary": "shcore",
+        "comment": "Retrieves the dots per inch (dpi) awareness of the specified process."
+    },
+    "GetProcessHeap": {
+        "neutralApiName": "GetProcessHeap",
+        "prototype": "HANDLE GetProcessHeap();",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves a handle to the default heap of the calling process. This handle can then be used in subsequent calls to the heap functions."
+    },
+    "GetProductInfo": {
+        "neutralApiName": "GetProductInfo",
+        "prototype": "BOOL GetProductInfo(\n  DWORD  dwOSMajorVersion,\n  DWORD  dwOSMinorVersion,\n  DWORD  dwSpMajorVersion,\n  DWORD  dwSpMinorVersion,\n  PDWORD pdwReturnedProductType\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the product type for the operating system on the local computer, and maps the type to the product types supported by the specified operating system."
+    },
+    "GetSaveFileNameW": {
+        "neutralApiName": "GetSaveFileName",
+        "prototype": "BOOL GetSaveFileNameW(\n  LPOPENFILENAMEW Arg1\n);",
+        "dllLibrary": "comdlg32",
+        "comment": "Creates a Save dialog box that lets the user specify the drive, directory, and name of a file to save."
+    },
+    "GetScrollInfo": {
+        "neutralApiName": "GetScrollInfo",
+        "prototype": "BOOL GetScrollInfo(\n  HWND         hwnd,\n  int          nBar,\n  LPSCROLLINFO lpsi\n);",
+        "dllLibrary": "user32",
+        "comment": "The GetScrollInfo function retrieves the parameters of a scroll bar, including the minimum and maximum scrolling positions, the page size, and the position of the scroll box (thumb)."
+    },
+    "GetShellWindow": {
+        "neutralApiName": "GetShellWindow",
+        "prototype": "HWND GetShellWindow();",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a handle to the Shell's desktop window."
+    },
+    "GetStdHandle": {
+        "neutralApiName": "GetStdHandle",
+        "prototype": "HANDLE WINAPI GetStdHandle(\n  _In_ DWORD nStdHandle\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves a handle to the specified standard device (standard input, standard output, or standard error)."
+    },
+    "GetStockObject": {
+        "neutralApiName": "GetStockObject",
+        "prototype": "HGDIOBJ GetStockObject(\n  int i\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The GetStockObject function retrieves a handle to one of the stock pens, brushes, fonts, or palettes."
+    },
+    "GetSysColor": {
+        "neutralApiName": "GetSysColor",
+        "prototype": "DWORD GetSysColor(\n  int nIndex\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the current color of the specified display element. Display elements are the parts of a window and the display that appear on the system display screen."
+    },
+    "GetSysColorBrush": {
+        "neutralApiName": "GetSysColorBrush",
+        "prototype": "HBRUSH GetSysColorBrush(\n  int nIndex\n);",
+        "dllLibrary": "user32",
+        "comment": "The GetSysColorBrush function retrieves a handle identifying a logical brush that corresponds to the specified color index."
+    },
+    "GetSystemDpiForProcess": {
+        "neutralApiName": "GetSystemDpiForProcess",
+        "prototype": "UINT GetSystemDpiForProcess(\n  HANDLE hProcess\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the system DPI associated with a given process. This is useful for avoiding compatibility issues that arise from sharing DPI-sensitive information between multiple system-aware processes with different system DPI values."
+    },
+    "GetSystemDirectoryW": {
+        "neutralApiName": "GetSystemDirectory",
+        "prototype": "UINT GetSystemDirectoryW(\n  LPWSTR lpBuffer,\n  UINT   uSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the path of the system directory. The system directory contains system files such as dynamic-link libraries and drivers."
+    },
+    "GetSystemInfo": {
+        "neutralApiName": "GetSystemInfo",
+        "prototype": "void GetSystemInfo(\n  LPSYSTEM_INFO lpSystemInfo\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves information about the current system. To retrieve accurate information for an application running on WOW64, call the GetNativeSystemInfo function."
+    },
+    "GetSystemMenu": {
+        "neutralApiName": "GetSystemMenu",
+        "prototype": "HMENU GetSystemMenu(\n  HWND hWnd,\n  BOOL bRevert\n);",
+        "dllLibrary": "user32",
+        "comment": "Enables the application to access the window menu (also known as the system menu or the control menu) for copying and modifying."
+    },
+    "GetSystemMetrics": {
+        "neutralApiName": "GetSystemMetrics",
+        "prototype": "int GetSystemMetrics(\n  int nIndex\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the specified system metric or system configuration setting. Note that all dimensions retrieved by GetSystemMetrics are in pixels."
+    },
+    "GetSystemMetricsForDpi": {
+        "neutralApiName": "GetSystemMetricsForDpi",
+        "prototype": "int GetSystemMetricsForDpi(\n  int  nIndex,\n  UINT dpi\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the specified system metric or system configuration setting taking into account a provided DPI."
+    },
+    "GetSystemPowerStatus": {
+        "neutralApiName": "GetSystemPowerStatus",
+        "prototype": "BOOL GetSystemPowerStatus(\n  LPSYSTEM_POWER_STATUS lpSystemPowerStatus\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the power status of the system. The status indicates whether the system is running on AC or DC power, whether the battery is currently charging, how much battery life remains, and if battery saver is on or off."
+    },
+    "GetTabbedTextExtentW": {
+        "neutralApiName": "GetTabbedTextExtent",
+        "prototype": "DWORD GetTabbedTextExtentW(\n  HDC       hdc,\n  LPCWSTR   lpString,\n  int       chCount,\n  int       nTabPositions,\n  const INT *lpnTabStopPositions\n);",
+        "dllLibrary": "user32",
+        "comment": "The GetTabbedTextExtent function computes the width and height of a character string. If the string contains one or more tab characters, the width of the string is based upon the specified tab stops. The GetTabbedTextExtent function uses the currently selected font to compute the dimensions of the string."
+    },
+    "GetSystemTime": {
+        "neutralApiName": "GetSystemTime",
+        "prototype": "void GetSystemTime(\n  LPSYSTEMTIME lpSystemTime\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the current local date and time."
+    },
+    "GetTempPathW": {
+        "neutralApiName": "GetTempPath",
+        "prototype": "DWORD GetTempPathW(\n  DWORD  nBufferLength,\n  LPWSTR lpBuffer\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the path of the directory designated for temporary files."
+    },
+    "GetTextMetricsW": {
+        "neutralApiName": "GetTextMetrics",
+        "prototype": "BOOL GetTextMetricsW(\n  HDC          hdc,\n  LPTEXTMETRICW lptm\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The GetTextMetrics function fills the specified buffer with the metrics for the currently selected font."
+    },
+    "GetUpdateRect": {
+        "neutralApiName": "GetUpdateRect",
+        "prototype": "BOOL GetUpdateRect(\n  HWND   hWnd,\n  LPRECT lpRect,\n  BOOL   bErase\n);",
+        "dllLibrary": "user32",
+        "comment": "The GetUpdateRect function retrieves the coordinates of the smallest rectangle that completely encloses the update region of the specified window. GetUpdateRect retrieves the rectangle in logical coordinates. If there is no update region, GetUpdateRect retrieves an empty rectangle (sets all coordinates to zero)."
+    },
+    "GetUpdateRgn": {
+        "neutralApiName": "GetUpdateRgn",
+        "prototype": "int GetUpdateRgn(\n  HWND hWnd,\n  HRGN hRgn,\n  BOOL bErase\n);",
+        "dllLibrary": "user32",
+        "comment": "The GetUpdateRgn function retrieves the update region of a window by copying it into the specified region. The coordinates of the update region are relative to the upper-left corner of the window (that is, they are client coordinates)."
+    },
+    "GetVersionExW": {
+        "neutralApiName": "GetVersionEx",
+        "prototype": "BOOL GetVersionExW(\n  LPOSVERSIONINFOW lpVersionInformation\n);",
+        "dllLibrary": "kernel32",
+        "comment": "With the release of Windows 8.1, the behavior of the GetVersionEx API has changed in the value it will return for the operating system version. The value returned by the GetVersionEx function now depends on how the application is manifested. Applications not manifested for Windows 8.1 or Windows 10 will return the Windows 8 OS version value (6.2). Once an application is manifested for a given operating system version, GetVersionEx will always return the version that the application is manifested for in future releases."
+    },
+    "GetVolumePathNamesForVolumeNameW": {
+        "neutralApiName": "GetVolumePathNamesForVolumeName",
+        "prototype": "BOOL GetVolumePathNamesForVolumeNameW(\n  LPCWSTR lpszVolumeName,\n  LPWCH   lpszVolumePathNames,\n  DWORD   cchBufferLength,\n  PDWORD  lpcchReturnLength\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves a list of drive letters and mounted folder paths for the specified volume."
+    },
+    "GetWindow": {
+        "neutralApiName": "GetWindow",
+        "prototype": "HWND GetWindow(\n  HWND hWnd,\n  UINT uCmd\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a handle to a window that has the specified relationship (Z-Order or owner) to the specified window."
+    },
+    "GetWindowDC": {
+        "neutralApiName": "GetWindowDC",
+        "prototype": "HDC GetWindowDC(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "The GetWindowDC function retrieves the device context (DC) for the entire window, including title bar, menus, and scroll bars. A window device context permits painting anywhere in a window, because the origin of the device context is the upper-left corner of the window instead of the client area."
+    },
+    "GetWindowRect": {
+        "neutralApiName": "GetWindowRect",
+        "prototype": "BOOL GetWindowRect(\n  HWND   hWnd,\n  LPRECT lpRect\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the dimensions of the bounding rectangle of the specified window. The dimensions are given in screen coordinates that are relative to the upper-left corner of the screen."
+    },
+    "GetWindowRgnBox": {
+        "neutralApiName": "GetWindowRgnBox",
+        "prototype": "int GetWindowRgnBox(\n  HWND   hWnd,\n  LPRECT lprc\n);",
+        "dllLibrary": "user32",
+        "comment": "The GetWindowRgnBox function retrieves the dimensions of the tightest bounding rectangle for the window region of a window."
+    },
+    "GetWindowTextLengthW": {
+        "neutralApiName": "GetWindowTextLength",
+        "prototype": "int GetWindowTextLengthW(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the length, in characters, of the specified window's title bar text (if the window has a title bar). If the specified window is a control, the function retrieves the length of the text within the control. However, GetWindowTextLength cannot retrieve the length of the text of an edit control in another application."
+    },
+    "GetWindowTextW": {
+        "neutralApiName": "GetWindowText",
+        "prototype": "int GetWindowTextW(\n  HWND   hWnd,\n  LPWSTR lpString,\n  int    nMaxCount\n);",
+        "dllLibrary": "user32",
+        "comment": "Copies the text of the specified window's title bar (if it has one) into a buffer. If the specified window is a control, the text of the control is copied. However, GetWindowText cannot retrieve the text of a control in another application."
+    },
+    "GlobalAlloc": {
+        "neutralApiName": "GlobalAlloc",
+        "prototype": "HGLOBAL GlobalAlloc(\n  UINT   uFlags,\n  SIZE_T dwBytes\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Allocates the specified number of bytes from the heap."
+    },
+    "GlobalFree": {
+        "neutralApiName": "GlobalFree",
+        "prototype": "HGLOBAL GlobalFree(\n  _Frees_ptr_opt_ HGLOBAL hMem\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Frees the specified global memory object and invalidates its handle."
+    },
+    "GlobalLock": {
+        "neutralApiName": "GlobalLock",
+        "prototype": "LPVOID GlobalLock(\n  HGLOBAL hMem\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Locks a global memory object and returns a pointer to the first byte of the object's memory block."
+    },
+    "GlobalUnlock": {
+        "neutralApiName": "GlobalUnlock",
+        "prototype": "BOOL GlobalUnlock(\n  HGLOBAL hMem\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Decrements the lock count associated with a memory object that was allocated with GMEM_MOVEABLE. This function has no effect on memory objects allocated with GMEM_FIXED."
+    },
+    "GrayStringW": {
+        "neutralApiName": "GrayString",
+        "prototype": "BOOL GrayStringW(\n  HDC            hDC,\n  HBRUSH         hBrush,\n  GRAYSTRINGPROC lpOutputFunc,\n  LPARAM         lpData,\n  int            nCount,\n  int            X,\n  int            Y,\n  int            nWidth,\n  int            nHeight\n);",
+        "dllLibrary": "user32",
+        "comment": "The GrayString function draws gray text at the specified location. The function draws the text by copying it into a memory bitmap, graying the bitmap, and then copying the bitmap to the screen. The function grays the text regardless of the selected brush and background. GrayString uses the font currently selected for the specified device context."
+    },
+    "HeapAlloc": {
+        "neutralApiName": "HeapAlloc",
+        "prototype": "LPVOID HeapAlloc(\n  HANDLE hHeap,\n  DWORD  dwFlags,\n  SIZE_T dwBytes\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Allocates a block of memory from a heap. The allocated memory is not movable."
+    },
+    "HeapFree": {
+        "neutralApiName": "HeapFree",
+        "prototype": "BOOL HeapFree(\n  HANDLE                 hHeap,\n  DWORD                  dwFlags,\n  _Frees_ptr_opt_ LPVOID lpMem\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Frees a memory block allocated from a heap by the HeapAlloc or HeapReAlloc function."
+    },
+    "IIDFromString": {
+        "neutralApiName": "IIDFromString",
+        "prototype": "HRESULT IIDFromString(\n  LPCOLESTR lpsz,\n  LPIID     lpiid\n);",
+        "dllLibrary": "ole32",
+        "comment": "Converts a string generated by the StringFromIID function back into the original interface identifier (IID)."
+    },
+    "InflateRect": {
+        "neutralApiName": "InflateRect",
+        "prototype": "BOOL InflateRect(\n  LPRECT lprc,\n  int    dx,\n  int    dy\n);",
+        "dllLibrary": "user32",
+        "comment": "The InflateRect function increases or decreases the width and height of the specified rectangle. The InflateRect function adds -dx units to the left end and dx to the right end of the rectangle and -dy units to the top and dy to the bottom. The dx and dy parameters are signed values; positive values increase the width and height, and negative values decrease them."
+    },
+    "InitCommonControlsEx": {
+        "neutralApiName": "InitCommonControlsEx",
+        "prototype": "BOOL InitCommonControlsEx(\n  const INITCOMMONCONTROLSEX *picce\n);",
+        "dllLibrary": "comctl32",
+        "comment": "Ensures that the common control DLL (Comctl32.dll) is loaded, and registers specific common control classes from the DLL. An application must call this function before creating a common control."
+    },
+    "InitializeProcThreadAttributeList": {
+        "neutralApiName": "InitializeProcThreadAttributeList",
+        "prototype": "BOOL InitializeProcThreadAttributeList(\n  LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,\n  DWORD                        dwAttributeCount,\n  DWORD                        dwFlags,\n  PSIZE_T                      lpSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Initializes the specified list of attributes for process and thread creation."
+    },
+    "InitiateShutdownW": {
+        "neutralApiName": "InitiateShutdown",
+        "prototype": "DWORD InitiateShutdownW(\n  LPWSTR lpMachineName,\n  LPWSTR lpMessage,\n  DWORD  dwGracePeriod,\n  DWORD  dwShutdownFlags,\n  DWORD  dwReason\n);",
+        "dllLibrary": "advapi32",
+        "comment": "Initiates a shutdown and restart of the specified computer, and restarts any applications that have been registered for restart."
+    },
+    "IntersectRect": {
+        "neutralApiName": "IntersectRect",
+        "prototype": "BOOL IntersectRect(\n  LPRECT     lprcDst,\n  const RECT *lprcSrc1,\n  const RECT *lprcSrc2\n);",
+        "dllLibrary": "user32",
+        "comment": "The IntersectRect function calculates the intersection of two source rectangles and places the coordinates of the intersection rectangle into the destination rectangle. If the source rectangles do not intersect, an empty rectangle (in which all coordinates are set to zero) is placed into the destination rectangle."
+    },
+    "InvalidateRect": {
+        "neutralApiName": "InvalidateRect",
+        "prototype": "BOOL InvalidateRect(\n  HWND       hWnd,\n  const RECT *lpRect,\n  BOOL       bErase\n);",
+        "dllLibrary": "user32",
+        "comment": "The InvalidateRect function adds a rectangle to the specified window's update region. The update region represents the portion of the window's client area that must be redrawn."
+    },
+    "InvalidateRgn": {
+        "neutralApiName": "InvalidateRgn",
+        "prototype": "BOOL InvalidateRgn(\n  HWND hWnd,\n  HRGN hRgn,\n  BOOL bErase\n);",
+        "dllLibrary": "user32",
+        "comment": "The InvalidateRgn function invalidates the client area within the specified region by adding it to the current update region of a window. The invalidated region, along with all other areas in the update region, is marked for painting when the next WM_PAINT message occurs."
+    },
+    "InvertRect": {
+        "neutralApiName": "InvertRect",
+        "prototype": "BOOL InvertRect(\n  HDC        hDC,\n  const RECT *lprc\n);",
+        "dllLibrary": "user32",
+        "comment": "The InvertRect function inverts a rectangle in a window by performing a logical NOT operation on the color values for each pixel in the rectangle's interior."
+    },
+    "IsClipboardFormatAvailable": {
+        "neutralApiName": "IsClipboardFormatAvailable",
+        "prototype": "BOOL IsClipboardFormatAvailable(\n  UINT format\n);",
+        "dllLibrary": "user32",
+        "comment": "Determines whether the clipboard contains data in the specified format."
+    },
+    "IsDebuggerPresent": {
+        "neutralApiName": "IsDebuggerPresent",
+        "prototype": "BOOL IsDebuggerPresent();",
+        "dllLibrary": "kernel32",
+        "comment": "Determines whether the calling process is being debugged by a user-mode debugger."
+    },
+    "IsDialogMessageW": {
+        "neutralApiName": "IsDialogMessage",
+        "prototype": "BOOL IsDialogMessageW(\n  HWND  hDlg,\n  LPMSG lpMsg\n);",
+        "dllLibrary": "user32",
+        "comment": "Determines whether a message is intended for the specified dialog box and, if it is, processes the message."
+    },
+    "IsRectEmpty": {
+        "neutralApiName": "IsRectEmpty",
+        "prototype": "BOOL IsRectEmpty(\n  const RECT *lprc\n);",
+        "dllLibrary": "user32",
+        "comment": "The IsRectEmpty function determines whether the specified rectangle is empty. An empty rectangle is one that has no area; that is, the coordinate of the right side is less than or equal to the coordinate of the left side, or the coordinate of the bottom side is less than or equal to the coordinate of the top side."
+    },
+    "IsWindowVisible": {
+        "neutralApiName": "IsWindowVisible",
+        "prototype": "BOOL IsWindowVisible(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Determines the visibility state of the specified window."
+    },
+    "IsWow64Process2": {
+        "neutralApiName": "IsWow64Process2",
+        "prototype": "BOOL IsWow64Process2(\n  HANDLE hProcess,\n  USHORT *pProcessMachine,\n  USHORT *pNativeMachine\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Determines whether the specified process is running under WOW64. Also returns additional machine process and architecture information."
+    },
+    "IsZoomed": {
+        "neutralApiName": "IsZoomed",
+        "prototype": "BOOL IsZoomed(\n HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Determines whether a window is maximized."
+    },
+    "KillTimer": {
+        "neutralApiName": "KillTimer",
+        "prototype": "BOOL KillTimer(\n  HWND     hWnd,\n  UINT_PTR uIDEvent\n);",
+        "dllLibrary": "user32",
+        "comment": "Destroys the specified timer."
+    },
+    "LineTo": {
+        "neutralApiName": "LineTo",
+        "prototype": "BOOL LineTo(\n  HDC hdc,\n  int x,\n  int y\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The LineTo function draws a line from the current position up to, but not including, the specified point."
+    },
+    "LoadCursorW": {
+        "neutralApiName": "LoadCursor",
+        "prototype": "HCURSOR LoadCursorW(\n  HINSTANCE hInstance,\n  LPCWSTR   lpCursorName\n);",
+        "dllLibrary": "user32",
+        "comment": "Loads the specified cursor resource from the executable (.EXE) file associated with an application instance. Note: this function has been superseded by the LoadImage function."
+    },
+    "LoadIconW": {
+        "neutralApiName": "LoadIcon",
+        "prototype": "HICON LoadIconW(\n  HINSTANCE hInstance,\n  LPCWSTR   lpIconName\n);",
+        "dllLibrary": "user32",
+        "comment": "Loads the specified icon resource from the executable (.exe) file associated with an application instance."
+    },
+    "LoadImageW": {
+        "neutralApiName": "LoadImage",
+        "prototype": "HANDLE LoadImageW(\n  HINSTANCE hInst,\n  LPCWSTR   name,\n  UINT      type,\n  int       cx,\n  int       cy,\n  UINT      fuLoad\n);",
+        "dllLibrary": "user32",
+        "comment": "Loads an icon, cursor, animated cursor, or bitmap."
+    },
+    "LoadLibraryW": {
+        "neutralApiName": "LoadLibrary",
+        "prototype": "HMODULE LoadLibraryW(\n  LPCWSTR lpLibFileName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Loads the specified module into the address space of the calling process. The specified module may cause other modules to be loaded."
+    },
+    "LoadResource": {
+        "neutralApiName": "LoadResource",
+        "prototype": "HGLOBAL LoadResource(\n  HMODULE hModule,\n  HRSRC   hResInfo\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves a handle that can be used to obtain a pointer to the first byte of the specified resource in memory."
+    },
+    "LockResource": {
+        "neutralApiName": "LockResource",
+        "prototype": "LPVOID LockResource(\n  HGLOBAL hResData\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves a pointer to the specified resource in memory."
+    },
+    "LockWindowUpdate": {
+        "neutralApiName": "LockWindowUpdate",
+        "prototype": "BOOL LockWindowUpdate(\n  HWND hWndLock\n);",
+        "dllLibrary": "user32",
+        "comment": "The LockWindowUpdate function disables or enables drawing in the specified window. Only one window can be locked at a time."
+    },
+    "LockWorkStation": {
+        "neutralApiName": "LockWorkStation",
+        "prototype": "BOOL LockWorkStation();",
+        "dllLibrary": "user32",
+        "comment": "Locks the workstation's display. Locking a workstation protects it from unauthorized use."
+    },
+    "LogicalToPhysicalPoint": {
+        "neutralApiName": "LogicalToPhysicalPoint",
+        "prototype": "BOOL LogicalToPhysicalPoint(\n  HWND    hWnd,\n  LPPOINT lpPoint\n);",
+        "dllLibrary": "user32",
+        "comment": "Converts the logical coordinates of a point in a window to physical coordinates."
+    },
+    "MapDialogRect": {
+        "neutralApiName": "MapDialogRect",
+        "prototype": "BOOL MapDialogRect(\n  HWND   hDlg,\n  LPRECT lpRect\n);",
+        "dllLibrary": "user32",
+        "comment": "Converts the specified dialog box units to screen units (pixels). The function replaces the coordinates in the specified RECT structure with the converted coordinates, which allows the structure to be used to create a dialog box or position a control within a dialog box."
+    },
+    "MapWindowPoints": {
+        "neutralApiName": "MapWindowPoints",
+        "prototype": "int MapWindowPoints(\n  HWND    hWndFrom,\n  HWND    hWndTo,\n  LPPOINT lpPoints,\n  UINT    cPoints\n);",
+        "dllLibrary": "user32",
+        "comment": "The MapWindowPoints function converts (maps) a set of points from a coordinate space relative to one window to a coordinate space relative to another window."
+    },
+    "mciGetDeviceIDW": {
+        "neutralApiName": "mciGetDeviceID",
+        "prototype": "MCIDEVICEID mciGetDeviceIDW(\n   LPCTSTR lpszDevice\n);",
+        "dllLibrary": "winmm",
+        "comment": "The mciGetDeviceID function retrieves the device identifier corresponding to the name of an open device."
+    },
+    "mciGetDeviceIDFromElementIDW": {
+        "neutralApiName": "mciGetDeviceIDFromElementID",
+        "prototype": "MCIDEVICEID mciGetDeviceIDFromElementIDW(\n   DWORD   dwElementID,\n   LPCTSTR lpstrType\n);",
+        "dllLibrary": "winmm",
+        "comment": "The mciGetDeviceIDFromElementID function retrieves the MCI device identifier corresponding to an element identifier."
+    },
+    "mciGetErrorStringW": {
+        "neutralApiName": "mciGetErrorString",
+        "prototype": "BOOL mciGetErrorStringW(\n   DWORD  fdwError,\n   LPTSTR lpszErrorText,\n   UINT   cchErrorText\n);",
+        "dllLibrary": "winmm",
+        "comment": "The mciGetErrorString function retrieves a string that describes the specified MCI error code."
+    },
+    "mciSendCommandW": {
+        "neutralApiName": "mciSendCommand",
+        "prototype": "MCIERROR mciSendCommandW(\n   MCIDEVICEID IDDevice,\n   UINT        uMsg,\n   DWORD_PTR   fdwCommand,\n   DWORD_PTR   dwParam\n);",
+        "dllLibrary": "winmm",
+        "comment": "The mciSendCommand function sends a command message to the specified MCI device."
+    },
+    "mciSendStringW": {
+        "neutralApiName": "mciSendString",
+        "prototype": "MCIERROR mciSendStringW(\n   LPCTSTR lpszCommand,\n   LPTSTR  lpszReturnString,\n   UINT    cchReturn,\n   HANDLE  hwndCallback\n);",
+        "dllLibrary": "winmm",
+        "comment": "The mciSendString function sends a command string to an MCI device. The device that the command is sent to is specified in the command string."
+    },
+    "MessageBoxW": {
+        "neutralApiName": "MessageBox",
+        "prototype": "int MessageBoxW(\n  HWND    hWnd,\n  LPCWSTR lpText,\n  LPCWSTR lpCaption,\n  UINT    uType\n);",
+        "dllLibrary": "user32",
+        "comment": "Displays a modal dialog box that contains a system icon, a set of buttons, and a brief application-specific message, such as status or error information. The message box returns an integer value that indicates which button the user clicked."
+    },
+    "midiOutGetNumDevs": {
+        "neutralApiName": "midiOutGetNumDevs",
+        "prototype": "UINT midiOutGetNumDevs();",
+        "dllLibrary": "winmm",
+        "comment": "The midiOutGetNumDevs function retrieves the number of MIDI output devices present in the system."
+    },
+    "MonitorFromPoint": {
+        "neutralApiName": "MonitorFromPoint",
+        "prototype": "HMONITOR MonitorFromPoint(\n  POINT pt,\n  DWORD dwFlags\n);",
+        "dllLibrary": "user32",
+        "comment": "The MonitorFromPoint function retrieves a handle to the display monitor that contains a specified point."
+    },
+    "MonitorFromRect": {
+        "neutralApiName": "MonitorFromRect",
+        "prototype": "HMONITOR MonitorFromRect(\n  LPCRECT lprc,\n  DWORD   dwFlags\n);",
+        "dllLibrary": "user32",
+        "comment": "The MonitorFromRect function retrieves a handle to the display monitor that has the largest area of intersection with a specified rectangle."
+    },
+    "MonitorFromWindow": {
+        "neutralApiName": "MonitorFromWindow",
+        "prototype": "HMONITOR MonitorFromWindow(\n  HWND  hwnd,\n  DWORD dwFlags\n);",
+        "dllLibrary": "user32",
+        "comment": "The MonitorFromWindow function retrieves a handle to the display monitor that has the largest area of intersection with the bounding rectangle of a specified window."
+    },
+    "MoveToEx": {
+        "neutralApiName": "MoveToEx",
+        "prototype": "BOOL MoveToEx(\n  HDC     hdc,\n  int     x,\n  int     y,\n  LPPOINT lppt\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The MoveToEx function updates the current position to the specified point and optionally returns the previous position."
+    },
+    "MoveWindow": {
+        "neutralApiName": "MoveWindow",
+        "prototype": "BOOL MoveWindow(\n  HWND hWnd,\n  int  X,\n  int  Y,\n  int  nWidth,\n  int  nHeight,\n  BOOL bRepaint\n);",
+        "dllLibrary": "user32",
+        "comment": "Changes the position and dimensions of the specified window. For a top-level window, the position and dimensions are relative to the upper-left corner of the screen. For a child window, they are relative to the upper-left corner of the parent window's client area."
+    },
+    "MsgWaitForMultipleObjects": {
+        "neutralApiName": "MsgWaitForMultipleObjects",
+        "prototype": "DWORD MsgWaitForMultipleObjects(\n  DWORD        nCount,\n  const HANDLE *pHandles,\n  BOOL         fWaitAll,\n  DWORD        dwMilliseconds,\n  DWORD        dwWakeMask\n);",
+        "dllLibrary": "user32",
+        "comment": "Waits until one or all of the specified objects are in the signaled state or the time-out interval elapses. The objects can include input event objects, which you specify using the dwWakeMask parameter."
+    },
+    "OffsetRect": {
+        "neutralApiName": "OffsetRect",
+        "prototype": "BOOL OffsetRect(\n  LPRECT lprc,\n  int    dx,\n  int    dy\n);",
+        "dllLibrary": "user32",
+        "comment": "The OffsetRect function moves the specified rectangle by the specified offsets."
+    },
+    "OpenIcon": {
+        "neutralApiName": "OpenIcon",
+        "prototype": "BOOL OpenIcon(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Restores a minimized (iconic) window to its previous size and position; it then activates the window."
+    },
+    "OpenProcess": {
+        "neutralApiName": "OpenProcess",
+        "prototype": "HANDLE OpenProcess(\n  DWORD dwDesiredAccess,\n  BOOL  bInheritHandle,\n  DWORD dwProcessId\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Opens an existing local process object."
+    },
+    "PaintDesktop": {
+        "neutralApiName": "PaintDesktop",
+        "prototype": "BOOL PaintDesktop(\n  HDC hdc\n);",
+        "dllLibrary": "user32",
+        "comment": "The PaintDesktop function fills the clipping region in the specified device context with the desktop pattern or wallpaper. The function is provided primarily for shell desktops."
+    },
+    "PeekMessageW": {
+        "neutralApiName": "PeekMessage",
+        "prototype": "BOOL PeekMessageW(\n  LPMSG lpMsg,\n  HWND  hWnd,\n  UINT  wMsgFilterMin,\n  UINT  wMsgFilterMax,\n  UINT  wRemoveMsg\n);",
+        "dllLibrary": "user32",
+        "comment": "Dispatches incoming sent messages, checks the thread message queue for a posted message, and retrieves the message (if any exist)."
+    },
+    "PhysicalToLogicalPoint": {
+        "neutralApiName": "PhysicalToLogicalPoint",
+        "prototype": "BOOL PhysicalToLogicalPoint(\n  HWND    hWnd,\n  LPPOINT lpPoint\n);",
+        "dllLibrary": "user32",
+        "comment": "Converts the physical coordinates of a point in a window to logical coordinates."
+    },
+    "Pie": {
+        "neutralApiName": "Pie",
+        "prototype": "BOOL Pie(\n  HDC hdc,\n  int left,\n  int top,\n  int right,\n  int bottom,\n  int xr1,\n  int yr1,\n  int xr2,\n  int yr2\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The Pie function draws a pie-shaped wedge bounded by the intersection of an ellipse and two radials. The pie is outlined by using the current pen and filled by using the current brush."
+    },
+    "PlaySoundW": {
+        "neutralApiName": "PlaySound",
+        "prototype": "BOOL PlaySoundW(\n  LPCTSTR pszSound,\n  HMODULE hmod,\n  DWORD fdwSound);",
+        "dllLibrary": "winmm",
+        "comment": "The PlaySound function plays a sound specified by the given file name, resource, or system event."
+    },
+    "PolyBezier": {
+        "neutralApiName": "PolyBezier",
+        "prototype": "BOOL PolyBezier(\n  HDC         hdc,\n  const POINT *apt,\n  DWORD       cpt\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The PolyBezier function draws one or more Bézier curves."
+    },
+    "PolyBezierTo": {
+        "neutralApiName": "PolyBezierTo",
+        "prototype": "BOOL PolyBezierTo(\n  HDC         hdc,\n  const POINT *apt,\n  DWORD       cpt\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The PolyBezierTo function draws one or more Bézier curves."
+    },
+    "PolyDraw": {
+        "neutralApiName": "PolyDraw",
+        "prototype": "BOOL PolyDraw(\n  HDC         hdc,\n  const POINT *apt,\n  const BYTE  *aj,\n  int         cpt\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The PolyDraw function draws a set of line segments and Bézier curves."
+    },
+    "Polygon": {
+        "neutralApiName": "Polygon",
+        "prototype": "BOOL Polygon(\n  HDC         hdc,\n  const POINT *apt,\n  int         cpt\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The Polygon function draws a polygon consisting of two or more vertices connected by straight lines. The polygon is outlined by using the current pen and filled by using the current brush and polygon fill mode."
+    },
+    "Polyline": {
+        "neutralApiName": "Polyline",
+        "prototype": "BOOL Polyline(\n  HDC         hdc,\n  const POINT *apt,\n  int         cpt\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The Polyline function draws a series of line segments by connecting the points in the specified array."
+    },
+    "PolylineTo": {
+        "neutralApiName": "PolylineTo",
+        "prototype": "BOOL PolylineTo(\n  HDC         hdc,\n  const POINT *apt,\n  DWORD         cpt\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The PolylineTo function draws one or more straight lines."
+    },
+    "PolyPolygon": {
+        "neutralApiName": "PolyPolygon",
+        "prototype": "BOOL PolyPolygon(\n  HDC         hdc,\n  const POINT *apt,\n  const INT   *asz,\n  int         csz\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The PolyPolygon function draws a series of closed polygons. Each polygon is outlined by using the current pen and filled by using the current brush and polygon fill mode. The polygons drawn by this function can overlap."
+    },
+    "PolyPolyline": {
+        "neutralApiName": "PolyPolyline",
+        "prototype": "BOOL PolyPolyline(\n  HDC         hdc,\n  const POINT *apt,\n  const DWORD *asz,\n  DWORD       csz\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The PolyPolyline function draws multiple series of connected line segments."
+    },
+    "PostMessageW": {
+        "neutralApiName": "PostMessage",
+        "prototype": "BOOL PostMessageW(\n  HWND   hWnd,\n  UINT   Msg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Places (posts) a message in the message queue associated with the thread that created the specified window and returns without waiting for the thread to process the message."
+    },
+    "PostThreadMessageW": {
+        "neutralApiName": "PostThreadMessage",
+        "prototype": "BOOL PostThreadMessageW(\n  DWORD  idThread,\n  UINT   Msg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Posts a message to the message queue of the specified thread. It returns without waiting for the thread to process the message."
+    },
+    "PostQuitMessage": {
+        "neutralApiName": "PostQuitMessage",
+        "prototype": "void PostQuitMessage(\n  int nExitCode\n);",
+        "dllLibrary": "user32",
+        "comment": "Indicates to the system that a thread has made a request to terminate (quit). It is typically used in response to a WM_DESTROY message."
+    },
+    "PtInRect": {
+        "neutralApiName": "PtInRect",
+        "prototype": "BOOL PtInRect(\n  const RECT *lprc,\n  POINT      pt\n);",
+        "dllLibrary": "user32",
+        "comment": "The PtInRect function determines whether the specified point lies within the specified rectangle. A point is within a rectangle if it lies on the left or top side or is within all four sides. A point on the right or bottom side is considered outside the rectangle."
+    },
+    "PtInRegion": {
+        "neutralApiName": "PtInRegion",
+        "prototype": "BOOL PtInRegion(\n  HRGN hrgn,\n  int  x,\n  int  y\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The PtInRegion function determines whether the specified point is inside the specified region."
+    },
+    "QueryDosDeviceW": {
+        "neutralApiName": "QueryDosDevice",
+        "prototype": "DWORD QueryDosDeviceW(\n  LPCWSTR lpDeviceName,\n  LPWSTR  lpTargetPath,\n  DWORD   ucchMax\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves information about MS-DOS device names. The function can obtain the current mapping for a particular MS-DOS device name. The function can also obtain a list of all existing MS-DOS device names."
+    },
+    "QueryPerformanceCounter": {
+        "neutralApiName": "QueryPerformanceCounter",
+        "prototype": "BOOL QueryPerformanceCounter(\n  LARGE_INTEGER *lpPerformanceCount\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the current value of the performance counter, which is a high resolution (<1us) time stamp that can be used for time-interval measurements."
+    },
+    "QueryPerformanceFrequency": {
+        "neutralApiName": "QueryPerformanceFrequency",
+        "prototype": "BOOL QueryPerformanceFrequency(\n  LARGE_INTEGER *lpFrequency\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the frequency of the performance counter. The frequency of the performance counter is fixed at system boot and is consistent across all processors. Therefore, the frequency need only be queried upon application initialization, and the result can be cached."
+    },
+    "ReadConsoleW": {
+        "neutralApiName": "ReadConsole",
+        "prototype": "BOOL WINAPI ReadConsoleW(\n  _In_     HANDLE  hConsoleInput,\n  _Out_    LPVOID  lpBuffer,\n  _In_     DWORD   nNumberOfCharsToRead,\n  _Out_    LPDWORD lpNumberOfCharsRead,\n  _In_opt_ LPVOID  pInputControl\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Reads character input from the console input buffer and removes it from the buffer."
+    },
+    "ReadFile": {
+        "neutralApiName": "ReadFile",
+        "prototype": "BOOL ReadFile(\n  HANDLE       hFile,\n  LPVOID       lpBuffer,\n  DWORD        nNumberOfBytesToRead,\n  LPDWORD      lpNumberOfBytesRead,\n  LPOVERLAPPED lpOverlapped\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Reads data from the specified file or input/output (I/O) device. Reads occur at the position specified by the file pointer if supported by the device."
+    },
+    "ReadProcessMemory": {
+        "neutralApiName": "ReadProcessMemory",
+        "prototype": "BOOL ReadProcessMemory(\n  HANDLE  hProcess,\n  LPCVOID lpBaseAddress,\n  LPVOID  lpBuffer,\n  SIZE_T  nSize,\n  SIZE_T  *lpNumberOfBytesRead\n);",
+        "dllLibrary": "kernel32",
+        "comment": "ReadProcessMemory copies the data in the specified address range from the address space of the specified process into the specified buffer of the current process. Any process that has a handle with PROCESS_VM_READ access can call the function."
+    },
+    "Rectangle": {
+        "neutralApiName": "Rectangle",
+        "prototype": "BOOL Rectangle(\n  HDC hdc,\n  int left,\n  int top,\n  int right,\n  int bottom\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The Rectangle function draws a rectangle. The rectangle is outlined by using the current pen and filled by using the current brush."
+    },
+    "RectInRegion": {
+        "neutralApiName": "RectInRegion",
+        "prototype": "BOOL RectInRegion(\n  HRGN       hrgn,\n  const RECT *lprect\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The RectInRegion function determines whether any part of the specified rectangle is within the boundaries of a region."
+    },
+    "RedrawWindow": {
+        "neutralApiName": "RedrawWindow",
+        "prototype": "BOOL RedrawWindow(\n  HWND       hWnd,\n  const RECT *lprcUpdate,\n  HRGN       hrgnUpdate,\n  UINT       flags\n);",
+        "dllLibrary": "user32",
+        "comment": "The RedrawWindow function updates the specified rectangle or region in a window's client area."
+    },
+    "RegCloseKey": {
+        "neutralApiName": "RegCloseKey",
+        "prototype": "LSTATUS RegCloseKey(\n  HKEY hKey\n);",
+        "dllLibrary": "advapi32",
+        "comment": "Closes a handle to the specified registry key."
+    },
+    "RegConnectRegistryW": {
+        "neutralApiName": "RegConnectRegistry",
+        "prototype": "LSTATUS RegConnectRegistryW(\n  LPCWSTR lpMachineName,\n  HKEY    hKey,\n  PHKEY   phkResult\n);",
+        "dllLibrary": "advapi32",
+        "comment": "Establishes a connection to a predefined registry key on another computer."
+    },
+    "RegisterClassW": {
+        "neutralApiName": "RegisterClass",
+        "prototype": "ATOM RegisterClassW(\n  const WNDCLASSW *lpWndClass\n);",
+        "dllLibrary": "user32",
+        "comment": "Registers a window class for subsequent use in calls to the CreateWindow or CreateWindowEx function."
+    },
+    "RegisterWindowMessageW": {
+        "neutralApiName": "RegisterWindowMessage",
+        "prototype": "UINT RegisterWindowMessageW(\n  LPCWSTR lpString\n);",
+        "dllLibrary": "user32",
+        "comment": "Defines a new window message that is guaranteed to be unique throughout the system. The message value can be used when sending or posting messages."
+    },
+    "RegOpenKeyExW": {
+        "neutralApiName": "RegOpenKeyEx",
+        "prototype": "LSTATUS RegOpenKeyExW(\n  HKEY    hKey,\n  LPCWSTR lpSubKey,\n  DWORD   ulOptions,\n  REGSAM  samDesired,\n  PHKEY   phkResult\n);",
+        "dllLibrary": "advapi32",
+        "comment": "Opens the specified registry key. Note that key names are not case sensitive."
+    },
+    "RegQueryValueExW": {
+        "neutralApiName": "RegQueryValueEx",
+        "prototype": "LSTATUS RegQueryValueExW(\n  HKEY    hKey,\n  LPCWSTR lpValueName,\n  LPDWORD lpReserved,\n  LPDWORD lpType,\n  LPBYTE  lpData,\n  LPDWORD lpcbData\n);",
+        "dllLibrary": "advapi32",
+        "comment": "Retrieves the type and data for the specified value name associated with an open registry key. To ensure that any string values (REG_SZ, REG_MULTI_SZ, and REG_EXPAND_SZ) returned are null-terminated, use the RegGetValue function."
+    },
+    "RegSetValueExW": {
+        "neutralApiName": "RegSetValueEx",
+        "prototype": "LSTATUS RegSetValueExW(\n  HKEY       hKey,\n  LPCWSTR    lpValueName,\n  DWORD      Reserved,\n  DWORD      dwType,\n  const BYTE *lpData,\n  DWORD      cbData\n);",
+        "dllLibrary": "advapi32",
+        "comment": "Sets the data and type of a specified value under a registry key."
+    },
+    "RemoveDirectoryW": {
+        "neutralApiName": "RemoveDirectory",
+        "prototype": "BOOL RemoveDirectoryW(\n  LPCWSTR lpPathName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Deletes an existing empty directory."
+    },
+    "ReleaseActCtx": {
+        "neutralApiName": "ReleaseActCtx",
+        "prototype": "void ReleaseActCtx(\n  HANDLE hActCtx\n);",
+        "dllLibrary": "kernel32",
+        "comment": "The ReleaseActCtx function decrements the reference count of the specified activation context."
+    },
+    "ReleaseDC": {
+        "neutralApiName": "ReleaseDC",
+        "prototype": "int ReleaseDC(\n  HWND hWnd,\n  HDC  hDC\n);",
+        "dllLibrary": "user32",
+        "comment": "The ReleaseDC function releases a device context (DC), freeing it for use by other applications. The effect of the ReleaseDC function depends on the type of DC. It frees only common and window DCs. It has no effect on class or private DCs."
+    },
+    "ReplaceTextW": {
+        "neutralApiName": "ReplaceText",
+        "prototype": "HWND ReplaceTextW(\n  LPFINDREPLACEW Arg1\n);",
+        "dllLibrary": "comdlg32",
+        "comment": "Creates a system-defined modeless dialog box that lets the user specify a string to search for and a replacement string, as well as options to control the find and replace operations."
+    },
+    "ReplyMessage": {
+        "neutralApiName": "ReplyMessage",
+        "prototype": "BOOL ReplyMessage(\n  LRESULT lResult\n);",
+        "dllLibrary": "user32",
+        "comment": "Replies to a message sent from another thread by the SendMessage function."
+    },
+    "ResizePseudoConsole": {
+        "neutralApiName": "ResizePseudoConsole",
+        "prototype": "HRESULT WINAPI ResizePseudoConsole(\n    _In_ HPCON hPC ,\n    _In_ COORD size\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Resizes the internal buffers for a pseudoconsole to the given size."
+    },
+    "RoundRect": {
+        "neutralApiName": "RoundRect",
+        "prototype": "BOOL RoundRect(\n  HDC hdc,\n  int left,\n  int top,\n  int right,\n  int bottom,\n  int width,\n  int height\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The RoundRect function draws a rectangle with rounded corners. The rectangle is outlined by using the current pen and filled by using the current brush."
+    },
+    "SaveCurrentMonitorSettings": {
+        "neutralApiName": "SaveCurrentMonitorSettings",
+        "prototype": "_BOOL SaveCurrentMonitorSettings(\n  HANDLE hMonitor\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Saves the current monitor settings to the display's nonvolatile storage."
+    },
+    "SaveDC": {
+        "neutralApiName": "SaveDC",
+        "prototype": "int SaveDC(\n  HDC hdc\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The SaveDC function saves the current state of the specified device context (DC) by copying data describing selected objects and graphic modes (such as the bitmap, brush, palette, font, pen, region, drawing mode, and mapping mode) to a context stack."
+    },
+    "ScreenToClient": {
+        "neutralApiName": "ScreenToClient",
+        "prototype": "BOOL ScreenToClient(\n  HWND    hWnd,\n  LPPOINT lpPoint\n);",
+        "dllLibrary": "user32",
+        "comment": "The ScreenToClient function converts the screen coordinates of a specified point on the screen to client-area coordinates."
+    },
+    "ScrollConsoleScreenBufferW": {
+        "neutralApiName": "ScrollConsoleScreenBuffer",
+        "prototype": "BOOL WINAPI ScrollConsoleScreenBufferW(\n  _In_           HANDLE     hConsoleOutput,\n  _In_     const SMALL_RECT *lpScrollRectangle,\n  _In_opt_ const SMALL_RECT *lpClipRectangle,\n  _In_           COORD      dwDestinationOrigin,\n  _In_     const CHAR_INFO  *lpFill\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Moves a block of data in a screen buffer. The effects of the move can be limited by specifying a clipping rectangle, so the contents of the console screen buffer outside the clipping rectangle are unchanged."
+    },
+    "ScrollWindow": {
+        "neutralApiName": "ScrollWindow",
+        "prototype": "BOOL ScrollWindow(\n  HWND       hWnd,\n  int        XAmount,\n  int        YAmount,\n  const RECT *lpRect,\n  const RECT *lpClipRect\n);",
+        "dllLibrary": "user32",
+        "comment": "The ScrollWindow function scrolls the contents of the specified window's client area."
+    },
+    "SelectObject": {
+        "neutralApiName": "SelectObject",
+        "prototype": "HGDIOBJ SelectObject(\n  HDC     hdc,\n  HGDIOBJ h\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The SelectObject function selects an object into the specified device context (DC). The new object replaces the previous object of the same type."
+    },
+    "SendDlgItemMessageW": {
+        "neutralApiName": "SendDlgItemMessage",
+        "prototype": "LRESULT SendDlgItemMessageW(\n  HWND   hDlg,\n  int    nIDDlgItem,\n  UINT   Msg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Sends a message to the specified control in a dialog box."
+    },
+    "SendInput": {
+        "neutralApiName": "SendInput",
+        "prototype": "UINT SendInput(\n  UINT    cInputs,\n  LPINPUT pInputs,\n  int     cbSize\n);",
+        "dllLibrary": "user32",
+        "comment": "Synthesizes keystrokes, mouse motions, and button clicks."
+    },
+    "SendMessageW": {
+        "neutralApiName": "SendMessage",
+        "prototype": "LRESULT SendMessageW(\n  HWND   hWnd,\n  UINT   Msg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Sends the specified message to a window or windows. The SendMessage function calls the window procedure for the specified window and does not return until the window procedure has processed the message."
+    },
+    "SetBkColor": {
+        "neutralApiName": "SetBkColor",
+        "prototype": "COLORREF SetBkColor(\n  HDC      hdc,\n  COLORREF color\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The SetBkColor function sets the current background color to the specified color value, or to the nearest physical color if the device cannot represent the specified color value."
+    },
+    "SetBkMode": {
+        "neutralApiName": "SetBkMode",
+        "prototype": "int SetBkMode(\n  HDC hdc,\n  int mode\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The SetBkMode function sets the background mix mode of the specified device context. The background mix mode is used with text, hatched brushes, and pen styles that are not solid lines."
+    },
+    "SetConsoleCtrlHandler": {
+        "neutralApiName": "SetConsoleCtrlHandler",
+        "prototype": "BOOL WINAPI SetConsoleCtrlHandler(\n  _In_opt_ PHANDLER_ROUTINE HandlerRoutine,\n  _In_     BOOL             Add\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Adds or removes an application-defined HandlerRoutine function from the list of handler functions for the calling process."
+    },
+    "SetConsoleCursorInfo": {
+        "neutralApiName": "SetConsoleCursorInfo",
+        "prototype": "BOOL WINAPI SetConsoleCursorInfo(\n  _In_       HANDLE              hConsoleOutput,\n  _In_ const CONSOLE_CURSOR_INFO *lpConsoleCursorInfo\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the size and visibility of the cursor for the specified console screen buffer."
+    },
+    "SetConsoleCursorPosition": {
+        "neutralApiName": "SetConsoleCursorPosition",
+        "prototype": "BOOL WINAPI SetConsoleCursorPosition(\n  _In_ HANDLE hConsoleOutput,\n  _In_ COORD  dwCursorPosition\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the cursor position in the specified console screen buffer."
+    },
+    "SetConsoleDisplayMode": {
+        "neutralApiName": "SetConsoleDisplayMode",
+        "prototype": "BOOL WINAPI SetConsoleDisplayMode(\n  _In_      HANDLE hConsoleOutput,\n  _In_      DWORD  dwFlags,\n  _Out_opt_ PCOORD lpNewScreenBufferDimensions\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the display mode of the specified console screen buffer."
+    },
+    "SetConsoleMode": {
+        "neutralApiName": "SetConsoleMode",
+        "prototype": "BOOL WINAPI SetConsoleMode(\n  _In_ HANDLE hConsoleHandle,\n  _In_ DWORD  dwMode\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the input mode of a console's input buffer or the output mode of a console screen buffer."
+    },
+    "SetConsoleTextAttribute": {
+        "neutralApiName": "SetConsoleTextAttribute",
+        "prototype": "BOOL WINAPI SetConsoleTextAttribute(\n  _In_ HANDLE hConsoleOutput,\n  _In_ WORD   wAttributes\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the attributes of characters written to the console screen buffer by the WriteFile or WriteConsole function, or echoed by the ReadFile or ReadConsole function. This function affects text written after the function call."
+    },
+    "SetConsoleWindowInfo": {
+        "neutralApiName": "SetConsoleWindowInfo",
+        "prototype": "BOOL WINAPI SetConsoleWindowInfo(\n  _In_       HANDLE     hConsoleOutput,\n  _In_       BOOL       bAbsolute,\n  _In_ const SMALL_RECT *lpConsoleWindow\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the current size and position of a console screen buffer's window."
+    },
+    "SetCurrentDirectoryW": {
+        "neutralApiName": "SetCurrentDirectory",
+        "prototype": "BOOL SetCurrentDirectoryW(\n  LPCTSTR lpPathName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Changes the current directory for the current process."
+    },
+    "SetCursorPos": {
+        "neutralApiName": "SetCursorPos",
+        "prototype": "BOOL SetCursorPos(\n  int X,\n  int Y\n);",
+        "dllLibrary": "user32",
+        "comment": "Moves the cursor to the specified screen coordinates. If the new coordinates are not within the screen rectangle set by the most recent ClipCursor function call, the system automatically adjusts the coordinates so that the cursor stays within the rectangle."
+    },
+    "SetDlgItemInt": {
+        "neutralApiName": "SetDlgItemInt",
+        "prototype": "BOOL SetDlgItemInt(\n  HWND hDlg,\n  int  nIDDlgItem,\n  UINT uValue,\n  BOOL bSigned\n);",
+        "dllLibrary": "user32",
+        "comment": "Sets the text of a control in a dialog box to the string representation of a specified integer value."
+    },
+    "SetDlgItemTextW": {
+        "neutralApiName": "SetDlgItemText",
+        "prototype": "BOOL SetDlgItemTextW(\n  HWND    hDlg,\n  int     nIDDlgItem,\n  LPCWSTR lpString\n);",
+        "dllLibrary": "user32",
+        "comment": "Sets the title or text of a control in a dialog box."
+    },
+    "SetFilePointer": {
+        "neutralApiName": "SetFilePointer",
+        "prototype": "DWORD SetFilePointer(\n  HANDLE hFile,\n  LONG   lDistanceToMove,\n  PLONG  lpDistanceToMoveHigh,\n  DWORD  dwMoveMethod\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Moves the file pointer of the specified file."
+    },
+    "SetFilePointerEx": {
+        "neutralApiName": "SetFilePointerEx",
+        "prototype": "BOOL SetFilePointerEx(\n  HANDLE         hFile,\n  LARGE_INTEGER  liDistanceToMove,\n  PLARGE_INTEGER lpNewFilePointer,\n  DWORD          dwMoveMethod\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Moves the file pointer of the specified file."
+    },
+    "SetFocus": {
+        "neutralApiName": "SetFocus",
+        "prototype": "HWND SetFocus(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Sets the keyboard focus to the specified window. The window must be attached to the calling thread's message queue."
+    },
+    "SetForegroundWindow": {
+        "neutralApiName": "SetForegroundWindow",
+        "prototype": "BOOL SetForegroundWindow(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Brings the thread that created the specified window into the foreground and activates the window. Keyboard input is directed to the window, and various visual cues are changed for the user. The system assigns a slightly higher priority to the thread that created the foreground window than it does to other threads."
+    },
+    "SetMapMode": {
+        "neutralApiName": "SetMapMode",
+        "prototype": "int SetMapMode(\n  HDC hdc,\n  int iMode\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The SetMapMode function sets the mapping mode of the specified device context. The mapping mode defines the unit of measure used to transform page-space units into device-space units, and also defines the orientation of the device's x and y axes."
+    },
+    "SetMenuInfo": {
+        "neutralApiName": "SetMenuInfo",
+        "prototype": "BOOL SetMenuInfo(\n  HMENU       hmenu,\n  LPCMENUINFO lpmi\n);",
+        "dllLibrary": "user32",
+        "comment": "Sets information for a specified menu."
+    },
+    "SetMenuItemInfoW": {
+        "neutralApiName": "SetMenuItemInfo",
+        "prototype": "BOOL SetMenuItemInfoW(\n  HMENU            hmenu,\n  UINT             item,\n  BOOL             fByPositon,\n  LPCMENUITEMINFOW lpmii\n);",
+        "dllLibrary": "user32",
+        "comment": "Changes information about a menu item."
+    },
+    "SetMonitorBrightness": {
+        "neutralApiName": "SetMonitorBrightness",
+        "prototype": "_BOOL SetMonitorBrightness(\n  HANDLE hMonitor,\n  DWORD  dwNewBrightness\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Sets a monitor's brightness value. Increasing the brightness value makes the display on the monitor brighter, and decreasing it makes the display dimmer."
+    },
+    "SetMonitorColorTemperature": {
+        "neutralApiName": "SetMonitorColorTemperature",
+        "prototype": "_BOOL SetMonitorColorTemperature(\n  HANDLE               hMonitor,\n  MC_COLOR_TEMPERATURE ctCurrentColorTemperature\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Sets a monitor's color temperature."
+    },
+    "SetMonitorContrast": {
+        "neutralApiName": "SetMonitorContrast",
+        "prototype": "_BOOL SetMonitorContrast(\n  HANDLE hMonitor,\n  DWORD  dwNewContrast\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Sets a monitor's contrast value."
+    },
+    "SetMonitorDisplayAreaPosition": {
+        "neutralApiName": "SetMonitorDisplayAreaPosition",
+        "prototype": "_BOOL SetMonitorDisplayAreaPosition(\n  HANDLE           hMonitor,\n  MC_POSITION_TYPE ptPositionType,\n  DWORD            dwNewPosition\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Sets the horizontal or vertical position of a monitor's display area. Increasing the horizontal position moves the display area toward the right side of the screen; decreasing it moves the display area toward the left. Increasing the vertical position moves the display area toward the top of the screen; decreasing it moves the display area toward the bottom."
+    },
+    "SetMonitorDisplayAreaSize": {
+        "neutralApiName": "SetMonitorDisplayAreaSize",
+        "prototype": "_BOOL SetMonitorDisplayAreaSize(\n  HANDLE       hMonitor,\n  MC_SIZE_TYPE stSizeType,\n  DWORD        dwNewDisplayAreaWidthOrHeight\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Sets the width or height of a monitor's display area."
+    },
+    "SetMonitorRedGreenOrBlueDrive": {
+        "neutralApiName": "SetMonitorRedGreenOrBlueDrive",
+        "prototype": "_BOOL SetMonitorRedGreenOrBlueDrive(\n  HANDLE        hMonitor,\n  MC_DRIVE_TYPE dtDriveType,\n  DWORD         dwNewDrive\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Sets a monitor's red, green, or blue drive value."
+    },
+    "SetMonitorRedGreenOrBlueGain": {
+        "neutralApiName": "SetMonitorRedGreenOrBlueGain",
+        "prototype": "_BOOL SetMonitorRedGreenOrBlueGain(\n  HANDLE       hMonitor,\n  MC_GAIN_TYPE gtGainType,\n  DWORD        dwNewGain\n);",
+        "dllLibrary": "dxva2",
+        "comment": "Sets a monitor's red, green, or blue gain value."
+    },
+    "SetParent": {
+        "neutralApiName": "SetParent",
+        "prototype": "HWND SetParent(\n  HWND hWndChild,\n  HWND hWndNewParent\n);",
+        "dllLibrary": "user32",
+        "comment": "Changes the parent window of the specified child window."
+    },
+    "SetPixel": {
+        "neutralApiName": "SetPixel",
+        "prototype": "COLORREF SetPixel(\n  HDC      hdc,\n  int      x,\n  int      y,\n  COLORREF color\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The SetPixel function sets the pixel at the specified coordinates to the specified color."
+    },
+    "SetProcessDPIAware": {
+        "neutralApiName": "SetProcessDPIAware",
+        "prototype": "BOOL SetProcessDPIAware();",
+        "dllLibrary": "user32",
+        "comment": "Sets the process-default DPI awareness to system-DPI awareness."
+    },
+    "SetProcessDpiAwareness": {
+        "neutralApiName": "SetProcessDpiAwareness",
+        "prototype": "HRESULT SetProcessDpiAwareness(\n  PROCESS_DPI_AWARENESS value\n);",
+        "dllLibrary": "shcore",
+        "comment": "Sets the process-default DPI awareness level. This is equivalent to calling SetProcessDpiAwarenessContext with the corresponding DPI_AWARENESS_CONTEXT value."
+    },
+    "SetRect": {
+        "neutralApiName": "SetRect",
+        "prototype": "BOOL SetRect(\n  LPRECT lprc,\n  int    xLeft,\n  int    yTop,\n  int    xRight,\n  int    yBottom\n);",
+        "dllLibrary": "user32",
+        "comment": "The SetRect function sets the coordinates of the specified rectangle. This is equivalent to assigning the left, top, right, and bottom arguments to the appropriate members of the RECT structure."
+    },
+    "SetRectEmpty": {
+        "neutralApiName": "SetRectEmpty",
+        "prototype": "BOOL SetRectEmpty(\n  LPRECT lprc\n);",
+        "dllLibrary": "user32",
+        "comment": "The SetRectEmpty function creates an empty rectangle in which all coordinates are set to zero."
+    },
+    "SetScrollInfo": {
+        "neutralApiName": "SetScrollInfo",
+        "prototype": "int SetScrollInfo(\n  HWND          hwnd,\n  int           nBar,\n  LPCSCROLLINFO lpsi,\n  BOOL          redraw\n);",
+        "dllLibrary": "user32",
+        "comment": "The SetScrollInfo function sets the parameters of a scroll bar, including the minimum and maximum scrolling positions, the page size, and the position of the scroll box (thumb). The function also redraws the scroll bar, if requested."
+    },
+    "SetStdHandle": {
+        "neutralApiName": "SetStdHandle",
+        "prototype": "BOOL WINAPI SetStdHandle(\n  _In_ DWORD  nStdHandle,\n  _In_ HANDLE hHandle\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the handle for the specified standard device (standard input, standard output, or standard error)."
+    },
+    "SetStretchBltMode": {
+        "neutralApiName": "SetStretchBltMode",
+        "prototype": "int SetStretchBltMode(\n  HDC hdc,\n  int mode\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The SetStretchBltMode function sets the bitmap stretching mode in the specified device context."
+    },
+    "SetTextColor": {
+        "neutralApiName": "SetTextColor",
+        "prototype": "COLORREF SetTextColor(\n  HDC      hdc,\n  COLORREF color\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The SetTextColor function sets the text color for the specified device context to the specified color."
+    },
+    "SetTimer": {
+        "neutralApiName": "SetTimer",
+        "prototype": "UINT_PTR SetTimer(\n  HWND      hWnd,\n  UINT_PTR  nIDEvent,\n  UINT      uElapse,\n  TIMERPROC lpTimerFunc\n);",
+        "dllLibrary": "user32",
+        "comment": "Creates a timer with the specified time-out value."
+    },
+    "SetViewportExtEx": {
+        "neutralApiName": "SetViewportExtEx",
+        "prototype": "BOOL SetViewportExtEx(\n  HDC    hdc,\n  int    x,\n  int    y,\n  LPSIZE lpsz\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The SetViewportExtEx function sets the horizontal and vertical extents of the viewport for a device context by using the specified values."
+    },
+    "SetViewportOrgEx": {
+        "neutralApiName": "SetViewportOrgEx",
+        "prototype": "BOOL SetViewportOrgEx(\n  HDC     hdc,\n  int     x,\n  int     y,\n  LPPOINT lppt\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The SetViewportOrgEx function specifies which device point maps to the window origin (0,0)."
+    },
+    "SetWindowExtEx": {
+        "neutralApiName": "SetWindowExtEx",
+        "prototype": "BOOL SetWindowExtEx(\n  HDC    hdc,\n  int    x,\n  int    y,\n  LPSIZE lpsz\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The SetWindowExtEx function sets the horizontal and vertical extents of the window for a device context by using the specified values."
+    },
+    "SetWindowLongPtrW": {
+        "neutralApiName": "SetWindowLongPtr",
+        "prototype": "LONG_PTR SetWindowLongPtrW(\n  HWND     hWnd,\n  int      nIndex,\n  LONG_PTR dwNewLong\n);",
+        "dllLibrary": "user32",
+        "comment": "Changes an attribute of the specified window. The function also sets a value at the specified offset in the extra window memory."
+    },
+    "SetWindowPos": {
+        "neutralApiName": "SetWindowPos",
+        "prototype": "BOOL SetWindowPos(\n  HWND hWnd,\n  HWND hWndInsertAfter,\n  int  X,\n  int  Y,\n  int  cx,\n  int  cy,\n  UINT uFlags\n);",
+        "dllLibrary": "user32",
+        "comment": "Changes the size, position, and Z order of a child, pop-up, or top-level window. These windows are ordered according to their appearance on the screen. The topmost window receives the highest rank and is the first window in the Z order."
+    },
+    "SetWindowRgn": {
+        "neutralApiName": "SetWindowRgn",
+        "prototype": "int SetWindowRgn(\n  HWND hWnd,\n  HRGN hRgn,\n  BOOL bRedraw\n);",
+        "dllLibrary": "user32",
+        "comment": "The SetWindowRgn function sets the window region of a window. The window region determines the area within the window where the system permits drawing. The system does not display any portion of a window that lies outside of the window region"
+    },
+    "SetWindowTextW": {
+        "neutralApiName": "SetWindowText",
+        "prototype": "BOOL SetWindowTextW(\n  HWND    hWnd,\n  LPCWSTR lpString\n);",
+        "dllLibrary": "user32",
+        "comment": "Changes the text of the specified window's title bar (if it has one). If the specified window is a control, the text of the control is changed. However, SetWindowText cannot change the text of a control in another application."
+    },
+    "ShellAboutW": {
+        "neutralApiName": "ShellAbout",
+        "prototype": "INT ShellAboutW(\n  HWND    hWnd,\n  LPCWSTR szApp,\n  LPCWSTR szOtherStuff,\n  HICON   hIcon\n);",
+        "dllLibrary": "shell32",
+        "comment": "Displays a ShellAbout dialog box."
+    },
+    "ShellExecuteExW": {
+        "neutralApiName": "ShellExecuteEx",
+        "prototype": "BOOL ShellExecuteExW(\n  SHELLEXECUTEINFOW *pExecInfo\n);",
+        "dllLibrary": "shell32",
+        "comment": "Performs an operation on a specified file."
+    },
+    "ShellExecuteW": {
+        "neutralApiName": "ShellExecute",
+        "prototype": "HINSTANCE ShellExecuteW(\n  HWND    hwnd,\n  LPCWSTR lpOperation,\n  LPCWSTR lpFile,\n  LPCWSTR lpParameters,\n  LPCWSTR lpDirectory,\n  INT     nShowCmd\n);",
+        "dllLibrary": "shell32",
+        "comment": "Performs an operation on a specified file."
+    },
+    "SHCreateItemFromParsingName": {
+        "neutralApiName": "SHCreateItemFromParsingName",
+        "prototype": "SHSTDAPI SHCreateItemFromParsingName(\n  PCWSTR   pszPath,\n  IBindCtx *pbc,\n  REFIID   riid,\n  void     **ppv\n);",
+        "dllLibrary": "shell32",
+        "comment": "Creates and initializes a Shell item object from a parsing name."
+    },
+    "SHEmptyRecycleBinW": {
+        "neutralApiName": "SHEmptyRecycleBin",
+        "prototype": "SHSTDAPI SHEmptyRecycleBinW(\n  HWND    hwnd,\n  LPCWSTR pszRootPath,\n  DWORD   dwFlags\n);",
+        "dllLibrary": "shell32",
+        "comment": "Empties the Recycle Bin on the specified drive."
+    },
+    "SHGetDiskFreeSpaceExW": {
+        "neutralApiName": "SHGetDiskFreeSpaceEx",
+        "prototype": "BOOL SHGetDiskFreeSpaceExW(\n  LPCWSTR        pszDirectoryName,\n  ULARGE_INTEGER *pulFreeBytesAvailableToCaller,\n  ULARGE_INTEGER *pulTotalNumberOfBytes,\n  ULARGE_INTEGER *pulTotalNumberOfFreeBytes\n);",
+        "dllLibrary": "shell32",
+        "comment": "Retrieves disk space information for a disk volume."
+    },
+    "SHGetDriveMedia": {
+        "neutralApiName": "SHGetDriveMedia",
+        "prototype": "HRESULT SHGetDriveMedia(\n  PCWSTR pszDrive,\n  DWORD  *pdwMediaContent\n);",
+        "dllLibrary": "shell32",
+        "comment": "Returns the type of media that is in the given drive."
+    },
+    "SHGetFolderPathW": {
+        "neutralApiName": "SHGetFolderPath",
+        "prototype": "SHFOLDERAPI SHGetFolderPathW(\n  HWND   hwnd,\n  int    csidl,\n  HANDLE hToken,\n  DWORD  dwFlags,\n  LPWSTR pszPath\n);",
+        "dllLibrary": "shell32",
+        "comment": "Gets the path of a folder identified by a CSIDL value."
+    },
+    "SHGetKnownFolderPath": {
+        "neutralApiName": "SHGetKnownFolderPath",
+        "prototype": "HRESULT SHGetKnownFolderPath(\n  REFKNOWNFOLDERID rfid,\n  DWORD            dwFlags,\n  HANDLE           hToken,\n  PWSTR            *ppszPath\n);",
+        "dllLibrary": "shell32",
+        "comment": "Retrieves the full path of a known folder identified by the folder's KNOWNFOLDERID."
+    },
+    "ShowCursor": {
+        "neutralApiName": "ShowCursor",
+        "prototype": "int ShowCursor(\n  BOOL bShow\n);",
+        "dllLibrary": "user32",
+        "comment": "Displays or hides the cursor."
+    },
+    "ShowWindow": {
+        "neutralApiName": "ShowWindow",
+        "prototype": "BOOL ShowWindow(\n  HWND hWnd,\n  int  nCmdShow\n);",
+        "dllLibrary": "user32",
+        "comment": "Sets the specified window's show state."
+    },
+    "ShowWindowAsync": {
+        "neutralApiName": "ShowWindowAsync",
+        "prototype": "BOOL ShowWindowAsync(\n  HWND hWnd,\n  int  nCmdShow\n);",
+        "dllLibrary": "user32",
+        "comment": "Sets the show state of a window without waiting for the operation to complete."
+    },
+    "SHQueryRecycleBinW": {
+        "neutralApiName": "SHQueryRecycleBin",
+        "prototype": "SHSTDAPI SHQueryRecycleBinW(\n  LPCWSTR         pszRootPath,\n  LPSHQUERYRBINFO pSHQueryRBInfo\n);",
+        "dllLibrary": "shell32",
+        "comment": "Retrieves the size of the Recycle Bin and the number of items in it, for a specified drive."
+    },
+    "Sleep": {
+        "neutralApiName": "Sleep",
+        "prototype": "void Sleep(\n  DWORD dwMilliseconds\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Suspends the execution of the current thread until the time-out interval elapses."
+    },
+    "SoundSentry": {
+        "neutralApiName": "SoundSentry",
+        "prototype": "BOOL SoundSentry();",
+        "dllLibrary": "user32",
+        "comment": "Triggers a visual signal to indicate that a sound is playing."
+    },
+    "StretchBlt": {
+        "neutralApiName": "StretchBlt",
+        "prototype": "BOOL StretchBlt(\n  HDC   hdcDest,\n  int   xDest,\n  int   yDest,\n  int   wDest,\n  int   hDest,\n  HDC   hdcSrc,\n  int   xSrc,\n  int   ySrc,\n  int   wSrc,\n  int   hSrc,\n  DWORD rop\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The StretchBlt function copies a bitmap from a source rectangle into a destination rectangle, stretching or compressing the bitmap to fit the dimensions of the destination rectangle, if necessary. The system stretches or compresses the bitmap according to the stretching mode currently set in the destination device context."
+    },
+    "StretchDIBits": {
+        "neutralApiName": "StretchDIBits",
+        "prototype": "int StretchDIBits(\n  HDC              hdc,\n  int              xDest,\n  int              yDest,\n  int              DestWidth,\n  int              DestHeight,\n  int              xSrc,\n  int              ySrc,\n  int              SrcWidth,\n  int              SrcHeight,\n  const VOID       *lpBits,\n  const BITMAPINFO *lpbmi,\n  UINT             iUsage,\n  DWORD            rop\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The StretchDIBits function copies the color data for a rectangle of pixels in a DIB, JPEG, or PNG image to the specified destination rectangle. If the destination rectangle is larger than the source rectangle, this function stretches the rows and columns of color data to fit the destination rectangle. If the destination rectangle is smaller than the source rectangle, this function compresses the rows and columns by using the specified raster operation."
+    },
+    "SubtractRect": {
+        "neutralApiName": "SubtractRect",
+        "prototype": "BOOL SubtractRect(\n  LPRECT     lprcDst,\n  const RECT *lprcSrc1,\n  const RECT *lprcSrc2\n);",
+        "dllLibrary": "user32",
+        "comment": "The SubtractRect function determines the coordinates of a rectangle formed by subtracting one rectangle from another."
+    },
+    "SysAllocString": {
+        "neutralApiName": "SysAllocString",
+        "prototype": "BSTR SysAllocString(\n  const OLECHAR *psz\n);",
+        "dllLibrary": "oleaut32",
+        "comment": "Allocates a new string and copies the passed string into it."
+    },
+    "SysFreeString": {
+        "neutralApiName": "SysFreeString",
+        "prototype": "void SysFreeString(\n  BSTR bstrString\n);",
+        "dllLibrary": "oleaut32",
+        "comment": "Deallocates a string allocated previously by SysAllocString, SysAllocStringByteLen, SysReAllocString, SysAllocStringLen, or SysReAllocStringLen."
+    },
+    "SysStringByteLen": {
+        "neutralApiName": "SysStringByteLen",
+        "prototype": "UINT SysStringByteLen(\n  BSTR bstr\n);",
+        "dllLibrary": "oleaut32",
+        "comment": "Returns the length (in bytes) of a BSTR."
+    },
+    "SysStringLen": {
+        "neutralApiName": "SysStringLen",
+        "prototype": "UINT SysStringLen(\n  BSTR pbstr\n);",
+        "dllLibrary": "oleaut32",
+        "comment": "Returns the length of a BSTR."
+    },
+    "SystemParametersInfoW": {
+        "neutralApiName": "SystemParametersInfo",
+        "prototype": "BOOL SystemParametersInfoW(\n  UINT  uiAction,\n  UINT  uiParam,\n  PVOID pvParam,\n  UINT  fWinIni\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves or sets the value of one of the system-wide parameters. This function can also update the user profile while setting a parameter."
+    },
+    "TabbedTextOutW": {
+        "neutralApiName": "TabbedTextOut",
+        "prototype": "LONG TabbedTextOutW(\n  HDC       hdc,\n  int       x,\n  int       y,\n  LPCWSTR   lpString,\n  int       chCount,\n  int       nTabPositions,\n  const INT *lpnTabStopPositions,\n  int       nTabOrigin\n);",
+        "dllLibrary": "user32",
+        "comment": "The TabbedTextOut function writes a character string at a specified location, expanding tabs to the values specified in an array of tab-stop positions. Text is written in the currently selected font, background color, and text color."
+    },
+    "TaskDialog": {
+        "neutralApiName": "TaskDialog",
+        "prototype": "HRESULT TaskDialog(\n  HWND                           hwndOwner,\n  HINSTANCE                      hInstance,\n  PCWSTR                         pszWindowTitle,\n  PCWSTR                         pszMainInstruction,\n  PCWSTR                         pszContent,\n  TASKDIALOG_COMMON_BUTTON_FLAGS dwCommonButtons,\n  PCWSTR                         pszIcon,\n  int                            *pnButton\n);",
+        "dllLibrary": "comctl32",
+        "comment": "The TaskDialog function creates, displays, and operates a task dialog. The task dialog contains application-defined message text and title, icons, and any combination of predefined push buttons. This function does not support the registration of a callback function to receive notifications."
+    },
+    "TaskDialogIndirect": {
+        "neutralApiName": "TaskDialogIndirect",
+        "prototype": "HRESULT TaskDialogIndirect(\n  const TASKDIALOGCONFIG *pTaskConfig,\n  int                    *pnButton,\n  int                    *pnRadioButton,\n  BOOL                   *pfVerificationFlagChecked\n);",
+        "dllLibrary": "comctl32",
+        "comment": "The TaskDialogIndirect function creates, displays, and operates a task dialog. The task dialog contains application-defined icons, messages, title, verification check box, command links, push buttons, and radio buttons. This function can register a callback function to receive notification messages."
+    },
+    "TextOutW": {
+        "neutralApiName": "TextOut",
+        "prototype": "BOOL TextOutW(\n  HDC     hdc,\n  int     x,\n  int     y,\n  LPCWSTR lpString,\n  int     c\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The TextOut function writes a character string at the specified location, using the currently selected font, background color, and text color."
+    },
+    "TranslateAcceleratorW": {
+        "neutralApiName": "TranslateAccelerator",
+        "prototype": "int TranslateAcceleratorW(\n  HWND   hWnd,\n  HACCEL hAccTable,\n  LPMSG  lpMsg\n);",
+        "dllLibrary": "user32",
+        "comment": "Processes accelerator keys for menu commands. The function translates a WM_KEYDOWN or WM_SYSKEYDOWN message to a WM_COMMAND or WM_SYSCOMMAND message (if there is an entry for the key in the specified accelerator table) and then sends the WM_COMMAND or WM_SYSCOMMAND message directly to the specified window procedure. TranslateAccelerator does not return until the window procedure has processed the message."
+    },
+    "TranslateMessage": {
+        "neutralApiName": "TranslateMessage",
+        "prototype": "BOOL TranslateMessage(\n  const MSG *lpMsg\n);",
+        "dllLibrary": "user32",
+        "comment": "Translates virtual-key messages into character messages. The character messages are posted to the calling thread's message queue, to be read the next time the thread calls the GetMessage or PeekMessage function."
+    },
+    "UnionRect": {
+        "neutralApiName": "UnionRect",
+        "prototype": "BOOL UnionRect(\n  LPRECT     lprcDst,\n  const RECT *lprcSrc1,\n  const RECT *lprcSrc2\n);",
+        "dllLibrary": "user32",
+        "comment": "The UnionRect function creates the union of two rectangles. The union is the smallest rectangle that contains both source rectangles."
+    },
+    "UpdateProcThreadAttribute": {
+        "neutralApiName": "UpdateProcThreadAttribute",
+        "prototype": "BOOL UpdateProcThreadAttribute(\n  LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,\n  DWORD                        dwFlags,\n  DWORD_PTR                    Attribute,\n  PVOID                        lpValue,\n  SIZE_T                       cbSize,\n  PVOID                        lpPreviousValue,\n  PSIZE_T                      lpReturnSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Updates the specified attribute in a list of attributes for process and thread creation."
+    },
+    "UpdateResourceW": {
+        "neutralApiName": "UpdateResource",
+        "prototype": "BOOL UpdateResourceW(\n  HANDLE  hUpdate,\n  LPCWSTR lpType,\n  LPCWSTR lpName,\n  WORD    wLanguage,\n  LPVOID  lpData,\n  DWORD   cb\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Adds, deletes, or replaces a resource in a portable executable (PE) file."
+    },
+    "UpdateWindow": {
+        "neutralApiName": "UpdateWindow",
+        "prototype": "BOOL UpdateWindow(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "The UpdateWindow function updates the client area of the specified window by sending a WM_PAINT message to the window if the window's update region is not empty. The function sends a WM_PAINT message directly to the window procedure of the specified window, bypassing the application queue. If the update region is empty, no message is sent."
+    },
+    "ValidateRect": {
+        "neutralApiName": "ValidateRect",
+        "prototype": "BOOL ValidateRect(\n  HWND       hWnd,\n  const RECT *lpRect\n);",
+        "dllLibrary": "user32",
+        "comment": "The ValidateRect function validates the client area within a rectangle by removing the rectangle from the update region of the specified window."
+    },
+    "ValidateRgn": {
+        "neutralApiName": "ValidateRgn",
+        "prototype": "BOOL ValidateRgn(\n  HWND hWnd,\n  HRGN hRgn\n);",
+        "dllLibrary": "user32",
+        "comment": "The ValidateRgn function validates the client area within a region by removing the region from the current update region of the specified window."
+    },
+    "VariantClear": {
+        "neutralApiName": "VariantClear",
+        "prototype": "HRESULT VariantClear(\n  VARIANTARG *pvarg\n);",
+        "dllLibrary": "oleaut32",
+        "comment": "Clears a variant."
+    },
+    "VariantInit": {
+        "neutralApiName": "VariantInit",
+        "prototype": "void VariantInit(\n  VARIANTARG *pvarg\n);",
+        "dllLibrary": "oleaut32",
+        "comment": "Initializes a variant."
+    },
+    "VerFindFileW": {
+        "neutralApiName": "VerFindFile",
+        "prototype": "DWORD VerFindFileW(\n  DWORD   uFlags,\n  LPCWSTR szFileName,\n  LPCWSTR szWinDir,\n  LPCWSTR szAppDir,\n  LPWSTR  szCurDir,\n  PUINT   puCurDirLen,\n  LPWSTR  szDestDir,\n  PUINT   puDestDirLen\n);",
+        "dllLibrary": "version",
+        "comment": "Determines where to install a file based on whether it locates another version of the file in the system. The values VerFindFile returns in the specified buffers are used in a subsequent call to the VerInstallFile function."
+    },
+    "VerInstallFileW": {
+        "neutralApiName": "VerInstallFile",
+        "prototype": "DWORD VerInstallFileW(\n  DWORD   uFlags,\n  LPCWSTR szSrcFileName,\n  LPCWSTR szDestFileName,\n  LPCWSTR szSrcDir,\n  LPCWSTR szDestDir,\n  LPCWSTR szCurDir,\n  LPWSTR  szTmpFile,\n  PUINT   puTmpFileLen\n);",
+        "dllLibrary": "version",
+        "comment": "Installs the specified file based on information returned from the VerFindFile function. VerInstallFile decompresses the file, if necessary, assigns a unique filename, and checks for errors, such as outdated files."
+    },
+    "VerLanguageNameW": {
+        "neutralApiName": "VerLanguageName",
+        "prototype": "DWORD VerLanguageNameW(\n  DWORD  wLang,\n  LPWSTR szLang,\n  DWORD  cchLang\n);",
+        "dllLibrary": "version",
+        "comment": "Retrieves a description string for the language associated with a specified binary Microsoft language identifier."
+    },
+    "VerQueryValueW": {
+        "neutralApiName": "VerQueryValue",
+        "prototype": "BOOL VerQueryValueW(\n  LPCVOID pBlock,\n  LPCWSTR lpSubBlock,\n  LPVOID  *lplpBuffer,\n  PUINT   puLen\n);",
+        "dllLibrary": "version",
+        "comment": "Retrieves specified version information from the specified version-information resource. To retrieve the appropriate resource, before you call VerQueryValue, you must first call the GetFileVersionInfoSize function, and then the GetFileVersionInfo function."
+    },
+    "VirtualAlloc": {
+        "neutralApiName": "VirtualAlloc",
+        "prototype": "LPVOID VirtualAlloc(\n  LPVOID lpAddress,\n  SIZE_T dwSize,\n  DWORD  flAllocationType,\n  DWORD  flProtect\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Reserves, commits, or changes the state of a region of pages in the virtual address space of the calling process. Memory allocated by this function is automatically initialized to zero."
+    },
+    "VirtualFree": {
+        "neutralApiName": "VirtualFree",
+        "prototype": "BOOL VirtualFree(\n  LPVOID lpAddress,\n  SIZE_T dwSize,\n  DWORD  dwFreeType\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Releases, decommits, or releases and decommits a region of pages within the virtual address space of the calling process."
+    },
+    "WaitForSingleObject": {
+        "neutralApiName": "WaitForSingleObject",
+        "prototype": "DWORD WaitForSingleObject(\n  HANDLE hHandle,\n  DWORD  dwMilliseconds\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Waits until the specified object is in the signaled state or the time-out interval elapses."
+    },
+    "WaitMessage": {
+        "neutralApiName": "WaitMessage",
+        "prototype": "BOOL WaitMessage();",
+        "dllLibrary": "user32",
+        "comment": "Yields control to other threads when a thread has no other messages in its message queue. The WaitMessage function suspends the thread and does not return until a new message is placed in the thread's message queue."
+    },
+    "WindowFromDC": {
+        "neutralApiName": "WindowFromDC",
+        "prototype": "HWND WindowFromDC(\n  HDC hDC\n);",
+        "dllLibrary": "user32",
+        "comment": "The WindowFromDC function returns a handle to the window associated with the specified display device context (DC). Output functions that use the specified device context draw into this window."
+    },
+    "WindowFromPhysicalPoint": {
+        "neutralApiName": "WindowFromPhysicalPoint",
+        "prototype": "HWND WindowFromPhysicalPoint(\n  POINT Point\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a handle to the window that contains the specified physical point."
+    },
+    "WindowFromPoint": {
+        "neutralApiName": "WindowFromPoint",
+        "prototype": "HWND WindowFromPoint(\n  POINT Point\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a handle to the window that contains the specified point."
+    },
+    "Wow64SuspendThread": {
+        "neutralApiName": "Wow64SuspendThread",
+        "prototype": "DWORD Wow64SuspendThread(\n  HANDLE hThread\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Suspends the specified WOW64 thread."
+    },
+    "WriteConsoleW": {
+        "neutralApiName": "WriteConsole",
+        "prototype": "BOOL WINAPI WriteConsoleW(\n  _In_             HANDLE  hConsoleOutput,\n  _In_       const VOID    *lpBuffer,\n  _In_             DWORD   nNumberOfCharsToWrite,\n  _Out_opt_        LPDWORD lpNumberOfCharsWritten,\n  _Reserved_       LPVOID  lpReserved\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Writes a character string to a console screen buffer beginning at the current cursor location."
+    },
+    "WriteFile": {
+        "neutralApiName": "WriteFile",
+        "prototype": "BOOL WriteFile(\n  HANDLE       hFile,\n  LPCVOID      lpBuffer,\n  DWORD        nNumberOfBytesToWrite,\n  LPDWORD      lpNumberOfBytesWritten,\n  LPOVERLAPPED lpOverlapped\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Writes data to the specified file or input/output (I/O) device."
+    },
+    "WriteProcessMemory": {
+        "neutralApiName": "WriteProcessMemory",
+        "prototype": "BOOL WriteProcessMemory(\n  HANDLE  hProcess,\n  LPVOID  lpBaseAddress,\n  LPCVOID lpBuffer,\n  SIZE_T  nSize,\n  SIZE_T  *lpNumberOfBytesWritten\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Writes data to an area of memory in a specified process. The entire area to be written to must be accessible or the operation fails."
+    }
+}

@@ -10,6 +10,7 @@ import 'dart:io';
 import 'new_apis.dart';
 import 'shared.dart';
 import 'struct_sizes.dart';
+import 'win32types.dart';
 
 void generateTests() {
   var tests = 0;

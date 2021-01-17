@@ -26,9 +26,11 @@
 #include <sysinfoapi.h>
 #include <shellscalingapi.h>
 #include <processthreadsapi.h>
+#include <apiquery2.h>
 
 void main()
 {
+    // IsApiSetImplemented();
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));
     printf("sizeof(long) is %zu\n", sizeof(long));
