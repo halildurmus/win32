@@ -32,12 +32,15 @@ void winrtUninitialize() => RoUninitialize();
 /// {@category winrt}
 String convertFromHString(Pointer<IntPtr> hstring) {
   final stringLength = allocate<Uint32>();
-  final stringPtr = WindowsGetStringRawBuffer(hstring.value, stringLength);
-  final dartString = stringPtr.unpackString(stringLength.value);
 
-  free(stringLength);
+  try {
+    final stringPtr = WindowsGetStringRawBuffer(hstring.value, stringLength);
+    final dartString = stringPtr.unpackString(stringLength.value);
 
-  return dartString;
+    return dartString;
+  } finally {
+    free(stringLength);
+  }
 }
 
 /// Takes a Dart String and converts it to an `HSTRING` (a WinRT String),
@@ -47,8 +50,7 @@ String convertFromHString(Pointer<IntPtr> hstring) {
 /// used, through a call to `WindowsDeleteString()`.
 /// {@category winrt}
 Pointer<IntPtr> convertToHString(String string) {
-  final hString = allocate<IntPtr>();
-
+  final hString = calloc<IntPtr>();
   // Create a HSTRING representing the object
   final hr = WindowsCreateString(Utf16.toUtf16(string), string.length, hString);
   if (FAILED(hr)) {
@@ -67,36 +69,44 @@ Pointer<IntPtr> convertToHString(String string) {
 /// {@category winrt}
 Pointer<IntPtr> CreateObject(String className, String iid) {
   final hstrClass = allocate<IntPtr>();
+  final lpClassName = TEXT(className);
+  final inspectablePtr = calloc<Pointer>();
+  final riid = calloc<GUID>();
+  final classPtr = calloc<IntPtr>();
 
-  // Create a HSTRING representing the object
-  var hr = WindowsCreateString(
-      Utf16.toUtf16(className), className.length, hstrClass);
-  if (FAILED(hr)) {
-    throw WindowsException(hr);
-  }
-  // Activates the specified Windows Runtime class. This returns the WinRT
-  // IInspectable interface, which is a subclass of IUnknown.
-  final inspectablePtr = allocate<Pointer>();
-  hr = RoActivateInstance(hstrClass.value, inspectablePtr);
-  if (FAILED(hr)) {
-    throw WindowsException(hr);
-  }
+  try {
+    // Create a HSTRING representing the object
+    var hr = WindowsCreateString(
+        Utf16.toUtf16(className), className.length, hstrClass);
+    if (FAILED(hr)) {
+      throw WindowsException(hr);
+    }
+    // Activates the specified Windows Runtime class. This returns the WinRT
+    // IInspectable interface, which is a subclass of IUnknown.
+    hr = RoActivateInstance(hstrClass.value, inspectablePtr);
+    if (FAILED(hr)) {
+      throw WindowsException(hr);
+    }
 
-  // Create an IID for the interface required
-  final riidCalendar = calloc<GUID>();
-  hr = IIDFromString(TEXT(iid), riidCalendar);
-  if (FAILED(hr)) {
-    throw WindowsException(hr);
-  }
+    // Create an IID for the interface required
+    hr = IIDFromString(TEXT(iid), riid);
+    if (FAILED(hr)) {
+      throw WindowsException(hr);
+    }
 
-  // Now use IInspectable to navigate to the relevant interface
-  final inspectable = IInspectable(inspectablePtr.cast());
-  final classPtr = allocate<IntPtr>();
-  hr = inspectable.QueryInterface(riidCalendar, classPtr);
-  if (FAILED(hr)) {
-    throw WindowsException(hr);
-  }
+    // Now use IInspectable to navigate to the relevant interface
+    final inspectable = IInspectable(inspectablePtr.cast());
+    hr = inspectable.QueryInterface(riid, classPtr);
+    if (FAILED(hr)) {
+      throw WindowsException(hr);
+    }
 
-  // Return a pointer to the relevant class
-  return classPtr;
+    // Return a pointer to the relevant class
+    return classPtr;
+  } finally {
+    free(riid);
+    free(inspectablePtr);
+    free(lpClassName);
+    free(hstrClass);
+  }
 }
