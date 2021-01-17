@@ -55,6 +55,7 @@ void generateFfiFiles(Win32API apiSet) {
 
   for (final library in libraries) {
     final writer = File('lib/src/$library.dart').openSync(mode: FileMode.write);
+    final libraryDartName = library.replaceAll('-', '_');
     writer.writeStringSync('''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
@@ -74,7 +75,7 @@ import 'callbacks.dart';
 import 'com/combase.dart';
 import 'structs.dart';
 
-final _$library = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');\n
+final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');\n
 ''');
 
     // Iterable<TypeDef>
@@ -93,7 +94,7 @@ $returnDartType ${sig.nameWithoutEncoding}(${sig.params.map((param) {
         final dartType = dartFromFFI(convertedParams.first);
         return '$dartType ${convertedParams.last}';
       }).join(', ')}) {
-  final _${sig.nameWithoutEncoding} = _$library.lookupFunction<\n
+  final _${sig.nameWithoutEncoding} = _$libraryDartName.lookupFunction<\n
     $returnFFIType Function(
       ${sig.params.map((param) {
         final convertedParams = sig.convertParamType(param);

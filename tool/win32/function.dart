@@ -1,6 +1,7 @@
 import 'signature.dart';
 
 const windowsBuilds = <String, int>{
+  'WIN8': 9200,
   'WIN10_TH1': 10240,
   'WIN10_TH2': 10586,
   'WIN10_RS1': 14393,

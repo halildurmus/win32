@@ -1379,6 +1379,13 @@
         "dllLibrary": "user32",
         "comment": "Displays a modal dialog box that contains a system icon, a set of buttons, and a brief application-specific message, such as status or error information. The message box returns an integer value that indicates which button the user clicked."
     },
+    "MetaDataGetDispenser": {
+        "prototype": "HRESULT MetaDataGetDispenser(\n        REFCLSID rclsid,\n        REFIID   riid,\n        LPVOID   *ppv\n      );",
+        "dllLibrary": "rometadata",
+        "comment": "Creates a dispenser class.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN10_TH2"
+    },
     "midiOutGetNumDevs": {
         "prototype": "UINT midiOutGetNumDevs();",
         "dllLibrary": "winmm",
@@ -1629,6 +1636,34 @@
         "dllLibrary": "kernel32",
         "comment": "Resizes the internal buffers for a pseudoconsole to the given size.",
         "minimumWindowsVersion": "WIN10_RS5"
+    },
+    "RoActivateInstance": {
+        "prototype": "HRESULT RoActivateInstance(\n        HSTRING      activatableClassId,\n        IInspectable **instance\n      );",
+        "apiSet": "api-ms-win-core-winrt-l1-1-0",
+        "comment": "Activates the specified Windows Runtime class.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "RoGetMetaDataFile": {
+        "prototype": "HRESULT RoGetMetaDataFile(\n        const HSTRING        name,\n        IMetaDataDispenserEx *metaDataDispenser,\n        HSTRING              *metaDataFilePath,\n        IMetaDataImport2     **metaDataImport,\n        mdTypeDef            *typeDefToken\n      );",
+        "apiSet": "api-ms-win-ro-typeresolution-l1-1-0",
+        "comment": "Locates and retrieves the metadata file that describes the Application Binary Interface (ABI) for the specified typename.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "RoInitialize": {
+        "prototype": "HRESULT RoInitialize(\n        RO_INIT_TYPE initType\n      );",
+        "apiSet": "api-ms-win-core-winrt-l1-1-0",
+        "comment": "Initializes the Windows Runtime on the current thread with the specified concurrency model.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "RoUninitialize": {
+        "prototype": "void RoUninitialize();",
+        "apiSet": "api-ms-win-core-winrt-l1-1-0",
+        "comment": "Closes the Windows Runtime on the current thread.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
     },
     "RoundRect": {
         "prototype": "BOOL RoundRect(\n  HDC hdc,\n  int left,\n  int top,\n  int right,\n  int bottom,\n  int width,\n  int height\n);",
@@ -2146,6 +2181,27 @@
         "prototype": "HWND WindowFromPoint(\n  POINT Point\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the window that contains the specified point."
+    },
+    "WindowsCreateString": {
+        "prototype": "HRESULT WindowsCreateString(\n        PCNZWCH sourceString,\n        UINT32  length,\n        HSTRING *string\n      );",
+        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
+        "comment": "Creates a new HSTRING based on the specified source string.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "WindowsDeleteString": {
+        "prototype": "HRESULT WindowsDeleteString(\n        HSTRING string\n      );",
+        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
+        "comment": "Decrements the reference count of a string buffer.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "WindowsGetStringRawBuffer": {
+        "prototype": "PCWSTR WindowsGetStringRawBuffer(\n        HSTRING string,\n        UINT32  *length\n      );",
+        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
+        "comment": "Retrieves the backing buffer for the specified string.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
     },
     "Wow64SuspendThread": {
         "prototype": "DWORD Wow64SuspendThread(\n  HANDLE hThread\n);",

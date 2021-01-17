@@ -43,6 +43,9 @@ void main() {
   final libraries = prototypes.values.map((e) => e.dllLibrary).toSet().toList();
 
   for (final library in libraries) {
+    // API set names aren't legal Dart identifiers, so we rename them
+    final libraryDartName = library.replaceAll('-', '_');
+
     writer.writeStringSync("group('Test $library functions', () {\n");
 
     final libProtos = prototypes.values.where((td) => td.dllLibrary == library);
@@ -58,8 +61,8 @@ void main() {
 
       final test = '''
       test('Can instantiate ${win32Func.nameWithoutEncoding}', () {
-        final $library = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');
-        final ${win32Func.nameWithoutEncoding} = $library.lookupFunction<\n
+        final $libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');
+        final ${win32Func.nameWithoutEncoding} = $libraryDartName.lookupFunction<\n
           $returnFFIType Function(
             ${win32Func.params.map((param) {
         final convertedParams = win32Func.convertParamType(param);

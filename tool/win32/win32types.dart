@@ -47,6 +47,7 @@ const mapping = <String, String>{
   'HBLUETOOTH_RADIO_FIND': 'IntPtr',
   'HBLUETOOTH_AUTHENTICATION_REGISTRATION': 'IntPtr', 'HINSTANCE': 'IntPtr',
   'HPCON': 'IntPtr',
+  'HSTRING': 'IntPtr',
 
   'HRESULT': 'Int32',
   'NTSTATUS': 'Int32',
@@ -66,6 +67,7 @@ const mapping = <String, String>{
   'PROCESS_DPI_AWARENESS': 'Int32',
   'COMPUTER_NAME_FORMAT': 'Int32',
   'GET_FILEEX_INFO_LEVELS': 'Int32',
+  'RO_INIT_TYPE': 'Int32',
 
   // Callbacks
   'DLGPROC': 'Pointer<NativeFunction<DlgProc>>',
@@ -92,6 +94,7 @@ const mapping = <String, String>{
   'PCWSTR': 'Pointer<Utf16>', 'LPCTSTR': 'Pointer<Utf16>',
   'LPTSTR': 'Pointer<Utf16>', 'LPWCH': 'Pointer<Utf16>',
   'LPCOLESTR': 'Pointer<Utf16>',
+  'PCNZWCH': 'Pointer<Utf16>',
   'LPCSTR': 'Pointer<Uint8>', // This is an ANSI type string
   'TCHAR': 'Uint16', 'PWSTR': 'Pointer<Utf16>',
 
@@ -124,6 +127,10 @@ const mapping = <String, String>{
   'LPOSVERSIONINFOW': 'Pointer<OSVERSIONINFO>',
   'LPCDLGTEMPLATEW': 'Pointer<DLGTEMPLATE>',
   'LPWIN32_FIND_DATAW': 'Pointer<WIN32_FIND_DATA>',
+
+  'mdTypeDef': 'Uint32',
+  'IMetaDataDispenserEx': 'IntPtr',
+  'IMetaDataImport2': 'IntPtr',
 
   // Special cases
   'RPC_AUTH_IDENTITY_HANDLE': 'Pointer',

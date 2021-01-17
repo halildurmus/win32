@@ -3956,6 +3956,78 @@ void main() {
     });
   });
 
+  group('Test rometadata functions', () {
+    if (windowsBuildNumber >= 10586) {
+      test('Can instantiate MetaDataGetDispenser', () {
+        final rometadata = DynamicLibrary.open('rometadata.dll');
+        final MetaDataGetDispenser = rometadata.lookupFunction<
+            Int32 Function(
+                Pointer<GUID> rclsid, Pointer<GUID> riid, Pointer<Pointer> ppv),
+            int Function(Pointer<GUID> rclsid, Pointer<GUID> riid,
+                Pointer<Pointer> ppv)>('MetaDataGetDispenser');
+        expect(MetaDataGetDispenser, isA<Function>());
+      });
+    }
+  });
+
+  group('Test api-ms-win-core-winrt-l1-1-0 functions', () {
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate RoActivateInstance', () {
+        final api_ms_win_core_winrt_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-l1-1-0.dll');
+        final RoActivateInstance = api_ms_win_core_winrt_l1_1_0.lookupFunction<
+            Int32 Function(
+                IntPtr activatableClassId, Pointer<Pointer> instance),
+            int Function(int activatableClassId,
+                Pointer<Pointer> instance)>('RoActivateInstance');
+        expect(RoActivateInstance, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate RoInitialize', () {
+        final api_ms_win_core_winrt_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-l1-1-0.dll');
+        final RoInitialize = api_ms_win_core_winrt_l1_1_0.lookupFunction<
+            Int32 Function(Int32 initType),
+            int Function(int initType)>('RoInitialize');
+        expect(RoInitialize, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate RoUninitialize', () {
+        final api_ms_win_core_winrt_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-l1-1-0.dll');
+        final RoUninitialize = api_ms_win_core_winrt_l1_1_0
+            .lookupFunction<Void Function(), void Function()>('RoUninitialize');
+        expect(RoUninitialize, isA<Function>());
+      });
+    }
+  });
+
+  group('Test api-ms-win-ro-typeresolution-l1-1-0 functions', () {
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate RoGetMetaDataFile', () {
+        final api_ms_win_ro_typeresolution_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-ro-typeresolution-l1-1-0.dll');
+        final RoGetMetaDataFile =
+            api_ms_win_ro_typeresolution_l1_1_0.lookupFunction<
+                Int32 Function(
+                    IntPtr name,
+                    Pointer<IntPtr> metaDataDispenser,
+                    Pointer<IntPtr> metaDataFilePath,
+                    Pointer<Pointer> metaDataImport,
+                    Pointer<Uint32> typeDefToken),
+                int Function(
+                    int name,
+                    Pointer<IntPtr> metaDataDispenser,
+                    Pointer<IntPtr> metaDataFilePath,
+                    Pointer<Pointer> metaDataImport,
+                    Pointer<Uint32> typeDefToken)>('RoGetMetaDataFile');
+        expect(RoGetMetaDataFile, isA<Function>());
+      });
+    }
+  });
+
   group('Test oleaut32 functions', () {
     test('Can instantiate SysAllocString', () {
       final oleaut32 = DynamicLibrary.open('oleaut32.dll');
@@ -3998,5 +4070,44 @@ void main() {
           void Function(Pointer pvarg)>('VariantInit');
       expect(VariantInit, isA<Function>());
     });
+  });
+
+  group('Test api-ms-win-core-winrt-string-l1-1-0 functions', () {
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate WindowsCreateString', () {
+        final api_ms_win_core_winrt_string_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+        final WindowsCreateString =
+            api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+                Int32 Function(Pointer<Utf16> sourceString, Uint32 length,
+                    Pointer<IntPtr> string),
+                int Function(Pointer<Utf16> sourceString, int length,
+                    Pointer<IntPtr> string)>('WindowsCreateString');
+        expect(WindowsCreateString, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate WindowsDeleteString', () {
+        final api_ms_win_core_winrt_string_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+        final WindowsDeleteString =
+            api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+                Int32 Function(IntPtr string),
+                int Function(int string)>('WindowsDeleteString');
+        expect(WindowsDeleteString, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate WindowsGetStringRawBuffer', () {
+        final api_ms_win_core_winrt_string_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+        final WindowsGetStringRawBuffer =
+            api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+                Pointer<Utf16> Function(IntPtr string, Pointer<Uint32> length),
+                Pointer<Utf16> Function(int string,
+                    Pointer<Uint32> length)>('WindowsGetStringRawBuffer');
+        expect(WindowsGetStringRawBuffer, isA<Function>());
+      });
+    }
   });
 }

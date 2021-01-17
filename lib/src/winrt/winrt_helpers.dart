@@ -8,6 +8,8 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import '../api-ms-win-core-winrt-l1-1-0.dart';
+import '../api-ms-win-core-winrt-string-l1-1-0.dart';
 import '../exceptions.dart';
 import '../extensions/unpack_utf16.dart';
 import '../generated/IInspectable.dart';
@@ -15,9 +17,7 @@ import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
 import '../utils.dart';
-
 import 'winrt_constants.dart';
-import 'winrt_prototypes.dart';
 
 /// Initializes the Windows Runtime on the current thread with a single-threaded
 /// concurrency model.
@@ -76,7 +76,7 @@ Pointer<IntPtr> CreateObject(String className, String iid) {
   }
   // Activates the specified Windows Runtime class. This returns the WinRT
   // IInspectable interface, which is a subclass of IUnknown.
-  final inspectablePtr = allocate<IntPtr>();
+  final inspectablePtr = allocate<Pointer>();
   hr = RoActivateInstance(hstrClass.value, inspectablePtr);
   if (FAILED(hr)) {
     throw WindowsException(hr);

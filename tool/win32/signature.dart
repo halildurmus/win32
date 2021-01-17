@@ -71,7 +71,12 @@ class Win32Signature {
     var paramType = ffiFromWin32(param.first);
     var paramName = param.last;
 
-    while (paramName.startsWith('*')) {
+    if (paramName.startsWith('**')) {
+      paramType = 'Pointer<Pointer>';
+      paramName = paramName.substring(2);
+    }
+
+    if (paramName.startsWith('*')) {
       if (paramType == 'Void') {
         paramType = 'Pointer';
       } else {
