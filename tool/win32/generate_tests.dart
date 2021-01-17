@@ -45,18 +45,21 @@ void main() {
   for (final library in libraries) {
     writer.writeStringSync("group('Test $library functions', () {\n");
 
-    // TaskDialog* is a special case since it requires comctl32.dll v6. This is
-    // not available to dart test because of
-    // https://github.com/dart-lang/sdk/issues/42598
-    final libProtos = prototypes.values
-        .where((td) => td.dllLibrary == library)
-        .where((td) => !td.exportName.startsWith('TaskDialog'));
+    final libProtos = prototypes.values.where((td) => td.dllLibrary == library);
+    // .where((td) => !td.exportName.startsWith('TaskDialog'));
 
     for (final proto in libProtos) {
-      // final apiName = prototypes.keys.firstWhere(
-      //     (k) => prototypes[k]!.neutralApiName == proto.neutralApiName);
-      final win32Func =
-          win32APIs.where((api) => api.name == proto.exportName).first;
+      final genericName =
+          prototypes.keys.firstWhere((k) => prototypes[k]! == proto);
+
+      // TaskDialog* is a special case since it requires comctl32.dll v6. This is
+      // not available to dart test because of
+      // https://github.com/dart-lang/sdk/issues/42598
+      if (genericName.startsWith('TaskDialog')) continue;
+
+      final win32Func = win32APIs
+          .where((api) => api.nameWithoutEncoding == genericName)
+          .first;
       final returnFFIType = ffiFromWin32(win32Func.returnType);
       final returnDartType = dartFromFFI(returnFFIType);
 
@@ -75,7 +78,7 @@ void main() {
         final dartType = dartFromFFI(convertedParams.first);
         return '$dartType ${convertedParams.last}';
       }).join(', ')})>
-          ('${proto.exportName}');
+          ('${win32Func.name}');
         expect(${win32Func.nameWithoutEncoding}, isA<Function>());
       });''';
 

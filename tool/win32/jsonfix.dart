@@ -1,47 +1,38 @@
+import 'dart:convert';
+import 'dart:io';
 import 'model.dart';
 
-// import 'dart:convert';
-// import 'dart:io';
+final newProtos = <String, TypeDefNew>{};
 
-// import 'model.dart';
+// The JSON format we want to get to
+class TypeDefNew {
+  final List<String> prototype;
+  final String dllLibrary;
+  final String comment;
 
-// final newProtos = <String, TypeDefNew>{};
+  const TypeDefNew(this.dllLibrary, this.prototype, this.comment);
 
-// class TypeDefNew {
-//   final String apiName;
-//   final List<String> prototype;
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'prototype': prototype.first,
+        'dllLibrary': dllLibrary,
+        'comment': comment
+      };
+}
 
-//   final String dllLibrary;
-//   final String comment;
+void saveNewJson(String filename) {
+  final file = File(filename);
+  file.writeAsStringSync(json.encode(newProtos).replaceAll(r'\\n', r'\n'));
+}
 
-//   const TypeDefNew(this.apiName, this.dllLibrary, this.prototype, this.comment);
-
-//   Map<String, dynamic> toJson() => <String, dynamic>{
-//         'exportedFunction': apiName,
-//         'prototype': prototype.first,
-//         'dllLibrary': dllLibrary,
-//         'comment': comment
-//       };
-// }
-
-// void saveNewJson(String filename) {
-//   final file = File(filename);
-//   file.writeAsStringSync(json.encode(newProtos).replaceAll(r'\\n', r'\n'));
-// }
-
-// void main() {
-//   loadJson('tool/win32/win32api.json');
-
-// // Do the conversion
-//   for (final protoKey in prototypes.keys) {
-//     final proto = prototypes[protoKey]!;
-//     newProtos[proto.neutralApiName] =
-//         TypeDefNew(protoKey, proto.dllLibrary, proto.prototype, proto.comment);
-//   }
-
-//   saveNewJson('tool/win32/win32api2.json');
-// }
 void main() {
   loadJson('tool/win32/win32api.json');
-  saveJson('tool/win32/win32api.json');
+
+// Do the conversion
+  for (final protoKey in prototypes.keys) {
+    final proto = prototypes[protoKey]!;
+    newProtos[protoKey] =
+        TypeDefNew(proto.dllLibrary, proto.prototype, proto.comment);
+  }
+
+  saveNewJson('tool/win32/win32api.json');
 }

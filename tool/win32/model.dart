@@ -5,24 +5,21 @@ import 'dart:io';
 final prototypes = <String, TypeDef>{};
 
 class TypeDef {
-  final String exportName;
   final List<String> prototype;
 
   final String dllLibrary;
   final String comment;
 
-  const TypeDef(this.exportName, this.dllLibrary, this.prototype, this.comment);
+  const TypeDef(this.dllLibrary, this.prototype, this.comment);
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'exportName': exportName,
         'prototype': prototype.first,
         'dllLibrary': dllLibrary,
         'comment': comment
       };
 
   TypeDef.fromJson(Map<String, dynamic> json)
-      : exportName = json['exportName'] as String,
-        prototype = [json['prototype'] as String],
+      : prototype = [json['prototype'] as String],
         dllLibrary = json['dllLibrary'] as String,
         comment = json['comment'] as String;
 }

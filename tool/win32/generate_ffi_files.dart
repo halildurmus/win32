@@ -80,10 +80,11 @@ final _$library = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' 
     final libProtos = prototypes.values.where((p) => p.dllLibrary == library);
 
     for (final proto in libProtos) {
-      // final genericName = prototypes.keys
-      //     .firstWhere((k) => prototypes[k]!.exportName == proto.exportName);
-      final win32Func =
-          win32APIs.where((api) => api.name == proto.exportName).first;
+      final genericName =
+          prototypes.keys.firstWhere((k) => prototypes[k]! == proto);
+      final win32Func = win32APIs
+          .where((api) => api.nameWithoutEncoding == genericName)
+          .first;
       final returnFFIType = ffiFromWin32(win32Func.returnType);
       final returnDartType = dartFromFFI(returnFFIType);
 
