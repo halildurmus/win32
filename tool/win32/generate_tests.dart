@@ -7,9 +7,9 @@
 
 import 'dart:io';
 
-import 'new_apis.dart';
 import 'shared.dart';
 import 'struct_sizes.dart';
+import 'versioned_apis.dart';
 import 'win32types.dart';
 
 void generateTests() {
@@ -139,7 +139,8 @@ void main() {
 }
 
 void main() {
-  loadCsv('tool/win32/win32api.csv');
+  loadJson('tool/win32/win32api.json');
+  parsePrototypes();
   generateTests();
   generateStructSizeTests();
 }

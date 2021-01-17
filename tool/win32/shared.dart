@@ -23,6 +23,12 @@ class TypeDef {
         'dllLibrary': dllLibrary,
         'comment': comment
       };
+
+  TypeDef.fromJson(Map<String, dynamic> json)
+      : neutralApiName = json['neutralApiName'] as String,
+        prototype = [json['prototype'] as String],
+        dllLibrary = json['dllLibrary'] as String,
+        comment = json['comment'] as String;
 }
 
 String dartFromFFI(String ffiType) {
@@ -140,64 +146,23 @@ Win32Function loadFunction(String rawFunction) {
   return func;
 }
 
-void loadCsv(String filename) {
-  final file = File(filename);
-  final lines = file.readAsLinesSync().skip(1);
-  for (final line in lines) {
-    final fields = line.split(', ');
-    final apiName = fields[0];
-    final neutralApiName = fields[1];
-    final dllLibrary = fields[2];
-
-    var prototype = fields[3];
-    var idx = 4;
-    // keep consuming until we have a quoted string
-    while (prototype.allMatches('"').length == 1) {
-      // ignore: use_string_buffers
-      prototype += ', ${fields[idx++]}';
-    }
-    prototype = prototype.replaceAll('"', '');
-
-    var comment = fields[idx++];
-    // last field is the comment
-    // keep consuming until we have a quoted string
-    while (comment.indexOf('"') == 0 && comment.lastIndexOf('"') == 0) {
-      // ignore: use_string_buffers
-      comment = '$comment, ${fields[idx++]}';
-    }
-    comment = comment.replaceAll('"', '');
-
-    prototypes[apiName] =
-        TypeDef(neutralApiName, dllLibrary, prototype.split('\n'), comment);
-  }
-
-  for (final func in prototypes.keys) {
-    loadFunction(prototypes[func]!.prototype[0]);
-  }
-}
-
-void saveCsv(String filename) {
-  final file = File(filename);
-  final buffer = StringBuffer();
-  buffer.writeln(
-      'ApiName, NeutralApiName, DllLibrary, WindowsPrototype, Comment');
-
-  for (final protoKey in prototypes.keys) {
-    final proto = prototypes[protoKey]!;
-    final fields = <String>[
-      protoKey,
-      proto.neutralApiName,
-      proto.dllLibrary,
-      '"${proto.prototype.first}"',
-      '"${proto.comment}"'
-    ];
-
-    buffer.writeln(fields.join(", "));
-  }
-  file.writeAsStringSync(buffer.toString());
-}
-
 void saveJson(String filename) {
   final file = File(filename);
   file.writeAsStringSync(json.encode(prototypes).replaceAll(r'\\n', r'\n'));
+}
+
+void loadJson(String filename) {
+  final file = File(filename);
+  final fileContents = file.readAsStringSync().replaceAll(r'\n', r'\\n');
+
+  final decoded = json.decode(fileContents) as Map<String, dynamic>;
+  for (final api in decoded.keys) {
+    prototypes[api] = TypeDef.fromJson(decoded[api] as Map<String, dynamic>);
+  }
+}
+
+void parsePrototypes() {
+  for (final func in prototypes.keys) {
+    loadFunction(prototypes[func]!.prototype[0]);
+  }
 }

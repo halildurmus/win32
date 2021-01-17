@@ -115,7 +115,8 @@ $returnDartType ${win32Func.nameWithoutEncoding}(${win32Func.params.map((param) 
 }
 
 void main() {
-  loadCsv('tool/win32/win32api.csv');
+  loadJson('tool/win32/win32api.json');
+  parsePrototypes();
   generateFfiFiles();
   print('${prototypes.length} typedefs generated.');
 }
