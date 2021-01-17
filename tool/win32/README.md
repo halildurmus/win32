@@ -22,8 +22,21 @@ The format for the JSON file (`win32api.json`) is as follows:
         // source of error.
         "prototype": "BOOL DeleteFileW(\n  LPCWSTR lpFileName\n);",
 
-        // The DLL that exports the API
+        // The DLL or API set that exports the API. For maximum compatibility,
+        // API sets should only be used for APIs introduced in Windows 8 or
+        // higher, and if used, the minimumWindowsVersion entry should be
+        // specified to ensure that they aren't loaded on Windows 7. For more
+        // information, see:
+        // https://docs.microsoft.com/en-us/uwp/win32-and-com/win32-apis
+        // and:
+        // https://docs.microsoft.com/en-us/windows/win32/apiindex/umbrella-lib-onecore
         "dllLibrary": "kernel32",
+        // or
+        "apiSet": "api-ms-win-core-file-l1-1-0",
+
+        // (Optional) The category for documentation, if not the same as the
+        // DLL library. 
+        "category": "winrt",
 
         // The doc comment for the API (typically, first sentence of the docs)
         "comment": "Deletes an existing file.",

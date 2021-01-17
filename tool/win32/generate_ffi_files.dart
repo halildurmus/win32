@@ -6,6 +6,7 @@
 
 import 'dart:io';
 
+import 'function.dart';
 import 'signature.dart';
 import 'win32api.dart';
 import 'win32types.dart';
@@ -30,21 +31,20 @@ String wrapCommentText(String inputText, [int wrapLength = 76]) {
   return outputText.toString().trimRight();
 }
 
-String generateDocComment(
-    String library, String cPrototype, String apiComment) {
+String generateDocComment(Win32Function func) {
   final comment = StringBuffer();
 
-  if (apiComment.isNotEmpty) {
-    comment.writeln(wrapCommentText(apiComment));
+  if (func.comment.isNotEmpty) {
+    comment.writeln(wrapCommentText(func.comment));
     comment.writeln('///');
   }
 
   comment.writeln('/// ```c');
   comment.write('/// ');
-  comment.writeln(cPrototype.split('\\n').join('\n/// '));
+  comment.writeln(func.prototype.first.split('\\n').join('\n/// '));
   comment.writeln('/// ```');
 
-  comment.write('/// {@category $library}');
+  comment.write('/// {@category ${func.category}}');
   return comment.toString();
 }
 
@@ -87,7 +87,7 @@ final _$library = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' 
       final returnDartType = dartFromFFI(returnFFIType);
 
       writer.writeStringSync('''
-${generateDocComment(library, proto.prototype.first, proto.comment)}
+${generateDocComment(proto)}
 $returnDartType ${sig.nameWithoutEncoding}(${sig.params.map((param) {
         final convertedParams = sig.convertParamType(param);
         final dartType = dartFromFFI(convertedParams.first);

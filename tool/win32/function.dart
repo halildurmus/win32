@@ -19,6 +19,7 @@ class Win32Function {
 
   final String dllLibrary;
   final String comment;
+  final String category;
 
   final int minimumWindowsVersion;
   final bool test;
@@ -31,9 +32,16 @@ class Win32Function {
       };
 
   Win32Function.fromJson(Map<String, dynamic> json)
-      : prototype = [json['prototype'] as String],
-        dllLibrary = json['dllLibrary'] as String,
+      : assert(json['prototype'] != null),
+        assert(json['comment'] != null),
+        prototype = [json['prototype'] as String],
+        dllLibrary = json['dllLibrary'] != null
+            ? json['dllLibrary'] as String
+            : json['apiSet'] as String,
         comment = json['comment'] as String,
+        category = json['category'] != null
+            ? json['category'] as String
+            : json['dllLibrary'] as String,
         minimumWindowsVersion = json['minimumWindowsVersion'] != null
             ? windowsBuilds[(json['minimumWindowsVersion'] as String)]!
             : 0,
