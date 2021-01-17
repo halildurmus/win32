@@ -9,21 +9,20 @@
 // header files and/or documentation. The extra layer of abstraction should be
 // better in the long run.
 
-import 'model.dart';
 import 'win32types.dart';
 
-final win32APIs = <Win32Function>[];
+final win32APIs = <Win32Signature>[];
 
-class Win32Function {
+class Win32Signature {
   final String name;
   final String returnType;
   final List<List<String>> params;
 
-  const Win32Function(this.returnType, this.name, this.params);
+  const Win32Signature(this.returnType, this.name, this.params);
 
-  factory Win32Function.fromPrototype(String rawFunction) {
-    final paramsStart = rawFunction.indexOf('(');
-    final preamble = rawFunction
+  factory Win32Signature.fromSyntaxString(String syntax) {
+    final paramsStart = syntax.indexOf('(');
+    final preamble = syntax
         .substring(0, paramsStart)
         .replaceAll('WINAPI ', '')
         .split(' ')
@@ -31,13 +30,13 @@ class Win32Function {
         .toList();
 
     if (preamble.length != 2) {
-      throw Exception('preamble != 2 at $rawFunction.');
+      throw Exception('preamble != 2 at $syntax.');
     }
     final returnType = preamble[0];
     final apiName = preamble[1];
 
-    var params = rawFunction
-        .substring(paramsStart + 1, rawFunction.length - 2)
+    var params = syntax
+        .substring(paramsStart + 1, syntax.length - 2)
         .split(',')
         .map((s) => s.replaceAll(r'\n', ''))
         .map((s) => s.replaceAll('_In_', ''))
@@ -64,7 +63,7 @@ class Win32Function {
       params = [];
     }
 
-    return Win32Function(returnType, apiName, params);
+    return Win32Signature(returnType, apiName, params);
   }
 
   String get nameWithoutEncoding =>
@@ -118,10 +117,4 @@ String dartFromFFI(String ffiType) {
 
   // Must be a struct passed by value, e.g. COORD in SetConsoleCursorPosition
   return ffiType;
-}
-
-void parsePrototypes() {
-  for (final func in prototypes.keys) {
-    win32APIs.add(Win32Function.fromPrototype(prototypes[func]!.prototype[0]));
-  }
 }

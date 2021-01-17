@@ -48,14 +48,10 @@ void main() {
     // .where((td) => !td.exportName.startsWith('TaskDialog'));
 
     for (final proto in libProtos) {
-      final genericName =
-          prototypes.keys.firstWhere((k) => prototypes[k]! == proto);
-
       if (proto.test == false) continue;
 
-      final win32Func = win32APIs
-          .where((api) => api.nameWithoutEncoding == genericName)
-          .first;
+      final win32Func = proto.signature;
+
       final returnFFIType = ffiFromWin32(win32Func.returnType);
       final returnDartType = dartFromFFI(returnFFIType);
 
@@ -141,7 +137,6 @@ void main() {
 
 void main() {
   loadJson('tool/win32/win32api.json');
-  parsePrototypes();
   generateTests();
   generateStructSizeTests();
 }

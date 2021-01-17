@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'converter.dart';
 import 'versioned_apis.dart';
 
 // Mapping of the generic API name to the TypeDef
@@ -14,9 +15,7 @@ class TypeDef {
 
   final int minimumWindowsVersion;
   final bool test;
-
-  const TypeDef(this.dllLibrary, this.prototype, this.comment,
-      {this.minimumWindowsVersion = 0, this.test = true});
+  final Win32Signature signature;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         'prototype': prototype.first,
@@ -31,7 +30,9 @@ class TypeDef {
         minimumWindowsVersion = json['minimumWindowsVersion'] != null
             ? windowsBuilds[(json['minimumWindowsVersion'] as String)]!
             : 0,
-        test = json['test'] as bool? ?? true;
+        test = json['test'] as bool? ?? true,
+        signature =
+            Win32Signature.fromSyntaxString(json['prototype'] as String);
 }
 
 void saveJson(String filename) {
