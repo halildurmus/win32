@@ -35,7 +35,7 @@ String ffiFromWin32(String win32Type) {
     'UINT': 'Uint32', 'UINT32': 'Uint32', 'DWORD': 'Uint32', 'ULONG': 'Uint32',
     'SHORT': 'Int16', 'INT16': 'Int16',
     'WORD': 'Uint16', 'UINT16': 'Uint16', 'ATOM': 'Uint16', 'USHORT': 'Uint16',
-    'BYTE': 'Uint8',
+    'BYTE': 'Uint8', 'UCHAR': 'Uint8',
     'BOOL': 'Int32', '_BOOL': 'Int32',
     'FLOAT': 'Float',
     'DOUBLE': 'Double', 'double': 'Double',
@@ -48,7 +48,8 @@ String ffiFromWin32(String win32Type) {
     'HFONT': 'IntPtr', 'HPALETTE': 'IntPtr', 'HGDIOBJ': 'IntPtr',
     'HMENU': 'IntPtr', 'HICON': 'IntPtr', 'HMONITOR': 'IntPtr',
     'HCURSOR': 'IntPtr', 'HBLUETOOTH_DEVICE_FIND': 'IntPtr',
-    'HBLUETOOTH_RADIO_FIND': 'IntPtr', 'HINSTANCE': 'IntPtr',
+    'HBLUETOOTH_RADIO_FIND': 'IntPtr',
+    'HBLUETOOTH_AUTHENTICATION_REGISTRATION': 'IntPtr', 'HINSTANCE': 'IntPtr',
     'HPCON': 'IntPtr',
 
     'HRESULT': 'Int32',
@@ -80,6 +81,8 @@ String ffiFromWin32(String win32Type) {
     'GRAYSTRINGPROC': 'Pointer<NativeFunction<OutputProc>>',
     'PHANDLER_ROUTINE': 'Pointer<NativeFunction<HandlerProc>>',
     'TIMERPROC': 'Pointer<NativeFunction<TimerProc>>',
+    'PFN_AUTHENTICATION_CALLBACK_EX':
+        'Pointer<NativeFunction<PfnAuthenticationCallbackEx>>',
 
     // Void pointers
     'LPVOID': 'Pointer', 'PVOID': 'Pointer', 'LPCVOID': 'Pointer',
@@ -235,7 +238,7 @@ Win32Function loadFunction(String rawFunction) {
       .toList();
 
   if (preamble.length != 2) {
-    throw Exception('preamble != 2');
+    throw Exception('preamble != 2 at $rawFunction.');
   }
   final returnType = preamble[0];
   final apiName = preamble[1];

@@ -2569,6 +2569,37 @@ class SYSTEMTIME extends Struct {
   external int wMilliseconds;
 }
 
+// typedef struct _BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS {
+//   BLUETOOTH_DEVICE_INFO                 deviceInfo;
+//   BLUETOOTH_AUTHENTICATION_METHOD       authenticationMethod;
+//   BLUETOOTH_IO_CAPABILITY               ioCapability;
+//   BLUETOOTH_AUTHENTICATION_REQUIREMENTS authenticationRequirements;
+//   union {
+//     ULONG Numeric_Value;
+//     ULONG Passkey;
+//   };
+// } BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS, *PBLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS;
+
+/// The BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS structure contains specific
+/// configuration information about the Bluetooth device responding to an
+/// authentication request.
+///
+/// /// {@category Struct}
+class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
+  external BLUETOOTH_DEVICE_INFO deviceInfo;
+  @Uint32()
+  external int authenticationMethod;
+  @Uint32()
+  external int ioCapability;
+  @Uint32()
+  external int authenticationRequirements;
+  @Uint32()
+  external int Numeric_Value;
+
+  int get Passkey => Numeric_Value;
+  set Passkey(int value) => Numeric_Value = value;
+}
+
 // typedef struct _BLUETOOTH_DEVICE_INFO {
 //   DWORD             dwSize;
 //   BLUETOOTH_ADDRESS Address;

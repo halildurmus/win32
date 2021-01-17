@@ -7,15 +7,15 @@ them accessible to Dart code without requiring a C compiler or the Windows SDK.
 [![Language](https://img.shields.io/badge/language-Dart-blue.svg)](https://dart.dev)
 ![Build](https://github.com/timsneath/win32/workflows/Build/badge.svg)
 
-Perhaps of as much use as the APIs themselves, this package provides a variety of
-instructive examples for more complex FFI usage scenarios.
+Perhaps of as much use as the APIs themselves, this package provides a variety
+of instructive examples for more complex FFI usage scenarios.
 
-By design, this package provides minimal modifications to the Win32 API to support
-Dart idioms. The goal is to provide high familiarity to an existing Win32 developer.
-Other plugins may build on these primitives to provide a friendly API for Dart and
-Flutter developers. A good example of that is
-[filepicker_windows](https://pub.dev/packages/filepicker_windows), which offers a
-common item dialog suitable for incorporation into an existing Flutter app.
+By design, this package provides minimal modifications to the Win32 API to
+support Dart idioms. The goal is to provide high familiarity to an existing
+Win32 developer. Other plugins may build on these primitives to provide a
+friendly API for Dart and Flutter developers. A good example of that is
+[filepicker_windows](https://pub.dev/packages/filepicker_windows), which offers
+a common item dialog suitable for incorporation into an existing Flutter app.
 
 ## Usage
 
@@ -28,7 +28,8 @@ to enumerate all locally-installed fonts:
 
 ![Fonts screenshot](https://github.com/timsneath/win32/blob/master/doc/images/fonts.png?raw=true)
 
-or access system information that is not exposed directly by the Dart framework libraries:
+or access system information that is not exposed directly by the Dart framework
+libraries:
 
 ![System information screenshot](https://github.com/timsneath/win32/blob/master/doc/images/power.png?raw=true)
 
@@ -36,7 +37,9 @@ You could use it to build a Windows app with Flutter that relies on Win32 APIs:
 
 ![Disk explorer screenshot](https://github.com/timsneath/win32/blob/master/doc/images/disk_explorer.png?raw=true)
 
-You could even use it to build a traditional Win32 app, written purely in Dart, that could have come straight out of a classic Charles Petzold book on programming Windows apps:
+You could even use it to build a traditional Win32 app, written purely in Dart,
+that could have come straight out of a classic Charles Petzold book on
+programming Windows apps:
 
 ![Dart notepad screenshot](https://github.com/timsneath/win32/blob/master/doc/images/notepad.png?raw=true)
 
@@ -44,11 +47,14 @@ or even, perhaps, a fully-fledged game using GDI:
 
 ![Dart Tetris for Win32 screenshot](https://github.com/timsneath/win32/blob/master/doc/images/tetris.png?raw=true)
 
-You might even build a package that depends upon it, like [dart_console](https://pub.dev/packages/dart_console), which enables advanced console manipulation:
+You might even build a package that depends upon it, like
+[dart_console](https://pub.dev/packages/dart_console), which enables advanced
+console manipulation:
 
 ![Dart console ANSI color demo screenshot](https://github.com/timsneath/win32/blob/master/doc/images/console.png?raw=true)
 
-or [filepicker_windows](https://pub.dev/packages/filepicker_windows), which provides a modern Windows file picker for Flutter:
+or [filepicker_windows](https://pub.dev/packages/filepicker_windows), which
+provides a modern Windows file picker for Flutter:
 
 ![Windows file picker screenshot](https://github.com/timsneath/win32/blob/master/doc/images/filepicker.png?raw=true)
 
@@ -85,31 +91,32 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | Example            | Description                                               |
 | ------------------ | --------------------------------------------------------- |
 | `hello.dart`       | Basic Petzoldian "hello world" Win32 app                  |
-| `paint.dart`       | Demonstrates simple GDI drawing and min/max window sizing |
-| `scroll.dart`      | Example of horizontal and vertical scrolling text window  |
-| `console.dart`     | Shows usage of console APIs                               |
-| `msgbox.dart`      | Demonstrates a MessageBox from the console                |
 | `calendar.dart`    | Gets information about the calendar from a WinRT API      |
-| `sendinput.dart`   | Sends keyboard and mouse input to another window          |
-| `knownfolder.dart` | Retrieves known folders from the current user profile     |
-| `window.dart`      | Enumerates open windows and basic window manipulation     |
-| `monitor.dart`     | Uses DDC and monitor-config API to get monitor caps       |
-| `wallpaper.dart`   | Shows what wallpaper and background color are set         |
-| `guid.dart`        | Creates a globally unique identifier (GUID)               |
+| `console.dart`     | Shows usage of console APIs                               |
+| `credentials.dart` | Adds a credential to the store and retrieves it           |
 | `devices.dart`     | Uses volume management APIs to list all disk devices      |
-| `modules.dart`     | Enumerates all loaded modules on the current system       |
-| `snake.dart`       | Snake game using various GDI features                     |
 | `dialog.dart`      | Create a custom dialog box in code                        |
 | `dialogshow.dart`  | Creates a common item dialog (file picker) using COM      |
-| `wmi.dart`         | Using WMI from COM to retrieve device/OS information      |
-| `sysinfo.dart`     | Examples of getting device information from native C APIs |
-| `filever.dart`     | Getting file version information from the file resource   |
-| `manifest\`        | Demonstrates the use of app manifests for compiled apps   |
-| `winmd.dart`       | Interrogate Windows Runtime types                         |
-| `credentials.dart` | Adds a credential to the store and retrieves it           |
 | `dynamic_load.dart`| Demonstrate loading a DLL and calling it at runtime       |
-| `tetris\main.dart` | Port of an open-source Tetris game to Dart                |
+| `filever.dart`     | Getting file version information from the file resource   |
+| `guid.dart`        | Creates a globally unique identifier (GUID)               |
+| `knownfolder.dart` | Retrieves known folders from the current user profile     |
+| `manifest\`        | Demonstrates the use of app manifests for compiled apps   |
+| `modules.dart`     | Enumerates all loaded modules on the current system       |
+| `monitor.dart`     | Uses DDC and monitor-config API to get monitor caps       |
+| `msgbox.dart`      | Demonstrates a MessageBox from the console                |
 | `notepad\notepad.dart` | Lightweight replica of the Windows notepad applet     |
+| `paint.dart`       | Demonstrates simple GDI drawing and min/max window sizing |
+| `play_sound.dart`  | Plays a WAV file through the Windows PlaySound API        |
+| `scroll.dart`      | Example of horizontal and vertical scrolling text window  |
+| `sendinput.dart`   | Sends keyboard and mouse input to another window          |
+| `snake.dart`       | Snake game using various GDI features                     |
+| `sysinfo.dart`     | Examples of getting device information from native C APIs |
+| `tetris\main.dart` | Port of an open-source Tetris game to Dart                |
+| `wallpaper.dart`   | Shows what wallpaper and background color are set         |
+| `window.dart`      | Enumerates open windows and basic window manipulation     |
+| `winmd.dart`       | Interrogate Windows Runtime types                         |
+| `wmi.dart`         | Using WMI from COM to retrieve device/OS information      |
 
 ### Flutter samples
 
@@ -119,8 +126,11 @@ computer and their volume IDs and attached paths.
 
 ## Requirements
 
-This package assumes the [Dart 32-bit or 64-bit compiler](https://dart.dev/get-dart),
-running on Windows.
+This package assumes the [Dart 64-bit compiler](https://dart.dev/get-dart),
+running on Windows. Most commands are tested on 32-bit Windows, but due to the
+lack of a compiler for 32-bit executables and the increasing lack of machines
+running 32-bit OSes, this is inevitably a low priority. The package is also
+tested on Windows-on-ARM architecture, running in x64 emulation mode.
 
 ## Features and bugs
 
@@ -161,12 +171,12 @@ The Tetris example listed above is a fuller worked example of a reasonably
 complete program that uses the Dart Win32 package. It is a port of a C version
 of the game by Chang-Hung Liang. [More information...](tetris/README.md)
 
-The [C implementation of the Snake game](https://github.com/davidejones/winsnake)
-is by David Jones, and is ported with his permission.
+The [C implementation of Snake](https://github.com/davidejones/winsnake) is by
+David Jones, and is ported with his permission.
 
-The original C version of the Notepad example was originally authored by Charles
-Petzold, and is kindly [licensed by him](https://www.charlespetzold.com/faq.html)
-without restriction.
+The original C version of the Notepad example was authored by Charles Petzold,
+and is kindly [licensed by him](https://www.charlespetzold.com/faq.html) without
+restriction.
 
 The summary Win32 API documentation comments are [licensed by Microsoft][] under
 the [Creative Commons Attribution 4.0 International Public License][license].

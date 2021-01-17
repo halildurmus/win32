@@ -56,8 +56,13 @@ typedef TimerProc = Void Function(IntPtr, Uint32, Pointer<Uint32>, Int32);
 typedef WindowProc = IntPtr Function(
     IntPtr hwnd, Int32 uMsg, IntPtr wParam, IntPtr lParam);
 
-/// Application-defined function used with the SetConsoleCtrlHandler
+/// Application-defined callback function used with the SetConsoleCtrlHandler
 /// function. A console process uses this function to handle control signals
 /// received by the process. When the signal is received, the system creates a
 /// new thread in the process to execute the function.
 typedef HandlerProc = Int32 Function(Uint32 dwCtrlType);
+
+/// Application-defined callback function used with the
+/// BluetoothRegisterForAuthenticationEx function.
+typedef PfnAuthenticationCallbackEx = Int32 Function(Pointer pvParam,
+    Pointer<BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS> pAuthCallbackParams);

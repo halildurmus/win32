@@ -58,6 +58,7 @@ void main() {
     }
   } finally {
     free(findRadioParams);
+    free(radioInfo);
     free(hRadio);
   }
 }
