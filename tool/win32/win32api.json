@@ -247,7 +247,8 @@
     "ClosePseudoConsole": {
         "prototype": "void WINAPI ClosePseudoConsole(\n    _In_ HPCON hPC\n);",
         "dllLibrary": "kernel32",
-        "comment": "Closes a pseudoconsole from the given handle."
+        "comment": "Closes a pseudoconsole from the given handle.",
+        "minimumWindowsVersion": "WIN10_RS5"
     },
     "CLSIDFromString": {
         "prototype": "HRESULT CLSIDFromString(\n  LPCOLESTR lpsz,\n  LPCLSID   pclsid\n);",
@@ -392,7 +393,8 @@
     "CreatePseudoConsole": {
         "prototype": "HRESULT WINAPI CreatePseudoConsole(\n  _In_ COORD size,\n  _In_ HANDLE hInput,\n  _In_ HANDLE hOutput,\n  _In_ DWORD dwFlags,\n  _Out_ HPCON* phPC\n);",
         "dllLibrary": "kernel32",
-        "comment": "Creates a new pseudoconsole object for the calling process."
+        "comment": "Creates a new pseudoconsole object for the calling process.",
+        "minimumWindowsVersion": "WIN10_RS5"
     },
     "CreateSolidBrush": {
         "prototype": "HBRUSH CreateSolidBrush(\n  COLORREF color\n);",
@@ -862,7 +864,8 @@
     "GetIntegratedDisplaySize": {
         "prototype": "HRESULT GetIntegratedDisplaySize(\n  double *sizeInInches\n);",
         "dllLibrary": "kernelbase",
-        "comment": "Retrieves the best estimate of the diagonal size of the built-in screen, in inches."
+        "comment": "Retrieves the best estimate of the diagonal size of the built-in screen, in inches.",
+        "minimumWindowsVersion": "WIN10_TH1"
     },
     "GetLargestConsoleWindowSize": {
         "prototype": "COORD WINAPI GetLargestConsoleWindowSize(\n  _In_ HANDLE hConsoleOutput\n);",
@@ -1062,7 +1065,8 @@
     "GetSystemDpiForProcess": {
         "prototype": "UINT GetSystemDpiForProcess(\n  HANDLE hProcess\n);",
         "dllLibrary": "user32",
-        "comment": "Retrieves the system DPI associated with a given process. This is useful for avoiding compatibility issues that arise from sharing DPI-sensitive information between multiple system-aware processes with different system DPI values."
+        "comment": "Retrieves the system DPI associated with a given process. This is useful for avoiding compatibility issues that arise from sharing DPI-sensitive information between multiple system-aware processes with different system DPI values.",
+        "minimumWindowsVersion": "WIN10_RS4"
     },
     "GetSystemDirectory": {
         "prototype": "UINT GetSystemDirectoryW(\n  LPWSTR lpBuffer,\n  UINT   uSize\n);",
@@ -1272,7 +1276,8 @@
     "IsWow64Process2": {
         "prototype": "BOOL IsWow64Process2(\n  HANDLE hProcess,\n  USHORT *pProcessMachine,\n  USHORT *pNativeMachine\n);",
         "dllLibrary": "kernel32",
-        "comment": "Determines whether the specified process is running under WOW64. Also returns additional machine process and architecture information."
+        "comment": "Determines whether the specified process is running under WOW64. Also returns additional machine process and architecture information.",
+        "minimumWindowsVersion": "WIN10_RS3"
     },
     "IsZoomed": {
         "prototype": "BOOL IsZoomed(\n HWND hWnd\n);",
@@ -1622,7 +1627,8 @@
     "ResizePseudoConsole": {
         "prototype": "HRESULT WINAPI ResizePseudoConsole(\n    _In_ HPCON hPC ,\n    _In_ COORD size\n);",
         "dllLibrary": "kernel32",
-        "comment": "Resizes the internal buffers for a pseudoconsole to the given size."
+        "comment": "Resizes the internal buffers for a pseudoconsole to the given size.",
+        "minimumWindowsVersion": "WIN10_RS5"
     },
     "RoundRect": {
         "prototype": "BOOL RoundRect(\n  HDC hdc,\n  int left,\n  int top,\n  int right,\n  int bottom,\n  int width,\n  int height\n);",
@@ -2022,12 +2028,14 @@
     "TaskDialog": {
         "prototype": "HRESULT TaskDialog(\n  HWND                           hwndOwner,\n  HINSTANCE                      hInstance,\n  PCWSTR                         pszWindowTitle,\n  PCWSTR                         pszMainInstruction,\n  PCWSTR                         pszContent,\n  TASKDIALOG_COMMON_BUTTON_FLAGS dwCommonButtons,\n  PCWSTR                         pszIcon,\n  int                            *pnButton\n);",
         "dllLibrary": "comctl32",
-        "comment": "The TaskDialog function creates, displays, and operates a task dialog. The task dialog contains application-defined message text and title, icons, and any combination of predefined push buttons. This function does not support the registration of a callback function to receive notifications."
+        "comment": "The TaskDialog function creates, displays, and operates a task dialog. The task dialog contains application-defined message text and title, icons, and any combination of predefined push buttons. This function does not support the registration of a callback function to receive notifications.",
+        "test": false
     },
     "TaskDialogIndirect": {
         "prototype": "HRESULT TaskDialogIndirect(\n  const TASKDIALOGCONFIG *pTaskConfig,\n  int                    *pnButton,\n  int                    *pnRadioButton,\n  BOOL                   *pfVerificationFlagChecked\n);",
         "dllLibrary": "comctl32",
-        "comment": "The TaskDialogIndirect function creates, displays, and operates a task dialog. The task dialog contains application-defined icons, messages, title, verification check box, command links, push buttons, and radio buttons. This function can register a callback function to receive notification messages."
+        "comment": "The TaskDialogIndirect function creates, displays, and operates a task dialog. The task dialog contains application-defined icons, messages, title, verification check box, command links, push buttons, and radio buttons. This function can register a callback function to receive notification messages.",
+        "test": false
     },
     "TextOut": {
         "prototype": "BOOL TextOutW(\n  HDC     hdc,\n  int     x,\n  int     y,\n  LPCWSTR lpString,\n  int     c\n);",

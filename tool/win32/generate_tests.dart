@@ -10,7 +10,6 @@ import 'dart:io';
 import 'converter.dart';
 import 'model.dart';
 import 'struct_sizes.dart';
-import 'versioned_apis.dart';
 import 'win32types.dart';
 
 void generateTests() {
@@ -52,10 +51,7 @@ void main() {
       final genericName =
           prototypes.keys.firstWhere((k) => prototypes[k]! == proto);
 
-      // TaskDialog* is a special case since it requires comctl32.dll v6. This is
-      // not available to dart test because of
-      // https://github.com/dart-lang/sdk/issues/42598
-      if (genericName.startsWith('TaskDialog')) continue;
+      if (proto.test == false) continue;
 
       final win32Func = win32APIs
           .where((api) => api.nameWithoutEncoding == genericName)
@@ -82,9 +78,9 @@ void main() {
         expect(${win32Func.nameWithoutEncoding}, isA<Function>());
       });''';
 
-      if (versionedAPIs.keys.contains(win32Func.name)) {
+      if (proto.minimumWindowsVersion > 0) {
         writer.writeStringSync('''
-        if (windowsBuildNumber >= ${versionedAPIs[win32Func.name]}) {
+        if (windowsBuildNumber >= ${proto.minimumWindowsVersion}) {
           $test
         }''');
       } else {
