@@ -36,14 +36,15 @@ int createHidden() {
 
 String _regWinClass() {
   const windowClass = 'Tray_Callback_Window';
-  final wc = WNDCLASS.allocate();
-  wc.style = CS_HREDRAW | CS_VREDRAW;
-  wc.lpfnWndProc = app.wndProc;
-  wc.hInstance = app.hInst;
-  wc.hIcon = app.loadDartIcon();
-  wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-  wc.lpszClassName = TEXT(windowClass);
-  RegisterClass(wc.addressOf);
+  final pWndClass = calloc<WNDCLASS>();
+  final wndClass = pWndClass.ref;
+  wndClass.style = CS_HREDRAW | CS_VREDRAW;
+  wndClass.lpfnWndProc = app.wndProc;
+  wndClass.hInstance = app.hInst;
+  wndClass.hIcon = app.loadDartIcon();
+  wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
+  wndClass.lpszClassName = TEXT(windowClass);
+  RegisterClass(pWndClass);
   return windowClass;
 }
 

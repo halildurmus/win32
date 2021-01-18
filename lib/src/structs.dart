@@ -3261,9 +3261,7 @@ class OVERLAPPED extends Struct {
   external Pointer pointer;
 
   @IntPtr()
-  int hEvent;
-
-  factory OVERLAPPED.allocate() => zeroAllocate<OVERLAPPED>().ref;
+  external int hEvent;
 }
 
 // typedef struct tagACTCTXW {
@@ -3522,16 +3520,6 @@ class NOTIFYICONDATA extends Struct {
   @Uint64()
   external int _wchar124_szTip;
 
-  String get szTip =>
-      addressOf.cast<Uint8>().elementAt(40).cast<Utf16>().unpackString(128);
-
-  set szTip(String text63chars) {
-    if (text63chars.length > 63) {
-      throw ArgumentError('Argument "text64chars" should be less 63 char');
-    }
-    _wchar_cpy(addressOf, 40, text63chars);
-  }
-
   @Uint32()
   external int dwState;
 
@@ -3668,16 +3656,6 @@ class NOTIFYICONDATA extends Struct {
   @Uint64()
   external int _wchar252_szInfo;
 
-  String get szInfo =>
-      addressOf.cast<Uint8>().elementAt(304).cast<Utf16>().unpackString(256);
-
-  set szInfo(String text255chars) {
-    if (text255chars.length > 255) {
-      throw ArgumentError('Argument "text255chars" should be less 255 chars');
-    }
-    _wchar_cpy(addressOf, 304, text255chars);
-  }
-
   @Uint32()
   external int uTimeout;
 
@@ -3718,16 +3696,6 @@ class NOTIFYICONDATA extends Struct {
   @Uint64()
   external int _wchar60_szInfoTitle;
 
-  String get szInfoTitle =>
-      addressOf.cast<Uint8>().elementAt(824).cast<Utf16>().unpackString(64);
-
-  set szInfoTitle(String text63chars) {
-    if (text63chars.length > 63) {
-      throw ArgumentError('Argument "text63chars" should be less 63 chars');
-    }
-    _wchar_cpy(addressOf, 824, text63chars);
-  }
-
   @Uint32()
   external int dwInfoFlags;
 
@@ -3742,21 +3710,51 @@ class NOTIFYICONDATA extends Struct {
 
   @IntPtr()
   external int hBalloonIcon;
+}
 
-  factory NOTIFYICONDATA.allocate() =>
-      zeroAllocate<NOTIFYICONDATA>().ref..cbSize = sizeOf<NOTIFYICONDATA>();
+extension Pointer_NOTIFYICONDATA_Extension on Pointer<NOTIFYICONDATA> {
+  String get szTip =>
+      cast<Uint8>().elementAt(40).cast<Utf16>().unpackString(128);
+
+  set szTip(String text63chars) {
+    if (text63chars.length > 63) {
+      throw ArgumentError('Argument "text64chars" should be less 63 char');
+    }
+    _wchar_cpy(this, 40, text63chars);
+  }
+
+  String get szInfo =>
+      cast<Uint8>().elementAt(304).cast<Utf16>().unpackString(256);
+
+  set szInfo(String text255chars) {
+    if (text255chars.length > 255) {
+      throw ArgumentError('Argument "text255chars" should be less 255 char');
+    }
+    _wchar_cpy(this, 304, text255chars);
+  }
+
+  String get szInfoTitle =>
+      cast<Uint8>().elementAt(824).cast<Utf16>().unpackString(64);
+
+  set szInfoTitle(String text63chars) {
+    if (text63chars.length > 63) {
+      throw ArgumentError('Argument "text63chars" should be less 63 char');
+    }
+    _wchar_cpy(this, 824, text63chars);
+  }
 
   static void _wchar_cpy(Pointer pointer, int memStart, String source) {
     final units = source.codeUnits;
     final szMemory = pointer.cast<Uint8>();
 
     for (var i = 0; i < units.length; i++) {
-      szMemory.elementAt(memStart + i * 2).value = units[i];
+      final index = memStart + i * 2;
+      szMemory.elementAt(index).value = units[i];
     }
-    szMemory.elementAt(memStart + units.length * 2).value = 0;
+    final lastIndex = memStart + units.length * 2;
+    szMemory.elementAt(lastIndex).value = 0;
   }
 }
-
 // typedef struct tagTPMPARAMS {
 //   UINT cbSize;
 //   RECT rcExclude;
@@ -3770,7 +3768,4 @@ class TPMPARAMS extends Struct {
   external int cbSize;
 
   external RECT rcExclude;
-
-  factory TPMPARAMS.allocate() =>
-      zeroAllocate<TPMPARAMS>().ref..cbSize = sizeOf<TPMPARAMS>();
 }

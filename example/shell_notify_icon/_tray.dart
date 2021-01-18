@@ -5,18 +5,19 @@ import 'package:win32/win32.dart';
 import '_app.dart' as app;
 import '_menu.dart' as menu;
 
-NOTIFYICONDATA _nid = NOTIFYICONDATA.allocate();
+final _nid = calloc<NOTIFYICONDATA>()..ref.cbSize = sizeOf<NOTIFYICONDATA>();
 
 bool _trayWndProc(int hWnd, int msg, int wParam, int lParam)  {
+  final hWnd = _nid.ref.hWnd;
   switch (msg) {
     case app.EVENT_TRAY_NOTIFY:
       final trayMsg = _fixNotifyDataToVersion4(LOWORD(lParam));
       switch (trayMsg) {
         case NIN_SELECT:
-          ShowWindow(_nid.hWnd, IsWindowVisible(_nid.hWnd) == 1
+          ShowWindow(hWnd, IsWindowVisible(hWnd) == 1
               ? SW_HIDE
               : SW_SHOW);
-          SetForegroundWindow(_nid.hWnd);
+          SetForegroundWindow(hWnd);
           return true;
 
         case WM_CONTEXTMENU:
@@ -28,13 +29,14 @@ bool _trayWndProc(int hWnd, int msg, int wParam, int lParam)  {
 }
 
 void addIcon({required int hWndParent}) {
-  _nid.hWnd = hWndParent;
-  _nid.uFlags = NIF_ICON | NIF_TIP | NIF_MESSAGE | NIF_SHOWTIP | NIF_GUID;
+  final nid = _nid.ref;
+  nid.hWnd = hWndParent;
+  nid.uFlags = NIF_ICON | NIF_TIP | NIF_MESSAGE | NIF_SHOWTIP | NIF_GUID;
   _nid.szTip = 'Dart tray';
-  _nid.uCallbackMessage = app.EVENT_TRAY_NOTIFY;
-  _nid.hIcon = app.loadDartIcon();
+  nid.uCallbackMessage = app.EVENT_TRAY_NOTIFY;
+  nid.hIcon = app.loadDartIcon();
 
-  Shell_NotifyIcon(NIM_ADD, _nid.addressOf);
+  Shell_NotifyIcon(NIM_ADD, _nid);
 
   // TODO: uVersion does not yet support. See NOTIFYICONDATA declaration
   // nid.uVersion = 4;
@@ -44,8 +46,8 @@ void addIcon({required int hWndParent}) {
 }
 
 void removeIcon() {
-  Shell_NotifyIcon(NIM_DELETE, _nid.addressOf);
-  free(_nid.addressOf);
+  Shell_NotifyIcon(NIM_DELETE, _nid);
+  free(_nid);
   app.deregisterWndProc(_trayWndProc);
 }
 

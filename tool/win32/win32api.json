@@ -2277,5 +2277,25 @@
         "prototype": "BOOL WriteProcessMemory(\n  HANDLE  hProcess,\n  LPVOID  lpBaseAddress,\n  LPCVOID lpBuffer,\n  SIZE_T  nSize,\n  SIZE_T  *lpNumberOfBytesWritten\n);",
         "dllLibrary": "kernel32",
         "comment": "Writes data to an area of memory in a specified process. The entire area to be written to must be accessible or the operation fails."
+    },
+    "Shell_NotifyIcon": {
+        "prototype": "BOOL Shell_NotifyIconW(\n DWORD dwMessage,\n NOTIFYICONDATA *lpData \n);",
+        "dllLibrary": "shell32",
+        "comment": "Sends a message to the taskbar's status area."
+    },
+    "GetSubMenu": {
+        "prototype": "HMENU GetSubMenu(\n HMENU hMenu,\n int nPos \n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a handle to the drop-down menu or submenu activated by the specified menu item."
+    },
+    "DestroyMenu": {
+        "prototype": "BOOL DestroyMenu(\n HMENU hMenu \n);",
+        "dllLibrary": "user32",
+        "comment": "Destroys the specified menu and frees any memory that the menu occupies."
+    },
+    "TrackPopupMenuEx": {
+        "prototype": "BOOL TrackPopupMenuEx(\n HMENU hMenu,\n UINT uFlags,\n int x,\n int y,\n HWND hwnd,\n TPMPARAMS *lptpm \n);",
+        "dllLibrary": "user32",
+        "comment": "Displays a shortcut menu at the specified location and tracks the selection of items on the shortcut menu. The shortcut menu can appear anywhere on the screen."
     }
 }

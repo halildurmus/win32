@@ -45,10 +45,10 @@ int _buildMenu() {
 }
 
 Point<int> _currentMousePos() {
-  final point = POINT.allocate();
-  GetCursorPos(point.addressOf);
-  final result = Point(point.x, point.y);
-  free(point.addressOf);
+  final point = calloc<POINT>();
+  GetCursorPos(point);
+  final result = Point(point.ref.x, point.ref.y);
+  free(point);
   return result;
 }
 

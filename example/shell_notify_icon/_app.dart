@@ -1,6 +1,7 @@
 import 'dart:ffi';
 import 'dart:io';
 
+import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 final hInst = GetModuleHandle(nullptr);
@@ -14,11 +15,12 @@ typedef LocalWndProc = bool Function(int hWnd,
 final wndProc = Pointer.fromFunction<WindowProc>(_appWndProc, 0);
 
 void exec() {
-  final msg = MSG.allocate().addressOf;
+  final msg = calloc<MSG>();
   while (GetMessage(msg, NULL, 0, 0) != 0) {
     TranslateMessage(msg);
     DispatchMessage(msg);
   }
+  free(msg);
 }
 
 int loadDartIcon() {
