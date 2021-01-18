@@ -3426,7 +3426,6 @@ class NLM_SIMULATED_PROFILE_INFO extends Opaque {}
 //   HICON hBalloonIcon;
 // } NOTIFYICONDATAW, *PNOTIFYICONDATAW;
 
-// TODO: This struct does not yet support uVersion
 // FFI support for packed structs https://github.com/dart-lang/sdk/issues/38158
 
 /// The NOTIFYICONDATA contains information that the system needs to display
