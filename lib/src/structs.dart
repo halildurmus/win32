@@ -3699,14 +3699,7 @@ class NOTIFYICONDATA extends Struct {
   @Uint32()
   external int dwInfoFlags;
 
-  @Uint32()
-  external int guidItem1;
-  @Uint16()
-  external int guidItem2;
-  @Uint16()
-  external int guidItem3;
-  @Uint64()
-  external int guidItem4;
+  external GUID guidItem;
 
   @IntPtr()
   external int hBalloonIcon;
