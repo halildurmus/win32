@@ -39,6 +39,27 @@ int FindExecutable(Pointer<Utf16> lpFile, Pointer<Utf16> lpDirectory,
   return _FindExecutable(lpFile, lpDirectory, lpResult);
 }
 
+/// Creates and initializes a Shell item object from a parsing name.
+///
+/// ```c
+/// SHSTDAPI SHCreateItemFromParsingName(
+///   PCWSTR   pszPath,
+///   IBindCtx *pbc,
+///   REFIID   riid,
+///   void     **ppv
+/// );
+/// ```
+/// {@category shell32}
+int SHCreateItemFromParsingName(Pointer<Utf16> pszPath, Pointer pbc,
+    Pointer<GUID> riid, Pointer<Pointer> ppv) {
+  final _SHCreateItemFromParsingName = _shell32.lookupFunction<
+      Int32 Function(Pointer<Utf16> pszPath, Pointer pbc, Pointer<GUID> riid,
+          Pointer<Pointer> ppv),
+      int Function(Pointer<Utf16> pszPath, Pointer pbc, Pointer<GUID> riid,
+          Pointer<Pointer> ppv)>('SHCreateItemFromParsingName');
+  return _SHCreateItemFromParsingName(pszPath, pbc, riid, ppv);
+}
+
 /// Displays a ShellAbout dialog box.
 ///
 /// ```c
@@ -58,21 +79,6 @@ int ShellAbout(
       int Function(int hWnd, Pointer<Utf16> szApp, Pointer<Utf16> szOtherStuff,
           int hIcon)>('ShellAboutW');
   return _ShellAbout(hWnd, szApp, szOtherStuff, hIcon);
-}
-
-/// Performs an operation on a specified file.
-///
-/// ```c
-/// BOOL ShellExecuteExW(
-///   SHELLEXECUTEINFOW *pExecInfo
-/// );
-/// ```
-/// {@category shell32}
-int ShellExecuteEx(Pointer<SHELLEXECUTEINFO> pExecInfo) {
-  final _ShellExecuteEx = _shell32.lookupFunction<
-      Int32 Function(Pointer<SHELLEXECUTEINFO> pExecInfo),
-      int Function(Pointer<SHELLEXECUTEINFO> pExecInfo)>('ShellExecuteExW');
-  return _ShellExecuteEx(pExecInfo);
 }
 
 /// Performs an operation on a specified file.
@@ -109,25 +115,19 @@ int ShellExecute(int hwnd, Pointer<Utf16> lpOperation, Pointer<Utf16> lpFile,
       hwnd, lpOperation, lpFile, lpParameters, lpDirectory, nShowCmd);
 }
 
-/// Creates and initializes a Shell item object from a parsing name.
+/// Performs an operation on a specified file.
 ///
 /// ```c
-/// SHSTDAPI SHCreateItemFromParsingName(
-///   PCWSTR   pszPath,
-///   IBindCtx *pbc,
-///   REFIID   riid,
-///   void     **ppv
+/// BOOL ShellExecuteExW(
+///   SHELLEXECUTEINFOW *pExecInfo
 /// );
 /// ```
 /// {@category shell32}
-int SHCreateItemFromParsingName(Pointer<Utf16> pszPath, Pointer pbc,
-    Pointer<GUID> riid, Pointer<Pointer> ppv) {
-  final _SHCreateItemFromParsingName = _shell32.lookupFunction<
-      Int32 Function(Pointer<Utf16> pszPath, Pointer pbc, Pointer<GUID> riid,
-          Pointer<Pointer> ppv),
-      int Function(Pointer<Utf16> pszPath, Pointer pbc, Pointer<GUID> riid,
-          Pointer<Pointer> ppv)>('SHCreateItemFromParsingName');
-  return _SHCreateItemFromParsingName(pszPath, pbc, riid, ppv);
+int ShellExecuteEx(Pointer<SHELLEXECUTEINFO> pExecInfo) {
+  final _ShellExecuteEx = _shell32.lookupFunction<
+      Int32 Function(Pointer<SHELLEXECUTEINFO> pExecInfo),
+      int Function(Pointer<SHELLEXECUTEINFO> pExecInfo)>('ShellExecuteExW');
+  return _ShellExecuteEx(pExecInfo);
 }
 
 /// Empties the Recycle Bin on the specified drive.

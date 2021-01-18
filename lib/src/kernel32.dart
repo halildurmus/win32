@@ -739,6 +739,22 @@ int FindFirstVolume(Pointer<Utf16> lpszVolumeName, int cchBufferLength) {
   return _FindFirstVolume(lpszVolumeName, cchBufferLength);
 }
 
+/// Requests that the operating system signal a change notification handle
+/// the next time it detects an appropriate change.
+///
+/// ```c
+/// BOOL FindNextChangeNotification(
+///   HANDLE hChangeHandle
+/// );
+/// ```
+/// {@category kernel32}
+int FindNextChangeNotification(int hChangeHandle) {
+  final _FindNextChangeNotification = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hChangeHandle),
+      int Function(int hChangeHandle)>('FindNextChangeNotification');
+  return _FindNextChangeNotification(hChangeHandle);
+}
+
 /// Continues a file search from a previous call to the FindFirstFile,
 /// FindFirstFileEx, or FindFirstFileTransacted functions.
 ///
@@ -755,22 +771,6 @@ int FindNextFile(int hFindFile, Pointer<WIN32_FIND_DATA> lpFindFileData) {
       int Function(int hFindFile,
           Pointer<WIN32_FIND_DATA> lpFindFileData)>('FindNextFileW');
   return _FindNextFile(hFindFile, lpFindFileData);
-}
-
-/// Requests that the operating system signal a change notification handle
-/// the next time it detects an appropriate change.
-///
-/// ```c
-/// BOOL FindNextChangeNotification(
-///   HANDLE hChangeHandle
-/// );
-/// ```
-/// {@category kernel32}
-int FindNextChangeNotification(int hChangeHandle) {
-  final _FindNextChangeNotification = _kernel32.lookupFunction<
-      Int32 Function(IntPtr hChangeHandle),
-      int Function(int hChangeHandle)>('FindNextChangeNotification');
-  return _FindNextChangeNotification(hChangeHandle);
 }
 
 /// Continues a volume search started by a call to the FindFirstVolume
@@ -1880,21 +1880,6 @@ int ReadProcessMemory(int hProcess, Pointer lpBaseAddress, Pointer lpBuffer,
       hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesRead);
 }
 
-/// Deletes an existing empty directory.
-///
-/// ```c
-/// BOOL RemoveDirectoryW(
-///   LPCWSTR lpPathName
-/// );
-/// ```
-/// {@category kernel32}
-int RemoveDirectory(Pointer<Utf16> lpPathName) {
-  final _RemoveDirectory = _kernel32.lookupFunction<
-      Int32 Function(Pointer<Utf16> lpPathName),
-      int Function(Pointer<Utf16> lpPathName)>('RemoveDirectoryW');
-  return _RemoveDirectory(lpPathName);
-}
-
 /// The ReleaseActCtx function decrements the reference count of the
 /// specified activation context.
 ///
@@ -1908,6 +1893,21 @@ void ReleaseActCtx(int hActCtx) {
   final _ReleaseActCtx = _kernel32.lookupFunction<Void Function(IntPtr hActCtx),
       void Function(int hActCtx)>('ReleaseActCtx');
   return _ReleaseActCtx(hActCtx);
+}
+
+/// Deletes an existing empty directory.
+///
+/// ```c
+/// BOOL RemoveDirectoryW(
+///   LPCWSTR lpPathName
+/// );
+/// ```
+/// {@category kernel32}
+int RemoveDirectory(Pointer<Utf16> lpPathName) {
+  final _RemoveDirectory = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpPathName),
+      int Function(Pointer<Utf16> lpPathName)>('RemoveDirectoryW');
+  return _RemoveDirectory(lpPathName);
 }
 
 /// Resizes the internal buffers for a pseudoconsole to the given size.
