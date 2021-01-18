@@ -551,6 +551,11 @@
         "dllLibrary": "user32",
         "comment": "Enables, disables, or grays the specified menu item."
     },
+    "EncryptFile": {
+        "prototype": "BOOL EncryptFileW(\n        LPCWSTR lpFileName\n);",
+        "dllLibrary": "advapi32",
+        "comment": "Encrypts a file or directory. All data streams in a file are encrypted. All new files created in an encrypted directory are encrypted."
+    },
     "EndDialog": {
         "prototype": "BOOL EndDialog(\n  HWND    hDlg,\n  INT_PTR nResult\n);",
         "dllLibrary": "user32",
@@ -615,11 +620,6 @@
         "prototype": "BOOL EnumWindows(\n  WNDENUMPROC lpEnumFunc,\n  LPARAM      lParam\n);",
         "dllLibrary": "user32",
         "comment": "Enumerates all top-level windows on the screen by passing the handle to each window, in turn, to an application-defined callback function. EnumWindows continues until the last top-level window is enumerated or the callback function returns FALSE."
-    },
-    "EncryptFile": {
-        "prototype": "BOOL EncryptFileW(\n        LPCWSTR lpFileName\n);",
-        "dllLibrary": "advapi32",
-        "comment": "Encrypts a file or directory. All data streams in a file are encrypted. All new files created in an encrypted directory are encrypted."
     },
     "EqualRect": {
         "prototype": "BOOL EqualRect(\n  const RECT *lprc1,\n  const RECT *lprc2\n);",
@@ -696,15 +696,15 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves the name of a volume on a computer. FindFirstVolume is used to begin scanning the volumes of a computer."
     },
-    "FindNextFile": {
-        "prototype": "BOOL FindNextFileW(\n  HANDLE             hFindFile,\n  LPWIN32_FIND_DATAW lpFindFileData\n);",
-        "dllLibrary": "kernel32",
-        "comment": "Continues a file search from a previous call to the FindFirstFile, FindFirstFileEx, or FindFirstFileTransacted functions."
-    },
     "FindNextChangeNotification": {
         "prototype": "BOOL FindNextChangeNotification(\n  HANDLE hChangeHandle\n);",
         "dllLibrary": "kernel32",
         "comment": "Requests that the operating system signal a change notification handle the next time it detects an appropriate change."
+    },
+    "FindNextFile": {
+        "prototype": "BOOL FindNextFileW(\n  HANDLE             hFindFile,\n  LPWIN32_FIND_DATAW lpFindFileData\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Continues a file search from a previous call to the FindFirstFile, FindFirstFileEx, or FindFirstFileTransacted functions."
     },
     "FindNextVolume": {
         "prototype": "BOOL FindNextVolumeW(\n  HANDLE hFindVolume,\n  LPWSTR lpszVolumeName,\n  DWORD  cchBufferLength\n);",
@@ -876,25 +876,25 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves attributes for a specified file or directory."
     },
+    "GetFileVersionInfo": {
+        "prototype": "BOOL GetFileVersionInfoW(\n  LPCWSTR lptstrFilename,\n  DWORD   dwHandle,\n  DWORD   dwLen,\n  LPVOID  lpData\n);",
+        "dllLibrary": "version",
+        "comment": "Retrieves version information for the specified file."
+    },
     "GetFileVersionInfoEx": {
         "prototype": "BOOL GetFileVersionInfoExW(\n  DWORD   dwFlags,\n  LPCWSTR lpwstrFilename,\n  DWORD   dwHandle,\n  DWORD   dwLen,\n  LPVOID  lpData\n);",
         "dllLibrary": "version",
         "comment": "Retrieves version information for the specified file."
-    },
-    "GetFileVersionInfoSizeEx": {
-        "prototype": "DWORD GetFileVersionInfoSizeExW(\n  DWORD   dwFlags,\n  LPCWSTR lpwstrFilename,\n  LPDWORD lpdwHandle\n);",
-        "dllLibrary": "version",
-        "comment": "Determines whether the operating system can retrieve version information for a specified file. If version information is available, GetFileVersionInfoSizeEx returns the size, in bytes, of that information."
     },
     "GetFileVersionInfoSize": {
         "prototype": "DWORD GetFileVersionInfoSizeW(\n  LPCWSTR lptstrFilename,\n  LPDWORD lpdwHandle\n);",
         "dllLibrary": "version",
         "comment": "Determines whether the operating system can retrieve version information for a specified file. If version information is available, GetFileVersionInfoSize returns the size, in bytes, of that information."
     },
-    "GetFileVersionInfo": {
-        "prototype": "BOOL GetFileVersionInfoW(\n  LPCWSTR lptstrFilename,\n  DWORD   dwHandle,\n  DWORD   dwLen,\n  LPVOID  lpData\n);",
+    "GetFileVersionInfoSizeEx": {
+        "prototype": "DWORD GetFileVersionInfoSizeExW(\n  DWORD   dwFlags,\n  LPCWSTR lpwstrFilename,\n  LPDWORD lpdwHandle\n);",
         "dllLibrary": "version",
-        "comment": "Retrieves version information for the specified file."
+        "comment": "Determines whether the operating system can retrieve version information for a specified file. If version information is available, GetFileVersionInfoSizeEx returns the size, in bytes, of that information."
     },
     "GetForegroundWindow": {
         "prototype": "HWND GetForegroundWindow();",
@@ -937,15 +937,15 @@
         "dllLibrary": "psapi",
         "comment": "Retrieves the base name of the specified module."
     },
-    "GetModuleFileNameEx": {
-        "prototype": "DWORD GetModuleFileNameExW(\n  HANDLE  hProcess,\n  HMODULE hModule,\n  LPWSTR  lpFilename,\n  DWORD   nSize\n);",
-        "dllLibrary": "psapi",
-        "comment": "Retrieves the fully qualified path for the file containing the specified module."
-    },
     "GetModuleFileName": {
         "prototype": "DWORD GetModuleFileNameW(\n  HMODULE hModule,\n  LPWSTR  lpFilename,\n  DWORD   nSize\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the fully qualified path for the file that contains the specified module. The module must have been loaded by the current process."
+    },
+    "GetModuleFileNameEx": {
+        "prototype": "DWORD GetModuleFileNameExW(\n  HANDLE  hProcess,\n  HMODULE hModule,\n  LPWSTR  lpFilename,\n  DWORD   nSize\n);",
+        "dllLibrary": "psapi",
+        "comment": "Retrieves the fully qualified path for the file containing the specified module."
     },
     "GetModuleHandle": {
         "prototype": "HMODULE GetModuleHandleW(\n  LPCWSTR lpModuleName\n);",
@@ -1107,16 +1107,16 @@
         "dllLibrary": "user32",
         "comment": "The GetSysColorBrush function retrieves a handle identifying a logical brush that corresponds to the specified color index."
     },
+    "GetSystemDirectory": {
+        "prototype": "UINT GetSystemDirectoryW(\n  LPWSTR lpBuffer,\n  UINT   uSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the path of the system directory. The system directory contains system files such as dynamic-link libraries and drivers."
+    },
     "GetSystemDpiForProcess": {
         "prototype": "UINT GetSystemDpiForProcess(\n  HANDLE hProcess\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves the system DPI associated with a given process. This is useful for avoiding compatibility issues that arise from sharing DPI-sensitive information between multiple system-aware processes with different system DPI values.",
         "minimumWindowsVersion": "WIN10_RS4"
-    },
-    "GetSystemDirectory": {
-        "prototype": "UINT GetSystemDirectoryW(\n  LPWSTR lpBuffer,\n  UINT   uSize\n);",
-        "dllLibrary": "kernel32",
-        "comment": "Retrieves the path of the system directory. The system directory contains system files such as dynamic-link libraries and drivers."
     },
     "GetSystemInfo": {
         "prototype": "void GetSystemInfo(\n  LPSYSTEM_INFO lpSystemInfo\n);",
@@ -1143,15 +1143,15 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves the power status of the system. The status indicates whether the system is running on AC or DC power, whether the battery is currently charging, how much battery life remains, and if battery saver is on or off."
     },
-    "GetTabbedTextExtent": {
-        "prototype": "DWORD GetTabbedTextExtentW(\n  HDC       hdc,\n  LPCWSTR   lpString,\n  int       chCount,\n  int       nTabPositions,\n  const INT *lpnTabStopPositions\n);",
-        "dllLibrary": "user32",
-        "comment": "The GetTabbedTextExtent function computes the width and height of a character string. If the string contains one or more tab characters, the width of the string is based upon the specified tab stops. The GetTabbedTextExtent function uses the currently selected font to compute the dimensions of the string."
-    },
     "GetSystemTime": {
         "prototype": "void GetSystemTime(\n  LPSYSTEMTIME lpSystemTime\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the current local date and time."
+    },
+    "GetTabbedTextExtent": {
+        "prototype": "DWORD GetTabbedTextExtentW(\n  HDC       hdc,\n  LPCWSTR   lpString,\n  int       chCount,\n  int       nTabPositions,\n  const INT *lpnTabStopPositions\n);",
+        "dllLibrary": "user32",
+        "comment": "The GetTabbedTextExtent function computes the width and height of a character string. If the string contains one or more tab characters, the width of the string is based upon the specified tab stops. The GetTabbedTextExtent function uses the currently selected font to compute the dimensions of the string."
     },
     "GetTempPath": {
         "prototype": "DWORD GetTempPathW(\n  DWORD  nBufferLength,\n  LPWSTR lpBuffer\n);",
@@ -1203,15 +1203,15 @@
         "dllLibrary": "user32",
         "comment": "The GetWindowRgnBox function retrieves the dimensions of the tightest bounding rectangle for the window region of a window."
     },
-    "GetWindowTextLength": {
-        "prototype": "int GetWindowTextLengthW(\n  HWND hWnd\n);",
-        "dllLibrary": "user32",
-        "comment": "Retrieves the length, in characters, of the specified window's title bar text (if the window has a title bar). If the specified window is a control, the function retrieves the length of the text within the control. However, GetWindowTextLength cannot retrieve the length of the text of an edit control in another application."
-    },
     "GetWindowText": {
         "prototype": "int GetWindowTextW(\n  HWND   hWnd,\n  LPWSTR lpString,\n  int    nMaxCount\n);",
         "dllLibrary": "user32",
         "comment": "Copies the text of the specified window's title bar (if it has one) into a buffer. If the specified window is a control, the text of the control is copied. However, GetWindowText cannot retrieve the text of a control in another application."
+    },
+    "GetWindowTextLength": {
+        "prototype": "int GetWindowTextLengthW(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the length, in characters, of the specified window's title bar text (if the window has a title bar). If the specified window is a control, the function retrieves the length of the text within the control. However, GetWindowTextLength cannot retrieve the length of the text of an edit control in another application."
     },
     "GlobalAlloc": {
         "prototype": "HGLOBAL GlobalAlloc(\n  UINT   uFlags,\n  SIZE_T dwBytes\n);",
@@ -1561,15 +1561,15 @@
         "dllLibrary": "user32",
         "comment": "Places (posts) a message in the message queue associated with the thread that created the specified window and returns without waiting for the thread to process the message."
     },
-    "PostThreadMessage": {
-        "prototype": "BOOL PostThreadMessageW(\n  DWORD  idThread,\n  UINT   Msg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
-        "dllLibrary": "user32",
-        "comment": "Posts a message to the message queue of the specified thread. It returns without waiting for the thread to process the message."
-    },
     "PostQuitMessage": {
         "prototype": "void PostQuitMessage(\n  int nExitCode\n);",
         "dllLibrary": "user32",
         "comment": "Indicates to the system that a thread has made a request to terminate (quit). It is typically used in response to a WM_DESTROY message."
+    },
+    "PostThreadMessage": {
+        "prototype": "BOOL PostThreadMessageW(\n  DWORD  idThread,\n  UINT   Msg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Posts a message to the message queue of the specified thread. It returns without waiting for the thread to process the message."
     },
     "PtInRect": {
         "prototype": "BOOL PtInRect(\n  const RECT *lprc,\n  POINT      pt\n);",
@@ -1661,11 +1661,6 @@
         "dllLibrary": "advapi32",
         "comment": "Sets the data and type of a specified value under a registry key."
     },
-    "RemoveDirectory": {
-        "prototype": "BOOL RemoveDirectoryW(\n  LPCWSTR lpPathName\n);",
-        "dllLibrary": "kernel32",
-        "comment": "Deletes an existing empty directory."
-    },
     "ReleaseActCtx": {
         "prototype": "void ReleaseActCtx(\n  HANDLE hActCtx\n);",
         "dllLibrary": "kernel32",
@@ -1675,6 +1670,11 @@
         "prototype": "int ReleaseDC(\n  HWND hWnd,\n  HDC  hDC\n);",
         "dllLibrary": "user32",
         "comment": "The ReleaseDC function releases a device context (DC), freeing it for use by other applications. The effect of the ReleaseDC function depends on the type of DC. It frees only common and window DCs. It has no effect on class or private DCs."
+    },
+    "RemoveDirectory": {
+        "prototype": "BOOL RemoveDirectoryW(\n  LPCWSTR lpPathName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Deletes an existing empty directory."
     },
     "ReplaceText": {
         "prototype": "HWND ReplaceTextW(\n  LPFINDREPLACEW Arg1\n);",
@@ -1713,17 +1713,17 @@
         "category": "winrt",
         "minimumWindowsVersion": "WIN8"
     },
+    "RoundRect": {
+        "prototype": "BOOL RoundRect(\n  HDC hdc,\n  int left,\n  int top,\n  int right,\n  int bottom,\n  int width,\n  int height\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The RoundRect function draws a rectangle with rounded corners. The rectangle is outlined by using the current pen and filled by using the current brush."
+    },
     "RoUninitialize": {
         "prototype": "void RoUninitialize();",
         "apiSet": "api-ms-win-core-winrt-l1-1-0",
         "comment": "Closes the Windows Runtime on the current thread.",
         "category": "winrt",
         "minimumWindowsVersion": "WIN8"
-    },
-    "RoundRect": {
-        "prototype": "BOOL RoundRect(\n  HDC hdc,\n  int left,\n  int top,\n  int right,\n  int bottom,\n  int width,\n  int height\n);",
-        "dllLibrary": "gdi32",
-        "comment": "The RoundRect function draws a rectangle with rounded corners. The rectangle is outlined by using the current pen and filled by using the current brush."
     },
     "SaveCurrentMonitorSettings": {
         "prototype": "_BOOL SaveCurrentMonitorSettings(\n  HANDLE hMonitor\n);",
@@ -1995,25 +1995,25 @@
         "dllLibrary": "user32",
         "comment": "Changes the text of the specified window's title bar (if it has one). If the specified window is a control, the text of the control is changed. However, SetWindowText cannot change the text of a control in another application."
     },
+    "SHCreateItemFromParsingName": {
+        "prototype": "SHSTDAPI SHCreateItemFromParsingName(\n  PCWSTR   pszPath,\n  IBindCtx *pbc,\n  REFIID   riid,\n  void     **ppv\n);",
+        "dllLibrary": "shell32",
+        "comment": "Creates and initializes a Shell item object from a parsing name."
+    },
     "ShellAbout": {
         "prototype": "INT ShellAboutW(\n  HWND    hWnd,\n  LPCWSTR szApp,\n  LPCWSTR szOtherStuff,\n  HICON   hIcon\n);",
         "dllLibrary": "shell32",
         "comment": "Displays a ShellAbout dialog box."
-    },
-    "ShellExecuteEx": {
-        "prototype": "BOOL ShellExecuteExW(\n  SHELLEXECUTEINFOW *pExecInfo\n);",
-        "dllLibrary": "shell32",
-        "comment": "Performs an operation on a specified file."
     },
     "ShellExecute": {
         "prototype": "HINSTANCE ShellExecuteW(\n  HWND    hwnd,\n  LPCWSTR lpOperation,\n  LPCWSTR lpFile,\n  LPCWSTR lpParameters,\n  LPCWSTR lpDirectory,\n  INT     nShowCmd\n);",
         "dllLibrary": "shell32",
         "comment": "Performs an operation on a specified file."
     },
-    "SHCreateItemFromParsingName": {
-        "prototype": "SHSTDAPI SHCreateItemFromParsingName(\n  PCWSTR   pszPath,\n  IBindCtx *pbc,\n  REFIID   riid,\n  void     **ppv\n);",
+    "ShellExecuteEx": {
+        "prototype": "BOOL ShellExecuteExW(\n  SHELLEXECUTEINFOW *pExecInfo\n);",
         "dllLibrary": "shell32",
-        "comment": "Creates and initializes a Shell item object from a parsing name."
+        "comment": "Performs an operation on a specified file."
     },
     "SHEmptyRecycleBin": {
         "prototype": "SHSTDAPI SHEmptyRecycleBinW(\n  HWND    hwnd,\n  LPCWSTR pszRootPath,\n  DWORD   dwFlags\n);",
