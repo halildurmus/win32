@@ -22,3 +22,6 @@ build/
 
 # This file is how Github maps docs to the site
 !doc/api/CNAME
+
+# This file varies from machine to machine
+.vscode/c_cpp_properties.json

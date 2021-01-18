@@ -56,16 +56,19 @@ class FileOpenDialog extends IFileOpenDialog {
   FileOpenDialog(Pointer<COMObject> ptr) : super(ptr);
 
   factory FileOpenDialog.createInstance() {
-    final ptr = COMObject.allocate().addressOf;
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..setGUID(CLSID_FileOpenDialog);
+    final iid = calloc<GUID>()..setGUID(IID_IFileOpenDialog);
 
-    final hr = CoCreateInstance(
-        GUID.fromString(CLSID_FileOpenDialog).addressOf,
-        nullptr,
-        CLSCTX_ALL,
-        GUID.fromString(IID_IFileOpenDialog).addressOf,
-        ptr.cast());
+    try {
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
 
-    if (FAILED(hr)) throw WindowsException(hr);
-    return FileOpenDialog(ptr);
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return FileOpenDialog(ptr);
+    } finally {
+      free(clsid);
+      free(iid);
+    }
   }
 }

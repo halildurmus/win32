@@ -21,7 +21,7 @@ class WinmdStore {
   static bool isInitialized = false;
 
   static void initialize() {
-    final dispenserObject = allocate<IntPtr>();
+    final dispenserObject = allocate<Pointer>();
 
     final hr = MetaDataGetDispenser(convertToCLSID(CLSID_CorMetaDataDispenser),
         convertToIID(IID_IMetaDataDispenser), dispenserObject);
@@ -66,7 +66,7 @@ class WinmdStore {
     final hstrTypeName = convertToHString(typeName);
 
     final hstrMetaDataFilePath = allocate<IntPtr>();
-    final spMetaDataImport = allocate<IntPtr>();
+    final spMetaDataImport = allocate<Pointer>();
     final typeDef = allocate<Uint32>();
 
     try {
@@ -74,7 +74,7 @@ class WinmdStore {
       // used for classes that are part of the Windows Runtime itself (i.e. not
       // third-party types).
       final hr = RoGetMetaDataFile(hstrTypeName.value, nullptr,
-          hstrMetaDataFilePath.address, spMetaDataImport, typeDef);
+          hstrMetaDataFilePath, spMetaDataImport, typeDef);
       if (SUCCEEDED(hr)) {
         final filePath = convertFromHString(hstrMetaDataFilePath);
         return getScopeForFile(filePath);

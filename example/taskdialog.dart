@@ -60,7 +60,6 @@ void showSimpleTaskDialog() {
 
 // Broken until https://github.com/dart-lang/sdk/issues/38158 is fixed.
 void showCustomTaskDialog() {
-  final config = TASKDIALOGCONFIG.allocate();
   print(sizeOf<TASKDIALOGCONFIG>());
   final buttonSelected = allocate<Int32>();
 
@@ -76,28 +75,27 @@ void showCustomTaskDialog() {
         'Take the red pill\nYou stay in Wonderland, and I show you how deep '
         'the rabbit hole goes.');
 
-  config.pszWindowTitle = TEXT('TaskDialogIndirect Sample');
-  config.pszMainInstruction = TEXT('Which pill will you take?');
-  config.pszContent =
-      TEXT('This is your last chance. There is no turning back.');
-  config.hMainIcon = TD_WARNING_ICON.address;
-
-  config.pszCollapsedControlText = TEXT('See more details.');
-  config.pszExpandedControlText = TEXT(
-      'In The Matrix, the main character Neo is offered the choice between a '
-      'red pill and a blue pill by rebel leader Morpheus. The red pill represents '
-      'an uncertain future: it would free him from the enslaving control of the '
-      'machine-generated dream world and allow him to escape into the real world, '
-      'but living the "truth of reality" is harsher and more difficult. On the '
-      'other hand, the blue pill represents a beautiful prison: it would lead him '
-      'back to ignorance, living in confined comfort without want or fear within '
-      'the simulated reality of the Matrix.');
-  config.cButtons = 2;
-  config.pButtons = buttons;
+  final config = calloc<TASKDIALOGCONFIG>()
+    ..ref.pszWindowTitle = TEXT('TaskDialogIndirect Sample')
+    ..ref.pszMainInstruction = TEXT('Which pill will you take?')
+    ..ref.pszContent =
+        TEXT('This is your last chance. There is no turning back.')
+    ..ref.hMainIcon = TD_WARNING_ICON.address
+    ..ref.pszCollapsedControlText = TEXT('See more details.')
+    ..ref.pszExpandedControlText = TEXT(
+        'In The Matrix, the main character Neo is offered the choice between a '
+        'red pill and a blue pill by rebel leader Morpheus. The red pill represents '
+        'an uncertain future: it would free him from the enslaving control of the '
+        'machine-generated dream world and allow him to escape into the real world, '
+        'but living the "truth of reality" is harsher and more difficult. On the '
+        'other hand, the blue pill represents a beautiful prison: it would lead him '
+        'back to ignorance, living in confined comfort without want or fear within '
+        'the simulated reality of the Matrix.')
+    ..ref.cButtons = 2
+    ..ref.pButtons = buttons;
 
   print('Here we go.');
-  final hr =
-      TaskDialogIndirect(config.addressOf, buttonSelected, nullptr, nullptr);
+  final hr = TaskDialogIndirect(config, buttonSelected, nullptr, nullptr);
 
   if (SUCCEEDED(hr)) {
     if (buttonSelected.value == 100) {

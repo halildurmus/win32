@@ -7,7 +7,7 @@ files:
 
 | Folder        | Description                                                 |
 |---------------|-------------------------------------------------------------|
-| win32         | Reads a CSV file containing metadata for classic C-style    |
+| win32         | Reads a JSON file containing metadata for classic C-style    |
 |               | APIs, and generates both the Dart files (kernel32.dart      |
 |               | etc.) and a set of basic verification tests for them.       |
 |               |                                                             |

@@ -7,11 +7,13 @@
 
 import 'dart:io';
 
-import 'new_apis.dart';
-import 'shared.dart';
+import 'signature.dart';
 import 'struct_sizes.dart';
+import 'win32api.dart';
+import 'win32types.dart';
 
-void generateTests() {
+void generateTests(Win32API apiSet) {
+  final prototypes = apiSet.prototypes;
   var tests = 0;
   final writer = File('test/api_test.dart').openSync(mode: FileMode.write);
 
@@ -41,26 +43,26 @@ void main() {
   final libraries = prototypes.values.map((e) => e.dllLibrary).toSet().toList();
 
   for (final library in libraries) {
+    // API set names aren't legal Dart identifiers, so we rename them
+    final libraryDartName = library.replaceAll('-', '_');
+
     writer.writeStringSync("group('Test $library functions', () {\n");
 
-    // TaskDialog* is a special case since it requires comctl32.dll v6. This is
-    // not available to dart test because of
-    // https://github.com/dart-lang/sdk/issues/42598
-    final libProtos = prototypes.values
-        .where((td) => td.dllLibrary == library)
-        .where((td) => !td.neutralApiName.startsWith('TaskDialog'));
+    final libProtos = prototypes.values.where((td) => td.dllLibrary == library);
+    // .where((td) => !td.exportName.startsWith('TaskDialog'));
 
     for (final proto in libProtos) {
-      final apiName = prototypes.keys.firstWhere(
-          (k) => prototypes[k]!.neutralApiName == proto.neutralApiName);
-      final win32Func = win32APIs.where((api) => api.name == apiName).first;
+      if (proto.test == false) continue;
+
+      final win32Func = proto.signature;
+
       final returnFFIType = ffiFromWin32(win32Func.returnType);
       final returnDartType = dartFromFFI(returnFFIType);
 
       final test = '''
       test('Can instantiate ${win32Func.nameWithoutEncoding}', () {
-        final $library = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');
-        final ${win32Func.nameWithoutEncoding} = $library.lookupFunction<\n
+        final $libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');
+        final ${win32Func.nameWithoutEncoding} = $libraryDartName.lookupFunction<\n
           $returnFFIType Function(
             ${win32Func.params.map((param) {
         final convertedParams = win32Func.convertParamType(param);
@@ -72,13 +74,13 @@ void main() {
         final dartType = dartFromFFI(convertedParams.first);
         return '$dartType ${convertedParams.last}';
       }).join(', ')})>
-          ('$apiName');
-        expect(${proto.neutralApiName}, isA<Function>());
+          ('${win32Func.name}');
+        expect(${win32Func.nameWithoutEncoding}, isA<Function>());
       });''';
 
-      if (versionedAPIs.keys.contains(apiName)) {
+      if (proto.minimumWindowsVersion > 0) {
         writer.writeStringSync('''
-        if (windowsBuildNumber >= ${versionedAPIs[apiName]}) {
+        if (windowsBuildNumber >= ${proto.minimumWindowsVersion}) {
           $test
         }''');
       } else {
@@ -138,7 +140,8 @@ void main() {
 }
 
 void main() {
-  loadCsv('tool/win32/win32api.csv');
-  generateTests();
+  final apiSet = Win32API('tool/win32/win32api.json');
+
+  generateTests(apiSet);
   generateStructSizeTests();
 }

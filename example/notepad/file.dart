@@ -17,31 +17,17 @@ class NotepadFile {
   /// The filename and extension of the current working file (e.g. `myfile.txt`)
   String title;
 
-  late OPENFILENAME ofn;
+  late Pointer<OPENFILENAME> ofn;
 
   NotepadFile(int hwnd, this.path, this.title) {
-    ofn = OPENFILENAME.allocate();
-    ofn.lStructSize = sizeOf<OPENFILENAME>();
-    ofn.hwndOwner = hwnd;
-    ofn.hInstance = NULL;
-    ofn.lpstrFilter = TEXT(
-        'Text Files (*.txt)\u{0}*.txt\u{0}All Files (*.*)\u{0}*.*\u{0}\u{0}');
-    ofn.lpstrCustomFilter = nullptr;
-    ofn.nMaxCustFilter = 0;
-    ofn.nFilterIndex = 0;
-    ofn.lpstrFile = nullptr; // Set in Open and Close functions
-    ofn.nMaxFile = MAX_PATH;
-    ofn.lpstrFileTitle = nullptr; // Set in Open and Close functions
-    ofn.nMaxFileTitle = MAX_PATH;
-    ofn.lpstrInitialDir = nullptr;
-    ofn.lpstrTitle = nullptr;
-    ofn.Flags = 0; // Set in Open and Close functions
-    ofn.nFileOffset = 0;
-    ofn.nFileExtension = 0;
-    ofn.lpstrDefExt = TEXT('txt');
-    ofn.lCustData = 0;
-    ofn.lpfnHook = nullptr;
-    ofn.lpTemplateName = nullptr;
+    ofn = calloc<OPENFILENAME>()
+      ..ref.lStructSize = sizeOf<OPENFILENAME>()
+      ..ref.hwndOwner = hwnd
+      ..ref.lpstrFilter = TEXT(
+          'Text Files (*.txt)\u{0}*.txt\u{0}All Files (*.*)\u{0}*.*\u{0}\u{0}')
+      ..ref.nMaxFile = MAX_PATH
+      ..ref.nMaxFileTitle = MAX_PATH
+      ..ref.lpstrDefExt = TEXT('txt');
   }
 
   /// Shows open dialog.
@@ -56,16 +42,16 @@ class NotepadFile {
         ? Utf16String.fromString(title)
         : Utf16String(MAX_PATH);
 
-    ofn.lpstrFile = strFile.pointer;
-    ofn.lpstrFileTitle = strFileTitle.pointer;
-    ofn.Flags = OFN_HIDEREADONLY | OFN_CREATEPROMPT;
+    ofn.ref.lpstrFile = strFile.pointer;
+    ofn.ref.lpstrFileTitle = strFileTitle.pointer;
+    ofn.ref.Flags = OFN_HIDEREADONLY | OFN_CREATEPROMPT;
 
-    final result = GetOpenFileName(ofn.addressOf);
+    final result = GetOpenFileName(ofn);
     if (result == 0) {
       return false;
     } else {
-      path = ofn.lpstrFile.unpackString(MAX_PATH);
-      title = ofn.lpstrFileTitle.unpackString(MAX_PATH);
+      path = ofn.ref.lpstrFile.unpackString(MAX_PATH);
+      title = ofn.ref.lpstrFileTitle.unpackString(MAX_PATH);
       return true;
     }
   }
@@ -83,16 +69,16 @@ class NotepadFile {
         ? Utf16String.fromString(title)
         : Utf16String(MAX_PATH);
 
-    ofn.lpstrFile = strFile.pointer;
-    ofn.lpstrFileTitle = strFileTitle.pointer;
-    ofn.Flags = OFN_OVERWRITEPROMPT;
+    ofn.ref.lpstrFile = strFile.pointer;
+    ofn.ref.lpstrFileTitle = strFileTitle.pointer;
+    ofn.ref.Flags = OFN_OVERWRITEPROMPT;
 
-    final result = GetSaveFileName(ofn.addressOf);
+    final result = GetSaveFileName(ofn);
     if (result == 0) {
       return false;
     } else {
-      path = ofn.lpstrFile.unpackString(MAX_PATH);
-      title = ofn.lpstrFileTitle.unpackString(MAX_PATH);
+      path = ofn.ref.lpstrFile.unpackString(MAX_PATH);
+      title = ofn.ref.lpstrFileTitle.unpackString(MAX_PATH);
       return true;
     }
   }

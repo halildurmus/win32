@@ -14,39 +14,51 @@ String toHex(int value32) =>
     '0x${value32.toUnsigned(32).toRadixString(16).padLeft(8, '0')}';
 
 void findBluetoothDevices(int btRadioHandle) {
-  final params = BLUETOOTH_DEVICE_SEARCH_PARAMS.allocate();
-  final info = BLUETOOTH_DEVICE_INFO.allocate();
+  final params = calloc<BLUETOOTH_DEVICE_SEARCH_PARAMS>()
+    ..ref.dwSize = sizeOf<BLUETOOTH_DEVICE_SEARCH_PARAMS>();
+  final info = calloc<BLUETOOTH_DEVICE_INFO>();
 
-  final firstDeviceHandle =
-      BluetoothFindFirstDevice(params.addressOf, info.addressOf);
+  try {
+    final firstDeviceHandle = BluetoothFindFirstDevice(params, info);
 
-  if (firstDeviceHandle != NULL) {
-    print(info.szName);
-    BluetoothFindDeviceClose(firstDeviceHandle);
-  } else {
-    print('No devices found.');
+    if (firstDeviceHandle != NULL) {
+      print(info.szName);
+      BluetoothFindDeviceClose(firstDeviceHandle);
+    } else {
+      print('No devices found.');
+    }
+  } finally {
+    free(params);
+    free(info);
   }
-
-  free(params.addressOf);
-  free(info.addressOf);
 }
 
 void main() {
-  final params = BLUETOOTH_FIND_RADIO_PARAMS.allocate();
-  final btRadioHandlePtr = allocate<IntPtr>();
+  final findRadioParams = calloc<BLUETOOTH_FIND_RADIO_PARAMS>()
+    ..ref.dwSize = sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>();
+  final radioInfo = calloc<BLUETOOTH_RADIO_INFO>()
+    ..ref.dwSize = sizeOf<BLUETOOTH_RADIO_INFO>();
+  final hRadio = allocate<IntPtr>();
 
-  final btFindRadioHandle =
-      BluetoothFindFirstRadio(params.addressOf, btRadioHandlePtr);
+  try {
+    final hEnum = BluetoothFindFirstRadio(findRadioParams, hRadio);
+    if (hEnum != NULL) {
+      print('Found a radio with handle: ${toHex(hRadio.value)}');
 
-  if (btFindRadioHandle != NULL) {
-    print('Handle: ${toHex(btRadioHandlePtr.value)}');
+      final res = BluetoothGetRadioInfo(hRadio.value, radioInfo);
+      if (res == ERROR_SUCCESS) {
+        print('Got radio info.\n');
+        print('Radio name: ${radioInfo.szName}');
+      }
 
-    findBluetoothDevices(btRadioHandlePtr.value);
-    BluetoothFindRadioClose(btRadioHandlePtr.value);
-  } else {
-    print('No Bluetooth radios found.');
+      findBluetoothDevices(hRadio.value);
+      BluetoothFindRadioClose(hRadio.value);
+    } else {
+      print('No Bluetooth radios found.');
+    }
+  } finally {
+    free(findRadioParams);
+    free(radioInfo);
+    free(hRadio);
   }
-
-  free(params.addressOf);
-  free(btRadioHandlePtr);
 }

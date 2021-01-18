@@ -14,12 +14,12 @@ import 'package:win32/win32.dart';
 void main() {
   // Open the device by specifying the device and filename.
   // MCI will attempt to choose the MIDI mapper as the output port.
-  final mciOpenParams = MCI_OPEN_PARMS.allocate()
-    ..lpstrDeviceType = TEXT('sequencer')
-    ..lpstrElementName = TEXT(r'c:\Windows\Media\flourish.mid');
+  final mciOpenParams = calloc<MCI_OPEN_PARMS>()
+    ..ref.lpstrDeviceType = TEXT('sequencer')
+    ..ref.lpstrElementName = TEXT(r'c:\Windows\Media\flourish.mid');
 
-  var dwReturn = mciSendCommand(NULL, MCI_OPEN,
-      MCI_OPEN_TYPE | MCI_OPEN_ELEMENT, mciOpenParams.addressOf.address);
+  var dwReturn = mciSendCommand(
+      NULL, MCI_OPEN, MCI_OPEN_TYPE | MCI_OPEN_ELEMENT, mciOpenParams.address);
 
   if (dwReturn != 0) {
     // Don't close it; just return error.
@@ -28,14 +28,14 @@ void main() {
   }
 
   // The device opened successfully; get the device ID.
-  final deviceID = mciOpenParams.wDeviceID;
+  final deviceID = mciOpenParams.ref.wDeviceID;
 
   // Check if the output port is the MIDI mapper.
-  final mciStatusParams = MCI_STATUS_PARMS.allocate()
-    ..dwItem = MCI_SEQ_STATUS_PORT;
+  final mciStatusParams = calloc<MCI_STATUS_PARMS>()
+    ..ref.dwItem = MCI_SEQ_STATUS_PORT;
 
   dwReturn = mciSendCommand(
-      deviceID, MCI_STATUS, MCI_STATUS_ITEM, mciStatusParams.addressOf.address);
+      deviceID, MCI_STATUS, MCI_STATUS_ITEM, mciStatusParams.address);
 
   if (dwReturn != 0) {
     print('Status command failed.');
@@ -45,7 +45,7 @@ void main() {
 
   // The output port is not the MIDI mapper.
   // Ask if the user wants to continue.
-  if (LOWORD(mciStatusParams.dwReturn) != MIDI_MAPPER) {
+  if (LOWORD(mciStatusParams.ref.dwReturn) != MIDI_MAPPER) {
     final warningMessage = TEXT('The MIDI mapper is not available. Continue?');
     if (MessageBox(NULL, warningMessage, TEXT(''), MB_YESNO) == IDNO) {
       // User does not want to continue. Not an error;
@@ -57,9 +57,9 @@ void main() {
 
   // Begin playback. The command will not return until playback has finished,
   // unless Ctrl+Break is pressed.
-  final mciPlayParams = MCI_PLAY_PARMS.allocate();
-  dwReturn = mciSendCommand(
-      deviceID, MCI_PLAY, MCI_WAIT, mciPlayParams.addressOf.address);
+  final mciPlayParams = calloc<MCI_PLAY_PARMS>();
+  dwReturn =
+      mciSendCommand(deviceID, MCI_PLAY, MCI_WAIT, mciPlayParams.address);
 
   mciSendCommand(deviceID, MCI_CLOSE, 0, NULL);
 

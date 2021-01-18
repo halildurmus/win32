@@ -19,25 +19,25 @@ void write(
   final examplePassword = utf8.encode(password) as Uint8List;
   final blob = examplePassword.allocatePointer();
 
-  final credential = CREDENTIAL.allocate()
-    ..Type = CRED_TYPE_GENERIC
-    ..TargetName = TEXT(credentialName)
-    ..Persist = CRED_PERSIST_LOCAL_MACHINE
-    ..UserName = TEXT(userName)
-    ..CredentialBlob = blob
-    ..CredentialBlobSize = examplePassword.length;
+  final credential = calloc<CREDENTIAL>()
+    ..ref.Type = CRED_TYPE_GENERIC
+    ..ref.TargetName = TEXT(credentialName)
+    ..ref.Persist = CRED_PERSIST_LOCAL_MACHINE
+    ..ref.UserName = TEXT(userName)
+    ..ref.CredentialBlob = blob
+    ..ref.CredentialBlobSize = examplePassword.length;
 
-  final result = CredWrite(credential.addressOf, 0);
+  final result = CredWrite(credential, 0);
 
   if (result != TRUE) {
     final errorCode = GetLastError();
     print('Error ($result): $errorCode');
     return;
   }
-  print('Success. (${credential.CredentialBlobSize})');
+  print('Success. (${credential.ref.CredentialBlobSize})');
 
   free(blob);
-  free(credential.addressOf);
+  free(credential);
 }
 
 void read(String credentialName) {

@@ -91,10 +91,13 @@ void main()
     printf("'TASKDIALOG_BUTTON': %zu,\n", sizeof(TASKDIALOG_BUTTON));
     printf("'DLLVERSIONINFO': %zu,\n", sizeof(DLLVERSIONINFO));
     printf("'OSVERSIONINFOW': %zu,\n", sizeof(OSVERSIONINFOW));
+    printf("'BLUETOOTH_ADDRESS': %zu,\n", sizeof(BLUETOOTH_ADDRESS));
     printf("'BLUETOOTH_DEVICE_INFO': %zu,\n", sizeof(BLUETOOTH_DEVICE_INFO));
+    printf("'BLUETOOTH_RADIO_INFO': %zu,\n", sizeof(BLUETOOTH_RADIO_INFO));
     printf("'BLUETOOTH_DEVICE_SEARCH_PARAMS': %zu,\n", sizeof(BLUETOOTH_DEVICE_SEARCH_PARAMS));
     printf("'BLUETOOTH_FIND_RADIO_PARAMS': %zu,\n", sizeof(BLUETOOTH_FIND_RADIO_PARAMS));
     printf("'BLUETOOTH_PIN_INFO': %zu,\n", sizeof(BLUETOOTH_PIN_INFO));
+    printf("'BLUETOOTH_OOB_DATA_INFO': %zu,\n", sizeof(BLUETOOTH_OOB_DATA_INFO));
     printf("'COR_FIELD_OFFSET': %zu,\n", sizeof(COR_FIELD_OFFSET));
     printf("'VS_FIXEDFILEINFO': %zu,\n", sizeof(VS_FIXEDFILEINFO));
     printf("'MCI_OPEN_PARMS': %zu,\n", sizeof(MCI_OPEN_PARMS));

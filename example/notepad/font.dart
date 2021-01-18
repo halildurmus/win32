@@ -8,54 +8,42 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 class NotepadFont {
-  LOGFONT logfont = LOGFONT.allocate();
+  final logfont = calloc<LOGFONT>();
   late int hFont;
 
   NotepadFont(int hwndEdit) {
     final hSysFont = GetStockObject(SYSTEM_FONT);
-    GetObject(hSysFont, sizeOf<LOGFONT>(), logfont.addressOf);
+    GetObject(hSysFont, sizeOf<LOGFONT>(), logfont);
 
-    hFont = CreateFontIndirect(logfont.addressOf);
+    hFont = CreateFontIndirect(logfont);
     SendMessage(hwndEdit, WM_SETFONT, hFont, 0);
   }
 
   bool notepadChooseFont(int hwnd) {
-    final cf = CHOOSEFONT.allocate();
+    final cf = calloc<CHOOSEFONT>()
+      ..ref.lStructSize = sizeOf<CHOOSEFONT>()
+      ..ref.hwndOwner = hwnd
+      ..ref.lpLogFont = logfont
+      ..ref.Flags = CF_INITTOLOGFONTSTRUCT | CF_SCREENFONTS | CF_EFFECTS;
 
-    cf.lStructSize = sizeOf<CHOOSEFONT>();
-    cf.hwndOwner = hwnd;
-    cf.hDC = NULL;
-    cf.lpLogFont = logfont.addressOf;
-    cf.iPointSize = 0;
-    cf.Flags = CF_INITTOLOGFONTSTRUCT | CF_SCREENFONTS | CF_EFFECTS;
-    cf.rgbColors = 0;
-    cf.lCustData = 0;
-    cf.lpfnHook = nullptr;
-    cf.lpTemplateName = nullptr;
-    cf.hInstance = NULL;
-    cf.lpszStyle = nullptr;
-    cf.nFontType = 0;
-    cf.nSizeMin = 0;
-    cf.nSizeMax = 0;
-
-    final result = ChooseFont(cf.addressOf);
+    final result = ChooseFont(cf);
     return result == TRUE;
   }
 
   void notepadSetFont(int hwndEdit) {
     int hFontNew;
-    final rect = RECT.allocate();
+    final rect = calloc<RECT>();
 
-    hFontNew = CreateFontIndirect(logfont.addressOf);
+    hFontNew = CreateFontIndirect(logfont);
 
     SendMessage(hwndEdit, WM_SETFONT, hFontNew, FALSE);
     DeleteObject(hFont);
     hFont = hFontNew;
 
-    GetClientRect(hwndEdit, rect.addressOf);
-    InvalidateRect(hwndEdit, rect.addressOf, TRUE);
+    GetClientRect(hwndEdit, rect);
+    InvalidateRect(hwndEdit, rect, TRUE);
 
-    free(rect.addressOf);
+    free(rect);
   }
 
   void dispose() {

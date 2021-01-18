@@ -22,7 +22,7 @@ const echoOffPrompt = 'Type any key, or q to quit: ';
 final stdin = GetStdHandle(STD_INPUT_HANDLE);
 final stdout = GetStdHandle(STD_OUTPUT_HANDLE);
 
-late CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
+late Pointer<CONSOLE_SCREEN_BUFFER_INFO> bufferInfo;
 
 /// Convert a byte array pointer into a Dart string
 String fromCString(Pointer<Uint8> buffer, int maxLength) =>
@@ -44,60 +44,61 @@ Pointer<Uint8> toCString(String buffer) {
 /// is disabled. It gets the current cursor position and resets it to the first
 /// cell of the next row.
 void newLine() {
-  GetConsoleScreenBufferInfo(stdout, bufferInfo.addressOf);
+  GetConsoleScreenBufferInfo(stdout, bufferInfo);
 
-  bufferInfo.dwCursorPosition.X = 0;
-  if (bufferInfo.dwSize.Y - 1 == bufferInfo.dwCursorPosition.Y) {
+  bufferInfo.ref.dwCursorPosition.X = 0;
+  if (bufferInfo.ref.dwSize.Y - 1 == bufferInfo.ref.dwCursorPosition.Y) {
     scrollScreenBuffer(stdout, 1);
   } else {
-    bufferInfo.dwCursorPosition.Y += 1;
+    bufferInfo.ref.dwCursorPosition.Y += 1;
   }
 
-  SetConsoleCursorPosition(stdout, bufferInfo.dwCursorPosition);
+  SetConsoleCursorPosition(stdout, bufferInfo.ref.dwCursorPosition);
 }
 
 void scrollScreenBuffer(int handle, int x) {
-  final scrollRect = SMALL_RECT.allocate();
-  scrollRect.Left = 0;
-  scrollRect.Top = 1;
-  scrollRect.Right = bufferInfo.dwSize.X - x;
-  scrollRect.Bottom = bufferInfo.dwSize.Y - x;
+  final scrollRect = calloc<SMALL_RECT>()
+    ..ref.Left = 0
+    ..ref.Top = 1
+    ..ref.Right = bufferInfo.ref.dwSize.X - x
+    ..ref.Bottom = bufferInfo.ref.dwSize.Y - x;
 
   // The destination for the scroll rectangle is one row up.
-  final coordDest = COORD.allocate();
-  coordDest.X = 0;
-  coordDest.Y = 0;
+  final coordDest = calloc<COORD>()
+    ..ref.X = 0
+    ..ref.Y = 0;
 
   final clipRect = scrollRect;
 
-  final fillChar = CHAR_INFO.allocate();
-  fillChar.Attributes = FOREGROUND_RED | FOREGROUND_INTENSITY;
-  fillChar.UnicodeChar = ' '.codeUnits.first;
+  final fillChar = calloc<CHAR_INFO>()
+    ..ref.Attributes = FOREGROUND_RED | FOREGROUND_INTENSITY
+    ..ref.UnicodeChar = ' '.codeUnits.first;
 
-  ScrollConsoleScreenBuffer(handle, scrollRect.addressOf, clipRect.addressOf,
-      coordDest, fillChar.addressOf);
+  ScrollConsoleScreenBuffer(
+      handle, scrollRect, clipRect, coordDest.ref, fillChar);
 
-  free(scrollRect.addressOf);
-  free(coordDest.addressOf);
-  free(fillChar.addressOf);
+  free(scrollRect);
+  free(coordDest);
+  free(fillChar);
 }
 
 void main() {
-  bufferInfo = CONSOLE_SCREEN_BUFFER_INFO.allocate();
-  GetConsoleScreenBufferInfo(stdout, bufferInfo.addressOf);
+  bufferInfo = calloc<CONSOLE_SCREEN_BUFFER_INFO>();
+  GetConsoleScreenBufferInfo(stdout, bufferInfo);
 
   print('Some console metrics:');
-  print('  Window dimensions LTRB: (${bufferInfo.srWindow.Left}, '
-      '${bufferInfo.srWindow.Top}, ${bufferInfo.srWindow.Right}, '
-      '${bufferInfo.srWindow.Bottom})');
-  print('  Cursor position X/Y: (${bufferInfo.dwCursorPosition.X}, '
-      '${bufferInfo.dwCursorPosition.Y})');
-  print('  Window size X/Y: (${bufferInfo.dwSize.Y}, ${bufferInfo.dwSize.Y})');
-  print('  Maximum window size X/Y: (${bufferInfo.dwMaximumWindowSize.X}, '
-      '${bufferInfo.dwMaximumWindowSize.Y})\n');
+  print('  Window dimensions LTRB: (${bufferInfo.ref.srWindow.Left}, '
+      '${bufferInfo.ref.srWindow.Top}, ${bufferInfo.ref.srWindow.Right}, '
+      '${bufferInfo.ref.srWindow.Bottom})');
+  print('  Cursor position X/Y: (${bufferInfo.ref.dwCursorPosition.X}, '
+      '${bufferInfo.ref.dwCursorPosition.Y})');
+  print(
+      '  Window size X/Y: (${bufferInfo.ref.dwSize.Y}, ${bufferInfo.ref.dwSize.Y})');
+  print('  Maximum window size X/Y: (${bufferInfo.ref.dwMaximumWindowSize.X}, '
+      '${bufferInfo.ref.dwMaximumWindowSize.Y})\n');
 
   // Set the text attributes to draw red text on black background.
-  final originalAttributes = bufferInfo.wAttributes;
+  final originalAttributes = bufferInfo.ref.wAttributes;
   SetConsoleTextAttribute(stdout, FOREGROUND_RED | FOREGROUND_INTENSITY);
 
   final cWritten = allocate<Uint32>();
@@ -158,7 +159,7 @@ void main() {
   SetConsoleMode(stdin, originalConsoleMode.value);
   SetConsoleTextAttribute(stdout, originalAttributes);
 
-  free(bufferInfo.addressOf);
+  free(bufferInfo);
   free(cWritten);
   free(buffer);
   free(cRead);

@@ -9,41 +9,42 @@ import 'package:win32/win32.dart';
 
 void main() {
   test('GUID creation', () {
-    final guid = GUID.allocate();
-    final hr = CoCreateGuid(guid.addressOf);
+    final guid = calloc<GUID>();
+    final hr = CoCreateGuid(guid);
     expect(hr, equals(S_OK));
 
-    final guid2 = GUID.fromString(guid.toString());
-    expect(guid.toString(), equals(guid2.toString()));
+    final guid2 = calloc<GUID>()..setGUID(guid.ref.toString());
+    expect(guid.ref.toString(), equals(guid2.ref.toString()));
 
-    free(guid.addressOf);
-    free(guid2.addressOf);
+    free(guid2);
+    free(guid);
   });
 
   test('GUID creation failure', () {
     // Note the rogue 'X' here
-    expect(() => GUID.fromString('{X161CA9B-9409-4A77-7327-8B8D3363C6B9}'),
+    expect(
+        () => calloc<GUID>()..setGUID('{X161CA9B-9409-4A77-7327-8B8D3363C6B9}'),
         throwsFormatException);
   });
 
   test('CLSIDFromString', () {
-    final guid = GUID.allocate();
-    final hr = CLSIDFromString(TEXT(CLSID_FileSaveDialog), guid.addressOf);
+    final guid = calloc<GUID>();
+    final hr = CLSIDFromString(TEXT(CLSID_FileSaveDialog), guid);
     expect(hr, equals(S_OK));
 
-    expect(guid.toString(), equalsIgnoringCase(CLSID_FileSaveDialog));
+    expect(guid.ref.toString(), equalsIgnoringCase(CLSID_FileSaveDialog));
 
-    free(guid.addressOf);
+    free(guid);
   });
 
   test('IIDFromString', () {
-    final guid = GUID.allocate();
-    final hr = IIDFromString(TEXT(IID_IShellItem2), guid.addressOf);
+    final guid = calloc<GUID>();
+    final hr = IIDFromString(TEXT(IID_IShellItem2), guid);
     expect(hr, equals(S_OK));
 
-    expect(guid.toString(), equalsIgnoringCase(IID_IShellItem2));
+    expect(guid.ref.toString(), equalsIgnoringCase(IID_IShellItem2));
 
-    free(guid.addressOf);
+    free(guid);
   });
 
   test('Create COM object without calling CoInitialize should fail', () {
@@ -60,16 +61,17 @@ void main() {
         nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
     expect(hr, equals(S_OK));
 
-    final ptr = COMObject.allocate().addressOf;
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..setGUID(CLSID_FileSaveDialog);
+    final iid = calloc<GUID>()..setGUID(IID_IFileSaveDialog);
 
-    hr = CoCreateInstance(
-        GUID.fromString(CLSID_FileSaveDialog).addressOf,
-        nullptr,
-        CLSCTX_ALL,
-        GUID.fromString(IID_IFileSaveDialog).addressOf,
-        ptr.cast());
+    hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
     expect(hr, equals(S_OK));
     expect(ptr.address, isNonZero);
+
+    free(iid);
+    free(clsid);
+    free(ptr);
 
     CoUninitialize();
   });
@@ -79,23 +81,28 @@ void main() {
         nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
     expect(hr, equals(S_OK));
 
-    final ptrFactory = COMObject.allocate().addressOf;
-    final ptrSaveDialog = COMObject.allocate().addressOf;
+    final ptrFactory = calloc<COMObject>();
+    final ptrSaveDialog = calloc<COMObject>();
+    final clsid = calloc<GUID>()..setGUID(CLSID_FileSaveDialog);
+    final iidClassFactory = calloc<GUID>()..setGUID(IID_IClassFactory);
+    final iidFileSaveDialog = calloc<GUID>()..setGUID(IID_IFileSaveDialog);
 
     hr = CoGetClassObject(
-        GUID.fromString(CLSID_FileSaveDialog).addressOf,
-        CLSCTX_ALL,
-        nullptr,
-        GUID.fromString(IID_IClassFactory).addressOf,
-        ptrFactory.cast());
+        clsid, CLSCTX_ALL, nullptr, iidClassFactory, ptrFactory.cast());
     expect(hr, equals(S_OK));
     expect(ptrFactory.address, isNonZero);
 
     final classFactory = IClassFactory(ptrFactory);
-    hr = classFactory.CreateInstance(nullptr,
-        GUID.fromString(IID_IFileSaveDialog).addressOf, ptrSaveDialog.cast());
+    hr = classFactory.CreateInstance(
+        nullptr, iidFileSaveDialog, ptrSaveDialog.cast());
     expect(hr, equals(S_OK));
     expect(ptrSaveDialog.address, isNonZero);
+
+    free(iidFileSaveDialog);
+    free(iidClassFactory);
+    free(clsid);
+    free(ptrSaveDialog);
+    free(ptrFactory);
 
     CoUninitialize();
   });

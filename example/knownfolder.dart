@@ -45,12 +45,12 @@ String getFolderPath() {
 
 /// Get the path for a known Windows folder, using the modern API
 String getKnownFolderPath() {
-  final knownFolderID = GUID.fromString(FOLDERID_Desktop);
+  final knownFolderID = calloc<GUID>()..setGUID(FOLDERID_Desktop);
   final pathPtrPtr = allocate<Pointer<Utf16>>();
 
   try {
-    final hr = SHGetKnownFolderPath(
-        knownFolderID.addressOf, KF_FLAG_DEFAULT, NULL, pathPtrPtr);
+    final hr =
+        SHGetKnownFolderPath(knownFolderID, KF_FLAG_DEFAULT, NULL, pathPtrPtr);
 
     if (FAILED(hr)) {
       throw WindowsException(hr);
@@ -59,7 +59,7 @@ String getKnownFolderPath() {
     final path = pathPtrPtr.value.unpackString(MAX_PATH);
     return path;
   } finally {
-    free(knownFolderID.addressOf);
+    free(knownFolderID);
     free(pathPtrPtr);
   }
 }

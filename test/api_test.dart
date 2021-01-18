@@ -28,6 +28,13 @@ void main() {
               int hActCtx, Pointer<IntPtr> lpCookie)>('ActivateActCtx');
       expect(ActivateActCtx, isA<Function>());
     });
+    test('Can instantiate AddRefActCtx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final AddRefActCtx = kernel32.lookupFunction<
+          Void Function(IntPtr hActCtx),
+          void Function(int hActCtx)>('AddRefActCtx');
+      expect(AddRefActCtx, isA<Function>());
+    });
     test('Can instantiate AllocConsole', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final AllocConsole = kernel32
@@ -57,6 +64,14 @@ void main() {
               int bDeleteExistingResources)>('BeginUpdateResourceW');
       expect(BeginUpdateResource, isA<Function>());
     });
+    test('Can instantiate CheckRemoteDebuggerPresent', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CheckRemoteDebuggerPresent = kernel32.lookupFunction<
+          Int32 Function(IntPtr hProcess, Pointer<Int32> pbDebuggerPresent),
+          int Function(int hProcess,
+              Pointer<Int32> pbDebuggerPresent)>('CheckRemoteDebuggerPresent');
+      expect(CheckRemoteDebuggerPresent, isA<Function>());
+    });
     test('Can instantiate CloseHandle', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final CloseHandle = kernel32.lookupFunction<
@@ -73,6 +88,22 @@ void main() {
         expect(ClosePseudoConsole, isA<Function>());
       });
     }
+    test('Can instantiate ContinueDebugEvent', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final ContinueDebugEvent = kernel32.lookupFunction<
+          Int32 Function(
+              Uint32 dwProcessId, Uint32 dwThreadId, Uint32 dwContinueStatus),
+          int Function(int dwProcessId, int dwThreadId,
+              int dwContinueStatus)>('ContinueDebugEvent');
+      expect(ContinueDebugEvent, isA<Function>());
+    });
+    test('Can instantiate CreateActCtx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CreateActCtx = kernel32.lookupFunction<
+          IntPtr Function(Pointer<ACTCTX> pActCtx),
+          int Function(Pointer<ACTCTX> pActCtx)>('CreateActCtxW');
+      expect(CreateActCtx, isA<Function>());
+    });
     test('Can instantiate CreateConsoleScreenBuffer', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final CreateConsoleScreenBuffer = kernel32.lookupFunction<
@@ -178,6 +209,26 @@ void main() {
           Int32 Function(Uint32 dwFlags, IntPtr ulCookie),
           int Function(int dwFlags, int ulCookie)>('DeactivateActCtx');
       expect(DeactivateActCtx, isA<Function>());
+    });
+    test('Can instantiate DebugBreak', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final DebugBreak = kernel32
+          .lookupFunction<Void Function(), void Function()>('DebugBreak');
+      expect(DebugBreak, isA<Function>());
+    });
+    test('Can instantiate DebugBreakProcess', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final DebugBreakProcess = kernel32.lookupFunction<
+          Int32 Function(IntPtr Process),
+          int Function(int Process)>('DebugBreakProcess');
+      expect(DebugBreakProcess, isA<Function>());
+    });
+    test('Can instantiate DebugSetProcessKillOnExit', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final DebugSetProcessKillOnExit = kernel32.lookupFunction<
+          Int32 Function(Int32 KillOnExit),
+          int Function(int KillOnExit)>('DebugSetProcessKillOnExit');
+      expect(DebugSetProcessKillOnExit, isA<Function>());
     });
     test('Can instantiate DeleteFile', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -451,6 +502,13 @@ void main() {
               'GetConsoleWindow');
       expect(GetConsoleWindow, isA<Function>());
     });
+    test('Can instantiate GetCurrentActCtx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetCurrentActCtx = kernel32.lookupFunction<
+          Int32 Function(Pointer<IntPtr> lphActCtx),
+          int Function(Pointer<IntPtr> lphActCtx)>('GetCurrentActCtx');
+      expect(GetCurrentActCtx, isA<Function>());
+    });
     test('Can instantiate GetCurrentProcess', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetCurrentProcess =
@@ -486,6 +544,14 @@ void main() {
           Void Function(Pointer<SYSTEMTIME> lpSystemTime),
           void Function(Pointer<SYSTEMTIME> lpSystemTime)>('GetLocalTime');
       expect(GetLocalTime, isA<Function>());
+    });
+    test('Can instantiate GetLogicalDriveStrings', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetLogicalDriveStrings = kernel32.lookupFunction<
+          Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
+          int Function(int nBufferLength,
+              Pointer<Utf16> lpBuffer)>('GetLogicalDriveStringsW');
+      expect(GetLogicalDriveStrings, isA<Function>());
     });
     test('Can instantiate GetModuleFileName', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -709,6 +775,15 @@ void main() {
           Pointer Function(int hResData)>('LockResource');
       expect(LockResource, isA<Function>());
     });
+    test('Can instantiate MoveFile', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final MoveFile = kernel32.lookupFunction<
+          Int32 Function(
+              Pointer<Utf16> lpExistingFileName, Pointer<Utf16> lpNewFileName),
+          int Function(Pointer<Utf16> lpExistingFileName,
+              Pointer<Utf16> lpNewFileName)>('MoveFileW');
+      expect(MoveFile, isA<Function>());
+    });
     test('Can instantiate OpenProcess', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final OpenProcess = kernel32.lookupFunction<
@@ -717,6 +792,13 @@ void main() {
           int Function(int dwDesiredAccess, int bInheritHandle,
               int dwProcessId)>('OpenProcess');
       expect(OpenProcess, isA<Function>());
+    });
+    test('Can instantiate OutputDebugString', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final OutputDebugString = kernel32.lookupFunction<
+          Void Function(Pointer<Utf16> lpOutputString),
+          void Function(Pointer<Utf16> lpOutputString)>('OutputDebugStringW');
+      expect(OutputDebugString, isA<Function>());
     });
     test('Can instantiate QueryDosDevice', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -800,6 +882,13 @@ void main() {
           Int32 Function(Pointer<Utf16> lpPathName),
           int Function(Pointer<Utf16> lpPathName)>('RemoveDirectoryW');
       expect(RemoveDirectory, isA<Function>());
+    });
+    test('Can instantiate ReleaseActCtx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final ReleaseActCtx = kernel32.lookupFunction<
+          Void Function(IntPtr hActCtx),
+          void Function(int hActCtx)>('ReleaseActCtx');
+      expect(ReleaseActCtx, isA<Function>());
     });
     if (windowsBuildNumber >= 17763) {
       test('Can instantiate ResizePseudoConsole', () {
@@ -2848,6 +2937,44 @@ void main() {
               int authenticationRequirement)>('BluetoothAuthenticateDeviceEx');
       expect(BluetoothAuthenticateDeviceEx, isA<Function>());
     });
+    test('Can instantiate BluetoothDisplayDeviceProperties', () {
+      final bthprops = DynamicLibrary.open('bthprops.cpl');
+      final BluetoothDisplayDeviceProperties = bthprops.lookupFunction<
+              Int32 Function(
+                  IntPtr hwndParent, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
+              int Function(
+                  int hwndParent, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)>(
+          'BluetoothDisplayDeviceProperties');
+      expect(BluetoothDisplayDeviceProperties, isA<Function>());
+    });
+    test('Can instantiate BluetoothEnableDiscovery', () {
+      final bthprops = DynamicLibrary.open('bthprops.cpl');
+      final BluetoothEnableDiscovery = bthprops.lookupFunction<
+          Int32 Function(IntPtr hRadio, Int32 fEnabled),
+          int Function(int hRadio, int fEnabled)>('BluetoothEnableDiscovery');
+      expect(BluetoothEnableDiscovery, isA<Function>());
+    });
+    test('Can instantiate BluetoothEnableIncomingConnections', () {
+      final bthprops = DynamicLibrary.open('bthprops.cpl');
+      final BluetoothEnableIncomingConnections = bthprops.lookupFunction<
+          Int32 Function(IntPtr hRadio, Int32 fEnabled),
+          int Function(
+              int hRadio, int fEnabled)>('BluetoothEnableIncomingConnections');
+      expect(BluetoothEnableIncomingConnections, isA<Function>());
+    });
+    test('Can instantiate BluetoothEnumerateInstalledServices', () {
+      final bthprops = DynamicLibrary.open('bthprops.cpl');
+      final BluetoothEnumerateInstalledServices = bthprops.lookupFunction<
+          Uint32 Function(IntPtr hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
+              Pointer<Uint32> pcServiceInout, Pointer<GUID> pGuidServices),
+          int Function(
+              int hRadio,
+              Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
+              Pointer<Uint32> pcServiceInout,
+              Pointer<GUID>
+                  pGuidServices)>('BluetoothEnumerateInstalledServices');
+      expect(BluetoothEnumerateInstalledServices, isA<Function>());
+    });
     test('Can instantiate BluetoothFindDeviceClose', () {
       final bthprops = DynamicLibrary.open('bthprops.cpl');
       final BluetoothFindDeviceClose = bthprops.lookupFunction<
@@ -2897,6 +3024,16 @@ void main() {
           int Function(int hFind)>('BluetoothFindRadioClose');
       expect(BluetoothFindRadioClose, isA<Function>());
     });
+    test('Can instantiate BluetoothGetRadioInfo', () {
+      final bthprops = DynamicLibrary.open('bthprops.cpl');
+      final BluetoothGetRadioInfo = bthprops.lookupFunction<
+              Uint32 Function(
+                  IntPtr hRadio, Pointer<BLUETOOTH_RADIO_INFO> pRadioInfo),
+              int Function(
+                  int hRadio, Pointer<BLUETOOTH_RADIO_INFO> pRadioInfo)>(
+          'BluetoothGetRadioInfo');
+      expect(BluetoothGetRadioInfo, isA<Function>());
+    });
     test('Can instantiate BluetoothIsConnectable', () {
       final bthprops = DynamicLibrary.open('bthprops.cpl');
       final BluetoothIsConnectable = bthprops.lookupFunction<
@@ -2910,6 +3047,58 @@ void main() {
           Int32 Function(IntPtr hRadio),
           int Function(int hRadio)>('BluetoothIsDiscoverable');
       expect(BluetoothIsDiscoverable, isA<Function>());
+    });
+    test('Can instantiate BluetoothIsVersionAvailable', () {
+      final bthprops = DynamicLibrary.open('bthprops.cpl');
+      final BluetoothIsVersionAvailable = bthprops.lookupFunction<
+          Int32 Function(Uint8 MajorVersion, Uint8 MinorVersion),
+          int Function(int MajorVersion,
+              int MinorVersion)>('BluetoothIsVersionAvailable');
+      expect(BluetoothIsVersionAvailable, isA<Function>());
+    });
+    test('Can instantiate BluetoothRegisterForAuthenticationEx', () {
+      final bthprops = DynamicLibrary.open('bthprops.cpl');
+      final BluetoothRegisterForAuthenticationEx = bthprops.lookupFunction<
+          Uint32 Function(
+              Pointer<BLUETOOTH_DEVICE_INFO> pbtdiIn,
+              Pointer<IntPtr> phRegHandleOut,
+              Pointer<NativeFunction<PfnAuthenticationCallbackEx>>
+                  pfnCallbackIn,
+              Pointer pvParam),
+          int Function(
+              Pointer<BLUETOOTH_DEVICE_INFO> pbtdiIn,
+              Pointer<IntPtr> phRegHandleOut,
+              Pointer<NativeFunction<PfnAuthenticationCallbackEx>>
+                  pfnCallbackIn,
+              Pointer pvParam)>('BluetoothRegisterForAuthenticationEx');
+      expect(BluetoothRegisterForAuthenticationEx, isA<Function>());
+    });
+    test('Can instantiate BluetoothRemoveDevice', () {
+      final bthprops = DynamicLibrary.open('bthprops.cpl');
+      final BluetoothRemoveDevice = bthprops.lookupFunction<
+          Uint32 Function(Pointer<BLUETOOTH_ADDRESS> pAddress),
+          int Function(
+              Pointer<BLUETOOTH_ADDRESS> pAddress)>('BluetoothRemoveDevice');
+      expect(BluetoothRemoveDevice, isA<Function>());
+    });
+    test('Can instantiate BluetoothSetServiceState', () {
+      final bthprops = DynamicLibrary.open('bthprops.cpl');
+      final BluetoothSetServiceState = bthprops.lookupFunction<
+          Uint32 Function(IntPtr hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
+              Pointer<GUID> pGuidService, Uint32 dwServiceFlags),
+          int Function(
+              int hRadio,
+              Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
+              Pointer<GUID> pGuidService,
+              int dwServiceFlags)>('BluetoothSetServiceState');
+      expect(BluetoothSetServiceState, isA<Function>());
+    });
+    test('Can instantiate BluetoothUnregisterAuthentication', () {
+      final bthprops = DynamicLibrary.open('bthprops.cpl');
+      final BluetoothUnregisterAuthentication = bthprops.lookupFunction<
+          Int32 Function(IntPtr hRegHandle),
+          int Function(int hRegHandle)>('BluetoothUnregisterAuthentication');
+      expect(BluetoothUnregisterAuthentication, isA<Function>());
     });
     test('Can instantiate BluetoothUpdateDeviceRecord', () {
       final bthprops = DynamicLibrary.open('bthprops.cpl');
@@ -3136,6 +3325,29 @@ void main() {
           int Function(
               Pointer<CREDENTIAL> Credential, int Flags)>('CredWriteW');
       expect(CredWrite, isA<Function>());
+    });
+    test('Can instantiate DecryptFile', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final DecryptFile = advapi32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpFileName, Uint32 dwReserved),
+          int Function(
+              Pointer<Utf16> lpFileName, int dwReserved)>('DecryptFileW');
+      expect(DecryptFile, isA<Function>());
+    });
+    test('Can instantiate EncryptFile', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final EncryptFile = advapi32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpFileName),
+          int Function(Pointer<Utf16> lpFileName)>('EncryptFileW');
+      expect(EncryptFile, isA<Function>());
+    });
+    test('Can instantiate FileEncryptionStatus', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final FileEncryptionStatus = advapi32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpFileName, Pointer<Uint32> lpStatus),
+          int Function(Pointer<Utf16> lpFileName,
+              Pointer<Uint32> lpStatus)>('FileEncryptionStatusW');
+      expect(FileEncryptionStatus, isA<Function>());
     });
     test('Can instantiate InitiateShutdown', () {
       final advapi32 = DynamicLibrary.open('advapi32.dll');
@@ -3858,6 +4070,78 @@ void main() {
     });
   });
 
+  group('Test rometadata functions', () {
+    if (windowsBuildNumber >= 10586) {
+      test('Can instantiate MetaDataGetDispenser', () {
+        final rometadata = DynamicLibrary.open('rometadata.dll');
+        final MetaDataGetDispenser = rometadata.lookupFunction<
+            Int32 Function(
+                Pointer<GUID> rclsid, Pointer<GUID> riid, Pointer<Pointer> ppv),
+            int Function(Pointer<GUID> rclsid, Pointer<GUID> riid,
+                Pointer<Pointer> ppv)>('MetaDataGetDispenser');
+        expect(MetaDataGetDispenser, isA<Function>());
+      });
+    }
+  });
+
+  group('Test api-ms-win-core-winrt-l1-1-0 functions', () {
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate RoActivateInstance', () {
+        final api_ms_win_core_winrt_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-l1-1-0.dll');
+        final RoActivateInstance = api_ms_win_core_winrt_l1_1_0.lookupFunction<
+            Int32 Function(
+                IntPtr activatableClassId, Pointer<Pointer> instance),
+            int Function(int activatableClassId,
+                Pointer<Pointer> instance)>('RoActivateInstance');
+        expect(RoActivateInstance, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate RoInitialize', () {
+        final api_ms_win_core_winrt_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-l1-1-0.dll');
+        final RoInitialize = api_ms_win_core_winrt_l1_1_0.lookupFunction<
+            Int32 Function(Int32 initType),
+            int Function(int initType)>('RoInitialize');
+        expect(RoInitialize, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate RoUninitialize', () {
+        final api_ms_win_core_winrt_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-l1-1-0.dll');
+        final RoUninitialize = api_ms_win_core_winrt_l1_1_0
+            .lookupFunction<Void Function(), void Function()>('RoUninitialize');
+        expect(RoUninitialize, isA<Function>());
+      });
+    }
+  });
+
+  group('Test api-ms-win-ro-typeresolution-l1-1-0 functions', () {
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate RoGetMetaDataFile', () {
+        final api_ms_win_ro_typeresolution_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-ro-typeresolution-l1-1-0.dll');
+        final RoGetMetaDataFile =
+            api_ms_win_ro_typeresolution_l1_1_0.lookupFunction<
+                Int32 Function(
+                    IntPtr name,
+                    Pointer<IntPtr> metaDataDispenser,
+                    Pointer<IntPtr> metaDataFilePath,
+                    Pointer<Pointer> metaDataImport,
+                    Pointer<Uint32> typeDefToken),
+                int Function(
+                    int name,
+                    Pointer<IntPtr> metaDataDispenser,
+                    Pointer<IntPtr> metaDataFilePath,
+                    Pointer<Pointer> metaDataImport,
+                    Pointer<Uint32> typeDefToken)>('RoGetMetaDataFile');
+        expect(RoGetMetaDataFile, isA<Function>());
+      });
+    }
+  });
+
   group('Test oleaut32 functions', () {
     test('Can instantiate SysAllocString', () {
       final oleaut32 = DynamicLibrary.open('oleaut32.dll');
@@ -3900,5 +4184,44 @@ void main() {
           void Function(Pointer pvarg)>('VariantInit');
       expect(VariantInit, isA<Function>());
     });
+  });
+
+  group('Test api-ms-win-core-winrt-string-l1-1-0 functions', () {
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate WindowsCreateString', () {
+        final api_ms_win_core_winrt_string_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+        final WindowsCreateString =
+            api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+                Int32 Function(Pointer<Utf16> sourceString, Uint32 length,
+                    Pointer<IntPtr> string),
+                int Function(Pointer<Utf16> sourceString, int length,
+                    Pointer<IntPtr> string)>('WindowsCreateString');
+        expect(WindowsCreateString, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate WindowsDeleteString', () {
+        final api_ms_win_core_winrt_string_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+        final WindowsDeleteString =
+            api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+                Int32 Function(IntPtr string),
+                int Function(int string)>('WindowsDeleteString');
+        expect(WindowsDeleteString, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate WindowsGetStringRawBuffer', () {
+        final api_ms_win_core_winrt_string_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+        final WindowsGetStringRawBuffer =
+            api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+                Pointer<Utf16> Function(IntPtr string, Pointer<Uint32> length),
+                Pointer<Utf16> Function(int string,
+                    Pointer<Uint32> length)>('WindowsGetStringRawBuffer');
+        expect(WindowsGetStringRawBuffer, isA<Function>());
+      });
+    }
   });
 }

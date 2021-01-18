@@ -257,17 +257,20 @@ class $className extends $name {
   $className(Pointer<COMObject> ptr) : super(ptr);
 
   factory $className.createInstance() {
-    final ptr = COMObject.allocate().addressOf;
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..setGUID(CLSID_$className);
+    final iid = calloc<GUID>()..setGUID(IID_$name);
 
-    final hr = CoCreateInstance(
-        GUID.fromString(CLSID_$className).addressOf,
-        nullptr,
-        CLSCTX_ALL,
-        GUID.fromString(IID_$name).addressOf,
-        ptr.cast());
+    try {
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
 
-    if (FAILED(hr)) throw WindowsException(hr);
-    return $className(ptr);
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return $className(ptr);
+    } finally {
+      free(clsid);
+      free(iid);
+    }
   }
 }
 ''');

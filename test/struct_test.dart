@@ -119,6 +119,13 @@ void main() {
       expect(sizeOf<MONITORINFO>(), equals(40));
     }
   });
+  test('Struct PHYSICAL_MONITOR is the right size', () {
+    if (sizeOf<IntPtr>() == 8) {
+      expect(sizeOf<PHYSICAL_MONITOR>(), equals(136));
+    } else {
+      expect(sizeOf<PHYSICAL_MONITOR>(), equals(136));
+    }
+  });
   test('Struct CHOOSECOLOR is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
       expect(sizeOf<CHOOSECOLOR>(), equals(72));
@@ -392,6 +399,27 @@ void main() {
       expect(sizeOf<SYSTEMTIME>(), equals(16));
     }
   });
+  test('Struct BLUETOOTH_ADDRESS is the right size', () {
+    if (sizeOf<IntPtr>() == 8) {
+      expect(sizeOf<BLUETOOTH_ADDRESS>(), equals(8));
+    } else {
+      expect(sizeOf<BLUETOOTH_ADDRESS>(), equals(8));
+    }
+  });
+  test('Struct BLUETOOTH_RADIO_INFO is the right size', () {
+    if (sizeOf<IntPtr>() == 8) {
+      expect(sizeOf<BLUETOOTH_RADIO_INFO>(), equals(520));
+    } else {
+      expect(sizeOf<BLUETOOTH_RADIO_INFO>(), equals(520));
+    }
+  });
+  test('Struct BLUETOOTH_DEVICE_INFO is the right size', () {
+    if (sizeOf<IntPtr>() == 8) {
+      expect(sizeOf<BLUETOOTH_DEVICE_INFO>(), equals(560));
+    } else {
+      expect(sizeOf<BLUETOOTH_DEVICE_INFO>(), equals(560));
+    }
+  });
   test('Struct BLUETOOTH_DEVICE_SEARCH_PARAMS is the right size', () {
     if (sizeOf<IntPtr>() == 8) {
       expect(sizeOf<BLUETOOTH_DEVICE_SEARCH_PARAMS>(), equals(40));
@@ -404,6 +432,13 @@ void main() {
       expect(sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>(), equals(4));
     } else {
       expect(sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>(), equals(4));
+    }
+  });
+  test('Struct BLUETOOTH_OOB_DATA_INFO is the right size', () {
+    if (sizeOf<IntPtr>() == 8) {
+      expect(sizeOf<BLUETOOTH_OOB_DATA_INFO>(), equals(32));
+    } else {
+      expect(sizeOf<BLUETOOTH_OOB_DATA_INFO>(), equals(32));
     }
   });
   test('Struct COR_FIELD_OFFSET is the right size', () {
