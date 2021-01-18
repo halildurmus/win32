@@ -476,4 +476,18 @@ void main() {
       expect(sizeOf<LOGBRUSH>(), equals(12));
     }
   });
+  test('Struct NOTIFYICONDATA is the right size', () {
+    if (sizeOf<IntPtr>() == 8) {
+      expect(sizeOf<NOTIFYICONDATA>(), equals(976));
+    } else {
+      expect(sizeOf<NOTIFYICONDATA>(), equals(956));
+    }
+  });
+  test('Struct TPMPARAMS is the right size', () {
+    if (sizeOf<IntPtr>() == 8) {
+      expect(sizeOf<TPMPARAMS>(), equals(20));
+    } else {
+      expect(sizeOf<TPMPARAMS>(), equals(20));
+    }
+  });
 }

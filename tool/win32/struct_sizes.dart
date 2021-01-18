@@ -88,6 +88,8 @@ const structSize64 = {
   'CLSID': 16,
   'STATSTG': 80,
   'NLM_SIMULATED_PROFILE_INFO': 524,
+  'NOTIFYICONDATA': 976,
+  'TPMPARAMS': 20,
 };
 
 const structSize32 = {
@@ -175,6 +177,8 @@ const structSize32 = {
   'CLSID': 16,
   'STATSTG': 72,
   'NLM_SIMULATED_PROFILE_INFO': 524,
+  'NOTIFYICONDATA': 956,
+  'TPMPARAMS': 20,
 };
 
 const skipStructs = [

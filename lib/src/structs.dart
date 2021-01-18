@@ -3418,14 +3418,12 @@ class NLM_SIMULATED_PROFILE_INFO extends Opaque {}
 //   WCHAR  szInfo[256];
 //   union {
 //   UINT  uTimeout;
-//   UINT  uVersion;  // used with NIM_SETVERSION, values 0, 3 and 4
+//   UINT  uVersion;
 //   } DUMMYUNIONNAME;
 //   WCHAR  szInfoTitle[64];
 //   DWORD dwInfoFlags;
-//   #endif
 //   GUID guidItem;
 //   HICON hBalloonIcon;
-//   #endif
 // } NOTIFYICONDATAW, *PNOTIFYICONDATAW;
 
 // TODO: This struct does not yet support uVersion
@@ -3659,42 +3657,47 @@ class NOTIFYICONDATA extends Struct {
   @Uint32()
   external int uTimeout;
 
-  @Uint32()
-  external int uVersion; // used with NIM_SETVERSION, values 0, 3 and 4
+  // This field is in a UNION with uTimeout, so we define it as the same.
+  int get uVersion => uTimeout;
+  set uVersion(int value) => uTimeout = value;
 
   // WCHAR szInfoTitle[64]
-  @Uint64()
+  // Because Dart FFI has a tendency to align on IntPtr boundaries, we split this
+  // carefully.
+  @Uint32()
   external int _wchar0_szInfoTitle;
   @Uint64()
-  external int _wchar4_szInfoTitle;
+  external int _wchar2_szInfoTitle;
   @Uint64()
-  external int _wchar8_szInfoTitle;
+  external int _wchar6_szInfoTitle;
   @Uint64()
-  external int _wchar12_szInfoTitle;
+  external int _wchar10_szInfoTitle;
   @Uint64()
-  external int _wchar16_szInfoTitle;
+  external int _wchar14_szInfoTitle;
   @Uint64()
-  external int _wchar20_szInfoTitle;
+  external int _wchar18_szInfoTitle;
   @Uint64()
-  external int _wchar24_szInfoTitle;
+  external int _wchar22_szInfoTitle;
   @Uint64()
-  external int _wchar28_szInfoTitle;
+  external int _wchar26_szInfoTitle;
   @Uint64()
-  external int _wchar32_szInfoTitle;
+  external int _wchar30_szInfoTitle;
   @Uint64()
-  external int _wchar36_szInfoTitle;
+  external int _wchar34_szInfoTitle;
   @Uint64()
-  external int _wchar40_szInfoTitle;
+  external int _wchar38_szInfoTitle;
   @Uint64()
-  external int _wchar44_szInfoTitle;
+  external int _wchar42_szInfoTitle;
   @Uint64()
-  external int _wchar48_szInfoTitle;
+  external int _wchar46_szInfoTitle;
   @Uint64()
-  external int _wchar52_szInfoTitle;
+  external int _wchar50_szInfoTitle;
   @Uint64()
-  external int _wchar56_szInfoTitle;
+  external int _wchar54_szInfoTitle;
   @Uint64()
-  external int _wchar60_szInfoTitle;
+  external int _wchar58_szInfoTitle;
+  @Uint32()
+  external int _wchar62_szInfoTitle;
 
   @Uint32()
   external int dwInfoFlags;
