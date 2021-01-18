@@ -9,8 +9,8 @@ final hInst = GetModuleHandle(nullptr);
 const EVENT_QUIT = WM_APP + 2;
 const EVENT_TRAY_NOTIFY = WM_APP + 1;
 
-typedef LocalWndProc = bool Function(int hWnd,
-    int uMsg, int wParam, int lParam);
+typedef LocalWndProc = bool Function(
+    int hWnd, int uMsg, int wParam, int lParam);
 
 final wndProc = Pointer.fromFunction<WindowProc>(_appWndProc, 0);
 
@@ -25,14 +25,8 @@ void exec() {
 
 int loadDartIcon() {
   final dartIconPath = _thisPath('dart.ico');
-  return LoadImage(
-      0,
-      TEXT(dartIconPath),
-      IMAGE_ICON,
-      0,
-      0,
-      LR_LOADFROMFILE | LR_DEFAULTSIZE | LR_SHARED
-  );
+  return LoadImage(0, TEXT(dartIconPath), IMAGE_ICON, 0, 0,
+      LR_LOADFROMFILE | LR_DEFAULTSIZE | LR_SHARED);
 }
 
 final _localWndProcs = <LocalWndProc>[];
@@ -43,12 +37,13 @@ void registryWdnProc(LocalWndProc proc) => _localWndProcs.add(proc);
 void deregisterWndProc(LocalWndProc proc) {
   _localWndProcs.remove(proc);
 }
+
 int _appWndProc(int hWnd, int uMsg, int wParam, int lParam) {
   if (iterateLocalWndProcs(hWnd, uMsg, wParam, lParam)) {
     return TRUE;
   }
 
-  switch(uMsg) {
+  switch (uMsg) {
     case WM_CLOSE:
       ShowWindow(hWnd, SW_HIDE);
       return TRUE;
@@ -57,7 +52,7 @@ int _appWndProc(int hWnd, int uMsg, int wParam, int lParam) {
 }
 
 bool iterateLocalWndProcs(int hWnd, int uMsg, int wParam, int lParam) {
-  for(final proc in _localWndProcs) {
+  for (final proc in _localWndProcs) {
     final isProcProcessed = proc(hWnd, uMsg, wParam, lParam);
     if (isProcProcessed) {
       return true;
@@ -66,6 +61,5 @@ bool iterateLocalWndProcs(int hWnd, int uMsg, int wParam, int lParam) {
   return false;
 }
 
-String _thisPath(String fileName) =>  Platform.script
-    .toFilePath()
-    .replaceFirst(RegExp(r'[^\\]+$'), fileName);
+String _thisPath(String fileName) =>
+    Platform.script.toFilePath().replaceFirst(RegExp(r'[^\\]+$'), fileName);

@@ -6,7 +6,7 @@ import 'package:win32/win32.dart';
 import '_app.dart' as app;
 
 bool _windowWndProc(int hWnd, int uMsg, int wParam, int lParam) {
-  switch(uMsg) {
+  switch (uMsg) {
     case WM_CLOSE:
       ShowWindow(hWnd, SW_HIDE);
       return true;
@@ -36,14 +36,13 @@ int createHidden() {
 
 String _regWinClass() {
   const windowClass = 'Tray_Callback_Window';
-  final pWndClass = calloc<WNDCLASS>();
-  final wndClass = pWndClass.ref;
-  wndClass.style = CS_HREDRAW | CS_VREDRAW;
-  wndClass.lpfnWndProc = app.wndProc;
-  wndClass.hInstance = app.hInst;
-  wndClass.hIcon = app.loadDartIcon();
-  wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-  wndClass.lpszClassName = TEXT(windowClass);
+  final pWndClass = calloc<WNDCLASS>()
+    ..ref.style = CS_HREDRAW | CS_VREDRAW
+    ..ref.lpfnWndProc = app.wndProc
+    ..ref.hInstance = app.hInst
+    ..ref.hIcon = app.loadDartIcon()
+    ..ref.hCursor = LoadCursor(NULL, IDC_ARROW)
+    ..ref.lpszClassName = TEXT(windowClass);
   RegisterClass(pWndClass);
   return windowClass;
 }

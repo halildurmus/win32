@@ -9,4 +9,3 @@ void main() {
   app.registryWdnProc(menu.wndProc);
   app.exec();
 }
-

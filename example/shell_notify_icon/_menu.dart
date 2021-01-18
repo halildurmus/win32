@@ -12,10 +12,8 @@ void show({required int hWndParent}) {
   final hMenu = _buildMenu();
 
   SetForegroundWindow(hWndParent);
-  TrackPopupMenuEx(hMenu,
-      _contextMenuFlags,
-      mousePos.x, mousePos.y,
-      hWndParent, nullptr);
+  TrackPopupMenuEx(
+      hMenu, _contextMenuFlags, mousePos.x, mousePos.y, hWndParent, nullptr);
 
   DestroyMenu(hMenu);
 }
@@ -52,7 +50,7 @@ Point<int> _currentMousePos() {
   return result;
 }
 
-int get _contextMenuFlags  {
+int get _contextMenuFlags {
   var uFlags = TPM_RIGHTBUTTON;
   if (GetSystemMetrics(SM_MENUDROPALIGNMENT) != 0) {
     uFlags |= TPM_RIGHTALIGN;

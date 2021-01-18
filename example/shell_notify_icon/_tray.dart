@@ -7,16 +7,14 @@ import '_menu.dart' as menu;
 
 final _nid = calloc<NOTIFYICONDATA>()..ref.cbSize = sizeOf<NOTIFYICONDATA>();
 
-bool _trayWndProc(int hWnd, int msg, int wParam, int lParam)  {
+bool _trayWndProc(int hWnd, int msg, int wParam, int lParam) {
   final hWnd = _nid.ref.hWnd;
   switch (msg) {
     case app.EVENT_TRAY_NOTIFY:
       final trayMsg = _fixNotifyDataToVersion4(LOWORD(lParam));
       switch (trayMsg) {
         case NIN_SELECT:
-          ShowWindow(hWnd, IsWindowVisible(hWnd) == 1
-              ? SW_HIDE
-              : SW_SHOW);
+          ShowWindow(hWnd, IsWindowVisible(hWnd) == 1 ? SW_HIDE : SW_SHOW);
           SetForegroundWindow(hWnd);
           return true;
 
@@ -38,9 +36,8 @@ void addIcon({required int hWndParent}) {
 
   Shell_NotifyIcon(NIM_ADD, _nid);
 
-  // TODO: uVersion does not yet support. See NOTIFYICONDATA declaration
-  // nid.uVersion = 4;
-  // Shell_NotifyIcon(NIM_SETVERSION, nid.addressOf);
+  nid.uVersion = 4;
+  Shell_NotifyIcon(NIM_SETVERSION, _nid);
 
   app.registryWdnProc(_trayWndProc);
 }
@@ -52,16 +49,25 @@ void removeIcon() {
 }
 
 int _fixNotifyDataToVersion4(int msg) {
-  switch(msg) {
-    case 521: return WM_MBUTTONDBLCLK;
-    case 520: return WM_MBUTTONUP;
-    case 519: return WM_MBUTTONDOWN;
-    case 517: return WM_CONTEXTMENU;
-    case 516: return WM_RBUTTONDOWN;
-    case 515: return WM_LBUTTONDBLCLK;
-    case 514: return NIN_SELECT;
-    case 513: return WM_LBUTTONDOWN;
-    case 512: return WM_MOUSEMOVE;
+  switch (msg) {
+    case 521:
+      return WM_MBUTTONDBLCLK;
+    case 520:
+      return WM_MBUTTONUP;
+    case 519:
+      return WM_MBUTTONDOWN;
+    case 517:
+      return WM_CONTEXTMENU;
+    case 516:
+      return WM_RBUTTONDOWN;
+    case 515:
+      return WM_LBUTTONDBLCLK;
+    case 514:
+      return NIN_SELECT;
+    case 513:
+      return WM_LBUTTONDOWN;
+    case 512:
+      return WM_MOUSEMOVE;
   }
   return msg;
 }
