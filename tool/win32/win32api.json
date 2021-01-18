@@ -199,6 +199,11 @@
         "dllLibrary": "gdi32",
         "comment": "The CancelDC function cancels any pending operation on the specified device context (DC)."
     },
+    "CheckRemoteDebuggerPresent": {
+        "prototype": "BOOL CheckRemoteDebuggerPresent(\n        HANDLE hProcess,\n        PBOOL  pbDebuggerPresent\n      );",
+        "dllLibrary": "kernel32",
+        "comment": "Determines whether the specified process is being debugged."
+    },
     "ChildWindowFromPoint": {
         "prototype": "HWND ChildWindowFromPoint(\n  HWND  hWndParent,\n  POINT Point\n);",
         "dllLibrary": "user32",
@@ -279,6 +284,11 @@
         "prototype": "HRESULT CoInitializeSecurity(\n  PSECURITY_DESCRIPTOR        pSecDesc,\n  LONG                        cAuthSvc,\n  SOLE_AUTHENTICATION_SERVICE *asAuthSvc,\n  void                        *pReserved1,\n  DWORD                       dwAuthnLevel,\n  DWORD                       dwImpLevel,\n  void                        *pAuthList,\n  DWORD                       dwCapabilities,\n  void                        *pReserved3\n);",
         "dllLibrary": "ole32",
         "comment": "Registers security and sets the default security values for the process."
+    },
+    "ContinueDebugEvent": {
+        "prototype": "BOOL ContinueDebugEvent(\n        DWORD dwProcessId,\n        DWORD dwThreadId,\n        DWORD dwContinueStatus\n      );",
+        "dllLibrary": "kernel32",
+        "comment": "Enables a debugger to continue a thread that previously reported a debugging event."
     },
     "CopyIcon": {
         "prototype": "HICON CopyIcon(\n  HICON hIcon\n);",
@@ -430,6 +440,26 @@
         "prototype": "BOOL DeactivateActCtx(\n  DWORD     dwFlags,\n  ULONG_PTR ulCookie\n);",
         "dllLibrary": "kernel32",
         "comment": "The DeactivateActCtx function deactivates the activation context corresponding to the specified cookie."
+    },
+    "DebugBreak": {
+        "prototype": "void DebugBreak();",
+        "dllLibrary": "kernel32",
+        "comment": "Causes a breakpoint exception to occur in the current process. This allows the calling thread to signal the debugger to handle the exception."
+    },
+    "DebugBreakProcess": {
+        "prototype": "BOOL DebugBreakProcess(\n        HANDLE Process\n      );",
+        "dllLibrary": "kernel32",
+        "comment": "Causes a breakpoint exception to occur in the specified process. This allows the calling thread to signal the debugger to handle the exception."
+    },
+    "DebugSetProcessKillOnExit": {
+        "prototype": "BOOL DebugSetProcessKillOnExit(\n        BOOL KillOnExit\n      );",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the action to be performed when the calling thread exits."
+    },
+    "DecryptFile": {
+        "prototype": "BOOL DecryptFileW(\n        LPCWSTR lpFileName,\n        DWORD   dwReserved\n);",
+        "dllLibrary": "advapi32",
+        "comment": "Decrypts an encrypted file or directory."
     },
     "DefWindowProc": {
         "prototype": "LRESULT DefWindowProcW(\n  HWND   hWnd,\n  UINT   Msg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
@@ -586,6 +616,11 @@
         "dllLibrary": "user32",
         "comment": "Enumerates all top-level windows on the screen by passing the handle to each window, in turn, to an application-defined callback function. EnumWindows continues until the last top-level window is enumerated or the callback function returns FALSE."
     },
+    "EncryptFile": {
+        "prototype": "BOOL EncryptFileW(\n        LPCWSTR lpFileName\n);",
+        "dllLibrary": "advapi32",
+        "comment": "Encrypts a file or directory. All data streams in a file are encrypted. All new files created in an encrypted directory are encrypted."
+    },
     "EqualRect": {
         "prototype": "BOOL EqualRect(\n  const RECT *lprc1,\n  const RECT *lprc2\n);",
         "dllLibrary": "user32",
@@ -610,6 +645,11 @@
         "prototype": "BOOL ExtTextOutW(\n  HDC        hdc,\n  int        x,\n  int        y,\n  UINT       options,\n  const RECT *lprect,\n  LPCWSTR    lpString,\n  UINT       c,\n  const INT  *lpDx\n);",
         "dllLibrary": "gdi32",
         "comment": "The ExtTextOut function draws text using the currently selected font, background color, and text color. You can optionally provide dimensions to be used for clipping, opaquing, or both."
+    },
+    "FileEncryptionStatus": {
+        "prototype": "BOOL FileEncryptionStatusW(\n        LPCWSTR lpFileName,\n        LPDWORD lpStatus\n);",
+        "dllLibrary": "advapi32",
+        "comment": "Retrieves the encryption status of the specified file."
     },
     "FillConsoleOutputAttribute": {
         "prototype": "BOOL WINAPI FillConsoleOutputAttribute(\n  _In_  HANDLE  hConsoleOutput,\n  _In_  WORD    wAttribute,\n  _In_  DWORD   nLength,\n  _In_  COORD   dwWriteCoord,\n  _Out_ LPDWORD lpNumberOfAttrsWritten\n);",
@@ -881,6 +921,11 @@
         "prototype": "void GetLocalTime(\n  LPSYSTEMTIME lpSystemTime\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the current local date and time."
+    },
+    "GetLogicalDriveStrings": {
+        "prototype": "DWORD GetLogicalDriveStringsW(\n        DWORD  nBufferLength,\n        LPWSTR lpBuffer\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Fills a buffer with strings that specify valid drives in the system."
     },
     "GetMessage": {
         "prototype": "BOOL GetMessageW(\n  LPMSG lpMsg,\n  HWND  hWnd,\n  UINT  wMsgFilterMin,\n  UINT  wMsgFilterMax\n);",
@@ -1406,6 +1451,11 @@
         "dllLibrary": "user32",
         "comment": "The MonitorFromWindow function retrieves a handle to the display monitor that has the largest area of intersection with the bounding rectangle of a specified window."
     },
+    "MoveFile": {
+        "prototype": "BOOL MoveFileW(\n        LPCWSTR lpExistingFileName,\n        LPCWSTR lpNewFileName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Moves an existing file or a directory, including its children."
+    },
     "MoveToEx": {
         "prototype": "BOOL MoveToEx(\n  HDC     hdc,\n  int     x,\n  int     y,\n  LPPOINT lppt\n);",
         "dllLibrary": "gdi32",
@@ -1435,6 +1485,11 @@
         "prototype": "HANDLE OpenProcess(\n  DWORD dwDesiredAccess,\n  BOOL  bInheritHandle,\n  DWORD dwProcessId\n);",
         "dllLibrary": "kernel32",
         "comment": "Opens an existing local process object."
+    },
+    "OutputDebugString": {
+        "prototype": "void OutputDebugStringW(\n        LPCWSTR lpOutputString\n      );",
+        "dllLibrary": "kernel32",
+        "comment": "Sends a string to the debugger for display."
     },
     "PaintDesktop": {
         "prototype": "BOOL PaintDesktop(\n  HDC hdc\n);",

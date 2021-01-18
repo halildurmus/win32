@@ -101,7 +101,7 @@ const mapping = <String, String>{
   // Pointers not prefixed with LP*
   'PUINT': 'Pointer<Uint32>', 'PHANDLE': 'Pointer<IntPtr>',
   'PULONGLONG': 'Pointer<Uint64>', 'PDWORD': 'Pointer<Uint32>',
-  'PLONG': 'Pointer<Int32>',
+  'PLONG': 'Pointer<Int32>', 'PBOOL': 'Pointer<Int32>',
   'PLARGE_INTEGER': 'Pointer<Int64>', 'PSIZE_T': 'Pointer<IntPtr>',
   'PBLUETOOTH_OOB_DATA_INFO': 'Pointer<BLUETOOTH_OOB_DATA_INFO>',
   'PBLUETOOTH_RADIO_INFO': 'Pointer<BLUETOOTH_RADIO_INFO>',

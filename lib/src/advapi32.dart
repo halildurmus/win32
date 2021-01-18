@@ -97,6 +97,55 @@ int CredWrite(Pointer<CREDENTIAL> Credential, int Flags) {
   return _CredWrite(Credential, Flags);
 }
 
+/// Decrypts an encrypted file or directory.
+///
+/// ```c
+/// BOOL DecryptFileW(
+///         LPCWSTR lpFileName,
+///         DWORD   dwReserved
+/// );
+/// ```
+/// {@category advapi32}
+int DecryptFile(Pointer<Utf16> lpFileName, int dwReserved) {
+  final _DecryptFile = _advapi32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpFileName, Uint32 dwReserved),
+      int Function(Pointer<Utf16> lpFileName, int dwReserved)>('DecryptFileW');
+  return _DecryptFile(lpFileName, dwReserved);
+}
+
+/// Encrypts a file or directory. All data streams in a file are encrypted.
+/// All new files created in an encrypted directory are encrypted.
+///
+/// ```c
+/// BOOL EncryptFileW(
+///         LPCWSTR lpFileName
+/// );
+/// ```
+/// {@category advapi32}
+int EncryptFile(Pointer<Utf16> lpFileName) {
+  final _EncryptFile = _advapi32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpFileName),
+      int Function(Pointer<Utf16> lpFileName)>('EncryptFileW');
+  return _EncryptFile(lpFileName);
+}
+
+/// Retrieves the encryption status of the specified file.
+///
+/// ```c
+/// BOOL FileEncryptionStatusW(
+///         LPCWSTR lpFileName,
+///         LPDWORD lpStatus
+/// );
+/// ```
+/// {@category advapi32}
+int FileEncryptionStatus(Pointer<Utf16> lpFileName, Pointer<Uint32> lpStatus) {
+  final _FileEncryptionStatus = _advapi32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpFileName, Pointer<Uint32> lpStatus),
+      int Function(Pointer<Utf16> lpFileName,
+          Pointer<Uint32> lpStatus)>('FileEncryptionStatusW');
+  return _FileEncryptionStatus(lpFileName, lpStatus);
+}
+
 /// Initiates a shutdown and restart of the specified computer, and
 /// restarts any applications that have been registered for restart.
 ///

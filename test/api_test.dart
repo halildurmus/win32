@@ -64,6 +64,14 @@ void main() {
               int bDeleteExistingResources)>('BeginUpdateResourceW');
       expect(BeginUpdateResource, isA<Function>());
     });
+    test('Can instantiate CheckRemoteDebuggerPresent', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CheckRemoteDebuggerPresent = kernel32.lookupFunction<
+          Int32 Function(IntPtr hProcess, Pointer<Int32> pbDebuggerPresent),
+          int Function(int hProcess,
+              Pointer<Int32> pbDebuggerPresent)>('CheckRemoteDebuggerPresent');
+      expect(CheckRemoteDebuggerPresent, isA<Function>());
+    });
     test('Can instantiate CloseHandle', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final CloseHandle = kernel32.lookupFunction<
@@ -80,6 +88,15 @@ void main() {
         expect(ClosePseudoConsole, isA<Function>());
       });
     }
+    test('Can instantiate ContinueDebugEvent', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final ContinueDebugEvent = kernel32.lookupFunction<
+          Int32 Function(
+              Uint32 dwProcessId, Uint32 dwThreadId, Uint32 dwContinueStatus),
+          int Function(int dwProcessId, int dwThreadId,
+              int dwContinueStatus)>('ContinueDebugEvent');
+      expect(ContinueDebugEvent, isA<Function>());
+    });
     test('Can instantiate CreateActCtx', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final CreateActCtx = kernel32.lookupFunction<
@@ -192,6 +209,26 @@ void main() {
           Int32 Function(Uint32 dwFlags, IntPtr ulCookie),
           int Function(int dwFlags, int ulCookie)>('DeactivateActCtx');
       expect(DeactivateActCtx, isA<Function>());
+    });
+    test('Can instantiate DebugBreak', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final DebugBreak = kernel32
+          .lookupFunction<Void Function(), void Function()>('DebugBreak');
+      expect(DebugBreak, isA<Function>());
+    });
+    test('Can instantiate DebugBreakProcess', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final DebugBreakProcess = kernel32.lookupFunction<
+          Int32 Function(IntPtr Process),
+          int Function(int Process)>('DebugBreakProcess');
+      expect(DebugBreakProcess, isA<Function>());
+    });
+    test('Can instantiate DebugSetProcessKillOnExit', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final DebugSetProcessKillOnExit = kernel32.lookupFunction<
+          Int32 Function(Int32 KillOnExit),
+          int Function(int KillOnExit)>('DebugSetProcessKillOnExit');
+      expect(DebugSetProcessKillOnExit, isA<Function>());
     });
     test('Can instantiate DeleteFile', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -508,6 +545,14 @@ void main() {
           void Function(Pointer<SYSTEMTIME> lpSystemTime)>('GetLocalTime');
       expect(GetLocalTime, isA<Function>());
     });
+    test('Can instantiate GetLogicalDriveStrings', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetLogicalDriveStrings = kernel32.lookupFunction<
+          Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
+          int Function(int nBufferLength,
+              Pointer<Utf16> lpBuffer)>('GetLogicalDriveStringsW');
+      expect(GetLogicalDriveStrings, isA<Function>());
+    });
     test('Can instantiate GetModuleFileName', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetModuleFileName = kernel32.lookupFunction<
@@ -730,6 +775,15 @@ void main() {
           Pointer Function(int hResData)>('LockResource');
       expect(LockResource, isA<Function>());
     });
+    test('Can instantiate MoveFile', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final MoveFile = kernel32.lookupFunction<
+          Int32 Function(
+              Pointer<Utf16> lpExistingFileName, Pointer<Utf16> lpNewFileName),
+          int Function(Pointer<Utf16> lpExistingFileName,
+              Pointer<Utf16> lpNewFileName)>('MoveFileW');
+      expect(MoveFile, isA<Function>());
+    });
     test('Can instantiate OpenProcess', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final OpenProcess = kernel32.lookupFunction<
@@ -738,6 +792,13 @@ void main() {
           int Function(int dwDesiredAccess, int bInheritHandle,
               int dwProcessId)>('OpenProcess');
       expect(OpenProcess, isA<Function>());
+    });
+    test('Can instantiate OutputDebugString', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final OutputDebugString = kernel32.lookupFunction<
+          Void Function(Pointer<Utf16> lpOutputString),
+          void Function(Pointer<Utf16> lpOutputString)>('OutputDebugStringW');
+      expect(OutputDebugString, isA<Function>());
     });
     test('Can instantiate QueryDosDevice', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -3242,6 +3303,29 @@ void main() {
           int Function(
               Pointer<CREDENTIAL> Credential, int Flags)>('CredWriteW');
       expect(CredWrite, isA<Function>());
+    });
+    test('Can instantiate DecryptFile', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final DecryptFile = advapi32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpFileName, Uint32 dwReserved),
+          int Function(
+              Pointer<Utf16> lpFileName, int dwReserved)>('DecryptFileW');
+      expect(DecryptFile, isA<Function>());
+    });
+    test('Can instantiate EncryptFile', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final EncryptFile = advapi32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpFileName),
+          int Function(Pointer<Utf16> lpFileName)>('EncryptFileW');
+      expect(EncryptFile, isA<Function>());
+    });
+    test('Can instantiate FileEncryptionStatus', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final FileEncryptionStatus = advapi32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpFileName, Pointer<Uint32> lpStatus),
+          int Function(Pointer<Utf16> lpFileName,
+              Pointer<Uint32> lpStatus)>('FileEncryptionStatusW');
+      expect(FileEncryptionStatus, isA<Function>());
     });
     test('Can instantiate InitiateShutdown', () {
       final advapi32 = DynamicLibrary.open('advapi32.dll');
