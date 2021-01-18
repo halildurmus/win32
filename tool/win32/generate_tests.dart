@@ -12,8 +12,7 @@ import 'struct_sizes.dart';
 import 'win32api.dart';
 import 'win32types.dart';
 
-void generateTests(Win32API apiSet) {
-  final prototypes = apiSet.prototypes;
+void generateTests(Win32API win32) {
   var tests = 0;
   final writer = File('test/api_test.dart').openSync(mode: FileMode.write);
 
@@ -40,7 +39,10 @@ import 'helpers.dart';
 void main() {
   final windowsBuildNumber = getWindowsBuildNumber();
 ''');
-  final libraries = prototypes.values.map((e) => e.dllLibrary).toSet().toList();
+  // Generate a list of libs, e.g. [kernel32, gdi32, ...]
+  // The .toSet() removes duplicates.
+  final libraries =
+      win32.functions.values.map((e) => e.dllLibrary).toSet().toList();
 
   for (final library in libraries) {
     // API set names aren't legal Dart identifiers, so we rename them
@@ -48,39 +50,37 @@ void main() {
 
     writer.writeStringSync("group('Test $library functions', () {\n");
 
-    final libProtos = prototypes.values.where((td) => td.dllLibrary == library);
-    // .where((td) => !td.exportName.startsWith('TaskDialog'));
+    final filteredFunctionList =
+        win32.functions.values.where((func) => func.dllLibrary == library);
 
-    for (final proto in libProtos) {
-      if (proto.test == false) continue;
+    for (final function in filteredFunctionList) {
+      if (function.test == false) continue;
 
-      final win32Func = proto.signature;
+      final apiName = function.signature.nameWithoutEncoding;
+      final returnFFIType = ffiFromWin32(function.signature.returnType);
+      final returnDartType = Win32Param([returnFFIType, '']).dartType;
 
-      final returnFFIType = ffiFromWin32(win32Func.returnType);
-      final returnDartType = dartFromFFI(returnFFIType);
+      final nativeParams = function.signature.params
+          .map((param) => '${param.ffiType} ${param.name}')
+          .join(', ');
+
+      final dartParams = function.signature.params
+          .map((param) => '${param.dartType} ${param.name}')
+          .join(', ');
 
       final test = '''
-      test('Can instantiate ${win32Func.nameWithoutEncoding}', () {
+      test('Can instantiate $apiName', () {
         final $libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');
-        final ${win32Func.nameWithoutEncoding} = $libraryDartName.lookupFunction<\n
-          $returnFFIType Function(
-            ${win32Func.params.map((param) {
-        final convertedParams = win32Func.convertParamType(param);
-        return '${convertedParams.first} ${convertedParams.last}';
-      }).join(', ')}),
-          $returnDartType Function(
-            ${win32Func.params.map((param) {
-        final convertedParams = win32Func.convertParamType(param);
-        final dartType = dartFromFFI(convertedParams.first);
-        return '$dartType ${convertedParams.last}';
-      }).join(', ')})>
-          ('${win32Func.name}');
-        expect(${win32Func.nameWithoutEncoding}, isA<Function>());
+        final $apiName = $libraryDartName.lookupFunction<\n
+          $returnFFIType Function($nativeParams),
+          $returnDartType Function($dartParams)>
+          ('${function.signature.name}');
+        expect($apiName, isA<Function>());
       });''';
 
-      if (proto.minimumWindowsVersion > 0) {
+      if (function.minimumWindowsVersion > 0) {
         writer.writeStringSync('''
-        if (windowsBuildNumber >= ${proto.minimumWindowsVersion}) {
+        if (windowsBuildNumber >= ${function.minimumWindowsVersion}) {
           $test
         }''');
       } else {
@@ -140,8 +140,8 @@ void main() {
 }
 
 void main() {
-  final apiSet = Win32API('tool/win32/win32api.json');
+  final win32 = Win32API('tool/win32/win32api.json');
 
-  generateTests(apiSet);
+  generateTests(win32);
   generateStructSizeTests();
 }
