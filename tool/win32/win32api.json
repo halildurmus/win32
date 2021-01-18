@@ -4,6 +4,11 @@
         "dllLibrary": "kernel32",
         "comment": "The ActivateActCtx function activates the specified activation context. It does this by pushing the specified activation context to the top of the activation stack. The specified activation context is thus associated with the current thread and any appropriate side-by-side API functions."
     },
+    "AddClipboardFormatListener": {
+        "prototype": "BOOL AddClipboardFormatListener(\n  HWND hwnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Places the given window in the system-maintained clipboard format listener list."
+    },
     "AddFontResource": {
         "prototype": "int AddFontResourceW(\n  LPCWSTR Arg1\n);",
         "dllLibrary": "gdi32",
@@ -199,6 +204,11 @@
         "dllLibrary": "gdi32",
         "comment": "The CancelDC function cancels any pending operation on the specified device context (DC)."
     },
+    "ChangeClipboardChain": {
+        "prototype": "BOOL ChangeClipboardChain(\n  HWND hWndRemove,\n  HWND hWndNewNext\n  );",
+        "dllLibrary": "user32",
+        "comment": "Removes a specified window from the chain of clipboard viewers."
+    },
     "CheckRemoteDebuggerPresent": {
         "prototype": "BOOL CheckRemoteDebuggerPresent(\n        HANDLE hProcess,\n        PBOOL  pbDebuggerPresent\n      );",
         "dllLibrary": "kernel32",
@@ -238,6 +248,11 @@
         "prototype": "BOOL ClipCursor(\n  const RECT *lpRect\n);",
         "dllLibrary": "user32",
         "comment": "Confines the cursor to a rectangular area on the screen. If a subsequent cursor position (set by the SetCursorPos function or the mouse) lies outside the rectangle, the system automatically adjusts the position to keep the cursor inside the rectangular area."
+    },
+    "CloseClipboard": {
+        "prototype": "BOOL CloseClipboard();",
+        "dllLibrary": "user32",
+        "comment": "Closes the clipboard."
     },
     "CloseFigure": {
         "prototype": "BOOL CloseFigure(\n  HDC hdc);",
@@ -314,6 +329,11 @@
         "prototype": "void CoUninitialize();",
         "dllLibrary": "ole32",
         "comment": "Closes the COM library on the current thread, unloads all DLLs loaded by the thread, frees any other resources that the thread maintains, and forces all RPC connections on the thread to close."
+    },
+    "CountClipboardFormats": {
+        "prototype": "int CountClipboardFormats();",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the number of different data formats currently on the clipboard."
     },
     "CreateAcceleratorTable": {
         "prototype": "HACCEL CreateAcceleratorTableW(\n  LPACCEL paccel,\n  int     cAccel\n);",
@@ -546,6 +566,11 @@
         "dllLibrary": "gdi32",
         "comment": "The Ellipse function draws an ellipse. The center of the ellipse is the center of the specified bounding rectangle. The ellipse is outlined by using the current pen and is filled by using the current brush."
     },
+    "EmptyClipboard": {
+        "prototype": "BOOL EmptyClipboard();",
+        "dllLibrary": "user32",
+        "comment": "Empties the clipboard and frees handles to data in the clipboard. The function then assigns ownership of the clipboard to the window that currently has the clipboard open."
+    },
     "EnableMenuItem": {
         "prototype": "BOOL EnableMenuItem(\n  HMENU hMenu,\n  UINT  uIDEnableItem,\n  UINT  uEnable\n);",
         "dllLibrary": "user32",
@@ -580,6 +605,11 @@
         "prototype": "BOOL EnumChildWindows(\n  HWND        hWndParent,\n  WNDENUMPROC lpEnumFunc,\n  LPARAM      lParam\n);",
         "dllLibrary": "user32",
         "comment": "Enumerates the child windows that belong to the specified parent window by passing the handle to each child window, in turn, to an application-defined callback function. EnumChildWindows continues until the last child window is enumerated or the callback function returns FALSE."
+    },
+    "EnumClipboardFormats": {
+        "prototype": "UINT EnumClipboardFormats(\n  UINT format\n);",
+        "dllLibrary": "user32",
+        "comment": "Enumerates the data formats currently available on the clipboard."
     },
     "EnumDisplayMonitors": {
         "prototype": "BOOL EnumDisplayMonitors(\n  HDC             hdc,\n  LPCRECT         lprcClip,\n  MONITORENUMPROC lpfnEnum,\n  LPARAM          dwData\n);",
@@ -761,10 +791,40 @@
         "dllLibrary": "kernel32",
         "comment": "Frees the loaded dynamic-link library (DLL) module and, if necessary, decrements its reference count. When the reference count reaches zero, the module is unloaded from the address space of the calling process and the handle is no longer valid."
     },
+    "GetAncestor": {
+        "prototype": "HWND GetAncestor(\n  HWND hwnd,\n  UINT gaFlags\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the handle to the ancestor of the specified window."
+    },
     "GetClientRect": {
         "prototype": "BOOL GetClientRect(\n  HWND   hWnd,\n  LPRECT lpRect\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves the coordinates of a window's client area. The client coordinates specify the upper-left and lower-right corners of the client area. Because client coordinates are relative to the upper-left corner of a window's client area, the coordinates of the upper-left corner are (0,0)."
+    },
+    "GetClipboardData": {
+        "prototype": "HANDLE GetClipboardData(\n  UINT uFormat\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves data from the clipboard in a specified format. The clipboard must have been opened previously."
+    },
+    "GetClipboardFormatName": {
+        "prototype": "int GetClipboardFormatNameW(\n  UINT format,\n  LPWSTR lpszFormatName,\n  int cchMaxCount\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves from the clipboard the name of the specified registered format. The function copies the name to the specified buffer."
+    },
+    "GetClipboardOwner": {
+        "prototype": "HWND GetClipboardOwner();",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the window handle of the current owner of the clipboard."
+    },
+    "GetClipboardSequenceNumber": {
+        "prototype": "DWORD GetClipboardSequenceNumber();",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the clipboard sequence number for the current window station."
+    },
+    "GetClipboardViewer": {
+        "prototype": "HWND GetClipboardViewer();",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the handle to the first window in the clipboard viewer chain."
     },
     "GetComputerNameEx": {
         "prototype": "BOOL GetComputerNameExW(\n  COMPUTER_NAME_FORMAT NameType,\n  LPWSTR               lpBuffer,\n  LPDWORD              nSize\n);",
@@ -830,6 +890,11 @@
         "prototype": "HDC GetDCEx(\n  HWND  hWnd,\n  HRGN  hrgnClip,\n  DWORD flags\n);",
         "dllLibrary": "user32",
         "comment": "The GetDCEx function retrieves a handle to a device context (DC) for the client area of a specified window or for the entire screen. You can use the returned handle in subsequent GDI functions to draw in the DC. The device context is an opaque data structure, whose values are used internally by GDI."
+    },
+    "GetDesktopWindow": {
+        "prototype": "HWND GetDesktopWindow();",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a handle to the desktop window. The desktop window covers the entire screen. The desktop window is the area on top of which other windows are painted."
     },
     "GetDialogBaseUnits": {
         "prototype": "long GetDialogBaseUnits();",
@@ -900,6 +965,11 @@
         "prototype": "HWND GetForegroundWindow();",
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the foreground window (the window with which the user is currently working). The system assigns a slightly higher priority to the thread that creates the foreground window than it does to other threads."
+    },
+    "GetInputState": {
+        "prototype": "BOOL GetInputState();",
+        "dllLibrary": "user32",
+        "comment": "Determines whether there are mouse-button or keyboard messages in the calling thread's message queue."
     },
     "GetIntegratedDisplaySize": {
         "prototype": "HRESULT GetIntegratedDisplaySize(\n  double *sizeInInches\n);",
@@ -1032,6 +1102,11 @@
         "dllLibrary": "gdi32",
         "comment": "The GetObject function retrieves information for the specified graphics object."
     },
+    "GetOpenClipboardWindow": {
+        "prototype": "HWND GetOpenClipboardWindow();",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the handle to the window that currently has the clipboard open."
+    },
     "GetOpenFileName": {
         "prototype": "BOOL GetOpenFileNameW(\n  LPOPENFILENAMEW Arg1\n);",
         "dllLibrary": "comdlg32",
@@ -1051,6 +1126,11 @@
         "prototype": "_BOOL GetPhysicalMonitorsFromHMONITOR(\n  HMONITOR           hMonitor,\n  DWORD              dwPhysicalMonitorArraySize,\n  LPPHYSICAL_MONITOR pPhysicalMonitorArray\n);",
         "dllLibrary": "dxva2",
         "comment": "Retrieves the physical monitors associated with an HMONITOR monitor handle."
+    },
+    "GetPriorityClipboardFormat": {
+        "prototype": "int GetPriorityClipboardFormat(\n  UINT *paFormatPriorityList,\n  int  cFormats\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the first available clipboard format in the specified list."
     },
     "GetProcAddress": {
         "prototype": "FARPROC GetProcAddress(\n  HMODULE hModule,\n  LPCSTR  lpProcName\n);",
@@ -1162,6 +1242,11 @@
         "prototype": "BOOL GetTextMetricsW(\n  HDC          hdc,\n  LPTEXTMETRICW lptm\n);",
         "dllLibrary": "gdi32",
         "comment": "The GetTextMetrics function fills the specified buffer with the metrics for the currently selected font."
+    },
+    "GetUpdatedClipboardFormats": {
+        "prototype": "BOOL GetUpdatedClipboardFormats(\n  PUINT lpuiFormats,\n  UINT  cFormats,\n  PUINT pcFormatsOut\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the currently supported clipboard formats."
     },
     "GetUpdateRect": {
         "prototype": "BOOL GetUpdateRect(\n  HWND   hWnd,\n  LPRECT lpRect,\n  BOOL   bErase\n);",
@@ -1307,6 +1392,11 @@
         "prototype": "BOOL IsDialogMessageW(\n  HWND  hDlg,\n  LPMSG lpMsg\n);",
         "dllLibrary": "user32",
         "comment": "Determines whether a message is intended for the specified dialog box and, if it is, processes the message."
+    },
+    "IsIconic": {
+        "prototype": "BOOL IsIconic(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Determines whether the specified window is minimized (iconic)."
     },
     "IsRectEmpty": {
         "prototype": "BOOL IsRectEmpty(\n  const RECT *lprc\n);",
@@ -1476,6 +1566,11 @@
         "dllLibrary": "user32",
         "comment": "The OffsetRect function moves the specified rectangle by the specified offsets."
     },
+    "OpenClipboard": {
+        "prototype": "BOOL OpenClipboard(  HWND hWndNewOwner);",
+        "dllLibrary": "user32",
+        "comment": "Opens the clipboard for examination and prevents other applications from modifying the clipboard content."
+    },
     "OpenIcon": {
         "prototype": "BOOL OpenIcon(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
@@ -1641,6 +1736,11 @@
         "dllLibrary": "user32",
         "comment": "Registers a window class for subsequent use in calls to the CreateWindow or CreateWindowEx function."
     },
+    "RegisterClipboardFormat": {
+        "prototype": "UINT RegisterClipboardFormatW(\n  LPCWSTR lpszFormat\n);",
+        "dllLibrary": "user32",
+        "comment": "Registers a new clipboard format. This format can then be used as a valid clipboard format."
+    },
     "RegisterWindowMessage": {
         "prototype": "UINT RegisterWindowMessageW(\n  LPCWSTR lpString\n);",
         "dllLibrary": "user32",
@@ -1670,6 +1770,11 @@
         "prototype": "int ReleaseDC(\n  HWND hWnd,\n  HDC  hDC\n);",
         "dllLibrary": "user32",
         "comment": "The ReleaseDC function releases a device context (DC), freeing it for use by other applications. The effect of the ReleaseDC function depends on the type of DC. It frees only common and window DCs. It has no effect on class or private DCs."
+    },
+    "RemoveClipboardFormatListener": {
+        "prototype": "BOOL RemoveClipboardFormatListener(\n  HWND hwnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Removes the given window from the system-maintained clipboard format listener list."
     },
     "RemoveDirectory": {
         "prototype": "BOOL RemoveDirectoryW(\n  LPCWSTR lpPathName\n);",
@@ -1779,6 +1884,16 @@
         "prototype": "int SetBkMode(\n  HDC hdc,\n  int mode\n);",
         "dllLibrary": "gdi32",
         "comment": "The SetBkMode function sets the background mix mode of the specified device context. The background mix mode is used with text, hatched brushes, and pen styles that are not solid lines."
+    },
+    "SetClipboardData": {
+        "prototype": "HANDLE SetClipboardData(\n  UINT   uFormat,\n  HANDLE hMem\n);",
+        "dllLibrary": "user32",
+        "comment": "Places data on the clipboard in a specified clipboard format. The window must be the current clipboard owner, and the application must have called the OpenClipboard function."
+    },
+    "SetClipboardViewer": {
+        "prototype": "HWND SetClipboardViewer(\n  HWND hWndNewViewer\n);",
+        "dllLibrary": "user32",
+        "comment": "Adds the specified window to the chain of clipboard viewers."
     },
     "SetConsoleCtrlHandler": {
         "prototype": "BOOL WINAPI SetConsoleCtrlHandler(\n  _In_opt_ PHANDLER_ROUTINE HandlerRoutine,\n  _In_     BOOL             Add\n);",
@@ -1950,6 +2065,11 @@
         "dllLibrary": "gdi32",
         "comment": "The SetStretchBltMode function sets the bitmap stretching mode in the specified device context."
     },
+    "SetSysColors": {
+        "prototype": "BOOL SetSysColors(\n  int            cElements,\n  const INT      *lpaElements,\n  const COLORREF *lpaRgbValues\n);",
+        "dllLibrary": "user32",
+        "comment": "Sets the colors for the specified display elements. Display elements are the various parts of a window and the display that appear on the system display screen."
+    },
     "SetTextColor": {
         "prototype": "COLORREF SetTextColor(\n  HDC      hdc,\n  COLORREF color\n);",
         "dllLibrary": "gdi32",
@@ -2044,6 +2164,11 @@
         "prototype": "int ShowCursor(\n  BOOL bShow\n);",
         "dllLibrary": "user32",
         "comment": "Displays or hides the cursor."
+    },
+    "ShowOwnedPopups": {
+        "prototype": "BOOL ShowOwnedPopups(\n  HWND hWnd,\n  BOOL fShow\n);",
+        "dllLibrary": "user32",
+        "comment": "Shows or hides all pop-up windows owned by the specified window."
     },
     "ShowWindow": {
         "prototype": "BOOL ShowWindow(\n  HWND hWnd,\n  int  nCmdShow\n);",
@@ -2146,6 +2271,11 @@
         "prototype": "BOOL UnionRect(\n  LPRECT     lprcDst,\n  const RECT *lprcSrc1,\n  const RECT *lprcSrc2\n);",
         "dllLibrary": "user32",
         "comment": "The UnionRect function creates the union of two rectangles. The union is the smallest rectangle that contains both source rectangles."
+    },
+    "UnregisterClass": {
+        "prototype": "BOOL UnregisterClassW(\n  LPCWSTR   lpClassName,\n  HINSTANCE hInstance\n);",
+        "dllLibrary": "user32",
+        "comment": "Unregisters a window class, freeing the memory required for the class."
     },
     "UpdateProcThreadAttribute": {
         "prototype": "BOOL UpdateProcThreadAttribute(\n  LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,\n  DWORD                        dwFlags,\n  DWORD_PTR                    Attribute,\n  PVOID                        lpValue,\n  SIZE_T                       cbSize,\n  PVOID                        lpPreviousValue,\n  PSIZE_T                      lpReturnSize\n);",
