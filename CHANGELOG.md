@@ -1,27 +1,11 @@
 ## 2.0.0-nullsafety.8
 
-- New APIs:
-  - advapi32: InitiateShutdownW, RegSetValueExW
-  - gdi32: AddFontResource, AddFontResourceEx, AngleArc, AnimatePalette, Arc,
-    ArcTo, BeginPath, BitBlt, CancelDC, Chord, CloseFigure,
-    CreateCompatibleBitmap, CreateCompatibleDC, CreateDIBPatternBrushPt,
-    CreateDIBitmap, CreateHalftonePalette, DeleteDC, DrawEscape, Ellipse,
-    EndPath, ExtTextOutW, GetDIBits, GetNearestColor, Pie, PolyBezierTo,
-    PolyDraw, Polygon, Polyline, PolylineTo, PolyPolygon, PolyPolyline,
-    PtInRegion, RectInRegion, RoundRect, SetStretchBltMode, StretchBlt
-  - kernel32: GlobalAlloc, GlobalFree, GlobalLock, GlobalUnlock,
-    IsWow64Process2, Wow64SuspendThread
-  - user32: ClientToScreen, CopyRect, DrawCaption, DrawTextEx, EqualRect,
-    ExcludeUpdateRgn, FrameRect, GetDCEx, GetSysColorBrush, GetTabbedTextExtent,
-    GetUpdateRect, GetUpdateRgn, GetWindowDC, GetWindowRgnBox, GrayString,
-    InflateRect, IntersectRect, InvalidateRgn, InvertRect, IsRectEmpty,
-    LockWindowUpdate, MapWindowPoints, MonitorFromRect, OffsetRect,
-    PaintDesktop, PtInRect, RedrawWindow, ScreenToClient, SetRect, SetRectEmpty,
-    SetWindowRgn, SubtractRect, TabbedTextOut, UnionRect, ValidateRect,
-    ValidateRgn, WindowFromDC
-  - Add BITMAP, BITMAPINFOHEADER, BITMAPFILEHEADER, PALETTEENTRY, DRAWTEXTPARAMS
-    structs
-- Adds COM tests and exports several COM interfaces that weree missing
+- New JSON-based metadata format for Win32 APIs that supports API sets and
+  minimum versions, and more robust tooling for loading and saving metadata
+- 100+ new APIs in kernel32, user32, ole32, advapi32, shell32 and gdi32
+- Migrated Windows Runtime APIs into core unmanaged metadata
+- Added COM tests and exported several COM interfaces that were missing
+- New shell tray notification example (thanks @ilopX)
 
 ## 2.0.0-nullsafety.7
 
