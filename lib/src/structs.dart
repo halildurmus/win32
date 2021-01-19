@@ -24,11 +24,13 @@
 import 'dart:ffi';
 import 'dart:math' show min;
 import 'dart:typed_data';
+
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
 import 'constants.dart';
 import 'constants_nodoc.dart';
+import 'extensions/set_string.dart';
 import 'extensions/unpack_utf16.dart';
 import 'kernel32.dart';
 import 'oleaut32.dart';
@@ -3708,48 +3710,41 @@ class NOTIFYICONDATA extends Struct {
 }
 
 extension Pointer_NOTIFYICONDATA_Extension on Pointer<NOTIFYICONDATA> {
-  String get szTip =>
-      cast<Uint8>().elementAt(40).cast<Utf16>().unpackString(128);
+  String get szTip => _pszTip.unpackString(128);
 
   set szTip(String text63chars) {
     if (text63chars.length > 63) {
       throw ArgumentError('Argument "text64chars" should be less 63 char');
     }
-    _wchar_cpy(this, 40, text63chars);
+    _pszTip.setString(text63chars);
   }
 
-  String get szInfo =>
-      cast<Uint8>().elementAt(304).cast<Utf16>().unpackString(256);
+  String get szInfo => _pszInfo.unpackString(256);
 
   set szInfo(String text255chars) {
     if (text255chars.length > 255) {
       throw ArgumentError('Argument "text255chars" should be less 255 char');
     }
-    _wchar_cpy(this, 304, text255chars);
+    _pszInfo.setString(text255chars);
   }
 
-  String get szInfoTitle =>
-      cast<Uint8>().elementAt(824).cast<Utf16>().unpackString(64);
+  String get szInfoTitle => _pszInfoTitle.unpackString(64);
 
   set szInfoTitle(String text63chars) {
     if (text63chars.length > 63) {
       throw ArgumentError('Argument "text63chars" should be less 63 char');
     }
-    _wchar_cpy(this, 824, text63chars);
+    _pszInfoTitle.setString(text63chars);
   }
 
-  static void _wchar_cpy(Pointer pointer, int memStart, String source) {
-    final units = source.codeUnits;
-    final szMemory = pointer.cast<Uint8>();
+  Pointer<Utf16> get _pszTip => cast<Uint8>().elementAt(40).cast<Utf16>();
 
-    for (var i = 0; i < units.length; i++) {
-      final index = memStart + i * 2;
-      szMemory.elementAt(index).value = units[i];
-    }
-    final lastIndex = memStart + units.length * 2;
-    szMemory.elementAt(lastIndex).value = 0;
-  }
+  Pointer<Utf16> get _pszInfo => cast<Uint8>().elementAt(304).cast<Utf16>();
+
+  Pointer<Utf16> get _pszInfoTitle =>
+      cast<Uint8>().elementAt(824).cast<Utf16>();
 }
+
 // typedef struct tagTPMPARAMS {
 //   UINT cbSize;
 //   RECT rcExclude;
