@@ -18,6 +18,27 @@ import 'structs.dart';
 
 final _oleaut32 = DynamicLibrary.open('oleaut32.dll');
 
+/// Retrieves a pointer to a running object that has been registered with
+/// OLE.
+///
+/// ```c
+/// HRESULT GetActiveObject(
+///   REFCLSID rclsid,
+///   void     *pvReserved,
+///   IUnknown **ppunk
+/// );
+/// ```
+/// {@category oleaut32}
+int GetActiveObject(
+    Pointer<GUID> rclsid, Pointer pvReserved, Pointer<Pointer> ppunk) {
+  final _GetActiveObject = _oleaut32.lookupFunction<
+      Int32 Function(
+          Pointer<GUID> rclsid, Pointer pvReserved, Pointer<Pointer> ppunk),
+      int Function(Pointer<GUID> rclsid, Pointer pvReserved,
+          Pointer<Pointer> ppunk)>('GetActiveObject');
+  return _GetActiveObject(rclsid, pvReserved, ppunk);
+}
+
 /// Allocates a new string and copies the passed string into it.
 ///
 /// ```c

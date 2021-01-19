@@ -88,14 +88,18 @@ const mapping = <String, String>{
 
   // Pointers to ints
   'LPDWORD': 'Pointer<Uint32>', 'LPBYTE': 'Pointer<Uint8>',
+  'LPBOOL': 'Pointer<Uint32>',
 
   // Strings
   'LPWSTR': 'Pointer<Utf16>', 'LPCWSTR': 'Pointer<Utf16>',
   'PCWSTR': 'Pointer<Utf16>', 'LPCTSTR': 'Pointer<Utf16>',
   'LPTSTR': 'Pointer<Utf16>', 'LPWCH': 'Pointer<Utf16>',
+  'LPCWCH': 'Pointer<Utf16>',
   'LPCOLESTR': 'Pointer<Utf16>',
+  'LPOLESTR': 'Pointer<Utf16>',
   'PCNZWCH': 'Pointer<Utf16>',
-  'LPCSTR': 'Pointer<Uint8>', // This is an ANSI type string
+  'LPCSTR': 'Pointer<Uint8>', 'LPSTR': 'Pointer<Uint8>',
+  'LPCCH': 'Pointer<Uint8>',
   'TCHAR': 'Uint16', 'PWSTR': 'Pointer<Utf16>',
 
   // Pointers not prefixed with LP*
@@ -134,6 +138,7 @@ const mapping = <String, String>{
 
   // Special cases
   'RPC_AUTH_IDENTITY_HANDLE': 'Pointer',
+  'REFGUID': 'Pointer<GUID>',
   'LPCRECT': 'Pointer<RECT>',
   'LPCMENUINFO': 'Pointer<MENUINFO>',
   'LPCMENUITEMINFOW': 'Pointer<MENUITEMINFO>',

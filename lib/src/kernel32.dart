@@ -2323,6 +2323,54 @@ int WaitForSingleObject(int hHandle, int dwMilliseconds) {
   return _WaitForSingleObject(hHandle, dwMilliseconds);
 }
 
+/// Maps a UTF-16 (wide character) string to a new character string. The
+/// new character string is not necessarily from a multibyte character set.
+///
+/// ```c
+/// int WideCharToMultiByte(
+///   UINT   CodePage,
+///   DWORD  dwFlags,
+///   LPCWCH lpWideCharStr,
+///   int    cchWideChar,
+///   LPSTR  lpMultiByteStr,
+///   int    cbMultiByte,
+///   LPCCH  lpDefaultChar,
+///   LPBOOL lpUsedDefaultChar
+/// );
+/// ```
+/// {@category kernel32}
+int WideCharToMultiByte(
+    int CodePage,
+    int dwFlags,
+    Pointer<Utf16> lpWideCharStr,
+    int cchWideChar,
+    Pointer<Uint8> lpMultiByteStr,
+    int cbMultiByte,
+    Pointer<Uint8> lpDefaultChar,
+    Pointer<Uint32> lpUsedDefaultChar) {
+  final _WideCharToMultiByte = _kernel32.lookupFunction<
+      Int32 Function(
+          Uint32 CodePage,
+          Uint32 dwFlags,
+          Pointer<Utf16> lpWideCharStr,
+          Int32 cchWideChar,
+          Pointer<Uint8> lpMultiByteStr,
+          Int32 cbMultiByte,
+          Pointer<Uint8> lpDefaultChar,
+          Pointer<Uint32> lpUsedDefaultChar),
+      int Function(
+          int CodePage,
+          int dwFlags,
+          Pointer<Utf16> lpWideCharStr,
+          int cchWideChar,
+          Pointer<Uint8> lpMultiByteStr,
+          int cbMultiByte,
+          Pointer<Uint8> lpDefaultChar,
+          Pointer<Uint32> lpUsedDefaultChar)>('WideCharToMultiByte');
+  return _WideCharToMultiByte(CodePage, dwFlags, lpWideCharStr, cchWideChar,
+      lpMultiByteStr, cbMultiByte, lpDefaultChar, lpUsedDefaultChar);
+}
+
 /// Suspends the specified WOW64 thread.
 ///
 /// ```c
