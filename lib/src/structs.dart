@@ -1809,6 +1809,45 @@ class CREDENTIAL extends Struct {
   external Pointer<Utf16> UserName;
 }
 
+// typedef struct tagWINDOWINFO {
+//   DWORD cbSize;
+//   RECT  rcWindow;
+//   RECT  rcClient;
+//   DWORD dwStyle;
+//   DWORD dwExStyle;
+//   DWORD dwWindowStatus;
+//   UINT  cxWindowBorders;
+//   UINT  cyWindowBorders;
+//   ATOM  atomWindowType;
+//   WORD  wCreatorVersion;
+// } WINDOWINFO, *PWINDOWINFO, *LPWINDOWINFO;
+
+/// Contains window information.
+///
+/// {@category Struct}
+class WINDOWINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  external RECT rcWindow;
+  external RECT rcClient;
+
+  @Uint32()
+  external int dwStyle;
+  @Uint32()
+  external int dwExStyle;
+  @Uint32()
+  external int dwWindowStatus;
+  @Uint32()
+  external int cxWindowBorders;
+  @Uint32()
+  external int cyWindowBorders;
+  @Uint16()
+  external int atomWindowType;
+  @Uint16()
+  external int wCreatorVersion;
+}
+
 // *** CONSOLE STRUCTS ***
 
 // Dart FFI does not yet have support for nested structs, so there's extra
