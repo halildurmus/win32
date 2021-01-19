@@ -117,6 +117,23 @@ int BeginUpdateResource(
   return _BeginUpdateResource(pFileName, bDeleteExistingResources);
 }
 
+/// Determines whether the specified process is being debugged.
+///
+/// ```c
+/// BOOL CheckRemoteDebuggerPresent(
+///         HANDLE hProcess,
+///         PBOOL  pbDebuggerPresent
+///       );
+/// ```
+/// {@category kernel32}
+int CheckRemoteDebuggerPresent(int hProcess, Pointer<Int32> pbDebuggerPresent) {
+  final _CheckRemoteDebuggerPresent = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hProcess, Pointer<Int32> pbDebuggerPresent),
+      int Function(int hProcess,
+          Pointer<Int32> pbDebuggerPresent)>('CheckRemoteDebuggerPresent');
+  return _CheckRemoteDebuggerPresent(hProcess, pbDebuggerPresent);
+}
+
 /// Closes an open object handle.
 ///
 /// ```c
@@ -143,6 +160,26 @@ void ClosePseudoConsole(int hPC) {
   final _ClosePseudoConsole = _kernel32.lookupFunction<
       Void Function(IntPtr hPC), void Function(int hPC)>('ClosePseudoConsole');
   return _ClosePseudoConsole(hPC);
+}
+
+/// Enables a debugger to continue a thread that previously reported a
+/// debugging event.
+///
+/// ```c
+/// BOOL ContinueDebugEvent(
+///         DWORD dwProcessId,
+///         DWORD dwThreadId,
+///         DWORD dwContinueStatus
+///       );
+/// ```
+/// {@category kernel32}
+int ContinueDebugEvent(int dwProcessId, int dwThreadId, int dwContinueStatus) {
+  final _ContinueDebugEvent = _kernel32.lookupFunction<
+      Int32 Function(
+          Uint32 dwProcessId, Uint32 dwThreadId, Uint32 dwContinueStatus),
+      int Function(int dwProcessId, int dwThreadId,
+          int dwContinueStatus)>('ContinueDebugEvent');
+  return _ContinueDebugEvent(dwProcessId, dwThreadId, dwContinueStatus);
 }
 
 /// The CreateActCtx function creates an activation context.
@@ -398,6 +435,52 @@ int DeactivateActCtx(int dwFlags, int ulCookie) {
       Int32 Function(Uint32 dwFlags, IntPtr ulCookie),
       int Function(int dwFlags, int ulCookie)>('DeactivateActCtx');
   return _DeactivateActCtx(dwFlags, ulCookie);
+}
+
+/// Causes a breakpoint exception to occur in the current process. This
+/// allows the calling thread to signal the debugger to handle the
+/// exception.
+///
+/// ```c
+/// void DebugBreak();
+/// ```
+/// {@category kernel32}
+void DebugBreak() {
+  final _DebugBreak =
+      _kernel32.lookupFunction<Void Function(), void Function()>('DebugBreak');
+  return _DebugBreak();
+}
+
+/// Causes a breakpoint exception to occur in the specified process. This
+/// allows the calling thread to signal the debugger to handle the
+/// exception.
+///
+/// ```c
+/// BOOL DebugBreakProcess(
+///         HANDLE Process
+///       );
+/// ```
+/// {@category kernel32}
+int DebugBreakProcess(int Process) {
+  final _DebugBreakProcess = _kernel32.lookupFunction<
+      Int32 Function(IntPtr Process),
+      int Function(int Process)>('DebugBreakProcess');
+  return _DebugBreakProcess(Process);
+}
+
+/// Sets the action to be performed when the calling thread exits.
+///
+/// ```c
+/// BOOL DebugSetProcessKillOnExit(
+///         BOOL KillOnExit
+///       );
+/// ```
+/// {@category kernel32}
+int DebugSetProcessKillOnExit(int KillOnExit) {
+  final _DebugSetProcessKillOnExit = _kernel32.lookupFunction<
+      Int32 Function(Int32 KillOnExit),
+      int Function(int KillOnExit)>('DebugSetProcessKillOnExit');
+  return _DebugSetProcessKillOnExit(KillOnExit);
 }
 
 /// Deletes an existing file.
@@ -656,6 +739,22 @@ int FindFirstVolume(Pointer<Utf16> lpszVolumeName, int cchBufferLength) {
   return _FindFirstVolume(lpszVolumeName, cchBufferLength);
 }
 
+/// Requests that the operating system signal a change notification handle
+/// the next time it detects an appropriate change.
+///
+/// ```c
+/// BOOL FindNextChangeNotification(
+///   HANDLE hChangeHandle
+/// );
+/// ```
+/// {@category kernel32}
+int FindNextChangeNotification(int hChangeHandle) {
+  final _FindNextChangeNotification = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hChangeHandle),
+      int Function(int hChangeHandle)>('FindNextChangeNotification');
+  return _FindNextChangeNotification(hChangeHandle);
+}
+
 /// Continues a file search from a previous call to the FindFirstFile,
 /// FindFirstFileEx, or FindFirstFileTransacted functions.
 ///
@@ -672,22 +771,6 @@ int FindNextFile(int hFindFile, Pointer<WIN32_FIND_DATA> lpFindFileData) {
       int Function(int hFindFile,
           Pointer<WIN32_FIND_DATA> lpFindFileData)>('FindNextFileW');
   return _FindNextFile(hFindFile, lpFindFileData);
-}
-
-/// Requests that the operating system signal a change notification handle
-/// the next time it detects an appropriate change.
-///
-/// ```c
-/// BOOL FindNextChangeNotification(
-///   HANDLE hChangeHandle
-/// );
-/// ```
-/// {@category kernel32}
-int FindNextChangeNotification(int hChangeHandle) {
-  final _FindNextChangeNotification = _kernel32.lookupFunction<
-      Int32 Function(IntPtr hChangeHandle),
-      int Function(int hChangeHandle)>('FindNextChangeNotification');
-  return _FindNextChangeNotification(hChangeHandle);
 }
 
 /// Continues a volume search started by a call to the FindFirstVolume
@@ -1080,6 +1163,23 @@ void GetLocalTime(Pointer<SYSTEMTIME> lpSystemTime) {
       Void Function(Pointer<SYSTEMTIME> lpSystemTime),
       void Function(Pointer<SYSTEMTIME> lpSystemTime)>('GetLocalTime');
   return _GetLocalTime(lpSystemTime);
+}
+
+/// Fills a buffer with strings that specify valid drives in the system.
+///
+/// ```c
+/// DWORD GetLogicalDriveStringsW(
+///         DWORD  nBufferLength,
+///         LPWSTR lpBuffer
+/// );
+/// ```
+/// {@category kernel32}
+int GetLogicalDriveStrings(int nBufferLength, Pointer<Utf16> lpBuffer) {
+  final _GetLogicalDriveStrings = _kernel32.lookupFunction<
+      Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
+      int Function(int nBufferLength,
+          Pointer<Utf16> lpBuffer)>('GetLogicalDriveStringsW');
+  return _GetLogicalDriveStrings(nBufferLength, lpBuffer);
 }
 
 /// Retrieves the fully qualified path for the file that contains the
@@ -1579,6 +1679,24 @@ Pointer LockResource(int hResData) {
   return _LockResource(hResData);
 }
 
+/// Moves an existing file or a directory, including its children.
+///
+/// ```c
+/// BOOL MoveFileW(
+///         LPCWSTR lpExistingFileName,
+///         LPCWSTR lpNewFileName
+/// );
+/// ```
+/// {@category kernel32}
+int MoveFile(Pointer<Utf16> lpExistingFileName, Pointer<Utf16> lpNewFileName) {
+  final _MoveFile = _kernel32.lookupFunction<
+      Int32 Function(
+          Pointer<Utf16> lpExistingFileName, Pointer<Utf16> lpNewFileName),
+      int Function(Pointer<Utf16> lpExistingFileName,
+          Pointer<Utf16> lpNewFileName)>('MoveFileW');
+  return _MoveFile(lpExistingFileName, lpNewFileName);
+}
+
 /// Opens an existing local process object.
 ///
 /// ```c
@@ -1596,6 +1714,21 @@ int OpenProcess(int dwDesiredAccess, int bInheritHandle, int dwProcessId) {
       int Function(int dwDesiredAccess, int bInheritHandle,
           int dwProcessId)>('OpenProcess');
   return _OpenProcess(dwDesiredAccess, bInheritHandle, dwProcessId);
+}
+
+/// Sends a string to the debugger for display.
+///
+/// ```c
+/// void OutputDebugStringW(
+///         LPCWSTR lpOutputString
+///       );
+/// ```
+/// {@category kernel32}
+void OutputDebugString(Pointer<Utf16> lpOutputString) {
+  final _OutputDebugString = _kernel32.lookupFunction<
+      Void Function(Pointer<Utf16> lpOutputString),
+      void Function(Pointer<Utf16> lpOutputString)>('OutputDebugStringW');
+  return _OutputDebugString(lpOutputString);
 }
 
 /// Retrieves information about MS-DOS device names. The function can
@@ -1747,21 +1880,6 @@ int ReadProcessMemory(int hProcess, Pointer lpBaseAddress, Pointer lpBuffer,
       hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesRead);
 }
 
-/// Deletes an existing empty directory.
-///
-/// ```c
-/// BOOL RemoveDirectoryW(
-///   LPCWSTR lpPathName
-/// );
-/// ```
-/// {@category kernel32}
-int RemoveDirectory(Pointer<Utf16> lpPathName) {
-  final _RemoveDirectory = _kernel32.lookupFunction<
-      Int32 Function(Pointer<Utf16> lpPathName),
-      int Function(Pointer<Utf16> lpPathName)>('RemoveDirectoryW');
-  return _RemoveDirectory(lpPathName);
-}
-
 /// The ReleaseActCtx function decrements the reference count of the
 /// specified activation context.
 ///
@@ -1775,6 +1893,21 @@ void ReleaseActCtx(int hActCtx) {
   final _ReleaseActCtx = _kernel32.lookupFunction<Void Function(IntPtr hActCtx),
       void Function(int hActCtx)>('ReleaseActCtx');
   return _ReleaseActCtx(hActCtx);
+}
+
+/// Deletes an existing empty directory.
+///
+/// ```c
+/// BOOL RemoveDirectoryW(
+///   LPCWSTR lpPathName
+/// );
+/// ```
+/// {@category kernel32}
+int RemoveDirectory(Pointer<Utf16> lpPathName) {
+  final _RemoveDirectory = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpPathName),
+      int Function(Pointer<Utf16> lpPathName)>('RemoveDirectoryW');
+  return _RemoveDirectory(lpPathName);
 }
 
 /// Resizes the internal buffers for a pseudoconsole to the given size.

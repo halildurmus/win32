@@ -24,5 +24,9 @@ call dart format %~dp0..\test\struct_test.dart
 call dart format %~dp0..\test\com
 echo.
 
+if "%1"=="--notest" goto end
+
 echo Running tests
 call dart test
+
+:end

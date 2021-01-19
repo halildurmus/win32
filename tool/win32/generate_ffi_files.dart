@@ -6,7 +6,10 @@
 
 import 'dart:io';
 
-import 'shared.dart';
+import 'function.dart';
+import 'signature.dart';
+import 'win32api.dart';
+import 'win32types.dart';
 
 String wrapCommentText(String inputText, [int wrapLength = 76]) {
   final words = inputText.split(' ');
@@ -28,29 +31,35 @@ String wrapCommentText(String inputText, [int wrapLength = 76]) {
   return outputText.toString().trimRight();
 }
 
-String generateDocComment(
-    String library, String cPrototype, String apiComment) {
+String generateDocComment(Win32Function func) {
   final comment = StringBuffer();
 
-  if (apiComment.isNotEmpty) {
-    comment.writeln(wrapCommentText(apiComment));
+  if (func.comment.isNotEmpty) {
+    comment.writeln(wrapCommentText(func.comment));
     comment.writeln('///');
   }
 
   comment.writeln('/// ```c');
   comment.write('/// ');
-  comment.writeln(cPrototype.split('\\n').join('\n/// '));
+  comment.writeln(func.prototype.first.split('\\n').join('\n/// '));
   comment.writeln('/// ```');
 
-  comment.write('/// {@category $library}');
+  comment.write('/// {@category ${func.category}}');
   return comment.toString();
 }
 
-void generateFfiFiles() {
-  final libraries = prototypes.values.map((e) => e.dllLibrary).toSet().toList();
+void generateFfiFiles(Win32API win32) {
+  // Generate a list of libs, e.g. [kernel32, gdi32, ...]
+  // The .toSet() removes duplicates.
+  final libraries =
+      win32.functions.values.map((e) => e.dllLibrary).toSet().toList();
 
   for (final library in libraries) {
     final writer = File('lib/src/$library.dart').openSync(mode: FileMode.write);
+
+    // API set names aren't legal Dart identifiers, so we rename them
+    final libraryDartName = library.replaceAll('-', '_');
+
     writer.writeStringSync('''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
@@ -70,41 +79,36 @@ import 'callbacks.dart';
 import 'com/combase.dart';
 import 'structs.dart';
 
-final _$library = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');\n
+final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');\n
 ''');
-    final libProtos = prototypes.values.where((p) => p.dllLibrary == library);
 
-    for (final proto in libProtos) {
-      final apiName = prototypes.keys.firstWhere(
-          (k) => prototypes[k]!.neutralApiName == proto.neutralApiName);
-      final win32Func = win32APIs.where((api) => api.name == apiName).first;
-      final returnFFIType = ffiFromWin32(win32Func.returnType);
-      final returnDartType = dartFromFFI(returnFFIType);
+    final filteredFunctionList =
+        win32.functions.values.where((func) => func.dllLibrary == library);
+
+    for (final function in filteredFunctionList) {
+      final apiName = function.signature.nameWithoutEncoding;
+      final returnFFIType = ffiFromWin32(function.signature.returnType);
+      final returnDartType = Win32Param([returnFFIType, '']).dartType;
+
+      final nativeParams = function.signature.params
+          .map((param) => '${param.ffiType} ${param.name}')
+          .join(', ');
+
+      final dartParams = function.signature.params
+          .map((param) => '${param.dartType} ${param.name}')
+          .join(', ');
+
+      final paramsList =
+          function.signature.params.map((param) => param.name).join(', ');
 
       writer.writeStringSync('''
-${generateDocComment(library, proto.prototype.first, proto.comment)}
-$returnDartType ${win32Func.nameWithoutEncoding}(${win32Func.params.map((param) {
-        final convertedParams = win32Func.convertParamType(param);
-        final dartType = dartFromFFI(convertedParams.first);
-        return '$dartType ${convertedParams.last}';
-      }).join(', ')}) {
-  final _${win32Func.nameWithoutEncoding} = _$library.lookupFunction<\n
-    $returnFFIType Function(
-      ${win32Func.params.map((param) {
-        final convertedParams = win32Func.convertParamType(param);
-        return '${convertedParams.first} ${convertedParams.last}';
-      }).join(', ')}),
-    $returnDartType Function(
-      ${win32Func.params.map((param) {
-        final convertedParams = win32Func.convertParamType(param);
-        final dartType = dartFromFFI(convertedParams.first);
-        return '$dartType ${convertedParams.last}';
-      }).join(', ')})>
-    ('$apiName');
-  return _${win32Func.nameWithoutEncoding}(${win32Func.params.map((param) {
-        final convertedParams = win32Func.convertParamType(param);
-        return convertedParams.last;
-      }).join(', ')});
+${generateDocComment(function)}
+$returnDartType $apiName(${function.signature.params.map((param) => '${param.dartType} ${param.name}').join(', ')}) {
+  final _$apiName = _$libraryDartName.lookupFunction<
+    $returnFFIType Function($nativeParams),
+    $returnDartType Function($dartParams)>
+    ('${function.signature.name}');
+  return _$apiName($paramsList);
 }
 ''');
     }
@@ -114,7 +118,8 @@ $returnDartType ${win32Func.nameWithoutEncoding}(${win32Func.params.map((param) 
 }
 
 void main() {
-  loadCsv('tool/win32/win32api.csv');
-  generateFfiFiles();
-  print('${prototypes.length} typedefs generated.');
+  final win32 = Win32API('tool/win32/win32api.json');
+
+  generateFfiFiles(win32);
+  print('${win32.functions.length} typedefs generated.');
 }

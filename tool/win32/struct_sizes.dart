@@ -19,6 +19,8 @@ const structSize64 = {
   'COMDLG_FILTERSPEC': 16,
   'ACCEL': 6,
   'MONITORINFO': 40,
+  'PHYSICAL_MONITOR': 264,
+  'SYSTEMTIME': 16,
   'CHOOSECOLOR': 72,
   'FINDREPLACE': 80,
   'CHOOSEFONT': 104,
@@ -42,6 +44,7 @@ const structSize64 = {
   'GUID': 16,
   'CREDENTIAL_ATTRIBUTE': 24,
   'CREDENTIAL': 80,
+  'WINDOWINFO': 60,
   'BITMAPINFO': 44,
   'BITMAP': 32,
   'BITMAPFILEHEADER': 14,
@@ -65,11 +68,13 @@ const structSize64 = {
   'TASKDIALOG_BUTTON': 12,
   'DLLVERSIONINFO': 20,
   'OSVERSIONINFO': 276,
-  'SYSTEMTIME': 16,
+  'BLUETOOTH_ADDRESS': 8,
   'BLUETOOTH_DEVICE_INFO': 560,
+  'BLUETOOTH_RADIO_INFO': 520,
   'BLUETOOTH_DEVICE_SEARCH_PARAMS': 40,
   'BLUETOOTH_FIND_RADIO_PARAMS': 4,
   'BLUETOOTH_PIN_INFO': 17,
+  'BLUETOOTH_OOB_DATA_INFO': 32,
   'COR_FIELD_OFFSET': 8,
   'VS_FIXEDFILEINFO': 52,
   'MCI_OPEN_PARMS': 36,
@@ -84,6 +89,8 @@ const structSize64 = {
   'CLSID': 16,
   'STATSTG': 80,
   'NLM_SIMULATED_PROFILE_INFO': 524,
+  'NOTIFYICONDATA': 976,
+  'TPMPARAMS': 20,
 };
 
 const structSize32 = {
@@ -102,6 +109,8 @@ const structSize32 = {
   'COMDLG_FILTERSPEC': 8,
   'ACCEL': 6,
   'MONITORINFO': 40,
+  'PHYSICAL_MONITOR': 260,
+  'SYSTEMTIME': 16,
   'CHOOSECOLOR': 36,
   'FINDREPLACE': 40,
   'CHOOSEFONT': 60,
@@ -125,6 +134,7 @@ const structSize32 = {
   'GUID': 16,
   'CREDENTIAL_ATTRIBUTE': 16,
   'CREDENTIAL': 52,
+  'WINDOWINFO': 60,
   'BITMAPINFO': 44,
   'BITMAP': 24,
   'BITMAPFILEHEADER': 14,
@@ -148,11 +158,13 @@ const structSize32 = {
   'TASKDIALOG_BUTTON': 8,
   'DLLVERSIONINFO': 20,
   'OSVERSIONINFO': 276,
-  'SYSTEMTIME': 16,
+  'BLUETOOTH_ADDRESS': 8,
   'BLUETOOTH_DEVICE_INFO': 560,
+  'BLUETOOTH_RADIO_INFO': 520,
   'BLUETOOTH_DEVICE_SEARCH_PARAMS': 32,
   'BLUETOOTH_FIND_RADIO_PARAMS': 4,
   'BLUETOOTH_PIN_INFO': 17,
+  'BLUETOOTH_OOB_DATA_INFO': 32,
   'COR_FIELD_OFFSET': 8,
   'VS_FIXEDFILEINFO': 52,
   'MCI_OPEN_PARMS': 20,
@@ -167,6 +179,8 @@ const structSize32 = {
   'CLSID': 16,
   'STATSTG': 72,
   'NLM_SIMULATED_PROFILE_INFO': 524,
+  'NOTIFYICONDATA': 956,
+  'TPMPARAMS': 20,
 };
 
 const skipStructs = [
@@ -179,11 +193,11 @@ const skipStructs = [
   // sizeOf<OSVERSIONINFO> returns 280 because Dart over-allocates storage.
   'OSVERSIONINFO',
 
+  // sizeOf<BLUETOOTH_PIN_INFO> returns 24 because Dart over-allocates storage.
+  'BLUETOOTH_PIN_INFO',
+
   // Should be allocated manually, rather than using sizeOf
   'DLGTEMPLATE', 'DLGITEMTEMPLATE',
-
-  // TODO: Doesn't contain magic data field
-  'BLUETOOTH_DEVICE_INFO', 'BLUETOOTH_PIN_INFO',
 
   // TODO: Packed structs
   'MCI_OPEN_PARMS', 'MCI_SEEK_PARMS',

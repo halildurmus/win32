@@ -11,7 +11,7 @@
 // This code not used by the package itself, but is just a helper to inspect
 // widths across x86 and x64 architectures.
 
-// Compile with cl struct_sizes.cpp
+// Compile with cl struct_sizes.cpp /Fe:structs64.exe
 
 #include <stdlib.h>
 #include <windows.h>
@@ -21,12 +21,11 @@
 #include <bluetoothapis.h>
 #include <wincred.h>
 #include <Shlwapi.h>
+#include <physicalmonitorenumerationapi.h>
 #include <CorHdr.h>
 
 void main()
 {
-    printf("On this platform:\n");
-
     printf("'WNDCLASS': %zu,\n", sizeof(WNDCLASS));
     printf("'SYSTEM_INFO': %zu,\n", sizeof(SYSTEM_INFO));
     printf("'PROCESS_INFORMATION': %zu,\n", sizeof(PROCESS_INFORMATION));
@@ -42,6 +41,8 @@ void main()
     printf("'COMDLG_FILTERSPEC': %zu,\n", sizeof(COMDLG_FILTERSPEC));
     printf("'ACCEL': %zu,\n", sizeof(ACCEL));
     printf("'MONITORINFO': %zu,\n", sizeof(MONITORINFO));
+    printf("'PHYSICAL_MONITOR': %zu,\n", sizeof(PHYSICAL_MONITOR));
+    printf("'SYSTEMTIME': %zu,\n", sizeof(SYSTEMTIME));
     printf("'CHOOSECOLOR': %zu,\n", sizeof(CHOOSECOLOR));
     printf("'FINDREPLACE': %zu,\n", sizeof(FINDREPLACE));
     printf("'CHOOSEFONT': %zu,\n", sizeof(CHOOSEFONT));
@@ -68,6 +69,7 @@ void main()
     printf("'GUID': %zu,\n", sizeof(GUID));
     printf("'CREDENTIAL_ATTRIBUTE': %zu,\n", sizeof(CREDENTIAL_ATTRIBUTE));
     printf("'CREDENTIAL': %zu,\n", sizeof(CREDENTIAL));
+    printf("'WINDOWINFO': %zu,\n", sizeof(WINDOWINFO));
     printf("'BITMAPINFO': %zu,\n", sizeof(BITMAPINFO));
     printf("'BITMAP': %zu,\n", sizeof(BITMAP));
     printf("'BITMAPFILEHEADER': %zu,\n", sizeof(BITMAPFILEHEADER));
@@ -91,10 +93,13 @@ void main()
     printf("'TASKDIALOG_BUTTON': %zu,\n", sizeof(TASKDIALOG_BUTTON));
     printf("'DLLVERSIONINFO': %zu,\n", sizeof(DLLVERSIONINFO));
     printf("'OSVERSIONINFOW': %zu,\n", sizeof(OSVERSIONINFOW));
+    printf("'BLUETOOTH_ADDRESS': %zu,\n", sizeof(BLUETOOTH_ADDRESS));
     printf("'BLUETOOTH_DEVICE_INFO': %zu,\n", sizeof(BLUETOOTH_DEVICE_INFO));
+    printf("'BLUETOOTH_RADIO_INFO': %zu,\n", sizeof(BLUETOOTH_RADIO_INFO));
     printf("'BLUETOOTH_DEVICE_SEARCH_PARAMS': %zu,\n", sizeof(BLUETOOTH_DEVICE_SEARCH_PARAMS));
     printf("'BLUETOOTH_FIND_RADIO_PARAMS': %zu,\n", sizeof(BLUETOOTH_FIND_RADIO_PARAMS));
     printf("'BLUETOOTH_PIN_INFO': %zu,\n", sizeof(BLUETOOTH_PIN_INFO));
+    printf("'BLUETOOTH_OOB_DATA_INFO': %zu,\n", sizeof(BLUETOOTH_OOB_DATA_INFO));
     printf("'COR_FIELD_OFFSET': %zu,\n", sizeof(COR_FIELD_OFFSET));
     printf("'VS_FIXEDFILEINFO': %zu,\n", sizeof(VS_FIXEDFILEINFO));
     printf("'MCI_OPEN_PARMS': %zu,\n", sizeof(MCI_OPEN_PARMS));
@@ -109,4 +114,6 @@ void main()
     printf("'CLSID': %zu,\n", sizeof(CLSID));
     printf("'STATSTG': %zu,\n", sizeof(STATSTG));
     printf("'NLM_SIMULATED_PROFILE_INFO': %zu,\n", sizeof(NLM_SIMULATED_PROFILE_INFO));
+    printf("'NOTIFYICONDATAW': %zu,\n", sizeof(NOTIFYICONDATAW));
+    printf("'TPMPARAMS': %zu,\n", sizeof(TPMPARAMS));
 }

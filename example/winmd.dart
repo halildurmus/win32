@@ -32,7 +32,7 @@ File metadataFileContainingType(String typeName) {
   final hstrTypeName = convertToHString(typeName);
 
   final hstrMetaDataFilePath = allocate<IntPtr>();
-  final spMetaDataImport = allocate<IntPtr>();
+  final spMetaDataImport = allocate<Pointer>();
   final typeDef = allocate<Uint32>();
 
   File path;
@@ -40,7 +40,7 @@ File metadataFileContainingType(String typeName) {
   // RoGetMetaDataFile can only be used for Windows Runtime classes in an app
   // that is not a Windows Store app.
   final hr = RoGetMetaDataFile(hstrTypeName.value, nullptr,
-      hstrMetaDataFilePath.address, spMetaDataImport, typeDef);
+      hstrMetaDataFilePath, spMetaDataImport, typeDef);
   if (SUCCEEDED(hr)) {
     path = File(convertFromHString(hstrMetaDataFilePath));
   } else {
@@ -59,7 +59,7 @@ File metadataFileContainingType(String typeName) {
 List<WindowsRuntimeType> metadataTypesInFile(File file) {
   final types = <WindowsRuntimeType>[];
 
-  final pDispenser = COMObject.allocate().addressOf;
+  final pDispenser = calloc<COMObject>();
   var hr = MetaDataGetDispenser(
       convertToCLSID(CLSID_CorMetaDataDispenser).cast(),
       convertToIID(IID_IMetaDataDispenser).cast(),

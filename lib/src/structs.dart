@@ -8,6 +8,7 @@
 // Linter exceptions
 // -----------------------------------------------------------------------------
 // ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_extensions
 // Why? The linter defaults to throw a warning for types not named as camel
 // case. We deliberately break this convention to match the Win32 underlying
 // types.
@@ -23,16 +24,18 @@
 import 'dart:ffi';
 import 'dart:math' show min;
 import 'dart:typed_data';
+
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
 import 'constants.dart';
 import 'constants_nodoc.dart';
+import 'extensions/set_string.dart';
 import 'extensions/unpack_utf16.dart';
 import 'kernel32.dart';
 import 'oleaut32.dart';
 
-Pointer<T> zeroAllocate<T extends NativeType>({int count = 1}) {
+Pointer<T> calloc<T extends NativeType>({int count = 1}) {
   final totalSize = count * sizeOf<T>();
   final heap = GetProcessHeap();
 
@@ -90,8 +93,6 @@ class WNDCLASS extends Struct {
 
   external Pointer<Utf16> lpszMenuName;
   external Pointer<Utf16> lpszClassName;
-
-  factory WNDCLASS.allocate() => zeroAllocate<WNDCLASS>().ref;
 }
 
 // typedef struct _SYSTEM_INFO {
@@ -148,8 +149,6 @@ class SYSTEM_INFO extends Struct {
 
   @Uint16()
   external int wProcessorRevision;
-
-  factory SYSTEM_INFO.allocate() => zeroAllocate<SYSTEM_INFO>().ref;
 }
 
 // typedef struct _PROCESS_INFORMATION {
@@ -173,9 +172,6 @@ class PROCESS_INFORMATION extends Struct {
   external int dwProcessId;
   @Uint32()
   external int dwThreadId;
-
-  factory PROCESS_INFORMATION.allocate() =>
-      zeroAllocate<PROCESS_INFORMATION>().ref;
 }
 
 // typedef struct _STARTUPINFOW {
@@ -238,7 +234,7 @@ class STARTUPINFO extends Struct {
   external int hStdError;
 
   factory STARTUPINFO.allocate() =>
-      zeroAllocate<STARTUPINFO>().ref..cb = sizeOf<STARTUPINFO>();
+      calloc<STARTUPINFO>().ref..cb = sizeOf<STARTUPINFO>();
 }
 
 // typedef struct tagBIND_OPTS
@@ -261,8 +257,6 @@ class BIND_OPTS extends Struct {
   external int grfMode;
   @Uint32()
   external int dwTickCountDeadline;
-
-  factory BIND_OPTS.allocate() => zeroAllocate<BIND_OPTS>().ref;
 }
 
 // typedef struct _SYSTEM_POWER_STATUS {
@@ -290,9 +284,6 @@ class SYSTEM_POWER_STATUS extends Struct {
   external int BatteryLifeTime;
   @Uint32()
   external int BatteryFullLifeTime;
-
-  factory SYSTEM_POWER_STATUS.allocate() =>
-      zeroAllocate<SYSTEM_POWER_STATUS>().ref;
 }
 
 // typedef struct {
@@ -349,9 +340,6 @@ class SYSTEM_BATTERY_STATE extends Struct {
   external int DefaultAlert1;
   @Uint32()
   external int DefaultAlert2;
-
-  factory SYSTEM_BATTERY_STATE.allocate() =>
-      zeroAllocate<SYSTEM_BATTERY_STATE>().ref;
 }
 
 // typedef struct _STARTUPINFOEXW {
@@ -400,7 +388,7 @@ class STARTUPINFOEX extends Struct {
   external Pointer lpAttributeList;
 
   factory STARTUPINFOEX.allocate() =>
-      zeroAllocate<STARTUPINFOEX>().ref..cb = sizeOf<STARTUPINFOEX>();
+      calloc<STARTUPINFOEX>().ref..cb = sizeOf<STARTUPINFOEX>();
 }
 
 // typedef struct _SECURITY_ATTRIBUTES {
@@ -426,9 +414,6 @@ class SECURITY_ATTRIBUTES extends Struct {
 
   @Int32()
   external int bInheritHandle;
-
-  factory SECURITY_ATTRIBUTES.allocate() =>
-      zeroAllocate<SECURITY_ATTRIBUTES>().ref;
 }
 
 // typedef struct _SECURITY_DESCRIPTOR {
@@ -460,9 +445,6 @@ class SECURITY_DESCRIPTOR extends Struct {
   external Pointer<IntPtr> Group;
   external Pointer<IntPtr> Sacl;
   external Pointer<IntPtr> Dacl;
-
-  factory SECURITY_DESCRIPTOR.allocate() =>
-      zeroAllocate<SECURITY_DESCRIPTOR>().ref;
 }
 
 // typedef struct tagSOLE_AUTHENTICATION_SERVICE {
@@ -487,9 +469,6 @@ class SOLE_AUTHENTICATION_SERVICE extends Struct {
 
   @Int32()
   external int hr;
-
-  factory SOLE_AUTHENTICATION_SERVICE.allocate() =>
-      zeroAllocate<SOLE_AUTHENTICATION_SERVICE>().ref;
 }
 
 // struct tagVARIANT
@@ -533,7 +512,7 @@ class VARIANT extends Struct {
 
   bool get isPointer => vt & VARENUM.VT_PTR == VARENUM.VT_PTR;
 
-  factory VARIANT.allocate() => zeroAllocate<VARIANT>().ref;
+  factory VARIANT.allocate() => calloc<VARIANT>().ref;
 
   factory VARIANT.fromPointer(Pointer ptr) => VARIANT.allocate()
     ..vt = VARENUM.VT_PTR
@@ -551,8 +530,6 @@ class VARIANT extends Struct {
 class COMDLG_FILTERSPEC extends Struct {
   external Pointer<Utf16> pszName;
   external Pointer<Utf16> pszSpec;
-
-  factory COMDLG_FILTERSPEC.allocate() => zeroAllocate<COMDLG_FILTERSPEC>().ref;
 }
 
 // typedef struct tagACCEL {
@@ -571,8 +548,6 @@ class ACCEL extends Struct {
   external int key;
   @Uint16()
   external int cmd;
-
-  factory ACCEL.allocate() => zeroAllocate<ACCEL>().ref;
 }
 
 // typedef struct tagMONITORINFO {
@@ -596,7 +571,7 @@ class MONITORINFO extends Struct {
   external int dwFlags;
 
   factory MONITORINFO.allocate() =>
-      zeroAllocate<MONITORINFO>().ref..cbSize = sizeOf<MONITORINFO>();
+      calloc<MONITORINFO>().ref..cbSize = sizeOf<MONITORINFO>();
 }
 
 const PHYSICAL_MONITOR_DESCRIPTION_SIZE = 128;
@@ -612,9 +587,74 @@ const PHYSICAL_MONITOR_DESCRIPTION_SIZE = 128;
 class PHYSICAL_MONITOR extends Struct {
   @IntPtr()
   external int hPhysicalMonitor;
+  @Uint64()
+  external int _data0;
+  @Uint64()
+  external int _data1;
+  @Uint64()
+  external int _data2;
+  @Uint64()
+  external int _data3;
+  @Uint64()
+  external int _data4;
+  @Uint64()
+  external int _data5;
+  @Uint64()
+  external int _data6;
+  @Uint64()
+  external int _data7;
+  @Uint64()
+  external int _data8;
+  @Uint64()
+  external int _data9;
+  @Uint64()
+  external int _data10;
+  @Uint64()
+  external int _data11;
+  @Uint64()
+  external int _data12;
+  @Uint64()
+  external int _data13;
+  @Uint64()
+  external int _data14;
+  @Uint64()
+  external int _data15;
+  @Uint64()
+  external int _data16;
+  @Uint64()
+  external int _data17;
+  @Uint64()
+  external int _data18;
+  @Uint64()
+  external int _data19;
+  @Uint64()
+  external int _data20;
+  @Uint64()
+  external int _data21;
+  @Uint64()
+  external int _data22;
+  @Uint64()
+  external int _data23;
+  @Uint64()
+  external int _data24;
+  @Uint64()
+  external int _data25;
+  @Uint64()
+  external int _data26;
+  @Uint64()
+  external int _data27;
+  @Uint64()
+  external int _data28;
+  @Uint64()
+  external int _data29;
+  @Uint64()
+  external int _data30;
+  @Uint64()
+  external int _data31;
+}
 
-  String get szPhysicalMonitorDescription => addressOf
-      .cast<IntPtr>()
+extension PointerPHYSICAL_MONITORExtension on Pointer<PHYSICAL_MONITOR> {
+  String get szPhysicalMonitorDescription => cast<IntPtr>()
       .elementAt(1)
       .cast<Utf16>()
       .unpackString(PHYSICAL_MONITOR_DESCRIPTION_SIZE);
@@ -664,7 +704,7 @@ class CHOOSECOLOR extends Struct {
   external Pointer<Uint16> lpTemplateName;
 
   factory CHOOSECOLOR.allocate() =>
-      zeroAllocate<CHOOSECOLOR>().ref..lStructSize = sizeOf<CHOOSECOLOR>();
+      calloc<CHOOSECOLOR>().ref..lStructSize = sizeOf<CHOOSECOLOR>();
 }
 
 // typedef struct tagFINDREPLACEW {
@@ -706,8 +746,6 @@ class FINDREPLACE extends Struct {
   external int lCustData;
   external Pointer<NativeFunction<LPFRHookProc>> lpfnHook;
   external Pointer<Utf16> lpTemplateName;
-
-  factory FINDREPLACE.allocate() => zeroAllocate<FINDREPLACE>().ref;
 }
 
 // typedef struct tagCHOOSEFONTW {
@@ -768,8 +806,6 @@ class CHOOSEFONT extends Struct {
   external int nSizeMin;
   @Int32()
   external int nSizeMax;
-
-  factory CHOOSEFONT.allocate() => zeroAllocate<CHOOSEFONT>().ref;
 }
 
 // typedef struct tagOFNW {
@@ -851,8 +887,6 @@ class OPENFILENAME extends Struct {
   external int dwReserved;
   @Uint32()
   external int FlagsEx;
-
-  factory OPENFILENAME.allocate() => zeroAllocate<OPENFILENAME>().ref;
 }
 
 // typedef struct {
@@ -937,11 +971,10 @@ class LOGFONT extends Struct {
   external int lfFaceName15;
   @Int32()
   external int lfFaceName16;
+}
 
-  Pointer<Utf16> get lfFaceName =>
-      addressOf.cast<Uint8>().elementAt(28).cast<Utf16>();
-
-  factory LOGFONT.allocate() => zeroAllocate<LOGFONT>().ref;
+extension PointerLOGFONTExtension on Pointer<LOGFONT> {
+  Pointer<Utf16> get lfFaceName => cast<Uint8>().elementAt(28).cast<Utf16>();
 }
 
 // typedef struct tagENUMLOGFONTEXW {
@@ -1043,29 +1076,23 @@ class ENUMLOGFONTEX extends Struct {
   external int _data42;
   @Uint32()
   external int _data43;
+}
 
-  LOGFONT get elfLogFont => addressOf.cast<LOGFONT>().ref;
-
-  String get elfFullName => addressOf
-      .cast<Uint8>()
+extension PointerENUMLOGFONTEXExtension on Pointer<ENUMLOGFONTEX> {
+  String get elfFullName => cast<Uint8>()
       .elementAt(sizeOf<LOGFONT>())
       .cast<Utf16>()
       .unpackString(LF_FULLFACESIZE);
 
-  String get elfStyle => addressOf
-      .cast<Uint8>()
+  String get elfStyle => cast<Uint8>()
       .elementAt(sizeOf<LOGFONT>() + LF_FULLFACESIZE * 2)
       .cast<Utf16>()
       .unpackString(LF_FACESIZE);
 
-  String get elfScript => addressOf
-      .cast<Uint8>()
+  String get elfScript => cast<Uint8>()
       .elementAt(sizeOf<LOGFONT>() + ((LF_FULLFACESIZE + LF_FACESIZE) * 2))
       .cast<Utf16>()
       .unpackString(LF_FACESIZE);
-
-  factory ENUMLOGFONTEX.allocate() =>
-      zeroAllocate<Uint8>(count: 348).cast<ENUMLOGFONTEX>().ref;
 }
 
 // typedef struct tagCREATESTRUCTW {
@@ -1113,8 +1140,6 @@ class CREATESTRUCT extends Struct {
 
   @Uint32()
   external int dwExStyle;
-
-  factory CREATESTRUCT.allocate() => zeroAllocate<CREATESTRUCT>().ref;
 }
 
 // typedef struct tagMENUINFO {
@@ -1144,8 +1169,6 @@ class MENUINFO extends Struct {
   @Uint32()
   external int dwContextHelpID;
   external Pointer<Uint32> dwMenuData;
-
-  factory MENUINFO.allocate() => zeroAllocate<MENUINFO>().ref;
 }
 
 // typedef struct tagMENUITEMINFOW {
@@ -1198,8 +1221,6 @@ class MENUITEMINFO extends Struct {
 
   @IntPtr()
   external int hbmpItem;
-
-  factory MENUITEMINFO.allocate() => zeroAllocate<MENUITEMINFO>().ref;
 }
 
 // typedef struct tagMSG {
@@ -1231,8 +1252,6 @@ class MSG extends Struct {
   external int time;
 
   external POINT pt;
-
-  factory MSG.allocate() => zeroAllocate<MSG>().ref;
 }
 
 // typedef struct tagSIZE {
@@ -1249,8 +1268,6 @@ class SIZE extends Struct {
 
   @Int32()
   external int cy;
-
-  factory SIZE.allocate() => zeroAllocate<SIZE>().ref;
 }
 
 // typedef struct tagMINMAXINFO {
@@ -1271,8 +1288,6 @@ class MINMAXINFO extends Struct {
   external POINT ptMaxPosition;
   external POINT ptMinTrackSize;
   external POINT ptMaxTrackSize;
-
-  factory MINMAXINFO.allocate() => zeroAllocate<MINMAXINFO>().ref;
 }
 
 // typedef struct tagPOINT {
@@ -1289,8 +1304,6 @@ class POINT extends Struct {
 
   @Int32()
   external int y;
-
-  factory POINT.allocate() => zeroAllocate<POINT>().ref;
 }
 
 // typedef struct tagPAINTSTRUCT {
@@ -1327,8 +1340,6 @@ class PAINTSTRUCT extends Struct {
   external int rgb3;
   @Uint64()
   external int rgb4;
-
-  factory PAINTSTRUCT.allocate() => zeroAllocate<PAINTSTRUCT>().ref;
 }
 
 // typedef struct tagRECT {
@@ -1351,8 +1362,6 @@ class RECT extends Struct {
   external int right;
   @Int32()
   external int bottom;
-
-  factory RECT.allocate() => zeroAllocate<RECT>().ref;
 }
 
 // typedef struct tagINPUT {
@@ -1370,29 +1379,28 @@ class RECT extends Struct {
 /// {@category Struct}
 class INPUT extends Struct {
   // 28 bytes on 32-bit, 40 bytes on 64-bit
-  @IntPtr()
+  @Uint32()
+  external int type;
+  @Int32()
   external int _data0;
   @IntPtr()
   external int _data1;
   @IntPtr()
   external int _data2;
-  @Uint64()
+  @IntPtr()
   external int _data3;
   @Uint64()
   external int _data4;
+}
 
-  int get type => addressOf.cast<Uint32>().value;
-  set type(int value) => addressOf.cast<Uint32>().value = value;
-
+extension PointerINPUTExtension on Pointer<INPUT> {
   // Location adjusts for padding on 32-bit or 64-bit
   MOUSEINPUT get mi =>
-      MOUSEINPUT(addressOf.cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
+      MOUSEINPUT(cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
   KEYBDINPUT get ki =>
-      KEYBDINPUT(addressOf.cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
+      KEYBDINPUT(cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
   HARDWAREINPUT get hi =>
-      HARDWAREINPUT(addressOf.cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
-
-  factory INPUT.allocate() => zeroAllocate<INPUT>().ref;
+      HARDWAREINPUT(cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
 }
 
 // typedef struct tagMOUSEINPUT {
@@ -1551,8 +1559,6 @@ class TEXTMETRIC extends Struct {
   external int tmPitchAndFamily;
   @Uint8()
   external int tmCharSet;
-
-  factory TEXTMETRIC.allocate() => zeroAllocate<TEXTMETRIC>().ref;
 }
 
 // typedef struct tagSCROLLINFO {
@@ -1585,8 +1591,6 @@ class SCROLLINFO extends Struct {
   external int nPos;
   @Int32()
   external int nTrackPos;
-
-  factory SCROLLINFO.allocate() => zeroAllocate<SCROLLINFO>().ref;
 }
 
 // typedef struct _SHELLEXECUTEINFOW {
@@ -1642,7 +1646,7 @@ class SHELLEXECUTEINFO extends Struct {
   external int hProcess;
 
   factory SHELLEXECUTEINFO.allocate() =>
-      zeroAllocate<SHELLEXECUTEINFO>().ref..cbSize = sizeOf<SHELLEXECUTEINFO>();
+      calloc<SHELLEXECUTEINFO>().ref..cbSize = sizeOf<SHELLEXECUTEINFO>();
 }
 
 // typedef struct _SHQUERYRBINFO {
@@ -1665,7 +1669,7 @@ class SHQUERYRBINFO extends Struct {
   external int i64NumItems;
 
   factory SHQUERYRBINFO.allocate() =>
-      zeroAllocate<SHQUERYRBINFO>().ref..cbSize = sizeOf<SHQUERYRBINFO>();
+      calloc<SHQUERYRBINFO>().ref..cbSize = sizeOf<SHQUERYRBINFO>();
 }
 
 // *** COM STRUCTS ***
@@ -1689,35 +1693,6 @@ class GUID extends Struct {
   external int Data3;
   @Uint64()
   external int Data4;
-
-  factory GUID.allocate() => zeroAllocate<GUID>().ref;
-
-  /// Create GUID from common {FDD39AD0-238F-46AF-ADB4-6C85480369C7} format
-  factory GUID.fromString(String guidString) {
-    assert(guidString.length == 38);
-    final guid = zeroAllocate<GUID>().ref;
-    guid.Data1 = int.parse(guidString.substring(1, 9), radix: 16);
-    guid.Data2 = int.parse(guidString.substring(10, 14), radix: 16);
-    guid.Data3 = int.parse(guidString.substring(15, 19), radix: 16);
-
-    // final component is pushed on the stack in reverse order per x64
-    // calling convention. This is a funky workaround until FFI supports
-    // passing structs by value.
-    final rawString = guidString.substring(35, 37) +
-        guidString.substring(33, 35) +
-        guidString.substring(31, 33) +
-        guidString.substring(29, 31) +
-        guidString.substring(27, 29) +
-        guidString.substring(25, 27) +
-        guidString.substring(22, 24) +
-        guidString.substring(20, 22);
-
-    // We need to split this to avoid overflowing a signed int.parse()
-    guid.Data4 = (int.parse(rawString.substring(0, 4), radix: 16) << 48) +
-        int.parse(rawString.substring(4, 16), radix: 16);
-
-    return guid;
-  }
 
   /// Print GUID in common {FDD39AD0-238F-46AF-ADB4-6C85480369C7} format
   @override
@@ -1743,6 +1718,31 @@ class GUID extends Struct {
   }
 }
 
+extension PointerGUIDExtension on Pointer<GUID> {
+  /// Create GUID from common {FDD39AD0-238F-46AF-ADB4-6C85480369C7} format
+  void setGUID(String guidString) {
+    assert(guidString.length == 38);
+    ref.Data1 = int.parse(guidString.substring(1, 9), radix: 16);
+    ref.Data2 = int.parse(guidString.substring(10, 14), radix: 16);
+    ref.Data3 = int.parse(guidString.substring(15, 19), radix: 16);
+
+    // Final component is pushed on the stack in reverse order per x64
+    // calling convention.
+    final rawString = guidString.substring(35, 37) +
+        guidString.substring(33, 35) +
+        guidString.substring(31, 33) +
+        guidString.substring(29, 31) +
+        guidString.substring(27, 29) +
+        guidString.substring(25, 27) +
+        guidString.substring(22, 24) +
+        guidString.substring(20, 22);
+
+    // We need to split this to avoid overflowing a signed int.parse()
+    ref.Data4 = (int.parse(rawString.substring(0, 4), radix: 16) << 48) +
+        int.parse(rawString.substring(4, 16), radix: 16);
+  }
+}
+
 // typedef struct _CREDENTIAL_ATTRIBUTEW {
 //     LPWSTR  Keyword;
 //     DWORD   Flags;
@@ -1765,9 +1765,6 @@ class CREDENTIAL_ATTRIBUTE extends Struct {
   external int ValueSize;
 
   external Pointer<Uint8> Value;
-
-  factory CREDENTIAL_ATTRIBUTE.allocate() =>
-      zeroAllocate<CREDENTIAL_ATTRIBUTE>().ref;
 }
 
 // typedef struct _CREDENTIALW {
@@ -1812,8 +1809,45 @@ class CREDENTIAL extends Struct {
   external Pointer<CREDENTIAL_ATTRIBUTE> Attributes;
   external Pointer<Utf16> TargetAlias;
   external Pointer<Utf16> UserName;
+}
 
-  factory CREDENTIAL.allocate() => zeroAllocate<CREDENTIAL>().ref;
+// typedef struct tagWINDOWINFO {
+//   DWORD cbSize;
+//   RECT  rcWindow;
+//   RECT  rcClient;
+//   DWORD dwStyle;
+//   DWORD dwExStyle;
+//   DWORD dwWindowStatus;
+//   UINT  cxWindowBorders;
+//   UINT  cyWindowBorders;
+//   ATOM  atomWindowType;
+//   WORD  wCreatorVersion;
+// } WINDOWINFO, *PWINDOWINFO, *LPWINDOWINFO;
+
+/// Contains window information.
+///
+/// {@category Struct}
+class WINDOWINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  external RECT rcWindow;
+  external RECT rcClient;
+
+  @Uint32()
+  external int dwStyle;
+  @Uint32()
+  external int dwExStyle;
+  @Uint32()
+  external int dwWindowStatus;
+  @Uint32()
+  external int cxWindowBorders;
+  @Uint32()
+  external int cyWindowBorders;
+  @Uint16()
+  external int atomWindowType;
+  @Uint16()
+  external int wCreatorVersion;
 }
 
 // *** CONSOLE STRUCTS ***
@@ -1884,7 +1918,7 @@ class BITMAPINFO extends Struct {
   @Uint8()
   external int rgbReserved;
 
-  factory BITMAPINFO.allocate() => zeroAllocate<BITMAPINFO>().ref..biSize = 44;
+  factory BITMAPINFO.allocate() => calloc<BITMAPINFO>().ref..biSize = 44;
 }
 
 // typedef struct tagBITMAP {
@@ -1915,8 +1949,6 @@ class BITMAP extends Struct {
   @Int16()
   external int bmBitsPixel;
   external Pointer bmBits;
-
-  factory BITMAP.allocate() => zeroAllocate<BITMAP>().ref;
 }
 
 // typedef struct tagBITMAPFILEHEADER {
@@ -1942,8 +1974,6 @@ class BITMAPFILEHEADER extends Struct {
   external int bfReserved2;
   @Uint32()
   external int bfOffBits;
-
-  factory BITMAPFILEHEADER.allocate() => zeroAllocate<BITMAPFILEHEADER>().ref;
 }
 
 // typedef struct tagBITMAPINFOHEADER {
@@ -1989,7 +2019,7 @@ class BITMAPINFOHEADER extends Struct {
   external int biClrImportant;
 
   factory BITMAPINFOHEADER.allocate() =>
-      zeroAllocate<BITMAPINFOHEADER>().ref..biSize = sizeOf<BITMAPINFOHEADER>();
+      calloc<BITMAPINFOHEADER>().ref..biSize = sizeOf<BITMAPINFOHEADER>();
 }
 
 // typedef struct tagPALETTEENTRY {
@@ -2012,8 +2042,6 @@ class PALETTEENTRY extends Struct {
   external int peBlue;
   @Uint8()
   external int peFlags;
-
-  factory PALETTEENTRY.allocate() => zeroAllocate<PALETTEENTRY>().ref;
 }
 
 // typedef struct tagDRAWTEXTPARAMS {
@@ -2039,8 +2067,6 @@ class DRAWTEXTPARAMS extends Struct {
   external int iRightMargin;
   @Uint32()
   external int uiLengthDrawn;
-
-  factory DRAWTEXTPARAMS.allocate() => zeroAllocate<DRAWTEXTPARAMS>().ref;
 }
 
 // typedef struct _FILETIME {
@@ -2057,8 +2083,6 @@ class FILETIME extends Struct {
   external int dwLowDateTime;
   @Uint32()
   external int dwHighDateTime;
-
-  factory FILETIME.allocate() => zeroAllocate<FILETIME>().ref;
 }
 
 // typedef struct KNOWNFOLDER_DEFINITION
@@ -2116,9 +2140,6 @@ class KNOWNFOLDER_DEFINITION extends Struct {
   external int ftidType_guid3;
   @Uint64()
   external int ftidType_guid4;
-
-  factory KNOWNFOLDER_DEFINITION.allocate() =>
-      zeroAllocate<KNOWNFOLDER_DEFINITION>().ref;
 }
 
 // typedef struct _SHITEMID
@@ -2135,8 +2156,6 @@ class SHITEMID extends Struct {
   external int cb;
   @Uint8()
   external int abID;
-
-  factory SHITEMID.allocate() => zeroAllocate<SHITEMID>().ref;
 }
 
 // typedef struct tagDISPPARAMS {
@@ -2158,8 +2177,6 @@ class DISPPARAMS extends Struct {
 
   @Int16()
   external int cNamedArgs;
-
-  factory DISPPARAMS.allocate() => zeroAllocate<DISPPARAMS>().ref;
 }
 
 // *** CONSOLE STRUCTS ***
@@ -2177,9 +2194,6 @@ class CONSOLE_CURSOR_INFO extends Struct {
   external int dwSize;
   @Int32()
   external int bVisible;
-
-  factory CONSOLE_CURSOR_INFO.allocate() =>
-      zeroAllocate<CONSOLE_CURSOR_INFO>().ref;
 }
 
 // typedef struct _CONSOLE_SCREEN_BUFFER_INFO {
@@ -2200,9 +2214,6 @@ class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
   external int wAttributes;
   external SMALL_RECT srWindow;
   external COORD dwMaximumWindowSize;
-
-  factory CONSOLE_SCREEN_BUFFER_INFO.allocate() =>
-      zeroAllocate<CONSOLE_SCREEN_BUFFER_INFO>().ref;
 }
 
 // typedef struct _CONSOLE_SELECTION_INFO {
@@ -2220,9 +2231,6 @@ class CONSOLE_SELECTION_INFO extends Struct {
 
   external COORD dwSelectionAnchor;
   external SMALL_RECT srSelection;
-
-  factory CONSOLE_SELECTION_INFO.allocate() =>
-      zeroAllocate<CONSOLE_SELECTION_INFO>().ref;
 }
 
 // typedef struct _COORD {
@@ -2241,8 +2249,6 @@ class COORD extends Struct {
 
   @Int16()
   external int Y;
-
-  factory COORD.allocate() => zeroAllocate<COORD>().ref;
 }
 
 // typedef struct _CHAR_INFO {
@@ -2263,8 +2269,6 @@ class CHAR_INFO extends Struct {
 
   @Int16()
   external int Attributes;
-
-  factory CHAR_INFO.allocate() => zeroAllocate<CHAR_INFO>().ref;
 }
 
 // typedef struct _SMALL_RECT {
@@ -2290,8 +2294,6 @@ class SMALL_RECT extends Struct {
 
   @Int16()
   external int Bottom;
-
-  factory SMALL_RECT.allocate() => zeroAllocate<SMALL_RECT>().ref;
 }
 // typedef struct tagINITCOMMONCONTROLSEX {
 //   DWORD dwSize;
@@ -2309,9 +2311,8 @@ class INITCOMMONCONTROLSEX extends Struct {
   @Uint32()
   external int dwICC;
 
-  factory INITCOMMONCONTROLSEX.allocate() =>
-      zeroAllocate<INITCOMMONCONTROLSEX>().ref
-        ..dwSize = sizeOf<INITCOMMONCONTROLSEX>();
+  factory INITCOMMONCONTROLSEX.allocate() => calloc<INITCOMMONCONTROLSEX>().ref
+    ..dwSize = sizeOf<INITCOMMONCONTROLSEX>();
 }
 
 class DLGTEMPLATE extends Struct {
@@ -2329,8 +2330,6 @@ class DLGTEMPLATE extends Struct {
   external int cx;
   @Uint16()
   external int cy;
-
-  factory DLGTEMPLATE.allocate() => zeroAllocate<DLGTEMPLATE>().ref;
 }
 
 class DLGITEMTEMPLATE extends Struct {
@@ -2358,7 +2357,7 @@ class DLGITEMTEMPLATE extends Struct {
   // sizeOf returns 20, because Dart over-allocates to DWORD boundaries. Instead
   // we allocate the *actual* size of this.
   factory DLGITEMTEMPLATE.allocate() =>
-      zeroAllocate<Uint8>(count: 18).cast<DLGITEMTEMPLATE>().ref;
+      calloc<Uint8>(count: 18).cast<DLGITEMTEMPLATE>().ref;
 }
 
 // typedef struct _TASKDIALOGCONFIG {
@@ -2454,7 +2453,7 @@ class TASKDIALOGCONFIG extends Struct {
   external int cxWidth;
 
   factory TASKDIALOGCONFIG.allocate() =>
-      zeroAllocate<TASKDIALOGCONFIG>().ref..cbSize = sizeOf<TASKDIALOGCONFIG>();
+      calloc<TASKDIALOGCONFIG>().ref..cbSize = sizeOf<TASKDIALOGCONFIG>();
 }
 
 // typedef struct _TASKDIALOG_BUTTON
@@ -2472,8 +2471,6 @@ class TASKDIALOG_BUTTON extends Struct {
   external int nButtonID;
 
   external Pointer<Utf16> pszButtonText;
-
-  factory TASKDIALOG_BUTTON.allocate() => zeroAllocate<TASKDIALOG_BUTTON>().ref;
 }
 
 // typedef struct _DLLVERSIONINFO
@@ -2502,7 +2499,7 @@ class DLLVERSIONINFO extends Struct {
   external int dwPlatformID;
 
   factory DLLVERSIONINFO.allocate() =>
-      zeroAllocate<DLLVERSIONINFO>().ref..cbSize = sizeOf<DLLVERSIONINFO>();
+      calloc<DLLVERSIONINFO>().ref..cbSize = sizeOf<DLLVERSIONINFO>();
 }
 
 // typedef struct _OSVERSIONINFOW {
@@ -2598,17 +2595,15 @@ class OSVERSIONINFO extends Struct {
   external int _data29;
   @Uint64()
   external int _data30;
-  @Uint64()
-  external int _data31;
-
-  String get szCSDVersion =>
-      addressOf.cast<Uint8>().elementAt(20).cast<Utf16>().unpackString(128);
 
   factory OSVERSIONINFO.allocate() =>
-      zeroAllocate<Uint8>(count: _OSVERSIONINFO_STRUCT_SIZE)
-          .cast<OSVERSIONINFO>()
-          .ref
+      calloc<Uint8>(count: _OSVERSIONINFO_STRUCT_SIZE).cast<OSVERSIONINFO>().ref
         ..dwOSVersionInfoSize = _OSVERSIONINFO_STRUCT_SIZE;
+}
+
+extension PointerOSVERSIONINFOExtension on Pointer<OSVERSIONINFO> {
+  String get szCSDVersion =>
+      cast<Uint8>().elementAt(20).cast<Utf16>().unpackString(128);
 }
 
 // typedef struct _SYSTEMTIME {
@@ -2645,8 +2640,37 @@ class SYSTEMTIME extends Struct {
   external int wSecond;
   @Uint16()
   external int wMilliseconds;
+}
 
-  factory SYSTEMTIME.allocate() => zeroAllocate<SYSTEMTIME>().ref;
+// typedef struct _BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS {
+//   BLUETOOTH_DEVICE_INFO                 deviceInfo;
+//   BLUETOOTH_AUTHENTICATION_METHOD       authenticationMethod;
+//   BLUETOOTH_IO_CAPABILITY               ioCapability;
+//   BLUETOOTH_AUTHENTICATION_REQUIREMENTS authenticationRequirements;
+//   union {
+//     ULONG Numeric_Value;
+//     ULONG Passkey;
+//   };
+// } BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS, *PBLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS;
+
+/// The BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS structure contains specific
+/// configuration information about the Bluetooth device responding to an
+/// authentication request.
+///
+/// /// {@category Struct}
+class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
+  external BLUETOOTH_DEVICE_INFO deviceInfo;
+  @Uint32()
+  external int authenticationMethod;
+  @Uint32()
+  external int ioCapability;
+  @Uint32()
+  external int authenticationRequirements;
+  @Uint32()
+  external int Numeric_Value;
+
+  int get Passkey => Numeric_Value;
+  set Passkey(int value) => Numeric_Value = value;
 }
 
 // typedef struct _BLUETOOTH_DEVICE_INFO {
@@ -2682,15 +2706,138 @@ class BLUETOOTH_DEVICE_INFO extends Struct {
   external SYSTEMTIME stLastSeen;
   external SYSTEMTIME stLastUsed;
 
-  String get szName => addressOf
-      .cast<Uint8>()
+  @Uint64()
+  external int _data0;
+  @Uint64()
+  external int _data1;
+  @Uint64()
+  external int _data2;
+  @Uint64()
+  external int _data3;
+  @Uint64()
+  external int _data4;
+  @Uint64()
+  external int _data5;
+  @Uint64()
+  external int _data6;
+  @Uint64()
+  external int _data7;
+  @Uint64()
+  external int _data8;
+  @Uint64()
+  external int _data9;
+  @Uint64()
+  external int _data10;
+  @Uint64()
+  external int _data11;
+  @Uint64()
+  external int _data12;
+  @Uint64()
+  external int _data13;
+  @Uint64()
+  external int _data14;
+  @Uint64()
+  external int _data15;
+  @Uint64()
+  external int _data16;
+  @Uint64()
+  external int _data17;
+  @Uint64()
+  external int _data18;
+  @Uint64()
+  external int _data19;
+  @Uint64()
+  external int _data20;
+  @Uint64()
+  external int _data21;
+  @Uint64()
+  external int _data22;
+  @Uint64()
+  external int _data23;
+  @Uint64()
+  external int _data24;
+  @Uint64()
+  external int _data25;
+  @Uint64()
+  external int _data26;
+  @Uint64()
+  external int _data27;
+  @Uint64()
+  external int _data28;
+  @Uint64()
+  external int _data29;
+  @Uint64()
+  external int _data30;
+  @Uint64()
+  external int _data31;
+  @Uint64()
+  external int _data32;
+  @Uint64()
+  external int _data33;
+  @Uint64()
+  external int _data34;
+  @Uint64()
+  external int _data35;
+  @Uint64()
+  external int _data36;
+  @Uint64()
+  external int _data37;
+  @Uint64()
+  external int _data38;
+  @Uint64()
+  external int _data39;
+  @Uint64()
+  external int _data40;
+  @Uint64()
+  external int _data41;
+  @Uint64()
+  external int _data42;
+  @Uint32()
+  external int _data43;
+  @Uint64()
+  external int _data44;
+  @Uint64()
+  external int _data45;
+  @Uint64()
+  external int _data46;
+  @Uint64()
+  external int _data47;
+  @Uint64()
+  external int _data48;
+  @Uint64()
+  external int _data49;
+  @Uint64()
+  external int _data50;
+  @Uint64()
+  external int _data51;
+  @Uint64()
+  external int _data52;
+  @Uint32()
+  external int _data53;
+  @Uint64()
+  external int _data54;
+  @Uint64()
+  external int _data55;
+  @Uint64()
+  external int _data56;
+  @Uint64()
+  external int _data57;
+  @Uint64()
+  external int _data58;
+  @Uint64()
+  external int _data59;
+  @Uint64()
+  external int _data60;
+  @Uint64()
+  external int _data61;
+}
+
+extension PointerBLUETOOTH_DEVICE_INFOExtension
+    on Pointer<BLUETOOTH_DEVICE_INFO> {
+  String get szName => cast<Uint8>()
       .elementAt(60)
       .cast<Utf16>()
       .unpackString(BLUETOOTH_MAX_NAME_SIZE);
-
-  factory BLUETOOTH_DEVICE_INFO.allocate() =>
-      zeroAllocate<Uint8>(count: 560).cast<BLUETOOTH_DEVICE_INFO>().ref
-        ..dwSize = 560;
 }
 
 // typedef struct _BLUETOOTH_DEVICE_SEARCH_PARAMS {
@@ -2725,10 +2872,6 @@ class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
   external int cTimeoutMultiplier;
   @IntPtr()
   external int hRadio;
-
-  factory BLUETOOTH_DEVICE_SEARCH_PARAMS.allocate() =>
-      zeroAllocate<BLUETOOTH_DEVICE_SEARCH_PARAMS>().ref
-        ..dwSize = sizeOf<BLUETOOTH_DEVICE_SEARCH_PARAMS>();
 }
 
 // typedef struct BLUETOOTH_FIND_RADIO_PARAMS {
@@ -2742,10 +2885,191 @@ class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
 class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
   @Uint32()
   external int dwSize;
+}
 
-  factory BLUETOOTH_FIND_RADIO_PARAMS.allocate() =>
-      zeroAllocate<BLUETOOTH_FIND_RADIO_PARAMS>().ref
-        ..dwSize = sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>();
+// typedef struct _BLUETOOTH_ADDRESS {
+//   union {
+//     BTH_ADDR ullLong;
+//     BYTE     rgBytes[6];
+//   };
+// } BLUETOOTH_ADDRESS_STRUCT;
+
+/// The BLUETOOTH_ADDRESS structure provides the address of a Bluetooth device.
+///
+/// {@category Struct}
+class BLUETOOTH_ADDRESS extends Struct {
+  @Uint64()
+  external int ullLong;
+
+  List<int> get rgBytes => [
+        (ullLong & 0xFF),
+        (ullLong & 0xFF00) >> 8,
+        (ullLong & 0xFF0000) >> 16,
+        (ullLong & 0xFF000000) >> 24,
+        (ullLong & 0xFF00000000) >> 32,
+        (ullLong & 0xFF0000000000) >> 40
+      ];
+}
+
+// // typedef struct _BLUETOOTH_RADIO_INFO {
+//   DWORD             dwSize;
+//   BLUETOOTH_ADDRESS address;
+//   WCHAR             szName[BLUETOOTH_MAX_NAME_SIZE];
+//   ULONG             ulClassofDevice;
+//   USHORT            lmpSubversion;
+//   USHORT            manufacturer;
+// } BLUETOOTH_RADIO_INFO, *PBLUETOOTH_RADIO_INFO;
+
+/// The BLUETOOTH_RADIO_INFO structure contains information about a Bluetooth
+/// radio.
+///
+/// {@category Struct}
+class BLUETOOTH_RADIO_INFO extends Struct {
+  @Uint32()
+  external int dwSize;
+
+  external BLUETOOTH_ADDRESS address;
+
+  // WCHAR szName[ BLUETOOTH_MAX_NAME_SIZE ];
+  @Uint64()
+  external int _data0;
+  @Uint64()
+  external int _data1;
+  @Uint64()
+  external int _data2;
+  @Uint64()
+  external int _data3;
+  @Uint64()
+  external int _data4;
+  @Uint64()
+  external int _data5;
+  @Uint64()
+  external int _data6;
+  @Uint64()
+  external int _data7;
+  @Uint64()
+  external int _data8;
+  @Uint64()
+  external int _data9;
+  @Uint64()
+  external int _data10;
+  @Uint64()
+  external int _data11;
+  @Uint64()
+  external int _data12;
+  @Uint64()
+  external int _data13;
+  @Uint64()
+  external int _data14;
+  @Uint64()
+  external int _data15;
+  @Uint64()
+  external int _data16;
+  @Uint64()
+  external int _data17;
+  @Uint64()
+  external int _data18;
+  @Uint64()
+  external int _data19;
+  @Uint64()
+  external int _data20;
+  @Uint64()
+  external int _data21;
+  @Uint64()
+  external int _data22;
+  @Uint64()
+  external int _data23;
+  @Uint64()
+  external int _data24;
+  @Uint64()
+  external int _data25;
+  @Uint64()
+  external int _data26;
+  @Uint64()
+  external int _data27;
+  @Uint64()
+  external int _data28;
+  @Uint64()
+  external int _data29;
+  @Uint64()
+  external int _data30;
+  @Uint64()
+  external int _data31;
+  @Uint64()
+  external int _data32;
+  @Uint64()
+  external int _data33;
+  @Uint64()
+  external int _data34;
+  @Uint64()
+  external int _data35;
+  @Uint64()
+  external int _data36;
+  @Uint64()
+  external int _data37;
+  @Uint64()
+  external int _data38;
+  @Uint64()
+  external int _data39;
+  @Uint64()
+  external int _data40;
+  @Uint64()
+  external int _data41;
+  @Uint64()
+  external int _data42;
+  @Uint32()
+  external int _data43;
+  @Uint64()
+  external int _data44;
+  @Uint64()
+  external int _data45;
+  @Uint64()
+  external int _data46;
+  @Uint64()
+  external int _data47;
+  @Uint64()
+  external int _data48;
+  @Uint64()
+  external int _data49;
+  @Uint64()
+  external int _data50;
+  @Uint64()
+  external int _data51;
+  @Uint64()
+  external int _data52;
+  @Uint32()
+  external int _data53;
+  @Uint64()
+  external int _data54;
+  @Uint64()
+  external int _data55;
+  @Uint64()
+  external int _data56;
+  @Uint64()
+  external int _data57;
+  @Uint64()
+  external int _data58;
+  @Uint64()
+  external int _data59;
+  @Uint64()
+  external int _data60;
+  @Uint64()
+  external int _data61;
+
+  @Uint32()
+  external int ulClassOfDevice;
+  @Uint16()
+  external int lmpSubversion;
+  @Uint16()
+  external int manufacturer;
+}
+
+extension PointerBLUETOOTH_RADIO_INFOExtension
+    on Pointer<BLUETOOTH_RADIO_INFO> {
+  String get szName => cast<Uint8>()
+      .elementAt(16)
+      .cast<Utf16>()
+      .unpackString(BLUETOOTH_MAX_NAME_SIZE);
 }
 
 // typedef struct _BLUETOOTH_PIN_INFO {
@@ -2758,16 +3082,23 @@ class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
 ///
 /// {@category Struct}
 class BLUETOOTH_PIN_INFO extends Struct {
-  int get pinLength =>
-      addressOf.cast<Uint8>().elementAt(BTH_MAX_PIN_SIZE).value;
+  @Int64()
+  external int _data0;
+  @Int64()
+  external int _data1;
+  @Int8()
+  external int _data8;
+}
+
+extension PointerBLUETOOTH_PIN_INFOExtension on Pointer<BLUETOOTH_PIN_INFO> {
+  int get pinLength => cast<Uint8>().elementAt(BTH_MAX_PIN_SIZE).value;
 
   set pinLength(int length) {
-    addressOf.cast<Uint8>().elementAt(BTH_MAX_PIN_SIZE).value =
+    cast<Uint8>().elementAt(BTH_MAX_PIN_SIZE).value =
         min(length, BTH_MAX_PIN_SIZE);
   }
 
-  String get pin =>
-      String.fromCharCodes(addressOf.cast<Uint8>().asTypedList(pinLength));
+  String get pin => String.fromCharCodes(cast<Uint8>().asTypedList(pinLength));
 
   set pin(String pinString) {
     final pinData = Uint8List.fromList(pinString.codeUnits);
@@ -2775,15 +3106,8 @@ class BLUETOOTH_PIN_INFO extends Struct {
     // Set up to the length of the string, even if longer than pinLength, since
     // user may set pin before pinLength.
     for (var idx = 0; idx < min(pinData.length, BTH_MAX_PIN_SIZE); idx++) {
-      addressOf.cast<Uint8>().elementAt(idx).value = pinData[idx];
+      cast<Uint8>().elementAt(idx).value = pinData[idx];
     }
-  }
-
-  factory BLUETOOTH_PIN_INFO.allocate() {
-    const structSize = BTH_MAX_PIN_SIZE + 1;
-    return zeroAllocate<Uint8>(count: structSize)
-        .cast<BLUETOOTH_PIN_INFO>()
-        .ref;
   }
 }
 
@@ -2797,18 +3121,26 @@ class BLUETOOTH_PIN_INFO extends Struct {
 ///
 /// {@category Struct}
 class BLUETOOTH_OOB_DATA_INFO extends Struct {
-  Uint8ClampedList get C =>
-      addressOf.cast<Uint8>().asTypedList(16) as Uint8ClampedList;
+  @Int64()
+  external int _data0;
+  @Int64()
+  external int _data1;
+  @Int64()
+  external int _data2;
+  @Int64()
+  external int _data3;
+}
+
+extension PointerBLUETOOTH_OOB_DATA_INFOExtension
+    on Pointer<BLUETOOTH_OOB_DATA_INFO> {
+  Uint8ClampedList get C => cast<Uint8>().asTypedList(16) as Uint8ClampedList;
   set C(Uint8ClampedList value) =>
-      addressOf.cast<Uint8>().asTypedList(16).setAll(0, value);
+      cast<Uint8>().asTypedList(16).setAll(0, value);
 
   Uint8ClampedList get R =>
-      addressOf.cast<Uint8>().elementAt(16).asTypedList(16) as Uint8ClampedList;
+      cast<Uint8>().elementAt(16).asTypedList(16) as Uint8ClampedList;
   set R(Uint8ClampedList value) =>
-      addressOf.cast<Uint8>().elementAt(16).asTypedList(16).setAll(0, value);
-
-  factory BLUETOOTH_OOB_DATA_INFO.allocate() =>
-      zeroAllocate<Uint8>(count: 32).cast<BLUETOOTH_OOB_DATA_INFO>().ref;
+      cast<Uint8>().elementAt(16).asTypedList(16).setAll(0, value);
 }
 
 // typedef struct COR_FIELD_OFFSET
@@ -2826,8 +3158,6 @@ class COR_FIELD_OFFSET extends Struct {
 
   @Uint32()
   external int ulOffset;
-
-  factory COR_FIELD_OFFSET.allocate() => zeroAllocate<COR_FIELD_OFFSET>().ref;
 }
 
 // typedef struct tagVS_FIXEDFILEINFO
@@ -2878,8 +3208,6 @@ class VS_FIXEDFILEINFO extends Struct {
   external int dwFileDateMS;
   @Uint32()
   external int dwFileDateLS;
-
-  factory VS_FIXEDFILEINFO.allocate() => zeroAllocate<VS_FIXEDFILEINFO>().ref;
 }
 
 // typedef struct tagMCI_OPEN_PARMSW {
@@ -2903,8 +3231,6 @@ class MCI_OPEN_PARMS extends Struct {
   external Pointer<Utf16> lpstrDeviceType;
   external Pointer<Utf16> lpstrElementName;
   external Pointer<Utf16> lpstrAlias;
-
-  factory MCI_OPEN_PARMS.allocate() => zeroAllocate<MCI_OPEN_PARMS>().ref;
 }
 
 // typedef struct {
@@ -2924,8 +3250,6 @@ class MCI_PLAY_PARMS extends Struct {
   external int dwFrom;
   @Uint32()
   external int dwTo;
-
-  factory MCI_PLAY_PARMS.allocate() => zeroAllocate<MCI_PLAY_PARMS>().ref;
 }
 
 // typedef struct tagMCI_SEEK_PARMS {
@@ -2942,8 +3266,6 @@ class MCI_SEEK_PARMS extends Struct {
   external int dwCallback;
   @Uint32()
   external int dwTo;
-
-  factory MCI_SEEK_PARMS.allocate() => zeroAllocate<MCI_SEEK_PARMS>().ref;
 }
 
 // typedef struct tagLOGBRUSH {
@@ -2962,8 +3284,6 @@ class LOGBRUSH extends Struct {
   @Int32()
   external int lbColor;
   external Pointer<Uint32> lbHatch;
-
-  factory LOGBRUSH.allocate() => zeroAllocate<LOGBRUSH>().ref;
 }
 
 // typedef struct tagMCI_STATUS_PARMS {
@@ -2985,8 +3305,6 @@ class MCI_STATUS_PARMS extends Struct {
   external int dwItem;
   @Uint32()
   external int dwTrack;
-
-  factory MCI_STATUS_PARMS.allocate() => zeroAllocate<MCI_STATUS_PARMS>().ref;
 }
 
 // typedef struct _OVERLAPPED {
@@ -3017,8 +3335,6 @@ class OVERLAPPED extends Struct {
 
   @IntPtr()
   external int hEvent;
-
-  factory OVERLAPPED.allocate() => zeroAllocate<OVERLAPPED>().ref;
 }
 
 // typedef struct tagACTCTXW {
@@ -3058,58 +3374,7 @@ class ACTCTX extends Struct {
 
   @IntPtr()
   external int hModule;
-
-  factory ACTCTX.allocate() => zeroAllocate<ACTCTX>().ref;
 }
-
-// -----------------------------------------------------------------------------
-// UNIMPLEMENTED OR PARTIALLY IMPLEMENTED CLASSES THAT ARE INCLUDED SO THAT COM
-// OBJECTS CAN BE GENERATED
-// -----------------------------------------------------------------------------
-
-/// Describes an exception that occurred during IDispatch::Invoke.
-///
-/// {@category Struct}
-class EXCEPINFO extends Struct {}
-
-/// Specifies the FMTID/PID identifier that programmatically identifies a
-/// property. Replaces SHCOLUMNID.
-///
-/// {@category Struct}
-class PROPERTYKEY extends Struct {}
-
-/// The PROPVARIANT structure is used in the ReadMultiple and WriteMultiple
-/// methods of IPropertyStorage to define the type tag and the value of a
-/// property in a property set.
-///
-/// {@category Struct}
-class PROPVARIANT extends Struct {}
-
-/// Represents a safe array.
-///
-/// {@category Struct}
-class SAFEARRAY extends Struct {}
-
-/// A CLSID is a globally unique identifier that identifies a COM class object.
-/// If your server or container allows linking to its embedded objects, you need
-/// to register a CLSID for each supported class of objects.
-///
-/// {@category Struct}
-class CLSID extends Struct {}
-
-/// The STATSTG structure contains statistical data about an open storage,
-/// stream, or byte-array object. This structure is used in the IEnumSTATSTG,
-/// ILockBytes, IStorage, and IStream interfaces.
-///
-/// {@category Struct}
-class STATSTG extends Struct {}
-
-/// Used to specify values that are used by SetSimulatedProfileInfo to override
-/// current internet connection profile values in an RDP Child Session to
-/// support the simulation of specific metered internet connection conditions.
-///
-/// {@category Struct}
-class NLM_SIMULATED_PROFILE_INFO extends Struct {}
 
 // typedef struct _WIN32_FIND_DATAW {
 //   DWORD    dwFileAttributes;
@@ -3146,30 +3411,422 @@ class WIN32_FIND_DATA extends Struct {
   external int dwReserved0;
   @Uint32()
   external int dwReserved1;
-  String get cFileName => addressOf
-      .cast<Uint8>()
-      .elementAt(44)
-      .cast<Utf16>()
-      .unpackString(MAX_PATH);
-  String get cAlternateFileName => addressOf
-      .cast<Uint8>()
-      .elementAt(44 + MAX_PATH * 2)
-      .cast<Utf16>()
-      .unpackString(14);
 
-  int get dwFileType => addressOf
-      .cast<Uint8>()
-      .elementAt(44 + (MAX_PATH + 14) * 2)
-      .cast<Uint32>()
-      .value;
-  int get dwCreatorType => addressOf
-      .cast<Uint8>()
-      .elementAt(48 + (MAX_PATH + 14) * 2)
-      .cast<Uint32>()
-      .value;
-  int get wFinderFlags => addressOf
-      .cast<Uint8>()
-      .elementAt(52 + (MAX_PATH + 14) * 2)
-      .cast<Uint16>()
-      .value;
+  // TODO: Pad for sizeOf
+}
+
+extension PointerWIN32_FIND_DATAExtension on Pointer<WIN32_FIND_DATA> {
+  String get cFileName =>
+      cast<Uint8>().elementAt(44).cast<Utf16>().unpackString(MAX_PATH);
+  String get cAlternateFileName =>
+      cast<Uint8>().elementAt(44 + MAX_PATH * 2).cast<Utf16>().unpackString(14);
+
+  int get dwFileType =>
+      cast<Uint8>().elementAt(44 + (MAX_PATH + 14) * 2).cast<Uint32>().value;
+  int get dwCreatorType =>
+      cast<Uint8>().elementAt(48 + (MAX_PATH + 14) * 2).cast<Uint32>().value;
+  int get wFinderFlags =>
+      cast<Uint8>().elementAt(52 + (MAX_PATH + 14) * 2).cast<Uint16>().value;
+}
+
+// -----------------------------------------------------------------------------
+// UNIMPLEMENTED OR PARTIALLY IMPLEMENTED CLASSES THAT ARE INCLUDED SO THAT COM
+// OBJECTS CAN BE GENERATED
+// -----------------------------------------------------------------------------
+
+/// Describes an exception that occurred during IDispatch::Invoke.
+///
+/// {@category Struct}
+class EXCEPINFO extends Opaque {}
+
+/// Specifies the FMTID/PID identifier that programmatically identifies a
+/// property. Replaces SHCOLUMNID.
+///
+/// {@category Struct}
+class PROPERTYKEY extends Opaque {}
+
+/// The PROPVARIANT structure is used in the ReadMultiple and WriteMultiple
+/// methods of IPropertyStorage to define the type tag and the value of a
+/// property in a property set.
+///
+/// {@category Struct}
+class PROPVARIANT extends Opaque {}
+
+/// Represents a safe array.
+///
+/// {@category Struct}
+class SAFEARRAY extends Opaque {}
+
+/// A CLSID is a globally unique identifier that identifies a COM class object.
+/// If your server or container allows linking to its embedded objects, you need
+/// to register a CLSID for each supported class of objects.
+///
+/// {@category Struct}
+class CLSID extends Opaque {}
+
+/// The STATSTG structure contains statistical data about an open storage,
+/// stream, or byte-array object. This structure is used in the IEnumSTATSTG,
+/// ILockBytes, IStorage, and IStream interfaces.
+///
+/// {@category Struct}
+class STATSTG extends Opaque {}
+
+/// Used to specify values that are used by SetSimulatedProfileInfo to override
+/// current internet connection profile values in an RDP Child Session to
+/// support the simulation of specific metered internet connection conditions.
+///
+/// {@category Struct}
+class NLM_SIMULATED_PROFILE_INFO extends Opaque {}
+
+// typedef struct _NOTIFYICONDATAW {
+//   DWORD cbSize;
+//   HWND hWnd;
+//   UINT uID;
+//   UINT uFlags;
+//   UINT uCallbackMessage;
+//   HICON hIcon;
+//   WCHAR  szTip[128];
+//   DWORD dwState;
+//   DWORD dwStateMask;
+//   WCHAR  szInfo[256];
+//   union {
+//   UINT  uTimeout;
+//   UINT  uVersion;
+//   } DUMMYUNIONNAME;
+//   WCHAR  szInfoTitle[64];
+//   DWORD dwInfoFlags;
+//   GUID guidItem;
+//   HICON hBalloonIcon;
+// } NOTIFYICONDATAW, *PNOTIFYICONDATAW;
+
+// FFI support for packed structs https://github.com/dart-lang/sdk/issues/38158
+
+/// The NOTIFYICONDATA contains information that the system needs to display
+/// notifications in the notification area. Used by Shell_NotifyIcon.
+///
+/// {@category Struct}
+class NOTIFYICONDATA extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  @IntPtr()
+  external int hWnd;
+
+  @Uint32()
+  external int uID;
+
+  @Uint32()
+  external int uFlags;
+
+  @Uint32()
+  external int uCallbackMessage;
+
+  @IntPtr()
+  external int hIcon;
+
+  // WCHAR szTip[128]
+  @Uint64()
+  external int _wchar0_szTip;
+  @Uint64()
+  external int _wchar4_szTip;
+  @Uint64()
+  external int _wchar8_szTip;
+  @Uint64()
+  external int _wchar12_szTip;
+  @Uint64()
+  external int _wchar16_szTip;
+  @Uint64()
+  external int _wchar20_szTip;
+  @Uint64()
+  external int _wchar24_szTip;
+  @Uint64()
+  external int _wchar28_szTip;
+  @Uint64()
+  external int _wchar32_szTip;
+  @Uint64()
+  external int _wchar36_szTip;
+  @Uint64()
+  external int _wchar40_szTip;
+  @Uint64()
+  external int _wchar44_szTip;
+  @Uint64()
+  external int _wchar48_szTip;
+  @Uint64()
+  external int _wchar52_szTip;
+  @Uint64()
+  external int _wchar56_szTip;
+  @Uint64()
+  external int _wchar60_szTip;
+  @Uint64()
+  external int _wchar64_szTip;
+  @Uint64()
+  external int _wchar68_szTip;
+  @Uint64()
+  external int _wchar72_szTip;
+  @Uint64()
+  external int _wchar76_szTip;
+  @Uint64()
+  external int _wchar80_szTip;
+  @Uint64()
+  external int _wchar84_szTip;
+  @Uint64()
+  external int _wchar88_szTip;
+  @Uint64()
+  external int _wchar92_szTip;
+  @Uint64()
+  external int _wchar96_szTip;
+  @Uint64()
+  external int _wchar100_szTip;
+  @Uint64()
+  external int _wchar104_szTip;
+  @Uint64()
+  external int _wchar108_szTip;
+  @Uint64()
+  external int _wchar112_szTip;
+  @Uint64()
+  external int _wchar116_szTip;
+  @Uint64()
+  external int _wchar120_szTip;
+  @Uint64()
+  external int _wchar124_szTip;
+
+  @Uint32()
+  external int dwState;
+
+  @Uint32()
+  external int dwStateMask;
+
+  // WCHAR szInfo[256]
+  @Uint64()
+  external int _wchar0_szInfo;
+  @Uint64()
+  external int _wchar4_szInfo;
+  @Uint64()
+  external int _wchar8_szInfo;
+  @Uint64()
+  external int _wchar12_szInfo;
+  @Uint64()
+  external int _wchar16_szInfo;
+  @Uint64()
+  external int _wchar20_szInfo;
+  @Uint64()
+  external int _wchar24_szInfo;
+  @Uint64()
+  external int _wchar28_szInfo;
+  @Uint64()
+  external int _wchar32_szInfo;
+  @Uint64()
+  external int _wchar36_szInfo;
+  @Uint64()
+  external int _wchar40_szInfo;
+  @Uint64()
+  external int _wchar44_szInfo;
+  @Uint64()
+  external int _wchar48_szInfo;
+  @Uint64()
+  external int _wchar52_szInfo;
+  @Uint64()
+  external int _wchar56_szInfo;
+  @Uint64()
+  external int _wchar60_szInfo;
+  @Uint64()
+  external int _wchar64_szInfo;
+  @Uint64()
+  external int _wchar68_szInfo;
+  @Uint64()
+  external int _wchar72_szInfo;
+  @Uint64()
+  external int _wchar76_szInfo;
+  @Uint64()
+  external int _wchar80_szInfo;
+  @Uint64()
+  external int _wchar84_szInfo;
+  @Uint64()
+  external int _wchar88_szInfo;
+  @Uint64()
+  external int _wchar92_szInfo;
+  @Uint64()
+  external int _wchar96_szInfo;
+  @Uint64()
+  external int _wchar100_szInfo;
+  @Uint64()
+  external int _wchar104_szInfo;
+  @Uint64()
+  external int _wchar108_szInfo;
+  @Uint64()
+  external int _wchar112_szInfo;
+  @Uint64()
+  external int _wchar116_szInfo;
+  @Uint64()
+  external int _wchar120_szInfo;
+  @Uint64()
+  external int _wchar124_szInfo;
+  @Uint64()
+  external int _wchar128_szInfo;
+  @Uint64()
+  external int _wchar132_szInfo;
+  @Uint64()
+  external int _wchar136_szInfo;
+  @Uint64()
+  external int _wchar140_szInfo;
+  @Uint64()
+  external int _wchar144_szInfo;
+  @Uint64()
+  external int _wchar148_szInfo;
+  @Uint64()
+  external int _wchar152_szInfo;
+  @Uint64()
+  external int _wchar156_szInfo;
+  @Uint64()
+  external int _wchar160_szInfo;
+  @Uint64()
+  external int _wchar164_szInfo;
+  @Uint64()
+  external int _wchar168_szInfo;
+  @Uint64()
+  external int _wchar172_szInfo;
+  @Uint64()
+  external int _wchar176_szInfo;
+  @Uint64()
+  external int _wchar180_szInfo;
+  @Uint64()
+  external int _wchar184_szInfo;
+  @Uint64()
+  external int _wchar188_szInfo;
+  @Uint64()
+  external int _wchar192_szInfo;
+  @Uint64()
+  external int _wchar196_szInfo;
+  @Uint64()
+  external int _wchar200_szInfo;
+  @Uint64()
+  external int _wchar204_szInfo;
+  @Uint64()
+  external int _wchar208_szInfo;
+  @Uint64()
+  external int _wchar212_szInfo;
+  @Uint64()
+  external int _wchar216_szInfo;
+  @Uint64()
+  external int _wchar220_szInfo;
+  @Uint64()
+  external int _wchar224_szInfo;
+  @Uint64()
+  external int _wchar228_szInfo;
+  @Uint64()
+  external int _wchar232_szInfo;
+  @Uint64()
+  external int _wchar236_szInfo;
+  @Uint64()
+  external int _wchar240_szInfo;
+  @Uint64()
+  external int _wchar244_szInfo;
+  @Uint64()
+  external int _wchar248_szInfo;
+  @Uint64()
+  external int _wchar252_szInfo;
+
+  @Uint32()
+  external int uTimeout;
+
+  // This field is in a UNION with uTimeout, so we define it as the same.
+  int get uVersion => uTimeout;
+  set uVersion(int value) => uTimeout = value;
+
+  // WCHAR szInfoTitle[64]
+  // Because Dart FFI has a tendency to align on IntPtr boundaries, we split this
+  // carefully.
+  @Uint32()
+  external int _wchar0_szInfoTitle;
+  @Uint64()
+  external int _wchar2_szInfoTitle;
+  @Uint64()
+  external int _wchar6_szInfoTitle;
+  @Uint64()
+  external int _wchar10_szInfoTitle;
+  @Uint64()
+  external int _wchar14_szInfoTitle;
+  @Uint64()
+  external int _wchar18_szInfoTitle;
+  @Uint64()
+  external int _wchar22_szInfoTitle;
+  @Uint64()
+  external int _wchar26_szInfoTitle;
+  @Uint64()
+  external int _wchar30_szInfoTitle;
+  @Uint64()
+  external int _wchar34_szInfoTitle;
+  @Uint64()
+  external int _wchar38_szInfoTitle;
+  @Uint64()
+  external int _wchar42_szInfoTitle;
+  @Uint64()
+  external int _wchar46_szInfoTitle;
+  @Uint64()
+  external int _wchar50_szInfoTitle;
+  @Uint64()
+  external int _wchar54_szInfoTitle;
+  @Uint64()
+  external int _wchar58_szInfoTitle;
+  @Uint32()
+  external int _wchar62_szInfoTitle;
+
+  @Uint32()
+  external int dwInfoFlags;
+
+  external GUID guidItem;
+
+  @IntPtr()
+  external int hBalloonIcon;
+}
+
+extension Pointer_NOTIFYICONDATA_Extension on Pointer<NOTIFYICONDATA> {
+  String get szTip => _pszTip.unpackString(128);
+
+  set szTip(String text63chars) {
+    if (text63chars.length > 63) {
+      throw ArgumentError('Argument "text64chars" should be less 63 char');
+    }
+    _pszTip.setString(text63chars);
+  }
+
+  String get szInfo => _pszInfo.unpackString(256);
+
+  set szInfo(String text255chars) {
+    if (text255chars.length > 255) {
+      throw ArgumentError('Argument "text255chars" should be less 255 char');
+    }
+    _pszInfo.setString(text255chars);
+  }
+
+  String get szInfoTitle => _pszInfoTitle.unpackString(64);
+
+  set szInfoTitle(String text63chars) {
+    if (text63chars.length > 63) {
+      throw ArgumentError('Argument "text63chars" should be less 63 char');
+    }
+    _pszInfoTitle.setString(text63chars);
+  }
+
+  Pointer<Utf16> get _pszTip => cast<Uint8>().elementAt(40).cast<Utf16>();
+
+  Pointer<Utf16> get _pszInfo => cast<Uint8>().elementAt(304).cast<Utf16>();
+
+  Pointer<Utf16> get _pszInfoTitle =>
+      cast<Uint8>().elementAt(824).cast<Utf16>();
+}
+
+// typedef struct tagTPMPARAMS {
+//   UINT cbSize;
+//   RECT rcExclude;
+// } TPMPARAMS;
+
+/// Contains extended parameters for the TrackPopupMenuEx function.
+///
+/// {@category Struct}
+class TPMPARAMS extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  external RECT rcExclude;
 }

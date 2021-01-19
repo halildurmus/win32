@@ -106,19 +106,22 @@ export 'src/ole32.dart';
 export 'src/oleaut32.dart';
 export 'src/powrprof.dart';
 export 'src/psapi.dart';
+export 'src/rometadata.dart';
 export 'src/shcore.dart';
 export 'src/shell32.dart';
 export 'src/user32.dart';
 export 'src/version.dart';
 export 'src/winmm.dart';
 
+export 'src/api-ms-win-core-winrt-l1-1-0.dart';
+export 'src/api-ms-win-core-winrt-string-l1-1-0.dart';
+export 'src/api-ms-win-ro-typeresolution-l1-1-0.dart';
+
 // COM foundational exports
 export 'src/com/combase.dart';
 
 // WinRT foundational exports
 export 'src/winrt/winrt_constants.dart';
-export 'src/winrt/winrt_prototypes.dart'
-    hide winrt, winrt_string, winrt_typeresolution;
 export 'src/winrt/winrt_helpers.dart';
 
 // COM and Windows Runtime interfaces
