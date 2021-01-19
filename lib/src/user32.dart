@@ -1196,6 +1196,36 @@ int GetMessage(
   return _GetMessage(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax);
 }
 
+/// Retrieves the extra message information for the current thread. Extra
+/// message information is an application- or driver-defined value
+/// associated with the current thread's message queue.
+///
+/// ```c
+/// LPARAM GetMessageExtraInfo();
+/// ```
+/// {@category user32}
+int GetMessageExtraInfo() {
+  final _GetMessageExtraInfo = _user32
+      .lookupFunction<IntPtr Function(), int Function()>('GetMessageExtraInfo');
+  return _GetMessageExtraInfo();
+}
+
+/// Retrieves the message time for the last message retrieved by the
+/// GetMessage function. The time is a long integer that specifies the
+/// elapsed time, in milliseconds, from the time the system was started to
+/// the time the message was created (that is, placed in the thread's
+/// message queue).
+///
+/// ```c
+/// LONG GetMessageTime();
+/// ```
+/// {@category user32}
+int GetMessageTime() {
+  final _GetMessageTime = _user32
+      .lookupFunction<Int32 Function(), int Function()>('GetMessageTime');
+  return _GetMessageTime();
+}
+
 /// The GetMonitorInfo function retrieves information about a display
 /// monitor.
 ///
@@ -1457,6 +1487,22 @@ int GetTabbedTextExtent(int hdc, Pointer<Utf16> lpString, int chCount,
       hdc, lpString, chCount, nTabPositions, lpnTabStopPositions);
 }
 
+/// Examines the Z order of the child windows associated with the specified
+/// parent window and retrieves a handle to the child window at the top of
+/// the Z order.
+///
+/// ```c
+/// HWND GetTopWindow(
+///   HWND hWnd
+/// );
+/// ```
+/// {@category user32}
+int GetTopWindow(int hWnd) {
+  final _GetTopWindow = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
+      int Function(int hWnd)>('GetTopWindow');
+  return _GetTopWindow(hWnd);
+}
+
 /// Retrieves the currently supported clipboard formats.
 ///
 /// ```c
@@ -1552,6 +1598,61 @@ int GetWindowDC(int hWnd) {
   final _GetWindowDC = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
       int Function(int hWnd)>('GetWindowDC');
   return _GetWindowDC(hWnd);
+}
+
+/// Retrieves the current display affinity setting, from any process, for a
+/// given window.
+///
+/// ```c
+/// BOOL GetWindowDisplayAffinity(
+///   HWND  hWnd,
+///   DWORD *pdwAffinity
+/// );
+/// ```
+/// {@category user32}
+int GetWindowDisplayAffinity(int hWnd, Pointer<Uint32> pdwAffinity) {
+  final _GetWindowDisplayAffinity = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Pointer<Uint32> pdwAffinity),
+      int Function(
+          int hWnd, Pointer<Uint32> pdwAffinity)>('GetWindowDisplayAffinity');
+  return _GetWindowDisplayAffinity(hWnd, pdwAffinity);
+}
+
+/// Retrieves information about the specified window.
+///
+/// ```c
+/// BOOL GetWindowInfo(
+///   HWND hwnd,
+///   PWINDOWINFO pwi
+/// );
+/// ```
+/// {@category user32}
+int GetWindowInfo(int hwnd, Pointer<WINDOWINFO> pwi) {
+  final _GetWindowInfo = _user32.lookupFunction<
+      Int32 Function(IntPtr hwnd, Pointer<WINDOWINFO> pwi),
+      int Function(int hwnd, Pointer<WINDOWINFO> pwi)>('GetWindowInfo');
+  return _GetWindowInfo(hwnd, pwi);
+}
+
+/// Retrieves the full path and file name of the module associated with the
+/// specified window handle.
+///
+/// ```c
+/// UINT GetWindowModuleFileNameW(
+///   HWND   hwnd,
+///   LPWSTR pszFileName,
+///   UINT   cchFileNameMax
+/// );
+/// ```
+/// {@category user32}
+int GetWindowModuleFileName(
+    int hwnd, Pointer<Utf16> pszFileName, int cchFileNameMax) {
+  final _GetWindowModuleFileName = _user32.lookupFunction<
+      Uint32 Function(
+          IntPtr hwnd, Pointer<Utf16> pszFileName, Uint32 cchFileNameMax),
+      int Function(int hwnd, Pointer<Utf16> pszFileName,
+          int cchFileNameMax)>('GetWindowModuleFileNameW');
+  return _GetWindowModuleFileName(hwnd, pszFileName, cchFileNameMax);
 }
 
 /// Retrieves the dimensions of the bounding rectangle of the specified

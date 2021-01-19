@@ -1654,6 +1654,19 @@ void main() {
               int wMsgFilterMax)>('GetMessageW');
       expect(GetMessage, isA<Function>());
     });
+    test('Can instantiate GetMessageExtraInfo', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetMessageExtraInfo =
+          user32.lookupFunction<IntPtr Function(), int Function()>(
+              'GetMessageExtraInfo');
+      expect(GetMessageExtraInfo, isA<Function>());
+    });
+    test('Can instantiate GetMessageTime', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetMessageTime = user32
+          .lookupFunction<Int32 Function(), int Function()>('GetMessageTime');
+      expect(GetMessageTime, isA<Function>());
+    });
     test('Can instantiate GetMonitorInfo', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetMonitorInfo = user32.lookupFunction<
@@ -1768,6 +1781,12 @@ void main() {
               Pointer<Int32> lpnTabStopPositions)>('GetTabbedTextExtentW');
       expect(GetTabbedTextExtent, isA<Function>());
     });
+    test('Can instantiate GetTopWindow', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetTopWindow = user32.lookupFunction<IntPtr Function(IntPtr hWnd),
+          int Function(int hWnd)>('GetTopWindow');
+      expect(GetTopWindow, isA<Function>());
+    });
     test('Can instantiate GetUpdatedClipboardFormats', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetUpdatedClipboardFormats = user32.lookupFunction<
@@ -1804,6 +1823,30 @@ void main() {
       final GetWindowDC = user32.lookupFunction<IntPtr Function(IntPtr hWnd),
           int Function(int hWnd)>('GetWindowDC');
       expect(GetWindowDC, isA<Function>());
+    });
+    test('Can instantiate GetWindowDisplayAffinity', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetWindowDisplayAffinity = user32.lookupFunction<
+          Int32 Function(IntPtr hWnd, Pointer<Uint32> pdwAffinity),
+          int Function(int hWnd,
+              Pointer<Uint32> pdwAffinity)>('GetWindowDisplayAffinity');
+      expect(GetWindowDisplayAffinity, isA<Function>());
+    });
+    test('Can instantiate GetWindowInfo', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetWindowInfo = user32.lookupFunction<
+          Int32 Function(IntPtr hwnd, Pointer<WINDOWINFO> pwi),
+          int Function(int hwnd, Pointer<WINDOWINFO> pwi)>('GetWindowInfo');
+      expect(GetWindowInfo, isA<Function>());
+    });
+    test('Can instantiate GetWindowModuleFileName', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetWindowModuleFileName = user32.lookupFunction<
+          Uint32 Function(
+              IntPtr hwnd, Pointer<Utf16> pszFileName, Uint32 cchFileNameMax),
+          int Function(int hwnd, Pointer<Utf16> pszFileName,
+              int cchFileNameMax)>('GetWindowModuleFileNameW');
+      expect(GetWindowModuleFileName, isA<Function>());
     });
     test('Can instantiate GetWindowRect', () {
       final user32 = DynamicLibrary.open('user32.dll');

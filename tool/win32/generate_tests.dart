@@ -117,13 +117,14 @@ import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
 void main() {
+  final is64bitOS = sizeOf<IntPtr>() == 8;
 ''');
 
   for (final struct
       in structSize64.keys.where((struct) => !skipStructs.contains(struct))) {
     writer.writeStringSync('''
   test('Struct $struct is the right size', () {
-    if (sizeOf<IntPtr>() == 8) {
+    if (is64bitOS) {
       expect(sizeOf<$struct>(), equals(${structSize64[struct]}));
     }
     else {

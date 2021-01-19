@@ -1002,6 +1002,16 @@
         "dllLibrary": "user32",
         "comment": "Retrieves a message from the calling thread's message queue. The function dispatches incoming sent messages until a posted message is available for retrieval."
     },
+    "GetMessageExtraInfo": {
+        "prototype": "LPARAM GetMessageExtraInfo();",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the extra message information for the current thread. Extra message information is an application- or driver-defined value associated with the current thread's message queue."
+    },
+    "GetMessageTime": {
+        "prototype": "LONG GetMessageTime();",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the message time for the last message retrieved by the GetMessage function. The time is a long integer that specifies the elapsed time, in milliseconds, from the time the system was started to the time the message was created (that is, placed in the thread's message queue)."
+    },
     "GetModuleBaseName": {
         "prototype": "DWORD GetModuleBaseNameW(\n  HANDLE  hProcess,\n  HMODULE hModule,\n  LPWSTR  lpBaseName,\n  DWORD   nSize\n);",
         "dllLibrary": "psapi",
@@ -1243,6 +1253,11 @@
         "dllLibrary": "gdi32",
         "comment": "The GetTextMetrics function fills the specified buffer with the metrics for the currently selected font."
     },
+    "GetTopWindow": {
+        "prototype": "HWND GetTopWindow(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Examines the Z order of the child windows associated with the specified parent window and retrieves a handle to the child window at the top of the Z order."
+    },
     "GetUpdatedClipboardFormats": {
         "prototype": "BOOL GetUpdatedClipboardFormats(\n  PUINT lpuiFormats,\n  UINT  cFormats,\n  PUINT pcFormatsOut\n);",
         "dllLibrary": "user32",
@@ -1277,6 +1292,21 @@
         "prototype": "HDC GetWindowDC(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
         "comment": "The GetWindowDC function retrieves the device context (DC) for the entire window, including title bar, menus, and scroll bars. A window device context permits painting anywhere in a window, because the origin of the device context is the upper-left corner of the window instead of the client area."
+    },
+    "GetWindowDisplayAffinity": {
+        "prototype": "BOOL GetWindowDisplayAffinity(\n  HWND  hWnd,\n  DWORD *pdwAffinity\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the current display affinity setting, from any process, for a given window."
+    },
+    "GetWindowInfo": {
+        "prototype": "BOOL GetWindowInfo(\n  HWND hwnd,\n  PWINDOWINFO pwi\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves information about the specified window."
+    },
+    "GetWindowModuleFileName": {
+        "prototype": "UINT GetWindowModuleFileNameW(\n  HWND   hwnd,\n  LPWSTR pszFileName,\n  UINT   cchFileNameMax\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the full path and file name of the module associated with the specified window handle."
     },
     "GetWindowRect": {
         "prototype": "BOOL GetWindowRect(\n  HWND   hWnd,\n  LPRECT lpRect\n);",
