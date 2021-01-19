@@ -8,10 +8,7 @@ Rough notes on steps I take to publish a new version of win32:
 
    - Optionally, also run it from Windows 7 to make sure nothing downlevel has
      failed.
-   - Optionally, test from macOS or Linux to make sure that tests don't run (and
-     fail) on an inappropriate device.
-   - Some tests may fail or be skipped from a SSH window (e.g. credential
-     saving, console buffer info); this is expected.
+   - These tests are also run through CI/CD on GitHub.
 
 3. Run `dartdoc --enable-experiment=non-nullable` from the root of the repo and
    make sure that it completes successfully. (I do this and the next step from
