@@ -11,8 +11,7 @@ bool _trayWndProc(int hWnd, int msg, int wParam, int lParam) {
   final hWnd = _nid.ref.hWnd;
   switch (msg) {
     case app.EVENT_TRAY_NOTIFY:
-      final trayMsg = _fixNotifyDataToVersion4(LOWORD(lParam));
-      switch (trayMsg) {
+      switch (LOWORD(lParam)) {
         case NIN_SELECT:
           ShowWindow(hWnd, IsWindowVisible(hWnd) == 1 ? SW_HIDE : SW_SHOW);
           SetForegroundWindow(hWnd);
@@ -46,28 +45,4 @@ void removeIcon() {
   Shell_NotifyIcon(NIM_DELETE, _nid);
   free(_nid);
   app.deregisterWndProc(_trayWndProc);
-}
-
-int _fixNotifyDataToVersion4(int msg) {
-  switch (msg) {
-    case 521:
-      return WM_MBUTTONDBLCLK;
-    case 520:
-      return WM_MBUTTONUP;
-    case 519:
-      return WM_MBUTTONDOWN;
-    case 517:
-      return WM_CONTEXTMENU;
-    case 516:
-      return WM_RBUTTONDOWN;
-    case 515:
-      return WM_LBUTTONDBLCLK;
-    case 514:
-      return NIN_SELECT;
-    case 513:
-      return WM_LBUTTONDOWN;
-    case 512:
-      return WM_MOUSEMOVE;
-  }
-  return msg;
 }
