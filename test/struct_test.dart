@@ -344,6 +344,13 @@ void main() {
       expect(sizeOf<KNOWNFOLDER_DEFINITION>(), equals(76));
     }
   });
+  test('Struct SHITEMID is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<SHITEMID>(), equals(3));
+    } else {
+      expect(sizeOf<SHITEMID>(), equals(3));
+    }
+  });
   test('Struct DISPPARAMS is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<DISPPARAMS>(), equals(24));

@@ -187,9 +187,6 @@ const skipStructs = [
   // sizeOf<ENUMLOGFONTEX> returns 352 because Dart over-allocates storage.
   'ENUMLOGFONTEX',
 
-  // sizeOf<SHITEMID> returns 4 because Dart over-allocates storage.
-  'SHITEMID',
-
   // sizeOf<OSVERSIONINFO> returns 280 because Dart over-allocates storage.
   'OSVERSIONINFO',
 

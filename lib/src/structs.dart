@@ -2152,10 +2152,20 @@ class KNOWNFOLDER_DEFINITION extends Struct {
 ///
 /// {@category Struct}
 class SHITEMID extends Struct {
-  @Uint16()
-  external int cb;
+  // Splitting this is necessary becaue otherwise Dart allocates the struct as 4
+  // bytes.
+  @Uint8()
+  external int _cb_hi;
+  @Uint8()
+  external int _cb_lo;
   @Uint8()
   external int abID;
+
+  int get cb => (_cb_hi << 8) + _cb_lo;
+  set cb(int value) {
+    _cb_hi = (value & 0xFF00) >> 8;
+    _cb_lo = value & 0x00FF;
+  }
 }
 
 // typedef struct tagDISPPARAMS {
