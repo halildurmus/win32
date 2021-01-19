@@ -453,6 +453,9 @@ const FORMAT_MESSAGE_MAX_WIDTH_MASK = 0x000000FF;
 // WindowStyle constants
 // -----------------------------------------------------------------------------
 
+/// The window is active.
+const WS_ACTIVECAPTION = 0x0001;
+
 /// The window has a thin-line border.
 const WS_BORDER = 0x00800000;
 

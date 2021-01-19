@@ -619,6 +619,38 @@ class PHYSICAL_MONITOR extends Struct {
   external int _data14;
   @Uint64()
   external int _data15;
+  @Uint64()
+  external int _data16;
+  @Uint64()
+  external int _data17;
+  @Uint64()
+  external int _data18;
+  @Uint64()
+  external int _data19;
+  @Uint64()
+  external int _data20;
+  @Uint64()
+  external int _data21;
+  @Uint64()
+  external int _data22;
+  @Uint64()
+  external int _data23;
+  @Uint64()
+  external int _data24;
+  @Uint64()
+  external int _data25;
+  @Uint64()
+  external int _data26;
+  @Uint64()
+  external int _data27;
+  @Uint64()
+  external int _data28;
+  @Uint64()
+  external int _data29;
+  @Uint64()
+  external int _data30;
+  @Uint64()
+  external int _data31;
 }
 
 extension PointerPHYSICAL_MONITORExtension on Pointer<PHYSICAL_MONITOR> {
@@ -1777,6 +1809,45 @@ class CREDENTIAL extends Struct {
   external Pointer<CREDENTIAL_ATTRIBUTE> Attributes;
   external Pointer<Utf16> TargetAlias;
   external Pointer<Utf16> UserName;
+}
+
+// typedef struct tagWINDOWINFO {
+//   DWORD cbSize;
+//   RECT  rcWindow;
+//   RECT  rcClient;
+//   DWORD dwStyle;
+//   DWORD dwExStyle;
+//   DWORD dwWindowStatus;
+//   UINT  cxWindowBorders;
+//   UINT  cyWindowBorders;
+//   ATOM  atomWindowType;
+//   WORD  wCreatorVersion;
+// } WINDOWINFO, *PWINDOWINFO, *LPWINDOWINFO;
+
+/// Contains window information.
+///
+/// {@category Struct}
+class WINDOWINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+
+  external RECT rcWindow;
+  external RECT rcClient;
+
+  @Uint32()
+  external int dwStyle;
+  @Uint32()
+  external int dwExStyle;
+  @Uint32()
+  external int dwWindowStatus;
+  @Uint32()
+  external int cxWindowBorders;
+  @Uint32()
+  external int cyWindowBorders;
+  @Uint16()
+  external int atomWindowType;
+  @Uint16()
+  external int wCreatorVersion;
 }
 
 // *** CONSOLE STRUCTS ***

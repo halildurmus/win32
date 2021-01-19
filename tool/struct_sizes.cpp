@@ -11,7 +11,7 @@
 // This code not used by the package itself, but is just a helper to inspect
 // widths across x86 and x64 architectures.
 
-// Compile with cl struct_sizes.cpp
+// Compile with cl struct_sizes.cpp /Fe:structs64.exe
 
 #include <stdlib.h>
 #include <windows.h>
@@ -21,12 +21,11 @@
 #include <bluetoothapis.h>
 #include <wincred.h>
 #include <Shlwapi.h>
+#include <physicalmonitorenumerationapi.h>
 #include <CorHdr.h>
 
 void main()
 {
-    printf("On this platform:\n");
-
     printf("'WNDCLASS': %zu,\n", sizeof(WNDCLASS));
     printf("'SYSTEM_INFO': %zu,\n", sizeof(SYSTEM_INFO));
     printf("'PROCESS_INFORMATION': %zu,\n", sizeof(PROCESS_INFORMATION));
@@ -42,6 +41,8 @@ void main()
     printf("'COMDLG_FILTERSPEC': %zu,\n", sizeof(COMDLG_FILTERSPEC));
     printf("'ACCEL': %zu,\n", sizeof(ACCEL));
     printf("'MONITORINFO': %zu,\n", sizeof(MONITORINFO));
+    printf("'PHYSICAL_MONITOR': %zu,\n", sizeof(PHYSICAL_MONITOR));
+    printf("'SYSTEMTIME': %zu,\n", sizeof(SYSTEMTIME));
     printf("'CHOOSECOLOR': %zu,\n", sizeof(CHOOSECOLOR));
     printf("'FINDREPLACE': %zu,\n", sizeof(FINDREPLACE));
     printf("'CHOOSEFONT': %zu,\n", sizeof(CHOOSEFONT));
@@ -68,6 +69,7 @@ void main()
     printf("'GUID': %zu,\n", sizeof(GUID));
     printf("'CREDENTIAL_ATTRIBUTE': %zu,\n", sizeof(CREDENTIAL_ATTRIBUTE));
     printf("'CREDENTIAL': %zu,\n", sizeof(CREDENTIAL));
+    printf("'WINDOWINFO': %zu,\n", sizeof(WINDOWINFO));
     printf("'BITMAPINFO': %zu,\n", sizeof(BITMAPINFO));
     printf("'BITMAP': %zu,\n", sizeof(BITMAP));
     printf("'BITMAPFILEHEADER': %zu,\n", sizeof(BITMAPFILEHEADER));

@@ -18,6 +18,22 @@ import 'structs.dart';
 
 final _user32 = DynamicLibrary.open('user32.dll');
 
+/// Places the given window in the system-maintained clipboard format
+/// listener list.
+///
+/// ```c
+/// BOOL AddClipboardFormatListener(
+///   HWND hwnd
+/// );
+/// ```
+/// {@category user32}
+int AddClipboardFormatListener(int hwnd) {
+  final _AddClipboardFormatListener = _user32.lookupFunction<
+      Int32 Function(IntPtr hwnd),
+      int Function(int hwnd)>('AddClipboardFormatListener');
+  return _AddClipboardFormatListener(hwnd);
+}
+
 /// Enables you to produce special effects when showing or hiding windows.
 /// There are four types of animation: roll, slide, collapse or expand, and
 /// alpha-blended fade.
@@ -94,6 +110,22 @@ int BringWindowToTop(int hWnd) {
   return _BringWindowToTop(hWnd);
 }
 
+/// Removes a specified window from the chain of clipboard viewers.
+///
+/// ```c
+/// BOOL ChangeClipboardChain(
+///   HWND hWndRemove,
+///   HWND hWndNewNext
+///   );
+/// ```
+/// {@category user32}
+int ChangeClipboardChain(int hWndRemove, int hWndNewNext) {
+  final _ChangeClipboardChain = _user32.lookupFunction<
+      Int32 Function(IntPtr hWndRemove, IntPtr hWndNewNext),
+      int Function(int hWndRemove, int hWndNewNext)>('ChangeClipboardChain');
+  return _ChangeClipboardChain(hWndRemove, hWndNewNext);
+}
+
 /// Determines which, if any, of the child windows belonging to a parent
 /// window contains the specified point. The search is restricted to
 /// immediate child windows. Grandchildren, and deeper descendant windows
@@ -168,6 +200,18 @@ int ClipCursor(Pointer<RECT> lpRect) {
   return _ClipCursor(lpRect);
 }
 
+/// Closes the clipboard.
+///
+/// ```c
+/// BOOL CloseClipboard();
+/// ```
+/// {@category user32}
+int CloseClipboard() {
+  final _CloseClipboard = _user32
+      .lookupFunction<Int32 Function(), int Function()>('CloseClipboard');
+  return _CloseClipboard();
+}
+
 /// Copies the specified icon from another module to the current module.
 ///
 /// ```c
@@ -197,6 +241,20 @@ int CopyRect(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc) {
       Int32 Function(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc),
       int Function(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc)>('CopyRect');
   return _CopyRect(lprcDst, lprcSrc);
+}
+
+/// Retrieves the number of different data formats currently on the
+/// clipboard.
+///
+/// ```c
+/// int CountClipboardFormats();
+/// ```
+/// {@category user32}
+int CountClipboardFormats() {
+  final _CountClipboardFormats =
+      _user32.lookupFunction<Int32 Function(), int Function()>(
+          'CountClipboardFormats');
+  return _CountClipboardFormats();
 }
 
 /// Creates an accelerator table.
@@ -536,6 +594,20 @@ int DrawTextEx(int hdc, Pointer<Utf16> lpchText, int cchText,
   return _DrawTextEx(hdc, lpchText, cchText, lprc, format, lpdtp);
 }
 
+/// Empties the clipboard and frees handles to data in the clipboard. The
+/// function then assigns ownership of the clipboard to the window that
+/// currently has the clipboard open.
+///
+/// ```c
+/// BOOL EmptyClipboard();
+/// ```
+/// {@category user32}
+int EmptyClipboard() {
+  final _EmptyClipboard = _user32
+      .lookupFunction<Int32 Function(), int Function()>('EmptyClipboard');
+  return _EmptyClipboard();
+}
+
 /// Enables, disables, or grays the specified menu item.
 ///
 /// ```c
@@ -613,6 +685,21 @@ int EnumChildWindows(int hWndParent,
           Pointer<NativeFunction<EnumWindowsProc>> lpEnumFunc,
           int lParam)>('EnumChildWindows');
   return _EnumChildWindows(hWndParent, lpEnumFunc, lParam);
+}
+
+/// Enumerates the data formats currently available on the clipboard.
+///
+/// ```c
+/// UINT EnumClipboardFormats(
+///   UINT format
+/// );
+/// ```
+/// {@category user32}
+int EnumClipboardFormats(int format) {
+  final _EnumClipboardFormats = _user32.lookupFunction<
+      Uint32 Function(Uint32 format),
+      int Function(int format)>('EnumClipboardFormats');
+  return _EnumClipboardFormats(format);
 }
 
 /// The EnumDisplayMonitors function enumerates display monitors (including
@@ -765,6 +852,22 @@ int FrameRect(int hDC, Pointer<RECT> lprc, int hbr) {
   return _FrameRect(hDC, lprc, hbr);
 }
 
+/// Retrieves the handle to the ancestor of the specified window.
+///
+/// ```c
+/// HWND GetAncestor(
+///   HWND hwnd,
+///   UINT gaFlags
+/// );
+/// ```
+/// {@category user32}
+int GetAncestor(int hwnd, int gaFlags) {
+  final _GetAncestor = _user32.lookupFunction<
+      IntPtr Function(IntPtr hwnd, Uint32 gaFlags),
+      int Function(int hwnd, int gaFlags)>('GetAncestor');
+  return _GetAncestor(hwnd, gaFlags);
+}
+
 /// Retrieves the coordinates of a window's client area. The client
 /// coordinates specify the upper-left and lower-right corners of the
 /// client area. Because client coordinates are relative to the upper-left
@@ -783,6 +886,80 @@ int GetClientRect(int hWnd, Pointer<RECT> lpRect) {
       Int32 Function(IntPtr hWnd, Pointer<RECT> lpRect),
       int Function(int hWnd, Pointer<RECT> lpRect)>('GetClientRect');
   return _GetClientRect(hWnd, lpRect);
+}
+
+/// Retrieves data from the clipboard in a specified format. The clipboard
+/// must have been opened previously.
+///
+/// ```c
+/// HANDLE GetClipboardData(
+///   UINT uFormat
+/// );
+/// ```
+/// {@category user32}
+int GetClipboardData(int uFormat) {
+  final _GetClipboardData = _user32.lookupFunction<
+      IntPtr Function(Uint32 uFormat),
+      int Function(int uFormat)>('GetClipboardData');
+  return _GetClipboardData(uFormat);
+}
+
+/// Retrieves from the clipboard the name of the specified registered
+/// format. The function copies the name to the specified buffer.
+///
+/// ```c
+/// int GetClipboardFormatNameW(
+///   UINT format,
+///   LPWSTR lpszFormatName,
+///   int cchMaxCount
+/// );
+/// ```
+/// {@category user32}
+int GetClipboardFormatName(
+    int format, Pointer<Utf16> lpszFormatName, int cchMaxCount) {
+  final _GetClipboardFormatName = _user32.lookupFunction<
+      Int32 Function(
+          Uint32 format, Pointer<Utf16> lpszFormatName, Int32 cchMaxCount),
+      int Function(int format, Pointer<Utf16> lpszFormatName,
+          int cchMaxCount)>('GetClipboardFormatNameW');
+  return _GetClipboardFormatName(format, lpszFormatName, cchMaxCount);
+}
+
+/// Retrieves the window handle of the current owner of the clipboard.
+///
+/// ```c
+/// HWND GetClipboardOwner();
+/// ```
+/// {@category user32}
+int GetClipboardOwner() {
+  final _GetClipboardOwner = _user32
+      .lookupFunction<IntPtr Function(), int Function()>('GetClipboardOwner');
+  return _GetClipboardOwner();
+}
+
+/// Retrieves the clipboard sequence number for the current window station.
+///
+/// ```c
+/// DWORD GetClipboardSequenceNumber();
+/// ```
+/// {@category user32}
+int GetClipboardSequenceNumber() {
+  final _GetClipboardSequenceNumber =
+      _user32.lookupFunction<Uint32 Function(), int Function()>(
+          'GetClipboardSequenceNumber');
+  return _GetClipboardSequenceNumber();
+}
+
+/// Retrieves the handle to the first window in the clipboard viewer chain.
+///
+/// ```c
+/// HWND GetClipboardViewer();
+/// ```
+/// {@category user32}
+int GetClipboardViewer() {
+  final _GetClipboardViewer = _user32
+      .lookupFunction<IntPtr Function(), int Function()>('GetClipboardViewer');
+  return _GetClipboardViewer();
 }
 
 /// Retrieves a handle to the current cursor.
@@ -849,6 +1026,20 @@ int GetDCEx(int hWnd, int hrgnClip, int flags) {
       IntPtr Function(IntPtr hWnd, IntPtr hrgnClip, Uint32 flags),
       int Function(int hWnd, int hrgnClip, int flags)>('GetDCEx');
   return _GetDCEx(hWnd, hrgnClip, flags);
+}
+
+/// Retrieves a handle to the desktop window. The desktop window covers the
+/// entire screen. The desktop window is the area on top of which other
+/// windows are painted.
+///
+/// ```c
+/// HWND GetDesktopWindow();
+/// ```
+/// {@category user32}
+int GetDesktopWindow() {
+  final _GetDesktopWindow = _user32
+      .lookupFunction<IntPtr Function(), int Function()>('GetDesktopWindow');
+  return _GetDesktopWindow();
 }
 
 /// Retrieves the system's dialog base units, which are the average width
@@ -969,6 +1160,19 @@ int GetForegroundWindow() {
   return _GetForegroundWindow();
 }
 
+/// Determines whether there are mouse-button or keyboard messages in the
+/// calling thread's message queue.
+///
+/// ```c
+/// BOOL GetInputState();
+/// ```
+/// {@category user32}
+int GetInputState() {
+  final _GetInputState =
+      _user32.lookupFunction<Int32 Function(), int Function()>('GetInputState');
+  return _GetInputState();
+}
+
 /// Retrieves a message from the calling thread's message queue. The
 /// function dispatches incoming sent messages until a posted message is
 /// available for retrieval.
@@ -990,6 +1194,36 @@ int GetMessage(
       int Function(Pointer<MSG> lpMsg, int hWnd, int wMsgFilterMin,
           int wMsgFilterMax)>('GetMessageW');
   return _GetMessage(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax);
+}
+
+/// Retrieves the extra message information for the current thread. Extra
+/// message information is an application- or driver-defined value
+/// associated with the current thread's message queue.
+///
+/// ```c
+/// LPARAM GetMessageExtraInfo();
+/// ```
+/// {@category user32}
+int GetMessageExtraInfo() {
+  final _GetMessageExtraInfo = _user32
+      .lookupFunction<IntPtr Function(), int Function()>('GetMessageExtraInfo');
+  return _GetMessageExtraInfo();
+}
+
+/// Retrieves the message time for the last message retrieved by the
+/// GetMessage function. The time is a long integer that specifies the
+/// elapsed time, in milliseconds, from the time the system was started to
+/// the time the message was created (that is, placed in the thread's
+/// message queue).
+///
+/// ```c
+/// LONG GetMessageTime();
+/// ```
+/// {@category user32}
+int GetMessageTime() {
+  final _GetMessageTime = _user32
+      .lookupFunction<Int32 Function(), int Function()>('GetMessageTime');
+  return _GetMessageTime();
 }
 
 /// The GetMonitorInfo function retrieves information about a display
@@ -1045,6 +1279,20 @@ int GetNextDlgTabItem(int hDlg, int hCtl, int bPrevious) {
   return _GetNextDlgTabItem(hDlg, hCtl, bPrevious);
 }
 
+/// Retrieves the handle to the window that currently has the clipboard
+/// open.
+///
+/// ```c
+/// HWND GetOpenClipboardWindow();
+/// ```
+/// {@category user32}
+int GetOpenClipboardWindow() {
+  final _GetOpenClipboardWindow =
+      _user32.lookupFunction<IntPtr Function(), int Function()>(
+          'GetOpenClipboardWindow');
+  return _GetOpenClipboardWindow();
+}
+
 /// Retrieves a handle to the specified window's parent or owner.
 ///
 /// ```c
@@ -1057,6 +1305,24 @@ int GetParent(int hWnd) {
   final _GetParent = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
       int Function(int hWnd)>('GetParent');
   return _GetParent(hWnd);
+}
+
+/// Retrieves the first available clipboard format in the specified list.
+///
+/// ```c
+/// int GetPriorityClipboardFormat(
+///   UINT *paFormatPriorityList,
+///   int  cFormats
+/// );
+/// ```
+/// {@category user32}
+int GetPriorityClipboardFormat(
+    Pointer<Uint32> paFormatPriorityList, int cFormats) {
+  final _GetPriorityClipboardFormat = _user32.lookupFunction<
+      Int32 Function(Pointer<Uint32> paFormatPriorityList, Int32 cFormats),
+      int Function(Pointer<Uint32> paFormatPriorityList,
+          int cFormats)>('GetPriorityClipboardFormat');
+  return _GetPriorityClipboardFormat(paFormatPriorityList, cFormats);
 }
 
 /// The GetScrollInfo function retrieves the parameters of a scroll bar,
@@ -1221,6 +1487,42 @@ int GetTabbedTextExtent(int hdc, Pointer<Utf16> lpString, int chCount,
       hdc, lpString, chCount, nTabPositions, lpnTabStopPositions);
 }
 
+/// Examines the Z order of the child windows associated with the specified
+/// parent window and retrieves a handle to the child window at the top of
+/// the Z order.
+///
+/// ```c
+/// HWND GetTopWindow(
+///   HWND hWnd
+/// );
+/// ```
+/// {@category user32}
+int GetTopWindow(int hWnd) {
+  final _GetTopWindow = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
+      int Function(int hWnd)>('GetTopWindow');
+  return _GetTopWindow(hWnd);
+}
+
+/// Retrieves the currently supported clipboard formats.
+///
+/// ```c
+/// BOOL GetUpdatedClipboardFormats(
+///   PUINT lpuiFormats,
+///   UINT  cFormats,
+///   PUINT pcFormatsOut
+/// );
+/// ```
+/// {@category user32}
+int GetUpdatedClipboardFormats(
+    Pointer<Uint32> lpuiFormats, int cFormats, Pointer<Uint32> pcFormatsOut) {
+  final _GetUpdatedClipboardFormats = _user32.lookupFunction<
+      Int32 Function(Pointer<Uint32> lpuiFormats, Uint32 cFormats,
+          Pointer<Uint32> pcFormatsOut),
+      int Function(Pointer<Uint32> lpuiFormats, int cFormats,
+          Pointer<Uint32> pcFormatsOut)>('GetUpdatedClipboardFormats');
+  return _GetUpdatedClipboardFormats(lpuiFormats, cFormats, pcFormatsOut);
+}
+
 /// The GetUpdateRect function retrieves the coordinates of the smallest
 /// rectangle that completely encloses the update region of the specified
 /// window. GetUpdateRect retrieves the rectangle in logical coordinates.
@@ -1298,6 +1600,61 @@ int GetWindowDC(int hWnd) {
   return _GetWindowDC(hWnd);
 }
 
+/// Retrieves the current display affinity setting, from any process, for a
+/// given window.
+///
+/// ```c
+/// BOOL GetWindowDisplayAffinity(
+///   HWND  hWnd,
+///   DWORD *pdwAffinity
+/// );
+/// ```
+/// {@category user32}
+int GetWindowDisplayAffinity(int hWnd, Pointer<Uint32> pdwAffinity) {
+  final _GetWindowDisplayAffinity = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Pointer<Uint32> pdwAffinity),
+      int Function(
+          int hWnd, Pointer<Uint32> pdwAffinity)>('GetWindowDisplayAffinity');
+  return _GetWindowDisplayAffinity(hWnd, pdwAffinity);
+}
+
+/// Retrieves information about the specified window.
+///
+/// ```c
+/// BOOL GetWindowInfo(
+///   HWND hwnd,
+///   PWINDOWINFO pwi
+/// );
+/// ```
+/// {@category user32}
+int GetWindowInfo(int hwnd, Pointer<WINDOWINFO> pwi) {
+  final _GetWindowInfo = _user32.lookupFunction<
+      Int32 Function(IntPtr hwnd, Pointer<WINDOWINFO> pwi),
+      int Function(int hwnd, Pointer<WINDOWINFO> pwi)>('GetWindowInfo');
+  return _GetWindowInfo(hwnd, pwi);
+}
+
+/// Retrieves the full path and file name of the module associated with the
+/// specified window handle.
+///
+/// ```c
+/// UINT GetWindowModuleFileNameW(
+///   HWND   hwnd,
+///   LPWSTR pszFileName,
+///   UINT   cchFileNameMax
+/// );
+/// ```
+/// {@category user32}
+int GetWindowModuleFileName(
+    int hwnd, Pointer<Utf16> pszFileName, int cchFileNameMax) {
+  final _GetWindowModuleFileName = _user32.lookupFunction<
+      Uint32 Function(
+          IntPtr hwnd, Pointer<Utf16> pszFileName, Uint32 cchFileNameMax),
+      int Function(int hwnd, Pointer<Utf16> pszFileName,
+          int cchFileNameMax)>('GetWindowModuleFileNameW');
+  return _GetWindowModuleFileName(hwnd, pszFileName, cchFileNameMax);
+}
+
 /// Retrieves the dimensions of the bounding rectangle of the specified
 /// window. The dimensions are given in screen coordinates that are
 /// relative to the upper-left corner of the screen.
@@ -1333,25 +1690,6 @@ int GetWindowRgnBox(int hWnd, Pointer<RECT> lprc) {
   return _GetWindowRgnBox(hWnd, lprc);
 }
 
-/// Retrieves the length, in characters, of the specified window's title
-/// bar text (if the window has a title bar). If the specified window is a
-/// control, the function retrieves the length of the text within the
-/// control. However, GetWindowTextLength cannot retrieve the length of the
-/// text of an edit control in another application.
-///
-/// ```c
-/// int GetWindowTextLengthW(
-///   HWND hWnd
-/// );
-/// ```
-/// {@category user32}
-int GetWindowTextLength(int hWnd) {
-  final _GetWindowTextLength = _user32.lookupFunction<
-      Int32 Function(IntPtr hWnd),
-      int Function(int hWnd)>('GetWindowTextLengthW');
-  return _GetWindowTextLength(hWnd);
-}
-
 /// Copies the text of the specified window's title bar (if it has one)
 /// into a buffer. If the specified window is a control, the text of the
 /// control is copied. However, GetWindowText cannot retrieve the text of a
@@ -1371,6 +1709,25 @@ int GetWindowText(int hWnd, Pointer<Utf16> lpString, int nMaxCount) {
       int Function(
           int hWnd, Pointer<Utf16> lpString, int nMaxCount)>('GetWindowTextW');
   return _GetWindowText(hWnd, lpString, nMaxCount);
+}
+
+/// Retrieves the length, in characters, of the specified window's title
+/// bar text (if the window has a title bar). If the specified window is a
+/// control, the function retrieves the length of the text within the
+/// control. However, GetWindowTextLength cannot retrieve the length of the
+/// text of an edit control in another application.
+///
+/// ```c
+/// int GetWindowTextLengthW(
+///   HWND hWnd
+/// );
+/// ```
+/// {@category user32}
+int GetWindowTextLength(int hWnd) {
+  final _GetWindowTextLength = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd),
+      int Function(int hWnd)>('GetWindowTextLengthW');
+  return _GetWindowTextLength(hWnd);
 }
 
 /// The GrayString function draws gray text at the specified location. The
@@ -1562,6 +1919,20 @@ int IsDialogMessage(int hDlg, Pointer<MSG> lpMsg) {
       Int32 Function(IntPtr hDlg, Pointer<MSG> lpMsg),
       int Function(int hDlg, Pointer<MSG> lpMsg)>('IsDialogMessageW');
   return _IsDialogMessage(hDlg, lpMsg);
+}
+
+/// Determines whether the specified window is minimized (iconic).
+///
+/// ```c
+/// BOOL IsIconic(
+///   HWND hWnd
+/// );
+/// ```
+/// {@category user32}
+int IsIconic(int hWnd) {
+  final _IsIconic = _user32.lookupFunction<Int32 Function(IntPtr hWnd),
+      int Function(int hWnd)>('IsIconic');
+  return _IsIconic(hWnd);
 }
 
 /// The IsRectEmpty function determines whether the specified rectangle is
@@ -1917,6 +2288,20 @@ int OffsetRect(Pointer<RECT> lprc, int dx, int dy) {
   return _OffsetRect(lprc, dx, dy);
 }
 
+/// Opens the clipboard for examination and prevents other applications
+/// from modifying the clipboard content.
+///
+/// ```c
+/// BOOL OpenClipboard(  HWND hWndNewOwner);
+/// ```
+/// {@category user32}
+int OpenClipboard(int hWndNewOwner) {
+  final _OpenClipboard = _user32.lookupFunction<
+      Int32 Function(IntPtr hWndNewOwner),
+      int Function(int hWndNewOwner)>('OpenClipboard');
+  return _OpenClipboard(hWndNewOwner);
+}
+
 /// Restores a minimized (iconic) window to its previous size and position;
 /// it then activates the window.
 ///
@@ -2009,6 +2394,22 @@ int PostMessage(int hWnd, int Msg, int wParam, int lParam) {
   return _PostMessage(hWnd, Msg, wParam, lParam);
 }
 
+/// Indicates to the system that a thread has made a request to terminate
+/// (quit). It is typically used in response to a WM_DESTROY message.
+///
+/// ```c
+/// void PostQuitMessage(
+///   int nExitCode
+/// );
+/// ```
+/// {@category user32}
+void PostQuitMessage(int nExitCode) {
+  final _PostQuitMessage = _user32.lookupFunction<
+      Void Function(Int32 nExitCode),
+      void Function(int nExitCode)>('PostQuitMessage');
+  return _PostQuitMessage(nExitCode);
+}
+
 /// Posts a message to the message queue of the specified thread. It
 /// returns without waiting for the thread to process the message.
 ///
@@ -2027,22 +2428,6 @@ int PostThreadMessage(int idThread, int Msg, int wParam, int lParam) {
       int Function(
           int idThread, int Msg, int wParam, int lParam)>('PostThreadMessageW');
   return _PostThreadMessage(idThread, Msg, wParam, lParam);
-}
-
-/// Indicates to the system that a thread has made a request to terminate
-/// (quit). It is typically used in response to a WM_DESTROY message.
-///
-/// ```c
-/// void PostQuitMessage(
-///   int nExitCode
-/// );
-/// ```
-/// {@category user32}
-void PostQuitMessage(int nExitCode) {
-  final _PostQuitMessage = _user32.lookupFunction<
-      Void Function(Int32 nExitCode),
-      void Function(int nExitCode)>('PostQuitMessage');
-  return _PostQuitMessage(nExitCode);
 }
 
 /// The PtInRect function determines whether the specified point lies
@@ -2102,6 +2487,22 @@ int RegisterClass(Pointer<WNDCLASS> lpWndClass) {
   return _RegisterClass(lpWndClass);
 }
 
+/// Registers a new clipboard format. This format can then be used as a
+/// valid clipboard format.
+///
+/// ```c
+/// UINT RegisterClipboardFormatW(
+///   LPCWSTR lpszFormat
+/// );
+/// ```
+/// {@category user32}
+int RegisterClipboardFormat(Pointer<Utf16> lpszFormat) {
+  final _RegisterClipboardFormat = _user32.lookupFunction<
+      Uint32 Function(Pointer<Utf16> lpszFormat),
+      int Function(Pointer<Utf16> lpszFormat)>('RegisterClipboardFormatW');
+  return _RegisterClipboardFormat(lpszFormat);
+}
+
 /// Defines a new window message that is guaranteed to be unique throughout
 /// the system. The message value can be used when sending or posting
 /// messages.
@@ -2136,6 +2537,22 @@ int ReleaseDC(int hWnd, int hDC) {
       Int32 Function(IntPtr hWnd, IntPtr hDC),
       int Function(int hWnd, int hDC)>('ReleaseDC');
   return _ReleaseDC(hWnd, hDC);
+}
+
+/// Removes the given window from the system-maintained clipboard format
+/// listener list.
+///
+/// ```c
+/// BOOL RemoveClipboardFormatListener(
+///   HWND hwnd
+/// );
+/// ```
+/// {@category user32}
+int RemoveClipboardFormatListener(int hwnd) {
+  final _RemoveClipboardFormatListener = _user32.lookupFunction<
+      Int32 Function(IntPtr hwnd),
+      int Function(int hwnd)>('RemoveClipboardFormatListener');
+  return _RemoveClipboardFormatListener(hwnd);
 }
 
 /// Replies to a message sent from another thread by the SendMessage
@@ -2251,6 +2668,39 @@ int SendMessage(int hWnd, int Msg, int wParam, int lParam) {
       IntPtr Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
       int Function(int hWnd, int Msg, int wParam, int lParam)>('SendMessageW');
   return _SendMessage(hWnd, Msg, wParam, lParam);
+}
+
+/// Places data on the clipboard in a specified clipboard format. The
+/// window must be the current clipboard owner, and the application must
+/// have called the OpenClipboard function.
+///
+/// ```c
+/// HANDLE SetClipboardData(
+///   UINT   uFormat,
+///   HANDLE hMem
+/// );
+/// ```
+/// {@category user32}
+int SetClipboardData(int uFormat, int hMem) {
+  final _SetClipboardData = _user32.lookupFunction<
+      IntPtr Function(Uint32 uFormat, IntPtr hMem),
+      int Function(int uFormat, int hMem)>('SetClipboardData');
+  return _SetClipboardData(uFormat, hMem);
+}
+
+/// Adds the specified window to the chain of clipboard viewers.
+///
+/// ```c
+/// HWND SetClipboardViewer(
+///   HWND hWndNewViewer
+/// );
+/// ```
+/// {@category user32}
+int SetClipboardViewer(int hWndNewViewer) {
+  final _SetClipboardViewer = _user32.lookupFunction<
+      IntPtr Function(IntPtr hWndNewViewer),
+      int Function(int hWndNewViewer)>('SetClipboardViewer');
+  return _SetClipboardViewer(hWndNewViewer);
 }
 
 /// Moves the cursor to the specified screen coordinates. If the new
@@ -2471,6 +2921,28 @@ int SetScrollInfo(int hwnd, int nBar, Pointer<SCROLLINFO> lpsi, int redraw) {
   return _SetScrollInfo(hwnd, nBar, lpsi, redraw);
 }
 
+/// Sets the colors for the specified display elements. Display elements
+/// are the various parts of a window and the display that appear on the
+/// system display screen.
+///
+/// ```c
+/// BOOL SetSysColors(
+///   int            cElements,
+///   const INT      *lpaElements,
+///   const COLORREF *lpaRgbValues
+/// );
+/// ```
+/// {@category user32}
+int SetSysColors(
+    int cElements, Pointer<Int32> lpaElements, Pointer<Int32> lpaRgbValues) {
+  final _SetSysColors = _user32.lookupFunction<
+      Int32 Function(Int32 cElements, Pointer<Int32> lpaElements,
+          Pointer<Int32> lpaRgbValues),
+      int Function(int cElements, Pointer<Int32> lpaElements,
+          Pointer<Int32> lpaRgbValues)>('SetSysColors');
+  return _SetSysColors(cElements, lpaElements, lpaRgbValues);
+}
+
 /// Creates a timer with the specified time-out value.
 ///
 /// ```c
@@ -2588,6 +3060,22 @@ int ShowCursor(int bShow) {
   final _ShowCursor = _user32.lookupFunction<Int32 Function(Int32 bShow),
       int Function(int bShow)>('ShowCursor');
   return _ShowCursor(bShow);
+}
+
+/// Shows or hides all pop-up windows owned by the specified window.
+///
+/// ```c
+/// BOOL ShowOwnedPopups(
+///   HWND hWnd,
+///   BOOL fShow
+/// );
+/// ```
+/// {@category user32}
+int ShowOwnedPopups(int hWnd, int fShow) {
+  final _ShowOwnedPopups = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Int32 fShow),
+      int Function(int hWnd, int fShow)>('ShowOwnedPopups');
+  return _ShowOwnedPopups(hWnd, fShow);
 }
 
 /// Sets the specified window's show state.
@@ -2780,6 +3268,23 @@ int UnionRect(
       int Function(Pointer<RECT> lprcDst, Pointer<RECT> lprcSrc1,
           Pointer<RECT> lprcSrc2)>('UnionRect');
   return _UnionRect(lprcDst, lprcSrc1, lprcSrc2);
+}
+
+/// Unregisters a window class, freeing the memory required for the class.
+///
+/// ```c
+/// BOOL UnregisterClassW(
+///   LPCWSTR   lpClassName,
+///   HINSTANCE hInstance
+/// );
+/// ```
+/// {@category user32}
+int UnregisterClass(Pointer<Utf16> lpClassName, int hInstance) {
+  final _UnregisterClass = _user32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpClassName, IntPtr hInstance),
+      int Function(
+          Pointer<Utf16> lpClassName, int hInstance)>('UnregisterClassW');
+  return _UnregisterClass(lpClassName, hInstance);
 }
 
 /// The UpdateWindow function updates the client area of the specified

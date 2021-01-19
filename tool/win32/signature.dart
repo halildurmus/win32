@@ -14,7 +14,7 @@ import 'win32types.dart';
 class Win32Signature {
   final String name;
   final String returnType;
-  final List<List<String>> params;
+  final List<Win32Param> params;
 
   const Win32Signature(this.returnType, this.name, this.params);
 
@@ -33,7 +33,7 @@ class Win32Signature {
     final returnType = preamble[0];
     final apiName = preamble[1];
 
-    var params = syntax
+    final params = syntax
         .substring(paramsStart + 1, syntax.length - 2)
         .split(',')
         .map((s) => s.replaceAll(r'\n', ''))
@@ -46,75 +46,60 @@ class Win32Signature {
         .map((s) => s.replaceAll('const', ''))
         .map((s) => s.trim())
         .map((s) => s.split(RegExp(' +')))
-        .map((s) => s.map((p) => p.trim()).toList())
-        .toList();
-
-    for (final param in params) {
-      if ((param.length != 2) &&
-          (param[0].isNotEmpty) &&
-          (!(param.length == 1 && param[0] == 'void'))) {
-        throw Exception('params != 2');
-      }
-    }
-
-    if (params.first.length == 1) {
-      params = [];
-    }
+        .map((s) => Win32Param(s.map((p) => p.trim()).toList()))
+        .toList()
+          ..removeWhere((param) => param.ffiType == 'Void');
 
     return Win32Signature(returnType, apiName, params);
   }
 
   String get nameWithoutEncoding =>
       name.endsWith('W') ? name.substring(0, name.length - 1) : name;
-
-  List<String> convertParamType(List<String> param) {
-    var paramType = ffiFromWin32(param.first);
-    var paramName = param.last;
-
-    if (paramName.startsWith('**')) {
-      paramType = 'Pointer<Pointer>';
-      paramName = paramName.substring(2);
-    }
-
-    if (paramName.startsWith('*')) {
-      if (paramType == 'Void') {
-        paramType = 'Pointer';
-      } else {
-        paramType = 'Pointer<$paramType>';
-      }
-      paramName = paramName.substring(1);
-    }
-
-    return [paramType, paramName];
-  }
 }
 
 class Win32Param {
-  final String name;
-  final String returnType;
+  late String name;
+  final String windowsType;
+  late String ffiType;
+
+  String get dartType {
+    if (ffiType.startsWith('Pointer')) {
+      return ffiType;
+    }
+    if (ffiType.startsWith('Uint') || ffiType.startsWith('Int')) {
+      return 'int';
+    }
+
+    if (['Double', 'Float'].contains(ffiType)) {
+      return 'double';
+    }
+
+    if (ffiType == 'Void') {
+      return 'void';
+    }
+
+    // Must be a struct passed by value, e.g. COORD in SetConsoleCursorPosition
+    return ffiType;
+  }
 
   Win32Param(List<String> param)
       : assert(param.length == 2),
-        name = param.first,
-        returnType = param.last;
-}
+        windowsType = param.last {
+    ffiType = ffiFromWin32(param.first);
+    name = param.last;
 
-String dartFromFFI(String ffiType) {
-  if (ffiType.startsWith('Pointer')) {
-    return ffiType;
-  }
-  if (ffiType.startsWith('Uint') || ffiType.startsWith('Int')) {
-    return 'int';
-  }
+    if (name.startsWith('**')) {
+      ffiType = 'Pointer<Pointer>';
+      name = name.substring(2);
+    }
 
-  if (['Double', 'Float'].contains(ffiType)) {
-    return 'double';
+    if (name.startsWith('*')) {
+      if (ffiType == 'Void') {
+        ffiType = 'Pointer';
+      } else {
+        ffiType = 'Pointer<$ffiType>';
+      }
+      name = name.substring(1);
+    }
   }
-
-  if (ffiType == 'Void') {
-    return 'void';
-  }
-
-  // Must be a struct passed by value, e.g. COORD in SetConsoleCursorPosition
-  return ffiType;
 }

@@ -48,14 +48,18 @@ String generateDocComment(Win32Function func) {
   return comment.toString();
 }
 
-void generateFfiFiles(Win32API apiSet) {
-  final prototypes = apiSet.prototypes;
+void generateFfiFiles(Win32API win32) {
   // Generate a list of libs, e.g. [kernel32, gdi32, ...]
-  final libraries = prototypes.values.map((e) => e.dllLibrary).toSet().toList();
+  // The .toSet() removes duplicates.
+  final libraries =
+      win32.functions.values.map((e) => e.dllLibrary).toSet().toList();
 
   for (final library in libraries) {
     final writer = File('lib/src/$library.dart').openSync(mode: FileMode.write);
+
+    // API set names aren't legal Dart identifiers, so we rename them
     final libraryDartName = library.replaceAll('-', '_');
+
     writer.writeStringSync('''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
@@ -78,39 +82,33 @@ import 'structs.dart';
 final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');\n
 ''');
 
-    // Iterable<TypeDef>
-    final libProtos = prototypes.values.where((p) => p.dllLibrary == library);
+    final filteredFunctionList =
+        win32.functions.values.where((func) => func.dllLibrary == library);
 
-    for (final proto in libProtos) {
-      final sig = proto.signature;
+    for (final function in filteredFunctionList) {
+      final apiName = function.signature.nameWithoutEncoding;
+      final returnFFIType = ffiFromWin32(function.signature.returnType);
+      final returnDartType = Win32Param([returnFFIType, '']).dartType;
 
-      final returnFFIType = ffiFromWin32(sig.returnType);
-      final returnDartType = dartFromFFI(returnFFIType);
+      final nativeParams = function.signature.params
+          .map((param) => '${param.ffiType} ${param.name}')
+          .join(', ');
+
+      final dartParams = function.signature.params
+          .map((param) => '${param.dartType} ${param.name}')
+          .join(', ');
+
+      final paramsList =
+          function.signature.params.map((param) => param.name).join(', ');
 
       writer.writeStringSync('''
-${generateDocComment(proto)}
-$returnDartType ${sig.nameWithoutEncoding}(${sig.params.map((param) {
-        final convertedParams = sig.convertParamType(param);
-        final dartType = dartFromFFI(convertedParams.first);
-        return '$dartType ${convertedParams.last}';
-      }).join(', ')}) {
-  final _${sig.nameWithoutEncoding} = _$libraryDartName.lookupFunction<\n
-    $returnFFIType Function(
-      ${sig.params.map((param) {
-        final convertedParams = sig.convertParamType(param);
-        return '${convertedParams.first} ${convertedParams.last}';
-      }).join(', ')}),
-    $returnDartType Function(
-      ${sig.params.map((param) {
-        final convertedParams = sig.convertParamType(param);
-        final dartType = dartFromFFI(convertedParams.first);
-        return '$dartType ${convertedParams.last}';
-      }).join(', ')})>
-    ('${sig.name}');
-  return _${sig.nameWithoutEncoding}(${sig.params.map((param) {
-        final convertedParams = sig.convertParamType(param);
-        return convertedParams.last;
-      }).join(', ')});
+${generateDocComment(function)}
+$returnDartType $apiName(${function.signature.params.map((param) => '${param.dartType} ${param.name}').join(', ')}) {
+  final _$apiName = _$libraryDartName.lookupFunction<
+    $returnFFIType Function($nativeParams),
+    $returnDartType Function($dartParams)>
+    ('${function.signature.name}');
+  return _$apiName($paramsList);
 }
 ''');
     }
@@ -120,8 +118,8 @@ $returnDartType ${sig.nameWithoutEncoding}(${sig.params.map((param) {
 }
 
 void main() {
-  final apiSet = Win32API('tool/win32/win32api.json');
+  final win32 = Win32API('tool/win32/win32api.json');
 
-  generateFfiFiles(apiSet);
-  print('${apiSet.prototypes.length} typedefs generated.');
+  generateFfiFiles(win32);
+  print('${win32.functions.length} typedefs generated.');
 }

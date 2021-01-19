@@ -21,6 +21,27 @@ final _version = DynamicLibrary.open('version.dll');
 /// Retrieves version information for the specified file.
 ///
 /// ```c
+/// BOOL GetFileVersionInfoW(
+///   LPCWSTR lptstrFilename,
+///   DWORD   dwHandle,
+///   DWORD   dwLen,
+///   LPVOID  lpData
+/// );
+/// ```
+/// {@category version}
+int GetFileVersionInfo(
+    Pointer<Utf16> lptstrFilename, int dwHandle, int dwLen, Pointer lpData) {
+  final _GetFileVersionInfo = _version.lookupFunction<
+      Int32 Function(Pointer<Utf16> lptstrFilename, Uint32 dwHandle,
+          Uint32 dwLen, Pointer lpData),
+      int Function(Pointer<Utf16> lptstrFilename, int dwHandle, int dwLen,
+          Pointer lpData)>('GetFileVersionInfoW');
+  return _GetFileVersionInfo(lptstrFilename, dwHandle, dwLen, lpData);
+}
+
+/// Retrieves version information for the specified file.
+///
+/// ```c
 /// BOOL GetFileVersionInfoExW(
 ///   DWORD   dwFlags,
 ///   LPCWSTR lpwstrFilename,
@@ -39,29 +60,6 @@ int GetFileVersionInfoEx(int dwFlags, Pointer<Utf16> lpwstrFilename,
           int dwLen, Pointer lpData)>('GetFileVersionInfoExW');
   return _GetFileVersionInfoEx(
       dwFlags, lpwstrFilename, dwHandle, dwLen, lpData);
-}
-
-/// Determines whether the operating system can retrieve version
-/// information for a specified file. If version information is available,
-/// GetFileVersionInfoSizeEx returns the size, in bytes, of that
-/// information.
-///
-/// ```c
-/// DWORD GetFileVersionInfoSizeExW(
-///   DWORD   dwFlags,
-///   LPCWSTR lpwstrFilename,
-///   LPDWORD lpdwHandle
-/// );
-/// ```
-/// {@category version}
-int GetFileVersionInfoSizeEx(
-    int dwFlags, Pointer<Utf16> lpwstrFilename, Pointer<Uint32> lpdwHandle) {
-  final _GetFileVersionInfoSizeEx = _version.lookupFunction<
-      Uint32 Function(Uint32 dwFlags, Pointer<Utf16> lpwstrFilename,
-          Pointer<Uint32> lpdwHandle),
-      int Function(int dwFlags, Pointer<Utf16> lpwstrFilename,
-          Pointer<Uint32> lpdwHandle)>('GetFileVersionInfoSizeExW');
-  return _GetFileVersionInfoSizeEx(dwFlags, lpwstrFilename, lpdwHandle);
 }
 
 /// Determines whether the operating system can retrieve version
@@ -85,25 +83,27 @@ int GetFileVersionInfoSize(
   return _GetFileVersionInfoSize(lptstrFilename, lpdwHandle);
 }
 
-/// Retrieves version information for the specified file.
+/// Determines whether the operating system can retrieve version
+/// information for a specified file. If version information is available,
+/// GetFileVersionInfoSizeEx returns the size, in bytes, of that
+/// information.
 ///
 /// ```c
-/// BOOL GetFileVersionInfoW(
-///   LPCWSTR lptstrFilename,
-///   DWORD   dwHandle,
-///   DWORD   dwLen,
-///   LPVOID  lpData
+/// DWORD GetFileVersionInfoSizeExW(
+///   DWORD   dwFlags,
+///   LPCWSTR lpwstrFilename,
+///   LPDWORD lpdwHandle
 /// );
 /// ```
 /// {@category version}
-int GetFileVersionInfo(
-    Pointer<Utf16> lptstrFilename, int dwHandle, int dwLen, Pointer lpData) {
-  final _GetFileVersionInfo = _version.lookupFunction<
-      Int32 Function(Pointer<Utf16> lptstrFilename, Uint32 dwHandle,
-          Uint32 dwLen, Pointer lpData),
-      int Function(Pointer<Utf16> lptstrFilename, int dwHandle, int dwLen,
-          Pointer lpData)>('GetFileVersionInfoW');
-  return _GetFileVersionInfo(lptstrFilename, dwHandle, dwLen, lpData);
+int GetFileVersionInfoSizeEx(
+    int dwFlags, Pointer<Utf16> lpwstrFilename, Pointer<Uint32> lpdwHandle) {
+  final _GetFileVersionInfoSizeEx = _version.lookupFunction<
+      Uint32 Function(Uint32 dwFlags, Pointer<Utf16> lpwstrFilename,
+          Pointer<Uint32> lpdwHandle),
+      int Function(int dwFlags, Pointer<Utf16> lpwstrFilename,
+          Pointer<Uint32> lpdwHandle)>('GetFileVersionInfoSizeExW');
+  return _GetFileVersionInfoSizeEx(dwFlags, lpwstrFilename, lpdwHandle);
 }
 
 /// Determines where to install a file based on whether it locates another
