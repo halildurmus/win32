@@ -3125,6 +3125,28 @@ void main() {
               int c)>('TextOutW');
       expect(TextOut, isA<Function>());
     });
+    test('Can instantiate GetSubMenu', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetSubMenu = user32.lookupFunction<
+          IntPtr Function(IntPtr hMenu, Int32 nPos),
+          int Function(int hMenu, int nPos)>('GetSubMenu');
+      expect(GetSubMenu, isA<Function>());
+    });
+    test('Can instantiate DestroyMenu', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final DestroyMenu = user32.lookupFunction<Int32 Function(IntPtr hMenu),
+          int Function(int hMenu)>('DestroyMenu');
+      expect(DestroyMenu, isA<Function>());
+    });
+    test('Can instantiate TrackPopupMenuEx', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final TrackPopupMenuEx = user32.lookupFunction<
+          Int32 Function(IntPtr hMenu, Uint32 uFlags, Int32 x, Int32 y,
+              IntPtr hwnd, Pointer<TPMPARAMS> lptpm),
+          int Function(int hMenu, int uFlags, int x, int y, int hwnd,
+              Pointer<TPMPARAMS> lptpm)>('TrackPopupMenuEx');
+      expect(TrackPopupMenuEx, isA<Function>());
+    });
   });
 
   group('Test bthprops functions', () {
@@ -4056,6 +4078,14 @@ void main() {
           int Function(Pointer<Utf16> pszRootPath,
               Pointer<SHQUERYRBINFO> pSHQueryRBInfo)>('SHQueryRecycleBinW');
       expect(SHQueryRecycleBin, isA<Function>());
+    });
+    test('Can instantiate Shell_NotifyIcon', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final Shell_NotifyIcon = shell32.lookupFunction<
+          Int32 Function(Uint32 dwMessage, Pointer<NOTIFYICONDATA> lpData),
+          int Function(int dwMessage,
+              Pointer<NOTIFYICONDATA> lpData)>('Shell_NotifyIconW');
+      expect(Shell_NotifyIcon, isA<Function>());
     });
   });
 

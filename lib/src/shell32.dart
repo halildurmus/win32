@@ -259,3 +259,20 @@ int SHQueryRecycleBin(
           Pointer<SHQUERYRBINFO> pSHQueryRBInfo)>('SHQueryRecycleBinW');
   return _SHQueryRecycleBin(pszRootPath, pSHQueryRBInfo);
 }
+
+/// Sends a message to the taskbar's status area.
+///
+/// ```c
+/// BOOL Shell_NotifyIconW(
+///  DWORD dwMessage,
+///  NOTIFYICONDATA *lpData
+/// );
+/// ```
+/// {@category shell32}
+int Shell_NotifyIcon(int dwMessage, Pointer<NOTIFYICONDATA> lpData) {
+  final _Shell_NotifyIcon = _shell32.lookupFunction<
+      Int32 Function(Uint32 dwMessage, Pointer<NOTIFYICONDATA> lpData),
+      int Function(
+          int dwMessage, Pointer<NOTIFYICONDATA> lpData)>('Shell_NotifyIconW');
+  return _Shell_NotifyIcon(dwMessage, lpData);
+}

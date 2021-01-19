@@ -114,4 +114,6 @@ void main()
     printf("'CLSID': %zu,\n", sizeof(CLSID));
     printf("'STATSTG': %zu,\n", sizeof(STATSTG));
     printf("'NLM_SIMULATED_PROFILE_INFO': %zu,\n", sizeof(NLM_SIMULATED_PROFILE_INFO));
+    printf("'NOTIFYICONDATAW': %zu,\n", sizeof(NOTIFYICONDATAW));
+    printf("'TPMPARAMS': %zu,\n", sizeof(TPMPARAMS));
 }

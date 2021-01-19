@@ -4699,3 +4699,222 @@ const SHUTDOWN_RESTARTAPPS = 0x0000080;
 /// SHUTDOWN_HYBRID flag with one or more of the flags in this table to specify
 /// options for the shutdown.
 const SHUTDOWN_HYBRID = 0x0000200;
+
+// -----------------------------------------------------------------------------
+// Shell_NotifyIcon uFlags constants
+// -----------------------------------------------------------------------------
+
+/// Adds an icon to the status area. The icon is given an identifier in the
+/// NOTIFYICONDATA structure pointed to by lpdata—either through its uID or
+/// guidItem member. This identifier is used in subsequent calls to
+/// Shell_NotifyIcon to perform later actions on the icon.
+const NIM_ADD = 0x00000000;
+
+/// Modifies an icon in the status area. NOTIFYICONDATA structure pointed to by
+/// lpdata uses the ID originally assigned to the icon when it was added to the
+/// notification area (NIM_ADD) to identify the icon to be modified.
+const NIM_MODIFY = 0x00000001;
+
+/// Deletes an icon from the status area. NOTIFYICONDATA structure
+/// pointed to by lpdata uses the ID originally assigned to the icon when it was
+/// added to the notification area (NIM_ADD) to identify the icon to be deleted.
+const NIM_DELETE = 0x00000002;
+
+/// Shell32.dll version 5.0 and later only. Returns focus to the
+/// taskbar notification area. Notification area icons should use this message
+/// when they have completed their UI operation. For example, if the icon
+/// displays a shortcut menu, but the user presses ESC to cancel it, use
+/// NIM_SETFOCUS to return focus to the notification area.
+const NIM_SETFOCUS = 0x00000003;
+
+/// Shell32.dll version 5.0 and later only. Instructs the notification area to
+/// behave according to the version number specified in the uVersion member of
+/// the structure pointed to by lpdata. The version number specifies which
+/// members are recognized. NIM_SETVERSION must be called every time a
+/// notification area icon is added (NIM_ADD)>. It does not need to be called
+/// with NIM_MOFIDY. The version setting is not persisted once a user logs off.
+const NIM_SETVERSION = 0x00000004;
+
+// -----------------------------------------------------------------------------
+// NOTIFYICONDATA::uVersion constants
+// Flags that either indicate which of the other members of the structure
+// contain valid data or provide additional information to the tooltip as to
+// how it should display. This member can be a combination of the following
+// values:
+// -----------------------------------------------------------------------------
+const NOTIFYICON_VERSION = 3;
+const NOTIFYICON_VERSION_4 = 4;
+
+// -----------------------------------------------------------------------------
+// NOTIFYICONDATA::uFlags constants
+// -----------------------------------------------------------------------------
+
+/// The uCallbackMessage member is valid.
+const NIF_MESSAGE = 0x00000001;
+
+/// The hIcon member is valid.
+const NIF_ICON = 0x00000002;
+
+/// The szTip member is valid.
+const NIF_TIP = 0x00000004;
+
+/// The dwState and dwStateMask members are valid.
+const NIF_STATE = 0x00000008;
+
+/// To display the balloon notification, specify NIF_INFO and provide
+/// text in szInfo.
+/// To remove a balloon notification, specify NIF_INFO and provide an empty
+/// string through szInfo.
+/// To add a notification area icon without displaying a notification,
+/// do not set the NIF_INFO flag.
+const NIF_INFO = 0x00000010;
+
+/// Windows 7 and later: The guidItem is valid.
+/// Windows Vista and earlier: Reserved.
+const NIF_GUID = 0x00000020;
+
+/// Windows Vista and later. If the balloon notification cannot be displayed
+/// immediately, discard it. Use this flag for notifications that represent
+/// real-time information which would be meaningless or misleading if displayed
+/// at a later time. For example, a message that states
+/// "Your telephone is ringing." NIF_REALTIME is meaningful only when combined
+/// with the NIF_INFO flag.
+const NIF_REALTIME = 0x00000040;
+
+/// Windows Vista and later. Use the standard tooltip. Normally, when uVersion
+/// is set to NOTIFYICON_VERSION_4, the standard tooltip is suppressed and
+/// can be replaced by the application-drawn, pop-up UI. If the application
+/// wants to show the standard tooltip with NOTIFYICON_VERSION_4, it can
+/// specify NIF_SHOWTIP to indicate the standard tooltip should still be shown.
+const NIF_SHOWTIP = 0x00000080;
+
+// -----------------------------------------------------------------------------
+// NOTIFYICONDATA::dwState constants
+// The state of the icon. One or both of the following values.
+// -----------------------------------------------------------------------------
+
+/// The icon is hidden.
+const NIS_HIDDEN = 0x00000001;
+
+/// The icon resource is shared between multiple icons.
+const NIS_SHAREDICON = 0x00000002;
+
+// -----------------------------------------------------------------------------
+// NOTIFYICONDATA::dwInfoFlags constants
+// Flags that can be set to modify the behavior and appearance of a balloon
+// notification. The icon is placed to the left of the title. If the szInfoTitle
+// member is zero-length, the icon is not shown.
+// -----------------------------------------------------------------------------
+
+/// No icon.
+const NIIF_NONE = 0x00000000;
+
+/// An information icon.
+const NIIF_INFO = 0x00000001;
+
+/// A warning icon.
+const NIIF_WARNING = 0x00000002;
+
+/// An error icon.
+const NIIF_ERROR = 0x00000003;
+
+/// Windows Vista and later: Use the icon identified in hBalloonIcon as the
+/// notification balloon's title icon.
+const NIIF_USER = 0x00000004;
+
+/// Windows XP and later. Reserved.
+const NIIF_ICON_MASK = 0x0000000F;
+
+/// Do not play the associated sound. Applies only to notifications.
+const NIIF_NOSOUND = 0x00000010;
+
+/// The large version of the icon should be used as the notification icon
+const NIIF_LARGE_ICON = 0x00000020;
+
+/// Do not display the balloon notification if the curr user is in "quiet time"
+const NIIF_RESPECT_QUIET_TIME = 0x00000080;
+
+/// Used to define private messages, usually of the form WM_APP+x, where x
+/// is an integer value.
+const WM_APP = 0x8000;
+
+// -----------------------------------------------------------------------------
+// Shell_NotifyIcon WndProc callback message contants
+// -----------------------------------------------------------------------------
+
+/// If a user selects a notify icon with the mouse and activates it with the
+/// ENTER key, the Shell now sends the associated application an NIN_SELECT
+/// notification. Earlier versions send WM_RBUTTONDOWN and WM_RBUTTONUP
+/// messages.
+const NIN_SELECT = WM_USER + 0;
+
+const NINF_KEY = 0x1;
+
+/// If a user selects a notify icon with the keyboard and activates it with
+/// the SPACEBAR or ENTER key, the version 5.0 Shell sends the associated
+/// application an NIN_KEYSELECT notification. Earlier versions send
+/// WM_RBUTTONDOWN and WM_RBUTTONUP messages.
+const NIN_KEYSELECT = NIN_SELECT | NINF_KEY;
+
+/// Sent when the balloon is shown (balloons are queued).
+const NIN_BALLOONSHOW = WM_USER + 2;
+
+/// Sent when the balloon disappears. For example, when the icon is deleted.
+/// This message is not sent if the balloon is dismissed because of a timeout or
+/// if the user clicks the mouse.
+/// As of Windows 7, NIN_BALLOONHIDE is also sent when a notification with
+/// the NIIF_RESPECT_QUIET_TIME flag set attempts to display during quiet time
+/// (a user's first hour on a new computer). In that case, the balloon is never
+/// displayed at all.
+const NIN_BALLOONHIDE = WM_USER + 3;
+
+/// Sent when the balloon is dismissed because of a timeout.
+const NIN_BALLOONTIMEOUT = WM_USER + 4;
+
+/// Sent when the balloon is dismissed because the user clicked the mouse.
+const NIN_BALLOONUSERCLICK = WM_USER + 5;
+
+/// Sent when the user hovers the cursor over an icon to indicate that the
+/// richer pop-up UI should be used in place of a standard textual tooltip.
+const NIN_POPUPOPEN = WM_USER + 6;
+
+/// Sent when a cursor no longer hovers over an icon to indicate that the rich
+/// pop-up UI should be closed.
+const NIN_POPUPCLOSE = WM_USER + 7;
+
+// -----------------------------------------------------------------------------
+// TrackPopupMenuEx uFlag constants
+// -----------------------------------------------------------------------------
+
+const TPM_LEFTBUTTON = 0x0000;
+const TPM_RIGHTBUTTON = 0x0002;
+const TPM_LEFTALIGN = 0x0000;
+const TPM_CENTERALIGN = 0x0004;
+const TPM_RIGHTALIGN = 0x0008;
+
+// -----------------------------------------------------------------------------
+// LoadImage type constants
+// -----------------------------------------------------------------------------
+
+const IMAGE_BITMAP = 0;
+const IMAGE_ICON = 1;
+const IMAGE_CURSOR = 2;
+const IMAGE_ENHMETAFILE = 3;
+
+// -----------------------------------------------------------------------------
+// LoadImage fuLoad constants
+// -----------------------------------------------------------------------------
+
+const LR_DEFAULTCOLOR = 0x00000000;
+const LR_MONOCHROME = 0x00000001;
+const LR_COLOR = 0x00000002;
+const LR_COPYRETURNORG = 0x00000004;
+const LR_COPYDELETEORG = 0x00000008;
+const LR_LOADFROMFILE = 0x00000010;
+const LR_LOADTRANSPARENT = 0x00000020;
+const LR_DEFAULTSIZE = 0x00000040;
+const LR_VGACOLOR = 0x00000080;
+const LR_LOADMAP3DCOLORS = 0x00001000;
+const LR_CREATEDIBSECTION = 0x00002000;
+const LR_COPYFROMRESOURCE = 0x00004000;
+const LR_SHARED = 0x00008000;
