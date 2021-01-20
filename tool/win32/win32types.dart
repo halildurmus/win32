@@ -46,10 +46,10 @@ const mapping = <String, String>{
   'HCURSOR': 'IntPtr', 'HBLUETOOTH_DEVICE_FIND': 'IntPtr',
   'HBLUETOOTH_RADIO_FIND': 'IntPtr',
   'HBLUETOOTH_AUTHENTICATION_REGISTRATION': 'IntPtr', 'HINSTANCE': 'IntPtr',
-  'HPCON': 'IntPtr',
+  'HPCON': 'IntPtr', 'HWAVEOUT': 'IntPtr',
   'HSTRING': 'IntPtr',
 
-  'HRESULT': 'Int32',
+  'HRESULT': 'Int32', 'MMRESULT': 'Uint32',
   'NTSTATUS': 'Int32',
   'SHSTDAPI': 'Int32', 'SHFOLDERAPI': 'Int32',
   'COLORREF': 'Int32',
@@ -88,7 +88,7 @@ const mapping = <String, String>{
 
   // Pointers to ints
   'LPDWORD': 'Pointer<Uint32>', 'LPBYTE': 'Pointer<Uint8>',
-  'LPBOOL': 'Pointer<Uint32>',
+  'LPBOOL': 'Pointer<Uint32>', 'LPUINT': 'Pointer<Uint32>',
 
   // Strings
   'LPWSTR': 'Pointer<Utf16>', 'LPCWSTR': 'Pointer<Utf16>',
@@ -143,6 +143,7 @@ const mapping = <String, String>{
   'LPCMENUINFO': 'Pointer<MENUINFO>',
   'LPCMENUITEMINFOW': 'Pointer<MENUITEMINFO>',
   'LPCSCROLLINFO': 'Pointer<SCROLLINFO>',
+  'LPCWAVEFORMATEX': 'Pointer<WAVEFORMATEX>',
   'LPCLSID': 'Pointer<GUID>', 'REFCLSID': 'Pointer<GUID>',
   'REFIID': 'Pointer<GUID>', 'LPIID': 'Pointer<GUID>',
   'REFKNOWNFOLDERID': 'Pointer<GUID>',
@@ -151,6 +152,7 @@ const mapping = <String, String>{
   'VARIANTARG': 'Void', 'va_list': 'Void',
   'IUnknown': 'Void', 'IBindCtx': 'Void',
   'HPCON*': 'Pointer<IntPtr>',
+  'LPHWAVEOUT': 'Pointer<IntPtr>',
   'LOGFONTW': 'LOGFONT',
   'SHELLEXECUTEINFOW': 'SHELLEXECUTEINFO',
   'WNDCLASSW': 'WNDCLASS',

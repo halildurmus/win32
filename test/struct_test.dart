@@ -512,4 +512,32 @@ void main() {
       expect(sizeOf<TPMPARAMS>(), equals(20));
     }
   });
+  test('Struct WAVEOUTCAPS is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<WAVEOUTCAPS>(), equals(84));
+    } else {
+      expect(sizeOf<WAVEOUTCAPS>(), equals(84));
+    }
+  });
+  test('Struct WAVEFORMATEX is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<WAVEFORMATEX>(), equals(18));
+    } else {
+      expect(sizeOf<WAVEFORMATEX>(), equals(18));
+    }
+  });
+  test('Struct WAVEHDR is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<WAVEHDR>(), equals(48));
+    } else {
+      expect(sizeOf<WAVEHDR>(), equals(32));
+    }
+  });
+  test('Struct MMTIME is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<MMTIME>(), equals(12));
+    } else {
+      expect(sizeOf<MMTIME>(), equals(12));
+    }
+  });
 }

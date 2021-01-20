@@ -91,6 +91,10 @@ const structSize64 = {
   'NLM_SIMULATED_PROFILE_INFO': 524,
   'NOTIFYICONDATA': 976,
   'TPMPARAMS': 20,
+  'WAVEOUTCAPS': 84,
+  'WAVEFORMATEX': 18,
+  'WAVEHDR': 48,
+  'MMTIME': 12,
 };
 
 const structSize32 = {
@@ -181,6 +185,10 @@ const structSize32 = {
   'NLM_SIMULATED_PROFILE_INFO': 524,
   'NOTIFYICONDATA': 956,
   'TPMPARAMS': 20,
+  'WAVEOUTCAPS': 84,
+  'WAVEFORMATEX': 18,
+  'WAVEHDR': 32,
+  'MMTIME': 12,
 };
 
 const skipStructs = [
