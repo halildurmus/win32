@@ -1,3 +1,8 @@
+## 2.0.0-nullsafety.9
+
+- Workarounds to fix sizing of BLUETOOTH_PIN_INFO and SHITEMID structs.
+- Add waveOut* APIs from winmm.dll (thanks @slightfoot)
+
 ## 2.0.0-nullsafety.8
 
 - New JSON-based metadata format for Win32 APIs that supports API sets and
