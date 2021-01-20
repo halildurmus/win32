@@ -15,13 +15,13 @@ import 'user32.dart';
 //
 // #define MAKEWORD(a, b)   ((WORD)(((BYTE)(((DWORD_PTR)(a)) & 0xff)) |
 //                          ((WORD)((BYTE)(((DWORD_PTR)(b)) & 0xff))) << 8))
-int MAKEWORD(int a, int b) => a & 0xff | (b & 0xff << 8);
+int MAKEWORD(int a, int b) => a & 0xff | ((b & 0xff) << 8);
 
 /// Creates a LONG value by concatenating the specified values.
 //
 // #define MAKELONG(a, b)   ((LONG)(((WORD)(((DWORD_PTR)(a)) & 0xffff)) |
 //                          ((DWORD)((WORD)(((DWORD_PTR)(b)) & 0xffff))) << 16))
-int MAKELONG(int a, int b) => a & 0xffff | (b & 0xffff << 16);
+int MAKELONG(int a, int b) => a & 0xffff | ((b & 0xffff) << 16);
 
 /// Retrieves the low-order word from the specified 32-bit value.
 //

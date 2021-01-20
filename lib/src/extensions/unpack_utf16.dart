@@ -31,11 +31,11 @@ extension Utf16Conversion on Pointer<Utf16> {
     for (var v = 0; v < maxLength; v++) {
       final charCode = ptr.elementAt(v).value;
       if (charCode != 0) {
-        buf.write(String.fromCharCode(charCode));
+        buf.writeCharCode(charCode);
       } else {
         results.add(buf.toString());
         if (ptr.elementAt(v + 1).value == 0) {
-          return results;
+          break;
         } else {
           buf.clear();
         }
