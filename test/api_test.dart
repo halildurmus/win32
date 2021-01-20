@@ -4451,6 +4451,163 @@ void main() {
               Pointer<Utf16> pszSound, int hmod, int fdwSound)>('PlaySoundW');
       expect(PlaySound, isA<Function>());
     });
+    test('Can instantiate waveOutClose', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveOutClose = winmm.lookupFunction<Uint32 Function(IntPtr hwo),
+          int Function(int hwo)>('waveOutClose');
+      expect(waveOutClose, isA<Function>());
+    });
+    test('Can instantiate waveOutGetDevCaps', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveOutGetDevCaps = winmm.lookupFunction<
+          Uint32 Function(
+              Uint32 uDeviceID, Pointer<WAVEOUTCAPS> pwoc, Uint32 cbwoc),
+          int Function(int uDeviceID, Pointer<WAVEOUTCAPS> pwoc,
+              int cbwoc)>('waveOutGetDevCapsW');
+      expect(waveOutGetDevCaps, isA<Function>());
+    });
+    test('Can instantiate waveOutGetErrorText', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveOutGetErrorText = winmm.lookupFunction<
+          Uint32 Function(
+              Uint32 mmrError, Pointer<Utf16> pszText, Uint32 cchText),
+          int Function(int mmrError, Pointer<Utf16> pszText,
+              int cchText)>('waveOutGetErrorTextW');
+      expect(waveOutGetErrorText, isA<Function>());
+    });
+    test('Can instantiate waveOutGetID', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveOutGetID = winmm.lookupFunction<
+          Uint32 Function(IntPtr hwo, Pointer<Uint32> puDeviceID),
+          int Function(int hwo, Pointer<Uint32> puDeviceID)>('waveOutGetID');
+      expect(waveOutGetID, isA<Function>());
+    });
+    test('Can instantiate waveOutGetNumDevs', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveOutGetNumDevs =
+          winmm.lookupFunction<Uint32 Function(), int Function()>(
+              'waveOutGetNumDevs');
+      expect(waveOutGetNumDevs, isA<Function>());
+    });
+    test('Can instantiate waveOutGetPitch', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveOutGetPitch = winmm.lookupFunction<
+          Uint32 Function(IntPtr hwo, Pointer<Uint32> pdwPitch),
+          int Function(int hwo, Pointer<Uint32> pdwPitch)>('waveOutGetPitch');
+      expect(waveOutGetPitch, isA<Function>());
+    });
+    test('Can instantiate waveOutGetPlaybackRate', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveOutGetPlaybackRate = winmm.lookupFunction<
+          Uint32 Function(IntPtr hwo, Pointer<Uint32> pdwRate),
+          int Function(
+              int hwo, Pointer<Uint32> pdwRate)>('waveOutGetPlaybackRate');
+      expect(waveOutGetPlaybackRate, isA<Function>());
+    });
+    test('Can instantiate waveOutGetPosition', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveOutGetPosition = winmm.lookupFunction<
+          Uint32 Function(IntPtr hwo, Pointer<MMTIME> pmmt, Uint32 cbmmt),
+          int Function(
+              int hwo, Pointer<MMTIME> pmmt, int cbmmt)>('waveOutGetPosition');
+      expect(waveOutGetPosition, isA<Function>());
+    });
+    test('Can instantiate waveOutGetVolume', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveOutGetVolume = winmm.lookupFunction<
+          Uint32 Function(IntPtr hwo, Pointer<Uint32> pdwVolume),
+          int Function(int hwo, Pointer<Uint32> pdwVolume)>('waveOutGetVolume');
+      expect(waveOutGetVolume, isA<Function>());
+    });
+    test('Can instantiate waveOutMessage', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveOutMessage = winmm.lookupFunction<
+          Uint32 Function(IntPtr hwo, Uint32 uMsg, IntPtr dw1, IntPtr dw2),
+          int Function(int hwo, int uMsg, int dw1, int dw2)>('waveOutMessage');
+      expect(waveOutMessage, isA<Function>());
+    });
+    test('Can instantiate waveOutOpen', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveOutOpen = winmm.lookupFunction<
+          Uint32 Function(
+              Pointer<IntPtr> phwo,
+              Uint32 uDeviceID,
+              Pointer<WAVEFORMATEX> pwfx,
+              IntPtr dwCallback,
+              IntPtr dwInstance,
+              Uint32 fdwOpen),
+          int Function(
+              Pointer<IntPtr> phwo,
+              int uDeviceID,
+              Pointer<WAVEFORMATEX> pwfx,
+              int dwCallback,
+              int dwInstance,
+              int fdwOpen)>('waveOutOpen');
+      expect(waveOutOpen, isA<Function>());
+    });
+    test('Can instantiate waveOutPause', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveOutPause = winmm.lookupFunction<Uint32 Function(IntPtr hwo),
+          int Function(int hwo)>('waveOutPause');
+      expect(waveOutPause, isA<Function>());
+    });
+    test('Can instantiate waveOutPrepareHeader', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveOutPrepareHeader = winmm.lookupFunction<
+          Uint32 Function(IntPtr hwo, Pointer<WAVEHDR> pwh, Uint32 cbwh),
+          int Function(
+              int hwo, Pointer<WAVEHDR> pwh, int cbwh)>('waveOutPrepareHeader');
+      expect(waveOutPrepareHeader, isA<Function>());
+    });
+    test('Can instantiate waveOutReset', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveOutReset = winmm.lookupFunction<Uint32 Function(IntPtr hwo),
+          int Function(int hwo)>('waveOutReset');
+      expect(waveOutReset, isA<Function>());
+    });
+    test('Can instantiate waveOutRestart', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveOutRestart = winmm.lookupFunction<Uint32 Function(IntPtr hwo),
+          int Function(int hwo)>('waveOutRestart');
+      expect(waveOutRestart, isA<Function>());
+    });
+    test('Can instantiate waveOutSetPitch', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveOutSetPitch = winmm.lookupFunction<
+          Uint32 Function(IntPtr hwo, Uint32 dwPitch),
+          int Function(int hwo, int dwPitch)>('waveOutSetPitch');
+      expect(waveOutSetPitch, isA<Function>());
+    });
+    test('Can instantiate waveOutSetPlaybackRate', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveOutSetPlaybackRate = winmm.lookupFunction<
+          Uint32 Function(IntPtr hwo, Uint32 dwRate),
+          int Function(int hwo, int dwRate)>('waveOutSetPlaybackRate');
+      expect(waveOutSetPlaybackRate, isA<Function>());
+    });
+    test('Can instantiate waveOutSetVolume', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveOutSetVolume = winmm.lookupFunction<
+          Uint32 Function(IntPtr hwo, Uint32 dwVolume),
+          int Function(int hwo, int dwVolume)>('waveOutSetVolume');
+      expect(waveOutSetVolume, isA<Function>());
+    });
+    test('Can instantiate waveOutUnprepareHeader', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveOutUnprepareHeader = winmm.lookupFunction<
+          Uint32 Function(IntPtr hwo, Pointer<WAVEHDR> pwh, Uint32 cbwh),
+          int Function(int hwo, Pointer<WAVEHDR> pwh,
+              int cbwh)>('waveOutUnprepareHeader');
+      expect(waveOutUnprepareHeader, isA<Function>());
+    });
+    test('Can instantiate waveOutWrite', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final waveOutWrite = winmm.lookupFunction<
+          Uint32 Function(IntPtr hwo, Pointer<WAVEHDR> pwh, Uint32 cbwh),
+          int Function(
+              int hwo, Pointer<WAVEHDR> pwh, int cbwh)>('waveOutWrite');
+      expect(waveOutWrite, isA<Function>());
+    });
   });
 
   group('Test rometadata functions', () {

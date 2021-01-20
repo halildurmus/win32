@@ -2517,5 +2517,105 @@
         "prototype": "BOOL WriteProcessMemory(\n  HANDLE  hProcess,\n  LPVOID  lpBaseAddress,\n  LPCVOID lpBuffer,\n  SIZE_T  nSize,\n  SIZE_T  *lpNumberOfBytesWritten\n);",
         "dllLibrary": "kernel32",
         "comment": "Writes data to an area of memory in a specified process. The entire area to be written to must be accessible or the operation fails."
+    },
+    "waveOutClose": {
+        "prototype": "MMRESULT waveOutClose(\n  HWAVEOUT hwo\n  );",
+        "dllLibrary": "winmm",
+        "comment": "The waveOutClose function closes the given waveform-audio output device."
+    },
+    "waveOutGetDevCaps": {
+        "prototype": "MMRESULT waveOutGetDevCapsW(\n  UINT          uDeviceID,\n  LPWAVEOUTCAPS pwoc,\n  UINT          cbwoc\n);",
+        "dllLibrary": "winmm",
+        "comment": "The waveOutGetDevCaps function retrieves the capabilities of a given waveform-audio output device."
+    },
+    "waveOutGetErrorText": {
+        "prototype": "MMRESULT waveOutGetErrorTextW(\n  MMRESULT mmrError,\n  LPWSTR    pszText,\n  UINT     cchText\n);",
+        "dllLibrary": "winmm",
+        "comment": "The waveOutGetErrorText function retrieves a textual description of the error identified by the given error number."
+    },
+    "waveOutGetID": {
+        "prototype": "MMRESULT waveOutGetID(\n  HWAVEOUT hwo,\n  LPUINT   puDeviceID\n);",
+        "dllLibrary": "winmm",
+        "comment": "The waveOutGetID function retrieves the device identifier for the given waveform-audio output device."
+    },
+    "waveOutGetNumDevs": {
+        "prototype": "UINT waveOutGetNumDevs();",
+        "dllLibrary": "winmm",
+        "comment": "The waveOutGetNumDevs function retrieves the number of waveform-audio output devices present in the system."
+    },
+    "waveOutGetPitch": {
+        "prototype": "MMRESULT waveOutGetPitch(\n  HWAVEOUT hwo,\n  LPDWORD  pdwPitch\n);",
+        "dllLibrary": "winmm",
+        "comment": "The waveOutGetPitch function retrieves the current pitch setting for the specified waveform-audio output device."
+    },
+    "waveOutGetPlaybackRate": {
+        "prototype": "MMRESULT waveOutGetPlaybackRate(\n  HWAVEOUT hwo,\n  LPDWORD  pdwRate\n);",
+        "dllLibrary": "winmm",
+        "comment": "The waveOutGetPlaybackRate function retrieves the current playback rate for the specified waveform-audio output device."
+    },
+    "waveOutGetPosition": {
+        "prototype": "MMRESULT waveOutGetPosition(\n  HWAVEOUT hwo,\n  LPMMTIME pmmt,\n  UINT     cbmmt\n);",
+        "dllLibrary": "winmm",
+        "comment": "The waveOutGetPosition function retrieves the current playback position of the given waveform-audio output device."
+    },
+    "waveOutGetVolume": {
+        "prototype": "MMRESULT waveOutGetVolume(\n  HWAVEOUT hwo,\n  LPDWORD  pdwVolume\n);",
+        "dllLibrary": "winmm",
+        "comment": "The waveOutGetVolume function retrieves the current volume level of the specified waveform-audio output device."
+    },
+    "waveOutMessage": {
+        "prototype": "MMRESULT waveOutMessage(\n  HWAVEOUT  hwo,\n  UINT      uMsg,\n  DWORD_PTR dw1,\n  DWORD_PTR dw2\n);",
+        "dllLibrary": "winmm",
+        "comment": "The waveOutMessage function sends messages to the waveform-audio output device drivers."
+    },
+    "waveOutOpen": {
+        "prototype": "MMRESULT waveOutOpen(\n  LPHWAVEOUT      phwo,\n  UINT            uDeviceID,\n  LPCWAVEFORMATEX pwfx,\n  DWORD_PTR       dwCallback,\n  DWORD_PTR       dwInstance,\n  DWORD           fdwOpen\n);",
+        "dllLibrary": "winmm",
+        "comment": "The waveOutOpen function opens the given waveform-audio output device for playback."
+    },
+    "waveOutPause": {
+        "prototype": "MMRESULT waveOutPause(\n  HWAVEOUT hwo\n);",
+        "dllLibrary": "winmm",
+        "comment": "The waveOutPause function pauses playback on the given waveform-audio output device. The current position is saved. Use the waveOutRestart function to resume playback from the current position."
+    },
+    "waveOutPrepareHeader": {
+        "prototype": "MMRESULT waveOutPrepareHeader(\n  HWAVEOUT  hwo,\n  LPWAVEHDR pwh,\n  UINT      cbwh\n);",
+        "dllLibrary": "winmm",
+        "comment": "The waveOutPrepareHeader function prepares a waveform-audio data block for playback."
+    },
+    "waveOutReset": {
+        "prototype": "MMRESULT waveOutReset(\n  HWAVEOUT hwo\n);",
+        "dllLibrary": "winmm",
+        "comment": "The waveOutReset function stops playback on the given waveform-audio output device and resets the current position to zero. All pending playback buffers are marked as done (WHDR_DONE) and returned to the application."
+    },
+    "waveOutRestart": {
+        "prototype": "MMRESULT waveOutRestart(\n  HWAVEOUT hwo\n);",
+        "dllLibrary": "winmm",
+        "comment": "The waveOutRestart function resumes playback on a paused waveform-audio output device."
+    },
+    "waveOutSetPitch": {
+        "prototype": "MMRESULT waveOutSetPitch(\n  HWAVEOUT hwo,\n  DWORD    dwPitch\n);",
+        "dllLibrary": "winmm",
+        "comment": "The waveOutSetPitch function sets the pitch for the specified waveform-audio output device."
+    },
+    "waveOutSetPlaybackRate": {
+        "prototype": "MMRESULT waveOutSetPlaybackRate(\n  HWAVEOUT hwo,\n  DWORD    dwRate\n);",
+        "dllLibrary": "winmm",
+        "comment": "The waveOutSetPlaybackRate function sets the playback rate for the specified waveform-audio output device."
+    },
+    "waveOutSetVolume": {
+        "prototype": "MMRESULT waveOutSetVolume(\n  HWAVEOUT hwo,\n  DWORD    dwVolume\n);",
+        "dllLibrary": "winmm",
+        "comment": "The waveOutSetVolume function sets the volume level of the specified waveform-audio output device."
+    },
+    "waveOutUnprepareHeader": {
+        "prototype": "MMRESULT waveOutUnprepareHeader(\n  HWAVEOUT  hwo,\n  LPWAVEHDR pwh,\n  UINT      cbwh\n);",
+        "dllLibrary": "winmm",
+        "comment": "The waveOutUnprepareHeader function cleans up the preparation performed by the waveOutPrepareHeader function. This function must be called after the device driver is finished with a data block. You must call this function before freeing the buffer."
+    },
+    "waveOutWrite": {
+        "prototype": "MMRESULT waveOutWrite(\n  HWAVEOUT  hwo,\n  LPWAVEHDR pwh,\n  UINT      cbwh\n);",
+        "dllLibrary": "winmm",
+        "comment": "The waveOutWrite function sends a data block to the given waveform-audio output device."
     }
 }

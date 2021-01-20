@@ -3467,6 +3467,251 @@ extension PointerWIN32_FIND_DATAExtension on Pointer<WIN32_FIND_DATA> {
       cast<Uint8>().elementAt(52 + (MAX_PATH + 14) * 2).cast<Uint16>().value;
 }
 
+// typedef struct tagWAVEOUTCAPSW {
+//   WORD      wMid;
+//   WORD      wPid;
+//   MMVERSION vDriverVersion;
+//   WCHAR     szPname[MAXPNAMELEN];
+//   DWORD     dwFormats;
+//   WORD      wChannels;
+//   WORD      wReserved1;
+//   DWORD     dwSupport;
+// } WAVEOUTCAPSW, *PWAVEOUTCAPSW, *NPWAVEOUTCAPSW, *LPWAVEOUTCAPSW;
+
+/// The WAVEOUTCAPS structure describes the capabilities of a waveform-audio
+/// output device.
+///
+/// {@category Struct}
+class WAVEOUTCAPS extends Struct {
+  @Uint16()
+  external int wMid;
+
+  @Uint16()
+  external int wPid;
+
+  @Uint32()
+  external int vDriverVersion;
+
+  // Need to use @Uint64() here because of the lack of fixed-size arrays
+  // MAXPNAMELEN is 32 (words)
+  @Uint32()
+  external int _data0;
+  @Uint32()
+  external int _data1;
+  @Uint32()
+  external int _data2;
+  @Uint32()
+  external int _data3;
+  @Uint32()
+  external int _data4;
+  @Uint32()
+  external int _data5;
+  @Uint32()
+  external int _data6;
+  @Uint32()
+  external int _data7;
+  @Uint32()
+  external int _data8;
+  @Uint32()
+  external int _data9;
+  @Uint32()
+  external int _data10;
+  @Uint32()
+  external int _data11;
+  @Uint32()
+  external int _data12;
+  @Uint32()
+  external int _data13;
+  @Uint32()
+  external int _data14;
+  @Uint32()
+  external int _data15;
+
+  @Uint32()
+  external int dwFormats;
+
+  @Uint16()
+  external int wChannels;
+
+  @Uint16()
+  external int wReserved1;
+
+  @Int32()
+  external int dwSupport;
+}
+
+extension Pointer_WAVEOUTCAPS_Extension on Pointer<WAVEOUTCAPS> {
+  String get name => cast<Uint8>().elementAt(8).cast<Utf16>().unpackString(32);
+}
+
+// typedef struct tWAVEFORMATEX {
+//   WORD  wFormatTag;
+//   WORD  nChannels;
+//   DWORD nSamplesPerSec;
+//   DWORD nAvgBytesPerSec;
+//   WORD  nBlockAlign;
+//   WORD  wBitsPerSample;
+//   WORD  cbSize;
+// } WAVEFORMATEX, *PWAVEFORMATEX, *NPWAVEFORMATEX, *LPWAVEFORMATEX;
+
+/// The WAVEFORMATEX structure defines the format of waveform-audio data. Only
+/// format information common to all waveform-audio data formats is included in
+/// this structure. For formats that require additional information, this
+/// structure is included as the first member in another structure, along with
+/// the additional information.
+///
+/// {@category Struct}
+class WAVEFORMATEX extends Struct {
+  @Uint16()
+  external int wFormatTag;
+
+  @Uint16()
+  external int nChannels;
+
+  // Work around overpadding by Dart FFI.
+  @Uint16()
+  external int _nSamplesPerSecHi;
+  @Uint16()
+  external int _nSamplesPerSecLo;
+
+  @Uint16()
+  external int _nAvgBytesPerSecHi;
+  @Uint16()
+  external int _nAvgBytesPerSecLo;
+
+  @Uint16()
+  external int nBlockAlign;
+
+  @Uint16()
+  external int wBitsPerSample;
+
+  @Uint16()
+  external int cbSize;
+
+  int get nSamplesPerSec => (_nSamplesPerSecHi << 16) + _nSamplesPerSecLo;
+  int get nAvgBytesPerSec => (_nAvgBytesPerSecHi << 16) + _nAvgBytesPerSecLo;
+
+  set nSamplesPerSec(int value) {
+    _nSamplesPerSecHi = (value & 0xFF00) << 16;
+    _nSamplesPerSecLo = value & 0xFF;
+  }
+
+  set nAvgBytesPerSec(int value) {
+    _nAvgBytesPerSecHi = (value & 0xFF00) << 16;
+    _nAvgBytesPerSecLo = value & 0xFF;
+  }
+}
+
+// typedef struct wavehdr_tag {
+//   LPSTR              lpData;
+//   DWORD              dwBufferLength;
+//   DWORD              dwBytesRecorded;
+//   DWORD_PTR          dwUser;
+//   DWORD              dwFlags;
+//   DWORD              dwLoops;
+//   struct wavehdr_tag *lpNext;
+//   DWORD_PTR          reserved;
+// } WAVEHDR, *PWAVEHDR, *NPWAVEHDR, *LPWAVEHDR;
+
+/// The WAVEHDR structure defines the header used to identify a waveform-audio
+/// buffer.
+///
+/// {@category Struct}
+class WAVEHDR extends Struct {
+  external Pointer<Uint8> lpData;
+
+  @Uint32()
+  external int dwBufferLength;
+
+  @Uint32()
+  external int dwBytesRecorded;
+
+  @IntPtr()
+  external int dwUser;
+
+  @Uint32()
+  external int dwFlags;
+
+  @Uint32()
+  external int dwLoops;
+
+  @IntPtr()
+  external int lpNext;
+
+  @IntPtr()
+  external int reserved;
+}
+
+// typedef struct mmtime_tag {
+//   UINT  wType;
+//   union {
+//     DWORD  ms;
+//     DWORD  sample;
+//     DWORD  cb;
+//     DWORD  ticks;
+//     struct {
+//       BYTE hour;
+//       BYTE min;
+//       BYTE sec;
+//       BYTE frame;
+//       BYTE fps;
+//       BYTE dummy;
+//       BYTE pad[2];
+//     } smpte;
+//     struct {
+//       DWORD songptrpos;
+//     } midi;
+//   } u;
+// } MMTIME, *PMMTIME, *LPMMTIME;
+
+class _smpte {
+  final int hour;
+  final int min;
+  final int sec;
+  final int frame;
+  final int fps;
+  final int dummy;
+
+  const _smpte(this.hour, this.min, this.sec, this.frame, this.fps, this.dummy);
+}
+
+class _midi {
+  final int songptrpos;
+
+  const _midi(this.songptrpos);
+}
+
+/// The MMTIME structure contains timing information for different types of
+/// multimedia data.
+///
+/// {@category Struct}
+class MMTIME extends Struct {
+  @Uint32()
+  external int wType;
+
+  @Uint32()
+  external int ms;
+
+  @Uint16()
+  external int _valueExtra;
+
+  @Uint16()
+  external int _pad;
+
+  int get sample => ms;
+  int get cb => ms;
+  int get ticks => ms;
+
+  _smpte get smpte => _smpte((ms & 0xFF000000) << 24, (ms & 0xFF0000) << 16,
+      (ms & 0xFF00) << 8, ms & 0xFF, (_valueExtra & 0xFF00) << 8, _valueExtra);
+  _midi get midi => _midi(ms);
+
+  set sample(int value) => ms = value;
+  set cb(int value) => ms = value;
+  set ticks(int value) => ms = value;
+  set midi(_midi value) => ms = value.songptrpos;
+}
+
 // -----------------------------------------------------------------------------
 // UNIMPLEMENTED OR PARTIALLY IMPLEMENTED CLASSES THAT ARE INCLUDED SO THAT COM
 // OBJECTS CAN BE GENERATED

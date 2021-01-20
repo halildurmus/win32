@@ -116,4 +116,8 @@ void main()
     printf("'NLM_SIMULATED_PROFILE_INFO': %zu,\n", sizeof(NLM_SIMULATED_PROFILE_INFO));
     printf("'NOTIFYICONDATAW': %zu,\n", sizeof(NOTIFYICONDATAW));
     printf("'TPMPARAMS': %zu,\n", sizeof(TPMPARAMS));
+    printf("'WAVEOUTCAPSW': %zu,\n", sizeof(WAVEOUTCAPSW));
+    printf("'WAVEFORMATEX': %zu,\n", sizeof(WAVEFORMATEX));
+    printf("'WAVEHDR': %zu,\n", sizeof(WAVEHDR));
+    printf("'MMTIME': %zu,\n", sizeof(MMTIME));
 }
