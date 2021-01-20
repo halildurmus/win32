@@ -149,3 +149,371 @@ int PlaySound(Pointer<Utf16> pszSound, int hmod, int fdwSound) {
           Pointer<Utf16> pszSound, int hmod, int fdwSound)>('PlaySoundW');
   return _PlaySound(pszSound, hmod, fdwSound);
 }
+
+/// The waveOutClose function closes the given waveform-audio output
+/// device.
+///
+/// ```c
+/// MMRESULT waveOutClose(
+///   HWAVEOUT hwo
+///   );
+/// ```
+/// {@category winmm}
+int waveOutClose(int hwo) {
+  final _waveOutClose =
+      _winmm.lookupFunction<Uint32 Function(IntPtr hwo), int Function(int hwo)>(
+          'waveOutClose');
+  return _waveOutClose(hwo);
+}
+
+/// The waveOutGetDevCaps function retrieves the capabilities of a given
+/// waveform-audio output device.
+///
+/// ```c
+/// MMRESULT waveOutGetDevCapsW(
+///   UINT          uDeviceID,
+///   LPWAVEOUTCAPS pwoc,
+///   UINT          cbwoc
+/// );
+/// ```
+/// {@category winmm}
+int waveOutGetDevCaps(int uDeviceID, Pointer<WAVEOUTCAPS> pwoc, int cbwoc) {
+  final _waveOutGetDevCaps = _winmm.lookupFunction<
+      Uint32 Function(
+          Uint32 uDeviceID, Pointer<WAVEOUTCAPS> pwoc, Uint32 cbwoc),
+      int Function(int uDeviceID, Pointer<WAVEOUTCAPS> pwoc,
+          int cbwoc)>('waveOutGetDevCapsW');
+  return _waveOutGetDevCaps(uDeviceID, pwoc, cbwoc);
+}
+
+/// The waveOutGetErrorText function retrieves a textual description of the
+/// error identified by the given error number.
+///
+/// ```c
+/// MMRESULT waveOutGetErrorTextW(
+///   MMRESULT mmrError,
+///   LPWSTR    pszText,
+///   UINT     cchText
+/// );
+/// ```
+/// {@category winmm}
+int waveOutGetErrorText(int mmrError, Pointer<Utf16> pszText, int cchText) {
+  final _waveOutGetErrorText = _winmm.lookupFunction<
+      Uint32 Function(Uint32 mmrError, Pointer<Utf16> pszText, Uint32 cchText),
+      int Function(int mmrError, Pointer<Utf16> pszText,
+          int cchText)>('waveOutGetErrorTextW');
+  return _waveOutGetErrorText(mmrError, pszText, cchText);
+}
+
+/// The waveOutGetID function retrieves the device identifier for the given
+/// waveform-audio output device.
+///
+/// ```c
+/// MMRESULT waveOutGetID(
+///   HWAVEOUT hwo,
+///   LPUINT   puDeviceID
+/// );
+/// ```
+/// {@category winmm}
+int waveOutGetID(int hwo, Pointer<Uint32> puDeviceID) {
+  final _waveOutGetID = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hwo, Pointer<Uint32> puDeviceID),
+      int Function(int hwo, Pointer<Uint32> puDeviceID)>('waveOutGetID');
+  return _waveOutGetID(hwo, puDeviceID);
+}
+
+/// The waveOutGetNumDevs function retrieves the number of waveform-audio
+/// output devices present in the system.
+///
+/// ```c
+/// UINT waveOutGetNumDevs();
+/// ```
+/// {@category winmm}
+int waveOutGetNumDevs() {
+  final _waveOutGetNumDevs = _winmm
+      .lookupFunction<Uint32 Function(), int Function()>('waveOutGetNumDevs');
+  return _waveOutGetNumDevs();
+}
+
+/// The waveOutGetPitch function retrieves the current pitch setting for
+/// the specified waveform-audio output device.
+///
+/// ```c
+/// MMRESULT waveOutGetPitch(
+///   HWAVEOUT hwo,
+///   LPDWORD  pdwPitch
+/// );
+/// ```
+/// {@category winmm}
+int waveOutGetPitch(int hwo, Pointer<Uint32> pdwPitch) {
+  final _waveOutGetPitch = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hwo, Pointer<Uint32> pdwPitch),
+      int Function(int hwo, Pointer<Uint32> pdwPitch)>('waveOutGetPitch');
+  return _waveOutGetPitch(hwo, pdwPitch);
+}
+
+/// The waveOutGetPlaybackRate function retrieves the current playback rate
+/// for the specified waveform-audio output device.
+///
+/// ```c
+/// MMRESULT waveOutGetPlaybackRate(
+///   HWAVEOUT hwo,
+///   LPDWORD  pdwRate
+/// );
+/// ```
+/// {@category winmm}
+int waveOutGetPlaybackRate(int hwo, Pointer<Uint32> pdwRate) {
+  final _waveOutGetPlaybackRate = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hwo, Pointer<Uint32> pdwRate),
+      int Function(int hwo, Pointer<Uint32> pdwRate)>('waveOutGetPlaybackRate');
+  return _waveOutGetPlaybackRate(hwo, pdwRate);
+}
+
+/// The waveOutGetPosition function retrieves the current playback position
+/// of the given waveform-audio output device.
+///
+/// ```c
+/// MMRESULT waveOutGetPosition(
+///   HWAVEOUT hwo,
+///   LPMMTIME pmmt,
+///   UINT     cbmmt
+/// );
+/// ```
+/// {@category winmm}
+int waveOutGetPosition(int hwo, Pointer<MMTIME> pmmt, int cbmmt) {
+  final _waveOutGetPosition = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hwo, Pointer<MMTIME> pmmt, Uint32 cbmmt),
+      int Function(
+          int hwo, Pointer<MMTIME> pmmt, int cbmmt)>('waveOutGetPosition');
+  return _waveOutGetPosition(hwo, pmmt, cbmmt);
+}
+
+/// The waveOutGetVolume function retrieves the current volume level of the
+/// specified waveform-audio output device.
+///
+/// ```c
+/// MMRESULT waveOutGetVolume(
+///   HWAVEOUT hwo,
+///   LPDWORD  pdwVolume
+/// );
+/// ```
+/// {@category winmm}
+int waveOutGetVolume(int hwo, Pointer<Uint32> pdwVolume) {
+  final _waveOutGetVolume = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hwo, Pointer<Uint32> pdwVolume),
+      int Function(int hwo, Pointer<Uint32> pdwVolume)>('waveOutGetVolume');
+  return _waveOutGetVolume(hwo, pdwVolume);
+}
+
+/// The waveOutMessage function sends messages to the waveform-audio output
+/// device drivers.
+///
+/// ```c
+/// MMRESULT waveOutMessage(
+///   HWAVEOUT  hwo,
+///   UINT      uMsg,
+///   DWORD_PTR dw1,
+///   DWORD_PTR dw2
+/// );
+/// ```
+/// {@category winmm}
+int waveOutMessage(int hwo, int uMsg, int dw1, int dw2) {
+  final _waveOutMessage = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hwo, Uint32 uMsg, IntPtr dw1, IntPtr dw2),
+      int Function(int hwo, int uMsg, int dw1, int dw2)>('waveOutMessage');
+  return _waveOutMessage(hwo, uMsg, dw1, dw2);
+}
+
+/// The waveOutOpen function opens the given waveform-audio output device
+/// for playback.
+///
+/// ```c
+/// MMRESULT waveOutOpen(
+///   LPHWAVEOUT      phwo,
+///   UINT            uDeviceID,
+///   LPCWAVEFORMATEX pwfx,
+///   DWORD_PTR       dwCallback,
+///   DWORD_PTR       dwInstance,
+///   DWORD           fdwOpen
+/// );
+/// ```
+/// {@category winmm}
+int waveOutOpen(Pointer<IntPtr> phwo, int uDeviceID, Pointer<WAVEFORMATEX> pwfx,
+    int dwCallback, int dwInstance, int fdwOpen) {
+  final _waveOutOpen = _winmm.lookupFunction<
+      Uint32 Function(
+          Pointer<IntPtr> phwo,
+          Uint32 uDeviceID,
+          Pointer<WAVEFORMATEX> pwfx,
+          IntPtr dwCallback,
+          IntPtr dwInstance,
+          Uint32 fdwOpen),
+      int Function(
+          Pointer<IntPtr> phwo,
+          int uDeviceID,
+          Pointer<WAVEFORMATEX> pwfx,
+          int dwCallback,
+          int dwInstance,
+          int fdwOpen)>('waveOutOpen');
+  return _waveOutOpen(phwo, uDeviceID, pwfx, dwCallback, dwInstance, fdwOpen);
+}
+
+/// The waveOutPause function pauses playback on the given waveform-audio
+/// output device. The current position is saved. Use the waveOutRestart
+/// function to resume playback from the current position.
+///
+/// ```c
+/// MMRESULT waveOutPause(
+///   HWAVEOUT hwo
+/// );
+/// ```
+/// {@category winmm}
+int waveOutPause(int hwo) {
+  final _waveOutPause =
+      _winmm.lookupFunction<Uint32 Function(IntPtr hwo), int Function(int hwo)>(
+          'waveOutPause');
+  return _waveOutPause(hwo);
+}
+
+/// The waveOutPrepareHeader function prepares a waveform-audio data block
+/// for playback.
+///
+/// ```c
+/// MMRESULT waveOutPrepareHeader(
+///   HWAVEOUT  hwo,
+///   LPWAVEHDR pwh,
+///   UINT      cbwh
+/// );
+/// ```
+/// {@category winmm}
+int waveOutPrepareHeader(int hwo, Pointer<WAVEHDR> pwh, int cbwh) {
+  final _waveOutPrepareHeader = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hwo, Pointer<WAVEHDR> pwh, Uint32 cbwh),
+      int Function(
+          int hwo, Pointer<WAVEHDR> pwh, int cbwh)>('waveOutPrepareHeader');
+  return _waveOutPrepareHeader(hwo, pwh, cbwh);
+}
+
+/// The waveOutReset function stops playback on the given waveform-audio
+/// output device and resets the current position to zero. All pending
+/// playback buffers are marked as done (WHDR_DONE) and returned to the
+/// application.
+///
+/// ```c
+/// MMRESULT waveOutReset(
+///   HWAVEOUT hwo
+/// );
+/// ```
+/// {@category winmm}
+int waveOutReset(int hwo) {
+  final _waveOutReset =
+      _winmm.lookupFunction<Uint32 Function(IntPtr hwo), int Function(int hwo)>(
+          'waveOutReset');
+  return _waveOutReset(hwo);
+}
+
+/// The waveOutRestart function resumes playback on a paused waveform-audio
+/// output device.
+///
+/// ```c
+/// MMRESULT waveOutRestart(
+///   HWAVEOUT hwo
+/// );
+/// ```
+/// {@category winmm}
+int waveOutRestart(int hwo) {
+  final _waveOutRestart =
+      _winmm.lookupFunction<Uint32 Function(IntPtr hwo), int Function(int hwo)>(
+          'waveOutRestart');
+  return _waveOutRestart(hwo);
+}
+
+/// The waveOutSetPitch function sets the pitch for the specified
+/// waveform-audio output device.
+///
+/// ```c
+/// MMRESULT waveOutSetPitch(
+///   HWAVEOUT hwo,
+///   DWORD    dwPitch
+/// );
+/// ```
+/// {@category winmm}
+int waveOutSetPitch(int hwo, int dwPitch) {
+  final _waveOutSetPitch = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hwo, Uint32 dwPitch),
+      int Function(int hwo, int dwPitch)>('waveOutSetPitch');
+  return _waveOutSetPitch(hwo, dwPitch);
+}
+
+/// The waveOutSetPlaybackRate function sets the playback rate for the
+/// specified waveform-audio output device.
+///
+/// ```c
+/// MMRESULT waveOutSetPlaybackRate(
+///   HWAVEOUT hwo,
+///   DWORD    dwRate
+/// );
+/// ```
+/// {@category winmm}
+int waveOutSetPlaybackRate(int hwo, int dwRate) {
+  final _waveOutSetPlaybackRate = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hwo, Uint32 dwRate),
+      int Function(int hwo, int dwRate)>('waveOutSetPlaybackRate');
+  return _waveOutSetPlaybackRate(hwo, dwRate);
+}
+
+/// The waveOutSetVolume function sets the volume level of the specified
+/// waveform-audio output device.
+///
+/// ```c
+/// MMRESULT waveOutSetVolume(
+///   HWAVEOUT hwo,
+///   DWORD    dwVolume
+/// );
+/// ```
+/// {@category winmm}
+int waveOutSetVolume(int hwo, int dwVolume) {
+  final _waveOutSetVolume = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hwo, Uint32 dwVolume),
+      int Function(int hwo, int dwVolume)>('waveOutSetVolume');
+  return _waveOutSetVolume(hwo, dwVolume);
+}
+
+/// The waveOutUnprepareHeader function cleans up the preparation performed
+/// by the waveOutPrepareHeader function. This function must be called
+/// after the device driver is finished with a data block. You must call
+/// this function before freeing the buffer.
+///
+/// ```c
+/// MMRESULT waveOutUnprepareHeader(
+///   HWAVEOUT  hwo,
+///   LPWAVEHDR pwh,
+///   UINT      cbwh
+/// );
+/// ```
+/// {@category winmm}
+int waveOutUnprepareHeader(int hwo, Pointer<WAVEHDR> pwh, int cbwh) {
+  final _waveOutUnprepareHeader = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hwo, Pointer<WAVEHDR> pwh, Uint32 cbwh),
+      int Function(
+          int hwo, Pointer<WAVEHDR> pwh, int cbwh)>('waveOutUnprepareHeader');
+  return _waveOutUnprepareHeader(hwo, pwh, cbwh);
+}
+
+/// The waveOutWrite function sends a data block to the given
+/// waveform-audio output device.
+///
+/// ```c
+/// MMRESULT waveOutWrite(
+///   HWAVEOUT  hwo,
+///   LPWAVEHDR pwh,
+///   UINT      cbwh
+/// );
+/// ```
+/// {@category winmm}
+int waveOutWrite(int hwo, Pointer<WAVEHDR> pwh, int cbwh) {
+  final _waveOutWrite = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hwo, Pointer<WAVEHDR> pwh, Uint32 cbwh),
+      int Function(int hwo, Pointer<WAVEHDR> pwh, int cbwh)>('waveOutWrite');
+  return _waveOutWrite(hwo, pwh, cbwh);
+}

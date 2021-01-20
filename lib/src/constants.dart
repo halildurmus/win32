@@ -4388,7 +4388,62 @@ class VARENUM {
 }
 
 // -----------------------------------------------------------------------------
-/// Monitor Configuration constants & enumerations
+// Multimedia constants
+// -----------------------------------------------------------------------------
+/// Time in milliseconds.
+const TIME_MS = 0x0001;
+
+/// Number of waveform-audio samples.
+const TIME_SAMPLES = 0x0002;
+
+/// Current byte offset from beginning of the file.
+const TIME_BYTES = 0x0004;
+
+/// SMPTE (Society of Motion Picture and Television Engineers) time.
+const TIME_SMPTE = 0x0008;
+
+/// MIDI time.
+const TIME_MIDI = 0x0010;
+
+/// Ticks within a MIDI stream.
+const TIME_TICKS = 0x0020;
+
+/// No callback mechanism. This is the default setting.
+const CALLBACK_NULL = 0x00000000;
+
+/// The dwCallback parameter is a window handle.
+const CALLBACK_WINDOW = 0x00010000;
+
+/// The dwCallback parameter is a thread identifier.
+const CALLBACK_THREAD = 0x00020000;
+
+/// The dwCallback parameter is a callback procedure address.
+const CALLBACK_FUNCTION = 0x00030000;
+
+/// The dwCallback parameter is an event handle.
+const CALLBACK_EVENT = 0x00050000;
+
+const WAVE_FORMAT_QUERY = 0x0001;
+
+/// If this flag is specified, a synchronous waveform-audio device can be
+/// opened. If this flag is not specified while opening a synchronous driver,
+/// the device will fail to open.
+const WAVE_ALLOWSYNC = 0x0002;
+
+/// If this flag is specified, the uDeviceID parameter specifies a
+/// waveform-audio device to be mapped to by the wave mapper.
+const WAVE_MAPPED = 0x0004;
+
+/// If this flag is specified, the ACM driver does not perform conversions on
+/// the audio data.
+const WAVE_FORMAT_DIRECT = 0x0008;
+
+/// If this flag is specified and the uDeviceID parameter is WAVE_MAPPER, the
+/// function opens the default communication device.
+const WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE = 0x0010;
+
+// -----------------------------------------------------------------------------
+// Monitor Configuration constants & enumerations
 // -----------------------------------------------------------------------------
 
 /// If the point is not contained within any display monitor, return NULL.
