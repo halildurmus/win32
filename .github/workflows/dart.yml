@@ -52,8 +52,8 @@ jobs:
       - name: Verify formatting
         run: dart format --output=none --set-exit-if-changed .
 
-      - name: Analyze project source
-        run: dart analyze --fatal-infos
+      # - name: Analyze project source
+      #   run: dart analyze --fatal-infos
 
       - name: Run tests
         run: dart test
