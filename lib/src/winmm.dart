@@ -23,7 +23,7 @@ final _winmm = DynamicLibrary.open('winmm.dll');
 ///
 /// ```c
 /// MCIDEVICEID mciGetDeviceIDW(
-///    LPCTSTR lpszDevice
+///   LPCTSTR lpszDevice
 /// );
 /// ```
 /// {@category winmm}
@@ -39,8 +39,8 @@ int mciGetDeviceID(Pointer<Utf16> lpszDevice) {
 ///
 /// ```c
 /// MCIDEVICEID mciGetDeviceIDFromElementIDW(
-///    DWORD   dwElementID,
-///    LPCTSTR lpstrType
+///   DWORD   dwElementID,
+///   LPCTSTR lpstrType
 /// );
 /// ```
 /// {@category winmm}
@@ -57,9 +57,9 @@ int mciGetDeviceIDFromElementID(int dwElementID, Pointer<Utf16> lpstrType) {
 ///
 /// ```c
 /// BOOL mciGetErrorStringW(
-///    DWORD  fdwError,
-///    LPTSTR lpszErrorText,
-///    UINT   cchErrorText
+///   DWORD  fdwError,
+///   LPTSTR lpszErrorText,
+///   UINT   cchErrorText
 /// );
 /// ```
 /// {@category winmm}
@@ -78,10 +78,10 @@ int mciGetErrorString(
 ///
 /// ```c
 /// MCIERROR mciSendCommandW(
-///    MCIDEVICEID IDDevice,
-///    UINT        uMsg,
-///    DWORD_PTR   fdwCommand,
-///    DWORD_PTR   dwParam
+///   MCIDEVICEID IDDevice,
+///   UINT        uMsg,
+///   DWORD_PTR   fdwCommand,
+///   DWORD_PTR   dwParam
 /// );
 /// ```
 /// {@category winmm}
@@ -99,10 +99,10 @@ int mciSendCommand(int IDDevice, int uMsg, int fdwCommand, int dwParam) {
 ///
 /// ```c
 /// MCIERROR mciSendStringW(
-///    LPCTSTR lpszCommand,
-///    LPTSTR  lpszReturnString,
-///    UINT    cchReturn,
-///    HANDLE  hwndCallback
+///   LPCTSTR lpszCommand,
+///   LPTSTR  lpszReturnString,
+///   UINT    cchReturn,
+///   HANDLE  hwndCallback
 /// );
 /// ```
 /// {@category winmm}

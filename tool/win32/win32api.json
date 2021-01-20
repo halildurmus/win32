@@ -210,7 +210,7 @@
         "comment": "Removes a specified window from the chain of clipboard viewers."
     },
     "CheckRemoteDebuggerPresent": {
-        "prototype": "BOOL CheckRemoteDebuggerPresent(\n        HANDLE hProcess,\n        PBOOL  pbDebuggerPresent\n      );",
+        "prototype": "BOOL CheckRemoteDebuggerPresent(\n  HANDLE hProcess,\n  PBOOL  pbDebuggerPresent\n      );",
         "dllLibrary": "kernel32",
         "comment": "Determines whether the specified process is being debugged."
     },
@@ -265,7 +265,7 @@
         "comment": "Closes an open object handle."
     },
     "ClosePseudoConsole": {
-        "prototype": "void WINAPI ClosePseudoConsole(\n    _In_ HPCON hPC\n);",
+        "prototype": "void WINAPI ClosePseudoConsole(\n  _In_ HPCON hPC\n);",
         "dllLibrary": "kernel32",
         "comment": "Closes a pseudoconsole from the given handle.",
         "minimumWindowsVersion": "WIN10_RS5"
@@ -321,7 +321,7 @@
         "comment": "Registers security and sets the default security values for the process."
     },
     "ContinueDebugEvent": {
-        "prototype": "BOOL ContinueDebugEvent(\n        DWORD dwProcessId,\n        DWORD dwThreadId,\n        DWORD dwContinueStatus\n      );",
+        "prototype": "BOOL ContinueDebugEvent(\n  DWORD dwProcessId,\n  DWORD dwThreadId,\n  DWORD dwContinueStatus\n);",
         "dllLibrary": "kernel32",
         "comment": "Enables a debugger to continue a thread that previously reported a debugging event."
     },
@@ -487,17 +487,17 @@
         "comment": "Causes a breakpoint exception to occur in the current process. This allows the calling thread to signal the debugger to handle the exception."
     },
     "DebugBreakProcess": {
-        "prototype": "BOOL DebugBreakProcess(\n        HANDLE Process\n      );",
+        "prototype": "BOOL DebugBreakProcess(\n  HANDLE Process\n);",
         "dllLibrary": "kernel32",
         "comment": "Causes a breakpoint exception to occur in the specified process. This allows the calling thread to signal the debugger to handle the exception."
     },
     "DebugSetProcessKillOnExit": {
-        "prototype": "BOOL DebugSetProcessKillOnExit(\n        BOOL KillOnExit\n      );",
+        "prototype": "BOOL DebugSetProcessKillOnExit(\n  BOOL KillOnExit\n);",
         "dllLibrary": "kernel32",
         "comment": "Sets the action to be performed when the calling thread exits."
     },
     "DecryptFile": {
-        "prototype": "BOOL DecryptFileW(\n        LPCWSTR lpFileName,\n        DWORD   dwReserved\n);",
+        "prototype": "BOOL DecryptFileW(\n  LPCWSTR lpFileName,\n  DWORD   dwReserved\n);",
         "dllLibrary": "advapi32",
         "comment": "Decrypts an encrypted file or directory."
     },
@@ -527,7 +527,7 @@
         "comment": "Destroys an icon and frees any memory the icon occupied."
     },
     "DestroyMenu": {
-        "prototype": "BOOL DestroyMenu(\n HMENU hMenu \n);",
+        "prototype": "BOOL DestroyMenu(\n  HMENU hMenu\n);",
         "dllLibrary": "user32",
         "comment": "Destroys the specified menu and frees any memory that the menu occupies."
     },
@@ -602,7 +602,7 @@
         "comment": "Enables, disables, or grays the specified menu item."
     },
     "EncryptFile": {
-        "prototype": "BOOL EncryptFileW(\n        LPCWSTR lpFileName\n);",
+        "prototype": "BOOL EncryptFileW(\n  LPCWSTR lpFileName\n);",
         "dllLibrary": "advapi32",
         "comment": "Encrypts a file or directory. All data streams in a file are encrypted. All new files created in an encrypted directory are encrypted."
     },
@@ -702,7 +702,7 @@
         "comment": "The ExtTextOut function draws text using the currently selected font, background color, and text color. You can optionally provide dimensions to be used for clipping, opaquing, or both."
     },
     "FileEncryptionStatus": {
-        "prototype": "BOOL FileEncryptionStatusW(\n        LPCWSTR lpFileName,\n        LPDWORD lpStatus\n);",
+        "prototype": "BOOL FileEncryptionStatusW(\n  LPCWSTR lpFileName,\n  LPDWORD lpStatus\n);",
         "dllLibrary": "advapi32",
         "comment": "Retrieves the encryption status of the specified file."
     },
@@ -1023,7 +1023,7 @@
         "comment": "Retrieves the current local date and time."
     },
     "GetLogicalDriveStrings": {
-        "prototype": "DWORD GetLogicalDriveStringsW(\n        DWORD  nBufferLength,\n        LPWSTR lpBuffer\n);",
+        "prototype": "DWORD GetLogicalDriveStringsW(\n  DWORD  nBufferLength,\n  LPWSTR lpBuffer\n);",
         "dllLibrary": "kernel32",
         "comment": "Fills a buffer with strings that specify valid drives in the system."
     },
@@ -1218,7 +1218,7 @@
         "comment": "The GetStockObject function retrieves a handle to one of the stock pens, brushes, fonts, or palettes."
     },
     "GetSubMenu": {
-        "prototype": "HMENU GetSubMenu(\n HMENU hMenu,\n int nPos \n);",
+        "prototype": "HMENU GetSubMenu(\n  HMENU hMenu,\n  int nPos\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the drop-down menu or submenu activated by the specified menu item."
     },
@@ -1480,7 +1480,7 @@
         "minimumWindowsVersion": "WIN10_RS3"
     },
     "IsZoomed": {
-        "prototype": "BOOL IsZoomed(\n HWND hWnd\n);",
+        "prototype": "BOOL IsZoomed(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
         "comment": "Determines whether a window is maximized."
     },
@@ -1550,27 +1550,27 @@
         "comment": "The MapWindowPoints function converts (maps) a set of points from a coordinate space relative to one window to a coordinate space relative to another window."
     },
     "mciGetDeviceID": {
-        "prototype": "MCIDEVICEID mciGetDeviceIDW(\n   LPCTSTR lpszDevice\n);",
+        "prototype": "MCIDEVICEID mciGetDeviceIDW(\n  LPCTSTR lpszDevice\n);",
         "dllLibrary": "winmm",
         "comment": "The mciGetDeviceID function retrieves the device identifier corresponding to the name of an open device."
     },
     "mciGetDeviceIDFromElementID": {
-        "prototype": "MCIDEVICEID mciGetDeviceIDFromElementIDW(\n   DWORD   dwElementID,\n   LPCTSTR lpstrType\n);",
+        "prototype": "MCIDEVICEID mciGetDeviceIDFromElementIDW(\n  DWORD   dwElementID,\n  LPCTSTR lpstrType\n);",
         "dllLibrary": "winmm",
         "comment": "The mciGetDeviceIDFromElementID function retrieves the MCI device identifier corresponding to an element identifier."
     },
     "mciGetErrorString": {
-        "prototype": "BOOL mciGetErrorStringW(\n   DWORD  fdwError,\n   LPTSTR lpszErrorText,\n   UINT   cchErrorText\n);",
+        "prototype": "BOOL mciGetErrorStringW(\n  DWORD  fdwError,\n  LPTSTR lpszErrorText,\n  UINT   cchErrorText\n);",
         "dllLibrary": "winmm",
         "comment": "The mciGetErrorString function retrieves a string that describes the specified MCI error code."
     },
     "mciSendCommand": {
-        "prototype": "MCIERROR mciSendCommandW(\n   MCIDEVICEID IDDevice,\n   UINT        uMsg,\n   DWORD_PTR   fdwCommand,\n   DWORD_PTR   dwParam\n);",
+        "prototype": "MCIERROR mciSendCommandW(\n  MCIDEVICEID IDDevice,\n  UINT        uMsg,\n  DWORD_PTR   fdwCommand,\n  DWORD_PTR   dwParam\n);",
         "dllLibrary": "winmm",
         "comment": "The mciSendCommand function sends a command message to the specified MCI device."
     },
     "mciSendString": {
-        "prototype": "MCIERROR mciSendStringW(\n   LPCTSTR lpszCommand,\n   LPTSTR  lpszReturnString,\n   UINT    cchReturn,\n   HANDLE  hwndCallback\n);",
+        "prototype": "MCIERROR mciSendStringW(\n  LPCTSTR lpszCommand,\n  LPTSTR  lpszReturnString,\n  UINT    cchReturn,\n  HANDLE  hwndCallback\n);",
         "dllLibrary": "winmm",
         "comment": "The mciSendString function sends a command string to an MCI device. The device that the command is sent to is specified in the command string."
     },
@@ -1580,7 +1580,7 @@
         "comment": "Displays a modal dialog box that contains a system icon, a set of buttons, and a brief application-specific message, such as status or error information. The message box returns an integer value that indicates which button the user clicked."
     },
     "MetaDataGetDispenser": {
-        "prototype": "HRESULT MetaDataGetDispenser(\n        REFCLSID rclsid,\n        REFIID   riid,\n        LPVOID   *ppv\n      );",
+        "prototype": "HRESULT MetaDataGetDispenser(\n  REFCLSID rclsid,\n  REFIID   riid,\n  LPVOID   *ppv\n);",
         "dllLibrary": "rometadata",
         "comment": "Creates a dispenser class.",
         "category": "winrt",
@@ -1607,7 +1607,7 @@
         "comment": "The MonitorFromWindow function retrieves a handle to the display monitor that has the largest area of intersection with the bounding rectangle of a specified window."
     },
     "MoveFile": {
-        "prototype": "BOOL MoveFileW(\n        LPCWSTR lpExistingFileName,\n        LPCWSTR lpNewFileName\n);",
+        "prototype": "BOOL MoveFileW(\n  LPCWSTR lpExistingFileName,\n  LPCWSTR lpNewFileName\n);",
         "dllLibrary": "kernel32",
         "comment": "Moves an existing file or a directory, including its children."
     },
@@ -1642,7 +1642,7 @@
         "comment": "Closes the COM library on the apartment, releases any class factories, other COM objects, or servers held by the apartment, disables RPC on the apartment, and frees any resources the apartment maintains."
     },
     "OpenClipboard": {
-        "prototype": "BOOL OpenClipboard(  HWND hWndNewOwner);",
+        "prototype": "BOOL OpenClipboard(\n  HWND hWndNewOwner\n);",
         "dllLibrary": "user32",
         "comment": "Opens the clipboard for examination and prevents other applications from modifying the clipboard content."
     },
@@ -1657,7 +1657,7 @@
         "comment": "Opens an existing local process object."
     },
     "OutputDebugString": {
-        "prototype": "void OutputDebugStringW(\n        LPCWSTR lpOutputString\n      );",
+        "prototype": "void OutputDebugStringW(\n  LPCWSTR lpOutputString\n);",
         "dllLibrary": "kernel32",
         "comment": "Sends a string to the debugger for display."
     },
@@ -1872,27 +1872,27 @@
         "comment": "Replies to a message sent from another thread by the SendMessage function."
     },
     "ResizePseudoConsole": {
-        "prototype": "HRESULT WINAPI ResizePseudoConsole(\n    _In_ HPCON hPC ,\n    _In_ COORD size\n);",
+        "prototype": "HRESULT WINAPI ResizePseudoConsole(\n  _In_ HPCON hPC ,\n  _In_ COORD size\n);",
         "dllLibrary": "kernel32",
         "comment": "Resizes the internal buffers for a pseudoconsole to the given size.",
         "minimumWindowsVersion": "WIN10_RS5"
     },
     "RoActivateInstance": {
-        "prototype": "HRESULT RoActivateInstance(\n        HSTRING      activatableClassId,\n        IInspectable **instance\n      );",
+        "prototype": "HRESULT RoActivateInstance(\n  HSTRING      activatableClassId,\n  IInspectable **instance\n);",
         "apiSet": "api-ms-win-core-winrt-l1-1-0",
         "comment": "Activates the specified Windows Runtime class.",
         "category": "winrt",
         "minimumWindowsVersion": "WIN8"
     },
     "RoGetMetaDataFile": {
-        "prototype": "HRESULT RoGetMetaDataFile(\n        const HSTRING        name,\n        IMetaDataDispenserEx *metaDataDispenser,\n        HSTRING              *metaDataFilePath,\n        IMetaDataImport2     **metaDataImport,\n        mdTypeDef            *typeDefToken\n      );",
+        "prototype": "HRESULT RoGetMetaDataFile(\n  const HSTRING        name,\n  IMetaDataDispenserEx *metaDataDispenser,\n  HSTRING              *metaDataFilePath,\n  IMetaDataImport2     **metaDataImport,\n  mdTypeDef            *typeDefToken\n);",
         "apiSet": "api-ms-win-ro-typeresolution-l1-1-0",
         "comment": "Locates and retrieves the metadata file that describes the Application Binary Interface (ABI) for the specified typename.",
         "category": "winrt",
         "minimumWindowsVersion": "WIN8"
     },
     "RoInitialize": {
-        "prototype": "HRESULT RoInitialize(\n        RO_INIT_TYPE initType\n      );",
+        "prototype": "HRESULT RoInitialize(\n  RO_INIT_TYPE initType\n);",
         "apiSet": "api-ms-win-core-winrt-l1-1-0",
         "comment": "Initializes the Windows Runtime on the current thread with the specified concurrency model.",
         "category": "winrt",
@@ -2201,7 +2201,7 @@
         "comment": "Creates and initializes a Shell item object from a parsing name."
     },
     "Shell_NotifyIcon": {
-        "prototype": "BOOL Shell_NotifyIconW(\n DWORD dwMessage,\n NOTIFYICONDATA *lpData \n);",
+        "prototype": "BOOL Shell_NotifyIconW(\n  DWORD dwMessage,\n  NOTIFYICONDATA *lpData\n);",
         "dllLibrary": "shell32",
         "comment": "Sends a message to the taskbar's status area."
     },
@@ -2358,7 +2358,7 @@
         "comment": "The TextOut function writes a character string at the specified location, using the currently selected font, background color, and text color."
     },
     "TrackPopupMenuEx": {
-        "prototype": "BOOL TrackPopupMenuEx(\n HMENU hMenu,\n UINT uFlags,\n int x,\n int y,\n HWND hwnd,\n TPMPARAMS *lptpm \n);",
+        "prototype": "BOOL TrackPopupMenuEx(\n  HMENU hMenu,\n  UINT uFlags,\n  int x,\n  int y,\n  HWND hwnd,\n  TPMPARAMS *lptpm\n);",
         "dllLibrary": "user32",
         "comment": "Displays a shortcut menu at the specified location and tracks the selection of items on the shortcut menu. The shortcut menu can appear anywhere on the screen."
     },
@@ -2478,21 +2478,21 @@
         "comment": "Retrieves a handle to the window that contains the specified point."
     },
     "WindowsCreateString": {
-        "prototype": "HRESULT WindowsCreateString(\n        PCNZWCH sourceString,\n        UINT32  length,\n        HSTRING *string\n      );",
+        "prototype": "HRESULT WindowsCreateString(\n  PCNZWCH sourceString,\n  UINT32  length,\n  HSTRING *string\n);",
         "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
         "comment": "Creates a new HSTRING based on the specified source string.",
         "category": "winrt",
         "minimumWindowsVersion": "WIN8"
     },
     "WindowsDeleteString": {
-        "prototype": "HRESULT WindowsDeleteString(\n        HSTRING string\n      );",
+        "prototype": "HRESULT WindowsDeleteString(\n  HSTRING string\n);",
         "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
         "comment": "Decrements the reference count of a string buffer.",
         "category": "winrt",
         "minimumWindowsVersion": "WIN8"
     },
     "WindowsGetStringRawBuffer": {
-        "prototype": "PCWSTR WindowsGetStringRawBuffer(\n        HSTRING string,\n        UINT32  *length\n      );",
+        "prototype": "PCWSTR WindowsGetStringRawBuffer(\n  HSTRING string,\n  UINT32  *length\n);",
         "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
         "comment": "Retrieves the backing buffer for the specified string.",
         "category": "winrt",

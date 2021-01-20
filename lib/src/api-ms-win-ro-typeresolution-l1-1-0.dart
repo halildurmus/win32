@@ -24,12 +24,12 @@ final _api_ms_win_ro_typeresolution_l1_1_0 =
 ///
 /// ```c
 /// HRESULT RoGetMetaDataFile(
-///         const HSTRING        name,
-///         IMetaDataDispenserEx *metaDataDispenser,
-///         HSTRING              *metaDataFilePath,
-///         IMetaDataImport2     **metaDataImport,
-///         mdTypeDef            *typeDefToken
-///       );
+///   const HSTRING        name,
+///   IMetaDataDispenserEx *metaDataDispenser,
+///   HSTRING              *metaDataFilePath,
+///   IMetaDataImport2     **metaDataImport,
+///   mdTypeDef            *typeDefToken
+/// );
 /// ```
 /// {@category winrt}
 int RoGetMetaDataFile(

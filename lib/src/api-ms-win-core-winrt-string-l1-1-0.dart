@@ -23,10 +23,10 @@ final _api_ms_win_core_winrt_string_l1_1_0 =
 ///
 /// ```c
 /// HRESULT WindowsCreateString(
-///         PCNZWCH sourceString,
-///         UINT32  length,
-///         HSTRING *string
-///       );
+///   PCNZWCH sourceString,
+///   UINT32  length,
+///   HSTRING *string
+/// );
 /// ```
 /// {@category winrt}
 int WindowsCreateString(
@@ -44,8 +44,8 @@ int WindowsCreateString(
 ///
 /// ```c
 /// HRESULT WindowsDeleteString(
-///         HSTRING string
-///       );
+///   HSTRING string
+/// );
 /// ```
 /// {@category winrt}
 int WindowsDeleteString(int string) {
@@ -59,9 +59,9 @@ int WindowsDeleteString(int string) {
 ///
 /// ```c
 /// PCWSTR WindowsGetStringRawBuffer(
-///         HSTRING string,
-///         UINT32  *length
-///       );
+///   HSTRING string,
+///   UINT32  *length
+/// );
 /// ```
 /// {@category winrt}
 Pointer<Utf16> WindowsGetStringRawBuffer(int string, Pointer<Uint32> length) {

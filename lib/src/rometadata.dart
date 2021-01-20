@@ -22,10 +22,10 @@ final _rometadata = DynamicLibrary.open('rometadata.dll');
 ///
 /// ```c
 /// HRESULT MetaDataGetDispenser(
-///         REFCLSID rclsid,
-///         REFIID   riid,
-///         LPVOID   *ppv
-///       );
+///   REFCLSID rclsid,
+///   REFIID   riid,
+///   LPVOID   *ppv
+/// );
 /// ```
 /// {@category winrt}
 int MetaDataGetDispenser(

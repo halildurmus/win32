@@ -434,7 +434,7 @@ int DestroyIcon(int hIcon) {
 ///
 /// ```c
 /// BOOL DestroyMenu(
-///  HMENU hMenu
+///   HMENU hMenu
 /// );
 /// ```
 /// {@category user32}
@@ -1377,8 +1377,8 @@ int GetShellWindow() {
 ///
 /// ```c
 /// HMENU GetSubMenu(
-///  HMENU hMenu,
-///  int nPos
+///   HMENU hMenu,
+///   int nPos
 /// );
 /// ```
 /// {@category user32}
@@ -2004,7 +2004,7 @@ int IsWindowVisible(int hWnd) {
 ///
 /// ```c
 /// BOOL IsZoomed(
-///  HWND hWnd
+///   HWND hWnd
 /// );
 /// ```
 /// {@category user32}
@@ -2324,7 +2324,9 @@ int OffsetRect(Pointer<RECT> lprc, int dx, int dy) {
 /// from modifying the clipboard content.
 ///
 /// ```c
-/// BOOL OpenClipboard(  HWND hWndNewOwner);
+/// BOOL OpenClipboard(
+///   HWND hWndNewOwner
+/// );
 /// ```
 /// {@category user32}
 int OpenClipboard(int hWndNewOwner) {
@@ -3247,12 +3249,12 @@ int TabbedTextOut(int hdc, int x, int y, Pointer<Utf16> lpString, int chCount,
 ///
 /// ```c
 /// BOOL TrackPopupMenuEx(
-///  HMENU hMenu,
-///  UINT uFlags,
-///  int x,
-///  int y,
-///  HWND hwnd,
-///  TPMPARAMS *lptpm
+///   HMENU hMenu,
+///   UINT uFlags,
+///   int x,
+///   int y,
+///   HWND hwnd,
+///   TPMPARAMS *lptpm
 /// );
 /// ```
 /// {@category user32}

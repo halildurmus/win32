@@ -64,8 +64,8 @@ int SHCreateItemFromParsingName(Pointer<Utf16> pszPath, Pointer pbc,
 ///
 /// ```c
 /// BOOL Shell_NotifyIconW(
-///  DWORD dwMessage,
-///  NOTIFYICONDATA *lpData
+///   DWORD dwMessage,
+///   NOTIFYICONDATA *lpData
 /// );
 /// ```
 /// {@category shell32}

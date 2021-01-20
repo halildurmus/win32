@@ -23,9 +23,9 @@ final _api_ms_win_core_winrt_l1_1_0 =
 ///
 /// ```c
 /// HRESULT RoActivateInstance(
-///         HSTRING      activatableClassId,
-///         IInspectable **instance
-///       );
+///   HSTRING      activatableClassId,
+///   IInspectable **instance
+/// );
 /// ```
 /// {@category winrt}
 int RoActivateInstance(int activatableClassId, Pointer<Pointer> instance) {
@@ -41,8 +41,8 @@ int RoActivateInstance(int activatableClassId, Pointer<Pointer> instance) {
 ///
 /// ```c
 /// HRESULT RoInitialize(
-///         RO_INIT_TYPE initType
-///       );
+///   RO_INIT_TYPE initType
+/// );
 /// ```
 /// {@category winrt}
 int RoInitialize(int initType) {

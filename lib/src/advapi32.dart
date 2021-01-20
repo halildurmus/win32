@@ -101,8 +101,8 @@ int CredWrite(Pointer<CREDENTIAL> Credential, int Flags) {
 ///
 /// ```c
 /// BOOL DecryptFileW(
-///         LPCWSTR lpFileName,
-///         DWORD   dwReserved
+///   LPCWSTR lpFileName,
+///   DWORD   dwReserved
 /// );
 /// ```
 /// {@category advapi32}
@@ -118,7 +118,7 @@ int DecryptFile(Pointer<Utf16> lpFileName, int dwReserved) {
 ///
 /// ```c
 /// BOOL EncryptFileW(
-///         LPCWSTR lpFileName
+///   LPCWSTR lpFileName
 /// );
 /// ```
 /// {@category advapi32}
@@ -133,8 +133,8 @@ int EncryptFile(Pointer<Utf16> lpFileName) {
 ///
 /// ```c
 /// BOOL FileEncryptionStatusW(
-///         LPCWSTR lpFileName,
-///         LPDWORD lpStatus
+///   LPCWSTR lpFileName,
+///   LPDWORD lpStatus
 /// );
 /// ```
 /// {@category advapi32}
