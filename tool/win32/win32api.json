@@ -2457,67 +2457,6 @@
         "dllLibrary": "user32",
         "comment": "Yields control to other threads when a thread has no other messages in its message queue. The WaitMessage function suspends the thread and does not return until a new message is placed in the thread's message queue."
     },
-    "WideCharToMultiByte": {
-        "prototype": "int WideCharToMultiByte(\n  UINT   CodePage,\n  DWORD  dwFlags,\n  LPCWCH lpWideCharStr,\n  int    cchWideChar,\n  LPSTR  lpMultiByteStr,\n  int    cbMultiByte,\n  LPCCH  lpDefaultChar,\n  LPBOOL lpUsedDefaultChar\n);",
-        "dllLibrary": "kernel32",
-        "comment": "Maps a UTF-16 (wide character) string to a new character string. The new character string is not necessarily from a multibyte character set."
-    },
-    "WindowFromDC": {
-        "prototype": "HWND WindowFromDC(\n  HDC hDC\n);",
-        "dllLibrary": "user32",
-        "comment": "The WindowFromDC function returns a handle to the window associated with the specified display device context (DC). Output functions that use the specified device context draw into this window."
-    },
-    "WindowFromPhysicalPoint": {
-        "prototype": "HWND WindowFromPhysicalPoint(\n  POINT Point\n);",
-        "dllLibrary": "user32",
-        "comment": "Retrieves a handle to the window that contains the specified physical point."
-    },
-    "WindowFromPoint": {
-        "prototype": "HWND WindowFromPoint(\n  POINT Point\n);",
-        "dllLibrary": "user32",
-        "comment": "Retrieves a handle to the window that contains the specified point."
-    },
-    "WindowsCreateString": {
-        "prototype": "HRESULT WindowsCreateString(\n  PCNZWCH sourceString,\n  UINT32  length,\n  HSTRING *string\n);",
-        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
-        "comment": "Creates a new HSTRING based on the specified source string.",
-        "category": "winrt",
-        "minimumWindowsVersion": "WIN8"
-    },
-    "WindowsDeleteString": {
-        "prototype": "HRESULT WindowsDeleteString(\n  HSTRING string\n);",
-        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
-        "comment": "Decrements the reference count of a string buffer.",
-        "category": "winrt",
-        "minimumWindowsVersion": "WIN8"
-    },
-    "WindowsGetStringRawBuffer": {
-        "prototype": "PCWSTR WindowsGetStringRawBuffer(\n  HSTRING string,\n  UINT32  *length\n);",
-        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
-        "comment": "Retrieves the backing buffer for the specified string.",
-        "category": "winrt",
-        "minimumWindowsVersion": "WIN8"
-    },
-    "Wow64SuspendThread": {
-        "prototype": "DWORD Wow64SuspendThread(\n  HANDLE hThread\n);",
-        "dllLibrary": "kernel32",
-        "comment": "Suspends the specified WOW64 thread."
-    },
-    "WriteConsole": {
-        "prototype": "BOOL WINAPI WriteConsoleW(\n  _In_             HANDLE  hConsoleOutput,\n  _In_       const VOID    *lpBuffer,\n  _In_             DWORD   nNumberOfCharsToWrite,\n  _Out_opt_        LPDWORD lpNumberOfCharsWritten,\n  _Reserved_       LPVOID  lpReserved\n);",
-        "dllLibrary": "kernel32",
-        "comment": "Writes a character string to a console screen buffer beginning at the current cursor location."
-    },
-    "WriteFile": {
-        "prototype": "BOOL WriteFile(\n  HANDLE       hFile,\n  LPCVOID      lpBuffer,\n  DWORD        nNumberOfBytesToWrite,\n  LPDWORD      lpNumberOfBytesWritten,\n  LPOVERLAPPED lpOverlapped\n);",
-        "dllLibrary": "kernel32",
-        "comment": "Writes data to the specified file or input/output (I/O) device."
-    },
-    "WriteProcessMemory": {
-        "prototype": "BOOL WriteProcessMemory(\n  HANDLE  hProcess,\n  LPVOID  lpBaseAddress,\n  LPCVOID lpBuffer,\n  SIZE_T  nSize,\n  SIZE_T  *lpNumberOfBytesWritten\n);",
-        "dllLibrary": "kernel32",
-        "comment": "Writes data to an area of memory in a specified process. The entire area to be written to must be accessible or the operation fails."
-    },
     "waveOutClose": {
         "prototype": "MMRESULT waveOutClose(\n  HWAVEOUT hwo\n  );",
         "dllLibrary": "winmm",
@@ -2617,5 +2556,66 @@
         "prototype": "MMRESULT waveOutWrite(\n  HWAVEOUT  hwo,\n  LPWAVEHDR pwh,\n  UINT      cbwh\n);",
         "dllLibrary": "winmm",
         "comment": "The waveOutWrite function sends a data block to the given waveform-audio output device."
+    },
+    "WideCharToMultiByte": {
+        "prototype": "int WideCharToMultiByte(\n  UINT   CodePage,\n  DWORD  dwFlags,\n  LPCWCH lpWideCharStr,\n  int    cchWideChar,\n  LPSTR  lpMultiByteStr,\n  int    cbMultiByte,\n  LPCCH  lpDefaultChar,\n  LPBOOL lpUsedDefaultChar\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Maps a UTF-16 (wide character) string to a new character string. The new character string is not necessarily from a multibyte character set."
+    },
+    "WindowFromDC": {
+        "prototype": "HWND WindowFromDC(\n  HDC hDC\n);",
+        "dllLibrary": "user32",
+        "comment": "The WindowFromDC function returns a handle to the window associated with the specified display device context (DC). Output functions that use the specified device context draw into this window."
+    },
+    "WindowFromPhysicalPoint": {
+        "prototype": "HWND WindowFromPhysicalPoint(\n  POINT Point\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a handle to the window that contains the specified physical point."
+    },
+    "WindowFromPoint": {
+        "prototype": "HWND WindowFromPoint(\n  POINT Point\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a handle to the window that contains the specified point."
+    },
+    "WindowsCreateString": {
+        "prototype": "HRESULT WindowsCreateString(\n  PCNZWCH sourceString,\n  UINT32  length,\n  HSTRING *string\n);",
+        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
+        "comment": "Creates a new HSTRING based on the specified source string.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "WindowsDeleteString": {
+        "prototype": "HRESULT WindowsDeleteString(\n  HSTRING string\n);",
+        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
+        "comment": "Decrements the reference count of a string buffer.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "WindowsGetStringRawBuffer": {
+        "prototype": "PCWSTR WindowsGetStringRawBuffer(\n  HSTRING string,\n  UINT32  *length\n);",
+        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
+        "comment": "Retrieves the backing buffer for the specified string.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "Wow64SuspendThread": {
+        "prototype": "DWORD Wow64SuspendThread(\n  HANDLE hThread\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Suspends the specified WOW64 thread."
+    },
+    "WriteConsole": {
+        "prototype": "BOOL WINAPI WriteConsoleW(\n  _In_             HANDLE  hConsoleOutput,\n  _In_       const VOID    *lpBuffer,\n  _In_             DWORD   nNumberOfCharsToWrite,\n  _Out_opt_        LPDWORD lpNumberOfCharsWritten,\n  _Reserved_       LPVOID  lpReserved\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Writes a character string to a console screen buffer beginning at the current cursor location."
+    },
+    "WriteFile": {
+        "prototype": "BOOL WriteFile(\n  HANDLE       hFile,\n  LPCVOID      lpBuffer,\n  DWORD        nNumberOfBytesToWrite,\n  LPDWORD      lpNumberOfBytesWritten,\n  LPOVERLAPPED lpOverlapped\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Writes data to the specified file or input/output (I/O) device."
+    },
+    "WriteProcessMemory": {
+        "prototype": "BOOL WriteProcessMemory(\n  HANDLE  hProcess,\n  LPVOID  lpBaseAddress,\n  LPCVOID lpBuffer,\n  SIZE_T  nSize,\n  SIZE_T  *lpNumberOfBytesWritten\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Writes data to an area of memory in a specified process. The entire area to be written to must be accessible or the operation fails."
     }
 }
