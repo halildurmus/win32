@@ -3492,7 +3492,7 @@ class WAVEOUTCAPS extends Struct {
   @Uint32()
   external int vDriverVersion;
 
-  // Need to use @Uint64() here because of the lack of fixed-size arrays
+  // Need to use @Uint32() here because of the lack of fixed-size arrays
   // MAXPNAMELEN is 32 (words)
   @Uint32()
   external int _data0;
