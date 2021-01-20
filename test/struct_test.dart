@@ -449,6 +449,13 @@ void main() {
       expect(sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>(), equals(4));
     }
   });
+  test('Struct BLUETOOTH_PIN_INFO is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<BLUETOOTH_PIN_INFO>(), equals(17));
+    } else {
+      expect(sizeOf<BLUETOOTH_PIN_INFO>(), equals(17));
+    }
+  });
   test('Struct BLUETOOTH_OOB_DATA_INFO is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<BLUETOOTH_OOB_DATA_INFO>(), equals(32));

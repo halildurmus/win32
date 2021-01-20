@@ -190,9 +190,6 @@ const skipStructs = [
   // sizeOf<OSVERSIONINFO> returns 280 because Dart over-allocates storage.
   'OSVERSIONINFO',
 
-  // sizeOf<BLUETOOTH_PIN_INFO> returns 24 because Dart over-allocates storage.
-  'BLUETOOTH_PIN_INFO',
-
   // Should be allocated manually, rather than using sizeOf
   'DLGTEMPLATE', 'DLGITEMTEMPLATE',
 

@@ -3092,12 +3092,40 @@ extension PointerBLUETOOTH_RADIO_INFOExtension
 ///
 /// {@category Struct}
 class BLUETOOTH_PIN_INFO extends Struct {
-  @Int64()
+  @Int8()
   external int _data0;
-  @Int64()
+  @Int8()
   external int _data1;
   @Int8()
+  external int _data2;
+  @Int8()
+  external int _data3;
+  @Int8()
+  external int _data4;
+  @Int8()
+  external int _data5;
+  @Int8()
+  external int _data6;
+  @Int8()
+  external int _data7;
+  @Int8()
   external int _data8;
+  @Int8()
+  external int _data9;
+  @Int8()
+  external int _data10;
+  @Int8()
+  external int _data11;
+  @Int8()
+  external int _data12;
+  @Int8()
+  external int _data13;
+  @Int8()
+  external int _data14;
+  @Int8()
+  external int _data15;
+  @Int8()
+  external int _data16;
 }
 
 extension PointerBLUETOOTH_PIN_INFOExtension on Pointer<BLUETOOTH_PIN_INFO> {
