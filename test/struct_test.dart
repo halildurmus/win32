@@ -498,18 +498,25 @@ void main() {
       expect(sizeOf<LOGBRUSH>(), equals(12));
     }
   });
-  test('Struct NOTIFYICONDATA is the right size', () {
+  test('Struct OVERLAPPED is the right size', () {
     if (is64bitOS) {
-      expect(sizeOf<NOTIFYICONDATA>(), equals(976));
+      expect(sizeOf<OVERLAPPED>(), equals(32));
     } else {
-      expect(sizeOf<NOTIFYICONDATA>(), equals(956));
+      expect(sizeOf<OVERLAPPED>(), equals(20));
     }
   });
-  test('Struct TPMPARAMS is the right size', () {
+  test('Struct ACTCTX is the right size', () {
     if (is64bitOS) {
-      expect(sizeOf<TPMPARAMS>(), equals(20));
+      expect(sizeOf<ACTCTX>(), equals(56));
     } else {
-      expect(sizeOf<TPMPARAMS>(), equals(20));
+      expect(sizeOf<ACTCTX>(), equals(32));
+    }
+  });
+  test('Struct WIN32_FIND_DATA is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<WIN32_FIND_DATA>(), equals(592));
+    } else {
+      expect(sizeOf<WIN32_FIND_DATA>(), equals(592));
     }
   });
   test('Struct WAVEOUTCAPS is the right size', () {
@@ -538,6 +545,20 @@ void main() {
       expect(sizeOf<MMTIME>(), equals(12));
     } else {
       expect(sizeOf<MMTIME>(), equals(12));
+    }
+  });
+  test('Struct NOTIFYICONDATA is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<NOTIFYICONDATA>(), equals(976));
+    } else {
+      expect(sizeOf<NOTIFYICONDATA>(), equals(956));
+    }
+  });
+  test('Struct TPMPARAMS is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<TPMPARAMS>(), equals(20));
+    } else {
+      expect(sizeOf<TPMPARAMS>(), equals(20));
     }
   });
 }

@@ -7,7 +7,7 @@ files:
 
 | Folder        | Description                                                 |
 |---------------|-------------------------------------------------------------|
-| win32         | Reads a JSON file containing metadata for classic C-style    |
+| win32         | Reads a JSON file containing metadata for classic C-style   |
 |               | APIs, and generates both the Dart files (kernel32.dart      |
 |               | etc.) and a set of basic verification tests for them.       |
 |               |                                                             |
@@ -39,5 +39,8 @@ also work from a WSL 2 instance.
 This folder also includes a few other small utilities of limited usefulness.
 
 - `build.cmd`. Generates EXE files for some of the Dart samples.
-- `constants.cpp`. Small helper app for confirm widths of various types and
-  structs across 32-bit and 64-bit architectures.
+- `constants.cpp`. Small helper app for confirm widths of various types across
+  32-bit and 64-bit architectures.
+- `struct_sizes.cpp`. Measures the size of structs in structs.dart on both
+  32-bit and 64-bit architectures so the appropriate unit tests can be
+  generated.

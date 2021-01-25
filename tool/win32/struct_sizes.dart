@@ -2,7 +2,11 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// Struct sizes are a mapping of name to 32-bit and 64-bit sizes
+// Struct sizes are a mapping of name to 32-bit and 64-bit sizes. The easiest
+// way to generate the first two maps is by compiling and running
+// struct_sizes.cpp on both 32-bit and 64-bit architectures, and copying the
+// resultant output directly into this file.
+
 const structSize64 = {
   'WNDCLASS': 72,
   'SYSTEM_INFO': 48,
@@ -82,6 +86,13 @@ const structSize64 = {
   'MCI_SEEK_PARMS': 12,
   'MCI_STATUS_PARMS': 24,
   'LOGBRUSH': 16,
+  'OVERLAPPED': 32,
+  'ACTCTX': 56,
+  'WIN32_FIND_DATA': 592,
+  'WAVEOUTCAPS': 84,
+  'WAVEFORMATEX': 18,
+  'WAVEHDR': 48,
+  'MMTIME': 12,
   'EXCEPINFO': 64,
   'PROPERTYKEY': 20,
   'PROPVARIANT': 24,
@@ -91,10 +102,6 @@ const structSize64 = {
   'NLM_SIMULATED_PROFILE_INFO': 524,
   'NOTIFYICONDATA': 976,
   'TPMPARAMS': 20,
-  'WAVEOUTCAPS': 84,
-  'WAVEFORMATEX': 18,
-  'WAVEHDR': 48,
-  'MMTIME': 12,
 };
 
 const structSize32 = {
@@ -176,6 +183,13 @@ const structSize32 = {
   'MCI_SEEK_PARMS': 8,
   'MCI_STATUS_PARMS': 16,
   'LOGBRUSH': 12,
+  'OVERLAPPED': 20,
+  'ACTCTX': 32,
+  'WIN32_FIND_DATA': 592,
+  'WAVEOUTCAPS': 84,
+  'WAVEFORMATEX': 18,
+  'WAVEHDR': 32,
+  'MMTIME': 12,
   'EXCEPINFO': 32,
   'PROPERTYKEY': 20,
   'PROPVARIANT': 16,
@@ -185,10 +199,6 @@ const structSize32 = {
   'NLM_SIMULATED_PROFILE_INFO': 524,
   'NOTIFYICONDATA': 956,
   'TPMPARAMS': 20,
-  'WAVEOUTCAPS': 84,
-  'WAVEFORMATEX': 18,
-  'WAVEHDR': 32,
-  'MMTIME': 12,
 };
 
 const skipStructs = [
