@@ -359,6 +359,14 @@ void main() {
       expect(sizeOf<BITMAP>(), equals(24));
     }
   });
+  test('Struct BITMAPFILEHEADER is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<BITMAPFILEHEADER>(), equals(14));
+    }
+    else {
+      expect(sizeOf<BITMAPFILEHEADER>(), equals(14));
+    }
+  });
   test('Struct BITMAPINFOHEADER is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<BITMAPINFOHEADER>(), equals(40));
@@ -591,12 +599,28 @@ void main() {
       expect(sizeOf<VS_FIXEDFILEINFO>(), equals(52));
     }
   });
+  test('Struct MCI_OPEN_PARMS is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<MCI_OPEN_PARMS>(), equals(36));
+    }
+    else {
+      expect(sizeOf<MCI_OPEN_PARMS>(), equals(20));
+    }
+  });
   test('Struct MCI_PLAY_PARMS is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<MCI_PLAY_PARMS>(), equals(16));
     }
     else {
       expect(sizeOf<MCI_PLAY_PARMS>(), equals(12));
+    }
+  });
+  test('Struct MCI_SEEK_PARMS is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<MCI_SEEK_PARMS>(), equals(12));
+    }
+    else {
+      expect(sizeOf<MCI_SEEK_PARMS>(), equals(8));
     }
   });
   test('Struct MCI_STATUS_PARMS is the right size', () {

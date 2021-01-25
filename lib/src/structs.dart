@@ -1952,14 +1952,32 @@ class BITMAP extends Struct {
 class BITMAPFILEHEADER extends Struct {
   @Uint16()
   external int bfType;
-  @Uint32()
-  external int bfSize;
+  @Uint16()
+  external int _bfSizeLo;
+  @Uint16()
+  external int _bfSizeHi;
   @Uint16()
   external int bfReserved1;
   @Uint16()
   external int bfReserved2;
-  @Uint32()
-  external int bfOffBits;
+  @Uint16()
+  external int _bfOffBitsLo;
+  @Uint16()
+  external int _bfOffBitsHi;
+
+  int get bfSize => (_bfSizeHi << 16) + _bfSizeLo;
+
+  set bfSize(int value) {
+    _bfSizeHi = (value & 0xFFFF0000) >> 16;
+    _bfSizeLo = value & 0xFFFF;
+  }
+
+  int get bfOffBits => (_bfOffBitsHi << 16) + _bfOffBitsLo;
+
+  set bfOffBits(int value) {
+    _bfOffBitsHi = (value & 0xFFFF0000) >> 16;
+    _bfOffBitsLo = value & 0xFFFF;
+  }
 }
 
 // typedef struct tagBITMAPINFOHEADER {
@@ -3344,16 +3362,61 @@ class VS_FIXEDFILEINFO extends Struct {
 /// The MCI_OPEN_PARMS structure contains information for the MCI_OPEN command.
 ///
 /// {@category Struct}
-///
-/// Packed struct -- 36 bytes on 64-bit, 20 bytes on 32-bit
 class MCI_OPEN_PARMS extends Struct {
-  @IntPtr()
-  external int dwCallback;
+  @Uint32()
+  external int _dwCallbackLo;
+  @Uint32()
+  external int _dwCallbackHi;
+
+  Pointer<IntPtr> get dwCallback =>
+      Pointer<IntPtr>.fromAddress((_dwCallbackHi << 16) + _dwCallbackLo);
+
+  set dwCallback(Pointer<IntPtr> value) {
+    _dwCallbackHi = (value.address & 0xFFFF0000) >> 16;
+    _dwCallbackLo = value.address & 0xFFFF;
+  }
+
   @Uint32()
   external int wDeviceID;
-  external Pointer<Utf16> lpstrDeviceType;
-  external Pointer<Utf16> lpstrElementName;
-  external Pointer<Utf16> lpstrAlias;
+
+  @Uint32()
+  external int _lpstrDeviceTypeLo;
+  @Uint32()
+  external int _lpstrDeviceTypeHi;
+
+  Pointer<Utf16> get lpstrDeviceType => Pointer<Utf16>.fromAddress(
+      (_lpstrDeviceTypeHi << 16) + _lpstrDeviceTypeLo);
+
+  set lpstrDeviceType(Pointer<Utf16> value) {
+    _lpstrDeviceTypeHi = (value.address & 0xFFFF0000) >> 16;
+    _lpstrDeviceTypeLo = value.address & 0xFFFF;
+  }
+
+  @Uint32()
+  external int _lpstrElementNameLo;
+  @Uint32()
+  external int _lpstrElementNameHi;
+
+  Pointer<Utf16> get lpstrElementName => Pointer<Utf16>.fromAddress(
+      (_lpstrElementNameHi << 16) + _lpstrElementNameLo);
+
+  set lpstrElementName(Pointer<Utf16> value) {
+    _lpstrElementNameHi = (value.address & 0xFFFF0000) >> 16;
+    _lpstrElementNameLo = value.address & 0xFFFF;
+  }
+
+  @Uint32()
+  external int _lpstrAliasLo;
+  @Uint32()
+  external int _lpstrAliasHi;
+
+  Pointer<Utf16> get lpstrAlias =>
+      Pointer<Utf16>.fromAddress((_lpstrAliasHi << 16) + _lpstrAliasLo);
+
+  set lpstrAlias(Pointer<Utf16> value) {
+    _lpstrAliasHi = (value.address & 0xFFFF0000) >> 16;
+    _lpstrAliasLo = value.address & 0xFFFF;
+  }
 }
 
 // typedef struct {
@@ -3385,10 +3448,20 @@ class MCI_PLAY_PARMS extends Struct {
 ///
 /// {@category Struct}
 class MCI_SEEK_PARMS extends Struct {
-  @IntPtr()
-  external int dwCallback;
+  @Uint32()
+  external int _dwCallbackLo;
+  @Uint32()
+  external int _dwCallbackHi;
   @Uint32()
   external int dwTo;
+
+  Pointer<IntPtr> get dwCallback =>
+      Pointer<IntPtr>.fromAddress((_dwCallbackHi << 16) + _dwCallbackLo);
+
+  set dwCallback(Pointer<IntPtr> value) {
+    _dwCallbackHi = (value.address & 0xFFFF0000) >> 16;
+    _dwCallbackLo = value.address & 0xFFFF;
+  }
 }
 
 // typedef struct tagMCI_STATUS_PARMS {

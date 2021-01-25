@@ -207,11 +207,9 @@ const structSize32 = {
 
 const skipStructs = [
   // Packed structs
-  'MCI_OPEN_PARMS', 'MCI_SEEK_PARMS',
   'TASKDIALOGCONFIG', 'TASKDIALOG_BUTTON',
-  'BITMAPFILEHEADER',
 
-  // Not yet implemented
+  // Opaque types
   'EXCEPINFO',
   'PROPERTYKEY',
   'PROPVARIANT',
