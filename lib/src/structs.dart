@@ -960,7 +960,8 @@ class LOGFONT extends Struct {
 }
 
 extension PointerLOGFONTExtension on Pointer<LOGFONT> {
-  Pointer<Utf16> get lfFaceName => cast<Uint8>().elementAt(28).cast<Utf16>();
+  String get lfFaceName =>
+      cast<Uint8>().elementAt(28).cast<Utf16>().unpackString(32);
 }
 
 // typedef struct tagENUMLOGFONTEXW {
@@ -974,94 +975,136 @@ extension PointerLOGFONTExtension on Pointer<LOGFONT> {
 ///
 /// {@category Struct}
 class ENUMLOGFONTEX extends Struct {
-  @Uint64()
+  external LOGFONT elfLogFont;
+
+  @Uint32()
   external int _data0;
-  @Uint64()
+  @Uint32()
   external int _data1;
-  @Uint64()
+  @Uint32()
   external int _data2;
-  @Uint64()
+  @Uint32()
   external int _data3;
-  @Uint64()
+  @Uint32()
   external int _data4;
-  @Uint64()
+  @Uint32()
   external int _data5;
-  @Uint64()
+  @Uint32()
   external int _data6;
-  @Uint64()
+  @Uint32()
   external int _data7;
-  @Uint64()
+  @Uint32()
   external int _data8;
-  @Uint64()
+  @Uint32()
   external int _data9;
-  @Uint64()
+  @Uint32()
   external int _data10;
-  @Uint64()
+  @Uint32()
   external int _data11;
-  @Uint64()
+  @Uint32()
   external int _data12;
-  @Uint64()
+  @Uint32()
   external int _data13;
-  @Uint64()
+  @Uint32()
   external int _data14;
-  @Uint64()
+  @Uint32()
   external int _data15;
-  @Uint64()
+  @Uint32()
   external int _data16;
-  @Uint64()
+  @Uint32()
   external int _data17;
-  @Uint64()
+  @Uint32()
   external int _data18;
-  @Uint64()
+  @Uint32()
   external int _data19;
-  @Uint64()
+  @Uint32()
   external int _data20;
-  @Uint64()
+  @Uint32()
   external int _data21;
-  @Uint64()
+  @Uint32()
   external int _data22;
-  @Uint64()
+  @Uint32()
   external int _data23;
-  @Uint64()
+  @Uint32()
   external int _data24;
-  @Uint64()
+  @Uint32()
   external int _data25;
-  @Uint64()
+  @Uint32()
   external int _data26;
-  @Uint64()
+  @Uint32()
   external int _data27;
-  @Uint64()
+  @Uint32()
   external int _data28;
-  @Uint64()
+  @Uint32()
   external int _data29;
-  @Uint64()
+  @Uint32()
   external int _data30;
-  @Uint64()
+  @Uint32()
   external int _data31;
-  @Uint64()
+  @Uint32()
   external int _data32;
-  @Uint64()
+  @Uint32()
   external int _data33;
-  @Uint64()
+  @Uint32()
   external int _data34;
-  @Uint64()
+  @Uint32()
   external int _data35;
-  @Uint64()
+  @Uint32()
   external int _data36;
-  @Uint64()
+  @Uint32()
   external int _data37;
-  @Uint64()
+  @Uint32()
   external int _data38;
-  @Uint64()
+  @Uint32()
   external int _data39;
-  @Uint64()
+  @Uint32()
   external int _data40;
-  @Uint64()
+  @Uint32()
   external int _data41;
-  @Uint64()
+  @Uint32()
   external int _data42;
   @Uint32()
   external int _data43;
+  @Uint32()
+  external int _data44;
+  @Uint32()
+  external int _data45;
+  @Uint32()
+  external int _data46;
+  @Uint32()
+  external int _data47;
+  @Uint32()
+  external int _data48;
+  @Uint32()
+  external int _data49;
+  @Uint32()
+  external int _data50;
+  @Uint32()
+  external int _data51;
+  @Uint32()
+  external int _data52;
+  @Uint32()
+  external int _data53;
+  @Uint32()
+  external int _data54;
+  @Uint32()
+  external int _data55;
+  @Uint32()
+  external int _data56;
+  @Uint32()
+  external int _data57;
+  @Uint32()
+  external int _data58;
+  @Uint32()
+  external int _data59;
+  @Uint32()
+  external int _data60;
+  @Uint32()
+  external int _data61;
+  @Uint32()
+  external int _data62;
+  @Uint32()
+  external int _data63;
 }
 
 extension PointerENUMLOGFONTEXExtension on Pointer<ENUMLOGFONTEX> {
