@@ -44,7 +44,6 @@ void main()
     printf("  'ACCEL': %zu,\n", sizeof(ACCEL));
     printf("  'MONITORINFO': %zu,\n", sizeof(MONITORINFO));
     printf("  'PHYSICAL_MONITOR': %zu,\n", sizeof(PHYSICAL_MONITOR));
-    printf("  'SYSTEMTIME': %zu,\n", sizeof(SYSTEMTIME));
     printf("  'CHOOSECOLOR': %zu,\n", sizeof(CHOOSECOLOR));
     printf("  'FINDREPLACE': %zu,\n", sizeof(FINDREPLACE));
     printf("  'CHOOSEFONT': %zu,\n", sizeof(CHOOSEFONT));
@@ -61,9 +60,6 @@ void main()
     printf("  'PAINTSTRUCT': %zu,\n", sizeof(PAINTSTRUCT));
     printf("  'RECT': %zu,\n", sizeof(RECT));
     printf("  'INPUT': %zu,\n", sizeof(INPUT));
-    // printf("'MOUSEINPUT': %zu,\n", sizeof(MOUSEINPUT));
-    // printf("'KEYBDINPUT': %zu,\n", sizeof(KEYBDINPUT));
-    // printf("'HARDWAREINPUT': %zu,\n", sizeof(HARDWAREINPUT));
     printf("  'TEXTMETRIC': %zu,\n", sizeof(TEXTMETRICW));
     printf("  'SCROLLINFO': %zu,\n", sizeof(SCROLLINFO));
     printf("  'SHELLEXECUTEINFO': %zu,\n", sizeof(SHELLEXECUTEINFO));
@@ -73,6 +69,7 @@ void main()
     printf("  'CREDENTIAL': %zu,\n", sizeof(CREDENTIAL));
     printf("  'WINDOWINFO': %zu,\n", sizeof(WINDOWINFO));
     printf("  'BITMAPINFO': %zu,\n", sizeof(BITMAPINFO));
+    printf("  'RGBQUAD': %zu,\n", sizeof(RGBQUAD));
     printf("  'BITMAP': %zu,\n", sizeof(BITMAP));
     printf("  'BITMAPFILEHEADER': %zu,\n", sizeof(BITMAPFILEHEADER));
     printf("  'BITMAPINFOHEADER': %zu,\n", sizeof(BITMAPINFOHEADER));
@@ -95,11 +92,13 @@ void main()
     printf("  'TASKDIALOG_BUTTON': %zu,\n", sizeof(TASKDIALOG_BUTTON));
     printf("  'DLLVERSIONINFO': %zu,\n", sizeof(DLLVERSIONINFO));
     printf("  'OSVERSIONINFO': %zu,\n", sizeof(OSVERSIONINFOW));
-    printf("  'BLUETOOTH_ADDRESS': %zu,\n", sizeof(BLUETOOTH_ADDRESS));
+    printf("  'SYSTEMTIME': %zu,\n", sizeof(SYSTEMTIME));
+    printf("  'BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS': %zu,\n", sizeof(BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS));
     printf("  'BLUETOOTH_DEVICE_INFO': %zu,\n", sizeof(BLUETOOTH_DEVICE_INFO));
-    printf("  'BLUETOOTH_RADIO_INFO': %zu,\n", sizeof(BLUETOOTH_RADIO_INFO));
     printf("  'BLUETOOTH_DEVICE_SEARCH_PARAMS': %zu,\n", sizeof(BLUETOOTH_DEVICE_SEARCH_PARAMS));
     printf("  'BLUETOOTH_FIND_RADIO_PARAMS': %zu,\n", sizeof(BLUETOOTH_FIND_RADIO_PARAMS));
+    printf("  'BLUETOOTH_ADDRESS': %zu,\n", sizeof(BLUETOOTH_ADDRESS));
+    printf("  'BLUETOOTH_RADIO_INFO': %zu,\n", sizeof(BLUETOOTH_RADIO_INFO));
     printf("  'BLUETOOTH_PIN_INFO': %zu,\n", sizeof(BLUETOOTH_PIN_INFO));
     printf("  'BLUETOOTH_OOB_DATA_INFO': %zu,\n", sizeof(BLUETOOTH_OOB_DATA_INFO));
     printf("  'COR_FIELD_OFFSET': %zu,\n", sizeof(COR_FIELD_OFFSET));

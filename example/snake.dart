@@ -382,12 +382,12 @@ void init(int width, int height) {
   bitmapWidth = width;
   bitmapHeight = height;
 
-  bitmapInfo.ref.biSize = sizeOf<BITMAPINFO>();
-  bitmapInfo.ref.biWidth = width;
-  bitmapInfo.ref.biHeight = height;
-  bitmapInfo.ref.biPlanes = 1;
-  bitmapInfo.ref.biBitCount = 32;
-  bitmapInfo.ref.biCompression = BI_RGB;
+  bitmapInfo.ref.bmiHeader.biSize = sizeOf<BITMAPINFO>();
+  bitmapInfo.ref.bmiHeader.biWidth = width;
+  bitmapInfo.ref.bmiHeader.biHeight = height;
+  bitmapInfo.ref.bmiHeader.biPlanes = 1;
+  bitmapInfo.ref.bmiHeader.biBitCount = 32;
+  bitmapInfo.ref.bmiHeader.biCompression = BI_RGB;
 
   final bitmapMemorySize = (width * height) * bytesPerPixel;
   bitmapMemory =

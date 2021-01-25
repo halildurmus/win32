@@ -1676,8 +1676,6 @@ class SHQUERYRBINFO extends Struct {
       calloc<SHQUERYRBINFO>().ref..cbSize = sizeOf<SHQUERYRBINFO>();
 }
 
-// *** COM STRUCTS ***
-
 // typedef struct _GUID {
 //     unsigned long  Data1;
 //     unsigned short Data2;
@@ -1854,31 +1852,20 @@ class WINDOWINFO extends Struct {
   external int wCreatorVersion;
 }
 
-// *** CONSOLE STRUCTS ***
-
-// Dart FFI does not yet have support for nested structs, so there's extra
-// work necessary to unpack parameters like COORD and SMALL_RECT. The Dart
-// issue for this work is https://github.com/dart-lang/sdk/issues/37271.
-
 // typedef struct tagBITMAPINFO {
 //   BITMAPINFOHEADER bmiHeader;
 //   RGBQUAD          bmiColors[1];
 // } BITMAPINFO, *LPBITMAPINFO, *PBITMAPINFO;
-//
-// typedef struct tagBITMAPINFOHEADER {
-//   DWORD biSize;
-//   LONG  biWidth;
-//   LONG  biHeight;
-//   WORD  biPlanes;
-//   WORD  biBitCount;
-//   DWORD biCompression;
-//   DWORD biSizeImage;
-//   LONG  biXPelsPerMeter;
-//   LONG  biYPelsPerMeter;
-//   DWORD biClrUsed;
-//   DWORD biClrImportant;
-// } BITMAPINFOHEADER, *PBITMAPINFOHEADER;
-//
+
+/// The BITMAPINFO structure defines the dimensions and color information for a
+/// device-independent bitmap (DIB).
+///
+/// {@category Struct}
+class BITMAPINFO extends Struct {
+  external BITMAPINFOHEADER bmiHeader;
+  external RGBQUAD bmiColors;
+}
+
 // typedef struct tagRGBQUAD {
 //   BYTE rgbBlue;
 //   BYTE rgbGreen;
@@ -1886,33 +1873,11 @@ class WINDOWINFO extends Struct {
 //   BYTE rgbReserved;
 // } RGBQUAD;
 
-/// The BITMAPINFO structure defines the dimensions and color information for a
-/// device-independent bitmap (DIB).
+/// The RGBQUAD structure describes a color consisting of relative intensities
+/// of red, green, and blue.
 ///
 /// {@category Struct}
-class BITMAPINFO extends Struct {
-  @Uint32()
-  external int biSize;
-  @Int32()
-  external int biWidth;
-  @Int32()
-  external int biHeight;
-  @Uint16()
-  external int biPlanes;
-  @Uint16()
-  external int biBitCount;
-  @Uint32()
-  external int biCompression;
-  @Uint32()
-  external int biSizeImage;
-  @Int32()
-  external int biXPelsPerMeter;
-  @Int32()
-  external int biYPelsPerMeter;
-  @Uint32()
-  external int biClrUsed;
-  @Uint32()
-  external int biClrImportant;
+class RGBQUAD extends Struct {
   @Uint8()
   external int rgbBlue;
   @Uint8()
@@ -1921,8 +1886,6 @@ class BITMAPINFO extends Struct {
   external int rgbRed;
   @Uint8()
   external int rgbReserved;
-
-  factory BITMAPINFO.allocate() => calloc<BITMAPINFO>().ref..biSize = 44;
 }
 
 // typedef struct tagBITMAP {
@@ -2021,9 +1984,6 @@ class BITMAPINFOHEADER extends Struct {
   external int biClrUsed;
   @Uint32()
   external int biClrImportant;
-
-  factory BITMAPINFOHEADER.allocate() =>
-      calloc<BITMAPINFOHEADER>().ref..biSize = sizeOf<BITMAPINFOHEADER>();
 }
 
 // typedef struct tagPALETTEENTRY {
@@ -2329,6 +2289,12 @@ class INITCOMMONCONTROLSEX extends Struct {
     ..dwSize = sizeOf<INITCOMMONCONTROLSEX>();
 }
 
+/// Defines the dimensions and style of a dialog box. This structure, always the
+/// first in a standard template for a dialog box, also specifies the number of
+/// controls in the dialog box and therefore specifies the number of subsequent
+/// DLGITEMTEMPLATE structures in the template.
+///
+/// {@category Struct}
 class DLGTEMPLATE extends Struct {
   @Uint32()
   external int style;
@@ -2346,6 +2312,11 @@ class DLGTEMPLATE extends Struct {
   external int cy;
 }
 
+/// Defines the dimensions and style of a control in a dialog box. One or more
+/// of these structures are combined with a DLGTEMPLATE structure to form a
+/// standard template for a dialog box.
+///
+/// {@category Struct}
 class DLGITEMTEMPLATE extends Struct {
   @Uint32()
   external int style;
@@ -2510,9 +2481,6 @@ class DLLVERSIONINFO extends Struct {
   external int dwBuildNumber;
   @Uint32()
   external int dwPlatformID;
-
-  factory DLLVERSIONINFO.allocate() =>
-      calloc<DLLVERSIONINFO>().ref..cbSize = sizeOf<DLLVERSIONINFO>();
 }
 
 // typedef struct _OSVERSIONINFOW {
@@ -2523,8 +2491,6 @@ class DLLVERSIONINFO extends Struct {
 //   DWORD dwPlatformId;
 //   WCHAR szCSDVersion[128];
 // } OSVERSIONINFOW, *POSVERSIONINFOW, *LPOSVERSIONINFOW, RTL_OSVERSIONINFOW, *PRTL_OSVERSIONINFOW;
-
-const _OSVERSIONINFO_STRUCT_SIZE = 20 + (128 * 2);
 
 /// Contains operating system version information. The information includes
 /// major and minor version numbers, a build number, a platform identifier, and
@@ -2608,10 +2574,6 @@ class OSVERSIONINFO extends Struct {
   external int _data29;
   @Uint64()
   external int _data30;
-
-  factory OSVERSIONINFO.allocate() =>
-      calloc<Uint8>(count: _OSVERSIONINFO_STRUCT_SIZE).cast<OSVERSIONINFO>().ref
-        ..dwOSVersionInfoSize = _OSVERSIONINFO_STRUCT_SIZE;
 }
 
 extension PointerOSVERSIONINFOExtension on Pointer<OSVERSIONINFO> {
@@ -3309,24 +3271,6 @@ class MCI_SEEK_PARMS extends Struct {
   external int dwTo;
 }
 
-// typedef struct tagLOGBRUSH {
-//   UINT      lbStyle;
-//   COLORREF  lbColor;
-//   ULONG_PTR lbHatch;
-// } LOGBRUSH, *PLOGBRUSH, *NPLOGBRUSH, *LPLOGBRUSH;
-
-/// The LOGBRUSH structure defines the style, color, and pattern of a physical
-/// brush. It is used by the CreateBrushIndirect and ExtCreatePen functions.
-///
-/// {@category Struct}
-class LOGBRUSH extends Struct {
-  @Uint32()
-  external int lbStyle;
-  @Int32()
-  external int lbColor;
-  external Pointer<Uint32> lbHatch;
-}
-
 // typedef struct tagMCI_STATUS_PARMS {
 //     DWORD_PTR   dwCallback;
 //     DWORD_PTR   dwReturn;
@@ -3346,6 +3290,24 @@ class MCI_STATUS_PARMS extends Struct {
   external int dwItem;
   @Uint32()
   external int dwTrack;
+}
+
+// typedef struct tagLOGBRUSH {
+//   UINT      lbStyle;
+//   COLORREF  lbColor;
+//   ULONG_PTR lbHatch;
+// } LOGBRUSH, *PLOGBRUSH, *NPLOGBRUSH, *LPLOGBRUSH;
+
+/// The LOGBRUSH structure defines the style, color, and pattern of a physical
+/// brush. It is used by the CreateBrushIndirect and ExtCreatePen functions.
+///
+/// {@category Struct}
+class LOGBRUSH extends Struct {
+  @Uint32()
+  external int lbStyle;
+  @Int32()
+  external int lbColor;
+  external Pointer<Uint32> lbHatch;
 }
 
 // typedef struct _OVERLAPPED {

@@ -127,13 +127,6 @@ void main() {
       expect(sizeOf<PHYSICAL_MONITOR>(), equals(260));
     }
   });
-  test('Struct SYSTEMTIME is the right size', () {
-    if (is64bitOS) {
-      expect(sizeOf<SYSTEMTIME>(), equals(16));
-    } else {
-      expect(sizeOf<SYSTEMTIME>(), equals(16));
-    }
-  });
   test('Struct CHOOSECOLOR is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<CHOOSECOLOR>(), equals(72));
@@ -302,6 +295,13 @@ void main() {
       expect(sizeOf<BITMAPINFO>(), equals(44));
     }
   });
+  test('Struct RGBQUAD is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<RGBQUAD>(), equals(4));
+    } else {
+      expect(sizeOf<RGBQUAD>(), equals(4));
+    }
+  });
   test('Struct BITMAP is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<BITMAP>(), equals(32));
@@ -414,11 +414,18 @@ void main() {
       expect(sizeOf<DLLVERSIONINFO>(), equals(20));
     }
   });
-  test('Struct BLUETOOTH_ADDRESS is the right size', () {
+  test('Struct SYSTEMTIME is the right size', () {
     if (is64bitOS) {
-      expect(sizeOf<BLUETOOTH_ADDRESS>(), equals(8));
+      expect(sizeOf<SYSTEMTIME>(), equals(16));
     } else {
-      expect(sizeOf<BLUETOOTH_ADDRESS>(), equals(8));
+      expect(sizeOf<SYSTEMTIME>(), equals(16));
+    }
+  });
+  test('Struct BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS>(), equals(576));
+    } else {
+      expect(sizeOf<BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS>(), equals(576));
     }
   });
   test('Struct BLUETOOTH_DEVICE_INFO is the right size', () {
@@ -426,13 +433,6 @@ void main() {
       expect(sizeOf<BLUETOOTH_DEVICE_INFO>(), equals(560));
     } else {
       expect(sizeOf<BLUETOOTH_DEVICE_INFO>(), equals(560));
-    }
-  });
-  test('Struct BLUETOOTH_RADIO_INFO is the right size', () {
-    if (is64bitOS) {
-      expect(sizeOf<BLUETOOTH_RADIO_INFO>(), equals(520));
-    } else {
-      expect(sizeOf<BLUETOOTH_RADIO_INFO>(), equals(520));
     }
   });
   test('Struct BLUETOOTH_DEVICE_SEARCH_PARAMS is the right size', () {
@@ -447,6 +447,20 @@ void main() {
       expect(sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>(), equals(4));
     } else {
       expect(sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>(), equals(4));
+    }
+  });
+  test('Struct BLUETOOTH_ADDRESS is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<BLUETOOTH_ADDRESS>(), equals(8));
+    } else {
+      expect(sizeOf<BLUETOOTH_ADDRESS>(), equals(8));
+    }
+  });
+  test('Struct BLUETOOTH_RADIO_INFO is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<BLUETOOTH_RADIO_INFO>(), equals(520));
+    } else {
+      expect(sizeOf<BLUETOOTH_RADIO_INFO>(), equals(520));
     }
   });
   test('Struct BLUETOOTH_PIN_INFO is the right size', () {
