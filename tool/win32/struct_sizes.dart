@@ -211,12 +211,12 @@ const skipStructs = [
   // Should be allocated manually, rather than using sizeOf
   'DLGTEMPLATE', 'DLGITEMTEMPLATE',
 
-  // TODO: Packed structs
+  // Packed structs
   'MCI_OPEN_PARMS', 'MCI_SEEK_PARMS',
   'TASKDIALOGCONFIG', 'TASKDIALOG_BUTTON',
   'BITMAPFILEHEADER',
 
-  // TODO: These are not yet implemented
+  // Not yet implemented
   'EXCEPINFO',
   'PROPERTYKEY',
   'PROPVARIANT',
