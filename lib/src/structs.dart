@@ -2281,13 +2281,13 @@ class INITCOMMONCONTROLSEX extends Struct {
 class DLGTEMPLATE extends Struct {
   // Work around struct packing issues in Dart
   @Uint16()
-  external int _styleHi;
-  @Uint16()
   external int _styleLo;
   @Uint16()
-  external int _dwExtendedStyleHi;
+  external int _styleHi;
   @Uint16()
   external int _dwExtendedStyleLo;
+  @Uint16()
+  external int _dwExtendedStyleHi;
 
   @Uint16()
   external int cdit;
@@ -2304,13 +2304,13 @@ class DLGTEMPLATE extends Struct {
   int get dwExtendedStyle => (_dwExtendedStyleHi << 16) + _dwExtendedStyleLo;
 
   set style(int value) {
-    _styleHi = (value & 0xFF00) << 16;
-    _styleLo = value & 0xFF;
+    _styleHi = (value & 0xFFFF0000) >> 16;
+    _styleLo = value & 0xFFFF;
   }
 
   set dwExtendedStyle(int value) {
-    _dwExtendedStyleHi = (value & 0xFF00) << 16;
-    _dwExtendedStyleLo = value & 0xFF;
+    _dwExtendedStyleHi = (value & 0xFFFF0000) >> 16;
+    _dwExtendedStyleLo = value & 0xFFFF;
   }
 }
 
@@ -2322,13 +2322,13 @@ class DLGTEMPLATE extends Struct {
 class DLGITEMTEMPLATE extends Struct {
   // Work around struct packing issues in Dart
   @Uint16()
-  external int _styleHi;
-  @Uint16()
   external int _styleLo;
   @Uint16()
-  external int _dwExtendedStyleHi;
+  external int _styleHi;
   @Uint16()
   external int _dwExtendedStyleLo;
+  @Uint16()
+  external int _dwExtendedStyleHi;
 
   @Int16()
   external int x;
@@ -2349,13 +2349,13 @@ class DLGITEMTEMPLATE extends Struct {
   int get dwExtendedStyle => (_dwExtendedStyleHi << 16) + _dwExtendedStyleLo;
 
   set style(int value) {
-    _styleHi = (value & 0xFF00) << 16;
-    _styleLo = value & 0xFF;
+    _styleHi = (value & 0xFFFF0000) >> 16;
+    _styleLo = value & 0xFFFF;
   }
 
   set dwExtendedStyle(int value) {
-    _dwExtendedStyleHi = (value & 0xFF00) << 16;
-    _dwExtendedStyleLo = value & 0xFF;
+    _dwExtendedStyleHi = (value & 0xFFFF0000) >> 16;
+    _dwExtendedStyleLo = value & 0xFFFF;
   }
 }
 
