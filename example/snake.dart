@@ -7,9 +7,9 @@
 // Original C implementation by David Jones, available here:
 //     https://github.com/davidejones/winsnake
 
-// NB THe code isn't yet idiomatic Dart, but it demonstrates some
-// useful concepts, including pointer arithmetic and use of virtual
-// memory in Win32.
+// Note: This code isn't very idiomatic for Dart, since it's an almost direct
+// translation of the C code. Nevertheless, it demonstrates some useful
+// concepts, including pointer arithmetic and use of virtual memory in Win32.
 
 import 'dart:ffi';
 import 'dart:math' show Random;
@@ -123,9 +123,9 @@ void collectApple() {
   // play sound
   Beep(750, 100);
   // increase speed and increase snake
-  final newPoint = Point();
-  newPoint.x = snakePoints[snakePoints.length - 1].x;
-  newPoint.y = snakePoints[snakePoints.length - 1].y;
+  final newPoint = Point()
+    ..x = snakePoints[snakePoints.length - 1].x
+    ..y = snakePoints[snakePoints.length - 1].y;
   snakePoints.add(newPoint);
 
   KillTimer(hWnd, IDT_TIMER1);
@@ -307,24 +307,24 @@ void resetGame() {
 
   // init snake
   snakePoints.clear();
-  final p1 = Point();
-  p1.x = 3;
-  p1.y = 0;
+  final p1 = Point()
+    ..x = 3
+    ..y = 0;
   snakePoints.add(p1);
 
-  final p2 = Point();
-  p2.x = 2;
-  p2.y = 0;
+  final p2 = Point()
+    ..x = 2
+    ..y = 0;
   snakePoints.add(p2);
 
-  final p3 = Point();
-  p3.x = 1;
-  p3.y = 0;
+  final p3 = Point()
+    ..x = 1
+    ..y = 0;
   snakePoints.add(p3);
 
-  final p4 = Point();
-  p4.x = 0;
-  p4.y = 0;
+  final p4 = Point()
+    ..x = 0
+    ..y = 0;
   snakePoints.add(p4);
 
   for (var i = 0; i < snakePoints.length; i++) {
