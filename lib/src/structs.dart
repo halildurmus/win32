@@ -2,18 +2,22 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// Dart representations of common structs used in the Win32 API
+// Dart representations of common structs used in the Win32 API. If you add a
+// new struct, make sure you also add a line to struct_sizes.cpp and
+// struct_sizes.dart to ensure that the C size matches the Dart representation.
 
 // -----------------------------------------------------------------------------
 // Linter exceptions
 // -----------------------------------------------------------------------------
 // ignore_for_file: camel_case_types
 // ignore_for_file: camel_case_extensions
+//
 // Why? The linter defaults to throw a warning for types not named as camel
 // case. We deliberately break this convention to match the Win32 underlying
 // types.
 //
 // ignore_for_file: unused_field
+//
 // Why? The linter complains about unused fields (e.g. a class that contains
 // underscore-prefixed members that are not used in the library. In this class,
 // we use this feature to ensure that sizeOf<STRUCT_NAME> returns a size at
@@ -3425,9 +3429,6 @@ class ACTCTX extends Struct {
 //   DWORD    dwReserved1;
 //   WCHAR    cFileName[MAX_PATH];
 //   WCHAR    cAlternateFileName[14];
-//   DWORD    dwFileType;
-//   DWORD    dwCreatorType;
-//   WORD     wFinderFlags;
 // } WIN32_FIND_DATAW, *PWIN32_FIND_DATAW, *LPWIN32_FIND_DATAW;
 
 /// Contains information about the file that is found by the FindFirstFile,
@@ -3437,10 +3438,11 @@ class ACTCTX extends Struct {
 class WIN32_FIND_DATA extends Struct {
   @Uint32()
   external int dwFileAttributes;
-  external FILETIME ftCreationTime;
 
+  external FILETIME ftCreationTime;
   external FILETIME ftLastAccessTime;
   external FILETIME ftLastWriteTime;
+
   @Uint32()
   external int nFileSizeHigh;
   @Uint32()
@@ -3450,7 +3452,146 @@ class WIN32_FIND_DATA extends Struct {
   @Uint32()
   external int dwReserved1;
 
-  // TODO: Pad for sizeOf
+  // WCHAR cFileName[MAX_PATH]; WCHAR cAltFileName[14];
+  // (260 + 14) * 2 = 548 bytes)
+  @Uint32()
+  external int _data0;
+  @Uint64()
+  external int _data1;
+  @Uint64()
+  external int _data2;
+  @Uint64()
+  external int _data3;
+  @Uint64()
+  external int _data4;
+  @Uint64()
+  external int _data5;
+  @Uint64()
+  external int _data6;
+  @Uint64()
+  external int _data7;
+  @Uint64()
+  external int _data8;
+  @Uint64()
+  external int _data9;
+  @Uint64()
+  external int _data10;
+  @Uint64()
+  external int _data11;
+  @Uint64()
+  external int _data12;
+  @Uint64()
+  external int _data13;
+  @Uint64()
+  external int _data14;
+  @Uint64()
+  external int _data15;
+  @Uint64()
+  external int _data16;
+  @Uint64()
+  external int _data17;
+  @Uint64()
+  external int _data18;
+  @Uint64()
+  external int _data19;
+  @Uint64()
+  external int _data20;
+  @Uint64()
+  external int _data21;
+  @Uint64()
+  external int _data22;
+  @Uint64()
+  external int _data23;
+  @Uint64()
+  external int _data24;
+  @Uint64()
+  external int _data25;
+  @Uint64()
+  external int _data26;
+  @Uint64()
+  external int _data27;
+  @Uint64()
+  external int _data28;
+  @Uint64()
+  external int _data29;
+  @Uint64()
+  external int _data30;
+  @Uint64()
+  external int _data31;
+  @Uint64()
+  external int _data32;
+  @Uint64()
+  external int _data33;
+  @Uint64()
+  external int _data34;
+  @Uint64()
+  external int _data35;
+  @Uint64()
+  external int _data36;
+  @Uint64()
+  external int _data37;
+  @Uint64()
+  external int _data38;
+  @Uint64()
+  external int _data39;
+  @Uint64()
+  external int _data40;
+  @Uint64()
+  external int _data41;
+  @Uint64()
+  external int _data42;
+  @Uint64()
+  external int _data43;
+  @Uint64()
+  external int _data44;
+  @Uint64()
+  external int _data45;
+  @Uint64()
+  external int _data46;
+  @Uint64()
+  external int _data47;
+  @Uint64()
+  external int _data48;
+  @Uint64()
+  external int _data49;
+  @Uint64()
+  external int _data50;
+  @Uint64()
+  external int _data51;
+  @Uint64()
+  external int _data52;
+  @Uint64()
+  external int _data53;
+  @Uint64()
+  external int _data54;
+  @Uint64()
+  external int _data55;
+  @Uint64()
+  external int _data56;
+  @Uint64()
+  external int _data57;
+  @Uint64()
+  external int _data58;
+  @Uint64()
+  external int _data59;
+  @Uint64()
+  external int _data60;
+  @Uint64()
+  external int _data61;
+  @Uint64()
+  external int _data62;
+  @Uint64()
+  external int _data63;
+  @Uint64()
+  external int _data64;
+  @Uint64()
+  external int _data65;
+  @Uint64()
+  external int _data66;
+  @Uint64()
+  external int _data67;
+  @Uint64()
+  external int _data68;
 }
 
 extension PointerWIN32_FIND_DATAExtension on Pointer<WIN32_FIND_DATA> {
@@ -3458,13 +3599,6 @@ extension PointerWIN32_FIND_DATAExtension on Pointer<WIN32_FIND_DATA> {
       cast<Uint8>().elementAt(44).cast<Utf16>().unpackString(MAX_PATH);
   String get cAlternateFileName =>
       cast<Uint8>().elementAt(44 + MAX_PATH * 2).cast<Utf16>().unpackString(14);
-
-  int get dwFileType =>
-      cast<Uint8>().elementAt(44 + (MAX_PATH + 14) * 2).cast<Uint32>().value;
-  int get dwCreatorType =>
-      cast<Uint8>().elementAt(48 + (MAX_PATH + 14) * 2).cast<Uint32>().value;
-  int get wFinderFlags =>
-      cast<Uint8>().elementAt(52 + (MAX_PATH + 14) * 2).cast<Uint16>().value;
 }
 
 // typedef struct tagWAVEOUTCAPSW {
