@@ -495,6 +495,14 @@ void main() {
       expect(sizeOf<DLLVERSIONINFO>(), equals(20));
     }
   });
+  test('Struct OSVERSIONINFO is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<OSVERSIONINFO>(), equals(276));
+    }
+    else {
+      expect(sizeOf<OSVERSIONINFO>(), equals(276));
+    }
+  });
   test('Struct SYSTEMTIME is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<SYSTEMTIME>(), equals(16));

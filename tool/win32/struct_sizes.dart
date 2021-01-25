@@ -206,9 +206,6 @@ const structSize32 = {
 };
 
 const skipStructs = [
-  // sizeOf<OSVERSIONINFO> returns 280 because Dart over-allocates storage.
-  'OSVERSIONINFO',
-
   // Packed structs
   'MCI_OPEN_PARMS', 'MCI_SEEK_PARMS',
   'TASKDIALOGCONFIG', 'TASKDIALOG_BUTTON',
