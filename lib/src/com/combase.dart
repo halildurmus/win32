@@ -8,6 +8,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import '../calloc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
@@ -22,9 +23,6 @@ class COMObject extends Struct {
   external Pointer<IntPtr> lpVtbl;
 
   Pointer<IntPtr> get vtable => Pointer.fromAddress(lpVtbl.value);
-
-  factory COMObject.allocate() =>
-      allocate<COMObject>().ref..lpVtbl = allocate<IntPtr>();
 }
 
 /// Converts a Dart string into an IID using the [IIDFromString] call.

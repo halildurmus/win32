@@ -49,6 +49,7 @@ import 'package:ffi/ffi.dart';
 
     buffer.writeln('''
 import '../com/combase.dart';
+import '../calloc.dart';
 import '../constants.dart';
 import '../constants_nodoc.dart';
 import '../exceptions.dart';

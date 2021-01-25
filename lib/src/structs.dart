@@ -36,23 +36,7 @@ import 'constants.dart';
 import 'constants_nodoc.dart';
 import 'extensions/set_string.dart';
 import 'extensions/unpack_utf16.dart';
-import 'kernel32.dart';
 import 'oleaut32.dart';
-
-Pointer<T> calloc<T extends NativeType>({int count = 1}) {
-  final totalSize = count * sizeOf<T>();
-  final heap = GetProcessHeap();
-
-  if (heap != NULL) {
-    final result = HeapAlloc(heap, HEAP_ZERO_MEMORY, totalSize);
-
-    if (result.address != 0) {
-      return result.cast<T>();
-    }
-  }
-
-  throw ArgumentError('Unable to allocate required memory.');
-}
 
 // typedef struct tagWNDCLASSW {
 //   UINT      style;
@@ -3229,6 +3213,9 @@ class BLUETOOTH_PIN_INFO extends Struct {
   external int _data15;
   @Int8()
   external int _data16;
+
+  // factory BLUETOOTH_PIN_INFO.allocate() =>
+  //     calloc<BLUETOOTH_PIN_INFO>(sizeOf<BLUETOOTH_PIN_INFO>()).ref;
 }
 
 extension PointerBLUETOOTH_PIN_INFOExtension on Pointer<BLUETOOTH_PIN_INFO> {

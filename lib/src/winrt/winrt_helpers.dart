@@ -10,6 +10,7 @@ import 'package:ffi/ffi.dart';
 
 import '../api-ms-win-core-winrt-l1-1-0.dart';
 import '../api-ms-win-core-winrt-string-l1-1-0.dart';
+import '../calloc.dart';
 import '../exceptions.dart';
 import '../extensions/unpack_utf16.dart';
 import '../generated/IInspectable.dart';
