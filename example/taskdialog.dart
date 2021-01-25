@@ -76,6 +76,7 @@ void showCustomTaskDialog() {
         'the rabbit hole goes.');
 
   final config = calloc<TASKDIALOGCONFIG>()
+    ..ref.cbSize = sizeOf<TASKDIALOGCONFIG>()
     ..ref.pszWindowTitle = TEXT('TaskDialogIndirect Sample')
     ..ref.pszMainInstruction = TEXT('Which pill will you take?')
     ..ref.pszContent =

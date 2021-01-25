@@ -212,9 +212,6 @@ const skipStructs = [
   // sizeOf<OSVERSIONINFO> returns 280 because Dart over-allocates storage.
   'OSVERSIONINFO',
 
-  // Should be allocated manually, rather than using sizeOf
-  'DLGTEMPLATE', 'DLGITEMTEMPLATE',
-
   // Packed structs
   'MCI_OPEN_PARMS', 'MCI_SEEK_PARMS',
   'TASKDIALOGCONFIG', 'TASKDIALOG_BUTTON',

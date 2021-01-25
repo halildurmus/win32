@@ -407,6 +407,20 @@ void main() {
       expect(sizeOf<INITCOMMONCONTROLSEX>(), equals(8));
     }
   });
+  test('Struct DLGTEMPLATE is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<DLGTEMPLATE>(), equals(18));
+    } else {
+      expect(sizeOf<DLGTEMPLATE>(), equals(18));
+    }
+  });
+  test('Struct DLGITEMTEMPLATE is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<DLGITEMTEMPLATE>(), equals(18));
+    } else {
+      expect(sizeOf<DLGITEMTEMPLATE>(), equals(18));
+    }
+  });
   test('Struct DLLVERSIONINFO is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<DLLVERSIONINFO>(), equals(20));

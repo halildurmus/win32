@@ -56,7 +56,7 @@ int enumMonitorCallback(int hMonitor, int hDC, Pointer lpRect, int lParam) {
 bool testBitmask(int bitmask, int value) => bitmask & value == value;
 
 int findPrimaryMonitor(List<int> monitors) {
-  final monitorInfo = calloc<MONITORINFO>();
+  final monitorInfo = calloc<MONITORINFO>()..ref.cbSize = sizeOf<MONITORINFO>();
 
   for (final monitor in monitors) {
     final result = GetMonitorInfo(monitor, monitorInfo);

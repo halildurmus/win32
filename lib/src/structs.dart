@@ -236,9 +236,6 @@ class STARTUPINFO extends Struct {
   external int hStdOutput;
   @IntPtr()
   external int hStdError;
-
-  factory STARTUPINFO.allocate() =>
-      calloc<STARTUPINFO>().ref..cb = sizeOf<STARTUPINFO>();
 }
 
 // typedef struct tagBIND_OPTS
@@ -390,9 +387,6 @@ class STARTUPINFOEX extends Struct {
   @IntPtr()
   external int hStdError;
   external Pointer lpAttributeList;
-
-  factory STARTUPINFOEX.allocate() =>
-      calloc<STARTUPINFOEX>().ref..cb = sizeOf<STARTUPINFOEX>();
 }
 
 // typedef struct _SECURITY_ATTRIBUTES {
@@ -515,12 +509,6 @@ class VARIANT extends Struct {
   external Pointer ptr2;
 
   bool get isPointer => vt & VARENUM.VT_PTR == VARENUM.VT_PTR;
-
-  factory VARIANT.allocate() => calloc<VARIANT>().ref;
-
-  factory VARIANT.fromPointer(Pointer ptr) => VARIANT.allocate()
-    ..vt = VARENUM.VT_PTR
-    ..ptr = ptr;
 }
 
 // typedef struct _COMDLG_FILTERSPEC {
@@ -573,9 +561,6 @@ class MONITORINFO extends Struct {
 
   @Uint32()
   external int dwFlags;
-
-  factory MONITORINFO.allocate() =>
-      calloc<MONITORINFO>().ref..cbSize = sizeOf<MONITORINFO>();
 }
 
 const PHYSICAL_MONITOR_DESCRIPTION_SIZE = 128;
@@ -706,9 +691,6 @@ class CHOOSECOLOR extends Struct {
 
   external Pointer<IntPtr> lpfnHook;
   external Pointer<Uint16> lpTemplateName;
-
-  factory CHOOSECOLOR.allocate() =>
-      calloc<CHOOSECOLOR>().ref..lStructSize = sizeOf<CHOOSECOLOR>();
 }
 
 // typedef struct tagFINDREPLACEW {
@@ -1648,9 +1630,6 @@ class SHELLEXECUTEINFO extends Struct {
   external int hMonitor;
   @IntPtr()
   external int hProcess;
-
-  factory SHELLEXECUTEINFO.allocate() =>
-      calloc<SHELLEXECUTEINFO>().ref..cbSize = sizeOf<SHELLEXECUTEINFO>();
 }
 
 // typedef struct _SHQUERYRBINFO {
@@ -1671,9 +1650,6 @@ class SHQUERYRBINFO extends Struct {
   external int i64Size;
   @Int64()
   external int i64NumItems;
-
-  factory SHQUERYRBINFO.allocate() =>
-      calloc<SHQUERYRBINFO>().ref..cbSize = sizeOf<SHQUERYRBINFO>();
 }
 
 // typedef struct _GUID {
@@ -2284,10 +2260,17 @@ class INITCOMMONCONTROLSEX extends Struct {
   external int dwSize;
   @Uint32()
   external int dwICC;
-
-  factory INITCOMMONCONTROLSEX.allocate() => calloc<INITCOMMONCONTROLSEX>().ref
-    ..dwSize = sizeOf<INITCOMMONCONTROLSEX>();
 }
+
+// typedef struct {
+//   DWORD style;
+//   DWORD dwExtendedStyle;
+//   WORD  cdit;
+//   short x;
+//   short y;
+//   short cx;
+//   short cy;
+// } DLGTEMPLATE;
 
 /// Defines the dimensions and style of a dialog box. This structure, always the
 /// first in a standard template for a dialog box, also specifies the number of
@@ -2296,10 +2279,16 @@ class INITCOMMONCONTROLSEX extends Struct {
 ///
 /// {@category Struct}
 class DLGTEMPLATE extends Struct {
-  @Uint32()
-  external int style;
-  @Uint32()
-  external int dwExtendedStyle;
+  // Work around struct packing issues in Dart
+  @Uint16()
+  external int _styleHi;
+  @Uint16()
+  external int _styleLo;
+  @Uint16()
+  external int _dwExtendedStyleHi;
+  @Uint16()
+  external int _dwExtendedStyleLo;
+
   @Uint16()
   external int cdit;
   @Uint16()
@@ -2310,6 +2299,19 @@ class DLGTEMPLATE extends Struct {
   external int cx;
   @Uint16()
   external int cy;
+
+  int get style => (_styleHi << 16) + _styleLo;
+  int get dwExtendedStyle => (_dwExtendedStyleHi << 16) + _dwExtendedStyleLo;
+
+  set style(int value) {
+    _styleHi = (value & 0xFF00) << 16;
+    _styleLo = value & 0xFF;
+  }
+
+  set dwExtendedStyle(int value) {
+    _dwExtendedStyleHi = (value & 0xFF00) << 16;
+    _dwExtendedStyleLo = value & 0xFF;
+  }
 }
 
 /// Defines the dimensions and style of a control in a dialog box. One or more
@@ -2318,11 +2320,15 @@ class DLGTEMPLATE extends Struct {
 ///
 /// {@category Struct}
 class DLGITEMTEMPLATE extends Struct {
-  @Uint32()
-  external int style;
-
-  @Uint32()
-  external int dwExtendedStyle;
+  // Work around struct packing issues in Dart
+  @Uint16()
+  external int _styleHi;
+  @Uint16()
+  external int _styleLo;
+  @Uint16()
+  external int _dwExtendedStyleHi;
+  @Uint16()
+  external int _dwExtendedStyleLo;
 
   @Int16()
   external int x;
@@ -2339,10 +2345,18 @@ class DLGITEMTEMPLATE extends Struct {
   @Uint16()
   external int id;
 
-  // sizeOf returns 20, because Dart over-allocates to DWORD boundaries. Instead
-  // we allocate the *actual* size of this.
-  factory DLGITEMTEMPLATE.allocate() =>
-      calloc<Uint8>(count: 18).cast<DLGITEMTEMPLATE>().ref;
+  int get style => (_styleHi << 16) + _styleLo;
+  int get dwExtendedStyle => (_dwExtendedStyleHi << 16) + _dwExtendedStyleLo;
+
+  set style(int value) {
+    _styleHi = (value & 0xFF00) << 16;
+    _styleLo = value & 0xFF;
+  }
+
+  set dwExtendedStyle(int value) {
+    _dwExtendedStyleHi = (value & 0xFF00) << 16;
+    _dwExtendedStyleLo = value & 0xFF;
+  }
 }
 
 // typedef struct _TASKDIALOGCONFIG {
@@ -2435,9 +2449,6 @@ class TASKDIALOGCONFIG extends Struct {
   external int lpCallbackData;
   @Uint32()
   external int cxWidth;
-
-  factory TASKDIALOGCONFIG.allocate() =>
-      calloc<TASKDIALOGCONFIG>().ref..cbSize = sizeOf<TASKDIALOGCONFIG>();
 }
 
 // typedef struct _TASKDIALOG_BUTTON
