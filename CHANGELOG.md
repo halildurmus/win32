@@ -2,6 +2,7 @@
 
 - Workarounds to fix sizing of BLUETOOTH_PIN_INFO and SHITEMID structs.
 - Add waveOut* APIs from winmm.dll (thanks @slightfoot)
+- Updated memory allocation due to FFI breaking changes.
 
 ## 2.0.0-nullsafety.8
 
