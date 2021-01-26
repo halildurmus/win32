@@ -59,7 +59,7 @@ class WNDCLASS extends Struct {
   @Uint32()
   external int style;
 
-  external Pointer<NativeFunction> lpfnWndProc;
+  external Pointer<NativeFunction<WindowProc>> lpfnWndProc;
 
   @Int32()
   external int cbClsExtra;
@@ -714,7 +714,7 @@ class FINDREPLACE extends Struct {
   external int wReplaceWithLen;
   @IntPtr()
   external int lCustData;
-  external Pointer<NativeFunction<LPFRHookProc>> lpfnHook;
+  external Pointer<NativeFunction<DlgProc>> lpfnHook;
   external Pointer<Utf16> lpTemplateName;
 }
 
@@ -763,7 +763,7 @@ class CHOOSEFONT extends Struct {
   @IntPtr()
   external int lCustData;
 
-  external Pointer<NativeFunction> lpfnHook;
+  external Pointer<NativeFunction<DlgProc>> lpfnHook;
   external Pointer<Utf16> lpTemplateName;
   @IntPtr()
   external int hInstance;
@@ -849,7 +849,7 @@ class OPENFILENAME extends Struct {
   @IntPtr()
   external int lCustData;
 
-  external Pointer<NativeFunction> lpfnHook;
+  external Pointer<NativeFunction<DlgProc>> lpfnHook;
   external Pointer<Utf16> lpTemplateName;
   external Pointer<Void> pvReserved;
 
@@ -2488,7 +2488,7 @@ class TASKDIALOGCONFIG extends Struct {
   external int hFooterIcon;
 
   external Pointer<Utf16> pszFooter;
-  external Pointer<NativeFunction> pfCallback;
+  external Pointer<NativeFunction<TaskDialogCallbackProc>> pfCallback;
 
   @IntPtr()
   external int lpCallbackData;
