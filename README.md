@@ -108,6 +108,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `notepad\notepad.dart` | Lightweight replica of the Windows notepad applet     |
 | `paint.dart`       | Demonstrates simple GDI drawing and min/max window sizing |
 | `play_sound.dart`  | Plays a WAV file through the Windows PlaySound API        |
+| `screenshot.dart`  | Takes a screenshot of the current desktop                 |
 | `scroll.dart`      | Example of horizontal and vertical scrolling text window  |
 | `sendinput.dart`   | Sends keyboard and mouse input to another window          |
 | `snake.dart`       | Snake game using various GDI features                     |
