@@ -6,38 +6,6 @@
 
 // ignore_for_file: camel_case_types
 
-// RoInitialize enum
-/// {@category Enum}
-class RO_INIT_TYPE {
-  static const RO_INIT_SINGLETHREADED = 0;
-  static const RO_INIT_MULTITHREADED = 1;
-}
-
-// Windows Runtime errors
-/// @nodoc
-const RO_E_METADATA_NAME_NOT_FOUND = 0x8000000F;
-
-/// @nodoc
-const RO_E_METADATA_NAME_IS_NAMESPACE = 0x80000010;
-
-/// @nodoc
-const RO_E_METADATA_INVALID_TYPE_FORMAT = 0x80000011;
-
-/// @nodoc
-const RO_E_INVALID_METADATA_FILE = 0x80000012;
-
-/// @nodoc
-const RO_E_CLOSED = 0x80000013;
-
-/// @nodoc
-const RO_E_EXCLUSIVE_WRITE = 0x80000014;
-
-/// @nodoc
-const RO_E_CHANGE_NOTIFICATION_IN_PROGRESS = 0x80000015;
-
-/// @nodoc
-const RO_E_ERROR_STRING_NOT_FOUND = 0x80000016;
-
 /// @nodoc
 const CLSID_CorMetaDataDispenser = '{E5CB7A31-7512-11D2-89CE-0080C792E5D8}';
 
