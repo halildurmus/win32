@@ -338,38 +338,7 @@ class SYSTEM_BATTERY_STATE extends Struct {
 ///
 /// {@category Struct}
 class STARTUPINFOEX extends Struct {
-  @Uint32()
-  external int cb;
-  external Pointer<Utf16> lpReserved;
-  external Pointer<Utf16> lpDesktop;
-  external Pointer<Utf16> lpTitle;
-  @Uint32()
-  external int dwX;
-  @Uint32()
-  external int dwY;
-  @Uint32()
-  external int dwXSize;
-  @Uint32()
-  external int dwYSize;
-  @Uint32()
-  external int dwXCountChars;
-  @Uint32()
-  external int dwYCountChars;
-  @Uint32()
-  external int dwFillAttribute;
-  @Uint32()
-  external int dwFlags;
-  @Uint16()
-  external int wShowWindow;
-  @Uint16()
-  external int cbReserved2;
-  external Pointer<Uint8> lpReserved2;
-  @IntPtr()
-  external int hStdInput;
-  @IntPtr()
-  external int hStdOutput;
-  @IntPtr()
-  external int hStdError;
+  external STARTUPINFO StartupInfo;
   external Pointer lpAttributeList;
 }
 
@@ -3213,9 +3182,6 @@ class BLUETOOTH_PIN_INFO extends Struct {
   external int _data15;
   @Int8()
   external int _data16;
-
-  // factory BLUETOOTH_PIN_INFO.allocate() =>
-  //     calloc<BLUETOOTH_PIN_INFO>(sizeOf<BLUETOOTH_PIN_INFO>()).ref;
 }
 
 extension PointerBLUETOOTH_PIN_INFOExtension on Pointer<BLUETOOTH_PIN_INFO> {
