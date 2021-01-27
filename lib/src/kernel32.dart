@@ -2181,6 +2181,23 @@ int SetStdHandle(int nStdHandle, int hHandle) {
   return _SetStdHandle(nStdHandle, hHandle);
 }
 
+/// Enables an application to inform the system that it is in use, thereby
+/// preventing the system from entering sleep or turning off the display
+/// while the application is running.
+///
+/// ```c
+/// EXECUTION_STATE SetThreadExecutionState(
+///   EXECUTION_STATE esFlags
+///   );
+/// ```
+/// {@category kernel32}
+int SetThreadExecutionState(int esFlags) {
+  final _SetThreadExecutionState = _kernel32.lookupFunction<
+      Uint32 Function(Uint32 esFlags),
+      int Function(int esFlags)>('SetThreadExecutionState');
+  return _SetThreadExecutionState(esFlags);
+}
+
 /// Suspends the execution of the current thread until the time-out
 /// interval elapses.
 ///

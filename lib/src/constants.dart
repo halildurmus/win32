@@ -411,6 +411,31 @@ const HEAP_REALLOC_IN_PLACE_ONLY = 0x00000010;
 const HEAP_CREATE_ENABLE_EXECUTE = 0x00040000;
 
 // -----------------------------------------------------------------------------
+// Thread execution states
+// -----------------------------------------------------------------------------
+
+/// Forces the system to be in the working state by resetting the system idle
+/// timer.
+const ES_SYSTEM_REQUIRED = 0x00000001;
+
+/// Forces the display to be on by resetting the display idle timer.
+
+const ES_DISPLAY_REQUIRED = 0x00000002;
+
+/// This value is not supported. If ES_USER_PRESENT is combined with other
+/// esFlags values, the call will fail and none of the specified states will be
+/// set.
+const ES_USER_PRESENT = 0x00000004;
+
+/// Enables away mode. This value must be specified with ES_CONTINUOUS.
+const ES_AWAYMODE_REQUIRED = 0x00000040;
+
+/// Informs the system that the state being set should remain in effect until
+/// the next call that uses ES_CONTINUOUS and one of the other state flags is
+/// cleared.
+const ES_CONTINUOUS = 0x80000000;
+
+// -----------------------------------------------------------------------------
 // Format message flags
 // -----------------------------------------------------------------------------
 

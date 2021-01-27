@@ -2155,6 +2155,11 @@
         "dllLibrary": "gdi32",
         "comment": "The SetTextColor function sets the text color for the specified device context to the specified color."
     },
+    "SetThreadExecutionState": {
+        "prototype": "EXECUTION_STATE SetThreadExecutionState(\n  EXECUTION_STATE esFlags\n  );",
+        "dllLibrary": "kernel32",
+        "comment": "Enables an application to inform the system that it is in use, thereby preventing the system from entering sleep or turning off the display while the application is running."
+    },
     "SetTimer": {
         "prototype": "UINT_PTR SetTimer(\n  HWND      hWnd,\n  UINT_PTR  nIDEvent,\n  UINT      uElapse,\n  TIMERPROC lpTimerFunc\n);",
         "dllLibrary": "user32",
