@@ -32,7 +32,7 @@ int loadDartIcon() {
 final _localWndProcs = <LocalWndProc>[];
 
 /// Use in iterateLocalWndProcs
-void registryWdnProc(LocalWndProc proc) => _localWndProcs.add(proc);
+void registerWndProc(LocalWndProc proc) => _localWndProcs.add(proc);
 
 void deregisterWndProc(LocalWndProc proc) {
   _localWndProcs.remove(proc);

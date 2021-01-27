@@ -6,6 +6,6 @@ import '_window.dart' as window;
 void main() {
   final hWnd = window.createHidden();
   tray.addIcon(hWndParent: hWnd);
-  app.registryWdnProc(menu.wndProc);
+  app.registerWndProc(menu.wndProc);
   app.exec();
 }

@@ -38,7 +38,7 @@ void addIcon({required int hWndParent}) {
   nid.uVersion = 4;
   Shell_NotifyIcon(NIM_SETVERSION, _nid);
 
-  app.registryWdnProc(_trayWndProc);
+  app.registerWndProc(_trayWndProc);
 }
 
 void removeIcon() {

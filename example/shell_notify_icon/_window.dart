@@ -30,7 +30,7 @@ int createHidden() {
       NULL,
       app.hInst,
       nullptr);
-  app.registryWdnProc(_windowWndProc);
+  app.registerWndProc(_windowWndProc);
   return hWnd;
 }
 
