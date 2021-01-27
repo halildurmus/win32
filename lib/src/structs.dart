@@ -1463,7 +1463,7 @@ class INPUT extends Struct {
   external int _data4;
 }
 
-extension PointerINPUTExtension on Pointer<INPUT> {
+extension Pointer_INPUT_Extension on Pointer<INPUT> {
   // Location adjusts for padding on 32-bit or 64-bit
   MOUSEINPUT get mi =>
       MOUSEINPUT(cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
