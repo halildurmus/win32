@@ -4412,6 +4412,23 @@ class VARENUM {
   static const VT_TYPEMASK = 0xff;
 }
 
+/// Prevents the function from attempting to coerce an object to a fundamental
+/// type by getting the Value property. Applications should set this flag only
+/// if necessary, because it makes their behavior inconsistent with other
+/// applications.
+const VARIANT_NOVALUEPROP = 0x01;
+
+/// Converts a VT_BOOL value to a string containing either "True" or "False".
+const VARIANT_ALPHABOOL = 0x02;
+
+/// For conversions to or from VT_BSTR, passes LOCALE_NOUSEROVERRIDE to the core
+/// coercion routines.
+const VARIANT_NOUSEROVERRIDE = 0x04;
+
+/// For conversions from VT_BOOL to VT_BSTR and back, uses the language
+/// specified by the locale in use on the local computer.
+const VARIANT_LOCALBOOL = 0x10;
+
 // -----------------------------------------------------------------------------
 // Multimedia constants
 // -----------------------------------------------------------------------------
