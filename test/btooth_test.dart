@@ -1,9 +1,8 @@
+@TestOn('windows')
+
 import 'dart:ffi';
 import 'dart:typed_data';
-
-@TestOn('windows')
 import 'package:test/test.dart';
-
 import 'package:win32/win32.dart';
 
 void main() {
