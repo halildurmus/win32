@@ -69,6 +69,8 @@ const mapping = <String, String>{
   'GET_FILEEX_INFO_LEVELS': 'Int32',
   'RO_INIT_TYPE': 'Int32',
 
+  'EXECUTION_STATE': 'Uint32',
+
   // Callbacks
   'DLGPROC': 'Pointer<NativeFunction<DlgProc>>',
   'WNDENUMPROC': 'Pointer<NativeFunction<EnumWindowsProc>>',

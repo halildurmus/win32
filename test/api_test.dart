@@ -1015,6 +1015,13 @@ void main() {
           int Function(int nStdHandle, int hHandle)>('SetStdHandle');
       expect(SetStdHandle, isA<Function>());
     });
+    test('Can instantiate SetThreadExecutionState', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetThreadExecutionState = kernel32.lookupFunction<
+          Uint32 Function(Uint32 esFlags),
+          int Function(int esFlags)>('SetThreadExecutionState');
+      expect(SetThreadExecutionState, isA<Function>());
+    });
     test('Can instantiate Sleep', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final Sleep = kernel32.lookupFunction<
