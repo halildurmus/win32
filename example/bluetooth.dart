@@ -22,7 +22,7 @@ void findBluetoothDevices(int btRadioHandle) {
     final firstDeviceHandle = BluetoothFindFirstDevice(params, info);
 
     if (firstDeviceHandle != NULL) {
-      print(info.szName);
+      print(info.ref.szName);
       BluetoothFindDeviceClose(firstDeviceHandle);
     } else {
       print('No devices found.');
@@ -48,7 +48,7 @@ void main() {
       final res = BluetoothGetRadioInfo(hRadio.value, radioInfo);
       if (res == ERROR_SUCCESS) {
         print('Got radio info.\n');
-        print('Radio name: ${radioInfo.szName}');
+        print('Radio name: ${radioInfo.ref.szName}');
       }
 
       findBluetoothDevices(hRadio.value);

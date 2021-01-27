@@ -29,7 +29,7 @@ void addIcon({required int hWndParent}) {
   final nid = _nid.ref;
   nid.hWnd = hWndParent;
   nid.uFlags = NIF_ICON | NIF_TIP | NIF_MESSAGE | NIF_SHOWTIP | NIF_GUID;
-  _nid.szTip = 'Dart tray';
+  nid.szTip = 'Dart tray';
   nid.uCallbackMessage = app.EVENT_TRAY_NOTIFY;
   nid.hIcon = app.loadDartIcon();
 

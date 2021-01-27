@@ -4,6 +4,10 @@ analyzer:
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false
+
+  # Until fix rolls into Dart
+  errors:
+    non_constant_type_argument_warning: ignore
     
 linter:
   rules:

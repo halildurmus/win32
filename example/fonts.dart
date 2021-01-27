@@ -16,7 +16,7 @@ int enumerateFonts(
   // Get extended information from the font
   final logFontEx = logFont.cast<ENUMLOGFONTEX>();
 
-  fontNames.add(logFontEx.elfFullName);
+  fontNames.add(logFontEx.ref.elfFullName);
   return TRUE; // continue enumeration
 }
 
