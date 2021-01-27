@@ -42,8 +42,8 @@ void main() {
   // on a particular host computer.
   final pLoc = IWbemLocator(calloc<COMObject>());
 
-  final clsid = calloc<GUID>()..setGUID(CLSID_WbemLocator);
-  final iid = calloc<GUID>()..setGUID(IID_IWbemLocator);
+  final clsid = calloc<GUID>()..ref.setGUID(CLSID_WbemLocator);
+  final iid = calloc<GUID>()..ref.setGUID(IID_IWbemLocator);
 
   hr = CoCreateInstance(
       clsid, nullptr, CLSCTX_INPROC_SERVER, iid, pLoc.ptr.cast());
@@ -150,13 +150,10 @@ void main() {
 
       final clsObj = IWbemClassObject(pClsObj.cast());
 
-      // A VARIANT is a union struct, which can't be directly represented by
-      // FFI yet. In this case we know that the VARIANT can only contain a BSTR
-      // so we are able to use a specialized variant.
       final vtProp = calloc<VARIANT>();
       hr = clsObj.Get(TEXT('Name'), 0, vtProp, nullptr, nullptr);
       if (SUCCEEDED(hr)) {
-        print('Process: ${vtProp.ref.ptr.cast<Utf16>().unpackString(256)}');
+        print('Process: ${vtProp.ref.bstrVal.unpackString(256)}');
       }
       // Free BSTRs in the returned variants
       VariantClear(vtProp);

@@ -45,7 +45,7 @@ String getFolderPath() {
 
 /// Get the path for a known Windows folder, using the modern API
 String getKnownFolderPath() {
-  final knownFolderID = calloc<GUID>()..setGUID(FOLDERID_Desktop);
+  final knownFolderID = calloc<GUID>()..ref.setGUID(FOLDERID_Desktop);
   final pathPtrPtr = allocate<Pointer<Utf16>>();
 
   try {

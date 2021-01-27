@@ -13,7 +13,7 @@ void main() {
     final hr = CoCreateGuid(guid);
     expect(hr, equals(S_OK));
 
-    final guid2 = calloc<GUID>()..setGUID(guid.ref.toString());
+    final guid2 = calloc<GUID>()..ref.setGUID(guid.ref.toString());
     expect(guid.ref.toString(), equals(guid2.ref.toString()));
 
     free(guid2);
@@ -23,7 +23,8 @@ void main() {
   test('GUID creation failure', () {
     // Note the rogue 'X' here
     expect(
-        () => calloc<GUID>()..setGUID('{X161CA9B-9409-4A77-7327-8B8D3363C6B9}'),
+        () => calloc<GUID>()
+          ..ref.setGUID('{X161CA9B-9409-4A77-7327-8B8D3363C6B9}'),
         throwsFormatException);
   });
 
@@ -62,8 +63,8 @@ void main() {
     expect(hr, equals(S_OK));
 
     final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..setGUID(CLSID_FileSaveDialog);
-    final iid = calloc<GUID>()..setGUID(IID_IFileSaveDialog);
+    final clsid = calloc<GUID>()..ref.setGUID(CLSID_FileSaveDialog);
+    final iid = calloc<GUID>()..ref.setGUID(IID_IFileSaveDialog);
 
     hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
     expect(hr, equals(S_OK));
@@ -83,9 +84,9 @@ void main() {
 
     final ptrFactory = calloc<COMObject>();
     final ptrSaveDialog = calloc<COMObject>();
-    final clsid = calloc<GUID>()..setGUID(CLSID_FileSaveDialog);
-    final iidClassFactory = calloc<GUID>()..setGUID(IID_IClassFactory);
-    final iidFileSaveDialog = calloc<GUID>()..setGUID(IID_IFileSaveDialog);
+    final clsid = calloc<GUID>()..ref.setGUID(CLSID_FileSaveDialog);
+    final iidClassFactory = calloc<GUID>()..ref.setGUID(IID_IClassFactory);
+    final iidFileSaveDialog = calloc<GUID>()..ref.setGUID(IID_IFileSaveDialog);
 
     hr = CoGetClassObject(
         clsid, CLSCTX_ALL, nullptr, iidClassFactory, ptrFactory.cast());

@@ -24,6 +24,8 @@ void main()
     printf("sizeof(long) is %zu\n", sizeof(long));
     printf("sizeof(short) is %zu\n", sizeof(short));
     printf("sizeof(char) is %zu\n", sizeof(char));
+    printf("sizeof(float) is %zu\n", sizeof(float));
+    printf("sizeof(double) is %zu\n", sizeof(double));
 
     printf("sizeof(LPCSTR) is %zu\n", sizeof(LPCSTR));
     printf("sizeof(LPCWSTR) is %zu\n", sizeof(LPCWSTR));

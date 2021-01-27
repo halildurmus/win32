@@ -151,8 +151,8 @@ class NetworkListManager extends INetworkListManager {
 
   factory NetworkListManager.createInstance() {
     final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..setGUID(CLSID_NetworkListManager);
-    final iid = calloc<GUID>()..setGUID(IID_INetworkListManager);
+    final clsid = calloc<GUID>()..ref.setGUID(CLSID_NetworkListManager);
+    final iid = calloc<GUID>()..ref.setGUID(IID_INetworkListManager);
 
     try {
       final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
