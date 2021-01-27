@@ -1,4 +1,4 @@
-name: Build
+name: Dart
 
 on:
   push:
@@ -7,41 +7,38 @@ on:
     branches: [ master ]
 
 jobs:
-  test:
+  build:
     runs-on: ${{matrix.os}}
     strategy:
+      # We want to see the results on edge even if beta fails (and vice versa).
+      # This prevents one failure from stopping the entire run.
       fail-fast: false
+
       matrix:
         # Include newest and latest versions of Windows, plus Ubuntu (to make
         # sure that tests don't fail on a non-supported platform).
-
         os: [windows-latest, windows-2016, ubuntu-latest]
 
         # Stable does not support null safety yet.
-        # sdk: [stable, beta, dev, edge]
-
         # Beta does not support structs by value or nested structs.
-        # sdk: [beta, dev, edge]
-        sdk: [dev, edge]
+        sdk: [dev, main]
 
         # One SDK version is plenty on Ubuntu. It's a safety test. Similarly,
         # nobody is running the oldest Windows on leading-edge Dart releases.
         exclude:
           - os: ubuntu-latest
-            sdk: edge
+            sdk: main
           - os: windows-2016
-            sdk: edge
+            sdk: main
 
     steps:
       - name: Fetch sources
         uses: actions/checkout@v2
 
       - name: Set up Dart
-        uses: cedx/setup-dart@v2
+        uses: dart-lang/setup-dart@v0.4
         with:
-          architecture: x64
-          release-channel: ${{matrix.sdk}}
-          version: latest
+          sdk: ${{matrix.sdk}}
 
       - name: Print Dart SDK version
         run: dart --version
@@ -52,8 +49,8 @@ jobs:
       - name: Verify formatting
         run: dart format --output=none --set-exit-if-changed .
 
-      # - name: Analyze project source
-      #   run: dart analyze --fatal-infos
+      - name: Analyze project source
+        run: dart analyze --fatal-warnings
 
       - name: Run tests
         run: dart test

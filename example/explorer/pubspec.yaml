@@ -14,7 +14,7 @@ dependencies:
     path: ../../
 
 dev_dependencies:
-  lint: ^1.5.1
+  pedantic: ^1.10.0-nullsafety.3
 
 ## This package is not intended for publishing; it's just an example.
 publish_to: none
