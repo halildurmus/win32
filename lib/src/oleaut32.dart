@@ -100,6 +100,26 @@ int SysStringLen(Pointer pbstr) {
   return _SysStringLen(pbstr);
 }
 
+/// Converts a variant from one type to another.
+///
+/// ```c
+/// HRESULT VariantChangeType(
+///   VARIANTARG       *pvargDest,
+///   const VARIANTARG *pvarSrc,
+///   USHORT           wFlags,
+///   VARTYPE          vt
+/// );
+/// ```
+/// {@category oleaut32}
+int VariantChangeType(Pointer pvargDest, Pointer pvarSrc, int wFlags, int vt) {
+  final _VariantChangeType = _oleaut32.lookupFunction<
+      Int32 Function(
+          Pointer pvargDest, Pointer pvarSrc, Uint16 wFlags, Uint32 vt),
+      int Function(Pointer pvargDest, Pointer pvarSrc, int wFlags,
+          int vt)>('VariantChangeType');
+  return _VariantChangeType(pvargDest, pvarSrc, wFlags, vt);
+}
+
 /// Clears a variant.
 ///
 /// ```c
@@ -112,6 +132,22 @@ int VariantClear(Pointer pvarg) {
   final _VariantClear = _oleaut32.lookupFunction<Int32 Function(Pointer pvarg),
       int Function(Pointer pvarg)>('VariantClear');
   return _VariantClear(pvarg);
+}
+
+/// Frees the destination variant and makes a copy of the source variant.
+///
+/// ```c
+/// HRESULT VariantCopy(
+///   VARIANTARG       *pvargDest,
+///   const VARIANTARG *pvargSrc
+/// );
+/// ```
+/// {@category oleaut32}
+int VariantCopy(Pointer pvargDest, Pointer pvargSrc) {
+  final _VariantCopy = _oleaut32.lookupFunction<
+      Int32 Function(Pointer pvargDest, Pointer pvargSrc),
+      int Function(Pointer pvargDest, Pointer pvargSrc)>('VariantCopy');
+  return _VariantCopy(pvargDest, pvargSrc);
 }
 
 /// Initializes a variant.

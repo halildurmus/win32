@@ -4234,12 +4234,28 @@ void main() {
           int Function(Pointer pbstr)>('SysStringLen');
       expect(SysStringLen, isA<Function>());
     });
+    test('Can instantiate VariantChangeType', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final VariantChangeType = oleaut32.lookupFunction<
+          Int32 Function(
+              Pointer pvargDest, Pointer pvarSrc, Uint16 wFlags, Uint32 vt),
+          int Function(Pointer pvargDest, Pointer pvarSrc, int wFlags,
+              int vt)>('VariantChangeType');
+      expect(VariantChangeType, isA<Function>());
+    });
     test('Can instantiate VariantClear', () {
       final oleaut32 = DynamicLibrary.open('oleaut32.dll');
       final VariantClear = oleaut32.lookupFunction<
           Int32 Function(Pointer pvarg),
           int Function(Pointer pvarg)>('VariantClear');
       expect(VariantClear, isA<Function>());
+    });
+    test('Can instantiate VariantCopy', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final VariantCopy = oleaut32.lookupFunction<
+          Int32 Function(Pointer pvargDest, Pointer pvargSrc),
+          int Function(Pointer pvargDest, Pointer pvargSrc)>('VariantCopy');
+      expect(VariantCopy, isA<Function>());
     });
     test('Can instantiate VariantInit', () {
       final oleaut32 = DynamicLibrary.open('oleaut32.dll');
