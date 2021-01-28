@@ -49,11 +49,8 @@ jobs:
       - name: Verify formatting
         run: dart format --output=none --set-exit-if-changed .
 
-      # Analyze fails because there's a Flutter example buried in a child
-      # folder, and even though the project itself runs fine (ana analysis
-      # passes locally), analyzer due to missing Flutter dependencies in this
-      # specific example.
-      # - name: Analyze project source run: dart analyze --fatal-warnings
+      - name: Analyze project source
+        run: dart analyze --fatal-warnings
 
       - name: Run tests
         run: dart test
