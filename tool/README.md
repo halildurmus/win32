@@ -29,10 +29,10 @@ types and generate the classes from them.
 # Deployment tooling
 
 Documentation is stored in the `gh-pages` branch. I found a very useful Bash
-script online to deploy the documentation without requiring arcane git mastery.
-To use this, run `dartdoc` to update the docs, and then call `deploy/deploy.sh`
-to update the branch. I use this utility from a macOS machine; I expect it would
-also work from a WSL 2 instance.
+script online to deploy the documentation without requiring arcane git
+knowledge. To use this, run `dartdoc` to update the docs, and then call
+`deploy/deploy.sh` to update the branch. I use this utility from a macOS
+machine; I expect it would also work from a WSL 2 instance.
 
 # Other utilities
 
