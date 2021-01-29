@@ -49,9 +49,14 @@ jobs:
         run: dart format --output=none --set-exit-if-changed .
 
       - name: Analyze project source
-        run: | 
+        run: dart analyze --fatal-warnings
+
+      - name: Check winmd tool
+        run: |
+          cd tool/winmd
+          dart pub get
           dart analyze --fatal-warnings
-          dart analyze --fatal-warnings tool/winmd
+          cd ../..
 
       - name: Run tests
         run: dart test
