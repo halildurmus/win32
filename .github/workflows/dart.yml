@@ -26,9 +26,13 @@ jobs:
         # nobody is running the oldest Windows on leading-edge Dart releases.
         exclude:
           - os: ubuntu-latest
-            sdk: dev, main
+            sdk: main
+          - os: ubuntu-latest
+            sdk: beta
           - os: windows-2016
-            sdk: dev, main
+            sdk: main
+          - os: windows-2016
+            sdk: dev
 
     steps:
       - name: Fetch sources
