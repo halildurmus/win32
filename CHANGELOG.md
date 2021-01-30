@@ -1,3 +1,7 @@
+## 1.7.4+1
+
+- Fix broken links as a result of renaming default branch from master -> main
+
 ## 1.7.4
 
 - Add SysAllocString, SysFreeString, SysStringByteLen, SysStringLen,
