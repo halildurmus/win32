@@ -966,6 +966,51 @@
         "dllLibrary": "user32",
         "comment": "Returns the dots per inch (dpi) value for the associated window."
     },
+    "GetUserDefaultLangID": {
+        "prototype": "LANGID GetUserDefaultLangID();",
+        "dllLibrary": "kernel32",
+        "comment": "Returns the language identifier of the Region Format setting for the current user."
+    },
+    "GetUserDefaultLocaleName": {
+        "prototype": "int GetUserDefaultLocaleName(\n  LPWSTR lpLocaleName,\n  int    cchLocaleName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the user default locale name."
+    },
+    "GetSystemDefaultLocaleName": {
+        "prototype": "int GetSystemDefaultLocaleName(\n  LPWSTR lpLocaleName,\n  int    cchLocaleName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the system default locale name."
+    },
+    "GetSystemDefaultLangID": {
+        "prototype": "LANGID GetSystemDefaultLangID();",
+        "dllLibrary": "kernel32",
+        "comment": "Returns the language identifier for the system locale."
+    },
+    "GetThreadLocale": {
+        "prototype": "LCID GetThreadLocale();",
+        "dllLibrary": "kernel32",
+        "comment": "Returns the locale identifier of the current locale for the calling thread."
+    },
+    "SetThreadUILanguage": {
+        "prototype": "LANGID SetThreadUILanguage(\n  LANGID LangId\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the user interface language for the current thread."
+    },
+    "GetThreadUILanguage": {
+        "prototype": "LANGID GetThreadUILanguage();",
+        "dllLibrary": "kernel32",
+        "comment": "Returns the language identifier of the first user interface language for the current thread."
+    },
+    "GetLocaleInfoEx": {
+        "prototype": "int GetLocaleInfoEx(\n  LPCWSTR lpLocaleName,\n  LCTYPE  LCType,\n  LPWSTR  lpLCData,\n  int     cchData\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves information about a locale specified by name."
+    },
+    "IsValidLocaleName": {
+        "prototype": "BOOL IsValidLocaleName(\n  LPCWSTR lpLocaleName\n  );",
+        "dllLibrary": "kernel32",
+        "comment": "Determines if the specified locale name is valid for a locale that is installed or supported on the operating system."
+    },
     "GetFileAttributesEx": {
         "prototype": "BOOL GetFileAttributesExW(\n  LPCWSTR                lpFileName,\n  GET_FILEEX_INFO_LEVELS fInfoLevelId,\n  LPVOID                 lpFileInformation\n);",
         "dllLibrary": "kernel32",
