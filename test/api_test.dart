@@ -4117,6 +4117,84 @@ void main() {
     });
   });
 
+  group('Test oleaut32 functions', () {
+    test('Can instantiate DosDateTimeToVariantTime', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final DosDateTimeToVariantTime = oleaut32.lookupFunction<
+          Int32 Function(
+              Uint16 wDosDate, Uint16 wDosTime, Pointer<Double> pvtime),
+          int Function(int wDosDate, int wDosTime,
+              Pointer<Double> pvtime)>('DosDateTimeToVariantTime');
+      expect(DosDateTimeToVariantTime, isA<Function>());
+    });
+    test('Can instantiate GetActiveObject', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final GetActiveObject = oleaut32.lookupFunction<
+          Int32 Function(
+              Pointer<GUID> rclsid, Pointer pvReserved, Pointer<Pointer> ppunk),
+          int Function(Pointer<GUID> rclsid, Pointer pvReserved,
+              Pointer<Pointer> ppunk)>('GetActiveObject');
+      expect(GetActiveObject, isA<Function>());
+    });
+    test('Can instantiate SysAllocString', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SysAllocString = oleaut32.lookupFunction<
+          Pointer Function(Pointer<Utf16> psz),
+          Pointer Function(Pointer<Utf16> psz)>('SysAllocString');
+      expect(SysAllocString, isA<Function>());
+    });
+    test('Can instantiate SysFreeString', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SysFreeString = oleaut32.lookupFunction<
+          Void Function(Pointer bstrString),
+          void Function(Pointer bstrString)>('SysFreeString');
+      expect(SysFreeString, isA<Function>());
+    });
+    test('Can instantiate SysStringByteLen', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SysStringByteLen = oleaut32.lookupFunction<
+          Uint32 Function(Pointer bstr),
+          int Function(Pointer bstr)>('SysStringByteLen');
+      expect(SysStringByteLen, isA<Function>());
+    });
+    test('Can instantiate SysStringLen', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SysStringLen = oleaut32.lookupFunction<
+          Uint32 Function(Pointer pbstr),
+          int Function(Pointer pbstr)>('SysStringLen');
+      expect(SysStringLen, isA<Function>());
+    });
+    test('Can instantiate VariantChangeType', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final VariantChangeType = oleaut32.lookupFunction<
+          Int32 Function(
+              Pointer pvargDest, Pointer pvarSrc, Uint16 wFlags, Uint32 vt),
+          int Function(Pointer pvargDest, Pointer pvarSrc, int wFlags,
+              int vt)>('VariantChangeType');
+      expect(VariantChangeType, isA<Function>());
+    });
+    test('Can instantiate VariantClear', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final VariantClear = oleaut32.lookupFunction<
+          Int32 Function(Pointer pvarg),
+          int Function(Pointer pvarg)>('VariantClear');
+      expect(VariantClear, isA<Function>());
+    });
+    test('Can instantiate VariantCopy', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final VariantCopy = oleaut32.lookupFunction<
+          Int32 Function(Pointer pvargDest, Pointer pvargSrc),
+          int Function(Pointer pvargDest, Pointer pvargSrc)>('VariantCopy');
+      expect(VariantCopy, isA<Function>());
+    });
+    test('Can instantiate VariantInit', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final VariantInit = oleaut32.lookupFunction<Void Function(Pointer pvarg),
+          void Function(Pointer pvarg)>('VariantInit');
+      expect(VariantInit, isA<Function>());
+    });
+  });
+
   group('Test comctl32 functions', () {
     test('Can instantiate DrawStatusText', () {
       final comctl32 = DynamicLibrary.open('comctl32.dll');
@@ -4311,75 +4389,6 @@ void main() {
           int Function(Pointer<Utf16> pszRootPath,
               Pointer<SHQUERYRBINFO> pSHQueryRBInfo)>('SHQueryRecycleBinW');
       expect(SHQueryRecycleBin, isA<Function>());
-    });
-  });
-
-  group('Test oleaut32 functions', () {
-    test('Can instantiate GetActiveObject', () {
-      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
-      final GetActiveObject = oleaut32.lookupFunction<
-          Int32 Function(
-              Pointer<GUID> rclsid, Pointer pvReserved, Pointer<Pointer> ppunk),
-          int Function(Pointer<GUID> rclsid, Pointer pvReserved,
-              Pointer<Pointer> ppunk)>('GetActiveObject');
-      expect(GetActiveObject, isA<Function>());
-    });
-    test('Can instantiate SysAllocString', () {
-      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
-      final SysAllocString = oleaut32.lookupFunction<
-          Pointer Function(Pointer<Utf16> psz),
-          Pointer Function(Pointer<Utf16> psz)>('SysAllocString');
-      expect(SysAllocString, isA<Function>());
-    });
-    test('Can instantiate SysFreeString', () {
-      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
-      final SysFreeString = oleaut32.lookupFunction<
-          Void Function(Pointer bstrString),
-          void Function(Pointer bstrString)>('SysFreeString');
-      expect(SysFreeString, isA<Function>());
-    });
-    test('Can instantiate SysStringByteLen', () {
-      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
-      final SysStringByteLen = oleaut32.lookupFunction<
-          Uint32 Function(Pointer bstr),
-          int Function(Pointer bstr)>('SysStringByteLen');
-      expect(SysStringByteLen, isA<Function>());
-    });
-    test('Can instantiate SysStringLen', () {
-      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
-      final SysStringLen = oleaut32.lookupFunction<
-          Uint32 Function(Pointer pbstr),
-          int Function(Pointer pbstr)>('SysStringLen');
-      expect(SysStringLen, isA<Function>());
-    });
-    test('Can instantiate VariantChangeType', () {
-      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
-      final VariantChangeType = oleaut32.lookupFunction<
-          Int32 Function(
-              Pointer pvargDest, Pointer pvarSrc, Uint16 wFlags, Uint32 vt),
-          int Function(Pointer pvargDest, Pointer pvarSrc, int wFlags,
-              int vt)>('VariantChangeType');
-      expect(VariantChangeType, isA<Function>());
-    });
-    test('Can instantiate VariantClear', () {
-      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
-      final VariantClear = oleaut32.lookupFunction<
-          Int32 Function(Pointer pvarg),
-          int Function(Pointer pvarg)>('VariantClear');
-      expect(VariantClear, isA<Function>());
-    });
-    test('Can instantiate VariantCopy', () {
-      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
-      final VariantCopy = oleaut32.lookupFunction<
-          Int32 Function(Pointer pvargDest, Pointer pvargSrc),
-          int Function(Pointer pvargDest, Pointer pvargSrc)>('VariantCopy');
-      expect(VariantCopy, isA<Function>());
-    });
-    test('Can instantiate VariantInit', () {
-      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
-      final VariantInit = oleaut32.lookupFunction<Void Function(Pointer pvarg),
-          void Function(Pointer pvarg)>('VariantInit');
-      expect(VariantInit, isA<Function>());
     });
   });
 

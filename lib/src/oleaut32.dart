@@ -18,6 +18,26 @@ import 'structs.dart';
 
 final _oleaut32 = DynamicLibrary.open('oleaut32.dll');
 
+/// Converts the MS-DOS representation of time to the date and time
+/// representation stored in a variant.
+///
+/// ```c
+/// INT DosDateTimeToVariantTime(
+///   USHORT wDosDate,
+///   USHORT wDosTime,
+///   DOUBLE *pvtime
+/// );
+/// ```
+/// {@category oleaut32}
+int DosDateTimeToVariantTime(
+    int wDosDate, int wDosTime, Pointer<Double> pvtime) {
+  final _DosDateTimeToVariantTime = _oleaut32.lookupFunction<
+      Int32 Function(Uint16 wDosDate, Uint16 wDosTime, Pointer<Double> pvtime),
+      int Function(int wDosDate, int wDosTime,
+          Pointer<Double> pvtime)>('DosDateTimeToVariantTime');
+  return _DosDateTimeToVariantTime(wDosDate, wDosTime, pvtime);
+}
+
 /// Retrieves a pointer to a running object that has been registered with
 /// OLE.
 ///

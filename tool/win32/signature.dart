@@ -1,4 +1,4 @@
-// converter.dart
+// signature.dart
 
 // The data model as loaded from JSON (as found in model.dart) contains a string
 // prototype for each API. This class parses the raw format into something more

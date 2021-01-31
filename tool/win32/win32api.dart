@@ -7,10 +7,10 @@ import 'function.dart';
 /// The collection of all C-style Windows API functions that are exposed through
 /// this Dart library.
 class Win32API {
-  /// Maps from an API name to its metadata
+  /// Maps from an API name to its metadata. Items in the map are ordered w/
+  /// case insensitivity.
   final functions = SplayTreeMap<String, Win32Function>(
       (str1, str2) => str1.toLowerCase().compareTo(str2.toLowerCase()));
-  // final functions = <String, Win32Function>{};
 
   // Serializes to JSON.
   void saveAsJson(String filename) {
@@ -34,7 +34,7 @@ class Win32API {
   }
 }
 
-// Tests the roundtrip of loading and saving.
+// Roundtrip load and save to make sure that the JSON file is ordered.
 void main() {
   final win32 = Win32API('tool/win32/win32api.json');
   win32.saveAsJson('tool/win32/win32api.json');

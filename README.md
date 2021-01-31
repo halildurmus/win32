@@ -7,6 +7,9 @@ them accessible to Dart code without requiring a C compiler or the Windows SDK.
 [![Language](https://img.shields.io/badge/language-Dart-blue.svg)](https://dart.dev)
 ![Dart](https://github.com/timsneath/win32/workflows/Dart/badge.svg)
 
+**IMPORTANT: If you are using Flutter 1.22 or earlier, use
+[v1.7.4](https://pub.dev/packages/win32/versions/1.7.4+1) of this package. Later versions of Dart include changes to FFI that are incompatible with older versions, and `win32` 2.x works with the updated API.**
+
 Perhaps of as much use as the APIs themselves, this package provides a variety
 of instructive examples for more complex FFI usage scenarios.
 

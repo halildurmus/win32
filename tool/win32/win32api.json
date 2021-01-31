@@ -566,6 +566,11 @@
         "dllLibrary": "user32",
         "comment": "Dispatches a message to a window procedure. It is typically used to dispatch a message retrieved by the GetMessage function."
     },
+    "DosDateTimeToVariantTime": {
+        "prototype": "INT DosDateTimeToVariantTime(\n  USHORT wDosDate,\n  USHORT wDosTime,\n  DOUBLE *pvtime\n);",
+        "dllLibrary": "oleaut32",
+        "comment": "Converts the MS-DOS representation of time to the date and time representation stored in a variant."
+    },
     "DrawCaption": {
         "prototype": "BOOL DrawCaption(\n  HWND       hwnd,\n  HDC        hdc,\n  const RECT *lprect,\n  UINT       flags\n);",
         "dllLibrary": "user32",
