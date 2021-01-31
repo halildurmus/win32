@@ -325,10 +325,20 @@
         "dllLibrary": "kernel32",
         "comment": "Enables a debugger to continue a thread that previously reported a debugging event."
     },
+    "CopyAcceleratorTable": {
+        "prototype": "int CopyAcceleratorTableW(\n  HACCEL  hAccelSrc,\n  LPACCEL lpAccelDst,\n  int     cAccelEntries\n);",
+        "dllLibrary": "user32",
+        "comment": "Copies the specified accelerator table. This function is used to obtain the accelerator-table data that corresponds to an accelerator-table handle, or to determine the size of the accelerator-table data."
+    },
     "CopyIcon": {
         "prototype": "HICON CopyIcon(\n  HICON hIcon\n);",
         "dllLibrary": "user32",
         "comment": "Copies the specified icon from another module to the current module."
+    },
+    "CopyImage": {
+        "prototype": "HANDLE CopyImage(\n  HANDLE h,\n  UINT   type,\n  int    cx,\n  int    cy,\n  UINT   flags\n);",
+        "dllLibrary": "user32",
+        "comment": "Creates a new image (icon, cursor, or bitmap) and copies the attributes of the specified image to the new one. If necessary, the function stretches the bits to fit the desired size of the new image."
     },
     "CopyRect": {
         "prototype": "BOOL CopyRect(\n  LPRECT     lprcDst,\n  const RECT *lprcSrc\n);",
@@ -1017,6 +1027,11 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves the calling thread's last-error code value. The last-error code is maintained on a per-thread basis. Multiple threads do not overwrite each other's last-error code."
     },
+    "GetLocaleInfoEx": {
+        "prototype": "int GetLocaleInfoEx(\n  LPCWSTR lpLocaleName,\n  LCTYPE  LCType,\n  LPWSTR  lpLCData,\n  int     cchData\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves information about a locale specified by name."
+    },
     "GetLocalTime": {
         "prototype": "void GetLocalTime(\n  LPSYSTEMTIME lpSystemTime\n);",
         "dllLibrary": "kernel32",
@@ -1232,6 +1247,16 @@
         "dllLibrary": "user32",
         "comment": "The GetSysColorBrush function retrieves a handle identifying a logical brush that corresponds to the specified color index."
     },
+    "GetSystemDefaultLangID": {
+        "prototype": "LANGID GetSystemDefaultLangID();",
+        "dllLibrary": "kernel32",
+        "comment": "Returns the language identifier for the system locale."
+    },
+    "GetSystemDefaultLocaleName": {
+        "prototype": "int GetSystemDefaultLocaleName(\n  LPWSTR lpLocaleName,\n  int    cchLocaleName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the system default locale name."
+    },
     "GetSystemDirectory": {
         "prototype": "UINT GetSystemDirectoryW(\n  LPWSTR lpBuffer,\n  UINT   uSize\n);",
         "dllLibrary": "kernel32",
@@ -1288,6 +1313,16 @@
         "dllLibrary": "gdi32",
         "comment": "The GetTextMetrics function fills the specified buffer with the metrics for the currently selected font."
     },
+    "GetThreadLocale": {
+        "prototype": "LCID GetThreadLocale();",
+        "dllLibrary": "kernel32",
+        "comment": "Returns the locale identifier of the current locale for the calling thread."
+    },
+    "GetThreadUILanguage": {
+        "prototype": "LANGID GetThreadUILanguage();",
+        "dllLibrary": "kernel32",
+        "comment": "Returns the language identifier of the first user interface language for the current thread."
+    },
     "GetTopWindow": {
         "prototype": "HWND GetTopWindow(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
@@ -1307,6 +1342,16 @@
         "prototype": "int GetUpdateRgn(\n  HWND hWnd,\n  HRGN hRgn,\n  BOOL bErase\n);",
         "dllLibrary": "user32",
         "comment": "The GetUpdateRgn function retrieves the update region of a window by copying it into the specified region. The coordinates of the update region are relative to the upper-left corner of the window (that is, they are client coordinates)."
+    },
+    "GetUserDefaultLangID": {
+        "prototype": "LANGID GetUserDefaultLangID();",
+        "dllLibrary": "kernel32",
+        "comment": "Returns the language identifier of the Region Format setting for the current user."
+    },
+    "GetUserDefaultLocaleName": {
+        "prototype": "int GetUserDefaultLocaleName(\n  LPWSTR lpLocaleName,\n  int    cchLocaleName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the user default locale name."
     },
     "GetVersionEx": {
         "prototype": "BOOL GetVersionExW(\n  LPOSVERSIONINFOW lpVersionInformation\n);",
@@ -1423,6 +1468,16 @@
         "dllLibrary": "advapi32",
         "comment": "Initiates a shutdown and restart of the specified computer, and restarts any applications that have been registered for restart."
     },
+    "InsertMenu": {
+        "prototype": "BOOL InsertMenuW(\n  HMENU    hMenu,\n  UINT     uPosition,\n  UINT     uFlags,\n  UINT_PTR uIDNewItem,\n  LPCWSTR  lpNewItem\n);",
+        "dllLibrary": "user32",
+        "comment": "Inserts a new menu item into a menu, moving other items down the menu."
+    },
+    "InsertMenuItem": {
+        "prototype": "BOOL InsertMenuItemW(\n  HMENU            hmenu,\n  UINT             item,\n  BOOL             fByPosition,\n  LPCMENUITEMINFOW lpmi\n);",
+        "dllLibrary": "user32",
+        "comment": "Inserts a new menu item at the specified position in a menu."
+    },
     "IntersectRect": {
         "prototype": "BOOL IntersectRect(\n  LPRECT     lprcDst,\n  const RECT *lprcSrc1,\n  const RECT *lprcSrc2\n);",
         "dllLibrary": "user32",
@@ -1467,6 +1522,11 @@
         "prototype": "BOOL IsRectEmpty(\n  const RECT *lprc\n);",
         "dllLibrary": "user32",
         "comment": "The IsRectEmpty function determines whether the specified rectangle is empty. An empty rectangle is one that has no area; that is, the coordinate of the right side is less than or equal to the coordinate of the left side, or the coordinate of the bottom side is less than or equal to the coordinate of the top side."
+    },
+    "IsValidLocaleName": {
+        "prototype": "BOOL IsValidLocaleName(\n  LPCWSTR lpLocaleName\n  );",
+        "dllLibrary": "kernel32",
+        "comment": "Determines if the specified locale name is valid for a locale that is installed or supported on the operating system."
     },
     "IsWindowVisible": {
         "prototype": "BOOL IsWindowVisible(\n  HWND hWnd\n);",
@@ -2164,6 +2224,11 @@
         "prototype": "EXECUTION_STATE SetThreadExecutionState(\n  EXECUTION_STATE esFlags\n  );",
         "dllLibrary": "kernel32",
         "comment": "Enables an application to inform the system that it is in use, thereby preventing the system from entering sleep or turning off the display while the application is running."
+    },
+    "SetThreadUILanguage": {
+        "prototype": "LANGID SetThreadUILanguage(\n  LANGID LangId\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the user interface language for the current thread."
     },
     "SetTimer": {
         "prototype": "UINT_PTR SetTimer(\n  HWND      hWnd,\n  UINT_PTR  nIDEvent,\n  UINT      uElapse,\n  TIMERPROC lpTimerFunc\n);",

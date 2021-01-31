@@ -1150,6 +1150,27 @@ int GetLastError() {
   return _GetLastError();
 }
 
+/// Retrieves information about a locale specified by name.
+///
+/// ```c
+/// int GetLocaleInfoEx(
+///   LPCWSTR lpLocaleName,
+///   LCTYPE  LCType,
+///   LPWSTR  lpLCData,
+///   int     cchData
+/// );
+/// ```
+/// {@category kernel32}
+int GetLocaleInfoEx(Pointer<Utf16> lpLocaleName, int LCType,
+    Pointer<Utf16> lpLCData, int cchData) {
+  final _GetLocaleInfoEx = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpLocaleName, Uint32 LCType,
+          Pointer<Utf16> lpLCData, Int32 cchData),
+      int Function(Pointer<Utf16> lpLocaleName, int LCType,
+          Pointer<Utf16> lpLCData, int cchData)>('GetLocaleInfoEx');
+  return _GetLocaleInfoEx(lpLocaleName, LCType, lpLCData, cchData);
+}
+
 /// Retrieves the current local date and time.
 ///
 /// ```c
@@ -1337,6 +1358,36 @@ int GetStdHandle(int nStdHandle) {
   return _GetStdHandle(nStdHandle);
 }
 
+/// Returns the language identifier for the system locale.
+///
+/// ```c
+/// LANGID GetSystemDefaultLangID();
+/// ```
+/// {@category kernel32}
+int GetSystemDefaultLangID() {
+  final _GetSystemDefaultLangID =
+      _kernel32.lookupFunction<Uint16 Function(), int Function()>(
+          'GetSystemDefaultLangID');
+  return _GetSystemDefaultLangID();
+}
+
+/// Retrieves the system default locale name.
+///
+/// ```c
+/// int GetSystemDefaultLocaleName(
+///   LPWSTR lpLocaleName,
+///   int    cchLocaleName
+/// );
+/// ```
+/// {@category kernel32}
+int GetSystemDefaultLocaleName(Pointer<Utf16> lpLocaleName, int cchLocaleName) {
+  final _GetSystemDefaultLocaleName = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpLocaleName, Int32 cchLocaleName),
+      int Function(Pointer<Utf16> lpLocaleName,
+          int cchLocaleName)>('GetSystemDefaultLocaleName');
+  return _GetSystemDefaultLocaleName(lpLocaleName, cchLocaleName);
+}
+
 /// Retrieves the path of the system directory. The system directory
 /// contains system files such as dynamic-link libraries and drivers.
 ///
@@ -1419,6 +1470,63 @@ int GetTempPath(int nBufferLength, Pointer<Utf16> lpBuffer) {
       Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
       int Function(int nBufferLength, Pointer<Utf16> lpBuffer)>('GetTempPathW');
   return _GetTempPath(nBufferLength, lpBuffer);
+}
+
+/// Returns the locale identifier of the current locale for the calling
+/// thread.
+///
+/// ```c
+/// LCID GetThreadLocale();
+/// ```
+/// {@category kernel32}
+int GetThreadLocale() {
+  final _GetThreadLocale = _kernel32
+      .lookupFunction<Uint32 Function(), int Function()>('GetThreadLocale');
+  return _GetThreadLocale();
+}
+
+/// Returns the language identifier of the first user interface language
+/// for the current thread.
+///
+/// ```c
+/// LANGID GetThreadUILanguage();
+/// ```
+/// {@category kernel32}
+int GetThreadUILanguage() {
+  final _GetThreadUILanguage = _kernel32
+      .lookupFunction<Uint16 Function(), int Function()>('GetThreadUILanguage');
+  return _GetThreadUILanguage();
+}
+
+/// Returns the language identifier of the Region Format setting for the
+/// current user.
+///
+/// ```c
+/// LANGID GetUserDefaultLangID();
+/// ```
+/// {@category kernel32}
+int GetUserDefaultLangID() {
+  final _GetUserDefaultLangID =
+      _kernel32.lookupFunction<Uint16 Function(), int Function()>(
+          'GetUserDefaultLangID');
+  return _GetUserDefaultLangID();
+}
+
+/// Retrieves the user default locale name.
+///
+/// ```c
+/// int GetUserDefaultLocaleName(
+///   LPWSTR lpLocaleName,
+///   int    cchLocaleName
+/// );
+/// ```
+/// {@category kernel32}
+int GetUserDefaultLocaleName(Pointer<Utf16> lpLocaleName, int cchLocaleName) {
+  final _GetUserDefaultLocaleName = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpLocaleName, Int32 cchLocaleName),
+      int Function(Pointer<Utf16> lpLocaleName,
+          int cchLocaleName)>('GetUserDefaultLocaleName');
+  return _GetUserDefaultLocaleName(lpLocaleName, cchLocaleName);
 }
 
 /// With the release of Windows 8.1, the behavior of the GetVersionEx API
@@ -1608,6 +1716,22 @@ int IsDebuggerPresent() {
   final _IsDebuggerPresent = _kernel32
       .lookupFunction<Int32 Function(), int Function()>('IsDebuggerPresent');
   return _IsDebuggerPresent();
+}
+
+/// Determines if the specified locale name is valid for a locale that is
+/// installed or supported on the operating system.
+///
+/// ```c
+/// BOOL IsValidLocaleName(
+///   LPCWSTR lpLocaleName
+///   );
+/// ```
+/// {@category kernel32}
+int IsValidLocaleName(Pointer<Utf16> lpLocaleName) {
+  final _IsValidLocaleName = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpLocaleName),
+      int Function(Pointer<Utf16> lpLocaleName)>('IsValidLocaleName');
+  return _IsValidLocaleName(lpLocaleName);
 }
 
 /// Determines whether the specified process is running under WOW64. Also
@@ -2196,6 +2320,21 @@ int SetThreadExecutionState(int esFlags) {
       Uint32 Function(Uint32 esFlags),
       int Function(int esFlags)>('SetThreadExecutionState');
   return _SetThreadExecutionState(esFlags);
+}
+
+/// Sets the user interface language for the current thread.
+///
+/// ```c
+/// LANGID SetThreadUILanguage(
+///   LANGID LangId
+/// );
+/// ```
+/// {@category kernel32}
+int SetThreadUILanguage(int LangId) {
+  final _SetThreadUILanguage = _kernel32.lookupFunction<
+      Uint16 Function(Uint16 LangId),
+      int Function(int LangId)>('SetThreadUILanguage');
+  return _SetThreadUILanguage(LangId);
 }
 
 /// Suspends the execution of the current thread until the time-out

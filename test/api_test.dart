@@ -538,6 +538,15 @@ void main() {
           .lookupFunction<Uint32 Function(), int Function()>('GetLastError');
       expect(GetLastError, isA<Function>());
     });
+    test('Can instantiate GetLocaleInfoEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetLocaleInfoEx = kernel32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpLocaleName, Uint32 LCType,
+              Pointer<Utf16> lpLCData, Int32 cchData),
+          int Function(Pointer<Utf16> lpLocaleName, int LCType,
+              Pointer<Utf16> lpLCData, int cchData)>('GetLocaleInfoEx');
+      expect(GetLocaleInfoEx, isA<Function>());
+    });
     test('Can instantiate GetLocalTime', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetLocalTime = kernel32.lookupFunction<
@@ -623,6 +632,21 @@ void main() {
           int Function(int nStdHandle)>('GetStdHandle');
       expect(GetStdHandle, isA<Function>());
     });
+    test('Can instantiate GetSystemDefaultLangID', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetSystemDefaultLangID =
+          kernel32.lookupFunction<Uint16 Function(), int Function()>(
+              'GetSystemDefaultLangID');
+      expect(GetSystemDefaultLangID, isA<Function>());
+    });
+    test('Can instantiate GetSystemDefaultLocaleName', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetSystemDefaultLocaleName = kernel32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpLocaleName, Int32 cchLocaleName),
+          int Function(Pointer<Utf16> lpLocaleName,
+              int cchLocaleName)>('GetSystemDefaultLocaleName');
+      expect(GetSystemDefaultLocaleName, isA<Function>());
+    });
     test('Can instantiate GetSystemDirectory', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetSystemDirectory = kernel32.lookupFunction<
@@ -660,6 +684,34 @@ void main() {
           int Function(
               int nBufferLength, Pointer<Utf16> lpBuffer)>('GetTempPathW');
       expect(GetTempPath, isA<Function>());
+    });
+    test('Can instantiate GetThreadLocale', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetThreadLocale = kernel32
+          .lookupFunction<Uint32 Function(), int Function()>('GetThreadLocale');
+      expect(GetThreadLocale, isA<Function>());
+    });
+    test('Can instantiate GetThreadUILanguage', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetThreadUILanguage =
+          kernel32.lookupFunction<Uint16 Function(), int Function()>(
+              'GetThreadUILanguage');
+      expect(GetThreadUILanguage, isA<Function>());
+    });
+    test('Can instantiate GetUserDefaultLangID', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetUserDefaultLangID =
+          kernel32.lookupFunction<Uint16 Function(), int Function()>(
+              'GetUserDefaultLangID');
+      expect(GetUserDefaultLangID, isA<Function>());
+    });
+    test('Can instantiate GetUserDefaultLocaleName', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetUserDefaultLocaleName = kernel32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpLocaleName, Int32 cchLocaleName),
+          int Function(Pointer<Utf16> lpLocaleName,
+              int cchLocaleName)>('GetUserDefaultLocaleName');
+      expect(GetUserDefaultLocaleName, isA<Function>());
     });
     test('Can instantiate GetVersionEx', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -742,6 +794,13 @@ void main() {
           kernel32.lookupFunction<Int32 Function(), int Function()>(
               'IsDebuggerPresent');
       expect(IsDebuggerPresent, isA<Function>());
+    });
+    test('Can instantiate IsValidLocaleName', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final IsValidLocaleName = kernel32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpLocaleName),
+          int Function(Pointer<Utf16> lpLocaleName)>('IsValidLocaleName');
+      expect(IsValidLocaleName, isA<Function>());
     });
     if (windowsBuildNumber >= 16299) {
       test('Can instantiate IsWow64Process2', () {
@@ -1022,6 +1081,13 @@ void main() {
           int Function(int esFlags)>('SetThreadExecutionState');
       expect(SetThreadExecutionState, isA<Function>());
     });
+    test('Can instantiate SetThreadUILanguage', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetThreadUILanguage = kernel32.lookupFunction<
+          Uint16 Function(Uint16 LangId),
+          int Function(int LangId)>('SetThreadUILanguage');
+      expect(SetThreadUILanguage, isA<Function>());
+    });
     test('Can instantiate Sleep', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final Sleep = kernel32.lookupFunction<
@@ -1257,11 +1323,29 @@ void main() {
           .lookupFunction<Int32 Function(), int Function()>('CloseClipboard');
       expect(CloseClipboard, isA<Function>());
     });
+    test('Can instantiate CopyAcceleratorTable', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final CopyAcceleratorTable = user32.lookupFunction<
+          Int32 Function(
+              IntPtr hAccelSrc, Pointer<ACCEL> lpAccelDst, Int32 cAccelEntries),
+          int Function(int hAccelSrc, Pointer<ACCEL> lpAccelDst,
+              int cAccelEntries)>('CopyAcceleratorTableW');
+      expect(CopyAcceleratorTable, isA<Function>());
+    });
     test('Can instantiate CopyIcon', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final CopyIcon = user32.lookupFunction<IntPtr Function(IntPtr hIcon),
           int Function(int hIcon)>('CopyIcon');
       expect(CopyIcon, isA<Function>());
+    });
+    test('Can instantiate CopyImage', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final CopyImage = user32.lookupFunction<
+          IntPtr Function(
+              IntPtr h, Uint32 type, Int32 cx, Int32 cy, Uint32 flags),
+          int Function(
+              int h, int type, int cx, int cy, int flags)>('CopyImage');
+      expect(CopyImage, isA<Function>());
     });
     test('Can instantiate CopyRect', () {
       final user32 = DynamicLibrary.open('user32.dll');
@@ -1951,6 +2035,24 @@ void main() {
           Int32 Function(Pointer<RECT> lprc, Int32 dx, Int32 dy),
           int Function(Pointer<RECT> lprc, int dx, int dy)>('InflateRect');
       expect(InflateRect, isA<Function>());
+    });
+    test('Can instantiate InsertMenu', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final InsertMenu = user32.lookupFunction<
+          Int32 Function(IntPtr hMenu, Uint32 uPosition, Uint32 uFlags,
+              IntPtr uIDNewItem, Pointer<Utf16> lpNewItem),
+          int Function(int hMenu, int uPosition, int uFlags, int uIDNewItem,
+              Pointer<Utf16> lpNewItem)>('InsertMenuW');
+      expect(InsertMenu, isA<Function>());
+    });
+    test('Can instantiate InsertMenuItem', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final InsertMenuItem = user32.lookupFunction<
+          Int32 Function(IntPtr hmenu, Uint32 item, Int32 fByPosition,
+              Pointer<MENUITEMINFO> lpmi),
+          int Function(int hmenu, int item, int fByPosition,
+              Pointer<MENUITEMINFO> lpmi)>('InsertMenuItemW');
+      expect(InsertMenuItem, isA<Function>());
     });
     test('Can instantiate IntersectRect', () {
       final user32 = DynamicLibrary.open('user32.dll');

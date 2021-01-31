@@ -30,7 +30,7 @@ int printModules(int processID) {
   if (EnumProcessModules(
           hProcess, hMods, sizeOf<IntPtr>() * 1024, cbNeeded.cast()) ==
       1) {
-    for (var i = 0; i < ((cbNeeded.value / sizeOf<IntPtr>()).floor()); i++) {
+    for (var i = 0; i < (cbNeeded.value ~/ sizeOf<IntPtr>()); i++) {
       final szModName = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
 
       // Get the full path to the module's file.
@@ -67,7 +67,7 @@ void main() {
   }
 
   // Calculate how many process identifiers were returned.
-  final cProcesses = (cbNeeded.value / sizeOf<Uint32>()).floor();
+  final cProcesses = cbNeeded.value ~/ sizeOf<Uint32>();
 
   // Print the names of the modules for each process.
   for (var i = 0; i < cProcesses; i++) {

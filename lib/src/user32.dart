@@ -212,6 +212,28 @@ int CloseClipboard() {
   return _CloseClipboard();
 }
 
+/// Copies the specified accelerator table. This function is used to obtain
+/// the accelerator-table data that corresponds to an accelerator-table
+/// handle, or to determine the size of the accelerator-table data.
+///
+/// ```c
+/// int CopyAcceleratorTableW(
+///   HACCEL  hAccelSrc,
+///   LPACCEL lpAccelDst,
+///   int     cAccelEntries
+/// );
+/// ```
+/// {@category user32}
+int CopyAcceleratorTable(
+    int hAccelSrc, Pointer<ACCEL> lpAccelDst, int cAccelEntries) {
+  final _CopyAcceleratorTable = _user32.lookupFunction<
+      Int32 Function(
+          IntPtr hAccelSrc, Pointer<ACCEL> lpAccelDst, Int32 cAccelEntries),
+      int Function(int hAccelSrc, Pointer<ACCEL> lpAccelDst,
+          int cAccelEntries)>('CopyAcceleratorTableW');
+  return _CopyAcceleratorTable(hAccelSrc, lpAccelDst, cAccelEntries);
+}
+
 /// Copies the specified icon from another module to the current module.
 ///
 /// ```c
@@ -224,6 +246,27 @@ int CopyIcon(int hIcon) {
   final _CopyIcon = _user32.lookupFunction<IntPtr Function(IntPtr hIcon),
       int Function(int hIcon)>('CopyIcon');
   return _CopyIcon(hIcon);
+}
+
+/// Creates a new image (icon, cursor, or bitmap) and copies the attributes
+/// of the specified image to the new one. If necessary, the function
+/// stretches the bits to fit the desired size of the new image.
+///
+/// ```c
+/// HANDLE CopyImage(
+///   HANDLE h,
+///   UINT   type,
+///   int    cx,
+///   int    cy,
+///   UINT   flags
+/// );
+/// ```
+/// {@category user32}
+int CopyImage(int h, int type, int cx, int cy, int flags) {
+  final _CopyImage = _user32.lookupFunction<
+      IntPtr Function(IntPtr h, Uint32 type, Int32 cx, Int32 cy, Uint32 flags),
+      int Function(int h, int type, int cx, int cy, int flags)>('CopyImage');
+  return _CopyImage(h, type, cx, cy, flags);
 }
 
 /// The CopyRect function copies the coordinates of one rectangle to
@@ -1837,6 +1880,49 @@ int InflateRect(Pointer<RECT> lprc, int dx, int dy) {
       Int32 Function(Pointer<RECT> lprc, Int32 dx, Int32 dy),
       int Function(Pointer<RECT> lprc, int dx, int dy)>('InflateRect');
   return _InflateRect(lprc, dx, dy);
+}
+
+/// Inserts a new menu item into a menu, moving other items down the menu.
+///
+/// ```c
+/// BOOL InsertMenuW(
+///   HMENU    hMenu,
+///   UINT     uPosition,
+///   UINT     uFlags,
+///   UINT_PTR uIDNewItem,
+///   LPCWSTR  lpNewItem
+/// );
+/// ```
+/// {@category user32}
+int InsertMenu(int hMenu, int uPosition, int uFlags, int uIDNewItem,
+    Pointer<Utf16> lpNewItem) {
+  final _InsertMenu = _user32.lookupFunction<
+      Int32 Function(IntPtr hMenu, Uint32 uPosition, Uint32 uFlags,
+          IntPtr uIDNewItem, Pointer<Utf16> lpNewItem),
+      int Function(int hMenu, int uPosition, int uFlags, int uIDNewItem,
+          Pointer<Utf16> lpNewItem)>('InsertMenuW');
+  return _InsertMenu(hMenu, uPosition, uFlags, uIDNewItem, lpNewItem);
+}
+
+/// Inserts a new menu item at the specified position in a menu.
+///
+/// ```c
+/// BOOL InsertMenuItemW(
+///   HMENU            hmenu,
+///   UINT             item,
+///   BOOL             fByPosition,
+///   LPCMENUITEMINFOW lpmi
+/// );
+/// ```
+/// {@category user32}
+int InsertMenuItem(
+    int hmenu, int item, int fByPosition, Pointer<MENUITEMINFO> lpmi) {
+  final _InsertMenuItem = _user32.lookupFunction<
+      Int32 Function(IntPtr hmenu, Uint32 item, Int32 fByPosition,
+          Pointer<MENUITEMINFO> lpmi),
+      int Function(int hmenu, int item, int fByPosition,
+          Pointer<MENUITEMINFO> lpmi)>('InsertMenuItemW');
+  return _InsertMenuItem(hmenu, item, fByPosition, lpmi);
 }
 
 /// The IntersectRect function calculates the intersection of two source

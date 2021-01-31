@@ -51,6 +51,7 @@ const mapping = <String, String>{
 
   'HRESULT': 'Int32', 'MMRESULT': 'Uint32',
   'NTSTATUS': 'Int32', 'VARTYPE': 'Uint32',
+  'LANGID': 'Uint16', 'LCID': 'Uint32', 'LCTYPE': 'Uint32',
   'SHSTDAPI': 'Int32', 'SHFOLDERAPI': 'Int32',
   'COLORREF': 'Int32',
   'MCIDEVICEID': 'Uint32', 'MCIERROR': 'Uint32',

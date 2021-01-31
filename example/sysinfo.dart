@@ -59,7 +59,7 @@ int getSystemMemoryInMegabytes() {
   try {
     final result = GetPhysicallyInstalledSystemMemory(memory);
     if (result != 0) {
-      return (memory.value / 1024).floor();
+      return memory.value ~/ 1024;
     } else {
       final error = GetLastError();
       throw WindowsException(HRESULT_FROM_WIN32(error));

@@ -105,8 +105,8 @@ void setApple() {
   data[appleY][appleX] = 0;
 
   // get a random x, y coordinate on the gameboard
-  final x = randRange(0, (bitmapWidth / 10).floor());
-  final y = randRange(0, (bitmapHeight / 10).floor());
+  final x = randRange(0, (bitmapWidth ~/ 10));
+  final y = randRange(0, (bitmapHeight ~/ 10));
 
   // set to 1 to represent apple
   if (data[y][x] == 0) {
@@ -161,26 +161,26 @@ void moveSnake() {
       if (direction.x == 1) {
         // right
         snakePoints[i].x += 1;
-        if (snakePoints[i].x >= (bitmapWidth / 10).floor()) {
+        if (snakePoints[i].x >= (bitmapWidth ~/ 10)) {
           snakePoints[i].x = 0;
         }
       } else if (direction.x == -1) {
         // left
         snakePoints[i].x -= 1;
         if (snakePoints[i].x < 0) {
-          snakePoints[i].x = (bitmapWidth / 10).floor();
+          snakePoints[i].x = (bitmapWidth ~/ 10);
         }
       } else if (direction.y == 1) {
         // down
         snakePoints[i].y += 1;
-        if (snakePoints[i].y >= (bitmapHeight / 10).floor()) {
+        if (snakePoints[i].y >= (bitmapHeight ~/ 10)) {
           snakePoints[i].y = 0;
         }
       } else if (direction.y == -1) {
         // up
         snakePoints[i].y -= 1;
         if (snakePoints[i].y < 0) {
-          snakePoints[i].y = (bitmapHeight / 10).floor() - 1;
+          snakePoints[i].y = (bitmapHeight ~/ 10) - 1;
         }
       }
     } else {
@@ -289,10 +289,10 @@ void setVectorToMemory() {
         ptr.elementAt(pixelOffset).value = 0;
         pixelOffset++;
       }
-      vecX = (x / 10).floor();
+      vecX = x ~/ 10;
     }
     rowOffset += pitch;
-    vecY = (y / 10).floor();
+    vecY = y ~/ 10;
   }
 }
 
