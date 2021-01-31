@@ -1456,6 +1456,9 @@ const WM_XBUTTONDBLCLK = 0x020D;
 /// window that processes it.
 const WM_MOUSEHWHEEL = 0x020E;
 
+/// Notifies applications that a power-management event has occurred.
+const WM_POWERBROADCAST = 0x0218;
+
 /// An application sends a WM_CUT message to an edit control or combo box to
 /// delete (cut) the current selection, if any, in the edit control and copy the
 /// deleted text to the clipboard in CF_TEXT format.
@@ -1556,6 +1559,33 @@ const WM_HOTKEY = 0x0312;
 /// Used to define private messages for use by private window classes, usually
 /// in the form WM_USER+x, where x is an integer value.
 const WM_USER = 0x0400;
+
+/// Notifies applications that the computer is about to enter a suspended state.
+/// This event is typically broadcast when all applications and installable
+/// drivers have returned TRUE to a previous PBT_APMQUERYSUSPEND event.
+const PBT_APMSUSPEND = 0x0004;
+
+/// Notifies applications that the system has resumed operation after being
+/// suspended.
+const PBT_APMRESUMESUSPEND = 0x0007;
+
+/// Notifies applications that the battery power is low.
+const PBT_APMBATTERYLOW = 0x0009;
+
+/// Notifies applications of a change in the power status of the computer, such
+/// as a switch from battery power to A/C. The system also broadcasts this event
+/// when remaining battery power slips below the threshold specified by the user
+/// or if the battery power changes by a specified percentage.
+const PBT_APMPOWERSTATUSCHANGE = 0x000A;
+
+/// Notifies applications that the system is resuming from sleep or hibernation.
+/// This event is delivered every time the system resumes and does not indicate
+/// whether a user is present.
+const PBT_APMRESUMEAUTOMATIC = 0x0012;
+
+/// Power setting change event sent with a WM_POWERBROADCAST window message or
+/// in a HandlerEx notification callback for services.
+const PBT_POWERSETTINGCHANGE = 0x8013;
 
 // -----------------------------------------------------------------------------
 // Queue status flags
@@ -4979,6 +5009,18 @@ const NIN_POPUPOPEN = WM_USER + 6;
 /// pop-up UI should be closed.
 const NIN_POPUPCLOSE = WM_USER + 7;
 
+// -----------------------------------------------------------------------------
+// Power setting constants
+// -----------------------------------------------------------------------------
+
+/// Notifications are sent using WM_POWERBROADCAST messages with a wParam
+/// parameter of PBT_POWERSETTINGCHANGE.
+const DEVICE_NOTIFY_WINDOW_HANDLE = 0;
+
+/// Notifications are sent to the HandlerEx callback function with a dwControl
+/// parameter of SERVICE_CONTROL_POWEREVENT and a dwEventType of
+/// PBT_POWERSETTINGCHANGE.
+const DEVICE_NOTIFY_SERVICE_HANDLE = 1;
 // -----------------------------------------------------------------------------
 // TrackPopupMenuEx constants
 // -----------------------------------------------------------------------------

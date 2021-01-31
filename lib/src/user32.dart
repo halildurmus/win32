@@ -2537,6 +2537,27 @@ int RegisterClipboardFormat(Pointer<Utf16> lpszFormat) {
   return _RegisterClipboardFormat(lpszFormat);
 }
 
+/// Registers the application to receive power setting notifications for
+/// the specific power setting event.
+///
+/// ```c
+/// HPOWERNOTIFY RegisterPowerSettingNotification(
+///   HANDLE  hRecipient,
+///   LPCGUID PowerSettingGuid,
+///   DWORD   Flags
+/// );
+/// ```
+/// {@category user32}
+int RegisterPowerSettingNotification(
+    int hRecipient, Pointer<GUID> PowerSettingGuid, int Flags) {
+  final _RegisterPowerSettingNotification = _user32.lookupFunction<
+      IntPtr Function(
+          IntPtr hRecipient, Pointer<GUID> PowerSettingGuid, Uint32 Flags),
+      int Function(int hRecipient, Pointer<GUID> PowerSettingGuid,
+          int Flags)>('RegisterPowerSettingNotification');
+  return _RegisterPowerSettingNotification(hRecipient, PowerSettingGuid, Flags);
+}
+
 /// Defines a new window message that is guaranteed to be unique throughout
 /// the system. The message value can be used when sending or posting
 /// messages.
@@ -3344,6 +3365,21 @@ int UnregisterClass(Pointer<Utf16> lpClassName, int hInstance) {
       int Function(
           Pointer<Utf16> lpClassName, int hInstance)>('UnregisterClassW');
   return _UnregisterClass(lpClassName, hInstance);
+}
+
+/// Unregisters the power setting notification.
+///
+/// ```c
+/// BOOL UnregisterPowerSettingNotification(
+///   HPOWERNOTIFY Handle
+/// );
+/// ```
+/// {@category user32}
+int UnregisterPowerSettingNotification(int Handle) {
+  final _UnregisterPowerSettingNotification = _user32.lookupFunction<
+      Int32 Function(IntPtr Handle),
+      int Function(int Handle)>('UnregisterPowerSettingNotification');
+  return _UnregisterPowerSettingNotification(Handle);
 }
 
 /// The UpdateWindow function updates the client area of the specified

@@ -47,7 +47,7 @@ const mapping = <String, String>{
   'HBLUETOOTH_RADIO_FIND': 'IntPtr',
   'HBLUETOOTH_AUTHENTICATION_REGISTRATION': 'IntPtr', 'HINSTANCE': 'IntPtr',
   'HPCON': 'IntPtr', 'HWAVEOUT': 'IntPtr',
-  'HSTRING': 'IntPtr',
+  'HSTRING': 'IntPtr', 'HPOWERNOTIFY': 'IntPtr',
 
   'HRESULT': 'Int32', 'MMRESULT': 'Uint32',
   'NTSTATUS': 'Int32', 'VARTYPE': 'Uint32',
@@ -142,6 +142,7 @@ const mapping = <String, String>{
   'RPC_AUTH_IDENTITY_HANDLE': 'Pointer',
   'REFGUID': 'Pointer<GUID>',
   'LPCRECT': 'Pointer<RECT>',
+  'LPCGUID': 'Pointer<GUID>',
   'LPCMENUINFO': 'Pointer<MENUINFO>',
   'LPCMENUITEMINFOW': 'Pointer<MENUITEMINFO>',
   'LPCSCROLLINFO': 'Pointer<SCROLLINFO>',

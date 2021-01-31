@@ -242,6 +242,23 @@ class BIND_OPTS extends Struct {
   external int dwTickCountDeadline;
 }
 
+// typedef struct {
+//   GUID  PowerSetting;
+//   DWORD DataLength;
+//   UCHAR Data[1];
+// } POWERBROADCAST_SETTING, *PPOWERBROADCAST_SETTING;
+
+/// Sent with a power setting event and contains data about the specific change.
+///
+/// {@category Struct}
+class POWERBROADCAST_SETTING extends Struct {
+  external GUID PowerSetting;
+  @Uint32()
+  external int DataLength;
+  @Uint8()
+  external int Data;
+}
+
 // typedef struct _SYSTEM_POWER_STATUS {
 //   BYTE  ACLineStatus;
 //   BYTE  BatteryFlag;

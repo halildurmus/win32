@@ -2235,6 +2235,15 @@ void main() {
           int Function(Pointer<Utf16> lpszFormat)>('RegisterClipboardFormatW');
       expect(RegisterClipboardFormat, isA<Function>());
     });
+    test('Can instantiate RegisterPowerSettingNotification', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final RegisterPowerSettingNotification = user32.lookupFunction<
+          IntPtr Function(
+              IntPtr hRecipient, Pointer<GUID> PowerSettingGuid, Uint32 Flags),
+          int Function(int hRecipient, Pointer<GUID> PowerSettingGuid,
+              int Flags)>('RegisterPowerSettingNotification');
+      expect(RegisterPowerSettingNotification, isA<Function>());
+    });
     test('Can instantiate RegisterWindowMessage', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final RegisterWindowMessage = user32.lookupFunction<
@@ -2574,6 +2583,13 @@ void main() {
           int Function(
               Pointer<Utf16> lpClassName, int hInstance)>('UnregisterClassW');
       expect(UnregisterClass, isA<Function>());
+    });
+    test('Can instantiate UnregisterPowerSettingNotification', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final UnregisterPowerSettingNotification = user32.lookupFunction<
+          Int32 Function(IntPtr Handle),
+          int Function(int Handle)>('UnregisterPowerSettingNotification');
+      expect(UnregisterPowerSettingNotification, isA<Function>());
     });
     test('Can instantiate UpdateWindow', () {
       final user32 = DynamicLibrary.open('user32.dll');

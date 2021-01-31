@@ -1821,6 +1821,11 @@
         "dllLibrary": "user32",
         "comment": "Registers a new clipboard format. This format can then be used as a valid clipboard format."
     },
+    "RegisterPowerSettingNotification": {
+        "prototype": "HPOWERNOTIFY RegisterPowerSettingNotification(\n  HANDLE  hRecipient,\n  LPCGUID PowerSettingGuid,\n  DWORD   Flags\n);",
+        "dllLibrary": "user32",
+        "comment": "Registers the application to receive power setting notifications for the specific power setting event."
+    },
     "RegisterWindowMessage": {
         "prototype": "UINT RegisterWindowMessageW(\n  LPCWSTR lpString\n);",
         "dllLibrary": "user32",
@@ -2386,6 +2391,11 @@
         "prototype": "BOOL UnregisterClassW(\n  LPCWSTR   lpClassName,\n  HINSTANCE hInstance\n);",
         "dllLibrary": "user32",
         "comment": "Unregisters a window class, freeing the memory required for the class."
+    },
+    "UnregisterPowerSettingNotification": {
+        "prototype": "BOOL UnregisterPowerSettingNotification(\n  HPOWERNOTIFY Handle\n);",
+        "dllLibrary": "user32",
+        "comment": "Unregisters the power setting notification."
     },
     "UpdateProcThreadAttribute": {
         "prototype": "BOOL UpdateProcThreadAttribute(\n  LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,\n  DWORD                        dwFlags,\n  DWORD_PTR                    Attribute,\n  PVOID                        lpValue,\n  SIZE_T                       cbSize,\n  PVOID                        lpPreviousValue,\n  PSIZE_T                      lpReturnSize\n);",
