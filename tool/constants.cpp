@@ -45,6 +45,7 @@ void main()
     printf("sizeof(DWORD) is %zu\n", sizeof(DWORD));
     printf("sizeof(WORD) is %zu\n", sizeof(WORD));
     printf("sizeof(INT) is %zu\n", sizeof(INT));
+    printf("sizeof(CHAR) is %zu\n", sizeof(CHAR));
     printf("sizeof(SHORT) is %zu\n", sizeof(SHORT));
     printf("sizeof(LONG) is %zu\n", sizeof(LONG));
     printf("sizeof(BYTE) is %zu\n", sizeof(BYTE));

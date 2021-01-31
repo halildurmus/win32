@@ -183,3 +183,41 @@ void VariantInit(Pointer pvarg) {
       void Function(Pointer pvarg)>('VariantInit');
   return _VariantInit(pvarg);
 }
+
+/// Converts the variant representation of a date and time to MS-DOS date
+/// and time values.
+///
+/// ```c
+/// INT VariantTimeToDosDateTime(
+///   DOUBLE vtime,
+///   USHORT *pwDosDate,
+///   USHORT *pwDosTime
+/// );
+/// ```
+/// {@category oleaut32}
+int VariantTimeToDosDateTime(
+    double vtime, Pointer<Uint16> pwDosDate, Pointer<Uint16> pwDosTime) {
+  final _VariantTimeToDosDateTime = _oleaut32.lookupFunction<
+      Int32 Function(
+          Double vtime, Pointer<Uint16> pwDosDate, Pointer<Uint16> pwDosTime),
+      int Function(double vtime, Pointer<Uint16> pwDosDate,
+          Pointer<Uint16> pwDosTime)>('VariantTimeToDosDateTime');
+  return _VariantTimeToDosDateTime(vtime, pwDosDate, pwDosTime);
+}
+
+/// Converts the variant representation of time to system time values.
+///
+/// ```c
+/// INT VariantTimeToSystemTime(
+///   DOUBLE       vtime,
+///   LPSYSTEMTIME lpSystemTime
+/// );
+/// ```
+/// {@category oleaut32}
+int VariantTimeToSystemTime(double vtime, Pointer<SYSTEMTIME> lpSystemTime) {
+  final _VariantTimeToSystemTime = _oleaut32.lookupFunction<
+      Int32 Function(Double vtime, Pointer<SYSTEMTIME> lpSystemTime),
+      int Function(double vtime,
+          Pointer<SYSTEMTIME> lpSystemTime)>('VariantTimeToSystemTime');
+  return _VariantTimeToSystemTime(vtime, lpSystemTime);
+}

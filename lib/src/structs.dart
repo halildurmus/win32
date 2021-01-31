@@ -539,7 +539,31 @@ class VARIANT extends Struct {
   Pointer get byref => Pointer.fromAddress(_data);
   set byref(Pointer val) => _data = val.address;
 
-  @IntPtr()
+  // CHAR -> char -> Int8
+  int get cVal => (_data & 0xFF00000000000000) >> 56.toSigned(8);
+  set cVal(int val) => _data = (val.toUnsigned(8) << 56);
+
+  // USHORT -> unsigned short -> Uint16
+  int get uiVal => (_data & 0xFFFF000000000000) >> 48;
+  set uiVal(int val) => _data = val << 48;
+
+  // ULONG -> unsigned long -> Uint32
+  int get ulVal => (_data & 0xFFFFFFFF00000000) >> 32;
+  set ulVal(int val) => _data = val << 32;
+
+  // ULONGLONG -> unsigned long long -> Uint64
+  int get ullVal => _data;
+  set ullVal(int val) => _data;
+
+  // INT -> int -> Int32
+  int get intVal => ((_data & 0xFFFFFFFF00000000) >> 32).toSigned(32);
+  set intVal(int val) => _data = (val.toUnsigned(32) << 32);
+
+  // UINT -> unsigned int -> Uint32
+  int get uintVal => (_data & 0xFFFFFFFF00000000) >> 32;
+  set uintVal(int val) => _data = val << 32;
+
+  @Uint64()
   external int _data;
   @IntPtr()
   external int _data2;

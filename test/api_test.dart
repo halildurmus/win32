@@ -4193,6 +4193,23 @@ void main() {
           void Function(Pointer pvarg)>('VariantInit');
       expect(VariantInit, isA<Function>());
     });
+    test('Can instantiate VariantTimeToDosDateTime', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final VariantTimeToDosDateTime = oleaut32.lookupFunction<
+          Int32 Function(Double vtime, Pointer<Uint16> pwDosDate,
+              Pointer<Uint16> pwDosTime),
+          int Function(double vtime, Pointer<Uint16> pwDosDate,
+              Pointer<Uint16> pwDosTime)>('VariantTimeToDosDateTime');
+      expect(VariantTimeToDosDateTime, isA<Function>());
+    });
+    test('Can instantiate VariantTimeToSystemTime', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final VariantTimeToSystemTime = oleaut32.lookupFunction<
+          Int32 Function(Double vtime, Pointer<SYSTEMTIME> lpSystemTime),
+          int Function(double vtime,
+              Pointer<SYSTEMTIME> lpSystemTime)>('VariantTimeToSystemTime');
+      expect(VariantTimeToSystemTime, isA<Function>());
+    });
   });
 
   group('Test comctl32 functions', () {

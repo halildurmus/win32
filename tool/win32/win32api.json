@@ -2512,6 +2512,16 @@
         "dllLibrary": "oleaut32",
         "comment": "Initializes a variant."
     },
+    "VariantTimeToDosDateTime": {
+        "prototype": "INT VariantTimeToDosDateTime(\n  DOUBLE vtime,\n  USHORT *pwDosDate,\n  USHORT *pwDosTime\n);",
+        "dllLibrary": "oleaut32",
+        "comment": "Converts the variant representation of a date and time to MS-DOS date and time values."
+    },
+    "VariantTimeToSystemTime": {
+        "prototype": "INT VariantTimeToSystemTime(\n  DOUBLE       vtime,\n  LPSYSTEMTIME lpSystemTime\n);",
+        "dllLibrary": "oleaut32",
+        "comment": "Converts the variant representation of time to system time values."
+    },
     "VerFindFile": {
         "prototype": "DWORD VerFindFileW(\n  DWORD   uFlags,\n  LPCWSTR szFileName,\n  LPCWSTR szWinDir,\n  LPCWSTR szAppDir,\n  LPWSTR  szCurDir,\n  PUINT   puCurDirLen,\n  LPWSTR  szDestDir,\n  PUINT   puDestDirLen\n);",
         "dllLibrary": "version",
