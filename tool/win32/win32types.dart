@@ -20,40 +20,236 @@ const mapping = <String, String>{
   'char': 'Int8',
 
   // Windows numerics
-  'INT_PTR': 'IntPtr', 'UINT_PTR': 'IntPtr', 'LONG_PTR': 'IntPtr',
-  'DWORD_PTR': 'IntPtr', 'ULONG_PTR': 'IntPtr',
-  'WPARAM': 'IntPtr', 'LPARAM': 'IntPtr',
+
+  // A signed integer type for pointer precision. Use when casting a pointer to
+  // an integer to perform pointer arithmetic.
+  'INT_PTR': 'IntPtr',
+
+  // An unsigned INT_PTR.
+  'UINT_PTR': 'IntPtr',
+
+  // A signed long type for pointer precision. Use when casting a pointer to a
+  // long to perform pointer arithmetic.
+  'LONG_PTR': 'IntPtr',
+
+  // An unsigned long type for pointer precision. Use when casting a pointer to
+  // a long type to perform pointer arithmetic. (Also commonly used for general
+  // 32-bit parameters that have been extended to 64 bits in 64-bit Windows.)
+  // Declared as `ULONG_PTR`.
+  'DWORD_PTR': 'IntPtr',
+
+  // An unsigned LONG_PTR.
+  'ULONG_PTR': 'IntPtr',
+
+  // A message parameter. Declared as `UINT_PTR`.
+  'WPARAM': 'IntPtr',
+
+  // A message parameter. Declared as `LONG_PTR`.
+  'LPARAM': 'IntPtr',
+
+  // The maximum number of bytes to which a pointer can point. Use for a count
+  // that must span the full range of a pointer. Declared as `ULONG_PTR`.
   'SIZE_T': 'IntPtr',
-  'LRESULT': 'IntPtr', 'FARPROC': 'IntPtr',
-  'LONGLONG': 'Int64', 'INT64': 'Int64', 'LARGE_INTEGER': 'Int64',
+
+  // Signed result of message processing. Declared as `LONG_PTR`.
+  'LRESULT': 'IntPtr',
+
+  'FARPROC': 'IntPtr',
+
+  // A 64-bit signed integer. The range is -9223372036854775808 through
+  // 9223372036854775807 decimal.
+  'LONGLONG': 'Int64',
+
+  // A 64-bit signed integer. The range is -9223372036854775808 through
+  // 9223372036854775807 decimal. Declared as `signed __int64`.
+  'INT64': 'Int64',
+
+  'LARGE_INTEGER': 'Int64',
   'ULONGLONG': 'Uint64', 'UINT64': 'Uint64', 'ULARGE_INTEGER': 'Uint64',
+
+  // A 64-bit unsigned integer. The range is 0 through 18446744073709551615
+  // decimal. Declared as `unsigned __int64`.
+  'DWORDLONG': 'Uint64',
+
+  // A 64-bit unsigned integer. Declared as `unsigned __int64`.
+  'DWORD64': 'Uint64',
+
   'LONG': 'Int32', 'INT': 'Int32', 'INT32': 'Int32', 'LSTATUS': 'Int32',
-  'UINT': 'Uint32', 'UINT32': 'Uint32', 'DWORD': 'Uint32', 'ULONG': 'Uint32',
-  'SHORT': 'Int16', 'INT16': 'Int16',
-  'WORD': 'Uint16', 'UINT16': 'Uint16', 'ATOM': 'Uint16', 'USHORT': 'Uint16',
-  'BYTE': 'Uint8', 'UCHAR': 'Uint8',
+
+  // A 32-bit unsigned integer. Declared as `unsigned int`.
+  'DWORD32': 'Uint32',
+
+  // An unsigned INT. The range is 0 through 4294967295 decimal. Declared as
+  // `unsigned int`.
+  'UINT': 'Uint32',
+
+  // An unsigned INT32. The range is 0 through 4294967295 decimal. Declared as
+  // `unsigned int`.
+  'UINT32': 'Uint32',
+
+  // A 32-bit unsigned integer. The range is 0 through 4294967295 decimal.
+  // Declared as `unsigned long`.
+  'DWORD': 'Uint32',
+
+  // An unsigned LONG. The range is 0 through 4294967295 decimal. Declared as
+  // `unsigned long`.
+  'ULONG': 'Uint32',
+
+  // A 16-bit integer. The range is -32768 through 32767 decimal. Declared as
+  // `short`.
+  'SHORT': 'Int16',
+
+  // A 16-bit signed integer. Declared as `signed short`.
+  'INT16': 'Int16',
+
+  // A 16-bit unsigned integer. The range is 0 through 65535 decimal. Declared
+  // as `unsigned short`.
+  'WORD': 'Uint16',
+
+  // An unsigned INT16. Declared as `unsigned short`.
+  'UINT16': 'Uint16',
+
+  // An atom. Declared as `WORD`.
+  'ATOM': 'Uint16',
+
+  // An unsigned SHORT. The range is 0 through 65535 decimal. Declared as
+  // `unsigned short`.
+  'USHORT': 'Uint16',
+
+  // A Boolean variable (should be TRUE or FALSE). Defined as `BYTE`.
+  'BOOLEAN': 'Uint8',
+
+  // A byte (8 bits). Type defined as as `unsigned char`.
+  'BYTE': 'Uint8',
+
+  // An unsigned CHAR. Declared as `unsigned char`.
+  'UCHAR': 'Uint8',
+
+  // A Boolean variable (should be TRUE or FALSE). Defined as `int`.
   'BOOL': 'Int32', '_BOOL': 'Int32',
+
+  // A floating-point variable. Defined as `float`.
   'FLOAT': 'Float',
+
   'DOUBLE': 'Double', 'double': 'Double',
   'VOID': 'Void',
 
-  'HANDLE': 'IntPtr', 'HRSRC': 'IntPtr', 'HWND': 'IntPtr',
-  'HMODULE': 'IntPtr', 'HGLOBAL': 'IntPtr', 'HDC': 'IntPtr',
-  'HBITMAP': 'IntPtr', 'HPEN': 'IntPtr', 'HBRUSH': 'IntPtr',
-  'HACCEL': 'IntPtr', 'HKEY': 'IntPtr', 'HRGN': 'IntPtr',
-  'HFONT': 'IntPtr', 'HPALETTE': 'IntPtr', 'HGDIOBJ': 'IntPtr',
-  'HMENU': 'IntPtr', 'HICON': 'IntPtr', 'HMONITOR': 'IntPtr',
-  'HCURSOR': 'IntPtr', 'HBLUETOOTH_DEVICE_FIND': 'IntPtr',
-  'HBLUETOOTH_RADIO_FIND': 'IntPtr',
-  'HBLUETOOTH_AUTHENTICATION_REGISTRATION': 'IntPtr', 'HINSTANCE': 'IntPtr',
-  'HPCON': 'IntPtr', 'HWAVEOUT': 'IntPtr',
-  'HSTRING': 'IntPtr', 'HPOWERNOTIFY': 'IntPtr',
+  // A handle to an object. Declared as `PVOID`.
+  'HANDLE': 'IntPtr',
 
-  'HRESULT': 'Int32', 'MMRESULT': 'Uint32',
+  // A handle to an accelerator table. Declared as `HANDLE`.
+  'HACCEL': 'IntPtr',
+
+  // A handle to a bitmap. Declared as `HANDLE`.
+  'HBITMAP': 'IntPtr',
+
+  // A handle to a brush. Declared as `HANDLE`.
+  'HBRUSH': 'IntPtr',
+
+  // A handle to a color space. Declared as `HANDLE`.
+  'HCOLORSPACE': 'IntPtr',
+
+  // A handle to a cursor. Declared as `HANDLE`.
+  'HCURSOR': 'IntPtr',
+
+  // A handle to a device context (DC). Declared as `HANDLE`.
+  'HDC': 'IntPtr',
+
+  // A handle to a desktop. Declared as `HANDLE`.
+  'HDESK': 'IntPtr',
+
+  // A handle to an enhanced metafile. Declared as `HANDLE`.
+  'HENHMETAFILE': 'IntPtr',
+
+  // A handle to a file opened by OpenFile, not CreateFile. Declared as `HANDLE`.
+  'HFILE': 'IntPtr',
+
+  // A handle to a font. Declared as `HANDLE`.
+  'HFONT': 'IntPtr',
+
+  // A handle to a GDI object. Declared as `HANDLE`.
+  'HGDIOBJ': 'IntPtr',
+
+  // A handle to a global memory block. Declared as `HANDLE`.
+  'HGLOBAL': 'IntPtr',
+
+  // A handle to an icon. Declared as `HANDLE`.
+  'HICON': 'IntPtr',
+
+  // A handle to an instance. This is the base address of the module in memory.
+  // HMODULE and HINSTANCE are the same today, but represented different things
+  // in 16-bit Windows. Declared as `HANDLE`.
+  'HINSTANCE': 'IntPtr',
+
+  // A handle to a registry key. Declared as `HANDLE`.
+  'HKEY': 'IntPtr',
+
+  // A handle to a menu. Declared as `HANDLE`.
+  'HMENU': 'IntPtr',
+
+  // A handle to a metafile. Declared as `HANDLE`.
+  'HMETAFILE': 'IntPtr',
+
+  // A handle to a module. The is the base address of the module in memory.
+  // Declared as `HANDLE`.
+  'HMODULE': 'IntPtr',
+
+  // A handle to a display monitor. Declared as `HANDLE`.
+  'HMONITOR': 'IntPtr',
+
+  // A handle to a palette. Declared as `HANDLE`.
+  'HPALETTE': 'IntPtr',
+
+  // A handle to a pen. Declared as `HANDLE`.
+  'HPEN': 'IntPtr',
+
+  // A handle to a region. Declared as `HANDLE`.
+  'HRGN': 'IntPtr',
+
+  // A handle to a resource. Declared as `HANDLE`.
+  'HRSRC': 'IntPtr',
+
+  // A handle to a window. Declared as `HANDLE`.
+  'HWND': 'IntPtr',
+
+  'HBLUETOOTH_DEVICE_FIND': 'IntPtr',
+  'HBLUETOOTH_RADIO_FIND': 'IntPtr',
+  'HBLUETOOTH_AUTHENTICATION_REGISTRATION': 'IntPtr',
+
+  // A handle to a pseudoconsole.
+  'HPCON': 'IntPtr',
+
+  'HWAVEOUT': 'IntPtr',
+
+  // A handle to a Windows Runtime string.
+  'HSTRING': 'IntPtr',
+
+  'HPOWERNOTIFY': 'IntPtr',
+
+  // The return codes used by COM interfaces. To test an HRESULT value, use the
+  // FAILED and SUCCEEDED macros. Declared as `LONG`.
+  'HRESULT': 'Int32',
+
+  'MMRESULT': 'Uint32',
   'NTSTATUS': 'Int32', 'VARTYPE': 'Uint32',
-  'LANGID': 'Uint16', 'LCID': 'Uint32', 'LCTYPE': 'Uint32',
+
+  // A language identifier. Declared as `WORD`.
+  'LANGID': 'Uint16',
+
+  // A locale identifier. Declared as `DWORD`.
+  'LCID': 'Uint32',
+
+  // A locale information. Declared as `DWORD`.
+  'LCTYPE': 'Uint32',
+
+  // A language group identifier. Declared as `DWORD`.
+  'LGRPID': 'Uint32',
+
   'SHSTDAPI': 'Int32', 'SHFOLDERAPI': 'Int32',
+
+  // The red, green, blue (RGB) color value (32 bits). Defined as `DWORD`.
   'COLORREF': 'Int32',
+
   'MCIDEVICEID': 'Uint32', 'MCIERROR': 'Uint32',
   'REGSAM': 'Uint32',
 
