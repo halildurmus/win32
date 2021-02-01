@@ -39,6 +39,70 @@ void main() {
     free(dosTime);
   });
 
+  test('LONG Variant', () {
+    final intVar = calloc<VARIANT>();
+    VariantInit(intVar);
+    intVar.ref.vt = VARENUM.VT_I4;
+    intVar.ref.lVal = -2147483648;
+    expect(intVar.ref.lVal, equals(-2147483648));
+
+    intVar.ref.lVal = 2147483647;
+    expect(intVar.ref.lVal, equals(2147483647));
+
+    intVar.ref.lVal = 0x80000000;
+    expect(intVar.ref.lVal, equals(-2147483648));
+
+    free(intVar);
+  });
+
+  test('INT Variant', () {
+    final intVar = calloc<VARIANT>();
+    VariantInit(intVar);
+    intVar.ref.vt = VARENUM.VT_I4;
+    intVar.ref.intVal = -2147483648;
+    expect(intVar.ref.intVal, equals(-2147483648));
+
+    intVar.ref.intVal = 2147483647;
+    expect(intVar.ref.intVal, equals(2147483647));
+
+    intVar.ref.intVal = 0x80000000;
+    expect(intVar.ref.intVal, equals(-2147483648));
+
+    free(intVar);
+  });
+
+  test('ULONG Variant', () {
+    final intVar = calloc<VARIANT>();
+    VariantInit(intVar);
+    intVar.ref.vt = VARENUM.VT_UI4;
+    intVar.ref.ulVal = 0;
+    expect(intVar.ref.ulVal, equals(0));
+
+    intVar.ref.ulVal = 4294967295;
+    expect(intVar.ref.ulVal, equals(4294967295));
+
+    intVar.ref.ulVal = 0x80000000;
+    expect(intVar.ref.ulVal, equals(2147483648));
+
+    free(intVar);
+  });
+
+  test('UINT Variant', () {
+    final intVar = calloc<VARIANT>();
+    VariantInit(intVar);
+    intVar.ref.vt = VARENUM.VT_UI4;
+    intVar.ref.uintVal = 0;
+    expect(intVar.ref.uintVal, equals(0));
+
+    intVar.ref.uintVal = 4294967295;
+    expect(intVar.ref.uintVal, equals(4294967295));
+
+    intVar.ref.uintVal = 0x80000000;
+    expect(intVar.ref.uintVal, equals(2147483648));
+
+    free(intVar);
+  });
+
   test('SHORT Variant', () {
     final intVar = calloc<VARIANT>();
     VariantInit(intVar);
@@ -51,6 +115,37 @@ void main() {
 
     intVar.ref.iVal = 0x8000;
     expect(intVar.ref.iVal, equals(-32768));
+
+    free(intVar);
+  });
+  test('BYTE Variant', () {
+    final intVar = calloc<VARIANT>();
+    VariantInit(intVar);
+    intVar.ref.vt = VARENUM.VT_UI1;
+    intVar.ref.bVal = 0;
+    expect(intVar.ref.bVal, equals(0));
+
+    intVar.ref.bVal = 255;
+    expect(intVar.ref.bVal, equals(255));
+
+    intVar.ref.bVal = 0x80;
+    expect(intVar.ref.bVal, equals(128));
+
+    free(intVar);
+  });
+
+  test('USHORT Variant', () {
+    final intVar = calloc<VARIANT>();
+    VariantInit(intVar);
+    intVar.ref.vt = VARENUM.VT_UI2;
+    intVar.ref.uiVal = 0;
+    expect(intVar.ref.uiVal, equals(0));
+
+    intVar.ref.uiVal = 65535;
+    expect(intVar.ref.uiVal, equals(65535));
+
+    intVar.ref.uiVal = 0x8000;
+    expect(intVar.ref.uiVal, equals(32768));
 
     free(intVar);
   });

@@ -482,7 +482,7 @@ class VARIANT extends Struct {
   set lVal(int val) => _data = (val.toUnsigned(32) << 32);
 
   // BYTE => unsigned char => Uint8
-  int get bVal => (_data & 0xFF00000000000000) >> 56;
+  int get bVal => ((_data & 0xFF00000000000000) >> 56).toUnsigned(8);
   set bVal(int val) => _data = val << 56;
 
   // SHORT => short => Int16
@@ -544,11 +544,11 @@ class VARIANT extends Struct {
   set cVal(int val) => _data = (val.toUnsigned(8) << 56);
 
   // USHORT -> unsigned short -> Uint16
-  int get uiVal => (_data & 0xFFFF000000000000) >> 48;
+  int get uiVal => ((_data & 0xFFFF000000000000) >> 48).toUnsigned(16);
   set uiVal(int val) => _data = val << 48;
 
   // ULONG -> unsigned long -> Uint32
-  int get ulVal => (_data & 0xFFFFFFFF00000000) >> 32;
+  int get ulVal => ((_data & 0xFFFFFFFF00000000) >> 32).toUnsigned(32);
   set ulVal(int val) => _data = val << 32;
 
   // ULONGLONG -> unsigned long long -> Uint64
@@ -560,7 +560,7 @@ class VARIANT extends Struct {
   set intVal(int val) => _data = (val.toUnsigned(32) << 32);
 
   // UINT -> unsigned int -> Uint32
-  int get uintVal => (_data & 0xFFFFFFFF00000000) >> 32;
+  int get uintVal => ((_data & 0xFFFFFFFF00000000) >> 32).toUnsigned(32);
   set uintVal(int val) => _data = val << 32;
 
   @Uint64()
