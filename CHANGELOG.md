@@ -1,3 +1,8 @@
+## 2.0.0-nullsafety.10
+
+- Make VARIANT more representative of the underlying type.
+- Add more tests.
+
 ## 2.0.0-nullsafety.9
 
 - Workarounds to fix sizing of BLUETOOTH_PIN_INFO and SHITEMID structs.
