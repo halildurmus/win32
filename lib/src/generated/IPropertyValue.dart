@@ -189,7 +189,7 @@ class IPropertyValue extends IInspectable {
   IPropertyValue(Pointer<COMObject> ptr) : super(ptr);
 
   int get Type {
-    final retValuePtr = allocate<Int32>();
+    final retValuePtr = calloc<Int32>();
 
     final hr = Pointer<NativeFunction<_get_Type_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(6).value)
@@ -197,12 +197,12 @@ class IPropertyValue extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    free(retValuePtr);
+    calloc.free(retValuePtr);
     return retValue;
   }
 
   int get IsNumericScalar {
-    final retValuePtr = allocate<Uint8>();
+    final retValuePtr = calloc<Uint8>();
 
     final hr = Pointer<NativeFunction<_get_IsNumericScalar_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(7).value)
@@ -210,7 +210,7 @@ class IPropertyValue extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    free(retValuePtr);
+    calloc.free(retValuePtr);
     return retValue;
   }
 

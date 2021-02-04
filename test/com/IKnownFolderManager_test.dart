@@ -20,35 +20,35 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final knownfoldermanager = IKnownFolderManager(ptr);
-  test('Can instantiate IKnownFolderManager.FolderIdFromCsidl', () {
-    expect(knownfoldermanager.FolderIdFromCsidl, isA<Function>());
-  });
-  test('Can instantiate IKnownFolderManager.FolderIdToCsidl', () {
-    expect(knownfoldermanager.FolderIdToCsidl, isA<Function>());
-  });
-  test('Can instantiate IKnownFolderManager.GetFolderIds', () {
-    expect(knownfoldermanager.GetFolderIds, isA<Function>());
-  });
-  test('Can instantiate IKnownFolderManager.GetFolder', () {
-    expect(knownfoldermanager.GetFolder, isA<Function>());
-  });
-  test('Can instantiate IKnownFolderManager.GetFolderByName', () {
-    expect(knownfoldermanager.GetFolderByName, isA<Function>());
-  });
-  test('Can instantiate IKnownFolderManager.RegisterFolder', () {
-    expect(knownfoldermanager.RegisterFolder, isA<Function>());
-  });
-  test('Can instantiate IKnownFolderManager.UnregisterFolder', () {
-    expect(knownfoldermanager.UnregisterFolder, isA<Function>());
-  });
-  test('Can instantiate IKnownFolderManager.FindFolderFromPath', () {
-    expect(knownfoldermanager.FindFolderFromPath, isA<Function>());
-  });
-  test('Can instantiate IKnownFolderManager.FindFolderFromIDList', () {
-    expect(knownfoldermanager.FindFolderFromIDList, isA<Function>());
-  });
-  test('Can instantiate IKnownFolderManager.Redirect', () {
-    expect(knownfoldermanager.Redirect, isA<Function>());
-  });
-  free(ptr);
-}
+    test('Can instantiate IKnownFolderManager.FolderIdFromCsidl', () {
+      expect(knownfoldermanager.FolderIdFromCsidl, isA<Function>());
+      });
+          test('Can instantiate IKnownFolderManager.FolderIdToCsidl', () {
+      expect(knownfoldermanager.FolderIdToCsidl, isA<Function>());
+      });
+          test('Can instantiate IKnownFolderManager.GetFolderIds', () {
+      expect(knownfoldermanager.GetFolderIds, isA<Function>());
+      });
+          test('Can instantiate IKnownFolderManager.GetFolder', () {
+      expect(knownfoldermanager.GetFolder, isA<Function>());
+      });
+          test('Can instantiate IKnownFolderManager.GetFolderByName', () {
+      expect(knownfoldermanager.GetFolderByName, isA<Function>());
+      });
+          test('Can instantiate IKnownFolderManager.RegisterFolder', () {
+      expect(knownfoldermanager.RegisterFolder, isA<Function>());
+      });
+          test('Can instantiate IKnownFolderManager.UnregisterFolder', () {
+      expect(knownfoldermanager.UnregisterFolder, isA<Function>());
+      });
+          test('Can instantiate IKnownFolderManager.FindFolderFromPath', () {
+      expect(knownfoldermanager.FindFolderFromPath, isA<Function>());
+      });
+          test('Can instantiate IKnownFolderManager.FindFolderFromIDList', () {
+      expect(knownfoldermanager.FindFolderFromIDList, isA<Function>());
+      });
+          test('Can instantiate IKnownFolderManager.Redirect', () {
+      expect(knownfoldermanager.Redirect, isA<Function>());
+      });
+        calloc.free(ptr);
+  }

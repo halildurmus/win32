@@ -43,6 +43,6 @@ void addIcon({required int hWndParent}) {
 
 void removeIcon() {
   Shell_NotifyIcon(NIM_DELETE, _nid);
-  free(_nid);
+  calloc.free(_nid);
   app.deregisterWndProc(_trayWndProc);
 }

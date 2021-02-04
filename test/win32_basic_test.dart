@@ -22,7 +22,7 @@ void main() {
     final ansi = convertToANSIString('Beep');
     final pGetNativeSystemInfo = GetProcAddress(hModule, ansi);
     expect(pGetNativeSystemInfo, isNonZero);
-    free(ansi);
+    calloc.free(ansi);
   });
 
   test('Successful GetCurrentProcess', () {

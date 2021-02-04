@@ -20,26 +20,26 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final shellitemarray = IShellItemArray(ptr);
-  test('Can instantiate IShellItemArray.BindToHandler', () {
-    expect(shellitemarray.BindToHandler, isA<Function>());
-  });
-  test('Can instantiate IShellItemArray.GetPropertyStore', () {
-    expect(shellitemarray.GetPropertyStore, isA<Function>());
-  });
-  test('Can instantiate IShellItemArray.GetPropertyDescriptionList', () {
-    expect(shellitemarray.GetPropertyDescriptionList, isA<Function>());
-  });
-  test('Can instantiate IShellItemArray.GetAttributes', () {
-    expect(shellitemarray.GetAttributes, isA<Function>());
-  });
-  test('Can instantiate IShellItemArray.GetCount', () {
-    expect(shellitemarray.GetCount, isA<Function>());
-  });
-  test('Can instantiate IShellItemArray.GetItemAt', () {
-    expect(shellitemarray.GetItemAt, isA<Function>());
-  });
-  test('Can instantiate IShellItemArray.EnumItems', () {
-    expect(shellitemarray.EnumItems, isA<Function>());
-  });
-  free(ptr);
-}
+    test('Can instantiate IShellItemArray.BindToHandler', () {
+      expect(shellitemarray.BindToHandler, isA<Function>());
+      });
+          test('Can instantiate IShellItemArray.GetPropertyStore', () {
+      expect(shellitemarray.GetPropertyStore, isA<Function>());
+      });
+          test('Can instantiate IShellItemArray.GetPropertyDescriptionList', () {
+      expect(shellitemarray.GetPropertyDescriptionList, isA<Function>());
+      });
+          test('Can instantiate IShellItemArray.GetAttributes', () {
+      expect(shellitemarray.GetAttributes, isA<Function>());
+      });
+          test('Can instantiate IShellItemArray.GetCount', () {
+      expect(shellitemarray.GetCount, isA<Function>());
+      });
+          test('Can instantiate IShellItemArray.GetItemAt', () {
+      expect(shellitemarray.GetItemAt, isA<Function>());
+      });
+          test('Can instantiate IShellItemArray.EnumItems', () {
+      expect(shellitemarray.EnumItems, isA<Function>());
+      });
+        calloc.free(ptr);
+  }

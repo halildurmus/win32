@@ -20,20 +20,20 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final shellitem = IShellItem(ptr);
-  test('Can instantiate IShellItem.BindToHandler', () {
-    expect(shellitem.BindToHandler, isA<Function>());
-  });
-  test('Can instantiate IShellItem.GetParent', () {
-    expect(shellitem.GetParent, isA<Function>());
-  });
-  test('Can instantiate IShellItem.GetDisplayName', () {
-    expect(shellitem.GetDisplayName, isA<Function>());
-  });
-  test('Can instantiate IShellItem.GetAttributes', () {
-    expect(shellitem.GetAttributes, isA<Function>());
-  });
-  test('Can instantiate IShellItem.Compare', () {
-    expect(shellitem.Compare, isA<Function>());
-  });
-  free(ptr);
-}
+    test('Can instantiate IShellItem.BindToHandler', () {
+      expect(shellitem.BindToHandler, isA<Function>());
+      });
+          test('Can instantiate IShellItem.GetParent', () {
+      expect(shellitem.GetParent, isA<Function>());
+      });
+          test('Can instantiate IShellItem.GetDisplayName', () {
+      expect(shellitem.GetDisplayName, isA<Function>());
+      });
+          test('Can instantiate IShellItem.GetAttributes', () {
+      expect(shellitem.GetAttributes, isA<Function>());
+      });
+          test('Can instantiate IShellItem.Compare', () {
+      expect(shellitem.Compare, isA<Function>());
+      });
+        calloc.free(ptr);
+  }

@@ -37,7 +37,7 @@
 ///
 /// To receive a string, allocate memory with a command like the following:
 /// ```
-///   final buffer = allocate<Uint16>(count: length).cast<Utf16>();
+///   final buffer = calloc<Uint16>(count: length).cast<Utf16>();
 ///   GetWindowText(hWnd, buffer, length);
 /// ```
 ///
@@ -56,7 +56,7 @@
 ///   final ansi = convertToANSIString('Beep');
 ///   final pGetNativeSystemInfo = GetProcAddress(hModule, ansi);
 ///   ...
-///   free(ansi);
+///   calloc.free(ansi);
 /// ```
 ///
 /// ## Strings (Windows Runtime)
@@ -66,11 +66,11 @@
 /// [WindowsDeleteString] API. A Dart function may be used to convert to and
 /// from `HSTRING`s, for example:
 /// ```
-///   final systemPtr = allocate<IntPtr>();
+///   final systemPtr = calloc<IntPtr>();
 ///   calendar.GetCalendarSystem(systemPtr);
 ///   print('The calendar system is ${convertFromHString(systemPtr)}.');
 ///   WindowsDeleteString(systemPtr.value);
-///   free(systemPtr);
+///   calloc.free(systemPtr);
 /// ```
 ///
 /// Make sure you dispose of `HSTRING`s by calling `WindowsDeleteString` and
@@ -79,7 +79,6 @@ library win32;
 
 // Core Win32 APIs, constants and macros
 export 'src/callbacks.dart';
-export 'src/calloc.dart';
 export 'src/constants.dart';
 export 'src/constants_nodoc.dart';
 export 'src/exceptions.dart';

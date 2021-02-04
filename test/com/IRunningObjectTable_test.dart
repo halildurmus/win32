@@ -20,26 +20,26 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final runningobjecttable = IRunningObjectTable(ptr);
-  test('Can instantiate IRunningObjectTable.Register', () {
-    expect(runningobjecttable.Register, isA<Function>());
-  });
-  test('Can instantiate IRunningObjectTable.Revoke', () {
-    expect(runningobjecttable.Revoke, isA<Function>());
-  });
-  test('Can instantiate IRunningObjectTable.IsRunning', () {
-    expect(runningobjecttable.IsRunning, isA<Function>());
-  });
-  test('Can instantiate IRunningObjectTable.GetObject', () {
-    expect(runningobjecttable.GetObject, isA<Function>());
-  });
-  test('Can instantiate IRunningObjectTable.NoteChangeTime', () {
-    expect(runningobjecttable.NoteChangeTime, isA<Function>());
-  });
-  test('Can instantiate IRunningObjectTable.GetTimeOfLastChange', () {
-    expect(runningobjecttable.GetTimeOfLastChange, isA<Function>());
-  });
-  test('Can instantiate IRunningObjectTable.EnumRunning', () {
-    expect(runningobjecttable.EnumRunning, isA<Function>());
-  });
-  free(ptr);
-}
+    test('Can instantiate IRunningObjectTable.Register', () {
+      expect(runningobjecttable.Register, isA<Function>());
+      });
+          test('Can instantiate IRunningObjectTable.Revoke', () {
+      expect(runningobjecttable.Revoke, isA<Function>());
+      });
+          test('Can instantiate IRunningObjectTable.IsRunning', () {
+      expect(runningobjecttable.IsRunning, isA<Function>());
+      });
+          test('Can instantiate IRunningObjectTable.GetObject', () {
+      expect(runningobjecttable.GetObject, isA<Function>());
+      });
+          test('Can instantiate IRunningObjectTable.NoteChangeTime', () {
+      expect(runningobjecttable.NoteChangeTime, isA<Function>());
+      });
+          test('Can instantiate IRunningObjectTable.GetTimeOfLastChange', () {
+      expect(runningobjecttable.GetTimeOfLastChange, isA<Function>());
+      });
+          test('Can instantiate IRunningObjectTable.EnumRunning', () {
+      expect(runningobjecttable.EnumRunning, isA<Function>());
+      });
+        calloc.free(ptr);
+  }

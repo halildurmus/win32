@@ -23,7 +23,7 @@ void showSimpleTaskDialog() {
       'decision. Of course, you cannot guarantee that the user will actually '
       "read the text, so it's important that you also provide an undo function "
       'for when the wrong choice is selected.');
-  final buttonSelected = allocate<Int32>();
+  final buttonSelected = calloc<Int32>();
 
   try {
     final hr = TaskDialog(
@@ -52,18 +52,18 @@ void showSimpleTaskDialog() {
         'app manifest\ndeclaring a dependency on comctl32.dll v6 is missing.\n');
     rethrow;
   } finally {
-    free(windowTitle);
-    free(mainInstruction);
-    free(content);
+    calloc.free(windowTitle);
+    calloc.free(mainInstruction);
+    calloc.free(content);
   }
 }
 
 // Broken until https://github.com/dart-lang/sdk/issues/38158 is fixed.
 void showCustomTaskDialog() {
   print(sizeOf<TASKDIALOGCONFIG>());
-  final buttonSelected = allocate<Int32>();
+  final buttonSelected = calloc<Int32>();
 
-  final buttons = allocate<TASKDIALOG_BUTTON>(count: 2);
+  final buttons = calloc<TASKDIALOG_BUTTON>(2);
   buttons[0]
     ..nButtonID = 100
     ..pszButtonText =

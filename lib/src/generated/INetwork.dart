@@ -9,7 +9,6 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
-import '../calloc.dart';
 import '../constants.dart';
 import '../constants_nodoc.dart';
 import '../exceptions.dart';
@@ -151,7 +150,7 @@ class INetwork extends IDispatch {
           pdwHighDateTimeConnected);
 
   int get IsConnectedToInternet {
-    final retValuePtr = allocate<Int16>();
+    final retValuePtr = calloc<Int16>();
 
     final hr =
         Pointer<NativeFunction<_get_IsConnectedToInternet_Native>>.fromAddress(
@@ -161,12 +160,12 @@ class INetwork extends IDispatch {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    free(retValuePtr);
+    calloc.free(retValuePtr);
     return retValue;
   }
 
   int get IsConnected {
-    final retValuePtr = allocate<Int16>();
+    final retValuePtr = calloc<Int16>();
 
     final hr = Pointer<NativeFunction<_get_IsConnected_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(16).value)
@@ -174,7 +173,7 @@ class INetwork extends IDispatch {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    free(retValuePtr);
+    calloc.free(retValuePtr);
     return retValue;
   }
 

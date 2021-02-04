@@ -69,7 +69,7 @@ class DrawEngine {
   void drawText(String text, int x, int y) {
     final textPtr = TEXT(text);
     TextOut(hdc, x, y, textPtr, text.length);
-    free(textPtr);
+    calloc.free(textPtr);
   }
 
   void drawScore(int score, int x, int y) {
@@ -80,7 +80,7 @@ class DrawEngine {
     TextOut(hdc, x, y, scoreTextPtr, scoreText.length);
     SetBkMode(hdc, TRANSPARENT);
 
-    free(scoreTextPtr);
+    calloc.free(scoreTextPtr);
   }
 
   void drawSpeed(int speed, int x, int y) {
@@ -91,7 +91,7 @@ class DrawEngine {
     TextOut(hdc, x, y, speedTextPtr, speedText.length);
     SetBkMode(hdc, TRANSPARENT);
 
-    free(speedTextPtr);
+    calloc.free(speedTextPtr);
   }
 
   void drawNextPiece(Piece piece, int x, int y) {
@@ -112,6 +112,6 @@ class DrawEngine {
       }
     }
 
-    free(nextTextPtr);
+    calloc.free(nextTextPtr);
   }
 }

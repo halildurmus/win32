@@ -20,44 +20,44 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final shellitem2 = IShellItem2(ptr);
-  test('Can instantiate IShellItem2.GetPropertyStore', () {
-    expect(shellitem2.GetPropertyStore, isA<Function>());
-  });
-  test('Can instantiate IShellItem2.GetPropertyStoreWithCreateObject', () {
-    expect(shellitem2.GetPropertyStoreWithCreateObject, isA<Function>());
-  });
-  test('Can instantiate IShellItem2.GetPropertyStoreForKeys', () {
-    expect(shellitem2.GetPropertyStoreForKeys, isA<Function>());
-  });
-  test('Can instantiate IShellItem2.GetPropertyDescriptionList', () {
-    expect(shellitem2.GetPropertyDescriptionList, isA<Function>());
-  });
-  test('Can instantiate IShellItem2.Update', () {
-    expect(shellitem2.Update, isA<Function>());
-  });
-  test('Can instantiate IShellItem2.GetProperty', () {
-    expect(shellitem2.GetProperty, isA<Function>());
-  });
-  test('Can instantiate IShellItem2.GetCLSID', () {
-    expect(shellitem2.GetCLSID, isA<Function>());
-  });
-  test('Can instantiate IShellItem2.GetFileTime', () {
-    expect(shellitem2.GetFileTime, isA<Function>());
-  });
-  test('Can instantiate IShellItem2.GetInt32', () {
-    expect(shellitem2.GetInt32, isA<Function>());
-  });
-  test('Can instantiate IShellItem2.GetString', () {
-    expect(shellitem2.GetString, isA<Function>());
-  });
-  test('Can instantiate IShellItem2.GetUInt32', () {
-    expect(shellitem2.GetUInt32, isA<Function>());
-  });
-  test('Can instantiate IShellItem2.GetUInt64', () {
-    expect(shellitem2.GetUInt64, isA<Function>());
-  });
-  test('Can instantiate IShellItem2.GetBool', () {
-    expect(shellitem2.GetBool, isA<Function>());
-  });
-  free(ptr);
-}
+    test('Can instantiate IShellItem2.GetPropertyStore', () {
+      expect(shellitem2.GetPropertyStore, isA<Function>());
+      });
+          test('Can instantiate IShellItem2.GetPropertyStoreWithCreateObject', () {
+      expect(shellitem2.GetPropertyStoreWithCreateObject, isA<Function>());
+      });
+          test('Can instantiate IShellItem2.GetPropertyStoreForKeys', () {
+      expect(shellitem2.GetPropertyStoreForKeys, isA<Function>());
+      });
+          test('Can instantiate IShellItem2.GetPropertyDescriptionList', () {
+      expect(shellitem2.GetPropertyDescriptionList, isA<Function>());
+      });
+          test('Can instantiate IShellItem2.Update', () {
+      expect(shellitem2.Update, isA<Function>());
+      });
+          test('Can instantiate IShellItem2.GetProperty', () {
+      expect(shellitem2.GetProperty, isA<Function>());
+      });
+          test('Can instantiate IShellItem2.GetCLSID', () {
+      expect(shellitem2.GetCLSID, isA<Function>());
+      });
+          test('Can instantiate IShellItem2.GetFileTime', () {
+      expect(shellitem2.GetFileTime, isA<Function>());
+      });
+          test('Can instantiate IShellItem2.GetInt32', () {
+      expect(shellitem2.GetInt32, isA<Function>());
+      });
+          test('Can instantiate IShellItem2.GetString', () {
+      expect(shellitem2.GetString, isA<Function>());
+      });
+          test('Can instantiate IShellItem2.GetUInt32', () {
+      expect(shellitem2.GetUInt32, isA<Function>());
+      });
+          test('Can instantiate IShellItem2.GetUInt64', () {
+      expect(shellitem2.GetUInt64, isA<Function>());
+      });
+          test('Can instantiate IShellItem2.GetBool', () {
+      expect(shellitem2.GetBool, isA<Function>());
+      });
+        calloc.free(ptr);
+  }

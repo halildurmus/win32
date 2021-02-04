@@ -18,7 +18,7 @@ void main() {
   }
 
   final netManager = NetworkListManager.createInstance();
-  final nlmConnectivity = allocate<Uint32>();
+  final nlmConnectivity = calloc<Uint32>();
   hr = netManager.GetConnectivity(nlmConnectivity);
   if (FAILED(hr)) {
     throw WindowsException(hr);
@@ -36,8 +36,8 @@ void main() {
     print('Connected to the Internet via IPv6.');
   }
 
-  free(nlmConnectivity);
-  free(netManager.ptr);
+  calloc.free(nlmConnectivity);
+  calloc.free(netManager.ptr);
 
   CoUninitialize();
 }

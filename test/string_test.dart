@@ -26,7 +26,7 @@ void main() {
         final stringPtr = TEXT(testString);
 
         expect(stringPtr.unpackString(5), equals(testString.substring(0, 5)));
-        free(stringPtr);
+        calloc.free(stringPtr);
       }
     });
 
@@ -35,7 +35,7 @@ void main() {
         final stringPtr = TEXT(testString);
 
         expect(stringPtr.unpackString(256), equals(testString));
-        free(stringPtr);
+        calloc.free(stringPtr);
       }
     });
 
@@ -44,7 +44,7 @@ void main() {
         final stringPtr = TEXT('');
 
         expect(stringPtr.unpackString(10), equals(''));
-        free(stringPtr);
+        calloc.free(stringPtr);
       }
     });
 
@@ -60,7 +60,7 @@ void main() {
         expect(arrayPtr.unpackStringArray(400)[5], equals('sultanas'));
         expect(arrayPtr.unpackStringArray(400).length, equals(6));
 
-        free(arrayPtr);
+        calloc.free(arrayPtr);
       }
     });
   });
@@ -76,7 +76,7 @@ void main() {
           expect(string, equals(string2));
 
           WindowsDeleteString(hstring.value);
-          free(hstring);
+          calloc.free(hstring);
         }
       });
       test('String to HSTRING conversion -- more complex', () {
@@ -92,7 +92,7 @@ Some accented text: Résumé
           expect(string, equals(string2));
 
           WindowsDeleteString(hstring.value);
-          free(hstring);
+          calloc.free(hstring);
         }
       });
     });

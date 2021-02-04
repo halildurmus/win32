@@ -62,13 +62,13 @@ int findPrimaryMonitor(List<int> monitors) {
     final result = GetMonitorInfo(monitor, monitorInfo);
     if (result == TRUE) {
       if (testBitmask(monitorInfo.ref.dwFlags, MONITORINFOF_PRIMARY)) {
-        free(monitorInfo);
+        calloc.free(monitorInfo);
         return monitor;
       }
     }
   }
 
-  free(monitorInfo);
+  calloc.free(monitorInfo);
   return 0;
 }
 
@@ -109,12 +109,12 @@ void main() {
   final primaryMonitorHandle = findPrimaryMonitor(monitors);
   print('Primary monitor handle: $primaryMonitorHandle');
 
-  final physicalMonitorCountPtr = allocate<Uint32>();
+  final physicalMonitorCountPtr = calloc<Uint32>();
   result = GetNumberOfPhysicalMonitorsFromHMONITOR(
       primaryMonitorHandle, physicalMonitorCountPtr);
   if (result == FALSE) {
     print('No physical monitors attached.');
-    free(physicalMonitorCountPtr);
+    calloc.free(physicalMonitorCountPtr);
     return;
   }
 
@@ -125,8 +125,8 @@ void main() {
   // Since fixed-size arrays are difficult to allocate with Dart FFI at present,
   // and since we only need the first entry, we can manually allocate space of
   // the right size.
-  final physicalMonitorArray = allocate<Uint8>(
-      count: physicalMonitorCountPtr.value * (sizeOf<IntPtr>() + 256));
+  final physicalMonitorArray =
+      calloc<PHYSICAL_MONITOR>(physicalMonitorCountPtr.value);
 
   result = GetPhysicalMonitorsFromHMONITOR(primaryMonitorHandle,
       physicalMonitorCountPtr.value, physicalMonitorArray.cast());
@@ -143,8 +143,8 @@ void main() {
       .unpackString(128);
   print('Physical monitor description: $physicalMonitorDescription');
 
-  final monitorCapabilitiesPtr = allocate<Uint32>();
-  final monitorColorTemperaturesPtr = allocate<Uint32>();
+  final monitorCapabilitiesPtr = calloc<Uint32>();
+  final monitorColorTemperaturesPtr = calloc<Uint32>();
 
   result = GetMonitorCapabilities(physicalMonitorHandle, monitorCapabilitiesPtr,
       monitorColorTemperaturesPtr);
@@ -155,9 +155,9 @@ void main() {
     print('Monitor does not support DDC/CI.');
   }
 
-  final minimumBrightnessPtr = allocate<Uint32>();
-  final currentBrightnessPtr = allocate<Uint32>();
-  final maximumBrightnessPtr = allocate<Uint32>();
+  final minimumBrightnessPtr = calloc<Uint32>();
+  final currentBrightnessPtr = calloc<Uint32>();
+  final maximumBrightnessPtr = calloc<Uint32>();
   result = GetMonitorBrightness(physicalMonitorHandle, minimumBrightnessPtr,
       currentBrightnessPtr, maximumBrightnessPtr);
   if (result == TRUE) {
@@ -170,11 +170,11 @@ void main() {
       physicalMonitorCountPtr.value, physicalMonitorArray.cast());
 
   // free all the heap-allocated variables
-  free(physicalMonitorArray);
-  free(physicalMonitorCountPtr);
-  free(monitorCapabilitiesPtr);
-  free(monitorColorTemperaturesPtr);
-  free(minimumBrightnessPtr);
-  free(currentBrightnessPtr);
-  free(maximumBrightnessPtr);
+  calloc.free(physicalMonitorArray);
+  calloc.free(physicalMonitorCountPtr);
+  calloc.free(monitorCapabilitiesPtr);
+  calloc.free(monitorColorTemperaturesPtr);
+  calloc.free(minimumBrightnessPtr);
+  calloc.free(currentBrightnessPtr);
+  calloc.free(maximumBrightnessPtr);
 }

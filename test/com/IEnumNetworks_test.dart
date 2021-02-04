@@ -20,17 +20,17 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final enumnetworks = IEnumNetworks(ptr);
-  test('Can instantiate IEnumNetworks.Next', () {
-    expect(enumnetworks.Next, isA<Function>());
-  });
-  test('Can instantiate IEnumNetworks.Skip', () {
-    expect(enumnetworks.Skip, isA<Function>());
-  });
-  test('Can instantiate IEnumNetworks.Reset', () {
-    expect(enumnetworks.Reset, isA<Function>());
-  });
-  test('Can instantiate IEnumNetworks.Clone', () {
-    expect(enumnetworks.Clone, isA<Function>());
-  });
-  free(ptr);
-}
+    test('Can instantiate IEnumNetworks.Next', () {
+      expect(enumnetworks.Next, isA<Function>());
+      });
+          test('Can instantiate IEnumNetworks.Skip', () {
+      expect(enumnetworks.Skip, isA<Function>());
+      });
+          test('Can instantiate IEnumNetworks.Reset', () {
+      expect(enumnetworks.Reset, isA<Function>());
+      });
+          test('Can instantiate IEnumNetworks.Clone', () {
+      expect(enumnetworks.Clone, isA<Function>());
+      });
+        calloc.free(ptr);
+  }

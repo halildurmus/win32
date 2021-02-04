@@ -20,14 +20,14 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final metadatadispenser = IMetaDataDispenser(ptr);
-  test('Can instantiate IMetaDataDispenser.DefineScope', () {
-    expect(metadatadispenser.DefineScope, isA<Function>());
-  });
-  test('Can instantiate IMetaDataDispenser.OpenScope', () {
-    expect(metadatadispenser.OpenScope, isA<Function>());
-  });
-  test('Can instantiate IMetaDataDispenser.OpenScopeOnMemory', () {
-    expect(metadatadispenser.OpenScopeOnMemory, isA<Function>());
-  });
-  free(ptr);
-}
+    test('Can instantiate IMetaDataDispenser.DefineScope', () {
+      expect(metadatadispenser.DefineScope, isA<Function>());
+      });
+          test('Can instantiate IMetaDataDispenser.OpenScope', () {
+      expect(metadatadispenser.OpenScope, isA<Function>());
+      });
+          test('Can instantiate IMetaDataDispenser.OpenScopeOnMemory', () {
+      expect(metadatadispenser.OpenScopeOnMemory, isA<Function>());
+      });
+        calloc.free(ptr);
+  }

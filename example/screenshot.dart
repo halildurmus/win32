@@ -74,7 +74,7 @@ void captureImage(int hwnd) {
                 bmpScreen.ref.bmHeight)
             .toInt();
 
-    final lpBitmap = allocate<Uint8>(count: dwBmpSize);
+    final lpBitmap = calloc<Uint8>(dwBmpSize);
 
     GetDIBits(hdcWindow, hbmScreen, 0, bmpScreen.ref.bmHeight, lpBitmap,
         bitmapInfoHeader.cast(), DIB_RGB_COLORS);
@@ -90,7 +90,7 @@ void captureImage(int hwnd) {
     bitmapFileHeader.ref.bfSize = dwSizeOfDIB;
     bitmapFileHeader.ref.bfType = 0x4D42; // BM
 
-    final dwBytesWritten = allocate<Uint32>();
+    final dwBytesWritten = calloc<Uint32>();
     WriteFile(hFile, bitmapFileHeader, sizeOf<BITMAPFILEHEADER>(),
         dwBytesWritten, nullptr);
     WriteFile(hFile, bitmapInfoHeader, sizeOf<BITMAPINFOHEADER>(),
@@ -123,7 +123,7 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
       captureImage(hWnd);
       EndPaint(hWnd, ps);
 
-      free(ps);
+      calloc.free(ps);
       return 0;
   }
   return DefWindowProc(hWnd, uMsg, wParam, lParam);

@@ -19,10 +19,10 @@ int enumWindowsProc(int hWnd, int lParam) {
     return TRUE;
   }
 
-  final buffer = allocate<Uint16>(count: length + 1).cast<Utf16>();
+  final buffer = calloc<Uint16>(length + 1).cast<Utf16>();
   GetWindowText(hWnd, buffer, length + 1);
   print('hWnd $hWnd: ${buffer.unpackString(length)}');
-  free(buffer);
+  calloc.free(buffer);
 
   return TRUE;
 }

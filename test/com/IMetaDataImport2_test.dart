@@ -20,29 +20,29 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final metadataimport2 = IMetaDataImport2(ptr);
-  test('Can instantiate IMetaDataImport2.EnumGenericParams', () {
-    expect(metadataimport2.EnumGenericParams, isA<Function>());
-  });
-  test('Can instantiate IMetaDataImport2.GetGenericParamProps', () {
-    expect(metadataimport2.GetGenericParamProps, isA<Function>());
-  });
-  test('Can instantiate IMetaDataImport2.GetMethodSpecProps', () {
-    expect(metadataimport2.GetMethodSpecProps, isA<Function>());
-  });
-  test('Can instantiate IMetaDataImport2.EnumGenericParamConstraints', () {
-    expect(metadataimport2.EnumGenericParamConstraints, isA<Function>());
-  });
-  test('Can instantiate IMetaDataImport2.GetGenericParamConstraintProps', () {
-    expect(metadataimport2.GetGenericParamConstraintProps, isA<Function>());
-  });
-  test('Can instantiate IMetaDataImport2.GetPEKind', () {
-    expect(metadataimport2.GetPEKind, isA<Function>());
-  });
-  test('Can instantiate IMetaDataImport2.GetVersionString', () {
-    expect(metadataimport2.GetVersionString, isA<Function>());
-  });
-  test('Can instantiate IMetaDataImport2.EnumMethodSpecs', () {
-    expect(metadataimport2.EnumMethodSpecs, isA<Function>());
-  });
-  free(ptr);
-}
+    test('Can instantiate IMetaDataImport2.EnumGenericParams', () {
+      expect(metadataimport2.EnumGenericParams, isA<Function>());
+      });
+          test('Can instantiate IMetaDataImport2.GetGenericParamProps', () {
+      expect(metadataimport2.GetGenericParamProps, isA<Function>());
+      });
+          test('Can instantiate IMetaDataImport2.GetMethodSpecProps', () {
+      expect(metadataimport2.GetMethodSpecProps, isA<Function>());
+      });
+          test('Can instantiate IMetaDataImport2.EnumGenericParamConstraints', () {
+      expect(metadataimport2.EnumGenericParamConstraints, isA<Function>());
+      });
+          test('Can instantiate IMetaDataImport2.GetGenericParamConstraintProps', () {
+      expect(metadataimport2.GetGenericParamConstraintProps, isA<Function>());
+      });
+          test('Can instantiate IMetaDataImport2.GetPEKind', () {
+      expect(metadataimport2.GetPEKind, isA<Function>());
+      });
+          test('Can instantiate IMetaDataImport2.GetVersionString', () {
+      expect(metadataimport2.GetVersionString, isA<Function>());
+      });
+          test('Can instantiate IMetaDataImport2.EnumMethodSpecs', () {
+      expect(metadataimport2.EnumMethodSpecs, isA<Function>());
+      });
+        calloc.free(ptr);
+  }

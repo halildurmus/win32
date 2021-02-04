@@ -463,7 +463,7 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
       init(width, height);
 
-      free(rect);
+      calloc.free(rect);
       break;
 
     case WM_CLOSE:
@@ -489,8 +489,8 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       draw(dc, rect.ref, x, y, width, height);
       EndPaint(hwnd, ps);
 
-      free(rect);
-      free(ps);
+      calloc.free(rect);
+      calloc.free(ps);
       break;
 
     case WM_KEYDOWN:
@@ -592,7 +592,7 @@ void main() {
           TranslateMessage(msg);
           DispatchMessage(msg);
         }
-        free(msg);
+        calloc.free(msg);
 
         final dc = GetDC(hWnd);
         final rect = calloc<RECT>();
@@ -605,7 +605,7 @@ void main() {
         draw(dc, rect.ref, 0, 0, windowWidth, windowHeight);
 
         ReleaseDC(hWnd, dc);
-        free(rect);
+        calloc.free(rect);
       }
     } else {
       MessageBox(0, TEXT('Failed to create window'), TEXT('Error'),

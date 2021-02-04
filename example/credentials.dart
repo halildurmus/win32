@@ -36,13 +36,13 @@ void write(
   }
   print('Success. (${credential.ref.CredentialBlobSize})');
 
-  free(blob);
-  free(credential);
+  calloc.free(blob);
+  calloc.free(credential);
 }
 
 void read(String credentialName) {
   print('Reading $credentialName ...');
-  final credPointer = allocate<Pointer<CREDENTIAL>>();
+  final credPointer = calloc<Pointer<CREDENTIAL>>();
   final result =
       CredRead(TEXT(credentialName), CRED_TYPE_GENERIC, 0, credPointer);
   if (result != TRUE) {
@@ -62,7 +62,7 @@ void read(String credentialName) {
   print('read password: $password');
   CredFree(credPointer.value);
   print('done.');
-  free(credPointer);
+  calloc.free(credPointer);
   print('returning');
 }
 

@@ -20,11 +20,11 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final sequentialstream = ISequentialStream(ptr);
-  test('Can instantiate ISequentialStream.Read', () {
-    expect(sequentialstream.Read, isA<Function>());
-  });
-  test('Can instantiate ISequentialStream.Write', () {
-    expect(sequentialstream.Write, isA<Function>());
-  });
-  free(ptr);
-}
+    test('Can instantiate ISequentialStream.Read', () {
+      expect(sequentialstream.Read, isA<Function>());
+      });
+          test('Can instantiate ISequentialStream.Write', () {
+      expect(sequentialstream.Write, isA<Function>());
+      });
+        calloc.free(ptr);
+  }

@@ -24,14 +24,14 @@ int printModules(int processID) {
   }
 
   // Get a list of all the modules in this process.
-  final hMods = allocate<IntPtr>(count: 1024);
-  final cbNeeded = allocate<Uint32>();
+  final hMods = calloc<IntPtr>(1024);
+  final cbNeeded = calloc<Uint32>();
 
   if (EnumProcessModules(
           hProcess, hMods, sizeOf<IntPtr>() * 1024, cbNeeded.cast()) ==
       1) {
     for (var i = 0; i < (cbNeeded.value ~/ sizeOf<IntPtr>()); i++) {
-      final szModName = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
+      final szModName = calloc<Uint16>(MAX_PATH).cast<Utf16>();
 
       // Get the full path to the module's file.
       final hModule = hMods.elementAt(i).value;
@@ -42,12 +42,12 @@ int printModules(int processID) {
         // Print the module name and handle value.
         print('\t${szModName.unpackString(MAX_PATH)} ($moduleValue)');
       }
-      free(szModName);
+      calloc.free(szModName);
     }
   }
 
-  free(hMods);
-  free(cbNeeded);
+  calloc.free(hMods);
+  calloc.free(cbNeeded);
 
   // Release the handle to the process.
   CloseHandle(hProcess);
@@ -56,8 +56,8 @@ int printModules(int processID) {
 }
 
 void main() {
-  final aProcesses = allocate<Uint32>(count: 1024);
-  final cbNeeded = allocate<Uint32>();
+  final aProcesses = calloc<Uint32>(1024);
+  final cbNeeded = calloc<Uint32>();
 
   // Get the list of process identifiers.
   if (EnumProcesses(aProcesses, sizeOf<Uint32>() * 1024, cbNeeded.cast()) ==

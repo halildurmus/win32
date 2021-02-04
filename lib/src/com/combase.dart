@@ -8,7 +8,6 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-import '../calloc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
@@ -39,7 +38,7 @@ Pointer<GUID> convertToIID(String strIID) {
   if (FAILED(hr)) {
     throw WindowsException(hr);
   }
-  free(lpszIID);
+  calloc.free(lpszIID);
   return iid;
 }
 
@@ -57,6 +56,6 @@ Pointer<GUID> convertToCLSID(String strCLSID) {
   if (FAILED(hr)) {
     throw WindowsException(hr);
   }
-  free(lpszCLSID);
+  calloc.free(lpszCLSID);
   return clsid;
 }

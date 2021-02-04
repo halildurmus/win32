@@ -35,7 +35,7 @@ bool isWindowsVersionAtLeast(int majorVersion, int minorVersion) {
       throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
     }
   } finally {
-    free(versionInfo);
+    calloc.free(versionInfo);
   }
 }
 
@@ -54,7 +54,7 @@ bool isWindows8OrGreater() => isWindowsVersionAtLeast(6, 2);
 /// Return a value representing the physically installed memory in the computer.
 /// This may not be the same as available memory.
 int getSystemMemoryInMegabytes() {
-  final memory = allocate<Uint64>();
+  final memory = calloc<Uint64>();
 
   try {
     final result = GetPhysicallyInstalledSystemMemory(memory);
@@ -65,19 +65,19 @@ int getSystemMemoryInMegabytes() {
       throw WindowsException(HRESULT_FROM_WIN32(error));
     }
   } finally {
-    free(memory);
+    calloc.free(memory);
   }
 }
 
 /// Get the computer's fully-qualified DNS name, where available.
 String getComputerName() {
-  final nameLength = allocate<Uint32>()..value = 0;
+  final nameLength = calloc<Uint32>();
   String name;
 
   GetComputerNameEx(
       COMPUTER_NAME_FORMAT.ComputerNameDnsFullyQualified, nullptr, nameLength);
 
-  final namePtr = allocate<Uint8>(count: nameLength.value * 2).cast<Utf16>();
+  final namePtr = calloc<Uint16>(nameLength.value).cast<Utf16>();
 
   try {
     final result = GetComputerNameEx(
@@ -91,8 +91,8 @@ String getComputerName() {
       throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
     }
   } finally {
-    free(namePtr);
-    free(nameLength);
+    calloc.free(namePtr);
+    calloc.free(nameLength);
   }
   return name;
 }
@@ -103,13 +103,13 @@ Object getRegistryValue(int key, String subKey, String valueName) {
 
   final subKeyPtr = TEXT(subKey);
   final valueNamePtr = TEXT(valueName);
-  final openKeyPtr = allocate<IntPtr>();
-  final dataType = allocate<Uint32>();
+  final openKeyPtr = calloc<IntPtr>();
+  final dataType = calloc<Uint32>();
 
   // 256 bytes is more than enough, and Windows will throw ERROR_MORE_DATA if
   // not, so there won't be an overrun.
-  final data = allocate<Uint8>(count: 256);
-  final dataSize = allocate<Uint32>()..value = 256;
+  final data = calloc<Uint8>(256);
+  final dataSize = calloc<Uint32>()..value = 256;
 
   try {
     var result = RegOpenKeyEx(key, subKeyPtr, 0, KEY_READ, openKeyPtr);
@@ -132,11 +132,11 @@ Object getRegistryValue(int key, String subKey, String valueName) {
       throw WindowsException(HRESULT_FROM_WIN32(result));
     }
   } finally {
-    free(subKeyPtr);
-    free(valueNamePtr);
-    free(openKeyPtr);
-    free(data);
-    free(dataSize);
+    calloc.free(subKeyPtr);
+    calloc.free(valueNamePtr);
+    calloc.free(openKeyPtr);
+    calloc.free(data);
+    calloc.free(dataSize);
   }
   RegCloseKey(openKeyPtr.value);
 
@@ -188,7 +188,7 @@ void printPowerInfo() {
       throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
     }
   } finally {
-    free(powerStatus);
+    calloc.free(powerStatus);
   }
 }
 
@@ -247,7 +247,7 @@ void printBatteryStatusInfo() {
       }
     }
   } finally {
-    free(batteryStatus);
+    calloc.free(batteryStatus);
   }
 }
 

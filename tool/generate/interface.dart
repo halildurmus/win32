@@ -49,7 +49,6 @@ import 'package:ffi/ffi.dart';
 
     buffer.writeln('''
 import '../com/combase.dart';
-import '../calloc.dart';
 import '../constants.dart';
 import '../constants_nodoc.dart';
 import '../exceptions.dart';
@@ -210,7 +209,7 @@ import '../winrt/winrt_constants.dart';
     }
 
     buffer.writeln('  ${dartType(method.returnType)} get $exposedMethodName {');
-    buffer.writeln('    final retValuePtr = allocate<$rootType>();');
+    buffer.writeln('    final retValuePtr = calloc<$rootType>();');
     buffer.writeln();
     buffer.writeln(
         '    final hr = Pointer<NativeFunction<_${method.name}_Native>>.fromAddress(');
@@ -222,7 +221,7 @@ import '../winrt/winrt_constants.dart';
        if (FAILED(hr)) throw WindowsException(hr);
 
        final retValue = retValuePtr.value;
-       free(retValuePtr);
+       calloc.free(retValuePtr);
        return retValue;
      }
     ''');
@@ -269,8 +268,8 @@ class $className extends $name {
 
       return $className(ptr);
     } finally {
-      free(clsid);
-      free(iid);
+      calloc.free(clsid);
+      calloc.free(iid);
     }
   }
 }

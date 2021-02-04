@@ -9,7 +9,6 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
-import '../calloc.dart';
 import '../constants.dart';
 import '../constants_nodoc.dart';
 import '../exceptions.dart';
@@ -68,8 +67,8 @@ class FileOpenDialog extends IFileOpenDialog {
 
       return FileOpenDialog(ptr);
     } finally {
-      free(clsid);
-      free(iid);
+      calloc.free(clsid);
+      calloc.free(iid);
     }
   }
 }

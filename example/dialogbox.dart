@@ -18,7 +18,7 @@ String textEntered = '';
 
 void main() {
   // Allocate 2KB, which is more than enough space for the dialog in memory.
-  final ptr = allocate<Uint16>(count: 1024);
+  final ptr = calloc<Uint16>(1024);
   var idx = 0;
 
   idx += ptr.elementAt(idx).cast<DLGTEMPLATE>().setDialog(
@@ -95,7 +95,7 @@ void main() {
   } else {
     print('Entered: $textEntered');
   }
-  free(ptr);
+  calloc.free(ptr);
 }
 
 // Documentation on this function here:
@@ -112,10 +112,10 @@ int dialogReturnProc(int hwndDlg, int message, int wParam, int lParam) {
         switch (LOWORD(wParam)) {
           case IDOK:
             print('OK');
-            final textPtr = allocate<Uint16>(count: 256).cast<Utf16>();
+            final textPtr = calloc<Uint16>(256).cast<Utf16>();
             GetDlgItemText(hwndDlg, ID_EDITTEXT, textPtr, 256);
             textEntered = textPtr.unpackString(256);
-            free(textPtr);
+            calloc.free(textPtr);
             EndDialog(hwndDlg, wParam);
             return TRUE;
           case IDCANCEL:

@@ -1,4 +1,5 @@
 import 'dart:ffi';
+
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
@@ -12,13 +13,13 @@ Object getRegistryValue(int key, String subKey, String valueName) {
 
   final subKeyPtr = TEXT(subKey);
   final valueNamePtr = TEXT(valueName);
-  final openKeyPtr = allocate<IntPtr>();
-  final dataType = allocate<Uint32>();
+  final openKeyPtr = calloc<IntPtr>();
+  final dataType = calloc<Uint32>();
 
   // 256 bytes is more than enough, and Windows will throw ERROR_MORE_DATA if
   // not, so there won't be an overrun.
-  final data = allocate<Uint8>(count: 256);
-  final dataSize = allocate<Uint32>()..value = 256;
+  final data = calloc<Uint8>(256);
+  final dataSize = calloc<Uint32>()..value = 256;
 
   try {
     var result = RegOpenKeyEx(key, subKeyPtr, 0, KEY_READ, openKeyPtr);
@@ -41,11 +42,11 @@ Object getRegistryValue(int key, String subKey, String valueName) {
       throw WindowsException(HRESULT_FROM_WIN32(result));
     }
   } finally {
-    free(subKeyPtr);
-    free(valueNamePtr);
-    free(openKeyPtr);
-    free(data);
-    free(dataSize);
+    calloc.free(subKeyPtr);
+    calloc.free(valueNamePtr);
+    calloc.free(openKeyPtr);
+    calloc.free(data);
+    calloc.free(dataSize);
   }
   RegCloseKey(openKeyPtr.value);
 

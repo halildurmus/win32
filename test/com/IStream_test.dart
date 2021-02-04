@@ -20,32 +20,32 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final stream = IStream(ptr);
-  test('Can instantiate IStream.Seek', () {
-    expect(stream.Seek, isA<Function>());
-  });
-  test('Can instantiate IStream.SetSize', () {
-    expect(stream.SetSize, isA<Function>());
-  });
-  test('Can instantiate IStream.CopyTo', () {
-    expect(stream.CopyTo, isA<Function>());
-  });
-  test('Can instantiate IStream.Commit', () {
-    expect(stream.Commit, isA<Function>());
-  });
-  test('Can instantiate IStream.Revert', () {
-    expect(stream.Revert, isA<Function>());
-  });
-  test('Can instantiate IStream.LockRegion', () {
-    expect(stream.LockRegion, isA<Function>());
-  });
-  test('Can instantiate IStream.UnlockRegion', () {
-    expect(stream.UnlockRegion, isA<Function>());
-  });
-  test('Can instantiate IStream.Stat', () {
-    expect(stream.Stat, isA<Function>());
-  });
-  test('Can instantiate IStream.Clone', () {
-    expect(stream.Clone, isA<Function>());
-  });
-  free(ptr);
-}
+    test('Can instantiate IStream.Seek', () {
+      expect(stream.Seek, isA<Function>());
+      });
+          test('Can instantiate IStream.SetSize', () {
+      expect(stream.SetSize, isA<Function>());
+      });
+          test('Can instantiate IStream.CopyTo', () {
+      expect(stream.CopyTo, isA<Function>());
+      });
+          test('Can instantiate IStream.Commit', () {
+      expect(stream.Commit, isA<Function>());
+      });
+          test('Can instantiate IStream.Revert', () {
+      expect(stream.Revert, isA<Function>());
+      });
+          test('Can instantiate IStream.LockRegion', () {
+      expect(stream.LockRegion, isA<Function>());
+      });
+          test('Can instantiate IStream.UnlockRegion', () {
+      expect(stream.UnlockRegion, isA<Function>());
+      });
+          test('Can instantiate IStream.Stat', () {
+      expect(stream.Stat, isA<Function>());
+      });
+          test('Can instantiate IStream.Clone', () {
+      expect(stream.Clone, isA<Function>());
+      });
+        calloc.free(ptr);
+  }

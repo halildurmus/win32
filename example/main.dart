@@ -18,7 +18,7 @@ void main() {
   // Allocates memory on the native heap for the struct that will be used to
   // configure the dialog box and return values
   final cc = calloc<CHOOSECOLOR>()..ref.lStructSize = sizeOf<CHOOSECOLOR>();
-  final custColors = allocate<Uint32>(count: 16);
+  final custColors = calloc<Uint32>(16);
 
   // Default color is mid-gray
   cc.ref.rgbResult = RGB(0x80, 0x80, 0x80);
@@ -42,6 +42,6 @@ void main() {
   print('Color chosen: ${toHexColor(cc.ref.rgbResult)}');
 
   // Free the memory allocated on the native heap
-  free(custColors);
-  free(cc);
+  calloc.free(custColors);
+  calloc.free(cc);
 }

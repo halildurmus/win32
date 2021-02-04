@@ -8,8 +8,7 @@ import 'package:win32/win32.dart';
 
 void main() {
   test('Volume management API', () {
-    final volumeNamePtr =
-        allocate<Uint16>(count: MAX_PATH).cast<Utf16>().cast<Utf16>();
+    final volumeNamePtr = calloc<Uint16>(MAX_PATH).cast<Utf16>();
 
     final hFindVolume = FindFirstVolume(volumeNamePtr, MAX_PATH);
     expect(hFindVolume, isNot(INVALID_HANDLE_VALUE));
@@ -18,7 +17,7 @@ void main() {
 
     expect(volume, startsWith(r'\\?\'));
 
-    free(volumeNamePtr);
+    calloc.free(volumeNamePtr);
   });
 
   test('Power management API', () {
@@ -34,7 +33,7 @@ void main() {
     expect(powerStatus.ref.SystemStatusFlag, isIn([0, 1]));
     expect(powerStatus.ref.BatteryLifePercent, isIn(validBatteryPercentages));
 
-    free(powerStatus);
+    calloc.free(powerStatus);
   });
 
   test('CallNtPowerInformation() sanity check', () {
@@ -54,6 +53,6 @@ void main() {
     expect(batteryStatus.ref.Charging, isIn([FALSE, TRUE]));
     expect(batteryStatus.ref.Discharging, isIn([FALSE, TRUE]));
 
-    free(batteryStatus);
+    calloc.free(batteryStatus);
   });
 }
