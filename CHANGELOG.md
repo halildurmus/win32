@@ -1,3 +1,3 @@
-## 1.0.0
+## 0.2.0-dev.1
 
-- Initial version, created by Stagehand
+- Initial version, extracted from win32
