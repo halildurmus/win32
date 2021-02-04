@@ -23,7 +23,7 @@ class WinmdScope {
   List<WinmdType> get typeDefs {
     final types = <WinmdType>[];
 
-    final phEnum = calloc<IntPtr>()..value = 0;
+    final phEnum = calloc<IntPtr>();
     final rgTypeDefs = calloc<Uint32>();
     final pcTypeDefs = calloc<Uint32>();
 

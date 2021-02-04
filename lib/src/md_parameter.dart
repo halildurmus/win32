@@ -28,7 +28,7 @@ class WinmdParameter {
 
     final pmd = calloc<Uint32>();
     final pulSequence = calloc<Uint32>();
-    final szName = calloc<Utf16>(256 * 2);
+    final szName = calloc<Uint8>(256 * 2).cast<Utf16>();
     final pchName = calloc<Uint32>();
     final pdwAttr = calloc<Uint32>();
     final pdwCPlusTypeFlag = calloc<Uint32>();

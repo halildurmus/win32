@@ -69,7 +69,7 @@ class WinmdType {
     final nRead = calloc<Uint32>();
     final tdFlags = calloc<Uint32>();
     final baseClassToken = calloc<Uint32>();
-    final typeName = calloc<Utf16>(256 * 2);
+    final typeName = calloc<Uint8>(256 * 2).cast<Utf16>();
 
     try {
       final hr = reader.GetTypeDefProps(
@@ -100,7 +100,7 @@ class WinmdType {
   /// metadata file, from which the TypeDef can be found and returned.
   factory WinmdType.fromTypeRef(IMetaDataImport2 reader, int typeRefToken) {
     final ptkResolutionScope = calloc<Uint32>();
-    final szName = calloc<Utf16>(256 * 2);
+    final szName = calloc<Uint8>(256 * 2).cast<Utf16>();
     final pchName = calloc<Uint32>();
 
     // a token like IInspectable is out of reach of GetTypeRefProps, since it is
@@ -164,7 +164,7 @@ class WinmdType {
   List<WinmdType> get interfaces {
     final interfaces = <WinmdType>[];
 
-    final phEnum = calloc<IntPtr>()..value = 0;
+    final phEnum = calloc<IntPtr>();
     final rImpls = calloc<Uint32>();
     final pcImpls = calloc<Uint32>();
 
@@ -191,7 +191,7 @@ class WinmdType {
   List<WinmdMethod> get methods {
     final methods = <WinmdMethod>[];
 
-    final phEnum = calloc<IntPtr>()..value = 0;
+    final phEnum = calloc<IntPtr>();
     final mdMethodDef = calloc<Uint32>();
     final pcTokens = calloc<Uint32>();
 

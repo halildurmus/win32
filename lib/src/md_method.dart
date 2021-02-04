@@ -215,7 +215,7 @@ class WinmdMethod {
 
   void _parseParameterNames() {
     if (!isGetProperty) {
-      final phEnum = calloc<IntPtr>()..value = 0;
+      final phEnum = calloc<IntPtr>();
       final ptkParamDef = calloc<Uint32>();
       final pcTokens = calloc<Uint32>();
 

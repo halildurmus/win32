@@ -25,7 +25,7 @@ class WinmdEnum extends WinmdType {
     final field = WinmdField();
 
     final ptkTypeDef = calloc<Uint32>();
-    final szField = calloc<Utf16>(256 * 2);
+    final szField = calloc<Uint8>(256 * 2).cast<Utf16>();
     final pchField = calloc<Uint32>();
     final pdwAttr = calloc<Uint32>();
     final ppvSigBlob = calloc<Uint8>();
