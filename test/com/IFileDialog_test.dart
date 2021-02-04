@@ -89,5 +89,5 @@ void main() {
   test('Can instantiate IFileDialog.SetFilter', () {
     expect(filedialog.SetFilter, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

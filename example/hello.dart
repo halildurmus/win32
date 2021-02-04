@@ -27,9 +27,9 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
       DrawText(hdc, msg, -1, rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
       EndPaint(hWnd, ps);
 
-      free(ps);
-      free(rect);
-      free(msg);
+      calloc.free(ps);
+      calloc.free(rect);
+      calloc.free(msg);
 
       return 0;
   }

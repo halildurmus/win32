@@ -26,5 +26,5 @@ void main() {
   test('Can instantiate IFileOpenDialog.GetSelectedItems', () {
     expect(fileopendialog.GetSelectedItems, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

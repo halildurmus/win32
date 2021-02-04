@@ -12,7 +12,7 @@ import 'package:win32/win32.dart';
 late DesktopWallpaper wallpaper;
 
 void printWallpaper() {
-  final pathPtr = allocate<IntPtr>();
+  final pathPtr = calloc<IntPtr>();
 
   try {
     final hr = wallpaper.GetWallpaper(nullptr, pathPtr.cast());
@@ -34,12 +34,12 @@ void printWallpaper() {
         throw WindowsException(hr);
     }
   } finally {
-    free(pathPtr);
+    calloc.free(pathPtr);
   }
 }
 
 void printBackgroundColor() {
-  final colorPtr = allocate<Uint32>(); // COLORREF
+  final colorPtr = calloc<Uint32>(); // COLORREF
 
   try {
     final hr = wallpaper.GetBackgroundColor(colorPtr);
@@ -52,7 +52,7 @@ void printBackgroundColor() {
       throw WindowsException(hr);
     }
   } finally {
-    free(colorPtr);
+    calloc.free(colorPtr);
   }
 }
 
@@ -70,7 +70,7 @@ void main() {
     printWallpaper();
     printBackgroundColor();
   } finally {
-    free(wallpaper.ptr);
+    calloc.free(wallpaper.ptr);
     CoUninitialize();
   }
 }

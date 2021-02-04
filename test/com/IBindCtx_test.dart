@@ -50,5 +50,5 @@ void main() {
   test('Can instantiate IBindCtx.RevokeObjectParam', () {
     expect(bindctx.RevokeObjectParam, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

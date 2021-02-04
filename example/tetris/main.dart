@@ -113,7 +113,7 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       result = DefWindowProc(hwnd, uMsg, wParam, lParam);
   }
 
-  free(ps);
+  calloc.free(ps);
 
   return result;
 }

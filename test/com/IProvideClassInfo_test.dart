@@ -23,5 +23,5 @@ void main() {
   test('Can instantiate IProvideClassInfo.GetClassInfo', () {
     expect(provideclassinfo.GetClassInfo, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

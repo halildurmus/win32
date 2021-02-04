@@ -44,5 +44,5 @@ void main() {
   test('Can instantiate IMetaDataImport2.EnumMethodSpecs', () {
     expect(metadataimport2.EnumMethodSpecs, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

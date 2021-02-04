@@ -35,5 +35,5 @@ void main() {
   test('Can instantiate IFileSaveDialog.ApplyProperties', () {
     expect(filesavedialog.ApplyProperties, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

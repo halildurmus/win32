@@ -30,15 +30,15 @@ void writeCredential(
       throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
     }
   } finally {
-    free(blob);
-    free(credential);
-    free(userNamePtr);
-    free(credNamePtr);
+    calloc.free(blob);
+    calloc.free(credential);
+    calloc.free(userNamePtr);
+    calloc.free(credNamePtr);
   }
 }
 
 String readCredential(String credentialName) {
-  final credPointer = allocate<Pointer<CREDENTIAL>>();
+  final credPointer = calloc<Pointer<CREDENTIAL>>();
   final credNamePtr = TEXT(credentialName);
 
   try {
@@ -53,8 +53,8 @@ String readCredential(String credentialName) {
     return password;
   } finally {
     if (credPointer.value.address != 0) CredFree(credPointer.value);
-    free(credPointer);
-    free(credNamePtr);
+    calloc.free(credPointer);
+    calloc.free(credNamePtr);
   }
 }
 
@@ -66,7 +66,7 @@ void deleteCredential(String credentialName) {
       throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
     }
   } finally {
-    free(credNamePtr);
+    calloc.free(credNamePtr);
   }
 }
 

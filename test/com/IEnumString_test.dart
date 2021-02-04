@@ -32,5 +32,5 @@ void main() {
   test('Can instantiate IEnumString.Clone', () {
     expect(enumstring.Clone, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

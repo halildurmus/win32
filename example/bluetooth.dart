@@ -28,8 +28,8 @@ void findBluetoothDevices(int btRadioHandle) {
       print('No devices found.');
     }
   } finally {
-    free(params);
-    free(info);
+    calloc.free(params);
+    calloc.free(info);
   }
 }
 
@@ -38,7 +38,7 @@ void main() {
     ..ref.dwSize = sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>();
   final radioInfo = calloc<BLUETOOTH_RADIO_INFO>()
     ..ref.dwSize = sizeOf<BLUETOOTH_RADIO_INFO>();
-  final hRadio = allocate<IntPtr>();
+  final hRadio = calloc<IntPtr>();
 
   try {
     final hEnum = BluetoothFindFirstRadio(findRadioParams, hRadio);
@@ -57,8 +57,8 @@ void main() {
       print('No Bluetooth radios found.');
     }
   } finally {
-    free(findRadioParams);
-    free(radioInfo);
-    free(hRadio);
+    calloc.free(findRadioParams);
+    calloc.free(radioInfo);
+    calloc.free(hRadio);
   }
 }

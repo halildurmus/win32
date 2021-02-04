@@ -206,5 +206,5 @@ void main() {
   test('Can instantiate IMetaDataImport.IsGlobal', () {
     expect(metadataimport.IsGlobal, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

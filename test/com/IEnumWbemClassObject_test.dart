@@ -35,5 +35,5 @@ void main() {
   test('Can instantiate IEnumWbemClassObject.Skip', () {
     expect(enumwbemclassobject.Skip, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

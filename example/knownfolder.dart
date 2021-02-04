@@ -10,12 +10,12 @@ import 'package:win32/win32.dart';
 
 // Get the path of the temporary directory (typically %TEMP%)
 String getTemporaryPath() {
-  final buffer = allocate<Uint16>(count: MAX_PATH + 1).cast<Utf16>();
+  final buffer = calloc<Uint16>(MAX_PATH + 1).cast<Utf16>();
   final length = GetTempPath(MAX_PATH, buffer);
 
   if (length == 0) {
     final error = GetLastError();
-    free(buffer);
+    calloc.free(buffer);
     throw WindowsException(error);
   } else {
     var path = buffer.unpackString(MAX_PATH);
@@ -25,14 +25,14 @@ String getTemporaryPath() {
     if (path.endsWith('\\')) {
       path = path.substring(0, path.length - 1);
     }
-    free(buffer);
+    calloc.free(buffer);
     return path;
   }
 }
 
 /// Get the path for a known Windows folder, using the classic (deprecated) API
 String getFolderPath() {
-  final path = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
+  final path = calloc<Uint16>(MAX_PATH).cast<Utf16>();
 
   final result = SHGetFolderPath(NULL, CSIDL_DESKTOP, NULL, 0, path);
 
@@ -46,7 +46,7 @@ String getFolderPath() {
 /// Get the path for a known Windows folder, using the modern API
 String getKnownFolderPath() {
   final knownFolderID = calloc<GUID>()..ref.setGUID(FOLDERID_Desktop);
-  final pathPtrPtr = allocate<Pointer<Utf16>>();
+  final pathPtrPtr = calloc<Pointer<Utf16>>();
 
   try {
     final hr =
@@ -59,8 +59,8 @@ String getKnownFolderPath() {
     final path = pathPtrPtr.value.unpackString(MAX_PATH);
     return path;
   } finally {
-    free(knownFolderID);
-    free(pathPtrPtr);
+    calloc.free(knownFolderID);
+    calloc.free(pathPtrPtr);
   }
 }
 

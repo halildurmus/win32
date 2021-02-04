@@ -26,5 +26,5 @@ void main() {
   test('Can instantiate IClassFactory.LockServer', () {
     expect(classfactory.LockServer, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

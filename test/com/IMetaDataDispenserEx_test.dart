@@ -38,5 +38,5 @@ void main() {
   test('Can instantiate IMetaDataDispenserEx.FindAssemblyModule', () {
     expect(metadatadispenserex.FindAssemblyModule, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

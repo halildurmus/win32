@@ -9,7 +9,6 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
-import '../calloc.dart';
 import '../constants.dart';
 import '../constants_nodoc.dart';
 import '../exceptions.dart';
@@ -50,7 +49,7 @@ class IEnumNetworkConnections extends IDispatch {
   IEnumNetworkConnections(Pointer<COMObject> ptr) : super(ptr);
 
   int get NewEnum {
-    final retValuePtr = allocate<IntPtr>();
+    final retValuePtr = calloc<IntPtr>();
 
     final hr = Pointer<NativeFunction<_get__NewEnum_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(7).value)
@@ -58,7 +57,7 @@ class IEnumNetworkConnections extends IDispatch {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    free(retValuePtr);
+    calloc.free(retValuePtr);
     return retValue;
   }
 

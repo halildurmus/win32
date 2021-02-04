@@ -9,7 +9,6 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
-import '../calloc.dart';
 import '../constants.dart';
 import '../constants_nodoc.dart';
 import '../exceptions.dart';
@@ -81,7 +80,7 @@ class IFileOpenPicker extends IInspectable {
   IFileOpenPicker(Pointer<COMObject> ptr) : super(ptr);
 
   int get ViewMode {
-    final retValuePtr = allocate<Int32>();
+    final retValuePtr = calloc<Int32>();
 
     final hr = Pointer<NativeFunction<_get_ViewMode_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(6).value)
@@ -89,7 +88,7 @@ class IFileOpenPicker extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    free(retValuePtr);
+    calloc.free(retValuePtr);
     return retValue;
   }
 
@@ -102,7 +101,7 @@ class IFileOpenPicker extends IInspectable {
   }
 
   int get SettingsIdentifier {
-    final retValuePtr = allocate<IntPtr>();
+    final retValuePtr = calloc<IntPtr>();
 
     final hr =
         Pointer<NativeFunction<_get_SettingsIdentifier_Native>>.fromAddress(
@@ -112,7 +111,7 @@ class IFileOpenPicker extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    free(retValuePtr);
+    calloc.free(retValuePtr);
     return retValue;
   }
 
@@ -126,7 +125,7 @@ class IFileOpenPicker extends IInspectable {
   }
 
   int get SuggestedStartLocation {
-    final retValuePtr = allocate<Int32>();
+    final retValuePtr = calloc<Int32>();
 
     final hr =
         Pointer<NativeFunction<_get_SuggestedStartLocation_Native>>.fromAddress(
@@ -136,7 +135,7 @@ class IFileOpenPicker extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    free(retValuePtr);
+    calloc.free(retValuePtr);
     return retValue;
   }
 
@@ -151,7 +150,7 @@ class IFileOpenPicker extends IInspectable {
   }
 
   int get CommitButtonText {
-    final retValuePtr = allocate<IntPtr>();
+    final retValuePtr = calloc<IntPtr>();
 
     final hr =
         Pointer<NativeFunction<_get_CommitButtonText_Native>>.fromAddress(
@@ -161,7 +160,7 @@ class IFileOpenPicker extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    free(retValuePtr);
+    calloc.free(retValuePtr);
     return retValue;
   }
 
@@ -175,7 +174,7 @@ class IFileOpenPicker extends IInspectable {
   }
 
   int get FileTypeFilter {
-    final retValuePtr = allocate<IntPtr>();
+    final retValuePtr = calloc<IntPtr>();
 
     final hr = Pointer<NativeFunction<_get_FileTypeFilter_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(14).value)
@@ -183,7 +182,7 @@ class IFileOpenPicker extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    free(retValuePtr);
+    calloc.free(retValuePtr);
     return retValue;
   }
 

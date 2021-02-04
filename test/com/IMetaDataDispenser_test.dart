@@ -29,5 +29,5 @@ void main() {
   test('Can instantiate IMetaDataDispenser.OpenScopeOnMemory', () {
     expect(metadatadispenser.OpenScopeOnMemory, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

@@ -49,7 +49,7 @@ void main() {
   }
 
   buffer.write('''
-  free(ptr);
+  calloc.free(ptr);
   }''');
 
   return buffer.toString();

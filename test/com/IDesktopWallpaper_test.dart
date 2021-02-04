@@ -68,5 +68,5 @@ void main() {
   test('Can instantiate IDesktopWallpaper.Enable', () {
     expect(desktopwallpaper.Enable, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

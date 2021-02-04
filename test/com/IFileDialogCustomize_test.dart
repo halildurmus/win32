@@ -101,5 +101,5 @@ void main() {
   test('Can instantiate IFileDialogCustomize.SetControlItemText', () {
     expect(filedialogcustomize.SetControlItemText, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

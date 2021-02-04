@@ -19,19 +19,19 @@ void main() {
     print('Windows Runtime demo. Calling Windows.Globalization.Calendar...\n');
     print('The year is ${calendar.Year}.');
 
-    final systemPtr = allocate<IntPtr>();
+    final systemPtr = calloc<IntPtr>();
     calendar.GetCalendarSystem(systemPtr);
     print('The calendar system is ${convertFromHString(systemPtr)}.');
     WindowsDeleteString(systemPtr.value);
-    free(systemPtr);
+    calloc.free(systemPtr);
 
-    final dayPtr = allocate<IntPtr>();
+    final dayPtr = calloc<IntPtr>();
     calendar.DayOfWeekAsFullSoloString(dayPtr);
     print('Today is ${convertFromHString(dayPtr)}.');
     WindowsDeleteString(systemPtr.value);
-    free(dayPtr);
+    calloc.free(dayPtr);
 
-    free(object);
+    calloc.free(object);
 
     if (calendar.IsDaylightSavingTime == 1) {
       print('Daylight Saving Time is in observance.');

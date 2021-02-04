@@ -32,5 +32,5 @@ void main() {
   test('Can instantiate IEnumMoniker.Clone', () {
     expect(enummoniker.Clone, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

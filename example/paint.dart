@@ -42,8 +42,8 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       }
 
       EndPaint(hwnd, ps);
-      free(rect);
-      free(ps);
+      calloc.free(rect);
+      calloc.free(ps);
 
       return 0;
   }

@@ -10,7 +10,6 @@ import 'package:ffi/ffi.dart';
 
 import '../api-ms-win-core-winrt-l1-1-0.dart';
 import '../api-ms-win-core-winrt-string-l1-1-0.dart';
-import '../calloc.dart';
 import '../constants.dart';
 import '../exceptions.dart';
 import '../extensions/unpack_utf16.dart';
@@ -32,7 +31,7 @@ void winrtUninitialize() => RoUninitialize();
 /// Takes a `HSTRING` (a WinRT String), and converts it to a Dart `String`.
 /// {@category winrt}
 String convertFromHString(Pointer<IntPtr> hstring) {
-  final stringLength = allocate<Uint32>();
+  final stringLength = calloc<Uint32>();
 
   try {
     final stringPtr = WindowsGetStringRawBuffer(hstring.value, stringLength);
@@ -40,7 +39,7 @@ String convertFromHString(Pointer<IntPtr> hstring) {
 
     return dartString;
   } finally {
-    free(stringLength);
+    calloc.free(stringLength);
   }
 }
 
@@ -69,7 +68,7 @@ Pointer<IntPtr> convertToHString(String string) {
 /// ```
 /// {@category winrt}
 Pointer<IntPtr> CreateObject(String className, String iid) {
-  final hstrClass = allocate<IntPtr>();
+  final hstrClass = calloc<IntPtr>();
   final lpClassName = TEXT(className);
   final inspectablePtr = calloc<Pointer>();
   final riid = calloc<GUID>();
@@ -106,10 +105,10 @@ Pointer<IntPtr> CreateObject(String className, String iid) {
     // Return a pointer to the relevant class
     return classPtr;
   } finally {
-    free(iidPtr);
-    free(riid);
-    free(inspectablePtr);
-    free(lpClassName);
-    free(hstrClass);
+    calloc.free(iidPtr);
+    calloc.free(riid);
+    calloc.free(inspectablePtr);
+    calloc.free(lpClassName);
+    calloc.free(hstrClass);
   }
 }

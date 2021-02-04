@@ -59,5 +59,5 @@ void main() {
   test('Can instantiate IShellItem2.GetBool', () {
     expect(shellitem2.GetBool, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

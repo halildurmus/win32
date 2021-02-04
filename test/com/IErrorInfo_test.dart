@@ -35,5 +35,5 @@ void main() {
   test('Can instantiate IErrorInfo.GetHelpContext', () {
     expect(errorinfo.GetHelpContext, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

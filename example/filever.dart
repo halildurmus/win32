@@ -13,9 +13,9 @@ void main() {
 
   final fviSize = getVersionBlockSize(lpFilename);
 
-  final pBlock = allocate<Uint8>(count: fviSize);
-  final lpFixedFileVersionInfo = allocate<IntPtr>();
-  final uLen = allocate<Uint32>();
+  final pBlock = calloc<Uint8>(fviSize);
+  final lpFixedFileVersionInfo = calloc<IntPtr>();
+  final uLen = calloc<Uint32>();
   final subBlock = TEXT(r'\');
 
   try {
@@ -40,11 +40,11 @@ void main() {
         '${HIWORD(fixedFileVersionInfo.ref.dwFileVersionLS)}.'
         '${LOWORD(fixedFileVersionInfo.ref.dwFileVersionLS)}');
   } finally {
-    free(lpFilename);
-    free(pBlock);
-    free(lpFixedFileVersionInfo);
-    free(uLen);
-    free(subBlock);
+    calloc.free(lpFilename);
+    calloc.free(pBlock);
+    calloc.free(lpFixedFileVersionInfo);
+    calloc.free(uLen);
+    calloc.free(subBlock);
   }
 }
 
@@ -52,7 +52,7 @@ int getVersionBlockSize(Pointer<Utf16> lpFilename) {
   int fviSize;
 
   // dwDummy isn't used; it's a historical vestige.
-  final dwDummy = allocate<Uint32>();
+  final dwDummy = calloc<Uint32>();
 
   try {
     fviSize = GetFileVersionInfoSize(lpFilename, dwDummy);
@@ -62,6 +62,6 @@ int getVersionBlockSize(Pointer<Utf16> lpFilename) {
 
     return fviSize;
   } finally {
-    free(dwDummy);
+    calloc.free(dwDummy);
   }
 }

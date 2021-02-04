@@ -26,7 +26,7 @@ late Pointer<FINDREPLACE> findReplace;
 int messageFindReplace = 0;
 int hDlgModeless = NULL;
 
-final iOffset = allocate<Uint32>()..value = 0;
+final iOffset = calloc<Uint32>();
 
 int mainWindowProc(int hwnd, int message, int wParam, int lParam) {
   switch (message) {
@@ -341,5 +341,5 @@ void main() {
       }
     }
   }
-  free(msg);
+  calloc.free(msg);
 }

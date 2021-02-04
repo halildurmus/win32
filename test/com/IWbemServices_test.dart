@@ -89,5 +89,5 @@ void main() {
   test('Can instantiate IWbemServices.ExecMethodAsync', () {
     expect(wbemservices.ExecMethodAsync, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

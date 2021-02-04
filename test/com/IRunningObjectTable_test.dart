@@ -41,5 +41,5 @@ void main() {
   test('Can instantiate IRunningObjectTable.EnumRunning', () {
     expect(runningobjecttable.EnumRunning, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

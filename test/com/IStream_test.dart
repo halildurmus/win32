@@ -47,5 +47,5 @@ void main() {
   test('Can instantiate IStream.Clone', () {
     expect(stream.Clone, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

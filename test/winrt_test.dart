@@ -42,7 +42,7 @@ void main() {
       final calendar = ICalendar(object.cast());
 
       expect(calendar.Year, greaterThanOrEqualTo(2020));
-      free(object);
+      calloc.free(object);
       winrtUninitialize();
     });
   }

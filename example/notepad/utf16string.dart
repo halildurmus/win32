@@ -13,7 +13,7 @@ class Utf16String {
   /// Creates a fixed length string with capacity to store `length` characters,
   /// initialized to `\0`
   Utf16String(this.length) {
-    pointer = (allocate<Uint16>(count: length)..value = 0).cast<Utf16>();
+    pointer = calloc<Uint16>(length).cast<Utf16>();
   }
 
   factory Utf16String.fromString(String string) {
@@ -38,7 +38,7 @@ class Utf16String {
 
   /// Deletes the space allocated on the heap for the string contents
   void delete() {
-    free(pointer);
+    calloc.free(pointer);
   }
 
   /// Returns the referenced string as a Dart `String`

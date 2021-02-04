@@ -47,5 +47,5 @@ void main() {
   test('Can instantiate IKnownFolder.GetFolderDefinition', () {
     expect(knownfolder.GetFolderDefinition, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

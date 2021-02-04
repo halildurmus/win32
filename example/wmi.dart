@@ -56,7 +56,7 @@ void main() {
     throw exception;
   }
 
-  final proxy = allocate<IntPtr>();
+  final proxy = calloc<IntPtr>();
 
   // Connect to the root\cimv2 namespace with the
   // current user and obtain pointer pSvc
@@ -110,7 +110,7 @@ void main() {
 
   // Use the IWbemServices pointer to make requests of WMI.
 
-  final pEnumerator = allocate<IntPtr>();
+  final pEnumerator = calloc<IntPtr>();
   IEnumWbemClassObject enumerator;
 
   // For example, query for all the running processes
@@ -134,11 +134,11 @@ void main() {
   } else {
     enumerator = IEnumWbemClassObject(pEnumerator.cast());
 
-    final uReturn = allocate<Uint32>();
+    final uReturn = calloc<Uint32>();
 
     var idx = 0;
     while (enumerator.ptr.address > 0) {
-      final pClsObj = allocate<IntPtr>();
+      final pClsObj = calloc<IntPtr>();
 
       hr = enumerator.Next(
           WBEM_TIMEOUT_TYPE.WBEM_INFINITE, 1, pClsObj.cast(), uReturn);
@@ -157,7 +157,7 @@ void main() {
       }
       // Free BSTRs in the returned variants
       VariantClear(vtProp);
-      free(vtProp);
+      calloc.free(vtProp);
 
       clsObj.Release();
     }

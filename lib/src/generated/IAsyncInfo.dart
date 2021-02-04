@@ -46,7 +46,7 @@ class IAsyncInfo extends IInspectable {
   IAsyncInfo(Pointer<COMObject> ptr) : super(ptr);
 
   int get Id {
-    final retValuePtr = allocate<Uint32>();
+    final retValuePtr = calloc<Uint32>();
 
     final hr = Pointer<NativeFunction<_get_Id_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(6).value)
@@ -54,12 +54,12 @@ class IAsyncInfo extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    free(retValuePtr);
+    calloc.free(retValuePtr);
     return retValue;
   }
 
   int get Status {
-    final retValuePtr = allocate<Int32>();
+    final retValuePtr = calloc<Int32>();
 
     final hr = Pointer<NativeFunction<_get_Status_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(7).value)
@@ -67,12 +67,12 @@ class IAsyncInfo extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    free(retValuePtr);
+    calloc.free(retValuePtr);
     return retValue;
   }
 
   int get ErrorCode {
-    final retValuePtr = allocate<Uint32>();
+    final retValuePtr = calloc<Uint32>();
 
     final hr = Pointer<NativeFunction<_get_ErrorCode_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(8).value)
@@ -80,7 +80,7 @@ class IAsyncInfo extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    free(retValuePtr);
+    calloc.free(retValuePtr);
     return retValue;
   }
 

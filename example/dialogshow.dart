@@ -16,7 +16,7 @@ void main() {
   if (SUCCEEDED(hr)) {
     final fileDialog = FileOpenDialog.createInstance();
 
-    final pfos = allocate<Uint32>();
+    final pfos = calloc<Uint32>();
     hr = fileDialog.GetOptions(pfos);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
@@ -36,7 +36,7 @@ void main() {
     hr = fileDialog.SetOkButtonLabel(TEXT('Go'));
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-    final rgSpec = allocate<COMDLG_FILTERSPEC>(count: 3);
+    final rgSpec = calloc<COMDLG_FILTERSPEC>(3);
     rgSpec[0]
       ..pszName = TEXT('JPEG Files')
       ..pszSpec = TEXT('*.jpg;*.jpeg');
@@ -57,12 +57,12 @@ void main() {
         throw WindowsException(hr);
       }
     } else {
-      final ppsi = allocate<IntPtr>();
+      final ppsi = calloc<IntPtr>();
       hr = fileDialog.GetResult(ppsi);
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
       final item = IShellItem(ppsi.cast());
-      final pathPtr = allocate<IntPtr>();
+      final pathPtr = calloc<IntPtr>();
       hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtr.cast());
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
 

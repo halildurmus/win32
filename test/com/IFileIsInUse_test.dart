@@ -35,5 +35,5 @@ void main() {
   test('Can instantiate IFileIsInUse.CloseFile', () {
     expect(fileisinuse.CloseFile, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

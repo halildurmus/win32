@@ -22,8 +22,8 @@ void main() {
           MB_DEFBUTTON2 // Second button is the default
       );
 
-  free(message);
-  free(title);
+  calloc.free(message);
+  calloc.free(title);
 
   switch (result) {
     case IDCANCEL:

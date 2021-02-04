@@ -34,7 +34,7 @@ String fromCString(Pointer<Uint8> buffer, int maxLength) =>
 /// The returned string is _not_ null-terminated.
 Pointer<Uint8> toCString(String buffer) {
   final units = utf8.encode(buffer);
-  final result = allocate<Uint8>(count: units.length);
+  final result = calloc<Uint8>(units.length);
   final nativeString = result.asTypedList(units.length);
   nativeString.setAll(0, units);
   return result.cast();
@@ -77,9 +77,9 @@ void scrollScreenBuffer(int handle, int x) {
   ScrollConsoleScreenBuffer(
       handle, scrollRect, clipRect, coordDest.ref, fillChar);
 
-  free(scrollRect);
-  free(coordDest);
-  free(fillChar);
+  calloc.free(scrollRect);
+  calloc.free(coordDest);
+  calloc.free(fillChar);
 }
 
 void main() {
@@ -101,9 +101,9 @@ void main() {
   final originalAttributes = bufferInfo.ref.wAttributes;
   SetConsoleTextAttribute(stdout, FOREGROUND_RED | FOREGROUND_INTENSITY);
 
-  final cWritten = allocate<Uint32>();
-  final buffer = allocate<Uint8>(count: 256);
-  final cRead = allocate<Uint32>();
+  final cWritten = calloc<Uint32>();
+  final buffer = calloc<Uint8>(256);
+  final cRead = calloc<Uint32>();
 
   // Write to STDOUT and read from STDIN by using the default
   // modes. Input is echoed automatically, and ReadFile
@@ -127,7 +127,7 @@ void main() {
   }
 
   // Turn off the line input and echo input modes
-  final originalConsoleMode = allocate<Uint32>();
+  final originalConsoleMode = calloc<Uint32>();
   GetConsoleMode(stdin, originalConsoleMode);
   final mode =
       originalConsoleMode.value & ~(ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT);
@@ -159,9 +159,9 @@ void main() {
   SetConsoleMode(stdin, originalConsoleMode.value);
   SetConsoleTextAttribute(stdout, originalAttributes);
 
-  free(bufferInfo);
-  free(cWritten);
-  free(buffer);
-  free(cRead);
-  free(originalConsoleMode);
+  calloc.free(bufferInfo);
+  calloc.free(cWritten);
+  calloc.free(buffer);
+  calloc.free(cRead);
+  calloc.free(originalConsoleMode);
 }

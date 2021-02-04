@@ -23,5 +23,5 @@ void main() {
   test('Can instantiate IModalWindow.Show', () {
     expect(modalwindow.Show, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

@@ -35,5 +35,5 @@ void main() {
   test('Can instantiate INetworkConnection.GetDomainType', () {
     expect(networkconnection.GetDomainType, isA<Function>());
   });
-  free(ptr);
+  calloc.free(ptr);
 }

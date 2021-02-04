@@ -33,5 +33,5 @@ void main() {
     print(font);
   }
 
-  free(searchFont);
+  calloc.free(searchFont);
 }

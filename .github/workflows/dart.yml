@@ -28,7 +28,7 @@ jobs:
           - os: ubuntu-latest
             sdk: main
           - os: ubuntu-latest
-            sdk: beta
+            sdk: dev
           - os: windows-2016
             sdk: main
           - os: windows-2016

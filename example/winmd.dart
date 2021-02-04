@@ -31,9 +31,9 @@ class WindowsRuntimeType {
 File metadataFileContainingType(String typeName) {
   final hstrTypeName = convertToHString(typeName);
 
-  final hstrMetaDataFilePath = allocate<IntPtr>();
-  final spMetaDataImport = allocate<Pointer>();
-  final typeDef = allocate<Uint32>();
+  final hstrMetaDataFilePath = calloc<IntPtr>();
+  final spMetaDataImport = calloc<Pointer>();
+  final typeDef = calloc<Uint32>();
 
   File path;
 
@@ -50,8 +50,8 @@ File metadataFileContainingType(String typeName) {
   WindowsDeleteString(hstrTypeName.value);
   WindowsDeleteString(hstrMetaDataFilePath.value);
 
-  free(hstrTypeName);
-  free(hstrMetaDataFilePath);
+  calloc.free(hstrTypeName);
+  calloc.free(hstrMetaDataFilePath);
 
   return path;
 }
@@ -71,7 +71,7 @@ List<WindowsRuntimeType> metadataTypesInFile(File file) {
 
   final dispenser = IMetaDataDispenser(pDispenser.cast());
   final szFile = TEXT(file.path);
-  final pReader = allocate<IntPtr>();
+  final pReader = calloc<IntPtr>();
 
   hr = dispenser.OpenScope(szFile, CorOpenFlags.ofRead,
       convertToIID(IID_IMetaDataImport2).cast(), pReader);
@@ -81,9 +81,9 @@ List<WindowsRuntimeType> metadataTypesInFile(File file) {
 
   final reader = IMetaDataImport2(pReader.cast());
 
-  final phEnum = allocate<IntPtr>()..value = 0;
-  final rgTypeDefs = allocate<Uint32>();
-  final pcTypeDefs = allocate<Uint32>();
+  final phEnum = calloc<IntPtr>();
+  final rgTypeDefs = calloc<Uint32>();
+  final pcTypeDefs = calloc<Uint32>();
 
   hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
   while (hr == S_OK) {
@@ -100,10 +100,10 @@ List<WindowsRuntimeType> metadataTypesInFile(File file) {
 WindowsRuntimeType ProcessToken(IMetaDataImport reader, int token) {
   WindowsRuntimeType type;
 
-  final nRead = allocate<Uint32>();
-  final tdFlags = allocate<Uint32>();
-  final baseClassToken = allocate<Uint32>();
-  final typeName = allocate<Uint16>(count: 256).cast<Utf16>();
+  final nRead = calloc<Uint32>();
+  final tdFlags = calloc<Uint32>();
+  final baseClassToken = calloc<Uint32>();
+  final typeName = calloc<Uint16>(256).cast<Utf16>();
 
   final hr = reader.GetTypeDefProps(
       token, typeName, 256, nRead, tdFlags, baseClassToken);
@@ -112,10 +112,10 @@ WindowsRuntimeType ProcessToken(IMetaDataImport reader, int token) {
     type = WindowsRuntimeType(token, typeName.unpackString(nRead.value),
         tdFlags.value, baseClassToken.value);
 
-    free(nRead);
-    free(tdFlags);
-    free(baseClassToken);
-    free(typeName);
+    calloc.free(nRead);
+    calloc.free(tdFlags);
+    calloc.free(baseClassToken);
+    calloc.free(typeName);
 
     return type;
   } else {

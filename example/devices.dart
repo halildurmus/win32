@@ -15,8 +15,8 @@ void displayVolumePaths(String volumeName) {
 
   // Could be arbitrarily long, but 4*MAX_PATH is a reasonable default.
   // More sophisticated solutions can be found online
-  final pathNamePtr = allocate<Uint16>(count: MAX_PATH * 4).cast<Utf16>();
-  final charCount = allocate<Uint32>();
+  final pathNamePtr = calloc<Uint16>(MAX_PATH * 4).cast<Utf16>();
+  final charCount = calloc<Uint32>();
   charCount.value = MAX_PATH;
   error = GetVolumePathNamesForVolumeName(
       Utf16.toUtf16(volumeName), pathNamePtr, charCount.value, charCount);
@@ -34,13 +34,13 @@ void displayVolumePaths(String volumeName) {
     print('GetVolumePathNamesForVolumeName failed with error code $error');
   }
 
-  free(pathNamePtr);
-  free(charCount);
+  calloc.free(pathNamePtr);
+  calloc.free(charCount);
 }
 
 void main() {
   var error = 0;
-  final volumeNamePtr = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
+  final volumeNamePtr = calloc<Uint16>(MAX_PATH).cast<Utf16>();
 
   final hFindVolume = FindFirstVolume(volumeNamePtr, MAX_PATH);
   if (hFindVolume == INVALID_HANDLE_VALUE) {
@@ -56,7 +56,7 @@ void main() {
     final shortVolumeName = volumeName.substring(4, volumeName.length - 1);
     final shortVolumeNamePtr = TEXT(shortVolumeName);
 
-    final deviceName = allocate<Uint16>(count: MAX_PATH).cast<Utf16>();
+    final deviceName = calloc<Uint16>(MAX_PATH).cast<Utf16>();
     final charCount = QueryDosDevice(shortVolumeNamePtr, deviceName, MAX_PATH);
 
     if (charCount == 0) {
@@ -81,8 +81,8 @@ void main() {
         break;
       }
     }
-    free(shortVolumeNamePtr);
+    calloc.free(shortVolumeNamePtr);
   }
-  free(volumeNamePtr);
+  calloc.free(volumeNamePtr);
   FindVolumeClose(hFindVolume);
 }
