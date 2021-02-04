@@ -49,14 +49,14 @@ class WinmdMethod {
   }
 
   factory WinmdMethod.fromToken(IMetaDataImport2 reader, int token) {
-    final pClass = allocate<Uint32>();
-    final szMethod = allocate<Uint16>(count: 256).cast<Utf16>();
-    final pchMethod = allocate<Uint32>();
-    final pdwAttr = allocate<Uint32>();
-    final ppvSigBlob = allocate<IntPtr>();
-    final pcbSigBlob = allocate<Uint32>();
-    final pulCodeRVA = allocate<Uint32>();
-    final pdwImplFlags = allocate<Uint32>();
+    final pClass = calloc<Uint32>();
+    final szMethod = calloc<Uint16>(256 * 2).cast<Utf16>();
+    final pchMethod = calloc<Uint32>();
+    final pdwAttr = calloc<Uint32>();
+    final ppvSigBlob = calloc<IntPtr>();
+    final pcbSigBlob = calloc<Uint32>();
+    final pulCodeRVA = calloc<Uint32>();
+    final pdwImplFlags = calloc<Uint32>();
 
     try {
       final hr = reader.GetMethodProps(token, pClass, szMethod, 256, pchMethod,
@@ -77,14 +77,14 @@ class WinmdMethod {
         throw WindowsException(hr);
       }
     } finally {
-      free(pClass);
-      free(szMethod);
-      free(pchMethod);
-      free(pdwAttr);
-      free(ppvSigBlob);
-      free(pcbSigBlob);
-      free(pulCodeRVA);
-      free(pdwImplFlags);
+      calloc.free(pClass);
+      calloc.free(szMethod);
+      calloc.free(pchMethod);
+      calloc.free(pdwAttr);
+      calloc.free(ppvSigBlob);
+      calloc.free(pcbSigBlob);
+      calloc.free(pulCodeRVA);
+      calloc.free(pdwImplFlags);
     }
   }
 
@@ -215,9 +215,9 @@ class WinmdMethod {
 
   void _parseParameterNames() {
     if (!isGetProperty) {
-      final phEnum = allocate<IntPtr>()..value = 0;
-      final ptkParamDef = allocate<Uint32>();
-      final pcTokens = allocate<Uint32>();
+      final phEnum = calloc<IntPtr>()..value = 0;
+      final ptkParamDef = calloc<Uint32>();
+      final pcTokens = calloc<Uint32>();
 
       try {
         var hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
@@ -228,8 +228,8 @@ class WinmdMethod {
           hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
         }
       } finally {
-        free(ptkParamDef);
-        free(pcTokens);
+        calloc.free(ptkParamDef);
+        calloc.free(pcTokens);
 
         reader.CloseEnum(phEnum.address);
         // dispose phEnum crashes here, so leave it allocated

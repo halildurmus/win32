@@ -190,7 +190,7 @@ import '../winrt/winrt_constants.dart';
 
     buffer.writeln('  ${method.returnTypeDart} get $exposedMethodName {');
     buffer.writeln(
-        '    final retValuePtr = allocate<${method.parameters.first.nativeType}>();');
+        '    final retValuePtr = calloc<${method.parameters.first.nativeType}>();');
     buffer.writeln();
     buffer.writeln(
         '    final hr = Pointer<NativeFunction<_${method.name}_Native>>.fromAddress(');
@@ -202,7 +202,7 @@ import '../winrt/winrt_constants.dart';
        if (FAILED(hr)) throw WindowsException(hr);
 
        final retValue = retValuePtr.value;
-       free(retValuePtr);
+       calloc.free(retValuePtr);
        return retValue;
      }
     ''');

@@ -24,15 +24,15 @@ class WinmdEnum extends WinmdType {
   WinmdField processFieldToken(int token) {
     final field = WinmdField();
 
-    final ptkTypeDef = allocate<Uint32>();
-    final szField = allocate<Uint16>(count: 256).cast<Utf16>();
-    final pchField = allocate<Uint32>();
-    final pdwAttr = allocate<Uint32>();
-    final ppvSigBlob = allocate<Uint8>();
-    final pcbSigBlob = allocate<Uint32>();
-    final pdwCPlusTypeFlag = allocate<Uint32>();
-    final ppValue = allocate<Uint8>();
-    final pcchValue = allocate<Uint32>();
+    final ptkTypeDef = calloc<Uint32>();
+    final szField = calloc<Utf16>(256 * 2);
+    final pchField = calloc<Uint32>();
+    final pdwAttr = calloc<Uint32>();
+    final ppvSigBlob = calloc<Uint8>();
+    final pcbSigBlob = calloc<Uint32>();
+    final pdwCPlusTypeFlag = calloc<Uint32>();
+    final ppValue = calloc<Uint8>();
+    final pcchValue = calloc<Uint32>();
 
     try {
       final hr = reader.GetFieldProps(
@@ -63,15 +63,15 @@ class WinmdEnum extends WinmdType {
         throw WindowsException(hr);
       }
     } finally {
-      free(ptkTypeDef);
-      free(szField);
-      free(pchField);
-      free(pdwAttr);
-      free(ppvSigBlob);
-      free(pcbSigBlob);
-      free(pdwCPlusTypeFlag);
-      free(ppValue);
-      free(pcchValue);
+      calloc.free(ptkTypeDef);
+      calloc.free(szField);
+      calloc.free(pchField);
+      calloc.free(pdwAttr);
+      calloc.free(ppvSigBlob);
+      calloc.free(pcbSigBlob);
+      calloc.free(pdwCPlusTypeFlag);
+      calloc.free(ppValue);
+      calloc.free(pcchValue);
     }
   }
 
@@ -80,9 +80,9 @@ class WinmdEnum extends WinmdType {
     final fields = <String?, int?>{};
     final fieldTokens = <int>[];
 
-    final phEnum = allocate<IntPtr>()..value = 0;
-    final rgTypeDefs = allocate<Uint32>();
-    final pcTokens = allocate<Uint32>();
+    final phEnum = calloc<IntPtr>();
+    final rgTypeDefs = calloc<Uint32>();
+    final pcTokens = calloc<Uint32>();
 
     try {
       var hr = reader.EnumFields(phEnum, token, rgTypeDefs, 1, pcTokens);
@@ -100,10 +100,10 @@ class WinmdEnum extends WinmdType {
     } finally {
       reader.CloseEnum(phEnum.address);
 
-      free(rgTypeDefs);
-      free(pcTokens);
+      calloc.free(rgTypeDefs);
+      calloc.free(pcTokens);
 
-      // dispose phEnum crashes here, so leave it allocated
+      // dispose phEnum crashes here, so leave it callocd
     }
   }
 }

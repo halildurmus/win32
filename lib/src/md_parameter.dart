@@ -26,14 +26,14 @@ class WinmdParameter {
   factory WinmdParameter.fromToken(IMetaDataImport2 reader, int token) {
     late WinmdParameter parameter;
 
-    final pmd = allocate<Uint32>();
-    final pulSequence = allocate<Uint32>();
-    final szName = allocate<Uint16>(count: 256).cast<Utf16>();
-    final pchName = allocate<Uint32>();
-    final pdwAttr = allocate<Uint32>();
-    final pdwCPlusTypeFlag = allocate<Uint32>();
-    final ppValue = allocate<Uint8>();
-    final pcchValue = allocate<Uint32>();
+    final pmd = calloc<Uint32>();
+    final pulSequence = calloc<Uint32>();
+    final szName = calloc<Utf16>(256 * 2);
+    final pchName = calloc<Uint32>();
+    final pdwAttr = calloc<Uint32>();
+    final pdwCPlusTypeFlag = calloc<Uint32>();
+    final ppValue = calloc<Uint8>();
+    final pcchValue = calloc<Uint32>();
 
     final hr = reader.GetParamProps(token, pmd, pulSequence, szName, 256,
         pchName, pdwAttr, pdwCPlusTypeFlag, ppValue, pcchValue);
@@ -50,14 +50,14 @@ class WinmdParameter {
             pcchValue.value);
       }
 
-      free(pmd);
-      free(pulSequence);
-      free(szName);
-      free(pchName);
-      free(pdwAttr);
-      free(pdwCPlusTypeFlag);
-      free(ppValue);
-      free(pcchValue);
+      calloc.free(pmd);
+      calloc.free(pulSequence);
+      calloc.free(szName);
+      calloc.free(pchName);
+      calloc.free(pdwAttr);
+      calloc.free(pdwCPlusTypeFlag);
+      calloc.free(ppValue);
+      calloc.free(pcchValue);
 
       return parameter;
     } else {

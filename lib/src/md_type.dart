@@ -66,10 +66,10 @@ class WinmdType {
 
   /// Instantiate a typedef from a TypeDef token.
   factory WinmdType.fromTypeDef(IMetaDataImport2 reader, int typeDefToken) {
-    final nRead = allocate<Uint32>();
-    final tdFlags = allocate<Uint32>();
-    final baseClassToken = allocate<Uint32>();
-    final typeName = allocate<Uint16>(count: 256).cast<Utf16>();
+    final nRead = calloc<Uint32>();
+    final tdFlags = calloc<Uint32>();
+    final baseClassToken = calloc<Uint32>();
+    final typeName = calloc<Utf16>(256 * 2);
 
     try {
       final hr = reader.GetTypeDefProps(
@@ -86,10 +86,10 @@ class WinmdType {
         throw WindowsException(hr);
       }
     } finally {
-      free(nRead);
-      free(tdFlags);
-      free(baseClassToken);
-      free(typeName);
+      calloc.free(nRead);
+      calloc.free(tdFlags);
+      calloc.free(baseClassToken);
+      calloc.free(typeName);
     }
   }
 
@@ -99,9 +99,9 @@ class WinmdType {
   /// Windows Runtime classes, the TypeRef is used to obtain the host scope
   /// metadata file, from which the TypeDef can be found and returned.
   factory WinmdType.fromTypeRef(IMetaDataImport2 reader, int typeRefToken) {
-    final ptkResolutionScope = allocate<Uint32>();
-    final szName = allocate<Uint16>(count: 256).cast<Utf16>();
-    final pchName = allocate<Uint32>();
+    final ptkResolutionScope = calloc<Uint32>();
+    final szName = calloc<Utf16>(256 * 2);
+    final pchName = calloc<Uint32>();
 
     // a token like IInspectable is out of reach of GetTypeRefProps, since it is
     // a plain COM object. These objects are returned as system types.
@@ -132,16 +132,16 @@ class WinmdType {
         throw WindowsException(hr);
       }
     } finally {
-      free(ptkResolutionScope);
-      free(szName);
-      free(pchName);
+      calloc.free(ptkResolutionScope);
+      calloc.free(szName);
+      calloc.free(pchName);
     }
   }
 
   /// Converts an individual interface into a type.
   WinmdType processInterfaceToken(int token) {
-    final pClass = allocate<Uint32>();
-    final ptkIface = allocate<Uint32>();
+    final pClass = calloc<Uint32>();
+    final ptkIface = calloc<Uint32>();
 
     try {
       final hr = reader.GetInterfaceImplProps(token, pClass, ptkIface);
@@ -155,8 +155,8 @@ class WinmdType {
 
       throw WindowsException(hr);
     } finally {
-      free(pClass);
-      free(ptkIface);
+      calloc.free(pClass);
+      calloc.free(ptkIface);
     }
   }
 
@@ -164,9 +164,9 @@ class WinmdType {
   List<WinmdType> get interfaces {
     final interfaces = <WinmdType>[];
 
-    final phEnum = allocate<IntPtr>()..value = 0;
-    final rImpls = allocate<Uint32>();
-    final pcImpls = allocate<Uint32>();
+    final phEnum = calloc<IntPtr>()..value = 0;
+    final rImpls = calloc<Uint32>();
+    final pcImpls = calloc<Uint32>();
 
     try {
       var hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
@@ -180,8 +180,8 @@ class WinmdType {
     } finally {
       reader.CloseEnum(phEnum.address);
 
-      free(rImpls);
-      free(pcImpls);
+      calloc.free(rImpls);
+      calloc.free(pcImpls);
 
       // dispose phEnum crashes here, so leave it allocated
     }
@@ -191,9 +191,9 @@ class WinmdType {
   List<WinmdMethod> get methods {
     final methods = <WinmdMethod>[];
 
-    final phEnum = allocate<IntPtr>()..value = 0;
-    final mdMethodDef = allocate<Uint32>();
-    final pcTokens = allocate<Uint32>();
+    final phEnum = calloc<IntPtr>()..value = 0;
+    final mdMethodDef = calloc<Uint32>();
+    final pcTokens = calloc<Uint32>();
 
     try {
       var hr = reader.EnumMethods(phEnum, token, mdMethodDef, 1, pcTokens);
@@ -207,8 +207,8 @@ class WinmdType {
     } finally {
       reader.CloseEnum(phEnum.address);
 
-      free(mdMethodDef);
-      free(pcTokens);
+      calloc.free(mdMethodDef);
+      calloc.free(pcTokens);
       // dispose phEnum crashes here, so leave it allocated
     }
   }
@@ -218,7 +218,7 @@ class WinmdType {
   /// Returns null if the method is not found.
   WinmdMethod? findMethod(String methodName) {
     final szName = TEXT(methodName);
-    final pmb = allocate<Uint32>();
+    final pmb = calloc<Uint32>();
 
     try {
       final hr = reader.FindMethod(token, szName, nullptr, 0, pmb);
@@ -230,8 +230,8 @@ class WinmdType {
         throw COMException(hr);
       }
     } finally {
-      free(szName);
-      free(pmb);
+      calloc.free(szName);
+      calloc.free(pmb);
     }
   }
 
@@ -244,8 +244,8 @@ class WinmdType {
   /// Returns null if a GUID couldn't be found.
   String? get guid {
     final attributeName = TEXT('Windows.Foundation.Metadata.GuidAttribute');
-    final ppData = allocate<IntPtr>();
-    final pcbData = allocate<Uint32>();
+    final ppData = calloc<IntPtr>();
+    final pcbData = calloc<Uint32>();
 
     try {
       final hr = reader.GetCustomAttributeByName(
@@ -258,9 +258,9 @@ class WinmdType {
         return null;
       }
     } finally {
-      free(attributeName);
-      free(ppData);
-      free(pcbData);
+      calloc.free(attributeName);
+      calloc.free(ppData);
+      calloc.free(pcbData);
     }
   }
 }

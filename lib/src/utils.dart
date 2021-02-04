@@ -61,9 +61,9 @@ File metadataFileContainingType(String typeName) {
 
   final hstrTypeName = convertToHString(typeName);
 
-  final hstrMetaDataFilePath = allocate<IntPtr>();
-  final spMetaDataImport = allocate<Pointer>();
-  final typeDef = allocate<Uint32>();
+  final hstrMetaDataFilePath = calloc<IntPtr>();
+  final spMetaDataImport = calloc<Pointer>();
+  final typeDef = calloc<Uint32>();
 
   try {
     // RoGetMetaDataFile can only be used for Windows Runtime classes (i.e. not
@@ -79,8 +79,8 @@ File metadataFileContainingType(String typeName) {
     WindowsDeleteString(hstrTypeName.value);
     WindowsDeleteString(hstrMetaDataFilePath.value);
 
-    free(hstrTypeName);
-    free(hstrMetaDataFilePath);
+    calloc.free(hstrTypeName);
+    calloc.free(hstrMetaDataFilePath);
   }
 
   return path;

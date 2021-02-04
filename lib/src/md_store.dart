@@ -21,7 +21,7 @@ class WinmdStore {
   static bool isInitialized = false;
 
   static void initialize() {
-    final dispenserObject = allocate<Pointer>();
+    final dispenserObject = calloc<Pointer>();
 
     final hr = MetaDataGetDispenser(convertToCLSID(CLSID_CorMetaDataDispenser),
         convertToIID(IID_IMetaDataDispenser), dispenserObject);
@@ -43,7 +43,7 @@ class WinmdStore {
       return WinmdScope(cache[fileScope]!);
     } else {
       final szFile = TEXT(fileScope);
-      final pReader = allocate<IntPtr>();
+      final pReader = calloc<IntPtr>();
 
       try {
         final hr = dispenser.OpenScope(szFile, CorOpenFlags.ofRead,
@@ -55,7 +55,7 @@ class WinmdStore {
           return WinmdScope(cache[fileScope]!);
         }
       } finally {
-        free(szFile);
+        calloc.free(szFile);
       }
     }
   }
@@ -65,9 +65,9 @@ class WinmdStore {
   static WinmdScope getScopeForType(String typeName) {
     final hstrTypeName = convertToHString(typeName);
 
-    final hstrMetaDataFilePath = allocate<IntPtr>();
-    final spMetaDataImport = allocate<Pointer>();
-    final typeDef = allocate<Uint32>();
+    final hstrMetaDataFilePath = calloc<IntPtr>();
+    final spMetaDataImport = calloc<Pointer>();
+    final typeDef = calloc<Uint32>();
 
     try {
       // For apps that are not Windows Store apps, RoGetMetaDataFile can only be
@@ -85,8 +85,8 @@ class WinmdStore {
       WindowsDeleteString(hstrTypeName.value);
       WindowsDeleteString(hstrMetaDataFilePath.value);
 
-      free(hstrTypeName);
-      free(hstrMetaDataFilePath);
+      calloc.free(hstrTypeName);
+      calloc.free(hstrMetaDataFilePath);
     }
   }
 
@@ -106,9 +106,9 @@ class WinmdStore {
     if (!isInitialized) return;
 
     for (final reader in cache.values) {
-      free(reader.ptr);
+      calloc.free(reader.ptr);
     }
-    free(dispenser.ptr);
+    calloc.free(dispenser.ptr);
 
     cache.clear();
     isInitialized = false;

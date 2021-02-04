@@ -23,9 +23,9 @@ class WinmdScope {
   List<WinmdType> get typeDefs {
     final types = <WinmdType>[];
 
-    final phEnum = allocate<IntPtr>()..value = 0;
-    final rgTypeDefs = allocate<Uint32>();
-    final pcTypeDefs = allocate<Uint32>();
+    final phEnum = calloc<IntPtr>()..value = 0;
+    final rgTypeDefs = calloc<Uint32>();
+    final pcTypeDefs = calloc<Uint32>();
 
     try {
       var hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
@@ -39,8 +39,8 @@ class WinmdScope {
     } finally {
       reader.CloseEnum(phEnum.address);
 
-      free(rgTypeDefs);
-      free(pcTypeDefs);
+      calloc.free(rgTypeDefs);
+      calloc.free(pcTypeDefs);
 
       // dispose phEnum crashes here, so leave it allocated
     }
@@ -59,14 +59,14 @@ class WinmdScope {
   /// Find a typedef by name.
   WinmdType findTypeDef(String type) {
     final szTypeDef = TEXT(type);
-    final ptkTypeDef = allocate<Uint32>();
+    final ptkTypeDef = calloc<Uint32>();
 
     try {
       reader.FindTypeDefByName(szTypeDef, NULL, ptkTypeDef);
       return WinmdType.fromToken(reader, ptkTypeDef.value);
     } finally {
-      free(szTypeDef);
-      free(ptkTypeDef);
+      calloc.free(szTypeDef);
+      calloc.free(ptkTypeDef);
     }
   }
 }
