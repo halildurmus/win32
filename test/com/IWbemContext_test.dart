@@ -20,32 +20,32 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final wbemcontext = IWbemContext(ptr);
-    test('Can instantiate IWbemContext.Clone', () {
-      expect(wbemcontext.Clone, isA<Function>());
-      });
-          test('Can instantiate IWbemContext.GetNames', () {
-      expect(wbemcontext.GetNames, isA<Function>());
-      });
-          test('Can instantiate IWbemContext.BeginEnumeration', () {
-      expect(wbemcontext.BeginEnumeration, isA<Function>());
-      });
-          test('Can instantiate IWbemContext.Next', () {
-      expect(wbemcontext.Next, isA<Function>());
-      });
-          test('Can instantiate IWbemContext.EndEnumeration', () {
-      expect(wbemcontext.EndEnumeration, isA<Function>());
-      });
-          test('Can instantiate IWbemContext.SetValue', () {
-      expect(wbemcontext.SetValue, isA<Function>());
-      });
-          test('Can instantiate IWbemContext.GetValue', () {
-      expect(wbemcontext.GetValue, isA<Function>());
-      });
-          test('Can instantiate IWbemContext.DeleteValue', () {
-      expect(wbemcontext.DeleteValue, isA<Function>());
-      });
-          test('Can instantiate IWbemContext.DeleteAll', () {
-      expect(wbemcontext.DeleteAll, isA<Function>());
-      });
-        calloc.free(ptr);
-  }
+  test('Can instantiate IWbemContext.Clone', () {
+    expect(wbemcontext.Clone, isA<Function>());
+  });
+  test('Can instantiate IWbemContext.GetNames', () {
+    expect(wbemcontext.GetNames, isA<Function>());
+  });
+  test('Can instantiate IWbemContext.BeginEnumeration', () {
+    expect(wbemcontext.BeginEnumeration, isA<Function>());
+  });
+  test('Can instantiate IWbemContext.Next', () {
+    expect(wbemcontext.Next, isA<Function>());
+  });
+  test('Can instantiate IWbemContext.EndEnumeration', () {
+    expect(wbemcontext.EndEnumeration, isA<Function>());
+  });
+  test('Can instantiate IWbemContext.SetValue', () {
+    expect(wbemcontext.SetValue, isA<Function>());
+  });
+  test('Can instantiate IWbemContext.GetValue', () {
+    expect(wbemcontext.GetValue, isA<Function>());
+  });
+  test('Can instantiate IWbemContext.DeleteValue', () {
+    expect(wbemcontext.DeleteValue, isA<Function>());
+  });
+  test('Can instantiate IWbemContext.DeleteAll', () {
+    expect(wbemcontext.DeleteAll, isA<Function>());
+  });
+  calloc.free(ptr);
+}

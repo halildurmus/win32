@@ -20,38 +20,38 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final network = INetwork(ptr);
-    test('Can instantiate INetwork.GetName', () {
-      expect(network.GetName, isA<Function>());
-      });
-          test('Can instantiate INetwork.SetName', () {
-      expect(network.SetName, isA<Function>());
-      });
-          test('Can instantiate INetwork.GetDescription', () {
-      expect(network.GetDescription, isA<Function>());
-      });
-          test('Can instantiate INetwork.SetDescription', () {
-      expect(network.SetDescription, isA<Function>());
-      });
-          test('Can instantiate INetwork.GetNetworkId', () {
-      expect(network.GetNetworkId, isA<Function>());
-      });
-          test('Can instantiate INetwork.GetDomainType', () {
-      expect(network.GetDomainType, isA<Function>());
-      });
-          test('Can instantiate INetwork.GetNetworkConnections', () {
-      expect(network.GetNetworkConnections, isA<Function>());
-      });
-          test('Can instantiate INetwork.GetTimeCreatedAndConnected', () {
-      expect(network.GetTimeCreatedAndConnected, isA<Function>());
-      });
-          test('Can instantiate INetwork.GetConnectivity', () {
-      expect(network.GetConnectivity, isA<Function>());
-      });
-          test('Can instantiate INetwork.GetCategory', () {
-      expect(network.GetCategory, isA<Function>());
-      });
-          test('Can instantiate INetwork.SetCategory', () {
-      expect(network.SetCategory, isA<Function>());
-      });
-        calloc.free(ptr);
-  }
+  test('Can instantiate INetwork.GetName', () {
+    expect(network.GetName, isA<Function>());
+  });
+  test('Can instantiate INetwork.SetName', () {
+    expect(network.SetName, isA<Function>());
+  });
+  test('Can instantiate INetwork.GetDescription', () {
+    expect(network.GetDescription, isA<Function>());
+  });
+  test('Can instantiate INetwork.SetDescription', () {
+    expect(network.SetDescription, isA<Function>());
+  });
+  test('Can instantiate INetwork.GetNetworkId', () {
+    expect(network.GetNetworkId, isA<Function>());
+  });
+  test('Can instantiate INetwork.GetDomainType', () {
+    expect(network.GetDomainType, isA<Function>());
+  });
+  test('Can instantiate INetwork.GetNetworkConnections', () {
+    expect(network.GetNetworkConnections, isA<Function>());
+  });
+  test('Can instantiate INetwork.GetTimeCreatedAndConnected', () {
+    expect(network.GetTimeCreatedAndConnected, isA<Function>());
+  });
+  test('Can instantiate INetwork.GetConnectivity', () {
+    expect(network.GetConnectivity, isA<Function>());
+  });
+  test('Can instantiate INetwork.GetCategory', () {
+    expect(network.GetCategory, isA<Function>());
+  });
+  test('Can instantiate INetwork.SetCategory', () {
+    expect(network.SetCategory, isA<Function>());
+  });
+  calloc.free(ptr);
+}

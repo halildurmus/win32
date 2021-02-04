@@ -20,14 +20,14 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final unknown = IUnknown(ptr);
-    test('Can instantiate IUnknown.QueryInterface', () {
-      expect(unknown.QueryInterface, isA<Function>());
-      });
-          test('Can instantiate IUnknown.AddRef', () {
-      expect(unknown.AddRef, isA<Function>());
-      });
-          test('Can instantiate IUnknown.Release', () {
-      expect(unknown.Release, isA<Function>());
-      });
-        calloc.free(ptr);
-  }
+  test('Can instantiate IUnknown.QueryInterface', () {
+    expect(unknown.QueryInterface, isA<Function>());
+  });
+  test('Can instantiate IUnknown.AddRef', () {
+    expect(unknown.AddRef, isA<Function>());
+  });
+  test('Can instantiate IUnknown.Release', () {
+    expect(unknown.Release, isA<Function>());
+  });
+  calloc.free(ptr);
+}

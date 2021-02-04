@@ -20,14 +20,14 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final inspectable = IInspectable(ptr);
-    test('Can instantiate IInspectable.GetIids', () {
-      expect(inspectable.GetIids, isA<Function>());
-      });
-          test('Can instantiate IInspectable.GetRuntimeClassName', () {
-      expect(inspectable.GetRuntimeClassName, isA<Function>());
-      });
-          test('Can instantiate IInspectable.GetTrustLevel', () {
-      expect(inspectable.GetTrustLevel, isA<Function>());
-      });
-        calloc.free(ptr);
-  }
+  test('Can instantiate IInspectable.GetIids', () {
+    expect(inspectable.GetIids, isA<Function>());
+  });
+  test('Can instantiate IInspectable.GetRuntimeClassName', () {
+    expect(inspectable.GetRuntimeClassName, isA<Function>());
+  });
+  test('Can instantiate IInspectable.GetTrustLevel', () {
+    expect(inspectable.GetTrustLevel, isA<Function>());
+  });
+  calloc.free(ptr);
+}

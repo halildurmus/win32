@@ -20,8 +20,8 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final provideclassinfo = IProvideClassInfo(ptr);
-    test('Can instantiate IProvideClassInfo.GetClassInfo', () {
-      expect(provideclassinfo.GetClassInfo, isA<Function>());
-      });
-        calloc.free(ptr);
-  }
+  test('Can instantiate IProvideClassInfo.GetClassInfo', () {
+    expect(provideclassinfo.GetClassInfo, isA<Function>());
+  });
+  calloc.free(ptr);
+}

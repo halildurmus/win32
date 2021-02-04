@@ -20,23 +20,23 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final metadatadispenserex = IMetaDataDispenserEx(ptr);
-    test('Can instantiate IMetaDataDispenserEx.SetOption', () {
-      expect(metadatadispenserex.SetOption, isA<Function>());
-      });
-          test('Can instantiate IMetaDataDispenserEx.GetOption', () {
-      expect(metadatadispenserex.GetOption, isA<Function>());
-      });
-          test('Can instantiate IMetaDataDispenserEx.OpenScopeOnITypeInfo', () {
-      expect(metadatadispenserex.OpenScopeOnITypeInfo, isA<Function>());
-      });
-          test('Can instantiate IMetaDataDispenserEx.GetCORSystemDirectory', () {
-      expect(metadatadispenserex.GetCORSystemDirectory, isA<Function>());
-      });
-          test('Can instantiate IMetaDataDispenserEx.FindAssembly', () {
-      expect(metadatadispenserex.FindAssembly, isA<Function>());
-      });
-          test('Can instantiate IMetaDataDispenserEx.FindAssemblyModule', () {
-      expect(metadatadispenserex.FindAssemblyModule, isA<Function>());
-      });
-        calloc.free(ptr);
-  }
+  test('Can instantiate IMetaDataDispenserEx.SetOption', () {
+    expect(metadatadispenserex.SetOption, isA<Function>());
+  });
+  test('Can instantiate IMetaDataDispenserEx.GetOption', () {
+    expect(metadatadispenserex.GetOption, isA<Function>());
+  });
+  test('Can instantiate IMetaDataDispenserEx.OpenScopeOnITypeInfo', () {
+    expect(metadatadispenserex.OpenScopeOnITypeInfo, isA<Function>());
+  });
+  test('Can instantiate IMetaDataDispenserEx.GetCORSystemDirectory', () {
+    expect(metadatadispenserex.GetCORSystemDirectory, isA<Function>());
+  });
+  test('Can instantiate IMetaDataDispenserEx.FindAssembly', () {
+    expect(metadatadispenserex.FindAssembly, isA<Function>());
+  });
+  test('Can instantiate IMetaDataDispenserEx.FindAssemblyModule', () {
+    expect(metadatadispenserex.FindAssemblyModule, isA<Function>());
+  });
+  calloc.free(ptr);
+}

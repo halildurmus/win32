@@ -20,20 +20,20 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final fileisinuse = IFileIsInUse(ptr);
-    test('Can instantiate IFileIsInUse.GetAppName', () {
-      expect(fileisinuse.GetAppName, isA<Function>());
-      });
-          test('Can instantiate IFileIsInUse.GetUsage', () {
-      expect(fileisinuse.GetUsage, isA<Function>());
-      });
-          test('Can instantiate IFileIsInUse.GetCapabilities', () {
-      expect(fileisinuse.GetCapabilities, isA<Function>());
-      });
-          test('Can instantiate IFileIsInUse.GetSwitchToHWND', () {
-      expect(fileisinuse.GetSwitchToHWND, isA<Function>());
-      });
-          test('Can instantiate IFileIsInUse.CloseFile', () {
-      expect(fileisinuse.CloseFile, isA<Function>());
-      });
-        calloc.free(ptr);
-  }
+  test('Can instantiate IFileIsInUse.GetAppName', () {
+    expect(fileisinuse.GetAppName, isA<Function>());
+  });
+  test('Can instantiate IFileIsInUse.GetUsage', () {
+    expect(fileisinuse.GetUsage, isA<Function>());
+  });
+  test('Can instantiate IFileIsInUse.GetCapabilities', () {
+    expect(fileisinuse.GetCapabilities, isA<Function>());
+  });
+  test('Can instantiate IFileIsInUse.GetSwitchToHWND', () {
+    expect(fileisinuse.GetSwitchToHWND, isA<Function>());
+  });
+  test('Can instantiate IFileIsInUse.CloseFile', () {
+    expect(fileisinuse.CloseFile, isA<Function>());
+  });
+  calloc.free(ptr);
+}

@@ -20,11 +20,11 @@ void main() {
   final ptr = calloc<COMObject>();
 
   final filedialog2 = IFileDialog2(ptr);
-    test('Can instantiate IFileDialog2.SetCancelButtonLabel', () {
-      expect(filedialog2.SetCancelButtonLabel, isA<Function>());
-      });
-          test('Can instantiate IFileDialog2.SetNavigationRoot', () {
-      expect(filedialog2.SetNavigationRoot, isA<Function>());
-      });
-        calloc.free(ptr);
-  }
+  test('Can instantiate IFileDialog2.SetCancelButtonLabel', () {
+    expect(filedialog2.SetCancelButtonLabel, isA<Function>());
+  });
+  test('Can instantiate IFileDialog2.SetNavigationRoot', () {
+    expect(filedialog2.SetNavigationRoot, isA<Function>());
+  });
+  calloc.free(ptr);
+}
