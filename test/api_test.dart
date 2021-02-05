@@ -1791,19 +1791,24 @@ void main() {
               'GetDoubleClickTime');
       expect(GetDoubleClickTime, isA<Function>());
     });
-    test('Can instantiate GetDpiForSystem', () {
-      final user32 = DynamicLibrary.open('user32.dll');
-      final GetDpiForSystem = user32
-          .lookupFunction<Uint32 Function(), int Function()>('GetDpiForSystem');
-      expect(GetDpiForSystem, isA<Function>());
-    });
-    test('Can instantiate GetDpiForWindow', () {
-      final user32 = DynamicLibrary.open('user32.dll');
-      final GetDpiForWindow = user32.lookupFunction<
-          Uint32 Function(IntPtr hwnd),
-          int Function(int hwnd)>('GetDpiForWindow');
-      expect(GetDpiForWindow, isA<Function>());
-    });
+    if (windowsBuildNumber >= 14393) {
+      test('Can instantiate GetDpiForSystem', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetDpiForSystem =
+            user32.lookupFunction<Uint32 Function(), int Function()>(
+                'GetDpiForSystem');
+        expect(GetDpiForSystem, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 14393) {
+      test('Can instantiate GetDpiForWindow', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetDpiForWindow = user32.lookupFunction<
+            Uint32 Function(IntPtr hwnd),
+            int Function(int hwnd)>('GetDpiForWindow');
+        expect(GetDpiForWindow, isA<Function>());
+      });
+    }
     test('Can instantiate GetFocus', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetFocus =
@@ -2020,13 +2025,15 @@ void main() {
           int Function(int nIndex)>('GetSystemMetrics');
       expect(GetSystemMetrics, isA<Function>());
     });
-    test('Can instantiate GetSystemMetricsForDpi', () {
-      final user32 = DynamicLibrary.open('user32.dll');
-      final GetSystemMetricsForDpi = user32.lookupFunction<
-          Int32 Function(Int32 nIndex, Uint32 dpi),
-          int Function(int nIndex, int dpi)>('GetSystemMetricsForDpi');
-      expect(GetSystemMetricsForDpi, isA<Function>());
-    });
+    if (windowsBuildNumber >= 14393) {
+      test('Can instantiate GetSystemMetricsForDpi', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetSystemMetricsForDpi = user32.lookupFunction<
+            Int32 Function(Int32 nIndex, Uint32 dpi),
+            int Function(int nIndex, int dpi)>('GetSystemMetricsForDpi');
+        expect(GetSystemMetricsForDpi, isA<Function>());
+      });
+    }
     test('Can instantiate GetTabbedTextExtent', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetTabbedTextExtent = user32.lookupFunction<
@@ -4695,30 +4702,36 @@ void main() {
   });
 
   group('Test shcore functions', () {
-    test('Can instantiate GetDpiForMonitor', () {
-      final shcore = DynamicLibrary.open('shcore.dll');
-      final GetDpiForMonitor = shcore.lookupFunction<
-          Int32 Function(IntPtr hmonitor, Int32 dpiType, Pointer<Uint32> dpiX,
-              Pointer<Uint32> dpiY),
-          int Function(int hmonitor, int dpiType, Pointer<Uint32> dpiX,
-              Pointer<Uint32> dpiY)>('GetDpiForMonitor');
-      expect(GetDpiForMonitor, isA<Function>());
-    });
-    test('Can instantiate GetProcessDpiAwareness', () {
-      final shcore = DynamicLibrary.open('shcore.dll');
-      final GetProcessDpiAwareness = shcore.lookupFunction<
-          Int32 Function(IntPtr hprocess, Pointer<Int32> value),
-          int Function(
-              int hprocess, Pointer<Int32> value)>('GetProcessDpiAwareness');
-      expect(GetProcessDpiAwareness, isA<Function>());
-    });
-    test('Can instantiate SetProcessDpiAwareness', () {
-      final shcore = DynamicLibrary.open('shcore.dll');
-      final SetProcessDpiAwareness = shcore.lookupFunction<
-          Int32 Function(Int32 value),
-          int Function(int value)>('SetProcessDpiAwareness');
-      expect(SetProcessDpiAwareness, isA<Function>());
-    });
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate GetDpiForMonitor', () {
+        final shcore = DynamicLibrary.open('shcore.dll');
+        final GetDpiForMonitor = shcore.lookupFunction<
+            Int32 Function(IntPtr hmonitor, Int32 dpiType, Pointer<Uint32> dpiX,
+                Pointer<Uint32> dpiY),
+            int Function(int hmonitor, int dpiType, Pointer<Uint32> dpiX,
+                Pointer<Uint32> dpiY)>('GetDpiForMonitor');
+        expect(GetDpiForMonitor, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate GetProcessDpiAwareness', () {
+        final shcore = DynamicLibrary.open('shcore.dll');
+        final GetProcessDpiAwareness = shcore.lookupFunction<
+            Int32 Function(IntPtr hprocess, Pointer<Int32> value),
+            int Function(
+                int hprocess, Pointer<Int32> value)>('GetProcessDpiAwareness');
+        expect(GetProcessDpiAwareness, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate SetProcessDpiAwareness', () {
+        final shcore = DynamicLibrary.open('shcore.dll');
+        final SetProcessDpiAwareness = shcore.lookupFunction<
+            Int32 Function(Int32 value),
+            int Function(int value)>('SetProcessDpiAwareness');
+        expect(SetProcessDpiAwareness, isA<Function>());
+      });
+    }
   });
 
   group('Test version functions', () {
