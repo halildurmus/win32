@@ -1009,17 +1009,20 @@
     "GetDpiForMonitor": {
         "prototype": "HRESULT GetDpiForMonitor(\n  HMONITOR         hmonitor,\n  MONITOR_DPI_TYPE dpiType,\n  UINT             *dpiX,\n  UINT             *dpiY\n  );",
         "dllLibrary": "shcore",
-        "comment": "Queries the dots per inch (dpi) of a display."
+        "comment": "Queries the dots per inch (dpi) of a display.",
+        "minimumWindowsVersion": "WIN81"
     },
     "GetDpiForSystem": {
         "prototype": "UINT GetDpiForSystem();",
         "dllLibrary": "user32",
-        "comment": "Returns the system DPI."
+        "comment": "Returns the system DPI.",
+        "minimumWindowsVersion": "WIN10_RS1"
     },
     "GetDpiForWindow": {
         "prototype": "UINT GetDpiForWindow(\n  HWND hwnd\n);",
         "dllLibrary": "user32",
-        "comment": "Returns the dots per inch (dpi) value for the associated window."
+        "comment": "Returns the dots per inch (dpi) value for the associated window.",
+        "minimumWindowsVersion": "WIN10_RS1"
     },
     "GetFileAttributesEx": {
         "prototype": "BOOL GetFileAttributesExW(\n  LPCWSTR                lpFileName,\n  GET_FILEEX_INFO_LEVELS fInfoLevelId,\n  LPVOID                 lpFileInformation\n);",
@@ -1290,7 +1293,8 @@
     "GetProcessDpiAwareness": {
         "prototype": "HRESULT GetProcessDpiAwareness(\n  HANDLE                hprocess,\n  PROCESS_DPI_AWARENESS *value\n);",
         "dllLibrary": "shcore",
-        "comment": "Retrieves the dots per inch (dpi) awareness of the specified process."
+        "comment": "Retrieves the dots per inch (dpi) awareness of the specified process.",
+        "minimumWindowsVersion": "WIN81"
     },
     "GetProcessHeap": {
         "prototype": "HANDLE GetProcessHeap();",
@@ -1381,7 +1385,8 @@
     "GetSystemMetricsForDpi": {
         "prototype": "int GetSystemMetricsForDpi(\n  int  nIndex,\n  UINT dpi\n);",
         "dllLibrary": "user32",
-        "comment": "Retrieves the specified system metric or system configuration setting taking into account a provided DPI."
+        "comment": "Retrieves the specified system metric or system configuration setting taking into account a provided DPI.",
+        "minimumWindowsVersion": "WIN10_RS1"
     },
     "GetSystemPowerStatus": {
         "prototype": "BOOL GetSystemPowerStatus(\n  LPSYSTEM_POWER_STATUS lpSystemPowerStatus\n);",
@@ -2323,7 +2328,8 @@
     "SetProcessDpiAwareness": {
         "prototype": "HRESULT SetProcessDpiAwareness(\n  PROCESS_DPI_AWARENESS value\n);",
         "dllLibrary": "shcore",
-        "comment": "Sets the process-default DPI awareness level. This is equivalent to calling SetProcessDpiAwarenessContext with the corresponding DPI_AWARENESS_CONTEXT value."
+        "comment": "Sets the process-default DPI awareness level. This is equivalent to calling SetProcessDpiAwarenessContext with the corresponding DPI_AWARENESS_CONTEXT value.",
+        "minimumWindowsVersion": "WIN81"
     },
     "SetRect": {
         "prototype": "BOOL SetRect(\n  LPRECT lprc,\n  int    xLeft,\n  int    yTop,\n  int    xRight,\n  int    yBottom\n);",
