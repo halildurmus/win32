@@ -74,7 +74,15 @@ const mapping = <String, String>{
   // A 64-bit unsigned integer. Declared as `unsigned __int64`.
   'DWORD64': 'Uint64',
 
-  'LONG': 'Int32', 'INT': 'Int32', 'INT32': 'Int32', 'LSTATUS': 'Int32',
+  // A 32-bit signed integer. The range is -2147483648 through 2147483647
+  // decimal. Declared as `long`.
+  'LONG': 'Int32',
+
+  // A 32-bit signed integer. The range is -2147483648 through 2147483647
+  // decimal. Declared as `long`.
+  'INT': 'Int32',
+
+  'INT32': 'Int32', 'LSTATUS': 'Int32',
 
   // A 32-bit unsigned integer. Declared as `unsigned int`.
   'DWORD32': 'Uint32',
@@ -105,6 +113,9 @@ const mapping = <String, String>{
   // A 16-bit unsigned integer. The range is 0 through 65535 decimal. Declared
   // as `unsigned short`.
   'WORD': 'Uint16',
+
+  // A 16-bit Unicode character. Declared as `wchar_t`.
+  'WCHAR': 'Uint16',
 
   // An unsigned INT16. Declared as `unsigned short`.
   'UINT16': 'Uint16',
@@ -291,6 +302,7 @@ const mapping = <String, String>{
   // Pointers to ints
   'LPDWORD': 'Pointer<Uint32>', 'LPBYTE': 'Pointer<Uint8>',
   'LPBOOL': 'Pointer<Uint32>', 'LPUINT': 'Pointer<Uint32>',
+  'LPWORD': 'Pointer<Uint16>',
 
   // Strings
   'LPWSTR': 'Pointer<Utf16>', 'LPCWSTR': 'Pointer<Utf16>',
@@ -305,10 +317,15 @@ const mapping = <String, String>{
   'TCHAR': 'Uint16', 'PWSTR': 'Pointer<Utf16>',
 
   // Pointers not prefixed with LP*
-  'PUINT': 'Pointer<Uint32>', 'PHANDLE': 'Pointer<IntPtr>',
-  'PULONGLONG': 'Pointer<Uint64>', 'PDWORD': 'Pointer<Uint32>',
-  'PLONG': 'Pointer<Int32>', 'PBOOL': 'Pointer<Int32>',
-  'PLARGE_INTEGER': 'Pointer<Int64>', 'PSIZE_T': 'Pointer<IntPtr>',
+  'PBOOL': 'Pointer<Int32>',
+  'PUINT': 'Pointer<Uint32>',
+  'PHANDLE': 'Pointer<IntPtr>',
+  'PULONGLONG': 'Pointer<Uint64>',
+  'PDWORD': 'Pointer<Uint32>',
+  'PLONG': 'Pointer<Int32>',
+  'PBYTE': 'Pointer<Uint8>',
+  'PLARGE_INTEGER': 'Pointer<Int64>',
+  'PSIZE_T': 'Pointer<IntPtr>',
   'PBLUETOOTH_OOB_DATA_INFO': 'Pointer<BLUETOOTH_OOB_DATA_INFO>',
   'PBLUETOOTH_RADIO_INFO': 'Pointer<BLUETOOTH_RADIO_INFO>',
   'PCREDENTIALW': 'Pointer<CREDENTIAL>', 'PHKEY': 'Pointer<IntPtr>',
@@ -318,6 +335,7 @@ const mapping = <String, String>{
   'PCONSOLE_SELECTION_INFO': 'Pointer<CONSOLE_SELECTION_INFO>',
   'PCONSOLE_SCREEN_BUFFER_INFO': 'Pointer<CONSOLE_SCREEN_BUFFER_INFO>',
   'PCACTCTXW': 'Pointer<ACTCTX>',
+  'PLASTINPUTINFO': 'Pointer<LASTINPUTINFO>',
 
   // Pointers to enums
   'LPMC_COLOR_TEMPERATURE': 'Pointer<Int32>',

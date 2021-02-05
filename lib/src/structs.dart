@@ -600,6 +600,42 @@ class ACCEL extends Struct {
   external int cmd;
 }
 
+// typedef struct tagLASTINPUTINFO {
+//   UINT  cbSize;
+//   DWORD dwTime;
+// } LASTINPUTINFO, *PLASTINPUTINFO;
+
+/// Contains the time of the last input.
+///
+/// {@category Struct}
+class LASTINPUTINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int dwTime;
+}
+
+// typedef struct tagMOUSEMOVEPOINT {
+//   int       x;
+//   int       y;
+//   DWORD     time;
+//   ULONG_PTR dwExtraInfo;
+// } MOUSEMOVEPOINT, *PMOUSEMOVEPOINT, *LPMOUSEMOVEPOINT;
+
+/// Contains information about the mouse's location in screen coordinates.
+///
+/// {@category Struct}
+class MOUSEMOVEPOINT extends Struct {
+  @Int32()
+  external int x;
+  @Int32()
+  external int y;
+  @Uint32()
+  external int time;
+  @IntPtr()
+  external int dwExtraInfo;
+}
+
 // typedef struct tagMONITORINFO {
 //   DWORD cbSize;
 //   RECT  rcMonitor;

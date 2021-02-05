@@ -120,6 +120,20 @@ void main() {
       expect(sizeOf<ACCEL>(), equals(6));
     }
   });
+  test('Struct LASTINPUTINFO is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<LASTINPUTINFO>(), equals(8));
+    } else {
+      expect(sizeOf<LASTINPUTINFO>(), equals(8));
+    }
+  });
+  test('Struct MOUSEMOVEPOINT is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<MOUSEMOVEPOINT>(), equals(24));
+    } else {
+      expect(sizeOf<MOUSEMOVEPOINT>(), equals(16));
+    }
+  });
   test('Struct MONITORINFO is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<MONITORINFO>(), equals(40));

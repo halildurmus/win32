@@ -43,6 +43,8 @@ void main()
     printf("  'VARIANT': %zu,\n", sizeof(VARIANT));
     printf("  'COMDLG_FILTERSPEC': %zu,\n", sizeof(COMDLG_FILTERSPEC));
     printf("  'ACCEL': %zu,\n", sizeof(ACCEL));
+    printf("  'LASTINPUTINFO': %zu,\n", sizeof(LASTINPUTINFO));
+    printf("  'MOUSEMOVEPOINT': %zu,\n", sizeof(MOUSEMOVEPOINT));
     printf("  'MONITORINFO': %zu,\n", sizeof(MONITORINFO));
     printf("  'PHYSICAL_MONITOR': %zu,\n", sizeof(PHYSICAL_MONITOR));
     printf("  'CHOOSECOLOR': %zu,\n", sizeof(CHOOSECOLOR));

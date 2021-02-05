@@ -1388,6 +1388,119 @@ int GetKeyboardLayout(int idThread) {
   return _GetKeyboardLayout(idThread);
 }
 
+/// Retrieves the input locale identifiers (formerly called keyboard layout
+/// handles) corresponding to the current set of input locales in the
+/// system. The function copies the identifiers to the specified buffer.
+///
+/// ```c
+/// int GetKeyboardLayoutList(
+///   int nBuff,
+///   HKL *lpList
+/// );
+/// ```
+/// {@category user32}
+int GetKeyboardLayoutList(int nBuff, Pointer<IntPtr> lpList) {
+  final _GetKeyboardLayoutList = _user32.lookupFunction<
+      Int32 Function(Int32 nBuff, Pointer<IntPtr> lpList),
+      int Function(int nBuff, Pointer<IntPtr> lpList)>('GetKeyboardLayoutList');
+  return _GetKeyboardLayoutList(nBuff, lpList);
+}
+
+/// Retrieves the name of the active input locale identifier (formerly
+/// called the keyboard layout) for the system.
+///
+/// ```c
+/// BOOL GetKeyboardLayoutNameW(
+///   LPWSTR pwszKLID
+/// );
+/// ```
+/// {@category user32}
+int GetKeyboardLayoutName(Pointer<Utf16> pwszKLID) {
+  final _GetKeyboardLayoutName = _user32.lookupFunction<
+      Int32 Function(Pointer<Utf16> pwszKLID),
+      int Function(Pointer<Utf16> pwszKLID)>('GetKeyboardLayoutNameW');
+  return _GetKeyboardLayoutName(pwszKLID);
+}
+
+/// Copies the status of the 256 virtual keys to the specified buffer.
+///
+/// ```c
+/// BOOL GetKeyboardState(
+///   PBYTE lpKeyState
+/// );
+/// ```
+/// {@category user32}
+int GetKeyboardState(Pointer<Uint8> lpKeyState) {
+  final _GetKeyboardState = _user32.lookupFunction<
+      Int32 Function(Pointer<Uint8> lpKeyState),
+      int Function(Pointer<Uint8> lpKeyState)>('GetKeyboardState');
+  return _GetKeyboardState(lpKeyState);
+}
+
+/// Retrieves information about the current keyboard.
+///
+/// ```c
+/// int GetKeyboardType(
+///   int nTypeFlag
+/// );
+/// ```
+/// {@category user32}
+int GetKeyboardType(int nTypeFlag) {
+  final _GetKeyboardType = _user32.lookupFunction<
+      Int32 Function(Int32 nTypeFlag),
+      int Function(int nTypeFlag)>('GetKeyboardType');
+  return _GetKeyboardType(nTypeFlag);
+}
+
+/// Retrieves a string that represents the name of a key.
+///
+/// ```c
+/// int GetKeyNameTextW(
+///   LONG   lParam,
+///   LPWSTR lpString,
+///   int    cchSize
+/// );
+/// ```
+/// {@category user32}
+int GetKeyNameText(int lParam, Pointer<Utf16> lpString, int cchSize) {
+  final _GetKeyNameText = _user32.lookupFunction<
+      Int32 Function(Int32 lParam, Pointer<Utf16> lpString, Int32 cchSize),
+      int Function(
+          int lParam, Pointer<Utf16> lpString, int cchSize)>('GetKeyNameTextW');
+  return _GetKeyNameText(lParam, lpString, cchSize);
+}
+
+/// Retrieves the status of the specified virtual key. The status specifies
+/// whether the key is up, down, or toggled (on, off—alternating each time
+/// the key is pressed).
+///
+/// ```c
+/// SHORT GetKeyState(
+///   int nVirtKey
+/// );
+/// ```
+/// {@category user32}
+int GetKeyState(int nVirtKey) {
+  final _GetKeyState = _user32.lookupFunction<Int16 Function(Int32 nVirtKey),
+      int Function(int nVirtKey)>('GetKeyState');
+  return _GetKeyState(nVirtKey);
+}
+
+/// Retrieves the time of the last input event.
+///
+/// ```c
+/// BOOL GetLastInputInfo(
+///   PLASTINPUTINFO plii
+/// );
+/// ```
+/// {@category user32}
+int GetLastInputInfo(Pointer<LASTINPUTINFO> plii) {
+  final _GetLastInputInfo = _user32.lookupFunction<
+      Int32 Function(Pointer<LASTINPUTINFO> plii),
+      int Function(Pointer<LASTINPUTINFO> plii)>('GetLastInputInfo');
+  return _GetLastInputInfo(plii);
+}
+
 /// Retrieves a message from the calling thread's message queue. The
 /// function dispatches incoming sent messages until a posted message is
 /// available for retrieval.
@@ -1456,6 +1569,33 @@ int GetMonitorInfo(int hMonitor, Pointer<MONITORINFO> lpmi) {
       Int32 Function(IntPtr hMonitor, Pointer<MONITORINFO> lpmi),
       int Function(int hMonitor, Pointer<MONITORINFO> lpmi)>('GetMonitorInfoW');
   return _GetMonitorInfo(hMonitor, lpmi);
+}
+
+/// Retrieves a history of up to 64 previous coordinates of the mouse or
+/// pen.
+///
+/// ```c
+/// int GetMouseMovePointsEx(
+///   UINT             cbSize,
+///   LPMOUSEMOVEPOINT lppt,
+///   LPMOUSEMOVEPOINT lpptBuf,
+///   int              nBufPoints,
+///   DWORD            resolution
+/// );
+/// ```
+/// {@category user32}
+int GetMouseMovePointsEx(int cbSize, Pointer<MOUSEMOVEPOINT> lppt,
+    Pointer<MOUSEMOVEPOINT> lpptBuf, int nBufPoints, int resolution) {
+  final _GetMouseMovePointsEx = _user32.lookupFunction<
+      Int32 Function(Uint32 cbSize, Pointer<MOUSEMOVEPOINT> lppt,
+          Pointer<MOUSEMOVEPOINT> lpptBuf, Int32 nBufPoints, Uint32 resolution),
+      int Function(
+          int cbSize,
+          Pointer<MOUSEMOVEPOINT> lppt,
+          Pointer<MOUSEMOVEPOINT> lpptBuf,
+          int nBufPoints,
+          int resolution)>('GetMouseMovePointsEx');
+  return _GetMouseMovePointsEx(cbSize, lppt, lpptBuf, nBufPoints, resolution);
 }
 
 /// Retrieves a handle to the first control in a group of controls that
@@ -2229,6 +2369,21 @@ int IsRectEmpty(Pointer<RECT> lprc) {
   return _IsRectEmpty(lprc);
 }
 
+/// Determines whether the specified window is enabled for mouse and
+/// keyboard input.
+///
+/// ```c
+/// BOOL IsWindowEnabled(
+///   HWND hWnd
+/// );
+/// ```
+/// {@category user32}
+int IsWindowEnabled(int hWnd) {
+  final _IsWindowEnabled = _user32.lookupFunction<Int32 Function(IntPtr hWnd),
+      int Function(int hWnd)>('IsWindowEnabled');
+  return _IsWindowEnabled(hWnd);
+}
+
 /// Determines the visibility state of the specified window.
 ///
 /// ```c
@@ -2331,6 +2486,23 @@ int LoadImage(
   return _LoadImage(hInst, name, type, cx, cy, fuLoad);
 }
 
+/// Loads a new input locale identifier (formerly called the keyboard
+/// layout) into the system.
+///
+/// ```c
+/// HKL LoadKeyboardLayoutW(
+///   LPCWSTR pwszKLID,
+///   UINT    Flags
+/// );
+/// ```
+/// {@category user32}
+int LoadKeyboardLayout(Pointer<Utf16> pwszKLID, int Flags) {
+  final _LoadKeyboardLayout = _user32.lookupFunction<
+      IntPtr Function(Pointer<Utf16> pwszKLID, Uint32 Flags),
+      int Function(Pointer<Utf16> pwszKLID, int Flags)>('LoadKeyboardLayoutW');
+  return _LoadKeyboardLayout(pwszKLID, Flags);
+}
+
 /// The LockWindowUpdate function disables or enables drawing in the
 /// specified window. Only one window can be locked at a time.
 ///
@@ -2394,6 +2566,23 @@ int MapDialogRect(int hDlg, Pointer<RECT> lpRect) {
       Int32 Function(IntPtr hDlg, Pointer<RECT> lpRect),
       int Function(int hDlg, Pointer<RECT> lpRect)>('MapDialogRect');
   return _MapDialogRect(hDlg, lpRect);
+}
+
+/// Translates (maps) a virtual-key code into a scan code or character
+/// value, or translates a scan code into a virtual-key code.
+///
+/// ```c
+/// UINT MapVirtualKeyW(
+///   UINT uCode,
+///   UINT uMapType
+/// );
+/// ```
+/// {@category user32}
+int MapVirtualKey(int uCode, int uMapType) {
+  final _MapVirtualKey = _user32.lookupFunction<
+      Uint32 Function(Uint32 uCode, Uint32 uMapType),
+      int Function(int uCode, int uMapType)>('MapVirtualKeyW');
+  return _MapVirtualKey(uCode, uMapType);
 }
 
 /// The MapWindowPoints function converts (maps) a set of points from a
@@ -2780,6 +2969,25 @@ int RegisterClipboardFormat(Pointer<Utf16> lpszFormat) {
   return _RegisterClipboardFormat(lpszFormat);
 }
 
+/// Defines a system-wide hot key.
+///
+/// ```c
+/// BOOL RegisterHotKey(
+///   HWND hWnd,
+///   int  id,
+///   UINT fsModifiers,
+///   UINT vk
+/// );
+/// ```
+/// {@category user32}
+int RegisterHotKey(int hWnd, int id, int fsModifiers, int vk) {
+  final _RegisterHotKey = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Int32 id, Uint32 fsModifiers, Uint32 vk),
+      int Function(
+          int hWnd, int id, int fsModifiers, int vk)>('RegisterHotKey');
+  return _RegisterHotKey(hWnd, id, fsModifiers, vk);
+}
+
 /// Registers the application to receive power setting notifications for
 /// the specific power setting event.
 ///
@@ -2816,6 +3024,22 @@ int RegisterWindowMessage(Pointer<Utf16> lpString) {
       Uint32 Function(Pointer<Utf16> lpString),
       int Function(Pointer<Utf16> lpString)>('RegisterWindowMessageW');
   return _RegisterWindowMessage(lpString);
+}
+
+/// Releases the mouse capture from a window in the current thread and
+/// restores normal mouse input processing. A window that has captured the
+/// mouse receives all mouse input, regardless of the position of the
+/// cursor, except when a mouse button is clicked while the cursor hot spot
+/// is in the window of another thread.
+///
+/// ```c
+/// BOOL ReleaseCapture();
+/// ```
+/// {@category user32}
+int ReleaseCapture() {
+  final _ReleaseCapture = _user32
+      .lookupFunction<Int32 Function(), int Function()>('ReleaseCapture');
+  return _ReleaseCapture();
 }
 
 /// The ReleaseDC function releases a device context (DC), freeing it for
@@ -2968,6 +3192,39 @@ int SendMessage(int hWnd, int Msg, int wParam, int lParam) {
   return _SendMessage(hWnd, Msg, wParam, lParam);
 }
 
+/// Activates a window. The window must be attached to the calling thread's
+/// message queue.
+///
+/// ```c
+/// HWND SetActiveWindow(
+///   HWND hWnd
+/// );
+/// ```
+/// {@category user32}
+int SetActiveWindow(int hWnd) {
+  final _SetActiveWindow = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
+      int Function(int hWnd)>('SetActiveWindow');
+  return _SetActiveWindow(hWnd);
+}
+
+/// Sets the mouse capture to the specified window belonging to the current
+/// thread. SetCapture captures mouse input either when the mouse is over
+/// the capturing window, or when the mouse button was pressed while the
+/// mouse was over the capturing window and the button is still down. Only
+/// one window at a time can capture the mouse.
+///
+/// ```c
+/// HWND SetCapture(
+///   HWND hWnd
+/// );
+/// ```
+/// {@category user32}
+int SetCapture(int hWnd) {
+  final _SetCapture = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
+      int Function(int hWnd)>('SetCapture');
+  return _SetCapture(hWnd);
+}
+
 /// Places data on the clipboard in a specified clipboard format. The
 /// window must be the current clipboard owner, and the application must
 /// have called the OpenClipboard function.
@@ -3058,6 +3315,25 @@ int SetDlgItemText(int hDlg, int nIDDlgItem, Pointer<Utf16> lpString) {
   return _SetDlgItemText(hDlg, nIDDlgItem, lpString);
 }
 
+/// Sets the double-click time for the mouse. A double-click is a series of
+/// two clicks of a mouse button, the second occurring within a specified
+/// time after the first. The double-click time is the maximum number of
+/// milliseconds that may occur between the first and second clicks of a
+/// double-click.
+///
+/// ```c
+/// BOOL SetDoubleClickTime(
+///   UINT Arg1
+/// );
+/// ```
+/// {@category user32}
+int SetDoubleClickTime(int Arg1) {
+  final _SetDoubleClickTime = _user32.lookupFunction<
+      Int32 Function(Uint32 Arg1),
+      int Function(int Arg1)>('SetDoubleClickTime');
+  return _SetDoubleClickTime(Arg1);
+}
+
 /// Sets the keyboard focus to the specified window. The window must be
 /// attached to the calling thread's message queue.
 ///
@@ -3090,6 +3366,24 @@ int SetForegroundWindow(int hWnd) {
       Int32 Function(IntPtr hWnd),
       int Function(int hWnd)>('SetForegroundWindow');
   return _SetForegroundWindow(hWnd);
+}
+
+/// Copies an array of keyboard key states into the calling thread's
+/// keyboard input-state table. This is the same table accessed by the
+/// GetKeyboardState and GetKeyState functions. Changes made to this table
+/// do not affect keyboard input to any other thread.
+///
+/// ```c
+/// BOOL SetKeyboardState(
+///   LPBYTE lpKeyState
+/// );
+/// ```
+/// {@category user32}
+int SetKeyboardState(Pointer<Uint8> lpKeyState) {
+  final _SetKeyboardState = _user32.lookupFunction<
+      Int32 Function(Pointer<Uint8> lpKeyState),
+      int Function(Pointer<Uint8> lpKeyState)>('SetKeyboardState');
+  return _SetKeyboardState(lpKeyState);
 }
 
 /// Sets information for a specified menu.
@@ -3442,6 +3736,20 @@ int SubtractRect(
   return _SubtractRect(lprcDst, lprcSrc1, lprcSrc2);
 }
 
+/// Reverses or restores the meaning of the left and right mouse buttons.
+///
+/// ```c
+/// BOOL SwapMouseButton(
+///   BOOL fSwap
+/// );
+/// ```
+/// {@category user32}
+int SwapMouseButton(int fSwap) {
+  final _SwapMouseButton = _user32.lookupFunction<Int32 Function(Int32 fSwap),
+      int Function(int fSwap)>('SwapMouseButton');
+  return _SwapMouseButton(fSwap);
+}
+
 /// Retrieves or sets the value of one of the system-wide parameters. This
 /// function can also update the user profile while setting a parameter.
 ///
@@ -3505,6 +3813,129 @@ int TabbedTextOut(int hdc, int x, int y, Pointer<Utf16> lpString, int chCount,
           int nTabOrigin)>('TabbedTextOutW');
   return _TabbedTextOut(hdc, x, y, lpString, chCount, nTabPositions,
       lpnTabStopPositions, nTabOrigin);
+}
+
+/// Translates the specified virtual-key code and keyboard state to the
+/// corresponding character or characters. The function translates the code
+/// using the input language and physical keyboard layout identified by the
+/// keyboard layout handle.
+///
+/// ```c
+/// int ToAscii(
+///   UINT       uVirtKey,
+///   UINT       uScanCode,
+///   const BYTE *lpKeyState,
+///   LPWORD     lpChar,
+///   UINT       uFlags
+/// );
+/// ```
+/// {@category user32}
+int ToAscii(int uVirtKey, int uScanCode, Pointer<Uint8> lpKeyState,
+    Pointer<Uint16> lpChar, int uFlags) {
+  final _ToAscii = _user32.lookupFunction<
+      Int32 Function(Uint32 uVirtKey, Uint32 uScanCode,
+          Pointer<Uint8> lpKeyState, Pointer<Uint16> lpChar, Uint32 uFlags),
+      int Function(int uVirtKey, int uScanCode, Pointer<Uint8> lpKeyState,
+          Pointer<Uint16> lpChar, int uFlags)>('ToAscii');
+  return _ToAscii(uVirtKey, uScanCode, lpKeyState, lpChar, uFlags);
+}
+
+/// Translates the specified virtual-key code and keyboard state to the
+/// corresponding character or characters. The function translates the code
+/// using the input language and physical keyboard layout identified by the
+/// input locale identifier.
+///
+/// ```c
+/// int ToAsciiEx(
+///   UINT       uVirtKey,
+///   UINT       uScanCode,
+///   const BYTE *lpKeyState,
+///   LPWORD     lpChar,
+///   UINT       uFlags,
+///   HKL        dwhkl
+/// );
+/// ```
+/// {@category user32}
+int ToAsciiEx(int uVirtKey, int uScanCode, Pointer<Uint8> lpKeyState,
+    Pointer<Uint16> lpChar, int uFlags, int dwhkl) {
+  final _ToAsciiEx = _user32.lookupFunction<
+      Int32 Function(
+          Uint32 uVirtKey,
+          Uint32 uScanCode,
+          Pointer<Uint8> lpKeyState,
+          Pointer<Uint16> lpChar,
+          Uint32 uFlags,
+          IntPtr dwhkl),
+      int Function(int uVirtKey, int uScanCode, Pointer<Uint8> lpKeyState,
+          Pointer<Uint16> lpChar, int uFlags, int dwhkl)>('ToAsciiEx');
+  return _ToAsciiEx(uVirtKey, uScanCode, lpKeyState, lpChar, uFlags, dwhkl);
+}
+
+/// Translates the specified virtual-key code and keyboard state to the
+/// corresponding Unicode character or characters.
+///
+/// ```c
+/// int ToUnicode(
+///   UINT       wVirtKey,
+///   UINT       wScanCode,
+///   const BYTE *lpKeyState,
+///   LPWSTR     pwszBuff,
+///   int        cchBuff,
+///   UINT       wFlags
+/// );
+/// ```
+/// {@category user32}
+int ToUnicode(int wVirtKey, int wScanCode, Pointer<Uint8> lpKeyState,
+    Pointer<Utf16> pwszBuff, int cchBuff, int wFlags) {
+  final _ToUnicode = _user32.lookupFunction<
+      Int32 Function(
+          Uint32 wVirtKey,
+          Uint32 wScanCode,
+          Pointer<Uint8> lpKeyState,
+          Pointer<Utf16> pwszBuff,
+          Int32 cchBuff,
+          Uint32 wFlags),
+      int Function(int wVirtKey, int wScanCode, Pointer<Uint8> lpKeyState,
+          Pointer<Utf16> pwszBuff, int cchBuff, int wFlags)>('ToUnicode');
+  return _ToUnicode(wVirtKey, wScanCode, lpKeyState, pwszBuff, cchBuff, wFlags);
+}
+
+/// Translates the specified virtual-key code and keyboard state to the
+/// corresponding Unicode character or characters.
+///
+/// ```c
+/// int ToUnicodeEx(
+///   UINT       wVirtKey,
+///   UINT       wScanCode,
+///   const BYTE *lpKeyState,
+///   LPWSTR     pwszBuff,
+///   int        cchBuff,
+///   UINT       wFlags,
+///   HKL        dwhkl
+/// );
+/// ```
+/// {@category user32}
+int ToUnicodeEx(int wVirtKey, int wScanCode, Pointer<Uint8> lpKeyState,
+    Pointer<Utf16> pwszBuff, int cchBuff, int wFlags, int dwhkl) {
+  final _ToUnicodeEx = _user32.lookupFunction<
+      Int32 Function(
+          Uint32 wVirtKey,
+          Uint32 wScanCode,
+          Pointer<Uint8> lpKeyState,
+          Pointer<Utf16> pwszBuff,
+          Int32 cchBuff,
+          Uint32 wFlags,
+          IntPtr dwhkl),
+      int Function(
+          int wVirtKey,
+          int wScanCode,
+          Pointer<Uint8> lpKeyState,
+          Pointer<Utf16> pwszBuff,
+          int cchBuff,
+          int wFlags,
+          int dwhkl)>('ToUnicodeEx');
+  return _ToUnicodeEx(
+      wVirtKey, wScanCode, lpKeyState, pwszBuff, cchBuff, wFlags, dwhkl);
 }
 
 /// Displays a shortcut menu at the specified location and tracks the
@@ -3593,6 +4024,21 @@ int UnionRect(
   return _UnionRect(lprcDst, lprcSrc1, lprcSrc2);
 }
 
+/// Unloads an input locale identifier (formerly called a keyboard layout).
+///
+/// ```c
+/// BOOL UnloadKeyboardLayout(
+///   HKL hkl
+/// );
+/// ```
+/// {@category user32}
+int UnloadKeyboardLayout(int hkl) {
+  final _UnloadKeyboardLayout =
+      _user32.lookupFunction<Int32 Function(IntPtr hkl), int Function(int hkl)>(
+          'UnloadKeyboardLayout');
+  return _UnloadKeyboardLayout(hkl);
+}
+
 /// Unregisters a window class, freeing the memory required for the class.
 ///
 /// ```c
@@ -3608,6 +4054,22 @@ int UnregisterClass(Pointer<Utf16> lpClassName, int hInstance) {
       int Function(
           Pointer<Utf16> lpClassName, int hInstance)>('UnregisterClassW');
   return _UnregisterClass(lpClassName, hInstance);
+}
+
+/// Frees a hot key previously registered by the calling thread.
+///
+/// ```c
+/// BOOL UnregisterHotKey(
+///   HWND hWnd,
+///   int  id
+/// );
+/// ```
+/// {@category user32}
+int UnregisterHotKey(int hWnd, int id) {
+  final _UnregisterHotKey = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Int32 id),
+      int Function(int hWnd, int id)>('UnregisterHotKey');
+  return _UnregisterHotKey(hWnd, id);
 }
 
 /// Unregisters the power setting notification.
@@ -3677,6 +4139,40 @@ int ValidateRgn(int hWnd, int hRgn) {
       Int32 Function(IntPtr hWnd, IntPtr hRgn),
       int Function(int hWnd, int hRgn)>('ValidateRgn');
   return _ValidateRgn(hWnd, hRgn);
+}
+
+/// Translates a character to the corresponding virtual-key code and shift
+/// state for the current keyboard.
+///
+/// ```c
+/// SHORT VkKeyScanW(
+///   WCHAR ch
+/// );
+/// ```
+/// {@category user32}
+int VkKeyScan(int ch) {
+  final _VkKeyScan =
+      _user32.lookupFunction<Int16 Function(Uint16 ch), int Function(int ch)>(
+          'VkKeyScanW');
+  return _VkKeyScan(ch);
+}
+
+/// Translates a character to the corresponding virtual-key code and shift
+/// state. The function translates the character using the input language
+/// and physical keyboard layout identified by the input locale identifier.
+///
+/// ```c
+/// SHORT VkKeyScanExW(
+///   WCHAR ch,
+///   HKL   dwhkl
+/// );
+/// ```
+/// {@category user32}
+int VkKeyScanEx(int ch, int dwhkl) {
+  final _VkKeyScanEx = _user32.lookupFunction<
+      Int16 Function(Uint16 ch, IntPtr dwhkl),
+      int Function(int ch, int dwhkl)>('VkKeyScanExW');
+  return _VkKeyScanEx(ch, dwhkl);
 }
 
 /// Yields control to other threads when a thread has no other messages in
