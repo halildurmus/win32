@@ -4,6 +4,11 @@
         "dllLibrary": "kernel32",
         "comment": "The ActivateActCtx function activates the specified activation context. It does this by pushing the specified activation context to the top of the activation stack. The specified activation context is thus associated with the current thread and any appropriate side-by-side API functions."
     },
+    "ActivateKeyboardLayout": {
+        "prototype": "HKL ActivateKeyboardLayout(\n  HKL  hkl,\n  UINT Flags\n);",
+        "dllLibrary": "user32",
+        "comment": "Sets the input locale identifier (formerly called the keyboard layout handle) for the calling thread or the current process. The input locale identifier specifies a locale as well as the physical layout of the keyboard."
+    },
     "AddClipboardFormatListener": {
         "prototype": "BOOL AddClipboardFormatListener(\n  HWND hwnd\n);",
         "dllLibrary": "user32",
@@ -88,6 +93,11 @@
         "prototype": "BOOL BitBlt(\n  HDC   hdc,\n  int   x,\n  int   y,\n  int   cx,\n  int   cy,\n  HDC   hdcSrc,\n  int   x1,\n  int   y1,\n  DWORD rop\n);",
         "dllLibrary": "gdi32",
         "comment": "The BitBlt function performs a bit-block transfer of the color data corresponding to a rectangle of pixels from the specified source device context into a destination device context."
+    },
+    "BlockInput": {
+        "prototype": "BOOL BlockInput(\n  BOOL fBlockIt);",
+        "dllLibrary": "user32",
+        "comment": "Blocks keyboard and mouse input events from reaching applications."
     },
     "BluetoothAuthenticateDeviceEx": {
         "prototype": "DWORD BluetoothAuthenticateDeviceEx(\n  HWND                        hwndParentIn,\n  HANDLE                      hRadioIn,\n  BLUETOOTH_DEVICE_INFO       *pbtdiInout,\n  PBLUETOOTH_OOB_DATA_INFO    pbtOobData,\n  AUTHENTICATION_REQUIREMENTS authenticationRequirement\n);",
@@ -571,6 +581,11 @@
         "dllLibrary": "oleaut32",
         "comment": "Converts the MS-DOS representation of time to the date and time representation stored in a variant."
     },
+    "DragDetect": {
+        "prototype": "BOOL DragDetect(\n  HWND  hwnd,\n  POINT pt);",
+        "dllLibrary": "user32",
+        "comment": "Captures the mouse and tracks its movement until the user releases the left button, presses the ESC key, or moves the mouse outside the drag rectangle around the specified point."
+    },
     "DrawCaption": {
         "prototype": "BOOL DrawCaption(\n  HWND       hwnd,\n  HDC        hdc,\n  const RECT *lprect,\n  UINT       flags\n);",
         "dllLibrary": "user32",
@@ -615,6 +630,11 @@
         "prototype": "BOOL EnableMenuItem(\n  HMENU hMenu,\n  UINT  uIDEnableItem,\n  UINT  uEnable\n);",
         "dllLibrary": "user32",
         "comment": "Enables, disables, or grays the specified menu item."
+    },
+    "EnableWindow": {
+        "prototype": "BOOL EnableWindow(\n  HWND hWnd,\n  BOOL bEnable\n);",
+        "dllLibrary": "user32",
+        "comment": "Enables or disables mouse and keyboard input to the specified window or control. When input is disabled, the window does not receive input such as mouse clicks and key presses. When input is enabled, the window receives all input."
     },
     "EncryptFile": {
         "prototype": "BOOL EncryptFileW(\n  LPCWSTR lpFileName\n);",
@@ -836,10 +856,25 @@
         "dllLibrary": "oleaut32",
         "comment": "Retrieves a pointer to a running object that has been registered with OLE."
     },
+    "GetActiveWindow": {
+        "prototype": "HWND GetActiveWindow();",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the window handle to the active window attached to the calling thread's message queue."
+    },
     "GetAncestor": {
         "prototype": "HWND GetAncestor(\n  HWND hwnd,\n  UINT gaFlags\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves the handle to the ancestor of the specified window."
+    },
+    "GetAsyncKeyState": {
+        "prototype": "SHORT GetAsyncKeyState(\n  int vKey\n);",
+        "dllLibrary": "user32",
+        "comment": "Determines whether a key is up or down at the time the function is called, and whether the key was pressed after a previous call to GetAsyncKeyState."
+    },
+    "GetCapture": {
+        "prototype": "HWND GetCapture();",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a handle to the window (if any) that has captured the mouse. Only one window at a time can capture the mouse; this window receives mouse input whether or not the cursor is within its borders."
     },
     "GetClientRect": {
         "prototype": "BOOL GetClientRect(\n  HWND   hWnd,\n  LPRECT lpRect\n);",
@@ -966,6 +1001,11 @@
         "dllLibrary": "user32",
         "comment": "Retrieves the title or text associated with a control in a dialog box."
     },
+    "GetDoubleClickTime": {
+        "prototype": "UINT GetDoubleClickTime();",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the current double-click time for the mouse. A double-click is a series of two clicks of the mouse button, the second occurring within a specified time after the first. The double-click time is the maximum number of milliseconds that may occur between the first and second click of a double-click. The maximum double-click time is 5000 milliseconds."
+    },
     "GetDpiForMonitor": {
         "prototype": "HRESULT GetDpiForMonitor(\n  HMONITOR         hmonitor,\n  MONITOR_DPI_TYPE dpiType,\n  UINT             *dpiX,\n  UINT             *dpiY\n  );",
         "dllLibrary": "shcore",
@@ -1006,6 +1046,11 @@
         "dllLibrary": "version",
         "comment": "Determines whether the operating system can retrieve version information for a specified file. If version information is available, GetFileVersionInfoSizeEx returns the size, in bytes, of that information."
     },
+    "GetFocus": {
+        "prototype": "HWND GetFocus();",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the handle to the window that has the keyboard focus, if the window is attached to the calling thread's message queue."
+    },
     "GetForegroundWindow": {
         "prototype": "HWND GetForegroundWindow();",
         "dllLibrary": "user32",
@@ -1021,6 +1066,11 @@
         "dllLibrary": "kernelbase",
         "comment": "Retrieves the best estimate of the diagonal size of the built-in screen, in inches.",
         "minimumWindowsVersion": "WIN10_TH1"
+    },
+    "GetKeyboardLayout": {
+        "prototype": "HKL GetKeyboardLayout(\n  DWORD idThread\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the active input locale identifier (formerly called the keyboard layout)."
     },
     "GetLargestConsoleWindowSize": {
         "prototype": "COORD WINAPI GetLargestConsoleWindowSize(\n  _In_ HANDLE hConsoleOutput\n);",

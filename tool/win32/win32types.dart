@@ -184,6 +184,9 @@ const mapping = <String, String>{
   // A handle to a registry key. Declared as `HANDLE`.
   'HKEY': 'IntPtr',
 
+  // A handle to a keyboard layout. Declared as `HANDLE`.
+  'HKL': 'IntPtr',
+
   // A handle to a menu. Declared as `HANDLE`.
   'HMENU': 'IntPtr',
 

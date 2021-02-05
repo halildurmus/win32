@@ -18,6 +18,25 @@ import 'structs.dart';
 
 final _user32 = DynamicLibrary.open('user32.dll');
 
+/// Sets the input locale identifier (formerly called the keyboard layout
+/// handle) for the calling thread or the current process. The input locale
+/// identifier specifies a locale as well as the physical layout of the
+/// keyboard.
+///
+/// ```c
+/// HKL ActivateKeyboardLayout(
+///   HKL  hkl,
+///   UINT Flags
+/// );
+/// ```
+/// {@category user32}
+int ActivateKeyboardLayout(int hkl, int Flags) {
+  final _ActivateKeyboardLayout = _user32.lookupFunction<
+      IntPtr Function(IntPtr hkl, Uint32 Flags),
+      int Function(int hkl, int Flags)>('ActivateKeyboardLayout');
+  return _ActivateKeyboardLayout(hkl, Flags);
+}
+
 /// Places the given window in the system-maintained clipboard format
 /// listener list.
 ///
@@ -91,6 +110,19 @@ int BeginPaint(int hWnd, Pointer<PAINTSTRUCT> lpPaint) {
       IntPtr Function(IntPtr hWnd, Pointer<PAINTSTRUCT> lpPaint),
       int Function(int hWnd, Pointer<PAINTSTRUCT> lpPaint)>('BeginPaint');
   return _BeginPaint(hWnd, lpPaint);
+}
+
+/// Blocks keyboard and mouse input events from reaching applications.
+///
+/// ```c
+/// BOOL BlockInput(
+///   BOOL fBlockIt);
+/// ```
+/// {@category user32}
+int BlockInput(int fBlockIt) {
+  final _BlockInput = _user32.lookupFunction<Int32 Function(Int32 fBlockIt),
+      int Function(int fBlockIt)>('BlockInput');
+  return _BlockInput(fBlockIt);
 }
 
 /// Brings the specified window to the top of the Z order. If the window is
@@ -561,6 +593,23 @@ int DispatchMessage(Pointer<MSG> lpMsg) {
   return _DispatchMessage(lpMsg);
 }
 
+/// Captures the mouse and tracks its movement until the user releases the
+/// left button, presses the ESC key, or moves the mouse outside the drag
+/// rectangle around the specified point.
+///
+/// ```c
+/// BOOL DragDetect(
+///   HWND  hwnd,
+///   POINT pt);
+/// ```
+/// {@category user32}
+int DragDetect(int hwnd, POINT pt) {
+  final _DragDetect = _user32.lookupFunction<
+      Int32 Function(IntPtr hwnd, POINT pt),
+      int Function(int hwnd, POINT pt)>('DragDetect');
+  return _DragDetect(hwnd, pt);
+}
+
 /// The DrawCaption function draws a window caption.
 ///
 /// ```c
@@ -682,6 +731,25 @@ int EnableMenuItem(int hMenu, int uIDEnableItem, int uEnable) {
       int Function(
           int hMenu, int uIDEnableItem, int uEnable)>('EnableMenuItem');
   return _EnableMenuItem(hMenu, uIDEnableItem, uEnable);
+}
+
+/// Enables or disables mouse and keyboard input to the specified window or
+/// control. When input is disabled, the window does not receive input such
+/// as mouse clicks and key presses. When input is enabled, the window
+/// receives all input.
+///
+/// ```c
+/// BOOL EnableWindow(
+///   HWND hWnd,
+///   BOOL bEnable
+/// );
+/// ```
+/// {@category user32}
+int EnableWindow(int hWnd, int bEnable) {
+  final _EnableWindow = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Int32 bEnable),
+      int Function(int hWnd, int bEnable)>('EnableWindow');
+  return _EnableWindow(hWnd, bEnable);
 }
 
 /// Destroys a modal dialog box, causing the system to end any processing
@@ -910,6 +978,19 @@ int FrameRect(int hDC, Pointer<RECT> lprc, int hbr) {
   return _FrameRect(hDC, lprc, hbr);
 }
 
+/// Retrieves the window handle to the active window attached to the
+/// calling thread's message queue.
+///
+/// ```c
+/// HWND GetActiveWindow();
+/// ```
+/// {@category user32}
+int GetActiveWindow() {
+  final _GetActiveWindow = _user32
+      .lookupFunction<IntPtr Function(), int Function()>('GetActiveWindow');
+  return _GetActiveWindow();
+}
+
 /// Retrieves the handle to the ancestor of the specified window.
 ///
 /// ```c
@@ -924,6 +1005,36 @@ int GetAncestor(int hwnd, int gaFlags) {
       IntPtr Function(IntPtr hwnd, Uint32 gaFlags),
       int Function(int hwnd, int gaFlags)>('GetAncestor');
   return _GetAncestor(hwnd, gaFlags);
+}
+
+/// Determines whether a key is up or down at the time the function is
+/// called, and whether the key was pressed after a previous call to
+/// GetAsyncKeyState.
+///
+/// ```c
+/// SHORT GetAsyncKeyState(
+///   int vKey
+/// );
+/// ```
+/// {@category user32}
+int GetAsyncKeyState(int vKey) {
+  final _GetAsyncKeyState = _user32.lookupFunction<Int16 Function(Int32 vKey),
+      int Function(int vKey)>('GetAsyncKeyState');
+  return _GetAsyncKeyState(vKey);
+}
+
+/// Retrieves a handle to the window (if any) that has captured the mouse.
+/// Only one window at a time can capture the mouse; this window receives
+/// mouse input whether or not the cursor is within its borders.
+///
+/// ```c
+/// HWND GetCapture();
+/// ```
+/// {@category user32}
+int GetCapture() {
+  final _GetCapture =
+      _user32.lookupFunction<IntPtr Function(), int Function()>('GetCapture');
+  return _GetCapture();
 }
 
 /// Retrieves the coordinates of a window's client area. The client
@@ -1177,6 +1288,23 @@ int GetDlgItemText(
   return _GetDlgItemText(hDlg, nIDDlgItem, lpString, cchMax);
 }
 
+/// Retrieves the current double-click time for the mouse. A double-click
+/// is a series of two clicks of the mouse button, the second occurring
+/// within a specified time after the first. The double-click time is the
+/// maximum number of milliseconds that may occur between the first and
+/// second click of a double-click. The maximum double-click time is 5000
+/// milliseconds.
+///
+/// ```c
+/// UINT GetDoubleClickTime();
+/// ```
+/// {@category user32}
+int GetDoubleClickTime() {
+  final _GetDoubleClickTime = _user32
+      .lookupFunction<Uint32 Function(), int Function()>('GetDoubleClickTime');
+  return _GetDoubleClickTime();
+}
+
 /// Returns the system DPI.
 ///
 /// ```c
@@ -1201,6 +1329,19 @@ int GetDpiForWindow(int hwnd) {
   final _GetDpiForWindow = _user32.lookupFunction<Uint32 Function(IntPtr hwnd),
       int Function(int hwnd)>('GetDpiForWindow');
   return _GetDpiForWindow(hwnd);
+}
+
+/// Retrieves the handle to the window that has the keyboard focus, if the
+/// window is attached to the calling thread's message queue.
+///
+/// ```c
+/// HWND GetFocus();
+/// ```
+/// {@category user32}
+int GetFocus() {
+  final _GetFocus =
+      _user32.lookupFunction<IntPtr Function(), int Function()>('GetFocus');
+  return _GetFocus();
 }
 
 /// Retrieves a handle to the foreground window (the window with which the
@@ -1229,6 +1370,22 @@ int GetInputState() {
   final _GetInputState =
       _user32.lookupFunction<Int32 Function(), int Function()>('GetInputState');
   return _GetInputState();
+}
+
+/// Retrieves the active input locale identifier (formerly called the
+/// keyboard layout).
+///
+/// ```c
+/// HKL GetKeyboardLayout(
+///   DWORD idThread
+/// );
+/// ```
+/// {@category user32}
+int GetKeyboardLayout(int idThread) {
+  final _GetKeyboardLayout = _user32.lookupFunction<
+      IntPtr Function(Uint32 idThread),
+      int Function(int idThread)>('GetKeyboardLayout');
+  return _GetKeyboardLayout(idThread);
 }
 
 /// Retrieves a message from the calling thread's message queue. The
