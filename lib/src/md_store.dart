@@ -63,30 +63,44 @@ class WinmdStore {
   /// Takes a typename (e.g. `Windows.Globalization.Calendar`) and returns the
   /// metadata scope that contains the type.
   static WinmdScope getScopeForType(String typeName) {
-    final hstrTypeName = convertToHString(typeName);
+    if (typeName.startsWith('Windows.Win32')) {
+      // It's a Win32 type.
 
-    final hstrMetaDataFilePath = calloc<IntPtr>();
-    final spMetaDataImport = calloc<Pointer>();
-    final typeDef = calloc<Uint32>();
+      // The following will throw an exception if the Win32 scope isn't in the
+      // cache, since we don't know where to find the Win32 metadata if it's not
+      // already loaded. This won't be a problem, so long as the original Win32
+      // metadata scope was loaded with getScopeForFile.
+      final cacheEntry =
+          cache.keys.firstWhere((entry) => entry.contains('Windows.Win32'));
 
-    try {
-      // For apps that are not Windows Store apps, RoGetMetaDataFile can only be
-      // used for classes that are part of the Windows Runtime itself (i.e. not
-      // third-party types).
-      final hr = RoGetMetaDataFile(hstrTypeName.value, nullptr,
-          hstrMetaDataFilePath, spMetaDataImport, typeDef);
-      if (SUCCEEDED(hr)) {
-        final filePath = convertFromHString(hstrMetaDataFilePath);
-        return getScopeForFile(filePath);
-      } else {
-        throw WindowsException(hr);
+      return WinmdScope(cache[cacheEntry]!);
+    } else {
+      // Assume it's a Windows Runtime type
+      final hstrTypeName = convertToHString(typeName);
+
+      final hstrMetaDataFilePath = calloc<IntPtr>();
+      final spMetaDataImport = calloc<Pointer>();
+      final typeDef = calloc<Uint32>();
+
+      try {
+        // For apps that are not Windows Store apps, RoGetMetaDataFile can only be
+        // used for classes that are part of the Windows Runtime itself (i.e. not
+        // third-party types).
+        final hr = RoGetMetaDataFile(hstrTypeName.value, nullptr,
+            hstrMetaDataFilePath, spMetaDataImport, typeDef);
+        if (SUCCEEDED(hr)) {
+          final filePath = convertFromHString(hstrMetaDataFilePath);
+          return getScopeForFile(filePath);
+        } else {
+          throw WindowsException(hr);
+        }
+      } finally {
+        WindowsDeleteString(hstrTypeName.value);
+        WindowsDeleteString(hstrMetaDataFilePath.value);
+
+        calloc.free(hstrTypeName);
+        calloc.free(hstrMetaDataFilePath);
       }
-    } finally {
-      WindowsDeleteString(hstrTypeName.value);
-      WindowsDeleteString(hstrMetaDataFilePath.value);
-
-      calloc.free(hstrTypeName);
-      calloc.free(hstrMetaDataFilePath);
     }
   }
 
