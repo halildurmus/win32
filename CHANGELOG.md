@@ -1,3 +1,7 @@
+## 0.2.0-dev.2
+
+- Add basic support for Win32 metadata
+
 ## 0.2.0-dev.1
 
 - Initial version, extracted from win32
