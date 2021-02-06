@@ -47,7 +47,7 @@ class WinmdStore {
 
       try {
         final hr = dispenser.OpenScope(szFile, CorOpenFlags.ofRead,
-            convertToIID(IID_IMetaDataImport2).cast(), pReader);
+            convertToIID(IID_IMetaDataImport2), pReader);
         if (FAILED(hr)) {
           throw WindowsException(hr);
         } else {
