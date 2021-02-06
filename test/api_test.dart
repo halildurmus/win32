@@ -4435,12 +4435,51 @@ void main() {
           Pointer Function(Pointer<Utf16> psz)>('SysAllocString');
       expect(SysAllocString, isA<Function>());
     });
+    test('Can instantiate SysAllocStringByteLen', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SysAllocStringByteLen = oleaut32.lookupFunction<
+          Pointer Function(Pointer<Uint8> psz, Uint32 len),
+          Pointer Function(
+              Pointer<Uint8> psz, int len)>('SysAllocStringByteLen');
+      expect(SysAllocStringByteLen, isA<Function>());
+    });
+    test('Can instantiate SysAllocStringLen', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SysAllocStringLen = oleaut32.lookupFunction<
+          Pointer Function(Pointer<Utf16> strIn, Uint32 ui),
+          Pointer Function(Pointer<Utf16> strIn, int ui)>('SysAllocStringLen');
+      expect(SysAllocStringLen, isA<Function>());
+    });
     test('Can instantiate SysFreeString', () {
       final oleaut32 = DynamicLibrary.open('oleaut32.dll');
       final SysFreeString = oleaut32.lookupFunction<
           Void Function(Pointer bstrString),
           void Function(Pointer bstrString)>('SysFreeString');
       expect(SysFreeString, isA<Function>());
+    });
+    test('Can instantiate SysReAllocString', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SysReAllocString = oleaut32.lookupFunction<
+          Int32 Function(Pointer<Pointer> pbstr, Pointer<Utf16> psz),
+          int Function(
+              Pointer<Pointer> pbstr, Pointer<Utf16> psz)>('SysReAllocString');
+      expect(SysReAllocString, isA<Function>());
+    });
+    test('Can instantiate SysReAllocStringLen', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SysReAllocStringLen = oleaut32.lookupFunction<
+          Int32 Function(
+              Pointer<Pointer> pbstr, Pointer<Utf16> psz, Uint32 len),
+          int Function(Pointer<Pointer> pbstr, Pointer<Utf16> psz,
+              int len)>('SysReAllocStringLen');
+      expect(SysReAllocStringLen, isA<Function>());
+    });
+    test('Can instantiate SysReleaseString', () {
+      final oleaut32 = DynamicLibrary.open('oleaut32.dll');
+      final SysReleaseString = oleaut32.lookupFunction<
+          Void Function(Pointer bstrString),
+          void Function(Pointer bstrString)>('SysReleaseString');
+      expect(SysReleaseString, isA<Function>());
     });
     test('Can instantiate SysStringByteLen', () {
       final oleaut32 = DynamicLibrary.open('oleaut32.dll');

@@ -74,6 +74,40 @@ Pointer SysAllocString(Pointer<Utf16> psz) {
   return _SysAllocString(psz);
 }
 
+/// Takes an ANSI string as input, and returns a BSTR that contains an ANSI
+/// string. Does not perform any ANSI-to-Unicode translation.
+///
+/// ```c
+/// BSTR SysAllocStringByteLen(
+///   LPCSTR psz,
+///   UINT   len
+/// );
+/// ```
+/// {@category oleaut32}
+Pointer SysAllocStringByteLen(Pointer<Uint8> psz, int len) {
+  final _SysAllocStringByteLen = _oleaut32.lookupFunction<
+      Pointer Function(Pointer<Uint8> psz, Uint32 len),
+      Pointer Function(Pointer<Uint8> psz, int len)>('SysAllocStringByteLen');
+  return _SysAllocStringByteLen(psz, len);
+}
+
+/// Allocates a new string, copies the specified number of characters from
+/// the passed string, and appends a null-terminating character.
+///
+/// ```c
+/// BSTR SysAllocStringLen(
+///   const OLECHAR *strIn,
+///   UINT          ui
+/// );
+/// ```
+/// {@category oleaut32}
+Pointer SysAllocStringLen(Pointer<Utf16> strIn, int ui) {
+  final _SysAllocStringLen = _oleaut32.lookupFunction<
+      Pointer Function(Pointer<Utf16> strIn, Uint32 ui),
+      Pointer Function(Pointer<Utf16> strIn, int ui)>('SysAllocStringLen');
+  return _SysAllocStringLen(strIn, ui);
+}
+
 /// Deallocates a string allocated previously by SysAllocString,
 /// SysAllocStringByteLen, SysReAllocString, SysAllocStringLen, or
 /// SysReAllocStringLen.
@@ -89,6 +123,60 @@ void SysFreeString(Pointer bstrString) {
       Void Function(Pointer bstrString),
       void Function(Pointer bstrString)>('SysFreeString');
   return _SysFreeString(bstrString);
+}
+
+/// Reallocates a previously allocated string to be the size of a second
+/// string and copies the second string into the reallocated memory.
+///
+/// ```c
+/// INT SysReAllocString(
+///   BSTR          *pbstr,
+///   const OLECHAR *psz
+/// );
+/// ```
+/// {@category oleaut32}
+int SysReAllocString(Pointer<Pointer> pbstr, Pointer<Utf16> psz) {
+  final _SysReAllocString = _oleaut32.lookupFunction<
+      Int32 Function(Pointer<Pointer> pbstr, Pointer<Utf16> psz),
+      int Function(
+          Pointer<Pointer> pbstr, Pointer<Utf16> psz)>('SysReAllocString');
+  return _SysReAllocString(pbstr, psz);
+}
+
+/// Creates a new BSTR containing a specified number of characters from an
+/// old BSTR, and frees the old BSTR.
+///
+/// ```c
+/// INT SysReAllocStringLen(
+///   BSTR          *pbstr,
+///   const OLECHAR *psz,
+///   UINT  len
+/// );
+/// ```
+/// {@category oleaut32}
+int SysReAllocStringLen(Pointer<Pointer> pbstr, Pointer<Utf16> psz, int len) {
+  final _SysReAllocStringLen = _oleaut32.lookupFunction<
+      Int32 Function(Pointer<Pointer> pbstr, Pointer<Utf16> psz, Uint32 len),
+      int Function(Pointer<Pointer> pbstr, Pointer<Utf16> psz,
+          int len)>('SysReAllocStringLen');
+  return _SysReAllocStringLen(pbstr, psz, len);
+}
+
+/// Decreases the pinning reference count for the specified string by one.
+/// When that count reaches 0, the memory for that string is no longer
+/// prevented from being freed.
+///
+/// ```c
+/// void SysReleaseString(
+/// BSTR bstrString
+/// );
+/// ```
+/// {@category oleaut32}
+void SysReleaseString(Pointer bstrString) {
+  final _SysReleaseString = _oleaut32.lookupFunction<
+      Void Function(Pointer bstrString),
+      void Function(Pointer bstrString)>('SysReleaseString');
+  return _SysReleaseString(bstrString);
 }
 
 /// Returns the length (in bytes) of a BSTR.

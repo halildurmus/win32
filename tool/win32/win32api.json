@@ -2541,10 +2541,35 @@
         "dllLibrary": "oleaut32",
         "comment": "Allocates a new string and copies the passed string into it."
     },
+    "SysAllocStringByteLen": {
+        "prototype": "BSTR SysAllocStringByteLen(\n  LPCSTR psz,\n  UINT   len\n);",
+        "dllLibrary": "oleaut32",
+        "comment": "Takes an ANSI string as input, and returns a BSTR that contains an ANSI string. Does not perform any ANSI-to-Unicode translation."
+    },
+    "SysAllocStringLen": {
+        "prototype": "BSTR SysAllocStringLen(\n  const OLECHAR *strIn,\n  UINT          ui\n);",
+        "dllLibrary": "oleaut32",
+        "comment": "Allocates a new string, copies the specified number of characters from the passed string, and appends a null-terminating character."
+    },
     "SysFreeString": {
         "prototype": "void SysFreeString(\n  BSTR bstrString\n);",
         "dllLibrary": "oleaut32",
         "comment": "Deallocates a string allocated previously by SysAllocString, SysAllocStringByteLen, SysReAllocString, SysAllocStringLen, or SysReAllocStringLen."
+    },
+    "SysReAllocString": {
+        "prototype": "INT SysReAllocString(\n  BSTR          *pbstr,\n  const OLECHAR *psz\n);",
+        "dllLibrary": "oleaut32",
+        "comment": "Reallocates a previously allocated string to be the size of a second string and copies the second string into the reallocated memory."
+    },
+    "SysReAllocStringLen": {
+        "prototype": "INT SysReAllocStringLen(\n  BSTR          *pbstr,\n  const OLECHAR *psz,\n  UINT  len\n);",
+        "dllLibrary": "oleaut32",
+        "comment": "Creates a new BSTR containing a specified number of characters from an old BSTR, and frees the old BSTR."
+    },
+    "SysReleaseString": {
+        "prototype": "void SysReleaseString(\nBSTR bstrString\n);",
+        "dllLibrary": "oleaut32",
+        "comment": "Decreases the pinning reference count for the specified string by one. When that count reaches 0, the memory for that string is no longer prevented from being freed."
     },
     "SysStringByteLen": {
         "prototype": "UINT SysStringByteLen(\n  BSTR bstr\n);",
