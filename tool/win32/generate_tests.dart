@@ -57,7 +57,7 @@ void main() {
       if (function.test == false) continue;
 
       final apiName = function.signature.nameWithoutEncoding;
-      final returnFFIType = ffiFromWin32(function.signature.returnType);
+      final returnFFIType = convertToFFIType(function.signature.returnType);
       final returnDartType = Win32Param([returnFFIType, '']).dartType;
 
       final nativeParams = function.signature.params
