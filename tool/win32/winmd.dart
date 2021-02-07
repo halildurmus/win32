@@ -34,12 +34,6 @@ class Win32Prototype {
 }
 
 void main() {
-  // Load JSON file
-  // final win32 = Win32API(r'c:\src\win32\tool\win32\win32api.json');
-
-  // final gdiAPIs =
-  //     win32.functions.values.where((func) => func.dllLibrary == 'gdi32');
-
   // Load WinMD metadata for Win32
   final scope = WinmdStore.getScopeForFile('tool/win32/Windows.Win32.winmd');
 
@@ -47,24 +41,22 @@ void main() {
   final gdiApi =
       scope.typeDefs.firstWhere((type) => type.typeName.endsWith('Gdi.Apis'));
 
-  // Sort the methods alphabetically
+  // Sort the functions alphabetically
   final sortedMethods = gdiApi.methods
     ..sort((a, b) => a.methodName.compareTo(b.methodName));
 
-  // // Convert the methods to the FFI native types
+  // // Convert the functions to their corresponding FFI declaration
   final gdiApis = sortedMethods
       .map((method) => Win32Prototype(method.methodName, method, 'gdi32'));
+  print('There are ${gdiApis.length} APIs represented in this scope.');
 
-  // final createDIBitmap =
-  //     gdiApi.methods.firstWhere((m) => m.methodName == 'CreateDIBitmap');
-  // final cdb = Win32Prototype(createDIBitmap, 'gdi32');
+  // Find a specific function
+  const funcName = 'AddFontResourceW';
+  final winmdMethod =
+      gdiApi.methods.firstWhere((m) => m.methodName == funcName);
+  final cdb = Win32Prototype('AddFontResource', winmdMethod, 'gdi32');
 
-  // print(cdb._method.parameters.length);
-  // print(cdb._method.token);
-  // print(cdb.dartFfiMapping);
-  // for (final p in cdb._method.parameters) {
-  //   print(p.typeIdentifier.name);
-  // }
-
-  print(gdiApis.map((api) => api.dartFfiMapping).join('\n'));
+  // Print out some information about it
+  print('This method is token #${cdb._method.token}');
+  print('The mapping is:\n${cdb.dartFfiMapping}');
 }
