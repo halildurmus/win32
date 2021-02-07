@@ -9,9 +9,7 @@ import 'dart:io';
 import 'package:winmd/winmd.dart';
 
 import 'function.dart';
-import 'signature.dart';
 import 'win32api.dart';
-import 'win32types.dart';
 import 'winmd.dart';
 
 late List<WinmdMethod> methods;
@@ -56,8 +54,8 @@ String generateDocComment(Win32Function func) {
 void generateFfiFiles(Win32API win32) {
   // Generate a list of libs, e.g. [kernel32, gdi32, ...]
   // The .toSet() removes duplicates.
-  final libraries =
-      win32.functions.values.map((e) => e.dllLibrary).toSet().toList();
+  // final libraries =
+  //     win32.functions.values.map((e) => e.dllLibrary).toSet().toList();
 
   for (final library in ['gdi32']) {
     final writer = File('lib/src/$library.dart').openSync(mode: FileMode.write);
@@ -93,20 +91,6 @@ final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ?
     for (final function in filteredFunctionList) {
       final method =
           methods.firstWhere((m) => m.methodName == function.signature.name);
-      final apiName = function.signature.nameWithoutEncoding;
-      final returnFFIType = convertToFFIType(function.signature.returnType);
-      final returnDartType = Win32Param([returnFFIType, '']).dartType;
-
-      final nativeParams = function.signature.params
-          .map((param) => '${param.ffiType} ${param.name}')
-          .join(', ');
-
-      final dartParams = function.signature.params
-          .map((param) => '${param.dartType} ${param.name}')
-          .join(', ');
-
-      final paramsList =
-          function.signature.params.map((param) => param.name).join(', ');
 
       writer.writeStringSync('''
 ${generateDocComment(function)}
