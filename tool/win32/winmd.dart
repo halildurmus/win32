@@ -1,6 +1,7 @@
 import 'package:winmd/winmd.dart';
 
 class Win32Prototype {
+  final String _nameWithoutEncoding;
   final WinmdMethod _method;
   final String _lib;
 
@@ -19,17 +20,17 @@ class Win32Prototype {
       .join(', ');
 
   String get dartFfiMapping => '${_method.returnType.typeIdentifier.dartType} '
-      '${_method.methodName}($dartParams) {\n'
-      '  final _${_method.methodName} = _$_lib.lookupFunction<\n'
+      '$_nameWithoutEncoding($dartParams) {\n'
+      '  final _$_nameWithoutEncoding = _$_lib.lookupFunction<\n'
       '    $nativePrototype, \n'
       '    $dartPrototype\n'
       "  >('${_method.methodName}');\n"
-      '  return _${_method.methodName}'
+      '  return _$_nameWithoutEncoding'
       '(${_method.parameters.map((param) => (param.name!)).toList().join(', ')})'
       ';\n'
       '}\n';
 
-  const Win32Prototype(this._method, this._lib);
+  const Win32Prototype(this._nameWithoutEncoding, this._method, this._lib);
 }
 
 void main() {
@@ -51,8 +52,8 @@ void main() {
     ..sort((a, b) => a.methodName.compareTo(b.methodName));
 
   // // Convert the methods to the FFI native types
-  final gdiApis =
-      sortedMethods.map((method) => Win32Prototype(method, 'gdi32'));
+  final gdiApis = sortedMethods
+      .map((method) => Win32Prototype(method.methodName, method, 'gdi32'));
 
   // final createDIBitmap =
   //     gdiApi.methods.firstWhere((m) => m.methodName == 'CreateDIBitmap');
