@@ -176,6 +176,10 @@ class WinmdMethod {
     } else {
       // We're parsing a method
       if (parameters.isNotEmpty) {
+        // In some implementations (e.g. Windows Runtime), param.EnumParams
+        // includes the return type as a zeroth sequence number. If that's the
+        // case, we already have a return parameter, and we can use this for the
+        // returnType, then strip it off the parameter list.
         if (parameters.first.sequence == 0) {
           // Parse return type
           returnType = parameters.first;
@@ -185,9 +189,15 @@ class WinmdMethod {
           returnType.typeIdentifier = returnTypeTuple.item1;
           blobPtr += returnTypeTuple.item2;
         } else {
-          // Set return type to void
-          returnType = WinmdParameter.fromVoid(reader);
-          blobPtr += 1;
+          // While in Windows Runtime, a zeroth parameter in param.EnumParams is
+          // provided, in Win32 EnumParams may not return a zeroth parameter
+          // even if there is a return type. So we still parse and return the
+          // signature.
+          final returnTypeTuple =
+              _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
+          returnType =
+              WinmdParameter.fromTypeIdentifier(reader, returnTypeTuple.item1);
+          blobPtr += returnTypeTuple.item2;
         }
 
         // Parse each method parameter
