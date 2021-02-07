@@ -5,6 +5,7 @@
 import 'enums.dart';
 import 'md_type.dart';
 import 'utils.dart';
+import 'win32types.dart';
 
 class WinmdTypeIdentifier {
   CorElementType corType;
@@ -117,9 +118,26 @@ class WinmdTypeIdentifier {
       case CorElementType.ELEMENT_TYPE_R8:
         return 'double';
       case CorElementType.ELEMENT_TYPE_PTR:
+        if (typeArgs.length == 1) {
+          if (typeArgs.first.type != null &&
+              typeArgs.first.type!.typeName.startsWith('Windows.Win32')) {
+            final win32Type =
+                typeArgs.first.type?.typeName.split('.').last ?? '';
+            final ffiNativeType = convertToFFIType(win32Type);
+            return 'Pointer<$ffiNativeType>';
+          }
+        }
+        return 'Pointer';
       case CorElementType.ELEMENT_TYPE_FNPTR:
         return 'Pointer';
       default:
+        // For now, only do this for Win32 types
+        if (type != null && type!.typeName.startsWith('Windows.Win32')) {
+          final win32Type = type?.typeName.split('.').last ?? '';
+          final ffiNativeType = convertToFFIType(win32Type);
+          final dartType = convertToDartType(ffiNativeType);
+          return dartType;
+        }
         return '';
     }
   }
@@ -153,12 +171,29 @@ class WinmdTypeIdentifier {
       case CorElementType.ELEMENT_TYPE_STRING:
         return 'IntPtr';
       case CorElementType.ELEMENT_TYPE_PTR:
+        if (typeArgs.length == 1) {
+          if (typeArgs.first.type != null &&
+              typeArgs.first.type!.typeName.startsWith('Windows.Win32')) {
+            final win32Type =
+                typeArgs.first.type?.typeName.split('.').last ?? '';
+            final ffiNativeType = convertToFFIType(win32Type);
+            return 'Pointer<$ffiNativeType>';
+          }
+        }
+        return 'Pointer';
+
       case CorElementType.ELEMENT_TYPE_FNPTR:
         return 'Pointer';
       case CorElementType.ELEMENT_TYPE_I:
       case CorElementType.ELEMENT_TYPE_U:
         return 'IntPtr';
       default:
+        // For now, only do this for Win32 types
+        if (type != null && type!.typeName.startsWith('Windows.Win32')) {
+          final win32Type = type?.typeName.split('.').last ?? '';
+          final ffiNativeType = convertToFFIType(win32Type);
+          return ffiNativeType;
+        }
         return '';
     }
   }
