@@ -118,16 +118,32 @@ class WinmdTypeIdentifier {
       case CorElementType.ELEMENT_TYPE_R8:
         return 'double';
       case CorElementType.ELEMENT_TYPE_PTR:
+        // Check if it's Pointer<T>, in which case we have work
         if (typeArgs.length == 1) {
           if (typeArgs.first.type != null &&
               typeArgs.first.type!.typeName.startsWith('Windows.Win32')) {
             final win32Type =
                 typeArgs.first.type?.typeName.split('.').last ?? '';
             final ffiNativeType = convertToFFIType(win32Type);
-            return 'Pointer<$ffiNativeType>';
+            // If it's a Unicode Win32 type, strip off the ending 'W'.
+            if (ffiNativeType.endsWith('W')) {
+              return 'Pointer<${ffiNativeType.substring(0, ffiNativeType.length - 1)}>';
+            } else {
+              return 'Pointer<$ffiNativeType>';
+            }
+          } else {
+            if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_VOID) {
+              // Pointer<Void> in Dart is unnecessarily restrictive, versus the
+              // Win32 meaning, which is more like "undefined type". We can
+              // model that with a generic Pointer in Dart.
+              return 'Pointer';
+            } else {
+              return 'Pointer<${typeArgs.first.nativeType}>';
+            }
           }
         }
         return 'Pointer';
+
       case CorElementType.ELEMENT_TYPE_FNPTR:
         return 'Pointer';
       default:
@@ -177,7 +193,21 @@ class WinmdTypeIdentifier {
             final win32Type =
                 typeArgs.first.type?.typeName.split('.').last ?? '';
             final ffiNativeType = convertToFFIType(win32Type);
-            return 'Pointer<$ffiNativeType>';
+            // If it's a Unicode Win32 type, strip off the ending 'W'.
+            if (ffiNativeType.endsWith('W')) {
+              return 'Pointer<${ffiNativeType.substring(0, ffiNativeType.length - 1)}>';
+            } else {
+              return 'Pointer<$ffiNativeType>';
+            }
+          } else {
+            if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_VOID) {
+              // Pointer<Void> in Dart is unnecessarily restrictive, versus the
+              // Win32 meaning, which is more like "undefined type". We can
+              // model that with a generic Pointer in Dart.
+              return 'Pointer';
+            } else {
+              return 'Pointer<${typeArgs.first.nativeType}>';
+            }
           }
         }
         return 'Pointer';
