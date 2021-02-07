@@ -199,6 +199,15 @@ class WinmdMethod {
                 _parseArray(signatureBlob.sublist(blobPtr + 1), paramsIndex)! +
                     2;
             paramsIndex++; //we've added two parameters here
+          } else if (runtimeType.item1.corType ==
+              CorElementType.ELEMENT_TYPE_PTR) {
+            // Pointer > XX (so we process the XX)
+            blobPtr += runtimeType.item2;
+            final ptrType =
+                _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
+            parameters[paramsIndex].typeIdentifier = runtimeType.item1;
+            parameters[paramsIndex].typeIdentifier.typeArgs.add(ptrType.item1);
+            blobPtr += ptrType.item2;
           } else {
             parameters[paramsIndex].typeIdentifier = runtimeType.item1;
             blobPtr += runtimeType.item2;
