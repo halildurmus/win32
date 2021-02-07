@@ -114,7 +114,6 @@ class WinmdTypeIdentifier {
       case CorElementType.ELEMENT_TYPE_U:
         return 'int';
       case CorElementType.ELEMENT_TYPE_R4:
-        return 'float';
       case CorElementType.ELEMENT_TYPE_R8:
         return 'double';
       case CorElementType.ELEMENT_TYPE_PTR:
