@@ -12,7 +12,7 @@ import 'function.dart';
 import 'win32api.dart';
 import 'winmd.dart';
 
-late List<WinmdMethod> methods;
+late List<Method> methods;
 
 String wrapCommentText(String inputText, [int wrapLength = 76]) {
   final words = inputText.split(' ');
@@ -103,7 +103,7 @@ ${Win32Prototype(function.signature.nameWithoutEncoding, method, 'gdi32').dartFf
 }
 
 void main() {
-  final scope = WinmdStore.getScopeForFile('tool/win32/Windows.Win32.winmd');
+  final scope = MetadataStore.getScopeForFile('tool/win32/Windows.Win32.winmd');
   final gdiApi =
       scope.typeDefs.firstWhere((type) => type.typeName.endsWith('Gdi.Apis'));
 

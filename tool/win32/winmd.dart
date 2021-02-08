@@ -2,7 +2,7 @@ import 'package:winmd/winmd.dart';
 
 class Win32Prototype {
   final String _nameWithoutEncoding;
-  final WinmdMethod _method;
+  final Method _method;
   final String _lib;
 
   String get nativePrototype =>
@@ -35,7 +35,7 @@ class Win32Prototype {
 
 void main() {
   // Load WinMD metadata for Win32
-  final scope = WinmdStore.getScopeForFile('tool/win32/Windows.Win32.winmd');
+  final scope = MetadataStore.getScopeForFile('tool/win32/Windows.Win32.winmd');
 
   // Find the GDI API namesapce
   final gdiApi =
