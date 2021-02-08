@@ -18,16 +18,10 @@ class Parameter extends TokenObject {
   final int attributeFlags;
   TypeIdentifier typeIdentifier;
   String? name;
-  final int paramValueLength;
+  final String constVal;
 
-  Parameter(
-      IMetaDataImport2 reader,
-      int token,
-      this.sequence,
-      this.attributeFlags,
-      this.typeIdentifier,
-      this.name,
-      this.paramValueLength)
+  Parameter(IMetaDataImport2 reader, int token, this.sequence,
+      this.attributeFlags, this.typeIdentifier, this.name, this.constVal)
       : super(reader, token);
 
   factory Parameter.fromToken(IMetaDataImport2 reader, int token) {
@@ -35,15 +29,15 @@ class Parameter extends TokenObject {
 
     final pmd = calloc<Uint32>();
     final pulSequence = calloc<Uint32>();
-    final szName = calloc<Uint8>(256 * 2).cast<Utf16>();
+    final szName = calloc<Uint16>(256).cast<Utf16>();
     final pchName = calloc<Uint32>();
     final pdwAttr = calloc<Uint32>();
     final pdwCPlusTypeFlag = calloc<Uint32>();
-    final ppValue = calloc<Uint8>();
+    final ppValue = calloc<Uint16>(256).cast<Utf16>();
     final pcchValue = calloc<Uint32>();
 
     final hr = reader.GetParamProps(token, pmd, pulSequence, szName, 256,
-        pchName, pdwAttr, pdwCPlusTypeFlag, ppValue, pcchValue);
+        pchName, pdwAttr, pdwCPlusTypeFlag, ppValue.cast(), pcchValue);
 
     if (SUCCEEDED(hr)) {
       if (pcchValue.value == 0) {
@@ -54,7 +48,7 @@ class Parameter extends TokenObject {
             pdwAttr.value,
             TypeIdentifier.fromValue(pdwCPlusTypeFlag.value),
             szName.unpackString(pchName.value),
-            pcchValue.value);
+            ppValue.unpackString(pcchValue.value));
       }
 
       calloc.free(pmd);
@@ -74,10 +68,10 @@ class Parameter extends TokenObject {
 
   factory Parameter.fromTypeIdentifier(
           IMetaDataImport2 reader, TypeIdentifier runtimeType) =>
-      Parameter(reader, 0, null, 0, runtimeType, null, 0);
+      Parameter(reader, 0, null, 0, runtimeType, null, '');
 
   factory Parameter.fromVoid(IMetaDataImport2 reader) => Parameter(reader, 0,
-      null, 0, TypeIdentifier(CorElementType.ELEMENT_TYPE_VOID), null, 0);
+      null, 0, TypeIdentifier(CorElementType.ELEMENT_TYPE_VOID), null, '');
 
   /// Enumerate all attributes that this parameter has.
   List<Attribute> get attributes {

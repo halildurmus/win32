@@ -18,15 +18,15 @@ class TypeBuilder {
   static bool isTypeValueType(TypeIdentifier typeIdentifier) =>
       typeIdentifier.type?.parent?.typeName == 'System.ValueType';
 
-  static String? dartType(TypeIdentifier typeIdentifier) {
+  static String dartType(TypeIdentifier typeIdentifier) {
     if (isTypeAnEnum(typeIdentifier)) {
       return 'int';
     } else if (isTypeValueType(typeIdentifier)) {
       return 'int';
     } else if (specialTypes.containsKey(typeIdentifier.name)) {
-      return specialTypes[typeIdentifier.name];
+      return specialTypes[typeIdentifier.name]!;
     } else {
-      return typeIdentifier.name;
+      return typeIdentifier.name ?? '';
     }
   }
 
@@ -68,11 +68,11 @@ class TypeBuilder {
           final paramName = method.name.substring(4).toCamelCase();
           method.parameters.add(ParameterProjection(paramName,
               nativeType: nativeType(mdMethod.returnType.typeIdentifier),
-              dartType: dartType(mdMethod.returnType.typeIdentifier)!));
+              dartType: dartType(mdMethod.returnType.typeIdentifier)));
         } else if (mdMethod.isGetProperty) {
           method.parameters.add(ParameterProjection('value',
               nativeType: nativeType(mdMethod.returnType.typeIdentifier),
-              dartType: dartType(mdMethod.returnType.typeIdentifier)!));
+              dartType: dartType(mdMethod.returnType.typeIdentifier)));
         } else {
           method.parameters.add(ParameterProjection('value',
               nativeType:
@@ -85,7 +85,7 @@ class TypeBuilder {
       for (final mdParam in mdMethod.parameters) {
         method.parameters.add(ParameterProjection(mdParam.name!,
             nativeType: nativeType(mdParam.typeIdentifier),
-            dartType: dartType(mdParam.typeIdentifier)!));
+            dartType: dartType(mdParam.typeIdentifier)));
       }
 
       interface.methods.add(method);
