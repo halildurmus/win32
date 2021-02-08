@@ -9,7 +9,7 @@
 import 'types.dart';
 
 class TypePrinter {
-  static String headerAsString(Interface type) {
+  static String headerAsString(ClassProjection type) {
     final buffer = StringBuffer();
     buffer.writeln('''
 // ${type.shortName}.dart
@@ -43,7 +43,7 @@ import '../winrt/winrt_constants.dart';
     return buffer.toString();
   }
 
-  static String guidConstantsAsString(Interface type) {
+  static String guidConstantsAsString(ClassProjection type) {
     final buffer = StringBuffer();
     if (type.generateClass) {
       buffer.writeln('/// @nodoc');
@@ -55,7 +55,7 @@ import '../winrt/winrt_constants.dart';
     return buffer.toString();
   }
 
-  static String typedefsAsString(Interface type) {
+  static String typedefsAsString(ClassProjection type) {
     final buffer = StringBuffer();
     for (final method in type.methods) {
       // Native typedef
@@ -103,7 +103,7 @@ import '../winrt/winrt_constants.dart';
     return buffer.toString();
   }
 
-  static String interfaceAsString(Interface type) {
+  static String interfaceAsString(ClassProjection type) {
     final buffer = StringBuffer();
     var vtableIndex = type.vtableStart;
 
@@ -152,7 +152,7 @@ import '../winrt/winrt_constants.dart';
     return buffer.toString();
   }
 
-  static String dartMethod(Method method, int? vtableIndex) {
+  static String dartMethod(MethodProjection method, int? vtableIndex) {
     final buffer = StringBuffer();
     buffer.write('  ${method.returnTypeDart} ${method.name}(');
     for (var idx = 0; idx < method.parameters.length; idx++) {
@@ -183,7 +183,7 @@ import '../winrt/winrt_constants.dart';
     return buffer.toString();
   }
 
-  static String dartGetProperty(Method method, int? vtableIndex) {
+  static String dartGetProperty(MethodProjection method, int? vtableIndex) {
     final buffer = StringBuffer();
 
     final exposedMethodName = method.name.substring(4);
@@ -209,7 +209,7 @@ import '../winrt/winrt_constants.dart';
     return buffer.toString();
   }
 
-  static String dartSetProperty(Method method, int? vtableIndex) {
+  static String dartSetProperty(MethodProjection method, int? vtableIndex) {
     final buffer = StringBuffer();
 
     buffer.writeln('''
@@ -224,7 +224,7 @@ import '../winrt/winrt_constants.dart';
     return buffer.toString();
   }
 
-  static String classAsString(Interface type) {
+  static String classAsString(ClassProjection type) {
     if (type.generateClass) {
       final buffer = StringBuffer();
 
@@ -261,7 +261,7 @@ class ${type.className} extends ${type.name} {
     }
   }
 
-  static String printType(Interface type) =>
+  static String printType(ClassProjection type) =>
       headerAsString(type) +
       guidConstantsAsString(type) +
       typedefsAsString(type) +

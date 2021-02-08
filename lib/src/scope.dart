@@ -7,21 +7,21 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'md_enum.dart';
-import 'md_type.dart';
+import 'enumeration.dart';
+import 'typedef.dart';
 
 /// A metadata scope, which typically matches an on-disk file.
 ///
 /// Rather than being created directly, you should obtain a scope from a
-/// [WinmdReader], which caches scopes to avoid duplication.
-class WinmdScope {
-  late IMetaDataImport2 reader;
+/// [MetadataStore], which caches scopes to avoid duplication.
+class Scope {
+  final IMetaDataImport2 reader;
 
-  WinmdScope(this.reader);
+  Scope(this.reader);
 
   /// Get an enumerated list of typedefs for this scope.
-  List<WinmdType> get typeDefs {
-    final types = <WinmdType>[];
+  List<TypeDef> get typeDefs {
+    final types = <TypeDef>[];
 
     final phEnum = calloc<IntPtr>();
     final rgTypeDefs = calloc<Uint32>();
@@ -32,7 +32,7 @@ class WinmdScope {
       while (hr == S_OK) {
         final token = rgTypeDefs.value;
 
-        types.add(WinmdType.fromToken(reader, token));
+        types.add(TypeDef.fromToken(reader, token));
         hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
       }
       return types;
@@ -46,24 +46,24 @@ class WinmdScope {
     }
   }
 
-  List<WinmdEnum> get enums {
-    final enums = <WinmdEnum>[];
+  List<Enumeration> get enums {
+    final enums = <Enumeration>[];
     for (final typeDef in typeDefs) {
       if (typeDef.parent?.typeName == 'System.Enum') {
-        enums.add(WinmdEnum(typeDef));
+        enums.add(Enumeration(typeDef));
       }
     }
     return enums;
   }
 
   /// Find a typedef by name.
-  WinmdType findTypeDef(String type) {
+  TypeDef findTypeDef(String type) {
     final szTypeDef = TEXT(type);
     final ptkTypeDef = calloc<Uint32>();
 
     try {
       reader.FindTypeDefByName(szTypeDef, NULL, ptkTypeDef);
-      return WinmdType.fromToken(reader, ptkTypeDef.value);
+      return TypeDef.fromToken(reader, ptkTypeDef.value);
     } finally {
       calloc.free(szTypeDef);
       calloc.free(ptkTypeDef);

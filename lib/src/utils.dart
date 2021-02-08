@@ -10,7 +10,7 @@ import 'dart:io';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'enums.dart';
+import 'constants.dart';
 
 class WinmdException implements Exception {
   final String message;

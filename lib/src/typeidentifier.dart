@@ -2,93 +2,93 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'enums.dart';
-import 'md_type.dart';
+import 'constants.dart';
+import 'typedef.dart';
 import 'utils.dart';
-import 'win32types.dart';
+import 'projection/win32types.dart';
 
-class WinmdTypeIdentifier {
+class TypeIdentifier {
   CorElementType corType;
-  late String name;
-  WinmdType? type;
-  final typeArgs = <WinmdTypeIdentifier>[];
+  String? name;
+  TypeDef? type;
+  final typeArgs = <TypeIdentifier>[];
 
-  WinmdTypeIdentifier(this.corType);
+  TypeIdentifier(this.corType);
 
-  factory WinmdTypeIdentifier.fromValue(int corElementTypeValue) {
+  factory TypeIdentifier.fromValue(int corElementTypeValue) {
     switch (corElementTypeValue) {
       case 0x0:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_END);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_END);
       case 0x1:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_VOID);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_VOID);
       case 0x2:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_BOOLEAN);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_BOOLEAN);
       case 0x3:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_CHAR);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_CHAR);
       case 0x4:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_I1);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_I1);
       case 0x5:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_U1);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_U1);
       case 0x6:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_I2);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_I2);
       case 0x7:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_U2);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_U2);
       case 0x8:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_I4);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_I4);
       case 0x9:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_U4);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_U4);
       case 0xa:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_I8);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_I8);
       case 0xb:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_U8);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_U8);
       case 0xc:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_R4);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_R4);
       case 0xd:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_R8);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_R8);
       case 0xe:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_STRING);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_STRING);
       case 0xf:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_PTR);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_PTR);
       case 0x10:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_BYREF);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_BYREF);
       case 0x11:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_VALUETYPE);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_VALUETYPE);
       case 0x12:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_CLASS);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_CLASS);
       case 0x13:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_VAR);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_VAR);
       case 0x14:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_ARRAY);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_ARRAY);
       case 0x15:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_GENERICINST);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_GENERICINST);
       case 0x16:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_TYPEDBYREF);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_TYPEDBYREF);
       case 0x18:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_I);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_I);
       case 0x19:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_U);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_U);
       case 0x1B:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_FNPTR);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_FNPTR);
       case 0x1C:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_OBJECT);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_OBJECT);
       case 0x1D:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_SZARRAY);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_SZARRAY);
       case 0x1E:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_MVAR);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_MVAR);
       case 0x1F:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_CMOD_REQD);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_CMOD_REQD);
       case 0x20:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_CMOD_OPT);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_CMOD_OPT);
       case 0x21:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_INTERNAL);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_INTERNAL);
       case 0x22:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_MAX);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_MAX);
       case 0x40:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_MODIFIER);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_MODIFIER);
       case 0x41:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_SENTINEL);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_SENTINEL);
       case 0x45:
-        return WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_PINNED);
+        return TypeIdentifier(CorElementType.ELEMENT_TYPE_PINNED);
       default:
         throw WinmdException('Unrecognized type $corElementTypeValue');
     }

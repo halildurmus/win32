@@ -7,14 +7,14 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'md_scope.dart';
-import 'md_type.dart';
+import 'scope.dart';
+import 'typedef.dart';
 
 /// Caches a reader for each file scope.
 ///
 /// Use this to obtain a reference of a scope without creating unnecessary
 /// copies or cycles.
-class WinmdStore {
+class MetadataStore {
   static late IMetaDataDispenser dispenser;
   static final cache = <String, IMetaDataImport2>{};
 
@@ -36,11 +36,11 @@ class WinmdStore {
   }
 
   /// Takes a metadata file path and returns the matching scope.
-  static WinmdScope getScopeForFile(String fileScope) {
+  static Scope getScopeForFile(String fileScope) {
     if (!isInitialized) initialize();
 
     if (cache.containsKey(fileScope)) {
-      return WinmdScope(cache[fileScope]!);
+      return Scope(cache[fileScope]!);
     } else {
       final szFile = TEXT(fileScope);
       final pReader = calloc<IntPtr>();
@@ -52,7 +52,7 @@ class WinmdStore {
           throw WindowsException(hr);
         } else {
           cache[fileScope] = IMetaDataImport2(pReader.cast());
-          return WinmdScope(cache[fileScope]!);
+          return Scope(cache[fileScope]!);
         }
       } finally {
         calloc.free(szFile);
@@ -62,7 +62,7 @@ class WinmdStore {
 
   /// Takes a typename (e.g. `Windows.Globalization.Calendar`) and returns the
   /// metadata scope that contains the type.
-  static WinmdScope getScopeForType(String typeName) {
+  static Scope getScopeForType(String typeName) {
     if (typeName.startsWith('Windows.Win32')) {
       // It's a Win32 type.
 
@@ -73,7 +73,7 @@ class WinmdStore {
       final cacheEntry =
           cache.keys.firstWhere((entry) => entry.contains('Windows.Win32'));
 
-      return WinmdScope(cache[cacheEntry]!);
+      return Scope(cache[cacheEntry]!);
     } else {
       // Assume it's a Windows Runtime type
       final hstrTypeName = convertToHString(typeName);
@@ -104,7 +104,7 @@ class WinmdStore {
     }
   }
 
-  static WinmdType getMetadataForType(String typeName) {
+  static TypeDef getMetadataForType(String typeName) {
     if (!isInitialized) initialize();
 
     final scope = getScopeForType(typeName);
@@ -130,5 +130,5 @@ class WinmdStore {
 
   /// Print information about the cache for debugging purposes.
   @override
-  String toString() => 'Store: [${WinmdStore.cache.keys.join(', ')}]';
+  String toString() => 'Store: [${MetadataStore.cache.keys.join(', ')}]';
 }

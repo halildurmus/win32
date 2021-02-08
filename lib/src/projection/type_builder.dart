@@ -2,23 +2,23 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'enums.dart';
-import 'md_type.dart';
-import 'md_typeidentifier.dart';
+import '../constants.dart';
+import '../typedef.dart';
+import '../typeidentifier.dart';
 import 'types.dart';
-import 'utils.dart';
+import '../utils.dart';
 
 const Map<String, String> specialTypes = {'System.Guid': 'GUID'};
 
 /// Takes a WinMD type and builds a Dart representation of it.
 class TypeBuilder {
-  static bool isTypeAnEnum(WinmdTypeIdentifier typeIdentifier) =>
+  static bool isTypeAnEnum(TypeIdentifier typeIdentifier) =>
       typeIdentifier.type?.parent?.typeName == 'System.Enum';
 
-  static bool isTypeValueType(WinmdTypeIdentifier typeIdentifier) =>
+  static bool isTypeValueType(TypeIdentifier typeIdentifier) =>
       typeIdentifier.type?.parent?.typeName == 'System.ValueType';
 
-  static String? dartType(WinmdTypeIdentifier typeIdentifier) {
+  static String? dartType(TypeIdentifier typeIdentifier) {
     if (isTypeAnEnum(typeIdentifier)) {
       return 'int';
     } else if (isTypeValueType(typeIdentifier)) {
@@ -30,7 +30,7 @@ class TypeBuilder {
     }
   }
 
-  static String nativeType(WinmdTypeIdentifier typeIdentifier) {
+  static String nativeType(TypeIdentifier typeIdentifier) {
     // ECMA-335 II.14.3 does not guarantee that an enum is 32-bit, but
     // per https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#enums,
     // enums are always signed or unsigned 32-bit values.
@@ -42,12 +42,13 @@ class TypeBuilder {
     } else if (specialTypes.containsKey(typeIdentifier.name)) {
       return specialTypes[typeIdentifier.name]!;
     } else {
-      return typeIdentifier.name;
+      return typeIdentifier.name ?? '';
     }
   }
 
-  static Interface projectWinMdType(WinmdType mdTypeDef) {
-    final interface = Interface();
+  /// Take a TypeDef and create a Dart projection of it.
+  static ClassProjection projectWindowsType(TypeDef mdTypeDef) {
+    final interface = ClassProjection();
     interface.sourceType = SourceType.winrt; // for now
     interface.iid = mdTypeDef.guid;
     interface.name = mdTypeDef.typeName;
@@ -55,7 +56,7 @@ class TypeBuilder {
     interface.vtableStart = 6; // For now, hardcode to IInspectable subclass
 
     for (final mdMethod in mdTypeDef.methods) {
-      final method = Method();
+      final method = MethodProjection();
       method.name = mdMethod.methodName;
       method.returnTypeNative = 'Int32';
       method.returnTypeDart = 'int';
@@ -63,31 +64,28 @@ class TypeBuilder {
       // return value is passed as an pointer
       if (mdMethod.returnType.typeIdentifier.corType !=
           CorElementType.ELEMENT_TYPE_VOID) {
-        final retParam = Parameter();
         if (mdMethod.isSetProperty) {
-          retParam.name = method.name.substring(4).toCamelCase();
+          final paramName = method.name.substring(4).toCamelCase();
+          method.parameters.add(ParameterProjection(paramName,
+              nativeType: nativeType(mdMethod.returnType.typeIdentifier),
+              dartType: dartType(mdMethod.returnType.typeIdentifier)!));
         } else if (mdMethod.isGetProperty) {
-          retParam.name = 'value';
-          retParam.nativeType = nativeType(mdMethod.returnType.typeIdentifier);
-          retParam.dartType = dartType(mdMethod.returnType.typeIdentifier)!;
+          method.parameters.add(ParameterProjection('value',
+              nativeType: nativeType(mdMethod.returnType.typeIdentifier),
+              dartType: dartType(mdMethod.returnType.typeIdentifier)!));
         } else {
-          retParam.name = 'value';
-          retParam.nativeType =
-              'Pointer<${nativeType(mdMethod.returnType.typeIdentifier)}>';
-          retParam.dartType =
-              'Pointer<${nativeType(mdMethod.returnType.typeIdentifier)}>';
+          method.parameters.add(ParameterProjection('value',
+              nativeType:
+                  'Pointer<${nativeType(mdMethod.returnType.typeIdentifier)}>',
+              dartType:
+                  'Pointer<${nativeType(mdMethod.returnType.typeIdentifier)}>'));
         }
-        method.parameters.add(retParam);
       }
 
       for (final mdParam in mdMethod.parameters) {
-        final param = Parameter();
-
-        param.name = mdParam.name!;
-        param.nativeType = nativeType(mdParam.typeIdentifier);
-        param.dartType = dartType(mdParam.typeIdentifier)!;
-
-        method.parameters.add(param);
+        method.parameters.add(ParameterProjection(mdParam.name!,
+            nativeType: nativeType(mdParam.typeIdentifier),
+            dartType: dartType(mdParam.typeIdentifier)!));
       }
 
       interface.methods.add(method);

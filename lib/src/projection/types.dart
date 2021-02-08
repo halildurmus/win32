@@ -6,29 +6,32 @@
 // parameters, as well as the logic necessary to emit a Dart language
 // representation (a projection) of the underlying API.
 
-enum SourceType { com, winrt, unknown }
+enum SourceType { com, winrt, win32, unknown }
 
-class Parameter {
-  late String name;
-  late String nativeType;
-  late String dartType;
+class ParameterProjection {
+  final String name;
+  final String nativeType;
+  final String dartType;
+
+  const ParameterProjection(this.name,
+      {required this.nativeType, required this.dartType});
 
   @override
   String toString() => '$name (dart: $dartType, native: $nativeType)';
 }
 
-class Method {
+class MethodProjection {
   late String name;
   late String returnTypeNative;
   late String returnTypeDart;
-  final parameters = <Parameter>[];
+  final parameters = <ParameterProjection>[];
 
   @override
   String toString() =>
       '$name (params: ${parameters.length}, returns: $returnTypeNative)';
 }
 
-class Interface {
+class ClassProjection {
   late SourceType sourceType;
   String? iid;
   late String name;
@@ -38,7 +41,7 @@ class Interface {
   late String inherits;
   late int vtableStart;
 
-  final methods = <Method>[];
+  final methods = <MethodProjection>[];
 
   String get shortName => name.split('.').last;
 
