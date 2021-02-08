@@ -9,18 +9,20 @@ import 'package:win32/win32.dart';
 
 import 'enums.dart';
 import 'md_typeidentifier.dart';
+import 'md_attribute.dart';
 
+/// A parameter or return type.
 class WinmdParameter {
-  IMetaDataImport2 reader;
+  final IMetaDataImport2 reader;
 
   int token;
-  int? sequence;
-  int attributes;
+  final int? sequence;
+  final int attributeFlags;
   WinmdTypeIdentifier typeIdentifier;
   String? name;
-  int paramValueLength;
+  final int paramValueLength;
 
-  WinmdParameter(this.reader, this.token, this.sequence, this.attributes,
+  WinmdParameter(this.reader, this.token, this.sequence, this.attributeFlags,
       this.typeIdentifier, this.name, this.paramValueLength);
 
   factory WinmdParameter.fromToken(IMetaDataImport2 reader, int token) {
@@ -77,4 +79,30 @@ class WinmdParameter {
       WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_VOID),
       null,
       0);
+
+  /// Enumerate all attributes that this parameter has.
+  List<WinmdAttribute> get attributes {
+    final attributes = <WinmdAttribute>[];
+
+    final phEnum = calloc<IntPtr>();
+    final rAttrs = calloc<Uint32>();
+    final pcAttrs = calloc<Uint32>();
+
+    try {
+      var hr =
+          reader.EnumCustomAttributes(phEnum, token, 0, rAttrs, 1, pcAttrs);
+      while (hr == S_OK) {
+        final attrToken = rAttrs.value;
+
+        attributes.add(WinmdAttribute.fromToken(reader, attrToken));
+        hr = reader.EnumCustomAttributes(phEnum, token, 0, rAttrs, 1, pcAttrs);
+      }
+      return attributes;
+    } finally {
+      reader.CloseEnum(phEnum.address);
+
+      calloc.free(rAttrs);
+      calloc.free(pcAttrs);
+    }
+  }
 }

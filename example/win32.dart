@@ -3,7 +3,7 @@ import 'package:winmd/winmd.dart';
 void main() {
   // Load WinMD metadata for Win32, as produced by the following utility:
   // https://github.com/microsoft/win32metadata
-  final scope = WinmdStore.getScopeForFile('Windows.Win32.winmd');
+  final scope = WinmdStore.getScopeForFile('example/Windows.Win32.winmd');
 
   // Find the GDI API namesapce
   final gdiApi =
@@ -24,4 +24,13 @@ void main() {
       .map((param) => '${param.typeIdentifier.nativeType} ${param.name!}')
       .join(', ');
   print('The parameters are:\n$params');
+
+  final lastParam = winmdMethod.parameters.last;
+  final attrs = lastParam.attributes;
+
+  for (final attr in attrs) {
+    print('attr: ${attr.blob.map((b) => b.toRadixString(16)).toList()}');
+  }
+
+  print('There are ${attrs.length} attributes.');
 }
