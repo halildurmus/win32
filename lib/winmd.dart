@@ -2,15 +2,14 @@
 library winmd;
 
 export 'src/constants.dart';
-export 'src/enums.dart';
-export 'src/md_enum.dart';
-export 'src/md_method.dart';
-export 'src/md_parameter.dart';
-export 'src/md_scope.dart';
-export 'src/md_store.dart';
-export 'src/md_type.dart';
-export 'src/md_typeidentifier.dart';
-export 'src/type_builder.dart';
-export 'src/type_printer.dart';
-export 'src/types.dart';
+export 'src/enumeration.dart';
+export 'src/method.dart';
+export 'src/parameter.dart';
+export 'src/scope.dart';
+export 'src/metadatastore.dart';
+export 'src/typedef.dart';
+export 'src/typeidentifier.dart';
+export 'src/projection/type_builder.dart';
+export 'src/projection/type_printer.dart';
+export 'src/projection/types.dart';
 export 'src/utils.dart';

@@ -8,16 +8,14 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'enums.dart';
-import 'md_parameter.dart';
-import 'md_type.dart';
-import 'md_typeidentifier.dart';
+import 'constants.dart';
+import 'tokenobject.dart';
+import 'parameter.dart';
+import 'typedef.dart';
+import 'typeidentifier.dart';
 import 'utils.dart';
 
-class WinmdMethod {
-  IMetaDataImport2 reader;
-
-  int token;
+class Method extends TokenObject {
   String methodName;
   int methodFlags;
   Uint8List signatureBlob;
@@ -28,8 +26,8 @@ class WinmdMethod {
   bool isGetProperty = false;
   bool isSetProperty = false;
 
-  List<WinmdParameter> parameters = <WinmdParameter>[];
-  late WinmdParameter returnType;
+  List<Parameter> parameters = <Parameter>[];
+  late Parameter returnType;
 
   bool _testFlag(int attribute) => methodFlags & attribute == attribute;
 
@@ -41,14 +39,15 @@ class WinmdMethod {
   bool get isSpecialName => _testFlag(CorMethodAttr.mdSpecialName);
   bool get isRTSpecialName => _testFlag(CorMethodAttr.mdRTSpecialName);
 
-  WinmdMethod(this.reader, this.token, this.methodName, this.methodFlags,
-      this.signatureBlob, this.relativeVirtualAddress, this.implFlags) {
+  Method(IMetaDataImport2 reader, int token, this.methodName, this.methodFlags,
+      this.signatureBlob, this.relativeVirtualAddress, this.implFlags)
+      : super(reader, token) {
     _parseMethodType();
     _parseParameterNames();
     _parseParameters();
   }
 
-  factory WinmdMethod.fromToken(IMetaDataImport2 reader, int token) {
+  factory Method.fromToken(IMetaDataImport2 reader, int token) {
     final pClass = calloc<Uint32>();
     final szMethod = calloc<Uint16>(256 * 2).cast<Utf16>();
     final pchMethod = calloc<Uint32>();
@@ -65,14 +64,8 @@ class WinmdMethod {
       if (SUCCEEDED(hr)) {
         final signature = Pointer<Uint8>.fromAddress(ppvSigBlob.value)
             .asTypedList(pcbSigBlob.value);
-        return WinmdMethod(
-            reader,
-            token,
-            szMethod.unpackString(pchMethod.value),
-            pdwAttr.value,
-            signature,
-            pulCodeRVA.value,
-            pdwImplFlags.value);
+        return Method(reader, token, szMethod.unpackString(pchMethod.value),
+            pdwAttr.value, signature, pulCodeRVA.value, pdwImplFlags.value);
       } else {
         throw WindowsException(hr);
       }
@@ -106,17 +99,16 @@ class WinmdMethod {
   /// consumed.
   ///
   /// Details on the blob format can be found at §II.23.1.16 of ECMA-335.
-  Tuple<WinmdTypeIdentifier, int> _parseTypeFromSignature(
-      Uint8List signatureBlob) {
+  Tuple<TypeIdentifier, int> _parseTypeFromSignature(Uint8List signatureBlob) {
     final paramType = signatureBlob.first;
-    final runtimeType = WinmdTypeIdentifier.fromValue(paramType);
+    final runtimeType = TypeIdentifier.fromValue(paramType);
     var dataLength = 0;
 
     if (runtimeType.corType == CorElementType.ELEMENT_TYPE_VALUETYPE ||
         runtimeType.corType == CorElementType.ELEMENT_TYPE_CLASS) {
       final uncompressed = corSigUncompressData(signatureBlob.sublist(1));
       final token = unencodeDefRefSpecToken(uncompressed.data);
-      final tokenAsType = WinmdType.fromToken(reader, token);
+      final tokenAsType = TypeDef.fromToken(reader, token);
 
       dataLength = uncompressed.dataLength + 1;
       runtimeType.name = tokenAsType.typeName;
@@ -140,7 +132,7 @@ class WinmdMethod {
       dataLength = 1;
       runtimeType.name = runtimeType.nativeType;
     }
-    return Tuple<WinmdTypeIdentifier, int>(runtimeType, dataLength);
+    return Tuple<TypeIdentifier, int>(runtimeType, dataLength);
   }
 
   String get callingConvention {
@@ -168,11 +160,11 @@ class WinmdMethod {
     var blobPtr = hasGenericParameters == false ? 2 : 3;
 
     if (isGetProperty) {
-      returnType = WinmdParameter.fromTypeIdentifier(
+      returnType = Parameter.fromTypeIdentifier(
           reader, _parseTypeFromSignature(signatureBlob.sublist(2)).item1)
         ..name = 'value';
     } else if (isSetProperty) {
-      returnType = WinmdParameter.fromVoid(reader);
+      returnType = Parameter.fromVoid(reader);
     } else {
       // We're parsing a method
       if (parameters.isNotEmpty) {
@@ -196,7 +188,7 @@ class WinmdMethod {
           final returnTypeTuple =
               _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
           returnType =
-              WinmdParameter.fromTypeIdentifier(reader, returnTypeTuple.item1);
+              Parameter.fromTypeIdentifier(reader, returnTypeTuple.item1);
           blobPtr += returnTypeTuple.item2;
         }
 
@@ -228,7 +220,7 @@ class WinmdMethod {
       } else {
         // paramNames is empty, so we're dealing with a void method with void
         // parameters.
-        returnType = WinmdParameter.fromVoid(reader);
+        returnType = Parameter.fromVoid(reader);
       }
     }
   }
@@ -244,7 +236,7 @@ class WinmdMethod {
         while (hr == S_OK) {
           final token = ptkParamDef.value;
 
-          parameters.add(WinmdParameter.fromToken(reader, token));
+          parameters.add(Parameter.fromToken(reader, token));
           hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
         }
       } finally {
@@ -262,7 +254,7 @@ class WinmdMethod {
 
     parameters[paramsIndex].name = '__valueSize';
     parameters[paramsIndex].typeIdentifier.name = 'Pointer<Uint32>';
-    parameters.insert(paramsIndex + 1, WinmdParameter.fromVoid(reader));
+    parameters.insert(paramsIndex + 1, Parameter.fromVoid(reader));
     parameters[paramsIndex + 1].name = 'value';
     parameters[paramsIndex + 1].typeIdentifier.name = 'Pointer<IntPtr>';
 

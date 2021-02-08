@@ -7,23 +7,23 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'md_type.dart';
+import 'typedef.dart';
 
-class WinmdField {
-  late String name;
-  late int value;
+class Field {
+  final String name;
+  final int value;
+
+  const Field(this.name, this.value);
 }
 
 /// Represents an enum in the Windows Metadata file
-class WinmdEnum extends WinmdType {
-  WinmdEnum(WinmdType type)
+class Enumeration extends TypeDef {
+  Enumeration(TypeDef type)
       : super(type.reader, type.token, type.typeName, type.flags,
             type.baseTypeToken);
 
   /// Converts an individual field
-  WinmdField processFieldToken(int token) {
-    final field = WinmdField();
-
+  Field processFieldToken(int token) {
     final ptkTypeDef = calloc<Uint32>();
     final szField = calloc<Uint8>(256 * 2).cast<Utf16>();
     final pchField = calloc<Uint32>();
@@ -49,16 +49,16 @@ class WinmdEnum extends WinmdType {
           pcchValue);
 
       if (SUCCEEDED(hr)) {
-        field.name = szField.unpackString(pchField.value);
-        print(field.name +
+        final fieldName = szField.unpackString(pchField.value);
+        final fieldValue = ppValue.cast<Uint32>().value;
+        print(fieldName +
             ppvSigBlob
                 .cast<Uint8>()
                 .asTypedList(pcbSigBlob.value)
                 .map((e) => e.toHexString(8))
                 .join(' '));
-        field.value = ppValue.cast<Uint32>().value;
 
-        return field;
+        return Field(fieldName, fieldValue);
       } else {
         throw WindowsException(hr);
       }
