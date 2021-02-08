@@ -6,7 +6,7 @@ possible to load them and build Dart FFI interop libraries from the results.
 
 ## Architecture
 
-![Architecture diagram](https://github.com/timsneath/winmd/blob/main/metadata.drawio.svg?raw=true)
+![Architecture diagram](https://github.com/timsneath/winmd/blob/master/metadata.drawio.svg?raw=true)
 
 ## Usage (Windows Runtime)
 
