@@ -54,6 +54,7 @@ void main() {
   const funcName = 'AddFontResourceW';
   final winmdMethod =
       gdiApi.methods.firstWhere((m) => m.methodName == funcName);
+
   final cdb = Win32Prototype('AddFontResource', winmdMethod, 'gdi32');
 
   // Print out some information about it
