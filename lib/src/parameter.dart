@@ -7,49 +7,48 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'enums.dart';
-import 'md_typeidentifier.dart';
-import 'md_attribute.dart';
+import 'constants.dart';
+import 'tokenobject.dart';
+import 'typeidentifier.dart';
+import 'attribute.dart';
 
 /// A parameter or return type.
-class WinmdParameter {
-  final IMetaDataImport2 reader;
-
-  int token;
+class Parameter extends TokenObject {
   final int? sequence;
   final int attributeFlags;
-  WinmdTypeIdentifier typeIdentifier;
+  TypeIdentifier typeIdentifier;
   String? name;
-  final int paramValueLength;
+  final String constVal;
 
-  WinmdParameter(this.reader, this.token, this.sequence, this.attributeFlags,
-      this.typeIdentifier, this.name, this.paramValueLength);
+  Parameter(IMetaDataImport2 reader, int token, this.sequence,
+      this.attributeFlags, this.typeIdentifier, this.name, this.constVal)
+      : super(reader, token);
 
-  factory WinmdParameter.fromToken(IMetaDataImport2 reader, int token) {
-    late WinmdParameter parameter;
+  factory Parameter.fromToken(IMetaDataImport2 reader, int token) {
+    late Parameter parameter;
 
     final pmd = calloc<Uint32>();
     final pulSequence = calloc<Uint32>();
-    final szName = calloc<Uint8>(256 * 2).cast<Utf16>();
+    final szName = calloc<Uint16>(256).cast<Utf16>();
     final pchName = calloc<Uint32>();
     final pdwAttr = calloc<Uint32>();
     final pdwCPlusTypeFlag = calloc<Uint32>();
-    final ppValue = calloc<Uint8>();
+    final ppValue = calloc<Uint16>(256).cast<Utf16>();
     final pcchValue = calloc<Uint32>();
 
     final hr = reader.GetParamProps(token, pmd, pulSequence, szName, 256,
-        pchName, pdwAttr, pdwCPlusTypeFlag, ppValue, pcchValue);
+        pchName, pdwAttr, pdwCPlusTypeFlag, ppValue.cast(), pcchValue);
 
     if (SUCCEEDED(hr)) {
       if (pcchValue.value == 0) {
-        parameter = WinmdParameter(
+        parameter = Parameter(
             reader,
             token,
             pulSequence.value,
             pdwAttr.value,
-            WinmdTypeIdentifier.fromValue(pdwCPlusTypeFlag.value),
+            TypeIdentifier.fromValue(pdwCPlusTypeFlag.value),
             szName.unpackString(pchName.value),
-            pcchValue.value);
+            ppValue.unpackString(pcchValue.value));
       }
 
       calloc.free(pmd);
@@ -67,22 +66,16 @@ class WinmdParameter {
     }
   }
 
-  factory WinmdParameter.fromTypeIdentifier(
-          IMetaDataImport2 reader, WinmdTypeIdentifier runtimeType) =>
-      WinmdParameter(reader, 0, null, 0, runtimeType, null, 0);
+  factory Parameter.fromTypeIdentifier(
+          IMetaDataImport2 reader, TypeIdentifier runtimeType) =>
+      Parameter(reader, 0, null, 0, runtimeType, null, '');
 
-  factory WinmdParameter.fromVoid(IMetaDataImport2 reader) => WinmdParameter(
-      reader,
-      0,
-      null,
-      0,
-      WinmdTypeIdentifier(CorElementType.ELEMENT_TYPE_VOID),
-      null,
-      0);
+  factory Parameter.fromVoid(IMetaDataImport2 reader) => Parameter(reader, 0,
+      null, 0, TypeIdentifier(CorElementType.ELEMENT_TYPE_VOID), null, '');
 
   /// Enumerate all attributes that this parameter has.
-  List<WinmdAttribute> get attributes {
-    final attributes = <WinmdAttribute>[];
+  List<Attribute> get attributes {
+    final attributes = <Attribute>[];
 
     final phEnum = calloc<IntPtr>();
     final rAttrs = calloc<Uint32>();
@@ -94,7 +87,7 @@ class WinmdParameter {
       while (hr == S_OK) {
         final attrToken = rAttrs.value;
 
-        attributes.add(WinmdAttribute.fromToken(reader, attrToken));
+        attributes.add(Attribute.fromToken(reader, attrToken));
         hr = reader.EnumCustomAttributes(phEnum, token, 0, rAttrs, 1, pcAttrs);
       }
       return attributes;

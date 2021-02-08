@@ -1,3 +1,7 @@
+## 0.3.0-dev.1
+
+- Refactoring
+
 ## 0.2.0-dev.4
 
 - Improvements to Win32 metadata parsing

@@ -8,19 +8,16 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'constants.dart';
-import 'enums.dart';
-import 'md_method.dart';
-import 'md_store.dart';
+import 'tokenobject.dart';
+import 'method.dart';
+import 'metadatastore.dart';
 import 'utils.dart';
 
 /// Represents a TypeDef in the Windows Metadata file
-class WinmdType {
-  late IMetaDataImport2 reader;
-
-  int token;
-  late String typeName;
-  int flags;
-  int baseTypeToken;
+class TypeDef extends TokenObject {
+  final String typeName;
+  final int flags;
+  final int baseTypeToken;
 
   /// Is the type a class?
   bool get isClass =>
@@ -42,30 +39,31 @@ class WinmdType {
   ///
   /// Typically, typedefs should be obtained from a [WinmdScope] object rather
   /// than being created directly.
-  WinmdType(this.reader,
-      [this.token = 0,
+  TypeDef(IMetaDataImport2 reader,
+      [int token = 0,
       this.typeName = '',
       this.flags = 0,
-      this.baseTypeToken = 0]);
+      this.baseTypeToken = 0])
+      : super(reader, token);
 
   /// Instantiate a typedef from a token.
   ///
   /// If the token is a TypeDef, it will be created directly; otherwise it will
   /// be retrieved by finding the scope that it comes from and returning a
   /// typedef from the new scope.
-  factory WinmdType.fromToken(IMetaDataImport2 reader, int token) {
+  factory TypeDef.fromToken(IMetaDataImport2 reader, int token) {
     if (tokenIsTypeRef(token)) {
-      return WinmdType.fromTypeRef(reader, token);
+      return TypeDef.fromTypeRefToken(reader, token);
     } else if (tokenIsTypeDef(token)) {
-      return WinmdType.fromTypeDef(reader, token);
+      return TypeDef.fromTypeDefToken(reader, token);
     } else {
       print('Unrecognized token $token');
-      return WinmdType(reader);
+      return TypeDef(reader);
     }
   }
 
   /// Instantiate a typedef from a TypeDef token.
-  factory WinmdType.fromTypeDef(IMetaDataImport2 reader, int typeDefToken) {
+  factory TypeDef.fromTypeDefToken(IMetaDataImport2 reader, int typeDefToken) {
     final nRead = calloc<Uint32>();
     final tdFlags = calloc<Uint32>();
     final baseClassToken = calloc<Uint32>();
@@ -76,12 +74,8 @@ class WinmdType {
           typeDefToken, typeName, 256, nRead, tdFlags, baseClassToken);
 
       if (SUCCEEDED(hr)) {
-        return WinmdType(
-            reader,
-            typeDefToken,
-            typeName.unpackString(nRead.value),
-            tdFlags.value,
-            baseClassToken.value);
+        return TypeDef(reader, typeDefToken, typeName.unpackString(nRead.value),
+            tdFlags.value, baseClassToken.value);
       } else {
         throw WindowsException(hr);
       }
@@ -98,7 +92,7 @@ class WinmdType {
   /// Unless the TypeRef token is `IInspectable`, the COM parent interface for
   /// Windows Runtime classes, the TypeRef is used to obtain the host scope
   /// metadata file, from which the TypeDef can be found and returned.
-  factory WinmdType.fromTypeRef(IMetaDataImport2 reader, int typeRefToken) {
+  factory TypeDef.fromTypeRefToken(IMetaDataImport2 reader, int typeRefToken) {
     final ptkResolutionScope = calloc<Uint32>();
     final szName = calloc<Uint8>(256 * 2).cast<Utf16>();
     final pchName = calloc<Uint32>();
@@ -106,7 +100,7 @@ class WinmdType {
     // a token like IInspectable is out of reach of GetTypeRefProps, since it is
     // a plain COM object. These objects are returned as system types.
     if (systemTokens.containsKey(typeRefToken)) {
-      return WinmdType(reader, 0, systemTokens[typeRefToken]!);
+      return TypeDef(reader, 0, systemTokens[typeRefToken]!);
     }
 
     try {
@@ -118,11 +112,11 @@ class WinmdType {
 
         // TODO: Can we shortcut something by using the resolution scope token?
         try {
-          final newScope = WinmdStore.getScopeForType(typeName);
+          final newScope = MetadataStore.getScopeForType(typeName);
           return newScope.findTypeDef(typeName);
         } catch (exception) {
           if (systemTokens.containsValue(typeName)) {
-            return WinmdType(reader, 0, typeName);
+            return TypeDef(reader, 0, typeName);
           } else {
             throw WinmdException(
                 'Unable to find scope for $typeName [${typeRefToken.toHexString(32)}]...');
@@ -139,7 +133,7 @@ class WinmdType {
   }
 
   /// Converts an individual interface into a type.
-  WinmdType processInterfaceToken(int token) {
+  TypeDef processInterfaceToken(int token) {
     final pClass = calloc<Uint32>();
     final ptkIface = calloc<Uint32>();
 
@@ -147,9 +141,9 @@ class WinmdType {
       final hr = reader.GetInterfaceImplProps(token, pClass, ptkIface);
       if (SUCCEEDED(hr)) {
         if (tokenIsTypeRef(ptkIface.value)) {
-          return WinmdType.fromTypeRef(reader, ptkIface.value);
+          return TypeDef.fromTypeRefToken(reader, ptkIface.value);
         } else if (tokenIsTypeDef(pClass.value)) {
-          return WinmdType.fromTypeDef(reader, ptkIface.value);
+          return TypeDef.fromTypeDefToken(reader, ptkIface.value);
         }
       }
 
@@ -161,8 +155,8 @@ class WinmdType {
   }
 
   /// Enumerate all interfaces that this type implements.
-  List<WinmdType> get interfaces {
-    final interfaces = <WinmdType>[];
+  List<TypeDef> get interfaces {
+    final interfaces = <TypeDef>[];
 
     final phEnum = calloc<IntPtr>();
     final rImpls = calloc<Uint32>();
@@ -188,8 +182,8 @@ class WinmdType {
   }
 
   /// Enumerate all methods contained within this type.
-  List<WinmdMethod> get methods {
-    final methods = <WinmdMethod>[];
+  List<Method> get methods {
+    final methods = <Method>[];
 
     final phEnum = calloc<IntPtr>();
     final mdMethodDef = calloc<Uint32>();
@@ -200,7 +194,7 @@ class WinmdType {
       while (hr == S_OK) {
         final token = mdMethodDef.value;
 
-        methods.add(WinmdMethod.fromToken(reader, token));
+        methods.add(Method.fromToken(reader, token));
         hr = reader.EnumMethods(phEnum, token, mdMethodDef, 1, pcTokens);
       }
       return methods;
@@ -216,14 +210,14 @@ class WinmdType {
   /// Get a method matching the name, if one exists.
   ///
   /// Returns null if the method is not found.
-  WinmdMethod? findMethod(String methodName) {
+  Method? findMethod(String methodName) {
     final szName = TEXT(methodName);
     final pmb = calloc<Uint32>();
 
     try {
       final hr = reader.FindMethod(token, szName, nullptr, 0, pmb);
       if (SUCCEEDED(hr)) {
-        return WinmdMethod.fromToken(reader, pmb.value);
+        return Method.fromToken(reader, pmb.value);
       } else if (hr == CLDB_E_RECORD_NOTFOUND) {
         return null;
       } else {
@@ -236,8 +230,8 @@ class WinmdType {
   }
 
   /// Gets the type referencing this type's superclass.
-  WinmdType? get parent =>
-      token == 0 ? null : WinmdType.fromToken(reader, baseTypeToken);
+  TypeDef? get parent =>
+      token == 0 ? null : TypeDef.fromToken(reader, baseTypeToken);
 
   /// Get the GUID for this type.
   ///

@@ -7,18 +7,19 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+import 'tokenobject.dart';
+
 /// An attribute.
-class WinmdAttribute {
-  final IMetaDataImport2 reader;
-  final int token;
+class Attribute extends TokenObject {
   final int modifiedObjectToken;
   final int tokenType;
   final List<int> blob;
 
-  WinmdAttribute(this.reader, this.token, this.modifiedObjectToken,
-      this.tokenType, this.blob);
+  Attribute(IMetaDataImport2 reader, int token, this.modifiedObjectToken,
+      this.tokenType, this.blob)
+      : super(reader, token);
 
-  factory WinmdAttribute.fromToken(IMetaDataImport2 reader, int token) {
+  factory Attribute.fromToken(IMetaDataImport2 reader, int token) {
     final ptkObj = calloc<Uint32>();
     final ptkType = calloc<Uint32>();
     final ppBlob = calloc<Uint32>(1024);
@@ -30,7 +31,7 @@ class WinmdAttribute {
       print('Length: ${pcbBlob.value}');
       final attrBlob = ppBlob.asTypedList(pcbBlob.value).toList();
       final attribute =
-          WinmdAttribute(reader, token, ptkObj.value, ptkType.value, attrBlob);
+          Attribute(reader, token, ptkObj.value, ptkType.value, attrBlob);
 
       calloc.free(pcbBlob);
       calloc.free(ppBlob);

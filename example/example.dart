@@ -17,7 +17,7 @@ void printHeading(String heading) {
 void listTokens([String type = 'Windows.Devices.Bluetooth.BluetoothAdapter']) {
   printHeading('Typedefs in the metadata file containing $type');
 
-  final mdScope = WinmdStore.getScopeForType(type);
+  final mdScope = MetadataStore.getScopeForType(type);
 
   for (final type in mdScope.typeDefs.take(10)) {
     print('[${type.token.toHexString(32)}] ${type.typeName} '
@@ -29,7 +29,7 @@ void listEnums([String type = 'Windows.Globalization']) {
   printHeading('Enums implemented by $type');
 
   final file = metadataFileContainingType('Windows.Globalization.DayOfWeek');
-  final mdScope = WinmdStore.getScopeForFile(file.path);
+  final mdScope = MetadataStore.getScopeForFile(file.path);
   final enums = mdScope.enums;
 
   for (final enumEntry in enums) {
@@ -41,7 +41,7 @@ void listMethods(
     [String type = 'Windows.Networking.Connectivity.NetworkInformation']) {
   printHeading('First ten methods of $type');
 
-  final mdScope = WinmdStore.getScopeForType(type);
+  final mdScope = MetadataStore.getScopeForType(type);
   final winTypeDef = mdScope.findTypeDef(type);
   final methods = winTypeDef.methods.take(10);
 
@@ -53,7 +53,7 @@ void listParameters(
     String methodName = 'CompareDateTime']) {
   printHeading('Parameters of $methodName in $type');
 
-  final mdScope = WinmdStore.getScopeForType(type);
+  final mdScope = MetadataStore.getScopeForType(type);
 
   final winTypeDef = mdScope.findTypeDef(type);
   final method = winTypeDef.findMethod(methodName)!;
@@ -75,7 +75,7 @@ void listParameters(
 void listInterfaces([String type = 'Windows.Storage.Pickers.FolderPicker']) {
   printHeading('First 5 interfaces implemented by $type');
 
-  final mdScope = WinmdStore.getScopeForType(type);
+  final mdScope = MetadataStore.getScopeForType(type);
 
   final winTypeDef = mdScope.findTypeDef(type);
 
@@ -91,13 +91,13 @@ void listInterfaces([String type = 'Windows.Storage.Pickers.FolderPicker']) {
 void listGUID([String type = 'Windows.UI.Shell.IAdaptiveCard']) {
   printHeading('GUID for $type');
 
-  final mdScope = WinmdStore.getScopeForType(type);
+  final mdScope = MetadataStore.getScopeForType(type);
   final winTypeDef = mdScope.findTypeDef(type);
 
   print(winTypeDef.guid);
 }
 
-String methodSignature(WinmdMethod method) {
+String methodSignature(Method method) {
   final buffer = StringBuffer();
   buffer.write('   ${method.isStatic ? 'static ' : ''}'
       '${method.isFinal ? 'final ' : ''}'
@@ -115,7 +115,7 @@ String methodSignature(WinmdMethod method) {
   return buffer.toString();
 }
 
-String typeParams(WinmdMethod method) => method.parameters
+String typeParams(Method method) => method.parameters
     .map((param) => '${param.typeIdentifier.name} ${param.name}')
     .join(', ');
 
@@ -125,7 +125,7 @@ String convertTypeToProjection(
 
   final idlProjection = StringBuffer();
 
-  final mdScope = WinmdStore.getScopeForType(type);
+  final mdScope = MetadataStore.getScopeForType(type);
   final winTypeDef = mdScope.findTypeDef(type);
 
   if (winTypeDef.parent!.typeName == 'IInspectable') {
