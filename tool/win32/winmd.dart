@@ -9,14 +9,14 @@ class Win32Prototype {
       '${_method.returnType.typeIdentifier.nativeType} Function($nativeParams)';
 
   String get nativeParams => _method.parameters
-      .map((param) => '${param.typeIdentifier.nativeType} ${param.name!}')
+      .map((param) => '${param.typeIdentifier.nativeType} ${param.name}')
       .join(', ');
 
   String get dartPrototype =>
       '${_method.returnType.typeIdentifier.dartType} Function($dartParams)';
 
   String get dartParams => _method.parameters
-      .map((param) => '${param.typeIdentifier.dartType} ${param.name!}')
+      .map((param) => '${param.typeIdentifier.dartType} ${param.name}')
       .join(', ');
 
   String get dartFfiMapping => '${_method.returnType.typeIdentifier.dartType} '
@@ -26,7 +26,7 @@ class Win32Prototype {
       '    $dartPrototype\n'
       "  >('${_method.methodName}');\n"
       '  return _$_nameWithoutEncoding'
-      '(${_method.parameters.map((param) => (param.name!)).toList().join(', ')})'
+      '(${_method.parameters.map((param) => (param.name)).toList().join(', ')})'
       ';\n'
       '}\n';
 
