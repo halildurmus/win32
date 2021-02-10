@@ -21,15 +21,19 @@ void main() {
   print('This method is token #${winmdMethod.token}');
 
   final params = winmdMethod.parameters
-      .map((param) => '${param.typeIdentifier.nativeType} ${param.name!}')
+      .map((param) => '${param.typeIdentifier.nativeType} ${param.name}')
       .join(', ');
   print('The parameters are:\n$params');
 
   final lastParam = winmdMethod.parameters.last;
-  final attrs = lastParam.attributes;
+  print('Parameter: ');
+  print(lastParam.signatureBlob.map((b) => b.toRadixString(8)).toList());
 
+  print('Attributes: ');
+  final attrs = lastParam.attributes;
   for (final attr in attrs) {
-    print('attr: ${attr.blob.map((b) => b.toRadixString(16)).toList()}');
+    print(
+        'attr: ${attr.signatureBlob.map((b) => b.toRadixString(16)).toList()}');
   }
 
   print('There are ${attrs.length} attributes.');
