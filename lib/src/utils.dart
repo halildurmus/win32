@@ -11,6 +11,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'constants.dart';
+import 'typeidentifier.dart';
 
 class WinmdException implements Exception {
   final String message;
@@ -21,25 +22,27 @@ class WinmdException implements Exception {
   String toString() => 'WinmdException: $message';
 }
 
-class Tuple<T1, T2> {
+class TypeTuple {
   /// Returns the first item of the tuple
-  final T1 item1;
+  final TypeIdentifier typeIdentifier;
 
   /// Returns the second item of the tuple
-  final T2 item2;
+  final int offsetLength;
 
   /// Creates a new tuple value with the specified items.
-  const Tuple(this.item1, this.item2);
+  const TypeTuple(this.typeIdentifier, this.offsetLength);
 
   @override
-  String toString() => '[$item1, $item2]';
+  String toString() => '[$typeIdentifier, $offsetLength]';
 
   @override
   bool operator ==(Object other) =>
-      other is Tuple && other.item1 == item1 && other.item2 == item2;
+      other is TypeTuple &&
+      other.typeIdentifier == typeIdentifier &&
+      other.offsetLength == offsetLength;
 
   @override
-  int get hashCode => item1.hashCode * item2.hashCode;
+  int get hashCode => typeIdentifier.hashCode * offsetLength.hashCode;
 }
 
 extension CamelCaseConversion on String {

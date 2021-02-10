@@ -9,13 +9,13 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'constants.dart';
-import 'tokenobject.dart';
+import '_base.dart';
 import 'parameter.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
 
-class Method extends TokenObject {
+class Method extends AttributeObject {
   String methodName;
   int methodFlags;
   Uint8List signatureBlob;
@@ -99,7 +99,7 @@ class Method extends TokenObject {
   /// consumed.
   ///
   /// Details on the blob format can be found at §II.23.1.16 of ECMA-335.
-  Tuple<TypeIdentifier, int> _parseTypeFromSignature(Uint8List signatureBlob) {
+  TypeTuple _parseTypeFromSignature(Uint8List signatureBlob) {
     final paramType = signatureBlob.first;
     final runtimeType = TypeIdentifier.fromValue(paramType);
     var dataLength = 0;
@@ -119,20 +119,21 @@ class Method extends TokenObject {
       runtimeType.corType = CorElementType.ELEMENT_TYPE_ARRAY;
     } else if (runtimeType.corType == CorElementType.ELEMENT_TYPE_GENERICINST) {
       final classTuple = _parseTypeFromSignature(signatureBlob.sublist(1));
-      runtimeType.name = classTuple.item1.name;
+      runtimeType.name = classTuple.typeIdentifier.name;
       final argsCount =
-          signatureBlob[1 + classTuple.item2]; // GENERICINST + class
-      dataLength = classTuple.item2 + 2; // GENERICINST + class + argsCount
+          signatureBlob[1 + classTuple.offsetLength]; // GENERICINST + class
+      dataLength =
+          classTuple.offsetLength + 2; // GENERICINST + class + argsCount
       for (var idx = 0; idx < argsCount; idx++) {
         final arg = _parseTypeFromSignature(signatureBlob.sublist(dataLength));
-        dataLength += arg.item2;
-        runtimeType.typeArgs.add(arg.item1);
+        dataLength += arg.offsetLength;
+        runtimeType.typeArgs.add(arg.typeIdentifier);
       }
     } else {
       dataLength = 1;
       runtimeType.name = runtimeType.nativeType;
     }
-    return Tuple<TypeIdentifier, int>(runtimeType, dataLength);
+    return TypeTuple(runtimeType, dataLength);
   }
 
   String get callingConvention {
@@ -160,8 +161,8 @@ class Method extends TokenObject {
     var blobPtr = hasGenericParameters == false ? 2 : 3;
 
     if (isGetProperty) {
-      returnType = Parameter.fromTypeIdentifier(
-          reader, _parseTypeFromSignature(signatureBlob.sublist(2)).item1)
+      returnType = Parameter.fromTypeIdentifier(reader,
+          _parseTypeFromSignature(signatureBlob.sublist(2)).typeIdentifier)
         ..name = '';
     } else if (isSetProperty) {
       returnType = Parameter.fromVoid(reader);
@@ -178,8 +179,8 @@ class Method extends TokenObject {
           parameters = parameters.sublist(1);
           final returnTypeTuple =
               _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
-          returnType.typeIdentifier = returnTypeTuple.item1;
-          blobPtr += returnTypeTuple.item2;
+          returnType.typeIdentifier = returnTypeTuple.typeIdentifier;
+          blobPtr += returnTypeTuple.offsetLength;
         } else {
           // While in Windows Runtime, a zeroth parameter in param.EnumParams is
           // provided, in Win32 EnumParams may not return a zeroth parameter
@@ -187,33 +188,37 @@ class Method extends TokenObject {
           // signature.
           final returnTypeTuple =
               _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
-          returnType =
-              Parameter.fromTypeIdentifier(reader, returnTypeTuple.item1);
-          blobPtr += returnTypeTuple.item2;
+          returnType = Parameter.fromTypeIdentifier(
+              reader, returnTypeTuple.typeIdentifier);
+          blobPtr += returnTypeTuple.offsetLength;
         }
 
         // Parse each method parameter
         while (paramsIndex < parameters.length) {
           final runtimeType =
               _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
-          if (runtimeType.item1.corType == CorElementType.ELEMENT_TYPE_ARRAY) {
+          if (runtimeType.typeIdentifier.corType ==
+              CorElementType.ELEMENT_TYPE_ARRAY) {
             blobPtr +=
                 _parseArray(signatureBlob.sublist(blobPtr + 1), paramsIndex)! +
                     2;
             paramsIndex++; //we've added two parameters here
-          } else if (runtimeType.item1.corType ==
+          } else if (runtimeType.typeIdentifier.corType ==
               CorElementType.ELEMENT_TYPE_PTR) {
             // Pointer<T>, so parse the type of T.
-            blobPtr += runtimeType.item2;
+            blobPtr += runtimeType.offsetLength;
             final ptrType =
                 _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
-            parameters[paramsIndex].typeIdentifier = runtimeType.item1;
-            parameters[paramsIndex].typeIdentifier.typeArgs.add(ptrType.item1);
-            blobPtr += ptrType.item2;
+            parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
+            parameters[paramsIndex]
+                .typeIdentifier
+                .typeArgs
+                .add(ptrType.typeIdentifier);
+            blobPtr += ptrType.offsetLength;
           } else {
-            parameters[paramsIndex].typeIdentifier = runtimeType.item1;
+            parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
 
-            blobPtr += runtimeType.item2;
+            blobPtr += runtimeType.offsetLength;
           }
           paramsIndex++;
         }
@@ -258,6 +263,6 @@ class Method extends TokenObject {
     parameters[paramsIndex + 1].name = 'value';
     parameters[paramsIndex + 1].typeIdentifier.name = 'Pointer<IntPtr>';
 
-    return typeTuple.item2;
+    return typeTuple.offsetLength;
   }
 }

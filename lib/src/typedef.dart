@@ -8,13 +8,13 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'constants.dart';
-import 'tokenobject.dart';
+import '_base.dart';
 import 'method.dart';
 import 'metadatastore.dart';
 import 'utils.dart';
 
 /// Represents a TypeDef in the Windows Metadata file
-class TypeDef extends TokenObject {
+class TypeDef extends AttributeObject {
   final String typeName;
   final int flags;
   final int baseTypeToken;

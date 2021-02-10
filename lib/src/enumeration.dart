@@ -51,12 +51,12 @@ class Enumeration extends TypeDef {
       if (SUCCEEDED(hr)) {
         final fieldName = szField.unpackString(pchField.value);
         final fieldValue = ppValue.cast<Uint32>().value;
-        print(fieldName +
-            ppvSigBlob
-                .cast<Uint8>()
-                .asTypedList(pcbSigBlob.value)
-                .map((e) => e.toHexString(8))
-                .join(' '));
+        // print(fieldName +
+        //     ppvSigBlob
+        //         .cast<Uint8>()
+        //         .asTypedList(pcbSigBlob.value)
+        //         .map((e) => e.toHexString(8))
+        //         .join(' '));
 
         return Field(fieldName, fieldValue);
       } else {
@@ -102,8 +102,6 @@ class Enumeration extends TypeDef {
 
       calloc.free(rgTypeDefs);
       calloc.free(pcTokens);
-
-      // dispose phEnum crashes here, so leave it callocd
     }
   }
 }

@@ -8,7 +8,7 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'tokenobject.dart';
+import '_base.dart';
 
 /// An attribute.
 class Attribute extends TokenObject {
@@ -26,22 +26,20 @@ class Attribute extends TokenObject {
     final ppBlob = calloc<Uint8>(1024);
     final pcbBlob = calloc<Uint32>();
 
-    final hr = reader.GetCustomAttributeProps(
-        token, ptkObj, ptkType, Pointer.fromAddress(ppBlob.address), pcbBlob);
-    if (SUCCEEDED(hr)) {
-      print('Length: ${pcbBlob.value}');
-      final attrBlob = ppBlob.asTypedList(pcbBlob.value);
-      final attribute =
-          Attribute(reader, token, ptkObj.value, ptkType.value, attrBlob);
-
+    try {
+      final hr = reader.GetCustomAttributeProps(
+          token, ptkObj, ptkType, Pointer.fromAddress(ppBlob.address), pcbBlob);
+      if (SUCCEEDED(hr)) {
+        return Attribute(reader, token, ptkObj.value, ptkType.value,
+            ppBlob.asTypedList(pcbBlob.value));
+      } else {
+        throw WindowsException(hr);
+      }
+    } finally {
       calloc.free(pcbBlob);
       calloc.free(ppBlob);
       calloc.free(ptkType);
       calloc.free(ptkObj);
-
-      return attribute;
-    } else {
-      throw WindowsException(hr);
     }
   }
 }

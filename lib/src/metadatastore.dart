@@ -15,12 +15,13 @@ import 'typedef.dart';
 /// Use this to obtain a reference of a scope without creating unnecessary
 /// copies or cycles.
 class MetadataStore {
-  static late IMetaDataDispenser dispenser;
+  static late final IMetaDataDispenser dispenser;
   static final cache = <String, IMetaDataImport2>{};
 
   static bool isInitialized = false;
 
   static void initialize() {
+    // This must have the same object lifetime as MetadataStore itself.
     final dispenserObject = calloc<Pointer>();
 
     final hr = MetaDataGetDispenser(convertToCLSID(CLSID_CorMetaDataDispenser),

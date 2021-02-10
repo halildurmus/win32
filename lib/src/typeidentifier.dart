@@ -147,7 +147,7 @@ class TypeIdentifier {
       case CorElementType.ELEMENT_TYPE_FNPTR:
         return 'Pointer';
       default:
-        // For now, only do this for Win32 types
+        // If it's a Win32 type, we know how to get the type
         if (type != null && type!.typeName.startsWith('Windows.Win32')) {
           final win32Type = type?.typeName.split('.').last ?? '';
           final ffiNativeType = convertToFFIType(win32Type);
@@ -218,7 +218,7 @@ class TypeIdentifier {
       case CorElementType.ELEMENT_TYPE_U:
         return 'IntPtr';
       default:
-        // For now, only do this for Win32 types
+        // If it's a Win32 type, we know how to get the type
         if (type != null && type!.typeName.startsWith('Windows.Win32')) {
           final win32Type = type?.typeName.split('.').last ?? '';
           final ffiNativeType = convertToFFIType(win32Type);
