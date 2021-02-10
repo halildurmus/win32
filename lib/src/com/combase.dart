@@ -45,7 +45,7 @@ Pointer<GUID> convertToIID(String strIID) {
 /// Converts a Dart string into an CLSID using the [CLSIDFromString] call.
 ///
 /// Returns a Pointer to the allocated CLSID. It is the caller's responsibility
-/// to deallocate the pointer when they are finished with it
+/// to deallocate the pointer when they are finished with it.
 ///
 /// {@category com}
 Pointer<GUID> convertToCLSID(String strCLSID) {
