@@ -162,7 +162,7 @@ class Method extends TokenObject {
     if (isGetProperty) {
       returnType = Parameter.fromTypeIdentifier(
           reader, _parseTypeFromSignature(signatureBlob.sublist(2)).item1)
-        ..name = 'value';
+        ..name = '';
     } else if (isSetProperty) {
       returnType = Parameter.fromVoid(reader);
     } else {

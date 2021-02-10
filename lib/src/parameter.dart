@@ -3,6 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'dart:ffi';
+import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
@@ -14,14 +15,14 @@ import 'attribute.dart';
 
 /// A parameter or return type.
 class Parameter extends TokenObject {
-  final int? sequence;
+  final int sequence;
   final int attributeFlags;
   TypeIdentifier typeIdentifier;
-  String? name;
-  final String constVal;
+  String name;
+  final Uint8List signatureBlob;
 
   Parameter(IMetaDataImport2 reader, int token, this.sequence,
-      this.attributeFlags, this.typeIdentifier, this.name, this.constVal)
+      this.attributeFlags, this.typeIdentifier, this.name, this.signatureBlob)
       : super(reader, token);
 
   factory Parameter.fromToken(IMetaDataImport2 reader, int token) {
@@ -33,7 +34,7 @@ class Parameter extends TokenObject {
     final pchName = calloc<Uint32>();
     final pdwAttr = calloc<Uint32>();
     final pdwCPlusTypeFlag = calloc<Uint32>();
-    final ppValue = calloc<Uint16>(256).cast<Utf16>();
+    final ppValue = calloc<Uint8>(256);
     final pcchValue = calloc<Uint32>();
 
     final hr = reader.GetParamProps(token, pmd, pulSequence, szName, 256,
@@ -48,7 +49,7 @@ class Parameter extends TokenObject {
             pdwAttr.value,
             TypeIdentifier.fromValue(pdwCPlusTypeFlag.value),
             szName.unpackString(pchName.value),
-            ppValue.unpackString(pcchValue.value));
+            ppValue.asTypedList(pcchValue.value));
       }
 
       calloc.free(pmd);
@@ -68,10 +69,10 @@ class Parameter extends TokenObject {
 
   factory Parameter.fromTypeIdentifier(
           IMetaDataImport2 reader, TypeIdentifier runtimeType) =>
-      Parameter(reader, 0, null, 0, runtimeType, null, '');
+      Parameter(reader, 0, 0, 0, runtimeType, '', Uint8List(0));
 
-  factory Parameter.fromVoid(IMetaDataImport2 reader) => Parameter(reader, 0,
-      null, 0, TypeIdentifier(CorElementType.ELEMENT_TYPE_VOID), null, '');
+  factory Parameter.fromVoid(IMetaDataImport2 reader) => Parameter(reader, 0, 0,
+      0, TypeIdentifier(CorElementType.ELEMENT_TYPE_VOID), '', Uint8List(0));
 
   /// Enumerate all attributes that this parameter has.
   List<Attribute> get attributes {

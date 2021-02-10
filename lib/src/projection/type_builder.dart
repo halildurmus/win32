@@ -83,7 +83,7 @@ class TypeBuilder {
       }
 
       for (final mdParam in mdMethod.parameters) {
-        method.parameters.add(ParameterProjection(mdParam.name!,
+        method.parameters.add(ParameterProjection(mdParam.name,
             nativeType: nativeType(mdParam.typeIdentifier),
             dartType: dartType(mdParam.typeIdentifier)));
       }
