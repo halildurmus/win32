@@ -1,3 +1,6 @@
+## 2.0.0-nullsafety.11
+ - Fixes `Method not found: 'Utf16.toUtf16'` ([#155](https://github.com/timsneath/win32/issues/155))
+
 ## 2.0.0-nullsafety.10
 
 - Make VARIANT more representative of the underlying type.
