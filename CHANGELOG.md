@@ -1,3 +1,7 @@
+## 2.0.0-nullsafety.12
+
+- Fix a string bug
+
 ## 2.0.0-nullsafety.11
 
 - Make VARIANT more representative of the underlying type.
