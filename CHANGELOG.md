@@ -1,3 +1,7 @@
+## 0.3.0-dev.2
+
+- Updated to FFI 1.0 and adopted breaking changes
+
 ## 0.3.0-dev.1
 
 - Refactoring

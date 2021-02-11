@@ -58,7 +58,7 @@ class Scope {
 
   /// Find a typedef by name.
   TypeDef findTypeDef(String type) {
-    final szTypeDef = TEXT(type);
+    final szTypeDef = type.toNativeUtf16();
     final ptkTypeDef = calloc<Uint32>();
 
     try {

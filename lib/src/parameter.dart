@@ -47,7 +47,7 @@ class Parameter extends AttributeObject {
             pulSequence.value,
             pdwAttr.value,
             TypeIdentifier.fromValue(pdwCPlusTypeFlag.value),
-            szName.unpackString(pchName.value),
+            szName.toDartString(length: pchName.value),
             ppValue.asTypedList(pcchValue.value));
       }
 

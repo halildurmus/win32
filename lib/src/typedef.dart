@@ -74,8 +74,12 @@ class TypeDef extends AttributeObject {
           typeDefToken, typeName, 256, nRead, tdFlags, baseClassToken);
 
       if (SUCCEEDED(hr)) {
-        return TypeDef(reader, typeDefToken, typeName.unpackString(nRead.value),
-            tdFlags.value, baseClassToken.value);
+        return TypeDef(
+            reader,
+            typeDefToken,
+            typeName.toDartString(length: nRead.value),
+            tdFlags.value,
+            baseClassToken.value);
       } else {
         throw WindowsException(hr);
       }
@@ -108,7 +112,7 @@ class TypeDef extends AttributeObject {
           typeRefToken, ptkResolutionScope, szName, 256, pchName);
 
       if (SUCCEEDED(hr)) {
-        final typeName = szName.unpackString(pchName.value);
+        final typeName = szName.toDartString(length: pchName.value);
 
         // TODO: Can we shortcut something by using the resolution scope token?
         try {
@@ -211,7 +215,7 @@ class TypeDef extends AttributeObject {
   ///
   /// Returns null if the method is not found.
   Method? findMethod(String methodName) {
-    final szName = TEXT(methodName);
+    final szName = methodName.toNativeUtf16();
     final pmb = calloc<Uint32>();
 
     try {
@@ -237,7 +241,8 @@ class TypeDef extends AttributeObject {
   ///
   /// Returns null if a GUID couldn't be found.
   String? get guid {
-    final attributeName = TEXT('Windows.Foundation.Metadata.GuidAttribute');
+    final attributeName =
+        'Windows.Foundation.Metadata.GuidAttribute'.toNativeUtf16();
     final ppData = calloc<IntPtr>();
     final pcbData = calloc<Uint32>();
 
