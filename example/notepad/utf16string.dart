@@ -1,4 +1,5 @@
 import 'dart:ffi';
+
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
@@ -18,7 +19,7 @@ class Utf16String {
 
   factory Utf16String.fromString(String string) {
     final value = Utf16String(string.length + 1);
-    value.pointer = Utf16.toUtf16(string);
+    value.pointer = string.toNativeUtf16();
     value.length = string.length;
 
     return value;

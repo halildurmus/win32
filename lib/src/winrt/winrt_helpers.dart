@@ -52,7 +52,8 @@ String convertFromHString(Pointer<IntPtr> hstring) {
 Pointer<IntPtr> convertToHString(String string) {
   final hString = calloc<IntPtr>();
   // Create a HSTRING representing the object
-  final hr = WindowsCreateString(Utf16.toUtf16(string), string.length, hString);
+  final hr =
+      WindowsCreateString(string.toNativeUtf16(), string.length, hString);
   if (FAILED(hr)) {
     throw WindowsException(hr);
   } else {
@@ -78,7 +79,7 @@ Pointer<IntPtr> CreateObject(String className, String iid) {
   try {
     // Create a HSTRING representing the object
     var hr = WindowsCreateString(
-        Utf16.toUtf16(className), className.length, hstrClass);
+        className.toNativeUtf16(), className.length, hstrClass);
     if (FAILED(hr)) {
       throw WindowsException(hr);
     }
