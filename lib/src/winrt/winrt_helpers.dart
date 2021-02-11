@@ -33,7 +33,7 @@ String convertFromHString(Pointer<IntPtr> hstring) {
 
   try {
     final stringPtr = WindowsGetStringRawBuffer(hstring.value, stringLength);
-    final dartString = stringPtr.toDartString(length: stringLength.value - 1);
+    final dartString = stringPtr.toDartString();
 
     return dartString;
   } finally {
