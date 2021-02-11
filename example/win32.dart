@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:winmd/winmd.dart';
 
 void main() {
@@ -13,9 +15,43 @@ void main() {
   final sortedMethods = gdiApi.methods
     ..sort((a, b) => a.methodName.compareTo(b.methodName));
 
+  print('------');
+  // int i = 0;
+  for (final method in sortedMethods) {
+    for (final param in method.parameters) {
+      for (final attr in param.attributes) {
+        if (attr.tokenType == 0x0A000004) {
+          // print('NativeTypeInfo ${method.methodName} ${param.name}');
+          if (attr.signatureBlob[2] == 0x14) // ASCII
+          {
+            print('ASCII: ${method.methodName} ${param.name}');
+          } else if (attr.signatureBlob[2] == 0x15) // Unicode
+          {
+            print('Unicode: ${method.methodName} ${param.name}');
+          }
+        }
+      }
+
+      // if (param.attributes.length == 1) {
+      //   // if (param.attributes.last.signatureBlob[2] == 0x15) {
+      //   print('${method.methodName} ${param.name}');
+      //   // }
+      // }
+    }
+  }
+  print('------');
+
   // Find a specific function
+  // const funcName = 'AddFontResourceW';
   const funcName = 'AddFontResourceW';
   final winmdMethod = sortedMethods.firstWhere((m) => m.methodName == funcName);
+
+  final mAttrs = winmdMethod.attributes;
+  print('There are ${mAttrs.length} method attributes:');
+  for (final attr in mAttrs) {
+    print(
+        'attr: ${attr.signatureBlob.map((b) => b.toRadixString(16)).toList()}');
+  }
 
   // Print out some information about it
   print('This method is token #${winmdMethod.token}');
@@ -33,7 +69,7 @@ void main() {
   print('There are ${attrs.length} attributes:');
   for (final attr in attrs) {
     print(
-        'attr: ${attr.signatureBlob.map((b) => b.toRadixString(16)).toList()}');
+        'attr [${attr.tokenType.toRadixString(16)}]: ${attr.signatureBlob.map((b) => b.toRadixString(16)).toList()}');
   }
 
   print('Uncompressed: ');

@@ -42,7 +42,7 @@ class Attribute extends TokenObject {
       }
     } finally {
       calloc.free(pcbBlob);
-      // calloc.free(ppBlob);
+      calloc.free(ppBlob);
       calloc.free(ptkType);
       calloc.free(ptkObj);
     }

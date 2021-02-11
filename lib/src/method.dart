@@ -74,7 +74,7 @@ class Method extends AttributeObject {
       calloc.free(szMethod);
       calloc.free(pchMethod);
       calloc.free(pdwAttr);
-      // calloc.free(ppvSigBlob);
+      calloc.free(ppvSigBlob);
       calloc.free(pcbSigBlob);
       calloc.free(pulCodeRVA);
       calloc.free(pdwImplFlags);

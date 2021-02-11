@@ -2,8 +2,18 @@ import 'dart:typed_data';
 
 import 'utils.dart';
 
-// attr: [b4, d3, b1, e4]
-// attr: [b8, d6, b1, e4, 99, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+// attr: [1, 0, 0, 0]
+
+// AddFontResourceW
+//   #prolog LPWSTR  // // // #nmd fld BOOL 16 IsNullTerminated                                                TRUE
+// attr: [1, 0, 15, 0, 0, 0, 1, 0, 53, 02, 10, 49, 73, 4e, 75, 6c, 6c, 54, 65, 72, 6d, 69, 6e, 61, 74, 65, 64, 1]
+
+// AddFontResourceA
+// attr: [1, 0, 14, 0, 0, 0, 1, 0, 53, 02, 10, 49, 73, 4e, 75, 6c, 6c, 54, 65, 72, 6d, 69, 6e, 61, 74, 65, 64, 1]
+
+// PolyBezier
+//     #prolog  ARRAY// // // #nmd//fld U2  14 SizeParamIndex                                          0x0002
+// attr: [1, 0, 2a, 0, 0, 0, 1, 0, 53, 06, 0e, 53, 69, 7a, 65, 50, 61, 72, 61, 6d, 49, 6e, 64, 65, 78, 2, 0]
 
 class SignatureDecoder {
   final Uint8List signature;
