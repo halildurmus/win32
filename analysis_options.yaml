@@ -1,7 +1,7 @@
 include: package:pedantic/analysis_options.yaml
 
 analyzer:
-  exclude: [example/explorer/**, tool/winmd/**]
+  exclude: [example/explorer/**]
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false
