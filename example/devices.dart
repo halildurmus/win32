@@ -17,25 +17,30 @@ void displayVolumePaths(String volumeName) {
   // More sophisticated solutions can be found online
   final pathNamePtr = calloc<Uint16>(MAX_PATH * 4).cast<Utf16>();
   final charCount = calloc<Uint32>();
-  charCount.value = MAX_PATH;
-  error = GetVolumePathNamesForVolumeName(
-      Utf16.toUtf16(volumeName), pathNamePtr, charCount.value, charCount);
+  final volumeNamePtr = volumeName.toNativeUtf16();
 
-  if (error != 0) {
-    if (charCount.value > 1) {
-      for (final path in pathNamePtr.unpackStringArray(charCount.value)) {
-        print(path);
+  try {
+    charCount.value = MAX_PATH;
+    error = GetVolumePathNamesForVolumeName(
+        volumeNamePtr, pathNamePtr, charCount.value, charCount);
+
+    if (error != 0) {
+      if (charCount.value > 1) {
+        for (final path in pathNamePtr.unpackStringArray(charCount.value)) {
+          print(path);
+        }
+      } else {
+        print('[none]');
       }
     } else {
-      print('[none]');
+      error = GetLastError();
+      print('GetVolumePathNamesForVolumeName failed with error code $error');
     }
-  } else {
-    error = GetLastError();
-    print('GetVolumePathNamesForVolumeName failed with error code $error');
+  } finally {
+    calloc.free(volumeNamePtr);
+    calloc.free(pathNamePtr);
+    calloc.free(charCount);
   }
-
-  calloc.free(pathNamePtr);
-  calloc.free(charCount);
 }
 
 void main() {
