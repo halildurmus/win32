@@ -29,12 +29,20 @@ void main() {
   print('Parameter: ');
   print(lastParam.signatureBlob.map((b) => b.toRadixString(8)).toList());
 
-  print('Attributes: ');
   final attrs = lastParam.attributes;
+  print('There are ${attrs.length} attributes:');
   for (final attr in attrs) {
     print(
         'attr: ${attr.signatureBlob.map((b) => b.toRadixString(16)).toList()}');
   }
 
-  print('There are ${attrs.length} attributes.');
+  print('Uncompressed: ');
+  var lastAttrSig = attrs.last.signatureBlob;
+  final uncompr = <int>[];
+  do {
+    final dataNugget = corSigUncompressData(lastAttrSig);
+    uncompr.add(dataNugget.data);
+    lastAttrSig = lastAttrSig.sublist(dataNugget.dataLength);
+  } while (lastAttrSig.isNotEmpty);
+  print('uncompr: ${uncompr.map((b) => b.toRadixString(16)).toList()}');
 }

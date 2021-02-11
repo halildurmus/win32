@@ -57,7 +57,7 @@ class Parameter extends AttributeObject {
       calloc.free(pchName);
       calloc.free(pdwAttr);
       calloc.free(pdwCPlusTypeFlag);
-      calloc.free(ppValue);
+      // calloc.free(ppValue);
       calloc.free(pcchValue);
 
       return parameter;
