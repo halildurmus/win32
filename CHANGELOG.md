@@ -1,3 +1,9 @@
+## 2.0.0-nullsafety.11
+
+- Make VARIANT more representative of the underlying type.
+- Add more tests.
+- Bump to ffi 1.0.0
+
 ## 2.0.0-nullsafety.10
 
 - Make VARIANT more representative of the underlying type.
