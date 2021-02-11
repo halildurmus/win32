@@ -67,7 +67,7 @@ class Method extends AttributeObject {
         return Method(
             reader,
             token,
-            szMethod.toDartString(length: pchMethod.value),
+            szMethod.toDartString(length: pchMethod.value - 1),
             pdwAttr.value,
             signature,
             pulCodeRVA.value,

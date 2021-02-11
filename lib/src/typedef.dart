@@ -77,7 +77,7 @@ class TypeDef extends AttributeObject {
         return TypeDef(
             reader,
             typeDefToken,
-            typeName.toDartString(length: nRead.value),
+            typeName.toDartString(length: nRead.value - 1),
             tdFlags.value,
             baseClassToken.value);
       } else {
@@ -112,7 +112,7 @@ class TypeDef extends AttributeObject {
           typeRefToken, ptkResolutionScope, szName, 256, pchName);
 
       if (SUCCEEDED(hr)) {
-        final typeName = szName.toDartString(length: pchName.value);
+        final typeName = szName.toDartString(length: pchName.value - 1);
 
         // TODO: Can we shortcut something by using the resolution scope token?
         try {
