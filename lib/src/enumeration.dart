@@ -49,7 +49,7 @@ class Enumeration extends TypeDef {
           pcchValue);
 
       if (SUCCEEDED(hr)) {
-        final fieldName = szField.toDartString(length: pchField.value - 1);
+        final fieldName = szField.toDartString();
         final fieldValue = ppValue.cast<Uint32>().value;
         // print(fieldName +
         //     ppvSigBlob

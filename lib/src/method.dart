@@ -64,14 +64,8 @@ class Method extends AttributeObject {
       if (SUCCEEDED(hr)) {
         final signature = Pointer<Uint8>.fromAddress(ppvSigBlob.value)
             .asTypedList(pcbSigBlob.value);
-        return Method(
-            reader,
-            token,
-            szMethod.toDartString(length: pchMethod.value - 1),
-            pdwAttr.value,
-            signature,
-            pulCodeRVA.value,
-            pdwImplFlags.value);
+        return Method(reader, token, szMethod.toDartString(), pdwAttr.value,
+            signature, pulCodeRVA.value, pdwImplFlags.value);
       } else {
         throw WindowsException(hr);
       }
