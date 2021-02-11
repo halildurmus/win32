@@ -17,8 +17,8 @@ final hInstance = GetModuleHandle(nullptr);
 String textEntered = '';
 
 void main() {
-  // Allocate 2KB, which is more than enough space for the dialog in memory.
-  final ptr = calloc<Uint16>(1024);
+  // Allocate 8KB, which is more than enough space for the dialog in memory.
+  final ptr = calloc<Uint16>(4096);
   var idx = 0;
 
   idx += ptr.elementAt(idx).cast<DLGTEMPLATE>().setDialog(
@@ -83,7 +83,7 @@ void main() {
       cy: 20,
       id: ID_EDITTEXT,
       windowSystemClass: 0x0081, // edit
-      text: '');
+      text: 'Enter text');
 
   final lpDialogFunc = Pointer.fromFunction<DlgProc>(dialogReturnProc, 0);
 
@@ -114,7 +114,7 @@ int dialogReturnProc(int hwndDlg, int message, int wParam, int lParam) {
             print('OK');
             final textPtr = calloc<Uint16>(256).cast<Utf16>();
             GetDlgItemText(hwndDlg, ID_EDITTEXT, textPtr, 256);
-            textEntered = textPtr.unpackString(256);
+            textEntered = textPtr.toDartString();
             calloc.free(textPtr);
             EndDialog(hwndDlg, wParam);
             return TRUE;

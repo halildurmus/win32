@@ -19,8 +19,7 @@ void printWallpaper() {
 
     switch (hr) {
       case S_OK:
-        final path =
-            Pointer<Utf16>.fromAddress(pathPtr.value).unpackString(1024);
+        final path = Pointer<Utf16>.fromAddress(pathPtr.value).toDartString();
         print(
             path.isEmpty ? 'No wallpaper is set.' : 'Wallpaper path is: $path');
         break;

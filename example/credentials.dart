@@ -55,7 +55,7 @@ void read(String credentialName) {
     return;
   }
   final cred = credPointer.value.ref;
-  print('Success. Read username ${cred.UserName.unpackString(100)} '
+  print('Success. Read username ${cred.UserName.toDartString()} '
       'password size: ${cred.CredentialBlobSize}');
   final blob = cred.CredentialBlob.asTypedList(cred.CredentialBlobSize);
   final password = utf8.decode(blob);

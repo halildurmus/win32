@@ -31,7 +31,7 @@ Object getRegistryValue(int key, String subKey, String valueName) {
         if (dataType.value == REG_DWORD) {
           dataValue = data.value;
         } else if (dataType.value == REG_SZ) {
-          dataValue = data.cast<Utf16>().unpackString(dataSize.value);
+          dataValue = data.cast<Utf16>().toDartString();
         } else {
           // other data types are available, but this is a sample
         }

@@ -140,7 +140,7 @@ void main() {
   final physicalMonitorDescription = physicalMonitorArray
       .elementAt(sizeOf<IntPtr>())
       .cast<Utf16>()
-      .unpackString(128);
+      .toDartString();
   print('Physical monitor description: $physicalMonitorDescription');
 
   final monitorCapabilitiesPtr = calloc<Uint32>();

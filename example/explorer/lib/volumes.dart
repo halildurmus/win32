@@ -62,7 +62,7 @@ class Volumes {
     }
 
     while (true) {
-      final volumeName = volumeNamePtr.unpackString(MAX_PATH);
+      final volumeName = volumeNamePtr.toDartString();
 
       //  Skip the \\?\ prefix and remove the trailing backslash.
       final shortVolumeName = volumeName.substring(4, volumeName.length - 1);
@@ -77,8 +77,8 @@ class Volumes {
         throw Exception('QueryDosDevice failed with error code $error');
       }
 
-      _volumes.add(Volume(deviceName.unpackString(MAX_PATH), volumeName,
-          GetVolumePaths(volumeName)));
+      _volumes.add(Volume(
+          deviceName.toDartString(), volumeName, GetVolumePaths(volumeName)));
 
       final success = FindNextVolume(hFindVolume, volumeNamePtr, MAX_PATH);
       if (success == 0) {

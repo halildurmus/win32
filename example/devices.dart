@@ -55,7 +55,7 @@ void main() {
   }
 
   while (true) {
-    final volumeName = volumeNamePtr.unpackString(MAX_PATH);
+    final volumeName = volumeNamePtr.toDartString();
 
     //  Skip the \\?\ prefix and remove the trailing backslash.
     final shortVolumeName = volumeName.substring(4, volumeName.length - 1);
@@ -70,7 +70,7 @@ void main() {
       break;
     }
 
-    print('\nFound a device:\n${deviceName.unpackString(MAX_PATH)}');
+    print('\nFound a device:\n${deviceName.toDartString()}');
     print('Volume name: $volumeName');
     print('Paths:');
     displayVolumePaths(volumeName);

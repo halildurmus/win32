@@ -69,7 +69,7 @@ void main() {
       final path = Pointer<Utf16>.fromAddress(pathPtr.value);
 
       // MAX_PATH may truncate early if long filename support is enabled
-      final pathRes = path.unpackString(MAX_PATH);
+      final pathRes = path.toDartString();
       print('Result: $pathRes');
 
       hr = item.Release();

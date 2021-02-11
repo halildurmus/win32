@@ -18,7 +18,7 @@ String getTemporaryPath() {
     calloc.free(buffer);
     throw WindowsException(error);
   } else {
-    var path = buffer.unpackString(MAX_PATH);
+    var path = buffer.toDartString();
 
     // GetTempPath adds a trailing backslash, but SHGetKnownFolderPath does not.
     // Strip off trailing backslash for consistency with other methods here.
@@ -37,7 +37,7 @@ String getFolderPath() {
   final result = SHGetFolderPath(NULL, CSIDL_DESKTOP, NULL, 0, path);
 
   if (SUCCEEDED(result)) {
-    return path.unpackString(MAX_PATH);
+    return path.toDartString();
   } else {
     return 'error code 0x${result.toUnsigned(32).toRadixString(16)}';
   }
@@ -56,7 +56,7 @@ String getKnownFolderPath() {
       throw WindowsException(hr);
     }
 
-    final path = pathPtrPtr.value.unpackString(MAX_PATH);
+    final path = pathPtrPtr.value.toDartString();
     return path;
   } finally {
     calloc.free(knownFolderID);

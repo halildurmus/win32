@@ -28,31 +28,36 @@
 /// but we use the wide versions, which are suffixed with a capital 'W' (e.g.
 /// `FormatMessageW`).
 ///
-/// You can use the [TEXT] function to convert a Dart string into a
+/// You can use the [toNativeUtf16] function to convert a Dart string into a
 /// `Pointer<Utf16>`, which can be passed to any Windows API expecting a string,
 /// for example:
-/// ```
-///   ShellExecute(0, TEXT('open'), TEXT('notepad.exe'), nullptr, nullptr, SW_SHOW);
+/// ```dart
+///   final verb = 'open'.toNativeUtf16();
+///   final process = 'notepad.exe'.toNativeUtf16();
+///   ShellExecute(0, verb, process, nullptr, nullptr, SW_SHOW);
 /// ```
 ///
+/// Note that it is your responsibility to release the memory used when you are
+/// finished with it.
+///
 /// To receive a string, allocate memory with a command like the following:
-/// ```
+/// ```dart
 ///   final buffer = calloc<Uint16>(count: length).cast<Utf16>();
 ///   GetWindowText(hWnd, buffer, length);
 /// ```
 ///
 /// This allocates an array of `length` UTF-16 code units. The cast is necessary
 /// because Utf16 has no length of itself. The returned value can be converted
-/// back to a Dart string using an extension method that is included with the
-/// library, as follows:
-/// ```
-///   print(buffer.unpackString(length));
+/// back to a Dart string using an extension method on Pointer<Utf16>, as
+/// follows:
+/// ```dart
+///   print(buffer.toDartString());
 /// ```
 ///
 /// A small number of APIs offer no wide version (e.g. `GetProcAddress`), and so
 /// the [convertToANSIString] method may be of use to convert a Dart string to a
 /// `Pointer<Uint8>`, which represents this format:
-/// ```
+/// ```dart
 ///   final ansi = convertToANSIString('Beep');
 ///   final pGetNativeSystemInfo = GetProcAddress(hModule, ansi);
 ///   ...
@@ -65,7 +70,7 @@
 /// with the [WindowsCreateString] API and deleted with the
 /// [WindowsDeleteString] API. A Dart function may be used to convert to and
 /// from `HSTRING`s, for example:
-/// ```
+/// ```dart
 ///   final systemPtr = calloc<IntPtr>();
 ///   calendar.GetCalendarSystem(systemPtr);
 ///   print('The calendar system is ${convertFromHString(systemPtr)}.');

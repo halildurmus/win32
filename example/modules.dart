@@ -40,7 +40,7 @@ int printModules(int processID) {
 
       if (GetModuleFileNameEx(hProcess, hModule, szModName, MAX_PATH) != 0) {
         // Print the module name and handle value.
-        print('\t${szModName.unpackString(MAX_PATH)} ($moduleValue)');
+        print('\t${szModName.toDartString()} ($moduleValue)');
       }
       calloc.free(szModName);
     }

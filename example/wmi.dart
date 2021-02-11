@@ -153,7 +153,7 @@ void main() {
       final vtProp = calloc<VARIANT>();
       hr = clsObj.Get(TEXT('Name'), 0, vtProp, nullptr, nullptr);
       if (SUCCEEDED(hr)) {
-        print('Process: ${vtProp.ref.bstrVal.unpackString(256)}');
+        print('Process: ${vtProp.ref.bstrVal.toDartString()}');
       }
       // Free BSTRs in the returned variants
       VariantClear(vtProp);

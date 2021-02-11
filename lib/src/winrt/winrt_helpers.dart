@@ -12,7 +12,6 @@ import '../api-ms-win-core-winrt-l1-1-0.dart';
 import '../api-ms-win-core-winrt-string-l1-1-0.dart';
 import '../constants.dart';
 import '../exceptions.dart';
-import '../extensions/unpack_utf16.dart';
 import '../generated/IInspectable.dart';
 import '../macros.dart';
 import '../ole32.dart';
@@ -34,7 +33,7 @@ String convertFromHString(Pointer<IntPtr> hstring) {
 
   try {
     final stringPtr = WindowsGetStringRawBuffer(hstring.value, stringLength);
-    final dartString = stringPtr.unpackString(stringLength.value);
+    final dartString = stringPtr.toDartString(length: stringLength.value - 1);
 
     return dartString;
   } finally {
