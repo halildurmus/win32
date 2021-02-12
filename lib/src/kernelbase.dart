@@ -26,7 +26,7 @@ final _kernelbase = DynamicLibrary.open('kernelbase.dll');
 ///   double *sizeInInches
 /// );
 /// ```
-/// {@category kernelbase}
+/// {@category kernel32}
 int GetIntegratedDisplaySize(Pointer<Double> sizeInInches) {
   final _GetIntegratedDisplaySize = _kernelbase.lookupFunction<
       Int32 Function(Pointer<Double> sizeInInches),
