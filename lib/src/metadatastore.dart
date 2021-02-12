@@ -43,7 +43,7 @@ class MetadataStore {
     if (cache.containsKey(fileScope)) {
       return Scope(cache[fileScope]!);
     } else {
-      final szFile = TEXT(fileScope);
+      final szFile = fileScope.toNativeUtf16();
       final pReader = calloc<IntPtr>();
 
       try {
