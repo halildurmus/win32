@@ -1,3 +1,7 @@
+## 2.0.0
+
+- Stable version w/ sound null safety.
+
 ## 2.0.0-nullsafety.12
 
 - Fix a string bug
