@@ -173,8 +173,8 @@ void main() {
       expect(method.isProperty, isFalse);
       expect(method.parameters.length, equals(1));
       expect(method.parameters.first.name, equals('remainingDigits'));
-      expect(method.parameters.first.typeIdentifier,
-          TypeIdentifier(CorElementType.ELEMENT_TYPE_I4));
+      expect(method.parameters.first.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_I4));
     });
 
     test('Method with multiple parameters and no return value is correct', () {
