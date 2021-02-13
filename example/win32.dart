@@ -47,8 +47,10 @@ void main() {
   print('The parameters are:\n$params');
 
   final lastParam = winmdMethod.parameters.last;
-  print('Parameter: ');
-  print(lastParam.signatureBlob.map((b) => b.toRadixString(8)).toList());
+  if (lastParam.signatureBlob.isNotEmpty) {
+    print('Parameter SignatureBlob: '
+        '${lastParam.signatureBlob.map((b) => b.toRadixString(8)).toList()}');
+  }
 
   final attr = lastParam.attributeByName('NativeTypeInfo');
   if (attr.isNotEmpty) {

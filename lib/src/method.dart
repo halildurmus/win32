@@ -41,17 +41,24 @@ class Method extends AttributeObject {
   bool get isRTSpecialName => _testFlag(CorMethodAttr.mdRTSpecialName);
 
   Module get module {
-    final ptkModule = calloc<Uint32>();
+    final pdwMappingFlags = calloc<Uint32>();
+    final szImportName = calloc<Uint16>(256).cast<Utf16>();
+    final pchImportName = calloc<Uint32>();
+    final ptkImportDLL = calloc<Uint32>();
     try {
-      final hr = reader.GetModuleFromScope(ptkModule);
+      final hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName, 256,
+          pchImportName, ptkImportDLL);
       if (SUCCEEDED(hr)) {
-        print('Module is ${ptkModule.value.toHexString(32)}');
-        return Module.fromToken(reader, ptkModule.value);
+        // print('pinvoke dll is ${szImportName.toDartString()}');
+        return Module.fromToken(reader, ptkImportDLL.value);
       } else {
         throw COMException(hr);
       }
     } finally {
-      calloc.free(ptkModule);
+      calloc.free(pdwMappingFlags);
+      calloc.free(szImportName);
+      calloc.free(pchImportName);
+      calloc.free(ptkImportDLL);
     }
   }
 
