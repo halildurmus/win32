@@ -30,7 +30,8 @@ class AttributeObject extends TokenObject {
       final hr =
           reader.GetCustomAttributeByName(token, szName, ppData, pcbData);
       if (SUCCEEDED(hr)) {
-        print(pcbData.value);
+        print(
+            'GetCustomAttributeByName(${szName.toDartString()}) returned ${pcbData.value} bytes of data');
         final sigList =
             Pointer<Uint8>.fromAddress(ppData.value).asTypedList(pcbData.value);
         return sigList;
@@ -39,6 +40,8 @@ class AttributeObject extends TokenObject {
       }
     } finally {
       calloc.free(szName);
+      calloc.free(ppData);
+      calloc.free(pcbData);
     }
   }
 

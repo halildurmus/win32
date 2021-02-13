@@ -37,7 +37,9 @@ void main() {
   print('This method is token #${winmdMethod.token}');
 
   final mattr = winmdMethod.attributeByName('DllImport');
-  print('DllImport: ${mattr.map((b) => b.toRadixString(16)).toList()}');
+  if (mattr.isNotEmpty) {
+    print('DllImport: ${mattr.map((b) => b.toRadixString(16)).toList()}');
+  }
 
   final params = winmdMethod.parameters
       .map((param) => '${param.typeIdentifier} ${param.name}')
@@ -49,10 +51,12 @@ void main() {
   print(lastParam.signatureBlob.map((b) => b.toRadixString(8)).toList());
 
   final attr = lastParam.attributeByName('NativeTypeInfo');
-  print('NativeTypeInfo: ${attr.map((b) => b.toRadixString(16)).toList()}');
+  if (attr.isNotEmpty) {
+    print('NativeTypeInfo: ${attr.map((b) => b.toRadixString(16)).toList()}');
+  }
 
   final attrs = lastParam.attributes;
-  print('There are ${attrs.length} attributes:');
+  print('There are ${attrs.length} attributes in ${lastParam.name}:');
   for (final attr in attrs) {
     print(
         'attr [${attr.tokenType.toRadixString(16)}]: ${attr.signatureBlob.map((b) => b.toRadixString(16)).toList()}');
