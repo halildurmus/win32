@@ -45,6 +45,7 @@ class Method extends AttributeObject {
     _parseMethodType();
     _parseParameterNames();
     _parseSignatureBlob();
+    _parseParameterAttributes();
   }
 
   factory Method.fromToken(IMetaDataImport2 reader, int token) {
@@ -132,8 +133,7 @@ class Method extends AttributeObject {
       }
     } else {
       dataLength = 1;
-      // TODO: figure this out
-      runtimeType.name = runtimeType.corType.toString();
+      runtimeType.name = runtimeType.toString();
     }
     return TypeTuple(runtimeType, dataLength);
   }
@@ -272,6 +272,25 @@ class Method extends AttributeObject {
 
         reader.CloseEnum(phEnum.address);
         // dispose phEnum crashes here, so leave it allocated
+      }
+    }
+  }
+
+  void _parseParameterAttributes() {
+    // At some point, we should look this up
+    const nativeTypeInfoToken = 0x0A000004;
+
+    for (final param in parameters) {
+      for (final attr in param.attributes) {
+        if (attr.tokenType == nativeTypeInfoToken) {
+          if (attr.signatureBlob[2] == 0x14) // ASCII
+          {
+            param.typeIdentifier.name = 'LPSTR';
+          } else if (attr.signatureBlob[2] == 0x15) // Unicode
+          {
+            param.typeIdentifier.name = 'LPWSTR';
+          }
+        }
       }
     }
   }
