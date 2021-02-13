@@ -61,8 +61,8 @@ class AttributeObject extends TokenObject {
       }
       return attributes;
     } finally {
-      reader.CloseEnum(phEnum.address);
-
+      reader.CloseEnum(phEnum.value);
+      calloc.free(phEnum);
       calloc.free(rAttrs);
       calloc.free(pcAttrs);
     }

@@ -18,6 +18,7 @@ import 'typedef.dart';
 /// [MetadataStore], which caches scopes to avoid duplication.
 class Scope {
   final IMetaDataImport2 reader;
+  final _modules = <Module>[];
 
   Scope(this.reader);
 
@@ -39,34 +40,36 @@ class Scope {
       }
       return types;
     } finally {
-      reader.CloseEnum(phEnum.address);
+      reader.CloseEnum(phEnum.value);
+      calloc.free(phEnum);
       calloc.free(rgTypeDefs);
       calloc.free(pcTypeDefs);
     }
   }
 
   List<Module> get modules {
-    final types = <Module>[];
+    if (_modules.isEmpty) {
+      final phEnum = calloc<IntPtr>();
+      final rgModuleRefs = calloc<Uint32>();
+      final pcModuleRefs = calloc<Uint32>();
 
-    final phEnum = calloc<IntPtr>();
-    final rgModuleRefs = calloc<Uint32>();
-    final pcModuleRefs = calloc<Uint32>();
-
-    try {
-      var hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
-      while (hr == S_OK) {
-        final token = rgModuleRefs.value;
-
-        types.add(Module.fromToken(reader, token));
-        hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
+      try {
+        var hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
+        while (hr == S_OK) {
+          final token = rgModuleRefs.value;
+          final module = Module.fromToken(reader, token);
+          print('${token.toHexString(32)}: ${module.name}');
+          _modules.add(Module.fromToken(reader, token));
+          hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
+        }
+      } finally {
+        reader.CloseEnum(phEnum.value);
+        calloc.free(phEnum);
+        calloc.free(rgModuleRefs);
+        calloc.free(pcModuleRefs);
       }
-      return types;
-    } finally {
-      reader.CloseEnum(phEnum.address);
-
-      calloc.free(rgModuleRefs);
-      calloc.free(pcModuleRefs);
     }
+    return _modules;
   }
 
   List<Enumeration> get enums {

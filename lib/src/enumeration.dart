@@ -98,8 +98,8 @@ class Enumeration extends TypeDef {
 
       return fields;
     } finally {
-      reader.CloseEnum(phEnum.address);
-
+      reader.CloseEnum(phEnum.value);
+      calloc.free(phEnum);
       calloc.free(rgTypeDefs);
       calloc.free(pcTokens);
     }

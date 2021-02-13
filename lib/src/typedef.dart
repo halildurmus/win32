@@ -172,8 +172,8 @@ class TypeDef extends AttributeObject {
       }
       return interfaces;
     } finally {
-      reader.CloseEnum(phEnum.address);
-
+      reader.CloseEnum(phEnum.value);
+      calloc.free(phEnum);
       calloc.free(rImpls);
       calloc.free(pcImpls);
 
@@ -199,11 +199,10 @@ class TypeDef extends AttributeObject {
       }
       return methods;
     } finally {
-      reader.CloseEnum(phEnum.address);
-
+      reader.CloseEnum(phEnum.value);
+      calloc.free(phEnum);
       calloc.free(mdMethodDef);
       calloc.free(pcTokens);
-      // dispose phEnum crashes here, so leave it allocated
     }
   }
 

@@ -5,6 +5,8 @@ void main() {
   // https://github.com/microsoft/win32metadata
   final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
 
+  final modules = scope.modules;
+
   // Find the GDI API namesapce
   final gdiApi =
       scope.typeDefs.firstWhere((type) => type.typeName.endsWith('Gdi.Apis'));
@@ -22,6 +24,8 @@ void main() {
   // Find a specific function
   const funcName = 'AddFontResourceW';
   final winmdMethod = sortedMethods.firstWhere((m) => m.methodName == funcName);
+
+  print('Module for $funcName is ${winmdMethod.module.name}');
 
   final mAttrs = winmdMethod.attributes;
   print('There are ${mAttrs.length} method attributes:');

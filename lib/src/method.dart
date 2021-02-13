@@ -10,6 +10,7 @@ import 'package:win32/win32.dart';
 
 import 'constants.dart';
 import '_base.dart';
+import 'module.dart';
 import 'parameter.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
@@ -38,6 +39,21 @@ class Method extends AttributeObject {
   bool get isVirtual => _testFlag(CorMethodAttr.mdVirtual);
   bool get isSpecialName => _testFlag(CorMethodAttr.mdSpecialName);
   bool get isRTSpecialName => _testFlag(CorMethodAttr.mdRTSpecialName);
+
+  Module get module {
+    final ptkModule = calloc<Uint32>();
+    try {
+      final hr = reader.GetModuleFromScope(ptkModule);
+      if (SUCCEEDED(hr)) {
+        print('Module is ${ptkModule.value.toHexString(32)}');
+        return Module.fromToken(reader, ptkModule.value);
+      } else {
+        throw COMException(hr);
+      }
+    } finally {
+      calloc.free(ptkModule);
+    }
+  }
 
   Method(IMetaDataImport2 reader, int token, this.methodName, this.methodFlags,
       this.signatureBlob, this.relativeVirtualAddress, this.implFlags)
@@ -267,11 +283,10 @@ class Method extends AttributeObject {
           hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
         }
       } finally {
+        reader.CloseEnum(phEnum.value);
+        calloc.free(phEnum);
         calloc.free(ptkParamDef);
         calloc.free(pcTokens);
-
-        reader.CloseEnum(phEnum.address);
-        // dispose phEnum crashes here, so leave it allocated
       }
     }
   }
