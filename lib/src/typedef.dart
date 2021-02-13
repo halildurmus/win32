@@ -113,7 +113,7 @@ class TypeDef extends AttributeObject {
         // TODO: Can we shortcut something by using the resolution scope token?
         try {
           final newScope = MetadataStore.getScopeForType(typeName);
-          return newScope.findTypeDef(typeName);
+          return newScope[typeName]!;
         } catch (exception) {
           if (systemTokens.containsValue(typeName)) {
             return TypeDef(reader, 0, typeName);

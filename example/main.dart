@@ -26,7 +26,7 @@ void main(List<String> args) {
       : Directory('lib/src/generated');
 
   for (final type in typesToGenerate) {
-    final mdTypeDef = MetadataStore.getMetadataForType(type);
+    final mdTypeDef = MetadataStore.getMetadataForType(type)!;
     final projection = TypeBuilder.projectWindowsType(mdTypeDef);
     final dartClass = TypePrinter.printType(projection);
 

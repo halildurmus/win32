@@ -105,11 +105,11 @@ class MetadataStore {
     }
   }
 
-  static TypeDef getMetadataForType(String typeName) {
+  static TypeDef? getMetadataForType(String typeName) {
     if (!isInitialized) initialize();
 
     final scope = getScopeForType(typeName);
-    return scope.findTypeDef(typeName);
+    return scope[typeName];
   }
 
   /// Dispose of all objects.
