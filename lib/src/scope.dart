@@ -22,6 +22,22 @@ class Scope {
 
   Scope(this.reader);
 
+  String get name {
+    final szName = calloc<Uint16>(256).cast<Utf16>();
+    final pchName = calloc<Uint32>();
+    try {
+      final hr = reader.GetScopeProps(szName, 256, pchName, nullptr);
+      if (SUCCEEDED(hr)) {
+        return szName.toDartString();
+      } else {
+        throw COMException(hr);
+      }
+    } finally {
+      calloc.free(szName);
+      calloc.free(pchName);
+    }
+  }
+
   /// Get an enumerated list of typedefs for this scope.
   List<TypeDef> get typeDefs {
     final types = <TypeDef>[];
@@ -57,8 +73,6 @@ class Scope {
         var hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
         while (hr == S_OK) {
           final token = rgModuleRefs.value;
-          final module = Module.fromToken(reader, token);
-          print('${token.toHexString(32)}: ${module.name}');
           _modules.add(Module.fromToken(reader, token));
           hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
         }

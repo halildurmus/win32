@@ -10,6 +10,17 @@ void main() {
       final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
       expect(scope.typeDefs.length, isNonZero);
     });
+    test('Scope name is as expected', () {
+      final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+      expect(scope.name, equals('Windows.Win32.winmd'));
+    });
+    test('Scope modules contain expected DLLs', () {
+      final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+      expect(
+          scope.modules.map((module) => module.name),
+          containsAll(
+              <String>['KERNEL32', 'USER32', 'GDI32', 'd3d12', 'netutils']));
+    });
 
     test('Can find the GDI API', () {
       final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
