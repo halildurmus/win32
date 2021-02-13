@@ -9,6 +9,7 @@ import 'package:win32/win32.dart';
 
 import 'constants.dart';
 import 'enumeration.dart';
+import 'module.dart';
 import 'typedef.dart';
 
 /// A metadata scope, which typically matches an on-disk file.
@@ -39,11 +40,32 @@ class Scope {
       return types;
     } finally {
       reader.CloseEnum(phEnum.address);
-
       calloc.free(rgTypeDefs);
       calloc.free(pcTypeDefs);
+    }
+  }
 
-      // dispose phEnum crashes here, so leave it allocated
+  List<Module> get modules {
+    final types = <Module>[];
+
+    final phEnum = calloc<IntPtr>();
+    final rgModuleRefs = calloc<Uint32>();
+    final pcModuleRefs = calloc<Uint32>();
+
+    try {
+      var hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
+      while (hr == S_OK) {
+        final token = rgModuleRefs.value;
+
+        types.add(Module.fromToken(reader, token));
+        hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
+      }
+      return types;
+    } finally {
+      reader.CloseEnum(phEnum.address);
+
+      calloc.free(rgModuleRefs);
+      calloc.free(pcModuleRefs);
     }
   }
 
