@@ -30,6 +30,147 @@ class TypeBuilder {
     }
   }
 
+  // String get dartType {
+  //   switch (corType) {
+  //     case CorElementType.ELEMENT_TYPE_VOID:
+  //       return 'void';
+  //     case CorElementType.ELEMENT_TYPE_BOOLEAN:
+  //       return 'bool';
+  //     case CorElementType.ELEMENT_TYPE_STRING:
+  //       return 'IntPtr';
+  //     case CorElementType.ELEMENT_TYPE_CHAR:
+  //     case CorElementType.ELEMENT_TYPE_I1:
+  //     case CorElementType.ELEMENT_TYPE_U1:
+  //     case CorElementType.ELEMENT_TYPE_I2:
+  //     case CorElementType.ELEMENT_TYPE_U2:
+  //     case CorElementType.ELEMENT_TYPE_I4:
+  //     case CorElementType.ELEMENT_TYPE_U4:
+  //     case CorElementType.ELEMENT_TYPE_I8:
+  //     case CorElementType.ELEMENT_TYPE_U8:
+  //     case CorElementType.ELEMENT_TYPE_I:
+  //     case CorElementType.ELEMENT_TYPE_U:
+  //       return 'int';
+  //     case CorElementType.ELEMENT_TYPE_R4:
+  //     case CorElementType.ELEMENT_TYPE_R8:
+  //       return 'double';
+  //     case CorElementType.ELEMENT_TYPE_PTR:
+  //       // Check if it's Pointer<T>, in which case we have work
+  //       if (typeArgs.length == 1) {
+  //         if (typeArgs.first.type != null &&
+  //             typeArgs.first.type!.typeName.startsWith('Windows.Win32')) {
+  //           final win32Type =
+  //               typeArgs.first.type?.typeName.split('.').last ?? '';
+  //           final ffiNativeType = convertToFFIType(win32Type);
+  //           // If it's a Unicode Win32 type, strip off the ending 'W'.
+  //           if (ffiNativeType.endsWith('W')) {
+  //             return 'Pointer<${ffiNativeType.substring(0, ffiNativeType.length - 1)}>';
+  //           } else {
+  //             return 'Pointer<$ffiNativeType>';
+  //           }
+  //         } else {
+  //           if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_U2) {
+  //             if (stringType == StringType.Unicode) {
+  //               return 'Pointer<Utf16>';
+  //             } else {
+  //               return 'Pointer<Uint16>';
+  //             }
+  //           }
+  //           if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_VOID) {
+  //             // Pointer<Void> in Dart is unnecessarily restrictive, versus the
+  //             // Win32 meaning, which is more like "undefined type". We can
+  //             // model that with a generic Pointer in Dart.
+  //             return 'Pointer';
+  //           } else {
+  //             return 'Pointer<${typeArgs.first.nativeType}>';
+  //           }
+  //         }
+  //       }
+  //       return 'Pointer';
+
+  //     case CorElementType.ELEMENT_TYPE_FNPTR:
+  //       return 'Pointer';
+  //     default:
+  //       // If it's a Win32 type, we know how to get the type
+  //       if (type != null && type!.typeName.startsWith('Windows.Win32')) {
+  //         final win32Type = type?.typeName.split('.').last ?? '';
+  //         final ffiNativeType = convertToFFIType(win32Type);
+  //         final dartType = convertToDartType(ffiNativeType);
+  //         return dartType;
+  //       }
+  //       return '';
+  //   }
+  // }
+
+  // String get nativeType {
+  //   switch (corType) {
+  //     case CorElementType.ELEMENT_TYPE_VOID:
+  //       return 'Void';
+  //     case CorElementType.ELEMENT_TYPE_BOOLEAN:
+  //     case CorElementType.ELEMENT_TYPE_CHAR:
+  //     case CorElementType.ELEMENT_TYPE_U1:
+  //       return 'Uint8';
+  //     case CorElementType.ELEMENT_TYPE_I1:
+  //       return 'Int8';
+  //     case CorElementType.ELEMENT_TYPE_I2:
+  //       return 'Int16';
+  //     case CorElementType.ELEMENT_TYPE_U2:
+  //       return 'Uint16';
+  //     case CorElementType.ELEMENT_TYPE_I4:
+  //       return 'Int32';
+  //     case CorElementType.ELEMENT_TYPE_U4:
+  //       return 'Uint32';
+  //     case CorElementType.ELEMENT_TYPE_I8:
+  //       return 'Int64';
+  //     case CorElementType.ELEMENT_TYPE_U8:
+  //       return 'Uint64';
+  //     case CorElementType.ELEMENT_TYPE_R4:
+  //       return 'Float';
+  //     case CorElementType.ELEMENT_TYPE_R8:
+  //       return 'Double';
+  //     case CorElementType.ELEMENT_TYPE_STRING:
+  //       return 'IntPtr';
+  //     case CorElementType.ELEMENT_TYPE_PTR:
+  //       if (typeArgs.length == 1) {
+  //         if (typeArgs.first.type != null &&
+  //             typeArgs.first.type!.typeName.startsWith('Windows.Win32')) {
+  //           final win32Type =
+  //               typeArgs.first.type?.typeName.split('.').last ?? '';
+  //           final ffiNativeType = convertToFFIType(win32Type);
+  //           // If it's a Unicode Win32 type, strip off the ending 'W'.
+  //           if (ffiNativeType.endsWith('W')) {
+  //             return 'Pointer<${ffiNativeType.substring(0, ffiNativeType.length - 1)}>';
+  //           } else {
+  //             return 'Pointer<$ffiNativeType>';
+  //           }
+  //         } else {
+  //           if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_VOID) {
+  //             // Pointer<Void> in Dart is unnecessarily restrictive, versus the
+  //             // Win32 meaning, which is more like "undefined type". We can
+  //             // model that with a generic Pointer in Dart.
+  //             return 'Pointer';
+  //           } else {
+  //             return 'Pointer<${typeArgs.first.nativeType}>';
+  //           }
+  //         }
+  //       }
+  //       return 'Pointer';
+
+  //     case CorElementType.ELEMENT_TYPE_FNPTR:
+  //       return 'Pointer';
+  //     case CorElementType.ELEMENT_TYPE_I:
+  //     case CorElementType.ELEMENT_TYPE_U:
+  //       return 'IntPtr';
+  //     default:
+  //       // If it's a Win32 type, we know how to get the type
+  //       if (type != null && type!.typeName.startsWith('Windows.Win32')) {
+  //         final win32Type = type?.typeName.split('.').last ?? '';
+  //         final ffiNativeType = convertToFFIType(win32Type);
+  //         return ffiNativeType;
+  //       }
+  //       return '';
+  //   }
+  // }
+
   static String nativeType(TypeIdentifier typeIdentifier) {
     // ECMA-335 II.14.3 does not guarantee that an enum is 32-bit, but
     // per https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#enums,
