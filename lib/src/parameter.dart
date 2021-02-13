@@ -42,32 +42,32 @@ class Parameter extends AttributeObject {
       : super(reader, token);
 
   factory Parameter.fromToken(IMetaDataImport2 reader, int token) {
-    late Parameter parameter;
-
     final pmd = calloc<Uint32>();
     final pulSequence = calloc<Uint32>();
     final szName = calloc<Uint16>(256).cast<Utf16>();
     final pchName = calloc<Uint32>();
     final pdwAttr = calloc<Uint32>();
     final pdwCPlusTypeFlag = calloc<Uint32>();
-    final ppValue = calloc<Uint8>(256);
+    final ppValue = calloc<IntPtr>();
     final pcchValue = calloc<Uint32>();
 
-    final hr = reader.GetParamProps(token, pmd, pulSequence, szName, 256,
-        pchName, pdwAttr, pdwCPlusTypeFlag, ppValue.cast(), pcchValue);
-
-    if (SUCCEEDED(hr)) {
-      if (pcchValue.value == 0) {
-        parameter = Parameter(
+    try {
+      final hr = reader.GetParamProps(token, pmd, pulSequence, szName, 256,
+          pchName, pdwAttr, pdwCPlusTypeFlag, ppValue.cast(), pcchValue);
+      if (SUCCEEDED(hr)) {
+        return Parameter(
             reader,
             token,
             pulSequence.value,
             pdwAttr.value,
             TypeIdentifier.fromValue(pdwCPlusTypeFlag.value),
             szName.toDartString(),
-            ppValue.asTypedList(pcchValue.value));
+            Pointer<Uint8>.fromAddress(ppValue.value)
+                .asTypedList(pcchValue.value));
+      } else {
+        throw WindowsException(hr);
       }
-
+    } finally {
       calloc.free(pmd);
       calloc.free(pulSequence);
       calloc.free(szName);
@@ -76,10 +76,6 @@ class Parameter extends AttributeObject {
       calloc.free(pdwCPlusTypeFlag);
       calloc.free(ppValue);
       calloc.free(pcchValue);
-
-      return parameter;
-    } else {
-      throw WindowsException(hr);
     }
   }
 
