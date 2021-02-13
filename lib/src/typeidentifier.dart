@@ -8,13 +8,26 @@ import 'utils.dart';
 
 enum StringType { ASCII, Unicode, None }
 
+/// Represents a type / name pairing, as for example used in a parameter. Return
+/// types use the same class, although they have no name.
 class TypeIdentifier {
+  /// Underlying base type represented here
   CorElementType corType;
-  String? name;
+
+  /// The identifier (e.g. param0)
+  String name;
+
+  /// The class or interface, if the type is (for example) ELEMENT_TYPE_CLASS
   TypeDef? type;
+
+  /// Marshalling information for the type, if any (e.g. LPWSTR)
+  StringType marshallingInfo;
+
+  /// Any arguments (for example, the Uint16 in a Pointer<Uint16>).
   final typeArgs = <TypeIdentifier>[];
 
-  TypeIdentifier(this.corType);
+  TypeIdentifier(this.corType,
+      [this.name = '', this.type, this.marshallingInfo = StringType.None]);
 
   factory TypeIdentifier.fromValue(int corElementTypeValue,
       [StringType stringType = StringType.None]) {

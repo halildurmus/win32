@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:winmd/winmd.dart';
 
 void main() {
