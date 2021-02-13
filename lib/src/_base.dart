@@ -3,6 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'dart:ffi';
+import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
@@ -20,6 +21,26 @@ class TokenObject {
 class AttributeObject extends TokenObject {
   const AttributeObject(IMetaDataImport2 reader, int token)
       : super(reader, token);
+
+  Uint8List attributeByName(String attrName) {
+    final szName = attrName.toNativeUtf16();
+    final ppData = calloc<IntPtr>();
+    final pcbData = calloc<Uint32>();
+    try {
+      final hr =
+          reader.GetCustomAttributeByName(token, szName, ppData, pcbData);
+      if (SUCCEEDED(hr)) {
+        print(pcbData.value);
+        final sigList =
+            Pointer<Uint8>.fromAddress(ppData.value).asTypedList(pcbData.value);
+        return sigList;
+      } else {
+        throw WindowsException(hr);
+      }
+    } finally {
+      calloc.free(szName);
+    }
+  }
 
   /// Enumerate all attributes that this parameter has.
   List<Attribute> get attributes {

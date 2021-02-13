@@ -20,6 +20,21 @@ class Parameter extends AttributeObject {
   String name;
   final Uint8List signatureBlob;
 
+  StringType get stringType {
+    const NativeTypeInfo = 0x0A000004;
+
+    for (final attr in attributes) {
+      if (attr.tokenType == NativeTypeInfo) {
+        if (attr.signatureBlob[2] == 0x14) {
+          return StringType.ASCII;
+        } else if (attr.signatureBlob[2] == 0x15) {
+          return StringType.Unicode;
+        }
+      }
+    }
+    return StringType.None;
+  }
+
   Parameter(IMetaDataImport2 reader, int token, this.sequence,
       this.attributeFlags, this.typeIdentifier, this.name, this.signatureBlob)
       : super(reader, token);

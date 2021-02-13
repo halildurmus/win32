@@ -56,14 +56,20 @@ void main() {
   // Print out some information about it
   print('This method is token #${winmdMethod.token}');
 
+  final mattr = winmdMethod.attributeByName('DllImport');
+  print('DllImport: ${mattr.map((b) => b.toRadixString(16)).toList()}');
+
   final params = winmdMethod.parameters
-      .map((param) => '${param.typeIdentifier.nativeType} ${param.name}')
+      .map((param) => '${param.typeIdentifier} ${param.name}')
       .join(', ');
   print('The parameters are:\n$params');
 
   final lastParam = winmdMethod.parameters.last;
   print('Parameter: ');
   print(lastParam.signatureBlob.map((b) => b.toRadixString(8)).toList());
+
+  final attr = lastParam.attributeByName('NativeTypeInfo');
+  print('NativeTypeInfo: ${attr.map((b) => b.toRadixString(16)).toList()}');
 
   final attrs = lastParam.attributes;
   print('There are ${attrs.length} attributes:');
@@ -72,13 +78,13 @@ void main() {
         'attr [${attr.tokenType.toRadixString(16)}]: ${attr.signatureBlob.map((b) => b.toRadixString(16)).toList()}');
   }
 
-  print('Uncompressed: ');
-  var lastAttrSig = attrs.last.signatureBlob;
-  final uncompr = <int>[];
-  do {
-    final dataNugget = corSigUncompressData(lastAttrSig);
-    uncompr.add(dataNugget.data);
-    lastAttrSig = lastAttrSig.sublist(dataNugget.dataLength);
-  } while (lastAttrSig.isNotEmpty);
-  print('uncompr: ${uncompr.map((b) => b.toRadixString(16)).toList()}');
+//   print('Uncompressed: ');
+//   var lastAttrSig = attrs.last.signatureBlob;
+//   final uncompr = <int>[];
+//   do {
+//     final dataNugget = corSigUncompressData(lastAttrSig);
+//     uncompr.add(dataNugget.data);
+//     lastAttrSig = lastAttrSig.sublist(dataNugget.dataLength);
+//   } while (lastAttrSig.isNotEmpty);
+//   print('uncompr: ${uncompr.map((b) => b.toRadixString(16)).toList()}');
 }
