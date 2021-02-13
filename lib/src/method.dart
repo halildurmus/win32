@@ -133,7 +133,7 @@ class Method extends AttributeObject {
     } else {
       dataLength = 1;
       // TODO: figure this out
-      // runtimeType.name = runtimeType.nativeType;
+      runtimeType.name = runtimeType.corType.toString();
     }
     return TypeTuple(runtimeType, dataLength);
   }

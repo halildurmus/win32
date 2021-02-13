@@ -67,11 +67,13 @@ class TypeBuilder {
             }
           } else {
             if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_U2) {
-              if (typeIdentifier.marshallingInfo == StringType.Unicode) {
+              if (typeIdentifier.name == 'LPWSTR') {
                 return 'Pointer<Utf16>';
-              } else {
-                return 'Pointer<Uint16>';
               }
+              if (typeIdentifier.name == 'LPSTR') {
+                return 'Pointer<Utf8>';
+              }
+              return 'Pointer<Uint16>';
             }
             if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_VOID) {
               // Pointer<Void> in Dart is unnecessarily restrictive, versus the

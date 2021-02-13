@@ -6,31 +6,25 @@ import 'constants.dart';
 import 'typedef.dart';
 import 'utils.dart';
 
-enum StringType { ASCII, Unicode, None }
-
-/// Represents a type / name pairing, as for example used in a parameter. Return
+/// Represents a type, as for example used in a parameter. Return
 /// types use the same class, although they have no name.
 class TypeIdentifier {
   /// Underlying base type represented here
   CorElementType corType;
 
-  /// The identifier (e.g. param0)
+  /// The name of the type (for example, `Windows.Storage.IStorageFile` or
+  /// `LPWSTR`)
   String name;
 
   /// The class or interface, if the type is (for example) ELEMENT_TYPE_CLASS
   TypeDef? type;
 
-  /// Marshalling information for the type, if any (e.g. LPWSTR)
-  StringType marshallingInfo;
-
   /// Any arguments (for example, the Uint16 in a Pointer<Uint16>).
   final typeArgs = <TypeIdentifier>[];
 
-  TypeIdentifier(this.corType,
-      [this.name = '', this.type, this.marshallingInfo = StringType.None]);
+  TypeIdentifier(this.corType, [this.name = '', this.type]);
 
-  factory TypeIdentifier.fromValue(int corElementTypeValue,
-      [StringType stringType = StringType.None]) {
+  factory TypeIdentifier.fromValue(int corElementTypeValue) {
     switch (corElementTypeValue) {
       case 0x0:
         return TypeIdentifier(CorElementType.ELEMENT_TYPE_END);
@@ -237,9 +231,9 @@ class TypeIdentifier {
       case CorElementType.ELEMENT_TYPE_TYPEDBYREF:
         return 'typedref';
       case CorElementType.ELEMENT_TYPE_I:
-        return 'sizedint';
+        return 'intptr';
       case CorElementType.ELEMENT_TYPE_U:
-        return 'sizeduint';
+        return 'uintptr';
       case CorElementType.ELEMENT_TYPE_FNPTR:
         return 'funcptr';
       case CorElementType.ELEMENT_TYPE_OBJECT:
