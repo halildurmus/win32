@@ -9,38 +9,17 @@ void main() {
   final gdiApi =
       scope.typeDefs.firstWhere((type) => type.typeName.endsWith('Gdi.Apis'));
 
+  final gdiAttrs = gdiApi.attributes;
+  for (final attr in gdiAttrs) {
+    print(
+        'gdiAttr: ${attr.signatureBlob.map((b) => b.toRadixString(16)).toList()}');
+  }
+
   // Sort the functions alphabetically
   final sortedMethods = gdiApi.methods
     ..sort((a, b) => a.methodName.compareTo(b.methodName));
 
-  print('------');
-  // int i = 0;
-  for (final method in sortedMethods) {
-    for (final param in method.parameters) {
-      for (final attr in param.attributes) {
-        if (attr.tokenType == 0x0A000004) {
-          // print('NativeTypeInfo ${method.methodName} ${param.name}');
-          if (attr.signatureBlob[2] == 0x14) // ASCII
-          {
-            print('ASCII: ${method.methodName} ${param.name}');
-          } else if (attr.signatureBlob[2] == 0x15) // Unicode
-          {
-            print('Unicode: ${method.methodName} ${param.name}');
-          }
-        }
-      }
-
-      // if (param.attributes.length == 1) {
-      //   // if (param.attributes.last.signatureBlob[2] == 0x15) {
-      //   print('${method.methodName} ${param.name}');
-      //   // }
-      // }
-    }
-  }
-  print('------');
-
   // Find a specific function
-  // const funcName = 'AddFontResourceW';
   const funcName = 'AddFontResourceW';
   final winmdMethod = sortedMethods.firstWhere((m) => m.methodName == funcName);
 
@@ -75,14 +54,4 @@ void main() {
     print(
         'attr [${attr.tokenType.toRadixString(16)}]: ${attr.signatureBlob.map((b) => b.toRadixString(16)).toList()}');
   }
-
-//   print('Uncompressed: ');
-//   var lastAttrSig = attrs.last.signatureBlob;
-//   final uncompr = <int>[];
-//   do {
-//     final dataNugget = corSigUncompressData(lastAttrSig);
-//     uncompr.add(dataNugget.data);
-//     lastAttrSig = lastAttrSig.sublist(dataNugget.dataLength);
-//   } while (lastAttrSig.isNotEmpty);
-//   print('uncompr: ${uncompr.map((b) => b.toRadixString(16)).toList()}');
 }
