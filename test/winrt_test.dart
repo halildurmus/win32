@@ -190,7 +190,9 @@ void main() {
       expect(method.parameters[0].typeIdentifier.name,
           equals('Windows.Storage.IStorageFile'));
       expect(method.parameters[0].name, equals('file'));
-      expect(method.parameters[1].typeIdentifier.name, equals('IntPtr'));
+      expect(method.parameters[1].typeIdentifier.name, equals('string'));
+      expect(method.parameters[1].typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_STRING));
       expect(method.parameters[1].name, equals('contentId'));
       expect(method.parameters[2].typeIdentifier.name,
           equals('Windows.Storage.Provider.ReadActivationMode'));
@@ -215,7 +217,9 @@ void main() {
       expect(method.returnType.typeIdentifier.typeArgs.first.name,
           equals('Windows.Globalization.JapanesePhoneme'));
       expect(method.parameters.first.name, equals('input'));
-      expect(method.parameters.first.typeIdentifier.name, equals('IntPtr'));
+      expect(method.parameters.first.typeIdentifier.name, equals('string'));
+      expect(method.parameters.first.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_STRING));
     });
 
     test('Calendar.Clone method is correct', () {
