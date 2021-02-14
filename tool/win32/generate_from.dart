@@ -1,1 +1,1 @@
-const winmdGenerated = ['gdi32'];
+const winmdGenerated = ['gdi32', 'user32'];

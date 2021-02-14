@@ -85,12 +85,14 @@ final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ?
         win32.functions.values.where((func) => func.dllLibrary == library);
 
     for (final function in filteredFunctionList) {
-      final method =
-          methods.firstWhere((m) => m.methodName == function.signature.name);
+      final method = methods.firstWhere(
+          (m) => m.methodName == function.signature.name,
+          orElse: () =>
+              throw Exception('Cannot find ${function.signature.name}'));
 
       writer.writeStringSync('''
 ${generateDocComment(function)}
-${Win32Prototype(function.signature.nameWithoutEncoding, method, 'gdi32').dartFfiMapping}
+${Win32Prototype(function.signature.nameWithoutEncoding, method, method.module.name).dartFfiMapping}
 ''');
     }
 
@@ -113,5 +115,5 @@ void main() {
       .length;
 
   generateFfiFiles(win32);
-  print('$genCount typedefs generated.');
+  print('$genCount typedefs generated from Windows metadata.');
 }
