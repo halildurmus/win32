@@ -91,8 +91,7 @@ class TypeBuilder {
               // the function.
               final newType = typeArgs.first.clone();
               if (typeArgs.length > 1) {
-                newType.typeArgs.addAll(typeArgs);
-                newType.typeArgs.removeAt(0);
+                newType.typeArgs.addAll(typeArgs.skip(1));
               }
               return 'Pointer<${nativeType(newType)}>';
             }
@@ -200,8 +199,7 @@ class TypeBuilder {
               // the function.
               final newType = typeArgs.first.clone();
               if (typeArgs.length > 1) {
-                newType.typeArgs.addAll(typeArgs);
-                newType.typeArgs.removeAt(0);
+                newType.typeArgs.addAll(typeArgs.skip(1));
               }
               return 'Pointer<${nativeType(newType)}>';
             }
