@@ -259,5 +259,32 @@ void main() {
       final method = winTypeDef.findMethod('whoLetTheDogsOut');
       expect(method, isNull);
     });
+
+    test('IPropertyValue array type', () {
+      final winTypeDef = MetadataStore.getMetadataForType(
+          'Windows.Foundation.IPropertyValue')!;
+
+      final method = winTypeDef.findMethod('GetUInt8Array')!;
+      expect(method.isProperty, isFalse);
+      expect(method.parameters.length, equals(2));
+
+      expect(method.token, equals(0x06000230));
+
+      final valueSizeParam = method.parameters.first;
+      expect(valueSizeParam.name, equals('__valueSize'));
+      expect(valueSizeParam.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_PTR));
+      expect(valueSizeParam.typeIdentifier.typeArgs.length, equals(1));
+      expect(valueSizeParam.typeIdentifier.typeArgs.first.corType,
+          equals(CorElementType.ELEMENT_TYPE_U4));
+
+      final valueParam = method.parameters.last;
+      expect(valueParam.name, equals('value'));
+      expect(valueParam.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_PTR));
+      expect(valueParam.typeIdentifier.typeArgs.length, equals(1));
+      expect(valueParam.typeIdentifier.typeArgs.first.corType,
+          equals(CorElementType.ELEMENT_TYPE_U1));
+    });
   }
 }

@@ -247,7 +247,7 @@ class Method extends AttributeObject {
         if (runtimeType.typeIdentifier.corType ==
             CorElementType.ELEMENT_TYPE_ARRAY) {
           blobPtr +=
-              _parseArray(signatureBlob.sublist(blobPtr + 1), paramsIndex)! + 2;
+              _parseArray(signatureBlob.sublist(blobPtr + 1), paramsIndex) + 2;
           paramsIndex++; //we've added two parameters here
         } else if (runtimeType.typeIdentifier.corType ==
             CorElementType.ELEMENT_TYPE_PTR) {
@@ -317,14 +317,28 @@ class Method extends AttributeObject {
     }
   }
 
-  int? _parseArray(Uint8List sublist, int paramsIndex) {
+  // Various projections do smart things to mask this into a single array
+  // value. We're not that clever yet, so we project it in its raw state, which
+  // means a little work here to ensure that it comes out right.
+  int _parseArray(Uint8List sublist, int paramsIndex) {
     final typeTuple = _parseTypeFromSignature(sublist.sublist(1));
 
     parameters[paramsIndex].name = '__valueSize';
-    parameters[paramsIndex].typeIdentifier.name = 'Pointer<Uint32>';
+    parameters[paramsIndex].typeIdentifier.corType =
+        CorElementType.ELEMENT_TYPE_PTR;
+    parameters[paramsIndex]
+        .typeIdentifier
+        .typeArgs
+        .add(TypeIdentifier(CorElementType.ELEMENT_TYPE_U4));
+
     parameters.insert(paramsIndex + 1, Parameter.fromVoid(reader));
     parameters[paramsIndex + 1].name = 'value';
-    parameters[paramsIndex + 1].typeIdentifier.name = 'Pointer<IntPtr>';
+    parameters[paramsIndex + 1].typeIdentifier.corType =
+        CorElementType.ELEMENT_TYPE_PTR;
+    parameters[paramsIndex + 1]
+        .typeIdentifier
+        .typeArgs
+        .add(typeTuple.typeIdentifier);
 
     return typeTuple.offsetLength;
   }
