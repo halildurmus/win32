@@ -18,7 +18,7 @@ jobs:
         os: [windows-latest]
 
         # Stable does not support null safety yet.
-        sdk: [beta, dev, main]
+        sdk: [beta, main]
 
     steps:
       - name: Fetch sources
