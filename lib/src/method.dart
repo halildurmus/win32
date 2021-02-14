@@ -324,7 +324,7 @@ class Method extends AttributeObject {
   // value. We're not that clever yet, so we project it in its raw state, which
   // means a little work here to ensure that it comes out right.
   int _parseArray(Uint8List sublist, int paramsIndex) {
-    final typeTuple = _parseTypeFromSignature(sublist.sublist(1));
+    final typeTuple = _parseTypeFromSignature(sublist.sublist(2));
 
     parameters[paramsIndex].name = '__valueSize';
     parameters[paramsIndex].typeIdentifier.corType =
