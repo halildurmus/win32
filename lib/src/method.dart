@@ -248,15 +248,23 @@ class Method extends AttributeObject {
         paramsIndex++; //we've added two parameters here
       } else if (runtimeType.typeIdentifier.corType ==
           CorElementType.ELEMENT_TYPE_PTR) {
+        final typeArgs = <TypeIdentifier>[];
+
         // Pointer<T>, so parse the type of T.
         blobPtr += runtimeType.offsetLength;
         final ptrType = _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
-        parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
-        parameters[paramsIndex]
-            .typeIdentifier
-            .typeArgs
-            .add(ptrType.typeIdentifier);
+        typeArgs.add(ptrType.typeIdentifier);
         blobPtr += ptrType.offsetLength;
+
+        if (ptrType.typeIdentifier.corType == CorElementType.ELEMENT_TYPE_PTR) {
+          // Pointer<Pointer<T2>>, so parse the type of T2
+          final ptrptrType =
+              _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
+          blobPtr += ptrptrType.offsetLength;
+          typeArgs.add(ptrptrType.typeIdentifier);
+        }
+        parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
+        parameters[paramsIndex].typeIdentifier.typeArgs.addAll(typeArgs);
       } else {
         parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
 

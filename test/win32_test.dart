@@ -229,7 +229,7 @@ void main() {
         equals(CorElementType.ELEMENT_TYPE_I4));
   });
 
-  test('Double pointer is interpreted correctly in CredReadW', () {
+  test('Double pointer is interpreted correctly', () {
     final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
     final typedef = scope['Windows.Win32.Security.Apis']!;
     final api = typedef.findMethod('CredReadW')!;
