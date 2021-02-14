@@ -100,6 +100,7 @@ export 'src/extensions/set_string.dart';
 export 'src/extensions/unpack_utf16.dart';
 
 // Traditional C-style Windows APIs
+export 'src/_manual.dart';
 export 'src/advapi32.dart';
 export 'src/bthprops.dart';
 export 'src/comctl32.dart';

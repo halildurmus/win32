@@ -81,8 +81,10 @@ import 'structs.dart';
 final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');\n
 ''');
 
-    final filteredFunctionList =
-        win32.functions.values.where((func) => func.dllLibrary == library);
+    final filteredFunctionList = win32.functions.values
+        .where((func) => func.dllLibrary == library)
+        .toList();
+    filteredFunctionList.remove('SetWindowLongPtrW');
 
     for (final function in filteredFunctionList) {
       final method = methods.firstWhere(
@@ -92,7 +94,7 @@ final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ?
 
       writer.writeStringSync('''
 ${generateDocComment(function)}
-${Win32Prototype(function.signature.nameWithoutEncoding, method, method.module.name).dartFfiMapping}
+${Win32Prototype(function.signature.nameWithoutEncoding, method, method.module.name.toLowerCase()).dartFfiMapping}
 ''');
     }
 
