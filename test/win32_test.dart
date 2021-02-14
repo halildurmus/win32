@@ -229,4 +229,18 @@ void main() {
     expect(returnType.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_I4));
   });
+
+  test('Double pointer is interpreted correctly in CredReadW', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.Security.Apis']!;
+    final api = typedef.findMethod('CredReadW')!;
+    final param = api.parameters.last;
+
+    expect(
+        param.typeIdentifier.corType, equals(CorElementType.ELEMENT_TYPE_PTR));
+    expect(param.typeIdentifier.typeArgs.length, equals(2));
+    expect(param.typeIdentifier.typeArgs.first.corType,
+        equals(CorElementType.ELEMENT_TYPE_PTR));
+    expect(param.typeIdentifier.typeArgs.last.name, endsWith('CREDENTIALW'));
+  });
 }
