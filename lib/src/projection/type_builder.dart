@@ -163,6 +163,15 @@ class TypeBuilder {
               return 'Pointer<$ffiNativeType>';
             }
           } else {
+            if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_U2) {
+              if (typeIdentifier.name == 'LPWSTR') {
+                return 'Pointer<Utf16>';
+              }
+              if (typeIdentifier.name == 'LPSTR') {
+                return 'Pointer<Utf8>';
+              }
+              return 'Pointer<Uint16>';
+            }
             if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_VOID) {
               // Pointer<Void> in Dart is unnecessarily restrictive, versus the
               // Win32 meaning, which is more like "undefined type". We can
