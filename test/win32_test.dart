@@ -219,4 +219,14 @@ void main() {
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
     expect(param.typeIdentifier.name, endsWith('HPOWERNOTIFY'));
   }, skip: 'https://github.com/microsoft/win32metadata/issues/225');
+
+  test('CountClipboardFormats has the correct return type', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.DataExchange.Apis']!;
+    final api = typedef.findMethod('CountClipboardFormats')!;
+    final returnType = api.returnType;
+
+    expect(returnType.typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_I4));
+  });
 }
