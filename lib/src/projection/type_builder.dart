@@ -50,6 +50,8 @@ class TypeBuilder {
       case CorElementType.ELEMENT_TYPE_R4:
       case CorElementType.ELEMENT_TYPE_R8:
         return 'double';
+      case CorElementType.ELEMENT_TYPE_OBJECT:
+        return 'COMObject';
       case CorElementType.ELEMENT_TYPE_PTR:
         // Check if it's Pointer<T>, in which case we have work
         final typeArgs = typeIdentifier.typeArgs;
@@ -102,8 +104,9 @@ class TypeBuilder {
       return dartType;
     }
 
-    throw WinmdException('Undetected type.');
-    // return '';
+    // Something failed. Return something egregiously wrong, so that the
+    // analyzer picks it up as an error.
+    return '**';
   }
 
   static String nativeType(TypeIdentifier typeIdentifier) {
@@ -148,6 +151,8 @@ class TypeBuilder {
         return 'Double';
       case CorElementType.ELEMENT_TYPE_STRING:
         return 'IntPtr';
+      case CorElementType.ELEMENT_TYPE_OBJECT:
+        return 'COMObject';
       case CorElementType.ELEMENT_TYPE_PTR:
         final typeArgs = typeIdentifier.typeArgs;
         if (typeArgs.length == 1) {
@@ -198,8 +203,9 @@ class TypeBuilder {
       final ffiNativeType = convertToFFIType(win32Type);
       return ffiNativeType;
     }
-    throw WinmdException('Undetected type.');
-    // return '';
+    // Something failed. Return something egregiously wrong, so that the
+    // analyzer picks it up as an error.
+    return '**';
   }
 
   /// Take a TypeDef and create a Dart projection of it.
