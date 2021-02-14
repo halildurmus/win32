@@ -197,4 +197,26 @@ void main() {
     expect(returnType.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_U4));
   });
+
+  test('UnregisterHotKey has the correct parameter type', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.KeyboardAndMouseInput.Apis']!;
+    final api = typedef.findMethod('UnregisterHotKey')!;
+    final param = api.parameters.first;
+
+    expect(param.typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+    expect(param.typeIdentifier.name, endsWith('HWND'));
+  });
+
+  test('UnregisterPowerSettingNotification has the correct parameter type', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.SystemServices.Apis']!;
+    final api = typedef.findMethod('UnregisterPowerSettingNotification')!;
+    final param = api.parameters.first;
+
+    expect(param.typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+    expect(param.typeIdentifier.name, endsWith('HPOWERNOTIFY'));
+  }, skip: 'https://github.com/microsoft/win32metadata/issues/225');
 }
