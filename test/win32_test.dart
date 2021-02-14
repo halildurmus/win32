@@ -176,4 +176,25 @@ void main() {
     expect(api.parameters.first.typeIdentifier.typeArgs.first.name,
         equals('Windows.Win32.DisplayDevices.RECT'));
   });
+
+  test('SetBkColor color param has the correct type', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final api = typedef.findMethod('SetBkColor')!;
+    final colorParam = api.parameters.last;
+
+    expect(colorParam.name, equals('color'));
+    expect(colorParam.typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_U4));
+  });
+
+  test('SetBkColor has the correct return type', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final api = typedef.findMethod('SetBkColor')!;
+    final returnType = api.returnType;
+
+    expect(returnType.typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_U4));
+  });
 }
