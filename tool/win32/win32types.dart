@@ -343,11 +343,11 @@ const win32TypeMap = <String, String>{
   'LPCOLESTR': 'Pointer<Utf16>',
   'LPOLESTR': 'Pointer<Utf16>',
   'PCNZWCH': 'Pointer<Utf16>',
-  'LPCSTR': 'Pointer<Int8>',
+  'LPCSTR': 'Pointer<Utf8>',
   'LPSTR': 'Pointer<Uint8>',
   'LPCCH': 'Pointer<Uint8>',
   'TCHAR': 'Uint16',
-  'PCSTR': 'Pointer<Uint8>',
+  'PCSTR': 'Pointer<Utf8>',
   'PCTSTR': 'Pointer<Utf16>',
   'PCWSTR': 'Pointer<Utf16>',
   // A pointer to a null-terminated string of 16-bit Unicode characters.

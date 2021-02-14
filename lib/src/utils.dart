@@ -19,14 +19,4 @@ bool isWindowsRuntimeAvailable() {
   return true;
 }
 
-Pointer<Uint8> convertToANSIString(String str) {
-  final pStr = calloc<Uint8>(str.length + 1);
-  for (var i = 0; i < str.length; i++) {
-    pStr.elementAt(i).value = str.codeUnitAt(i) & 0xFF;
-  }
-  pStr.elementAt(str.length).value = 0;
-  return pStr;
-}
-
-// @deprecated
 Pointer<Utf16> TEXT(String string) => string.toNativeUtf16();

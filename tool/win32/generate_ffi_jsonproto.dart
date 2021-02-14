@@ -7,6 +7,7 @@
 import 'dart:io';
 
 import 'function.dart';
+import 'generate_from.dart';
 import 'signature.dart';
 import 'win32api.dart';
 import 'win32types.dart';
@@ -55,8 +56,6 @@ void generateFfiFiles(Win32API win32) {
       win32.functions.values.map((e) => e.dllLibrary).toSet().toList();
 
   // Use generate_ffi_winmd.dart for these
-  const winmdGenerated = ['gdi32'];
-
   libraries.removeWhere((library) => winmdGenerated.contains(library));
 
   for (final library in libraries) {

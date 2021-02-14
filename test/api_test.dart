@@ -597,9 +597,9 @@ void main() {
     test('Can instantiate GetProcAddress', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetProcAddress = kernel32.lookupFunction<
-          IntPtr Function(IntPtr hModule, Pointer<Uint8> lpProcName),
+          IntPtr Function(IntPtr hModule, Pointer<Utf8> lpProcName),
           int Function(
-              int hModule, Pointer<Uint8> lpProcName)>('GetProcAddress');
+              int hModule, Pointer<Utf8> lpProcName)>('GetProcAddress');
       expect(GetProcAddress, isA<Function>());
     });
     test('Can instantiate GetProcessHeap', () {
@@ -3214,9 +3214,9 @@ void main() {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final DrawEscape = gdi32.lookupFunction<
           Int32 Function(
-              IntPtr hdc, Int32 iEscape, Int32 cjIn, Pointer<Uint8> lpIn),
+              IntPtr hdc, Int32 iEscape, Int32 cjIn, Pointer<Utf8> lpIn),
           int Function(int hdc, int iEscape, int cjIn,
-              Pointer<Uint8> lpIn)>('DrawEscape');
+              Pointer<Utf8> lpIn)>('DrawEscape');
       expect(DrawEscape, isA<Function>());
     });
     test('Can instantiate Ellipse', () {
@@ -4438,9 +4438,9 @@ void main() {
     test('Can instantiate SysAllocStringByteLen', () {
       final oleaut32 = DynamicLibrary.open('oleaut32.dll');
       final SysAllocStringByteLen = oleaut32.lookupFunction<
-          Pointer Function(Pointer<Uint8> psz, Uint32 len),
+          Pointer Function(Pointer<Utf8> psz, Uint32 len),
           Pointer Function(
-              Pointer<Uint8> psz, int len)>('SysAllocStringByteLen');
+              Pointer<Utf8> psz, int len)>('SysAllocStringByteLen');
       expect(SysAllocStringByteLen, isA<Function>());
     });
     test('Can instantiate SysAllocStringLen', () {

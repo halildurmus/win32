@@ -19,7 +19,7 @@ void main() {
   test('Successful GetProcAddress', () {
     final hModule = GetModuleHandle(TEXT('kernel32.dll'));
 
-    final ansi = convertToANSIString('Beep');
+    final ansi = 'Beep'.toANSI();
     final pGetNativeSystemInfo = GetProcAddress(hModule, ansi);
     expect(pGetNativeSystemInfo, isNonZero);
     calloc.free(ansi);

@@ -84,10 +84,10 @@ Pointer SysAllocString(Pointer<Utf16> psz) {
 /// );
 /// ```
 /// {@category oleaut32}
-Pointer SysAllocStringByteLen(Pointer<Uint8> psz, int len) {
+Pointer SysAllocStringByteLen(Pointer<Utf8> psz, int len) {
   final _SysAllocStringByteLen = _oleaut32.lookupFunction<
-      Pointer Function(Pointer<Uint8> psz, Uint32 len),
-      Pointer Function(Pointer<Uint8> psz, int len)>('SysAllocStringByteLen');
+      Pointer Function(Pointer<Utf8> psz, Uint32 len),
+      Pointer Function(Pointer<Utf8> psz, int len)>('SysAllocStringByteLen');
   return _SysAllocStringByteLen(psz, len);
 }
 

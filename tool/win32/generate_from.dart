@@ -1,0 +1,1 @@
+const winmdGenerated = ['gdi32'];

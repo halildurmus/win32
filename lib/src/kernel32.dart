@@ -1285,10 +1285,10 @@ int GetPhysicallyInstalledSystemMemory(Pointer<Uint64> TotalMemoryInKilobytes) {
 /// );
 /// ```
 /// {@category kernel32}
-int GetProcAddress(int hModule, Pointer<Uint8> lpProcName) {
+int GetProcAddress(int hModule, Pointer<Utf8> lpProcName) {
   final _GetProcAddress = _kernel32.lookupFunction<
-      IntPtr Function(IntPtr hModule, Pointer<Uint8> lpProcName),
-      int Function(int hModule, Pointer<Uint8> lpProcName)>('GetProcAddress');
+      IntPtr Function(IntPtr hModule, Pointer<Utf8> lpProcName),
+      int Function(int hModule, Pointer<Utf8> lpProcName)>('GetProcAddress');
   return _GetProcAddress(hModule, lpProcName);
 }
 

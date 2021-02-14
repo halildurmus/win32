@@ -9,10 +9,11 @@ import 'dart:io';
 import 'package:winmd/winmd.dart';
 
 import 'function.dart';
+import 'generate_from.dart';
 import 'win32api.dart';
 import 'winmd.dart';
 
-late List<Method> methods;
+final methods = <Method>[];
 
 String wrapCommentText(String inputText, [int wrapLength = 76]) {
   final words = inputText.split(' ');
@@ -52,7 +53,6 @@ String generateDocComment(Win32Function func) {
 }
 
 void generateFfiFiles(Win32API win32) {
-  const winmdGenerated = ['gdi32'];
   for (final library in winmdGenerated) {
     final writer = File('lib/src/$library.dart').openSync(mode: FileMode.write);
 
@@ -100,12 +100,18 @@ ${Win32Prototype(function.signature.nameWithoutEncoding, method, 'gdi32').dartFf
 
 void main() {
   final scope = MetadataStore.getScopeForFile('tool/win32/Windows.Win32.winmd');
-  final gdiApi =
-      scope.typeDefs.firstWhere((type) => type.typeName.endsWith('Gdi.Apis'));
+  final apis = scope.typeDefs.where((type) => type.typeName.endsWith('Apis'));
+  // final gdiApi =
+  //     scope.typeDefs.firstWhere((type) => type.typeName.endsWith('Gdi.Apis'));
 
-  methods = gdiApi.methods;
+  apis.forEach((api) => methods.addAll(api.methods));
+  print('${methods.length} APIs collected');
+
   final win32 = Win32API('tool/win32/win32api.json');
+  final genCount = win32.functions.values
+      .where((func) => winmdGenerated.contains(func.dllLibrary))
+      .length;
 
   generateFfiFiles(win32);
-  print('${win32.functions.length} typedefs generated.');
+  print('$genCount typedefs generated.');
 }
