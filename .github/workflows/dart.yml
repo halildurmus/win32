@@ -10,8 +10,8 @@ jobs:
   build:
     runs-on: ${{matrix.os}}
     strategy:
-      # We want to see the results on edge even if beta fails (and vice versa).
-      # This prevents one failure from stopping the entire run.
+      # We want to see the results even if one Dart version fails (and vice
+      # versa). This prevents one failure from stopping the entire run.
       fail-fast: false
 
       matrix:

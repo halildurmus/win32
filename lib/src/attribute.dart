@@ -23,15 +23,20 @@ class Attribute extends TokenObject {
   factory Attribute.fromToken(IMetaDataImport2 reader, int token) {
     final ptkObj = calloc<Uint32>();
     final ptkType = calloc<Uint32>();
-    final ppBlob = calloc<Uint8>(1024);
+    final ppBlob = calloc<IntPtr>();
     final pcbBlob = calloc<Uint32>();
 
     try {
       final hr = reader.GetCustomAttributeProps(
-          token, ptkObj, ptkType, Pointer.fromAddress(ppBlob.address), pcbBlob);
+          token, ptkObj, ptkType, ppBlob, pcbBlob);
       if (SUCCEEDED(hr)) {
-        return Attribute(reader, token, ptkObj.value, ptkType.value,
-            ppBlob.asTypedList(pcbBlob.value));
+        return Attribute(
+            reader,
+            token,
+            ptkObj.value,
+            ptkType.value,
+            Pointer<Uint8>.fromAddress(ppBlob.value)
+                .asTypedList(pcbBlob.value));
       } else {
         throw WindowsException(hr);
       }

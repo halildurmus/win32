@@ -7,6 +7,7 @@ import '../typedef.dart';
 import '../typeidentifier.dart';
 import 'types.dart';
 import '../utils.dart';
+import 'win32types.dart';
 
 const Map<String, String> specialTypes = {'System.Guid': 'GUID'};
 
@@ -19,15 +20,90 @@ class TypeBuilder {
       typeIdentifier.type?.parent?.typeName == 'System.ValueType';
 
   static String dartType(TypeIdentifier typeIdentifier) {
-    if (isTypeAnEnum(typeIdentifier)) {
+    if (isTypeAnEnum(typeIdentifier) || isTypeValueType(typeIdentifier)) {
       return 'int';
-    } else if (isTypeValueType(typeIdentifier)) {
-      return 'int';
-    } else if (specialTypes.containsKey(typeIdentifier.name)) {
-      return specialTypes[typeIdentifier.name]!;
-    } else {
-      return typeIdentifier.name ?? '';
     }
+
+    if (specialTypes.containsKey(typeIdentifier.name)) {
+      return specialTypes[typeIdentifier.name]!;
+    }
+
+    switch (typeIdentifier.corType) {
+      case CorElementType.ELEMENT_TYPE_VOID:
+        return 'void';
+      case CorElementType.ELEMENT_TYPE_BOOLEAN:
+        return 'bool';
+      case CorElementType.ELEMENT_TYPE_STRING:
+        return 'IntPtr';
+      case CorElementType.ELEMENT_TYPE_CHAR:
+      case CorElementType.ELEMENT_TYPE_I1:
+      case CorElementType.ELEMENT_TYPE_U1:
+      case CorElementType.ELEMENT_TYPE_I2:
+      case CorElementType.ELEMENT_TYPE_U2:
+      case CorElementType.ELEMENT_TYPE_I4:
+      case CorElementType.ELEMENT_TYPE_U4:
+      case CorElementType.ELEMENT_TYPE_I8:
+      case CorElementType.ELEMENT_TYPE_U8:
+      case CorElementType.ELEMENT_TYPE_I:
+      case CorElementType.ELEMENT_TYPE_U:
+        return 'int';
+      case CorElementType.ELEMENT_TYPE_R4:
+      case CorElementType.ELEMENT_TYPE_R8:
+        return 'double';
+      case CorElementType.ELEMENT_TYPE_PTR:
+        // Check if it's Pointer<T>, in which case we have work
+        final typeArgs = typeIdentifier.typeArgs;
+        if (typeArgs.length == 1) {
+          if (typeArgs.first.type != null &&
+              typeArgs.first.type!.typeName.startsWith('Windows.Win32')) {
+            final win32Type =
+                typeArgs.first.type?.typeName.split('.').last ?? '';
+            final ffiNativeType = convertToFFIType(win32Type);
+            // If it's a Unicode Win32 type, strip off the ending 'W'.
+            if (ffiNativeType.endsWith('W')) {
+              return 'Pointer<${ffiNativeType.substring(0, ffiNativeType.length - 1)}>';
+            } else {
+              return 'Pointer<$ffiNativeType>';
+            }
+          } else {
+            if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_U2) {
+              if (typeIdentifier.name == 'LPWSTR') {
+                return 'Pointer<Utf16>';
+              }
+              if (typeIdentifier.name == 'LPSTR') {
+                return 'Pointer<Utf8>';
+              }
+              return 'Pointer<Uint16>';
+            }
+            if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_VOID) {
+              // Pointer<Void> in Dart is unnecessarily restrictive, versus the
+              // Win32 meaning, which is more like "undefined type". We can
+              // model that with a generic Pointer in Dart.
+              return 'Pointer';
+            } else {
+              return 'Pointer<${nativeType(typeArgs.first)}>';
+            }
+          }
+        }
+        return 'Pointer';
+
+      case CorElementType.ELEMENT_TYPE_FNPTR:
+        return 'Pointer';
+
+      default:
+    }
+
+    // If it's a Win32 type, we know how to get the type
+    if (typeIdentifier.type != null &&
+        typeIdentifier.type!.typeName.startsWith('Windows.Win32')) {
+      final win32Type = typeIdentifier.type?.typeName.split('.').last ?? '';
+      final ffiNativeType = convertToFFIType(win32Type);
+      final dartType = convertToDartType(ffiNativeType);
+      return dartType;
+    }
+
+    throw WinmdException('Undetected type.');
+    // return '';
   }
 
   static String nativeType(TypeIdentifier typeIdentifier) {
@@ -36,14 +112,85 @@ class TypeBuilder {
     // enums are always signed or unsigned 32-bit values.
     if (isTypeAnEnum(typeIdentifier)) {
       return 'Int32';
-    } else if (isTypeValueType(typeIdentifier)) {
+    }
+    if (isTypeValueType(typeIdentifier)) {
       // TODO: This needs figuring out -- a struct could have anything in it.
       return 'Uint32';
-    } else if (specialTypes.containsKey(typeIdentifier.name)) {
-      return specialTypes[typeIdentifier.name]!;
-    } else {
-      return typeIdentifier.name ?? '';
     }
+    if (specialTypes.containsKey(typeIdentifier.name)) {
+      return specialTypes[typeIdentifier.name]!;
+    }
+
+    switch (typeIdentifier.corType) {
+      case CorElementType.ELEMENT_TYPE_VOID:
+        return 'Void';
+      case CorElementType.ELEMENT_TYPE_BOOLEAN:
+      case CorElementType.ELEMENT_TYPE_CHAR:
+      case CorElementType.ELEMENT_TYPE_U1:
+        return 'Uint8';
+      case CorElementType.ELEMENT_TYPE_I1:
+        return 'Int8';
+      case CorElementType.ELEMENT_TYPE_I2:
+        return 'Int16';
+      case CorElementType.ELEMENT_TYPE_U2:
+        return 'Uint16';
+      case CorElementType.ELEMENT_TYPE_I4:
+        return 'Int32';
+      case CorElementType.ELEMENT_TYPE_U4:
+        return 'Uint32';
+      case CorElementType.ELEMENT_TYPE_I8:
+        return 'Int64';
+      case CorElementType.ELEMENT_TYPE_U8:
+        return 'Uint64';
+      case CorElementType.ELEMENT_TYPE_R4:
+        return 'Float';
+      case CorElementType.ELEMENT_TYPE_R8:
+        return 'Double';
+      case CorElementType.ELEMENT_TYPE_STRING:
+        return 'IntPtr';
+      case CorElementType.ELEMENT_TYPE_PTR:
+        final typeArgs = typeIdentifier.typeArgs;
+        if (typeArgs.length == 1) {
+          if (typeArgs.first.type != null &&
+              typeArgs.first.type!.typeName.startsWith('Windows.Win32')) {
+            final win32Type =
+                typeArgs.first.type?.typeName.split('.').last ?? '';
+            final ffiNativeType = convertToFFIType(win32Type);
+            // If it's a Unicode Win32 type, strip off the ending 'W'.
+            if (ffiNativeType.endsWith('W')) {
+              return 'Pointer<${ffiNativeType.substring(0, ffiNativeType.length - 1)}>';
+            } else {
+              return 'Pointer<$ffiNativeType>';
+            }
+          } else {
+            if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_VOID) {
+              // Pointer<Void> in Dart is unnecessarily restrictive, versus the
+              // Win32 meaning, which is more like "undefined type". We can
+              // model that with a generic Pointer in Dart.
+              return 'Pointer';
+            } else {
+              return 'Pointer<${nativeType(typeArgs.first)}>';
+            }
+          }
+        }
+        return 'Pointer';
+
+      case CorElementType.ELEMENT_TYPE_FNPTR:
+        return 'Pointer';
+      case CorElementType.ELEMENT_TYPE_I:
+      case CorElementType.ELEMENT_TYPE_U:
+        return 'IntPtr';
+      default:
+    }
+    // If it's a Win32 type, we know how to get the type
+    if (typeIdentifier.type != null &&
+        typeIdentifier.type!.typeName.startsWith('Windows.Win32')) {
+      final win32Type = typeIdentifier.type?.typeName.split('.').last ?? '';
+      final ffiNativeType = convertToFFIType(win32Type);
+      return ffiNativeType;
+    }
+    throw WinmdException('Undetected type.');
+    // return '';
   }
 
   /// Take a TypeDef and create a Dart projection of it.

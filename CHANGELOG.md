@@ -1,3 +1,9 @@
+## 0.4.0-dev.1
+
+- Broad refactoring, focusing the core WinMD package on reading metadata and
+  moving transforms to the projection/ folder. Also fix a memory leak on the
+  enumerations.
+
 ## 0.3.0-dev.2
 
 - Updated to FFI 1.0 and adopted breaking changes

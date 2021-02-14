@@ -42,8 +42,8 @@ void listMethods(
   printHeading('First ten methods of $type');
 
   final mdScope = MetadataStore.getScopeForType(type);
-  final winTypeDef = mdScope.findTypeDef(type);
-  final methods = winTypeDef.methods.take(10);
+  final winTypeDef = mdScope[type];
+  final methods = winTypeDef!.methods.take(10);
 
   print(methods.map(methodSignature).join('\n'));
 }
@@ -55,8 +55,8 @@ void listParameters(
 
   final mdScope = MetadataStore.getScopeForType(type);
 
-  final winTypeDef = mdScope.findTypeDef(type);
-  final method = winTypeDef.findMethod(methodName)!;
+  final winTypeDef = mdScope[type];
+  final method = winTypeDef!.findMethod(methodName)!;
 
   print('${method.methodName} has '
       '${method.parameters.length} parameter(s).');
@@ -77,9 +77,9 @@ void listInterfaces([String type = 'Windows.Storage.Pickers.FolderPicker']) {
 
   final mdScope = MetadataStore.getScopeForType(type);
 
-  final winTypeDef = mdScope.findTypeDef(type);
+  final winTypeDef = mdScope[type];
 
-  final interfaces = winTypeDef.interfaces.take(5);
+  final interfaces = winTypeDef!.interfaces.take(5);
 
   print('$type implements:');
   for (final interface in interfaces) {
@@ -92,9 +92,9 @@ void listGUID([String type = 'Windows.UI.Shell.IAdaptiveCard']) {
   printHeading('GUID for $type');
 
   final mdScope = MetadataStore.getScopeForType(type);
-  final winTypeDef = mdScope.findTypeDef(type);
+  final winTypeDef = mdScope[type];
 
-  print(winTypeDef.guid);
+  print(winTypeDef!.guid);
 }
 
 String methodSignature(Method method) {
@@ -126,15 +126,15 @@ String convertTypeToProjection(
   final idlProjection = StringBuffer();
 
   final mdScope = MetadataStore.getScopeForType(type);
-  final winTypeDef = mdScope.findTypeDef(type);
+  final winTypeDef = mdScope[type];
 
-  if (winTypeDef.parent!.typeName == 'IInspectable') {
+  if (winTypeDef?.parent?.typeName == 'IInspectable') {
     idlProjection.writeln('// vtable_start 6');
   } else {
     idlProjection.writeln('// vtable_start UNKNOWN');
   }
 
-  idlProjection.writeln('[uuid(${winTypeDef.guid}]');
+  idlProjection.writeln('[uuid(${winTypeDef!.guid}]');
   idlProjection.writeln(
       'interface ${winTypeDef.typeName} : ${winTypeDef.parent!.typeName}');
   idlProjection.writeln('{');

@@ -7,7 +7,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+import 'constants.dart';
 import 'enumeration.dart';
+import 'module.dart';
 import 'typedef.dart';
 
 /// A metadata scope, which typically matches an on-disk file.
@@ -16,8 +18,25 @@ import 'typedef.dart';
 /// [MetadataStore], which caches scopes to avoid duplication.
 class Scope {
   final IMetaDataImport2 reader;
+  final _modules = <Module>[];
 
   Scope(this.reader);
+
+  String get name {
+    final szName = calloc<Uint16>(256).cast<Utf16>();
+    final pchName = calloc<Uint32>();
+    try {
+      final hr = reader.GetScopeProps(szName, 256, pchName, nullptr);
+      if (SUCCEEDED(hr)) {
+        return szName.toDartString();
+      } else {
+        throw COMException(hr);
+      }
+    } finally {
+      calloc.free(szName);
+      calloc.free(pchName);
+    }
+  }
 
   /// Get an enumerated list of typedefs for this scope.
   List<TypeDef> get typeDefs {
@@ -37,13 +56,34 @@ class Scope {
       }
       return types;
     } finally {
-      reader.CloseEnum(phEnum.address);
-
+      reader.CloseEnum(phEnum.value);
+      calloc.free(phEnum);
       calloc.free(rgTypeDefs);
       calloc.free(pcTypeDefs);
-
-      // dispose phEnum crashes here, so leave it allocated
     }
+  }
+
+  List<Module> get modules {
+    if (_modules.isEmpty) {
+      final phEnum = calloc<IntPtr>();
+      final rgModuleRefs = calloc<Uint32>();
+      final pcModuleRefs = calloc<Uint32>();
+
+      try {
+        var hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
+        while (hr == S_OK) {
+          final token = rgModuleRefs.value;
+          _modules.add(Module.fromToken(reader, token));
+          hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
+        }
+      } finally {
+        reader.CloseEnum(phEnum.value);
+        calloc.free(phEnum);
+        calloc.free(rgModuleRefs);
+        calloc.free(pcModuleRefs);
+      }
+    }
+    return _modules;
   }
 
   List<Enumeration> get enums {
@@ -57,13 +97,19 @@ class Scope {
   }
 
   /// Find a typedef by name.
-  TypeDef findTypeDef(String type) {
+  TypeDef? operator [](String type) {
     final szTypeDef = type.toNativeUtf16();
     final ptkTypeDef = calloc<Uint32>();
 
     try {
-      reader.FindTypeDefByName(szTypeDef, NULL, ptkTypeDef);
-      return TypeDef.fromToken(reader, ptkTypeDef.value);
+      final hr = reader.FindTypeDefByName(szTypeDef, NULL, ptkTypeDef);
+      if (SUCCEEDED(hr)) {
+        return TypeDef.fromToken(reader, ptkTypeDef.value);
+      } else if (hr == CLDB_E_RECORD_NOTFOUND) {
+        return null;
+      } else {
+        throw COMException(hr);
+      }
     } finally {
       calloc.free(szTypeDef);
       calloc.free(ptkTypeDef);

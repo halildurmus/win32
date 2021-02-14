@@ -5,15 +5,24 @@
 import 'constants.dart';
 import 'typedef.dart';
 import 'utils.dart';
-import 'projection/win32types.dart';
 
+/// Represents a type, as for example used in a parameter. Return
+/// types use the same class, although they have no name.
 class TypeIdentifier {
+  /// Underlying base type represented here
   CorElementType corType;
-  String? name;
+
+  /// The name of the type (for example, `Windows.Storage.IStorageFile` or
+  /// `LPWSTR`)
+  String name;
+
+  /// The class or interface, if the type is (for example) ELEMENT_TYPE_CLASS
   TypeDef? type;
+
+  /// Any arguments (for example, the Uint16 in a Pointer<Uint16>).
   final typeArgs = <TypeIdentifier>[];
 
-  TypeIdentifier(this.corType);
+  TypeIdentifier(this.corType, [this.name = '', this.type]);
 
   factory TypeIdentifier.fromValue(int corElementTypeValue) {
     switch (corElementTypeValue) {
@@ -93,141 +102,6 @@ class TypeIdentifier {
         throw WinmdException('Unrecognized type $corElementTypeValue');
     }
   }
-
-  String get dartType {
-    switch (corType) {
-      case CorElementType.ELEMENT_TYPE_VOID:
-        return 'void';
-      case CorElementType.ELEMENT_TYPE_BOOLEAN:
-        return 'bool';
-      case CorElementType.ELEMENT_TYPE_STRING:
-        return 'IntPtr';
-      case CorElementType.ELEMENT_TYPE_CHAR:
-      case CorElementType.ELEMENT_TYPE_I1:
-      case CorElementType.ELEMENT_TYPE_U1:
-      case CorElementType.ELEMENT_TYPE_I2:
-      case CorElementType.ELEMENT_TYPE_U2:
-      case CorElementType.ELEMENT_TYPE_I4:
-      case CorElementType.ELEMENT_TYPE_U4:
-      case CorElementType.ELEMENT_TYPE_I8:
-      case CorElementType.ELEMENT_TYPE_U8:
-      case CorElementType.ELEMENT_TYPE_I:
-      case CorElementType.ELEMENT_TYPE_U:
-        return 'int';
-      case CorElementType.ELEMENT_TYPE_R4:
-      case CorElementType.ELEMENT_TYPE_R8:
-        return 'double';
-      case CorElementType.ELEMENT_TYPE_PTR:
-        // Check if it's Pointer<T>, in which case we have work
-        if (typeArgs.length == 1) {
-          if (typeArgs.first.type != null &&
-              typeArgs.first.type!.typeName.startsWith('Windows.Win32')) {
-            final win32Type =
-                typeArgs.first.type?.typeName.split('.').last ?? '';
-            final ffiNativeType = convertToFFIType(win32Type);
-            // If it's a Unicode Win32 type, strip off the ending 'W'.
-            if (ffiNativeType.endsWith('W')) {
-              return 'Pointer<${ffiNativeType.substring(0, ffiNativeType.length - 1)}>';
-            } else {
-              return 'Pointer<$ffiNativeType>';
-            }
-          } else {
-            if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_VOID) {
-              // Pointer<Void> in Dart is unnecessarily restrictive, versus the
-              // Win32 meaning, which is more like "undefined type". We can
-              // model that with a generic Pointer in Dart.
-              return 'Pointer';
-            } else {
-              return 'Pointer<${typeArgs.first.nativeType}>';
-            }
-          }
-        }
-        return 'Pointer';
-
-      case CorElementType.ELEMENT_TYPE_FNPTR:
-        return 'Pointer';
-      default:
-        // If it's a Win32 type, we know how to get the type
-        if (type != null && type!.typeName.startsWith('Windows.Win32')) {
-          final win32Type = type?.typeName.split('.').last ?? '';
-          final ffiNativeType = convertToFFIType(win32Type);
-          final dartType = convertToDartType(ffiNativeType);
-          return dartType;
-        }
-        return '';
-    }
-  }
-
-  String get nativeType {
-    switch (corType) {
-      case CorElementType.ELEMENT_TYPE_VOID:
-        return 'Void';
-      case CorElementType.ELEMENT_TYPE_BOOLEAN:
-      case CorElementType.ELEMENT_TYPE_CHAR:
-      case CorElementType.ELEMENT_TYPE_U1:
-        return 'Uint8';
-      case CorElementType.ELEMENT_TYPE_I1:
-        return 'Int8';
-      case CorElementType.ELEMENT_TYPE_I2:
-        return 'Int16';
-      case CorElementType.ELEMENT_TYPE_U2:
-        return 'Uint16';
-      case CorElementType.ELEMENT_TYPE_I4:
-        return 'Int32';
-      case CorElementType.ELEMENT_TYPE_U4:
-        return 'Uint32';
-      case CorElementType.ELEMENT_TYPE_I8:
-        return 'Int64';
-      case CorElementType.ELEMENT_TYPE_U8:
-        return 'Uint64';
-      case CorElementType.ELEMENT_TYPE_R4:
-        return 'Float';
-      case CorElementType.ELEMENT_TYPE_R8:
-        return 'Double';
-      case CorElementType.ELEMENT_TYPE_STRING:
-        return 'IntPtr';
-      case CorElementType.ELEMENT_TYPE_PTR:
-        if (typeArgs.length == 1) {
-          if (typeArgs.first.type != null &&
-              typeArgs.first.type!.typeName.startsWith('Windows.Win32')) {
-            final win32Type =
-                typeArgs.first.type?.typeName.split('.').last ?? '';
-            final ffiNativeType = convertToFFIType(win32Type);
-            // If it's a Unicode Win32 type, strip off the ending 'W'.
-            if (ffiNativeType.endsWith('W')) {
-              return 'Pointer<${ffiNativeType.substring(0, ffiNativeType.length - 1)}>';
-            } else {
-              return 'Pointer<$ffiNativeType>';
-            }
-          } else {
-            if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_VOID) {
-              // Pointer<Void> in Dart is unnecessarily restrictive, versus the
-              // Win32 meaning, which is more like "undefined type". We can
-              // model that with a generic Pointer in Dart.
-              return 'Pointer';
-            } else {
-              return 'Pointer<${typeArgs.first.nativeType}>';
-            }
-          }
-        }
-        return 'Pointer';
-
-      case CorElementType.ELEMENT_TYPE_FNPTR:
-        return 'Pointer';
-      case CorElementType.ELEMENT_TYPE_I:
-      case CorElementType.ELEMENT_TYPE_U:
-        return 'IntPtr';
-      default:
-        // If it's a Win32 type, we know how to get the type
-        if (type != null && type!.typeName.startsWith('Windows.Win32')) {
-          final win32Type = type?.typeName.split('.').last ?? '';
-          final ffiNativeType = convertToFFIType(win32Type);
-          return ffiNativeType;
-        }
-        return '';
-    }
-  }
-
   int get value {
     switch (corType) {
       case CorElementType.ELEMENT_TYPE_END:
@@ -302,6 +176,86 @@ class TypeIdentifier {
         return 0x41;
       case CorElementType.ELEMENT_TYPE_PINNED:
         return 0x45;
+      default:
+        throw WinmdException('Unrecognized type ${corType.index}');
+    }
+  }
+
+  @override
+  String toString() {
+    switch (corType) {
+      case CorElementType.ELEMENT_TYPE_END:
+        return '*END*';
+      case CorElementType.ELEMENT_TYPE_VOID:
+        return 'void';
+      case CorElementType.ELEMENT_TYPE_BOOLEAN:
+        return 'bool';
+      case CorElementType.ELEMENT_TYPE_CHAR:
+        return 'char';
+      case CorElementType.ELEMENT_TYPE_I1:
+        return 'byte';
+      case CorElementType.ELEMENT_TYPE_U1:
+        return 'ubyte';
+      case CorElementType.ELEMENT_TYPE_I2:
+        return 'short';
+      case CorElementType.ELEMENT_TYPE_U2:
+        return 'ushort';
+      case CorElementType.ELEMENT_TYPE_I4:
+        return 'int';
+      case CorElementType.ELEMENT_TYPE_U4:
+        return 'uint';
+      case CorElementType.ELEMENT_TYPE_I8:
+        return 'int64';
+      case CorElementType.ELEMENT_TYPE_U8:
+        return 'uint64';
+      case CorElementType.ELEMENT_TYPE_R4:
+        return 'float';
+      case CorElementType.ELEMENT_TYPE_R8:
+        return 'double';
+      case CorElementType.ELEMENT_TYPE_STRING:
+        return 'string';
+      case CorElementType.ELEMENT_TYPE_PTR:
+        return 'pointer';
+      case CorElementType.ELEMENT_TYPE_BYREF:
+        return 'byref';
+      case CorElementType.ELEMENT_TYPE_VALUETYPE:
+        return 'valuetype';
+      case CorElementType.ELEMENT_TYPE_CLASS:
+        return 'class';
+      case CorElementType.ELEMENT_TYPE_VAR:
+        return 'classvar';
+      case CorElementType.ELEMENT_TYPE_ARRAY:
+        return 'array';
+      case CorElementType.ELEMENT_TYPE_GENERICINST:
+        return 'generic';
+      case CorElementType.ELEMENT_TYPE_TYPEDBYREF:
+        return 'typedref';
+      case CorElementType.ELEMENT_TYPE_I:
+        return 'intptr';
+      case CorElementType.ELEMENT_TYPE_U:
+        return 'uintptr';
+      case CorElementType.ELEMENT_TYPE_FNPTR:
+        return 'funcptr';
+      case CorElementType.ELEMENT_TYPE_OBJECT:
+        return 'object';
+      case CorElementType.ELEMENT_TYPE_SZARRAY:
+        return 'vector';
+      case CorElementType.ELEMENT_TYPE_MVAR:
+        return 'methodvar';
+      case CorElementType.ELEMENT_TYPE_CMOD_REQD:
+        return 'required';
+      case CorElementType.ELEMENT_TYPE_CMOD_OPT:
+        return 'optional';
+      case CorElementType.ELEMENT_TYPE_INTERNAL:
+        return '*internal*';
+      case CorElementType.ELEMENT_TYPE_MAX:
+        return '*invalid*';
+      case CorElementType.ELEMENT_TYPE_MODIFIER:
+        return '*modifier*';
+      case CorElementType.ELEMENT_TYPE_SENTINEL:
+        return 'sentinel';
+      case CorElementType.ELEMENT_TYPE_PINNED:
+        return '*pinned*';
       default:
         throw WinmdException('Unrecognized type ${corType.index}');
     }

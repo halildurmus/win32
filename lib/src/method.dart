@@ -10,6 +10,7 @@ import 'package:win32/win32.dart';
 
 import 'constants.dart';
 import '_base.dart';
+import 'module.dart';
 import 'parameter.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
@@ -39,12 +40,35 @@ class Method extends AttributeObject {
   bool get isSpecialName => _testFlag(CorMethodAttr.mdSpecialName);
   bool get isRTSpecialName => _testFlag(CorMethodAttr.mdRTSpecialName);
 
+  Module get module {
+    final pdwMappingFlags = calloc<Uint32>();
+    final szImportName = calloc<Uint16>(256).cast<Utf16>();
+    final pchImportName = calloc<Uint32>();
+    final ptkImportDLL = calloc<Uint32>();
+    try {
+      final hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName, 256,
+          pchImportName, ptkImportDLL);
+      if (SUCCEEDED(hr)) {
+        // print('pinvoke dll is ${szImportName.toDartString()}');
+        return Module.fromToken(reader, ptkImportDLL.value);
+      } else {
+        throw COMException(hr);
+      }
+    } finally {
+      calloc.free(pdwMappingFlags);
+      calloc.free(szImportName);
+      calloc.free(pchImportName);
+      calloc.free(ptkImportDLL);
+    }
+  }
+
   Method(IMetaDataImport2 reader, int token, this.methodName, this.methodFlags,
       this.signatureBlob, this.relativeVirtualAddress, this.implFlags)
       : super(reader, token) {
     _parseMethodType();
     _parseParameterNames();
-    _parseParameters();
+    _parseSignatureBlob();
+    _parseParameterAttributes();
   }
 
   factory Method.fromToken(IMetaDataImport2 reader, int token) {
@@ -95,10 +119,11 @@ class Method extends AttributeObject {
 
   /// Parse a single type from the signature blob.
   ///
-  /// Returns a Tuple containing the runtime type and the number of bytes
+  /// Returns a [TypeTuple] containing the runtime type and the number of bytes
   /// consumed.
   ///
-  /// Details on the blob format can be found at §II.23.1.16 of ECMA-335.
+  /// Details on the blob format can be found at §II.23.1.16 and §II.23.2 of
+  /// ECMA-335.
   TypeTuple _parseTypeFromSignature(Uint8List signatureBlob) {
     final paramType = signatureBlob.first;
     final runtimeType = TypeIdentifier.fromValue(paramType);
@@ -131,7 +156,7 @@ class Method extends AttributeObject {
       }
     } else {
       dataLength = 1;
-      runtimeType.name = runtimeType.nativeType;
+      runtimeType.name = runtimeType.toString();
     }
     return TypeTuple(runtimeType, dataLength);
   }
@@ -149,84 +174,104 @@ class Method extends AttributeObject {
     return retVal.toString();
   }
 
-  /// Parses the parameters and return type for this method.
+  /// Parses the parameters and return type for this method from the
+  /// [signatureBlob], which is of type `MethodDefSig` (or `PropertySig`, if the
+  /// method is a property getter). This is documented in §II.23.2.1 and
+  /// §II.23.2.5 respectively.
+  void _parseSignatureBlob() {
+    if (isGetProperty || isSetProperty) {
+      _parsePropertySig();
+    } else {
+      _parseMethodDefSig();
+    }
+  }
+
+  /// Parse a property from the signature blob. Properties have the following
+  /// format: [type | paramCount | customMod | type | param]
   ///
-  /// The method might actually be a property getter or setter, so we also have
-  /// to handle those conditions.
-  void _parseParameters() {
+  /// `PropertySig` is defined in §II.23.2.5.
+  void _parsePropertySig() {
+    if (isGetProperty) {
+      // Type should begin at index 2
+      final typeIdentifier =
+          _parseTypeFromSignature(signatureBlob.sublist(2)).typeIdentifier;
+      returnType = Parameter.fromTypeIdentifier(reader, typeIdentifier);
+    } else if (isSetProperty) {
+      // set properties don't have a return type
+      returnType = Parameter.fromVoid(reader);
+    }
+  }
+
+  /// Parses the parameters and return type for this method from the
+  /// [signatureBlob], which is of type `MethodDefSig`. This is documented in
+  /// §II.23.2.1.
+  ///
+  /// This is of format:
+  ///   [callConv | genParamCount | paramCount | retType | param...]
+  void _parseMethodDefSig() {
     var paramsIndex = 0;
 
-    // Strip off the header and the paramCount. We use the paramNames
-    // enumeration to determine how many parameters there are to index.
+    // Strip off the header and the paramCount. We know the number and names of
+    // the parameters already, and we're simply mapping them to types here.
     var blobPtr = hasGenericParameters == false ? 2 : 3;
 
-    if (isGetProperty) {
-      returnType = Parameter.fromTypeIdentifier(reader,
-          _parseTypeFromSignature(signatureBlob.sublist(2)).typeIdentifier)
-        ..name = '';
-    } else if (isSetProperty) {
-      returnType = Parameter.fromVoid(reader);
-    } else {
-      // We're parsing a method
-      if (parameters.isNotEmpty) {
-        // In some implementations (e.g. Windows Runtime), param.EnumParams
-        // includes the return type as a zeroth sequence number. If that's the
-        // case, we already have a return parameter, and we can use this for the
-        // returnType, then strip it off the parameter list.
-        if (parameters.first.sequence == 0) {
-          // Parse return type
-          returnType = parameters.first;
-          parameters = parameters.sublist(1);
-          final returnTypeTuple =
-              _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
-          returnType.typeIdentifier = returnTypeTuple.typeIdentifier;
-          blobPtr += returnTypeTuple.offsetLength;
-        } else {
-          // While in Windows Runtime, a zeroth parameter in param.EnumParams is
-          // provided, in Win32 EnumParams may not return a zeroth parameter
-          // even if there is a return type. So we still parse and return the
-          // signature.
-          final returnTypeTuple =
-              _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
-          returnType = Parameter.fromTypeIdentifier(
-              reader, returnTypeTuple.typeIdentifier);
-          blobPtr += returnTypeTuple.offsetLength;
-        }
-
-        // Parse each method parameter
-        while (paramsIndex < parameters.length) {
-          final runtimeType =
-              _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
-          if (runtimeType.typeIdentifier.corType ==
-              CorElementType.ELEMENT_TYPE_ARRAY) {
-            blobPtr +=
-                _parseArray(signatureBlob.sublist(blobPtr + 1), paramsIndex)! +
-                    2;
-            paramsIndex++; //we've added two parameters here
-          } else if (runtimeType.typeIdentifier.corType ==
-              CorElementType.ELEMENT_TYPE_PTR) {
-            // Pointer<T>, so parse the type of T.
-            blobPtr += runtimeType.offsetLength;
-            final ptrType =
-                _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
-            parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
-            parameters[paramsIndex]
-                .typeIdentifier
-                .typeArgs
-                .add(ptrType.typeIdentifier);
-            blobPtr += ptrType.offsetLength;
-          } else {
-            parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
-
-            blobPtr += runtimeType.offsetLength;
-          }
-          paramsIndex++;
-        }
+    if (parameters.isNotEmpty) {
+      // In some implementations (e.g. Windows Runtime), param.EnumParams
+      // includes the return type as a zeroth sequence number. If that's the
+      // case, we already have a return parameter, and we can use this for the
+      // returnType, then strip it off the parameter list.
+      if (parameters.first.sequence == 0) {
+        // Parse return type
+        returnType = parameters.first;
+        parameters = parameters.sublist(1);
+        final returnTypeTuple =
+            _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
+        returnType.typeIdentifier = returnTypeTuple.typeIdentifier;
+        blobPtr += returnTypeTuple.offsetLength;
       } else {
-        // paramNames is empty, so we're dealing with a void method with void
-        // parameters.
-        returnType = Parameter.fromVoid(reader);
+        // In Win32 EnumParams does not return a zeroth parameter even if there
+        // is a return type. So we create a new returnType for it.
+        final returnTypeTuple =
+            _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
+        returnType = Parameter.fromTypeIdentifier(
+            reader, returnTypeTuple.typeIdentifier);
+        blobPtr += returnTypeTuple.offsetLength;
       }
+
+      // Now we're at the parameters section of MethodDefSig. Parse each method
+      // parameter.
+      while (paramsIndex < parameters.length) {
+        final runtimeType =
+            _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
+
+        if (runtimeType.typeIdentifier.corType ==
+            CorElementType.ELEMENT_TYPE_ARRAY) {
+          blobPtr +=
+              _parseArray(signatureBlob.sublist(blobPtr + 1), paramsIndex)! + 2;
+          paramsIndex++; //we've added two parameters here
+        } else if (runtimeType.typeIdentifier.corType ==
+            CorElementType.ELEMENT_TYPE_PTR) {
+          // Pointer<T>, so parse the type of T.
+          blobPtr += runtimeType.offsetLength;
+          final ptrType =
+              _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
+          parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
+          parameters[paramsIndex]
+              .typeIdentifier
+              .typeArgs
+              .add(ptrType.typeIdentifier);
+          blobPtr += ptrType.offsetLength;
+        } else {
+          parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
+
+          blobPtr += runtimeType.offsetLength;
+        }
+        paramsIndex++;
+      }
+    } else {
+      // paramNames is empty, so we're dealing with a void method with void
+      // parameters.
+      returnType = Parameter.fromVoid(reader);
     }
   }
 
@@ -245,11 +290,29 @@ class Method extends AttributeObject {
           hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
         }
       } finally {
+        reader.CloseEnum(phEnum.value);
+        calloc.free(phEnum);
         calloc.free(ptkParamDef);
         calloc.free(pcTokens);
+      }
+    }
+  }
 
-        reader.CloseEnum(phEnum.address);
-        // dispose phEnum crashes here, so leave it allocated
+  void _parseParameterAttributes() {
+    // At some point, we should look this up
+    const nativeTypeInfoToken = 0x0A000004;
+
+    for (final param in parameters) {
+      for (final attr in param.attributes) {
+        if (attr.tokenType == nativeTypeInfoToken) {
+          if (attr.signatureBlob[2] == 0x14) // ASCII
+          {
+            param.typeIdentifier.name = 'LPSTR';
+          } else if (attr.signatureBlob[2] == 0x15) // Unicode
+          {
+            param.typeIdentifier.name = 'LPWSTR';
+          }
+        }
       }
     }
   }
