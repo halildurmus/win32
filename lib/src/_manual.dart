@@ -8,12 +8,6 @@
 
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
-
-import 'callbacks.dart';
-import 'com/combase.dart';
-import 'structs.dart';
-
 final _user32 = DynamicLibrary.open('user32.dll');
 
 /// Changes an attribute of the specified window. The function also sets a
