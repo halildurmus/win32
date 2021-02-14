@@ -14,9 +14,11 @@ const Map<String, String> specialTypes = {'System.Guid': 'GUID'};
 /// Takes a WinMD type and builds a Dart representation of it.
 class TypeBuilder {
   static bool isTypeAnEnum(TypeIdentifier typeIdentifier) =>
+      !typeIdentifier.name.startsWith('Windows.Win32') &&
       typeIdentifier.type?.parent?.typeName == 'System.Enum';
 
   static bool isTypeValueType(TypeIdentifier typeIdentifier) =>
+      !typeIdentifier.name.startsWith('Windows.Win32') &&
       typeIdentifier.type?.parent?.typeName == 'System.ValueType';
 
   static String dartType(TypeIdentifier typeIdentifier) {
