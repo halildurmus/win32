@@ -4,14 +4,14 @@ import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
-  test(('Simple int type'), () {
+  test('Simple int type', () {
     final type = TypeIdentifier(CorElementType.ELEMENT_TYPE_I4);
 
     expect(TypeBuilder.dartType(type), equals('int'));
     expect(TypeBuilder.nativeType(type), equals('Int32'));
   });
 
-  test(('Unicode string'), () {
+  test('Unicode string', () {
     final type = TypeIdentifier(CorElementType.ELEMENT_TYPE_PTR)
       ..name = 'LPWSTR'
       ..typeArgs = [TypeIdentifier(CorElementType.ELEMENT_TYPE_U2)];
@@ -20,17 +20,17 @@ void main() {
     expect(TypeBuilder.nativeType(type), equals('Pointer<Utf16>'));
   });
 
-  test(('ANSI string'), () {
+  test('ANSI string', () {
     final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
     final typedef = scope['Windows.Win32.KeyboardAndMouseInput.Apis']!;
     final api = typedef.findMethod('GetKeyNameTextA')!;
-    final type = api.parameters.first.typeIdentifier; // LPSTR
+    final type = api.parameters[1].typeIdentifier; // LPSTR
 
     expect(TypeBuilder.dartType(type), equals('Pointer<Utf8>'));
     expect(TypeBuilder.nativeType(type), equals('Pointer<Utf8>'));
   });
 
-  test(('Handle'), () {
+  test('Handle', () {
     final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
     final typedef = scope['Windows.Win32.KeyboardAndMouseInput.Apis']!;
     final api = typedef.findMethod('UnregisterHotKey')!;
@@ -39,8 +39,16 @@ void main() {
     expect(TypeBuilder.dartType(type), equals('int'));
     expect(TypeBuilder.nativeType(type), equals('IntPtr'));
   });
+  test('Pointer<T>', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.KeyboardAndMouseInput.Apis']!;
+    final api = typedef.findMethod('GetKeyboardState')!;
+    final type = api.parameters.first.typeIdentifier; // PBYTE
 
-  test(('Pointer<Pointer<T>>'), () {
+    expect(TypeBuilder.dartType(type), equals('Pointer<Uint8>'));
+    expect(TypeBuilder.nativeType(type), equals('Pointer<Uint8>'));
+  });
+  test('Pointer<Pointer<T>>', () {
     final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
     final typedef = scope['Windows.Win32.Security.Apis']!;
     final api = typedef.findMethod('CredReadW')!;

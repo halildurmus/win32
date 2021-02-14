@@ -55,9 +55,17 @@ class TypeBuilder {
       case CorElementType.ELEMENT_TYPE_OBJECT:
         return 'COMObject';
       case CorElementType.ELEMENT_TYPE_PTR:
+        // Is it a string pointer?
+        if (typeIdentifier.name == 'LPWSTR') {
+          return 'Pointer<Utf16>';
+        }
+        if (typeIdentifier.name == 'LPSTR') {
+          return 'Pointer<Utf8>';
+        }
+
         // Check if it's Pointer<T>, in which case we have work
         final typeArgs = typeIdentifier.typeArgs;
-        if (typeArgs.length == 1) {
+        if (typeArgs.isNotEmpty) {
           if (typeArgs.first.type != null &&
               typeArgs.first.type!.typeName.startsWith('Windows.Win32')) {
             final win32Type =
@@ -70,15 +78,6 @@ class TypeBuilder {
               return 'Pointer<$ffiNativeType>';
             }
           } else {
-            if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_U2) {
-              if (typeIdentifier.name == 'LPWSTR') {
-                return 'Pointer<Utf16>';
-              }
-              if (typeIdentifier.name == 'LPSTR') {
-                return 'Pointer<Utf8>';
-              }
-              return 'Pointer<Uint16>';
-            }
             if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_VOID) {
               // Pointer<Void> in Dart is unnecessarily restrictive, versus the
               // Win32 meaning, which is more like "undefined type". We can
@@ -164,6 +163,13 @@ class TypeBuilder {
       case CorElementType.ELEMENT_TYPE_OBJECT:
         return 'COMObject';
       case CorElementType.ELEMENT_TYPE_PTR:
+        if (typeIdentifier.name == 'LPWSTR') {
+          return 'Pointer<Utf16>';
+        }
+        if (typeIdentifier.name == 'LPSTR') {
+          return 'Pointer<Utf8>';
+        }
+
         final typeArgs = typeIdentifier.typeArgs;
         if (typeArgs.isNotEmpty) {
           if (typeArgs.first.type != null &&
@@ -178,15 +184,6 @@ class TypeBuilder {
               return 'Pointer<$ffiNativeType>';
             }
           } else {
-            if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_U2) {
-              if (typeIdentifier.name == 'LPWSTR') {
-                return 'Pointer<Utf16>';
-              }
-              if (typeIdentifier.name == 'LPSTR') {
-                return 'Pointer<Utf8>';
-              }
-              return 'Pointer<Uint16>';
-            }
             if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_VOID) {
               // Pointer<Void> in Dart is unnecessarily restrictive, versus the
               // Win32/C meaning, which is more like "undefined type". We can
