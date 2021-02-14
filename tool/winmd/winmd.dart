@@ -27,6 +27,10 @@ void main(List<String> args) {
 
   for (final type in typesToGenerate) {
     final mdTypeDef = MetadataStore.getMetadataForType(type);
+    if (mdTypeDef == null) {
+      throw Exception("Can't find type $type.");
+    }
+
     final projection = TypeBuilder.projectWindowsType(mdTypeDef);
     final dartClass = TypePrinter.printType(projection);
 

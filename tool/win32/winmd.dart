@@ -6,20 +6,23 @@ class Win32Prototype {
   final String _lib;
 
   String get nativePrototype =>
-      '${_method.returnType.typeIdentifier.nativeType} Function($nativeParams)';
+      '${TypeBuilder.nativeType(_method.returnType.typeIdentifier)} Function($nativeParams)';
 
   String get nativeParams => _method.parameters
-      .map((param) => '${param.typeIdentifier.nativeType} ${param.name}')
+      .map((param) =>
+          '${TypeBuilder.nativeType(param.typeIdentifier)} ${param.name}')
       .join(', ');
 
   String get dartPrototype =>
-      '${_method.returnType.typeIdentifier.dartType} Function($dartParams)';
+      '${TypeBuilder.dartType(_method.returnType.typeIdentifier)} Function($dartParams)';
 
   String get dartParams => _method.parameters
-      .map((param) => '${param.typeIdentifier.dartType} ${param.name}')
+      .map((param) =>
+          '${TypeBuilder.dartType(param.typeIdentifier)} ${param.name}')
       .join(', ');
 
-  String get dartFfiMapping => '${_method.returnType.typeIdentifier.dartType} '
+  String get dartFfiMapping =>
+      '${TypeBuilder.dartType(_method.returnType.typeIdentifier)} '
       '$_nameWithoutEncoding($dartParams) {\n'
       '  final _$_nameWithoutEncoding = _$_lib.lookupFunction<\n'
       '    $nativePrototype, \n'
