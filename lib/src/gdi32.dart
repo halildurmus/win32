@@ -474,11 +474,11 @@ int DeleteObject(int ho) {
 /// );
 /// ```
 /// {@category gdi32}
-int DrawEscape(int hdc, int iEscape, int cjIn, Pointer<Int8> lpIn) {
+int DrawEscape(int hdc, int iEscape, int cjIn, Pointer<Utf8> lpIn) {
   final _DrawEscape = _gdi32.lookupFunction<
-      Int32 Function(IntPtr hdc, Int32 iEscape, Int32 cjIn, Pointer<Int8> lpIn),
+      Int32 Function(IntPtr hdc, Int32 iEscape, Int32 cjIn, Pointer<Utf8> lpIn),
       int Function(
-          int hdc, int iEscape, int cjIn, Pointer<Int8> lpIn)>('DrawEscape');
+          int hdc, int iEscape, int cjIn, Pointer<Utf8> lpIn)>('DrawEscape');
   return _DrawEscape(hdc, iEscape, cjIn, lpIn);
 }
 

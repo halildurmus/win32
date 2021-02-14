@@ -6,9 +6,9 @@
 
 // This file contains Win32 APIs that are missing from the Win32 metadata.
 
-import 'dart:ffi';
+// import 'dart:ffi';
 
-final _user32 = DynamicLibrary.open('user32.dll');
+// final _user32 = DynamicLibrary.open('user32.dll');
 
 /// Changes an attribute of the specified window. The function also sets a
 /// value at the specified offset in the extra window memory.
