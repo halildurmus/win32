@@ -157,7 +157,7 @@ class TypeBuilder {
         return 'COMObject';
       case CorElementType.ELEMENT_TYPE_PTR:
         final typeArgs = typeIdentifier.typeArgs;
-        if (typeArgs.length == 1) {
+        if (typeArgs.isNotEmpty) {
           if (typeArgs.first.type != null &&
               typeArgs.first.type!.typeName.startsWith('Windows.Win32')) {
             final win32Type =
@@ -185,6 +185,9 @@ class TypeBuilder {
               // model that with a generic Pointer in Dart.
               return 'Pointer';
             } else {
+              if (typeArgs.length == 2) {
+                return 'Pointer<${nativeType(typeArgs.first)}<${nativeType(typeArgs.last)}>>';
+              }
               return 'Pointer<${nativeType(typeArgs.first)}>';
             }
           }

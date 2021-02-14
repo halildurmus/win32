@@ -266,6 +266,7 @@ class Method extends AttributeObject {
             blobPtr += ptrptrType.offsetLength;
             typeArgs.add(ptrptrType.typeIdentifier);
           }
+
           parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
           parameters[paramsIndex].typeIdentifier.typeArgs.addAll(typeArgs);
           break;
