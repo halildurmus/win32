@@ -85,7 +85,16 @@ class TypeBuilder {
               // model that with a generic Pointer in Dart.
               return 'Pointer';
             } else {
-              return 'Pointer<${nativeType(typeArgs.first)}>';
+              // If it's a double- (or triple-) dereferenced pointer, then
+              // create a new typeIdentifier, based on the first typeArgs entry
+              // and with the remainder as its typeArgs. Then recursively call
+              // the function.
+              final newType = typeArgs.first.clone();
+              if (typeArgs.length > 1) {
+                newType.typeArgs.addAll(typeArgs);
+                newType.typeArgs.removeAt(0);
+              }
+              return 'Pointer<${nativeType(newType)}>';
             }
           }
         }
@@ -181,14 +190,20 @@ class TypeBuilder {
             }
             if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_VOID) {
               // Pointer<Void> in Dart is unnecessarily restrictive, versus the
-              // Win32 meaning, which is more like "undefined type". We can
+              // Win32/C meaning, which is more like "undefined type". We can
               // model that with a generic Pointer in Dart.
               return 'Pointer';
             } else {
-              if (typeArgs.length == 2) {
-                return 'Pointer<${nativeType(typeArgs.first)}<${nativeType(typeArgs.last)}>>';
+              // If it's a double- (or triple-) dereferenced pointer, then
+              // create a new typeIdentifier, based on the first typeArgs entry
+              // and with the remainder as its typeArgs. Then recursively call
+              // the function.
+              final newType = typeArgs.first.clone();
+              if (typeArgs.length > 1) {
+                newType.typeArgs.addAll(typeArgs);
+                newType.typeArgs.removeAt(0);
               }
-              return 'Pointer<${nativeType(typeArgs.first)}>';
+              return 'Pointer<${nativeType(newType)}>';
             }
           }
         }

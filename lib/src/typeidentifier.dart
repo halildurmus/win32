@@ -20,9 +20,15 @@ class TypeIdentifier {
   TypeDef? type;
 
   /// Any arguments (for example, the Uint16 in a Pointer<Uint16>).
-  final typeArgs = <TypeIdentifier>[];
+  List<TypeIdentifier> typeArgs = [];
 
   TypeIdentifier(this.corType, [this.name = '', this.type]);
+
+  TypeIdentifier clone() {
+    final clone = TypeIdentifier(corType, name, type);
+    clone.typeArgs = List.from(typeArgs);
+    return clone;
+  }
 
   factory TypeIdentifier.fromValue(int corElementTypeValue) {
     switch (corElementTypeValue) {
