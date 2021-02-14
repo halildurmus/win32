@@ -25,7 +25,8 @@ void main() {
       for (var i = 0; i < TEST_RUNS; i++) {
         final stringPtr = TEXT(testString);
 
-        expect(stringPtr.unpackString(5), equals(testString.substring(0, 5)));
+        expect(stringPtr.toDartString(length: 5),
+            equals(testString.substring(0, 5)));
         calloc.free(stringPtr);
       }
     });
@@ -34,7 +35,7 @@ void main() {
       for (var i = 0; i < TEST_RUNS; i++) {
         final stringPtr = TEXT(testString);
 
-        expect(stringPtr.unpackString(256), equals(testString));
+        expect(stringPtr.toDartString(), equals(testString));
         calloc.free(stringPtr);
       }
     });
@@ -43,7 +44,7 @@ void main() {
       for (var i = 0; i < TEST_RUNS; i++) {
         final stringPtr = TEXT('');
 
-        expect(stringPtr.unpackString(10), equals(''));
+        expect(stringPtr.toDartString(), equals(''));
         calloc.free(stringPtr);
       }
     });

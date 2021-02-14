@@ -7,19 +7,17 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'utf16string.dart';
-
 const MAX_STRING_LEN = 256;
 
 class NotepadFind {
   late Pointer<FINDREPLACE> find;
 
-  late Utf16String szFindText;
-  late Utf16String szReplText;
+  late Pointer<Utf16> szFindText;
+  late Pointer<Utf16> szReplText;
 
   NotepadFind() {
-    szFindText = Utf16String(MAX_STRING_LEN);
-    szReplText = Utf16String(MAX_STRING_LEN);
+    szFindText = calloc<Uint16>(MAX_STRING_LEN).cast<Utf16>();
+    szReplText = calloc<Uint16>(MAX_STRING_LEN).cast<Utf16>();
     find = calloc<FINDREPLACE>();
   }
 
@@ -27,7 +25,7 @@ class NotepadFind {
     find.ref.lStructSize = sizeOf<FINDREPLACE>();
     find.ref.hwndOwner = hwnd;
     find.ref.Flags = FR_HIDEUPDOWN | FR_HIDEMATCHCASE | FR_HIDEWHOLEWORD;
-    find.ref.lpstrFindWhat = szFindText.pointer;
+    find.ref.lpstrFindWhat = szFindText;
     find.ref.wFindWhatLen = MAX_STRING_LEN;
 
     return FindText(find);
@@ -37,8 +35,8 @@ class NotepadFind {
     find.ref.lStructSize = sizeOf<FINDREPLACE>();
     find.ref.hwndOwner = hwnd;
     find.ref.Flags = FR_HIDEUPDOWN | FR_HIDEMATCHCASE | FR_HIDEWHOLEWORD;
-    find.ref.lpstrFindWhat = szFindText.pointer;
-    find.ref.lpstrReplaceWith = szReplText.pointer;
+    find.ref.lpstrFindWhat = szFindText;
+    find.ref.lpstrReplaceWith = szReplText;
     find.ref.wFindWhatLen = MAX_STRING_LEN;
     find.ref.wReplaceWithLen = MAX_STRING_LEN;
 
@@ -52,13 +50,13 @@ class NotepadFind {
     // Read in the edit document
     iLength = GetWindowTextLength(hwndEdit);
 
-    final pDoc = Utf16String(iLength + 1);
-    GetWindowText(hwndEdit, pDoc.pointer, iLength + 1);
-    final strDoc = pDoc.toString();
-    pDoc.delete();
+    final pDoc = calloc<Uint16>(iLength + 1).cast<Utf16>();
+    GetWindowText(hwndEdit, pDoc, iLength + 1);
+    final strDoc = pDoc.toDartString();
+    calloc.free(pDoc);
 
     // Search the document for the find string
-    final toFind = pfr.ref.lpstrFindWhat.unpackString(MAX_STRING_LEN);
+    final toFind = pfr.ref.lpstrFindWhat.toDartString();
     final startOffset = strDoc.indexOf(toFind, piSearchOffset.value);
     if (startOffset == -1) return false;
     final endOffset = startOffset + toFind.length;
@@ -73,7 +71,7 @@ class NotepadFind {
   }
 
   bool findNextTextInEditWindow(int hwndEdit, Pointer<Uint32> piSearchOffset) {
-    final fr = calloc<FINDREPLACE>()..ref.lpstrFindWhat = szFindText.pointer;
+    final fr = calloc<FINDREPLACE>()..ref.lpstrFindWhat = szFindText;
 
     return findTextInEditWindow(hwndEdit, piSearchOffset, fr);
   }
@@ -88,5 +86,5 @@ class NotepadFind {
     return true;
   }
 
-  bool findValidFind() => !szFindText.isEmpty;
+  bool findValidFind() => szFindText.toDartString().isNotEmpty;
 }

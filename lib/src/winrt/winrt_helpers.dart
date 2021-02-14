@@ -12,12 +12,10 @@ import '../api-ms-win-core-winrt-l1-1-0.dart';
 import '../api-ms-win-core-winrt-string-l1-1-0.dart';
 import '../constants.dart';
 import '../exceptions.dart';
-import '../extensions/unpack_utf16.dart';
 import '../generated/IInspectable.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
-import '../utils.dart';
 
 /// Initializes the Windows Runtime on the current thread with a single-threaded
 /// concurrency model.
@@ -35,7 +33,7 @@ String convertFromHString(Pointer<IntPtr> hstring) {
 
   try {
     final stringPtr = WindowsGetStringRawBuffer(hstring.value, stringLength);
-    final dartString = stringPtr.unpackString(stringLength.value);
+    final dartString = stringPtr.toDartString();
 
     return dartString;
   } finally {
@@ -51,12 +49,17 @@ String convertFromHString(Pointer<IntPtr> hstring) {
 /// {@category winrt}
 Pointer<IntPtr> convertToHString(String string) {
   final hString = calloc<IntPtr>();
+  final stringPtr = string.toNativeUtf16();
   // Create a HSTRING representing the object
-  final hr = WindowsCreateString(Utf16.toUtf16(string), string.length, hString);
-  if (FAILED(hr)) {
-    throw WindowsException(hr);
-  } else {
-    return hString;
+  try {
+    final hr = WindowsCreateString(stringPtr, string.length, hString);
+    if (FAILED(hr)) {
+      throw WindowsException(hr);
+    } else {
+      return hString;
+    }
+  } finally {
+    calloc.free(stringPtr);
   }
 }
 
@@ -69,16 +72,16 @@ Pointer<IntPtr> convertToHString(String string) {
 /// {@category winrt}
 Pointer<IntPtr> CreateObject(String className, String iid) {
   final hstrClass = calloc<IntPtr>();
-  final lpClassName = TEXT(className);
+  final lpClassName = className.toNativeUtf16();
   final inspectablePtr = calloc<Pointer>();
   final riid = calloc<GUID>();
   final classPtr = calloc<IntPtr>();
-  final iidPtr = TEXT(iid);
+  final iidPtr = iid.toNativeUtf16();
+  final classNamePtr = className.toNativeUtf16();
 
   try {
     // Create a HSTRING representing the object
-    var hr = WindowsCreateString(
-        Utf16.toUtf16(className), className.length, hstrClass);
+    var hr = WindowsCreateString(classNamePtr, className.length, hstrClass);
     if (FAILED(hr)) {
       throw WindowsException(hr);
     }
@@ -105,6 +108,7 @@ Pointer<IntPtr> CreateObject(String className, String iid) {
     // Return a pointer to the relevant class
     return classPtr;
   } finally {
+    calloc.free(classNamePtr);
     calloc.free(iidPtr);
     calloc.free(riid);
     calloc.free(inspectablePtr);

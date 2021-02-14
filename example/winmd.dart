@@ -109,8 +109,8 @@ WindowsRuntimeType ProcessToken(IMetaDataImport reader, int token) {
       token, typeName, 256, nRead, tdFlags, baseClassToken);
 
   if (SUCCEEDED(hr)) {
-    type = WindowsRuntimeType(token, typeName.unpackString(nRead.value),
-        tdFlags.value, baseClassToken.value);
+    type = WindowsRuntimeType(
+        token, typeName.toDartString(), tdFlags.value, baseClassToken.value);
 
     calloc.free(nRead);
     calloc.free(tdFlags);

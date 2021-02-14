@@ -12,7 +12,6 @@ import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
-import '../utils.dart';
 
 /// A representation of a generic COM object. All Dart COM objects inherit from
 /// this class.
@@ -31,15 +30,18 @@ class COMObject extends Struct {
 ///
 /// {@category com}
 Pointer<GUID> convertToIID(String strIID) {
-  final lpszIID = TEXT(strIID);
+  final lpszIID = strIID.toNativeUtf16();
   final iid = calloc<GUID>();
 
-  final hr = IIDFromString(lpszIID, iid);
-  if (FAILED(hr)) {
-    throw WindowsException(hr);
+  try {
+    final hr = IIDFromString(lpszIID, iid);
+    if (FAILED(hr)) {
+      throw WindowsException(hr);
+    }
+    return iid;
+  } finally {
+    calloc.free(lpszIID);
   }
-  calloc.free(lpszIID);
-  return iid;
 }
 
 /// Converts a Dart string into an CLSID using the [CLSIDFromString] call.
@@ -49,13 +51,16 @@ Pointer<GUID> convertToIID(String strIID) {
 ///
 /// {@category com}
 Pointer<GUID> convertToCLSID(String strCLSID) {
-  final lpszCLSID = TEXT(strCLSID);
+  final lpszCLSID = strCLSID.toNativeUtf16();
   final clsid = calloc<GUID>();
 
-  final hr = CLSIDFromString(lpszCLSID, clsid);
-  if (FAILED(hr)) {
-    throw WindowsException(hr);
+  try {
+    final hr = CLSIDFromString(lpszCLSID, clsid);
+    if (FAILED(hr)) {
+      throw WindowsException(hr);
+    }
+    return clsid;
+  } finally {
+    calloc.free(lpszCLSID);
   }
-  calloc.free(lpszCLSID);
-  return clsid;
 }

@@ -13,7 +13,7 @@ void main() {
     final hFindVolume = FindFirstVolume(volumeNamePtr, MAX_PATH);
     expect(hFindVolume, isNot(INVALID_HANDLE_VALUE));
 
-    final volume = volumeNamePtr.unpackString(MAX_PATH);
+    final volume = volumeNamePtr.toDartString();
 
     expect(volume, startsWith(r'\\?\'));
 
