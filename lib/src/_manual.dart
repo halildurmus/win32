@@ -21,9 +21,9 @@ final _user32 = DynamicLibrary.open('user32.dll');
 /// );
 /// ```
 /// {@category user32}
-int SetWindowLongPtr(int hWnd, int nIndex, int dwNewLong) {
-  final _SetWindowLongPtr = _user32.lookupFunction<
-      IntPtr Function(IntPtr hWnd, Int32 nIndex, IntPtr dwNewLong),
-      int Function(int hWnd, int nIndex, int dwNewLong)>('SetWindowLongPtrW');
-  return _SetWindowLongPtr(hWnd, nIndex, dwNewLong);
-}
+// int SetWindowLongPtr(int hWnd, int nIndex, int dwNewLong) {
+//   final _SetWindowLongPtr = _user32.lookupFunction<
+//       IntPtr Function(IntPtr hWnd, Int32 nIndex, IntPtr dwNewLong),
+//       int Function(int hWnd, int nIndex, int dwNewLong)>('SetWindowLongPtrW');
+//   return _SetWindowLongPtr(hWnd, nIndex, dwNewLong);
+// }
