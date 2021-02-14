@@ -22,7 +22,7 @@ void main() {
               <String>['KERNEL32', 'USER32', 'GDI32', 'd3d12', 'netutils']));
     });
 
-    test('Can find the GDI API', () {
+    test('Can successfully load a typedef from the Win32 metadata', () {
       final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
       final typedef = scope['Windows.Win32.Gdi.Apis'];
       expect(typedef, isNotNull);
@@ -36,7 +36,7 @@ void main() {
       expect(typedef, isNull);
     });
 
-    test('Can find the AddFontResourceW API', () {
+    test('Can find a known API within the given scope', () {
       final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
       final typedef = scope['Windows.Win32.Gdi.Apis']!;
 
@@ -53,7 +53,7 @@ void main() {
       expect(api, isNull);
     });
 
-    test('Can find the AddFontResourceW API', () {
+    test('Can detect the module in which an API is found', () {
       final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
       final typedef = scope['Windows.Win32.Gdi.Apis']!;
 
@@ -62,7 +62,7 @@ void main() {
       expect(api.module.name, equalsIgnoringCase('gdi32'));
     });
 
-    test('AddFontResourceW API returns an int', () {
+    test('Functions can correctly return an int type', () {
       final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
       final typedef = scope['Windows.Win32.Gdi.Apis']!;
       final api = typedef.findMethod('AddFontResourceW')!;
@@ -74,7 +74,7 @@ void main() {
       expect(returnType.typeIdentifier.name, equals('int'));
     });
 
-    test('AddFontResourceW API has a wide string parameter named param0', () {
+    test('LPWSTR parameters are handled correctly', () {
       final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
       final typedef = scope['Windows.Win32.Gdi.Apis']!;
       final api = typedef.findMethod('AddFontResourceW')!;
@@ -95,15 +95,14 @@ void main() {
           equals(CorElementType.ELEMENT_TYPE_U2));
     });
 
-    test('AddFontResourceW signature blob is correct', () {
+    test('Signature blob is correct', () {
       final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
       final typedef = scope['Windows.Win32.Gdi.Apis']!;
       final api = typedef.findMethod('AddFontResourceW')!;
       expect(api.signatureBlob, equals([0x00, 0x01, 0x08, 0x0f, 0x07]));
     });
 
-    test('AddFontResourceW nativeTypeInfo custom attribute blob is correct',
-        () {
+    test('NativeTypeInfo custom attribute blob is correct', () {
       final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
       final typedef = scope['Windows.Win32.Gdi.Apis']!;
       final api = typedef.findMethod('AddFontResourceW')!;
@@ -120,7 +119,7 @@ void main() {
     });
   }
 
-  test('AddFontResourceW string param is correctly marked', () {
+  test('Unicode string params are correctly marked', () {
     final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
     final typedef = scope['Windows.Win32.Gdi.Apis']!;
     final api = typedef.findMethod('AddFontResourceW')!;
@@ -132,7 +131,7 @@ void main() {
     expect(param.typeIdentifier.name, equals('LPWSTR'));
   });
 
-  test('AddFontResourceA string param is correctly marked', () {
+  test('ANSI string params are correctly marked', () {
     final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
     final typedef = scope['Windows.Win32.Gdi.Apis']!;
     final api = typedef.findMethod('AddFontResourceA')!;
@@ -144,7 +143,7 @@ void main() {
     expect(param.typeIdentifier.name, equals('LPSTR'));
   });
 
-  test('UnionRect function parameters have correct width', () {
+  test('Returned structs like LPRECT have correct param width', () {
     final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
     final typedef = scope['Windows.Win32.Gdi.Apis']!;
     final api = typedef.findMethod('UnionRect')!;
@@ -163,7 +162,7 @@ void main() {
         equals(CorElementType.ELEMENT_TYPE_PTR));
   });
 
-  test('UnionRect function have correct Win32 type', () {
+  test('Structs like RECT have the correct type args', () {
     final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
     final typedef = scope['Windows.Win32.Gdi.Apis']!;
     final api = typedef.findMethod('UnionRect')!;
@@ -177,7 +176,7 @@ void main() {
         equals('Windows.Win32.DisplayDevices.RECT'));
   });
 
-  test('SetBkColor color param has the correct type', () {
+  test('DWORD typedefs like COLORREF have the correct param type', () {
     final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
     final typedef = scope['Windows.Win32.Gdi.Apis']!;
     final api = typedef.findMethod('SetBkColor')!;
@@ -188,7 +187,7 @@ void main() {
         equals(CorElementType.ELEMENT_TYPE_U4));
   });
 
-  test('SetBkColor has the correct return type', () {
+  test('DWORD typedefs like COLORREF have the correct return type', () {
     final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
     final typedef = scope['Windows.Win32.Gdi.Apis']!;
     final api = typedef.findMethod('SetBkColor')!;
@@ -198,7 +197,7 @@ void main() {
         equals(CorElementType.ELEMENT_TYPE_U4));
   });
 
-  test('UnregisterHotKey has the correct parameter type', () {
+  test('HANDLE-style parameters have the correct type', () {
     final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
     final typedef = scope['Windows.Win32.KeyboardAndMouseInput.Apis']!;
     final api = typedef.findMethod('UnregisterHotKey')!;
@@ -220,7 +219,7 @@ void main() {
     expect(param.typeIdentifier.name, endsWith('HPOWERNOTIFY'));
   }, skip: 'https://github.com/microsoft/win32metadata/issues/225');
 
-  test('CountClipboardFormats has the correct return type', () {
+  test('APIs with empty parameters have an accurate return type', () {
     final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
     final typedef = scope['Windows.Win32.DataExchange.Apis']!;
     final api = typedef.findMethod('CountClipboardFormats')!;
