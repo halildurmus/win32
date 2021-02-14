@@ -240,35 +240,38 @@ class Method extends AttributeObject {
     while (paramsIndex < parameters.length) {
       final runtimeType =
           _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
+      blobPtr += runtimeType.offsetLength;
 
-      if (runtimeType.typeIdentifier.corType ==
-          CorElementType.ELEMENT_TYPE_ARRAY) {
-        blobPtr +=
-            _parseArray(signatureBlob.sublist(blobPtr + 1), paramsIndex) + 2;
-        paramsIndex++; //we've added two parameters here
-      } else if (runtimeType.typeIdentifier.corType ==
-          CorElementType.ELEMENT_TYPE_PTR) {
-        final typeArgs = <TypeIdentifier>[];
+      switch (runtimeType.typeIdentifier.corType) {
+        case CorElementType.ELEMENT_TYPE_ARRAY:
+          blobPtr +=
+              _parseArray(signatureBlob.sublist(blobPtr), paramsIndex) + 2;
+          paramsIndex++; //we've added two parameters here
+          break;
 
-        // Pointer<T>, so parse the type of T.
-        blobPtr += runtimeType.offsetLength;
-        final ptrType = _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
-        typeArgs.add(ptrType.typeIdentifier);
-        blobPtr += ptrType.offsetLength;
+        case CorElementType.ELEMENT_TYPE_PTR:
+          final typeArgs = <TypeIdentifier>[];
 
-        if (ptrType.typeIdentifier.corType == CorElementType.ELEMENT_TYPE_PTR) {
-          // Pointer<Pointer<T2>>, so parse the type of T2
-          final ptrptrType =
+          // Pointer<T>, so parse the type of T.
+          final ptrType =
               _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
-          blobPtr += ptrptrType.offsetLength;
-          typeArgs.add(ptrptrType.typeIdentifier);
-        }
-        parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
-        parameters[paramsIndex].typeIdentifier.typeArgs.addAll(typeArgs);
-      } else {
-        parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
+          typeArgs.add(ptrType.typeIdentifier);
+          blobPtr += ptrType.offsetLength;
 
-        blobPtr += runtimeType.offsetLength;
+          if (ptrType.typeIdentifier.corType ==
+              CorElementType.ELEMENT_TYPE_PTR) {
+            // Pointer<Pointer<T2>>, so parse the type of T2
+            final ptrptrType =
+                _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
+            blobPtr += ptrptrType.offsetLength;
+            typeArgs.add(ptrptrType.typeIdentifier);
+          }
+          parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
+          parameters[paramsIndex].typeIdentifier.typeArgs.addAll(typeArgs);
+          break;
+
+        default:
+          parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
       }
       paramsIndex++;
     }
