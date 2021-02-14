@@ -53,6 +53,15 @@ void main() {
       expect(api, isNull);
     });
 
+    test('Can find the AddFontResourceW API', () {
+      final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+      final typedef = scope['Windows.Win32.Gdi.Apis']!;
+
+      final api = typedef.findMethod('AddFontResourceW')!;
+
+      expect(api.module.name, equalsIgnoringCase('gdi32'));
+    });
+
     test('AddFontResourceW API returns an int', () {
       final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
       final typedef = scope['Windows.Win32.Gdi.Apis']!;
