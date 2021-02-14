@@ -212,66 +212,57 @@ class Method extends AttributeObject {
     var paramsIndex = 0;
 
     // Strip off the header and the paramCount. We know the number and names of
-    // the parameters already, and we're simply mapping them to types here.
+    // the parameters already; we're simply mapping them to types here.
     var blobPtr = hasGenericParameters == false ? 2 : 3;
 
-    if (parameters.isNotEmpty) {
-      // In some implementations (e.g. Windows Runtime), param.EnumParams
-      // includes the return type as a zeroth sequence number. If that's the
-      // case, we already have a return parameter, and we can use this for the
-      // returnType, then strip it off the parameter list.
-      if (parameters.first.sequence == 0) {
-        // Parse return type
-        returnType = parameters.first;
-        parameters = parameters.sublist(1);
-        final returnTypeTuple =
-            _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
-        returnType.typeIdentifier = returnTypeTuple.typeIdentifier;
-        blobPtr += returnTypeTuple.offsetLength;
-      } else {
-        // In Win32 EnumParams does not return a zeroth parameter even if there
-        // is a return type. So we create a new returnType for it.
-        final returnTypeTuple =
-            _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
-        returnType = Parameter.fromTypeIdentifier(
-            reader, returnTypeTuple.typeIdentifier);
-        blobPtr += returnTypeTuple.offsetLength;
-      }
-
-      // Now we're at the parameters section of MethodDefSig. Parse each method
-      // parameter.
-      while (paramsIndex < parameters.length) {
-        final runtimeType =
-            _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
-
-        if (runtimeType.typeIdentifier.corType ==
-            CorElementType.ELEMENT_TYPE_ARRAY) {
-          blobPtr +=
-              _parseArray(signatureBlob.sublist(blobPtr + 1), paramsIndex) + 2;
-          paramsIndex++; //we've added two parameters here
-        } else if (runtimeType.typeIdentifier.corType ==
-            CorElementType.ELEMENT_TYPE_PTR) {
-          // Pointer<T>, so parse the type of T.
-          blobPtr += runtimeType.offsetLength;
-          final ptrType =
-              _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
-          parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
-          parameters[paramsIndex]
-              .typeIdentifier
-              .typeArgs
-              .add(ptrType.typeIdentifier);
-          blobPtr += ptrType.offsetLength;
-        } else {
-          parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
-
-          blobPtr += runtimeType.offsetLength;
-        }
-        paramsIndex++;
-      }
+    // Windows Runtime emits a zero-th parameter for the return type. So move
+    // that to the returnType and parse a type from the signature.
+    if (parameters.isNotEmpty && parameters.first.sequence == 0) {
+      // Parse return type
+      returnType = parameters.first;
+      parameters = parameters.sublist(1);
+      final returnTypeTuple =
+          _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
+      returnType.typeIdentifier = returnTypeTuple.typeIdentifier;
+      blobPtr += returnTypeTuple.offsetLength;
     } else {
-      // paramNames is empty, so we're dealing with a void method with void
-      // parameters.
-      returnType = Parameter.fromVoid(reader);
+      // In Win32 metadata, EnumParams does not return a zero-th parameter even
+      // if there is a return type. So we create a new returnType for it.
+      final returnTypeTuple =
+          _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
+      returnType =
+          Parameter.fromTypeIdentifier(reader, returnTypeTuple.typeIdentifier);
+      blobPtr += returnTypeTuple.offsetLength;
+    }
+
+    // Parse through the params section of MethodDefSig, and map each recovered
+    // type to the corresponding parameter.
+    while (paramsIndex < parameters.length) {
+      final runtimeType =
+          _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
+
+      if (runtimeType.typeIdentifier.corType ==
+          CorElementType.ELEMENT_TYPE_ARRAY) {
+        blobPtr +=
+            _parseArray(signatureBlob.sublist(blobPtr + 1), paramsIndex) + 2;
+        paramsIndex++; //we've added two parameters here
+      } else if (runtimeType.typeIdentifier.corType ==
+          CorElementType.ELEMENT_TYPE_PTR) {
+        // Pointer<T>, so parse the type of T.
+        blobPtr += runtimeType.offsetLength;
+        final ptrType = _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
+        parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
+        parameters[paramsIndex]
+            .typeIdentifier
+            .typeArgs
+            .add(ptrType.typeIdentifier);
+        blobPtr += ptrType.offsetLength;
+      } else {
+        parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
+
+        blobPtr += runtimeType.offsetLength;
+      }
+      paramsIndex++;
     }
   }
 
