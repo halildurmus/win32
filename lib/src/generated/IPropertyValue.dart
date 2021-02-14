@@ -87,59 +87,59 @@ typedef _GetRect_Native = Int32 Function(Pointer obj, Pointer<Uint32> value);
 typedef _GetRect_Dart = int Function(Pointer obj, Pointer<Uint32> value);
 
 typedef _GetUInt8Array_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint8> value);
 typedef _GetUInt8Array_Dart = int Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint8> value);
 
 typedef _GetInt16Array_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Int16> value);
 typedef _GetInt16Array_Dart = int Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Int16> value);
 
 typedef _GetUInt16Array_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint16> value);
 typedef _GetUInt16Array_Dart = int Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint16> value);
 
 typedef _GetInt32Array_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Int32> value);
 typedef _GetInt32Array_Dart = int Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Int32> value);
 
 typedef _GetUInt32Array_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint32> value);
 typedef _GetUInt32Array_Dart = int Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint32> value);
 
 typedef _GetInt64Array_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Int64> value);
 typedef _GetInt64Array_Dart = int Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Int64> value);
 
 typedef _GetUInt64Array_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint64> value);
 typedef _GetUInt64Array_Dart = int Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint64> value);
 
 typedef _GetSingleArray_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Float> value);
 typedef _GetSingleArray_Dart = int Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Float> value);
 
 typedef _GetDoubleArray_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Double> value);
 typedef _GetDoubleArray_Dart = int Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Double> value);
 
 typedef _GetChar16Array_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint8> value);
 typedef _GetChar16Array_Dart = int Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint8> value);
 
 typedef _GetBooleanArray_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint8> value);
 typedef _GetBooleanArray_Dart = int Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint8> value);
 
 typedef _GetStringArray_Native = Int32 Function(
     Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
@@ -147,39 +147,39 @@ typedef _GetStringArray_Dart = int Function(
     Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
 
 typedef _GetInspectableArray_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<COMObject> value);
 typedef _GetInspectableArray_Dart = int Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<COMObject> value);
 
 typedef _GetGuidArray_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<GUID> value);
 typedef _GetGuidArray_Dart = int Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<GUID> value);
 
 typedef _GetDateTimeArray_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint32> value);
 typedef _GetDateTimeArray_Dart = int Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint32> value);
 
 typedef _GetTimeSpanArray_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint32> value);
 typedef _GetTimeSpanArray_Dart = int Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint32> value);
 
 typedef _GetPointArray_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint32> value);
 typedef _GetPointArray_Dart = int Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint32> value);
 
 typedef _GetSizeArray_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint32> value);
 typedef _GetSizeArray_Dart = int Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint32> value);
 
 typedef _GetRectArray_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint32> value);
 typedef _GetRectArray_Dart = int Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint32> value);
 
 /// {@category Interface}
 /// {@category winrt}
@@ -304,67 +304,67 @@ class IPropertyValue extends IInspectable {
               ptr.ref.vtable.elementAt(25).value)
           .asFunction<_GetRect_Dart>()(ptr.ref.lpVtbl, value);
 
-  int GetUInt8Array(Pointer<Uint32> __valueSize, Pointer<IntPtr> value) =>
+  int GetUInt8Array(Pointer<Uint32> __valueSize, Pointer<Uint8> value) =>
       Pointer<NativeFunction<_GetUInt8Array_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(26).value)
               .asFunction<_GetUInt8Array_Dart>()(
           ptr.ref.lpVtbl, __valueSize, value);
 
-  int GetInt16Array(Pointer<Uint32> __valueSize, Pointer<IntPtr> value) =>
+  int GetInt16Array(Pointer<Uint32> __valueSize, Pointer<Int16> value) =>
       Pointer<NativeFunction<_GetInt16Array_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(27).value)
               .asFunction<_GetInt16Array_Dart>()(
           ptr.ref.lpVtbl, __valueSize, value);
 
-  int GetUInt16Array(Pointer<Uint32> __valueSize, Pointer<IntPtr> value) =>
+  int GetUInt16Array(Pointer<Uint32> __valueSize, Pointer<Uint16> value) =>
       Pointer<NativeFunction<_GetUInt16Array_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(28).value)
               .asFunction<_GetUInt16Array_Dart>()(
           ptr.ref.lpVtbl, __valueSize, value);
 
-  int GetInt32Array(Pointer<Uint32> __valueSize, Pointer<IntPtr> value) =>
+  int GetInt32Array(Pointer<Uint32> __valueSize, Pointer<Int32> value) =>
       Pointer<NativeFunction<_GetInt32Array_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(29).value)
               .asFunction<_GetInt32Array_Dart>()(
           ptr.ref.lpVtbl, __valueSize, value);
 
-  int GetUInt32Array(Pointer<Uint32> __valueSize, Pointer<IntPtr> value) =>
+  int GetUInt32Array(Pointer<Uint32> __valueSize, Pointer<Uint32> value) =>
       Pointer<NativeFunction<_GetUInt32Array_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(30).value)
               .asFunction<_GetUInt32Array_Dart>()(
           ptr.ref.lpVtbl, __valueSize, value);
 
-  int GetInt64Array(Pointer<Uint32> __valueSize, Pointer<IntPtr> value) =>
+  int GetInt64Array(Pointer<Uint32> __valueSize, Pointer<Int64> value) =>
       Pointer<NativeFunction<_GetInt64Array_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(31).value)
               .asFunction<_GetInt64Array_Dart>()(
           ptr.ref.lpVtbl, __valueSize, value);
 
-  int GetUInt64Array(Pointer<Uint32> __valueSize, Pointer<IntPtr> value) =>
+  int GetUInt64Array(Pointer<Uint32> __valueSize, Pointer<Uint64> value) =>
       Pointer<NativeFunction<_GetUInt64Array_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(32).value)
               .asFunction<_GetUInt64Array_Dart>()(
           ptr.ref.lpVtbl, __valueSize, value);
 
-  int GetSingleArray(Pointer<Uint32> __valueSize, Pointer<IntPtr> value) =>
+  int GetSingleArray(Pointer<Uint32> __valueSize, Pointer<Float> value) =>
       Pointer<NativeFunction<_GetSingleArray_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(33).value)
               .asFunction<_GetSingleArray_Dart>()(
           ptr.ref.lpVtbl, __valueSize, value);
 
-  int GetDoubleArray(Pointer<Uint32> __valueSize, Pointer<IntPtr> value) =>
+  int GetDoubleArray(Pointer<Uint32> __valueSize, Pointer<Double> value) =>
       Pointer<NativeFunction<_GetDoubleArray_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(34).value)
               .asFunction<_GetDoubleArray_Dart>()(
           ptr.ref.lpVtbl, __valueSize, value);
 
-  int GetChar16Array(Pointer<Uint32> __valueSize, Pointer<IntPtr> value) =>
+  int GetChar16Array(Pointer<Uint32> __valueSize, Pointer<Uint8> value) =>
       Pointer<NativeFunction<_GetChar16Array_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(35).value)
               .asFunction<_GetChar16Array_Dart>()(
           ptr.ref.lpVtbl, __valueSize, value);
 
-  int GetBooleanArray(Pointer<Uint32> __valueSize, Pointer<IntPtr> value) =>
+  int GetBooleanArray(Pointer<Uint32> __valueSize, Pointer<Uint8> value) =>
       Pointer<NativeFunction<_GetBooleanArray_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(36).value)
               .asFunction<_GetBooleanArray_Dart>()(
@@ -376,41 +376,42 @@ class IPropertyValue extends IInspectable {
               .asFunction<_GetStringArray_Dart>()(
           ptr.ref.lpVtbl, __valueSize, value);
 
-  int GetInspectableArray(Pointer<Uint32> __valueSize, Pointer<IntPtr> value) =>
+  int GetInspectableArray(
+          Pointer<Uint32> __valueSize, Pointer<COMObject> value) =>
       Pointer<NativeFunction<_GetInspectableArray_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(38).value)
               .asFunction<_GetInspectableArray_Dart>()(
           ptr.ref.lpVtbl, __valueSize, value);
 
-  int GetGuidArray(Pointer<Uint32> __valueSize, Pointer<IntPtr> value) =>
+  int GetGuidArray(Pointer<Uint32> __valueSize, Pointer<GUID> value) =>
       Pointer<NativeFunction<_GetGuidArray_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(39).value)
           .asFunction<_GetGuidArray_Dart>()(ptr.ref.lpVtbl, __valueSize, value);
 
-  int GetDateTimeArray(Pointer<Uint32> __valueSize, Pointer<IntPtr> value) =>
+  int GetDateTimeArray(Pointer<Uint32> __valueSize, Pointer<Uint32> value) =>
       Pointer<NativeFunction<_GetDateTimeArray_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(40).value)
               .asFunction<_GetDateTimeArray_Dart>()(
           ptr.ref.lpVtbl, __valueSize, value);
 
-  int GetTimeSpanArray(Pointer<Uint32> __valueSize, Pointer<IntPtr> value) =>
+  int GetTimeSpanArray(Pointer<Uint32> __valueSize, Pointer<Uint32> value) =>
       Pointer<NativeFunction<_GetTimeSpanArray_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(41).value)
               .asFunction<_GetTimeSpanArray_Dart>()(
           ptr.ref.lpVtbl, __valueSize, value);
 
-  int GetPointArray(Pointer<Uint32> __valueSize, Pointer<IntPtr> value) =>
+  int GetPointArray(Pointer<Uint32> __valueSize, Pointer<Uint32> value) =>
       Pointer<NativeFunction<_GetPointArray_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(42).value)
               .asFunction<_GetPointArray_Dart>()(
           ptr.ref.lpVtbl, __valueSize, value);
 
-  int GetSizeArray(Pointer<Uint32> __valueSize, Pointer<IntPtr> value) =>
+  int GetSizeArray(Pointer<Uint32> __valueSize, Pointer<Uint32> value) =>
       Pointer<NativeFunction<_GetSizeArray_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(43).value)
           .asFunction<_GetSizeArray_Dart>()(ptr.ref.lpVtbl, __valueSize, value);
 
-  int GetRectArray(Pointer<Uint32> __valueSize, Pointer<IntPtr> value) =>
+  int GetRectArray(Pointer<Uint32> __valueSize, Pointer<Uint32> value) =>
       Pointer<NativeFunction<_GetRectArray_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(44).value)
           .asFunction<_GetRectArray_Dart>()(ptr.ref.lpVtbl, __valueSize, value);
