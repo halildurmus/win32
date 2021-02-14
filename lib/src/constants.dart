@@ -2,11 +2,10 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+// COM error returned when a Find* method returns no results
 final CLDB_E_RECORD_NOTFOUND = 0x80131130.toSigned(32);
 
-// Defined here:
-// https://docs.microsoft.com/en-us/dotnet/framework/unmanaged-api/metadata/cormethodattr-enumeration
-
+/// Contains values that indicate type metadata.
 class CorTypeAttr {
   static const tdVisibilityMask = 0x00000007;
   static const tdNotPublic = 0x00000000;
@@ -43,6 +42,7 @@ class CorTypeAttr {
   static const tdHasSecurity = 0x00040000;
 }
 
+/// /// Contains values that describe the features of a method.
 class CorMethodAttr {
   static const mdMemberAccessMask = 0x0007;
   static const mdPrivateScope = 0x0000;
@@ -70,6 +70,7 @@ class CorMethodAttr {
   static const mdRequireSecObject = 0x8000;
 }
 
+/// Contains values that describe the metadata of a method parameter.
 class CorParamAttr {
   static const pdIn = 0x0001;
   static const pdOut = 0x0002;
@@ -80,6 +81,7 @@ class CorParamAttr {
   static const pdUnused = 0xcfe0;
 }
 
+/// Indicates the type of a metadata token.
 class CorTokenType {
   static const mdtModule = 0x00000000;
   static const mdtTypeRef = 0x01000000;
@@ -109,6 +111,7 @@ class CorTokenType {
   static const mdtBaseType = 0x72000000;
 }
 
+/// Specifies a common language runtime Type, a type modifier, or information about a type in a metadata type signature.
 enum CorElementType {
   ELEMENT_TYPE_END,
   ELEMENT_TYPE_VOID,
@@ -148,8 +151,10 @@ enum CorElementType {
   ELEMENT_TYPE_PINNED
 }
 
-// TODO: Is there a way to look these up rather than encode them here?
+// Windows Runtime tokens that represent a base interop type outside of the
+// Windows Runtime.
 final systemTokens = <int, String>{
+  // TODO: Is there a way to look these up rather than encode them here?
   0x01000000: 'IInspectable',
   0x01000001: 'System.Object',
   0x01000008: 'System.Enum',

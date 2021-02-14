@@ -11,14 +11,15 @@ import 'package:win32/win32.dart';
 import 'attribute.dart';
 
 // The base object for metadata objects.
-class TokenObject {
+abstract class TokenObject {
   final IMetaDataImport2 reader;
   final int token;
 
   const TokenObject(this.reader, this.token);
 }
 
-class AttributeObject extends TokenObject {
+/// Represents an object that has attributes associated with it.
+abstract class AttributeObject extends TokenObject {
   const AttributeObject(IMetaDataImport2 reader, int token)
       : super(reader, token);
 
