@@ -1,0 +1,45 @@
+name: Dart
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ${{matrix.os}}
+    strategy:
+      # We want to see the results on edge even if beta fails (and vice versa).
+      # This prevents one failure from stopping the entire run.
+      fail-fast: false
+
+      matrix:
+        os: [windows-latest]
+
+        # Stable does not support null safety yet.
+        sdk: [beta, dev, main]
+
+    steps:
+      - name: Fetch sources
+        uses: actions/checkout@v2
+
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@v0.4
+        with:
+          sdk: ${{matrix.sdk}}
+
+      - name: Print Dart SDK version
+        run: dart --version
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Analyze project source
+        run: dart analyze --fatal-warnings
+
+      - name: Run tests
+        run: dart test
