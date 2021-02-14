@@ -40,7 +40,7 @@ void main() {
     expect(TypeBuilder.nativeType(type), equals('IntPtr'));
   });
 
-  test(('Handle'), () {
+  test(('Pointer<Pointer<T>>'), () {
     final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
     final typedef = scope['Windows.Win32.Security.Apis']!;
     final api = typedef.findMethod('CredReadW')!;
