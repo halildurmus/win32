@@ -52,7 +52,8 @@ String generateDocComment(Win32Function func) {
 }
 
 void generateFfiFiles(Win32API win32) {
-  for (final library in ['gdi32', 'user32', 'shell32']) {
+  const winmdGenerated = ['gdi32'];
+  for (final library in winmdGenerated) {
     final writer = File('lib/src/$library.dart').openSync(mode: FileMode.write);
 
     // API set names aren't legal Dart identifiers, so we rename them

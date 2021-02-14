@@ -28,11 +28,11 @@ final _gdi32 = DynamicLibrary.open('gdi32.dll');
 /// );
 /// ```
 /// {@category gdi32}
-int AddFontResource(Pointer<Utf16> Arg1) {
+int AddFontResource(Pointer<Utf16> param0) {
   final _AddFontResource = _gdi32.lookupFunction<
-      Int32 Function(Pointer<Utf16> Arg1),
-      int Function(Pointer<Utf16> Arg1)>('AddFontResourceW');
-  return _AddFontResource(Arg1);
+      Int32 Function(Pointer<Utf16> param0),
+      int Function(Pointer<Utf16> param0)>('AddFontResourceW');
+  return _AddFontResource(param0);
 }
 
 /// The AddFontResourceEx function adds the font resource from the
@@ -389,7 +389,7 @@ int CreateHalftonePalette(int hdc) {
 /// {@category gdi32}
 int CreateHatchBrush(int iHatch, int color) {
   final _CreateHatchBrush = _gdi32.lookupFunction<
-      IntPtr Function(Int32 iHatch, Int32 color),
+      IntPtr Function(Int32 iHatch, Uint32 color),
       int Function(int iHatch, int color)>('CreateHatchBrush');
   return _CreateHatchBrush(iHatch, color);
 }
@@ -408,7 +408,7 @@ int CreateHatchBrush(int iHatch, int color) {
 /// {@category gdi32}
 int CreatePen(int iStyle, int cWidth, int color) {
   final _CreatePen = _gdi32.lookupFunction<
-      IntPtr Function(Int32 iStyle, Int32 cWidth, Int32 color),
+      IntPtr Function(Int32 iStyle, Int32 cWidth, Uint32 color),
       int Function(int iStyle, int cWidth, int color)>('CreatePen');
   return _CreatePen(iStyle, cWidth, color);
 }
@@ -423,7 +423,7 @@ int CreatePen(int iStyle, int cWidth, int color) {
 /// ```
 /// {@category gdi32}
 int CreateSolidBrush(int color) {
-  final _CreateSolidBrush = _gdi32.lookupFunction<IntPtr Function(Int32 color),
+  final _CreateSolidBrush = _gdi32.lookupFunction<IntPtr Function(Uint32 color),
       int Function(int color)>('CreateSolidBrush');
   return _CreateSolidBrush(color);
 }
@@ -474,12 +474,11 @@ int DeleteObject(int ho) {
 /// );
 /// ```
 /// {@category gdi32}
-int DrawEscape(int hdc, int iEscape, int cjIn, Pointer<Uint8> lpIn) {
+int DrawEscape(int hdc, int iEscape, int cjIn, Pointer<Int8> lpIn) {
   final _DrawEscape = _gdi32.lookupFunction<
-      Int32 Function(
-          IntPtr hdc, Int32 iEscape, Int32 cjIn, Pointer<Uint8> lpIn),
+      Int32 Function(IntPtr hdc, Int32 iEscape, Int32 cjIn, Pointer<Int8> lpIn),
       int Function(
-          int hdc, int iEscape, int cjIn, Pointer<Uint8> lpIn)>('DrawEscape');
+          int hdc, int iEscape, int cjIn, Pointer<Int8> lpIn)>('DrawEscape');
   return _DrawEscape(hdc, iEscape, cjIn, lpIn);
 }
 
@@ -655,7 +654,7 @@ int GetDIBits(int hdc, int hbm, int start, int cLines, Pointer lpvBits,
 /// {@category gdi32}
 int GetNearestColor(int hdc, int color) {
   final _GetNearestColor = _gdi32.lookupFunction<
-      Int32 Function(IntPtr hdc, Int32 color),
+      Uint32 Function(IntPtr hdc, Uint32 color),
       int Function(int hdc, int color)>('GetNearestColor');
   return _GetNearestColor(hdc, color);
 }
@@ -1061,7 +1060,7 @@ int SelectObject(int hdc, int h) {
 /// {@category gdi32}
 int SetBkColor(int hdc, int color) {
   final _SetBkColor = _gdi32.lookupFunction<
-      Int32 Function(IntPtr hdc, Int32 color),
+      Uint32 Function(IntPtr hdc, Uint32 color),
       int Function(int hdc, int color)>('SetBkColor');
   return _SetBkColor(hdc, color);
 }
@@ -1117,7 +1116,7 @@ int SetMapMode(int hdc, int iMode) {
 /// {@category gdi32}
 int SetPixel(int hdc, int x, int y, int color) {
   final _SetPixel = _gdi32.lookupFunction<
-      Int32 Function(IntPtr hdc, Int32 x, Int32 y, Int32 color),
+      Uint32 Function(IntPtr hdc, Int32 x, Int32 y, Uint32 color),
       int Function(int hdc, int x, int y, int color)>('SetPixel');
   return _SetPixel(hdc, x, y, color);
 }
@@ -1151,7 +1150,7 @@ int SetStretchBltMode(int hdc, int mode) {
 /// {@category gdi32}
 int SetTextColor(int hdc, int color) {
   final _SetTextColor = _gdi32.lookupFunction<
-      Int32 Function(IntPtr hdc, Int32 color),
+      Uint32 Function(IntPtr hdc, Uint32 color),
       int Function(int hdc, int color)>('SetTextColor');
   return _SetTextColor(hdc, color);
 }

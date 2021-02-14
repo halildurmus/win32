@@ -55,8 +55,9 @@ void generateFfiFiles(Win32API win32) {
       win32.functions.values.map((e) => e.dllLibrary).toSet().toList();
 
   // Use generate_ffi_winmd.dart for these
-  libraries.removeWhere(
-      (library) => ['gdi32', 'user32', 'shell32'].contains(library));
+  const winmdGenerated = ['gdi32'];
+
+  libraries.removeWhere((library) => winmdGenerated.contains(library));
 
   for (final library in libraries) {
     final writer = File('lib/src/$library.dart').openSync(mode: FileMode.write);

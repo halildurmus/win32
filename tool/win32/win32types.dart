@@ -343,7 +343,7 @@ const win32TypeMap = <String, String>{
   'LPCOLESTR': 'Pointer<Utf16>',
   'LPOLESTR': 'Pointer<Utf16>',
   'PCNZWCH': 'Pointer<Utf16>',
-  'LPCSTR': 'Pointer<Uint8>',
+  'LPCSTR': 'Pointer<Int8>',
   'LPSTR': 'Pointer<Uint8>',
   'LPCCH': 'Pointer<Uint8>',
   'TCHAR': 'Uint16',
