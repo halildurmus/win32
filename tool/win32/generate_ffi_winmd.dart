@@ -84,7 +84,9 @@ final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ?
     final filteredFunctionList = win32.functions.values
         .where((func) => func.dllLibrary == library)
         .toList();
-    filteredFunctionList.remove('SetWindowLongPtrW');
+
+    filteredFunctionList
+        .removeWhere((func) => func.signature.name == 'SetWindowLongPtrW');
 
     for (final function in filteredFunctionList) {
       final method = methods.firstWhere(
