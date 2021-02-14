@@ -2,7 +2,8 @@
 
 echo Generating C-style Win32 APIs and tests
 call dart %~dp0win32\win32api.dart
-call dart %~dp0win32\generate_ffi_files.dart 
+call dart %~dp0win32\generate_ffi_jsonproto.dart 
+call dart %~dp0win32\generate_ffi_winmd.dart 
 call dart %~dp0win32\generate_tests.dart 
 echo.
 

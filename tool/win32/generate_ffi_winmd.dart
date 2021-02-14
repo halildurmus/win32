@@ -52,12 +52,7 @@ String generateDocComment(Win32Function func) {
 }
 
 void generateFfiFiles(Win32API win32) {
-  // Generate a list of libs, e.g. [kernel32, gdi32, ...]
-  // The .toSet() removes duplicates.
-  // final libraries =
-  //     win32.functions.values.map((e) => e.dllLibrary).toSet().toList();
-
-  for (final library in ['gdi32']) {
+  for (final library in ['gdi32', 'user32', 'shell32']) {
     final writer = File('lib/src/$library.dart').openSync(mode: FileMode.write);
 
     // API set names aren't legal Dart identifiers, so we rename them
