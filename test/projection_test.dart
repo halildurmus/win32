@@ -98,4 +98,14 @@ void main() {
     expect(TypeBuilder.nativeType(type), equals('Pointer<Pointer<COMObject>>'));
     expect(TypeBuilder.dartType(type), equals('Pointer<Pointer<COMObject>>'));
   });
+
+  test('OLECHAR is represented correctly', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.Automation.Apis']!;
+    final api = typedef.findMethod('SysAllocString')!;
+    final type = api.parameters.first.typeIdentifier; // IUnknown **
+
+    expect(TypeBuilder.nativeType(type), equals('Pointer<Utf16>'));
+    expect(TypeBuilder.dartType(type), equals('Pointer<Utf16>'));
+  });
 }
