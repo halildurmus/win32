@@ -97,12 +97,6 @@ class TypeDef extends AttributeObject {
     final szName = calloc<Uint8>(256 * 2).cast<Utf16>();
     final pchName = calloc<Uint32>();
 
-    // a token like IInspectable is out of reach of GetTypeRefProps, since it is
-    // a plain COM object. These objects are returned as system types.
-    if (systemTokens.containsKey(typeRefToken)) {
-      return TypeDef(reader, 0, systemTokens[typeRefToken]!);
-    }
-
     try {
       final hr = reader.GetTypeRefProps(
           typeRefToken, ptkResolutionScope, szName, 256, pchName);

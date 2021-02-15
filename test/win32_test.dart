@@ -242,4 +242,15 @@ void main() {
         equals(CorElementType.ELEMENT_TYPE_PTR));
     expect(param.typeIdentifier.typeArgs.last.name, endsWith('CREDENTIALW'));
   });
+
+  test('HRESULT return values are generated correctly', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.WindowsProgramming.Apis']!;
+    final api = typedef.findMethod('GetIntegratedDisplaySize')!;
+    final returnType = api.returnType;
+
+    expect(returnType.typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+    expect(returnType.typeIdentifier.name, endsWith('HRESULT'));
+  });
 }
