@@ -8,6 +8,7 @@ const winmdGenerated = [
   'powrprof',
   'rometadata',
   // 'shcore',
+  'version',
   'winmm'
 ];
 

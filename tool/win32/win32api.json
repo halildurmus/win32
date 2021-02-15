@@ -2736,7 +2736,7 @@
     },
     "VerLanguageName": {
         "prototype": "DWORD VerLanguageNameW(\n  DWORD  wLang,\n  LPWSTR szLang,\n  DWORD  cchLang\n);",
-        "dllLibrary": "version",
+        "dllLibrary": "kernel32",
         "comment": "Retrieves a description string for the language associated with a specified binary Microsoft language identifier."
     },
     "VerQueryValue": {
