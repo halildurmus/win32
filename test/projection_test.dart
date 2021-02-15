@@ -39,6 +39,7 @@ void main() {
     expect(TypeBuilder.dartType(type), equals('int'));
     expect(TypeBuilder.nativeType(type), equals('IntPtr'));
   });
+
   test('Pointer<T>', () {
     final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
     final typedef = scope['Windows.Win32.KeyboardAndMouseInput.Apis']!;
@@ -48,6 +49,7 @@ void main() {
     expect(TypeBuilder.dartType(type), equals('Pointer<Uint8>'));
     expect(TypeBuilder.nativeType(type), equals('Pointer<Uint8>'));
   });
+
   test('Pointer<Pointer<T>>', () {
     final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
     final typedef = scope['Windows.Win32.Security.Apis']!;
@@ -103,9 +105,9 @@ void main() {
     final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
     final typedef = scope['Windows.Win32.Automation.Apis']!;
     final api = typedef.findMethod('SysAllocString')!;
-    final type = api.parameters.first.typeIdentifier; // IUnknown **
+    final type = api.parameters.first.typeIdentifier; // OLECHAR *
 
     expect(TypeBuilder.nativeType(type), equals('Pointer<Utf16>'));
     expect(TypeBuilder.dartType(type), equals('Pointer<Utf16>'));
-  });
+  }, skip: 'https://github.com/microsoft/win32metadata/issues/233');
 }
