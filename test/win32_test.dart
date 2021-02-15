@@ -253,4 +253,15 @@ void main() {
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
     expect(returnType.typeIdentifier.name, endsWith('HRESULT'));
   });
+
+  test('IUnknown parameters are generated correctly', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.Com.Apis']!;
+    final api = typedef.findMethod('CoSetProxyBlanket')!;
+    final param = api.parameters.first;
+
+    expect(param.typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_CLASS));
+    expect(param.typeIdentifier.name, endsWith('IUnknown'));
+  });
 }

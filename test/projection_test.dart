@@ -58,4 +58,23 @@ void main() {
         TypeBuilder.nativeType(type), equals('Pointer<Pointer<CREDENTIAL>>'));
     expect(TypeBuilder.dartType(type), equals('Pointer<Pointer<CREDENTIAL>>'));
   });
+  test('Pass COM interfaces', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.Com.Apis']!;
+    final api = typedef.findMethod('CoSetProxyBlanket')!;
+    final type = api.parameters.first.typeIdentifier; // IUnknown
+
+    expect(TypeBuilder.nativeType(type), equals('Pointer'));
+    expect(TypeBuilder.dartType(type), equals('Pointer'));
+  });
+
+  test('Pass pointers to COM interfaces', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.Com.Apis']!;
+    final api = typedef.findMethod('CoCreateInstance')!;
+    final type = api.parameters[1].typeIdentifier; // LPUNKNOWN
+
+    expect(TypeBuilder.nativeType(type), equals('Pointer<IntPtr>'));
+    expect(TypeBuilder.dartType(type), equals('Pointer<IntPtr>'));
+  });
 }
