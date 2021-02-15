@@ -58,6 +58,17 @@ void main() {
         TypeBuilder.nativeType(type), equals('Pointer<Pointer<CREDENTIAL>>'));
     expect(TypeBuilder.dartType(type), equals('Pointer<Pointer<CREDENTIAL>>'));
   });
+
+  test('Unicode string w/ double pointer', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.Shell.Apis']!;
+    final api = typedef.findMethod('SHGetKnownFolderPath')!;
+    final type = api.parameters.last.typeIdentifier; // PWSTR *
+
+    expect(TypeBuilder.dartType(type), equals('Pointer<Pointer<Utf16>>'));
+    expect(TypeBuilder.nativeType(type), equals('Pointer<Pointer<Utf16>>'));
+  });
+
   test('Pass COM interfaces', () {
     final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
     final typedef = scope['Windows.Win32.Com.Apis']!;
