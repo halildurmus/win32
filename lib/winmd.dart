@@ -1,4 +1,13 @@
-/// Support for working with the ECMA specification for WinMD.
+/// Support for working with Windows Metadata, as defined in the ECMA-335
+/// specification.
+///
+/// The specification itself can be found at:
+///   https://www.ecma-international.org/publications/files/ECMA-ST/ECMA-335.pdf
+
+// Further sources of inspiration:
+// https://stackoverflow.com/questions/54375771/how-to-read-a-winmd-winrt-metadata-file
+// https://docs.microsoft.com/en-us/windows/win32/api/rometadataresolution/nf-rometadataresolution-rogetmetadatafile
+
 library winmd;
 
 export 'src/attribute.dart';
