@@ -88,4 +88,14 @@ void main() {
     expect(TypeBuilder.nativeType(type), equals('Pointer<IntPtr>'));
     expect(TypeBuilder.dartType(type), equals('Pointer<IntPtr>'));
   });
+
+  test('Pass double pointers to COM interfaces', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.Automation.Apis']!;
+    final api = typedef.findMethod('GetActiveObject')!;
+    final type = api.parameters.last.typeIdentifier; // IUnknown **
+
+    expect(TypeBuilder.nativeType(type), equals('Pointer<Pointer<COMObject>>'));
+    expect(TypeBuilder.dartType(type), equals('Pointer<Pointer<COMObject>>'));
+  });
 }
