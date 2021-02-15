@@ -1135,6 +1135,14 @@ void main() {
               int cb)>('UpdateResourceW');
       expect(UpdateResource, isA<Function>());
     });
+    test('Can instantiate VerLanguageName', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final VerLanguageName = kernel32.lookupFunction<
+          Uint32 Function(Uint32 wLang, Pointer<Utf16> szLang, Uint32 cchLang),
+          int Function(int wLang, Pointer<Utf16> szLang,
+              int cchLang)>('VerLanguageNameW');
+      expect(VerLanguageName, isA<Function>());
+    });
     test('Can instantiate VirtualAlloc', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final VirtualAlloc = kernel32.lookupFunction<
@@ -4855,14 +4863,6 @@ void main() {
               Pointer<Utf16> szTmpFile,
               Pointer<Uint32> puTmpFileLen)>('VerInstallFileW');
       expect(VerInstallFile, isA<Function>());
-    });
-    test('Can instantiate VerLanguageName', () {
-      final version = DynamicLibrary.open('version.dll');
-      final VerLanguageName = version.lookupFunction<
-          Uint32 Function(Uint32 wLang, Pointer<Utf16> szLang, Uint32 cchLang),
-          int Function(int wLang, Pointer<Utf16> szLang,
-              int cchLang)>('VerLanguageNameW');
-      expect(VerLanguageName, isA<Function>());
     });
     test('Can instantiate VerQueryValue', () {
       final version = DynamicLibrary.open('version.dll');
