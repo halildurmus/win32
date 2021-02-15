@@ -109,12 +109,16 @@ class TypeDef extends AttributeObject {
           final newScope = MetadataStore.getScopeForType(typeName);
           return newScope[typeName]!;
         } catch (exception) {
+          // a token like IInspectable is out of reach of GetTypeRefProps, since it is
+          // a plain COM object. These objects are returned as system types.
+          if (systemTokens.containsKey(typeRefToken)) {
+            return TypeDef(reader, 0, systemTokens[typeRefToken]!);
+          }
           if (systemTokens.containsValue(typeName)) {
             return TypeDef(reader, 0, typeName);
-          } else {
-            throw WinmdException(
-                'Unable to find scope for $typeName [${typeRefToken.toHexString(32)}]...');
           }
+          throw WinmdException(
+              'Unable to find scope for $typeName [${typeRefToken.toHexString(32)}]...');
         }
       } else {
         throw WindowsException(hr);
