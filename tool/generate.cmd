@@ -11,7 +11,7 @@ call dart %~dp0generate\generate.dart %~dp0generate\com %~dp0..\lib\src\generate
 echo.
 
 echo Generating Windows Runtime classes from IDL
-call dart %~dp0generate\generate.dart %~dp0generate\winrt %~dp0..\lib\src\generated
+rem call dart %~dp0generate\generate.dart %~dp0generate\winrt %~dp0..\lib\src\generated
 echo.
 
 echo Generating Windows Runtime classes from inspection
