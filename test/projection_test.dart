@@ -87,8 +87,8 @@ void main() {
     final api = typedef.findMethod('CoCreateInstance')!;
     final type = api.parameters[1].typeIdentifier; // LPUNKNOWN
 
-    expect(TypeBuilder.nativeType(type), equals('Pointer<IntPtr>'));
-    expect(TypeBuilder.dartType(type), equals('Pointer<IntPtr>'));
+    expect(TypeBuilder.nativeType(type), equals('Pointer'));
+    expect(TypeBuilder.dartType(type), equals('Pointer'));
   });
 
   test('Pass double pointers to COM interfaces', () {
@@ -97,8 +97,8 @@ void main() {
     final api = typedef.findMethod('GetActiveObject')!;
     final type = api.parameters.last.typeIdentifier; // IUnknown **
 
-    expect(TypeBuilder.nativeType(type), equals('Pointer<Pointer<COMObject>>'));
-    expect(TypeBuilder.dartType(type), equals('Pointer<Pointer<COMObject>>'));
+    expect(TypeBuilder.nativeType(type), equals('Pointer<Pointer>'));
+    expect(TypeBuilder.dartType(type), equals('Pointer<Pointer>'));
   });
 
   test('OLECHAR is represented correctly', () {
