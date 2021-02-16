@@ -1,3 +1,7 @@
+## 0.4.0-dev.2
+
+- Add more tests
+
 ## 0.4.0-dev.1
 
 - Broad refactoring, focusing the core WinMD package on reading metadata and
