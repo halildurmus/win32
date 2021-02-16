@@ -69,7 +69,7 @@ void main() {
 
     expect(TypeBuilder.dartType(type), equals('Pointer<Pointer<Utf16>>'));
     expect(TypeBuilder.nativeType(type), equals('Pointer<Pointer<Utf16>>'));
-  });
+  }, skip: 'https://github.com/microsoft/win32metadata/issues/241');
 
   test('Pass COM interfaces', () {
     final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
