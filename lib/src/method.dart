@@ -129,36 +129,61 @@ class Method extends AttributeObject {
     final runtimeType = TypeIdentifier.fromValue(paramType);
     var dataLength = 0;
 
-    if (runtimeType.corType == CorElementType.ELEMENT_TYPE_VALUETYPE ||
-        runtimeType.corType == CorElementType.ELEMENT_TYPE_CLASS) {
-      final uncompressed = corSigUncompressData(signatureBlob.sublist(1));
-      final token = unencodeDefRefSpecToken(uncompressed.data);
-      final tokenAsType = TypeDef.fromToken(reader, token);
+    switch (runtimeType.corType) {
+      case CorElementType.ELEMENT_TYPE_VALUETYPE:
+      case CorElementType.ELEMENT_TYPE_CLASS:
+        final uncompressed = corSigUncompressData(signatureBlob.sublist(1));
+        final token = unencodeDefRefSpecToken(uncompressed.data);
+        final tokenAsType = TypeDef.fromToken(reader, token);
 
-      dataLength = uncompressed.dataLength + 1;
-      runtimeType.name = tokenAsType.typeName;
-      runtimeType.type = tokenAsType;
-    } else if (runtimeType.corType == CorElementType.ELEMENT_TYPE_BYREF &&
-        signatureBlob[1] == 0x1D) {
-      // array
-      runtimeType.corType = CorElementType.ELEMENT_TYPE_ARRAY;
-    } else if (runtimeType.corType == CorElementType.ELEMENT_TYPE_GENERICINST) {
-      final classTuple = _parseTypeFromSignature(signatureBlob.sublist(1));
-      runtimeType.name = classTuple.typeIdentifier.name;
-      final argsCount =
-          signatureBlob[1 + classTuple.offsetLength]; // GENERICINST + class
-      dataLength =
-          classTuple.offsetLength + 2; // GENERICINST + class + argsCount
-      for (var idx = 0; idx < argsCount; idx++) {
-        final arg = _parseTypeFromSignature(signatureBlob.sublist(dataLength));
-        dataLength += arg.offsetLength;
-        runtimeType.typeArgs.add(arg.typeIdentifier);
-      }
-    } else {
-      dataLength = 1;
-      runtimeType.name = runtimeType.toString();
+        dataLength = uncompressed.dataLength + 1;
+        runtimeType.name = tokenAsType.typeName;
+        runtimeType.type = tokenAsType;
+        break;
+
+      case CorElementType.ELEMENT_TYPE_BYREF:
+        if (signatureBlob[1] == 0x1D) {
+          // array
+          runtimeType.corType = CorElementType.ELEMENT_TYPE_ARRAY;
+        }
+        break;
+
+      case CorElementType.ELEMENT_TYPE_PTR:
+        final ptrTuple = _parseTypeFromSignature(signatureBlob.sublist(1));
+        dataLength = 1 + ptrTuple.offsetLength;
+        runtimeType.typeArgs.add(ptrTuple.typeIdentifier);
+        flattenTypeArgs(runtimeType);
+        break;
+
+      case CorElementType.ELEMENT_TYPE_GENERICINST:
+        final classTuple = _parseTypeFromSignature(signatureBlob.sublist(1));
+        runtimeType.name = classTuple.typeIdentifier.name;
+        final argsCount =
+            signatureBlob[1 + classTuple.offsetLength]; // GENERICINST + class
+        dataLength =
+            classTuple.offsetLength + 2; // GENERICINST + class + argsCount
+        for (var idx = 0; idx < argsCount; idx++) {
+          final arg =
+              _parseTypeFromSignature(signatureBlob.sublist(dataLength));
+          dataLength += arg.offsetLength;
+          runtimeType.typeArgs.add(arg.typeIdentifier);
+        }
+        break;
+
+      default:
+        dataLength = 1;
+        runtimeType.name = runtimeType.toString();
     }
+
     return TypeTuple(runtimeType, dataLength);
+  }
+
+  void flattenTypeArgs(TypeIdentifier type) {
+    // TODO: Need to walk deeper in case of triple dereference
+    if (type.typeArgs.first.typeArgs.isNotEmpty) {
+      type.typeArgs.add(type.typeArgs.first.typeArgs.first);
+      type.typeArgs.first.typeArgs.remove(0);
+    }
   }
 
   String get callingConvention {
@@ -242,37 +267,12 @@ class Method extends AttributeObject {
           _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
       blobPtr += runtimeType.offsetLength;
 
-      switch (runtimeType.typeIdentifier.corType) {
-        case CorElementType.ELEMENT_TYPE_ARRAY:
-          blobPtr +=
-              _parseArray(signatureBlob.sublist(blobPtr), paramsIndex) + 2;
-          paramsIndex++; //we've added two parameters here
-          break;
-
-        case CorElementType.ELEMENT_TYPE_PTR:
-          final typeArgs = <TypeIdentifier>[];
-
-          // Pointer<T>, so parse the type of T.
-          final ptrType =
-              _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
-          typeArgs.add(ptrType.typeIdentifier);
-          blobPtr += ptrType.offsetLength;
-
-          if (ptrType.typeIdentifier.corType ==
-              CorElementType.ELEMENT_TYPE_PTR) {
-            // Pointer<Pointer<T2>>, so parse the type of T2
-            final ptrptrType =
-                _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
-            blobPtr += ptrptrType.offsetLength;
-            typeArgs.add(ptrptrType.typeIdentifier);
-          }
-
-          parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
-          parameters[paramsIndex].typeIdentifier.typeArgs.addAll(typeArgs);
-          break;
-
-        default:
-          parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
+      if (runtimeType.typeIdentifier.corType ==
+          CorElementType.ELEMENT_TYPE_ARRAY) {
+        blobPtr += _parseArray(signatureBlob.sublist(blobPtr), paramsIndex) + 2;
+        paramsIndex++; //we've added two parameters here
+      } else {
+        parameters[paramsIndex].typeIdentifier = runtimeType.typeIdentifier;
       }
       paramsIndex++;
     }

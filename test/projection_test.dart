@@ -39,6 +39,7 @@ void main() {
     expect(TypeBuilder.dartType(type), equals('int'));
     expect(TypeBuilder.nativeType(type), equals('IntPtr'));
   });
+
   test('Pointer<T>', () {
     final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
     final typedef = scope['Windows.Win32.KeyboardAndMouseInput.Apis']!;
@@ -48,6 +49,7 @@ void main() {
     expect(TypeBuilder.dartType(type), equals('Pointer<Uint8>'));
     expect(TypeBuilder.nativeType(type), equals('Pointer<Uint8>'));
   });
+
   test('Pointer<Pointer<T>>', () {
     final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
     final typedef = scope['Windows.Win32.Security.Apis']!;
@@ -58,4 +60,54 @@ void main() {
         TypeBuilder.nativeType(type), equals('Pointer<Pointer<CREDENTIAL>>'));
     expect(TypeBuilder.dartType(type), equals('Pointer<Pointer<CREDENTIAL>>'));
   });
+
+  test('Unicode string w/ double pointer', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.Shell.Apis']!;
+    final api = typedef.findMethod('SHGetKnownFolderPath')!;
+    final type = api.parameters.last.typeIdentifier; // PWSTR *
+
+    expect(TypeBuilder.dartType(type), equals('Pointer<Pointer<Utf16>>'));
+    expect(TypeBuilder.nativeType(type), equals('Pointer<Pointer<Utf16>>'));
+  }, skip: 'https://github.com/microsoft/win32metadata/issues/241');
+
+  test('Pass COM interfaces', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.Com.Apis']!;
+    final api = typedef.findMethod('CoSetProxyBlanket')!;
+    final type = api.parameters.first.typeIdentifier; // IUnknown
+
+    expect(TypeBuilder.nativeType(type), equals('Pointer'));
+    expect(TypeBuilder.dartType(type), equals('Pointer'));
+  });
+
+  test('Pass pointers to COM interfaces', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.Com.Apis']!;
+    final api = typedef.findMethod('CoCreateInstance')!;
+    final type = api.parameters[1].typeIdentifier; // LPUNKNOWN
+
+    expect(TypeBuilder.nativeType(type), equals('Pointer'));
+    expect(TypeBuilder.dartType(type), equals('Pointer'));
+  });
+
+  test('Pass double pointers to COM interfaces', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.Automation.Apis']!;
+    final api = typedef.findMethod('GetActiveObject')!;
+    final type = api.parameters.last.typeIdentifier; // IUnknown **
+
+    expect(TypeBuilder.nativeType(type), equals('Pointer<Pointer>'));
+    expect(TypeBuilder.dartType(type), equals('Pointer<Pointer>'));
+  });
+
+  test('OLECHAR is represented correctly', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.Automation.Apis']!;
+    final api = typedef.findMethod('SysAllocString')!;
+    final type = api.parameters.first.typeIdentifier; // OLECHAR *
+
+    expect(TypeBuilder.nativeType(type), equals('Pointer<Utf16>'));
+    expect(TypeBuilder.dartType(type), equals('Pointer<Utf16>'));
+  }, skip: 'https://github.com/microsoft/win32metadata/issues/233');
 }

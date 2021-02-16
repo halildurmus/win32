@@ -67,7 +67,8 @@ class TypeBuilder {
         final typeArgs = typeIdentifier.typeArgs;
         if (typeArgs.isNotEmpty) {
           if (typeArgs.first.type != null &&
-              typeArgs.first.type!.typeName.startsWith('Windows.Win32')) {
+              typeArgs.first.type!.typeName.startsWith('Windows.Win32') &&
+              typeArgs.first.corType != CorElementType.ELEMENT_TYPE_CLASS) {
             final win32Type =
                 typeArgs.first.type?.typeName.split('.').last ?? '';
             final ffiNativeType = convertToFFIType(win32Type);
@@ -99,6 +100,7 @@ class TypeBuilder {
         return 'Pointer';
 
       case CorElementType.ELEMENT_TYPE_FNPTR:
+      case CorElementType.ELEMENT_TYPE_CLASS:
         return 'Pointer';
 
       default:
@@ -173,7 +175,8 @@ class TypeBuilder {
         final typeArgs = typeIdentifier.typeArgs;
         if (typeArgs.isNotEmpty) {
           if (typeArgs.first.type != null &&
-              typeArgs.first.type!.typeName.startsWith('Windows.Win32')) {
+              typeArgs.first.type!.typeName.startsWith('Windows.Win32') &&
+              typeArgs.first.corType != CorElementType.ELEMENT_TYPE_CLASS) {
             final win32Type =
                 typeArgs.first.type?.typeName.split('.').last ?? '';
             final ffiNativeType = convertToFFIType(win32Type);
@@ -205,6 +208,7 @@ class TypeBuilder {
         return 'Pointer';
 
       case CorElementType.ELEMENT_TYPE_FNPTR:
+      case CorElementType.ELEMENT_TYPE_CLASS:
         return 'Pointer';
       case CorElementType.ELEMENT_TYPE_I:
       case CorElementType.ELEMENT_TYPE_U:
