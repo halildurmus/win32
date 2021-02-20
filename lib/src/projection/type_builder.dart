@@ -100,7 +100,6 @@ class TypeBuilder {
         return 'Pointer';
 
       case CorElementType.ELEMENT_TYPE_FNPTR:
-      case CorElementType.ELEMENT_TYPE_CLASS:
         return 'Pointer';
 
       default:
@@ -208,7 +207,6 @@ class TypeBuilder {
         return 'Pointer';
 
       case CorElementType.ELEMENT_TYPE_FNPTR:
-      case CorElementType.ELEMENT_TYPE_CLASS:
         return 'Pointer';
       case CorElementType.ELEMENT_TYPE_I:
       case CorElementType.ELEMENT_TYPE_U:

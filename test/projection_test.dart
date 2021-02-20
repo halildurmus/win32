@@ -110,4 +110,16 @@ void main() {
     expect(TypeBuilder.nativeType(type), equals('Pointer<Utf16>'));
     expect(TypeBuilder.dartType(type), equals('Pointer<Utf16>'));
   }, skip: 'https://github.com/microsoft/win32metadata/issues/233');
+
+  test('Callbacks are represented correctly', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final api = typedef.findMethod('EnumFontFamiliesExW')!;
+    final type = api.parameters[2].typeIdentifier; // FONTENUMPROCW
+
+    expect(TypeBuilder.nativeType(type),
+        equals('Pointer<NativeFunction<EnumFontFamExProc>>'));
+    expect(TypeBuilder.dartType(type),
+        equals('Pointer<NativeFunction<EnumFontFamExProc>>'));
+  });
 }
