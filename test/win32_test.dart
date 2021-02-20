@@ -264,4 +264,17 @@ void main() {
         equals(CorElementType.ELEMENT_TYPE_CLASS));
     expect(param.typeIdentifier.name, endsWith('IUnknown'));
   });
+
+  test('Callback functions are generated correctly', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final api = typedef.findMethod('EnumFontFamiliesExW')!;
+    final param = api.parameters[2]; // FONTENUMPROCW
+
+    expect(param.name, equals('lpProc'));
+    expect(param.typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_CLASS));
+    expect(param.typeIdentifier.name, endsWith('FONTENUMPROCW'));
+    expect(param.typeIdentifier.typeArgs, isEmpty);
+  });
 }
