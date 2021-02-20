@@ -9,7 +9,6 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'attribute.dart';
-import 'module.dart';
 
 // The base object for metadata objects.
 abstract class TokenObject {
