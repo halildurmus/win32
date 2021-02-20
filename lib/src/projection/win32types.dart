@@ -426,7 +426,7 @@ const win32TypeMap = <String, String>{
   'BSTR': 'Pointer',
   'OLECHAR': 'Utf16',
   'VARIANTARG': 'Void', 'va_list': 'Void',
-  'IUnknown': 'Void', 'IBindCtx': 'Void',
+  'IUnknown': 'Pointer', 'IBindCtx': 'Pointer',
   'HPCON*': 'Pointer<IntPtr>',
   'LPHWAVEOUT': 'Pointer<IntPtr>',
   'LOGFONTW': 'LOGFONT',
