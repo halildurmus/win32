@@ -9,6 +9,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'attribute.dart';
+import 'module.dart';
 
 // The base object for metadata objects.
 abstract class TokenObject {
@@ -16,6 +17,23 @@ abstract class TokenObject {
   final int token;
 
   const TokenObject(this.reader, this.token);
+
+  bool get isValidToken => reader.IsValidToken(token) == TRUE;
+
+  bool get isGlobal {
+    final pIsGlobal = calloc<Int32>();
+
+    try {
+      final hr = reader.IsGlobal(token, pIsGlobal);
+      if (SUCCEEDED(hr)) {
+        return pIsGlobal.value == 1;
+      } else {
+        throw WindowsException(hr);
+      }
+    } finally {
+      calloc.free(pIsGlobal);
+    }
+  }
 }
 
 /// Represents an object that has attributes associated with it.
