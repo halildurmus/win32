@@ -313,6 +313,9 @@ const win32TypeMap = <String, String>{
   'COMPUTER_NAME_FORMAT': 'Int32',
   'GET_FILEEX_INFO_LEVELS': 'Int32',
   'RO_INIT_TYPE': 'Int32',
+  'NLM_NETWORK_CATEGORY': 'Uint32',
+  'NLM_DOMAIN_TYPE': 'Uint32',
+  'NLM_CONNECTIVITY': 'Uint32',
 
   'EXECUTION_STATE': 'Uint32',
 
@@ -430,6 +433,7 @@ const win32TypeMap = <String, String>{
   'REFKNOWNFOLDERID': 'Pointer<GUID>',
   'OLECHAR': 'Utf16',
   'VARIANTARG': 'Void', 'va_list': 'Void',
+  'IEnumNetworkConnections': 'Pointer',
   'IUnknown': 'Pointer', 'IBindCtx': 'Pointer',
   'HPCON*': 'Pointer<IntPtr>',
   'LPHWAVEOUT': 'Pointer<IntPtr>',
