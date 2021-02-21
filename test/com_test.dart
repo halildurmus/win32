@@ -141,6 +141,33 @@ void main() {
         expect(TypeBuilder.nativeType(param.typeIdentifier),
             equals('Pointer<Pointer>'));
       });
+
+      test('Properties are represented accurately', () {
+        final isConnected = iNetwork.findMethod('get_IsConnectedToInternet')!;
+        expect(isConnected.isGetProperty, equals(true));
+      }, skip: 'https://github.com/microsoft/win32metadata/issues/270');
+
+      test('Properties are represented accurately', () {
+        final isConnected = iNetwork.findMethod('get_IsConnectedToInternet')!;
+        final param = isConnected.parameters.first;
+
+        expect(param.name, equals('pbIsConnected'));
+        expect(param.typeIdentifier.corType,
+            equals(CorElementType.ELEMENT_TYPE_PTR));
+        expect(param.typeIdentifier.typeArgs.length, equals(1));
+        expect(param.typeIdentifier.typeArgs.first.corType,
+            equals(CorElementType.ELEMENT_TYPE_I2));
+      });
+
+      test('Properties are projected accurately', () {
+        final isConnected = iNetwork.findMethod('get_IsConnectedToInternet')!;
+        final param = isConnected.parameters.first;
+
+        expect(TypeBuilder.dartType(param.typeIdentifier),
+            equals('Pointer<Int16>'));
+        expect(TypeBuilder.nativeType(param.typeIdentifier),
+            equals('Pointer<Int16>'));
+      });
     });
 
     group('Projection of INetwork', () {

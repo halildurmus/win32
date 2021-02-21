@@ -22,6 +22,8 @@ class ParameterProjection {
 
 class MethodProjection {
   late String name;
+  late bool isGetProperty;
+  late bool isSetProperty;
   late String returnTypeNative;
   late String returnTypeDart;
   final parameters = <ParameterProjection>[];

@@ -65,7 +65,7 @@ import '../winrt/winrt_constants.dart';
       if (method.parameters.isNotEmpty) {
         buffer.writeln(',');
       }
-      if (method.name.startsWith('get_')) {
+      if (method.isGetProperty) {
         buffer.write(
             '  Pointer<${method.parameters.first.nativeType}> ${method.parameters.first.name}');
       } else {
@@ -85,7 +85,7 @@ import '../winrt/winrt_constants.dart';
       if (method.parameters.isNotEmpty) {
         buffer.writeln(',');
       }
-      if (method.name.startsWith('get_')) {
+      if (method.isGetProperty) {
         buffer.write(
             '  Pointer<${method.parameters.first.nativeType}> ${method.parameters.first.name}');
       } else {
@@ -136,9 +136,9 @@ import '../winrt/winrt_constants.dart';
     }
 
     for (final method in type.methods) {
-      if (method.name.startsWith('get_')) {
+      if (method.isGetProperty) {
         buffer.write(dartGetProperty(method, vtableIndex));
-      } else if (method.name.startsWith('put_')) {
+      } else if (method.isSetProperty) {
         buffer.write(dartSetProperty(method, vtableIndex));
       } else {
         buffer.write(dartMethod(method, vtableIndex));

@@ -237,6 +237,8 @@ class TypeBuilder {
     for (final mdMethod in mdTypeDef.methods) {
       final method = MethodProjection();
       method.name = mdMethod.methodName;
+      method.isGetProperty = mdMethod.isGetProperty;
+      method.isSetProperty = mdMethod.isSetProperty;
 
       if (interface.name.startsWith('Windows.Win32')) {
         // return type is almost certainly an HRESULT, but we'll use the return
