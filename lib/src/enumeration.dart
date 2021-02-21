@@ -12,8 +12,10 @@ import 'typedef.dart';
 class Field {
   final String name;
   final int value;
+  final int attributes;
+  final int corType;
 
-  const Field(this.name, this.value);
+  const Field(this.name, this.value, this.attributes, this.corType);
 }
 
 /// Represents an enum in the Windows Metadata file
@@ -28,10 +30,10 @@ class Enumeration extends TypeDef {
     final szField = calloc<Uint8>(256 * 2).cast<Utf16>();
     final pchField = calloc<Uint32>();
     final pdwAttr = calloc<Uint32>();
-    final ppvSigBlob = calloc<Uint8>();
+    final ppvSigBlob = calloc<IntPtr>();
     final pcbSigBlob = calloc<Uint32>();
     final pdwCPlusTypeFlag = calloc<Uint32>();
-    final ppValue = calloc<Uint8>();
+    final ppValue = calloc<IntPtr>();
     final pcchValue = calloc<Uint32>();
 
     try {
@@ -42,23 +44,23 @@ class Enumeration extends TypeDef {
           256,
           pchField,
           pdwAttr,
-          ppvSigBlob,
+          ppvSigBlob.cast(),
           pcbSigBlob,
           pdwCPlusTypeFlag,
-          ppValue,
+          ppValue.cast(),
           pcchValue);
 
       if (SUCCEEDED(hr)) {
         final fieldName = szField.toDartString();
-        final fieldValue = ppValue.cast<Uint32>().value;
-        // print(fieldName +
-        //     ppvSigBlob
-        //         .cast<Uint8>()
-        //         .asTypedList(pcbSigBlob.value)
-        //         .map((e) => e.toHexString(8))
-        //         .join(' '));
+        final attr = pdwAttr.value;
+        final ctype = pdwCPlusTypeFlag.value;
 
-        return Field(fieldName, fieldValue);
+        if (ppValue.value != 0) {
+          return Field(fieldName,
+              Pointer<Uint32>.fromAddress(ppValue.value).value, attr, ctype);
+        } else {
+          return Field(fieldName, 0, attr, ctype);
+        }
       } else {
         throw WindowsException(hr);
       }

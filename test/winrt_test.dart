@@ -146,6 +146,16 @@ void main() {
           equals(CorElementType.ELEMENT_TYPE_VOID));
       expect(method.parameters.length, equals(0));
     });
+
+    test('Calendar.SetToNow() calling convention is correct', () {
+      final winTypeDef =
+          MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
+
+      final method = winTypeDef.findMethod('SetToNow')!;
+
+      expect(method.callingConvention, equals('default instance '));
+    });
+
     test('Calendar.Day get property is correct', () {
       final winTypeDef =
           MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
@@ -258,6 +268,34 @@ void main() {
 
       final method = winTypeDef.findMethod('whoLetTheDogsOut');
       expect(method, isNull);
+    });
+
+    test('Retrieve enums', () {
+      final mdScope =
+          MetadataStore.getScopeForType('Windows.Globalization.Calendar');
+
+      expect(mdScope.enums.length, greaterThanOrEqualTo(15));
+    });
+
+    test('Evaluate an enum has the right number of fields', () {
+      final mdScope =
+          MetadataStore.getScopeForType('Windows.Globalization.Calendar');
+
+      final dayOfWeek =
+          mdScope.enums.firstWhere((en) => en.typeName.endsWith('DayOfWeek'));
+
+      expect(dayOfWeek.fields.length, equals(8)); // includes 'value__'
+    });
+
+    test('Evaluate an enum has the right values', () {
+      final mdScope =
+          MetadataStore.getScopeForType('Windows.Globalization.Calendar');
+
+      final dayOfWeek =
+          mdScope.enums.firstWhere((en) => en.typeName.endsWith('DayOfWeek'));
+
+      final tuesday = dayOfWeek.fields['Tuesday']!;
+      expect(tuesday, equals(2));
     });
 
     test('IPropertyValue array type', () {

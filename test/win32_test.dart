@@ -62,6 +62,15 @@ void main() {
       expect(api.module.name, equalsIgnoringCase('gdi32'));
     });
 
+    test('isValid gives correct result for a real token', () {
+      final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+      final typedef = scope['Windows.Win32.Gdi.Apis']!;
+
+      final api = typedef.findMethod('AddFontResourceW')!;
+
+      expect(api.isValidToken, isTrue);
+    });
+
     test('Functions can correctly return an int type', () {
       final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
       final typedef = scope['Windows.Win32.Gdi.Apis']!;
