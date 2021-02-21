@@ -256,9 +256,6 @@ class TypeDef extends AttributeObject {
   ///
   /// Returns null if a GUID couldn't be found.
   String? get guid {
-    final attribute = attributes;
-    print(attribute.length);
-
     var guid =
         getCustomGUIDAttribute('Windows.Foundation.Metadata.GuidAttribute');
 

@@ -316,6 +316,7 @@ const win32TypeMap = <String, String>{
   'NLM_NETWORK_CATEGORY': 'Uint32',
   'NLM_DOMAIN_TYPE': 'Uint32',
   'NLM_CONNECTIVITY': 'Uint32',
+  'NLM_ENUM_NETWORK': 'Uint32',
 
   'EXECUTION_STATE': 'Uint32',
 
@@ -435,6 +436,9 @@ const win32TypeMap = <String, String>{
   'VARIANTARG': 'Void', 'va_list': 'Void',
   'IEnumNetworkConnections': 'Pointer',
   'IUnknown': 'Pointer', 'IBindCtx': 'Pointer',
+  'IEnumNetworks': 'Pointer',
+  'INetwork': 'Pointer',
+  'INetworkConnection': 'Pointer',
   'HPCON*': 'Pointer<IntPtr>',
   'LPHWAVEOUT': 'Pointer<IntPtr>',
   'LOGFONTW': 'LOGFONT',
