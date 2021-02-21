@@ -317,6 +317,12 @@ const win32TypeMap = <String, String>{
   'NLM_DOMAIN_TYPE': 'Uint32',
   'NLM_CONNECTIVITY': 'Uint32',
   'NLM_ENUM_NETWORK': 'Uint32',
+  'TrustLevel': 'Uint32',
+  'DESKTOP_WALLPAPER_POSITION': 'Uint32',
+  'DESKTOP_SLIDESHOW_OPTIONS': 'Uint32',
+  'DESKTOP_SLIDESHOW_STATE': 'Uint32',
+  'DESKTOP_SLIDESHOW_DIRECTION': 'Uint32',
+  'FILE_USAGE_TYPE': 'Uint32',
 
   'EXECUTION_STATE': 'Uint32',
 
@@ -439,6 +445,7 @@ const win32TypeMap = <String, String>{
   'IEnumNetworks': 'Pointer',
   'INetwork': 'Pointer',
   'INetworkConnection': 'Pointer',
+  'IShellItemArray': 'Pointer',
   'HPCON*': 'Pointer<IntPtr>',
   'LPHWAVEOUT': 'Pointer<IntPtr>',
   'LOGFONTW': 'LOGFONT',
