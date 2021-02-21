@@ -9,17 +9,40 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+class DesktopWallpaper extends IDesktopWallpaper {
+  static const CLSID_DesktopWallpaper =
+      '{C2CF3110-460E-4fc1-B9D0-8A1C0C9CC4BD}';
+  DesktopWallpaper(Pointer<COMObject> ptr) : super(ptr);
+
+  factory DesktopWallpaper.createInstance() {
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..ref.setGUID(CLSID_DesktopWallpaper);
+    final iid = calloc<GUID>()..ref.setGUID(IID_IDesktopWallpaper);
+
+    try {
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return DesktopWallpaper(ptr);
+    } finally {
+      calloc.free(clsid);
+      calloc.free(iid);
+    }
+  }
+}
+
 late DesktopWallpaper wallpaper;
 
 void printWallpaper() {
-  final pathPtr = calloc<IntPtr>();
+  final pathPtr = calloc<Pointer<Utf16>>();
 
   try {
-    final hr = wallpaper.GetWallpaper(nullptr, pathPtr.cast());
+    final hr = wallpaper.GetWallpaper(nullptr, pathPtr);
 
     switch (hr) {
       case S_OK:
-        final path = Pointer<Utf16>.fromAddress(pathPtr.value).toDartString();
+        final path = pathPtr.value.toDartString();
         print(
             path.isEmpty ? 'No wallpaper is set.' : 'Wallpaper path is: $path');
         break;

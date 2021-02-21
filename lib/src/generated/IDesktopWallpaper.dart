@@ -10,16 +10,12 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
 
 import 'IUnknown.dart';
-
-/// @nodoc
-const CLSID_DesktopWallpaper = '{C2CF3110-460E-4fc1-B9D0-8A1C0C9CC4BD}';
 
 /// @nodoc
 const IID_IDesktopWallpaper = '{B92B56A9-8B55-4E14-9A89-0199BBB6F93B}';
@@ -30,14 +26,14 @@ typedef _SetWallpaper_Dart = int Function(
     Pointer obj, Pointer<Utf16> monitorID, Pointer<Utf16> wallpaper);
 
 typedef _GetWallpaper_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> monitorID, Pointer<Utf16> wallpaper);
+    Pointer obj, Pointer<Utf16> monitorID, Pointer<Pointer<Utf16>> wallpaper);
 typedef _GetWallpaper_Dart = int Function(
-    Pointer obj, Pointer<Utf16> monitorID, Pointer<Utf16> wallpaper);
+    Pointer obj, Pointer<Utf16> monitorID, Pointer<Pointer<Utf16>> wallpaper);
 
 typedef _GetMonitorDevicePathAt_Native = Int32 Function(
-    Pointer obj, Uint32 monitorIndex, Pointer<Utf16> monitorID);
+    Pointer obj, Uint32 monitorIndex, Pointer<Pointer<Utf16>> monitorID);
 typedef _GetMonitorDevicePathAt_Dart = int Function(
-    Pointer obj, int monitorIndex, Pointer<Utf16> monitorID);
+    Pointer obj, int monitorIndex, Pointer<Pointer<Utf16>> monitorID);
 
 typedef _GetMonitorDevicePathCount_Native = Int32 Function(
     Pointer obj, Pointer<Uint32> count);
@@ -64,15 +60,12 @@ typedef _GetPosition_Native = Int32 Function(
     Pointer obj, Pointer<Uint32> position);
 typedef _GetPosition_Dart = int Function(Pointer obj, Pointer<Uint32> position);
 
-typedef _SetSlideshow_Native = Int32 Function(
-    Pointer obj, Pointer<COMObject> items);
-typedef _SetSlideshow_Dart = int Function(
-    Pointer obj, Pointer<COMObject> items);
+typedef _SetSlideshow_Native = Int32 Function(Pointer obj, Pointer items);
+typedef _SetSlideshow_Dart = int Function(Pointer obj, Pointer items);
 
 typedef _GetSlideshow_Native = Int32 Function(
-    Pointer obj, Pointer<COMObject> items);
-typedef _GetSlideshow_Dart = int Function(
-    Pointer obj, Pointer<COMObject> items);
+    Pointer obj, Pointer<Pointer> items);
+typedef _GetSlideshow_Dart = int Function(Pointer obj, Pointer<Pointer> items);
 
 typedef _SetSlideshowOptions_Native = Int32 Function(
     Pointer obj, Uint32 options, Uint32 slideshowTick);
@@ -108,13 +101,15 @@ class IDesktopWallpaper extends IUnknown {
               .asFunction<_SetWallpaper_Dart>()(
           ptr.ref.lpVtbl, monitorID, wallpaper);
 
-  int GetWallpaper(Pointer<Utf16> monitorID, Pointer<Utf16> wallpaper) =>
+  int GetWallpaper(
+          Pointer<Utf16> monitorID, Pointer<Pointer<Utf16>> wallpaper) =>
       Pointer<NativeFunction<_GetWallpaper_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(4).value)
               .asFunction<_GetWallpaper_Dart>()(
           ptr.ref.lpVtbl, monitorID, wallpaper);
 
-  int GetMonitorDevicePathAt(int monitorIndex, Pointer<Utf16> monitorID) =>
+  int GetMonitorDevicePathAt(
+          int monitorIndex, Pointer<Pointer<Utf16>> monitorID) =>
       Pointer<NativeFunction<_GetMonitorDevicePathAt_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(5).value)
               .asFunction<_GetMonitorDevicePathAt_Dart>()(
@@ -151,12 +146,12 @@ class IDesktopWallpaper extends IUnknown {
               ptr.ref.vtable.elementAt(11).value)
           .asFunction<_GetPosition_Dart>()(ptr.ref.lpVtbl, position);
 
-  int SetSlideshow(Pointer<COMObject> items) =>
+  int SetSlideshow(Pointer items) =>
       Pointer<NativeFunction<_SetSlideshow_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(12).value)
           .asFunction<_SetSlideshow_Dart>()(ptr.ref.lpVtbl, items);
 
-  int GetSlideshow(Pointer<COMObject> items) =>
+  int GetSlideshow(Pointer<Pointer> items) =>
       Pointer<NativeFunction<_GetSlideshow_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(13).value)
           .asFunction<_GetSlideshow_Dart>()(ptr.ref.lpVtbl, items);
@@ -188,26 +183,4 @@ class IDesktopWallpaper extends IUnknown {
   int Enable(int enable) => Pointer<NativeFunction<_Enable_Native>>.fromAddress(
           ptr.ref.vtable.elementAt(18).value)
       .asFunction<_Enable_Dart>()(ptr.ref.lpVtbl, enable);
-}
-
-/// {@category com}
-class DesktopWallpaper extends IDesktopWallpaper {
-  DesktopWallpaper(Pointer<COMObject> ptr) : super(ptr);
-
-  factory DesktopWallpaper.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_DesktopWallpaper);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IDesktopWallpaper);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return DesktopWallpaper(ptr);
-    } finally {
-      calloc.free(clsid);
-      calloc.free(iid);
-    }
-  }
 }

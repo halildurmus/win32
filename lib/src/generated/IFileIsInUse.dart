@@ -10,7 +10,6 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
@@ -19,14 +18,15 @@ import '../structs.dart';
 import 'IUnknown.dart';
 
 /// @nodoc
-const IID_IFileIsInUse = '{64a1cbf0-3a1a-4461-9158-376969693950}';
+const IID_IFileIsInUse = '{64A1CBF0-3A1A-4461-9158-376969693950}';
 
 typedef _GetAppName_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> ppszName);
-typedef _GetAppName_Dart = int Function(Pointer obj, Pointer<Utf16> ppszName);
+    Pointer obj, Pointer<Pointer<Utf16>> ppszName);
+typedef _GetAppName_Dart = int Function(
+    Pointer obj, Pointer<Pointer<Utf16>> ppszName);
 
-typedef _GetUsage_Native = Int32 Function(Pointer obj, Pointer<Int32> pfut);
-typedef _GetUsage_Dart = int Function(Pointer obj, Pointer<Int32> pfut);
+typedef _GetUsage_Native = Int32 Function(Pointer obj, Pointer<Uint32> pfut);
+typedef _GetUsage_Dart = int Function(Pointer obj, Pointer<Uint32> pfut);
 
 typedef _GetCapabilities_Native = Int32 Function(
     Pointer obj, Pointer<Uint32> pdwCapFlags);
@@ -48,12 +48,12 @@ class IFileIsInUse extends IUnknown {
 
   IFileIsInUse(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetAppName(Pointer<Utf16> ppszName) =>
+  int GetAppName(Pointer<Pointer<Utf16>> ppszName) =>
       Pointer<NativeFunction<_GetAppName_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
           .asFunction<_GetAppName_Dart>()(ptr.ref.lpVtbl, ppszName);
 
-  int GetUsage(Pointer<Int32> pfut) =>
+  int GetUsage(Pointer<Uint32> pfut) =>
       Pointer<NativeFunction<_GetUsage_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(4).value)
           .asFunction<_GetUsage_Dart>()(ptr.ref.lpVtbl, pfut);
