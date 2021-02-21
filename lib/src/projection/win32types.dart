@@ -324,7 +324,10 @@ const win32TypeMap = <String, String>{
   'DESKTOP_SLIDESHOW_DIRECTION': 'Uint32',
   'FILE_USAGE_TYPE': 'Uint32',
   'FDAP': 'Uint32',
-
+  'CDCONTROLSTATEF': 'Uint32',
+  'KF_CATEGORY': 'Uint32',
+  'ITEMIDLIST': 'Uint32',
+  'FFFP_MODE': 'Uint32',
   'EXECUTION_STATE': 'Uint32',
 
   // Callbacks
@@ -459,6 +462,7 @@ const win32TypeMap = <String, String>{
   'IStream': 'Pointer',
   'IProvideClassInfo': 'Pointer',
   'IMoniker': 'Pointer',
+  'ITypeInfo': 'Pointer',
   'IEnumVARIANT': 'Pointer',
   'IEnumMoniker': 'Pointer',
   'HPCON*': 'Pointer<IntPtr>',
