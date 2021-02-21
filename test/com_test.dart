@@ -133,7 +133,7 @@ void main() {
     test('Can cast to IUnknown', () {
       final riid = convertToIID(IID_IUnknown);
 
-      final classPtr = calloc<IntPtr>();
+      final classPtr = calloc<Pointer>();
       final hr = dialog.QueryInterface(riid.cast(), classPtr);
       expect(hr, equals(S_OK));
 
@@ -146,7 +146,7 @@ void main() {
     test('Cast to random interface fails', () {
       final riid = convertToIID(IID_IDesktopWallpaper);
 
-      final classPtr = calloc<IntPtr>();
+      final classPtr = calloc<Pointer>();
       final hr = dialog.QueryInterface(riid.cast(), classPtr);
       expect(hr, equals(E_NOINTERFACE));
 

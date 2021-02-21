@@ -10,7 +10,6 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
@@ -20,14 +19,14 @@ import '../structs.dart';
 const IID_IUnknown = '{00000000-0000-0000-C000-000000000046}';
 
 typedef _QueryInterface_Native = Int32 Function(
-    Pointer obj, Pointer<GUID> riid, Pointer<IntPtr> ppvObject);
+    Pointer obj, Pointer<GUID> riid, Pointer<Pointer> ppvObject);
 typedef _QueryInterface_Dart = int Function(
-    Pointer obj, Pointer<GUID> riid, Pointer<IntPtr> ppvObject);
+    Pointer obj, Pointer<GUID> riid, Pointer<Pointer> ppvObject);
 
-typedef _AddRef_Native = Int32 Function(Pointer obj);
+typedef _AddRef_Native = Uint32 Function(Pointer obj);
 typedef _AddRef_Dart = int Function(Pointer obj);
 
-typedef _Release_Native = Int32 Function(Pointer obj);
+typedef _Release_Native = Uint32 Function(Pointer obj);
 typedef _Release_Dart = int Function(Pointer obj);
 
 /// {@category Interface}
@@ -39,7 +38,7 @@ class IUnknown {
 
   IUnknown(this.ptr);
 
-  int QueryInterface(Pointer<GUID> riid, Pointer<IntPtr> ppvObject) =>
+  int QueryInterface(Pointer<GUID> riid, Pointer<Pointer> ppvObject) =>
       Pointer<NativeFunction<_QueryInterface_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(0).value)
           .asFunction<_QueryInterface_Dart>()(ptr.ref.lpVtbl, riid, ppvObject);

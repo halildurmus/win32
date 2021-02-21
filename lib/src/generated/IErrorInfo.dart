@@ -10,7 +10,6 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
@@ -25,18 +24,19 @@ typedef _GetGUID_Native = Int32 Function(Pointer obj, Pointer<GUID> pGUID);
 typedef _GetGUID_Dart = int Function(Pointer obj, Pointer<GUID> pGUID);
 
 typedef _GetSource_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> pBstrSource);
-typedef _GetSource_Dart = int Function(Pointer obj, Pointer<Utf16> pBstrSource);
+    Pointer obj, Pointer<Pointer<Utf16>> pBstrSource);
+typedef _GetSource_Dart = int Function(
+    Pointer obj, Pointer<Pointer<Utf16>> pBstrSource);
 
 typedef _GetDescription_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> pBstrDescription);
+    Pointer obj, Pointer<Pointer<Utf16>> pBstrDescription);
 typedef _GetDescription_Dart = int Function(
-    Pointer obj, Pointer<Utf16> pBstrDescription);
+    Pointer obj, Pointer<Pointer<Utf16>> pBstrDescription);
 
 typedef _GetHelpFile_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> pBstrHelpFile);
+    Pointer obj, Pointer<Pointer<Utf16>> pBstrHelpFile);
 typedef _GetHelpFile_Dart = int Function(
-    Pointer obj, Pointer<Utf16> pBstrHelpFile);
+    Pointer obj, Pointer<Pointer<Utf16>> pBstrHelpFile);
 
 typedef _GetHelpContext_Native = Int32 Function(
     Pointer obj, Pointer<Uint32> pdwHelpContext);
@@ -55,17 +55,17 @@ class IErrorInfo extends IUnknown {
               ptr.ref.vtable.elementAt(3).value)
           .asFunction<_GetGUID_Dart>()(ptr.ref.lpVtbl, pGUID);
 
-  int GetSource(Pointer<Utf16> pBstrSource) =>
+  int GetSource(Pointer<Pointer<Utf16>> pBstrSource) =>
       Pointer<NativeFunction<_GetSource_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(4).value)
           .asFunction<_GetSource_Dart>()(ptr.ref.lpVtbl, pBstrSource);
 
-  int GetDescription(Pointer<Utf16> pBstrDescription) =>
+  int GetDescription(Pointer<Pointer<Utf16>> pBstrDescription) =>
       Pointer<NativeFunction<_GetDescription_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(5).value)
           .asFunction<_GetDescription_Dart>()(ptr.ref.lpVtbl, pBstrDescription);
 
-  int GetHelpFile(Pointer<Utf16> pBstrHelpFile) =>
+  int GetHelpFile(Pointer<Pointer<Utf16>> pBstrHelpFile) =>
       Pointer<NativeFunction<_GetHelpFile_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(6).value)
           .asFunction<_GetHelpFile_Dart>()(ptr.ref.lpVtbl, pBstrHelpFile);

@@ -10,7 +10,6 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
@@ -22,9 +21,9 @@ import 'IDispatch.dart';
 const IID_INetwork = '{DCB00002-570F-4A9B-8D69-199FDBA5723B}';
 
 typedef _GetName_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> pszNetworkName);
+    Pointer obj, Pointer<Pointer<Utf16>> pszNetworkName);
 typedef _GetName_Dart = int Function(
-    Pointer obj, Pointer<Utf16> pszNetworkName);
+    Pointer obj, Pointer<Pointer<Utf16>> pszNetworkName);
 
 typedef _SetName_Native = Int32 Function(
     Pointer obj, Pointer<Utf16> szNetworkNewName);
@@ -32,9 +31,9 @@ typedef _SetName_Dart = int Function(
     Pointer obj, Pointer<Utf16> szNetworkNewName);
 
 typedef _GetDescription_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> pszDescription);
+    Pointer obj, Pointer<Pointer<Utf16>> pszDescription);
 typedef _GetDescription_Dart = int Function(
-    Pointer obj, Pointer<Utf16> pszDescription);
+    Pointer obj, Pointer<Pointer<Utf16>> pszDescription);
 
 typedef _SetDescription_Native = Int32 Function(
     Pointer obj, Pointer<Utf16> szDescription);
@@ -52,9 +51,9 @@ typedef _GetDomainType_Dart = int Function(
     Pointer obj, Pointer<Uint32> pNetworkType);
 
 typedef _GetNetworkConnections_Native = Int32 Function(
-    Pointer obj, Pointer<IntPtr> ppEnumNetworkConnection);
+    Pointer obj, Pointer<Pointer> ppEnumNetworkConnection);
 typedef _GetNetworkConnections_Dart = int Function(
-    Pointer obj, Pointer<IntPtr> ppEnumNetworkConnection);
+    Pointer obj, Pointer<Pointer> ppEnumNetworkConnection);
 
 typedef _GetTimeCreatedAndConnected_Native = Int32 Function(
     Pointer obj,
@@ -99,7 +98,7 @@ class INetwork extends IDispatch {
 
   INetwork(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetName(Pointer<Utf16> pszNetworkName) =>
+  int GetName(Pointer<Pointer<Utf16>> pszNetworkName) =>
       Pointer<NativeFunction<_GetName_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(7).value)
           .asFunction<_GetName_Dart>()(ptr.ref.lpVtbl, pszNetworkName);
@@ -109,7 +108,7 @@ class INetwork extends IDispatch {
               ptr.ref.vtable.elementAt(8).value)
           .asFunction<_SetName_Dart>()(ptr.ref.lpVtbl, szNetworkNewName);
 
-  int GetDescription(Pointer<Utf16> pszDescription) =>
+  int GetDescription(Pointer<Pointer<Utf16>> pszDescription) =>
       Pointer<NativeFunction<_GetDescription_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(9).value)
           .asFunction<_GetDescription_Dart>()(ptr.ref.lpVtbl, pszDescription);
@@ -129,7 +128,7 @@ class INetwork extends IDispatch {
               ptr.ref.vtable.elementAt(12).value)
           .asFunction<_GetDomainType_Dart>()(ptr.ref.lpVtbl, pNetworkType);
 
-  int GetNetworkConnections(Pointer<IntPtr> ppEnumNetworkConnection) =>
+  int GetNetworkConnections(Pointer<Pointer> ppEnumNetworkConnection) =>
       Pointer<NativeFunction<_GetNetworkConnections_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(13).value)
               .asFunction<_GetNetworkConnections_Dart>()(
@@ -149,33 +148,16 @@ class INetwork extends IDispatch {
           pdwLowDateTimeConnected,
           pdwHighDateTimeConnected);
 
-  int get IsConnectedToInternet {
-    final retValuePtr = calloc<Int16>();
+  int get_IsConnectedToInternet(Pointer<Int16> pbIsConnected) =>
+      Pointer<NativeFunction<_get_IsConnectedToInternet_Native>>.fromAddress(
+                  ptr.ref.vtable.elementAt(15).value)
+              .asFunction<_get_IsConnectedToInternet_Dart>()(
+          ptr.ref.lpVtbl, pbIsConnected);
 
-    final hr =
-        Pointer<NativeFunction<_get_IsConnectedToInternet_Native>>.fromAddress(
-                    ptr.ref.vtable.elementAt(15).value)
-                .asFunction<_get_IsConnectedToInternet_Dart>()(
-            ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw WindowsException(hr);
-
-    final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
-    return retValue;
-  }
-
-  int get IsConnected {
-    final retValuePtr = calloc<Int16>();
-
-    final hr = Pointer<NativeFunction<_get_IsConnected_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(16).value)
-        .asFunction<_get_IsConnected_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw WindowsException(hr);
-
-    final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
-    return retValue;
-  }
+  int get_IsConnected(Pointer<Int16> pbIsConnected) =>
+      Pointer<NativeFunction<_get_IsConnected_Native>>.fromAddress(
+              ptr.ref.vtable.elementAt(16).value)
+          .asFunction<_get_IsConnected_Dart>()(ptr.ref.lpVtbl, pbIsConnected);
 
   int GetConnectivity(Pointer<Uint32> pConnectivity) =>
       Pointer<NativeFunction<_GetConnectivity_Native>>.fromAddress(

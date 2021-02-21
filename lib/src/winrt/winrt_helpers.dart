@@ -70,12 +70,12 @@ Pointer<IntPtr> convertToHString(String string) {
 /// final calendar = ICalendar(object.cast());
 /// ```
 /// {@category winrt}
-Pointer<IntPtr> CreateObject(String className, String iid) {
+Pointer<Pointer> CreateObject(String className, String iid) {
   final hstrClass = calloc<IntPtr>();
   final lpClassName = className.toNativeUtf16();
   final inspectablePtr = calloc<Pointer>();
   final riid = calloc<GUID>();
-  final classPtr = calloc<IntPtr>();
+  final classPtr = calloc<Pointer>();
   final iidPtr = iid.toNativeUtf16();
   final classNamePtr = className.toNativeUtf16();
 

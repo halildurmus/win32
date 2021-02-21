@@ -12,7 +12,11 @@ class COMType {
 }
 
 const typesToGenerate = <COMType>[
+  COMType('Windows.Win32.Com.IUnknown', '', 0),
   COMType('Windows.Win32.NetworkListManager.INetwork', 'IDispatch', 7),
+  COMType(
+      'Windows.Win32.NetworkListManager.INetworkListManager', 'IDispatch', 7),
+  COMType('Windows.Win32.Automation.IErrorInfo', 'IUnknown', 3),
 ];
 
 void main(List<String> args) {
