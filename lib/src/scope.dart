@@ -18,6 +18,7 @@ import 'typedef.dart';
 /// [MetadataStore], which caches scopes to avoid duplication.
 class Scope {
   final IMetaDataImport2 reader;
+  final _typedefs = <TypeDef>[];
   final _modules = <Module>[];
 
   Scope(this.reader);
@@ -38,29 +39,32 @@ class Scope {
     }
   }
 
+  TypeDef findTypeDef(String typedef) =>
+      typeDefs.firstWhere((t) => t.typeName == typedef);
+
   /// Get an enumerated list of typedefs for this scope.
   List<TypeDef> get typeDefs {
-    final types = <TypeDef>[];
+    if (_typedefs.isEmpty) {
+      final phEnum = calloc<IntPtr>();
+      final rgTypeDefs = calloc<Uint32>();
+      final pcTypeDefs = calloc<Uint32>();
 
-    final phEnum = calloc<IntPtr>();
-    final rgTypeDefs = calloc<Uint32>();
-    final pcTypeDefs = calloc<Uint32>();
+      try {
+        var hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
+        while (hr == S_OK) {
+          final token = rgTypeDefs.value;
 
-    try {
-      var hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
-      while (hr == S_OK) {
-        final token = rgTypeDefs.value;
-
-        types.add(TypeDef.fromToken(reader, token));
-        hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
+          _typedefs.add(TypeDef.fromToken(reader, token));
+          hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
+        }
+      } finally {
+        reader.CloseEnum(phEnum.value);
+        calloc.free(phEnum);
+        calloc.free(rgTypeDefs);
+        calloc.free(pcTypeDefs);
       }
-      return types;
-    } finally {
-      reader.CloseEnum(phEnum.value);
-      calloc.free(phEnum);
-      calloc.free(rgTypeDefs);
-      calloc.free(pcTypeDefs);
     }
+    return _typedefs;
   }
 
   List<Module> get modules {

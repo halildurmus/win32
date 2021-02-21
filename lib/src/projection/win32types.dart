@@ -356,6 +356,7 @@ const win32TypeMap = <String, String>{
   'PCWSTR': 'Pointer<Utf16>',
   // A pointer to a null-terminated string of 16-bit Unicode characters.
   'PWSTR': 'Pointer<Utf16>',
+  'BSTR': 'Pointer<Utf16>',
 
   // Pointers not prefixed with LP*
   'PBOOL': 'Pointer<Int32>',
@@ -427,7 +428,6 @@ const win32TypeMap = <String, String>{
   'LPCLSID': 'Pointer<GUID>', 'REFCLSID': 'Pointer<GUID>',
   'REFIID': 'Pointer<GUID>', 'LPIID': 'Pointer<GUID>',
   'REFKNOWNFOLDERID': 'Pointer<GUID>',
-  'BSTR': 'Pointer',
   'OLECHAR': 'Utf16',
   'VARIANTARG': 'Void', 'va_list': 'Void',
   'IUnknown': 'Pointer', 'IBindCtx': 'Pointer',
