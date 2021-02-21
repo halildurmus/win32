@@ -230,29 +230,53 @@ class TypeDef extends AttributeObject {
   TypeDef? get parent =>
       token == 0 ? null : TypeDef.fromToken(reader, baseTypeToken);
 
-  /// Get the GUID for this type.
-  ///
-  /// Returns null if a GUID couldn't be found.
-  String? get guid {
-    final attributeName =
-        'Windows.Foundation.Metadata.GuidAttribute'.toNativeUtf16();
+  String? getCustomGUIDAttribute(String guidAttributeName) {
+    final ptrAttributeName = guidAttributeName.toNativeUtf16();
     final ppData = calloc<IntPtr>();
     final pcbData = calloc<Uint32>();
 
     try {
       final hr = reader.GetCustomAttributeByName(
-          token, attributeName, ppData, pcbData);
-      if (SUCCEEDED(hr) && pcbData.value == 20) {
+          token, ptrAttributeName, ppData, pcbData);
+      if (SUCCEEDED(hr)) {
         final blob = Pointer<Uint8>.fromAddress(ppData.value);
-        final guid = blob.elementAt(2).cast<GUID>();
-        return guid.ref.toString();
-      } else {
-        return null;
+        if (pcbData.value > 0) {
+          final returnValue = blob.elementAt(2).cast<GUID>();
+          return returnValue.ref.toString();
+        }
       }
     } finally {
-      calloc.free(attributeName);
+      calloc.free(ptrAttributeName);
       calloc.free(ppData);
       calloc.free(pcbData);
     }
+  }
+
+  /// Get the GUID for this type.
+  ///
+  /// Returns null if a GUID couldn't be found.
+  String? get guid {
+    final attribute = attributes;
+    print(attribute.length);
+
+    var guid =
+        getCustomGUIDAttribute('Windows.Foundation.Metadata.GuidAttribute');
+
+    // There is _definitely_ a better way to do this, but right now I'm
+    // struggling to get some attributes by name. So brute forcing this for now.
+    if (guid == null) {
+      // Find the first attribute with a length of 41
+      final guidAttributeIndex =
+          attributes.indexWhere((attr) => attr.signatureBlob.length == 41);
+      if (guidAttributeIndex == -1) {
+        return null;
+      }
+      final guidAttribute = attributes[guidAttributeIndex];
+      final decodedGuid = String.fromCharCodes(
+          guidAttribute.signatureBlob.toList().sublist(3, 39));
+      return '{$decodedGuid}';
+    }
+
+    return guid;
   }
 }
