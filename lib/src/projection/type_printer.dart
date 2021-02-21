@@ -128,7 +128,6 @@ import '../winrt/winrt_constants.dart';
 ''');
     } else {
       buffer.write('''
-  @override  
   Pointer<COMObject> ptr;
 
    ${type.shortName}(this.ptr);\n
