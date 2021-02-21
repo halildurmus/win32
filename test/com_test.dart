@@ -22,11 +22,9 @@ void main() {
     });
 
     group('INetwork tests', () {
-      late TypeDef iNetwork;
-      setUp(() {
-        iNetwork =
-            scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
-      });
+      final iNetwork =
+          scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
+
       test('Can search for a COM interface in winmd', () {
         expect(iNetwork.isInterface, isTrue);
         expect(iNetwork.isValidToken, isTrue);
@@ -40,6 +38,12 @@ void main() {
         final getName = iNetwork.methods.first;
 
         expect(getName.methodName, equals('GetName'));
+      });
+
+      test('COM methods have right number of parameters', () {
+        final getName = iNetwork.methods.first;
+
+        expect(getName.parameters.length, equals(1));
       });
 
       test('COM methods return HRESULTs', () {
@@ -136,6 +140,20 @@ void main() {
             equals('Pointer<Pointer>'));
         expect(TypeBuilder.nativeType(param.typeIdentifier),
             equals('Pointer<Pointer>'));
+      });
+    });
+
+    group('Projection of INetwork', () {
+      final iNetwork =
+          scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
+      final projected = TypeBuilder.projectWindowsType(iNetwork);
+
+      test('Correct number of projected methods', () {
+        expect(projected.methods.length, equals(13));
+      });
+
+      test('Correct number of parameters in a test method', () {
+        expect(projected.methods.first.parameters.length, equals(1));
       });
     });
   }

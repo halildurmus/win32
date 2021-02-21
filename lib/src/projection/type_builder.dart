@@ -237,27 +237,36 @@ class TypeBuilder {
     for (final mdMethod in mdTypeDef.methods) {
       final method = MethodProjection();
       method.name = mdMethod.methodName;
-      method.returnTypeNative = 'Int32';
-      method.returnTypeDart = 'int';
 
-      // return value is passed as an pointer
-      if (mdMethod.returnType.typeIdentifier.corType !=
-          CorElementType.ELEMENT_TYPE_VOID) {
-        if (mdMethod.isSetProperty) {
-          final paramName = method.name.substring(4).toCamelCase();
-          method.parameters.add(ParameterProjection(paramName,
-              nativeType: nativeType(mdMethod.returnType.typeIdentifier),
-              dartType: dartType(mdMethod.returnType.typeIdentifier)));
-        } else if (mdMethod.isGetProperty) {
-          method.parameters.add(ParameterProjection('value',
-              nativeType: nativeType(mdMethod.returnType.typeIdentifier),
-              dartType: dartType(mdMethod.returnType.typeIdentifier)));
-        } else {
-          method.parameters.add(ParameterProjection('value',
-              nativeType:
-                  'Pointer<${nativeType(mdMethod.returnType.typeIdentifier)}>',
-              dartType:
-                  'Pointer<${nativeType(mdMethod.returnType.typeIdentifier)}>'));
+      if (interface.name.startsWith('Windows.Win32')) {
+        // return type is almost certainly an HRESULT, but we'll use the return
+        // type just to be sure.
+        method.returnTypeNative =
+            nativeType(mdMethod.returnType.typeIdentifier);
+        method.returnTypeDart = dartType(mdMethod.returnType.typeIdentifier);
+      } else {
+        // WinRT methods always return an HRESULT, and provide the actual return
+        // value as an pointer
+        method.returnTypeNative = 'Int32';
+        method.returnTypeDart = 'int';
+        if (mdMethod.returnType.typeIdentifier.corType !=
+            CorElementType.ELEMENT_TYPE_VOID) {
+          if (mdMethod.isSetProperty) {
+            final paramName = method.name.substring(4).toCamelCase();
+            method.parameters.add(ParameterProjection(paramName,
+                nativeType: nativeType(mdMethod.returnType.typeIdentifier),
+                dartType: dartType(mdMethod.returnType.typeIdentifier)));
+          } else if (mdMethod.isGetProperty) {
+            method.parameters.add(ParameterProjection('value',
+                nativeType: nativeType(mdMethod.returnType.typeIdentifier),
+                dartType: dartType(mdMethod.returnType.typeIdentifier)));
+          } else {
+            method.parameters.add(ParameterProjection('value',
+                nativeType:
+                    'Pointer<${nativeType(mdMethod.returnType.typeIdentifier)}>',
+                dartType:
+                    'Pointer<${nativeType(mdMethod.returnType.typeIdentifier)}>'));
+          }
         }
       }
 
