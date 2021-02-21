@@ -10,7 +10,6 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
@@ -27,19 +26,24 @@ typedef _GetTypeInfoCount_Dart = int Function(
     Pointer obj, Pointer<Uint32> pctinfo);
 
 typedef _GetTypeInfo_Native = Int32 Function(
-    Pointer obj, Uint32 iTInfo, Uint32 lcid, Pointer<IntPtr> ppTInfo);
+    Pointer obj, Uint32 iTInfo, Uint32 lcid, Pointer<Pointer> ppTInfo);
 typedef _GetTypeInfo_Dart = int Function(
-    Pointer obj, int iTInfo, int lcid, Pointer<IntPtr> ppTInfo);
+    Pointer obj, int iTInfo, int lcid, Pointer<Pointer> ppTInfo);
 
 typedef _GetIDsOfNames_Native = Int32 Function(
     Pointer obj,
     Pointer<GUID> riid,
-    Pointer<Utf16> rgszNames,
+    Pointer<Pointer<Utf16>> rgszNames,
     Uint32 cNames,
     Uint32 lcid,
     Pointer<Int32> rgDispId);
-typedef _GetIDsOfNames_Dart = int Function(Pointer obj, Pointer<GUID> riid,
-    Pointer<Utf16> rgszNames, int cNames, int lcid, Pointer<Int32> rgDispId);
+typedef _GetIDsOfNames_Dart = int Function(
+    Pointer obj,
+    Pointer<GUID> riid,
+    Pointer<Pointer<Utf16>> rgszNames,
+    int cNames,
+    int lcid,
+    Pointer<Int32> rgDispId);
 
 typedef _Invoke_Native = Int32 Function(
     Pointer obj,
@@ -74,14 +78,14 @@ class IDispatch extends IUnknown {
               ptr.ref.vtable.elementAt(3).value)
           .asFunction<_GetTypeInfoCount_Dart>()(ptr.ref.lpVtbl, pctinfo);
 
-  int GetTypeInfo(int iTInfo, int lcid, Pointer<IntPtr> ppTInfo) =>
+  int GetTypeInfo(int iTInfo, int lcid, Pointer<Pointer> ppTInfo) =>
       Pointer<NativeFunction<_GetTypeInfo_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(4).value)
               .asFunction<_GetTypeInfo_Dart>()(
           ptr.ref.lpVtbl, iTInfo, lcid, ppTInfo);
 
-  int GetIDsOfNames(Pointer<GUID> riid, Pointer<Utf16> rgszNames, int cNames,
-          int lcid, Pointer<Int32> rgDispId) =>
+  int GetIDsOfNames(Pointer<GUID> riid, Pointer<Pointer<Utf16>> rgszNames,
+          int cNames, int lcid, Pointer<Int32> rgDispId) =>
       Pointer<NativeFunction<_GetIDsOfNames_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(5).value)
               .asFunction<_GetIDsOfNames_Dart>()(

@@ -13,6 +13,9 @@ class COMType {
 
 const typesToGenerate = <COMType>[
   COMType('Windows.Win32.Com.IUnknown', '', 0),
+  COMType('Windows.Win32.Com.IBindCtx', 'IUnknown', 3),
+  COMType('Windows.Win32.Com.IClassFactory', 'IUnknown', 3),
+  COMType('Windows.Win32.Automation.IDispatch', 'IUnknown', 3),
   COMType('Windows.Win32.Automation.IErrorInfo', 'IUnknown', 3),
   COMType('Windows.Win32.Shell.IFileIsInUse', 'IUnknown', 3),
   COMType('Windows.Win32.Shell.IDesktopWallpaper', 'IUnknown', 3),
