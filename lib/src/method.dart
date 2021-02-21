@@ -108,6 +108,9 @@ class Method extends AttributeObject {
   bool get hasGenericParameters => signatureBlob[0] & 0x10 == 0x10;
 
   void _parseMethodType() {
+    // Note that COM properties currently do not have special name, per:
+    // https://github.com/microsoft/win32metadata/issues/270
+    // So for now, we treat them just as methods.
     if (isSpecialName && methodName.startsWith('get_')) {
       // Property getter
       isGetProperty = true;

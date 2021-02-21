@@ -16,17 +16,15 @@ void main() {
 
     test('Can find a COM interface in winmd by name', () {
       final iNetwork =
-          scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork');
+          scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
 
       expect(iNetwork.isValidToken, isTrue);
     });
 
     group('INetwork tests', () {
-      late TypeDef iNetwork;
-      setUp(() {
-        iNetwork =
-            scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork');
-      });
+      final iNetwork =
+          scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
+
       test('Can search for a COM interface in winmd', () {
         expect(iNetwork.isInterface, isTrue);
         expect(iNetwork.isValidToken, isTrue);
@@ -40,6 +38,12 @@ void main() {
         final getName = iNetwork.methods.first;
 
         expect(getName.methodName, equals('GetName'));
+      });
+
+      test('COM methods have right number of parameters', () {
+        final getName = iNetwork.methods.first;
+
+        expect(getName.parameters.length, equals(1));
       });
 
       test('COM methods return HRESULTs', () {
@@ -86,6 +90,97 @@ void main() {
 
         expect(TypeBuilder.dartType(param.typeIdentifier),
             equals('Pointer<Utf16>'));
+      });
+
+      test('GUIDs are represented accurately', () {
+        final getNetworkId = iNetwork.findMethod('GetNetworkId')!;
+        final param = getNetworkId.parameters.first;
+
+        expect(param.name, equals('pgdGuidNetworkId'));
+        expect(param.typeIdentifier.corType,
+            equals(CorElementType.ELEMENT_TYPE_PTR));
+        expect(param.typeIdentifier.typeArgs.length, equals(1));
+        expect(param.typeIdentifier.typeArgs.first.name, endsWith('Guid'));
+      });
+
+      test('GUIDs are projected accurately', () {
+        final getNetworkId = iNetwork.findMethod('GetNetworkId')!;
+        final param = getNetworkId.parameters.first;
+
+        expect(TypeBuilder.dartType(param.typeIdentifier),
+            equals('Pointer<GUID>'));
+        expect(TypeBuilder.nativeType(param.typeIdentifier),
+            equals('Pointer<GUID>'));
+      });
+
+      test('Enums like NLM_NETWORK_CATEGORY are projected accurately', () {
+        final setCategory = iNetwork.findMethod('SetCategory')!;
+        final param = setCategory.parameters.first;
+
+        expect(TypeBuilder.dartType(param.typeIdentifier), equals('int'));
+        expect(TypeBuilder.nativeType(param.typeIdentifier), equals('Uint32'));
+      });
+
+      test('Pointers to enums are projected accurately', () {
+        final getCategory = iNetwork.findMethod('GetCategory')!;
+        final param = getCategory.parameters.first;
+
+        expect(TypeBuilder.dartType(param.typeIdentifier),
+            equals('Pointer<Uint32>'));
+        expect(TypeBuilder.nativeType(param.typeIdentifier),
+            equals('Pointer<Uint32>'));
+      });
+
+      test('Pointers to interfaces are projected accurately', () {
+        final getNetworkConnections =
+            iNetwork.findMethod('GetNetworkConnections')!;
+        final param = getNetworkConnections.parameters.first;
+
+        expect(TypeBuilder.dartType(param.typeIdentifier),
+            equals('Pointer<Pointer>'));
+        expect(TypeBuilder.nativeType(param.typeIdentifier),
+            equals('Pointer<Pointer>'));
+      });
+
+      test('Properties are represented accurately', () {
+        final isConnected = iNetwork.findMethod('get_IsConnectedToInternet')!;
+        expect(isConnected.isGetProperty, equals(true));
+      }, skip: 'https://github.com/microsoft/win32metadata/issues/270');
+
+      test('Properties are represented accurately', () {
+        final isConnected = iNetwork.findMethod('get_IsConnectedToInternet')!;
+        final param = isConnected.parameters.first;
+
+        expect(param.name, equals('pbIsConnected'));
+        expect(param.typeIdentifier.corType,
+            equals(CorElementType.ELEMENT_TYPE_PTR));
+        expect(param.typeIdentifier.typeArgs.length, equals(1));
+        expect(param.typeIdentifier.typeArgs.first.corType,
+            equals(CorElementType.ELEMENT_TYPE_I2));
+      });
+
+      test('Properties are projected accurately', () {
+        final isConnected = iNetwork.findMethod('get_IsConnectedToInternet')!;
+        final param = isConnected.parameters.first;
+
+        expect(TypeBuilder.dartType(param.typeIdentifier),
+            equals('Pointer<Int16>'));
+        expect(TypeBuilder.nativeType(param.typeIdentifier),
+            equals('Pointer<Int16>'));
+      });
+    });
+
+    group('Projection of INetwork', () {
+      final iNetwork =
+          scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
+      final projected = TypeBuilder.projectWindowsType(iNetwork);
+
+      test('Correct number of projected methods', () {
+        expect(projected.methods.length, equals(13));
+      });
+
+      test('Correct number of parameters in a test method', () {
+        expect(projected.methods.first.parameters.length, equals(1));
       });
     });
   }

@@ -2,15 +2,16 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// Parse the Windows Metadata for a WinRT type and generate a Dart wrapper
+// Parse the Windows Metadata for a COM type and generate a Dart wrapper
 
 import 'package:winmd/winmd.dart';
 
-const winrtType = 'Windows.Foundation.IPropertyValue';
+const typeToGenerate = 'Windows.Win32.NetworkListManager.INetwork';
 
 void main(List<String> args) {
-  final mdTypeDef = MetadataStore.getMetadataForType(winrtType)!;
-  final projection = TypeBuilder.projectWindowsType(mdTypeDef);
+  final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+  final typedef = scope.findTypeDef(typeToGenerate)!;
+  final projection = TypeBuilder.projectWindowsType(typedef);
   final dartClass = TypePrinter.printType(projection);
 
   print(dartClass);
