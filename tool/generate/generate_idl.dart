@@ -1,4 +1,4 @@
-// generate.dart
+// generate_idl.dart
 
 // The main entrypoint for the generate tool.
 

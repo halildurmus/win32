@@ -8,11 +8,11 @@ call dart %~dp0win32\generate_tests.dart
 echo.
 
 echo Generating COM classes
-call dart %~dp0generate\generate.dart %~dp0generate\com %~dp0..\lib\src\generated %~dp0..\test\com
+call dart %~dp0generate\generate_idl.dart %~dp0generate\com %~dp0..\lib\src\generated %~dp0..\test\com
 echo.
 
 echo Generating Windows Runtime classes from IDL
-call dart %~dp0generate\generate.dart %~dp0generate\winrt %~dp0..\lib\src\generated
+call dart %~dp0generate\generate_idl.dart %~dp0generate\winrt %~dp0..\lib\src\generated
 echo.
 
 echo Generating Windows Runtime classes from inspection
