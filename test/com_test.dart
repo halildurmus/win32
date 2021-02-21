@@ -16,7 +16,7 @@ void main() {
 
     test('Can find a COM interface in winmd by name', () {
       final iNetwork =
-          scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork');
+          scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
 
       expect(iNetwork.isValidToken, isTrue);
     });
@@ -25,7 +25,7 @@ void main() {
       late TypeDef iNetwork;
       setUp(() {
         iNetwork =
-            scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork');
+            scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
       });
       test('Can search for a COM interface in winmd', () {
         expect(iNetwork.isInterface, isTrue);

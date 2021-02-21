@@ -39,8 +39,10 @@ class Scope {
     }
   }
 
-  TypeDef findTypeDef(String typedef) =>
-      typeDefs.firstWhere((t) => t.typeName == typedef);
+  TypeDef? findTypeDef(String typedef) {
+    final typeDef = typeDefs.where((t) => t.typeName == typedef);
+    return (typeDef.isNotEmpty ? typeDef.first : null);
+  }
 
   /// Get an enumerated list of typedefs for this scope.
   List<TypeDef> get typeDefs {
