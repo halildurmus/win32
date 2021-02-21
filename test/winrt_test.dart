@@ -146,6 +146,16 @@ void main() {
           equals(CorElementType.ELEMENT_TYPE_VOID));
       expect(method.parameters.length, equals(0));
     });
+
+    test('Calendar.SetToNow() calling convention is correct', () {
+      final winTypeDef =
+          MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
+
+      final method = winTypeDef.findMethod('SetToNow')!;
+
+      expect(method.callingConvention, equals('default instance '));
+    });
+
     test('Calendar.Day get property is correct', () {
       final winTypeDef =
           MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
