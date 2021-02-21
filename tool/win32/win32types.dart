@@ -276,7 +276,7 @@ const win32TypeMap = <String, String>{
   'HRESULT': 'Int32',
 
   'MMRESULT': 'Uint32',
-  'NTSTATUS': 'Int32', 'VARTYPE': 'Uint32',
+  'NTSTATUS': 'Int32', 'VARTYPE': 'Uint16',
 
   // A language identifier. Declared as `WORD`.
   'LANGID': 'Uint16',

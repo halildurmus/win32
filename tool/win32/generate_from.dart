@@ -5,7 +5,7 @@ const winmdGenerated = [
   'comdlg32',
   'dxva2',
   'gdi32',
-  // 'oleaut32',
+  'oleaut32',
   'powrprof',
   // 'psapi',
   'rometadata',
@@ -16,8 +16,6 @@ const winmdGenerated = [
 ];
 
 // bthprops is broken because of BLUETOOTH_DEVICE_INFO_STRUCT incorrect name
-
-// oleaut32 is missing because of GetActiveObject (Dart test fails)
 
 // psapi is missing because of
 // https://github.com/microsoft/win32metadata/issues/229

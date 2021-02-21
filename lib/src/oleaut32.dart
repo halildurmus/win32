@@ -219,12 +219,13 @@ int SysStringLen(Pointer pbstr) {
 /// );
 /// ```
 /// {@category oleaut32}
-int VariantChangeType(Pointer pvargDest, Pointer pvarSrc, int wFlags, int vt) {
+int VariantChangeType(
+    Pointer<VARIANT> pvargDest, Pointer<VARIANT> pvarSrc, int wFlags, int vt) {
   final _VariantChangeType = _oleaut32.lookupFunction<
-      Int32 Function(
-          Pointer pvargDest, Pointer pvarSrc, Uint16 wFlags, Uint32 vt),
-      int Function(Pointer pvargDest, Pointer pvarSrc, int wFlags,
-          int vt)>('VariantChangeType');
+      Int32 Function(Pointer<VARIANT> pvargDest, Pointer<VARIANT> pvarSrc,
+          Uint16 wFlags, Uint16 vt),
+      int Function(Pointer<VARIANT> pvargDest, Pointer<VARIANT> pvarSrc,
+          int wFlags, int vt)>('VariantChangeType');
   return _VariantChangeType(pvargDest, pvarSrc, wFlags, vt);
 }
 
@@ -236,9 +237,10 @@ int VariantChangeType(Pointer pvargDest, Pointer pvarSrc, int wFlags, int vt) {
 /// );
 /// ```
 /// {@category oleaut32}
-int VariantClear(Pointer pvarg) {
-  final _VariantClear = _oleaut32.lookupFunction<Int32 Function(Pointer pvarg),
-      int Function(Pointer pvarg)>('VariantClear');
+int VariantClear(Pointer<VARIANT> pvarg) {
+  final _VariantClear = _oleaut32.lookupFunction<
+      Int32 Function(Pointer<VARIANT> pvarg),
+      int Function(Pointer<VARIANT> pvarg)>('VariantClear');
   return _VariantClear(pvarg);
 }
 
@@ -251,10 +253,11 @@ int VariantClear(Pointer pvarg) {
 /// );
 /// ```
 /// {@category oleaut32}
-int VariantCopy(Pointer pvargDest, Pointer pvargSrc) {
+int VariantCopy(Pointer<VARIANT> pvargDest, Pointer<VARIANT> pvargSrc) {
   final _VariantCopy = _oleaut32.lookupFunction<
-      Int32 Function(Pointer pvargDest, Pointer pvargSrc),
-      int Function(Pointer pvargDest, Pointer pvargSrc)>('VariantCopy');
+      Int32 Function(Pointer<VARIANT> pvargDest, Pointer<VARIANT> pvargSrc),
+      int Function(Pointer<VARIANT> pvargDest,
+          Pointer<VARIANT> pvargSrc)>('VariantCopy');
   return _VariantCopy(pvargDest, pvargSrc);
 }
 
@@ -266,9 +269,10 @@ int VariantCopy(Pointer pvargDest, Pointer pvargSrc) {
 /// );
 /// ```
 /// {@category oleaut32}
-void VariantInit(Pointer pvarg) {
-  final _VariantInit = _oleaut32.lookupFunction<Void Function(Pointer pvarg),
-      void Function(Pointer pvarg)>('VariantInit');
+void VariantInit(Pointer<VARIANT> pvarg) {
+  final _VariantInit = _oleaut32.lookupFunction<
+      Void Function(Pointer<VARIANT> pvarg),
+      void Function(Pointer<VARIANT> pvarg)>('VariantInit');
   return _VariantInit(pvarg);
 }
 

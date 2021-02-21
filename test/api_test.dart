@@ -4507,7 +4507,7 @@ void main() {
       final oleaut32 = DynamicLibrary.open('oleaut32.dll');
       final VariantChangeType = oleaut32.lookupFunction<
           Int32 Function(
-              Pointer pvargDest, Pointer pvarSrc, Uint16 wFlags, Uint32 vt),
+              Pointer pvargDest, Pointer pvarSrc, Uint16 wFlags, Uint16 vt),
           int Function(Pointer pvargDest, Pointer pvarSrc, int wFlags,
               int vt)>('VariantChangeType');
       expect(VariantChangeType, isA<Function>());
