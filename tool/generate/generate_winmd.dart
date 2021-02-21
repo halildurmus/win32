@@ -3,25 +3,35 @@
 import 'dart:io';
 import 'package:winmd/winmd.dart';
 
-const typesToGenerate = [
-  'Windows.Win32.NetworkListManager.INetwork',
+class COMType {
+  final String typeName;
+  final String inheritsFrom;
+  final int vTableStart;
+
+  const COMType(this.typeName, this.inheritsFrom, this.vTableStart);
+}
+
+const typesToGenerate = <COMType>[
+  COMType('Windows.Win32.NetworkListManager.INetwork', 'IDispatch', 7),
 ];
 
 void main(List<String> args) {
+  final scope = MetadataStore.getScopeForFile('tool/win32/Windows.Win32.winmd');
+
   final outputDirectory = (args.length == 1)
       ? Directory(args.first)
       : Directory('lib/src/generated');
 
   for (final type in typesToGenerate) {
-    final mdTypeDef = MetadataStore.getMetadataForType(type);
-    if (mdTypeDef == null) {
-      throw Exception("Can't find type $type.");
-    }
+    final mdTypeDef = scope.findTypeDef(type.typeName)!;
 
     final projection = TypeBuilder.projectWindowsType(mdTypeDef);
+    projection.inherits = type.inheritsFrom;
+    projection.vtableStart = type.vTableStart;
+    projection.sourceType = SourceType.com;
     final dartClass = TypePrinter.printType(projection);
 
-    final outputFilename = type.split('.').last;
+    final outputFilename = type.typeName.split('.').last;
     final outputFile =
         File('${outputDirectory.uri.toFilePath()}$outputFilename.dart');
 
