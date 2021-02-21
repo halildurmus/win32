@@ -18,7 +18,6 @@ export 'src/method.dart';
 export 'src/module.dart';
 export 'src/parameter.dart';
 export 'src/scope.dart';
-export 'src/signature.dart';
 export 'src/typedef.dart';
 export 'src/typeidentifier.dart';
 export 'src/utils.dart';
