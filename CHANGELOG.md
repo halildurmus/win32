@@ -1,3 +1,8 @@
+## 0.4.0-dev.3
+
+- Fix enumerations
+- Add more tests
+
 ## 0.4.0-dev.2
 
 - Add more tests
