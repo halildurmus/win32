@@ -10,7 +10,6 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
@@ -19,7 +18,7 @@ import '../structs.dart';
 import 'ISequentialStream.dart';
 
 /// @nodoc
-const IID_IStream = '{0000000c-0000-0000-C000-000000000046}';
+const IID_IStream = '{0000000C-0000-0000-C000-000000000046}';
 
 typedef _Seek_Native = Int32 Function(Pointer obj, Int64 dlibMove,
     Uint32 dwOrigin, Pointer<Uint64> plibNewPosition);
@@ -29,10 +28,10 @@ typedef _Seek_Dart = int Function(
 typedef _SetSize_Native = Int32 Function(Pointer obj, Uint64 libNewSize);
 typedef _SetSize_Dart = int Function(Pointer obj, int libNewSize);
 
-typedef _CopyTo_Native = Int32 Function(Pointer obj, Pointer<COMObject> pstm,
-    Uint64 cb, Pointer<Uint64> pcbRead, Pointer<Uint64> pcbWritten);
-typedef _CopyTo_Dart = int Function(Pointer obj, Pointer<COMObject> pstm,
-    int cb, Pointer<Uint64> pcbRead, Pointer<Uint64> pcbWritten);
+typedef _CopyTo_Native = Int32 Function(Pointer obj, Pointer pstm, Uint64 cb,
+    Pointer<Uint64> pcbRead, Pointer<Uint64> pcbWritten);
+typedef _CopyTo_Dart = int Function(Pointer obj, Pointer pstm, int cb,
+    Pointer<Uint64> pcbRead, Pointer<Uint64> pcbWritten);
 
 typedef _Commit_Native = Int32 Function(Pointer obj, Uint32 grfCommitFlags);
 typedef _Commit_Dart = int Function(Pointer obj, int grfCommitFlags);
@@ -55,8 +54,8 @@ typedef _Stat_Native = Int32 Function(
 typedef _Stat_Dart = int Function(
     Pointer obj, Pointer<STATSTG> pstatstg, int grfStatFlag);
 
-typedef _Clone_Native = Int32 Function(Pointer obj, Pointer<IntPtr> ppstm);
-typedef _Clone_Dart = int Function(Pointer obj, Pointer<IntPtr> ppstm);
+typedef _Clone_Native = Int32 Function(Pointer obj, Pointer<Pointer> ppstm);
+typedef _Clone_Dart = int Function(Pointer obj, Pointer<Pointer> ppstm);
 
 /// {@category Interface}
 /// {@category com}
@@ -76,7 +75,7 @@ class IStream extends ISequentialStream {
               ptr.ref.vtable.elementAt(6).value)
           .asFunction<_SetSize_Dart>()(ptr.ref.lpVtbl, libNewSize);
 
-  int CopyTo(Pointer<COMObject> pstm, int cb, Pointer<Uint64> pcbRead,
+  int CopyTo(Pointer pstm, int cb, Pointer<Uint64> pcbRead,
           Pointer<Uint64> pcbWritten) =>
       Pointer<NativeFunction<_CopyTo_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(7).value)
@@ -109,7 +108,7 @@ class IStream extends ISequentialStream {
               ptr.ref.vtable.elementAt(12).value)
           .asFunction<_Stat_Dart>()(ptr.ref.lpVtbl, pstatstg, grfStatFlag);
 
-  int Clone(Pointer<IntPtr> ppstm) =>
+  int Clone(Pointer<Pointer> ppstm) =>
       Pointer<NativeFunction<_Clone_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(13).value)
           .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppstm);

@@ -30,7 +30,7 @@ void main() {
     expect(wbemservices.QueryObjectSink, isA<Function>());
   });
   test('Can instantiate IWbemServices.GetObject', () {
-    expect(wbemservices.GetObject, isA<Function>());
+    expect(wbemservices.GetObjectA, isA<Function>());
   });
   test('Can instantiate IWbemServices.GetObjectAsync', () {
     expect(wbemservices.GetObjectAsync, isA<Function>());

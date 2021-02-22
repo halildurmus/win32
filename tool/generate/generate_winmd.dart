@@ -56,29 +56,22 @@ const interfacesToGenerate = <COMType>[
   COMType('Windows.Win32.Com.IRunningObjectTable', 'IUnknown', vTableStart: 3),
   COMType('Windows.Win32.StructuredStorage.ISequentialStream', 'IUnknown',
       vTableStart: 3),
+  COMType('Windows.Win32.Shell.IShellItem', 'IUnknown', vTableStart: 3),
+  COMType('Windows.Win32.Shell.IShellItem2', 'IShellItem', vTableStart: 8),
+  COMType('Windows.Win32.Shell.IShellItemArray', 'IUnknown', vTableStart: 3),
+  COMType('Windows.Win32.Shell.IShellItemFilter', 'IUnknown', vTableStart: 3),
+  COMType('Windows.Win32.StructuredStorage.IStream', 'ISequentialStream',
+      vTableStart: 5),
+  COMType('Windows.Win32.StructuredStorage.ISequentialStream', 'IUnknown',
+      vTableStart: 3),
+  COMType('Windows.Win32.Automation.ISupportErrorInfo', 'IUnknown',
+      vTableStart: 3),
+  COMType('Windows.Win32.Wmi.IWbemClassObject', 'IUnknown', vTableStart: 3),
+  COMType('Windows.Win32.Wmi.IWbemContext', 'IUnknown', vTableStart: 3),
+  COMType('Windows.Win32.Wmi.IWbemLocator', 'IUnknown',
+      vTableStart: 3, generateClass: true),
+  COMType('Windows.Win32.Wmi.IWbemServices', 'IUnknown', vTableStart: 3),
 ];
-
-// /// {@category com}
-// class FileOpenDialog extends IFileOpenDialog {
-//   FileOpenDialog(Pointer<COMObject> ptr) : super(ptr);
-
-//   factory FileOpenDialog.createInstance() {
-//     final ptr = calloc<COMObject>();
-//     final clsid = calloc<GUID>()..ref.setGUID(CLSID_FileOpenDialog);
-//     final iid = calloc<GUID>()..ref.setGUID(IID_IFileOpenDialog);
-
-//     try {
-//       final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-//       if (FAILED(hr)) throw WindowsException(hr);
-
-//       return FileOpenDialog(ptr);
-//     } finally {
-//       calloc.free(clsid);
-//       calloc.free(iid);
-//     }
-//   }
-// }
 
 void main(List<String> args) {
   final scope = MetadataStore.getScopeForFile('tool/win32/Windows.Win32.winmd');
