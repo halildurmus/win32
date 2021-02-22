@@ -11,15 +11,16 @@ echo Generating COM classes
 call dart %~dp0generate\generate_idl.dart %~dp0generate\com %~dp0..\lib\src\generated %~dp0..\test\com
 echo.
 
-echo Generating COM classes via metadata
-call dart %~dp0generate\generate_winmd.dart %~dp0..\lib\src\generated
+echo Generating COM classes from Windows metadata
+call dart %~dp0metadata\com.dart %~dp0..\lib\src\generated
+echo.
 
 echo Generating Windows Runtime classes from IDL
 call dart %~dp0generate\generate_idl.dart %~dp0generate\winrt %~dp0..\lib\src\generated
 echo.
 
-echo Generating Windows Runtime classes from inspection
-call dart %~dp0winmd\winmd.dart %~dp0..\lib\src\generated
+echo Generating Windows Runtime classes from Windows metadata
+call dart %~dp0metadata\winrt.dart %~dp0..\lib\src\generated
 echo.
 
 echo Formatting generated source code

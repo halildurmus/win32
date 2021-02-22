@@ -18,6 +18,7 @@ final typesToGenerate = [
   'Windows.Foundation.IAsyncInfo',
   'Windows.Foundation.IClosable',
   'Windows.Foundation.IStringable',
+  //  'Windows.Globalization.ICalendar',
 ];
 
 void main(List<String> args) {
