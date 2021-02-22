@@ -18,6 +18,9 @@ import '../structs.dart';
 import 'IUnknown.dart';
 
 /// @nodoc
+const CLSID_DesktopWallpaper = '{C2CF3110-460E-4FC1-B9D0-8A1C0C9CC4BD}';
+
+/// @nodoc
 const IID_IDesktopWallpaper = '{B92B56A9-8B55-4E14-9A89-0199BBB6F93B}';
 
 typedef _SetWallpaper_Native = Int32 Function(
@@ -183,4 +186,26 @@ class IDesktopWallpaper extends IUnknown {
   int Enable(int enable) => Pointer<NativeFunction<_Enable_Native>>.fromAddress(
           ptr.ref.vtable.elementAt(18).value)
       .asFunction<_Enable_Dart>()(ptr.ref.lpVtbl, enable);
+}
+
+/// {@category com}
+class DesktopWallpaper extends IDesktopWallpaper {
+  DesktopWallpaper(Pointer<COMObject> ptr) : super(ptr);
+
+  factory DesktopWallpaper.createInstance() {
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..ref.setGUID(CLSID_DesktopWallpaper);
+    final iid = calloc<GUID>()..ref.setGUID(IID_IDesktopWallpaper);
+
+    try {
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return DesktopWallpaper(ptr);
+    } finally {
+      calloc.free(clsid);
+      calloc.free(iid);
+    }
+  }
 }

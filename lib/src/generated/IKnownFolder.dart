@@ -10,7 +10,6 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
@@ -19,24 +18,25 @@ import '../structs.dart';
 import 'IUnknown.dart';
 
 /// @nodoc
-const IID_IKnownFolder = '{3AA7AF7E-9B36-420c-A8E3-F77D4674A488}';
+const IID_IKnownFolder = '{3AA7AF7E-9B36-420C-A8E3-F77D4674A488}';
 
 typedef _GetId_Native = Int32 Function(Pointer obj, Pointer<GUID> pkfid);
 typedef _GetId_Dart = int Function(Pointer obj, Pointer<GUID> pkfid);
 
 typedef _GetCategory_Native = Int32 Function(
-    Pointer obj, Pointer<Int32> pCategory);
-typedef _GetCategory_Dart = int Function(Pointer obj, Pointer<Int32> pCategory);
+    Pointer obj, Pointer<Uint32> pCategory);
+typedef _GetCategory_Dart = int Function(
+    Pointer obj, Pointer<Uint32> pCategory);
 
 typedef _GetShellItem_Native = Int32 Function(
-    Pointer obj, Uint32 dwFlags, Pointer<GUID> riid, Pointer<IntPtr> ppv);
+    Pointer obj, Uint32 dwFlags, Pointer<GUID> riid, Pointer<Pointer> ppv);
 typedef _GetShellItem_Dart = int Function(
-    Pointer obj, int dwFlags, Pointer<GUID> riid, Pointer<IntPtr> ppv);
+    Pointer obj, int dwFlags, Pointer<GUID> riid, Pointer<Pointer> ppv);
 
 typedef _GetPath_Native = Int32 Function(
-    Pointer obj, Uint32 dwFlags, Pointer<Utf16> ppszPath);
+    Pointer obj, Uint32 dwFlags, Pointer<Pointer<Utf16>> ppszPath);
 typedef _GetPath_Dart = int Function(
-    Pointer obj, int dwFlags, Pointer<Utf16> ppszPath);
+    Pointer obj, int dwFlags, Pointer<Pointer<Utf16>> ppszPath);
 
 typedef _SetPath_Native = Int32 Function(
     Pointer obj, Uint32 dwFlags, Pointer<Utf16> pszPath);
@@ -44,9 +44,9 @@ typedef _SetPath_Dart = int Function(
     Pointer obj, int dwFlags, Pointer<Utf16> pszPath);
 
 typedef _GetIDList_Native = Int32 Function(
-    Pointer obj, Uint32 dwFlags, Pointer<SHITEMID> ppidl);
+    Pointer obj, Uint32 dwFlags, Pointer<Pointer<Uint32>> ppidl);
 typedef _GetIDList_Dart = int Function(
-    Pointer obj, int dwFlags, Pointer<SHITEMID> ppidl);
+    Pointer obj, int dwFlags, Pointer<Pointer<Uint32>> ppidl);
 
 typedef _GetFolderType_Native = Int32 Function(
     Pointer obj, Pointer<GUID> pftid);
@@ -74,17 +74,17 @@ class IKnownFolder extends IUnknown {
               ptr.ref.vtable.elementAt(3).value)
           .asFunction<_GetId_Dart>()(ptr.ref.lpVtbl, pkfid);
 
-  int GetCategory(Pointer<Int32> pCategory) =>
+  int GetCategory(Pointer<Uint32> pCategory) =>
       Pointer<NativeFunction<_GetCategory_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(4).value)
           .asFunction<_GetCategory_Dart>()(ptr.ref.lpVtbl, pCategory);
 
-  int GetShellItem(int dwFlags, Pointer<GUID> riid, Pointer<IntPtr> ppv) =>
+  int GetShellItem(int dwFlags, Pointer<GUID> riid, Pointer<Pointer> ppv) =>
       Pointer<NativeFunction<_GetShellItem_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(5).value)
           .asFunction<_GetShellItem_Dart>()(ptr.ref.lpVtbl, dwFlags, riid, ppv);
 
-  int GetPath(int dwFlags, Pointer<Utf16> ppszPath) =>
+  int GetPath(int dwFlags, Pointer<Pointer<Utf16>> ppszPath) =>
       Pointer<NativeFunction<_GetPath_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(6).value)
           .asFunction<_GetPath_Dart>()(ptr.ref.lpVtbl, dwFlags, ppszPath);
@@ -94,7 +94,7 @@ class IKnownFolder extends IUnknown {
               ptr.ref.vtable.elementAt(7).value)
           .asFunction<_SetPath_Dart>()(ptr.ref.lpVtbl, dwFlags, pszPath);
 
-  int GetIDList(int dwFlags, Pointer<SHITEMID> ppidl) =>
+  int GetIDList(int dwFlags, Pointer<Pointer<Uint32>> ppidl) =>
       Pointer<NativeFunction<_GetIDList_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(8).value)
           .asFunction<_GetIDList_Dart>()(ptr.ref.lpVtbl, dwFlags, ppidl);

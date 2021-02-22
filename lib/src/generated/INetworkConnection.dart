@@ -10,7 +10,6 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
@@ -22,8 +21,9 @@ import 'IDispatch.dart';
 const IID_INetworkConnection = '{DCB00005-570F-4A9B-8D69-199FDBA5723B}';
 
 typedef _GetNetwork_Native = Int32 Function(
-    Pointer obj, Pointer<IntPtr> ppNetwork);
-typedef _GetNetwork_Dart = int Function(Pointer obj, Pointer<IntPtr> ppNetwork);
+    Pointer obj, Pointer<Pointer> ppNetwork);
+typedef _GetNetwork_Dart = int Function(
+    Pointer obj, Pointer<Pointer> ppNetwork);
 
 typedef _get_IsConnectedToInternet_Native = Int32 Function(
     Pointer obj, Pointer<Int16> pbIsConnected);
@@ -62,38 +62,21 @@ class INetworkConnection extends IDispatch {
 
   INetworkConnection(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetNetwork(Pointer<IntPtr> ppNetwork) =>
+  int GetNetwork(Pointer<Pointer> ppNetwork) =>
       Pointer<NativeFunction<_GetNetwork_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(7).value)
           .asFunction<_GetNetwork_Dart>()(ptr.ref.lpVtbl, ppNetwork);
 
-  int get IsConnectedToInternet {
-    final retValuePtr = calloc<Int16>();
+  int get_IsConnectedToInternet(Pointer<Int16> pbIsConnected) =>
+      Pointer<NativeFunction<_get_IsConnectedToInternet_Native>>.fromAddress(
+                  ptr.ref.vtable.elementAt(8).value)
+              .asFunction<_get_IsConnectedToInternet_Dart>()(
+          ptr.ref.lpVtbl, pbIsConnected);
 
-    final hr =
-        Pointer<NativeFunction<_get_IsConnectedToInternet_Native>>.fromAddress(
-                    ptr.ref.vtable.elementAt(8).value)
-                .asFunction<_get_IsConnectedToInternet_Dart>()(
-            ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw WindowsException(hr);
-
-    final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
-    return retValue;
-  }
-
-  int get IsConnected {
-    final retValuePtr = calloc<Int16>();
-
-    final hr = Pointer<NativeFunction<_get_IsConnected_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(9).value)
-        .asFunction<_get_IsConnected_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw WindowsException(hr);
-
-    final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
-    return retValue;
-  }
+  int get_IsConnected(Pointer<Int16> pbIsConnected) =>
+      Pointer<NativeFunction<_get_IsConnected_Native>>.fromAddress(
+              ptr.ref.vtable.elementAt(9).value)
+          .asFunction<_get_IsConnected_Dart>()(ptr.ref.lpVtbl, pbIsConnected);
 
   int GetConnectivity(Pointer<Uint32> pConnectivity) =>
       Pointer<NativeFunction<_GetConnectivity_Native>>.fromAddress(

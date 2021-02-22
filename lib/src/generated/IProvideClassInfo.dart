@@ -10,7 +10,6 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
@@ -21,9 +20,9 @@ import 'IUnknown.dart';
 /// @nodoc
 const IID_IProvideClassInfo = '{B196B283-BAB4-101A-B69C-00AA00341D07}';
 
-typedef _GetClassInfo_Native = Int32 Function(
-    Pointer obj, Pointer<IntPtr> ppTI);
-typedef _GetClassInfo_Dart = int Function(Pointer obj, Pointer<IntPtr> ppTI);
+typedef _GetClassInfoA_Native = Int32 Function(
+    Pointer obj, Pointer<Pointer> ppTI);
+typedef _GetClassInfoA_Dart = int Function(Pointer obj, Pointer<Pointer> ppTI);
 
 /// {@category Interface}
 /// {@category com}
@@ -32,8 +31,8 @@ class IProvideClassInfo extends IUnknown {
 
   IProvideClassInfo(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetClassInfo(Pointer<IntPtr> ppTI) =>
-      Pointer<NativeFunction<_GetClassInfo_Native>>.fromAddress(
+  int GetClassInfoA(Pointer<Pointer> ppTI) =>
+      Pointer<NativeFunction<_GetClassInfoA_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
-          .asFunction<_GetClassInfo_Dart>()(ptr.ref.lpVtbl, ppTI);
+          .asFunction<_GetClassInfoA_Dart>()(ptr.ref.lpVtbl, ppTI);
 }

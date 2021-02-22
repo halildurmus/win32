@@ -10,7 +10,6 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
@@ -19,7 +18,7 @@ import '../structs.dart';
 import 'IUnknown.dart';
 
 /// @nodoc
-const IID_IModalWindow = '{b4db1657-70d7-485e-8e3e-6fcb5a5c1802}';
+const IID_IModalWindow = '{B4DB1657-70D7-485E-8E3E-6FCB5A5C1802}';
 
 typedef _Show_Native = Int32 Function(Pointer obj, IntPtr hwndOwner);
 typedef _Show_Dart = int Function(Pointer obj, int hwndOwner);

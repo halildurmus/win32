@@ -18,6 +18,9 @@ import '../structs.dart';
 import 'IDispatch.dart';
 
 /// @nodoc
+const CLSID_NetworkListManager = '{DCB00C01-570F-4A9B-8D69-199FDBA5723B}';
+
+/// @nodoc
 const IID_INetworkListManager = '{DCB00000-570F-4A9B-8D69-199FDBA5723B}';
 
 typedef _GetNetworks_Native = Int32 Function(
@@ -121,4 +124,26 @@ class INetworkListManager extends IDispatch {
       Pointer<NativeFunction<_ClearSimulatedProfileInfo_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(15).value)
           .asFunction<_ClearSimulatedProfileInfo_Dart>()(ptr.ref.lpVtbl);
+}
+
+/// {@category com}
+class NetworkListManager extends INetworkListManager {
+  NetworkListManager(Pointer<COMObject> ptr) : super(ptr);
+
+  factory NetworkListManager.createInstance() {
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..ref.setGUID(CLSID_NetworkListManager);
+    final iid = calloc<GUID>()..ref.setGUID(IID_INetworkListManager);
+
+    try {
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return NetworkListManager(ptr);
+    } finally {
+      calloc.free(clsid);
+      calloc.free(iid);
+    }
+  }
 }

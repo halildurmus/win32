@@ -10,31 +10,6 @@ import 'package:ffi/ffi.dart';
 
 import 'package:win32/win32.dart';
 
-// TODO: Remove this from here
-class NetworkListManager extends INetworkListManager {
-  static const CLSID_NetworkListManager =
-      '{DCB00C01-570F-4A9B-8D69-199FDBA5723B}';
-
-  NetworkListManager(Pointer<COMObject> ptr) : super(ptr);
-
-  factory NetworkListManager.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_NetworkListManager);
-    final iid = calloc<GUID>()..ref.setGUID(IID_INetworkListManager);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return NetworkListManager(ptr);
-    } finally {
-      calloc.free(clsid);
-      calloc.free(iid);
-    }
-  }
-}
-
 void main() {
   // Initialize COM
   var hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);

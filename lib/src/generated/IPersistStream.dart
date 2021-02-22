@@ -10,7 +10,6 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
@@ -24,13 +23,12 @@ const IID_IPersistStream = '{00000109-0000-0000-C000-000000000046}';
 typedef _IsDirty_Native = Int32 Function(Pointer obj);
 typedef _IsDirty_Dart = int Function(Pointer obj);
 
-typedef _Load_Native = Int32 Function(Pointer obj, Pointer<COMObject> pStm);
-typedef _Load_Dart = int Function(Pointer obj, Pointer<COMObject> pStm);
+typedef _Load_Native = Int32 Function(Pointer obj, Pointer pStm);
+typedef _Load_Dart = int Function(Pointer obj, Pointer pStm);
 
 typedef _Save_Native = Int32 Function(
-    Pointer obj, Pointer<COMObject> pStm, Int32 fClearDirty);
-typedef _Save_Dart = int Function(
-    Pointer obj, Pointer<COMObject> pStm, int fClearDirty);
+    Pointer obj, Pointer pStm, Int32 fClearDirty);
+typedef _Save_Dart = int Function(Pointer obj, Pointer pStm, int fClearDirty);
 
 typedef _GetSizeMax_Native = Int32 Function(
     Pointer obj, Pointer<Uint64> pcbSize);
@@ -47,12 +45,11 @@ class IPersistStream extends IPersist {
           ptr.ref.vtable.elementAt(4).value)
       .asFunction<_IsDirty_Dart>()(ptr.ref.lpVtbl);
 
-  int Load(Pointer<COMObject> pStm) =>
-      Pointer<NativeFunction<_Load_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(5).value)
-          .asFunction<_Load_Dart>()(ptr.ref.lpVtbl, pStm);
+  int Load(Pointer pStm) => Pointer<NativeFunction<_Load_Native>>.fromAddress(
+          ptr.ref.vtable.elementAt(5).value)
+      .asFunction<_Load_Dart>()(ptr.ref.lpVtbl, pStm);
 
-  int Save(Pointer<COMObject> pStm, int fClearDirty) =>
+  int Save(Pointer pStm, int fClearDirty) =>
       Pointer<NativeFunction<_Save_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(6).value)
           .asFunction<_Save_Dart>()(ptr.ref.lpVtbl, pStm, fClearDirty);
