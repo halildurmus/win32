@@ -128,7 +128,6 @@ import '../winrt/winrt_constants.dart';
 ''');
     } else {
       buffer.write('''
-  @override  
   Pointer<COMObject> ptr;
 
    ${type.shortName}(this.ptr);\n
@@ -225,6 +224,8 @@ import '../winrt/winrt_constants.dart';
   }
 
   static String classAsString(ClassProjection type) {
+    final interfaceWithoutNamespace = type.name.split('.').last;
+
     if (type.generateClass) {
       final buffer = StringBuffer();
 
@@ -234,25 +235,25 @@ import '../winrt/winrt_constants.dart';
         buffer.writeln('/// {@category com}');
       }
       buffer.write('''
-class ${type.className} extends ${type.name} {
-  @override
-  Pointer<COMObject> ptr;
+class ${type.className} extends $interfaceWithoutNamespace {
+  ${type.className}(Pointer<COMObject> ptr) : super(ptr);
 
   factory ${type.className}.createInstance() {
     final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..ref.setGUID(CLSID_${type.className});
+    final iid = calloc<GUID>()..ref.setGUID(IID_$interfaceWithoutNamespace);
 
-    var hr = CoCreateInstance(
-        GUID.fromString(CLSID_${type.className}).addressOf,
-        nullptr,
-        CLSCTX_ALL,
-        GUID.fromString(IID_${type.name}).addressOf,
-        ptr);
+    try {
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
 
-    if (FAILED(hr)) throw WindowsException(hr);
-    return ${type.className}(ptr);
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return ${type.className}(ptr);
+    } finally {
+      calloc.free(clsid);
+      calloc.free(iid);
+    }
   }
-
-  ${type.className}(this.ptr) : super(ptr);
 }
 ''');
       return buffer.toString();

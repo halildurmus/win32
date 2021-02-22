@@ -40,7 +40,31 @@ abstract class AttributeObject extends TokenObject {
   const AttributeObject(IMetaDataImport2 reader, int token)
       : super(reader, token);
 
-  Uint8List attributeByName(String attrName) {
+  String attributeAsString(String attrName) {
+    final szName = attrName.toNativeUtf16();
+    final ppData = calloc<IntPtr>();
+    final pcbData = calloc<Uint32>();
+    try {
+      final hr =
+          reader.GetCustomAttributeByName(token, szName, ppData, pcbData);
+      if (SUCCEEDED(hr)) {
+        if (pcbData.value <= 3) return '';
+        final sigList = Pointer<Uint8>.fromAddress(ppData.value)
+            .elementAt(3)
+            .cast<Utf8>()
+            .toDartString();
+        return sigList;
+      } else {
+        throw WindowsException(hr);
+      }
+    } finally {
+      calloc.free(szName);
+      calloc.free(ppData);
+      calloc.free(pcbData);
+    }
+  }
+
+  Uint8List attributeSignature(String attrName) {
     final szName = attrName.toNativeUtf16();
     final ppData = calloc<IntPtr>();
     final pcbData = calloc<Uint32>();

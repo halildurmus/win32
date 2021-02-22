@@ -34,6 +34,10 @@ void main() {
         expect(iNetwork.methods.length, equals(13));
       });
 
+      test('Interface has the right IID', () {
+        expect(iNetwork.guid, equals('{DCB00002-570F-4A9B-8D69-199FDBA5723B}'));
+      });
+
       test('COM methods are named correctly', () {
         final getName = iNetwork.methods.first;
 
