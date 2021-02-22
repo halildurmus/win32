@@ -1,5 +1,4 @@
 @TestOn('windows')
-
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 import 'package:win32/win32.dart';
@@ -169,6 +168,21 @@ void main() {
       expect(method.isSetProperty, isFalse);
       expect(method.isGetProperty, isTrue);
       expect(method.parameters.length, equals(0));
+    });
+
+    test('Calendar.PeriodAsFullString overload is correctly represented', () {
+      final winTypeDef =
+          MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
+
+      final methods =
+          winTypeDef.methods.where((m) => m.methodName == 'PeriodAsString');
+      expect(methods.length, equals(2));
+
+      for (final method in methods) {
+        final overloadName = method
+            .attributeAsString('Windows.Foundation.Metadata.OverloadAttribute');
+        expect(overloadName, isIn(['PeriodAsFullString', 'PeriodAsString']));
+      }
     });
 
     test('Calendar.YearAsTruncatedString get property is correct', () {

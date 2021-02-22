@@ -43,7 +43,7 @@ void main() {
   // Print out some information about it
   print('This method is token #${winmdMethod.token}');
 
-  final mattr = winmdMethod.attributeByName('DllImport');
+  final mattr = winmdMethod.attributeSignature('DllImport');
   if (mattr.isNotEmpty) {
     print('DllImport: ${mattr.map((b) => b.toRadixString(16)).toList()}');
   }
@@ -59,7 +59,7 @@ void main() {
         '${lastParam.signatureBlob.map((b) => b.toRadixString(8)).toList()}');
   }
 
-  final attr = lastParam.attributeByName('NativeTypeInfo');
+  final attr = lastParam.attributeSignature('NativeTypeInfo');
   if (attr.isNotEmpty) {
     print('NativeTypeInfo: ${attr.map((b) => b.toRadixString(16)).toList()}');
   }

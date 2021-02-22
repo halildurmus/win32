@@ -236,7 +236,13 @@ class TypeBuilder {
 
     for (final mdMethod in mdTypeDef.methods) {
       final method = MethodProjection();
-      method.name = mdMethod.methodName;
+      final overload = mdMethod
+          .attributeAsString('Windows.Foundation.Metadata.OverloadAttribute');
+      if (overload.isNotEmpty) {
+        method.name = overload;
+      } else {
+        method.name = mdMethod.methodName;
+      }
       method.isGetProperty = mdMethod.isGetProperty;
       method.isSetProperty = mdMethod.isSetProperty;
 
