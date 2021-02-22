@@ -18,7 +18,8 @@ final typesToGenerate = [
   'Windows.Foundation.IAsyncInfo',
   'Windows.Foundation.IClosable',
   'Windows.Foundation.IStringable',
-  //  'Windows.Globalization.ICalendar',
+  'Windows.Globalization.ICalendar',
+  // 'Windows.Storage.Pickers.IFileOpenPicker'
 ];
 
 void main(List<String> args) {

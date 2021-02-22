@@ -25,3 +25,5 @@ build/
 
 # This file varies from machine to machine
 .vscode/c_cpp_properties.json
+
+test/.test_coverage.dart
