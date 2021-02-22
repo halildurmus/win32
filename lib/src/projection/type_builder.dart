@@ -36,7 +36,7 @@ class TypeBuilder {
       case CorElementType.ELEMENT_TYPE_BOOLEAN:
         return 'bool';
       case CorElementType.ELEMENT_TYPE_STRING:
-        return 'IntPtr';
+        return 'int';
       case CorElementType.ELEMENT_TYPE_CHAR:
       case CorElementType.ELEMENT_TYPE_I1:
       case CorElementType.ELEMENT_TYPE_U1:
@@ -54,6 +54,9 @@ class TypeBuilder {
         return 'double';
       case CorElementType.ELEMENT_TYPE_OBJECT:
         return 'COMObject';
+      case CorElementType.ELEMENT_TYPE_GENERICINST:
+        // TODO: Assume a Vector for now
+        return dartType(typeIdentifier.typeArgs.first);
       case CorElementType.ELEMENT_TYPE_PTR:
         // Is it a string pointer?
         if (typeIdentifier.name == 'LPWSTR') {
@@ -114,7 +117,13 @@ class TypeBuilder {
       return dartType;
     }
 
-    // Something failed. Return something egregiously wrong, so that the
+    if (typeIdentifier.corType == CorElementType.ELEMENT_TYPE_CLASS) {
+      // WinRT type
+      // TODO: Check this is right in all cases.
+      return 'Pointer';
+    }
+
+    // We have no idea. Return something egregiously wrong, so that the
     // analyzer picks it up as an error.
     return '**';
   }
@@ -163,6 +172,9 @@ class TypeBuilder {
         return 'IntPtr';
       case CorElementType.ELEMENT_TYPE_OBJECT:
         return 'COMObject';
+      case CorElementType.ELEMENT_TYPE_GENERICINST:
+        // TODO: Assume a Vector for now
+        return nativeType(typeIdentifier.typeArgs.first);
       case CorElementType.ELEMENT_TYPE_PTR:
         if (typeIdentifier.name == 'LPWSTR') {
           return 'Pointer<Utf16>';
@@ -219,6 +231,12 @@ class TypeBuilder {
       final win32Type = typeIdentifier.type?.typeName.split('.').last ?? '';
       final ffiNativeType = convertToFFIType(win32Type);
       return ffiNativeType;
+    }
+
+    if (typeIdentifier.corType == CorElementType.ELEMENT_TYPE_CLASS) {
+      // WinRT type
+      // TODO: Check this is right in all cases.
+      return 'Pointer';
     }
     // Something failed. Return something egregiously wrong, so that the
     // analyzer picks it up as an error.

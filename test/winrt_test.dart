@@ -170,6 +170,52 @@ void main() {
       expect(method.parameters.length, equals(0));
     });
 
+    test('String parameters are accurately represented', () {
+      final winTypeDef =
+          MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
+
+      final method = winTypeDef.findMethod('ChangeCalendarSystem')!;
+
+      expect(method.parameters.first.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_STRING));
+      expect(method.parameters.first.typeIdentifier.name, equals('string'));
+      expect(method.isSpecialName, isFalse);
+      expect(method.isProperty, isFalse);
+      expect(method.isSetProperty, isFalse);
+      expect(method.isGetProperty, isFalse);
+    });
+
+    test('Calendar.Clone return value is correct', () {
+      final winTypeDef =
+          MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
+
+      final method = winTypeDef.findMethod('Clone')!;
+
+      expect(method.parameters.length, equals(0));
+      expect(method.returnType.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_CLASS));
+      expect(method.returnType.typeIdentifier.name,
+          equals('Windows.Globalization.Calendar'));
+    });
+
+    test('String array property return type is correct', () {
+      final winTypeDef =
+          MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
+
+      final method = winTypeDef.findMethod('get_Languages')!;
+
+      expect(method.parameters.length, equals(0));
+      expect(method.returnType.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_GENERICINST));
+      expect(method.returnType.typeIdentifier.name,
+          equals('Windows.Foundation.Collections.IVectorView`1'));
+      expect(method.returnType.typeIdentifier.typeArgs.length, equals(1));
+      expect(method.returnType.typeIdentifier.typeArgs.first.corType,
+          equals(CorElementType.ELEMENT_TYPE_STRING));
+      expect(method.returnType.typeIdentifier.typeArgs.first.name,
+          equals('string'));
+    });
+
     test('Calendar.PeriodAsFullString overload is correctly represented', () {
       final winTypeDef =
           MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
