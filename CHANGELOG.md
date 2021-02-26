@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Adds a demo of custom window shapes.
+
 ## 2.0.0
 
 - Stable version w/ sound null safety.
