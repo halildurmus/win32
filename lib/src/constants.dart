@@ -1718,6 +1718,124 @@ const COLOR_INACTIVECAPTIONTEXT = 19;
 const COLOR_BTNHIGHLIGHT = 20;
 
 // -----------------------------------------------------------------------------
+// GetWindowLong styles
+// -----------------------------------------------------------------------------
+
+/// Gets/sets the extended window styles.
+const GWL_EXSTYLE = -20;
+
+/// Gets/sets a new application instance handle.
+const GWL_HINSTANCE = -6;
+
+/// Gets/sets a new identifier of the child window. The window cannot be a
+/// top-level window.
+const GWL_ID = -12;
+
+/// Gets/sets a new window style.
+const GWL_STYLE = -16;
+
+/// Gets/sets the user data associated with the window. This data is intended
+/// for use by the application that created the window. Its value is initially
+/// zero.
+const GWL_USERDATA = -21;
+
+/// Sets a new address for the window procedure. You cannot change this
+/// attribute if the window does not belong to the same process as the calling
+/// thread.
+const GWL_WNDPROC = -4;
+
+// -----------------------------------------------------------------------------
+// Hit testing constants
+// -----------------------------------------------------------------------------
+
+/// On the screen background or on a dividing line between windows (same as
+/// HTNOWHERE, except that the DefWindowProc function produces a system beep to
+/// indicate an error).
+const HTERROR = -2;
+
+/// In a window currently covered by another window in the same thread (the
+/// message will be sent to underlying windows in the same thread until one of
+/// them returns a code that is not HTTRANSPARENT).
+const HTTRANSPARENT = -1;
+
+/// On the screen background or on a dividing line between windows.
+const HTNOWHERE = 0;
+
+/// In a client area.
+const HTCLIENT = 1;
+
+/// In a title bar.
+const HTCAPTION = 2;
+
+/// In a window menu or in a Close button in a child window.
+const HTSYSMENU = 3;
+
+/// In a size box (same as HTSIZE).
+const HTGROWBOX = 4;
+
+/// In a size box (same as HTGROWBOX).
+const HTSIZE = HTGROWBOX;
+
+/// In a menu.
+const HTMENU = 5;
+
+/// In a horizontal scroll bar.
+const HTHSCROLL = 6;
+
+/// In the vertical scroll bar.
+const HTVSCROLL = 7;
+
+/// In a Minimize button.
+const HTMINBUTTON = 8;
+
+/// In a Maximize button.
+const HTMAXBUTTON = 9;
+
+/// In the left border of a resizable window (the user can click the mouse to
+/// resize the window horizontally).
+const HTLEFT = 10;
+
+/// In the right border of a resizable window (the user can click the mouse to
+/// resize the window horizontally).
+const HTRIGHT = 11;
+
+/// In the upper-horizontal border of a window.
+const HTTOP = 12;
+
+/// In the upper-left corner of a window border.
+const HTTOPLEFT = 13;
+
+/// In the upper-right corner of a window border.
+const HTTOPRIGHT = 14;
+
+/// In the lower-horizontal border of a resizable window (the user can click the
+/// mouse to resize the window vertically).
+const HTBOTTOM = 15;
+
+/// In the lower-left corner of a border of a resizable window (the user can
+/// click the mouse to resize the window diagonally).
+const HTBOTTOMLEFT = 16;
+
+/// In the lower-right corner of a border of a resizable window (the user can
+/// click the mouse to resize the window diagonally).
+const HTBOTTOMRIGHT = 17;
+
+/// In the border of a window that does not have a sizing border.
+const HTBORDER = 18;
+
+/// In a Minimize button.
+const HTREDUCE = HTMINBUTTON;
+
+/// In a Maximize button.
+const HTZOOM = HTMAXBUTTON;
+
+/// In a Close button.
+const HTCLOSE = 20;
+
+/// In a Help button.
+const HTHELP = 21;
+
+// -----------------------------------------------------------------------------
 // System-wide parameters
 // -----------------------------------------------------------------------------
 
