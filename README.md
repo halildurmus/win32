@@ -94,6 +94,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `calendar.dart`    | Gets information about the calendar from a WinRT API      |
 | `console.dart`     | Shows usage of console APIs                               |
 | `credentials.dart` | Adds a credential to the store and retrieves it           |
+| `customwin.dart`   | Displays a non-rectangular window                         |
 | `devices.dart`     | Uses volume management APIs to list all disk devices      |
 | `dialog.dart`      | Create a custom dialog box in code                        |
 | `dialogshow.dart`  | Creates a common item dialog (file picker) using COM      |
@@ -138,7 +139,7 @@ tested on Windows-on-ARM architecture, running in x64 emulation mode.
 The current package only projects a subset of the Win32 API, but new APIs will
 be add based on user demand. I'm particularly interested in unblocking plugins
 for Windows. Please file feature requests and bugs at the [issue
-tracker][tracker]. 
+tracker][tracker].
 
 **Disclaimer**: This is a hobby project, and should not be viewed as having the
 same level of quality assurance as an official package from the Dart team. I'm a
