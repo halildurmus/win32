@@ -420,6 +420,11 @@
         "dllLibrary": "kernel32",
         "comment": "Creates a new directory. If the underlying file system supports security on files and directories, the function applies a specified security descriptor to the new directory."
     },
+    "CreateEllipticRgn": {
+        "prototype": "HRGN CreateEllipticRgn(\n  int x1,\n  int y1,\n  int x2,\n  int y2\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The CreateEllipticRgn function creates an elliptical region."
+    },
     "CreateFile": {
         "prototype": "HANDLE CreateFileW(\n  LPCWSTR               lpFileName,\n  DWORD                 dwDesiredAccess,\n  DWORD                 dwShareMode,\n  LPSECURITY_ATTRIBUTES lpSecurityAttributes,\n  DWORD                 dwCreationDisposition,\n  DWORD                 dwFlagsAndAttributes,\n  HANDLE                hTemplateFile\n);",
         "dllLibrary": "kernel32",

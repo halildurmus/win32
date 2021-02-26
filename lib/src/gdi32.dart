@@ -344,6 +344,24 @@ int CreateDIBPatternBrushPt(Pointer lpPackedDIB, int iUsage) {
   return _CreateDIBPatternBrushPt(lpPackedDIB, iUsage);
 }
 
+/// The CreateEllipticRgn function creates an elliptical region.
+///
+/// ```c
+/// HRGN CreateEllipticRgn(
+///   int x1,
+///   int y1,
+///   int x2,
+///   int y2
+/// );
+/// ```
+/// {@category gdi32}
+int CreateEllipticRgn(int x1, int y1, int x2, int y2) {
+  final _CreateEllipticRgn = _gdi32.lookupFunction<
+      IntPtr Function(Int32 x1, Int32 y1, Int32 x2, Int32 y2),
+      int Function(int x1, int y1, int x2, int y2)>('CreateEllipticRgn');
+  return _CreateEllipticRgn(x1, y1, x2, y2);
+}
+
 /// The CreateFontIndirect function creates a logical font that has the
 /// specified characteristics. The font can subsequently be selected as the
 /// current font for any device context.

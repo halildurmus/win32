@@ -3162,6 +3162,13 @@ void main() {
               Pointer lpPackedDIB, int iUsage)>('CreateDIBPatternBrushPt');
       expect(CreateDIBPatternBrushPt, isA<Function>());
     });
+    test('Can instantiate CreateEllipticRgn', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final CreateEllipticRgn = gdi32.lookupFunction<
+          IntPtr Function(Int32 x1, Int32 y1, Int32 x2, Int32 y2),
+          int Function(int x1, int y1, int x2, int y2)>('CreateEllipticRgn');
+      expect(CreateEllipticRgn, isA<Function>());
+    });
     test('Can instantiate CreateFontIndirect', () {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final CreateFontIndirect = gdi32.lookupFunction<
