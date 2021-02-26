@@ -7,11 +7,8 @@ them accessible to Dart code without requiring a C compiler or the Windows SDK.
 [![Language](https://img.shields.io/badge/language-Dart-blue.svg)](https://dart.dev)
 ![Dart](https://github.com/timsneath/win32/workflows/Dart/badge.svg)
 
-**IMPORTANT: If you are using Flutter 1.22 or earlier, use
-[v1.7.4](https://pub.dev/packages/win32/versions/1.7.4+1) of this package. Later versions of Dart include changes to FFI that are incompatible with older versions, and `win32` 2.x works with the updated API.**
-
-Perhaps of as much use as the APIs themselves, this package provides a variety
-of instructive examples for more complex FFI usage scenarios.
+In addition to exposing the APIs themselves, this package offers a variety of
+instructive examples for more complex FFI usage scenarios.
 
 By design, this package provides minimal modifications to the Win32 API to
 support Dart idioms. The goal is to provide high familiarity to an existing
@@ -138,24 +135,21 @@ tested on Windows-on-ARM architecture, running in x64 emulation mode.
 
 ## Features and bugs
 
-Let me know what APIs you're interested in seeing. I'm not planning to project
-the entire Windows API, but I'm particularly interested in examples that either
-unblock a plugin for Windows or that demonstrate more complex Windows APIs that
-represent an important pattern.
+The current package only projects a subset of the Win32 API, but new APIs will
+be add based on user demand. I'm particularly interested in unblocking plugins
+for Windows. Please file feature requests and bugs at the [issue
+tracker][tracker]. 
 
-Please file feature requests and bugs at the [issue tracker][tracker]. This
-is a hobby project, and should not be viewed as having the same level of
-quality assurance as an official package from the Dart team. I'm a product
-manager having fun on my weekends!
+**Disclaimer**: This is a hobby project, and should not be viewed as having the
+same level of quality assurance as an official package from the Dart team. I'm a
+product manager having fun on my weekends!
 
 ## Backwards compatibility
 
-The library version uses a loose semver model, but you should not assume a
-strict guarantee of no breaking changes between minor versions. That guarantee
-is not possible to make, for several reasons:
+The library version uses semver, but you should not assume a strict guarantee of
+no breaking changes between minor versions. That guarantee is not possible to
+make, for several reasons:
 
-- The underlying FFI library has not yet reached v1.0 and breaking changes at
-  that level may be difficult to encapsulate.
 - Several times, my fixing a bug in the fidelity of the Win32 API has tightened
   the constraints over a parameter (for example, `Pointer` becomes
   `Pointer<INPUT>`). These changes should be signalled in the log.
@@ -167,7 +161,7 @@ One solution is to pin to a specific version of Win32, or declare a more
 tightly-bounded version dependency (e.g. `'>=1.7.0 <1.8.0'` rather than merely
 `^1.7.0`). But the best approach is simply to test regularly with the latest
 version of this package, and continue to move your minimum forward. As the
-package matures, these issues should gradually fade into the distance.
+package matures, these issues should gradually fade away.
 
 ## Acknowledgements
 
