@@ -155,7 +155,7 @@ void main() {
       expect(method.callingConvention, equals('default instance '));
     });
 
-    test('Calendar.Day get property is correct', () {
+    test('Calendar.Day getter property is correct', () {
       final winTypeDef =
           MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
 
@@ -168,6 +168,23 @@ void main() {
       expect(method.isSetProperty, isFalse);
       expect(method.isGetProperty, isTrue);
       expect(method.parameters.length, equals(0));
+    });
+
+    test('Calendar.Day setter property is correct', () {
+      final winTypeDef =
+          MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
+
+      final method = winTypeDef.findMethod('put_Day')!;
+
+      expect(method.returnType.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_VOID));
+      expect(method.isSpecialName, isTrue);
+      expect(method.isProperty, isTrue);
+      expect(method.isSetProperty, isTrue);
+      expect(method.isGetProperty, isFalse);
+      expect(method.parameters.length, equals(1));
+      expect(method.parameters.first.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_I4));
     });
 
     test('String parameters are accurately represented', () {

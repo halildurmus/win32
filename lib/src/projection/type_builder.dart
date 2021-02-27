@@ -293,7 +293,7 @@ class TypeBuilder {
                 nativeType: nativeType(mdMethod.returnType.typeIdentifier),
                 dartType: dartType(mdMethod.returnType.typeIdentifier)));
           } else {
-            method.parameters.add(ParameterProjection('value',
+            method.parameters.add(ParameterProjection('result',
                 nativeType:
                     'Pointer<${nativeType(mdMethod.returnType.typeIdentifier)}>',
                 dartType:
