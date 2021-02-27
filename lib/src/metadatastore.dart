@@ -27,7 +27,7 @@ class MetadataStore {
     final dispenserObject = calloc<Pointer>();
 
     final hr = MetaDataGetDispenser(convertToCLSID(CLSID_CorMetaDataDispenser),
-        convertToIID(IID_IMetaDataDispenser), dispenserObject);
+        convertToIID(md.IID_IMetaDataDispenser), dispenserObject);
 
     if (FAILED(hr)) {
       throw WindowsException(hr);
@@ -50,7 +50,7 @@ class MetadataStore {
 
       try {
         final hr = dispenser.OpenScope(szFile, CorOpenFlags.ofRead,
-            convertToIID(IID_IMetaDataImport2), pReader);
+            convertToIID(md.IID_IMetaDataImport2), pReader);
         if (FAILED(hr)) {
           throw WindowsException(hr);
         } else {

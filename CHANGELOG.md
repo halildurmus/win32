@@ -1,3 +1,7 @@
+## 0.4.0-dev.6
+
+- Fix bug associated with vending winmd COM objects
+
 ## 0.4.0-dev.5
 
 - Improve generation of Windows Runtime get properties
