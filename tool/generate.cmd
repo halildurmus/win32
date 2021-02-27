@@ -7,10 +7,6 @@ call dart %~dp0win32\generate_ffi_winmd.dart
 call dart %~dp0win32\generate_tests.dart 
 echo.
 
-echo Generating COM classes from header files
-call dart %~dp0generate\generate_idl.dart %~dp0generate\com %~dp0..\lib\src\generated %~dp0..\test\com
-echo.
-
 echo Generating COM classes from Windows metadata
 call dart %~dp0metadata\com.dart %~dp0..\lib\src\generated
 echo.
