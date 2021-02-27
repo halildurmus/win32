@@ -187,6 +187,25 @@ void main() {
           equals(CorElementType.ELEMENT_TYPE_I4));
     });
 
+    test('Property setter for a class type is correct', () {
+      final winTypeDef = MetadataStore.getMetadataForType(
+          'Windows.Storage.Pickers.IFileOpenPicker')!;
+
+      final method = winTypeDef.findMethod('put_ViewMode')!;
+
+      expect(method.returnType.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_VOID));
+      expect(method.isSpecialName, isTrue);
+      expect(method.isProperty, isTrue);
+      expect(method.isSetProperty, isTrue);
+      expect(method.isGetProperty, isFalse);
+      expect(method.parameters.length, equals(1));
+      expect(method.parameters.first.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+      expect(method.parameters.first.typeIdentifier.name,
+          equals('Windows.Storage.Pickers.PickerViewMode'));
+    });
+
     test('String parameters are accurately represented', () {
       final winTypeDef =
           MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
