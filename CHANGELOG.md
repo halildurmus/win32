@@ -1,3 +1,7 @@
+## 0.4.0-dev.4
+
+- Improve generation of Windows Runtime types
+
 ## 0.4.0-dev.3
 
 - Fix enumerations
