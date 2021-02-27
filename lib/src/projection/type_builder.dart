@@ -125,7 +125,7 @@ class TypeBuilder {
 
     // We have no idea. Return something egregiously wrong, so that the
     // analyzer picks it up as an error.
-    return '**';
+    return '__${typeIdentifier.name}__';
   }
 
   static String nativeType(TypeIdentifier typeIdentifier) {
@@ -240,7 +240,7 @@ class TypeBuilder {
     }
     // Something failed. Return something egregiously wrong, so that the
     // analyzer picks it up as an error.
-    return '**';
+    return '__${typeIdentifier.name}__';
   }
 
   /// Take a TypeDef and create a Dart projection of it.
