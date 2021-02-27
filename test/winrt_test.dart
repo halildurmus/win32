@@ -155,7 +155,7 @@ void main() {
       expect(method.callingConvention, equals('default instance '));
     });
 
-    test('Calendar.Day get property is correct', () {
+    test('Calendar.Day getter property is correct', () {
       final winTypeDef =
           MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
 
@@ -168,6 +168,98 @@ void main() {
       expect(method.isSetProperty, isFalse);
       expect(method.isGetProperty, isTrue);
       expect(method.parameters.length, equals(0));
+    });
+
+    test('Calendar.Day setter property is correct', () {
+      final winTypeDef =
+          MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
+
+      final method = winTypeDef.findMethod('put_Day')!;
+
+      expect(method.returnType.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_VOID));
+      expect(method.isSpecialName, isTrue);
+      expect(method.isProperty, isTrue);
+      expect(method.isSetProperty, isTrue);
+      expect(method.isGetProperty, isFalse);
+      expect(method.parameters.length, equals(1));
+      expect(method.parameters.first.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_I4));
+    });
+
+    test('Property setter for a class type is correct', () {
+      final winTypeDef = MetadataStore.getMetadataForType(
+          'Windows.Storage.Pickers.IFileOpenPicker')!;
+
+      final method = winTypeDef.findMethod('put_ViewMode')!;
+
+      expect(method.returnType.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_VOID));
+      expect(method.isSpecialName, isTrue);
+      expect(method.isProperty, isTrue);
+      expect(method.isSetProperty, isTrue);
+      expect(method.isGetProperty, isFalse);
+      expect(method.parameters.length, equals(1));
+      expect(method.parameters.first.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+      expect(method.parameters.first.typeIdentifier.name,
+          equals('Windows.Storage.Pickers.PickerViewMode'));
+    });
+
+    test('Class valuetype is correctly identified', () {
+      final winTypeDef = MetadataStore.getMetadataForType(
+          'Windows.Storage.Pickers.IFileOpenPicker')!;
+
+      final method = winTypeDef.findMethod('put_ViewMode')!;
+      final classType = method.parameters.first.typeIdentifier;
+
+      expect(TypeBuilder.isTypeValueType(classType), isTrue);
+    });
+
+    test('String parameters are accurately represented', () {
+      final winTypeDef =
+          MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
+
+      final method = winTypeDef.findMethod('ChangeCalendarSystem')!;
+
+      expect(method.parameters.first.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_STRING));
+      expect(method.parameters.first.typeIdentifier.name, equals('string'));
+      expect(method.isSpecialName, isFalse);
+      expect(method.isProperty, isFalse);
+      expect(method.isSetProperty, isFalse);
+      expect(method.isGetProperty, isFalse);
+    });
+
+    test('Calendar.Clone return value is correct', () {
+      final winTypeDef =
+          MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
+
+      final method = winTypeDef.findMethod('Clone')!;
+
+      expect(method.parameters.length, equals(0));
+      expect(method.returnType.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_CLASS));
+      expect(method.returnType.typeIdentifier.name,
+          equals('Windows.Globalization.Calendar'));
+    });
+
+    test('String array property return type is correct', () {
+      final winTypeDef =
+          MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
+
+      final method = winTypeDef.findMethod('get_Languages')!;
+
+      expect(method.parameters.length, equals(0));
+      expect(method.returnType.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_GENERICINST));
+      expect(method.returnType.typeIdentifier.name,
+          equals('Windows.Foundation.Collections.IVectorView`1'));
+      expect(method.returnType.typeIdentifier.typeArgs.length, equals(1));
+      expect(method.returnType.typeIdentifier.typeArgs.first.corType,
+          equals(CorElementType.ELEMENT_TYPE_STRING));
+      expect(method.returnType.typeIdentifier.typeArgs.first.name,
+          equals('string'));
     });
 
     test('Calendar.PeriodAsFullString overload is correctly represented', () {
@@ -185,7 +277,7 @@ void main() {
       }
     });
 
-    test('Calendar.YearAsTruncatedString get property is correct', () {
+    test('Calendar.YearAsTruncatedString method is correct', () {
       final winTypeDef =
           MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
 
@@ -197,6 +289,27 @@ void main() {
       expect(method.isProperty, isFalse);
       expect(method.parameters.length, equals(1));
       expect(method.parameters.first.name, equals('remainingDigits'));
+      expect(method.parameters.first.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_I4));
+    });
+
+    test('Method with one parameter and return value is correct', () {
+      final winTypeDef =
+          MetadataStore.getMetadataForType('Windows.Globalization.Calendar')!;
+
+      final method = winTypeDef.methods
+          .where((m) => m.methodName == 'MonthAsString')
+          .firstWhere((m) =>
+              m.attributeAsString(
+                  'Windows.Foundation.Metadata.OverloadAttribute') ==
+              'MonthAsString');
+
+      expect(method.returnType.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_STRING));
+      expect(method.isSpecialName, isFalse);
+      expect(method.isProperty, isFalse);
+      expect(method.parameters.length, equals(1));
+      expect(method.parameters.first.name, equals('idealLength'));
       expect(method.parameters.first.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_I4));
     });

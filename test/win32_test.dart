@@ -208,6 +208,20 @@ void main() {
       expect(param.typeIdentifier.name, endsWith('HPOWERNOTIFY'));
     }, skip: 'https://github.com/microsoft/win32metadata/issues/225');
 
+    test('GetActiveObject REFCLSID has the correct parameter type', () {
+      final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+      final typedef = scope['Windows.Win32.Automation.Apis']!;
+      final api = typedef.findMethod('GetActiveObject')!;
+      final param = api.parameters.first;
+
+      expect(param.name, equals('rclsid'));
+      expect(param.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_PTR));
+      expect(param.typeIdentifier.typeArgs.first.name, endsWith('System.Guid'));
+      expect(param.typeIdentifier.typeArgs.first.corType,
+          equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+    });
+
     test('APIs with empty parameters have an accurate return type', () {
       final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
       final typedef = scope['Windows.Win32.DataExchange.Apis']!;

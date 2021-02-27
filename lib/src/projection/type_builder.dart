@@ -19,15 +19,15 @@ class TypeBuilder {
 
   static bool isTypeValueType(TypeIdentifier typeIdentifier) =>
       !typeIdentifier.name.startsWith('Windows.Win32') &&
-      typeIdentifier.type?.parent?.typeName == 'System.ValueType';
+      (typeIdentifier.corType == CorElementType.ELEMENT_TYPE_VALUETYPE ||
+          typeIdentifier.type?.parent?.typeName == 'System.ValueType');
 
   static String dartType(TypeIdentifier typeIdentifier) {
-    if (isTypeAnEnum(typeIdentifier) || isTypeValueType(typeIdentifier)) {
-      return 'int';
-    }
-
     if (specialTypes.containsKey(typeIdentifier.name)) {
       return specialTypes[typeIdentifier.name]!;
+    }
+    if (isTypeAnEnum(typeIdentifier) || isTypeValueType(typeIdentifier)) {
+      return 'int';
     }
 
     switch (typeIdentifier.corType) {
@@ -36,7 +36,7 @@ class TypeBuilder {
       case CorElementType.ELEMENT_TYPE_BOOLEAN:
         return 'bool';
       case CorElementType.ELEMENT_TYPE_STRING:
-        return 'IntPtr';
+        return 'int';
       case CorElementType.ELEMENT_TYPE_CHAR:
       case CorElementType.ELEMENT_TYPE_I1:
       case CorElementType.ELEMENT_TYPE_U1:
@@ -54,6 +54,9 @@ class TypeBuilder {
         return 'double';
       case CorElementType.ELEMENT_TYPE_OBJECT:
         return 'COMObject';
+      case CorElementType.ELEMENT_TYPE_GENERICINST:
+        // TODO: Assume a Vector for now
+        return dartType(typeIdentifier.typeArgs.first);
       case CorElementType.ELEMENT_TYPE_PTR:
         // Is it a string pointer?
         if (typeIdentifier.name == 'LPWSTR') {
@@ -114,9 +117,15 @@ class TypeBuilder {
       return dartType;
     }
 
-    // Something failed. Return something egregiously wrong, so that the
+    if (typeIdentifier.corType == CorElementType.ELEMENT_TYPE_CLASS) {
+      // WinRT type
+      // TODO: Check this is right in all cases.
+      return 'Pointer';
+    }
+
+    // We have no idea. Return something egregiously wrong, so that the
     // analyzer picks it up as an error.
-    return '**';
+    return '__${typeIdentifier.name}__';
   }
 
   static String nativeType(TypeIdentifier typeIdentifier) {
@@ -126,14 +135,14 @@ class TypeBuilder {
     if (isTypeAnEnum(typeIdentifier)) {
       return 'Int32';
     }
-    if (isTypeValueType(typeIdentifier)) {
-      // TODO: This needs figuring out -- a struct could have anything in it.
-      return 'Uint32';
-    }
+
     if (specialTypes.containsKey(typeIdentifier.name)) {
       return specialTypes[typeIdentifier.name]!;
     }
-
+    if (isTypeValueType(typeIdentifier)) {
+      // TODO: This might need something more variable.
+      return 'Uint32';
+    }
     switch (typeIdentifier.corType) {
       case CorElementType.ELEMENT_TYPE_VOID:
         return 'Void';
@@ -163,6 +172,9 @@ class TypeBuilder {
         return 'IntPtr';
       case CorElementType.ELEMENT_TYPE_OBJECT:
         return 'COMObject';
+      case CorElementType.ELEMENT_TYPE_GENERICINST:
+        // TODO: Assume a Vector for now
+        return nativeType(typeIdentifier.typeArgs.first);
       case CorElementType.ELEMENT_TYPE_PTR:
         if (typeIdentifier.name == 'LPWSTR') {
           return 'Pointer<Utf16>';
@@ -220,9 +232,15 @@ class TypeBuilder {
       final ffiNativeType = convertToFFIType(win32Type);
       return ffiNativeType;
     }
+
+    if (typeIdentifier.corType == CorElementType.ELEMENT_TYPE_CLASS) {
+      // WinRT type
+      // TODO: Check this is right in all cases.
+      return 'Pointer';
+    }
     // Something failed. Return something egregiously wrong, so that the
     // analyzer picks it up as an error.
-    return '**';
+    return '__${typeIdentifier.name}__';
   }
 
   /// Take a TypeDef and create a Dart projection of it.
@@ -245,6 +263,12 @@ class TypeBuilder {
       }
       method.isGetProperty = mdMethod.isGetProperty;
       method.isSetProperty = mdMethod.isSetProperty;
+
+      for (final mdParam in mdMethod.parameters) {
+        method.parameters.add(ParameterProjection(mdParam.name,
+            nativeType: nativeType(mdParam.typeIdentifier),
+            dartType: dartType(mdParam.typeIdentifier)));
+      }
 
       if (interface.name.startsWith('Windows.Win32')) {
         // return type is almost certainly an HRESULT, but we'll use the return
@@ -269,19 +293,13 @@ class TypeBuilder {
                 nativeType: nativeType(mdMethod.returnType.typeIdentifier),
                 dartType: dartType(mdMethod.returnType.typeIdentifier)));
           } else {
-            method.parameters.add(ParameterProjection('value',
+            method.parameters.add(ParameterProjection('result',
                 nativeType:
                     'Pointer<${nativeType(mdMethod.returnType.typeIdentifier)}>',
                 dartType:
                     'Pointer<${nativeType(mdMethod.returnType.typeIdentifier)}>'));
           }
         }
-      }
-
-      for (final mdParam in mdMethod.parameters) {
-        method.parameters.add(ParameterProjection(mdParam.name,
-            nativeType: nativeType(mdParam.typeIdentifier),
-            dartType: dartType(mdParam.typeIdentifier)));
       }
 
       interface.methods.add(method);

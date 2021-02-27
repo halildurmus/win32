@@ -114,7 +114,7 @@ class Method extends AttributeObject {
     if (isSpecialName && methodName.startsWith('get_')) {
       // Property getter
       isGetProperty = true;
-    } else if (isSpecialName && methodName.startsWith('set_')) {
+    } else if (isSpecialName && methodName.startsWith('put_')) {
       // Property setter
       isSetProperty = true;
     }
@@ -207,7 +207,7 @@ class Method extends AttributeObject {
   /// method is a property getter). This is documented in §II.23.2.1 and
   /// §II.23.2.5 respectively.
   void _parseSignatureBlob() {
-    if (isGetProperty || isSetProperty) {
+    if (isGetProperty) {
       _parsePropertySig();
     } else {
       _parseMethodDefSig();
