@@ -19,15 +19,15 @@ class TypeBuilder {
 
   static bool isTypeValueType(TypeIdentifier typeIdentifier) =>
       !typeIdentifier.name.startsWith('Windows.Win32') &&
-      typeIdentifier.type?.parent?.typeName == 'System.ValueType';
+      (typeIdentifier.corType == CorElementType.ELEMENT_TYPE_VALUETYPE ||
+          typeIdentifier.type?.parent?.typeName == 'System.ValueType');
 
   static String dartType(TypeIdentifier typeIdentifier) {
-    if (isTypeAnEnum(typeIdentifier) || isTypeValueType(typeIdentifier)) {
-      return 'int';
-    }
-
     if (specialTypes.containsKey(typeIdentifier.name)) {
       return specialTypes[typeIdentifier.name]!;
+    }
+    if (isTypeAnEnum(typeIdentifier) || isTypeValueType(typeIdentifier)) {
+      return 'int';
     }
 
     switch (typeIdentifier.corType) {
@@ -135,14 +135,14 @@ class TypeBuilder {
     if (isTypeAnEnum(typeIdentifier)) {
       return 'Int32';
     }
-    if (isTypeValueType(typeIdentifier)) {
-      // TODO: This needs figuring out -- a struct could have anything in it.
-      return 'Uint32';
-    }
+
     if (specialTypes.containsKey(typeIdentifier.name)) {
       return specialTypes[typeIdentifier.name]!;
     }
-
+    if (isTypeValueType(typeIdentifier)) {
+      // TODO: This might need something more variable.
+      return 'Uint32';
+    }
     switch (typeIdentifier.corType) {
       case CorElementType.ELEMENT_TYPE_VOID:
         return 'Void';
