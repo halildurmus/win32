@@ -10,7 +10,6 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
@@ -24,10 +23,10 @@ import 'IInspectable.dart';
 const IID_IFileOpenPicker = '{2CA8278A-12C5-4C5F-8977-94547793C241}';
 
 typedef _get_ViewMode_Native = Int32 Function(
-    Pointer obj, Pointer<Int32> value);
-typedef _get_ViewMode_Dart = int Function(Pointer obj, Pointer<Int32> value);
+    Pointer obj, Pointer<Uint32> value);
+typedef _get_ViewMode_Dart = int Function(Pointer obj, Pointer<Uint32> value);
 
-typedef _put_ViewMode_Native = Int32 Function(Pointer obj, Int32 value);
+typedef _put_ViewMode_Native = Int32 Function(Pointer obj, Uint32 value);
 typedef _put_ViewMode_Dart = int Function(Pointer obj, int value);
 
 typedef _get_SettingsIdentifier_Native = Int32 Function(
@@ -40,12 +39,12 @@ typedef _put_SettingsIdentifier_Native = Int32 Function(
 typedef _put_SettingsIdentifier_Dart = int Function(Pointer obj, int value);
 
 typedef _get_SuggestedStartLocation_Native = Int32 Function(
-    Pointer obj, Pointer<Int32> value);
+    Pointer obj, Pointer<Uint32> value);
 typedef _get_SuggestedStartLocation_Dart = int Function(
-    Pointer obj, Pointer<Int32> value);
+    Pointer obj, Pointer<Uint32> value);
 
 typedef _put_SuggestedStartLocation_Native = Int32 Function(
-    Pointer obj, Int32 value);
+    Pointer obj, Uint32 value);
 typedef _put_SuggestedStartLocation_Dart = int Function(Pointer obj, int value);
 
 typedef _get_CommitButtonText_Native = Int32 Function(
@@ -63,14 +62,14 @@ typedef _get_FileTypeFilter_Dart = int Function(
     Pointer obj, Pointer<IntPtr> value);
 
 typedef _PickSingleFileAsync_Native = Int32 Function(
-    Pointer obj, Pointer<IntPtr> operation);
+    Pointer obj, Pointer<Pointer> result);
 typedef _PickSingleFileAsync_Dart = int Function(
-    Pointer obj, Pointer<IntPtr> operation);
+    Pointer obj, Pointer<Pointer> result);
 
 typedef _PickMultipleFilesAsync_Native = Int32 Function(
-    Pointer obj, Pointer<IntPtr> operation);
+    Pointer obj, Pointer<Pointer> result);
 typedef _PickMultipleFilesAsync_Dart = int Function(
-    Pointer obj, Pointer<IntPtr> operation);
+    Pointer obj, Pointer<Pointer> result);
 
 /// {@category Interface}
 /// {@category winrt}
@@ -80,7 +79,7 @@ class IFileOpenPicker extends IInspectable {
   IFileOpenPicker(Pointer<COMObject> ptr) : super(ptr);
 
   int get ViewMode {
-    final retValuePtr = calloc<Int32>();
+    final retValuePtr = calloc<Uint32>();
 
     final hr = Pointer<NativeFunction<_get_ViewMode_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(6).value)
@@ -125,7 +124,7 @@ class IFileOpenPicker extends IInspectable {
   }
 
   int get SuggestedStartLocation {
-    final retValuePtr = calloc<Int32>();
+    final retValuePtr = calloc<Uint32>();
 
     final hr =
         Pointer<NativeFunction<_get_SuggestedStartLocation_Native>>.fromAddress(
@@ -186,14 +185,13 @@ class IFileOpenPicker extends IInspectable {
     return retValue;
   }
 
-  int PickSingleFileAsync(Pointer<IntPtr> operation) =>
+  int PickSingleFileAsync(Pointer<Pointer> result) =>
       Pointer<NativeFunction<_PickSingleFileAsync_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(15).value)
-          .asFunction<_PickSingleFileAsync_Dart>()(ptr.ref.lpVtbl, operation);
+          .asFunction<_PickSingleFileAsync_Dart>()(ptr.ref.lpVtbl, result);
 
-  int PickMultipleFilesAsync(Pointer<IntPtr> operation) =>
+  int PickMultipleFilesAsync(Pointer<Pointer> result) =>
       Pointer<NativeFunction<_PickMultipleFilesAsync_Native>>.fromAddress(
-                  ptr.ref.vtable.elementAt(16).value)
-              .asFunction<_PickMultipleFilesAsync_Dart>()(
-          ptr.ref.lpVtbl, operation);
+              ptr.ref.vtable.elementAt(16).value)
+          .asFunction<_PickMultipleFilesAsync_Dart>()(ptr.ref.lpVtbl, result);
 }
