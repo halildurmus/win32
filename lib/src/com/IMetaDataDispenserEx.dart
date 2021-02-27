@@ -5,7 +5,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'IMetaDataDispenser.dart';
+import 'IMetaDataDispenser.dart' as md;
 
 const IID_IMetaDataDispenserEx = '{31BCFCE2-DAFB-11D2-9F81-00C04F79A0A3}';
 
@@ -79,7 +79,7 @@ typedef _FindAssemblyModule_Dart = int Function(
 
 /// {@category Interface}
 /// {@category com}
-class IMetaDataDispenserEx extends IMetaDataDispenser {
+class IMetaDataDispenserEx extends md.IMetaDataDispenser {
   // vtable begins at 6, ends at 11
 
   IMetaDataDispenserEx(Pointer<COMObject> ptr) : super(ptr);

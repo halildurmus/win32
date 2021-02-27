@@ -11,14 +11,14 @@ import 'constants.dart';
 import 'enumeration.dart';
 import 'module.dart';
 import 'typedef.dart';
-import 'com/IMetaDataImport2.dart';
+import 'com/IMetaDataImport2.dart' as md;
 
 /// A metadata scope, which typically matches an on-disk file.
 ///
 /// Rather than being created directly, you should obtain a scope from a
 /// [MetadataStore], which caches scopes to avoid duplication.
 class Scope {
-  final IMetaDataImport2 reader;
+  final md.IMetaDataImport2 reader;
   final _typedefs = <TypeDef>[];
   final _modules = <Module>[];
 

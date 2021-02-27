@@ -10,9 +10,7 @@ environment:
 
 dependencies:
   ffi: ^1.0.0
-  # win32: ^2.0.0
-  win32:
-    path: ../win32
+  win32: ^2.0.0
 
 dev_dependencies:
   pedantic: ^1.10.0
