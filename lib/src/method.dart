@@ -15,6 +15,7 @@ import 'parameter.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
+import 'com/IMetaDataImport2.dart';
 
 class Method extends AttributeObject {
   String methodName;

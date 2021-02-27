@@ -8,6 +8,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import '_base.dart';
+import 'com/IMetaDataImport2.dart';
 
 class Module extends AttributeObject {
   final String name;

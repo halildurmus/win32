@@ -12,6 +12,7 @@ import '_base.dart';
 import 'method.dart';
 import 'metadatastore.dart';
 import 'utils.dart';
+import 'com/IMetaDataImport2.dart';
 
 /// Represents a TypeDef in the Windows Metadata file
 class TypeDef extends AttributeObject {

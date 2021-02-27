@@ -22,6 +22,11 @@ export 'src/typedef.dart';
 export 'src/typeidentifier.dart';
 export 'src/utils.dart';
 
+export 'src/com/IMetaDataDispenser.dart';
+export 'src/com/IMetaDataDispenserEx.dart';
+export 'src/com/IMetaDataImport.dart';
+export 'src/com/IMetaDataImport2.dart';
+
 export 'src/projection/type_builder.dart';
 export 'src/projection/type_printer.dart';
 export 'src/projection/types.dart';

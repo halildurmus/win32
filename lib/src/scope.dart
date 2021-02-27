@@ -11,6 +11,7 @@ import 'constants.dart';
 import 'enumeration.dart';
 import 'module.dart';
 import 'typedef.dart';
+import 'com/IMetaDataImport2.dart';
 
 /// A metadata scope, which typically matches an on-disk file.
 ///

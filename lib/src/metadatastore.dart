@@ -9,6 +9,8 @@ import 'package:win32/win32.dart';
 
 import 'scope.dart';
 import 'typedef.dart';
+import 'com/IMetaDataDispenser.dart';
+import 'com/IMetaDataImport2.dart';
 
 /// Caches a reader for each file scope.
 ///
