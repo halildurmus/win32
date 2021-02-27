@@ -186,6 +186,47 @@ void main() {
       test('Correct number of parameters in a test method', () {
         expect(projected.methods.first.parameters.length, equals(1));
       });
+
+      test('Property can be found in projection', () {
+        final isConnected = projected.methods.indexWhere(
+            (method) => (method.name == 'get_IsConnectedToInternet'));
+        expect(isConnected, isNot(-1));
+      });
+
+      test('isConnectedToInternet property is a property', () {
+        final isConnected = projected.methods.firstWhere(
+            (method) => (method.name == 'get_IsConnectedToInternet'));
+        expect(isConnected.isGetProperty, isTrue);
+      });
+
+      test('isConnectedToInternet property return is HRESULT', () {
+        final isConnected = projected.methods.firstWhere(
+            (method) => (method.name == 'get_IsConnectedToInternet'));
+        expect(isConnected.returnTypeNative, equals('Int32'));
+        expect(isConnected.returnTypeDart, equals('int'));
+      });
+
+      test('isConnectedToInternet property parameter is VARIANT_BOOL', () {
+        final isConnected = projected.methods.firstWhere(
+            (method) => (method.name == 'get_IsConnectedToInternet'));
+        expect(isConnected.parameters.length, equals(1));
+        expect(isConnected.parameters.first.nativeType, equals('Int16'));
+        expect(isConnected.parameters.first.dartType, equals('int'));
+      });
+    });
+
+    group('Other projection tests', () {
+      test('IEnumNetworkConnections.NewEnum returns a Pointer', () {
+        final iEnumNetworkConnections = scope.findTypeDef(
+            'Windows.Win32.NetworkListManager.IEnumNetworkConnections')!;
+        final projected =
+            TypeBuilder.projectWindowsType(iEnumNetworkConnections);
+        final newEnum = projected.methods
+            .firstWhere((method) => (method.name == 'get__NewEnum'));
+        expect(newEnum.parameters.length, equals(1));
+        expect(newEnum.parameters.first.nativeType, equals('Pointer'));
+        expect(newEnum.parameters.first.dartType, equals('Pointer'));
+      });
     });
   }
 }

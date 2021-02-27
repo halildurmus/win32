@@ -12,6 +12,7 @@ import '_base.dart';
 import 'method.dart';
 import 'metadatastore.dart';
 import 'utils.dart';
+import 'com/IMetaDataImport2.dart' as md;
 
 /// Represents a TypeDef in the Windows Metadata file
 class TypeDef extends AttributeObject {
@@ -39,7 +40,7 @@ class TypeDef extends AttributeObject {
   ///
   /// Typically, typedefs should be obtained from a [WinmdScope] object rather
   /// than being created directly.
-  TypeDef(IMetaDataImport2 reader,
+  TypeDef(md.IMetaDataImport2 reader,
       [int token = 0,
       this.typeName = '',
       this.flags = 0,
@@ -51,7 +52,7 @@ class TypeDef extends AttributeObject {
   /// If the token is a TypeDef, it will be created directly; otherwise it will
   /// be retrieved by finding the scope that it comes from and returning a
   /// typedef from the new scope.
-  factory TypeDef.fromToken(IMetaDataImport2 reader, int token) {
+  factory TypeDef.fromToken(md.IMetaDataImport2 reader, int token) {
     if (tokenIsTypeRef(token)) {
       return TypeDef.fromTypeRefToken(reader, token);
     } else if (tokenIsTypeDef(token)) {
@@ -63,7 +64,8 @@ class TypeDef extends AttributeObject {
   }
 
   /// Instantiate a typedef from a TypeDef token.
-  factory TypeDef.fromTypeDefToken(IMetaDataImport2 reader, int typeDefToken) {
+  factory TypeDef.fromTypeDefToken(
+      md.IMetaDataImport2 reader, int typeDefToken) {
     final nRead = calloc<Uint32>();
     final tdFlags = calloc<Uint32>();
     final baseClassToken = calloc<Uint32>();
@@ -92,7 +94,8 @@ class TypeDef extends AttributeObject {
   /// Unless the TypeRef token is `IInspectable`, the COM parent interface for
   /// Windows Runtime classes, the TypeRef is used to obtain the host scope
   /// metadata file, from which the TypeDef can be found and returned.
-  factory TypeDef.fromTypeRefToken(IMetaDataImport2 reader, int typeRefToken) {
+  factory TypeDef.fromTypeRefToken(
+      md.IMetaDataImport2 reader, int typeRefToken) {
     final ptkResolutionScope = calloc<Uint32>();
     final szName = calloc<Uint8>(256 * 2).cast<Utf16>();
     final pchName = calloc<Uint32>();
@@ -258,21 +261,7 @@ class TypeDef extends AttributeObject {
   String? get guid {
     var guid =
         getCustomGUIDAttribute('Windows.Foundation.Metadata.GuidAttribute');
-
-    // There is _definitely_ a better way to do this, but right now I'm
-    // struggling to get some attributes by name. So brute forcing this for now.
-    if (guid == null) {
-      // Find the first attribute with a length of 41
-      final guidAttributeIndex =
-          attributes.indexWhere((attr) => attr.signatureBlob.length == 41);
-      if (guidAttributeIndex == -1) {
-        return null;
-      }
-      final guidAttribute = attributes[guidAttributeIndex];
-      final decodedGuid = String.fromCharCodes(
-          guidAttribute.signatureBlob.toList().sublist(3, 39));
-      return '{$decodedGuid}';
-    }
+    guid ??= getCustomGUIDAttribute('Windows.Win32.Interop.GuidAttribute');
 
     return guid;
   }

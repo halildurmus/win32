@@ -34,7 +34,7 @@ class TypeBuilder {
       case CorElementType.ELEMENT_TYPE_VOID:
         return 'void';
       case CorElementType.ELEMENT_TYPE_BOOLEAN:
-        return 'bool';
+        return 'int';
       case CorElementType.ELEMENT_TYPE_STRING:
         return 'int';
       case CorElementType.ELEMENT_TYPE_CHAR:
@@ -276,6 +276,22 @@ class TypeBuilder {
         method.returnTypeNative =
             nativeType(mdMethod.returnType.typeIdentifier);
         method.returnTypeDart = dartType(mdMethod.returnType.typeIdentifier);
+
+        // Win32 COM properties are not marked as such in the metadata
+        // (https://github.com/microsoft/win32metadata/issues/270), so we have
+        // to manually deal with them.
+        if (mdMethod.methodName.startsWith('get_')) {
+          method.isGetProperty = true;
+          // This is a Pointer<T>, which will be wrapped later, so strip the
+          // Pointer<> off.
+          method.parameters = [
+            ParameterProjection(mdMethod.parameters.first.name,
+                nativeType: nativeType(
+                    mdMethod.parameters.first.typeIdentifier.typeArgs.first),
+                dartType: dartType(
+                    mdMethod.parameters.first.typeIdentifier.typeArgs.first))
+          ];
+        }
       } else {
         // WinRT methods always return an HRESULT, and provide the actual return
         // value as an pointer

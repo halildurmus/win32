@@ -1,3 +1,7 @@
+## 0.4.0-dev.5
+
+- Improve generation of Windows Runtime get properties
+
 ## 0.4.0-dev.4
 
 - Improve generation of Windows Runtime types

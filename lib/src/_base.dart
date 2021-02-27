@@ -9,10 +9,11 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'attribute.dart';
+import 'com/IMetaDataImport2.dart' as md;
 
 // The base object for metadata objects.
 abstract class TokenObject {
-  final IMetaDataImport2 reader;
+  final md.IMetaDataImport2 reader;
   final int token;
 
   const TokenObject(this.reader, this.token);
@@ -37,7 +38,7 @@ abstract class TokenObject {
 
 /// Represents an object that has attributes associated with it.
 abstract class AttributeObject extends TokenObject {
-  const AttributeObject(IMetaDataImport2 reader, int token)
+  const AttributeObject(md.IMetaDataImport2 reader, int token)
       : super(reader, token);
 
   String attributeAsString(String attrName) {

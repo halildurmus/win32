@@ -9,14 +9,16 @@ import 'package:win32/win32.dart';
 
 import 'scope.dart';
 import 'typedef.dart';
+import 'com/IMetaDataDispenser.dart' as md;
+import 'com/IMetaDataImport2.dart' as md;
 
 /// Caches a reader for each file scope.
 ///
 /// Use this to obtain a reference of a scope without creating unnecessary
 /// copies or cycles.
 class MetadataStore {
-  static late final IMetaDataDispenser dispenser;
-  static final cache = <String, IMetaDataImport2>{};
+  static late final md.IMetaDataDispenser dispenser;
+  static final cache = <String, md.IMetaDataImport2>{};
 
   static bool isInitialized = false;
 
@@ -31,7 +33,7 @@ class MetadataStore {
       throw WindowsException(hr);
     }
 
-    dispenser = IMetaDataDispenser(dispenserObject.cast());
+    dispenser = md.IMetaDataDispenser(dispenserObject.cast());
 
     isInitialized = true;
   }
@@ -52,7 +54,7 @@ class MetadataStore {
         if (FAILED(hr)) {
           throw WindowsException(hr);
         } else {
-          cache[fileScope] = IMetaDataImport2(pReader.cast());
+          cache[fileScope] = md.IMetaDataImport2(pReader.cast());
           return Scope(cache[fileScope]!);
         }
       } finally {
