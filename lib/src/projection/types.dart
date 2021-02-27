@@ -26,7 +26,7 @@ class MethodProjection {
   late bool isSetProperty;
   late String returnTypeNative;
   late String returnTypeDart;
-  final parameters = <ParameterProjection>[];
+  List<ParameterProjection> parameters = <ParameterProjection>[];
 
   @override
   String toString() =>
