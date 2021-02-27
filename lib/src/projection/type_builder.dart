@@ -264,6 +264,12 @@ class TypeBuilder {
       method.isGetProperty = mdMethod.isGetProperty;
       method.isSetProperty = mdMethod.isSetProperty;
 
+      for (final mdParam in mdMethod.parameters) {
+        method.parameters.add(ParameterProjection(mdParam.name,
+            nativeType: nativeType(mdParam.typeIdentifier),
+            dartType: dartType(mdParam.typeIdentifier)));
+      }
+
       if (interface.name.startsWith('Windows.Win32')) {
         // return type is almost certainly an HRESULT, but we'll use the return
         // type just to be sure.
@@ -294,12 +300,6 @@ class TypeBuilder {
                     'Pointer<${nativeType(mdMethod.returnType.typeIdentifier)}>'));
           }
         }
-      }
-
-      for (final mdParam in mdMethod.parameters) {
-        method.parameters.add(ParameterProjection(mdParam.name,
-            nativeType: nativeType(mdParam.typeIdentifier),
-            dartType: dartType(mdParam.typeIdentifier)));
       }
 
       interface.methods.add(method);

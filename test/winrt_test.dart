@@ -231,7 +231,7 @@ void main() {
       }
     });
 
-    test('Calendar.YearAsTruncatedString get property is correct', () {
+    test('Calendar.YearAsTruncatedString method is correct', () {
       final winTypeDef =
           MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
 
@@ -243,6 +243,27 @@ void main() {
       expect(method.isProperty, isFalse);
       expect(method.parameters.length, equals(1));
       expect(method.parameters.first.name, equals('remainingDigits'));
+      expect(method.parameters.first.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_I4));
+    });
+
+    test('Method with one parameter and return value is correct', () {
+      final winTypeDef =
+          MetadataStore.getMetadataForType('Windows.Globalization.Calendar')!;
+
+      final method = winTypeDef.methods
+          .where((m) => m.methodName == 'MonthAsString')
+          .firstWhere((m) =>
+              m.attributeAsString(
+                  'Windows.Foundation.Metadata.OverloadAttribute') ==
+              'MonthAsString');
+
+      expect(method.returnType.typeIdentifier.corType,
+          equals(CorElementType.ELEMENT_TYPE_STRING));
+      expect(method.isSpecialName, isFalse);
+      expect(method.isProperty, isFalse);
+      expect(method.parameters.length, equals(1));
+      expect(method.parameters.first.name, equals('idealLength'));
       expect(method.parameters.first.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_I4));
     });
