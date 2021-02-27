@@ -47,10 +47,18 @@ class IEnumNetworkConnections extends IDispatch {
 
   IEnumNetworkConnections(Pointer<COMObject> ptr) : super(ptr);
 
-  int get__NewEnum(Pointer<Pointer> ppEnumVar) =>
-      Pointer<NativeFunction<_get__NewEnum_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_get__NewEnum_Dart>()(ptr.ref.lpVtbl, ppEnumVar);
+  Pointer get NewEnum {
+    final retValuePtr = calloc<Pointer>();
+
+    final hr = Pointer<NativeFunction<_get__NewEnum_Native>>.fromAddress(
+            ptr.ref.vtable.elementAt(7).value)
+        .asFunction<_get__NewEnum_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+    if (FAILED(hr)) throw WindowsException(hr);
+
+    final retValue = retValuePtr.value;
+    calloc.free(retValuePtr);
+    return retValue;
+  }
 
   int Next(int celt, Pointer<Pointer> rgelt, Pointer<Uint32> pceltFetched) =>
       Pointer<NativeFunction<_Next_Native>>.fromAddress(
