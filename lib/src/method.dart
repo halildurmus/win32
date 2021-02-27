@@ -114,8 +114,7 @@ class Method extends AttributeObject {
     if (isSpecialName && methodName.startsWith('get_')) {
       // Property getter
       isGetProperty = true;
-    } else if (isSpecialName &&
-        (methodName.startsWith('set_') || methodName.startsWith('put_'))) {
+    } else if (isSpecialName && methodName.startsWith('put_')) {
       // Property setter
       isSetProperty = true;
     }
