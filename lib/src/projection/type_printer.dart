@@ -185,9 +185,13 @@ import '../winrt/winrt_constants.dart';
   static String dartGetProperty(MethodProjection method, int? vtableIndex) {
     final buffer = StringBuffer();
 
-    final exposedMethodName = method.name.substring(4);
+    // strip off all underscores, even if double underscores
+    final exposedMethodName = method.name.startsWith('get__')
+        ? method.name.substring(5)
+        : method.name.substring(4);
 
-    buffer.writeln('  ${method.returnTypeDart} get $exposedMethodName {');
+    buffer.writeln(
+        '  ${method.parameters.first.dartType} get $exposedMethodName {');
     buffer.writeln(
         '    final retValuePtr = calloc<${method.parameters.first.nativeType}>();');
     buffer.writeln();

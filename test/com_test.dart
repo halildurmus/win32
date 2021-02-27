@@ -214,5 +214,19 @@ void main() {
         expect(isConnected.parameters.first.dartType, equals('int'));
       });
     });
+
+    group('Other projection tests', () {
+      test('IEnumNetworkConnections.NewEnum returns a Pointer', () {
+        final iEnumNetworkConnections = scope.findTypeDef(
+            'Windows.Win32.NetworkListManager.IEnumNetworkConnections')!;
+        final projected =
+            TypeBuilder.projectWindowsType(iEnumNetworkConnections);
+        final newEnum = projected.methods
+            .firstWhere((method) => (method.name == 'get__NewEnum'));
+        expect(newEnum.parameters.length, equals(1));
+        expect(newEnum.parameters.first.nativeType, equals('Pointer'));
+        expect(newEnum.parameters.first.dartType, equals('Pointer'));
+      });
+    });
   }
 }

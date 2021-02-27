@@ -34,7 +34,7 @@ class TypeBuilder {
       case CorElementType.ELEMENT_TYPE_VOID:
         return 'void';
       case CorElementType.ELEMENT_TYPE_BOOLEAN:
-        return 'bool';
+        return 'int';
       case CorElementType.ELEMENT_TYPE_STRING:
         return 'int';
       case CorElementType.ELEMENT_TYPE_CHAR:
