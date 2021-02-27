@@ -95,10 +95,15 @@ void main() {
     });
 
     // test('Calendar resolved language', () {
-    //   final addr = calendar.ResolvedLanguage;
+    //   final hstr = calendar.ResolvedLanguage;
     //   final hstr = Pointer<IntPtr>.fromAddress(addr);
     //   expect(convertFromHString(hstr), equals('en-US'));
     // });
+
+    test('Calendar daylight savings', () {
+      final boolVal = calendar.IsDaylightSavingTime;
+      expect(boolVal, isIn([0, 1]));
+    });
 
     tearDown(() {
       calloc.free(calendar.ptr);
