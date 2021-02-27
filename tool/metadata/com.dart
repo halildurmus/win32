@@ -13,8 +13,6 @@ class COMType {
       {this.vTableStart = 0, this.generateClass = false});
 }
 
-// TODO: Bootstrapping here. Ideally we'd be able to generate most of this
-//       automatically in the future.
 const interfacesToGenerate = <COMType>[
   COMType('Windows.Win32.Com.IUnknown', ''),
   COMType('Windows.Win32.Com.IBindCtx', 'IUnknown', vTableStart: 3),
@@ -45,7 +43,7 @@ const interfacesToGenerate = <COMType>[
       vTableStart: 27, generateClass: true),
   COMType('Windows.Win32.Shell.IKnownFolder', 'IUnknown', vTableStart: 3),
   COMType('Windows.Win32.Shell.IKnownFolderManager', 'IUnknown',
-      vTableStart: 3),
+      vTableStart: 3, generateClass: true),
   COMType('Windows.Win32.Shell.IModalWindow', 'IUnknown', vTableStart: 3),
   COMType('Windows.Win32.Com.IMoniker', 'IPersistStream', vTableStart: 8),
   COMType('Windows.Win32.NetworkListManager.INetworkConnection', 'IDispatch',

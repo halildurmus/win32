@@ -33,7 +33,6 @@ void main() {
     });
 
     test('Calendar DST', () {
-      // TODO: Should be projected as a bool
       expect(calendar.IsDaylightSavingTime, inInclusiveRange(0, 1));
     });
 
