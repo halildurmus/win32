@@ -206,6 +206,16 @@ void main() {
           equals('Windows.Storage.Pickers.PickerViewMode'));
     });
 
+    test('Class valuetype is correctly identified', () {
+      final winTypeDef = MetadataStore.getMetadataForType(
+          'Windows.Storage.Pickers.IFileOpenPicker')!;
+
+      final method = winTypeDef.findMethod('put_ViewMode')!;
+      final classType = method.parameters.first.typeIdentifier;
+
+      expect(TypeBuilder.isTypeValueType(classType), isTrue);
+    });
+
     test('String parameters are accurately represented', () {
       final winTypeDef =
           MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
