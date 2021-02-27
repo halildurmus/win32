@@ -30,8 +30,7 @@ void main() {
     expect(runningobjecttable.IsRunning, isA<Function>());
   });
   test('Can instantiate IRunningObjectTable.GetObject', () {
-    // BUG: https://github.com/microsoft/win32metadata/issues/274
-    expect(runningobjecttable.GetObjectA, isA<Function>());
+    expect(runningobjecttable.GetObject, isA<Function>());
   });
   test('Can instantiate IRunningObjectTable.NoteChangeTime', () {
     expect(runningobjecttable.NoteChangeTime, isA<Function>());

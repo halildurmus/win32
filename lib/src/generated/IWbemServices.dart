@@ -43,14 +43,14 @@ typedef _QueryObjectSink_Native = Int32 Function(
 typedef _QueryObjectSink_Dart = int Function(
     Pointer obj, int lFlags, Pointer<Pointer> ppResponseHandler);
 
-typedef _GetObjectA_Native = Int32 Function(
+typedef _GetObject_Native = Int32 Function(
     Pointer obj,
     Pointer<Utf16> strObjectPath,
     Int32 lFlags,
     Pointer pCtx,
     Pointer<Pointer> ppObject,
     Pointer<Pointer> ppCallResult);
-typedef _GetObjectA_Dart = int Function(
+typedef _GetObject_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> strObjectPath,
     int lFlags,
@@ -312,11 +312,11 @@ class IWbemServices extends IUnknown {
               .asFunction<_QueryObjectSink_Dart>()(
           ptr.ref.lpVtbl, lFlags, ppResponseHandler);
 
-  int GetObjectA(Pointer<Utf16> strObjectPath, int lFlags, Pointer pCtx,
+  int GetObject(Pointer<Utf16> strObjectPath, int lFlags, Pointer pCtx,
           Pointer<Pointer> ppObject, Pointer<Pointer> ppCallResult) =>
-      Pointer<NativeFunction<_GetObjectA_Native>>.fromAddress(
+      Pointer<NativeFunction<_GetObject_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(6).value)
-              .asFunction<_GetObjectA_Dart>()(
+              .asFunction<_GetObject_Dart>()(
           ptr.ref.lpVtbl, strObjectPath, lFlags, pCtx, ppObject, ppCallResult);
 
   int GetObjectAsync(Pointer<Utf16> strObjectPath, int lFlags, Pointer pCtx,

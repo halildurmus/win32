@@ -31,9 +31,9 @@ typedef _Revoke_Dart = int Function(Pointer obj, int dwRegister);
 typedef _IsRunning_Native = Int32 Function(Pointer obj, Pointer pmkObjectName);
 typedef _IsRunning_Dart = int Function(Pointer obj, Pointer pmkObjectName);
 
-typedef _GetObjectA_Native = Int32 Function(
+typedef _GetObject_Native = Int32 Function(
     Pointer obj, Pointer pmkObjectName, Pointer<Pointer> ppunkObject);
-typedef _GetObjectA_Dart = int Function(
+typedef _GetObject_Dart = int Function(
     Pointer obj, Pointer pmkObjectName, Pointer<Pointer> ppunkObject);
 
 typedef _NoteChangeTime_Native = Int32 Function(
@@ -75,10 +75,10 @@ class IRunningObjectTable extends IUnknown {
               ptr.ref.vtable.elementAt(5).value)
           .asFunction<_IsRunning_Dart>()(ptr.ref.lpVtbl, pmkObjectName);
 
-  int GetObjectA(Pointer pmkObjectName, Pointer<Pointer> ppunkObject) =>
-      Pointer<NativeFunction<_GetObjectA_Native>>.fromAddress(
+  int GetObject(Pointer pmkObjectName, Pointer<Pointer> ppunkObject) =>
+      Pointer<NativeFunction<_GetObject_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(6).value)
-              .asFunction<_GetObjectA_Dart>()(
+              .asFunction<_GetObject_Dart>()(
           ptr.ref.lpVtbl, pmkObjectName, ppunkObject);
 
   int NoteChangeTime(int dwRegister, Pointer<FILETIME> pfiletime) =>
