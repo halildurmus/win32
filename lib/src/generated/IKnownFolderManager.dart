@@ -18,6 +18,9 @@ import '../structs.dart';
 import 'IUnknown.dart';
 
 /// @nodoc
+const CLSID_KnownFolderManager = '{4DF0C730-DF9D-4AE3-9153-AA6B82E9795A}';
+
+/// @nodoc
 const IID_IKnownFolderManager = '{8BE2D872-86AA-4D47-B776-32CCA40C7018}';
 
 typedef _FolderIdFromCsidl_Native = Int32 Function(
@@ -151,4 +154,26 @@ class IKnownFolderManager extends IUnknown {
                   ptr.ref.vtable.elementAt(12).value)
               .asFunction<_Redirect_Dart>()(ptr.ref.lpVtbl, rfid, hwnd, flags,
           pszTargetPath, cFolders, pExclusion, ppszError);
+}
+
+/// {@category com}
+class KnownFolderManager extends IKnownFolderManager {
+  KnownFolderManager(Pointer<COMObject> ptr) : super(ptr);
+
+  factory KnownFolderManager.createInstance() {
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..ref.setGUID(CLSID_KnownFolderManager);
+    final iid = calloc<GUID>()..ref.setGUID(IID_IKnownFolderManager);
+
+    try {
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return KnownFolderManager(ptr);
+    } finally {
+      calloc.free(clsid);
+      calloc.free(iid);
+    }
+  }
 }
