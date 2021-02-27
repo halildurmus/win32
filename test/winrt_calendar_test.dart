@@ -48,25 +48,52 @@ void main() {
       expect(calendar.Year, inInclusiveRange(1921, 2000));
     });
 
-    // test('Calendar month as string', () {
-    //   final monthString = calendar.MonthAsFullString();
-    //   expect(
-    //       calendar.monthString,
-    //       isIn([
-    //         'January',
-    //         'February',
-    //         'March',
-    //         'April',
-    //         'May',
-    //         'June',
-    //         'July',
-    //         'August',
-    //         'September',
-    //         'October',
-    //         'November',
-    //         'December'
-    //       ]));
-    // });
+    test('Calendar month as string', () {
+      final hstr = calloc<IntPtr>();
+      calendar.MonthAsFullString(hstr);
+      expect(
+          convertFromHString(hstr),
+          isIn([
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+          ]));
+      WindowsDeleteString(hstr.value);
+      calloc.free(hstr);
+    });
+
+    test('Calendar month as truncated string', () {
+      final hstr = calloc<IntPtr>();
+      calendar.MonthAsString(3, hstr);
+      print(convertFromHString(hstr));
+      expect(
+          convertFromHString(hstr),
+          isIn([
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
+          ]));
+      WindowsDeleteString(hstr.value);
+      calloc.free(hstr);
+    });
 
     // test('Calendar resolved language', () {
     //   final addr = calendar.ResolvedLanguage;
