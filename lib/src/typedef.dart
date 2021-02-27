@@ -259,21 +259,7 @@ class TypeDef extends AttributeObject {
   String? get guid {
     var guid =
         getCustomGUIDAttribute('Windows.Foundation.Metadata.GuidAttribute');
-
-    // There is _definitely_ a better way to do this, but right now I'm
-    // struggling to get some attributes by name. So brute forcing this for now.
-    if (guid == null) {
-      // Find the first attribute with a length of 41
-      final guidAttributeIndex =
-          attributes.indexWhere((attr) => attr.signatureBlob.length == 41);
-      if (guidAttributeIndex == -1) {
-        return null;
-      }
-      final guidAttribute = attributes[guidAttributeIndex];
-      final decodedGuid = String.fromCharCodes(
-          guidAttribute.signatureBlob.toList().sublist(3, 39));
-      return '{$decodedGuid}';
-    }
+    guid ??= getCustomGUIDAttribute('Windows.Win32.Interop.GuidAttribute');
 
     return guid;
   }

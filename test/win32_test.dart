@@ -104,7 +104,7 @@ void main() {
       final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
       final typedef = scope['Windows.Win32.Gdi.Apis']!;
       final api = typedef.findMethod('AddFontResourceW')!;
-      expect(api.signatureBlob, equals([0x00, 0x01, 0x08, 0x11, 0x2D]));
+      expect(api.signatureBlob, equals([0x00, 0x01, 0x08, 0x11, 0x41]));
     });
 
     test('Unicode string params are correctly marked', () {
