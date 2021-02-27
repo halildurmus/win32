@@ -74,7 +74,6 @@ void main() {
     test('Calendar month as truncated string', () {
       final hstr = calloc<IntPtr>();
       calendar.MonthAsString(3, hstr);
-      print(convertFromHString(hstr));
       expect(
           convertFromHString(hstr),
           isIn([
