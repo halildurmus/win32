@@ -131,7 +131,7 @@ final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ?
 
       writer.writeStringSync('''
 ${generateDocComment(function)}
-${Win32Prototype(function.signature.nameWithoutEncoding, method, method.module.name.toLowerCase()).dartFfiMapping}
+${Win32Prototype(function.signature.nameWithoutEncoding, method, libraryDartName).dartFfiMapping}
 ''');
     }
 

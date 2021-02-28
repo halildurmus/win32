@@ -1,5 +1,6 @@
 const winmdGenerated = [
   'advapi32',
+  'api-ms-win-core-winrt-l1-1-0',
   // 'bthprops',
   'comctl32',
   'comdlg32',
