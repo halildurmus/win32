@@ -687,18 +687,18 @@
         "comment": "The EnumFontFamiliesEx function enumerates all uniquely-named fonts in the system that match the font characteristics specified by the LOGFONT structure. EnumFontFamiliesEx enumerates fonts based on typeface name, character set, or both."
     },
     "EnumProcesses": {
-        "prototype": "BOOL EnumProcesses(\n  DWORD   *lpidProcess,\n  DWORD   cb,\n  LPDWORD lpcbNeeded\n);",
-        "dllLibrary": "psapi",
+        "prototype": "BOOL K32EnumProcesses(\n  DWORD   *lpidProcess,\n  DWORD   cb,\n  LPDWORD lpcbNeeded\n);",
+        "dllLibrary": "kernel32",
         "comment": "Retrieves the process identifier for each process object in the system."
     },
     "EnumProcessModules": {
-        "prototype": "BOOL EnumProcessModules(\n  HANDLE  hProcess,\n  HMODULE *lphModule,\n  DWORD   cb,\n  LPDWORD lpcbNeeded\n);",
-        "dllLibrary": "psapi",
+        "prototype": "BOOL K32EnumProcessModules(\n  HANDLE  hProcess,\n  HMODULE *lphModule,\n  DWORD   cb,\n  LPDWORD lpcbNeeded\n);",
+        "dllLibrary": "kernel32",
         "comment": "Retrieves a handle for each module in the specified process."
     },
     "EnumProcessModulesEx": {
-        "prototype": "BOOL EnumProcessModulesEx(\n  HANDLE  hProcess,\n  HMODULE *lphModule,\n  DWORD   cb,\n  LPDWORD lpcbNeeded,\n  DWORD   dwFilterFlag\n);",
-        "dllLibrary": "psapi",
+        "prototype": "BOOL K32EnumProcessModulesEx(\n  HANDLE  hProcess,\n  HMODULE *lphModule,\n  DWORD   cb,\n  LPDWORD lpcbNeeded,\n  DWORD   dwFilterFlag\n);",
+        "dllLibrary": "kernel32",
         "comment": "Retrieves a handle for each module in the specified process that meets the specified filter criteria."
     },
     "EnumResourceNames": {
@@ -1157,8 +1157,8 @@
         "comment": "Retrieves the message time for the last message retrieved by the GetMessage function. The time is a long integer that specifies the elapsed time, in milliseconds, from the time the system was started to the time the message was created (that is, placed in the thread's message queue)."
     },
     "GetModuleBaseName": {
-        "prototype": "DWORD GetModuleBaseNameW(\n  HANDLE  hProcess,\n  HMODULE hModule,\n  LPWSTR  lpBaseName,\n  DWORD   nSize\n);",
-        "dllLibrary": "psapi",
+        "prototype": "DWORD K32GetModuleBaseNameW(\n  HANDLE  hProcess,\n  HMODULE hModule,\n  LPWSTR  lpBaseName,\n  DWORD   nSize\n);",
+        "dllLibrary": "kernel32",
         "comment": "Retrieves the base name of the specified module."
     },
     "GetModuleFileName": {
@@ -1167,8 +1167,8 @@
         "comment": "Retrieves the fully qualified path for the file that contains the specified module. The module must have been loaded by the current process."
     },
     "GetModuleFileNameEx": {
-        "prototype": "DWORD GetModuleFileNameExW(\n  HANDLE  hProcess,\n  HMODULE hModule,\n  LPWSTR  lpFilename,\n  DWORD   nSize\n);",
-        "dllLibrary": "psapi",
+        "prototype": "DWORD K32GetModuleFileNameExW(\n  HANDLE  hProcess,\n  HMODULE hModule,\n  LPWSTR  lpFilename,\n  DWORD   nSize\n);",
+        "dllLibrary": "kernel32",
         "comment": "Retrieves the fully qualified path for the file containing the specified module."
     },
     "GetModuleHandle": {

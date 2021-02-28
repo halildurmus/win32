@@ -156,9 +156,10 @@ int CloseHandle(int hObject) {
 /// );
 /// ```
 /// {@category kernel32}
-void ClosePseudoConsole(int hPC) {
+void ClosePseudoConsole(Pointer hPC) {
   final _ClosePseudoConsole = _kernel32.lookupFunction<
-      Void Function(IntPtr hPC), void Function(int hPC)>('ClosePseudoConsole');
+      Void Function(Pointer hPC),
+      void Function(Pointer hPC)>('ClosePseudoConsole');
   return _ClosePseudoConsole(hPC);
 }
 
@@ -411,12 +412,12 @@ int CreateProcess(
 /// ```
 /// {@category kernel32}
 int CreatePseudoConsole(
-    COORD size, int hInput, int hOutput, int dwFlags, Pointer<IntPtr> phPC) {
+    COORD size, int hInput, int hOutput, int dwFlags, Pointer<Pointer> phPC) {
   final _CreatePseudoConsole = _kernel32.lookupFunction<
       Int32 Function(COORD size, IntPtr hInput, IntPtr hOutput, Uint32 dwFlags,
-          Pointer<IntPtr> phPC),
+          Pointer<Pointer> phPC),
       int Function(COORD size, int hInput, int hOutput, int dwFlags,
-          Pointer<IntPtr> phPC)>('CreatePseudoConsole');
+          Pointer<Pointer> phPC)>('CreatePseudoConsole');
   return _CreatePseudoConsole(size, hInput, hOutput, dwFlags, phPC);
 }
 
@@ -512,6 +513,75 @@ int EndUpdateResource(int hUpdate, int fDiscard) {
       Int32 Function(IntPtr hUpdate, Int32 fDiscard),
       int Function(int hUpdate, int fDiscard)>('EndUpdateResourceW');
   return _EndUpdateResource(hUpdate, fDiscard);
+}
+
+/// Retrieves the process identifier for each process object in the system.
+///
+/// ```c
+/// BOOL K32EnumProcesses(
+///   DWORD   *lpidProcess,
+///   DWORD   cb,
+///   LPDWORD lpcbNeeded
+/// );
+/// ```
+/// {@category kernel32}
+int K32EnumProcesses(
+    Pointer<Uint32> lpidProcess, int cb, Pointer<Uint32> lpcbNeeded) {
+  final _K32EnumProcesses = _kernel32.lookupFunction<
+      Int32 Function(
+          Pointer<Uint32> lpidProcess, Uint32 cb, Pointer<Uint32> lpcbNeeded),
+      int Function(Pointer<Uint32> lpidProcess, int cb,
+          Pointer<Uint32> lpcbNeeded)>('K32EnumProcesses');
+  return _K32EnumProcesses(lpidProcess, cb, lpcbNeeded);
+}
+
+/// Retrieves a handle for each module in the specified process.
+///
+/// ```c
+/// BOOL K32EnumProcessModules(
+///   HANDLE  hProcess,
+///   HMODULE *lphModule,
+///   DWORD   cb,
+///   LPDWORD lpcbNeeded
+/// );
+/// ```
+/// {@category kernel32}
+int K32EnumProcessModules(int hProcess, Pointer<IntPtr> lphModule, int cb,
+    Pointer<Uint32> lpcbNeeded) {
+  final _K32EnumProcessModules = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
+          Pointer<Uint32> lpcbNeeded),
+      int Function(int hProcess, Pointer<IntPtr> lphModule, int cb,
+          Pointer<Uint32> lpcbNeeded)>('K32EnumProcessModules');
+  return _K32EnumProcessModules(hProcess, lphModule, cb, lpcbNeeded);
+}
+
+/// Retrieves a handle for each module in the specified process that meets
+/// the specified filter criteria.
+///
+/// ```c
+/// BOOL K32EnumProcessModulesEx(
+///   HANDLE  hProcess,
+///   HMODULE *lphModule,
+///   DWORD   cb,
+///   LPDWORD lpcbNeeded,
+///   DWORD   dwFilterFlag
+/// );
+/// ```
+/// {@category kernel32}
+int K32EnumProcessModulesEx(int hProcess, Pointer<IntPtr> lphModule, int cb,
+    Pointer<Uint32> lpcbNeeded, int dwFilterFlag) {
+  final _K32EnumProcessModulesEx = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
+          Pointer<Uint32> lpcbNeeded, Uint32 dwFilterFlag),
+      int Function(
+          int hProcess,
+          Pointer<IntPtr> lphModule,
+          int cb,
+          Pointer<Uint32> lpcbNeeded,
+          int dwFilterFlag)>('K32EnumProcessModulesEx');
+  return _K32EnumProcessModulesEx(
+      hProcess, lphModule, cb, lpcbNeeded, dwFilterFlag);
 }
 
 /// Enumerates resources of a specified type within a binary module. For
@@ -890,8 +960,14 @@ int FlushConsoleInputBuffer(int hConsoleInput) {
 /// );
 /// ```
 /// {@category kernel32}
-int FormatMessage(int dwFlags, Pointer lpSource, int dwMessageId,
-    int dwLanguageId, Pointer<Utf16> lpBuffer, int nSize, Pointer Arguments) {
+int FormatMessage(
+    int dwFlags,
+    Pointer lpSource,
+    int dwMessageId,
+    int dwLanguageId,
+    Pointer<Utf16> lpBuffer,
+    int nSize,
+    Pointer<Pointer<Int8>> Arguments) {
   final _FormatMessage = _kernel32.lookupFunction<
       Uint32 Function(
           Uint32 dwFlags,
@@ -900,7 +976,7 @@ int FormatMessage(int dwFlags, Pointer lpSource, int dwMessageId,
           Uint32 dwLanguageId,
           Pointer<Utf16> lpBuffer,
           Uint32 nSize,
-          Pointer Arguments),
+          Pointer<Pointer<Int8>> Arguments),
       int Function(
           int dwFlags,
           Pointer lpSource,
@@ -908,7 +984,7 @@ int FormatMessage(int dwFlags, Pointer lpSource, int dwMessageId,
           int dwLanguageId,
           Pointer<Utf16> lpBuffer,
           int nSize,
-          Pointer Arguments)>('FormatMessageW');
+          Pointer<Pointer<Int8>> Arguments)>('FormatMessageW');
   return _FormatMessage(
       dwFlags, lpSource, dwMessageId, dwLanguageId, lpBuffer, nSize, Arguments);
 }
@@ -1203,6 +1279,27 @@ int GetLogicalDriveStrings(int nBufferLength, Pointer<Utf16> lpBuffer) {
   return _GetLogicalDriveStrings(nBufferLength, lpBuffer);
 }
 
+/// Retrieves the base name of the specified module.
+///
+/// ```c
+/// DWORD K32GetModuleBaseNameW(
+///   HANDLE  hProcess,
+///   HMODULE hModule,
+///   LPWSTR  lpBaseName,
+///   DWORD   nSize
+/// );
+/// ```
+/// {@category kernel32}
+int K32GetModuleBaseName(
+    int hProcess, int hModule, Pointer<Utf16> lpBaseName, int nSize) {
+  final _K32GetModuleBaseName = _kernel32.lookupFunction<
+      Uint32 Function(IntPtr hProcess, IntPtr hModule,
+          Pointer<Utf16> lpBaseName, Uint32 nSize),
+      int Function(int hProcess, int hModule, Pointer<Utf16> lpBaseName,
+          int nSize)>('K32GetModuleBaseNameW');
+  return _K32GetModuleBaseName(hProcess, hModule, lpBaseName, nSize);
+}
+
 /// Retrieves the fully qualified path for the file that contains the
 /// specified module. The module must have been loaded by the current
 /// process.
@@ -1221,6 +1318,28 @@ int GetModuleFileName(int hModule, Pointer<Utf16> lpFilename, int nSize) {
       int Function(int hModule, Pointer<Utf16> lpFilename,
           int nSize)>('GetModuleFileNameW');
   return _GetModuleFileName(hModule, lpFilename, nSize);
+}
+
+/// Retrieves the fully qualified path for the file containing the
+/// specified module.
+///
+/// ```c
+/// DWORD K32GetModuleFileNameExW(
+///   HANDLE  hProcess,
+///   HMODULE hModule,
+///   LPWSTR  lpFilename,
+///   DWORD   nSize
+/// );
+/// ```
+/// {@category kernel32}
+int K32GetModuleFileNameEx(
+    int hProcess, int hModule, Pointer<Utf16> lpFilename, int nSize) {
+  final _K32GetModuleFileNameEx = _kernel32.lookupFunction<
+      Uint32 Function(IntPtr hProcess, IntPtr hModule,
+          Pointer<Utf16> lpFilename, Uint32 nSize),
+      int Function(int hProcess, int hModule, Pointer<Utf16> lpFilename,
+          int nSize)>('K32GetModuleFileNameExW');
+  return _K32GetModuleFileNameEx(hProcess, hModule, lpFilename, nSize);
 }
 
 /// Retrieves a module handle for the specified module. The module must
@@ -1694,12 +1813,12 @@ int HeapFree(int hHeap, int dwFlags, Pointer lpMem) {
 /// );
 /// ```
 /// {@category kernel32}
-int InitializeProcThreadAttributeList(Pointer lpAttributeList,
-    int dwAttributeCount, int dwFlags, Pointer<IntPtr> lpSize) {
+int InitializeProcThreadAttributeList(int lpAttributeList, int dwAttributeCount,
+    int dwFlags, Pointer<IntPtr> lpSize) {
   final _InitializeProcThreadAttributeList = _kernel32.lookupFunction<
-      Int32 Function(Pointer lpAttributeList, Uint32 dwAttributeCount,
+      Int32 Function(IntPtr lpAttributeList, Uint32 dwAttributeCount,
           Uint32 dwFlags, Pointer<IntPtr> lpSize),
-      int Function(Pointer lpAttributeList, int dwAttributeCount, int dwFlags,
+      int Function(int lpAttributeList, int dwAttributeCount, int dwFlags,
           Pointer<IntPtr> lpSize)>('InitializeProcThreadAttributeList');
   return _InitializeProcThreadAttributeList(
       lpAttributeList, dwAttributeCount, dwFlags, lpSize);
@@ -1927,20 +2046,20 @@ int QueryPerformanceFrequency(Pointer<Int64> lpFrequency) {
 /// ```
 /// {@category kernel32}
 int ReadConsole(int hConsoleInput, Pointer lpBuffer, int nNumberOfCharsToRead,
-    Pointer<Uint32> lpNumberOfCharsRead, Pointer pInputControl) {
+    Pointer<Uint32> lpNumberOfCharsRead, Pointer<Void> pInputControl) {
   final _ReadConsole = _kernel32.lookupFunction<
       Int32 Function(
           IntPtr hConsoleInput,
           Pointer lpBuffer,
           Uint32 nNumberOfCharsToRead,
           Pointer<Uint32> lpNumberOfCharsRead,
-          Pointer pInputControl),
+          Pointer<Void> pInputControl),
       int Function(
           int hConsoleInput,
           Pointer lpBuffer,
           int nNumberOfCharsToRead,
           Pointer<Uint32> lpNumberOfCharsRead,
-          Pointer pInputControl)>('ReadConsoleW');
+          Pointer<Void> pInputControl)>('ReadConsoleW');
   return _ReadConsole(hConsoleInput, lpBuffer, nNumberOfCharsToRead,
       lpNumberOfCharsRead, pInputControl);
 }
@@ -2043,10 +2162,10 @@ int RemoveDirectory(Pointer<Utf16> lpPathName) {
 /// );
 /// ```
 /// {@category kernel32}
-int ResizePseudoConsole(int hPC, COORD size) {
+int ResizePseudoConsole(Pointer hPC, COORD size) {
   final _ResizePseudoConsole = _kernel32.lookupFunction<
-      Int32 Function(IntPtr hPC, COORD size),
-      int Function(int hPC, COORD size)>('ResizePseudoConsole');
+      Int32 Function(Pointer hPC, COORD size),
+      int Function(Pointer hPC, COORD size)>('ResizePseudoConsole');
   return _ResizePseudoConsole(hPC, size);
 }
 
@@ -2368,7 +2487,7 @@ void Sleep(int dwMilliseconds) {
 /// ```
 /// {@category kernel32}
 int UpdateProcThreadAttribute(
-    Pointer lpAttributeList,
+    int lpAttributeList,
     int dwFlags,
     int Attribute,
     Pointer lpValue,
@@ -2377,7 +2496,7 @@ int UpdateProcThreadAttribute(
     Pointer<IntPtr> lpReturnSize) {
   final _UpdateProcThreadAttribute = _kernel32.lookupFunction<
       Int32 Function(
-          Pointer lpAttributeList,
+          IntPtr lpAttributeList,
           Uint32 dwFlags,
           IntPtr Attribute,
           Pointer lpValue,
@@ -2385,7 +2504,7 @@ int UpdateProcThreadAttribute(
           Pointer lpPreviousValue,
           Pointer<IntPtr> lpReturnSize),
       int Function(
-          Pointer lpAttributeList,
+          int lpAttributeList,
           int dwFlags,
           int Attribute,
           Pointer lpValue,
@@ -2519,29 +2638,29 @@ int WideCharToMultiByte(
     int dwFlags,
     Pointer<Utf16> lpWideCharStr,
     int cchWideChar,
-    Pointer<Uint8> lpMultiByteStr,
+    Pointer<Utf8> lpMultiByteStr,
     int cbMultiByte,
-    Pointer<Uint8> lpDefaultChar,
-    Pointer<Uint32> lpUsedDefaultChar) {
+    Pointer<Utf8> lpDefaultChar,
+    Pointer<Int32> lpUsedDefaultChar) {
   final _WideCharToMultiByte = _kernel32.lookupFunction<
       Int32 Function(
           Uint32 CodePage,
           Uint32 dwFlags,
           Pointer<Utf16> lpWideCharStr,
           Int32 cchWideChar,
-          Pointer<Uint8> lpMultiByteStr,
+          Pointer<Utf8> lpMultiByteStr,
           Int32 cbMultiByte,
-          Pointer<Uint8> lpDefaultChar,
-          Pointer<Uint32> lpUsedDefaultChar),
+          Pointer<Utf8> lpDefaultChar,
+          Pointer<Int32> lpUsedDefaultChar),
       int Function(
           int CodePage,
           int dwFlags,
           Pointer<Utf16> lpWideCharStr,
           int cchWideChar,
-          Pointer<Uint8> lpMultiByteStr,
+          Pointer<Utf8> lpMultiByteStr,
           int cbMultiByte,
-          Pointer<Uint8> lpDefaultChar,
-          Pointer<Uint32> lpUsedDefaultChar)>('WideCharToMultiByte');
+          Pointer<Utf8> lpDefaultChar,
+          Pointer<Int32> lpUsedDefaultChar)>('WideCharToMultiByte');
   return _WideCharToMultiByte(CodePage, dwFlags, lpWideCharStr, cchWideChar,
       lpMultiByteStr, cbMultiByte, lpDefaultChar, lpUsedDefaultChar);
 }
