@@ -8,10 +8,45 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import 'function.dart';
-import 'generate_from.dart';
-import 'win32api.dart';
-import 'winmd.dart';
+import '../win32/function.dart';
+import '../win32/generate_from.dart';
+import '../win32/win32api.dart';
+
+class Win32Prototype {
+  final String _nameWithoutEncoding;
+  final Method _method;
+  final String _lib;
+
+  String get nativePrototype =>
+      '${TypeBuilder.nativeType(_method.returnType.typeIdentifier)} Function($nativeParams)';
+
+  String get nativeParams => _method.parameters
+      .map((param) =>
+          '${TypeBuilder.nativeType(param.typeIdentifier)} ${param.name}')
+      .join(', ');
+
+  String get dartPrototype =>
+      '${TypeBuilder.dartType(_method.returnType.typeIdentifier)} Function($dartParams)';
+
+  String get dartParams => _method.parameters
+      .map((param) =>
+          '${TypeBuilder.dartType(param.typeIdentifier)} ${param.name}')
+      .join(', ');
+
+  String get dartFfiMapping =>
+      '${TypeBuilder.dartType(_method.returnType.typeIdentifier)} '
+      '$_nameWithoutEncoding($dartParams) {\n'
+      '  final _$_nameWithoutEncoding = _$_lib.lookupFunction<\n'
+      '    $nativePrototype, \n'
+      '    $dartPrototype\n'
+      "  >('${_method.methodName}');\n"
+      '  return _$_nameWithoutEncoding'
+      '(${_method.parameters.map((param) => (param.name)).toList().join(', ')})'
+      ';\n'
+      '}\n';
+
+  const Win32Prototype(this._nameWithoutEncoding, this._method, this._lib);
+}
 
 final methods = <Method>[];
 
@@ -107,8 +142,6 @@ ${Win32Prototype(function.signature.nameWithoutEncoding, method, method.module.n
 void main() {
   final scope = MetadataStore.getScopeForFile('tool/win32/Windows.Win32.winmd');
   final apis = scope.typeDefs.where((type) => type.typeName.endsWith('Apis'));
-  // final gdiApi =
-  //     scope.typeDefs.firstWhere((type) => type.typeName.endsWith('Gdi.Apis'));
 
   apis.forEach((api) => methods.addAll(api.methods));
   print('${methods.length} APIs collected');

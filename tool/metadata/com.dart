@@ -82,7 +82,7 @@ void main(List<String> args) {
           (typeNameAsList.sublist(0, typeNameAsList.length - 1)
                 ..add(typeNameAsList.last.substring(1)))
               .join('.');
-      clsid = scope.findTypeDef(fullyQualifiedClassName)!.guid ?? '';
+      clsid = scope.findTypeDef(fullyQualifiedClassName)?.guid ?? '';
     }
 
     final parentInterface = mdTypeDef.interfaces.isNotEmpty
