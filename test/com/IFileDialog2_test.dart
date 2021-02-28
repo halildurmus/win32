@@ -26,5 +26,5 @@ void main() {
   test('Can instantiate IFileDialog2.SetNavigationRoot', () {
     expect(filedialog2.SetNavigationRoot, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

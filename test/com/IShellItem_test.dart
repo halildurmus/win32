@@ -35,5 +35,5 @@ void main() {
   test('Can instantiate IShellItem.Compare', () {
     expect(shellitem.Compare, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

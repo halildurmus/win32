@@ -157,7 +157,7 @@ void main() {
       }
       // Free BSTRs in the returned variants
       VariantClear(vtProp);
-      calloc.free(vtProp);
+      free(vtProp);
 
       clsObj.Release();
     }

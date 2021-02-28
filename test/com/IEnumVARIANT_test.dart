@@ -32,5 +32,5 @@ void main() {
   test('Can instantiate IEnumVARIANT.Clone', () {
     expect(enumvariant.Clone, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

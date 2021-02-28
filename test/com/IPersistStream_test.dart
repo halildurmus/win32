@@ -32,5 +32,5 @@ void main() {
   test('Can instantiate IPersistStream.GetSizeMax', () {
     expect(persiststream.GetSizeMax, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

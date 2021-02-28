@@ -40,11 +40,11 @@ void main() {
         '${HIWORD(fixedFileVersionInfo.ref.dwFileVersionLS)}.'
         '${LOWORD(fixedFileVersionInfo.ref.dwFileVersionLS)}');
   } finally {
-    calloc.free(lpFilename);
-    calloc.free(pBlock);
-    calloc.free(lpFixedFileVersionInfo);
-    calloc.free(uLen);
-    calloc.free(subBlock);
+    free(lpFilename);
+    free(pBlock);
+    free(lpFixedFileVersionInfo);
+    free(uLen);
+    free(subBlock);
   }
 }
 
@@ -62,6 +62,6 @@ int getVersionBlockSize(Pointer<Utf16> lpFilename) {
 
     return fviSize;
   } finally {
-    calloc.free(dwDummy);
+    free(dwDummy);
   }
 }

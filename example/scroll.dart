@@ -75,7 +75,7 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       // lowercase letters and 12 uppercase letters.)
       xClientMax = 48 * xChar + 12 * xUpper;
 
-      calloc.free(tm);
+      free(tm);
 
       return 0;
 
@@ -102,7 +102,7 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
       si.ref.nPage = xClient ~/ xChar;
       SetScrollInfo(hwnd, SB_HORZ, si, TRUE);
 
-      calloc.free(si);
+      free(si);
 
       return 0;
 
@@ -157,7 +157,7 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
         ScrollWindow(hwnd, xChar * (xPos - si.ref.nPos), 0, nullptr, nullptr);
       }
 
-      calloc.free(si);
+      free(si);
       return 0;
 
     case WM_VSCROLL:
@@ -223,7 +223,7 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
         UpdateWindow(hwnd);
       }
 
-      calloc.free(si);
+      free(si);
       return 0;
 
     case WM_PAINT:
@@ -258,8 +258,8 @@ int mainWindowProc(int hwnd, int uMsg, int wParam, int lParam) {
 
       // Indicate that painting is finished.
       EndPaint(hwnd, ps);
-      calloc.free(ps);
-      calloc.free(si);
+      free(ps);
+      free(si);
       return 0;
 
     case WM_DESTROY:

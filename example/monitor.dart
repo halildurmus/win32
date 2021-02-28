@@ -62,13 +62,13 @@ int findPrimaryMonitor(List<int> monitors) {
     final result = GetMonitorInfo(monitor, monitorInfo);
     if (result == TRUE) {
       if (testBitmask(monitorInfo.ref.dwFlags, MONITORINFOF_PRIMARY)) {
-        calloc.free(monitorInfo);
+        free(monitorInfo);
         return monitor;
       }
     }
   }
 
-  calloc.free(monitorInfo);
+  free(monitorInfo);
   return 0;
 }
 
@@ -114,7 +114,7 @@ void main() {
       primaryMonitorHandle, physicalMonitorCountPtr);
   if (result == FALSE) {
     print('No physical monitors attached.');
-    calloc.free(physicalMonitorCountPtr);
+    free(physicalMonitorCountPtr);
     return;
   }
 
@@ -170,11 +170,11 @@ void main() {
       physicalMonitorCountPtr.value, physicalMonitorArray.cast());
 
   // free all the heap-allocated variables
-  calloc.free(physicalMonitorArray);
-  calloc.free(physicalMonitorCountPtr);
-  calloc.free(monitorCapabilitiesPtr);
-  calloc.free(monitorColorTemperaturesPtr);
-  calloc.free(minimumBrightnessPtr);
-  calloc.free(currentBrightnessPtr);
-  calloc.free(maximumBrightnessPtr);
+  free(physicalMonitorArray);
+  free(physicalMonitorCountPtr);
+  free(monitorCapabilitiesPtr);
+  free(monitorColorTemperaturesPtr);
+  free(minimumBrightnessPtr);
+  free(currentBrightnessPtr);
+  free(maximumBrightnessPtr);
 }

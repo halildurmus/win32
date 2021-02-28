@@ -23,15 +23,15 @@ void main() {
     calendar.GetCalendarSystem(systemPtr);
     print('The calendar system is ${convertFromHString(systemPtr)}.');
     WindowsDeleteString(systemPtr.value);
-    calloc.free(systemPtr);
+    free(systemPtr);
 
     final dayPtr = calloc<IntPtr>();
     calendar.DayOfWeekAsFullSoloString(dayPtr);
     print('Today is ${convertFromHString(dayPtr)}.');
     WindowsDeleteString(systemPtr.value);
-    calloc.free(dayPtr);
+    free(dayPtr);
 
-    calloc.free(object);
+    free(object);
 
     if (calendar.IsDaylightSavingTime) {
       print('Daylight Saving Time is in observance.');

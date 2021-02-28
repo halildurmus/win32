@@ -15,7 +15,7 @@ String getTemporaryPath() {
 
   if (length == 0) {
     final error = GetLastError();
-    calloc.free(buffer);
+    free(buffer);
     throw WindowsException(error);
   } else {
     var path = buffer.toDartString();
@@ -25,7 +25,7 @@ String getTemporaryPath() {
     if (path.endsWith('\\')) {
       path = path.substring(0, path.length - 1);
     }
-    calloc.free(buffer);
+    free(buffer);
     return path;
   }
 }
@@ -59,8 +59,8 @@ String getKnownFolderPath() {
     final path = pathPtrPtr.value.toDartString();
     return path;
   } finally {
-    calloc.free(knownFolderID);
-    calloc.free(pathPtrPtr);
+    free(knownFolderID);
+    free(pathPtrPtr);
   }
 }
 

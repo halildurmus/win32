@@ -20,3 +20,5 @@ bool isWindowsRuntimeAvailable() {
 }
 
 Pointer<Utf16> TEXT(String string) => string.toNativeUtf16();
+
+void free(Pointer pointer) => calloc.free(pointer);

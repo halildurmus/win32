@@ -45,8 +45,8 @@ class Volumes {
           'GetVolumePathNamesForVolumeName failed with error code $error');
     }
 
-    calloc.free(pathNamePtr);
-    calloc.free(charCount);
+    free(pathNamePtr);
+    free(charCount);
 
     return paths;
   }
@@ -90,9 +90,9 @@ class Volumes {
           break;
         }
       }
-      calloc.free(shortVolumeNamePtr);
+      free(shortVolumeNamePtr);
     }
-    calloc.free(volumeNamePtr);
+    free(volumeNamePtr);
     FindVolumeClose(hFindVolume);
   }
 }

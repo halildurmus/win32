@@ -23,5 +23,5 @@ void main() {
   test('Can instantiate IPersist.GetClassID', () {
     expect(persist.GetClassID, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

@@ -341,5 +341,5 @@ void main() {
       }
     }
   }
-  calloc.free(msg);
+  free(msg);
 }

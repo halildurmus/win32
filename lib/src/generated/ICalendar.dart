@@ -14,6 +14,7 @@ import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../utils.dart';
 
 import '../winrt/winrt_constants.dart';
 
@@ -458,7 +459,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -471,7 +472,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -526,7 +527,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -539,7 +540,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -552,7 +553,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -565,7 +566,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -602,7 +603,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -617,7 +618,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -632,7 +633,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -645,7 +646,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -690,7 +691,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -705,7 +706,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -721,7 +722,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -734,7 +735,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -800,7 +801,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -815,7 +816,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -831,7 +832,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -844,7 +845,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -880,7 +881,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -918,7 +919,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -933,7 +934,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -949,7 +950,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -962,7 +963,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1001,7 +1002,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1016,7 +1017,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1032,7 +1033,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1045,7 +1046,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1082,7 +1083,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1119,7 +1120,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1156,7 +1157,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1210,7 +1211,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1225,7 +1226,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1241,7 +1242,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1257,7 +1258,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1272,7 +1273,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1288,7 +1289,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1303,7 +1304,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1318,7 +1319,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue == 0;
   }
 }

@@ -42,12 +42,12 @@ int printModules(int processID) {
         // Print the module name and handle value.
         print('\t${szModName.toDartString()} ($moduleValue)');
       }
-      calloc.free(szModName);
+      free(szModName);
     }
   }
 
-  calloc.free(hMods);
-  calloc.free(cbNeeded);
+  free(hMods);
+  free(cbNeeded);
 
   // Release the handle to the process.
   CloseHandle(hProcess);

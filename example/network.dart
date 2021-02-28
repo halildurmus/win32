@@ -66,12 +66,12 @@ void main() {
       hr = enumerator.Next(1, netPtr.cast(), elements);
     }
   } finally {
-    calloc.free(elements);
-    calloc.free(netPtr);
-    calloc.free(enumPtr);
-    calloc.free(descPtr);
-    calloc.free(nlmConnectivity);
-    calloc.free(netManager.ptr);
+    free(elements);
+    free(netPtr);
+    free(enumPtr);
+    free(descPtr);
+    free(nlmConnectivity);
+    free(netManager.ptr);
 
     CoUninitialize();
   }

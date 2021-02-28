@@ -26,5 +26,5 @@ void main() {
   test('Can instantiate ISequentialStream.Write', () {
     expect(sequentialstream.Write, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

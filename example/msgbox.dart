@@ -4,7 +4,6 @@
 
 // Demonstrates a MessageBox from the console
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main() {
@@ -22,8 +21,8 @@ void main() {
           MB_DEFBUTTON2 // Second button is the default
       );
 
-  calloc.free(message);
-  calloc.free(title);
+  free(message);
+  free(title);
 
   switch (result) {
     case IDCANCEL:

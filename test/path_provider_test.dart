@@ -274,9 +274,9 @@ class VersionInfoQuerier {
       }
       return valueAddress.value.toDartString();
     } finally {
-      calloc.free(keyPath);
-      calloc.free(length);
-      calloc.free(valueAddress);
+      free(keyPath);
+      free(length);
+      free(valueAddress);
     }
   }
 }
@@ -320,7 +320,7 @@ class PathProviderWindows {
 
       return Future.value(path);
     } finally {
-      calloc.free(buffer);
+      free(buffer);
     }
   }
 
@@ -373,8 +373,8 @@ class PathProviderWindows {
       final path = pathPtrPtr.value.toDartString();
       return Future.value(path);
     } finally {
-      calloc.free(pathPtrPtr);
-      calloc.free(knownFolderID);
+      free(pathPtrPtr);
+      free(knownFolderID);
     }
   }
 
@@ -410,7 +410,7 @@ class PathProviderWindows {
         infoBuffer = calloc<Uint8>(infoSize);
         if (GetFileVersionInfo(moduleNameBuffer, 0, infoSize, infoBuffer) ==
             0) {
-          calloc.free(infoBuffer);
+          free(infoBuffer);
           infoBuffer = null;
         }
       }
@@ -429,10 +429,10 @@ class PathProviderWindows {
           ? path.join(companyName, productName)
           : productName;
     } finally {
-      calloc.free(moduleNameBuffer);
-      calloc.free(unused);
+      free(moduleNameBuffer);
+      free(unused);
       if (infoBuffer != null) {
-        calloc.free(infoBuffer);
+        free(infoBuffer);
       }
     }
   }

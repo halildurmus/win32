@@ -23,5 +23,5 @@ void main() {
   test('Can instantiate ISupportErrorInfo.InterfaceSupportsErrorInfo', () {
     expect(supporterrorinfo.InterfaceSupportsErrorInfo, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

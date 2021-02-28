@@ -14,6 +14,7 @@ import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../utils.dart';
 
 import '../winrt/winrt_constants.dart';
 

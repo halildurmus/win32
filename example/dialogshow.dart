@@ -63,7 +63,7 @@ void main() {
 
       final item = IShellItem(ppsi.cast());
       final pathPtr = calloc<Pointer<Utf16>>();
-      hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtr.cast());
+      hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtr);
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
       // MAX_PATH may truncate early if long filename support is enabled

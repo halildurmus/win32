@@ -16,6 +16,7 @@ import '../generated/IInspectable.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../utils.dart';
 
 /// Initializes the Windows Runtime on the current thread with a single-threaded
 /// concurrency model.
@@ -37,7 +38,7 @@ String convertFromHString(Pointer<IntPtr> hstring) {
 
     return dartString;
   } finally {
-    calloc.free(stringLength);
+    free(stringLength);
   }
 }
 
@@ -59,7 +60,7 @@ Pointer<IntPtr> convertToHString(String string) {
       return hString;
     }
   } finally {
-    calloc.free(stringPtr);
+    free(stringPtr);
   }
 }
 
@@ -108,11 +109,11 @@ Pointer<Pointer> CreateObject(String className, String iid) {
     // Return a pointer to the relevant class
     return classPtr;
   } finally {
-    calloc.free(classNamePtr);
-    calloc.free(iidPtr);
-    calloc.free(riid);
-    calloc.free(inspectablePtr);
-    calloc.free(lpClassName);
-    calloc.free(hstrClass);
+    free(classNamePtr);
+    free(iidPtr);
+    free(riid);
+    free(inspectablePtr);
+    free(lpClassName);
+    free(hstrClass);
   }
 }

@@ -32,5 +32,5 @@ void main() {
   test('Can instantiate IDispatch.Invoke', () {
     expect(dispatch.Invoke, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

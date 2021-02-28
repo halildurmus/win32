@@ -29,5 +29,5 @@ void main() {
   test('Can instantiate IUnknown.Release', () {
     expect(unknown.Release, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

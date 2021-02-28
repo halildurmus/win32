@@ -14,6 +14,7 @@ import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../utils.dart';
 
 /// @nodoc
 const IID_IUnknown = '{00000000-0000-0000-C000-000000000046}';

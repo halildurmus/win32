@@ -29,5 +29,5 @@ void main() {
   test('Can instantiate IInspectable.GetTrustLevel', () {
     expect(inspectable.GetTrustLevel, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

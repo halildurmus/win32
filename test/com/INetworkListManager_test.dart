@@ -41,5 +41,5 @@ void main() {
   test('Can instantiate INetworkListManager.ClearSimulatedProfileInfo', () {
     expect(networklistmanager.ClearSimulatedProfileInfo, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

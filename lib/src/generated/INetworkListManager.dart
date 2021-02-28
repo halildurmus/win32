@@ -14,6 +14,7 @@ import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../utils.dart';
 
 import 'IDispatch.dart';
 
@@ -108,7 +109,7 @@ class INetworkListManager extends IDispatch {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -121,7 +122,7 @@ class INetworkListManager extends IDispatch {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -159,8 +160,8 @@ class NetworkListManager extends INetworkListManager {
 
       return NetworkListManager(ptr);
     } finally {
-      calloc.free(clsid);
-      calloc.free(iid);
+      free(clsid);
+      free(iid);
     }
   }
 }

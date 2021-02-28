@@ -67,7 +67,7 @@ void main() {
             'December'
           ]));
       WindowsDeleteString(hstr.value);
-      calloc.free(hstr);
+      free(hstr);
     });
 
     test('Calendar month as truncated string', () {
@@ -90,17 +90,17 @@ void main() {
             'Dec'
           ]));
       WindowsDeleteString(hstr.value);
-      calloc.free(hstr);
+      free(hstr);
     });
 
     test('Calendar resolved language', () {
       final hstrPtr = calloc<IntPtr>()..value = calendar.ResolvedLanguage;
       expect(convertFromHString(hstrPtr), equals('en-US'));
-      calloc.free(hstrPtr);
+      free(hstrPtr);
     });
 
     tearDown(() {
-      calloc.free(calendar.ptr);
+      free(calendar.ptr);
       winrtUninitialize();
     });
   }

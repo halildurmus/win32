@@ -21,11 +21,11 @@ void main() {
   final kernel32 = 'kernel32.dll'.toNativeUtf16();
   final hModule = GetModuleHandle(kernel32);
   if (hModule == NULL) throw Exception('Could not load kernel32.dll');
-  calloc.free(kernel32);
+  free(kernel32);
 
   final ansi = 'GetNativeSystemInfo'.toANSI();
   final pGetNativeSystemInfo = GetProcAddress(hModule, ansi);
-  calloc.free(ansi);
+  free(ansi);
 
   if (pGetNativeSystemInfo != NULL) {
     print('GetNativeSystemInfo() is available on this system.');

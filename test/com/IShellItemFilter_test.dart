@@ -26,5 +26,5 @@ void main() {
   test('Can instantiate IShellItemFilter.GetEnumFlagsForItem', () {
     expect(shellitemfilter.GetEnumFlagsForItem, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

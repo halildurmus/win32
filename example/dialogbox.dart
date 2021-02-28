@@ -95,7 +95,7 @@ void main() {
   } else {
     print('Entered: $textEntered');
   }
-  calloc.free(ptr);
+  free(ptr);
 }
 
 // Documentation on this function here:
@@ -115,7 +115,7 @@ int dialogReturnProc(int hwndDlg, int message, int wParam, int lParam) {
             final textPtr = calloc<Uint16>(256).cast<Utf16>();
             GetDlgItemText(hwndDlg, ID_EDITTEXT, textPtr, 256);
             textEntered = textPtr.toDartString();
-            calloc.free(textPtr);
+            free(textPtr);
             EndDialog(hwndDlg, wParam);
             return TRUE;
           case IDCANCEL:

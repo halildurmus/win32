@@ -43,7 +43,7 @@ class NotepadFont {
     GetClientRect(hwndEdit, rect);
     InvalidateRect(hwndEdit, rect, TRUE);
 
-    calloc.free(rect);
+    free(rect);
   }
 
   void dispose() {

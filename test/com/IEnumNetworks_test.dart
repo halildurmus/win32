@@ -32,5 +32,5 @@ void main() {
   test('Can instantiate IEnumNetworks.Clone', () {
     expect(enumnetworks.Clone, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

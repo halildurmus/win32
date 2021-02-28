@@ -14,6 +14,7 @@ import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../utils.dart';
 
 import 'IUnknown.dart';
 
@@ -172,8 +173,8 @@ class KnownFolderManager extends IKnownFolderManager {
 
       return KnownFolderManager(ptr);
     } finally {
-      calloc.free(clsid);
-      calloc.free(iid);
+      free(clsid);
+      free(iid);
     }
   }
 }

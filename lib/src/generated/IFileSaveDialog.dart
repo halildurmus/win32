@@ -14,6 +14,7 @@ import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../utils.dart';
 
 import 'IFileDialog.dart';
 
@@ -95,8 +96,8 @@ class FileSaveDialog extends IFileSaveDialog {
 
       return FileSaveDialog(ptr);
     } finally {
-      calloc.free(clsid);
-      calloc.free(iid);
+      free(clsid);
+      free(iid);
     }
   }
 }

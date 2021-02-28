@@ -61,7 +61,7 @@
 ///   final ansi = convertToANSIString('Beep');
 ///   final pGetNativeSystemInfo = GetProcAddress(hModule, ansi);
 ///   ...
-///   calloc.free(ansi);
+///   free(ansi);
 /// ```
 ///
 /// ## Strings (Windows Runtime)
@@ -75,7 +75,7 @@
 ///   calendar.GetCalendarSystem(systemPtr);
 ///   print('The calendar system is ${convertFromHString(systemPtr)}.');
 ///   WindowsDeleteString(systemPtr.value);
-///   calloc.free(systemPtr);
+///   free(systemPtr);
 /// ```
 ///
 /// Make sure you dispose of `HSTRING`s by calling `WindowsDeleteString` and

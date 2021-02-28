@@ -20,7 +20,7 @@ void exec() {
     TranslateMessage(msg);
     DispatchMessage(msg);
   }
-  calloc.free(msg);
+  free(msg);
 }
 
 int loadDartIcon() {

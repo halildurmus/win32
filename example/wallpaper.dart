@@ -33,7 +33,7 @@ void printWallpaper() {
         throw WindowsException(hr);
     }
   } finally {
-    calloc.free(pathPtr);
+    free(pathPtr);
   }
 }
 
@@ -51,7 +51,7 @@ void printBackgroundColor() {
       throw WindowsException(hr);
     }
   } finally {
-    calloc.free(colorPtr);
+    free(colorPtr);
   }
 }
 
@@ -69,7 +69,7 @@ void main() {
     printWallpaper();
     printBackgroundColor();
   } finally {
-    calloc.free(wallpaper.ptr);
+    free(wallpaper.ptr);
     CoUninitialize();
   }
 }

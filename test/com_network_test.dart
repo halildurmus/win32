@@ -14,7 +14,7 @@ void main() {
     final nlm = NetworkListManager.createInstance();
     expect(nlm.ptr.address, isNonZero);
 
-    calloc.free(nlm.ptr);
+    free(nlm.ptr);
 
     CoUninitialize();
   });
@@ -28,13 +28,13 @@ void main() {
     test('Network is connected', () {
       final nlm = NetworkListManager.createInstance();
       expect(nlm.IsConnected, equals(-1));
-      calloc.free(nlm.ptr);
+      free(nlm.ptr);
     });
 
     test('Network is connected to the internet', () {
       final nlm = NetworkListManager.createInstance();
       expect(nlm.IsConnectedToInternet, equals(-1));
-      calloc.free(nlm.ptr);
+      free(nlm.ptr);
     });
 
     test('Can enumerate a network connection', () {
@@ -55,9 +55,9 @@ void main() {
       // network should be connected, given the filter
       expect(network.IsConnected, equals(-1));
 
-      calloc.free(netPtr);
-      calloc.free(enumPtr);
-      calloc.free(nlm.ptr);
+      free(netPtr);
+      free(enumPtr);
+      free(nlm.ptr);
     });
 
     test('First network connection has a description', () {
@@ -81,9 +81,9 @@ void main() {
       // more than one character long, and test for that.
       expect(descPtr.value.length, greaterThan(1));
 
-      calloc.free(netPtr);
-      calloc.free(enumPtr);
-      calloc.free(nlm.ptr);
+      free(netPtr);
+      free(enumPtr);
+      free(nlm.ptr);
     });
 
     tearDown(CoUninitialize);

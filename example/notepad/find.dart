@@ -53,7 +53,7 @@ class NotepadFind {
     final pDoc = calloc<Uint16>(iLength + 1).cast<Utf16>();
     GetWindowText(hwndEdit, pDoc, iLength + 1);
     final strDoc = pDoc.toDartString();
-    calloc.free(pDoc);
+    free(pDoc);
 
     // Search the document for the find string
     final toFind = pfr.ref.lpstrFindWhat.toDartString();

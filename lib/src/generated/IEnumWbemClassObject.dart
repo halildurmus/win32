@@ -10,32 +10,31 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../utils.dart';
 
 import 'IUnknown.dart';
 
 /// @nodoc
-const IID_IEnumWbemClassObject = '{027947e1-d731-11ce-a357-000000000001}';
+const IID_IEnumWbemClassObject = '{027947E1-D731-11CE-A357-000000000001}';
 
 typedef _Reset_Native = Int32 Function(Pointer obj);
 typedef _Reset_Dart = int Function(Pointer obj);
 
 typedef _Next_Native = Int32 Function(Pointer obj, Int32 lTimeout,
-    Uint32 uCount, Pointer<IntPtr> apObjects, Pointer<Uint32> puReturned);
+    Uint32 uCount, Pointer<Pointer> apObjects, Pointer<Uint32> puReturned);
 typedef _Next_Dart = int Function(Pointer obj, int lTimeout, int uCount,
-    Pointer<IntPtr> apObjects, Pointer<Uint32> puReturned);
+    Pointer<Pointer> apObjects, Pointer<Uint32> puReturned);
 
 typedef _NextAsync_Native = Int32 Function(
-    Pointer obj, Uint32 uCount, Pointer<COMObject> pSink);
-typedef _NextAsync_Dart = int Function(
-    Pointer obj, int uCount, Pointer<COMObject> pSink);
+    Pointer obj, Uint32 uCount, Pointer pSink);
+typedef _NextAsync_Dart = int Function(Pointer obj, int uCount, Pointer pSink);
 
-typedef _Clone_Native = Int32 Function(Pointer obj, Pointer<IntPtr> ppEnum);
-typedef _Clone_Dart = int Function(Pointer obj, Pointer<IntPtr> ppEnum);
+typedef _Clone_Native = Int32 Function(Pointer obj, Pointer<Pointer> ppEnum);
+typedef _Clone_Dart = int Function(Pointer obj, Pointer<Pointer> ppEnum);
 
 typedef _Skip_Native = Int32 Function(
     Pointer obj, Int32 lTimeout, Uint32 nCount);
@@ -52,19 +51,19 @@ class IEnumWbemClassObject extends IUnknown {
           ptr.ref.vtable.elementAt(3).value)
       .asFunction<_Reset_Dart>()(ptr.ref.lpVtbl);
 
-  int Next(int lTimeout, int uCount, Pointer<IntPtr> apObjects,
+  int Next(int lTimeout, int uCount, Pointer<Pointer> apObjects,
           Pointer<Uint32> puReturned) =>
       Pointer<NativeFunction<_Next_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(4).value)
               .asFunction<_Next_Dart>()(
           ptr.ref.lpVtbl, lTimeout, uCount, apObjects, puReturned);
 
-  int NextAsync(int uCount, Pointer<COMObject> pSink) =>
+  int NextAsync(int uCount, Pointer pSink) =>
       Pointer<NativeFunction<_NextAsync_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(5).value)
           .asFunction<_NextAsync_Dart>()(ptr.ref.lpVtbl, uCount, pSink);
 
-  int Clone(Pointer<IntPtr> ppEnum) =>
+  int Clone(Pointer<Pointer> ppEnum) =>
       Pointer<NativeFunction<_Clone_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(6).value)
           .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppEnum);

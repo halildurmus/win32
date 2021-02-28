@@ -50,5 +50,5 @@ void main() {
   test('Can instantiate IKnownFolderManager.Redirect', () {
     expect(knownfoldermanager.Redirect, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

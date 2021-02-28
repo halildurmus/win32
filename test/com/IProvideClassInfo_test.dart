@@ -24,5 +24,5 @@ void main() {
     // BUG: https://github.com/microsoft/win32metadata/issues/274
     expect(provideclassinfo.GetClassInfoA, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

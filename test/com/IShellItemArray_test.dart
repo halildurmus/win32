@@ -41,5 +41,5 @@ void main() {
   test('Can instantiate IShellItemArray.EnumItems', () {
     expect(shellitemarray.EnumItems, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }
