@@ -30,6 +30,10 @@ void main() {
         expect(iNetwork.isValidToken, isTrue);
       });
 
+      test('INetwork inherits from IDispatch', () {
+        expect(iNetwork.interfaces.first.typeName, endsWith('IDispatch'));
+      });
+
       test('Interface has expected number of methods', () {
         expect(iNetwork.methods.length, equals(13));
       });
