@@ -30,6 +30,7 @@ import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../utils.dart';
 ''');
     if (type.sourceType == SourceType.winrt) {
       buffer.writeln('''
@@ -202,7 +203,7 @@ import '../winrt/winrt_constants.dart';
       if (FAILED(hr)) throw WindowsException(hr);
 
       final retValue = retValuePtr.value;
-      calloc.free(retValuePtr);
+      free(retValuePtr);
       return ${convertBool ? 'retValue == 0' : 'retValue'};
     }
 ''');
@@ -251,8 +252,8 @@ class ${type.className} extends $interfaceWithoutNamespace {
 
       return ${type.className}(ptr);
     } finally {
-      calloc.free(clsid);
-      calloc.free(iid);
+      free(clsid);
+      free(iid);
     }
   }
 }
