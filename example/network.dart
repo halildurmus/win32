@@ -2,12 +2,11 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-// Checks for network connectivity
+// Get information about the network connections on the current device.
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-
 import 'package:win32/win32.dart';
 
 void main() {
@@ -19,33 +18,61 @@ void main() {
 
   final netManager = NetworkListManager.createInstance();
   final nlmConnectivity = calloc<Uint32>();
-  hr = netManager.GetConnectivity(nlmConnectivity);
-  if (FAILED(hr)) {
-    throw WindowsException(hr);
+  final enumPtr = calloc<Pointer>();
+  final netPtr = calloc<Pointer>();
+  final descPtr = calloc<Pointer<Utf16>>();
+  final elements = calloc<Uint32>();
+
+  try {
+    hr = netManager.GetConnectivity(nlmConnectivity);
+    if (FAILED(hr)) {
+      throw WindowsException(hr);
+    }
+
+    final connectivity = nlmConnectivity.value;
+    var isInternetConnected = false;
+
+    // These two options are not mutually exclusive
+    if (connectivity & NLM_CONNECTIVITY.NLM_CONNECTIVITY_IPV4_INTERNET ==
+        NLM_CONNECTIVITY.NLM_CONNECTIVITY_IPV4_INTERNET) {
+      print('Connected to the Internet via IPv4.');
+      isInternetConnected = true;
+    }
+
+    if (connectivity & NLM_CONNECTIVITY.NLM_CONNECTIVITY_IPV6_INTERNET ==
+        NLM_CONNECTIVITY.NLM_CONNECTIVITY_IPV6_INTERNET) {
+      print('Connected to the Internet via IPv6.');
+      isInternetConnected = true;
+    }
+
+    if (!isInternetConnected) {
+      print('Not connected to the Internet.');
+    }
+
+    hr = netManager.GetNetworks(NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_ALL, enumPtr);
+    if (FAILED(hr)) {
+      throw WindowsException(hr);
+    }
+
+    print('\nNetworks (connected and disconnected) on this machine:');
+    final enumerator = IEnumNetworks(enumPtr.cast());
+    hr = enumerator.Next(1, netPtr.cast(), elements);
+    while (elements.value == 1) {
+      final network = INetwork(netPtr.cast());
+      hr = network.GetDescription(descPtr);
+      if (SUCCEEDED(hr)) {
+        print(descPtr.value.toDartString());
+      }
+      hr = enumerator.Next(1, netPtr.cast(), elements);
+    }
+  } finally {
+    calloc.free(elements);
+    calloc.free(netPtr);
+    calloc.free(enumPtr);
+    calloc.free(descPtr);
+    calloc.free(nlmConnectivity);
+    calloc.free(netManager.ptr);
+
+    CoUninitialize();
   }
-
-  final connectivity = nlmConnectivity.value;
-  var isInternetConnected = false;
-
-  // These two options are not mutually exclusive
-  if (connectivity & NLM_CONNECTIVITY.NLM_CONNECTIVITY_IPV4_INTERNET ==
-      NLM_CONNECTIVITY.NLM_CONNECTIVITY_IPV4_INTERNET) {
-    print('Connected to the Internet via IPv4.');
-    isInternetConnected = true;
-  }
-
-  if (connectivity & NLM_CONNECTIVITY.NLM_CONNECTIVITY_IPV6_INTERNET ==
-      NLM_CONNECTIVITY.NLM_CONNECTIVITY_IPV6_INTERNET) {
-    print('Connected to the Internet via IPv6.');
-    isInternetConnected = true;
-  }
-
-  if (!isInternetConnected) {
-    print('Not connected to the Internet.');
-  }
-
-  calloc.free(nlmConnectivity);
-  calloc.free(netManager.ptr);
-
-  CoUninitialize();
 }
