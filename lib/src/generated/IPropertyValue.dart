@@ -201,7 +201,7 @@ class IPropertyValue extends IInspectable {
     return retValue;
   }
 
-  int get IsNumericScalar {
+  bool get IsNumericScalar {
     final retValuePtr = calloc<Uint8>();
 
     final hr = Pointer<NativeFunction<_get_IsNumericScalar_Native>>.fromAddress(
@@ -211,7 +211,7 @@ class IPropertyValue extends IInspectable {
 
     final retValue = retValuePtr.value;
     calloc.free(retValuePtr);
-    return retValue;
+    return retValue == 0;
   }
 
   int GetUInt8(Pointer<Uint8> result) =>

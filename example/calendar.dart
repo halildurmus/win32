@@ -33,9 +33,9 @@ void main() {
 
     calloc.free(object);
 
-    if (calendar.IsDaylightSavingTime == 1) {
+    if (calendar.IsDaylightSavingTime) {
       print('Daylight Saving Time is in observance.');
-    } else if (calendar.IsDaylightSavingTime == 0) {
+    } else if (calendar.IsDaylightSavingTime) {
       print('Daylight Savings Time is not in observance.');
     }
   } finally {

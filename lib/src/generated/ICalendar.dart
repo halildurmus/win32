@@ -1307,7 +1307,7 @@ class ICalendar extends IInspectable {
     return retValue;
   }
 
-  int get IsDaylightSavingTime {
+  bool get IsDaylightSavingTime {
     final retValuePtr = calloc<Uint8>();
 
     final hr =
@@ -1319,6 +1319,6 @@ class ICalendar extends IInspectable {
 
     final retValue = retValuePtr.value;
     calloc.free(retValuePtr);
-    return retValue;
+    return retValue == 0;
   }
 }
