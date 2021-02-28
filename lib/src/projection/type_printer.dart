@@ -190,25 +190,22 @@ import '../winrt/winrt_constants.dart';
         ? method.name.substring(5)
         : method.name.substring(4);
 
-    buffer.writeln(
-        '  ${method.parameters.first.dartType} get $exposedMethodName {');
-    buffer.writeln(
-        '    final retValuePtr = calloc<${method.parameters.first.nativeType}>();');
-    buffer.writeln();
-    buffer.writeln(
-        '    final hr = Pointer<NativeFunction<_${method.name}_Native>>.fromAddress(');
-    buffer.writeln(
-        '                ptr.ref.vtable.elementAt($vtableIndex).value)');
-    buffer.writeln(
-        '       .asFunction<_${method.name}_Dart>()(ptr.ref.lpVtbl, retValuePtr);');
-    buffer.writeln('''
-       if (FAILED(hr)) throw WindowsException(hr);
+    final convertBool = method.parameters.first.dartType == 'bool';
 
-       final retValue = retValuePtr.value;
-       calloc.free(retValuePtr);
-       return retValue;
-     }
-    ''');
+    buffer.writeln('''
+    ${method.parameters.first.dartType} get $exposedMethodName {
+      final retValuePtr = calloc<${method.parameters.first.nativeType}>();
+      
+      final hr = Pointer<NativeFunction<_${method.name}_Native>>.fromAddress(
+        ptr.ref.vtable.elementAt($vtableIndex).value)
+          .asFunction<_${method.name}_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      final retValue = retValuePtr.value;
+      calloc.free(retValuePtr);
+      return ${convertBool ? 'retValue == 0' : 'retValue'};
+    }
+''');
     return buffer.toString();
   }
 
