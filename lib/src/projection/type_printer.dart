@@ -191,10 +191,7 @@ import '../winrt/winrt_constants.dart';
         : method.name.substring(4);
 
     final convertBool = method.parameters.first.dartType == 'bool';
-    if (convertBool) {
-      print(
-          'Converting bool. Native type is ${method.parameters.first.nativeType}');
-    }
+
     buffer.writeln('''
     ${method.parameters.first.dartType} get $exposedMethodName {
       final retValuePtr = calloc<${method.parameters.first.nativeType}>();
