@@ -93,6 +93,29 @@ class Scope {
     return _modules;
   }
 
+  List<String> get userStrings {
+    final strings = <String>[];
+
+    final phEnum = calloc<IntPtr>();
+    final rgStrings = calloc<Uint32>();
+    final pcStrings = calloc<Uint32>();
+    try {
+      var hr = reader.EnumUserStrings(phEnum, rgStrings, 1, pcStrings);
+      while (hr == S_OK) {
+        final token = rgStrings.value;
+        strings.add(token.toHexString(16));
+        hr = reader.EnumUserStrings(phEnum, rgStrings, 1, pcStrings);
+      }
+    } finally {
+      reader.CloseEnum(phEnum.value);
+      calloc.free(phEnum);
+      calloc.free(rgStrings);
+      calloc.free(pcStrings);
+    }
+
+    return strings;
+  }
+
   List<Enumeration> get enums {
     final enums = <Enumeration>[];
     for (final typeDef in typeDefs) {

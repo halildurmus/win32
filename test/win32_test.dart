@@ -22,6 +22,11 @@ void main() {
               <String>['KERNEL32', 'USER32', 'GDI32', 'd3d12', 'netutils']));
     });
 
+    test('Scope modules contain expected user strings', () {
+      final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+      expect(scope.userStrings.length, equals(0));
+    });
+
     test('Can successfully load a typedef from the Win32 metadata', () {
       final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
       final typedef = scope['Windows.Win32.Gdi.Apis'];
@@ -292,6 +297,29 @@ void main() {
           param.typeIdentifier.corType, equals(CorElementType.ELEMENT_TYPE_I));
       expect(param.typeIdentifier.name, equals('intptr'));
       expect(param.typeIdentifier.typeArgs, isEmpty);
+    });
+
+    test('Enumerations present in Win32 metadata', () {
+      final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+      final enums = scope.enums;
+
+      expect(enums.length, greaterThan(100));
+    });
+
+    test('Enumerations contain correct entries', () {
+      final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+      final ropCode =
+          scope.enums.firstWhere((en) => en.typeName.endsWith('ROP_CODE'));
+
+      expect(ropCode.fields.length, equals(18));
+    });
+
+    test('A specific enumeration contains expected constants', () {
+      final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+      final ropCode =
+          scope.enums.firstWhere((en) => en.typeName.endsWith('ROP_CODE'));
+
+      expect(ropCode.fields['SRCCOPY'], equals(0x00CC0020));
     });
   }
 }
