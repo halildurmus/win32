@@ -24,7 +24,4 @@ const winmdGenerated = [
 // api-ms-win-core-winrt-string is broken because of
 // https://github.com/microsoft/win32metadata/issues/292
 
-// api-ms-win-core-winrt-string is broken because it is used by the generation
-// itself
-
-// shell32 is missing because of SHGetKnownFolderPath (Dart test fails)
+// api-ms-win-ro-typeresolution-l1-1-0 is missing in the metadata
