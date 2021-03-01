@@ -6,9 +6,9 @@
 
 // This file contains Win32 APIs that are missing from the Win32 metadata.
 
-// import 'dart:ffi';
+import 'dart:ffi';
 
-// final _user32 = DynamicLibrary.open('user32.dll');
+final _user32 = DynamicLibrary.open('user32.dll');
 
 /// Changes an attribute of the specified window. The function also sets a
 /// value at the specified offset in the extra window memory.
@@ -21,9 +21,9 @@
 /// );
 /// ```
 /// {@category user32}
-// int SetWindowLongPtr(int hWnd, int nIndex, int dwNewLong) {
-//   final _SetWindowLongPtr = _user32.lookupFunction<
-//       IntPtr Function(IntPtr hWnd, Int32 nIndex, IntPtr dwNewLong),
-//       int Function(int hWnd, int nIndex, int dwNewLong)>('SetWindowLongPtrW');
-//   return _SetWindowLongPtr(hWnd, nIndex, dwNewLong);
-// }
+int SetWindowLongPtr(int hWnd, int nIndex, int dwNewLong) {
+  final _SetWindowLongPtr = _user32.lookupFunction<
+      IntPtr Function(IntPtr hWnd, Int32 nIndex, IntPtr dwNewLong),
+      int Function(int hWnd, int nIndex, int dwNewLong)>('SetWindowLongPtrW');
+  return _SetWindowLongPtr(hWnd, nIndex, dwNewLong);
+}
