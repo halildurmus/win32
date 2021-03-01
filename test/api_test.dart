@@ -3660,13 +3660,13 @@ void main() {
           Uint32 Function(
               IntPtr hwndParentIn,
               IntPtr hRadioIn,
-              Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
+              Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdiInout,
               Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
               Int32 authenticationRequirement),
           int Function(
               int hwndParentIn,
               int hRadioIn,
-              Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
+              Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdiInout,
               Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
               int authenticationRequirement)>('BluetoothAuthenticateDeviceEx');
       expect(BluetoothAuthenticateDeviceEx, isA<Function>());
@@ -3674,10 +3674,10 @@ void main() {
     test('Can instantiate BluetoothDisplayDeviceProperties', () {
       final bthprops = DynamicLibrary.open('bthprops.cpl');
       final BluetoothDisplayDeviceProperties = bthprops.lookupFunction<
-              Int32 Function(
-                  IntPtr hwndParent, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
+              Int32 Function(IntPtr hwndParent,
+                  Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdi),
               int Function(
-                  int hwndParent, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)>(
+                  int hwndParent, Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdi)>(
           'BluetoothDisplayDeviceProperties');
       expect(BluetoothDisplayDeviceProperties, isA<Function>());
     });
@@ -3699,14 +3699,17 @@ void main() {
     test('Can instantiate BluetoothEnumerateInstalledServices', () {
       final bthprops = DynamicLibrary.open('bthprops.cpl');
       final BluetoothEnumerateInstalledServices = bthprops.lookupFunction<
-          Uint32 Function(IntPtr hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
-              Pointer<Uint32> pcServiceInout, Pointer<GUID> pGuidServices),
-          int Function(
-              int hRadio,
-              Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
-              Pointer<Uint32> pcServiceInout,
-              Pointer<GUID>
-                  pGuidServices)>('BluetoothEnumerateInstalledServices');
+              Uint32 Function(
+                  IntPtr hRadio,
+                  Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdi,
+                  Pointer<Uint32> pcServiceInout,
+                  Pointer<GUID> pGuidServices),
+              int Function(
+                  int hRadio,
+                  Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdi,
+                  Pointer<Uint32> pcServiceInout,
+                  Pointer<GUID> pGuidServices)>(
+          'BluetoothEnumerateInstalledServices');
       expect(BluetoothEnumerateInstalledServices, isA<Function>());
     });
     test('Can instantiate BluetoothFindDeviceClose', () {
@@ -3720,9 +3723,9 @@ void main() {
       final bthprops = DynamicLibrary.open('bthprops.cpl');
       final BluetoothFindFirstDevice = bthprops.lookupFunction<
               IntPtr Function(Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp,
-                  Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
+                  Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdi),
               int Function(Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp,
-                  Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)>(
+                  Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdi)>(
           'BluetoothFindFirstDevice');
       expect(BluetoothFindFirstDevice, isA<Function>());
     });
@@ -3738,9 +3741,11 @@ void main() {
     test('Can instantiate BluetoothFindNextDevice', () {
       final bthprops = DynamicLibrary.open('bthprops.cpl');
       final BluetoothFindNextDevice = bthprops.lookupFunction<
-          Int32 Function(IntPtr hFind, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
-          int Function(int hFind,
-              Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)>('BluetoothFindNextDevice');
+              Int32 Function(
+                  IntPtr hFind, Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdi),
+              int Function(
+                  int hFind, Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdi)>(
+          'BluetoothFindNextDevice');
       expect(BluetoothFindNextDevice, isA<Function>());
     });
     test('Can instantiate BluetoothFindNextRadio', () {
@@ -3794,13 +3799,13 @@ void main() {
       final bthprops = DynamicLibrary.open('bthprops.cpl');
       final BluetoothRegisterForAuthenticationEx = bthprops.lookupFunction<
           Uint32 Function(
-              Pointer<BLUETOOTH_DEVICE_INFO> pbtdiIn,
+              Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdiIn,
               Pointer<IntPtr> phRegHandleOut,
               Pointer<NativeFunction<PfnAuthenticationCallbackEx>>
                   pfnCallbackIn,
               Pointer pvParam),
           int Function(
-              Pointer<BLUETOOTH_DEVICE_INFO> pbtdiIn,
+              Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdiIn,
               Pointer<IntPtr> phRegHandleOut,
               Pointer<NativeFunction<PfnAuthenticationCallbackEx>>
                   pfnCallbackIn,
@@ -3810,19 +3815,22 @@ void main() {
     test('Can instantiate BluetoothRemoveDevice', () {
       final bthprops = DynamicLibrary.open('bthprops.cpl');
       final BluetoothRemoveDevice = bthprops.lookupFunction<
-          Uint32 Function(Pointer<BLUETOOTH_ADDRESS> pAddress),
-          int Function(
-              Pointer<BLUETOOTH_ADDRESS> pAddress)>('BluetoothRemoveDevice');
+              Uint32 Function(Pointer<BLUETOOTH_ADDRESS_STRUCT> pAddress),
+              int Function(Pointer<BLUETOOTH_ADDRESS_STRUCT> pAddress)>(
+          'BluetoothRemoveDevice');
       expect(BluetoothRemoveDevice, isA<Function>());
     });
     test('Can instantiate BluetoothSetServiceState', () {
       final bthprops = DynamicLibrary.open('bthprops.cpl');
       final BluetoothSetServiceState = bthprops.lookupFunction<
-          Uint32 Function(IntPtr hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
-              Pointer<GUID> pGuidService, Uint32 dwServiceFlags),
+          Uint32 Function(
+              IntPtr hRadio,
+              Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdi,
+              Pointer<GUID> pGuidService,
+              Uint32 dwServiceFlags),
           int Function(
               int hRadio,
-              Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
+              Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdi,
               Pointer<GUID> pGuidService,
               int dwServiceFlags)>('BluetoothSetServiceState');
       expect(BluetoothSetServiceState, isA<Function>());
@@ -3837,8 +3845,8 @@ void main() {
     test('Can instantiate BluetoothUpdateDeviceRecord', () {
       final bthprops = DynamicLibrary.open('bthprops.cpl');
       final BluetoothUpdateDeviceRecord = bthprops.lookupFunction<
-              Uint32 Function(Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
-              int Function(Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)>(
+              Uint32 Function(Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdi),
+              int Function(Pointer<BLUETOOTH_DEVICE_INFO_STRUCT> pbtdi)>(
           'BluetoothUpdateDeviceRecord');
       expect(BluetoothUpdateDeviceRecord, isA<Function>());
     });

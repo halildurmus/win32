@@ -2899,7 +2899,7 @@ class SYSTEMTIME extends Struct {
 ///
 /// /// {@category Struct}
 class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
-  external BLUETOOTH_DEVICE_INFO deviceInfo;
+  external BLUETOOTH_DEVICE_INFO_STRUCT deviceInfo;
   @Uint32()
   external int authenticationMethod;
   @Uint32()
@@ -2929,7 +2929,7 @@ class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
 /// device.
 ///
 /// {@category Struct}
-class BLUETOOTH_DEVICE_INFO extends Struct {
+class BLUETOOTH_DEVICE_INFO_STRUCT extends Struct {
   @Uint32()
   external int dwSize;
   @Uint64()
@@ -3148,7 +3148,7 @@ class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
 /// The BLUETOOTH_ADDRESS structure provides the address of a Bluetooth device.
 ///
 /// {@category Struct}
-class BLUETOOTH_ADDRESS extends Struct {
+class BLUETOOTH_ADDRESS_STRUCT extends Struct {
   @Uint64()
   external int ullLong;
 
@@ -3179,7 +3179,7 @@ class BLUETOOTH_RADIO_INFO extends Struct {
   @Uint32()
   external int dwSize;
 
-  external BLUETOOTH_ADDRESS address;
+  external BLUETOOTH_ADDRESS_STRUCT address;
 
   // WCHAR szName[ BLUETOOTH_MAX_NAME_SIZE ];
   @Uint64()

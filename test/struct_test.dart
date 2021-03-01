@@ -484,11 +484,11 @@ void main() {
       expect(sizeOf<BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS>(), equals(576));
     }
   });
-  test('Struct BLUETOOTH_DEVICE_INFO is the right size', () {
+  test('Struct BLUETOOTH_DEVICE_INFO_STRUCT is the right size', () {
     if (is64bitOS) {
-      expect(sizeOf<BLUETOOTH_DEVICE_INFO>(), equals(560));
+      expect(sizeOf<BLUETOOTH_DEVICE_INFO_STRUCT>(), equals(560));
     } else {
-      expect(sizeOf<BLUETOOTH_DEVICE_INFO>(), equals(560));
+      expect(sizeOf<BLUETOOTH_DEVICE_INFO_STRUCT>(), equals(560));
     }
   });
   test('Struct BLUETOOTH_DEVICE_SEARCH_PARAMS is the right size', () {
@@ -507,9 +507,9 @@ void main() {
   });
   test('Struct BLUETOOTH_ADDRESS is the right size', () {
     if (is64bitOS) {
-      expect(sizeOf<BLUETOOTH_ADDRESS>(), equals(8));
+      expect(sizeOf<BLUETOOTH_ADDRESS_STRUCT>(), equals(8));
     } else {
-      expect(sizeOf<BLUETOOTH_ADDRESS>(), equals(8));
+      expect(sizeOf<BLUETOOTH_ADDRESS_STRUCT>(), equals(8));
     }
   });
   test('Struct BLUETOOTH_RADIO_INFO is the right size', () {
