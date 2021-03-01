@@ -2,18 +2,22 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
+import 'package:win32/win32.dart';
+
 List<String> namespaces = [];
 
 void initNamespaces(Scope scope) {
-  final ns = <String>{};
+  // Use a Set to avoid duplication
+  final namespaceSet = <String>{};
 
   final scope = MetadataStore.getScopeForFile('tool/win32/Windows.Win32.winmd');
   for (final td in scope.typeDefs) {
     if (td.typeName.startsWith('Windows.Win32')) {
-      ns.add(td.typeName.split('.')[2]);
+      final namespace = td.typeName.split('.')[2];
+      namespaceSet.add('Windows.Win32.$namespace');
     }
   }
-  namespaces = ns.toList();
+  namespaces = namespaceSet.toList();
 }
 
 void main() {
@@ -23,8 +27,8 @@ void main() {
   for (final namespace in namespaces) {
     final folderName = namespace.split('.').last.toLowerCase();
 
-    final filteredEnums = scope.enums.where(
-        (typedef) => typedef.typeName.startsWith('Windows.Win32.$namespace'));
+    final filteredEnums =
+        scope.enums.where((typedef) => typedef.typeName.startsWith(namespace));
 
     if (filteredEnums.isNotEmpty) {
       Directory('lib/src/$folderName').createSync();
@@ -33,7 +37,7 @@ void main() {
           File('lib/src/$folderName/enums.dart').openSync(mode: FileMode.write);
 
       final enumsLength = filteredEnums.length;
-      print('There are $enumsLength enums in $namespace.');
+      print('Processing $enumsLength enums in $namespace.');
       final buffer = StringBuffer();
 
       for (final enumClass in filteredEnums) {
@@ -56,8 +60,10 @@ void main() {
 
         // The first field is always the special field _value
         for (final field in enumClass.fields.keys.skip(1)) {
-          buffer
-              .writeln('  static const ${field} = ${enumClass.fields[field]};');
+          if (field != null && field.startsWith('_')) continue;
+
+          final value = enumClass.fields[field]!.toHexString(32);
+          buffer.writeln('  static const ${field} = $value;');
         }
 
         buffer.writeln('}\n');
