@@ -1,0 +1,325 @@
+/// {@category Enum}
+class MBN_SIGNAL_CONSTANTS {
+  static const MBN_RSSI_DEFAULT = 0xffffffff;
+  static const MBN_RSSI_DISABLE = 0x00000000;
+  static const MBN_RSSI_UNKNOWN = 0x00000063;
+  static const MBN_ERROR_RATE_UNKNOWN = 0x00000063;
+}
+
+/// {@category Enum}
+class MBN_CELLULAR_CLASS {
+  static const MBN_CELLULAR_CLASS_NONE = 0x00000000;
+  static const MBN_CELLULAR_CLASS_GSM = 0x00000001;
+  static const MBN_CELLULAR_CLASS_CDMA = 0x00000002;
+}
+
+/// {@category Enum}
+class MBN_VOICE_CLASS {
+  static const MBN_VOICE_CLASS_NONE = 0x00000000;
+  static const MBN_VOICE_CLASS_NO_VOICE = 0x00000001;
+  static const MBN_VOICE_CLASS_SEPARATE_VOICE_DATA = 0x00000002;
+  static const MBN_VOICE_CLASS_SIMULTANEOUS_VOICE_DATA = 0x00000003;
+}
+
+/// {@category Enum}
+class MBN_PROVIDER_STATE {
+  static const MBN_PROVIDER_STATE_NONE = 0x00000000;
+  static const MBN_PROVIDER_STATE_HOME = 0x00000001;
+  static const MBN_PROVIDER_STATE_FORBIDDEN = 0x00000002;
+  static const MBN_PROVIDER_STATE_PREFERRED = 0x00000004;
+  static const MBN_PROVIDER_STATE_VISIBLE = 0x00000008;
+  static const MBN_PROVIDER_STATE_REGISTERED = 0x00000010;
+  static const MBN_PROVIDER_STATE_PREFERRED_MULTICARRIER = 0x00000020;
+}
+
+/// {@category Enum}
+class MBN_PROVIDER_CONSTANTS {
+  static const MBN_PROVIDERNAME_LEN = 0x00000014;
+  static const MBN_PROVIDERID_LEN = 0x00000006;
+}
+
+/// {@category Enum}
+class MBN_INTERFACE_CAPS_CONSTANTS {
+  static const MBN_DEVICEID_LEN = 0x00000012;
+  static const MBN_MANUFACTURER_LEN = 0x00000020;
+  static const MBN_MODEL_LEN = 0x00000020;
+  static const MBN_FIRMWARE_LEN = 0x00000020;
+}
+
+/// {@category Enum}
+class MBN_DATA_CLASS {
+  static const MBN_DATA_CLASS_NONE = 0x00000000;
+  static const MBN_DATA_CLASS_GPRS = 0x00000001;
+  static const MBN_DATA_CLASS_EDGE = 0x00000002;
+  static const MBN_DATA_CLASS_UMTS = 0x00000004;
+  static const MBN_DATA_CLASS_HSDPA = 0x00000008;
+  static const MBN_DATA_CLASS_HSUPA = 0x00000010;
+  static const MBN_DATA_CLASS_LTE = 0x00000020;
+  static const MBN_DATA_CLASS_5G_NSA = 0x00000040;
+  static const MBN_DATA_CLASS_5G_SA = 0x00000080;
+  static const MBN_DATA_CLASS_1XRTT = 0x00010000;
+  static const MBN_DATA_CLASS_1XEVDO = 0x00020000;
+  static const MBN_DATA_CLASS_1XEVDO_REVA = 0x00040000;
+  static const MBN_DATA_CLASS_1XEVDV = 0x00080000;
+  static const MBN_DATA_CLASS_3XRTT = 0x00100000;
+  static const MBN_DATA_CLASS_1XEVDO_REVB = 0x00200000;
+  static const MBN_DATA_CLASS_UMB = 0x00400000;
+  static const MBN_DATA_CLASS_CUSTOM = 0x80000000;
+}
+
+/// {@category Enum}
+class MBN_CTRL_CAPS {
+  static const MBN_CTRL_CAPS_NONE = 0x00000000;
+  static const MBN_CTRL_CAPS_REG_MANUAL = 0x00000001;
+  static const MBN_CTRL_CAPS_HW_RADIO_SWITCH = 0x00000002;
+  static const MBN_CTRL_CAPS_CDMA_MOBILE_IP = 0x00000004;
+  static const MBN_CTRL_CAPS_CDMA_SIMPLE_IP = 0x00000008;
+  static const MBN_CTRL_CAPS_PROTECT_UNIQUEID = 0x00000010;
+  static const MBN_CTRL_CAPS_MODEL_MULTI_CARRIER = 0x00000020;
+  static const MBN_CTRL_CAPS_USSD = 0x00000040;
+  static const MBN_CTRL_CAPS_MULTI_MODE = 0x00000080;
+}
+
+/// {@category Enum}
+class MBN_SMS_CAPS {
+  static const MBN_SMS_CAPS_NONE = 0x00000000;
+  static const MBN_SMS_CAPS_PDU_RECEIVE = 0x00000001;
+  static const MBN_SMS_CAPS_PDU_SEND = 0x00000002;
+  static const MBN_SMS_CAPS_TEXT_RECEIVE = 0x00000004;
+  static const MBN_SMS_CAPS_TEXT_SEND = 0x00000008;
+}
+
+/// {@category Enum}
+class MBN_BAND_CLASS {
+  static const MBN_BAND_CLASS_NONE = 0x00000000;
+  static const MBN_BAND_CLASS_0 = 0x00000001;
+  static const MBN_BAND_CLASS_I = 0x00000002;
+  static const MBN_BAND_CLASS_II = 0x00000004;
+  static const MBN_BAND_CLASS_III = 0x00000008;
+  static const MBN_BAND_CLASS_IV = 0x00000010;
+  static const MBN_BAND_CLASS_V = 0x00000020;
+  static const MBN_BAND_CLASS_VI = 0x00000040;
+  static const MBN_BAND_CLASS_VII = 0x00000080;
+  static const MBN_BAND_CLASS_VIII = 0x00000100;
+  static const MBN_BAND_CLASS_IX = 0x00000200;
+  static const MBN_BAND_CLASS_X = 0x00000400;
+  static const MBN_BAND_CLASS_XI = 0x00000800;
+  static const MBN_BAND_CLASS_XII = 0x00001000;
+  static const MBN_BAND_CLASS_XIII = 0x00002000;
+  static const MBN_BAND_CLASS_XIV = 0x00004000;
+  static const MBN_BAND_CLASS_XV = 0x00008000;
+  static const MBN_BAND_CLASS_XVI = 0x00010000;
+  static const MBN_BAND_CLASS_XVII = 0x00020000;
+  static const MBN_BAND_CLASS_CUSTOM = 0x80000000;
+}
+
+/// {@category Enum}
+class MBN_READY_STATE {
+  static const MBN_READY_STATE_OFF = 0x00000000;
+  static const MBN_READY_STATE_INITIALIZED = 0x00000001;
+  static const MBN_READY_STATE_SIM_NOT_INSERTED = 0x00000002;
+  static const MBN_READY_STATE_BAD_SIM = 0x00000003;
+  static const MBN_READY_STATE_FAILURE = 0x00000004;
+  static const MBN_READY_STATE_NOT_ACTIVATED = 0x00000005;
+  static const MBN_READY_STATE_DEVICE_LOCKED = 0x00000006;
+  static const MBN_READY_STATE_DEVICE_BLOCKED = 0x00000007;
+  static const MBN_READY_STATE_NO_ESIM_PROFILE = 0x00000008;
+}
+
+/// {@category Enum}
+class MBN_ACTIVATION_STATE {
+  static const MBN_ACTIVATION_STATE_NONE = 0x00000000;
+  static const MBN_ACTIVATION_STATE_ACTIVATED = 0x00000001;
+  static const MBN_ACTIVATION_STATE_ACTIVATING = 0x00000002;
+  static const MBN_ACTIVATION_STATE_DEACTIVATED = 0x00000003;
+  static const MBN_ACTIVATION_STATE_DEACTIVATING = 0x00000004;
+}
+
+/// {@category Enum}
+class MBN_CONNECTION_MODE {
+  static const MBN_CONNECTION_MODE_PROFILE = 0x00000000;
+  static const MBN_CONNECTION_MODE_TMP_PROFILE = 0x00000001;
+}
+
+/// {@category Enum}
+class MBN_VOICE_CALL_STATE {
+  static const MBN_VOICE_CALL_STATE_NONE = 0x00000000;
+  static const MBN_VOICE_CALL_STATE_IN_PROGRESS = 0x00000001;
+  static const MBN_VOICE_CALL_STATE_HANGUP = 0x00000002;
+}
+
+/// {@category Enum}
+class MBN_REGISTRATION_CONSTANTS {
+  static const MBN_ROAMTEXT_LEN = 0x00000040;
+  static const MBN_CDMA_DEFAULT_PROVIDER_ID = 0x00000000;
+}
+
+/// {@category Enum}
+class MBN_REGISTER_STATE {
+  static const MBN_REGISTER_STATE_NONE = 0x00000000;
+  static const MBN_REGISTER_STATE_DEREGISTERED = 0x00000001;
+  static const MBN_REGISTER_STATE_SEARCHING = 0x00000002;
+  static const MBN_REGISTER_STATE_HOME = 0x00000003;
+  static const MBN_REGISTER_STATE_ROAMING = 0x00000004;
+  static const MBN_REGISTER_STATE_PARTNER = 0x00000005;
+  static const MBN_REGISTER_STATE_DENIED = 0x00000006;
+}
+
+/// {@category Enum}
+class MBN_REGISTER_MODE {
+  static const MBN_REGISTER_MODE_NONE = 0x00000000;
+  static const MBN_REGISTER_MODE_AUTOMATIC = 0x00000001;
+  static const MBN_REGISTER_MODE_MANUAL = 0x00000002;
+}
+
+/// {@category Enum}
+class MBN_PIN_CONSTANTS {
+  static const MBN_ATTEMPTS_REMAINING_UNKNOWN = 0xffffffff;
+  static const MBN_PIN_LENGTH_UNKNOWN = 0xffffffff;
+}
+
+/// {@category Enum}
+class MBN_PIN_STATE {
+  static const MBN_PIN_STATE_NONE = 0x00000000;
+  static const MBN_PIN_STATE_ENTER = 0x00000001;
+  static const MBN_PIN_STATE_UNBLOCK = 0x00000002;
+}
+
+/// {@category Enum}
+class MBN_PIN_TYPE {
+  static const MBN_PIN_TYPE_NONE = 0x00000000;
+  static const MBN_PIN_TYPE_CUSTOM = 0x00000001;
+  static const MBN_PIN_TYPE_PIN1 = 0x00000002;
+  static const MBN_PIN_TYPE_PIN2 = 0x00000003;
+  static const MBN_PIN_TYPE_DEVICE_SIM_PIN = 0x00000004;
+  static const MBN_PIN_TYPE_DEVICE_FIRST_SIM_PIN = 0x00000005;
+  static const MBN_PIN_TYPE_NETWORK_PIN = 0x00000006;
+  static const MBN_PIN_TYPE_NETWORK_SUBSET_PIN = 0x00000007;
+  static const MBN_PIN_TYPE_SVC_PROVIDER_PIN = 0x00000008;
+  static const MBN_PIN_TYPE_CORPORATE_PIN = 0x00000009;
+  static const MBN_PIN_TYPE_SUBSIDY_LOCK = 0x0000000a;
+}
+
+/// {@category Enum}
+class MBN_PIN_MODE {
+  static const MBN_PIN_MODE_ENABLED = 0x00000001;
+  static const MBN_PIN_MODE_DISABLED = 0x00000002;
+}
+
+/// {@category Enum}
+class MBN_PIN_FORMAT {
+  static const MBN_PIN_FORMAT_NONE = 0x00000000;
+  static const MBN_PIN_FORMAT_NUMERIC = 0x00000001;
+  static const MBN_PIN_FORMAT_ALPHANUMERIC = 0x00000002;
+}
+
+/// {@category Enum}
+class MBN_CONTEXT_CONSTANTS {
+  static const MBN_ACCESSSTRING_LEN = 0x00000064;
+  static const MBN_USERNAME_LEN = 0x000000ff;
+  static const MBN_PASSWORD_LEN = 0x000000ff;
+  static const MBN_CONTEXT_ID_APPEND = 0xffffffff;
+}
+
+/// {@category Enum}
+class MBN_AUTH_PROTOCOL {
+  static const MBN_AUTH_PROTOCOL_NONE = 0x00000000;
+  static const MBN_AUTH_PROTOCOL_PAP = 0x00000001;
+  static const MBN_AUTH_PROTOCOL_CHAP = 0x00000002;
+  static const MBN_AUTH_PROTOCOL_MSCHAPV2 = 0x00000003;
+}
+
+/// {@category Enum}
+class MBN_COMPRESSION {
+  static const MBN_COMPRESSION_NONE = 0x00000000;
+  static const MBN_COMPRESSION_ENABLE = 0x00000001;
+}
+
+/// {@category Enum}
+class MBN_CONTEXT_TYPE {
+  static const MBN_CONTEXT_TYPE_NONE = 0x00000000;
+  static const MBN_CONTEXT_TYPE_INTERNET = 0x00000001;
+  static const MBN_CONTEXT_TYPE_VPN = 0x00000002;
+  static const MBN_CONTEXT_TYPE_VOICE = 0x00000003;
+  static const MBN_CONTEXT_TYPE_VIDEO_SHARE = 0x00000004;
+  static const MBN_CONTEXT_TYPE_CUSTOM = 0x00000005;
+  static const MBN_CONTEXT_TYPE_PURCHASE = 0x00000006;
+}
+
+/// {@category Enum}
+class WWAEXT_SMS_CONSTANTS {
+  static const MBN_MESSAGE_INDEX_NONE = 0x00000000;
+  static const MBN_CDMA_SHORT_MSG_SIZE_UNKNOWN = 0x00000000;
+  static const MBN_CDMA_SHORT_MSG_SIZE_MAX = 0x000000a0;
+}
+
+/// {@category Enum}
+class MBN_MSG_STATUS {
+  static const MBN_MSG_STATUS_NEW = 0x00000000;
+  static const MBN_MSG_STATUS_OLD = 0x00000001;
+  static const MBN_MSG_STATUS_DRAFT = 0x00000002;
+  static const MBN_MSG_STATUS_SENT = 0x00000003;
+}
+
+/// {@category Enum}
+class MBN_SMS_CDMA_LANG {
+  static const MBN_SMS_CDMA_LANG_NONE = 0x00000000;
+  static const MBN_SMS_CDMA_LANG_ENGLISH = 0x00000001;
+  static const MBN_SMS_CDMA_LANG_FRENCH = 0x00000002;
+  static const MBN_SMS_CDMA_LANG_SPANISH = 0x00000003;
+  static const MBN_SMS_CDMA_LANG_JAPANESE = 0x00000004;
+  static const MBN_SMS_CDMA_LANG_KOREAN = 0x00000005;
+  static const MBN_SMS_CDMA_LANG_CHINESE = 0x00000006;
+  static const MBN_SMS_CDMA_LANG_HEBREW = 0x00000007;
+}
+
+/// {@category Enum}
+class MBN_SMS_CDMA_ENCODING {
+  static const MBN_SMS_CDMA_ENCODING_OCTET = 0x00000000;
+  static const MBN_SMS_CDMA_ENCODING_EPM = 0x00000001;
+  static const MBN_SMS_CDMA_ENCODING_7BIT_ASCII = 0x00000002;
+  static const MBN_SMS_CDMA_ENCODING_IA5 = 0x00000003;
+  static const MBN_SMS_CDMA_ENCODING_UNICODE = 0x00000004;
+  static const MBN_SMS_CDMA_ENCODING_SHIFT_JIS = 0x00000005;
+  static const MBN_SMS_CDMA_ENCODING_KOREAN = 0x00000006;
+  static const MBN_SMS_CDMA_ENCODING_LATIN_HEBREW = 0x00000007;
+  static const MBN_SMS_CDMA_ENCODING_LATIN = 0x00000008;
+  static const MBN_SMS_CDMA_ENCODING_GSM_7BIT = 0x00000009;
+}
+
+/// {@category Enum}
+class MBN_SMS_FLAG {
+  static const MBN_SMS_FLAG_ALL = 0x00000000;
+  static const MBN_SMS_FLAG_INDEX = 0x00000001;
+  static const MBN_SMS_FLAG_NEW = 0x00000002;
+  static const MBN_SMS_FLAG_OLD = 0x00000003;
+  static const MBN_SMS_FLAG_SENT = 0x00000004;
+  static const MBN_SMS_FLAG_DRAFT = 0x00000005;
+}
+
+/// {@category Enum}
+class MBN_SMS_STATUS_FLAG {
+  static const MBN_SMS_FLAG_NONE = 0x00000000;
+  static const MBN_SMS_FLAG_MESSAGE_STORE_FULL = 0x00000001;
+  static const MBN_SMS_FLAG_NEW_MESSAGE = 0x00000002;
+}
+
+/// {@category Enum}
+class MBN_SMS_FORMAT {
+  static const MBN_SMS_FORMAT_NONE = 0x00000000;
+  static const MBN_SMS_FORMAT_PDU = 0x00000001;
+  static const MBN_SMS_FORMAT_TEXT = 0x00000002;
+}
+
+/// {@category Enum}
+class MBN_RADIO {
+  static const MBN_RADIO_OFF = 0x00000000;
+  static const MBN_RADIO_ON = 0x00000001;
+}
+
+/// {@category Enum}
+class MBN_DEVICE_SERVICES_INTERFACE_STATE {
+  static const MBN_DEVICE_SERVICES_CAPABLE_INTERFACE_ARRIVAL = 0x00000000;
+  static const MBN_DEVICE_SERVICES_CAPABLE_INTERFACE_REMOVAL = 0x00000001;
+}
+

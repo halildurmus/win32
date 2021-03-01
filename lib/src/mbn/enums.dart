@@ -1,0 +1,5 @@
+/// {@category Enum}
+class MBN_DEVICE_SERVICE_SESSIONS_STATE {
+  static const MBN_DEVICE_SERVICE_SESSIONS_RESTORED = 0x00000000;
+}
+
