@@ -27,8 +27,6 @@ const winmdGenerated = [
 // api-ms-win-core-winrt-string is broken because it is used by the generation
 // itself
 
-// bthprops is broken because of BLUETOOTH_DEVICE_INFO_STRUCT incorrect name
-
 // shcore is missing because module is api-ms-win-shcore-scaling-l1-1-1
 
 // shell32 is missing because of SHGetKnownFolderPath (Dart test fails)

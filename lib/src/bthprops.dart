@@ -27,7 +27,7 @@ final _bthprops = DynamicLibrary.open('bthprops.cpl');
 /// DWORD BluetoothAuthenticateDeviceEx(
 ///   HWND                        hwndParentIn,
 ///   HANDLE                      hRadioIn,
-///   BLUETOOTH_DEVICE_INFO       *pbtdiInout,
+///   BLUETOOTH_DEVICE_INFO_STRUCT       *pbtdiInout,
 ///   PBLUETOOTH_OOB_DATA_INFO    pbtOobData,
 ///   AUTHENTICATION_REQUIREMENTS authenticationRequirement
 /// );
@@ -62,7 +62,7 @@ int BluetoothAuthenticateDeviceEx(
 /// ```c
 /// BOOL BluetoothDisplayDeviceProperties(
 ///   HWND                  hwndParent,
-///   BLUETOOTH_DEVICE_INFO *pbtdi
+///   BLUETOOTH_DEVICE_INFO_STRUCT *pbtdi
 /// );
 /// ```
 /// {@category bthprops}
@@ -119,7 +119,7 @@ int BluetoothEnableIncomingConnections(int hRadio, int fEnabled) {
 /// ```c
 /// DWORD BluetoothEnumerateInstalledServices(
 ///   HANDLE                      hRadio,
-///   const BLUETOOTH_DEVICE_INFO *pbtdi,
+///   const BLUETOOTH_DEVICE_INFO_STRUCT *pbtdi,
 ///   DWORD                       *pcServiceInout,
 ///   GUID                        *pGuidServices
 /// );
@@ -167,7 +167,7 @@ int BluetoothFindDeviceClose(int hFind) {
 /// ```c
 /// HBLUETOOTH_DEVICE_FIND BluetoothFindFirstDevice(
 ///   const BLUETOOTH_DEVICE_SEARCH_PARAMS *pbtsp,
-///   BLUETOOTH_DEVICE_INFO                *pbtdi
+///   BLUETOOTH_DEVICE_INFO_STRUCT                *pbtdi
 /// );
 /// ```
 /// {@category bthprops}
@@ -207,7 +207,7 @@ int BluetoothFindFirstRadio(
 /// ```c
 /// BOOL BluetoothFindNextDevice(
 ///   HBLUETOOTH_DEVICE_FIND hFind,
-///   BLUETOOTH_DEVICE_INFO  *pbtdi
+///   BLUETOOTH_DEVICE_INFO_STRUCT  *pbtdi
 /// );
 /// ```
 /// {@category bthprops}
@@ -330,7 +330,7 @@ int BluetoothIsVersionAvailable(int MajorVersion, int MinorVersion) {
 ///
 /// ```c
 /// DWORD BluetoothRegisterForAuthenticationEx(
-///   const BLUETOOTH_DEVICE_INFO            *pbtdiIn,
+///   const BLUETOOTH_DEVICE_INFO_STRUCT            *pbtdiIn,
 ///   HBLUETOOTH_AUTHENTICATION_REGISTRATION *phRegHandleOut,
 ///   PFN_AUTHENTICATION_CALLBACK_EX         pfnCallbackIn,
 ///   PVOID                                  pvParam
@@ -363,7 +363,7 @@ int BluetoothRegisterForAuthenticationEx(
 ///
 /// ```c
 /// DWORD BluetoothRemoveDevice(
-///   const BLUETOOTH_ADDRESS *pAddress
+///   const BLUETOOTH_ADDRESS_STRUCT *pAddress
 /// );
 /// ```
 /// {@category bthprops}
@@ -381,7 +381,7 @@ int BluetoothRemoveDevice(Pointer<BLUETOOTH_ADDRESS_STRUCT> pAddress) {
 /// ```c
 /// DWORD BluetoothSetServiceState(
 ///   HANDLE                      hRadio,
-///   const BLUETOOTH_DEVICE_INFO *pbtdi,
+///   const BLUETOOTH_DEVICE_INFO_STRUCT *pbtdi,
 ///   const GUID                  *pGuidService,
 ///   DWORD                       dwServiceFlags
 /// );
@@ -428,7 +428,7 @@ int BluetoothUnregisterAuthentication(int hRegHandle) {
 ///
 /// ```c
 /// DWORD BluetoothUpdateDeviceRecord(
-///   const BLUETOOTH_DEVICE_INFO *pbtdi
+///   const BLUETOOTH_DEVICE_INFO_STRUCT *pbtdi
 /// );
 /// ```
 /// {@category bthprops}

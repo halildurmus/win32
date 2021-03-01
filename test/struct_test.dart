@@ -505,7 +505,7 @@ void main() {
       expect(sizeOf<BLUETOOTH_FIND_RADIO_PARAMS>(), equals(4));
     }
   });
-  test('Struct BLUETOOTH_ADDRESS is the right size', () {
+  test('Struct BLUETOOTH_ADDRESS_STRUCT is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<BLUETOOTH_ADDRESS_STRUCT>(), equals(8));
     } else {
