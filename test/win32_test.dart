@@ -280,5 +280,18 @@ void main() {
       expect(param.typeIdentifier.name, endsWith('FONTENUMPROCW'));
       expect(param.typeIdentifier.typeArgs, isEmpty);
     });
+
+    test('Naked structs are generated correctly', () {
+      final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+      final typedef = scope['Windows.Win32.SystemServices.Apis']!;
+      final api = typedef.findMethod('InitializeProcThreadAttributeList')!;
+      final param = api.parameters.first;
+
+      expect(param.name, equals('lpAttributeList'));
+      expect(
+          param.typeIdentifier.corType, equals(CorElementType.ELEMENT_TYPE_I));
+      expect(param.typeIdentifier.name, equals('intptr'));
+      expect(param.typeIdentifier.typeArgs, isEmpty);
+    });
   }
 }
