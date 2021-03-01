@@ -8,6 +8,7 @@ import 'package:win32/win32.dart';
 void main() {
   if (isWindowsRuntimeAvailable()) {
     late ICalendar calendar;
+
     setUp(() {
       winrtInitialize();
 
@@ -95,7 +96,11 @@ void main() {
 
     test('Calendar resolved language', () {
       final hstrPtr = calloc<IntPtr>()..value = calendar.ResolvedLanguage;
-      expect(convertFromHString(hstrPtr), equals('en-US'));
+      final lang = convertFromHString(hstrPtr);
+
+      // Should be something like en-US
+      expect(lang[2], equals('-'));
+      expect(lang.length, equals(5));
       free(hstrPtr);
     });
 
