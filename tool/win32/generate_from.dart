@@ -16,7 +16,7 @@ const winmdGenerated = [
   'rometadata',
   'shcore',
   // 'shell32',
-  // 'user32',
+  'user32',
   'version',
   'winmm'
 ];
@@ -26,7 +26,5 @@ const winmdGenerated = [
 
 // api-ms-win-core-winrt-string is broken because it is used by the generation
 // itself
-
-// shcore is missing because module is api-ms-win-shcore-scaling-l1-1-1
 
 // shell32 is missing because of SHGetKnownFolderPath (Dart test fails)
