@@ -14,7 +14,7 @@ void main() {
   try {
     final object =
         CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
-    final calendar = ICalendar(object.cast());
+    final calendar = ICalendar(object);
 
     print('Windows Runtime demo. Calling Windows.Globalization.Calendar...\n');
     print('The year is ${calendar.Year}.');

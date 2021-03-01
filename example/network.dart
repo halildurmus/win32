@@ -18,8 +18,8 @@ void main() {
 
   final netManager = NetworkListManager.createInstance();
   final nlmConnectivity = calloc<Uint32>();
-  final enumPtr = calloc<Pointer>();
-  final netPtr = calloc<Pointer>();
+  final enumPtr = calloc<COMObject>();
+  final netPtr = calloc<COMObject>();
   final descPtr = calloc<Pointer<Utf16>>();
   final elements = calloc<Uint32>();
 
@@ -49,16 +49,17 @@ void main() {
       print('Not connected to the Internet.');
     }
 
-    hr = netManager.GetNetworks(NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_ALL, enumPtr);
+    hr = netManager.GetNetworks(
+        NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_ALL, enumPtr.cast());
     if (FAILED(hr)) {
       throw WindowsException(hr);
     }
 
     print('\nNetworks (connected and disconnected) on this machine:');
-    final enumerator = IEnumNetworks(enumPtr.cast());
+    final enumerator = IEnumNetworks(enumPtr);
     hr = enumerator.Next(1, netPtr.cast(), elements);
     while (elements.value == 1) {
-      final network = INetwork(netPtr.cast());
+      final network = INetwork(netPtr);
       hr = network.GetDescription(descPtr);
       if (SUCCEEDED(hr)) {
         print(descPtr.value.toDartString());

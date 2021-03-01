@@ -14,7 +14,7 @@ void main() {
   final fviSize = getVersionBlockSize(lpFilename);
 
   final pBlock = calloc<Uint8>(fviSize);
-  final lpFixedFileVersionInfo = calloc<IntPtr>();
+  final lpFixedFileVersionInfo = calloc<Pointer>();
   final uLen = calloc<Uint32>();
   final subBlock = TEXT(r'\');
 
@@ -24,15 +24,13 @@ void main() {
       throw Exception('GetFileVersionInfo failed.');
     }
 
-    result =
-        VerQueryValue(pBlock, subBlock, lpFixedFileVersionInfo.cast(), uLen);
+    result = VerQueryValue(pBlock, subBlock, lpFixedFileVersionInfo, uLen);
     if (result == 0) {
       throw Exception('VerQueryValue failed.');
     }
 
     final fixedFileVersionInfo =
-        Pointer.fromAddress(lpFixedFileVersionInfo.value)
-            .cast<VS_FIXEDFILEINFO>();
+        lpFixedFileVersionInfo.value.cast<VS_FIXEDFILEINFO>();
 
     print('Version of shell32.dll: '
         '${HIWORD(fixedFileVersionInfo.ref.dwFileVersionMS)}.'

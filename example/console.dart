@@ -37,7 +37,7 @@ Pointer<Uint8> toCString(String buffer) {
   final result = calloc<Uint8>(units.length);
   final nativeString = result.asTypedList(units.length);
   nativeString.setAll(0, units);
-  return result.cast();
+  return result;
 }
 
 /// The newLine function handles carriage returns when the processed input mode

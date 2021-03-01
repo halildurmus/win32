@@ -129,7 +129,7 @@ void main() {
       calloc<PHYSICAL_MONITOR>(physicalMonitorCountPtr.value);
 
   result = GetPhysicalMonitorsFromHMONITOR(primaryMonitorHandle,
-      physicalMonitorCountPtr.value, physicalMonitorArray.cast());
+      physicalMonitorCountPtr.value, physicalMonitorArray);
   if (result == FALSE) {
     throw WindowsException(result);
   }
@@ -166,8 +166,7 @@ void main() {
         'maximum(${maximumBrightnessPtr.value})');
   }
 
-  DestroyPhysicalMonitors(
-      physicalMonitorCountPtr.value, physicalMonitorArray.cast());
+  DestroyPhysicalMonitors(physicalMonitorCountPtr.value, physicalMonitorArray);
 
   // free all the heap-allocated variables
   free(physicalMonitorArray);

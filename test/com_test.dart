@@ -62,11 +62,11 @@ void main() {
         nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
     expect(hr, equals(S_OK));
 
-    final ptr = calloc<COMObject>();
+    final ptr = calloc<Pointer>();
     final clsid = calloc<GUID>()..ref.setGUID(CLSID_FileSaveDialog);
     final iid = calloc<GUID>()..ref.setGUID(IID_IFileSaveDialog);
 
-    hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
+    hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr);
     expect(hr, equals(S_OK));
     expect(ptr.address, isNonZero);
 

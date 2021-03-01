@@ -13,7 +13,7 @@ void main() {
 
       final object =
           CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
-      calendar = ICalendar(object.cast());
+      calendar = ICalendar(object);
     });
 
     test('Calendar year', () {

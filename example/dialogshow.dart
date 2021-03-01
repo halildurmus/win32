@@ -57,11 +57,11 @@ void main() {
         throw WindowsException(hr);
       }
     } else {
-      final ppsi = calloc<Pointer>();
-      hr = fileDialog.GetResult(ppsi);
+      final ppsi = calloc<COMObject>();
+      hr = fileDialog.GetResult(ppsi.cast());
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-      final item = IShellItem(ppsi.cast());
+      final item = IShellItem(ppsi);
       final pathPtr = calloc<Pointer<Utf16>>();
       hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtr);
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
