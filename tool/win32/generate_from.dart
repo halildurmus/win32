@@ -15,7 +15,7 @@ const winmdGenerated = [
   'powrprof',
   'rometadata',
   'shcore',
-  // 'shell32',
+  'shell32',
   'user32',
   'version',
   'winmm'
