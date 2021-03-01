@@ -14,6 +14,13 @@ void main() {
       expect(mdScope.typeDefs.length, greaterThan(50));
     });
 
+    test('Scope modules contain expected user strings', () {
+      final scope =
+          MetadataStore.getScopeForType('Windows.Globalization.Calendar');
+      expect(scope.userStrings.length, equals(1));
+      expect(scope.userStrings.first, equals('0x0001'));
+    });
+
     test('Find a specific WinMD token', () {
       final mdScope = MetadataStore.getScopeForType(
           'Windows.Globalization.ICalendarFactory');

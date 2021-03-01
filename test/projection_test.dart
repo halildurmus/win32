@@ -122,4 +122,14 @@ void main() {
     expect(TypeBuilder.dartType(type),
         equals('Pointer<NativeFunction<EnumFontFamExProc>>'));
   });
+
+  test('Naked structs are represented correctly', () {
+    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final typedef = scope['Windows.Win32.SystemServices.Apis']!;
+    final api = typedef.findMethod('InitializeProcThreadAttributeList')!;
+    final type = api.parameters.first.typeIdentifier; // FONTENUMPROCW
+
+    expect(TypeBuilder.nativeType(type), equals('IntPtr'));
+    expect(TypeBuilder.dartType(type), equals('int'));
+  });
 }
