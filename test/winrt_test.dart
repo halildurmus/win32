@@ -219,8 +219,9 @@ void main() {
 
       final method = winTypeDef.findMethod('put_ViewMode')!;
       final classType = method.parameters.first.typeIdentifier;
+      final typeProjection = TypeProjector(classType);
 
-      expect(TypeBuilder.isTypeValueType(classType), isTrue);
+      expect(typeProjection.isTypeValueType, isTrue);
     });
 
     test('String parameters are accurately represented', () {

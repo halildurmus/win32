@@ -27,6 +27,7 @@ export 'src/com/IMetaDataDispenserEx.dart';
 export 'src/com/IMetaDataImport.dart';
 export 'src/com/IMetaDataImport2.dart';
 
-export 'src/projection/type_builder.dart';
-export 'src/projection/type_printer.dart';
+export 'src/projection/classprojector.dart';
+export 'src/projection/typeprojector.dart';
+export 'src/projection/typeprinter.dart';
 export 'src/projection/types.dart';

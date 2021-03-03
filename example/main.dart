@@ -10,7 +10,7 @@ const winrtType = 'Windows.Foundation.IPropertyValue';
 
 void main(List<String> args) {
   final mdTypeDef = MetadataStore.getMetadataForType(winrtType)!;
-  final projection = TypeBuilder.projectWindowsType(mdTypeDef);
+  final projection = ClassProjector(mdTypeDef).projection;
   final dartClass = TypePrinter.printType(projection);
 
   print(dartClass);
