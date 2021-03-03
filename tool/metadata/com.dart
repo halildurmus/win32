@@ -89,7 +89,7 @@ void main(List<String> args) {
         ? mdTypeDef.interfaces.first.typeName.split('.').last
         : '';
 
-    final projection = TypeBuilder.projectWindowsType(mdTypeDef)
+    final classProjection = ClassProjector(mdTypeDef).projection
       ..inherits = parentInterface
       ..vtableStart = type.vTableStart
       ..sourceType = SourceType.com
@@ -97,7 +97,7 @@ void main(List<String> args) {
       ..clsid = clsid
       ..className = type.typeName.split('.').last.substring(1);
 
-    final dartClass = TypePrinter.printType(projection);
+    final dartClass = TypePrinter.printType(classProjection);
 
     final outputFilename = type.typeName.split('.').last;
     final outputFile =

@@ -33,8 +33,8 @@ void main(List<String> args) {
       throw Exception("Can't find type $type.");
     }
 
-    final projection = TypeBuilder.projectWindowsType(mdTypeDef);
-    final dartClass = TypePrinter.printType(projection);
+    final classProjection = ClassProjector(mdTypeDef).projection;
+    final dartClass = TypePrinter.printType(classProjection);
 
     final outputFilename = type.split('.').last;
     final outputFile =
