@@ -1,3 +1,7 @@
+## 0.4.0-dev.7
+
+- Rework API for projection of metadata
+
 ## 0.4.0-dev.6
 
 - Fix bug associated with vending winmd COM objects
