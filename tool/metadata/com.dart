@@ -14,6 +14,7 @@ class COMType {
 
 const interfacesToGenerate = <COMType>[
   COMType('Windows.Win32.Com.IUnknown'),
+  COMType('Windows.Win32.Shell.IApplicationActivationManager', vTableStart: 3),
   COMType('Windows.Win32.Com.IBindCtx', vTableStart: 3),
   COMType('Windows.Win32.Com.IClassFactory', vTableStart: 3),
   COMType('Windows.Win32.Com.IEnumMoniker', vTableStart: 3),
