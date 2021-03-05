@@ -44,7 +44,7 @@ String processEnumeration(Enumeration enumClass) {
     if (field != null && field.startsWith('_')) continue;
 
     final value = enumClass.fields[field]!.toHexString(32);
-    buffer.writeln('  static const ${field} = $value;');
+    buffer.writeln('  static const $field = $value;');
   }
 
   buffer.writeln('}\n');

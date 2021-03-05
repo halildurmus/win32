@@ -9,12 +9,12 @@
 // -----------------------------------------------------------------------------
 // Linter exceptions
 // -----------------------------------------------------------------------------
-// ignore_for_file: camel_case_types
-// ignore_for_file: camel_case_extensions
+// ignore_for_file: camel_case_types ignore_for_file: camel_case_extensions
 //
 // Why? The linter defaults to throw a warning for types not named as camel
 // case. We deliberately break this convention to match the Win32 underlying
 // types.
+//
 //
 // ignore_for_file: unused_field
 //
@@ -23,6 +23,13 @@
 // we use this feature to ensure that sizeOf<STRUCT_NAME> returns a size at
 // least as large as the underlying native struct. See, for example,
 // ENUMLOGFONTEX.
+//
+//
+// ignore_for_file: unnecessary_getters_setters
+//
+// Why? In structs like VARIANT, we're using getters and setters to project the
+// same underlying data property to various union types. The trivial overhead is
+// outweighed by readability.
 // -----------------------------------------------------------------------------
 
 import 'dart:ffi';
@@ -1540,7 +1547,7 @@ class INPUT extends Struct {
   external int _data4;
 }
 
-extension Pointer_INPUT_Extension on Pointer<INPUT> {
+extension PointerINPUTExtension on Pointer<INPUT> {
   // Location adjusts for padding on 32-bit or 64-bit
   MOUSEINPUT get mi =>
       MOUSEINPUT(cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
