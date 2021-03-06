@@ -86,7 +86,7 @@ class ClassProjector {
           } else {
             methodProjection.parameters.add(ParameterProjection('result',
                 nativeType: 'Pointer<${typeBuilder.nativeType}>',
-                dartType: 'Pointer<${typeBuilder.dartType}>'));
+                dartType: 'Pointer<${typeBuilder.nativeType}>'));
           }
         }
       }
