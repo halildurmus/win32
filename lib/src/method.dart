@@ -355,4 +355,7 @@ class Method extends AttributeObject {
 
     return typeTuple.offsetLength;
   }
+
+  @override
+  String toString() => 'Method: $methodName';
 }

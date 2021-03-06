@@ -106,4 +106,7 @@ class Enumeration extends TypeDef {
       calloc.free(pcTokens);
     }
   }
+
+  @override
+  String toString() => 'Enumeration: $typeName';
 }

@@ -71,4 +71,7 @@ class Parameter extends AttributeObject {
 
   factory Parameter.fromVoid(md.IMetaDataImport2 reader) => Parameter(reader, 0,
       0, 0, TypeIdentifier(CorElementType.ELEMENT_TYPE_VOID), '', Uint8List(0));
+
+  @override
+  String toString() => 'Parameter: $name';
 }

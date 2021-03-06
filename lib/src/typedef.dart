@@ -265,4 +265,7 @@ class TypeDef extends AttributeObject {
 
     return guid;
   }
+
+  @override
+  String toString() => 'TypeDef: $typeName';
 }

@@ -33,7 +33,7 @@ class TypeTuple {
   const TypeTuple(this.typeIdentifier, this.offsetLength);
 
   @override
-  String toString() => '[$typeIdentifier, $offsetLength]';
+  String toString() => 'TypeTuple: [$typeIdentifier, $offsetLength]';
 
   @override
   bool operator ==(Object other) =>

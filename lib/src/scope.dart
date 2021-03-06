@@ -147,4 +147,7 @@ class Scope {
       calloc.free(ptkTypeDef);
     }
   }
+
+  @override
+  String toString() => 'Scope: $name';
 }
