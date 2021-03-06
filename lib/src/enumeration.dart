@@ -27,7 +27,7 @@ class Enumeration extends TypeDef {
   /// Converts an individual field
   Field processFieldToken(int token) {
     final ptkTypeDef = calloc<Uint32>();
-    final szField = calloc<Uint8>(256 * 2).cast<Utf16>();
+    final szField = calloc<Uint16>(256).cast<Utf16>();
     final pchField = calloc<Uint32>();
     final pdwAttr = calloc<Uint32>();
     final ppvSigBlob = calloc<IntPtr>();
@@ -106,4 +106,7 @@ class Enumeration extends TypeDef {
       calloc.free(pcTokens);
     }
   }
+
+  @override
+  String toString() => 'Enumeration: $typeName';
 }

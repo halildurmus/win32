@@ -21,6 +21,7 @@ class Scope {
   final md.IMetaDataImport2 reader;
   final _typedefs = <TypeDef>[];
   final _modules = <Module>[];
+  final _enums = <Enumeration>[];
 
   Scope(this.reader);
 
@@ -70,6 +71,7 @@ class Scope {
     return _typedefs;
   }
 
+  /// Get an enumerated list of modules for this scope.
   List<Module> get modules {
     if (_modules.isEmpty) {
       final phEnum = calloc<IntPtr>();
@@ -117,13 +119,14 @@ class Scope {
   }
 
   List<Enumeration> get enums {
-    final enums = <Enumeration>[];
-    for (final typeDef in typeDefs) {
-      if (typeDef.parent?.typeName == 'System.Enum') {
-        enums.add(Enumeration(typeDef));
+    if (_enums.isEmpty) {
+      for (final typeDef in typeDefs) {
+        if (typeDef.parent?.typeName == 'System.Enum') {
+          _enums.add(Enumeration(typeDef));
+        }
       }
     }
-    return enums;
+    return _enums;
   }
 
   /// Find a typedef by name.
@@ -145,4 +148,7 @@ class Scope {
       calloc.free(ptkTypeDef);
     }
   }
+
+  @override
+  String toString() => 'Scope: $name';
 }

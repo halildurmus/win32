@@ -11,7 +11,7 @@ const typeToGenerate = 'Windows.Win32.NetworkListManager.INetwork';
 void main(List<String> args) {
   final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
   final typedef = scope.findTypeDef(typeToGenerate)!;
-  final projection = TypeBuilder.projectWindowsType(typedef);
+  final projection = ClassProjector(typedef).projection;
   final dartClass = TypePrinter.printType(projection);
 
   print(dartClass);

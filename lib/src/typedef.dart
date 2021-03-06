@@ -40,7 +40,7 @@ class TypeDef extends AttributeObject {
   ///
   /// Typically, typedefs should be obtained from a [WinmdScope] object rather
   /// than being created directly.
-  TypeDef(md.IMetaDataImport2 reader,
+  const TypeDef(md.IMetaDataImport2 reader,
       [int token = 0,
       this.typeName = '',
       this.flags = 0,
@@ -69,7 +69,7 @@ class TypeDef extends AttributeObject {
     final nRead = calloc<Uint32>();
     final tdFlags = calloc<Uint32>();
     final baseClassToken = calloc<Uint32>();
-    final typeName = calloc<Uint8>(256 * 2).cast<Utf16>();
+    final typeName = calloc<Uint16>(256).cast<Utf16>();
 
     try {
       final hr = reader.GetTypeDefProps(
@@ -97,7 +97,7 @@ class TypeDef extends AttributeObject {
   factory TypeDef.fromTypeRefToken(
       md.IMetaDataImport2 reader, int typeRefToken) {
     final ptkResolutionScope = calloc<Uint32>();
-    final szName = calloc<Uint8>(256 * 2).cast<Utf16>();
+    final szName = calloc<Uint16>(256).cast<Utf16>();
     final pchName = calloc<Uint32>();
 
     try {
@@ -265,4 +265,7 @@ class TypeDef extends AttributeObject {
 
     return guid;
   }
+
+  @override
+  String toString() => 'TypeDef: $typeName';
 }

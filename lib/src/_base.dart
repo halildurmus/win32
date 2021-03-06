@@ -34,6 +34,13 @@ abstract class TokenObject {
       calloc.free(pIsGlobal);
     }
   }
+
+  @override
+  int get hashCode => token;
+
+  @override
+  bool operator ==(Object other) =>
+      other is TokenObject && other.token == token;
 }
 
 /// Represents an object that has attributes associated with it.
