@@ -40,7 +40,7 @@ class TypeDef extends AttributeObject {
   ///
   /// Typically, typedefs should be obtained from a [WinmdScope] object rather
   /// than being created directly.
-  TypeDef(md.IMetaDataImport2 reader,
+  const TypeDef(md.IMetaDataImport2 reader,
       [int token = 0,
       this.typeName = '',
       this.flags = 0,

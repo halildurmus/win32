@@ -14,6 +14,12 @@ void main() {
       final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
       expect(scope.name, equals('Windows.Win32.winmd'));
     });
+
+    test('Scope toString() is as expected', () {
+      final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+      expect(scope.toString(), equals('Scope: Windows.Win32.winmd'));
+    });
+
     test('Scope modules contain expected DLLs', () {
       final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
       expect(
@@ -32,6 +38,23 @@ void main() {
       final typedef = scope['Windows.Win32.Gdi.Apis'];
       expect(typedef, isNotNull);
       expect(typedef!.methods.length, isNonZero);
+    });
+
+    test('Typedef is named correctly', () {
+      final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+      final typedef = scope['Windows.Win32.Shell.Apis']!;
+      expect(typedef.typeName, equals('Windows.Win32.Shell.Apis'));
+      expect(typedef.toString(), equals('TypeDef: Windows.Win32.Shell.Apis'));
+    });
+
+    test('Typedef equality is successful', () {
+      final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+      final typedef1 = scope['Windows.Win32.Shell.Apis']!;
+      final typedef2 = scope.findTypeDef('Windows.Win32.Shell.Apis');
+      final typedef3 = scope['Windows.Win32.Gdi.Apis']!;
+
+      expect(typedef1, equals(typedef2));
+      expect(typedef1, isNot(equals(typedef3)));
     });
 
     test('Searching for a non-existent typedef returns null', () {

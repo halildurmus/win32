@@ -71,6 +71,7 @@ class Scope {
     return _typedefs;
   }
 
+  /// Get an enumerated list of modules for this scope.
   List<Module> get modules {
     if (_modules.isEmpty) {
       final phEnum = calloc<IntPtr>();
