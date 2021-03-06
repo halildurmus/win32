@@ -4,6 +4,7 @@ possible to load them and build Dart FFI interop libraries from the results.
 [![pub package](https://img.shields.io/pub/v/winmd.svg)](https://pub.dev/packages/winmd)
 [![Language](https://img.shields.io/badge/language-Dart-blue.svg)](https://dart.dev)
 ![Code Coverage](https://github.com/timsneath/winmd/blob/main/coverage_badge.svg?raw=true)
+![Build](https://github.com/timsneath/winmd/workflows/Build/badge.svg)
 
 ## Architecture
 
