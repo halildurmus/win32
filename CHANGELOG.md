@@ -1,3 +1,7 @@
+## 0.4.0-dev.8
+
+- Refactor code, change enums to return `Uint32` by default.
+
 ## 0.4.0-dev.7
 
 - Rework API for projection of metadata
