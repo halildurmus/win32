@@ -20,4 +20,3 @@ class WNV_CA_NOTIFICATION_TYPE {
   static const WnvCustomerAddressMoved = 0x00000002;
   static const WnvCustomerAddressMax = 0x00000003;
 }
-

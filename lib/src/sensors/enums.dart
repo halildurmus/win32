@@ -49,4 +49,3 @@ class MagnetometerAccuracy {
   static const MAGNETOMETER_ACCURACY_APPROXIMATE = 0x00000002;
   static const MAGNETOMETER_ACCURACY_HIGH = 0x00000003;
 }
-

@@ -184,9 +184,11 @@ class FsrmRuleFlags {
 /// {@category Enum}
 class FsrmClassificationLoggingFlags {
   static const FsrmClassificationLoggingFlags_None = 0x00000000;
-  static const FsrmClassificationLoggingFlags_ClassificationsInLogFile = 0x00000001;
+  static const FsrmClassificationLoggingFlags_ClassificationsInLogFile =
+      0x00000001;
   static const FsrmClassificationLoggingFlags_ErrorsInLogFile = 0x00000002;
-  static const FsrmClassificationLoggingFlags_ClassificationsInSystemLog = 0x00000004;
+  static const FsrmClassificationLoggingFlags_ClassificationsInSystemLog =
+      0x00000004;
   static const FsrmClassificationLoggingFlags_ErrorsInSystemLog = 0x00000008;
 }
 
@@ -194,7 +196,8 @@ class FsrmClassificationLoggingFlags {
 class FsrmExecutionOption {
   static const FsrmExecutionOption_Unknown = 0x00000000;
   static const FsrmExecutionOption_EvaluateUnset = 0x00000001;
-  static const FsrmExecutionOption_ReEvaluate_ConsiderExistingValue = 0x00000002;
+  static const FsrmExecutionOption_ReEvaluate_ConsiderExistingValue =
+      0x00000002;
   static const FsrmExecutionOption_ReEvaluate_IgnoreExistingValue = 0x00000003;
 }
 
@@ -370,4 +373,3 @@ class AdrClientFlags {
   static const AdrClientFlags_FailIfNotSupportedByServer = 0x00000002;
   static const AdrClientFlags_FailIfNotDomainJoined = 0x00000004;
 }
-

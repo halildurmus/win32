@@ -468,4 +468,3 @@ class MIDL_IRemoteDesktopClient_0001 {
   static const KeyCombinationDown = 0x00000004;
   static const KeyCombinationScroll = 0x00000005;
 }
-

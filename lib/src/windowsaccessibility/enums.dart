@@ -452,4 +452,3 @@ class AsyncContentLoadedState {
   static const AsyncContentLoadedState_Progress = 0x00000001;
   static const AsyncContentLoadedState_Completed = 0x00000002;
 }
-

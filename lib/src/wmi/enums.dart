@@ -910,4 +910,3 @@ class WbemObjectTextFormatEnum {
 class WbemConnectOptionsEnum {
   static const wbemConnectFlagUseMaxWait = 0x00000080;
 }
-

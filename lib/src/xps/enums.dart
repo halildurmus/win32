@@ -214,4 +214,3 @@ class EPrintTicketScope {
   static const kPTDocumentScope = 0x00000001;
   static const kPTJobScope = 0x00000002;
 }
-

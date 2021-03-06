@@ -42,4 +42,3 @@ class MONITOR_DPI_TYPE {
   static const MDT_RAW_DPI = 0x00000002;
   static const MDT_DEFAULT = 0x00000000;
 }
-

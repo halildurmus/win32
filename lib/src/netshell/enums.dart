@@ -34,4 +34,3 @@ class NS_MODE_CHANGE {
   static const NETSH_COMMIT_STATE = 0x00000003;
   static const NETSH_SAVE = 0x00000004;
 }
-

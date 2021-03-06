@@ -103,4 +103,3 @@ class EFaultRepRetVal {
   static const frrvErrNoMemory = 0x00000009;
   static const frrvErrDoubleFault = 0x0000000a;
 }
-

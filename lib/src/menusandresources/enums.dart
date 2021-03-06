@@ -19,7 +19,8 @@ class POINTER_INPUT_TYPE {
 
 /// {@category Enum}
 class EDIT_CONTROL_FEATURE {
-  static const EDIT_CONTROL_FEATURE_ENTERPRISE_DATA_PROTECTION_PASTE_SUPPORT = 0x00000000;
+  static const EDIT_CONTROL_FEATURE_ENTERPRISE_DATA_PROTECTION_PASTE_SUPPORT =
+      0x00000000;
   static const EDIT_CONTROL_FEATURE_PASTE_NOTIFICATIONS = 0x00000001;
 }
 
@@ -64,4 +65,3 @@ class MrmResourceIndexerMessageSeverity {
   static const MrmResourceIndexerMessageSeverityWarning = 0x00000002;
   static const MrmResourceIndexerMessageSeverityError = 0x00000003;
 }
-

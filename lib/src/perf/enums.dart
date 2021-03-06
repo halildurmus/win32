@@ -131,4 +131,3 @@ class FolderActionSteps {
   static const plaDeleteCab = 0x00000008;
   static const plaDeleteReport = 0x00000010;
 }
-

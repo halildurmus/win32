@@ -44,4 +44,3 @@ class TRANSPORT_TYPE {
   static const UseTransportType_Wsk = 0x00000001;
   static const UseTransportType_Quic = 0x00000002;
 }
-

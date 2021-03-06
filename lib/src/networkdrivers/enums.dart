@@ -186,4 +186,3 @@ class NL_ROUTER_DISCOVERY_BEHAVIOR {
   static const RouterDiscoveryDhcp = 0x00000002;
   static const RouterDiscoveryUnchanged = 0xffffffff;
 }
-

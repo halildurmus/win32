@@ -963,4 +963,3 @@ class INPUT_MESSAGE_ORIGIN_ID {
   static const IMO_INJECTED = 0x00000002;
   static const IMO_SYSTEM = 0x00000004;
 }
-

@@ -210,4 +210,3 @@ class InputScope {
   static const IS_XML = 0xfffffffc;
   static const IS_ENUMSTRING = 0xfffffffb;
 }
-

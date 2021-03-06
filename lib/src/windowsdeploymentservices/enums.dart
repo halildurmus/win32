@@ -132,4 +132,3 @@ class WDSTRANSPORT_TFTP_CAPABILITY {
   static const WdsTptTftpCapMaximumBlockSize = 0x00000001;
   static const WdsTptTftpCapVariableWindow = 0x00000002;
 }
-

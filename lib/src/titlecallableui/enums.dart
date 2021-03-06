@@ -23,4 +23,3 @@ class KnownGamingPrivileges {
   static const XPRIVILEGE_MULTIPLAYER_SESSIONS = 0x000000fe;
   static const XPRIVILEGE_ADD_FRIEND = 0x000000ff;
 }
-

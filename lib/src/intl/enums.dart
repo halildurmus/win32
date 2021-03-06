@@ -1082,7 +1082,8 @@ class UBlockCode {
   static const UBLOCK_MAHJONG_TILES = 0x000000aa;
   static const UBLOCK_DOMINO_TILES = 0x000000ab;
   static const UBLOCK_SAMARITAN = 0x000000ac;
-  static const UBLOCK_UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS_EXTENDED = 0x000000ad;
+  static const UBLOCK_UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS_EXTENDED =
+      0x000000ad;
   static const UBLOCK_TAI_THAM = 0x000000ae;
   static const UBLOCK_VEDIC_EXTENSIONS = 0x000000af;
   static const UBLOCK_LISU = 0x000000b0;
@@ -2353,4 +2354,3 @@ class UTransDirection {
   static const UTRANS_FORWARD = 0x00000000;
   static const UTRANS_REVERSE = 0x00000001;
 }
-

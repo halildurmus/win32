@@ -70,4 +70,3 @@ class TARGET_INFORMATION_CLASS {
   static const TargetFlags = 0x00000006;
   static const LoginOptions = 0x00000007;
 }
-

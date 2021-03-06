@@ -227,7 +227,8 @@ class NL_NETWORK_CONNECTIVITY_LEVEL_HINT {
   static const NetworkConnectivityLevelHintNone = 0x00000001;
   static const NetworkConnectivityLevelHintLocalAccess = 0x00000002;
   static const NetworkConnectivityLevelHintInternetAccess = 0x00000003;
-  static const NetworkConnectivityLevelHintConstrainedInternetAccess = 0x00000004;
+  static const NetworkConnectivityLevelHintConstrainedInternetAccess =
+      0x00000004;
   static const NetworkConnectivityLevelHintHidden = 0x00000005;
 }
 
@@ -238,4 +239,3 @@ class NL_NETWORK_CONNECTIVITY_COST_HINT {
   static const NetworkConnectivityCostHintFixed = 0x00000002;
   static const NetworkConnectivityCostHintVariable = 0x00000003;
 }
-

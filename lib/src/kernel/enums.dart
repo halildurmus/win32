@@ -61,4 +61,3 @@ class SUITE_TYPE {
   static const MultiUserTS = 0x00000011;
   static const MaxSuiteType = 0x00000012;
 }
-

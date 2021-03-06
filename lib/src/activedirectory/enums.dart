@@ -499,4 +499,3 @@ class DSROLE_OPERATION_STATE {
   static const DsRoleOperationActive = 0x00000001;
   static const DsRoleOperationNeedReboot = 0x00000002;
 }
-

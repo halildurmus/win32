@@ -40,4 +40,3 @@ class RdcMappingAccessMode {
   static const RDCMAPPING_ReadOnly = 0x00000001;
   static const RDCMAPPING_ReadWrite = 0x00000002;
 }
-

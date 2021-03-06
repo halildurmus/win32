@@ -326,4 +326,3 @@ class WMPSubscriptionDownloadState {
   static const wmpsdlsCompleted = 0x00000003;
   static const wmpsdlsCancelled = 0x00000004;
 }
-

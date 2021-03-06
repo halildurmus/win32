@@ -15,4 +15,3 @@ class ColumnSortOrder {
   static const SortOrder_Ascending = 0x00000000;
   static const SortOrder_Descending = 0x00000001;
 }
-

@@ -219,4 +219,3 @@ class REGKIND {
   static const REGKIND_REGISTER = 0x00000001;
   static const REGKIND_NONE = 0x00000002;
 }
-

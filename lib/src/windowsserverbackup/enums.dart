@@ -8,4 +8,3 @@ class WSB_OB_STATUS_ENTRY_PAIR_TYPE {
   static const WSB_OB_ET_SIZE = 0x00000005;
   static const WSB_OB_ET_MAX = 0x00000006;
 }
-

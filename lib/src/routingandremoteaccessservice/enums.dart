@@ -159,4 +159,3 @@ class RTM_EVENT_TYPE {
   static const RTM_ROUTE_EXPIRED = 0x00000002;
   static const RTM_CHANGE_NOTIFICATION = 0x00000003;
 }
-

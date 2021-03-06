@@ -99,4 +99,3 @@ class JET_INDEXCHECKING {
   static const JET_IndexCheckingDeferToOpenTable = 0x00000002;
   static const JET_IndexCheckingMax = 0x00000003;
 }
-

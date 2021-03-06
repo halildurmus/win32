@@ -126,4 +126,3 @@ class tagMxdcS0PageEnums {
   static const MXDC_RESOURCE_PNG_THUMBNAIL = 0x00000008;
   static const MXDC_RESOURCE_MAX = 0x00000009;
 }
-

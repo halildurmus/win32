@@ -116,4 +116,3 @@ class GROUPPROP {
   static const GROUPPROP_DISPLAYNAME = 0x0000000b;
   static const GROUPPROP_DESCRIPTION = 0x0000000c;
 }
-

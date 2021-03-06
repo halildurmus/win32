@@ -734,7 +734,8 @@ class SECPKG_ATTR_LCT_STATUS {
 class SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS {
   static const SecApplicationProtocolNegotiationStatus_None = 0x00000000;
   static const SecApplicationProtocolNegotiationStatus_Success = 0x00000001;
-  static const SecApplicationProtocolNegotiationStatus_SelectedClientOnly = 0x00000002;
+  static const SecApplicationProtocolNegotiationStatus_SelectedClientOnly =
+      0x00000002;
 }
 
 /// {@category Enum}
@@ -967,13 +968,19 @@ class TPMVSCMGR_ERROR {
 /// {@category Enum}
 class KeyCredentialManagerOperationErrorStates {
   static const KeyCredentialManagerOperationErrorStateNone = 0x00000000;
-  static const KeyCredentialManagerOperationErrorStateDeviceJoinFailure = 0x00000001;
+  static const KeyCredentialManagerOperationErrorStateDeviceJoinFailure =
+      0x00000001;
   static const KeyCredentialManagerOperationErrorStateTokenFailure = 0x00000002;
-  static const KeyCredentialManagerOperationErrorStateCertificateFailure = 0x00000004;
-  static const KeyCredentialManagerOperationErrorStateRemoteSessionFailure = 0x00000008;
-  static const KeyCredentialManagerOperationErrorStatePolicyFailure = 0x00000010;
-  static const KeyCredentialManagerOperationErrorStateHardwareFailure = 0x00000020;
-  static const KeyCredentialManagerOperationErrorStatePinExistsFailure = 0x00000040;
+  static const KeyCredentialManagerOperationErrorStateCertificateFailure =
+      0x00000004;
+  static const KeyCredentialManagerOperationErrorStateRemoteSessionFailure =
+      0x00000008;
+  static const KeyCredentialManagerOperationErrorStatePolicyFailure =
+      0x00000010;
+  static const KeyCredentialManagerOperationErrorStateHardwareFailure =
+      0x00000020;
+  static const KeyCredentialManagerOperationErrorStatePinExistsFailure =
+      0x00000040;
 }
 
 /// {@category Enum}
@@ -1647,7 +1654,8 @@ class CERTENROLL_OBJECTID {
   static const XCN_OID_PKCS_12_pbeWithSHA1And3KeyTripleDES = 0x00000194;
   static const XCN_OID_PKCS_12_pbeWithSHA1And40BitRC2 = 0x00000195;
   static const XCN_OID_PKCS_12_pbeWithSHA1And40BitRC4 = 0x00000196;
-  static const XCN_OID_PKCS_12_PROTECTED_PASSWORD_SECRET_BAG_TYPE_ID = 0x00000197;
+  static const XCN_OID_PKCS_12_PROTECTED_PASSWORD_SECRET_BAG_TYPE_ID =
+      0x00000197;
   static const XCN_OID_PKINIT_KP_KDC = 0x00000198;
   static const XCN_OID_PKIX_CA_REPOSITORY = 0x00000199;
   static const XCN_OID_PKIX_OCSP_NONCE = 0x0000019a;
@@ -2057,7 +2065,8 @@ class CERTENROLL_PROPERTYID {
   static const XCN_CERT_PUB_KEY_CNG_ALG_BIT_LENGTH_PROP_ID = 0x0000005d;
   static const XCN_CERT_ISSUER_PUB_KEY_BIT_LENGTH_PROP_ID = 0x0000005e;
   static const XCN_CERT_ISSUER_CHAIN_SIGN_HASH_CNG_ALG_PROP_ID = 0x0000005f;
-  static const XCN_CERT_ISSUER_CHAIN_PUB_KEY_CNG_ALG_BIT_LENGTH_PROP_ID = 0x00000060;
+  static const XCN_CERT_ISSUER_CHAIN_PUB_KEY_CNG_ALG_BIT_LENGTH_PROP_ID =
+      0x00000060;
   static const XCN_CERT_NO_EXPIRE_NOTIFICATION_PROP_ID = 0x00000061;
   static const XCN_CERT_AUTH_ROOT_SHA256_HASH_PROP_ID = 0x00000062;
   static const XCN_CERT_NCRYPT_KEY_HANDLE_TRANSFER_PROP_ID = 0x00000063;
@@ -2316,7 +2325,8 @@ class X509CertificateTemplateEnrollmentFlag {
   static const EnrollmentReuseKeyOnFullSmartCard = 0x00002000;
   static const EnrollmentNoRevocationInfoInCerts = 0x00004000;
   static const EnrollmentIncludeBasicConstraintsForEECerts = 0x00008000;
-  static const EnrollmentPreviousApprovalKeyBasedValidateReenrollment = 0x00010000;
+  static const EnrollmentPreviousApprovalKeyBasedValidateReenrollment =
+      0x00010000;
   static const EnrollmentCertificateIssuancePoliciesFromRequest = 0x00020000;
   static const EnrollmentSkipAutoRenewal = 0x00040000;
 }
@@ -2631,4 +2641,3 @@ class DdqAccessLevel {
   static const CurrentUserData = 0x00000001;
   static const AllUserData = 0x00000002;
 }
-

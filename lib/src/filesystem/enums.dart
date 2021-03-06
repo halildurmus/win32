@@ -867,4 +867,3 @@ class FILE_ID_TYPE {
   static const ExtendedFileIdType = 0x00000002;
   static const MaximumFileIdType = 0x00000003;
 }
-

@@ -187,4 +187,3 @@ class MMC_VIEW_TYPE {
   static const MMC_VIEW_TYPE_HTML = 0x00000001;
   static const MMC_VIEW_TYPE_OCX = 0x00000002;
 }
-

@@ -6,4 +6,3 @@ class LOCATION_REPORT_STATUS {
   static const REPORT_INITIALIZING = 0x00000003;
   static const REPORT_RUNNING = 0x00000004;
 }
-

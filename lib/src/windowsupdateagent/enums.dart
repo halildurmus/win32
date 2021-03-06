@@ -158,4 +158,3 @@ class AddServiceFlag {
 class UpdateServiceOption {
   static const usoNonVolatileService = 0x00000001;
 }
-

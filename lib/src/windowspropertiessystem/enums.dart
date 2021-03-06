@@ -306,4 +306,3 @@ class SYNC_ENGINE_STATE_FLAGS {
   static const SESF_PAUSED_DUE_TO_USER_REQUEST = 0x00000100;
   static const SESF_ALL_FLAGS = 0x000001ff;
 }
-
