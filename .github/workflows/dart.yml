@@ -17,8 +17,7 @@ jobs:
       matrix:
         os: [windows-latest]
 
-        # Stable does not support null safety yet.
-        sdk: [beta, main]
+        sdk: [stable, beta, main]
 
     steps:
       - name: Fetch sources
