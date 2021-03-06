@@ -17,7 +17,7 @@ class Module extends AttributeObject {
       : super(reader, token);
 
   factory Module.fromToken(md.IMetaDataImport2 reader, int token) {
-    final szName = calloc<Uint16>(256 * 2).cast<Utf16>();
+    final szName = calloc<Uint16>(256).cast<Utf16>();
     final pchName = calloc<Uint32>();
 
     try {
@@ -33,4 +33,7 @@ class Module extends AttributeObject {
       calloc.free(szName);
     }
   }
+
+  @override
+  String toString() => 'Module: $name';
 }

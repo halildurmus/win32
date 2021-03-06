@@ -80,7 +80,7 @@ class Method extends AttributeObject {
 
   factory Method.fromToken(md.IMetaDataImport2 reader, int token) {
     final pClass = calloc<Uint32>();
-    final szMethod = calloc<Uint16>(256 * 2).cast<Utf16>();
+    final szMethod = calloc<Uint16>(256).cast<Utf16>();
     final pchMethod = calloc<Uint32>();
     final pdwAttr = calloc<Uint32>();
     final ppvSigBlob = calloc<IntPtr>();
