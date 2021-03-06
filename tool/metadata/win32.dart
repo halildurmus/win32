@@ -30,7 +30,7 @@ class Win32Prototype {
 
   String get dartParams => _method.parameters
       .map((param) =>
-          '${TypeProjector(param.typeIdentifier).nativeType} ${param.name}')
+          '${TypeProjector(param.typeIdentifier).dartType} ${param.name}')
       .join(', ');
 
   String get dartFfiMapping =>
