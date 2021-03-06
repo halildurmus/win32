@@ -227,6 +227,44 @@ void main() {
         expect(newEnum.parameters.first.nativeType, equals('Pointer'));
         expect(newEnum.parameters.first.dartType, equals('Pointer'));
       });
+
+      test(
+          'IApplicationActivationManager.ActivateApplication '
+          'recognizes ACTIVATEOPTIONS as an enum', () {
+        final iApplicationActivationManager = scope
+            .findTypeDef('Windows.Win32.Shell.IApplicationActivationManager')!;
+        final activateApplication =
+            iApplicationActivationManager.findMethod('ActivateApplication')!;
+        final param = activateApplication.parameters[2];
+
+        expect(param.name, equals('options'));
+        expect(param.typeIdentifier.name,
+            equals('Windows.Win32.Shell.ACTIVATEOPTIONS'));
+        expect(param.typeIdentifier.corType,
+            equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+        expect(
+            param.typeIdentifier.type?.parent?.typeName, equals('System.Enum'));
+        expect(param.typeIdentifier.typeArgs.length, isZero);
+        expect(
+            scope.enums
+                .firstWhere((p) => p.typeName == param.typeIdentifier.name),
+            isNotNull);
+      });
+
+      test(
+          'IApplicationActivationManager.ActivateApplication '
+          'projects ACTIVATEOPTIONS as an enum', () {
+        final iApplicationActivationManager = scope
+            .findTypeDef('Windows.Win32.Shell.IApplicationActivationManager')!;
+        final activateApplication =
+            iApplicationActivationManager.findMethod('ActivateApplication')!;
+        final param = activateApplication.parameters[2];
+        final projector = TypeProjector(param.typeIdentifier);
+
+        expect(projector.isTypeAnEnum, equals(true));
+        expect(projector.nativeType, equals('Uint32'));
+        expect(projector.dartType, equals('int'));
+      });
     });
   }
 }
