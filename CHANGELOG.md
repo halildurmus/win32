@@ -1,6 +1,9 @@
 ## 2.0.1
 
 - Adds a demo of custom window shapes.
+- Removes Windows Metadata classes (now in the `winmd` package). This is a
+  breaking change, but it's not anticipated to be a problem since these classes
+  are only used for code generation.
 
 ## 2.0.0
 

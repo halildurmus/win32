@@ -19,7 +19,7 @@ jobs:
         # sure that tests don't fail on a non-supported platform).
         os: [windows-latest, windows-2016, ubuntu-latest]
 
-        sdk: [stable, beta, dev, main]
+        sdk: [stable, dev, main]
 
         # One SDK version is plenty on Ubuntu. It's a safety test. Similarly,
         # it's unlikely that we'll find unique bugs associated with running the
@@ -30,12 +30,8 @@ jobs:
             sdk: main
           - os: ubuntu-latest
             sdk: dev
-          - os: ubuntu-latest
-            sdk: beta
           - os: windows-2016
             sdk: main
-          - os: windows-2016
-            sdk: dev
           - os: windows-2016
             sdk: dev
 
