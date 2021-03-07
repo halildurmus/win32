@@ -2999,12 +2999,12 @@ int RegisterHotKey(int hWnd, int id, int fsModifiers, int vk) {
 /// );
 /// ```
 /// {@category user32}
-Pointer RegisterPowerSettingNotification(
+int RegisterPowerSettingNotification(
     int hRecipient, Pointer<GUID> PowerSettingGuid, int Flags) {
   final _RegisterPowerSettingNotification = _user32.lookupFunction<
-      Pointer Function(
+      IntPtr Function(
           IntPtr hRecipient, Pointer<GUID> PowerSettingGuid, Uint32 Flags),
-      Pointer Function(int hRecipient, Pointer<GUID> PowerSettingGuid,
+      int Function(int hRecipient, Pointer<GUID> PowerSettingGuid,
           int Flags)>('RegisterPowerSettingNotification');
   return _RegisterPowerSettingNotification(hRecipient, PowerSettingGuid, Flags);
 }
@@ -4062,10 +4062,10 @@ int UnregisterHotKey(int hWnd, int id) {
 /// );
 /// ```
 /// {@category user32}
-int UnregisterPowerSettingNotification(Pointer Handle) {
+int UnregisterPowerSettingNotification(int Handle) {
   final _UnregisterPowerSettingNotification = _user32.lookupFunction<
-      Int32 Function(Pointer Handle),
-      int Function(Pointer Handle)>('UnregisterPowerSettingNotification');
+      Int32 Function(IntPtr Handle),
+      int Function(int Handle)>('UnregisterPowerSettingNotification');
   return _UnregisterPowerSettingNotification(Handle);
 }
 
