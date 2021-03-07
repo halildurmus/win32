@@ -129,9 +129,12 @@ final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ?
           orElse: () =>
               throw Exception('Cannot find ${function.signature.name}'));
 
+      final dartFunctionName = win32.functions.keys
+          .firstWhere((k) => win32.functions[k] == function);
+
       writer.writeStringSync('''
 ${generateDocComment(function)}
-${Win32Prototype(function.signature.nameWithoutEncoding, method, libraryDartName).dartFfiMapping}
+${Win32Prototype(dartFunctionName, method, libraryDartName).dartFfiMapping}
 ''');
     }
 
@@ -140,7 +143,8 @@ ${Win32Prototype(function.signature.nameWithoutEncoding, method, libraryDartName
 }
 
 void main() {
-  final scope = MetadataStore.getScopeForFile('tool/win32/Windows.Win32.winmd');
+  final scope =
+      MetadataStore.getScopeForFile(File('tool/win32/Windows.Win32.winmd'));
   final apis = scope.typeDefs.where((type) => type.typeName.endsWith('Apis'));
 
   apis.forEach((api) => methods.addAll(api.methods));

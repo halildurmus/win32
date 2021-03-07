@@ -19,10 +19,15 @@ import 'package:win32/win32.dart';
 void main() {
   final ptr = calloc<COMObject>();
 
-  final provideclassinfo = IProvideClassInfo(ptr);
-  test('Can instantiate IProvideClassInfo.GetClassInfo', () {
-    // BUG: https://github.com/microsoft/win32metadata/issues/290
-    expect(provideclassinfo.GetClassInfoA, isA<Function>());
+  final applicationactivationmanager = IApplicationActivationManager(ptr);
+  test('Can instantiate IApplicationActivationManager.ActivateApplication', () {
+    expect(applicationactivationmanager.ActivateApplication, isA<Function>());
+  });
+  test('Can instantiate IApplicationActivationManager.ActivateForFile', () {
+    expect(applicationactivationmanager.ActivateForFile, isA<Function>());
+  });
+  test('Can instantiate IApplicationActivationManager.ActivateForProtocol', () {
+    expect(applicationactivationmanager.ActivateForProtocol, isA<Function>());
   });
   free(ptr);
 }

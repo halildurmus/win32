@@ -33,8 +33,8 @@ void main(List<String> args) {
       throw Exception("Can't find type $type.");
     }
 
-    final classProjection = ClassProjector(mdTypeDef).projection;
-    final dartClass = TypePrinter.printType(classProjection);
+    final projection = ClassProjector(mdTypeDef).projection;
+    final dartClass = TypePrinter.printProjection(projection);
 
     final outputFilename = type.split('.').last;
     final outputFile =

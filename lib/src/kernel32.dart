@@ -156,10 +156,9 @@ int CloseHandle(int hObject) {
 /// );
 /// ```
 /// {@category kernel32}
-void ClosePseudoConsole(Pointer hPC) {
+void ClosePseudoConsole(int hPC) {
   final _ClosePseudoConsole = _kernel32.lookupFunction<
-      Void Function(Pointer hPC),
-      void Function(Pointer hPC)>('ClosePseudoConsole');
+      Void Function(IntPtr hPC), void Function(int hPC)>('ClosePseudoConsole');
   return _ClosePseudoConsole(hPC);
 }
 
@@ -412,12 +411,12 @@ int CreateProcess(
 /// ```
 /// {@category kernel32}
 int CreatePseudoConsole(
-    COORD size, int hInput, int hOutput, int dwFlags, Pointer<Pointer> phPC) {
+    COORD size, int hInput, int hOutput, int dwFlags, Pointer<IntPtr> phPC) {
   final _CreatePseudoConsole = _kernel32.lookupFunction<
       Int32 Function(COORD size, IntPtr hInput, IntPtr hOutput, Uint32 dwFlags,
-          Pointer<Pointer> phPC),
+          Pointer<IntPtr> phPC),
       int Function(COORD size, int hInput, int hOutput, int dwFlags,
-          Pointer<Pointer> phPC)>('CreatePseudoConsole');
+          Pointer<IntPtr> phPC)>('CreatePseudoConsole');
   return _CreatePseudoConsole(size, hInput, hOutput, dwFlags, phPC);
 }
 
@@ -525,14 +524,14 @@ int EndUpdateResource(int hUpdate, int fDiscard) {
 /// );
 /// ```
 /// {@category kernel32}
-int K32EnumProcesses(
+int EnumProcesses(
     Pointer<Uint32> lpidProcess, int cb, Pointer<Uint32> lpcbNeeded) {
-  final _K32EnumProcesses = _kernel32.lookupFunction<
+  final _EnumProcesses = _kernel32.lookupFunction<
       Int32 Function(
           Pointer<Uint32> lpidProcess, Uint32 cb, Pointer<Uint32> lpcbNeeded),
       int Function(Pointer<Uint32> lpidProcess, int cb,
           Pointer<Uint32> lpcbNeeded)>('K32EnumProcesses');
-  return _K32EnumProcesses(lpidProcess, cb, lpcbNeeded);
+  return _EnumProcesses(lpidProcess, cb, lpcbNeeded);
 }
 
 /// Retrieves a handle for each module in the specified process.
@@ -546,14 +545,14 @@ int K32EnumProcesses(
 /// );
 /// ```
 /// {@category kernel32}
-int K32EnumProcessModules(int hProcess, Pointer<IntPtr> lphModule, int cb,
+int EnumProcessModules(int hProcess, Pointer<IntPtr> lphModule, int cb,
     Pointer<Uint32> lpcbNeeded) {
-  final _K32EnumProcessModules = _kernel32.lookupFunction<
+  final _EnumProcessModules = _kernel32.lookupFunction<
       Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
           Pointer<Uint32> lpcbNeeded),
       int Function(int hProcess, Pointer<IntPtr> lphModule, int cb,
           Pointer<Uint32> lpcbNeeded)>('K32EnumProcessModules');
-  return _K32EnumProcessModules(hProcess, lphModule, cb, lpcbNeeded);
+  return _EnumProcessModules(hProcess, lphModule, cb, lpcbNeeded);
 }
 
 /// Retrieves a handle for each module in the specified process that meets
@@ -569,9 +568,9 @@ int K32EnumProcessModules(int hProcess, Pointer<IntPtr> lphModule, int cb,
 /// );
 /// ```
 /// {@category kernel32}
-int K32EnumProcessModulesEx(int hProcess, Pointer<IntPtr> lphModule, int cb,
+int EnumProcessModulesEx(int hProcess, Pointer<IntPtr> lphModule, int cb,
     Pointer<Uint32> lpcbNeeded, int dwFilterFlag) {
-  final _K32EnumProcessModulesEx = _kernel32.lookupFunction<
+  final _EnumProcessModulesEx = _kernel32.lookupFunction<
       Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
           Pointer<Uint32> lpcbNeeded, Uint32 dwFilterFlag),
       int Function(
@@ -580,7 +579,7 @@ int K32EnumProcessModulesEx(int hProcess, Pointer<IntPtr> lphModule, int cb,
           int cb,
           Pointer<Uint32> lpcbNeeded,
           int dwFilterFlag)>('K32EnumProcessModulesEx');
-  return _K32EnumProcessModulesEx(
+  return _EnumProcessModulesEx(
       hProcess, lphModule, cb, lpcbNeeded, dwFilterFlag);
 }
 
@@ -1290,14 +1289,14 @@ int GetLogicalDriveStrings(int nBufferLength, Pointer<Utf16> lpBuffer) {
 /// );
 /// ```
 /// {@category kernel32}
-int K32GetModuleBaseName(
+int GetModuleBaseName(
     int hProcess, int hModule, Pointer<Utf16> lpBaseName, int nSize) {
-  final _K32GetModuleBaseName = _kernel32.lookupFunction<
+  final _GetModuleBaseName = _kernel32.lookupFunction<
       Uint32 Function(IntPtr hProcess, IntPtr hModule,
           Pointer<Utf16> lpBaseName, Uint32 nSize),
       int Function(int hProcess, int hModule, Pointer<Utf16> lpBaseName,
           int nSize)>('K32GetModuleBaseNameW');
-  return _K32GetModuleBaseName(hProcess, hModule, lpBaseName, nSize);
+  return _GetModuleBaseName(hProcess, hModule, lpBaseName, nSize);
 }
 
 /// Retrieves the fully qualified path for the file that contains the
@@ -1332,14 +1331,14 @@ int GetModuleFileName(int hModule, Pointer<Utf16> lpFilename, int nSize) {
 /// );
 /// ```
 /// {@category kernel32}
-int K32GetModuleFileNameEx(
+int GetModuleFileNameEx(
     int hProcess, int hModule, Pointer<Utf16> lpFilename, int nSize) {
-  final _K32GetModuleFileNameEx = _kernel32.lookupFunction<
+  final _GetModuleFileNameEx = _kernel32.lookupFunction<
       Uint32 Function(IntPtr hProcess, IntPtr hModule,
           Pointer<Utf16> lpFilename, Uint32 nSize),
       int Function(int hProcess, int hModule, Pointer<Utf16> lpFilename,
           int nSize)>('K32GetModuleFileNameExW');
-  return _K32GetModuleFileNameEx(hProcess, hModule, lpFilename, nSize);
+  return _GetModuleFileNameEx(hProcess, hModule, lpFilename, nSize);
 }
 
 /// Retrieves a module handle for the specified module. The module must
@@ -2162,10 +2161,10 @@ int RemoveDirectory(Pointer<Utf16> lpPathName) {
 /// );
 /// ```
 /// {@category kernel32}
-int ResizePseudoConsole(Pointer hPC, COORD size) {
+int ResizePseudoConsole(int hPC, COORD size) {
   final _ResizePseudoConsole = _kernel32.lookupFunction<
-      Int32 Function(Pointer hPC, COORD size),
-      int Function(Pointer hPC, COORD size)>('ResizePseudoConsole');
+      Int32 Function(IntPtr hPC, COORD size),
+      int Function(int hPC, COORD size)>('ResizePseudoConsole');
   return _ResizePseudoConsole(hPC, size);
 }
 

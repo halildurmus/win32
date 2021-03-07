@@ -39,8 +39,8 @@ import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
 import 'com/combase.dart';
-import 'generated/IUnknown.dart';
 import 'generated/IDispatch.dart';
+import 'generated/IUnknown.dart';
 import 'oleaut32.dart';
 
 // typedef struct tagWNDCLASSW {
@@ -2906,7 +2906,7 @@ class SYSTEMTIME extends Struct {
 ///
 /// /// {@category Struct}
 class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
-  external BLUETOOTH_DEVICE_INFO_STRUCT deviceInfo;
+  external BLUETOOTH_DEVICE_INFO deviceInfo;
   @Uint32()
   external int authenticationMethod;
   @Uint32()
@@ -2930,13 +2930,13 @@ class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
 //   SYSTEMTIME        stLastSeen;
 //   SYSTEMTIME        stLastUsed;
 //   WCHAR             szName[BLUETOOTH_MAX_NAME_SIZE];
-// } BLUETOOTH_DEVICE_INFO_STRUCT;
+// } BLUETOOTH_DEVICE_INFO;
 
 /// The BLUETOOTH_DEVICE_INFO structure provides information about a Bluetooth
 /// device.
 ///
 /// {@category Struct}
-class BLUETOOTH_DEVICE_INFO_STRUCT extends Struct {
+class BLUETOOTH_DEVICE_INFO extends Struct {
   @Uint32()
   external int dwSize;
   @Uint64()
@@ -3150,12 +3150,12 @@ class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
 //     BTH_ADDR ullLong;
 //     BYTE     rgBytes[6];
 //   };
-// } BLUETOOTH_ADDRESS_STRUCT;
+// } BLUETOOTH_ADDRESS;
 
 /// The BLUETOOTH_ADDRESS structure provides the address of a Bluetooth device.
 ///
 /// {@category Struct}
-class BLUETOOTH_ADDRESS_STRUCT extends Struct {
+class BLUETOOTH_ADDRESS extends Struct {
   @Uint64()
   external int ullLong;
 
@@ -3186,7 +3186,7 @@ class BLUETOOTH_RADIO_INFO extends Struct {
   @Uint32()
   external int dwSize;
 
-  external BLUETOOTH_ADDRESS_STRUCT address;
+  external BLUETOOTH_ADDRESS address;
 
   // WCHAR szName[ BLUETOOTH_MAX_NAME_SIZE ];
   @Uint64()

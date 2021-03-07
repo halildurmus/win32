@@ -97,10 +97,10 @@ void main()
     printf("  'OSVERSIONINFO': %zu,\n", sizeof(OSVERSIONINFOW));
     printf("  'SYSTEMTIME': %zu,\n", sizeof(SYSTEMTIME));
     printf("  'BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS': %zu,\n", sizeof(BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS));
-    printf("  'BLUETOOTH_DEVICE_INFO_STRUCT': %zu,\n", sizeof(BLUETOOTH_DEVICE_INFO_STRUCT));
+    printf("  'BLUETOOTH_DEVICE_INFO': %zu,\n", sizeof(BLUETOOTH_DEVICE_INFO));
     printf("  'BLUETOOTH_DEVICE_SEARCH_PARAMS': %zu,\n", sizeof(BLUETOOTH_DEVICE_SEARCH_PARAMS));
     printf("  'BLUETOOTH_FIND_RADIO_PARAMS': %zu,\n", sizeof(BLUETOOTH_FIND_RADIO_PARAMS));
-    printf("  'BLUETOOTH_ADDRESS_STRUCT': %zu,\n", sizeof(BLUETOOTH_ADDRESS_STRUCT));
+    printf("  'BLUETOOTH_ADDRESS': %zu,\n", sizeof(BLUETOOTH_ADDRESS));
     printf("  'BLUETOOTH_RADIO_INFO': %zu,\n", sizeof(BLUETOOTH_RADIO_INFO));
     printf("  'BLUETOOTH_PIN_INFO': %zu,\n", sizeof(BLUETOOTH_PIN_INFO));
     printf("  'BLUETOOTH_OOB_DATA_INFO': %zu,\n", sizeof(BLUETOOTH_OOB_DATA_INFO));

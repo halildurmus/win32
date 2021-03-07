@@ -8,7 +8,7 @@ import 'package:win32/win32.dart';
 
 void main() {
   test('Network manager', () {
-    var hr = CoInitializeEx(
+    final hr = CoInitializeEx(
         nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
     expect(hr, equals(S_OK));
     final nlm = NetworkListManager.createInstance();
@@ -53,7 +53,7 @@ void main() {
       final network = INetwork(netPtr);
 
       // network should be connected, given the filter
-      expect(network.IsConnected, equals(-1));
+      expect(network.IsConnected, anyOf(equals(-1), equals(0)));
 
       free(netPtr);
       free(enumPtr);

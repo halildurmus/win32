@@ -27,8 +27,7 @@ int printModules(int processID) {
   final hMods = calloc<IntPtr>(1024);
   final cbNeeded = calloc<Uint32>();
 
-  if (K32EnumProcessModules(
-          hProcess, hMods, sizeOf<IntPtr>() * 1024, cbNeeded) ==
+  if (EnumProcessModules(hProcess, hMods, sizeOf<IntPtr>() * 1024, cbNeeded) ==
       1) {
     for (var i = 0; i < (cbNeeded.value ~/ sizeOf<IntPtr>()); i++) {
       final szModName = calloc<Uint16>(MAX_PATH).cast<Utf16>();
@@ -38,7 +37,7 @@ int printModules(int processID) {
       final moduleValue =
           '0x${hModule.toRadixString(16).padLeft(sizeOf<IntPtr>(), '0').toUpperCase()}';
 
-      if (K32GetModuleFileNameEx(hProcess, hModule, szModName, MAX_PATH) != 0) {
+      if (GetModuleFileNameEx(hProcess, hModule, szModName, MAX_PATH) != 0) {
         // Print the module name and handle value.
         print('\t${szModName.toDartString()} ($moduleValue)');
       }
@@ -60,7 +59,7 @@ void main() {
   final cbNeeded = calloc<Uint32>();
 
   // Get the list of process identifiers.
-  if (K32EnumProcesses(aProcesses, sizeOf<Uint32>() * 1024, cbNeeded) == 0) {
+  if (EnumProcesses(aProcesses, sizeOf<Uint32>() * 1024, cbNeeded) == 0) {
     print('EnumProcesses failed.');
     exit(1);
   }

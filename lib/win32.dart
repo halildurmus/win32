@@ -131,6 +131,7 @@ export 'src/winrt/winrt_constants.dart';
 export 'src/winrt/winrt_helpers.dart';
 
 // COM and Windows Runtime interfaces
+export 'src/generated/IApplicationActivationManager.dart';
 export 'src/generated/IAsyncInfo.dart';
 export 'src/generated/IBindCtx.dart';
 export 'src/generated/ICalendar.dart';
