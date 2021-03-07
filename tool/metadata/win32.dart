@@ -78,6 +78,13 @@ String wrapCommentText(String inputText, [int wrapLength = 76]) {
   return outputText.toString().trimRight();
 }
 
+bool methodMatches(String methodName, List<String> rawPrototype) {
+  final prototype = rawPrototype.join('\n');
+  final methodNameToFind = ' $methodName(';
+
+  return prototype.contains(methodNameToFind);
+}
+
 String generateDocComment(Win32Function func) {
   final comment = StringBuffer();
 
@@ -136,17 +143,16 @@ final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ?
     print('$library has ${filteredFunctionList.length} entries');
 
     for (final function in filteredFunctionList.keys) {
-      final method = methods.firstWhere(
-          (m) => filteredFunctionList[function]!
-              .prototype
-              .first
-              .contains(m.methodName),
-          orElse: () => throw Exception('Cannot find $function'));
-
-      writer.writeStringSync('''
+      try {
+        final method = methods.firstWhere((m) => methodMatches(
+            m.methodName, filteredFunctionList[function]!.prototype));
+        writer.writeStringSync('''
 ${generateDocComment(filteredFunctionList[function]!)}
 ${Win32Prototype(function, method, libraryDartName).dartFfiMapping}
 ''');
+      } on StateError {
+        continue;
+      }
     }
 
     writer.closeSync();
