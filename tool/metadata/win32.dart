@@ -10,6 +10,7 @@ import 'package:winmd/winmd.dart';
 
 import '../win32/function.dart';
 import '../win32/generate_from.dart';
+import '../win32/generate_win32_tests.dart';
 import '../win32/win32api.dart';
 
 class Win32Prototype {
@@ -50,6 +51,14 @@ class Win32Prototype {
 
 final methods = <Method>[];
 
+String methodNameWithoutEncoding(String methodName) {
+  if (methodName.endsWith('W') || methodName.endsWith('A')) {
+    return methodName.substring(0, methodName.length - 1);
+  } else {
+    return methodName;
+  }
+}
+
 String wrapCommentText(String inputText, [int wrapLength = 76]) {
   final words = inputText.split(' ');
   final textLine = StringBuffer('/// ');
@@ -68,6 +77,13 @@ String wrapCommentText(String inputText, [int wrapLength = 76]) {
 
   outputText.write(textLine);
   return outputText.toString().trimRight();
+}
+
+bool methodMatches(String methodName, List<String> rawPrototype) {
+  final prototype = rawPrototype.join('\n');
+  final methodNameToFind = ' $methodName(';
+
+  return prototype.contains(methodNameToFind);
 }
 
 String generateDocComment(Win32Function func) {
@@ -116,26 +132,28 @@ import 'structs.dart';
 final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');\n
 ''');
 
-    final filteredFunctionList = win32.functions.values
-        .where((func) => func.dllLibrary == library)
-        .toList();
+    // Subset of functions that belong to the library we're projecting.
+    // SetWindowLongPtrW is missing from the metadata, per
+    // https://github.com/microsoft/win32metadata/issues/142 so we have to
+    // manually exclude it, otherwise we'll fail.
+    final filteredFunctionList = Map<String, Win32Function>.of(win32.functions)
+      ..removeWhere((key, value) => value.dllLibrary != library)
+      ..removeWhere(
+          (key, value) => value.prototype.contains('SetWindowLongPtrW'));
 
-    filteredFunctionList
-        .removeWhere((func) => func.signature.name == 'SetWindowLongPtrW');
+    print('$library has ${filteredFunctionList.length} entries');
 
-    for (final function in filteredFunctionList) {
-      final method = methods.firstWhere(
-          (m) => m.methodName == function.signature.name,
-          orElse: () =>
-              throw Exception('Cannot find ${function.signature.name}'));
-
-      final dartFunctionName = win32.functions.keys
-          .firstWhere((k) => win32.functions[k] == function);
-
-      writer.writeStringSync('''
-${generateDocComment(function)}
-${Win32Prototype(dartFunctionName, method, libraryDartName).dartFfiMapping}
+    for (final function in filteredFunctionList.keys) {
+      try {
+        final method = methods.firstWhere((m) => methodMatches(
+            m.methodName, filteredFunctionList[function]!.prototype));
+        writer.writeStringSync('''
+${generateDocComment(filteredFunctionList[function]!)}
+${Win32Prototype(function, method, libraryDartName).dartFfiMapping}
 ''');
+      } on StateError {
+        continue;
+      }
     }
 
     writer.closeSync();
@@ -157,4 +175,10 @@ void main() {
 
   generateFfiFiles(win32);
   print('$genCount typedefs generated from Windows metadata.');
+
+  final apiTestsGenerated = generateTests(win32);
+  print('$apiTestsGenerated API tests generated.');
+
+  final structTestsGenerated = generateStructSizeTests();
+  print('$structTestsGenerated struct tests generated.');
 }
