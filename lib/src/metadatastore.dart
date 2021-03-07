@@ -17,8 +17,8 @@ import 'com/IMetaDataImport2.dart' as md;
 /// Use this to obtain a reference of a scope without creating unnecessary
 /// copies or cycles.
 class MetadataStore {
-  static late final md.IMetaDataDispenser dispenser;
-  static final cache = <String, md.IMetaDataImport2>{};
+  static late md.IMetaDataDispenser dispenser;
+  static Map<String, Scope> cache = {};
 
   static bool isInitialized = false;
 
@@ -43,7 +43,7 @@ class MetadataStore {
     if (!isInitialized) initialize();
 
     if (cache.containsKey(fileScope)) {
-      return Scope(cache[fileScope]!);
+      return cache[fileScope]!;
     } else {
       final szFile = fileScope.toNativeUtf16();
       final pReader = calloc<IntPtr>();
@@ -54,8 +54,8 @@ class MetadataStore {
         if (FAILED(hr)) {
           throw WindowsException(hr);
         } else {
-          cache[fileScope] = md.IMetaDataImport2(pReader.cast());
-          return Scope(cache[fileScope]!);
+          cache[fileScope] = Scope(md.IMetaDataImport2(pReader.cast()));
+          return cache[fileScope]!;
         }
       } finally {
         calloc.free(szFile);
@@ -76,7 +76,7 @@ class MetadataStore {
       final cacheEntry =
           cache.keys.firstWhere((entry) => entry.contains('Windows.Win32'));
 
-      return Scope(cache[cacheEntry]!);
+      return cache[cacheEntry]!;
     } else {
       // Assume it's a Windows Runtime type
       final hstrTypeName = convertToHString(typeName);
@@ -122,8 +122,8 @@ class MetadataStore {
   static void close() {
     if (!isInitialized) return;
 
-    for (final reader in cache.values) {
-      calloc.free(reader.ptr);
+    for (final scope in cache.values) {
+      calloc.free(scope.reader.ptr);
     }
     calloc.free(dispenser.ptr);
 
