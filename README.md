@@ -17,17 +17,22 @@ equivalent file.
 ```dart
 import 'package:winmd/winmd.dart';
 
-final type = 'Windows.Foundation.IAsyncInfo';
-final typeDef = MetadataStore.getMetadataForType(type);
-final projection = TypeBuilder.projectWindowsType(typeDef);
-final dartClass = TypePrinter.printType(projection);
+void main() {
+  // A Windows Runtime interface
+  const type = 'Windows.Foundation.IAsyncInfo';
 
-final outputFilename = type.split('.').last;
-final outputFile =
-    File('${outputDirectory.uri.toFilePath()}$outputFilename.dart');
+  // Load the metadata for this interface
+  final typeDef = MetadataStore.getMetadataForType(type)!;
 
-print('Writing:    ${outputFile.path}');
-outputFile.writeAsStringSync(dartClass);
+  // Project it into something Dart can work with
+  final projection = ClassProjector(typeDef).projection;
+
+  // Create a Dart projection
+  final dartClass = TypePrinter.printType(projection);
+
+  // Print it to the screen. Normally you'd save it to a file and format it.
+  print(dartClass);
+}
 ```
 
 ## Usage (Win32)
@@ -35,12 +40,14 @@ outputFile.writeAsStringSync(dartClass);
 Load all the methods from the GDI namespace and print out some metadata.
 
 ```dart
+import 'dart:io';
+
 import 'package:winmd/winmd.dart';
 
 void main() {
   // Load WinMD metadata for Win32, as produced by the following utility:
   // https://github.com/microsoft/win32metadata
-  final scope = MetadataStore.getScopeForFile('Windows.Win32.winmd');
+  final scope = MetadataStore.getScopeForFile(File('Windows.Win32.winmd'));
 
   // Find the GDI API namesapce
   final gdiApi =
