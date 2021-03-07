@@ -3,7 +3,6 @@
 echo Generating C-style Win32 APIs and tests
 call dart %~dp0win32\win32api.dart
 call dart %~dp0metadata\win32.dart %~dp0..\lib\src\generated
-call dart %~dp0win32\generate_win32_tests.dart 
 echo.
 
 echo Temporarily reset bthprops.dart (https://github.com/microsoft/win32metadata/issues/296)
