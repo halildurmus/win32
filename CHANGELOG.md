@@ -1,5 +1,6 @@
-## 0.4.0-dev.8
+## 0.4.0
 
+- Refactor type projection code
 - Refactor code, change enums to return `Uint32` by default.
 
 ## 0.4.0-dev.7
