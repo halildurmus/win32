@@ -100,12 +100,12 @@
         "comment": "Blocks keyboard and mouse input events from reaching applications."
     },
     "BluetoothAuthenticateDeviceEx": {
-        "prototype": "DWORD BluetoothAuthenticateDeviceEx(\n  HWND                        hwndParentIn,\n  HANDLE                      hRadioIn,\n  BLUETOOTH_DEVICE_INFO_STRUCT       *pbtdiInout,\n  PBLUETOOTH_OOB_DATA_INFO    pbtOobData,\n  AUTHENTICATION_REQUIREMENTS authenticationRequirement\n);",
+        "prototype": "DWORD BluetoothAuthenticateDeviceEx(\n  HWND                        hwndParentIn,\n  HANDLE                      hRadioIn,\n  BLUETOOTH_DEVICE_INFO       *pbtdiInout,\n  PBLUETOOTH_OOB_DATA_INFO    pbtOobData,\n  AUTHENTICATION_REQUIREMENTS authenticationRequirement\n);",
         "dllLibrary": "bthprops",
         "comment": "The BluetoothAuthenticateDeviceEx function sends an authentication request to a remote Bluetooth device. Additionally, this function allows for out-of-band data to be passed into the function call for the device being authenticated."
     },
     "BluetoothDisplayDeviceProperties": {
-        "prototype": "BOOL BluetoothDisplayDeviceProperties(\n  HWND                  hwndParent,\n  BLUETOOTH_DEVICE_INFO_STRUCT *pbtdi\n);",
+        "prototype": "BOOL BluetoothDisplayDeviceProperties(\n  HWND                  hwndParent,\n  BLUETOOTH_DEVICE_INFO *pbtdi\n);",
         "dllLibrary": "bthprops",
         "comment": "The BluetoothDisplayDeviceProperties function opens the Control Panel device information property sheet."
     },
@@ -120,7 +120,7 @@
         "comment": "The BluetoothEnableIncomingConnections function modifies whether a local Bluetooth radio accepts incoming connections."
     },
     "BluetoothEnumerateInstalledServices": {
-        "prototype": "DWORD BluetoothEnumerateInstalledServices(\n  HANDLE                      hRadio,\n  const BLUETOOTH_DEVICE_INFO_STRUCT *pbtdi,\n  DWORD                       *pcServiceInout,\n  GUID                        *pGuidServices\n);",
+        "prototype": "DWORD BluetoothEnumerateInstalledServices(\n  HANDLE                      hRadio,\n  const BLUETOOTH_DEVICE_INFO *pbtdi,\n  DWORD                       *pcServiceInout,\n  GUID                        *pGuidServices\n);",
         "dllLibrary": "bthprops",
         "comment": "The BluetoothEnumerateInstalledServices function enumerates the services GUIDs (Globally Unique Identifiers) enabled on a Bluetooth device."
     },
@@ -130,7 +130,7 @@
         "comment": "The BluetoothFindDeviceClose function closes an enumeration handle associated with a device query."
     },
     "BluetoothFindFirstDevice": {
-        "prototype": "HBLUETOOTH_DEVICE_FIND BluetoothFindFirstDevice(\n  const BLUETOOTH_DEVICE_SEARCH_PARAMS *pbtsp,\n  BLUETOOTH_DEVICE_INFO_STRUCT                *pbtdi\n);",
+        "prototype": "HBLUETOOTH_DEVICE_FIND BluetoothFindFirstDevice(\n  const BLUETOOTH_DEVICE_SEARCH_PARAMS *pbtsp,\n  BLUETOOTH_DEVICE_INFO                *pbtdi\n);",
         "dllLibrary": "bthprops",
         "comment": "The BluetoothFindFirstDevice function begins the enumeration Bluetooth devices."
     },
@@ -140,7 +140,7 @@
         "comment": "The BluetoothFindFirstRadio function begins the enumeration of local Bluetooth radios."
     },
     "BluetoothFindNextDevice": {
-        "prototype": "BOOL BluetoothFindNextDevice(\n  HBLUETOOTH_DEVICE_FIND hFind,\n  BLUETOOTH_DEVICE_INFO_STRUCT  *pbtdi\n);",
+        "prototype": "BOOL BluetoothFindNextDevice(\n  HBLUETOOTH_DEVICE_FIND hFind,\n  BLUETOOTH_DEVICE_INFO  *pbtdi\n);",
         "dllLibrary": "bthprops",
         "comment": "The BluetoothFindNextDevice function finds the next Bluetooth device."
     },
@@ -175,17 +175,17 @@
         "comment": "The BluetoothIsVersionAvailable function indicates if the installed Bluetooth binary set supports the requested version."
     },
     "BluetoothRegisterForAuthenticationEx": {
-        "prototype": "DWORD BluetoothRegisterForAuthenticationEx(\n  const BLUETOOTH_DEVICE_INFO_STRUCT            *pbtdiIn,\n  HBLUETOOTH_AUTHENTICATION_REGISTRATION *phRegHandleOut,\n  PFN_AUTHENTICATION_CALLBACK_EX         pfnCallbackIn,\n  PVOID                                  pvParam\n);",
+        "prototype": "DWORD BluetoothRegisterForAuthenticationEx(\n  const BLUETOOTH_DEVICE_INFO            *pbtdiIn,\n  HBLUETOOTH_AUTHENTICATION_REGISTRATION *phRegHandleOut,\n  PFN_AUTHENTICATION_CALLBACK_EX         pfnCallbackIn,\n  PVOID                                  pvParam\n);",
         "dllLibrary": "bthprops",
         "comment": "The BluetoothRegisterForAuthenticationEx function registers an application for a pin request, numeric comparison and callback function."
     },
     "BluetoothRemoveDevice": {
-        "prototype": "DWORD BluetoothRemoveDevice(\n  const BLUETOOTH_ADDRESS_STRUCT *pAddress\n);",
+        "prototype": "DWORD BluetoothRemoveDevice(\n  const BLUETOOTH_ADDRESS *pAddress\n);",
         "dllLibrary": "bthprops",
         "comment": "The BluetoothRemoveDevice function removes authentication between a Bluetooth device and the computer and clears cached service information for the device."
     },
     "BluetoothSetServiceState": {
-        "prototype": "DWORD BluetoothSetServiceState(\n  HANDLE                      hRadio,\n  const BLUETOOTH_DEVICE_INFO_STRUCT *pbtdi,\n  const GUID                  *pGuidService,\n  DWORD                       dwServiceFlags\n);",
+        "prototype": "DWORD BluetoothSetServiceState(\n  HANDLE                      hRadio,\n  const BLUETOOTH_DEVICE_INFO *pbtdi,\n  const GUID                  *pGuidService,\n  DWORD                       dwServiceFlags\n);",
         "dllLibrary": "bthprops",
         "comment": "The BluetoothSetServiceState function enables or disables services for a Bluetooth device."
     },
@@ -195,7 +195,7 @@
         "comment": "The BluetoothUnregisterAuthentication function removes registration for a callback routine that was previously registered with a call to the BluetoothRegisterForAuthentication function."
     },
     "BluetoothUpdateDeviceRecord": {
-        "prototype": "DWORD BluetoothUpdateDeviceRecord(\n  const BLUETOOTH_DEVICE_INFO_STRUCT *pbtdi\n);",
+        "prototype": "DWORD BluetoothUpdateDeviceRecord(\n  const BLUETOOTH_DEVICE_INFO *pbtdi\n);",
         "dllLibrary": "bthprops",
         "comment": "The BluetoothUpdateDeviceRecord function updates the local computer cache about a Bluetooth device."
     },
