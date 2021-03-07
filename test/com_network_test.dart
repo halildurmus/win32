@@ -53,7 +53,7 @@ void main() {
       final network = INetwork(netPtr);
 
       // network should be connected, given the filter
-      expect(network.IsConnected, equals(-1));
+      expect(network.IsConnected, anyOf(equals(-1), equals(0)));
 
       free(netPtr);
       free(enumPtr);
