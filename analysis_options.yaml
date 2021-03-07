@@ -1,7 +1,7 @@
 include: package:pedantic/analysis_options.yaml
 
 analyzer:
-  exclude: [example/explorer/**, test/.test_coverage.dart]
+  exclude: [example/explorer/**]
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false
