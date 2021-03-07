@@ -7,8 +7,16 @@ call dart %~dp0metadata\win32.dart %~dp0..\lib\src\generated
 call dart %~dp0win32\generate_win32_tests.dart 
 echo.
 
+echo Temporarily reset bthprops.dart (https://github.com/microsoft/win32metadata/issues/296)
+git restore %~dp0..\lib\src\bthprops.dart
+echo.
+
 echo Generating COM classes and tests from Windows metadata
 call dart %~dp0metadata\generate_com_apis.dart
+echo.
+
+echo Temporarily reset IProvideClassInfo_test.dart (https://github.com/microsoft/win32metadata/issues/290)
+git restore %~dp0..\test\com\IProvideClassInfo_test.dart
 echo.
 
 echo Generating Windows Runtime classes from Windows metadata
