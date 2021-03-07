@@ -21,7 +21,7 @@ void main() {
 
   final provideclassinfo = IProvideClassInfo(ptr);
   test('Can instantiate IProvideClassInfo.GetClassInfo', () {
-    // BUG: https://github.com/microsoft/win32metadata/issues/274
+    // BUG: https://github.com/microsoft/win32metadata/issues/290
     expect(provideclassinfo.GetClassInfoA, isA<Function>());
   });
   free(ptr);
