@@ -156,10 +156,9 @@ int CloseHandle(int hObject) {
 /// );
 /// ```
 /// {@category kernel32}
-void ClosePseudoConsole(Pointer hPC) {
+void ClosePseudoConsole(int hPC) {
   final _ClosePseudoConsole = _kernel32.lookupFunction<
-      Void Function(Pointer hPC),
-      void Function(Pointer hPC)>('ClosePseudoConsole');
+      Void Function(IntPtr hPC), void Function(int hPC)>('ClosePseudoConsole');
   return _ClosePseudoConsole(hPC);
 }
 
@@ -412,12 +411,12 @@ int CreateProcess(
 /// ```
 /// {@category kernel32}
 int CreatePseudoConsole(
-    COORD size, int hInput, int hOutput, int dwFlags, Pointer<Pointer> phPC) {
+    COORD size, int hInput, int hOutput, int dwFlags, Pointer<IntPtr> phPC) {
   final _CreatePseudoConsole = _kernel32.lookupFunction<
       Int32 Function(COORD size, IntPtr hInput, IntPtr hOutput, Uint32 dwFlags,
-          Pointer<Pointer> phPC),
+          Pointer<IntPtr> phPC),
       int Function(COORD size, int hInput, int hOutput, int dwFlags,
-          Pointer<Pointer> phPC)>('CreatePseudoConsole');
+          Pointer<IntPtr> phPC)>('CreatePseudoConsole');
   return _CreatePseudoConsole(size, hInput, hOutput, dwFlags, phPC);
 }
 
@@ -2162,10 +2161,10 @@ int RemoveDirectory(Pointer<Utf16> lpPathName) {
 /// );
 /// ```
 /// {@category kernel32}
-int ResizePseudoConsole(Pointer hPC, COORD size) {
+int ResizePseudoConsole(int hPC, COORD size) {
   final _ResizePseudoConsole = _kernel32.lookupFunction<
-      Int32 Function(Pointer hPC, COORD size),
-      int Function(Pointer hPC, COORD size)>('ResizePseudoConsole');
+      Int32 Function(IntPtr hPC, COORD size),
+      int Function(int hPC, COORD size)>('ResizePseudoConsole');
   return _ResizePseudoConsole(hPC, size);
 }
 
