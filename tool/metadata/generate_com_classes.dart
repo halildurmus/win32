@@ -1,4 +1,4 @@
-// generate_winmd.dart
+// generate_com_classes.dart
 
 import 'dart:io';
 import 'package:winmd/winmd.dart';
