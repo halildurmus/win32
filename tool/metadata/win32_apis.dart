@@ -130,7 +130,8 @@ final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ?
 }
 
 void main() {
-  final scope = MetadataStore.getScopeForFile('tool/win32/Windows.Win32.winmd');
+  final scope =
+      MetadataStore.getScopeForFile(File('tool/win32/Windows.Win32.winmd'));
 
   // Start with the GDI namespace
   final gdi = scope.typeDefs

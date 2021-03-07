@@ -9,7 +9,8 @@ void initNamespaces(Scope scope) {
   // Use a Set to avoid duplication
   final namespaceSet = <String>{};
 
-  final scope = MetadataStore.getScopeForFile('tool/win32/Windows.Win32.winmd');
+  final scope =
+      MetadataStore.getScopeForFile(File('tool/win32/Windows.Win32.winmd'));
   for (final td in scope.typeDefs) {
     if (td.typeName.startsWith('Windows.Win32')) {
       final namespace = td.typeName.split('.')[2];
@@ -53,7 +54,8 @@ String processEnumeration(Enumeration enumClass) {
 }
 
 void main() {
-  final scope = MetadataStore.getScopeForFile('tool/win32/Windows.Win32.winmd');
+  final scope =
+      MetadataStore.getScopeForFile(File('tool/win32/Windows.Win32.winmd'));
   initNamespaces(scope);
 
   for (final namespace in namespaces) {
