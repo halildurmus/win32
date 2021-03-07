@@ -41,10 +41,11 @@ class MetadataStore {
 
   /// Takes a metadata file path and returns the matching scope.
   static Scope getScopeForFile(File fileScope) {
+    final filename = fileScope.uri.pathSegments.last;
     if (!isInitialized) initialize();
 
-    if (cache.containsKey(fileScope)) {
-      return cache[fileScope]!;
+    if (cache.containsKey(filename)) {
+      return cache[filename]!;
     } else {
       final szFile = fileScope.path.toNativeUtf16();
       final pReader = calloc<IntPtr>();
@@ -56,7 +57,7 @@ class MetadataStore {
           throw WindowsException(hr);
         } else {
           final scope = Scope(md.IMetaDataImport2(pReader.cast()));
-          cache[fileScope.uri.pathSegments.last] = scope;
+          cache[filename] = scope;
           return scope;
         }
       } finally {

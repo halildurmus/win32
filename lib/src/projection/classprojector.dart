@@ -5,7 +5,7 @@
 import '../constants.dart';
 import '../typedef.dart';
 import '../utils.dart';
-import 'types.dart';
+import 'projections.dart';
 import 'typeprojector.dart';
 
 class ClassProjector {

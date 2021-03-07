@@ -6,7 +6,10 @@
 // parameters, as well as the logic necessary to emit a Dart language
 // representation (a projection) of the underlying API.
 
-import 'types.dart';
+import '../typedef.dart';
+
+import 'classprojector.dart';
+import 'projections.dart';
 
 class TypePrinter {
   static String headerAsString(ClassProjection type) {
@@ -264,10 +267,12 @@ class ${type.className} extends $interfaceWithoutNamespace {
     }
   }
 
-  static String printType(ClassProjection type) =>
-      headerAsString(type) +
-      guidConstantsAsString(type) +
-      typedefsAsString(type) +
-      interfaceAsString(type) +
-      classAsString(type);
+  static String printType(TypeDef typeDef) {
+    final type = ClassProjector(typeDef).projection;
+    return headerAsString(type) +
+        guidConstantsAsString(type) +
+        typedefsAsString(type) +
+        interfaceAsString(type) +
+        classAsString(type);
+  }
 }

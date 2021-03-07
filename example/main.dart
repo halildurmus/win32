@@ -13,11 +13,8 @@ void main() {
   // Load the metadata for this interface
   final typeDef = MetadataStore.getMetadataForType(type)!;
 
-  // Project it into something Dart can work with
-  final projection = ClassProjector(typeDef).projection;
-
   // Create a Dart projection
-  final dartClass = TypePrinter.printType(projection);
+  final dartClass = TypePrinter.printType(typeDef);
 
   // Print it to the screen. Normally you'd save it to a file and format it.
   print(dartClass);

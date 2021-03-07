@@ -11,6 +11,3 @@ build/
 
 # Directory created by dartdoc
 doc/api/
-
-# Ignore coverage
-test/.test_coverage.dart

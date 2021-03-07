@@ -28,6 +28,6 @@ export 'src/com/IMetaDataImport.dart';
 export 'src/com/IMetaDataImport2.dart';
 
 export 'src/projection/classprojector.dart';
-export 'src/projection/typeprojector.dart';
+export 'src/projection/projections.dart';
 export 'src/projection/typeprinter.dart';
-export 'src/projection/types.dart';
+export 'src/projection/typeprojector.dart';
