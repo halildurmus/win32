@@ -129,9 +129,12 @@ final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ?
           orElse: () =>
               throw Exception('Cannot find ${function.signature.name}'));
 
+      final dartFunctionName = win32.functions.keys
+          .firstWhere((k) => win32.functions[k] == function);
+
       writer.writeStringSync('''
 ${generateDocComment(function)}
-${Win32Prototype(function.signature.nameWithoutEncoding, method, libraryDartName).dartFfiMapping}
+${Win32Prototype(dartFunctionName, method, libraryDartName).dartFfiMapping}
 ''');
     }
 
