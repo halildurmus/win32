@@ -16,8 +16,7 @@ jobs:
 
       matrix:
         os: [windows-latest]
-
-        sdk: [stable, beta, main]
+        sdk: [stable, dev]
 
     steps:
       - name: Fetch sources
