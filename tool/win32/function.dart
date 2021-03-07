@@ -1,5 +1,3 @@
-import 'signature.dart';
-
 const windowsBuilds = <String, int>{
   'WIN8': 9200,
   'WIN81': 9600,
@@ -27,7 +25,6 @@ class Win32Function {
 
   final int minimumWindowsVersion;
   final bool test;
-  final Win32Signature signature;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         'prototype': prototype.first,
@@ -57,7 +54,5 @@ class Win32Function {
         minimumWindowsVersion = json['minimumWindowsVersion'] != null
             ? windowsBuilds[(json['minimumWindowsVersion'] as String)]!
             : 0,
-        test = json['test'] as bool? ?? true,
-        signature =
-            Win32Signature.fromSyntaxString(json['prototype'] as String);
+        test = json['test'] as bool? ?? true;
 }

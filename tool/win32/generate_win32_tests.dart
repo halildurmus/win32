@@ -7,13 +7,14 @@
 
 import 'dart:io';
 
-import 'signature.dart';
+import 'package:winmd/winmd.dart';
+
+import '../metadata/win32.dart';
 import 'struct_sizes.dart';
 import 'win32api.dart';
-import 'win32types.dart';
 
-void generateTests(Win32API win32) {
-  var tests = 0;
+int generateTests(Win32API win32) {
+  var testsGenerated = 0;
   final writer = File('test/api_test.dart').openSync(mode: FileMode.write);
 
   writer.writeStringSync('''
@@ -50,56 +51,58 @@ void main() {
 
     writer.writeStringSync("group('Test $library functions', () {\n");
 
-    final filteredFunctionList =
-        win32.functions.values.where((func) => func.dllLibrary == library);
+    final filteredFunctionList = win32.functions
+      ..removeWhere((key, value) => value.dllLibrary != library)
+      ..removeWhere(
+          (key, value) => value.prototype.contains('SetWindowLongPtrW'));
 
-    for (final function in filteredFunctionList) {
-      if (function.test == false) continue;
+    for (final function in filteredFunctionList.keys) {
+      if (filteredFunctionList[function]!.test == false) continue;
 
-      final dartFunctionName = win32.functions.keys
-          .firstWhere((k) => win32.functions[k] == function);
+      final method = methods.firstWhere((m) => m.methodName == function,
+          orElse: () => throw Exception('Cannot find $function'));
 
-      final returnFFIType = convertToFFIType(function.signature.returnType);
-      final returnDartType = Win32Param([returnFFIType, '']).dartType;
+      final prototype = Win32Prototype(function, method, libraryDartName);
 
-      final nativeParams = function.signature.params
-          .map((param) => '${param.ffiType} ${param.name}')
-          .join(', ');
+      final returnFFIType =
+          TypeProjector(method.returnType.typeIdentifier).nativeType;
+      final returnDartType =
+          TypeProjector(method.returnType.typeIdentifier).dartType;
 
-      final dartParams = function.signature.params
-          .map((param) => '${param.dartType} ${param.name}')
-          .join(', ');
+      final minimumWindowsVersion =
+          filteredFunctionList[function]!.minimumWindowsVersion;
 
       final test = '''
-      test('Can instantiate $dartFunctionName', () {
+      test('Can instantiate $function', () {
         final $libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');
-        final $dartFunctionName = $libraryDartName.lookupFunction<\n
-          $returnFFIType Function($nativeParams),
-          $returnDartType Function($dartParams)>
-          ('${function.signature.name}');
-        expect($dartFunctionName, isA<Function>());
+        final $function = $libraryDartName.lookupFunction<\n
+          $returnFFIType Function(${prototype.nativeParams}),
+          $returnDartType Function(${prototype.dartParams})>
+          ('$function');
+        expect($function, isA<Function>());
       });''';
 
-      if (function.minimumWindowsVersion > 0) {
+      if (minimumWindowsVersion > 0) {
         writer.writeStringSync('''
-        if (windowsBuildNumber >= ${function.minimumWindowsVersion}) {
+        if (windowsBuildNumber >= $minimumWindowsVersion) {
           $test
         }''');
       } else {
         writer.writeStringSync(test);
       }
       writer.writeStringSync('\n');
-      tests++;
+      testsGenerated++;
     }
     writer.writeStringSync('});\n\n');
   }
   writer.writeStringSync('}');
   writer.closeSync();
-  print('$tests API tests generated.');
+
+  return testsGenerated;
 }
 
-void generateStructSizeTests() {
-  var tests = 0;
+int generateStructSizeTests() {
+  var testsGenerated = 0;
   final writer = File('test/struct_test.dart').openSync(mode: FileMode.write);
 
   writer.writeStringSync('''
@@ -134,17 +137,11 @@ void main() {
     }
   });
 ''');
-    tests++;
+    testsGenerated++;
   }
 
   writer.writeStringSync('}');
   writer.closeSync();
-  print('$tests struct tests generated.');
-}
 
-void main() {
-  final win32 = Win32API('tool/win32/win32api.json');
-
-  generateTests(win32);
-  generateStructSizeTests();
+  return testsGenerated;
 }
