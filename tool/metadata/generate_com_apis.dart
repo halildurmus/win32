@@ -1,7 +1,11 @@
 // generate_com_classes.dart
 
 import 'dart:io';
+
+import 'package:args/args.dart';
 import 'package:winmd/winmd.dart';
+
+late final Scope scope;
 
 class COMType {
   final String typeName;
@@ -67,12 +71,15 @@ const interfacesToGenerate = <COMType>[
 ];
 
 void main(List<String> args) {
-  final scope =
-      MetadataStore.getScopeForFile(File('tool/win32/Windows.Win32.winmd'));
+  scope = MetadataStore.getScopeForFile(File('tool/win32/Windows.Win32.winmd'));
 
-  final outputDirectory = (args.length == 1)
-      ? Directory(args.first)
-      : Directory('lib/src/generated');
+  final parser = ArgParser()
+    ..addOption('classDirectory', defaultsTo: 'lib/src/generated')
+    ..addOption('testDirectory', defaultsTo: 'test/com');
+
+  final argResults = parser.parse(args);
+  final classDirectory = Directory(argResults['classDirectory'] as String);
+  final testDirectory = Directory(argResults['testDirectory'] as String);
 
   for (final type in interfacesToGenerate) {
     final mdTypeDef = scope.findTypeDef(type.typeName)!;
@@ -101,11 +108,20 @@ void main(List<String> args) {
 
     final dartClass = TypePrinter.printProjection(projection);
 
-    final outputFilename = type.typeName.split('.').last;
+    final classOutputFilename = type.typeName.split('.').last;
     final outputFile =
-        File('${outputDirectory.uri.toFilePath()}$outputFilename.dart');
+        File('${classDirectory.uri.toFilePath()}$classOutputFilename.dart');
 
     print('Writing:    ${outputFile.path}');
     outputFile.writeAsStringSync(dartClass);
+
+    final dartTests = TypePrinter.printTests(projection);
+
+    final testOutputFilename = type.typeName.split('.').last;
+    final testFile = File(
+        '${testDirectory.uri.toFilePath()}${testOutputFilename}_test.dart');
+
+    print('Writing:    ${testFile.path}');
+    testFile.writeAsStringSync(dartTests);
   }
 }
