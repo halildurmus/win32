@@ -5,12 +5,14 @@
 // Parse the Windows Metadata for a Win32 type and grab some interesting
 // information about it.
 
+import 'dart:io';
+
 import 'package:winmd/winmd.dart';
 
 void main() {
   // Load WinMD metadata for Win32, as produced by the following utility:
   // https://github.com/microsoft/win32metadata
-  final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+  final scope = MetadataStore.getScopeForFile(File('bin/Windows.Win32.winmd'));
   print('*** ${scope.name} ***');
 
   // Find the GDI API namesapce

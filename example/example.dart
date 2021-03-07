@@ -4,6 +4,8 @@
 
 // Parse the Windows Metadata for a type and interpret its metadata
 
+import 'dart:io';
+
 import 'package:win32/win32.dart';
 import 'package:winmd/winmd.dart';
 
@@ -29,7 +31,7 @@ void listEnums([String type = 'Windows.Globalization']) {
   printHeading('Enums implemented by $type');
 
   final file = metadataFileContainingType('Windows.Globalization.DayOfWeek');
-  final mdScope = MetadataStore.getScopeForFile(file.path);
+  final mdScope = MetadataStore.getScopeForFile(File(file.path));
   final enums = mdScope.enums;
 
   for (final enumEntry in enums) {

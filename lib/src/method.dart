@@ -50,7 +50,6 @@ class Method extends AttributeObject {
       final hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName, 256,
           pchImportName, ptkImportDLL);
       if (SUCCEEDED(hr)) {
-        // print('pinvoke dll is ${szImportName.toDartString()}');
         return Module.fromToken(reader, ptkImportDLL.value);
       } else {
         throw COMException(hr);

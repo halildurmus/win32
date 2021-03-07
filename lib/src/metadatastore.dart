@@ -3,6 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
@@ -39,13 +40,13 @@ class MetadataStore {
   }
 
   /// Takes a metadata file path and returns the matching scope.
-  static Scope getScopeForFile(String fileScope) {
+  static Scope getScopeForFile(File fileScope) {
     if (!isInitialized) initialize();
 
     if (cache.containsKey(fileScope)) {
       return cache[fileScope]!;
     } else {
-      final szFile = fileScope.toNativeUtf16();
+      final szFile = fileScope.path.toNativeUtf16();
       final pReader = calloc<IntPtr>();
 
       try {
@@ -54,8 +55,9 @@ class MetadataStore {
         if (FAILED(hr)) {
           throw WindowsException(hr);
         } else {
-          cache[fileScope] = Scope(md.IMetaDataImport2(pReader.cast()));
-          return cache[fileScope]!;
+          final scope = Scope(md.IMetaDataImport2(pReader.cast()));
+          cache[fileScope.uri.pathSegments.last] = scope;
+          return scope;
         }
       } finally {
         calloc.free(szFile);
@@ -93,7 +95,7 @@ class MetadataStore {
             hstrMetaDataFilePath, spMetaDataImport, typeDef);
         if (SUCCEEDED(hr)) {
           final filePath = convertFromHString(hstrMetaDataFilePath);
-          return getScopeForFile(filePath);
+          return getScopeForFile(File(filePath));
         } else {
           throw WindowsException(hr);
         }
@@ -132,6 +134,6 @@ class MetadataStore {
   }
 
   /// Print information about the cache for debugging purposes.
-  @override
-  String toString() => 'Store: [${MetadataStore.cache.keys.join(', ')}]';
+  static String cacheInfo() =>
+      'Store: [${MetadataStore.cache.keys.join(', ')}]';
 }

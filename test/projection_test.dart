@@ -1,4 +1,7 @@
 @TestOn('windows')
+
+import 'dart:io';
+
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
@@ -22,7 +25,8 @@ void main() {
   });
 
   group('Projection', () {
-    final scope = MetadataStore.getScopeForFile('bin/Windows.Win32.winmd');
+    final scope =
+        MetadataStore.getScopeForFile(File('bin/Windows.Win32.winmd'));
 
     test('ANSI string', () {
       final typedef = scope['Windows.Win32.KeyboardAndMouseInput.Apis']!;
