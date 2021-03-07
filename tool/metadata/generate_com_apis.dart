@@ -71,7 +71,8 @@ const interfacesToGenerate = <COMType>[
 ];
 
 void main(List<String> args) {
-  scope = MetadataStore.getScopeForFile(File('tool/win32/Windows.Win32.winmd'));
+  scope =
+      MetadataStore.getScopeForFile(File('tool/metadata/Windows.Win32.winmd'));
 
   final parser = ArgParser()
     ..addOption('classDirectory', defaultsTo: 'lib/src/generated')

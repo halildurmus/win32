@@ -21,7 +21,8 @@ const winmdGenerated = [
   'winmm'
 ];
 
-// api-ms-win-core-winrt-string is broken because of
+// api-ms-win-core-winrt-string is broken because of:
 // https://github.com/microsoft/win32metadata/issues/292
 
-// api-ms-win-ro-typeresolution-l1-1-0 is missing in the metadata
+// api-ms-win-ro-typeresolution-l1-1-0 is missing in the metadata:
+// https://github.com/microsoft/win32metadata/issues/240

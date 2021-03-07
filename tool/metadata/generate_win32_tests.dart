@@ -9,10 +9,10 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import '../metadata/win32.dart';
-import 'function.dart';
-import 'struct_sizes.dart';
-import 'win32api.dart';
+import '../manual_gen/function.dart';
+import '../manual_gen/struct_sizes.dart';
+import '../manual_gen/win32api.dart';
+import 'generate_win32.dart';
 
 int generateTests(Win32API win32) {
   var testsGenerated = 0;

@@ -1,8 +1,9 @@
 # Win32 API Generation
 
-The traditional (C-style) APIs exposed by this library are generated from metadata. This folder contains code that loads
-this metadata (primarily in the form of a JSON file) and generates a series of files representing FFI mappings and tests
-as output.
+The traditional (C-style) APIs exposed by this library are generated from
+metadata. This folder contains code that loads this metadata (primarily in the
+form of a JSON file) and generates a series of files representing FFI mappings
+and tests as output.
 
 ## JSON Format
 

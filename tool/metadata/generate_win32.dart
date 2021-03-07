@@ -8,10 +8,10 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import '../win32/function.dart';
-import '../win32/generate_from.dart';
-import '../win32/generate_win32_tests.dart';
-import '../win32/win32api.dart';
+import '../manual_gen/function.dart';
+import '../manual_gen/win32api.dart';
+import 'generate_win32_tests.dart';
+import 'winmd_caveats.dart';
 
 class Win32Prototype {
   final String _nameWithoutEncoding;
@@ -141,8 +141,6 @@ final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ?
       ..removeWhere(
           (key, value) => value.prototype.contains('SetWindowLongPtrW'));
 
-    print('$library has ${filteredFunctionList.length} entries');
-
     for (final function in filteredFunctionList.keys) {
       try {
         final method = methods.firstWhere((m) => methodMatches(
@@ -162,13 +160,13 @@ ${Win32Prototype(function, method, libraryDartName).dartFfiMapping}
 
 void main() {
   final scope =
-      MetadataStore.getScopeForFile(File('tool/win32/Windows.Win32.winmd'));
+      MetadataStore.getScopeForFile(File('tool/metadata/Windows.Win32.winmd'));
   final apis = scope.typeDefs.where((type) => type.typeName.endsWith('Apis'));
 
   apis.forEach((api) => methods.addAll(api.methods));
   print('${methods.length} APIs collected');
 
-  final win32 = Win32API('tool/win32/win32api.json');
+  final win32 = Win32API('tool/manual_gen/win32api.json');
   final genCount = win32.functions.values
       .where((func) => winmdGenerated.contains(func.dllLibrary))
       .length;
