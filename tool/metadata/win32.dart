@@ -18,23 +18,23 @@ class Win32Prototype {
   final String _lib;
 
   String get nativePrototype =>
-      '${TypeBuilder.nativeType(_method.returnType.typeIdentifier)} Function($nativeParams)';
+      '${TypeProjector(_method.returnType.typeIdentifier).nativeType} Function($nativeParams)';
 
   String get nativeParams => _method.parameters
       .map((param) =>
-          '${TypeBuilder.nativeType(param.typeIdentifier)} ${param.name}')
+          '${TypeProjector(param.typeIdentifier).nativeType} ${param.name}')
       .join(', ');
 
   String get dartPrototype =>
-      '${TypeBuilder.dartType(_method.returnType.typeIdentifier)} Function($dartParams)';
+      '${TypeProjector(_method.returnType.typeIdentifier).dartType} Function($dartParams)';
 
   String get dartParams => _method.parameters
       .map((param) =>
-          '${TypeBuilder.dartType(param.typeIdentifier)} ${param.name}')
+          '${TypeProjector(param.typeIdentifier).dartType} ${param.name}')
       .join(', ');
 
   String get dartFfiMapping =>
-      '${TypeBuilder.dartType(_method.returnType.typeIdentifier)} '
+      '${TypeProjector(_method.returnType.typeIdentifier).dartType} '
       '$_nameWithoutEncoding($dartParams) {\n'
       '  final _$_nameWithoutEncoding = _$_lib.lookupFunction<\n'
       '    $nativePrototype, \n'
@@ -140,7 +140,8 @@ ${Win32Prototype(function.signature.nameWithoutEncoding, method, libraryDartName
 }
 
 void main() {
-  final scope = MetadataStore.getScopeForFile('tool/win32/Windows.Win32.winmd');
+  final scope =
+      MetadataStore.getScopeForFile(File('tool/win32/Windows.Win32.winmd'));
   final apis = scope.typeDefs.where((type) => type.typeName.endsWith('Apis'));
 
   apis.forEach((api) => methods.addAll(api.methods));
