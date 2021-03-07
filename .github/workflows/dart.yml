@@ -1,4 +1,4 @@
-name: Dart
+name: Build
 
 on:
   push:
@@ -19,18 +19,23 @@ jobs:
         # sure that tests don't fail on a non-supported platform).
         os: [windows-latest, windows-2016, ubuntu-latest]
 
-        # Stable does not support null safety yet.
-        sdk: [beta, dev, main]
+        sdk: [stable, beta, dev, main]
 
         # One SDK version is plenty on Ubuntu. It's a safety test. Similarly,
-        # nobody is running the oldest Windows on leading-edge Dart releases.
+        # it's unlikely that we'll find unique bugs associated with running the
+        # oldest Windows version on leading-edge Dart releases that won't be
+        # caught by running on the latest Windows version.
         exclude:
           - os: ubuntu-latest
             sdk: main
           - os: ubuntu-latest
             sdk: dev
+          - os: ubuntu-latest
+            sdk: beta
           - os: windows-2016
             sdk: main
+          - os: windows-2016
+            sdk: dev
           - os: windows-2016
             sdk: dev
 
@@ -39,7 +44,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up Dart
-        uses: dart-lang/setup-dart@v0.4
+        uses: dart-lang/setup-dart@v1
         with:
           sdk: ${{matrix.sdk}}
 
