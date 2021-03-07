@@ -275,4 +275,11 @@ class ${type.className} extends $interfaceWithoutNamespace {
         interfaceAsString(type) +
         classAsString(type);
   }
+
+  static String printProjection(ClassProjection projection) =>
+      headerAsString(projection) +
+      guidConstantsAsString(projection) +
+      typedefsAsString(projection) +
+      interfaceAsString(projection) +
+      classAsString(projection);
 }
