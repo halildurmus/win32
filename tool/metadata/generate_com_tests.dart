@@ -12,6 +12,9 @@ import 'package:winmd/winmd.dart';
 import 'generate_com_classes.dart';
 
 String generateTests(ClassProjection projection) {
+  final interfaceName = projection.shortName;
+  final dartClassName = interfaceName.substring(1).toLowerCase();
+
   final buffer = StringBuffer();
   buffer.write('''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
@@ -35,26 +38,22 @@ import 'package:win32/win32.dart';
 void main() {
   final ptr = calloc<COMObject>();
 
-  final ${projection.name.substring(1).toLowerCase()} = ${projection.name}(ptr);
+  final $dartClassName = $interfaceName(ptr);
 ''');
 
-  // for (final method in interface.methods) {
-  //   final className = interface.name!;
+  for (final method in projection.methods) {
+    if (!method.isGetProperty && !method.isSetProperty) {
+      buffer.write('''
+        test('Can instantiate $interfaceName.${method.name}', () {
+          expect($dartClassName.${method.name}, isA<Function>());
+          });
+          ''');
+    }
+  }
 
-  //   if (!method.name.startsWith('get_') && !method.name.startsWith('set_')) {
-  //     buffer.write('''
-  //   test('Can instantiate $className.${method.name}', () {
-  //     expect(${interface.name!.substring(1).toLowerCase()}.${method.name}, isA<Function>());
-  //     });
-  //     ''');
-  //   }
-  //   // }
-
-  // }
-
-  // buffer.write('''
-  // calloc.free(ptr);
-  // }''');
+  buffer.write('''
+  free(ptr);
+  }''');
 
   return buffer.toString();
 }
