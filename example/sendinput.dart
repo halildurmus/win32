@@ -37,7 +37,7 @@ void main() {
   result = SendInput(1, kbd, sizeOf<INPUT>());
   if (result != TRUE) print('Error: ${GetLastError()}');
 
-  calloc.free(kbd);
+  free(kbd);
 
   print('Sending a right-click mouse event.');
   final mouse = calloc<INPUT>();
@@ -51,5 +51,5 @@ void main() {
   result = SendInput(1, mouse, sizeOf<INPUT>());
   if (result != TRUE) print('Error: ${GetLastError()}');
 
-  calloc.free(mouse);
+  free(mouse);
 }

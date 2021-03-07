@@ -47,5 +47,5 @@ void main() {
   test('Can instantiate IWbemContext.DeleteAll', () {
     expect(wbemcontext.DeleteAll, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

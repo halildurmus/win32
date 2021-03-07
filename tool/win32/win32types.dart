@@ -1,6 +1,8 @@
-String ffiFromWin32(String win32Type) {
-  if (mapping.containsKey(win32Type)) {
-    return mapping[win32Type]!;
+/// Converts from a Win32 type (e.g. BOOL, UINT, DWORD) to the underlying Dart
+/// FFI native type (e.g. Uint32).
+String convertToFFIType(String win32Type) {
+  if (win32TypeMap.containsKey(win32Type)) {
+    return win32TypeMap[win32Type]!;
   } else {
     if (win32Type.startsWith('LP')) {
       return 'Pointer<${win32Type.substring(2)}>';
@@ -11,7 +13,33 @@ String ffiFromWin32(String win32Type) {
   }
 }
 
-const mapping = <String, String>{
+// Converts from a Dart FFI native type (e.g. Uint32) to the equivalent Dart
+// type (e.g. int).
+String convertToDartType(String ffiType) {
+  const intTypes = <String>[
+    'Int8',
+    'Int16',
+    'Int32',
+    'Int64',
+    'IntPtr',
+    'Uint8',
+    'Uint16',
+    'Uint32',
+    'Uint64'
+  ];
+
+  if (['Float', 'Double'].contains(ffiType)) {
+    return 'double';
+  }
+
+  if (intTypes.contains(ffiType)) {
+    return 'int';
+  }
+
+  return ffiType;
+}
+
+const win32TypeMap = <String, String>{
   // Base C types
   'void': 'Void',
   'int': 'Int32',
@@ -248,7 +276,7 @@ const mapping = <String, String>{
   'HRESULT': 'Int32',
 
   'MMRESULT': 'Uint32',
-  'NTSTATUS': 'Int32', 'VARTYPE': 'Uint32',
+  'NTSTATUS': 'Int32', 'VARTYPE': 'Uint16',
 
   // A language identifier. Declared as `WORD`.
   'LANGID': 'Uint16',
@@ -315,11 +343,11 @@ const mapping = <String, String>{
   'LPCOLESTR': 'Pointer<Utf16>',
   'LPOLESTR': 'Pointer<Utf16>',
   'PCNZWCH': 'Pointer<Utf16>',
-  'LPCSTR': 'Pointer<Uint8>',
+  'LPCSTR': 'Pointer<Utf8>',
   'LPSTR': 'Pointer<Uint8>',
   'LPCCH': 'Pointer<Uint8>',
   'TCHAR': 'Uint16',
-  'PCSTR': 'Pointer<Uint8>',
+  'PCSTR': 'Pointer<Utf8>',
   'PCTSTR': 'Pointer<Utf16>',
   'PCWSTR': 'Pointer<Utf16>',
   // A pointer to a null-terminated string of 16-bit Unicode characters.

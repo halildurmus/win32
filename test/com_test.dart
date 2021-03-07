@@ -16,8 +16,8 @@ void main() {
     final guid2 = calloc<GUID>()..ref.setGUID(guid.ref.toString());
     expect(guid.ref.toString(), equals(guid2.ref.toString()));
 
-    calloc.free(guid2);
-    calloc.free(guid);
+    free(guid2);
+    free(guid);
   });
 
   test('GUID creation failure', () {
@@ -35,7 +35,7 @@ void main() {
 
     expect(guid.ref.toString(), equalsIgnoringCase(CLSID_FileSaveDialog));
 
-    calloc.free(guid);
+    free(guid);
   });
 
   test('IIDFromString', () {
@@ -45,7 +45,7 @@ void main() {
 
     expect(guid.ref.toString(), equalsIgnoringCase(IID_IShellItem2));
 
-    calloc.free(guid);
+    free(guid);
   });
 
   test('Create COM object without calling CoInitialize should fail', () {
@@ -62,17 +62,17 @@ void main() {
         nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
     expect(hr, equals(S_OK));
 
-    final ptr = calloc<COMObject>();
+    final ptr = calloc<Pointer>();
     final clsid = calloc<GUID>()..ref.setGUID(CLSID_FileSaveDialog);
     final iid = calloc<GUID>()..ref.setGUID(IID_IFileSaveDialog);
 
-    hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
+    hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr);
     expect(hr, equals(S_OK));
     expect(ptr.address, isNonZero);
 
-    calloc.free(iid);
-    calloc.free(clsid);
-    calloc.free(ptr);
+    free(iid);
+    free(clsid);
+    free(ptr);
 
     CoUninitialize();
   });
@@ -99,11 +99,11 @@ void main() {
     expect(hr, equals(S_OK));
     expect(ptrSaveDialog.address, isNonZero);
 
-    calloc.free(iidFileSaveDialog);
-    calloc.free(iidClassFactory);
-    calloc.free(clsid);
-    calloc.free(ptrSaveDialog);
-    calloc.free(ptrFactory);
+    free(iidFileSaveDialog);
+    free(iidClassFactory);
+    free(clsid);
+    free(ptrSaveDialog);
+    free(ptrFactory);
 
     CoUninitialize();
   });
@@ -133,25 +133,25 @@ void main() {
     test('Can cast to IUnknown', () {
       final riid = convertToIID(IID_IUnknown);
 
-      final classPtr = calloc<IntPtr>();
+      final classPtr = calloc<Pointer>();
       final hr = dialog.QueryInterface(riid.cast(), classPtr);
       expect(hr, equals(S_OK));
 
       final unk = IUnknown(classPtr.cast());
       expect(unk.ptr.address, isNonZero);
 
-      calloc.free(classPtr);
-      calloc.free(riid);
+      free(classPtr);
+      free(riid);
     });
     test('Cast to random interface fails', () {
       final riid = convertToIID(IID_IDesktopWallpaper);
 
-      final classPtr = calloc<IntPtr>();
+      final classPtr = calloc<Pointer>();
       final hr = dialog.QueryInterface(riid.cast(), classPtr);
       expect(hr, equals(E_NOINTERFACE));
 
-      calloc.free(classPtr);
-      calloc.free(riid);
+      free(classPtr);
+      free(riid);
     });
     test('AddRef / Release', () {
       var refs = dialog.AddRef();
@@ -167,7 +167,7 @@ void main() {
       expect(refs, equals(1));
     });
     tearDown(() {
-      calloc.free(dialog.ptr);
+      free(dialog.ptr);
       CoUninitialize();
     });
   });

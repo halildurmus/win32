@@ -12,6 +12,7 @@ import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../utils.dart';
 
 /// A representation of a generic COM object. All Dart COM objects inherit from
 /// this class.
@@ -40,7 +41,7 @@ Pointer<GUID> convertToIID(String strIID) {
     }
     return iid;
   } finally {
-    calloc.free(lpszIID);
+    free(lpszIID);
   }
 }
 
@@ -61,6 +62,6 @@ Pointer<GUID> convertToCLSID(String strCLSID) {
     }
     return clsid;
   } finally {
-    calloc.free(lpszCLSID);
+    free(lpszCLSID);
   }
 }

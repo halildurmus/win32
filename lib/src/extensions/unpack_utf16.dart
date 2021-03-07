@@ -10,7 +10,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 extension Utf16Conversion on Pointer<Utf16> {
-  @deprecated
+  @Deprecated('Use the toDartString method in package:ffi 1.0 instead.')
   String unpackString(int maxLength) {
     final pathData = cast<Uint16>().asTypedList(maxLength);
 

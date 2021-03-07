@@ -10,20 +10,20 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../utils.dart';
 
 import 'IUnknown.dart';
 
 /// @nodoc
-const IID_IPersist = '{0000010c-0000-0000-C000-000000000046}';
+const IID_IPersist = '{0000010C-0000-0000-C000-000000000046}';
 
 typedef _GetClassID_Native = Int32 Function(
-    Pointer obj, Pointer<CLSID> pClassID);
-typedef _GetClassID_Dart = int Function(Pointer obj, Pointer<CLSID> pClassID);
+    Pointer obj, Pointer<GUID> pClassID);
+typedef _GetClassID_Dart = int Function(Pointer obj, Pointer<GUID> pClassID);
 
 /// {@category Interface}
 /// {@category com}
@@ -32,7 +32,7 @@ class IPersist extends IUnknown {
 
   IPersist(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetClassID(Pointer<CLSID> pClassID) =>
+  int GetClassID(Pointer<GUID> pClassID) =>
       Pointer<NativeFunction<_GetClassID_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
           .asFunction<_GetClassID_Dart>()(ptr.ref.lpVtbl, pClassID);

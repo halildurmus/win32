@@ -244,6 +244,37 @@ void main() {
           int Function(int hUpdate, int fDiscard)>('EndUpdateResourceW');
       expect(EndUpdateResource, isA<Function>());
     });
+    test('Can instantiate EnumProcesses', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final EnumProcesses = kernel32.lookupFunction<
+          Int32 Function(Pointer<Uint32> lpidProcess, Uint32 cb,
+              Pointer<Uint32> lpcbNeeded),
+          int Function(Pointer<Uint32> lpidProcess, int cb,
+              Pointer<Uint32> lpcbNeeded)>('K32EnumProcesses');
+      expect(EnumProcesses, isA<Function>());
+    });
+    test('Can instantiate EnumProcessModules', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final EnumProcessModules = kernel32.lookupFunction<
+          Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
+              Pointer<Uint32> lpcbNeeded),
+          int Function(int hProcess, Pointer<IntPtr> lphModule, int cb,
+              Pointer<Uint32> lpcbNeeded)>('K32EnumProcessModules');
+      expect(EnumProcessModules, isA<Function>());
+    });
+    test('Can instantiate EnumProcessModulesEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final EnumProcessModulesEx = kernel32.lookupFunction<
+          Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
+              Pointer<Uint32> lpcbNeeded, Uint32 dwFilterFlag),
+          int Function(
+              int hProcess,
+              Pointer<IntPtr> lphModule,
+              int cb,
+              Pointer<Uint32> lpcbNeeded,
+              int dwFilterFlag)>('K32EnumProcessModulesEx');
+      expect(EnumProcessModulesEx, isA<Function>());
+    });
     test('Can instantiate EnumResourceNames', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final EnumResourceNames = kernel32.lookupFunction<
@@ -562,6 +593,15 @@ void main() {
               Pointer<Utf16> lpBuffer)>('GetLogicalDriveStringsW');
       expect(GetLogicalDriveStrings, isA<Function>());
     });
+    test('Can instantiate GetModuleBaseName', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetModuleBaseName = kernel32.lookupFunction<
+          Uint32 Function(IntPtr hProcess, IntPtr hModule,
+              Pointer<Utf16> lpBaseName, Uint32 nSize),
+          int Function(int hProcess, int hModule, Pointer<Utf16> lpBaseName,
+              int nSize)>('K32GetModuleBaseNameW');
+      expect(GetModuleBaseName, isA<Function>());
+    });
     test('Can instantiate GetModuleFileName', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetModuleFileName = kernel32.lookupFunction<
@@ -570,6 +610,15 @@ void main() {
           int Function(int hModule, Pointer<Utf16> lpFilename,
               int nSize)>('GetModuleFileNameW');
       expect(GetModuleFileName, isA<Function>());
+    });
+    test('Can instantiate GetModuleFileNameEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetModuleFileNameEx = kernel32.lookupFunction<
+          Uint32 Function(IntPtr hProcess, IntPtr hModule,
+              Pointer<Utf16> lpFilename, Uint32 nSize),
+          int Function(int hProcess, int hModule, Pointer<Utf16> lpFilename,
+              int nSize)>('K32GetModuleFileNameExW');
+      expect(GetModuleFileNameEx, isA<Function>());
     });
     test('Can instantiate GetModuleHandle', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -597,9 +646,9 @@ void main() {
     test('Can instantiate GetProcAddress', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetProcAddress = kernel32.lookupFunction<
-          IntPtr Function(IntPtr hModule, Pointer<Uint8> lpProcName),
+          IntPtr Function(IntPtr hModule, Pointer<Utf8> lpProcName),
           int Function(
-              int hModule, Pointer<Uint8> lpProcName)>('GetProcAddress');
+              int hModule, Pointer<Utf8> lpProcName)>('GetProcAddress');
       expect(GetProcAddress, isA<Function>());
     });
     test('Can instantiate GetProcessHeap', () {
@@ -1134,6 +1183,14 @@ void main() {
               Pointer lpData,
               int cb)>('UpdateResourceW');
       expect(UpdateResource, isA<Function>());
+    });
+    test('Can instantiate VerLanguageName', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final VerLanguageName = kernel32.lookupFunction<
+          Uint32 Function(Uint32 wLang, Pointer<Utf16> szLang, Uint32 cchLang),
+          int Function(int wLang, Pointer<Utf16> szLang,
+              int cchLang)>('VerLanguageNameW');
+      expect(VerLanguageName, isA<Function>());
     });
     test('Can instantiate VirtualAlloc', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -3221,9 +3278,9 @@ void main() {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final DrawEscape = gdi32.lookupFunction<
           Int32 Function(
-              IntPtr hdc, Int32 iEscape, Int32 cjIn, Pointer<Uint8> lpIn),
+              IntPtr hdc, Int32 iEscape, Int32 cjIn, Pointer<Utf8> lpIn),
           int Function(int hdc, int iEscape, int cjIn,
-              Pointer<Uint8> lpIn)>('DrawEscape');
+              Pointer<Utf8> lpIn)>('DrawEscape');
       expect(DrawEscape, isA<Function>());
     });
     test('Can instantiate Ellipse', () {
@@ -4445,9 +4502,9 @@ void main() {
     test('Can instantiate SysAllocStringByteLen', () {
       final oleaut32 = DynamicLibrary.open('oleaut32.dll');
       final SysAllocStringByteLen = oleaut32.lookupFunction<
-          Pointer Function(Pointer<Uint8> psz, Uint32 len),
+          Pointer Function(Pointer<Utf8> psz, Uint32 len),
           Pointer Function(
-              Pointer<Uint8> psz, int len)>('SysAllocStringByteLen');
+              Pointer<Utf8> psz, int len)>('SysAllocStringByteLen');
       expect(SysAllocStringByteLen, isA<Function>());
     });
     test('Can instantiate SysAllocStringLen', () {
@@ -4506,7 +4563,7 @@ void main() {
       final oleaut32 = DynamicLibrary.open('oleaut32.dll');
       final VariantChangeType = oleaut32.lookupFunction<
           Int32 Function(
-              Pointer pvargDest, Pointer pvarSrc, Uint16 wFlags, Uint32 vt),
+              Pointer pvargDest, Pointer pvarSrc, Uint16 wFlags, Uint16 vt),
           int Function(Pointer pvargDest, Pointer pvarSrc, int wFlags,
               int vt)>('VariantChangeType');
       expect(VariantChangeType, isA<Function>());
@@ -4567,58 +4624,6 @@ void main() {
           int Function(
               Pointer<INITCOMMONCONTROLSEX> picce)>('InitCommonControlsEx');
       expect(InitCommonControlsEx, isA<Function>());
-    });
-  });
-
-  group('Test psapi functions', () {
-    test('Can instantiate EnumProcesses', () {
-      final psapi = DynamicLibrary.open('psapi.dll');
-      final EnumProcesses = psapi.lookupFunction<
-          Int32 Function(Pointer<Uint32> lpidProcess, Uint32 cb,
-              Pointer<Uint32> lpcbNeeded),
-          int Function(Pointer<Uint32> lpidProcess, int cb,
-              Pointer<Uint32> lpcbNeeded)>('EnumProcesses');
-      expect(EnumProcesses, isA<Function>());
-    });
-    test('Can instantiate EnumProcessModules', () {
-      final psapi = DynamicLibrary.open('psapi.dll');
-      final EnumProcessModules = psapi.lookupFunction<
-          Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
-              Pointer<Uint32> lpcbNeeded),
-          int Function(int hProcess, Pointer<IntPtr> lphModule, int cb,
-              Pointer<Uint32> lpcbNeeded)>('EnumProcessModules');
-      expect(EnumProcessModules, isA<Function>());
-    });
-    test('Can instantiate EnumProcessModulesEx', () {
-      final psapi = DynamicLibrary.open('psapi.dll');
-      final EnumProcessModulesEx = psapi.lookupFunction<
-          Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
-              Pointer<Uint32> lpcbNeeded, Uint32 dwFilterFlag),
-          int Function(
-              int hProcess,
-              Pointer<IntPtr> lphModule,
-              int cb,
-              Pointer<Uint32> lpcbNeeded,
-              int dwFilterFlag)>('EnumProcessModulesEx');
-      expect(EnumProcessModulesEx, isA<Function>());
-    });
-    test('Can instantiate GetModuleBaseName', () {
-      final psapi = DynamicLibrary.open('psapi.dll');
-      final GetModuleBaseName = psapi.lookupFunction<
-          Uint32 Function(IntPtr hProcess, IntPtr hModule,
-              Pointer<Utf16> lpBaseName, Uint32 nSize),
-          int Function(int hProcess, int hModule, Pointer<Utf16> lpBaseName,
-              int nSize)>('GetModuleBaseNameW');
-      expect(GetModuleBaseName, isA<Function>());
-    });
-    test('Can instantiate GetModuleFileNameEx', () {
-      final psapi = DynamicLibrary.open('psapi.dll');
-      final GetModuleFileNameEx = psapi.lookupFunction<
-          Uint32 Function(IntPtr hProcess, IntPtr hModule,
-              Pointer<Utf16> lpFilename, Uint32 nSize),
-          int Function(int hProcess, int hModule, Pointer<Utf16> lpFilename,
-              int nSize)>('GetModuleFileNameExW');
-      expect(GetModuleFileNameEx, isA<Function>());
     });
   });
 
@@ -4862,14 +4867,6 @@ void main() {
               Pointer<Utf16> szTmpFile,
               Pointer<Uint32> puTmpFileLen)>('VerInstallFileW');
       expect(VerInstallFile, isA<Function>());
-    });
-    test('Can instantiate VerLanguageName', () {
-      final version = DynamicLibrary.open('version.dll');
-      final VerLanguageName = version.lookupFunction<
-          Uint32 Function(Uint32 wLang, Pointer<Utf16> szLang, Uint32 cchLang),
-          int Function(int wLang, Pointer<Utf16> szLang,
-              int cchLang)>('VerLanguageNameW');
-      expect(VerLanguageName, isA<Function>());
     });
     test('Can instantiate VerQueryValue', () {
       final version = DynamicLibrary.open('version.dll');

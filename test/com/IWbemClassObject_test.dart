@@ -92,5 +92,5 @@ void main() {
   test('Can instantiate IWbemClassObject.GetMethodOrigin', () {
     expect(wbemclassobject.GetMethodOrigin, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

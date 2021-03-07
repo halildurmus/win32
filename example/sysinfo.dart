@@ -35,7 +35,7 @@ bool isWindowsVersionAtLeast(int majorVersion, int minorVersion) {
       throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
     }
   } finally {
-    calloc.free(versionInfo);
+    free(versionInfo);
   }
 }
 
@@ -65,7 +65,7 @@ int getSystemMemoryInMegabytes() {
       throw WindowsException(HRESULT_FROM_WIN32(error));
     }
   } finally {
-    calloc.free(memory);
+    free(memory);
   }
 }
 
@@ -91,8 +91,8 @@ String getComputerName() {
       throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
     }
   } finally {
-    calloc.free(namePtr);
-    calloc.free(nameLength);
+    free(namePtr);
+    free(nameLength);
   }
   return name;
 }
@@ -132,11 +132,11 @@ Object getRegistryValue(int key, String subKey, String valueName) {
       throw WindowsException(HRESULT_FROM_WIN32(result));
     }
   } finally {
-    calloc.free(subKeyPtr);
-    calloc.free(valueNamePtr);
-    calloc.free(openKeyPtr);
-    calloc.free(data);
-    calloc.free(dataSize);
+    free(subKeyPtr);
+    free(valueNamePtr);
+    free(openKeyPtr);
+    free(data);
+    free(dataSize);
   }
   RegCloseKey(openKeyPtr.value);
 
@@ -188,7 +188,7 @@ void printPowerInfo() {
       throw WindowsException(HRESULT_FROM_WIN32(GetLastError()));
     }
   } finally {
-    calloc.free(powerStatus);
+    free(powerStatus);
   }
 }
 
@@ -247,7 +247,7 @@ void printBatteryStatusInfo() {
       }
     }
   } finally {
-    calloc.free(batteryStatus);
+    free(batteryStatus);
   }
 }
 

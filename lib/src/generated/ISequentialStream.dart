@@ -10,26 +10,26 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../utils.dart';
 
 import 'IUnknown.dart';
 
 /// @nodoc
-const IID_ISequentialStream = '{0c733a30-2a1c-11ce-ade5-00aa0044773d}';
+const IID_ISequentialStream = '{0C733A30-2A1C-11CE-ADE5-00AA0044773D}';
 
 typedef _Read_Native = Int32 Function(
-    Pointer obj, Pointer<Void> pv, Uint32 cb, Pointer<Uint32> pcbRead);
+    Pointer obj, Pointer pv, Uint32 cb, Pointer<Uint32> pcbRead);
 typedef _Read_Dart = int Function(
-    Pointer obj, Pointer<Void> pv, int cb, Pointer<Uint32> pcbRead);
+    Pointer obj, Pointer pv, int cb, Pointer<Uint32> pcbRead);
 
 typedef _Write_Native = Int32 Function(
-    Pointer obj, Pointer<Void> pv, Uint32 cb, Pointer<Uint32> pcbWritten);
+    Pointer obj, Pointer pv, Uint32 cb, Pointer<Uint32> pcbWritten);
 typedef _Write_Dart = int Function(
-    Pointer obj, Pointer<Void> pv, int cb, Pointer<Uint32> pcbWritten);
+    Pointer obj, Pointer pv, int cb, Pointer<Uint32> pcbWritten);
 
 /// {@category Interface}
 /// {@category com}
@@ -38,12 +38,12 @@ class ISequentialStream extends IUnknown {
 
   ISequentialStream(Pointer<COMObject> ptr) : super(ptr);
 
-  int Read(Pointer<Void> pv, int cb, Pointer<Uint32> pcbRead) =>
+  int Read(Pointer pv, int cb, Pointer<Uint32> pcbRead) =>
       Pointer<NativeFunction<_Read_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
           .asFunction<_Read_Dart>()(ptr.ref.lpVtbl, pv, cb, pcbRead);
 
-  int Write(Pointer<Void> pv, int cb, Pointer<Uint32> pcbWritten) =>
+  int Write(Pointer pv, int cb, Pointer<Uint32> pcbWritten) =>
       Pointer<NativeFunction<_Write_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(4).value)
           .asFunction<_Write_Dart>()(ptr.ref.lpVtbl, pv, cb, pcbWritten);

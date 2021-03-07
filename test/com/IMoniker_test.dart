@@ -65,5 +65,5 @@ void main() {
   test('Can instantiate IMoniker.IsSystemMoniker', () {
     expect(moniker.IsSystemMoniker, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

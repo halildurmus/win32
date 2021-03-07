@@ -21,7 +21,8 @@ void main() {
 
   final provideclassinfo = IProvideClassInfo(ptr);
   test('Can instantiate IProvideClassInfo.GetClassInfo', () {
-    expect(provideclassinfo.GetClassInfo, isA<Function>());
+    // BUG: https://github.com/microsoft/win32metadata/issues/274
+    expect(provideclassinfo.GetClassInfoA, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

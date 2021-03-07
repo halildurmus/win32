@@ -10,11 +10,11 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../utils.dart';
 
 import '../winrt/winrt_constants.dart';
 
@@ -23,8 +23,8 @@ import 'IInspectable.dart';
 /// @nodoc
 const IID_ICalendar = '{CA30221D-86D9-40FB-A26B-D44EB7CF08EA}';
 
-typedef _Clone_Native = Int32 Function(Pointer obj, Pointer<IntPtr> value);
-typedef _Clone_Dart = int Function(Pointer obj, Pointer<IntPtr> value);
+typedef _Clone_Native = Int32 Function(Pointer obj, Pointer<Pointer> result);
+typedef _Clone_Dart = int Function(Pointer obj, Pointer<Pointer> result);
 
 typedef _SetToMin_Native = Int32 Function(Pointer obj);
 typedef _SetToMin_Dart = int Function(Pointer obj);
@@ -45,25 +45,25 @@ typedef _put_NumeralSystem_Native = Int32 Function(Pointer obj, IntPtr value);
 typedef _put_NumeralSystem_Dart = int Function(Pointer obj, int value);
 
 typedef _GetCalendarSystem_Native = Int32 Function(
-    Pointer obj, Pointer<IntPtr> value);
+    Pointer obj, Pointer<IntPtr> result);
 typedef _GetCalendarSystem_Dart = int Function(
-    Pointer obj, Pointer<IntPtr> value);
+    Pointer obj, Pointer<IntPtr> result);
 
 typedef _ChangeCalendarSystem_Native = Int32 Function(
     Pointer obj, IntPtr value);
 typedef _ChangeCalendarSystem_Dart = int Function(Pointer obj, int value);
 
-typedef _GetClock_Native = Int32 Function(Pointer obj, Pointer<IntPtr> value);
-typedef _GetClock_Dart = int Function(Pointer obj, Pointer<IntPtr> value);
+typedef _GetClock_Native = Int32 Function(Pointer obj, Pointer<IntPtr> result);
+typedef _GetClock_Dart = int Function(Pointer obj, Pointer<IntPtr> result);
 
 typedef _ChangeClock_Native = Int32 Function(Pointer obj, IntPtr value);
 typedef _ChangeClock_Dart = int Function(Pointer obj, int value);
 
 typedef _GetDateTime_Native = Int32 Function(
-    Pointer obj, Pointer<Int64> result);
-typedef _GetDateTime_Dart = int Function(Pointer obj, Pointer<Int64> result);
+    Pointer obj, Pointer<Uint32> result);
+typedef _GetDateTime_Dart = int Function(Pointer obj, Pointer<Uint32> result);
 
-typedef _SetDateTime_Native = Int32 Function(Pointer obj, Int64 value);
+typedef _SetDateTime_Native = Int32 Function(Pointer obj, Uint32 value);
 typedef _SetDateTime_Dart = int Function(Pointer obj, int value);
 
 typedef _SetToNow_Native = Int32 Function(Pointer obj);
@@ -378,17 +378,17 @@ typedef _NanosecondAsPaddedString_Dart = int Function(
     Pointer obj, int minDigits, Pointer<IntPtr> result);
 
 typedef _Compare_Native = Int32 Function(
-    Pointer obj, Pointer<IntPtr> other, Pointer<Int32> result);
+    Pointer obj, Pointer other, Pointer<Int32> result);
 typedef _Compare_Dart = int Function(
-    Pointer obj, Pointer<IntPtr> other, Pointer<Int32> result);
+    Pointer obj, Pointer other, Pointer<Int32> result);
 
 typedef _CompareDateTime_Native = Int32 Function(
-    Pointer obj, Int64 other, Pointer<Int32> result);
+    Pointer obj, Uint32 other, Pointer<Int32> result);
 typedef _CompareDateTime_Dart = int Function(
     Pointer obj, int other, Pointer<Int32> result);
 
-typedef _CopyTo_Native = Int32 Function(Pointer obj, Pointer<IntPtr> other);
-typedef _CopyTo_Dart = int Function(Pointer obj, Pointer<IntPtr> other);
+typedef _CopyTo_Native = Int32 Function(Pointer obj, Pointer other);
+typedef _CopyTo_Dart = int Function(Pointer obj, Pointer other);
 
 typedef _get_FirstMinuteInThisHour_Native = Int32 Function(
     Pointer obj, Pointer<Int32> value);
@@ -437,10 +437,10 @@ class ICalendar extends IInspectable {
 
   ICalendar(Pointer<COMObject> ptr) : super(ptr);
 
-  int Clone(Pointer<IntPtr> value) =>
+  int Clone(Pointer<Pointer> result) =>
       Pointer<NativeFunction<_Clone_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, value);
+          .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, result);
 
   int SetToMin() => Pointer<NativeFunction<_SetToMin_Native>>.fromAddress(
           ptr.ref.vtable.elementAt(7).value)
@@ -459,7 +459,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -472,7 +472,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -484,27 +484,27 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
   }
 
-  int GetCalendarSystem(Pointer<IntPtr> value) =>
+  int GetCalendarSystem(Pointer<IntPtr> result) =>
       Pointer<NativeFunction<_GetCalendarSystem_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(12).value)
-          .asFunction<_GetCalendarSystem_Dart>()(ptr.ref.lpVtbl, value);
+          .asFunction<_GetCalendarSystem_Dart>()(ptr.ref.lpVtbl, result);
 
   int ChangeCalendarSystem(int value) =>
       Pointer<NativeFunction<_ChangeCalendarSystem_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(13).value)
           .asFunction<_ChangeCalendarSystem_Dart>()(ptr.ref.lpVtbl, value);
 
-  int GetClock(Pointer<IntPtr> value) =>
+  int GetClock(Pointer<IntPtr> result) =>
       Pointer<NativeFunction<_GetClock_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(14).value)
-          .asFunction<_GetClock_Dart>()(ptr.ref.lpVtbl, value);
+          .asFunction<_GetClock_Dart>()(ptr.ref.lpVtbl, result);
 
   int ChangeClock(int value) =>
       Pointer<NativeFunction<_ChangeClock_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(15).value)
           .asFunction<_ChangeClock_Dart>()(ptr.ref.lpVtbl, value);
 
-  int GetDateTime(Pointer<Int64> result) =>
+  int GetDateTime(Pointer<Uint32> result) =>
       Pointer<NativeFunction<_GetDateTime_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(16).value)
           .asFunction<_GetDateTime_Dart>()(ptr.ref.lpVtbl, result);
@@ -527,7 +527,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -540,7 +540,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -553,7 +553,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -566,7 +566,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -603,7 +603,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -618,7 +618,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -633,7 +633,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -646,7 +646,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -691,7 +691,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -706,7 +706,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -722,7 +722,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -735,7 +735,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -801,7 +801,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -816,7 +816,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -832,7 +832,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -845,7 +845,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -881,7 +881,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -919,7 +919,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -934,7 +934,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -950,7 +950,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -963,7 +963,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1002,7 +1002,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1017,7 +1017,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1033,7 +1033,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1046,7 +1046,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1083,7 +1083,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1120,7 +1120,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1157,7 +1157,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1185,7 +1185,7 @@ class ICalendar extends IInspectable {
               .asFunction<_NanosecondAsPaddedString_Dart>()(
           ptr.ref.lpVtbl, minDigits, result);
 
-  int Compare(Pointer<IntPtr> other, Pointer<Int32> result) =>
+  int Compare(Pointer other, Pointer<Int32> result) =>
       Pointer<NativeFunction<_Compare_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(93).value)
           .asFunction<_Compare_Dart>()(ptr.ref.lpVtbl, other, result);
@@ -1195,7 +1195,7 @@ class ICalendar extends IInspectable {
               ptr.ref.vtable.elementAt(94).value)
           .asFunction<_CompareDateTime_Dart>()(ptr.ref.lpVtbl, other, result);
 
-  int CopyTo(Pointer<IntPtr> other) =>
+  int CopyTo(Pointer other) =>
       Pointer<NativeFunction<_CopyTo_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(95).value)
           .asFunction<_CopyTo_Dart>()(ptr.ref.lpVtbl, other);
@@ -1211,7 +1211,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1226,7 +1226,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1242,7 +1242,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1258,7 +1258,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1273,7 +1273,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1289,7 +1289,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -1304,11 +1304,11 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
-  int get IsDaylightSavingTime {
+  bool get IsDaylightSavingTime {
     final retValuePtr = calloc<Uint8>();
 
     final hr =
@@ -1319,7 +1319,7 @@ class ICalendar extends IInspectable {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
-    return retValue;
+    free(retValuePtr);
+    return retValue == 0;
   }
 }

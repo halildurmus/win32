@@ -9,12 +9,12 @@
 // -----------------------------------------------------------------------------
 // Linter exceptions
 // -----------------------------------------------------------------------------
-// ignore_for_file: camel_case_types
-// ignore_for_file: camel_case_extensions
+// ignore_for_file: camel_case_types ignore_for_file: camel_case_extensions
 //
 // Why? The linter defaults to throw a warning for types not named as camel
 // case. We deliberately break this convention to match the Win32 underlying
 // types.
+//
 //
 // ignore_for_file: unused_field
 //
@@ -23,6 +23,13 @@
 // we use this feature to ensure that sizeOf<STRUCT_NAME> returns a size at
 // least as large as the underlying native struct. See, for example,
 // ENUMLOGFONTEX.
+//
+//
+// ignore_for_file: unnecessary_getters_setters
+//
+// Why? In structs like VARIANT, we're using getters and setters to project the
+// same underlying data property to various union types. The trivial overhead is
+// outweighed by readability.
 // -----------------------------------------------------------------------------
 
 import 'dart:ffi';
@@ -32,8 +39,8 @@ import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
 import 'com/combase.dart';
-import 'generated/IUnknown.dart';
 import 'generated/IDispatch.dart';
+import 'generated/IUnknown.dart';
 import 'oleaut32.dart';
 
 // typedef struct tagWNDCLASSW {
@@ -1540,7 +1547,7 @@ class INPUT extends Struct {
   external int _data4;
 }
 
-extension Pointer_INPUT_Extension on Pointer<INPUT> {
+extension PointerINPUTExtension on Pointer<INPUT> {
   // Location adjusts for padding on 32-bit or 64-bit
   MOUSEINPUT get mi =>
       MOUSEINPUT(cast<Uint8>().elementAt(sizeOf<IntPtr>()).cast());
@@ -2923,7 +2930,7 @@ class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
 //   SYSTEMTIME        stLastSeen;
 //   SYSTEMTIME        stLastUsed;
 //   WCHAR             szName[BLUETOOTH_MAX_NAME_SIZE];
-// } BLUETOOTH_DEVICE_INFO_STRUCT;
+// } BLUETOOTH_DEVICE_INFO;
 
 /// The BLUETOOTH_DEVICE_INFO structure provides information about a Bluetooth
 /// device.
@@ -3143,7 +3150,7 @@ class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
 //     BTH_ADDR ullLong;
 //     BYTE     rgBytes[6];
 //   };
-// } BLUETOOTH_ADDRESS_STRUCT;
+// } BLUETOOTH_ADDRESS;
 
 /// The BLUETOOTH_ADDRESS structure provides the address of a Bluetooth device.
 ///

@@ -10,11 +10,11 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../utils.dart';
 
 import 'IDispatch.dart';
 
@@ -22,8 +22,9 @@ import 'IDispatch.dart';
 const IID_INetworkConnection = '{DCB00005-570F-4A9B-8D69-199FDBA5723B}';
 
 typedef _GetNetwork_Native = Int32 Function(
-    Pointer obj, Pointer<IntPtr> ppNetwork);
-typedef _GetNetwork_Dart = int Function(Pointer obj, Pointer<IntPtr> ppNetwork);
+    Pointer obj, Pointer<Pointer> ppNetwork);
+typedef _GetNetwork_Dart = int Function(
+    Pointer obj, Pointer<Pointer> ppNetwork);
 
 typedef _get_IsConnectedToInternet_Native = Int32 Function(
     Pointer obj, Pointer<Int16> pbIsConnected);
@@ -62,7 +63,7 @@ class INetworkConnection extends IDispatch {
 
   INetworkConnection(Pointer<COMObject> ptr) : super(ptr);
 
-  int GetNetwork(Pointer<IntPtr> ppNetwork) =>
+  int GetNetwork(Pointer<Pointer> ppNetwork) =>
       Pointer<NativeFunction<_GetNetwork_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(7).value)
           .asFunction<_GetNetwork_Dart>()(ptr.ref.lpVtbl, ppNetwork);
@@ -78,7 +79,7 @@ class INetworkConnection extends IDispatch {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 
@@ -91,7 +92,7 @@ class INetworkConnection extends IDispatch {
     if (FAILED(hr)) throw WindowsException(hr);
 
     final retValue = retValuePtr.value;
-    calloc.free(retValuePtr);
+    free(retValuePtr);
     return retValue;
   }
 

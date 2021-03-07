@@ -83,9 +83,9 @@ class Win32Param {
   }
 
   Win32Param(List<String> param)
-      : assert(param.length == 2),
+      : assert(param.length <= 2),
         windowsType = param.last {
-    ffiType = ffiFromWin32(param.first);
+    ffiType = convertToFFIType(param.first);
     name = param.last;
 
     if (name.startsWith('**')) {

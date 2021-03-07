@@ -23,5 +23,5 @@ void main() {
   test('Can instantiate IWbemLocator.ConnectServer', () {
     expect(wbemlocator.ConnectServer, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

@@ -47,7 +47,4 @@
         "source.fixAll.markdownlint": true
     },
     "dart.analysisExcludedFolders": ["example/explorer"],
-    "copyrightInserter.holder": "the Dart project authors.",
-    "copyrightInserter.license": "bsd",
-    "copyrightInserter.year": "2020",
 }

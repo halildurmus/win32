@@ -206,25 +206,6 @@ int VerInstallFile(
       szDestDir, szCurDir, szTmpFile, puTmpFileLen);
 }
 
-/// Retrieves a description string for the language associated with a
-/// specified binary Microsoft language identifier.
-///
-/// ```c
-/// DWORD VerLanguageNameW(
-///   DWORD  wLang,
-///   LPWSTR szLang,
-///   DWORD  cchLang
-/// );
-/// ```
-/// {@category version}
-int VerLanguageName(int wLang, Pointer<Utf16> szLang, int cchLang) {
-  final _VerLanguageName = _version.lookupFunction<
-      Uint32 Function(Uint32 wLang, Pointer<Utf16> szLang, Uint32 cchLang),
-      int Function(
-          int wLang, Pointer<Utf16> szLang, int cchLang)>('VerLanguageNameW');
-  return _VerLanguageName(wLang, szLang, cchLang);
-}
-
 /// Retrieves specified version information from the specified
 /// version-information resource. To retrieve the appropriate resource,
 /// before you call VerQueryValue, you must first call the

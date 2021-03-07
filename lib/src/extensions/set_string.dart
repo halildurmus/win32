@@ -10,7 +10,8 @@ import 'package:ffi/ffi.dart';
 
 /// Sets the memory starting at the pointer location to the string supplied.
 ///
-/// Returns the number of bytes written.
+/// There should already be sufficient allocated memory at the pointer address
+/// to avoid a buffer overrun. Returns the number of bytes written.
 extension SetString on Pointer<Utf16> {
   int setString(String string) {
     final ptr = cast<Uint16>();

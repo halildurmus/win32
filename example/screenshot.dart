@@ -123,7 +123,7 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
       captureImage(hWnd);
       EndPaint(hWnd, ps);
 
-      calloc.free(ps);
+      free(ps);
       return 0;
   }
   return DefWindowProc(hWnd, uMsg, wParam, lParam);

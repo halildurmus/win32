@@ -10,26 +10,22 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../utils.dart';
 
 import 'IUnknown.dart';
 
 /// @nodoc
-const IID_IBindCtx = '{0000000e-0000-0000-C000-000000000046}';
+const IID_IBindCtx = '{0000000E-0000-0000-C000-000000000046}';
 
-typedef _RegisterObjectBound_Native = Int32 Function(
-    Pointer obj, Pointer<COMObject> punk);
-typedef _RegisterObjectBound_Dart = int Function(
-    Pointer obj, Pointer<COMObject> punk);
+typedef _RegisterObjectBound_Native = Int32 Function(Pointer obj, Pointer punk);
+typedef _RegisterObjectBound_Dart = int Function(Pointer obj, Pointer punk);
 
-typedef _RevokeObjectBound_Native = Int32 Function(
-    Pointer obj, Pointer<COMObject> punk);
-typedef _RevokeObjectBound_Dart = int Function(
-    Pointer obj, Pointer<COMObject> punk);
+typedef _RevokeObjectBound_Native = Int32 Function(Pointer obj, Pointer punk);
+typedef _RevokeObjectBound_Dart = int Function(Pointer obj, Pointer punk);
 
 typedef _ReleaseBoundObjects_Native = Int32 Function(Pointer obj);
 typedef _ReleaseBoundObjects_Dart = int Function(Pointer obj);
@@ -45,24 +41,24 @@ typedef _GetBindOptions_Dart = int Function(
     Pointer obj, Pointer<BIND_OPTS> pbindopts);
 
 typedef _GetRunningObjectTable_Native = Int32 Function(
-    Pointer obj, Pointer<IntPtr> pprot);
+    Pointer obj, Pointer<Pointer> pprot);
 typedef _GetRunningObjectTable_Dart = int Function(
-    Pointer obj, Pointer<IntPtr> pprot);
+    Pointer obj, Pointer<Pointer> pprot);
 
 typedef _RegisterObjectParam_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> pszKey, Pointer<COMObject> punk);
+    Pointer obj, Pointer<Utf16> pszKey, Pointer punk);
 typedef _RegisterObjectParam_Dart = int Function(
-    Pointer obj, Pointer<Utf16> pszKey, Pointer<COMObject> punk);
+    Pointer obj, Pointer<Utf16> pszKey, Pointer punk);
 
 typedef _GetObjectParam_Native = Int32 Function(
-    Pointer obj, Pointer<Utf16> pszKey, Pointer<IntPtr> ppunk);
+    Pointer obj, Pointer<Utf16> pszKey, Pointer<Pointer> ppunk);
 typedef _GetObjectParam_Dart = int Function(
-    Pointer obj, Pointer<Utf16> pszKey, Pointer<IntPtr> ppunk);
+    Pointer obj, Pointer<Utf16> pszKey, Pointer<Pointer> ppunk);
 
 typedef _EnumObjectParam_Native = Int32 Function(
-    Pointer obj, Pointer<IntPtr> ppenum);
+    Pointer obj, Pointer<Pointer> ppenum);
 typedef _EnumObjectParam_Dart = int Function(
-    Pointer obj, Pointer<IntPtr> ppenum);
+    Pointer obj, Pointer<Pointer> ppenum);
 
 typedef _RevokeObjectParam_Native = Int32 Function(
     Pointer obj, Pointer<Utf16> pszKey);
@@ -76,12 +72,12 @@ class IBindCtx extends IUnknown {
 
   IBindCtx(Pointer<COMObject> ptr) : super(ptr);
 
-  int RegisterObjectBound(Pointer<COMObject> punk) =>
+  int RegisterObjectBound(Pointer punk) =>
       Pointer<NativeFunction<_RegisterObjectBound_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
           .asFunction<_RegisterObjectBound_Dart>()(ptr.ref.lpVtbl, punk);
 
-  int RevokeObjectBound(Pointer<COMObject> punk) =>
+  int RevokeObjectBound(Pointer punk) =>
       Pointer<NativeFunction<_RevokeObjectBound_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(4).value)
           .asFunction<_RevokeObjectBound_Dart>()(ptr.ref.lpVtbl, punk);
@@ -101,23 +97,23 @@ class IBindCtx extends IUnknown {
               ptr.ref.vtable.elementAt(7).value)
           .asFunction<_GetBindOptions_Dart>()(ptr.ref.lpVtbl, pbindopts);
 
-  int GetRunningObjectTable(Pointer<IntPtr> pprot) =>
+  int GetRunningObjectTable(Pointer<Pointer> pprot) =>
       Pointer<NativeFunction<_GetRunningObjectTable_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(8).value)
           .asFunction<_GetRunningObjectTable_Dart>()(ptr.ref.lpVtbl, pprot);
 
-  int RegisterObjectParam(Pointer<Utf16> pszKey, Pointer<COMObject> punk) =>
+  int RegisterObjectParam(Pointer<Utf16> pszKey, Pointer punk) =>
       Pointer<NativeFunction<_RegisterObjectParam_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(9).value)
               .asFunction<_RegisterObjectParam_Dart>()(
           ptr.ref.lpVtbl, pszKey, punk);
 
-  int GetObjectParam(Pointer<Utf16> pszKey, Pointer<IntPtr> ppunk) =>
+  int GetObjectParam(Pointer<Utf16> pszKey, Pointer<Pointer> ppunk) =>
       Pointer<NativeFunction<_GetObjectParam_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(10).value)
           .asFunction<_GetObjectParam_Dart>()(ptr.ref.lpVtbl, pszKey, ppunk);
 
-  int EnumObjectParam(Pointer<IntPtr> ppenum) =>
+  int EnumObjectParam(Pointer<Pointer> ppenum) =>
       Pointer<NativeFunction<_EnumObjectParam_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(11).value)
           .asFunction<_EnumObjectParam_Dart>()(ptr.ref.lpVtbl, ppenum);

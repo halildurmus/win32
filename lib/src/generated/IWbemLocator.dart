@@ -10,19 +10,19 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../utils.dart';
 
 import 'IUnknown.dart';
 
 /// @nodoc
-const CLSID_WbemLocator = '{4590f811-1d3a-11d0-891f-00aa004b2e24}';
+const CLSID_WbemLocator = '{4590F811-1D3A-11D0-891F-00AA004B2E24}';
 
 /// @nodoc
-const IID_IWbemLocator = '{dc12a687-737f-11cf-884d-00aa004b2e24}';
+const IID_IWbemLocator = '{DC12A687-737F-11CF-884D-00AA004B2E24}';
 
 typedef _ConnectServer_Native = Int32 Function(
     Pointer obj,
@@ -32,8 +32,8 @@ typedef _ConnectServer_Native = Int32 Function(
     Pointer<Utf16> strLocale,
     Int32 lSecurityFlags,
     Pointer<Utf16> strAuthority,
-    Pointer<COMObject> pCtx,
-    Pointer<IntPtr> ppNamespace);
+    Pointer pCtx,
+    Pointer<Pointer> ppNamespace);
 typedef _ConnectServer_Dart = int Function(
     Pointer obj,
     Pointer<Utf16> strNetworkResource,
@@ -42,8 +42,8 @@ typedef _ConnectServer_Dart = int Function(
     Pointer<Utf16> strLocale,
     int lSecurityFlags,
     Pointer<Utf16> strAuthority,
-    Pointer<COMObject> pCtx,
-    Pointer<IntPtr> ppNamespace);
+    Pointer pCtx,
+    Pointer<Pointer> ppNamespace);
 
 /// {@category Interface}
 /// {@category com}
@@ -59,8 +59,8 @@ class IWbemLocator extends IUnknown {
           Pointer<Utf16> strLocale,
           int lSecurityFlags,
           Pointer<Utf16> strAuthority,
-          Pointer<COMObject> pCtx,
-          Pointer<IntPtr> ppNamespace) =>
+          Pointer pCtx,
+          Pointer<Pointer> ppNamespace) =>
       Pointer<NativeFunction<_ConnectServer_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(3).value)
               .asFunction<_ConnectServer_Dart>()(
@@ -91,8 +91,8 @@ class WbemLocator extends IWbemLocator {
 
       return WbemLocator(ptr);
     } finally {
-      calloc.free(clsid);
-      calloc.free(iid);
+      free(clsid);
+      free(iid);
     }
   }
 }

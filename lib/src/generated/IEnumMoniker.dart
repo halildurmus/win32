@@ -10,11 +10,11 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../utils.dart';
 
 import 'IUnknown.dart';
 
@@ -22,9 +22,9 @@ import 'IUnknown.dart';
 const IID_IEnumMoniker = '{00000102-0000-0000-C000-000000000046}';
 
 typedef _Next_Native = Int32 Function(Pointer obj, Uint32 celt,
-    Pointer<IntPtr> rgelt, Pointer<Uint32> pceltFetched);
-typedef _Next_Dart = int Function(
-    Pointer obj, int celt, Pointer<IntPtr> rgelt, Pointer<Uint32> pceltFetched);
+    Pointer<Pointer> rgelt, Pointer<Uint32> pceltFetched);
+typedef _Next_Dart = int Function(Pointer obj, int celt, Pointer<Pointer> rgelt,
+    Pointer<Uint32> pceltFetched);
 
 typedef _Skip_Native = Int32 Function(Pointer obj, Uint32 celt);
 typedef _Skip_Dart = int Function(Pointer obj, int celt);
@@ -32,8 +32,8 @@ typedef _Skip_Dart = int Function(Pointer obj, int celt);
 typedef _Reset_Native = Int32 Function(Pointer obj);
 typedef _Reset_Dart = int Function(Pointer obj);
 
-typedef _Clone_Native = Int32 Function(Pointer obj, Pointer<IntPtr> ppenum);
-typedef _Clone_Dart = int Function(Pointer obj, Pointer<IntPtr> ppenum);
+typedef _Clone_Native = Int32 Function(Pointer obj, Pointer<Pointer> ppenum);
+typedef _Clone_Dart = int Function(Pointer obj, Pointer<Pointer> ppenum);
 
 /// {@category Interface}
 /// {@category com}
@@ -42,7 +42,7 @@ class IEnumMoniker extends IUnknown {
 
   IEnumMoniker(Pointer<COMObject> ptr) : super(ptr);
 
-  int Next(int celt, Pointer<IntPtr> rgelt, Pointer<Uint32> pceltFetched) =>
+  int Next(int celt, Pointer<Pointer> rgelt, Pointer<Uint32> pceltFetched) =>
       Pointer<NativeFunction<_Next_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
           .asFunction<_Next_Dart>()(ptr.ref.lpVtbl, celt, rgelt, pceltFetched);
@@ -55,7 +55,7 @@ class IEnumMoniker extends IUnknown {
           ptr.ref.vtable.elementAt(5).value)
       .asFunction<_Reset_Dart>()(ptr.ref.lpVtbl);
 
-  int Clone(Pointer<IntPtr> ppenum) =>
+  int Clone(Pointer<Pointer> ppenum) =>
       Pointer<NativeFunction<_Clone_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(6).value)
           .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppenum);

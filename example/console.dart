@@ -37,7 +37,7 @@ Pointer<Uint8> toCString(String buffer) {
   final result = calloc<Uint8>(units.length);
   final nativeString = result.asTypedList(units.length);
   nativeString.setAll(0, units);
-  return result.cast();
+  return result;
 }
 
 /// The newLine function handles carriage returns when the processed input mode
@@ -77,9 +77,9 @@ void scrollScreenBuffer(int handle, int x) {
   ScrollConsoleScreenBuffer(
       handle, scrollRect, clipRect, coordDest.ref, fillChar);
 
-  calloc.free(scrollRect);
-  calloc.free(coordDest);
-  calloc.free(fillChar);
+  free(scrollRect);
+  free(coordDest);
+  free(fillChar);
 }
 
 void main() {
@@ -159,9 +159,9 @@ void main() {
   SetConsoleMode(stdin, originalConsoleMode.value);
   SetConsoleTextAttribute(stdout, originalAttributes);
 
-  calloc.free(bufferInfo);
-  calloc.free(cWritten);
-  calloc.free(buffer);
-  calloc.free(cRead);
-  calloc.free(originalConsoleMode);
+  free(bufferInfo);
+  free(cWritten);
+  free(buffer);
+  free(cRead);
+  free(originalConsoleMode);
 }

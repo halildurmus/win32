@@ -5,6 +5,7 @@ this metadata (primarily in the form of a JSON file) and generates a series of f
 as output.
 
 ## JSON Format
+
 The format for the JSON file (`win32api.json`) is as follows:
 
 ```jsonc
@@ -63,10 +64,11 @@ may not be intuitive.
 ### `TaskDialog*`
 
 `TaskDialog` and `TaskDialogIndirect` is a special case since it requires
-`comctl32.dll` v6. This is not available to `dart test` because of [Dart issue
-#42598](https://github.com/dart-lang/sdk/issues/42598).
+`comctl32.dll` v6. This is not available to `dart test` because of [Dart
+issue #42598](https://github.com/dart-lang/sdk/issues/42598).
 
 ### `IsWow64Process2`
+
 The Windows API documentation says `IsWow64Process2` is available in Windows
 Server 2016 (i.e. RS2 / build 10586), and the header files mark it as available
 on any Windows 10 version. But the API itself is not available on such early

@@ -10,16 +10,16 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../utils.dart';
 
 import 'IUnknown.dart';
 
 /// @nodoc
-const IID_IFileDialogCustomize = '{e6fdd21a-163f-4975-9c8c-a69f1ba37034}';
+const IID_IFileDialogCustomize = '{E6FDD21A-163F-4975-9C8C-A69F1BA37034}';
 
 typedef _EnableOpenDropDown_Native = Int32 Function(
     Pointer obj, Uint32 dwIDCtl);
@@ -66,19 +66,19 @@ typedef _SetControlLabel_Dart = int Function(
     Pointer obj, int dwIDCtl, Pointer<Utf16> pszLabel);
 
 typedef _GetControlState_Native = Int32 Function(
-    Pointer obj, Uint32 dwIDCtl, Pointer<Int32> pdwState);
+    Pointer obj, Uint32 dwIDCtl, Pointer<Uint32> pdwState);
 typedef _GetControlState_Dart = int Function(
-    Pointer obj, int dwIDCtl, Pointer<Int32> pdwState);
+    Pointer obj, int dwIDCtl, Pointer<Uint32> pdwState);
 
 typedef _SetControlState_Native = Int32 Function(
-    Pointer obj, Uint32 dwIDCtl, Int32 dwState);
+    Pointer obj, Uint32 dwIDCtl, Uint32 dwState);
 typedef _SetControlState_Dart = int Function(
     Pointer obj, int dwIDCtl, int dwState);
 
 typedef _GetEditBoxText_Native = Int32 Function(
-    Pointer obj, Uint32 dwIDCtl, Pointer<IntPtr> ppszText);
+    Pointer obj, Uint32 dwIDCtl, Pointer<Pointer<Uint16>> ppszText);
 typedef _GetEditBoxText_Dart = int Function(
-    Pointer obj, int dwIDCtl, Pointer<IntPtr> ppszText);
+    Pointer obj, int dwIDCtl, Pointer<Pointer<Uint16>> ppszText);
 
 typedef _SetEditBoxText_Native = Int32 Function(
     Pointer obj, Uint32 dwIDCtl, Pointer<Utf16> pszText);
@@ -110,12 +110,12 @@ typedef _RemoveAllControlItems_Native = Int32 Function(
 typedef _RemoveAllControlItems_Dart = int Function(Pointer obj, int dwIDCtl);
 
 typedef _GetControlItemState_Native = Int32 Function(
-    Pointer obj, Uint32 dwIDCtl, Uint32 dwIDItem, Pointer<Int32> pdwState);
+    Pointer obj, Uint32 dwIDCtl, Uint32 dwIDItem, Pointer<Uint32> pdwState);
 typedef _GetControlItemState_Dart = int Function(
-    Pointer obj, int dwIDCtl, int dwIDItem, Pointer<Int32> pdwState);
+    Pointer obj, int dwIDCtl, int dwIDItem, Pointer<Uint32> pdwState);
 
 typedef _SetControlItemState_Native = Int32 Function(
-    Pointer obj, Uint32 dwIDCtl, Uint32 dwIDItem, Int32 dwState);
+    Pointer obj, Uint32 dwIDCtl, Uint32 dwIDItem, Uint32 dwState);
 typedef _SetControlItemState_Dart = int Function(
     Pointer obj, int dwIDCtl, int dwIDItem, int dwState);
 
@@ -204,7 +204,7 @@ class IFileDialogCustomize extends IUnknown {
               .asFunction<_SetControlLabel_Dart>()(
           ptr.ref.lpVtbl, dwIDCtl, pszLabel);
 
-  int GetControlState(int dwIDCtl, Pointer<Int32> pdwState) =>
+  int GetControlState(int dwIDCtl, Pointer<Uint32> pdwState) =>
       Pointer<NativeFunction<_GetControlState_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(13).value)
               .asFunction<_GetControlState_Dart>()(
@@ -216,7 +216,7 @@ class IFileDialogCustomize extends IUnknown {
               .asFunction<_SetControlState_Dart>()(
           ptr.ref.lpVtbl, dwIDCtl, dwState);
 
-  int GetEditBoxText(int dwIDCtl, Pointer<IntPtr> ppszText) =>
+  int GetEditBoxText(int dwIDCtl, Pointer<Pointer<Uint16>> ppszText) =>
       Pointer<NativeFunction<_GetEditBoxText_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(15).value)
               .asFunction<_GetEditBoxText_Dart>()(
@@ -256,7 +256,8 @@ class IFileDialogCustomize extends IUnknown {
               ptr.ref.vtable.elementAt(21).value)
           .asFunction<_RemoveAllControlItems_Dart>()(ptr.ref.lpVtbl, dwIDCtl);
 
-  int GetControlItemState(int dwIDCtl, int dwIDItem, Pointer<Int32> pdwState) =>
+  int GetControlItemState(
+          int dwIDCtl, int dwIDItem, Pointer<Uint32> pdwState) =>
       Pointer<NativeFunction<_GetControlItemState_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(22).value)
               .asFunction<_GetControlItemState_Dart>()(

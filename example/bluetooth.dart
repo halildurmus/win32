@@ -28,8 +28,8 @@ void findBluetoothDevices(int btRadioHandle) {
       print('No devices found.');
     }
   } finally {
-    calloc.free(params);
-    calloc.free(info);
+    free(params);
+    free(info);
   }
 }
 
@@ -57,8 +57,8 @@ void main() {
       print('No Bluetooth radios found.');
     }
   } finally {
-    calloc.free(findRadioParams);
-    calloc.free(radioInfo);
-    calloc.free(hRadio);
+    free(findRadioParams);
+    free(radioInfo);
+    free(hRadio);
   }
 }

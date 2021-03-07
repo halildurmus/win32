@@ -73,6 +73,31 @@ const FACILITY_CERT = 11;
 /// The source of the error code is Wininet related.
 const FACILITY_INTERNET = 12;
 
+/// The code that creates and manages objects of this class is a DLL that runs
+/// in the same process as the caller of the function specifying the class
+/// context.
+const CLSCTX_INPROC_SERVER = 0x1;
+
+/// The code that manages objects of this class is an in-process handler. This
+/// is a DLL that runs in the client process and implements client-side
+/// structures of this class when instances of the class are accessed remotely.
+const CLSCTX_INPROC_HANDLER = 0x2;
+
+/// The EXE code that creates and manages objects of this class runs on same
+/// machine but is loaded in a separate process space.
+const CLSCTX_LOCAL_SERVER = 0x4;
+
+/// A remote context. The LocalServer32 or LocalService code that creates and
+/// manages objects of this class is run on a different computer.
+const CLSCTX_REMOTE_SERVER = 0x10;
+
+/// The combination of [CLSCTX_INPROC_SERVER], [CLSCTX_INPROC_HANDLER],
+/// [CLSCTX_LOCAL_SERVER], and [CLSCTX_REMOTE_SERVER].
+const CLSCTX_ALL = CLSCTX_INPROC_SERVER |
+    CLSCTX_INPROC_HANDLER |
+    CLSCTX_LOCAL_SERVER |
+    CLSCTX_REMOTE_SERVER;
+
 // -----------------------------------------------------------------------------
 // Error constants
 // -----------------------------------------------------------------------------

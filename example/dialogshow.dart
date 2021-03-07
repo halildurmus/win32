@@ -57,20 +57,19 @@ void main() {
         throw WindowsException(hr);
       }
     } else {
-      final ppsi = calloc<IntPtr>();
-      hr = fileDialog.GetResult(ppsi);
+      final ppsi = calloc<COMObject>();
+      hr = fileDialog.GetResult(ppsi.cast());
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-      final item = IShellItem(ppsi.cast());
-      final pathPtr = calloc<IntPtr>();
-      hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtr.cast());
+      final item = IShellItem(ppsi);
+      final pathPtr = calloc<Pointer<Utf16>>();
+      hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtr);
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
-
-      final path = Pointer<Utf16>.fromAddress(pathPtr.value);
 
       // MAX_PATH may truncate early if long filename support is enabled
-      final pathRes = path.toDartString();
-      print('Result: $pathRes');
+      final path = pathPtr.value.toDartString();
+
+      print('Result: $path');
 
       hr = item.Release();
       if (!SUCCEEDED(hr)) throw WindowsException(hr);

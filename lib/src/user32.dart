@@ -3327,11 +3327,11 @@ int SetDlgItemText(int hDlg, int nIDDlgItem, Pointer<Utf16> lpString) {
 /// );
 /// ```
 /// {@category user32}
-int SetDoubleClickTime(int Arg1) {
+int SetDoubleClickTime(int param0) {
   final _SetDoubleClickTime = _user32.lookupFunction<
-      Int32 Function(Uint32 Arg1),
-      int Function(int Arg1)>('SetDoubleClickTime');
-  return _SetDoubleClickTime(Arg1);
+      Int32 Function(Uint32 param0),
+      int Function(int param0)>('SetDoubleClickTime');
+  return _SetDoubleClickTime(param0);
 }
 
 /// Sets the keyboard focus to the specified window. The window must be
@@ -3395,11 +3395,11 @@ int SetKeyboardState(Pointer<Uint8> lpKeyState) {
 /// );
 /// ```
 /// {@category user32}
-int SetMenuInfo(int hmenu, Pointer<MENUINFO> lpmi) {
+int SetMenuInfo(int param0, Pointer<MENUINFO> param1) {
   final _SetMenuInfo = _user32.lookupFunction<
-      Int32 Function(IntPtr hmenu, Pointer<MENUINFO> lpmi),
-      int Function(int hmenu, Pointer<MENUINFO> lpmi)>('SetMenuInfo');
-  return _SetMenuInfo(hmenu, lpmi);
+      Int32 Function(IntPtr param0, Pointer<MENUINFO> param1),
+      int Function(int param0, Pointer<MENUINFO> param1)>('SetMenuInfo');
+  return _SetMenuInfo(param0, param1);
 }
 
 /// Changes information about a menu item.
@@ -3526,12 +3526,12 @@ int SetScrollInfo(int hwnd, int nBar, Pointer<SCROLLINFO> lpsi, int redraw) {
 /// ```
 /// {@category user32}
 int SetSysColors(
-    int cElements, Pointer<Int32> lpaElements, Pointer<Int32> lpaRgbValues) {
+    int cElements, Pointer<Int32> lpaElements, Pointer<Uint32> lpaRgbValues) {
   final _SetSysColors = _user32.lookupFunction<
       Int32 Function(Int32 cElements, Pointer<Int32> lpaElements,
-          Pointer<Int32> lpaRgbValues),
+          Pointer<Uint32> lpaRgbValues),
       int Function(int cElements, Pointer<Int32> lpaElements,
-          Pointer<Int32> lpaRgbValues)>('SetSysColors');
+          Pointer<Uint32> lpaRgbValues)>('SetSysColors');
   return _SetSysColors(cElements, lpaElements, lpaRgbValues);
 }
 
@@ -3554,24 +3554,6 @@ int SetTimer(int hWnd, int nIDEvent, int uElapse,
       int Function(int hWnd, int nIDEvent, int uElapse,
           Pointer<NativeFunction<TimerProc>> lpTimerFunc)>('SetTimer');
   return _SetTimer(hWnd, nIDEvent, uElapse, lpTimerFunc);
-}
-
-/// Changes an attribute of the specified window. The function also sets a
-/// value at the specified offset in the extra window memory.
-///
-/// ```c
-/// LONG_PTR SetWindowLongPtrW(
-///   HWND     hWnd,
-///   int      nIndex,
-///   LONG_PTR dwNewLong
-/// );
-/// ```
-/// {@category user32}
-int SetWindowLongPtr(int hWnd, int nIndex, int dwNewLong) {
-  final _SetWindowLongPtr = _user32.lookupFunction<
-      IntPtr Function(IntPtr hWnd, Int32 nIndex, IntPtr dwNewLong),
-      int Function(int hWnd, int nIndex, int dwNewLong)>('SetWindowLongPtrW');
-  return _SetWindowLongPtr(hWnd, nIndex, dwNewLong);
 }
 
 /// Changes the size, position, and Z order of a child, pop-up, or

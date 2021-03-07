@@ -10,32 +10,32 @@ import 'package:ffi/ffi.dart';
 
 import '../com/combase.dart';
 import '../constants.dart';
-import '../constants_nodoc.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../utils.dart';
 
 import 'IUnknown.dart';
 
 /// @nodoc
-const IID_IWbemContext = '{44aca674-e8fc-11d0-a07c-00c04fb68820}';
+const IID_IWbemContext = '{44ACA674-E8FC-11D0-A07C-00C04FB68820}';
 
-typedef _Clone_Native = Int32 Function(Pointer obj, Pointer<IntPtr> ppNewCopy);
-typedef _Clone_Dart = int Function(Pointer obj, Pointer<IntPtr> ppNewCopy);
+typedef _Clone_Native = Int32 Function(Pointer obj, Pointer<Pointer> ppNewCopy);
+typedef _Clone_Dart = int Function(Pointer obj, Pointer<Pointer> ppNewCopy);
 
 typedef _GetNames_Native = Int32 Function(
-    Pointer obj, Int32 lFlags, Pointer<SAFEARRAY> pNames);
+    Pointer obj, Int32 lFlags, Pointer<Pointer<SAFEARRAY>> pNames);
 typedef _GetNames_Dart = int Function(
-    Pointer obj, int lFlags, Pointer<SAFEARRAY> pNames);
+    Pointer obj, int lFlags, Pointer<Pointer<SAFEARRAY>> pNames);
 
 typedef _BeginEnumeration_Native = Int32 Function(Pointer obj, Int32 lFlags);
 typedef _BeginEnumeration_Dart = int Function(Pointer obj, int lFlags);
 
 typedef _Next_Native = Int32 Function(Pointer obj, Int32 lFlags,
-    Pointer<Utf16> pstrName, Pointer<VARIANT> pValue);
-typedef _Next_Dart = int Function(
-    Pointer obj, int lFlags, Pointer<Utf16> pstrName, Pointer<VARIANT> pValue);
+    Pointer<Pointer<Utf16>> pstrName, Pointer<VARIANT> pValue);
+typedef _Next_Dart = int Function(Pointer obj, int lFlags,
+    Pointer<Pointer<Utf16>> pstrName, Pointer<VARIANT> pValue);
 
 typedef _EndEnumeration_Native = Int32 Function(Pointer obj);
 typedef _EndEnumeration_Dart = int Function(Pointer obj);
@@ -65,12 +65,12 @@ class IWbemContext extends IUnknown {
 
   IWbemContext(Pointer<COMObject> ptr) : super(ptr);
 
-  int Clone(Pointer<IntPtr> ppNewCopy) =>
+  int Clone(Pointer<Pointer> ppNewCopy) =>
       Pointer<NativeFunction<_Clone_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
           .asFunction<_Clone_Dart>()(ptr.ref.lpVtbl, ppNewCopy);
 
-  int GetNames(int lFlags, Pointer<SAFEARRAY> pNames) =>
+  int GetNames(int lFlags, Pointer<Pointer<SAFEARRAY>> pNames) =>
       Pointer<NativeFunction<_GetNames_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(4).value)
           .asFunction<_GetNames_Dart>()(ptr.ref.lpVtbl, lFlags, pNames);
@@ -80,7 +80,8 @@ class IWbemContext extends IUnknown {
               ptr.ref.vtable.elementAt(5).value)
           .asFunction<_BeginEnumeration_Dart>()(ptr.ref.lpVtbl, lFlags);
 
-  int Next(int lFlags, Pointer<Utf16> pstrName, Pointer<VARIANT> pValue) =>
+  int Next(int lFlags, Pointer<Pointer<Utf16>> pstrName,
+          Pointer<VARIANT> pValue) =>
       Pointer<NativeFunction<_Next_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(6).value)
           .asFunction<_Next_Dart>()(ptr.ref.lpVtbl, lFlags, pstrName, pValue);

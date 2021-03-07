@@ -56,8 +56,10 @@ void main() {
     for (final function in filteredFunctionList) {
       if (function.test == false) continue;
 
-      final apiName = function.signature.nameWithoutEncoding;
-      final returnFFIType = ffiFromWin32(function.signature.returnType);
+      final dartFunctionName = win32.functions.keys
+          .firstWhere((k) => win32.functions[k] == function);
+
+      final returnFFIType = convertToFFIType(function.signature.returnType);
       final returnDartType = Win32Param([returnFFIType, '']).dartType;
 
       final nativeParams = function.signature.params
@@ -69,13 +71,13 @@ void main() {
           .join(', ');
 
       final test = '''
-      test('Can instantiate $apiName', () {
+      test('Can instantiate $dartFunctionName', () {
         final $libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');
-        final $apiName = $libraryDartName.lookupFunction<\n
+        final $dartFunctionName = $libraryDartName.lookupFunction<\n
           $returnFFIType Function($nativeParams),
           $returnDartType Function($dartParams)>
           ('${function.signature.name}');
-        expect($apiName, isA<Function>());
+        expect($dartFunctionName, isA<Function>());
       });''';
 
       if (function.minimumWindowsVersion > 0) {

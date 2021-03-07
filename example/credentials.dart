@@ -36,8 +36,8 @@ void write(
   }
   print('Success. (${credential.ref.CredentialBlobSize})');
 
-  calloc.free(blob);
-  calloc.free(credential);
+  free(blob);
+  free(credential);
 }
 
 void read(String credentialName) {
@@ -62,7 +62,7 @@ void read(String credentialName) {
   print('read password: $password');
   CredFree(credPointer.value);
   print('done.');
-  calloc.free(credPointer);
+  free(credPointer);
   print('returning');
 }
 

@@ -61,7 +61,7 @@
 ///   final ansi = convertToANSIString('Beep');
 ///   final pGetNativeSystemInfo = GetProcAddress(hModule, ansi);
 ///   ...
-///   calloc.free(ansi);
+///   free(ansi);
 /// ```
 ///
 /// ## Strings (Windows Runtime)
@@ -75,7 +75,7 @@
 ///   calendar.GetCalendarSystem(systemPtr);
 ///   print('The calendar system is ${convertFromHString(systemPtr)}.');
 ///   WindowsDeleteString(systemPtr.value);
-///   calloc.free(systemPtr);
+///   free(systemPtr);
 /// ```
 ///
 /// Make sure you dispose of `HSTRING`s by calling `WindowsDeleteString` and
@@ -95,10 +95,12 @@ export 'src/utils.dart';
 export 'src/extensions/dialogs.dart';
 export 'src/extensions/int_to_hexstring.dart';
 export 'src/extensions/list_to_blob.dart';
+export 'src/extensions/set_ansi.dart';
 export 'src/extensions/set_string.dart';
 export 'src/extensions/unpack_utf16.dart';
 
 // Traditional C-style Windows APIs
+export 'src/_manual.dart';
 export 'src/advapi32.dart';
 export 'src/bthprops.dart';
 export 'src/comctl32.dart';
@@ -110,7 +112,6 @@ export 'src/kernelbase.dart';
 export 'src/ole32.dart';
 export 'src/oleaut32.dart';
 export 'src/powrprof.dart';
-export 'src/psapi.dart';
 export 'src/rometadata.dart';
 export 'src/shcore.dart';
 export 'src/shell32.dart';
@@ -154,10 +155,6 @@ export 'src/generated/IFileSaveDialog.dart';
 export 'src/generated/IInspectable.dart';
 export 'src/generated/IKnownFolder.dart';
 export 'src/generated/IKnownFolderManager.dart';
-export 'src/generated/IMetaDataDispenser.dart';
-export 'src/generated/IMetaDataDispenserEx.dart';
-export 'src/generated/IMetaDataImport.dart';
-export 'src/generated/IMetaDataImport2.dart';
 export 'src/generated/IModalWindow.dart';
 export 'src/generated/IMoniker.dart';
 export 'src/generated/INetwork.dart';

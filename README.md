@@ -5,7 +5,7 @@ them accessible to Dart code without requiring a C compiler or the Windows SDK.
 
 [![pub package](https://img.shields.io/pub/v/win32.svg)](https://pub.dev/packages/win32)
 [![Language](https://img.shields.io/badge/language-Dart-blue.svg)](https://dart.dev)
-![Dart](https://github.com/timsneath/win32/workflows/Dart/badge.svg)
+![Build](https://github.com/timsneath/win32/workflows/Build/badge.svg)
 
 In addition to exposing the APIs themselves, this package offers a variety of
 instructive examples for more complex FFI usage scenarios.

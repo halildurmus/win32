@@ -53,5 +53,5 @@ void main() {
   test('Can instantiate INetwork.SetCategory', () {
     expect(network.SetCategory, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }
