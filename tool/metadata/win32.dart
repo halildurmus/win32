@@ -176,8 +176,8 @@ void main() {
   generateFfiFiles(win32);
   print('$genCount typedefs generated from Windows metadata.');
 
-  // final apiTestsGenerated = generateTests(win32);
-  // print('$apiTestsGenerated API tests generated.');
+  final apiTestsGenerated = generateTests(win32);
+  print('$apiTestsGenerated API tests generated.');
 
   final structTestsGenerated = generateStructSizeTests();
   print('$structTestsGenerated struct tests generated.');

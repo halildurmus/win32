@@ -10,6 +10,7 @@ import 'dart:io';
 import 'package:winmd/winmd.dart';
 
 import '../metadata/win32.dart';
+import 'function.dart';
 import 'struct_sizes.dart';
 import 'win32api.dart';
 
@@ -51,7 +52,7 @@ void main() {
 
     writer.writeStringSync("group('Test $library functions', () {\n");
 
-    final filteredFunctionList = win32.functions
+    final filteredFunctionList = Map<String, Win32Function>.of(win32.functions)
       ..removeWhere((key, value) => value.dllLibrary != library)
       ..removeWhere(
           (key, value) => value.prototype.contains('SetWindowLongPtrW'));
@@ -59,8 +60,13 @@ void main() {
     for (final function in filteredFunctionList.keys) {
       if (filteredFunctionList[function]!.test == false) continue;
 
-      final method = methods.firstWhere((m) => m.methodName == function,
-          orElse: () => throw Exception('Cannot find $function'));
+      late Method method;
+      try {
+        method = methods.firstWhere((m) => methodMatches(
+            m.methodName, filteredFunctionList[function]!.prototype));
+      } on StateError {
+        continue;
+      }
 
       final prototype = Win32Prototype(function, method, libraryDartName);
 
@@ -72,13 +78,22 @@ void main() {
       final minimumWindowsVersion =
           filteredFunctionList[function]!.minimumWindowsVersion;
 
+      // Temporary, because of
+      // https://github.com/microsoft/win32metadata/issues/296
+      final nativeParams = prototype.nativeParams
+          .replaceAll('BLUETOOTH_ADDRESS_STRUCT', 'BLUETOOTH_ADDRESS')
+          .replaceAll('BLUETOOTH_DEVICE_INFO_STRUCT', 'BLUETOOTH_DEVICE_INFO');
+      final dartParams = prototype.dartParams
+          .replaceAll('BLUETOOTH_ADDRESS_STRUCT', 'BLUETOOTH_ADDRESS')
+          .replaceAll('BLUETOOTH_DEVICE_INFO_STRUCT', 'BLUETOOTH_DEVICE_INFO');
+
       final test = '''
       test('Can instantiate $function', () {
         final $libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');
         final $function = $libraryDartName.lookupFunction<\n
-          $returnFFIType Function(${prototype.nativeParams}),
-          $returnDartType Function(${prototype.dartParams})>
-          ('$function');
+          $returnFFIType Function($nativeParams),
+          $returnDartType Function($dartParams)>
+          ('${method.methodName}');
         expect($function, isA<Function>());
       });''';
 
