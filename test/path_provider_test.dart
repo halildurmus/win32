@@ -3,8 +3,8 @@
 // Flutter) depends upon.
 
 import 'dart:async';
-import 'dart:io';
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:ffi/ffi.dart';
 import 'package:meta/meta.dart';
@@ -405,7 +405,7 @@ class PathProviderWindows {
       }
 
       // From that, load the VERSIONINFO resource
-      int infoSize = GetFileVersionInfoSize(moduleNameBuffer, unused);
+      final infoSize = GetFileVersionInfoSize(moduleNameBuffer, unused);
       if (infoSize != 0) {
         infoBuffer = calloc<Uint8>(infoSize);
         if (GetFileVersionInfo(moduleNameBuffer, 0, infoSize, infoBuffer) ==
