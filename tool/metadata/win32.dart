@@ -10,6 +10,7 @@ import 'package:winmd/winmd.dart';
 
 import '../win32/function.dart';
 import '../win32/generate_from.dart';
+import '../win32/generate_win32_tests.dart';
 import '../win32/win32api.dart';
 
 class Win32Prototype {
@@ -178,6 +179,6 @@ void main() {
   // final apiTestsGenerated = generateTests(win32);
   // print('$apiTestsGenerated API tests generated.');
 
-  // final structTestsGenerated = generateStructSizeTests();
-  // print('$structTestsGenerated struct tests generated.');
+  final structTestsGenerated = generateStructSizeTests();
+  print('$structTestsGenerated struct tests generated.');
 }
