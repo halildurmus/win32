@@ -1615,6 +1615,15 @@ class SIGDN {
 }
 
 /// {@category Enum}
+class ACTIVATEOPTIONS {
+  static const AO_NONE = 0x00000000;
+  static const AO_DESIGNMODE = 0x00000001;
+  static const AO_NOERRORUI = 0x00000002;
+  static const AO_NOSPLASHSCREEN = 0x00000004;
+  static const AO_PRELAUNCH = 0x02000000;
+}
+
+/// {@category Enum}
 class EOLE_AUTHENTICATION_CAPABILITIES {
   static const EOAC_NONE = 0;
   static const EOAC_MUTUAL_AUTH = 0x1;
