@@ -114,7 +114,7 @@ void main() {
   test('Signature blob is correct', () {
     final typedef = scope['Windows.Win32.Gdi.Apis']!;
     final api = typedef.findMethod('AddFontResourceW')!;
-    expect(api.signatureBlob, equals([0x00, 0x01, 0x08, 0x11, 0x25]));
+    expect(api.signatureBlob.sublist(0, 4), equals([0x00, 0x01, 0x08, 0x11]));
   });
 
   test('Unicode string params are correctly marked', () {
