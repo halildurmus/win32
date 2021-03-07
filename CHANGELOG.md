@@ -1,3 +1,7 @@
+## 0.4.1
+
+- Support printing COM tests
+
 ## 0.4.0
 
 - Refactor type projection code
