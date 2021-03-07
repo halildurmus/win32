@@ -66,7 +66,8 @@ const interfacesToGenerate = <COMType>[
 ];
 
 void main(List<String> args) {
-  final scope = MetadataStore.getScopeForFile('tool/win32/Windows.Win32.winmd');
+  final scope =
+      MetadataStore.getScopeForFile(File('tool/win32/Windows.Win32.winmd'));
 
   final outputDirectory = (args.length == 1)
       ? Directory(args.first)
@@ -89,7 +90,7 @@ void main(List<String> args) {
         ? mdTypeDef.interfaces.first.typeName.split('.').last
         : '';
 
-    final projection = TypeBuilder.projectWindowsType(mdTypeDef)
+    final projection = ClassProjector(mdTypeDef).projection
       ..inherits = parentInterface
       ..vtableStart = type.vTableStart
       ..sourceType = SourceType.com
@@ -97,7 +98,7 @@ void main(List<String> args) {
       ..clsid = clsid
       ..className = type.typeName.split('.').last.substring(1);
 
-    final dartClass = TypePrinter.printType(projection);
+    final dartClass = TypePrinter.printProjection(projection);
 
     final outputFilename = type.typeName.split('.').last;
     final outputFile =
