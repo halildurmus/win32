@@ -4690,6 +4690,13 @@ void main() {
               int dwFlags)>('SHEmptyRecycleBinW');
       expect(SHEmptyRecycleBin, isA<Function>());
     });
+    test('Can instantiate SHGetDesktopFolder', () {
+      final shell32 = DynamicLibrary.open('shell32.dll');
+      final SHGetDesktopFolder = shell32.lookupFunction<
+          Int32 Function(Pointer<Pointer> ppshf),
+          int Function(Pointer<Pointer> ppshf)>('SHGetDesktopFolder');
+      expect(SHGetDesktopFolder, isA<Function>());
+    });
     test('Can instantiate SHGetDiskFreeSpaceEx', () {
       final shell32 = DynamicLibrary.open('shell32.dll');
       final SHGetDiskFreeSpaceEx = shell32.lookupFunction<
