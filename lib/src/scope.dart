@@ -7,11 +7,11 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+import 'com/IMetaDataImport2.dart' as md;
 import 'constants.dart';
 import 'enumeration.dart';
 import 'module.dart';
 import 'typedef.dart';
-import 'com/IMetaDataImport2.dart' as md;
 
 /// A metadata scope, which typically matches an on-disk file.
 ///

@@ -8,10 +8,10 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'constants.dart';
 import '_base.dart';
-import 'typeidentifier.dart';
 import 'com/IMetaDataImport2.dart' as md;
+import 'constants.dart';
+import 'typeidentifier.dart';
 
 enum StringType { ASCII, Unicode, None }
 

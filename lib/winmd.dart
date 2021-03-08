@@ -8,6 +8,8 @@
 // https://stackoverflow.com/questions/54375771/how-to-read-a-winmd-winrt-metadata-file
 // https://docs.microsoft.com/en-us/windows/win32/api/rometadataresolution/nf-rometadataresolution-rogetmetadatafile
 
+// ignore_for_file: directives_ordering
+
 library winmd;
 
 export 'src/attribute.dart';

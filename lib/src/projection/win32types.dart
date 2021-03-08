@@ -453,6 +453,7 @@ const win32TypeMap = <String, String>{
   'IMetaDataImport2': 'IntPtr',
 
   // COM interfaces
+  'IEnumIDList': 'Pointer',
   'IEnumMoniker': 'Pointer',
   'IEnumNetworkConnections': 'Pointer',
   'IEnumNetworks': 'Pointer',
@@ -471,6 +472,7 @@ const win32TypeMap = <String, String>{
   'IPropertyStore': 'Pointer',
   'IProvideClassInfo': 'Pointer',
   'IRunningObjectTable': 'Pointer',
+  'IShellFolder': 'Pointer',
   'IShellItem': 'Pointer',
   'IShellItemArray': 'Pointer',
   'IShellItemFilter': 'Pointer',

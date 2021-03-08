@@ -7,12 +7,12 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'constants.dart';
 import '_base.dart';
-import 'method.dart';
-import 'metadatastore.dart';
-import 'utils.dart';
 import 'com/IMetaDataImport2.dart' as md;
+import 'constants.dart';
+import 'metadatastore.dart';
+import 'method.dart';
+import 'utils.dart';
 
 /// Represents a TypeDef in the Windows Metadata file
 class TypeDef extends AttributeObject {

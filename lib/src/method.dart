@@ -8,14 +8,14 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'constants.dart';
 import '_base.dart';
+import 'com/IMetaDataImport2.dart' as md;
+import 'constants.dart';
 import 'module.dart';
 import 'parameter.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
-import 'com/IMetaDataImport2.dart' as md;
 
 class Method extends AttributeObject {
   String methodName;
