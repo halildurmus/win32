@@ -2,110 +2,13 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'dart:ffi';
-
-import 'package:ffi/ffi.dart';
-import 'package:win32/win32.dart';
-
 import 'typedef.dart';
-
-class Field {
-  final String name;
-  final int value;
-  final int attributes;
-  final int corType;
-
-  const Field(this.name, this.value, this.attributes, this.corType);
-}
 
 /// Represents an enum in the Windows Metadata file
 class Enumeration extends TypeDef {
   Enumeration(TypeDef type)
       : super(type.reader, type.token, type.typeName, type.flags,
             type.baseTypeToken);
-
-  /// Converts an individual field
-  Field processFieldToken(int token) {
-    final ptkTypeDef = calloc<Uint32>();
-    final szField = calloc<Uint16>(256).cast<Utf16>();
-    final pchField = calloc<Uint32>();
-    final pdwAttr = calloc<Uint32>();
-    final ppvSigBlob = calloc<IntPtr>();
-    final pcbSigBlob = calloc<Uint32>();
-    final pdwCPlusTypeFlag = calloc<Uint32>();
-    final ppValue = calloc<IntPtr>();
-    final pcchValue = calloc<Uint32>();
-
-    try {
-      final hr = reader.GetFieldProps(
-          token,
-          ptkTypeDef,
-          szField,
-          256,
-          pchField,
-          pdwAttr,
-          ppvSigBlob.cast(),
-          pcbSigBlob,
-          pdwCPlusTypeFlag,
-          ppValue.cast(),
-          pcchValue);
-
-      if (SUCCEEDED(hr)) {
-        final fieldName = szField.toDartString();
-        final attr = pdwAttr.value;
-        final ctype = pdwCPlusTypeFlag.value;
-
-        if (ppValue.value != 0) {
-          return Field(fieldName,
-              Pointer<Uint32>.fromAddress(ppValue.value).value, attr, ctype);
-        } else {
-          return Field(fieldName, 0, attr, ctype);
-        }
-      } else {
-        throw WindowsException(hr);
-      }
-    } finally {
-      calloc.free(ptkTypeDef);
-      calloc.free(szField);
-      calloc.free(pchField);
-      calloc.free(pdwAttr);
-      calloc.free(ppvSigBlob);
-      calloc.free(pcbSigBlob);
-      calloc.free(pdwCPlusTypeFlag);
-      calloc.free(ppValue);
-      calloc.free(pcchValue);
-    }
-  }
-
-  /// Get the fields for this enum.
-  Map<String?, int?> get fields {
-    final fields = <String?, int?>{};
-    final fieldTokens = <int>[];
-
-    final phEnum = calloc<IntPtr>();
-    final rgTypeDefs = calloc<Uint32>();
-    final pcTokens = calloc<Uint32>();
-
-    try {
-      var hr = reader.EnumFields(phEnum, token, rgTypeDefs, 1, pcTokens);
-      while (hr == S_OK) {
-        fieldTokens.add(rgTypeDefs.value);
-        hr = reader.EnumFields(phEnum, token, rgTypeDefs, 1, pcTokens);
-      }
-
-      for (final fieldToken in fieldTokens) {
-        final field = processFieldToken(fieldToken);
-        fields[field.name] = field.value;
-      }
-
-      return fields;
-    } finally {
-      reader.CloseEnum(phEnum.value);
-      calloc.free(phEnum);
-      calloc.free(rgTypeDefs);
-      calloc.free(pcTokens);
-    }
-  }
 
   @override
   String toString() => 'Enumeration: $typeName';

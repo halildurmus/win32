@@ -428,8 +428,7 @@ void main() {
     final dayOfWeek =
         mdScope.enums.firstWhere((en) => en.typeName.endsWith('DayOfWeek'));
 
-    final tuesday = dayOfWeek.fields['Tuesday']!;
-    expect(tuesday, equals(2));
+    expect(dayOfWeek.findField('Tuesday')?.value, equals(2));
   });
 
   test('IPropertyValue array type', () {
