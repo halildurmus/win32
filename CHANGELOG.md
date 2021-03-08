@@ -4,6 +4,8 @@
 - Removes Windows Metadata classes (now in the `winmd` package). This is a
   breaking change, but it's not anticipated to be a problem since these classes
   are only used for code generation.
+- Update to latest WinMD package
+- Add shell folder APIs
 
 ## 2.0.0
 

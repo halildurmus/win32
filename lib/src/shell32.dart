@@ -165,6 +165,22 @@ int SHEmptyRecycleBin(int hwnd, Pointer<Utf16> pszRootPath, int dwFlags) {
   return _SHEmptyRecycleBin(hwnd, pszRootPath, dwFlags);
 }
 
+/// Retrieves the IShellFolder interface for the desktop folder, which is
+/// the root of the Shell's namespace.
+///
+/// ```c
+/// SHSTDAPI SHGetDesktopFolder(
+///   IShellFolder **ppshf
+/// );
+/// ```
+/// {@category shell32}
+int SHGetDesktopFolder(Pointer<Pointer> ppshf) {
+  final _SHGetDesktopFolder = _shell32.lookupFunction<
+      Int32 Function(Pointer<Pointer> ppshf),
+      int Function(Pointer<Pointer> ppshf)>('SHGetDesktopFolder');
+  return _SHGetDesktopFolder(ppshf);
+}
+
 /// Retrieves disk space information for a disk volume.
 ///
 /// ```c

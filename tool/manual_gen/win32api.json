@@ -2452,6 +2452,11 @@
         "dllLibrary": "shell32",
         "comment": "Empties the Recycle Bin on the specified drive."
     },
+    "SHGetDesktopFolder": {
+        "prototype": "SHSTDAPI SHGetDesktopFolder(\n  IShellFolder **ppshf\n);",
+        "dllLibrary": "shell32",
+        "comment": "Retrieves the IShellFolder interface for the desktop folder, which is the root of the Shell's namespace."
+    },
     "SHGetDiskFreeSpaceEx": {
         "prototype": "BOOL SHGetDiskFreeSpaceExW(\n  LPCWSTR        pszDirectoryName,\n  ULARGE_INTEGER *pulFreeBytesAvailableToCaller,\n  ULARGE_INTEGER *pulTotalNumberOfBytes,\n  ULARGE_INTEGER *pulTotalNumberOfFreeBytes\n);",
         "dllLibrary": "shell32",

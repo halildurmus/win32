@@ -908,6 +908,176 @@ class CHOOSEFONT extends Struct {
   external int nSizeMax;
 }
 
+// typedef struct _STRRET {
+//   UINT  uType;
+//   union {
+//     LPWSTR pOleStr;
+//     UINT   uOffset;
+//     char   cStr[260];
+//   } DUMMYUNIONNAME;
+// } STRRET;
+
+/// Contains strings returned from the IShellFolder interface methods.
+///
+/// {@category Struct}
+class STRRET extends Struct {
+  @Uint32()
+  external int uType;
+
+  int get uOffset => _cStr0;
+
+  @Uint32()
+  external int _cStr0;
+  @Uint32()
+  external int _cStr1;
+  @Uint32()
+  external int _cStr2;
+  @Uint32()
+  external int _cStr3;
+  @Uint32()
+  external int _cStr4;
+  @Uint32()
+  external int _cStr5;
+  @Uint32()
+  external int _cStr6;
+  @Uint32()
+  external int _cStr7;
+  @Uint32()
+  external int _cStr8;
+  @Uint32()
+  external int _cStr9;
+  @Uint32()
+  external int _cStr10;
+  @Uint32()
+  external int _cStr11;
+  @Uint32()
+  external int _cStr12;
+  @Uint32()
+  external int _cStr13;
+  @Uint32()
+  external int _cStr14;
+  @Uint32()
+  external int _cStr15;
+  @Uint32()
+  external int _cStr16;
+  @Uint32()
+  external int _cStr17;
+  @Uint32()
+  external int _cStr18;
+  @Uint32()
+  external int _cStr19;
+  @Uint32()
+  external int _cStr20;
+  @Uint32()
+  external int _cStr21;
+  @Uint32()
+  external int _cStr22;
+  @Uint32()
+  external int _cStr23;
+  @Uint32()
+  external int _cStr24;
+  @Uint32()
+  external int _cStr25;
+  @Uint32()
+  external int _cStr26;
+  @Uint32()
+  external int _cStr27;
+  @Uint32()
+  external int _cStr28;
+  @Uint32()
+  external int _cStr29;
+  @Uint32()
+  external int _cStr30;
+  @Uint32()
+  external int _cStr31;
+  @Uint32()
+  external int _cStr32;
+  @Uint32()
+  external int _cStr33;
+  @Uint32()
+  external int _cStr34;
+  @Uint32()
+  external int _cStr35;
+  @Uint32()
+  external int _cStr36;
+  @Uint32()
+  external int _cStr37;
+  @Uint32()
+  external int _cStr38;
+  @Uint32()
+  external int _cStr39;
+  @Uint32()
+  external int _cStr40;
+  @Uint32()
+  external int _cStr41;
+  @Uint32()
+  external int _cStr42;
+  @Uint32()
+  external int _cStr43;
+  @Uint32()
+  external int _cStr44;
+  @Uint32()
+  external int _cStr45;
+  @Uint32()
+  external int _cStr46;
+  @Uint32()
+  external int _cStr47;
+  @Uint32()
+  external int _cStr48;
+  @Uint32()
+  external int _cStr49;
+  @Uint32()
+  external int _cStr50;
+  @Uint32()
+  external int _cStr51;
+  @Uint32()
+  external int _cStr52;
+  @Uint32()
+  external int _cStr53;
+  @Uint32()
+  external int _cStr54;
+  @Uint32()
+  external int _cStr55;
+  @Uint32()
+  external int _cStr56;
+  @Uint32()
+  external int _cStr57;
+  @Uint32()
+  external int _cStr58;
+  @Uint32()
+  external int _cStr59;
+  @Uint32()
+  external int _cStr60;
+  @Uint32()
+  external int _cStr61;
+  @Uint32()
+  external int _cStr62;
+  @Uint32()
+  external int _cStr63;
+  @Uint32()
+  external int _cStr64;
+
+  String get cStr => String.fromCharCodes(Uint32List.fromList([
+        _cStr0, _cStr1, _cStr2, _cStr3, //
+        _cStr4, _cStr5, _cStr6, _cStr7,
+        _cStr8, _cStr9, _cStr10, _cStr11,
+        _cStr12, _cStr13, _cStr14, _cStr15,
+        _cStr16, _cStr17, _cStr18, _cStr19,
+        _cStr20, _cStr21, _cStr22, _cStr23,
+        _cStr24, _cStr25, _cStr26, _cStr27,
+        _cStr28, _cStr29, _cStr30, _cStr31,
+        _cStr32, _cStr33, _cStr34, _cStr35,
+        _cStr36, _cStr37, _cStr38, _cStr39,
+        _cStr40, _cStr41, _cStr42, _cStr43,
+        _cStr44, _cStr45, _cStr46, _cStr47,
+        _cStr48, _cStr49, _cStr50, _cStr51,
+        _cStr52, _cStr53, _cStr54, _cStr55,
+        _cStr56, _cStr57, _cStr58, _cStr59,
+        _cStr60, _cStr61, _cStr62, _cStr63,
+        _cStr64
+      ]).buffer.asUint16List());
+}
+
 // typedef struct tagOFNW {
 //    DWORD        lStructSize;
 //    HWND         hwndOwner;
