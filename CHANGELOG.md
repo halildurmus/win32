@@ -1,3 +1,8 @@
+## 0.4.3
+
+- Add PVALENTW
+- Revert tip-of-tree .winmd
+
 ## 0.4.2
 
 - Add more COM interface types
