@@ -1,3 +1,7 @@
+## 0.4.2
+
+- Add more COM interface types
+
 ## 0.4.1
 
 - Support printing COM tests
