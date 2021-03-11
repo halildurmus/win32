@@ -432,6 +432,7 @@ const win32TypeMap = <String, String>{
   'PCONSOLE_SCREEN_BUFFER_INFO': 'Pointer<CONSOLE_SCREEN_BUFFER_INFO>',
   'PCACTCTXW': 'Pointer<ACTCTX>',
   'PLASTINPUTINFO': 'Pointer<LASTINPUTINFO>',
+  'PVALENTW': 'Pointer<VALENT>',
 
   // Pointers to enums
   'LPMC_COLOR_TEMPERATURE': 'Pointer<Int32>',
