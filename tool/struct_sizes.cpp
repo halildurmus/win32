@@ -33,6 +33,7 @@ void main()
     printf("  'PROCESS_INFORMATION': %zu,\n", sizeof(PROCESS_INFORMATION));
     printf("  'STARTUPINFO': %zu,\n", sizeof(STARTUPINFO));
     printf("  'BIND_OPTS': %zu,\n", sizeof(BIND_OPTS));
+    printf("  'VALENTW': %zu,\n", sizeof(VALENTW));
     printf("  'POWERBROADCAST_SETTING': %zu,\n", sizeof(POWERBROADCAST_SETTING));
     printf("  'SYSTEM_POWER_STATUS': %zu,\n", sizeof(SYSTEM_POWER_STATUS));
     printf("  'SYSTEM_BATTERY_STATE': %zu,\n", sizeof(SYSTEM_BATTERY_STATE));
