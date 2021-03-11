@@ -50,6 +50,13 @@ void main() {
       expect(sizeOf<BIND_OPTS>(), equals(16));
     }
   });
+  test('Struct VALENT is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<VALENT>(), equals(32));
+    } else {
+      expect(sizeOf<VALENT>(), equals(16));
+    }
+  });
   test('Struct POWERBROADCAST_SETTING is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<POWERBROADCAST_SETTING>(), equals(24));
