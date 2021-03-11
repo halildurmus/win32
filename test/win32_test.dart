@@ -207,7 +207,7 @@ void main() {
     expect(param.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
     expect(param.typeIdentifier.name, endsWith('HPOWERNOTIFY'));
-  }, skip: 'https://github.com/microsoft/win32metadata/issues/225');
+  });
 
   test('GetActiveObject REFCLSID has the correct parameter type', () {
     final typedef = scope['Windows.Win32.Automation.Apis']!;
