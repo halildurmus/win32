@@ -141,7 +141,6 @@ export 'src/generated/IDispatch.dart';
 export 'src/generated/IEnumIDList.dart';
 export 'src/generated/IEnumMoniker.dart';
 export 'src/generated/IEnumNetworkConnections.dart';
-export 'src/generated/IEnumNetworkConnections.dart';
 export 'src/generated/IEnumNetworks.dart';
 export 'src/generated/IEnumSpellingError.dart';
 export 'src/generated/IEnumString.dart';
