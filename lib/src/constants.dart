@@ -5496,3 +5496,26 @@ class RO_INIT_TYPE {
   /// is initialized in the MTA.
   static const RO_INIT_MULTITHREADED = 1;
 }
+
+// -----------------------------------------------------------------------------
+// Internationalization for Windows Applications constants
+// -----------------------------------------------------------------------------
+
+/// Identifies the type of corrective action to be taken for a spelling error.
+///
+/// {@category Enum}
+class CORRECTIVE_ACTION {
+  /// There are no errors.
+  static const NONE = 0;
+
+  /// The user should be prompted with a list of suggestions as returned by
+  /// ISpellChecker::Suggest.
+  static const GET_SUGGESTIONS = 1;
+
+  /// Replace the indicated erroneous text with the text provided in the
+  /// suggestion. The user does not need to be prompted.
+  static const REPLACE = 2;
+
+  /// The user should be prompted to delete the indicated erroneous text.
+  static const DELETE = 3;
+}

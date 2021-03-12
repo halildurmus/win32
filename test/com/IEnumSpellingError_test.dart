@@ -21,18 +21,9 @@ import 'package:win32/win32.dart';
 void main() {
   final ptr = calloc<COMObject>();
 
-  final enumidlist = IEnumIDList(ptr);
-  test('Can instantiate IEnumIDList.Next', () {
-    expect(enumidlist.Next, isA<Function>());
-  });
-  test('Can instantiate IEnumIDList.Skip', () {
-    expect(enumidlist.Skip, isA<Function>());
-  });
-  test('Can instantiate IEnumIDList.Reset', () {
-    expect(enumidlist.Reset, isA<Function>());
-  });
-  test('Can instantiate IEnumIDList.Clone', () {
-    expect(enumidlist.Clone, isA<Function>());
+  final enumspellingerror = IEnumSpellingError(ptr);
+  test('Can instantiate IEnumSpellingError.Next', () {
+    expect(enumspellingerror.Next, isA<Function>());
   });
   free(ptr);
 }
