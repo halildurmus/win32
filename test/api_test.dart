@@ -4181,6 +4181,312 @@ void main() {
               Pointer<IntPtr> phkResult)>('RegConnectRegistryW');
       expect(RegConnectRegistry, isA<Function>());
     });
+    test('Can instantiate RegCopyTree', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegCopyTree = advapi32.lookupFunction<
+          Int32 Function(
+              IntPtr hKeySrc, Pointer<Utf16> lpSubKey, IntPtr hKeyDest),
+          int Function(int hKeySrc, Pointer<Utf16> lpSubKey,
+              int hKeyDest)>('RegCopyTreeW');
+      expect(RegCopyTree, isA<Function>());
+    });
+    test('Can instantiate RegCreateKey', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegCreateKey = advapi32.lookupFunction<
+          Int32 Function(
+              IntPtr hKey, Pointer<Utf16> lpSubKey, Pointer<IntPtr> phkResult),
+          int Function(int hKey, Pointer<Utf16> lpSubKey,
+              Pointer<IntPtr> phkResult)>('RegCreateKeyW');
+      expect(RegCreateKey, isA<Function>());
+    });
+    test('Can instantiate RegCreateKeyEx', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegCreateKeyEx = advapi32.lookupFunction<
+          Int32 Function(
+              IntPtr hKey,
+              Pointer<Utf16> lpSubKey,
+              Uint32 Reserved,
+              Pointer<Utf16> lpClass,
+              Uint32 dwOptions,
+              Uint32 samDesired,
+              Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
+              Pointer<IntPtr> phkResult,
+              Pointer<Uint32> lpdwDisposition),
+          int Function(
+              int hKey,
+              Pointer<Utf16> lpSubKey,
+              int Reserved,
+              Pointer<Utf16> lpClass,
+              int dwOptions,
+              int samDesired,
+              Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
+              Pointer<IntPtr> phkResult,
+              Pointer<Uint32> lpdwDisposition)>('RegCreateKeyExW');
+      expect(RegCreateKeyEx, isA<Function>());
+    });
+    test('Can instantiate RegCreateKeyTransacted', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegCreateKeyTransacted = advapi32.lookupFunction<
+          Int32 Function(
+              IntPtr hKey,
+              Pointer<Utf16> lpSubKey,
+              Uint32 Reserved,
+              Pointer<Utf16> lpClass,
+              Uint32 dwOptions,
+              Uint32 samDesired,
+              Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
+              Pointer<IntPtr> phkResult,
+              Pointer<Uint32> lpdwDisposition,
+              IntPtr hTransaction,
+              Pointer pExtendedParemeter),
+          int Function(
+              int hKey,
+              Pointer<Utf16> lpSubKey,
+              int Reserved,
+              Pointer<Utf16> lpClass,
+              int dwOptions,
+              int samDesired,
+              Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
+              Pointer<IntPtr> phkResult,
+              Pointer<Uint32> lpdwDisposition,
+              int hTransaction,
+              Pointer pExtendedParemeter)>('RegCreateKeyTransactedW');
+      expect(RegCreateKeyTransacted, isA<Function>());
+    });
+    test('Can instantiate RegDeleteKey', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegDeleteKey = advapi32.lookupFunction<
+          Int32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey),
+          int Function(int hKey, Pointer<Utf16> lpSubKey)>('RegDeleteKeyW');
+      expect(RegDeleteKey, isA<Function>());
+    });
+    test('Can instantiate RegDeleteKeyEx', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegDeleteKeyEx = advapi32.lookupFunction<
+          Int32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey,
+              Uint32 samDesired, Uint32 Reserved),
+          int Function(int hKey, Pointer<Utf16> lpSubKey, int samDesired,
+              int Reserved)>('RegDeleteKeyExW');
+      expect(RegDeleteKeyEx, isA<Function>());
+    });
+    test('Can instantiate RegDeleteKeyTransacted', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegDeleteKeyTransacted = advapi32.lookupFunction<
+          Int32 Function(
+              IntPtr hKey,
+              Pointer<Utf16> lpSubKey,
+              Uint32 samDesired,
+              Uint32 Reserved,
+              IntPtr hTransaction,
+              Pointer pExtendedParameter),
+          int Function(
+              int hKey,
+              Pointer<Utf16> lpSubKey,
+              int samDesired,
+              int Reserved,
+              int hTransaction,
+              Pointer pExtendedParameter)>('RegDeleteKeyTransactedW');
+      expect(RegDeleteKeyTransacted, isA<Function>());
+    });
+    test('Can instantiate RegDeleteKeyValue', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegDeleteKeyValue = advapi32.lookupFunction<
+          Int32 Function(
+              IntPtr hKey, Pointer<Utf16> lpSubKey, Pointer<Utf16> lpValueName),
+          int Function(int hKey, Pointer<Utf16> lpSubKey,
+              Pointer<Utf16> lpValueName)>('RegDeleteKeyValueW');
+      expect(RegDeleteKeyValue, isA<Function>());
+    });
+    test('Can instantiate RegDeleteTree', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegDeleteTree = advapi32.lookupFunction<
+          Int32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey),
+          int Function(int hKey, Pointer<Utf16> lpSubKey)>('RegDeleteTreeW');
+      expect(RegDeleteTree, isA<Function>());
+    });
+    test('Can instantiate RegDeleteValue', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegDeleteValue = advapi32.lookupFunction<
+          Int32 Function(IntPtr hKey, Pointer<Utf16> lpValueName),
+          int Function(
+              int hKey, Pointer<Utf16> lpValueName)>('RegDeleteValueW');
+      expect(RegDeleteValue, isA<Function>());
+    });
+    test('Can instantiate RegDisablePredefinedCache', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegDisablePredefinedCache =
+          advapi32.lookupFunction<Int32 Function(), int Function()>(
+              'RegDisablePredefinedCache');
+      expect(RegDisablePredefinedCache, isA<Function>());
+    });
+    test('Can instantiate RegDisablePredefinedCacheEx', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegDisablePredefinedCacheEx =
+          advapi32.lookupFunction<Int32 Function(), int Function()>(
+              'RegDisablePredefinedCacheEx');
+      expect(RegDisablePredefinedCacheEx, isA<Function>());
+    });
+    test('Can instantiate RegDisableReflectionKey', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegDisableReflectionKey = advapi32.lookupFunction<
+          Int32 Function(IntPtr hBase),
+          int Function(int hBase)>('RegDisableReflectionKey');
+      expect(RegDisableReflectionKey, isA<Function>());
+    });
+    test('Can instantiate RegEnableReflectionKey', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegEnableReflectionKey = advapi32.lookupFunction<
+          Int32 Function(IntPtr hBase),
+          int Function(int hBase)>('RegEnableReflectionKey');
+      expect(RegEnableReflectionKey, isA<Function>());
+    });
+    test('Can instantiate RegEnumKey', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegEnumKey = advapi32.lookupFunction<
+          Int32 Function(IntPtr hKey, Uint32 dwIndex, Pointer<Utf16> lpName,
+              Uint32 cchName),
+          int Function(int hKey, int dwIndex, Pointer<Utf16> lpName,
+              int cchName)>('RegEnumKeyW');
+      expect(RegEnumKey, isA<Function>());
+    });
+    test('Can instantiate RegEnumKeyEx', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegEnumKeyEx = advapi32.lookupFunction<
+          Int32 Function(
+              IntPtr hKey,
+              Uint32 dwIndex,
+              Pointer<Utf16> lpName,
+              Pointer<Uint32> lpcchName,
+              Pointer<Uint32> lpReserved,
+              Pointer<Utf16> lpClass,
+              Pointer<Uint32> lpcchClass,
+              Pointer<FILETIME> lpftLastWriteTime),
+          int Function(
+              int hKey,
+              int dwIndex,
+              Pointer<Utf16> lpName,
+              Pointer<Uint32> lpcchName,
+              Pointer<Uint32> lpReserved,
+              Pointer<Utf16> lpClass,
+              Pointer<Uint32> lpcchClass,
+              Pointer<FILETIME> lpftLastWriteTime)>('RegEnumKeyExW');
+      expect(RegEnumKeyEx, isA<Function>());
+    });
+    test('Can instantiate RegEnumValue', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegEnumValue = advapi32.lookupFunction<
+          Int32 Function(
+              IntPtr hKey,
+              Uint32 dwIndex,
+              Pointer<Utf16> lpValueName,
+              Pointer<Uint32> lpcchValueName,
+              Pointer<Uint32> lpReserved,
+              Pointer<Uint32> lpType,
+              Pointer<Uint8> lpData,
+              Pointer<Uint32> lpcbData),
+          int Function(
+              int hKey,
+              int dwIndex,
+              Pointer<Utf16> lpValueName,
+              Pointer<Uint32> lpcchValueName,
+              Pointer<Uint32> lpReserved,
+              Pointer<Uint32> lpType,
+              Pointer<Uint8> lpData,
+              Pointer<Uint32> lpcbData)>('RegEnumValueW');
+      expect(RegEnumValue, isA<Function>());
+    });
+    test('Can instantiate RegFlushKey', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegFlushKey = advapi32.lookupFunction<Int32 Function(IntPtr hKey),
+          int Function(int hKey)>('RegFlushKey');
+      expect(RegFlushKey, isA<Function>());
+    });
+    test('Can instantiate RegGetValue', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegGetValue = advapi32.lookupFunction<
+          Int32 Function(
+              IntPtr hkey,
+              Pointer<Utf16> lpSubKey,
+              Pointer<Utf16> lpValue,
+              Uint32 dwFlags,
+              Pointer<Uint32> pdwType,
+              Pointer pvData,
+              Pointer<Uint32> pcbData),
+          int Function(
+              int hkey,
+              Pointer<Utf16> lpSubKey,
+              Pointer<Utf16> lpValue,
+              int dwFlags,
+              Pointer<Uint32> pdwType,
+              Pointer pvData,
+              Pointer<Uint32> pcbData)>('RegGetValueW');
+      expect(RegGetValue, isA<Function>());
+    });
+    test('Can instantiate RegLoadAppKey', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegLoadAppKey = advapi32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpFile, Pointer<IntPtr> phkResult,
+              Uint32 samDesired, Uint32 dwOptions, Uint32 Reserved),
+          int Function(Pointer<Utf16> lpFile, Pointer<IntPtr> phkResult,
+              int samDesired, int dwOptions, int Reserved)>('RegLoadAppKeyW');
+      expect(RegLoadAppKey, isA<Function>());
+    });
+    test('Can instantiate RegLoadKey', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegLoadKey = advapi32.lookupFunction<
+          Int32 Function(
+              IntPtr hKey, Pointer<Utf16> lpSubKey, Pointer<Utf16> lpFile),
+          int Function(int hKey, Pointer<Utf16> lpSubKey,
+              Pointer<Utf16> lpFile)>('RegLoadKeyW');
+      expect(RegLoadKey, isA<Function>());
+    });
+    test('Can instantiate RegLoadMUIString', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegLoadMUIString = advapi32.lookupFunction<
+          Int32 Function(
+              IntPtr hKey,
+              Pointer<Utf16> pszValue,
+              Pointer<Utf16> pszOutBuf,
+              Uint32 cbOutBuf,
+              Pointer<Uint32> pcbData,
+              Uint32 Flags,
+              Pointer<Utf16> pszDirectory),
+          int Function(
+              int hKey,
+              Pointer<Utf16> pszValue,
+              Pointer<Utf16> pszOutBuf,
+              int cbOutBuf,
+              Pointer<Uint32> pcbData,
+              int Flags,
+              Pointer<Utf16> pszDirectory)>('RegLoadMUIStringW');
+      expect(RegLoadMUIString, isA<Function>());
+    });
+    test('Can instantiate RegNotifyChangeKeyValue', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegNotifyChangeKeyValue = advapi32.lookupFunction<
+          Int32 Function(IntPtr hKey, Int32 bWatchSubtree,
+              Uint32 dwNotifyFilter, IntPtr hEvent, Int32 fAsynchronous),
+          int Function(int hKey, int bWatchSubtree, int dwNotifyFilter,
+              int hEvent, int fAsynchronous)>('RegNotifyChangeKeyValue');
+      expect(RegNotifyChangeKeyValue, isA<Function>());
+    });
+    test('Can instantiate RegOpenCurrentUser', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegOpenCurrentUser = advapi32.lookupFunction<
+          Int32 Function(Uint32 samDesired, Pointer<IntPtr> phkResult),
+          int Function(
+              int samDesired, Pointer<IntPtr> phkResult)>('RegOpenCurrentUser');
+      expect(RegOpenCurrentUser, isA<Function>());
+    });
+    test('Can instantiate RegOpenKey', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegOpenKey = advapi32.lookupFunction<
+          Int32 Function(
+              IntPtr hKey, Pointer<Utf16> lpSubKey, Pointer<IntPtr> phkResult),
+          int Function(int hKey, Pointer<Utf16> lpSubKey,
+              Pointer<IntPtr> phkResult)>('RegOpenKeyW');
+      expect(RegOpenKey, isA<Function>());
+    });
     test('Can instantiate RegOpenKeyEx', () {
       final advapi32 = DynamicLibrary.open('advapi32.dll');
       final RegOpenKeyEx = advapi32.lookupFunction<
@@ -4189,6 +4495,104 @@ void main() {
           int Function(int hKey, Pointer<Utf16> lpSubKey, int ulOptions,
               int samDesired, Pointer<IntPtr> phkResult)>('RegOpenKeyExW');
       expect(RegOpenKeyEx, isA<Function>());
+    });
+    test('Can instantiate RegOpenKeyTransacted', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegOpenKeyTransacted = advapi32.lookupFunction<
+          Int32 Function(
+              IntPtr hKey,
+              Pointer<Utf16> lpSubKey,
+              Uint32 ulOptions,
+              Uint32 samDesired,
+              Pointer<IntPtr> phkResult,
+              IntPtr hTransaction,
+              Pointer pExtendedParemeter),
+          int Function(
+              int hKey,
+              Pointer<Utf16> lpSubKey,
+              int ulOptions,
+              int samDesired,
+              Pointer<IntPtr> phkResult,
+              int hTransaction,
+              Pointer pExtendedParemeter)>('RegOpenKeyTransactedW');
+      expect(RegOpenKeyTransacted, isA<Function>());
+    });
+    test('Can instantiate RegOpenUserClassesRoot', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegOpenUserClassesRoot = advapi32.lookupFunction<
+          Int32 Function(IntPtr hToken, Uint32 dwOptions, Uint32 samDesired,
+              Pointer<IntPtr> phkResult),
+          int Function(int hToken, int dwOptions, int samDesired,
+              Pointer<IntPtr> phkResult)>('RegOpenUserClassesRoot');
+      expect(RegOpenUserClassesRoot, isA<Function>());
+    });
+    test('Can instantiate RegOverridePredefKey', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegOverridePredefKey = advapi32.lookupFunction<
+          Int32 Function(IntPtr hKey, IntPtr hNewHKey),
+          int Function(int hKey, int hNewHKey)>('RegOverridePredefKey');
+      expect(RegOverridePredefKey, isA<Function>());
+    });
+    test('Can instantiate RegQueryInfoKey', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegQueryInfoKey = advapi32.lookupFunction<
+          Int32 Function(
+              IntPtr hKey,
+              Pointer<Utf16> lpClass,
+              Pointer<Uint32> lpcchClass,
+              Pointer<Uint32> lpReserved,
+              Pointer<Uint32> lpcSubKeys,
+              Pointer<Uint32> lpcbMaxSubKeyLen,
+              Pointer<Uint32> lpcbMaxClassLen,
+              Pointer<Uint32> lpcValues,
+              Pointer<Uint32> lpcbMaxValueNameLen,
+              Pointer<Uint32> lpcbMaxValueLen,
+              Pointer<Uint32> lpcbSecurityDescriptor,
+              Pointer<FILETIME> lpftLastWriteTime),
+          int Function(
+              int hKey,
+              Pointer<Utf16> lpClass,
+              Pointer<Uint32> lpcchClass,
+              Pointer<Uint32> lpReserved,
+              Pointer<Uint32> lpcSubKeys,
+              Pointer<Uint32> lpcbMaxSubKeyLen,
+              Pointer<Uint32> lpcbMaxClassLen,
+              Pointer<Uint32> lpcValues,
+              Pointer<Uint32> lpcbMaxValueNameLen,
+              Pointer<Uint32> lpcbMaxValueLen,
+              Pointer<Uint32> lpcbSecurityDescriptor,
+              Pointer<FILETIME> lpftLastWriteTime)>('RegQueryInfoKeyW');
+      expect(RegQueryInfoKey, isA<Function>());
+    });
+    test('Can instantiate RegQueryMultipleValues', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegQueryMultipleValues = advapi32.lookupFunction<
+          Int32 Function(IntPtr hKey, Pointer<VALENT> val_list, Uint32 num_vals,
+              Pointer<Utf16> lpValueBuf, Pointer<Uint32> ldwTotsize),
+          int Function(
+              int hKey,
+              Pointer<VALENT> val_list,
+              int num_vals,
+              Pointer<Utf16> lpValueBuf,
+              Pointer<Uint32> ldwTotsize)>('RegQueryMultipleValuesW');
+      expect(RegQueryMultipleValues, isA<Function>());
+    });
+    test('Can instantiate RegQueryReflectionKey', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegQueryReflectionKey = advapi32.lookupFunction<
+          Int32 Function(IntPtr hBase, Pointer<Int32> bIsReflectionDisabled),
+          int Function(int hBase,
+              Pointer<Int32> bIsReflectionDisabled)>('RegQueryReflectionKey');
+      expect(RegQueryReflectionKey, isA<Function>());
+    });
+    test('Can instantiate RegQueryValue', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegQueryValue = advapi32.lookupFunction<
+          Int32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey,
+              Pointer<Utf16> lpData, Pointer<Int32> lpcbData),
+          int Function(int hKey, Pointer<Utf16> lpSubKey, Pointer<Utf16> lpData,
+              Pointer<Int32> lpcbData)>('RegQueryValueW');
+      expect(RegQueryValue, isA<Function>());
     });
     test('Can instantiate RegQueryValueEx', () {
       final advapi32 = DynamicLibrary.open('advapi32.dll');
@@ -4209,6 +4613,76 @@ void main() {
               Pointer<Uint32> lpcbData)>('RegQueryValueExW');
       expect(RegQueryValueEx, isA<Function>());
     });
+    test('Can instantiate RegReplaceKey', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegReplaceKey = advapi32.lookupFunction<
+          Int32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey,
+              Pointer<Utf16> lpNewFile, Pointer<Utf16> lpOldFile),
+          int Function(
+              int hKey,
+              Pointer<Utf16> lpSubKey,
+              Pointer<Utf16> lpNewFile,
+              Pointer<Utf16> lpOldFile)>('RegReplaceKeyW');
+      expect(RegReplaceKey, isA<Function>());
+    });
+    test('Can instantiate RegRestoreKey', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegRestoreKey = advapi32.lookupFunction<
+          Int32 Function(IntPtr hKey, Pointer<Utf16> lpFile, Uint32 dwFlags),
+          int Function(
+              int hKey, Pointer<Utf16> lpFile, int dwFlags)>('RegRestoreKeyW');
+      expect(RegRestoreKey, isA<Function>());
+    });
+    test('Can instantiate RegSaveKey', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegSaveKey = advapi32.lookupFunction<
+              Int32 Function(IntPtr hKey, Pointer<Utf16> lpFile,
+                  Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes),
+              int Function(int hKey, Pointer<Utf16> lpFile,
+                  Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes)>(
+          'RegSaveKeyW');
+      expect(RegSaveKey, isA<Function>());
+    });
+    test('Can instantiate RegSaveKeyEx', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegSaveKeyEx = advapi32.lookupFunction<
+          Int32 Function(IntPtr hKey, Pointer<Utf16> lpFile,
+              Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes, Uint32 Flags),
+          int Function(
+              int hKey,
+              Pointer<Utf16> lpFile,
+              Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes,
+              int Flags)>('RegSaveKeyExW');
+      expect(RegSaveKeyEx, isA<Function>());
+    });
+    test('Can instantiate RegSetKeyValue', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegSetKeyValue = advapi32.lookupFunction<
+          Int32 Function(
+              IntPtr hKey,
+              Pointer<Utf16> lpSubKey,
+              Pointer<Utf16> lpValueName,
+              Uint32 dwType,
+              Pointer lpData,
+              Uint32 cbData),
+          int Function(
+              int hKey,
+              Pointer<Utf16> lpSubKey,
+              Pointer<Utf16> lpValueName,
+              int dwType,
+              Pointer lpData,
+              int cbData)>('RegSetKeyValueW');
+      expect(RegSetKeyValue, isA<Function>());
+    });
+    test('Can instantiate RegSetValue', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegSetValue = advapi32.lookupFunction<
+          Int32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey, Uint32 dwType,
+              Pointer<Utf16> lpData, Uint32 cbData),
+          int Function(int hKey, Pointer<Utf16> lpSubKey, int dwType,
+              Pointer<Utf16> lpData, int cbData)>('RegSetValueW');
+      expect(RegSetValue, isA<Function>());
+    });
     test('Can instantiate RegSetValueEx', () {
       final advapi32 = DynamicLibrary.open('advapi32.dll');
       final RegSetValueEx = advapi32.lookupFunction<
@@ -4222,6 +4696,13 @@ void main() {
           int Function(int hKey, Pointer<Utf16> lpValueName, int Reserved,
               int dwType, Pointer<Uint8> lpData, int cbData)>('RegSetValueExW');
       expect(RegSetValueEx, isA<Function>());
+    });
+    test('Can instantiate RegUnLoadKey', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final RegUnLoadKey = advapi32.lookupFunction<
+          Int32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey),
+          int Function(int hKey, Pointer<Utf16> lpSubKey)>('RegUnLoadKeyW');
+      expect(RegUnLoadKey, isA<Function>());
     });
   });
 

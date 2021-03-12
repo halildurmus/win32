@@ -6,6 +6,7 @@
   are only used for code generation.
 - Update to latest WinMD package
 - Add shell folder APIs
+- Add registry key APIs
 
 ## 2.0.0
 

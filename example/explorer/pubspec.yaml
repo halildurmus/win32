@@ -4,17 +4,25 @@ description: Drive explorer, built with Flutter
 version: 1.0.0+4
 
 environment:
-  sdk: '>=2.12.0-0 <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
   font_awesome_flutter: ^9.0.0-nullsafety
+  path_provider: ^2.0.1
   win32:
     path: ../../
 
 dev_dependencies:
-  pedantic: ^1.10.0
+  pedantic: ^1.11.0
 
 ## This package is not intended for publishing; it's just an example.
 publish_to: none
+
+# Because we want to test that path_provider works with the current tip of tree
+# build of Win32, we set a dependency override here. Otherwise path_provider
+# will depend on the win32 release published to pub.dev. 
+dependency_overrides:
+  win32:
+    path: ../../
