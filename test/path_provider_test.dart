@@ -7,7 +7,6 @@ import 'dart:ffi';
 import 'dart:io';
 
 import 'package:ffi/ffi.dart';
-import 'package:meta/meta.dart';
 import 'package:path/path.dart' as path;
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
@@ -286,7 +285,6 @@ class VersionInfoQuerier {
 /// This class implements the `package:path_provider` functionality for Windows.
 class PathProviderWindows {
   /// The object to use for performing VerQueryValue calls.
-  @visibleForTesting
   VersionInfoQuerier versionInfoQuerier = VersionInfoQuerier();
 
   /// This is typically the same as the TMP environment variable.

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'volumes.dart';
 
@@ -15,6 +16,14 @@ class MyApp extends StatelessWidget {
         ),
         themeMode: ThemeMode.light,
         home: Scaffold(
+          // This exists only to test that path_provider doesn't break with the
+          // latest Win32. It's entirely redundant to the point of this demo.
+          floatingActionButton: FloatingActionButton.extended(
+              onPressed: () async {
+                final appDocDir = await getApplicationDocumentsDirectory();
+                print(appDocDir.path);
+              },
+              label: Text('Paths')),
           body: VolumeListView(),
         ),
       );

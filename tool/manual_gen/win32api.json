@@ -330,6 +330,11 @@
         "dllLibrary": "ole32",
         "comment": "Registers security and sets the default security values for the process."
     },
+    "ConnectNamedPipe": {
+        "prototype": "BOOL ConnectNamedPipe(\n  HANDLE       hNamedPipe,\n  LPOVERLAPPED lpOverlapped);",
+        "dllLibrary": "kernel32",
+        "comment": "Enables a named pipe server process to wait for a client process to connect to an instance of a named pipe. A client process connects by calling either the CreateFile or CallNamedPipe function."
+    },
     "ContinueDebugEvent": {
         "prototype": "BOOL ContinueDebugEvent(\n  DWORD dwProcessId,\n  DWORD dwThreadId,\n  DWORD dwContinueStatus\n);",
         "dllLibrary": "kernel32",
@@ -449,6 +454,11 @@
         "prototype": "HMENU CreateMenu();",
         "dllLibrary": "user32",
         "comment": "Creates a menu. The menu is initially empty, but it can be filled with menu items by using the InsertMenuItem, AppendMenu, and InsertMenu functions."
+    },
+    "CreateNamedPipe": {
+        "prototype": "HANDLE CreateNamedPipeW(\n  LPCWSTR                lpName,\n  DWORD                 dwOpenMode,\n  DWORD                 dwPipeMode,\n  DWORD                 nMaxInstances,\n  DWORD                 nOutBufferSize,\n  DWORD                 nInBufferSize,\n  DWORD                 nDefaultTimeOut,\n  LPSECURITY_ATTRIBUTES lpSecurityAttributes);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates an instance of a named pipe and returns a handle for subsequent pipe operations. A named pipe server process uses this function either to create the first instance of a specific named pipe and establish its basic attributes or to create a new instance of an existing named pipe."
     },
     "CreatePen": {
         "prototype": "HPEN CreatePen(\n  int      iStyle,\n  int      cWidth,\n  COLORREF color\n);",
@@ -575,6 +585,11 @@
         "prototype": "INT_PTR DialogBoxIndirectParamW(\n  HINSTANCE       hInstance,\n  LPCDLGTEMPLATEW hDialogTemplate,\n  HWND            hWndParent,\n  DLGPROC         lpDialogFunc,\n  LPARAM          dwInitParam\n);",
         "dllLibrary": "user32",
         "comment": "Creates a modal dialog box from a dialog box template in memory. Before displaying the dialog box, the function passes an application-defined value to the dialog box procedure as the lParam parameter of the WM_INITDIALOG message. An application can use this value to initialize dialog box controls."
+    },
+    "DisconnectNamedPipe": {
+        "prototype": "BOOL DisconnectNamedPipe(\n  HANDLE hNamedPipe);",
+        "dllLibrary": "kernel32",
+        "comment": "Disconnects the server end of a named pipe instance from a client process."
     },
     "DispatchMessage": {
         "prototype": "LRESULT DispatchMessageW(\n  const MSG *lpMsg\n);",
@@ -876,6 +891,11 @@
         "dllLibrary": "user32",
         "comment": "Determines whether a key is up or down at the time the function is called, and whether the key was pressed after a previous call to GetAsyncKeyState."
     },
+    "GetBinaryType": {
+        "prototype": "BOOL GetBinaryTypeW(\n  LPCWSTR lpApplicationName,\n  LPDWORD lpBinaryType);",
+        "dllLibrary": "kernel32",
+        "comment": "Determines whether a file is an executable (.exe) file, and if so, which subsystem runs the executable file."
+    },
     "GetCapture": {
         "prototype": "HWND GetCapture();",
         "dllLibrary": "user32",
@@ -1028,6 +1048,11 @@
         "dllLibrary": "user32",
         "comment": "Returns the dots per inch (dpi) value for the associated window.",
         "minimumWindowsVersion": "WIN10_RS1"
+    },
+    "GetExitCodeProcess": {
+        "prototype": "BOOL GetExitCodeProcess(\n  HANDLE  hProcess,\n  LPDWORD lpExitCode);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the termination status of the specified process."
     },
     "GetFileAttributesEx": {
         "prototype": "BOOL GetFileAttributesExW(\n  LPCWSTR                lpFileName,\n  GET_FILEEX_INFO_LEVELS fInfoLevelId,\n  LPVOID                 lpFileInformation\n);",
@@ -1230,6 +1255,11 @@
         "prototype": "int GetMouseMovePointsEx(\n  UINT             cbSize,\n  LPMOUSEMOVEPOINT lppt,\n  LPMOUSEMOVEPOINT lpptBuf,\n  int              nBufPoints,\n  DWORD            resolution\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves a history of up to 64 previous coordinates of the mouse or pen."
+    },
+    "GetNamedPipeInfo": {
+        "prototype": "BOOL GetNamedPipeInfo(\n  HANDLE  hNamedPipe,\n  LPDWORD lpFlags,\n  LPDWORD lpOutBufferSize,\n  LPDWORD lpInBufferSize,\n  LPDWORD lpMaxInstances);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves information about the specified named pipe."
     },
     "GetNativeSystemInfo": {
         "prototype": "void GetNativeSystemInfo(\n  LPSYSTEM_INFO lpSystemInfo\n);",
@@ -1463,6 +1493,11 @@
         "prototype": "BOOL GetVersionExW(\n  LPOSVERSIONINFOW lpVersionInformation\n);",
         "dllLibrary": "kernel32",
         "comment": "With the release of Windows 8.1, the behavior of the GetVersionEx API has changed in the value it will return for the operating system version. The value returned by the GetVersionEx function now depends on how the application is manifested. Applications not manifested for Windows 8.1 or Windows 10 will return the Windows 8 OS version value (6.2). Once an application is manifested for a given operating system version, GetVersionEx will always return the version that the application is manifested for in future releases."
+    },
+    "GetVolumePathName": {
+        "prototype": "BOOL GetVolumePathNameW(\n  LPCWSTR lpszFileName,\n  LPWSTR  lpszVolumePathName,\n  DWORD   cchBufferLength);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the volume mount point where the specified path is mounted."
     },
     "GetVolumePathNamesForVolumeName": {
         "prototype": "BOOL GetVolumePathNamesForVolumeNameW(\n  LPCWSTR lpszVolumeName,\n  LPWCH   lpszVolumePathNames,\n  DWORD   cchBufferLength,\n  PDWORD  lpcchReturnLength\n);",
@@ -1852,6 +1887,11 @@
         "dllLibrary": "user32",
         "comment": "Dispatches incoming sent messages, checks the thread message queue for a posted message, and retrieves the message (if any exist)."
     },
+    "PeekNamedPipe": {
+        "prototype": "BOOL PeekNamedPipe(\n  HANDLE  hNamedPipe,\n  LPVOID  lpBuffer,\n  DWORD   nBufferSize,\n  LPDWORD lpBytesRead,\n  LPDWORD lpTotalBytesAvail,\n  LPDWORD lpBytesLeftThisMessage);",
+        "dllLibrary": "kernel32",
+        "comment": "Copies data from a named or anonymous pipe into a buffer without removing it from the pipe. It also returns information about data in the pipe."
+    },
     "PhysicalToLogicalPoint": {
         "prototype": "BOOL PhysicalToLogicalPoint(\n  HWND    hWnd,\n  LPPOINT lpPoint\n);",
         "dllLibrary": "user32",
@@ -1992,6 +2032,101 @@
         "dllLibrary": "advapi32",
         "comment": "Establishes a connection to a predefined registry key on another computer."
     },
+    "RegCopyTree": {
+        "prototype": "LSTATUS RegCopyTreeW(\n  HKEY    hKeySrc,\n  LPCWSTR lpSubKey,\n  HKEY    hKeyDest\n);",
+        "dllLibrary": "advapi32",
+        "comment": "Copies the specified registry key, along with its values and subkeys, to the specified destination key."
+    },
+    "RegCreateKey": {
+        "prototype": "LSTATUS RegCreateKeyW(\n  HKEY    hKey,\n  LPCWSTR lpSubKey,\n  PHKEY   phkResult);",
+        "dllLibrary": "advapi32",
+        "comment": "Creates the specified registry key. If the key already exists in the registry, the function opens it."
+    },
+    "RegCreateKeyEx": {
+        "prototype": "LSTATUS RegCreateKeyExW(\n  HKEY hKey,\n  LPCWSTR lpSubKey,\n  DWORD Reserved,\n  LPWSTR lpClass,\n  DWORD dwOptions,\n  REGSAM samDesired,\n  const LPSECURITY_ATTRIBUTES lpSecurityAttributes,\n  PHKEY phkResult,\n  LPDWORD lpdwDisposition\n);",
+        "dllLibrary": "advapi32",
+        "comment": "Creates the specified registry key. If the key already exists, the function opens it. Note that key names are not case sensitive."
+    },
+    "RegCreateKeyTransacted": {
+        "prototype": "LSTATUS RegCreateKeyTransactedW(\n  HKEY     hKey,\n  LPCWSTR  lpSubKey,\n  DWORD    Reserved,\n  LPWSTR   lpClass,\n  DWORD    dwOptions,\n  REGSAM   samDesired,\n  const LPSECURITY_ATTRIBUTES lpSecurityAttributes,\n  PHKEY    phkResult,\n  LPDWORD  lpdwDisposition,\n  HANDLE   hTransaction,\n  PVOID    pExtendedParemeter);",
+        "dllLibrary": "advapi32",
+        "comment": "Establishes a connection to a predefined registry key on another computer."
+    },
+    "RegDeleteKey": {
+        "prototype": "LSTATUS RegDeleteKeyW(\n  HKEY    hKey,\n  LPCWSTR lpSubKey);",
+        "dllLibrary": "advapi32",
+        "comment": "Deletes a subkey and its values. Note that key names are not case sensitive."
+    },
+    "RegDeleteKeyEx": {
+        "prototype": "LSTATUS RegDeleteKeyExW(\n  HKEY    hKey,\n  LPCWSTR lpSubKey,\n  REGSAM  samDesired,\n  DWORD   Reserved);",
+        "dllLibrary": "advapi32",
+        "comment": "Deletes a subkey and its values from the specified platform-specific view of the registry. Note that key names are not case sensitive."
+    },
+    "RegDeleteKeyTransacted": {
+        "prototype": "LSTATUS RegDeleteKeyTransactedW(\n  HKEY    hKey,\n  LPCWSTR lpSubKey,\n  REGSAM  samDesired,\n  DWORD   Reserved,\n  HANDLE  hTransaction,\n  PVOID   pExtendedParameter);",
+        "dllLibrary": "advapi32",
+        "comment": "Deletes a subkey and its values from the specified platform-specific view of the registry as a transacted operation. Note that key names are not case sensitive."
+    },
+    "RegDeleteKeyValue": {
+        "prototype": "LSTATUS RegDeleteKeyValueW(\n  HKEY    hKey,\n  LPCWSTR lpSubKey,\n  LPCWSTR lpValueName);",
+        "dllLibrary": "advapi32",
+        "comment": "Removes the specified value from the specified registry key and subkey."
+    },
+    "RegDeleteTree": {
+        "prototype": "LSTATUS RegDeleteTreeW(\n  HKEY    hKey,\n  LPCWSTR lpSubKey);",
+        "dllLibrary": "advapi32",
+        "comment": "Deletes the subkeys and values of the specified key recursively."
+    },
+    "RegDeleteValue": {
+        "prototype": "LSTATUS RegDeleteValueW(\n  HKEY    hKey,\n  LPCWSTR lpValueName);",
+        "dllLibrary": "advapi32",
+        "comment": "Removes a named value from the specified registry key. Note that value names are not case sensitive."
+    },
+    "RegDisablePredefinedCache": {
+        "prototype": "LSTATUS RegDisablePredefinedCache();",
+        "dllLibrary": "advapi32",
+        "comment": "Disables handle caching of the predefined registry handle for HKEY_CURRENT_USER for the current process. This function does not work on a remote computer."
+    },
+    "RegDisablePredefinedCacheEx": {
+        "prototype": "LSTATUS RegDisablePredefinedCacheEx();",
+        "dllLibrary": "advapi32",
+        "comment": "Disables handle caching for all predefined registry handles for the current process."
+    },
+    "RegDisableReflectionKey": {
+        "prototype": "LONG RegDisableReflectionKey(\n  HKEY hBase);",
+        "dllLibrary": "advapi32",
+        "comment": "Disables registry reflection for the specified key. Disabling reflection for a key does not affect reflection of any subkeys."
+    },
+    "RegEnableReflectionKey": {
+        "prototype": "LONG RegEnableReflectionKey(\n  HKEY hBase);",
+        "dllLibrary": "advapi32",
+        "comment": "Restores registry reflection for the specified disabled key. Restoring reflection for a key does not affect reflection of any subkeys."
+    },
+    "RegEnumKey": {
+        "prototype": "LSTATUS RegEnumKeyW(\n  HKEY   hKey,\n  DWORD  dwIndex,\n  LPWSTR lpName,\n  DWORD  cchName);",
+        "dllLibrary": "advapi32",
+        "comment": "Enumerates the subkeys of the specified open registry key. The function retrieves the name of one subkey each time it is called."
+    },
+    "RegEnumKeyEx": {
+        "prototype": "LSTATUS RegEnumKeyExW(\n  HKEY      hKey,\n  DWORD     dwIndex,\n  LPWSTR    lpName,\n  LPDWORD   lpcchName,\n  LPDWORD   lpReserved,\n  LPWSTR    lpClass,\n  LPDWORD   lpcchClass,\n  PFILETIME lpftLastWriteTime);",
+        "dllLibrary": "advapi32",
+        "comment": "Enumerates the subkeys of the specified open registry key. The function retrieves information about one subkey each time it is called."
+    },
+    "RegEnumValue": {
+        "prototype": "LSTATUS RegEnumValueW(\n  HKEY    hKey,\n  DWORD   dwIndex,\n  LPWSTR  lpValueName,\n  LPDWORD lpcchValueName,\n  LPDWORD lpReserved,\n  LPDWORD lpType,\n  LPBYTE  lpData,\n  LPDWORD lpcbData);",
+        "dllLibrary": "advapi32",
+        "comment": "Enumerates the values for the specified open registry key. The function copies one indexed value name and data block for the key each time it is called."
+    },
+    "RegFlushKey": {
+        "prototype": "LSTATUS RegFlushKey(\n  HKEY hKey);",
+        "dllLibrary": "advapi32",
+        "comment": "Writes all the attributes of the specified open registry key into the registry."
+    },
+    "RegGetValue": {
+        "prototype": "LSTATUS RegGetValueW(\n  HKEY    hkey,\n  LPCWSTR lpSubKey,\n  LPCWSTR lpValue,\n  DWORD   dwFlags,\n  LPDWORD pdwType,\n  PVOID   pvData,\n  LPDWORD pcbData);",
+        "dllLibrary": "advapi32",
+        "comment": "Retrieves the type and data for the specified registry value."
+    },
     "RegisterClass": {
         "prototype": "ATOM RegisterClassW(\n  const WNDCLASSW *lpWndClass\n);",
         "dllLibrary": "user32",
@@ -2017,20 +2152,120 @@
         "dllLibrary": "user32",
         "comment": "Defines a new window message that is guaranteed to be unique throughout the system. The message value can be used when sending or posting messages."
     },
+    "RegLoadAppKey": {
+        "prototype": "LSTATUS RegLoadAppKeyW(\n  LPCWSTR lpFile,\n  PHKEY   phkResult,\n  REGSAM  samDesired,\n  DWORD   dwOptions,\n  DWORD   Reserved);",
+        "dllLibrary": "advapi32",
+        "comment": "Loads the specified registry hive as an application hive."
+    },
+    "RegLoadKey": {
+        "prototype": "LSTATUS RegLoadKeyW(\n  HKEY    hKey,\n  LPCWSTR lpSubKey,\n  LPCWSTR lpFile);",
+        "dllLibrary": "advapi32",
+        "comment": "Creates a subkey under HKEY_USERS or HKEY_LOCAL_MACHINE and loads the data from the specified registry hive into that subkey."
+    },
+    "RegLoadMUIString": {
+        "prototype": "LSTATUS RegLoadMUIStringW(\n  HKEY    hKey,\n  LPCWSTR pszValue,\n  LPWSTR  pszOutBuf,\n  DWORD   cbOutBuf,\n  LPDWORD pcbData,\n  DWORD   Flags,\n  LPCWSTR pszDirectory);",
+        "dllLibrary": "advapi32",
+        "comment": "Loads the specified string from the specified key and subkey."
+    },
+    "RegNotifyChangeKeyValue": {
+        "prototype": "LSTATUS RegNotifyChangeKeyValue(\n  HKEY   hKey,\n  BOOL   bWatchSubtree,\n  DWORD  dwNotifyFilter,\n  HANDLE hEvent,\n  BOOL   fAsynchronous);",
+        "dllLibrary": "advapi32",
+        "comment": "Notifies the caller about changes to the attributes or contents of a specified registry key."
+    },
+    "RegOpenCurrentUser": {
+        "prototype": "LSTATUS RegOpenCurrentUser(\n  REGSAM samDesired,\n  PHKEY  phkResult);",
+        "dllLibrary": "advapi32",
+        "comment": "Retrieves a handle to the HKEY_CURRENT_USER key for the user the current thread is impersonating."
+    },
+    "RegOpenKey": {
+        "prototype": "LSTATUS RegOpenKeyW(\n  HKEY    hKey,\n  LPCWSTR lpSubKey,\n  PHKEY   phkResult);",
+        "dllLibrary": "advapi32",
+        "comment": "Opens the specified registry key."
+    },
     "RegOpenKeyEx": {
         "prototype": "LSTATUS RegOpenKeyExW(\n  HKEY    hKey,\n  LPCWSTR lpSubKey,\n  DWORD   ulOptions,\n  REGSAM  samDesired,\n  PHKEY   phkResult\n);",
         "dllLibrary": "advapi32",
         "comment": "Opens the specified registry key. Note that key names are not case sensitive."
+    },
+    "RegOpenKeyTransacted": {
+        "prototype": "LSTATUS RegOpenKeyTransactedW(\n  HKEY    hKey,\n  LPCWSTR lpSubKey,\n  DWORD   ulOptions,\n  REGSAM  samDesired,\n  PHKEY   phkResult,\n  HANDLE  hTransaction,\n  PVOID   pExtendedParemeter);",
+        "dllLibrary": "advapi32",
+        "comment": "Opens the specified registry key and associates it with a transaction. Note that key names are not case sensitive."
+    },
+    "RegOpenUserClassesRoot": {
+        "prototype": "LSTATUS RegOpenUserClassesRoot(\n  HANDLE hToken,\n  DWORD  dwOptions,\n  REGSAM samDesired,\n  PHKEY  phkResult);",
+        "dllLibrary": "advapi32",
+        "comment": "Retrieves a handle to the HKEY_CLASSES_ROOT key for a specified user. The user is identified by an access token."
+    },
+    "RegOverridePredefKey": {
+        "prototype": "LSTATUS RegOverridePredefKey(\n  HKEY hKey,\n  HKEY hNewHKey);",
+        "dllLibrary": "advapi32",
+        "comment": "Maps a predefined registry key to the specified registry key."
+    },
+    "RegQueryInfoKey": {
+        "prototype": "LSTATUS RegQueryInfoKeyW(\n  HKEY      hKey,\n  LPWSTR    lpClass,\n  LPDWORD   lpcchClass,\n  LPDWORD   lpReserved,\n  LPDWORD   lpcSubKeys,\n  LPDWORD   lpcbMaxSubKeyLen,\n  LPDWORD   lpcbMaxClassLen,\n  LPDWORD   lpcValues,\n  LPDWORD   lpcbMaxValueNameLen,\n  LPDWORD   lpcbMaxValueLen,\n  LPDWORD   lpcbSecurityDescriptor,\n  PFILETIME lpftLastWriteTime);",
+        "dllLibrary": "advapi32",
+        "comment": "Retrieves information about the specified registry key."
+    },
+    "RegQueryMultipleValues": {
+        "prototype": "LSTATUS RegQueryMultipleValuesW(\n  HKEY     hKey,\n  PVALENTW val_list,\n  DWORD    num_vals,\n  LPWSTR   lpValueBuf,\n  LPDWORD  ldwTotsize);",
+        "dllLibrary": "advapi32",
+        "comment": "Retrieves the type and data for a list of value names associated with an open registry key."
+    },
+    "RegQueryReflectionKey": {
+        "prototype": "LONG RegQueryReflectionKey(\n  HKEY hBase,\n  BOOL *bIsReflectionDisabled);",
+        "dllLibrary": "advapi32",
+        "comment": "Determines whether reflection has been disabled or enabled for the specified key."
+    },
+    "RegQueryValue": {
+        "prototype": "LSTATUS RegQueryValueW(\n  HKEY    hKey,\n  LPCWSTR lpSubKey,\n  LPWSTR  lpData,\n  PLONG   lpcbData);",
+        "dllLibrary": "advapi32",
+        "comment": "Retrieves the data associated with the default or unnamed value of a specified registry key. The data must be a null-terminated string."
     },
     "RegQueryValueEx": {
         "prototype": "LSTATUS RegQueryValueExW(\n  HKEY    hKey,\n  LPCWSTR lpValueName,\n  LPDWORD lpReserved,\n  LPDWORD lpType,\n  LPBYTE  lpData,\n  LPDWORD lpcbData\n);",
         "dllLibrary": "advapi32",
         "comment": "Retrieves the type and data for the specified value name associated with an open registry key. To ensure that any string values (REG_SZ, REG_MULTI_SZ, and REG_EXPAND_SZ) returned are null-terminated, use the RegGetValue function."
     },
+    "RegReplaceKey": {
+        "prototype": "LSTATUS RegReplaceKeyW(\n  HKEY    hKey,\n  LPCWSTR lpSubKey,\n  LPCWSTR lpNewFile,\n  LPCWSTR lpOldFile);",
+        "dllLibrary": "advapi32",
+        "comment": "Replaces the file backing a registry key and all its subkeys with another file, so that when the system is next started, the key and subkeys will have the values stored in the new file."
+    },
+    "RegRestoreKey": {
+        "prototype": "LSTATUS RegRestoreKeyW(\n  HKEY    hKey,\n  LPCWSTR lpFile,\n  DWORD   dwFlags);",
+        "dllLibrary": "advapi32",
+        "comment": "Reads the registry information in a specified file and copies it over the specified key. This registry information may be in the form of a key and multiple levels of subkeys."
+    },
+    "RegSaveKey": {
+        "prototype": "LSTATUS RegSaveKeyW(\n  HKEY                        hKey,\n  LPCWSTR                     lpFile,\n  const LPSECURITY_ATTRIBUTES lpSecurityAttributes);",
+        "dllLibrary": "advapi32",
+        "comment": "Saves the specified key and all of its subkeys and values to a new file, in the standard format."
+    },
+    "RegSaveKeyEx": {
+        "prototype": "LSTATUS RegSaveKeyExW(\n  HKEY                        hKey,\n  LPCWSTR                     lpFile,\n  const LPSECURITY_ATTRIBUTES lpSecurityAttributes,\n  DWORD                       Flags);",
+        "dllLibrary": "advapi32",
+        "comment": "Saves the specified key and all of its subkeys and values to a registry file, in the specified format."
+    },
+    "RegSetKeyValue": {
+        "prototype": "LSTATUS RegSetKeyValueW(\n  HKEY    hKey,\n  LPCWSTR lpSubKey,\n  LPCWSTR lpValueName,\n  DWORD   dwType,\n  LPCVOID lpData,\n  DWORD   cbData);",
+        "dllLibrary": "advapi32",
+        "comment": "Sets the data for the specified value in the specified registry key and subkey."
+    },
+    "RegSetValue": {
+        "prototype": "LSTATUS RegSetValueW(\n  HKEY    hKey,\n  LPCWSTR lpSubKey,\n  DWORD   dwType,\n  LPCWSTR lpData,\n  DWORD   cbData);",
+        "dllLibrary": "advapi32",
+        "comment": "Sets the data for the default or unnamed value of a specified registry key. The data must be a text string."
+    },
     "RegSetValueEx": {
         "prototype": "LSTATUS RegSetValueExW(\n  HKEY       hKey,\n  LPCWSTR    lpValueName,\n  DWORD      Reserved,\n  DWORD      dwType,\n  const BYTE *lpData,\n  DWORD      cbData\n);",
         "dllLibrary": "advapi32",
         "comment": "Sets the data and type of a specified value under a registry key."
+    },
+    "RegUnLoadKey": {
+        "prototype": "LSTATUS RegUnLoadKeyW(\n  HKEY    hKey,\n  LPCWSTR lpSubKey);",
+        "dllLibrary": "advapi32",
+        "comment": "Unloads the specified registry key and its subkeys from the registry."
     },
     "ReleaseActCtx": {
         "prototype": "void ReleaseActCtx(\n  HANDLE hActCtx\n);",
@@ -2056,6 +2291,11 @@
         "prototype": "BOOL RemoveDirectoryW(\n  LPCWSTR lpPathName\n);",
         "dllLibrary": "kernel32",
         "comment": "Deletes an existing empty directory."
+    },
+    "ReOpenFile": {
+        "prototype": "HANDLE ReOpenFile(\n  HANDLE hOriginalFile,\n  DWORD  dwDesiredAccess,\n  DWORD  dwShareMode,\n  DWORD  dwFlagsAndAttributes);",
+        "dllLibrary": "kernel32",
+        "comment": "Reopens the specified file system object with different access rights, sharing mode, and flags."
     },
     "ReplaceText": {
         "prototype": "HWND ReplaceTextW(\n  LPFINDREPLACEW Arg1\n);",
@@ -2251,6 +2491,11 @@
         "dllLibrary": "kernel32",
         "comment": "Moves the file pointer of the specified file."
     },
+    "SetFileShortName": {
+        "prototype": "BOOL SetFileShortNameW(\n  HANDLE  hFile,\n  LPCWSTR lpShortName);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the short name for the specified file. The file must be on an NTFS file system volume."
+    },
     "SetFocus": {
         "prototype": "HWND SetFocus(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
@@ -2315,6 +2560,11 @@
         "prototype": "_BOOL SetMonitorRedGreenOrBlueGain(\n  HANDLE       hMonitor,\n  MC_GAIN_TYPE gtGainType,\n  DWORD        dwNewGain\n);",
         "dllLibrary": "dxva2",
         "comment": "Sets a monitor's red, green, or blue gain value."
+    },
+    "SetNamedPipeHandleState": {
+        "prototype": "BOOL SetNamedPipeHandleState(\n  HANDLE  hNamedPipe,\n  LPDWORD lpMode,\n  LPDWORD lpMaxCollectionCount,\n  LPDWORD lpCollectDataTimeout);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the read mode and the blocking mode of the specified named pipe. If the specified handle is to the client end of a named pipe and if the named pipe server process is on a remote computer, the function can also be used to control local buffering."
     },
     "SetParent": {
         "prototype": "HWND SetParent(\n  HWND hWndChild,\n  HWND hWndNewParent\n);",
@@ -2396,6 +2646,11 @@
         "prototype": "BOOL SetViewportOrgEx(\n  HDC     hdc,\n  int     x,\n  int     y,\n  LPPOINT lppt\n);",
         "dllLibrary": "gdi32",
         "comment": "The SetViewportOrgEx function specifies which device point maps to the window origin (0,0)."
+    },
+    "SetVolumeLabel": {
+        "prototype": "BOOL SetVolumeLabelW(\n  LPCWSTR lpRootPathName,\n  LPCWSTR lpVolumeName);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the label of a file system volume."
     },
     "SetWindowExtEx": {
         "prototype": "BOOL SetWindowExtEx(\n  HDC    hdc,\n  int    x,\n  int    y,\n  LPSIZE lpsz\n);",
@@ -2614,6 +2869,11 @@
         "comment": "The TaskDialogIndirect function creates, displays, and operates a task dialog. The task dialog contains application-defined icons, messages, title, verification check box, command links, push buttons, and radio buttons. This function can register a callback function to receive notification messages.",
         "test": false
     },
+    "TerminateProcess": {
+        "prototype": "BOOL TerminateProcess(\n  HANDLE hProcess,\n  UINT   uExitCode);",
+        "dllLibrary": "kernel32",
+        "comment": "Terminates the specified process and all of its threads."
+    },
     "TextOut": {
         "prototype": "BOOL TextOutW(\n  HDC     hdc,\n  int     x,\n  int     y,\n  LPCWSTR lpString,\n  int     c\n);",
         "dllLibrary": "gdi32",
@@ -2643,6 +2903,11 @@
         "prototype": "BOOL TrackPopupMenuEx(\n  HMENU hMenu,\n  UINT uFlags,\n  int x,\n  int y,\n  HWND hwnd,\n  TPMPARAMS *lptpm\n);",
         "dllLibrary": "user32",
         "comment": "Displays a shortcut menu at the specified location and tracks the selection of items on the shortcut menu. The shortcut menu can appear anywhere on the screen."
+    },
+    "TransactNamedPipe": {
+        "prototype": "BOOL TransactNamedPipe(\n  HANDLE       hNamedPipe,\n  LPVOID       lpInBuffer,\n  DWORD        nInBufferSize,\n  LPVOID       lpOutBuffer,\n  DWORD        nOutBufferSize,\n  LPDWORD      lpBytesRead,\n  LPOVERLAPPED lpOverlapped);",
+        "dllLibrary": "kernel32",
+        "comment": "Combines the functions that write a message to and read a message from the specified named pipe into a single network operation."
     },
     "TranslateAccelerator": {
         "prototype": "int TranslateAcceleratorW(\n  HWND   hWnd,\n  HACCEL hAccTable,\n  LPMSG  lpMsg\n);",

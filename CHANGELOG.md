@@ -1,3 +1,7 @@
+## 2.0.2
+
+- Adds named pipe APIs to support projects like TerminalStudio/pty.
+
 ## 2.0.1
 
 - Adds a demo of custom window shapes.
@@ -6,85 +10,25 @@
   are only used for code generation.
 - Update to latest WinMD package
 - Add shell folder APIs
+- Add registry key APIs
 
 ## 2.0.0
 
 - Stable version w/ sound null safety.
-
-## 2.0.0-nullsafety.12
-
-- Fix a string bug
-
-## 2.0.0-nullsafety.11
-
-- Make VARIANT more representative of the underlying type.
-- Add more tests.
-- Bump to ffi 1.0.0
-
-## 2.0.0-nullsafety.10
-
-- Make VARIANT more representative of the underlying type.
-- Add more tests.
-- Bump to ffi 0.3.0-nullsafety.1
-
-## 2.0.0-nullsafety.9
-
-- Workarounds to fix sizing of BLUETOOTH_PIN_INFO and SHITEMID structs.
-- Add waveOut* APIs from winmm.dll (thanks @slightfoot)
-- Updated memory allocation due to FFI breaking changes.
-
-## 2.0.0-nullsafety.8
-
+- Update to ffi 1.0.0 and address breaking changes.
+- 100+ new APIs in kernel32, user32, ole32, advapi32, shell32 and gdi32, as well
+  as a series of COM interfaces.
+- Rework API wrapper to use functions instead of properties
 - New JSON-based metadata format for Win32 APIs that supports API sets and
   minimum versions, and more robust tooling for loading and saving metadata
-- 100+ new APIs in kernel32, user32, ole32, advapi32, shell32 and gdi32
 - Migrated Windows Runtime APIs into core unmanaged metadata
-- Added COM tests and exported several COM interfaces that were missing
-- New shell tray notification example (thanks @ilopX)
-
-## 2.0.0-nullsafety.7
-
-- Documented more constants and callbacks
-- Add AnimateWindow, ChildWindowFromPoint, ChildWindowFromPointEx,
-  EnumChildWindows, LogicalToPhysicalPoint, OpenIcon, PhysicalToLogicalPoint,
-  PostThreadMessage, ReplyMessage, SetForegroundWindow, SoundSentry, WaitMessage
-  user32 APIs
-- Add CreateHatchBrush gdi32 API
-
-## 2.0.0-nullsafety.6
-
-- Add GetDpiForWindow, GetSystemMetricsForDpi, GetWindowRect, IsZoomed,
-  PostMessage user32 APIs for @callmebit
-
-## 2.0.0-nullsafety.5
-
+- Add waveOut* APIs from winmm.dll (thanks @slightfoot)
+- Make VARIANT more representative of the underlying type.
+- Add DLGTEMPLATE and DLGITEMTEMPLATE structs with extension methods.
+- Add more tests.
 - Add dialog box example and supporting extension methods
-
-## 2.0.0-nullsafety.4
-
-- Add remaining Win32 dialog calls
-
-## 2.0.0-nullsafety.3
-
-- Add button and dialog style constants
-- Add DLGTEMPLATE and DLGITEMTEMPLATE
-
-## 2.0.0-nullsafety.2
-
-- Add extended window style constants (WM_EX_*)
-
-## 2.0.0-nullsafety.1
-
-- Add a number of GDI calls
-- Rework API wrapper to use functions instead of properties
-- Convert API tests support reworked API wrapper
-- High-fidelity INPUT struct that demonstrates an approach for union structs in
-  Dart FFI
-- Document some more constants
-
-## 2.0.0-nullsafety.0
-
-- Enable sound null safety
+- New shell tray notification example (thanks @ilopX)
+- Better documentation of constants and callbacks
 
 ## 1.7.5
 

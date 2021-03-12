@@ -461,6 +461,170 @@ const ES_AWAYMODE_REQUIRED = 0x00000040;
 const ES_CONTINUOUS = 0x80000000;
 
 // -----------------------------------------------------------------------------
+// Named pipe flags
+// -----------------------------------------------------------------------------
+
+/// The flow of data in the pipe goes from client to server only. This mode
+/// gives the server the equivalent of GENERIC_READ access to the pipe. The
+/// client must specify GENERIC_WRITE access when connecting to the pipe. If the
+/// client must read pipe settings by calling the GetNamedPipeInfo or
+/// GetNamedPipeHandleState functions, the client must specify GENERIC_WRITE and
+/// FILE_READ_ATTRIBUTES access when connecting to the pipe.
+const PIPE_ACCESS_INBOUND = 0x00000001;
+
+/// The flow of data in the pipe goes from server to client only. This mode
+/// gives the server the equivalent of GENERIC_WRITE access to the pipe. The
+/// client must specify GENERIC_READ access when connecting to the pipe. If the
+/// client must change pipe settings by calling the SetNamedPipeHandleState
+/// function, the client must specify GENERIC_READ and FILE_WRITE_ATTRIBUTES
+/// access when connecting to the pipe.
+const PIPE_ACCESS_OUTBOUND = 0x00000002;
+
+/// The pipe is bi-directional; both server and client processes can read from
+/// and write to the pipe. This mode gives the server the equivalent of
+/// GENERIC_READ and GENERIC_WRITE access to the pipe. The client can specify
+/// GENERIC_READ or GENERIC_WRITE, or both, when it connects to the pipe using
+/// the CreateFile function.
+const PIPE_ACCESS_DUPLEX = 0x00000003;
+
+/// The handle refers to the client end of a named pipe instance. This is the
+/// default.
+const PIPE_CLIENT_END = 0x00000000;
+
+/// The handle refers to the server end of a named pipe instance. If this value
+/// is not specified, the handle refers to the client end of a named pipe
+/// instance.
+const PIPE_SERVER_END = 0x00000001;
+
+/// Blocking mode is enabled. When the pipe handle is specified in the ReadFile,
+/// WriteFile, or ConnectNamedPipe function, the operations are not completed
+/// until there is data to read, all data is written, or a client is connected.
+/// Use of this mode can mean waiting indefinitely in some situations for a
+/// client process to perform an action.
+const PIPE_WAIT = 0x00000000;
+
+/// Nonblocking mode is enabled. In this mode, ReadFile, WriteFile, and
+/// ConnectNamedPipe always return immediately.
+const PIPE_NOWAIT = 0x00000001;
+
+/// Data is read from the pipe as a stream of bytes. This mode can be used with
+/// either PIPE_TYPE_MESSAGE or PIPE_TYPE_BYTE.
+const PIPE_READMODE_BYTE = 0x00000000;
+
+/// Data is read from the pipe as a stream of messages. This mode can be only
+/// used if PIPE_TYPE_MESSAGE is also specified.
+const PIPE_READMODE_MESSAGE = 0x00000002;
+
+/// The named pipe is a byte pipe. This is the default.
+const PIPE_TYPE_BYTE = 0x00000000;
+
+/// The named pipe is a message pipe. If this value is not specified, the pipe
+/// is a byte pipe.
+const PIPE_TYPE_MESSAGE = 0x00000004;
+
+/// Connections from remote clients can be accepted and checked against the
+/// security descriptor for the pipe.
+const PIPE_ACCEPT_REMOTE_CLIENTS = 0x00000000;
+
+/// Connections from remote clients are automatically rejected.
+const PIPE_REJECT_REMOTE_CLIENTS = 0x00000008;
+
+/// The number of pipe instances that can be created is limited only by the
+/// availability of system resources.
+const PIPE_UNLIMITED_INSTANCES = 255;
+
+// -----------------------------------------------------------------------------
+// File create flags
+// -----------------------------------------------------------------------------
+
+/// Write operations will not go through any intermediate cache, they will go
+/// directly to disk.
+const FILE_FLAG_WRITE_THROUGH = 0x80000000;
+
+/// The file or device is being opened or created for asynchronous I/O. When
+/// subsequent I/O operations are completed on this handle, the event specified
+/// in the OVERLAPPED structure will be set to the signaled state. If this flag
+/// is specified, the file can be used for simultaneous read and write
+/// operations. If this flag is not specified, then I/O operations are
+/// serialized, even if the calls to the read and write functions specify an
+/// OVERLAPPED structure.
+const FILE_FLAG_OVERLAPPED = 0x40000000;
+
+/// The file or device is being opened with no system caching for data reads and
+/// writes. This flag does not affect hard disk caching or memory mapped files
+const FILE_FLAG_NO_BUFFERING = 0x20000000;
+
+/// Access is intended to be random. The system can use this as a hint to
+/// optimize file caching.
+const FILE_FLAG_RANDOM_ACCESS = 0x10000000;
+
+/// Access is intended to be sequential from beginning to end. The system can
+/// use this as a hint to optimize file caching.
+const FILE_FLAG_SEQUENTIAL_SCAN = 0x08000000;
+
+/// The file is to be deleted immediately after all of its handles are closed,
+/// which includes the specified handle and any other open or duplicated
+/// handles.
+const FILE_FLAG_DELETE_ON_CLOSE = 0x04000000;
+
+/// The file is being opened or created for a backup or restore operation. The
+/// system ensures that the calling process overrides file security checks when
+/// the process has SE_BACKUP_NAME and SE_RESTORE_NAME privileges.
+const FILE_FLAG_BACKUP_SEMANTICS = 0x02000000;
+
+/// Access will occur according to POSIX rules. This includes allowing multiple
+/// files with names, differing only in case, for file systems that support that
+/// naming.
+const FILE_FLAG_POSIX_SEMANTICS = 0x01000000;
+
+/// The file or device is being opened with session awareness. If this flag is
+/// not specified, then per-session devices (such as a device using RemoteFX USB
+/// Redirection) cannot be opened by processes running in session 0. This flag
+/// has no effect for callers not in session 0. This flag is supported only on
+/// server editions of Windows.
+const FILE_FLAG_SESSION_AWARE = 0x00800000;
+
+/// Normal reparse point processing will not occur; CreateFile will attempt to
+/// open the reparse point. When a file is opened, a file handle is returned,
+/// whether or not the filter that controls the reparse point is operational.
+const FILE_FLAG_OPEN_REPARSE_POINT = 0x00200000;
+
+/// The file data is requested, but it should continue to be located in remote
+/// storage. It should not be transported back to local storage. This flag is
+/// for use by remote storage systems.
+const FILE_FLAG_OPEN_NO_RECALL = 0x00100000;
+
+/// If you attempt to create multiple instances of a pipe with this flag,
+/// creation of the first instance succeeds, but creation of the next instance
+/// fails with ERROR_ACCESS_DENIED.
+const FILE_FLAG_FIRST_PIPE_INSTANCE = 0x00080000;
+
+// -----------------------------------------------------------------------------
+// Get Binary Type flags
+// -----------------------------------------------------------------------------
+
+/// A 32-bit Windows-based application
+const SCS_32BIT_BINARY = 0;
+
+/// An MS-DOS – based application
+const SCS_DOS_BINARY = 1;
+
+/// A 16-bit Windows-based application
+const SCS_WOW_BINARY = 2;
+
+/// A PIF file that executes an MS-DOS–based application
+const SCS_PIF_BINARY = 3;
+
+/// A POSIX–based application
+const SCS_POSIX_BINARY = 4;
+
+/// A 16-bit OS/2-based application
+const SCS_OS216_BINARY = 5;
+
+/// A 64-bit Windows-based application.
+const SCS_64BIT_BINARY = 6;
+
+// -----------------------------------------------------------------------------
 // Format message flags
 // -----------------------------------------------------------------------------
 

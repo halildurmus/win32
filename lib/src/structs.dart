@@ -249,6 +249,27 @@ class BIND_OPTS extends Struct {
   external int dwTickCountDeadline;
 }
 
+// typedef struct value_entW {
+//   LPWSTR    ve_valuename;
+//   DWORD     ve_valuelen;
+//   DWORD_PTR ve_valueptr;
+//   DWORD     ve_type;
+// } VALENTW, *PVALENTW;
+
+/// Contains information about a registry value. The RegQueryMultipleValues
+/// function uses this structure.
+///
+/// {@category Struct}
+class VALENT extends Struct {
+  external Pointer<Utf16> ve_valuename;
+  @Uint32()
+  external int ve_valuelen;
+  @IntPtr()
+  external int ve_valueptr;
+  @Uint32()
+  external int ve_type;
+}
+
 // typedef struct {
 //   GUID  PowerSetting;
 //   DWORD DataLength;
