@@ -266,5 +266,17 @@ void main() {
       expect(projector.nativeType, equals('Uint32'));
       expect(projector.dartType, equals('int'));
     });
+
+    test('Unidentified COM interfaces should be represented as Pointers', () {
+      final iSpellChecker = scope['Windows.Win32.Intl.ISpellCheckerFactory']!;
+      final createSpellChecker =
+          iSpellChecker.findMethod('CreateSpellChecker')!;
+      final type = createSpellChecker
+          .parameters.last.typeIdentifier; // ISpellChecker **value
+      final typeProjection = TypeProjector(type);
+
+      expect(typeProjection.nativeType, equals('Pointer<Pointer>'));
+      expect(typeProjection.dartType, equals('Pointer<Pointer>'));
+    });
   });
 }

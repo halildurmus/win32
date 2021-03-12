@@ -89,6 +89,12 @@ class TypeProjector {
               // Win32 meaning, which is more like "undefined type". We can
               // model that with a generic Pointer in Dart.
               return 'Pointer';
+            } else if (typeArgs.first.type != null &&
+                typeArgs.first.type!.interfaces.isNotEmpty &&
+                typeArgs.first.type!.interfaces.first.typeName ==
+                    'Windows.Win32.Com.IUnknown') {
+              // COM type
+              return 'Pointer<Pointer>';
             } else {
               // If it's a double- (or triple-) dereferenced pointer, then
               // create a new typeIdentifier, based on the first typeArgs entry
@@ -108,6 +114,14 @@ class TypeProjector {
         return 'Pointer';
 
       default:
+    }
+
+    // COM type
+    if (typeIdentifier.type != null &&
+        typeIdentifier.type!.interfaces.isNotEmpty &&
+        typeIdentifier.type!.interfaces.first.typeName ==
+            'Windows.Win32.Com.IUnknown') {
+      return 'Pointer';
     }
 
     // If it's a Win32 type, we know how to get the type
@@ -205,6 +219,12 @@ class TypeProjector {
               // Win32/C meaning, which is more like "undefined type". We can
               // model that with a generic Pointer in Dart.
               return 'Pointer';
+            } else if (typeArgs.first.type != null &&
+                typeArgs.first.type!.interfaces.isNotEmpty &&
+                typeArgs.first.type!.interfaces.first.typeName ==
+                    'Windows.Win32.Com.IUnknown') {
+              // COM type
+              return 'Pointer<Pointer>';
             } else {
               // If it's a double- (or triple-) dereferenced pointer, then
               // create a new typeIdentifier, based on the first typeArgs entry
@@ -227,6 +247,15 @@ class TypeProjector {
         return 'IntPtr';
       default:
     }
+
+    // COM type
+    if (typeIdentifier.type != null &&
+        typeIdentifier.type!.interfaces.isNotEmpty &&
+        typeIdentifier.type!.interfaces.first.typeName ==
+            'Windows.Win32.Com.IUnknown') {
+      return 'Pointer';
+    }
+
     // If it's a Win32 type, we know how to get the type
     if (typeIdentifier.type != null &&
         typeIdentifier.type!.typeName.startsWith('Windows.Win32')) {

@@ -319,6 +319,7 @@ const win32TypeMap = <String, String>{
   'ACTIVATEOPTIONS': 'Uint32',
   'CDCONTROLSTATEF': 'Uint32',
   'ConsoleMode': 'Uint32',
+  'CORRECTIVE_ACTION': 'Uint32',
   'DESKTOP_SLIDESHOW_DIRECTION': 'Uint32',
   'DESKTOP_SLIDESHOW_OPTIONS': 'Uint32',
   'DESKTOP_SLIDESHOW_STATE': 'Uint32',
