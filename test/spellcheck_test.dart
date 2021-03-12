@@ -23,7 +23,6 @@ void main() {
     expect(hr, equals(S_OK));
     expect(supportedPtr.value, equals(1));
 
-    free(supportedPtr);
     free(languageTagPtr);
 
     languageTagPtr = 'en-US'.toNativeUtf16();
