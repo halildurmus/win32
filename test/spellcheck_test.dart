@@ -9,15 +9,17 @@ import 'package:win32/win32.dart';
 
 void main() {
   test('Spellcheck', () {
-    var hr = CoInitializeEx(
-        nullptr, COINIT_APARTMENTTHREADED);
+    var hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
     expect(hr, equals(S_OK));
 
     final spellCheckerFactory = SpellCheckerFactory.createInstance();
     expect(spellCheckerFactory.ptr.address, isNonZero);
 
     final supportedPtr = calloc<Int32>();
-    var languageTagPtr = Platform.localeName.toNativeUtf16();
+
+    // Dart reports locale as (for example) en_US; Windows expects en-US
+    var languageTagPtr =
+        Platform.localeName.replaceAll('_', '-').toNativeUtf16();
 
     hr = spellCheckerFactory.IsSupported(languageTagPtr, supportedPtr);
     expect(hr, equals(S_OK));
