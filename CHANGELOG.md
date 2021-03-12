@@ -1,3 +1,7 @@
+## 0.4.4
+
+- Fix projection of Pointers to interfaces (thanks @bonukai).
+
 ## 0.4.3
 
 - Add PVALENTW
