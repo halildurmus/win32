@@ -13,39 +13,12 @@
 
 ## 0.4.0
 
-- Refactor type projection code
-- Refactor code, change enums to return `Uint32` by default.
-
-## 0.4.0-dev.7
-
-- Rework API for projection of metadata
-
-## 0.4.0-dev.6
-
-- Fix bug associated with vending winmd COM objects
-
-## 0.4.0-dev.5
-
-- Improve generation of Windows Runtime get properties
-
-## 0.4.0-dev.4
-
-- Improve generation of Windows Runtime types
-
-## 0.4.0-dev.3
-
-- Fix enumerations
-- Add more tests
-
-## 0.4.0-dev.2
-
-- Add more tests
-
-## 0.4.0-dev.1
-
 - Broad refactoring, focusing the core WinMD package on reading metadata and
   moving transforms to the projection/ folder. Also fix a memory leak on the
   enumerations.
+- Rework API for projection of metadata
+- Improve generation of Windows Runtime get properties and types
+- Add more tests
 
 ## 0.3.0-dev.2
 
