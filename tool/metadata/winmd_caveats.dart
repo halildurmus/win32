@@ -27,3 +27,6 @@ const winmdGenerated = [
 
 // api-ms-win-ro-typeresolution-l1-1-0 is missing in the metadata:
 // https://github.com/microsoft/win32metadata/issues/240
+
+// dbghelp is blocked on:
+// https://github.com/microsoft/win32metadata/issues/239
