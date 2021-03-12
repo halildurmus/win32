@@ -2802,6 +2802,26 @@
         "dllLibrary": "user32",
         "comment": "Reverses or restores the meaning of the left and right mouse buttons."
     },
+    "SymCleanup": {
+        "prototype": "BOOL IMAGEAPI SymCleanup(\n  HANDLE hProcess);",
+        "dllLibrary": "dbghelp",
+        "comment": "Deallocates all resources associated with the process handle."
+    },
+    "SymEnumSymbols": {
+        "prototype": "BOOL IMAGEAPI SymEnumSymbolsW(\n  HANDLE                          hProcess,\n  ULONG64                         BaseOfDll,\n  PCWSTR                          Mask,\n  PSYM_ENUMERATESYMBOLS_CALLBACKW EnumSymbolsCallback,\n  PVOID                           UserContext);",
+        "dllLibrary": "dbghelp",
+        "comment": "Enumerates all symbols in a process."
+    },
+    "SymInitialize": {
+        "prototype": "BOOL IMAGEAPI SymInitializeW(\n  HANDLE hProcess,\n  PCWSTR UserSearchPath,\n  BOOL   fInvadeProcess);",
+        "dllLibrary": "dbghelp",
+        "comment": "Initializes the symbol handler for a process."
+    },
+    "SymLoadModuleEx": {
+        "prototype": "DWORD64 IMAGEAPI SymLoadModuleExW(\n  HANDLE        hProcess,\n  HANDLE        hFile,\n  PCWSTR        ImageName,\n  PCWSTR        ModuleName,\n  DWORD64       BaseOfDll,\n  DWORD         DllSize,\n  PMODLOAD_DATA Data,\n  DWORD         Flags);",
+        "dllLibrary": "dbghelp",
+        "comment": "Loads the symbol table for the specified module."
+    },
     "SysAllocString": {
         "prototype": "BSTR SysAllocString(\n  const OLECHAR *psz\n);",
         "dllLibrary": "oleaut32",

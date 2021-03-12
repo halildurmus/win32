@@ -5011,3 +5011,59 @@ class TPMPARAMS extends Struct {
 
   external RECT rcExclude;
 }
+
+// typedef struct _SYMBOL_INFOW {
+//   ULONG   SizeOfStruct;
+//   ULONG   TypeIndex;
+//   ULONG64 Reserved[2];
+//   ULONG   Index;
+//   ULONG   Size;
+//   ULONG64 ModBase;
+//   ULONG   Flags;
+//   ULONG64 Value;
+//   ULONG64 Address;
+//   ULONG   Register;
+//   ULONG   Scope;
+//   ULONG   Tag;
+//   ULONG   NameLen;
+//   ULONG   MaxNameLen;
+//   WCHAR   Name[1];
+// } SYMBOL_INFOW, *PSYMBOL_INFOW;
+
+/// Contains symbol information.
+///
+/// {@category Struct}
+class SYMBOL_INFO extends Struct {
+  @Uint32()
+  external int SizeOfStruct;
+  @Uint32()
+  external int TypeIndex;
+  @Uint64()
+  external int Reserved0;
+  @Uint64()
+  external int Reserved1;
+  @Uint32()
+  external int Index;
+  @Uint32()
+  external int Size;
+  @Uint64()
+  external int ModBase;
+  @Uint32()
+  external int Flags;
+  @Uint64()
+  external int Value;
+  @Uint64()
+  external int Address;
+  @Uint32()
+  external int Register;
+  @Uint32()
+  external int Scope;
+  @Uint32()
+  external int Tag;
+  @Uint32()
+  external int NameLen;
+  @Uint32()
+  external int MaxNameLen;
+  @Uint16()
+  external int Name;
+}

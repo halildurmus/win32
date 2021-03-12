@@ -5819,6 +5819,8 @@ void main() {
 
   group('Test api-ms-win-ro-typeresolution-l1-1-0 functions', () {});
 
+  group('Test dbghelp functions', () {});
+
   group('Test api-ms-win-core-winrt-string-l1-1-0 functions', () {
     if (windowsBuildNumber >= 9200) {
       test('Can instantiate WindowsCreateString', () {

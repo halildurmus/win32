@@ -6,6 +6,7 @@ const winmdGenerated = [
   'bthprops',
   'comctl32',
   'comdlg32',
+  'dbghelp',
   'dxva2',
   'gdi32',
   'kernel32',

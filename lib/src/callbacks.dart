@@ -54,6 +54,11 @@ typedef OutputProc = Int32 Function(IntPtr Arg1, IntPtr Arg2, Int32 Arg3);
 typedef PfnAuthenticationCallbackEx = Int32 Function(Pointer pvParam,
     Pointer<BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS> pAuthCallbackParams);
 
+/// Application-defined callback function used with the SymEnumSymbols,
+/// SymEnumTypes, and SymEnumTypesByName functions.
+typedef SymEnumsSymbolProc = Int32 Function(
+    Pointer<SYMBOL_INFO> pSymInfo, Uint32 SymbolSize, Pointer UserContext);
+
 /// Application-defined callback function used with the TaskDialogIndirect
 /// function. It receives messages from the task dialog when various events
 /// occur.
