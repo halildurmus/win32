@@ -1,3 +1,7 @@
+## 2.0.2
+
+- Adds named pipe APIs to support projects like TerminalStudio/pty.
+
 ## 2.0.1
 
 - Adds a demo of custom window shapes.
