@@ -23,32 +23,34 @@ class Volumes {
 
   List<String> GetVolumePaths(String volumeName) {
     final paths = <String>[];
-    var error = 0;
 
     // Could be arbitrarily long, but 4*MAX_PATH is a reasonable default.
     // More sophisticated solutions can be found online
     final pathNamePtr = calloc<Uint16>(MAX_PATH * 4).cast<Utf16>();
     final charCount = calloc<Uint32>();
-    charCount.value = MAX_PATH;
-    error = GetVolumePathNamesForVolumeName(
-        Utf16.toUtf16(volumeName), pathNamePtr, charCount.value, charCount);
+    final volumeNamePtr = volumeName.toNativeUtf16();
 
-    if (error != 0) {
-      if (charCount.value > 1) {
-        for (final path in pathNamePtr.unpackStringArray(charCount.value)) {
-          paths.add(path);
+    try {
+      charCount.value = MAX_PATH;
+      final success = GetVolumePathNamesForVolumeName(
+          volumeNamePtr, pathNamePtr, charCount.value, charCount);
+
+      if (success != FALSE) {
+        if (charCount.value > 1) {
+          for (final path in pathNamePtr.unpackStringArray(charCount.value)) {
+            paths.add(path);
+          }
         }
+      } else {
+        final error = GetLastError();
+        throw Exception(
+            'GetVolumePathNamesForVolumeName failed with error code $error');
       }
-    } else {
-      error = GetLastError();
-      throw Exception(
-          'GetVolumePathNamesForVolumeName failed with error code $error');
+      return paths;
+    } finally {
+      free(pathNamePtr);
+      free(charCount);
     }
-
-    free(pathNamePtr);
-    free(charCount);
-
-    return paths;
   }
 
   Volumes() {
@@ -66,7 +68,7 @@ class Volumes {
 
       //  Skip the \\?\ prefix and remove the trailing backslash.
       final shortVolumeName = volumeName.substring(4, volumeName.length - 1);
-      final shortVolumeNamePtr = Utf16.toUtf16(shortVolumeName);
+      final shortVolumeNamePtr = shortVolumeName.toNativeUtf16();
 
       final deviceName = calloc<Uint16>(MAX_PATH).cast<Utf16>();
       final charCount =
@@ -81,7 +83,7 @@ class Volumes {
           deviceName.toDartString(), volumeName, GetVolumePaths(volumeName)));
 
       final success = FindNextVolume(hFindVolume, volumeNamePtr, MAX_PATH);
-      if (success == 0) {
+      if (success == FALSE) {
         error = GetLastError();
         if (error != ERROR_NO_MORE_FILES && error != ERROR_SUCCESS) {
           print('FindNextVolume failed with error code $error');
