@@ -88,6 +88,14 @@ void main() {
         expect(ClosePseudoConsole, isA<Function>());
       });
     }
+    test('Can instantiate ConnectNamedPipe', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final ConnectNamedPipe = kernel32.lookupFunction<
+          Int32 Function(IntPtr hNamedPipe, Pointer<OVERLAPPED> lpOverlapped),
+          int Function(int hNamedPipe,
+              Pointer<OVERLAPPED> lpOverlapped)>('ConnectNamedPipe');
+      expect(ConnectNamedPipe, isA<Function>());
+    });
     test('Can instantiate ContinueDebugEvent', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final ContinueDebugEvent = kernel32.lookupFunction<
@@ -151,6 +159,30 @@ void main() {
               int dwFlagsAndAttributes,
               int hTemplateFile)>('CreateFileW');
       expect(CreateFile, isA<Function>());
+    });
+    test('Can instantiate CreateNamedPipe', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final CreateNamedPipe = kernel32.lookupFunction<
+              IntPtr Function(
+                  Pointer<Utf16> lpName,
+                  Uint32 dwOpenMode,
+                  Uint32 dwPipeMode,
+                  Uint32 nMaxInstances,
+                  Uint32 nOutBufferSize,
+                  Uint32 nInBufferSize,
+                  Uint32 nDefaultTimeOut,
+                  Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes),
+              int Function(
+                  Pointer<Utf16> lpName,
+                  int dwOpenMode,
+                  int dwPipeMode,
+                  int nMaxInstances,
+                  int nOutBufferSize,
+                  int nInBufferSize,
+                  int nDefaultTimeOut,
+                  Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes)>(
+          'CreateNamedPipeW');
+      expect(CreateNamedPipe, isA<Function>());
     });
     test('Can instantiate CreatePipe', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -236,6 +268,13 @@ void main() {
           Int32 Function(Pointer<Utf16> lpFileName),
           int Function(Pointer<Utf16> lpFileName)>('DeleteFileW');
       expect(DeleteFile, isA<Function>());
+    });
+    test('Can instantiate DisconnectNamedPipe', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final DisconnectNamedPipe = kernel32.lookupFunction<
+          Int32 Function(IntPtr hNamedPipe),
+          int Function(int hNamedPipe)>('DisconnectNamedPipe');
+      expect(DisconnectNamedPipe, isA<Function>());
     });
     test('Can instantiate EndUpdateResource', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -470,6 +509,15 @@ void main() {
           int Function(int hLibModule)>('FreeLibrary');
       expect(FreeLibrary, isA<Function>());
     });
+    test('Can instantiate GetBinaryType', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetBinaryType = kernel32.lookupFunction<
+          Int32 Function(
+              Pointer<Utf16> lpApplicationName, Pointer<Uint32> lpBinaryType),
+          int Function(Pointer<Utf16> lpApplicationName,
+              Pointer<Uint32> lpBinaryType)>('GetBinaryTypeW');
+      expect(GetBinaryType, isA<Function>());
+    });
     test('Can instantiate GetComputerNameEx', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetComputerNameEx = kernel32.lookupFunction<
@@ -546,6 +594,14 @@ void main() {
           kernel32.lookupFunction<IntPtr Function(), int Function()>(
               'GetCurrentProcess');
       expect(GetCurrentProcess, isA<Function>());
+    });
+    test('Can instantiate GetExitCodeProcess', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetExitCodeProcess = kernel32.lookupFunction<
+          Int32 Function(IntPtr hProcess, Pointer<Uint32> lpExitCode),
+          int Function(
+              int hProcess, Pointer<Uint32> lpExitCode)>('GetExitCodeProcess');
+      expect(GetExitCodeProcess, isA<Function>());
     });
     test('Can instantiate GetFileAttributesEx', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -626,6 +682,23 @@ void main() {
           IntPtr Function(Pointer<Utf16> lpModuleName),
           int Function(Pointer<Utf16> lpModuleName)>('GetModuleHandleW');
       expect(GetModuleHandle, isA<Function>());
+    });
+    test('Can instantiate GetNamedPipeInfo', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetNamedPipeInfo = kernel32.lookupFunction<
+          Int32 Function(
+              IntPtr hNamedPipe,
+              Pointer<Uint32> lpFlags,
+              Pointer<Uint32> lpOutBufferSize,
+              Pointer<Uint32> lpInBufferSize,
+              Pointer<Uint32> lpMaxInstances),
+          int Function(
+              int hNamedPipe,
+              Pointer<Uint32> lpFlags,
+              Pointer<Uint32> lpOutBufferSize,
+              Pointer<Uint32> lpInBufferSize,
+              Pointer<Uint32> lpMaxInstances)>('GetNamedPipeInfo');
+      expect(GetNamedPipeInfo, isA<Function>());
     });
     test('Can instantiate GetNativeSystemInfo', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -770,6 +843,17 @@ void main() {
               Pointer<OSVERSIONINFO> lpVersionInformation)>('GetVersionExW');
       expect(GetVersionEx, isA<Function>());
     });
+    test('Can instantiate GetVolumePathName', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetVolumePathName = kernel32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpszFileName,
+              Pointer<Utf16> lpszVolumePathName, Uint32 cchBufferLength),
+          int Function(
+              Pointer<Utf16> lpszFileName,
+              Pointer<Utf16> lpszVolumePathName,
+              int cchBufferLength)>('GetVolumePathNameW');
+      expect(GetVolumePathName, isA<Function>());
+    });
     test('Can instantiate GetVolumePathNamesForVolumeName', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetVolumePathNamesForVolumeName = kernel32.lookupFunction<
@@ -905,6 +989,25 @@ void main() {
           void Function(Pointer<Utf16> lpOutputString)>('OutputDebugStringW');
       expect(OutputDebugString, isA<Function>());
     });
+    test('Can instantiate PeekNamedPipe', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final PeekNamedPipe = kernel32.lookupFunction<
+          Int32 Function(
+              IntPtr hNamedPipe,
+              Pointer lpBuffer,
+              Uint32 nBufferSize,
+              Pointer<Uint32> lpBytesRead,
+              Pointer<Uint32> lpTotalBytesAvail,
+              Pointer<Uint32> lpBytesLeftThisMessage),
+          int Function(
+              int hNamedPipe,
+              Pointer lpBuffer,
+              int nBufferSize,
+              Pointer<Uint32> lpBytesRead,
+              Pointer<Uint32> lpTotalBytesAvail,
+              Pointer<Uint32> lpBytesLeftThisMessage)>('PeekNamedPipe');
+      expect(PeekNamedPipe, isA<Function>());
+    });
     test('Can instantiate QueryDosDevice', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final QueryDosDevice = kernel32.lookupFunction<
@@ -994,6 +1097,15 @@ void main() {
           Int32 Function(Pointer<Utf16> lpPathName),
           int Function(Pointer<Utf16> lpPathName)>('RemoveDirectoryW');
       expect(RemoveDirectory, isA<Function>());
+    });
+    test('Can instantiate ReOpenFile', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final ReOpenFile = kernel32.lookupFunction<
+          IntPtr Function(IntPtr hOriginalFile, Uint32 dwDesiredAccess,
+              Uint32 dwShareMode, Uint32 dwFlagsAndAttributes),
+          int Function(int hOriginalFile, int dwDesiredAccess, int dwShareMode,
+              int dwFlagsAndAttributes)>('ReOpenFile');
+      expect(ReOpenFile, isA<Function>());
     });
     if (windowsBuildNumber >= 17763) {
       test('Can instantiate ResizePseudoConsole', () {
@@ -1113,6 +1225,29 @@ void main() {
               int dwMoveMethod)>('SetFilePointerEx');
       expect(SetFilePointerEx, isA<Function>());
     });
+    test('Can instantiate SetFileShortName', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetFileShortName = kernel32.lookupFunction<
+          Int32 Function(IntPtr hFile, Pointer<Utf16> lpShortName),
+          int Function(
+              int hFile, Pointer<Utf16> lpShortName)>('SetFileShortNameW');
+      expect(SetFileShortName, isA<Function>());
+    });
+    test('Can instantiate SetNamedPipeHandleState', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetNamedPipeHandleState = kernel32.lookupFunction<
+          Int32 Function(
+              IntPtr hNamedPipe,
+              Pointer<Uint32> lpMode,
+              Pointer<Uint32> lpMaxCollectionCount,
+              Pointer<Uint32> lpCollectDataTimeout),
+          int Function(
+              int hNamedPipe,
+              Pointer<Uint32> lpMode,
+              Pointer<Uint32> lpMaxCollectionCount,
+              Pointer<Uint32> lpCollectDataTimeout)>('SetNamedPipeHandleState');
+      expect(SetNamedPipeHandleState, isA<Function>());
+    });
     test('Can instantiate SetStdHandle', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final SetStdHandle = kernel32.lookupFunction<
@@ -1134,12 +1269,49 @@ void main() {
           int Function(int LangId)>('SetThreadUILanguage');
       expect(SetThreadUILanguage, isA<Function>());
     });
+    test('Can instantiate SetVolumeLabel', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetVolumeLabel = kernel32.lookupFunction<
+          Int32 Function(
+              Pointer<Utf16> lpRootPathName, Pointer<Utf16> lpVolumeName),
+          int Function(Pointer<Utf16> lpRootPathName,
+              Pointer<Utf16> lpVolumeName)>('SetVolumeLabelW');
+      expect(SetVolumeLabel, isA<Function>());
+    });
     test('Can instantiate Sleep', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final Sleep = kernel32.lookupFunction<
           Void Function(Uint32 dwMilliseconds),
           void Function(int dwMilliseconds)>('Sleep');
       expect(Sleep, isA<Function>());
+    });
+    test('Can instantiate TerminateProcess', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final TerminateProcess = kernel32.lookupFunction<
+          Int32 Function(IntPtr hProcess, Uint32 uExitCode),
+          int Function(int hProcess, int uExitCode)>('TerminateProcess');
+      expect(TerminateProcess, isA<Function>());
+    });
+    test('Can instantiate TransactNamedPipe', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final TransactNamedPipe = kernel32.lookupFunction<
+          Int32 Function(
+              IntPtr hNamedPipe,
+              Pointer lpInBuffer,
+              Uint32 nInBufferSize,
+              Pointer lpOutBuffer,
+              Uint32 nOutBufferSize,
+              Pointer<Uint32> lpBytesRead,
+              Pointer<OVERLAPPED> lpOverlapped),
+          int Function(
+              int hNamedPipe,
+              Pointer lpInBuffer,
+              int nInBufferSize,
+              Pointer lpOutBuffer,
+              int nOutBufferSize,
+              Pointer<Uint32> lpBytesRead,
+              Pointer<OVERLAPPED> lpOverlapped)>('TransactNamedPipe');
+      expect(TransactNamedPipe, isA<Function>());
     });
     test('Can instantiate UpdateProcThreadAttribute', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
