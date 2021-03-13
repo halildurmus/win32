@@ -9,7 +9,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import '_base.dart';
-import 'com/IMetaDataImport2.dart' as md;
+import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'typeidentifier.dart';
 
@@ -23,11 +23,11 @@ class Parameter extends AttributeObject {
   String name;
   final Uint8List signatureBlob;
 
-  Parameter(md.IMetaDataImport2 reader, int token, this.sequence,
+  Parameter(IMetaDataImport2 reader, int token, this.sequence,
       this.attributeFlags, this.typeIdentifier, this.name, this.signatureBlob)
       : super(reader, token);
 
-  factory Parameter.fromToken(md.IMetaDataImport2 reader, int token) {
+  factory Parameter.fromToken(IMetaDataImport2 reader, int token) {
     final pmd = calloc<Uint32>();
     final pulSequence = calloc<Uint32>();
     final szName = calloc<Uint16>(256).cast<Utf16>();
@@ -66,11 +66,11 @@ class Parameter extends AttributeObject {
   }
 
   factory Parameter.fromTypeIdentifier(
-          md.IMetaDataImport2 reader, TypeIdentifier runtimeType) =>
+          IMetaDataImport2 reader, TypeIdentifier runtimeType) =>
       Parameter(reader, 0, 0, 0, runtimeType, '', Uint8List(0));
 
-  factory Parameter.fromVoid(md.IMetaDataImport2 reader) => Parameter(reader, 0,
-      0, 0, TypeIdentifier(CorElementType.ELEMENT_TYPE_VOID), '', Uint8List(0));
+  factory Parameter.fromVoid(IMetaDataImport2 reader) => Parameter(reader, 0, 0,
+      0, TypeIdentifier(CorElementType.ELEMENT_TYPE_VOID), '', Uint8List(0));
 
   @override
   String toString() => 'Parameter: $name';

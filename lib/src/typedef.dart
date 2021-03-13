@@ -8,7 +8,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import '_base.dart';
-import 'com/IMetaDataImport2.dart' as md;
+import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'metadatastore.dart';
 import 'method.dart';
@@ -40,7 +40,7 @@ class TypeDef extends AttributeObject {
   ///
   /// Typically, typedefs should be obtained from a [WinmdScope] object rather
   /// than being created directly.
-  const TypeDef(md.IMetaDataImport2 reader,
+  const TypeDef(IMetaDataImport2 reader,
       [int token = 0,
       this.typeName = '',
       this.flags = 0,
@@ -52,7 +52,7 @@ class TypeDef extends AttributeObject {
   /// If the token is a TypeDef, it will be created directly; otherwise it will
   /// be retrieved by finding the scope that it comes from and returning a
   /// typedef from the new scope.
-  factory TypeDef.fromToken(md.IMetaDataImport2 reader, int token) {
+  factory TypeDef.fromToken(IMetaDataImport2 reader, int token) {
     if (tokenIsTypeRef(token)) {
       return TypeDef.fromTypeRefToken(reader, token);
     } else if (tokenIsTypeDef(token)) {
@@ -64,8 +64,7 @@ class TypeDef extends AttributeObject {
   }
 
   /// Instantiate a typedef from a TypeDef token.
-  factory TypeDef.fromTypeDefToken(
-      md.IMetaDataImport2 reader, int typeDefToken) {
+  factory TypeDef.fromTypeDefToken(IMetaDataImport2 reader, int typeDefToken) {
     final nRead = calloc<Uint32>();
     final tdFlags = calloc<Uint32>();
     final baseClassToken = calloc<Uint32>();
@@ -94,8 +93,7 @@ class TypeDef extends AttributeObject {
   /// Unless the TypeRef token is `IInspectable`, the COM parent interface for
   /// Windows Runtime classes, the TypeRef is used to obtain the host scope
   /// metadata file, from which the TypeDef can be found and returned.
-  factory TypeDef.fromTypeRefToken(
-      md.IMetaDataImport2 reader, int typeRefToken) {
+  factory TypeDef.fromTypeRefToken(IMetaDataImport2 reader, int typeRefToken) {
     final ptkResolutionScope = calloc<Uint32>();
     final szName = calloc<Uint16>(256).cast<Utf16>();
     final pchName = calloc<Uint32>();

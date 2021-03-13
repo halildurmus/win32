@@ -10,8 +10,8 @@ import 'dart:isolate';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'com/IMetaDataDispenser.dart' as md;
-import 'com/IMetaDataImport2.dart' as md;
+import 'com/IMetaDataDispenser.dart';
+import 'com/IMetaDataImport2.dart';
 import 'scope.dart';
 import 'typedef.dart';
 
@@ -20,7 +20,7 @@ import 'typedef.dart';
 /// Use this to obtain a reference of a scope without creating unnecessary
 /// copies or cycles.
 class MetadataStore {
-  static late md.IMetaDataDispenser dispenser;
+  static late IMetaDataDispenser dispenser;
   static Map<String, Scope> cache = {};
 
   static bool isInitialized = false;
@@ -30,13 +30,13 @@ class MetadataStore {
     final dispenserObject = calloc<Pointer>();
 
     final hr = MetaDataGetDispenser(convertToCLSID(CLSID_CorMetaDataDispenser),
-        convertToIID(md.IID_IMetaDataDispenser), dispenserObject);
+        convertToIID(IID_IMetaDataDispenser), dispenserObject);
 
     if (FAILED(hr)) {
       throw WindowsException(hr);
     }
 
-    dispenser = md.IMetaDataDispenser(dispenserObject.cast());
+    dispenser = IMetaDataDispenser(dispenserObject.cast());
 
     isInitialized = true;
   }
@@ -69,11 +69,11 @@ class MetadataStore {
 
       try {
         final hr = dispenser.OpenScope(szFile, CorOpenFlags.ofRead,
-            convertToIID(md.IID_IMetaDataImport2), pReader);
+            convertToIID(IID_IMetaDataImport2), pReader);
         if (FAILED(hr)) {
           throw WindowsException(hr);
         } else {
-          final scope = Scope(md.IMetaDataImport2(pReader.cast()));
+          final scope = Scope(IMetaDataImport2(pReader.cast()));
           cache[filename] = scope;
           return scope;
         }

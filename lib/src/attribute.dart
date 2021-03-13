@@ -9,7 +9,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import '_base.dart';
-import 'com/IMetaDataImport2.dart' as md;
+import 'com/IMetaDataImport2.dart';
 
 /// An attribute.
 class Attribute extends TokenObject {
@@ -17,11 +17,11 @@ class Attribute extends TokenObject {
   final int tokenType;
   final Uint8List signatureBlob;
 
-  Attribute(md.IMetaDataImport2 reader, int token, this.modifiedObjectToken,
+  Attribute(IMetaDataImport2 reader, int token, this.modifiedObjectToken,
       this.tokenType, this.signatureBlob)
       : super(reader, token);
 
-  factory Attribute.fromToken(md.IMetaDataImport2 reader, int token) {
+  factory Attribute.fromToken(IMetaDataImport2 reader, int token) {
     final ptkObj = calloc<Uint32>();
     final ptkType = calloc<Uint32>();
     final ppBlob = calloc<IntPtr>();

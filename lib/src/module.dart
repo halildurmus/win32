@@ -8,15 +8,14 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import '_base.dart';
-import 'com/IMetaDataImport2.dart' as md;
+import 'com/IMetaDataImport2.dart';
 
 class Module extends AttributeObject {
   final String name;
 
-  Module(md.IMetaDataImport2 reader, int token, this.name)
-      : super(reader, token);
+  Module(IMetaDataImport2 reader, int token, this.name) : super(reader, token);
 
-  factory Module.fromToken(md.IMetaDataImport2 reader, int token) {
+  factory Module.fromToken(IMetaDataImport2 reader, int token) {
     final szName = calloc<Uint16>(256).cast<Utf16>();
     final pchName = calloc<Uint32>();
 
