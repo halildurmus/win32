@@ -19,9 +19,6 @@ import '../utils.dart';
 import 'IUnknown.dart';
 
 /// @nodoc
-const CLSID_NetworkListManagerEvents = '';
-
-/// @nodoc
 const IID_INetworkListManagerEvents = '{DCB00001-570F-4A9B-8D69-199FDBA5723B}';
 
 typedef _ConnectivityChanged_Native = Int32 Function(
@@ -41,26 +38,4 @@ class INetworkListManagerEvents extends IUnknown {
                   ptr.ref.vtable.elementAt(3).value)
               .asFunction<_ConnectivityChanged_Dart>()(
           ptr.ref.lpVtbl, newConnectivity);
-}
-
-/// {@category com}
-class NetworkListManagerEvents extends INetworkListManagerEvents {
-  NetworkListManagerEvents(Pointer<COMObject> ptr) : super(ptr);
-
-  factory NetworkListManagerEvents.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_NetworkListManagerEvents);
-    final iid = calloc<GUID>()..ref.setGUID(IID_INetworkListManagerEvents);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return NetworkListManagerEvents(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
 }
