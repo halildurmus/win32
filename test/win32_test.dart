@@ -84,6 +84,22 @@ void main() {
     expect(api.isValidToken, isTrue);
   });
 
+  test('isValid gives correct result for a pseudo-token', () {
+    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final api = typedef.findMethod('AddFontResourceW')!;
+    final returnType = api.returnType;
+
+    expect(returnType.isValidToken, isFalse);
+  });
+
+  test('No attributes for a pseudo-token', () {
+    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final api = typedef.findMethod('AddFontResourceW')!;
+    final returnType = api.returnType;
+
+    expect(returnType.attributes.length, isZero);
+  });
+
   test('Functions can correctly return an int type', () {
     final typedef = scope['Windows.Win32.Gdi.Apis']!;
     final api = typedef.findMethod('AddFontResourceW')!;
