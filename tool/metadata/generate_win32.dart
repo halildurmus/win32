@@ -159,8 +159,7 @@ ${Win32Prototype(function, method, libraryDartName).dartFfiMapping}
 }
 
 void main() {
-  final scope =
-      MetadataStore.getScopeForFile(File('tool/metadata/Windows.Win32.winmd'));
+  final scope = MetadataStore.getWin32Scope();
   final apis = scope.typeDefs.where((type) => type.typeName.endsWith('Apis'));
 
   apis.forEach((api) => methods.addAll(api.methods));

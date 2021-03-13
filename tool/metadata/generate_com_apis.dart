@@ -91,8 +91,7 @@ int vTableStart(TypeDef? type) {
 }
 
 void main(List<String> args) {
-  scope =
-      MetadataStore.getScopeForFile(File('tool/metadata/Windows.Win32.winmd'));
+  scope = MetadataStore.getWin32Scope();
 
   final parser = ArgParser()
     ..addOption('classDirectory', defaultsTo: 'lib/src/generated')

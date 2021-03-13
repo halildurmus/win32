@@ -64,8 +64,7 @@ void main() {
       'Windows.Win32.Wmi.IWbemServices': 3,
     };
 
-    final scope = MetadataStore.getScopeForFile(
-        File('tool/metadata/Windows.Win32.winmd'));
+    final scope = MetadataStore.getWin32Scope();
 
     for (final type in testedTypes.keys) {
       final calculatedVTableStart = vTableStart(scope.findTypeDef(type));
