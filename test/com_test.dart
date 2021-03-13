@@ -1,12 +1,10 @@
 @TestOn('windows')
 
-import 'dart:io';
-
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
-  final scope = MetadataStore.getScopeForFile(File('bin/Windows.Win32.winmd'));
+  final scope = MetadataStore.getWin32Scope();
   test('Can find a COM interface in winmd', () {
     final iNetwork = scope.typeDefs
         .firstWhere((typedef) => typedef.typeName.endsWith('INetwork'));

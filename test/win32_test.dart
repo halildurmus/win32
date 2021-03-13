@@ -1,12 +1,10 @@
 @TestOn('windows')
 
-import 'dart:io';
-
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
-  final scope = MetadataStore.getScopeForFile(File('bin/Windows.Win32.winmd'));
+  final scope = MetadataStore.getWin32Scope();
   test('Scope name is as expected', () {
     expect(scope.name, equals('Windows.Win32.winmd'));
   });

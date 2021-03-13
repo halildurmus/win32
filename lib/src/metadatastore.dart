@@ -39,6 +39,14 @@ class MetadataStore {
     isInitialized = true;
   }
 
+  // Generate a scope for the locally-cached Win32 metadata file. By having this
+  // here, we remove the need for this large file to be distributed with the
+  // win32 package, since it's only used at development time for generating
+  // types. It also reduces the risk of breaking changes being out of sync with
+  // the winmd library, since the two can be more tightly bound together.
+  static Scope getWin32Scope() =>
+      getScopeForFile(File('bin/Windows.Win32.winmd'));
+
   /// Takes a metadata file path and returns the matching scope.
   static Scope getScopeForFile(File fileScope) {
     final filename = fileScope.uri.pathSegments.last;
