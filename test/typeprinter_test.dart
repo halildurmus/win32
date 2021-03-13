@@ -18,8 +18,7 @@ void main() {
 
   test('COM golden', () {
     const typeToGenerate = 'Windows.Win32.NetworkListManager.INetwork';
-    final scope =
-        MetadataStore.getScopeForFile(File('bin/Windows.Win32.winmd'));
+    final scope = MetadataStore.getWin32Scope();
     final typedef = scope.findTypeDef(typeToGenerate)!;
 
     final dartClass = TypePrinter.printType(typedef);

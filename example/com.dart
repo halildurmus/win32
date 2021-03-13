@@ -4,14 +4,12 @@
 
 // Parse the Windows Metadata for a COM type and generate a Dart wrapper
 
-import 'dart:io';
-
 import 'package:winmd/winmd.dart';
 
 const typeToGenerate = 'Windows.Win32.NetworkListManager.INetwork';
 
 void main(List<String> args) {
-  final scope = MetadataStore.getScopeForFile(File('bin/Windows.Win32.winmd'));
+  final scope = MetadataStore.getWin32Scope();
   final typedef = scope.findTypeDef(typeToGenerate)!;
   final dartClass = TypePrinter.printType(typedef);
 

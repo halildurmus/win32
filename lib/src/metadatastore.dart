@@ -2,8 +2,10 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'dart:cli';
 import 'dart:ffi';
 import 'dart:io';
+import 'dart:isolate';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
@@ -44,8 +46,15 @@ class MetadataStore {
   // win32 package, since it's only used at development time for generating
   // types. It also reduces the risk of breaking changes being out of sync with
   // the winmd library, since the two can be more tightly bound together.
-  static Scope getWin32Scope() =>
-      getScopeForFile(File('bin/Windows.Win32.winmd'));
+  static Scope getWin32Scope() {
+    final uri = Uri.parse('package:winmd/assets/Windows.Win32.winmd');
+    final future = Isolate.resolvePackageUri(uri);
+    final package = waitFor(future, timeout: const Duration(seconds: 5));
+    if (package == null) throw Exception('Could not find Windows.Win32.winmd');
+    final fileScope = File.fromUri(package);
+
+    return getScopeForFile(fileScope);
+  }
 
   /// Takes a metadata file path and returns the matching scope.
   static Scope getScopeForFile(File fileScope) {

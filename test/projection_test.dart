@@ -25,8 +25,7 @@ void main() {
   });
 
   group('Projection', () {
-    final scope =
-        MetadataStore.getScopeForFile(File('bin/Windows.Win32.winmd'));
+    final scope = MetadataStore.getWin32Scope();
 
     test('ANSI string', () {
       final typedef = scope['Windows.Win32.KeyboardAndMouseInput.Apis']!;
