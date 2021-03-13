@@ -610,6 +610,27 @@ int DragDetect(int hwnd, POINT pt) {
   return _DragDetect(hwnd, pt);
 }
 
+/// Animates the caption of a window to indicate the opening of an icon or
+/// the minimizing or maximizing of a window.
+///
+/// ```c
+/// BOOL DrawAnimatedRects(
+///   HWND       hwnd,
+///   int        idAni,
+///   const RECT *lprcFrom,
+///   const RECT *lprcTo);
+/// ```
+/// {@category user32}
+int DrawAnimatedRects(
+    int hwnd, int idAni, Pointer<RECT> lprcFrom, Pointer<RECT> lprcTo) {
+  final _DrawAnimatedRects = _user32.lookupFunction<
+      Int32 Function(IntPtr hwnd, Int32 idAni, Pointer<RECT> lprcFrom,
+          Pointer<RECT> lprcTo),
+      int Function(int hwnd, int idAni, Pointer<RECT> lprcFrom,
+          Pointer<RECT> lprcTo)>('DrawAnimatedRects');
+  return _DrawAnimatedRects(hwnd, idAni, lprcFrom, lprcTo);
+}
+
 /// The DrawCaption function draws a window caption.
 ///
 /// ```c
@@ -630,6 +651,61 @@ int DrawCaption(int hwnd, int hdc, Pointer<RECT> lprect, int flags) {
   return _DrawCaption(hwnd, hdc, lprect, flags);
 }
 
+/// The DrawEdge function draws one or more edges of rectangle.
+///
+/// ```c
+/// BOOL DrawEdge(
+///   HDC    hdc,
+///   LPRECT qrc,
+///   UINT   edge,
+///   UINT   grfFlags);
+/// ```
+/// {@category user32}
+int DrawEdge(int hdc, Pointer<RECT> qrc, int edge, int grfFlags) {
+  final _DrawEdge = _user32.lookupFunction<
+      Int32 Function(
+          IntPtr hdc, Pointer<RECT> qrc, Uint32 edge, Uint32 grfFlags),
+      int Function(
+          int hdc, Pointer<RECT> qrc, int edge, int grfFlags)>('DrawEdge');
+  return _DrawEdge(hdc, qrc, edge, grfFlags);
+}
+
+/// The DrawFocusRect function draws a rectangle in the style used to
+/// indicate that the rectangle has the focus.
+///
+/// ```c
+/// BOOL DrawFocusRect(
+///   HDC        hDC,
+///   const RECT *lprc);
+/// ```
+/// {@category user32}
+int DrawFocusRect(int hDC, Pointer<RECT> lprc) {
+  final _DrawFocusRect = _user32.lookupFunction<
+      Int32 Function(IntPtr hDC, Pointer<RECT> lprc),
+      int Function(int hDC, Pointer<RECT> lprc)>('DrawFocusRect');
+  return _DrawFocusRect(hDC, lprc);
+}
+
+/// The DrawFrameControl function draws a frame control of the specified
+/// type and style.
+///
+/// ```c
+/// BOOL DrawFrameControl(
+///   HDC    ,
+///   LPRECT ,
+///   UINT   ,
+///   UINT);
+/// ```
+/// {@category user32}
+int DrawFrameControl(int param0, Pointer<RECT> param1, int param2, int param3) {
+  final _DrawFrameControl = _user32.lookupFunction<
+      Int32 Function(
+          IntPtr param0, Pointer<RECT> param1, Uint32 param2, Uint32 param3),
+      int Function(int param0, Pointer<RECT> param1, int param2,
+          int param3)>('DrawFrameControl');
+  return _DrawFrameControl(param0, param1, param2, param3);
+}
+
 /// Draws an icon or cursor into the specified device context.
 ///
 /// ```c
@@ -646,6 +722,61 @@ int DrawIcon(int hDC, int X, int Y, int hIcon) {
       Int32 Function(IntPtr hDC, Int32 X, Int32 Y, IntPtr hIcon),
       int Function(int hDC, int X, int Y, int hIcon)>('DrawIcon');
   return _DrawIcon(hDC, X, Y, hIcon);
+}
+
+/// The DrawState function displays an image and applies a visual effect to
+/// indicate a state, such as a disabled or default state.
+///
+/// ```c
+/// BOOL DrawStateW(
+///   HDC           hdc,
+///   HBRUSH        hbrFore,
+///   DRAWSTATEPROC qfnCallBack,
+///   LPARAM        lData,
+///   WPARAM        wData,
+///   int           x,
+///   int           y,
+///   int           cx,
+///   int           cy,
+///   UINT          uFlags);
+/// ```
+/// {@category user32}
+int DrawState(
+    int hdc,
+    int hbrFore,
+    Pointer<NativeFunction<DrawStateProc>> qfnCallBack,
+    int lData,
+    int wData,
+    int x,
+    int y,
+    int cx,
+    int cy,
+    int uFlags) {
+  final _DrawState = _user32.lookupFunction<
+      Int32 Function(
+          IntPtr hdc,
+          IntPtr hbrFore,
+          Pointer<NativeFunction<DrawStateProc>> qfnCallBack,
+          IntPtr lData,
+          IntPtr wData,
+          Int32 x,
+          Int32 y,
+          Int32 cx,
+          Int32 cy,
+          Uint32 uFlags),
+      int Function(
+          int hdc,
+          int hbrFore,
+          Pointer<NativeFunction<DrawStateProc>> qfnCallBack,
+          int lData,
+          int wData,
+          int x,
+          int y,
+          int cx,
+          int cy,
+          int uFlags)>('DrawStateW');
+  return _DrawState(
+      hdc, hbrFore, qfnCallBack, lData, wData, x, y, cx, cy, uFlags);
 }
 
 /// The DrawText function draws formatted text in the specified rectangle.

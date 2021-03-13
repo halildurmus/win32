@@ -606,20 +606,45 @@
         "dllLibrary": "user32",
         "comment": "Captures the mouse and tracks its movement until the user releases the left button, presses the ESC key, or moves the mouse outside the drag rectangle around the specified point."
     },
+    "DrawAnimatedRects": {
+        "prototype": "BOOL DrawAnimatedRects(\n  HWND       hwnd,\n  int        idAni,\n  const RECT *lprcFrom,\n  const RECT *lprcTo);",
+        "dllLibrary": "user32",
+        "comment": "Animates the caption of a window to indicate the opening of an icon or the minimizing or maximizing of a window."
+    },
     "DrawCaption": {
         "prototype": "BOOL DrawCaption(\n  HWND       hwnd,\n  HDC        hdc,\n  const RECT *lprect,\n  UINT       flags\n);",
         "dllLibrary": "user32",
         "comment": "The DrawCaption function draws a window caption."
+    },
+    "DrawEdge": {
+        "prototype": "BOOL DrawEdge(\n  HDC    hdc,\n  LPRECT qrc,\n  UINT   edge,\n  UINT   grfFlags);",
+        "dllLibrary": "user32",
+        "comment": "The DrawEdge function draws one or more edges of rectangle."
     },
     "DrawEscape": {
         "prototype": "int DrawEscape(\n  HDC    hdc,\n  int    iEscape,\n  int    cjIn,\n  LPCSTR lpIn\n);",
         "dllLibrary": "gdi32",
         "comment": "The DrawEscape function provides drawing capabilities of the specified video display that are not directly available through the graphics device interface (GDI)."
     },
+    "DrawFocusRect": {
+        "prototype": "BOOL DrawFocusRect(\n  HDC        hDC,\n  const RECT *lprc);",
+        "dllLibrary": "user32",
+        "comment": "The DrawFocusRect function draws a rectangle in the style used to indicate that the rectangle has the focus."
+    },
+    "DrawFrameControl": {
+        "prototype": "BOOL DrawFrameControl(\n  HDC    ,\n  LPRECT ,\n  UINT   ,\n  UINT);",
+        "dllLibrary": "user32",
+        "comment": "The DrawFrameControl function draws a frame control of the specified type and style."
+    },
     "DrawIcon": {
         "prototype": "BOOL DrawIcon(\n  HDC   hDC,\n  int   X,\n  int   Y,\n  HICON hIcon\n);",
         "dllLibrary": "user32",
         "comment": "Draws an icon or cursor into the specified device context."
+    },
+    "DrawState": {
+        "prototype": "BOOL DrawStateW(\n  HDC           hdc,\n  HBRUSH        hbrFore,\n  DRAWSTATEPROC qfnCallBack,\n  LPARAM        lData,\n  WPARAM        wData,\n  int           x,\n  int           y,\n  int           cx,\n  int           cy,\n  UINT          uFlags);",
+        "dllLibrary": "user32",
+        "comment": "The DrawState function displays an image and applies a visual effect to indicate a state, such as a disabled or default state."
     },
     "DrawStatusText": {
         "prototype": "void DrawStatusTextW(\n  HDC     hDC,\n  LPCRECT lprc,\n  LPCWSTR pszText,\n  UINT    uFlags\n);",

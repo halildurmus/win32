@@ -15,6 +15,11 @@ import 'structs.dart';
 /// modeless dialog box.
 typedef DlgProc = IntPtr Function(IntPtr, Uint32, IntPtr, IntPtr);
 
+/// Application-defined callback function that renders a complex image for the
+/// DrawState function.
+typedef DrawStateProc = Int32 Function(
+    IntPtr hdc, IntPtr lData, IntPtr wData, Int32 cx, Int32 cy);
+
 /// Application-defined callback function used with the EnumChildWindows
 /// function. It receives the child window handles.
 typedef EnumWindowsProc = Int32 Function(IntPtr hwnd, IntPtr lParam);
