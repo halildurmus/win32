@@ -77,77 +77,7 @@ class TypeProjector {
     return 'Pointer';
   }
 
-  String get dartType {
-    if (specialTypes.containsKey(typeIdentifier.name)) {
-      return specialTypes[typeIdentifier.name]!;
-    }
-    if (isTypeAnEnum || isTypeValueType) {
-      return 'int';
-    }
-
-    switch (typeIdentifier.corType) {
-      case CorElementType.ELEMENT_TYPE_VOID:
-        return 'void';
-      case CorElementType.ELEMENT_TYPE_BOOLEAN:
-        return 'bool';
-      case CorElementType.ELEMENT_TYPE_STRING:
-        return 'int';
-      case CorElementType.ELEMENT_TYPE_CHAR:
-      case CorElementType.ELEMENT_TYPE_I1:
-      case CorElementType.ELEMENT_TYPE_U1:
-      case CorElementType.ELEMENT_TYPE_I2:
-      case CorElementType.ELEMENT_TYPE_U2:
-      case CorElementType.ELEMENT_TYPE_I4:
-      case CorElementType.ELEMENT_TYPE_U4:
-      case CorElementType.ELEMENT_TYPE_I8:
-      case CorElementType.ELEMENT_TYPE_U8:
-      case CorElementType.ELEMENT_TYPE_I:
-      case CorElementType.ELEMENT_TYPE_U:
-        return 'int';
-      case CorElementType.ELEMENT_TYPE_R4:
-      case CorElementType.ELEMENT_TYPE_R8:
-        return 'double';
-      case CorElementType.ELEMENT_TYPE_OBJECT:
-        return 'COMObject';
-      case CorElementType.ELEMENT_TYPE_GENERICINST:
-        // TODO: Assume a Vector for now
-        return TypeProjector(typeIdentifier.typeArgs.first).dartType;
-      case CorElementType.ELEMENT_TYPE_PTR:
-        return pointerType(typeIdentifier);
-
-      case CorElementType.ELEMENT_TYPE_FNPTR:
-        return 'Pointer';
-
-      default:
-    }
-
-    // COM type
-    if (typeIdentifier.type != null &&
-        typeIdentifier.type!.interfaces.isNotEmpty &&
-        typeIdentifier.type!.interfaces.first.typeName ==
-            'Windows.Win32.Com.IUnknown') {
-      return 'Pointer';
-    }
-
-    // If it's a Win32 type, we know how to get the type
-    if (typeIdentifier.type != null &&
-        typeIdentifier.type!.typeName.startsWith('Windows.Win32')) {
-      final win32Type = typeIdentifier.type?.typeName.split('.').last ?? '';
-      final ffiNativeType = convertToFFIType(win32Type);
-      final dartType = convertToDartType(ffiNativeType);
-      return dartType;
-    }
-
-    if (typeIdentifier.corType == CorElementType.ELEMENT_TYPE_CLASS) {
-      // WinRT type
-      // TODO: Check this is right in all cases.
-      return 'Pointer';
-    }
-
-    // We have no idea. Return something egregiously wrong, so that the
-    // analyzer picks it up as an error.
-    return '__${typeIdentifier.name}__';
-  }
+  String get dartType => convertToDartType(nativeType);
 
   String get nativeType {
     // ECMA-335 II.14.3 does not guarantee that an enum is 32-bit, but
@@ -168,6 +98,7 @@ class TypeProjector {
       case CorElementType.ELEMENT_TYPE_VOID:
         return 'Void';
       case CorElementType.ELEMENT_TYPE_BOOLEAN:
+        return '/* Boolean */ Uint8';
       case CorElementType.ELEMENT_TYPE_CHAR:
       case CorElementType.ELEMENT_TYPE_U1:
         return 'Uint8';

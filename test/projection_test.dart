@@ -156,5 +156,15 @@ void main() {
       expect(typeProjection.nativeType, equals('Pointer<Uint32>'));
       expect(typeProjection.dartType, equals('Pointer<Uint32>'));
     });
+
+    test('Void returns are represented correctly', () {
+      final typedef = scope['Windows.Win32.Security.Apis']!;
+      final api = typedef.findMethod('CredFree')!;
+      final type = api.returnType.typeIdentifier;
+      final typeProjection = TypeProjector(type);
+
+      expect(typeProjection.nativeType, equals('Void'));
+      expect(typeProjection.dartType, equals('void'));
+    });
   });
 }

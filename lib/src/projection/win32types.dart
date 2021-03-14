@@ -36,6 +36,14 @@ String convertToDartType(String ffiType) {
     return 'int';
   }
 
+  if (ffiType == 'Void') {
+    return 'void';
+  }
+
+  if (ffiType == '/* Boolean */ Uint8') {
+    return 'bool';
+  }
+
   return ffiType;
 }
 
