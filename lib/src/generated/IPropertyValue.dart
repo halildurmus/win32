@@ -27,9 +27,9 @@ typedef _get_Type_Native = Int32 Function(Pointer obj, Pointer<Uint32> value);
 typedef _get_Type_Dart = int Function(Pointer obj, Pointer<Uint32> value);
 
 typedef _get_IsNumericScalar_Native = Int32 Function(
-    Pointer obj, Pointer<Uint8> value);
+    Pointer obj, Pointer< /* Boolean */ Uint8> value);
 typedef _get_IsNumericScalar_Dart = int Function(
-    Pointer obj, Pointer<Uint8> value);
+    Pointer obj, Pointer< /* Boolean */ Uint8> value);
 
 typedef _GetUInt8_Native = Int32 Function(Pointer obj, Pointer<Uint8> result);
 typedef _GetUInt8_Dart = int Function(Pointer obj, Pointer<Uint8> result);
@@ -61,8 +61,10 @@ typedef _GetDouble_Dart = int Function(Pointer obj, Pointer<Double> result);
 typedef _GetChar16_Native = Int32 Function(Pointer obj, Pointer<Uint8> result);
 typedef _GetChar16_Dart = int Function(Pointer obj, Pointer<Uint8> result);
 
-typedef _GetBoolean_Native = Int32 Function(Pointer obj, Pointer<Uint8> result);
-typedef _GetBoolean_Dart = int Function(Pointer obj, Pointer<Uint8> result);
+typedef _GetBoolean_Native = Int32 Function(
+    Pointer obj, Pointer< /* Boolean */ Uint8> result);
+typedef _GetBoolean_Dart = int Function(
+    Pointer obj, Pointer< /* Boolean */ Uint8> result);
 
 typedef _GetString_Native = Int32 Function(Pointer obj, Pointer<IntPtr> result);
 typedef _GetString_Dart = int Function(Pointer obj, Pointer<IntPtr> result);
@@ -137,10 +139,10 @@ typedef _GetChar16Array_Native = Int32 Function(
 typedef _GetChar16Array_Dart = int Function(
     Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint8> value);
 
-typedef _GetBooleanArray_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint8> value);
-typedef _GetBooleanArray_Dart = int Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint8> value);
+typedef _GetBooleanArray_Native = Int32 Function(Pointer obj,
+    Pointer<Uint32> __valueSize, Pointer< /* Boolean */ Uint8> value);
+typedef _GetBooleanArray_Dart = int Function(Pointer obj,
+    Pointer<Uint32> __valueSize, Pointer< /* Boolean */ Uint8> value);
 
 typedef _GetStringArray_Native = Int32 Function(
     Pointer obj, Pointer<Uint32> __valueSize, Pointer<IntPtr> value);
@@ -203,7 +205,7 @@ class IPropertyValue extends IInspectable {
   }
 
   bool get IsNumericScalar {
-    final retValuePtr = calloc<Uint8>();
+    final retValuePtr = calloc< /* Boolean */ Uint8>();
 
     final hr = Pointer<NativeFunction<_get_IsNumericScalar_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(7).value)
@@ -265,7 +267,7 @@ class IPropertyValue extends IInspectable {
               ptr.ref.vtable.elementAt(17).value)
           .asFunction<_GetChar16_Dart>()(ptr.ref.lpVtbl, result);
 
-  int GetBoolean(Pointer<Uint8> result) =>
+  int GetBoolean(Pointer< /* Boolean */ Uint8> result) =>
       Pointer<NativeFunction<_GetBoolean_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(18).value)
           .asFunction<_GetBoolean_Dart>()(ptr.ref.lpVtbl, result);
@@ -365,7 +367,8 @@ class IPropertyValue extends IInspectable {
               .asFunction<_GetChar16Array_Dart>()(
           ptr.ref.lpVtbl, __valueSize, value);
 
-  int GetBooleanArray(Pointer<Uint32> __valueSize, Pointer<Uint8> value) =>
+  int GetBooleanArray(
+          Pointer<Uint32> __valueSize, Pointer< /* Boolean */ Uint8> value) =>
       Pointer<NativeFunction<_GetBooleanArray_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(36).value)
               .asFunction<_GetBooleanArray_Dart>()(

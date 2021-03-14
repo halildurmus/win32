@@ -426,9 +426,9 @@ typedef _get_ResolvedLanguage_Dart = int Function(
     Pointer obj, Pointer<IntPtr> value);
 
 typedef _get_IsDaylightSavingTime_Native = Int32 Function(
-    Pointer obj, Pointer<Uint8> value);
+    Pointer obj, Pointer< /* Boolean */ Uint8> value);
 typedef _get_IsDaylightSavingTime_Dart = int Function(
-    Pointer obj, Pointer<Uint8> value);
+    Pointer obj, Pointer< /* Boolean */ Uint8> value);
 
 /// {@category Interface}
 /// {@category winrt}
@@ -1309,7 +1309,7 @@ class ICalendar extends IInspectable {
   }
 
   bool get IsDaylightSavingTime {
-    final retValuePtr = calloc<Uint8>();
+    final retValuePtr = calloc< /* Boolean */ Uint8>();
 
     final hr =
         Pointer<NativeFunction<_get_IsDaylightSavingTime_Native>>.fromAddress(

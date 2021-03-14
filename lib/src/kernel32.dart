@@ -1799,14 +1799,7 @@ int GetUserDefaultLocaleName(Pointer<Utf16> lpLocaleName, int cchLocaleName) {
   return _GetUserDefaultLocaleName(lpLocaleName, cchLocaleName);
 }
 
-/// With the release of Windows 8.1, the behavior of the GetVersionEx API
-/// has changed in the value it will return for the operating system
-/// version. The value returned by the GetVersionEx function now depends on
-/// how the application is manifested. Applications not manifested for
-/// Windows 8.1 or Windows 10 will return the Windows 8 OS version value
-/// (6.2). Once an application is manifested for a given operating system
-/// version, GetVersionEx will always return the version that the
-/// application is manifested for in future releases.
+/// Gets information about the operating system version.
 ///
 /// ```c
 /// BOOL GetVersionExW(
