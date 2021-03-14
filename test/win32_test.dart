@@ -320,4 +320,25 @@ void main() {
 
     expect(ropCode.fields['SRCCOPY'], equals(0x00CC0020));
   });
+
+  test('Enumerations are typed appropriately in functions', () {
+    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final api = typedef.findMethod('CreateDIBitmap')!;
+    final param = api.parameters.last;
+
+    expect(param.name, equals('iUsage'));
+    expect(param.typeIdentifier.type?.parent?.typeName, equals('System.Enum'));
+  });
+
+  test('Pointers to enumerations are typed appropriately in functions', () {
+    final typedef = scope['Windows.Win32.SystemServices.Apis']!;
+    final api = typedef.findMethod('GetNamedPipeInfo')!;
+    final param = api.parameters[1];
+
+    expect(param.name, equals('lpFlags'));
+    expect(param.typeIdentifier.typeArgs.first.corType,
+        equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+    expect(param.typeIdentifier.typeArgs.first.type?.parent?.typeName,
+        equals('System.Enum'));
+  });
 }

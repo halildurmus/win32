@@ -16,7 +16,6 @@ class TypeProjector {
   const TypeProjector(this.typeIdentifier);
 
   bool get isTypeAnEnum =>
-      !typeIdentifier.name.startsWith('Windows.Win32') &&
       typeIdentifier.type?.parent?.typeName == 'System.Enum';
 
   bool get isTypeValueType =>
@@ -66,6 +65,10 @@ class TypeProjector {
         }
         if (typeIdentifier.name == 'LPSTR') {
           return 'Pointer<Utf8>';
+        }
+        if (typeIdentifier.typeArgs.first.type?.parent?.typeName ==
+            'System.Enum') {
+          return 'Pointer<Uint32>';
         }
 
         // Check if it's Pointer<T>, in which case we have work
@@ -149,7 +152,7 @@ class TypeProjector {
     // per https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#enums,
     // enums are always signed or unsigned 32-bit values.
     if (isTypeAnEnum) {
-      return 'Int32';
+      return 'Uint32';
     }
 
     if (specialTypes.containsKey(typeIdentifier.name)) {
@@ -197,6 +200,10 @@ class TypeProjector {
         }
         if (typeIdentifier.name == 'LPSTR') {
           return 'Pointer<Utf8>';
+        }
+        if (typeIdentifier.typeArgs.first.type?.parent?.typeName ==
+            'System.Enum') {
+          return 'Pointer<Uint32>';
         }
 
         final typeArgs = typeIdentifier.typeArgs;

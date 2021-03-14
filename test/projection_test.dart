@@ -136,5 +136,25 @@ void main() {
       expect(typeProjection.nativeType, equals('IntPtr'));
       expect(typeProjection.dartType, equals('int'));
     });
+
+    test('Enumeration params are represented correctly', () {
+      final typedef = scope['Windows.Win32.Gdi.Apis']!;
+      final api = typedef.findMethod('CreateDIBitmap')!;
+      final type = api.parameters.last.typeIdentifier;
+      final typeProjection = TypeProjector(type);
+
+      expect(typeProjection.nativeType, equals('Uint32'));
+      expect(typeProjection.dartType, equals('int'));
+    });
+
+    test('Pointer<Enum> params are represented correctly', () {
+      final typedef = scope['Windows.Win32.SystemServices.Apis']!;
+      final api = typedef.findMethod('GetNamedPipeInfo')!;
+      final type = api.parameters[1].typeIdentifier;
+      final typeProjection = TypeProjector(type);
+
+      expect(typeProjection.nativeType, equals('Pointer<Uint32>'));
+      expect(typeProjection.dartType, equals('Pointer<Uint32>'));
+    });
   });
 }
