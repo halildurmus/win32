@@ -2,6 +2,7 @@
 
 - Add network events, thanks to a contribution from @sunbreak.
 - Update COM vtable generation, thanks to a contribution from @bonukai.
+- Update to use the latest WinMD package.
 
 ## 2.0.3
 
