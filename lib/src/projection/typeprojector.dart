@@ -23,6 +23,60 @@ class TypeProjector {
       (typeIdentifier.corType == CorElementType.ELEMENT_TYPE_VALUETYPE ||
           typeIdentifier.type?.parent?.typeName == 'System.ValueType');
 
+  String pointerType(TypeIdentifier typeIdentifier) {
+    // Is it a string pointer?
+    if (typeIdentifier.name == 'LPWSTR') {
+      return 'Pointer<Utf16>';
+    }
+    if (typeIdentifier.name == 'LPSTR') {
+      return 'Pointer<Utf8>';
+    }
+    if (typeIdentifier.typeArgs.first.type?.parent?.typeName == 'System.Enum') {
+      return 'Pointer<Uint32>';
+    }
+
+    // Check if it's Pointer<T>, in which case we have work
+    final typeArgs = typeIdentifier.typeArgs;
+    if (typeArgs.isNotEmpty) {
+      if (typeArgs.first.type != null &&
+          typeArgs.first.type!.typeName.startsWith('Windows.Win32') &&
+          typeArgs.first.corType != CorElementType.ELEMENT_TYPE_CLASS) {
+        final win32Type = typeArgs.first.type?.typeName.split('.').last ?? '';
+        final ffiNativeType = convertToFFIType(win32Type);
+        // If it's a Unicode Win32 type, strip off the ending 'W'.
+        if (ffiNativeType.endsWith('W')) {
+          return 'Pointer<${ffiNativeType.substring(0, ffiNativeType.length - 1)}>';
+        } else {
+          return 'Pointer<$ffiNativeType>';
+        }
+      } else {
+        if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_VOID) {
+          // Pointer<Void> in Dart is unnecessarily restrictive, versus the
+          // Win32 meaning, which is more like "undefined type". We can
+          // model that with a generic Pointer in Dart.
+          return 'Pointer';
+        } else if (typeArgs.first.type != null &&
+            typeArgs.first.type!.interfaces.isNotEmpty &&
+            typeArgs.first.type!.interfaces.first.typeName ==
+                'Windows.Win32.Com.IUnknown') {
+          // COM type
+          return 'Pointer<Pointer>';
+        } else {
+          // If it's a double- (or triple-) dereferenced pointer, then
+          // create a new typeIdentifier, based on the first typeArgs entry
+          // and with the remainder as its typeArgs. Then recursively call
+          // the function.
+          final newType = typeArgs.first.clone();
+          if (typeArgs.length > 1) {
+            newType.typeArgs.addAll(typeArgs.skip(1));
+          }
+          return 'Pointer<${TypeProjector(newType).nativeType}>';
+        }
+      }
+    }
+    return 'Pointer';
+  }
+
   String get dartType {
     if (specialTypes.containsKey(typeIdentifier.name)) {
       return specialTypes[typeIdentifier.name]!;
@@ -59,59 +113,7 @@ class TypeProjector {
         // TODO: Assume a Vector for now
         return TypeProjector(typeIdentifier.typeArgs.first).dartType;
       case CorElementType.ELEMENT_TYPE_PTR:
-        // Is it a string pointer?
-        if (typeIdentifier.name == 'LPWSTR') {
-          return 'Pointer<Utf16>';
-        }
-        if (typeIdentifier.name == 'LPSTR') {
-          return 'Pointer<Utf8>';
-        }
-        if (typeIdentifier.typeArgs.first.type?.parent?.typeName ==
-            'System.Enum') {
-          return 'Pointer<Uint32>';
-        }
-
-        // Check if it's Pointer<T>, in which case we have work
-        final typeArgs = typeIdentifier.typeArgs;
-        if (typeArgs.isNotEmpty) {
-          if (typeArgs.first.type != null &&
-              typeArgs.first.type!.typeName.startsWith('Windows.Win32') &&
-              typeArgs.first.corType != CorElementType.ELEMENT_TYPE_CLASS) {
-            final win32Type =
-                typeArgs.first.type?.typeName.split('.').last ?? '';
-            final ffiNativeType = convertToFFIType(win32Type);
-            // If it's a Unicode Win32 type, strip off the ending 'W'.
-            if (ffiNativeType.endsWith('W')) {
-              return 'Pointer<${ffiNativeType.substring(0, ffiNativeType.length - 1)}>';
-            } else {
-              return 'Pointer<$ffiNativeType>';
-            }
-          } else {
-            if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_VOID) {
-              // Pointer<Void> in Dart is unnecessarily restrictive, versus the
-              // Win32 meaning, which is more like "undefined type". We can
-              // model that with a generic Pointer in Dart.
-              return 'Pointer';
-            } else if (typeArgs.first.type != null &&
-                typeArgs.first.type!.interfaces.isNotEmpty &&
-                typeArgs.first.type!.interfaces.first.typeName ==
-                    'Windows.Win32.Com.IUnknown') {
-              // COM type
-              return 'Pointer<Pointer>';
-            } else {
-              // If it's a double- (or triple-) dereferenced pointer, then
-              // create a new typeIdentifier, based on the first typeArgs entry
-              // and with the remainder as its typeArgs. Then recursively call
-              // the function.
-              final newType = typeArgs.first.clone();
-              if (typeArgs.length > 1) {
-                newType.typeArgs.addAll(typeArgs.skip(1));
-              }
-              return 'Pointer<${TypeProjector(newType).nativeType}>';
-            }
-          }
-        }
-        return 'Pointer';
+        return pointerType(typeIdentifier);
 
       case CorElementType.ELEMENT_TYPE_FNPTR:
         return 'Pointer';
@@ -195,58 +197,7 @@ class TypeProjector {
         // TODO: Assume a Vector for now
         return TypeProjector(typeIdentifier.typeArgs.first).nativeType;
       case CorElementType.ELEMENT_TYPE_PTR:
-        if (typeIdentifier.name == 'LPWSTR') {
-          return 'Pointer<Utf16>';
-        }
-        if (typeIdentifier.name == 'LPSTR') {
-          return 'Pointer<Utf8>';
-        }
-        if (typeIdentifier.typeArgs.first.type?.parent?.typeName ==
-            'System.Enum') {
-          return 'Pointer<Uint32>';
-        }
-
-        final typeArgs = typeIdentifier.typeArgs;
-        if (typeArgs.isNotEmpty) {
-          if (typeArgs.first.type != null &&
-              typeArgs.first.type!.typeName.startsWith('Windows.Win32') &&
-              typeArgs.first.corType != CorElementType.ELEMENT_TYPE_CLASS) {
-            final win32Type =
-                typeArgs.first.type?.typeName.split('.').last ?? '';
-            final ffiNativeType = convertToFFIType(win32Type);
-            // If it's a Unicode Win32 type, strip off the ending 'W'.
-            if (ffiNativeType.endsWith('W')) {
-              return 'Pointer<${ffiNativeType.substring(0, ffiNativeType.length - 1)}>';
-            } else {
-              return 'Pointer<$ffiNativeType>';
-            }
-          } else {
-            if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_VOID) {
-              // Pointer<Void> in Dart is unnecessarily restrictive, versus the
-              // Win32/C meaning, which is more like "undefined type". We can
-              // model that with a generic Pointer in Dart.
-              return 'Pointer';
-            } else if (typeArgs.first.type != null &&
-                typeArgs.first.type!.interfaces.isNotEmpty &&
-                typeArgs.first.type!.interfaces.first.typeName ==
-                    'Windows.Win32.Com.IUnknown') {
-              // COM type
-              return 'Pointer<Pointer>';
-            } else {
-              // If it's a double- (or triple-) dereferenced pointer, then
-              // create a new typeIdentifier, based on the first typeArgs entry
-              // and with the remainder as its typeArgs. Then recursively call
-              // the function.
-              final newType = typeArgs.first.clone();
-              if (typeArgs.length > 1) {
-                newType.typeArgs.addAll(typeArgs.skip(1));
-              }
-              return 'Pointer<${TypeProjector(newType).nativeType}>';
-            }
-          }
-        }
-        return 'Pointer';
-
+        return pointerType(typeIdentifier);
       case CorElementType.ELEMENT_TYPE_FNPTR:
         return 'Pointer';
       case CorElementType.ELEMENT_TYPE_I:
