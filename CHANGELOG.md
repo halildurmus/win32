@@ -1,3 +1,13 @@
+## 0.4.5
+
+- Bundle the latest win32metadata `.winmd` file with the package, and expose it
+  via the `MetadataStore.getWin32Scope()` method. This will ensure that this
+  library's projection APIs stay in sync with any changes to the metadata file
+  itself. You can still supply your own copy of `Windows.Win32.winmd` file and
+  load with the `MetadataStore.getScopeForFile()` call.
+- Project all enums as `Uint32`, for consistency.
+- Add more tests to ensure a couple of regressions never creep in again.
+
 ## 0.4.4
 
 - Fix projection of Pointers to interfaces (thanks @bonukai).
