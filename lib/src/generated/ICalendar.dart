@@ -229,8 +229,8 @@ typedef _DayAsPaddedString_Dart = int Function(
     Pointer obj, int minDigits, Pointer<IntPtr> result);
 
 typedef _get_DayOfWeek_Native = Int32 Function(
-    Pointer obj, Pointer<Int32> value);
-typedef _get_DayOfWeek_Dart = int Function(Pointer obj, Pointer<Int32> value);
+    Pointer obj, Pointer<Uint32> value);
+typedef _get_DayOfWeek_Dart = int Function(Pointer obj, Pointer<Uint32> value);
 
 typedef _DayOfWeekAsFullString_Native = Int32 Function(
     Pointer obj, Pointer<IntPtr> result);
@@ -873,7 +873,7 @@ class ICalendar extends IInspectable {
           ptr.ref.lpVtbl, minDigits, result);
 
   int get DayOfWeek {
-    final retValuePtr = calloc<Int32>();
+    final retValuePtr = calloc<Uint32>();
 
     final hr = Pointer<NativeFunction<_get_DayOfWeek_Native>>.fromAddress(
             ptr.ref.vtable.elementAt(57).value)

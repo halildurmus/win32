@@ -1136,7 +1136,7 @@ int GetComputerNameEx(
     int NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize) {
   final _GetComputerNameEx = _kernel32.lookupFunction<
       Int32 Function(
-          Int32 NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize),
+          Uint32 NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize),
       int Function(int NameType, Pointer<Utf16> lpBuffer,
           Pointer<Uint32> nSize)>('GetComputerNameExW');
   return _GetComputerNameEx(NameType, lpBuffer, nSize);
@@ -1306,7 +1306,7 @@ int GetExitCodeProcess(int hProcess, Pointer<Uint32> lpExitCode) {
 int GetFileAttributesEx(
     Pointer<Utf16> lpFileName, int fInfoLevelId, Pointer lpFileInformation) {
   final _GetFileAttributesEx = _kernel32.lookupFunction<
-      Int32 Function(Pointer<Utf16> lpFileName, Int32 fInfoLevelId,
+      Int32 Function(Pointer<Utf16> lpFileName, Uint32 fInfoLevelId,
           Pointer lpFileInformation),
       int Function(Pointer<Utf16> lpFileName, int fInfoLevelId,
           Pointer lpFileInformation)>('GetFileAttributesExW');
