@@ -9,11 +9,11 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'attribute.dart';
-import 'com/IMetaDataImport2.dart' as md;
+import 'com/IMetaDataImport2.dart';
 
 // The base object for metadata objects.
 abstract class TokenObject {
-  final md.IMetaDataImport2 reader;
+  final IMetaDataImport2 reader;
   final int token;
 
   const TokenObject(this.reader, this.token);
@@ -45,7 +45,7 @@ abstract class TokenObject {
 
 /// Represents an object that has attributes associated with it.
 abstract class AttributeObject extends TokenObject {
-  const AttributeObject(md.IMetaDataImport2 reader, int token)
+  const AttributeObject(IMetaDataImport2 reader, int token)
       : super(reader, token);
 
   String attributeAsString(String attrName) {
@@ -95,7 +95,7 @@ abstract class AttributeObject extends TokenObject {
     }
   }
 
-  /// Enumerate all attributes that this parameter has.
+  /// Enumerate all attributes that this object has.
   List<Attribute> get attributes {
     final attributes = <Attribute>[];
 
@@ -104,6 +104,12 @@ abstract class AttributeObject extends TokenObject {
     final pcAttrs = calloc<Uint32>();
 
     try {
+      // Certain AttributedObjects may not have a valid token (e.g. a return
+      // type has a token of 0). In this case, we return an empty set, since
+      // calling EnumCustomAttributes with a scope of 0 will return all
+      // attributes on all objects in the scope.
+      if (!isValidToken) return attributes;
+
       var hr =
           reader.EnumCustomAttributes(phEnum, token, 0, rAttrs, 1, pcAttrs);
       while (hr == S_OK) {

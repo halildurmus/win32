@@ -2,14 +2,16 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'dart:cli';
 import 'dart:ffi';
 import 'dart:io';
+import 'dart:isolate';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'com/IMetaDataDispenser.dart' as md;
-import 'com/IMetaDataImport2.dart' as md;
+import 'com/IMetaDataDispenser.dart';
+import 'com/IMetaDataImport2.dart';
 import 'scope.dart';
 import 'typedef.dart';
 
@@ -18,7 +20,7 @@ import 'typedef.dart';
 /// Use this to obtain a reference of a scope without creating unnecessary
 /// copies or cycles.
 class MetadataStore {
-  static late md.IMetaDataDispenser dispenser;
+  static late IMetaDataDispenser dispenser;
   static Map<String, Scope> cache = {};
 
   static bool isInitialized = false;
@@ -28,15 +30,30 @@ class MetadataStore {
     final dispenserObject = calloc<Pointer>();
 
     final hr = MetaDataGetDispenser(convertToCLSID(CLSID_CorMetaDataDispenser),
-        convertToIID(md.IID_IMetaDataDispenser), dispenserObject);
+        convertToIID(IID_IMetaDataDispenser), dispenserObject);
 
     if (FAILED(hr)) {
       throw WindowsException(hr);
     }
 
-    dispenser = md.IMetaDataDispenser(dispenserObject.cast());
+    dispenser = IMetaDataDispenser(dispenserObject.cast());
 
     isInitialized = true;
+  }
+
+  // Generate a scope for the locally-cached Win32 metadata file. By having this
+  // here, we remove the need for this large file to be distributed with the
+  // win32 package, since it's only used at development time for generating
+  // types. It also reduces the risk of breaking changes being out of sync with
+  // the winmd library, since the two can be more tightly bound together.
+  static Scope getWin32Scope() {
+    final uri = Uri.parse('package:winmd/assets/Windows.Win32.winmd');
+    final future = Isolate.resolvePackageUri(uri);
+    final package = waitFor(future, timeout: const Duration(seconds: 5));
+    if (package == null) throw Exception('Could not find Windows.Win32.winmd');
+    final fileScope = File.fromUri(package);
+
+    return getScopeForFile(fileScope);
   }
 
   /// Takes a metadata file path and returns the matching scope.
@@ -52,11 +69,11 @@ class MetadataStore {
 
       try {
         final hr = dispenser.OpenScope(szFile, CorOpenFlags.ofRead,
-            convertToIID(md.IID_IMetaDataImport2), pReader);
+            convertToIID(IID_IMetaDataImport2), pReader);
         if (FAILED(hr)) {
           throw WindowsException(hr);
         } else {
-          final scope = Scope(md.IMetaDataImport2(pReader.cast()));
+          final scope = Scope(IMetaDataImport2(pReader.cast()));
           cache[filename] = scope;
           return scope;
         }

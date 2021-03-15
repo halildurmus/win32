@@ -1,12 +1,10 @@
 @TestOn('windows')
 
-import 'dart:io';
-
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
-  final scope = MetadataStore.getScopeForFile(File('bin/Windows.Win32.winmd'));
+  final scope = MetadataStore.getWin32Scope();
   test('Scope name is as expected', () {
     expect(scope.name, equals('Windows.Win32.winmd'));
   });
@@ -82,6 +80,22 @@ void main() {
     final api = typedef.findMethod('AddFontResourceW')!;
 
     expect(api.isValidToken, isTrue);
+  });
+
+  test('isValid gives correct result for a pseudo-token', () {
+    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final api = typedef.findMethod('AddFontResourceW')!;
+    final returnType = api.returnType;
+
+    expect(returnType.isValidToken, isFalse);
+  });
+
+  test('No attributes for a pseudo-token', () {
+    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final api = typedef.findMethod('AddFontResourceW')!;
+    final returnType = api.returnType;
+
+    expect(returnType.attributes.length, isZero);
   });
 
   test('Functions can correctly return an int type', () {
@@ -207,7 +221,7 @@ void main() {
     expect(param.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
     expect(param.typeIdentifier.name, endsWith('HPOWERNOTIFY'));
-  }, skip: 'https://github.com/microsoft/win32metadata/issues/225');
+  });
 
   test('GetActiveObject REFCLSID has the correct parameter type', () {
     final typedef = scope['Windows.Win32.Automation.Apis']!;
@@ -305,5 +319,26 @@ void main() {
         scope.enums.firstWhere((en) => en.typeName.endsWith('ROP_CODE'));
 
     expect(ropCode.findField('SRCCOPY')?.value, equals(0x00CC0020));
+  });
+
+  test('Enumerations are typed appropriately in functions', () {
+    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final api = typedef.findMethod('CreateDIBitmap')!;
+    final param = api.parameters.last;
+
+    expect(param.name, equals('iUsage'));
+    expect(param.typeIdentifier.type?.parent?.typeName, equals('System.Enum'));
+  });
+
+  test('Pointers to enumerations are typed appropriately in functions', () {
+    final typedef = scope['Windows.Win32.SystemServices.Apis']!;
+    final api = typedef.findMethod('GetNamedPipeInfo')!;
+    final param = api.parameters[1];
+
+    expect(param.name, equals('lpFlags'));
+    expect(param.typeIdentifier.typeArgs.first.corType,
+        equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+    expect(param.typeIdentifier.typeArgs.first.type?.parent?.typeName,
+        equals('System.Enum'));
   });
 }

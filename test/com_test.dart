@@ -1,12 +1,10 @@
 @TestOn('windows')
 
-import 'dart:io';
-
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
-  final scope = MetadataStore.getScopeForFile(File('bin/Windows.Win32.winmd'));
+  final scope = MetadataStore.getWin32Scope();
   test('Can find a COM interface in winmd', () {
     final iNetwork = scope.typeDefs
         .firstWhere((typedef) => typedef.typeName.endsWith('INetwork'));
@@ -265,6 +263,18 @@ void main() {
       // expect(projector.isTypeAnEnum, equals(true));
       expect(projector.nativeType, equals('Uint32'));
       expect(projector.dartType, equals('int'));
+    });
+
+    test('Unidentified COM interfaces should be represented as Pointers', () {
+      final iSpellChecker = scope['Windows.Win32.Intl.ISpellCheckerFactory']!;
+      final createSpellChecker =
+          iSpellChecker.findMethod('CreateSpellChecker')!;
+      final type = createSpellChecker
+          .parameters.last.typeIdentifier; // ISpellChecker **value
+      final typeProjection = TypeProjector(type);
+
+      expect(typeProjection.nativeType, equals('Pointer<Pointer>'));
+      expect(typeProjection.dartType, equals('Pointer<Pointer>'));
     });
   });
 }

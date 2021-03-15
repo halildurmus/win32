@@ -9,7 +9,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import '_base.dart';
-import 'com/IMetaDataImport2.dart' as md;
+import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'module.dart';
 import 'parameter.dart';
@@ -62,14 +62,8 @@ class Method extends AttributeObject {
     }
   }
 
-  Method(
-      md.IMetaDataImport2 reader,
-      int token,
-      this.methodName,
-      this.methodFlags,
-      this.signatureBlob,
-      this.relativeVirtualAddress,
-      this.implFlags)
+  Method(IMetaDataImport2 reader, int token, this.methodName, this.methodFlags,
+      this.signatureBlob, this.relativeVirtualAddress, this.implFlags)
       : super(reader, token) {
     _parseMethodType();
     _parseParameterNames();
@@ -77,7 +71,7 @@ class Method extends AttributeObject {
     _parseParameterAttributes();
   }
 
-  factory Method.fromToken(md.IMetaDataImport2 reader, int token) {
+  factory Method.fromToken(IMetaDataImport2 reader, int token) {
     final pClass = calloc<Uint32>();
     final szMethod = calloc<Uint16>(256).cast<Utf16>();
     final pchMethod = calloc<Uint32>();

@@ -36,6 +36,14 @@ String convertToDartType(String ffiType) {
     return 'int';
   }
 
+  if (ffiType == 'Void') {
+    return 'void';
+  }
+
+  if (ffiType == '/* Boolean */ Uint8') {
+    return 'bool';
+  }
+
   return ffiType;
 }
 
@@ -319,6 +327,7 @@ const win32TypeMap = <String, String>{
   'ACTIVATEOPTIONS': 'Uint32',
   'CDCONTROLSTATEF': 'Uint32',
   'ConsoleMode': 'Uint32',
+  'CORRECTIVE_ACTION': 'Uint32',
   'DESKTOP_SLIDESHOW_DIRECTION': 'Uint32',
   'DESKTOP_SLIDESHOW_OPTIONS': 'Uint32',
   'DESKTOP_SLIDESHOW_STATE': 'Uint32',
@@ -355,6 +364,7 @@ const win32TypeMap = <String, String>{
 
   // Callbacks
   'DLGPROC': 'Pointer<NativeFunction<DlgProc>>',
+  'DRAWSTATEPROC': 'Pointer<NativeFunction<DrawStateProc>>',
   'WNDENUMPROC': 'Pointer<NativeFunction<EnumWindowsProc>>',
   'FONTENUMPROCW': 'Pointer<NativeFunction<EnumFontFamExProc>>',
   'ENUMRESNAMEPROCW': 'Pointer<NativeFunction<EnumResNameProc>>',
@@ -432,6 +442,7 @@ const win32TypeMap = <String, String>{
   'PCONSOLE_SCREEN_BUFFER_INFO': 'Pointer<CONSOLE_SCREEN_BUFFER_INFO>',
   'PCACTCTXW': 'Pointer<ACTCTX>',
   'PLASTINPUTINFO': 'Pointer<LASTINPUTINFO>',
+  'PVALENTW': 'Pointer<VALENT>',
 
   // Pointers to enums
   'LPMC_COLOR_TEMPERATURE': 'Pointer<Int32>',

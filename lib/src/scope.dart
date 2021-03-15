@@ -7,7 +7,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'com/IMetaDataImport2.dart' as md;
+import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'enumeration.dart';
 import 'module.dart';
@@ -18,7 +18,7 @@ import 'typedef.dart';
 /// Rather than being created directly, you should obtain a scope from a
 /// [MetadataStore], which caches scopes to avoid duplication.
 class Scope {
-  final md.IMetaDataImport2 reader;
+  final IMetaDataImport2 reader;
   final _typedefs = <TypeDef>[];
   final _modules = <Module>[];
   final _enums = <Enumeration>[];

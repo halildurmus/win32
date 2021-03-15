@@ -1,7 +1,5 @@
 @TestOn('windows')
 
-import 'dart:io';
-
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
@@ -25,8 +23,7 @@ void main() {
   });
 
   group('Projection', () {
-    final scope =
-        MetadataStore.getScopeForFile(File('bin/Windows.Win32.winmd'));
+    final scope = MetadataStore.getWin32Scope();
 
     test('ANSI string', () {
       final typedef = scope['Windows.Win32.KeyboardAndMouseInput.Apis']!;
@@ -138,6 +135,36 @@ void main() {
 
       expect(typeProjection.nativeType, equals('IntPtr'));
       expect(typeProjection.dartType, equals('int'));
+    });
+
+    test('Enumeration params are represented correctly', () {
+      final typedef = scope['Windows.Win32.Gdi.Apis']!;
+      final api = typedef.findMethod('CreateDIBitmap')!;
+      final type = api.parameters.last.typeIdentifier;
+      final typeProjection = TypeProjector(type);
+
+      expect(typeProjection.nativeType, equals('Uint32'));
+      expect(typeProjection.dartType, equals('int'));
+    });
+
+    test('Pointer<Enum> params are represented correctly', () {
+      final typedef = scope['Windows.Win32.SystemServices.Apis']!;
+      final api = typedef.findMethod('GetNamedPipeInfo')!;
+      final type = api.parameters[1].typeIdentifier;
+      final typeProjection = TypeProjector(type);
+
+      expect(typeProjection.nativeType, equals('Pointer<Uint32>'));
+      expect(typeProjection.dartType, equals('Pointer<Uint32>'));
+    });
+
+    test('Void returns are represented correctly', () {
+      final typedef = scope['Windows.Win32.Security.Apis']!;
+      final api = typedef.findMethod('CredFree')!;
+      final type = api.returnType.typeIdentifier;
+      final typeProjection = TypeProjector(type);
+
+      expect(typeProjection.nativeType, equals('Void'));
+      expect(typeProjection.dartType, equals('void'));
     });
   });
 }

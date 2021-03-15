@@ -1,42 +1,38 @@
+## 0.4.5
+
+- Bundle the latest win32metadata `.winmd` file with the package, and expose it
+  via the `MetadataStore.getWin32Scope()` method. This will ensure that this
+  library's projection APIs stay in sync with any changes to the metadata file
+  itself. You can still supply your own copy of `Windows.Win32.winmd` file and
+  load with the `MetadataStore.getScopeForFile()` call.
+- Project all enums as `Uint32`, for consistency.
+- Add more tests to ensure a couple of regressions never creep in again.
+
+## 0.4.4
+
+- Fix projection of Pointers to interfaces (thanks @bonukai).
+
+## 0.4.3
+
+- Add PVALENTW
+- Revert tip-of-tree .winmd
+
+## 0.4.2
+
+- Add more COM interface types
+
 ## 0.4.1
 
 - Support printing COM tests
 
 ## 0.4.0
 
-- Refactor type projection code
-- Refactor code, change enums to return `Uint32` by default.
-
-## 0.4.0-dev.7
-
-- Rework API for projection of metadata
-
-## 0.4.0-dev.6
-
-- Fix bug associated with vending winmd COM objects
-
-## 0.4.0-dev.5
-
-- Improve generation of Windows Runtime get properties
-
-## 0.4.0-dev.4
-
-- Improve generation of Windows Runtime types
-
-## 0.4.0-dev.3
-
-- Fix enumerations
-- Add more tests
-
-## 0.4.0-dev.2
-
-- Add more tests
-
-## 0.4.0-dev.1
-
 - Broad refactoring, focusing the core WinMD package on reading metadata and
   moving transforms to the projection/ folder. Also fix a memory leak on the
   enumerations.
+- Rework API for projection of metadata
+- Improve generation of Windows Runtime get properties and types
+- Add more tests
 
 ## 0.3.0-dev.2
 

@@ -40,34 +40,36 @@ void main() {
 Load all the methods from the GDI namespace and print out some metadata.
 
 ```dart
-import 'dart:io';
-
 import 'package:winmd/winmd.dart';
 
 void main() {
   // Load WinMD metadata for Win32, as produced by the following utility:
   // https://github.com/microsoft/win32metadata
-  final scope = MetadataStore.getScopeForFile(File('Windows.Win32.winmd'));
+  final scope = MetadataStore.getWin32Scope();
 
-  // Find the GDI API namesapce
-  final gdiApi =
-      scope.typeDefs.firstWhere((type) => type.typeName.endsWith('Gdi.Apis'));
+  // Find a namesapce
+  final namespace = scope['Windows.Win32.WindowsAndMessaging.Apis']!;
 
   // Sort the functions alphabetically
-  final sortedMethods = gdiApi.methods
+  final sortedMethods = namespace.methods
     ..sort((a, b) => a.methodName.compareTo(b.methodName));
 
   // Find a specific function
-  const funcName = 'AddFontResourceW';
+  const funcName = 'MessageBoxW';
   final method = sortedMethods.firstWhere((m) => m.methodName == funcName);
 
   // Print out some information about it
-  print('This method is token #${method.token}');
+  print('Win32 function $funcName [token #${method.token}]');
 
+  // Retrieve its parameters and project them into Dart FFI types
   final params = method.parameters
-      .map((param) => '${param.typeIdentifier.nativeType} ${param.name!}')
+      .map((param) =>
+          '${TypeProjector(param.typeIdentifier).nativeType} ${param.name}')
       .join(', ');
-  print('The parameters are:\n$params');
+  print('The parameters are:\n  $params');
+
+  final returnType = TypeProjector(method.returnType.typeIdentifier).nativeType;
+  print('It returns type: $returnType.');
 }
 ```
 

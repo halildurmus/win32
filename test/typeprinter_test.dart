@@ -12,19 +12,21 @@ void main() {
     final typeDef = MetadataStore.getMetadataForType(type)!;
     final dartClass = TypePrinter.printType(typeDef);
 
+    // File('test/goldens/IAsyncInfo.comparison').writeAsStringSync(dartClass);
     final golden = File('test/goldens/IAsyncInfo.golden').readAsStringSync();
     expect(dartClass, equalsIgnoringWhitespace(golden));
   });
 
   test('COM golden', () {
     const typeToGenerate = 'Windows.Win32.NetworkListManager.INetwork';
-    final scope =
-        MetadataStore.getScopeForFile(File('bin/Windows.Win32.winmd'));
+    final scope = MetadataStore.getWin32Scope();
     final typedef = scope.findTypeDef(typeToGenerate)!;
 
     final dartClass = TypePrinter.printType(typedef);
 
+    // File('test/goldens/INetwork.comparison').writeAsStringSync(dartClass);
     final golden = File('test/goldens/INetwork.golden').readAsStringSync();
+
     expect(dartClass, equalsIgnoringWhitespace(golden));
   });
 }
