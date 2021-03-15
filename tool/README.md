@@ -10,26 +10,18 @@ the form of an ECMA-335 specification file, generated from this repo:
 The metadata is extracted and parsed using the separate winmd package:
   <https://pub.dev/packages/winmd>
 
-The `.winmd` file supplied in the `tool\win32` directory is used to generate the
+The `.winmd` file supplied in the `tool\metadata` directory is used to generate the
 APIs.
 
 Not every API is projected.
 
-- For Win32 APIs, the JSON file in the same directory is used to determine which
-  APIs to project.
+- For Win32 APIs, the JSON file in the `manual_gen` directory is used to
+  determine which APIs to project.
 - For COM and WinRT APIs, the Dart files in the `metadata` directly explicitly
   name the types that should be projected.
 
 During the build process, you should call `generate.cmd` to instantiate these
 types and generate the classes from them.
-
-# Deployment tooling
-
-Documentation is stored in the `gh-pages` branch. I found a very useful Bash
-script online to deploy the documentation without requiring arcane git
-knowledge. To use this, run `dartdoc` to update the docs, and then call
-`deploy/deploy.sh` to update the branch. I use this utility from a macOS
-machine; I expect it would also work from a WSL 2 instance.
 
 # Other utilities
 

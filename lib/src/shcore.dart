@@ -32,7 +32,7 @@ final _shcore = DynamicLibrary.open('shcore.dll');
 int GetDpiForMonitor(
     int hmonitor, int dpiType, Pointer<Uint32> dpiX, Pointer<Uint32> dpiY) {
   final _GetDpiForMonitor = _shcore.lookupFunction<
-      Int32 Function(IntPtr hmonitor, Int32 dpiType, Pointer<Uint32> dpiX,
+      Int32 Function(IntPtr hmonitor, Uint32 dpiType, Pointer<Uint32> dpiX,
           Pointer<Uint32> dpiY),
       int Function(int hmonitor, int dpiType, Pointer<Uint32> dpiX,
           Pointer<Uint32> dpiY)>('GetDpiForMonitor');
@@ -48,11 +48,11 @@ int GetDpiForMonitor(
 /// );
 /// ```
 /// {@category shcore}
-int GetProcessDpiAwareness(int hprocess, Pointer<Int32> value) {
+int GetProcessDpiAwareness(int hprocess, Pointer<Uint32> value) {
   final _GetProcessDpiAwareness = _shcore.lookupFunction<
-      Int32 Function(IntPtr hprocess, Pointer<Int32> value),
+      Int32 Function(IntPtr hprocess, Pointer<Uint32> value),
       int Function(
-          int hprocess, Pointer<Int32> value)>('GetProcessDpiAwareness');
+          int hprocess, Pointer<Uint32> value)>('GetProcessDpiAwareness');
   return _GetProcessDpiAwareness(hprocess, value);
 }
 
@@ -68,7 +68,7 @@ int GetProcessDpiAwareness(int hprocess, Pointer<Int32> value) {
 /// {@category shcore}
 int SetProcessDpiAwareness(int value) {
   final _SetProcessDpiAwareness = _shcore.lookupFunction<
-      Int32 Function(Int32 value),
+      Int32 Function(Uint32 value),
       int Function(int value)>('SetProcessDpiAwareness');
   return _SetProcessDpiAwareness(value);
 }

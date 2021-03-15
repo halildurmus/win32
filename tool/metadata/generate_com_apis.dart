@@ -9,71 +9,89 @@ late final Scope scope;
 
 class COMType {
   final String typeName;
-  final int vTableStart;
   final bool generateClass;
 
-  const COMType(this.typeName,
-      {this.vTableStart = 0, this.generateClass = false});
+  const COMType(this.typeName, {this.generateClass = false});
 }
 
 const interfacesToGenerate = <COMType>[
+  COMType('Windows.Win32.Automation.IDispatch'),
+  COMType('Windows.Win32.Automation.IEnumVARIANT'),
+  COMType('Windows.Win32.Automation.IErrorInfo'),
+  COMType('Windows.Win32.Automation.ISupportErrorInfo'),
+  COMType('Windows.Win32.Com.IBindCtx'),
+  COMType('Windows.Win32.Com.IClassFactory'),
+  COMType('Windows.Win32.Com.IConnectionPoint'),
+  COMType('Windows.Win32.Com.IConnectionPointContainer'),
+  COMType('Windows.Win32.Com.IEnumMoniker'),
+  COMType('Windows.Win32.Com.IEnumString'),
+  COMType('Windows.Win32.Com.IMoniker'),
+  COMType('Windows.Win32.Com.IPersist'),
+  COMType('Windows.Win32.Com.IPersistStream'),
+  COMType('Windows.Win32.Com.IProvideClassInfo'),
+  COMType('Windows.Win32.Com.IRunningObjectTable'),
   COMType('Windows.Win32.Com.IUnknown'),
-  COMType('Windows.Win32.Shell.IApplicationActivationManager', vTableStart: 3),
-  COMType('Windows.Win32.Automation.IDispatch', vTableStart: 3),
-  COMType('Windows.Win32.Automation.IEnumVARIANT', vTableStart: 3),
-  COMType('Windows.Win32.Automation.IErrorInfo', vTableStart: 3),
-  COMType('Windows.Win32.Automation.ISupportErrorInfo', vTableStart: 3),
-  COMType('Windows.Win32.Com.IBindCtx', vTableStart: 3),
-  COMType('Windows.Win32.Com.IClassFactory', vTableStart: 3),
-  COMType('Windows.Win32.Com.IEnumMoniker', vTableStart: 3),
-  COMType('Windows.Win32.Com.IEnumString', vTableStart: 3),
-  COMType('Windows.Win32.Com.IMoniker', vTableStart: 8),
-  COMType('Windows.Win32.Com.IPersist', vTableStart: 3),
-  COMType('Windows.Win32.Com.IPersistStream', vTableStart: 4),
-  COMType('Windows.Win32.Com.IProvideClassInfo', vTableStart: 3),
-  COMType('Windows.Win32.Com.IRunningObjectTable', vTableStart: 3),
-  COMType('Windows.Win32.Com.IUnknown'),
-  COMType('Windows.Win32.NetworkListManager.IEnumNetworkConnections',
-      vTableStart: 7),
-  COMType('Windows.Win32.NetworkListManager.IEnumNetworks', vTableStart: 7),
-  COMType('Windows.Win32.NetworkListManager.INetwork', vTableStart: 7),
-  COMType('Windows.Win32.NetworkListManager.INetworkConnection',
-      vTableStart: 7),
+  COMType('Windows.Win32.Intl.IEnumSpellingError', generateClass: true),
+  COMType('Windows.Win32.Intl.ISpellChecker', generateClass: true),
+  COMType('Windows.Win32.Intl.ISpellCheckerChangedEventHandler',
+      generateClass: true),
+  COMType('Windows.Win32.Intl.ISpellCheckerFactory', generateClass: true),
+  COMType('Windows.Win32.Intl.ISpellingError', generateClass: true),
+  COMType('Windows.Win32.NetworkListManager.IEnumNetworkConnections'),
+  COMType('Windows.Win32.NetworkListManager.IEnumNetworks'),
+  COMType('Windows.Win32.NetworkListManager.INetwork'),
+  COMType('Windows.Win32.NetworkListManager.INetworkConnection'),
   COMType('Windows.Win32.NetworkListManager.INetworkListManager',
-      vTableStart: 7, generateClass: true),
+      generateClass: true),
+  COMType('Windows.Win32.NetworkListManager.INetworkListManagerEvents'),
   COMType('Windows.Win32.Shell.IApplicationActivationManager',
-      vTableStart: 3, generateClass: true),
-  COMType('Windows.Win32.Shell.IDesktopWallpaper',
-      vTableStart: 3, generateClass: true),
-  COMType('Windows.Win32.Shell.IFileDialog', vTableStart: 4),
-  COMType('Windows.Win32.Shell.IFileDialog2', vTableStart: 27),
-  COMType('Windows.Win32.Shell.IFileDialogCustomize', vTableStart: 3),
-  COMType('Windows.Win32.Shell.IFileIsInUse', vTableStart: 3),
-  COMType('Windows.Win32.Shell.IFileOpenDialog',
-      vTableStart: 27, generateClass: true),
-  COMType('Windows.Win32.Shell.IFileSaveDialog',
-      vTableStart: 27, generateClass: true),
-  COMType('Windows.Win32.Shell.IKnownFolder', vTableStart: 3),
-  COMType('Windows.Win32.Shell.IKnownFolderManager',
-      vTableStart: 3, generateClass: true),
-  COMType('Windows.Win32.Shell.IModalWindow', vTableStart: 3),
-  COMType('Windows.Win32.Shell.IShellItem', vTableStart: 3),
-  COMType('Windows.Win32.Shell.IShellItem2', vTableStart: 8),
-  COMType('Windows.Win32.Shell.IShellItemArray', vTableStart: 3),
-  COMType('Windows.Win32.Shell.IShellItemFilter', vTableStart: 3),
-  COMType('Windows.Win32.StructuredStorage.ISequentialStream', vTableStart: 3),
-  COMType('Windows.Win32.StructuredStorage.IStream', vTableStart: 5),
-  COMType('Windows.Win32.WinRT.IInspectable', vTableStart: 3),
-  COMType('Windows.Win32.Wmi.IEnumWbemClassObject', vTableStart: 3),
-  COMType('Windows.Win32.Wmi.IWbemClassObject', vTableStart: 3),
-  COMType('Windows.Win32.Wmi.IWbemContext', vTableStart: 3),
-  COMType('Windows.Win32.Wmi.IWbemLocator',
-      vTableStart: 3, generateClass: true),
-  COMType('Windows.Win32.Wmi.IWbemServices', vTableStart: 3),
+      generateClass: true),
+  COMType('Windows.Win32.Shell.IDesktopWallpaper', generateClass: true),
+  COMType('Windows.Win32.Shell.IEnumIDList'),
+  COMType('Windows.Win32.Shell.IFileDialog'),
+  COMType('Windows.Win32.Shell.IFileDialog2'),
+  COMType('Windows.Win32.Shell.IFileDialogCustomize'),
+  COMType('Windows.Win32.Shell.IFileIsInUse'),
+  COMType('Windows.Win32.Shell.IFileOpenDialog', generateClass: true),
+  COMType('Windows.Win32.Shell.IFileSaveDialog', generateClass: true),
+  COMType('Windows.Win32.Shell.IKnownFolder'),
+  COMType('Windows.Win32.Shell.IKnownFolderManager', generateClass: true),
+  COMType('Windows.Win32.Shell.IModalWindow'),
+  COMType('Windows.Win32.Shell.IShellFolder'),
+  COMType('Windows.Win32.Shell.IShellItem'),
+  COMType('Windows.Win32.Shell.IShellItem2'),
+  COMType('Windows.Win32.Shell.IShellItemArray'),
+  COMType('Windows.Win32.Shell.IShellItemFilter'),
+  COMType('Windows.Win32.StructuredStorage.ISequentialStream'),
+  COMType('Windows.Win32.StructuredStorage.IStream'),
+  COMType('Windows.Win32.WinRT.IInspectable'),
+  COMType('Windows.Win32.Wmi.IEnumWbemClassObject'),
+  COMType('Windows.Win32.Wmi.IWbemClassObject'),
+  COMType('Windows.Win32.Wmi.IWbemContext'),
+  COMType('Windows.Win32.Wmi.IWbemLocator', generateClass: true),
+  COMType('Windows.Win32.Wmi.IWbemServices'),
 ];
 
+int vTableStart(TypeDef? type) {
+  if (type == null) {
+    return 0;
+  }
+
+  if (type.isInterface && type.interfaces.isNotEmpty) {
+    var sum = 0;
+
+    for (final interface in type.interfaces) {
+      sum += interface.methods.length + vTableStart(interface);
+    }
+
+    return sum;
+  }
+
+  return 0;
+}
+
 void main(List<String> args) {
-  scope = MetadataStore.getScopeForFile(File('tool/win32/Windows.Win32.winmd'));
+  scope = MetadataStore.getWin32Scope();
 
   final parser = ArgParser()
     ..addOption('classDirectory', defaultsTo: 'lib/src/generated')
@@ -102,7 +120,7 @@ void main(List<String> args) {
 
     final classProjection = ClassProjector(mdTypeDef).projection
       ..inherits = parentInterface
-      ..vtableStart = type.vTableStart
+      ..vtableStart = vTableStart(mdTypeDef)
       ..sourceType = SourceType.com
       ..generateClass = type.generateClass
       ..clsid = clsid

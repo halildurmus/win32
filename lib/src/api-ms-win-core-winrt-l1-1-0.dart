@@ -47,7 +47,7 @@ int RoActivateInstance(int activatableClassId, Pointer<Pointer> instance) {
 /// {@category winrt}
 int RoInitialize(int initType) {
   final _RoInitialize = _api_ms_win_core_winrt_l1_1_0.lookupFunction<
-      Int32 Function(Int32 initType),
+      Int32 Function(Uint32 initType),
       int Function(int initType)>('RoInitialize');
   return _RoInitialize(initType);
 }
