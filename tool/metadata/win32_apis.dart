@@ -8,7 +8,7 @@ import 'dart:io';
 
 import 'package:winmd/winmd.dart';
 
-import '../win32/function.dart';
+import '../manual_gen/function.dart';
 
 class Win32Prototype {
   final String _nameWithoutEncoding;
