@@ -90,6 +90,7 @@ void generateFfiFile(String library, TypeDef typedef) {
 
   final filteredFunctionList = typedef.methods
       .where((method) => method.module.name == library)
+      .where((method) => !method.methodName.endsWith('A'))
       .toList()
         ..sort((a, b) => a.methodName.compareTo(b.methodName));
 
@@ -130,8 +131,7 @@ final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ?
 }
 
 void main() {
-  final scope =
-      MetadataStore.getScopeForFile(File('tool/win32/Windows.Win32.winmd'));
+  final scope = MetadataStore.getWin32Scope();
 
   // Start with the GDI namespace
   final gdi = scope.typeDefs
