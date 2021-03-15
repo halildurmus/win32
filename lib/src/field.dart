@@ -3,30 +3,41 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'dart:ffi';
+import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import '_base.dart';
-import 'com/IMetaDataImport2.dart' as md;
+import 'com/IMetaDataImport2.dart';
 import 'typeidentifier.dart';
+import 'utils.dart';
 
 class Field extends AttributeObject {
   final String name;
   final int value;
   final TypeIdentifier typeIdentifier;
   final int corType;
+  final int fieldAttribute;
+  final Uint8List signatureBlob;
 
-  Field(md.IMetaDataImport2 reader, int token, this.name, this.value,
-      this.typeIdentifier, this.corType)
+  Field(
+      IMetaDataImport2 reader,
+      int token,
+      this.name,
+      this.value,
+      this.typeIdentifier,
+      this.corType,
+      this.fieldAttribute,
+      this.signatureBlob)
       : super(reader, token);
 
-  factory Field.fromToken(md.IMetaDataImport2 reader, int token) {
+  factory Field.fromToken(IMetaDataImport2 reader, int token) {
     final ptkTypeDef = calloc<Uint32>();
     final szField = calloc<Uint16>(256).cast<Utf16>();
     final pchField = calloc<Uint32>();
     final pdwAttr = calloc<Uint32>();
-    final ppvSigBlob = calloc<Uint8>();
+    final ppvSigBlob = calloc<Pointer<Uint8>>();
     final pcbSigBlob = calloc<Uint32>();
     final pdwCPlusTypeFlag = calloc<Uint32>();
     final ppValue = calloc<Pointer<Uint32>>();
@@ -40,7 +51,7 @@ class Field extends AttributeObject {
           256,
           pchField,
           pdwAttr,
-          ppvSigBlob,
+          ppvSigBlob.cast(),
           pcbSigBlob,
           pdwCPlusTypeFlag,
           ppValue.cast(),
@@ -49,13 +60,21 @@ class Field extends AttributeObject {
       if (SUCCEEDED(hr)) {
         final fieldName = szField.toDartString();
         final ctype = pdwCPlusTypeFlag.value;
-        if (ppValue.value != nullptr) {
-          return Field(reader, ptkTypeDef.value, fieldName, ppValue.value.value,
-              TypeIdentifier.fromValue(pdwCPlusTypeFlag.value), ctype);
-        } else {
-          return Field(reader, ptkTypeDef.value, fieldName, 0,
-              TypeIdentifier.fromValue(pdwCPlusTypeFlag.value), ctype);
-        }
+
+        // The first entry of the signature is its FieldAttribute (compare
+        // against the CorFieldAttr enumeration), and then follows a type
+        // identifier.
+        final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
+        final typeTuple = parseTypeFromSignature(signature.sublist(1), reader);
+        return Field(
+            reader,
+            ptkTypeDef.value,
+            fieldName,
+            ppValue.value != nullptr ? ppValue.value.value : 0,
+            typeTuple.typeIdentifier,
+            ctype,
+            pdwAttr.value,
+            signature);
       } else {
         throw WindowsException(hr);
       }

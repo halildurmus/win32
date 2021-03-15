@@ -81,6 +81,33 @@ class CorParamAttr {
   static const pdUnused = 0xcfe0;
 }
 
+/// Contains values that describe metadata about a field.
+class CorFieldAttr {
+  static const fdFieldAccessMask = 0x0007;
+  static const fdPrivateScope = 0x0000;
+  static const fdPrivate = 0x0001;
+  static const fdFamANDAssem = 0x0002;
+  static const fdAssembly = 0x0003;
+  static const fdFamily = 0x0004;
+  static const fdFamORAssem = 0x0005;
+  static const fdPublic = 0x0006;
+
+  static const fdStatic = 0x0010;
+  static const fdInitOnly = 0x0020;
+  static const fdLiteral = 0x0040;
+  static const fdNotSerialized = 0x0080;
+
+  static const fdSpecialName = 0x0200;
+
+  static const fdPinvokeImpl = 0x2000;
+
+  static const fdReservedMask = 0x9500;
+  static const fdRTSpecialName = 0x0400;
+  static const fdHasFieldMarshal = 0x1000;
+  static const fdHasDefault = 0x8000;
+  static const fdHasFieldRVA = 0x0100;
+}
+
 /// Indicates the type of a metadata token.
 class CorTokenType {
   static const mdtModule = 0x00000000;

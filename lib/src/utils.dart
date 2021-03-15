@@ -6,11 +6,14 @@
 
 import 'dart:ffi';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
+import 'typedef.dart';
 import 'typeidentifier.dart';
 
 class WinmdException implements Exception {
@@ -147,4 +150,75 @@ int unencodeDefRefSpecToken(int encoded) {
   } else {
     return 0;
   }
+}
+
+void flattenTypeArgs(TypeIdentifier type) {
+  // TODO: Need to walk deeper in case of triple dereference
+  if (type.typeArgs.first.typeArgs.isNotEmpty) {
+    type.typeArgs.add(type.typeArgs.first.typeArgs.first);
+    type.typeArgs.first.typeArgs.remove(0);
+  }
+}
+
+/// Parse a single type from the signature blob.
+///
+/// Returns a [TypeTuple] containing the runtime type and the number of bytes
+/// consumed.
+///
+/// Details on the blob format can be found at §II.23.1.16 and §II.23.2 of
+/// ECMA-335.
+TypeTuple parseTypeFromSignature(
+    Uint8List signatureBlob, IMetaDataImport2 reader) {
+  final paramType = signatureBlob.first;
+  final runtimeType = TypeIdentifier.fromValue(paramType);
+  var dataLength = 0;
+
+  switch (runtimeType.corType) {
+    case CorElementType.ELEMENT_TYPE_VALUETYPE:
+    case CorElementType.ELEMENT_TYPE_CLASS:
+      final uncompressed = corSigUncompressData(signatureBlob.sublist(1));
+      final token = unencodeDefRefSpecToken(uncompressed.data);
+      final tokenAsType = TypeDef.fromToken(reader, token);
+
+      dataLength = uncompressed.dataLength + 1;
+      runtimeType.name = tokenAsType.typeName;
+      runtimeType.type = tokenAsType;
+      break;
+
+    case CorElementType.ELEMENT_TYPE_BYREF:
+      if (signatureBlob[1] == 0x1D) {
+        // array
+        runtimeType.corType = CorElementType.ELEMENT_TYPE_ARRAY;
+      }
+      break;
+
+    case CorElementType.ELEMENT_TYPE_PTR:
+      final ptrTuple = parseTypeFromSignature(signatureBlob.sublist(1), reader);
+      dataLength = 1 + ptrTuple.offsetLength;
+      runtimeType.typeArgs.add(ptrTuple.typeIdentifier);
+      flattenTypeArgs(runtimeType);
+      break;
+
+    case CorElementType.ELEMENT_TYPE_GENERICINST:
+      final classTuple =
+          parseTypeFromSignature(signatureBlob.sublist(1), reader);
+      runtimeType.name = classTuple.typeIdentifier.name;
+      final argsCount =
+          signatureBlob[1 + classTuple.offsetLength]; // GENERICINST + class
+      dataLength =
+          classTuple.offsetLength + 2; // GENERICINST + class + argsCount
+      for (var idx = 0; idx < argsCount; idx++) {
+        final arg =
+            parseTypeFromSignature(signatureBlob.sublist(dataLength), reader);
+        dataLength += arg.offsetLength;
+        runtimeType.typeArgs.add(arg.typeIdentifier);
+      }
+      break;
+
+    default:
+      dataLength = 1;
+      runtimeType.name = runtimeType.toString();
+  }
+
+  return TypeTuple(runtimeType, dataLength);
 }
