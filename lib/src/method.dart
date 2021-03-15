@@ -13,7 +13,6 @@ import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'module.dart';
 import 'parameter.dart';
-import 'typedef.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
 
@@ -120,75 +119,6 @@ class Method extends AttributeObject {
     }
   }
 
-  /// Parse a single type from the signature blob.
-  ///
-  /// Returns a [TypeTuple] containing the runtime type and the number of bytes
-  /// consumed.
-  ///
-  /// Details on the blob format can be found at §II.23.1.16 and §II.23.2 of
-  /// ECMA-335.
-  TypeTuple _parseTypeFromSignature(Uint8List signatureBlob) {
-    final paramType = signatureBlob.first;
-    final runtimeType = TypeIdentifier.fromValue(paramType);
-    var dataLength = 0;
-
-    switch (runtimeType.corType) {
-      case CorElementType.ELEMENT_TYPE_VALUETYPE:
-      case CorElementType.ELEMENT_TYPE_CLASS:
-        final uncompressed = corSigUncompressData(signatureBlob.sublist(1));
-        final token = unencodeDefRefSpecToken(uncompressed.data);
-        final tokenAsType = TypeDef.fromToken(reader, token);
-
-        dataLength = uncompressed.dataLength + 1;
-        runtimeType.name = tokenAsType.typeName;
-        runtimeType.type = tokenAsType;
-        break;
-
-      case CorElementType.ELEMENT_TYPE_BYREF:
-        if (signatureBlob[1] == 0x1D) {
-          // array
-          runtimeType.corType = CorElementType.ELEMENT_TYPE_ARRAY;
-        }
-        break;
-
-      case CorElementType.ELEMENT_TYPE_PTR:
-        final ptrTuple = _parseTypeFromSignature(signatureBlob.sublist(1));
-        dataLength = 1 + ptrTuple.offsetLength;
-        runtimeType.typeArgs.add(ptrTuple.typeIdentifier);
-        flattenTypeArgs(runtimeType);
-        break;
-
-      case CorElementType.ELEMENT_TYPE_GENERICINST:
-        final classTuple = _parseTypeFromSignature(signatureBlob.sublist(1));
-        runtimeType.name = classTuple.typeIdentifier.name;
-        final argsCount =
-            signatureBlob[1 + classTuple.offsetLength]; // GENERICINST + class
-        dataLength =
-            classTuple.offsetLength + 2; // GENERICINST + class + argsCount
-        for (var idx = 0; idx < argsCount; idx++) {
-          final arg =
-              _parseTypeFromSignature(signatureBlob.sublist(dataLength));
-          dataLength += arg.offsetLength;
-          runtimeType.typeArgs.add(arg.typeIdentifier);
-        }
-        break;
-
-      default:
-        dataLength = 1;
-        runtimeType.name = runtimeType.toString();
-    }
-
-    return TypeTuple(runtimeType, dataLength);
-  }
-
-  void flattenTypeArgs(TypeIdentifier type) {
-    // TODO: Need to walk deeper in case of triple dereference
-    if (type.typeArgs.first.typeArgs.isNotEmpty) {
-      type.typeArgs.add(type.typeArgs.first.typeArgs.first);
-      type.typeArgs.first.typeArgs.remove(0);
-    }
-  }
-
   String get callingConvention {
     final retVal = StringBuffer();
     final cc = signatureBlob[0];
@@ -222,7 +152,8 @@ class Method extends AttributeObject {
     if (isGetProperty) {
       // Type should begin at index 2
       final typeIdentifier =
-          _parseTypeFromSignature(signatureBlob.sublist(2)).typeIdentifier;
+          parseTypeFromSignature(signatureBlob.sublist(2), reader)
+              .typeIdentifier;
       returnType = Parameter.fromTypeIdentifier(reader, typeIdentifier);
     } else if (isSetProperty) {
       // set properties don't have a return type
@@ -250,14 +181,14 @@ class Method extends AttributeObject {
       returnType = parameters.first;
       parameters = parameters.sublist(1);
       final returnTypeTuple =
-          _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
+          parseTypeFromSignature(signatureBlob.sublist(blobPtr), reader);
       returnType.typeIdentifier = returnTypeTuple.typeIdentifier;
       blobPtr += returnTypeTuple.offsetLength;
     } else {
       // In Win32 metadata, EnumParams does not return a zero-th parameter even
       // if there is a return type. So we create a new returnType for it.
       final returnTypeTuple =
-          _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
+          parseTypeFromSignature(signatureBlob.sublist(blobPtr), reader);
       returnType =
           Parameter.fromTypeIdentifier(reader, returnTypeTuple.typeIdentifier);
       blobPtr += returnTypeTuple.offsetLength;
@@ -267,7 +198,7 @@ class Method extends AttributeObject {
     // type to the corresponding parameter.
     while (paramsIndex < parameters.length) {
       final runtimeType =
-          _parseTypeFromSignature(signatureBlob.sublist(blobPtr));
+          parseTypeFromSignature(signatureBlob.sublist(blobPtr), reader);
       blobPtr += runtimeType.offsetLength;
 
       if (runtimeType.typeIdentifier.corType ==
@@ -327,7 +258,7 @@ class Method extends AttributeObject {
   // value. We're not that clever yet, so we project it in its raw state, which
   // means a little work here to ensure that it comes out right.
   int _parseArray(Uint8List sublist, int paramsIndex) {
-    final typeTuple = _parseTypeFromSignature(sublist.sublist(2));
+    final typeTuple = parseTypeFromSignature(sublist.sublist(2), reader);
 
     parameters[paramsIndex].name = '__valueSize';
     parameters[paramsIndex].typeIdentifier.corType =

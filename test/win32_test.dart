@@ -318,7 +318,7 @@ void main() {
     final ropCode =
         scope.enums.firstWhere((en) => en.typeName.endsWith('ROP_CODE'));
 
-    expect(ropCode.fields['SRCCOPY'], equals(0x00CC0020));
+    expect(ropCode.findField('SRCCOPY')?.value, equals(0x00CC0020));
   });
 
   test('Enumerations are typed appropriately in functions', () {

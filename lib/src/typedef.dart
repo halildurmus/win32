@@ -10,6 +10,7 @@ import 'package:win32/win32.dart';
 import '_base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
+import 'field.dart';
 import 'metadatastore.dart';
 import 'method.dart';
 import 'utils.dart';
@@ -180,6 +181,30 @@ class TypeDef extends AttributeObject {
     }
   }
 
+  List<Field> get fields {
+    final fields = <Field>[];
+
+    final phEnum = calloc<IntPtr>();
+    final rgFields = calloc<Uint32>();
+    final pcTokens = calloc<Uint32>();
+
+    try {
+      var hr = reader.EnumFields(phEnum, token, rgFields, 1, pcTokens);
+      while (hr == S_OK) {
+        final token = rgFields.value;
+
+        fields.add(Field.fromToken(reader, token));
+        hr = reader.EnumFields(phEnum, token, rgFields, 1, pcTokens);
+      }
+      return fields;
+    } finally {
+      reader.CloseEnum(phEnum.value);
+      calloc.free(phEnum);
+      calloc.free(rgFields);
+      calloc.free(pcTokens);
+    }
+  }
+
   /// Enumerate all methods contained within this type.
   List<Method> get methods {
     final methods = <Method>[];
@@ -202,6 +227,14 @@ class TypeDef extends AttributeObject {
       calloc.free(phEnum);
       calloc.free(mdMethodDef);
       calloc.free(pcTokens);
+    }
+  }
+
+  Field? findField(String fieldName) {
+    try {
+      return fields.firstWhere((field) => field.name == fieldName);
+    } on StateError {
+      return null;
     }
   }
 
