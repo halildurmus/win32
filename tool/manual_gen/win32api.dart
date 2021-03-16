@@ -47,7 +47,7 @@ class Win32API {
             Win32Function.fromJson(decoded[api] as Map<String, dynamic>);
       }
       if (structFile != null) {
-        final file = File(apiFile);
+        final file = File(structFile);
         final fileContents = file.readAsStringSync().replaceAll(r'\n', r'\\n');
 
         final decoded = json.decode(fileContents) as Map<String, dynamic>;
