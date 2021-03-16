@@ -46,7 +46,7 @@ int BluetoothAuthenticateDeviceEx(
           IntPtr hRadioIn,
           Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
           Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
-          Int32 authenticationRequirement),
+          Uint32 authenticationRequirement),
       int Function(
           int hwndParentIn,
           int hRadioIn,
