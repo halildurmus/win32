@@ -94,7 +94,7 @@ void main(List<String> args) {
   scope = MetadataStore.getWin32Scope();
 
   final parser = ArgParser()
-    ..addOption('classDirectory', defaultsTo: 'lib/src/generated')
+    ..addOption('classDirectory', defaultsTo: 'lib/src/com')
     ..addOption('testDirectory', defaultsTo: 'test/com');
 
   final argResults = parser.parse(args);
