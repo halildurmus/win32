@@ -10,6 +10,7 @@ import '../typedef.dart';
 
 import 'classprojector.dart';
 import 'projections.dart';
+import 'typeprojector.dart';
 
 class TypePrinter {
   static String headerAsString(ClassProjection type) {
@@ -27,12 +28,13 @@ import 'package:ffi/ffi.dart';
 ''');
 
     buffer.writeln('''
-import '../com/combase.dart';
+import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../structs.g.dart';
 import '../utils.dart';
 ''');
     if (type.sourceType == SourceType.winrt) {
@@ -313,6 +315,25 @@ void main() {
   free(ptr);
   }''');
 
+    return buffer.toString();
+  }
+
+  static String printStruct(TypeDef typedef, String structName) {
+    final buffer = StringBuffer();
+
+    buffer.writeln('class $structName extends Struct {');
+
+    for (final field in typedef.fields) {
+      final nativeType = TypeProjector(field.typeIdentifier).nativeType;
+      final dartType = TypeProjector(field.typeIdentifier).dartType;
+
+      if (dartType == 'int') {
+        buffer.writeln('  @$nativeType() external $dartType ${field.name};');
+      } else {
+        buffer.writeln('  external $dartType ${field.name};');
+      }
+    }
+    buffer.writeln('}\n');
     return buffer.toString();
   }
 
