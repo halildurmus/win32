@@ -10,6 +10,7 @@ import 'dart:io';
 import 'package:winmd/winmd.dart';
 
 import '../manual_gen/win32api.dart';
+import 'generate_win32.dart';
 
 const structFileHeader = '''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
@@ -68,6 +69,11 @@ int generateStructs(Win32API win32) {
 
   for (final struct in win32.structs.keys) {
     final typedef = scope[win32.structs[struct]!.namespace]!;
+
+    writer.writeStringSync(wrapCommentText(win32.structs[struct]!.comment));
+
+    writer.writeStringSync('///\n/// {@category Struct}\n');
+
     writer.writeStringSync(TypePrinter.printStruct(typedef));
     structsGenerated++;
   }
