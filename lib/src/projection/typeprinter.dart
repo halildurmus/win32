@@ -28,7 +28,7 @@ import 'package:ffi/ffi.dart';
 ''');
 
     buffer.writeln('''
-import '../com/combase.dart';
+import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
 import '../macros.dart';
@@ -317,16 +317,20 @@ void main() {
     return buffer.toString();
   }
 
-  static String printStruct(TypeDef typedef) {
+  static String printStruct(TypeDef typedef, String structName) {
     final buffer = StringBuffer();
 
-    buffer
-        .writeln('class ${typedef.typeName.split('.').last} extends Struct {');
+    buffer.writeln('class $structName extends Struct {');
 
     for (final field in typedef.fields) {
       final nativeType = TypeProjector(field.typeIdentifier).nativeType;
       final dartType = TypeProjector(field.typeIdentifier).dartType;
-      buffer.writeln('  @$nativeType() external $dartType ${field.name};');
+
+      if (dartType == 'int') {
+        buffer.writeln('  @$nativeType() external $dartType ${field.name};');
+      } else {
+        buffer.writeln('  external $dartType ${field.name};');
+      }
     }
     buffer.writeln('}\n');
     return buffer.toString();
