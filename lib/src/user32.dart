@@ -15,6 +15,7 @@ import 'package:ffi/ffi.dart';
 import 'callbacks.dart';
 import 'combase.dart';
 import 'structs.dart';
+import 'structs.g.dart';
 
 final _user32 = DynamicLibrary.open('user32.dll');
 

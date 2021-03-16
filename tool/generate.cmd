@@ -33,6 +33,9 @@ call dart format %~dp0..\test\com
 echo.
 
 echo Running tests
+if "%1"=="--no-test" goto end
+
+:dart_test
 call dart test
 
 :end

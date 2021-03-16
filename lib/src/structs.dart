@@ -9,7 +9,8 @@
 // -----------------------------------------------------------------------------
 // Linter exceptions
 // -----------------------------------------------------------------------------
-// ignore_for_file: camel_case_types ignore_for_file: camel_case_extensions
+// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_extensions
 //
 // Why? The linter defaults to throw a warning for types not named as camel
 // case. We deliberately break this convention to match the Win32 underlying
@@ -42,6 +43,7 @@ import 'com/IDispatch.dart';
 import 'com/IUnknown.dart';
 import 'combase.dart';
 import 'oleaut32.dart';
+import 'structs.g.dart';
 
 // typedef struct tagWNDCLASSW {
 //   UINT      style;
@@ -144,132 +146,6 @@ class SYSTEM_INFO extends Struct {
   external int wProcessorRevision;
 }
 
-// typedef struct _PROCESS_INFORMATION {
-//   HANDLE hProcess;
-//   HANDLE hThread;
-//   DWORD  dwProcessId;
-//   DWORD  dwThreadId;
-// } PROCESS_INFORMATION, *PPROCESS_INFORMATION, *LPPROCESS_INFORMATION;
-
-/// Contains information about a newly created process and its primary thread.
-/// It is used with the CreateProcess, CreateProcessAsUser,
-/// CreateProcessWithLogonW, or CreateProcessWithTokenW function.
-///
-/// {@category Struct}
-class PROCESS_INFORMATION extends Struct {
-  @IntPtr()
-  external int hProcess;
-  @IntPtr()
-  external int hThread;
-  @Uint32()
-  external int dwProcessId;
-  @Uint32()
-  external int dwThreadId;
-}
-
-// typedef struct _STARTUPINFOW {
-//   DWORD  cb;
-//   LPWSTR lpReserved;
-//   LPWSTR lpDesktop;
-//   LPWSTR lpTitle;
-//   DWORD  dwX;
-//   DWORD  dwY;
-//   DWORD  dwXSize;
-//   DWORD  dwYSize;
-//   DWORD  dwXCountChars;
-//   DWORD  dwYCountChars;
-//   DWORD  dwFillAttribute;
-//   DWORD  dwFlags;
-//   WORD   wShowWindow;
-//   WORD   cbReserved2;
-//   LPBYTE lpReserved2;
-//   HANDLE hStdInput;
-//   HANDLE hStdOutput;
-//   HANDLE hStdError;
-// } STARTUPINFOW, *LPSTARTUPINFOW;
-
-/// Specifies the window station, desktop, standard handles, and appearance of
-/// the main window for a process at creation time.
-///
-/// {@category Struct}
-class STARTUPINFO extends Struct {
-  @Uint32()
-  external int cb;
-  external Pointer<Utf16> lpReserved;
-  external Pointer<Utf16> lpDesktop;
-  external Pointer<Utf16> lpTitle;
-  @Uint32()
-  external int dwX;
-  @Uint32()
-  external int dwY;
-  @Uint32()
-  external int dwXSize;
-  @Uint32()
-  external int dwYSize;
-  @Uint32()
-  external int dwXCountChars;
-  @Uint32()
-  external int dwYCountChars;
-  @Uint32()
-  external int dwFillAttribute;
-  @Uint32()
-  external int dwFlags;
-  @Uint16()
-  external int wShowWindow;
-  @Uint16()
-  external int cbReserved2;
-  external Pointer<Uint8> lpReserved2;
-  @IntPtr()
-  external int hStdInput;
-  @IntPtr()
-  external int hStdOutput;
-  @IntPtr()
-  external int hStdError;
-}
-
-// typedef struct tagBIND_OPTS
-//     {
-//     DWORD cbStruct;
-//     DWORD grfFlags;
-//     DWORD grfMode;
-//     DWORD dwTickCountDeadline;
-//     } 	BIND_OPTS;
-
-/// Contains parameters used during a moniker-binding operation.
-///
-/// {@Category Struct}
-class BIND_OPTS extends Struct {
-  @Uint32()
-  external int cbStruct;
-  @Uint32()
-  external int grfFlags;
-  @Uint32()
-  external int grfMode;
-  @Uint32()
-  external int dwTickCountDeadline;
-}
-
-// typedef struct value_entW {
-//   LPWSTR    ve_valuename;
-//   DWORD     ve_valuelen;
-//   DWORD_PTR ve_valueptr;
-//   DWORD     ve_type;
-// } VALENTW, *PVALENTW;
-
-/// Contains information about a registry value. The RegQueryMultipleValues
-/// function uses this structure.
-///
-/// {@category Struct}
-class VALENT extends Struct {
-  external Pointer<Utf16> ve_valuename;
-  @Uint32()
-  external int ve_valuelen;
-  @IntPtr()
-  external int ve_valueptr;
-  @Uint32()
-  external int ve_type;
-}
-
 // typedef struct {
 //   GUID  PowerSetting;
 //   DWORD DataLength;
@@ -285,33 +161,6 @@ class POWERBROADCAST_SETTING extends Struct {
   external int DataLength;
   @Uint8()
   external int Data;
-}
-
-// typedef struct _SYSTEM_POWER_STATUS {
-//   BYTE  ACLineStatus;
-//   BYTE  BatteryFlag;
-//   BYTE  BatteryLifePercent;
-//   BYTE  SystemStatusFlag;
-//   DWORD BatteryLifeTime;
-//   DWORD BatteryFullLifeTime;
-// } SYSTEM_POWER_STATUS, *LPSYSTEM_POWER_STATUS;
-
-/// Contains information about the power status of the system.
-///
-/// {@category Struct}
-class SYSTEM_POWER_STATUS extends Struct {
-  @Uint8()
-  external int ACLineStatus;
-  @Uint8()
-  external int BatteryFlag;
-  @Uint8()
-  external int BatteryLifePercent;
-  @Uint8()
-  external int SystemStatusFlag;
-  @Uint32()
-  external int BatteryLifeTime;
-  @Uint32()
-  external int BatteryFullLifeTime;
 }
 
 // typedef struct {
@@ -385,31 +234,6 @@ class STARTUPINFOEX extends Struct {
   external Pointer lpAttributeList;
 }
 
-// typedef struct _SECURITY_ATTRIBUTES {
-//   DWORD  nLength;
-//   LPVOID lpSecurityDescriptor;
-//   BOOL   bInheritHandle;
-// } SECURITY_ATTRIBUTES, *PSECURITY_ATTRIBUTES, *LPSECURITY_ATTRIBUTES;
-
-/// The SECURITY_ATTRIBUTES structure contains the security descriptor for an
-/// object and specifies whether the handle retrieved by specifying this
-/// structure is inheritable.
-///
-/// This structure provides security settings for objects created by various
-/// functions, such as CreateFile, CreatePipe, CreateProcess, RegCreateKeyEx, or
-/// RegSaveKeyEx.
-///
-/// {@category Struct}
-class SECURITY_ATTRIBUTES extends Struct {
-  @Uint32()
-  external int nLength;
-
-  external Pointer<Void> lpSecurityDescriptor;
-
-  @Int32()
-  external int bInheritHandle;
-}
-
 // typedef struct _SECURITY_DESCRIPTOR {
 //   BYTE                        Revision;
 //   BYTE                        Sbz1;
@@ -439,30 +263,6 @@ class SECURITY_DESCRIPTOR extends Struct {
   external Pointer<IntPtr> Group;
   external Pointer<IntPtr> Sacl;
   external Pointer<IntPtr> Dacl;
-}
-
-// typedef struct tagSOLE_AUTHENTICATION_SERVICE {
-//   DWORD   dwAuthnSvc;
-//   DWORD   dwAuthzSvc;
-//   OLECHAR *pPrincipalName;
-//   HRESULT hr;
-// } SOLE_AUTHENTICATION_SERVICE;
-
-/// Identifies an authentication service that a server is willing to use to
-/// communicate to a client.
-///
-/// {@category Struct}
-class SOLE_AUTHENTICATION_SERVICE extends Struct {
-  @Uint32()
-  external int dwAuthnSvc;
-
-  @Uint32()
-  external int dwAuthzSvc;
-
-  external Pointer<Utf16> pPrincipalName;
-
-  @Int32()
-  external int hr;
 }
 
 // struct tagVARIANT
@@ -641,48 +441,6 @@ class LASTINPUTINFO extends Struct {
   external int cbSize;
   @Uint32()
   external int dwTime;
-}
-
-// typedef struct tagMOUSEMOVEPOINT {
-//   int       x;
-//   int       y;
-//   DWORD     time;
-//   ULONG_PTR dwExtraInfo;
-// } MOUSEMOVEPOINT, *PMOUSEMOVEPOINT, *LPMOUSEMOVEPOINT;
-
-/// Contains information about the mouse's location in screen coordinates.
-///
-/// {@category Struct}
-class MOUSEMOVEPOINT extends Struct {
-  @Int32()
-  external int x;
-  @Int32()
-  external int y;
-  @Uint32()
-  external int time;
-  @IntPtr()
-  external int dwExtraInfo;
-}
-
-// typedef struct tagMONITORINFO {
-//   DWORD cbSize;
-//   RECT  rcMonitor;
-//   RECT  rcWork;
-//   DWORD dwFlags;
-// } MONITORINFO, *LPMONITORINFO;
-
-/// The MONITORINFO structure contains information about a display monitor.
-///
-/// {@category Struct}
-class MONITORINFO extends Struct {
-  @Uint32()
-  external int cbSize;
-
-  external RECT rcMonitor;
-  external RECT rcWork;
-
-  @Uint32()
-  external int dwFlags;
 }
 
 const PHYSICAL_MONITOR_DESCRIPTION_SIZE = 128;
@@ -1438,53 +1196,6 @@ class ENUMLOGFONTEX extends Struct {
         _elfScript8, _elfScript9, _elfScript10, _elfScript11,
         _elfScript12, _elfScript13, _elfScript14, _elfScript15,
       ]).buffer.asUint16List());
-}
-
-// typedef struct tagCREATESTRUCTW {
-//   LPVOID    lpCreateParams;
-//   HINSTANCE hInstance;
-//   HMENU     hMenu;
-//   HWND      hwndParent;
-//   int       cy;
-//   int       cx;
-//   int       y;
-//   int       x;
-//   LONG      style;
-//   LPCWSTR   lpszName;
-//   LPCWSTR   lpszClass;
-//   DWORD     dwExStyle;
-// } CREATESTRUCTW, *LPCREATESTRUCTW;
-
-/// Defines the initialization parameters passed to the window procedure of an
-/// application. These members are identical to the parameters of the
-/// CreateWindowEx function.
-///
-/// {@category Struct}
-class CREATESTRUCT extends Struct {
-  external Pointer<Void> lpCreateParams;
-
-  @IntPtr()
-  external int hInstance;
-  @IntPtr()
-  external int hMenu;
-  @IntPtr()
-  external int hwndParent;
-  @Int32()
-  external int cy;
-  @Int32()
-  external int cx;
-  @Int32()
-  external int y;
-  @Int32()
-  external int x;
-  @Int32()
-  external int style;
-
-  external Pointer<Utf16> lpszName;
-  external Pointer<Utf16> lpszClass;
-
-  @Uint32()
-  external int dwExStyle;
 }
 
 // typedef struct tagMENUINFO {

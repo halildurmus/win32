@@ -15,6 +15,7 @@ import 'package:ffi/ffi.dart';
 import 'callbacks.dart';
 import 'combase.dart';
 import 'structs.dart';
+import 'structs.g.dart';
 
 final _api_ms_win_core_winrt_l1_1_0 =
     DynamicLibrary.open('api-ms-win-core-winrt-l1-1-0.dll');

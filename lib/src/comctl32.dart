@@ -15,6 +15,7 @@ import 'package:ffi/ffi.dart';
 import 'callbacks.dart';
 import 'combase.dart';
 import 'structs.dart';
+import 'structs.g.dart';
 
 final _comctl32 = DynamicLibrary.open('comctl32.dll');
 

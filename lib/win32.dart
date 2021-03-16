@@ -89,6 +89,7 @@ export 'src/constants_nodoc.dart';
 export 'src/exceptions.dart';
 export 'src/macros.dart';
 export 'src/structs.dart';
+export 'src/structs.g.dart';
 export 'src/utils.dart';
 
 // Useful extension methods

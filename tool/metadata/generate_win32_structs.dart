@@ -45,6 +45,12 @@ const structFileHeader = '''
 // Why? In structs like VARIANT, we're using getters and setters to project the
 // same underlying data property to various union types. The trivial overhead is
 // outweighed by readability.
+//
+//
+// ignore_for_file: unused_import
+//
+// Why? We speculatively include some imports that we might generate a
+// requirement for.
 // -----------------------------------------------------------------------------
 
 import 'dart:ffi';
@@ -57,6 +63,7 @@ import 'com/IDispatch.dart';
 import 'com/IUnknown.dart';
 import 'combase.dart';
 import 'oleaut32.dart';
+import 'structs.dart';
 ''';
 
 int generateStructs(Win32API win32) {
@@ -72,9 +79,9 @@ int generateStructs(Win32API win32) {
 
     writer.writeStringSync(wrapCommentText(win32.structs[struct]!.comment));
 
-    writer.writeStringSync('///\n/// {@category Struct}\n');
+    writer.writeStringSync('\n///\n/// {@category Struct}\n');
 
-    writer.writeStringSync(TypePrinter.printStruct(typedef));
+    writer.writeStringSync(TypePrinter.printStruct(typedef, struct));
     structsGenerated++;
   }
 
