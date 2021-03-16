@@ -7,6 +7,14 @@
         "namespace": "Windows.Win32.Com.BIND_OPTS",
         "comment": "Contains parameters used during a moniker-binding operation."
     },
+    "BITMAP": {
+        "namespace": "Windows.Win32.Gdi.BITMAP",
+        "comment": "The BITMAP structure defines the type, width, height, color format, and bit values of a bitmap."
+    },
+    "BITMAPINFOHEADER": {
+        "namespace": "Windows.Win32.DirectShow.BITMAPINFOHEADER",
+        "comment": "The BITMAPINFOHEADER structure contains information about the dimensions and color format of a device-independent bitmap (DIB)."
+    },
     "BLUETOOTH_FIND_RADIO_PARAMS": {
         "namespace": "Windows.Win32.Bluetooth.BLUETOOTH_FIND_RADIO_PARAMS",
         "comment": "The BLUETOOTH_FIND_RADIO_PARAMS structure facilitates enumerating installed Bluetooth radios."
@@ -31,6 +39,14 @@
         "namespace": "Windows.Win32.WindowsAndMessaging.CREATESTRUCTW",
         "comment": "Defines the initialization parameters passed to the window procedure of an application. These members are identical to the parameters of the CreateWindowEx function."
     },
+    "CREDENTIAL": {
+        "namespace": "Windows.Win32.Security.CREDENTIALW",
+        "comment": "The CREDENTIAL structure contains an individual credential."
+    },
+    "CREDENTIAL_ATTRIBUTE": {
+        "namespace": "Windows.Win32.Security.CREDENTIAL_ATTRIBUTEW",
+        "comment": "The CREDENTIAL_ATTRIBUTE structure contains an application-defined attribute of the credential. An attribute is a keyword-value pair. It is up to the application to define the meaning of the attribute."
+    },
     "DISPPARAMS": {
         "namespace": "Windows.Win32.Automation.DISPPARAMS",
         "comment": "Contains the arguments passed to a method or property."
@@ -39,9 +55,21 @@
         "namespace": "Windows.Win32.Shell.DLLVERSIONINFO",
         "comment": "Receives DLL-specific version information. It is used with the DllGetVersion function."
     },
+    "DRAWTEXTPARAMS": {
+        "namespace": "Windows.Win32.Gdi.DRAWTEXTPARAMS",
+        "comment": "The DRAWTEXTPARAMS structure contains extended formatting options for the DrawTextEx function."
+    },
+    "FILETIME": {
+        "namespace": "Windows.Win32.WindowsProgramming.FILETIME",
+        "comment": "Contains a 64-bit value representing the number of 100-nanosecond intervals since January 1, 1601 (UTC)."
+    },
     "INITCOMMONCONTROLSEX": {
         "namespace": "Windows.Win32.Controls.INITCOMMONCONTROLSEX",
         "comment": "Carries information used to load common control classes from the dynamic-link library (DLL). This structure is used with the InitCommonControlsEx function."
+    },
+    "KNOWNFOLDER_DEFINITION": {
+        "namespace": "Windows.Win32.Shell.KNOWNFOLDER_DEFINITION",
+        "comment": "Defines the specifics of a known folder."
     },
     "LOGBRUSH": {
         "namespace": "Windows.Win32.Gdi.LOGBRUSH",
@@ -55,6 +83,18 @@
         "namespace": "Windows.Win32.CoreAudio.MCI_STATUS_PARMS",
         "comment": "The MCI_STATUS_PARMS structure contains information for the MCI_STATUS command."
     },
+    "MENUINFO": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.MENUINFO",
+        "comment": "Contains information about a menu."
+    },
+    "MENUITEMINFO": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.MENUITEMINFOW",
+        "comment": "Contains information about a menu item."
+    },
+    "MINMAXINFO": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.MINMAXINFO",
+        "comment": "Contains information about a window's maximized size and position and its minimum and maximum tracking size."
+    },
     "MONITORINFO": {
         "namespace": "Windows.Win32.Gdi.MONITORINFO",
         "comment": "The MONITORINFO structure contains information about a display monitor."
@@ -63,13 +103,45 @@
         "namespace": "Windows.Win32.KeyboardAndMouseInput.MOUSEMOVEPOINT",
         "comment": "Contains information about the mouse's location in screen coordinates."
     },
+    "MSG": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.MSG",
+        "comment": "Contains message information from a thread's message queue."
+    },
+    "PALETTEENTRY": {
+        "namespace": "Windows.Win32.Gdi.PALETTEENTRY",
+        "comment": "The PALETTEENTRY structure specifies the color and usage of an entry in a logical palette. A logical palette is defined by a LOGPALETTE structure."
+    },
+    "POINT": {
+        "namespace": "Windows.Win32.DisplayDevices.POINT",
+        "comment": "The POINT structure defines the x- and y-coordinates of a point."
+    },
     "PROCESS_INFORMATION": {
         "namespace": "Windows.Win32.SystemServices.PROCESS_INFORMATION",
         "comment": "Contains information about a newly created process and its primary thread. It is used with the CreateProcess, CreateProcessAsUser, CreateProcessWithLogonW, or CreateProcessWithTokenW function."
     },
+    "RECT": {
+        "namespace": "Windows.Win32.DisplayDevices.RECT",
+        "comment": "The RECT structure defines a rectangle by the coordinates of its upper-left and lower-right corners."
+    },
+    "RGBQUAD": {
+        "namespace": "Windows.Win32.Gdi.RGBQUAD",
+        "comment": "The RGBQUAD structure describes a color consisting of relative intensities of red, green, and blue."
+    },
+    "SCROLLINFO": {
+        "namespace": "Windows.Win32.Controls.SCROLLINFO",
+        "comment": "The SCROLLINFO structure contains scroll bar parameters to be set by the SetScrollInfo function (or SBM_SETSCROLLINFO message), or retrieved by the GetScrollInfo function (or SBM_GETSCROLLINFO message)"
+    },
     "SECURITY_ATTRIBUTES": {
         "namespace": "Windows.Win32.SystemServices.SECURITY_ATTRIBUTES",
         "comment": "The SECURITY_ATTRIBUTES structure contains the security descriptor for an object and specifies whether the handle retrieved by specifying this structure is inheritable.\n\nThis structure provides security settings for objects created by various functions, such as CreateFile, CreatePipe, CreateProcess, RegCreateKeyEx, or RegSaveKeyEx."
+    },
+    "SHQUERYRBINFO": {
+        "namespace": "Windows.Win32.Shell.SHQUERYRBINFO",
+        "comment": "Contains the size and item count information retrieved by the SHQueryRecycleBin function."
+    },
+    "SIZE": {
+        "namespace": "Windows.Win32.DisplayDevices.SIZE",
+        "comment": "The SIZE structure defines the width and height of a rectangle."
     },
     "SMALL_RECT": {
         "namespace": "Windows.Win32.SystemServices.SMALL_RECT",
@@ -95,6 +167,10 @@
         "namespace": "Windows.Win32.Controls.TASKDIALOG_BUTTON",
         "comment": "The TASKDIALOG_BUTTON structure contains information used to display a button in a task dialog. The TASKDIALOGCONFIG structure uses this structure."
     },
+    "TEXTMETRIC": {
+        "namespace": "Windows.Win32.Gdi.TEXTMETRICW",
+        "comment": "The TEXTMETRIC structure contains basic information about a physical font. All sizes are specified in logical units; that is, they depend on the current mapping mode of the display context."
+    },
     "TPMPARAMS": {
         "namespace": "Windows.Win32.WindowsAndMessaging.TPMPARAMS",
         "comment": "Contains extended parameters for the TrackPopupMenuEx function."
@@ -110,5 +186,9 @@
     "WAVEHDR": {
         "namespace": "Windows.Win32.Multimedia.WAVEHDR",
         "comment": "The WAVEHDR structure defines the header used to identify a waveform-audio buffer."
+    },
+    "WINDOWINFO": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.WINDOWINFO",
+        "comment": "Contains window information."
     }
 }

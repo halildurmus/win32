@@ -85,6 +85,55 @@ class BIND_OPTS extends Struct {
   external int dwTickCountDeadline;
 }
 
+/// The BITMAP structure defines the type, width, height, color format, and
+/// bit values of a bitmap.
+///
+/// {@category Struct}
+class BITMAP extends Struct {
+  @Int32()
+  external int bmType;
+  @Int32()
+  external int bmWidth;
+  @Int32()
+  external int bmHeight;
+  @Int32()
+  external int bmWidthBytes;
+  @Uint16()
+  external int bmPlanes;
+  @Uint16()
+  external int bmBitsPixel;
+  external Pointer bmBits;
+}
+
+/// The BITMAPINFOHEADER structure contains information about the
+/// dimensions and color format of a device-independent bitmap (DIB).
+///
+/// {@category Struct}
+class BITMAPINFOHEADER extends Struct {
+  @Uint32()
+  external int biSize;
+  @Int32()
+  external int biWidth;
+  @Int32()
+  external int biHeight;
+  @Uint16()
+  external int biPlanes;
+  @Uint16()
+  external int biBitCount;
+  @Uint32()
+  external int biCompression;
+  @Uint32()
+  external int biSizeImage;
+  @Int32()
+  external int biXPelsPerMeter;
+  @Int32()
+  external int biYPelsPerMeter;
+  @Uint32()
+  external int biClrUsed;
+  @Uint32()
+  external int biClrImportant;
+}
+
 /// The BLUETOOTH_FIND_RADIO_PARAMS structure facilitates enumerating
 /// installed Bluetooth radios.
 ///
@@ -167,6 +216,43 @@ class CREATESTRUCT extends Struct {
   external int dwExStyle;
 }
 
+/// The CREDENTIAL structure contains an individual credential.
+///
+/// {@category Struct}
+class CREDENTIAL extends Struct {
+  @Uint32()
+  external int Flags;
+  @Uint32()
+  external int Type;
+  external Pointer<Utf16> TargetName;
+  external Pointer<Utf16> Comment;
+  external FILETIME LastWritten;
+  @Uint32()
+  external int CredentialBlobSize;
+  external Pointer<Uint8> CredentialBlob;
+  @Uint32()
+  external int Persist;
+  @Uint32()
+  external int AttributeCount;
+  external Pointer<CREDENTIAL_ATTRIBUTE> Attributes;
+  external Pointer<Utf16> TargetAlias;
+  external Pointer<Utf16> UserName;
+}
+
+/// The CREDENTIAL_ATTRIBUTE structure contains an application-defined
+/// attribute of the credential. An attribute is a keyword-value pair. It
+/// is up to the application to define the meaning of the attribute.
+///
+/// {@category Struct}
+class CREDENTIAL_ATTRIBUTE extends Struct {
+  external Pointer<Utf16> Keyword;
+  @Uint32()
+  external int Flags;
+  @Uint32()
+  external int ValueSize;
+  external Pointer<Uint8> Value;
+}
+
 /// Contains the arguments passed to a method or property.
 ///
 /// {@category Struct}
@@ -196,6 +282,34 @@ class DLLVERSIONINFO extends Struct {
   external int dwPlatformID;
 }
 
+/// The DRAWTEXTPARAMS structure contains extended formatting options for
+/// the DrawTextEx function.
+///
+/// {@category Struct}
+class DRAWTEXTPARAMS extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Int32()
+  external int iTabLength;
+  @Int32()
+  external int iLeftMargin;
+  @Int32()
+  external int iRightMargin;
+  @Uint32()
+  external int uiLengthDrawn;
+}
+
+/// Contains a 64-bit value representing the number of 100-nanosecond
+/// intervals since January 1, 1601 (UTC).
+///
+/// {@category Struct}
+class FILETIME extends Struct {
+  @Uint32()
+  external int dwLowDateTime;
+  @Uint32()
+  external int dwHighDateTime;
+}
+
 /// Carries information used to load common control classes from the
 /// dynamic-link library (DLL). This structure is used with the
 /// InitCommonControlsEx function.
@@ -206,6 +320,28 @@ class INITCOMMONCONTROLSEX extends Struct {
   external int dwSize;
   @Uint32()
   external int dwICC;
+}
+
+/// Defines the specifics of a known folder.
+///
+/// {@category Struct}
+class KNOWNFOLDER_DEFINITION extends Struct {
+  @Uint32()
+  external int category;
+  external Pointer<Utf16> pszName;
+  external Pointer<Utf16> pszDescription;
+  external GUID fidParent;
+  external Pointer<Utf16> pszRelativePath;
+  external Pointer<Utf16> pszParsingName;
+  external Pointer<Utf16> pszTooltip;
+  external Pointer<Utf16> pszLocalizedName;
+  external Pointer<Utf16> pszIcon;
+  external Pointer<Utf16> pszSecurity;
+  @Uint32()
+  external int dwAttributes;
+  @Uint32()
+  external int kfdFlags;
+  external GUID ftidType;
 }
 
 /// The LOGBRUSH structure defines the style, color, and pattern of a
@@ -250,6 +386,67 @@ class MCI_STATUS_PARMS extends Struct {
   external int dwTrack;
 }
 
+/// Contains information about a menu.
+///
+/// {@category Struct}
+class MENUINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int fMask;
+  @Uint32()
+  external int dwStyle;
+  @Uint32()
+  external int cyMax;
+  @IntPtr()
+  external int hbrBack;
+  @Uint32()
+  external int dwContextHelpID;
+  @IntPtr()
+  external int dwMenuData;
+}
+
+/// Contains information about a menu item.
+///
+/// {@category Struct}
+class MENUITEMINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int fMask;
+  @Uint32()
+  external int fType;
+  @Uint32()
+  external int fState;
+  @Uint32()
+  external int wID;
+  @IntPtr()
+  external int hSubMenu;
+  @IntPtr()
+  external int hbmpChecked;
+  @IntPtr()
+  external int hbmpUnchecked;
+  @IntPtr()
+  external int dwItemData;
+  external Pointer<Utf16> dwTypeData;
+  @Uint32()
+  external int cch;
+  @IntPtr()
+  external int hbmpItem;
+}
+
+/// Contains information about a window's maximized size and position and
+/// its minimum and maximum tracking size.
+///
+/// {@category Struct}
+class MINMAXINFO extends Struct {
+  external POINT ptReserved;
+  external POINT ptMaxSize;
+  external POINT ptMaxPosition;
+  external POINT ptMinTrackSize;
+  external POINT ptMaxTrackSize;
+}
+
 /// The MONITORINFO structure contains information about a display monitor.
 ///
 /// {@category Struct}
@@ -276,6 +473,49 @@ class MOUSEMOVEPOINT extends Struct {
   external int dwExtraInfo;
 }
 
+/// Contains message information from a thread's message queue.
+///
+/// {@category Struct}
+class MSG extends Struct {
+  @IntPtr()
+  external int hwnd;
+  @Uint32()
+  external int message;
+  @IntPtr()
+  external int wParam;
+  @IntPtr()
+  external int lParam;
+  @Uint32()
+  external int time;
+  external POINT pt;
+}
+
+/// The PALETTEENTRY structure specifies the color and usage of an entry in
+/// a logical palette. A logical palette is defined by a LOGPALETTE
+/// structure.
+///
+/// {@category Struct}
+class PALETTEENTRY extends Struct {
+  @Uint8()
+  external int peRed;
+  @Uint8()
+  external int peGreen;
+  @Uint8()
+  external int peBlue;
+  @Uint8()
+  external int peFlags;
+}
+
+/// The POINT structure defines the x- and y-coordinates of a point.
+///
+/// {@category Struct}
+class POINT extends Struct {
+  @Int32()
+  external int x;
+  @Int32()
+  external int y;
+}
+
 /// Contains information about a newly created process and its primary
 /// thread. It is used with the CreateProcess, CreateProcessAsUser,
 /// CreateProcessWithLogonW, or CreateProcessWithTokenW function.
@@ -292,6 +532,58 @@ class PROCESS_INFORMATION extends Struct {
   external int dwThreadId;
 }
 
+/// The RECT structure defines a rectangle by the coordinates of its
+/// upper-left and lower-right corners.
+///
+/// {@category Struct}
+class RECT extends Struct {
+  @Int32()
+  external int left;
+  @Int32()
+  external int top;
+  @Int32()
+  external int right;
+  @Int32()
+  external int bottom;
+}
+
+/// The RGBQUAD structure describes a color consisting of relative
+/// intensities of red, green, and blue.
+///
+/// {@category Struct}
+class RGBQUAD extends Struct {
+  @Uint8()
+  external int rgbBlue;
+  @Uint8()
+  external int rgbGreen;
+  @Uint8()
+  external int rgbRed;
+  @Uint8()
+  external int rgbReserved;
+}
+
+/// The SCROLLINFO structure contains scroll bar parameters to be set by
+/// the SetScrollInfo function (or SBM_SETSCROLLINFO message), or retrieved
+/// by the GetScrollInfo function (or SBM_GETSCROLLINFO message)
+///
+/// {@category Struct}
+class SCROLLINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int fMask;
+  @Int32()
+  external int nMin;
+  @Int32()
+  external int nMax;
+  @Uint32()
+  external int nPage;
+  @Int32()
+  external int nPos;
+  @Int32()
+  external int nTrackPos;
+}
+
 /// The SECURITY_ATTRIBUTES structure contains the security descriptor for
 /// an object and specifies whether the handle retrieved by specifying this
 /// structure is inheritable.\n\nThis structure provides security settings
@@ -305,6 +597,29 @@ class SECURITY_ATTRIBUTES extends Struct {
   external Pointer lpSecurityDescriptor;
   @Int32()
   external int bInheritHandle;
+}
+
+/// Contains the size and item count information retrieved by the
+/// SHQueryRecycleBin function.
+///
+/// {@category Struct}
+class SHQUERYRBINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Int64()
+  external int i64Size;
+  @Int64()
+  external int i64NumItems;
+}
+
+/// The SIZE structure defines the width and height of a rectangle.
+///
+/// {@category Struct}
+class SIZE extends Struct {
+  @Int32()
+  external int cx;
+  @Int32()
+  external int cy;
 }
 
 /// Defines the coordinates of the upper left and lower right corners of a
@@ -429,6 +744,54 @@ class TASKDIALOG_BUTTON extends Struct {
   external Pointer<Utf16> pszButtonText;
 }
 
+/// The TEXTMETRIC structure contains basic information about a physical
+/// font. All sizes are specified in logical units; that is, they depend on
+/// the current mapping mode of the display context.
+///
+/// {@category Struct}
+class TEXTMETRIC extends Struct {
+  @Int32()
+  external int tmHeight;
+  @Int32()
+  external int tmAscent;
+  @Int32()
+  external int tmDescent;
+  @Int32()
+  external int tmInternalLeading;
+  @Int32()
+  external int tmExternalLeading;
+  @Int32()
+  external int tmAveCharWidth;
+  @Int32()
+  external int tmMaxCharWidth;
+  @Int32()
+  external int tmWeight;
+  @Int32()
+  external int tmOverhang;
+  @Int32()
+  external int tmDigitizedAspectX;
+  @Int32()
+  external int tmDigitizedAspectY;
+  @Uint16()
+  external int tmFirstChar;
+  @Uint16()
+  external int tmLastChar;
+  @Uint16()
+  external int tmDefaultChar;
+  @Uint16()
+  external int tmBreakChar;
+  @Uint8()
+  external int tmItalic;
+  @Uint8()
+  external int tmUnderlined;
+  @Uint8()
+  external int tmStruckOut;
+  @Uint8()
+  external int tmPitchAndFamily;
+  @Uint8()
+  external int tmCharSet;
+}
+
 /// Contains extended parameters for the TrackPopupMenuEx function.
 ///
 /// {@category Struct}
@@ -504,4 +867,28 @@ class WAVEHDR extends Struct {
   external Pointer<WAVEHDR> lpNext;
   @IntPtr()
   external int reserved;
+}
+
+/// Contains window information.
+///
+/// {@category Struct}
+class WINDOWINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  external RECT rcWindow;
+  external RECT rcClient;
+  @Uint32()
+  external int dwStyle;
+  @Uint32()
+  external int dwExStyle;
+  @Uint32()
+  external int dwWindowStatus;
+  @Uint32()
+  external int cxWindowBorders;
+  @Uint32()
+  external int cyWindowBorders;
+  @Uint16()
+  external int atomWindowType;
+  @Uint16()
+  external int wCreatorVersion;
 }
