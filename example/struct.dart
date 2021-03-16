@@ -39,4 +39,5 @@ void main() {
   final scope = MetadataStore.getWin32Scope();
   printStruct(scope['Windows.Win32.Gdi.XFORM']!);
   printStruct(scope['Windows.Win32.SystemServices.PROCESS_INFORMATION']!);
+  printStruct(scope['Windows.Win32.SystemServices.STARTUPINFOW']!);
 }

@@ -10,6 +10,7 @@ import '../typedef.dart';
 
 import 'classprojector.dart';
 import 'projections.dart';
+import 'typeprojector.dart';
 
 class TypePrinter {
   static String headerAsString(ClassProjection type) {
@@ -313,6 +314,21 @@ void main() {
   free(ptr);
   }''');
 
+    return buffer.toString();
+  }
+
+  static String printStruct(TypeDef typedef) {
+    final buffer = StringBuffer();
+
+    buffer
+        .writeln('class ${typedef.typeName.split('.').last} extends Struct {');
+
+    for (final field in typedef.fields) {
+      final nativeType = TypeProjector(field.typeIdentifier).nativeType;
+      final dartType = TypeProjector(field.typeIdentifier).dartType;
+      buffer.writeln('  @$nativeType() external $dartType ${field.name};');
+    }
+    buffer.writeln('}\n');
     return buffer.toString();
   }
 
