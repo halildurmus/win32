@@ -165,7 +165,9 @@ void main() {
   apis.forEach((api) => methods.addAll(api.methods));
   print('${methods.length} APIs collected');
 
-  final win32 = Win32API('tool/manual_gen/win32api.json');
+  final win32 = Win32API(
+      apiFile: 'tool/manual_gen/win32api.json',
+      structFile: 'tool/manual_gen/win32struct.json');
   final genCount = win32.functions.values
       .where((func) => winmdGenerated.contains(func.dllLibrary))
       .length;
