@@ -85,6 +85,59 @@ class BIND_OPTS extends Struct {
   external int dwTickCountDeadline;
 }
 
+/// The BLUETOOTH_FIND_RADIO_PARAMS structure facilitates enumerating
+/// installed Bluetooth radios.
+///
+/// {@category Struct}
+class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
+  @Uint32()
+  external int dwSize;
+}
+
+/// Contains information about the console cursor.
+///
+/// {@category Struct}
+class CONSOLE_CURSOR_INFO extends Struct {
+  @Uint32()
+  external int dwSize;
+  @Int32()
+  external int bVisible;
+}
+
+/// Contains information about a console screen buffer.
+///
+/// {@category Struct}
+class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
+  external COORD dwSize;
+  external COORD dwCursorPosition;
+  @Uint16()
+  external int wAttributes;
+  external SMALL_RECT srWindow;
+  external COORD dwMaximumWindowSize;
+}
+
+/// Contains information for a console selection.
+///
+/// {@category Struct}
+class CONSOLE_SELECTION_INFO extends Struct {
+  @Uint32()
+  external int dwFlags;
+  external COORD dwSelectionAnchor;
+  external SMALL_RECT srSelection;
+}
+
+/// Defines the coordinates of a character cell in a console screen buffer.
+/// The origin of the coordinate system (0,0) is at the top, left cell of
+/// the buffer.
+///
+/// {@category Struct}
+class COORD extends Struct {
+  @Int16()
+  external int X;
+  @Int16()
+  external int Y;
+}
+
 /// Defines the initialization parameters passed to the window procedure of
 /// an application. These members are identical to the parameters of the
 /// CreateWindowEx function.
@@ -112,6 +165,47 @@ class CREATESTRUCT extends Struct {
   external Pointer<Utf16> lpszClass;
   @Uint32()
   external int dwExStyle;
+}
+
+/// Contains the arguments passed to a method or property.
+///
+/// {@category Struct}
+class DISPPARAMS extends Struct {
+  external Pointer<VARIANT> rgvarg;
+  external Pointer<Int32> rgdispidNamedArgs;
+  @Uint32()
+  external int cArgs;
+  @Uint32()
+  external int cNamedArgs;
+}
+
+/// Receives DLL-specific version information. It is used with the
+/// DllGetVersion function.
+///
+/// {@category Struct}
+class DLLVERSIONINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int dwMajorVersion;
+  @Uint32()
+  external int dwMinorVersion;
+  @Uint32()
+  external int dwBuildNumber;
+  @Uint32()
+  external int dwPlatformID;
+}
+
+/// Carries information used to load common control classes from the
+/// dynamic-link library (DLL). This structure is used with the
+/// InitCommonControlsEx function.
+///
+/// {@category Struct}
+class INITCOMMONCONTROLSEX extends Struct {
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwICC;
 }
 
 /// The LOGBRUSH structure defines the style, color, and pattern of a
@@ -213,6 +307,21 @@ class SECURITY_ATTRIBUTES extends Struct {
   external int bInheritHandle;
 }
 
+/// Defines the coordinates of the upper left and lower right corners of a
+/// rectangle.
+///
+/// {@category Struct}
+class SMALL_RECT extends Struct {
+  @Int16()
+  external int Left;
+  @Int16()
+  external int Top;
+  @Int16()
+  external int Right;
+  @Int16()
+  external int Bottom;
+}
+
 /// Identifies an authentication service that a server is willing to use to
 /// communicate to a client.
 ///
@@ -282,6 +391,42 @@ class SYSTEM_POWER_STATUS extends Struct {
   external int BatteryLifeTime;
   @Uint32()
   external int BatteryFullLifeTime;
+}
+
+/// Specifies a date and time, using individual members for the month, day,
+/// year, weekday, hour, minute, second, and millisecond. The time is
+/// either in coordinated universal time (UTC) or local time, depending on
+/// the function that is being called.
+///
+/// {@category Struct}
+class SYSTEMTIME extends Struct {
+  @Uint16()
+  external int wYear;
+  @Uint16()
+  external int wMonth;
+  @Uint16()
+  external int wDayOfWeek;
+  @Uint16()
+  external int wDay;
+  @Uint16()
+  external int wHour;
+  @Uint16()
+  external int wMinute;
+  @Uint16()
+  external int wSecond;
+  @Uint16()
+  external int wMilliseconds;
+}
+
+/// The TASKDIALOG_BUTTON structure contains information used to display a
+/// button in a task dialog. The TASKDIALOGCONFIG structure uses this
+/// structure.
+///
+/// {@category Struct}
+class TASKDIALOG_BUTTON extends Struct {
+  @Int32()
+  external int nButtonID;
+  external Pointer<Utf16> pszButtonText;
 }
 
 /// Contains extended parameters for the TrackPopupMenuEx function.

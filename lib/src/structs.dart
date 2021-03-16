@@ -2191,99 +2191,6 @@ class SHITEMID extends Struct {
   }
 }
 
-// typedef struct tagDISPPARAMS {
-//   VARIANTARG *rgvarg;
-//   DISPID     *rgdispidNamedArgs;
-//   UINT       cArgs;
-//   UINT       cNamedArgs;
-// } DISPPARAMS;
-
-/// Contains the arguments passed to a method or property.
-///
-/// {@category Struct}
-class DISPPARAMS extends Struct {
-  external Pointer<VARIANT> rgvarg;
-  external Pointer<Int32> rgdispidNamedArgs;
-
-  @Int16()
-  external int cArgs;
-
-  @Int16()
-  external int cNamedArgs;
-}
-
-// *** CONSOLE STRUCTS ***
-
-// typedef struct _CONSOLE_CURSOR_INFO {
-//   DWORD dwSize;
-//   BOOL  bVisible;
-// } CONSOLE_CURSOR_INFO, *PCONSOLE_CURSOR_INFO;
-
-/// Contains information about the console cursor.
-///
-/// {@category Struct}
-class CONSOLE_CURSOR_INFO extends Struct {
-  @Uint32()
-  external int dwSize;
-  @Int32()
-  external int bVisible;
-}
-
-// typedef struct _CONSOLE_SCREEN_BUFFER_INFO {
-//   COORD      dwSize;
-//   COORD      dwCursorPosition;
-//   WORD       wAttributes;
-//   SMALL_RECT srWindow;
-//   COORD      dwMaximumWindowSize;
-// } CONSOLE_SCREEN_BUFFER_INFO;
-
-/// Contains information about a console screen buffer.
-///
-/// {@category Struct}
-class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
-  external COORD dwSize;
-  external COORD dwCursorPosition;
-  @Uint16()
-  external int wAttributes;
-  external SMALL_RECT srWindow;
-  external COORD dwMaximumWindowSize;
-}
-
-// typedef struct _CONSOLE_SELECTION_INFO {
-//   DWORD      dwFlags;
-//   COORD      dwSelectionAnchor;
-//   SMALL_RECT srSelection;
-// } CONSOLE_SELECTION_INFO, *PCONSOLE_SELECTION_INFO;
-
-/// Contains information for a console selection.
-///
-/// {@category Struct}
-class CONSOLE_SELECTION_INFO extends Struct {
-  @Uint32()
-  external int dwFlags;
-
-  external COORD dwSelectionAnchor;
-  external SMALL_RECT srSelection;
-}
-
-// typedef struct _COORD {
-//   SHORT X;
-//   SHORT Y;
-// } COORD, *PCOORD;
-
-/// Defines the coordinates of a character cell in a console screen buffer. The
-/// origin of the coordinate system (0,0) is at the top, left cell of the
-/// buffer.
-///
-/// {@category Struct}
-class COORD extends Struct {
-  @Int16()
-  external int X;
-
-  @Int16()
-  external int Y;
-}
-
 // typedef struct _CHAR_INFO {
 //   union {
 //     WCHAR UnicodeChar;
@@ -2302,47 +2209,6 @@ class CHAR_INFO extends Struct {
 
   @Int16()
   external int Attributes;
-}
-
-// typedef struct _SMALL_RECT {
-//   SHORT Left;
-//   SHORT Top;
-//   SHORT Right;
-//   SHORT Bottom;
-// } SMALL_RECT;
-
-/// Defines the coordinates of the upper left and lower right corners of a
-/// rectangle.
-///
-/// {@category Struct}
-class SMALL_RECT extends Struct {
-  @Int16()
-  external int Left;
-
-  @Int16()
-  external int Top;
-
-  @Int16()
-  external int Right;
-
-  @Int16()
-  external int Bottom;
-}
-// typedef struct tagINITCOMMONCONTROLSEX {
-//   DWORD dwSize;
-//   DWORD dwICC;
-// } INITCOMMONCONTROLSEX, *LPINITCOMMONCONTROLSEX;
-
-/// Carries information used to load common control classes from the
-/// dynamic-link library (DLL). This structure is used with the
-/// InitCommonControlsEx function.
-///
-/// {@category Struct}
-class INITCOMMONCONTROLSEX extends Struct {
-  @Uint32()
-  external int dwSize;
-  @Uint32()
-  external int dwICC;
 }
 
 // typedef struct {
@@ -2534,49 +2400,6 @@ class TASKDIALOGCONFIG extends Struct {
   external int cxWidth;
 }
 
-// typedef struct _TASKDIALOG_BUTTON
-// {
-//     int     nButtonID;
-//     PCWSTR  pszButtonText;
-// } TASKDIALOG_BUTTON;
-
-/// The TASKDIALOG_BUTTON structure contains information used to display a
-/// button in a task dialog. The TASKDIALOGCONFIG structure uses this structure.
-///
-/// {@category Struct}
-class TASKDIALOG_BUTTON extends Struct {
-  @Int32()
-  external int nButtonID;
-
-  external Pointer<Utf16> pszButtonText;
-}
-
-// typedef struct _DLLVERSIONINFO
-// {
-//     DWORD cbSize;
-//     DWORD dwMajorVersion;                   // Major version
-//     DWORD dwMinorVersion;                   // Minor version
-//     DWORD dwBuildNumber;                    // Build number
-//     DWORD dwPlatformID;                     // DLLVER_PLATFORM_*
-// } DLLVERSIONINFO;
-
-/// Receives DLL-specific version information. It is used with the DllGetVersion
-/// function.
-///
-/// {@category Struct}
-class DLLVERSIONINFO extends Struct {
-  @Uint32()
-  external int cbSize;
-  @Uint32()
-  external int dwMajorVersion;
-  @Uint32()
-  external int dwMinorVersion;
-  @Uint32()
-  external int dwBuildNumber;
-  @Uint32()
-  external int dwPlatformID;
-}
-
 // typedef struct _OSVERSIONINFOW {
 //   DWORD dwOSVersionInfoSize;
 //   DWORD dwMajorVersion;
@@ -2753,42 +2576,6 @@ class OSVERSIONINFO extends Struct {
         _szCSDVersion56, _szCSDVersion57, _szCSDVersion58, _szCSDVersion59,
         _szCSDVersion60, _szCSDVersion61, _szCSDVersion62, _szCSDVersion63
       ]).buffer.asUint16List());
-}
-
-// typedef struct _SYSTEMTIME {
-//   WORD wYear;
-//   WORD wMonth;
-//   WORD wDayOfWeek;
-//   WORD wDay;
-//   WORD wHour;
-//   WORD wMinute;
-//   WORD wSecond;
-//   WORD wMilliseconds;
-// } SYSTEMTIME, *PSYSTEMTIME, *LPSYSTEMTIME;
-
-/// Specifies a date and time, using individual members for the month, day,
-/// year, weekday, hour, minute, second, and millisecond. The time is either in
-/// coordinated universal time (UTC) or local time, depending on the function
-/// that is being called.
-///
-/// {@category Struct}
-class SYSTEMTIME extends Struct {
-  @Uint16()
-  external int wYear;
-  @Uint16()
-  external int wMonth;
-  @Uint16()
-  external int wDayOfWeek;
-  @Uint16()
-  external int wDay;
-  @Uint16()
-  external int wHour;
-  @Uint16()
-  external int wMinute;
-  @Uint16()
-  external int wSecond;
-  @Uint16()
-  external int wMilliseconds;
 }
 
 // typedef struct _BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS {
@@ -3032,19 +2819,6 @@ class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
   external int cTimeoutMultiplier;
   @IntPtr()
   external int hRadio;
-}
-
-// typedef struct BLUETOOTH_FIND_RADIO_PARAMS {
-//   DWORD dwSize;
-// } BLUETOOTH_FIND_RADIO_PARAMS;
-
-/// The BLUETOOTH_FIND_RADIO_PARAMS structure facilitates enumerating installed
-/// Bluetooth radios.
-///
-/// {@category Struct}
-class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
-  @Uint32()
-  external int dwSize;
 }
 
 // typedef struct _BLUETOOTH_ADDRESS {

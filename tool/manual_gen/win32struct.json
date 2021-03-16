@@ -7,9 +7,41 @@
         "namespace": "Windows.Win32.Com.BIND_OPTS",
         "comment": "Contains parameters used during a moniker-binding operation."
     },
+    "BLUETOOTH_FIND_RADIO_PARAMS": {
+        "namespace": "Windows.Win32.Bluetooth.BLUETOOTH_FIND_RADIO_PARAMS",
+        "comment": "The BLUETOOTH_FIND_RADIO_PARAMS structure facilitates enumerating installed Bluetooth radios."
+    },
+    "CONSOLE_CURSOR_INFO": {
+        "namespace": "Windows.Win32.SystemServices.CONSOLE_CURSOR_INFO",
+        "comment": "Contains information about the console cursor."
+    },
+    "CONSOLE_SCREEN_BUFFER_INFO": {
+        "namespace": "Windows.Win32.SystemServices.CONSOLE_SCREEN_BUFFER_INFO",
+        "comment": "Contains information about a console screen buffer."
+    },
+    "CONSOLE_SELECTION_INFO": {
+        "namespace": "Windows.Win32.SystemServices.CONSOLE_SELECTION_INFO",
+        "comment": "Contains information for a console selection."
+    },
+    "COORD": {
+        "namespace": "Windows.Win32.SystemServices.COORD",
+        "comment": "Defines the coordinates of a character cell in a console screen buffer. The origin of the coordinate system (0,0) is at the top, left cell of the buffer."
+    },
     "CREATESTRUCT": {
         "namespace": "Windows.Win32.WindowsAndMessaging.CREATESTRUCTW",
         "comment": "Defines the initialization parameters passed to the window procedure of an application. These members are identical to the parameters of the CreateWindowEx function."
+    },
+    "DISPPARAMS": {
+        "namespace": "Windows.Win32.Automation.DISPPARAMS",
+        "comment": "Contains the arguments passed to a method or property."
+    },
+    "DLLVERSIONINFO": {
+        "namespace": "Windows.Win32.Shell.DLLVERSIONINFO",
+        "comment": "Receives DLL-specific version information. It is used with the DllGetVersion function."
+    },
+    "INITCOMMONCONTROLSEX": {
+        "namespace": "Windows.Win32.Controls.INITCOMMONCONTROLSEX",
+        "comment": "Carries information used to load common control classes from the dynamic-link library (DLL). This structure is used with the InitCommonControlsEx function."
     },
     "LOGBRUSH": {
         "namespace": "Windows.Win32.Gdi.LOGBRUSH",
@@ -39,6 +71,10 @@
         "namespace": "Windows.Win32.SystemServices.SECURITY_ATTRIBUTES",
         "comment": "The SECURITY_ATTRIBUTES structure contains the security descriptor for an object and specifies whether the handle retrieved by specifying this structure is inheritable.\n\nThis structure provides security settings for objects created by various functions, such as CreateFile, CreatePipe, CreateProcess, RegCreateKeyEx, or RegSaveKeyEx."
     },
+    "SMALL_RECT": {
+        "namespace": "Windows.Win32.SystemServices.SMALL_RECT",
+        "comment": "Defines the coordinates of the upper left and lower right corners of a rectangle."
+    },
     "SOLE_AUTHENTICATION_SERVICE": {
         "namespace": "Windows.Win32.Com.SOLE_AUTHENTICATION_SERVICE",
         "comment": "Identifies an authentication service that a server is willing to use to communicate to a client."
@@ -50,6 +86,14 @@
     "SYSTEM_POWER_STATUS": {
         "namespace": "Windows.Win32.SystemServices.SYSTEM_POWER_STATUS",
         "comment": "Contains information about the power status of the system."
+    },
+    "SYSTEMTIME": {
+        "namespace": "Windows.Win32.WindowsProgramming.SYSTEMTIME",
+        "comment": "Specifies a date and time, using individual members for the month, day, year, weekday, hour, minute, second, and millisecond. The time is either in coordinated universal time (UTC) or local time, depending on the function that is being called."
+    },
+    "TASKDIALOG_BUTTON": {
+        "namespace": "Windows.Win32.Controls.TASKDIALOG_BUTTON",
+        "comment": "The TASKDIALOG_BUTTON structure contains information used to display a button in a task dialog. The TASKDIALOGCONFIG structure uses this structure."
     },
     "TPMPARAMS": {
         "namespace": "Windows.Win32.WindowsAndMessaging.TPMPARAMS",
