@@ -13,7 +13,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
-import 'com/combase.dart';
+import 'combase.dart';
 import 'structs.dart';
 
 final _kernelbase = DynamicLibrary.open('kernelbase.dll');

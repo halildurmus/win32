@@ -38,9 +38,9 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
-import 'com/combase.dart';
-import 'generated/IDispatch.dart';
-import 'generated/IUnknown.dart';
+import 'com/IDispatch.dart';
+import 'com/IUnknown.dart';
+import 'combase.dart';
 import 'oleaut32.dart';
 
 // typedef struct tagWNDCLASSW {

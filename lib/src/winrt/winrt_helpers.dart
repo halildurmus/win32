@@ -10,10 +10,10 @@ import 'package:ffi/ffi.dart';
 
 import '../api-ms-win-core-winrt-l1-1-0.dart';
 import '../api-ms-win-core-winrt-string-l1-1-0.dart';
-import '../com/combase.dart';
+import '../com/IInspectable.dart';
+import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
-import '../generated/IInspectable.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
