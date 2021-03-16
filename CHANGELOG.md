@@ -1,3 +1,7 @@
+## 0.4.6
+
+- Add struct generation
+
 ## 0.4.5
 
 - Bundle the latest win32metadata `.winmd` file with the package, and expose it
