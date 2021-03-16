@@ -3369,56 +3369,6 @@ class COR_FIELD_OFFSET extends Struct {
   external int ulOffset;
 }
 
-// typedef struct tagVS_FIXEDFILEINFO
-// {
-//     DWORD   dwSignature;
-//     DWORD   dwStrucVersion;
-//     DWORD   dwFileVersionMS;
-//     DWORD   dwFileVersionLS;
-//     DWORD   dwProductVersionMS;
-//     DWORD   dwProductVersionLS;
-//     DWORD   dwFileFlagsMask;
-//     DWORD   dwFileFlags;
-//     DWORD   dwFileOS;
-//     DWORD   dwFileType;
-//     DWORD   dwFileSubtype;
-//     DWORD   dwFileDateMS;
-//     DWORD   dwFileDateLS;
-// } VS_FIXEDFILEINFO;
-
-/// Contains version information for a file. This information is language and
-/// code page independent.
-///
-/// {@category Struct}
-class VS_FIXEDFILEINFO extends Struct {
-  @Uint32()
-  external int dwSignature;
-  @Uint32()
-  external int dwStrucVersion;
-  @Uint32()
-  external int dwFileVersionMS;
-  @Uint32()
-  external int dwFileVersionLS;
-  @Uint32()
-  external int dwProductVersionMS;
-  @Uint32()
-  external int dwProductVersionLS;
-  @Uint32()
-  external int dwFileFlagsMask;
-  @Uint32()
-  external int dwFileFlags;
-  @Uint32()
-  external int dwFileOS;
-  @Uint32()
-  external int dwFileType;
-  @Uint32()
-  external int dwFileSubtype;
-  @Uint32()
-  external int dwFileDateMS;
-  @Uint32()
-  external int dwFileDateLS;
-}
-
 // typedef struct tagMCI_OPEN_PARMSW {
 //     DWORD_PTR   dwCallback;
 //     MCIDEVICEID wDeviceID;
@@ -3487,25 +3437,6 @@ class MCI_OPEN_PARMS extends Struct {
   }
 }
 
-// typedef struct {
-//   DWORD_PTR dwCallback;
-//   DWORD     dwFrom;
-//   DWORD     dwTo;
-// } MCI_PLAY_PARMS, *PMCI_PLAY_PARMS, FAR *LPMCI_PLAY_PARMS;
-
-/// The MCI_PLAY_PARMS structure contains positioning information for the
-/// MCI_PLAY command.
-///
-/// {@category Struct}
-class MCI_PLAY_PARMS extends Struct {
-  @IntPtr()
-  external int dwCallback;
-  @Uint32()
-  external int dwFrom;
-  @Uint32()
-  external int dwTo;
-}
-
 // typedef struct tagMCI_SEEK_PARMS {
 //     DWORD_PTR   dwCallback;
 //     DWORD       dwTo;
@@ -3530,45 +3461,6 @@ class MCI_SEEK_PARMS extends Struct {
     _dwCallbackHi = (value.address & 0xFFFF0000) >> 16;
     _dwCallbackLo = value.address & 0xFFFF;
   }
-}
-
-// typedef struct tagMCI_STATUS_PARMS {
-//     DWORD_PTR   dwCallback;
-//     DWORD_PTR   dwReturn;
-//     DWORD       dwItem;
-//     DWORD       dwTrack;
-// } MCI_STATUS_PARMS, *PMCI_STATUS_PARMS, FAR * LPMCI_STATUS_PARMS;
-
-/// The MCI_STATUS_PARMS structure contains information for the MCI_STATUS command.
-///
-/// {@category Struct}
-class MCI_STATUS_PARMS extends Struct {
-  @IntPtr()
-  external int dwCallback;
-  @IntPtr()
-  external int dwReturn;
-  @Uint32()
-  external int dwItem;
-  @Uint32()
-  external int dwTrack;
-}
-
-// typedef struct tagLOGBRUSH {
-//   UINT      lbStyle;
-//   COLORREF  lbColor;
-//   ULONG_PTR lbHatch;
-// } LOGBRUSH, *PLOGBRUSH, *NPLOGBRUSH, *LPLOGBRUSH;
-
-/// The LOGBRUSH structure defines the style, color, and pattern of a physical
-/// brush. It is used by the CreateBrushIndirect and ExtCreatePen functions.
-///
-/// {@category Struct}
-class LOGBRUSH extends Struct {
-  @Uint32()
-  external int lbStyle;
-  @Int32()
-  external int lbColor;
-  external Pointer<Uint32> lbHatch;
 }
 
 // typedef struct _OVERLAPPED {
@@ -3599,45 +3491,6 @@ class OVERLAPPED extends Struct {
 
   @IntPtr()
   external int hEvent;
-}
-
-// typedef struct tagACTCTXW {
-//   ULONG   cbSize;
-//   DWORD   dwFlags;
-//   LPCWSTR lpSource;
-//   USHORT  wProcessorArchitecture;
-//   LANGID  wLangId;
-//   LPCWSTR lpAssemblyDirectory;
-//   LPCWSTR lpResourceName;
-//   LPCWSTR lpApplicationName;
-//   HMODULE hModule;
-// } ACTCTXW, *PACTCTXW;
-
-/// The ACTCTX structure is used by the CreateActCtx function to create the
-/// activation context.
-///
-/// {@category Struct}
-class ACTCTX extends Struct {
-  @Uint32()
-  external int cbSize;
-
-  @Uint32()
-  external int dwFlags;
-
-  external Pointer<Utf16> lpSource;
-
-  @Uint16()
-  external int wProcessorArchitecture;
-
-  @Uint16()
-  external int wLangId;
-
-  external Pointer<Utf16> lpAssemblyDirectory;
-  external Pointer<Utf16> lpResourceName;
-  external Pointer<Utf16> lpApplicationName;
-
-  @IntPtr()
-  external int hModule;
 }
 
 // typedef struct _WIN32_FIND_DATAW {
@@ -4134,46 +3987,6 @@ class WAVEFORMATEX extends Struct {
     _nAvgBytesPerSecHi = (value & 0xFF00) << 16;
     _nAvgBytesPerSecLo = value & 0xFF;
   }
-}
-
-// typedef struct wavehdr_tag {
-//   LPSTR              lpData;
-//   DWORD              dwBufferLength;
-//   DWORD              dwBytesRecorded;
-//   DWORD_PTR          dwUser;
-//   DWORD              dwFlags;
-//   DWORD              dwLoops;
-//   struct wavehdr_tag *lpNext;
-//   DWORD_PTR          reserved;
-// } WAVEHDR, *PWAVEHDR, *NPWAVEHDR, *LPWAVEHDR;
-
-/// The WAVEHDR structure defines the header used to identify a waveform-audio
-/// buffer.
-///
-/// {@category Struct}
-class WAVEHDR extends Struct {
-  external Pointer<Uint8> lpData;
-
-  @Uint32()
-  external int dwBufferLength;
-
-  @Uint32()
-  external int dwBytesRecorded;
-
-  @IntPtr()
-  external int dwUser;
-
-  @Uint32()
-  external int dwFlags;
-
-  @Uint32()
-  external int dwLoops;
-
-  @IntPtr()
-  external int lpNext;
-
-  @IntPtr()
-  external int reserved;
 }
 
 // typedef struct mmtime_tag {
@@ -4706,19 +4519,4 @@ class NOTIFYICONDATA extends Struct {
 
   @IntPtr()
   external int hBalloonIcon;
-}
-
-// typedef struct tagTPMPARAMS {
-//   UINT cbSize;
-//   RECT rcExclude;
-// } TPMPARAMS;
-
-/// Contains extended parameters for the TrackPopupMenuEx function.
-///
-/// {@category Struct}
-class TPMPARAMS extends Struct {
-  @Uint32()
-  external int cbSize;
-
-  external RECT rcExclude;
 }

@@ -50,6 +50,27 @@ import 'combase.dart';
 import 'oleaut32.dart';
 import 'structs.dart';
 
+/// The ACTCTX structure is used by the CreateActCtx function to create the
+/// activation context.
+///
+/// {@category Struct}
+class ACTCTX extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int dwFlags;
+  external Pointer<Utf16> lpSource;
+  @Uint16()
+  external int wProcessorArchitecture;
+  @Uint16()
+  external int wLangId;
+  external Pointer<Utf16> lpAssemblyDirectory;
+  external Pointer<Utf16> lpResourceName;
+  external Pointer<Utf16> lpApplicationName;
+  @IntPtr()
+  external int hModule;
+}
+
 /// Contains parameters used during a moniker-binding operation.
 ///
 /// {@category Struct}
@@ -91,6 +112,48 @@ class CREATESTRUCT extends Struct {
   external Pointer<Utf16> lpszClass;
   @Uint32()
   external int dwExStyle;
+}
+
+/// The LOGBRUSH structure defines the style, color, and pattern of a
+/// physical brush. It is used by the CreateBrushIndirect and ExtCreatePen
+/// functions.
+///
+/// {@category Struct}
+class LOGBRUSH extends Struct {
+  @Uint32()
+  external int lbStyle;
+  @Uint32()
+  external int lbColor;
+  @IntPtr()
+  external int lbHatch;
+}
+
+/// The MCI_PLAY_PARMS structure contains positioning information for the
+/// MCI_PLAY command.
+///
+/// {@category Struct}
+class MCI_PLAY_PARMS extends Struct {
+  @IntPtr()
+  external int dwCallback;
+  @Uint32()
+  external int dwFrom;
+  @Uint32()
+  external int dwTo;
+}
+
+/// The MCI_STATUS_PARMS structure contains information for the MCI_STATUS
+/// command.
+///
+/// {@category Struct}
+class MCI_STATUS_PARMS extends Struct {
+  @IntPtr()
+  external int dwCallback;
+  @IntPtr()
+  external int dwReturn;
+  @Uint32()
+  external int dwItem;
+  @Uint32()
+  external int dwTrack;
 }
 
 /// The MONITORINFO structure contains information about a display monitor.
@@ -221,6 +284,15 @@ class SYSTEM_POWER_STATUS extends Struct {
   external int BatteryFullLifeTime;
 }
 
+/// Contains extended parameters for the TrackPopupMenuEx function.
+///
+/// {@category Struct}
+class TPMPARAMS extends Struct {
+  @Uint32()
+  external int cbSize;
+  external RECT rcExclude;
+}
+
 /// Contains information about a registry value. The RegQueryMultipleValues
 /// function uses this structure.
 ///
@@ -233,4 +305,58 @@ class VALENT extends Struct {
   external int ve_valueptr;
   @Uint32()
   external int ve_type;
+}
+
+/// Contains version information for a file. This information is language
+/// and code page independent.
+///
+/// {@category Struct}
+class VS_FIXEDFILEINFO extends Struct {
+  @Uint32()
+  external int dwSignature;
+  @Uint32()
+  external int dwStrucVersion;
+  @Uint32()
+  external int dwFileVersionMS;
+  @Uint32()
+  external int dwFileVersionLS;
+  @Uint32()
+  external int dwProductVersionMS;
+  @Uint32()
+  external int dwProductVersionLS;
+  @Uint32()
+  external int dwFileFlagsMask;
+  @Uint32()
+  external int dwFileFlags;
+  @Uint32()
+  external int dwFileOS;
+  @Uint32()
+  external int dwFileType;
+  @Uint32()
+  external int dwFileSubtype;
+  @Uint32()
+  external int dwFileDateMS;
+  @Uint32()
+  external int dwFileDateLS;
+}
+
+/// The WAVEHDR structure defines the header used to identify a
+/// waveform-audio buffer.
+///
+/// {@category Struct}
+class WAVEHDR extends Struct {
+  external Pointer<Utf8> lpData;
+  @Uint32()
+  external int dwBufferLength;
+  @Uint32()
+  external int dwBytesRecorded;
+  @IntPtr()
+  external int dwUser;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwLoops;
+  external Pointer<WAVEHDR> lpNext;
+  @IntPtr()
+  external int reserved;
 }

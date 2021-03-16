@@ -1,4 +1,8 @@
 {
+    "ACTCTX": {
+        "namespace": "Windows.Win32.ApplicationInstallationAndServicing.ACTCTXW",
+        "comment": "The ACTCTX structure is used by the CreateActCtx function to create the activation context."
+    },
     "BIND_OPTS": {
         "namespace": "Windows.Win32.Com.BIND_OPTS",
         "comment": "Contains parameters used during a moniker-binding operation."
@@ -6,6 +10,18 @@
     "CREATESTRUCT": {
         "namespace": "Windows.Win32.WindowsAndMessaging.CREATESTRUCTW",
         "comment": "Defines the initialization parameters passed to the window procedure of an application. These members are identical to the parameters of the CreateWindowEx function."
+    },
+    "LOGBRUSH": {
+        "namespace": "Windows.Win32.Gdi.LOGBRUSH",
+        "comment": "The LOGBRUSH structure defines the style, color, and pattern of a physical brush. It is used by the CreateBrushIndirect and ExtCreatePen functions."
+    },
+    "MCI_PLAY_PARMS": {
+        "namespace": "Windows.Win32.CoreAudio.MCI_PLAY_PARMS",
+        "comment": "The MCI_PLAY_PARMS structure contains positioning information for the MCI_PLAY command."
+    },
+    "MCI_STATUS_PARMS": {
+        "namespace": "Windows.Win32.CoreAudio.MCI_STATUS_PARMS",
+        "comment": "The MCI_STATUS_PARMS structure contains information for the MCI_STATUS command."
     },
     "MONITORINFO": {
         "namespace": "Windows.Win32.Gdi.MONITORINFO",
@@ -35,8 +51,20 @@
         "namespace": "Windows.Win32.SystemServices.SYSTEM_POWER_STATUS",
         "comment": "Contains information about the power status of the system."
     },
+    "TPMPARAMS": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.TPMPARAMS",
+        "comment": "Contains extended parameters for the TrackPopupMenuEx function."
+    },
     "VALENT": {
         "namespace": "Windows.Win32.WindowsProgramming.VALENTW",
         "comment": "Contains information about a registry value. The RegQueryMultipleValues function uses this structure."
+    },
+    "VS_FIXEDFILEINFO": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.VS_FIXEDFILEINFO",
+        "comment": "Contains version information for a file. This information is language and code page independent."
+    },
+    "WAVEHDR": {
+        "namespace": "Windows.Win32.Multimedia.WAVEHDR",
+        "comment": "The WAVEHDR structure defines the header used to identify a waveform-audio buffer."
     }
 }
