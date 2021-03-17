@@ -16,9 +16,13 @@ import 'package:win32/win32.dart';
 void main() {
   // Open the device by specifying the device and filename.
   // MCI will attempt to choose the MIDI mapper as the output port.
+  final deviceType = TEXT('sequencer');
+  final elementName = TEXT(r'c:\Windows\Media\flourish.mid');
   final mciOpenParams = calloc<MCI_OPEN_PARMS>()
-    ..ref.lpstrDeviceType = TEXT('sequencer')
-    ..ref.lpstrElementName = TEXT(r'c:\Windows\Media\flourish.mid');
+    ..ref.lpstrDeviceType = deviceType
+    ..ref.lpstrElementName = elementName;
+  free(deviceType);
+  free(elementName);
 
   var dwReturn = mciSendCommand(
       NULL, MCI_OPEN, MCI_OPEN_TYPE | MCI_OPEN_ELEMENT, mciOpenParams.address);
@@ -49,11 +53,15 @@ void main() {
   // Ask if the user wants to continue.
   if (LOWORD(mciStatusParams.ref.dwReturn) != MIDI_MAPPER) {
     final warningMessage = TEXT('The MIDI mapper is not available. Continue?');
-    if (MessageBox(NULL, warningMessage, TEXT(''), MB_YESNO) == IDNO) {
-      // User does not want to continue. Not an error;
-      // just close the device and return.
-      mciSendCommand(deviceID, MCI_CLOSE, 0, NULL);
-      return;
+    try {
+      if (MessageBox(NULL, warningMessage, nullptr, MB_YESNO) == IDNO) {
+        // User does not want to continue. Not an error;
+        // just close the device and return.
+        mciSendCommand(deviceID, MCI_CLOSE, 0, NULL);
+        return;
+      }
+    } finally {
+      free(warningMessage);
     }
   }
 
@@ -70,5 +78,7 @@ void main() {
     exit(dwReturn);
   }
 
-  MessageBox(NULL, TEXT('Press OK to stop'), TEXT(''), MB_OK);
+  final message = TEXT('Press OK to stop');
+  MessageBox(NULL, message, nullptr, MB_OK);
+  free(message);
 }
