@@ -5,8 +5,18 @@ final scope = MetadataStore.getWin32Scope();
 void printStruct(String typedef) =>
     print(TypePrinter.printStruct(scope[typedef]!, typedef.split('.').last));
 
+// Union
+// "CHAR_INFO": {
+//     "namespace": "Windows.Win32.SystemServices.CHAR_INFO",
+//     "comment": "Specifies a Unicode or ANSI character and its attributes. This structure is used by console functions to read from and write to a console screen buffer."
+// },
+
+// Nested Unicode struct
+// 'Windows.Win32.SystemServices.STARTUPINFOEXW'
+
 void main() {
   // printStruct('Windows.Win32.Gdi.XFORM');
   // printStruct('Windows.Win32.SystemServices.PROCESS_INFORMATION');
-  printStruct('Windows.Win32.SystemServices.STARTUPINFOW');
+  // printStruct('Windows.Win32.SystemServices.STARTUPINFOEXW');
+  printStruct('Windows.Win32.StructuredStorage.STATSTG');
 }

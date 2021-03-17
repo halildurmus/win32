@@ -215,6 +215,16 @@ TypeTuple parseTypeFromSignature(
       }
       break;
 
+    case CorElementType.ELEMENT_TYPE_ARRAY:
+      // Format is [Type ArrayShape] (see §II.23.2.13)
+      final arrayTuple =
+          parseTypeFromSignature(signatureBlob.sublist(1), reader);
+      runtimeType.name = arrayTuple.typeIdentifier.name;
+      runtimeType.type = arrayTuple.typeIdentifier.type;
+      dataLength = 1 + arrayTuple.offsetLength;
+      // TODO: Parse ArrayShape
+      break;
+
     default:
       dataLength = 1;
       runtimeType.name = runtimeType.toString();
