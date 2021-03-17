@@ -517,7 +517,7 @@ const win32TypeMap = <String, String>{
   'SHELLEXECUTEINFOW': 'SHELLEXECUTEINFO',
   'WNDCLASSW': 'WNDCLASS',
   'LPPROC_THREAD_ATTRIBUTE_LIST': 'Pointer',
-  'FindChangeNotifcationHandle': 'IntPtr',
+  'FindChangeNotificationHandle': 'IntPtr',
   'FindFileHandle': 'IntPtr',
   'FindVolumeHandle': 'IntPtr',
   'HeapHandle': 'IntPtr',

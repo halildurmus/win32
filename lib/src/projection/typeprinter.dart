@@ -319,22 +319,28 @@ void main() {
   }
 
   static String printStruct(TypeDef typedef, String structName) {
-    final buffer = StringBuffer();
+    try {
+      // TODO: Handle arrays after Dart 2.13 stable, per:
+      //   https://github.com/dart-lang/sdk/issues/35763
+      final buffer = StringBuffer();
 
-    buffer.writeln('class $structName extends Struct {');
+      buffer.writeln('class $structName extends Struct {');
 
-    for (final field in typedef.fields) {
-      final nativeType = TypeProjector(field.typeIdentifier).nativeType;
-      final dartType = TypeProjector(field.typeIdentifier).dartType;
+      for (final field in typedef.fields) {
+        final nativeType = TypeProjector(field.typeIdentifier).nativeType;
+        final dartType = TypeProjector(field.typeIdentifier).dartType;
 
-      if (dartType == 'int') {
-        buffer.writeln('  @$nativeType() external $dartType ${field.name};');
-      } else {
-        buffer.writeln('  external $dartType ${field.name};');
+        if (dartType == 'int' || dartType == 'double') {
+          buffer.writeln('  @$nativeType() external $dartType ${field.name};');
+        } else {
+          buffer.writeln('  external $dartType ${field.name};');
+        }
       }
+      buffer.writeln('}\n');
+      return buffer.toString();
+    } catch (identifier) {
+      return '';
     }
-    buffer.writeln('}\n');
-    return buffer.toString();
   }
 
   static String printType(TypeDef typeDef) {
