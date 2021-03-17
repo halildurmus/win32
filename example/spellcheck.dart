@@ -11,7 +11,6 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main(List<String> args) {
-  
   if (args.length != 1) {
     print('Provide text in the argument');
     return;
@@ -49,7 +48,7 @@ void main(List<String> args) {
 
     while (errors.Next(errorPtr.cast()) == S_OK) {
       errorCount++;
-      
+
       final error = ISpellingError(errorPtr);
       final word = text.substring(
         error.StartIndex,
