@@ -10,17 +10,38 @@ void main() {
     final xform = scope['Windows.Win32.Gdi.XFORM']!;
     expect(xform.fields.length, equals(6));
   });
+
   test('Struct primitive field has expected name and type', () {
     final xform = scope['Windows.Win32.Gdi.XFORM']!;
     expect(xform.fields.first.name, equals('eM11'));
     expect(xform.fields.first.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_R4));
   });
+
   test('Struct valuetype field has expected name and type', () {
-    final xform = scope['Windows.Win32.SystemServices.PROCESS_INFORMATION']!;
-    expect(xform.fields.first.name, equals('hProcess'));
-    expect(xform.fields.first.typeIdentifier.corType,
+    final procInfo = scope['Windows.Win32.SystemServices.PROCESS_INFORMATION']!;
+    expect(procInfo.fields.first.name, equals('hProcess'));
+    expect(procInfo.fields.first.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
-    expect(xform.fields.first.typeIdentifier.name, endsWith('HANDLE'));
+    expect(procInfo.fields.first.typeIdentifier.name, endsWith('HANDLE'));
+  });
+
+  test('Struct array field has expected name and type', () {
+    final procInfo = scope['Windows.Win32.Gdi.BITMAPINFO']!;
+    expect(procInfo.fields.last.name, equals('bmiColors'));
+    expect(procInfo.fields.last.typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_ARRAY));
+    expect(procInfo.fields.last.typeIdentifier.name, endsWith('RGBQUAD'));
+  });
+
+  test('Struct array field projects correctly', () {
+    final procInfo = scope['Windows.Win32.Gdi.BITMAPINFO']!;
+
+    final nativeType =
+        TypeProjector(procInfo.fields.last.typeIdentifier).nativeType;
+    final dartType =
+        TypeProjector(procInfo.fields.last.typeIdentifier).dartType;
+    expect(nativeType, equals('RGBQUAD'));
+    expect(dartType, equals('RGBQUAD'));
   });
 }

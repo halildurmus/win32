@@ -1,42 +1,22 @@
 import 'package:winmd/winmd.dart';
 
-// .class public sequential ansi sealed beforefieldinit Windows.Win32.SystemServices.PROCESS_INFORMATION
-// 	extends [netstandard]System.ValueType
-// {
-// 	// Fields
-// 	.field public valuetype [Windows.Win32.winmd]Windows.Win32.SystemServices.HANDLE hProcess
-// 	.field public valuetype [Windows.Win32.winmd]Windows.Win32.SystemServices.HANDLE hThread
-// 	.field public uint32 dwProcessId
-// 	.field public uint32 dwThreadId
+final scope = MetadataStore.getWin32Scope();
 
-// } // end of class Windows.Win32.SystemServices.PROCESS_INFORMATION
+void printStruct(String typedef) =>
+    print(TypePrinter.printStruct(scope[typedef]!, typedef.split('.').last));
 
-// .class public sequential ansi sealed beforefieldinit Windows.Win32.Gdi.XFORM
-// 	extends [netstandard]System.ValueType
-// {
-// 	// Fields
-// 	.field public float32 eM11
-// 	.field public float32 eM12
-// 	.field public float32 eM21
-// 	.field public float32 eM22
-// 	.field public float32 eDx
-// 	.field public float32 eDy
+// Union
+// "CHAR_INFO": {
+//     "namespace": "Windows.Win32.SystemServices.CHAR_INFO",
+//     "comment": "Specifies a Unicode or ANSI character and its attributes. This structure is used by console functions to read from and write to a console screen buffer."
+// },
 
-// } // end of class Windows.Win32.Gdi.XFORM
-
-void printStruct(TypeDef typedef) {
-  print('class ${typedef.typeName.split('.').last} extends Struct {');
-
-  for (final field in typedef.fields) {
-    final nativeType = TypeProjector(field.typeIdentifier).nativeType;
-    final dartType = TypeProjector(field.typeIdentifier).dartType;
-    print('  @$nativeType() external $dartType ${field.name};');
-  }
-  print('}\n');
-}
+// Nested Unicode struct
+// 'Windows.Win32.SystemServices.STARTUPINFOEXW'
 
 void main() {
-  final scope = MetadataStore.getWin32Scope();
-  printStruct(scope['Windows.Win32.Gdi.XFORM']!);
-  printStruct(scope['Windows.Win32.SystemServices.PROCESS_INFORMATION']!);
+  // printStruct('Windows.Win32.Gdi.XFORM');
+  // printStruct('Windows.Win32.SystemServices.PROCESS_INFORMATION');
+  // printStruct('Windows.Win32.SystemServices.STARTUPINFOEXW');
+  printStruct('Windows.Win32.StructuredStorage.STATSTG');
 }
