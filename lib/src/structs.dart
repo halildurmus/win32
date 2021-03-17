@@ -234,37 +234,6 @@ class STARTUPINFOEX extends Struct {
   external Pointer lpAttributeList;
 }
 
-// typedef struct _SECURITY_DESCRIPTOR {
-//   BYTE                        Revision;
-//   BYTE                        Sbz1;
-//   SECURITY_DESCRIPTOR_CONTROL Control;
-//   PSID                        Owner;
-//   PSID                        Group;
-//   PACL                        Sacl;
-//   PACL                        Dacl;
-// } SECURITY_DESCRIPTOR, *PISECURITY_DESCRIPTOR;
-
-/// The SECURITY_DESCRIPTOR structure contains the security information
-/// associated with an object. Applications use this structure to set and query
-/// an object's security status.
-///
-/// {@category Struct}
-class SECURITY_DESCRIPTOR extends Struct {
-  @Uint8()
-  external int Revision;
-
-  @Uint8()
-  external int Sbz1;
-
-  @Int16()
-  external int Control;
-
-  external Pointer<IntPtr> Owner;
-  external Pointer<IntPtr> Group;
-  external Pointer<IntPtr> Sacl;
-  external Pointer<IntPtr> Dacl;
-}
-
 // struct tagVARIANT
 //    {
 //        VARTYPE vt;
@@ -1198,170 +1167,6 @@ class ENUMLOGFONTEX extends Struct {
       ]).buffer.asUint16List());
 }
 
-// typedef struct tagMENUINFO {
-//   DWORD     cbSize;
-//   DWORD     fMask;
-//   DWORD     dwStyle;
-//   UINT      cyMax;
-//   HBRUSH    hbrBack;
-//   DWORD     dwContextHelpID;
-//   ULONG_PTR dwMenuData;
-// } MENUINFO, *LPMENUINFO;
-
-/// Contains information about a menu.
-///
-/// {@category Struct}
-class MENUINFO extends Struct {
-  @Uint32()
-  external int cbSize;
-  @Uint32()
-  external int fMask;
-  @Uint32()
-  external int dwStyle;
-  @Uint32()
-  external int cyMax;
-  @IntPtr()
-  external int hbrBack;
-  @Uint32()
-  external int dwContextHelpID;
-  external Pointer<Uint32> dwMenuData;
-}
-
-// typedef struct tagMENUITEMINFOW {
-//   UINT      cbSize;
-//   UINT      fMask;
-//   UINT      fType;
-//   UINT      fState;
-//   UINT      wID;
-//   HMENU     hSubMenu;
-//   HBITMAP   hbmpChecked;
-//   HBITMAP   hbmpUnchecked;
-//   ULONG_PTR dwItemData;
-//   LPWSTR    dwTypeData;
-//   UINT      cch;
-//   HBITMAP   hbmpItem;
-// } MENUITEMINFOW, *LPMENUITEMINFOW;
-
-/// Contains information about a menu item.
-///
-/// {@category Struct}
-class MENUITEMINFO extends Struct {
-  @Uint32()
-  external int cbSize;
-
-  @Uint32()
-  external int fMask;
-
-  @Uint32()
-  external int fType;
-
-  @Uint32()
-  external int fState;
-
-  @Uint32()
-  external int wID;
-
-  @IntPtr()
-  external int hSubMenu;
-
-  @IntPtr()
-  external int hbmpChecked;
-  @IntPtr()
-  external int hbmpUnchecked;
-
-  external Pointer<Uint32> dwItemData;
-  external Pointer<Utf16> dwTypeData;
-
-  @Uint32()
-  external int cch;
-
-  @IntPtr()
-  external int hbmpItem;
-}
-
-// typedef struct tagMSG {
-//   HWND   hwnd;
-//   UINT   message;
-//   WPARAM wParam;
-//   LPARAM lParam;
-//   DWORD  time;
-//   POINT  pt;
-// } MSG, *PMSG, *NPMSG, *LPMSG;
-
-/// Contains message information from a thread's message queue.
-///
-/// {@category Struct}
-class MSG extends Struct {
-  @IntPtr()
-  external int hwnd;
-
-  @Uint32()
-  external int message;
-
-  @IntPtr()
-  external int wParam;
-
-  @IntPtr()
-  external int lParam;
-
-  @Uint32()
-  external int time;
-
-  external POINT pt;
-}
-
-// typedef struct tagSIZE {
-//   LONG cx;
-//   LONG cy;
-// } SIZE, *PSIZE;
-
-/// The SIZE structure defines the width and height of a rectangle.
-///
-/// {@category Struct}
-class SIZE extends Struct {
-  @Int32()
-  external int cx;
-
-  @Int32()
-  external int cy;
-}
-
-// typedef struct tagMINMAXINFO {
-//   POINT ptReserved;
-//   POINT ptMaxSize;
-//   POINT ptMaxPosition;
-//   POINT ptMinTrackSize;
-//   POINT ptMaxTrackSize;
-// } MINMAXINFO, *PMINMAXINFO, *LPMINMAXINFO;
-
-/// Contains information about a window's maximized size and position and its
-/// minimum and maximum tracking size.
-///
-/// {@category Struct}
-class MINMAXINFO extends Struct {
-  external POINT ptReserved;
-  external POINT ptMaxSize;
-  external POINT ptMaxPosition;
-  external POINT ptMinTrackSize;
-  external POINT ptMaxTrackSize;
-}
-
-// typedef struct tagPOINT {
-//   LONG x;
-//   LONG y;
-// } POINT, *PPOINT, *NPPOINT, *LPPOINT;
-
-/// The POINT structure defines the x- and y-coordinates of a point.
-///
-/// {@category Struct}
-class POINT extends Struct {
-  @Int32()
-  external int x;
-
-  @Int32()
-  external int y;
-}
-
 // typedef struct tagPAINTSTRUCT {
 //   HDC  hdc;
 //   BOOL fErase;
@@ -1396,28 +1201,6 @@ class PAINTSTRUCT extends Struct {
   external int rgb3;
   @Uint64()
   external int rgb4;
-}
-
-// typedef struct tagRECT {
-//   LONG left;
-//   LONG top;
-//   LONG right;
-//   LONG bottom;
-// } RECT, *PRECT, *NPRECT, *LPRECT;
-
-/// The RECT structure defines a rectangle by the coordinates of its upper-left
-/// and lower-right corners.
-///
-/// {@category Struct}
-class RECT extends Struct {
-  @Int32()
-  external int left;
-  @Int32()
-  external int top;
-  @Int32()
-  external int right;
-  @Int32()
-  external int bottom;
 }
 
 // typedef struct tagINPUT {
@@ -1546,109 +1329,6 @@ class HARDWAREINPUT {
   set wParamH(int value) => ptr.elementAt(3).value = value;
 }
 
-// typedef struct tagTEXTMETRICW {
-//   LONG  tmHeight;
-//   LONG  tmAscent;
-//   LONG  tmDescent;
-//   LONG  tmInternalLeading;
-//   LONG  tmExternalLeading;
-//   LONG  tmAveCharWidth;
-//   LONG  tmMaxCharWidth;
-//   LONG  tmWeight;
-//   LONG  tmOverhang;
-//   LONG  tmDigitizedAspectX;
-//   LONG  tmDigitizedAspectY;
-//   WCHAR tmFirstChar;
-//   WCHAR tmLastChar;
-//   WCHAR tmDefaultChar;
-//   WCHAR tmBreakChar;
-//   BYTE  tmItalic;
-//   BYTE  tmUnderlined;
-//   BYTE  tmStruckOut;
-//   BYTE  tmPitchAndFamily;
-//   BYTE  tmCharSet;
-// } TEXTMETRICW, *PTEXTMETRICW, *NPTEXTMETRICW, *LPTEXTMETRICW;
-
-/// The TEXTMETRIC structure contains basic information about a physical font.
-/// All sizes are specified in logical units; that is, they depend on the
-/// current mapping mode of the display context.
-///
-/// {@category Struct}
-class TEXTMETRIC extends Struct {
-  @Int32()
-  external int tmHeight;
-  @Int32()
-  external int tmAscent;
-  @Int32()
-  external int tmDescent;
-  @Int32()
-  external int tmInternalLeading;
-  @Int32()
-  external int tmExternalLeading;
-  @Int32()
-  external int tmAveCharWidth;
-  @Int32()
-  external int tmMaxCharWidth;
-  @Int32()
-  external int tmWeight;
-  @Int32()
-  external int tmOverhang;
-  @Int32()
-  external int tmDigitizedAspectX;
-  @Int32()
-  external int tmDigitizedAspectY;
-  @Int16()
-  external int tmFirstChar;
-  @Int16()
-  external int tmLastChar;
-  @Int16()
-  external int tmDefaultChar;
-  @Int16()
-  external int tmBreakChar;
-  @Uint8()
-  external int tmItalic;
-  @Uint8()
-  external int tmUnderlined;
-  @Uint8()
-  external int tmStruckOut;
-  @Uint8()
-  external int tmPitchAndFamily;
-  @Uint8()
-  external int tmCharSet;
-}
-
-// typedef struct tagSCROLLINFO {
-//   UINT cbSize;
-//   UINT fMask;
-//   int  nMin;
-//   int  nMax;
-//   UINT nPage;
-//   int  nPos;
-//   int  nTrackPos;
-// } SCROLLINFO, *LPSCROLLINFO;
-
-/// The SCROLLINFO structure contains scroll bar parameters to be set by the
-/// SetScrollInfo function (or SBM_SETSCROLLINFO message), or retrieved by the
-/// GetScrollInfo function (or SBM_GETSCROLLINFO message).
-///
-/// {@category Struct}
-class SCROLLINFO extends Struct {
-  @Uint32()
-  external int cbSize;
-  @Uint32()
-  external int fMask;
-  @Int32()
-  external int nMin;
-  @Int32()
-  external int nMax;
-  @Uint32()
-  external int nPage;
-  @Int32()
-  external int nPos;
-  @Int32()
-  external int nTrackPos;
-}
-
 // typedef struct _SHELLEXECUTEINFOW {
 //   DWORD     cbSize;
 //   ULONG     fMask;
@@ -1704,26 +1384,6 @@ class SHELLEXECUTEINFO extends Struct {
 
   @IntPtr()
   external int hProcess;
-}
-
-// typedef struct _SHQUERYRBINFO {
-//     DWORD   cbSize;
-//     __int64 i64Size;
-//     __int64 i64NumItems;
-// #endif
-// } SHQUERYRBINFO, *LPSHQUERYRBINFO;
-
-/// Contains the size and item count information retrieved by the
-/// SHQueryRecycleBin function.
-///
-/// {@category Struct}
-class SHQUERYRBINFO extends Struct {
-  @Uint32()
-  external int cbSize;
-  @Int64()
-  external int i64Size;
-  @Int64()
-  external int i64NumItems;
 }
 
 // typedef struct _GUID {
@@ -1793,179 +1453,6 @@ class GUID extends Struct {
   }
 }
 
-// typedef struct _CREDENTIAL_ATTRIBUTEW {
-//     LPWSTR  Keyword;
-//     DWORD   Flags;
-//     DWORD   ValueSize;
-//     LPBYTE  Value;
-// } CREDENTIAL_ATTRIBUTEW, *PCREDENTIAL_ATTRIBUTEW;
-
-/// The CREDENTIAL_ATTRIBUTE structure contains an application-defined attribute
-/// of the credential. An attribute is a keyword-value pair. It is up to the
-/// application to define the meaning of the attribute.
-///
-/// {@category Struct}
-class CREDENTIAL_ATTRIBUTE extends Struct {
-  external Pointer<Utf16> Keyword;
-
-  @Uint32()
-  external int Flags;
-
-  @Uint32()
-  external int ValueSize;
-
-  external Pointer<Uint8> Value;
-}
-
-// typedef struct _CREDENTIALW {
-//     DWORD Flags;
-//     DWORD Type;
-//     LPWSTR TargetName;
-//     LPWSTR Comment;
-//     FILETIME LastWritten;
-//     DWORD CredentialBlobSize;
-//     LPBYTE CredentialBlob;
-//     DWORD Persist;
-//     DWORD AttributeCount;
-//     PCREDENTIAL_ATTRIBUTEW Attributes;
-//     LPWSTR TargetAlias;
-//     LPWSTR UserName;
-// } CREDENTIALW, *PCREDENTIALW;
-
-/// The CREDENTIAL structure contains an individual credential.
-///
-/// {@category Struct}
-class CREDENTIAL extends Struct {
-  @Uint32()
-  external int Flags;
-  @Uint32()
-  external int Type;
-
-  external Pointer<Utf16> TargetName;
-  external Pointer<Utf16> Comment;
-  external Pointer<FILETIME> LastWritten;
-
-  @Uint32()
-  external int CredentialBlobSize;
-
-  external Pointer<Uint8> CredentialBlob;
-
-  @Uint32()
-  external int Persist;
-
-  @Uint32()
-  external int AttributeCount;
-
-  external Pointer<CREDENTIAL_ATTRIBUTE> Attributes;
-  external Pointer<Utf16> TargetAlias;
-  external Pointer<Utf16> UserName;
-}
-
-// typedef struct tagWINDOWINFO {
-//   DWORD cbSize;
-//   RECT  rcWindow;
-//   RECT  rcClient;
-//   DWORD dwStyle;
-//   DWORD dwExStyle;
-//   DWORD dwWindowStatus;
-//   UINT  cxWindowBorders;
-//   UINT  cyWindowBorders;
-//   ATOM  atomWindowType;
-//   WORD  wCreatorVersion;
-// } WINDOWINFO, *PWINDOWINFO, *LPWINDOWINFO;
-
-/// Contains window information.
-///
-/// {@category Struct}
-class WINDOWINFO extends Struct {
-  @Uint32()
-  external int cbSize;
-
-  external RECT rcWindow;
-  external RECT rcClient;
-
-  @Uint32()
-  external int dwStyle;
-  @Uint32()
-  external int dwExStyle;
-  @Uint32()
-  external int dwWindowStatus;
-  @Uint32()
-  external int cxWindowBorders;
-  @Uint32()
-  external int cyWindowBorders;
-  @Uint16()
-  external int atomWindowType;
-  @Uint16()
-  external int wCreatorVersion;
-}
-
-// typedef struct tagBITMAPINFO {
-//   BITMAPINFOHEADER bmiHeader;
-//   RGBQUAD          bmiColors[1];
-// } BITMAPINFO, *LPBITMAPINFO, *PBITMAPINFO;
-
-/// The BITMAPINFO structure defines the dimensions and color information for a
-/// device-independent bitmap (DIB).
-///
-/// {@category Struct}
-class BITMAPINFO extends Struct {
-  external BITMAPINFOHEADER bmiHeader;
-  external RGBQUAD bmiColors;
-}
-
-// typedef struct tagRGBQUAD {
-//   BYTE rgbBlue;
-//   BYTE rgbGreen;
-//   BYTE rgbRed;
-//   BYTE rgbReserved;
-// } RGBQUAD;
-
-/// The RGBQUAD structure describes a color consisting of relative intensities
-/// of red, green, and blue.
-///
-/// {@category Struct}
-class RGBQUAD extends Struct {
-  @Uint8()
-  external int rgbBlue;
-  @Uint8()
-  external int rgbGreen;
-  @Uint8()
-  external int rgbRed;
-  @Uint8()
-  external int rgbReserved;
-}
-
-// typedef struct tagBITMAP {
-//   LONG   bmType;
-//   LONG   bmWidth;
-//   LONG   bmHeight;
-//   LONG   bmWidthBytes;
-//   WORD   bmPlanes;
-//   WORD   bmBitsPixel;
-//   LPVOID bmBits;
-// } BITMAP, *PBITMAP, *NPBITMAP, *LPBITMAP;
-
-/// The BITMAP structure defines the type, width, height, color format, and bit
-/// values of a bitmap.
-///
-/// {@category Struct}
-class BITMAP extends Struct {
-  @Int32()
-  external int bmType;
-  @Int32()
-  external int bmWidth;
-  @Int32()
-  external int bmHeight;
-  @Int32()
-  external int bmWidthBytes;
-  @Int16()
-  external int bmPlanes;
-  @Int16()
-  external int bmBitsPixel;
-  external Pointer bmBits;
-}
-
 // typedef struct tagBITMAPFILEHEADER {
 //   WORD  bfType;
 //   DWORD bfSize;
@@ -2009,162 +1496,6 @@ class BITMAPFILEHEADER extends Struct {
   }
 }
 
-// typedef struct tagBITMAPINFOHEADER {
-//   DWORD biSize;
-//   LONG  biWidth;
-//   LONG  biHeight;
-//   WORD  biPlanes;
-//   WORD  biBitCount;
-//   DWORD biCompression;
-//   DWORD biSizeImage;
-//   LONG  biXPelsPerMeter;
-//   LONG  biYPelsPerMeter;
-//   DWORD biClrUsed;
-//   DWORD biClrImportant;
-// } BITMAPINFOHEADER, *LPBITMAPINFOHEADER, *PBITMAPINFOHEADER;
-
-/// The BITMAPINFOHEADER structure contains information about the dimensions and
-/// color format of a device-independent bitmap (DIB).
-///
-/// {@category Struct}
-class BITMAPINFOHEADER extends Struct {
-  @Uint32()
-  external int biSize;
-  @Int32()
-  external int biWidth;
-  @Int32()
-  external int biHeight;
-  @Uint16()
-  external int biPlanes;
-  @Uint16()
-  external int biBitCount;
-  @Uint32()
-  external int biCompression;
-  @Uint32()
-  external int biSizeImage;
-  @Int32()
-  external int biXPelsPerMeter;
-  @Int32()
-  external int biYPelsPerMeter;
-  @Uint32()
-  external int biClrUsed;
-  @Uint32()
-  external int biClrImportant;
-}
-
-// typedef struct tagPALETTEENTRY {
-//   BYTE peRed;
-//   BYTE peGreen;
-//   BYTE peBlue;
-//   BYTE peFlags;
-// } PALETTEENTRY;
-
-/// The PALETTEENTRY structure specifies the color and usage of an entry in a
-/// logical palette. A logical palette is defined by a LOGPALETTE structure.
-///
-/// {@category Struct}
-class PALETTEENTRY extends Struct {
-  @Uint8()
-  external int peRed;
-  @Uint8()
-  external int peGreen;
-  @Uint8()
-  external int peBlue;
-  @Uint8()
-  external int peFlags;
-}
-
-// typedef struct tagDRAWTEXTPARAMS {
-//   UINT cbSize;
-//   int  iTabLength;
-//   int  iLeftMargin;
-//   int  iRightMargin;
-//   UINT uiLengthDrawn;
-// } DRAWTEXTPARAMS, *LPDRAWTEXTPARAMS;
-
-/// The DRAWTEXTPARAMS structure contains extended formatting options for the
-/// DrawTextEx function.
-///
-/// {@category Struct}
-class DRAWTEXTPARAMS extends Struct {
-  @Uint32()
-  external int cbSize;
-  @Int32()
-  external int iTabLength;
-  @Int32()
-  external int iLeftMargin;
-  @Int32()
-  external int iRightMargin;
-  @Uint32()
-  external int uiLengthDrawn;
-}
-
-// typedef struct _FILETIME {
-//     DWORD dwLowDateTime;
-//     DWORD dwHighDateTime;
-// } FILETIME, *PFILETIME, *LPFILETIME;
-
-/// Contains a 64-bit value representing the number of 100-nanosecond intervals
-/// since January 1, 1601 (UTC).
-///
-/// {@category Struct}
-class FILETIME extends Struct {
-  @Uint32()
-  external int dwLowDateTime;
-  @Uint32()
-  external int dwHighDateTime;
-}
-
-// typedef struct KNOWNFOLDER_DEFINITION
-//     {
-//     KF_CATEGORY category;
-//     LPWSTR pszName;
-//     LPWSTR pszDescription;
-//     KNOWNFOLDERID fidParent;
-//     LPWSTR pszRelativePath;
-//     LPWSTR pszParsingName;
-//     LPWSTR pszTooltip;
-//     LPWSTR pszLocalizedName;
-//     LPWSTR pszIcon;
-//     LPWSTR pszSecurity;
-//     DWORD dwAttributes;
-//     KF_DEFINITION_FLAGS kfdFlags;
-//     FOLDERTYPEID ftidType;
-//     } 	KNOWNFOLDER_DEFINITION;
-
-/// Defines the specifics of a known folder.
-///
-/// {@category Struct}
-class KNOWNFOLDER_DEFINITION extends Struct {
-  @Int32()
-  external int category;
-  external Pointer<Utf16> pszName;
-  external Pointer<Utf16> pszDescription;
-
-  @Uint32()
-  external int fidParent_guid1;
-  @Uint16()
-  external int fidParent_guid2;
-  @Uint16()
-  external int fidParent_guid3;
-  @Uint64()
-  external int fidParent_guid4;
-
-  external Pointer<Utf16> pszRelativePath;
-  external Pointer<Utf16> pszParsingName;
-  external Pointer<Utf16> pszTooltip;
-  external Pointer<Utf16> pszLocalizedName;
-  external Pointer<Utf16> pszIcon;
-  external Pointer<Utf16> pszSecurity;
-
-  @Uint32()
-  external int dwAttributes;
-  @Uint32()
-  external int kfdFlags;
-
-  external GUID ftidType;
-}
-
 // typedef struct _SHITEMID
 //     {
 //     USHORT cb;
@@ -2191,99 +1522,6 @@ class SHITEMID extends Struct {
   }
 }
 
-// typedef struct tagDISPPARAMS {
-//   VARIANTARG *rgvarg;
-//   DISPID     *rgdispidNamedArgs;
-//   UINT       cArgs;
-//   UINT       cNamedArgs;
-// } DISPPARAMS;
-
-/// Contains the arguments passed to a method or property.
-///
-/// {@category Struct}
-class DISPPARAMS extends Struct {
-  external Pointer<VARIANT> rgvarg;
-  external Pointer<Int32> rgdispidNamedArgs;
-
-  @Int16()
-  external int cArgs;
-
-  @Int16()
-  external int cNamedArgs;
-}
-
-// *** CONSOLE STRUCTS ***
-
-// typedef struct _CONSOLE_CURSOR_INFO {
-//   DWORD dwSize;
-//   BOOL  bVisible;
-// } CONSOLE_CURSOR_INFO, *PCONSOLE_CURSOR_INFO;
-
-/// Contains information about the console cursor.
-///
-/// {@category Struct}
-class CONSOLE_CURSOR_INFO extends Struct {
-  @Uint32()
-  external int dwSize;
-  @Int32()
-  external int bVisible;
-}
-
-// typedef struct _CONSOLE_SCREEN_BUFFER_INFO {
-//   COORD      dwSize;
-//   COORD      dwCursorPosition;
-//   WORD       wAttributes;
-//   SMALL_RECT srWindow;
-//   COORD      dwMaximumWindowSize;
-// } CONSOLE_SCREEN_BUFFER_INFO;
-
-/// Contains information about a console screen buffer.
-///
-/// {@category Struct}
-class CONSOLE_SCREEN_BUFFER_INFO extends Struct {
-  external COORD dwSize;
-  external COORD dwCursorPosition;
-  @Uint16()
-  external int wAttributes;
-  external SMALL_RECT srWindow;
-  external COORD dwMaximumWindowSize;
-}
-
-// typedef struct _CONSOLE_SELECTION_INFO {
-//   DWORD      dwFlags;
-//   COORD      dwSelectionAnchor;
-//   SMALL_RECT srSelection;
-// } CONSOLE_SELECTION_INFO, *PCONSOLE_SELECTION_INFO;
-
-/// Contains information for a console selection.
-///
-/// {@category Struct}
-class CONSOLE_SELECTION_INFO extends Struct {
-  @Uint32()
-  external int dwFlags;
-
-  external COORD dwSelectionAnchor;
-  external SMALL_RECT srSelection;
-}
-
-// typedef struct _COORD {
-//   SHORT X;
-//   SHORT Y;
-// } COORD, *PCOORD;
-
-/// Defines the coordinates of a character cell in a console screen buffer. The
-/// origin of the coordinate system (0,0) is at the top, left cell of the
-/// buffer.
-///
-/// {@category Struct}
-class COORD extends Struct {
-  @Int16()
-  external int X;
-
-  @Int16()
-  external int Y;
-}
-
 // typedef struct _CHAR_INFO {
 //   union {
 //     WCHAR UnicodeChar;
@@ -2302,47 +1540,6 @@ class CHAR_INFO extends Struct {
 
   @Int16()
   external int Attributes;
-}
-
-// typedef struct _SMALL_RECT {
-//   SHORT Left;
-//   SHORT Top;
-//   SHORT Right;
-//   SHORT Bottom;
-// } SMALL_RECT;
-
-/// Defines the coordinates of the upper left and lower right corners of a
-/// rectangle.
-///
-/// {@category Struct}
-class SMALL_RECT extends Struct {
-  @Int16()
-  external int Left;
-
-  @Int16()
-  external int Top;
-
-  @Int16()
-  external int Right;
-
-  @Int16()
-  external int Bottom;
-}
-// typedef struct tagINITCOMMONCONTROLSEX {
-//   DWORD dwSize;
-//   DWORD dwICC;
-// } INITCOMMONCONTROLSEX, *LPINITCOMMONCONTROLSEX;
-
-/// Carries information used to load common control classes from the
-/// dynamic-link library (DLL). This structure is used with the
-/// InitCommonControlsEx function.
-///
-/// {@category Struct}
-class INITCOMMONCONTROLSEX extends Struct {
-  @Uint32()
-  external int dwSize;
-  @Uint32()
-  external int dwICC;
 }
 
 // typedef struct {
@@ -2534,49 +1731,6 @@ class TASKDIALOGCONFIG extends Struct {
   external int cxWidth;
 }
 
-// typedef struct _TASKDIALOG_BUTTON
-// {
-//     int     nButtonID;
-//     PCWSTR  pszButtonText;
-// } TASKDIALOG_BUTTON;
-
-/// The TASKDIALOG_BUTTON structure contains information used to display a
-/// button in a task dialog. The TASKDIALOGCONFIG structure uses this structure.
-///
-/// {@category Struct}
-class TASKDIALOG_BUTTON extends Struct {
-  @Int32()
-  external int nButtonID;
-
-  external Pointer<Utf16> pszButtonText;
-}
-
-// typedef struct _DLLVERSIONINFO
-// {
-//     DWORD cbSize;
-//     DWORD dwMajorVersion;                   // Major version
-//     DWORD dwMinorVersion;                   // Minor version
-//     DWORD dwBuildNumber;                    // Build number
-//     DWORD dwPlatformID;                     // DLLVER_PLATFORM_*
-// } DLLVERSIONINFO;
-
-/// Receives DLL-specific version information. It is used with the DllGetVersion
-/// function.
-///
-/// {@category Struct}
-class DLLVERSIONINFO extends Struct {
-  @Uint32()
-  external int cbSize;
-  @Uint32()
-  external int dwMajorVersion;
-  @Uint32()
-  external int dwMinorVersion;
-  @Uint32()
-  external int dwBuildNumber;
-  @Uint32()
-  external int dwPlatformID;
-}
-
 // typedef struct _OSVERSIONINFOW {
 //   DWORD dwOSVersionInfoSize;
 //   DWORD dwMajorVersion;
@@ -2753,42 +1907,6 @@ class OSVERSIONINFO extends Struct {
         _szCSDVersion56, _szCSDVersion57, _szCSDVersion58, _szCSDVersion59,
         _szCSDVersion60, _szCSDVersion61, _szCSDVersion62, _szCSDVersion63
       ]).buffer.asUint16List());
-}
-
-// typedef struct _SYSTEMTIME {
-//   WORD wYear;
-//   WORD wMonth;
-//   WORD wDayOfWeek;
-//   WORD wDay;
-//   WORD wHour;
-//   WORD wMinute;
-//   WORD wSecond;
-//   WORD wMilliseconds;
-// } SYSTEMTIME, *PSYSTEMTIME, *LPSYSTEMTIME;
-
-/// Specifies a date and time, using individual members for the month, day,
-/// year, weekday, hour, minute, second, and millisecond. The time is either in
-/// coordinated universal time (UTC) or local time, depending on the function
-/// that is being called.
-///
-/// {@category Struct}
-class SYSTEMTIME extends Struct {
-  @Uint16()
-  external int wYear;
-  @Uint16()
-  external int wMonth;
-  @Uint16()
-  external int wDayOfWeek;
-  @Uint16()
-  external int wDay;
-  @Uint16()
-  external int wHour;
-  @Uint16()
-  external int wMinute;
-  @Uint16()
-  external int wSecond;
-  @Uint16()
-  external int wMilliseconds;
 }
 
 // typedef struct _BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS {
@@ -3032,19 +2150,6 @@ class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
   external int cTimeoutMultiplier;
   @IntPtr()
   external int hRadio;
-}
-
-// typedef struct BLUETOOTH_FIND_RADIO_PARAMS {
-//   DWORD dwSize;
-// } BLUETOOTH_FIND_RADIO_PARAMS;
-
-/// The BLUETOOTH_FIND_RADIO_PARAMS structure facilitates enumerating installed
-/// Bluetooth radios.
-///
-/// {@category Struct}
-class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
-  @Uint32()
-  external int dwSize;
 }
 
 // typedef struct _BLUETOOTH_ADDRESS {
@@ -3369,56 +2474,6 @@ class COR_FIELD_OFFSET extends Struct {
   external int ulOffset;
 }
 
-// typedef struct tagVS_FIXEDFILEINFO
-// {
-//     DWORD   dwSignature;
-//     DWORD   dwStrucVersion;
-//     DWORD   dwFileVersionMS;
-//     DWORD   dwFileVersionLS;
-//     DWORD   dwProductVersionMS;
-//     DWORD   dwProductVersionLS;
-//     DWORD   dwFileFlagsMask;
-//     DWORD   dwFileFlags;
-//     DWORD   dwFileOS;
-//     DWORD   dwFileType;
-//     DWORD   dwFileSubtype;
-//     DWORD   dwFileDateMS;
-//     DWORD   dwFileDateLS;
-// } VS_FIXEDFILEINFO;
-
-/// Contains version information for a file. This information is language and
-/// code page independent.
-///
-/// {@category Struct}
-class VS_FIXEDFILEINFO extends Struct {
-  @Uint32()
-  external int dwSignature;
-  @Uint32()
-  external int dwStrucVersion;
-  @Uint32()
-  external int dwFileVersionMS;
-  @Uint32()
-  external int dwFileVersionLS;
-  @Uint32()
-  external int dwProductVersionMS;
-  @Uint32()
-  external int dwProductVersionLS;
-  @Uint32()
-  external int dwFileFlagsMask;
-  @Uint32()
-  external int dwFileFlags;
-  @Uint32()
-  external int dwFileOS;
-  @Uint32()
-  external int dwFileType;
-  @Uint32()
-  external int dwFileSubtype;
-  @Uint32()
-  external int dwFileDateMS;
-  @Uint32()
-  external int dwFileDateLS;
-}
-
 // typedef struct tagMCI_OPEN_PARMSW {
 //     DWORD_PTR   dwCallback;
 //     MCIDEVICEID wDeviceID;
@@ -3487,25 +2542,6 @@ class MCI_OPEN_PARMS extends Struct {
   }
 }
 
-// typedef struct {
-//   DWORD_PTR dwCallback;
-//   DWORD     dwFrom;
-//   DWORD     dwTo;
-// } MCI_PLAY_PARMS, *PMCI_PLAY_PARMS, FAR *LPMCI_PLAY_PARMS;
-
-/// The MCI_PLAY_PARMS structure contains positioning information for the
-/// MCI_PLAY command.
-///
-/// {@category Struct}
-class MCI_PLAY_PARMS extends Struct {
-  @IntPtr()
-  external int dwCallback;
-  @Uint32()
-  external int dwFrom;
-  @Uint32()
-  external int dwTo;
-}
-
 // typedef struct tagMCI_SEEK_PARMS {
 //     DWORD_PTR   dwCallback;
 //     DWORD       dwTo;
@@ -3530,45 +2566,6 @@ class MCI_SEEK_PARMS extends Struct {
     _dwCallbackHi = (value.address & 0xFFFF0000) >> 16;
     _dwCallbackLo = value.address & 0xFFFF;
   }
-}
-
-// typedef struct tagMCI_STATUS_PARMS {
-//     DWORD_PTR   dwCallback;
-//     DWORD_PTR   dwReturn;
-//     DWORD       dwItem;
-//     DWORD       dwTrack;
-// } MCI_STATUS_PARMS, *PMCI_STATUS_PARMS, FAR * LPMCI_STATUS_PARMS;
-
-/// The MCI_STATUS_PARMS structure contains information for the MCI_STATUS command.
-///
-/// {@category Struct}
-class MCI_STATUS_PARMS extends Struct {
-  @IntPtr()
-  external int dwCallback;
-  @IntPtr()
-  external int dwReturn;
-  @Uint32()
-  external int dwItem;
-  @Uint32()
-  external int dwTrack;
-}
-
-// typedef struct tagLOGBRUSH {
-//   UINT      lbStyle;
-//   COLORREF  lbColor;
-//   ULONG_PTR lbHatch;
-// } LOGBRUSH, *PLOGBRUSH, *NPLOGBRUSH, *LPLOGBRUSH;
-
-/// The LOGBRUSH structure defines the style, color, and pattern of a physical
-/// brush. It is used by the CreateBrushIndirect and ExtCreatePen functions.
-///
-/// {@category Struct}
-class LOGBRUSH extends Struct {
-  @Uint32()
-  external int lbStyle;
-  @Int32()
-  external int lbColor;
-  external Pointer<Uint32> lbHatch;
 }
 
 // typedef struct _OVERLAPPED {
@@ -3599,45 +2596,6 @@ class OVERLAPPED extends Struct {
 
   @IntPtr()
   external int hEvent;
-}
-
-// typedef struct tagACTCTXW {
-//   ULONG   cbSize;
-//   DWORD   dwFlags;
-//   LPCWSTR lpSource;
-//   USHORT  wProcessorArchitecture;
-//   LANGID  wLangId;
-//   LPCWSTR lpAssemblyDirectory;
-//   LPCWSTR lpResourceName;
-//   LPCWSTR lpApplicationName;
-//   HMODULE hModule;
-// } ACTCTXW, *PACTCTXW;
-
-/// The ACTCTX structure is used by the CreateActCtx function to create the
-/// activation context.
-///
-/// {@category Struct}
-class ACTCTX extends Struct {
-  @Uint32()
-  external int cbSize;
-
-  @Uint32()
-  external int dwFlags;
-
-  external Pointer<Utf16> lpSource;
-
-  @Uint16()
-  external int wProcessorArchitecture;
-
-  @Uint16()
-  external int wLangId;
-
-  external Pointer<Utf16> lpAssemblyDirectory;
-  external Pointer<Utf16> lpResourceName;
-  external Pointer<Utf16> lpApplicationName;
-
-  @IntPtr()
-  external int hModule;
 }
 
 // typedef struct _WIN32_FIND_DATAW {
@@ -4136,46 +3094,6 @@ class WAVEFORMATEX extends Struct {
   }
 }
 
-// typedef struct wavehdr_tag {
-//   LPSTR              lpData;
-//   DWORD              dwBufferLength;
-//   DWORD              dwBytesRecorded;
-//   DWORD_PTR          dwUser;
-//   DWORD              dwFlags;
-//   DWORD              dwLoops;
-//   struct wavehdr_tag *lpNext;
-//   DWORD_PTR          reserved;
-// } WAVEHDR, *PWAVEHDR, *NPWAVEHDR, *LPWAVEHDR;
-
-/// The WAVEHDR structure defines the header used to identify a waveform-audio
-/// buffer.
-///
-/// {@category Struct}
-class WAVEHDR extends Struct {
-  external Pointer<Uint8> lpData;
-
-  @Uint32()
-  external int dwBufferLength;
-
-  @Uint32()
-  external int dwBytesRecorded;
-
-  @IntPtr()
-  external int dwUser;
-
-  @Uint32()
-  external int dwFlags;
-
-  @Uint32()
-  external int dwLoops;
-
-  @IntPtr()
-  external int lpNext;
-
-  @IntPtr()
-  external int reserved;
-}
-
 // typedef struct mmtime_tag {
 //   UINT  wType;
 //   union {
@@ -4256,37 +3174,12 @@ class MMTIME extends Struct {
 /// {@category Struct}
 class EXCEPINFO extends Opaque {}
 
-/// Specifies the FMTID/PID identifier that programmatically identifies a
-/// property. Replaces SHCOLUMNID.
-///
-/// {@category Struct}
-class PROPERTYKEY extends Opaque {}
-
 /// The PROPVARIANT structure is used in the ReadMultiple and WriteMultiple
 /// methods of IPropertyStorage to define the type tag and the value of a
 /// property in a property set.
 ///
 /// {@category Struct}
 class PROPVARIANT extends Opaque {}
-
-/// Represents a safe array.
-///
-/// {@category Struct}
-class SAFEARRAY extends Opaque {}
-
-/// A CLSID is a globally unique identifier that identifies a COM class object.
-/// If your server or container allows linking to its embedded objects, you need
-/// to register a CLSID for each supported class of objects.
-///
-/// {@category Struct}
-class CLSID extends Opaque {}
-
-/// The STATSTG structure contains statistical data about an open storage,
-/// stream, or byte-array object. This structure is used in the IEnumSTATSTG,
-/// ILockBytes, IStorage, and IStream interfaces.
-///
-/// {@category Struct}
-class STATSTG extends Opaque {}
 
 /// Used to specify values that are used by SetSimulatedProfileInfo to override
 /// current internet connection profile values in an RDP Child Session to
@@ -4706,19 +3599,4 @@ class NOTIFYICONDATA extends Struct {
 
   @IntPtr()
   external int hBalloonIcon;
-}
-
-// typedef struct tagTPMPARAMS {
-//   UINT cbSize;
-//   RECT rcExclude;
-// } TPMPARAMS;
-
-/// Contains extended parameters for the TrackPopupMenuEx function.
-///
-/// {@category Struct}
-class TPMPARAMS extends Struct {
-  @Uint32()
-  external int cbSize;
-
-  external RECT rcExclude;
 }

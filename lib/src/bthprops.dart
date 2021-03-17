@@ -15,6 +15,7 @@ import 'package:ffi/ffi.dart';
 import 'callbacks.dart';
 import 'combase.dart';
 import 'structs.dart';
+import 'structs.g.dart';
 
 final _bthprops = DynamicLibrary.open('bthprops.cpl');
 
@@ -45,7 +46,7 @@ int BluetoothAuthenticateDeviceEx(
           IntPtr hRadioIn,
           Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
           Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
-          Int32 authenticationRequirement),
+          Uint32 authenticationRequirement),
       int Function(
           int hwndParentIn,
           int hRadioIn,
