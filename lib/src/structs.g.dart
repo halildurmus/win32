@@ -50,6 +50,24 @@ import 'combase.dart';
 import 'oleaut32.dart';
 import 'structs.dart';
 
+/// The ACL structure is the header of an access control list (ACL). A
+/// complete ACL consists of an ACL structure followed by an ordered list
+/// of zero or more access control entries (ACEs).
+///
+/// {@category Struct}
+class ACL extends Struct {
+  @Uint8()
+  external int AclRevision;
+  @Uint8()
+  external int Sbz1;
+  @Uint16()
+  external int AclSize;
+  @Uint16()
+  external int AceCount;
+  @Uint16()
+  external int Sbz2;
+}
+
 /// The ACTCTX structure is used by the CreateActCtx function to create the
 /// activation context.
 ///
@@ -103,6 +121,15 @@ class BITMAP extends Struct {
   @Uint16()
   external int bmBitsPixel;
   external Pointer bmBits;
+}
+
+/// The BITMAPINFO structure defines the dimensions and color information
+/// for a device-independent bitmap (DIB).
+///
+/// {@category Struct}
+class BITMAPINFO extends Struct {
+  external BITMAPINFOHEADER bmiHeader;
+  external RGBQUAD bmiColors;
 }
 
 /// The BITMAPINFOHEADER structure contains information about the
@@ -532,6 +559,16 @@ class PROCESS_INFORMATION extends Struct {
   external int dwThreadId;
 }
 
+/// Specifies the FMTID/PID identifier that programmatically identifies a
+/// property.
+///
+/// {@category Struct}
+class PROPERTYKEY extends Struct {
+  external GUID fmtid;
+  @Uint32()
+  external int pid;
+}
+
 /// The RECT structure defines a rectangle by the coordinates of its
 /// upper-left and lower-right corners.
 ///
@@ -560,6 +597,32 @@ class RGBQUAD extends Struct {
   external int rgbRed;
   @Uint8()
   external int rgbReserved;
+}
+
+/// Represents a safe array.
+///
+/// {@category Struct}
+class SAFEARRAY extends Struct {
+  @Uint16()
+  external int cDims;
+  @Uint16()
+  external int fFeatures;
+  @Uint32()
+  external int cbElements;
+  @Uint32()
+  external int cLocks;
+  external Pointer pvData;
+  external SAFEARRAYBOUND rgsabound;
+}
+
+/// Represents the bounds of one dimension of the array.
+///
+/// {@category Struct}
+class SAFEARRAYBOUND extends Struct {
+  @Uint32()
+  external int cElements;
+  @Int32()
+  external int lLbound;
 }
 
 /// The SCROLLINFO structure contains scroll bar parameters to be set by
@@ -597,6 +660,24 @@ class SECURITY_ATTRIBUTES extends Struct {
   external Pointer lpSecurityDescriptor;
   @Int32()
   external int bInheritHandle;
+}
+
+/// The SECURITY_DESCRIPTOR structure contains the security information
+/// associated with an object. Applications use this structure to set and
+/// query an object's security status.
+///
+/// {@category Struct}
+class SECURITY_DESCRIPTOR extends Struct {
+  @Uint8()
+  external int Revision;
+  @Uint8()
+  external int Sbz1;
+  @Uint16()
+  external int Control;
+  external Pointer Owner;
+  external Pointer Group;
+  external Pointer<ACL> Sacl;
+  external Pointer<ACL> Dacl;
 }
 
 /// Contains the size and item count information retrieved by the
@@ -688,6 +769,31 @@ class STARTUPINFO extends Struct {
   external int hStdOutput;
   @IntPtr()
   external int hStdError;
+}
+
+/// The STATSTG structure contains statistical data about an open storage,
+/// stream, or byte-array object. This structure is used in the
+/// IEnumSTATSTG, ILockBytes, IStorage, and IStream interfaces.
+///
+/// {@category Struct}
+class STATSTG extends Struct {
+  external Pointer<Utf16> pwcsName;
+  @Uint32()
+  external int type;
+  @Uint64()
+  external int cbSize;
+  external FILETIME mtime;
+  external FILETIME ctime;
+  external FILETIME atime;
+  @Uint32()
+  external int grfMode;
+  @Uint32()
+  external int grfLocksSupported;
+  external GUID clsid;
+  @Uint32()
+  external int grfStateBits;
+  @Uint32()
+  external int reserved;
 }
 
 /// Contains information about the power status of the system.

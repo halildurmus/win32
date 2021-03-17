@@ -1,4 +1,8 @@
 {
+    "ACL": {
+        "namespace": "Windows.Win32.Security.ACL",
+        "comment": "The ACL structure is the header of an access control list (ACL). A complete ACL consists of an ACL structure followed by an ordered list of zero or more access control entries (ACEs)."
+    },
     "ACTCTX": {
         "namespace": "Windows.Win32.ApplicationInstallationAndServicing.ACTCTXW",
         "comment": "The ACTCTX structure is used by the CreateActCtx function to create the activation context."
@@ -10,6 +14,10 @@
     "BITMAP": {
         "namespace": "Windows.Win32.Gdi.BITMAP",
         "comment": "The BITMAP structure defines the type, width, height, color format, and bit values of a bitmap."
+    },
+    "BITMAPINFO": {
+        "namespace": "Windows.Win32.Gdi.BITMAPINFO",
+        "comment": "The BITMAPINFO structure defines the dimensions and color information for a device-independent bitmap (DIB)."
     },
     "BITMAPINFOHEADER": {
         "namespace": "Windows.Win32.DirectShow.BITMAPINFOHEADER",
@@ -119,6 +127,10 @@
         "namespace": "Windows.Win32.SystemServices.PROCESS_INFORMATION",
         "comment": "Contains information about a newly created process and its primary thread. It is used with the CreateProcess, CreateProcessAsUser, CreateProcessWithLogonW, or CreateProcessWithTokenW function."
     },
+    "PROPERTYKEY": {
+        "namespace": "Windows.Win32.WindowsPropertiesSystem.PROPERTYKEY",
+        "comment": "Specifies the FMTID/PID identifier that programmatically identifies a property."
+    },
     "RECT": {
         "namespace": "Windows.Win32.DisplayDevices.RECT",
         "comment": "The RECT structure defines a rectangle by the coordinates of its upper-left and lower-right corners."
@@ -127,6 +139,14 @@
         "namespace": "Windows.Win32.Gdi.RGBQUAD",
         "comment": "The RGBQUAD structure describes a color consisting of relative intensities of red, green, and blue."
     },
+    "SAFEARRAY": {
+        "namespace": "Windows.Win32.Automation.SAFEARRAY",
+        "comment": "Represents a safe array."
+    },
+    "SAFEARRAYBOUND": {
+        "namespace": "Windows.Win32.Automation.SAFEARRAYBOUND",
+        "comment": "Represents the bounds of one dimension of the array."
+    },
     "SCROLLINFO": {
         "namespace": "Windows.Win32.Controls.SCROLLINFO",
         "comment": "The SCROLLINFO structure contains scroll bar parameters to be set by the SetScrollInfo function (or SBM_SETSCROLLINFO message), or retrieved by the GetScrollInfo function (or SBM_GETSCROLLINFO message)"
@@ -134,6 +154,10 @@
     "SECURITY_ATTRIBUTES": {
         "namespace": "Windows.Win32.SystemServices.SECURITY_ATTRIBUTES",
         "comment": "The SECURITY_ATTRIBUTES structure contains the security descriptor for an object and specifies whether the handle retrieved by specifying this structure is inheritable.\n\nThis structure provides security settings for objects created by various functions, such as CreateFile, CreatePipe, CreateProcess, RegCreateKeyEx, or RegSaveKeyEx."
+    },
+    "SECURITY_DESCRIPTOR": {
+        "namespace": "Windows.Win32.Security.SECURITY_DESCRIPTOR",
+        "comment": "The SECURITY_DESCRIPTOR structure contains the security information associated with an object. Applications use this structure to set and query an object's security status."
     },
     "SHQUERYRBINFO": {
         "namespace": "Windows.Win32.Shell.SHQUERYRBINFO",
@@ -154,6 +178,10 @@
     "STARTUPINFO": {
         "namespace": "Windows.Win32.SystemServices.STARTUPINFOW",
         "comment": "Specifies the window station, desktop, standard handles, and appearance of the main window for a process at creation time."
+    },
+    "STATSTG": {
+        "namespace": "Windows.Win32.StructuredStorage.STATSTG",
+        "comment": "The STATSTG structure contains statistical data about an open storage, stream, or byte-array object. This structure is used in the IEnumSTATSTG, ILockBytes, IStorage, and IStream interfaces."
     },
     "SYSTEM_POWER_STATUS": {
         "namespace": "Windows.Win32.SystemServices.SYSTEM_POWER_STATUS",

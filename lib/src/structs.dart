@@ -234,37 +234,6 @@ class STARTUPINFOEX extends Struct {
   external Pointer lpAttributeList;
 }
 
-// typedef struct _SECURITY_DESCRIPTOR {
-//   BYTE                        Revision;
-//   BYTE                        Sbz1;
-//   SECURITY_DESCRIPTOR_CONTROL Control;
-//   PSID                        Owner;
-//   PSID                        Group;
-//   PACL                        Sacl;
-//   PACL                        Dacl;
-// } SECURITY_DESCRIPTOR, *PISECURITY_DESCRIPTOR;
-
-/// The SECURITY_DESCRIPTOR structure contains the security information
-/// associated with an object. Applications use this structure to set and query
-/// an object's security status.
-///
-/// {@category Struct}
-class SECURITY_DESCRIPTOR extends Struct {
-  @Uint8()
-  external int Revision;
-
-  @Uint8()
-  external int Sbz1;
-
-  @Int16()
-  external int Control;
-
-  external Pointer<IntPtr> Owner;
-  external Pointer<IntPtr> Group;
-  external Pointer<IntPtr> Sacl;
-  external Pointer<IntPtr> Dacl;
-}
-
 // struct tagVARIANT
 //    {
 //        VARTYPE vt;
@@ -1482,20 +1451,6 @@ class GUID extends Struct {
     Data4 = (int.parse(rawString.substring(0, 4), radix: 16) << 48) +
         int.parse(rawString.substring(4, 16), radix: 16);
   }
-}
-
-// typedef struct tagBITMAPINFO {
-//   BITMAPINFOHEADER bmiHeader;
-//   RGBQUAD          bmiColors[1];
-// } BITMAPINFO, *LPBITMAPINFO, *PBITMAPINFO;
-
-/// The BITMAPINFO structure defines the dimensions and color information for a
-/// device-independent bitmap (DIB).
-///
-/// {@category Struct}
-class BITMAPINFO extends Struct {
-  external BITMAPINFOHEADER bmiHeader;
-  external RGBQUAD bmiColors;
 }
 
 // typedef struct tagBITMAPFILEHEADER {
@@ -3219,37 +3174,12 @@ class MMTIME extends Struct {
 /// {@category Struct}
 class EXCEPINFO extends Opaque {}
 
-/// Specifies the FMTID/PID identifier that programmatically identifies a
-/// property. Replaces SHCOLUMNID.
-///
-/// {@category Struct}
-class PROPERTYKEY extends Opaque {}
-
 /// The PROPVARIANT structure is used in the ReadMultiple and WriteMultiple
 /// methods of IPropertyStorage to define the type tag and the value of a
 /// property in a property set.
 ///
 /// {@category Struct}
 class PROPVARIANT extends Opaque {}
-
-/// Represents a safe array.
-///
-/// {@category Struct}
-class SAFEARRAY extends Opaque {}
-
-/// A CLSID is a globally unique identifier that identifies a COM class object.
-/// If your server or container allows linking to its embedded objects, you need
-/// to register a CLSID for each supported class of objects.
-///
-/// {@category Struct}
-class CLSID extends Opaque {}
-
-/// The STATSTG structure contains statistical data about an open storage,
-/// stream, or byte-array object. This structure is used in the IEnumSTATSTG,
-/// ILockBytes, IStorage, and IStream interfaces.
-///
-/// {@category Struct}
-class STATSTG extends Opaque {}
 
 /// Used to specify values that are used by SetSimulatedProfileInfo to override
 /// current internet connection profile values in an RDP Child Session to
