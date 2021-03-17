@@ -1,5 +1,5 @@
 /// {@category Enum}
-class tag_WBEM_PATH_STATUS_FLAG {
+class WBEM_PATH_STATUS_FLAG {
   static const WBEMPATH_INFO_ANON_LOCAL_MACHINE = 0x00000001;
   static const WBEMPATH_INFO_HAS_MACHINE_NAME = 0x00000002;
   static const WBEMPATH_INFO_IS_CLASS_REF = 0x00000004;
@@ -21,7 +21,7 @@ class tag_WBEM_PATH_STATUS_FLAG {
 }
 
 /// {@category Enum}
-class tag_WBEM_PATH_CREATE_FLAG {
+class WBEM_PATH_CREATE_FLAG {
   static const WBEMPATH_CREATE_ACCEPT_RELATIVE = 0x00000001;
   static const WBEMPATH_CREATE_ACCEPT_ABSOLUTE = 0x00000002;
   static const WBEMPATH_CREATE_ACCEPT_ALL = 0x00000004;
@@ -29,7 +29,7 @@ class tag_WBEM_PATH_CREATE_FLAG {
 }
 
 /// {@category Enum}
-class tag_WBEM_GET_TEXT_FLAGS {
+class WBEM_GET_TEXT_FLAGS {
   static const WBEMPATH_COMPRESSED = 0x00000001;
   static const WBEMPATH_GET_RELATIVE_ONLY = 0x00000002;
   static const WBEMPATH_GET_SERVER_TOO = 0x00000004;
@@ -39,7 +39,7 @@ class tag_WBEM_GET_TEXT_FLAGS {
 }
 
 /// {@category Enum}
-class tag_WBEM_GET_KEY_FLAGS {
+class WBEM_GET_KEY_FLAGS {
   static const WBEMPATH_TEXT = 0x00000001;
   static const WBEMPATH_QUOTEDTEXT = 0x00000002;
 }
@@ -107,7 +107,7 @@ class WMIQ_ASSOCQ_FLAGS {
 }
 
 /// {@category Enum}
-class tag_WMIQ_LANGUAGE_FEATURES {
+class WMIQ_LANGUAGE_FEATURES {
   static const WMIQ_LF1_BASIC_SELECT = 0x00000001;
   static const WMIQ_LF2_CLASS_NAME_IN_QUERY = 0x00000002;
   static const WMIQ_LF3_STRING_CASE_FUNCTIONS = 0x00000003;
@@ -152,7 +152,7 @@ class tag_WMIQ_LANGUAGE_FEATURES {
 }
 
 /// {@category Enum}
-class tag_WMIQ_RPNQ_FEATURE {
+class WMIQ_RPNQ_FEATURE {
   static const WMIQ_RPNF_WHERE_CLAUSE_PRESENT = 0x00000001;
   static const WMIQ_RPNF_QUERY_IS_CONJUNCTIVE = 0x00000002;
   static const WMIQ_RPNF_QUERY_IS_DISJUNCTIVE = 0x00000004;
@@ -282,7 +282,7 @@ class WBEM_SECURITY_FLAGS {
 }
 
 /// {@category Enum}
-class tag_WBEM_LIMITATION_FLAG_TYPE {
+class WBEM_LIMITATION_FLAG_TYPE {
   static const WBEM_FLAG_EXCLUDE_OBJECT_QUALIFIERS = 0x00000010;
   static const WBEM_FLAG_EXCLUDE_PROPERTY_QUALIFIERS = 0x00000020;
 }
@@ -304,7 +304,7 @@ class WBEM_COMPARISON_FLAG {
 }
 
 /// {@category Enum}
-class tag_WBEM_LOCKING {
+class WBEM_LOCKING {
   static const WBEM_FLAG_ALLOW_READ = 0x00000001;
 }
 
@@ -344,14 +344,14 @@ class WBEM_REFRESHER_FLAGS {
 }
 
 /// {@category Enum}
-class tag_WBEM_SHUTDOWN_FLAGS {
+class WBEM_SHUTDOWN_FLAGS {
   static const WBEM_SHUTDOWN_UNLOAD_COMPONENT = 0x00000001;
   static const WBEM_SHUTDOWN_WMI = 0x00000002;
   static const WBEM_SHUTDOWN_OS = 0x00000003;
 }
 
 /// {@category Enum}
-class tag_WBEMSTATUS_FORMAT {
+class WBEMSTATUS_FORMAT {
   static const WBEMSTATUS_FORMAT_NEWLINE = 0x00000000;
   static const WBEMSTATUS_FORMAT_NO_NEWLINE = 0x00000001;
 }
@@ -605,20 +605,20 @@ class WBEM_UNSECAPP_FLAG_TYPE {
 }
 
 /// {@category Enum}
-class tag_WBEM_INFORMATION_FLAG_TYPE {
+class WBEM_INFORMATION_FLAG_TYPE {
   static const WBEM_FLAG_SHORT_NAME = 0x00000001;
   static const WBEM_FLAG_LONG_NAME = 0x00000002;
 }
 
 /// {@category Enum}
-class tag_WBEM_PROVIDER_REQUIREMENTS_TYPE {
+class WBEM_PROVIDER_REQUIREMENTS_TYPE {
   static const WBEM_REQUIREMENTS_START_POSTFILTER = 0x00000000;
   static const WBEM_REQUIREMENTS_STOP_POSTFILTER = 0x00000001;
   static const WBEM_REQUIREMENTS_RECHECK_SUBSCRIPTIONS = 0x00000002;
 }
 
 /// {@category Enum}
-class tag_WBEM_EXTRA_RETURN_CODES {
+class WBEM_EXTRA_RETURN_CODES {
   static const WBEM_S_INITIALIZED = 0x00000000;
   static const WBEM_S_LIMITED_SERVICE = 0x00043001;
   static const WBEM_S_INDIRECTLY_UPDATED = 0x00043002;
@@ -628,12 +628,12 @@ class tag_WBEM_EXTRA_RETURN_CODES {
 }
 
 /// {@category Enum}
-class tag_WBEM_PROVIDER_FLAGS {
+class WBEM_PROVIDER_FLAGS {
   static const WBEM_FLAG_OWNER_UPDATE = 0x00010000;
 }
 
 /// {@category Enum}
-class tag_WBEM_BATCH_TYPE {
+class WBEM_BATCH_TYPE {
   static const WBEM_FLAG_BATCH_IF_NEEDED = 0x00000000;
   static const WBEM_FLAG_MUST_BATCH = 0x00000001;
   static const WBEM_FLAG_MUST_NOT_BATCH = 0x00000002;
@@ -910,3 +910,4 @@ class WbemObjectTextFormatEnum {
 class WbemConnectOptionsEnum {
   static const wbemConnectFlagUseMaxWait = 0x00000080;
 }
+

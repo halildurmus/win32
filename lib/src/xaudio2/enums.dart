@@ -34,3 +34,4 @@ class HrtfDistanceDecayType {
   static const NaturalDecay = 0x00000000;
   static const CustomDecay = 0x00000001;
 }
+

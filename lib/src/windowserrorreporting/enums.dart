@@ -1,4 +1,76 @@
 /// {@category Enum}
+class WER_FILE {
+  static const WER_FILE_ANONYMOUS_DATA = 0x00000002;
+  static const WER_FILE_DELETE_WHEN_DONE = 0x00000001;
+}
+
+/// {@category Enum}
+class WerRegisterFile_regFileTypeFlags {
+  static const WerRegFileTypeMax = 0x00000003;
+  static const WerRegFileTypeOther = 0x00000002;
+  static const WerRegFileTypeUserDocument = 0x00000001;
+}
+
+/// {@category Enum}
+class WerReportSubmit_dwFlags {
+  static const WER_SUBMIT_ADD_REGISTERED_DATA = 0x00000010;
+  static const WER_SUBMIT_HONOR_RECOVERY = 0x00000001;
+  static const WER_SUBMIT_HONOR_RESTART = 0x00000002;
+  static const WER_SUBMIT_NO_ARCHIVE = 0x00000100;
+  static const WER_SUBMIT_NO_CLOSE_UI = 0x00000040;
+  static const WER_SUBMIT_NO_QUEUE = 0x00000080;
+  static const WER_SUBMIT_OUTOFPROCESS = 0x00000020;
+  static const WER_SUBMIT_OUTOFPROCESS_ASYNC = 0x00000400;
+  static const WER_SUBMIT_QUEUE = 0x00000004;
+  static const WER_SUBMIT_SHOW_DEBUG = 0x00000008;
+  static const WER_SUBMIT_START_MINIMIZED = 0x00000200;
+  static const WER_SUBMIT_BYPASS_DATA_THROTTLING = 0x00000800;
+  static const WER_SUBMIT_ARCHIVE_PARAMETERS_ONLY = 0x00001000;
+  static const WER_SUBMIT_REPORT_MACHINE_ID = 0x00002000;
+}
+
+/// {@category Enum}
+class WER_FAULT_REPORTING {
+  static const WER_FAULT_REPORTING_FLAG_DISABLE_THREAD_SUSPENSION = 0x00000004;
+  static const WER_FAULT_REPORTING_FLAG_NOHEAP = 0x00000001;
+  static const WER_FAULT_REPORTING_FLAG_QUEUE = 0x00000002;
+  static const WER_FAULT_REPORTING_FLAG_QUEUE_UPLOAD = 0x00000008;
+  static const WER_FAULT_REPORTING_ALWAYS_SHOW_UI = 0x00000010;
+}
+
+/// {@category Enum}
+class WerReportSubmit_consentFlags {
+  static const WerConsentAlwaysPrompt = 0x00000004;
+  static const WerConsentApproved = 0x00000002;
+  static const WerConsentDenied = 0x00000003;
+  static const WerConsentMax = 0x00000005;
+  static const WerConsentNotAsked = 0x00000001;
+}
+
+/// {@category Enum}
+class WerReportSubmit_pSubmitResultFlags {
+  static const WerCustomAction = 0x00000009;
+  static const WerDisabled = 0x00000005;
+  static const WerDisabledQueue = 0x00000007;
+  static const WerReportAsync = 0x00000008;
+  static const WerReportCancelled = 0x00000006;
+  static const WerReportDebug = 0x00000003;
+  static const WerReportFailed = 0x00000004;
+  static const WerReportQueued = 0x00000001;
+  static const WerReportUploaded = 0x00000002;
+}
+
+/// {@category Enum}
+class WerReportCreate_repTypeFlags {
+  static const WerReportApplicationCrash = 0x00000002;
+  static const WerReportApplicationHang = 0x00000003;
+  static const WerReportInvalid = 0x00000005;
+  static const WerReportKernel = 0x00000004;
+  static const WerReportCritical = 0x00000001;
+  static const WerReportNonCritical = 0x00000000;
+}
+
+/// {@category Enum}
 class WER_REPORT_UI {
   static const WerUIAdditionalDataDlgHeader = 0x00000001;
   static const WerUIIconFilePath = 0x00000002;
@@ -103,3 +175,4 @@ class EFaultRepRetVal {
   static const frrvErrNoMemory = 0x00000009;
   static const frrvErrDoubleFault = 0x0000000a;
 }
+

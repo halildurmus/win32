@@ -54,3 +54,4 @@ class QOS_NOTIFY_FLOW {
   static const QOSNotifyUncongested = 0x00000001;
   static const QOSNotifyAvailable = 0x00000002;
 }
+

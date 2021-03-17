@@ -14,6 +14,21 @@ class DPI_HOSTING_BEHAVIOR {
 }
 
 /// {@category Enum}
+class PROCESS_DPI_AWARENESS {
+  static const PROCESS_DPI_UNAWARE = 0x00000000;
+  static const PROCESS_SYSTEM_DPI_AWARE = 0x00000001;
+  static const PROCESS_PER_MONITOR_DPI_AWARE = 0x00000002;
+}
+
+/// {@category Enum}
+class MONITOR_DPI_TYPE {
+  static const MDT_EFFECTIVE_DPI = 0x00000000;
+  static const MDT_ANGULAR_DPI = 0x00000001;
+  static const MDT_RAW_DPI = 0x00000002;
+  static const MDT_DEFAULT = 0x00000000;
+}
+
+/// {@category Enum}
 class DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS {
   static const DCDC_DEFAULT = 0x00000000;
   static const DCDC_DISABLE_FONT_UPDATE = 0x00000001;
@@ -28,17 +43,3 @@ class DIALOG_DPI_CHANGE_BEHAVIORS {
   static const DDC_DISABLE_CONTROL_RELAYOUT = 0x00000004;
 }
 
-/// {@category Enum}
-class PROCESS_DPI_AWARENESS {
-  static const PROCESS_DPI_UNAWARE = 0x00000000;
-  static const PROCESS_SYSTEM_DPI_AWARE = 0x00000001;
-  static const PROCESS_PER_MONITOR_DPI_AWARE = 0x00000002;
-}
-
-/// {@category Enum}
-class MONITOR_DPI_TYPE {
-  static const MDT_EFFECTIVE_DPI = 0x00000000;
-  static const MDT_ANGULAR_DPI = 0x00000001;
-  static const MDT_RAW_DPI = 0x00000002;
-  static const MDT_DEFAULT = 0x00000000;
-}

@@ -1,4 +1,11 @@
 /// {@category Enum}
+class GPMRSOPMode {
+  static const rsopUnknown = 0x00000000;
+  static const rsopPlanning = 0x00000001;
+  static const rsopLogging = 0x00000002;
+}
+
+/// {@category Enum}
 class GPMPermissionType {
   static const permGPOApply = 0x00010000;
   static const permGPORead = 0x00010100;
@@ -41,13 +48,50 @@ class GPMSearchProperty {
 }
 
 /// {@category Enum}
+class GPMSearchOperation {
+  static const opEquals = 0x00000000;
+  static const opContains = 0x00000001;
+  static const opNotContains = 0x00000002;
+  static const opNotEquals = 0x00000003;
+}
+
+/// {@category Enum}
+class GPMReportType {
+  static const repXML = 0x00000000;
+  static const repHTML = 0x00000001;
+  static const repInfraXML = 0x00000002;
+  static const repInfraRefreshXML = 0x00000003;
+  static const repClientHealthXML = 0x00000004;
+  static const repClientHealthRefreshXML = 0x00000005;
+}
+
+/// {@category Enum}
+class GPMEntryType {
+  static const typeUser = 0x00000000;
+  static const typeComputer = 0x00000001;
+  static const typeLocalGroup = 0x00000002;
+  static const typeGlobalGroup = 0x00000003;
+  static const typeUniversalGroup = 0x00000004;
+  static const typeUNCPath = 0x00000005;
+  static const typeUnknown = 0x00000006;
+}
+
+/// {@category Enum}
+class GPMDestinationOption {
+  static const opDestinationSameAsSource = 0x00000000;
+  static const opDestinationNone = 0x00000001;
+  static const opDestinationByRelativeName = 0x00000002;
+  static const opDestinationSet = 0x00000003;
+}
+
+/// {@category Enum}
 class GPMReportingOptions {
   static const opReportLegacy = 0x00000000;
   static const opReportComments = 0x00000001;
 }
 
 /// {@category Enum}
-class MIDL_IGPMSOM_0001 {
+class GPMSOMType {
   static const somSite = 0x00000000;
   static const somDomain = 0x00000001;
   static const somOU = 0x00000002;
@@ -64,3 +108,4 @@ class GPMStarterGPOType {
   static const typeSystem = 0x00000000;
   static const typeCustom = 0x00000001;
 }
+

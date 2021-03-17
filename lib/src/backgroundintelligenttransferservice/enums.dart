@@ -1,4 +1,10 @@
 /// {@category Enum}
+class BG_TOKEN {
+  static const BG_TOKEN_LOCAL_FILE = 0x00000001;
+  static const BG_TOKEN_NETWORK = 0x00000002;
+}
+
+/// {@category Enum}
 class BG_ERROR_CONTEXT {
   static const BG_ERROR_CONTEXT_NONE = 0x00000000;
   static const BG_ERROR_CONTEXT_UNKNOWN = 0x00000001;
@@ -116,3 +122,4 @@ class GROUPPROP {
   static const GROUPPROP_DISPLAYNAME = 0x0000000b;
   static const GROUPPROP_DESCRIPTION = 0x0000000c;
 }
+

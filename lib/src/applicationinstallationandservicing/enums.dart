@@ -1,21 +1,4 @@
 /// {@category Enum}
-class ACTCTX_REQUESTED_RUN_LEVEL {
-  static const ACTCTX_RUN_LEVEL_UNSPECIFIED = 0x00000000;
-  static const ACTCTX_RUN_LEVEL_AS_INVOKER = 0x00000001;
-  static const ACTCTX_RUN_LEVEL_HIGHEST_AVAILABLE = 0x00000002;
-  static const ACTCTX_RUN_LEVEL_REQUIRE_ADMIN = 0x00000003;
-  static const ACTCTX_RUN_LEVEL_NUMBERS = 0x00000004;
-}
-
-/// {@category Enum}
-class ACTCTX_COMPATIBILITY_ELEMENT_TYPE {
-  static const ACTCTX_COMPATIBILITY_ELEMENT_TYPE_UNKNOWN = 0x00000000;
-  static const ACTCTX_COMPATIBILITY_ELEMENT_TYPE_OS = 0x00000001;
-  static const ACTCTX_COMPATIBILITY_ELEMENT_TYPE_MITIGATION = 0x00000002;
-  static const ACTCTX_COMPATIBILITY_ELEMENT_TYPE_MAXVERSIONTESTED = 0x00000003;
-}
-
-/// {@category Enum}
 class RESULTTYPES {
   static const ieUnknown = 0x00000000;
   static const ieError = 0x00000001;
@@ -138,7 +121,7 @@ class REINSTALLMODE {
 }
 
 /// {@category Enum}
-class tagINSTALLOGMODE {
+class INSTALLOGMODE {
   static const INSTALLLOGMODE_FATALEXIT = 0x00000001;
   static const INSTALLLOGMODE_ERROR = 0x00000002;
   static const INSTALLLOGMODE_WARNING = 0x00000004;
@@ -446,7 +429,7 @@ class ASM_NAME {
 }
 
 /// {@category Enum}
-class MIDL_IAssemblyName_0002 {
+class ASM_BIND_FLAGS {
   static const ASM_BINDF_FORCE_CACHE_INSTALL = 0x00000001;
   static const ASM_BINDF_RFS_INTEGRITY_CHECK = 0x00000002;
   static const ASM_BINDF_RFS_MODULE_CHECK = 0x00000004;
@@ -485,3 +468,163 @@ class CREATE_ASM_NAME_OBJ_FLAGS {
   static const CANOF_PARSE_DISPLAY_NAME = 0x00000001;
   static const CANOF_SET_DEFAULT_VALUES = 0x00000002;
 }
+
+/// {@category Enum}
+class ACTCTX_REQUESTED_RUN_LEVEL {
+  static const ACTCTX_RUN_LEVEL_UNSPECIFIED = 0x00000000;
+  static const ACTCTX_RUN_LEVEL_AS_INVOKER = 0x00000001;
+  static const ACTCTX_RUN_LEVEL_HIGHEST_AVAILABLE = 0x00000002;
+  static const ACTCTX_RUN_LEVEL_REQUIRE_ADMIN = 0x00000003;
+  static const ACTCTX_RUN_LEVEL_NUMBERS = 0x00000004;
+}
+
+/// {@category Enum}
+class ACTCTX_COMPATIBILITY_ELEMENT_TYPE {
+  static const ACTCTX_COMPATIBILITY_ELEMENT_TYPE_UNKNOWN = 0x00000000;
+  static const ACTCTX_COMPATIBILITY_ELEMENT_TYPE_OS = 0x00000001;
+  static const ACTCTX_COMPATIBILITY_ELEMENT_TYPE_MITIGATION = 0x00000002;
+  static const ACTCTX_COMPATIBILITY_ELEMENT_TYPE_MAXVERSIONTESTED = 0x00000003;
+}
+
+/// {@category Enum}
+class SP_COPY_STYLE {
+  static const SP_COPY_DELETESOURCE = 0x00000001;
+  static const SP_COPY_REPLACEONLY = 0x00000002;
+  static const SP_COPY_NEWER_OR_SAME = 0x00000004;
+  static const SP_COPY_NEWER_ONLY = 0x00010000;
+  static const SP_COPY_NOOVERWRITE = 0x00000008;
+  static const SP_COPY_NODECOMP = 0x00000010;
+  static const SP_COPY_LANGUAGEAWARE = 0x00000020;
+  static const SP_COPY_SOURCE_ABSOLUTE = 0x00000040;
+  static const SP_COPY_SOURCEPATH_ABSOLUTE = 0x00000080;
+  static const SP_COPY_FORCE_IN_USE = 0x00000200;
+  static const SP_COPY_IN_USE_NEEDS_REBOOT = 0x00000100;
+  static const SP_COPY_NOSKIP = 0x00000400;
+  static const SP_COPY_FORCE_NOOVERWRITE = 0x00001000;
+  static const SP_COPY_FORCE_NEWER = 0x00002000;
+  static const SP_COPY_WARNIFSKIP = 0x00004000;
+  static const SP_COPY_NOBROWSE = 0x00008000;
+  static const SP_COPY_NEWER = 0x00000004;
+  static const SP_COPY_RESERVED = 0x00020000;
+  static const SP_COPY_OEMINF_CATALOG_ONLY = 0x00040000;
+  static const SP_COPY_REPLACE_BOOT_FILE = 0x00080000;
+  static const SP_COPY_NOPRUNE = 0x00100000;
+  static const SP_COPY_OEM_F6_INF = 0x00200000;
+  static const SP_COPY_ALREADYDECOMP = 0x00400000;
+  static const SP_COPY_WINDOWS_SIGNED = 0x01000000;
+  static const SP_COPY_PNPLOCKED = 0x02000000;
+  static const SP_COPY_IN_USE_TRY_RENAME = 0x04000000;
+  static const SP_COPY_INBOX_INF = 0x08000000;
+  static const SP_COPY_HARDLINK = 0x10000000;
+}
+
+/// {@category Enum}
+class MsiSourceList_dwContext {
+  static const MSIINSTALLCONTEXT_USERMANAGED = 0x00000001;
+  static const MSIINSTALLCONTEXT_USERUNMANAGED = 0x00000002;
+  static const MSIINSTALLCONTEXT_MACHINE = 0x00000004;
+}
+
+/// {@category Enum}
+class MsiCreateTransformSummaryInfo_iErrorConditions {
+  static const none = 0x00000000;
+  static const MSITRANSFORM_ERROR_ADDEXISTINGROW = 0x00000001;
+  static const MSITRANSFORM_ERROR_DELMISSINGROW = 0x00000002;
+  static const MSITRANSFORM_ERROR_ADDEXISTINGTABLE = 0x00000004;
+  static const MSITRANSFORM_ERROR_DELMISSINGTABLE = 0x00000008;
+  static const MSITRANSFORM_ERROR_UPDATEMISSINGROW = 0x00000010;
+  static const MSITRANSFORM_ERROR_CHANGECODEPAGE = 0x00000020;
+}
+
+/// {@category Enum}
+class Setup_Operation {
+  static const FILEOP_DELETE = 0x00000002;
+  static const FILEOP_COPY = 0x00000000;
+}
+
+/// {@category Enum}
+class MsiCreateTransformSummaryInfo_iValidation {
+  static const none = 0x00000000;
+  static const MSITRANSFORM_VALIDATE_LANGUAGE = 0x00000001;
+  static const MSITRANSFORM_VALIDATE_PRODUCT = 0x00000002;
+}
+
+/// {@category Enum}
+class MsiGetFeatureValidStates_lpInstallStates {
+  static const lpInstallStates2 = 0x00000002;
+  static const lpInstallStates4 = 0x00000004;
+  static const lpInstallStates8 = 0x00000008;
+  static const lpInstallStates16 = 0x00000010;
+  static const lpInstallStates32 = 0x00000020;
+}
+
+/// {@category Enum}
+class MsiViewModify_eModifyModeFlags {
+  static const MSIMODIFY_REFRESH = 0x00000000;
+  static const MSIMODIFY_INSERT = 0x00000001;
+  static const MSIMODIFY_UPDATE = 0x00000002;
+  static const MSIMODIFY_ASSIGN = 0x00000003;
+  static const MSIMODIFY_REPLACE = 0x00000004;
+  static const MSIMODIFY_MERGE = 0x00000005;
+  static const MSIMODIFY_DELETE = 0x00000006;
+  static const MSIMODIFY_INSERT_TEMPORARY = 0x00000007;
+  static const MSIMODIFY_VALIDATE = 0x00000008;
+  static const MSIMODIFY_VALIDATE_NEW = 0x00000009;
+  static const MSIMODIFY_VALIDATE_FIELD = 0x0000000a;
+  static const MSIMODIFY_VALIDATE_DELETE = 0x0000000b;
+}
+
+/// {@category Enum}
+class SetupCopyOEMInf_OEMSourceMediaType {
+  static const SPOST_NONE = 0x00000000;
+  static const SPOST_PATH = 0x00000001;
+  static const SPOST_URL = 0x00000002;
+}
+
+/// {@category Enum}
+class LPDISPLAYVAL_uiTypeFlags {
+  static const ieUnknown = 0x00000000;
+  static const ieError = 0x00000001;
+  static const ieWarning = 0x00000002;
+  static const ieInfo = 0x00000003;
+}
+
+/// {@category Enum}
+class MsiProvideAssembly_dwAssemblyInfo {
+  static const MSIASSEMBLYINFO_NETASSEMBLY = 0x00000000;
+  static const MSIASSEMBLYINFO_WIN32ASSEMBLY = 0x00000001;
+}
+
+/// {@category Enum}
+class IAssemblyCache_UninstallAssembly_pulDispositionFlags {
+  static const IASSEMBLYCACHE_UNINSTALL_DISPOSITION_UNINSTALLED = 0x00000001;
+  static const IASSEMBLYCACHE_UNINSTALL_DISPOSITION_STILL_IN_USE = 0x00000002;
+  static const IASSEMBLYCACHE_UNINSTALL_DISPOSITION_ALREADY_UNINSTALLED = 0x00000003;
+  static const IASSEMBLYCACHE_UNINSTALL_DISPOSITION_DELETE_PENDING = 0x00000004;
+}
+
+/// {@category Enum}
+class MsiAdvertiseScript_dwFlags {
+  static const SCRIPTFLAGS_CACHEINFO = 0x00000001;
+  static const SCRIPTFLAGS_SHORTCUTS = 0x00000004;
+  static const SCRIPTFLAGS_MACHINEASSIGN = 0x00000008;
+  static const SCRIPTFLAGS_REGDATA_CNFGINFO = 0x00000020;
+  static const SCRIPTFLAGS_VALIDATE_TRANSFORMS_LIST = 0x00000040;
+  static const SCRIPTFLAGS_REGDATA_CLASSINFO = 0x00000080;
+  static const SCRIPTFLAGS_REGDATA_EXTENSIONINFO = 0x00000100;
+  static const SCRIPTFLAGS_REGDATA_APPINFO = 0x00000180;
+  static const SCRIPTFLAGS_REGDATA = 0x000001a0;
+}
+
+/// {@category Enum}
+class IAssemblyCache_QueryAssemblyInfoFlags {
+  static const QUERYASMINFO_FLAG_VALIDATE = 0x00000001;
+}
+
+/// {@category Enum}
+class SP_INF_INFORMATION_InfStyleFlags {
+  static const INF_STYLE_NONE = 0x00000000;
+  static const INF_STYLE_OLDNT = 0x00000001;
+  static const INF_STYLE_WIN4 = 0x00000002;
+}
+

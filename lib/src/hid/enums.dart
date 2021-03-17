@@ -10,3 +10,4 @@ class HIDP_KEYBOARD_DIRECTION {
   static const HidP_Keyboard_Break = 0x00000000;
   static const HidP_Keyboard_Make = 0x00000001;
 }
+

@@ -130,3 +130,4 @@ class UI_OWNERSHIP {
   static const UI_OWNERSHIP_TRANSFER = 0x00000000;
   static const UI_OWNERSHIP_COPY = 0x00000001;
 }
+

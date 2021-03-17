@@ -1,4 +1,21 @@
 /// {@category Enum}
+class WlanGetNetworkBssList_dot11BssTypeFlags {
+  static const dot11_BSS_type_infrastructure = 0x00000001;
+  static const dot11_BSS_type_independent = 0x00000002;
+}
+
+/// {@category Enum}
+class WlanSetProfileEap_dwFlags {
+  static const WLAN_SET_EAPHOST_DATA_ALL_USERS = 0x00000001;
+}
+
+/// {@category Enum}
+class WLAN_CONNECTION_NOTIFICATION_DATAFlags {
+  static const WLAN_CONNECTION_NOTIFICATION_ADHOC_NETWORK_FORMED = 0x00000001;
+  static const WLAN_CONNECTION_NOTIFICATION_CONSOLE_USER_PROFILE = 0x00000004;
+}
+
+/// {@category Enum}
 class DOT11_BSS_TYPE {
   static const dot11_BSS_type_infrastructure = 0x00000001;
   static const dot11_BSS_type_independent = 0x00000002;
@@ -548,11 +565,9 @@ class DOT11_ANQP_QUERY_RESULT {
   static const dot11_ANQP_query_result_failure = 0x00000001;
   static const dot11_ANQP_query_result_timed_out = 0x00000002;
   static const dot11_ANQP_query_result_resources = 0x00000003;
-  static const dot11_ANQP_query_result_advertisement_protocol_not_supported_on_remote =
-      0x00000004;
+  static const dot11_ANQP_query_result_advertisement_protocol_not_supported_on_remote = 0x00000004;
   static const dot11_ANQP_query_result_gas_protocol_failure = 0x00000005;
-  static const dot11_ANQP_query_result_advertisement_server_not_responding =
-      0x00000006;
+  static const dot11_ANQP_query_result_advertisement_server_not_responding = 0x00000006;
   static const dot11_ANQP_query_result_access_issues = 0x00000007;
 }
 
@@ -761,17 +776,14 @@ class WLAN_INTF_OPCODE {
   static const wlan_intf_opcode_interface_state = 0x00000006;
   static const wlan_intf_opcode_current_connection = 0x00000007;
   static const wlan_intf_opcode_channel_number = 0x00000008;
-  static const wlan_intf_opcode_supported_infrastructure_auth_cipher_pairs =
-      0x00000009;
+  static const wlan_intf_opcode_supported_infrastructure_auth_cipher_pairs = 0x00000009;
   static const wlan_intf_opcode_supported_adhoc_auth_cipher_pairs = 0x0000000a;
-  static const wlan_intf_opcode_supported_country_or_region_string_list =
-      0x0000000b;
+  static const wlan_intf_opcode_supported_country_or_region_string_list = 0x0000000b;
   static const wlan_intf_opcode_current_operation_mode = 0x0000000c;
   static const wlan_intf_opcode_supported_safe_mode = 0x0000000d;
   static const wlan_intf_opcode_certified_safe_mode = 0x0000000e;
   static const wlan_intf_opcode_hosted_network_capable = 0x0000000f;
-  static const wlan_intf_opcode_management_frame_protection_capable =
-      0x00000010;
+  static const wlan_intf_opcode_management_frame_protection_capable = 0x00000010;
   static const wlan_intf_opcode_autoconf_end = 0x0fffffff;
   static const wlan_intf_opcode_msm_start = 0x10000100;
   static const wlan_intf_opcode_statistics = 0x10000101;
@@ -788,12 +800,10 @@ class WLAN_AUTOCONF_OPCODE {
   static const wlan_autoconf_opcode_start = 0x00000000;
   static const wlan_autoconf_opcode_show_denied_networks = 0x00000001;
   static const wlan_autoconf_opcode_power_setting = 0x00000002;
-  static const wlan_autoconf_opcode_only_use_gp_profiles_for_allowed_networks =
-      0x00000003;
+  static const wlan_autoconf_opcode_only_use_gp_profiles_for_allowed_networks = 0x00000003;
   static const wlan_autoconf_opcode_allow_explicit_creds = 0x00000004;
   static const wlan_autoconf_opcode_block_period = 0x00000005;
-  static const wlan_autoconf_opcode_allow_virtual_station_extensibility =
-      0x00000006;
+  static const wlan_autoconf_opcode_allow_virtual_station_extensibility = 0x00000006;
   static const wlan_autoconf_opcode_end = 0x00000007;
 }
 
@@ -873,10 +883,8 @@ class WLAN_HOSTED_NETWORK_REASON {
   static const wlan_hosted_network_reason_interface_unavailable = 0x0000000c;
   static const wlan_hosted_network_reason_miniport_stopped = 0x0000000d;
   static const wlan_hosted_network_reason_miniport_started = 0x0000000e;
-  static const wlan_hosted_network_reason_incompatible_connection_started =
-      0x0000000f;
-  static const wlan_hosted_network_reason_incompatible_connection_stopped =
-      0x00000010;
+  static const wlan_hosted_network_reason_incompatible_connection_started = 0x0000000f;
+  static const wlan_hosted_network_reason_incompatible_connection_stopped = 0x00000010;
   static const wlan_hosted_network_reason_user_action = 0x00000011;
   static const wlan_hosted_network_reason_client_abort = 0x00000012;
   static const wlan_hosted_network_reason_ap_start_failed = 0x00000013;
@@ -887,10 +895,8 @@ class WLAN_HOSTED_NETWORK_REASON {
   static const wlan_hosted_network_reason_service_unavailable = 0x00000018;
   static const wlan_hosted_network_reason_device_change = 0x00000019;
   static const wlan_hosted_network_reason_properties_change = 0x0000001a;
-  static const wlan_hosted_network_reason_virtual_station_blocking_use =
-      0x0000001b;
-  static const wlan_hosted_network_reason_service_available_on_virtual_station =
-      0x0000001c;
+  static const wlan_hosted_network_reason_virtual_station_blocking_use = 0x0000001b;
+  static const wlan_hosted_network_reason_service_available_on_virtual_station = 0x0000001c;
 }
 
 /// {@category Enum}
@@ -1019,3 +1025,4 @@ class DOT11_ADHOC_CONNECT_FAIL_REASON {
   static const DOT11_ADHOC_CONNECT_FAIL_PASSPHRASE_MISMATCH = 0x00000001;
   static const DOT11_ADHOC_CONNECT_FAIL_OTHER = 0x00000002;
 }
+

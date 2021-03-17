@@ -1,4 +1,42 @@
 /// {@category Enum}
+class PROCESSOR_ARCHITECTURE {
+  static const PROCESSOR_ARCHITECTURE_AMD64 = 0x00000009;
+  static const PROCESSOR_ARCHITECTURE_IA64 = 0x00000006;
+  static const PROCESSOR_ARCHITECTURE_INTEL = 0x00000000;
+  static const PROCESSOR_ARCHITECTURE_ARM = 0x00000005;
+  static const PROCESSOR_ARCHITECTURE_ARM64 = 0x0000000c;
+  static const PROCESSOR_ARCHITECTURE_UNKNOWN = 0x0000ffff;
+}
+
+/// {@category Enum}
+class PxeProviderSetAttribute_pParameterBufferFlags {
+  static const PXE_PROV_FILTER_ALL = 0x00000000;
+  static const PXE_PROV_FILTER_DHCP_ONLY = 0x00000001;
+  static const PXE_PROV_FILTER_PXE_ONLY = 0x00000002;
+}
+
+/// {@category Enum}
+class WdsBpInitialize_bPacketTypeFlags {
+  static const WDSBP_PK_TYPE_WDSNBP = 0x00000002;
+  static const WDSBP_PK_TYPE_BCD = 0x00000004;
+  static const WDSBP_PK_TYPE_DHCPV6 = 0x00000008;
+}
+
+/// {@category Enum}
+class PFN_WdsCliCallback_dwMessageIdFlags {
+  static const WDS_CLI_MSG_START = 0x00000000;
+  static const WDS_CLI_MSG_COMPLETE = 0x00000001;
+  static const WDS_CLI_MSG_PROGRESS = 0x00000002;
+  static const WDS_CLI_MSG_TEXT = 0x00000003;
+}
+
+/// {@category Enum}
+class WDS_TRANSPORTCLIENT_REQUEST_ulAuthLevelFlags {
+  static const WDS_TRANSPORTCLIENT_AUTH = 0x00000001;
+  static const WDS_TRANSPORTCLIENT_NO_AUTH = 0x00000002;
+}
+
+/// {@category Enum}
 class WDS_CLI_IMAGE_TYPE {
   static const WDS_CLI_IMAGE_TYPE_UNKNOWN = 0x00000000;
   static const WDS_CLI_IMAGE_TYPE_WIM = 0x00000001;
@@ -132,3 +170,4 @@ class WDSTRANSPORT_TFTP_CAPABILITY {
   static const WdsTptTftpCapMaximumBlockSize = 0x00000001;
   static const WdsTptTftpCapVariableWindow = 0x00000002;
 }
+

@@ -46,3 +46,4 @@ class DEVICE_SELECTION_DEVICE_TYPE {
   static const DST_FS_DEVICE = 0x00000005;
   static const DST_DV_DEVICE = 0x00000006;
 }
+

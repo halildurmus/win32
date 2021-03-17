@@ -1082,8 +1082,7 @@ class UBlockCode {
   static const UBLOCK_MAHJONG_TILES = 0x000000aa;
   static const UBLOCK_DOMINO_TILES = 0x000000ab;
   static const UBLOCK_SAMARITAN = 0x000000ac;
-  static const UBLOCK_UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS_EXTENDED =
-      0x000000ad;
+  static const UBLOCK_UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS_EXTENDED = 0x000000ad;
   static const UBLOCK_TAI_THAM = 0x000000ae;
   static const UBLOCK_VEDIC_EXTENSIONS = 0x000000af;
   static const UBLOCK_LISU = 0x000000b0;
@@ -2354,3 +2353,231 @@ class UTransDirection {
   static const UTRANS_FORWARD = 0x00000000;
   static const UTRANS_REVERSE = 0x00000001;
 }
+
+/// {@category Enum}
+class IGP_ID {
+  static const IGP_GETIMEVERSION = 0xfffffffc;
+  static const IGP_CONVERSION = 0x00000008;
+  static const IGP_PROPERTY = 0x00000004;
+  static const IGP_SELECT = 0x00000018;
+  static const IGP_SENTENCE = 0x0000000c;
+  static const IGP_SETCOMPSTR = 0x00000014;
+  static const IGP_UI = 0x00000010;
+}
+
+/// {@category Enum}
+class ScriptStringOut_uOptionsFlags {
+  static const ETO_CLIPPED = 0x00000004;
+  static const ETO_OPAQUE = 0x00000002;
+  static const ETO_GLYPH_INDEX = 0x00000010;
+  static const ETO_IGNORELANGUAGE = 0x00001000;
+  static const ETO_NUMERICSLATIN = 0x00000800;
+  static const ETO_NUMERICSLOCAL = 0x00000400;
+}
+
+/// {@category Enum}
+class FoldString_dwMapFlags {
+  static const MAP_COMPOSITE = 0x00000040;
+  static const MAP_EXPAND_LIGATURES = 0x00002000;
+  static const MAP_FOLDCZONE = 0x00000010;
+  static const MAP_FOLDDIGITS = 0x00000080;
+  static const MAP_PRECOMPOSED = 0x00000020;
+}
+
+/// {@category Enum}
+class ImmUnregisterWord_DWORD {
+  static const IME_REGWORD_STYLE_EUDC = 0x00000001;
+}
+
+/// {@category Enum}
+class ImmSetCompositionString_dwIndex {
+  static const SCS_SETSTR = 0x00000009;
+  static const SCS_CHANGEATTR = 0x00000012;
+  static const SCS_CHANGECLAUSE = 0x00000024;
+  static const SCS_SETRECONVERTSTRING = 0x00010000;
+  static const SCS_QUERYRECONVERTSTRING = 0x00020000;
+}
+
+/// {@category Enum}
+class IME_CONFIG {
+  static const IME_CONFIG_GENERAL = 0x00000001;
+  static const IME_CONFIG_REGISTERWORD = 0x00000002;
+  static const IME_CONFIG_SELECTDICTIONARY = 0x00000003;
+}
+
+/// {@category Enum}
+class ImmGetImeMenuItems_Arg3 {
+  static const IGIMII_CMODE = 0x00000001;
+  static const IGIMII_SMODE = 0x00000002;
+  static const IGIMII_CONFIGURE = 0x00000004;
+  static const IGIMII_TOOLS = 0x00000008;
+  static const IGIMII_HELP = 0x00000010;
+  static const IGIMII_OTHER = 0x00000020;
+  static const IGIMII_INPUTTOOLS = 0x00000040;
+}
+
+/// {@category Enum}
+class ImmGetGuideLine_dwIndex {
+  static const GGL_LEVEL = 0x00000001;
+  static const GGL_INDEX = 0x00000002;
+  static const GGL_STRING = 0x00000003;
+  static const GGL_PRIVATE = 0x00000004;
+}
+
+/// {@category Enum}
+class EnumDateFormatsExEx_dwFlags {
+  static const DATE_SHORTDATE = 0x00000001;
+  static const DATE_LONGDATE = 0x00000002;
+  static const DATE_YEARMONTH = 0x00000008;
+  static const DATE_MONTHDAY = 0x00000080;
+  static const DATE_AUTOLAYOUT = 0x00000040;
+  static const DATE_LTRREADING = 0x00000010;
+  static const DATE_RTLREADING = 0x00000020;
+  static const DATE_USE_ALT_CALENDAR = 0x00000004;
+}
+
+/// {@category Enum}
+class ImmNotifyIME_dwIndex {
+  static const CPS_CANCEL = 0x00000004;
+  static const CPS_COMPLETE = 0x00000001;
+  static const CPS_CONVERT = 0x00000002;
+  static const CPS_REVERT = 0x00000003;
+}
+
+/// {@category Enum}
+class TranslateCharsetInfo_dwFlags {
+  static const TCI_SRCCHARSET = 0x00000001;
+  static const TCI_SRCCODEPAGE = 0x00000002;
+  static const TCI_SRCFONTSIG = 0x00000003;
+  static const TCI_SRCLOCALE = 0x00001000;
+}
+
+/// {@category Enum}
+class ImmAssociateContextEx_arg3 {
+  static const IACE_CHILDREN = 0x00000001;
+  static const IACE_DEFAULT = 0x00000010;
+  static const IACE_IGNORENOCONTEXT = 0x00000020;
+}
+
+/// {@category Enum}
+class GetTimeFormatEx_dwFlags {
+  static const TIME_NOMINUTESORSECONDS = 0x00000001;
+  static const TIME_NOSECONDS = 0x00000002;
+  static const TIME_NOTIMEMARKER = 0x00000004;
+  static const TIME_FORCE24HOURFORMAT = 0x00000008;
+}
+
+/// {@category Enum}
+class ImmNotifyIME_dwAction {
+  static const NI_CHANGECANDIDATELIST = 0x00000013;
+  static const NI_CLOSECANDIDATE = 0x00000011;
+  static const NI_COMPOSITIONSTR = 0x00000015;
+  static const NI_IMEMENUSELECTED = 0x00000018;
+  static const NI_OPENCANDIDATE = 0x00000010;
+  static const NI_SELECTCANDIDATESTR = 0x00000012;
+  static const NI_SETCANDIDATE_PAGESIZE = 0x00000017;
+  static const NI_SETCANDIDATE_PAGESTART = 0x00000016;
+}
+
+/// {@category Enum}
+class ImmGetConversionList_uFlag {
+  static const GCL_CONVERSION = 0x00000001;
+  static const GCL_REVERSECONVERSION = 0x00000002;
+  static const GCL_REVERSE_LENGTH = 0x00000003;
+}
+
+/// {@category Enum}
+class EnumSystemLanguageGroupsW_dwFlags {
+  static const LGRPID_INSTALLED = 0x00000001;
+  static const LGRPID_SUPPORTED = 0x00000002;
+}
+
+/// {@category Enum}
+class MultiByteToWideChar_dwFlags {
+  static const MB_COMPOSITE = 0x00000002;
+  static const MB_ERR_INVALID_CHARS = 0x00000008;
+  static const MB_PRECOMPOSED = 0x00000001;
+  static const MB_USEGLYPHCHARS = 0x00000004;
+}
+
+/// {@category Enum}
+class CompareStringEx_dwCmpFlags {
+  static const LINGUISTIC_IGNORECASE = 0x00000010;
+  static const LINGUISTIC_IGNOREDIACRITIC = 0x00000020;
+  static const NORM_IGNORECASE = 0x00000001;
+  static const NORM_IGNOREKANATYPE = 0x00010000;
+  static const NORM_IGNORENONSPACE = 0x00000002;
+  static const NORM_IGNORESYMBOLS = 0x00000004;
+  static const NORM_IGNOREWIDTH = 0x00020000;
+  static const NORM_LINGUISTIC_CASING = 0x08000000;
+  static const SORT_DIGITSASNUMBERS = 0x00000008;
+  static const SORT_STRINGSORT = 0x00001000;
+}
+
+/// {@category Enum}
+class ImmEnumInputContext_idThread {
+  static const None = 0x00000000;
+  static const idThread1 = 0x00000001;
+}
+
+/// {@category Enum}
+class IsValidLocale_dwFlags {
+  static const LCID_INSTALLED = 0x00000001;
+  static const LCID_SUPPORTED = 0x00000002;
+}
+
+/// {@category Enum}
+class EnumSystemCodePages_dwFlags {
+  static const CP_INSTALLED = 0x00000001;
+  static const CP_SUPPORTED = 0x00000002;
+}
+
+/// {@category Enum}
+class IImePad_Request_reqIdFlags {
+  static const IMEPADREQ_INSERTSTRING = 0x00001001;
+  static const IMEPADREQ_SENDCONTROL = 0x00001004;
+  static const IMEPADREQ_SETAPPLETSIZE = 0x00001008;
+  static const IMEPADREQ_GETCOMPOSITIONSTRING = 0x00001006;
+  static const IMEPADREQ_GETCOMPOSITIONSTRINGINFO = 0x0000100c;
+  static const IMEPADREQ_DELETESTRING = 0x00001010;
+  static const IMEPADREQ_CHANGESTRING = 0x00001011;
+  static const IMEPADREQ_GETAPPLHWND = 0x00001014;
+  static const IMEPADREQ_FORCEIMEPADWINDOWSHOW = 0x00001015;
+  static const IMEPADREQ_POSTMODALNOTIFY = 0x00001016;
+  static const IMEPADREQ_GETDEFAULTUILANGID = 0x00001017;
+  static const IMEPADREQ_GETAPPLETUISTYLE = 0x00001019;
+  static const IMEPADREQ_SETAPPLETUISTYLE = 0x0000101a;
+  static const IMEPADREQ_ISAPPLETACTIVE = 0x0000101b;
+  static const IMEPADREQ_ISIMEPADWINDOWVISIBLE = 0x0000101c;
+  static const IMEPADREQ_SETAPPLETMINMAXSIZE = 0x0000101d;
+  static const IMEPADREQ_GETCONVERSIONSTATUS = 0x0000101e;
+  static const IMEPADREQ_GETVERSION = 0x0000101f;
+  static const IMEPADREQ_GETCURRENTIMEINFO = 0x00001020;
+}
+
+/// {@category Enum}
+class ScriptIsComplex_dwFlags {
+  static const SIC_ASCIIDIGIT = 0x00000002;
+  static const SIC_COMPLEX = 0x00000001;
+  static const SIC_NEUTRAL = 0x00000004;
+}
+
+/// {@category Enum}
+class IsTextUnicode_lpiResultFlags {
+  static const IS_TEXT_UNICODE_ASCII16 = 0x00000001;
+  static const IS_TEXT_UNICODE_REVERSE_ASCII16 = 0x00000010;
+  static const IS_TEXT_UNICODE_STATISTICS = 0x00000002;
+  static const IS_TEXT_UNICODE_REVERSE_STATISTICS = 0x00000020;
+  static const IS_TEXT_UNICODE_CONTROLS = 0x00000004;
+  static const IS_TEXT_UNICODE_REVERSE_CONTROLS = 0x00000040;
+  static const IS_TEXT_UNICODE_SIGNATURE = 0x00000008;
+  static const IS_TEXT_UNICODE_REVERSE_SIGNATURE = 0x00000080;
+  static const IS_TEXT_UNICODE_ILLEGAL_CHARS = 0x00000100;
+  static const IS_TEXT_UNICODE_ODD_LENGTH = 0x00000200;
+  static const IS_TEXT_UNICODE_NULL_BYTES = 0x00001000;
+  static const IS_TEXT_UNICODE_UNICODE_MASK = 0x0000000f;
+  static const IS_TEXT_UNICODE_REVERSE_MASK = 0x000000f0;
+  static const IS_TEXT_UNICODE_NOT_UNICODE_MASK = 0x00000f00;
+  static const IS_TEXT_UNICODE_NOT_ASCII_MASK = 0x0000f000;
+}
+

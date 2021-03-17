@@ -64,3 +64,4 @@ class LDAP_RETCODE {
   static const LDAP_CLIENT_LOOP = 0x00000060;
   static const LDAP_REFERRAL_LIMIT_EXCEEDED = 0x00000061;
 }
+

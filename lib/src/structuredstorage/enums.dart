@@ -1,49 +1,4 @@
 /// {@category Enum}
-class STGTY {
-  static const STGTY_STORAGE = 0x00000001;
-  static const STGTY_STREAM = 0x00000002;
-  static const STGTY_LOCKBYTES = 0x00000003;
-  static const STGTY_PROPERTY = 0x00000004;
-}
-
-/// {@category Enum}
-class STREAM_SEEK {
-  static const STREAM_SEEK_SET = 0x00000000;
-  static const STREAM_SEEK_CUR = 0x00000001;
-  static const STREAM_SEEK_END = 0x00000002;
-}
-
-/// {@category Enum}
-class LOCKTYPE {
-  static const LOCK_WRITE = 0x00000001;
-  static const LOCK_EXCLUSIVE = 0x00000002;
-  static const LOCK_ONLYONCE = 0x00000004;
-}
-
-/// {@category Enum}
-class STGC {
-  static const STGC_DEFAULT = 0x00000000;
-  static const STGC_OVERWRITE = 0x00000001;
-  static const STGC_ONLYIFCURRENT = 0x00000002;
-  static const STGC_DANGEROUSLYCOMMITMERELYTODISKCACHE = 0x00000004;
-  static const STGC_CONSOLIDATE = 0x00000008;
-}
-
-/// {@category Enum}
-class STGMOVE {
-  static const STGMOVE_MOVE = 0x00000000;
-  static const STGMOVE_COPY = 0x00000001;
-  static const STGMOVE_SHALLOWCOPY = 0x00000002;
-}
-
-/// {@category Enum}
-class STATFLAG {
-  static const STATFLAG_DEFAULT = 0x00000000;
-  static const STATFLAG_NONAME = 0x00000001;
-  static const STATFLAG_NOOPEN = 0x00000002;
-}
-
-/// {@category Enum}
 class PIDMSI_STATUS_VALUE {
   static const PIDMSI_STATUS_NORMAL = 0x00000000;
   static const PIDMSI_STATUS_NEW = 0x00000001;
@@ -99,3 +54,55 @@ class JET_INDEXCHECKING {
   static const JET_IndexCheckingDeferToOpenTable = 0x00000002;
   static const JET_IndexCheckingMax = 0x00000003;
 }
+
+/// {@category Enum}
+class PROPSPEC_ulKind {
+  static const PRSPEC_LPWSTR = 0x00000000;
+  static const PRSPEC_PROPID = 0x00000001;
+}
+
+/// {@category Enum}
+class STGC {
+  static const STGC_DEFAULT = 0x00000000;
+  static const STGC_OVERWRITE = 0x00000001;
+  static const STGC_ONLYIFCURRENT = 0x00000002;
+  static const STGC_DANGEROUSLYCOMMITMERELYTODISKCACHE = 0x00000004;
+  static const STGC_CONSOLIDATE = 0x00000008;
+}
+
+/// {@category Enum}
+class STGMOVE {
+  static const STGMOVE_MOVE = 0x00000000;
+  static const STGMOVE_COPY = 0x00000001;
+  static const STGMOVE_SHALLOWCOPY = 0x00000002;
+}
+
+/// {@category Enum}
+class STATFLAG {
+  static const STATFLAG_DEFAULT = 0x00000000;
+  static const STATFLAG_NONAME = 0x00000001;
+  static const STATFLAG_NOOPEN = 0x00000002;
+}
+
+/// {@category Enum}
+class STGTY {
+  static const STGTY_STORAGE = 0x00000001;
+  static const STGTY_STREAM = 0x00000002;
+  static const STGTY_LOCKBYTES = 0x00000003;
+  static const STGTY_PROPERTY = 0x00000004;
+}
+
+/// {@category Enum}
+class STREAM_SEEK {
+  static const STREAM_SEEK_SET = 0x00000000;
+  static const STREAM_SEEK_CUR = 0x00000001;
+  static const STREAM_SEEK_END = 0x00000002;
+}
+
+/// {@category Enum}
+class LOCKTYPE {
+  static const LOCK_WRITE = 0x00000001;
+  static const LOCK_EXCLUSIVE = 0x00000002;
+  static const LOCK_ONLYONCE = 0x00000004;
+}
+

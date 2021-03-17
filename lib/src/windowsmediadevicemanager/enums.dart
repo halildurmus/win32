@@ -145,3 +145,4 @@ class WMDMMessage {
   static const WMDM_MSG_MEDIA_ARRIVAL = 0x00000002;
   static const WMDM_MSG_MEDIA_REMOVAL = 0x00000003;
 }
+

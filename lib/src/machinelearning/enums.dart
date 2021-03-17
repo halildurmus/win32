@@ -104,3 +104,4 @@ class MLOperatorExecutionType {
   static const Cpu = 0x00000001;
   static const D3D12 = 0x00000002;
 }
+

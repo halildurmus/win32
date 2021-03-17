@@ -1,4 +1,1301 @@
 /// {@category Enum}
+class DISPID_TUNER {
+  static const DISPID_TUNER_TS_UNIQUENAME = 0x00000001;
+  static const DISPID_TUNER_TS_FRIENDLYNAME = 0x00000002;
+  static const DISPID_TUNER_TS_CLSID = 0x00000003;
+  static const DISPID_TUNER_TS_NETWORKTYPE = 0x00000004;
+  static const DISPID_TUNER_TS__NETWORKTYPE = 0x00000005;
+  static const DISPID_TUNER_TS_CREATETUNEREQUEST = 0x00000006;
+  static const DISPID_TUNER_TS_ENUMCATEGORYGUIDS = 0x00000007;
+  static const DISPID_TUNER_TS_ENUMDEVICEMONIKERS = 0x00000008;
+  static const DISPID_TUNER_TS_DEFAULTPREFERREDCOMPONENTTYPES = 0x00000009;
+  static const DISPID_TUNER_TS_FREQMAP = 0x0000000a;
+  static const DISPID_TUNER_TS_DEFLOCATOR = 0x0000000b;
+  static const DISPID_TUNER_TS_CLONE = 0x0000000c;
+  static const DISPID_TUNER_TR_TUNINGSPACE = 0x00000001;
+  static const DISPID_TUNER_TR_COMPONENTS = 0x00000002;
+  static const DISPID_TUNER_TR_CLONE = 0x00000003;
+  static const DISPID_TUNER_TR_LOCATOR = 0x00000004;
+  static const DISPID_TUNER_CT_CATEGORY = 0x00000001;
+  static const DISPID_TUNER_CT_MEDIAMAJORTYPE = 0x00000002;
+  static const DISPID_TUNER_CT__MEDIAMAJORTYPE = 0x00000003;
+  static const DISPID_TUNER_CT_MEDIASUBTYPE = 0x00000004;
+  static const DISPID_TUNER_CT__MEDIASUBTYPE = 0x00000005;
+  static const DISPID_TUNER_CT_MEDIAFORMATTYPE = 0x00000006;
+  static const DISPID_TUNER_CT__MEDIAFORMATTYPE = 0x00000007;
+  static const DISPID_TUNER_CT_MEDIATYPE = 0x00000008;
+  static const DISPID_TUNER_CT_CLONE = 0x00000009;
+  static const DISPID_TUNER_LCT_LANGID = 0x00000064;
+  static const DISPID_TUNER_MP2CT_TYPE = 0x000000c8;
+  static const DISPID_TUNER_ATSCCT_FLAGS = 0x0000012c;
+  static const DISPID_TUNER_L_CARRFREQ = 0x00000001;
+  static const DISPID_TUNER_L_INNERFECMETHOD = 0x00000002;
+  static const DISPID_TUNER_L_INNERFECRATE = 0x00000003;
+  static const DISPID_TUNER_L_OUTERFECMETHOD = 0x00000004;
+  static const DISPID_TUNER_L_OUTERFECRATE = 0x00000005;
+  static const DISPID_TUNER_L_MOD = 0x00000006;
+  static const DISPID_TUNER_L_SYMRATE = 0x00000007;
+  static const DISPID_TUNER_L_CLONE = 0x00000008;
+  static const DISPID_TUNER_L_ATSC_PHYS_CHANNEL = 0x000000c9;
+  static const DISPID_TUNER_L_ATSC_TSID = 0x000000ca;
+  static const DISPID_TUNER_L_ATSC_MP2_PROGNO = 0x000000cb;
+  static const DISPID_TUNER_L_DVBT_BANDWIDTH = 0x0000012d;
+  static const DISPID_TUNER_L_DVBT_LPINNERFECMETHOD = 0x0000012e;
+  static const DISPID_TUNER_L_DVBT_LPINNERFECRATE = 0x0000012f;
+  static const DISPID_TUNER_L_DVBT_GUARDINTERVAL = 0x00000130;
+  static const DISPID_TUNER_L_DVBT_HALPHA = 0x00000131;
+  static const DISPID_TUNER_L_DVBT_TRANSMISSIONMODE = 0x00000132;
+  static const DISPID_TUNER_L_DVBT_INUSE = 0x00000133;
+  static const DISPID_TUNER_L_DVBT2_PHYSICALLAYERPIPEID = 0x0000015f;
+  static const DISPID_TUNER_L_DVBS_POLARISATION = 0x00000191;
+  static const DISPID_TUNER_L_DVBS_WEST = 0x00000192;
+  static const DISPID_TUNER_L_DVBS_ORBITAL = 0x00000193;
+  static const DISPID_TUNER_L_DVBS_AZIMUTH = 0x00000194;
+  static const DISPID_TUNER_L_DVBS_ELEVATION = 0x00000195;
+  static const DISPID_TUNER_L_DVBS2_DISEQ_LNB_SOURCE = 0x00000196;
+  static const DISPID_TUNER_TS_DVBS2_LOW_OSC_FREQ_OVERRIDE = 0x00000197;
+  static const DISPID_TUNER_TS_DVBS2_HI_OSC_FREQ_OVERRIDE = 0x00000198;
+  static const DISPID_TUNER_TS_DVBS2_LNB_SWITCH_FREQ_OVERRIDE = 0x00000199;
+  static const DISPID_TUNER_TS_DVBS2_SPECTRAL_INVERSION_OVERRIDE = 0x0000019a;
+  static const DISPID_TUNER_L_DVBS2_ROLLOFF = 0x0000019b;
+  static const DISPID_TUNER_L_DVBS2_PILOT = 0x0000019c;
+  static const DISPID_TUNER_L_ANALOG_STANDARD = 0x00000259;
+  static const DISPID_TUNER_L_DTV_O_MAJOR_CHANNEL = 0x000002bd;
+  static const DISPID_TUNER_C_TYPE = 0x00000001;
+  static const DISPID_TUNER_C_STATUS = 0x00000002;
+  static const DISPID_TUNER_C_LANGID = 0x00000003;
+  static const DISPID_TUNER_C_DESCRIPTION = 0x00000004;
+  static const DISPID_TUNER_C_CLONE = 0x00000005;
+  static const DISPID_TUNER_C_MP2_PID = 0x00000065;
+  static const DISPID_TUNER_C_MP2_PCRPID = 0x00000066;
+  static const DISPID_TUNER_C_MP2_PROGNO = 0x00000067;
+  static const DISPID_TUNER_C_ANALOG_AUDIO = 0x000000c9;
+  static const DISPID_TUNER_TS_DVB_SYSTEMTYPE = 0x00000065;
+  static const DISPID_TUNER_TS_DVB2_NETWORK_ID = 0x00000066;
+  static const DISPID_TUNER_TS_DVBS_LOW_OSC_FREQ = 0x000003e9;
+  static const DISPID_TUNER_TS_DVBS_HI_OSC_FREQ = 0x000003ea;
+  static const DISPID_TUNER_TS_DVBS_LNB_SWITCH_FREQ = 0x000003eb;
+  static const DISPID_TUNER_TS_DVBS_INPUT_RANGE = 0x000003ec;
+  static const DISPID_TUNER_TS_DVBS_SPECTRAL_INVERSION = 0x000003ed;
+  static const DISPID_TUNER_TS_AR_MINFREQUENCY = 0x00000065;
+  static const DISPID_TUNER_TS_AR_MAXFREQUENCY = 0x00000066;
+  static const DISPID_TUNER_TS_AR_STEP = 0x00000067;
+  static const DISPID_TUNER_TS_AR_COUNTRYCODE = 0x00000068;
+  static const DISPID_TUNER_TS_AUX_COUNTRYCODE = 0x00000065;
+  static const DISPID_TUNER_TS_ATV_MINCHANNEL = 0x00000065;
+  static const DISPID_TUNER_TS_ATV_MAXCHANNEL = 0x00000066;
+  static const DISPID_TUNER_TS_ATV_INPUTTYPE = 0x00000067;
+  static const DISPID_TUNER_TS_ATV_COUNTRYCODE = 0x00000068;
+  static const DISPID_TUNER_TS_ATSC_MINMINORCHANNEL = 0x000000c9;
+  static const DISPID_TUNER_TS_ATSC_MAXMINORCHANNEL = 0x000000ca;
+  static const DISPID_TUNER_TS_ATSC_MINPHYSCHANNEL = 0x000000cb;
+  static const DISPID_TUNER_TS_ATSC_MAXPHYSCHANNEL = 0x000000cc;
+  static const DISPID_TUNER_TS_DC_MINMAJORCHANNEL = 0x0000012d;
+  static const DISPID_TUNER_TS_DC_MAXMAJORCHANNEL = 0x0000012e;
+  static const DISPID_TUNER_TS_DC_MINSOURCEID = 0x0000012f;
+  static const DISPID_TUNER_TS_DC_MAXSOURCEID = 0x00000130;
+  static const DISPID_CHTUNER_ATVAC_CHANNEL = 0x00000065;
+  static const DISPID_CHTUNER_ATVDC_SYSTEM = 0x00000065;
+  static const DISPID_CHTUNER_ATVDC_CONTENT = 0x00000066;
+  static const DISPID_CHTUNER_CIDTR_CHANNELID = 0x00000065;
+  static const DISPID_CHTUNER_CTR_CHANNEL = 0x00000065;
+  static const DISPID_CHTUNER_ACTR_MINOR_CHANNEL = 0x000000c9;
+  static const DISPID_CHTUNER_DCTR_MAJOR_CHANNEL = 0x0000012d;
+  static const DISPID_CHTUNER_DCTR_SRCID = 0x0000012e;
+  static const DISPID_DVBTUNER_DVBC_ATTRIBUTESVALID = 0x00000065;
+  static const DISPID_DVBTUNER_DVBC_PID = 0x00000066;
+  static const DISPID_DVBTUNER_DVBC_TAG = 0x00000067;
+  static const DISPID_DVBTUNER_DVBC_COMPONENTTYPE = 0x00000068;
+  static const DISPID_DVBTUNER_ONID = 0x00000065;
+  static const DISPID_DVBTUNER_TSID = 0x00000066;
+  static const DISPID_DVBTUNER_SID = 0x00000067;
+  static const DISPID_MP2TUNER_TSID = 0x00000065;
+  static const DISPID_MP2TUNER_PROGNO = 0x00000066;
+  static const DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST = 0x00000001;
+}
+
+/// {@category Enum}
+class EnTvRat_System {
+  static const MPAA = 0x00000000;
+  static const US_TV = 0x00000001;
+  static const Canadian_English = 0x00000002;
+  static const Canadian_French = 0x00000003;
+  static const Reserved4 = 0x00000004;
+  static const System5 = 0x00000005;
+  static const System6 = 0x00000006;
+  static const Reserved7 = 0x00000007;
+  static const PBDA = 0x00000008;
+  static const AgeBased = 0x00000009;
+  static const TvRat_kSystems = 0x0000000a;
+  static const TvRat_SystemDontKnow = 0x000000ff;
+}
+
+/// {@category Enum}
+class EnTvRat_GenericLevel {
+  static const TvRat_0 = 0x00000000;
+  static const TvRat_1 = 0x00000001;
+  static const TvRat_2 = 0x00000002;
+  static const TvRat_3 = 0x00000003;
+  static const TvRat_4 = 0x00000004;
+  static const TvRat_5 = 0x00000005;
+  static const TvRat_6 = 0x00000006;
+  static const TvRat_7 = 0x00000007;
+  static const TvRat_8 = 0x00000008;
+  static const TvRat_9 = 0x00000009;
+  static const TvRat_10 = 0x0000000a;
+  static const TvRat_11 = 0x0000000b;
+  static const TvRat_12 = 0x0000000c;
+  static const TvRat_13 = 0x0000000d;
+  static const TvRat_14 = 0x0000000e;
+  static const TvRat_15 = 0x0000000f;
+  static const TvRat_16 = 0x00000010;
+  static const TvRat_17 = 0x00000011;
+  static const TvRat_18 = 0x00000012;
+  static const TvRat_19 = 0x00000013;
+  static const TvRat_20 = 0x00000014;
+  static const TvRat_21 = 0x00000015;
+  static const TvRat_kLevels = 0x00000016;
+  static const TvRat_Unblock = 0xffffffff;
+  static const TvRat_LevelDontKnow = 0x000000ff;
+}
+
+/// {@category Enum}
+class EnTvRat_MPAA {
+  static const MPAA_NotApplicable = 0x00000000;
+  static const MPAA_G = 0x00000001;
+  static const MPAA_PG = 0x00000002;
+  static const MPAA_PG13 = 0x00000003;
+  static const MPAA_R = 0x00000004;
+  static const MPAA_NC17 = 0x00000005;
+  static const MPAA_X = 0x00000006;
+  static const MPAA_NotRated = 0x00000007;
+}
+
+/// {@category Enum}
+class EnTvRat_US_TV {
+  static const US_TV_None = 0x00000000;
+  static const US_TV_Y = 0x00000001;
+  static const US_TV_Y7 = 0x00000002;
+  static const US_TV_G = 0x00000003;
+  static const US_TV_PG = 0x00000004;
+  static const US_TV_14 = 0x00000005;
+  static const US_TV_MA = 0x00000006;
+  static const US_TV_None7 = 0x00000007;
+}
+
+/// {@category Enum}
+class EnTvRat_CAE_TV {
+  static const CAE_TV_Exempt = 0x00000000;
+  static const CAE_TV_C = 0x00000001;
+  static const CAE_TV_C8 = 0x00000002;
+  static const CAE_TV_G = 0x00000003;
+  static const CAE_TV_PG = 0x00000004;
+  static const CAE_TV_14 = 0x00000005;
+  static const CAE_TV_18 = 0x00000006;
+  static const CAE_TV_Reserved = 0x00000007;
+}
+
+/// {@category Enum}
+class EnTvRat_CAF_TV {
+  static const CAF_TV_Exempt = 0x00000000;
+  static const CAF_TV_G = 0x00000001;
+  static const CAF_TV_8 = 0x00000002;
+  static const CAF_TV_13 = 0x00000003;
+  static const CAF_TV_16 = 0x00000004;
+  static const CAF_TV_18 = 0x00000005;
+  static const CAF_TV_Reserved6 = 0x00000006;
+  static const CAF_TV_Reserved = 0x00000007;
+}
+
+/// {@category Enum}
+class BfEnTvRat_GenericAttributes {
+  static const BfAttrNone = 0x00000000;
+  static const BfIsBlocked = 0x00000001;
+  static const BfIsAttr_1 = 0x00000002;
+  static const BfIsAttr_2 = 0x00000004;
+  static const BfIsAttr_3 = 0x00000008;
+  static const BfIsAttr_4 = 0x00000010;
+  static const BfIsAttr_5 = 0x00000020;
+  static const BfIsAttr_6 = 0x00000040;
+  static const BfIsAttr_7 = 0x00000080;
+  static const BfValidAttrSubmask = 0x000000ff;
+}
+
+/// {@category Enum}
+class BfEnTvRat_Attributes_US_TV {
+  static const US_TV_IsBlocked = 0x00000001;
+  static const US_TV_IsViolent = 0x00000002;
+  static const US_TV_IsSexualSituation = 0x00000004;
+  static const US_TV_IsAdultLanguage = 0x00000008;
+  static const US_TV_IsSexuallySuggestiveDialog = 0x00000010;
+  static const US_TV_ValidAttrSubmask = 0x0000001f;
+}
+
+/// {@category Enum}
+class BfEnTvRat_Attributes_MPAA {
+  static const MPAA_IsBlocked = 0x00000001;
+  static const MPAA_ValidAttrSubmask = 0x00000001;
+}
+
+/// {@category Enum}
+class BfEnTvRat_Attributes_CAE_TV {
+  static const CAE_IsBlocked = 0x00000001;
+  static const CAE_ValidAttrSubmask = 0x00000001;
+}
+
+/// {@category Enum}
+class BfEnTvRat_Attributes_CAF_TV {
+  static const CAF_IsBlocked = 0x00000001;
+  static const CAF_ValidAttrSubmask = 0x00000001;
+}
+
+/// {@category Enum}
+class FormatNotSupportedEvents {
+  static const FORMATNOTSUPPORTED_CLEAR = 0x00000000;
+  static const FORMATNOTSUPPORTED_NOTSUPPORTED = 0x00000001;
+}
+
+/// {@category Enum}
+class ProtType {
+  static const PROT_COPY_FREE = 0x00000001;
+  static const PROT_COPY_ONCE = 0x00000002;
+  static const PROT_COPY_NEVER = 0x00000003;
+  static const PROT_COPY_NEVER_REALLY = 0x00000004;
+  static const PROT_COPY_NO_MORE = 0x00000005;
+  static const PROT_COPY_FREE_CIT = 0x00000006;
+  static const PROT_COPY_BF = 0x00000007;
+  static const PROT_COPY_CN_RECORDING_STOP = 0x00000008;
+  static const PROT_COPY_FREE_SECURE = 0x00000009;
+  static const PROT_COPY_INVALID = 0x00000032;
+}
+
+/// {@category Enum}
+class EncDecEvents {
+  static const ENCDEC_CPEVENT = 0x00000000;
+  static const ENCDEC_RECORDING_STATUS = 0x00000001;
+}
+
+/// {@category Enum}
+class CPRecordingStatus {
+  static const RECORDING_STOPPED = 0x00000000;
+  static const RECORDING_STARTED = 0x00000001;
+}
+
+/// {@category Enum}
+class CPEventBitShift {
+  static const CPEVENT_BITSHIFT_RATINGS = 0x00000000;
+  static const CPEVENT_BITSHIFT_COPP = 0x00000001;
+  static const CPEVENT_BITSHIFT_LICENSE = 0x00000002;
+  static const CPEVENT_BITSHIFT_ROLLBACK = 0x00000003;
+  static const CPEVENT_BITSHIFT_SAC = 0x00000004;
+  static const CPEVENT_BITSHIFT_DOWNRES = 0x00000005;
+  static const CPEVENT_BITSHIFT_STUBLIB = 0x00000006;
+  static const CPEVENT_BITSHIFT_UNTRUSTEDGRAPH = 0x00000007;
+  static const CPEVENT_BITSHIFT_PENDING_CERTIFICATE = 0x00000008;
+  static const CPEVENT_BITSHIFT_NO_PLAYREADY = 0x00000009;
+}
+
+/// {@category Enum}
+class CPEvents {
+  static const CPEVENT_NONE = 0x00000000;
+  static const CPEVENT_RATINGS = 0x00000001;
+  static const CPEVENT_COPP = 0x00000002;
+  static const CPEVENT_LICENSE = 0x00000003;
+  static const CPEVENT_ROLLBACK = 0x00000004;
+  static const CPEVENT_SAC = 0x00000005;
+  static const CPEVENT_DOWNRES = 0x00000006;
+  static const CPEVENT_STUBLIB = 0x00000007;
+  static const CPEVENT_UNTRUSTEDGRAPH = 0x00000008;
+  static const CPEVENT_PROTECTWINDOWED = 0x00000009;
+}
+
+/// {@category Enum}
+class RevokedComponent {
+  static const REVOKED_COPP = 0x00000000;
+  static const REVOKED_SAC = 0x00000001;
+  static const REVOKED_APP_STUB = 0x00000002;
+  static const REVOKED_SECURE_PIPELINE = 0x00000003;
+  static const REVOKED_MAX_TYPES = 0x00000004;
+}
+
+/// {@category Enum}
+class EnTag_Mode {
+  static const EnTag_Remove = 0x00000000;
+  static const EnTag_Once = 0x00000001;
+  static const EnTag_Repeat = 0x00000002;
+}
+
+/// {@category Enum}
+class COPPEventBlockReason {
+  static const COPP_Unknown = 0xffffffff;
+  static const COPP_BadDriver = 0x00000000;
+  static const COPP_NoCardHDCPSupport = 0x00000001;
+  static const COPP_NoMonitorHDCPSupport = 0x00000002;
+  static const COPP_BadCertificate = 0x00000003;
+  static const COPP_InvalidBusProtection = 0x00000004;
+  static const COPP_AeroGlassOff = 0x00000005;
+  static const COPP_RogueApp = 0x00000006;
+  static const COPP_ForbiddenVideo = 0x00000007;
+  static const COPP_Activate = 0x00000008;
+  static const COPP_DigitalAudioUnprotected = 0x00000009;
+}
+
+/// {@category Enum}
+class LicenseEventBlockReason {
+  static const LIC_BadLicense = 0x00000000;
+  static const LIC_NeedIndiv = 0x00000001;
+  static const LIC_Expired = 0x00000002;
+  static const LIC_NeedActivation = 0x00000003;
+  static const LIC_ExtenderBlocked = 0x00000004;
+}
+
+/// {@category Enum}
+class DownResEventParam {
+  static const DOWNRES_Always = 0x00000000;
+  static const DOWNRES_InWindowOnly = 0x00000001;
+  static const DOWNRES_Undefined = 0x00000002;
+}
+
+/// {@category Enum}
+class SegDispidList {
+  static const dispidName = 0x00000000;
+  static const dispidStatus = 0x00000001;
+  static const dispidDevImageSourceWidth = 0x00000002;
+  static const dispidDevImageSourceHeight = 0x00000003;
+  static const dispidDevCountryCode = 0x00000004;
+  static const dispidDevOverScan = 0x00000005;
+  static const dispidSegment = 0x00000006;
+  static const dispidDevVolume = 0x00000007;
+  static const dispidDevBalance = 0x00000008;
+  static const dispidDevPower = 0x00000009;
+  static const dispidTuneChan = 0x0000000a;
+  static const dispidDevVideoSubchannel = 0x0000000b;
+  static const dispidDevAudioSubchannel = 0x0000000c;
+  static const dispidChannelAvailable = 0x0000000d;
+  static const dispidDevVideoFrequency = 0x0000000e;
+  static const dispidDevAudioFrequency = 0x0000000f;
+  static const dispidCount = 0x00000010;
+  static const dispidDevFileName = 0x00000011;
+  static const dispidVisible = 0x00000012;
+  static const dispidOwner = 0x00000013;
+  static const dispidMessageDrain = 0x00000014;
+  static const dispidViewable = 0x00000015;
+  static const dispidDevView = 0x00000016;
+  static const dispidKSCat = 0x00000017;
+  static const dispidCLSID = 0x00000018;
+  static const dispid_KSCat = 0x00000019;
+  static const dispid_CLSID = 0x0000001a;
+  static const dispidTune = 0x0000001b;
+  static const dispidTS = 0x0000001c;
+  static const dispidDevSAP = 0x0000001d;
+  static const dispidClip = 0x0000001e;
+  static const dispidRequestedClipRect = 0x0000001f;
+  static const dispidClippedSourceRect = 0x00000020;
+  static const dispidAvailableSourceRect = 0x00000021;
+  static const dispidMediaPosition = 0x00000022;
+  static const dispidDevRun = 0x00000023;
+  static const dispidDevPause = 0x00000024;
+  static const dispidDevStop = 0x00000025;
+  static const dispidCCEnable = 0x00000026;
+  static const dispidDevStep = 0x00000027;
+  static const dispidDevCanStep = 0x00000028;
+  static const dispidSourceSize = 0x00000029;
+  static const dispid_playtitle = 0x0000002a;
+  static const dispid_playchapterintitle = 0x0000002b;
+  static const dispid_playchapter = 0x0000002c;
+  static const dispid_playchaptersautostop = 0x0000002d;
+  static const dispid_playattime = 0x0000002e;
+  static const dispid_playattimeintitle = 0x0000002f;
+  static const dispid_playperiodintitleautostop = 0x00000030;
+  static const dispid_replaychapter = 0x00000031;
+  static const dispid_playprevchapter = 0x00000032;
+  static const dispid_playnextchapter = 0x00000033;
+  static const dispid_playforwards = 0x00000034;
+  static const dispid_playbackwards = 0x00000035;
+  static const dispid_stilloff = 0x00000036;
+  static const dispid_audiolanguage = 0x00000037;
+  static const dispid_showmenu = 0x00000038;
+  static const dispid_resume = 0x00000039;
+  static const dispid_returnfromsubmenu = 0x0000003a;
+  static const dispid_buttonsavailable = 0x0000003b;
+  static const dispid_currentbutton = 0x0000003c;
+  static const dispid_SelectAndActivateButton = 0x0000003d;
+  static const dispid_ActivateButton = 0x0000003e;
+  static const dispid_SelectRightButton = 0x0000003f;
+  static const dispid_SelectLeftButton = 0x00000040;
+  static const dispid_SelectLowerButton = 0x00000041;
+  static const dispid_SelectUpperButton = 0x00000042;
+  static const dispid_ActivateAtPosition = 0x00000043;
+  static const dispid_SelectAtPosition = 0x00000044;
+  static const dispid_ButtonAtPosition = 0x00000045;
+  static const dispid_NumberOfChapters = 0x00000046;
+  static const dispid_TotalTitleTime = 0x00000047;
+  static const dispid_TitlesAvailable = 0x00000048;
+  static const dispid_VolumesAvailable = 0x00000049;
+  static const dispid_CurrentVolume = 0x0000004a;
+  static const dispid_CurrentDiscSide = 0x0000004b;
+  static const dispid_CurrentDomain = 0x0000004c;
+  static const dispid_CurrentChapter = 0x0000004d;
+  static const dispid_CurrentTitle = 0x0000004e;
+  static const dispid_CurrentTime = 0x0000004f;
+  static const dispid_FramesPerSecond = 0x00000050;
+  static const dispid_DVDTimeCode2bstr = 0x00000051;
+  static const dispid_DVDDirectory = 0x00000052;
+  static const dispid_IsSubpictureStreamEnabled = 0x00000053;
+  static const dispid_IsAudioStreamEnabled = 0x00000054;
+  static const dispid_CurrentSubpictureStream = 0x00000055;
+  static const dispid_SubpictureLanguage = 0x00000056;
+  static const dispid_CurrentAudioStream = 0x00000057;
+  static const dispid_AudioStreamsAvailable = 0x00000058;
+  static const dispid_AnglesAvailable = 0x00000059;
+  static const dispid_CurrentAngle = 0x0000005a;
+  static const dispid_CCActive = 0x0000005b;
+  static const dispid_CurrentCCService = 0x0000005c;
+  static const dispid_SubpictureStreamsAvailable = 0x0000005d;
+  static const dispid_SubpictureOn = 0x0000005e;
+  static const dispid_DVDUniqueID = 0x0000005f;
+  static const dispid_EnableResetOnStop = 0x00000060;
+  static const dispid_AcceptParentalLevelChange = 0x00000061;
+  static const dispid_NotifyParentalLevelChange = 0x00000062;
+  static const dispid_SelectParentalCountry = 0x00000063;
+  static const dispid_SelectParentalLevel = 0x00000064;
+  static const dispid_TitleParentalLevels = 0x00000065;
+  static const dispid_PlayerParentalCountry = 0x00000066;
+  static const dispid_PlayerParentalLevel = 0x00000067;
+  static const dispid_Eject = 0x00000068;
+  static const dispid_UOPValid = 0x00000069;
+  static const dispid_SPRM = 0x0000006a;
+  static const dispid_GPRM = 0x0000006b;
+  static const dispid_DVDTextStringType = 0x0000006c;
+  static const dispid_DVDTextString = 0x0000006d;
+  static const dispid_DVDTextNumberOfStrings = 0x0000006e;
+  static const dispid_DVDTextNumberOfLanguages = 0x0000006f;
+  static const dispid_DVDTextLanguageLCID = 0x00000070;
+  static const dispid_RegionChange = 0x00000071;
+  static const dispid_DVDAdm = 0x00000072;
+  static const dispid_DeleteBookmark = 0x00000073;
+  static const dispid_RestoreBookmark = 0x00000074;
+  static const dispid_SaveBookmark = 0x00000075;
+  static const dispid_SelectDefaultAudioLanguage = 0x00000076;
+  static const dispid_SelectDefaultSubpictureLanguage = 0x00000077;
+  static const dispid_PreferredSubpictureStream = 0x00000078;
+  static const dispid_DefaultMenuLanguage = 0x00000079;
+  static const dispid_DefaultSubpictureLanguage = 0x0000007a;
+  static const dispid_DefaultAudioLanguage = 0x0000007b;
+  static const dispid_DefaultSubpictureLanguageExt = 0x0000007c;
+  static const dispid_DefaultAudioLanguageExt = 0x0000007d;
+  static const dispid_LanguageFromLCID = 0x0000007e;
+  static const dispid_KaraokeAudioPresentationMode = 0x0000007f;
+  static const dispid_KaraokeChannelContent = 0x00000080;
+  static const dispid_KaraokeChannelAssignment = 0x00000081;
+  static const dispid_RestorePreferredSettings = 0x00000082;
+  static const dispid_ButtonRect = 0x00000083;
+  static const dispid_DVDScreenInMouseCoordinates = 0x00000084;
+  static const dispid_CustomCompositorClass = 0x00000085;
+  static const dispidCustomCompositorClass = 0x00000086;
+  static const dispid_CustomCompositor = 0x00000087;
+  static const dispidMixerBitmap = 0x00000088;
+  static const dispid_MixerBitmap = 0x00000089;
+  static const dispidMixerBitmapOpacity = 0x0000008a;
+  static const dispidMixerBitmapRect = 0x0000008b;
+  static const dispidSetupMixerBitmap = 0x0000008c;
+  static const dispidUsingOverlay = 0x0000008d;
+  static const dispidDisplayChange = 0x0000008e;
+  static const dispidRePaint = 0x0000008f;
+  static const dispid_IsEqualDevice = 0x00000090;
+  static const dispidrate = 0x00000091;
+  static const dispidposition = 0x00000092;
+  static const dispidpositionmode = 0x00000093;
+  static const dispidlength = 0x00000094;
+  static const dispidChangePassword = 0x00000095;
+  static const dispidSaveParentalLevel = 0x00000096;
+  static const dispidSaveParentalCountry = 0x00000097;
+  static const dispidConfirmPassword = 0x00000098;
+  static const dispidGetParentalLevel = 0x00000099;
+  static const dispidGetParentalCountry = 0x0000009a;
+  static const dispidDefaultAudioLCID = 0x0000009b;
+  static const dispidDefaultSubpictureLCID = 0x0000009c;
+  static const dispidDefaultMenuLCID = 0x0000009d;
+  static const dispidBookmarkOnStop = 0x0000009e;
+  static const dispidMaxVidRect = 0x0000009f;
+  static const dispidMinVidRect = 0x000000a0;
+  static const dispidCapture = 0x000000a1;
+  static const dispid_DecimateInput = 0x000000a2;
+  static const dispidAlloctor = 0x000000a3;
+  static const dispid_Allocator = 0x000000a4;
+  static const dispidAllocPresentID = 0x000000a5;
+  static const dispidSetAllocator = 0x000000a6;
+  static const dispid_SetAllocator = 0x000000a7;
+  static const dispidStreamBufferSinkName = 0x000000a8;
+  static const dispidStreamBufferSourceName = 0x000000a9;
+  static const dispidStreamBufferContentRecording = 0x000000aa;
+  static const dispidStreamBufferReferenceRecording = 0x000000ab;
+  static const dispidstarttime = 0x000000ac;
+  static const dispidstoptime = 0x000000ad;
+  static const dispidrecordingstopped = 0x000000ae;
+  static const dispidrecordingstarted = 0x000000af;
+  static const dispidNameSetLock = 0x000000b0;
+  static const dispidrecordingtype = 0x000000b1;
+  static const dispidstart = 0x000000b2;
+  static const dispidRecordingAttribute = 0x000000b3;
+  static const dispid_RecordingAttribute = 0x000000b4;
+  static const dispidSBEConfigure = 0x000000b5;
+  static const dispid_CurrentRatings = 0x000000b6;
+  static const dispid_MaxRatingsLevel = 0x000000b7;
+  static const dispid_audioencoderint = 0x000000b8;
+  static const dispid_videoencoderint = 0x000000b9;
+  static const dispidService = 0x000000ba;
+  static const dispid_BlockUnrated = 0x000000bb;
+  static const dispid_UnratedDelay = 0x000000bc;
+  static const dispid_SuppressEffects = 0x000000bd;
+  static const dispidsbesource = 0x000000be;
+  static const dispidSetSinkFilter = 0x000000bf;
+  static const dispid_SinkStreams = 0x000000c0;
+  static const dispidTVFormats = 0x000000c1;
+  static const dispidModes = 0x000000c2;
+  static const dispidAuxInputs = 0x000000c3;
+  static const dispidTeleTextFilter = 0x000000c4;
+  static const dispid_channelchangeint = 0x000000c5;
+  static const dispidUnlockProfile = 0x000000c6;
+  static const dispid_AddFilter = 0x000000c7;
+  static const dispidSetMinSeek = 0x000000c8;
+  static const dispidRateEx = 0x000000c9;
+  static const dispidaudiocounter = 0x000000ca;
+  static const dispidvideocounter = 0x000000cb;
+  static const dispidcccounter = 0x000000cc;
+  static const dispidwstcounter = 0x000000cd;
+  static const dispid_audiocounter = 0x000000ce;
+  static const dispid_videocounter = 0x000000cf;
+  static const dispid_cccounter = 0x000000d0;
+  static const dispid_wstcounter = 0x000000d1;
+  static const dispidaudioanalysis = 0x000000d2;
+  static const dispidvideoanalysis = 0x000000d3;
+  static const dispiddataanalysis = 0x000000d4;
+  static const dispidaudio_analysis = 0x000000d5;
+  static const dispidvideo_analysis = 0x000000d6;
+  static const dispiddata_analysis = 0x000000d7;
+  static const dispid_resetFilterList = 0x000000d8;
+  static const dispidDevicePath = 0x000000d9;
+  static const dispid_SourceFilter = 0x000000da;
+  static const dispid__SourceFilter = 0x000000db;
+  static const dispidUserEvent = 0x000000dc;
+  static const dispid_Bookmark = 0x000000dd;
+  static const LastReservedDeviceDispid = 0x00003fff;
+}
+
+/// {@category Enum}
+class SegEventidList {
+  static const eventidStateChange = 0x00000000;
+  static const eventidOnTuneChanged = 0x00000001;
+  static const eventidEndOfMedia = 0x00000002;
+  static const eventidDVDNotify = 0x00000003;
+  static const eventidPlayForwards = 0x00000004;
+  static const eventidPlayBackwards = 0x00000005;
+  static const eventidShowMenu = 0x00000006;
+  static const eventidResume = 0x00000007;
+  static const eventidSelectOrActivateButton = 0x00000008;
+  static const eventidStillOff = 0x00000009;
+  static const eventidPauseOn = 0x0000000a;
+  static const eventidChangeCurrentAudioStream = 0x0000000b;
+  static const eventidChangeCurrentSubpictureStream = 0x0000000c;
+  static const eventidChangeCurrentAngle = 0x0000000d;
+  static const eventidPlayAtTimeInTitle = 0x0000000e;
+  static const eventidPlayAtTime = 0x0000000f;
+  static const eventidPlayChapterInTitle = 0x00000010;
+  static const eventidPlayChapter = 0x00000011;
+  static const eventidReplayChapter = 0x00000012;
+  static const eventidPlayNextChapter = 0x00000013;
+  static const eventidStop = 0x00000014;
+  static const eventidReturnFromSubmenu = 0x00000015;
+  static const eventidPlayTitle = 0x00000016;
+  static const eventidPlayPrevChapter = 0x00000017;
+  static const eventidChangeKaraokePresMode = 0x00000018;
+  static const eventidChangeVideoPresMode = 0x00000019;
+  static const eventidOverlayUnavailable = 0x0000001a;
+  static const eventidSinkCertificateFailure = 0x0000001b;
+  static const eventidSinkCertificateSuccess = 0x0000001c;
+  static const eventidSourceCertificateFailure = 0x0000001d;
+  static const eventidSourceCertificateSuccess = 0x0000001e;
+  static const eventidRatingsBlocked = 0x0000001f;
+  static const eventidRatingsUnlocked = 0x00000020;
+  static const eventidRatingsChanged = 0x00000021;
+  static const eventidWriteFailure = 0x00000022;
+  static const eventidTimeHole = 0x00000023;
+  static const eventidStaleDataRead = 0x00000024;
+  static const eventidContentBecomingStale = 0x00000025;
+  static const eventidStaleFileDeleted = 0x00000026;
+  static const eventidEncryptionOn = 0x00000027;
+  static const eventidEncryptionOff = 0x00000028;
+  static const eventidRateChange = 0x00000029;
+  static const eventidLicenseChange = 0x0000002a;
+  static const eventidCOPPBlocked = 0x0000002b;
+  static const eventidCOPPUnblocked = 0x0000002c;
+  static const dispidlicenseerrorcode = 0x0000002d;
+  static const eventidBroadcastEvent = 0x0000002e;
+  static const eventidBroadcastEventEx = 0x0000002f;
+  static const eventidContentPrimarilyAudio = 0x00000030;
+  static const dispidAVDecAudioDualMonoEvent = 0x00000031;
+  static const dispidAVAudioSampleRateEvent = 0x00000032;
+  static const dispidAVAudioChannelConfigEvent = 0x00000033;
+  static const dispidAVAudioChannelCountEvent = 0x00000034;
+  static const dispidAVDecCommonMeanBitRateEvent = 0x00000035;
+  static const dispidAVDDSurroundModeEvent = 0x00000036;
+  static const dispidAVDecCommonInputFormatEvent = 0x00000037;
+  static const dispidAVDecCommonOutputFormatEvent = 0x00000038;
+  static const eventidWriteFailureClear = 0x00000039;
+  static const LastReservedDeviceEvent = 0x00003fff;
+}
+
+/// {@category Enum}
+class PositionModeList {
+  static const FrameMode = 0x00000000;
+  static const TenthsSecondsMode = 0x00000001;
+}
+
+/// {@category Enum}
+class RecordingType {
+  static const CONTENT = 0x00000000;
+  static const REFERENCE = 0x00000001;
+}
+
+/// {@category Enum}
+class MSVidCCService {
+  static const None = 0x00000000;
+  static const Caption1 = 0x00000001;
+  static const Caption2 = 0x00000002;
+  static const Text1 = 0x00000003;
+  static const Text2 = 0x00000004;
+  static const XDS = 0x00000005;
+}
+
+/// {@category Enum}
+class MSVidSinkStreams {
+  static const MSVidSink_Video = 0x00000001;
+  static const MSVidSink_Audio = 0x00000002;
+  static const MSVidSink_Other = 0x00000004;
+}
+
+/// {@category Enum}
+class MSVidSegmentType {
+  static const MSVidSEG_SOURCE = 0x00000000;
+  static const MSVidSEG_XFORM = 0x00000001;
+  static const MSVidSEG_DEST = 0x00000002;
+}
+
+/// {@category Enum}
+class MSVidCtlButtonstate {
+  static const MSVIDCTL_LEFT_BUTTON = 0x00000001;
+  static const MSVIDCTL_RIGHT_BUTTON = 0x00000002;
+  static const MSVIDCTL_MIDDLE_BUTTON = 0x00000004;
+  static const MSVIDCTL_X_BUTTON1 = 0x00000008;
+  static const MSVIDCTL_X_BUTTON2 = 0x00000010;
+  static const MSVIDCTL_SHIFT = 0x00000001;
+  static const MSVIDCTL_CTRL = 0x00000002;
+  static const MSVIDCTL_ALT = 0x00000004;
+}
+
+/// {@category Enum}
+class DVDMenuIDConstants {
+  static const dvdMenu_Title = 0x00000002;
+  static const dvdMenu_Root = 0x00000003;
+  static const dvdMenu_Subpicture = 0x00000004;
+  static const dvdMenu_Audio = 0x00000005;
+  static const dvdMenu_Angle = 0x00000006;
+  static const dvdMenu_Chapter = 0x00000007;
+}
+
+/// {@category Enum}
+class DVDFilterState {
+  static const dvdState_Undefined = 0xfffffffe;
+  static const dvdState_Unitialized = 0xffffffff;
+  static const dvdState_Stopped = 0x00000000;
+  static const dvdState_Paused = 0x00000001;
+  static const dvdState_Running = 0x00000002;
+}
+
+/// {@category Enum}
+class DVDTextStringType {
+  static const dvdStruct_Volume = 0x00000001;
+  static const dvdStruct_Title = 0x00000002;
+  static const dvdStruct_ParentalID = 0x00000003;
+  static const dvdStruct_PartOfTitle = 0x00000004;
+  static const dvdStruct_Cell = 0x00000005;
+  static const dvdStream_Audio = 0x00000010;
+  static const dvdStream_Subpicture = 0x00000011;
+  static const dvdStream_Angle = 0x00000012;
+  static const dvdChannel_Audio = 0x00000020;
+  static const dvdGeneral_Name = 0x00000030;
+  static const dvdGeneral_Comments = 0x00000031;
+  static const dvdTitle_Series = 0x00000038;
+  static const dvdTitle_Movie = 0x00000039;
+  static const dvdTitle_Video = 0x0000003a;
+  static const dvdTitle_Album = 0x0000003b;
+  static const dvdTitle_Song = 0x0000003c;
+  static const dvdTitle_Other = 0x0000003f;
+  static const dvdTitle_Sub_Series = 0x00000040;
+  static const dvdTitle_Sub_Movie = 0x00000041;
+  static const dvdTitle_Sub_Video = 0x00000042;
+  static const dvdTitle_Sub_Album = 0x00000043;
+  static const dvdTitle_Sub_Song = 0x00000044;
+  static const dvdTitle_Sub_Other = 0x00000047;
+  static const dvdTitle_Orig_Series = 0x00000048;
+  static const dvdTitle_Orig_Movie = 0x00000049;
+  static const dvdTitle_Orig_Video = 0x0000004a;
+  static const dvdTitle_Orig_Album = 0x0000004b;
+  static const dvdTitle_Orig_Song = 0x0000004c;
+  static const dvdTitle_Orig_Other = 0x0000004f;
+  static const dvdOther_Scene = 0x00000050;
+  static const dvdOther_Cut = 0x00000051;
+  static const dvdOther_Take = 0x00000052;
+}
+
+/// {@category Enum}
+class DVDSPExt {
+  static const dvdSPExt_NotSpecified = 0x00000000;
+  static const dvdSPExt_Caption_Normal = 0x00000001;
+  static const dvdSPExt_Caption_Big = 0x00000002;
+  static const dvdSPExt_Caption_Children = 0x00000003;
+  static const dvdSPExt_CC_Normal = 0x00000005;
+  static const dvdSPExt_CC_Big = 0x00000006;
+  static const dvdSPExt_CC_Children = 0x00000007;
+  static const dvdSPExt_Forced = 0x00000009;
+  static const dvdSPExt_DirectorComments_Normal = 0x0000000d;
+  static const dvdSPExt_DirectorComments_Big = 0x0000000e;
+  static const dvdSPExt_DirectorComments_Children = 0x0000000f;
+}
+
+/// {@category Enum}
+class SourceSizeList {
+  static const sslFullSize = 0x00000000;
+  static const sslClipByOverScan = 0x00000001;
+  static const sslClipByClipRect = 0x00000002;
+}
+
+/// {@category Enum}
+class MSViddispidList {
+  static const dispidInputs = 0x00000000;
+  static const dispidOutputs = 0x00000001;
+  static const dispid_Inputs = 0x00000002;
+  static const dispid_Outputs = 0x00000003;
+  static const dispidVideoRenderers = 0x00000004;
+  static const dispidAudioRenderers = 0x00000005;
+  static const dispidFeatures = 0x00000006;
+  static const dispidInput = 0x00000007;
+  static const dispidOutput = 0x00000008;
+  static const dispidVideoRenderer = 0x00000009;
+  static const dispidAudioRenderer = 0x0000000a;
+  static const dispidSelectedFeatures = 0x0000000b;
+  static const dispidView = 0x0000000c;
+  static const dispidBuild = 0x0000000d;
+  static const dispidPause = 0x0000000e;
+  static const dispidRun = 0x0000000f;
+  static const dispidStop = 0x00000010;
+  static const dispidDecompose = 0x00000011;
+  static const dispidDisplaySize = 0x00000012;
+  static const dispidMaintainAspectRatio = 0x00000013;
+  static const dispidColorKey = 0x00000014;
+  static const dispidStateChange = 0x00000015;
+  static const dispidgetState = 0x00000016;
+  static const dispidunbind = 0x00000017;
+  static const dispidbind = 0x00000018;
+  static const dispidDisableVideo = 0x00000019;
+  static const dispidDisableAudio = 0x0000001a;
+  static const dispidViewNext = 0x0000001b;
+  static const dispidServiceP = 0x0000001c;
+}
+
+/// {@category Enum}
+class DisplaySizeList {
+  static const dslDefaultSize = 0x00000000;
+  static const dslSourceSize = 0x00000000;
+  static const dslHalfSourceSize = 0x00000001;
+  static const dslDoubleSourceSize = 0x00000002;
+  static const dslFullScreen = 0x00000003;
+  static const dslHalfScreen = 0x00000004;
+  static const dslQuarterScreen = 0x00000005;
+  static const dslSixteenthScreen = 0x00000006;
+}
+
+/// {@category Enum}
+class MSVidCtlStateList {
+  static const STATE_UNBUILT = 0xffffffff;
+  static const STATE_STOP = 0x00000000;
+  static const STATE_PAUSE = 0x00000001;
+  static const STATE_PLAY = 0x00000002;
+}
+
+/// {@category Enum}
+class RECORDING_TYPE {
+  static const RECORDING_TYPE_CONTENT = 0x00000000;
+  static const RECORDING_TYPE_REFERENCE = 0x00000001;
+}
+
+/// {@category Enum}
+class STREAMBUFFER_ATTR_DATATYPE {
+  static const STREAMBUFFER_TYPE_DWORD = 0x00000000;
+  static const STREAMBUFFER_TYPE_STRING = 0x00000001;
+  static const STREAMBUFFER_TYPE_BINARY = 0x00000002;
+  static const STREAMBUFFER_TYPE_BOOL = 0x00000003;
+  static const STREAMBUFFER_TYPE_QWORD = 0x00000004;
+  static const STREAMBUFFER_TYPE_WORD = 0x00000005;
+  static const STREAMBUFFER_TYPE_GUID = 0x00000006;
+}
+
+/// {@category Enum}
+class CROSSBAR_DEFAULT_FLAGS {
+  static const DEF_MODE_PROFILE = 0x00000001;
+  static const DEF_MODE_STREAMS = 0x00000002;
+}
+
+/// {@category Enum}
+class MPEG_CURRENT_NEXT_BIT {
+  static const MPEG_SECTION_IS_NEXT = 0x00000000;
+  static const MPEG_SECTION_IS_CURRENT = 0x00000001;
+}
+
+/// {@category Enum}
+class MPEG_CONTEXT_TYPE {
+  static const MPEG_CONTEXT_BCS_DEMUX = 0x00000000;
+  static const MPEG_CONTEXT_WINSOCK = 0x00000001;
+}
+
+/// {@category Enum}
+class MPEG_REQUEST_TYPE {
+  static const MPEG_RQST_UNKNOWN = 0x00000000;
+  static const MPEG_RQST_GET_SECTION = 0x00000001;
+  static const MPEG_RQST_GET_SECTION_ASYNC = 0x00000002;
+  static const MPEG_RQST_GET_TABLE = 0x00000003;
+  static const MPEG_RQST_GET_TABLE_ASYNC = 0x00000004;
+  static const MPEG_RQST_GET_SECTIONS_STREAM = 0x00000005;
+  static const MPEG_RQST_GET_PES_STREAM = 0x00000006;
+  static const MPEG_RQST_GET_TS_STREAM = 0x00000007;
+  static const MPEG_RQST_START_MPE_STREAM = 0x00000008;
+}
+
+/// {@category Enum}
+class VA_VIDEO_FORMAT {
+  static const VA_VIDEO_COMPONENT = 0x00000000;
+  static const VA_VIDEO_PAL = 0x00000001;
+  static const VA_VIDEO_NTSC = 0x00000002;
+  static const VA_VIDEO_SECAM = 0x00000003;
+  static const VA_VIDEO_MAC = 0x00000004;
+  static const VA_VIDEO_UNSPECIFIED = 0x00000005;
+}
+
+/// {@category Enum}
+class VA_COLOR_PRIMARIES {
+  static const VA_PRIMARIES_ITU_R_BT_709 = 0x00000001;
+  static const VA_PRIMARIES_UNSPECIFIED = 0x00000002;
+  static const VA_PRIMARIES_ITU_R_BT_470_SYSTEM_M = 0x00000004;
+  static const VA_PRIMARIES_ITU_R_BT_470_SYSTEM_B_G = 0x00000005;
+  static const VA_PRIMARIES_SMPTE_170M = 0x00000006;
+  static const VA_PRIMARIES_SMPTE_240M = 0x00000007;
+  static const VA_PRIMARIES_H264_GENERIC_FILM = 0x00000008;
+}
+
+/// {@category Enum}
+class VA_TRANSFER_CHARACTERISTICS {
+  static const VA_TRANSFER_CHARACTERISTICS_ITU_R_BT_709 = 0x00000001;
+  static const VA_TRANSFER_CHARACTERISTICS_UNSPECIFIED = 0x00000002;
+  static const VA_TRANSFER_CHARACTERISTICS_ITU_R_BT_470_SYSTEM_M = 0x00000004;
+  static const VA_TRANSFER_CHARACTERISTICS_ITU_R_BT_470_SYSTEM_B_G = 0x00000005;
+  static const VA_TRANSFER_CHARACTERISTICS_SMPTE_170M = 0x00000006;
+  static const VA_TRANSFER_CHARACTERISTICS_SMPTE_240M = 0x00000007;
+  static const VA_TRANSFER_CHARACTERISTICS_LINEAR = 0x00000008;
+  static const VA_TRANSFER_CHARACTERISTICS_H264_LOG_100_TO_1 = 0x00000009;
+  static const VA_TRANSFER_CHARACTERISTICS_H264_LOG_316_TO_1 = 0x0000000a;
+}
+
+/// {@category Enum}
+class VA_MATRIX_COEFFICIENTS {
+  static const VA_MATRIX_COEFF_H264_RGB = 0x00000000;
+  static const VA_MATRIX_COEFF_ITU_R_BT_709 = 0x00000001;
+  static const VA_MATRIX_COEFF_UNSPECIFIED = 0x00000002;
+  static const VA_MATRIX_COEFF_FCC = 0x00000004;
+  static const VA_MATRIX_COEFF_ITU_R_BT_470_SYSTEM_B_G = 0x00000005;
+  static const VA_MATRIX_COEFF_SMPTE_170M = 0x00000006;
+  static const VA_MATRIX_COEFF_SMPTE_240M = 0x00000007;
+  static const VA_MATRIX_COEFF_H264_YCgCo = 0x00000008;
+}
+
+/// {@category Enum}
+class DVB_STRCONV_MODE {
+  static const STRCONV_MODE_DVB = 0x00000000;
+  static const STRCONV_MODE_DVB_EMPHASIS = 0x00000001;
+  static const STRCONV_MODE_DVB_WITHOUT_EMPHASIS = 0x00000002;
+  static const STRCONV_MODE_ISDB = 0x00000003;
+}
+
+/// {@category Enum}
+class CRID_LOCATION {
+  static const CRID_LOCATION_IN_DESCRIPTOR = 0x00000000;
+  static const CRID_LOCATION_IN_CIT = 0x00000001;
+  static const CRID_LOCATION_DVB_RESERVED1 = 0x00000002;
+  static const CRID_LOCATION_DVB_RESERVED2 = 0x00000003;
+}
+
+/// {@category Enum}
+class DESC_LINKAGE_TYPE {
+  static const DESC_LINKAGE_RESERVED0 = 0x00000000;
+  static const DESC_LINKAGE_INFORMATION = 0x00000001;
+  static const DESC_LINKAGE_EPG = 0x00000002;
+  static const DESC_LINKAGE_CA_REPLACEMENT = 0x00000003;
+  static const DESC_LINKAGE_COMPLETE_NET_BOUQUET_SI = 0x00000004;
+  static const DESC_LINKAGE_REPLACEMENT = 0x00000005;
+  static const DESC_LINKAGE_DATA = 0x00000006;
+  static const DESC_LINKAGE_RESERVED1 = 0x00000007;
+  static const DESC_LINKAGE_USER = 0x00000008;
+  static const DESC_LINKAGE_RESERVED2 = 0x000000ff;
+}
+
+/// {@category Enum}
+class ChannelChangeSpanningEvent_State {
+  static const ChannelChangeSpanningEvent_Start = 0x00000000;
+  static const ChannelChangeSpanningEvent_End = 0x00000002;
+}
+
+/// {@category Enum}
+class ChannelType {
+  static const ChannelTypeNone = 0x00000000;
+  static const ChannelTypeOther = 0x00000001;
+  static const ChannelTypeVideo = 0x00000002;
+  static const ChannelTypeAudio = 0x00000004;
+  static const ChannelTypeText = 0x00000008;
+  static const ChannelTypeSubtitles = 0x00000010;
+  static const ChannelTypeCaptions = 0x00000020;
+  static const ChannelTypeSuperimpose = 0x00000040;
+  static const ChannelTypeData = 0x00000080;
+}
+
+/// {@category Enum}
+class SignalAndServiceStatusSpanningEvent_State {
+  static const SignalAndServiceStatusSpanningEvent_None = 0xffffffff;
+  static const SignalAndServiceStatusSpanningEvent_Clear = 0x00000000;
+  static const SignalAndServiceStatusSpanningEvent_NoTVSignal = 0x00000001;
+  static const SignalAndServiceStatusSpanningEvent_ServiceOffAir = 0x00000002;
+  static const SignalAndServiceStatusSpanningEvent_WeakTVSignal = 0x00000003;
+  static const SignalAndServiceStatusSpanningEvent_NoSubscription = 0x00000004;
+  static const SignalAndServiceStatusSpanningEvent_AllAVScrambled = 0x00000005;
+}
+
+/// {@category Enum}
+class KSPROPERTY_BDA_ETHERNET_FILTER {
+  static const KSPROPERTY_BDA_ETHERNET_FILTER_MULTICAST_LIST_SIZE = 0x00000000;
+  static const KSPROPERTY_BDA_ETHERNET_FILTER_MULTICAST_LIST = 0x00000001;
+  static const KSPROPERTY_BDA_ETHERNET_FILTER_MULTICAST_MODE = 0x00000002;
+}
+
+/// {@category Enum}
+class KSPROPERTY_BDA_IPv4_FILTER {
+  static const KSPROPERTY_BDA_IPv4_FILTER_MULTICAST_LIST_SIZE = 0x00000000;
+  static const KSPROPERTY_BDA_IPv4_FILTER_MULTICAST_LIST = 0x00000001;
+  static const KSPROPERTY_BDA_IPv4_FILTER_MULTICAST_MODE = 0x00000002;
+}
+
+/// {@category Enum}
+class KSPROPERTY_BDA_IPv6_FILTER {
+  static const KSPROPERTY_BDA_IPv6_FILTER_MULTICAST_LIST_SIZE = 0x00000000;
+  static const KSPROPERTY_BDA_IPv6_FILTER_MULTICAST_LIST = 0x00000001;
+  static const KSPROPERTY_BDA_IPv6_FILTER_MULTICAST_MODE = 0x00000002;
+}
+
+/// {@category Enum}
+class KSPROPERTY_BDA_SIGNAL_STATS {
+  static const KSPROPERTY_BDA_SIGNAL_STRENGTH = 0x00000000;
+  static const KSPROPERTY_BDA_SIGNAL_QUALITY = 0x00000001;
+  static const KSPROPERTY_BDA_SIGNAL_PRESENT = 0x00000002;
+  static const KSPROPERTY_BDA_SIGNAL_LOCKED = 0x00000003;
+  static const KSPROPERTY_BDA_SAMPLE_TIME = 0x00000004;
+  static const KSPROPERTY_BDA_SIGNAL_LOCK_CAPS = 0x00000005;
+  static const KSPROPERTY_BDA_SIGNAL_LOCK_TYPE = 0x00000006;
+}
+
+/// {@category Enum}
+class BDA_LockType {
+  static const Bda_LockType_None = 0x00000000;
+  static const Bda_LockType_PLL = 0x00000001;
+  static const Bda_LockType_DecoderDemod = 0x00000002;
+  static const Bda_LockType_Complete = 0x00000080;
+}
+
+/// {@category Enum}
+class KSMETHOD_BDA_CHANGE_SYNC {
+  static const KSMETHOD_BDA_START_CHANGES = 0x00000000;
+  static const KSMETHOD_BDA_CHECK_CHANGES = 0x00000001;
+  static const KSMETHOD_BDA_COMMIT_CHANGES = 0x00000002;
+  static const KSMETHOD_BDA_GET_CHANGE_STATE = 0x00000003;
+}
+
+/// {@category Enum}
+class KSMETHOD_BDA_DEVICE_CONFIGURATION {
+  static const KSMETHOD_BDA_CREATE_PIN_FACTORY = 0x00000000;
+  static const KSMETHOD_BDA_DELETE_PIN_FACTORY = 0x00000001;
+  static const KSMETHOD_BDA_CREATE_TOPOLOGY = 0x00000002;
+}
+
+/// {@category Enum}
+class KSPROPERTY_BDA_TOPOLOGY {
+  static const KSPROPERTY_BDA_NODE_TYPES = 0x00000000;
+  static const KSPROPERTY_BDA_PIN_TYPES = 0x00000001;
+  static const KSPROPERTY_BDA_TEMPLATE_CONNECTIONS = 0x00000002;
+  static const KSPROPERTY_BDA_NODE_METHODS = 0x00000003;
+  static const KSPROPERTY_BDA_NODE_PROPERTIES = 0x00000004;
+  static const KSPROPERTY_BDA_NODE_EVENTS = 0x00000005;
+  static const KSPROPERTY_BDA_CONTROLLING_PIN_ID = 0x00000006;
+  static const KSPROPERTY_BDA_NODE_DESCRIPTORS = 0x00000007;
+}
+
+/// {@category Enum}
+class KSPROPERTY_BDA_PIN_CONTROL {
+  static const KSPROPERTY_BDA_PIN_ID = 0x00000000;
+  static const KSPROPERTY_BDA_PIN_TYPE = 0x00000001;
+}
+
+/// {@category Enum}
+class KSPROPERTY_BDA_PIN_EVENT {
+  static const KSEVENT_BDA_PIN_CONNECTED = 0x00000000;
+  static const KSEVENT_BDA_PIN_DISCONNECTED = 0x00000001;
+}
+
+/// {@category Enum}
+class KSPROPERTY_BDA_VOID_TRANSFORM {
+  static const KSPROPERTY_BDA_VOID_TRANSFORM_START = 0x00000000;
+  static const KSPROPERTY_BDA_VOID_TRANSFORM_STOP = 0x00000001;
+}
+
+/// {@category Enum}
+class KSPROPERTY_BDA_NULL_TRANSFORM {
+  static const KSPROPERTY_BDA_NULL_TRANSFORM_START = 0x00000000;
+  static const KSPROPERTY_BDA_NULL_TRANSFORM_STOP = 0x00000001;
+}
+
+/// {@category Enum}
+class KSPROPERTY_BDA_FREQUENCY_FILTER {
+  static const KSPROPERTY_BDA_RF_TUNER_FREQUENCY = 0x00000000;
+  static const KSPROPERTY_BDA_RF_TUNER_POLARITY = 0x00000001;
+  static const KSPROPERTY_BDA_RF_TUNER_RANGE = 0x00000002;
+  static const KSPROPERTY_BDA_RF_TUNER_TRANSPONDER = 0x00000003;
+  static const KSPROPERTY_BDA_RF_TUNER_BANDWIDTH = 0x00000004;
+  static const KSPROPERTY_BDA_RF_TUNER_FREQUENCY_MULTIPLIER = 0x00000005;
+  static const KSPROPERTY_BDA_RF_TUNER_CAPS = 0x00000006;
+  static const KSPROPERTY_BDA_RF_TUNER_SCAN_STATUS = 0x00000007;
+  static const KSPROPERTY_BDA_RF_TUNER_STANDARD = 0x00000008;
+  static const KSPROPERTY_BDA_RF_TUNER_STANDARD_MODE = 0x00000009;
+}
+
+/// {@category Enum}
+class BDA_SignalType {
+  static const Bda_SignalType_Unknown = 0x00000000;
+  static const Bda_SignalType_Analog = 0x00000001;
+  static const Bda_SignalType_Digital = 0x00000002;
+}
+
+/// {@category Enum}
+class BDA_DigitalSignalStandard {
+  static const Bda_DigitalStandard_None = 0x00000000;
+  static const Bda_DigitalStandard_DVB_T = 0x00000001;
+  static const Bda_DigitalStandard_DVB_S = 0x00000002;
+  static const Bda_DigitalStandard_DVB_C = 0x00000004;
+  static const Bda_DigitalStandard_ATSC = 0x00000008;
+  static const Bda_DigitalStandard_ISDB_T = 0x00000010;
+  static const Bda_DigitalStandard_ISDB_S = 0x00000020;
+  static const Bda_DigitalStandard_ISDB_C = 0x00000040;
+}
+
+/// {@category Enum}
+class KSEVENT_BDA_TUNER {
+  static const KSEVENT_BDA_TUNER_SCAN = 0x00000000;
+}
+
+/// {@category Enum}
+class KSPROPERTY_BDA_LNB_INFO {
+  static const KSPROPERTY_BDA_LNB_LOF_LOW_BAND = 0x00000000;
+  static const KSPROPERTY_BDA_LNB_LOF_HIGH_BAND = 0x00000001;
+  static const KSPROPERTY_BDA_LNB_SWITCH_FREQUENCY = 0x00000002;
+}
+
+/// {@category Enum}
+class KSPROPERTY_BDA_DISEQC_COMMAND {
+  static const KSPROPERTY_BDA_DISEQC_ENABLE = 0x00000000;
+  static const KSPROPERTY_BDA_DISEQC_LNB_SOURCE = 0x00000001;
+  static const KSPROPERTY_BDA_DISEQC_USETONEBURST = 0x00000002;
+  static const KSPROPERTY_BDA_DISEQC_REPEATS = 0x00000003;
+  static const KSPROPERTY_BDA_DISEQC_SEND = 0x00000004;
+  static const KSPROPERTY_BDA_DISEQC_RESPONSE = 0x00000005;
+}
+
+/// {@category Enum}
+class KSPROPERTY_BDA_DISEQC_EVENT {
+  static const KSEVENT_BDA_DISEQC_DATA_RECEIVED = 0x00000000;
+}
+
+/// {@category Enum}
+class KSPROPERTY_BDA_DIGITAL_DEMODULATOR {
+  static const KSPROPERTY_BDA_MODULATION_TYPE = 0x00000000;
+  static const KSPROPERTY_BDA_INNER_FEC_TYPE = 0x00000001;
+  static const KSPROPERTY_BDA_INNER_FEC_RATE = 0x00000002;
+  static const KSPROPERTY_BDA_OUTER_FEC_TYPE = 0x00000003;
+  static const KSPROPERTY_BDA_OUTER_FEC_RATE = 0x00000004;
+  static const KSPROPERTY_BDA_SYMBOL_RATE = 0x00000005;
+  static const KSPROPERTY_BDA_SPECTRAL_INVERSION = 0x00000006;
+  static const KSPROPERTY_BDA_GUARD_INTERVAL = 0x00000007;
+  static const KSPROPERTY_BDA_TRANSMISSION_MODE = 0x00000008;
+  static const KSPROPERTY_BDA_ROLL_OFF = 0x00000009;
+  static const KSPROPERTY_BDA_PILOT = 0x0000000a;
+  static const KSPROPERTY_BDA_SIGNALTIMEOUTS = 0x0000000b;
+  static const KSPROPERTY_BDA_PLP_NUMBER = 0x0000000c;
+}
+
+/// {@category Enum}
+class KSPROPERTY_BDA_AUTODEMODULATE {
+  static const KSPROPERTY_BDA_AUTODEMODULATE_START = 0x00000000;
+  static const KSPROPERTY_BDA_AUTODEMODULATE_STOP = 0x00000001;
+}
+
+/// {@category Enum}
+class KSPROPERTY_IDS_BDA_TABLE {
+  static const KSPROPERTY_BDA_TABLE_SECTION = 0x00000000;
+}
+
+/// {@category Enum}
+class KSPROPERTY_BDA_PIDFILTER {
+  static const KSPROPERTY_BDA_PIDFILTER_MAP_PIDS = 0x00000000;
+  static const KSPROPERTY_BDA_PIDFILTER_UNMAP_PIDS = 0x00000001;
+  static const KSPROPERTY_BDA_PIDFILTER_LIST_PIDS = 0x00000002;
+}
+
+/// {@category Enum}
+class KSPROPERTY_BDA_CA {
+  static const KSPROPERTY_BDA_ECM_MAP_STATUS = 0x00000000;
+  static const KSPROPERTY_BDA_CA_MODULE_STATUS = 0x00000001;
+  static const KSPROPERTY_BDA_CA_SMART_CARD_STATUS = 0x00000002;
+  static const KSPROPERTY_BDA_CA_MODULE_UI = 0x00000003;
+  static const KSPROPERTY_BDA_CA_SET_PROGRAM_PIDS = 0x00000004;
+  static const KSPROPERTY_BDA_CA_REMOVE_PROGRAM = 0x00000005;
+}
+
+/// {@category Enum}
+class KSPROPERTY_BDA_CA_EVENT {
+  static const KSEVENT_BDA_PROGRAM_FLOW_STATUS_CHANGED = 0x00000000;
+  static const KSEVENT_BDA_CA_MODULE_STATUS_CHANGED = 0x00000001;
+  static const KSEVENT_BDA_CA_SMART_CARD_STATUS_CHANGED = 0x00000002;
+  static const KSEVENT_BDA_CA_MODULE_UI_REQUESTED = 0x00000003;
+}
+
+/// {@category Enum}
+class KSMETHOD_BDA_DRM {
+  static const KSMETHOD_BDA_DRM_CURRENT = 0x00000000;
+  static const KSMETHOD_BDA_DRM_DRMSTATUS = 0x00000001;
+}
+
+/// {@category Enum}
+class KSMETHOD_BDA_WMDRM {
+  static const KSMETHOD_BDA_WMDRM_STATUS = 0x00000000;
+  static const KSMETHOD_BDA_WMDRM_REVINFO = 0x00000001;
+  static const KSMETHOD_BDA_WMDRM_CRL = 0x00000002;
+  static const KSMETHOD_BDA_WMDRM_MESSAGE = 0x00000003;
+  static const KSMETHOD_BDA_WMDRM_REISSUELICENSE = 0x00000004;
+  static const KSMETHOD_BDA_WMDRM_RENEWLICENSE = 0x00000005;
+  static const KSMETHOD_BDA_WMDRM_LICENSE = 0x00000006;
+  static const KSMETHOD_BDA_WMDRM_KEYINFO = 0x00000007;
+}
+
+/// {@category Enum}
+class KSMETHOD_BDA_WMDRM_TUNER {
+  static const KSMETHOD_BDA_WMDRMTUNER_CANCELCAPTURETOKEN = 0x00000000;
+  static const KSMETHOD_BDA_WMDRMTUNER_SETPIDPROTECTION = 0x00000001;
+  static const KSMETHOD_BDA_WMDRMTUNER_GETPIDPROTECTION = 0x00000002;
+  static const KSMETHOD_BDA_WMDRMTUNER_SETSYNCVALUE = 0x00000003;
+  static const KSMETHOD_BDA_WMDRMTUNER_STARTCODEPROFILE = 0x00000004;
+  static const KSMETHOD_BDA_WMDRMTUNER_PURCHASE_ENTITLEMENT = 0x00000005;
+}
+
+/// {@category Enum}
+class KSMETHOD_BDA_EVENTING_SERVICE {
+  static const KSMETHOD_BDA_EVENT_DATA = 0x00000000;
+  static const KSMETHOD_BDA_EVENT_COMPLETE = 0x00000001;
+}
+
+/// {@category Enum}
+class KSEVENT_BDA_EVENT_TYPE {
+  static const KSEVENT_BDA_EVENT_PENDINGEVENT = 0x00000000;
+}
+
+/// {@category Enum}
+class KSMETHOD_BDA_DEBUG_SERVICE {
+  static const KSMETHOD_BDA_DEBUG_LEVEL = 0x00000000;
+  static const KSMETHOD_BDA_DEBUG_DATA = 0x00000001;
+}
+
+/// {@category Enum}
+class KSMETHOD_BDA_TUNER_SERVICE {
+  static const KSMETHOD_BDA_TUNER_SETTUNER = 0x00000000;
+  static const KSMETHOD_BDA_TUNER_GETTUNERSTATE = 0x00000001;
+  static const KSMETHOD_BDA_TUNER_SIGNALNOISERATIO = 0x00000002;
+}
+
+/// {@category Enum}
+class KSMETHOD_BDA_GPNV_SERVICE {
+  static const KSMETHOD_BDA_GPNV_GETVALUE = 0x00000000;
+  static const KSMETHOD_BDA_GPNV_SETVALUE = 0x00000001;
+  static const KSMETHOD_BDA_GPNV_NAMEFROMINDEX = 0x00000002;
+  static const KSMETHOD_BDA_GPNV_GETVALUEUPDATENAME = 0x00000003;
+}
+
+/// {@category Enum}
+class KSMETHOD_BDA_MUX_SERVICE {
+  static const KSMETHOD_BDA_MUX_GETPIDLIST = 0x00000000;
+  static const KSMETHOD_BDA_MUX_SETPIDLIST = 0x00000001;
+}
+
+/// {@category Enum}
+class KSMETHOD_BDA_SCAN_SERVICE {
+  static const KSMETHOD_BDA_SCAN_CAPABILTIES = 0x00000000;
+  static const KSMETHOD_BDA_SCANNING_STATE = 0x00000001;
+  static const KSMETHOD_BDA_SCAN_FILTER = 0x00000002;
+  static const KSMETHOD_BDA_SCAN_START = 0x00000003;
+  static const KSMETHOD_BDA_SCAN_RESUME = 0x00000004;
+  static const KSMETHOD_BDA_SCAN_STOP = 0x00000005;
+}
+
+/// {@category Enum}
+class KSMETHOD_BDA_GDDS_SERVICE {
+  static const KSMETHOD_BDA_GDDS_DATATYPE = 0x00000000;
+  static const KSMETHOD_BDA_GDDS_DATA = 0x00000001;
+  static const KSMETHOD_BDA_GDDS_TUNEXMLFROMIDX = 0x00000002;
+  static const KSMETHOD_BDA_GDDS_GETSERVICES = 0x00000003;
+  static const KSMETHOD_BDA_GDDS_SERVICEFROMTUNEXML = 0x00000004;
+  static const KSMETHOD_BDA_GDDS_DATAUPDATE = 0x00000005;
+}
+
+/// {@category Enum}
+class KSMETHOD_BDA_CAS_SERVICE {
+  static const KSMETHOD_BDA_CAS_CHECKENTITLEMENTTOKEN = 0x00000000;
+  static const KSMETHOD_BDA_CAS_SETCAPTURETOKEN = 0x00000001;
+  static const KSMETHOD_BDA_CAS_OPENBROADCASTMMI = 0x00000002;
+  static const KSMETHOD_BDA_CAS_CLOSEMMIDIALOG = 0x00000003;
+}
+
+/// {@category Enum}
+class KSMETHOD_BDA_ISDB_CAS {
+  static const KSMETHOD_BDA_ISDBCAS_SETREQUEST = 0x00000000;
+  static const KSMETHOD_BDA_ISDBCAS_RESPONSEDATA = 0x00000001;
+}
+
+/// {@category Enum}
+class KSMETHOD_BDA_TS_SELECTOR {
+  static const KSMETHOD_BDA_TS_SELECTOR_SETTSID = 0x00000000;
+  static const KSMETHOD_BDA_TS_SELECTOR_GETTSINFORMATION = 0x00000001;
+}
+
+/// {@category Enum}
+class KSMETHOD_BDA_USERACTIVITY_SERVICE {
+  static const KSMETHOD_BDA_USERACTIVITY_USEREASON = 0x00000000;
+  static const KSMETHOD_BDA_USERACTIVITY_INTERVAL = 0x00000001;
+  static const KSMETHOD_BDA_USERACTIVITY_DETECTED = 0x00000002;
+}
+
+/// {@category Enum}
 class READYSTATE {
   static const READYSTATE_UNINITIALIZED = 0x00000000;
   static const READYSTATE_LOADING = 0x00000001;
@@ -8,10 +1305,30 @@ class READYSTATE {
 }
 
 /// {@category Enum}
-class VIDEOENCODER_BITRATE_MODE {
-  static const ConstantBitRate = 0x00000000;
-  static const VariableBitRateAverage = 0x00000001;
-  static const VariableBitRatePeak = 0x00000002;
+class IDvbSiParser2_GetEIT2_tableIdFlags {
+  static const DVB_EIT_ACTUAL_TID = 0x0000004e;
+  static const DVB_EIT_OTHER_TID_ = 0x0000004f;
+}
+
+/// {@category Enum}
+class MPEG2VIDEOINFO_dwFlags {
+  static const AMMPEG2_DoPanScan = 0x00000001;
+  static const AMMPEG2_DVDLine21Field1 = 0x00000002;
+  static const AMMPEG2_DVDLine21Field2 = 0x00000004;
+  static const AMMPEG2_SourceIsLetterboxed = 0x00000008;
+  static const AMMPEG2_FilmCameraMode = 0x00000010;
+  static const AMMPEG2_LetterboxAnalogOut = 0x00000020;
+  static const AMMPEG2_DSS_UserData = 0x00000040;
+  static const AMMPEG2_DVB_UserData = 0x00000080;
+  static const AMMPEG2_27MhzTimebase = 0x00000100;
+  static const AMMPEG2_WidescreenAnalogOut = 0x00000200;
+}
+
+/// {@category Enum}
+class MPEGLAYER3WAVEFORMAT_fdwFlags {
+  static const MPEGLAYER3_FLAG_PADDING_ISO = 0x00000000;
+  static const MPEGLAYER3_FLAG_PADDING_ON = 0x00000001;
+  static const MPEGLAYER3_FLAG_PADDING_OFF = 0x00000002;
 }
 
 /// {@category Enum}
@@ -44,7 +1361,7 @@ class FILTER_STATE {
 }
 
 /// {@category Enum}
-class tagAM_SAMPLE_PROPERTY_FLAGS {
+class AM_SAMPLE_PROPERTY_FLAGS {
   static const AM_SAMPLE_SPLICEPOINT = 0x00000001;
   static const AM_SAMPLE_PREROLL = 0x00000002;
   static const AM_SAMPLE_DATADISCONTINUITY = 0x00000004;
@@ -85,12 +1402,12 @@ class AM_SEEKING_SEEKING_CAPABILITIES {
 }
 
 /// {@category Enum}
-class tagAM_MEDIAEVENT_FLAGS {
+class AM_MEDIAEVENT_FLAGS {
   static const AM_MEDIAEVENT_NONOTIFY = 0x00000001;
 }
 
 /// {@category Enum}
-class MIDL_IFilterMapper_0001 {
+class IFILTERMAPPER_MERIT {
   static const MERIT_PREFERRED = 0x00800000;
   static const MERIT_NORMAL = 0x00600000;
   static const MERIT_UNLIKELY = 0x00400000;
@@ -100,9 +1417,34 @@ class MIDL_IFilterMapper_0001 {
 }
 
 /// {@category Enum}
+class REG_PINFLAG {
+  static const REG_PINFLAG_B_ZERO = 0x00000001;
+  static const REG_PINFLAG_B_RENDERER = 0x00000002;
+  static const REG_PINFLAG_B_MANY = 0x00000004;
+  static const REG_PINFLAG_B_OUTPUT = 0x00000008;
+}
+
+/// {@category Enum}
 class QualityMessageType {
   static const Famine = 0x00000000;
   static const Flood = 0x00000001;
+}
+
+/// {@category Enum}
+class COLORKEY_TYPE {
+  static const CK_NOCOLORKEY = 0x00000000;
+  static const CK_INDEX = 0x00000001;
+  static const CK_RGB = 0x00000002;
+}
+
+/// {@category Enum}
+class ADVISE_TYPE {
+  static const ADVISE_NONE = 0x00000000;
+  static const ADVISE_CLIPPING = 0x00000001;
+  static const ADVISE_PALETTE = 0x00000002;
+  static const ADVISE_COLORKEY = 0x00000004;
+  static const ADVISE_POSITION = 0x00000008;
+  static const ADVISE_DISPLAY_CHANGE = 0x00000010;
 }
 
 /// {@category Enum}
@@ -519,6 +1861,11 @@ class VMRMode {
   static const VMRMode_Windowless = 0x00000002;
   static const VMRMode_Renderless = 0x00000004;
   static const VMRMode_Mask = 0x00000007;
+}
+
+/// {@category Enum}
+class STREAMIF_CONSTANTS {
+  static const MAX_NUMBER_OF_STREAMS = 0x00000010;
 }
 
 /// {@category Enum}
@@ -1266,8 +2613,7 @@ class BDA_CONDITIONALACCESS_REQUESTTYPE {
   static const CONDITIONALACCESS_ACCESS_UNSPECIFIED = 0x00000000;
   static const CONDITIONALACCESS_ACCESS_NOT_POSSIBLE = 0x00000001;
   static const CONDITIONALACCESS_ACCESS_POSSIBLE = 0x00000002;
-  static const CONDITIONALACCESS_ACCESS_POSSIBLE_NO_STREAMING_DISRUPTION =
-      0x00000003;
+  static const CONDITIONALACCESS_ACCESS_POSSIBLE_NO_STREAMING_DISRUPTION = 0x00000003;
 }
 
 /// {@category Enum}
@@ -1344,6 +2690,13 @@ class BDA_DrmPairingError {
   static const BDA_DrmPairing_DrmRePairSoon = 0x00000007;
   static const BDA_DrmPairing_Aborted = 0x00000008;
   static const BDA_DrmPairing_NeedSDKUpdate = 0x00000009;
+}
+
+/// {@category Enum}
+class KSPROPERTY_IPSINK {
+  static const KSPROPERTY_IPSINK_MULTICASTLIST = 0x00000000;
+  static const KSPROPERTY_IPSINK_ADAPTER_DESCRIPTION = 0x00000001;
+  static const KSPROPERTY_IPSINK_ADAPTER_ADDRESS = 0x00000002;
 }
 
 /// {@category Enum}
@@ -1436,6 +2789,61 @@ class STREAM_TYPE {
 class STREAM_STATE {
   static const STREAMSTATE_STOP = 0x00000000;
   static const STREAMSTATE_RUN = 0x00000001;
+}
+
+/// {@category Enum}
+class COMPLETION_STATUS_FLAGS {
+  static const COMPSTAT_NOUPDATEOK = 0x00000001;
+  static const COMPSTAT_WAIT = 0x00000002;
+  static const COMPSTAT_ABORT = 0x00000004;
+}
+
+/// {@category Enum}
+class MMSSF_GET_INFORMATION_FLAGS {
+  static const MMSSF_HASCLOCK = 0x00000001;
+  static const MMSSF_SUPPORTSEEK = 0x00000002;
+  static const MMSSF_ASYNCHRONOUS = 0x00000004;
+}
+
+/// {@category Enum}
+class SSUPDATE_TYPE {
+  static const SSUPDATE_ASYNC = 0x00000001;
+  static const SSUPDATE_CONTINUOUS = 0x00000002;
+}
+
+/// {@category Enum}
+class DDSFF_FLAGS {
+  static const DDSFF_PROGRESSIVERENDER = 0x00000001;
+}
+
+/// {@category Enum}
+class AMMSF_MMS_INIT_FLAGS {
+  static const AMMSF_NOGRAPHTHREAD = 0x00000001;
+}
+
+/// {@category Enum}
+class AMMSF_MS_FLAGS {
+  static const AMMSF_ADDDEFAULTRENDERER = 0x00000001;
+  static const AMMSF_CREATEPEER = 0x00000002;
+  static const AMMSF_STOPIFNOSAMPLES = 0x00000004;
+  static const AMMSF_NOSTALL = 0x00000008;
+}
+
+/// {@category Enum}
+class AMMSF_RENDER_FLAGS {
+  static const AMMSF_RENDERTYPEMASK = 0x00000003;
+  static const AMMSF_RENDERTOEXISTING = 0x00000000;
+  static const AMMSF_RENDERALLSTREAMS = 0x00000001;
+  static const AMMSF_NORENDER = 0x00000002;
+  static const AMMSF_NOCLOCK = 0x00000004;
+  static const AMMSF_RUN = 0x00000008;
+}
+
+/// {@category Enum}
+class OUTPUT_STATE {
+  static const Disabled = 0x00000000;
+  static const ReadData = 0x00000001;
+  static const RenderData = 0x00000002;
 }
 
 /// {@category Enum}
@@ -1819,6 +3227,13 @@ class DMO_ENUM_FLAGS {
 }
 
 /// {@category Enum}
+class VIDEOENCODER_BITRATE_MODE {
+  static const ConstantBitRate = 0x00000000;
+  static const VariableBitRateAverage = 0x00000001;
+  static const VariableBitRatePeak = 0x00000002;
+}
+
+/// {@category Enum}
 class COPP_HDCP_Protection_Level {
   static const COPP_HDCP_Level0 = 0x00000000;
   static const COPP_HDCP_LevelMin = 0x00000000;
@@ -1882,8 +3297,7 @@ class COPP_ImageAspectRatio_EN300294 {
   static const COPP_AspectRatio_EN300294_Box16by9Center = 0x00000003;
   static const COPP_AspectRatio_EN300294_Box16by9Top = 0x00000004;
   static const COPP_AspectRatio_EN300294_BoxGT16by9Center = 0x00000005;
-  static const COPP_AspectRatio_EN300294_FullFormat4by3ProtectedCenter =
-      0x00000006;
+  static const COPP_AspectRatio_EN300294_FullFormat4by3ProtectedCenter = 0x00000006;
   static const COPP_AspectRatio_EN300294_FullFormat16by9Anamorphic = 0x00000007;
   static const COPP_AspectRatio_ForceDWORD = 0x7fffffff;
 }
@@ -1929,1147 +3343,3 @@ class COPP_BusType {
   static const COPP_BusType_ForceDWORD = 0x7fffffff;
 }
 
-/// {@category Enum}
-class EnTvRat_System {
-  static const MPAA = 0x00000000;
-  static const US_TV = 0x00000001;
-  static const Canadian_English = 0x00000002;
-  static const Canadian_French = 0x00000003;
-  static const Reserved4 = 0x00000004;
-  static const System5 = 0x00000005;
-  static const System6 = 0x00000006;
-  static const Reserved7 = 0x00000007;
-  static const PBDA = 0x00000008;
-  static const AgeBased = 0x00000009;
-  static const TvRat_kSystems = 0x0000000a;
-  static const TvRat_SystemDontKnow = 0x000000ff;
-}
-
-/// {@category Enum}
-class EnTvRat_GenericLevel {
-  static const TvRat_0 = 0x00000000;
-  static const TvRat_1 = 0x00000001;
-  static const TvRat_2 = 0x00000002;
-  static const TvRat_3 = 0x00000003;
-  static const TvRat_4 = 0x00000004;
-  static const TvRat_5 = 0x00000005;
-  static const TvRat_6 = 0x00000006;
-  static const TvRat_7 = 0x00000007;
-  static const TvRat_8 = 0x00000008;
-  static const TvRat_9 = 0x00000009;
-  static const TvRat_10 = 0x0000000a;
-  static const TvRat_11 = 0x0000000b;
-  static const TvRat_12 = 0x0000000c;
-  static const TvRat_13 = 0x0000000d;
-  static const TvRat_14 = 0x0000000e;
-  static const TvRat_15 = 0x0000000f;
-  static const TvRat_16 = 0x00000010;
-  static const TvRat_17 = 0x00000011;
-  static const TvRat_18 = 0x00000012;
-  static const TvRat_19 = 0x00000013;
-  static const TvRat_20 = 0x00000014;
-  static const TvRat_21 = 0x00000015;
-  static const TvRat_kLevels = 0x00000016;
-  static const TvRat_Unblock = 0xffffffff;
-  static const TvRat_LevelDontKnow = 0x000000ff;
-}
-
-/// {@category Enum}
-class EnTvRat_MPAA {
-  static const MPAA_NotApplicable = 0x00000000;
-  static const MPAA_G = 0x00000001;
-  static const MPAA_PG = 0x00000002;
-  static const MPAA_PG13 = 0x00000003;
-  static const MPAA_R = 0x00000004;
-  static const MPAA_NC17 = 0x00000005;
-  static const MPAA_X = 0x00000006;
-  static const MPAA_NotRated = 0x00000007;
-}
-
-/// {@category Enum}
-class EnTvRat_US_TV {
-  static const US_TV_None = 0x00000000;
-  static const US_TV_Y = 0x00000001;
-  static const US_TV_Y7 = 0x00000002;
-  static const US_TV_G = 0x00000003;
-  static const US_TV_PG = 0x00000004;
-  static const US_TV_14 = 0x00000005;
-  static const US_TV_MA = 0x00000006;
-  static const US_TV_None7 = 0x00000007;
-}
-
-/// {@category Enum}
-class EnTvRat_CAE_TV {
-  static const CAE_TV_Exempt = 0x00000000;
-  static const CAE_TV_C = 0x00000001;
-  static const CAE_TV_C8 = 0x00000002;
-  static const CAE_TV_G = 0x00000003;
-  static const CAE_TV_PG = 0x00000004;
-  static const CAE_TV_14 = 0x00000005;
-  static const CAE_TV_18 = 0x00000006;
-  static const CAE_TV_Reserved = 0x00000007;
-}
-
-/// {@category Enum}
-class EnTvRat_CAF_TV {
-  static const CAF_TV_Exempt = 0x00000000;
-  static const CAF_TV_G = 0x00000001;
-  static const CAF_TV_8 = 0x00000002;
-  static const CAF_TV_13 = 0x00000003;
-  static const CAF_TV_16 = 0x00000004;
-  static const CAF_TV_18 = 0x00000005;
-  static const CAF_TV_Reserved6 = 0x00000006;
-  static const CAF_TV_Reserved = 0x00000007;
-}
-
-/// {@category Enum}
-class BfEnTvRat_GenericAttributes {
-  static const BfAttrNone = 0x00000000;
-  static const BfIsBlocked = 0x00000001;
-  static const BfIsAttr_1 = 0x00000002;
-  static const BfIsAttr_2 = 0x00000004;
-  static const BfIsAttr_3 = 0x00000008;
-  static const BfIsAttr_4 = 0x00000010;
-  static const BfIsAttr_5 = 0x00000020;
-  static const BfIsAttr_6 = 0x00000040;
-  static const BfIsAttr_7 = 0x00000080;
-  static const BfValidAttrSubmask = 0x000000ff;
-}
-
-/// {@category Enum}
-class BfEnTvRat_Attributes_US_TV {
-  static const US_TV_IsBlocked = 0x00000001;
-  static const US_TV_IsViolent = 0x00000002;
-  static const US_TV_IsSexualSituation = 0x00000004;
-  static const US_TV_IsAdultLanguage = 0x00000008;
-  static const US_TV_IsSexuallySuggestiveDialog = 0x00000010;
-  static const US_TV_ValidAttrSubmask = 0x0000001f;
-}
-
-/// {@category Enum}
-class BfEnTvRat_Attributes_MPAA {
-  static const MPAA_IsBlocked = 0x00000001;
-  static const MPAA_ValidAttrSubmask = 0x00000001;
-}
-
-/// {@category Enum}
-class BfEnTvRat_Attributes_CAE_TV {
-  static const CAE_IsBlocked = 0x00000001;
-  static const CAE_ValidAttrSubmask = 0x00000001;
-}
-
-/// {@category Enum}
-class BfEnTvRat_Attributes_CAF_TV {
-  static const CAF_IsBlocked = 0x00000001;
-  static const CAF_ValidAttrSubmask = 0x00000001;
-}
-
-/// {@category Enum}
-class FormatNotSupportedEvents {
-  static const FORMATNOTSUPPORTED_CLEAR = 0x00000000;
-  static const FORMATNOTSUPPORTED_NOTSUPPORTED = 0x00000001;
-}
-
-/// {@category Enum}
-class ProtType {
-  static const PROT_COPY_FREE = 0x00000001;
-  static const PROT_COPY_ONCE = 0x00000002;
-  static const PROT_COPY_NEVER = 0x00000003;
-  static const PROT_COPY_NEVER_REALLY = 0x00000004;
-  static const PROT_COPY_NO_MORE = 0x00000005;
-  static const PROT_COPY_FREE_CIT = 0x00000006;
-  static const PROT_COPY_BF = 0x00000007;
-  static const PROT_COPY_CN_RECORDING_STOP = 0x00000008;
-  static const PROT_COPY_FREE_SECURE = 0x00000009;
-  static const PROT_COPY_INVALID = 0x00000032;
-}
-
-/// {@category Enum}
-class EncDecEvents {
-  static const ENCDEC_CPEVENT = 0x00000000;
-  static const ENCDEC_RECORDING_STATUS = 0x00000001;
-}
-
-/// {@category Enum}
-class CPRecordingStatus {
-  static const RECORDING_STOPPED = 0x00000000;
-  static const RECORDING_STARTED = 0x00000001;
-}
-
-/// {@category Enum}
-class CPEventBitShift {
-  static const CPEVENT_BITSHIFT_RATINGS = 0x00000000;
-  static const CPEVENT_BITSHIFT_COPP = 0x00000001;
-  static const CPEVENT_BITSHIFT_LICENSE = 0x00000002;
-  static const CPEVENT_BITSHIFT_ROLLBACK = 0x00000003;
-  static const CPEVENT_BITSHIFT_SAC = 0x00000004;
-  static const CPEVENT_BITSHIFT_DOWNRES = 0x00000005;
-  static const CPEVENT_BITSHIFT_STUBLIB = 0x00000006;
-  static const CPEVENT_BITSHIFT_UNTRUSTEDGRAPH = 0x00000007;
-  static const CPEVENT_BITSHIFT_PENDING_CERTIFICATE = 0x00000008;
-  static const CPEVENT_BITSHIFT_NO_PLAYREADY = 0x00000009;
-}
-
-/// {@category Enum}
-class CPEvents {
-  static const CPEVENT_NONE = 0x00000000;
-  static const CPEVENT_RATINGS = 0x00000001;
-  static const CPEVENT_COPP = 0x00000002;
-  static const CPEVENT_LICENSE = 0x00000003;
-  static const CPEVENT_ROLLBACK = 0x00000004;
-  static const CPEVENT_SAC = 0x00000005;
-  static const CPEVENT_DOWNRES = 0x00000006;
-  static const CPEVENT_STUBLIB = 0x00000007;
-  static const CPEVENT_UNTRUSTEDGRAPH = 0x00000008;
-  static const CPEVENT_PROTECTWINDOWED = 0x00000009;
-}
-
-/// {@category Enum}
-class RevokedComponent {
-  static const REVOKED_COPP = 0x00000000;
-  static const REVOKED_SAC = 0x00000001;
-  static const REVOKED_APP_STUB = 0x00000002;
-  static const REVOKED_SECURE_PIPELINE = 0x00000003;
-  static const REVOKED_MAX_TYPES = 0x00000004;
-}
-
-/// {@category Enum}
-class EnTag_Mode {
-  static const EnTag_Remove = 0x00000000;
-  static const EnTag_Once = 0x00000001;
-  static const EnTag_Repeat = 0x00000002;
-}
-
-/// {@category Enum}
-class COPPEventBlockReason {
-  static const COPP_Unknown = 0xffffffff;
-  static const COPP_BadDriver = 0x00000000;
-  static const COPP_NoCardHDCPSupport = 0x00000001;
-  static const COPP_NoMonitorHDCPSupport = 0x00000002;
-  static const COPP_BadCertificate = 0x00000003;
-  static const COPP_InvalidBusProtection = 0x00000004;
-  static const COPP_AeroGlassOff = 0x00000005;
-  static const COPP_RogueApp = 0x00000006;
-  static const COPP_ForbiddenVideo = 0x00000007;
-  static const COPP_Activate = 0x00000008;
-  static const COPP_DigitalAudioUnprotected = 0x00000009;
-}
-
-/// {@category Enum}
-class LicenseEventBlockReason {
-  static const LIC_BadLicense = 0x00000000;
-  static const LIC_NeedIndiv = 0x00000001;
-  static const LIC_Expired = 0x00000002;
-  static const LIC_NeedActivation = 0x00000003;
-  static const LIC_ExtenderBlocked = 0x00000004;
-}
-
-/// {@category Enum}
-class DownResEventParam {
-  static const DOWNRES_Always = 0x00000000;
-  static const DOWNRES_InWindowOnly = 0x00000001;
-  static const DOWNRES_Undefined = 0x00000002;
-}
-
-/// {@category Enum}
-class SegDispidList {
-  static const dispidName = 0x00000000;
-  static const dispidStatus = 0x00000001;
-  static const dispidDevImageSourceWidth = 0x00000002;
-  static const dispidDevImageSourceHeight = 0x00000003;
-  static const dispidDevCountryCode = 0x00000004;
-  static const dispidDevOverScan = 0x00000005;
-  static const dispidSegment = 0x00000006;
-  static const dispidDevVolume = 0x00000007;
-  static const dispidDevBalance = 0x00000008;
-  static const dispidDevPower = 0x00000009;
-  static const dispidTuneChan = 0x0000000a;
-  static const dispidDevVideoSubchannel = 0x0000000b;
-  static const dispidDevAudioSubchannel = 0x0000000c;
-  static const dispidChannelAvailable = 0x0000000d;
-  static const dispidDevVideoFrequency = 0x0000000e;
-  static const dispidDevAudioFrequency = 0x0000000f;
-  static const dispidCount = 0x00000010;
-  static const dispidDevFileName = 0x00000011;
-  static const dispidVisible = 0x00000012;
-  static const dispidOwner = 0x00000013;
-  static const dispidMessageDrain = 0x00000014;
-  static const dispidViewable = 0x00000015;
-  static const dispidDevView = 0x00000016;
-  static const dispidKSCat = 0x00000017;
-  static const dispidCLSID = 0x00000018;
-  static const dispid_KSCat = 0x00000019;
-  static const dispid_CLSID = 0x0000001a;
-  static const dispidTune = 0x0000001b;
-  static const dispidTS = 0x0000001c;
-  static const dispidDevSAP = 0x0000001d;
-  static const dispidClip = 0x0000001e;
-  static const dispidRequestedClipRect = 0x0000001f;
-  static const dispidClippedSourceRect = 0x00000020;
-  static const dispidAvailableSourceRect = 0x00000021;
-  static const dispidMediaPosition = 0x00000022;
-  static const dispidDevRun = 0x00000023;
-  static const dispidDevPause = 0x00000024;
-  static const dispidDevStop = 0x00000025;
-  static const dispidCCEnable = 0x00000026;
-  static const dispidDevStep = 0x00000027;
-  static const dispidDevCanStep = 0x00000028;
-  static const dispidSourceSize = 0x00000029;
-  static const dispid_playtitle = 0x0000002a;
-  static const dispid_playchapterintitle = 0x0000002b;
-  static const dispid_playchapter = 0x0000002c;
-  static const dispid_playchaptersautostop = 0x0000002d;
-  static const dispid_playattime = 0x0000002e;
-  static const dispid_playattimeintitle = 0x0000002f;
-  static const dispid_playperiodintitleautostop = 0x00000030;
-  static const dispid_replaychapter = 0x00000031;
-  static const dispid_playprevchapter = 0x00000032;
-  static const dispid_playnextchapter = 0x00000033;
-  static const dispid_playforwards = 0x00000034;
-  static const dispid_playbackwards = 0x00000035;
-  static const dispid_stilloff = 0x00000036;
-  static const dispid_audiolanguage = 0x00000037;
-  static const dispid_showmenu = 0x00000038;
-  static const dispid_resume = 0x00000039;
-  static const dispid_returnfromsubmenu = 0x0000003a;
-  static const dispid_buttonsavailable = 0x0000003b;
-  static const dispid_currentbutton = 0x0000003c;
-  static const dispid_SelectAndActivateButton = 0x0000003d;
-  static const dispid_ActivateButton = 0x0000003e;
-  static const dispid_SelectRightButton = 0x0000003f;
-  static const dispid_SelectLeftButton = 0x00000040;
-  static const dispid_SelectLowerButton = 0x00000041;
-  static const dispid_SelectUpperButton = 0x00000042;
-  static const dispid_ActivateAtPosition = 0x00000043;
-  static const dispid_SelectAtPosition = 0x00000044;
-  static const dispid_ButtonAtPosition = 0x00000045;
-  static const dispid_NumberOfChapters = 0x00000046;
-  static const dispid_TotalTitleTime = 0x00000047;
-  static const dispid_TitlesAvailable = 0x00000048;
-  static const dispid_VolumesAvailable = 0x00000049;
-  static const dispid_CurrentVolume = 0x0000004a;
-  static const dispid_CurrentDiscSide = 0x0000004b;
-  static const dispid_CurrentDomain = 0x0000004c;
-  static const dispid_CurrentChapter = 0x0000004d;
-  static const dispid_CurrentTitle = 0x0000004e;
-  static const dispid_CurrentTime = 0x0000004f;
-  static const dispid_FramesPerSecond = 0x00000050;
-  static const dispid_DVDTimeCode2bstr = 0x00000051;
-  static const dispid_DVDDirectory = 0x00000052;
-  static const dispid_IsSubpictureStreamEnabled = 0x00000053;
-  static const dispid_IsAudioStreamEnabled = 0x00000054;
-  static const dispid_CurrentSubpictureStream = 0x00000055;
-  static const dispid_SubpictureLanguage = 0x00000056;
-  static const dispid_CurrentAudioStream = 0x00000057;
-  static const dispid_AudioStreamsAvailable = 0x00000058;
-  static const dispid_AnglesAvailable = 0x00000059;
-  static const dispid_CurrentAngle = 0x0000005a;
-  static const dispid_CCActive = 0x0000005b;
-  static const dispid_CurrentCCService = 0x0000005c;
-  static const dispid_SubpictureStreamsAvailable = 0x0000005d;
-  static const dispid_SubpictureOn = 0x0000005e;
-  static const dispid_DVDUniqueID = 0x0000005f;
-  static const dispid_EnableResetOnStop = 0x00000060;
-  static const dispid_AcceptParentalLevelChange = 0x00000061;
-  static const dispid_NotifyParentalLevelChange = 0x00000062;
-  static const dispid_SelectParentalCountry = 0x00000063;
-  static const dispid_SelectParentalLevel = 0x00000064;
-  static const dispid_TitleParentalLevels = 0x00000065;
-  static const dispid_PlayerParentalCountry = 0x00000066;
-  static const dispid_PlayerParentalLevel = 0x00000067;
-  static const dispid_Eject = 0x00000068;
-  static const dispid_UOPValid = 0x00000069;
-  static const dispid_SPRM = 0x0000006a;
-  static const dispid_GPRM = 0x0000006b;
-  static const dispid_DVDTextStringType = 0x0000006c;
-  static const dispid_DVDTextString = 0x0000006d;
-  static const dispid_DVDTextNumberOfStrings = 0x0000006e;
-  static const dispid_DVDTextNumberOfLanguages = 0x0000006f;
-  static const dispid_DVDTextLanguageLCID = 0x00000070;
-  static const dispid_RegionChange = 0x00000071;
-  static const dispid_DVDAdm = 0x00000072;
-  static const dispid_DeleteBookmark = 0x00000073;
-  static const dispid_RestoreBookmark = 0x00000074;
-  static const dispid_SaveBookmark = 0x00000075;
-  static const dispid_SelectDefaultAudioLanguage = 0x00000076;
-  static const dispid_SelectDefaultSubpictureLanguage = 0x00000077;
-  static const dispid_PreferredSubpictureStream = 0x00000078;
-  static const dispid_DefaultMenuLanguage = 0x00000079;
-  static const dispid_DefaultSubpictureLanguage = 0x0000007a;
-  static const dispid_DefaultAudioLanguage = 0x0000007b;
-  static const dispid_DefaultSubpictureLanguageExt = 0x0000007c;
-  static const dispid_DefaultAudioLanguageExt = 0x0000007d;
-  static const dispid_LanguageFromLCID = 0x0000007e;
-  static const dispid_KaraokeAudioPresentationMode = 0x0000007f;
-  static const dispid_KaraokeChannelContent = 0x00000080;
-  static const dispid_KaraokeChannelAssignment = 0x00000081;
-  static const dispid_RestorePreferredSettings = 0x00000082;
-  static const dispid_ButtonRect = 0x00000083;
-  static const dispid_DVDScreenInMouseCoordinates = 0x00000084;
-  static const dispid_CustomCompositorClass = 0x00000085;
-  static const dispidCustomCompositorClass = 0x00000086;
-  static const dispid_CustomCompositor = 0x00000087;
-  static const dispidMixerBitmap = 0x00000088;
-  static const dispid_MixerBitmap = 0x00000089;
-  static const dispidMixerBitmapOpacity = 0x0000008a;
-  static const dispidMixerBitmapRect = 0x0000008b;
-  static const dispidSetupMixerBitmap = 0x0000008c;
-  static const dispidUsingOverlay = 0x0000008d;
-  static const dispidDisplayChange = 0x0000008e;
-  static const dispidRePaint = 0x0000008f;
-  static const dispid_IsEqualDevice = 0x00000090;
-  static const dispidrate = 0x00000091;
-  static const dispidposition = 0x00000092;
-  static const dispidpositionmode = 0x00000093;
-  static const dispidlength = 0x00000094;
-  static const dispidChangePassword = 0x00000095;
-  static const dispidSaveParentalLevel = 0x00000096;
-  static const dispidSaveParentalCountry = 0x00000097;
-  static const dispidConfirmPassword = 0x00000098;
-  static const dispidGetParentalLevel = 0x00000099;
-  static const dispidGetParentalCountry = 0x0000009a;
-  static const dispidDefaultAudioLCID = 0x0000009b;
-  static const dispidDefaultSubpictureLCID = 0x0000009c;
-  static const dispidDefaultMenuLCID = 0x0000009d;
-  static const dispidBookmarkOnStop = 0x0000009e;
-  static const dispidMaxVidRect = 0x0000009f;
-  static const dispidMinVidRect = 0x000000a0;
-  static const dispidCapture = 0x000000a1;
-  static const dispid_DecimateInput = 0x000000a2;
-  static const dispidAlloctor = 0x000000a3;
-  static const dispid_Allocator = 0x000000a4;
-  static const dispidAllocPresentID = 0x000000a5;
-  static const dispidSetAllocator = 0x000000a6;
-  static const dispid_SetAllocator = 0x000000a7;
-  static const dispidStreamBufferSinkName = 0x000000a8;
-  static const dispidStreamBufferSourceName = 0x000000a9;
-  static const dispidStreamBufferContentRecording = 0x000000aa;
-  static const dispidStreamBufferReferenceRecording = 0x000000ab;
-  static const dispidstarttime = 0x000000ac;
-  static const dispidstoptime = 0x000000ad;
-  static const dispidrecordingstopped = 0x000000ae;
-  static const dispidrecordingstarted = 0x000000af;
-  static const dispidNameSetLock = 0x000000b0;
-  static const dispidrecordingtype = 0x000000b1;
-  static const dispidstart = 0x000000b2;
-  static const dispidRecordingAttribute = 0x000000b3;
-  static const dispid_RecordingAttribute = 0x000000b4;
-  static const dispidSBEConfigure = 0x000000b5;
-  static const dispid_CurrentRatings = 0x000000b6;
-  static const dispid_MaxRatingsLevel = 0x000000b7;
-  static const dispid_audioencoderint = 0x000000b8;
-  static const dispid_videoencoderint = 0x000000b9;
-  static const dispidService = 0x000000ba;
-  static const dispid_BlockUnrated = 0x000000bb;
-  static const dispid_UnratedDelay = 0x000000bc;
-  static const dispid_SuppressEffects = 0x000000bd;
-  static const dispidsbesource = 0x000000be;
-  static const dispidSetSinkFilter = 0x000000bf;
-  static const dispid_SinkStreams = 0x000000c0;
-  static const dispidTVFormats = 0x000000c1;
-  static const dispidModes = 0x000000c2;
-  static const dispidAuxInputs = 0x000000c3;
-  static const dispidTeleTextFilter = 0x000000c4;
-  static const dispid_channelchangeint = 0x000000c5;
-  static const dispidUnlockProfile = 0x000000c6;
-  static const dispid_AddFilter = 0x000000c7;
-  static const dispidSetMinSeek = 0x000000c8;
-  static const dispidRateEx = 0x000000c9;
-  static const dispidaudiocounter = 0x000000ca;
-  static const dispidvideocounter = 0x000000cb;
-  static const dispidcccounter = 0x000000cc;
-  static const dispidwstcounter = 0x000000cd;
-  static const dispid_audiocounter = 0x000000ce;
-  static const dispid_videocounter = 0x000000cf;
-  static const dispid_cccounter = 0x000000d0;
-  static const dispid_wstcounter = 0x000000d1;
-  static const dispidaudioanalysis = 0x000000d2;
-  static const dispidvideoanalysis = 0x000000d3;
-  static const dispiddataanalysis = 0x000000d4;
-  static const dispidaudio_analysis = 0x000000d5;
-  static const dispidvideo_analysis = 0x000000d6;
-  static const dispiddata_analysis = 0x000000d7;
-  static const dispid_resetFilterList = 0x000000d8;
-  static const dispidDevicePath = 0x000000d9;
-  static const dispid_SourceFilter = 0x000000da;
-  static const dispid__SourceFilter = 0x000000db;
-  static const dispidUserEvent = 0x000000dc;
-  static const dispid_Bookmark = 0x000000dd;
-  static const LastReservedDeviceDispid = 0x00003fff;
-}
-
-/// {@category Enum}
-class SegEventidList {
-  static const eventidStateChange = 0x00000000;
-  static const eventidOnTuneChanged = 0x00000001;
-  static const eventidEndOfMedia = 0x00000002;
-  static const eventidDVDNotify = 0x00000003;
-  static const eventidPlayForwards = 0x00000004;
-  static const eventidPlayBackwards = 0x00000005;
-  static const eventidShowMenu = 0x00000006;
-  static const eventidResume = 0x00000007;
-  static const eventidSelectOrActivateButton = 0x00000008;
-  static const eventidStillOff = 0x00000009;
-  static const eventidPauseOn = 0x0000000a;
-  static const eventidChangeCurrentAudioStream = 0x0000000b;
-  static const eventidChangeCurrentSubpictureStream = 0x0000000c;
-  static const eventidChangeCurrentAngle = 0x0000000d;
-  static const eventidPlayAtTimeInTitle = 0x0000000e;
-  static const eventidPlayAtTime = 0x0000000f;
-  static const eventidPlayChapterInTitle = 0x00000010;
-  static const eventidPlayChapter = 0x00000011;
-  static const eventidReplayChapter = 0x00000012;
-  static const eventidPlayNextChapter = 0x00000013;
-  static const eventidStop = 0x00000014;
-  static const eventidReturnFromSubmenu = 0x00000015;
-  static const eventidPlayTitle = 0x00000016;
-  static const eventidPlayPrevChapter = 0x00000017;
-  static const eventidChangeKaraokePresMode = 0x00000018;
-  static const eventidChangeVideoPresMode = 0x00000019;
-  static const eventidOverlayUnavailable = 0x0000001a;
-  static const eventidSinkCertificateFailure = 0x0000001b;
-  static const eventidSinkCertificateSuccess = 0x0000001c;
-  static const eventidSourceCertificateFailure = 0x0000001d;
-  static const eventidSourceCertificateSuccess = 0x0000001e;
-  static const eventidRatingsBlocked = 0x0000001f;
-  static const eventidRatingsUnlocked = 0x00000020;
-  static const eventidRatingsChanged = 0x00000021;
-  static const eventidWriteFailure = 0x00000022;
-  static const eventidTimeHole = 0x00000023;
-  static const eventidStaleDataRead = 0x00000024;
-  static const eventidContentBecomingStale = 0x00000025;
-  static const eventidStaleFileDeleted = 0x00000026;
-  static const eventidEncryptionOn = 0x00000027;
-  static const eventidEncryptionOff = 0x00000028;
-  static const eventidRateChange = 0x00000029;
-  static const eventidLicenseChange = 0x0000002a;
-  static const eventidCOPPBlocked = 0x0000002b;
-  static const eventidCOPPUnblocked = 0x0000002c;
-  static const dispidlicenseerrorcode = 0x0000002d;
-  static const eventidBroadcastEvent = 0x0000002e;
-  static const eventidBroadcastEventEx = 0x0000002f;
-  static const eventidContentPrimarilyAudio = 0x00000030;
-  static const dispidAVDecAudioDualMonoEvent = 0x00000031;
-  static const dispidAVAudioSampleRateEvent = 0x00000032;
-  static const dispidAVAudioChannelConfigEvent = 0x00000033;
-  static const dispidAVAudioChannelCountEvent = 0x00000034;
-  static const dispidAVDecCommonMeanBitRateEvent = 0x00000035;
-  static const dispidAVDDSurroundModeEvent = 0x00000036;
-  static const dispidAVDecCommonInputFormatEvent = 0x00000037;
-  static const dispidAVDecCommonOutputFormatEvent = 0x00000038;
-  static const eventidWriteFailureClear = 0x00000039;
-  static const LastReservedDeviceEvent = 0x00003fff;
-}
-
-/// {@category Enum}
-class PositionModeList {
-  static const FrameMode = 0x00000000;
-  static const TenthsSecondsMode = 0x00000001;
-}
-
-/// {@category Enum}
-class RecordingType {
-  static const CONTENT = 0x00000000;
-  static const REFERENCE = 0x00000001;
-}
-
-/// {@category Enum}
-class MSVidCCService {
-  static const None = 0x00000000;
-  static const Caption1 = 0x00000001;
-  static const Caption2 = 0x00000002;
-  static const Text1 = 0x00000003;
-  static const Text2 = 0x00000004;
-  static const XDS = 0x00000005;
-}
-
-/// {@category Enum}
-class MSVidSinkStreams {
-  static const MSVidSink_Video = 0x00000001;
-  static const MSVidSink_Audio = 0x00000002;
-  static const MSVidSink_Other = 0x00000004;
-}
-
-/// {@category Enum}
-class MSVidSegmentType {
-  static const MSVidSEG_SOURCE = 0x00000000;
-  static const MSVidSEG_XFORM = 0x00000001;
-  static const MSVidSEG_DEST = 0x00000002;
-}
-
-/// {@category Enum}
-class MSVidCtlButtonstate {
-  static const MSVIDCTL_LEFT_BUTTON = 0x00000001;
-  static const MSVIDCTL_RIGHT_BUTTON = 0x00000002;
-  static const MSVIDCTL_MIDDLE_BUTTON = 0x00000004;
-  static const MSVIDCTL_X_BUTTON1 = 0x00000008;
-  static const MSVIDCTL_X_BUTTON2 = 0x00000010;
-  static const MSVIDCTL_SHIFT = 0x00000001;
-  static const MSVIDCTL_CTRL = 0x00000002;
-  static const MSVIDCTL_ALT = 0x00000004;
-}
-
-/// {@category Enum}
-class DVDMenuIDConstants {
-  static const dvdMenu_Title = 0x00000002;
-  static const dvdMenu_Root = 0x00000003;
-  static const dvdMenu_Subpicture = 0x00000004;
-  static const dvdMenu_Audio = 0x00000005;
-  static const dvdMenu_Angle = 0x00000006;
-  static const dvdMenu_Chapter = 0x00000007;
-}
-
-/// {@category Enum}
-class DVDFilterState {
-  static const dvdState_Undefined = 0xfffffffe;
-  static const dvdState_Unitialized = 0xffffffff;
-  static const dvdState_Stopped = 0x00000000;
-  static const dvdState_Paused = 0x00000001;
-  static const dvdState_Running = 0x00000002;
-}
-
-/// {@category Enum}
-class DVDTextStringType {
-  static const dvdStruct_Volume = 0x00000001;
-  static const dvdStruct_Title = 0x00000002;
-  static const dvdStruct_ParentalID = 0x00000003;
-  static const dvdStruct_PartOfTitle = 0x00000004;
-  static const dvdStruct_Cell = 0x00000005;
-  static const dvdStream_Audio = 0x00000010;
-  static const dvdStream_Subpicture = 0x00000011;
-  static const dvdStream_Angle = 0x00000012;
-  static const dvdChannel_Audio = 0x00000020;
-  static const dvdGeneral_Name = 0x00000030;
-  static const dvdGeneral_Comments = 0x00000031;
-  static const dvdTitle_Series = 0x00000038;
-  static const dvdTitle_Movie = 0x00000039;
-  static const dvdTitle_Video = 0x0000003a;
-  static const dvdTitle_Album = 0x0000003b;
-  static const dvdTitle_Song = 0x0000003c;
-  static const dvdTitle_Other = 0x0000003f;
-  static const dvdTitle_Sub_Series = 0x00000040;
-  static const dvdTitle_Sub_Movie = 0x00000041;
-  static const dvdTitle_Sub_Video = 0x00000042;
-  static const dvdTitle_Sub_Album = 0x00000043;
-  static const dvdTitle_Sub_Song = 0x00000044;
-  static const dvdTitle_Sub_Other = 0x00000047;
-  static const dvdTitle_Orig_Series = 0x00000048;
-  static const dvdTitle_Orig_Movie = 0x00000049;
-  static const dvdTitle_Orig_Video = 0x0000004a;
-  static const dvdTitle_Orig_Album = 0x0000004b;
-  static const dvdTitle_Orig_Song = 0x0000004c;
-  static const dvdTitle_Orig_Other = 0x0000004f;
-  static const dvdOther_Scene = 0x00000050;
-  static const dvdOther_Cut = 0x00000051;
-  static const dvdOther_Take = 0x00000052;
-}
-
-/// {@category Enum}
-class DVDSPExt {
-  static const dvdSPExt_NotSpecified = 0x00000000;
-  static const dvdSPExt_Caption_Normal = 0x00000001;
-  static const dvdSPExt_Caption_Big = 0x00000002;
-  static const dvdSPExt_Caption_Children = 0x00000003;
-  static const dvdSPExt_CC_Normal = 0x00000005;
-  static const dvdSPExt_CC_Big = 0x00000006;
-  static const dvdSPExt_CC_Children = 0x00000007;
-  static const dvdSPExt_Forced = 0x00000009;
-  static const dvdSPExt_DirectorComments_Normal = 0x0000000d;
-  static const dvdSPExt_DirectorComments_Big = 0x0000000e;
-  static const dvdSPExt_DirectorComments_Children = 0x0000000f;
-}
-
-/// {@category Enum}
-class SourceSizeList {
-  static const sslFullSize = 0x00000000;
-  static const sslClipByOverScan = 0x00000001;
-  static const sslClipByClipRect = 0x00000002;
-}
-
-/// {@category Enum}
-class MSViddispidList {
-  static const dispidInputs = 0x00000000;
-  static const dispidOutputs = 0x00000001;
-  static const dispid_Inputs = 0x00000002;
-  static const dispid_Outputs = 0x00000003;
-  static const dispidVideoRenderers = 0x00000004;
-  static const dispidAudioRenderers = 0x00000005;
-  static const dispidFeatures = 0x00000006;
-  static const dispidInput = 0x00000007;
-  static const dispidOutput = 0x00000008;
-  static const dispidVideoRenderer = 0x00000009;
-  static const dispidAudioRenderer = 0x0000000a;
-  static const dispidSelectedFeatures = 0x0000000b;
-  static const dispidView = 0x0000000c;
-  static const dispidBuild = 0x0000000d;
-  static const dispidPause = 0x0000000e;
-  static const dispidRun = 0x0000000f;
-  static const dispidStop = 0x00000010;
-  static const dispidDecompose = 0x00000011;
-  static const dispidDisplaySize = 0x00000012;
-  static const dispidMaintainAspectRatio = 0x00000013;
-  static const dispidColorKey = 0x00000014;
-  static const dispidStateChange = 0x00000015;
-  static const dispidgetState = 0x00000016;
-  static const dispidunbind = 0x00000017;
-  static const dispidbind = 0x00000018;
-  static const dispidDisableVideo = 0x00000019;
-  static const dispidDisableAudio = 0x0000001a;
-  static const dispidViewNext = 0x0000001b;
-  static const dispidServiceP = 0x0000001c;
-}
-
-/// {@category Enum}
-class DisplaySizeList {
-  static const dslDefaultSize = 0x00000000;
-  static const dslSourceSize = 0x00000000;
-  static const dslHalfSourceSize = 0x00000001;
-  static const dslDoubleSourceSize = 0x00000002;
-  static const dslFullScreen = 0x00000003;
-  static const dslHalfScreen = 0x00000004;
-  static const dslQuarterScreen = 0x00000005;
-  static const dslSixteenthScreen = 0x00000006;
-}
-
-/// {@category Enum}
-class MSVidCtlStateList {
-  static const STATE_UNBUILT = 0xffffffff;
-  static const STATE_STOP = 0x00000000;
-  static const STATE_PAUSE = 0x00000001;
-  static const STATE_PLAY = 0x00000002;
-}
-
-/// {@category Enum}
-class STREAMBUFFER_ATTR_DATATYPE {
-  static const STREAMBUFFER_TYPE_DWORD = 0x00000000;
-  static const STREAMBUFFER_TYPE_STRING = 0x00000001;
-  static const STREAMBUFFER_TYPE_BINARY = 0x00000002;
-  static const STREAMBUFFER_TYPE_BOOL = 0x00000003;
-  static const STREAMBUFFER_TYPE_QWORD = 0x00000004;
-  static const STREAMBUFFER_TYPE_WORD = 0x00000005;
-  static const STREAMBUFFER_TYPE_GUID = 0x00000006;
-}
-
-/// {@category Enum}
-class CROSSBAR_DEFAULT_FLAGS {
-  static const DEF_MODE_PROFILE = 0x00000001;
-  static const DEF_MODE_STREAMS = 0x00000002;
-}
-
-/// {@category Enum}
-class MPEG_CURRENT_NEXT_BIT {
-  static const MPEG_SECTION_IS_NEXT = 0x00000000;
-  static const MPEG_SECTION_IS_CURRENT = 0x00000001;
-}
-
-/// {@category Enum}
-class MPEG_CONTEXT_TYPE {
-  static const MPEG_CONTEXT_BCS_DEMUX = 0x00000000;
-  static const MPEG_CONTEXT_WINSOCK = 0x00000001;
-}
-
-/// {@category Enum}
-class MPEG_REQUEST_TYPE {
-  static const MPEG_RQST_UNKNOWN = 0x00000000;
-  static const MPEG_RQST_GET_SECTION = 0x00000001;
-  static const MPEG_RQST_GET_SECTION_ASYNC = 0x00000002;
-  static const MPEG_RQST_GET_TABLE = 0x00000003;
-  static const MPEG_RQST_GET_TABLE_ASYNC = 0x00000004;
-  static const MPEG_RQST_GET_SECTIONS_STREAM = 0x00000005;
-  static const MPEG_RQST_GET_PES_STREAM = 0x00000006;
-  static const MPEG_RQST_GET_TS_STREAM = 0x00000007;
-  static const MPEG_RQST_START_MPE_STREAM = 0x00000008;
-}
-
-/// {@category Enum}
-class VA_VIDEO_FORMAT {
-  static const VA_VIDEO_COMPONENT = 0x00000000;
-  static const VA_VIDEO_PAL = 0x00000001;
-  static const VA_VIDEO_NTSC = 0x00000002;
-  static const VA_VIDEO_SECAM = 0x00000003;
-  static const VA_VIDEO_MAC = 0x00000004;
-  static const VA_VIDEO_UNSPECIFIED = 0x00000005;
-}
-
-/// {@category Enum}
-class VA_COLOR_PRIMARIES {
-  static const VA_PRIMARIES_ITU_R_BT_709 = 0x00000001;
-  static const VA_PRIMARIES_UNSPECIFIED = 0x00000002;
-  static const VA_PRIMARIES_ITU_R_BT_470_SYSTEM_M = 0x00000004;
-  static const VA_PRIMARIES_ITU_R_BT_470_SYSTEM_B_G = 0x00000005;
-  static const VA_PRIMARIES_SMPTE_170M = 0x00000006;
-  static const VA_PRIMARIES_SMPTE_240M = 0x00000007;
-  static const VA_PRIMARIES_H264_GENERIC_FILM = 0x00000008;
-}
-
-/// {@category Enum}
-class VA_TRANSFER_CHARACTERISTICS {
-  static const VA_TRANSFER_CHARACTERISTICS_ITU_R_BT_709 = 0x00000001;
-  static const VA_TRANSFER_CHARACTERISTICS_UNSPECIFIED = 0x00000002;
-  static const VA_TRANSFER_CHARACTERISTICS_ITU_R_BT_470_SYSTEM_M = 0x00000004;
-  static const VA_TRANSFER_CHARACTERISTICS_ITU_R_BT_470_SYSTEM_B_G = 0x00000005;
-  static const VA_TRANSFER_CHARACTERISTICS_SMPTE_170M = 0x00000006;
-  static const VA_TRANSFER_CHARACTERISTICS_SMPTE_240M = 0x00000007;
-  static const VA_TRANSFER_CHARACTERISTICS_LINEAR = 0x00000008;
-  static const VA_TRANSFER_CHARACTERISTICS_H264_LOG_100_TO_1 = 0x00000009;
-  static const VA_TRANSFER_CHARACTERISTICS_H264_LOG_316_TO_1 = 0x0000000a;
-}
-
-/// {@category Enum}
-class VA_MATRIX_COEFFICIENTS {
-  static const VA_MATRIX_COEFF_H264_RGB = 0x00000000;
-  static const VA_MATRIX_COEFF_ITU_R_BT_709 = 0x00000001;
-  static const VA_MATRIX_COEFF_UNSPECIFIED = 0x00000002;
-  static const VA_MATRIX_COEFF_FCC = 0x00000004;
-  static const VA_MATRIX_COEFF_ITU_R_BT_470_SYSTEM_B_G = 0x00000005;
-  static const VA_MATRIX_COEFF_SMPTE_170M = 0x00000006;
-  static const VA_MATRIX_COEFF_SMPTE_240M = 0x00000007;
-  static const VA_MATRIX_COEFF_H264_YCgCo = 0x00000008;
-}
-
-/// {@category Enum}
-class ChannelChangeSpanningEvent_State {
-  static const ChannelChangeSpanningEvent_Start = 0x00000000;
-  static const ChannelChangeSpanningEvent_End = 0x00000002;
-}
-
-/// {@category Enum}
-class ChannelType {
-  static const ChannelTypeNone = 0x00000000;
-  static const ChannelTypeOther = 0x00000001;
-  static const ChannelTypeVideo = 0x00000002;
-  static const ChannelTypeAudio = 0x00000004;
-  static const ChannelTypeText = 0x00000008;
-  static const ChannelTypeSubtitles = 0x00000010;
-  static const ChannelTypeCaptions = 0x00000020;
-  static const ChannelTypeSuperimpose = 0x00000040;
-  static const ChannelTypeData = 0x00000080;
-}
-
-/// {@category Enum}
-class SignalAndServiceStatusSpanningEvent_State {
-  static const SignalAndServiceStatusSpanningEvent_None = 0xffffffff;
-  static const SignalAndServiceStatusSpanningEvent_Clear = 0x00000000;
-  static const SignalAndServiceStatusSpanningEvent_NoTVSignal = 0x00000001;
-  static const SignalAndServiceStatusSpanningEvent_ServiceOffAir = 0x00000002;
-  static const SignalAndServiceStatusSpanningEvent_WeakTVSignal = 0x00000003;
-  static const SignalAndServiceStatusSpanningEvent_NoSubscription = 0x00000004;
-  static const SignalAndServiceStatusSpanningEvent_AllAVScrambled = 0x00000005;
-}
-
-/// {@category Enum}
-class KSPROPERTY_BDA_ETHERNET_FILTER {
-  static const KSPROPERTY_BDA_ETHERNET_FILTER_MULTICAST_LIST_SIZE = 0x00000000;
-  static const KSPROPERTY_BDA_ETHERNET_FILTER_MULTICAST_LIST = 0x00000001;
-  static const KSPROPERTY_BDA_ETHERNET_FILTER_MULTICAST_MODE = 0x00000002;
-}
-
-/// {@category Enum}
-class KSPROPERTY_BDA_IPv4_FILTER {
-  static const KSPROPERTY_BDA_IPv4_FILTER_MULTICAST_LIST_SIZE = 0x00000000;
-  static const KSPROPERTY_BDA_IPv4_FILTER_MULTICAST_LIST = 0x00000001;
-  static const KSPROPERTY_BDA_IPv4_FILTER_MULTICAST_MODE = 0x00000002;
-}
-
-/// {@category Enum}
-class KSPROPERTY_BDA_IPv6_FILTER {
-  static const KSPROPERTY_BDA_IPv6_FILTER_MULTICAST_LIST_SIZE = 0x00000000;
-  static const KSPROPERTY_BDA_IPv6_FILTER_MULTICAST_LIST = 0x00000001;
-  static const KSPROPERTY_BDA_IPv6_FILTER_MULTICAST_MODE = 0x00000002;
-}
-
-/// {@category Enum}
-class KSPROPERTY_BDA_SIGNAL_STATS {
-  static const KSPROPERTY_BDA_SIGNAL_STRENGTH = 0x00000000;
-  static const KSPROPERTY_BDA_SIGNAL_QUALITY = 0x00000001;
-  static const KSPROPERTY_BDA_SIGNAL_PRESENT = 0x00000002;
-  static const KSPROPERTY_BDA_SIGNAL_LOCKED = 0x00000003;
-  static const KSPROPERTY_BDA_SAMPLE_TIME = 0x00000004;
-  static const KSPROPERTY_BDA_SIGNAL_LOCK_CAPS = 0x00000005;
-  static const KSPROPERTY_BDA_SIGNAL_LOCK_TYPE = 0x00000006;
-}
-
-/// {@category Enum}
-class BdaLockType {
-  static const Bda_LockType_None = 0x00000000;
-  static const Bda_LockType_PLL = 0x00000001;
-  static const Bda_LockType_DecoderDemod = 0x00000002;
-  static const Bda_LockType_Complete = 0x00000080;
-}
-
-/// {@category Enum}
-class KSMETHOD_BDA_CHANGE_SYNC {
-  static const KSMETHOD_BDA_START_CHANGES = 0x00000000;
-  static const KSMETHOD_BDA_CHECK_CHANGES = 0x00000001;
-  static const KSMETHOD_BDA_COMMIT_CHANGES = 0x00000002;
-  static const KSMETHOD_BDA_GET_CHANGE_STATE = 0x00000003;
-}
-
-/// {@category Enum}
-class KSMETHOD_BDA_DEVICE_CONFIGURATION {
-  static const KSMETHOD_BDA_CREATE_PIN_FACTORY = 0x00000000;
-  static const KSMETHOD_BDA_DELETE_PIN_FACTORY = 0x00000001;
-  static const KSMETHOD_BDA_CREATE_TOPOLOGY = 0x00000002;
-}
-
-/// {@category Enum}
-class KSPROPERTY_BDA_TOPOLOGY {
-  static const KSPROPERTY_BDA_NODE_TYPES = 0x00000000;
-  static const KSPROPERTY_BDA_PIN_TYPES = 0x00000001;
-  static const KSPROPERTY_BDA_TEMPLATE_CONNECTIONS = 0x00000002;
-  static const KSPROPERTY_BDA_NODE_METHODS = 0x00000003;
-  static const KSPROPERTY_BDA_NODE_PROPERTIES = 0x00000004;
-  static const KSPROPERTY_BDA_NODE_EVENTS = 0x00000005;
-  static const KSPROPERTY_BDA_CONTROLLING_PIN_ID = 0x00000006;
-  static const KSPROPERTY_BDA_NODE_DESCRIPTORS = 0x00000007;
-}
-
-/// {@category Enum}
-class KSPROPERTY_BDA_PIN_CONTROL {
-  static const KSPROPERTY_BDA_PIN_ID = 0x00000000;
-  static const KSPROPERTY_BDA_PIN_TYPE = 0x00000001;
-}
-
-/// {@category Enum}
-class KSPROPERTY_BDA_PIN_EVENT {
-  static const KSEVENT_BDA_PIN_CONNECTED = 0x00000000;
-  static const KSEVENT_BDA_PIN_DISCONNECTED = 0x00000001;
-}
-
-/// {@category Enum}
-class KSPROPERTY_BDA_VOID_TRANSFORM {
-  static const KSPROPERTY_BDA_VOID_TRANSFORM_START = 0x00000000;
-  static const KSPROPERTY_BDA_VOID_TRANSFORM_STOP = 0x00000001;
-}
-
-/// {@category Enum}
-class KSPROPERTY_BDA_NULL_TRANSFORM {
-  static const KSPROPERTY_BDA_NULL_TRANSFORM_START = 0x00000000;
-  static const KSPROPERTY_BDA_NULL_TRANSFORM_STOP = 0x00000001;
-}
-
-/// {@category Enum}
-class KSPROPERTY_BDA_FREQUENCY_FILTER {
-  static const KSPROPERTY_BDA_RF_TUNER_FREQUENCY = 0x00000000;
-  static const KSPROPERTY_BDA_RF_TUNER_POLARITY = 0x00000001;
-  static const KSPROPERTY_BDA_RF_TUNER_RANGE = 0x00000002;
-  static const KSPROPERTY_BDA_RF_TUNER_TRANSPONDER = 0x00000003;
-  static const KSPROPERTY_BDA_RF_TUNER_BANDWIDTH = 0x00000004;
-  static const KSPROPERTY_BDA_RF_TUNER_FREQUENCY_MULTIPLIER = 0x00000005;
-  static const KSPROPERTY_BDA_RF_TUNER_CAPS = 0x00000006;
-  static const KSPROPERTY_BDA_RF_TUNER_SCAN_STATUS = 0x00000007;
-  static const KSPROPERTY_BDA_RF_TUNER_STANDARD = 0x00000008;
-  static const KSPROPERTY_BDA_RF_TUNER_STANDARD_MODE = 0x00000009;
-}
-
-/// {@category Enum}
-class BdaSignalType {
-  static const Bda_SignalType_Unknown = 0x00000000;
-  static const Bda_SignalType_Analog = 0x00000001;
-  static const Bda_SignalType_Digital = 0x00000002;
-}
-
-/// {@category Enum}
-class BDA_DigitalSignalStandard {
-  static const Bda_DigitalStandard_None = 0x00000000;
-  static const Bda_DigitalStandard_DVB_T = 0x00000001;
-  static const Bda_DigitalStandard_DVB_S = 0x00000002;
-  static const Bda_DigitalStandard_DVB_C = 0x00000004;
-  static const Bda_DigitalStandard_ATSC = 0x00000008;
-  static const Bda_DigitalStandard_ISDB_T = 0x00000010;
-  static const Bda_DigitalStandard_ISDB_S = 0x00000020;
-  static const Bda_DigitalStandard_ISDB_C = 0x00000040;
-}
-
-/// {@category Enum}
-class KSEVENT_BDA_TUNER {
-  static const KSEVENT_BDA_TUNER_SCAN = 0x00000000;
-}
-
-/// {@category Enum}
-class KSPROPERTY_BDA_LNB_INFO {
-  static const KSPROPERTY_BDA_LNB_LOF_LOW_BAND = 0x00000000;
-  static const KSPROPERTY_BDA_LNB_LOF_HIGH_BAND = 0x00000001;
-  static const KSPROPERTY_BDA_LNB_SWITCH_FREQUENCY = 0x00000002;
-}
-
-/// {@category Enum}
-class KSPROPERTY_BDA_DISEQC_COMMAND {
-  static const KSPROPERTY_BDA_DISEQC_ENABLE = 0x00000000;
-  static const KSPROPERTY_BDA_DISEQC_LNB_SOURCE = 0x00000001;
-  static const KSPROPERTY_BDA_DISEQC_USETONEBURST = 0x00000002;
-  static const KSPROPERTY_BDA_DISEQC_REPEATS = 0x00000003;
-  static const KSPROPERTY_BDA_DISEQC_SEND = 0x00000004;
-  static const KSPROPERTY_BDA_DISEQC_RESPONSE = 0x00000005;
-}
-
-/// {@category Enum}
-class KSPROPERTY_BDA_DISEQC_EVENT {
-  static const KSEVENT_BDA_DISEQC_DATA_RECEIVED = 0x00000000;
-}
-
-/// {@category Enum}
-class KSPROPERTY_BDA_DIGITAL_DEMODULATOR {
-  static const KSPROPERTY_BDA_MODULATION_TYPE = 0x00000000;
-  static const KSPROPERTY_BDA_INNER_FEC_TYPE = 0x00000001;
-  static const KSPROPERTY_BDA_INNER_FEC_RATE = 0x00000002;
-  static const KSPROPERTY_BDA_OUTER_FEC_TYPE = 0x00000003;
-  static const KSPROPERTY_BDA_OUTER_FEC_RATE = 0x00000004;
-  static const KSPROPERTY_BDA_SYMBOL_RATE = 0x00000005;
-  static const KSPROPERTY_BDA_SPECTRAL_INVERSION = 0x00000006;
-  static const KSPROPERTY_BDA_GUARD_INTERVAL = 0x00000007;
-  static const KSPROPERTY_BDA_TRANSMISSION_MODE = 0x00000008;
-  static const KSPROPERTY_BDA_ROLL_OFF = 0x00000009;
-  static const KSPROPERTY_BDA_PILOT = 0x0000000a;
-  static const KSPROPERTY_BDA_SIGNALTIMEOUTS = 0x0000000b;
-  static const KSPROPERTY_BDA_PLP_NUMBER = 0x0000000c;
-}
-
-/// {@category Enum}
-class KSPROPERTY_BDA_AUTODEMODULATE {
-  static const KSPROPERTY_BDA_AUTODEMODULATE_START = 0x00000000;
-  static const KSPROPERTY_BDA_AUTODEMODULATE_STOP = 0x00000001;
-}
-
-/// {@category Enum}
-class KSPROPERTY_IDS_BDA_TABLE {
-  static const KSPROPERTY_BDA_TABLE_SECTION = 0x00000000;
-}
-
-/// {@category Enum}
-class KSPROPERTY_BDA_PIDFILTER {
-  static const KSPROPERTY_BDA_PIDFILTER_MAP_PIDS = 0x00000000;
-  static const KSPROPERTY_BDA_PIDFILTER_UNMAP_PIDS = 0x00000001;
-  static const KSPROPERTY_BDA_PIDFILTER_LIST_PIDS = 0x00000002;
-}
-
-/// {@category Enum}
-class KSPROPERTY_BDA_CA {
-  static const KSPROPERTY_BDA_ECM_MAP_STATUS = 0x00000000;
-  static const KSPROPERTY_BDA_CA_MODULE_STATUS = 0x00000001;
-  static const KSPROPERTY_BDA_CA_SMART_CARD_STATUS = 0x00000002;
-  static const KSPROPERTY_BDA_CA_MODULE_UI = 0x00000003;
-  static const KSPROPERTY_BDA_CA_SET_PROGRAM_PIDS = 0x00000004;
-  static const KSPROPERTY_BDA_CA_REMOVE_PROGRAM = 0x00000005;
-}
-
-/// {@category Enum}
-class KSPROPERTY_BDA_CA_EVENT {
-  static const KSEVENT_BDA_PROGRAM_FLOW_STATUS_CHANGED = 0x00000000;
-  static const KSEVENT_BDA_CA_MODULE_STATUS_CHANGED = 0x00000001;
-  static const KSEVENT_BDA_CA_SMART_CARD_STATUS_CHANGED = 0x00000002;
-  static const KSEVENT_BDA_CA_MODULE_UI_REQUESTED = 0x00000003;
-}
-
-/// {@category Enum}
-class KSMETHOD_BDA_DRM {
-  static const KSMETHOD_BDA_DRM_CURRENT = 0x00000000;
-  static const KSMETHOD_BDA_DRM_DRMSTATUS = 0x00000001;
-}
-
-/// {@category Enum}
-class KSMETHOD_BDA_WMDRM {
-  static const KSMETHOD_BDA_WMDRM_STATUS = 0x00000000;
-  static const KSMETHOD_BDA_WMDRM_REVINFO = 0x00000001;
-  static const KSMETHOD_BDA_WMDRM_CRL = 0x00000002;
-  static const KSMETHOD_BDA_WMDRM_MESSAGE = 0x00000003;
-  static const KSMETHOD_BDA_WMDRM_REISSUELICENSE = 0x00000004;
-  static const KSMETHOD_BDA_WMDRM_RENEWLICENSE = 0x00000005;
-  static const KSMETHOD_BDA_WMDRM_LICENSE = 0x00000006;
-  static const KSMETHOD_BDA_WMDRM_KEYINFO = 0x00000007;
-}
-
-/// {@category Enum}
-class KSMETHOD_BDA_WMDRM_TUNER {
-  static const KSMETHOD_BDA_WMDRMTUNER_CANCELCAPTURETOKEN = 0x00000000;
-  static const KSMETHOD_BDA_WMDRMTUNER_SETPIDPROTECTION = 0x00000001;
-  static const KSMETHOD_BDA_WMDRMTUNER_GETPIDPROTECTION = 0x00000002;
-  static const KSMETHOD_BDA_WMDRMTUNER_SETSYNCVALUE = 0x00000003;
-  static const KSMETHOD_BDA_WMDRMTUNER_STARTCODEPROFILE = 0x00000004;
-  static const KSMETHOD_BDA_WMDRMTUNER_PURCHASE_ENTITLEMENT = 0x00000005;
-}
-
-/// {@category Enum}
-class KSMETHOD_BDA_EVENTING_SERVICE {
-  static const KSMETHOD_BDA_EVENT_DATA = 0x00000000;
-  static const KSMETHOD_BDA_EVENT_COMPLETE = 0x00000001;
-}
-
-/// {@category Enum}
-class KSEVENT_BDA_EVENT_TYPE {
-  static const KSEVENT_BDA_EVENT_PENDINGEVENT = 0x00000000;
-}
-
-/// {@category Enum}
-class KSMETHOD_BDA_DEBUG_SERVICE {
-  static const KSMETHOD_BDA_DEBUG_LEVEL = 0x00000000;
-  static const KSMETHOD_BDA_DEBUG_DATA = 0x00000001;
-}
-
-/// {@category Enum}
-class KSMETHOD_BDA_TUNER_SERVICE {
-  static const KSMETHOD_BDA_TUNER_SETTUNER = 0x00000000;
-  static const KSMETHOD_BDA_TUNER_GETTUNERSTATE = 0x00000001;
-  static const KSMETHOD_BDA_TUNER_SIGNALNOISERATIO = 0x00000002;
-}
-
-/// {@category Enum}
-class KSMETHOD_BDA_GPNV_SERVICE {
-  static const KSMETHOD_BDA_GPNV_GETVALUE = 0x00000000;
-  static const KSMETHOD_BDA_GPNV_SETVALUE = 0x00000001;
-  static const KSMETHOD_BDA_GPNV_NAMEFROMINDEX = 0x00000002;
-  static const KSMETHOD_BDA_GPNV_GETVALUEUPDATENAME = 0x00000003;
-}
-
-/// {@category Enum}
-class KSMETHOD_BDA_MUX_SERVICE {
-  static const KSMETHOD_BDA_MUX_GETPIDLIST = 0x00000000;
-  static const KSMETHOD_BDA_MUX_SETPIDLIST = 0x00000001;
-}
-
-/// {@category Enum}
-class KSMETHOD_BDA_SCAN_SERVICE {
-  static const KSMETHOD_BDA_SCAN_CAPABILTIES = 0x00000000;
-  static const KSMETHOD_BDA_SCANNING_STATE = 0x00000001;
-  static const KSMETHOD_BDA_SCAN_FILTER = 0x00000002;
-  static const KSMETHOD_BDA_SCAN_START = 0x00000003;
-  static const KSMETHOD_BDA_SCAN_RESUME = 0x00000004;
-  static const KSMETHOD_BDA_SCAN_STOP = 0x00000005;
-}
-
-/// {@category Enum}
-class KSMETHOD_BDA_GDDS_SERVICE {
-  static const KSMETHOD_BDA_GDDS_DATATYPE = 0x00000000;
-  static const KSMETHOD_BDA_GDDS_DATA = 0x00000001;
-  static const KSMETHOD_BDA_GDDS_TUNEXMLFROMIDX = 0x00000002;
-  static const KSMETHOD_BDA_GDDS_GETSERVICES = 0x00000003;
-  static const KSMETHOD_BDA_GDDS_SERVICEFROMTUNEXML = 0x00000004;
-  static const KSMETHOD_BDA_GDDS_DATAUPDATE = 0x00000005;
-}
-
-/// {@category Enum}
-class KSMETHOD_BDA_CAS_SERVICE {
-  static const KSMETHOD_BDA_CAS_CHECKENTITLEMENTTOKEN = 0x00000000;
-  static const KSMETHOD_BDA_CAS_SETCAPTURETOKEN = 0x00000001;
-  static const KSMETHOD_BDA_CAS_OPENBROADCASTMMI = 0x00000002;
-  static const KSMETHOD_BDA_CAS_CLOSEMMIDIALOG = 0x00000003;
-}
-
-/// {@category Enum}
-class KSMETHOD_BDA_ISDB_CAS {
-  static const KSMETHOD_BDA_ISDBCAS_SETREQUEST = 0x00000000;
-  static const KSMETHOD_BDA_ISDBCAS_RESPONSEDATA = 0x00000001;
-}
-
-/// {@category Enum}
-class KSMETHOD_BDA_TS_SELECTOR {
-  static const KSMETHOD_BDA_TS_SELECTOR_SETTSID = 0x00000000;
-  static const KSMETHOD_BDA_TS_SELECTOR_GETTSINFORMATION = 0x00000001;
-}
-
-/// {@category Enum}
-class KSMETHOD_BDA_USERACTIVITY_SERVICE {
-  static const KSMETHOD_BDA_USERACTIVITY_USEREASON = 0x00000000;
-  static const KSMETHOD_BDA_USERACTIVITY_INTERVAL = 0x00000001;
-  static const KSMETHOD_BDA_USERACTIVITY_DETECTED = 0x00000002;
-}

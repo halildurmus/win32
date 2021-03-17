@@ -53,3 +53,4 @@ class INSTANCE_INFORMATION_CLASS {
   static const InstanceFullInformation = 0x00000002;
   static const InstanceAggregateStandardInformation = 0x00000003;
 }
+

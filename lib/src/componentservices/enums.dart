@@ -1,4 +1,44 @@
 /// {@category Enum}
+class ICOMAdminCatalog_InstallApplication_lOptionsFlags {
+  static const COMAdminInstallNoUsers = 0x00000000;
+  static const COMAdminInstallUsers = 0x00000001;
+  static const COMAdminInstallForceOverwriteOfFiles = 0x00000002;
+  static const COMAdminInstallForceOverwriteOfFile = 0x00000002;
+}
+
+/// {@category Enum}
+class ICOMAdminCatalog_ExportApplication_lOptionsFlags {
+  static const COMAdminExportNoUsers = 0x00000000;
+  static const COMAdminExportUsers = 0x00000001;
+  static const COMAdminExportApplicationProxy = 0x00000002;
+  static const COMAdminExportForceOverwriteOfFile = 0x00000004;
+  static const COMAdminExportIn10Format = 0x00000010;
+}
+
+/// {@category Enum}
+class ICOMAdminCatalog2_IsSafeToDelete_pCOMAdminInUseFlags {
+  static const COMAdminNotInUse = 0x00000000;
+  static const COMAdminInUseByCatalog = 0x00000001;
+  static const COMAdminInUseByRegistryUnknown = 0x00000002;
+  static const COMAdminInUseByRegistryProxyStub = 0x00000003;
+  static const COMAdminInUseByRegistryTypeLib = 0x00000004;
+  static const COMAdminInUseByRegistryClsid = 0x00000005;
+}
+
+/// {@category Enum}
+class CoGetDefaultContext_aptTypeFlags {
+  static const APTTYPE_MTA = 0x00000001;
+  static const APTTYPE_NA = 0x00000002;
+  static const APTTYPE_MAINSTA = 0x00000003;
+}
+
+/// {@category Enum}
+class ImportUnconfiguredComponents_pVarComponentType {
+  static const COMAdmin32BitComponent = 0x00000001;
+  static const COMAdmin64BitComponent = 0x00000002;
+}
+
+/// {@category Enum}
 class COMAdminInUse {
   static const COMAdminNotInUse = 0x00000000;
   static const COMAdminInUseByCatalog = 0x00000001;
@@ -596,6 +636,48 @@ class CSC_SxsConfig {
 }
 
 /// {@category Enum}
+class AutoSvcs_Error_Constants {
+  static const mtsErrCtxAborted = 0x8004e002;
+  static const mtsErrCtxAborting = 0x8004e003;
+  static const mtsErrCtxNoContext = 0x8004e004;
+  static const mtsErrCtxNotRegistered = 0x8004e005;
+  static const mtsErrCtxSynchTimeout = 0x8004e006;
+  static const mtsErrCtxOldReference = 0x8004e007;
+  static const mtsErrCtxRoleNotFound = 0x8004e00c;
+  static const mtsErrCtxNoSecurity = 0x8004e00d;
+  static const mtsErrCtxWrongThread = 0x8004e00e;
+  static const mtsErrCtxTMNotAvailable = 0x8004e00f;
+  static const comQCErrApplicationNotQueued = 0x80110600;
+  static const comQCErrNoQueueableInterfaces = 0x80110601;
+  static const comQCErrQueuingServiceNotAvailable = 0x80110602;
+  static const comQCErrQueueTransactMismatch = 0x80110603;
+  static const comqcErrRecorderMarshalled = 0x80110604;
+  static const comqcErrOutParam = 0x80110605;
+  static const comqcErrRecorderNotTrusted = 0x80110606;
+  static const comqcErrPSLoad = 0x80110607;
+  static const comqcErrMarshaledObjSameTxn = 0x80110608;
+  static const comqcErrInvalidMessage = 0x80110650;
+  static const comqcErrMsmqSidUnavailable = 0x80110651;
+  static const comqcErrWrongMsgExtension = 0x80110652;
+  static const comqcErrMsmqServiceUnavailable = 0x80110653;
+  static const comqcErrMsgNotAuthenticated = 0x80110654;
+  static const comqcErrMsmqConnectorUsed = 0x80110655;
+  static const comqcErrBadMarshaledObject = 0x80110656;
+}
+
+/// {@category Enum}
+class LockModes {
+  static const LockSetGet = 0x00000000;
+  static const LockMethod = 0x00000001;
+}
+
+/// {@category Enum}
+class ReleaseModes {
+  static const Standard = 0x00000000;
+  static const Process = 0x00000001;
+}
+
+/// {@category Enum}
 class CRMFLAGS {
   static const CRMFLAG_FORGETTARGET = 0x00000001;
   static const CRMFLAG_WRITTENDURINGPREPARE = 0x00000002;
@@ -614,3 +696,4 @@ class CRMREGFLAGS {
   static const CRMREGFLAG_ALLPHASES = 0x00000007;
   static const CRMREGFLAG_FAILIFINDOUBTSREMAIN = 0x00000010;
 }
+

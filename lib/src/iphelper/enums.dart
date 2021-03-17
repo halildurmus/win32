@@ -1,4 +1,109 @@
 /// {@category Enum}
+class SCOPE_LEVEL {
+  static const ScopeLevelInterface = 0x00000001;
+  static const ScopeLevelLink = 0x00000002;
+  static const ScopeLevelSubnet = 0x00000003;
+  static const ScopeLevelAdmin = 0x00000004;
+  static const ScopeLevelSite = 0x00000005;
+  static const ScopeLevelOrganization = 0x00000008;
+  static const ScopeLevelGlobal = 0x0000000e;
+  static const ScopeLevelCount = 0x00000010;
+}
+
+/// {@category Enum}
+class NL_PREFIX_ORIGIN {
+  static const IpPrefixOriginOther = 0x00000000;
+  static const IpPrefixOriginManual = 0x00000001;
+  static const IpPrefixOriginWellKnown = 0x00000002;
+  static const IpPrefixOriginDhcp = 0x00000003;
+  static const IpPrefixOriginRouterAdvertisement = 0x00000004;
+  static const IpPrefixOriginUnchanged = 0x00000010;
+}
+
+/// {@category Enum}
+class NL_SUFFIX_ORIGIN {
+  static const NlsoOther = 0x00000000;
+  static const NlsoManual = 0x00000001;
+  static const NlsoWellKnown = 0x00000002;
+  static const NlsoDhcp = 0x00000003;
+  static const NlsoLinkLayerAddress = 0x00000004;
+  static const NlsoRandom = 0x00000005;
+  static const IpSuffixOriginOther = 0x00000000;
+  static const IpSuffixOriginManual = 0x00000001;
+  static const IpSuffixOriginWellKnown = 0x00000002;
+  static const IpSuffixOriginDhcp = 0x00000003;
+  static const IpSuffixOriginLinkLayerAddress = 0x00000004;
+  static const IpSuffixOriginRandom = 0x00000005;
+  static const IpSuffixOriginUnchanged = 0x00000010;
+}
+
+/// {@category Enum}
+class NL_DAD_STATE {
+  static const NldsInvalid = 0x00000000;
+  static const NldsTentative = 0x00000001;
+  static const NldsDuplicate = 0x00000002;
+  static const NldsDeprecated = 0x00000003;
+  static const NldsPreferred = 0x00000004;
+  static const IpDadStateInvalid = 0x00000000;
+  static const IpDadStateTentative = 0x00000001;
+  static const IpDadStateDuplicate = 0x00000002;
+  static const IpDadStateDeprecated = 0x00000003;
+  static const IpDadStatePreferred = 0x00000004;
+}
+
+/// {@category Enum}
+class NL_NETWORK_CONNECTIVITY_LEVEL_HINT {
+  static const NetworkConnectivityLevelHintUnknown = 0x00000000;
+  static const NetworkConnectivityLevelHintNone = 0x00000001;
+  static const NetworkConnectivityLevelHintLocalAccess = 0x00000002;
+  static const NetworkConnectivityLevelHintInternetAccess = 0x00000003;
+  static const NetworkConnectivityLevelHintConstrainedInternetAccess = 0x00000004;
+  static const NetworkConnectivityLevelHintHidden = 0x00000005;
+}
+
+/// {@category Enum}
+class NL_NETWORK_CONNECTIVITY_COST_HINT {
+  static const NetworkConnectivityCostHintUnknown = 0x00000000;
+  static const NetworkConnectivityCostHintUnrestricted = 0x00000001;
+  static const NetworkConnectivityCostHintFixed = 0x00000002;
+  static const NetworkConnectivityCostHintVariable = 0x00000003;
+}
+
+/// {@category Enum}
+class Get_Family {
+  static const AF_INET = 0x00000002;
+  static const AF_INET6 = 0x00000017;
+  static const AF_UNSPEC = 0x00000000;
+}
+
+/// {@category Enum}
+class SetIfEntry_pIfRowFlags {
+  static const MIB_IF_ADMIN_STATUS_UP = 0x00000001;
+  static const MIB_IF_ADMIN_STATUS_DOWN = 0x00000002;
+}
+
+/// {@category Enum}
+class GetAdaptersAddresses_Flags {
+  static const GAA_FLAG_SKIP_UNICAST = 0x00000001;
+  static const GAA_FLAG_SKIP_ANYCAST = 0x00000002;
+  static const GAA_FLAG_SKIP_MULTICAST = 0x00000004;
+  static const GAA_FLAG_SKIP_DNS_SERVER = 0x00000008;
+  static const GAA_FLAG_INCLUDE_PREFIX = 0x00000010;
+  static const GAA_FLAG_SKIP_FRIENDLY_NAME = 0x00000020;
+  static const GAA_FLAG_INCLUDE_WINS_INFO = 0x00000040;
+  static const GAA_FLAG_INCLUDE_GATEWAYS = 0x00000080;
+  static const GAA_FLAG_INCLUDE_ALL_INTERFACES = 0x00000100;
+  static const GAA_FLAG_INCLUDE_ALL_COMPARTMENTS = 0x00000200;
+  static const GAA_FLAG_INCLUDE_TUNNEL_BINDINGORDER = 0x00000400;
+}
+
+/// {@category Enum}
+class IP_FLAG {
+  static const IP_FLAG_REVERSE = 0x00000001;
+  static const IP_FLAG_DF = 0x00000002;
+}
+
+/// {@category Enum}
 class IF_ACCESS_TYPE {
   static const IF_ACCESS_LOOPBACK = 0x00000001;
   static const IF_ACCESS_BROADCAST = 0x00000002;
@@ -168,74 +273,3 @@ class NET_ADDRESS_FORMAT {
   static const NET_ADDRESS_IPV6 = 0x00000003;
 }
 
-/// {@category Enum}
-class SCOPE_LEVEL {
-  static const ScopeLevelInterface = 0x00000001;
-  static const ScopeLevelLink = 0x00000002;
-  static const ScopeLevelSubnet = 0x00000003;
-  static const ScopeLevelAdmin = 0x00000004;
-  static const ScopeLevelSite = 0x00000005;
-  static const ScopeLevelOrganization = 0x00000008;
-  static const ScopeLevelGlobal = 0x0000000e;
-  static const ScopeLevelCount = 0x00000010;
-}
-
-/// {@category Enum}
-class NL_PREFIX_ORIGIN {
-  static const IpPrefixOriginOther = 0x00000000;
-  static const IpPrefixOriginManual = 0x00000001;
-  static const IpPrefixOriginWellKnown = 0x00000002;
-  static const IpPrefixOriginDhcp = 0x00000003;
-  static const IpPrefixOriginRouterAdvertisement = 0x00000004;
-  static const IpPrefixOriginUnchanged = 0x00000010;
-}
-
-/// {@category Enum}
-class NL_SUFFIX_ORIGIN {
-  static const NlsoOther = 0x00000000;
-  static const NlsoManual = 0x00000001;
-  static const NlsoWellKnown = 0x00000002;
-  static const NlsoDhcp = 0x00000003;
-  static const NlsoLinkLayerAddress = 0x00000004;
-  static const NlsoRandom = 0x00000005;
-  static const IpSuffixOriginOther = 0x00000000;
-  static const IpSuffixOriginManual = 0x00000001;
-  static const IpSuffixOriginWellKnown = 0x00000002;
-  static const IpSuffixOriginDhcp = 0x00000003;
-  static const IpSuffixOriginLinkLayerAddress = 0x00000004;
-  static const IpSuffixOriginRandom = 0x00000005;
-  static const IpSuffixOriginUnchanged = 0x00000010;
-}
-
-/// {@category Enum}
-class NL_DAD_STATE {
-  static const NldsInvalid = 0x00000000;
-  static const NldsTentative = 0x00000001;
-  static const NldsDuplicate = 0x00000002;
-  static const NldsDeprecated = 0x00000003;
-  static const NldsPreferred = 0x00000004;
-  static const IpDadStateInvalid = 0x00000000;
-  static const IpDadStateTentative = 0x00000001;
-  static const IpDadStateDuplicate = 0x00000002;
-  static const IpDadStateDeprecated = 0x00000003;
-  static const IpDadStatePreferred = 0x00000004;
-}
-
-/// {@category Enum}
-class NL_NETWORK_CONNECTIVITY_LEVEL_HINT {
-  static const NetworkConnectivityLevelHintUnknown = 0x00000000;
-  static const NetworkConnectivityLevelHintNone = 0x00000001;
-  static const NetworkConnectivityLevelHintLocalAccess = 0x00000002;
-  static const NetworkConnectivityLevelHintInternetAccess = 0x00000003;
-  static const NetworkConnectivityLevelHintConstrainedInternetAccess =
-      0x00000004;
-  static const NetworkConnectivityLevelHintHidden = 0x00000005;
-}
-
-/// {@category Enum}
-class NL_NETWORK_CONNECTIVITY_COST_HINT {
-  static const NetworkConnectivityCostHintUnknown = 0x00000000;
-  static const NetworkConnectivityCostHintUnrestricted = 0x00000001;
-  static const NetworkConnectivityCostHintFixed = 0x00000002;
-  static const NetworkConnectivityCostHintVariable = 0x00000003;
-}

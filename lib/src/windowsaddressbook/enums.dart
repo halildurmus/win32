@@ -4,3 +4,4 @@ class Gender {
   static const genderFemale = 0x00000001;
   static const genderMale = 0x00000002;
 }
+

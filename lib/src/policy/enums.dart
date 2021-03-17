@@ -48,3 +48,4 @@ class GROUP_POLICY_HINT_TYPE {
   static const GPHintDomain = 0x00000003;
   static const GPHintOrganizationalUnit = 0x00000004;
 }
+

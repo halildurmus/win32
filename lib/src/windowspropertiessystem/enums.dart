@@ -1,4 +1,62 @@
 /// {@category Enum}
+class SYNC_TRANSFER_STATUS {
+  static const STS_NONE = 0x00000000;
+  static const STS_NEEDSUPLOAD = 0x00000001;
+  static const STS_NEEDSDOWNLOAD = 0x00000002;
+  static const STS_TRANSFERRING = 0x00000004;
+  static const STS_PAUSED = 0x00000008;
+  static const STS_HASERROR = 0x00000010;
+  static const STS_FETCHING_METADATA = 0x00000020;
+  static const STS_USER_REQUESTED_REFRESH = 0x00000040;
+  static const STS_HASWARNING = 0x00000080;
+  static const STS_EXCLUDED = 0x00000100;
+  static const STS_INCOMPLETE = 0x00000200;
+  static const STS_PLACEHOLDER_IFEMPTY = 0x00000400;
+}
+
+/// {@category Enum}
+class PLACEHOLDER_STATES {
+  static const PS_NONE = 0x00000000;
+  static const PS_MARKED_FOR_OFFLINE_AVAILABILITY = 0x00000001;
+  static const PS_FULL_PRIMARY_STREAM_AVAILABLE = 0x00000002;
+  static const PS_CREATE_FILE_ACCESSIBLE = 0x00000004;
+  static const PS_CLOUDFILE_PLACEHOLDER = 0x00000008;
+  static const PS_DEFAULT = 0x00000007;
+  static const PS_ALL = 0x0000000f;
+}
+
+/// {@category Enum}
+class PROPERTYUI_FLAGS {
+  static const PUIF_DEFAULT = 0x00000000;
+  static const PUIF_RIGHTALIGN = 0x00000001;
+  static const PUIF_NOLABELININFOTIP = 0x00000002;
+}
+
+/// {@category Enum}
+class PDOPSTATUS {
+  static const PDOPS_RUNNING = 0x00000001;
+  static const PDOPS_PAUSED = 0x00000002;
+  static const PDOPS_CANCELLED = 0x00000003;
+  static const PDOPS_STOPPED = 0x00000004;
+  static const PDOPS_ERRORS = 0x00000005;
+}
+
+/// {@category Enum}
+class SYNC_ENGINE_STATE_FLAGS {
+  static const SESF_NONE = 0x00000000;
+  static const SESF_SERVICE_QUOTA_NEARING_LIMIT = 0x00000001;
+  static const SESF_SERVICE_QUOTA_EXCEEDED_LIMIT = 0x00000002;
+  static const SESF_AUTHENTICATION_ERROR = 0x00000004;
+  static const SESF_PAUSED_DUE_TO_METERED_NETWORK = 0x00000008;
+  static const SESF_PAUSED_DUE_TO_DISK_SPACE_FULL = 0x00000010;
+  static const SESF_PAUSED_DUE_TO_CLIENT_POLICY = 0x00000020;
+  static const SESF_PAUSED_DUE_TO_SERVICE_POLICY = 0x00000040;
+  static const SESF_SERVICE_UNAVAILABLE = 0x00000080;
+  static const SESF_PAUSED_DUE_TO_USER_REQUEST = 0x00000100;
+  static const SESF_ALL_FLAGS = 0x000001ff;
+}
+
+/// {@category Enum}
 class GETPROPERTYSTOREFLAGS {
   static const GPS_DEFAULT = 0x00000000;
   static const GPS_HANDLERPROPERTIESONLY = 0x00000001;
@@ -202,7 +260,7 @@ class PERSIST_SPROPSTORE_FLAGS {
 }
 
 /// {@category Enum}
-class tagPSTIME_FLAGS {
+class PSTIME_FLAGS {
   static const PSTF_UTC = 0x00000000;
   static const PSTF_LOCAL = 0x00000001;
 }
@@ -219,7 +277,7 @@ class PROPVAR_COMPARE_UNIT {
 }
 
 /// {@category Enum}
-class tagPROPVAR_COMPARE_FLAGS {
+class PROPVAR_COMPARE_FLAGS {
   static const PVCF_DEFAULT = 0x00000000;
   static const PVCF_TREATEMPTYASGREATERTHAN = 0x00000001;
   static const PVCF_USESTRCMP = 0x00000002;
@@ -230,7 +288,7 @@ class tagPROPVAR_COMPARE_FLAGS {
 }
 
 /// {@category Enum}
-class tagPROPVAR_CHANGE_FLAGS {
+class PROPVAR_CHANGE_FLAGS {
   static const PVCHF_DEFAULT = 0x00000000;
   static const PVCHF_NOVALUEPROP = 0x00000001;
   static const PVCHF_ALPHABOOL = 0x00000002;
@@ -249,60 +307,3 @@ class DRAWPROGRESSFLAGS {
   static const DPF_STOPPED = 0x00000010;
 }
 
-/// {@category Enum}
-class SYNC_TRANSFER_STATUS {
-  static const STS_NONE = 0x00000000;
-  static const STS_NEEDSUPLOAD = 0x00000001;
-  static const STS_NEEDSDOWNLOAD = 0x00000002;
-  static const STS_TRANSFERRING = 0x00000004;
-  static const STS_PAUSED = 0x00000008;
-  static const STS_HASERROR = 0x00000010;
-  static const STS_FETCHING_METADATA = 0x00000020;
-  static const STS_USER_REQUESTED_REFRESH = 0x00000040;
-  static const STS_HASWARNING = 0x00000080;
-  static const STS_EXCLUDED = 0x00000100;
-  static const STS_INCOMPLETE = 0x00000200;
-  static const STS_PLACEHOLDER_IFEMPTY = 0x00000400;
-}
-
-/// {@category Enum}
-class PLACEHOLDER_STATES {
-  static const PS_NONE = 0x00000000;
-  static const PS_MARKED_FOR_OFFLINE_AVAILABILITY = 0x00000001;
-  static const PS_FULL_PRIMARY_STREAM_AVAILABLE = 0x00000002;
-  static const PS_CREATE_FILE_ACCESSIBLE = 0x00000004;
-  static const PS_CLOUDFILE_PLACEHOLDER = 0x00000008;
-  static const PS_DEFAULT = 0x00000007;
-  static const PS_ALL = 0x0000000f;
-}
-
-/// {@category Enum}
-class PROPERTYUI_FLAGS {
-  static const PUIF_DEFAULT = 0x00000000;
-  static const PUIF_RIGHTALIGN = 0x00000001;
-  static const PUIF_NOLABELININFOTIP = 0x00000002;
-}
-
-/// {@category Enum}
-class PDOPSTATUS {
-  static const PDOPS_RUNNING = 0x00000001;
-  static const PDOPS_PAUSED = 0x00000002;
-  static const PDOPS_CANCELLED = 0x00000003;
-  static const PDOPS_STOPPED = 0x00000004;
-  static const PDOPS_ERRORS = 0x00000005;
-}
-
-/// {@category Enum}
-class SYNC_ENGINE_STATE_FLAGS {
-  static const SESF_NONE = 0x00000000;
-  static const SESF_SERVICE_QUOTA_NEARING_LIMIT = 0x00000001;
-  static const SESF_SERVICE_QUOTA_EXCEEDED_LIMIT = 0x00000002;
-  static const SESF_AUTHENTICATION_ERROR = 0x00000004;
-  static const SESF_PAUSED_DUE_TO_METERED_NETWORK = 0x00000008;
-  static const SESF_PAUSED_DUE_TO_DISK_SPACE_FULL = 0x00000010;
-  static const SESF_PAUSED_DUE_TO_CLIENT_POLICY = 0x00000020;
-  static const SESF_PAUSED_DUE_TO_SERVICE_POLICY = 0x00000040;
-  static const SESF_SERVICE_UNAVAILABLE = 0x00000080;
-  static const SESF_PAUSED_DUE_TO_USER_REQUEST = 0x00000100;
-  static const SESF_ALL_FLAGS = 0x000001ff;
-}

@@ -99,3 +99,4 @@ class EC_SUBSCRIPTION_RUNTIME_STATUS_ACTIVE_STATUS {
   static const EcRuntimeStatusActiveStatusInactive = 0x00000003;
   static const EcRuntimeStatusActiveStatusTrying = 0x00000004;
 }
+

@@ -9,8 +9,7 @@ void initNamespaces(Scope scope) {
   // Use a Set to avoid duplication
   final namespaceSet = <String>{};
 
-  final scope =
-      MetadataStore.getScopeForFile(File('tool/win32/Windows.Win32.winmd'));
+  final scope = MetadataStore.getWin32Scope();
   for (final td in scope.typeDefs) {
     if (td.typeName.startsWith('Windows.Win32')) {
       final namespace = td.typeName.split('.')[2];
@@ -41,11 +40,11 @@ String processEnumeration(Enumeration enumClass) {
   buffer.writeln('class $dartClass {');
 
   // The first field is always the special field _value
-  for (final field in enumClass.fields.keys.skip(1)) {
-    if (field != null && field.startsWith('_')) continue;
+  for (final field in enumClass.fields.skip(1)) {
+    // if (field.startsWith('_')) continue;
 
-    final value = enumClass.fields[field]!.toHexString(32);
-    buffer.writeln('  static const $field = $value;');
+    final value = field.value.toHexString(32);
+    buffer.writeln('  static const ${field.name} = $value;');
   }
 
   buffer.writeln('}\n');
@@ -54,8 +53,7 @@ String processEnumeration(Enumeration enumClass) {
 }
 
 void main() {
-  final scope =
-      MetadataStore.getScopeForFile(File('tool/win32/Windows.Win32.winmd'));
+  final scope = MetadataStore.getWin32Scope();
   initNamespaces(scope);
 
   for (final namespace in namespaces) {

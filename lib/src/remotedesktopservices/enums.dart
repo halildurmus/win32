@@ -1,19 +1,4 @@
 /// {@category Enum}
-class APO_BUFFER_FLAGS {
-  static const BUFFER_INVALID = 0x00000000;
-  static const BUFFER_VALID = 0x00000001;
-  static const BUFFER_SILENT = 0x00000002;
-}
-
-/// {@category Enum}
-class AE_POSITION_FLAGS {
-  static const POSITION_INVALID = 0x00000000;
-  static const POSITION_DISCONTINUOUS = 0x00000001;
-  static const POSITION_CONTINUOUS = 0x00000002;
-  static const POSITION_QPC_ERROR = 0x00000004;
-}
-
-/// {@category Enum}
 class AAAuthSchemes {
   static const AA_AUTH_MIN = 0x00000000;
   static const AA_AUTH_BASIC = 0x00000001;
@@ -39,6 +24,12 @@ class AAAccountingDataType {
 }
 
 /// {@category Enum}
+class SESSION_TIMEOUT_ACTION_TYPE {
+  static const SESSION_TIMEOUT_ACTION_DISCONNECT = 0x00000000;
+  static const SESSION_TIMEOUT_ACTION_SILENT_REAUTH = 0x00000001;
+}
+
+/// {@category Enum}
 class PolicyAttributeType {
   static const EnableAllRedirections = 0x00000000;
   static const DisableAllRedirections = 0x00000001;
@@ -48,6 +39,13 @@ class PolicyAttributeType {
   static const ClipboardRedirectionDisabled = 0x00000005;
   static const PnpRedirectionDisabled = 0x00000006;
   static const AllowOnlySDRServers = 0x00000007;
+}
+
+/// {@category Enum}
+class AATrustClassID {
+  static const AA_UNTRUSTED = 0x00000000;
+  static const AA_TRUSTEDUSER_UNTRUSTEDCLIENT = 0x00000001;
+  static const AA_TRUSTEDUSER_TRUSTEDCLIENT = 0x00000002;
 }
 
 /// {@category Enum}
@@ -432,7 +430,7 @@ class WRDS_SETTING_LEVEL {
 }
 
 /// {@category Enum}
-class MIDL_IRemoteDesktopClientSettings_0001 {
+class PasswordEncodingType {
   static const PasswordEncodingUTF8 = 0x00000000;
   static const PasswordEncodingUTF16LE = 0x00000001;
   static const PasswordEncodingUTF16BE = 0x00000002;
@@ -460,7 +458,7 @@ class SnapshotFormatType {
 }
 
 /// {@category Enum}
-class MIDL_IRemoteDesktopClient_0001 {
+class KeyCombinationType {
   static const KeyCombinationHome = 0x00000000;
   static const KeyCombinationLeft = 0x00000001;
   static const KeyCombinationUp = 0x00000002;
@@ -468,3 +466,19 @@ class MIDL_IRemoteDesktopClient_0001 {
   static const KeyCombinationDown = 0x00000004;
   static const KeyCombinationScroll = 0x00000005;
 }
+
+/// {@category Enum}
+class APO_BUFFER_FLAGS {
+  static const BUFFER_INVALID = 0x00000000;
+  static const BUFFER_VALID = 0x00000001;
+  static const BUFFER_SILENT = 0x00000002;
+}
+
+/// {@category Enum}
+class AE_POSITION_FLAGS {
+  static const POSITION_INVALID = 0x00000000;
+  static const POSITION_DISCONTINUOUS = 0x00000001;
+  static const POSITION_CONTINUOUS = 0x00000002;
+  static const POSITION_QPC_ERROR = 0x00000004;
+}
+

@@ -425,9 +425,94 @@ class WINHTTP_WEB_SOCKET_CLOSE_STATUS {
   static const WINHTTP_WEB_SOCKET_INVALID_PAYLOAD_CLOSE_STATUS = 0x000003ef;
   static const WINHTTP_WEB_SOCKET_POLICY_VIOLATION_CLOSE_STATUS = 0x000003f0;
   static const WINHTTP_WEB_SOCKET_MESSAGE_TOO_BIG_CLOSE_STATUS = 0x000003f1;
-  static const WINHTTP_WEB_SOCKET_UNSUPPORTED_EXTENSIONS_CLOSE_STATUS =
-      0x000003f2;
+  static const WINHTTP_WEB_SOCKET_UNSUPPORTED_EXTENSIONS_CLOSE_STATUS = 0x000003f2;
   static const WINHTTP_WEB_SOCKET_SERVER_ERROR_CLOSE_STATUS = 0x000003f3;
-  static const WINHTTP_WEB_SOCKET_SECURE_HANDSHAKE_ERROR_CLOSE_STATUS =
-      0x000003f7;
+  static const WINHTTP_WEB_SOCKET_SECURE_HANDSHAKE_ERROR_CLOSE_STATUS = 0x000003f7;
 }
+
+/// {@category Enum}
+class WINHTTP_STATUS_CALLBACK_lpvStatusInformationFlags {
+  static const WINHTTP_CALLBACK_STATUS_FLAG_CERT_REV_FAILED = 0x00000001;
+  static const WINHTTP_CALLBACK_STATUS_FLAG_INVALID_CERT = 0x00000002;
+  static const WINHTTP_CALLBACK_STATUS_FLAG_CERT_REVOKED = 0x00000004;
+  static const WINHTTP_CALLBACK_STATUS_FLAG_INVALID_CA = 0x00000008;
+  static const WINHTTP_CALLBACK_STATUS_FLAG_CERT_CN_INVALID = 0x00000010;
+  static const WINHTTP_CALLBACK_STATUS_FLAG_CERT_DATE_INVALID = 0x00000020;
+  static const WINHTTP_CALLBACK_STATUS_FLAG_SECURITY_CHANNEL_ERROR = 0x80000000;
+}
+
+/// {@category Enum}
+class WinHttpConnect_nServerPortFlags {
+  static const INTERNET_DEFAULT_HTTP_PORT = 0x00000050;
+  static const INTERNET_DEFAULT_HTTPS_PORT = 0x000001bb;
+  static const INTERNET_DEFAULT_PORT = 0x00000000;
+}
+
+/// {@category Enum}
+class WinHttpOpenRequest_dwFlags {
+  static const WINHTTP_FLAG_BYPASS_PROXY_CACHE = 0x00000100;
+  static const WINHTTP_FLAG_ESCAPE_DISABLE = 0x00000040;
+  static const WINHTTP_FLAG_ESCAPE_DISABLE_QUERY = 0x00000080;
+  static const WINHTTP_FLAG_ESCAPE_PERCENT = 0x00000004;
+  static const WINHTTP_FLAG_NULL_CODEPAGE = 0x00000008;
+  static const WINHTTP_FLAG_REFRESH = 0x00000100;
+  static const WINHTTP_FLAG_SECURE = 0x00800000;
+}
+
+/// {@category Enum}
+class WinHttpCreateUrl_dwFlags {
+  static const ICU_ESCAPE = 0x80000000;
+  static const ICU_REJECT_USERPWD = 0x00004000;
+  static const ICU_DECODE = 0x10000000;
+}
+
+/// {@category Enum}
+class HttpReceiveHttpRequest_Flags {
+  static const HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY = 0x00000001;
+  static const HTTP_RECEIVE_REQUEST_FLAG_FLUSH_BODY = 0x00000002;
+}
+
+/// {@category Enum}
+class HTTP_INITIALIZE {
+  static const HTTP_INITIALIZE_CONFIG = 0x00000002;
+  static const HTTP_INITIALIZE_SERVER = 0x00000001;
+}
+
+/// {@category Enum}
+class WinHttpOpen_dwAccessTypeFlags {
+  static const WINHTTP_ACCESS_TYPE_NO_PROXY = 0x00000001;
+  static const WINHTTP_ACCESS_TYPE_DEFAULT_PROXY = 0x00000000;
+  static const WINHTTP_ACCESS_TYPE_NAMED_PROXY = 0x00000003;
+  static const WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY = 0x00000004;
+}
+
+/// {@category Enum}
+class WINHTTP_ASYNC_RESULT_dwResultFlags {
+  static const API_RECEIVE_RESPONSE = 0x00000001;
+  static const API_QUERY_DATA_AVAILABLE = 0x00000002;
+  static const API_READ_DATA = 0x00000003;
+  static const API_WRITE_DATA = 0x00000004;
+  static const API_SEND_REQUEST = 0x00000005;
+}
+
+/// {@category Enum}
+class URL_COMPONENTS_nSchemeFlags {
+  static const INTERNET_SCHEME_HTTP = 0x00000001;
+  static const INTERNET_SCHEME_HTTPS = 0x00000002;
+}
+
+/// {@category Enum}
+class HTTP_SERVICE_CONFIG_SSL_PARAM_DefaultCertCheckModeFlags {
+  static const None = 0x00000000;
+  static const DefaultCertCheckMode1 = 0x00000001;
+  static const DefaultCertCheckMode2 = 0x00000002;
+  static const DefaultCertCheckMode4 = 0x00000004;
+}
+
+/// {@category Enum}
+class WINHTTP_CREDS_dwAuthScheme {
+  static const WINHTTP_AUTH_SCHEME_BASIC = 0x00000001;
+  static const WINHTTP_AUTH_SCHEME_NTLM = 0x00000002;
+  static const WINHTTP_AUTH_SCHEME_NEGOTIATE = 0x00000010;
+}
+

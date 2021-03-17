@@ -1,105 +1,4 @@
 /// {@category Enum}
-class FIND_FIRST_EX_FLAGS {
-  static const FIND_FIRST_EX_CASE_SENSITIVE = 0x00000001;
-  static const FIND_FIRST_EX_LARGE_FETCH = 0x00000002;
-  static const FIND_FIRST_EX_ON_DISK_ENTRIES_ONLY = 0x00000004;
-}
-
-/// {@category Enum}
-class FILE_NOTIFY_CHANGE {
-  static const FILE_NOTIFY_CHANGE_FILE_NAME = 0x00000001;
-  static const FILE_NOTIFY_CHANGE_DIR_NAME = 0x00000002;
-  static const FILE_NOTIFY_CHANGE_ATTRIBUTES = 0x00000004;
-  static const FILE_NOTIFY_CHANGE_SIZE = 0x00000008;
-  static const FILE_NOTIFY_CHANGE_LAST_WRITE = 0x00000010;
-  static const FILE_NOTIFY_CHANGE_LAST_ACCESS = 0x00000020;
-  static const FILE_NOTIFY_CHANGE_CREATION = 0x00000040;
-  static const FILE_NOTIFY_CHANGE_SECURITY = 0x00000100;
-}
-
-/// {@category Enum}
-class DEFINE_DOS_DEVICE_FLAGS {
-  static const DDD_RAW_TARGET_PATH = 0x00000001;
-  static const DDD_REMOVE_DEFINITION = 0x00000002;
-  static const DDD_EXACT_MATCH_ON_REMOVE = 0x00000004;
-  static const DDD_NO_BROADCAST_SYSTEM = 0x00000008;
-  static const DDD_LUID_BROADCAST_DRIVE = 0x00000010;
-}
-
-/// {@category Enum}
-class FILE_CREATE_FLAGS {
-  static const CREATE_NEW = 0x00000001;
-  static const CREATE_ALWAYS = 0x00000002;
-  static const OPEN_EXISTING = 0x00000003;
-  static const OPEN_ALWAYS = 0x00000004;
-  static const TRUNCATE_EXISTING = 0x00000005;
-}
-
-/// {@category Enum}
-class FILE_SHARE_FLAGS {
-  static const FILE_SHARE_NONE = 0x00000000;
-  static const FILE_SHARE_DELETE = 0x00000004;
-  static const FILE_SHARE_READ = 0x00000001;
-  static const FILE_SHARE_WRITE = 0x00000002;
-}
-
-/// {@category Enum}
-class FILE_FLAGS_AND_ATTRIBUTES {
-  static const FILE_ATTRIBUTE_READONLY = 0x00000001;
-  static const FILE_ATTRIBUTE_HIDDEN = 0x00000002;
-  static const FILE_ATTRIBUTE_SYSTEM = 0x00000004;
-  static const FILE_ATTRIBUTE_DIRECTORY = 0x00000010;
-  static const FILE_ATTRIBUTE_ARCHIVE = 0x00000020;
-  static const FILE_ATTRIBUTE_DEVICE = 0x00000040;
-  static const FILE_ATTRIBUTE_NORMAL = 0x00000080;
-  static const FILE_ATTRIBUTE_TEMPORARY = 0x00000100;
-  static const FILE_ATTRIBUTE_SPARSE_FILE = 0x00000200;
-  static const FILE_ATTRIBUTE_REPARSE_POINT = 0x00000400;
-  static const FILE_ATTRIBUTE_COMPRESSED = 0x00000800;
-  static const FILE_ATTRIBUTE_OFFLINE = 0x00001000;
-  static const FILE_ATTRIBUTE_NOT_CONTENT_INDEXED = 0x00002000;
-  static const FILE_ATTRIBUTE_ENCRYPTED = 0x00004000;
-  static const FILE_ATTRIBUTE_INTEGRITY_STREAM = 0x00008000;
-  static const FILE_ATTRIBUTE_VIRTUAL = 0x00010000;
-  static const FILE_ATTRIBUTE_NO_SCRUB_DATA = 0x00020000;
-  static const FILE_ATTRIBUTE_EA = 0x00040000;
-  static const FILE_ATTRIBUTE_PINNED = 0x00080000;
-  static const FILE_ATTRIBUTE_UNPINNED = 0x00100000;
-  static const FILE_ATTRIBUTE_RECALL_ON_OPEN = 0x00040000;
-  static const FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS = 0x00400000;
-}
-
-/// {@category Enum}
-class FILE_ACCESS_FLAGS {
-  static const FILE_READ_DATA = 0x00000001;
-  static const FILE_LIST_DIRECTORY = 0x00000001;
-  static const FILE_WRITE_DATA = 0x00000002;
-  static const FILE_ADD_FILE = 0x00000002;
-  static const FILE_APPEND_DATA = 0x00000004;
-  static const FILE_ADD_SUBDIRECTORY = 0x00000004;
-  static const FILE_CREATE_PIPE_INSTANCE = 0x00000004;
-  static const FILE_READ_EA = 0x00000008;
-  static const FILE_WRITE_EA = 0x00000010;
-  static const FILE_EXECUTE = 0x00000020;
-  static const FILE_TRAVERSE = 0x00000020;
-  static const FILE_DELETE_CHILD = 0x00000040;
-  static const FILE_READ_ATTRIBUTES = 0x00000080;
-  static const FILE_WRITE_ATTRIBUTES = 0x00000100;
-  static const READ_CONTROL = 0x00020000;
-  static const SYNCHRONIZE = 0x00100000;
-  static const STANDARD_RIGHTS_REQUIRED = 0x000f0000;
-  static const STANDARD_RIGHTS_READ = 0x00020000;
-  static const STANDARD_RIGHTS_WRITE = 0x00020000;
-  static const STANDARD_RIGHTS_EXECUTE = 0x00020000;
-  static const STANDARD_RIGHTS_ALL = 0x001f0000;
-  static const SPECIFIC_RIGHTS_ALL = 0x0000ffff;
-  static const FILE_ALL_ACCESS = 0x001f01ff;
-  static const FILE_GENERIC_READ = 0x00120089;
-  static const FILE_GENERIC_WRITE = 0x00120116;
-  static const FILE_GENERIC_EXECUTE = 0x001200a0;
-}
-
-/// {@category Enum}
 class STREAM_INFO_LEVELS {
   static const FindStreamInfoStandard = 0x00000000;
   static const FindStreamInfoMaxInfoLevel = 0x00000001;
@@ -554,6 +453,402 @@ class TRANSACTION_OUTCOME {
 }
 
 /// {@category Enum}
+class FIND_FIRST_EX_FLAGS {
+  static const FIND_FIRST_EX_CASE_SENSITIVE = 0x00000001;
+  static const FIND_FIRST_EX_LARGE_FETCH = 0x00000002;
+  static const FIND_FIRST_EX_ON_DISK_ENTRIES_ONLY = 0x00000004;
+}
+
+/// {@category Enum}
+class DEFINE_DOS_DEVICE_FLAGS {
+  static const DDD_RAW_TARGET_PATH = 0x00000001;
+  static const DDD_REMOVE_DEFINITION = 0x00000002;
+  static const DDD_EXACT_MATCH_ON_REMOVE = 0x00000004;
+  static const DDD_NO_BROADCAST_SYSTEM = 0x00000008;
+  static const DDD_LUID_BROADCAST_DRIVE = 0x00000010;
+}
+
+/// {@category Enum}
+class FILE_CREATE_FLAGS {
+  static const CREATE_NEW = 0x00000001;
+  static const CREATE_ALWAYS = 0x00000002;
+  static const OPEN_EXISTING = 0x00000003;
+  static const OPEN_ALWAYS = 0x00000004;
+  static const TRUNCATE_EXISTING = 0x00000005;
+}
+
+/// {@category Enum}
+class FILE_SHARE_FLAGS {
+  static const FILE_SHARE_NONE = 0x00000000;
+  static const FILE_SHARE_DELETE = 0x00000004;
+  static const FILE_SHARE_READ = 0x00000001;
+  static const FILE_SHARE_WRITE = 0x00000002;
+}
+
+/// {@category Enum}
+class FILE_FLAGS_AND_ATTRIBUTES {
+  static const FILE_ATTRIBUTE_READONLY = 0x00000001;
+  static const FILE_ATTRIBUTE_HIDDEN = 0x00000002;
+  static const FILE_ATTRIBUTE_SYSTEM = 0x00000004;
+  static const FILE_ATTRIBUTE_DIRECTORY = 0x00000010;
+  static const FILE_ATTRIBUTE_ARCHIVE = 0x00000020;
+  static const FILE_ATTRIBUTE_DEVICE = 0x00000040;
+  static const FILE_ATTRIBUTE_NORMAL = 0x00000080;
+  static const FILE_ATTRIBUTE_TEMPORARY = 0x00000100;
+  static const FILE_ATTRIBUTE_SPARSE_FILE = 0x00000200;
+  static const FILE_ATTRIBUTE_REPARSE_POINT = 0x00000400;
+  static const FILE_ATTRIBUTE_COMPRESSED = 0x00000800;
+  static const FILE_ATTRIBUTE_OFFLINE = 0x00001000;
+  static const FILE_ATTRIBUTE_NOT_CONTENT_INDEXED = 0x00002000;
+  static const FILE_ATTRIBUTE_ENCRYPTED = 0x00004000;
+  static const FILE_ATTRIBUTE_INTEGRITY_STREAM = 0x00008000;
+  static const FILE_ATTRIBUTE_VIRTUAL = 0x00010000;
+  static const FILE_ATTRIBUTE_NO_SCRUB_DATA = 0x00020000;
+  static const FILE_ATTRIBUTE_EA = 0x00040000;
+  static const FILE_ATTRIBUTE_PINNED = 0x00080000;
+  static const FILE_ATTRIBUTE_UNPINNED = 0x00100000;
+  static const FILE_ATTRIBUTE_RECALL_ON_OPEN = 0x00040000;
+  static const FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS = 0x00400000;
+  static const FILE_FLAG_WRITE_THROUGH = 0x80000000;
+  static const FILE_FLAG_OVERLAPPED = 0x40000000;
+  static const FILE_FLAG_NO_BUFFERING = 0x20000000;
+  static const FILE_FLAG_RANDOM_ACCESS = 0x10000000;
+  static const FILE_FLAG_SEQUENTIAL_SCAN = 0x08000000;
+  static const FILE_FLAG_DELETE_ON_CLOSE = 0x04000000;
+  static const FILE_FLAG_BACKUP_SEMANTICS = 0x02000000;
+  static const FILE_FLAG_POSIX_SEMANTICS = 0x01000000;
+  static const FILE_FLAG_SESSION_AWARE = 0x00800000;
+  static const FILE_FLAG_OPEN_REPARSE_POINT = 0x00200000;
+  static const FILE_FLAG_OPEN_NO_RECALL = 0x00100000;
+  static const FILE_FLAG_FIRST_PIPE_INSTANCE = 0x00080000;
+  static const SECURITY_ANONYMOUS = 0x00000000;
+  static const SECURITY_IDENTIFICATION = 0x00010000;
+  static const SECURITY_IMPERSONATION = 0x00020000;
+  static const SECURITY_DELEGATION = 0x00030000;
+  static const SECURITY_CONTEXT_TRACKING = 0x00040000;
+  static const SECURITY_EFFECTIVE_ONLY = 0x00080000;
+  static const SECURITY_SQOS_PRESENT = 0x00100000;
+  static const SECURITY_VALID_SQOS_FLAGS = 0x001f0000;
+}
+
+/// {@category Enum}
+class FILE_ACCESS_FLAGS {
+  static const FILE_READ_DATA = 0x00000001;
+  static const FILE_LIST_DIRECTORY = 0x00000001;
+  static const FILE_WRITE_DATA = 0x00000002;
+  static const FILE_ADD_FILE = 0x00000002;
+  static const FILE_APPEND_DATA = 0x00000004;
+  static const FILE_ADD_SUBDIRECTORY = 0x00000004;
+  static const FILE_CREATE_PIPE_INSTANCE = 0x00000004;
+  static const FILE_READ_EA = 0x00000008;
+  static const FILE_WRITE_EA = 0x00000010;
+  static const FILE_EXECUTE = 0x00000020;
+  static const FILE_TRAVERSE = 0x00000020;
+  static const FILE_DELETE_CHILD = 0x00000040;
+  static const FILE_READ_ATTRIBUTES = 0x00000080;
+  static const FILE_WRITE_ATTRIBUTES = 0x00000100;
+  static const READ_CONTROL = 0x00020000;
+  static const SYNCHRONIZE = 0x00100000;
+  static const STANDARD_RIGHTS_REQUIRED = 0x000f0000;
+  static const STANDARD_RIGHTS_READ = 0x00020000;
+  static const STANDARD_RIGHTS_WRITE = 0x00020000;
+  static const STANDARD_RIGHTS_EXECUTE = 0x00020000;
+  static const STANDARD_RIGHTS_ALL = 0x001f0000;
+  static const SPECIFIC_RIGHTS_ALL = 0x0000ffff;
+  static const FILE_ALL_ACCESS = 0x001f01ff;
+  static const FILE_GENERIC_READ = 0x00120089;
+  static const FILE_GENERIC_WRITE = 0x00120116;
+  static const FILE_GENERIC_EXECUTE = 0x001200a0;
+}
+
+/// {@category Enum}
+class COPYFILE2_MESSAGE_TYPE {
+  static const COPYFILE2_CALLBACK_NONE = 0x00000000;
+  static const COPYFILE2_CALLBACK_CHUNK_STARTED = 0x00000001;
+  static const COPYFILE2_CALLBACK_CHUNK_FINISHED = 0x00000002;
+  static const COPYFILE2_CALLBACK_STREAM_STARTED = 0x00000003;
+  static const COPYFILE2_CALLBACK_STREAM_FINISHED = 0x00000004;
+  static const COPYFILE2_CALLBACK_POLL_CONTINUE = 0x00000005;
+  static const COPYFILE2_CALLBACK_ERROR = 0x00000006;
+  static const COPYFILE2_CALLBACK_MAX = 0x00000007;
+}
+
+/// {@category Enum}
+class COPYFILE2_MESSAGE_ACTION {
+  static const COPYFILE2_PROGRESS_CONTINUE = 0x00000000;
+  static const COPYFILE2_PROGRESS_CANCEL = 0x00000001;
+  static const COPYFILE2_PROGRESS_STOP = 0x00000002;
+  static const COPYFILE2_PROGRESS_QUIET = 0x00000003;
+  static const COPYFILE2_PROGRESS_PAUSE = 0x00000004;
+}
+
+/// {@category Enum}
+class COPYFILE2_COPY_PHASE {
+  static const COPYFILE2_PHASE_NONE = 0x00000000;
+  static const COPYFILE2_PHASE_PREPARE_SOURCE = 0x00000001;
+  static const COPYFILE2_PHASE_PREPARE_DEST = 0x00000002;
+  static const COPYFILE2_PHASE_READ_SOURCE = 0x00000003;
+  static const COPYFILE2_PHASE_WRITE_DESTINATION = 0x00000004;
+  static const COPYFILE2_PHASE_SERVER_COPY = 0x00000005;
+  static const COPYFILE2_PHASE_NAMEGRAFT_COPY = 0x00000006;
+  static const COPYFILE2_PHASE_MAX = 0x00000007;
+}
+
+/// {@category Enum}
+class PRIORITY_HINT {
+  static const IoPriorityHintVeryLow = 0x00000000;
+  static const IoPriorityHintLow = 0x00000001;
+  static const IoPriorityHintNormal = 0x00000002;
+  static const MaximumIoPriorityHintType = 0x00000003;
+}
+
+/// {@category Enum}
+class FILE_ID_TYPE {
+  static const FileIdType = 0x00000000;
+  static const ObjectIdType = 0x00000001;
+  static const ExtendedFileIdType = 0x00000002;
+  static const MaximumFileIdType = 0x00000003;
+}
+
+/// {@category Enum}
+class CLFS_FLAG {
+  static const CLFS_FLAG_FORCE_APPEND = 0x00000001;
+  static const CLFS_FLAG_FORCE_FLUSH = 0x00000002;
+  static const CLFS_FLAG_NO_FLAGS = 0x00000000;
+  static const CLFS_FLAG_USE_RESERVATION = 0x00000004;
+}
+
+/// {@category Enum}
+class SetFilePointer_dwMoveMethod {
+  static const FILE_BEGIN = 0x00000000;
+  static const FILE_CURRENT = 0x00000001;
+  static const FILE_END = 0x00000002;
+}
+
+/// {@category Enum}
+class MoveFileTransacted_dwFlags {
+  static const MOVEFILE_COPY_ALLOWED = 0x00000002;
+  static const MOVEFILE_CREATE_HARDLINK = 0x00000010;
+  static const MOVEFILE_DELAY_UNTIL_REBOOT = 0x00000004;
+  static const MOVEFILE_REPLACE_EXISTING = 0x00000001;
+  static const MOVEFILE_WRITE_THROUGH = 0x00000008;
+  static const MOVEFILE_FAIL_IF_NOT_TRACKABLE = 0x00000020;
+}
+
+/// {@category Enum}
+class FILE_NAME {
+  static const FILE_NAME_NORMALIZED = 0x00000000;
+  static const FILE_NAME_OPENED = 0x00000008;
+}
+
+/// {@category Enum}
+class DefineDosDevice_dwFlags {
+  static const DDD_EXACT_MATCH_ON_REMOVE = 0x00000004;
+  static const DDD_NO_BROADCAST_SYSTEM = 0x00000008;
+  static const DDD_RAW_TARGET_PATH = 0x00000001;
+  static const DDD_REMOVE_DEFINITION = 0x00000002;
+}
+
+/// {@category Enum}
+class CreateFile_dwShareMode {
+  static const None = 0x00000000;
+  static const FILE_SHARE_DELETE = 0x00000004;
+  static const FILE_SHARE_READ = 0x00000001;
+  static const FILE_SHARE_WRITE = 0x00000002;
+}
+
+/// {@category Enum}
+class LZOpenFile_wStyle {
+  static const OF_CANCEL = 0x00000800;
+  static const OF_CREATE = 0x00001000;
+  static const OF_DELETE = 0x00000200;
+  static const OF_EXIST = 0x00004000;
+  static const OF_PARSE = 0x00000100;
+  static const OF_PROMPT = 0x00002000;
+  static const OF_READ = 0x00000000;
+  static const OF_READWRITE = 0x00000002;
+  static const OF_REOPEN = 0x00008000;
+  static const OF_SHARE_DENY_NONE = 0x00000040;
+  static const OF_SHARE_DENY_READ = 0x00000030;
+  static const OF_SHARE_DENY_WRITE = 0x00000020;
+  static const OF_SHARE_EXCLUSIVE = 0x00000010;
+  static const OF_WRITE = 0x00000001;
+  static const OF_SHARE_COMPAT = 0x00000000;
+  static const OF_VERIFY = 0x00000400;
+}
+
+/// {@category Enum}
+class CreateLogFile_fCreateDispositionFlags {
+  static const CREATE_NEW = 0x00000001;
+  static const OPEN_EXISTING = 0x00000003;
+  static const OPEN_ALWAYS = 0x00000004;
+  static const CREATE_ALWAYS = 0x00000002;
+  static const TRUNCATE_EXISTING = 0x00000005;
+}
+
+/// {@category Enum}
+class FILE_NOTIFY_CHANGE {
+  static const FILE_NOTIFY_CHANGE_FILE_NAME = 0x00000001;
+  static const FILE_NOTIFY_CHANGE_DIR_NAME = 0x00000002;
+  static const FILE_NOTIFY_CHANGE_ATTRIBUTES = 0x00000004;
+  static const FILE_NOTIFY_CHANGE_SIZE = 0x00000008;
+  static const FILE_NOTIFY_CHANGE_LAST_WRITE = 0x00000010;
+  static const FILE_NOTIFY_CHANGE_LAST_ACCESS = 0x00000020;
+  static const FILE_NOTIFY_CHANGE_CREATION = 0x00000040;
+  static const FILE_NOTIFY_CHANGE_SECURITY = 0x00000100;
+}
+
+/// {@category Enum}
+class TXFS_MINIVERSION {
+  static const TXFS_MINIVERSION_COMMITTED_VIEW = 0x00000000;
+  static const TXFS_MINIVERSION_DIRTY_VIEW = 0x0000ffff;
+  static const TXFS_MINIVERSION_DEFAULT_VIEW = 0x0000fffe;
+}
+
+/// {@category Enum}
+class ReplaceFile_dwReplaceFlags {
+  static const REPLACEFILE_WRITE_THROUGH = 0x00000001;
+  static const REPLACEFILE_IGNORE_MERGE_ERRORS = 0x00000002;
+  static const REPLACEFILE_IGNORE_ACL_ERRORS = 0x00000004;
+}
+
+/// {@category Enum}
+class DISKQUOTA_USERNAME_RESOLVE {
+  static const DISKQUOTA_USERNAME_RESOLVE_ASYNC = 0x00000002;
+  static const DISKQUOTA_USERNAME_RESOLVE_NONE = 0x00000000;
+  static const DISKQUOTA_USERNAME_RESOLVE_SYNC = 0x00000001;
+}
+
+/// {@category Enum}
+class UpdateNtmsOmidInfo_labelTypeFlags {
+  static const NTMS_OMID_TYPE_FILESYSTEM_INFO = 0x00000002;
+  static const NTMS_OMID_TYPE_RAW_LABEL = 0x00000001;
+}
+
+/// {@category Enum}
+class LockFileEx_dwFlags {
+  static const LOCKFILE_EXCLUSIVE_LOCK = 0x00000002;
+  static const LOCKFILE_FAIL_IMMEDIATELY = 0x00000001;
+}
+
+/// {@category Enum}
+class LPPROGRESS_ROUTINE_dwCallbackReasonFlags {
+  static const CALLBACK_CHUNK_FINISHED = 0x00000000;
+  static const CALLBACK_STREAM_SWITCH = 0x00000001;
+}
+
+/// {@category Enum}
+class FILE_ACTION {
+  static const FILE_ACTION_ADDED = 0x00000001;
+  static const FILE_ACTION_REMOVED = 0x00000002;
+  static const FILE_ACTION_MODIFIED = 0x00000003;
+  static const FILE_ACTION_RENAMED_OLD_NAME = 0x00000004;
+  static const FILE_ACTION_RENAMED_NEW_NAME = 0x00000005;
+}
+
+/// {@category Enum}
+class DELETE_USN_JOURNAL_DATAFlags {
+  static const USN_DELETE_FLAG_DELETE = 0x00000001;
+  static const USN_DELETE_FLAG_NOTIFY = 0x00000002;
+}
+
+/// {@category Enum}
+class SHARE_INFO_501_shi501_type {
+  static const STYPE_DISKTREE = 0x00000000;
+  static const STYPE_PRINTQ = 0x00000001;
+  static const STYPE_DEVICE = 0x00000002;
+  static const STYPE_IPC = 0x00000003;
+}
+
+/// {@category Enum}
+class SHARE_INFO_502_shi502_permissionsFlags {
+  static const ACCESS_READ = 0x00000001;
+  static const ACCESS_WRITE = 0x00000002;
+  static const ACCESS_CREATE = 0x00000004;
+  static const ACCESS_EXEC = 0x00000008;
+  static const ACCESS_DELETE = 0x00000010;
+  static const ACCESS_ATRIB = 0x00000020;
+  static const ACCESS_PERM = 0x00000040;
+  static const ACCESS_ALL = 0x00008000;
+}
+
+/// {@category Enum}
+class NTMS_MEDIATYPEINFORMATION_DeviceTypeFlags {
+  static const FILE_DEVICE_CD_ROM = 0x00000002;
+  static const FILE_DEVICE_DISK = 0x00000007;
+  static const FILE_DEVICE_TAPE = 0x0000001f;
+  static const FILE_DEVICE_DVD = 0x00000033;
+}
+
+/// {@category Enum}
+class TXFS_MODIFY_RMFlags {
+  static const TXFS_RM_FLAG_LOGGING_MODE = 0x00000001;
+  static const TXFS_RM_FLAG_RENAME_RM = 0x00000002;
+  static const TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MAX = 0x00000004;
+  static const TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MIN = 0x00000008;
+  static const TXFS_RM_FLAG_LOG_GROWTH_INCREMENT_NUM_CONTAINERS = 0x00000010;
+  static const TXFS_RM_FLAG_LOG_GROWTH_INCREMENT_PERCENT = 0x00000020;
+  static const TXFS_RM_FLAG_LOG_AUTO_SHRINK_PERCENTAGE = 0x00000040;
+  static const TXFS_RM_FLAG_LOG_NO_CONTAINER_COUNT_MAX = 0x00000080;
+  static const TXFS_RM_FLAG_LOG_NO_CONTAINER_COUNT_MIN = 0x00000100;
+  static const TXFS_RM_FLAG_GROW_LOG = 0x00000400;
+  static const TXFS_RM_FLAG_SHRINK_LOG = 0x00000800;
+  static const TXFS_RM_FLAG_ENFORCE_MINIMUM_SIZE = 0x00001000;
+  static const TXFS_RM_FLAG_PRESERVE_CHANGES = 0x00002000;
+  static const TXFS_RM_FLAG_RESET_RM_AT_NEXT_START = 0x00004000;
+  static const TXFS_RM_FLAG_DO_NOT_RESET_RM_AT_NEXT_START = 0x00008000;
+  static const TXFS_RM_FLAG_PREFER_CONSISTENCY = 0x00010000;
+  static const TXFS_RM_FLAG_PREFER_AVAILABILITY = 0x00020000;
+}
+
+/// {@category Enum}
+class FILESYSTEM_STATISTICS_TYPE {
+  static const FILESYSTEM_STATISTICS_TYPE_EXFAT = 0x00000003;
+  static const FILESYSTEM_STATISTICS_TYPE_FAT = 0x00000002;
+  static const FILESYSTEM_STATISTICS_TYPE_NTFS = 0x00000001;
+}
+
+/// {@category Enum}
+class USN_RECORD_V4_SourceInfoFlags {
+  static const USN_SOURCE_AUXILIARY_DATA = 0x00000002;
+  static const USN_SOURCE_DATA_MANAGEMENT = 0x00000001;
+  static const USN_SOURCE_REPLICATION_MANAGEMENT = 0x00000004;
+  static const USN_SOURCE_CLIENT_REPLICATION_MANAGEMENT = 0x00000008;
+}
+
+/// {@category Enum}
+class FILE_STORAGE_TIER_Flags {
+  static const FILE_STORAGE_TIER_FLAG_NO_SEEK_PENALTY = 0x00020000;
+}
+
+/// {@category Enum}
+class SESSION_INFO_502_sesi502_user_flags {
+  static const SESS_GUEST = 0x00000001;
+  static const SESS_NOENCRYPTION = 0x00000002;
+}
+
+/// {@category Enum}
+class TXF_LOG_RECORD_BASE_RecordTypeFlags {
+  static const TXF_LOG_RECORD_TYPE_AFFECTED_FILE = 0x00000004;
+  static const TXF_LOG_RECORD_TYPE_TRUNCATE = 0x00000002;
+  static const TXF_LOG_RECORD_TYPE_WRITE = 0x00000001;
+}
+
+/// {@category Enum}
+class FILE_INFO_3_fi3_permissionsFlags {
+  static const PERM_FILE_READ = 0x00000001;
+  static const PERM_FILE_WRITE = 0x00000002;
+  static const PERM_FILE_CREATE = 0x00000004;
+}
+
+/// {@category Enum}
+class DISK_CACHE_INFORMATION_ReadRetentionPriorityFlags {
+  static const EqualPriority = 0x00000000;
+  static const KeepPrefetchedData = 0x00000001;
+  static const KeepReadData = 0x00000002;
+}
+
+/// {@category Enum}
 class FINDEX_INFO_LEVELS {
   static const FindExInfoStandard = 0x00000000;
   static const FindExInfoBasic = 0x00000001;
@@ -819,51 +1114,3 @@ class FILE_STORAGE_TIER_MEDIA_TYPE {
   static const FileStorageTierMediaTypeMax = 0x00000005;
 }
 
-/// {@category Enum}
-class COPYFILE2_MESSAGE_TYPE {
-  static const COPYFILE2_CALLBACK_NONE = 0x00000000;
-  static const COPYFILE2_CALLBACK_CHUNK_STARTED = 0x00000001;
-  static const COPYFILE2_CALLBACK_CHUNK_FINISHED = 0x00000002;
-  static const COPYFILE2_CALLBACK_STREAM_STARTED = 0x00000003;
-  static const COPYFILE2_CALLBACK_STREAM_FINISHED = 0x00000004;
-  static const COPYFILE2_CALLBACK_POLL_CONTINUE = 0x00000005;
-  static const COPYFILE2_CALLBACK_ERROR = 0x00000006;
-  static const COPYFILE2_CALLBACK_MAX = 0x00000007;
-}
-
-/// {@category Enum}
-class COPYFILE2_MESSAGE_ACTION {
-  static const COPYFILE2_PROGRESS_CONTINUE = 0x00000000;
-  static const COPYFILE2_PROGRESS_CANCEL = 0x00000001;
-  static const COPYFILE2_PROGRESS_STOP = 0x00000002;
-  static const COPYFILE2_PROGRESS_QUIET = 0x00000003;
-  static const COPYFILE2_PROGRESS_PAUSE = 0x00000004;
-}
-
-/// {@category Enum}
-class COPYFILE2_COPY_PHASE {
-  static const COPYFILE2_PHASE_NONE = 0x00000000;
-  static const COPYFILE2_PHASE_PREPARE_SOURCE = 0x00000001;
-  static const COPYFILE2_PHASE_PREPARE_DEST = 0x00000002;
-  static const COPYFILE2_PHASE_READ_SOURCE = 0x00000003;
-  static const COPYFILE2_PHASE_WRITE_DESTINATION = 0x00000004;
-  static const COPYFILE2_PHASE_SERVER_COPY = 0x00000005;
-  static const COPYFILE2_PHASE_NAMEGRAFT_COPY = 0x00000006;
-  static const COPYFILE2_PHASE_MAX = 0x00000007;
-}
-
-/// {@category Enum}
-class PRIORITY_HINT {
-  static const IoPriorityHintVeryLow = 0x00000000;
-  static const IoPriorityHintLow = 0x00000001;
-  static const IoPriorityHintNormal = 0x00000002;
-  static const MaximumIoPriorityHintType = 0x00000003;
-}
-
-/// {@category Enum}
-class FILE_ID_TYPE {
-  static const FileIdType = 0x00000000;
-  static const ObjectIdType = 0x00000001;
-  static const ExtendedFileIdType = 0x00000002;
-  static const MaximumFileIdType = 0x00000003;
-}

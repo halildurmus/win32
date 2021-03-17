@@ -52,3 +52,4 @@ class RM_FILTER_ACTION {
   static const RmNoRestart = 0x00000001;
   static const RmNoShutdown = 0x00000002;
 }
+

@@ -117,3 +117,10 @@ class CM_NOTIFY_ACTION {
   static const CM_NOTIFY_ACTION_DEVICEINSTANCEREMOVED = 0x00000009;
   static const CM_NOTIFY_ACTION_MAX = 0x0000000a;
 }
+
+/// {@category Enum}
+class SetupDiBuildDriverInfoList_DriverTypeFlags {
+  static const SPDIT_CLASSDRIVER = 0x00000001;
+  static const SPDIT_COMPATDRIVER = 0x00000002;
+}
+

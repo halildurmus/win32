@@ -1,79 +1,4 @@
 /// {@category Enum}
-class NET_IF_OPER_STATUS {
-  static const NET_IF_OPER_STATUS_UP = 0x00000001;
-  static const NET_IF_OPER_STATUS_DOWN = 0x00000002;
-  static const NET_IF_OPER_STATUS_TESTING = 0x00000003;
-  static const NET_IF_OPER_STATUS_UNKNOWN = 0x00000004;
-  static const NET_IF_OPER_STATUS_DORMANT = 0x00000005;
-  static const NET_IF_OPER_STATUS_NOT_PRESENT = 0x00000006;
-  static const NET_IF_OPER_STATUS_LOWER_LAYER_DOWN = 0x00000007;
-}
-
-/// {@category Enum}
-class NET_IF_ADMIN_STATUS {
-  static const NET_IF_ADMIN_STATUS_UP = 0x00000001;
-  static const NET_IF_ADMIN_STATUS_DOWN = 0x00000002;
-  static const NET_IF_ADMIN_STATUS_TESTING = 0x00000003;
-}
-
-/// {@category Enum}
-class NET_IF_CONNECTION_TYPE {
-  static const NET_IF_CONNECTION_DEDICATED = 0x00000001;
-  static const NET_IF_CONNECTION_PASSIVE = 0x00000002;
-  static const NET_IF_CONNECTION_DEMAND = 0x00000003;
-  static const NET_IF_CONNECTION_MAXIMUM = 0x00000004;
-}
-
-/// {@category Enum}
-class TUNNEL_TYPE {
-  static const TUNNEL_TYPE_NONE = 0x00000000;
-  static const TUNNEL_TYPE_OTHER = 0x00000001;
-  static const TUNNEL_TYPE_DIRECT = 0x00000002;
-  static const TUNNEL_TYPE_6TO4 = 0x0000000b;
-  static const TUNNEL_TYPE_ISATAP = 0x0000000d;
-  static const TUNNEL_TYPE_TEREDO = 0x0000000e;
-  static const TUNNEL_TYPE_IPHTTPS = 0x0000000f;
-}
-
-/// {@category Enum}
-class NET_IF_ACCESS_TYPE {
-  static const NET_IF_ACCESS_LOOPBACK = 0x00000001;
-  static const NET_IF_ACCESS_BROADCAST = 0x00000002;
-  static const NET_IF_ACCESS_POINT_TO_POINT = 0x00000003;
-  static const NET_IF_ACCESS_POINT_TO_MULTI_POINT = 0x00000004;
-  static const NET_IF_ACCESS_MAXIMUM = 0x00000005;
-}
-
-/// {@category Enum}
-class NET_IF_DIRECTION_TYPE {
-  static const NET_IF_DIRECTION_SENDRECEIVE = 0x00000000;
-  static const NET_IF_DIRECTION_SENDONLY = 0x00000001;
-  static const NET_IF_DIRECTION_RECEIVEONLY = 0x00000002;
-  static const NET_IF_DIRECTION_MAXIMUM = 0x00000003;
-}
-
-/// {@category Enum}
-class NET_IF_MEDIA_CONNECT_STATE {
-  static const MediaConnectStateUnknown = 0x00000000;
-  static const MediaConnectStateConnected = 0x00000001;
-  static const MediaConnectStateDisconnected = 0x00000002;
-}
-
-/// {@category Enum}
-class NET_IF_MEDIA_DUPLEX_STATE {
-  static const MediaDuplexStateUnknown = 0x00000000;
-  static const MediaDuplexStateHalf = 0x00000001;
-  static const MediaDuplexStateFull = 0x00000002;
-}
-
-/// {@category Enum}
-class MIB_IF_TABLE_LEVEL {
-  static const MibIfTableNormal = 0x00000000;
-  static const MibIfTableRaw = 0x00000001;
-  static const MibIfTableNormalWithoutStatistics = 0x00000002;
-}
-
-/// {@category Enum}
 class NL_ROUTE_PROTOCOL {
   static const RouteProtocolOther = 0x00000001;
   static const RouteProtocolLocal = 0x00000002;
@@ -186,3 +111,79 @@ class NL_ROUTER_DISCOVERY_BEHAVIOR {
   static const RouterDiscoveryDhcp = 0x00000002;
   static const RouterDiscoveryUnchanged = 0xffffffff;
 }
+
+/// {@category Enum}
+class NET_IF_OPER_STATUS {
+  static const NET_IF_OPER_STATUS_UP = 0x00000001;
+  static const NET_IF_OPER_STATUS_DOWN = 0x00000002;
+  static const NET_IF_OPER_STATUS_TESTING = 0x00000003;
+  static const NET_IF_OPER_STATUS_UNKNOWN = 0x00000004;
+  static const NET_IF_OPER_STATUS_DORMANT = 0x00000005;
+  static const NET_IF_OPER_STATUS_NOT_PRESENT = 0x00000006;
+  static const NET_IF_OPER_STATUS_LOWER_LAYER_DOWN = 0x00000007;
+}
+
+/// {@category Enum}
+class NET_IF_ADMIN_STATUS {
+  static const NET_IF_ADMIN_STATUS_UP = 0x00000001;
+  static const NET_IF_ADMIN_STATUS_DOWN = 0x00000002;
+  static const NET_IF_ADMIN_STATUS_TESTING = 0x00000003;
+}
+
+/// {@category Enum}
+class NET_IF_CONNECTION_TYPE {
+  static const NET_IF_CONNECTION_DEDICATED = 0x00000001;
+  static const NET_IF_CONNECTION_PASSIVE = 0x00000002;
+  static const NET_IF_CONNECTION_DEMAND = 0x00000003;
+  static const NET_IF_CONNECTION_MAXIMUM = 0x00000004;
+}
+
+/// {@category Enum}
+class TUNNEL_TYPE {
+  static const TUNNEL_TYPE_NONE = 0x00000000;
+  static const TUNNEL_TYPE_OTHER = 0x00000001;
+  static const TUNNEL_TYPE_DIRECT = 0x00000002;
+  static const TUNNEL_TYPE_6TO4 = 0x0000000b;
+  static const TUNNEL_TYPE_ISATAP = 0x0000000d;
+  static const TUNNEL_TYPE_TEREDO = 0x0000000e;
+  static const TUNNEL_TYPE_IPHTTPS = 0x0000000f;
+}
+
+/// {@category Enum}
+class NET_IF_ACCESS_TYPE {
+  static const NET_IF_ACCESS_LOOPBACK = 0x00000001;
+  static const NET_IF_ACCESS_BROADCAST = 0x00000002;
+  static const NET_IF_ACCESS_POINT_TO_POINT = 0x00000003;
+  static const NET_IF_ACCESS_POINT_TO_MULTI_POINT = 0x00000004;
+  static const NET_IF_ACCESS_MAXIMUM = 0x00000005;
+}
+
+/// {@category Enum}
+class NET_IF_DIRECTION_TYPE {
+  static const NET_IF_DIRECTION_SENDRECEIVE = 0x00000000;
+  static const NET_IF_DIRECTION_SENDONLY = 0x00000001;
+  static const NET_IF_DIRECTION_RECEIVEONLY = 0x00000002;
+  static const NET_IF_DIRECTION_MAXIMUM = 0x00000003;
+}
+
+/// {@category Enum}
+class NET_IF_MEDIA_CONNECT_STATE {
+  static const MediaConnectStateUnknown = 0x00000000;
+  static const MediaConnectStateConnected = 0x00000001;
+  static const MediaConnectStateDisconnected = 0x00000002;
+}
+
+/// {@category Enum}
+class NET_IF_MEDIA_DUPLEX_STATE {
+  static const MediaDuplexStateUnknown = 0x00000000;
+  static const MediaDuplexStateHalf = 0x00000001;
+  static const MediaDuplexStateFull = 0x00000002;
+}
+
+/// {@category Enum}
+class MIB_IF_TABLE_LEVEL {
+  static const MibIfTableNormal = 0x00000000;
+  static const MibIfTableRaw = 0x00000001;
+  static const MibIfTableNormalWithoutStatistics = 0x00000002;
+}
+

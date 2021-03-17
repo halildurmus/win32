@@ -13,3 +13,4 @@ class SW_DEVICE_LIFETIME {
   static const SWDeviceLifetimeParentPresent = 0x00000001;
   static const SWDeviceLifetimeMax = 0x00000002;
 }
+

@@ -88,3 +88,4 @@ class RDPENCOMAPI_CONSTANTS {
   static const CONST_CONN_INTERVAL = 0x00000032;
   static const CONST_ATTENDEE_ID_DEFAULT = 0xffffffff;
 }
+

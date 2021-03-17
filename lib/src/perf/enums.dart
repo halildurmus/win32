@@ -1,27 +1,4 @@
 /// {@category Enum}
-class PerfRegInfoType {
-  static const PERF_REG_COUNTERSET_STRUCT = 0x00000001;
-  static const PERF_REG_COUNTER_STRUCT = 0x00000002;
-  static const PERF_REG_COUNTERSET_NAME_STRING = 0x00000003;
-  static const PERF_REG_COUNTERSET_HELP_STRING = 0x00000004;
-  static const PERF_REG_COUNTER_NAME_STRINGS = 0x00000005;
-  static const PERF_REG_COUNTER_HELP_STRINGS = 0x00000006;
-  static const PERF_REG_PROVIDER_NAME = 0x00000007;
-  static const PERF_REG_PROVIDER_GUID = 0x00000008;
-  static const PERF_REG_COUNTERSET_ENGLISH_NAME = 0x00000009;
-  static const PERF_REG_COUNTER_ENGLISH_NAMES = 0x0000000a;
-}
-
-/// {@category Enum}
-class PerfCounterDataType {
-  static const PERF_ERROR_RETURN = 0x00000000;
-  static const PERF_SINGLE_COUNTER = 0x00000001;
-  static const PERF_MULTIPLE_COUNTERS = 0x00000002;
-  static const PERF_MULTIPLE_INSTANCES = 0x00000004;
-  static const PERF_COUNTERSET = 0x00000006;
-}
-
-/// {@category Enum}
 class DataCollectorType {
   static const plaPerformanceCounter = 0x00000000;
   static const plaTrace = 0x00000001;
@@ -131,3 +108,92 @@ class FolderActionSteps {
   static const plaDeleteCab = 0x00000008;
   static const plaDeleteReport = 0x00000010;
 }
+
+/// {@category Enum}
+class PerfRegInfoType {
+  static const PERF_REG_COUNTERSET_STRUCT = 0x00000001;
+  static const PERF_REG_COUNTER_STRUCT = 0x00000002;
+  static const PERF_REG_COUNTERSET_NAME_STRING = 0x00000003;
+  static const PERF_REG_COUNTERSET_HELP_STRING = 0x00000004;
+  static const PERF_REG_COUNTER_NAME_STRINGS = 0x00000005;
+  static const PERF_REG_COUNTER_HELP_STRINGS = 0x00000006;
+  static const PERF_REG_PROVIDER_NAME = 0x00000007;
+  static const PERF_REG_PROVIDER_GUID = 0x00000008;
+  static const PERF_REG_COUNTERSET_ENGLISH_NAME = 0x00000009;
+  static const PERF_REG_COUNTER_ENGLISH_NAMES = 0x0000000a;
+}
+
+/// {@category Enum}
+class PerfCounterDataType {
+  static const PERF_ERROR_RETURN = 0x00000000;
+  static const PERF_SINGLE_COUNTER = 0x00000001;
+  static const PERF_MULTIPLE_COUNTERS = 0x00000002;
+  static const PERF_MULTIPLE_INSTANCES = 0x00000004;
+  static const PERF_COUNTERSET = 0x00000006;
+}
+
+/// {@category Enum}
+class PERF_DETAIL {
+  static const PERF_DETAIL_NOVICE = 0x00000064;
+  static const PERF_DETAIL_ADVANCED = 0x000000c8;
+  static const PERF_DETAIL_EXPERT = 0x0000012c;
+  static const PERF_DETAIL_WIZARD = 0x00000190;
+}
+
+/// {@category Enum}
+class PdhSetDefaultRealTimeDataSource_dwDataSourceIdFlags {
+  static const DATA_SOURCE_REGISTRY = 0x00000001;
+  static const DATA_SOURCE_WBEM = 0x00000004;
+}
+
+/// {@category Enum}
+class PdhMakeCounterPath_dwFlags {
+  static const PDH_PATH_WBEM_RESULT = 0x00000001;
+  static const PDH_PATH_WBEM_INPUT = 0x00000002;
+  static const None = 0x00000000;
+}
+
+/// {@category Enum}
+class PDH_FMT {
+  static const PDH_FMT_DOUBLE = 0x00000200;
+  static const PDH_FMT_LARGE = 0x00000400;
+  static const PDH_FMT_LONG = 0x00000100;
+}
+
+/// {@category Enum}
+class PDH_LOG_TYPE {
+  static const PDH_LOG_TYPE_UNDEFINED = 0x00000000;
+  static const PDH_LOG_TYPE_CSV = 0x00000001;
+  static const PDH_LOG_TYPE_SQL = 0x00000007;
+  static const PDH_LOG_TYPE_TSV = 0x00000002;
+  static const PDH_LOG_TYPE_BINARY = 0x00000008;
+  static const PDH_LOG_TYPE_PERFMON = 0x00000006;
+}
+
+/// {@category Enum}
+class PDH_LOG {
+  static const PDH_LOG_READ_ACCESS = 0x00010000;
+  static const PDH_LOG_WRITE_ACCESS = 0x00020000;
+  static const PDH_LOG_UPDATE_ACCESS = 0x00040000;
+}
+
+/// {@category Enum}
+class PdhSelectDataSource_dwFlags {
+  static const PDH_FLAGS_FILE_BROWSER_ONLY = 0x00000001;
+  static const None = 0x00000000;
+}
+
+/// {@category Enum}
+class PdhGetDllVersion_lpdwVersionFlags {
+  static const PDH_CVERSION_WIN50 = 0x00000500;
+  static const PDH_VERSION = 0x00000503;
+}
+
+/// {@category Enum}
+class PERF_COUNTER_REG_INFO_AggregateFuncFlags {
+  static const PERF_AGGREGATE_UNDEFINED = 0x00000000;
+  static const PERF_AGGREGATE_TOTAL = 0x00000001;
+  static const PERF_AGGREGATE_AVG = 0x00000002;
+  static const PERF_AGGREGATE_MIN = 0x00000003;
+}
+

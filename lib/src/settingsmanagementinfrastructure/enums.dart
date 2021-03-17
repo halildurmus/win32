@@ -55,3 +55,4 @@ class WcmNamespaceAccess {
   static const ReadOnlyAccess = 0x00000001;
   static const ReadWriteAccess = 0x00000002;
 }
+

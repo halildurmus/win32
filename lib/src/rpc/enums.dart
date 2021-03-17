@@ -166,3 +166,28 @@ class MIDL_ES_HANDLE_STYLE {
   static const MES_FIXED_BUFFER_HANDLE = 0x00000001;
   static const MES_DYNAMIC_BUFFER_HANDLE = 0x00000002;
 }
+
+/// {@category Enum}
+class RpcNsGroupDelete_GroupNameSyntax {
+  static const RPC_C_NS_SYNTAX_DEFAULT = 0x00000000;
+  static const RPC_C_NS_SYNTAX_DCE = 0x00000003;
+}
+
+/// {@category Enum}
+class RPC_C_HTTP_AUTHN_TARGET {
+  static const RPC_C_HTTP_AUTHN_TARGET_SERVER = 0x00000001;
+  static const RPC_C_HTTP_AUTHN_TARGET_PROXY = 0x00000002;
+}
+
+/// {@category Enum}
+class RPC_C_QOS_IDENTITY {
+  static const RPC_C_QOS_IDENTITY_STATIC = 0x00000000;
+  static const RPC_C_QOS_IDENTITY_DYNAMIC = 0x00000001;
+}
+
+/// {@category Enum}
+class RPC_BINDING_HANDLE_OPTIONS_V1Flags {
+  static const RPC_BHO_NONCAUSAL = 0x00000001;
+  static const RPC_BHO_DONTLINGER = 0x00000002;
+}
+

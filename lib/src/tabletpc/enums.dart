@@ -828,8 +828,7 @@ class DISPID_InkRecoAlternate {
   static const DISPID_InkRecoAlternate_GetPropertyValue = 0x0000000c;
   static const DISPID_InkRecoAlternate_LineAlternates = 0x0000000d;
   static const DISPID_InkRecoAlternate_ConfidenceAlternates = 0x0000000e;
-  static const DISPID_InkRecoAlternate_AlternatesWithConstantPropertyValues =
-      0x0000000f;
+  static const DISPID_InkRecoAlternate_AlternatesWithConstantPropertyValues = 0x0000000f;
 }
 
 /// {@category Enum}
@@ -1273,3 +1272,4 @@ class enumRECO_TYPE {
   static const RECO_TYPE_WSTRING = 0x00000000;
   static const RECO_TYPE_WCHAR = 0x00000001;
 }
+

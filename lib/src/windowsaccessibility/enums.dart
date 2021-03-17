@@ -1,4 +1,90 @@
 /// {@category Enum}
+class STICKYKEYS_FLAGS {
+  static const SKF_STICKYKEYSON = 0x00000001;
+  static const SKF_AVAILABLE = 0x00000002;
+  static const SKF_HOTKEYACTIVE = 0x00000004;
+  static const SKF_CONFIRMHOTKEY = 0x00000008;
+  static const SKF_HOTKEYSOUND = 0x00000010;
+  static const SKF_INDICATOR = 0x00000020;
+  static const SKF_AUDIBLEFEEDBACK = 0x00000040;
+  static const SKF_TRISTATE = 0x00000080;
+  static const SKF_TWOKEYSOFF = 0x00000100;
+  static const SKF_LALTLATCHED = 0x10000000;
+  static const SKF_LCTLLATCHED = 0x04000000;
+  static const SKF_LSHIFTLATCHED = 0x01000000;
+  static const SKF_RALTLATCHED = 0x20000000;
+  static const SKF_RCTLLATCHED = 0x08000000;
+  static const SKF_RSHIFTLATCHED = 0x02000000;
+  static const SKF_LWINLATCHED = 0x40000000;
+  static const SKF_RWINLATCHED = 0x80000000;
+  static const SKF_LALTLOCKED = 0x00100000;
+  static const SKF_LCTLLOCKED = 0x00040000;
+  static const SKF_LSHIFTLOCKED = 0x00010000;
+  static const SKF_RALTLOCKED = 0x00200000;
+  static const SKF_RCTLLOCKED = 0x00080000;
+  static const SKF_RSHIFTLOCKED = 0x00020000;
+  static const SKF_LWINLOCKED = 0x00400000;
+  static const SKF_RWINLOCKED = 0x00800000;
+}
+
+/// {@category Enum}
+class SOUNDSENTRY_FLAGS {
+  static const SSF_SOUNDSENTRYON = 0x00000001;
+  static const SSF_AVAILABLE = 0x00000002;
+  static const SSF_INDICATOR = 0x00000004;
+}
+
+/// {@category Enum}
+class AccSetRunningUtilityState_dwUtilityStateFlags {
+  static const ANRUS_ON_SCREEN_KEYBOARD_ACTIVE = 0x00000001;
+  static const ANRUS_TOUCH_MODIFICATION_ACTIVE = 0x00000002;
+  static const ANRUS_PRIORITY_AUDIO_ACTIVE = 0x00000004;
+  static const ANRUS_PRIORITY_AUDIO_ACTIVE_NODUCK = 0x00000008;
+}
+
+/// {@category Enum}
+class SOUNDSENTRYW_iFSGrafEffect {
+  static const SSGF_DISPLAY = 0x00000003;
+  static const SSGF_NONE = 0x00000000;
+}
+
+/// {@category Enum}
+class SERIALKEYSW_dwFlags {
+  static const SERKF_AVAILABLE = 0x00000002;
+  static const SERKF_INDICATOR = 0x00000004;
+  static const SERKF_SERIALKEYSON = 0x00000001;
+}
+
+/// {@category Enum}
+class HIGHCONTRASTW_dwFlags {
+  static const HCF_HIGHCONTRASTON = 0x00000001;
+  static const HCF_AVAILABLE = 0x00000002;
+  static const HCF_HOTKEYACTIVE = 0x00000004;
+  static const HCF_CONFIRMHOTKEY = 0x00000008;
+  static const HCF_HOTKEYSOUND = 0x00000010;
+  static const HCF_INDICATOR = 0x00000020;
+  static const HCF_HOTKEYAVAILABLE = 0x00000040;
+  static const HCF_OPTION_NOTHEMECHANGE = 0x00001000;
+}
+
+/// {@category Enum}
+class SOUNDSENTRYA_iFSTextEffect {
+  static const SSTF_BORDER = 0x00000002;
+  static const SSTF_CHARS = 0x00000001;
+  static const SSTF_DISPLAY = 0x00000003;
+  static const SSTF_NONE = 0x00000000;
+}
+
+/// {@category Enum}
+class SOUNDSENTRYA_iWindowsEffect {
+  static const SSWF_CUSTOM = 0x00000004;
+  static const SSWF_DISPLAY = 0x00000003;
+  static const SSWF_NONE = 0x00000000;
+  static const SSWF_TITLE = 0x00000001;
+  static const SSWF_WINDOW = 0x00000002;
+}
+
+/// {@category Enum}
 class AnnoScope {
   static const ANNO_THIS = 0x00000000;
   static const ANNO_CONTAINER = 0x00000001;
@@ -452,3 +538,4 @@ class AsyncContentLoadedState {
   static const AsyncContentLoadedState_Progress = 0x00000001;
   static const AsyncContentLoadedState_Completed = 0x00000002;
 }
+

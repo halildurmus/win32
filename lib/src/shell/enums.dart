@@ -708,7 +708,7 @@ class SVUIA_STATUS {
 }
 
 /// {@category Enum}
-class tagSORTDIRECTION {
+class SORTDIRECTION {
   static const SORT_DESCENDING = 0xffffffff;
   static const SORT_ASCENDING = 0x00000001;
 }
@@ -947,7 +947,7 @@ class EXPPS {
 }
 
 /// {@category Enum}
-class tagDESKBANDCID {
+class DESKBANDCID {
   static const DBID_BANDINFOCHANGED = 0x00000000;
   static const DBID_SHOWONLY = 0x00000001;
   static const DBID_MAXIMIZEBAND = 0x00000002;
@@ -1063,18 +1063,18 @@ class NAMESPACEWALKFLAG {
 }
 
 /// {@category Enum}
-class tagBANDSITECID {
+class BANDSITECID {
   static const BSID_BANDADDED = 0x00000000;
   static const BSID_BANDREMOVED = 0x00000001;
 }
 
 /// {@category Enum}
-class tagMENUBANDHANDLERCID {
+class MENUBANDHANDLERCID {
   static const MBHANDCID_PIDLSELECT = 0x00000000;
 }
 
 /// {@category Enum}
-class tagMENUPOPUPSELECT {
+class MENUPOPUPSELECT {
   static const MPOS_EXECUTE = 0x00000000;
   static const MPOS_FULLCANCEL = 0x00000001;
   static const MPOS_CANCELLEVEL = 0x00000002;
@@ -1084,7 +1084,7 @@ class tagMENUPOPUPSELECT {
 }
 
 /// {@category Enum}
-class tagMENUPOPUPPOPUPFLAGS {
+class MENUPOPUPPOPUPFLAGS {
   static const MPPF_SETFOCUS = 0x00000001;
   static const MPPF_INITIALSELECT = 0x00000002;
   static const MPPF_NOANIMATE = 0x00000004;
@@ -1236,20 +1236,20 @@ class ATTACHMENT_ACTION {
 }
 
 /// {@category Enum}
-class tagSMINFOMASK {
+class SMINFOMASK {
   static const SMIM_TYPE = 0x00000001;
   static const SMIM_FLAGS = 0x00000002;
   static const SMIM_ICON = 0x00000004;
 }
 
 /// {@category Enum}
-class tagSMINFOTYPE {
+class SMINFOTYPE {
   static const SMIT_SEPARATOR = 0x00000001;
   static const SMIT_STRING = 0x00000002;
 }
 
 /// {@category Enum}
-class tagSMINFOFLAGS {
+class SMINFOFLAGS {
   static const SMIF_ICON = 0x00000001;
   static const SMIF_ACCELERATOR = 0x00000002;
   static const SMIF_DROPTARGET = 0x00000004;
@@ -1728,7 +1728,7 @@ class DSH_FLAGS {
 }
 
 /// {@category Enum}
-class tagCDBURNINGEXTENSIONRET {
+class CDBURNINGEXTENSIONRET {
   static const CDBE_RET_DEFAULT = 0x00000000;
   static const CDBE_RET_DONTRUNOTHEREXTS = 0x00000001;
   static const CDBE_RET_STOPWIZARD = 0x00000002;
@@ -2148,7 +2148,7 @@ class RESTRICTIONS {
 }
 
 /// {@category Enum}
-class tagOPEN_AS_INFO_FLAGS {
+class OPEN_AS_INFO_FLAGS {
   static const OAIF_ALLOW_REGISTRATION = 0x00000001;
   static const OAIF_REGISTER_EXT = 0x00000002;
   static const OAIF_EXEC = 0x00000004;
@@ -2187,7 +2187,7 @@ class SHELL_UI_COMPONENT {
 }
 
 /// {@category Enum}
-class tagSFBS_FLAGS {
+class SFBS_FLAGS {
   static const SFBS_FLAGS_ROUND_TO_NEAREST_DISPLAYED_DIGIT = 0x00000001;
   static const SFBS_FLAGS_TRUNCATE_UNDISPLAYED_DECIMAL_DIGITS = 0x00000002;
 }
@@ -2356,6 +2356,7 @@ class SHGLOBALCOUNTER {
   static const GLOBALCOUNTER_IESESSIONS = 0x0000000a;
   static const GLOBALCOUNTER_IEONLY_SESSIONS = 0x0000000b;
   static const GLOBALCOUNTER_APPLICATION_DESTINATIONS = 0x0000000c;
+  static const __UNUSED_RECYCLE_WAS_GLOBALCOUNTER_CSCSYNCINPROGRESS = 0x0000000d;
   static const GLOBALCOUNTER_BITBUCKETNUMDELETERS = 0x0000000e;
   static const GLOBALCOUNTER_RECYCLEDIRTYCOUNT_SHARES = 0x0000000f;
   static const GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_A = 0x00000010;
@@ -2384,6 +2385,8 @@ class SHGLOBALCOUNTER {
   static const GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_X = 0x00000027;
   static const GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_Y = 0x00000028;
   static const GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_Z = 0x00000029;
+  static const __UNUSED_RECYCLE_WAS_GLOBALCOUNTER_RECYCLEDIRTYCOUNT_SERVERDRIVE = 0x0000002a;
+  static const __UNUSED_RECYCLE_WAS_GLOBALCOUNTER_RECYCLEGLOBALDIRTYCOUNT = 0x0000002b;
   static const GLOBALCOUNTER_RECYCLEBINENUM = 0x0000002c;
   static const GLOBALCOUNTER_RECYCLEBINCORRUPTED = 0x0000002d;
   static const GLOBALCOUNTER_RATINGS_STATECOUNTER = 0x0000002e;
@@ -2395,11 +2398,9 @@ class SHGLOBALCOUNTER {
   static const GLOBALCOUNTER_ASSOCCHANGED = 0x00000034;
   static const GLOBALCOUNTER_APP_ITEMS_STATE_STORE_CACHE = 0x00000035;
   static const GLOBALCOUNTER_SETTINGSYNC_ENABLED = 0x00000036;
-  static const GLOBALCOUNTER_APPSFOLDER_FILETYPEASSOCIATION_COUNTER =
-      0x00000037;
+  static const GLOBALCOUNTER_APPSFOLDER_FILETYPEASSOCIATION_COUNTER = 0x00000037;
   static const GLOBALCOUNTER_USERINFOCHANGED = 0x00000038;
-  static const GLOBALCOUNTER_SYNC_ENGINE_INFORMATION_CACHE_MACHINEWIDE =
-      0x00000039;
+  static const GLOBALCOUNTER_SYNC_ENGINE_INFORMATION_CACHE_MACHINEWIDE = 0x00000039;
   static const GLOBALCOUNTER_BANNERS_DATAMODEL_CACHE_MACHINEWIDE = 0x0000003a;
   static const GLOBALCOUNTER_MAXIMUMVALUE = 0x0000003b;
 }
@@ -2827,7 +2828,7 @@ class ThumbnailStreamCacheOptions {
 }
 
 /// {@category Enum}
-class tagTLENUMF {
+class TLENUMF {
   static const TLEF_RELATIVE_INCLUDE_CURRENT = 0x00000001;
   static const TLEF_RELATIVE_BACK = 0x00000010;
   static const TLEF_RELATIVE_FORE = 0x00000020;
@@ -2860,7 +2861,7 @@ class HLTRANSLATEF_NOREDEF10 {
 }
 
 /// {@category Enum}
-class MIDL_IHlink_0001 {
+class HLNF {
   static const HLNF_INTERNALJUMP = 0x00000001;
   static const HLNF_OPENINNEWWINDOW = 0x00000002;
   static const HLNF_NAVIGATINGBACK = 0x00000004;
@@ -2870,14 +2871,14 @@ class MIDL_IHlink_0001 {
 }
 
 /// {@category Enum}
-class MIDL_IHlink_0002 {
+class HLINKGETREF {
   static const HLINKGETREF_DEFAULT = 0x00000000;
   static const HLINKGETREF_ABSOLUTE = 0x00000001;
   static const HLINKGETREF_RELATIVE = 0x00000002;
 }
 
 /// {@category Enum}
-class MIDL_IHlink_0003 {
+class HLFNAMEF {
   static const HLFNAMEF_DEFAULT = 0x00000000;
   static const HLFNAMEF_TRYCACHE = 0x00000001;
   static const HLFNAMEF_TRYPRETTYTARGET = 0x00000002;
@@ -2886,24 +2887,24 @@ class MIDL_IHlink_0003 {
 }
 
 /// {@category Enum}
-class MIDL_IHlink_0004 {
+class HLINKMISC {
   static const HLINKMISC_RELATIVE = 0x00000001;
 }
 
 /// {@category Enum}
-class MIDL_IHlink_0005 {
+class HLINKSETF {
   static const HLINKSETF_TARGET = 0x00000001;
   static const HLINKSETF_LOCATION = 0x00000002;
 }
 
 /// {@category Enum}
-class MIDL_IHlinkSite_0001 {
+class HLINKWHICHMK {
   static const HLINKWHICHMK_CONTAINER = 0x00000001;
   static const HLINKWHICHMK_BASE = 0x00000002;
 }
 
 /// {@category Enum}
-class MIDL_IHlinkBrowseContext_0001 {
+class HLTB_INFO {
   static const HLTB_DOCKEDLEFT = 0x00000000;
   static const HLTB_DOCKEDTOP = 0x00000001;
   static const HLTB_DOCKEDRIGHT = 0x00000002;
@@ -2912,7 +2913,7 @@ class MIDL_IHlinkBrowseContext_0001 {
 }
 
 /// {@category Enum}
-class MIDL_IHlinkBrowseContext_0002 {
+class HLBWIF_FLAGS {
   static const HLBWIF_HASFRAMEWNDINFO = 0x00000001;
   static const HLBWIF_HASDOCWNDINFO = 0x00000002;
   static const HLBWIF_FRAMEWNDMAXIMIZED = 0x00000004;
@@ -2922,7 +2923,7 @@ class MIDL_IHlinkBrowseContext_0002 {
 }
 
 /// {@category Enum}
-class MIDL_IHlinkBrowseContext_0003 {
+class HLID_INFO {
   static const HLID_INVALID = 0x00000000;
   static const HLID_PREVIOUS = 0xffffffff;
   static const HLID_NEXT = 0xfffffffe;
@@ -2932,7 +2933,7 @@ class MIDL_IHlinkBrowseContext_0003 {
 }
 
 /// {@category Enum}
-class MIDL_IHlinkBrowseContext_0004 {
+class HLQF_INFO {
   static const HLQF_ISVALID = 0x00000001;
   static const HLQF_ISCURRENT = 0x00000002;
 }
@@ -3025,3 +3026,4 @@ class urlassociationdialog_in_flags {
 class mimeassociationdialog_in_flags {
   static const MIMEASSOCDLG_FL_REGISTER_ASSOC = 0x00000001;
 }
+

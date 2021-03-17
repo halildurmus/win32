@@ -1,4 +1,22 @@
 /// {@category Enum}
+class UpdateICMRegKey_command {
+  static const ICM_ADDPROFILE = 0x00000001;
+  static const ICM_DELETEPROFILE = 0x00000002;
+  static const ICM_QUERYPROFILE = 0x00000003;
+  static const ICM_SETDEFAULTPROFILE = 0x00000004;
+  static const ICM_REGISTERICMATCHER = 0x00000005;
+  static const ICM_UNREGISTERICMATCHER = 0x00000006;
+  static const ICM_QUERYMATCH = 0x00000007;
+}
+
+/// {@category Enum}
+class ColorMatchToTarget_actionFlags {
+  static const CS_ENABLE = 0x00000001;
+  static const CS_DISABLE = 0x00000002;
+  static const CS_DELETE_TRANSFORM = 0x00000003;
+}
+
+/// {@category Enum}
 class COLORTYPE {
   static const COLOR_GRAY = 0x00000001;
   static const COLOR_RGB = 0x00000002;
@@ -96,3 +114,4 @@ class WCS_PROFILE_MANAGEMENT_SCOPE {
   static const WCS_PROFILE_MANAGEMENT_SCOPE_SYSTEM_WIDE = 0x00000000;
   static const WCS_PROFILE_MANAGEMENT_SCOPE_CURRENT_USER = 0x00000001;
 }
+

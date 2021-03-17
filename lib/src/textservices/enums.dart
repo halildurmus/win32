@@ -1,4 +1,56 @@
 /// {@category Enum}
+class ITfSystemDeviceTypeLangBarItem_SetIconModeFlags {
+  static const None = 0x00000000;
+  static const TF_DTLBI_USEPROFILEICON = 0x00000001;
+}
+
+/// {@category Enum}
+class ITextStoreACPSink_OnTextChangeFlags {
+  static const None = 0x00000000;
+  static const TS_ST_CORRECTION = 0x00000001;
+}
+
+/// {@category Enum}
+class ITextStoreAnchorSink_OnTextChangeFlags {
+  static const None = 0x00000000;
+  static const TS_TC_CORRECTION = 0x00000001;
+}
+
+/// {@category Enum}
+class ITfInsertAtSelection_InsertTextAtSelectionFlags {
+  static const TF_IAS_NOQUERY = 0x00000001;
+  static const TF_IAS_QUERYONLY = 0x00000002;
+  static const TF_IAS_NO_DEFAULT_COMPOSITION = 0x80000000;
+}
+
+/// {@category Enum}
+class IAnchor_GetChangeHistory_pdwHistoryFlags {
+  static const TS_CH_PRECEDING_DEL = 0x00000001;
+  static const TS_CH_FOLLOWING_DEL = 0x00000002;
+}
+
+/// {@category Enum}
+class OnLockGranted_dwLockFlags {
+  static const TS_LF_READ = 0x00000002;
+  static const TS_LF_READWRITE = 0x00000006;
+}
+
+/// {@category Enum}
+class ITfEditRecord_GetTextAndPropertyUpdatesFlags {
+  static const None = 0x00000000;
+  static const TF_GTP_INCL_TEXT = 0x00000001;
+}
+
+/// {@category Enum}
+class ITfContext_RequestEditSessionFlags {
+  static const TF_ES_ASYNCDONTCARE = 0x00000000;
+  static const TF_ES_SYNC = 0x00000001;
+  static const TF_ES_READ = 0x00000002;
+  static const TF_ES_READWRITE = 0x00000006;
+  static const TF_ES_ASYNC = 0x00000008;
+}
+
+/// {@category Enum}
 class TsActiveSelEnd {
   static const TS_AE_NONE = 0x00000000;
   static const TS_AE_START = 0x00000001;
@@ -210,3 +262,4 @@ class InputScope {
   static const IS_XML = 0xfffffffc;
   static const IS_ENUMSTRING = 0xfffffffb;
 }
+

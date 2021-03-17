@@ -674,3 +674,4 @@ class RND_ADVERTISING_SCOPE {
   static const RAS_REGION = 0x00000003;
   static const RAS_WORLD = 0x00000004;
 }
+

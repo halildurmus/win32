@@ -269,3 +269,4 @@ class EVT_EVENT_PROPERTY_ID {
   static const EvtEventPath = 0x00000001;
   static const EvtEventPropertyIdEND = 0x00000002;
 }
+

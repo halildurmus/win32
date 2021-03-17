@@ -67,3 +67,4 @@ class JsValueType {
   static const JsError = 0x00000007;
   static const JsArray = 0x00000008;
 }
+

@@ -423,3 +423,26 @@ class WPCFLAG_VISIBILITY {
   static const WPCFLAG_WPC_VISIBLE = 0x00000000;
   static const WPCFLAG_WPC_HIDDEN = 0x00000001;
 }
+
+/// {@category Enum}
+class IWindowsParentalControlsCore_GetVisibility_peVisibilityFlags {
+  static const WPCFLAG_WPC_VISIBLE = 0x00000000;
+  static const WPCFLAG_WPC_HIDDEN = 0x00000001;
+}
+
+/// {@category Enum}
+class GetRestrictions_pdwRestrictions {
+  static const WPCFLAG_NO_RESTRICTION = 0x00000000;
+  static const WPCFLAG_LOGGING_REQUIRED = 0x00000001;
+  static const WPCFLAG_WEB_FILTERED = 0x00000002;
+  static const WPCFLAG_HOURS_RESTRICTED = 0x00000004;
+  static const WPCFLAG_GAMES_BLOCKED = 0x00000008;
+  static const WPCFLAG_APPS_RESTRICTED = 0x00000010;
+}
+
+/// {@category Enum}
+class IWPCWebSettings_GetSettings_pdwSettingsFlags {
+  static const WPCFLAG_WEB_SETTING_NOTBLOCKED = 0x00000000;
+  static const WPCFLAG_WEB_SETTING_DOWNLOADSBLOCKED = 0x00000001;
+}
+

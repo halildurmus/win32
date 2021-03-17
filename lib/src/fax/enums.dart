@@ -262,3 +262,4 @@ class FAX_ENUM_DEVICE_ID_SOURCE {
 class SendToMode {
   static const SEND_TO_FAX_RECIPIENT_ATTACHMENT = 0x00000000;
 }
+

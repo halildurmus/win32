@@ -200,3 +200,4 @@ class FSM_STATE {
   static const PAUSED = 0x0000000c;
   static const SHUTDOWN = 0x0000000d;
 }
+

@@ -1,4 +1,249 @@
 /// {@category Enum}
+class VER_MASK {
+  static const VER_BUILDNUMBER = 0x00000004;
+  static const VER_MAJORVERSION = 0x00000002;
+  static const VER_MINORVERSION = 0x00000001;
+  static const VER_PLATFORMID = 0x00000008;
+  static const VER_PRODUCT_TYPE = 0x00000080;
+  static const VER_SERVICEPACKMAJOR = 0x00000020;
+  static const VER_SERVICEPACKMINOR = 0x00000010;
+  static const VER_SUITENAME = 0x00000040;
+}
+
+/// {@category Enum}
+class RegSaveKeyEx_Flags {
+  static const REG_STANDARD_FORMAT = 0x00000001;
+  static const REG_LATEST_FORMAT = 0x00000002;
+  static const REG_NO_COMPRESSION = 0x00000004;
+}
+
+/// {@category Enum}
+class VerifierEnumerateResource_Flags {
+  static const AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES = 0x00000002;
+  static const AVRF_ENUM_RESOURCES_FLAGS_SUSPEND = 0x00000001;
+}
+
+/// {@category Enum}
+class VER_SET_CONDITION__c_ {
+  static const VER_EQUAL = 0x00000001;
+  static const VER_GREATER = 0x00000002;
+  static const VER_GREATER_EQUAL = 0x00000003;
+  static const VER_LESS = 0x00000004;
+  static const VER_LESS_EQUAL = 0x00000005;
+}
+
+/// {@category Enum}
+class RegRestoreKey_dwFlags {
+  static const REG_FORCE_RESTORE = 0x00000008;
+  static const REG_WHOLE_HIVE_VOLATILE = 0x00000001;
+}
+
+/// {@category Enum}
+class RegNotifyChangeKeyValue_dwNotifyFilterFlags {
+  static const REG_NOTIFY_CHANGE_NAME = 0x00000001;
+  static const REG_NOTIFY_CHANGE_ATTRIBUTES = 0x00000002;
+  static const REG_NOTIFY_CHANGE_LAST_SET = 0x00000004;
+  static const REG_NOTIFY_CHANGE_SECURITY = 0x00000008;
+  static const REG_NOTIFY_THREAD_AGNOSTIC = 0x10000000;
+}
+
+/// {@category Enum}
+class FDICreate_cpuTypeFlags {
+  static const cpu80286 = 0x00000000;
+  static const cpu80386 = 0x00000001;
+}
+
+/// {@category Enum}
+class IsUserCetAvailableInEnvironment_UserCetEnvironmentFlags {
+  static const USER_CET_ENVIRONMENT_WIN32_PROCESS = 0x00000000;
+  static const USER_CET_ENVIRONMENT_SGX2_ENCLAVE = 0x00000002;
+  static const USER_CET_ENVIRONMENT_VBS_BASIC_ENCLAVE = 0x00000011;
+}
+
+/// {@category Enum}
+class NtCreateFile_CreateDispositionFlags {
+  static const FILE_SUPERSEDE = 0x00000000;
+  static const FILE_CREATE = 0x00000002;
+  static const FILE_OPEN = 0x00000001;
+  static const FILE_OPEN_IF = 0x00000003;
+  static const FILE_OVERWRITE = 0x00000004;
+  static const FILE_OVERWRITE_IF = 0x00000005;
+}
+
+/// {@category Enum}
+class RRF_RT {
+  static const RRF_RT_ANY = 0x0000ffff;
+  static const RRF_RT_DWORD = 0x00000018;
+  static const RRF_RT_QWORD = 0x00000048;
+  static const RRF_RT_REG_BINARY = 0x00000008;
+  static const RRF_RT_REG_DWORD = 0x00000010;
+  static const RRF_RT_REG_EXPAND_SZ = 0x00000004;
+  static const RRF_RT_REG_MULTI_SZ = 0x00000020;
+  static const RRF_RT_REG_NONE = 0x00000001;
+  static const RRF_RT_REG_QWORD = 0x00000040;
+  static const RRF_RT_REG_SZ = 0x00000002;
+}
+
+/// {@category Enum}
+class GetProductInfo_pdwReturnedProductTypeFlags {
+  static const PRODUCT_BUSINESS = 0x00000006;
+  static const PRODUCT_BUSINESS_N = 0x00000010;
+  static const PRODUCT_CLUSTER_SERVER = 0x00000012;
+  static const PRODUCT_CLUSTER_SERVER_V = 0x00000040;
+  static const PRODUCT_CORE = 0x00000065;
+  static const PRODUCT_CORE_COUNTRYSPECIFIC = 0x00000063;
+  static const PRODUCT_CORE_N = 0x00000062;
+  static const PRODUCT_CORE_SINGLELANGUAGE = 0x00000064;
+  static const PRODUCT_DATACENTER_EVALUATION_SERVER = 0x00000050;
+  static const PRODUCT_DATACENTER_A_SERVER_CORE = 0x00000091;
+  static const PRODUCT_STANDARD_A_SERVER_CORE = 0x00000092;
+  static const PRODUCT_DATACENTER_SERVER = 0x00000008;
+  static const PRODUCT_DATACENTER_SERVER_CORE = 0x0000000c;
+  static const PRODUCT_DATACENTER_SERVER_CORE_V = 0x00000027;
+  static const PRODUCT_DATACENTER_SERVER_V = 0x00000025;
+  static const PRODUCT_EDUCATION = 0x00000079;
+  static const PRODUCT_EDUCATION_N = 0x0000007a;
+  static const PRODUCT_ENTERPRISE = 0x00000004;
+  static const PRODUCT_ENTERPRISE_E = 0x00000046;
+  static const PRODUCT_ENTERPRISE_EVALUATION = 0x00000048;
+  static const PRODUCT_ENTERPRISE_N = 0x0000001b;
+  static const PRODUCT_ENTERPRISE_N_EVALUATION = 0x00000054;
+  static const PRODUCT_ENTERPRISE_S = 0x0000007d;
+  static const PRODUCT_ENTERPRISE_S_EVALUATION = 0x00000081;
+  static const PRODUCT_ENTERPRISE_S_N = 0x0000007e;
+  static const PRODUCT_ENTERPRISE_S_N_EVALUATION = 0x00000082;
+  static const PRODUCT_ENTERPRISE_SERVER = 0x0000000a;
+  static const PRODUCT_ENTERPRISE_SERVER_CORE = 0x0000000e;
+  static const PRODUCT_ENTERPRISE_SERVER_CORE_V = 0x00000029;
+  static const PRODUCT_ENTERPRISE_SERVER_IA64 = 0x0000000f;
+  static const PRODUCT_ENTERPRISE_SERVER_V = 0x00000026;
+  static const PRODUCT_ESSENTIALBUSINESS_SERVER_ADDL = 0x0000003c;
+  static const PRODUCT_ESSENTIALBUSINESS_SERVER_ADDLSVC = 0x0000003e;
+  static const PRODUCT_ESSENTIALBUSINESS_SERVER_MGMT = 0x0000003b;
+  static const PRODUCT_ESSENTIALBUSINESS_SERVER_MGMTSVC = 0x0000003d;
+  static const PRODUCT_HOME_BASIC = 0x00000002;
+  static const PRODUCT_HOME_BASIC_E = 0x00000043;
+  static const PRODUCT_HOME_BASIC_N = 0x00000005;
+  static const PRODUCT_HOME_PREMIUM = 0x00000003;
+  static const PRODUCT_HOME_PREMIUM_E = 0x00000044;
+  static const PRODUCT_HOME_PREMIUM_N = 0x0000001a;
+  static const PRODUCT_HOME_PREMIUM_SERVER = 0x00000022;
+  static const PRODUCT_HOME_SERVER = 0x00000013;
+  static const PRODUCT_HYPERV = 0x0000002a;
+  static const PRODUCT_IOTUAP = 0x0000007b;
+  static const PRODUCT_IOTUAPCOMMERCIAL = 0x00000083;
+  static const PRODUCT_MEDIUMBUSINESS_SERVER_MANAGEMENT = 0x0000001e;
+  static const PRODUCT_MEDIUMBUSINESS_SERVER_MESSAGING = 0x00000020;
+  static const PRODUCT_MEDIUMBUSINESS_SERVER_SECURITY = 0x0000001f;
+  static const PRODUCT_MOBILE_CORE = 0x00000068;
+  static const PRODUCT_MOBILE_ENTERPRISE = 0x00000085;
+  static const PRODUCT_MULTIPOINT_PREMIUM_SERVER = 0x0000004d;
+  static const PRODUCT_MULTIPOINT_STANDARD_SERVER = 0x0000004c;
+  static const PRODUCT_PRO_WORKSTATION = 0x000000a1;
+  static const PRODUCT_PRO_WORKSTATION_N = 0x000000a2;
+  static const PRODUCT_PROFESSIONAL = 0x00000030;
+  static const PRODUCT_PROFESSIONAL_E = 0x00000045;
+  static const PRODUCT_PROFESSIONAL_N = 0x00000031;
+  static const PRODUCT_PROFESSIONAL_WMC = 0x00000067;
+  static const PRODUCT_SB_SOLUTION_SERVER = 0x00000032;
+  static const PRODUCT_SB_SOLUTION_SERVER_EM = 0x00000036;
+  static const PRODUCT_SERVER_FOR_SB_SOLUTIONS = 0x00000033;
+  static const PRODUCT_SERVER_FOR_SB_SOLUTIONS_EM = 0x00000037;
+  static const PRODUCT_SERVER_FOR_SMALLBUSINESS = 0x00000018;
+  static const PRODUCT_SERVER_FOR_SMALLBUSINESS_V = 0x00000023;
+  static const PRODUCT_SERVER_FOUNDATION = 0x00000021;
+  static const PRODUCT_SMALLBUSINESS_SERVER = 0x00000009;
+  static const PRODUCT_SMALLBUSINESS_SERVER_PREMIUM = 0x00000019;
+  static const PRODUCT_SMALLBUSINESS_SERVER_PREMIUM_CORE = 0x0000003f;
+  static const PRODUCT_SOLUTION_EMBEDDEDSERVER = 0x00000038;
+  static const PRODUCT_STANDARD_EVALUATION_SERVER = 0x0000004f;
+  static const PRODUCT_STANDARD_SERVER = 0x00000007;
+  static const PRODUCT_STANDARD_SERVER_CORE_ = 0x0000000d;
+  static const PRODUCT_STANDARD_SERVER_CORE_V = 0x00000028;
+  static const PRODUCT_STANDARD_SERVER_V = 0x00000024;
+  static const PRODUCT_STANDARD_SERVER_SOLUTIONS = 0x00000034;
+  static const PRODUCT_STANDARD_SERVER_SOLUTIONS_CORE = 0x00000035;
+  static const PRODUCT_STARTER = 0x0000000b;
+  static const PRODUCT_STARTER_E = 0x00000042;
+  static const PRODUCT_STARTER_N = 0x0000002f;
+  static const PRODUCT_STORAGE_ENTERPRISE_SERVER = 0x00000017;
+  static const PRODUCT_STORAGE_ENTERPRISE_SERVER_CORE = 0x0000002e;
+  static const PRODUCT_STORAGE_EXPRESS_SERVER = 0x00000014;
+  static const PRODUCT_STORAGE_EXPRESS_SERVER_CORE = 0x0000002b;
+  static const PRODUCT_STORAGE_STANDARD_EVALUATION_SERVER = 0x00000060;
+  static const PRODUCT_STORAGE_STANDARD_SERVER = 0x00000015;
+  static const PRODUCT_STORAGE_STANDARD_SERVER_CORE = 0x0000002c;
+  static const PRODUCT_STORAGE_WORKGROUP_EVALUATION_SERVER = 0x0000005f;
+  static const PRODUCT_STORAGE_WORKGROUP_SERVER = 0x00000016;
+  static const PRODUCT_STORAGE_WORKGROUP_SERVER_CORE = 0x0000002d;
+  static const PRODUCT_ULTIMATE = 0x00000001;
+  static const PRODUCT_ULTIMATE_E = 0x00000047;
+  static const PRODUCT_ULTIMATE_N = 0x0000001c;
+  static const PRODUCT_UNDEFINED = 0x00000000;
+  static const PRODUCT_WEB_SERVER = 0x00000011;
+  static const PRODUCT_WEB_SERVER_CORE = 0x0000001d;
+}
+
+/// {@category Enum}
+class IsProcessorFeaturePresent_ProcessorFeatureFlags {
+  static const PF_ARM_64BIT_LOADSTORE_ATOMIC = 0x00000019;
+  static const PF_ARM_DIVIDE_INSTRUCTION_AVAILABLE = 0x00000018;
+  static const PF_ARM_EXTERNAL_CACHE_AVAILABLE = 0x0000001a;
+  static const PF_ARM_FMAC_INSTRUCTIONS_AVAILABLE = 0x0000001b;
+  static const PF_ARM_VFP_32_REGISTERS_AVAILABLE = 0x00000012;
+  static const PF_3DNOW_INSTRUCTIONS_AVAILABLE = 0x00000007;
+  static const PF_CHANNELS_ENABLED = 0x00000010;
+  static const PF_COMPARE_EXCHANGE_DOUBLE = 0x00000002;
+  static const PF_COMPARE_EXCHANGE128 = 0x0000000e;
+  static const PF_COMPARE64_EXCHANGE128 = 0x0000000f;
+  static const PF_FASTFAIL_AVAILABLE = 0x00000017;
+  static const PF_FLOATING_POINT_EMULATED = 0x00000001;
+  static const PF_FLOATING_POINT_PRECISION_ERRATA = 0x00000000;
+  static const PF_MMX_INSTRUCTIONS_AVAILABLE = 0x00000003;
+  static const PF_NX_ENABLED = 0x0000000c;
+  static const PF_PAE_ENABLED = 0x00000009;
+  static const PF_RDTSC_INSTRUCTION_AVAILABLE = 0x00000008;
+  static const PF_RDWRFSGSBASE_AVAILABLE = 0x00000016;
+  static const PF_SECOND_LEVEL_ADDRESS_TRANSLATION = 0x00000014;
+  static const PF_SSE3_INSTRUCTIONS_AVAILABLE = 0x0000000d;
+  static const PF_VIRT_FIRMWARE_ENABLED = 0x00000015;
+  static const PF_XMMI_INSTRUCTIONS_AVAILABLE = 0x00000006;
+  static const PF_XMMI64_INSTRUCTIONS_AVAILABLE = 0x0000000a;
+  static const PF_XSAVE_ENABLED = 0x00000011;
+  static const PF_ARM_V8_INSTRUCTIONS_AVAILABLE = 0x0000001d;
+  static const PF_ARM_V8_CRYPTO_INSTRUCTIONS_AVAILABLE = 0x0000001e;
+  static const PF_ARM_V8_CRC32_INSTRUCTIONS_AVAILABLE = 0x0000001f;
+  static const PF_ARM_V81_ATOMIC_INSTRUCTIONS_AVAILABLE = 0x00000022;
+}
+
+/// {@category Enum}
+class VER_NT {
+  static const VER_NT_DOMAIN_CONTROLLER = 0x00000002;
+  static const VER_NT_SERVER = 0x00000003;
+  static const VER_NT_WORKSTATION = 0x00000001;
+}
+
+/// {@category Enum}
+class TDIEntityID_tei_entityFlags {
+  static const GENERIC_ENTITY = 0x00000000;
+  static const AT_ENTITY = 0x00000280;
+  static const CL_NL_ENTITY = 0x00000301;
+  static const CO_NL_ENTITY = 0x00000300;
+  static const CL_TL_ENTITY = 0x00000401;
+  static const CO_TL_ENTITY = 0x00000400;
+  static const ER_ENTITY = 0x00000380;
+  static const IF_ENTITY = 0x00000200;
+}
+
+/// {@category Enum}
+class FIRMWARE_TYPE {
+  static const FirmwareTypeUnknown = 0x00000000;
+  static const FirmwareTypeBios = 0x00000001;
+  static const FirmwareTypeUefi = 0x00000002;
+  static const FirmwareTypeMax = 0x00000003;
+}
+
+/// {@category Enum}
 class PROCESS_CREATION_FLAGS {
   static const DEBUG_PROCESS = 0x00000001;
   static const DEBUG_ONLY_THIS_PROCESS = 0x00000002;
@@ -65,46 +310,55 @@ class VER_FLAGS {
 }
 
 /// {@category Enum}
-class FORMAT_MESSAGE_OPTIONS {
-  static const FORMAT_MESSAGE_ALLOCATE_BUFFER = 0x00000100;
-  static const FORMAT_MESSAGE_IGNORE_INSERTS = 0x00000200;
-  static const FORMAT_MESSAGE_FROM_STRING = 0x00000400;
-  static const FORMAT_MESSAGE_FROM_HMODULE = 0x00000800;
-  static const FORMAT_MESSAGE_FROM_SYSTEM = 0x00001000;
-  static const FORMAT_MESSAGE_ARGUMENT_ARRAY = 0x00002000;
-  static const FORMAT_MESSAGE_MAX_WIDTH_MASK = 0x000000ff;
+class REG_VALUE_TYPE {
+  static const REG_NONE = 0x00000000;
+  static const REG_SZ = 0x00000001;
+  static const REG_EXPAND_SZ = 0x00000002;
+  static const REG_BINARY = 0x00000003;
+  static const REG_DWORD = 0x00000004;
+  static const REG_DWORD_LITTLE_ENDIAN = 0x00000004;
+  static const REG_DWORD_BIG_ENDIAN = 0x00000005;
+  static const REG_LINK = 0x00000006;
+  static const REG_MULTI_SZ = 0x00000007;
+  static const REG_RESOURCE_LIST = 0x00000008;
+  static const REG_FULL_RESOURCE_DESCRIPTOR = 0x00000009;
+  static const REG_RESOURCE_REQUIREMENTS_LIST = 0x0000000a;
+  static const REG_QWORD = 0x0000000b;
+  static const REG_QWORD_LITTLE_ENDIAN = 0x0000000b;
 }
 
 /// {@category Enum}
-class FIRMWARE_TYPE {
-  static const FirmwareTypeUnknown = 0x00000000;
-  static const FirmwareTypeBios = 0x00000001;
-  static const FirmwareTypeUefi = 0x00000002;
-  static const FirmwareTypeMax = 0x00000003;
+class REG_SAM_FLAGS {
+  static const KEY_QUERY_VALUE = 0x00000001;
+  static const KEY_SET_VALUE = 0x00000002;
+  static const KEY_CREATE_SUB_KEY = 0x00000004;
+  static const KEY_ENUMERATE_SUB_KEYS = 0x00000008;
+  static const KEY_NOTIFY = 0x00000010;
+  static const KEY_CREATE_LINK = 0x00000020;
+  static const KEY_WOW64_32KEY = 0x00000200;
+  static const KEY_WOW64_64KEY = 0x00000100;
+  static const KEY_WOW64_RES = 0x00000300;
+  static const KEY_READ = 0x00020019;
+  static const KEY_WRITE = 0x00020006;
+  static const KEY_EXECUTE = 0x00020019;
+  static const KEY_ALL_ACCESS = 0x000f003f;
 }
 
 /// {@category Enum}
-class UpdateImpactLevel {
-  static const UpdateImpactLevel_None = 0x00000000;
-  static const UpdateImpactLevel_Low = 0x00000001;
-  static const UpdateImpactLevel_Medium = 0x00000002;
-  static const UpdateImpactLevel_High = 0x00000003;
+class REG_OPEN_CREATE_OPTIONS {
+  static const REG_OPTION_RESERVED = 0x00000000;
+  static const REG_OPTION_NON_VOLATILE = 0x00000000;
+  static const REG_OPTION_VOLATILE = 0x00000001;
+  static const REG_OPTION_CREATE_LINK = 0x00000002;
+  static const REG_OPTION_BACKUP_RESTORE = 0x00000004;
+  static const REG_OPTION_OPEN_LINK = 0x00000008;
+  static const REG_OPTION_DONT_VIRTUALIZE = 0x00000010;
 }
 
 /// {@category Enum}
-class UpdateAssessmentStatus {
-  static const UpdateAssessmentStatus_Latest = 0x00000000;
-  static const UpdateAssessmentStatus_NotLatestSoftRestriction = 0x00000001;
-  static const UpdateAssessmentStatus_NotLatestHardRestriction = 0x00000002;
-  static const UpdateAssessmentStatus_NotLatestEndOfSupport = 0x00000003;
-  static const UpdateAssessmentStatus_NotLatestServicingTrain = 0x00000004;
-  static const UpdateAssessmentStatus_NotLatestDeferredFeature = 0x00000005;
-  static const UpdateAssessmentStatus_NotLatestDeferredQuality = 0x00000006;
-  static const UpdateAssessmentStatus_NotLatestPausedFeature = 0x00000007;
-  static const UpdateAssessmentStatus_NotLatestPausedQuality = 0x00000008;
-  static const UpdateAssessmentStatus_NotLatestManaged = 0x00000009;
-  static const UpdateAssessmentStatus_NotLatestUnknown = 0x0000000a;
-  static const UpdateAssessmentStatus_NotLatestTargetedVersion = 0x0000000b;
+class REG_CREATE_KEY_DISPOSITION {
+  static const REG_CREATED_NEW_KEY = 0x00000001;
+  static const REG_OPENED_EXISTING_KEY = 0x00000002;
 }
 
 /// {@category Enum}
@@ -631,8 +885,7 @@ class WLDP_WINDOWS_LOCKDOWN_MODE {
 class WLDP_WINDOWS_LOCKDOWN_RESTRICTION {
   static const WLDP_WINDOWS_LOCKDOWN_RESTRICTION_NONE = 0x00000000;
   static const WLDP_WINDOWS_LOCKDOWN_RESTRICTION_NOUNLOCK = 0x00000001;
-  static const WLDP_WINDOWS_LOCKDOWN_RESTRICTION_NOUNLOCK_PERMANENT =
-      0x00000002;
+  static const WLDP_WINDOWS_LOCKDOWN_RESTRICTION_NOUNLOCK_PERMANENT = 0x00000002;
   static const WLDP_WINDOWS_LOCKDOWN_RESTRICTION_MAX = 0x00000003;
 }
 
@@ -649,6 +902,7 @@ class XmlNodeType {
   static const XmlNodeType_Whitespace = 0x0000000d;
   static const XmlNodeType_EndElement = 0x0000000f;
   static const XmlNodeType_XmlDeclaration = 0x00000011;
+  static const _XmlNodeType_Last = 0x00000011;
 }
 
 /// {@category Enum}
@@ -656,12 +910,14 @@ class XmlConformanceLevel {
   static const XmlConformanceLevel_Auto = 0x00000000;
   static const XmlConformanceLevel_Fragment = 0x00000001;
   static const XmlConformanceLevel_Document = 0x00000002;
+  static const _XmlConformanceLevel_Last = 0x00000002;
 }
 
 /// {@category Enum}
 class DtdProcessing {
   static const DtdProcessing_Prohibit = 0x00000000;
   static const DtdProcessing_Parse = 0x00000001;
+  static const _DtdProcessing_Last = 0x00000001;
 }
 
 /// {@category Enum}
@@ -683,6 +939,7 @@ class XmlReaderProperty {
   static const XmlReaderProperty_ReadState = 0x00000005;
   static const XmlReaderProperty_MaxElementDepth = 0x00000006;
   static const XmlReaderProperty_MaxEntityExpansion = 0x00000007;
+  static const _XmlReaderProperty_Last = 0x00000007;
 }
 
 /// {@category Enum}
@@ -779,6 +1036,7 @@ class XmlStandalone {
   static const XmlStandalone_Omit = 0x00000000;
   static const XmlStandalone_Yes = 0x00000001;
   static const XmlStandalone_No = 0x00000002;
+  static const _XmlStandalone_Last = 0x00000002;
 }
 
 /// {@category Enum}
@@ -789,6 +1047,7 @@ class XmlWriterProperty {
   static const XmlWriterProperty_OmitXmlDeclaration = 0x00000003;
   static const XmlWriterProperty_ConformanceLevel = 0x00000004;
   static const XmlWriterProperty_CompactEmptyElement = 0x00000005;
+  static const _XmlWriterProperty_Last = 0x00000005;
 }
 
 /// {@category Enum}
@@ -819,8 +1078,7 @@ class DEVPROP_OPERATOR {
   static const DEVPROP_OPERATOR_LIST_ELEMENT_ENDS_WITH = 0x00003000;
   static const DEVPROP_OPERATOR_LIST_ELEMENT_CONTAINS = 0x00004000;
   static const DEVPROP_OPERATOR_LIST_CONTAINS_IGNORE_CASE = 0x00021000;
-  static const DEVPROP_OPERATOR_LIST_ELEMENT_BEGINS_WITH_IGNORE_CASE =
-      0x00022000;
+  static const DEVPROP_OPERATOR_LIST_ELEMENT_BEGINS_WITH_IGNORE_CASE = 0x00022000;
   static const DEVPROP_OPERATOR_LIST_ELEMENT_ENDS_WITH_IGNORE_CASE = 0x00023000;
   static const DEVPROP_OPERATOR_LIST_ELEMENT_CONTAINS_IGNORE_CASE = 0x00024000;
   static const DEVPROP_OPERATOR_AND_OPEN = 0x00100000;
@@ -906,6 +1164,30 @@ class PfFrameType {
 }
 
 /// {@category Enum}
+class UpdateImpactLevel {
+  static const UpdateImpactLevel_None = 0x00000000;
+  static const UpdateImpactLevel_Low = 0x00000001;
+  static const UpdateImpactLevel_Medium = 0x00000002;
+  static const UpdateImpactLevel_High = 0x00000003;
+}
+
+/// {@category Enum}
+class UpdateAssessmentStatus {
+  static const UpdateAssessmentStatus_Latest = 0x00000000;
+  static const UpdateAssessmentStatus_NotLatestSoftRestriction = 0x00000001;
+  static const UpdateAssessmentStatus_NotLatestHardRestriction = 0x00000002;
+  static const UpdateAssessmentStatus_NotLatestEndOfSupport = 0x00000003;
+  static const UpdateAssessmentStatus_NotLatestServicingTrain = 0x00000004;
+  static const UpdateAssessmentStatus_NotLatestDeferredFeature = 0x00000005;
+  static const UpdateAssessmentStatus_NotLatestDeferredQuality = 0x00000006;
+  static const UpdateAssessmentStatus_NotLatestPausedFeature = 0x00000007;
+  static const UpdateAssessmentStatus_NotLatestPausedQuality = 0x00000008;
+  static const UpdateAssessmentStatus_NotLatestManaged = 0x00000009;
+  static const UpdateAssessmentStatus_NotLatestUnknown = 0x0000000a;
+  static const UpdateAssessmentStatus_NotLatestTargetedVersion = 0x0000000b;
+}
+
+/// {@category Enum}
 class EXTENDED_NAME_FORMAT {
   static const NameUnknown = 0x00000000;
   static const NameFullyQualifiedDN = 0x00000001;
@@ -920,3 +1202,4 @@ class EXTENDED_NAME_FORMAT {
   static const NameGivenName = 0x0000000d;
   static const NameSurname = 0x0000000e;
 }
+

@@ -55,11 +55,35 @@ class FILTERING_TYPE {
 }
 
 /// {@category Enum}
+class SYNC_CONSTRAINT_RESOLVE_ACTION {
+  static const SCRA_DEFER = 0x00000000;
+  static const SCRA_ACCEPT_DESTINATION_PROVIDER = 0x00000001;
+  static const SCRA_ACCEPT_SOURCE_PROVIDER = 0x00000002;
+  static const SCRA_TRANSFER_AND_DEFER = 0x00000003;
+  static const SCRA_MERGE = 0x00000004;
+  static const SCRA_RENAME_SOURCE = 0x00000005;
+  static const SCRA_RENAME_DESTINATION = 0x00000006;
+}
+
+/// {@category Enum}
+class CONSTRAINT_CONFLICT_REASON {
+  static const CCR_OTHER = 0x00000000;
+  static const CCR_COLLISION = 0x00000001;
+  static const CCR_NOPARENT = 0x00000002;
+  static const CCR_IDENTITY = 0x00000003;
+}
+
+/// {@category Enum}
 class KNOWLEDGE_COOKIE_COMPARISON_RESULT {
   static const KCCR_COOKIE_KNOWLEDGE_EQUAL = 0x00000000;
   static const KCCR_COOKIE_KNOWLEDGE_CONTAINED = 0x00000001;
   static const KCCR_COOKIE_KNOWLEDGE_CONTAINS = 0x00000002;
   static const KCCR_COOKIE_KNOWLEDGE_NOT_COMPARABLE = 0x00000003;
+}
+
+/// {@category Enum}
+class FILTER_COMBINATION_TYPE {
+  static const FCT_INTERSECTION = 0x00000000;
 }
 
 /// {@category Enum}
@@ -72,3 +96,4 @@ class SYNC_REGISTRATION_EVENT {
   static const SRE_CONFIGUI_REMOVED = 0x00000005;
   static const SRE_CONFIGUI_UPDATED = 0x00000006;
 }
+

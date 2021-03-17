@@ -1,116 +1,4 @@
 /// {@category Enum}
-class ConsoleMode {
-  static const ENABLE_ECHO_INPUT = 0x00000004;
-  static const ENABLE_INSERT_MODE = 0x00000020;
-  static const ENABLE_LINE_INPUT = 0x00000002;
-  static const ENABLE_MOUSE_INPUT = 0x00000010;
-  static const ENABLE_PROCESSED_INPUT = 0x00000001;
-  static const ENABLE_QUICK_EDIT_MODE = 0x00000040;
-  static const ENABLE_WINDOW_INPUT = 0x00000008;
-  static const ENABLE_VIRTUAL_TERMINAL_INPUT = 0x00000200;
-  static const ENABLE_PROCESSED_OUTPUT = 0x00000001;
-  static const ENABLE_WRAP_AT_EOL_OUTPUT = 0x00000002;
-  static const ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x00000004;
-  static const DISABLE_NEWLINE_AUTO_RETURN = 0x00000008;
-  static const ENABLE_LVB_GRID_WORLDWIDE = 0x00000010;
-}
-
-/// {@category Enum}
-class PAGE_TYPE {
-  static const PAGE_NOACCESS = 0x00000001;
-  static const PAGE_READONLY = 0x00000002;
-  static const PAGE_READWRITE = 0x00000004;
-  static const PAGE_WRITECOPY = 0x00000008;
-  static const PAGE_EXECUTE = 0x00000010;
-  static const PAGE_EXECUTE_READ = 0x00000020;
-  static const PAGE_EXECUTE_READWRITE = 0x00000040;
-  static const PAGE_EXECUTE_WRITECOPY = 0x00000080;
-  static const PAGE_GUARD = 0x00000100;
-  static const PAGE_NOCACHE = 0x00000200;
-  static const PAGE_WRITECOMBINE = 0x00000400;
-  static const PAGE_TARGETS_INVALID = 0x40000000;
-  static const PAGE_TARGETS_NO_UPDATE = 0x40000000;
-}
-
-/// {@category Enum}
-class PROCESS_ACCESS_RIGHTS {
-  static const PROCESS_TERMINATE = 0x00000001;
-  static const PROCESS_CREATE_THREAD = 0x00000002;
-  static const PROCESS_SET_SESSIONID = 0x00000004;
-  static const PROCESS_VM_OPERATION = 0x00000008;
-  static const PROCESS_VM_READ = 0x00000010;
-  static const PROCESS_VM_WRITE = 0x00000020;
-  static const PROCESS_DUP_HANDLE = 0x00000040;
-  static const PROCESS_CREATE_PROCESS = 0x00000080;
-  static const PROCESS_SET_QUOTA = 0x00000100;
-  static const PROCESS_SET_INFORMATION = 0x00000200;
-  static const PROCESS_QUERY_INFORMATION = 0x00000400;
-  static const PROCESS_SUSPEND_RESUME = 0x00000800;
-  static const PROCESS_QUERY_LIMITED_INFORMATION = 0x00001000;
-  static const PROCESS_SET_LIMITED_INFORMATION = 0x00002000;
-  static const PROCESS_ALL_ACCESS = 0x001fffff;
-  static const DELETE = 0x00010000;
-  static const READ_CONTROL = 0x00020000;
-  static const WRITE_DAC = 0x00040000;
-  static const WRITE_OWNER = 0x00080000;
-  static const SYNCHRONIZE = 0x00100000;
-  static const STANDARD_RIGHTS_REQUIRED = 0x000f0000;
-}
-
-/// {@category Enum}
-class JOB_OBJECT_LIMIT {
-  static const JOB_OBJECT_LIMIT_WORKINGSET = 0x00000001;
-  static const JOB_OBJECT_LIMIT_PROCESS_TIME = 0x00000002;
-  static const JOB_OBJECT_LIMIT_JOB_TIME = 0x00000004;
-  static const JOB_OBJECT_LIMIT_ACTIVE_PROCESS = 0x00000008;
-  static const JOB_OBJECT_LIMIT_AFFINITY = 0x00000010;
-  static const JOB_OBJECT_LIMIT_PRIORITY_CLASS = 0x00000020;
-  static const JOB_OBJECT_LIMIT_PRESERVE_JOB_TIME = 0x00000040;
-  static const JOB_OBJECT_LIMIT_SCHEDULING_CLASS = 0x00000080;
-  static const JOB_OBJECT_LIMIT_PROCESS_MEMORY = 0x00000100;
-  static const JOB_OBJECT_LIMIT_JOB_MEMORY = 0x00000200;
-  static const JOB_OBJECT_LIMIT_JOB_MEMORY_HIGH = 0x00000200;
-  static const JOB_OBJECT_LIMIT_DIE_ON_UNHANDLED_EXCEPTION = 0x00000400;
-  static const JOB_OBJECT_LIMIT_BREAKAWAY_OK = 0x00000800;
-  static const JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK = 0x00001000;
-  static const JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE = 0x00002000;
-  static const JOB_OBJECT_LIMIT_SUBSET_AFFINITY = 0x00004000;
-  static const JOB_OBJECT_LIMIT_JOB_MEMORY_LOW = 0x00008000;
-  static const JOB_OBJECT_LIMIT_JOB_READ_BYTES = 0x00010000;
-  static const JOB_OBJECT_LIMIT_JOB_WRITE_BYTES = 0x00020000;
-  static const JOB_OBJECT_LIMIT_RATE_CONTROL = 0x00040000;
-  static const JOB_OBJECT_LIMIT_CPU_RATE_CONTROL = 0x00040000;
-  static const JOB_OBJECT_LIMIT_IO_RATE_CONTROL = 0x00080000;
-  static const JOB_OBJECT_LIMIT_NET_RATE_CONTROL = 0x00100000;
-  static const JOB_OBJECT_LIMIT_VALID_FLAGS = 0x0007ffff;
-  static const JOB_OBJECT_BASIC_LIMIT_VALID_FLAGS = 0x000000ff;
-  static const JOB_OBJECT_EXTENDED_LIMIT_VALID_FLAGS = 0x00007fff;
-  static const JOB_OBJECT_NOTIFICATION_LIMIT_VALID_FLAGS = 0x001f8204;
-}
-
-/// {@category Enum}
-class JOB_OBJECT_UILIMIT {
-  static const JOB_OBJECT_UILIMIT_NONE = 0x00000000;
-  static const JOB_OBJECT_UILIMIT_HANDLES = 0x00000001;
-  static const JOB_OBJECT_UILIMIT_READCLIPBOARD = 0x00000002;
-  static const JOB_OBJECT_UILIMIT_WRITECLIPBOARD = 0x00000004;
-  static const JOB_OBJECT_UILIMIT_SYSTEMPARAMETERS = 0x00000008;
-  static const JOB_OBJECT_UILIMIT_DISPLAYSETTINGS = 0x00000010;
-  static const JOB_OBJECT_UILIMIT_GLOBALATOMS = 0x00000020;
-  static const JOB_OBJECT_UILIMIT_DESKTOP = 0x00000040;
-  static const JOB_OBJECT_UILIMIT_EXITWINDOWS = 0x00000080;
-}
-
-/// {@category Enum}
-class JOB_OBJECT_SECURITY {
-  static const JOB_OBJECT_SECURITY_NO_ADMIN = 0x00000001;
-  static const JOB_OBJECT_SECURITY_RESTRICTED_TOKEN = 0x00000002;
-  static const JOB_OBJECT_SECURITY_ONLY_TOKEN = 0x00000004;
-  static const JOB_OBJECT_SECURITY_FILTER_TOKENS = 0x00000008;
-  static const JOB_OBJECT_SECURITY_VALID_FLAGS = 0x0000000f;
-}
-
-/// {@category Enum}
 class ACCESS_REASON_TYPE {
   static const AccessReasonNone = 0x00000000;
   static const AccessReasonAllowedAce = 0x00010000;
@@ -198,8 +86,7 @@ class JOB_OBJECT_IO_RATE_CONTROL_FLAGS {
   static const JOB_OBJECT_IO_RATE_CONTROL_ENABLE = 0x00000001;
   static const JOB_OBJECT_IO_RATE_CONTROL_STANDALONE_VOLUME = 0x00000002;
   static const JOB_OBJECT_IO_RATE_CONTROL_FORCE_UNIT_ACCESS_ALL = 0x00000004;
-  static const JOB_OBJECT_IO_RATE_CONTROL_FORCE_UNIT_ACCESS_ON_SOFT_CAP =
-      0x00000008;
+  static const JOB_OBJECT_IO_RATE_CONTROL_FORCE_UNIT_ACCESS_ON_SOFT_CAP = 0x00000008;
   static const JOB_OBJECT_IO_RATE_CONTROL_VALID_FLAGS = 0x0000000f;
 }
 
@@ -734,15 +621,13 @@ class ACTIVATION_CONTEXT_INFO_CLASS {
   static const ActivationContextBasicInformation = 0x00000001;
   static const ActivationContextDetailedInformation = 0x00000002;
   static const AssemblyDetailedInformationInActivationContext = 0x00000003;
-  static const FileInformationInAssemblyOfAssemblyInActivationContext =
-      0x00000004;
+  static const FileInformationInAssemblyOfAssemblyInActivationContext = 0x00000004;
   static const RunlevelInformationInActivationContext = 0x00000005;
   static const CompatibilityInformationInActivationContext = 0x00000006;
   static const ActivationContextManifestResourceName = 0x00000007;
   static const MaxActivationContextInfoClass = 0x00000008;
   static const AssemblyDetailedInformationInActivationContxt = 0x00000003;
-  static const FileInformationInAssemblyOfAssemblyInActivationContxt =
-      0x00000004;
+  static const FileInformationInAssemblyOfAssemblyInActivationContxt = 0x00000004;
 }
 
 /// {@category Enum}
@@ -846,6 +731,1293 @@ class TP_CALLBACK_PRIORITY {
   static const TP_CALLBACK_PRIORITY_LOW = 0x00000002;
   static const TP_CALLBACK_PRIORITY_INVALID = 0x00000003;
   static const TP_CALLBACK_PRIORITY_COUNT = 0x00000003;
+}
+
+/// {@category Enum}
+class CONSOLE_MODE {
+  static const ENABLE_ECHO_INPUT = 0x00000004;
+  static const ENABLE_INSERT_MODE = 0x00000020;
+  static const ENABLE_LINE_INPUT = 0x00000002;
+  static const ENABLE_MOUSE_INPUT = 0x00000010;
+  static const ENABLE_PROCESSED_INPUT = 0x00000001;
+  static const ENABLE_QUICK_EDIT_MODE = 0x00000040;
+  static const ENABLE_WINDOW_INPUT = 0x00000008;
+  static const ENABLE_VIRTUAL_TERMINAL_INPUT = 0x00000200;
+  static const ENABLE_PROCESSED_OUTPUT = 0x00000001;
+  static const ENABLE_WRAP_AT_EOL_OUTPUT = 0x00000002;
+  static const ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x00000004;
+  static const DISABLE_NEWLINE_AUTO_RETURN = 0x00000008;
+  static const ENABLE_LVB_GRID_WORLDWIDE = 0x00000010;
+}
+
+/// {@category Enum}
+class PAGE_TYPE {
+  static const PAGE_NOACCESS = 0x00000001;
+  static const PAGE_READONLY = 0x00000002;
+  static const PAGE_READWRITE = 0x00000004;
+  static const PAGE_WRITECOPY = 0x00000008;
+  static const PAGE_EXECUTE = 0x00000010;
+  static const PAGE_EXECUTE_READ = 0x00000020;
+  static const PAGE_EXECUTE_READWRITE = 0x00000040;
+  static const PAGE_EXECUTE_WRITECOPY = 0x00000080;
+  static const PAGE_GUARD = 0x00000100;
+  static const PAGE_NOCACHE = 0x00000200;
+  static const PAGE_WRITECOMBINE = 0x00000400;
+  static const PAGE_TARGETS_INVALID = 0x40000000;
+  static const PAGE_TARGETS_NO_UPDATE = 0x40000000;
+}
+
+/// {@category Enum}
+class PROCESS_ACCESS_RIGHTS {
+  static const PROCESS_TERMINATE = 0x00000001;
+  static const PROCESS_CREATE_THREAD = 0x00000002;
+  static const PROCESS_SET_SESSIONID = 0x00000004;
+  static const PROCESS_VM_OPERATION = 0x00000008;
+  static const PROCESS_VM_READ = 0x00000010;
+  static const PROCESS_VM_WRITE = 0x00000020;
+  static const PROCESS_DUP_HANDLE = 0x00000040;
+  static const PROCESS_CREATE_PROCESS = 0x00000080;
+  static const PROCESS_SET_QUOTA = 0x00000100;
+  static const PROCESS_SET_INFORMATION = 0x00000200;
+  static const PROCESS_QUERY_INFORMATION = 0x00000400;
+  static const PROCESS_SUSPEND_RESUME = 0x00000800;
+  static const PROCESS_QUERY_LIMITED_INFORMATION = 0x00001000;
+  static const PROCESS_SET_LIMITED_INFORMATION = 0x00002000;
+  static const PROCESS_ALL_ACCESS = 0x001fffff;
+  static const DELETE = 0x00010000;
+  static const READ_CONTROL = 0x00020000;
+  static const WRITE_DAC = 0x00040000;
+  static const WRITE_OWNER = 0x00080000;
+  static const SYNCHRONIZE = 0x00100000;
+  static const STANDARD_RIGHTS_REQUIRED = 0x000f0000;
+}
+
+/// {@category Enum}
+class JOB_OBJECT_LIMIT {
+  static const JOB_OBJECT_LIMIT_WORKINGSET = 0x00000001;
+  static const JOB_OBJECT_LIMIT_PROCESS_TIME = 0x00000002;
+  static const JOB_OBJECT_LIMIT_JOB_TIME = 0x00000004;
+  static const JOB_OBJECT_LIMIT_ACTIVE_PROCESS = 0x00000008;
+  static const JOB_OBJECT_LIMIT_AFFINITY = 0x00000010;
+  static const JOB_OBJECT_LIMIT_PRIORITY_CLASS = 0x00000020;
+  static const JOB_OBJECT_LIMIT_PRESERVE_JOB_TIME = 0x00000040;
+  static const JOB_OBJECT_LIMIT_SCHEDULING_CLASS = 0x00000080;
+  static const JOB_OBJECT_LIMIT_PROCESS_MEMORY = 0x00000100;
+  static const JOB_OBJECT_LIMIT_JOB_MEMORY = 0x00000200;
+  static const JOB_OBJECT_LIMIT_JOB_MEMORY_HIGH = 0x00000200;
+  static const JOB_OBJECT_LIMIT_DIE_ON_UNHANDLED_EXCEPTION = 0x00000400;
+  static const JOB_OBJECT_LIMIT_BREAKAWAY_OK = 0x00000800;
+  static const JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK = 0x00001000;
+  static const JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE = 0x00002000;
+  static const JOB_OBJECT_LIMIT_SUBSET_AFFINITY = 0x00004000;
+  static const JOB_OBJECT_LIMIT_JOB_MEMORY_LOW = 0x00008000;
+  static const JOB_OBJECT_LIMIT_JOB_READ_BYTES = 0x00010000;
+  static const JOB_OBJECT_LIMIT_JOB_WRITE_BYTES = 0x00020000;
+  static const JOB_OBJECT_LIMIT_RATE_CONTROL = 0x00040000;
+  static const JOB_OBJECT_LIMIT_CPU_RATE_CONTROL = 0x00040000;
+  static const JOB_OBJECT_LIMIT_IO_RATE_CONTROL = 0x00080000;
+  static const JOB_OBJECT_LIMIT_NET_RATE_CONTROL = 0x00100000;
+  static const JOB_OBJECT_LIMIT_VALID_FLAGS = 0x0007ffff;
+  static const JOB_OBJECT_BASIC_LIMIT_VALID_FLAGS = 0x000000ff;
+  static const JOB_OBJECT_EXTENDED_LIMIT_VALID_FLAGS = 0x00007fff;
+  static const JOB_OBJECT_NOTIFICATION_LIMIT_VALID_FLAGS = 0x001f8204;
+}
+
+/// {@category Enum}
+class JOB_OBJECT_UILIMIT {
+  static const JOB_OBJECT_UILIMIT_NONE = 0x00000000;
+  static const JOB_OBJECT_UILIMIT_HANDLES = 0x00000001;
+  static const JOB_OBJECT_UILIMIT_READCLIPBOARD = 0x00000002;
+  static const JOB_OBJECT_UILIMIT_WRITECLIPBOARD = 0x00000004;
+  static const JOB_OBJECT_UILIMIT_SYSTEMPARAMETERS = 0x00000008;
+  static const JOB_OBJECT_UILIMIT_DISPLAYSETTINGS = 0x00000010;
+  static const JOB_OBJECT_UILIMIT_GLOBALATOMS = 0x00000020;
+  static const JOB_OBJECT_UILIMIT_DESKTOP = 0x00000040;
+  static const JOB_OBJECT_UILIMIT_EXITWINDOWS = 0x00000080;
+}
+
+/// {@category Enum}
+class JOB_OBJECT_SECURITY {
+  static const JOB_OBJECT_SECURITY_NO_ADMIN = 0x00000001;
+  static const JOB_OBJECT_SECURITY_RESTRICTED_TOKEN = 0x00000002;
+  static const JOB_OBJECT_SECURITY_ONLY_TOKEN = 0x00000004;
+  static const JOB_OBJECT_SECURITY_FILTER_TOKENS = 0x00000008;
+  static const JOB_OBJECT_SECURITY_VALID_FLAGS = 0x0000000f;
+}
+
+/// {@category Enum}
+class WAIT_RETURN_CAUSE {
+  static const WAIT_OBJECT_0 = 0x00000000;
+  static const WAIT_ABANDONED = 0x00000080;
+  static const WAIT_ABANDONED_0 = 0x00000080;
+  static const WAIT_IO_COMPLETION = 0x000000c0;
+  static const WAIT_TIMEOUT = 0x00000102;
+  static const WAIT_FAILED = 0xffffffff;
+}
+
+/// {@category Enum}
+class PROCESS_MEMORY_EXHAUSTION_TYPE {
+  static const PMETypeFailFastOnCommitFailure = 0x00000000;
+  static const PMETypeMax = 0x00000001;
+}
+
+/// {@category Enum}
+class ALERT_SYSTEM_SEV {
+  static const ALERT_SYSTEM_INFORMATIONAL = 0x00000001;
+  static const ALERT_SYSTEM_WARNING = 0x00000002;
+  static const ALERT_SYSTEM_ERROR = 0x00000003;
+  static const ALERT_SYSTEM_QUERY = 0x00000004;
+  static const ALERT_SYSTEM_CRITICAL = 0x00000005;
+}
+
+/// {@category Enum}
+class APPCOMMAND_ID {
+  static const APPCOMMAND_BROWSER_BACKWARD = 0x00000001;
+  static const APPCOMMAND_BROWSER_FORWARD = 0x00000002;
+  static const APPCOMMAND_BROWSER_REFRESH = 0x00000003;
+  static const APPCOMMAND_BROWSER_STOP = 0x00000004;
+  static const APPCOMMAND_BROWSER_SEARCH = 0x00000005;
+  static const APPCOMMAND_BROWSER_FAVORITES = 0x00000006;
+  static const APPCOMMAND_BROWSER_HOME = 0x00000007;
+  static const APPCOMMAND_VOLUME_MUTE = 0x00000008;
+  static const APPCOMMAND_VOLUME_DOWN = 0x00000009;
+  static const APPCOMMAND_VOLUME_UP = 0x0000000a;
+  static const APPCOMMAND_MEDIA_NEXTTRACK = 0x0000000b;
+  static const APPCOMMAND_MEDIA_PREVIOUSTRACK = 0x0000000c;
+  static const APPCOMMAND_MEDIA_STOP = 0x0000000d;
+  static const APPCOMMAND_MEDIA_PLAY_PAUSE = 0x0000000e;
+  static const APPCOMMAND_LAUNCH_MAIL = 0x0000000f;
+  static const APPCOMMAND_LAUNCH_MEDIA_SELECT = 0x00000010;
+  static const APPCOMMAND_LAUNCH_APP1 = 0x00000011;
+  static const APPCOMMAND_LAUNCH_APP2 = 0x00000012;
+  static const APPCOMMAND_BASS_DOWN = 0x00000013;
+  static const APPCOMMAND_BASS_BOOST = 0x00000014;
+  static const APPCOMMAND_BASS_UP = 0x00000015;
+  static const APPCOMMAND_TREBLE_DOWN = 0x00000016;
+  static const APPCOMMAND_TREBLE_UP = 0x00000017;
+  static const APPCOMMAND_MICROPHONE_VOLUME_MUTE = 0x00000018;
+  static const APPCOMMAND_MICROPHONE_VOLUME_DOWN = 0x00000019;
+  static const APPCOMMAND_MICROPHONE_VOLUME_UP = 0x0000001a;
+  static const APPCOMMAND_HELP = 0x0000001b;
+  static const APPCOMMAND_FIND = 0x0000001c;
+  static const APPCOMMAND_NEW = 0x0000001d;
+  static const APPCOMMAND_OPEN = 0x0000001e;
+  static const APPCOMMAND_CLOSE = 0x0000001f;
+  static const APPCOMMAND_SAVE = 0x00000020;
+  static const APPCOMMAND_PRINT = 0x00000021;
+  static const APPCOMMAND_UNDO = 0x00000022;
+  static const APPCOMMAND_REDO = 0x00000023;
+  static const APPCOMMAND_COPY = 0x00000024;
+  static const APPCOMMAND_CUT = 0x00000025;
+  static const APPCOMMAND_PASTE = 0x00000026;
+  static const APPCOMMAND_REPLY_TO_MAIL = 0x00000027;
+  static const APPCOMMAND_FORWARD_MAIL = 0x00000028;
+  static const APPCOMMAND_SEND_MAIL = 0x00000029;
+  static const APPCOMMAND_SPELL_CHECK = 0x0000002a;
+  static const APPCOMMAND_DICTATE_OR_COMMAND_CONTROL_TOGGLE = 0x0000002b;
+  static const APPCOMMAND_MIC_ON_OFF_TOGGLE = 0x0000002c;
+  static const APPCOMMAND_CORRECTION_LIST = 0x0000002d;
+  static const APPCOMMAND_MEDIA_PLAY = 0x0000002e;
+  static const APPCOMMAND_MEDIA_PAUSE = 0x0000002f;
+  static const APPCOMMAND_MEDIA_RECORD = 0x00000030;
+  static const APPCOMMAND_MEDIA_FAST_FORWARD = 0x00000031;
+  static const APPCOMMAND_MEDIA_REWIND = 0x00000032;
+  static const APPCOMMAND_MEDIA_CHANNEL_UP = 0x00000033;
+  static const APPCOMMAND_MEDIA_CHANNEL_DOWN = 0x00000034;
+  static const APPCOMMAND_DELETE = 0x00000035;
+  static const APPCOMMAND_DWM_FLIP3D = 0x00000036;
+}
+
+/// {@category Enum}
+class ATF_FLAGS {
+  static const ATF_TIMEOUTON = 0x00000001;
+  static const ATF_ONOFFFEEDBACK = 0x00000002;
+}
+
+/// {@category Enum}
+class BUTTON_STYLE {
+  static const BS_PUSHBUTTON = 0x00000000;
+  static const BS_DEFPUSHBUTTON = 0x00000001;
+  static const BS_CHECKBOX = 0x00000002;
+  static const BS_AUTOCHECKBOX = 0x00000003;
+  static const BS_RADIOBUTTON = 0x00000004;
+  static const BS_3STATE = 0x00000005;
+  static const BS_AUTO3STATE = 0x00000006;
+  static const BS_GROUPBOX = 0x00000007;
+  static const BS_USERBUTTON = 0x00000008;
+  static const BS_AUTORADIOBUTTON = 0x00000009;
+  static const BS_PUSHBOX = 0x0000000a;
+  static const BS_OWNERDRAW = 0x0000000b;
+  static const BS_TYPEMASK = 0x0000000f;
+  static const BS_LEFTTEXT = 0x00000020;
+  static const BS_TEXT = 0x00000000;
+  static const BS_ICON = 0x00000040;
+  static const BS_BITMAP = 0x00000080;
+  static const BS_LEFT = 0x00000100;
+  static const BS_RIGHT = 0x00000200;
+  static const BS_CENTER = 0x00000300;
+  static const BS_TOP = 0x00000400;
+  static const BS_BOTTOM = 0x00000800;
+  static const BS_VCENTER = 0x00000c00;
+  static const BS_PUSHLIKE = 0x00001000;
+  static const BS_MULTILINE = 0x00002000;
+  static const BS_NOTIFY = 0x00004000;
+  static const BS_FLAT = 0x00008000;
+  static const BS_RIGHTBUTTON = 0x00000020;
+}
+
+/// {@category Enum}
+class COMBOBOX_STYLE {
+  static const CBS_SIMPLE = 0x00000001;
+  static const CBS_DROPDOWN = 0x00000002;
+  static const CBS_DROPDOWNLIST = 0x00000003;
+  static const CBS_OWNERDRAWFIXED = 0x00000010;
+  static const CBS_OWNERDRAWVARIABLE = 0x00000020;
+  static const CBS_AUTOHSCROLL = 0x00000040;
+  static const CBS_OEMCONVERT = 0x00000080;
+  static const CBS_SORT = 0x00000100;
+  static const CBS_HASSTRINGS = 0x00000200;
+  static const CBS_NOINTEGRALHEIGHT = 0x00000400;
+  static const CBS_DISABLENOSCROLL = 0x00000800;
+  static const CBS_UPPERCASE = 0x00002000;
+  static const CBS_LOWERCASE = 0x00004000;
+}
+
+/// {@category Enum}
+class CHOOSECOLOR_FLAGS {
+  static const CC_RGBINIT = 0x00000001;
+  static const CC_FULLOPEN = 0x00000002;
+  static const CC_PREVENTFULLOPEN = 0x00000004;
+  static const CC_SHOWHELP = 0x00000008;
+  static const CC_ENABLEHOOK = 0x00000010;
+  static const CC_ENABLETEMPLATE = 0x00000020;
+  static const CC_ENABLETEMPLATEHANDLE = 0x00000040;
+  static const CC_SOLIDCOLOR = 0x00000080;
+  static const CC_ANYCOLOR = 0x00000100;
+}
+
+/// {@category Enum}
+class CLIPBOARD_FORMATS {
+  static const CF_TEXT = 0x00000001;
+  static const CF_BITMAP = 0x00000002;
+  static const CF_METAFILEPICT = 0x00000003;
+  static const CF_SYLK = 0x00000004;
+  static const CF_DIF = 0x00000005;
+  static const CF_TIFF = 0x00000006;
+  static const CF_OEMTEXT = 0x00000007;
+  static const CF_DIB = 0x00000008;
+  static const CF_PALETTE = 0x00000009;
+  static const CF_PENDATA = 0x0000000a;
+  static const CF_RIFF = 0x0000000b;
+  static const CF_WAVE = 0x0000000c;
+  static const CF_UNICODETEXT = 0x0000000d;
+  static const CF_ENHMETAFILE = 0x0000000e;
+  static const CF_HDROP = 0x0000000f;
+  static const CF_LOCALE = 0x00000010;
+  static const CF_DIBV5 = 0x00000011;
+  static const CF_MAX = 0x00000012;
+  static const CF_OWNERDISPLAY = 0x00000080;
+  static const CF_DSPTEXT = 0x00000081;
+  static const CF_DSPBITMAP = 0x00000082;
+  static const CF_DSPMETAFILEPICT = 0x00000083;
+  static const CF_DSPENHMETAFILE = 0x0000008e;
+  static const CF_PRIVATEFIRST = 0x00000200;
+  static const CF_PRIVATELAST = 0x000002ff;
+  static const CF_GDIOBJFIRST = 0x00000300;
+  static const CF_GDIOBJLAST = 0x000003ff;
+}
+
+/// {@category Enum}
+class DIALOGBOX_STYLE {
+  static const DS_ABSALIGN = 0x00000001;
+  static const DS_SYSMODAL = 0x00000002;
+  static const DS_LOCALEDIT = 0x00000020;
+  static const DS_SETFONT = 0x00000040;
+  static const DS_MODALFRAME = 0x00000080;
+  static const DS_NOIDLEMSG = 0x00000100;
+  static const DS_SETFOREGROUND = 0x00000200;
+  static const DS_3DLOOK = 0x00000004;
+  static const DS_FIXEDSYS = 0x00000008;
+  static const DS_NOFAILCREATE = 0x00000010;
+  static const DS_CONTROL = 0x00000400;
+  static const DS_CENTER = 0x00000800;
+  static const DS_CENTERMOUSE = 0x00001000;
+  static const DS_CONTEXTHELP = 0x00002000;
+  static const DS_SHELLFONT = 0x00000048;
+  static const DS_USEPIXELS = 0x00008000;
+}
+
+/// {@category Enum}
+class EDITCONTROL_STYLE {
+  static const ES_LEFT = 0x00000000;
+  static const ES_CENTER = 0x00000001;
+  static const ES_RIGHT = 0x00000002;
+  static const ES_MULTILINE = 0x00000004;
+  static const ES_UPPERCASE = 0x00000008;
+  static const ES_LOWERCASE = 0x00000010;
+  static const ES_PASSWORD = 0x00000020;
+  static const ES_AUTOVSCROLL = 0x00000040;
+  static const ES_AUTOHSCROLL = 0x00000080;
+  static const ES_NOHIDESEL = 0x00000100;
+  static const ES_OEMCONVERT = 0x00000400;
+  static const ES_READONLY = 0x00000800;
+  static const ES_WANTRETURN = 0x00001000;
+  static const ES_NUMBER = 0x00002000;
+}
+
+/// {@category Enum}
+class GESTURECONFIG_FLAGS {
+  static const GC_ALLGESTURES = 0x00000001;
+  static const GC_ZOOM = 0x00000001;
+  static const GC_PAN = 0x00000001;
+  static const GC_PAN_WITH_SINGLE_FINGER_VERTICALLY = 0x00000002;
+  static const GC_PAN_WITH_SINGLE_FINGER_HORIZONTALLY = 0x00000004;
+  static const GC_PAN_WITH_GUTTER = 0x00000008;
+  static const GC_PAN_WITH_INERTIA = 0x00000010;
+  static const GC_ROTATE = 0x00000001;
+  static const GC_TWOFINGERTAP = 0x00000001;
+  static const GC_PRESSANDTAP = 0x00000001;
+  static const GC_ROLLOVER = 0x00000001;
+}
+
+/// {@category Enum}
+class LISTBOX_STYLE {
+  static const LBS_STANDARD = 0x00a00003;
+  static const LBS_NOTIFY = 0x00000001;
+  static const LBS_SORT = 0x00000002;
+  static const LBS_NOREDRAW = 0x00000004;
+  static const LBS_MULTIPLESEL = 0x00000008;
+  static const LBS_OWNERDRAWFIXED = 0x00000010;
+  static const LBS_OWNERDRAWVARIABLE = 0x00000020;
+  static const LBS_HASSTRINGS = 0x00000040;
+  static const LBS_USETABSTOPS = 0x00000080;
+  static const LBS_NOINTEGRALHEIGHT = 0x00000100;
+  static const LBS_MULTICOLUMN = 0x00000200;
+  static const LBS_WANTKEYBOARDINPUT = 0x00000400;
+  static const LBS_EXTENDEDSEL = 0x00000800;
+  static const LBS_DISABLENOSCROLL = 0x00001000;
+  static const LBS_NODATA = 0x00002000;
+  static const LBS_NOSEL = 0x00004000;
+  static const LBS_COMBOBOX = 0x00008000;
+}
+
+/// {@category Enum}
+class SCROLLBAR_STYLE {
+  static const SBS_HORZ = 0x00000000;
+  static const SBS_VERT = 0x00000001;
+  static const SBS_TOPALIGN = 0x00000002;
+  static const SBS_LEFTALIGN = 0x00000002;
+  static const SBS_BOTTOMALIGN = 0x00000004;
+  static const SBS_RIGHTALIGN = 0x00000004;
+  static const SBS_SIZEBOXTOPLEFTALIGN = 0x00000002;
+  static const SBS_SIZEBOXBOTTOMRIGHTALIGN = 0x00000004;
+  static const SBS_SIZEBOX = 0x00000008;
+  static const SBS_SIZEGRIP = 0x00000010;
+}
+
+/// {@category Enum}
+class STATIC_CONTROL_STYLE {
+  static const SS_LEFT = 0x00000000;
+  static const SS_CENTER = 0x00000001;
+  static const SS_RIGHT = 0x00000002;
+  static const SS_ICON = 0x00000003;
+  static const SS_BLACKRECT = 0x00000004;
+  static const SS_GRAYRECT = 0x00000005;
+  static const SS_WHITERECT = 0x00000006;
+  static const SS_BLACKFRAME = 0x00000007;
+  static const SS_GRAYFRAME = 0x00000008;
+  static const SS_WHITEFRAME = 0x00000009;
+  static const SS_USERITEM = 0x0000000a;
+  static const SS_SIMPLE = 0x0000000b;
+  static const SS_LEFTNOWORDWRAP = 0x0000000c;
+  static const SS_OWNERDRAW = 0x0000000d;
+  static const SS_BITMAP = 0x0000000e;
+  static const SS_ENHMETAFILE = 0x0000000f;
+  static const SS_ETCHEDHORZ = 0x00000010;
+  static const SS_ETCHEDVERT = 0x00000011;
+  static const SS_ETCHEDFRAME = 0x00000012;
+  static const SS_TYPEMASK = 0x0000001f;
+  static const SS_REALSIZECONTROL = 0x00000040;
+  static const SS_NOPREFIX = 0x00000080;
+  static const SS_NOTIFY = 0x00000100;
+  static const SS_CENTERIMAGE = 0x00000200;
+  static const SS_RIGHTJUST = 0x00000400;
+  static const SS_REALSIZEIMAGE = 0x00000800;
+  static const SS_SUNKEN = 0x00001000;
+  static const SS_EDITCONTROL = 0x00002000;
+  static const SS_ENDELLIPSIS = 0x00004000;
+  static const SS_PATHELLIPSIS = 0x00008000;
+  static const SS_WORDELLIPSIS = 0x0000c000;
+  static const SS_ELLIPSISMASK = 0x0000c000;
+}
+
+/// {@category Enum}
+class PFM_FLAGS {
+  static const IGP_GETIMEVERSION = 0xfffffffc;
+}
+
+/// {@category Enum}
+class SECTION_FLAGS {
+  static const SECTION_ALL_ACCESS = 0x000f001f;
+  static const SECTION_QUERY = 0x00000001;
+  static const SECTION_MAP_WRITE = 0x00000002;
+  static const SECTION_MAP_READ = 0x00000004;
+  static const SECTION_MAP_EXECUTE = 0x00000008;
+  static const SECTION_EXTEND_SIZE = 0x00000010;
+  static const SECTION_MAP_EXECUTE_EXPLICIT = 0x00000020;
+}
+
+/// {@category Enum}
+class FILE_MAP {
+  static const FILE_MAP_WRITE = 0x00000002;
+  static const FILE_MAP_READ = 0x00000004;
+  static const FILE_MAP_ALL_ACCESS = 0x000f001f;
+  static const FILE_MAP_EXECUTE = 0x00000020;
+  static const FILE_MAP_COPY = 0x00000001;
+  static const FILE_MAP_RESERVE = 0x80000000;
+  static const FILE_MAP_TARGETS_INVALID = 0x40000000;
+  static const FILE_MAP_LARGE_PAGES = 0x20000000;
+}
+
+/// {@category Enum}
+class THREAD_PRIORITY {
+  static const THREAD_MODE_BACKGROUND_BEGIN = 0x00010000;
+  static const THREAD_MODE_BACKGROUND_END = 0x00020000;
+  static const THREAD_PRIORITY_ABOVE_NORMAL = 0x00000001;
+  static const THREAD_PRIORITY_HIGHEST = 0x00000002;
+  static const THREAD_PRIORITY_NORMAL = 0x00000000;
+  static const THREAD_PRIORITY_TIME_CRITICAL = 0x0000000f;
+}
+
+/// {@category Enum}
+class GPT_ATTRIBUTES {
+  static const GPT_ATTRIBUTE_PLATFORM_REQUIRED = 0x00000001;
+  static const GPT_BASIC_DATA_ATTRIBUTE_NO_DRIVE_LETTER = 0x00000000;
+  static const GPT_BASIC_DATA_ATTRIBUTE_HIDDEN = 0x00000000;
+  static const GPT_BASIC_DATA_ATTRIBUTE_SHADOW_COPY = 0x00000000;
+  static const GPT_BASIC_DATA_ATTRIBUTE_READ_ONLY = 0x00000000;
+}
+
+/// {@category Enum}
+class Uri_CREATE_FLAGS {
+  static const Uri_CREATE_ALLOW_RELATIVE = 0x00000001;
+  static const Uri_CREATE_ALLOW_IMPLICIT_WILDCARD_SCHEME = 0x00000002;
+  static const Uri_CREATE_ALLOW_IMPLICIT_FILE_SCHEME = 0x00000004;
+  static const Uri_CREATE_NOFRAG = 0x00000008;
+  static const Uri_CREATE_NO_CANONICALIZE = 0x00000010;
+  static const Uri_CREATE_CANONICALIZE = 0x00000100;
+  static const Uri_CREATE_FILE_USE_DOS_PATH = 0x00000020;
+  static const Uri_CREATE_DECODE_EXTRA_INFO = 0x00000040;
+  static const Uri_CREATE_NO_DECODE_EXTRA_INFO = 0x00000080;
+  static const Uri_CREATE_CRACK_UNKNOWN_SCHEMES = 0x00000200;
+  static const Uri_CREATE_NO_CRACK_UNKNOWN_SCHEMES = 0x00000400;
+  static const Uri_CREATE_PRE_PROCESS_HTML_URI = 0x00000800;
+  static const Uri_CREATE_NO_PRE_PROCESS_HTML_URI = 0x00001000;
+  static const Uri_CREATE_IE_SETTINGS = 0x00002000;
+  static const Uri_CREATE_NO_IE_SETTINGS = 0x00004000;
+  static const Uri_CREATE_NO_ENCODE_FORBIDDEN_CHARACTERS = 0x00008000;
+  static const Uri_CREATE_NORMALIZE_INTL_CHARACTERS = 0x00010000;
+  static const Uri_CREATE_CANONICALIZE_ABSOLUTE = 0x00020000;
+}
+
+/// {@category Enum}
+class GetCommModemStatus_lpModemStatFlags {
+  static const MS_CTS_ON = 0x00000010;
+  static const MS_DSR_ON = 0x00000020;
+  static const MS_RING_ON = 0x00000040;
+  static const MS_RLSD_ON = 0x00000080;
+}
+
+/// {@category Enum}
+class ReportEvent_wType {
+  static const EVENTLOG_SUCCESS = 0x00000000;
+  static const EVENTLOG_AUDIT_FAILURE = 0x00000010;
+  static const EVENTLOG_AUDIT_SUCCESS = 0x00000008;
+  static const EVENTLOG_ERROR_TYPE = 0x00000001;
+  static const EVENTLOG_INFORMATION_TYPE = 0x00000004;
+  static const EVENTLOG_WARNING_TYPE = 0x00000002;
+}
+
+/// {@category Enum}
+class GetNamedPipeHandleStateA_lpStateFlags {
+  static const PIPE_NOWAIT = 0x00000001;
+  static const PIPE_READMODE_MESSAGE = 0x00000002;
+}
+
+/// {@category Enum}
+class RegisterWaitForSingleObject_dwFlags {
+  static const WT_EXECUTEDEFAULT = 0x00000000;
+  static const WT_EXECUTEINIOTHREAD = 0x00000001;
+  static const WT_EXECUTEINPERSISTENTTHREAD = 0x00000080;
+  static const WT_EXECUTEINWAITTHREAD = 0x00000004;
+  static const WT_EXECUTELONGFUNCTION = 0x00000010;
+  static const WT_EXECUTEONLYONCE = 0x00000008;
+  static const WT_TRANSFER_IMPERSONATION = 0x00000100;
+  static const WT_EXECUTEINTIMERTHREAD = 0x00000020;
+}
+
+/// {@category Enum}
+class CreateFileMapping_flProtect {
+  static const PAGE_EXECUTE_READ = 0x00000020;
+  static const PAGE_EXECUTE_READWRITE = 0x00000040;
+  static const PAGE_EXECUTE_WRITECOPY = 0x00000080;
+  static const PAGE_READONLY = 0x00000002;
+  static const PAGE_READWRITE = 0x00000004;
+  static const PAGE_WRITECOPY = 0x00000008;
+}
+
+/// {@category Enum}
+class HeapReAlloc_dwFlags {
+  static const HEAP_GENERATE_EXCEPTIONS = 0x00000004;
+  static const HEAP_NO_SERIALIZE = 0x00000001;
+  static const HEAP_REALLOC_IN_PLACE_ONLY = 0x00000010;
+  static const HEAP_ZERO_MEMORY = 0x00000008;
+  static const HEAP_CREATE_ENABLE_EXECUTE = 0x00040000;
+}
+
+/// {@category Enum}
+class WaitNamedPipeA_nTimeOutFlags {
+  static const NMPWAIT_USE_DEFAULT_WAIT = 0x00000000;
+  static const NMPWAIT_WAIT_FOREVER = 0xffffffff;
+}
+
+/// {@category Enum}
+class UnmapViewOfFile_UnmapFlags {
+  static const MEM_UNMAP_WITH_TRANSIENT_BOOST = 0x00000001;
+  static const MEM_PRESERVE_PLACEHOLDER = 0x00000002;
+}
+
+/// {@category Enum}
+class SERVICE_ERROR {
+  static const SERVICE_ERROR_CRITICAL = 0x00000003;
+  static const SERVICE_ERROR_IGNORE = 0x00000000;
+  static const SERVICE_ERROR_NORMAL = 0x00000001;
+  static const SERVICE_ERROR_SEVERE = 0x00000002;
+}
+
+/// {@category Enum}
+class CREATE_EVENT {
+  static const CREATE_EVENT_INITIAL_SET = 0x00000002;
+  static const CREATE_EVENT_MANUAL_RESET = 0x00000001;
+}
+
+/// {@category Enum}
+class ClearCommError_lpErrorsFlags {
+  static const CE_BREAK = 0x00000010;
+  static const CE_FRAME = 0x00000008;
+  static const CE_OVERRUN = 0x00000002;
+  static const CE_RXOVER = 0x00000001;
+  static const CE_RXPARITY = 0x00000004;
+}
+
+/// {@category Enum}
+class LoadLibraryEx_dwFlags {
+  static const DONT_RESOLVE_DLL_REFERENCES = 0x00000001;
+  static const LOAD_IGNORE_CODE_AUTHZ_LEVEL = 0x00000010;
+  static const LOAD_LIBRARY_AS_DATAFILE = 0x00000002;
+  static const LOAD_LIBRARY_AS_DATAFILE_EXCLUSIVE = 0x00000040;
+  static const LOAD_LIBRARY_AS_IMAGE_RESOURCE = 0x00000020;
+  static const LOAD_LIBRARY_SEARCH_APPLICATION_DIR = 0x00000200;
+  static const LOAD_LIBRARY_SEARCH_DEFAULT_DIRS = 0x00001000;
+  static const LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR = 0x00000100;
+  static const LOAD_LIBRARY_SEARCH_SYSTEM32 = 0x00000800;
+  static const LOAD_LIBRARY_SEARCH_USER_DIRS = 0x00000400;
+  static const LOAD_WITH_ALTERED_SEARCH_PATH = 0x00000008;
+  static const LOAD_LIBRARY_REQUIRE_SIGNED_TARGET = 0x00000080;
+  static const LOAD_LIBRARY_SAFE_CURRENT_DIRS = 0x00002000;
+}
+
+/// {@category Enum}
+class PurgeComm_dwFlags {
+  static const PURGE_RXABORT = 0x00000002;
+  static const PURGE_RXCLEAR = 0x00000008;
+  static const PURGE_TXABORT = 0x00000001;
+  static const PURGE_TXCLEAR = 0x00000004;
+}
+
+/// {@category Enum}
+class SetPriorityClass_dwPriorityClassFlags {
+  static const ABOVE_NORMAL_PRIORITY_CLASS = 0x00008000;
+  static const BELOW_NORMAL_PRIORITY_CLASS = 0x00004000;
+  static const HIGH_PRIORITY_CLASS = 0x00000080;
+  static const IDLE_PRIORITY_CLASS = 0x00000040;
+  static const NORMAL_PRIORITY_CLASS = 0x00000020;
+  static const PROCESS_MODE_BACKGROUND_BEGIN = 0x00100000;
+  static const PROCESS_MODE_BACKGROUND_END = 0x00200000;
+  static const REALTIME_PRIORITY_CLASS = 0x00000100;
+}
+
+/// {@category Enum}
+class VirtualFree_dwFreeType {
+  static const MEM_DECOMMIT = 0x00004000;
+  static const MEM_RELEASE = 0x00008000;
+}
+
+/// {@category Enum}
+class CreateProcessWith_dwLogonFlags {
+  static const LOGON_WITH_PROFILE = 0x00000001;
+  static const LOGON_NETCREDENTIALS_ONLY = 0x00000002;
+}
+
+/// {@category Enum}
+class GetTapePosition_dwPositionType {
+  static const TAPE_ABSOLUTE_POSITION = 0x00000000;
+  static const TAPE_LOGICAL_POSITION = 0x00000001;
+}
+
+/// {@category Enum}
+class CreateTapePartition_dwPartitionMethodFlags {
+  static const TAPE_FIXED_PARTITIONS = 0x00000000;
+  static const TAPE_INITIATOR_PARTITIONS = 0x00000002;
+  static const TAPE_SELECT_PARTITIONS = 0x00000001;
+}
+
+/// {@category Enum}
+class MsgWaitForMultipleObjectsEx_dwFlags {
+  static const MWMO_ALERTABLE = 0x00000002;
+  static const MWMO_INPUTAVAILABLE = 0x00000004;
+  static const MWMO_WAITALL = 0x00000001;
+}
+
+/// {@category Enum}
+class PowerDeterminePlatformRoleEx_VersionFlags {
+  static const POWER_PLATFORM_ROLE_VERSION = 0x00000002;
+  static const POWER_PLATFORM_ROLE_V1 = 0x00000001;
+  static const POWER_PLATFORM_ROLE_V2 = 0x00000002;
+}
+
+/// {@category Enum}
+class PowerSettingRegisterNotification_Flags {
+  static const DEVICE_NOTIFY_SERVICE_HANDLE = 0x00000001;
+  static const DEVICE_NOTIFY_CALLBACK = 0x00000002;
+  static const DEVICE_NOTIFY_WINDOW_HANDLE = 0x00000000;
+}
+
+/// {@category Enum}
+class VirtualAlloc_flAllocationType {
+  static const MEM_COMMIT = 0x00001000;
+  static const MEM_RESERVE = 0x00002000;
+  static const MEM_RESET = 0x00080000;
+  static const MEM_RESET_UNDO = 0x01000000;
+  static const MEM_REPLACE_PLACEHOLDER = 0x00004000;
+  static const MEM_LARGE_PAGES = 0x20000000;
+  static const MEM_RESERVE_PLACEHOLDER = 0x00040000;
+  static const MEM_FREE = 0x00010000;
+}
+
+/// {@category Enum}
+class GetCommMask_lpEvtMaskFlags {
+  static const EV_BREAK = 0x00000040;
+  static const EV_CTS = 0x00000008;
+  static const EV_DSR = 0x00000010;
+  static const EV_ERR = 0x00000080;
+  static const EV_EVENT1 = 0x00000800;
+  static const EV_EVENT2 = 0x00001000;
+  static const EV_PERR = 0x00000200;
+  static const EV_RING = 0x00000100;
+  static const EV_RLSD = 0x00000020;
+  static const EV_RX80FULL = 0x00000400;
+  static const EV_RXCHAR = 0x00000001;
+  static const EV_RXFLAG = 0x00000002;
+  static const EV_TXEMPTY = 0x00000004;
+}
+
+/// {@category Enum}
+class WriteTapemark_dwTapemarkType {
+  static const TAPE_FILEMARKS = 0x00000001;
+  static const TAPE_LONG_FILEMARKS = 0x00000003;
+  static const TAPE_SETMARKS = 0x00000000;
+  static const TAPE_SHORT_FILEMARKS = 0x00000002;
+}
+
+/// {@category Enum}
+class CreateServiceW_dwStartType {
+  static const SERVICE_AUTO_START = 0x00000002;
+  static const SERVICE_BOOT_START = 0x00000000;
+  static const SERVICE_DEMAND_START = 0x00000003;
+  static const SERVICE_DISABLED = 0x00000004;
+  static const SERVICE_SYSTEM_START = 0x00000001;
+}
+
+/// {@category Enum}
+class SetTapePosition_dwPositionMethod {
+  static const TAPE_ABSOLUTE_BLOCK = 0x00000001;
+  static const TAPE_LOGICAL_BLOCK = 0x00000002;
+  static const TAPE_REWIND = 0x00000000;
+  static const TAPE_SPACE_END_OF_DATA = 0x00000004;
+  static const TAPE_SPACE_FILEMARKS = 0x00000006;
+  static const TAPE_SPACE_RELATIVE_BLOCKS = 0x00000005;
+  static const TAPE_SPACE_SEQUENTIAL_FMKS = 0x00000007;
+  static const TAPE_SPACE_SEQUENTIAL_SMKS = 0x00000009;
+  static const TAPE_SPACE_SETMARKS = 0x00000008;
+}
+
+/// {@category Enum}
+class PreFetchCacheLine_lFlags {
+  static const PF_TEMPORAL_LEVEL_1 = 0x00000001;
+  static const PF_NON_TEMPORAL_LEVEL_ALL = 0x00000000;
+}
+
+/// {@category Enum}
+class QueryInformationJobObject_JobObjectInformationClassFlags {
+  static const JobObjectBasicAccountingInformation = 0x00000001;
+  static const JobObjectBasicAndIoAccountingInformation = 0x00000008;
+  static const JobObjectBasicLimitInformation = 0x00000002;
+  static const JobObjectBasicProcessIdList = 0x00000003;
+  static const JobObjectBasicUIRestrictions = 0x00000004;
+  static const JobObjectCpuRateControlInformation = 0x0000000f;
+  static const JobObjectEndOfJobTimeInformation = 0x00000006;
+  static const JobObjectExtendedLimitInformation = 0x00000009;
+  static const JobObjectGroupInformation = 0x0000000b;
+  static const JobObjectGroupInformationEx = 0x0000000e;
+  static const JobObjectLimitViolationInformation = 0x0000000d;
+  static const JobObjectLimitViolationInformation2 = 0x00000022;
+  static const JobObjectNetRateControlInformation = 0x00000020;
+  static const JobObjectNotificationLimitInformation = 0x0000000c;
+  static const JobObjectNotificationLimitInformation2 = 0x00000021;
+  static const JobObjectSecurityLimitInformation = 0x00000005;
+  static const JobObjectAssociateCompletionPortInformation = 0x00000007;
+}
+
+/// {@category Enum}
+class QueryProcessAffinityUpdateMode_lpdwFlags {
+  static const PROCESS_AFFINITY_ENABLE_AUTO_UPDATE = 0x00000001;
+}
+
+/// {@category Enum}
+class GetNamedPipeInfo_lpFlags {
+  static const PIPE_CLIENT_END = 0x00000000;
+  static const PIPE_SERVER_END = 0x00000001;
+  static const PIPE_TYPE_BYTE = 0x00000000;
+  static const PIPE_TYPE_MESSAGE = 0x00000004;
+}
+
+/// {@category Enum}
+class SetTapeParameters_dwOperationFlags {
+  static const SET_TAPE_DRIVE_INFORMATION = 0x00000001;
+  static const SET_TAPE_MEDIA_INFORMATION = 0x00000000;
+}
+
+/// {@category Enum}
+class SetProcessDEPPolicy_dwFlags {
+  static const PROCESS_DEP_ENABLE = 0x00000001;
+  static const PROCESS_DEP_DISABLE_ATL_THUNK_EMULATION = 0x00000002;
+}
+
+/// {@category Enum}
+class CreateHatchBrush_iHatchFlags {
+  static const HS_BDIAGONAL = 0x00000003;
+  static const HS_CROSS = 0x00000004;
+  static const HS_DIAGCROSS = 0x00000005;
+  static const HS_FDIAGONAL = 0x00000002;
+  static const HS_HORIZONTAL = 0x00000000;
+  static const HS_VERTICAL = 0x00000001;
+}
+
+/// {@category Enum}
+class QueryFullProcessImageName_dwFlags {
+  static const PROCESS_NAME_NATIVE = 0x00000001;
+}
+
+/// {@category Enum}
+class SetThreadExecutionState_esFlags {
+  static const ES_AWAYMODE_REQUIRED = 0x00000040;
+  static const ES_CONTINUOUS = 0x80000000;
+  static const ES_DISPLAY_REQUIRED = 0x00000002;
+  static const ES_SYSTEM_REQUIRED = 0x00000001;
+  static const ES_USER_PRESENT = 0x00000004;
+}
+
+/// {@category Enum}
+class EscapeCommFunction_dwFuncFlags {
+  static const CLRBREAK = 0x00000009;
+  static const CLRDTR = 0x00000006;
+  static const CLRRTS = 0x00000004;
+  static const SETBREAK = 0x00000008;
+  static const SETDTR = 0x00000005;
+  static const SETRTS = 0x00000003;
+  static const SETXOFF = 0x00000001;
+  static const SETXON = 0x00000002;
+}
+
+/// {@category Enum}
+class OfferVirtualMemory_PriorityFlags {
+  static const VMOfferPriorityVeryLow = 0x00001000;
+  static const VMOfferPriorityLow = 0x00002000;
+  static const VMOfferPriorityBelowNormal = 0x00002000;
+  static const VMOfferPriorityNormal = 0x00002000;
+}
+
+/// {@category Enum}
+class ReadEventLog_dwReadFlags {
+  static const EVENTLOG_SEEK_READ = 0x00000002;
+  static const EVENTLOG_SEQUENTIAL_READ = 0x00000001;
+}
+
+/// {@category Enum}
+class LocalAlloc_uFlags {
+  static const LHND = 0x00000042;
+  static const LMEM_FIXED = 0x00000000;
+  static const LMEM_MOVEABLE = 0x00000002;
+  static const LMEM_ZEROINIT = 0x00000040;
+  static const LPTR = 0x00000040;
+  static const NONZEROLHND = 0x00000002;
+  static const NONZEROLPTR = 0x00000000;
+}
+
+/// {@category Enum}
+class HeapSetInformation_HeapInformationClassFlags {
+  static const HeapCompatibilityInformation = 0x00000000;
+  static const HeapEnableTerminationOnCorruption = 0x00000001;
+  static const HeapOptimizeResources = 0x00000003;
+}
+
+/// {@category Enum}
+class ExitWindowsEx_uFlags {
+  static const EWX_HYBRID_SHUTDOWN = 0x00400000;
+  static const EWX_LOGOFF = 0x00000000;
+  static const EWX_POWEROFF = 0x00000008;
+  static const EWX_REBOOT = 0x00000002;
+  static const EWX_RESTARTAPPS = 0x00000040;
+  static const EWX_SHUTDOWN = 0x00000001;
+}
+
+/// {@category Enum}
+class NtQueryInformationProcess_ProcessInformationClassFlags {
+  static const ProcessBasicInformation = 0x00000000;
+  static const ProcessDebugPort = 0x00000007;
+  static const ProcessWow64Information = 0x0000001a;
+  static const ProcessImageFileName = 0x0000001b;
+  static const ProcessBreakOnTermination = 0x0000001d;
+  static const ProcessSubsystemInformation = 0x0000004b;
+}
+
+/// {@category Enum}
+class PrepareTape_dwOperationFlags {
+  static const TAPE_FORMAT = 0x00000005;
+  static const TAPE_LOAD = 0x00000000;
+  static const TAPE_LOCK = 0x00000003;
+  static const TAPE_TENSION = 0x00000002;
+  static const TAPE_UNLOAD = 0x00000001;
+  static const TAPE_UNLOCK = 0x00000004;
+}
+
+/// {@category Enum}
+class IImageList_GetItemFlagsFlags {
+  static const ILIF_ALPHA = 0x00000001;
+  static const ILIF_LOWQUALITY = 0x00000002;
+}
+
+/// {@category Enum}
+class GlobalAlloc_uFlags {
+  static const GHND = 0x00000042;
+  static const GMEM_FIXED = 0x00000000;
+  static const GMEM_MOVEABLE = 0x00000002;
+  static const GMEM_ZEROINIT = 0x00000040;
+  static const GPTR = 0x00000040;
+}
+
+/// {@category Enum}
+class GetTapeParameters_dwOperationFlags {
+  static const GET_TAPE_DRIVE_INFORMATION = 0x00000001;
+  static const GET_TAPE_MEDIA_INFORMATION = 0x00000000;
+}
+
+/// {@category Enum}
+class EraseTape_dwEraseType {
+  static const TAPE_ERASE_LONG = 0x00000001;
+  static const TAPE_ERASE_SHORT = 0x00000000;
+}
+
+/// {@category Enum}
+class GetGuiResources_uiFlags {
+  static const GR_GDIOBJECTS = 0x00000000;
+  static const GR_GDIOBJECTS_PEAK = 0x00000002;
+  static const GR_USEROBJECTS = 0x00000001;
+  static const GR_USEROBJECTS_PEAK = 0x00000004;
+}
+
+/// {@category Enum}
+class MODEMDEVCAPS_dwDialOptionsFlags {
+  static const DIALOPTION_BILLING = 0x00000040;
+  static const DIALOPTION_DIALTONE = 0x00000100;
+  static const DIALOPTION_QUIET = 0x00000080;
+}
+
+/// {@category Enum}
+class JOBOBJECT_CPU_RATE_CONTROL_INFORMATIONFlags {
+  static const JOB_OBJECT_CPU_RATE_CONTROL_ENABLE = 0x00000001;
+  static const JOB_OBJECT_CPU_RATE_CONTROL_WEIGHT_BASED = 0x00000002;
+  static const JOB_OBJECT_CPU_RATE_CONTROL_HARD_CAP = 0x00000004;
+  static const JOB_OBJECT_CPU_RATE_CONTROL_NOTIFY = 0x00000008;
+  static const JOB_OBJECT__CPU_RATE_CONTROL_MIN_MAX_RATE = 0x00000010;
+}
+
+/// {@category Enum}
+class VDS_NF_PACK {
+  static const VDS_NF_PACK_ARRIVE = 0x00000001;
+  static const VDS_NF_PACK_DEPART = 0x00000002;
+  static const VDS_NF_PACK_MODIFY = 0x00000003;
+}
+
+/// {@category Enum}
+class VDS_NF_FILE_SYSTEM {
+  static const VDS_NF_FILE_SYSTEM_MODIFY = 0x000000cb;
+  static const VDS_NF_FILE_SYSTEM_FORMAT_PROGRESS = 0x000000cc;
+}
+
+/// {@category Enum}
+class GET_CHANGER_PARAMETERS_LockUnlockCapabilitiesFlags {
+  static const LOCK_UNLOCK_DOOR = 0x00000002;
+  static const LOCK_UNLOCK_IEPORT = 0x00000001;
+  static const LOCK_UNLOCK_KEYPAD = 0x00000004;
+}
+
+/// {@category Enum}
+class MODEMSETTINGS_dwSpeakerModeFlags {
+  static const MDMSPKR_CALLSETUP = 0x00000008;
+  static const MDMSPKR_DIAL = 0x00000002;
+  static const MDMSPKR_OFF = 0x00000001;
+  static const MDMSPKR_ON = 0x00000004;
+}
+
+/// {@category Enum}
+class JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2_IoRateControlToleranceInterval {
+  static const ToleranceIntervalShort = 0x00000001;
+  static const ToleranceIntervalMedium = 0x00000002;
+  static const ToleranceIntervalLong = 0x00000003;
+}
+
+/// {@category Enum}
+class DCB_fDtrControlFlags {
+  static const DTR_CONTROL_DISABLE = 0x00000000;
+  static const DTR_CONTROL_ENABLE = 0x00000001;
+  static const DTR_CONTROL_HANDSHAKE = 0x00000002;
+}
+
+/// {@category Enum}
+class VDS_NF_CONTROLLER {
+  static const VDS_NF_CONTROLLER_ARRIVE = 0x00000067;
+  static const VDS_NF_CONTROLLER_DEPART = 0x00000068;
+  static const VDS_NF_CONTROLLER_MODIFY = 0x0000015e;
+  static const VDS_NF_CONTROLLER_REMOVED = 0x0000015f;
+}
+
+/// {@category Enum}
+class GET_CHANGER_PARAMETERS_Features0Flags {
+  static const CHANGER_BAR_CODE_SCANNER_INSTALLED = 0x00000001;
+  static const CHANGER_CARTRIDGE_MAGAZINE = 0x00000100;
+  static const CHANGER_CLEANER_ACCESS_NOT_VALID = 0x00040000;
+  static const CHANGER_CLEANER_SLOT = 0x00000040;
+  static const CHANGER_CLOSE_IEPORT = 0x00000004;
+  static const CHANGER_DEVICE_REINITIALIZE_CAPABLE = 0x08000000;
+  static const CHANGER_DRIVE_CLEANING_REQUIRED = 0x00010000;
+  static const CHANGER_DRIVE_EMPTY_ON_DOOR_ACCESS = 0x20000000;
+  static const CHANGER_EXCHANGE_MEDIA = 0x00000020;
+  static const CHANGER_INIT_ELEM_STAT_WITH_RANGE = 0x00000002;
+  static const CHANGER_KEYPAD_ENABLE_DISABLE = 0x10000000;
+  static const CHANGER_LOCK_UNLOCK = 0x00000080;
+  static const CHANGER_MEDIUM_FLIP = 0x00000200;
+  static const CHANGER_OPEN_IEPORT = 0x00000008;
+  static const CHANGER_POSITION_TO_ELEMENT = 0x00000400;
+  static const CHANGER_PREDISMOUNT_EJECT_REQUIRED = 0x00020000;
+  static const CHANGER_PREMOUNT_EJECT_REQUIRED = 0x00080000;
+  static const CHANGER_REPORT_IEPORT_STATE = 0x00000800;
+  static const CHANGER_SERIAL_NUMBER_VALID = 0x04000000;
+  static const CHANGER_STATUS_NON_VOLATILE = 0x00000010;
+  static const CHANGER_STORAGE_DRIVE = 0x00001000;
+  static const CHANGER_STORAGE_IEPORT = 0x00002000;
+  static const CHANGER_STORAGE_SLOT = 0x00004000;
+  static const CHANGER_STORAGE_TRANSPORT = 0x00008000;
+  static const CHANGER_VOLUME_ASSERT = 0x00400000;
+  static const CHANGER_VOLUME_IDENTIFICATION = 0x00100000;
+  static const CHANGER_VOLUME_REPLACE = 0x00800000;
+  static const CHANGER_VOLUME_SEARCH = 0x00200000;
+  static const CHANGER_VOLUME_UNDEFINE = 0x01000000;
+}
+
+/// {@category Enum}
+class JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2_RateControlTolerance {
+  static const ToleranceLow = 0x00000001;
+  static const ToleranceMedium = 0x00000002;
+  static const ToleranceHigh = 0x00000003;
+}
+
+/// {@category Enum}
+class VDS_NF_DRIVE {
+  static const VDS_NF_DRIVE_ARRIVE = 0x00000069;
+  static const VDS_NF_DRIVE_DEPART = 0x0000006a;
+  static const VDS_NF_DRIVE_MODIFY = 0x0000006b;
+  static const VDS_NF_DRIVE_REMOVED = 0x00000162;
+}
+
+/// {@category Enum}
+class VDS_NF_PORT {
+  static const VDS_NF_PORT_ARRIVE = 0x00000079;
+  static const VDS_NF_PORT_DEPART = 0x0000007a;
+  static const VDS_NF_PORT_MODIFY = 0x00000160;
+  static const VDS_NF_PORT_REMOVED = 0x00000161;
+}
+
+/// {@category Enum}
+class tttoolinfoa_uFlags {
+  static const TTF_ABSOLUTE = 0x00000080;
+  static const TTF_CENTERTIP = 0x00000002;
+  static const TTF_IDISHWND = 0x00000001;
+  static const TTF_PARSELINKS = 0x00001000;
+  static const TTF_RTLREADING = 0x00000004;
+  static const TTF_SUBCLASS = 0x00000010;
+  static const TTF_TRACK = 0x00000020;
+  static const TTF_TRANSPARENT = 0x00000100;
+}
+
+/// {@category Enum}
+class JOBOBJECT_END_OF_JOB_TIME_INFORMATION_EndOfJobTimeActionFlags {
+  static const JOB_OBJECT_TERMINATE_AT_END_OF_JOB = 0x00000000;
+  static const JOB_OBJECT_POST_AT_END_OF_JOB = 0x00000001;
+}
+
+/// {@category Enum}
+class COMMPROP_wSettableStopParityFlags {
+  static const STOPBITS_10 = 0x00000001;
+  static const STOPBITS_15 = 0x00000002;
+  static const STOPBITS_20 = 0x00000004;
+  static const PARITY_NONE = 0x00000100;
+  static const PARITY_ODD = 0x00000200;
+  static const PARITY_EVEN = 0x00000400;
+  static const PARITY_MARK = 0x00000800;
+  static const PARITY_SPACE = 0x00001000;
+}
+
+/// {@category Enum}
+class MODEMSETTINGS_dwSpeakerVolumeFlags {
+  static const MDMVOL_HIGH = 0x00000002;
+  static const MDMVOL_LOW = 0x00000000;
+  static const MDMVOL_MEDIUM = 0x00000001;
+}
+
+/// {@category Enum}
+class MODEMDEVCAPS_dwSpeakerVolumeFlags {
+  static const MDMVOLFLAG_HIGH = 0x00000004;
+  static const MDMVOLFLAG_LOW = 0x00000001;
+  static const MDMVOLFLAG_MEDIUM = 0x00000002;
+}
+
+/// {@category Enum}
+class MODEMDEVCAPS_dwSpeakerModeFlags {
+  static const MDMSPKRFLAG_CALLSETUP = 0x00000008;
+  static const MDMSPKRFLAG_DIAL = 0x00000002;
+  static const MDMSPKRFLAG_OFF = 0x00000001;
+  static const MDMSPKRFLAG_ON = 0x00000004;
+}
+
+/// {@category Enum}
+class DCB_StopBitsFlags {
+  static const ONESTOPBIT = 0x00000000;
+  static const ONE5STOPBITS = 0x00000001;
+  static const TWOSTOPBITS = 0x00000002;
+}
+
+/// {@category Enum}
+class CHANGER_ELEMENT_STATUSFlags {
+  static const ELEMENT_STATUS_ACCESS = 0x00000008;
+  static const ELEMENT_STATUS_AVOLTAG = 0x20000000;
+  static const ELEMENT_STATUS_EXCEPT = 0x00000004;
+  static const ELEMENT_STATUS_EXENAB = 0x00000010;
+  static const ELEMENT_STATUS_FULL = 0x00000001;
+  static const ELEMENT_STATUS_ID_VALID = 0x00002000;
+  static const ELEMENT_STATUS_IMPEXP = 0x00000002;
+  static const ELEMENT_STATUS_INENAB = 0x00000020;
+  static const ELEMENT_STATUS_INVERT = 0x00400000;
+  static const ELEMENT_STATUS_LUN_VALID = 0x00001000;
+  static const ELEMENT_STATUS_NOT_BUS = 0x00008000;
+  static const ELEMENT_STATUS_PVOLTAG = 0x10000000;
+  static const ELEMENT_STATUS_SVALID = 0x00800000;
+  static const ELEMENT_STATUS_PRODUCT_DATA = 0x00000040;
+}
+
+/// {@category Enum}
+class STARTUPINFOW_dwFlags {
+  static const STARTF_FORCEONFEEDBACK = 0x00000040;
+  static const STARTF_FORCEOFFFEEDBACK = 0x00000080;
+  static const STARTF_PREVENTPINNING = 0x00002000;
+  static const STARTF_RUNFULLSCREEN = 0x00000020;
+  static const STARTF_TITLEISAPPID = 0x00001000;
+  static const STARTF_TITLEISLINKNAME = 0x00000800;
+  static const STARTF_UNTRUSTEDSOURCE = 0x00008000;
+  static const STARTF_USECOUNTCHARS = 0x00000008;
+  static const STARTF_USEFILLATTRIBUTE = 0x00000010;
+  static const STARTF_USEHOTKEY = 0x00000200;
+  static const STARTF_USEPOSITION = 0x00000004;
+  static const STARTF_USESHOWWINDOW = 0x00000001;
+  static const STARTF_USESIZE = 0x00000002;
+  static const STARTF_USESTDHANDLES = 0x00000100;
+}
+
+/// {@category Enum}
+class TAPE_GET_DRIVE_PARAMETERS_FeaturesHighFlags {
+  static const TAPE_DRIVE_ABS_BLK_IMMED = 0x80002000;
+  static const TAPE_DRIVE_ABSOLUTE_BLK = 0x80001000;
+  static const TAPE_DRIVE_END_OF_DATA = 0x80010000;
+  static const TAPE_DRIVE_FILEMARKS = 0x80040000;
+  static const TAPE_DRIVE_LOAD_UNLOAD = 0x80000001;
+  static const TAPE_DRIVE_LOAD_UNLD_IMMED = 0x80000020;
+  static const TAPE_DRIVE_LOCK_UNLOCK = 0x80000004;
+  static const TAPE_DRIVE_LOCK_UNLK_IMMED = 0x80000080;
+  static const TAPE_DRIVE_LOG_BLK_IMMED = 0x80008000;
+  static const TAPE_DRIVE_LOGICAL_BLK = 0x80004000;
+  static const TAPE_DRIVE_RELATIVE_BLKS = 0x80020000;
+  static const TAPE_DRIVE_REVERSE_POSITION = 0x80400000;
+  static const TAPE_DRIVE_REWIND_IMMEDIATE = 0x80000008;
+  static const TAPE_DRIVE_SEQUENTIAL_FMKS = 0x80080000;
+  static const TAPE_DRIVE_SEQUENTIAL_SMKS = 0x80200000;
+  static const TAPE_DRIVE_SET_BLOCK_SIZE = 0x80000010;
+  static const TAPE_DRIVE_SET_COMPRESSION = 0x80000200;
+  static const TAPE_DRIVE_SET_ECC = 0x80000100;
+  static const TAPE_DRIVE_SET_PADDING = 0x80000400;
+  static const TAPE_DRIVE_SET_REPORT_SMKS = 0x80000800;
+  static const TAPE_DRIVE_SETMARKS = 0x80100000;
+  static const TAPE_DRIVE_SPACE_IMMEDIATE = 0x80800000;
+  static const TAPE_DRIVE_TENSION = 0x80000002;
+  static const TAPE_DRIVE_TENSION_IMMED = 0x80000040;
+  static const TAPE_DRIVE_WRITE_FILEMARKS = 0x82000000;
+  static const TAPE_DRIVE_WRITE_LONG_FMKS = 0x88000000;
+  static const TAPE_DRIVE_WRITE_MARK_IMMED = 0x90000000;
+  static const TAPE_DRIVE_WRITE_SETMARKS = 0x81000000;
+  static const TAPE_DRIVE_WRITE_SHORT_FMKS = 0x84000000;
+}
+
+/// {@category Enum}
+class MEMORY_PRIORITY_INFORMATION_MemoryPriorityFlags {
+  static const MEMORY_PRIORITY_VERY_LOW = 0x00000001;
+  static const MEMORY_PRIORITY_LOW = 0x00000002;
+  static const MEMORY_PRIORITY_MEDIUM = 0x00000003;
+  static const MEMORY_PRIORITY_BELOW_NORMAL = 0x00000004;
+  static const MEMORY_PRIORITY_NORMAL = 0x00000005;
+}
+
+/// {@category Enum}
+class VDS_NF_LUN {
+  static const VDS_NF_LUN_ARRIVE = 0x0000006c;
+  static const VDS_NF_LUN_DEPART = 0x0000006d;
+  static const VDS_NF_LUN_MODIFY = 0x0000006e;
+}
+
+/// {@category Enum}
+class WIN32_STREAM_ID_dwStreamIdFlags {
+  static const BACKUP_ALTERNATE_DATA = 0x00000004;
+  static const BACKUP_DATA = 0x00000001;
+  static const BACKUP_EA_DATA = 0x00000002;
+  static const BACKUP_LINK = 0x00000005;
+  static const BACKUP_OBJECT_ID = 0x00000007;
+  static const BACKUP_PROPERTY_DATA = 0x00000006;
+  static const BACKUP_REPARSE_DATA = 0x00000008;
+  static const BACKUP_SECURITY_DATA = 0x00000003;
+  static const BACKUP_SPARSE_BLOCK = 0x00000009;
+  static const BACKUP_TXFS_DATA = 0x0000000a;
+}
+
+/// {@category Enum}
+class PROCESS_PROTECTION_LEVEL_INFORMATION_ProtectionLevelFlags {
+  static const PROTECTION_LEVEL_WINTCB_LIGHT = 0x00000000;
+  static const PROTECTION_LEVEL_WINDOWS = 0x00000001;
+  static const PROTECTION_LEVEL_WINDOWS_LIGHT = 0x00000002;
+  static const PROTECTION_LEVEL_ANTIMALWARE_LIGHT = 0x00000003;
+  static const PROTECTION_LEVEL_LSA_LIGHT = 0x00000004;
+  static const PROTECTION_LEVEL_WINTCB = 0x00000005;
+  static const PROTECTION_LEVEL_CODEGEN_LIGHT = 0x00000006;
+  static const PROTECTION_LEVEL_AUTHENTICODE = 0x00000007;
+  static const PROTECTION_LEVEL_PPL_APP = 0x00000008;
+  static const PROTECTION_LEVEL_NONE = 0xfffffffe;
+}
+
+/// {@category Enum}
+class DEV_BROADCAST_HDR_dbch_devicetypeFlags {
+  static const DBT_DEVTYP_DEVICEINTERFACE = 0x00000005;
+  static const DBT_DEVTYP_HANDLE = 0x00000006;
+  static const DBT_DEVTYP_OEM = 0x00000000;
+  static const DBT_DEVTYP_PORT = 0x00000003;
+  static const DBT_DEVTYP_VOLUME = 0x00000002;
+}
+
+/// {@category Enum}
+class GET_CHANGER_PARAMETERS_Features1Flags {
+  static const CHANGER_CLEANER_AUTODISMOUNT = 0x80000004;
+  static const CHANGER_CLEANER_OPS_NOT_SUPPORTED = 0x80000040;
+  static const CHANGER_IEPORT_USER_CONTROL_CLOSE = 0x80000100;
+  static const CHANGER_IEPORT_USER_CONTROL_OPEN = 0x80000080;
+  static const CHANGER_MOVE_EXTENDS_IEPORT = 0x80000200;
+  static const CHANGER_MOVE_RETRACTS_IEPORT = 0x80000400;
+  static const CHANGER_PREDISMOUNT_ALIGN_TO_DRIVE = 0x80000002;
+  static const CHANGER_PREDISMOUNT_ALIGN_TO_SLOT = 0x80000001;
+  static const CHANGER_RTN_MEDIA_TO_ORIGINAL_ADDR = 0x80000020;
+  static const CHANGER_SLOTS_USE_TRAYS = 0x80000010;
+  static const CHANGER_TRUE_EXCHANGE_CAPABLE = 0x80000008;
+}
+
+/// {@category Enum}
+class POWER_ACTION_POLICY_EventCodeFlags {
+  static const POWER_FORCE_TRIGGER_RESET = 0x80000000;
+  static const POWER_LEVEL_USER_NOTIFY_EXEC = 0x00000004;
+  static const POWER_LEVEL_USER_NOTIFY_SOUND = 0x00000002;
+  static const POWER_LEVEL_USER_NOTIFY_TEXT = 0x00000001;
+  static const POWER_USER_NOTIFY_BUTTON = 0x00000008;
+  static const POWER_USER_NOTIFY_SHUTDOWN = 0x00000010;
+}
+
+/// {@category Enum}
+class VDS_NF_DISK {
+  static const VDS_NF_DISK_ARRIVE = 0x00000008;
+  static const VDS_NF_DISK_DEPART = 0x00000009;
+  static const VDS_NF_DISK_MODIFY = 0x0000000a;
+}
+
+/// {@category Enum}
+class DCB_fRtsControlFlags {
+  static const RTS_CONTROL_DISABLE = 0x00000000;
+  static const RTS_CONTROL_ENABLE = 0x00000001;
+  static const RTS_CONTROL_HANDSHAKE = 0x00000002;
+  static const RTS_CONTROL_TOGGLE = 0x00000003;
+}
+
+/// {@category Enum}
+class DEV_BROADCAST_VOLUMEFlags {
+  static const DBTF_MEDIA = 0x00000001;
+  static const DBTF_NET = 0x00000002;
+}
+
+/// {@category Enum}
+class cert_viewproperties_struct_a_dwFlags {
+  static const CM_ENABLEHOOK = 0x00000001;
+  static const CM_SHOW_HELP = 0x00000002;
+  static const CM_SHOW_HELPICON = 0x00000004;
+  static const CM_ENABLETEMPLATE = 0x00000008;
+  static const CM_HIDE_ADVANCEPAGE = 0x00000010;
+  static const CM_HIDE_TRUSTPAGE = 0x00000020;
+  static const CM_NO_NAMECHANGE = 0x00000040;
+  static const CM_NO_EDITTRUST = 0x00000080;
+  static const CM_HIDE_DETAILPAGE = 0x00000100;
+  static const CM_ADD_CERT_STORES = 0x00000200;
+}
+
+/// {@category Enum}
+class JOBOBJECT_IO_RATE_CONTROL_INFORMATIONFlags {
+  static const JOB_OBJECT_IO_RATE_CONTROL_ENABLE = 0x00000001;
+}
+
+/// {@category Enum}
+class REASON_CONTEXTFlags {
+  static const POWER_REQUEST_CONTEXT_DETAILED_STRING = 0x00000002;
+  static const POWER_REQUEST_CONTEXT_SIMPLE_STRING = 0x00000001;
+}
+
+/// {@category Enum}
+class DCB_ParityFlags {
+  static const EVENPARITY = 0x00000002;
+  static const MARKPARITY = 0x00000003;
+  static const NOPARITY = 0x00000000;
+  static const ODDPARITY = 0x00000001;
+  static const SPACEPARITY = 0x00000004;
 }
 
 /// {@category Enum}
@@ -1291,10 +2463,8 @@ class SCM_PD_OPERATIONAL_STATUS_REASON {
   static const ScmPhysicalDeviceOpReason_PermanentError = 0x0000000e;
   static const ScmPhysicalDeviceOpReason_LostWritePersistence = 0x0000000f;
   static const ScmPhysicalDeviceOpReason_FatalError = 0x00000010;
-  static const ScmPhysicalDeviceOpReason_DataPersistenceLossImminent =
-      0x00000011;
-  static const ScmPhysicalDeviceOpReason_WritePersistenceLossImminent =
-      0x00000012;
+  static const ScmPhysicalDeviceOpReason_DataPersistenceLossImminent = 0x00000011;
+  static const ScmPhysicalDeviceOpReason_WritePersistenceLossImminent = 0x00000012;
   static const ScmPhysicalDeviceOpReason_MediaRemainingSpareBlock = 0x00000013;
   static const ScmPhysicalDeviceOpReason_PerformanceDegradation = 0x00000014;
   static const ScmPhysicalDeviceOpReason_ExcessiveTemperature = 0x00000015;
@@ -3174,8 +4344,3 @@ class ORIENTATION_PREFERENCE {
   static const ORIENTATION_PREFERENCE_PORTRAIT_FLIPPED = 0x00000008;
 }
 
-/// {@category Enum}
-class PROCESS_MEMORY_EXHAUSTION_TYPE {
-  static const PMETypeFailFastOnCommitFailure = 0x00000000;
-  static const PMETypeMax = 0x00000001;
-}

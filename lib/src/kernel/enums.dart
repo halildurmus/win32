@@ -1,15 +1,15 @@
 /// {@category Enum}
+class COMPARTMENT_ID {
+  static const UNSPECIFIED_COMPARTMENT_ID = 0x00000000;
+  static const DEFAULT_COMPARTMENT_ID = 0x00000001;
+}
+
+/// {@category Enum}
 class EXCEPTION_DISPOSITION {
   static const ExceptionContinueExecution = 0x00000000;
   static const ExceptionContinueSearch = 0x00000001;
   static const ExceptionNestedException = 0x00000002;
   static const ExceptionCollidedUnwind = 0x00000003;
-}
-
-/// {@category Enum}
-class COMPARTMENT_ID {
-  static const UNSPECIFIED_COMPARTMENT_ID = 0x00000000;
-  static const DEFAULT_COMPARTMENT_ID = 0x00000001;
 }
 
 /// {@category Enum}
@@ -61,3 +61,4 @@ class SUITE_TYPE {
   static const MultiUserTS = 0x00000011;
   static const MaxSuiteType = 0x00000012;
 }
+

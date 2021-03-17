@@ -70,3 +70,4 @@ class PROBLEM_TYPE {
   static const PT_HIGHER_UTILIZATION = 0x00000010;
   static const PT_UP_STREAM_UTILIZATION = 0x00000020;
 }
+

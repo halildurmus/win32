@@ -1,38 +1,4 @@
 /// {@category Enum}
-class CREDUI_FLAGS {
-  static const CREDUI_FLAGS_ALWAYS_SHOW_UI = 0x00000080;
-  static const CREDUI_FLAGS_COMPLETE_USERNAME = 0x00000800;
-  static const CREDUI_FLAGS_DO_NOT_PERSIST = 0x00000002;
-  static const CREDUI_FLAGS_EXCLUDE_CERTIFICATES = 0x00000008;
-  static const CREDUI_FLAGS_EXPECT_CONFIRMATION = 0x00020000;
-  static const CREDUI_FLAGS_GENERIC_CREDENTIALS = 0x00040000;
-  static const CREDUI_FLAGS_INCORRECT_PASSWORD = 0x00000001;
-  static const CREDUI_FLAGS_KEEP_USERNAME = 0x00100000;
-  static const CREDUI_FLAGS_PASSWORD_ONLY_OK = 0x00000200;
-  static const CREDUI_FLAGS_PERSIST = 0x00001000;
-  static const CREDUI_FLAGS_REQUEST_ADMINISTRATOR = 0x00000004;
-  static const CREDUI_FLAGS_REQUIRE_CERTIFICATE = 0x00000010;
-  static const CREDUI_FLAGS_REQUIRE_SMARTCARD = 0x00000100;
-  static const CREDUI_FLAGS_SERVER_CREDENTIAL = 0x00004000;
-  static const CREDUI_FLAGS_SHOW_SAVE_CHECK_BOX = 0x00000040;
-  static const CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS = 0x00080000;
-  static const CREDUI_FLAGS_VALIDATE_USERNAME = 0x00000400;
-}
-
-/// {@category Enum}
-class CREDUIWIN {
-  static const CREDUIWIN_GENERIC = 0x00000001;
-  static const CREDUIWIN_CHECKBOX = 0x00000002;
-  static const CREDUIWIN_AUTHPACKAGE_ONLY = 0x00000010;
-  static const CREDUIWIN_IN_CRED_ONLY = 0x00000020;
-  static const CREDUIWIN_ENUMERATE_ADMINS = 0x00000100;
-  static const CREDUIWIN_ENUMERATE_CURRENT_USER = 0x00000200;
-  static const CREDUIWIN_SECURE_PROMPT = 0x00001000;
-  static const CREDUIWIN_PREPROMPTING = 0x00002000;
-  static const CREDUIWIN_PACK_32_WOW = 0x10000000;
-}
-
-/// {@category Enum}
 class SID_NAME_USE {
   static const SidTypeUser = 0x00000001;
   static const SidTypeGroup = 0x00000002;
@@ -269,18 +235,22 @@ class MANDATORY_LEVEL {
 }
 
 /// {@category Enum}
-class MSA_INFO_LEVEL {
-  static const MsaInfoLevel0 = 0x00000000;
-  static const MsaInfoLevelMax = 0x00000001;
-}
-
-/// {@category Enum}
-class MSA_INFO_STATE {
-  static const MsaInfoNotExist = 0x00000001;
-  static const MsaInfoNotService = 0x00000002;
-  static const MsaInfoCannotInstall = 0x00000003;
-  static const MsaInfoCanInstall = 0x00000004;
-  static const MsaInfoInstalled = 0x00000005;
+class TOKEN_ACCESS_MASK {
+  static const DELETE = 0x00010000;
+  static const READ_CONTROL = 0x00020000;
+  static const WRITE_DAC = 0x00040000;
+  static const WRITE_OWNER = 0x00080000;
+  static const ACCESS_SYSTEM_SECURITY = 0x01000000;
+  static const TOKEN_ASSIGN_PRIMARY = 0x00000001;
+  static const TOKEN_DUPLICATE = 0x00000002;
+  static const TOKEN_IMPERSONATE = 0x00000004;
+  static const TOKEN_QUERY = 0x00000008;
+  static const TOKEN_QUERY_SOURCE = 0x00000010;
+  static const TOKEN_ADJUST_PRIVILEGES = 0x00000020;
+  static const TOKEN_ADJUST_GROUPS = 0x00000040;
+  static const TOKEN_ADJUST_DEFAULT = 0x00000080;
+  static const TOKEN_ADJUST_SESSIONID = 0x00000100;
+  static const TOKEN_ALL_ACCESS = 0x000f00ff;
 }
 
 /// {@category Enum}
@@ -295,6 +265,21 @@ class PROCESS_INFORMATION_CLASS {
   static const ProcessProtectionLevelInfo = 0x00000007;
   static const ProcessLeapSecondInfo = 0x00000008;
   static const ProcessInformationClassMax = 0x00000009;
+}
+
+/// {@category Enum}
+class MSA_INFO_LEVEL {
+  static const MsaInfoLevel0 = 0x00000000;
+  static const MsaInfoLevelMax = 0x00000001;
+}
+
+/// {@category Enum}
+class MSA_INFO_STATE {
+  static const MsaInfoNotExist = 0x00000001;
+  static const MsaInfoNotService = 0x00000002;
+  static const MsaInfoCannotInstall = 0x00000003;
+  static const MsaInfoCanInstall = 0x00000004;
+  static const MsaInfoInstalled = 0x00000005;
 }
 
 /// {@category Enum}
@@ -734,8 +719,7 @@ class SECPKG_ATTR_LCT_STATUS {
 class SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS {
   static const SecApplicationProtocolNegotiationStatus_None = 0x00000000;
   static const SecApplicationProtocolNegotiationStatus_Success = 0x00000001;
-  static const SecApplicationProtocolNegotiationStatus_SelectedClientOnly =
-      0x00000002;
+  static const SecApplicationProtocolNegotiationStatus_SelectedClientOnly = 0x00000002;
 }
 
 /// {@category Enum}
@@ -968,19 +952,13 @@ class TPMVSCMGR_ERROR {
 /// {@category Enum}
 class KeyCredentialManagerOperationErrorStates {
   static const KeyCredentialManagerOperationErrorStateNone = 0x00000000;
-  static const KeyCredentialManagerOperationErrorStateDeviceJoinFailure =
-      0x00000001;
+  static const KeyCredentialManagerOperationErrorStateDeviceJoinFailure = 0x00000001;
   static const KeyCredentialManagerOperationErrorStateTokenFailure = 0x00000002;
-  static const KeyCredentialManagerOperationErrorStateCertificateFailure =
-      0x00000004;
-  static const KeyCredentialManagerOperationErrorStateRemoteSessionFailure =
-      0x00000008;
-  static const KeyCredentialManagerOperationErrorStatePolicyFailure =
-      0x00000010;
-  static const KeyCredentialManagerOperationErrorStateHardwareFailure =
-      0x00000020;
-  static const KeyCredentialManagerOperationErrorStatePinExistsFailure =
-      0x00000040;
+  static const KeyCredentialManagerOperationErrorStateCertificateFailure = 0x00000004;
+  static const KeyCredentialManagerOperationErrorStateRemoteSessionFailure = 0x00000008;
+  static const KeyCredentialManagerOperationErrorStatePolicyFailure = 0x00000010;
+  static const KeyCredentialManagerOperationErrorStateHardwareFailure = 0x00000020;
+  static const KeyCredentialManagerOperationErrorStatePinExistsFailure = 0x00000040;
 }
 
 /// {@category Enum}
@@ -1008,7 +986,7 @@ class NETLOGON_LOGON_INFO_CLASS {
 }
 
 /// {@category Enum}
-class tag_IdentityUpdateEvent {
+class IdentityUpdateEvent {
   static const IDENTITY_ASSOCIATED = 0x00000001;
   static const IDENTITY_DISASSOCIATED = 0x00000002;
   static const IDENTITY_CREATED = 0x00000004;
@@ -1017,6 +995,24 @@ class tag_IdentityUpdateEvent {
   static const IDENTITY_PROPCHANGED = 0x00000020;
   static const IDENTITY_CONNECTED = 0x00000040;
   static const IDENTITY_DISCONNECTED = 0x00000080;
+}
+
+/// {@category Enum}
+class IDENTITY_URL {
+  static const IDENTITY_URL_CREATE_ACCOUNT_WIZARD = 0x00000000;
+  static const IDENTITY_URL_SIGN_IN_WIZARD = 0x00000001;
+  static const IDENTITY_URL_CHANGE_PASSWORD_WIZARD = 0x00000002;
+  static const IDENTITY_URL_IFEXISTS_WIZARD = 0x00000003;
+  static const IDENTITY_URL_ACCOUNT_SETTINGS = 0x00000004;
+  static const IDENTITY_URL_RESTORE_WIZARD = 0x00000005;
+  static const IDENTITY_URL_CONNECT_WIZARD = 0x00000006;
+}
+
+/// {@category Enum}
+class ACCOUNT_STATE {
+  static const NOT_CONNECTED = 0x00000000;
+  static const CONNECTING = 0x00000001;
+  static const CONNECT_COMPLETED = 0x00000002;
 }
 
 /// {@category Enum}
@@ -1654,8 +1650,7 @@ class CERTENROLL_OBJECTID {
   static const XCN_OID_PKCS_12_pbeWithSHA1And3KeyTripleDES = 0x00000194;
   static const XCN_OID_PKCS_12_pbeWithSHA1And40BitRC2 = 0x00000195;
   static const XCN_OID_PKCS_12_pbeWithSHA1And40BitRC4 = 0x00000196;
-  static const XCN_OID_PKCS_12_PROTECTED_PASSWORD_SECRET_BAG_TYPE_ID =
-      0x00000197;
+  static const XCN_OID_PKCS_12_PROTECTED_PASSWORD_SECRET_BAG_TYPE_ID = 0x00000197;
   static const XCN_OID_PKINIT_KP_KDC = 0x00000198;
   static const XCN_OID_PKIX_CA_REPOSITORY = 0x00000199;
   static const XCN_OID_PKIX_OCSP_NONCE = 0x0000019a;
@@ -2065,8 +2060,7 @@ class CERTENROLL_PROPERTYID {
   static const XCN_CERT_PUB_KEY_CNG_ALG_BIT_LENGTH_PROP_ID = 0x0000005d;
   static const XCN_CERT_ISSUER_PUB_KEY_BIT_LENGTH_PROP_ID = 0x0000005e;
   static const XCN_CERT_ISSUER_CHAIN_SIGN_HASH_CNG_ALG_PROP_ID = 0x0000005f;
-  static const XCN_CERT_ISSUER_CHAIN_PUB_KEY_CNG_ALG_BIT_LENGTH_PROP_ID =
-      0x00000060;
+  static const XCN_CERT_ISSUER_CHAIN_PUB_KEY_CNG_ALG_BIT_LENGTH_PROP_ID = 0x00000060;
   static const XCN_CERT_NO_EXPIRE_NOTIFICATION_PROP_ID = 0x00000061;
   static const XCN_CERT_AUTH_ROOT_SHA256_HASH_PROP_ID = 0x00000062;
   static const XCN_CERT_NCRYPT_KEY_HANDLE_TRANSFER_PROP_ID = 0x00000063;
@@ -2325,8 +2319,7 @@ class X509CertificateTemplateEnrollmentFlag {
   static const EnrollmentReuseKeyOnFullSmartCard = 0x00002000;
   static const EnrollmentNoRevocationInfoInCerts = 0x00004000;
   static const EnrollmentIncludeBasicConstraintsForEECerts = 0x00008000;
-  static const EnrollmentPreviousApprovalKeyBasedValidateReenrollment =
-      0x00010000;
+  static const EnrollmentPreviousApprovalKeyBasedValidateReenrollment = 0x00010000;
   static const EnrollmentCertificateIssuancePoliciesFromRequest = 0x00020000;
   static const EnrollmentSkipAutoRenewal = 0x00040000;
 }
@@ -2641,3 +2634,1860 @@ class DdqAccessLevel {
   static const CurrentUserData = 0x00000001;
   static const AllUserData = 0x00000002;
 }
+
+/// {@category Enum}
+class BCRYPT_OPERATION {
+  static const BCRYPT_CIPHER_OPERATION = 0x00000001;
+  static const BCRYPT_HASH_OPERATION = 0x00000002;
+  static const BCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION = 0x00000004;
+  static const BCRYPT_SECRET_AGREEMENT_OPERATION = 0x00000008;
+  static const BCRYPT_SIGNATURE_OPERATION = 0x00000010;
+  static const BCRYPT_RNG_OPERATION = 0x00000020;
+}
+
+/// {@category Enum}
+class NCRYPT_OPERATION {
+  static const NCRYPT_CIPHER_OPERATION = 0x00000001;
+  static const NCRYPT_HASH_OPERATION = 0x00000002;
+  static const NCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION = 0x00000004;
+  static const NCRYPT_SECRET_AGREEMENT_OPERATION = 0x00000008;
+  static const NCRYPT_SIGNATURE_OPERATION = 0x00000010;
+}
+
+/// {@category Enum}
+class CERT_FIND_FLAGS {
+  static const CERT_FIND_ANY = 0x00000000;
+  static const CERT_FIND_CERT_ID = 0x00100000;
+  static const CERT_FIND_CTL_USAGE = 0x000a0000;
+  static const CERT_FIND_ENHKEY_USAGE = 0x000a0000;
+  static const CERT_FIND_EXISTING = 0x000d0000;
+  static const CERT_FIND_HASH = 0x00010000;
+  static const CERT_FIND_HAS_PRIVATE_KEY = 0x00150000;
+  static const CERT_FIND_ISSUER_ATTR = 0x00030004;
+  static const CERT_FIND_ISSUER_NAME = 0x00020004;
+  static const CERT_FIND_ISSUER_OF = 0x000c0000;
+  static const CERT_FIND_ISSUER_STR = 0x00080004;
+  static const CERT_FIND_KEY_IDENTIFIER = 0x000f0000;
+  static const CERT_FIND_KEY_SPEC = 0x00090000;
+  static const CERT_FIND_MD5_HASH = 0x00040000;
+  static const CERT_FIND_PROPERTY = 0x00050000;
+  static const CERT_FIND_PUBLIC_KEY = 0x00060000;
+  static const CERT_FIND_SHA1_HASH = 0x00010000;
+  static const CERT_FIND_SIGNATURE_HASH = 0x000e0000;
+  static const CERT_FIND_SUBJECT_ATTR = 0x00030007;
+  static const CERT_FIND_SUBJECT_CERT = 0x000b0000;
+  static const CERT_FIND_SUBJECT_NAME = 0x00020007;
+  static const CERT_FIND_SUBJECT_STR = 0x00080007;
+  static const CERT_FIND_CROSS_CERT_DIST_POINTS = 0x00110000;
+  static const CERT_FIND_PUBKEY_MD5_HASH = 0x00120000;
+  static const CERT_FIND_SUBJECT_STR_A = 0x00070007;
+  static const CERT_FIND_SUBJECT_STR_W = 0x00080007;
+  static const CERT_FIND_ISSUER_STR_A = 0x00070004;
+  static const CERT_FIND_ISSUER_STR_W = 0x00080004;
+  static const CERT_FIND_SUBJECT_INFO_ACCESS = 0x00130000;
+  static const CERT_FIND_HASH_STR = 0x00140000;
+  static const CERT_FIND_OPTIONAL_ENHKEY_USAGE_FLAG = 0x00000001;
+  static const CERT_FIND_EXT_ONLY_ENHKEY_USAGE_FLAG = 0x00000002;
+  static const CERT_FIND_PROP_ONLY_ENHKEY_USAGE_FLAG = 0x00000004;
+  static const CERT_FIND_NO_ENHKEY_USAGE_FLAG = 0x00000008;
+  static const CERT_FIND_OR_ENHKEY_USAGE_FLAG = 0x00000010;
+  static const CERT_FIND_VALID_ENHKEY_USAGE_FLAG = 0x00000020;
+  static const CERT_FIND_OPTIONAL_CTL_USAGE_FLAG = 0x00000001;
+  static const CERT_FIND_EXT_ONLY_CTL_USAGE_FLAG = 0x00000002;
+  static const CERT_FIND_PROP_ONLY_CTL_USAGE_FLAG = 0x00000004;
+  static const CERT_FIND_NO_CTL_USAGE_FLAG = 0x00000008;
+  static const CERT_FIND_OR_CTL_USAGE_FLAG = 0x00000010;
+  static const CERT_FIND_VALID_CTL_USAGE_FLAG = 0x00000020;
+}
+
+/// {@category Enum}
+class CERT_QUERY_FLAGS {
+  static const CERT_QUERY_CONTENT_FLAG_ALL = 0x00003ffe;
+  static const CERT_QUERY_CONTENT_FLAG_CERT = 0x00000002;
+  static const CERT_QUERY_CONTENT_FLAG_CERT_PAIR = 0x00002000;
+  static const CERT_QUERY_CONTENT_FLAG_CRL = 0x00000008;
+  static const CERT_QUERY_CONTENT_FLAG_CTL = 0x00000004;
+  static const CERT_QUERY_CONTENT_FLAG_PFX = 0x00001000;
+  static const CERT_QUERY_CONTENT_FLAG_PFX_AND_LOAD = 0x00004000;
+  static const CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED = 0x00000100;
+  static const CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED = 0x00000400;
+  static const CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED = 0x00000200;
+  static const CERT_QUERY_CONTENT_FLAG_PKCS10 = 0x00000800;
+  static const CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT = 0x00000020;
+  static const CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL = 0x00000080;
+  static const CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL = 0x00000040;
+  static const CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE = 0x00000010;
+  static const CERT_QUERY_CONTENT_CERT = 0x00000001;
+  static const CERT_QUERY_CONTENT_CERT_PAIR = 0x0000000d;
+  static const CERT_QUERY_CONTENT_CRL = 0x00000003;
+  static const CERT_QUERY_CONTENT_CTL = 0x00000002;
+  static const CERT_QUERY_CONTENT_PFX = 0x0000000c;
+  static const CERT_QUERY_CONTENT_PFX_AND_LOAD = 0x0000000e;
+  static const CERT_QUERY_CONTENT_PKCS7_SIGNED = 0x00000008;
+  static const CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED = 0x0000000a;
+  static const CERT_QUERY_CONTENT_PKCS7_UNSIGNED = 0x00000009;
+  static const CERT_QUERY_CONTENT_PKCS10 = 0x0000000b;
+  static const CERT_QUERY_CONTENT_SERIALIZED_CERT = 0x00000005;
+  static const CERT_QUERY_CONTENT_SERIALIZED_CRL = 0x00000007;
+  static const CERT_QUERY_CONTENT_SERIALIZED_CTL = 0x00000006;
+  static const CERT_QUERY_CONTENT_SERIALIZED_STORE = 0x00000004;
+  static const CERT_QUERY_CONTENT_FLAG_ALL_ISSUER_CERT = 0x00000332;
+}
+
+/// {@category Enum}
+class CERT_QUERY_FORMAT_TYPE {
+  static const CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED = 0x00000003;
+  static const CERT_QUERY_FORMAT_BASE64_ENCODED = 0x00000002;
+  static const CERT_QUERY_FORMAT_BINARY = 0x00000001;
+}
+
+/// {@category Enum}
+class CERT_QUERY_FORMAT_FLAGS {
+  static const CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED = 0x00000008;
+  static const CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED = 0x00000004;
+  static const CERT_QUERY_FORMAT_FLAG_BINARY = 0x00000002;
+  static const CERT_QUERY_FORMAT_FLAG_ALL = 0x0000000e;
+}
+
+/// {@category Enum}
+class ICertEncodeStringArray_Reset_StringTypeFlags {
+  static const CERT_RDN_ANY_TYPE = 0x00000000;
+  static const CERT_RDN_NUMERIC_STRING = 0x00000003;
+  static const CERT_RDN_PRINTABLE_STRING = 0x00000004;
+  static const CERT_RDN_T61_STRING = 0x00000005;
+  static const CERT_RDN_VIDEOTEX_STRING = 0x00000006;
+  static const CERT_RDN_IA5_STRING = 0x00000007;
+  static const CERT_RDN_GRAPHIC_STRING = 0x00000008;
+  static const CERT_RDN_ISO646_STRING = 0x00000009;
+  static const CERT_RDN_GENERAL_STRING = 0x0000000a;
+  static const CERT_RDN_INT4_STRING = 0x0000000b;
+  static const CERT_RDN_UNICODE_STRING = 0x0000000c;
+  static const CERT_RDN_BMP_STRING = 0x0000000c;
+  static const CERT_RDN_ENCODED_BLOB = 0x00000001;
+  static const CERT_RDN_OCTET_STRING = 0x00000002;
+  static const CERT_RDN_TELETEX_STRING = 0x00000005;
+  static const CERT_RDN_UNIVERSAL_STRING = 0x0000000b;
+  static const CERT_RDN_UTF8_STRING = 0x0000000d;
+}
+
+/// {@category Enum}
+class Cert_dwStrType {
+  static const CERT_SIMPLE_NAME_STR = 0x00000001;
+  static const CERT_OID_NAME_STR = 0x00000002;
+  static const CERT_X500_NAME_STR = 0x00000003;
+}
+
+/// {@category Enum}
+class ICertView_SetRestriction_ColumnIndexFlags {
+  static const CV_COLUMN_LOG_DEFAULT = 0xfffffffe;
+  static const CV_COLUMN_LOG_FAILED_DEFAULT = 0xfffffffd;
+  static const CV_COLUMN_QUEUE_DEFAULT = 0xffffffff;
+}
+
+/// {@category Enum}
+class LOGON32_PROVIDER {
+  static const LOGON32_PROVIDER_DEFAULT = 0x00000000;
+  static const LOGON32_PROVIDER_WINNT50 = 0x00000003;
+  static const LOGON32_PROVIDER_WINNT40 = 0x00000002;
+}
+
+/// {@category Enum}
+class ICertAdmin2_DeleteRowFlags {
+  static const CDR_EXPIRED = 0x00000001;
+  static const CDR_REQUEST_LAST_CHANGED = 0x00000002;
+}
+
+/// {@category Enum}
+class SECPKG_ATTR {
+  static const SECPKG_ATTR_C_ACCESS_TOKEN = 0x80000012;
+  static const SECPKG_ATTR_C_FULL_ACCESS_TOKEN = 0x80000082;
+  static const SECPKG_ATTR_CERT_TRUST_STATUS = 0x80000084;
+  static const SECPKG_ATTR_CREDS = 0x80000080;
+  static const SECPKG_ATTR_CREDS_2 = 0x80000086;
+  static const SECPKG_ATTR_NEGOTIATION_PACKAGE = 0x80000081;
+  static const SECPKG_ATTR_PACKAGE_INFO = 0x0000000a;
+  static const SECPKG_ATTR_SERVER_AUTH_FLAGS = 0x80000083;
+  static const SECPKG_ATTR_SIZES = 0x00000000;
+  static const SECPKG_ATTR_SUBJECT_SECURITY_ATTRIBUTES = 0x0000007c;
+  static const SECPKG_ATTR_ACCESS_TOKEN = 0x00000012;
+  static const SECPKG_ATTR_APP_DATA = 0x0000005e;
+  static const SECPKG_ATTR_AUTHORITY = 0x00000006;
+  static const SECPKG_ATTR_CLIENT_SPECIFIED_TARGET = 0x0000001b;
+  static const SECPKG_ATTR_CONNECTION_INFO = 0x0000005a;
+  static const SECPKG_ATTR_DCE_INFO = 0x00000003;
+  static const SECPKG_ATTR_ENDPOINT_BINDINGS = 0x0000001a;
+  static const SECPKG_ATTR_EAP_KEY_BLOCK = 0x0000005b;
+  static const SECPKG_ATTR_FLAGS = 0x0000000e;
+  static const SECPKG_ATTR_ISSUER_LIST_EX = 0x00000059;
+  static const SECPKG_ATTR_KEY_INFO = 0x00000005;
+  static const SECPKG_ATTR_LAST_CLIENT_TOKEN_STATUS = 0x0000001e;
+  static const SECPKG_ATTR_LIFESPAN = 0x00000002;
+  static const SECPKG_ATTR_LOCAL_CERT_CONTEXT = 0x00000054;
+  static const SECPKG_ATTR_LOCAL_CRED = 0x00000052;
+  static const SECPKG_ATTR_NAMES = 0x00000001;
+  static const SECPKG_ATTR_NATIVE_NAMES = 0x0000000d;
+  static const SECPKG_ATTR_NEGOTIATION_INFO = 0x0000000c;
+  static const SECPKG_ATTR_PASSWORD_EXPIRY = 0x00000008;
+  static const SECPKG_ATTR_REMOTE_CERT_CONTEXT = 0x00000053;
+  static const SECPKG_ATTR_ROOT_STORE = 0x00000055;
+  static const SECPKG_ATTR_SESSION_KEY = 0x00000009;
+  static const SECPKG_ATTR_SESSION_INFO = 0x0000005d;
+  static const SECPKG_ATTR_STREAM_SIZES = 0x00000004;
+  static const SECPKG_ATTR_SUPPORTED_SIGNATURES = 0x00000066;
+  static const SECPKG_ATTR_TARGET_INFORMATION = 0x00000011;
+  static const SECPKG_ATTR_UNIQUE_BINDINGS = 0x00000019;
+}
+
+/// {@category Enum}
+class NPGetUniversalName_dwInfoLevel {
+  static const UNIVERSAL_NAME_INFO_LEVEL = 0x00000001;
+  static const REMOTE_NAME_INFO_LEVEL = 0x00000002;
+}
+
+/// {@category Enum}
+class Enum_dwServiceState {
+  static const SERVICE_ACTIVE = 0x00000001;
+  static const SERVICE_INACTIVE = 0x00000002;
+  static const SERVICE_STATE_ALL = 0x00000003;
+}
+
+/// {@category Enum}
+class CertOpenStore_dwEncodingType {
+  static const PKCS_7_ASN_ENCODING = 0x00010000;
+  static const X509_ASN_ENCODING = 0x00000001;
+}
+
+/// {@category Enum}
+class ICertRequest2_GetFullResponseProperty_PropIdFlags {
+  static const FR_PROP_NONE = 0x00000000;
+  static const FR_PROP_FULLRESPONSE = 0x00000001;
+  static const FR_PROP_STATUSINFOCOUNT = 0x00000002;
+  static const FR_PROP_BODYPARTSTRING = 0x00000003;
+  static const FR_PROP_STATUS = 0x00000004;
+  static const FR_PROP_STATUSSTRING = 0x00000005;
+  static const FR_PROP_OTHERINFOCHOICE = 0x00000006;
+  static const FR_PROP_FAILINFO = 0x00000007;
+  static const FR_PROP_PENDINFOTOKEN = 0x00000008;
+  static const FR_PROP_PENDINFOTIME = 0x00000009;
+  static const FR_PROP_ISSUEDCERTIFICATEHASH = 0x0000000a;
+  static const FR_PROP_ISSUEDCERTIFICATE = 0x0000000b;
+  static const FR_PROP_ISSUEDCERTIFICATECHAIN = 0x0000000c;
+  static const FR_PROP_ISSUEDCERTIFICATECRLCHAIN = 0x0000000d;
+  static const FR_PROP_ENCRYPTEDKEYHASH = 0x0000000e;
+  static const FR_PROP_FULLRESPONSENOPKCS7 = 0x0000000f;
+  static const FR_PROP_CAEXCHANGECERTIFICATEHASH = 0x00000010;
+  static const FR_PROP_CAEXCHANGECERTIFICATE = 0x00000011;
+  static const FR_PROP_CAEXCHANGECERTIFICATECHAIN = 0x00000012;
+  static const FR_PROP_CAEXCHANGECERTIFICATECRLCHAIN = 0x00000013;
+  static const FR_PROP_ATTESTATIONCHALLENGE = 0x00000014;
+  static const FR_PROP_ATTESTATIONPROVIDERNAME = 0x00000015;
+}
+
+/// {@category Enum}
+class BCrypt_dwTable {
+  static const CRYPT_LOCAL = 0x00000001;
+  static const CRYPT_DOMAIN = 0x00000002;
+}
+
+/// {@category Enum}
+class SERVICE_CONFIG {
+  static const SERVICE_CONFIG_DELAYED_AUTO_START_INFO = 0x00000003;
+  static const SERVICE_CONFIG_DESCRIPTION = 0x00000001;
+  static const SERVICE_CONFIG_FAILURE_ACTIONS = 0x00000002;
+  static const SERVICE_CONFIG_FAILURE_ACTIONS_FLAG = 0x00000004;
+  static const SERVICE_CONFIG_PREFERRED_NODE = 0x00000009;
+  static const SERVICE_CONFIG_PRESHUTDOWN_INFO = 0x00000007;
+  static const SERVICE_CONFIG_REQUIRED_PRIVILEGES_INFO = 0x00000006;
+  static const SERVICE_CONFIG_SERVICE_SID_INFO = 0x00000005;
+  static const SERVICE_CONFIG_TRIGGER_INFO = 0x00000008;
+  static const SERVICE_CONFIG_LAUNCH_PROTECTED = 0x0000000c;
+}
+
+/// {@category Enum}
+class PFSCE_LOG_INFO_ErrLevelFlags {
+  static const SCE_LOG_LEVEL_ALWAYS = 0x00000000;
+  static const SCE_LOG_LEVEL_ERROR = 0x00000001;
+  static const SCE_LOG_LEVEL_DETAIL = 0x00000002;
+  static const SCE_LOG_LEVEL_DEBUG = 0x00000003;
+}
+
+/// {@category Enum}
+class WNPERM_DLG {
+  static const WNPERM_DLG_PERM = 0x00000000;
+  static const WNPERM_DLG_AUDIT = 0x00000001;
+  static const WNPERM_DLG_OWNER = 0x00000002;
+}
+
+/// {@category Enum}
+class CryptSignAndEncodeCertificate_dwKeySpec {
+  static const AT_KEYEXCHANGE = 0x00000001;
+  static const AT_SIGNATURE = 0x00000002;
+  static const CERT_NCRYPT_KEY_SPEC = 0xffffffff;
+}
+
+/// {@category Enum}
+class CVRC_COLUMN {
+  static const CVRC_COLUMN_SCHEMA = 0x00000000;
+  static const CVRC_COLUMN_RESULT = 0x00000001;
+  static const CVRC_COLUMN_VALUE = 0x00000002;
+  static const CVRC_COLUMN_MASK = 0x00000fff;
+}
+
+/// {@category Enum}
+class CreateRestrictedToken_Flags {
+  static const DISABLE_MAX_PRIVILEGE = 0x00000001;
+  static const SANDBOX_INERT = 0x00000002;
+  static const LUA_TOKEN = 0x00000004;
+  static const WRITE_RESTRICTED = 0x00000008;
+}
+
+/// {@category Enum}
+class Import_Flags {
+  static const CR_IN_BASE64HEADER = 0x00000000;
+  static const CR_IN_BASE64 = 0x00000001;
+  static const CR_IN_BINARY = 0x00000002;
+}
+
+/// {@category Enum}
+class MSV1_0 {
+  static const MSV1_0_PASSTHRU = 0x00000001;
+  static const MSV1_0_GUEST_LOGON = 0x00000002;
+}
+
+/// {@category Enum}
+class LOGON32_LOGON {
+  static const LOGON32_LOGON_BATCH = 0x00000004;
+  static const LOGON32_LOGON_INTERACTIVE = 0x00000002;
+  static const LOGON32_LOGON_NETWORK = 0x00000003;
+  static const LOGON32_LOGON_NETWORK_CLEARTEXT = 0x00000008;
+  static const LOGON32_LOGON_NEW_CREDENTIALS = 0x00000009;
+  static const LOGON32_LOGON_SERVICE = 0x00000005;
+  static const LOGON32_LOGON_UNLOCK = 0x00000007;
+}
+
+/// {@category Enum}
+class EnumServicesStatus_dwServiceType {
+  static const SERVICE_DRIVER = 0x0000000b;
+  static const SERVICE_FILE_SYSTEM_DRIVER_ = 0x00000002;
+  static const SERVICE_KERNEL_DRIVER = 0x00000001;
+  static const SERVICE_WIN32 = 0x00000030;
+  static const SERVICE_WIN32_OWN_PROCESS_ = 0x00000010;
+  static const SERVICE_WIN32_SHARE_PROCESS = 0x00000020;
+  static const SERVICE_ADAPTER = 0x00000004;
+  static const SERVICE_FILE_SYSTEM_DRIVER = 0x00000002;
+  static const SERVICE_RECOGNIZER_DRIVER = 0x00000008;
+  static const SERVICE_WIN32_OWN_PROCESS = 0x00000010;
+  static const SERVICE_USER_OWN_PROCESS = 0x00000050;
+  static const SERVICE_USER_SHARE_PROCESS = 0x00000060;
+}
+
+/// {@category Enum}
+class NCrypt_dwFlags {
+  static const NCRYPT_SILENT_FLAG = 0x00000040;
+  static const NCRYPT_MACHINE_KEY_FLAG = 0x00000020;
+  static const NCRYPT_NO_KEY_VALIDATION = 0x00000008;
+  static const NCRYPT_WRITE_KEY_TO_LEGACY_STORE_FLAG = 0x00000200;
+  static const NCRYPT_NO_PADDING_FLAG = 0x00000001;
+  static const NCRYPT_PAD_OAEP_FLAG = 0x00000004;
+  static const NCRYPT_PAD_PKCS1_FLAG = 0x00000002;
+  static const NCRYPT_PAD_PSS_FLAG = 0x00000008;
+  static const NCRYPT_PERSIST_FLAG = 0x80000000;
+  static const NCRYPT_PERSIST_ONLY_FLAG = 0x40000000;
+  static const BCRYPT_PAD_PKCS1 = 0x00000002;
+  static const BCRYPT_PAD_PSS = 0x00000008;
+}
+
+/// {@category Enum}
+class CREDUI_FLAGS {
+  static const CREDUI_FLAGS_ALWAYS_SHOW_UI = 0x00000080;
+  static const CREDUI_FLAGS_COMPLETE_USERNAME = 0x00000800;
+  static const CREDUI_FLAGS_DO_NOT_PERSIST = 0x00000002;
+  static const CREDUI_FLAGS_EXCLUDE_CERTIFICATES = 0x00000008;
+  static const CREDUI_FLAGS_EXPECT_CONFIRMATION = 0x00020000;
+  static const CREDUI_FLAGS_GENERIC_CREDENTIALS = 0x00040000;
+  static const CREDUI_FLAGS_INCORRECT_PASSWORD = 0x00000001;
+  static const CREDUI_FLAGS_KEEP_USERNAME = 0x00100000;
+  static const CREDUI_FLAGS_PASSWORD_ONLY_OK = 0x00000200;
+  static const CREDUI_FLAGS_PERSIST = 0x00001000;
+  static const CREDUI_FLAGS_REQUEST_ADMINISTRATOR = 0x00000004;
+  static const CREDUI_FLAGS_REQUIRE_CERTIFICATE = 0x00000010;
+  static const CREDUI_FLAGS_REQUIRE_SMARTCARD = 0x00000100;
+  static const CREDUI_FLAGS_SERVER_CREDENTIAL = 0x00004000;
+  static const CREDUI_FLAGS_SHOW_SAVE_CHECK_BOX = 0x00000040;
+  static const CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS = 0x00080000;
+  static const CREDUI_FLAGS_VALIDATE_USERNAME = 0x00000400;
+}
+
+/// {@category Enum}
+class BCrypt_dwInterface {
+  static const BCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE = 0x00000003;
+  static const BCRYPT_CIPHER_INTERFACE = 0x00000001;
+  static const BCRYPT_HASH_INTERFACE = 0x00000002;
+  static const BCRYPT_RNG_INTERFACE = 0x00000006;
+  static const BCRYPT_SECRET_AGREEMENT_INTERFACE = 0x00000004;
+  static const BCRYPT_SIGNATURE_INTERFACE = 0x00000005;
+  static const NCRYPT_KEY_STORAGE_INTERFACE = 0x00010001;
+  static const NCRYPT_SCHANNEL_INTERFACE = 0x00010002;
+}
+
+/// {@category Enum}
+class CryptRetrieveObjectByUrl_pszObjectOid {
+  static const NULL = 0x00000000;
+}
+
+/// {@category Enum}
+class CryptUIWizImport_dwFlags {
+  static const CRYPTUI_WIZ_NO_UI = 0x00000001;
+  static const CRYPTUI_WIZ_IGNORE_NO_UI_FLAG_FOR_CSPS = 0x00000002;
+  static const CRYPTUI_WIZ_NO_UI_EXCEPT_CSP = 0x00000003;
+  static const CRYPTUI_WIZ_IMPORT_ALLOW_CERT = 0x00020000;
+  static const CRYPTUI_WIZ_IMPORT_ALLOW_CRL = 0x00040000;
+  static const CRYPTUI_WIZ_IMPORT_ALLOW_CTL = 0x00080000;
+  static const CRYPTUI_WIZ_IMPORT_NO_CHANGE_DEST_STORE = 0x00010000;
+  static const CRYPTUI_WIZ_IMPORT_TO_LOCALMACHINE = 0x00100000;
+  static const CRYPTUI_WIZ_IMPORT_TO_CURRENTUSER = 0x00200000;
+  static const CRYPTUI_WIZ_IMPORT_REMOTE_DEST_STORE = 0x00400000;
+  static const CRYPTUI_WIZ_EXPORT_PRIVATE_KEY = 0x00000100;
+  static const CRYPTUI_WIZ_EXPORT_NO_DELETE_PRIVATE_KEY = 0x00000200;
+}
+
+/// {@category Enum}
+class ICertGetConfig_GetConfigFlags {
+  static const CC_DEFAULTCONFIG = 0x00000000;
+  static const CC_FIRSTCONFIG = 0x00000002;
+  static const CC_LOCALACTIVECONFIG = 0x00000004;
+  static const CC_LOCALCONFIG = 0x00000003;
+  static const CC_UIPICKCONFIG = 0x00000001;
+  static const CC_UIPICKCONFIGSKIPLOCALCA_ = 0x00000005;
+}
+
+/// {@category Enum}
+class BCRYPT_PAD {
+  static const BCRYPT_PAD_NONE = 0x00000001;
+  static const BCRYPT_PAD_OAEP = 0x00000004;
+  static const BCRYPT_PAD_PKCS1 = 0x00000002;
+  static const BCRYPT_PAD_PSS = 0x00000008;
+  static const NCRYPT_SILENT_FLAG = 0x00000040;
+}
+
+/// {@category Enum}
+class CRYPT_STRING {
+  static const CRYPT_STRING_BASE64HEADER = 0x00000000;
+  static const CRYPT_STRING_BASE64 = 0x00000001;
+  static const CRYPT_STRING_BINARY = 0x00000002;
+  static const CRYPT_STRING_BASE64REQUESTHEADER = 0x00000003;
+  static const CRYPT_STRING_HEX = 0x00000004;
+  static const CRYPT_STRING_HEXASCII = 0x00000005;
+  static const CRYPT_STRING_BASE64X509CRLHEADER = 0x00000009;
+  static const CRYPT_STRING_HEXADDR = 0x0000000a;
+  static const CRYPT_STRING_HEXASCIIADDR = 0x0000000b;
+  static const CRYPT_STRING_HEXRAW = 0x0000000c;
+  static const CRYPT_STRING_STRICT = 0x20000000;
+  static const CRYPT_STRING_BASE64_ANY = 0x00000006;
+  static const CRYPT_STRING_ANY = 0x00000007;
+  static const CRYPT_STRING_HEX_ANY = 0x00000008;
+}
+
+/// {@category Enum}
+class IEnumCERTVIEWCOLUMN_GetValueFlags {
+  static const CV_OUT_BASE64 = 0x00000001;
+  static const CV_OUT_BASE64HEADER = 0x00000000;
+  static const CV_OUT_BASE64REQUESTHEADER = 0x00000003;
+  static const CV_OUT_BASE64X509CRLHEADER = 0x00000009;
+  static const CV_OUT_BINARY = 0x00000002;
+  static const CV_OUT_HEX = 0x00000004;
+  static const CV_OUT_HEXADDR = 0x0000000a;
+  static const CV_OUT_HEXASCII = 0x00000005;
+  static const CV_OUT_HEXASCIIADDR = 0x0000000b;
+}
+
+/// {@category Enum}
+class PendingRequest_lDesiredProperty {
+  static const XEPR_CADNS = 0x00000001;
+  static const XEPR_CAFRIENDLYNAME = 0x00000003;
+  static const XEPR_CANAME = 0x00000002;
+  static const XEPR_HASH = 0x00000008;
+  static const XEPR_REQUESTID = 0x00000004;
+}
+
+/// {@category Enum}
+class CryptImportPublicKeyInfoEx2_dwFlags {
+  static const CRYPT_OID_INFO_PUBKEY_SIGN_KEY_FLAG = 0x80000000;
+  static const CRYPT_OID_INFO_PUBKEY_ENCRYPT_KEY_FLAG = 0x40000000;
+}
+
+/// {@category Enum}
+class ICertAdmin2_GetMyRoles_pRolesFlags {
+  static const CA_ACCESS_ADMIN = 0x00000001;
+  static const CA_ACCESS_AUDITOR = 0x00000004;
+  static const CA_ACCESS_ENROLL = 0x00000200;
+  static const CA_ACCESS_OFFICER = 0x00000002;
+  static const CA_ACCESS_OPERATOR = 0x00000008;
+  static const CA_ACCESS_READ = 0x00000100;
+}
+
+/// {@category Enum}
+class CryptXml_dwFlags {
+  static const CRYPT_XML_FLAG_DISABLE_EXTENSIONS = 0x10000000;
+  static const CRYPT_XML_FLAG_NO_SERIALIZE = 0x80000000;
+  static const CRYPT_XML_SIGN_ADD_KEYVALUE = 0x00000001;
+}
+
+/// {@category Enum}
+class AddAuditAccess_AceFlags {
+  static const CONTAINER_INHERIT_ACE = 0x00000002;
+  static const FAILED_ACCESS_ACE_FLAG = 0x00000080;
+  static const INHERIT_ONLY_ACE = 0x00000008;
+  static const INHERITED_ACE = 0x00000010;
+  static const NO_PROPAGATE_INHERIT_ACE = 0x00000004;
+  static const OBJECT_INHERIT_ACE = 0x00000001;
+  static const SUCCESSFUL_ACCESS_ACE_FLAG = 0x00000040;
+  static const SUB_CONTAINERS_AND_OBJECTS_INHERIT = 0x00000003;
+  static const SUB_CONTAINERS_ONLY_INHERIT = 0x00000002;
+  static const SUB_OBJECTS_ONLY_INHERIT = 0x00000001;
+  static const INHERIT_NO_PROPAGATE = 0x00000004;
+  static const INHERIT_ONLY = 0x00000008;
+  static const NO_INHERITANCE = 0x00000000;
+  static const INHERIT_ONLY_ACE_ = 0x00000008;
+}
+
+/// {@category Enum}
+class AuthzInitializeResourceManagerEx_Flags {
+  static const AUTHZ_RM_FLAG_NO_AUDIT = 0x00000001;
+  static const AUTHZ_RM_FLAG_INITIALIZE_UNDER_IMPERSONATION = 0x00000002;
+  static const AUTHZ_RM_FLAG_NO_CENTRAL_ACCESS_POLICIES = 0x00000004;
+}
+
+/// {@category Enum}
+class CR_DISP {
+  static const CR_DISP_DENIED = 0x00000002;
+  static const CR_DISP_ERROR = 0x00000001;
+  static const CR_DISP_INCOMPLETE = 0x00000000;
+  static const CR_DISP_ISSUED = 0x00000003;
+  static const CR_DISP_ISSUED_OUT_OF_BAND = 0x00000004;
+  static const CR_DISP_UNDER_SUBMISSION = 0x00000005;
+}
+
+/// {@category Enum}
+class XEKL_KEYSIZE {
+  static const XEKL_KEYSIZE_MIN = 0x00000001;
+  static const XEKL_KEYSIZE_MAX = 0x00000002;
+  static const XEKL_KEYSIZE_INC = 0x00000003;
+}
+
+/// {@category Enum}
+class CryptEncodeObjectEx_dwFlags {
+  static const CRYPT_ENCODE_ALLOC_FLAG = 0x00008000;
+  static const CRYPT_ENCODE_ENABLE_PUNYCODE_FLAG = 0x00020000;
+  static const CRYPT_UNICODE_NAME_ENCODE_DISABLE_CHECK_TYPE_FLAG = 0x40000000;
+  static const CRYPT_UNICODE_NAME_ENCODE_ENABLE_T61_UNICODE_FLAG = 0x80000000;
+  static const CRYPT_UNICODE_NAME_ENCODE_ENABLE_UTF8_UNICODE_FLAG = 0x20000000;
+}
+
+/// {@category Enum}
+class SetServiceObjectSecurity_dwSecurityInformation {
+  static const DACL_SECURITY_INFORMATION = 0x00000004;
+  static const GROUP_SECURITY_INFORMATION = 0x00000002;
+  static const OWNER_SECURITY_INFORMATION = 0x00000001;
+  static const SACL_SECURITY_INFORMATION = 0x00000008;
+}
+
+/// {@category Enum}
+class PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_RELEASE_dwReasonFlags {
+  static const CRYPT_OBJECT_LOCATOR_RELEASE_SYSTEM_SHUTDOWN = 0x00000001;
+  static const CRYPT_OBJECT_LOCATOR_RELEASE_SERVICE_STOP = 0x00000002;
+  static const CRYPT_OBJECT_LOCATOR_RELEASE_PROCESS_EXIT = 0x00000003;
+  static const CRYPT_OBJECT_LOCATOR_RELEASE_DLL_UNLOAD = 0x00000004;
+}
+
+/// {@category Enum}
+class CryptAcquireCertificatePrivateKey_dwFlags {
+  static const CRYPT_ACQUIRE_CACHE_FLAG = 0x00000001;
+  static const CRYPT_ACQUIRE_COMPARE_KEY_FLAG = 0x00000004;
+  static const CRYPT_ACQUIRE_NO_HEALING = 0x00000008;
+  static const CRYPT_ACQUIRE_SILENT_FLAG = 0x00000040;
+  static const CRYPT_ACQUIRE_USE_PROV_INFO_FLAG = 0x00000002;
+}
+
+/// {@category Enum}
+class createRequestWStr_Flags {
+  static const XECR_CMC = 0x00000003;
+  static const XECR_PKCS10_V1_5 = 0x00000004;
+  static const XECR_PKCS10_V2_0 = 0x00000001;
+  static const XECR_PKCS7 = 0x00000002;
+}
+
+/// {@category Enum}
+class SECPKG_CRED {
+  static const SECPKG_CRED_INBOUND = 0x00000001;
+  static const SECPKG_CRED_OUTBOUND = 0x00000002;
+}
+
+/// {@category Enum}
+class CryptGetObjectUrl_dwFlags {
+  static const CRYPT_GET_URL_FROM_PROPERTY = 0x00000001;
+  static const CRYPT_GET_URL_FROM_EXTENSION = 0x00000002;
+  static const CRYPT_GET_URL_FROM_UNAUTH_ATTRIBUTE = 0x00000004;
+  static const CRYPT_GET_URL_FROM_AUTH_ATTRIBUTE = 0x00000008;
+}
+
+/// {@category Enum}
+class ISecurityInformation_GetAccessRightsFlags {
+  static const SI_ADVANCED = 0x00000010;
+  static const SI_EDIT_AUDITS = 0x00000002;
+  static const SI_EDIT_PROPERTIES = 0x00000080;
+}
+
+/// {@category Enum}
+class IAzClientContext3_GetGroups_ulOptionsFlags {
+  static const AZ_CLIENT_CONTEXT_GET_GROUPS_STORE_LEVEL_ONLY = 0x00000002;
+}
+
+/// {@category Enum}
+class ICertExit_Initialize_pEventMaskFlags {
+  static const EXITEVENT_CERTDENIED = 0x00000004;
+  static const EXITEVENT_CERTISSUED = 0x00000001;
+  static const EXITEVENT_CERTPENDING = 0x00000002;
+  static const EXITEVENT_CERTRETRIEVEPENDING = 0x00000010;
+  static const EXITEVENT_CERTREVOKED = 0x00000008;
+  static const EXITEVENT_CRLISSUED = 0x00000020;
+  static const EXITEVENT_SHUTDOWN = 0x00000040;
+}
+
+/// {@category Enum}
+class CryptGenKey_AlgidFlags {
+  static const CALG_DH_EPHEM = 0x0000aa02;
+  static const CALG_DH_SF = 0x0000aa01;
+}
+
+/// {@category Enum}
+class CreatePrivateObjectSecurity_AutoInheritFlags {
+  static const SEF_AVOID_OWNER_CHECK = 0x00000010;
+  static const SEF_AVOID_OWNER_RESTRICTION = 0x00001000;
+  static const SEF_AVOID_PRIVILEGE_CHECK = 0x00000008;
+  static const SEF_DACL_AUTO_INHERIT = 0x00000001;
+  static const SEF_DEFAULT_DESCRIPTOR_FOR_OBJECT = 0x00000004;
+  static const SEF_DEFAULT_GROUP_FROM_PARENT = 0x00000040;
+  static const SEF_DEFAULT_OWNER_FROM_PARENT = 0x00000020;
+  static const SEF_MACL_NO_EXECUTE_UP = 0x00000400;
+  static const SEF_MACL_NO_READ_UP = 0x00000200;
+  static const SEF_MACL_NO_WRITE_UP = 0x00000100;
+  static const SEF_SACL_AUTO_INHERIT = 0x00000002;
+}
+
+/// {@category Enum}
+class NP_nPropSel {
+  static const WNPS_FILE = 0x00000000;
+  static const WNPS_DIR = 0x00000001;
+  static const WNPS_MULT = 0x00000002;
+}
+
+/// {@category Enum}
+class NPDirectoryNotify_dwOperFlags {
+  static const WNDN_MKDIR = 0x00000001;
+  static const WNDN_RMDIR = 0x00000002;
+  static const WNDN_MVDIR = 0x00000003;
+}
+
+/// {@category Enum}
+class CertSaveStore_dwSaveAsFlags {
+  static const CERT_STORE_SAVE_AS_PKCS7 = 0x00000002;
+  static const CERT_STORE_SAVE_AS_STORE = 0x00000001;
+}
+
+/// {@category Enum}
+class BCryptQueryProviderRegistration_dwModeFlags {
+  static const CRYPT_ANY = 0x00000004;
+  static const CRYPT_UM = 0x00000001;
+  static const CRYPT_KM = 0x00000002;
+  static const CRYPT_MM = 0x00000003;
+}
+
+/// {@category Enum}
+class AddCertTypeToRequestWStrEx_lType {
+  static const XECT_EXTENSION_V1 = 0x00000001;
+  static const XECT_EXTENSION_V2 = 0x00000002;
+}
+
+/// {@category Enum}
+class NCryptNotifyChangeKey_dwFlags {
+  static const NCRYPT_REGISTER_NOTIFY_FLAG = 0x00000001;
+  static const NCRYPT_UNREGISTER_NOTIFY_FLAG = 0x00000002;
+  static const NCRYPT_MACHINE_KEY_FLAG = 0x00000020;
+  static const NCRYPT_SILENT_FLAG = 0x00000040;
+}
+
+/// {@category Enum}
+class CertFindChainInStore_dwFindFlags {
+  static const CERT_CHAIN_FIND_BY_ISSUER_COMPARE_KEY_FLAG = 0x00000001;
+  static const CERT_CHAIN_FIND_BY_ISSUER_COMPLEX_CHAIN_FLAG = 0x00000002;
+  static const CERT_CHAIN_FIND_BY_ISSUER_CACHE_ONLY_FLAG = 0x00008000;
+  static const CERT_CHAIN_FIND_BY_ISSUER_CACHE_ONLY_URL_FLAG = 0x00000004;
+  static const CERT_CHAIN_FIND_BY_ISSUER_LOCAL_MACHINE_FLAG = 0x00000008;
+  static const CERT_CHAIN_FIND_BY_ISSUER_NO_KEY_FLAG = 0x00004000;
+}
+
+/// {@category Enum}
+class CertControlStore_dwFlags {
+  static const CERT_STORE_CTRL_COMMIT_FORCE_FLAG = 0x00000001;
+  static const CERT_STORE_CTRL_COMMIT_CLEAR_FLAG = 0x00000002;
+  static const CERT_STORE_CTRL_INHIBIT_DUPLICATE_HANDLE_FLAG = 0x00000001;
+}
+
+/// {@category Enum}
+class ICEnroll4_addBlobPropertyToCertificate_bstrPropertyFlags {
+  static const CERT_DESCRIPTION_PROP_ID = 0x0000000d;
+  static const CERT_RENEWAL_PROP_ID = 0x00000040;
+}
+
+/// {@category Enum}
+class AuthzAccessCheck_Flags {
+  static const AUTHZ_ACCESS_CHECK_NO_DEEP_COPY_SD = 0x00000001;
+}
+
+/// {@category Enum}
+class BCryptOpenAlgorithmProvider_dwFlags {
+  static const BCRYPT_ALG_HANDLE_HMAC_FLAG = 0x00000008;
+  static const BCRYPT_PROV_DISPATCH = 0x00000001;
+  static const BCRYPT_HASH_REUSABLE_FLAG = 0x00000020;
+}
+
+/// {@category Enum}
+class SECPKG_ATTR_1 {
+  static const SECPKG_ATTR_APP_DATA = 0x0000005e;
+  static const SECPKG_ATTR_EAP_PRF_INFO = 0x00000065;
+  static const SECPKG_ATTR_EARLY_START = 0x00000069;
+  static const SECPKG_ATTR_DTLS_MTU = 0x00000022;
+  static const SECPKG_ATTR_KEYING_MATERIAL_INFO = 0x0000006a;
+  static const SECPKG_ATTR_ACCESS_TOKEN = 0x00000012;
+  static const SECPKG_ATTR_AUTHORITY = 0x00000006;
+  static const SECPKG_ATTR_CLIENT_SPECIFIED_TARGET = 0x0000001b;
+  static const SECPKG_ATTR_CONNECTION_INFO = 0x0000005a;
+  static const SECPKG_ATTR_CREDS_2 = 0x80000086;
+  static const SECPKG_ATTR_DCE_INFO = 0x00000003;
+  static const SECPKG_ATTR_ENDPOINT_BINDINGS = 0x0000001a;
+  static const SECPKG_ATTR_EAP_KEY_BLOCK = 0x0000005b;
+  static const SECPKG_ATTR_FLAGS = 0x0000000e;
+  static const SECPKG_ATTR_ISSUER_LIST_EX = 0x00000059;
+  static const SECPKG_ATTR_KEY_INFO = 0x00000005;
+  static const SECPKG_ATTR_LAST_CLIENT_TOKEN_STATUS = 0x0000001e;
+  static const SECPKG_ATTR_LIFESPAN = 0x00000002;
+  static const SECPKG_ATTR_LOCAL_CERT_CONTEXT = 0x00000054;
+  static const SECPKG_ATTR_NAMES = 0x00000001;
+  static const SECPKG_ATTR_NATIVE_NAMES = 0x0000000d;
+  static const SECPKG_ATTR_NEGOTIATION_INFO = 0x0000000c;
+  static const SECPKG_ATTR_PACKAGE_INFO = 0x0000000a;
+  static const SECPKG_ATTR_PASSWORD_EXPIRY = 0x00000008;
+  static const SECPKG_ATTR_REMOTE_CERT_CONTEXT = 0x00000053;
+  static const SECPKG_ATTR_ROOT_STORE = 0x00000055;
+  static const SECPKG_ATTR_SESSION_KEY = 0x00000009;
+  static const SECPKG_ATTR_SESSION_INFO = 0x0000005d;
+  static const SECPKG_ATTR_SIZES = 0x00000000;
+  static const SECPKG_ATTR_STREAM_SIZES = 0x00000004;
+  static const SECPKG_ATTR_SUBJECT_SECURITY_ATTRIBUTES = 0x0000007c;
+  static const SECPKG_ATTR_SUPPORTED_SIGNATURES = 0x00000066;
+  static const SECPKG_ATTR_TARGET_INFORMATION = 0x00000011;
+  static const SECPKG_ATTR_UNIQUE_BINDINGS = 0x00000019;
+}
+
+/// {@category Enum}
+class AuthzInitializeObjectAccessAuditEvent_Flags {
+  static const AUTHZ_NO_SUCCESS_AUDIT = 0x00000001;
+  static const AUTHZ_NO_FAILURE_AUDIT = 0x00000002;
+  static const AUTHZ_NO_ALLOC_STRINGS = 0x00000004;
+}
+
+/// {@category Enum}
+class SaferComputeTokenFromLevel_dwFlags {
+  static const SAFER_TOKEN_NULL_IF_EQUAL = 0x00000001;
+  static const SAFER_TOKEN_COMPARE_ONLY = 0x00000002;
+  static const SAFER_TOKEN_MAKE_INERT = 0x00000004;
+  static const SAFER_TOKEN_WANT_FLAGS = 0x00000008;
+}
+
+/// {@category Enum}
+class CVRC_TABLE {
+  static const CVRC_TABLE_ATTRIBUTES = 0x00004000;
+  static const CVRC_TABLE_CRL = 0x00005000;
+  static const CVRC_TABLE_EXTENSIONS = 0x00003000;
+  static const CVRC_TABLE_REQCERT = 0x00000000;
+}
+
+/// {@category Enum}
+class CertSaveStore_dwSaveToFlags {
+  static const CERT_STORE_SAVE_TO_FILE = 0x00000001;
+  static const CERT_STORE_SAVE_TO_FILENAME = 0x00000004;
+  static const CERT_STORE_SAVE_TO_FILENAME_A = 0x00000003;
+  static const CERT_STORE_SAVE_TO_FILENAME_W = 0x00000004;
+  static const CERT_STORE_SAVE_TO_MEMORY = 0x00000002;
+}
+
+/// {@category Enum}
+class CryptSetProvParam_dwParamFlags {
+  static const PP_CLIENT_HWND = 0x00000001;
+  static const PP_DELETEKEY = 0x00000018;
+  static const PP_KEYEXCHANGE_ALG = 0x0000000e;
+  static const PP_KEYEXCHANGE_PIN = 0x00000020;
+  static const PP_KEYEXCHANGE_KEYSIZE = 0x0000000c;
+  static const PP_KEYSET_SEC_DESCR = 0x00000008;
+  static const PP_PIN_PROMPT_STRING = 0x0000002c;
+  static const PP_ROOT_CERTSTORE = 0x0000002e;
+  static const PP_SIGNATURE_ALG = 0x0000000f;
+  static const PP_SIGNATURE_PIN = 0x00000021;
+  static const PP_SIGNATURE_KEYSIZE = 0x0000000d;
+  static const PP_UI_PROMPT = 0x00000015;
+  static const PP_USE_HARDWARE_RNG = 0x00000026;
+  static const PP_USER_CERTSTORE = 0x0000002a;
+  static const PP_SECURE_KEYEXCHANGE_PIN = 0x0000002f;
+  static const PP_SECURE_SIGNATURE_PIN = 0x00000030;
+  static const PP_SMARTCARD_READER = 0x0000002b;
+}
+
+/// {@category Enum}
+class GetValue_Type {
+  static const PROPTYPE_BINARY = 0x00000003;
+  static const PROPTYPE_DATE = 0x00000002;
+  static const PROPTYPE_LONG = 0x00000001;
+  static const PROPTYPE_STRING = 0x00000004;
+}
+
+/// {@category Enum}
+class CryptSetKeyParam_dwParamFlags {
+  static const KP_ALGID = 0x00000007;
+  static const KP_CERTIFICATE = 0x0000001a;
+  static const KP_PERMISSIONS = 0x00000006;
+  static const KP_SALT = 0x00000002;
+  static const KP_SALT_EX = 0x0000000a;
+  static const KP_BLOCKLEN = 0x00000008;
+  static const KP_GET_USE_COUNT = 0x0000002a;
+  static const KP_KEYLEN = 0x00000009;
+}
+
+/// {@category Enum}
+class Msv1_0SubAuthenticationFilterFlags {
+  static const LOGON_GUEST = 0x00000001;
+  static const LOGON_NOENCRYPTION = 0x00000002;
+}
+
+/// {@category Enum}
+class CryptImportPKCS8_dwFlags {
+  static const CRYPT_EXPORTABLE = 0x00000001;
+  static const CRYPT_USER_PROTECTED = 0x00000002;
+  static const CRYPT_ARCHIVABLE = 0x00004000;
+  static const CRYPT_CREATE_IV = 0x00000200;
+  static const CRYPT_CREATE_SALT = 0x00000004;
+  static const CRYPT_DATA_KEY = 0x00000800;
+  static const CRYPT_FORCE_KEY_PROTECTION_HIGH = 0x00008000;
+  static const CRYPT_KEK = 0x00000400;
+  static const CRYPT_INITIATOR = 0x00000040;
+  static const CRYPT_NO_SALT = 0x00000010;
+  static const CRYPT_ONLINE = 0x00000080;
+  static const CRYPT_PREGEN = 0x00000040;
+  static const CRYPT_RECIPIENT = 0x00000010;
+  static const CRYPT_SF = 0x00000100;
+  static const CRYPT_SGCKEY = 0x00002000;
+  static const CRYPT_MACHINE_KEYSET = 0x00000020;
+  static const CRYPT_USER_KEYSET = 0x00001000;
+  static const PKCS12_PREFER_CNG_KSP = 0x00000100;
+  static const PKCS12_NO_PERSIST_KEY = 0x00008000;
+  static const PKCS12_INCLUDE_EXTENDED_PROPERTIES = 0x00000010;
+  static const CRYPT_OAEP = 0x00000040;
+}
+
+/// {@category Enum}
+class RTL_ENCRYPT_OPTION {
+  static const RTL_ENCRYPT_OPTION_CROSS_PROCESS = 0x00000001;
+  static const RTL_ENCRYPT_OPTION_SAME_LOGON = 0x00000002;
+}
+
+/// {@category Enum}
+class WintrustGetDefaultForUsage_dwActionFlags {
+  static const DWACTION_ALLOCANDFILL = 0x00000001;
+  static const DWACTION_FREE = 0x00000002;
+}
+
+/// {@category Enum}
+class TREE_SEC_INFO {
+  static const TREE_SEC_INFO_SET = 0x00000001;
+  static const TREE_SEC_INFO_RESET = 0x00000002;
+  static const TREE_SEC_INFO_RESET_KEEP_EXPLICIT = 0x00000003;
+}
+
+/// {@category Enum}
+class ExportSecurityContext_fFlags {
+  static const SECPKG_CONTEXT_EXPORT_RESET_NEW = 0x00000001;
+  static const SECPKG_CONTEXT_EXPORT_DELETE_OLD = 0x00000002;
+  static const SECPKG_CONTEXT_EXPORT_TO_KERNEL = 0x00000004;
+}
+
+/// {@category Enum}
+class ICertEncodeCRLDistInfo_SetNameEntry_NameChoiceFlags {
+  static const CERT_ALT_NAME_RFC822_NAME = 0x00000002;
+  static const CERT_ALT_NAME_DNS_NAME = 0x00000003;
+  static const CERT_ALT_NAME_URL = 0x00000007;
+  static const CERT_ALT_NAME_REGISTERED_ID = 0x00000009;
+  static const CERT_ALT_NAME_DIRECTORY_NAME = 0x00000005;
+  static const CERT_ALT_NAME_IP_ADDRESS = 0x00000008;
+}
+
+/// {@category Enum}
+class CryptExportKey_dwFlags {
+  static const CRYPT_BLOB_VER3 = 0x00000080;
+  static const CRYPT_DESTROYKEY = 0x00000004;
+  static const CRYPT_OAEP = 0x00000040;
+  static const CRYPT_SSL2_FALLBACK = 0x00000002;
+  static const CRYPT_Y_ONLY = 0x00000001;
+  static const CRYPT_EXPORTABLE = 0x00000001;
+  static const CRYPT_NO_SALT = 0x00000010;
+  static const CRYPT_USER_PROTECTED = 0x00000002;
+}
+
+/// {@category Enum}
+class SCardEstablishContext_dwScopeFlags {
+  static const SCARD_SCOPE_USER = 0x00000000;
+  static const SCARD_SCOPE_SYSTEM = 0x00000002;
+}
+
+/// {@category Enum}
+class CryptMsgOpenToEncode_dwMsgTypeFlags {
+  static const CMSG_DATA = 0x00000001;
+  static const CMSG_SIGNED = 0x00000002;
+  static const CMSG_ENVELOPED = 0x00000003;
+  static const CMSG_SIGNED_AND_ENVELOPED = 0x00000004;
+  static const CMSG_HASHED = 0x00000005;
+}
+
+/// {@category Enum}
+class CertSrvBackupPrepareW_dwBackupFlags {
+  static const CSBACKUP_TYPE_FULL = 0x00000001;
+  static const CSBACKUP_TYPE_LOGS_ONLY = 0x00000002;
+}
+
+/// {@category Enum}
+class SERVICE_NOTIFY {
+  static const SERVICE_NOTIFY_CREATED = 0x00000080;
+  static const SERVICE_NOTIFY_CONTINUE_PENDING = 0x00000010;
+  static const SERVICE_NOTIFY_DELETE_PENDING = 0x00000200;
+  static const SERVICE_NOTIFY_DELETED = 0x00000100;
+  static const SERVICE_NOTIFY_PAUSE_PENDING = 0x00000020;
+  static const SERVICE_NOTIFY_PAUSED = 0x00000040;
+  static const SERVICE_NOTIFY_RUNNING = 0x00000008;
+  static const SERVICE_NOTIFY_START_PENDING = 0x00000002;
+  static const SERVICE_NOTIFY_STOP_PENDING = 0x00000004;
+  static const SERVICE_NOTIFY_STOPPED = 0x00000001;
+}
+
+/// {@category Enum}
+class AddMandatoryAce_dwAceRevisionFlags {
+  static const ACL_REVISION = 0x00000002;
+  static const ACL_REVISION_DS = 0x00000004;
+}
+
+/// {@category Enum}
+class CertOpenStore_dwFlags {
+  static const CERT_STORE_BACKUP_RESTORE_FLAG = 0x00000800;
+  static const CERT_STORE_CREATE_NEW_FLAG = 0x00002000;
+  static const CERT_STORE_DEFER_CLOSE_UNTIL_LAST_FREE_FLAG = 0x00000004;
+  static const CERT_STORE_DELETE_FLAG = 0x00000010;
+  static const CERT_STORE_ENUM_ARCHIVED_FLAG = 0x00000200;
+  static const CERT_STORE_MAXIMUM_ALLOWED_FLAG = 0x00001000;
+  static const CERT_STORE_NO_CRYPT_RELEASE_FLAG = 0x00000001;
+  static const CERT_STORE_OPEN_EXISTING_FLAG = 0x00004000;
+  static const CERT_STORE_READONLY_FLAG = 0x00008000;
+  static const CERT_STORE_SET_LOCALIZED_NAME_FLAG = 0x00000002;
+  static const CERT_STORE_SHARE_CONTEXT_FLAG = 0x00000080;
+  static const CERT_STORE_UPDATE_KEYID_FLAG = 0x00000400;
+}
+
+/// {@category Enum}
+class CryptInstallDefaultContext_dwFlags {
+  static const CRYPT_DEFAULT_CONTEXT_AUTO_RELEASE_FLAG = 0x00000001;
+  static const CRYPT_DEFAULT_CONTEXT_PROCESS_FLAG = 0x00000002;
+}
+
+/// {@category Enum}
+class XEKL_KEYSPEC {
+  static const XEKL_KEYSPEC_KEYX = 0x00000001;
+  static const XEKL_KEYSPEC_SIG = 0x00000002;
+}
+
+/// {@category Enum}
+class NCryptDecrypt_dwFlags {
+  static const NCRYPT_NO_PADDING_FLAG = 0x00000001;
+  static const NCRYPT_PAD_OAEP_FLAG = 0x00000004;
+  static const NCRYPT_PAD_PKCS1_FLAG = 0x00000002;
+  static const NCRYPT_SILENT_FLAG = 0x00000040;
+}
+
+/// {@category Enum}
+class CryptVerifyCertificateSignatureEx_dwFlags {
+  static const CRYPT_VERIFY_CERT_SIGN_DISABLE_MD2_MD4_FLAG = 0x00000001;
+  static const CRYPT_VERIFY_CERT_SIGN_SET_STRONG_PROPERTIES_FLAG = 0x00000002;
+  static const CRYPT_VERIFY_CERT_SIGN_RETURN_STRONG_PROPERTIES_FLAG = 0x00000004;
+}
+
+/// {@category Enum}
+class ICertRequest2_GetFullResponsePropertyFlags {
+  static const CR_OUT_BASE64HEADER = 0x00000000;
+  static const CR_OUT_BASE64 = 0x00000001;
+  static const CR_OUT_BINARY = 0x00000002;
+}
+
+/// {@category Enum}
+class Wintrust_pdwPolicyFlags {
+  static const WTPF_TRUSTTEST = 0x00000020;
+  static const WTPF_TESTCANBEVALID = 0x00000080;
+  static const WTPF_IGNOREEXPIRATION = 0x00000100;
+  static const WTPF_IGNOREREVOKATION = 0x00000200;
+  static const WTPF_OFFLINEOK_IND = 0x00000400;
+  static const WTPF_OFFLINEOK_COM = 0x00000800;
+  static const WTPF_OFFLINEOKNBU_IND = 0x00001000;
+  static const WTPF_OFFLINEOKNBU_COM = 0x00002000;
+  static const WTPF_VERIFY_V1_OFF = 0x00010000;
+  static const WTPF_IGNOREREVOCATIONONTS = 0x00020000;
+  static const WTPF_ALLOWONLYPERTRUST = 0x00040000;
+}
+
+/// {@category Enum}
+class AddConditionalAce_AceTypeFlags {
+  static const ACCESS_ALLOWED_CALLBACK_ACE_TYPE = 0x00000009;
+  static const ACCESS_DENIED_CALLBACK_ACE_TYPE = 0x0000000a;
+  static const SYSTEM_AUDIT_CALLBACK_ACE_TYPE = 0x0000000d;
+  static const ACCESS_ALLOWED_ACE_TYPE = 0x00000000;
+  static const ACCESS_ALLOWED_CALLBACK_OBJECT_ACE_TYPE = 0x0000000b;
+  static const ACCESS_ALLOWED_COMPOUND_ACE_TYPE = 0x00000004;
+  static const ACCESS_ALLOWED_OBJECT_ACE_TYPE = 0x00000005;
+  static const ACCESS_DENIED_ACE_TYPE = 0x00000001;
+  static const ACCESS_DENIED_CALLBACK_OBJECT_ACE_TYPE = 0x0000000c;
+  static const ACCESS_DENIED_OBJECT_ACE_TYPE = 0x00000006;
+  static const ACCESS_MAX_MS_ACE_TYPE = 0x00000008;
+  static const ACCESS_MAX_MS_V2_ACE_TYPE = 0x00000003;
+  static const ACCESS_MAX_MS_V3_ACE_TYPE = 0x00000004;
+  static const ACCESS_MAX_MS_V4_ACE_TYPE = 0x00000008;
+  static const ACCESS_MAX_MS_OBJECT_ACE_TYPE = 0x00000008;
+  static const ACCESS_MIN_MS_ACE_TYPE = 0x00000000;
+  static const ACCESS_MIN_MS_OBJECT_ACE_TYPE = 0x00000005;
+  static const SYSTEM_ALARM_ACE_TYPE = 0x00000003;
+  static const SYSTEM_ALARM_CALLBACK_ACE_TYPE = 0x0000000e;
+  static const SYSTEM_ALARM_CALLBACK_OBJECT_ACE_TYPE = 0x00000010;
+  static const SYSTEM_ALARM_OBJECT_ACE_TYPE = 0x00000008;
+  static const SYSTEM_AUDIT_ACE_TYPE = 0x00000002;
+  static const SYSTEM_MANDATORY_LABEL_ACE_TYPE = 0x00000011;
+}
+
+/// {@category Enum}
+class NPFormatNetworkName_dwFlags {
+  static const WNFMT_MULTILINE = 0x00000001;
+  static const WNFMT_ABBREVIATED = 0x00000002;
+}
+
+/// {@category Enum}
+class ICertServerExit_GetRequestProperty_strPropertyNameFlags {
+  static const CR_IN_PKCS7 = 0x00000300;
+  static const CR_IN_PKCS10 = 0x00000100;
+  static const CR_IN_KEYGEN = 0x00000200;
+}
+
+/// {@category Enum}
+class ICertView_SetRestriction_SeekOperatorFlags {
+  static const CVR_SEEK_EQ = 0x00000001;
+  static const CVR_SEEK_LE = 0x00000004;
+  static const CVR_SEEK_LT = 0x00000002;
+  static const CVR_SEEK_GE = 0x00000008;
+  static const CVR_SEEK_GT = 0x00000010;
+}
+
+/// {@category Enum}
+class WlxShutdown_ShutdownTypeFlags {
+  static const WLX_SAS_ACTION_SHUTDOWN = 0x00000005;
+  static const WLX_SAS_ACTION_SHUTDOWN_REBOOT = 0x0000000b;
+  static const WLX_SAS_ACTION_SHUTDOWN_POWER_OFF = 0x0000000a;
+}
+
+/// {@category Enum}
+class CredEnumerate_Flags {
+  static const CRED_ENUMERATE_ALL_CREDENTIALS = 0x00000001;
+}
+
+/// {@category Enum}
+class CryptQueryObject_dwObjectTypeFlags {
+  static const CERT_QUERY_OBJECT_BLOB = 0x00000002;
+  static const CERT_QUERY_OBJECT_FILE = 0x00000001;
+}
+
+/// {@category Enum}
+class AcceptSecurityContext_fContextReqFlags {
+  static const ASC_REQ_ALLOCATE_MEMORY = 0x00000100;
+  static const ASC_REQ_CONNECTION = 0x00000800;
+  static const ASC_REQ_DELEGATE = 0x00000001;
+  static const ASC_REQ_EXTENDED_ERROR = 0x00008000;
+  static const ASC_REQ_REPLAY_DETECT = 0x00000004;
+  static const ASC_REQ_SEQUENCE_DETECT = 0x00000008;
+  static const ASC_REQ_STREAM = 0x00010000;
+}
+
+/// {@category Enum}
+class CryptCATOpen_dwPublicVersionFlags {
+  static const CRYPTCAT_VERSION_1 = 0x00000100;
+  static const CRYPTCAT_VERSION_2 = 0x00000200;
+}
+
+/// {@category Enum}
+class PFN_CERT_ENUM_SYSTEM_STOREFlags {
+  static const CERT_SYSTEM_STORE_LOCATION_MASK = 0x00ff0000;
+  static const CERT_SYSTEM_STORE_RELOCATE_FLAG = 0x80000000;
+}
+
+/// {@category Enum}
+class CREDUIWIN_FLAGS {
+  static const CREDUIWIN_GENERIC = 0x00000001;
+  static const CREDUIWIN_CHECKBOX = 0x00000002;
+  static const CREDUIWIN_AUTHPACKAGE_ONLY = 0x00000010;
+  static const CREDUIWIN_IN_CRED_ONLY = 0x00000020;
+  static const CREDUIWIN_ENUMERATE_ADMINS = 0x00000100;
+  static const CREDUIWIN_ENUMERATE_CURRENT_USER = 0x00000200;
+  static const CREDUIWIN_SECURE_PROMPT = 0x00001000;
+  static const CREDUIWIN_PREPROMPTING = 0x00002000;
+  static const CREDUIWIN_PACK_32_WOW = 0x10000000;
+}
+
+/// {@category Enum}
+class CertCreateSelfSignCertificate_dwFlags {
+  static const CERT_CREATE_SELFSIGN_NO_KEY_INFO = 0x00000002;
+  static const CERT_CREATE_SELFSIGN_NO_SIGN = 0x00000001;
+}
+
+/// {@category Enum}
+class CryptInstallDefaultContext_dwDefaultTypeFlags {
+  static const CRYPT_DEFAULT_CONTEXT_CERT_SIGN_OID = 0x00000001;
+  static const CRYPT_DEFAULT_CONTEXT_MULTI_CERT_SIGN_OID = 0x00000002;
+}
+
+/// {@category Enum}
+class CryptCATOpen_fdwOpenFlags {
+  static const CRYPTCAT_OPEN_ALWAYS = 0x00000002;
+  static const CRYPTCAT_OPEN_CREATENEW = 0x00000001;
+  static const CRYPTCAT_OPEN_EXISTING = 0x00000004;
+  static const CRYPTCAT_OPEN_EXCLUDE_PAGE_HASHES = 0x00010000;
+  static const CRYPTCAT_OPEN_INCLUDE_PAGE_HASHES = 0x00020000;
+  static const CRYPTCAT_OPEN_VERIFYSIGHASH = 0x10000000;
+  static const CRYPTCAT_OPEN_NO_CONTENT_HCRYPTMSG = 0x20000000;
+  static const CRYPTCAT_OPEN_SORTED = 0x40000000;
+  static const CRYPTCAT_OPEN_FLAGS_MASK = 0xffff0000;
+}
+
+/// {@category Enum}
+class BCryptResolveProviders_dwFlags {
+  static const CRYPT_ALL_FUNCTIONS = 0x00000001;
+  static const CRYPT_ALL_PROVIDERS = 0x00000002;
+}
+
+/// {@category Enum}
+class CertFindCTLInStore_dwFindTypeFlags {
+  static const CTL_FIND_ANY = 0x00000000;
+  static const CTL_FIND_SHA1_HASH = 0x00000001;
+  static const CTL_FIND_MD5_HASH = 0x00000002;
+  static const CTL_FIND_USAGE = 0x00000003;
+  static const CTL_FIND_SAME_USAGE_FLAG = 0x00000001;
+  static const CTL_FIND_EXISTING = 0x00000005;
+  static const CTL_FIND_SUBJECT = 0x00000004;
+}
+
+/// {@category Enum}
+class CryptFindCertificateKeyProvInfo_dwFlags {
+  static const CRYPT_FIND_USER_KEYSET_FLAG = 0x00000001;
+  static const CRYPT_FIND_MACHINE_KEYSET_FLAG = 0x00000002;
+  static const CRYPT_FIND_SILENT_KEYSET_FLAG = 0x00000040;
+}
+
+/// {@category Enum}
+class TOKEN_MANDATORY_POLICY_PolicyFlags {
+  static const TOKEN_MANDATORY_POLICY_OFF = 0x00000000;
+  static const TOKEN_MANDATORY_POLICY_NO_WRITE_UP = 0x00000001;
+  static const TOKEN_MANDATORY_POLICY_NEW_PROCESS_MIN = 0x00000002;
+  static const TOKEN_MANDATORY_POLICY_VALID_MASK = 0x00000003;
+}
+
+/// {@category Enum}
+class AUTHZ_ACCESS_REPLY_SaclEvaluationResultsFlags {
+  static const AUTHZ_GENERATE_SUCCESS_AUDIT = 0x00000001;
+  static const AUTHZ_GENERATE_FAILURE_AUDIT = 0x00000002;
+}
+
+/// {@category Enum}
+class CRYPTUI_VIEWCERTIFICATE_STRUCTW_dwFlags {
+  static const CRYPTUI_HIDE_HIERARCHYPAGE = 0x00000001;
+  static const CRYPTUI_HIDE_DETAILPAGE = 0x00000002;
+  static const CRYPTUI_DISABLE_EDITPROPERTIES = 0x00000004;
+  static const CRYPTUI_ENABLE_EDITPROPERTIES = 0x00000008;
+  static const CRYPTUI_DISABLE_ADDTOSTORE = 0x00000010;
+  static const CRYPTUI_ENABLE_ADDTOSTORE = 0x00000020;
+  static const CRYPTUI_ACCEPT_DECLINE_STYLE = 0x00000040;
+  static const CRYPTUI_IGNORE_UNTRUSTED_ROOT = 0x00000080;
+  static const CRYPTUI_DONT_OPEN_STORES = 0x00000100;
+  static const CRYPTUI_ONLY_OPEN_ROOT_STORE = 0x00000200;
+  static const CRYPTUI_WARN_UNTRUSTED_ROOT = 0x00000400;
+  static const CRYPTUI_ENABLE_REVOCATION_CHECKING = 0x00000800;
+  static const CRYPTUI_WARN_REMOTE_TRUST = 0x00001000;
+  static const CRYPTUI_DISABLE_EXPORT = 0x00002000;
+  static const CRYPTUI_ENABLE_REVOCATION_CHECK_END_CERT = 0x00004000;
+  static const CRYPTUI_ENABLE_REVOCATION_CHECK_CHAIN = 0x00008000;
+  static const CRYPTUI_ENABLE_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT = 0x00000800;
+  static const CRYPTUI_DISABLE_HTMLLINK = 0x00010000;
+  static const CRYPTUI_DISABLE_ISSUERSTATEMENT = 0x00020000;
+  static const CRYPTUI_CACHE_ONLY_URL_RETRIEVAL = 0x00040000;
+}
+
+/// {@category Enum}
+class KERB_TICKET_CACHE_INFOFlags {
+  static const KERB_TICKET_FLAGS_forwardable = 0x40000000;
+  static const KERB_TICKET_FLAGS_forwarded = 0x20000000;
+  static const KERB_TICKET_FLAGS_hw_authent = 0x00100000;
+  static const KERB_TICKET_FLAGS_initial = 0x00400000;
+  static const KERB_TICKET_FLAGS_invalid = 0x01000000;
+  static const KERB_TICKET_FLAGS_may_postdate = 0x04000000;
+  static const KERB_TICKET_FLAGS_ok_as_delegate = 0x00040000;
+  static const KERB_TICKET_FLAGS_postdated = 0x02000000;
+  static const KERB_TICKET_FLAGS_pre_authent = 0x00200000;
+  static const KERB_TICKET_FLAGS_proxiable = 0x10000000;
+  static const KERB_TICKET_FLAGS_proxy = 0x08000000;
+  static const KERB_TICKET_FLAGS_renewable = 0x00800000;
+  static const KERB_TICKET_FLAGS_reserved = 0x80000000;
+  static const KERB_TICKET_FLAGS_reserved1 = 0x00000001;
+}
+
+/// {@category Enum}
+class SYSTEM_AUDIT_OBJECT_ACE_Flags {
+  static const ACE_OBJECT_TYPE_PRESENT = 0x00000001;
+  static const ACE_INHERITED_OBJECT_TYPE_PRESENT = 0x00000002;
+}
+
+/// {@category Enum}
+class CRYPT_IMAGE_REFFlags {
+  static const CRYPT_MIN_DEPENDENCIES = 0x00000001;
+  static const CRYPT_PROCESS_ISOLATE = 0x00010000;
+}
+
+/// {@category Enum}
+class SERVICE_STATUS_PROCESSFlags {
+  static const SERVICE_RUNS_IN_SYSTEM_PROCESS = 0x00000001;
+}
+
+/// {@category Enum}
+class CERT_REVOCATION_STATUS_dwReasonFlags {
+  static const CRL_REASON_UNSPECIFIED = 0x00000000;
+  static const CRL_REASON_KEY_COMPROMISE = 0x00000001;
+  static const CRL_REASON_CA_COMPROMISE = 0x00000002;
+  static const CRL_REASON_AFFILIATION_CHANGED = 0x00000003;
+  static const CRL_REASON_SUPERSEDED = 0x00000004;
+  static const CRL_REASON_CESSATION_OF_OPERATION = 0x00000005;
+  static const CRL_REASON_CERTIFICATE_HOLD = 0x00000006;
+  static const CRL_REASON_REMOVE_FROM_CRL = 0x00000008;
+}
+
+/// {@category Enum}
+class KERB_CERTIFICATE_LOGON_MessageTypeFlags {
+  static const KerbCertificateLogon = 0x0000000d;
+  static const KerbCertificateUnlockLogon = 0x0000000f;
+}
+
+/// {@category Enum}
+class EV_EXTRA_CERT_CHAIN_POLICY_PARAFlags {
+  static const CERT_ROOT_PROGRAM_FLAG_LSC = 0x00000040;
+  static const CERT_ROOT_PROGRAM_FLAG_ORG = 0x00000080;
+  static const CERT_ROOT_PROGRAM_FLAG_SUBJECT_LOGO = 0x00000020;
+}
+
+/// {@category Enum}
+class CRYPT_XML_KEY_VALUE_dwTypeFlags {
+  static const CRYPT_XML_KEY_VALUE_TYPE_DSA = 0x00000001;
+  static const CRYPT_XML_KEY_VALUE_TYPE_RSA = 0x00000002;
+  static const CRYPT_XML_KEY_VALUE_TYPE_ECDSA = 0x00000003;
+  static const CRYPT_XML_KEY_VALUE_TYPE_CUSTOM = 0x00000004;
+}
+
+/// {@category Enum}
+class CERT_LOGOTYPE_IMAGE_INFO_dwLogotypeImageResolutionChoiceFlags {
+  static const CERT_LOGOTYPE_NO_IMAGE_RESOLUTION_CHOICE = 0x00000000;
+  static const CERT_LOGOTYPE_BITS_IMAGE_RESOLUTION_CHOICE = 0x00000001;
+  static const CERT_LOGOTYPE_TABLE_SIZE_IMAGE_RESOLUTION_CHOICE = 0x00000002;
+}
+
+/// {@category Enum}
+class CERT_SELECT_STRUCT_A_dwFlags {
+  static const CSS_HIDE_PROPERTIES = 0x00000001;
+  static const CSS_ENABLEHOOK = 0x00000002;
+  static const CSS_ALLOWMULTISELECT = 0x00000004;
+  static const CSS_SHOW_HELP = 0x00000010;
+  static const CSS_ENABLETEMPLATE = 0x00000020;
+  static const CSS_ENABLETEMPLATEHANDLE = 0x00000040;
+}
+
+/// {@category Enum}
+class CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO_dwKeyChoiceFlags {
+  static const CMSG_KEY_AGREE_EPHEMERAL_KEY_CHOICE = 0x00000001;
+  static const CMSG_KEY_AGREE_STATIC_KEY_CHOICE = 0x00000002;
+}
+
+/// {@category Enum}
+class SEC_WINNT_AUTH_IDENTITY {
+  static const SEC_WINNT_AUTH_IDENTITY_ANSI = 0x00000001;
+  static const SEC_WINNT_AUTH_IDENTITY_UNICODE = 0x00000002;
+}
+
+/// {@category Enum}
+class CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1Flags {
+  static const CLAIM_SECURITY_ATTRIBUTE_NON_INHERITABLE = 0x00000001;
+  static const CLAIM_SECURITY_ATTRIBUTE_VALUE_CASE_SENSITIVE = 0x00000002;
+  static const CLAIM_SECURITY_ATTRIBUTE_USE_FOR_DENY_ONLY = 0x00000004;
+  static const CLAIM_SECURITY_ATTRIBUTE_DISABLED_BY_DEFAULT = 0x00000008;
+  static const CLAIM_SECURITY_ATTRIBUTE_DISABLED = 0x00000010;
+  static const CLAIM_SECURITY_ATTRIBUTE_MANDATORY = 0x00000020;
+}
+
+/// {@category Enum}
+class CRYPTUI_WIZ_IMPORT_SRC_INFO_dwSubjectChoiceFlags {
+  static const CRYPTUI_WIZ_IMPORT_SUBJECT_FILE = 0x00000001;
+  static const CRYPTUI_WIZ_IMPORT_SUBJECT_CERT_CONTEXT = 0x00000002;
+  static const CRYPTUI_WIZ_IMPORT_SUBJECT_CTL_CONTEXT = 0x00000003;
+  static const CRYPTUI_WIZ_IMPORT_SUBJECT_CRL_CONTEXT = 0x00000004;
+  static const CRYPTUI_WIZ_IMPORT_SUBJECT_CERT_STORE = 0x00000005;
+}
+
+/// {@category Enum}
+class KERB_BINDING_CACHE_ENTRY_DATA_AddressType {
+  static const DS_INET_ADDRESS = 0x00000001;
+  static const DS_NETBIOS_ADDRESS = 0x00000002;
+}
+
+/// {@category Enum}
+class CERT_LOGOTYPE_INFO_dwLogotypeInfoChoiceFlags {
+  static const CERT_LOGOTYPE_DIRECT_INFO_CHOICE = 0x00000001;
+  static const CERT_LOGOTYPE_INDIRECT_INFO_CHOICE = 0x00000002;
+}
+
+/// {@category Enum}
+class SCARD_STATE {
+  static const SCARD_STATE_UNAWARE = 0x00000000;
+  static const SCARD_STATE_IGNORE = 0x00000001;
+  static const SCARD_STATE_UNAVAILABLE = 0x00000008;
+  static const SCARD_STATE_EMPTY = 0x00000010;
+  static const SCARD_STATE_PRESENT = 0x00000020;
+  static const SCARD_STATE_ATRMATCH = 0x00000040;
+  static const SCARD_STATE_EXCLUSIVE = 0x00000080;
+  static const SCARD_STATE_INUSE = 0x00000100;
+  static const SCARD_STATE_MUTE = 0x00000200;
+  static const SCARD_STATE_CHANGED = 0x00000002;
+  static const SCARD_STATE_UNKNOWN = 0x00000004;
+}
+
+/// {@category Enum}
+class WINTRUST_DATA_dwUIChoiceFlags {
+  static const WTD_UI_ALL = 0x00000001;
+  static const WTD_UI_NONE = 0x00000002;
+  static const WTD_UI_NOBAD = 0x00000003;
+  static const WTD_UI_NOGOOD = 0x00000004;
+}
+
+/// {@category Enum}
+class WINTRUST_SIGNATURE_SETTINGSFlags {
+  static const WSS_VERIFY_SPECIFIC = 0x00000001;
+  static const WSS_GET_SECONDARY_SIG_COUNT = 0x00000002;
+}
+
+/// {@category Enum}
+class SCH_CREDENTIALS_dwFlags {
+  static const SCH_CRED_AUTO_CRED_VALIDATION = 0x00000020;
+  static const SCH_CRED_CACHE_ONLY_URL_RETRIEVAL_ON_CREATE = 0x00020000;
+  static const SCH_DISABLE_RECONNECTS = 0x00000080;
+  static const SCH_CRED_IGNORE_NO_REVOCATION_CHECK = 0x00000800;
+  static const SCH_CRED_IGNORE_REVOCATION_OFFLINE = 0x00001000;
+  static const SCH_CRED_MANUAL_CRED_VALIDATION = 0x00000008;
+  static const SCH_CRED_NO_DEFAULT_CREDS = 0x00000010;
+  static const SCH_CRED_NO_SERVERNAME_CHECK = 0x00000004;
+  static const SCH_CRED_NO_SYSTEM_MAPPER = 0x00000002;
+  static const SCH_CRED_REVOCATION_CHECK_CHAIN = 0x00000200;
+  static const SCH_CRED_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT = 0x00000400;
+  static const SCH_CRED_REVOCATION_CHECK_END_CERT = 0x00000100;
+  static const SCH_CRED_USE_DEFAULT_CREDS = 0x00000040;
+  static const SCH_SEND_AUX_RECORD = 0x00200000;
+  static const SCH_SEND_ROOT_CERT = 0x00040000;
+  static const SCH_USE_STRONG_CRYPTO = 0x00400000;
+  static const SCH_USE_PRESHAREDKEY_ONLY = 0x00800000;
+}
+
+/// {@category Enum}
+class DOMAIN_PASSWORD_INFORMATION_PasswordPropertiesFlags {
+  static const DOMAIN_PASSWORD_COMPLEX = 0x00000001;
+  static const DOMAIN_PASSWORD_NO_ANON_CHANGE = 0x00000002;
+  static const DOMAIN_PASSWORD_NO_CLEAR_CHANGE = 0x00000004;
+  static const DOMAIN_LOCKOUT_ADMINS = 0x00000008;
+  static const DOMAIN_PASSWORD_STORE_CLEARTEXT = 0x00000010;
+  static const DOMAIN_REFUSE_PASSWORD_CHANGE = 0x00000020;
+}
+
+/// {@category Enum}
+class WINTRUST_DATA_dwStateActionFlags {
+  static const WTD_STATEACTION_IGNORE = 0x00000000;
+  static const WTD_STATEACTION_VERIFY = 0x00000001;
+  static const WTD_STATEACTION_CLOSE = 0x00000002;
+  static const WTD_STATEACTION_AUTO_CACHE = 0x00000003;
+  static const WTD_STATEACTION_AUTO_CACHE_FLUSH = 0x00000004;
+}
+
+/// {@category Enum}
+class CERT_STORE_PROV_INFOFlags {
+  static const CERT_STORE_PROV_EXTERNAL_FLAG = 0x00000001;
+  static const CERT_STORE_PROV_DELETED_FLAG = 0x00000002;
+  static const CERT_STORE_PROV_NO_PERSIST_FLAG = 0x00000004;
+  static const CERT_STORE_PROV_SYSTEM_STORE_FLAG = 0x00000008;
+  static const CERT_STORE_PROV_LM_SYSTEM_STORE_FLAG = 0x00000010;
+}
+
+/// {@category Enum}
+class CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_ValueTypeFlags {
+  static const CLAIM_SECURITY_ATTRIBUTE_TYPE_INT64 = 0x00000001;
+  static const CLAIM_SECURITY_ATTRIBUTE_TYPE_UINT64 = 0x00000002;
+  static const CLAIM_SECURITY_ATTRIBUTE_TYPE_STRING = 0x00000003;
+  static const CLAIM_SECURITY_ATTRIBUTE_TYPE_OCTET_STRING = 0x00000010;
+  static const CLAIM_SECURITY_ATTRIBUTE_TYPE_FQBN = 0x00000004;
+  static const CLAIM_SECURITY_ATTRIBUTE_TYPE_SID = 0x00000005;
+  static const CLAIM_SECURITY_ATTRIBUTE_TYPE_BOOLEAN = 0x00000006;
+}
+
+/// {@category Enum}
+class CMSG_KEY_AGREE_ORIGINATOR {
+  static const CMSG_KEY_AGREE_ORIGINATOR_CERT = 0x00000001;
+  static const CMSG_KEY_AGREE_ORIGINATOR_PUBLIC_KEY = 0x00000002;
+}
+
+/// {@category Enum}
+class CRYPTUI_WIZ_DIGITAL_SIGN_INFO_dwSubjectChoiceFlags {
+  static const CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_BLOB = 0x00000002;
+  static const CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_FILE = 0x00000001;
+  static const None = 0x00000000;
+}
+
+/// {@category Enum}
+class CRYPT_CONTEXT_CONFIGFlags {
+  static const CRYPT_EXCLUSIVE = 0x00000001;
+  static const CRYPT_OVERRIDE = 0x00010000;
+}
+
+/// {@category Enum}
+class SCHANNEL_ALERT_TOKEN_dwAlertTypeFlags {
+  static const TLS1_ALERT_WARNING = 0x00000001;
+  static const TLS1_ALERT_FATAL = 0x00000002;
+}
+
+/// {@category Enum}
+class BCRYPT_DSA_KEY_BLOB_V2_dwMagic {
+  static const BCRYPT_DSA_PUBLIC_MAGIC = 0x42505344;
+  static const BCRYPT_DSA_PRIVATE_MAGIC = 0x56505344;
+}
+
+/// {@category Enum}
+class WINTRUST_DATA_dwUnionChoiceFlags {
+  static const WTD_CHOICE_FILE = 0x00000001;
+  static const WTD_CHOICE_CATALOG = 0x00000002;
+  static const WTD_CHOICE_BLOB = 0x00000003;
+  static const WTD_CHOICE_SIGNER = 0x00000004;
+  static const WTD_CHOICE_CERT = 0x00000005;
+}
+
+/// {@category Enum}
+class TRUSTED_DOMAIN_INFORMATION_EX_TrustTypeFlags {
+  static const TRUST_TYPE_DOWNLEVEL = 0x00000001;
+  static const TRUST_TYPE_UPLEVEL = 0x00000002;
+  static const TRUST_TYPE_MIT = 0x00000003;
+  static const TRUST_TYPE_DCE = 0x00000004;
+}
+
+/// {@category Enum}
+class SC_ACTION_TypeFlags {
+  static const SC_ACTION_NONE = 0x00000000;
+  static const SC_ACTION_REBOOT = 0x00000002;
+  static const SC_ACTION_RESTART = 0x00000001;
+  static const SC_ACTION_RUN_COMMAND = 0x00000003;
+}
+
+/// {@category Enum}
+class CRYPTUI_WIZ_DIGITAL_SIGN_INFO_dwSigningCertChoiceFlags {
+  static const CRYPTUI_WIZ_DIGITAL_SIGN_CERT = 0x00000001;
+  static const CRYPTUI_WIZ_DIGITAL_SIGN_STORE = 0x00000002;
+  static const CRYPTUI_WIZ_DIGITAL_SIGN_PVK = 0x00000003;
+  static const None = 0x00000000;
+}
+
+/// {@category Enum}
+class WINTRUST_DATA_fdwRevocationChecksFlags {
+  static const WTD_REVOKE_NONE = 0x00000000;
+  static const WTD_REVOKE_WHOLECHAIN = 0x00000001;
+}
+
+/// {@category Enum}
+class CRYPT_XML_X509DATA_ITEM_dwTypeFlags {
+  static const CRYPT_XML_X509DATA_TYPE_ISSUER_SERIAL = 0x00000001;
+  static const CRYPT_XML_X509DATA_TYPE_SKI = 0x00000002;
+  static const CRYPT_XML_X509DATA_TYPE_SUBJECT_NAME = 0x00000003;
+  static const CRYPT_XML_X509DATA_TYPE_CERTIFICATE = 0x00000004;
+  static const CRYPT_XML_X509DATA_TYPE_CRL = 0x00000005;
+  static const CRYPT_XML_X509DATA_TYPE_CUSTOM = 0x00000006;
+}
+
+/// {@category Enum}
+class MSV1_0_SUBAUTH_LOGON_ParameterControlFlags {
+  static const MSV1_0_CLEARTEXT_PASSWORD_ALLOWED = 0x00000002;
+  static const MSV1_0_UPDATE_LOGON_STATISTICS = 0x00000004;
+  static const MSV1_0_RETURN_USER_PARAMETERS = 0x00000008;
+  static const MSV1_0_DONT_TRY_GUEST_ACCOUNT = 0x00000010;
+  static const MSV1_0_ALLOW_SERVER_TRUST_ACCOUNT = 0x00000020;
+  static const MSV1_0_RETURN_PASSWORD_EXPIRY = 0x00000040;
+  static const MSV1_0_ALLOW_WORKSTATION_TRUST_ACCOUNT = 0x00000800;
+  static const MSV1_0_TRY_GUEST_ACCOUNT_ONLY = 0x00000100;
+  static const MSV1_0_RETURN_PROFILE_PATH = 0x00000200;
+  static const MSV1_0_TRY_SPECIFIED_DOMAIN_ONLY = 0x00000400;
+}
+
+/// {@category Enum}
+class KERB_ADD_CREDENTIALS_REQUESTFlags {
+  static const KERB_REQUEST_ADD_CREDENTIAL = 0x00000001;
+  static const KERB_REQUEST_REPLACE_CREDENTIAL = 0x00000002;
+  static const KERB_REQUEST_REMOVE_CREDENTIAL = 0x00000004;
+}
+
+/// {@category Enum}
+class CERT_BIOMETRIC_DATA_dwTypeOfBiometricDataChoiceFlags {
+  static const CERT_BIOMETRIC_PREDEFINED_DATA_CHOICE = 0x00000001;
+  static const CERT_BIOMETRIC_OID_DATA_CHOICE = 0x00000002;
+}
+
+/// {@category Enum}
+class CERT_CHAIN_POLICY_PARAFlags {
+  static const CERT_CHAIN_POLICY_IGNORE_NOT_TIME_VALID_FLAG = 0x00000001;
+  static const CERT_CHAIN_POLICY_IGNORE_CTL_NOT_TIME_VALID_FLAG = 0x00000002;
+  static const CERT_CHAIN_POLICY_IGNORE_NOT_TIME_NESTED_FLAG = 0x00000004;
+  static const CERT_CHAIN_POLICY_IGNORE_ALL_NOT_TIME_VALID_FLAGS = 0x00000007;
+  static const CERT_CHAIN_POLICY_IGNORE_INVALID_BASIC_CONSTRAINTS_FLAG = 0x00000008;
+  static const CERT_CHAIN_POLICY_ALLOW_UNKNOWN_CA_FLAG = 0x00000010;
+  static const CERT_CHAIN_POLICY_IGNORE_WRONG_USAGE_FLAG = 0x00000020;
+  static const CERT_CHAIN_POLICY_IGNORE_INVALID_NAME_FLAG = 0x00000040;
+  static const CERT_CHAIN_POLICY_IGNORE_INVALID_POLICY_FLAG = 0x00000080;
+  static const CERT_CHAIN_POLICY_IGNORE_END_REV_UNKNOWN_FLAG = 0x00000100;
+  static const CERT_CHAIN_POLICY_IGNORE_CTL_SIGNER_REV_UNKNOWN_FLAG = 0x00000200;
+  static const CERT_CHAIN_POLICY_IGNORE_CA_REV_UNKNOWN_FLAG = 0x00000400;
+  static const CERT_CHAIN_POLICY_IGNORE_ROOT_REV_UNKNOWN_FLAG = 0x00000800;
+  static const CERT_CHAIN_POLICY_IGNORE_ALL_REV_UNKNOWN_FLAGS = 0x00000f00;
+  static const CERT_CHAIN_POLICY_ALLOW_TESTROOT_FLAG = 0x00008000;
+  static const CERT_CHAIN_POLICY_TRUST_TESTROOT_FLAG = 0x00004000;
+  static const CERT_CHAIN_POLICY_IGNORE_NOT_SUPPORTED_CRITICAL_EXT_FLAG = 0x00002000;
+  static const CERT_CHAIN_POLICY_IGNORE_PEER_TRUST_FLAG = 0x00001000;
+}
+
+/// {@category Enum}
+class SERVICE_TRIGGER_dwActionFlags {
+  static const SERVICE_TRIGGER_ACTION_SERVICE_START = 0x00000001;
+  static const SERVICE_TRIGGER_ACTION_SERVICE_STOP = 0x00000002;
+}
+
+/// {@category Enum}
+class SERVICE_TRIGGER_dwTriggerTypeFlags {
+  static const SERVICE_TRIGGER_TYPE_CUSTOM = 0x00000014;
+  static const SERVICE_TRIGGER_TYPE_DEVICE_INTERFACE_ARRIVAL = 0x00000001;
+  static const SERVICE_TRIGGER_TYPE_DOMAIN_JOIN = 0x00000003;
+  static const SERVICE_TRIGGER_TYPE_FIREWALL_PORT_EVENT = 0x00000004;
+  static const SERVICE_TRIGGER_TYPE_GROUP_POLICY = 0x00000005;
+  static const SERVICE_TRIGGER_TYPE_IP_ADDRESS_AVAILABILITY = 0x00000002;
+  static const SERVICE_TRIGGER_TYPE_NETWORK_ENDPOINT = 0x00000006;
+}
+
+/// {@category Enum}
+class CERT_STRONG_SIGN_SERIALIZED_INFOFlags {
+  static const CERT_STRONG_SIGN_ENABLE_CRL_CHECK = 0x00000001;
+  static const CERT_STRONG_SIGN_ENABLE_OCSP_CHECK = 0x00000002;
+}
+
+/// {@category Enum}
+class CERT_LOGOTYPE_IMAGE_INFO_dwLogotypeImageInfoChoiceFlags {
+  static const CERT_LOGOTYPE_GRAY_SCALE_IMAGE_INFO_CHOICE = 0x00000001;
+  static const CERT_LOGOTYPE_COLOR_IMAGE_INFO_CHOICE = 0x00000002;
+}
+
+/// {@category Enum}
+class CRYPT_XML_STATUS_dwInfoStatusFlags {
+  static const CRYPT_XML_STATUS_INTERNAL_REFERENCE = 0x00000001;
+  static const CRYPT_XML_STATUS_KEY_AVAILABLE = 0x00000002;
+  static const CRYPT_XML_STATUS_DIGESTING = 0x00000004;
+  static const CRYPT_XML_STATUS_DIGEST_VALID = 0x00000008;
+  static const CRYPT_XML_STATUS_SIGNATURE_VALID = 0x00010000;
+  static const CRYPT_XML_STATUS_OPENED_TO_ENCODE = 0x80000000;
+}
+
+/// {@category Enum}
+class CRYPT_XML_TRANSFORM_INFOFlags {
+  static const CRYPT_XML_TRANSFORM_ON_STREAM = 0x00000001;
+  static const CRYPT_XML_TRANSFORM_ON_NODESET = 0x00000002;
+  static const CRYPT_XML_TRANSFORM_URI_QUERY_STRING = 0x00000003;
+}
+
+/// {@category Enum}
+class CRYPT_XML_ALGORITHM_INFO_dwGroupIdFlags {
+  static const CRYPT_XML_GROUP_ID_HASH_________ = 0x00000001;
+  static const CRYPT_XML_GROUP_ID_SIGN_________ = 0x00000002;
+}
+
+/// {@category Enum}
+class CRYPTUI_WIZ_EXPORT_INFO_dwSubjectChoiceFlags {
+  static const CRYPTUI_WIZ_EXPORT_CERT_CONTEXT = 0x00000001;
+  static const CRYPTUI_WIZ_EXPORT_CTL_CONTEXT = 0x00000002;
+  static const CRYPTUI_WIZ_EXPORT_CRL_CONTEXT = 0x00000003;
+  static const CRYPTUI_WIZ_EXPORT_CERT_STORE = 0x00000004;
+  static const CRYPTUI_WIZ_EXPORT_CERT_STORE_CERTIFICATES_ONLY = 0x00000005;
+}
+
+/// {@category Enum}
+class TOKEN_PRIVILEGES_PrivilegesFlags {
+  static const SE_PRIVILEGE_ENABLED = 0x00000002;
+  static const SE_PRIVILEGE_ENABLED_BY_DEFAULT = 0x00000001;
+  static const SE_PRIVILEGE_REMOVED = 0x00000004;
+  static const SE_PRIVILEGE_USED_FOR_ACCESS = 0x80000000;
+}
+
+/// {@category Enum}
+class CERT_SELECT_CRITERIA_dwTypeFlags {
+  static const CERT_SELECT_BY_ENHKEY_USAGE = 0x00000001;
+  static const CERT_SELECT_BY_KEY_USAGE = 0x00000002;
+  static const CERT_SELECT_BY_POLICY_OID = 0x00000003;
+  static const CERT_SELECT_BY_PROV_NAME = 0x00000004;
+  static const CERT_SELECT_BY_EXTENSION = 0x00000005;
+  static const CERT_SELECT_BY_SUBJECT_HOST_NAME = 0x00000006;
+  static const CERT_SELECT_BY_ISSUER_ATTR = 0x00000007;
+  static const CERT_SELECT_BY_SUBJECT_ATTR = 0x00000008;
+  static const CERT_SELECT_BY_ISSUER_NAME = 0x00000009;
+  static const CERT_SELECT_BY_PUBLIC_KEY = 0x0000000a;
+  static const CERT_SELECT_BY_TLS_SIGNATURES = 0x0000000b;
+}
+
+/// {@category Enum}
+class SI_OBJECT_INFOFlags {
+  static const SI_AUDITS_ELEVATION_REQUIRED = 0x02000000;
+  static const SI_DISABLE_DENY_ACE = 0x80000000;
+  static const SI_EDIT_EFFECTIVE = 0x00020000;
+  static const SI_ENABLE_CENTRAL_POLICY = 0x40000000;
+  static const SI_ENABLE_EDIT_ATTRIBUTE_CONDITION = 0x20000000;
+  static const SI_MAY_WRITE = 0x10000000;
+  static const SI_NO_ADDITIONAL_PERMISSION = 0x00200000;
+  static const SI_OWNER_ELEVATION_REQUIRED = 0x04000000;
+  static const SI_PERMS_ELEVATION_REQUIRED = 0x01000000;
+  static const SI_RESET_DACL = 0x00040000;
+  static const SI_RESET_OWNER = 0x00100000;
+  static const SI_RESET_SACL = 0x00080000;
+  static const SI_SCOPE_ELEVATION_REQUIRED = 0x08000000;
+  static const SI_VIEW_ONLY = 0x00400000;
+}
+
+/// {@category Enum}
+class TRUSTED_DOMAIN_INFORMATION_EX_TrustDirectionFlags {
+  static const TRUST_DIRECTION_DISABLED = 0x00000000;
+  static const TRUST_DIRECTION_INBOUND = 0x00000001;
+  static const TRUST_DIRECTION_OUTBOUND = 0x00000002;
+  static const TRUST_DIRECTION_BIDIRECTIONAL = 0x00000003;
+}
+
+/// {@category Enum}
+class MSV1_0_SUPPLEMENTAL_CREDENTIALFlags {
+  static const MSV1_0_CRED_LM_PRESENT = 0x00000001;
+  static const MSV1_0_CRED_NT_PRESENT = 0x00000002;
+  static const MSV1_0_CRED_VERSION = 0x00000000;
+}
+
+/// {@category Enum}
+class CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFOFlags {
+  static const CRYPTUI_WIZ_DIGITAL_SIGN_COMMERCIAL = 0x00000001;
+  static const CRYPTUI_WIZ_DIGITAL_SIGN_INDIVIDUAL = 0x00000002;
+}
+
+/// {@category Enum}
+class WINTRUST_DATA_dwUIContextFlags {
+  static const WTD_UICONTEXT_EXECUTE = 0x00000000;
+  static const WTD_UICONTEXT_INSTALL = 0x00000001;
+}
+
+/// {@category Enum}
+class SECURITY_PACKAGE_OPTIONS_TypeFlags {
+  static const SECPKG_OPTIONS_TYPE_UNKNOWN = 0x00000000;
+  static const SECPKG_OPTIONS_TYPE_LSA = 0x00000001;
+  static const SECPKG_OPTIONS_TYPE_SSPI = 0x00000002;
+}
+
+/// {@category Enum}
+class BCRYPT_RSAKEY_BLOB_MagicFlags {
+  static const BCRYPT_RSAPUBLIC_MAGIC = 0x31415352;
+  static const BCRYPT_RSAPRIVATE_MAGIC = 0x32415352;
+  static const BCRYPT_RSAFULLPRIVATE_MAGIC = 0x33415352;
+}
+
+/// {@category Enum}
+class CRYPT_XML_KEY_INFO_ITEM_dwTypeFlags {
+  static const CRYPT_XML_KEYINFO_TYPE_KEYNAME = 0x00000001;
+  static const CRYPT_XML_KEYINFO_TYPE_KEYVALUE = 0x00000002;
+  static const CRYPT_XML_KEYINFO_TYPE_RETRIEVAL = 0x00000003;
+  static const CRYPT_XML_KEYINFO_TYPE_X509DATA = 0x00000004;
+  static const CRYPT_XML_KEYINFO_TYPE_CUSTOM = 0x00000005;
+}
+
+/// {@category Enum}
+class CERT_BIOMETRIC_DATA_dwPredefinedFlags {
+  static const CERT_BIOMETRIC_PICTURE_TYPE = 0x00000000;
+  static const CERT_BIOMETRIC_SIGNATURE_TYPE = 0x00000001;
+}
+
+/// {@category Enum}
+class AUTHZ_SECURITY_ATTRIBUTE_V1Flags {
+  static const AUTHZ_SECURITY_ATTRIBUTE_NON_INHERITABLE = 0x00000001;
+  static const AUTHZ_SECURITY_ATTRIBUTE_VALUE_CASE_SENSITIVE = 0x00000002;
+}
+
+/// {@category Enum}
+class SCHANNEL_SESSION_TOKENFlags {
+  static const SSL_SESSION_ENABLE_RECONNECTS = 0x00000001;
+  static const SSL_SESSION_DISABLE_RECONNECTS = 0x00000002;
+}
+
+/// {@category Enum}
+class CRYPT_TIMESTAMP_REQUEST_dwVersionFlags {
+  static const TIMESTAMP_VERSION = 0x00000001;
+}
+
+/// {@category Enum}
+class KERB_CRYPTO_KEY_KeyTypeFlags {
+  static const KERB_ETYPE_DES_CBC_CRC = 0x00000001;
+  static const KERB_ETYPE_DES_CBC_MD4 = 0x00000002;
+  static const KERB_ETYPE_DES_CBC_MD5 = 0x00000003;
+  static const KERB_ETYPE_NULL = 0x00000000;
+  static const KERB_ETYPE_RC4_HMAC_NT = 0x00000017;
+  static const KERB_ETYPE_RC4_MD4 = 0xffffff80;
+}
+
+/// {@category Enum}
+class CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO_dwPvkChoiceFlags {
+  static const CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE = 0x00000001;
+  static const CRYPTUI_WIZ_DIGITAL_SIGN_PVK_PROV = 0x00000002;
+}
+
+/// {@category Enum}
+class CERT_ID_dwIdChoiceFlags {
+  static const CERT_ID_ISSUER_SERIAL_NUMBER = 0x00000001;
+  static const CERT_ID_KEY_IDENTIFIER = 0x00000002;
+  static const CERT_ID_SHA1_HASH = 0x00000003;
+}
+
+/// {@category Enum}
+class HTTPSPolicyCallbackData_dwAuthTypeFlags {
+  static const AUTHTYPE_CLIENT = 0x00000001;
+  static const AUTHTYPE_SERVER = 0x00000002;
+}
+
+/// {@category Enum}
+class CRYPTUI_WIZ_EXPORT_CERTCONTEXT_INFO_dwExportFormatFlags {
+  static const CRYPTUI_WIZ_EXPORT_FORMAT_DER = 0x00000001;
+  static const CRYPTUI_WIZ_EXPORT_FORMAT_PFX = 0x00000002;
+  static const CRYPTUI_WIZ_EXPORT_FORMAT_PKCS7 = 0x00000003;
+  static const CRYPTUI_WIZ_EXPORT_FORMAT_BASE64 = 0x00000004;
+  static const CRYPTUI_WIZ_EXPORT_FORMAT_CRL = 0x00000006;
+  static const CRYPTUI_WIZ_EXPORT_FORMAT_CTL = 0x00000007;
+}
+
+/// {@category Enum}
+class BCRYPT_DH_KEY_BLOB_dwMagicFlags {
+  static const BCRYPT_DH_PUBLIC_MAGIC = 0x42504844;
+  static const BCRYPT_DH_PRIVATE_MAGIC = 0x56504844;
+}
+
+/// {@category Enum}
+class LSA_AUTH_INFORMATION_AuthTypeFlags {
+  static const TRUST_AUTH_TYPE_NONE = 0x00000000;
+  static const TRUST_AUTH_TYPE_NT4OWF = 0x00000001;
+  static const TRUST_AUTH_TYPE_CLEAR = 0x00000002;
+  static const TRUST_AUTH_TYPE_VERSION = 0x00000003;
+}
+
+/// {@category Enum}
+class CRYPTUI_WIZ_DIGITAL_SIGN_INFO_dwAdditionalCertChoiceFlags {
+  static const CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN = 0x00000001;
+  static const CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN_NO_ROOT = 0x00000002;
+  static const None = 0x00000000;
+}
+
+/// {@category Enum}
+class CRYPT_XML_STATUS_dwErrorStatusFlags {
+  static const CRYPT_XML_STATUS_ERROR_NOT_RESOLVED = 0x00000001;
+  static const CRYPT_XML_STATUS_ERROR_DIGEST_INVALID = 0x00000002;
+  static const CRYPT_XML_STATUS_ERROR_NOT_SUPPORTED_ALGORITHM = 0x00000005;
+  static const CRYPT_XML_STATUS_ERROR_NOT_SUPPORTED_TRANSFORM = 0x00000008;
+  static const CRYPT_XML_STATUS_ERROR_SIGNATURE_INVALID = 0x00010000;
+  static const CRYPT_XML_STATUS_ERROR_KEYINFO_NOT_PARSED = 0x00020000;
+}
+
+/// {@category Enum}
+class CRYPT_TIMESTAMP_RESPONSE_dwStatusFlags {
+  static const TIMESTAMP_STATUS_GRANTED = 0x00000000;
+  static const TIMESTAMP_STATUS_GRANTED_WITH_MODS = 0x00000001;
+  static const TIMESTAMP_STATUS_REJECTED = 0x00000002;
+  static const TIMESTAMP_STATUS_WAITING = 0x00000003;
+  static const TIMESTAMP_STATUS_REVOCATION_WARNING = 0x00000004;
+  static const TIMESTAMP_STATUS_REVOKED = 0x00000005;
+}
+
+/// {@category Enum}
+class NCryptAlgorithmName_dwClassFlags {
+  static const NCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE = 0x00000003;
+  static const NCRYPT_SECRET_AGREEMENT_INTERFACE = 0x00000004;
+  static const NCRYPT_SIGNATURE_INTERFACE = 0x00000005;
+}
+
+/// {@category Enum}
+class SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_dwDataTypeFlags {
+  static const SERVICE_TRIGGER_DATA_TYPE_BINARY = 0x00000001;
+  static const SERVICE_TRIGGER_DATA_TYPE_STRING = 0x00000002;
+  static const SERVICE_TRIGGER_DATA_TYPE_LEVEL = 0x00000003;
+  static const SERVICE_TRIGGER_DATA_TYPE_KEYWORD_ANY = 0x00000004;
+  static const SERVICE_TRIGGER_DATA_TYPE_KEYWORD_ALL = 0x00000005;
+}
+
+/// {@category Enum}
+class SECPKG_EVENT_PACKAGE_CHANGE_ChangeTypeFlags {
+  static const SECPKG_PACKAGE_CHANGE_LOAD = 0x00000000;
+  static const SECPKG_PACKAGE_CHANGE_UNLOAD = 0x00000001;
+  static const SECPKG_PACKAGE_CHANGE_SELECT = 0x00000002;
+}
+
+/// {@category Enum}
+class CTL_MODIFY_REQUEST_dwOperationFlags {
+  static const CTL_MODIFY_REQUEST_ADD_TRUSTED = 0x00000003;
+  static const CTL_MODIFY_REQUEST_ADD_NOT_TRUSTED = 0x00000001;
+  static const CTL_MODIFY_REQUEST_REMOVE = 0x00000002;
+}
+
+/// {@category Enum}
+class SERVICE_STATUS_PROCESS_dwCurrentState {
+  static const SERVICE_CONTINUE_PENDING = 0x00000005;
+  static const SERVICE_PAUSE_PENDING = 0x00000006;
+  static const SERVICE_PAUSED = 0x00000007;
+  static const SERVICE_RUNNING = 0x00000004;
+  static const SERVICE_START_PENDING = 0x00000002;
+  static const SERVICE_STOP_PENDING = 0x00000003;
+  static const SERVICE_STOPPED = 0x00000001;
+}
+
+/// {@category Enum}
+class TRUSTED_DOMAIN_INFORMATION_EX_TrustAttributesFlags {
+  static const TRUST_ATTRIBUTE_NON_TRANSITIVE = 0x00000001;
+  static const TRUST_ATTRIBUTE_UPLEVEL_ONLY = 0x00000002;
+  static const TRUST_ATTRIBUTE_FILTER_SIDS = 0x00000004;
+  static const TRUST_ATTRIBUTE_FOREST_TRANSITIVE = 0x00000008;
+  static const TRUST_ATTRIBUTE_CROSS_ORGANIZATION = 0x00000010;
+  static const TRUST_ATTRIBUTE_TREAT_AS_EXTERNAL = 0x00000040;
+  static const TRUST_ATTRIBUTE_WITHIN_FOREST = 0x00000020;
+}
+

@@ -54,3 +54,4 @@ class DBKINDENUM {
   static const DBKIND_PROPID = 0x00000005;
   static const DBKIND_GUID = 0x00000006;
 }
+

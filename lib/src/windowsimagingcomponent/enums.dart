@@ -511,3 +511,4 @@ class WICPersistOptions {
   static const WICPersistOptionPreferUTF8 = 0x00000008;
   static const WICPersistOptionMask = 0x0000ffff;
 }
+

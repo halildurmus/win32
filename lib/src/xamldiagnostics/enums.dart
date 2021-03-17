@@ -53,3 +53,4 @@ class VisualElementState {
   static const ErrorResourceNotFound = 0x00000001;
   static const ErrorInvalidResource = 0x00000002;
 }
+
