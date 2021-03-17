@@ -4691,6 +4691,12 @@ final E_ACCESSDENIED = 0x80070005.toSigned(32);
 /// The data necessary to complete this operation is not yet available.
 final E_PENDING = 0x8000000A.toSigned(32);
 
+/// typedef short VARIANT_BOOL: -1 == TRUE
+final VARIANT_TRUE = -1;
+
+/// typedef short VARIANT_BOOL: 0 == FALSE
+final VARIANT_FALSE = 0;
+
 /// Specifies the variant types.
 ///
 /// {@category Enum}

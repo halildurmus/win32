@@ -10,6 +10,7 @@ import 'package:winmd/winmd.dart';
 
 import '../manual_gen/function.dart';
 import '../manual_gen/win32api.dart';
+import 'generate_win32_structs.dart';
 import 'generate_win32_tests.dart';
 import 'winmd_caveats.dart';
 
@@ -126,8 +127,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
-import 'com/combase.dart';
+import 'combase.dart';
 import 'structs.dart';
+import 'structs.g.dart';
 
 final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');\n
 ''');
@@ -165,7 +167,9 @@ void main() {
   apis.forEach((api) => methods.addAll(api.methods));
   print('${methods.length} APIs collected');
 
-  final win32 = Win32API('tool/manual_gen/win32api.json');
+  final win32 = Win32API(
+      apiFile: 'tool/manual_gen/win32api.json',
+      structFile: 'tool/manual_gen/win32struct.json');
   final genCount = win32.functions.values
       .where((func) => winmdGenerated.contains(func.dllLibrary))
       .length;
@@ -175,6 +179,9 @@ void main() {
 
   final apiTestsGenerated = generateTests(win32);
   print('$apiTestsGenerated API tests generated.');
+
+  final structsGenerated = generateStructs(win32);
+  print('$structsGenerated structs generated from Windows metadata.');
 
   final structTestsGenerated = generateStructSizeTests();
   print('$structTestsGenerated struct tests generated.');

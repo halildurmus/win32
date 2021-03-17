@@ -24,17 +24,25 @@ void main() {
     hr = fileDialog.SetOptions(options);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-    hr = fileDialog.SetDefaultExtension(TEXT('txt;csv'));
+    final defaultExtensions = TEXT('txt;csv');
+    hr = fileDialog.SetDefaultExtension(defaultExtensions);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
+    free(defaultExtensions);
 
-    hr = fileDialog.SetFileNameLabel(TEXT('Custom Label:'));
+    final fileNameLabel = TEXT('Custom Label:');
+    hr = fileDialog.SetFileNameLabel(fileNameLabel);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
+    free(fileNameLabel);
 
-    hr = fileDialog.SetTitle(TEXT('Custom Title'));
+    final title = TEXT('Custom Title');
+    hr = fileDialog.SetTitle(title);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
+    free(title);
 
-    hr = fileDialog.SetOkButtonLabel(TEXT('Go'));
+    final okButtonLabel = TEXT('Go');
+    hr = fileDialog.SetOkButtonLabel(okButtonLabel);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
+    free(okButtonLabel);
 
     final rgSpec = calloc<COMDLG_FILTERSPEC>(3);
     rgSpec[0]

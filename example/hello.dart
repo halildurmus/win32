@@ -39,7 +39,6 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
 void main() {
   // Register the window class.
   final className = TEXT('Sample Window Class');
-
   final wc = calloc<WNDCLASS>()
     ..ref.style = CS_HREDRAW | CS_VREDRAW
     ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
@@ -50,11 +49,11 @@ void main() {
   RegisterClass(wc);
 
   // Create the window.
-
+  final windowCaption = TEXT('Dart Native Win32 window');
   final hWnd = CreateWindowEx(
       0, // Optional window styles.
       className, // Window class
-      TEXT('Dart Native Win32 window'), // Window caption
+      windowCaption, // Window caption
       WS_OVERLAPPEDWINDOW, // Window style
 
       // Size and position
@@ -67,7 +66,7 @@ void main() {
       hInstance, // Instance handle
       nullptr // Additional application data
       );
-
+  free(windowCaption);
   free(className);
 
   if (hWnd == 0) {
