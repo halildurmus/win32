@@ -27,7 +27,7 @@ class OpenFilePicker extends FileDialog {
 
     final fileDialog = FileOpenDialog.createInstance();
 
-    final pfos = allocate<Uint32>();
+    final pfos = calloc<Uint32>();
     hr = fileDialog.GetOptions(pfos);
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -71,8 +71,7 @@ class OpenFilePicker extends FileDialog {
     }
 
     if (filterSpecification.isNotEmpty) {
-      final rgSpec =
-          allocate<COMDLG_FILTERSPEC>(count: filterSpecification.length);
+      final rgSpec = calloc<COMDLG_FILTERSPEC>(filterSpecification.length);
 
       var index = 0;
       for (final key in filterSpecification.keys) {
@@ -113,21 +112,16 @@ class OpenFilePicker extends FileDialog {
         throw WindowsException(hr);
       }
     } else {
-      final ppsi = allocate<IntPtr>();
+      final ppsi = calloc<Pointer>();
       hr = fileDialog.GetResult(ppsi);
       if (FAILED(hr)) throw WindowsException(hr);
 
       final item = IShellItem(ppsi.cast());
-      final pathPtrPtr = allocate<IntPtr>();
-      hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtrPtr.cast());
+      final pathPtrPtr = calloc<Pointer<Utf16>>();
+      hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtrPtr);
       if (FAILED(hr)) throw WindowsException(hr);
 
-      final pathPtr = Pointer<Utf16>.fromAddress(pathPtrPtr.value);
-      // MAX_PATH is the normal maximum, but if the process is set to support
-      // long file paths and the user selects a path with length > MAX_PATH
-      // characters, it could be longer. In this case, the file name will be
-      // truncated.
-      filePath = pathPtr.unpackString(MAX_PATH);
+      filePath = pathPtrPtr.value.toDartString();
 
       hr = item.Release();
       if (FAILED(hr)) throw WindowsException(hr);

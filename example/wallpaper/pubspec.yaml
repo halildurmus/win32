@@ -6,7 +6,7 @@ description: Demonstrates how to use the filepicker_windows plugin.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
-  sdk: '>=2.12.0-0 <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   filepicker_windows:
@@ -24,4 +24,4 @@ flutter:
   uses-material-design: true
 
 dev_dependencies:
-  lint: ^1.5.1
+  lint: ^1.5.3

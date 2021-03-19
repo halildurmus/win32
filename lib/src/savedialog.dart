@@ -18,7 +18,7 @@ class SaveFilePicker extends FileDialog {
 
     final fileDialog = FileSaveDialog.createInstance();
 
-    final pfos = allocate<Uint32>();
+    final pfos = calloc<Uint32>();
     hr = fileDialog.GetOptions(pfos);
     if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
@@ -60,8 +60,7 @@ class SaveFilePicker extends FileDialog {
     }
 
     if (filterSpecification.isNotEmpty) {
-      final rgSpec =
-          allocate<COMDLG_FILTERSPEC>(count: filterSpecification.length);
+      final rgSpec = calloc<COMDLG_FILTERSPEC>(filterSpecification.length);
 
       var index = 0;
       for (final key in filterSpecification.keys) {
@@ -82,18 +81,16 @@ class SaveFilePicker extends FileDialog {
         throw WindowsException(hr);
       }
     } else {
-      final ppsi = allocate<IntPtr>();
+      final ppsi = calloc<Pointer>();
       hr = fileDialog.GetResult(ppsi);
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
       final item = IShellItem(ppsi.cast());
-      final pathPtrPtr = allocate<IntPtr>();
+      final pathPtrPtr = calloc<Pointer<Utf16>>();
       hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtrPtr.cast());
       if (!SUCCEEDED(hr)) throw WindowsException(hr);
 
-      final pathPtr = Pointer<Utf16>.fromAddress(pathPtrPtr.value);
-      // MAX_PATH is a slight hack here, since this could be longer.
-      filePath = pathPtr.unpackString(MAX_PATH);
+      filePath = pathPtrPtr.value.toDartString();
 
       hr = item.Release();
       if (!SUCCEEDED(hr)) throw WindowsException(hr);

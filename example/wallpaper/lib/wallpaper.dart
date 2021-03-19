@@ -1,6 +1,7 @@
 import 'dart:ffi';
 import 'dart:io';
 
+import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 class Wallpaper {
@@ -11,8 +12,12 @@ class Wallpaper {
 
     final wallpaper = DesktopWallpaper.createInstance();
 
-    wallpaper.SetWallpaper(nullptr, TEXT(wallpaperFile.path));
+    final pathPtr = TEXT(wallpaperFile.path);
+    wallpaper.SetWallpaper(nullptr, pathPtr);
     if (FAILED(hr)) throw WindowsException(hr);
+
+    calloc.free(pathPtr);
+    calloc.free(wallpaper.ptr);
 
     CoUninitialize();
   }

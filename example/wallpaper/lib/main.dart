@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    RaisedButton(
+                    ElevatedButton(
                       onPressed: () {
                         final file = picker.OpenFilePicker();
                         file.hidePinnedPlaces = true;
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                       },
                       child: const Text('Open file dialog'),
                     ),
-                    RaisedButton(
+                    ElevatedButton(
                       onPressed: () {
                         if (path != null) {
                           Wallpaper.set(path!);

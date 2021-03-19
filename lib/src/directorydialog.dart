@@ -18,7 +18,7 @@ class DirectoryPicker extends FileDialog {
 
     final dialog = FileOpenDialog.createInstance();
 
-    final pfos = allocate<Uint32>();
+    final pfos = calloc<Uint32>();
     hr = dialog.GetOptions(pfos);
     if (FAILED(hr)) throw WindowsException(hr);
 
@@ -69,12 +69,12 @@ class DirectoryPicker extends FileDialog {
         throw WindowsException(hr);
       }
     } else {
-      final ppsi = allocate<IntPtr>();
+      final ppsi = calloc<Pointer<COMObject>>();
       hr = dialog.GetResult(ppsi);
       if (FAILED(hr)) throw WindowsException(hr);
 
       final item = IShellItem(ppsi.cast());
-      final pathPtrPtr = allocate<IntPtr>();
+      final pathPtrPtr = calloc<IntPtr>();
       hr = item.GetDisplayName(SIGDN.SIGDN_FILESYSPATH, pathPtrPtr.cast());
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -83,7 +83,7 @@ class DirectoryPicker extends FileDialog {
       // long file paths and the user selects a path with length > MAX_PATH
       // characters, it could be longer. In this case, the file name will be
       // truncated.
-      path = pathPtr.unpackString(MAX_PATH);
+      path = pathPtr.toDartString();
 
       hr = item.Release();
       if (FAILED(hr)) throw WindowsException(hr);
