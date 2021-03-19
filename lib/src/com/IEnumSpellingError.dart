@@ -20,9 +20,6 @@ import '../utils.dart';
 import 'IUnknown.dart';
 
 /// @nodoc
-const CLSID_EnumSpellingError = '';
-
-/// @nodoc
 const IID_IEnumSpellingError = '{803E3BD4-2828-4410-8290-418D1D73C762}';
 
 typedef _Next_Native = Int32 Function(Pointer obj, Pointer<Pointer> value);
@@ -39,26 +36,4 @@ class IEnumSpellingError extends IUnknown {
       Pointer<NativeFunction<_Next_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)
           .asFunction<_Next_Dart>()(ptr.ref.lpVtbl, value);
-}
-
-/// {@category com}
-class EnumSpellingError extends IEnumSpellingError {
-  EnumSpellingError(Pointer<COMObject> ptr) : super(ptr);
-
-  factory EnumSpellingError.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_EnumSpellingError);
-    final iid = calloc<GUID>()..ref.setGUID(IID_IEnumSpellingError);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return EnumSpellingError(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
 }

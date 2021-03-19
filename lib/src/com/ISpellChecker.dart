@@ -20,9 +20,6 @@ import '../utils.dart';
 import 'IUnknown.dart';
 
 /// @nodoc
-const CLSID_SpellChecker = '';
-
-/// @nodoc
 const IID_ISpellChecker = '{B6FD0B71-E2BC-4653-8D05-F197E412770B}';
 
 typedef _get_LanguageTag_Native = Int32 Function(
@@ -200,26 +197,4 @@ class ISpellChecker extends IUnknown {
       Pointer<NativeFunction<_ComprehensiveCheck_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(16).value)
           .asFunction<_ComprehensiveCheck_Dart>()(ptr.ref.lpVtbl, text, value);
-}
-
-/// {@category com}
-class SpellChecker extends ISpellChecker {
-  SpellChecker(Pointer<COMObject> ptr) : super(ptr);
-
-  factory SpellChecker.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_SpellChecker);
-    final iid = calloc<GUID>()..ref.setGUID(IID_ISpellChecker);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return SpellChecker(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
-  }
 }

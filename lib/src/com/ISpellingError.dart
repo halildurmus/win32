@@ -20,9 +20,6 @@ import '../utils.dart';
 import 'IUnknown.dart';
 
 /// @nodoc
-const CLSID_SpellingError = '';
-
-/// @nodoc
 const IID_ISpellingError = '{B7C82D61-FBE8-4B47-9B27-6C0D2E0DE0A3}';
 
 typedef _get_StartIndex_Native = Int32 Function(
@@ -101,27 +98,5 @@ class ISpellingError extends IUnknown {
     final retValue = retValuePtr.value;
     free(retValuePtr);
     return retValue;
-  }
-}
-
-/// {@category com}
-class SpellingError extends ISpellingError {
-  SpellingError(Pointer<COMObject> ptr) : super(ptr);
-
-  factory SpellingError.createInstance() {
-    final ptr = calloc<COMObject>();
-    final clsid = calloc<GUID>()..ref.setGUID(CLSID_SpellingError);
-    final iid = calloc<GUID>()..ref.setGUID(IID_ISpellingError);
-
-    try {
-      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
-
-      if (FAILED(hr)) throw WindowsException(hr);
-
-      return SpellingError(ptr);
-    } finally {
-      free(clsid);
-      free(iid);
-    }
   }
 }
