@@ -276,6 +276,24 @@ void main() {
           int Function(int hNamedPipe)>('DisconnectNamedPipe');
       expect(DisconnectNamedPipe, isA<Function>());
     });
+    test('Can instantiate DnsHostnameToComputerName', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final DnsHostnameToComputerName = kernel32.lookupFunction<
+          Int32 Function(Pointer<Utf16> Hostname, Pointer<Utf16> ComputerName,
+              Pointer<Uint32> nSize),
+          int Function(Pointer<Utf16> Hostname, Pointer<Utf16> ComputerName,
+              Pointer<Uint32> nSize)>('DnsHostnameToComputerNameW');
+      expect(DnsHostnameToComputerName, isA<Function>());
+    });
+    test('Can instantiate DosDateTimeToFileTime', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final DosDateTimeToFileTime = kernel32.lookupFunction<
+          Int32 Function(
+              Uint16 wFatDate, Uint16 wFatTime, Pointer<FILETIME> lpFileTime),
+          int Function(int wFatDate, int wFatTime,
+              Pointer<FILETIME> lpFileTime)>('DosDateTimeToFileTime');
+      expect(DosDateTimeToFileTime, isA<Function>());
+    });
     test('Can instantiate EndUpdateResource', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final EndUpdateResource = kernel32.lookupFunction<
@@ -348,6 +366,15 @@ void main() {
           Void Function(Uint32 uExitCode),
           void Function(int uExitCode)>('ExitProcess');
       expect(ExitProcess, isA<Function>());
+    });
+    test('Can instantiate FileTimeToDosDateTime', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final FileTimeToDosDateTime = kernel32.lookupFunction<
+          Int32 Function(Pointer<FILETIME> lpFileTime,
+              Pointer<Uint16> lpFatDate, Pointer<Uint16> lpFatTime),
+          int Function(Pointer<FILETIME> lpFileTime, Pointer<Uint16> lpFatDate,
+              Pointer<Uint16> lpFatTime)>('FileTimeToDosDateTime');
+      expect(FileTimeToDosDateTime, isA<Function>());
     });
     test('Can instantiate FillConsoleOutputAttribute', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -517,6 +544,14 @@ void main() {
           int Function(Pointer<Utf16> lpApplicationName,
               Pointer<Uint32> lpBinaryType)>('GetBinaryTypeW');
       expect(GetBinaryType, isA<Function>());
+    });
+    test('Can instantiate GetComputerName', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetComputerName = kernel32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize),
+          int Function(Pointer<Utf16> lpBuffer,
+              Pointer<Uint32> nSize)>('GetComputerNameW');
+      expect(GetComputerName, isA<Function>());
     });
     test('Can instantiate GetComputerNameEx', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -925,6 +960,13 @@ void main() {
               'IsDebuggerPresent');
       expect(IsDebuggerPresent, isA<Function>());
     });
+    test('Can instantiate IsNativeVhdBoot', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final IsNativeVhdBoot = kernel32.lookupFunction<
+          Int32 Function(Pointer<Int32> NativeVhdBoot),
+          int Function(Pointer<Int32> NativeVhdBoot)>('IsNativeVhdBoot');
+      expect(IsNativeVhdBoot, isA<Function>());
+    });
     test('Can instantiate IsValidLocaleName', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final IsValidLocaleName = kernel32.lookupFunction<
@@ -1232,6 +1274,28 @@ void main() {
           int Function(
               int hFile, Pointer<Utf16> lpShortName)>('SetFileShortNameW');
       expect(SetFileShortName, isA<Function>());
+    });
+    test('Can instantiate SetFirmwareEnvironmentVariable', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetFirmwareEnvironmentVariable = kernel32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpName, Pointer<Utf16> lpGuid,
+              Pointer pValue, Uint32 nSize),
+          int Function(Pointer<Utf16> lpName, Pointer<Utf16> lpGuid,
+              Pointer pValue, int nSize)>('SetFirmwareEnvironmentVariableW');
+      expect(SetFirmwareEnvironmentVariable, isA<Function>());
+    });
+    test('Can instantiate SetFirmwareEnvironmentVariableEx', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetFirmwareEnvironmentVariableEx = kernel32.lookupFunction<
+          Int32 Function(Pointer<Utf16> lpName, Pointer<Utf16> lpGuid,
+              Pointer pValue, Uint32 nSize, Uint32 dwAttributes),
+          int Function(
+              Pointer<Utf16> lpName,
+              Pointer<Utf16> lpGuid,
+              Pointer pValue,
+              int nSize,
+              int dwAttributes)>('SetFirmwareEnvironmentVariableExW');
+      expect(SetFirmwareEnvironmentVariableEx, isA<Function>());
     });
     test('Can instantiate SetNamedPipeHandleState', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -1706,6 +1770,13 @@ void main() {
               Pointer<NativeFunction<DlgProc>> lpDialogFunc,
               int dwInitParam)>('DialogBoxIndirectParamW');
       expect(DialogBoxIndirectParam, isA<Function>());
+    });
+    test('Can instantiate DisableProcessWindowsGhosting', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final DisableProcessWindowsGhosting =
+          user32.lookupFunction<Void Function(), void Function()>(
+              'DisableProcessWindowsGhosting');
+      expect(DisableProcessWindowsGhosting, isA<Function>());
     });
     test('Can instantiate DispatchMessage', () {
       final user32 = DynamicLibrary.open('user32.dll');
