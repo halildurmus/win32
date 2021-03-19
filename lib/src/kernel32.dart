@@ -622,6 +622,55 @@ int DosDateTimeToFileTime(
   return _DosDateTimeToFileTime(wFatDate, wFatTime, lpFileTime);
 }
 
+/// Duplicates an object handle.
+///
+/// ```c
+/// BOOL DuplicateHandle(
+///   HANDLE   hSourceProcessHandle,
+///   HANDLE   hSourceHandle,
+///   HANDLE   hTargetProcessHandle,
+///   LPHANDLE lpTargetHandle,
+///   DWORD    dwDesiredAccess,
+///   BOOL     bInheritHandle,
+///   DWORD    dwOptions
+/// );
+/// ```
+/// {@category kernel32}
+int DuplicateHandle(
+    int hSourceProcessHandle,
+    int hSourceHandle,
+    int hTargetProcessHandle,
+    Pointer<IntPtr> lpTargetHandle,
+    int dwDesiredAccess,
+    int bInheritHandle,
+    int dwOptions) {
+  final _DuplicateHandle = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hSourceProcessHandle,
+          IntPtr hSourceHandle,
+          IntPtr hTargetProcessHandle,
+          Pointer<IntPtr> lpTargetHandle,
+          Uint32 dwDesiredAccess,
+          Int32 bInheritHandle,
+          Uint32 dwOptions),
+      int Function(
+          int hSourceProcessHandle,
+          int hSourceHandle,
+          int hTargetProcessHandle,
+          Pointer<IntPtr> lpTargetHandle,
+          int dwDesiredAccess,
+          int bInheritHandle,
+          int dwOptions)>('DuplicateHandle');
+  return _DuplicateHandle(
+      hSourceProcessHandle,
+      hSourceHandle,
+      hTargetProcessHandle,
+      lpTargetHandle,
+      dwDesiredAccess,
+      bInheritHandle,
+      dwOptions);
+}
+
 /// Commits or discards changes made prior to a call to UpdateResource.
 ///
 /// ```c
@@ -1391,6 +1440,23 @@ int GetFileAttributesEx(
       int Function(Pointer<Utf16> lpFileName, int fInfoLevelId,
           Pointer lpFileInformation)>('GetFileAttributesExW');
   return _GetFileAttributesEx(lpFileName, fInfoLevelId, lpFileInformation);
+}
+
+/// Retrieves certain properties of an object handle.
+///
+/// ```c
+/// BOOL GetHandleInformation(
+///   HANDLE  hObject,
+///   LPDWORD lpdwFlags
+/// );
+/// ```
+/// {@category kernel32}
+int GetHandleInformation(int hObject, Pointer<Uint32> lpdwFlags) {
+  final _GetHandleInformation = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hObject, Pointer<Uint32> lpdwFlags),
+      int Function(
+          int hObject, Pointer<Uint32> lpdwFlags)>('GetHandleInformation');
+  return _GetHandleInformation(hObject, lpdwFlags);
 }
 
 /// Retrieves the size of the largest possible console window, based on the
@@ -2788,6 +2854,24 @@ int SetFirmwareEnvironmentVariableEx(Pointer<Utf16> lpName,
           int nSize, int dwAttributes)>('SetFirmwareEnvironmentVariableExW');
   return _SetFirmwareEnvironmentVariableEx(
       lpName, lpGuid, pValue, nSize, dwAttributes);
+}
+
+/// Sets certain properties of an object handle.
+///
+/// ```c
+/// BOOL SetHandleInformation(
+///   HANDLE hObject,
+///   DWORD  dwMask,
+///   DWORD  dwFlags
+/// );
+/// ```
+/// {@category kernel32}
+int SetHandleInformation(int hObject, int dwMask, int dwFlags) {
+  final _SetHandleInformation = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hObject, Uint32 dwMask, Uint32 dwFlags),
+      int Function(
+          int hObject, int dwMask, int dwFlags)>('SetHandleInformation');
+  return _SetHandleInformation(hObject, dwMask, dwFlags);
 }
 
 /// Sets the read mode and the blocking mode of the specified named pipe.

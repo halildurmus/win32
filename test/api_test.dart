@@ -294,6 +294,27 @@ void main() {
               Pointer<FILETIME> lpFileTime)>('DosDateTimeToFileTime');
       expect(DosDateTimeToFileTime, isA<Function>());
     });
+    test('Can instantiate DuplicateHandle', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final DuplicateHandle = kernel32.lookupFunction<
+          Int32 Function(
+              IntPtr hSourceProcessHandle,
+              IntPtr hSourceHandle,
+              IntPtr hTargetProcessHandle,
+              Pointer<IntPtr> lpTargetHandle,
+              Uint32 dwDesiredAccess,
+              Int32 bInheritHandle,
+              Uint32 dwOptions),
+          int Function(
+              int hSourceProcessHandle,
+              int hSourceHandle,
+              int hTargetProcessHandle,
+              Pointer<IntPtr> lpTargetHandle,
+              int dwDesiredAccess,
+              int bInheritHandle,
+              int dwOptions)>('DuplicateHandle');
+      expect(DuplicateHandle, isA<Function>());
+    });
     test('Can instantiate EndUpdateResource', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final EndUpdateResource = kernel32.lookupFunction<
@@ -646,6 +667,14 @@ void main() {
           int Function(Pointer<Utf16> lpFileName, int fInfoLevelId,
               Pointer lpFileInformation)>('GetFileAttributesExW');
       expect(GetFileAttributesEx, isA<Function>());
+    });
+    test('Can instantiate GetHandleInformation', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetHandleInformation = kernel32.lookupFunction<
+          Int32 Function(IntPtr hObject, Pointer<Uint32> lpdwFlags),
+          int Function(
+              int hObject, Pointer<Uint32> lpdwFlags)>('GetHandleInformation');
+      expect(GetHandleInformation, isA<Function>());
     });
     test('Can instantiate GetLargestConsoleWindowSize', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -1296,6 +1325,14 @@ void main() {
               int nSize,
               int dwAttributes)>('SetFirmwareEnvironmentVariableExW');
       expect(SetFirmwareEnvironmentVariableEx, isA<Function>());
+    });
+    test('Can instantiate SetHandleInformation', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetHandleInformation = kernel32.lookupFunction<
+          Int32 Function(IntPtr hObject, Uint32 dwMask, Uint32 dwFlags),
+          int Function(
+              int hObject, int dwMask, int dwFlags)>('SetHandleInformation');
+      expect(SetHandleInformation, isA<Function>());
     });
     test('Can instantiate SetNamedPipeHandleState', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -4334,6 +4371,30 @@ void main() {
     });
   });
 
+  group('Test kernelbase functions', () {
+    if (windowsBuildNumber >= 10240) {
+      test('Can instantiate CompareObjectHandles', () {
+        final kernelbase = DynamicLibrary.open('kernelbase.dll');
+        final CompareObjectHandles = kernelbase.lookupFunction<
+            Int32 Function(
+                IntPtr hFirstObjectHandle, IntPtr hSecondObjectHandle),
+            int Function(int hFirstObjectHandle,
+                int hSecondObjectHandle)>('CompareObjectHandles');
+        expect(CompareObjectHandles, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 10240) {
+      test('Can instantiate GetIntegratedDisplaySize', () {
+        final kernelbase = DynamicLibrary.open('kernelbase.dll');
+        final GetIntegratedDisplaySize = kernelbase.lookupFunction<
+            Int32 Function(Pointer<Double> sizeInInches),
+            int Function(
+                Pointer<Double> sizeInInches)>('GetIntegratedDisplaySize');
+        expect(GetIntegratedDisplaySize, isA<Function>());
+      });
+    }
+  });
+
   group('Test advapi32 functions', () {
     test('Can instantiate CredDelete', () {
       final advapi32 = DynamicLibrary.open('advapi32.dll');
@@ -5601,19 +5662,6 @@ void main() {
               Pointer<Uint32> puLen)>('VerQueryValueW');
       expect(VerQueryValue, isA<Function>());
     });
-  });
-
-  group('Test kernelbase functions', () {
-    if (windowsBuildNumber >= 10240) {
-      test('Can instantiate GetIntegratedDisplaySize', () {
-        final kernelbase = DynamicLibrary.open('kernelbase.dll');
-        final GetIntegratedDisplaySize = kernelbase.lookupFunction<
-            Int32 Function(Pointer<Double> sizeInInches),
-            int Function(
-                Pointer<Double> sizeInInches)>('GetIntegratedDisplaySize');
-        expect(GetIntegratedDisplaySize, isA<Function>());
-      });
-    }
   });
 
   group('Test winmm functions', () {

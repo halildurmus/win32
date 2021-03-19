@@ -600,6 +600,18 @@ const FILE_FLAG_OPEN_NO_RECALL = 0x00100000;
 const FILE_FLAG_FIRST_PIPE_INSTANCE = 0x00080000;
 
 // -----------------------------------------------------------------------------
+// Handle flags
+// -----------------------------------------------------------------------------
+
+/// If this flag is set, a child process created with the bInheritHandles
+/// parameter of CreateProcess set to TRUE will inherit the object handle.
+const HANDLE_FLAG_INHERIT = 0x00000001;
+
+/// If this flag is set, calling the CloseHandle function will not close the
+/// object handle.
+const HANDLE_FLAG_PROTECT_FROM_CLOSE = 0x00000002;
+
+// -----------------------------------------------------------------------------
 // Get Binary Type flags
 // -----------------------------------------------------------------------------
 

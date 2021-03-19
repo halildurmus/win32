@@ -330,6 +330,13 @@
         "dllLibrary": "ole32",
         "comment": "Registers security and sets the default security values for the process."
     },
+    "CompareObjectHandles": {
+        "prototype": "BOOL CompareObjectHandles(\n  HANDLE hFirstObjectHandle,\n  HANDLE hSecondObjectHandle\n);",
+        "dllLibrary": "kernelbase",
+        "comment": "Compares two object handles to determine if they refer to the same underlying kernel object.",
+        "category": "kernel32",
+        "minimumWindowsVersion": "WIN10_TH1"
+    },
     "ConnectNamedPipe": {
         "prototype": "BOOL ConnectNamedPipe(\n  HANDLE       hNamedPipe,\n  LPOVERLAPPED lpOverlapped);",
         "dllLibrary": "kernel32",
@@ -650,6 +657,11 @@
         "prototype": "int DrawTextExW(\n  HDC              hdc,\n  LPWSTR           lpchText,\n  int              cchText,\n  LPRECT           lprc,\n  UINT             format,\n  LPDRAWTEXTPARAMS lpdtp\n);",
         "dllLibrary": "user32",
         "comment": "The DrawTextEx function draws formatted text in the specified rectangle."
+    },
+    "DuplicateHandle": {
+        "prototype": "BOOL DuplicateHandle(\n  HANDLE   hSourceProcessHandle,\n  HANDLE   hSourceHandle,\n  HANDLE   hTargetProcessHandle,\n  LPHANDLE lpTargetHandle,\n  DWORD    dwDesiredAccess,\n  BOOL     bInheritHandle,\n  DWORD    dwOptions\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Duplicates an object handle."
     },
     "Ellipse": {
         "prototype": "BOOL Ellipse(\n  HDC hdc,\n  int left,\n  int top,\n  int right,\n  int bottom\n);",
@@ -1113,6 +1125,11 @@
         "prototype": "HWND GetForegroundWindow();",
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the foreground window (the window with which the user is currently working). The system assigns a slightly higher priority to the thread that creates the foreground window than it does to other threads."
+    },
+    "GetHandleInformation": {
+        "prototype": "BOOL GetHandleInformation(\n  HANDLE  hObject,\n  LPDWORD lpdwFlags\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves certain properties of an object handle."
     },
     "GetInputState": {
         "prototype": "BOOL GetInputState();",
@@ -2545,6 +2562,11 @@
         "prototype": "BOOL SetForegroundWindow(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
         "comment": "Brings the thread that created the specified window into the foreground and activates the window. Keyboard input is directed to the window, and various visual cues are changed for the user. The system assigns a slightly higher priority to the thread that created the foreground window than it does to other threads."
+    },
+    "SetHandleInformation": {
+        "prototype": "BOOL SetHandleInformation(\n  HANDLE hObject,\n  DWORD  dwMask,\n  DWORD  dwFlags\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets certain properties of an object handle."
     },
     "SetKeyboardState": {
         "prototype": "BOOL SetKeyboardState(\n  LPBYTE lpKeyState\n);",
