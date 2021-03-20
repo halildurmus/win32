@@ -27,9 +27,9 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
       DrawText(hdc, msg, -1, rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
       EndPaint(hWnd, ps);
 
-      calloc.free(ps);
-      calloc.free(rect);
-      calloc.free(msg);
+      free(ps);
+      free(rect);
+      free(msg);
 
       return 0;
   }
@@ -39,7 +39,6 @@ int mainWindowProc(int hWnd, int uMsg, int wParam, int lParam) {
 void main() {
   // Register the window class.
   final className = TEXT('Sample Window Class');
-
   final wc = calloc<WNDCLASS>()
     ..ref.style = CS_HREDRAW | CS_VREDRAW
     ..ref.lpfnWndProc = Pointer.fromFunction<WindowProc>(mainWindowProc, 0)
@@ -50,11 +49,11 @@ void main() {
   RegisterClass(wc);
 
   // Create the window.
-
+  final windowCaption = TEXT('Dart Native Win32 window');
   final hWnd = CreateWindowEx(
       0, // Optional window styles.
       className, // Window class
-      TEXT('Dart Native Win32 window'), // Window caption
+      windowCaption, // Window caption
       WS_OVERLAPPEDWINDOW, // Window style
 
       // Size and position
@@ -67,6 +66,8 @@ void main() {
       hInstance, // Instance handle
       nullptr // Additional application data
       );
+  free(windowCaption);
+  free(className);
 
   if (hWnd == 0) {
     final error = GetLastError();
@@ -77,10 +78,11 @@ void main() {
   UpdateWindow(hWnd);
 
   // Run the message loop.
-
   final msg = calloc<MSG>();
   while (GetMessage(msg, NULL, 0, 0) != 0) {
     TranslateMessage(msg);
     DispatchMessage(msg);
   }
+
+  free(msg);
 }

@@ -46,7 +46,7 @@ Point<int> _currentMousePos() {
   final point = calloc<POINT>();
   GetCursorPos(point);
   final result = Point(point.ref.x, point.ref.y);
-  calloc.free(point);
+  free(point);
   return result;
 }
 

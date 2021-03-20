@@ -13,8 +13,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
-import 'com/combase.dart';
+import 'combase.dart';
 import 'structs.dart';
+import 'structs.g.dart';
 
 final _ole32 = DynamicLibrary.open('ole32.dll');
 
@@ -115,17 +116,13 @@ int CoCreateGuid(Pointer<GUID> pguid) {
 /// );
 /// ```
 /// {@category ole32}
-int CoCreateInstance(Pointer<GUID> rclsid, Pointer<IntPtr> pUnkOuter,
-    int dwClsContext, Pointer<GUID> riid, Pointer<Pointer> ppv) {
+int CoCreateInstance(Pointer<GUID> rclsid, Pointer pUnkOuter, int dwClsContext,
+    Pointer<GUID> riid, Pointer<Pointer> ppv) {
   final _CoCreateInstance = _ole32.lookupFunction<
-      Int32 Function(Pointer<GUID> rclsid, Pointer<IntPtr> pUnkOuter,
+      Int32 Function(Pointer<GUID> rclsid, Pointer pUnkOuter,
           Uint32 dwClsContext, Pointer<GUID> riid, Pointer<Pointer> ppv),
-      int Function(
-          Pointer<GUID> rclsid,
-          Pointer<IntPtr> pUnkOuter,
-          int dwClsContext,
-          Pointer<GUID> riid,
-          Pointer<Pointer> ppv)>('CoCreateInstance');
+      int Function(Pointer<GUID> rclsid, Pointer pUnkOuter, int dwClsContext,
+          Pointer<GUID> riid, Pointer<Pointer> ppv)>('CoCreateInstance');
   return _CoCreateInstance(rclsid, pUnkOuter, dwClsContext, riid, ppv);
 }
 
@@ -202,7 +199,7 @@ int CoInitializeEx(Pointer pvReserved, int dwCoInit) {
 /// ```
 /// {@category ole32}
 int CoInitializeSecurity(
-    Pointer<SECURITY_DESCRIPTOR> pSecDesc,
+    Pointer pSecDesc,
     int cAuthSvc,
     Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
     Pointer pReserved1,
@@ -213,7 +210,7 @@ int CoInitializeSecurity(
     Pointer pReserved3) {
   final _CoInitializeSecurity = _ole32.lookupFunction<
       Int32 Function(
-          Pointer<SECURITY_DESCRIPTOR> pSecDesc,
+          Pointer pSecDesc,
           Int32 cAuthSvc,
           Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
           Pointer pReserved1,
@@ -223,7 +220,7 @@ int CoInitializeSecurity(
           Uint32 dwCapabilities,
           Pointer pReserved3),
       int Function(
-          Pointer<SECURITY_DESCRIPTOR> pSecDesc,
+          Pointer pSecDesc,
           int cAuthSvc,
           Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
           Pointer pReserved1,

@@ -42,6 +42,6 @@ void main() {
   print('Color chosen: ${toHexColor(cc.ref.rgbResult)}');
 
   // Free the memory allocated on the native heap
-  calloc.free(custColors);
-  calloc.free(cc);
+  free(custColors);
+  free(cc);
 }

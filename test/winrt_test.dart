@@ -1,6 +1,5 @@
 @TestOn('windows')
 
-import 'package:ffi/ffi.dart';
 import 'package:test/test.dart';
 import 'package:win32/win32.dart';
 
@@ -39,10 +38,10 @@ void main() {
 
       final object =
           CreateObject('Windows.Globalization.Calendar', IID_ICalendar);
-      final calendar = ICalendar(object.cast());
+      final calendar = ICalendar(object);
 
       expect(calendar.Year, greaterThanOrEqualTo(2020));
-      calloc.free(object);
+      free(object);
       winrtUninitialize();
     });
   }

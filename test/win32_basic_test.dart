@@ -2,7 +2,6 @@
 
 import 'package:test/test.dart';
 
-import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 void main() {
@@ -19,10 +18,10 @@ void main() {
   test('Successful GetProcAddress', () {
     final hModule = GetModuleHandle(TEXT('kernel32.dll'));
 
-    final ansi = convertToANSIString('Beep');
+    final ansi = 'Beep'.toANSI();
     final pGetNativeSystemInfo = GetProcAddress(hModule, ansi);
     expect(pGetNativeSystemInfo, isNonZero);
-    calloc.free(ansi);
+    free(ansi);
   });
 
   test('Successful GetCurrentProcess', () {

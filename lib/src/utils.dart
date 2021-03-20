@@ -8,6 +8,8 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+/// Detects whether the Windows Runtime is available by attempting to open its
+/// core library.
 bool isWindowsRuntimeAvailable() {
   try {
     DynamicLibrary.open('api-ms-win-core-winrt-l1-1-0.dll');
@@ -19,14 +21,14 @@ bool isWindowsRuntimeAvailable() {
   return true;
 }
 
-Pointer<Uint8> convertToANSIString(String str) {
-  final pStr = calloc<Uint8>(str.length + 1);
-  for (var i = 0; i < str.length; i++) {
-    pStr.elementAt(i).value = str.codeUnitAt(i) & 0xFF;
-  }
-  pStr.elementAt(str.length).value = 0;
-  return pStr;
-}
-
-// @deprecated
+/// Converts a Dart string to a natively-allocated string.
+///
+/// The user is responsible for disposing its memory, typically by calling
+/// free() when it has been used.
 Pointer<Utf16> TEXT(String string) => string.toNativeUtf16();
+
+/// Frees allocated memory.
+///
+/// [calloc.free] and [malloc.free] do the same thing, so this works regardless
+/// of whether memory was zero-allocated on creation or not.
+void free(Pointer pointer) => calloc.free(pointer);

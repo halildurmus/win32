@@ -11,6 +11,7 @@ import 'package:ffi/ffi.dart';
 import 'constants.dart';
 import 'extensions/int_to_hexstring.dart';
 import 'kernel32.dart';
+import 'utils.dart';
 
 /// Generic COM Exception
 class COMException implements Exception {
@@ -59,7 +60,7 @@ class WindowsException extends COMException {
 
       return errorMessage;
     } finally {
-      calloc.free(buffer);
+      free(buffer);
     }
   }
 

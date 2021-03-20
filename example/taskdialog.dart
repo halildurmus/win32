@@ -52,9 +52,9 @@ void showSimpleTaskDialog() {
         'app manifest\ndeclaring a dependency on comctl32.dll v6 is missing.\n');
     rethrow;
   } finally {
-    calloc.free(windowTitle);
-    calloc.free(mainInstruction);
-    calloc.free(content);
+    free(windowTitle);
+    free(mainInstruction);
+    free(content);
   }
 }
 

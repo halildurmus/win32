@@ -13,8 +13,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
-import 'com/combase.dart';
+import 'combase.dart';
 import 'structs.dart';
+import 'structs.g.dart';
 
 final _oleaut32 = DynamicLibrary.open('oleaut32.dll');
 
@@ -67,10 +68,10 @@ int GetActiveObject(
 /// );
 /// ```
 /// {@category oleaut32}
-Pointer SysAllocString(Pointer<Utf16> psz) {
+Pointer<Utf16> SysAllocString(Pointer<Utf16> psz) {
   final _SysAllocString = _oleaut32.lookupFunction<
-      Pointer Function(Pointer<Utf16> psz),
-      Pointer Function(Pointer<Utf16> psz)>('SysAllocString');
+      Pointer<Utf16> Function(Pointer<Utf16> psz),
+      Pointer<Utf16> Function(Pointer<Utf16> psz)>('SysAllocString');
   return _SysAllocString(psz);
 }
 
@@ -84,10 +85,11 @@ Pointer SysAllocString(Pointer<Utf16> psz) {
 /// );
 /// ```
 /// {@category oleaut32}
-Pointer SysAllocStringByteLen(Pointer<Uint8> psz, int len) {
+Pointer<Utf16> SysAllocStringByteLen(Pointer<Utf8> psz, int len) {
   final _SysAllocStringByteLen = _oleaut32.lookupFunction<
-      Pointer Function(Pointer<Uint8> psz, Uint32 len),
-      Pointer Function(Pointer<Uint8> psz, int len)>('SysAllocStringByteLen');
+      Pointer<Utf16> Function(Pointer<Utf8> psz, Uint32 len),
+      Pointer<Utf16> Function(
+          Pointer<Utf8> psz, int len)>('SysAllocStringByteLen');
   return _SysAllocStringByteLen(psz, len);
 }
 
@@ -101,10 +103,11 @@ Pointer SysAllocStringByteLen(Pointer<Uint8> psz, int len) {
 /// );
 /// ```
 /// {@category oleaut32}
-Pointer SysAllocStringLen(Pointer<Utf16> strIn, int ui) {
+Pointer<Utf16> SysAllocStringLen(Pointer<Utf16> strIn, int ui) {
   final _SysAllocStringLen = _oleaut32.lookupFunction<
-      Pointer Function(Pointer<Utf16> strIn, Uint32 ui),
-      Pointer Function(Pointer<Utf16> strIn, int ui)>('SysAllocStringLen');
+      Pointer<Utf16> Function(Pointer<Utf16> strIn, Uint32 ui),
+      Pointer<Utf16> Function(
+          Pointer<Utf16> strIn, int ui)>('SysAllocStringLen');
   return _SysAllocStringLen(strIn, ui);
 }
 
@@ -118,10 +121,10 @@ Pointer SysAllocStringLen(Pointer<Utf16> strIn, int ui) {
 /// );
 /// ```
 /// {@category oleaut32}
-void SysFreeString(Pointer bstrString) {
+void SysFreeString(Pointer<Utf16> bstrString) {
   final _SysFreeString = _oleaut32.lookupFunction<
-      Void Function(Pointer bstrString),
-      void Function(Pointer bstrString)>('SysFreeString');
+      Void Function(Pointer<Utf16> bstrString),
+      void Function(Pointer<Utf16> bstrString)>('SysFreeString');
   return _SysFreeString(bstrString);
 }
 
@@ -135,11 +138,11 @@ void SysFreeString(Pointer bstrString) {
 /// );
 /// ```
 /// {@category oleaut32}
-int SysReAllocString(Pointer<Pointer> pbstr, Pointer<Utf16> psz) {
+int SysReAllocString(Pointer<Pointer<Utf16>> pbstr, Pointer<Utf16> psz) {
   final _SysReAllocString = _oleaut32.lookupFunction<
-      Int32 Function(Pointer<Pointer> pbstr, Pointer<Utf16> psz),
-      int Function(
-          Pointer<Pointer> pbstr, Pointer<Utf16> psz)>('SysReAllocString');
+      Int32 Function(Pointer<Pointer<Utf16>> pbstr, Pointer<Utf16> psz),
+      int Function(Pointer<Pointer<Utf16>> pbstr,
+          Pointer<Utf16> psz)>('SysReAllocString');
   return _SysReAllocString(pbstr, psz);
 }
 
@@ -154,10 +157,12 @@ int SysReAllocString(Pointer<Pointer> pbstr, Pointer<Utf16> psz) {
 /// );
 /// ```
 /// {@category oleaut32}
-int SysReAllocStringLen(Pointer<Pointer> pbstr, Pointer<Utf16> psz, int len) {
+int SysReAllocStringLen(
+    Pointer<Pointer<Utf16>> pbstr, Pointer<Utf16> psz, int len) {
   final _SysReAllocStringLen = _oleaut32.lookupFunction<
-      Int32 Function(Pointer<Pointer> pbstr, Pointer<Utf16> psz, Uint32 len),
-      int Function(Pointer<Pointer> pbstr, Pointer<Utf16> psz,
+      Int32 Function(
+          Pointer<Pointer<Utf16>> pbstr, Pointer<Utf16> psz, Uint32 len),
+      int Function(Pointer<Pointer<Utf16>> pbstr, Pointer<Utf16> psz,
           int len)>('SysReAllocStringLen');
   return _SysReAllocStringLen(pbstr, psz, len);
 }
@@ -172,10 +177,10 @@ int SysReAllocStringLen(Pointer<Pointer> pbstr, Pointer<Utf16> psz, int len) {
 /// );
 /// ```
 /// {@category oleaut32}
-void SysReleaseString(Pointer bstrString) {
+void SysReleaseString(Pointer<Utf16> bstrString) {
   final _SysReleaseString = _oleaut32.lookupFunction<
-      Void Function(Pointer bstrString),
-      void Function(Pointer bstrString)>('SysReleaseString');
+      Void Function(Pointer<Utf16> bstrString),
+      void Function(Pointer<Utf16> bstrString)>('SysReleaseString');
   return _SysReleaseString(bstrString);
 }
 
@@ -187,10 +192,10 @@ void SysReleaseString(Pointer bstrString) {
 /// );
 /// ```
 /// {@category oleaut32}
-int SysStringByteLen(Pointer bstr) {
+int SysStringByteLen(Pointer<Utf16> bstr) {
   final _SysStringByteLen = _oleaut32.lookupFunction<
-      Uint32 Function(Pointer bstr),
-      int Function(Pointer bstr)>('SysStringByteLen');
+      Uint32 Function(Pointer<Utf16> bstr),
+      int Function(Pointer<Utf16> bstr)>('SysStringByteLen');
   return _SysStringByteLen(bstr);
 }
 
@@ -202,9 +207,10 @@ int SysStringByteLen(Pointer bstr) {
 /// );
 /// ```
 /// {@category oleaut32}
-int SysStringLen(Pointer pbstr) {
-  final _SysStringLen = _oleaut32.lookupFunction<Uint32 Function(Pointer pbstr),
-      int Function(Pointer pbstr)>('SysStringLen');
+int SysStringLen(Pointer<Utf16> pbstr) {
+  final _SysStringLen = _oleaut32.lookupFunction<
+      Uint32 Function(Pointer<Utf16> pbstr),
+      int Function(Pointer<Utf16> pbstr)>('SysStringLen');
   return _SysStringLen(pbstr);
 }
 
@@ -219,12 +225,13 @@ int SysStringLen(Pointer pbstr) {
 /// );
 /// ```
 /// {@category oleaut32}
-int VariantChangeType(Pointer pvargDest, Pointer pvarSrc, int wFlags, int vt) {
+int VariantChangeType(
+    Pointer<VARIANT> pvargDest, Pointer<VARIANT> pvarSrc, int wFlags, int vt) {
   final _VariantChangeType = _oleaut32.lookupFunction<
-      Int32 Function(
-          Pointer pvargDest, Pointer pvarSrc, Uint16 wFlags, Uint32 vt),
-      int Function(Pointer pvargDest, Pointer pvarSrc, int wFlags,
-          int vt)>('VariantChangeType');
+      Int32 Function(Pointer<VARIANT> pvargDest, Pointer<VARIANT> pvarSrc,
+          Uint16 wFlags, Uint16 vt),
+      int Function(Pointer<VARIANT> pvargDest, Pointer<VARIANT> pvarSrc,
+          int wFlags, int vt)>('VariantChangeType');
   return _VariantChangeType(pvargDest, pvarSrc, wFlags, vt);
 }
 
@@ -236,9 +243,10 @@ int VariantChangeType(Pointer pvargDest, Pointer pvarSrc, int wFlags, int vt) {
 /// );
 /// ```
 /// {@category oleaut32}
-int VariantClear(Pointer pvarg) {
-  final _VariantClear = _oleaut32.lookupFunction<Int32 Function(Pointer pvarg),
-      int Function(Pointer pvarg)>('VariantClear');
+int VariantClear(Pointer<VARIANT> pvarg) {
+  final _VariantClear = _oleaut32.lookupFunction<
+      Int32 Function(Pointer<VARIANT> pvarg),
+      int Function(Pointer<VARIANT> pvarg)>('VariantClear');
   return _VariantClear(pvarg);
 }
 
@@ -251,10 +259,11 @@ int VariantClear(Pointer pvarg) {
 /// );
 /// ```
 /// {@category oleaut32}
-int VariantCopy(Pointer pvargDest, Pointer pvargSrc) {
+int VariantCopy(Pointer<VARIANT> pvargDest, Pointer<VARIANT> pvargSrc) {
   final _VariantCopy = _oleaut32.lookupFunction<
-      Int32 Function(Pointer pvargDest, Pointer pvargSrc),
-      int Function(Pointer pvargDest, Pointer pvargSrc)>('VariantCopy');
+      Int32 Function(Pointer<VARIANT> pvargDest, Pointer<VARIANT> pvargSrc),
+      int Function(Pointer<VARIANT> pvargDest,
+          Pointer<VARIANT> pvargSrc)>('VariantCopy');
   return _VariantCopy(pvargDest, pvargSrc);
 }
 
@@ -266,9 +275,10 @@ int VariantCopy(Pointer pvargDest, Pointer pvargSrc) {
 /// );
 /// ```
 /// {@category oleaut32}
-void VariantInit(Pointer pvarg) {
-  final _VariantInit = _oleaut32.lookupFunction<Void Function(Pointer pvarg),
-      void Function(Pointer pvarg)>('VariantInit');
+void VariantInit(Pointer<VARIANT> pvarg) {
+  final _VariantInit = _oleaut32.lookupFunction<
+      Void Function(Pointer<VARIANT> pvarg),
+      void Function(Pointer<VARIANT> pvarg)>('VariantInit');
   return _VariantInit(pvarg);
 }
 

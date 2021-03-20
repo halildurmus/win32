@@ -10,12 +10,14 @@ import 'package:ffi/ffi.dart';
 
 import '../api-ms-win-core-winrt-l1-1-0.dart';
 import '../api-ms-win-core-winrt-string-l1-1-0.dart';
+import '../com/IInspectable.dart';
+import '../combase.dart';
 import '../constants.dart';
 import '../exceptions.dart';
-import '../generated/IInspectable.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../utils.dart';
 
 /// Initializes the Windows Runtime on the current thread with a single-threaded
 /// concurrency model.
@@ -37,7 +39,7 @@ String convertFromHString(Pointer<IntPtr> hstring) {
 
     return dartString;
   } finally {
-    calloc.free(stringLength);
+    free(stringLength);
   }
 }
 
@@ -59,7 +61,7 @@ Pointer<IntPtr> convertToHString(String string) {
       return hString;
     }
   } finally {
-    calloc.free(stringPtr);
+    free(stringPtr);
   }
 }
 
@@ -70,12 +72,12 @@ Pointer<IntPtr> convertToHString(String string) {
 /// final calendar = ICalendar(object.cast());
 /// ```
 /// {@category winrt}
-Pointer<IntPtr> CreateObject(String className, String iid) {
+Pointer<COMObject> CreateObject(String className, String iid) {
   final hstrClass = calloc<IntPtr>();
   final lpClassName = className.toNativeUtf16();
-  final inspectablePtr = calloc<Pointer>();
+  final inspectablePtr = calloc<COMObject>();
   final riid = calloc<GUID>();
-  final classPtr = calloc<IntPtr>();
+  final classPtr = calloc<Pointer>();
   final iidPtr = iid.toNativeUtf16();
   final classNamePtr = className.toNativeUtf16();
 
@@ -87,7 +89,7 @@ Pointer<IntPtr> CreateObject(String className, String iid) {
     }
     // Activates the specified Windows Runtime class. This returns the WinRT
     // IInspectable interface, which is a subclass of IUnknown.
-    hr = RoActivateInstance(hstrClass.value, inspectablePtr);
+    hr = RoActivateInstance(hstrClass.value, inspectablePtr.cast());
     if (FAILED(hr)) {
       throw WindowsException(hr);
     }
@@ -99,20 +101,20 @@ Pointer<IntPtr> CreateObject(String className, String iid) {
     }
 
     // Now use IInspectable to navigate to the relevant interface
-    final inspectable = IInspectable(inspectablePtr.cast());
+    final inspectable = IInspectable(inspectablePtr);
     hr = inspectable.QueryInterface(riid, classPtr);
     if (FAILED(hr)) {
       throw WindowsException(hr);
     }
 
     // Return a pointer to the relevant class
-    return classPtr;
+    return classPtr.cast();
   } finally {
-    calloc.free(classNamePtr);
-    calloc.free(iidPtr);
-    calloc.free(riid);
-    calloc.free(inspectablePtr);
-    calloc.free(lpClassName);
-    calloc.free(hstrClass);
+    free(classNamePtr);
+    free(iidPtr);
+    free(riid);
+    free(inspectablePtr);
+    free(lpClassName);
+    free(hstrClass);
   }
 }

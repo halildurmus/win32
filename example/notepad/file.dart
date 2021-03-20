@@ -101,6 +101,6 @@ class NotepadFile {
     GetWindowText(hwndEdit, buffer, iLength + 1);
     file.writeAsStringSync(buffer.toDartString());
 
-    calloc.free(buffer);
+    free(buffer);
   }
 }

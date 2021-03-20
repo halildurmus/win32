@@ -13,8 +13,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
-import 'com/combase.dart';
+import 'combase.dart';
 import 'structs.dart';
+import 'structs.g.dart';
 
 final _version = DynamicLibrary.open('version.dll');
 
@@ -204,25 +205,6 @@ int VerInstallFile(
           Pointer<Uint32> puTmpFileLen)>('VerInstallFileW');
   return _VerInstallFile(uFlags, szSrcFileName, szDestFileName, szSrcDir,
       szDestDir, szCurDir, szTmpFile, puTmpFileLen);
-}
-
-/// Retrieves a description string for the language associated with a
-/// specified binary Microsoft language identifier.
-///
-/// ```c
-/// DWORD VerLanguageNameW(
-///   DWORD  wLang,
-///   LPWSTR szLang,
-///   DWORD  cchLang
-/// );
-/// ```
-/// {@category version}
-int VerLanguageName(int wLang, Pointer<Utf16> szLang, int cchLang) {
-  final _VerLanguageName = _version.lookupFunction<
-      Uint32 Function(Uint32 wLang, Pointer<Utf16> szLang, Uint32 cchLang),
-      int Function(
-          int wLang, Pointer<Utf16> szLang, int cchLang)>('VerLanguageNameW');
-  return _VerLanguageName(wLang, szLang, cchLang);
 }
 
 /// Retrieves specified version information from the specified

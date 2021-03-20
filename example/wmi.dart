@@ -56,7 +56,7 @@ void main() {
     throw exception;
   }
 
-  final proxy = calloc<IntPtr>();
+  final proxy = calloc<Pointer>();
 
   // Connect to the root\cimv2 namespace with the
   // current user and obtain pointer pSvc
@@ -89,7 +89,7 @@ void main() {
   // Set the IWbemServices proxy so that impersonation
   // of the user (client) occurs.
   hr = CoSetProxyBlanket(
-      Pointer.fromAddress(proxy.value), // the proxy to set
+      proxy.value, // the proxy to set
       RPC_C_AUTHN_WINNT, // authentication service
       RPC_C_AUTHZ_NONE, // authorization service
       nullptr, // Server principal name
@@ -110,7 +110,7 @@ void main() {
 
   // Use the IWbemServices pointer to make requests of WMI.
 
-  final pEnumerator = calloc<IntPtr>();
+  final pEnumerator = calloc<Pointer>();
   IEnumWbemClassObject enumerator;
 
   // For example, query for all the running processes
@@ -157,7 +157,7 @@ void main() {
       }
       // Free BSTRs in the returned variants
       VariantClear(vtProp);
-      calloc.free(vtProp);
+      free(vtProp);
 
       clsObj.Release();
     }

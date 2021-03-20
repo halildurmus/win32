@@ -17,5 +17,5 @@ void main() {
     print(guid.ref);
   }
 
-  calloc.free(guid);
+  free(guid);
 }

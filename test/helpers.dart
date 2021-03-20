@@ -42,11 +42,11 @@ Object getRegistryValue(int key, String subKey, String valueName) {
       throw WindowsException(HRESULT_FROM_WIN32(result));
     }
   } finally {
-    calloc.free(subKeyPtr);
-    calloc.free(valueNamePtr);
-    calloc.free(openKeyPtr);
-    calloc.free(data);
-    calloc.free(dataSize);
+    free(subKeyPtr);
+    free(valueNamePtr);
+    free(openKeyPtr);
+    free(data);
+    free(dataSize);
   }
   RegCloseKey(openKeyPtr.value);
 

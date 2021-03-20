@@ -124,6 +124,6 @@ void main() {
     expect(idx, equals(dialogGolden.length));
     expect(ptr.cast<Uint16>().asTypedList(idx), equals(dialogGolden));
 
-    calloc.free(ptr);
+    free(ptr);
   });
 }

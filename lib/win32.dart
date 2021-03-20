@@ -61,7 +61,7 @@
 ///   final ansi = convertToANSIString('Beep');
 ///   final pGetNativeSystemInfo = GetProcAddress(hModule, ansi);
 ///   ...
-///   calloc.free(ansi);
+///   free(ansi);
 /// ```
 ///
 /// ## Strings (Windows Runtime)
@@ -75,7 +75,7 @@
 ///   calendar.GetCalendarSystem(systemPtr);
 ///   print('The calendar system is ${convertFromHString(systemPtr)}.');
 ///   WindowsDeleteString(systemPtr.value);
-///   calloc.free(systemPtr);
+///   free(systemPtr);
 /// ```
 ///
 /// Make sure you dispose of `HSTRING`s by calling `WindowsDeleteString` and
@@ -89,18 +89,22 @@ export 'src/constants_nodoc.dart';
 export 'src/exceptions.dart';
 export 'src/macros.dart';
 export 'src/structs.dart';
+export 'src/structs.g.dart';
 export 'src/utils.dart';
 
 // Useful extension methods
 export 'src/extensions/dialogs.dart';
 export 'src/extensions/int_to_hexstring.dart';
 export 'src/extensions/list_to_blob.dart';
+export 'src/extensions/set_ansi.dart';
 export 'src/extensions/set_string.dart';
 export 'src/extensions/unpack_utf16.dart';
 
 // Traditional C-style Windows APIs
+export 'src/_manual.dart';
 export 'src/advapi32.dart';
 export 'src/bthprops.dart';
+export 'src/combase.dart';
 export 'src/comctl32.dart';
 export 'src/comdlg32.dart';
 export 'src/dxva2.dart';
@@ -110,7 +114,6 @@ export 'src/kernelbase.dart';
 export 'src/ole32.dart';
 export 'src/oleaut32.dart';
 export 'src/powrprof.dart';
-export 'src/psapi.dart';
 export 'src/rometadata.dart';
 export 'src/shcore.dart';
 export 'src/shell32.dart';
@@ -122,61 +125,64 @@ export 'src/api-ms-win-core-winrt-l1-1-0.dart';
 export 'src/api-ms-win-core-winrt-string-l1-1-0.dart';
 export 'src/api-ms-win-ro-typeresolution-l1-1-0.dart';
 
-// COM foundational exports
-export 'src/com/combase.dart';
-
 // WinRT foundational exports
 export 'src/winrt/winrt_constants.dart';
 export 'src/winrt/winrt_helpers.dart';
 
 // COM and Windows Runtime interfaces
-export 'src/generated/IAsyncInfo.dart';
-export 'src/generated/IBindCtx.dart';
-export 'src/generated/ICalendar.dart';
-export 'src/generated/IClassFactory.dart';
-export 'src/generated/IDesktopWallpaper.dart';
-export 'src/generated/IDispatch.dart';
-export 'src/generated/IEnumMoniker.dart';
-export 'src/generated/IEnumNetworkConnections.dart';
-export 'src/generated/IEnumNetworks.dart';
-export 'src/generated/IEnumString.dart';
-export 'src/generated/IEnumVARIANT.dart';
-export 'src/generated/IEnumWbemClassObject.dart';
-export 'src/generated/IEnumNetworkConnections.dart';
-export 'src/generated/IErrorInfo.dart';
-export 'src/generated/IFileDialog.dart';
-export 'src/generated/IFileDialog2.dart';
-export 'src/generated/IFileDialogCustomize.dart';
-export 'src/generated/IFileIsInUse.dart';
-export 'src/generated/IFileOpenDialog.dart';
-export 'src/generated/IFileOpenPicker.dart';
-export 'src/generated/IFileSaveDialog.dart';
-export 'src/generated/IInspectable.dart';
-export 'src/generated/IKnownFolder.dart';
-export 'src/generated/IKnownFolderManager.dart';
-export 'src/generated/IMetaDataDispenser.dart';
-export 'src/generated/IMetaDataDispenserEx.dart';
-export 'src/generated/IMetaDataImport.dart';
-export 'src/generated/IMetaDataImport2.dart';
-export 'src/generated/IModalWindow.dart';
-export 'src/generated/IMoniker.dart';
-export 'src/generated/INetwork.dart';
-export 'src/generated/INetworkConnection.dart';
-export 'src/generated/INetworkListManager.dart';
-export 'src/generated/IPersist.dart';
-export 'src/generated/IPersistStream.dart';
-export 'src/generated/IProvideClassInfo.dart';
-export 'src/generated/IPropertyValue.dart';
-export 'src/generated/IRunningObjectTable.dart';
-export 'src/generated/ISequentialStream.dart';
-export 'src/generated/IShellItem.dart';
-export 'src/generated/IShellItem2.dart';
-export 'src/generated/IShellItemArray.dart';
-export 'src/generated/IShellItemFilter.dart';
-export 'src/generated/IStream.dart';
-export 'src/generated/ISupportErrorInfo.dart';
-export 'src/generated/IUnknown.dart';
-export 'src/generated/IWbemClassObject.dart';
-export 'src/generated/IWbemContext.dart';
-export 'src/generated/IWbemLocator.dart';
-export 'src/generated/IWbemServices.dart';
+export 'src/com/IApplicationActivationManager.dart';
+export 'src/com/IAsyncInfo.dart';
+export 'src/com/IBindCtx.dart';
+export 'src/com/ICalendar.dart';
+export 'src/com/IClassFactory.dart';
+export 'src/com/IConnectionPoint.dart';
+export 'src/com/IConnectionPointContainer.dart';
+export 'src/com/IDesktopWallpaper.dart';
+export 'src/com/IDispatch.dart';
+export 'src/com/IEnumIDList.dart';
+export 'src/com/IEnumMoniker.dart';
+export 'src/com/IEnumNetworkConnections.dart';
+export 'src/com/IEnumNetworks.dart';
+export 'src/com/IEnumSpellingError.dart';
+export 'src/com/IEnumString.dart';
+export 'src/com/IEnumVARIANT.dart';
+export 'src/com/IEnumWbemClassObject.dart';
+export 'src/com/IErrorInfo.dart';
+export 'src/com/IFileDialog.dart';
+export 'src/com/IFileDialog2.dart';
+export 'src/com/IFileDialogCustomize.dart';
+export 'src/com/IFileIsInUse.dart';
+export 'src/com/IFileOpenDialog.dart';
+export 'src/com/IFileOpenPicker.dart';
+export 'src/com/IFileSaveDialog.dart';
+export 'src/com/IInspectable.dart';
+export 'src/com/IKnownFolder.dart';
+export 'src/com/IKnownFolderManager.dart';
+export 'src/com/IModalWindow.dart';
+export 'src/com/IMoniker.dart';
+export 'src/com/INetwork.dart';
+export 'src/com/INetworkConnection.dart';
+export 'src/com/INetworkListManager.dart';
+export 'src/com/INetworkListManagerEvents.dart';
+export 'src/com/IPersist.dart';
+export 'src/com/IPersistStream.dart';
+export 'src/com/IPropertyValue.dart';
+export 'src/com/IProvideClassInfo.dart';
+export 'src/com/IRunningObjectTable.dart';
+export 'src/com/ISequentialStream.dart';
+export 'src/com/IShellFolder.dart';
+export 'src/com/IShellItem.dart';
+export 'src/com/IShellItem2.dart';
+export 'src/com/IShellItemArray.dart';
+export 'src/com/IShellItemFilter.dart';
+export 'src/com/ISpellChecker.dart';
+export 'src/com/ISpellCheckerChangedEventHandler.dart';
+export 'src/com/ISpellCheckerFactory.dart';
+export 'src/com/ISpellingError.dart';
+export 'src/com/IStream.dart';
+export 'src/com/ISupportErrorInfo.dart';
+export 'src/com/IUnknown.dart';
+export 'src/com/IWbemClassObject.dart';
+export 'src/com/IWbemContext.dart';
+export 'src/com/IWbemLocator.dart';
+export 'src/com/IWbemServices.dart';

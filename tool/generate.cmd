@@ -1,21 +1,24 @@
 @echo off
 
 echo Generating C-style Win32 APIs and tests
-call dart %~dp0win32\win32api.dart
-call dart %~dp0win32\generate_ffi_files.dart 
-call dart %~dp0win32\generate_tests.dart 
+call dart %~dp0manual_gen\win32api.dart
+call dart %~dp0metadata\generate_win32.dart
 echo.
 
-echo Generating COM classes
-call dart %~dp0generate\generate.dart %~dp0generate\com %~dp0..\lib\src\generated %~dp0..\test\com
+echo Temporarily reset user32.dart (https://github.com/microsoft/win32metadata/issues/346)
+git restore %~dp0..\lib\src\user32.dart
 echo.
 
-echo Generating Windows Runtime classes from IDL
-rem call dart %~dp0generate\generate.dart %~dp0generate\winrt %~dp0..\lib\src\generated
+echo Generating COM classes and tests from Windows metadata
+call dart %~dp0metadata\generate_com_apis.dart
 echo.
 
-echo Generating Windows Runtime classes from inspection
-call dart %~dp0winmd\winmd.dart %~dp0..\lib\src\generated
+echo Temporarily reset IProvideClassInfo_test.dart (https://github.com/microsoft/win32metadata/issues/290)
+git restore %~dp0..\test\com\IProvideClassInfo_test.dart
+echo.
+
+echo Generating Windows Runtime classes from Windows metadata
+call dart %~dp0metadata\generate_winrt_apis.dart %~dp0..\lib\src\com
 echo.
 
 echo Formatting generated source code
@@ -25,9 +28,10 @@ call dart format %~dp0..\test\struct_test.dart
 call dart format %~dp0..\test\com
 echo.
 
-if "%1"=="--notest" goto end
-
 echo Running tests
+if "%1"=="--no-test" goto end
+
+:dart_test
 call dart test
 
 :end

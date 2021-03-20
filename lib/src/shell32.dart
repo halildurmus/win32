@@ -13,8 +13,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
-import 'com/combase.dart';
+import 'combase.dart';
 import 'structs.dart';
+import 'structs.g.dart';
 
 final _shell32 = DynamicLibrary.open('shell32.dll');
 
@@ -163,6 +164,22 @@ int SHEmptyRecycleBin(int hwnd, Pointer<Utf16> pszRootPath, int dwFlags) {
       int Function(int hwnd, Pointer<Utf16> pszRootPath,
           int dwFlags)>('SHEmptyRecycleBinW');
   return _SHEmptyRecycleBin(hwnd, pszRootPath, dwFlags);
+}
+
+/// Retrieves the IShellFolder interface for the desktop folder, which is
+/// the root of the Shell's namespace.
+///
+/// ```c
+/// SHSTDAPI SHGetDesktopFolder(
+///   IShellFolder **ppshf
+/// );
+/// ```
+/// {@category shell32}
+int SHGetDesktopFolder(Pointer<Pointer> ppshf) {
+  final _SHGetDesktopFolder = _shell32.lookupFunction<
+      Int32 Function(Pointer<Pointer> ppshf),
+      int Function(Pointer<Pointer> ppshf)>('SHGetDesktopFolder');
+  return _SHGetDesktopFolder(ppshf);
 }
 
 /// Retrieves disk space information for a disk volume.

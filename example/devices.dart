@@ -37,9 +37,9 @@ void displayVolumePaths(String volumeName) {
       print('GetVolumePathNamesForVolumeName failed with error code $error');
     }
   } finally {
-    calloc.free(volumeNamePtr);
-    calloc.free(pathNamePtr);
-    calloc.free(charCount);
+    free(volumeNamePtr);
+    free(pathNamePtr);
+    free(charCount);
   }
 }
 
@@ -86,8 +86,8 @@ void main() {
         break;
       }
     }
-    calloc.free(shortVolumeNamePtr);
+    free(shortVolumeNamePtr);
   }
-  calloc.free(volumeNamePtr);
+  free(volumeNamePtr);
   FindVolumeClose(hFindVolume);
 }

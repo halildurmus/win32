@@ -11,7 +11,7 @@ void main() {
     final variant = calloc<VARIANT>();
     VariantInit(variant);
     expect(variant.ref.vt, equals(VARENUM.VT_EMPTY));
-    calloc.free(variant);
+    free(variant);
   });
 
   test('Variant time representation from DOS date/time', () {
@@ -33,10 +33,10 @@ void main() {
         equals(TRUE));
     expect(dosDate.value, equals(theDate));
 
-    calloc.free(varDateTime);
-    calloc.free(sysDateTime);
-    calloc.free(dosDate);
-    calloc.free(dosTime);
+    free(varDateTime);
+    free(sysDateTime);
+    free(dosDate);
+    free(dosTime);
   });
 
   test('LONG Variant', () {
@@ -52,7 +52,7 @@ void main() {
     intVar.ref.lVal = 0x80000000;
     expect(intVar.ref.lVal, equals(-2147483648));
 
-    calloc.free(intVar);
+    free(intVar);
   });
 
   test('INT Variant', () {
@@ -68,7 +68,7 @@ void main() {
     intVar.ref.intVal = 0x80000000;
     expect(intVar.ref.intVal, equals(-2147483648));
 
-    calloc.free(intVar);
+    free(intVar);
   });
 
   test('ULONG Variant', () {
@@ -84,7 +84,7 @@ void main() {
     intVar.ref.ulVal = 0x80000000;
     expect(intVar.ref.ulVal, equals(2147483648));
 
-    calloc.free(intVar);
+    free(intVar);
   });
 
   test('UINT Variant', () {
@@ -100,7 +100,7 @@ void main() {
     intVar.ref.uintVal = 0x80000000;
     expect(intVar.ref.uintVal, equals(2147483648));
 
-    calloc.free(intVar);
+    free(intVar);
   });
 
   test('SHORT Variant', () {
@@ -116,7 +116,7 @@ void main() {
     intVar.ref.iVal = 0x8000;
     expect(intVar.ref.iVal, equals(-32768));
 
-    calloc.free(intVar);
+    free(intVar);
   });
   test('BYTE Variant', () {
     final intVar = calloc<VARIANT>();
@@ -131,7 +131,7 @@ void main() {
     intVar.ref.bVal = 0x80;
     expect(intVar.ref.bVal, equals(128));
 
-    calloc.free(intVar);
+    free(intVar);
   });
 
   test('USHORT Variant', () {
@@ -147,7 +147,7 @@ void main() {
     intVar.ref.uiVal = 0x8000;
     expect(intVar.ref.uiVal, equals(32768));
 
-    calloc.free(intVar);
+    free(intVar);
   });
 
   test('BSTR allocation', () {
@@ -158,6 +158,6 @@ void main() {
     expect(SysStringByteLen(bstr), equals(testString.length * 2));
 
     SysFreeString(bstr);
-    calloc.free(testStringPtr);
+    free(testStringPtr);
   });
 }

@@ -42,8 +42,8 @@ class NotepadEditor {
 
     result = iSelBeg.value != iSelEnd.value;
 
-    calloc.free(iSelBeg);
-    calloc.free(iSelEnd);
+    free(iSelBeg);
+    free(iSelEnd);
 
     return result;
   }

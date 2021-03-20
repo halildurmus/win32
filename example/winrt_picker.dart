@@ -13,7 +13,7 @@ void main() {
   final object = CreateObject(
       'Windows.Storage.Pickers.FileOpenPicker', IID_IFileOpenPicker);
 
-  final picker = IFileOpenPicker(object.cast());
+  final picker = IFileOpenPicker(object);
   picker.ViewMode = PickerViewMode.Thumbnail;
 
   // Need to add the results of the async operation

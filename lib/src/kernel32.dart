@@ -13,8 +13,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
-import 'com/combase.dart';
+import 'combase.dart';
 import 'structs.dart';
+import 'structs.g.dart';
 
 final _kernel32 = DynamicLibrary.open('kernel32.dll');
 
@@ -162,6 +163,24 @@ void ClosePseudoConsole(int hPC) {
   return _ClosePseudoConsole(hPC);
 }
 
+/// Enables a named pipe server process to wait for a client process to
+/// connect to an instance of a named pipe. A client process connects by
+/// calling either the CreateFile or CallNamedPipe function.
+///
+/// ```c
+/// BOOL ConnectNamedPipe(
+///   HANDLE       hNamedPipe,
+///   LPOVERLAPPED lpOverlapped);
+/// ```
+/// {@category kernel32}
+int ConnectNamedPipe(int hNamedPipe, Pointer<OVERLAPPED> lpOverlapped) {
+  final _ConnectNamedPipe = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hNamedPipe, Pointer<OVERLAPPED> lpOverlapped),
+      int Function(int hNamedPipe,
+          Pointer<OVERLAPPED> lpOverlapped)>('ConnectNamedPipe');
+  return _ConnectNamedPipe(hNamedPipe, lpOverlapped);
+}
+
 /// Enables a debugger to continue a thread that previously reported a
 /// debugging event.
 ///
@@ -306,6 +325,56 @@ int CreateFile(
       dwCreationDisposition,
       dwFlagsAndAttributes,
       hTemplateFile);
+}
+
+/// Creates an instance of a named pipe and returns a handle for subsequent
+/// pipe operations. A named pipe server process uses this function either
+/// to create the first instance of a specific named pipe and establish its
+/// basic attributes or to create a new instance of an existing named pipe.
+///
+/// ```c
+/// HANDLE CreateNamedPipeW(
+///   LPCWSTR                lpName,
+///   DWORD                 dwOpenMode,
+///   DWORD                 dwPipeMode,
+///   DWORD                 nMaxInstances,
+///   DWORD                 nOutBufferSize,
+///   DWORD                 nInBufferSize,
+///   DWORD                 nDefaultTimeOut,
+///   LPSECURITY_ATTRIBUTES lpSecurityAttributes);
+/// ```
+/// {@category kernel32}
+int CreateNamedPipe(
+    Pointer<Utf16> lpName,
+    int dwOpenMode,
+    int dwPipeMode,
+    int nMaxInstances,
+    int nOutBufferSize,
+    int nInBufferSize,
+    int nDefaultTimeOut,
+    Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes) {
+  final _CreateNamedPipe = _kernel32.lookupFunction<
+          IntPtr Function(
+              Pointer<Utf16> lpName,
+              Uint32 dwOpenMode,
+              Uint32 dwPipeMode,
+              Uint32 nMaxInstances,
+              Uint32 nOutBufferSize,
+              Uint32 nInBufferSize,
+              Uint32 nDefaultTimeOut,
+              Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes),
+          int Function(
+              Pointer<Utf16> lpName,
+              int dwOpenMode,
+              int dwPipeMode,
+              int nMaxInstances,
+              int nOutBufferSize,
+              int nInBufferSize,
+              int nDefaultTimeOut,
+              Pointer<SECURITY_ATTRIBUTES> lpSecurityAttributes)>(
+      'CreateNamedPipeW');
+  return _CreateNamedPipe(lpName, dwOpenMode, dwPipeMode, nMaxInstances,
+      nOutBufferSize, nInBufferSize, nDefaultTimeOut, lpSecurityAttributes);
 }
 
 /// Creates an anonymous pipe, and returns handles to the read and write
@@ -498,6 +567,110 @@ int DeleteFile(Pointer<Utf16> lpFileName) {
   return _DeleteFile(lpFileName);
 }
 
+/// Disconnects the server end of a named pipe instance from a client
+/// process.
+///
+/// ```c
+/// BOOL DisconnectNamedPipe(
+///   HANDLE hNamedPipe);
+/// ```
+/// {@category kernel32}
+int DisconnectNamedPipe(int hNamedPipe) {
+  final _DisconnectNamedPipe = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hNamedPipe),
+      int Function(int hNamedPipe)>('DisconnectNamedPipe');
+  return _DisconnectNamedPipe(hNamedPipe);
+}
+
+/// Converts a DNS-style host name to a NetBIOS-style computer name.
+///
+/// ```c
+/// BOOL DnsHostnameToComputerNameW(
+///   LPCWSTR Hostname,
+///   LPWSTR  ComputerName,
+///   LPDWORD nSize
+/// );
+/// ```
+/// {@category kernel32}
+int DnsHostnameToComputerName(Pointer<Utf16> Hostname,
+    Pointer<Utf16> ComputerName, Pointer<Uint32> nSize) {
+  final _DnsHostnameToComputerName = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> Hostname, Pointer<Utf16> ComputerName,
+          Pointer<Uint32> nSize),
+      int Function(Pointer<Utf16> Hostname, Pointer<Utf16> ComputerName,
+          Pointer<Uint32> nSize)>('DnsHostnameToComputerNameW');
+  return _DnsHostnameToComputerName(Hostname, ComputerName, nSize);
+}
+
+/// Converts MS-DOS date and time values to a file time.
+///
+/// ```c
+/// BOOL DosDateTimeToFileTime(
+///   WORD       wFatDate,
+///   WORD       wFatTime,
+///   LPFILETIME lpFileTime
+/// );
+/// ```
+/// {@category kernel32}
+int DosDateTimeToFileTime(
+    int wFatDate, int wFatTime, Pointer<FILETIME> lpFileTime) {
+  final _DosDateTimeToFileTime = _kernel32.lookupFunction<
+      Int32 Function(
+          Uint16 wFatDate, Uint16 wFatTime, Pointer<FILETIME> lpFileTime),
+      int Function(int wFatDate, int wFatTime,
+          Pointer<FILETIME> lpFileTime)>('DosDateTimeToFileTime');
+  return _DosDateTimeToFileTime(wFatDate, wFatTime, lpFileTime);
+}
+
+/// Duplicates an object handle.
+///
+/// ```c
+/// BOOL DuplicateHandle(
+///   HANDLE   hSourceProcessHandle,
+///   HANDLE   hSourceHandle,
+///   HANDLE   hTargetProcessHandle,
+///   LPHANDLE lpTargetHandle,
+///   DWORD    dwDesiredAccess,
+///   BOOL     bInheritHandle,
+///   DWORD    dwOptions
+/// );
+/// ```
+/// {@category kernel32}
+int DuplicateHandle(
+    int hSourceProcessHandle,
+    int hSourceHandle,
+    int hTargetProcessHandle,
+    Pointer<IntPtr> lpTargetHandle,
+    int dwDesiredAccess,
+    int bInheritHandle,
+    int dwOptions) {
+  final _DuplicateHandle = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hSourceProcessHandle,
+          IntPtr hSourceHandle,
+          IntPtr hTargetProcessHandle,
+          Pointer<IntPtr> lpTargetHandle,
+          Uint32 dwDesiredAccess,
+          Int32 bInheritHandle,
+          Uint32 dwOptions),
+      int Function(
+          int hSourceProcessHandle,
+          int hSourceHandle,
+          int hTargetProcessHandle,
+          Pointer<IntPtr> lpTargetHandle,
+          int dwDesiredAccess,
+          int bInheritHandle,
+          int dwOptions)>('DuplicateHandle');
+  return _DuplicateHandle(
+      hSourceProcessHandle,
+      hSourceHandle,
+      hTargetProcessHandle,
+      lpTargetHandle,
+      dwDesiredAccess,
+      bInheritHandle,
+      dwOptions);
+}
+
 /// Commits or discards changes made prior to a call to UpdateResource.
 ///
 /// ```c
@@ -512,6 +685,75 @@ int EndUpdateResource(int hUpdate, int fDiscard) {
       Int32 Function(IntPtr hUpdate, Int32 fDiscard),
       int Function(int hUpdate, int fDiscard)>('EndUpdateResourceW');
   return _EndUpdateResource(hUpdate, fDiscard);
+}
+
+/// Retrieves the process identifier for each process object in the system.
+///
+/// ```c
+/// BOOL K32EnumProcesses(
+///   DWORD   *lpidProcess,
+///   DWORD   cb,
+///   LPDWORD lpcbNeeded
+/// );
+/// ```
+/// {@category kernel32}
+int EnumProcesses(
+    Pointer<Uint32> lpidProcess, int cb, Pointer<Uint32> lpcbNeeded) {
+  final _EnumProcesses = _kernel32.lookupFunction<
+      Int32 Function(
+          Pointer<Uint32> lpidProcess, Uint32 cb, Pointer<Uint32> lpcbNeeded),
+      int Function(Pointer<Uint32> lpidProcess, int cb,
+          Pointer<Uint32> lpcbNeeded)>('K32EnumProcesses');
+  return _EnumProcesses(lpidProcess, cb, lpcbNeeded);
+}
+
+/// Retrieves a handle for each module in the specified process.
+///
+/// ```c
+/// BOOL K32EnumProcessModules(
+///   HANDLE  hProcess,
+///   HMODULE *lphModule,
+///   DWORD   cb,
+///   LPDWORD lpcbNeeded
+/// );
+/// ```
+/// {@category kernel32}
+int EnumProcessModules(int hProcess, Pointer<IntPtr> lphModule, int cb,
+    Pointer<Uint32> lpcbNeeded) {
+  final _EnumProcessModules = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
+          Pointer<Uint32> lpcbNeeded),
+      int Function(int hProcess, Pointer<IntPtr> lphModule, int cb,
+          Pointer<Uint32> lpcbNeeded)>('K32EnumProcessModules');
+  return _EnumProcessModules(hProcess, lphModule, cb, lpcbNeeded);
+}
+
+/// Retrieves a handle for each module in the specified process that meets
+/// the specified filter criteria.
+///
+/// ```c
+/// BOOL K32EnumProcessModulesEx(
+///   HANDLE  hProcess,
+///   HMODULE *lphModule,
+///   DWORD   cb,
+///   LPDWORD lpcbNeeded,
+///   DWORD   dwFilterFlag
+/// );
+/// ```
+/// {@category kernel32}
+int EnumProcessModulesEx(int hProcess, Pointer<IntPtr> lphModule, int cb,
+    Pointer<Uint32> lpcbNeeded, int dwFilterFlag) {
+  final _EnumProcessModulesEx = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hProcess, Pointer<IntPtr> lphModule, Uint32 cb,
+          Pointer<Uint32> lpcbNeeded, Uint32 dwFilterFlag),
+      int Function(
+          int hProcess,
+          Pointer<IntPtr> lphModule,
+          int cb,
+          Pointer<Uint32> lpcbNeeded,
+          int dwFilterFlag)>('K32EnumProcessModulesEx');
+  return _EnumProcessModulesEx(
+      hProcess, lphModule, cb, lpcbNeeded, dwFilterFlag);
 }
 
 /// Enumerates resources of a specified type within a binary module. For
@@ -584,6 +826,26 @@ void ExitProcess(int uExitCode) {
   final _ExitProcess = _kernel32.lookupFunction<Void Function(Uint32 uExitCode),
       void Function(int uExitCode)>('ExitProcess');
   return _ExitProcess(uExitCode);
+}
+
+/// Converts a file time to MS-DOS date and time values.
+///
+/// ```c
+/// BOOL FileTimeToDosDateTime(
+///   const FILETIME *lpFileTime,
+///   LPWORD         lpFatDate,
+///   LPWORD         lpFatTime
+/// );
+/// ```
+/// {@category kernel32}
+int FileTimeToDosDateTime(Pointer<FILETIME> lpFileTime,
+    Pointer<Uint16> lpFatDate, Pointer<Uint16> lpFatTime) {
+  final _FileTimeToDosDateTime = _kernel32.lookupFunction<
+      Int32 Function(Pointer<FILETIME> lpFileTime, Pointer<Uint16> lpFatDate,
+          Pointer<Uint16> lpFatTime),
+      int Function(Pointer<FILETIME> lpFileTime, Pointer<Uint16> lpFatDate,
+          Pointer<Uint16> lpFatTime)>('FileTimeToDosDateTime');
+  return _FileTimeToDosDateTime(lpFileTime, lpFatDate, lpFatTime);
 }
 
 /// Sets the character attributes for a specified number of character
@@ -890,8 +1152,14 @@ int FlushConsoleInputBuffer(int hConsoleInput) {
 /// );
 /// ```
 /// {@category kernel32}
-int FormatMessage(int dwFlags, Pointer lpSource, int dwMessageId,
-    int dwLanguageId, Pointer<Utf16> lpBuffer, int nSize, Pointer Arguments) {
+int FormatMessage(
+    int dwFlags,
+    Pointer lpSource,
+    int dwMessageId,
+    int dwLanguageId,
+    Pointer<Utf16> lpBuffer,
+    int nSize,
+    Pointer<Pointer<Int8>> Arguments) {
   final _FormatMessage = _kernel32.lookupFunction<
       Uint32 Function(
           Uint32 dwFlags,
@@ -900,7 +1168,7 @@ int FormatMessage(int dwFlags, Pointer lpSource, int dwMessageId,
           Uint32 dwLanguageId,
           Pointer<Utf16> lpBuffer,
           Uint32 nSize,
-          Pointer Arguments),
+          Pointer<Pointer<Int8>> Arguments),
       int Function(
           int dwFlags,
           Pointer lpSource,
@@ -908,7 +1176,7 @@ int FormatMessage(int dwFlags, Pointer lpSource, int dwMessageId,
           int dwLanguageId,
           Pointer<Utf16> lpBuffer,
           int nSize,
-          Pointer Arguments)>('FormatMessageW');
+          Pointer<Pointer<Int8>> Arguments)>('FormatMessageW');
   return _FormatMessage(
       dwFlags, lpSource, dwMessageId, dwLanguageId, lpBuffer, nSize, Arguments);
 }
@@ -943,6 +1211,44 @@ int FreeLibrary(int hLibModule) {
   return _FreeLibrary(hLibModule);
 }
 
+/// Determines whether a file is an executable (.exe) file, and if so,
+/// which subsystem runs the executable file.
+///
+/// ```c
+/// BOOL GetBinaryTypeW(
+///   LPCWSTR lpApplicationName,
+///   LPDWORD lpBinaryType);
+/// ```
+/// {@category kernel32}
+int GetBinaryType(
+    Pointer<Utf16> lpApplicationName, Pointer<Uint32> lpBinaryType) {
+  final _GetBinaryType = _kernel32.lookupFunction<
+      Int32 Function(
+          Pointer<Utf16> lpApplicationName, Pointer<Uint32> lpBinaryType),
+      int Function(Pointer<Utf16> lpApplicationName,
+          Pointer<Uint32> lpBinaryType)>('GetBinaryTypeW');
+  return _GetBinaryType(lpApplicationName, lpBinaryType);
+}
+
+/// Retrieves the NetBIOS name of the local computer. This name is
+/// established at system startup, when the system reads it from the
+/// registry.
+///
+/// ```c
+/// BOOL GetComputerNameW(
+///   LPWSTR  lpBuffer,
+///   LPDWORD nSize
+/// );
+/// ```
+/// {@category kernel32}
+int GetComputerName(Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize) {
+  final _GetComputerName = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize),
+      int Function(
+          Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize)>('GetComputerNameW');
+  return _GetComputerName(lpBuffer, nSize);
+}
+
 /// Retrieves a NetBIOS or DNS name associated with the local computer. The
 /// names are established at system startup, when the system reads them
 /// from the registry.
@@ -959,7 +1265,7 @@ int GetComputerNameEx(
     int NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize) {
   final _GetComputerNameEx = _kernel32.lookupFunction<
       Int32 Function(
-          Int32 NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize),
+          Uint32 NameType, Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize),
       int Function(int NameType, Pointer<Utf16> lpBuffer,
           Pointer<Uint32> nSize)>('GetComputerNameExW');
   return _GetComputerNameEx(NameType, lpBuffer, nSize);
@@ -1100,6 +1406,22 @@ int GetCurrentProcess() {
   return _GetCurrentProcess();
 }
 
+/// Retrieves the termination status of the specified process.
+///
+/// ```c
+/// BOOL GetExitCodeProcess(
+///   HANDLE  hProcess,
+///   LPDWORD lpExitCode);
+/// ```
+/// {@category kernel32}
+int GetExitCodeProcess(int hProcess, Pointer<Uint32> lpExitCode) {
+  final _GetExitCodeProcess = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hProcess, Pointer<Uint32> lpExitCode),
+      int Function(
+          int hProcess, Pointer<Uint32> lpExitCode)>('GetExitCodeProcess');
+  return _GetExitCodeProcess(hProcess, lpExitCode);
+}
+
 /// Retrieves attributes for a specified file or directory.
 ///
 /// ```c
@@ -1113,11 +1435,28 @@ int GetCurrentProcess() {
 int GetFileAttributesEx(
     Pointer<Utf16> lpFileName, int fInfoLevelId, Pointer lpFileInformation) {
   final _GetFileAttributesEx = _kernel32.lookupFunction<
-      Int32 Function(Pointer<Utf16> lpFileName, Int32 fInfoLevelId,
+      Int32 Function(Pointer<Utf16> lpFileName, Uint32 fInfoLevelId,
           Pointer lpFileInformation),
       int Function(Pointer<Utf16> lpFileName, int fInfoLevelId,
           Pointer lpFileInformation)>('GetFileAttributesExW');
   return _GetFileAttributesEx(lpFileName, fInfoLevelId, lpFileInformation);
+}
+
+/// Retrieves certain properties of an object handle.
+///
+/// ```c
+/// BOOL GetHandleInformation(
+///   HANDLE  hObject,
+///   LPDWORD lpdwFlags
+/// );
+/// ```
+/// {@category kernel32}
+int GetHandleInformation(int hObject, Pointer<Uint32> lpdwFlags) {
+  final _GetHandleInformation = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hObject, Pointer<Uint32> lpdwFlags),
+      int Function(
+          int hObject, Pointer<Uint32> lpdwFlags)>('GetHandleInformation');
+  return _GetHandleInformation(hObject, lpdwFlags);
 }
 
 /// Retrieves the size of the largest possible console window, based on the
@@ -1203,6 +1542,27 @@ int GetLogicalDriveStrings(int nBufferLength, Pointer<Utf16> lpBuffer) {
   return _GetLogicalDriveStrings(nBufferLength, lpBuffer);
 }
 
+/// Retrieves the base name of the specified module.
+///
+/// ```c
+/// DWORD K32GetModuleBaseNameW(
+///   HANDLE  hProcess,
+///   HMODULE hModule,
+///   LPWSTR  lpBaseName,
+///   DWORD   nSize
+/// );
+/// ```
+/// {@category kernel32}
+int GetModuleBaseName(
+    int hProcess, int hModule, Pointer<Utf16> lpBaseName, int nSize) {
+  final _GetModuleBaseName = _kernel32.lookupFunction<
+      Uint32 Function(IntPtr hProcess, IntPtr hModule,
+          Pointer<Utf16> lpBaseName, Uint32 nSize),
+      int Function(int hProcess, int hModule, Pointer<Utf16> lpBaseName,
+          int nSize)>('K32GetModuleBaseNameW');
+  return _GetModuleBaseName(hProcess, hModule, lpBaseName, nSize);
+}
+
 /// Retrieves the fully qualified path for the file that contains the
 /// specified module. The module must have been loaded by the current
 /// process.
@@ -1223,6 +1583,28 @@ int GetModuleFileName(int hModule, Pointer<Utf16> lpFilename, int nSize) {
   return _GetModuleFileName(hModule, lpFilename, nSize);
 }
 
+/// Retrieves the fully qualified path for the file containing the
+/// specified module.
+///
+/// ```c
+/// DWORD K32GetModuleFileNameExW(
+///   HANDLE  hProcess,
+///   HMODULE hModule,
+///   LPWSTR  lpFilename,
+///   DWORD   nSize
+/// );
+/// ```
+/// {@category kernel32}
+int GetModuleFileNameEx(
+    int hProcess, int hModule, Pointer<Utf16> lpFilename, int nSize) {
+  final _GetModuleFileNameEx = _kernel32.lookupFunction<
+      Uint32 Function(IntPtr hProcess, IntPtr hModule,
+          Pointer<Utf16> lpFilename, Uint32 nSize),
+      int Function(int hProcess, int hModule, Pointer<Utf16> lpFilename,
+          int nSize)>('K32GetModuleFileNameExW');
+  return _GetModuleFileNameEx(hProcess, hModule, lpFilename, nSize);
+}
+
 /// Retrieves a module handle for the specified module. The module must
 /// have been loaded by the calling process.
 ///
@@ -1237,6 +1619,40 @@ int GetModuleHandle(Pointer<Utf16> lpModuleName) {
       IntPtr Function(Pointer<Utf16> lpModuleName),
       int Function(Pointer<Utf16> lpModuleName)>('GetModuleHandleW');
   return _GetModuleHandle(lpModuleName);
+}
+
+/// Retrieves information about the specified named pipe.
+///
+/// ```c
+/// BOOL GetNamedPipeInfo(
+///   HANDLE  hNamedPipe,
+///   LPDWORD lpFlags,
+///   LPDWORD lpOutBufferSize,
+///   LPDWORD lpInBufferSize,
+///   LPDWORD lpMaxInstances);
+/// ```
+/// {@category kernel32}
+int GetNamedPipeInfo(
+    int hNamedPipe,
+    Pointer<Uint32> lpFlags,
+    Pointer<Uint32> lpOutBufferSize,
+    Pointer<Uint32> lpInBufferSize,
+    Pointer<Uint32> lpMaxInstances) {
+  final _GetNamedPipeInfo = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hNamedPipe,
+          Pointer<Uint32> lpFlags,
+          Pointer<Uint32> lpOutBufferSize,
+          Pointer<Uint32> lpInBufferSize,
+          Pointer<Uint32> lpMaxInstances),
+      int Function(
+          int hNamedPipe,
+          Pointer<Uint32> lpFlags,
+          Pointer<Uint32> lpOutBufferSize,
+          Pointer<Uint32> lpInBufferSize,
+          Pointer<Uint32> lpMaxInstances)>('GetNamedPipeInfo');
+  return _GetNamedPipeInfo(
+      hNamedPipe, lpFlags, lpOutBufferSize, lpInBufferSize, lpMaxInstances);
 }
 
 /// Retrieves information about the current system to an application
@@ -1285,10 +1701,10 @@ int GetPhysicallyInstalledSystemMemory(Pointer<Uint64> TotalMemoryInKilobytes) {
 /// );
 /// ```
 /// {@category kernel32}
-int GetProcAddress(int hModule, Pointer<Uint8> lpProcName) {
+int GetProcAddress(int hModule, Pointer<Utf8> lpProcName) {
   final _GetProcAddress = _kernel32.lookupFunction<
-      IntPtr Function(IntPtr hModule, Pointer<Uint8> lpProcName),
-      int Function(int hModule, Pointer<Uint8> lpProcName)>('GetProcAddress');
+      IntPtr Function(IntPtr hModule, Pointer<Utf8> lpProcName),
+      int Function(int hModule, Pointer<Utf8> lpProcName)>('GetProcAddress');
   return _GetProcAddress(hModule, lpProcName);
 }
 
@@ -1529,14 +1945,7 @@ int GetUserDefaultLocaleName(Pointer<Utf16> lpLocaleName, int cchLocaleName) {
   return _GetUserDefaultLocaleName(lpLocaleName, cchLocaleName);
 }
 
-/// With the release of Windows 8.1, the behavior of the GetVersionEx API
-/// has changed in the value it will return for the operating system
-/// version. The value returned by the GetVersionEx function now depends on
-/// how the application is manifested. Applications not manifested for
-/// Windows 8.1 or Windows 10 will return the Windows 8 OS version value
-/// (6.2). Once an application is manifested for a given operating system
-/// version, GetVersionEx will always return the version that the
-/// application is manifested for in future releases.
+/// Gets information about the operating system version.
 ///
 /// ```c
 /// BOOL GetVersionExW(
@@ -1550,6 +1959,27 @@ int GetVersionEx(Pointer<OSVERSIONINFO> lpVersionInformation) {
       int Function(
           Pointer<OSVERSIONINFO> lpVersionInformation)>('GetVersionExW');
   return _GetVersionEx(lpVersionInformation);
+}
+
+/// Retrieves the volume mount point where the specified path is mounted.
+///
+/// ```c
+/// BOOL GetVolumePathNameW(
+///   LPCWSTR lpszFileName,
+///   LPWSTR  lpszVolumePathName,
+///   DWORD   cchBufferLength);
+/// ```
+/// {@category kernel32}
+int GetVolumePathName(Pointer<Utf16> lpszFileName,
+    Pointer<Utf16> lpszVolumePathName, int cchBufferLength) {
+  final _GetVolumePathName = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpszFileName,
+          Pointer<Utf16> lpszVolumePathName, Uint32 cchBufferLength),
+      int Function(
+          Pointer<Utf16> lpszFileName,
+          Pointer<Utf16> lpszVolumePathName,
+          int cchBufferLength)>('GetVolumePathNameW');
+  return _GetVolumePathName(lpszFileName, lpszVolumePathName, cchBufferLength);
 }
 
 /// Retrieves a list of drive letters and mounted folder paths for the
@@ -1694,12 +2124,12 @@ int HeapFree(int hHeap, int dwFlags, Pointer lpMem) {
 /// );
 /// ```
 /// {@category kernel32}
-int InitializeProcThreadAttributeList(Pointer lpAttributeList,
-    int dwAttributeCount, int dwFlags, Pointer<IntPtr> lpSize) {
+int InitializeProcThreadAttributeList(int lpAttributeList, int dwAttributeCount,
+    int dwFlags, Pointer<IntPtr> lpSize) {
   final _InitializeProcThreadAttributeList = _kernel32.lookupFunction<
-      Int32 Function(Pointer lpAttributeList, Uint32 dwAttributeCount,
+      Int32 Function(IntPtr lpAttributeList, Uint32 dwAttributeCount,
           Uint32 dwFlags, Pointer<IntPtr> lpSize),
-      int Function(Pointer lpAttributeList, int dwAttributeCount, int dwFlags,
+      int Function(int lpAttributeList, int dwAttributeCount, int dwFlags,
           Pointer<IntPtr> lpSize)>('InitializeProcThreadAttributeList');
   return _InitializeProcThreadAttributeList(
       lpAttributeList, dwAttributeCount, dwFlags, lpSize);
@@ -1716,6 +2146,21 @@ int IsDebuggerPresent() {
   final _IsDebuggerPresent = _kernel32
       .lookupFunction<Int32 Function(), int Function()>('IsDebuggerPresent');
   return _IsDebuggerPresent();
+}
+
+/// Indicates if the OS was booted from a VHD container.
+///
+/// ```c
+/// BOOL IsNativeVhdBoot(
+///   PBOOL NativeVhdBoot
+/// );
+/// ```
+/// {@category kernel32}
+int IsNativeVhdBoot(Pointer<Int32> NativeVhdBoot) {
+  final _IsNativeVhdBoot = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Int32> NativeVhdBoot),
+      int Function(Pointer<Int32> NativeVhdBoot)>('IsNativeVhdBoot');
+  return _IsNativeVhdBoot(NativeVhdBoot);
 }
 
 /// Determines if the specified locale name is valid for a locale that is
@@ -1855,6 +2300,46 @@ void OutputDebugString(Pointer<Utf16> lpOutputString) {
   return _OutputDebugString(lpOutputString);
 }
 
+/// Copies data from a named or anonymous pipe into a buffer without
+/// removing it from the pipe. It also returns information about data in
+/// the pipe.
+///
+/// ```c
+/// BOOL PeekNamedPipe(
+///   HANDLE  hNamedPipe,
+///   LPVOID  lpBuffer,
+///   DWORD   nBufferSize,
+///   LPDWORD lpBytesRead,
+///   LPDWORD lpTotalBytesAvail,
+///   LPDWORD lpBytesLeftThisMessage);
+/// ```
+/// {@category kernel32}
+int PeekNamedPipe(
+    int hNamedPipe,
+    Pointer lpBuffer,
+    int nBufferSize,
+    Pointer<Uint32> lpBytesRead,
+    Pointer<Uint32> lpTotalBytesAvail,
+    Pointer<Uint32> lpBytesLeftThisMessage) {
+  final _PeekNamedPipe = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hNamedPipe,
+          Pointer lpBuffer,
+          Uint32 nBufferSize,
+          Pointer<Uint32> lpBytesRead,
+          Pointer<Uint32> lpTotalBytesAvail,
+          Pointer<Uint32> lpBytesLeftThisMessage),
+      int Function(
+          int hNamedPipe,
+          Pointer lpBuffer,
+          int nBufferSize,
+          Pointer<Uint32> lpBytesRead,
+          Pointer<Uint32> lpTotalBytesAvail,
+          Pointer<Uint32> lpBytesLeftThisMessage)>('PeekNamedPipe');
+  return _PeekNamedPipe(hNamedPipe, lpBuffer, nBufferSize, lpBytesRead,
+      lpTotalBytesAvail, lpBytesLeftThisMessage);
+}
+
 /// Retrieves information about MS-DOS device names. The function can
 /// obtain the current mapping for a particular MS-DOS device name. The
 /// function can also obtain a list of all existing MS-DOS device names.
@@ -1927,20 +2412,20 @@ int QueryPerformanceFrequency(Pointer<Int64> lpFrequency) {
 /// ```
 /// {@category kernel32}
 int ReadConsole(int hConsoleInput, Pointer lpBuffer, int nNumberOfCharsToRead,
-    Pointer<Uint32> lpNumberOfCharsRead, Pointer pInputControl) {
+    Pointer<Uint32> lpNumberOfCharsRead, Pointer<Void> pInputControl) {
   final _ReadConsole = _kernel32.lookupFunction<
       Int32 Function(
           IntPtr hConsoleInput,
           Pointer lpBuffer,
           Uint32 nNumberOfCharsToRead,
           Pointer<Uint32> lpNumberOfCharsRead,
-          Pointer pInputControl),
+          Pointer<Void> pInputControl),
       int Function(
           int hConsoleInput,
           Pointer lpBuffer,
           int nNumberOfCharsToRead,
           Pointer<Uint32> lpNumberOfCharsRead,
-          Pointer pInputControl)>('ReadConsoleW');
+          Pointer<Void> pInputControl)>('ReadConsoleW');
   return _ReadConsole(hConsoleInput, lpBuffer, nNumberOfCharsToRead,
       lpNumberOfCharsRead, pInputControl);
 }
@@ -2032,6 +2517,28 @@ int RemoveDirectory(Pointer<Utf16> lpPathName) {
       Int32 Function(Pointer<Utf16> lpPathName),
       int Function(Pointer<Utf16> lpPathName)>('RemoveDirectoryW');
   return _RemoveDirectory(lpPathName);
+}
+
+/// Reopens the specified file system object with different access rights,
+/// sharing mode, and flags.
+///
+/// ```c
+/// HANDLE ReOpenFile(
+///   HANDLE hOriginalFile,
+///   DWORD  dwDesiredAccess,
+///   DWORD  dwShareMode,
+///   DWORD  dwFlagsAndAttributes);
+/// ```
+/// {@category kernel32}
+int ReOpenFile(int hOriginalFile, int dwDesiredAccess, int dwShareMode,
+    int dwFlagsAndAttributes) {
+  final _ReOpenFile = _kernel32.lookupFunction<
+      IntPtr Function(IntPtr hOriginalFile, Uint32 dwDesiredAccess,
+          Uint32 dwShareMode, Uint32 dwFlagsAndAttributes),
+      int Function(int hOriginalFile, int dwDesiredAccess, int dwShareMode,
+          int dwFlagsAndAttributes)>('ReOpenFile');
+  return _ReOpenFile(
+      hOriginalFile, dwDesiredAccess, dwShareMode, dwFlagsAndAttributes);
 }
 
 /// Resizes the internal buffers for a pseudoconsole to the given size.
@@ -2288,6 +2795,118 @@ int SetFilePointerEx(int hFile, int liDistanceToMove,
       hFile, liDistanceToMove, lpNewFilePointer, dwMoveMethod);
 }
 
+/// Sets the short name for the specified file. The file must be on an NTFS
+/// file system volume.
+///
+/// ```c
+/// BOOL SetFileShortNameW(
+///   HANDLE  hFile,
+///   LPCWSTR lpShortName);
+/// ```
+/// {@category kernel32}
+int SetFileShortName(int hFile, Pointer<Utf16> lpShortName) {
+  final _SetFileShortName = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hFile, Pointer<Utf16> lpShortName),
+      int Function(int hFile, Pointer<Utf16> lpShortName)>('SetFileShortNameW');
+  return _SetFileShortName(hFile, lpShortName);
+}
+
+/// Sets the value of the specified firmware environment variable.
+///
+/// ```c
+/// BOOL SetFirmwareEnvironmentVariableW(
+///   LPCWSTR lpName,
+///   LPCWSTR lpGuid,
+///   PVOID   pValue,
+///   DWORD   nSize
+/// );
+/// ```
+/// {@category kernel32}
+int SetFirmwareEnvironmentVariable(
+    Pointer<Utf16> lpName, Pointer<Utf16> lpGuid, Pointer pValue, int nSize) {
+  final _SetFirmwareEnvironmentVariable = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpName, Pointer<Utf16> lpGuid,
+          Pointer pValue, Uint32 nSize),
+      int Function(Pointer<Utf16> lpName, Pointer<Utf16> lpGuid, Pointer pValue,
+          int nSize)>('SetFirmwareEnvironmentVariableW');
+  return _SetFirmwareEnvironmentVariable(lpName, lpGuid, pValue, nSize);
+}
+
+/// Sets the value of the specified firmware environment variable and the
+/// attributes that indicate how this variable is stored and maintained.
+///
+/// ```c
+/// BOOL SetFirmwareEnvironmentVariableExW(
+///   LPCWSTR lpName,
+///   LPCWSTR lpGuid,
+///   PVOID   pValue,
+///   DWORD   nSize,
+///   DWORD   dwAttributes
+/// );
+/// ```
+/// {@category kernel32}
+int SetFirmwareEnvironmentVariableEx(Pointer<Utf16> lpName,
+    Pointer<Utf16> lpGuid, Pointer pValue, int nSize, int dwAttributes) {
+  final _SetFirmwareEnvironmentVariableEx = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpName, Pointer<Utf16> lpGuid,
+          Pointer pValue, Uint32 nSize, Uint32 dwAttributes),
+      int Function(Pointer<Utf16> lpName, Pointer<Utf16> lpGuid, Pointer pValue,
+          int nSize, int dwAttributes)>('SetFirmwareEnvironmentVariableExW');
+  return _SetFirmwareEnvironmentVariableEx(
+      lpName, lpGuid, pValue, nSize, dwAttributes);
+}
+
+/// Sets certain properties of an object handle.
+///
+/// ```c
+/// BOOL SetHandleInformation(
+///   HANDLE hObject,
+///   DWORD  dwMask,
+///   DWORD  dwFlags
+/// );
+/// ```
+/// {@category kernel32}
+int SetHandleInformation(int hObject, int dwMask, int dwFlags) {
+  final _SetHandleInformation = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hObject, Uint32 dwMask, Uint32 dwFlags),
+      int Function(
+          int hObject, int dwMask, int dwFlags)>('SetHandleInformation');
+  return _SetHandleInformation(hObject, dwMask, dwFlags);
+}
+
+/// Sets the read mode and the blocking mode of the specified named pipe.
+/// If the specified handle is to the client end of a named pipe and if the
+/// named pipe server process is on a remote computer, the function can
+/// also be used to control local buffering.
+///
+/// ```c
+/// BOOL SetNamedPipeHandleState(
+///   HANDLE  hNamedPipe,
+///   LPDWORD lpMode,
+///   LPDWORD lpMaxCollectionCount,
+///   LPDWORD lpCollectDataTimeout);
+/// ```
+/// {@category kernel32}
+int SetNamedPipeHandleState(
+    int hNamedPipe,
+    Pointer<Uint32> lpMode,
+    Pointer<Uint32> lpMaxCollectionCount,
+    Pointer<Uint32> lpCollectDataTimeout) {
+  final _SetNamedPipeHandleState = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hNamedPipe,
+          Pointer<Uint32> lpMode,
+          Pointer<Uint32> lpMaxCollectionCount,
+          Pointer<Uint32> lpCollectDataTimeout),
+      int Function(
+          int hNamedPipe,
+          Pointer<Uint32> lpMode,
+          Pointer<Uint32> lpMaxCollectionCount,
+          Pointer<Uint32> lpCollectDataTimeout)>('SetNamedPipeHandleState');
+  return _SetNamedPipeHandleState(
+      hNamedPipe, lpMode, lpMaxCollectionCount, lpCollectDataTimeout);
+}
+
 /// Sets the handle for the specified standard device (standard input,
 /// standard output, or standard error).
 ///
@@ -2337,6 +2956,23 @@ int SetThreadUILanguage(int LangId) {
   return _SetThreadUILanguage(LangId);
 }
 
+/// Sets the label of a file system volume.
+///
+/// ```c
+/// BOOL SetVolumeLabelW(
+///   LPCWSTR lpRootPathName,
+///   LPCWSTR lpVolumeName);
+/// ```
+/// {@category kernel32}
+int SetVolumeLabel(Pointer<Utf16> lpRootPathName, Pointer<Utf16> lpVolumeName) {
+  final _SetVolumeLabel = _kernel32.lookupFunction<
+      Int32 Function(
+          Pointer<Utf16> lpRootPathName, Pointer<Utf16> lpVolumeName),
+      int Function(Pointer<Utf16> lpRootPathName,
+          Pointer<Utf16> lpVolumeName)>('SetVolumeLabelW');
+  return _SetVolumeLabel(lpRootPathName, lpVolumeName);
+}
+
 /// Suspends the execution of the current thread until the time-out
 /// interval elapses.
 ///
@@ -2350,6 +2986,64 @@ void Sleep(int dwMilliseconds) {
   final _Sleep = _kernel32.lookupFunction<Void Function(Uint32 dwMilliseconds),
       void Function(int dwMilliseconds)>('Sleep');
   return _Sleep(dwMilliseconds);
+}
+
+/// Terminates the specified process and all of its threads.
+///
+/// ```c
+/// BOOL TerminateProcess(
+///   HANDLE hProcess,
+///   UINT   uExitCode);
+/// ```
+/// {@category kernel32}
+int TerminateProcess(int hProcess, int uExitCode) {
+  final _TerminateProcess = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hProcess, Uint32 uExitCode),
+      int Function(int hProcess, int uExitCode)>('TerminateProcess');
+  return _TerminateProcess(hProcess, uExitCode);
+}
+
+/// Combines the functions that write a message to and read a message from
+/// the specified named pipe into a single network operation.
+///
+/// ```c
+/// BOOL TransactNamedPipe(
+///   HANDLE       hNamedPipe,
+///   LPVOID       lpInBuffer,
+///   DWORD        nInBufferSize,
+///   LPVOID       lpOutBuffer,
+///   DWORD        nOutBufferSize,
+///   LPDWORD      lpBytesRead,
+///   LPOVERLAPPED lpOverlapped);
+/// ```
+/// {@category kernel32}
+int TransactNamedPipe(
+    int hNamedPipe,
+    Pointer lpInBuffer,
+    int nInBufferSize,
+    Pointer lpOutBuffer,
+    int nOutBufferSize,
+    Pointer<Uint32> lpBytesRead,
+    Pointer<OVERLAPPED> lpOverlapped) {
+  final _TransactNamedPipe = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hNamedPipe,
+          Pointer lpInBuffer,
+          Uint32 nInBufferSize,
+          Pointer lpOutBuffer,
+          Uint32 nOutBufferSize,
+          Pointer<Uint32> lpBytesRead,
+          Pointer<OVERLAPPED> lpOverlapped),
+      int Function(
+          int hNamedPipe,
+          Pointer lpInBuffer,
+          int nInBufferSize,
+          Pointer lpOutBuffer,
+          int nOutBufferSize,
+          Pointer<Uint32> lpBytesRead,
+          Pointer<OVERLAPPED> lpOverlapped)>('TransactNamedPipe');
+  return _TransactNamedPipe(hNamedPipe, lpInBuffer, nInBufferSize, lpOutBuffer,
+      nOutBufferSize, lpBytesRead, lpOverlapped);
 }
 
 /// Updates the specified attribute in a list of attributes for process and
@@ -2368,7 +3062,7 @@ void Sleep(int dwMilliseconds) {
 /// ```
 /// {@category kernel32}
 int UpdateProcThreadAttribute(
-    Pointer lpAttributeList,
+    int lpAttributeList,
     int dwFlags,
     int Attribute,
     Pointer lpValue,
@@ -2377,7 +3071,7 @@ int UpdateProcThreadAttribute(
     Pointer<IntPtr> lpReturnSize) {
   final _UpdateProcThreadAttribute = _kernel32.lookupFunction<
       Int32 Function(
-          Pointer lpAttributeList,
+          IntPtr lpAttributeList,
           Uint32 dwFlags,
           IntPtr Attribute,
           Pointer lpValue,
@@ -2385,7 +3079,7 @@ int UpdateProcThreadAttribute(
           Pointer lpPreviousValue,
           Pointer<IntPtr> lpReturnSize),
       int Function(
-          Pointer lpAttributeList,
+          int lpAttributeList,
           int dwFlags,
           int Attribute,
           Pointer lpValue,
@@ -2418,6 +3112,25 @@ int UpdateResource(int hUpdate, Pointer<Utf16> lpType, Pointer<Utf16> lpName,
       int Function(int hUpdate, Pointer<Utf16> lpType, Pointer<Utf16> lpName,
           int wLanguage, Pointer lpData, int cb)>('UpdateResourceW');
   return _UpdateResource(hUpdate, lpType, lpName, wLanguage, lpData, cb);
+}
+
+/// Retrieves a description string for the language associated with a
+/// specified binary Microsoft language identifier.
+///
+/// ```c
+/// DWORD VerLanguageNameW(
+///   DWORD  wLang,
+///   LPWSTR szLang,
+///   DWORD  cchLang
+/// );
+/// ```
+/// {@category kernel32}
+int VerLanguageName(int wLang, Pointer<Utf16> szLang, int cchLang) {
+  final _VerLanguageName = _kernel32.lookupFunction<
+      Uint32 Function(Uint32 wLang, Pointer<Utf16> szLang, Uint32 cchLang),
+      int Function(
+          int wLang, Pointer<Utf16> szLang, int cchLang)>('VerLanguageNameW');
+  return _VerLanguageName(wLang, szLang, cchLang);
 }
 
 /// Reserves, commits, or changes the state of a region of pages in the
@@ -2500,29 +3213,29 @@ int WideCharToMultiByte(
     int dwFlags,
     Pointer<Utf16> lpWideCharStr,
     int cchWideChar,
-    Pointer<Uint8> lpMultiByteStr,
+    Pointer<Utf8> lpMultiByteStr,
     int cbMultiByte,
-    Pointer<Uint8> lpDefaultChar,
-    Pointer<Uint32> lpUsedDefaultChar) {
+    Pointer<Utf8> lpDefaultChar,
+    Pointer<Int32> lpUsedDefaultChar) {
   final _WideCharToMultiByte = _kernel32.lookupFunction<
       Int32 Function(
           Uint32 CodePage,
           Uint32 dwFlags,
           Pointer<Utf16> lpWideCharStr,
           Int32 cchWideChar,
-          Pointer<Uint8> lpMultiByteStr,
+          Pointer<Utf8> lpMultiByteStr,
           Int32 cbMultiByte,
-          Pointer<Uint8> lpDefaultChar,
-          Pointer<Uint32> lpUsedDefaultChar),
+          Pointer<Utf8> lpDefaultChar,
+          Pointer<Int32> lpUsedDefaultChar),
       int Function(
           int CodePage,
           int dwFlags,
           Pointer<Utf16> lpWideCharStr,
           int cchWideChar,
-          Pointer<Uint8> lpMultiByteStr,
+          Pointer<Utf8> lpMultiByteStr,
           int cbMultiByte,
-          Pointer<Uint8> lpDefaultChar,
-          Pointer<Uint32> lpUsedDefaultChar)>('WideCharToMultiByte');
+          Pointer<Utf8> lpDefaultChar,
+          Pointer<Int32> lpUsedDefaultChar)>('WideCharToMultiByte');
   return _WideCharToMultiByte(CodePage, dwFlags, lpWideCharStr, cchWideChar,
       lpMultiByteStr, cbMultiByte, lpDefaultChar, lpUsedDefaultChar);
 }

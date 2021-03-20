@@ -7,6 +7,8 @@
 
 // THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
 
+// ignore_for_file: unused_local_variable
+
 @TestOn('windows')
 
 import 'dart:ffi';
@@ -26,5 +28,5 @@ void main() {
   test('Can instantiate IClassFactory.LockServer', () {
     expect(classfactory.LockServer, isA<Function>());
   });
-  calloc.free(ptr);
+  free(ptr);
 }

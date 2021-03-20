@@ -17,7 +17,7 @@ void main() {
 
     expect(volume, startsWith(r'\\?\'));
 
-    calloc.free(volumeNamePtr);
+    free(volumeNamePtr);
   });
 
   test('Power management API', () {
@@ -33,7 +33,7 @@ void main() {
     expect(powerStatus.ref.SystemStatusFlag, isIn([0, 1]));
     expect(powerStatus.ref.BatteryLifePercent, isIn(validBatteryPercentages));
 
-    calloc.free(powerStatus);
+    free(powerStatus);
   });
 
   test('CallNtPowerInformation() sanity check', () {
@@ -53,6 +53,6 @@ void main() {
     expect(batteryStatus.ref.Charging, isIn([FALSE, TRUE]));
     expect(batteryStatus.ref.Discharging, isIn([FALSE, TRUE]));
 
-    calloc.free(batteryStatus);
+    free(batteryStatus);
   });
 }

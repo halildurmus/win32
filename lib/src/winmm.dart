@@ -13,8 +13,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
-import 'com/combase.dart';
+import 'combase.dart';
 import 'structs.dart';
+import 'structs.g.dart';
 
 final _winmm = DynamicLibrary.open('winmm.dll');
 
@@ -27,11 +28,11 @@ final _winmm = DynamicLibrary.open('winmm.dll');
 /// );
 /// ```
 /// {@category winmm}
-int mciGetDeviceID(Pointer<Utf16> lpszDevice) {
+int mciGetDeviceID(Pointer<Utf16> pszDevice) {
   final _mciGetDeviceID = _winmm.lookupFunction<
-      Uint32 Function(Pointer<Utf16> lpszDevice),
-      int Function(Pointer<Utf16> lpszDevice)>('mciGetDeviceIDW');
-  return _mciGetDeviceID(lpszDevice);
+      Uint32 Function(Pointer<Utf16> pszDevice),
+      int Function(Pointer<Utf16> pszDevice)>('mciGetDeviceIDW');
+  return _mciGetDeviceID(pszDevice);
 }
 
 /// The mciGetDeviceIDFromElementID function retrieves the MCI device
@@ -63,14 +64,12 @@ int mciGetDeviceIDFromElementID(int dwElementID, Pointer<Utf16> lpstrType) {
 /// );
 /// ```
 /// {@category winmm}
-int mciGetErrorString(
-    int fdwError, Pointer<Utf16> lpszErrorText, int cchErrorText) {
+int mciGetErrorString(int mcierr, Pointer<Utf16> pszText, int cchText) {
   final _mciGetErrorString = _winmm.lookupFunction<
-      Int32 Function(
-          Uint32 fdwError, Pointer<Utf16> lpszErrorText, Uint32 cchErrorText),
-      int Function(int fdwError, Pointer<Utf16> lpszErrorText,
-          int cchErrorText)>('mciGetErrorStringW');
-  return _mciGetErrorString(fdwError, lpszErrorText, cchErrorText);
+      Int32 Function(Uint32 mcierr, Pointer<Utf16> pszText, Uint32 cchText),
+      int Function(int mcierr, Pointer<Utf16> pszText,
+          int cchText)>('mciGetErrorStringW');
+  return _mciGetErrorString(mcierr, pszText, cchText);
 }
 
 /// The mciSendCommand function sends a command message to the specified
@@ -85,13 +84,13 @@ int mciGetErrorString(
 /// );
 /// ```
 /// {@category winmm}
-int mciSendCommand(int IDDevice, int uMsg, int fdwCommand, int dwParam) {
+int mciSendCommand(int mciId, int uMsg, int dwParam1, int dwParam2) {
   final _mciSendCommand = _winmm.lookupFunction<
       Uint32 Function(
-          Uint32 IDDevice, Uint32 uMsg, IntPtr fdwCommand, IntPtr dwParam),
-      int Function(int IDDevice, int uMsg, int fdwCommand,
-          int dwParam)>('mciSendCommandW');
-  return _mciSendCommand(IDDevice, uMsg, fdwCommand, dwParam);
+          Uint32 mciId, Uint32 uMsg, IntPtr dwParam1, IntPtr dwParam2),
+      int Function(
+          int mciId, int uMsg, int dwParam1, int dwParam2)>('mciSendCommandW');
+  return _mciSendCommand(mciId, uMsg, dwParam1, dwParam2);
 }
 
 /// The mciSendString function sends a command string to an MCI device. The
@@ -106,17 +105,21 @@ int mciSendCommand(int IDDevice, int uMsg, int fdwCommand, int dwParam) {
 /// );
 /// ```
 /// {@category winmm}
-int mciSendString(Pointer<Utf16> lpszCommand, Pointer<Utf16> lpszReturnString,
-    int cchReturn, int hwndCallback) {
+int mciSendString(Pointer<Utf16> lpstrCommand, Pointer<Utf16> lpstrReturnString,
+    int uReturnLength, int hwndCallback) {
   final _mciSendString = _winmm.lookupFunction<
       Uint32 Function(
-          Pointer<Utf16> lpszCommand,
-          Pointer<Utf16> lpszReturnString,
-          Uint32 cchReturn,
+          Pointer<Utf16> lpstrCommand,
+          Pointer<Utf16> lpstrReturnString,
+          Uint32 uReturnLength,
           IntPtr hwndCallback),
-      int Function(Pointer<Utf16> lpszCommand, Pointer<Utf16> lpszReturnString,
-          int cchReturn, int hwndCallback)>('mciSendStringW');
-  return _mciSendString(lpszCommand, lpszReturnString, cchReturn, hwndCallback);
+      int Function(
+          Pointer<Utf16> lpstrCommand,
+          Pointer<Utf16> lpstrReturnString,
+          int uReturnLength,
+          int hwndCallback)>('mciSendStringW');
+  return _mciSendString(
+      lpstrCommand, lpstrReturnString, uReturnLength, hwndCallback);
 }
 
 /// The midiOutGetNumDevs function retrieves the number of MIDI output
@@ -180,7 +183,7 @@ int waveOutClose(int hwo) {
 int waveOutGetDevCaps(int uDeviceID, Pointer<WAVEOUTCAPS> pwoc, int cbwoc) {
   final _waveOutGetDevCaps = _winmm.lookupFunction<
       Uint32 Function(
-          Uint32 uDeviceID, Pointer<WAVEOUTCAPS> pwoc, Uint32 cbwoc),
+          IntPtr uDeviceID, Pointer<WAVEOUTCAPS> pwoc, Uint32 cbwoc),
       int Function(int uDeviceID, Pointer<WAVEOUTCAPS> pwoc,
           int cbwoc)>('waveOutGetDevCapsW');
   return _waveOutGetDevCaps(uDeviceID, pwoc, cbwoc);

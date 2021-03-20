@@ -73,6 +73,31 @@ const FACILITY_CERT = 11;
 /// The source of the error code is Wininet related.
 const FACILITY_INTERNET = 12;
 
+/// The code that creates and manages objects of this class is a DLL that runs
+/// in the same process as the caller of the function specifying the class
+/// context.
+const CLSCTX_INPROC_SERVER = 0x1;
+
+/// The code that manages objects of this class is an in-process handler. This
+/// is a DLL that runs in the client process and implements client-side
+/// structures of this class when instances of the class are accessed remotely.
+const CLSCTX_INPROC_HANDLER = 0x2;
+
+/// The EXE code that creates and manages objects of this class runs on same
+/// machine but is loaded in a separate process space.
+const CLSCTX_LOCAL_SERVER = 0x4;
+
+/// A remote context. The LocalServer32 or LocalService code that creates and
+/// manages objects of this class is run on a different computer.
+const CLSCTX_REMOTE_SERVER = 0x10;
+
+/// The combination of [CLSCTX_INPROC_SERVER], [CLSCTX_INPROC_HANDLER],
+/// [CLSCTX_LOCAL_SERVER], and [CLSCTX_REMOTE_SERVER].
+const CLSCTX_ALL = CLSCTX_INPROC_SERVER |
+    CLSCTX_INPROC_HANDLER |
+    CLSCTX_LOCAL_SERVER |
+    CLSCTX_REMOTE_SERVER;
+
 // -----------------------------------------------------------------------------
 // Error constants
 // -----------------------------------------------------------------------------
@@ -434,6 +459,182 @@ const ES_AWAYMODE_REQUIRED = 0x00000040;
 /// the next call that uses ES_CONTINUOUS and one of the other state flags is
 /// cleared.
 const ES_CONTINUOUS = 0x80000000;
+
+// -----------------------------------------------------------------------------
+// Named pipe flags
+// -----------------------------------------------------------------------------
+
+/// The flow of data in the pipe goes from client to server only. This mode
+/// gives the server the equivalent of GENERIC_READ access to the pipe. The
+/// client must specify GENERIC_WRITE access when connecting to the pipe. If the
+/// client must read pipe settings by calling the GetNamedPipeInfo or
+/// GetNamedPipeHandleState functions, the client must specify GENERIC_WRITE and
+/// FILE_READ_ATTRIBUTES access when connecting to the pipe.
+const PIPE_ACCESS_INBOUND = 0x00000001;
+
+/// The flow of data in the pipe goes from server to client only. This mode
+/// gives the server the equivalent of GENERIC_WRITE access to the pipe. The
+/// client must specify GENERIC_READ access when connecting to the pipe. If the
+/// client must change pipe settings by calling the SetNamedPipeHandleState
+/// function, the client must specify GENERIC_READ and FILE_WRITE_ATTRIBUTES
+/// access when connecting to the pipe.
+const PIPE_ACCESS_OUTBOUND = 0x00000002;
+
+/// The pipe is bi-directional; both server and client processes can read from
+/// and write to the pipe. This mode gives the server the equivalent of
+/// GENERIC_READ and GENERIC_WRITE access to the pipe. The client can specify
+/// GENERIC_READ or GENERIC_WRITE, or both, when it connects to the pipe using
+/// the CreateFile function.
+const PIPE_ACCESS_DUPLEX = 0x00000003;
+
+/// The handle refers to the client end of a named pipe instance. This is the
+/// default.
+const PIPE_CLIENT_END = 0x00000000;
+
+/// The handle refers to the server end of a named pipe instance. If this value
+/// is not specified, the handle refers to the client end of a named pipe
+/// instance.
+const PIPE_SERVER_END = 0x00000001;
+
+/// Blocking mode is enabled. When the pipe handle is specified in the ReadFile,
+/// WriteFile, or ConnectNamedPipe function, the operations are not completed
+/// until there is data to read, all data is written, or a client is connected.
+/// Use of this mode can mean waiting indefinitely in some situations for a
+/// client process to perform an action.
+const PIPE_WAIT = 0x00000000;
+
+/// Nonblocking mode is enabled. In this mode, ReadFile, WriteFile, and
+/// ConnectNamedPipe always return immediately.
+const PIPE_NOWAIT = 0x00000001;
+
+/// Data is read from the pipe as a stream of bytes. This mode can be used with
+/// either PIPE_TYPE_MESSAGE or PIPE_TYPE_BYTE.
+const PIPE_READMODE_BYTE = 0x00000000;
+
+/// Data is read from the pipe as a stream of messages. This mode can be only
+/// used if PIPE_TYPE_MESSAGE is also specified.
+const PIPE_READMODE_MESSAGE = 0x00000002;
+
+/// The named pipe is a byte pipe. This is the default.
+const PIPE_TYPE_BYTE = 0x00000000;
+
+/// The named pipe is a message pipe. If this value is not specified, the pipe
+/// is a byte pipe.
+const PIPE_TYPE_MESSAGE = 0x00000004;
+
+/// Connections from remote clients can be accepted and checked against the
+/// security descriptor for the pipe.
+const PIPE_ACCEPT_REMOTE_CLIENTS = 0x00000000;
+
+/// Connections from remote clients are automatically rejected.
+const PIPE_REJECT_REMOTE_CLIENTS = 0x00000008;
+
+/// The number of pipe instances that can be created is limited only by the
+/// availability of system resources.
+const PIPE_UNLIMITED_INSTANCES = 255;
+
+// -----------------------------------------------------------------------------
+// File create flags
+// -----------------------------------------------------------------------------
+
+/// Write operations will not go through any intermediate cache, they will go
+/// directly to disk.
+const FILE_FLAG_WRITE_THROUGH = 0x80000000;
+
+/// The file or device is being opened or created for asynchronous I/O. When
+/// subsequent I/O operations are completed on this handle, the event specified
+/// in the OVERLAPPED structure will be set to the signaled state. If this flag
+/// is specified, the file can be used for simultaneous read and write
+/// operations. If this flag is not specified, then I/O operations are
+/// serialized, even if the calls to the read and write functions specify an
+/// OVERLAPPED structure.
+const FILE_FLAG_OVERLAPPED = 0x40000000;
+
+/// The file or device is being opened with no system caching for data reads and
+/// writes. This flag does not affect hard disk caching or memory mapped files
+const FILE_FLAG_NO_BUFFERING = 0x20000000;
+
+/// Access is intended to be random. The system can use this as a hint to
+/// optimize file caching.
+const FILE_FLAG_RANDOM_ACCESS = 0x10000000;
+
+/// Access is intended to be sequential from beginning to end. The system can
+/// use this as a hint to optimize file caching.
+const FILE_FLAG_SEQUENTIAL_SCAN = 0x08000000;
+
+/// The file is to be deleted immediately after all of its handles are closed,
+/// which includes the specified handle and any other open or duplicated
+/// handles.
+const FILE_FLAG_DELETE_ON_CLOSE = 0x04000000;
+
+/// The file is being opened or created for a backup or restore operation. The
+/// system ensures that the calling process overrides file security checks when
+/// the process has SE_BACKUP_NAME and SE_RESTORE_NAME privileges.
+const FILE_FLAG_BACKUP_SEMANTICS = 0x02000000;
+
+/// Access will occur according to POSIX rules. This includes allowing multiple
+/// files with names, differing only in case, for file systems that support that
+/// naming.
+const FILE_FLAG_POSIX_SEMANTICS = 0x01000000;
+
+/// The file or device is being opened with session awareness. If this flag is
+/// not specified, then per-session devices (such as a device using RemoteFX USB
+/// Redirection) cannot be opened by processes running in session 0. This flag
+/// has no effect for callers not in session 0. This flag is supported only on
+/// server editions of Windows.
+const FILE_FLAG_SESSION_AWARE = 0x00800000;
+
+/// Normal reparse point processing will not occur; CreateFile will attempt to
+/// open the reparse point. When a file is opened, a file handle is returned,
+/// whether or not the filter that controls the reparse point is operational.
+const FILE_FLAG_OPEN_REPARSE_POINT = 0x00200000;
+
+/// The file data is requested, but it should continue to be located in remote
+/// storage. It should not be transported back to local storage. This flag is
+/// for use by remote storage systems.
+const FILE_FLAG_OPEN_NO_RECALL = 0x00100000;
+
+/// If you attempt to create multiple instances of a pipe with this flag,
+/// creation of the first instance succeeds, but creation of the next instance
+/// fails with ERROR_ACCESS_DENIED.
+const FILE_FLAG_FIRST_PIPE_INSTANCE = 0x00080000;
+
+// -----------------------------------------------------------------------------
+// Handle flags
+// -----------------------------------------------------------------------------
+
+/// If this flag is set, a child process created with the bInheritHandles
+/// parameter of CreateProcess set to TRUE will inherit the object handle.
+const HANDLE_FLAG_INHERIT = 0x00000001;
+
+/// If this flag is set, calling the CloseHandle function will not close the
+/// object handle.
+const HANDLE_FLAG_PROTECT_FROM_CLOSE = 0x00000002;
+
+// -----------------------------------------------------------------------------
+// Get Binary Type flags
+// -----------------------------------------------------------------------------
+
+/// A 32-bit Windows-based application
+const SCS_32BIT_BINARY = 0;
+
+/// An MS-DOS – based application
+const SCS_DOS_BINARY = 1;
+
+/// A 16-bit Windows-based application
+const SCS_WOW_BINARY = 2;
+
+/// A PIF file that executes an MS-DOS–based application
+const SCS_PIF_BINARY = 3;
+
+/// A POSIX–based application
+const SCS_POSIX_BINARY = 4;
+
+/// A 16-bit OS/2-based application
+const SCS_OS216_BINARY = 5;
+
+/// A 64-bit Windows-based application.
+const SCS_64BIT_BINARY = 6;
 
 // -----------------------------------------------------------------------------
 // Format message flags
@@ -1716,6 +1917,124 @@ const COLOR_INACTIVECAPTIONTEXT = 19;
 /// Highlight color for three-dimensional display elements (for edges facing the
 /// light source.)
 const COLOR_BTNHIGHLIGHT = 20;
+
+// -----------------------------------------------------------------------------
+// GetWindowLong styles
+// -----------------------------------------------------------------------------
+
+/// Gets/sets the extended window styles.
+const GWL_EXSTYLE = -20;
+
+/// Gets/sets a new application instance handle.
+const GWL_HINSTANCE = -6;
+
+/// Gets/sets a new identifier of the child window. The window cannot be a
+/// top-level window.
+const GWL_ID = -12;
+
+/// Gets/sets a new window style.
+const GWL_STYLE = -16;
+
+/// Gets/sets the user data associated with the window. This data is intended
+/// for use by the application that created the window. Its value is initially
+/// zero.
+const GWL_USERDATA = -21;
+
+/// Sets a new address for the window procedure. You cannot change this
+/// attribute if the window does not belong to the same process as the calling
+/// thread.
+const GWL_WNDPROC = -4;
+
+// -----------------------------------------------------------------------------
+// Hit testing constants
+// -----------------------------------------------------------------------------
+
+/// On the screen background or on a dividing line between windows (same as
+/// HTNOWHERE, except that the DefWindowProc function produces a system beep to
+/// indicate an error).
+const HTERROR = -2;
+
+/// In a window currently covered by another window in the same thread (the
+/// message will be sent to underlying windows in the same thread until one of
+/// them returns a code that is not HTTRANSPARENT).
+const HTTRANSPARENT = -1;
+
+/// On the screen background or on a dividing line between windows.
+const HTNOWHERE = 0;
+
+/// In a client area.
+const HTCLIENT = 1;
+
+/// In a title bar.
+const HTCAPTION = 2;
+
+/// In a window menu or in a Close button in a child window.
+const HTSYSMENU = 3;
+
+/// In a size box (same as HTSIZE).
+const HTGROWBOX = 4;
+
+/// In a size box (same as HTGROWBOX).
+const HTSIZE = HTGROWBOX;
+
+/// In a menu.
+const HTMENU = 5;
+
+/// In a horizontal scroll bar.
+const HTHSCROLL = 6;
+
+/// In the vertical scroll bar.
+const HTVSCROLL = 7;
+
+/// In a Minimize button.
+const HTMINBUTTON = 8;
+
+/// In a Maximize button.
+const HTMAXBUTTON = 9;
+
+/// In the left border of a resizable window (the user can click the mouse to
+/// resize the window horizontally).
+const HTLEFT = 10;
+
+/// In the right border of a resizable window (the user can click the mouse to
+/// resize the window horizontally).
+const HTRIGHT = 11;
+
+/// In the upper-horizontal border of a window.
+const HTTOP = 12;
+
+/// In the upper-left corner of a window border.
+const HTTOPLEFT = 13;
+
+/// In the upper-right corner of a window border.
+const HTTOPRIGHT = 14;
+
+/// In the lower-horizontal border of a resizable window (the user can click the
+/// mouse to resize the window vertically).
+const HTBOTTOM = 15;
+
+/// In the lower-left corner of a border of a resizable window (the user can
+/// click the mouse to resize the window diagonally).
+const HTBOTTOMLEFT = 16;
+
+/// In the lower-right corner of a border of a resizable window (the user can
+/// click the mouse to resize the window diagonally).
+const HTBOTTOMRIGHT = 17;
+
+/// In the border of a window that does not have a sizing border.
+const HTBORDER = 18;
+
+/// In a Minimize button.
+const HTREDUCE = HTMINBUTTON;
+
+/// In a Maximize button.
+const HTZOOM = HTMAXBUTTON;
+
+/// In a Close button.
+const HTCLOSE = 20;
+
+/// In a Help button.
+const HTHELP = 21;
 
 // -----------------------------------------------------------------------------
 // System-wide parameters
@@ -4384,6 +4703,12 @@ final E_ACCESSDENIED = 0x80070005.toSigned(32);
 /// The data necessary to complete this operation is not yet available.
 final E_PENDING = 0x8000000A.toSigned(32);
 
+/// typedef short VARIANT_BOOL: -1 == TRUE
+final VARIANT_TRUE = -1;
+
+/// typedef short VARIANT_BOOL: 0 == FALSE
+final VARIANT_FALSE = 0;
+
 /// Specifies the variant types.
 ///
 /// {@category Enum}
@@ -5188,4 +5513,27 @@ class RO_INIT_TYPE {
   /// Initializes the thread for multi-threaded concurrency. The current thread
   /// is initialized in the MTA.
   static const RO_INIT_MULTITHREADED = 1;
+}
+
+// -----------------------------------------------------------------------------
+// Internationalization for Windows Applications constants
+// -----------------------------------------------------------------------------
+
+/// Identifies the type of corrective action to be taken for a spelling error.
+///
+/// {@category Enum}
+class CORRECTIVE_ACTION {
+  /// There are no errors.
+  static const NONE = 0;
+
+  /// The user should be prompted with a list of suggestions as returned by
+  /// ISpellChecker::Suggest.
+  static const GET_SUGGESTIONS = 1;
+
+  /// Replace the indicated erroneous text with the text provided in the
+  /// suggestion. The user does not need to be prompted.
+  static const REPLACE = 2;
+
+  /// The user should be prompted to delete the indicated erroneous text.
+  static const DELETE = 3;
 }
