@@ -106,11 +106,24 @@ class TypeDef extends AttributeObject {
       if (SUCCEEDED(hr)) {
         final typeName = szName.toDartString();
 
-        // TODO: Can we shortcut something by using the resolution scope token?
         try {
+          // if (typeName == '') {
+          // final pReader = calloc<IntPtr>();
+          // final typeDefToken = calloc<Uint32>();
+          // final hr = reader.ResolveTypeRef(typeRefToken,
+          //     convertToIID(IID_IMetaDataImport2), pReader, typeDefToken);
+          // if (SUCCEEDED(hr)) {
+          //   print('resolved');
+          // } else {
+          //   throw WindowsException(hr);
+          // }
+          // final import = IMetaDataImport2(pReader.cast());
+          // return TypeDef.fromTypeDefToken(import, typeDefToken.value);
+          // }
           final newScope = MetadataStore.getScopeForType(typeName);
           return newScope[typeName]!;
         } catch (exception) {
+          // print(exception);
           // a token like IInspectable is out of reach of GetTypeRefProps, since it is
           // a plain COM object. These objects are returned as system types.
           if (systemTokens.containsKey(typeRefToken)) {
@@ -140,10 +153,13 @@ class TypeDef extends AttributeObject {
     try {
       final hr = reader.GetInterfaceImplProps(token, pClass, ptkIface);
       if (SUCCEEDED(hr)) {
+        final classToken = pClass.value;
+        final interfaceToken = ptkIface.value;
         if (tokenIsTypeRef(ptkIface.value)) {
-          return TypeDef.fromTypeRefToken(reader, ptkIface.value);
+          print(classToken);
+          return TypeDef.fromTypeRefToken(reader, interfaceToken);
         } else if (tokenIsTypeDef(pClass.value)) {
-          return TypeDef.fromTypeDefToken(reader, ptkIface.value);
+          return TypeDef.fromTypeDefToken(reader, interfaceToken);
         }
       }
 
@@ -176,8 +192,6 @@ class TypeDef extends AttributeObject {
       calloc.free(phEnum);
       calloc.free(rImpls);
       calloc.free(pcImpls);
-
-      // dispose phEnum crashes here, so leave it allocated
     }
   }
 

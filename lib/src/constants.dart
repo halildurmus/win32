@@ -189,4 +189,5 @@ final systemTokens = <int, String>{
   0x0100001d: 'System.ValueType',
   0x010000af: 'System.Guid',
   0x01000180: 'System.MulticastDelegate',
+  0x1b000094: 'IEnumerable',
 };

@@ -1,6 +1,7 @@
 @TestOn('windows')
 
 import 'package:test/test.dart';
+import 'package:win32/win32.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
@@ -18,6 +19,11 @@ void main() {
         MetadataStore.getScopeForType('Windows.Globalization.Calendar');
     expect(scope.userStrings.length, equals(1));
     expect(scope.userStrings.first, equals('0x0001'));
+  });
+
+  test('Appropriate response to failure to find scope', () {
+    expect(() => MetadataStore.getScopeForType('Windows.Monetization.Dogecoin'),
+        throwsA(isA<WindowsException>()));
   });
 
   test('Find a specific WinMD token', () {
@@ -73,6 +79,33 @@ void main() {
         interfaceNames, contains('Windows.UI.Xaml.Controls.IButtonWithFlyout'));
   });
 
+  test('Find interfaces returns sane results when inheriting from system type',
+      () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Media.Playback.PlaybackMediaMarkerSequence')!;
+
+    final interfaces = winTypeDef.interfaces;
+    expect(interfaces.length, equals(2));
+
+    final interfaceNames = interfaces.map((element) => element.typeName);
+    expect(interfaceNames, contains('IEnumerable'));
+    expect(interfaceNames,
+        contains('Windows.Media.Playback.IPlaybackMediaMarkerSequence'));
+  });
+
+  test('Find interfaces returns sane results when inheriting from system type',
+      () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Foundation.Collections.IPropertySet')!;
+
+    final interfaces = winTypeDef.interfaces;
+    expect(interfaces.length, equals(2));
+
+    final interfaceNames = interfaces.map((element) => element.typeName);
+    expect(interfaceNames, contains('IEnumerable'));
+    expect(interfaceNames,
+        contains('Windows.Media.Playback.IPlaybackMediaMarkerSequence'));
+  });
   test('Interface GUID is correct', () {
     final winTypeDef =
         MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
@@ -221,6 +254,27 @@ void main() {
     final typeProjection = TypeProjector(classType);
 
     expect(typeProjection.isTypeValueType, isTrue);
+  });
+
+  test('Property getter returns appropriate results for interface.', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Media.Playback.MediaPlayer')!;
+
+    final method = winTypeDef.findMethod('get_Source')!;
+    expect(method.returnType.typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_CLASS));
+    expect(method.returnType.typeIdentifier.name,
+        endsWith('IMediaPlaybackSource'));
+  });
+
+  test('Property getter projects appropriate results for interface.', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Media.Playback.MediaPlayer')!;
+
+    final method = winTypeDef.findMethod('get_Source')!;
+    final typeProjection = TypeProjector(method.returnType.typeIdentifier);
+    expect(typeProjection.dartType, equals('Pointer'));
+    expect(typeProjection.nativeType, equals('Pointer'));
   });
 
   test('String parameters are accurately represented', () {
