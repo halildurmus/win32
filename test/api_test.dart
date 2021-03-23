@@ -1573,7 +1573,7 @@ void main() {
     test('Can instantiate ActivateKeyboardLayout', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final ActivateKeyboardLayout = user32.lookupFunction<
-          IntPtr Function(Uint32 hkl, Uint32 Flags),
+          IntPtr Function(IntPtr hkl, Uint32 Flags),
           int Function(int hkl, int Flags)>('ActivateKeyboardLayout');
       expect(ActivateKeyboardLayout, isA<Function>());
     });
@@ -2305,8 +2305,9 @@ void main() {
     test('Can instantiate GetScrollInfo', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetScrollInfo = user32.lookupFunction<
-          Int32 Function(IntPtr hwnd, Uint32 nBar, Uint32 lpsi),
-          int Function(int hwnd, int nBar, int lpsi)>('GetScrollInfo');
+          Int32 Function(IntPtr hwnd, Uint32 nBar, Pointer<SCROLLINFO> lpsi),
+          int Function(
+              int hwnd, int nBar, Pointer<SCROLLINFO> lpsi)>('GetScrollInfo');
       expect(GetScrollInfo, isA<Function>());
     });
     test('Can instantiate GetShellWindow', () {
@@ -2620,8 +2621,8 @@ void main() {
     test('Can instantiate LoadIcon', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final LoadIcon = user32.lookupFunction<
-          IntPtr Function(IntPtr hInstance, Uint32 lpIconName),
-          int Function(int hInstance, int lpIconName)>('LoadIconW');
+          IntPtr Function(IntPtr hInstance, Pointer<Uint32> lpIconName),
+          int Function(int hInstance, Pointer<Uint32> lpIconName)>('LoadIconW');
       expect(LoadIcon, isA<Function>());
     });
     test('Can instantiate LoadImage', () {
@@ -3050,9 +3051,10 @@ void main() {
     test('Can instantiate SetScrollInfo', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final SetScrollInfo = user32.lookupFunction<
-          Int32 Function(IntPtr hwnd, Uint32 nBar, Uint32 lpsi, Int32 redraw),
-          int Function(
-              int hwnd, int nBar, int lpsi, int redraw)>('SetScrollInfo');
+          Int32 Function(
+              IntPtr hwnd, Uint32 nBar, Pointer<SCROLLINFO> lpsi, Int32 redraw),
+          int Function(int hwnd, int nBar, Pointer<SCROLLINFO> lpsi,
+              int redraw)>('SetScrollInfo');
       expect(SetScrollInfo, isA<Function>());
     });
     test('Can instantiate SetSysColors', () {
@@ -3691,9 +3693,10 @@ void main() {
     test('Can instantiate PolyDraw', () {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final PolyDraw = gdi32.lookupFunction<
-          Int32 Function(IntPtr hdc, Pointer<POINT> apt, Uint32 aj, Int32 cpt),
-          int Function(
-              int hdc, Pointer<POINT> apt, int aj, int cpt)>('PolyDraw');
+          Int32 Function(
+              IntPtr hdc, Pointer<POINT> apt, Pointer<Uint8> aj, Int32 cpt),
+          int Function(int hdc, Pointer<POINT> apt, Pointer<Uint8> aj,
+              int cpt)>('PolyDraw');
       expect(PolyDraw, isA<Function>());
     });
     test('Can instantiate Polygon', () {
@@ -4258,7 +4261,7 @@ void main() {
       final ole32 = DynamicLibrary.open('ole32.dll');
       final CoInitializeSecurity = ole32.lookupFunction<
           Int32 Function(
-              Pointer pSecDesc,
+              Pointer<SECURITY_DESCRIPTOR> pSecDesc,
               Int32 cAuthSvc,
               Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
               Pointer pReserved1,
@@ -4268,7 +4271,7 @@ void main() {
               Uint32 dwCapabilities,
               Pointer pReserved3),
           int Function(
-              Pointer pSecDesc,
+              Pointer<SECURITY_DESCRIPTOR> pSecDesc,
               int cAuthSvc,
               Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
               Pointer pReserved1,

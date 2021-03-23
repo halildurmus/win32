@@ -578,6 +578,22 @@ int DialogBoxIndirectParam(
       hInstance, hDialogTemplate, hWndParent, lpDialogFunc, dwInitParam);
 }
 
+/// Disables the window ghosting feature for the calling GUI process.
+/// Window ghosting is a Windows Manager feature that lets the user
+/// minimize, move, or close the main window of an application that is not
+/// responding.
+///
+/// ```c
+/// void DisableProcessWindowsGhosting();
+/// ```
+/// {@category user32}
+void DisableProcessWindowsGhosting() {
+  final _DisableProcessWindowsGhosting =
+      _user32.lookupFunction<Void Function(), void Function()>(
+          'DisableProcessWindowsGhosting');
+  return _DisableProcessWindowsGhosting();
+}
+
 /// Dispatches a message to a window procedure. It is typically used to
 /// dispatch a message retrieved by the GetMessage function.
 ///
@@ -1695,7 +1711,7 @@ int GetPriorityClipboardFormat(
 /// {@category user32}
 int GetScrollInfo(int hwnd, int nBar, Pointer<SCROLLINFO> lpsi) {
   final _GetScrollInfo = _user32.lookupFunction<
-      Int32 Function(IntPtr hwnd, Int32 nBar, Pointer<SCROLLINFO> lpsi),
+      Int32 Function(IntPtr hwnd, Uint32 nBar, Pointer<SCROLLINFO> lpsi),
       int Function(
           int hwnd, int nBar, Pointer<SCROLLINFO> lpsi)>('GetScrollInfo');
   return _GetScrollInfo(hwnd, nBar, lpsi);
@@ -1741,7 +1757,7 @@ int GetSubMenu(int hMenu, int nPos) {
 /// ```
 /// {@category user32}
 int GetSysColor(int nIndex) {
-  final _GetSysColor = _user32.lookupFunction<Uint32 Function(Int32 nIndex),
+  final _GetSysColor = _user32.lookupFunction<Uint32 Function(Uint32 nIndex),
       int Function(int nIndex)>('GetSysColor');
   return _GetSysColor(nIndex);
 }
@@ -1807,7 +1823,8 @@ int GetSystemMenu(int hWnd, int bRevert) {
 /// ```
 /// {@category user32}
 int GetSystemMetrics(int nIndex) {
-  final _GetSystemMetrics = _user32.lookupFunction<Int32 Function(Int32 nIndex),
+  final _GetSystemMetrics = _user32.lookupFunction<
+      Int32 Function(Uint32 nIndex),
       int Function(int nIndex)>('GetSystemMetrics');
   return _GetSystemMetrics(nIndex);
 }
@@ -3508,7 +3525,7 @@ int SetRectEmpty(Pointer<RECT> lprc) {
 int SetScrollInfo(int hwnd, int nBar, Pointer<SCROLLINFO> lpsi, int redraw) {
   final _SetScrollInfo = _user32.lookupFunction<
       Int32 Function(
-          IntPtr hwnd, Int32 nBar, Pointer<SCROLLINFO> lpsi, Int32 redraw),
+          IntPtr hwnd, Uint32 nBar, Pointer<SCROLLINFO> lpsi, Int32 redraw),
       int Function(int hwnd, int nBar, Pointer<SCROLLINFO> lpsi,
           int redraw)>('SetScrollInfo');
   return _SetScrollInfo(hwnd, nBar, lpsi, redraw);
@@ -3664,7 +3681,7 @@ int ShowOwnedPopups(int hWnd, int fShow) {
 /// {@category user32}
 int ShowWindow(int hWnd, int nCmdShow) {
   final _ShowWindow = _user32.lookupFunction<
-      Int32 Function(IntPtr hWnd, Int32 nCmdShow),
+      Int32 Function(IntPtr hWnd, Uint32 nCmdShow),
       int Function(int hWnd, int nCmdShow)>('ShowWindow');
   return _ShowWindow(hWnd, nCmdShow);
 }

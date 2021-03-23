@@ -341,6 +341,34 @@ const ERROR_TOO_MANY_SEM_REQUESTS = 103;
 const ERROR_INVALID_AT_INTERRUPT_TIME = 104;
 
 // -----------------------------------------------------------------------------
+// Windows Runtime errors
+// -----------------------------------------------------------------------------
+
+/// Typename or Namespace was not found in metadata file.
+const RO_E_METADATA_NAME_NOT_FOUND = 0x8000000F;
+
+/// Name is an existing namespace rather than a typename.
+const RO_E_METADATA_NAME_IS_NAMESPACE = 0x80000010;
+
+/// Typename has an invalid format.
+const RO_E_METADATA_INVALID_TYPE_FORMAT = 0x80000011;
+
+/// Metadata file is invalid or corrupted.
+const RO_E_INVALID_METADATA_FILE = 0x80000012;
+
+/// The object has been closed.
+const RO_E_CLOSED = 0x80000013;
+
+/// Only one thread may access the object during a write operation.
+const RO_E_EXCLUSIVE_WRITE = 0x80000014;
+
+/// Operation is prohibited during change notification.
+const RO_E_CHANGE_NOTIFICATION_IN_PROGRESS = 0x80000015;
+
+/// The text associated with this error code could not be found.
+const RO_E_ERROR_STRING_NOT_FOUND = 0x80000016;
+
+// -----------------------------------------------------------------------------
 // Process and file access types
 // -----------------------------------------------------------------------------
 
