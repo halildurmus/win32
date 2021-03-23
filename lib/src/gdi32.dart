@@ -839,10 +839,12 @@ int PolyBezierTo(int hdc, Pointer<POINT> apt, int cpt) {
 /// );
 /// ```
 /// {@category gdi32}
-int PolyDraw(int hdc, Pointer<POINT> apt, int aj, int cpt) {
+int PolyDraw(int hdc, Pointer<POINT> apt, Pointer<Uint8> aj, int cpt) {
   final _PolyDraw = _gdi32.lookupFunction<
-      Int32 Function(IntPtr hdc, Pointer<POINT> apt, Uint32 aj, Int32 cpt),
-      int Function(int hdc, Pointer<POINT> apt, int aj, int cpt)>('PolyDraw');
+      Int32 Function(
+          IntPtr hdc, Pointer<POINT> apt, Pointer<Uint8> aj, Int32 cpt),
+      int Function(
+          int hdc, Pointer<POINT> apt, Pointer<Uint8> aj, int cpt)>('PolyDraw');
   return _PolyDraw(hdc, apt, aj, cpt);
 }
 
