@@ -443,6 +443,7 @@ const win32TypeMap = <String, String>{
   'PCACTCTXW': 'Pointer<ACTCTX>',
   'PLASTINPUTINFO': 'Pointer<LASTINPUTINFO>',
   'PVALENTW': 'Pointer<VALENT>',
+  'PSID': 'Pointer',
 
   // Pointers to enums
   'LPMC_COLOR_TEMPERATURE': 'Pointer<Int32>',
