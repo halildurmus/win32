@@ -2621,8 +2621,8 @@ void main() {
     test('Can instantiate LoadIcon', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final LoadIcon = user32.lookupFunction<
-          IntPtr Function(IntPtr hInstance, Pointer<Utf16> lpIconName),
-          int Function(int hInstance, Pointer<Utf16> lpIconName)>('LoadIconW');
+          IntPtr Function(IntPtr hInstance, Pointer<Uint32> lpIconName),
+          int Function(int hInstance, Pointer<Uint32> lpIconName)>('LoadIconW');
       expect(LoadIcon, isA<Function>());
     });
     test('Can instantiate LoadImage', () {
