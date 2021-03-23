@@ -20,7 +20,7 @@
         "comment": "The BITMAPINFO structure defines the dimensions and color information for a device-independent bitmap (DIB)."
     },
     "BITMAPINFOHEADER": {
-        "namespace": "Windows.Win32.DirectShow.BITMAPINFOHEADER",
+        "namespace": "Windows.Win32.Gdi.BITMAPINFOHEADER",
         "comment": "The BITMAPINFOHEADER structure contains information about the dimensions and color format of a device-independent bitmap (DIB)."
     },
     "BLUETOOTH_FIND_RADIO_PARAMS": {
