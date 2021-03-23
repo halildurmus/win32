@@ -1,3 +1,7 @@
+## 0.4.8
+
+- Update to latest win32metadata `.winmd` file.
+
 ## 0.4.7
 
 - Minor fixes
