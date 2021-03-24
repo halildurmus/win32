@@ -5,10 +5,6 @@ call dart %~dp0manual_gen\win32api.dart
 call dart %~dp0metadata\generate_win32.dart
 echo.
 
-echo Temporarily reset user32.dart (https://github.com/microsoft/win32metadata/issues/379)
-git restore %~dp0..\lib\src\user32.dart
-echo.
-
 echo Generating COM classes and tests from Windows metadata
 call dart %~dp0metadata\generate_com_apis.dart
 echo.

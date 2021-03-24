@@ -2643,7 +2643,7 @@ int MapWindowPoints(
 int MessageBox(
     int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption, int uType) {
   final _MessageBox = _user32.lookupFunction<
-      Int32 Function(IntPtr hWnd, Pointer<Utf16> lpText,
+      Uint32 Function(IntPtr hWnd, Pointer<Utf16> lpText,
           Pointer<Utf16> lpCaption, Uint32 uType),
       int Function(int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption,
           int uType)>('MessageBoxW');
