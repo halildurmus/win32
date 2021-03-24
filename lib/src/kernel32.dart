@@ -1928,6 +1928,18 @@ int GetUserDefaultLangID() {
   return _GetUserDefaultLangID();
 }
 
+/// Returns the locale identifier for the user default locale.
+///
+/// ```c
+/// LCID GetUserDefaultLCID();
+/// ```
+/// {@category kernel32}
+int GetUserDefaultLCID() {
+  final _GetUserDefaultLCID = _kernel32
+      .lookupFunction<Uint32 Function(), int Function()>('GetUserDefaultLCID');
+  return _GetUserDefaultLCID();
+}
+
 /// Retrieves the user default locale name.
 ///
 /// ```c

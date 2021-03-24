@@ -891,6 +891,13 @@ void main() {
               'GetUserDefaultLangID');
       expect(GetUserDefaultLangID, isA<Function>());
     });
+    test('Can instantiate GetUserDefaultLCID', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetUserDefaultLCID =
+          kernel32.lookupFunction<Uint32 Function(), int Function()>(
+              'GetUserDefaultLCID');
+      expect(GetUserDefaultLCID, isA<Function>());
+    });
     test('Can instantiate GetUserDefaultLocaleName', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetUserDefaultLocaleName = kernel32.lookupFunction<

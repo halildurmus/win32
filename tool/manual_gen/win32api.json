@@ -1526,6 +1526,11 @@
         "dllLibrary": "kernel32",
         "comment": "Returns the language identifier of the Region Format setting for the current user."
     },
+    "GetUserDefaultLCID": {
+        "prototype": "LCID GetUserDefaultLCID();",
+        "dllLibrary": "kernel32",
+        "comment": "Returns the locale identifier for the user default locale."
+    },
     "GetUserDefaultLocaleName": {
         "prototype": "int GetUserDefaultLocaleName(\n  LPWSTR lpLocaleName,\n  int    cchLocaleName\n);",
         "dllLibrary": "kernel32",
