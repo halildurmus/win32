@@ -474,6 +474,21 @@ class MINMAXINFO extends Struct {
   external POINT ptMaxTrackSize;
 }
 
+/// Contains module data.
+///
+/// {@category Struct}
+class MODLOAD_DATA extends Struct {
+  @Uint32()
+  external int ssize;
+  @Uint32()
+  external int ssig;
+  external Pointer data;
+  @Uint32()
+  external int size;
+  @Uint32()
+  external int flags;
+}
+
 /// The MONITORINFO structure contains information about a display monitor.
 ///
 /// {@category Struct}

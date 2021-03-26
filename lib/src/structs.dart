@@ -3601,21 +3601,6 @@ class NOTIFYICONDATA extends Struct {
   external int hBalloonIcon;
 }
 
-// typedef struct tagTPMPARAMS {
-//   UINT cbSize;
-//   RECT rcExclude;
-// } TPMPARAMS;
-
-/// Contains extended parameters for the TrackPopupMenuEx function.
-///
-/// {@category Struct}
-class TPMPARAMS extends Struct {
-  @Uint32()
-  external int cbSize;
-
-  external RECT rcExclude;
-}
-
 // typedef struct _SYMBOL_INFOW {
 //   ULONG   SizeOfStruct;
 //   ULONG   TypeIndex;

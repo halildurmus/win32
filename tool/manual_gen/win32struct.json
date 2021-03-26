@@ -103,6 +103,10 @@
         "namespace": "Windows.Win32.WindowsAndMessaging.MINMAXINFO",
         "comment": "Contains information about a window's maximized size and position and its minimum and maximum tracking size."
     },
+    "MODLOAD_DATA": {
+        "namespace": "Windows.Win32.Debug.MODLOAD_DATA",
+        "comment": "Contains module data."
+    },
     "MONITORINFO": {
         "namespace": "Windows.Win32.Gdi.MONITORINFO",
         "comment": "The MONITORINFO structure contains information about a display monitor."
