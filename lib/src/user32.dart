@@ -3574,6 +3574,24 @@ int SetTimer(int hWnd, int nIDEvent, int uElapse,
   return _SetTimer(hWnd, nIDEvent, uElapse, lpTimerFunc);
 }
 
+/// Changes an attribute of the specified window. The function also sets a
+/// value at the specified offset in the extra window memory.
+///
+/// ```c
+/// LONG_PTR SetWindowLongPtrW(
+///   HWND     hWnd,
+///   int      nIndex,
+///   LONG_PTR dwNewLong
+/// );
+/// ```
+/// {@category user32}
+int SetWindowLongPtr(int hWnd, int nIndex, int dwNewLong) {
+  final _SetWindowLongPtr = _user32.lookupFunction<
+      IntPtr Function(IntPtr hWnd, Uint32 nIndex, IntPtr dwNewLong),
+      int Function(int hWnd, int nIndex, int dwNewLong)>('SetWindowLongPtrW');
+  return _SetWindowLongPtr(hWnd, nIndex, dwNewLong);
+}
+
 /// Changes the size, position, and Z order of a child, pop-up, or
 /// top-level window. These windows are ordered according to their
 /// appearance on the screen. The topmost window receives the highest rank

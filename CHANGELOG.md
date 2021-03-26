@@ -1,3 +1,7 @@
+## 2.0.5
+
+- TBD
+
 ## 2.0.4
 
 - Add network events, thanks to a contribution from @sunbreak.

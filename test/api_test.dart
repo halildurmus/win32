@@ -3082,6 +3082,14 @@ void main() {
               Pointer<NativeFunction<TimerProc>> lpTimerFunc)>('SetTimer');
       expect(SetTimer, isA<Function>());
     });
+    test('Can instantiate SetWindowLongPtr', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final SetWindowLongPtr = user32.lookupFunction<
+          IntPtr Function(IntPtr hWnd, Uint32 nIndex, IntPtr dwNewLong),
+          int Function(
+              int hWnd, int nIndex, int dwNewLong)>('SetWindowLongPtrW');
+      expect(SetWindowLongPtr, isA<Function>());
+    });
     test('Can instantiate SetWindowPos', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final SetWindowPos = user32.lookupFunction<
@@ -5953,9 +5961,9 @@ void main() {
             DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
         final WindowsCreateString =
             api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
-                Int32 Function(Pointer<Uint16> sourceString, Uint32 length,
+                Int32 Function(Pointer<Utf16> sourceString, Uint32 length,
                     Pointer<IntPtr> string),
-                int Function(Pointer<Uint16> sourceString, int length,
+                int Function(Pointer<Utf16> sourceString, int length,
                     Pointer<IntPtr> string)>('WindowsCreateString');
         expect(WindowsCreateString, isA<Function>());
       });

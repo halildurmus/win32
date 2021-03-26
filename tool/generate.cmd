@@ -9,10 +9,6 @@ echo Generating COM classes and tests from Windows metadata
 call dart %~dp0metadata\generate_com_apis.dart
 echo.
 
-echo Temporarily reset IProvideClassInfo_test.dart (https://github.com/microsoft/win32metadata/issues/290)
-git restore %~dp0..\test\com\IProvideClassInfo_test.dart
-echo.
-
 echo Generating Windows Runtime classes from Windows metadata
 call dart %~dp0metadata\generate_winrt_apis.dart %~dp0..\lib\src\com
 echo.
