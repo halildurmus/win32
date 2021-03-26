@@ -13,8 +13,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
-import 'com/combase.dart';
+import 'combase.dart';
 import 'structs.dart';
+import 'structs.g.dart';
 
 final _dxva2 = DynamicLibrary.open('dxva2.dll');
 
@@ -127,12 +128,12 @@ int GetMonitorCapabilities(int hMonitor, Pointer<Uint32> pdwMonitorCapabilities,
 /// ```
 /// {@category dxva2}
 int GetMonitorColorTemperature(
-    int hMonitor, Pointer<Int32> pctCurrentColorTemperature) {
+    int hMonitor, Pointer<Uint32> pctCurrentColorTemperature) {
   final _GetMonitorColorTemperature = _dxva2.lookupFunction<
           Int32 Function(
-              IntPtr hMonitor, Pointer<Int32> pctCurrentColorTemperature),
+              IntPtr hMonitor, Pointer<Uint32> pctCurrentColorTemperature),
           int Function(
-              int hMonitor, Pointer<Int32> pctCurrentColorTemperature)>(
+              int hMonitor, Pointer<Uint32> pctCurrentColorTemperature)>(
       'GetMonitorColorTemperature');
   return _GetMonitorColorTemperature(hMonitor, pctCurrentColorTemperature);
 }
@@ -187,7 +188,7 @@ int GetMonitorDisplayAreaPosition(
   final _GetMonitorDisplayAreaPosition = _dxva2.lookupFunction<
       Int32 Function(
           IntPtr hMonitor,
-          Int32 ptPositionType,
+          Uint32 ptPositionType,
           Pointer<Uint32> pdwMinimumPosition,
           Pointer<Uint32> pdwCurrentPosition,
           Pointer<Uint32> pdwMaximumPosition),
@@ -222,7 +223,7 @@ int GetMonitorDisplayAreaSize(
   final _GetMonitorDisplayAreaSize = _dxva2.lookupFunction<
           Int32 Function(
               IntPtr hMonitor,
-              Int32 stSizeType,
+              Uint32 stSizeType,
               Pointer<Uint32> pdwMinimumWidthOrHeight,
               Pointer<Uint32> pdwCurrentWidthOrHeight,
               Pointer<Uint32> pdwMaximumWidthOrHeight),
@@ -262,7 +263,7 @@ int GetMonitorRedGreenOrBlueDrive(
   final _GetMonitorRedGreenOrBlueDrive = _dxva2.lookupFunction<
       Int32 Function(
           IntPtr hMonitor,
-          Int32 dtDriveType,
+          Uint32 dtDriveType,
           Pointer<Uint32> pdwMinimumDrive,
           Pointer<Uint32> pdwCurrentDrive,
           Pointer<Uint32> pdwMaximumDrive),
@@ -297,7 +298,7 @@ int GetMonitorRedGreenOrBlueGain(
   final _GetMonitorRedGreenOrBlueGain = _dxva2.lookupFunction<
       Int32 Function(
           IntPtr hMonitor,
-          Int32 gtGainType,
+          Uint32 gtGainType,
           Pointer<Uint32> pdwMinimumGain,
           Pointer<Uint32> pdwCurrentGain,
           Pointer<Uint32> pdwMaximumGain),
@@ -321,13 +322,13 @@ int GetMonitorRedGreenOrBlueGain(
 /// ```
 /// {@category dxva2}
 int GetMonitorTechnologyType(
-    int hMonitor, Pointer<Int32> pdtyDisplayTechnologyType) {
+    int hMonitor, Pointer<Uint32> pdtyDisplayTechnologyType) {
   final _GetMonitorTechnologyType = _dxva2.lookupFunction<
-      Int32 Function(IntPtr hMonitor, Pointer<Int32> pdtyDisplayTechnologyType),
-      int Function(
-          int hMonitor,
-          Pointer<Int32>
-              pdtyDisplayTechnologyType)>('GetMonitorTechnologyType');
+          Int32 Function(
+              IntPtr hMonitor, Pointer<Uint32> pdtyDisplayTechnologyType),
+          int Function(
+              int hMonitor, Pointer<Uint32> pdtyDisplayTechnologyType)>(
+      'GetMonitorTechnologyType');
   return _GetMonitorTechnologyType(hMonitor, pdtyDisplayTechnologyType);
 }
 
@@ -424,7 +425,7 @@ int SetMonitorBrightness(int hMonitor, int dwNewBrightness) {
 /// {@category dxva2}
 int SetMonitorColorTemperature(int hMonitor, int ctCurrentColorTemperature) {
   final _SetMonitorColorTemperature = _dxva2.lookupFunction<
-      Int32 Function(IntPtr hMonitor, Int32 ctCurrentColorTemperature),
+      Int32 Function(IntPtr hMonitor, Uint32 ctCurrentColorTemperature),
       int Function(int hMonitor,
           int ctCurrentColorTemperature)>('SetMonitorColorTemperature');
   return _SetMonitorColorTemperature(hMonitor, ctCurrentColorTemperature);
@@ -465,7 +466,7 @@ int SetMonitorDisplayAreaPosition(
     int hMonitor, int ptPositionType, int dwNewPosition) {
   final _SetMonitorDisplayAreaPosition = _dxva2.lookupFunction<
       Int32 Function(
-          IntPtr hMonitor, Int32 ptPositionType, Uint32 dwNewPosition),
+          IntPtr hMonitor, Uint32 ptPositionType, Uint32 dwNewPosition),
       int Function(int hMonitor, int ptPositionType,
           int dwNewPosition)>('SetMonitorDisplayAreaPosition');
   return _SetMonitorDisplayAreaPosition(
@@ -485,7 +486,7 @@ int SetMonitorDisplayAreaPosition(
 int SetMonitorDisplayAreaSize(
     int hMonitor, int stSizeType, int dwNewDisplayAreaWidthOrHeight) {
   final _SetMonitorDisplayAreaSize = _dxva2.lookupFunction<
-      Int32 Function(IntPtr hMonitor, Int32 stSizeType,
+      Int32 Function(IntPtr hMonitor, Uint32 stSizeType,
           Uint32 dwNewDisplayAreaWidthOrHeight),
       int Function(int hMonitor, int stSizeType,
           int dwNewDisplayAreaWidthOrHeight)>('SetMonitorDisplayAreaSize');
@@ -506,7 +507,7 @@ int SetMonitorDisplayAreaSize(
 int SetMonitorRedGreenOrBlueDrive(
     int hMonitor, int dtDriveType, int dwNewDrive) {
   final _SetMonitorRedGreenOrBlueDrive = _dxva2.lookupFunction<
-      Int32 Function(IntPtr hMonitor, Int32 dtDriveType, Uint32 dwNewDrive),
+      Int32 Function(IntPtr hMonitor, Uint32 dtDriveType, Uint32 dwNewDrive),
       int Function(int hMonitor, int dtDriveType,
           int dwNewDrive)>('SetMonitorRedGreenOrBlueDrive');
   return _SetMonitorRedGreenOrBlueDrive(hMonitor, dtDriveType, dwNewDrive);
@@ -524,7 +525,7 @@ int SetMonitorRedGreenOrBlueDrive(
 /// {@category dxva2}
 int SetMonitorRedGreenOrBlueGain(int hMonitor, int gtGainType, int dwNewGain) {
   final _SetMonitorRedGreenOrBlueGain = _dxva2.lookupFunction<
-      Int32 Function(IntPtr hMonitor, Int32 gtGainType, Uint32 dwNewGain),
+      Int32 Function(IntPtr hMonitor, Uint32 gtGainType, Uint32 dwNewGain),
       int Function(int hMonitor, int gtGainType,
           int dwNewGain)>('SetMonitorRedGreenOrBlueGain');
   return _SetMonitorRedGreenOrBlueGain(hMonitor, gtGainType, dwNewGain);

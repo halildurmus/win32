@@ -18,7 +18,7 @@
 #include <stdio.h>
 
 void main()
-{ 
+{
     printf("On this platform:\n");
     printf("sizeof(int) is %zu\n", sizeof(int));
     printf("sizeof(long) is %zu\n", sizeof(long));

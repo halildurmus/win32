@@ -13,8 +13,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
-import 'com/combase.dart';
+import 'combase.dart';
 import 'structs.dart';
+import 'structs.g.dart';
 
 final _user32 = DynamicLibrary.open('user32.dll');
 
@@ -575,6 +576,22 @@ int DialogBoxIndirectParam(
           int dwInitParam)>('DialogBoxIndirectParamW');
   return _DialogBoxIndirectParam(
       hInstance, hDialogTemplate, hWndParent, lpDialogFunc, dwInitParam);
+}
+
+/// Disables the window ghosting feature for the calling GUI process.
+/// Window ghosting is a Windows Manager feature that lets the user
+/// minimize, move, or close the main window of an application that is not
+/// responding.
+///
+/// ```c
+/// void DisableProcessWindowsGhosting();
+/// ```
+/// {@category user32}
+void DisableProcessWindowsGhosting() {
+  final _DisableProcessWindowsGhosting =
+      _user32.lookupFunction<Void Function(), void Function()>(
+          'DisableProcessWindowsGhosting');
+  return _DisableProcessWindowsGhosting();
 }
 
 /// Dispatches a message to a window procedure. It is typically used to
@@ -1694,7 +1711,7 @@ int GetPriorityClipboardFormat(
 /// {@category user32}
 int GetScrollInfo(int hwnd, int nBar, Pointer<SCROLLINFO> lpsi) {
   final _GetScrollInfo = _user32.lookupFunction<
-      Int32 Function(IntPtr hwnd, Int32 nBar, Pointer<SCROLLINFO> lpsi),
+      Int32 Function(IntPtr hwnd, Uint32 nBar, Pointer<SCROLLINFO> lpsi),
       int Function(
           int hwnd, int nBar, Pointer<SCROLLINFO> lpsi)>('GetScrollInfo');
   return _GetScrollInfo(hwnd, nBar, lpsi);
@@ -1740,7 +1757,7 @@ int GetSubMenu(int hMenu, int nPos) {
 /// ```
 /// {@category user32}
 int GetSysColor(int nIndex) {
-  final _GetSysColor = _user32.lookupFunction<Uint32 Function(Int32 nIndex),
+  final _GetSysColor = _user32.lookupFunction<Uint32 Function(Uint32 nIndex),
       int Function(int nIndex)>('GetSysColor');
   return _GetSysColor(nIndex);
 }
@@ -1806,7 +1823,8 @@ int GetSystemMenu(int hWnd, int bRevert) {
 /// ```
 /// {@category user32}
 int GetSystemMetrics(int nIndex) {
-  final _GetSystemMetrics = _user32.lookupFunction<Int32 Function(Int32 nIndex),
+  final _GetSystemMetrics = _user32.lookupFunction<
+      Int32 Function(Uint32 nIndex),
       int Function(int nIndex)>('GetSystemMetrics');
   return _GetSystemMetrics(nIndex);
 }
@@ -2625,7 +2643,7 @@ int MapWindowPoints(
 int MessageBox(
     int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption, int uType) {
   final _MessageBox = _user32.lookupFunction<
-      Int32 Function(IntPtr hWnd, Pointer<Utf16> lpText,
+      Uint32 Function(IntPtr hWnd, Pointer<Utf16> lpText,
           Pointer<Utf16> lpCaption, Uint32 uType),
       int Function(int hWnd, Pointer<Utf16> lpText, Pointer<Utf16> lpCaption,
           int uType)>('MessageBoxW');
@@ -3507,7 +3525,7 @@ int SetRectEmpty(Pointer<RECT> lprc) {
 int SetScrollInfo(int hwnd, int nBar, Pointer<SCROLLINFO> lpsi, int redraw) {
   final _SetScrollInfo = _user32.lookupFunction<
       Int32 Function(
-          IntPtr hwnd, Int32 nBar, Pointer<SCROLLINFO> lpsi, Int32 redraw),
+          IntPtr hwnd, Uint32 nBar, Pointer<SCROLLINFO> lpsi, Int32 redraw),
       int Function(int hwnd, int nBar, Pointer<SCROLLINFO> lpsi,
           int redraw)>('SetScrollInfo');
   return _SetScrollInfo(hwnd, nBar, lpsi, redraw);
@@ -3554,6 +3572,24 @@ int SetTimer(int hWnd, int nIDEvent, int uElapse,
       int Function(int hWnd, int nIDEvent, int uElapse,
           Pointer<NativeFunction<TimerProc>> lpTimerFunc)>('SetTimer');
   return _SetTimer(hWnd, nIDEvent, uElapse, lpTimerFunc);
+}
+
+/// Changes an attribute of the specified window. The function also sets a
+/// value at the specified offset in the extra window memory.
+///
+/// ```c
+/// LONG_PTR SetWindowLongPtrW(
+///   HWND     hWnd,
+///   int      nIndex,
+///   LONG_PTR dwNewLong
+/// );
+/// ```
+/// {@category user32}
+int SetWindowLongPtr(int hWnd, int nIndex, int dwNewLong) {
+  final _SetWindowLongPtr = _user32.lookupFunction<
+      IntPtr Function(IntPtr hWnd, Uint32 nIndex, IntPtr dwNewLong),
+      int Function(int hWnd, int nIndex, int dwNewLong)>('SetWindowLongPtrW');
+  return _SetWindowLongPtr(hWnd, nIndex, dwNewLong);
 }
 
 /// Changes the size, position, and Z order of a child, pop-up, or
@@ -3663,7 +3699,7 @@ int ShowOwnedPopups(int hWnd, int fShow) {
 /// {@category user32}
 int ShowWindow(int hWnd, int nCmdShow) {
   final _ShowWindow = _user32.lookupFunction<
-      Int32 Function(IntPtr hWnd, Int32 nCmdShow),
+      Int32 Function(IntPtr hWnd, Uint32 nCmdShow),
       int Function(int hWnd, int nCmdShow)>('ShowWindow');
   return _ShowWindow(hWnd, nCmdShow);
 }

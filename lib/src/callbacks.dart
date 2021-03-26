@@ -9,6 +9,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'structs.dart';
+import 'structs.g.dart';
 
 /// Application-defined callback function used with the CreateDialog and
 /// DialogBox families of functions. It processes messages sent to a modal or

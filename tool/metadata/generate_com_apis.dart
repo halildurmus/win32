@@ -5,79 +5,84 @@ import 'dart:io';
 import 'package:args/args.dart';
 import 'package:winmd/winmd.dart';
 
-late final Scope scope;
-
-class COMType {
-  final String typeName;
-  final int vTableStart;
-  final bool generateClass;
-
-  const COMType(this.typeName,
-      {this.vTableStart = 0, this.generateClass = false});
-}
-
-const interfacesToGenerate = <COMType>[
-  COMType('Windows.Win32.Automation.IDispatch', vTableStart: 3),
-  COMType('Windows.Win32.Automation.IEnumVARIANT', vTableStart: 3),
-  COMType('Windows.Win32.Automation.IErrorInfo', vTableStart: 3),
-  COMType('Windows.Win32.Automation.ISupportErrorInfo', vTableStart: 3),
-  COMType('Windows.Win32.Com.IBindCtx', vTableStart: 3),
-  COMType('Windows.Win32.Com.IClassFactory', vTableStart: 3),
-  COMType('Windows.Win32.Com.IEnumMoniker', vTableStart: 3),
-  COMType('Windows.Win32.Com.IEnumString', vTableStart: 3),
-  COMType('Windows.Win32.Com.IMoniker', vTableStart: 8),
-  COMType('Windows.Win32.Com.IPersist', vTableStart: 3),
-  COMType('Windows.Win32.Com.IPersistStream', vTableStart: 4),
-  COMType('Windows.Win32.Com.IProvideClassInfo', vTableStart: 3),
-  COMType('Windows.Win32.Com.IRunningObjectTable', vTableStart: 3),
-  COMType('Windows.Win32.Com.IUnknown'),
-  COMType('Windows.Win32.NetworkListManager.IEnumNetworkConnections',
-      vTableStart: 7),
-  COMType('Windows.Win32.NetworkListManager.IEnumNetworks', vTableStart: 7),
-  COMType('Windows.Win32.NetworkListManager.INetwork', vTableStart: 7),
-  COMType('Windows.Win32.NetworkListManager.INetworkConnection',
-      vTableStart: 7),
-  COMType('Windows.Win32.NetworkListManager.INetworkListManager',
-      vTableStart: 7, generateClass: true),
-  COMType('Windows.Win32.Shell.IApplicationActivationManager',
-      vTableStart: 3, generateClass: true),
-  COMType('Windows.Win32.Shell.IDesktopWallpaper',
-      vTableStart: 3, generateClass: true),
-  COMType('Windows.Win32.Shell.IEnumIDList', vTableStart: 3),
-  COMType('Windows.Win32.Shell.IFileDialog', vTableStart: 4),
-  COMType('Windows.Win32.Shell.IFileDialog2', vTableStart: 27),
-  COMType('Windows.Win32.Shell.IFileDialogCustomize', vTableStart: 3),
-  COMType('Windows.Win32.Shell.IFileIsInUse', vTableStart: 3),
-  COMType('Windows.Win32.Shell.IFileOpenDialog',
-      vTableStart: 27, generateClass: true),
-  COMType('Windows.Win32.Shell.IFileSaveDialog',
-      vTableStart: 27, generateClass: true),
-  COMType('Windows.Win32.Shell.IKnownFolder', vTableStart: 3),
-  COMType('Windows.Win32.Shell.IKnownFolderManager',
-      vTableStart: 3, generateClass: true),
-  COMType('Windows.Win32.Shell.IModalWindow', vTableStart: 3),
-  COMType('Windows.Win32.Shell.IShellFolder', vTableStart: 3),
-  COMType('Windows.Win32.Shell.IShellItem', vTableStart: 3),
-  COMType('Windows.Win32.Shell.IShellItem2', vTableStart: 8),
-  COMType('Windows.Win32.Shell.IShellItemArray', vTableStart: 3),
-  COMType('Windows.Win32.Shell.IShellItemFilter', vTableStart: 3),
-  COMType('Windows.Win32.StructuredStorage.ISequentialStream', vTableStart: 3),
-  COMType('Windows.Win32.StructuredStorage.IStream', vTableStart: 5),
-  COMType('Windows.Win32.WinRT.IInspectable', vTableStart: 3),
-  COMType('Windows.Win32.Wmi.IEnumWbemClassObject', vTableStart: 3),
-  COMType('Windows.Win32.Wmi.IWbemClassObject', vTableStart: 3),
-  COMType('Windows.Win32.Wmi.IWbemContext', vTableStart: 3),
-  COMType('Windows.Win32.Wmi.IWbemLocator',
-      vTableStart: 3, generateClass: true),
-  COMType('Windows.Win32.Wmi.IWbemServices', vTableStart: 3),
+const interfacesToGenerate = <String>[
+  'Windows.Win32.Automation.IDispatch',
+  'Windows.Win32.Automation.IEnumVARIANT',
+  'Windows.Win32.Automation.IErrorInfo',
+  'Windows.Win32.Automation.ISupportErrorInfo',
+  'Windows.Win32.Com.IBindCtx',
+  'Windows.Win32.Com.IClassFactory',
+  'Windows.Win32.Com.IConnectionPoint',
+  'Windows.Win32.Com.IConnectionPointContainer',
+  'Windows.Win32.Com.IEnumMoniker',
+  'Windows.Win32.Com.IEnumString',
+  'Windows.Win32.Com.IMoniker',
+  'Windows.Win32.Com.IPersist',
+  'Windows.Win32.Com.IPersistStream',
+  'Windows.Win32.Com.IProvideClassInfo',
+  'Windows.Win32.Com.IRunningObjectTable',
+  'Windows.Win32.Com.IUnknown',
+  'Windows.Win32.Intl.IEnumSpellingError',
+  'Windows.Win32.Intl.ISpellChecker',
+  'Windows.Win32.Intl.ISpellCheckerChangedEventHandler',
+  'Windows.Win32.Intl.ISpellCheckerFactory',
+  'Windows.Win32.Intl.ISpellingError',
+  'Windows.Win32.NetworkListManager.IEnumNetworkConnections',
+  'Windows.Win32.NetworkListManager.IEnumNetworks',
+  'Windows.Win32.NetworkListManager.INetwork',
+  'Windows.Win32.NetworkListManager.INetworkConnection',
+  'Windows.Win32.NetworkListManager.INetworkListManager',
+  'Windows.Win32.NetworkListManager.INetworkListManagerEvents',
+  'Windows.Win32.Shell.IApplicationActivationManager',
+  'Windows.Win32.Shell.IDesktopWallpaper',
+  'Windows.Win32.Shell.IEnumIDList',
+  'Windows.Win32.Shell.IFileDialog',
+  'Windows.Win32.Shell.IFileDialog2',
+  'Windows.Win32.Shell.IFileDialogCustomize',
+  'Windows.Win32.Shell.IFileIsInUse',
+  'Windows.Win32.Shell.IFileOpenDialog',
+  'Windows.Win32.Shell.IFileSaveDialog',
+  'Windows.Win32.Shell.IKnownFolder',
+  'Windows.Win32.Shell.IKnownFolderManager',
+  'Windows.Win32.Shell.IModalWindow',
+  'Windows.Win32.Shell.IShellFolder',
+  'Windows.Win32.Shell.IShellItem',
+  'Windows.Win32.Shell.IShellItem2',
+  'Windows.Win32.Shell.IShellItemArray',
+  'Windows.Win32.Shell.IShellItemFilter',
+  'Windows.Win32.StructuredStorage.ISequentialStream',
+  'Windows.Win32.StructuredStorage.IStream',
+  'Windows.Win32.WinRT.IInspectable',
+  'Windows.Win32.Wmi.IEnumWbemClassObject',
+  'Windows.Win32.Wmi.IWbemClassObject',
+  'Windows.Win32.Wmi.IWbemContext',
+  'Windows.Win32.Wmi.IWbemLocator',
+  'Windows.Win32.Wmi.IWbemServices',
 ];
 
+int vTableStart(TypeDef? type) {
+  if (type == null) {
+    return 0;
+  }
+
+  if (type.isInterface && type.interfaces.isNotEmpty) {
+    var sum = 0;
+
+    for (final interface in type.interfaces) {
+      sum += interface.methods.length + vTableStart(interface);
+    }
+
+    return sum;
+  }
+
+  return 0;
+}
+
 void main(List<String> args) {
-  scope =
-      MetadataStore.getScopeForFile(File('tool/metadata/Windows.Win32.winmd'));
+  final scope = MetadataStore.getWin32Scope();
 
   final parser = ArgParser()
-    ..addOption('classDirectory', defaultsTo: 'lib/src/generated')
+    ..addOption('classDirectory', defaultsTo: 'lib/src/com')
     ..addOption('testDirectory', defaultsTo: 'test/com');
 
   final argResults = parser.parse(args);
@@ -85,17 +90,14 @@ void main(List<String> args) {
   final testDirectory = Directory(argResults['testDirectory'] as String);
 
   for (final type in interfacesToGenerate) {
-    final mdTypeDef = scope.findTypeDef(type.typeName)!;
+    final mdTypeDef = scope.findTypeDef(type)!;
 
-    var clsid = '';
-    if (type.generateClass) {
-      final typeNameAsList = type.typeName.split('.');
-      final fullyQualifiedClassName =
-          (typeNameAsList.sublist(0, typeNameAsList.length - 1)
-                ..add(typeNameAsList.last.substring(1)))
-              .join('.');
-      clsid = scope.findTypeDef(fullyQualifiedClassName)?.guid ?? '';
-    }
+    final typeNameAsList = type.split('.');
+    final fullyQualifiedClassName =
+        (typeNameAsList.sublist(0, typeNameAsList.length - 1)
+              ..add(typeNameAsList.last.substring(1)))
+            .join('.');
+    final clsid = scope.findTypeDef(fullyQualifiedClassName)?.guid ?? '';
 
     final parentInterface = mdTypeDef.interfaces.isNotEmpty
         ? mdTypeDef.interfaces.first.typeName.split('.').last
@@ -103,15 +105,15 @@ void main(List<String> args) {
 
     final projection = ClassProjector(mdTypeDef).projection
       ..inherits = parentInterface
-      ..vtableStart = type.vTableStart
+      ..vtableStart = vTableStart(mdTypeDef)
       ..sourceType = SourceType.com
-      ..generateClass = type.generateClass
+      ..generateClass = clsid.isNotEmpty
       ..clsid = clsid
-      ..className = type.typeName.split('.').last.substring(1);
+      ..className = type.split('.').last.substring(1);
 
     final dartClass = TypePrinter.printProjection(projection);
 
-    final classOutputFilename = type.typeName.split('.').last;
+    final classOutputFilename = type.split('.').last;
     final outputFile =
         File('${classDirectory.uri.toFilePath()}$classOutputFilename.dart');
 
@@ -120,7 +122,7 @@ void main(List<String> args) {
 
     final dartTests = TypePrinter.printTests(projection);
 
-    final testOutputFilename = type.typeName.split('.').last;
+    final testOutputFilename = type.split('.').last;
     final testFile = File(
         '${testDirectory.uri.toFilePath()}${testOutputFilename}_test.dart');
 

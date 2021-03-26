@@ -13,8 +13,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
-import 'com/combase.dart';
+import 'combase.dart';
 import 'structs.dart';
+import 'structs.g.dart';
 
 final _gdi32 = DynamicLibrary.open('gdi32.dll');
 
@@ -407,7 +408,7 @@ int CreateHalftonePalette(int hdc) {
 /// {@category gdi32}
 int CreateHatchBrush(int iHatch, int color) {
   final _CreateHatchBrush = _gdi32.lookupFunction<
-      IntPtr Function(Int32 iHatch, Uint32 color),
+      IntPtr Function(Uint32 iHatch, Uint32 color),
       int Function(int iHatch, int color)>('CreateHatchBrush');
   return _CreateHatchBrush(iHatch, color);
 }
@@ -426,7 +427,7 @@ int CreateHatchBrush(int iHatch, int color) {
 /// {@category gdi32}
 int CreatePen(int iStyle, int cWidth, int color) {
   final _CreatePen = _gdi32.lookupFunction<
-      IntPtr Function(Int32 iStyle, Int32 cWidth, Uint32 color),
+      IntPtr Function(Uint32 iStyle, Int32 cWidth, Uint32 color),
       int Function(int iStyle, int cWidth, int color)>('CreatePen');
   return _CreatePen(iStyle, cWidth, color);
 }
@@ -706,7 +707,7 @@ int GetObject(int h, int c, Pointer pv) {
 /// {@category gdi32}
 int GetStockObject(int i) {
   final _GetStockObject =
-      _gdi32.lookupFunction<IntPtr Function(Int32 i), int Function(int i)>(
+      _gdi32.lookupFunction<IntPtr Function(Uint32 i), int Function(int i)>(
           'GetStockObject');
   return _GetStockObject(i);
 }
@@ -1096,7 +1097,7 @@ int SetBkColor(int hdc, int color) {
 /// {@category gdi32}
 int SetBkMode(int hdc, int mode) {
   final _SetBkMode = _gdi32.lookupFunction<
-      Int32 Function(IntPtr hdc, Int32 mode),
+      Int32 Function(IntPtr hdc, Uint32 mode),
       int Function(int hdc, int mode)>('SetBkMode');
   return _SetBkMode(hdc, mode);
 }
@@ -1115,7 +1116,7 @@ int SetBkMode(int hdc, int mode) {
 /// {@category gdi32}
 int SetMapMode(int hdc, int iMode) {
   final _SetMapMode = _gdi32.lookupFunction<
-      Int32 Function(IntPtr hdc, Int32 iMode),
+      Int32 Function(IntPtr hdc, Uint32 iMode),
       int Function(int hdc, int iMode)>('SetMapMode');
   return _SetMapMode(hdc, iMode);
 }
@@ -1151,7 +1152,7 @@ int SetPixel(int hdc, int x, int y, int color) {
 /// {@category gdi32}
 int SetStretchBltMode(int hdc, int mode) {
   final _SetStretchBltMode = _gdi32.lookupFunction<
-      Int32 Function(IntPtr hdc, Int32 mode),
+      Int32 Function(IntPtr hdc, Uint32 mode),
       int Function(int hdc, int mode)>('SetStretchBltMode');
   return _SetStretchBltMode(hdc, mode);
 }

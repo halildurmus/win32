@@ -10,6 +10,7 @@ import 'package:winmd/winmd.dart';
 
 import '../manual_gen/function.dart';
 import '../manual_gen/win32api.dart';
+import 'generate_win32_structs.dart';
 import 'generate_win32_tests.dart';
 import 'winmd_caveats.dart';
 
@@ -126,20 +127,16 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
-import 'com/combase.dart';
+import 'combase.dart';
 import 'structs.dart';
+import 'structs.g.dart';
 
 final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ? '.cpl' : '.dll'}');\n
 ''');
 
     // Subset of functions that belong to the library we're projecting.
-    // SetWindowLongPtrW is missing from the metadata, per
-    // https://github.com/microsoft/win32metadata/issues/142 so we have to
-    // manually exclude it, otherwise we'll fail.
     final filteredFunctionList = Map<String, Win32Function>.of(win32.functions)
-      ..removeWhere((key, value) => value.dllLibrary != library)
-      ..removeWhere(
-          (key, value) => value.prototype.contains('SetWindowLongPtrW'));
+      ..removeWhere((key, value) => value.dllLibrary != library);
 
     for (final function in filteredFunctionList.keys) {
       try {
@@ -159,14 +156,15 @@ ${Win32Prototype(function, method, libraryDartName).dartFfiMapping}
 }
 
 void main() {
-  final scope =
-      MetadataStore.getScopeForFile(File('tool/metadata/Windows.Win32.winmd'));
+  final scope = MetadataStore.getWin32Scope();
   final apis = scope.typeDefs.where((type) => type.typeName.endsWith('Apis'));
 
   apis.forEach((api) => methods.addAll(api.methods));
   print('${methods.length} APIs collected');
 
-  final win32 = Win32API('tool/manual_gen/win32api.json');
+  final win32 = Win32API(
+      apiFile: 'tool/manual_gen/win32api.json',
+      structFile: 'tool/manual_gen/win32struct.json');
   final genCount = win32.functions.values
       .where((func) => winmdGenerated.contains(func.dllLibrary))
       .length;
@@ -176,6 +174,9 @@ void main() {
 
   final apiTestsGenerated = generateTests(win32);
   print('$apiTestsGenerated API tests generated.');
+
+  final structsGenerated = generateStructs(win32);
+  print('$structsGenerated structs generated from Windows metadata.');
 
   final structTestsGenerated = generateStructSizeTests();
   print('$structTestsGenerated struct tests generated.');

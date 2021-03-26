@@ -638,6 +638,20 @@ void main() {
       expect(sizeOf<MMTIME>(), equals(12));
     }
   });
+  test('Struct SAFEARRAY is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<SAFEARRAY>(), equals(32));
+    } else {
+      expect(sizeOf<SAFEARRAY>(), equals(24));
+    }
+  });
+  test('Struct STATSTG is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<STATSTG>(), equals(80));
+    } else {
+      expect(sizeOf<STATSTG>(), equals(72));
+    }
+  });
   test('Struct NOTIFYICONDATA is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<NOTIFYICONDATA>(), equals(976));

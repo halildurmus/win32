@@ -330,6 +330,13 @@
         "dllLibrary": "ole32",
         "comment": "Registers security and sets the default security values for the process."
     },
+    "CompareObjectHandles": {
+        "prototype": "BOOL CompareObjectHandles(\n  HANDLE hFirstObjectHandle,\n  HANDLE hSecondObjectHandle\n);",
+        "dllLibrary": "kernelbase",
+        "comment": "Compares two object handles to determine if they refer to the same underlying kernel object.",
+        "category": "kernel32",
+        "minimumWindowsVersion": "WIN10_TH1"
+    },
     "ConnectNamedPipe": {
         "prototype": "BOOL ConnectNamedPipe(\n  HANDLE       hNamedPipe,\n  LPOVERLAPPED lpOverlapped);",
         "dllLibrary": "kernel32",
@@ -586,6 +593,11 @@
         "dllLibrary": "user32",
         "comment": "Creates a modal dialog box from a dialog box template in memory. Before displaying the dialog box, the function passes an application-defined value to the dialog box procedure as the lParam parameter of the WM_INITDIALOG message. An application can use this value to initialize dialog box controls."
     },
+    "DisableProcessWindowsGhosting": {
+        "prototype": "void DisableProcessWindowsGhosting();",
+        "dllLibrary": "user32",
+        "comment": "Disables the window ghosting feature for the calling GUI process. Window ghosting is a Windows Manager feature that lets the user minimize, move, or close the main window of an application that is not responding."
+    },
     "DisconnectNamedPipe": {
         "prototype": "BOOL DisconnectNamedPipe(\n  HANDLE hNamedPipe);",
         "dllLibrary": "kernel32",
@@ -595,6 +607,16 @@
         "prototype": "LRESULT DispatchMessageW(\n  const MSG *lpMsg\n);",
         "dllLibrary": "user32",
         "comment": "Dispatches a message to a window procedure. It is typically used to dispatch a message retrieved by the GetMessage function."
+    },
+    "DnsHostnameToComputerName": {
+        "prototype": "BOOL DnsHostnameToComputerNameW(\n  LPCWSTR Hostname,\n  LPWSTR  ComputerName,\n  LPDWORD nSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Converts a DNS-style host name to a NetBIOS-style computer name."
+    },
+    "DosDateTimeToFileTime": {
+        "prototype": "BOOL DosDateTimeToFileTime(\n  WORD       wFatDate,\n  WORD       wFatTime,\n  LPFILETIME lpFileTime\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Converts MS-DOS date and time values to a file time."
     },
     "DosDateTimeToVariantTime": {
         "prototype": "INT DosDateTimeToVariantTime(\n  USHORT wDosDate,\n  USHORT wDosTime,\n  DOUBLE *pvtime\n);",
@@ -635,6 +657,11 @@
         "prototype": "int DrawTextExW(\n  HDC              hdc,\n  LPWSTR           lpchText,\n  int              cchText,\n  LPRECT           lprc,\n  UINT             format,\n  LPDRAWTEXTPARAMS lpdtp\n);",
         "dllLibrary": "user32",
         "comment": "The DrawTextEx function draws formatted text in the specified rectangle."
+    },
+    "DuplicateHandle": {
+        "prototype": "BOOL DuplicateHandle(\n  HANDLE   hSourceProcessHandle,\n  HANDLE   hSourceHandle,\n  HANDLE   hTargetProcessHandle,\n  LPHANDLE lpTargetHandle,\n  DWORD    dwDesiredAccess,\n  BOOL     bInheritHandle,\n  DWORD    dwOptions\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Duplicates an object handle."
     },
     "Ellipse": {
         "prototype": "BOOL Ellipse(\n  HDC hdc,\n  int left,\n  int top,\n  int right,\n  int bottom\n);",
@@ -760,6 +787,11 @@
         "prototype": "BOOL FileEncryptionStatusW(\n  LPCWSTR lpFileName,\n  LPDWORD lpStatus\n);",
         "dllLibrary": "advapi32",
         "comment": "Retrieves the encryption status of the specified file."
+    },
+    "FileTimeToDosDateTime": {
+        "prototype": "BOOL FileTimeToDosDateTime(\n  const FILETIME *lpFileTime,\n  LPWORD         lpFatDate,\n  LPWORD         lpFatTime\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Converts a file time to MS-DOS date and time values."
     },
     "FillConsoleOutputAttribute": {
         "prototype": "BOOL WINAPI FillConsoleOutputAttribute(\n  _In_  HANDLE  hConsoleOutput,\n  _In_  WORD    wAttribute,\n  _In_  DWORD   nLength,\n  _In_  COORD   dwWriteCoord,\n  _Out_ LPDWORD lpNumberOfAttrsWritten\n);",
@@ -931,6 +963,11 @@
         "dllLibrary": "user32",
         "comment": "Retrieves the handle to the first window in the clipboard viewer chain."
     },
+    "GetComputerName": {
+        "prototype": "BOOL GetComputerNameW(\n  LPWSTR  lpBuffer,\n  LPDWORD nSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the NetBIOS name of the local computer. This name is established at system startup, when the system reads it from the registry."
+    },
     "GetComputerNameEx": {
         "prototype": "BOOL GetComputerNameExW(\n  COMPUTER_NAME_FORMAT NameType,\n  LPWSTR               lpBuffer,\n  LPDWORD              nSize\n);",
         "dllLibrary": "kernel32",
@@ -1088,6 +1125,11 @@
         "prototype": "HWND GetForegroundWindow();",
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the foreground window (the window with which the user is currently working). The system assigns a slightly higher priority to the thread that creates the foreground window than it does to other threads."
+    },
+    "GetHandleInformation": {
+        "prototype": "BOOL GetHandleInformation(\n  HANDLE  hObject,\n  LPDWORD lpdwFlags\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves certain properties of an object handle."
     },
     "GetInputState": {
         "prototype": "BOOL GetInputState();",
@@ -1484,6 +1526,11 @@
         "dllLibrary": "kernel32",
         "comment": "Returns the language identifier of the Region Format setting for the current user."
     },
+    "GetUserDefaultLCID": {
+        "prototype": "LCID GetUserDefaultLCID();",
+        "dllLibrary": "kernel32",
+        "comment": "Returns the locale identifier for the user default locale."
+    },
     "GetUserDefaultLocaleName": {
         "prototype": "int GetUserDefaultLocaleName(\n  LPWSTR lpLocaleName,\n  int    cchLocaleName\n);",
         "dllLibrary": "kernel32",
@@ -1492,7 +1539,7 @@
     "GetVersionEx": {
         "prototype": "BOOL GetVersionExW(\n  LPOSVERSIONINFOW lpVersionInformation\n);",
         "dllLibrary": "kernel32",
-        "comment": "With the release of Windows 8.1, the behavior of the GetVersionEx API has changed in the value it will return for the operating system version. The value returned by the GetVersionEx function now depends on how the application is manifested. Applications not manifested for Windows 8.1 or Windows 10 will return the Windows 8 OS version value (6.2). Once an application is manifested for a given operating system version, GetVersionEx will always return the version that the application is manifested for in future releases."
+        "comment": "Gets information about the operating system version."
     },
     "GetVolumePathName": {
         "prototype": "BOOL GetVolumePathNameW(\n  LPCWSTR lpszFileName,\n  LPWSTR  lpszVolumePathName,\n  DWORD   cchBufferLength);",
@@ -1658,6 +1705,11 @@
         "prototype": "BOOL IsIconic(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
         "comment": "Determines whether the specified window is minimized (iconic)."
+    },
+    "IsNativeVhdBoot": {
+        "prototype": "BOOL IsNativeVhdBoot(\n  PBOOL NativeVhdBoot\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Indicates if the OS was booted from a VHD container."
     },
     "IsRectEmpty": {
         "prototype": "BOOL IsRectEmpty(\n  const RECT *lprc\n);",
@@ -2496,6 +2548,16 @@
         "dllLibrary": "kernel32",
         "comment": "Sets the short name for the specified file. The file must be on an NTFS file system volume."
     },
+    "SetFirmwareEnvironmentVariable": {
+        "prototype": "BOOL SetFirmwareEnvironmentVariableW(\n  LPCWSTR lpName,\n  LPCWSTR lpGuid,\n  PVOID   pValue,\n  DWORD   nSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the value of the specified firmware environment variable."
+    },
+    "SetFirmwareEnvironmentVariableEx": {
+        "prototype": "BOOL SetFirmwareEnvironmentVariableExW(\n  LPCWSTR lpName,\n  LPCWSTR lpGuid,\n  PVOID   pValue,\n  DWORD   nSize,\n  DWORD   dwAttributes\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the value of the specified firmware environment variable and the attributes that indicate how this variable is stored and maintained."
+    },
     "SetFocus": {
         "prototype": "HWND SetFocus(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
@@ -2505,6 +2567,11 @@
         "prototype": "BOOL SetForegroundWindow(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
         "comment": "Brings the thread that created the specified window into the foreground and activates the window. Keyboard input is directed to the window, and various visual cues are changed for the user. The system assigns a slightly higher priority to the thread that created the foreground window than it does to other threads."
+    },
+    "SetHandleInformation": {
+        "prototype": "BOOL SetHandleInformation(\n  HANDLE hObject,\n  DWORD  dwMask,\n  DWORD  dwFlags\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets certain properties of an object handle."
     },
     "SetKeyboardState": {
         "prototype": "BOOL SetKeyboardState(\n  LPBYTE lpKeyState\n);",

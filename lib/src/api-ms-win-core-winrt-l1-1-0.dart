@@ -13,8 +13,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
-import 'com/combase.dart';
+import 'combase.dart';
 import 'structs.dart';
+import 'structs.g.dart';
 
 final _api_ms_win_core_winrt_l1_1_0 =
     DynamicLibrary.open('api-ms-win-core-winrt-l1-1-0.dll');
@@ -47,7 +48,7 @@ int RoActivateInstance(int activatableClassId, Pointer<Pointer> instance) {
 /// {@category winrt}
 int RoInitialize(int initType) {
   final _RoInitialize = _api_ms_win_core_winrt_l1_1_0.lookupFunction<
-      Int32 Function(Int32 initType),
+      Int32 Function(Uint32 initType),
       int Function(int initType)>('RoInitialize');
   return _RoInitialize(initType);
 }

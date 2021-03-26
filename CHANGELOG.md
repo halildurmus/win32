@@ -1,3 +1,17 @@
+## 2.0.5
+
+- TBD
+
+## 2.0.4
+
+- Add network events, thanks to a contribution from @sunbreak.
+- Update COM vtable generation, thanks to a contribution from @bonukai.
+- Update to use the latest WinMD package.
+
+## 2.0.3
+
+- Add spellchecking COM APIs, thanks to a contribution from @bonukai.
+
 ## 2.0.2
 
 - Adds named pipe APIs to support projects like TerminalStudio/pty.

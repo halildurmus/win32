@@ -27,13 +27,13 @@ void main() {
 
     test('Network is connected', () {
       final nlm = NetworkListManager.createInstance();
-      expect(nlm.IsConnected, equals(-1));
+      expect(nlm.IsConnected, equals(VARIANT_TRUE));
       free(nlm.ptr);
     });
 
     test('Network is connected to the internet', () {
       final nlm = NetworkListManager.createInstance();
-      expect(nlm.IsConnectedToInternet, equals(-1));
+      expect(nlm.IsConnectedToInternet, equals(VARIANT_TRUE));
       free(nlm.ptr);
     });
 
@@ -53,7 +53,8 @@ void main() {
       final network = INetwork(netPtr);
 
       // network should be connected, given the filter
-      expect(network.IsConnected, anyOf(equals(-1), equals(0)));
+      expect(network.IsConnected,
+          anyOf(equals(VARIANT_TRUE), equals(VARIANT_FALSE)));
 
       free(netPtr);
       free(enumPtr);

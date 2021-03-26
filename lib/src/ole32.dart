@@ -13,8 +13,9 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import 'callbacks.dart';
-import 'com/combase.dart';
+import 'combase.dart';
 import 'structs.dart';
+import 'structs.g.dart';
 
 final _ole32 = DynamicLibrary.open('ole32.dll');
 
@@ -198,7 +199,7 @@ int CoInitializeEx(Pointer pvReserved, int dwCoInit) {
 /// ```
 /// {@category ole32}
 int CoInitializeSecurity(
-    Pointer pSecDesc,
+    Pointer<SECURITY_DESCRIPTOR> pSecDesc,
     int cAuthSvc,
     Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
     Pointer pReserved1,
@@ -209,7 +210,7 @@ int CoInitializeSecurity(
     Pointer pReserved3) {
   final _CoInitializeSecurity = _ole32.lookupFunction<
       Int32 Function(
-          Pointer pSecDesc,
+          Pointer<SECURITY_DESCRIPTOR> pSecDesc,
           Int32 cAuthSvc,
           Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
           Pointer pReserved1,
@@ -219,7 +220,7 @@ int CoInitializeSecurity(
           Uint32 dwCapabilities,
           Pointer pReserved3),
       int Function(
-          Pointer pSecDesc,
+          Pointer<SECURITY_DESCRIPTOR> pSecDesc,
           int cAuthSvc,
           Pointer<SOLE_AUTHENTICATION_SERVICE> asAuthSvc,
           Pointer pReserved1,

@@ -99,10 +99,11 @@ void main() {
   UpdateWindow(hWnd);
 
   // Run the message loop.
-
   final msg = calloc<MSG>();
   while (GetMessage(msg, NULL, 0, 0) != 0) {
     TranslateMessage(msg);
     DispatchMessage(msg);
   }
+
+  free(className);
 }
