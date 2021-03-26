@@ -1,3 +1,7 @@
+## 0.4.10
+
+- Update to latest win32metadata `.winmd` file.
+
 ## 0.4.9
 
 - Update to latest win32metadata `.winmd` file.
