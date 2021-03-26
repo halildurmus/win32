@@ -290,6 +290,18 @@ void main() {
     expect(param.typeIdentifier.typeArgs, isEmpty);
   });
 
+  test('Callback functions are generated correctly 2', () {
+    final typedef = scope['Windows.Win32.Debug.Apis']!;
+    final api = typedef.findMethod('SymEnumSymbolsW')!;
+    final param = api.parameters[3]; // PSYM_ENUMERATESYMBOLS_CALLBACKW
+
+    expect(param.name, equals('EnumSymbolsCallback'));
+    expect(param.typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_CLASS));
+    expect(
+        param.typeIdentifier.name, endsWith('PSYM_ENUMERATESYMBOLS_CALLBACKW'));
+    expect(param.typeIdentifier.typeArgs, isEmpty);
+  });
   test('Naked structs are generated correctly', () {
     final typedef = scope['Windows.Win32.SystemServices.Apis']!;
     final api = typedef.findMethod('InitializeProcThreadAttributeList')!;

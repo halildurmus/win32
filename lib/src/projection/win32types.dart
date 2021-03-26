@@ -378,6 +378,8 @@ const win32TypeMap = <String, String>{
   'TIMERPROC': 'Pointer<NativeFunction<TimerProc>>',
   'PFN_AUTHENTICATION_CALLBACK_EX':
       'Pointer<NativeFunction<PfnAuthenticationCallbackEx>>',
+  'PSYM_ENUMERATESYMBOLS_CALLBACKW':
+      'Pointer<NativeFunction<SymEnumSymbolsProc>>',
 
   // Void pointers
   'LPVOID': 'Pointer', 'PVOID': 'Pointer', 'LPCVOID': 'Pointer',

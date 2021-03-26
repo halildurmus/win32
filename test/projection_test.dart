@@ -127,6 +127,19 @@ void main() {
           equals('Pointer<NativeFunction<EnumFontFamExProc>>'));
     });
 
+    test('Callbacks are represented correctly 2', () {
+      final typedef = scope['Windows.Win32.Debug.Apis']!;
+      final api = typedef.findMethod('SymEnumSymbolsW')!;
+      final type =
+          api.parameters[3].typeIdentifier; // PSYM_ENUMERATESYMBOLS_CALLBACKW
+      final typeProjection = TypeProjector(type);
+
+      expect(typeProjection.nativeType,
+          equals('Pointer<NativeFunction<SymEnumSymbolsProc>>'));
+      expect(typeProjection.dartType,
+          equals('Pointer<NativeFunction<SymEnumSymbolsProc>>'));
+    });
+
     test('Naked structs are represented correctly', () {
       final typedef = scope['Windows.Win32.SystemServices.Apis']!;
       final api = typedef.findMethod('InitializeProcThreadAttributeList')!;
