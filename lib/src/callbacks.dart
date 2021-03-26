@@ -57,7 +57,7 @@ typedef PfnAuthenticationCallbackEx = Int32 Function(Pointer pvParam,
 
 /// Application-defined callback function used with the SymEnumSymbols,
 /// SymEnumTypes, and SymEnumTypesByName functions.
-typedef SymEnumsSymbolProc = Int32 Function(
+typedef SymEnumSymbolsProc = Int32 Function(
     Pointer<SYMBOL_INFO> pSymInfo, Uint32 SymbolSize, Pointer UserContext);
 
 /// Application-defined callback function used with the TaskDialogIndirect
