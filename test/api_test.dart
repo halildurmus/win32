@@ -5954,7 +5954,63 @@ void main() {
 
   group('Test api-ms-win-ro-typeresolution-l1-1-0 functions', () {});
 
-  group('Test dbghelp functions', () {});
+  group('Test dbghelp functions', () {
+    test('Can instantiate SymCleanup', () {
+      final dbghelp = DynamicLibrary.open('dbghelp.dll');
+      final SymCleanup = dbghelp.lookupFunction<Int32 Function(IntPtr hProcess),
+          int Function(int hProcess)>('SymCleanup');
+      expect(SymCleanup, isA<Function>());
+    });
+    test('Can instantiate SymEnumSymbols', () {
+      final dbghelp = DynamicLibrary.open('dbghelp.dll');
+      final SymEnumSymbols = dbghelp.lookupFunction<
+          Int32 Function(
+              IntPtr hProcess,
+              Uint64 BaseOfDll,
+              Pointer<Utf16> Mask,
+              Pointer<NativeFunction<SymEnumSymbolsProc>> EnumSymbolsCallback,
+              Pointer UserContext),
+          int Function(
+              int hProcess,
+              int BaseOfDll,
+              Pointer<Utf16> Mask,
+              Pointer<NativeFunction<SymEnumSymbolsProc>> EnumSymbolsCallback,
+              Pointer UserContext)>('SymEnumSymbolsW');
+      expect(SymEnumSymbols, isA<Function>());
+    });
+    test('Can instantiate SymInitialize', () {
+      final dbghelp = DynamicLibrary.open('dbghelp.dll');
+      final SymInitialize = dbghelp.lookupFunction<
+          Int32 Function(IntPtr hProcess, Pointer<Utf16> UserSearchPath,
+              Int32 fInvadeProcess),
+          int Function(int hProcess, Pointer<Utf16> UserSearchPath,
+              int fInvadeProcess)>('SymInitializeW');
+      expect(SymInitialize, isA<Function>());
+    });
+    test('Can instantiate SymLoadModuleEx', () {
+      final dbghelp = DynamicLibrary.open('dbghelp.dll');
+      final SymLoadModuleEx = dbghelp.lookupFunction<
+          Uint64 Function(
+              IntPtr hProcess,
+              IntPtr hFile,
+              Pointer<Utf16> ImageName,
+              Pointer<Utf16> ModuleName,
+              Uint64 BaseOfDll,
+              Uint32 DllSize,
+              Pointer<MODLOAD_DATA> Data,
+              Uint32 Flags),
+          int Function(
+              int hProcess,
+              int hFile,
+              Pointer<Utf16> ImageName,
+              Pointer<Utf16> ModuleName,
+              int BaseOfDll,
+              int DllSize,
+              Pointer<MODLOAD_DATA> Data,
+              int Flags)>('SymLoadModuleExW');
+      expect(SymLoadModuleEx, isA<Function>());
+    });
+  });
 
   group('Test api-ms-win-core-winrt-string-l1-1-0 functions', () {
     if (windowsBuildNumber >= 9200) {
