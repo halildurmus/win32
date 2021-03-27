@@ -3,6 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import '../constants.dart';
+import '../metadatastore.dart';
 import '../typeidentifier.dart';
 
 import 'win32types.dart';
@@ -15,11 +16,36 @@ class TypeProjector {
 
   const TypeProjector(this.typeIdentifier);
 
+  bool get isWin32Type => typeIdentifier.name.startsWith('Windows.Win32');
+
+  // The Win32 metadata wraps types like HANDLE into a strongly-typed equivalent
+  // (e.g. NonCloseableHandle). That seems unnecessary for now, and so we're
+  // going to unwrap that to its underlying value.
+  bool get isWin32WrappedType {
+    final scope = MetadataStore.getWin32Scope();
+
+    final valueTypeDef = scope[typeIdentifier.name];
+
+    return (valueTypeDef?.fields.length == 1 &&
+        valueTypeDef?.fields.first.name == 'Value');
+  }
+
+  TypeIdentifier? get win32WrappedType {
+    // Test to see if it's a type on our exceptions list, in which case do
+    // nothing.
+    final win32Type = typeIdentifier.type?.typeName.split('.').last ?? '';
+    final ffiNativeType = convertToFFIType(win32Type);
+    if (ffiNativeType != win32Type) return null;
+
+    final scope = MetadataStore.getWin32Scope();
+    final valueTypeDef = scope[typeIdentifier.name];
+    return valueTypeDef?.fields.first.typeIdentifier;
+  }
+
   bool get isTypeAnEnum =>
       typeIdentifier.type?.parent?.typeName == 'System.Enum';
 
   bool get isTypeValueType =>
-      !typeIdentifier.name.startsWith('Windows.Win32') &&
       (typeIdentifier.corType == CorElementType.ELEMENT_TYPE_VALUETYPE ||
           typeIdentifier.type?.parent?.typeName == 'System.ValueType');
 
@@ -87,13 +113,25 @@ class TypeProjector {
       return 'Uint32';
     }
 
+    // For now, treat GUIDs specially
     if (specialTypes.containsKey(typeIdentifier.name)) {
       return specialTypes[typeIdentifier.name]!;
     }
-    if (isTypeValueType) {
-      // TODO: This might need something more variable.
+
+    // Unwrap Win32 value types
+    if (isTypeValueType && isWin32Type && isWin32WrappedType) {
+      final wrappedType = win32WrappedType;
+      if (wrappedType != null) {
+        return TypeProjector(wrappedType).nativeType;
+      }
+    }
+
+    // Treat WinRT value types as Uint32
+    if (isTypeValueType && !isWin32Type) {
       return 'Uint32';
     }
+
+    // Handle base types
     switch (typeIdentifier.corType) {
       case CorElementType.ELEMENT_TYPE_VOID:
         return 'Void';

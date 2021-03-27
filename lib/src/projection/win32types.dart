@@ -350,7 +350,7 @@ const win32TypeMap = <String, String>{
   'NLM_DOMAIN_TYPE': 'Uint32',
   'NLM_ENUM_NETWORK': 'Uint32',
   'NLM_NETWORK_CATEGORY': 'Uint32',
-  'NonClosableHandle': 'IntPtr',
+  // 'NonClosableHandle': 'IntPtr',
   'PAGE_TYPE': 'Uint32',
   'PickerLocationId': 'Uint32',
   'PickerViewMode': 'Uint32',
