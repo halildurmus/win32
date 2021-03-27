@@ -43,4 +43,14 @@ void main() {
     expect(nativeType, equals('RGBQUAD'));
     expect(dartType, equals('RGBQUAD'));
   });
+
+  test('Struct STATSTG projects correctly', () {
+    final procInfo = scope['Windows.Win32.StructuredStorage.STATSTG']!;
+    final cbSize = procInfo.fields[2].typeIdentifier; // cbSize
+
+    final nativeType = TypeProjector(cbSize).nativeType;
+    final dartType = TypeProjector(cbSize).dartType;
+    expect(nativeType, equals('Uint64'));
+    expect(dartType, equals('int'));
+  });
 }

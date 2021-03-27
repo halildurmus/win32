@@ -189,6 +189,8 @@ final systemTokens = <int, String>{
   0x0100001d: 'System.ValueType',
   0x01000ad1: 'System.ValueType', // _Anonymous_e__Struct
   0x01000ad2: 'System.ValueType', // _u_e__Struct
+  0x01000ad3: 'System.ValueType', // _Anonymous_e__Struct
+  0x01000ad4: 'System.ValueType',
   0x010000af: 'System.Guid',
   0x01000180: 'System.MulticastDelegate',
 };
