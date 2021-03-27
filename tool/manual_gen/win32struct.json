@@ -75,6 +75,10 @@
         "namespace": "Windows.Win32.Controls.INITCOMMONCONTROLSEX",
         "comment": "Carries information used to load common control classes from the dynamic-link library (DLL). This structure is used with the InitCommonControlsEx function."
     },
+    "ITEMIDLIST": {
+        "namespace": "Windows.Win32.Shell.ITEMIDLIST",
+        "comment": "Contains a list of item identifiers."
+    },
     "KNOWNFOLDER_DEFINITION": {
         "namespace": "Windows.Win32.Shell.KNOWNFOLDER_DEFINITION",
         "comment": "Defines the specifics of a known folder."

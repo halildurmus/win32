@@ -65,9 +65,9 @@ typedef _FindFolderFromPath_Dart = int Function(
     Pointer obj, Pointer<Utf16> pszPath, int mode, Pointer<Pointer> ppkf);
 
 typedef _FindFolderFromIDList_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> pidl, Pointer<Pointer> ppkf);
+    Pointer obj, Pointer<ITEMIDLIST> pidl, Pointer<Pointer> ppkf);
 typedef _FindFolderFromIDList_Dart = int Function(
-    Pointer obj, Pointer<Uint32> pidl, Pointer<Pointer> ppkf);
+    Pointer obj, Pointer<ITEMIDLIST> pidl, Pointer<Pointer> ppkf);
 
 typedef _Redirect_Native = Int32 Function(
     Pointer obj,
@@ -139,7 +139,7 @@ class IKnownFolderManager extends IUnknown {
               .asFunction<_FindFolderFromPath_Dart>()(
           ptr.ref.lpVtbl, pszPath, mode, ppkf);
 
-  int FindFolderFromIDList(Pointer<Uint32> pidl, Pointer<Pointer> ppkf) =>
+  int FindFolderFromIDList(Pointer<ITEMIDLIST> pidl, Pointer<Pointer> ppkf) =>
       Pointer<NativeFunction<_FindFolderFromIDList_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(11).value)
           .asFunction<_FindFolderFromIDList_Dart>()(ptr.ref.lpVtbl, pidl, ppkf);

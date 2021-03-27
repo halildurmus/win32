@@ -349,6 +349,13 @@ class INITCOMMONCONTROLSEX extends Struct {
   external int dwICC;
 }
 
+/// Contains a list of item identifiers.
+///
+/// {@category Struct}
+class ITEMIDLIST extends Struct {
+  external SHITEMID mkid;
+}
+
 /// Defines the specifics of a known folder.
 ///
 /// {@category Struct}
