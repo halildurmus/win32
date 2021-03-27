@@ -46,9 +46,9 @@ typedef _SetPath_Dart = int Function(
     Pointer obj, int dwFlags, Pointer<Utf16> pszPath);
 
 typedef _GetIDList_Native = Int32 Function(
-    Pointer obj, Uint32 dwFlags, Pointer<Pointer<Uint32>> ppidl);
+    Pointer obj, Uint32 dwFlags, Pointer<Pointer<ITEMIDLIST>> ppidl);
 typedef _GetIDList_Dart = int Function(
-    Pointer obj, int dwFlags, Pointer<Pointer<Uint32>> ppidl);
+    Pointer obj, int dwFlags, Pointer<Pointer<ITEMIDLIST>> ppidl);
 
 typedef _GetFolderType_Native = Int32 Function(
     Pointer obj, Pointer<GUID> pftid);
@@ -96,7 +96,7 @@ class IKnownFolder extends IUnknown {
               ptr.ref.vtable.elementAt(7).value)
           .asFunction<_SetPath_Dart>()(ptr.ref.lpVtbl, dwFlags, pszPath);
 
-  int GetIDList(int dwFlags, Pointer<Pointer<Uint32>> ppidl) =>
+  int GetIDList(int dwFlags, Pointer<Pointer<ITEMIDLIST>> ppidl) =>
       Pointer<NativeFunction<_GetIDList_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(8).value)
           .asFunction<_GetIDList_Dart>()(ptr.ref.lpVtbl, dwFlags, ppidl);

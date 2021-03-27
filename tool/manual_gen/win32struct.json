@@ -75,6 +75,10 @@
         "namespace": "Windows.Win32.Controls.INITCOMMONCONTROLSEX",
         "comment": "Carries information used to load common control classes from the dynamic-link library (DLL). This structure is used with the InitCommonControlsEx function."
     },
+    "ITEMIDLIST": {
+        "namespace": "Windows.Win32.Shell.ITEMIDLIST",
+        "comment": "Contains a list of item identifiers."
+    },
     "KNOWNFOLDER_DEFINITION": {
         "namespace": "Windows.Win32.Shell.KNOWNFOLDER_DEFINITION",
         "comment": "Defines the specifics of a known folder."
@@ -102,6 +106,10 @@
     "MINMAXINFO": {
         "namespace": "Windows.Win32.WindowsAndMessaging.MINMAXINFO",
         "comment": "Contains information about a window's maximized size and position and its minimum and maximum tracking size."
+    },
+    "MODLOAD_DATA": {
+        "namespace": "Windows.Win32.Debug.MODLOAD_DATA",
+        "comment": "Contains module data."
     },
     "MONITORINFO": {
         "namespace": "Windows.Win32.Gdi.MONITORINFO",

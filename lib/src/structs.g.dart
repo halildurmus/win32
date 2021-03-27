@@ -349,6 +349,13 @@ class INITCOMMONCONTROLSEX extends Struct {
   external int dwICC;
 }
 
+/// Contains a list of item identifiers.
+///
+/// {@category Struct}
+class ITEMIDLIST extends Struct {
+  external SHITEMID mkid;
+}
+
 /// Defines the specifics of a known folder.
 ///
 /// {@category Struct}
@@ -472,6 +479,21 @@ class MINMAXINFO extends Struct {
   external POINT ptMaxPosition;
   external POINT ptMinTrackSize;
   external POINT ptMaxTrackSize;
+}
+
+/// Contains module data.
+///
+/// {@category Struct}
+class MODLOAD_DATA extends Struct {
+  @Uint32()
+  external int ssize;
+  @Uint32()
+  external int ssig;
+  external Pointer data;
+  @Uint32()
+  external int size;
+  @Uint32()
+  external int flags;
 }
 
 /// The MONITORINFO structure contains information about a display monitor.

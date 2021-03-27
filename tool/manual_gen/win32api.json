@@ -2869,6 +2869,88 @@
         "dllLibrary": "user32",
         "comment": "Reverses or restores the meaning of the left and right mouse buttons."
     },
+    "SymCleanup": {
+        "prototype": "BOOL IMAGEAPI SymCleanup(\n  HANDLE hProcess);",
+        "dllLibrary": "dbghelp",
+        "comment": "Deallocates all resources associated with the process handle."
+    },
+    "SymEnumSymbols": {
+        "prototype": "BOOL IMAGEAPI SymEnumSymbolsW(\n  HANDLE                          hProcess,\n  ULONG64                         BaseOfDll,\n  PCWSTR                          Mask,\n  PSYM_ENUMERATESYMBOLS_CALLBACKW EnumSymbolsCallback,\n  PVOID                           UserContext\n);",
+        "dllLibrary": "dbghelp",
+        "comment": "Enumerates all symbols in a process."
+    },
+    "SymFromAddr": {
+        "prototype": "BOOL IMAGEAPI SymFromAddrW(\n  HANDLE        hProcess,\n  DWORD64       Address,\n  PDWORD64      Displacement,\n  PSYMBOL_INFOW Symbol\n);",
+        "dllLibrary": "dbghelp",
+        "comment": "Retrieves symbol information for the specified address."
+    },
+    "SymFromToken": {
+        "prototype": "BOOL IMAGEAPI SymFromTokenW(\n  HANDLE        hProcess,\n  DWORD64       Base,\n  DWORD         Token,\n  PSYMBOL_INFOW Symbol\n);",
+        "dllLibrary": "dbghelp",
+        "comment": "Retrieves symbol information for the specified managed code token."
+    },
+    "SymGetExtendedOption": {
+        "prototype": "BOOL IMAGEAPI SymGetExtendedOption(\n  IMAGEHLP_EXTENDED_OPTIONS option\n);",
+        "dllLibrary": "dbghelp",
+        "comment": "Gets whether the specified extended symbol option on or off.",
+        "minimumWindowsVersion": "WIN10_RS4"
+    },
+    "SymInitialize": {
+        "prototype": "BOOL IMAGEAPI SymInitializeW(\n  HANDLE hProcess,\n  PCWSTR UserSearchPath,\n  BOOL   fInvadeProcess\n);",
+        "dllLibrary": "dbghelp",
+        "comment": "Initializes the symbol handler for a process."
+    },
+    "SymLoadModuleEx": {
+        "prototype": "DWORD64 IMAGEAPI SymLoadModuleExW(\n  HANDLE        hProcess,\n  HANDLE        hFile,\n  PCWSTR        ImageName,\n  PCWSTR        ModuleName,\n  DWORD64       BaseOfDll,\n  DWORD         DllSize,\n  PMODLOAD_DATA Data,\n  DWORD         Flags);",
+        "dllLibrary": "dbghelp",
+        "comment": "Loads the symbol table for the specified module."
+    },
+    "SymSetExtendedOption": {
+        "prototype": "BOOL IMAGEAPI SymSetExtendedOption(\n  IMAGEHLP_EXTENDED_OPTIONS option,\n  BOOL                      value\n);",
+        "dllLibrary": "dbghelp",
+        "comment": "Turns the specified extended symbol option on or off.",
+        "minimumWindowsVersion": "WIN10_RS4"
+    },
+    "SymSetOptions": {
+        "prototype": "DWORD IMAGEAPI SymSetOptions(\n  DWORD SymOptions\n);",
+        "dllLibrary": "dbghelp",
+        "comment": "Sets the options mask."
+    },
+    "SymSetParentWindow": {
+        "prototype": "BOOL IMAGEAPI SymSetParentWindow(\n  HWND hwnd\n);",
+        "dllLibrary": "dbghelp",
+        "comment": "Sets the window that the caller will use to display a user interface."
+    },
+    "SymSetScopeFromAddr": {
+        "prototype": "BOOL IMAGEAPI SymSetScopeFromAddr(\n  HANDLE  hProcess,\n  ULONG64 Address\n);",
+        "dllLibrary": "dbghelp",
+        "comment": "Sets the local scope to the symbol that matches the specified address."
+    },
+    "SymSetScopeFromIndex": {
+        "prototype": "BOOL IMAGEAPI SymSetScopeFromIndex(\n  HANDLE  hProcess,\n  ULONG64 BaseOfDll,\n  DWORD   Index\n);",
+        "dllLibrary": "dbghelp",
+        "comment": "Sets the local scope to the symbol that matches the specified index."
+    },
+    "SymSetScopeFromInlineContext": {
+        "prototype": "BOOL IMAGEAPI SymSetScopeFromInlineContext(\n  HANDLE  hProcess,\n  ULONG64 Address,\n  ULONG   InlineContext\n);",
+        "dllLibrary": "dbghelp",
+        "comment": "Sets the local scope to the symbol that matches the specified address and inline context."
+    },
+    "SymSetSearchPath": {
+        "prototype": "BOOL IMAGEAPI SymSetSearchPathW(\n  HANDLE hProcess,\n  PCWSTR SearchPath\n);",
+        "dllLibrary": "dbghelp",
+        "comment": "Sets the search path for the specified process."
+    },
+    "SymUnloadModule": {
+        "prototype": "BOOL IMAGEAPI SymUnloadModule(\n  HANDLE hProcess,\n  DWORD  BaseOfDll\n);",
+        "dllLibrary": "dbghelp",
+        "comment": "Unloads the symbol table."
+    },
+    "SymUnloadModule64": {
+        "prototype": "BOOL IMAGEAPI SymUnloadModule64(\n  HANDLE  hProcess,\n  DWORD64 BaseOfDll\n);",
+        "dllLibrary": "dbghelp",
+        "comment": "Unloads the symbol table."
+    },
     "SysAllocString": {
         "prototype": "BSTR SysAllocString(\n  const OLECHAR *psz\n);",
         "dllLibrary": "oleaut32",
@@ -2985,6 +3067,11 @@
         "prototype": "BOOL TranslateMessage(\n  const MSG *lpMsg\n);",
         "dllLibrary": "user32",
         "comment": "Translates virtual-key messages into character messages. The character messages are posted to the calling thread's message queue, to be read the next time the thread calls the GetMessage or PeekMessage function."
+    },
+    "UnDecorateSymbolName": {
+        "prototype": "DWORD IMAGEAPI UnDecorateSymbolNameW(\n  PCWSTR name,\n  PWSTR  outputString,\n  DWORD  maxStringLength,\n  DWORD  flags\n);",
+        "dllLibrary": "dbghelp",
+        "comment": "Undecorates the specified decorated C++ symbol name."
     },
     "UnionRect": {
         "prototype": "BOOL UnionRect(\n  LPRECT     lprcDst,\n  const RECT *lprcSrc1,\n  const RECT *lprcSrc2\n);",

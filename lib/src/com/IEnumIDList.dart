@@ -23,9 +23,9 @@ import 'IUnknown.dart';
 const IID_IEnumIDList = '{000214F2-0000-0000-C000-000000000046}';
 
 typedef _Next_Native = Int32 Function(Pointer obj, Uint32 celt,
-    Pointer<Pointer<Uint32>> rgelt, Pointer<Uint32> pceltFetched);
+    Pointer<Pointer<ITEMIDLIST>> rgelt, Pointer<Uint32> pceltFetched);
 typedef _Next_Dart = int Function(Pointer obj, int celt,
-    Pointer<Pointer<Uint32>> rgelt, Pointer<Uint32> pceltFetched);
+    Pointer<Pointer<ITEMIDLIST>> rgelt, Pointer<Uint32> pceltFetched);
 
 typedef _Skip_Native = Int32 Function(Pointer obj, Uint32 celt);
 typedef _Skip_Dart = int Function(Pointer obj, int celt);
@@ -43,7 +43,7 @@ class IEnumIDList extends IUnknown {
 
   IEnumIDList(Pointer<COMObject> ptr) : super(ptr);
 
-  int Next(int celt, Pointer<Pointer<Uint32>> rgelt,
+  int Next(int celt, Pointer<Pointer<ITEMIDLIST>> rgelt,
           Pointer<Uint32> pceltFetched) =>
       Pointer<NativeFunction<_Next_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(3).value)

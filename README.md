@@ -98,6 +98,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `devices.dart`     | Uses volume management APIs to list all disk devices      |
 | `dialog.dart`      | Create a custom dialog box in code                        |
 | `dialogshow.dart`  | Creates a common item dialog (file picker) using COM      |
+| `dump.dart`        | Use debugger libraries to print DLL exported functions    |
 | `dynamic_load.dart`| Demonstrate loading a DLL and calling it at runtime       |
 | `filever.dart`     | Getting file version information from the file resource   |
 | `guid.dart`        | Creates a globally unique identifier (GUID)               |
@@ -129,7 +130,7 @@ computer and their volume IDs and attached paths.
 ## Requirements
 
 This package assumes the [Dart 64-bit compiler](https://dart.dev/get-dart),
-running on Windows. Most commands are tested on 32-bit Windows, but due to the
+running on Windows. Many commands are tested on 32-bit Windows, but due to the
 lack of a compiler for 32-bit executables and the increasing lack of machines
 running 32-bit OSes, this is inevitably a low priority. The package is also
 tested on Windows-on-ARM architecture, running in x64 emulation mode.
