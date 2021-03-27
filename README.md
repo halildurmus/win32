@@ -130,7 +130,7 @@ computer and their volume IDs and attached paths.
 ## Requirements
 
 This package assumes the [Dart 64-bit compiler](https://dart.dev/get-dart),
-running on Windows. Manh commands are tested on 32-bit Windows, but due to the
+running on Windows. Many commands are tested on 32-bit Windows, but due to the
 lack of a compiler for 32-bit executables and the increasing lack of machines
 running 32-bit OSes, this is inevitably a low priority. The package is also
 tested on Windows-on-ARM architecture, running in x64 emulation mode.
