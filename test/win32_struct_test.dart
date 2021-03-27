@@ -36,11 +36,10 @@ void main() {
 
   test('Struct array field projects correctly', () {
     final procInfo = scope['Windows.Win32.Gdi.BITMAPINFO']!;
+    final bmiColors = procInfo.fields.last.typeIdentifier;
 
-    final nativeType =
-        TypeProjector(procInfo.fields.last.typeIdentifier).nativeType;
-    final dartType =
-        TypeProjector(procInfo.fields.last.typeIdentifier).dartType;
+    final nativeType = TypeProjector(bmiColors).nativeType;
+    final dartType = TypeProjector(bmiColors).dartType;
     expect(nativeType, equals('RGBQUAD'));
     expect(dartType, equals('RGBQUAD'));
   });
