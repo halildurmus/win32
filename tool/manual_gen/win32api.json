@@ -2892,7 +2892,8 @@
     "SymGetExtendedOption": {
         "prototype": "BOOL IMAGEAPI SymGetExtendedOption(\n  IMAGEHLP_EXTENDED_OPTIONS option\n);",
         "dllLibrary": "dbghelp",
-        "comment": "Gets whether the specified extended symbol option on or off."
+        "comment": "Gets whether the specified extended symbol option on or off.",
+        "minimumWindowsVersion": "WIN10_RS4"
     },
     "SymInitialize": {
         "prototype": "BOOL IMAGEAPI SymInitializeW(\n  HANDLE hProcess,\n  PCWSTR UserSearchPath,\n  BOOL   fInvadeProcess\n);",
@@ -2907,7 +2908,8 @@
     "SymSetExtendedOption": {
         "prototype": "BOOL IMAGEAPI SymSetExtendedOption(\n  IMAGEHLP_EXTENDED_OPTIONS option,\n  BOOL                      value\n);",
         "dllLibrary": "dbghelp",
-        "comment": "Turns the specified extended symbol option on or off."
+        "comment": "Turns the specified extended symbol option on or off.",
+        "minimumWindowsVersion": "WIN10_RS4"
     },
     "SymSetOptions": {
         "prototype": "DWORD IMAGEAPI SymSetOptions(\n  DWORD SymOptions\n);",
