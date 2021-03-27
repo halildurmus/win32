@@ -36,12 +36,21 @@ void main() {
 
   test('Struct array field projects correctly', () {
     final procInfo = scope['Windows.Win32.Gdi.BITMAPINFO']!;
+    final bmiColors = procInfo.fields.last.typeIdentifier;
 
-    final nativeType =
-        TypeProjector(procInfo.fields.last.typeIdentifier).nativeType;
-    final dartType =
-        TypeProjector(procInfo.fields.last.typeIdentifier).dartType;
+    final nativeType = TypeProjector(bmiColors).nativeType;
+    final dartType = TypeProjector(bmiColors).dartType;
     expect(nativeType, equals('RGBQUAD'));
     expect(dartType, equals('RGBQUAD'));
+  });
+
+  test('Struct STATSTG projects correctly', () {
+    final procInfo = scope['Windows.Win32.StructuredStorage.STATSTG']!;
+    final cbSize = procInfo.fields[2].typeIdentifier; // cbSize
+
+    final nativeType = TypeProjector(cbSize).nativeType;
+    final dartType = TypeProjector(cbSize).dartType;
+    expect(nativeType, equals('Uint64'));
+    expect(dartType, equals('int'));
   });
 }

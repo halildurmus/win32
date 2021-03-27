@@ -13,8 +13,6 @@ import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'typeidentifier.dart';
 
-enum StringType { ASCII, Unicode, None }
-
 /// A parameter or return type.
 class Parameter extends AttributeObject {
   final int sequence;

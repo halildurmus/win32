@@ -1,7 +1,6 @@
 @TestOn('windows')
 
 import 'package:test/test.dart';
-import 'package:winmd/src/metadatastore.dart';
 import 'package:winmd/winmd.dart';
 
 void main() {
