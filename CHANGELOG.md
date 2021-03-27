@@ -1,6 +1,6 @@
 ## 2.0.5
 
-- TBD
+- Add some debugging APIs to allow enumerating exported symbols.
 
 ## 2.0.4
 
