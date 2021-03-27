@@ -5996,13 +5996,15 @@ void main() {
               Pointer<SYMBOL_INFO> Symbol)>('SymFromTokenW');
       expect(SymFromToken, isA<Function>());
     });
-    test('Can instantiate SymGetExtendedOption', () {
-      final dbghelp = DynamicLibrary.open('dbghelp.dll');
-      final SymGetExtendedOption = dbghelp.lookupFunction<
-          Int32 Function(Uint32 option),
-          int Function(int option)>('SymGetExtendedOption');
-      expect(SymGetExtendedOption, isA<Function>());
-    });
+    if (windowsBuildNumber >= 17134) {
+      test('Can instantiate SymGetExtendedOption', () {
+        final dbghelp = DynamicLibrary.open('dbghelp.dll');
+        final SymGetExtendedOption = dbghelp.lookupFunction<
+            Int32 Function(Uint32 option),
+            int Function(int option)>('SymGetExtendedOption');
+        expect(SymGetExtendedOption, isA<Function>());
+      });
+    }
     test('Can instantiate SymInitialize', () {
       final dbghelp = DynamicLibrary.open('dbghelp.dll');
       final SymInitialize = dbghelp.lookupFunction<
@@ -6035,13 +6037,15 @@ void main() {
               int Flags)>('SymLoadModuleExW');
       expect(SymLoadModuleEx, isA<Function>());
     });
-    test('Can instantiate SymSetExtendedOption', () {
-      final dbghelp = DynamicLibrary.open('dbghelp.dll');
-      final SymSetExtendedOption = dbghelp.lookupFunction<
-          Int32 Function(Uint32 option, Int32 value),
-          int Function(int option, int value)>('SymSetExtendedOption');
-      expect(SymSetExtendedOption, isA<Function>());
-    });
+    if (windowsBuildNumber >= 17134) {
+      test('Can instantiate SymSetExtendedOption', () {
+        final dbghelp = DynamicLibrary.open('dbghelp.dll');
+        final SymSetExtendedOption = dbghelp.lookupFunction<
+            Int32 Function(Uint32 option, Int32 value),
+            int Function(int option, int value)>('SymSetExtendedOption');
+        expect(SymSetExtendedOption, isA<Function>());
+      });
+    }
     test('Can instantiate SymSetOptions', () {
       final dbghelp = DynamicLibrary.open('dbghelp.dll');
       final SymSetOptions = dbghelp.lookupFunction<
