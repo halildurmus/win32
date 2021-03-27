@@ -1,6 +1,13 @@
 ## 2.0.5
 
-- Add some debugging APIs to allow enumerating exported symbols.
+- Add some debugging APIs to allow enumerating exported symbols, along with a
+  sample (`dump.dart`).
+- Free memory allocations in samples.
+- Use latest version of Win32 metadata from winmd package, and generate most
+  structs automatically using this metadata.
+- Generate COM helper classes wherever metadata supports it, instead of
+  requiring a manual decorator.
+- Add about 20 new kernel32 APIs.
 
 ## 2.0.4
 
