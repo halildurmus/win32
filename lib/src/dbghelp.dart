@@ -333,12 +333,12 @@ int SymUnloadModule64(int hProcess, int BaseOfDll) {
 /// );
 /// ```
 /// {@category dbghelp}
-int UnDecorateSymbolNameW(Pointer<Utf16> name, Pointer<Utf16> outputString,
+int UnDecorateSymbolName(Pointer<Utf16> name, Pointer<Utf16> outputString,
     int maxStringLength, int flags) {
-  final _UnDecorateSymbolNameW = _dbghelp.lookupFunction<
+  final _UnDecorateSymbolName = _dbghelp.lookupFunction<
       Uint32 Function(Pointer<Utf16> name, Pointer<Utf16> outputString,
           Uint32 maxStringLength, Uint32 flags),
       int Function(Pointer<Utf16> name, Pointer<Utf16> outputString,
           int maxStringLength, int flags)>('UnDecorateSymbolNameW');
-  return _UnDecorateSymbolNameW(name, outputString, maxStringLength, flags);
+  return _UnDecorateSymbolName(name, outputString, maxStringLength, flags);
 }

@@ -6094,14 +6094,14 @@ void main() {
           int Function(int hProcess, int BaseOfDll)>('SymUnloadModule64');
       expect(SymUnloadModule64, isA<Function>());
     });
-    test('Can instantiate UnDecorateSymbolNameW', () {
+    test('Can instantiate UnDecorateSymbolName', () {
       final dbghelp = DynamicLibrary.open('dbghelp.dll');
-      final UnDecorateSymbolNameW = dbghelp.lookupFunction<
+      final UnDecorateSymbolName = dbghelp.lookupFunction<
           Uint32 Function(Pointer<Utf16> name, Pointer<Utf16> outputString,
               Uint32 maxStringLength, Uint32 flags),
           int Function(Pointer<Utf16> name, Pointer<Utf16> outputString,
               int maxStringLength, int flags)>('UnDecorateSymbolNameW');
-      expect(UnDecorateSymbolNameW, isA<Function>());
+      expect(UnDecorateSymbolName, isA<Function>());
     });
   });
 
