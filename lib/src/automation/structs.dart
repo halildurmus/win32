@@ -43,6 +43,10 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class BSTR extends Struct {
+  external Pointer<Uint8> Value;
+}
+
 class SAFEARRAYBOUND extends Struct {
   @Uint32() external int cElements;
   @Int32() external int lLbound;
@@ -79,6 +83,11 @@ class _wireSAFEARR_HAVEIID extends Struct {
   external GUID iid;
 }
 
+class _wireSAFEARRAY_UNION extends Struct {
+  @Uint32() external int sfType;
+  @Uint32() external int u;
+}
+
 class _wireSAFEARRAY extends Struct {
   @Uint16() external int cDims;
   @Uint16() external int fFeatures;
@@ -97,11 +106,30 @@ class SAFEARRAY extends Struct {
   external SAFEARRAYBOUND rgsabound;
 }
 
+class VARIANT extends Struct {
+  @Uint32() external int Anonymous;
+}
+
 class _wireBRECORD extends Struct {
   @Uint32() external int fFlags;
   @Uint32() external int clSize;
   external Pointer pRecInfo;
   external Pointer<Uint8> pRecord;
+}
+
+class _wireVARIANT extends Struct {
+  @Uint32() external int clSize;
+  @Uint32() external int rpcReserved;
+  @Uint16() external int vt;
+  @Uint16() external int wReserved1;
+  @Uint16() external int wReserved2;
+  @Uint16() external int wReserved3;
+  @Uint32() external int Anonymous;
+}
+
+class TYPEDESC extends Struct {
+  @Uint32() external int Anonymous;
+  @Uint16() external int vt;
 }
 
 class ARRAYDESC extends Struct {
@@ -123,6 +151,11 @@ class PARAMDESC extends Struct {
 class IDLDESC extends Struct {
   @IntPtr() external int dwReserved;
   @Uint16() external int wIDLFlags;
+}
+
+class ELEMDESC extends Struct {
+  external TYPEDESC tdesc;
+  @Uint32() external int Anonymous;
 }
 
 class TYPEATTR extends Struct {
@@ -161,7 +194,7 @@ class EXCEPINFO extends Struct {
   external Pointer<Utf16> bstrHelpFile;
   @Uint32() external int dwHelpContext;
   external Pointer pvReserved;
-  external Pointer<EXCEPFINO_DEFERRED_FILLIN> pfnDeferredFillIn;
+  external Pointer<NativeFunction<ExcepInfoProc>> pfnDeferredFillIn;
   @Int32() external int scode;
 }
 
@@ -178,6 +211,15 @@ class FUNCDESC extends Struct {
   @Int16() external int cScodes;
   external ELEMDESC elemdescFunc;
   @Uint16() external int wFuncFlags;
+}
+
+class VARDESC extends Struct {
+  @Int32() external int memid;
+  external Pointer<Utf16> lpstrSchema;
+  @Uint32() external int Anonymous;
+  external ELEMDESC elemdescVar;
+  @Uint16() external int wVarFlags;
+  @Uint32() external int varkind;
 }
 
 class CLEANLOCALSTORAGE extends Struct {
@@ -321,9 +363,5 @@ class WIA_MICR extends Struct {
   @Uint16() external int Reserved;
   @Uint32() external int Count;
   external WIA_MICR_INFO Micr;
-}
-
-class BSTR extends Struct {
-  external Pointer<Uint8> Value;
 }
 

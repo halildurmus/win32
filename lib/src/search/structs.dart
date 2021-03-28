@@ -80,7 +80,7 @@ class DB_NUMERIC extends Struct {
 }
 
 class DBVECTOR extends Struct {
-  @Uint32() external int size;
+  @Uint64() external int size;
   external Pointer ptr;
 }
 
@@ -136,21 +136,21 @@ class DBOBJECT extends Struct {
 
 class DBBINDEXT extends Struct {
   external Pointer<Uint8> pExtension;
-  @Uint32() external int ulExtension;
+  @Uint64() external int ulExtension;
 }
 
 class DBBINDING extends Struct {
-  @Uint32() external int iOrdinal;
-  @Uint32() external int obValue;
-  @Uint32() external int obLength;
-  @Uint32() external int obStatus;
+  @Uint64() external int iOrdinal;
+  @Uint64() external int obValue;
+  @Uint64() external int obLength;
+  @Uint64() external int obStatus;
   external Pointer pTypeInfo;
   external Pointer<DBOBJECT> pObject;
   external Pointer<DBBINDEXT> pBindExt;
   @Uint32() external int dwPart;
   @Uint32() external int dwMemOwner;
   @Uint32() external int eParamIO;
-  @Uint32() external int cbMaxLen;
+  @Uint64() external int cbMaxLen;
   @Uint32() external int dwFlags;
   @Uint16() external int wType;
   @Uint8() external int bPrecision;
@@ -159,16 +159,16 @@ class DBBINDING extends Struct {
 
 class DBFAILUREINFO extends Struct {
   @IntPtr() external int hRow;
-  @Uint32() external int iColumn;
+  @Uint64() external int iColumn;
   @Int32() external int failure;
 }
 
 class DBCOLUMNINFO extends Struct {
   external Pointer<Utf16> pwszName;
   external Pointer pTypeInfo;
-  @Uint32() external int iOrdinal;
+  @Uint64() external int iOrdinal;
   @Uint32() external int dwFlags;
-  @Uint32() external int ulColumnSize;
+  @Uint64() external int ulColumnSize;
   @Uint16() external int wType;
   @Uint8() external int bPrecision;
   @Uint8() external int bScale;
@@ -177,16 +177,16 @@ class DBCOLUMNINFO extends Struct {
 
 class DBPARAMS extends Struct {
   external Pointer pData;
-  @Uint32() external int cParamSets;
+  @Uint64() external int cParamSets;
   @IntPtr() external int hAccessor;
 }
 
 class DBPARAMINFO extends Struct {
   @Uint32() external int dwFlags;
-  @Uint32() external int iOrdinal;
+  @Uint64() external int iOrdinal;
   external Pointer<Utf16> pwszName;
   external Pointer pTypeInfo;
-  @Uint32() external int ulParamSize;
+  @Uint64() external int ulParamSize;
   @Uint16() external int wType;
   @Uint8() external int bPrecision;
   @Uint8() external int bScale;
@@ -237,7 +237,7 @@ class DBCOLUMNDESC extends Struct {
   external Pointer<DBPROPSET> rgPropertySets;
   external Pointer<GUID> pclsid;
   @Uint32() external int cPropertySets;
-  @Uint32() external int ulColumnSize;
+  @Uint64() external int ulColumnSize;
   external DBID dbcid;
   @Uint16() external int wType;
   @Uint8() external int bPrecision;
@@ -247,10 +247,10 @@ class DBCOLUMNDESC extends Struct {
 class DBCOLUMNACCESS extends Struct {
   external Pointer pData;
   external DBID columnid;
-  @Uint32() external int cbDataLen;
+  @Uint64() external int cbDataLen;
   @Uint32() external int dwStatus;
-  @Uint32() external int cbMaxLen;
-  @Uint32() external int dwReserved;
+  @Uint64() external int cbMaxLen;
+  @Uint64() external int dwReserved;
   @Uint16() external int wType;
   @Uint8() external int bPrecision;
   @Uint8() external int bScale;
@@ -259,26 +259,26 @@ class DBCOLUMNACCESS extends Struct {
 class DBCONSTRAINTDESC extends Struct {
   external Pointer<DBID> pConstraintID;
   @Uint32() external int ConstraintType;
-  @Uint32() external int cColumns;
+  @Uint64() external int cColumns;
   external Pointer<DBID> rgColumnList;
   external Pointer<DBID> pReferencedTableID;
-  @Uint32() external int cForeignKeyColumns;
+  @Uint64() external int cForeignKeyColumns;
   external Pointer<DBID> rgForeignKeyColumnList;
   external Pointer<Utf16> pwszConstraintText;
   @Uint32() external int UpdateRule;
   @Uint32() external int DeleteRule;
   @Uint32() external int MatchType;
   @Uint32() external int Deferrability;
-  @Uint32() external int cReserved;
+  @Uint64() external int cReserved;
   external Pointer<DBPROPSET> rgReserved;
 }
 
 class MDAXISINFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int iAxis;
-  @Uint32() external int cDimensions;
-  @Uint32() external int cCoordinates;
-  external Pointer<Uint32> rgcColumns;
+  @Uint64() external int cbSize;
+  @Uint64() external int iAxis;
+  @Uint64() external int cDimensions;
+  @Uint64() external int cCoordinates;
+  external Pointer<Uint64> rgcColumns;
   external Pointer<Pointer<Utf16>> rgpwszDimensionNames;
 }
 
@@ -302,7 +302,7 @@ class RMTPACK extends Struct {
 class DBPARAMBINDINFO extends Struct {
   external Pointer<Utf16> pwszDataSourceType;
   external Pointer<Utf16> pwszName;
-  @Uint32() external int ulParamSize;
+  @Uint64() external int ulParamSize;
   @Uint32() external int dwFlags;
   @Uint8() external int bPrecision;
   @Uint8() external int bScale;

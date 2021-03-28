@@ -43,41 +43,26 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class COMPRESS_ALLOCATION_ROUTINES extends Struct {
-  external PFN_COMPRESS_ALLOCATE Allocate;
-  external PFN_COMPRESS_FREE Free;
-  external Pointer UserContext;
-}
-
-class CO_DEVICE_CATALOG_COOKIE extends Struct {
-  @IntPtr() external int Value;
+class HRESULT extends Struct {
+  @Int32() external int Value;
 }
 
 class CO_MTA_USAGE_COOKIE extends Struct {
   @IntPtr() external int Value;
 }
 
-class HRESULT extends Struct {
-  @Int32() external int Value;
+class CO_DEVICE_CATALOG_COOKIE extends Struct {
+  @IntPtr() external int Value;
 }
 
 class COMPRESSOR_HANDLE extends Struct {
   @IntPtr() external int Value;
 }
 
-class CSPLATFORM extends Struct {
-  @Uint32() external int dwPlatformId;
-  @Uint32() external int dwVersionHi;
-  @Uint32() external int dwVersionLo;
-  @Uint32() external int dwProcessorArch;
-}
-
-class QUERYCONTEXT extends Struct {
-  @Uint32() external int dwContext;
-  external CSPLATFORM Platform;
-  @Uint32() external int Locale;
-  @Uint32() external int dwVersionHi;
-  @Uint32() external int dwVersionLo;
+class COMPRESS_ALLOCATION_ROUTINES extends Struct {
+  external PFN_COMPRESS_ALLOCATE Allocate;
+  external PFN_COMPRESS_FREE Free;
+  external Pointer UserContext;
 }
 
 class COAUTHIDENTITY extends Struct {
@@ -254,6 +239,17 @@ class RemSTGMEDIUM extends Struct {
   @Uint32() external int pUnkForRelease;
   @Uint32() external int cbData;
   external __ubyte__ data;
+}
+
+class STGMEDIUM extends Struct {
+  @Uint32() external int tymed;
+  @Uint32() external int Anonymous;
+  external Pointer pUnkForRelease;
+}
+
+class GDI_OBJECT extends Struct {
+  @Uint32() external int ObjectType;
+  @Uint32() external int u;
 }
 
 class userSTGMEDIUM extends Struct {
@@ -556,6 +552,12 @@ class FONTDESC extends Struct {
   @Int32() external int fStrikethrough;
 }
 
+class PICTDESC extends Struct {
+  @Uint32() external int cbSizeofstruct;
+  @Uint32() external int picType;
+  @Uint32() external int Anonymous;
+}
+
 class PAGERANGE extends Struct {
   @Int32() external int nFromPage;
   @Int32() external int nToPage;
@@ -811,7 +813,7 @@ class OLEUIBUSYW extends Struct {
   @IntPtr() external int hInstance;
   external Pointer<Utf16> lpszTemplate;
   @IntPtr() external int hResource;
-  external HTASK hTask;
+  @IntPtr() external int hTask;
   external Pointer<IntPtr> lphWndDialog;
 }
 
@@ -825,7 +827,7 @@ class OLEUIBUSYA extends Struct {
   @IntPtr() external int hInstance;
   external Pointer<Utf8> lpszTemplate;
   @IntPtr() external int hResource;
-  external HTASK hTask;
+  @IntPtr() external int hTask;
   external Pointer<IntPtr> lphWndDialog;
 }
 
@@ -959,6 +961,12 @@ class OLEUIOBJECTPROPSA extends Struct {
   external Pointer<OLEUILINKPROPSA> lpLP;
 }
 
+class CATEGORYINFO extends Struct {
+  external GUID catid;
+  @Uint32() external int lcid;
+  external __ushort__ szDescription;
+}
+
 class CALLFRAMEINFO extends Struct {
   @Uint32() external int iMethod;
   @Int32() external int fHasInValues;
@@ -989,16 +997,19 @@ class CALLFRAME_MARSHALCONTEXT extends Struct {
   external GUID guidTransferSyntax;
 }
 
-class CATEGORYINFO extends Struct {
-  external GUID catid;
-  @Uint32() external int lcid;
-  external __ushort__ szDescription;
+class CSPLATFORM extends Struct {
+  @Uint32() external int dwPlatformId;
+  @Uint32() external int dwVersionHi;
+  @Uint32() external int dwVersionLo;
+  @Uint32() external int dwProcessorArch;
 }
 
-class ComCallData extends Struct {
-  @Uint32() external int dwDispid;
-  @Uint32() external int dwReserved;
-  external Pointer pUserDefined;
+class QUERYCONTEXT extends Struct {
+  @Uint32() external int dwContext;
+  external CSPLATFORM Platform;
+  @Uint32() external int Locale;
+  @Uint32() external int dwVersionHi;
+  @Uint32() external int dwVersionLo;
 }
 
 class SecurityIdentity extends Struct {

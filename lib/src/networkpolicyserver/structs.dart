@@ -46,6 +46,13 @@ import 'package:ffi/ffi.dart';
 class SdoMachine extends Struct {
 }
 
+class RADIUS_ATTRIBUTE extends Struct {
+  @Uint32() external int dwAttrType;
+  @Uint32() external int fDataType;
+  @Uint32() external int cbDataLength;
+  @Uint32() external int Anonymous;
+}
+
 class RADIUS_VSA_FORMAT extends Struct {
   external __ubyte__ VendorId;
   @Uint8() external int VendorType;

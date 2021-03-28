@@ -43,9 +43,153 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class HRSRC extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HSURF extends Struct {
+  @IntPtr() external int Value;
+}
+
+class LSTATUS extends Struct {
+  @Int32() external int Value;
+}
+
+class NTSTATUS extends Struct {
+  @Int32() external int Value;
+}
+
+class LRESULT extends Struct {
+  @Int32() external int Value;
+}
+
+class BOOL extends Struct {
+  @Int32() external int Value;
+}
+
+class PWSTR extends Struct {
+  external Pointer<Uint8> Value;
+}
+
+class PSTR extends Struct {
+  external Pointer<Uint8> Value;
+}
+
+class HANDLE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class NonClosableHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HINSTANCE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class TimerQueueHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class PTP_POOL extends Struct {
+  @IntPtr() external int Value;
+}
+
+class NamespaceHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class BoundaryDescriptorHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class EventLogHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class EventSourceHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HeapHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class ProcessHeapHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HPOWERNOTIFY extends Struct {
+  @IntPtr() external int Value;
+}
+
+class DPI_AWARENESS_CONTEXT extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HUMPD extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HSTR extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HSPRITE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HSEMAPHORE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HLSURF extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HFASTMUTEX extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HDRVOBJ extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HDEV extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HBM extends Struct {
+  @IntPtr() external int Value;
+}
+
+class DHSURF extends Struct {
+  @IntPtr() external int Value;
+}
+
+class DHPDEV extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HPCON extends Struct {
+  @IntPtr() external int Value;
+}
+
 class FLOAT128 extends Struct {
   @Int64() external int LowPart;
   @Int64() external int HighPart;
+}
+
+class LARGE_INTEGER extends Struct {
+  @Uint32() external int Anonymous;
+  @Uint32() external int u;
+  @Int64() external int QuadPart;
+}
+
+class ULARGE_INTEGER extends Struct {
+  @Uint32() external int Anonymous;
+  @Uint32() external int u;
+  @Uint64() external int QuadPart;
 }
 
 class M128A extends Struct {
@@ -93,9 +237,57 @@ class XSTATE_CONTEXT extends Struct {
   @Uint32() external int Length;
   @Uint32() external int Reserved1;
   external Pointer<XSAVE_AREA> Area;
-  @Uint32() external int Reserved2;
   external Pointer Buffer;
-  @Uint32() external int Reserved3;
+}
+
+class SCOPE_TABLE_AMD64 extends Struct {
+  @Uint32() external int Count;
+  external ____ ScopeRecord;
+}
+
+class UNWIND_HISTORY_TABLE_ENTRY extends Struct {
+  @Uint64() external int ImageBase;
+  external Pointer<IMAGE_RUNTIME_FUNCTION_ENTRY> FunctionEntry;
+}
+
+class UNWIND_HISTORY_TABLE extends Struct {
+  @Uint32() external int Count;
+  @Uint8() external int LocalHint;
+  @Uint8() external int GlobalHint;
+  @Uint8() external int Search;
+  @Uint8() external int Once;
+  @Uint64() external int LowAddress;
+  @Uint64() external int HighAddress;
+  external UNWIND_HISTORY_TABLE_ENTRY Entry;
+}
+
+class DISPATCHER_CONTEXT extends Struct {
+  @Uint64() external int ControlPc;
+  @Uint64() external int ImageBase;
+  external Pointer<IMAGE_RUNTIME_FUNCTION_ENTRY> FunctionEntry;
+  @Uint64() external int EstablisherFrame;
+  @Uint64() external int TargetIp;
+  external Pointer<CONTEXT> ContextRecord;
+  external EXCEPTION_ROUTINE LanguageHandler;
+  external Pointer HandlerData;
+  external Pointer<UNWIND_HISTORY_TABLE> HistoryTable;
+  @Uint32() external int ScopeIndex;
+  @Uint32() external int Fill0;
+}
+
+class KNONVOLATILE_CONTEXT_POINTERS extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+}
+
+class SCOPE_TABLE_ARM extends Struct {
+  @Uint32() external int Count;
+  external ____ ScopeRecord;
+}
+
+class SCOPE_TABLE_ARM64 extends Struct {
+  @Uint32() external int Count;
+  external ____ ScopeRecord;
 }
 
 class KNONVOLATILE_CONTEXT_POINTERS_ARM64 extends Struct {
@@ -119,22 +311,6 @@ class KNONVOLATILE_CONTEXT_POINTERS_ARM64 extends Struct {
   external Pointer<Uint64> D13;
   external Pointer<Uint64> D14;
   external Pointer<Uint64> D15;
-}
-
-class FLOATING_SAVE_AREA extends Struct {
-  @Uint32() external int ControlWord;
-  @Uint32() external int StatusWord;
-  @Uint32() external int TagWord;
-  @Uint32() external int ErrorOffset;
-  @Uint32() external int ErrorSelector;
-  @Uint32() external int DataOffset;
-  @Uint32() external int DataSelector;
-  external __ubyte__ RegisterArea;
-  @Uint32() external int Spare0;
-}
-
-class KNONVOLATILE_CONTEXT_POINTERS extends Struct {
-  @Uint32() external int Dummy;
 }
 
 class WOW64_DESCRIPTOR_TABLE_ENTRY extends Struct {
@@ -190,7 +366,7 @@ class ACCESS_REASONS extends Struct {
 class SE_SECURITY_DESCRIPTOR extends Struct {
   @Uint32() external int Size;
   @Uint32() external int Flags;
-  external Pointer SecurityDescriptor;
+  external Pointer<SECURITY_DESCRIPTOR> SecurityDescriptor;
 }
 
 class SE_ACCESS_REQUEST extends Struct {
@@ -211,6 +387,11 @@ class SE_ACCESS_REPLY extends Struct {
   external Pointer<Uint32> AccessStatus;
   external Pointer<ACCESS_REASONS> AccessReason;
   external Pointer<Pointer<PRIVILEGE_SET>> Privileges;
+}
+
+class SE_TOKEN_USER extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
 }
 
 class TOKEN_SID_INFORMATION extends Struct {
@@ -240,6 +421,36 @@ class EXCEPTION_REGISTRATION_RECORD extends Struct {
   external EXCEPTION_ROUTINE Handler;
 }
 
+class NT_TIB extends Struct {
+  external Pointer<EXCEPTION_REGISTRATION_RECORD> ExceptionList;
+  external Pointer StackBase;
+  external Pointer StackLimit;
+  external Pointer SubSystemTib;
+  @Uint32() external int Anonymous;
+  external Pointer ArbitraryUserPointer;
+  external Pointer<NT_TIB> Self;
+}
+
+class NT_TIB32 extends Struct {
+  @Uint32() external int ExceptionList;
+  @Uint32() external int StackBase;
+  @Uint32() external int StackLimit;
+  @Uint32() external int SubSystemTib;
+  @Uint32() external int Anonymous;
+  @Uint32() external int ArbitraryUserPointer;
+  @Uint32() external int Self;
+}
+
+class NT_TIB64 extends Struct {
+  @Uint64() external int ExceptionList;
+  @Uint64() external int StackBase;
+  @Uint64() external int StackLimit;
+  @Uint64() external int SubSystemTib;
+  @Uint32() external int Anonymous;
+  @Uint64() external int ArbitraryUserPointer;
+  @Uint64() external int Self;
+}
+
 class UMS_CREATE_THREAD_ATTRIBUTES extends Struct {
   @Uint32() external int UmsVersion;
   external Pointer UmsContext;
@@ -260,6 +471,11 @@ class PROCESS_DYNAMIC_EH_CONTINUATION_TARGETS_INFORMATION extends Struct {
   @Uint16() external int Reserved;
   @Uint32() external int Reserved2;
   external Pointer<PROCESS_DYNAMIC_EH_CONTINUATION_TARGET> Targets;
+}
+
+class RATE_QUOTA_LIMIT extends Struct {
+  @Uint32() external int RateData;
+  @Uint32() external int Anonymous;
 }
 
 class QUOTA_LIMITS_EX extends Struct {
@@ -284,6 +500,67 @@ class IO_COUNTERS extends Struct {
   @Uint64() external int ReadTransferCount;
   @Uint64() external int WriteTransferCount;
   @Uint64() external int OtherTransferCount;
+}
+
+class PROCESS_MITIGATION_ASLR_POLICY extends Struct {
+  @Uint32() external int Anonymous;
+}
+
+class PROCESS_MITIGATION_DEP_POLICY extends Struct {
+  @Uint32() external int Anonymous;
+  @Uint8() external int Permanent;
+}
+
+class PROCESS_MITIGATION_STRICT_HANDLE_CHECK_POLICY extends Struct {
+  @Uint32() external int Anonymous;
+}
+
+class PROCESS_MITIGATION_SYSTEM_CALL_DISABLE_POLICY extends Struct {
+  @Uint32() external int Anonymous;
+}
+
+class PROCESS_MITIGATION_EXTENSION_POINT_DISABLE_POLICY extends Struct {
+  @Uint32() external int Anonymous;
+}
+
+class PROCESS_MITIGATION_DYNAMIC_CODE_POLICY extends Struct {
+  @Uint32() external int Anonymous;
+}
+
+class PROCESS_MITIGATION_CONTROL_FLOW_GUARD_POLICY extends Struct {
+  @Uint32() external int Anonymous;
+}
+
+class PROCESS_MITIGATION_BINARY_SIGNATURE_POLICY extends Struct {
+  @Uint32() external int Anonymous;
+}
+
+class PROCESS_MITIGATION_FONT_DISABLE_POLICY extends Struct {
+  @Uint32() external int Anonymous;
+}
+
+class PROCESS_MITIGATION_IMAGE_LOAD_POLICY extends Struct {
+  @Uint32() external int Anonymous;
+}
+
+class PROCESS_MITIGATION_SYSTEM_CALL_FILTER_POLICY extends Struct {
+  @Uint32() external int Anonymous;
+}
+
+class PROCESS_MITIGATION_PAYLOAD_RESTRICTION_POLICY extends Struct {
+  @Uint32() external int Anonymous;
+}
+
+class PROCESS_MITIGATION_CHILD_PROCESS_POLICY extends Struct {
+  @Uint32() external int Anonymous;
+}
+
+class PROCESS_MITIGATION_SIDE_CHANNEL_ISOLATION_POLICY extends Struct {
+  @Uint32() external int Anonymous;
+}
+
+class PROCESS_MITIGATION_USER_SHADOW_STACK_POLICY extends Struct {
+  @Uint32() external int Anonymous;
 }
 
 class JOBOBJECT_BASIC_ACCOUNTING_INFORMATION extends Struct {
@@ -364,6 +641,21 @@ class JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION extends Struct {
   @Uint32() external int LimitFlags;
 }
 
+class JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2 extends Struct {
+  @Uint64() external int IoReadBytesLimit;
+  @Uint64() external int IoWriteBytesLimit;
+  @Int64() external int PerJobUserTimeLimit;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Anonymous3;
+  @Uint32() external int LimitFlags;
+  @Uint32() external int IoRateControlTolerance;
+  @Uint64() external int JobLowMemoryLimit;
+  @Uint32() external int IoRateControlToleranceInterval;
+  @Uint32() external int NetRateControlTolerance;
+  @Uint32() external int NetRateControlToleranceInterval;
+}
+
 class JOBOBJECT_LIMIT_VIOLATION_INFORMATION extends Struct {
   @Uint32() external int LimitFlags;
   @Uint32() external int ViolationLimitFlags;
@@ -377,6 +669,31 @@ class JOBOBJECT_LIMIT_VIOLATION_INFORMATION extends Struct {
   @Uint64() external int JobMemoryLimit;
   @Uint32() external int RateControlTolerance;
   @Uint32() external int RateControlToleranceLimit;
+}
+
+class JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2 extends Struct {
+  @Uint32() external int LimitFlags;
+  @Uint32() external int ViolationLimitFlags;
+  @Uint64() external int IoReadBytes;
+  @Uint64() external int IoReadBytesLimit;
+  @Uint64() external int IoWriteBytes;
+  @Uint64() external int IoWriteBytesLimit;
+  @Int64() external int PerJobUserTime;
+  @Int64() external int PerJobUserTimeLimit;
+  @Uint64() external int JobMemory;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Anonymous3;
+  @Uint64() external int JobLowMemoryLimit;
+  @Uint32() external int IoRateControlTolerance;
+  @Uint32() external int IoRateControlToleranceLimit;
+  @Uint32() external int NetRateControlTolerance;
+  @Uint32() external int NetRateControlToleranceLimit;
+}
+
+class JOBOBJECT_CPU_RATE_CONTROL_INFORMATION extends Struct {
+  @Uint32() external int ControlFlags;
+  @Uint32() external int Anonymous;
 }
 
 class JOBOBJECT_NET_RATE_CONTROL_INFORMATION extends Struct {
@@ -471,6 +788,12 @@ class CACHE_DESCRIPTOR extends Struct {
   @Uint32() external int Type;
 }
 
+class SYSTEM_LOGICAL_PROCESSOR_INFORMATION extends Struct {
+  @IntPtr() external int ProcessorMask;
+  @Uint32() external int Relationship;
+  @Uint32() external int Anonymous;
+}
+
 class PROCESSOR_RELATIONSHIP extends Struct {
   @Uint8() external int Flags;
   @Uint8() external int EfficiencyClass;
@@ -509,6 +832,18 @@ class GROUP_RELATIONSHIP extends Struct {
   external PROCESSOR_GROUP_INFO GroupInfo;
 }
 
+class SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX extends Struct {
+  @Uint32() external int Relationship;
+  @Uint32() external int Size;
+  @Uint32() external int Anonymous;
+}
+
+class SYSTEM_CPU_SET_INFORMATION extends Struct {
+  @Uint32() external int Size;
+  @Uint32() external int Type;
+  @Uint32() external int Anonymous;
+}
+
 class SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION extends Struct {
   @Uint64() external int CycleTime;
 }
@@ -518,10 +853,24 @@ class XSTATE_FEATURE extends Struct {
   @Uint32() external int Size;
 }
 
+class XSTATE_CONFIGURATION extends Struct {
+  @Uint64() external int EnabledFeatures;
+  @Uint64() external int EnabledVolatileFeatures;
+  @Uint32() external int Size;
+  @Uint32() external int Anonymous;
+  external XSTATE_FEATURE Features;
+  @Uint64() external int EnabledSupervisorFeatures;
+  @Uint64() external int AlignedFeatures;
+  @Uint32() external int AllFeatureSize;
+  external __uint__ AllFeatures;
+  @Uint64() external int EnabledUserVisibleSupervisorFeatures;
+}
+
 class MEMORY_BASIC_INFORMATION extends Struct {
   external Pointer BaseAddress;
   external Pointer AllocationBase;
   @Uint32() external int AllocationProtect;
+  @Uint16() external int PartitionId;
   @IntPtr() external int RegionSize;
   @Uint32() external int State;
   @Uint32() external int Protect;
@@ -561,6 +910,11 @@ class MEM_ADDRESS_REQUIREMENTS extends Struct {
   @IntPtr() external int Alignment;
 }
 
+class MEM_EXTENDED_PARAMETER extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+}
+
 class ENCLAVE_CREATE_INFO_SGX extends Struct {
   external __ubyte__ Secs;
 }
@@ -584,6 +938,15 @@ class ENCLAVE_CREATE_INFO_VBS_BASIC extends Struct {
 
 class ENCLAVE_LOAD_DATA_VBS_BASIC extends Struct {
   @Uint32() external int PageType;
+}
+
+class ENCLAVE_INIT_INFO_VBS_BASIC extends Struct {
+  external __ubyte__ FamilyId;
+  external __ubyte__ ImageId;
+  @Uint64() external int EnclaveSize;
+  @Uint32() external int EnclaveSvn;
+  @Uint32() external int Reserved;
+  @Uint32() external int Anonymous;
 }
 
 class ENCLAVE_INIT_INFO_VBS extends Struct {
@@ -646,6 +1009,14 @@ class REARRANGE_FILE_DATA extends Struct {
   @Uint64() external int SourceStartingOffset;
   @Uint64() external int TargetOffset;
   @IntPtr() external int SourceFileHandle;
+  @Uint32() external int Length;
+  @Uint32() external int Flags;
+}
+
+class REARRANGE_FILE_DATA32 extends Struct {
+  @Uint64() external int SourceStartingOffset;
+  @Uint64() external int TargetOffset;
+  @Uint32() external int SourceFileHandle;
   @Uint32() external int Length;
   @Uint32() external int Flags;
 }
@@ -973,6 +1344,13 @@ class PROCESSOR_IDLESTATE_INFO extends Struct {
   external __ubyte__ Spare;
 }
 
+class PROCESSOR_IDLESTATE_POLICY extends Struct {
+  @Uint16() external int Revision;
+  @Uint32() external int Flags;
+  @Uint32() external int PolicyCount;
+  external PROCESSOR_IDLESTATE_INFO Policy;
+}
+
 class PROCESSOR_POWER_POLICY_INFO extends Struct {
   @Uint32() external int TimeCheck;
   @Uint32() external int DemoteLimit;
@@ -990,6 +1368,19 @@ class PROCESSOR_POWER_POLICY extends Struct {
   @Uint32() external int _bitfield;
   @Uint32() external int PolicyCount;
   external PROCESSOR_POWER_POLICY_INFO Policy;
+}
+
+class PROCESSOR_PERFSTATE_POLICY extends Struct {
+  @Uint32() external int Revision;
+  @Uint8() external int MaxThrottle;
+  @Uint8() external int MinThrottle;
+  @Uint8() external int BusyAdjThreshold;
+  @Uint32() external int Anonymous;
+  @Uint32() external int TimeCheck;
+  @Uint32() external int IncreaseTime;
+  @Uint32() external int DecreaseTime;
+  @Uint32() external int IncreasePercent;
+  @Uint32() external int DecreasePercent;
 }
 
 class ADMINISTRATOR_POWER_POLICY extends Struct {
@@ -1266,11 +1657,56 @@ class ANON_OBJECT_HEADER_BIGOBJ extends Struct {
   @Uint32() external int NumberOfSymbols;
 }
 
+class IMAGE_SYMBOL extends Struct {
+  @Uint32() external int N;
+  @Uint32() external int Value;
+  @Int16() external int SectionNumber;
+  @Uint16() external int Type;
+  @Uint8() external int StorageClass;
+  @Uint8() external int NumberOfAuxSymbols;
+}
+
+class IMAGE_SYMBOL_EX extends Struct {
+  @Uint32() external int N;
+  @Uint32() external int Value;
+  @Int32() external int SectionNumber;
+  @Uint16() external int Type;
+  @Uint8() external int StorageClass;
+  @Uint8() external int NumberOfAuxSymbols;
+}
+
 class IMAGE_AUX_SYMBOL_TOKEN_DEF extends Struct {
   @Uint8() external int bAuxType;
   @Uint8() external int bReserved;
   @Uint32() external int SymbolTableIndex;
   external __ubyte__ rgbReserved;
+}
+
+class IMAGE_AUX_SYMBOL extends Struct {
+  @Uint32() external int Sym;
+  @Uint32() external int File;
+  @Uint32() external int Section;
+  external IMAGE_AUX_SYMBOL_TOKEN_DEF TokenDef;
+  @Uint32() external int CRC;
+}
+
+class IMAGE_AUX_SYMBOL_EX extends Struct {
+  @Uint32() external int Sym;
+  @Uint32() external int File;
+  @Uint32() external int Section;
+  @Uint32() external int Anonymous;
+  @Uint32() external int CRC;
+}
+
+class IMAGE_RELOCATION extends Struct {
+  @Uint32() external int Anonymous;
+  @Uint32() external int SymbolTableIndex;
+  @Uint16() external int Type;
+}
+
+class IMAGE_LINENUMBER extends Struct {
+  @Uint32() external int Type;
+  @Uint16() external int Linenumber;
 }
 
 class IMAGE_BASE_RELOCATION extends Struct {
@@ -1307,6 +1743,40 @@ class IMAGE_IMPORT_BY_NAME extends Struct {
   external __byte__ Name;
 }
 
+class IMAGE_THUNK_DATA64 extends Struct {
+  @Uint32() external int u1;
+}
+
+class IMAGE_THUNK_DATA32 extends Struct {
+  @Uint32() external int u1;
+}
+
+class IMAGE_TLS_DIRECTORY64 extends Struct {
+  @Uint64() external int StartAddressOfRawData;
+  @Uint64() external int EndAddressOfRawData;
+  @Uint64() external int AddressOfIndex;
+  @Uint64() external int AddressOfCallBacks;
+  @Uint32() external int SizeOfZeroFill;
+  @Uint32() external int Anonymous;
+}
+
+class IMAGE_TLS_DIRECTORY32 extends Struct {
+  @Uint32() external int StartAddressOfRawData;
+  @Uint32() external int EndAddressOfRawData;
+  @Uint32() external int AddressOfIndex;
+  @Uint32() external int AddressOfCallBacks;
+  @Uint32() external int SizeOfZeroFill;
+  @Uint32() external int Anonymous;
+}
+
+class IMAGE_IMPORT_DESCRIPTOR extends Struct {
+  @Uint32() external int Anonymous;
+  @Uint32() external int TimeDateStamp;
+  @Uint32() external int ForwarderChain;
+  @Uint32() external int Name;
+  @Uint32() external int FirstThunk;
+}
+
 class IMAGE_BOUND_IMPORT_DESCRIPTOR extends Struct {
   @Uint32() external int TimeDateStamp;
   @Uint16() external int OffsetModuleName;
@@ -1319,6 +1789,17 @@ class IMAGE_BOUND_FORWARDER_REF extends Struct {
   @Uint16() external int Reserved;
 }
 
+class IMAGE_DELAYLOAD_DESCRIPTOR extends Struct {
+  @Uint32() external int Attributes;
+  @Uint32() external int DllNameRVA;
+  @Uint32() external int ModuleHandleRVA;
+  @Uint32() external int ImportAddressTableRVA;
+  @Uint32() external int ImportNameTableRVA;
+  @Uint32() external int BoundImportAddressTableRVA;
+  @Uint32() external int UnloadInformationTableRVA;
+  @Uint32() external int TimeDateStamp;
+}
+
 class IMAGE_RESOURCE_DIRECTORY extends Struct {
   @Uint32() external int Characteristics;
   @Uint32() external int TimeDateStamp;
@@ -1326,6 +1807,11 @@ class IMAGE_RESOURCE_DIRECTORY extends Struct {
   @Uint16() external int MinorVersion;
   @Uint16() external int NumberOfNamedEntries;
   @Uint16() external int NumberOfIdEntries;
+}
+
+class IMAGE_RESOURCE_DIRECTORY_ENTRY extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
 }
 
 class IMAGE_RESOURCE_DIRECTORY_STRING extends Struct {
@@ -1437,6 +1923,21 @@ class IMAGE_CE_RUNTIME_FUNCTION_ENTRY extends Struct {
   @Uint32() external int _bitfield;
 }
 
+class IMAGE_ARM_RUNTIME_FUNCTION_ENTRY extends Struct {
+  @Uint32() external int BeginAddress;
+  @Uint32() external int Anonymous;
+}
+
+class IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY extends Struct {
+  @Uint32() external int BeginAddress;
+  @Uint32() external int Anonymous;
+}
+
+class IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY_XDATA extends Struct {
+  @Uint32() external int HeaderData;
+  @Uint32() external int Anonymous;
+}
+
 class IMAGE_ALPHA64_RUNTIME_FUNCTION_ENTRY extends Struct {
   @Uint64() external int BeginAddress;
   @Uint64() external int EndAddress;
@@ -1451,6 +1952,12 @@ class IMAGE_ALPHA_RUNTIME_FUNCTION_ENTRY extends Struct {
   @Uint32() external int ExceptionHandler;
   @Uint32() external int HandlerData;
   @Uint32() external int PrologEndAddress;
+}
+
+class IMAGE_RUNTIME_FUNCTION_ENTRY extends Struct {
+  @Uint32() external int BeginAddress;
+  @Uint32() external int EndAddress;
+  @Uint32() external int Anonymous;
 }
 
 class IMAGE_ENCLAVE_CONFIG32 extends Struct {
@@ -1541,6 +2048,41 @@ class IMAGE_ARCHITECTURE_ENTRY extends Struct {
   @Uint32() external int NewInst;
 }
 
+class IMPORT_OBJECT_HEADER extends Struct {
+  @Uint16() external int Sig1;
+  @Uint16() external int Sig2;
+  @Uint16() external int Version;
+  @Uint16() external int Machine;
+  @Uint32() external int TimeDateStamp;
+  @Uint32() external int SizeOfData;
+  @Uint32() external int Anonymous;
+  @Uint16() external int _bitfield;
+}
+
+class IMAGE_COR20_HEADER extends Struct {
+  @Uint32() external int cb;
+  @Uint16() external int MajorRuntimeVersion;
+  @Uint16() external int MinorRuntimeVersion;
+  external IMAGE_DATA_DIRECTORY MetaData;
+  @Uint32() external int Flags;
+  @Uint32() external int Anonymous;
+  external IMAGE_DATA_DIRECTORY Resources;
+  external IMAGE_DATA_DIRECTORY StrongNameSignature;
+  external IMAGE_DATA_DIRECTORY CodeManagerTable;
+  external IMAGE_DATA_DIRECTORY VTableFixups;
+  external IMAGE_DATA_DIRECTORY ExportAddressTableJumps;
+  external IMAGE_DATA_DIRECTORY ManagedNativeHeader;
+}
+
+class SLIST_ENTRY extends Struct {
+  external Pointer<SLIST_ENTRY> Next;
+}
+
+class SLIST_HEADER extends Struct {
+  @Uint32() external int Anonymous;
+  @Uint32() external int HeaderX64;
+}
+
 class RTL_RUN_ONCE extends Struct {
   external Pointer Ptr;
 }
@@ -1566,6 +2108,12 @@ class CORRELATION_VECTOR extends Struct {
 class CUSTOM_SYSTEM_EVENT_TRIGGER_CONFIG extends Struct {
   @Uint32() external int Size;
   external Pointer<Utf16> TriggerId;
+}
+
+class IMAGE_POLICY_ENTRY extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int PolicyId;
+  @Uint32() external int u;
 }
 
 class IMAGE_POLICY_METADATA extends Struct {
@@ -1832,6 +2380,19 @@ class TP_POOL_STACK_INFORMATION extends Struct {
 class TP_CLEANUP_GROUP extends Struct {
 }
 
+class TP_CALLBACK_ENVIRON_V3 extends Struct {
+  @Uint32() external int Version;
+  @IntPtr() external int Pool;
+  @IntPtr() external int CleanupGroup;
+  external PTP_CLEANUP_GROUP_CANCEL_CALLBACK CleanupGroupCancelCallback;
+  external Pointer RaceDll;
+  @IntPtr() external int ActivationContext;
+  external PTP_SIMPLE_CALLBACK FinalizationCallback;
+  @Uint32() external int u;
+  @Uint32() external int CallbackPriority;
+  @Uint32() external int Size;
+}
+
 class TP_WORK extends Struct {
 }
 
@@ -1860,382 +2421,32 @@ class JOBOBJECT_IO_RATE_CONTROL_INFORMATION extends Struct {
   @Uint32() external int ControlFlags;
 }
 
-class PROCESS_INFORMATION extends Struct {
-  @IntPtr() external int hProcess;
-  @IntPtr() external int hThread;
-  @Uint32() external int dwProcessId;
-  @Uint32() external int dwThreadId;
-}
-
-class STARTUPINFOA extends Struct {
-  @Uint32() external int cb;
-  external Pointer<Utf8> lpReserved;
-  external Pointer<Utf8> lpDesktop;
-  external Pointer<Utf8> lpTitle;
-  @Uint32() external int dwX;
-  @Uint32() external int dwY;
-  @Uint32() external int dwXSize;
-  @Uint32() external int dwYSize;
-  @Uint32() external int dwXCountChars;
-  @Uint32() external int dwYCountChars;
-  @Uint32() external int dwFillAttribute;
-  @Uint32() external int dwFlags;
-  @Uint16() external int wShowWindow;
-  @Uint16() external int cbReserved2;
-  external Pointer<Uint8> lpReserved2;
-  @IntPtr() external int hStdInput;
-  @IntPtr() external int hStdOutput;
-  @IntPtr() external int hStdError;
-}
-
-class STARTUPINFOW extends Struct {
-  @Uint32() external int cb;
-  external Pointer<Utf16> lpReserved;
-  external Pointer<Utf16> lpDesktop;
-  external Pointer<Utf16> lpTitle;
-  @Uint32() external int dwX;
-  @Uint32() external int dwY;
-  @Uint32() external int dwXSize;
-  @Uint32() external int dwYSize;
-  @Uint32() external int dwXCountChars;
-  @Uint32() external int dwYCountChars;
-  @Uint32() external int dwFillAttribute;
-  @Uint32() external int dwFlags;
-  @Uint16() external int wShowWindow;
-  @Uint16() external int cbReserved2;
-  external Pointer<Uint8> lpReserved2;
-  @IntPtr() external int hStdInput;
-  @IntPtr() external int hStdOutput;
-  @IntPtr() external int hStdError;
-}
-
-class MEMORY_PRIORITY_INFORMATION extends Struct {
-  @Uint32() external int MemoryPriority;
-}
-
-class THREAD_POWER_THROTTLING_STATE extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int ControlMask;
-  @Uint32() external int StateMask;
-}
-
-class APP_MEMORY_INFORMATION extends Struct {
-  @Uint64() external int AvailableCommit;
-  @Uint64() external int PrivateCommitUsage;
-  @Uint64() external int PeakPrivateCommitUsage;
-  @Uint64() external int TotalCommitUsage;
-}
-
-class PROCESS_MEMORY_EXHAUSTION_INFO extends Struct {
-  @Uint16() external int Version;
-  @Uint16() external int Reserved;
-  @Uint32() external int Type;
-  @IntPtr() external int Value;
-}
-
-class PROCESS_POWER_THROTTLING_STATE extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int ControlMask;
-  @Uint32() external int StateMask;
-}
-
-class PROCESS_PROTECTION_LEVEL_INFORMATION extends Struct {
-  @Uint32() external int ProtectionLevel;
-}
-
-class PROCESS_LEAP_SECOND_INFO extends Struct {
-  @Uint32() external int Flags;
-  @Uint32() external int Reserved;
-}
-
-class MEMORYSTATUSEX extends Struct {
-  @Uint32() external int dwLength;
-  @Uint32() external int dwMemoryLoad;
-  @Uint64() external int ullTotalPhys;
-  @Uint64() external int ullAvailPhys;
-  @Uint64() external int ullTotalPageFile;
-  @Uint64() external int ullAvailPageFile;
-  @Uint64() external int ullTotalVirtual;
-  @Uint64() external int ullAvailVirtual;
-  @Uint64() external int ullAvailExtendedVirtual;
-}
-
-class COMMPROP extends Struct {
-  @Uint16() external int wPacketLength;
-  @Uint16() external int wPacketVersion;
-  @Uint32() external int dwServiceMask;
-  @Uint32() external int dwReserved1;
-  @Uint32() external int dwMaxTxQueue;
-  @Uint32() external int dwMaxRxQueue;
-  @Uint32() external int dwMaxBaud;
-  @Uint32() external int dwProvSubType;
-  @Uint32() external int dwProvCapabilities;
-  @Uint32() external int dwSettableParams;
-  @Uint32() external int dwSettableBaud;
-  @Uint16() external int wSettableData;
-  @Uint32() external int wSettableStopParity;
-  @Uint32() external int dwCurrentTxQueue;
-  @Uint32() external int dwCurrentRxQueue;
-  @Uint32() external int dwProvSpec1;
-  @Uint32() external int dwProvSpec2;
-  external __ushort__ wcProvChar;
-}
-
-class COMSTAT extends Struct {
-  @Uint32() external int _bitfield;
-  @Uint32() external int cbInQue;
-  @Uint32() external int cbOutQue;
-}
-
-class DCB extends Struct {
-  @Uint32() external int DCBlength;
-  @Uint32() external int BaudRate;
-  @Uint32() external int _bitfield;
-  @Uint16() external int wReserved;
-  @Uint16() external int XonLim;
-  @Uint16() external int XoffLim;
-  @Uint8() external int ByteSize;
-  @Uint32() external int Parity;
-  @Uint32() external int StopBits;
-  @Int8() external int XonChar;
-  @Int8() external int XoffChar;
-  @Int8() external int ErrorChar;
-  @Int8() external int EofChar;
-  @Int8() external int EvtChar;
-  @Uint16() external int wReserved1;
-}
-
-class COMMTIMEOUTS extends Struct {
-  @Uint32() external int ReadIntervalTimeout;
-  @Uint32() external int ReadTotalTimeoutMultiplier;
-  @Uint32() external int ReadTotalTimeoutConstant;
-  @Uint32() external int WriteTotalTimeoutMultiplier;
-  @Uint32() external int WriteTotalTimeoutConstant;
-}
-
-class COMMCONFIG extends Struct {
-  @Uint32() external int dwSize;
-  @Uint16() external int wVersion;
-  @Uint16() external int wReserved;
-  external DCB dcb;
-  @Uint32() external int dwProviderSubType;
-  @Uint32() external int dwProviderOffset;
-  @Uint32() external int dwProviderSize;
-  external __ushort__ wcProviderData;
-}
-
-class MEMORYSTATUS extends Struct {
-  @Uint32() external int dwLength;
-  @Uint32() external int dwMemoryLoad;
-  @IntPtr() external int dwTotalPhys;
-  @IntPtr() external int dwAvailPhys;
-  @IntPtr() external int dwTotalPageFile;
-  @IntPtr() external int dwAvailPageFile;
-  @IntPtr() external int dwTotalVirtual;
-  @IntPtr() external int dwAvailVirtual;
-}
-
-class UMS_SCHEDULER_STARTUP_INFO extends Struct {
-  @Uint32() external int UmsVersion;
-  external Pointer CompletionList;
-  external PRTL_UMS_SCHEDULER_ENTRY_POINT SchedulerProc;
-  external Pointer SchedulerParam;
-}
-
-class WIN32_STREAM_ID extends Struct {
-  @Uint32() external int dwStreamId;
-  @Uint32() external int dwStreamAttributes;
-  @Int64() external int Size;
-  @Uint32() external int dwStreamNameSize;
-  external __ushort__ cStreamName;
-}
-
-class STARTUPINFOEXA extends Struct {
-  external STARTUPINFOA StartupInfo;
-  @IntPtr() external int lpAttributeList;
-}
-
-class STARTUPINFOEXW extends Struct {
-  external STARTUPINFOW StartupInfo;
-  @IntPtr() external int lpAttributeList;
-}
-
-class EVENTLOG_FULL_INFORMATION extends Struct {
-  @Uint32() external int dwFull;
-}
-
-class SYSTEM_POWER_STATUS extends Struct {
-  @Uint8() external int ACLineStatus;
-  @Uint8() external int BatteryFlag;
-  @Uint8() external int BatteryLifePercent;
-  @Uint8() external int SystemStatusFlag;
-  @Uint32() external int BatteryLifeTime;
-  @Uint32() external int BatteryFullLifeTime;
-}
-
-class PEB_LDR_DATA extends Struct {
-  external __ubyte__ Reserved1;
-  external ____ Reserved2;
-  external LIST_ENTRY InMemoryOrderModuleList;
-}
-
-class RTL_USER_PROCESS_PARAMETERS extends Struct {
-  external __ubyte__ Reserved1;
-  external ____ Reserved2;
-  external UNICODE_STRING ImagePathName;
-  external UNICODE_STRING CommandLine;
-}
-
-class PEB extends Struct {
-  external __ubyte__ Reserved1;
-  @Uint8() external int BeingDebugged;
-  external __ubyte__ Reserved2;
-  external ____ Reserved3;
-  external Pointer<PEB_LDR_DATA> Ldr;
-  external Pointer<RTL_USER_PROCESS_PARAMETERS> ProcessParameters;
-  external ____ Reserved4;
-  external Pointer AtlThunkSListPtr;
-  external Pointer Reserved5;
-  @Uint32() external int Reserved6;
-  external Pointer Reserved7;
-  @Uint32() external int Reserved8;
-  @Uint32() external int AtlThunkSListPtr32;
-  external ____ Reserved9;
-  external __ubyte__ Reserved10;
-  external PPS_POST_PROCESS_INIT_ROUTINE PostProcessInitRoutine;
-  external __ubyte__ Reserved11;
-  external ____ Reserved12;
-  @Uint32() external int SessionId;
-}
-
-class BOOL extends Struct {
-  @Int32() external int Value;
-}
-
-class BoundaryDescriptorHandle extends Struct {
-  @IntPtr() external int Value;
-}
-
-class DHPDEV extends Struct {
-  @IntPtr() external int Value;
-}
-
-class DHSURF extends Struct {
-  @IntPtr() external int Value;
-}
-
-class DPI_AWARENESS_CONTEXT extends Struct {
-  @IntPtr() external int Value;
-}
-
-class EventLogHandle extends Struct {
-  @IntPtr() external int Value;
-}
-
-class EventSourceHandle extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HANDLE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HBM extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HDEV extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HDRVOBJ extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HeapHandle extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HFASTMUTEX extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HINSTANCE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HLSURF extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HPCON extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HPOWERNOTIFY extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HRSRC extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HSEMAPHORE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HSPRITE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HSTR extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HSURF extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HUMPD extends Struct {
-  @IntPtr() external int Value;
-}
-
-class LRESULT extends Struct {
-  @Int32() external int Value;
-}
-
-class LSTATUS extends Struct {
-  @Int32() external int Value;
-}
-
-class NamespaceHandle extends Struct {
-  @IntPtr() external int Value;
-}
-
-class NTSTATUS extends Struct {
-  @Int32() external int Value;
-}
-
-class PSTR extends Struct {
-  external Pointer<Uint8> Value;
-}
-
-class PTP_POOL extends Struct {
-  @IntPtr() external int Value;
-}
-
-class PWSTR extends Struct {
-  external Pointer<Uint8> Value;
-}
-
-class TimerQueueHandle extends Struct {
-  @IntPtr() external int Value;
-}
-
 class SECURITY_ATTRIBUTES extends Struct {
   @Uint32() external int nLength;
   external Pointer lpSecurityDescriptor;
   @Int32() external int bInheritHandle;
+}
+
+class OVERLAPPED extends Struct {
+  @IntPtr() external int Internal;
+  @IntPtr() external int InternalHigh;
+  @Uint32() external int Anonymous;
+  @IntPtr() external int hEvent;
+}
+
+class PROCESS_HEAP_ENTRY extends Struct {
+  external Pointer lpData;
+  @Uint32() external int cbData;
+  @Uint8() external int cbOverhead;
+  @Uint8() external int iRegionIndex;
+  @Uint16() external int wFlags;
+  @Uint32() external int Anonymous;
+}
+
+class REASON_CONTEXT extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Flags;
+  @Uint32() external int Reason;
 }
 
 class HEAP_SUMMARY extends Struct {
@@ -2249,6 +2460,14 @@ class HEAP_SUMMARY extends Struct {
 class WIN32_MEMORY_RANGE_ENTRY extends Struct {
   external Pointer VirtualAddress;
   @IntPtr() external int NumberOfBytes;
+}
+
+class WIN32_MEMORY_REGION_INFORMATION extends Struct {
+  external Pointer AllocationBase;
+  @Uint32() external int AllocationProtect;
+  @Uint32() external int Anonymous;
+  @IntPtr() external int RegionSize;
+  @IntPtr() external int CommitSize;
 }
 
 class ENUMUILANG extends Struct {
@@ -2281,6 +2500,15 @@ class SMALL_RECT extends Struct {
   @Int16() external int Bottom;
 }
 
+class KEY_EVENT_RECORD extends Struct {
+  @Int32() external int bKeyDown;
+  @Uint16() external int wRepeatCount;
+  @Uint16() external int wVirtualKeyCode;
+  @Uint16() external int wVirtualScanCode;
+  @Uint32() external int uChar;
+  @Uint32() external int dwControlKeyState;
+}
+
 class MOUSE_EVENT_RECORD extends Struct {
   external COORD dwMousePosition;
   @Uint32() external int dwButtonState;
@@ -2298,6 +2526,16 @@ class MENU_EVENT_RECORD extends Struct {
 
 class FOCUS_EVENT_RECORD extends Struct {
   @Int32() external int bSetFocus;
+}
+
+class INPUT_RECORD extends Struct {
+  @Uint16() external int EventType;
+  @Uint32() external int Event;
+}
+
+class CHAR_INFO extends Struct {
+  @Uint32() external int Char;
+  @Uint16() external int Attributes;
 }
 
 class CONSOLE_FONT_INFO extends Struct {
@@ -2359,6 +2597,44 @@ class CONSOLE_HISTORY_INFO extends Struct {
   @Uint32() external int dwFlags;
 }
 
+class MODEMDEVCAPS extends Struct {
+  @Uint32() external int dwActualSize;
+  @Uint32() external int dwRequiredSize;
+  @Uint32() external int dwDevSpecificOffset;
+  @Uint32() external int dwDevSpecificSize;
+  @Uint32() external int dwModemProviderVersion;
+  @Uint32() external int dwModemManufacturerOffset;
+  @Uint32() external int dwModemManufacturerSize;
+  @Uint32() external int dwModemModelOffset;
+  @Uint32() external int dwModemModelSize;
+  @Uint32() external int dwModemVersionOffset;
+  @Uint32() external int dwModemVersionSize;
+  @Uint32() external int dwDialOptions;
+  @Uint32() external int dwCallSetupFailTimer;
+  @Uint32() external int dwInactivityTimeout;
+  @Uint32() external int dwSpeakerVolume;
+  @Uint32() external int dwSpeakerMode;
+  @Uint32() external int dwModemOptions;
+  @Uint32() external int dwMaxDTERate;
+  @Uint32() external int dwMaxDCERate;
+  external __ubyte__ abVariablePortion;
+}
+
+class MODEMSETTINGS extends Struct {
+  @Uint32() external int dwActualSize;
+  @Uint32() external int dwRequiredSize;
+  @Uint32() external int dwDevSpecificOffset;
+  @Uint32() external int dwDevSpecificSize;
+  @Uint32() external int dwCallSetupFailTimer;
+  @Uint32() external int dwInactivityTimeout;
+  @Uint32() external int dwSpeakerVolume;
+  @Uint32() external int dwSpeakerMode;
+  @Uint32() external int dwPreferredModemOptions;
+  @Uint32() external int dwNegotiatedModemOptions;
+  @Uint32() external int dwNegotiatedDCERate;
+  external __ubyte__ abVariablePortion;
+}
+
 class RPC_IMPORT_CONTEXT_P extends Struct {
   external Pointer LookupContext;
   external Pointer ProposedHandle;
@@ -2399,11 +2675,41 @@ class RemBRUSH extends Struct {
   external __ubyte__ data;
 }
 
+class userCLIPFORMAT extends Struct {
+  @Int32() external int fContext;
+  @Uint32() external int u;
+}
+
+class GDI_NONREMOTE extends Struct {
+  @Int32() external int fContext;
+  @Uint32() external int u;
+}
+
+class userHGLOBAL extends Struct {
+  @Int32() external int fContext;
+  @Uint32() external int u;
+}
+
+class userHMETAFILE extends Struct {
+  @Int32() external int fContext;
+  @Uint32() external int u;
+}
+
 class remoteMETAFILEPICT extends Struct {
   @Int32() external int mm;
   @Int32() external int xExt;
   @Int32() external int yExt;
   external Pointer<userHMETAFILE> hMF;
+}
+
+class userHMETAFILEPICT extends Struct {
+  @Int32() external int fContext;
+  @Uint32() external int u;
+}
+
+class userHENHMETAFILE extends Struct {
+  @Int32() external int fContext;
+  @Uint32() external int u;
 }
 
 class userBITMAP extends Struct {
@@ -2417,6 +2723,33 @@ class userBITMAP extends Struct {
   external __ubyte__ pBuffer;
 }
 
+class userHBITMAP extends Struct {
+  @Int32() external int fContext;
+  @Uint32() external int u;
+}
+
+class userHPALETTE extends Struct {
+  @Int32() external int fContext;
+  @Uint32() external int u;
+}
+
+class RemotableHandle extends Struct {
+  @Int32() external int fContext;
+  @Uint32() external int u;
+}
+
+class CY extends Struct {
+  @Uint32() external int Anonymous;
+  @Int64() external int int64;
+}
+
+class DECIMAL extends Struct {
+  @Uint16() external int wReserved;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Hi32;
+  @Uint32() external int Anonymous2;
+}
+
 class BSTRBLOB extends Struct {
   @Uint32() external int cbSize;
   external Pointer<Uint8> pData;
@@ -2428,1763 +2761,9 @@ class CLIPDATA extends Struct {
   external Pointer<Uint8> pClipData;
 }
 
-class STORAGE_HOTPLUG_INFO extends Struct {
-  @Uint32() external int Size;
-  @Uint8() external int MediaRemovable;
-  @Uint8() external int MediaHotplug;
-  @Uint8() external int DeviceHotplug;
-  @Uint8() external int WriteCacheEnableOverride;
-}
-
-class STORAGE_DEVICE_NUMBER extends Struct {
-  @Uint32() external int DeviceType;
-  @Uint32() external int DeviceNumber;
-  @Uint32() external int PartitionNumber;
-}
-
-class STORAGE_DEVICE_NUMBERS extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int NumberOfDevices;
-  external STORAGE_DEVICE_NUMBER Devices;
-}
-
-class STORAGE_DEVICE_NUMBER_EX extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int Flags;
-  @Uint32() external int DeviceType;
-  @Uint32() external int DeviceNumber;
-  external GUID DeviceGuid;
-  @Uint32() external int PartitionNumber;
-}
-
-class STORAGE_BUS_RESET_REQUEST extends Struct {
-  @Uint8() external int PathId;
-}
-
-class STORAGE_BREAK_RESERVATION_REQUEST extends Struct {
-  @Uint32() external int Length;
-  @Uint8() external int _unused;
-  @Uint8() external int PathId;
-  @Uint8() external int TargetId;
-  @Uint8() external int Lun;
-}
-
-class PREVENT_MEDIA_REMOVAL extends Struct {
-  @Uint8() external int PreventMediaRemoval;
-}
-
-class CLASS_MEDIA_CHANGE_CONTEXT extends Struct {
-  @Uint32() external int MediaChangeCount;
-  @Uint32() external int NewState;
-}
-
-class TAPE_STATISTICS extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Flags;
-  @Int64() external int RecoveredWrites;
-  @Int64() external int UnrecoveredWrites;
-  @Int64() external int RecoveredReads;
-  @Int64() external int UnrecoveredReads;
-  @Uint8() external int CompressionRatioReads;
-  @Uint8() external int CompressionRatioWrites;
-}
-
-class TAPE_GET_STATISTICS extends Struct {
-  @Uint32() external int Operation;
-}
-
-class GET_MEDIA_TYPES extends Struct {
-  @Uint32() external int DeviceType;
-  @Uint32() external int MediaInfoCount;
-  external DEVICE_MEDIA_INFO MediaInfo;
-}
-
-class STORAGE_PREDICT_FAILURE extends Struct {
-  @Uint32() external int PredictFailure;
-  external __ubyte__ VendorSpecific;
-}
-
-class STORAGE_FAILURE_PREDICTION_CONFIG extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint8() external int Set;
-  @Uint8() external int Enabled;
-  @Uint16() external int Reserved;
-}
-
-class STORAGE_PROPERTY_SET extends Struct {
-  @Uint32() external int PropertyId;
-  @Uint32() external int SetType;
-  external __ubyte__ AdditionalParameters;
-}
-
-class STORAGE_IDENTIFIER extends Struct {
-  @Uint32() external int CodeSet;
-  @Uint32() external int Type;
-  @Uint16() external int IdentifierSize;
-  @Uint16() external int NextOffset;
-  @Uint32() external int Association;
-  external __ubyte__ Identifier;
-}
-
-class STORAGE_LB_PROVISIONING_MAP_RESOURCES extends Struct {
-  @Uint32() external int Size;
-  @Uint32() external int Version;
-  @Uint8() external int _bitfield1;
-  external __ubyte__ Reserved1;
-  @Uint8() external int _bitfield2;
-  external __ubyte__ Reserved3;
-  @Uint64() external int AvailableMappingResources;
-  @Uint64() external int UsedMappingResources;
-}
-
-class STORAGE_RPMB_DESCRIPTOR extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int SizeInBytes;
-  @Uint32() external int MaxReliableWriteSizeInBytes;
-  @Uint32() external int FrameFormat;
-}
-
-class STORAGE_CRYPTO_CAPABILITY extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int CryptoCapabilityIndex;
-  @Uint32() external int AlgorithmId;
-  @Uint32() external int KeySize;
-  @Uint32() external int DataUnitSizeBitmask;
-}
-
-class STORAGE_CRYPTO_DESCRIPTOR extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int NumKeysSupported;
-  @Uint32() external int NumCryptoCapabilities;
-  external STORAGE_CRYPTO_CAPABILITY CryptoCapabilities;
-}
-
-class STORAGE_TIER extends Struct {
-  external GUID Id;
-  external __ushort__ Name;
-  external __ushort__ Description;
-  @Uint64() external int Flags;
-  @Uint64() external int ProvisionedCapacity;
-  @Uint32() external int MediaType;
-  @Uint32() external int Class;
-}
-
-class STORAGE_DEVICE_TIERING_DESCRIPTOR extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int Flags;
-  @Uint32() external int TotalNumberOfTiers;
-  @Uint32() external int NumberOfTiersReturned;
-  external STORAGE_TIER Tiers;
-}
-
-class STORAGE_DEVICE_FAULT_DOMAIN_DESCRIPTOR extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int NumberOfFaultDomains;
-  external GUID FaultDomainIds;
-}
-
-class STORAGE_PROTOCOL_SPECIFIC_DATA_EXT extends Struct {
-  @Uint32() external int ProtocolType;
-  @Uint32() external int DataType;
-  @Uint32() external int ProtocolDataValue;
-  @Uint32() external int ProtocolDataSubValue;
-  @Uint32() external int ProtocolDataOffset;
-  @Uint32() external int ProtocolDataLength;
-  @Uint32() external int FixedProtocolReturnData;
-  @Uint32() external int ProtocolDataSubValue2;
-  @Uint32() external int ProtocolDataSubValue3;
-  @Uint32() external int ProtocolDataSubValue4;
-  @Uint32() external int ProtocolDataSubValue5;
-  external __uint__ Reserved;
-}
-
-class STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  external STORAGE_PROTOCOL_SPECIFIC_DATA_EXT ProtocolSpecificData;
-}
-
-class STORAGE_DEVICE_MANAGEMENT_STATUS extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int Health;
-  @Uint32() external int NumberOfOperationalStatus;
-  @Uint32() external int NumberOfAdditionalReasons;
-  @Uint32() external int OperationalStatus;
-  external STORAGE_OPERATIONAL_REASON AdditionalReasons;
-}
-
-class STORAGE_ZONE_GROUP extends Struct {
-  @Uint32() external int ZoneCount;
-  @Uint32() external int ZoneType;
-  @Uint64() external int ZoneSize;
-}
-
-class STORAGE_DEVICE_LOCATION_DESCRIPTOR extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  external DEVICE_LOCATION Location;
-  @Uint32() external int StringOffset;
-}
-
-class STORAGE_DEVICE_NUMA_PROPERTY extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int NumaNode;
-}
-
-class STORAGE_DEVICE_UNSAFE_SHUTDOWN_COUNT extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int UnsafeShutdownCount;
-}
-
-class STORAGE_HW_ENDURANCE_DATA_DESCRIPTOR extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  external STORAGE_HW_ENDURANCE_INFO EnduranceInfo;
-}
-
-class DEVICE_DATA_SET_RANGE extends Struct {
-  @Int64() external int StartingOffset;
-  @Uint64() external int LengthInBytes;
-}
-
-class DEVICE_MANAGE_DATA_SET_ATTRIBUTES extends Struct {
-  @Uint32() external int Size;
-  @Uint32() external int Action;
-  @Uint32() external int Flags;
-  @Uint32() external int ParameterBlockOffset;
-  @Uint32() external int ParameterBlockLength;
-  @Uint32() external int DataSetRangesOffset;
-  @Uint32() external int DataSetRangesLength;
-}
-
-class DEVICE_MANAGE_DATA_SET_ATTRIBUTES_OUTPUT extends Struct {
-  @Uint32() external int Size;
-  @Uint32() external int Action;
-  @Uint32() external int Flags;
-  @Uint32() external int OperationStatus;
-  @Uint32() external int ExtendedError;
-  @Uint32() external int TargetDetailedError;
-  @Uint32() external int ReservedStatus;
-  @Uint32() external int OutputBlockOffset;
-  @Uint32() external int OutputBlockLength;
-}
-
-class DEVICE_DSM_DEFINITION extends Struct {
-  @Uint32() external int Action;
-  @Uint8() external int SingleRange;
-  @Uint32() external int ParameterBlockAlignment;
-  @Uint32() external int ParameterBlockLength;
-  @Uint8() external int HasOutput;
-  @Uint32() external int OutputBlockAlignment;
-  @Uint32() external int OutputBlockLength;
-}
-
-class DEVICE_DSM_NOTIFICATION_PARAMETERS extends Struct {
-  @Uint32() external int Size;
-  @Uint32() external int Flags;
-  @Uint32() external int NumFileTypeIDs;
-  external GUID FileTypeID;
-}
-
-class DEVICE_DSM_OFFLOAD_READ_PARAMETERS extends Struct {
-  @Uint32() external int Flags;
-  @Uint32() external int TimeToLive;
-  external __uint__ Reserved;
-}
-
-class STORAGE_OFFLOAD_READ_OUTPUT extends Struct {
-  @Uint32() external int OffloadReadFlags;
-  @Uint32() external int Reserved;
-  @Uint64() external int LengthProtected;
-  @Uint32() external int TokenLength;
-  external STORAGE_OFFLOAD_TOKEN Token;
-}
-
-class DEVICE_DSM_OFFLOAD_WRITE_PARAMETERS extends Struct {
-  @Uint32() external int Flags;
-  @Uint32() external int Reserved;
-  @Uint64() external int TokenOffset;
-  external STORAGE_OFFLOAD_TOKEN Token;
-}
-
-class STORAGE_OFFLOAD_WRITE_OUTPUT extends Struct {
-  @Uint32() external int OffloadWriteFlags;
-  @Uint32() external int Reserved;
-  @Uint64() external int LengthCopied;
-}
-
-class DEVICE_DATA_SET_LBP_STATE_PARAMETERS extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int Flags;
-  @Uint32() external int OutputVersion;
-}
-
-class DEVICE_DATA_SET_LB_PROVISIONING_STATE extends Struct {
-  @Uint32() external int Size;
-  @Uint32() external int Version;
-  @Uint64() external int SlabSizeInBytes;
-  @Uint32() external int SlabOffsetDeltaInBytes;
-  @Uint32() external int SlabAllocationBitMapBitCount;
-  @Uint32() external int SlabAllocationBitMapLength;
-  external __uint__ SlabAllocationBitMap;
-}
-
-class DEVICE_DATA_SET_LB_PROVISIONING_STATE_V2 extends Struct {
-  @Uint32() external int Size;
-  @Uint32() external int Version;
-  @Uint64() external int SlabSizeInBytes;
-  @Uint64() external int SlabOffsetDeltaInBytes;
-  @Uint32() external int SlabAllocationBitMapBitCount;
-  @Uint32() external int SlabAllocationBitMapLength;
-  external __uint__ SlabAllocationBitMap;
-}
-
-class DEVICE_DATA_SET_REPAIR_PARAMETERS extends Struct {
-  @Uint32() external int NumberOfRepairCopies;
-  @Uint32() external int SourceCopy;
-  external __uint__ RepairCopies;
-}
-
-class DEVICE_DATA_SET_REPAIR_OUTPUT extends Struct {
-  external DEVICE_DATA_SET_RANGE ParityExtent;
-}
-
-class DEVICE_DATA_SET_SCRUB_OUTPUT extends Struct {
-  @Uint64() external int BytesProcessed;
-  @Uint64() external int BytesRepaired;
-  @Uint64() external int BytesFailed;
-}
-
-class DEVICE_DATA_SET_SCRUB_EX_OUTPUT extends Struct {
-  @Uint64() external int BytesProcessed;
-  @Uint64() external int BytesRepaired;
-  @Uint64() external int BytesFailed;
-  external DEVICE_DATA_SET_RANGE ParityExtent;
-}
-
-class DEVICE_DSM_TIERING_QUERY_INPUT extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int Flags;
-  @Uint32() external int NumberOfTierIds;
-  external GUID TierIds;
-}
-
-class STORAGE_TIER_REGION extends Struct {
-  external GUID TierId;
-  @Uint64() external int Offset;
-  @Uint64() external int Length;
-}
-
-class DEVICE_DSM_TIERING_QUERY_OUTPUT extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int Flags;
-  @Uint32() external int Reserved;
-  @Uint64() external int Alignment;
-  @Uint32() external int TotalNumberOfRegions;
-  @Uint32() external int NumberOfRegionsReturned;
-  external STORAGE_TIER_REGION Regions;
-}
-
-class DEVICE_DSM_NVCACHE_CHANGE_PRIORITY_PARAMETERS extends Struct {
-  @Uint32() external int Size;
-  @Uint8() external int TargetPriority;
-  external __ubyte__ Reserved;
-}
-
-class DEVICE_DATA_SET_TOPOLOGY_ID_QUERY_OUTPUT extends Struct {
-  @Uint64() external int TopologyRangeBytes;
-  external __ubyte__ TopologyId;
-}
-
-class DEVICE_STORAGE_ADDRESS_RANGE extends Struct {
-  @Int64() external int StartAddress;
-  @Uint64() external int LengthInBytes;
-}
-
-class DEVICE_DSM_PHYSICAL_ADDRESSES_OUTPUT extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Flags;
-  @Uint32() external int TotalNumberOfRanges;
-  @Uint32() external int NumberOfRangesReturned;
-  external DEVICE_STORAGE_ADDRESS_RANGE Ranges;
-}
-
-class DEVICE_DSM_REPORT_ZONES_PARAMETERS extends Struct {
-  @Uint32() external int Size;
-  @Uint8() external int ReportOption;
-  @Uint8() external int Partial;
-  external __ubyte__ Reserved;
-}
-
-class STORAGE_ZONE_DESCRIPTOR extends Struct {
-  @Uint32() external int Size;
-  @Uint32() external int ZoneType;
-  @Uint32() external int ZoneCondition;
-  @Uint8() external int ResetWritePointerRecommend;
-  external __ubyte__ Reserved0;
-  @Uint64() external int ZoneSize;
-  @Uint64() external int WritePointerOffset;
-}
-
-class DEVICE_DSM_REPORT_ZONES_DATA extends Struct {
-  @Uint32() external int Size;
-  @Uint32() external int ZoneCount;
-  @Uint32() external int Attributes;
-  @Uint32() external int Reserved0;
-  external STORAGE_ZONE_DESCRIPTOR ZoneDescriptors;
-}
-
-class DEVICE_DSM_RANGE_ERROR_INFO extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Flags;
-  @Uint32() external int TotalNumberOfRanges;
-  @Uint32() external int NumberOfRangesReturned;
-  external DEVICE_STORAGE_RANGE_ATTRIBUTES Ranges;
-}
-
-class DEVICE_DSM_LOST_QUERY_PARAMETERS extends Struct {
-  @Uint32() external int Version;
-  @Uint64() external int Granularity;
-}
-
-class DEVICE_DSM_LOST_QUERY_OUTPUT extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint64() external int Alignment;
-  @Uint32() external int NumberOfBits;
-  external __uint__ BitMap;
-}
-
-class DEVICE_DSM_FREE_SPACE_OUTPUT extends Struct {
-  @Uint32() external int Version;
-  @Uint64() external int FreeSpace;
-}
-
-class DEVICE_DSM_CONVERSION_OUTPUT extends Struct {
-  @Uint32() external int Version;
-  external GUID Source;
-}
-
-class STORAGE_GET_BC_PROPERTIES_OUTPUT extends Struct {
-  @Uint32() external int MaximumRequestsPerPeriod;
-  @Uint32() external int MinimumPeriod;
-  @Uint64() external int MaximumRequestSize;
-  @Uint32() external int EstimatedTimePerRequest;
-  @Uint32() external int NumOutStandingRequests;
-  @Uint64() external int RequestSize;
-}
-
-class STORAGE_ALLOCATE_BC_STREAM_INPUT extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int RequestsPerPeriod;
-  @Uint32() external int Period;
-  @Uint8() external int RetryFailures;
-  @Uint8() external int Discardable;
-  external __ubyte__ Reserved1;
-  @Uint32() external int AccessType;
-  @Uint32() external int AccessMode;
-}
-
-class STORAGE_ALLOCATE_BC_STREAM_OUTPUT extends Struct {
-  @Uint64() external int RequestSize;
-  @Uint32() external int NumOutStandingRequests;
-}
-
-class STORAGE_PRIORITY_HINT_SUPPORT extends Struct {
-  @Uint32() external int SupportFlags;
-}
-
-class STORAGE_DIAGNOSTIC_REQUEST extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int Reserved;
-  @Uint32() external int TargetType;
-  @Uint32() external int Level;
-}
-
-class STORAGE_DIAGNOSTIC_DATA extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  external GUID ProviderId;
-  @Uint32() external int BufferSize;
-  @Uint32() external int Reserved;
-  external __ubyte__ DiagnosticDataBuffer;
-}
-
-class PHYSICAL_ELEMENT_STATUS_REQUEST extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int StartingElement;
-  @Uint8() external int Filter;
-  @Uint8() external int ReportType;
-  external __ubyte__ Reserved;
-}
-
-class PHYSICAL_ELEMENT_STATUS_DESCRIPTOR extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int ElementIdentifier;
-  @Uint8() external int PhysicalElementType;
-  @Uint8() external int PhysicalElementHealth;
-  external __ubyte__ Reserved1;
-  @Uint64() external int AssociatedCapacity;
-  external __uint__ Reserved2;
-}
-
-class PHYSICAL_ELEMENT_STATUS extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int DescriptorCount;
-  @Uint32() external int ReturnedDescriptorCount;
-  @Uint32() external int ElementIdentifierBeingDepoped;
-  @Uint32() external int Reserved;
-  external PHYSICAL_ELEMENT_STATUS_DESCRIPTOR Descriptors;
-}
-
-class REMOVE_ELEMENT_AND_TRUNCATE_REQUEST extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint64() external int RequestCapacity;
-  @Uint32() external int ElementIdentifier;
-  @Uint32() external int Reserved;
-}
-
-class GET_DEVICE_INTERNAL_STATUS_DATA_REQUEST extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int RequestDataType;
-  @Uint32() external int RequestDataSet;
-}
-
-class DEVICE_INTERNAL_STATUS_DATA extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint64() external int T10VendorId;
-  @Uint32() external int DataSet1Length;
-  @Uint32() external int DataSet2Length;
-  @Uint32() external int DataSet3Length;
-  @Uint32() external int DataSet4Length;
-  @Uint8() external int StatusDataVersion;
-  external __ubyte__ Reserved;
-  external __ubyte__ ReasonIdentifier;
-  @Uint32() external int StatusDataLength;
-  external __ubyte__ StatusData;
-}
-
-class STORAGE_MEDIA_SERIAL_NUMBER_DATA extends Struct {
-  @Uint16() external int Reserved;
-  @Uint16() external int SerialNumberLength;
-  external __ubyte__ SerialNumber;
-}
-
-class STORAGE_READ_CAPACITY extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int BlockLength;
-  @Int64() external int NumberOfBlocks;
-  @Int64() external int DiskLength;
-}
-
-class DEVICEDUMP_SUBSECTION_POINTER extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwOffset;
-}
-
-class DEVICEDUMP_STRUCTURE_VERSION extends Struct {
-  @Uint32() external int dwSignature;
-  @Uint32() external int dwVersion;
-  @Uint32() external int dwSize;
-}
-
-class DEVICEDUMP_SECTION_HEADER extends Struct {
-  external GUID guidDeviceDataId;
-  external __ubyte__ sOrganizationID;
-  @Uint32() external int dwFirmwareRevision;
-  external __ubyte__ sModelNumber;
-  external __ubyte__ szDeviceManufacturingID;
-  @Uint32() external int dwFlags;
-  @Uint32() external int bRestrictedPrivateDataVersion;
-  @Uint32() external int dwFirmwareIssueId;
-  external __ubyte__ szIssueDescriptionString;
-}
-
-class GP_LOG_PAGE_DESCRIPTOR extends Struct {
-  @Uint16() external int LogAddress;
-  @Uint16() external int LogSectors;
-}
-
-class DEVICEDUMP_PUBLIC_SUBSECTION extends Struct {
-  @Uint32() external int dwFlags;
-  external GP_LOG_PAGE_DESCRIPTOR GPLogTable;
-  external __byte__ szDescription;
-  external __ubyte__ bData;
-}
-
-class DEVICEDUMP_RESTRICTED_SUBSECTION extends Struct {
-  external __ubyte__ bData;
-}
-
-class DEVICEDUMP_PRIVATE_SUBSECTION extends Struct {
-  @Uint32() external int dwFlags;
-  external GP_LOG_PAGE_DESCRIPTOR GPLogId;
-  external __ubyte__ bData;
-}
-
-class DEVICEDUMP_STORAGEDEVICE_DATA extends Struct {
-  external DEVICEDUMP_STRUCTURE_VERSION Descriptor;
-  external DEVICEDUMP_SECTION_HEADER SectionHeader;
-  @Uint32() external int dwBufferSize;
-  @Uint32() external int dwReasonForCollection;
-  external DEVICEDUMP_SUBSECTION_POINTER PublicData;
-  external DEVICEDUMP_SUBSECTION_POINTER RestrictedData;
-  external DEVICEDUMP_SUBSECTION_POINTER PrivateData;
-}
-
-class DEVICEDUMP_STORAGESTACK_PUBLIC_DUMP extends Struct {
-  external DEVICEDUMP_STRUCTURE_VERSION Descriptor;
-  @Uint32() external int dwReasonForCollection;
-  external __ubyte__ cDriverName;
-  @Uint32() external int uiNumRecords;
-  external DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD RecordArray;
-}
-
-class STORAGE_IDLE_POWER extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int _bitfield;
-  @Uint32() external int D3IdleTimeout;
-}
-
-class STORAGE_IDLE_POWERUP_REASON extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int PowerupReason;
-}
-
-class STORAGE_RPMB_DATA_FRAME extends Struct {
-  external __ubyte__ Stuff;
-  external __ubyte__ KeyOrMAC;
-  external __ubyte__ Data;
-  external __ubyte__ Nonce;
-  external __ubyte__ WriteCounter;
-  external __ubyte__ Address;
-  external __ubyte__ BlockCount;
-  external __ubyte__ OperationResult;
-  external __ubyte__ RequestOrResponseType;
-}
-
-class STORAGE_EVENT_NOTIFICATION extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint64() external int Events;
-}
-
-class STORAGE_COUNTERS extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int NumberOfCounters;
-  external STORAGE_COUNTER Counters;
-}
-
-class STORAGE_HW_FIRMWARE_INFO_QUERY extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int Flags;
-  @Uint32() external int Reserved;
-}
-
-class STORAGE_HW_FIRMWARE_SLOT_INFO extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint8() external int SlotNumber;
-  @Uint8() external int _bitfield;
-  external __ubyte__ Reserved1;
-  external __ubyte__ Revision;
-}
-
-class STORAGE_HW_FIRMWARE_INFO extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint8() external int _bitfield;
-  @Uint8() external int SlotCount;
-  @Uint8() external int ActiveSlot;
-  @Uint8() external int PendingActivateSlot;
-  @Uint8() external int FirmwareShared;
-  external __ubyte__ Reserved;
-  @Uint32() external int ImagePayloadAlignment;
-  @Uint32() external int ImagePayloadMaxSize;
-  external STORAGE_HW_FIRMWARE_SLOT_INFO Slot;
-}
-
-class STORAGE_HW_FIRMWARE_DOWNLOAD_V2 extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int Flags;
-  @Uint8() external int Slot;
-  external __ubyte__ Reserved;
-  @Uint64() external int Offset;
-  @Uint64() external int BufferSize;
-  @Uint32() external int ImageSize;
-  @Uint32() external int Reserved2;
-  external __ubyte__ ImageBuffer;
-}
-
-class STORAGE_ATTRIBUTE_MGMT extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int Action;
-  @Uint32() external int Attribute;
-}
-
-class SCM_PD_HEALTH_NOTIFICATION_DATA extends Struct {
-  external GUID DeviceGuid;
-}
-
-class SCM_LOGICAL_DEVICE_INSTANCE extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  external GUID DeviceGuid;
-  external __ushort__ SymbolicLink;
-}
-
-class SCM_LOGICAL_DEVICES extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int DeviceCount;
-  external SCM_LOGICAL_DEVICE_INSTANCE Devices;
-}
-
-class SCM_PHYSICAL_DEVICE_INSTANCE extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int NfitHandle;
-  external __ushort__ SymbolicLink;
-}
-
-class SCM_PHYSICAL_DEVICES extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int DeviceCount;
-  external SCM_PHYSICAL_DEVICE_INSTANCE Devices;
-}
-
-class SCM_REGION extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int Flags;
-  @Uint32() external int NfitHandle;
-  external GUID LogicalDeviceGuid;
-  external GUID AddressRangeType;
-  @Uint32() external int AssociatedId;
-  @Uint64() external int Length;
-  @Uint64() external int StartingDPA;
-  @Uint64() external int BaseSPA;
-  @Uint64() external int SPAOffset;
-  @Uint64() external int RegionOffset;
-}
-
-class SCM_REGIONS extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int RegionCount;
-  external SCM_REGION Regions;
-}
-
-class SCM_INTERLEAVED_PD_INFO extends Struct {
-  @Uint32() external int DeviceHandle;
-  external GUID DeviceGuid;
-}
-
-class SCM_LD_INTERLEAVE_SET_INFO extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int InterleaveSetSize;
-  external SCM_INTERLEAVED_PD_INFO InterleaveSet;
-}
-
-class SCM_PD_PROPERTY_QUERY extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int PropertyId;
-  @Uint32() external int QueryType;
-  external __ubyte__ AdditionalParameters;
-}
-
-class SCM_PD_DESCRIPTOR_HEADER extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-}
-
-class SCM_PD_DEVICE_HANDLE extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  external GUID DeviceGuid;
-  @Uint32() external int DeviceHandle;
-}
-
-class SCM_PD_DEVICE_INFO extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  external GUID DeviceGuid;
-  @Uint32() external int UnsafeShutdownCount;
-  @Uint64() external int PersistentMemorySizeInBytes;
-  @Uint64() external int VolatileMemorySizeInBytes;
-  @Uint64() external int TotalMemorySizeInBytes;
-  @Uint32() external int SlotNumber;
-  @Uint32() external int DeviceHandle;
-  @Uint16() external int PhysicalId;
-  @Uint8() external int NumberOfFormatInterfaceCodes;
-  external __ushort__ FormatInterfaceCodes;
-  @Uint32() external int VendorId;
-  @Uint32() external int ProductId;
-  @Uint32() external int SubsystemDeviceId;
-  @Uint32() external int SubsystemVendorId;
-  @Uint8() external int ManufacturingLocation;
-  @Uint8() external int ManufacturingWeek;
-  @Uint8() external int ManufacturingYear;
-  @Uint32() external int SerialNumber4Byte;
-  @Uint32() external int SerialNumberLengthInChars;
-  external __byte__ SerialNumber;
-}
-
-class SCM_PD_DEVICE_SPECIFIC_PROPERTY extends Struct {
-  external __ushort__ Name;
-  @Int64() external int Value;
-}
-
-class SCM_PD_DEVICE_SPECIFIC_INFO extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int NumberOfProperties;
-  external SCM_PD_DEVICE_SPECIFIC_PROPERTY DeviceSpecificProperties;
-}
-
-class SCM_PD_FIRMWARE_SLOT_INFO extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint8() external int SlotNumber;
-  @Uint8() external int _bitfield;
-  external __ubyte__ Reserved1;
-  external __ubyte__ Revision;
-}
-
-class SCM_PD_FIRMWARE_INFO extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint8() external int ActiveSlot;
-  @Uint8() external int NextActiveSlot;
-  @Uint8() external int SlotCount;
-  external SCM_PD_FIRMWARE_SLOT_INFO Slots;
-}
-
-class SCM_PD_MANAGEMENT_STATUS extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int Health;
-  @Uint32() external int NumberOfOperationalStatus;
-  @Uint32() external int NumberOfAdditionalReasons;
-  @Uint32() external int OperationalStatus;
-  @Uint32() external int AdditionalReasons;
-}
-
-class SCM_PD_LOCATION_STRING extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  external __ushort__ Location;
-}
-
-class SCM_PD_FIRMWARE_DOWNLOAD extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int Flags;
-  @Uint8() external int Slot;
-  external __ubyte__ Reserved;
-  @Uint64() external int Offset;
-  @Uint32() external int FirmwareImageSizeInBytes;
-  external __ubyte__ FirmwareImage;
-}
-
-class SCM_PD_FIRMWARE_ACTIVATE extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int Flags;
-  @Uint8() external int Slot;
-}
-
-class SCM_PD_PASSTHROUGH_INPUT extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  external GUID ProtocolGuid;
-  @Uint32() external int DataSize;
-  external __ubyte__ Data;
-}
-
-class SCM_PD_PASSTHROUGH_OUTPUT extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  external GUID ProtocolGuid;
-  @Uint32() external int DataSize;
-  external __ubyte__ Data;
-}
-
-class SCM_PD_PASSTHROUGH_INVDIMM_INPUT extends Struct {
-  @Uint32() external int Opcode;
-  @Uint32() external int OpcodeParametersLength;
-  external __ubyte__ OpcodeParameters;
-}
-
-class SCM_PD_PASSTHROUGH_INVDIMM_OUTPUT extends Struct {
-  @Uint16() external int GeneralStatus;
-  @Uint16() external int ExtendedStatus;
-  @Uint32() external int OutputDataLength;
-  external __ubyte__ OutputData;
-}
-
-class SCM_PD_REINITIALIZE_MEDIA_OUTPUT extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Size;
-  @Uint32() external int Status;
-}
-
-class DISK_CONTROLLER_NUMBER extends Struct {
-  @Uint32() external int ControllerNumber;
-  @Uint32() external int DiskNumber;
-}
-
-class HISTOGRAM_BUCKET extends Struct {
-  @Uint32() external int Reads;
-  @Uint32() external int Writes;
-}
-
-class DISK_HISTOGRAM extends Struct {
-  @Int64() external int DiskSize;
-  @Int64() external int Start;
-  @Int64() external int End;
-  @Int64() external int Average;
-  @Int64() external int AverageRead;
-  @Int64() external int AverageWrite;
-  @Uint32() external int Granularity;
-  @Uint32() external int Size;
-  @Uint32() external int ReadCount;
-  @Uint32() external int WriteCount;
-  external Pointer<HISTOGRAM_BUCKET> Histogram;
-}
-
-class DISK_RECORD extends Struct {
-  @Int64() external int ByteOffset;
-  @Int64() external int StartTime;
-  @Int64() external int EndTime;
-  external Pointer VirtualAddress;
-  @Uint32() external int NumberOfBytes;
-  @Uint8() external int DeviceNumber;
-  @Uint8() external int ReadRequest;
-}
-
-class DISK_LOGGING extends Struct {
-  @Uint8() external int Function;
-  external Pointer BufferAddress;
-  @Uint32() external int BufferSize;
-}
-
-class BIN_RANGE extends Struct {
-  @Int64() external int StartValue;
-  @Int64() external int Length;
-}
-
-class PERF_BIN extends Struct {
-  @Uint32() external int NumberOfBins;
-  @Uint32() external int TypeOfBin;
-  external BIN_RANGE BinsRanges;
-}
-
-class BIN_COUNT extends Struct {
-  external BIN_RANGE BinRange;
-  @Uint32() external int BinCount;
-}
-
-class BIN_RESULTS extends Struct {
-  @Uint32() external int NumberOfBins;
-  external BIN_COUNT BinCounts;
-}
-
-class GETVERSIONINPARAMS extends Struct {
-  @Uint8() external int bVersion;
-  @Uint8() external int bRevision;
-  @Uint8() external int bReserved;
-  @Uint8() external int bIDEDeviceMap;
-  @Uint32() external int fCapabilities;
-  external __uint__ dwReserved;
-}
-
-class IDEREGS extends Struct {
-  @Uint8() external int bFeaturesReg;
-  @Uint8() external int bSectorCountReg;
-  @Uint8() external int bSectorNumberReg;
-  @Uint8() external int bCylLowReg;
-  @Uint8() external int bCylHighReg;
-  @Uint8() external int bDriveHeadReg;
-  @Uint8() external int bCommandReg;
-  @Uint8() external int bReserved;
-}
-
-class SENDCMDINPARAMS extends Struct {
-  @Uint32() external int cBufferSize;
-  external IDEREGS irDriveRegs;
-  @Uint8() external int bDriveNumber;
-  external __ubyte__ bReserved;
-  external __uint__ dwReserved;
-  external __ubyte__ bBuffer;
-}
-
-class DRIVERSTATUS extends Struct {
-  @Uint8() external int bDriverError;
-  @Uint8() external int bIDEError;
-  external __ubyte__ bReserved;
-  external __uint__ dwReserved;
-}
-
-class SENDCMDOUTPARAMS extends Struct {
-  @Uint32() external int cBufferSize;
-  external DRIVERSTATUS DriverStatus;
-  external __ubyte__ bBuffer;
-}
-
-class CHANGER_ELEMENT extends Struct {
-  @Uint32() external int ElementType;
-  @Uint32() external int ElementAddress;
-}
-
-class CHANGER_ELEMENT_LIST extends Struct {
-  external CHANGER_ELEMENT Element;
-  @Uint32() external int NumberOfElements;
-}
-
-class GET_CHANGER_PARAMETERS extends Struct {
-  @Uint32() external int Size;
-  @Uint16() external int NumberTransportElements;
-  @Uint16() external int NumberStorageElements;
-  @Uint16() external int NumberCleanerSlots;
-  @Uint16() external int NumberIEElements;
-  @Uint16() external int NumberDataTransferElements;
-  @Uint16() external int NumberOfDoors;
-  @Uint16() external int FirstSlotNumber;
-  @Uint16() external int FirstDriveNumber;
-  @Uint16() external int FirstTransportNumber;
-  @Uint16() external int FirstIEPortNumber;
-  @Uint16() external int FirstCleanerSlotAddress;
-  @Uint16() external int MagazineSize;
-  @Uint32() external int DriveCleanTimeout;
-  @Uint32() external int Features0;
-  @Uint32() external int Features1;
-  @Uint8() external int MoveFromTransport;
-  @Uint8() external int MoveFromSlot;
-  @Uint8() external int MoveFromIePort;
-  @Uint8() external int MoveFromDrive;
-  @Uint8() external int ExchangeFromTransport;
-  @Uint8() external int ExchangeFromSlot;
-  @Uint8() external int ExchangeFromIePort;
-  @Uint8() external int ExchangeFromDrive;
-  @Uint32() external int LockUnlockCapabilities;
-  @Uint8() external int PositionCapabilities;
-  external __ubyte__ Reserved1;
-  external __uint__ Reserved2;
-}
-
-class CHANGER_PRODUCT_DATA extends Struct {
-  external __ubyte__ VendorId;
-  external __ubyte__ ProductId;
-  external __ubyte__ Revision;
-  external __ubyte__ SerialNumber;
-  @Uint8() external int DeviceType;
-}
-
-class CHANGER_SET_ACCESS extends Struct {
-  external CHANGER_ELEMENT Element;
-  @Uint32() external int Control;
-}
-
-class CHANGER_READ_ELEMENT_STATUS extends Struct {
-  external CHANGER_ELEMENT_LIST ElementList;
-  @Uint8() external int VolumeTagInfo;
-}
-
-class CHANGER_ELEMENT_STATUS extends Struct {
-  external CHANGER_ELEMENT Element;
-  external CHANGER_ELEMENT SrcElementAddress;
-  @Uint32() external int Flags;
-  @Uint32() external int ExceptionCode;
-  @Uint8() external int TargetId;
-  @Uint8() external int Lun;
-  @Uint16() external int Reserved;
-  external __ubyte__ PrimaryVolumeID;
-  external __ubyte__ AlternateVolumeID;
-}
-
-class CHANGER_ELEMENT_STATUS_EX extends Struct {
-  external CHANGER_ELEMENT Element;
-  external CHANGER_ELEMENT SrcElementAddress;
-  @Uint32() external int Flags;
-  @Uint32() external int ExceptionCode;
-  @Uint8() external int TargetId;
-  @Uint8() external int Lun;
-  @Uint16() external int Reserved;
-  external __ubyte__ PrimaryVolumeID;
-  external __ubyte__ AlternateVolumeID;
-  external __ubyte__ VendorIdentification;
-  external __ubyte__ ProductIdentification;
-  external __ubyte__ SerialNumber;
-}
-
-class CHANGER_INITIALIZE_ELEMENT_STATUS extends Struct {
-  external CHANGER_ELEMENT_LIST ElementList;
-  @Uint8() external int BarCodeScan;
-}
-
-class CHANGER_SET_POSITION extends Struct {
-  external CHANGER_ELEMENT Transport;
-  external CHANGER_ELEMENT Destination;
-  @Uint8() external int Flip;
-}
-
-class CHANGER_EXCHANGE_MEDIUM extends Struct {
-  external CHANGER_ELEMENT Transport;
-  external CHANGER_ELEMENT Source;
-  external CHANGER_ELEMENT Destination1;
-  external CHANGER_ELEMENT Destination2;
-  @Uint8() external int Flip1;
-  @Uint8() external int Flip2;
-}
-
-class CHANGER_MOVE_MEDIUM extends Struct {
-  external CHANGER_ELEMENT Transport;
-  external CHANGER_ELEMENT Source;
-  external CHANGER_ELEMENT Destination;
-  @Uint8() external int Flip;
-}
-
-class CHANGER_SEND_VOLUME_TAG_INFORMATION extends Struct {
-  external CHANGER_ELEMENT StartingElement;
-  @Uint32() external int ActionCode;
-  external __ubyte__ VolumeIDTemplate;
-}
-
-class READ_ELEMENT_ADDRESS_INFO extends Struct {
-  @Uint32() external int NumberOfElements;
-  external CHANGER_ELEMENT_STATUS ElementStatus;
-}
-
-class PATHNAME_BUFFER extends Struct {
-  @Uint32() external int PathNameLength;
-  external __ushort__ Name;
-}
-
-class FSCTL_QUERY_FAT_BPB_BUFFER extends Struct {
-  external __ubyte__ First0x24BytesOfBootSector;
-}
-
-class REFS_VOLUME_DATA_BUFFER extends Struct {
-  @Uint32() external int ByteCount;
-  @Uint32() external int MajorVersion;
-  @Uint32() external int MinorVersion;
-  @Uint32() external int BytesPerPhysicalSector;
-  @Int64() external int VolumeSerialNumber;
-  @Int64() external int NumberSectors;
-  @Int64() external int TotalClusters;
-  @Int64() external int FreeClusters;
-  @Int64() external int TotalReserved;
-  @Uint32() external int BytesPerSector;
-  @Uint32() external int BytesPerCluster;
-  @Int64() external int MaximumSizeOfResidentFile;
-  @Uint16() external int FastTierDataFillRatio;
-  @Uint16() external int SlowTierDataFillRatio;
-  @Uint32() external int DestagesFastTierToSlowTierRate;
-  @Int64() external int Reserved;
-}
-
-class STARTING_LCN_INPUT_BUFFER_EX extends Struct {
-  @Int64() external int StartingLcn;
-  @Uint32() external int Flags;
-}
-
-class RETRIEVAL_POINTER_COUNT extends Struct {
-  @Uint32() external int ExtentCount;
-}
-
-class MOVE_FILE_RECORD_DATA extends Struct {
-  @IntPtr() external int FileHandle;
-  @Int64() external int SourceFileRecord;
-  @Int64() external int TargetFileRecord;
-}
-
-class USN_RECORD_UNION extends Struct {
-  external USN_RECORD_COMMON_HEADER Header;
-  external USN_RECORD_V2 V2;
-  external USN_RECORD_V3 V3;
-  external USN_RECORD_V4 V4;
-}
-
-class BULK_SECURITY_TEST_DATA extends Struct {
-  @Uint32() external int DesiredAccess;
-  external __uint__ SecurityIds;
-}
-
-class FILE_PREFETCH extends Struct {
-  @Uint32() external int Type;
-  @Uint32() external int Count;
-  external __uint64__ Prefetch;
-}
-
-class FILE_PREFETCH_EX extends Struct {
-  @Uint32() external int Type;
-  @Uint32() external int Count;
-  external Pointer Context;
-  external __uint64__ Prefetch;
-}
-
-class FILE_ZERO_DATA_INFORMATION_EX extends Struct {
-  @Int64() external int FileOffset;
-  @Int64() external int BeyondFinalZero;
-  @Uint32() external int Flags;
-}
-
-class ENCRYPTION_BUFFER extends Struct {
-  @Uint32() external int EncryptionOperation;
-  external __ubyte__ Private;
-}
-
-class DECRYPTION_STATUS_BUFFER extends Struct {
-  @Uint8() external int NoEncryptedStreams;
-}
-
-class REQUEST_RAW_ENCRYPTED_DATA extends Struct {
-  @Int64() external int FileOffset;
-  @Uint32() external int Length;
-}
-
-class ENCRYPTED_DATA_INFO extends Struct {
-  @Uint64() external int StartingFileOffset;
-  @Uint32() external int OutputBufferOffset;
-  @Uint32() external int BytesWithinFileSize;
-  @Uint32() external int BytesWithinValidDataLength;
-  @Uint16() external int CompressionFormat;
-  @Uint8() external int DataUnitShift;
-  @Uint8() external int ChunkShift;
-  @Uint8() external int ClusterShift;
-  @Uint8() external int EncryptionFormat;
-  @Uint16() external int NumberOfDataBlocks;
-  external __uint__ DataBlockSize;
-}
-
-class EXTENDED_ENCRYPTED_DATA_INFO extends Struct {
-  @Uint32() external int ExtendedCode;
-  @Uint32() external int Length;
-  @Uint32() external int Flags;
-  @Uint32() external int Reserved;
-}
-
-class SI_COPYFILE extends Struct {
-  @Uint32() external int SourceFileNameLength;
-  @Uint32() external int DestinationFileNameLength;
-  @Uint32() external int Flags;
-  external __ushort__ FileNameBuffer;
-}
-
-class FILE_INITIATE_REPAIR_OUTPUT_BUFFER extends Struct {
-  @Uint64() external int Hint1;
-  @Uint64() external int Hint2;
-  @Uint64() external int Clsn;
-  @Uint32() external int Status;
-}
-
-class TXFS_ROLLFORWARD_REDO_INFORMATION extends Struct {
-  @Int64() external int LastVirtualClock;
-  @Uint64() external int LastRedoLsn;
-  @Uint64() external int HighestRecoveryLsn;
-  @Uint32() external int Flags;
-}
-
-class TXFS_START_RM_INFORMATION extends Struct {
-  @Uint32() external int Flags;
-  @Uint64() external int LogContainerSize;
-  @Uint32() external int LogContainerCountMin;
-  @Uint32() external int LogContainerCountMax;
-  @Uint32() external int LogGrowthIncrement;
-  @Uint32() external int LogAutoShrinkPercentage;
-  @Uint32() external int TmLogPathOffset;
-  @Uint16() external int TmLogPathLength;
-  @Uint16() external int LoggingMode;
-  @Uint16() external int LogPathLength;
-  @Uint16() external int Reserved;
-  external __ushort__ LogPath;
-}
-
-class FILE_FS_PERSISTENT_VOLUME_INFORMATION extends Struct {
-  @Uint32() external int VolumeFlags;
-  @Uint32() external int FlagMask;
-  @Uint32() external int Version;
-  @Uint32() external int Reserved;
-}
-
-class STORAGE_QUERY_DEPENDENT_VOLUME_REQUEST extends Struct {
-  @Uint32() external int RequestLevel;
-  @Uint32() external int RequestFlags;
-}
-
-class STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY extends Struct {
-  @Uint32() external int EntryLength;
-  @Uint32() external int DependencyTypeFlags;
-  @Uint32() external int ProviderSpecificFlags;
-  external VIRTUAL_STORAGE_TYPE VirtualStorageType;
-}
-
-class STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY extends Struct {
-  @Uint32() external int EntryLength;
-  @Uint32() external int DependencyTypeFlags;
-  @Uint32() external int ProviderSpecificFlags;
-  external VIRTUAL_STORAGE_TYPE VirtualStorageType;
-  @Uint32() external int AncestorLevel;
-  @Uint32() external int HostVolumeNameOffset;
-  @Uint32() external int HostVolumeNameSize;
-  @Uint32() external int DependentVolumeNameOffset;
-  @Uint32() external int DependentVolumeNameSize;
-  @Uint32() external int RelativePathOffset;
-  @Uint32() external int RelativePathSize;
-  @Uint32() external int DependentDeviceNameOffset;
-  @Uint32() external int DependentDeviceNameSize;
-}
-
-class SD_CHANGE_MACHINE_SID_INPUT extends Struct {
-  @Uint16() external int CurrentMachineSIDOffset;
-  @Uint16() external int CurrentMachineSIDLength;
-  @Uint16() external int NewMachineSIDOffset;
-  @Uint16() external int NewMachineSIDLength;
-}
-
-class SD_CHANGE_MACHINE_SID_OUTPUT extends Struct {
-  @Uint64() external int NumSDChangedSuccess;
-  @Uint64() external int NumSDChangedFail;
-  @Uint64() external int NumSDUnused;
-  @Uint64() external int NumSDTotal;
-  @Uint64() external int NumMftSDChangedSuccess;
-  @Uint64() external int NumMftSDChangedFail;
-  @Uint64() external int NumMftSDTotal;
-}
-
-class SD_QUERY_STATS_INPUT extends Struct {
-  @Uint32() external int Reserved;
-}
-
-class SD_QUERY_STATS_OUTPUT extends Struct {
-  @Uint64() external int SdsStreamSize;
-  @Uint64() external int SdsAllocationSize;
-  @Uint64() external int SiiStreamSize;
-  @Uint64() external int SiiAllocationSize;
-  @Uint64() external int SdhStreamSize;
-  @Uint64() external int SdhAllocationSize;
-  @Uint64() external int NumSDTotal;
-  @Uint64() external int NumSDUnused;
-}
-
-class SD_ENUM_SDS_INPUT extends Struct {
-  @Uint64() external int StartingOffset;
-  @Uint64() external int MaxSDEntriesToReturn;
-}
-
-class SD_ENUM_SDS_ENTRY extends Struct {
-  @Uint32() external int Hash;
-  @Uint32() external int SecurityId;
-  @Uint64() external int Offset;
-  @Uint32() external int Length;
-  external __ubyte__ Descriptor;
-}
-
-class SD_ENUM_SDS_OUTPUT extends Struct {
-  @Uint64() external int NextOffset;
-  @Uint64() external int NumSDEntriesReturned;
-  @Uint64() external int NumSDBytesReturned;
-  external SD_ENUM_SDS_ENTRY SDEntry;
-}
-
-class FILE_TYPE_NOTIFICATION_INPUT extends Struct {
-  @Uint32() external int Flags;
-  @Uint32() external int NumFileTypeIDs;
-  external GUID FileTypeID;
-}
-
-class CSV_MGMT_LOCK extends Struct {
-  @Uint32() external int Flags;
-}
-
-class CSV_QUERY_FILE_REVISION_FILE_ID_128 extends Struct {
-  external FILE_ID_128 FileId;
-  external __int64__ FileRevision;
-}
-
-class CSV_QUERY_VOLUME_REDIRECT_STATE extends Struct {
-  @Uint32() external int MdsNodeId;
-  @Uint32() external int DsNodeId;
-  @Uint8() external int IsDiskConnected;
-  @Uint8() external int ClusterEnableDirectIo;
-  @Uint32() external int DiskConnectivity;
-}
-
-class CSV_QUERY_MDS_PATH_V2 extends Struct {
-  @Int64() external int Version;
-  @Uint32() external int RequiredSize;
-  @Uint32() external int MdsNodeId;
-  @Uint32() external int DsNodeId;
-  @Uint32() external int Flags;
-  @Uint32() external int DiskConnectivity;
-  external GUID VolumeId;
-  @Uint32() external int IpAddressOffset;
-  @Uint32() external int IpAddressLength;
-  @Uint32() external int PathOffset;
-  @Uint32() external int PathLength;
-}
-
-class CLUSTER_RANGE extends Struct {
-  @Int64() external int StartingCluster;
-  @Int64() external int ClusterCount;
-}
-
-class FILE_REFERENCE_RANGE extends Struct {
-  @Uint64() external int StartingFileReferenceNumber;
-  @Uint64() external int EndingFileReferenceNumber;
-}
-
-class QUERY_FILE_LAYOUT_OUTPUT extends Struct {
-  @Uint32() external int FileEntryCount;
-  @Uint32() external int FirstFileOffset;
-  @Uint32() external int Flags;
-  @Uint32() external int Reserved;
-}
-
-class FILE_LAYOUT_ENTRY extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int NextFileOffset;
-  @Uint32() external int Flags;
-  @Uint32() external int FileAttributes;
-  @Uint64() external int FileReferenceNumber;
-  @Uint32() external int FirstNameOffset;
-  @Uint32() external int FirstStreamOffset;
-  @Uint32() external int ExtraInfoOffset;
-  @Uint32() external int ExtraInfoLength;
-}
-
-class FILE_LAYOUT_NAME_ENTRY extends Struct {
-  @Uint32() external int NextNameOffset;
-  @Uint32() external int Flags;
-  @Uint64() external int ParentFileReferenceNumber;
-  @Uint32() external int FileNameLength;
-  @Uint32() external int Reserved;
-  external __ushort__ FileName;
-}
-
-class STREAM_LAYOUT_ENTRY extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int NextStreamOffset;
-  @Uint32() external int Flags;
-  @Uint32() external int ExtentInformationOffset;
-  @Int64() external int AllocationSize;
-  @Int64() external int EndOfFile;
-  @Uint32() external int StreamInformationOffset;
-  @Uint32() external int AttributeTypeCode;
-  @Uint32() external int AttributeFlags;
-  @Uint32() external int StreamIdentifierLength;
-  external __ushort__ StreamIdentifier;
-}
-
-class FSCTL_SET_INTEGRITY_INFORMATION_BUFFER_EX extends Struct {
-  @Uint8() external int EnableIntegrity;
-  @Uint8() external int KeepIntegrityStateUnchanged;
-  @Uint16() external int Reserved;
-  @Uint32() external int Flags;
-  @Uint8() external int Version;
-  external __ubyte__ Reserved2;
-}
-
-class FSCTL_OFFLOAD_READ_INPUT extends Struct {
-  @Uint32() external int Size;
-  @Uint32() external int Flags;
-  @Uint32() external int TokenTimeToLive;
-  @Uint32() external int Reserved;
-  @Uint64() external int FileOffset;
-  @Uint64() external int CopyLength;
-}
-
-class FSCTL_OFFLOAD_READ_OUTPUT extends Struct {
-  @Uint32() external int Size;
-  @Uint32() external int Flags;
-  @Uint64() external int TransferLength;
-  external __ubyte__ Token;
-}
-
-class FSCTL_OFFLOAD_WRITE_INPUT extends Struct {
-  @Uint32() external int Size;
-  @Uint32() external int Flags;
-  @Uint64() external int FileOffset;
-  @Uint64() external int CopyLength;
-  @Uint64() external int TransferOffset;
-  external __ubyte__ Token;
-}
-
-class FSCTL_OFFLOAD_WRITE_OUTPUT extends Struct {
-  @Uint32() external int Size;
-  @Uint32() external int Flags;
-  @Uint64() external int LengthWritten;
-}
-
-class SET_PURGE_FAILURE_MODE_INPUT extends Struct {
-  @Uint32() external int Flags;
-}
-
-class FILE_REGION_INFO extends Struct {
-  @Int64() external int FileOffset;
-  @Int64() external int Length;
-  @Uint32() external int Usage;
-  @Uint32() external int Reserved;
-}
-
-class FILE_REGION_OUTPUT extends Struct {
-  @Uint32() external int Flags;
-  @Uint32() external int TotalRegionEntryCount;
-  @Uint32() external int RegionEntryCount;
-  @Uint32() external int Reserved;
-  external FILE_REGION_INFO Region;
-}
-
-class FILE_REGION_INPUT extends Struct {
-  @Int64() external int FileOffset;
-  @Int64() external int Length;
-  @Uint32() external int DesiredUsage;
-}
-
-class WRITE_USN_REASON_INPUT extends Struct {
-  @Uint32() external int Flags;
-  @Uint32() external int UsnReasonToWrite;
-}
-
-class FILE_DESIRED_STORAGE_CLASS_INFORMATION extends Struct {
-  @Uint32() external int Class;
-  @Uint32() external int Flags;
-}
-
-class DUPLICATE_EXTENTS_DATA_EX extends Struct {
-  @IntPtr() external int Size;
-  @IntPtr() external int FileHandle;
-  @Int64() external int SourceFileOffset;
-  @Int64() external int TargetFileOffset;
-  @Int64() external int ByteCount;
-  @Uint32() external int Flags;
-}
-
-class REFS_SMR_VOLUME_INFO_OUTPUT extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Flags;
-  @Int64() external int SizeOfRandomlyWritableTier;
-  @Int64() external int FreeSpaceInRandomlyWritableTier;
-  @Int64() external int SizeofSMRTier;
-  @Int64() external int FreeSpaceInSMRTier;
-  @Int64() external int UsableFreeSpaceInSMRTier;
-  @Uint32() external int VolumeGcState;
-  @Uint32() external int VolumeGcLastStatus;
-  external __uint64__ Unused;
-}
-
-class REFS_SMR_VOLUME_GC_PARAMETERS extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Flags;
-  @Uint32() external int Action;
-  @Uint32() external int Method;
-  @Uint32() external int IoGranularity;
-  @Uint32() external int CompressionFormat;
-  external __uint64__ Unused;
-}
-
-class STREAMS_QUERY_PARAMETERS_OUTPUT_BUFFER extends Struct {
-  @Uint32() external int OptimalWriteSize;
-  @Uint32() external int StreamGranularitySize;
-  @Uint32() external int StreamIdMin;
-  @Uint32() external int StreamIdMax;
-}
-
-class STREAMS_ASSOCIATE_ID_INPUT_BUFFER extends Struct {
-  @Uint32() external int Flags;
-  @Uint32() external int StreamId;
-}
-
-class STREAMS_QUERY_ID_OUTPUT_BUFFER extends Struct {
-  @Uint32() external int StreamId;
-}
-
-class QUERY_BAD_RANGES_INPUT_RANGE extends Struct {
-  @Uint64() external int StartOffset;
-  @Uint64() external int LengthInBytes;
-}
-
-class QUERY_BAD_RANGES_INPUT extends Struct {
-  @Uint32() external int Flags;
-  @Uint32() external int NumRanges;
-  external QUERY_BAD_RANGES_INPUT_RANGE Ranges;
-}
-
-class QUERY_BAD_RANGES_OUTPUT_RANGE extends Struct {
-  @Uint32() external int Flags;
-  @Uint32() external int Reserved;
-  @Uint64() external int StartOffset;
-  @Uint64() external int LengthInBytes;
-}
-
-class QUERY_BAD_RANGES_OUTPUT extends Struct {
-  @Uint32() external int Flags;
-  @Uint32() external int NumBadRanges;
-  @Uint64() external int NextOffsetToLookUp;
-  external QUERY_BAD_RANGES_OUTPUT_RANGE BadRanges;
-}
-
-class SET_DAX_ALLOC_ALIGNMENT_HINT_INPUT extends Struct {
-  @Uint32() external int Flags;
-  @Uint32() external int AlignmentShift;
-  @Uint64() external int FileOffsetToAlign;
-  @Uint32() external int FallbackAlignmentShift;
-}
-
-class VIRTUAL_STORAGE_SET_BEHAVIOR_INPUT extends Struct {
-  @Uint32() external int Size;
-  @Uint32() external int BehaviorCode;
-}
-
-class ENCRYPTION_KEY_CTRL_INPUT extends Struct {
-  @Uint32() external int HeaderSize;
-  @Uint32() external int StructureSize;
-  @Uint16() external int KeyOffset;
-  @Uint16() external int KeySize;
-  @Uint32() external int DplLock;
-  @Uint64() external int DplUserId;
-  @Uint64() external int DplCredentialId;
-}
-
-class WOF_EXTERNAL_INFO extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Provider;
-}
-
-class WOF_EXTERNAL_FILE_ID extends Struct {
-  external FILE_ID_128 FileId;
-}
-
-class WOF_VERSION_INFO extends Struct {
-  @Uint32() external int WofVersion;
-}
-
-class WIM_PROVIDER_EXTERNAL_INFO extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Flags;
-  @Int64() external int DataSourceId;
-  external __ubyte__ ResourceHash;
-}
-
-class WIM_PROVIDER_ADD_OVERLAY_INPUT extends Struct {
-  @Uint32() external int WimType;
-  @Uint32() external int WimIndex;
-  @Uint32() external int WimFileNameOffset;
-  @Uint32() external int WimFileNameLength;
-}
-
-class WIM_PROVIDER_UPDATE_OVERLAY_INPUT extends Struct {
-  @Int64() external int DataSourceId;
-  @Uint32() external int WimFileNameOffset;
-  @Uint32() external int WimFileNameLength;
-}
-
-class WIM_PROVIDER_REMOVE_OVERLAY_INPUT extends Struct {
-  @Int64() external int DataSourceId;
-}
-
-class WIM_PROVIDER_SUSPEND_OVERLAY_INPUT extends Struct {
-  @Int64() external int DataSourceId;
-}
-
-class WIM_PROVIDER_OVERLAY_ENTRY extends Struct {
-  @Uint32() external int NextEntryOffset;
-  @Int64() external int DataSourceId;
-  external GUID WimGuid;
-  @Uint32() external int WimFileNameOffset;
-  @Uint32() external int WimType;
-  @Uint32() external int WimIndex;
-  @Uint32() external int Flags;
-}
-
-class FILE_PROVIDER_EXTERNAL_INFO_V0 extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Algorithm;
-}
-
-class FILE_PROVIDER_EXTERNAL_INFO_V1 extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Algorithm;
-  @Uint32() external int Flags;
-}
-
-class CONTAINER_VOLUME_STATE extends Struct {
-  @Uint32() external int Flags;
-}
-
-class CONTAINER_ROOT_INFO_INPUT extends Struct {
-  @Uint32() external int Flags;
-}
-
-class CONTAINER_ROOT_INFO_OUTPUT extends Struct {
-  @Uint16() external int ContainerRootIdLength;
-  external __ubyte__ ContainerRootId;
-}
-
-class VIRTUALIZATION_INSTANCE_INFO_INPUT extends Struct {
-  @Uint32() external int NumberOfWorkerThreads;
-  @Uint32() external int Flags;
-}
-
-class VIRTUALIZATION_INSTANCE_INFO_INPUT_EX extends Struct {
-  @Uint16() external int HeaderSize;
-  @Uint32() external int Flags;
-  @Uint32() external int NotificationInfoSize;
-  @Uint16() external int NotificationInfoOffset;
-  @Uint16() external int ProviderMajorVersion;
-}
-
-class VIRTUALIZATION_INSTANCE_INFO_OUTPUT extends Struct {
-  external GUID VirtualizationInstanceID;
-}
-
-class GET_FILTER_FILE_IDENTIFIER_INPUT extends Struct {
-  @Uint16() external int AltitudeLength;
-  external __ushort__ Altitude;
-}
-
-class GET_FILTER_FILE_IDENTIFIER_OUTPUT extends Struct {
-  @Uint16() external int FilterFileIdentifierLength;
-  external __ubyte__ FilterFileIdentifier;
-}
-
-class IO_IRP_EXT_TRACK_OFFSET_HEADER extends Struct {
-  @Uint16() external int Validation;
-  @Uint16() external int Flags;
-  external PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK TrackedOffsetCallback;
+class uCLSSPEC extends Struct {
+  @Uint32() external int tyspec;
+  @Uint32() external int tagged_union;
 }
 
 class SCARD_IO_REQUEST extends Struct {
@@ -4198,6 +2777,13 @@ class SCARD_T0_COMMAND extends Struct {
   @Uint8() external int bP1;
   @Uint8() external int bP2;
   @Uint8() external int bP3;
+}
+
+class SCARD_T0_REQUEST extends Struct {
+  external SCARD_IO_REQUEST ioRequest;
+  @Uint8() external int bSw1;
+  @Uint8() external int bSw2;
+  @Uint32() external int Anonymous;
 }
 
 class SCARD_T1_REQUEST extends Struct {
@@ -4231,7 +2817,7 @@ class PRINTER_INFO_2A extends Struct {
   external Pointer<Utf8> pPrintProcessor;
   external Pointer<Utf8> pDatatype;
   external Pointer<Utf8> pParameters;
-  external Pointer pSecurityDescriptor;
+  external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
   @Uint32() external int Attributes;
   @Uint32() external int Priority;
   @Uint32() external int DefaultPriority;
@@ -4255,7 +2841,7 @@ class PRINTER_INFO_2W extends Struct {
   external Pointer<Utf16> pPrintProcessor;
   external Pointer<Utf16> pDatatype;
   external Pointer<Utf16> pParameters;
-  external Pointer pSecurityDescriptor;
+  external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
   @Uint32() external int Attributes;
   @Uint32() external int Priority;
   @Uint32() external int DefaultPriority;
@@ -4267,7 +2853,7 @@ class PRINTER_INFO_2W extends Struct {
 }
 
 class PRINTER_INFO_3 extends Struct {
-  external Pointer pSecurityDescriptor;
+  external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
 }
 
 class PRINTER_INFO_4A extends Struct {
@@ -4373,7 +2959,7 @@ class JOB_INFO_2A extends Struct {
   external Pointer<Utf8> pDriverName;
   external Pointer<DEVMODEA> pDevMode;
   external Pointer<Utf8> pStatus;
-  external Pointer pSecurityDescriptor;
+  external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
   @Uint32() external int Status;
   @Uint32() external int Priority;
   @Uint32() external int Position;
@@ -4399,7 +2985,7 @@ class JOB_INFO_2W extends Struct {
   external Pointer<Utf16> pDriverName;
   external Pointer<DEVMODE> pDevMode;
   external Pointer<Utf16> pStatus;
-  external Pointer pSecurityDescriptor;
+  external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
   @Uint32() external int Status;
   @Uint32() external int Priority;
   @Uint32() external int Position;
@@ -4431,7 +3017,7 @@ class JOB_INFO_4A extends Struct {
   external Pointer<Utf8> pDriverName;
   external Pointer<DEVMODEA> pDevMode;
   external Pointer<Utf8> pStatus;
-  external Pointer pSecurityDescriptor;
+  external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
   @Uint32() external int Status;
   @Uint32() external int Priority;
   @Uint32() external int Position;
@@ -4458,7 +3044,7 @@ class JOB_INFO_4W extends Struct {
   external Pointer<Utf16> pDriverName;
   external Pointer<DEVMODE> pDevMode;
   external Pointer<Utf16> pStatus;
-  external Pointer pSecurityDescriptor;
+  external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
   @Uint32() external int Status;
   @Uint32() external int Priority;
   @Uint32() external int Position;
@@ -4899,6 +3485,14 @@ class PRINTER_NOTIFY_OPTIONS extends Struct {
   external Pointer<PRINTER_NOTIFY_OPTIONS_TYPE> pTypes;
 }
 
+class PRINTER_NOTIFY_INFO_DATA extends Struct {
+  @Uint16() external int Type;
+  @Uint16() external int Field;
+  @Uint32() external int Reserved;
+  @Uint32() external int Id;
+  @Uint32() external int NotifyData;
+}
+
 class PRINTER_NOTIFY_INFO extends Struct {
   @Uint32() external int Version;
   @Uint32() external int Flags;
@@ -4909,6 +3503,11 @@ class PRINTER_NOTIFY_INFO extends Struct {
 class BINARY_CONTAINER extends Struct {
   @Uint32() external int cbBuf;
   external Pointer<Uint8> pData;
+}
+
+class BIDI_DATA extends Struct {
+  @Uint32() external int dwBidiType;
+  @Uint32() external int u;
 }
 
 class BIDI_REQUEST_DATA extends Struct {
@@ -4992,6 +3591,11 @@ class CORE_PRINTER_DRIVERW extends Struct {
   external __ushort__ szPackageID;
 }
 
+class PrintPropertyValue extends Struct {
+  @Uint32() external int ePropertyType;
+  @Uint32() external int value;
+}
+
 class PrintNamedProperty extends Struct {
   external Pointer<Utf16> propertyName;
   external PrintPropertyValue propertyValue;
@@ -5005,44 +3609,6 @@ class PrintPropertiesCollection extends Struct {
 class PRINT_EXECUTION_DATA extends Struct {
   @Uint32() external int context;
   @Uint32() external int clientAppPID;
-}
-
-class MODEMDEVCAPS extends Struct {
-  @Uint32() external int dwActualSize;
-  @Uint32() external int dwRequiredSize;
-  @Uint32() external int dwDevSpecificOffset;
-  @Uint32() external int dwDevSpecificSize;
-  @Uint32() external int dwModemProviderVersion;
-  @Uint32() external int dwModemManufacturerOffset;
-  @Uint32() external int dwModemManufacturerSize;
-  @Uint32() external int dwModemModelOffset;
-  @Uint32() external int dwModemModelSize;
-  @Uint32() external int dwModemVersionOffset;
-  @Uint32() external int dwModemVersionSize;
-  @Uint32() external int dwDialOptions;
-  @Uint32() external int dwCallSetupFailTimer;
-  @Uint32() external int dwInactivityTimeout;
-  @Uint32() external int dwSpeakerVolume;
-  @Uint32() external int dwSpeakerMode;
-  @Uint32() external int dwModemOptions;
-  @Uint32() external int dwMaxDTERate;
-  @Uint32() external int dwMaxDCERate;
-  external __ubyte__ abVariablePortion;
-}
-
-class MODEMSETTINGS extends Struct {
-  @Uint32() external int dwActualSize;
-  @Uint32() external int dwRequiredSize;
-  @Uint32() external int dwDevSpecificOffset;
-  @Uint32() external int dwDevSpecificSize;
-  @Uint32() external int dwCallSetupFailTimer;
-  @Uint32() external int dwInactivityTimeout;
-  @Uint32() external int dwSpeakerVolume;
-  @Uint32() external int dwSpeakerMode;
-  @Uint32() external int dwPreferredModemOptions;
-  @Uint32() external int dwNegotiatedModemOptions;
-  @Uint32() external int dwNegotiatedDCERate;
-  external __ubyte__ abVariablePortion;
 }
 
 class DispatcherQueueOptions extends Struct {
@@ -5173,6 +3739,16 @@ class VDS_PORTAL_GROUP_NOTIFICATION extends Struct {
   external GUID portalGroupId;
 }
 
+class VDS_NOTIFICATION extends Struct {
+  @Uint32() external int objectType;
+  @Uint32() external int Anonymous;
+}
+
+class VDS_ASYNC_OUTPUT extends Struct {
+  @Uint32() external int type;
+  @Uint32() external int Anonymous;
+}
+
 class VDS_PATH_ID extends Struct {
   @Uint64() external int ullSourceId;
   @Uint64() external int ullPathId;
@@ -5232,6 +3808,15 @@ class VDS_PROVIDER_PROP extends Struct {
   @Uint32() external int ulFlags;
   @Uint32() external int ulStripeSizeFlags;
   @Int16() external int sRebuildPriority;
+}
+
+class VDS_PATH_INFO extends Struct {
+  external VDS_PATH_ID pathId;
+  @Uint32() external int type;
+  @Uint32() external int status;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Anonymous3;
 }
 
 class VDS_PATH_POLICY extends Struct {
@@ -5706,6 +4291,46 @@ class DD_DESTROYDDLOCALDATA extends Struct {
   @Int32() external int ddRVal;
 }
 
+class D3DHVERTEX extends Struct {
+  @Uint32() external int dwFlags;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Anonymous3;
+}
+
+class D3DTLVERTEX extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Anonymous3;
+  @Uint32() external int Anonymous4;
+  @Uint32() external int Anonymous5;
+  @Uint32() external int Anonymous6;
+  @Uint32() external int Anonymous7;
+  @Uint32() external int Anonymous8;
+}
+
+class D3DLVERTEX extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Anonymous3;
+  @Uint32() external int dwReserved;
+  @Uint32() external int Anonymous4;
+  @Uint32() external int Anonymous5;
+  @Uint32() external int Anonymous6;
+  @Uint32() external int Anonymous7;
+}
+
+class D3DVERTEX extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Anonymous3;
+  @Uint32() external int Anonymous4;
+  @Uint32() external int Anonymous5;
+  @Uint32() external int Anonymous6;
+  @Uint32() external int Anonymous7;
+  @Uint32() external int Anonymous8;
+}
+
 class D3DVIEWPORT extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwX;
@@ -5761,10 +4386,29 @@ class D3DLIGHTINGELEMENT extends Struct {
   external D3DVECTOR dvNormal;
 }
 
+class D3DMATERIAL extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Anonymous3;
+  @Uint32() external int Anonymous4;
+  @Uint32() external int Anonymous5;
+  @Uint32() external int hTexture;
+  @Uint32() external int dwRampSize;
+}
+
+class D3DMATERIAL7 extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Anonymous3;
+  @Uint32() external int Anonymous4;
+  @Uint32() external int Anonymous5;
+}
+
 class D3DLIGHT extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dltType;
-  external DXGI_RGBA dcvColor;
+  external D3DCOLORVALUE dcvColor;
   external D3DVECTOR dvPosition;
   external D3DVECTOR dvDirection;
   @Float() external double dvRange;
@@ -5778,9 +4422,9 @@ class D3DLIGHT extends Struct {
 
 class D3DLIGHT7 extends Struct {
   @Uint32() external int dltType;
-  external DXGI_RGBA dcvDiffuse;
-  external DXGI_RGBA dcvSpecular;
-  external DXGI_RGBA dcvAmbient;
+  external D3DCOLORVALUE dcvDiffuse;
+  external D3DCOLORVALUE dcvSpecular;
+  external D3DCOLORVALUE dcvAmbient;
   external D3DVECTOR dvPosition;
   external D3DVECTOR dvDirection;
   @Float() external double dvRange;
@@ -5795,7 +4439,7 @@ class D3DLIGHT7 extends Struct {
 class D3DLIGHT2 extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dltType;
-  external DXGI_RGBA dcvColor;
+  external D3DCOLORVALUE dcvColor;
   external D3DVECTOR dvPosition;
   external D3DVECTOR dvDirection;
   @Float() external double dvRange;
@@ -5839,6 +4483,11 @@ class D3DLINEPATTERN extends Struct {
   @Uint16() external int wLinePattern;
 }
 
+class D3DSTATE extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+}
+
 class D3DMATRIXLOAD extends Struct {
   @Uint32() external int hDestMatrix;
   @Uint32() external int hSrcMatrix;
@@ -5856,6 +4505,18 @@ class D3DPROCESSVERTICES extends Struct {
   @Uint16() external int wDest;
   @Uint32() external int dwCount;
   @Uint32() external int dwReserved;
+}
+
+class D3DTRIANGLE extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Anonymous3;
+  @Uint16() external int wFlags;
+}
+
+class D3DLINE extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
 }
 
 class D3DSPAN extends Struct {
@@ -6229,6 +4890,15 @@ class D3DNTHAL_D3DEXTENDEDCAPS extends Struct {
   @Uint32() external int dwReserved4;
 }
 
+class D3DNTHAL_CONTEXTCREATEDATA extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Anonymous3;
+  @Uint32() external int dwPID;
+  @IntPtr() external int dwhContext;
+  @Int32() external int ddrval;
+}
+
 class D3DNTHAL_CONTEXTDESTROYDATA extends Struct {
   @IntPtr() external int dwhContext;
   @Int32() external int ddrval;
@@ -6346,6 +5016,12 @@ class D3DNTHAL_VALIDATETEXTURESTAGESTATEDATA extends Struct {
   @Int32() external int ddrval;
 }
 
+class D3DNTHAL_DP2COMMAND extends Struct {
+  @Uint8() external int bCommand;
+  @Uint8() external int bReserved;
+  @Uint32() external int Anonymous;
+}
+
 class D3DNTHAL_DP2POINTS extends Struct {
   @Uint16() external int wCount;
   @Uint16() external int wVStart;
@@ -6409,6 +5085,11 @@ class D3DNTHAL_DP2TRIANGLEFAN_IMM extends Struct {
   @Uint32() external int dwEdgeFlags;
 }
 
+class D3DNTHAL_DP2RENDERSTATE extends Struct {
+  @Uint32() external int RenderState;
+  @Uint32() external int Anonymous;
+}
+
 class D3DNTHAL_DP2TEXTURESTAGESTATE extends Struct {
   @Uint16() external int wStage;
   @Uint16() external int TSState;
@@ -6453,6 +5134,11 @@ class D3DNTHAL_DP2STATESET extends Struct {
 class D3DNTHAL_DP2ZRANGE extends Struct {
   @Float() external double dvMinZ;
   @Float() external double dvMaxZ;
+}
+
+class D3DNTHAL_DP2SETLIGHT extends Struct {
+  @Uint32() external int dwIndex;
+  @Uint32() external int Anonymous;
 }
 
 class D3DNTHAL_DP2SETCLIPPLANE extends Struct {
@@ -6500,6 +5186,23 @@ class D3DNTHAL_DP2SETTEXLOD extends Struct {
   @Uint32() external int dwLOD;
 }
 
+class D3DNTHAL_DRAWPRIMITIVES2DATA extends Struct {
+  @IntPtr() external int dwhContext;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwVertexType;
+  external Pointer<DD_SURFACE_LOCAL> lpDDCommands;
+  @Uint32() external int dwCommandOffset;
+  @Uint32() external int dwCommandLength;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int dwVertexOffset;
+  @Uint32() external int dwVertexLength;
+  @Uint32() external int dwReqVertexBufSize;
+  @Uint32() external int dwReqCommandBufSize;
+  external Pointer<Uint32> lpdwRStates;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int dwErrorOffset;
+}
+
 class D3DNTHAL_CALLBACKS3 extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwFlags;
@@ -6510,12 +5213,12 @@ class D3DNTHAL_CALLBACKS3 extends Struct {
 }
 
 class POINTE extends Struct {
-  @Uint32() external int x;
-  @Uint32() external int y;
+  @Float() external double x;
+  @Float() external double y;
 }
 
 class FLOAT_LONG extends Struct {
-  @Uint32() external int e;
+  @Float() external double e;
   @Int32() external int l;
 }
 
@@ -6576,6 +5279,1922 @@ class EMFINFO extends Struct {
 class DRH_APIBITMAPDATA extends Struct {
   external Pointer<SURFOBJ> pso;
   @Int32() external int b;
+}
+
+class STORAGE_HOTPLUG_INFO extends Struct {
+  @Uint32() external int Size;
+  @Uint8() external int MediaRemovable;
+  @Uint8() external int MediaHotplug;
+  @Uint8() external int DeviceHotplug;
+  @Uint8() external int WriteCacheEnableOverride;
+}
+
+class STORAGE_DEVICE_NUMBER extends Struct {
+  @Uint32() external int DeviceType;
+  @Uint32() external int DeviceNumber;
+  @Uint32() external int PartitionNumber;
+}
+
+class STORAGE_DEVICE_NUMBERS extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int NumberOfDevices;
+  external STORAGE_DEVICE_NUMBER Devices;
+}
+
+class STORAGE_DEVICE_NUMBER_EX extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int Flags;
+  @Uint32() external int DeviceType;
+  @Uint32() external int DeviceNumber;
+  external GUID DeviceGuid;
+  @Uint32() external int PartitionNumber;
+}
+
+class STORAGE_BUS_RESET_REQUEST extends Struct {
+  @Uint8() external int PathId;
+}
+
+class STORAGE_BREAK_RESERVATION_REQUEST extends Struct {
+  @Uint32() external int Length;
+  @Uint8() external int _unused;
+  @Uint8() external int PathId;
+  @Uint8() external int TargetId;
+  @Uint8() external int Lun;
+}
+
+class PREVENT_MEDIA_REMOVAL extends Struct {
+  @Uint8() external int PreventMediaRemoval;
+}
+
+class CLASS_MEDIA_CHANGE_CONTEXT extends Struct {
+  @Uint32() external int MediaChangeCount;
+  @Uint32() external int NewState;
+}
+
+class TAPE_STATISTICS extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Flags;
+  @Int64() external int RecoveredWrites;
+  @Int64() external int UnrecoveredWrites;
+  @Int64() external int RecoveredReads;
+  @Int64() external int UnrecoveredReads;
+  @Uint8() external int CompressionRatioReads;
+  @Uint8() external int CompressionRatioWrites;
+}
+
+class TAPE_GET_STATISTICS extends Struct {
+  @Uint32() external int Operation;
+}
+
+class DEVICE_MEDIA_INFO extends Struct {
+  @Uint32() external int DeviceSpecific;
+}
+
+class GET_MEDIA_TYPES extends Struct {
+  @Uint32() external int DeviceType;
+  @Uint32() external int MediaInfoCount;
+  external DEVICE_MEDIA_INFO MediaInfo;
+}
+
+class STORAGE_PREDICT_FAILURE extends Struct {
+  @Uint32() external int PredictFailure;
+  external __ubyte__ VendorSpecific;
+}
+
+class STORAGE_FAILURE_PREDICTION_CONFIG extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint8() external int Set;
+  @Uint8() external int Enabled;
+  @Uint16() external int Reserved;
+}
+
+class STORAGE_PROPERTY_SET extends Struct {
+  @Uint32() external int PropertyId;
+  @Uint32() external int SetType;
+  external __ubyte__ AdditionalParameters;
+}
+
+class STORAGE_IDENTIFIER extends Struct {
+  @Uint32() external int CodeSet;
+  @Uint32() external int Type;
+  @Uint16() external int IdentifierSize;
+  @Uint16() external int NextOffset;
+  @Uint32() external int Association;
+  external __ubyte__ Identifier;
+}
+
+class STORAGE_LB_PROVISIONING_MAP_RESOURCES extends Struct {
+  @Uint32() external int Size;
+  @Uint32() external int Version;
+  @Uint8() external int _bitfield1;
+  external __ubyte__ Reserved1;
+  @Uint8() external int _bitfield2;
+  external __ubyte__ Reserved3;
+  @Uint64() external int AvailableMappingResources;
+  @Uint64() external int UsedMappingResources;
+}
+
+class STORAGE_RPMB_DESCRIPTOR extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int SizeInBytes;
+  @Uint32() external int MaxReliableWriteSizeInBytes;
+  @Uint32() external int FrameFormat;
+}
+
+class STORAGE_CRYPTO_CAPABILITY extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int CryptoCapabilityIndex;
+  @Uint32() external int AlgorithmId;
+  @Uint32() external int KeySize;
+  @Uint32() external int DataUnitSizeBitmask;
+}
+
+class STORAGE_CRYPTO_DESCRIPTOR extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int NumKeysSupported;
+  @Uint32() external int NumCryptoCapabilities;
+  external STORAGE_CRYPTO_CAPABILITY CryptoCapabilities;
+}
+
+class STORAGE_TIER extends Struct {
+  external GUID Id;
+  external __ushort__ Name;
+  external __ushort__ Description;
+  @Uint64() external int Flags;
+  @Uint64() external int ProvisionedCapacity;
+  @Uint32() external int MediaType;
+  @Uint32() external int Class;
+}
+
+class STORAGE_DEVICE_TIERING_DESCRIPTOR extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int Flags;
+  @Uint32() external int TotalNumberOfTiers;
+  @Uint32() external int NumberOfTiersReturned;
+  external STORAGE_TIER Tiers;
+}
+
+class STORAGE_DEVICE_FAULT_DOMAIN_DESCRIPTOR extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int NumberOfFaultDomains;
+  external GUID FaultDomainIds;
+}
+
+class STORAGE_PROTOCOL_SPECIFIC_DATA_EXT extends Struct {
+  @Uint32() external int ProtocolType;
+  @Uint32() external int DataType;
+  @Uint32() external int ProtocolDataValue;
+  @Uint32() external int ProtocolDataSubValue;
+  @Uint32() external int ProtocolDataOffset;
+  @Uint32() external int ProtocolDataLength;
+  @Uint32() external int FixedProtocolReturnData;
+  @Uint32() external int ProtocolDataSubValue2;
+  @Uint32() external int ProtocolDataSubValue3;
+  @Uint32() external int ProtocolDataSubValue4;
+  @Uint32() external int ProtocolDataSubValue5;
+  external __uint__ Reserved;
+}
+
+class STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  external STORAGE_PROTOCOL_SPECIFIC_DATA_EXT ProtocolSpecificData;
+}
+
+class STORAGE_OPERATIONAL_REASON extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int Reason;
+  @Uint32() external int RawBytes;
+}
+
+class STORAGE_DEVICE_MANAGEMENT_STATUS extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int Health;
+  @Uint32() external int NumberOfOperationalStatus;
+  @Uint32() external int NumberOfAdditionalReasons;
+  @Uint32() external int OperationalStatus;
+  external STORAGE_OPERATIONAL_REASON AdditionalReasons;
+}
+
+class STORAGE_ZONE_GROUP extends Struct {
+  @Uint32() external int ZoneCount;
+  @Uint32() external int ZoneType;
+  @Uint64() external int ZoneSize;
+}
+
+class STORAGE_ZONED_DEVICE_DESCRIPTOR extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int DeviceType;
+  @Uint32() external int ZoneCount;
+  @Uint32() external int ZoneAttributes;
+  @Uint32() external int ZoneGroupCount;
+  external STORAGE_ZONE_GROUP ZoneGroup;
+}
+
+class DEVICE_LOCATION extends Struct {
+  @Uint32() external int Socket;
+  @Uint32() external int Slot;
+  @Uint32() external int Adapter;
+  @Uint32() external int Port;
+  @Uint32() external int Anonymous;
+}
+
+class STORAGE_DEVICE_LOCATION_DESCRIPTOR extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  external DEVICE_LOCATION Location;
+  @Uint32() external int StringOffset;
+}
+
+class STORAGE_DEVICE_NUMA_PROPERTY extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int NumaNode;
+}
+
+class STORAGE_DEVICE_UNSAFE_SHUTDOWN_COUNT extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int UnsafeShutdownCount;
+}
+
+class STORAGE_HW_ENDURANCE_INFO extends Struct {
+  @Uint32() external int ValidFields;
+  @Uint32() external int GroupId;
+  @Uint32() external int Flags;
+  @Uint32() external int LifePercentage;
+  external __ubyte__ BytesReadCount;
+  external __ubyte__ ByteWriteCount;
+}
+
+class STORAGE_HW_ENDURANCE_DATA_DESCRIPTOR extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  external STORAGE_HW_ENDURANCE_INFO EnduranceInfo;
+}
+
+class DEVICE_DATA_SET_RANGE extends Struct {
+  @Int64() external int StartingOffset;
+  @Uint64() external int LengthInBytes;
+}
+
+class DEVICE_MANAGE_DATA_SET_ATTRIBUTES extends Struct {
+  @Uint32() external int Size;
+  @Uint32() external int Action;
+  @Uint32() external int Flags;
+  @Uint32() external int ParameterBlockOffset;
+  @Uint32() external int ParameterBlockLength;
+  @Uint32() external int DataSetRangesOffset;
+  @Uint32() external int DataSetRangesLength;
+}
+
+class DEVICE_MANAGE_DATA_SET_ATTRIBUTES_OUTPUT extends Struct {
+  @Uint32() external int Size;
+  @Uint32() external int Action;
+  @Uint32() external int Flags;
+  @Uint32() external int OperationStatus;
+  @Uint32() external int ExtendedError;
+  @Uint32() external int TargetDetailedError;
+  @Uint32() external int ReservedStatus;
+  @Uint32() external int OutputBlockOffset;
+  @Uint32() external int OutputBlockLength;
+}
+
+class DEVICE_DSM_DEFINITION extends Struct {
+  @Uint32() external int Action;
+  @Uint8() external int SingleRange;
+  @Uint32() external int ParameterBlockAlignment;
+  @Uint32() external int ParameterBlockLength;
+  @Uint8() external int HasOutput;
+  @Uint32() external int OutputBlockAlignment;
+  @Uint32() external int OutputBlockLength;
+}
+
+class DEVICE_DSM_NOTIFICATION_PARAMETERS extends Struct {
+  @Uint32() external int Size;
+  @Uint32() external int Flags;
+  @Uint32() external int NumFileTypeIDs;
+  external GUID FileTypeID;
+}
+
+class STORAGE_OFFLOAD_TOKEN extends Struct {
+  external __ubyte__ TokenType;
+  external __ubyte__ Reserved;
+  external __ubyte__ TokenIdLength;
+  @Uint32() external int Anonymous;
+}
+
+class DEVICE_DSM_OFFLOAD_READ_PARAMETERS extends Struct {
+  @Uint32() external int Flags;
+  @Uint32() external int TimeToLive;
+  external __uint__ Reserved;
+}
+
+class STORAGE_OFFLOAD_READ_OUTPUT extends Struct {
+  @Uint32() external int OffloadReadFlags;
+  @Uint32() external int Reserved;
+  @Uint64() external int LengthProtected;
+  @Uint32() external int TokenLength;
+  external STORAGE_OFFLOAD_TOKEN Token;
+}
+
+class DEVICE_DSM_OFFLOAD_WRITE_PARAMETERS extends Struct {
+  @Uint32() external int Flags;
+  @Uint32() external int Reserved;
+  @Uint64() external int TokenOffset;
+  external STORAGE_OFFLOAD_TOKEN Token;
+}
+
+class STORAGE_OFFLOAD_WRITE_OUTPUT extends Struct {
+  @Uint32() external int OffloadWriteFlags;
+  @Uint32() external int Reserved;
+  @Uint64() external int LengthCopied;
+}
+
+class DEVICE_DATA_SET_LBP_STATE_PARAMETERS extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int Flags;
+  @Uint32() external int OutputVersion;
+}
+
+class DEVICE_DATA_SET_LB_PROVISIONING_STATE extends Struct {
+  @Uint32() external int Size;
+  @Uint32() external int Version;
+  @Uint64() external int SlabSizeInBytes;
+  @Uint32() external int SlabOffsetDeltaInBytes;
+  @Uint32() external int SlabAllocationBitMapBitCount;
+  @Uint32() external int SlabAllocationBitMapLength;
+  external __uint__ SlabAllocationBitMap;
+}
+
+class DEVICE_DATA_SET_LB_PROVISIONING_STATE_V2 extends Struct {
+  @Uint32() external int Size;
+  @Uint32() external int Version;
+  @Uint64() external int SlabSizeInBytes;
+  @Uint64() external int SlabOffsetDeltaInBytes;
+  @Uint32() external int SlabAllocationBitMapBitCount;
+  @Uint32() external int SlabAllocationBitMapLength;
+  external __uint__ SlabAllocationBitMap;
+}
+
+class DEVICE_DATA_SET_REPAIR_PARAMETERS extends Struct {
+  @Uint32() external int NumberOfRepairCopies;
+  @Uint32() external int SourceCopy;
+  external __uint__ RepairCopies;
+}
+
+class DEVICE_DATA_SET_REPAIR_OUTPUT extends Struct {
+  external DEVICE_DATA_SET_RANGE ParityExtent;
+}
+
+class DEVICE_DATA_SET_SCRUB_OUTPUT extends Struct {
+  @Uint64() external int BytesProcessed;
+  @Uint64() external int BytesRepaired;
+  @Uint64() external int BytesFailed;
+}
+
+class DEVICE_DATA_SET_SCRUB_EX_OUTPUT extends Struct {
+  @Uint64() external int BytesProcessed;
+  @Uint64() external int BytesRepaired;
+  @Uint64() external int BytesFailed;
+  external DEVICE_DATA_SET_RANGE ParityExtent;
+}
+
+class DEVICE_DSM_TIERING_QUERY_INPUT extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int Flags;
+  @Uint32() external int NumberOfTierIds;
+  external GUID TierIds;
+}
+
+class STORAGE_TIER_REGION extends Struct {
+  external GUID TierId;
+  @Uint64() external int Offset;
+  @Uint64() external int Length;
+}
+
+class DEVICE_DSM_TIERING_QUERY_OUTPUT extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int Flags;
+  @Uint32() external int Reserved;
+  @Uint64() external int Alignment;
+  @Uint32() external int TotalNumberOfRegions;
+  @Uint32() external int NumberOfRegionsReturned;
+  external STORAGE_TIER_REGION Regions;
+}
+
+class DEVICE_DSM_NVCACHE_CHANGE_PRIORITY_PARAMETERS extends Struct {
+  @Uint32() external int Size;
+  @Uint8() external int TargetPriority;
+  external __ubyte__ Reserved;
+}
+
+class DEVICE_DATA_SET_TOPOLOGY_ID_QUERY_OUTPUT extends Struct {
+  @Uint64() external int TopologyRangeBytes;
+  external __ubyte__ TopologyId;
+}
+
+class DEVICE_STORAGE_ADDRESS_RANGE extends Struct {
+  @Int64() external int StartAddress;
+  @Uint64() external int LengthInBytes;
+}
+
+class DEVICE_DSM_PHYSICAL_ADDRESSES_OUTPUT extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Flags;
+  @Uint32() external int TotalNumberOfRanges;
+  @Uint32() external int NumberOfRangesReturned;
+  external DEVICE_STORAGE_ADDRESS_RANGE Ranges;
+}
+
+class DEVICE_DSM_REPORT_ZONES_PARAMETERS extends Struct {
+  @Uint32() external int Size;
+  @Uint8() external int ReportOption;
+  @Uint8() external int Partial;
+  external __ubyte__ Reserved;
+}
+
+class STORAGE_ZONE_DESCRIPTOR extends Struct {
+  @Uint32() external int Size;
+  @Uint32() external int ZoneType;
+  @Uint32() external int ZoneCondition;
+  @Uint8() external int ResetWritePointerRecommend;
+  external __ubyte__ Reserved0;
+  @Uint64() external int ZoneSize;
+  @Uint64() external int WritePointerOffset;
+}
+
+class DEVICE_DSM_REPORT_ZONES_DATA extends Struct {
+  @Uint32() external int Size;
+  @Uint32() external int ZoneCount;
+  @Uint32() external int Attributes;
+  @Uint32() external int Reserved0;
+  external STORAGE_ZONE_DESCRIPTOR ZoneDescriptors;
+}
+
+class DEVICE_STORAGE_RANGE_ATTRIBUTES extends Struct {
+  @Uint64() external int LengthInBytes;
+  @Uint32() external int Anonymous;
+  @Uint32() external int Reserved;
+}
+
+class DEVICE_DSM_RANGE_ERROR_INFO extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Flags;
+  @Uint32() external int TotalNumberOfRanges;
+  @Uint32() external int NumberOfRangesReturned;
+  external DEVICE_STORAGE_RANGE_ATTRIBUTES Ranges;
+}
+
+class DEVICE_DSM_LOST_QUERY_PARAMETERS extends Struct {
+  @Uint32() external int Version;
+  @Uint64() external int Granularity;
+}
+
+class DEVICE_DSM_LOST_QUERY_OUTPUT extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint64() external int Alignment;
+  @Uint32() external int NumberOfBits;
+  external __uint__ BitMap;
+}
+
+class DEVICE_DSM_FREE_SPACE_OUTPUT extends Struct {
+  @Uint32() external int Version;
+  @Uint64() external int FreeSpace;
+}
+
+class DEVICE_DSM_CONVERSION_OUTPUT extends Struct {
+  @Uint32() external int Version;
+  external GUID Source;
+}
+
+class STORAGE_GET_BC_PROPERTIES_OUTPUT extends Struct {
+  @Uint32() external int MaximumRequestsPerPeriod;
+  @Uint32() external int MinimumPeriod;
+  @Uint64() external int MaximumRequestSize;
+  @Uint32() external int EstimatedTimePerRequest;
+  @Uint32() external int NumOutStandingRequests;
+  @Uint64() external int RequestSize;
+}
+
+class STORAGE_ALLOCATE_BC_STREAM_INPUT extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int RequestsPerPeriod;
+  @Uint32() external int Period;
+  @Uint8() external int RetryFailures;
+  @Uint8() external int Discardable;
+  external __ubyte__ Reserved1;
+  @Uint32() external int AccessType;
+  @Uint32() external int AccessMode;
+}
+
+class STORAGE_ALLOCATE_BC_STREAM_OUTPUT extends Struct {
+  @Uint64() external int RequestSize;
+  @Uint32() external int NumOutStandingRequests;
+}
+
+class STORAGE_PRIORITY_HINT_SUPPORT extends Struct {
+  @Uint32() external int SupportFlags;
+}
+
+class STORAGE_DIAGNOSTIC_REQUEST extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int Reserved;
+  @Uint32() external int TargetType;
+  @Uint32() external int Level;
+}
+
+class STORAGE_DIAGNOSTIC_DATA extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  external GUID ProviderId;
+  @Uint32() external int BufferSize;
+  @Uint32() external int Reserved;
+  external __ubyte__ DiagnosticDataBuffer;
+}
+
+class PHYSICAL_ELEMENT_STATUS_REQUEST extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int StartingElement;
+  @Uint8() external int Filter;
+  @Uint8() external int ReportType;
+  external __ubyte__ Reserved;
+}
+
+class PHYSICAL_ELEMENT_STATUS_DESCRIPTOR extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int ElementIdentifier;
+  @Uint8() external int PhysicalElementType;
+  @Uint8() external int PhysicalElementHealth;
+  external __ubyte__ Reserved1;
+  @Uint64() external int AssociatedCapacity;
+  external __uint__ Reserved2;
+}
+
+class PHYSICAL_ELEMENT_STATUS extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int DescriptorCount;
+  @Uint32() external int ReturnedDescriptorCount;
+  @Uint32() external int ElementIdentifierBeingDepoped;
+  @Uint32() external int Reserved;
+  external PHYSICAL_ELEMENT_STATUS_DESCRIPTOR Descriptors;
+}
+
+class REMOVE_ELEMENT_AND_TRUNCATE_REQUEST extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint64() external int RequestCapacity;
+  @Uint32() external int ElementIdentifier;
+  @Uint32() external int Reserved;
+}
+
+class GET_DEVICE_INTERNAL_STATUS_DATA_REQUEST extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int RequestDataType;
+  @Uint32() external int RequestDataSet;
+}
+
+class DEVICE_INTERNAL_STATUS_DATA extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint64() external int T10VendorId;
+  @Uint32() external int DataSet1Length;
+  @Uint32() external int DataSet2Length;
+  @Uint32() external int DataSet3Length;
+  @Uint32() external int DataSet4Length;
+  @Uint8() external int StatusDataVersion;
+  external __ubyte__ Reserved;
+  external __ubyte__ ReasonIdentifier;
+  @Uint32() external int StatusDataLength;
+  external __ubyte__ StatusData;
+}
+
+class STORAGE_MEDIA_SERIAL_NUMBER_DATA extends Struct {
+  @Uint16() external int Reserved;
+  @Uint16() external int SerialNumberLength;
+  external __ubyte__ SerialNumber;
+}
+
+class STORAGE_READ_CAPACITY extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int BlockLength;
+  @Int64() external int NumberOfBlocks;
+  @Int64() external int DiskLength;
+}
+
+class PERSISTENT_RESERVE_COMMAND extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int Anonymous;
+}
+
+class DEVICEDUMP_SUBSECTION_POINTER extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwOffset;
+}
+
+class DEVICEDUMP_STRUCTURE_VERSION extends Struct {
+  @Uint32() external int dwSignature;
+  @Uint32() external int dwVersion;
+  @Uint32() external int dwSize;
+}
+
+class DEVICEDUMP_SECTION_HEADER extends Struct {
+  external GUID guidDeviceDataId;
+  external __ubyte__ sOrganizationID;
+  @Uint32() external int dwFirmwareRevision;
+  external __ubyte__ sModelNumber;
+  external __ubyte__ szDeviceManufacturingID;
+  @Uint32() external int dwFlags;
+  @Uint32() external int bRestrictedPrivateDataVersion;
+  @Uint32() external int dwFirmwareIssueId;
+  external __ubyte__ szIssueDescriptionString;
+}
+
+class GP_LOG_PAGE_DESCRIPTOR extends Struct {
+  @Uint16() external int LogAddress;
+  @Uint16() external int LogSectors;
+}
+
+class DEVICEDUMP_PUBLIC_SUBSECTION extends Struct {
+  @Uint32() external int dwFlags;
+  external GP_LOG_PAGE_DESCRIPTOR GPLogTable;
+  external __byte__ szDescription;
+  external __ubyte__ bData;
+}
+
+class DEVICEDUMP_RESTRICTED_SUBSECTION extends Struct {
+  external __ubyte__ bData;
+}
+
+class DEVICEDUMP_PRIVATE_SUBSECTION extends Struct {
+  @Uint32() external int dwFlags;
+  external GP_LOG_PAGE_DESCRIPTOR GPLogId;
+  external __ubyte__ bData;
+}
+
+class DEVICEDUMP_STORAGEDEVICE_DATA extends Struct {
+  external DEVICEDUMP_STRUCTURE_VERSION Descriptor;
+  external DEVICEDUMP_SECTION_HEADER SectionHeader;
+  @Uint32() external int dwBufferSize;
+  @Uint32() external int dwReasonForCollection;
+  external DEVICEDUMP_SUBSECTION_POINTER PublicData;
+  external DEVICEDUMP_SUBSECTION_POINTER RestrictedData;
+  external DEVICEDUMP_SUBSECTION_POINTER PrivateData;
+}
+
+class DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD extends Struct {
+  external __ubyte__ Cdb;
+  external __ubyte__ Command;
+  @Uint64() external int StartTime;
+  @Uint64() external int EndTime;
+  @Uint32() external int OperationStatus;
+  @Uint32() external int OperationError;
+  @Uint32() external int StackSpecific;
+}
+
+class DEVICEDUMP_STORAGESTACK_PUBLIC_DUMP extends Struct {
+  external DEVICEDUMP_STRUCTURE_VERSION Descriptor;
+  @Uint32() external int dwReasonForCollection;
+  external __ubyte__ cDriverName;
+  @Uint32() external int uiNumRecords;
+  external DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD RecordArray;
+}
+
+class STORAGE_IDLE_POWER extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int _bitfield;
+  @Uint32() external int D3IdleTimeout;
+}
+
+class STORAGE_IDLE_POWERUP_REASON extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int PowerupReason;
+}
+
+class STORAGE_RPMB_DATA_FRAME extends Struct {
+  external __ubyte__ Stuff;
+  external __ubyte__ KeyOrMAC;
+  external __ubyte__ Data;
+  external __ubyte__ Nonce;
+  external __ubyte__ WriteCounter;
+  external __ubyte__ Address;
+  external __ubyte__ BlockCount;
+  external __ubyte__ OperationResult;
+  external __ubyte__ RequestOrResponseType;
+}
+
+class STORAGE_EVENT_NOTIFICATION extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint64() external int Events;
+}
+
+class STORAGE_COUNTER extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int Value;
+}
+
+class STORAGE_COUNTERS extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int NumberOfCounters;
+  external STORAGE_COUNTER Counters;
+}
+
+class STORAGE_HW_FIRMWARE_INFO_QUERY extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int Flags;
+  @Uint32() external int Reserved;
+}
+
+class STORAGE_HW_FIRMWARE_SLOT_INFO extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint8() external int SlotNumber;
+  @Uint8() external int _bitfield;
+  external __ubyte__ Reserved1;
+  external __ubyte__ Revision;
+}
+
+class STORAGE_HW_FIRMWARE_INFO extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint8() external int _bitfield;
+  @Uint8() external int SlotCount;
+  @Uint8() external int ActiveSlot;
+  @Uint8() external int PendingActivateSlot;
+  @Uint8() external int FirmwareShared;
+  external __ubyte__ Reserved;
+  @Uint32() external int ImagePayloadAlignment;
+  @Uint32() external int ImagePayloadMaxSize;
+  external STORAGE_HW_FIRMWARE_SLOT_INFO Slot;
+}
+
+class STORAGE_HW_FIRMWARE_DOWNLOAD_V2 extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int Flags;
+  @Uint8() external int Slot;
+  external __ubyte__ Reserved;
+  @Uint64() external int Offset;
+  @Uint64() external int BufferSize;
+  @Uint32() external int ImageSize;
+  @Uint32() external int Reserved2;
+  external __ubyte__ ImageBuffer;
+}
+
+class STORAGE_ATTRIBUTE_MGMT extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int Action;
+  @Uint32() external int Attribute;
+}
+
+class SCM_PD_HEALTH_NOTIFICATION_DATA extends Struct {
+  external GUID DeviceGuid;
+}
+
+class SCM_LOGICAL_DEVICE_INSTANCE extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  external GUID DeviceGuid;
+  external __ushort__ SymbolicLink;
+}
+
+class SCM_LOGICAL_DEVICES extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int DeviceCount;
+  external SCM_LOGICAL_DEVICE_INSTANCE Devices;
+}
+
+class SCM_PHYSICAL_DEVICE_INSTANCE extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int NfitHandle;
+  external __ushort__ SymbolicLink;
+}
+
+class SCM_PHYSICAL_DEVICES extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int DeviceCount;
+  external SCM_PHYSICAL_DEVICE_INSTANCE Devices;
+}
+
+class SCM_REGION extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int Flags;
+  @Uint32() external int NfitHandle;
+  external GUID LogicalDeviceGuid;
+  external GUID AddressRangeType;
+  @Uint32() external int AssociatedId;
+  @Uint64() external int Length;
+  @Uint64() external int StartingDPA;
+  @Uint64() external int BaseSPA;
+  @Uint64() external int SPAOffset;
+  @Uint64() external int RegionOffset;
+}
+
+class SCM_REGIONS extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int RegionCount;
+  external SCM_REGION Regions;
+}
+
+class SCM_INTERLEAVED_PD_INFO extends Struct {
+  @Uint32() external int DeviceHandle;
+  external GUID DeviceGuid;
+}
+
+class SCM_LD_INTERLEAVE_SET_INFO extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int InterleaveSetSize;
+  external SCM_INTERLEAVED_PD_INFO InterleaveSet;
+}
+
+class SCM_PD_PROPERTY_QUERY extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int PropertyId;
+  @Uint32() external int QueryType;
+  external __ubyte__ AdditionalParameters;
+}
+
+class SCM_PD_DESCRIPTOR_HEADER extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+}
+
+class SCM_PD_DEVICE_HANDLE extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  external GUID DeviceGuid;
+  @Uint32() external int DeviceHandle;
+}
+
+class SCM_PD_DEVICE_INFO extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  external GUID DeviceGuid;
+  @Uint32() external int UnsafeShutdownCount;
+  @Uint64() external int PersistentMemorySizeInBytes;
+  @Uint64() external int VolatileMemorySizeInBytes;
+  @Uint64() external int TotalMemorySizeInBytes;
+  @Uint32() external int SlotNumber;
+  @Uint32() external int DeviceHandle;
+  @Uint16() external int PhysicalId;
+  @Uint8() external int NumberOfFormatInterfaceCodes;
+  external __ushort__ FormatInterfaceCodes;
+  @Uint32() external int VendorId;
+  @Uint32() external int ProductId;
+  @Uint32() external int SubsystemDeviceId;
+  @Uint32() external int SubsystemVendorId;
+  @Uint8() external int ManufacturingLocation;
+  @Uint8() external int ManufacturingWeek;
+  @Uint8() external int ManufacturingYear;
+  @Uint32() external int SerialNumber4Byte;
+  @Uint32() external int SerialNumberLengthInChars;
+  external __byte__ SerialNumber;
+}
+
+class SCM_PD_DEVICE_SPECIFIC_PROPERTY extends Struct {
+  external __ushort__ Name;
+  @Int64() external int Value;
+}
+
+class SCM_PD_DEVICE_SPECIFIC_INFO extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int NumberOfProperties;
+  external SCM_PD_DEVICE_SPECIFIC_PROPERTY DeviceSpecificProperties;
+}
+
+class SCM_PD_FIRMWARE_SLOT_INFO extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint8() external int SlotNumber;
+  @Uint8() external int _bitfield;
+  external __ubyte__ Reserved1;
+  external __ubyte__ Revision;
+}
+
+class SCM_PD_FIRMWARE_INFO extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint8() external int ActiveSlot;
+  @Uint8() external int NextActiveSlot;
+  @Uint8() external int SlotCount;
+  external SCM_PD_FIRMWARE_SLOT_INFO Slots;
+}
+
+class SCM_PD_MANAGEMENT_STATUS extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int Health;
+  @Uint32() external int NumberOfOperationalStatus;
+  @Uint32() external int NumberOfAdditionalReasons;
+  @Uint32() external int OperationalStatus;
+  @Uint32() external int AdditionalReasons;
+}
+
+class SCM_PD_LOCATION_STRING extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  external __ushort__ Location;
+}
+
+class SCM_PD_FIRMWARE_DOWNLOAD extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int Flags;
+  @Uint8() external int Slot;
+  external __ubyte__ Reserved;
+  @Uint64() external int Offset;
+  @Uint32() external int FirmwareImageSizeInBytes;
+  external __ubyte__ FirmwareImage;
+}
+
+class SCM_PD_FIRMWARE_ACTIVATE extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int Flags;
+  @Uint8() external int Slot;
+}
+
+class SCM_PD_PASSTHROUGH_INPUT extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  external GUID ProtocolGuid;
+  @Uint32() external int DataSize;
+  external __ubyte__ Data;
+}
+
+class SCM_PD_PASSTHROUGH_OUTPUT extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  external GUID ProtocolGuid;
+  @Uint32() external int DataSize;
+  external __ubyte__ Data;
+}
+
+class SCM_PD_PASSTHROUGH_INVDIMM_INPUT extends Struct {
+  @Uint32() external int Opcode;
+  @Uint32() external int OpcodeParametersLength;
+  external __ubyte__ OpcodeParameters;
+}
+
+class SCM_PD_PASSTHROUGH_INVDIMM_OUTPUT extends Struct {
+  @Uint16() external int GeneralStatus;
+  @Uint16() external int ExtendedStatus;
+  @Uint32() external int OutputDataLength;
+  external __ubyte__ OutputData;
+}
+
+class SCM_PD_REINITIALIZE_MEDIA_INPUT extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int Options;
+}
+
+class SCM_PD_REINITIALIZE_MEDIA_OUTPUT extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int Status;
+}
+
+class SET_PARTITION_INFORMATION_EX extends Struct {
+  @Uint32() external int PartitionStyle;
+  @Uint32() external int Anonymous;
+}
+
+class DISK_CONTROLLER_NUMBER extends Struct {
+  @Uint32() external int ControllerNumber;
+  @Uint32() external int DiskNumber;
+}
+
+class HISTOGRAM_BUCKET extends Struct {
+  @Uint32() external int Reads;
+  @Uint32() external int Writes;
+}
+
+class DISK_HISTOGRAM extends Struct {
+  @Int64() external int DiskSize;
+  @Int64() external int Start;
+  @Int64() external int End;
+  @Int64() external int Average;
+  @Int64() external int AverageRead;
+  @Int64() external int AverageWrite;
+  @Uint32() external int Granularity;
+  @Uint32() external int Size;
+  @Uint32() external int ReadCount;
+  @Uint32() external int WriteCount;
+  external Pointer<HISTOGRAM_BUCKET> Histogram;
+}
+
+class DISK_RECORD extends Struct {
+  @Int64() external int ByteOffset;
+  @Int64() external int StartTime;
+  @Int64() external int EndTime;
+  external Pointer VirtualAddress;
+  @Uint32() external int NumberOfBytes;
+  @Uint8() external int DeviceNumber;
+  @Uint8() external int ReadRequest;
+}
+
+class DISK_LOGGING extends Struct {
+  @Uint8() external int Function;
+  external Pointer BufferAddress;
+  @Uint32() external int BufferSize;
+}
+
+class BIN_RANGE extends Struct {
+  @Int64() external int StartValue;
+  @Int64() external int Length;
+}
+
+class PERF_BIN extends Struct {
+  @Uint32() external int NumberOfBins;
+  @Uint32() external int TypeOfBin;
+  external BIN_RANGE BinsRanges;
+}
+
+class BIN_COUNT extends Struct {
+  external BIN_RANGE BinRange;
+  @Uint32() external int BinCount;
+}
+
+class BIN_RESULTS extends Struct {
+  @Uint32() external int NumberOfBins;
+  external BIN_COUNT BinCounts;
+}
+
+class GETVERSIONINPARAMS extends Struct {
+  @Uint8() external int bVersion;
+  @Uint8() external int bRevision;
+  @Uint8() external int bReserved;
+  @Uint8() external int bIDEDeviceMap;
+  @Uint32() external int fCapabilities;
+  external __uint__ dwReserved;
+}
+
+class IDEREGS extends Struct {
+  @Uint8() external int bFeaturesReg;
+  @Uint8() external int bSectorCountReg;
+  @Uint8() external int bSectorNumberReg;
+  @Uint8() external int bCylLowReg;
+  @Uint8() external int bCylHighReg;
+  @Uint8() external int bDriveHeadReg;
+  @Uint8() external int bCommandReg;
+  @Uint8() external int bReserved;
+}
+
+class SENDCMDINPARAMS extends Struct {
+  @Uint32() external int cBufferSize;
+  external IDEREGS irDriveRegs;
+  @Uint8() external int bDriveNumber;
+  external __ubyte__ bReserved;
+  external __uint__ dwReserved;
+  external __ubyte__ bBuffer;
+}
+
+class DRIVERSTATUS extends Struct {
+  @Uint8() external int bDriverError;
+  @Uint8() external int bIDEError;
+  external __ubyte__ bReserved;
+  external __uint__ dwReserved;
+}
+
+class SENDCMDOUTPARAMS extends Struct {
+  @Uint32() external int cBufferSize;
+  external DRIVERSTATUS DriverStatus;
+  external __ubyte__ bBuffer;
+}
+
+class CHANGER_ELEMENT extends Struct {
+  @Uint32() external int ElementType;
+  @Uint32() external int ElementAddress;
+}
+
+class CHANGER_ELEMENT_LIST extends Struct {
+  external CHANGER_ELEMENT Element;
+  @Uint32() external int NumberOfElements;
+}
+
+class GET_CHANGER_PARAMETERS extends Struct {
+  @Uint32() external int Size;
+  @Uint16() external int NumberTransportElements;
+  @Uint16() external int NumberStorageElements;
+  @Uint16() external int NumberCleanerSlots;
+  @Uint16() external int NumberIEElements;
+  @Uint16() external int NumberDataTransferElements;
+  @Uint16() external int NumberOfDoors;
+  @Uint16() external int FirstSlotNumber;
+  @Uint16() external int FirstDriveNumber;
+  @Uint16() external int FirstTransportNumber;
+  @Uint16() external int FirstIEPortNumber;
+  @Uint16() external int FirstCleanerSlotAddress;
+  @Uint16() external int MagazineSize;
+  @Uint32() external int DriveCleanTimeout;
+  @Uint32() external int Features0;
+  @Uint32() external int Features1;
+  @Uint8() external int MoveFromTransport;
+  @Uint8() external int MoveFromSlot;
+  @Uint8() external int MoveFromIePort;
+  @Uint8() external int MoveFromDrive;
+  @Uint8() external int ExchangeFromTransport;
+  @Uint8() external int ExchangeFromSlot;
+  @Uint8() external int ExchangeFromIePort;
+  @Uint8() external int ExchangeFromDrive;
+  @Uint8() external int LockUnlockCapabilities;
+  @Uint8() external int PositionCapabilities;
+  external __ubyte__ Reserved1;
+  external __uint__ Reserved2;
+}
+
+class CHANGER_PRODUCT_DATA extends Struct {
+  external __ubyte__ VendorId;
+  external __ubyte__ ProductId;
+  external __ubyte__ Revision;
+  external __ubyte__ SerialNumber;
+  @Uint8() external int DeviceType;
+}
+
+class CHANGER_SET_ACCESS extends Struct {
+  external CHANGER_ELEMENT Element;
+  @Uint32() external int Control;
+}
+
+class CHANGER_READ_ELEMENT_STATUS extends Struct {
+  external CHANGER_ELEMENT_LIST ElementList;
+  @Uint8() external int VolumeTagInfo;
+}
+
+class CHANGER_ELEMENT_STATUS extends Struct {
+  external CHANGER_ELEMENT Element;
+  external CHANGER_ELEMENT SrcElementAddress;
+  @Uint32() external int Flags;
+  @Uint32() external int ExceptionCode;
+  @Uint8() external int TargetId;
+  @Uint8() external int Lun;
+  @Uint16() external int Reserved;
+  external __ubyte__ PrimaryVolumeID;
+  external __ubyte__ AlternateVolumeID;
+}
+
+class CHANGER_ELEMENT_STATUS_EX extends Struct {
+  external CHANGER_ELEMENT Element;
+  external CHANGER_ELEMENT SrcElementAddress;
+  @Uint32() external int Flags;
+  @Uint32() external int ExceptionCode;
+  @Uint8() external int TargetId;
+  @Uint8() external int Lun;
+  @Uint16() external int Reserved;
+  external __ubyte__ PrimaryVolumeID;
+  external __ubyte__ AlternateVolumeID;
+  external __ubyte__ VendorIdentification;
+  external __ubyte__ ProductIdentification;
+  external __ubyte__ SerialNumber;
+}
+
+class CHANGER_INITIALIZE_ELEMENT_STATUS extends Struct {
+  external CHANGER_ELEMENT_LIST ElementList;
+  @Uint8() external int BarCodeScan;
+}
+
+class CHANGER_SET_POSITION extends Struct {
+  external CHANGER_ELEMENT Transport;
+  external CHANGER_ELEMENT Destination;
+  @Uint8() external int Flip;
+}
+
+class CHANGER_EXCHANGE_MEDIUM extends Struct {
+  external CHANGER_ELEMENT Transport;
+  external CHANGER_ELEMENT Source;
+  external CHANGER_ELEMENT Destination1;
+  external CHANGER_ELEMENT Destination2;
+  @Uint8() external int Flip1;
+  @Uint8() external int Flip2;
+}
+
+class CHANGER_MOVE_MEDIUM extends Struct {
+  external CHANGER_ELEMENT Transport;
+  external CHANGER_ELEMENT Source;
+  external CHANGER_ELEMENT Destination;
+  @Uint8() external int Flip;
+}
+
+class CHANGER_SEND_VOLUME_TAG_INFORMATION extends Struct {
+  external CHANGER_ELEMENT StartingElement;
+  @Uint32() external int ActionCode;
+  external __ubyte__ VolumeIDTemplate;
+}
+
+class READ_ELEMENT_ADDRESS_INFO extends Struct {
+  @Uint32() external int NumberOfElements;
+  external CHANGER_ELEMENT_STATUS ElementStatus;
+}
+
+class PATHNAME_BUFFER extends Struct {
+  @Uint32() external int PathNameLength;
+  external __ushort__ Name;
+}
+
+class FSCTL_QUERY_FAT_BPB_BUFFER extends Struct {
+  external __ubyte__ First0x24BytesOfBootSector;
+}
+
+class REFS_VOLUME_DATA_BUFFER extends Struct {
+  @Uint32() external int ByteCount;
+  @Uint32() external int MajorVersion;
+  @Uint32() external int MinorVersion;
+  @Uint32() external int BytesPerPhysicalSector;
+  @Int64() external int VolumeSerialNumber;
+  @Int64() external int NumberSectors;
+  @Int64() external int TotalClusters;
+  @Int64() external int FreeClusters;
+  @Int64() external int TotalReserved;
+  @Uint32() external int BytesPerSector;
+  @Uint32() external int BytesPerCluster;
+  @Int64() external int MaximumSizeOfResidentFile;
+  @Uint16() external int FastTierDataFillRatio;
+  @Uint16() external int SlowTierDataFillRatio;
+  @Uint32() external int DestagesFastTierToSlowTierRate;
+  @Int64() external int Reserved;
+}
+
+class STARTING_LCN_INPUT_BUFFER_EX extends Struct {
+  @Int64() external int StartingLcn;
+  @Uint32() external int Flags;
+}
+
+class RETRIEVAL_POINTERS_AND_REFCOUNT_BUFFER extends Struct {
+  @Uint32() external int ExtentCount;
+  @Int64() external int StartingVcn;
+  external ____ Extents;
+}
+
+class RETRIEVAL_POINTER_COUNT extends Struct {
+  @Uint32() external int ExtentCount;
+}
+
+class MOVE_FILE_RECORD_DATA extends Struct {
+  @IntPtr() external int FileHandle;
+  @Int64() external int SourceFileRecord;
+  @Int64() external int TargetFileRecord;
+}
+
+class MOVE_FILE_DATA32 extends Struct {
+  @Uint32() external int FileHandle;
+  @Int64() external int StartingVcn;
+  @Int64() external int StartingLcn;
+  @Uint32() external int ClusterCount;
+}
+
+class USN_RECORD_UNION extends Struct {
+  external USN_RECORD_COMMON_HEADER Header;
+  external USN_RECORD_V2 V2;
+  external USN_RECORD_V3 V3;
+  external USN_RECORD_V4 V4;
+}
+
+class BULK_SECURITY_TEST_DATA extends Struct {
+  @Uint32() external int DesiredAccess;
+  external __uint__ SecurityIds;
+}
+
+class FILE_PREFETCH extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int Count;
+  external __uint64__ Prefetch;
+}
+
+class FILE_PREFETCH_EX extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int Count;
+  external Pointer Context;
+  external __uint64__ Prefetch;
+}
+
+class FILE_ZERO_DATA_INFORMATION_EX extends Struct {
+  @Int64() external int FileOffset;
+  @Int64() external int BeyondFinalZero;
+  @Uint32() external int Flags;
+}
+
+class ENCRYPTION_BUFFER extends Struct {
+  @Uint32() external int EncryptionOperation;
+  external __ubyte__ Private;
+}
+
+class DECRYPTION_STATUS_BUFFER extends Struct {
+  @Uint8() external int NoEncryptedStreams;
+}
+
+class REQUEST_RAW_ENCRYPTED_DATA extends Struct {
+  @Int64() external int FileOffset;
+  @Uint32() external int Length;
+}
+
+class ENCRYPTED_DATA_INFO extends Struct {
+  @Uint64() external int StartingFileOffset;
+  @Uint32() external int OutputBufferOffset;
+  @Uint32() external int BytesWithinFileSize;
+  @Uint32() external int BytesWithinValidDataLength;
+  @Uint16() external int CompressionFormat;
+  @Uint8() external int DataUnitShift;
+  @Uint8() external int ChunkShift;
+  @Uint8() external int ClusterShift;
+  @Uint8() external int EncryptionFormat;
+  @Uint16() external int NumberOfDataBlocks;
+  external __uint__ DataBlockSize;
+}
+
+class EXTENDED_ENCRYPTED_DATA_INFO extends Struct {
+  @Uint32() external int ExtendedCode;
+  @Uint32() external int Length;
+  @Uint32() external int Flags;
+  @Uint32() external int Reserved;
+}
+
+class SI_COPYFILE extends Struct {
+  @Uint32() external int SourceFileNameLength;
+  @Uint32() external int DestinationFileNameLength;
+  @Uint32() external int Flags;
+  external __ushort__ FileNameBuffer;
+}
+
+class FILE_INITIATE_REPAIR_OUTPUT_BUFFER extends Struct {
+  @Uint64() external int Hint1;
+  @Uint64() external int Hint2;
+  @Uint64() external int Clsn;
+  @Uint32() external int Status;
+}
+
+class TXFS_ROLLFORWARD_REDO_INFORMATION extends Struct {
+  @Int64() external int LastVirtualClock;
+  @Uint64() external int LastRedoLsn;
+  @Uint64() external int HighestRecoveryLsn;
+  @Uint32() external int Flags;
+}
+
+class TXFS_START_RM_INFORMATION extends Struct {
+  @Uint32() external int Flags;
+  @Uint64() external int LogContainerSize;
+  @Uint32() external int LogContainerCountMin;
+  @Uint32() external int LogContainerCountMax;
+  @Uint32() external int LogGrowthIncrement;
+  @Uint32() external int LogAutoShrinkPercentage;
+  @Uint32() external int TmLogPathOffset;
+  @Uint16() external int TmLogPathLength;
+  @Uint16() external int LoggingMode;
+  @Uint16() external int LogPathLength;
+  @Uint16() external int Reserved;
+  external __ushort__ LogPath;
+}
+
+class FILE_FS_PERSISTENT_VOLUME_INFORMATION extends Struct {
+  @Uint32() external int VolumeFlags;
+  @Uint32() external int FlagMask;
+  @Uint32() external int Version;
+  @Uint32() external int Reserved;
+}
+
+class STORAGE_QUERY_DEPENDENT_VOLUME_REQUEST extends Struct {
+  @Uint32() external int RequestLevel;
+  @Uint32() external int RequestFlags;
+}
+
+class STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY extends Struct {
+  @Uint32() external int EntryLength;
+  @Uint32() external int DependencyTypeFlags;
+  @Uint32() external int ProviderSpecificFlags;
+  external VIRTUAL_STORAGE_TYPE VirtualStorageType;
+}
+
+class STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY extends Struct {
+  @Uint32() external int EntryLength;
+  @Uint32() external int DependencyTypeFlags;
+  @Uint32() external int ProviderSpecificFlags;
+  external VIRTUAL_STORAGE_TYPE VirtualStorageType;
+  @Uint32() external int AncestorLevel;
+  @Uint32() external int HostVolumeNameOffset;
+  @Uint32() external int HostVolumeNameSize;
+  @Uint32() external int DependentVolumeNameOffset;
+  @Uint32() external int DependentVolumeNameSize;
+  @Uint32() external int RelativePathOffset;
+  @Uint32() external int RelativePathSize;
+  @Uint32() external int DependentDeviceNameOffset;
+  @Uint32() external int DependentDeviceNameSize;
+}
+
+class STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE extends Struct {
+  @Uint32() external int ResponseLevel;
+  @Uint32() external int NumberEntries;
+  @Uint32() external int Anonymous;
+}
+
+class SD_CHANGE_MACHINE_SID_INPUT extends Struct {
+  @Uint16() external int CurrentMachineSIDOffset;
+  @Uint16() external int CurrentMachineSIDLength;
+  @Uint16() external int NewMachineSIDOffset;
+  @Uint16() external int NewMachineSIDLength;
+}
+
+class SD_CHANGE_MACHINE_SID_OUTPUT extends Struct {
+  @Uint64() external int NumSDChangedSuccess;
+  @Uint64() external int NumSDChangedFail;
+  @Uint64() external int NumSDUnused;
+  @Uint64() external int NumSDTotal;
+  @Uint64() external int NumMftSDChangedSuccess;
+  @Uint64() external int NumMftSDChangedFail;
+  @Uint64() external int NumMftSDTotal;
+}
+
+class SD_QUERY_STATS_INPUT extends Struct {
+  @Uint32() external int Reserved;
+}
+
+class SD_QUERY_STATS_OUTPUT extends Struct {
+  @Uint64() external int SdsStreamSize;
+  @Uint64() external int SdsAllocationSize;
+  @Uint64() external int SiiStreamSize;
+  @Uint64() external int SiiAllocationSize;
+  @Uint64() external int SdhStreamSize;
+  @Uint64() external int SdhAllocationSize;
+  @Uint64() external int NumSDTotal;
+  @Uint64() external int NumSDUnused;
+}
+
+class SD_ENUM_SDS_INPUT extends Struct {
+  @Uint64() external int StartingOffset;
+  @Uint64() external int MaxSDEntriesToReturn;
+}
+
+class SD_ENUM_SDS_ENTRY extends Struct {
+  @Uint32() external int Hash;
+  @Uint32() external int SecurityId;
+  @Uint64() external int Offset;
+  @Uint32() external int Length;
+  external __ubyte__ Descriptor;
+}
+
+class SD_ENUM_SDS_OUTPUT extends Struct {
+  @Uint64() external int NextOffset;
+  @Uint64() external int NumSDEntriesReturned;
+  @Uint64() external int NumSDBytesReturned;
+  external SD_ENUM_SDS_ENTRY SDEntry;
+}
+
+class SD_GLOBAL_CHANGE_INPUT extends Struct {
+  @Uint32() external int Flags;
+  @Uint32() external int ChangeType;
+  @Uint32() external int Anonymous;
+}
+
+class SD_GLOBAL_CHANGE_OUTPUT extends Struct {
+  @Uint32() external int Flags;
+  @Uint32() external int ChangeType;
+  @Uint32() external int Anonymous;
+}
+
+class FILE_TYPE_NOTIFICATION_INPUT extends Struct {
+  @Uint32() external int Flags;
+  @Uint32() external int NumFileTypeIDs;
+  external GUID FileTypeID;
+}
+
+class CSV_MGMT_LOCK extends Struct {
+  @Uint32() external int Flags;
+}
+
+class CSV_QUERY_FILE_REVISION_FILE_ID_128 extends Struct {
+  external FILE_ID_128 FileId;
+  external __int64__ FileRevision;
+}
+
+class CSV_QUERY_VOLUME_REDIRECT_STATE extends Struct {
+  @Uint32() external int MdsNodeId;
+  @Uint32() external int DsNodeId;
+  @Uint8() external int IsDiskConnected;
+  @Uint8() external int ClusterEnableDirectIo;
+  @Uint32() external int DiskConnectivity;
+}
+
+class CSV_QUERY_MDS_PATH_V2 extends Struct {
+  @Int64() external int Version;
+  @Uint32() external int RequiredSize;
+  @Uint32() external int MdsNodeId;
+  @Uint32() external int DsNodeId;
+  @Uint32() external int Flags;
+  @Uint32() external int DiskConnectivity;
+  external GUID VolumeId;
+  @Uint32() external int IpAddressOffset;
+  @Uint32() external int IpAddressLength;
+  @Uint32() external int PathOffset;
+  @Uint32() external int PathLength;
+}
+
+class CLUSTER_RANGE extends Struct {
+  @Int64() external int StartingCluster;
+  @Int64() external int ClusterCount;
+}
+
+class FILE_REFERENCE_RANGE extends Struct {
+  @Uint64() external int StartingFileReferenceNumber;
+  @Uint64() external int EndingFileReferenceNumber;
+}
+
+class QUERY_FILE_LAYOUT_INPUT extends Struct {
+  @Uint32() external int Anonymous;
+  @Uint32() external int Flags;
+  @Uint32() external int FilterType;
+  @Uint32() external int Reserved;
+  @Uint32() external int Filter;
+}
+
+class QUERY_FILE_LAYOUT_OUTPUT extends Struct {
+  @Uint32() external int FileEntryCount;
+  @Uint32() external int FirstFileOffset;
+  @Uint32() external int Flags;
+  @Uint32() external int Reserved;
+}
+
+class FILE_LAYOUT_ENTRY extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int NextFileOffset;
+  @Uint32() external int Flags;
+  @Uint32() external int FileAttributes;
+  @Uint64() external int FileReferenceNumber;
+  @Uint32() external int FirstNameOffset;
+  @Uint32() external int FirstStreamOffset;
+  @Uint32() external int ExtraInfoOffset;
+  @Uint32() external int ExtraInfoLength;
+}
+
+class FILE_LAYOUT_NAME_ENTRY extends Struct {
+  @Uint32() external int NextNameOffset;
+  @Uint32() external int Flags;
+  @Uint64() external int ParentFileReferenceNumber;
+  @Uint32() external int FileNameLength;
+  @Uint32() external int Reserved;
+  external __ushort__ FileName;
+}
+
+class FILE_LAYOUT_INFO_ENTRY extends Struct {
+  @Uint32() external int BasicInformation;
+  @Uint32() external int OwnerId;
+  @Uint32() external int SecurityId;
+  @Int64() external int Usn;
+  @Uint32() external int StorageReserveId;
+}
+
+class STREAM_LAYOUT_ENTRY extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int NextStreamOffset;
+  @Uint32() external int Flags;
+  @Uint32() external int ExtentInformationOffset;
+  @Int64() external int AllocationSize;
+  @Int64() external int EndOfFile;
+  @Uint32() external int StreamInformationOffset;
+  @Uint32() external int AttributeTypeCode;
+  @Uint32() external int AttributeFlags;
+  @Uint32() external int StreamIdentifierLength;
+  external __ushort__ StreamIdentifier;
+}
+
+class STREAM_EXTENT_ENTRY extends Struct {
+  @Uint32() external int Flags;
+  @Uint32() external int ExtentInformation;
+}
+
+class FSCTL_SET_INTEGRITY_INFORMATION_BUFFER_EX extends Struct {
+  @Uint8() external int EnableIntegrity;
+  @Uint8() external int KeepIntegrityStateUnchanged;
+  @Uint16() external int Reserved;
+  @Uint32() external int Flags;
+  @Uint8() external int Version;
+  external __ubyte__ Reserved2;
+}
+
+class FSCTL_OFFLOAD_READ_INPUT extends Struct {
+  @Uint32() external int Size;
+  @Uint32() external int Flags;
+  @Uint32() external int TokenTimeToLive;
+  @Uint32() external int Reserved;
+  @Uint64() external int FileOffset;
+  @Uint64() external int CopyLength;
+}
+
+class FSCTL_OFFLOAD_READ_OUTPUT extends Struct {
+  @Uint32() external int Size;
+  @Uint32() external int Flags;
+  @Uint64() external int TransferLength;
+  external __ubyte__ Token;
+}
+
+class FSCTL_OFFLOAD_WRITE_INPUT extends Struct {
+  @Uint32() external int Size;
+  @Uint32() external int Flags;
+  @Uint64() external int FileOffset;
+  @Uint64() external int CopyLength;
+  @Uint64() external int TransferOffset;
+  external __ubyte__ Token;
+}
+
+class FSCTL_OFFLOAD_WRITE_OUTPUT extends Struct {
+  @Uint32() external int Size;
+  @Uint32() external int Flags;
+  @Uint64() external int LengthWritten;
+}
+
+class SET_PURGE_FAILURE_MODE_INPUT extends Struct {
+  @Uint32() external int Flags;
+}
+
+class FILE_REGION_INFO extends Struct {
+  @Int64() external int FileOffset;
+  @Int64() external int Length;
+  @Uint32() external int Usage;
+  @Uint32() external int Reserved;
+}
+
+class FILE_REGION_OUTPUT extends Struct {
+  @Uint32() external int Flags;
+  @Uint32() external int TotalRegionEntryCount;
+  @Uint32() external int RegionEntryCount;
+  @Uint32() external int Reserved;
+  external FILE_REGION_INFO Region;
+}
+
+class FILE_REGION_INPUT extends Struct {
+  @Int64() external int FileOffset;
+  @Int64() external int Length;
+  @Uint32() external int DesiredUsage;
+}
+
+class WRITE_USN_REASON_INPUT extends Struct {
+  @Uint32() external int Flags;
+  @Uint32() external int UsnReasonToWrite;
+}
+
+class STREAM_INFORMATION_ENTRY extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Flags;
+  @Uint32() external int StreamInformation;
+}
+
+class FILE_DESIRED_STORAGE_CLASS_INFORMATION extends Struct {
+  @Uint32() external int Class;
+  @Uint32() external int Flags;
+}
+
+class DUPLICATE_EXTENTS_DATA32 extends Struct {
+  @Uint32() external int FileHandle;
+  @Int64() external int SourceFileOffset;
+  @Int64() external int TargetFileOffset;
+  @Int64() external int ByteCount;
+}
+
+class DUPLICATE_EXTENTS_DATA_EX extends Struct {
+  @IntPtr() external int Size;
+  @IntPtr() external int FileHandle;
+  @Int64() external int SourceFileOffset;
+  @Int64() external int TargetFileOffset;
+  @Int64() external int ByteCount;
+  @Uint32() external int Flags;
+}
+
+class DUPLICATE_EXTENTS_DATA_EX32 extends Struct {
+  @Uint32() external int Size;
+  @Uint32() external int FileHandle;
+  @Int64() external int SourceFileOffset;
+  @Int64() external int TargetFileOffset;
+  @Int64() external int ByteCount;
+  @Uint32() external int Flags;
+}
+
+class REFS_SMR_VOLUME_INFO_OUTPUT extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Flags;
+  @Int64() external int SizeOfRandomlyWritableTier;
+  @Int64() external int FreeSpaceInRandomlyWritableTier;
+  @Int64() external int SizeofSMRTier;
+  @Int64() external int FreeSpaceInSMRTier;
+  @Int64() external int UsableFreeSpaceInSMRTier;
+  @Uint32() external int VolumeGcState;
+  @Uint32() external int VolumeGcLastStatus;
+  external __uint64__ Unused;
+}
+
+class REFS_SMR_VOLUME_GC_PARAMETERS extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Flags;
+  @Uint32() external int Action;
+  @Uint32() external int Method;
+  @Uint32() external int IoGranularity;
+  @Uint32() external int CompressionFormat;
+  external __uint64__ Unused;
+}
+
+class STREAMS_QUERY_PARAMETERS_OUTPUT_BUFFER extends Struct {
+  @Uint32() external int OptimalWriteSize;
+  @Uint32() external int StreamGranularitySize;
+  @Uint32() external int StreamIdMin;
+  @Uint32() external int StreamIdMax;
+}
+
+class STREAMS_ASSOCIATE_ID_INPUT_BUFFER extends Struct {
+  @Uint32() external int Flags;
+  @Uint32() external int StreamId;
+}
+
+class STREAMS_QUERY_ID_OUTPUT_BUFFER extends Struct {
+  @Uint32() external int StreamId;
+}
+
+class QUERY_BAD_RANGES_INPUT_RANGE extends Struct {
+  @Uint64() external int StartOffset;
+  @Uint64() external int LengthInBytes;
+}
+
+class QUERY_BAD_RANGES_INPUT extends Struct {
+  @Uint32() external int Flags;
+  @Uint32() external int NumRanges;
+  external QUERY_BAD_RANGES_INPUT_RANGE Ranges;
+}
+
+class QUERY_BAD_RANGES_OUTPUT_RANGE extends Struct {
+  @Uint32() external int Flags;
+  @Uint32() external int Reserved;
+  @Uint64() external int StartOffset;
+  @Uint64() external int LengthInBytes;
+}
+
+class QUERY_BAD_RANGES_OUTPUT extends Struct {
+  @Uint32() external int Flags;
+  @Uint32() external int NumBadRanges;
+  @Uint64() external int NextOffsetToLookUp;
+  external QUERY_BAD_RANGES_OUTPUT_RANGE BadRanges;
+}
+
+class SET_DAX_ALLOC_ALIGNMENT_HINT_INPUT extends Struct {
+  @Uint32() external int Flags;
+  @Uint32() external int AlignmentShift;
+  @Uint64() external int FileOffsetToAlign;
+  @Uint32() external int FallbackAlignmentShift;
+}
+
+class VIRTUAL_STORAGE_SET_BEHAVIOR_INPUT extends Struct {
+  @Uint32() external int Size;
+  @Uint32() external int BehaviorCode;
+}
+
+class ENCRYPTION_KEY_CTRL_INPUT extends Struct {
+  @Uint32() external int HeaderSize;
+  @Uint32() external int StructureSize;
+  @Uint16() external int KeyOffset;
+  @Uint16() external int KeySize;
+  @Uint32() external int DplLock;
+  @Uint64() external int DplUserId;
+  @Uint64() external int DplCredentialId;
+}
+
+class WOF_EXTERNAL_INFO extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Provider;
+}
+
+class WOF_EXTERNAL_FILE_ID extends Struct {
+  external FILE_ID_128 FileId;
+}
+
+class WOF_VERSION_INFO extends Struct {
+  @Uint32() external int WofVersion;
+}
+
+class WIM_PROVIDER_EXTERNAL_INFO extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Flags;
+  @Int64() external int DataSourceId;
+  external __ubyte__ ResourceHash;
+}
+
+class WIM_PROVIDER_ADD_OVERLAY_INPUT extends Struct {
+  @Uint32() external int WimType;
+  @Uint32() external int WimIndex;
+  @Uint32() external int WimFileNameOffset;
+  @Uint32() external int WimFileNameLength;
+}
+
+class WIM_PROVIDER_UPDATE_OVERLAY_INPUT extends Struct {
+  @Int64() external int DataSourceId;
+  @Uint32() external int WimFileNameOffset;
+  @Uint32() external int WimFileNameLength;
+}
+
+class WIM_PROVIDER_REMOVE_OVERLAY_INPUT extends Struct {
+  @Int64() external int DataSourceId;
+}
+
+class WIM_PROVIDER_SUSPEND_OVERLAY_INPUT extends Struct {
+  @Int64() external int DataSourceId;
+}
+
+class WIM_PROVIDER_OVERLAY_ENTRY extends Struct {
+  @Uint32() external int NextEntryOffset;
+  @Int64() external int DataSourceId;
+  external GUID WimGuid;
+  @Uint32() external int WimFileNameOffset;
+  @Uint32() external int WimType;
+  @Uint32() external int WimIndex;
+  @Uint32() external int Flags;
+}
+
+class FILE_PROVIDER_EXTERNAL_INFO_V0 extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Algorithm;
+}
+
+class FILE_PROVIDER_EXTERNAL_INFO_V1 extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Algorithm;
+  @Uint32() external int Flags;
+}
+
+class CONTAINER_VOLUME_STATE extends Struct {
+  @Uint32() external int Flags;
+}
+
+class CONTAINER_ROOT_INFO_INPUT extends Struct {
+  @Uint32() external int Flags;
+}
+
+class CONTAINER_ROOT_INFO_OUTPUT extends Struct {
+  @Uint16() external int ContainerRootIdLength;
+  external __ubyte__ ContainerRootId;
+}
+
+class VIRTUALIZATION_INSTANCE_INFO_INPUT extends Struct {
+  @Uint32() external int NumberOfWorkerThreads;
+  @Uint32() external int Flags;
+}
+
+class VIRTUALIZATION_INSTANCE_INFO_INPUT_EX extends Struct {
+  @Uint16() external int HeaderSize;
+  @Uint32() external int Flags;
+  @Uint32() external int NotificationInfoSize;
+  @Uint16() external int NotificationInfoOffset;
+  @Uint16() external int ProviderMajorVersion;
+}
+
+class VIRTUALIZATION_INSTANCE_INFO_OUTPUT extends Struct {
+  external GUID VirtualizationInstanceID;
+}
+
+class GET_FILTER_FILE_IDENTIFIER_INPUT extends Struct {
+  @Uint16() external int AltitudeLength;
+  external __ushort__ Altitude;
+}
+
+class GET_FILTER_FILE_IDENTIFIER_OUTPUT extends Struct {
+  @Uint16() external int FilterFileIdentifierLength;
+  external __ubyte__ FilterFileIdentifier;
+}
+
+class IO_IRP_EXT_TRACK_OFFSET_HEADER extends Struct {
+  @Uint16() external int Validation;
+  @Uint16() external int Flags;
+  external PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK TrackedOffsetCallback;
 }
 
 class DEVICE_EVENT_MOUNT extends Struct {
@@ -7282,6 +7901,12 @@ class VIDEO_CLUTDATA extends Struct {
   @Uint8() external int Unused;
 }
 
+class VIDEO_CLUT extends Struct {
+  @Uint16() external int NumEntries;
+  @Uint16() external int FirstEntry;
+  external ____ LookupTable;
+}
+
 class VIDEO_CURSOR_POSITION extends Struct {
   @Int16() external int Column;
   @Int16() external int Row;
@@ -7416,6 +8041,12 @@ class DISPLAY_BRIGHTNESS extends Struct {
   @Uint8() external int ucDCBrightness;
 }
 
+class VIDEO_BRIGHTNESS_POLICY extends Struct {
+  @Uint8() external int DefaultToBiosPolicy;
+  @Uint8() external int LevelCount;
+  external ____ Level;
+}
+
 class FSCNTL_SCREEN_INFO extends Struct {
   external COORD Position;
   external COORD ScreenSize;
@@ -7501,6 +8132,11 @@ class VIDEO_QUERY_PERFORMANCE_COUNTER extends Struct {
   external Pointer<VIDEO_PERFORMANCE_COUNTER> Buffer;
 }
 
+class PANEL_QUERY_BRIGHTNESS_CAPS extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Anonymous;
+}
+
 class BRIGHTNESS_LEVEL extends Struct {
   @Uint8() external int Count;
   external __ubyte__ Level;
@@ -7519,9 +8155,35 @@ class BRIGHTNESS_NIT_RANGES extends Struct {
   external BRIGHTNESS_NIT_RANGE SupportedRanges;
 }
 
+class PANEL_QUERY_BRIGHTNESS_RANGES extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Anonymous;
+}
+
+class PANEL_GET_BRIGHTNESS extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Anonymous;
+}
+
 class CHROMATICITY_COORDINATE extends Struct {
   @Float() external double x;
   @Float() external double y;
+}
+
+class PANEL_BRIGHTNESS_SENSOR_DATA extends Struct {
+  @Uint32() external int Anonymous;
+  @Float() external double AlsReading;
+  external CHROMATICITY_COORDINATE ChromaticityCoordinate;
+  @Float() external double ColorTemperature;
+}
+
+class PANEL_SET_BRIGHTNESS extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Anonymous;
+}
+
+class PANEL_SET_BRIGHTNESS_STATE extends Struct {
+  @Uint32() external int Anonymous;
 }
 
 class PANEL_SET_BACKLIGHT_OPTIMIZATION extends Struct {
@@ -7540,8 +8202,20 @@ class PANEL_GET_BACKLIGHT_REDUCTION extends Struct {
   external BACKLIGHT_REDUCTION_GAMMA_RAMP GammaRamp;
 }
 
+class COLORSPACE_TRANSFORM_DATA_CAP extends Struct {
+  @Uint32() external int DataType;
+  @Uint32() external int Anonymous;
+  @Float() external double NumericRangeMin;
+  @Float() external double NumericRangeMax;
+}
+
 class COLORSPACE_TRANSFORM_1DLUT_CAP extends Struct {
   @Uint32() external int NumberOfLUTEntries;
+  external COLORSPACE_TRANSFORM_DATA_CAP DataCap;
+}
+
+class COLORSPACE_TRANSFORM_MATRIX_CAP extends Struct {
+  @Uint32() external int Anonymous;
   external COLORSPACE_TRANSFORM_DATA_CAP DataCap;
 }
 
@@ -7590,6 +8264,11 @@ class COLORSPACE_TRANSFORM_MATRIX_V2 extends Struct {
   external GAMMA_RAMP_RGB LookupTable1DRegamma;
 }
 
+class COLORSPACE_TRANSFORM extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int Data;
+}
+
 class COLORSPACE_TRANSFORM_SET_INPUT extends Struct {
   @Uint32() external int OutputWireColorSpaceExpected;
   external OUTPUT_WIRE_FORMAT OutputWireFormatExpected;
@@ -7621,6 +8300,30 @@ class MIPI_DSI_CAPS extends Struct {
   @Uint8() external int LengthLo;
 }
 
+class MIPI_DSI_PACKET extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  @Uint8() external int EccFiller;
+  external __ubyte__ Payload;
+}
+
+class MIPI_DSI_TRANSMISSION extends Struct {
+  @Uint32() external int TotalBufferSize;
+  @Uint8() external int PacketCount;
+  @Uint8() external int FailedPacket;
+  @Uint32() external int Anonymous;
+  @Uint16() external int ReadWordCount;
+  @Uint16() external int FinalCommandExtraPayload;
+  @Uint16() external int MipiErrors;
+  @Uint16() external int HostErrors;
+  external MIPI_DSI_PACKET Packets;
+}
+
+class MIPI_DSI_RESET extends Struct {
+  @Uint32() external int Flags;
+  @Uint32() external int Anonymous;
+}
+
 class PROCESSOR_NUMBER extends Struct {
   @Uint16() external int Group;
   @Uint8() external int Number;
@@ -7637,5 +8340,258 @@ class POWERBROADCAST_SETTING extends Struct {
   external GUID PowerSetting;
   @Uint32() external int DataLength;
   external __ubyte__ Data;
+}
+
+class PROCESS_INFORMATION extends Struct {
+  @IntPtr() external int hProcess;
+  @IntPtr() external int hThread;
+  @Uint32() external int dwProcessId;
+  @Uint32() external int dwThreadId;
+}
+
+class STARTUPINFOA extends Struct {
+  @Uint32() external int cb;
+  external Pointer<Utf8> lpReserved;
+  external Pointer<Utf8> lpDesktop;
+  external Pointer<Utf8> lpTitle;
+  @Uint32() external int dwX;
+  @Uint32() external int dwY;
+  @Uint32() external int dwXSize;
+  @Uint32() external int dwYSize;
+  @Uint32() external int dwXCountChars;
+  @Uint32() external int dwYCountChars;
+  @Uint32() external int dwFillAttribute;
+  @Uint32() external int dwFlags;
+  @Uint16() external int wShowWindow;
+  @Uint16() external int cbReserved2;
+  external Pointer<Uint8> lpReserved2;
+  @IntPtr() external int hStdInput;
+  @IntPtr() external int hStdOutput;
+  @IntPtr() external int hStdError;
+}
+
+class STARTUPINFOW extends Struct {
+  @Uint32() external int cb;
+  external Pointer<Utf16> lpReserved;
+  external Pointer<Utf16> lpDesktop;
+  external Pointer<Utf16> lpTitle;
+  @Uint32() external int dwX;
+  @Uint32() external int dwY;
+  @Uint32() external int dwXSize;
+  @Uint32() external int dwYSize;
+  @Uint32() external int dwXCountChars;
+  @Uint32() external int dwYCountChars;
+  @Uint32() external int dwFillAttribute;
+  @Uint32() external int dwFlags;
+  @Uint16() external int wShowWindow;
+  @Uint16() external int cbReserved2;
+  external Pointer<Uint8> lpReserved2;
+  @IntPtr() external int hStdInput;
+  @IntPtr() external int hStdOutput;
+  @IntPtr() external int hStdError;
+}
+
+class MEMORY_PRIORITY_INFORMATION extends Struct {
+  @Uint32() external int MemoryPriority;
+}
+
+class THREAD_POWER_THROTTLING_STATE extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int ControlMask;
+  @Uint32() external int StateMask;
+}
+
+class APP_MEMORY_INFORMATION extends Struct {
+  @Uint64() external int AvailableCommit;
+  @Uint64() external int PrivateCommitUsage;
+  @Uint64() external int PeakPrivateCommitUsage;
+  @Uint64() external int TotalCommitUsage;
+}
+
+class PROCESS_MEMORY_EXHAUSTION_INFO extends Struct {
+  @Uint16() external int Version;
+  @Uint16() external int Reserved;
+  @Uint32() external int Type;
+  @IntPtr() external int Value;
+}
+
+class PROCESS_POWER_THROTTLING_STATE extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int ControlMask;
+  @Uint32() external int StateMask;
+}
+
+class PROCESS_PROTECTION_LEVEL_INFORMATION extends Struct {
+  @Uint32() external int ProtectionLevel;
+}
+
+class PROCESS_LEAP_SECOND_INFO extends Struct {
+  @Uint32() external int Flags;
+  @Uint32() external int Reserved;
+}
+
+class MEMORYSTATUSEX extends Struct {
+  @Uint32() external int dwLength;
+  @Uint32() external int dwMemoryLoad;
+  @Uint64() external int ullTotalPhys;
+  @Uint64() external int ullAvailPhys;
+  @Uint64() external int ullTotalPageFile;
+  @Uint64() external int ullAvailPageFile;
+  @Uint64() external int ullTotalVirtual;
+  @Uint64() external int ullAvailVirtual;
+  @Uint64() external int ullAvailExtendedVirtual;
+}
+
+class COMMPROP extends Struct {
+  @Uint16() external int wPacketLength;
+  @Uint16() external int wPacketVersion;
+  @Uint32() external int dwServiceMask;
+  @Uint32() external int dwReserved1;
+  @Uint32() external int dwMaxTxQueue;
+  @Uint32() external int dwMaxRxQueue;
+  @Uint32() external int dwMaxBaud;
+  @Uint32() external int dwProvSubType;
+  @Uint32() external int dwProvCapabilities;
+  @Uint32() external int dwSettableParams;
+  @Uint32() external int dwSettableBaud;
+  @Uint16() external int wSettableData;
+  @Uint32() external int wSettableStopParity;
+  @Uint32() external int dwCurrentTxQueue;
+  @Uint32() external int dwCurrentRxQueue;
+  @Uint32() external int dwProvSpec1;
+  @Uint32() external int dwProvSpec2;
+  external __ushort__ wcProvChar;
+}
+
+class COMSTAT extends Struct {
+  @Uint32() external int _bitfield;
+  @Uint32() external int cbInQue;
+  @Uint32() external int cbOutQue;
+}
+
+class DCB extends Struct {
+  @Uint32() external int DCBlength;
+  @Uint32() external int BaudRate;
+  @Uint32() external int _bitfield;
+  @Uint16() external int wReserved;
+  @Uint16() external int XonLim;
+  @Uint16() external int XoffLim;
+  @Uint8() external int ByteSize;
+  @Uint8() external int Parity;
+  @Uint8() external int StopBits;
+  @Int8() external int XonChar;
+  @Int8() external int XoffChar;
+  @Int8() external int ErrorChar;
+  @Int8() external int EofChar;
+  @Int8() external int EvtChar;
+  @Uint16() external int wReserved1;
+}
+
+class COMMTIMEOUTS extends Struct {
+  @Uint32() external int ReadIntervalTimeout;
+  @Uint32() external int ReadTotalTimeoutMultiplier;
+  @Uint32() external int ReadTotalTimeoutConstant;
+  @Uint32() external int WriteTotalTimeoutMultiplier;
+  @Uint32() external int WriteTotalTimeoutConstant;
+}
+
+class COMMCONFIG extends Struct {
+  @Uint32() external int dwSize;
+  @Uint16() external int wVersion;
+  @Uint16() external int wReserved;
+  external DCB dcb;
+  @Uint32() external int dwProviderSubType;
+  @Uint32() external int dwProviderOffset;
+  @Uint32() external int dwProviderSize;
+  external __ushort__ wcProviderData;
+}
+
+class MEMORYSTATUS extends Struct {
+  @Uint32() external int dwLength;
+  @Uint32() external int dwMemoryLoad;
+  @IntPtr() external int dwTotalPhys;
+  @IntPtr() external int dwAvailPhys;
+  @IntPtr() external int dwTotalPageFile;
+  @IntPtr() external int dwAvailPageFile;
+  @IntPtr() external int dwTotalVirtual;
+  @IntPtr() external int dwAvailVirtual;
+}
+
+class UMS_SCHEDULER_STARTUP_INFO extends Struct {
+  @Uint32() external int UmsVersion;
+  external Pointer CompletionList;
+  external PRTL_UMS_SCHEDULER_ENTRY_POINT SchedulerProc;
+  external Pointer SchedulerParam;
+}
+
+class UMS_SYSTEM_THREAD_INFORMATION extends Struct {
+  @Uint32() external int UmsVersion;
+  @Uint32() external int Anonymous;
+}
+
+class WIN32_STREAM_ID extends Struct {
+  @Uint32() external int dwStreamId;
+  @Uint32() external int dwStreamAttributes;
+  @Int64() external int Size;
+  @Uint32() external int dwStreamNameSize;
+  external __ushort__ cStreamName;
+}
+
+class STARTUPINFOEXA extends Struct {
+  external STARTUPINFOA StartupInfo;
+  @IntPtr() external int lpAttributeList;
+}
+
+class STARTUPINFOEXW extends Struct {
+  external STARTUPINFOW StartupInfo;
+  @IntPtr() external int lpAttributeList;
+}
+
+class EVENTLOG_FULL_INFORMATION extends Struct {
+  @Uint32() external int dwFull;
+}
+
+class SYSTEM_POWER_STATUS extends Struct {
+  @Uint8() external int ACLineStatus;
+  @Uint8() external int BatteryFlag;
+  @Uint8() external int BatteryLifePercent;
+  @Uint8() external int SystemStatusFlag;
+  @Uint32() external int BatteryLifeTime;
+  @Uint32() external int BatteryFullLifeTime;
+}
+
+class PEB_LDR_DATA extends Struct {
+  external __ubyte__ Reserved1;
+  external ____ Reserved2;
+  external LIST_ENTRY InMemoryOrderModuleList;
+}
+
+class RTL_USER_PROCESS_PARAMETERS extends Struct {
+  external __ubyte__ Reserved1;
+  external ____ Reserved2;
+  external UNICODE_STRING ImagePathName;
+  external UNICODE_STRING CommandLine;
+}
+
+class PEB extends Struct {
+  external __ubyte__ Reserved1;
+  @Uint8() external int BeingDebugged;
+  external __ubyte__ Reserved2;
+  external ____ Reserved3;
+  external Pointer<PEB_LDR_DATA> Ldr;
+  external Pointer<RTL_USER_PROCESS_PARAMETERS> ProcessParameters;
+  external ____ Reserved4;
+  external Pointer AtlThunkSListPtr;
+  external Pointer Reserved5;
+  @Uint32() external int Reserved6;
+  external Pointer Reserved7;
+  @Uint32() external int Reserved8;
+  @Uint32() external int AtlThunkSListPtr32;
+  external ____ Reserved9;
+  external __ubyte__ Reserved10;
+  external PPS_POST_PROCESS_INIT_ROUTINE PostProcessInitRoutine;
+  external __ubyte__ Reserved11;
+  external ____ Reserved12;
+  @Uint32() external int SessionId;
 }
 

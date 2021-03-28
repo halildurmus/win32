@@ -43,6 +43,14 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class IcmpHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HIFTIMESTAMPCHANGE extends Struct {
+  @IntPtr() external int Value;
+}
+
 class SOCKADDR_INET extends Struct {
   external sockaddr_in Ipv4;
   external SOCKADDR_IN6_LH Ipv6;
@@ -68,15 +76,15 @@ class NL_BANDWIDTH_INFORMATION extends Struct {
   @Uint8() external int BandwidthPeaked;
 }
 
-class HIFTIMESTAMPCHANGE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class IcmpHandle extends Struct {
-  @IntPtr() external int Value;
-}
-
 class ip_option_information extends Struct {
+  @Uint8() external int Ttl;
+  @Uint8() external int Tos;
+  @Uint8() external int Flags;
+  @Uint8() external int OptionsSize;
+  external Pointer<Uint8> OptionsData;
+}
+
+class ip_option_information32 extends Struct {
   @Uint8() external int Ttl;
   @Uint8() external int Tos;
   @Uint8() external int Flags;
@@ -92,6 +100,16 @@ class icmp_echo_reply extends Struct {
   @Uint16() external int Reserved;
   external Pointer Data;
   external ip_option_information Options;
+}
+
+class icmp_echo_reply32 extends Struct {
+  @Uint32() external int Address;
+  @Uint32() external int Status;
+  @Uint32() external int RoundTripTime;
+  @Uint16() external int DataSize;
+  @Uint16() external int Reserved;
+  external Pointer Data;
+  external ip_option_information32 Options;
 }
 
 class IPV6_ADDRESS_EX extends Struct {
@@ -153,6 +171,11 @@ class NET_IF_RCV_ADDRESS_LH extends Struct {
 class NET_IF_ALIAS_LH extends Struct {
   @Uint16() external int ifAliasLength;
   @Uint16() external int ifAliasOffset;
+}
+
+class NET_LUID_LH extends Struct {
+  @Uint64() external int Value;
+  @Uint32() external int Info;
 }
 
 class IF_PHYSICAL_ADDRESS_LH extends Struct {
@@ -244,9 +267,132 @@ class IP_ADAPTER_INFO extends Struct {
   @Int64() external int LeaseExpires;
 }
 
+class IP_ADAPTER_UNICAST_ADDRESS_LH extends Struct {
+  @Uint32() external int Anonymous;
+  external Pointer<IP_ADAPTER_UNICAST_ADDRESS_LH> Next;
+  external SOCKET_ADDRESS Address;
+  @Uint32() external int PrefixOrigin;
+  @Uint32() external int SuffixOrigin;
+  @Uint32() external int DadState;
+  @Uint32() external int ValidLifetime;
+  @Uint32() external int PreferredLifetime;
+  @Uint32() external int LeaseLifetime;
+  @Uint8() external int OnLinkPrefixLength;
+}
+
+class IP_ADAPTER_UNICAST_ADDRESS_XP extends Struct {
+  @Uint32() external int Anonymous;
+  external Pointer<IP_ADAPTER_UNICAST_ADDRESS_XP> Next;
+  external SOCKET_ADDRESS Address;
+  @Uint32() external int PrefixOrigin;
+  @Uint32() external int SuffixOrigin;
+  @Uint32() external int DadState;
+  @Uint32() external int ValidLifetime;
+  @Uint32() external int PreferredLifetime;
+  @Uint32() external int LeaseLifetime;
+}
+
+class IP_ADAPTER_ANYCAST_ADDRESS_XP extends Struct {
+  @Uint32() external int Anonymous;
+  external Pointer<IP_ADAPTER_ANYCAST_ADDRESS_XP> Next;
+  external SOCKET_ADDRESS Address;
+}
+
+class IP_ADAPTER_MULTICAST_ADDRESS_XP extends Struct {
+  @Uint32() external int Anonymous;
+  external Pointer<IP_ADAPTER_MULTICAST_ADDRESS_XP> Next;
+  external SOCKET_ADDRESS Address;
+}
+
+class IP_ADAPTER_DNS_SERVER_ADDRESS_XP extends Struct {
+  @Uint32() external int Anonymous;
+  external Pointer<IP_ADAPTER_DNS_SERVER_ADDRESS_XP> Next;
+  external SOCKET_ADDRESS Address;
+}
+
+class IP_ADAPTER_WINS_SERVER_ADDRESS_LH extends Struct {
+  @Uint32() external int Anonymous;
+  external Pointer<IP_ADAPTER_WINS_SERVER_ADDRESS_LH> Next;
+  external SOCKET_ADDRESS Address;
+}
+
+class IP_ADAPTER_GATEWAY_ADDRESS_LH extends Struct {
+  @Uint32() external int Anonymous;
+  external Pointer<IP_ADAPTER_GATEWAY_ADDRESS_LH> Next;
+  external SOCKET_ADDRESS Address;
+}
+
+class IP_ADAPTER_PREFIX_XP extends Struct {
+  @Uint32() external int Anonymous;
+  external Pointer<IP_ADAPTER_PREFIX_XP> Next;
+  external SOCKET_ADDRESS Address;
+  @Uint32() external int PrefixLength;
+}
+
 class IP_ADAPTER_DNS_SUFFIX extends Struct {
   external Pointer<IP_ADAPTER_DNS_SUFFIX> Next;
   external __ushort__ String;
+}
+
+class IP_ADAPTER_ADDRESSES_LH extends Struct {
+  @Uint32() external int Anonymous1;
+  external Pointer<IP_ADAPTER_ADDRESSES_LH> Next;
+  external Pointer<Utf8> AdapterName;
+  external Pointer<IP_ADAPTER_UNICAST_ADDRESS_LH> FirstUnicastAddress;
+  external Pointer<IP_ADAPTER_ANYCAST_ADDRESS_XP> FirstAnycastAddress;
+  external Pointer<IP_ADAPTER_MULTICAST_ADDRESS_XP> FirstMulticastAddress;
+  external Pointer<IP_ADAPTER_DNS_SERVER_ADDRESS_XP> FirstDnsServerAddress;
+  external Pointer<Utf16> DnsSuffix;
+  external Pointer<Utf16> Description;
+  external Pointer<Utf16> FriendlyName;
+  external __ubyte__ PhysicalAddress;
+  @Uint32() external int PhysicalAddressLength;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Mtu;
+  @Uint32() external int IfType;
+  @Uint32() external int OperStatus;
+  @Uint32() external int Ipv6IfIndex;
+  external __uint__ ZoneIndices;
+  external Pointer<IP_ADAPTER_PREFIX_XP> FirstPrefix;
+  @Uint64() external int TransmitLinkSpeed;
+  @Uint64() external int ReceiveLinkSpeed;
+  external Pointer<IP_ADAPTER_WINS_SERVER_ADDRESS_LH> FirstWinsServerAddress;
+  external Pointer<IP_ADAPTER_GATEWAY_ADDRESS_LH> FirstGatewayAddress;
+  @Uint32() external int Ipv4Metric;
+  @Uint32() external int Ipv6Metric;
+  external NET_LUID_LH Luid;
+  external SOCKET_ADDRESS Dhcpv4Server;
+  @Uint32() external int CompartmentId;
+  external GUID NetworkGuid;
+  @Uint32() external int ConnectionType;
+  @Uint32() external int TunnelType;
+  external SOCKET_ADDRESS Dhcpv6Server;
+  external __ubyte__ Dhcpv6ClientDuid;
+  @Uint32() external int Dhcpv6ClientDuidLength;
+  @Uint32() external int Dhcpv6Iaid;
+  external Pointer<IP_ADAPTER_DNS_SUFFIX> FirstDnsSuffix;
+}
+
+class IP_ADAPTER_ADDRESSES_XP extends Struct {
+  @Uint32() external int Anonymous;
+  external Pointer<IP_ADAPTER_ADDRESSES_XP> Next;
+  external Pointer<Utf8> AdapterName;
+  external Pointer<IP_ADAPTER_UNICAST_ADDRESS_XP> FirstUnicastAddress;
+  external Pointer<IP_ADAPTER_ANYCAST_ADDRESS_XP> FirstAnycastAddress;
+  external Pointer<IP_ADAPTER_MULTICAST_ADDRESS_XP> FirstMulticastAddress;
+  external Pointer<IP_ADAPTER_DNS_SERVER_ADDRESS_XP> FirstDnsServerAddress;
+  external Pointer<Utf16> DnsSuffix;
+  external Pointer<Utf16> Description;
+  external Pointer<Utf16> FriendlyName;
+  external __ubyte__ PhysicalAddress;
+  @Uint32() external int PhysicalAddressLength;
+  @Uint32() external int Flags;
+  @Uint32() external int Mtu;
+  @Uint32() external int IfType;
+  @Uint32() external int OperStatus;
+  @Uint32() external int Ipv6IfIndex;
+  external __uint__ ZoneIndices;
+  external Pointer<IP_ADAPTER_PREFIX_XP> FirstPrefix;
 }
 
 class IP_PER_ADAPTER_INFO_W2KSP1 extends Struct {

@@ -647,7 +647,7 @@ class MDEVICECAPSEX extends Struct {
 }
 
 class MIDIOPENDESC extends Struct {
-  external HMIDI hMidi;
+  @IntPtr() external int hMidi;
   @IntPtr() external int dwCallback;
   @IntPtr() external int dwInstance;
   @IntPtr() external int dnDevNode;

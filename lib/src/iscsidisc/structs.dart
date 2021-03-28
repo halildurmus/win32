@@ -75,6 +75,38 @@ class SCSI_PASS_THROUGH_DIRECT extends Struct {
   external __ubyte__ Cdb;
 }
 
+class SCSI_PASS_THROUGH32 extends Struct {
+  @Uint16() external int Length;
+  @Uint8() external int ScsiStatus;
+  @Uint8() external int PathId;
+  @Uint8() external int TargetId;
+  @Uint8() external int Lun;
+  @Uint8() external int CdbLength;
+  @Uint8() external int SenseInfoLength;
+  @Uint8() external int DataIn;
+  @Uint32() external int DataTransferLength;
+  @Uint32() external int TimeOutValue;
+  @Uint32() external int DataBufferOffset;
+  @Uint32() external int SenseInfoOffset;
+  external __ubyte__ Cdb;
+}
+
+class SCSI_PASS_THROUGH_DIRECT32 extends Struct {
+  @Uint16() external int Length;
+  @Uint8() external int ScsiStatus;
+  @Uint8() external int PathId;
+  @Uint8() external int TargetId;
+  @Uint8() external int Lun;
+  @Uint8() external int CdbLength;
+  @Uint8() external int SenseInfoLength;
+  @Uint8() external int DataIn;
+  @Uint32() external int DataTransferLength;
+  @Uint32() external int TimeOutValue;
+  external Pointer DataBuffer;
+  @Uint32() external int SenseInfoOffset;
+  external __ubyte__ Cdb;
+}
+
 class SCSI_PASS_THROUGH_EX extends Struct {
   @Uint32() external int Version;
   @Uint32() external int Length;
@@ -113,6 +145,44 @@ class SCSI_PASS_THROUGH_DIRECT_EX extends Struct {
   external __ubyte__ Cdb;
 }
 
+class SCSI_PASS_THROUGH32_EX extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Length;
+  @Uint32() external int CdbLength;
+  @Uint32() external int StorAddressLength;
+  @Uint8() external int ScsiStatus;
+  @Uint8() external int SenseInfoLength;
+  @Uint8() external int DataDirection;
+  @Uint8() external int Reserved;
+  @Uint32() external int TimeOutValue;
+  @Uint32() external int StorAddressOffset;
+  @Uint32() external int SenseInfoOffset;
+  @Uint32() external int DataOutTransferLength;
+  @Uint32() external int DataInTransferLength;
+  @Uint32() external int DataOutBufferOffset;
+  @Uint32() external int DataInBufferOffset;
+  external __ubyte__ Cdb;
+}
+
+class SCSI_PASS_THROUGH_DIRECT32_EX extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Length;
+  @Uint32() external int CdbLength;
+  @Uint32() external int StorAddressLength;
+  @Uint8() external int ScsiStatus;
+  @Uint8() external int SenseInfoLength;
+  @Uint8() external int DataDirection;
+  @Uint8() external int Reserved;
+  @Uint32() external int TimeOutValue;
+  @Uint32() external int StorAddressOffset;
+  @Uint32() external int SenseInfoOffset;
+  @Uint32() external int DataOutTransferLength;
+  @Uint32() external int DataInTransferLength;
+  external Pointer DataOutBuffer;
+  external Pointer DataInBuffer;
+  external __ubyte__ Cdb;
+}
+
 class ATA_PASS_THROUGH_EX extends Struct {
   @Uint16() external int Length;
   @Uint16() external int AtaFlags;
@@ -129,6 +199,36 @@ class ATA_PASS_THROUGH_EX extends Struct {
 }
 
 class ATA_PASS_THROUGH_DIRECT extends Struct {
+  @Uint16() external int Length;
+  @Uint16() external int AtaFlags;
+  @Uint8() external int PathId;
+  @Uint8() external int TargetId;
+  @Uint8() external int Lun;
+  @Uint8() external int ReservedAsUchar;
+  @Uint32() external int DataTransferLength;
+  @Uint32() external int TimeOutValue;
+  @Uint32() external int ReservedAsUlong;
+  external Pointer DataBuffer;
+  external __ubyte__ PreviousTaskFile;
+  external __ubyte__ CurrentTaskFile;
+}
+
+class ATA_PASS_THROUGH_EX32 extends Struct {
+  @Uint16() external int Length;
+  @Uint16() external int AtaFlags;
+  @Uint8() external int PathId;
+  @Uint8() external int TargetId;
+  @Uint8() external int Lun;
+  @Uint8() external int ReservedAsUchar;
+  @Uint32() external int DataTransferLength;
+  @Uint32() external int TimeOutValue;
+  @Uint32() external int ReservedAsUlong;
+  @Uint32() external int DataBufferOffset;
+  external __ubyte__ PreviousTaskFile;
+  external __ubyte__ CurrentTaskFile;
+}
+
+class ATA_PASS_THROUGH_DIRECT32 extends Struct {
   @Uint16() external int Length;
   @Uint16() external int AtaFlags;
   @Uint8() external int PathId;
@@ -180,6 +280,42 @@ class MPIO_PASS_THROUGH_PATH_EX extends Struct {
 }
 
 class MPIO_PASS_THROUGH_PATH_DIRECT_EX extends Struct {
+  @Uint32() external int PassThroughOffset;
+  @Uint32() external int Version;
+  @Uint16() external int Length;
+  @Uint8() external int Flags;
+  @Uint8() external int PortNumber;
+  @Uint64() external int MpioPathId;
+}
+
+class MPIO_PASS_THROUGH_PATH32 extends Struct {
+  external SCSI_PASS_THROUGH32 PassThrough;
+  @Uint32() external int Version;
+  @Uint16() external int Length;
+  @Uint8() external int Flags;
+  @Uint8() external int PortNumber;
+  @Uint64() external int MpioPathId;
+}
+
+class MPIO_PASS_THROUGH_PATH_DIRECT32 extends Struct {
+  external SCSI_PASS_THROUGH_DIRECT32 PassThrough;
+  @Uint32() external int Version;
+  @Uint16() external int Length;
+  @Uint8() external int Flags;
+  @Uint8() external int PortNumber;
+  @Uint64() external int MpioPathId;
+}
+
+class MPIO_PASS_THROUGH_PATH32_EX extends Struct {
+  @Uint32() external int PassThroughOffset;
+  @Uint32() external int Version;
+  @Uint16() external int Length;
+  @Uint8() external int Flags;
+  @Uint8() external int PortNumber;
+  @Uint64() external int MpioPathId;
+}
+
+class MPIO_PASS_THROUGH_PATH_DIRECT32_EX extends Struct {
   @Uint32() external int PassThroughOffset;
   @Uint32() external int Version;
   @Uint16() external int Length;
@@ -259,6 +395,15 @@ class NVCACHE_HINT_PAYLOAD extends Struct {
   external __ubyte__ Reserved;
 }
 
+class NV_SEP_CACHE_PARAMETER extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint32() external int Flags;
+  @Uint8() external int WriteCacheType;
+  @Uint8() external int WriteCacheTypeEffective;
+  external __ubyte__ ParameterReserve1;
+}
+
 class STORAGE_DIAGNOSTIC_MP_REQUEST extends Struct {
   @Uint32() external int Version;
   @Uint32() external int Size;
@@ -304,6 +449,19 @@ class NVCACHE_PRIORITY_LEVEL_DESCRIPTOR extends Struct {
   @Uint32() external int Reserved1;
 }
 
+class HYBRID_INFORMATION extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Size;
+  @Uint8() external int HybridSupported;
+  @Uint32() external int Status;
+  @Uint32() external int CacheTypeEffective;
+  @Uint32() external int CacheTypeDefault;
+  @Uint32() external int FractionBase;
+  @Uint64() external int CacheSize;
+  @Uint32() external int Attributes;
+  @Uint32() external int Priorities;
+}
+
 class HYBRID_DIRTY_THRESHOLDS extends Struct {
   @Uint32() external int Version;
   @Uint32() external int Size;
@@ -328,6 +486,13 @@ class FIRMWARE_REQUEST_BLOCK extends Struct {
   @Uint32() external int Flags;
   @Uint32() external int DataBufferOffset;
   @Uint32() external int DataBufferLength;
+}
+
+class STORAGE_FIRMWARE_SLOT_INFO extends Struct {
+  @Uint8() external int SlotNumber;
+  @Uint8() external int ReadOnly;
+  external __ubyte__ Reserved;
+  @Uint32() external int Revision;
 }
 
 class STORAGE_FIRMWARE_SLOT_INFO_V2 extends Struct {
@@ -466,6 +631,15 @@ class DUMP_DRIVER_EX extends Struct {
   external NTSCSI_UNICODE_STRING DriverFullPath;
 }
 
+class STORAGE_ENDURANCE_INFO extends Struct {
+  @Uint32() external int ValidFields;
+  @Uint32() external int GroupId;
+  @Uint32() external int Flags;
+  @Uint32() external int LifePercentage;
+  external __ubyte__ BytesReadCount;
+  external __ubyte__ ByteWriteCount;
+}
+
 class STORAGE_ENDURANCE_DATA_DESCRIPTOR extends Struct {
   @Uint32() external int Version;
   @Uint32() external int Size;
@@ -495,6 +669,11 @@ class IKE_AUTHENTICATION_PRESHARED_KEY extends Struct {
   external Pointer<Uint8> Id;
   @Uint32() external int KeyLengthInBytes;
   external Pointer<Uint8> Key;
+}
+
+class IKE_AUTHENTICATION_INFORMATION extends Struct {
+  @Uint32() external int AuthMethod;
+  @Uint32() external int Anonymous;
 }
 
 class ISCSI_UNIQUE_SESSION_ID extends Struct {

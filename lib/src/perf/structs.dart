@@ -51,114 +51,6 @@ class PerfQueryHandle extends Struct {
   @IntPtr() external int Value;
 }
 
-class PERF_DATA_BLOCK extends Struct {
-  external __ushort__ Signature;
-  @Uint32() external int LittleEndian;
-  @Uint32() external int Version;
-  @Uint32() external int Revision;
-  @Uint32() external int TotalByteLength;
-  @Uint32() external int HeaderLength;
-  @Uint32() external int NumObjectTypes;
-  @Int32() external int DefaultObject;
-  external SYSTEMTIME SystemTime;
-  @Int64() external int PerfTime;
-  @Int64() external int PerfFreq;
-  @Int64() external int PerfTime100nSec;
-  @Uint32() external int SystemNameLength;
-  @Uint32() external int SystemNameOffset;
-}
-
-class PERF_OBJECT_TYPE extends Struct {
-  @Uint32() external int TotalByteLength;
-  @Uint32() external int DefinitionLength;
-  @Uint32() external int HeaderLength;
-  @Uint32() external int ObjectNameTitleIndex;
-  external Pointer<Utf16> ObjectNameTitle;
-  @Uint32() external int ObjectHelpTitleIndex;
-  external Pointer<Utf16> ObjectHelpTitle;
-  @Uint32() external int DetailLevel;
-  @Uint32() external int NumCounters;
-  @Int32() external int DefaultCounter;
-  @Int32() external int NumInstances;
-  @Uint32() external int CodePage;
-  @Int64() external int PerfTime;
-  @Int64() external int PerfFreq;
-}
-
-class PERF_COUNTER_DEFINITION extends Struct {
-  @Uint32() external int ByteLength;
-  @Uint32() external int CounterNameTitleIndex;
-  external Pointer<Utf16> CounterNameTitle;
-  @Uint32() external int CounterHelpTitleIndex;
-  external Pointer<Utf16> CounterHelpTitle;
-  @Int32() external int DefaultScale;
-  @Uint32() external int DetailLevel;
-  @Uint32() external int CounterType;
-  @Uint32() external int CounterSize;
-  @Uint32() external int CounterOffset;
-}
-
-class PERF_INSTANCE_DEFINITION extends Struct {
-  @Uint32() external int ByteLength;
-  @Uint32() external int ParentObjectTitleIndex;
-  @Uint32() external int ParentObjectInstance;
-  @Int32() external int UniqueID;
-  @Uint32() external int NameOffset;
-  @Uint32() external int NameLength;
-}
-
-class PERF_COUNTER_BLOCK extends Struct {
-  @Uint32() external int ByteLength;
-}
-
-class DataCollectorSet extends Struct {
-}
-
-class TraceSession extends Struct {
-}
-
-class TraceSessionCollection extends Struct {
-}
-
-class TraceDataProvider extends Struct {
-}
-
-class TraceDataProviderCollection extends Struct {
-}
-
-class DataCollectorSetCollection extends Struct {
-}
-
-class LegacyDataCollectorSet extends Struct {
-}
-
-class LegacyDataCollectorSetCollection extends Struct {
-}
-
-class LegacyTraceSession extends Struct {
-}
-
-class LegacyTraceSessionCollection extends Struct {
-}
-
-class ServerDataCollectorSet extends Struct {
-}
-
-class ServerDataCollectorSetCollection extends Struct {
-}
-
-class SystemDataCollectorSet extends Struct {
-}
-
-class SystemDataCollectorSetCollection extends Struct {
-}
-
-class BootTraceSession extends Struct {
-}
-
-class BootTraceSessionCollection extends Struct {
-}
-
 class PERF_COUNTERSET_INFO extends Struct {
   external GUID CounterSetGuid;
   external GUID ProviderGuid;
@@ -299,6 +191,11 @@ class PDH_RAW_COUNTER_ITEM_W extends Struct {
   external PDH_RAW_COUNTER RawValue;
 }
 
+class PDH_FMT_COUNTERVALUE extends Struct {
+  @Uint32() external int CStatus;
+  @Uint32() external int Anonymous;
+}
+
 class PDH_FMT_COUNTERVALUE_ITEM_A extends Struct {
   external Pointer<Utf8> szName;
   external PDH_FMT_COUNTERVALUE FmtValue;
@@ -349,6 +246,36 @@ class PDH_DATA_ITEM_PATH_ELEMENTS_W extends Struct {
   external Pointer<Utf16> szInstanceName;
 }
 
+class PDH_COUNTER_INFO_A extends Struct {
+  @Uint32() external int dwLength;
+  @Uint32() external int dwType;
+  @Uint32() external int CVersion;
+  @Uint32() external int CStatus;
+  @Int32() external int lScale;
+  @Int32() external int lDefaultScale;
+  @IntPtr() external int dwUserData;
+  @IntPtr() external int dwQueryUserData;
+  external Pointer<Utf8> szFullPath;
+  @Uint32() external int Anonymous;
+  external Pointer<Utf8> szExplainText;
+  external __uint__ DataBuffer;
+}
+
+class PDH_COUNTER_INFO_W extends Struct {
+  @Uint32() external int dwLength;
+  @Uint32() external int dwType;
+  @Uint32() external int CVersion;
+  @Uint32() external int CStatus;
+  @Int32() external int lScale;
+  @Int32() external int lDefaultScale;
+  @IntPtr() external int dwUserData;
+  @IntPtr() external int dwQueryUserData;
+  external Pointer<Utf16> szFullPath;
+  @Uint32() external int Anonymous;
+  external Pointer<Utf16> szExplainText;
+  external __uint__ DataBuffer;
+}
+
 class PDH_TIME_INFO extends Struct {
   @Int64() external int StartTime;
   @Int64() external int EndTime;
@@ -360,6 +287,30 @@ class PDH_RAW_LOG_RECORD extends Struct {
   @Uint32() external int dwRecordType;
   @Uint32() external int dwItems;
   external __ubyte__ RawBytes;
+}
+
+class PDH_LOG_SERVICE_QUERY_INFO_A extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwLogQuota;
+  external Pointer<Utf8> szLogFileCaption;
+  external Pointer<Utf8> szDefaultDir;
+  external Pointer<Utf8> szBaseFileName;
+  @Uint32() external int dwFileType;
+  @Uint32() external int dwReserved;
+  @Uint32() external int Anonymous;
+}
+
+class PDH_LOG_SERVICE_QUERY_INFO_W extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwLogQuota;
+  external Pointer<Utf16> szLogFileCaption;
+  external Pointer<Utf16> szDefaultDir;
+  external Pointer<Utf16> szBaseFileName;
+  @Uint32() external int dwFileType;
+  @Uint32() external int dwReserved;
+  @Uint32() external int Anonymous;
 }
 
 class PDH_BROWSE_DLG_CONFIG_HW extends Struct {
@@ -412,5 +363,53 @@ class PDH_BROWSE_DLG_CONFIG_A extends Struct {
   @Int32() external int CallBackStatus;
   @Uint32() external int dwDefaultDetailLevel;
   external Pointer<Utf8> szDialogBoxCaption;
+}
+
+class DataCollectorSet extends Struct {
+}
+
+class TraceSession extends Struct {
+}
+
+class TraceSessionCollection extends Struct {
+}
+
+class TraceDataProvider extends Struct {
+}
+
+class TraceDataProviderCollection extends Struct {
+}
+
+class DataCollectorSetCollection extends Struct {
+}
+
+class LegacyDataCollectorSet extends Struct {
+}
+
+class LegacyDataCollectorSetCollection extends Struct {
+}
+
+class LegacyTraceSession extends Struct {
+}
+
+class LegacyTraceSessionCollection extends Struct {
+}
+
+class ServerDataCollectorSet extends Struct {
+}
+
+class ServerDataCollectorSetCollection extends Struct {
+}
+
+class SystemDataCollectorSet extends Struct {
+}
+
+class SystemDataCollectorSetCollection extends Struct {
+}
+
+class BootTraceSession extends Struct {
+}
+
+class BootTraceSessionCollection extends Struct {
 }
 

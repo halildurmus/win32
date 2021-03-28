@@ -360,6 +360,10 @@ class KSPRIORITY extends Struct {
   @Uint32() external int PrioritySubClass;
 }
 
+class KSIDENTIFIER extends Struct {
+  @Uint32() external int Anonymous;
+}
+
 class KSP_NODE extends Struct {
   external KSIDENTIFIER Property;
   @Uint32() external int NodeId;
@@ -401,6 +405,16 @@ class KSPROPERTY_MEMBERSHEADER extends Struct {
   @Uint32() external int Flags;
 }
 
+class KSPROPERTY_BOUNDS_LONG extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+}
+
+class KSPROPERTY_BOUNDS_LONGLONG extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+}
+
 class KSPROPERTY_STEPPING_LONG extends Struct {
   @Uint32() external int SteppingDelta;
   @Uint32() external int Reserved;
@@ -412,10 +426,24 @@ class KSPROPERTY_STEPPING_LONGLONG extends Struct {
   external KSPROPERTY_BOUNDS_LONGLONG Bounds;
 }
 
+class KSEVENTDATA extends Struct {
+  @Uint32() external int NotificationType;
+  @Uint32() external int Anonymous;
+}
+
 class KSQUERYBUFFER extends Struct {
   external KSIDENTIFIER Event;
   external Pointer<KSEVENTDATA> EventData;
   external Pointer Reserved;
+}
+
+class KSRELATIVEEVENT extends Struct {
+  @Uint32() external int Size;
+  @Uint32() external int Flags;
+  @Uint32() external int Anonymous;
+  external Pointer Reserved;
+  external KSIDENTIFIER Event;
+  external KSEVENTDATA EventData;
 }
 
 class KSEVENT_TIME_MARK extends Struct {
@@ -604,6 +632,12 @@ class KSMEDIUMSETID_Standard extends Struct {
 class KSPROPSETID_Pin extends Struct {
 }
 
+class KSP_PIN extends Struct {
+  external KSIDENTIFIER Property;
+  @Uint32() external int PinId;
+  @Uint32() external int Anonymous;
+}
+
 class KSE_PIN extends Struct {
   external KSIDENTIFIER Event;
   @Uint32() external int PinId;
@@ -613,6 +647,11 @@ class KSE_PIN extends Struct {
 class KSPIN_CINSTANCES extends Struct {
   @Uint32() external int PossibleCount;
   @Uint32() external int CurrentCount;
+}
+
+class KSDATAFORMAT extends Struct {
+  @Uint32() external int Anonymous;
+  @Int64() external int Alignment;
 }
 
 class KSATTRIBUTE extends Struct {
@@ -680,6 +719,15 @@ class KSPROPSETID_Connection extends Struct {
 class KSPROPSETID_MemoryTransport extends Struct {
 }
 
+class KSALLOCATOR_FRAMING extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int PoolType;
+  @Uint32() external int Frames;
+  @Uint32() external int FrameSize;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Reserved;
+}
+
 class KS_FRAMING_RANGE extends Struct {
   @Uint32() external int MinFrameSize;
   @Uint32() external int MaxFrameSize;
@@ -696,6 +744,19 @@ class KS_COMPRESSION extends Struct {
   @Uint32() external int RatioNumerator;
   @Uint32() external int RatioDenominator;
   @Uint32() external int RatioConstantMargin;
+}
+
+class KS_FRAMING_ITEM extends Struct {
+  external GUID MemoryType;
+  external GUID BusType;
+  @Uint32() external int MemoryFlags;
+  @Uint32() external int BusFlags;
+  @Uint32() external int Flags;
+  @Uint32() external int Frames;
+  @Uint32() external int Anonymous;
+  @Uint32() external int MemoryTypeWeight;
+  external KS_FRAMING_RANGE PhysicalRange;
+  external KS_FRAMING_RANGE_WEIGHTED FramingRange;
 }
 
 class KSALLOCATOR_FRAMING_EX extends Struct {
@@ -757,6 +818,7 @@ class KSSTREAM_HEADER extends Struct {
   @Uint32() external int DataUsed;
   external Pointer Data;
   @Uint32() external int OptionsFlags;
+  @Uint32() external int Reserved;
 }
 
 class KSSTREAM_METADATA_INFO extends Struct {
@@ -766,6 +828,14 @@ class KSSTREAM_METADATA_INFO extends Struct {
   external Pointer SystemVa;
   @Uint32() external int Flags;
   @Uint32() external int Reserved;
+}
+
+class KSSTREAM_UVC_METADATATYPE_TIMESTAMP extends Struct {
+  @Uint32() external int PresentationTimeStamp;
+  @Uint32() external int SourceClockReference;
+  @Uint32() external int Anonymous;
+  @Uint16() external int Reserved0;
+  @Uint32() external int Reserved1;
 }
 
 class KSSTREAM_UVC_METADATA extends Struct {
@@ -865,6 +935,11 @@ class KSPROPERTY_SERIAL extends Struct {
   external KSIDENTIFIER PropTypeSet;
   @Uint32() external int Id;
   @Uint32() external int PropertyLength;
+}
+
+class MF_MDL_SHARED_PAYLOAD_KEY extends Struct {
+  @Uint32() external int combined;
+  external GUID GMDLHandle;
 }
 
 class KSMULTIPLE_DATA_PROP extends Struct {
@@ -1239,6 +1314,12 @@ class KSAUDIO_MIC_ARRAY_GEOMETRY extends Struct {
   external KSAUDIO_MICROPHONE_COORDINATES KsMicCoord;
 }
 
+class DS3DVECTOR extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Anonymous3;
+}
+
 class KSPROPSETID_DirectSound3DListener extends Struct {
 }
 
@@ -1515,6 +1596,13 @@ class KSAUDIO_DYNAMIC_RANGE extends Struct {
 class KSAUDIO_MIXLEVEL extends Struct {
   @Int32() external int Mute;
   @Int32() external int Level;
+}
+
+class KSAUDIO_MIX_CAPS extends Struct {
+  @Int32() external int Mute;
+  @Int32() external int Minimum;
+  @Int32() external int Maximum;
+  @Uint32() external int Anonymous;
 }
 
 class KSAUDIO_MIXCAP_TABLE extends Struct {
@@ -1935,14 +2023,12 @@ class KSNODEPROPERTY_AUDIO_DEV_SPECIFIC extends Struct {
 class KSNODEPROPERTY_AUDIO_3D_LISTENER extends Struct {
   external KSNODEPROPERTY NodeProperty;
   external Pointer ListenerId;
-  @Uint32() external int Reserved;
 }
 
 class KSNODEPROPERTY_AUDIO_PROPERTY extends Struct {
   external KSNODEPROPERTY NodeProperty;
   external Pointer AppContext;
   @Uint32() external int Length;
-  @Uint32() external int Reserved;
 }
 
 class KSDATAFORMAT_TYPE_MUSIC extends Struct {
@@ -2385,6 +2471,16 @@ class KS_VIDEOINFOHEADER extends Struct {
   external KS_BITMAPINFOHEADER bmiHeader;
 }
 
+class KS_VIDEOINFO extends Struct {
+  external RECT rcSource;
+  external RECT rcTarget;
+  @Uint32() external int dwBitRate;
+  @Uint32() external int dwBitErrorRate;
+  @Int64() external int AvgTimePerFrame;
+  external KS_BITMAPINFOHEADER bmiHeader;
+  @Uint32() external int Anonymous;
+}
+
 class KS_VBIINFOHEADER extends Struct {
   @Uint32() external int StartLine;
   @Uint32() external int EndLine;
@@ -2412,6 +2508,21 @@ class KS_TVTUNER_CHANGE_INFO extends Struct {
   @Uint32() external int dwCountryCode;
   @Uint32() external int dwAnalogVideoStandard;
   @Uint32() external int dwChannel;
+}
+
+class KS_VIDEOINFOHEADER2 extends Struct {
+  external RECT rcSource;
+  external RECT rcTarget;
+  @Uint32() external int dwBitRate;
+  @Uint32() external int dwBitErrorRate;
+  @Int64() external int AvgTimePerFrame;
+  @Uint32() external int dwInterlaceFlags;
+  @Uint32() external int dwCopyProtectFlags;
+  @Uint32() external int dwPictAspectRatioX;
+  @Uint32() external int dwPictAspectRatioY;
+  @Uint32() external int Anonymous;
+  @Uint32() external int dwReserved2;
+  external KS_BITMAPINFOHEADER bmiHeader;
 }
 
 class KS_MPEG1VIDEOINFO extends Struct {
@@ -2873,6 +2984,19 @@ class KSPROPSETID_MPEG4_MediaType_Attributes extends Struct {
 class KSEVENTSETID_DynamicFormatChange extends Struct {
 }
 
+class KS_FRAME_INFO extends Struct {
+  @Uint32() external int ExtendedHeaderSize;
+  @Uint32() external int dwFrameFlags;
+  @Int64() external int PictureNumber;
+  @Int64() external int DropCount;
+  @IntPtr() external int hDirectDraw;
+  @IntPtr() external int hSurfaceHandle;
+  external RECT DirectDrawRect;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Reserved2;
+  @Uint32() external int Anonymous2;
+}
+
 class KS_VBI_FRAME_INFO extends Struct {
   @Uint32() external int ExtendedHeaderSize;
   @Uint32() external int dwFrameFlags;
@@ -3203,6 +3327,14 @@ class PROPSETID_VIDCAP_CAMERACONTROL_REGION_OF_INTEREST extends Struct {
 class EVENTSETID_VIDCAP_CAMERACONTROL_REGION_OF_INTEREST extends Struct {
 }
 
+class KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST_S extends Struct {
+  external RECT FocusRect;
+  @Int32() external int AutoFocusLock;
+  @Int32() external int AutoExposureLock;
+  @Int32() external int AutoWhitebalanceLock;
+  @Uint32() external int Anonymous;
+}
+
 class PROPSETID_VIDCAP_CAMERACONTROL_IMAGE_PIN_CAPABILITY extends Struct {
 }
 
@@ -3229,6 +3361,10 @@ class KSCAMERA_EXTENDEDPROP_HEADER extends Struct {
   @Uint64() external int Capability;
 }
 
+class KSCAMERA_EXTENDEDPROP_VALUE extends Struct {
+  @Uint32() external int Value;
+}
+
 class KSCAMERA_MAXVIDEOFPS_FORPHOTORES extends Struct {
   @Uint32() external int PhotoResWidth;
   @Uint32() external int PhotoResHeight;
@@ -3250,7 +3386,7 @@ class KSCAMERA_EXTENDEDPROP_VIDEOPROCSETTING extends Struct {
   @Int32() external int Min;
   @Int32() external int Max;
   @Int32() external int Step;
-  external KSCAMERA_EXTENDEDPROP_VALUE VideoProc;
+  @Uint32() external int VideoProc;
   @Uint64() external int Reserved;
 }
 
@@ -3448,6 +3584,23 @@ class KSCAMERAPROFILE_VariablePhotoSequence extends Struct {
 class KSCAMERAPROFILE_VideoHDR8 extends Struct {
 }
 
+class KSCAMERA_PROFILE_MEDIAINFO extends Struct {
+  @Uint32() external int Resolution;
+  @Uint32() external int MaxFrameRate;
+  @Uint64() external int Flags;
+  @Uint32() external int Data0;
+  @Uint32() external int Data1;
+  @Uint32() external int Data2;
+  @Uint32() external int Data3;
+}
+
+class KSCAMERA_PROFILE_PININFO extends Struct {
+  external GUID PinCategory;
+  @Uint32() external int Anonymous;
+  @Uint32() external int MediaInfoCount;
+  external Pointer<KSCAMERA_PROFILE_MEDIAINFO> MediaInfos;
+}
+
 class KSCAMERA_PROFILE_INFO extends Struct {
   external GUID ProfileId;
   @Uint32() external int Index;
@@ -3460,6 +3613,12 @@ class KSCAMERA_PROFILE_CONCURRENCYINFO extends Struct {
   @Uint32() external int Reserved;
   @Uint32() external int ProfileCount;
   external Pointer<KSCAMERA_PROFILE_INFO> Profiles;
+}
+
+class KSDEVICE_PROFILE_INFO extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int Size;
+  @Uint32() external int Anonymous;
 }
 
 class WNF_KSCAMERA_STREAMSTATE_INFO extends Struct {
@@ -3504,6 +3663,11 @@ class DEVCAPS extends Struct {
   @Int32() external int Calibrate;
   @Int32() external int SeekType;
   @Int32() external int SimulatedHardware;
+}
+
+class KSPROPERTY_EXTDEVICE_S extends Struct {
+  external KSIDENTIFIER Property;
+  @Uint32() external int u;
 }
 
 class PROPSETID_EXT_TRANSPORT extends Struct {
@@ -3580,6 +3744,16 @@ class MEDIUM_INFO extends Struct {
 class TRANSPORT_STATE extends Struct {
   @Uint32() external int Mode;
   @Uint32() external int State;
+}
+
+class KSPROPERTY_EXTXPORT_S extends Struct {
+  external KSIDENTIFIER Property;
+  @Uint32() external int u;
+}
+
+class KSPROPERTY_EXTXPORT_NODE_S extends Struct {
+  external KSP_NODE NodeProperty;
+  @Uint32() external int u;
 }
 
 class PROPSETID_TIMECODE_READER extends Struct {
@@ -4049,6 +4223,10 @@ class KSAUDIOMODULE_PROPERTY extends Struct {
 }
 
 class KSNOTIFICATIONID_AudioModule extends Struct {
+}
+
+class KSAUDIOMODULE_NOTIFICATION extends Struct {
+  @Uint32() external int Anonymous;
 }
 
 class AudioClientProperties extends Struct {

@@ -43,6 +43,10 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class HPTPROVIDER extends Struct {
+  @IntPtr() external int Value;
+}
+
 class DRAWPATRECT extends Struct {
   external POINT ptPosition;
   external POINT ptSize;
@@ -69,6 +73,36 @@ class PSFEATURE_CUSTPAPER extends Struct {
   @Int32() external int lHeightOffset;
 }
 
+class DEVMODEA extends Struct {
+  external __ubyte__ dmDeviceName;
+  @Uint16() external int dmSpecVersion;
+  @Uint16() external int dmDriverVersion;
+  @Uint16() external int dmSize;
+  @Uint16() external int dmDriverExtra;
+  @Uint32() external int dmFields;
+  @Uint32() external int Anonymous1;
+  @Int16() external int dmColor;
+  @Int16() external int dmDuplex;
+  @Int16() external int dmYResolution;
+  @Int16() external int dmTTOption;
+  @Int16() external int dmCollate;
+  external __ubyte__ dmFormName;
+  @Uint16() external int dmLogPixels;
+  @Uint32() external int dmBitsPerPel;
+  @Uint32() external int dmPelsWidth;
+  @Uint32() external int dmPelsHeight;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int dmDisplayFrequency;
+  @Uint32() external int dmICMMethod;
+  @Uint32() external int dmICMIntent;
+  @Uint32() external int dmMediaType;
+  @Uint32() external int dmDitherType;
+  @Uint32() external int dmReserved1;
+  @Uint32() external int dmReserved2;
+  @Uint32() external int dmPanningWidth;
+  @Uint32() external int dmPanningHeight;
+}
+
 class DOCINFOA extends Struct {
   @Int32() external int cbSize;
   external Pointer<Utf8> lpszDocName;
@@ -83,13 +117,6 @@ class DOCINFOW extends Struct {
   external Pointer<Utf16> lpszOutput;
   external Pointer<Utf16> lpszDatatype;
   @Uint32() external int fwType;
-}
-
-class HPTPROVIDER extends Struct {
-  @IntPtr() external int Value;
-}
-
-class IPrintDocumentPackageTarget extends Struct {
 }
 
 class XpsOMObjectFactory extends Struct {
@@ -134,6 +161,11 @@ class XPS_MATRIX extends Struct {
   @Float() external double m22;
   @Float() external double m31;
   @Float() external double m32;
+}
+
+class XPS_COLOR extends Struct {
+  @Uint32() external int colorType;
+  @Uint32() external int value;
 }
 
 class XpsSignatureManager extends Struct {

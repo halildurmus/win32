@@ -51,6 +51,20 @@ class WINML_TENSOR_BINDING_DESC extends Struct {
   external Pointer pData;
 }
 
+class WINML_SEQUENCE_BINDING_DESC extends Struct {
+  @Uint32() external int ElementCount;
+  @Uint32() external int ElementType;
+  @Uint32() external int Anonymous;
+}
+
+class WINML_MAP_BINDING_DESC extends Struct {
+  @Uint32() external int ElementCount;
+  @Uint32() external int KeyType;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Fields;
+  @Uint32() external int Anonymous2;
+}
+
 class WINML_IMAGE_BINDING_DESC extends Struct {
   @Uint32() external int ElementType;
   @Uint32() external int NumDimensions;
@@ -64,6 +78,12 @@ class WINML_RESOURCE_BINDING_DESC extends Struct {
   @Uint32() external int NumDimensions;
   external Pointer<Int64> pShape;
   external ID3D12Resource pResource;
+}
+
+class WINML_BINDING_DESC extends Struct {
+  external Pointer<Utf16> Name;
+  @Uint32() external int BindType;
+  @Uint32() external int Anonymous;
 }
 
 class WINML_TENSOR_VARIABLE_DESC extends Struct {
@@ -87,12 +107,31 @@ class WINML_IMAGE_VARIABLE_DESC extends Struct {
   external Pointer<Int64> pShape;
 }
 
+class WINML_VARIABLE_DESC extends Struct {
+  external Pointer<Utf16> Name;
+  external Pointer<Utf16> Description;
+  @Uint32() external int FeatureType;
+  @Int32() external int Required;
+  @Uint32() external int Anonymous;
+}
+
 class WINML_MODEL_DESC extends Struct {
   external Pointer<Utf16> Author;
   external Pointer<Utf16> Name;
   external Pointer<Utf16> Domain;
   external Pointer<Utf16> Description;
   @IntPtr() external int Version;
+}
+
+class MLOperatorEdgeDescription extends Struct {
+  @Uint32() external int edgeType;
+  @Uint32() external int Anonymous;
+}
+
+class MLOperatorSchemaEdgeDescription extends Struct {
+  @Uint32() external int options;
+  @Uint32() external int typeFormat;
+  @Uint32() external int Anonymous;
 }
 
 class MLOperatorEdgeTypeConstraint extends Struct {
@@ -105,6 +144,13 @@ class MLOperatorAttribute extends Struct {
   external Pointer<Int8> name;
   @Uint32() external int type;
   external bool required;
+}
+
+class MLOperatorAttributeNameValue extends Struct {
+  external Pointer<Int8> name;
+  @Uint32() external int type;
+  @Uint32() external int valueCount;
+  @Uint32() external int Anonymous;
 }
 
 class MLOperatorSchemaDescription extends Struct {

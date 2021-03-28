@@ -43,12 +43,18 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT extends Struct {
+  @IntPtr() external int Value;
+}
+
 class PRJ_DIR_ENTRY_BUFFER_HANDLE extends Struct {
   @IntPtr() external int Value;
 }
 
-class PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT extends Struct {
-  @IntPtr() external int Value;
+class PRJ_EXTENDED_INFO extends Struct {
+  @Uint32() external int InfoType;
+  @Uint32() external int NextInfoOffset;
+  @Uint32() external int Anonymous;
 }
 
 class PRJ_NOTIFICATION_MAPPING extends Struct {
@@ -84,10 +90,19 @@ class PRJ_FILE_BASIC_INFO extends Struct {
   @Uint32() external int FileAttributes;
 }
 
+class PRJ_PLACEHOLDER_INFO extends Struct {
+  external PRJ_FILE_BASIC_INFO FileBasicInfo;
+  @Uint32() external int EaInformation;
+  @Uint32() external int SecurityInformation;
+  @Uint32() external int StreamsInformation;
+  external PRJ_PLACEHOLDER_VERSION_INFO VersionInfo;
+  external __ubyte__ VariableData;
+}
+
 class PRJ_CALLBACK_DATA extends Struct {
   @Uint32() external int Size;
   @Uint32() external int Flags;
-  external PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT NamespaceVirtualizationContext;
+  @IntPtr() external int NamespaceVirtualizationContext;
   @Int32() external int CommandId;
   external GUID FileId;
   external GUID DataStreamId;
@@ -96,6 +111,12 @@ class PRJ_CALLBACK_DATA extends Struct {
   @Uint32() external int TriggeringProcessId;
   external Pointer<Utf16> TriggeringProcessImageFileName;
   external Pointer InstanceContext;
+}
+
+class PRJ_NOTIFICATION_PARAMETERS extends Struct {
+  @Uint32() external int PostCreate;
+  @Uint32() external int FileRenamed;
+  @Uint32() external int FileDeletedOnHandleClose;
 }
 
 class PRJ_CALLBACKS extends Struct {
@@ -107,5 +128,10 @@ class PRJ_CALLBACKS extends Struct {
   external PRJ_QUERY_FILE_NAME_CB QueryFileNameCallback;
   external PRJ_NOTIFICATION_CB NotificationCallback;
   external PRJ_CANCEL_COMMAND_CB CancelCommandCallback;
+}
+
+class PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS extends Struct {
+  @Uint32() external int CommandType;
+  @Uint32() external int Anonymous;
 }
 

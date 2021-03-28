@@ -47,6 +47,11 @@ class TBS_CONTEXT_PARAMS extends Struct {
   @Uint32() external int version;
 }
 
+class TBS_CONTEXT_PARAMS2 extends Struct {
+  @Uint32() external int version;
+  @Uint32() external int Anonymous;
+}
+
 class tdTPM_WNF_PROVISIONING extends Struct {
   @Uint32() external int status;
   external __ubyte__ message;

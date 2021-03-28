@@ -207,6 +207,11 @@ class DHCP_IP_RESERVATION extends Struct {
   external Pointer<DHCP_BINARY_DATA> ReservedForClient;
 }
 
+class DHCP_SUBNET_ELEMENT_DATA extends Struct {
+  @Uint32() external int ElementType;
+  @Uint32() external int Element;
+}
+
 class DHCP_SUBNET_ELEMENT_UNION extends Struct {
 }
 
@@ -249,6 +254,11 @@ class DHCP_FILTER_ENUM_INFO extends Struct {
   external Pointer<DHCP_FILTER_RECORD> pEnumRecords;
 }
 
+class DHCP_OPTION_DATA_ELEMENT extends Struct {
+  @Uint32() external int OptionType;
+  @Uint32() external int Element;
+}
+
 class DHCP_OPTION_ELEMENT_UNION extends Struct {
 }
 
@@ -285,9 +295,19 @@ class DHCP_RESERVED_SCOPE extends Struct {
   @Uint32() external int ReservedIpSubnetAddress;
 }
 
+class DHCP_OPTION_SCOPE_INFO extends Struct {
+  @Uint32() external int ScopeType;
+  @Uint32() external int ScopeInfo;
+}
+
 class DHCP_RESERVED_SCOPE6 extends Struct {
   external DHCP_IPV6_ADDRESS ReservedIpAddress;
   external DHCP_IPV6_ADDRESS ReservedIpSubnetAddress;
+}
+
+class DHCP_OPTION_SCOPE_INFO6 extends Struct {
+  @Uint32() external int ScopeType;
+  @Uint32() external int ScopeInfo;
 }
 
 class DHCP_OPTION_SCOPE_UNION6 extends Struct {
@@ -376,7 +396,18 @@ class DHCP_CLIENT_INFO_PB_ARRAY extends Struct {
   external Pointer<Pointer<DHCP_CLIENT_INFO_PB>> Clients;
 }
 
+class DHCP_SEARCH_INFO extends Struct {
+  @Uint32() external int SearchType;
+  @Uint32() external int SearchInfo;
+}
+
 class DHCP_CLIENT_SEARCH_UNION extends Struct {
+}
+
+class DHCP_PROPERTY extends Struct {
+  @Uint32() external int ID;
+  @Uint32() external int Type;
+  @Uint32() external int Value;
 }
 
 class DHCP_PROPERTY_ARRAY extends Struct {
@@ -565,6 +596,11 @@ class DHCP_RESERVATION_INFO_ARRAY extends Struct {
   external Pointer<Pointer<DHCP_IP_RESERVATION_INFO>> Elements;
 }
 
+class DHCP_SUBNET_ELEMENT_DATA_V4 extends Struct {
+  @Uint32() external int ElementType;
+  @Uint32() external int Element;
+}
+
 class DHCP_SUBNET_ELEMENT_UNION_V4 extends Struct {
 }
 
@@ -665,6 +701,25 @@ class DHCP_CLIENT_INFO_ARRAY_V5 extends Struct {
   external Pointer<Pointer<DHCP_CLIENT_INFO_V5>> Clients;
 }
 
+class DHCP_ALL_OPTIONS extends Struct {
+  @Uint32() external int Flags;
+  external Pointer<DHCP_OPTION_ARRAY> NonVendorOptions;
+  @Uint32() external int NumVendorOptions;
+  external Pointer<Uint32> VendorOptions;
+}
+
+class DHCP_ALL_OPTION_VALUES extends Struct {
+  @Uint32() external int Flags;
+  @Uint32() external int NumElements;
+  external Pointer<Uint32> Options;
+}
+
+class DHCP_ALL_OPTION_VALUES_PB extends Struct {
+  @Uint32() external int Flags;
+  @Uint32() external int NumElements;
+  external Pointer<Uint32> Options;
+}
+
 class DHCPDS_SERVER extends Struct {
   @Uint32() external int Version;
   external Pointer<Utf16> ServerName;
@@ -681,6 +736,12 @@ class DHCPDS_SERVERS extends Struct {
   external Pointer<DHCPDS_SERVER> Servers;
 }
 
+class DHCP_ATTRIB extends Struct {
+  @Uint32() external int DhcpAttribId;
+  @Uint32() external int DhcpAttribType;
+  @Uint32() external int Anonymous;
+}
+
 class DHCP_ATTRIB_ARRAY extends Struct {
   @Uint32() external int NumElements;
   external Pointer<DHCP_ATTRIB> DhcpAttribs;
@@ -691,6 +752,11 @@ class DHCP_BOOTP_IP_RANGE extends Struct {
   @Uint32() external int EndAddress;
   @Uint32() external int BootpAllocated;
   @Uint32() external int MaxBootpAllowed;
+}
+
+class DHCP_SUBNET_ELEMENT_DATA_V5 extends Struct {
+  @Uint32() external int ElementType;
+  @Uint32() external int Element;
 }
 
 class DHCP_SUBNET_ELEMENT_INFO_ARRAY_V5 extends Struct {
@@ -801,6 +867,11 @@ class DHCP_IP_RESERVATION_V6 extends Struct {
   @Uint32() external int InterfaceId;
 }
 
+class DHCP_SUBNET_ELEMENT_DATA_V6 extends Struct {
+  @Uint32() external int ElementType;
+  @Uint32() external int Element;
+}
+
 class DHCP_SUBNET_ELEMENT_UNION_V6 extends Struct {
 }
 
@@ -829,6 +900,11 @@ class DHCPV6_IP_ARRAY extends Struct {
 class DHCP_CLIENT_INFO_ARRAY_V6 extends Struct {
   @Uint32() external int NumElements;
   external Pointer<Pointer<DHCP_CLIENT_INFO_V6>> Clients;
+}
+
+class DHCP_SEARCH_INFO_V6 extends Struct {
+  @Uint32() external int SearchType;
+  @Uint32() external int SearchInfo;
 }
 
 class DHCP_POL_COND extends Struct {

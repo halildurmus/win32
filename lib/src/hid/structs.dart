@@ -171,6 +171,26 @@ class DIDATAFORMAT extends Struct {
   external Pointer<DIOBJECTDATAFORMAT> rgodf;
 }
 
+class DIACTIONA extends Struct {
+  @IntPtr() external int uAppData;
+  @Uint32() external int dwSemantic;
+  @Uint32() external int dwFlags;
+  @Uint32() external int Anonymous;
+  external GUID guidInstance;
+  @Uint32() external int dwObjID;
+  @Uint32() external int dwHow;
+}
+
+class DIACTIONW extends Struct {
+  @IntPtr() external int uAppData;
+  @Uint32() external int dwSemantic;
+  @Uint32() external int dwFlags;
+  @Uint32() external int Anonymous;
+  external GUID guidInstance;
+  @Uint32() external int dwObjID;
+  @Uint32() external int dwHow;
+}
+
 class DIACTIONFORMATA extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwActionSize;
@@ -709,6 +729,16 @@ class KEYBOARD_IME_STATUS extends Struct {
   @Uint32() external int ImeConvMode;
 }
 
+class MOUSE_INPUT_DATA extends Struct {
+  @Uint16() external int UnitId;
+  @Uint16() external int Flags;
+  @Uint32() external int Anonymous;
+  @Uint32() external int RawButtons;
+  @Int32() external int LastX;
+  @Int32() external int LastY;
+  @Uint32() external int ExtraInformation;
+}
+
 class MOUSE_ATTRIBUTES extends Struct {
   @Uint16() external int MouseIdentifier;
   @Uint16() external int NumberOfButtons;
@@ -723,6 +753,48 @@ class MOUSE_UNIT_ID_PARAMETER extends Struct {
 class USAGE_AND_PAGE extends Struct {
   @Uint16() external int Usage;
   @Uint16() external int UsagePage;
+}
+
+class HIDP_BUTTON_CAPS extends Struct {
+  @Uint16() external int UsagePage;
+  @Uint8() external int ReportID;
+  @Uint8() external int IsAlias;
+  @Uint16() external int BitField;
+  @Uint16() external int LinkCollection;
+  @Uint16() external int LinkUsage;
+  @Uint16() external int LinkUsagePage;
+  @Uint8() external int IsRange;
+  @Uint8() external int IsStringRange;
+  @Uint8() external int IsDesignatorRange;
+  @Uint8() external int IsAbsolute;
+  external __uint__ Reserved;
+  @Uint32() external int Anonymous;
+}
+
+class HIDP_VALUE_CAPS extends Struct {
+  @Uint16() external int UsagePage;
+  @Uint8() external int ReportID;
+  @Uint8() external int IsAlias;
+  @Uint16() external int BitField;
+  @Uint16() external int LinkCollection;
+  @Uint16() external int LinkUsage;
+  @Uint16() external int LinkUsagePage;
+  @Uint8() external int IsRange;
+  @Uint8() external int IsStringRange;
+  @Uint8() external int IsDesignatorRange;
+  @Uint8() external int IsAbsolute;
+  @Uint8() external int HasNull;
+  @Uint8() external int Reserved;
+  @Uint16() external int BitSize;
+  @Uint16() external int ReportCount;
+  external __ushort__ Reserved2;
+  @Uint32() external int UnitsExp;
+  @Uint32() external int Units;
+  @Int32() external int LogicalMin;
+  @Int32() external int LogicalMax;
+  @Int32() external int PhysicalMin;
+  @Int32() external int PhysicalMax;
+  @Uint32() external int Anonymous;
 }
 
 class HIDP_LINK_COLLECTION_NODE extends Struct {
@@ -758,6 +830,12 @@ class HIDP_CAPS extends Struct {
   @Uint16() external int NumberFeatureDataIndices;
 }
 
+class HIDP_DATA extends Struct {
+  @Uint16() external int DataIndex;
+  @Uint16() external int Reserved;
+  @Uint32() external int Anonymous;
+}
+
 class HIDP_UNKNOWN_TOKEN extends Struct {
   @Uint8() external int Token;
   external __ubyte__ Reserved;
@@ -769,6 +847,10 @@ class HIDP_EXTENDED_ATTRIBUTES extends Struct {
   external __ubyte__ Reserved;
   external Pointer<HIDP_UNKNOWN_TOKEN> GlobalUnknowns;
   external __uint__ Data;
+}
+
+class HIDP_KEYBOARD_MODIFIER_STATE extends Struct {
+  @Uint32() external int Anonymous;
 }
 
 class HIDD_CONFIGURATION extends Struct {

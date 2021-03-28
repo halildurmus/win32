@@ -43,6 +43,14 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class L2_NOTIFICATION_DATA extends Struct {
+  @Uint32() external int NotificationSource;
+  @Uint32() external int NotificationCode;
+  external GUID InterfaceGuid;
+  @Uint32() external int dwDataSize;
+  external Pointer pData;
+}
+
 class SOCKET_ADDRESS_LIST extends Struct {
   @Int32() external int iAddressCount;
   external SOCKET_ADDRESS Address;
@@ -55,12 +63,12 @@ class SOCKADDR_STORAGE_LH extends Struct {
   external __byte__ __ss_pad2;
 }
 
-class L2_NOTIFICATION_DATA extends Struct {
-  @Uint32() external int NotificationSource;
-  @Uint32() external int NotificationCode;
-  external GUID InterfaceGuid;
-  @Uint32() external int dwDataSize;
-  external Pointer pData;
+class SOCKADDR_IN6_LH extends Struct {
+  @Uint16() external int sin6_family;
+  @Uint16() external int sin6_port;
+  @Uint32() external int sin6_flowinfo;
+  external in6_addr sin6_addr;
+  @Uint32() external int Anonymous;
 }
 
 class NET_PHYSICAL_LOCATION_LH extends Struct {

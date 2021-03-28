@@ -43,12 +43,6 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class InertiaProcessor extends Struct {
-}
-
-class ManipulationProcessor extends Struct {
-}
-
 class HGESTUREINFO extends Struct {
   @IntPtr() external int Value;
 }
@@ -94,5 +88,11 @@ class GESTURECONFIG extends Struct {
   @Uint32() external int dwID;
   @Uint32() external int dwWant;
   @Uint32() external int dwBlock;
+}
+
+class InertiaProcessor extends Struct {
+}
+
+class ManipulationProcessor extends Struct {
 }
 

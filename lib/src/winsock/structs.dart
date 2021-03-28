@@ -43,6 +43,19 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class HWSAEVENT extends Struct {
+  @IntPtr() external int Value;
+}
+
+class BLOB extends Struct {
+  @Uint32() external int cbSize;
+  external Pointer<Uint8> pBlobData;
+}
+
+class in_addr extends Struct {
+  @Uint32() external int S_un;
+}
+
 class SOCKADDR extends Struct {
   @Uint16() external int sa_family;
   external __byte__ sa_data;
@@ -71,6 +84,10 @@ class SOCKET_PROCESSOR_AFFINITY extends Struct {
   external PROCESSOR_NUMBER Processor;
   @Uint16() external int NumaNodeId;
   @Uint16() external int Reserved;
+}
+
+class SCOPE_ID extends Struct {
+  @Uint32() external int Anonymous;
 }
 
 class sockaddr_in extends Struct {
@@ -251,8 +268,8 @@ class netent extends Struct {
 class servent extends Struct {
   external Pointer<Int8> s_name;
   external Pointer<Pointer<Int8>> s_aliases;
-  @Int16() external int s_port;
   external Pointer<Int8> s_proto;
+  @Int16() external int s_port;
 }
 
 class protoent extends Struct {
@@ -264,11 +281,11 @@ class protoent extends Struct {
 class WSAData extends Struct {
   @Uint16() external int wVersion;
   @Uint16() external int wHighVersion;
-  external __byte__ szDescription;
-  external __byte__ szSystemStatus;
   @Uint16() external int iMaxSockets;
   @Uint16() external int iMaxUdpDg;
   external Pointer<Int8> lpVendorInfo;
+  external __byte__ szDescription;
+  external __byte__ szSystemStatus;
 }
 
 class sockproto extends Struct {
@@ -335,6 +352,11 @@ class WSAPROTOCOL_INFOW extends Struct {
   @Uint32() external int dwMessageSize;
   @Uint32() external int dwProviderReserved;
   external __ushort__ szProtocol;
+}
+
+class WSACOMPLETION extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int Parameters;
 }
 
 class AFPROTOCOLS extends Struct {
@@ -485,6 +507,10 @@ class WSAPOLLFD extends Struct {
   @IntPtr() external int fd;
   @Int16() external int events;
   @Int16() external int revents;
+}
+
+class in6_addr extends Struct {
+  @Uint32() external int u;
 }
 
 class sockaddr_in6_old extends Struct {
@@ -727,6 +753,21 @@ class WINDOWS_DEVICELIST extends Struct {
 class WCE_DEVICELIST extends Struct {
   @Uint32() external int numDevice;
   external WCE_IRDA_DEVICE_INFO Device;
+}
+
+class WINDOWS_IAS_SET extends Struct {
+  external __byte__ irdaClassName;
+  external __byte__ irdaAttribName;
+  @Uint32() external int irdaAttribType;
+  @Uint32() external int irdaAttribute;
+}
+
+class WINDOWS_IAS_QUERY extends Struct {
+  external __ubyte__ irdaDeviceID;
+  external __byte__ irdaClassName;
+  external __byte__ irdaAttribName;
+  @Uint32() external int irdaAttribType;
+  @Uint32() external int irdaAttribute;
 }
 
 class NL_PATH_BANDWIDTH_ROD extends Struct {
@@ -992,6 +1033,11 @@ class AALUSER_PARAMETERS extends Struct {
   @Uint32() external int UserDefined;
 }
 
+class AAL_PARAMETERS_IE extends Struct {
+  @Uint32() external int AALType;
+  @Uint32() external int AALSpecificParameters;
+}
+
 class ATM_TD extends Struct {
   @Uint32() external int PeakCellRate_CLP0;
   @Uint32() external int PeakCellRate_CLP01;
@@ -1088,6 +1134,17 @@ class TRANSMIT_FILE_BUFFERS extends Struct {
   @Uint32() external int TailLength;
 }
 
+class TRANSMIT_PACKETS_ELEMENT extends Struct {
+  @Uint32() external int dwElFlags;
+  @Uint32() external int cLength;
+  @Uint32() external int Anonymous;
+}
+
+class NLA_BLOB extends Struct {
+  @Uint32() external int header;
+  @Uint32() external int data;
+}
+
 class WSAPOLLDATA extends Struct {
   @Int32() external int result;
   @Uint32() external int fds;
@@ -1101,6 +1158,11 @@ class WSASENDMSG extends Struct {
   external Pointer<Uint32> lpNumberOfBytesSent;
   external Pointer<OVERLAPPED> lpOverlapped;
   external Pointer<WSAOVERLAPPED_COMPLETION_ROUTINE> lpCompletionRoutine;
+}
+
+class RIO_NOTIFICATION_COMPLETION extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int Anonymous;
 }
 
 class RIO_EXTENSION_FUNCTION_TABLE extends Struct {
@@ -1373,14 +1435,5 @@ class SERVICE_ASYNC_INFO extends Struct {
   external Pointer<SERVICE_CALLBACK_PROC> lpServiceCallbackProc;
   @IntPtr() external int lParam;
   @IntPtr() external int hAsyncTaskHandle;
-}
-
-class HWSAEVENT extends Struct {
-  @IntPtr() external int Value;
-}
-
-class BLOB extends Struct {
-  @Uint32() external int cbSize;
-  external Pointer<Uint8> pBlobData;
 }
 

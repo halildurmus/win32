@@ -43,6 +43,18 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class InMemoryPropertyStore extends Struct {
+}
+
+class InMemoryPropertyStoreMarshalByValue extends Struct {
+}
+
+class PropertySystem extends Struct {
+}
+
+class SERIALIZEDPROPSTORAGE extends Struct {
+}
+
 class PROPERTYKEY extends Struct {
   external GUID fmtid;
   @Uint32() external int pid;
@@ -61,17 +73,5 @@ class PROPPRG extends Struct {
   @Uint32() external int dwRealModeFlags;
   external __byte__ achOtherFile;
   external __byte__ achPIFFile;
-}
-
-class InMemoryPropertyStore extends Struct {
-}
-
-class InMemoryPropertyStoreMarshalByValue extends Struct {
-}
-
-class PropertySystem extends Struct {
-}
-
-class SERIALIZEDPROPSTORAGE extends Struct {
 }
 

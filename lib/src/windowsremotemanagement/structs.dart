@@ -53,6 +53,11 @@ class WSMAN_DATA_BINARY extends Struct {
   external Pointer<Uint8> data;
 }
 
+class WSMAN_DATA extends Struct {
+  @Uint32() external int type;
+  @Uint32() external int Anonymous;
+}
+
 class WSMAN_ERROR extends Struct {
   @Uint32() external int code;
   external Pointer<Utf16> errorDetail;
@@ -64,6 +69,11 @@ class WSMAN_ERROR extends Struct {
 class WSMAN_USERNAME_PASSWORD_CREDS extends Struct {
   external Pointer<Utf16> username;
   external Pointer<Utf16> password;
+}
+
+class WSMAN_AUTHENTICATION_CREDENTIALS extends Struct {
+  @Uint32() external int authenticationMechanism;
+  @Uint32() external int Anonymous;
 }
 
 class WSMAN_OPTION extends Struct {

@@ -43,6 +43,15 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class HTTP_PUSH_WAIT_HANDLE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HTTP_VERSION_INFO extends Struct {
+  @Uint32() external int dwMajorVersion;
+  @Uint32() external int dwMinorVersion;
+}
+
 class INTERNET_ASYNC_RESULT extends Struct {
   @IntPtr() external int dwResult;
   @Uint32() external int dwError;
@@ -59,6 +68,16 @@ class INTERNET_PROXY_INFO extends Struct {
   @Uint32() external int dwAccessType;
   external Pointer<Int8> lpszProxy;
   external Pointer<Int8> lpszProxyBypass;
+}
+
+class INTERNET_PER_CONN_OPTIONA extends Struct {
+  @Uint32() external int dwOption;
+  @Uint32() external int Value;
+}
+
+class INTERNET_PER_CONN_OPTIONW extends Struct {
+  @Uint32() external int dwOption;
+  @Uint32() external int Value;
 }
 
 class INTERNET_PER_CONN_OPTION_LISTA extends Struct {
@@ -285,6 +304,12 @@ class GOPHER_UNKNOWN_ATTRIBUTE_TYPE extends Struct {
   external Pointer<Int8> Text;
 }
 
+class GOPHER_ATTRIBUTE_TYPE extends Struct {
+  @Uint32() external int CategoryId;
+  @Uint32() external int AttributeId;
+  @Uint32() external int AttributeType;
+}
+
 class INTERNET_COOKIE2 extends Struct {
   external Pointer<Utf16> pwszName;
   external Pointer<Utf16> pwszValue;
@@ -300,6 +325,44 @@ class INTERNET_AUTH_NOTIFY_DATA extends Struct {
   @Uint32() external int dwOptions;
   external PFN_AUTH_NOTIFY pfnNotify;
   @IntPtr() external int dwContext;
+}
+
+class INTERNET_CACHE_ENTRY_INFOA extends Struct {
+  @Uint32() external int dwStructSize;
+  external Pointer<Utf8> lpszSourceUrlName;
+  external Pointer<Utf8> lpszLocalFileName;
+  @Uint32() external int CacheEntryType;
+  @Uint32() external int dwUseCount;
+  @Uint32() external int dwHitRate;
+  @Uint32() external int dwSizeLow;
+  @Uint32() external int dwSizeHigh;
+  external FILETIME LastModifiedTime;
+  external FILETIME ExpireTime;
+  external FILETIME LastAccessTime;
+  external FILETIME LastSyncTime;
+  external Pointer<Utf8> lpHeaderInfo;
+  @Uint32() external int dwHeaderInfoSize;
+  external Pointer<Utf8> lpszFileExtension;
+  @Uint32() external int Anonymous;
+}
+
+class INTERNET_CACHE_ENTRY_INFOW extends Struct {
+  @Uint32() external int dwStructSize;
+  external Pointer<Utf16> lpszSourceUrlName;
+  external Pointer<Utf16> lpszLocalFileName;
+  @Uint32() external int CacheEntryType;
+  @Uint32() external int dwUseCount;
+  @Uint32() external int dwHitRate;
+  @Uint32() external int dwSizeLow;
+  @Uint32() external int dwSizeHigh;
+  external FILETIME LastModifiedTime;
+  external FILETIME ExpireTime;
+  external FILETIME LastAccessTime;
+  external FILETIME LastSyncTime;
+  external Pointer<Utf16> lpHeaderInfo;
+  @Uint32() external int dwHeaderInfoSize;
+  external Pointer<Utf16> lpszFileExtension;
+  @Uint32() external int Anonymous;
 }
 
 class INTERNET_CACHE_TIMESTAMPS extends Struct {
@@ -406,6 +469,16 @@ class INTERNET_CALLBACK_COOKIE extends Struct {
   @Uint32() external int dwFlags;
 }
 
+class INTERNET_CREDENTIALS extends Struct {
+  external Pointer<Utf16> lpcwszHostName;
+  @Uint32() external int dwPort;
+  @Uint32() external int dwScheme;
+  external Pointer<Utf16> lpcwszUrl;
+  external Pointer<Utf16> lpcwszRealm;
+  @Int32() external int fAuthIdentity;
+  @Uint32() external int Anonymous;
+}
+
 class HTTP_PUSH_TRANSPORT_SETTING extends Struct {
   external GUID TransportSettingId;
   external GUID BrokerEventId;
@@ -446,6 +519,32 @@ class INTERNET_CACHE_CONFIG_PATH_ENTRYA extends Struct {
 class INTERNET_CACHE_CONFIG_PATH_ENTRYW extends Struct {
   external __ushort__ CachePath;
   @Uint32() external int dwCacheSize;
+}
+
+class INTERNET_CACHE_CONFIG_INFOA extends Struct {
+  @Uint32() external int dwStructSize;
+  @Uint32() external int dwContainer;
+  @Uint32() external int dwQuota;
+  @Uint32() external int dwReserved4;
+  @Int32() external int fPerUser;
+  @Uint32() external int dwSyncMode;
+  @Uint32() external int dwNumCachePaths;
+  @Uint32() external int Anonymous;
+  @Uint32() external int dwNormalUsage;
+  @Uint32() external int dwExemptUsage;
+}
+
+class INTERNET_CACHE_CONFIG_INFOW extends Struct {
+  @Uint32() external int dwStructSize;
+  @Uint32() external int dwContainer;
+  @Uint32() external int dwQuota;
+  @Uint32() external int dwReserved4;
+  @Int32() external int fPerUser;
+  @Uint32() external int dwSyncMode;
+  @Uint32() external int dwNumCachePaths;
+  @Uint32() external int Anonymous;
+  @Uint32() external int dwNormalUsage;
+  @Uint32() external int dwExemptUsage;
 }
 
 class INTERNET_CACHE_CONTAINER_INFOA extends Struct {
@@ -531,14 +630,5 @@ class ProofOfPossessionCookieInfo extends Struct {
   external Pointer<Utf16> data;
   @Uint32() external int flags;
   external Pointer<Utf16> p3pHeader;
-}
-
-class HTTP_VERSION_INFO extends Struct {
-  @Uint32() external int dwMajorVersion;
-  @Uint32() external int dwMinorVersion;
-}
-
-class HTTP_PUSH_WAIT_HANDLE extends Struct {
-  @IntPtr() external int Value;
 }
 

@@ -48,6 +48,13 @@ class TOKEN_VALUE extends Struct {
   @Uint32() external int dwValue;
 }
 
+class NS_HELPER_ATTRIBUTES extends Struct {
+  @Uint32() external int Anonymous;
+  external GUID guidHelper;
+  external PNS_HELPER_START_FN pfnStart;
+  external PNS_HELPER_STOP_FN pfnStop;
+}
+
 class CMD_ENTRY extends Struct {
   external Pointer<Utf16> pwszCmdToken;
   external PFN_HANDLE_CMD pfnCmdHandler;
@@ -64,6 +71,23 @@ class CMD_GROUP_ENTRY extends Struct {
   @Uint32() external int dwFlags;
   external Pointer<CMD_ENTRY> pCmdGroup;
   external PNS_OSVERSIONCHECK pOsVersionCheck;
+}
+
+class NS_CONTEXT_ATTRIBUTES extends Struct {
+  @Uint32() external int Anonymous;
+  external Pointer<Utf16> pwszContext;
+  external GUID guidHelper;
+  @Uint32() external int dwFlags;
+  @Uint32() external int ulPriority;
+  @Uint32() external int ulNumTopCmds;
+  external Pointer<CMD_ENTRY> pTopCmds;
+  @Uint32() external int ulNumGroups;
+  external Pointer<CMD_GROUP_ENTRY> pCmdGroups;
+  external PNS_CONTEXT_COMMIT_FN pfnCommitFn;
+  external PNS_CONTEXT_DUMP_FN pfnDumpFn;
+  external PNS_CONTEXT_CONNECT_FN pfnConnectFn;
+  external Pointer pReserved;
+  external PNS_OSVERSIONCHECK pfnOsVersionCheck;
 }
 
 class TAG_TYPE extends Struct {

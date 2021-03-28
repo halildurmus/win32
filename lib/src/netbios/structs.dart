@@ -106,7 +106,7 @@ class SESSION_HEADER extends Struct {
 
 class SESSION_BUFFER extends Struct {
   @Uint8() external int lsn;
-  @Uint32() external int state;
+  @Uint8() external int state;
   external __ubyte__ local_name;
   external __ubyte__ remote_name;
   @Uint8() external int rcvs_outstanding;

@@ -43,7 +43,10 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class IPhraseSink extends Struct {
+class DBID extends Struct {
+  @Uint32() external int uGuid;
+  @Uint32() external int eKind;
+  @Uint32() external int uName;
 }
 
 class CI_STATE extends Struct {

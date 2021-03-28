@@ -60,3 +60,8 @@ class WEB_SOCKET_HTTP_HEADER extends Struct {
   @Uint32() external int ulValueLength;
 }
 
+class WEB_SOCKET_BUFFER extends Struct {
+  @Uint32() external int Data;
+  @Uint32() external int CloseStatus;
+}
+

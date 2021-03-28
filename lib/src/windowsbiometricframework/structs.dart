@@ -48,6 +48,11 @@ class WINBIO_VERSION extends Struct {
   @Uint32() external int MinorVersion;
 }
 
+class WINBIO_IDENTITY extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int Value;
+}
+
 class WINBIO_SECURE_CONNECTION_PARAMS extends Struct {
   @Uint32() external int PayloadSize;
   @Uint16() external int Version;
@@ -78,6 +83,21 @@ class WINBIO_BIR extends Struct {
 class WINBIO_REGISTERED_FORMAT extends Struct {
   @Uint16() external int Owner;
   @Uint16() external int Type;
+}
+
+class WINBIO_BIR_HEADER extends Struct {
+  @Uint16() external int ValidFields;
+  @Uint8() external int HeaderVersion;
+  @Uint8() external int PatronHeaderVersion;
+  @Uint8() external int DataFlags;
+  @Uint32() external int Type;
+  @Uint8() external int Subtype;
+  @Uint8() external int Purpose;
+  @Int8() external int DataQuality;
+  @Int64() external int CreationDate;
+  @Uint32() external int ValidityPeriod;
+  external WINBIO_REGISTERED_FORMAT BiometricDataFormat;
+  external WINBIO_REGISTERED_FORMAT ProductId;
 }
 
 class WINBIO_BDB_ANSI_381_HEADER extends Struct {
@@ -117,6 +137,28 @@ class WINBIO_SECURE_BUFFER_HEADER_V1 extends Struct {
   @Uint64() external int ValidationTag;
 }
 
+class WINBIO_EVENT extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int Parameters;
+}
+
+class WINBIO_PRESENCE_PROPERTIES extends Struct {
+  @Uint32() external int FacialFeatures;
+  @Uint32() external int Iris;
+}
+
+class WINBIO_PRESENCE extends Struct {
+  @Uint32() external int Factor;
+  @Uint8() external int SubFactor;
+  @Int32() external int Status;
+  @Uint32() external int RejectDetail;
+  external WINBIO_IDENTITY Identity;
+  @Uint64() external int TrackingId;
+  @Uint64() external int Ticket;
+  external WINBIO_PRESENCE_PROPERTIES Properties;
+  @Uint32() external int Authorization;
+}
+
 class WINBIO_BSP_SCHEMA extends Struct {
   @Uint32() external int BiometricFactor;
   external GUID BspId;
@@ -146,6 +188,33 @@ class WINBIO_STORAGE_SCHEMA extends Struct {
   @Uint32() external int Attributes;
   external __ushort__ FilePath;
   external __ushort__ ConnectionString;
+}
+
+class WINBIO_EXTENDED_SENSOR_INFO extends Struct {
+  @Uint32() external int GenericSensorCapabilities;
+  @Uint32() external int Factor;
+  @Uint32() external int Specific;
+}
+
+class WINBIO_EXTENDED_ENGINE_INFO extends Struct {
+  @Uint32() external int GenericEngineCapabilities;
+  @Uint32() external int Factor;
+  @Uint32() external int Specific;
+}
+
+class WINBIO_EXTENDED_STORAGE_INFO extends Struct {
+  @Uint32() external int GenericStorageCapabilities;
+  @Uint32() external int Factor;
+  @Uint32() external int Specific;
+}
+
+class WINBIO_EXTENDED_ENROLLMENT_STATUS extends Struct {
+  @Int32() external int TemplateStatus;
+  @Uint32() external int RejectDetail;
+  @Uint32() external int PercentComplete;
+  @Uint32() external int Factor;
+  @Uint8() external int SubFactor;
+  @Uint32() external int Specific;
 }
 
 class WINBIO_EXTENDED_UNIT_STATUS extends Struct {
@@ -187,6 +256,17 @@ class WINBIO_GESTURE_METADATA extends Struct {
   @Uint32() external int BiometricType;
   @Uint32() external int MatchType;
   @Uint32() external int ProtectionType;
+}
+
+class WINBIO_ASYNC_RESULT extends Struct {
+  @Uint32() external int SessionHandle;
+  @Uint32() external int Operation;
+  @Uint64() external int SequenceNumber;
+  @Int64() external int TimeStamp;
+  @Int32() external int ApiStatus;
+  @Uint32() external int UnitId;
+  external Pointer UserData;
+  @Uint32() external int Parameters;
 }
 
 class _WINIBIO_SENSOR_CONTEXT extends Struct {

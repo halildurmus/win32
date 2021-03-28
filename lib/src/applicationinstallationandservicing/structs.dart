@@ -43,51 +43,8 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class MsmMerge extends Struct {
-}
-
-class PMSIHANDLE extends Struct {
-  external MSIHANDLE m_h;
-}
-
-class MSIPATCHSEQUENCEINFOA extends Struct {
-  external Pointer<Utf8> szPatchData;
-  @Uint32() external int ePatchDataType;
-  @Uint32() external int dwOrder;
-  @Uint32() external int uStatus;
-}
-
-class MSIPATCHSEQUENCEINFOW extends Struct {
-  external Pointer<Utf16> szPatchData;
-  @Uint32() external int ePatchDataType;
-  @Uint32() external int dwOrder;
-  @Uint32() external int uStatus;
-}
-
-class MSIFILEHASHINFO extends Struct {
-  @Uint32() external int dwFileHashInfoSize;
-  external __uint__ dwData;
-}
-
-class ASSEMBLY_INFO extends Struct {
-  @Uint32() external int cbAssemblyInfo;
-  @Uint32() external int dwAssemblyFlags;
-  @Uint64() external int uliAssemblySizeInKB;
-  external Pointer<Utf16> pszCurrentAssemblyPathBuf;
-  @Uint32() external int cchBuf;
-}
-
-class FUSION_INSTALL_REFERENCE extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-  external GUID guidScheme;
-  external Pointer<Utf16> szIdentifier;
-  external Pointer<Utf16> szNonCannonicalData;
-}
-
-class PROTECTED_FILE_DATA extends Struct {
-  external __ushort__ FileName;
-  @Uint32() external int FileNumber;
+class MSIHANDLE extends Struct {
+  @Uint32() external int Value;
 }
 
 class ACTIVATION_CONTEXT_QUERY_INDEX extends Struct {
@@ -157,49 +114,6 @@ class ACTIVATION_CONTEXT_DETAILED_INFORMATION extends Struct {
   external Pointer<Utf16> lpAppDirPath;
 }
 
-class ACTCTXA extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-  external Pointer<Utf8> lpSource;
-  @Uint16() external int wProcessorArchitecture;
-  @Uint16() external int wLangId;
-  external Pointer<Utf8> lpAssemblyDirectory;
-  external Pointer<Utf8> lpResourceName;
-  external Pointer<Utf8> lpApplicationName;
-  @IntPtr() external int hModule;
-}
-
-class ACTCTXW extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-  external Pointer<Utf16> lpSource;
-  @Uint16() external int wProcessorArchitecture;
-  @Uint16() external int wLangId;
-  external Pointer<Utf16> lpAssemblyDirectory;
-  external Pointer<Utf16> lpResourceName;
-  external Pointer<Utf16> lpApplicationName;
-  @IntPtr() external int hModule;
-}
-
-class ACTCTX_SECTION_KEYED_DATA extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int ulDataFormatVersion;
-  external Pointer lpData;
-  @Uint32() external int ulLength;
-  external Pointer lpSectionGlobalData;
-  @Uint32() external int ulSectionGlobalDataLength;
-  external Pointer lpSectionBase;
-  @Uint32() external int ulSectionTotalLength;
-  @IntPtr() external int hActCtx;
-  @Uint32() external int ulAssemblyRosterIndex;
-  @Uint32() external int ulFlags;
-  external ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA AssemblyMetadata;
-}
-
-class MSIHANDLE extends Struct {
-  @Uint32() external int Value;
-}
-
 class INFCONTEXT extends Struct {
   external Pointer Inf;
   external Pointer CurrentInf;
@@ -211,6 +125,17 @@ class SP_INF_INFORMATION extends Struct {
   @Uint32() external int InfStyle;
   @Uint32() external int InfCount;
   external __ubyte__ VersionData;
+}
+
+class SP_ALTPLATFORM_INFO_V2 extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int Platform;
+  @Uint32() external int MajorVersion;
+  @Uint32() external int MinorVersion;
+  @Uint16() external int ProcessorArchitecture;
+  @Uint32() external int Anonymous;
+  @Uint32() external int FirstValidatedMajorVersion;
+  @Uint32() external int FirstValidatedMinorVersion;
 }
 
 class SP_ALTPLATFORM_INFO_V1 extends Struct {
@@ -394,5 +319,91 @@ class SP_INF_SIGNER_INFO_V2_W extends Struct {
   external __ushort__ DigitalSigner;
   external __ushort__ DigitalSignerVersion;
   @Uint32() external int SignerScore;
+}
+
+class MsmMerge extends Struct {
+}
+
+class PMSIHANDLE extends Struct {
+  @Uint32() external int m_h;
+}
+
+class MSIPATCHSEQUENCEINFOA extends Struct {
+  external Pointer<Utf8> szPatchData;
+  @Uint32() external int ePatchDataType;
+  @Uint32() external int dwOrder;
+  @Uint32() external int uStatus;
+}
+
+class MSIPATCHSEQUENCEINFOW extends Struct {
+  external Pointer<Utf16> szPatchData;
+  @Uint32() external int ePatchDataType;
+  @Uint32() external int dwOrder;
+  @Uint32() external int uStatus;
+}
+
+class MSIFILEHASHINFO extends Struct {
+  @Uint32() external int dwFileHashInfoSize;
+  external __uint__ dwData;
+}
+
+class ASSEMBLY_INFO extends Struct {
+  @Uint32() external int cbAssemblyInfo;
+  @Uint32() external int dwAssemblyFlags;
+  @Uint64() external int uliAssemblySizeInKB;
+  external Pointer<Utf16> pszCurrentAssemblyPathBuf;
+  @Uint32() external int cchBuf;
+}
+
+class FUSION_INSTALL_REFERENCE extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwFlags;
+  external GUID guidScheme;
+  external Pointer<Utf16> szIdentifier;
+  external Pointer<Utf16> szNonCannonicalData;
+}
+
+class PROTECTED_FILE_DATA extends Struct {
+  external __ushort__ FileName;
+  @Uint32() external int FileNumber;
+}
+
+class ACTCTXA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwFlags;
+  external Pointer<Utf8> lpSource;
+  @Uint16() external int wProcessorArchitecture;
+  @Uint16() external int wLangId;
+  external Pointer<Utf8> lpAssemblyDirectory;
+  external Pointer<Utf8> lpResourceName;
+  external Pointer<Utf8> lpApplicationName;
+  @IntPtr() external int hModule;
+}
+
+class ACTCTXW extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwFlags;
+  external Pointer<Utf16> lpSource;
+  @Uint16() external int wProcessorArchitecture;
+  @Uint16() external int wLangId;
+  external Pointer<Utf16> lpAssemblyDirectory;
+  external Pointer<Utf16> lpResourceName;
+  external Pointer<Utf16> lpApplicationName;
+  @IntPtr() external int hModule;
+}
+
+class ACTCTX_SECTION_KEYED_DATA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int ulDataFormatVersion;
+  external Pointer lpData;
+  @Uint32() external int ulLength;
+  external Pointer lpSectionGlobalData;
+  @Uint32() external int ulSectionGlobalDataLength;
+  external Pointer lpSectionBase;
+  @Uint32() external int ulSectionTotalLength;
+  @IntPtr() external int hActCtx;
+  @Uint32() external int ulAssemblyRosterIndex;
+  @Uint32() external int ulFlags;
+  external ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA AssemblyMetadata;
 }
 

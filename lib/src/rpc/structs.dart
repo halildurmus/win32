@@ -43,11 +43,6 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class NDR_SCONTEXT_1 extends Struct {
-  external ____ pad;
-  external Pointer userContext;
-}
-
 class RPC_BINDING_VECTOR extends Struct {
   @Uint32() external int Count;
   external ____ BindingH;
@@ -161,6 +156,110 @@ class RPC_HTTP_TRANSPORT_CREDENTIALS_V3_A extends Struct {
   external Pointer ProxyCredentials;
   @Uint32() external int NumberOfProxyAuthnSchemes;
   external Pointer<Uint32> ProxyAuthnSchemes;
+}
+
+class RPC_SECURITY_QOS_V2_W extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Capabilities;
+  @Uint32() external int IdentityTracking;
+  @Uint32() external int ImpersonationType;
+  @Uint32() external int AdditionalSecurityInfoType;
+  @Uint32() external int u;
+}
+
+class RPC_SECURITY_QOS_V2_A extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Capabilities;
+  @Uint32() external int IdentityTracking;
+  @Uint32() external int ImpersonationType;
+  @Uint32() external int AdditionalSecurityInfoType;
+  @Uint32() external int u;
+}
+
+class RPC_SECURITY_QOS_V3_W extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Capabilities;
+  @Uint32() external int IdentityTracking;
+  @Uint32() external int ImpersonationType;
+  @Uint32() external int AdditionalSecurityInfoType;
+  @Uint32() external int u;
+  external Pointer Sid;
+}
+
+class RPC_SECURITY_QOS_V3_A extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Capabilities;
+  @Uint32() external int IdentityTracking;
+  @Uint32() external int ImpersonationType;
+  @Uint32() external int AdditionalSecurityInfoType;
+  @Uint32() external int u;
+  external Pointer Sid;
+}
+
+class RPC_SECURITY_QOS_V4_W extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Capabilities;
+  @Uint32() external int IdentityTracking;
+  @Uint32() external int ImpersonationType;
+  @Uint32() external int AdditionalSecurityInfoType;
+  @Uint32() external int u;
+  external Pointer Sid;
+  @Uint32() external int EffectiveOnly;
+}
+
+class RPC_SECURITY_QOS_V4_A extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Capabilities;
+  @Uint32() external int IdentityTracking;
+  @Uint32() external int ImpersonationType;
+  @Uint32() external int AdditionalSecurityInfoType;
+  @Uint32() external int u;
+  external Pointer Sid;
+  @Uint32() external int EffectiveOnly;
+}
+
+class RPC_SECURITY_QOS_V5_W extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Capabilities;
+  @Uint32() external int IdentityTracking;
+  @Uint32() external int ImpersonationType;
+  @Uint32() external int AdditionalSecurityInfoType;
+  @Uint32() external int u;
+  external Pointer Sid;
+  @Uint32() external int EffectiveOnly;
+  external Pointer ServerSecurityDescriptor;
+}
+
+class RPC_SECURITY_QOS_V5_A extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Capabilities;
+  @Uint32() external int IdentityTracking;
+  @Uint32() external int ImpersonationType;
+  @Uint32() external int AdditionalSecurityInfoType;
+  @Uint32() external int u;
+  external Pointer Sid;
+  @Uint32() external int EffectiveOnly;
+  external Pointer ServerSecurityDescriptor;
+}
+
+class RPC_BINDING_HANDLE_TEMPLATE_V1_W extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Flags;
+  @Uint32() external int ProtocolSequence;
+  external Pointer<Uint16> NetworkAddress;
+  external Pointer<Uint16> StringEndpoint;
+  @Uint32() external int u1;
+  external GUID ObjectUuid;
+}
+
+class RPC_BINDING_HANDLE_TEMPLATE_V1_A extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Flags;
+  @Uint32() external int ProtocolSequence;
+  external Pointer<Uint8> NetworkAddress;
+  external Pointer<Uint8> StringEndpoint;
+  @Uint32() external int u1;
+  external GUID ObjectUuid;
 }
 
 class RPC_BINDING_HANDLE_SECURITY_V1_W extends Struct {
@@ -344,6 +443,14 @@ class I_RpcProxyCallbackInterface extends Struct {
   external I_RpcProxyUpdatePerfCounterBackendServerFn RpcProxyUpdatePerfCounterBackendServerFn;
 }
 
+class RPC_ASYNC_NOTIFICATION_INFO extends Struct {
+  @Uint32() external int APC;
+  @Uint32() external int IOC;
+  @Uint32() external int IntPtr;
+  @IntPtr() external int hEvent;
+  external PFN_RPCNOTIFICATION_ROUTINE NotificationRoutine;
+}
+
 class RPC_ASYNC_STATE extends Struct {
   @Uint32() external int Size;
   @Uint32() external int Signature;
@@ -361,6 +468,24 @@ class RPC_ASYNC_STATE extends Struct {
 class BinaryParam extends Struct {
   external Pointer Buffer;
   @Int16() external int Size;
+}
+
+class RPC_EE_INFO_PARAM extends Struct {
+  @Uint32() external int ParameterType;
+  @Uint32() external int u;
+}
+
+class RPC_EXTENDED_ERROR_INFO extends Struct {
+  @Uint32() external int Version;
+  external Pointer<Utf16> ComputerName;
+  @Uint32() external int ProcessID;
+  @Uint32() external int u;
+  @Uint32() external int GeneratingComponent;
+  @Uint32() external int Status;
+  @Uint16() external int DetectionLocation;
+  @Uint16() external int Flags;
+  @Int32() external int NumberOfParameters;
+  external RPC_EE_INFO_PARAM Parameters;
 }
 
 class RPC_ERROR_ENUM_HANDLE extends Struct {
@@ -647,6 +772,29 @@ class NDR_EXPR_DESC extends Struct {
   external Pointer<Uint8> pFormatExpr;
 }
 
+class MIDL_STUB_DESC extends Struct {
+  external Pointer RpcInterfaceInformation;
+  @IntPtr() external int pfnAllocate;
+  @IntPtr() external int pfnFree;
+  @Uint32() external int IMPLICIT_HANDLE_INFO;
+  external Pointer<NDR_RUNDOWN> apfnNdrRundownRoutines;
+  external Pointer<GENERIC_BINDING_ROUTINE_PAIR> aGenericBindingRoutinePairs;
+  external Pointer<EXPR_EVAL> apfnExprEval;
+  external Pointer<XMIT_ROUTINE_QUINTUPLE> aXmitQuintuple;
+  external Pointer<Uint8> pFormatTypes;
+  @Int32() external int fCheckBounds;
+  @Uint32() external int Version;
+  external Pointer<MALLOC_FREE_STRUCT> pMallocFreeStruct;
+  @Int32() external int MIDLVersion;
+  external Pointer<COMM_FAULT_OFFSETS> CommFaultOffsets;
+  external Pointer<USER_MARSHAL_ROUTINE_QUADRUPLE> aUserMarshalQuadruple;
+  external Pointer<NDR_NOTIFY_ROUTINE> NotifyRoutineTable;
+  @IntPtr() external int mFlags;
+  external Pointer<NDR_CS_ROUTINES> CsRoutineTables;
+  external Pointer ProxyServerInfo;
+  external Pointer<NDR_EXPR_DESC> pExprInfo;
+}
+
 class MIDL_FORMAT_STRING extends Struct {
   @Int16() external int Pad;
   @Uint8() external int Format;
@@ -735,9 +883,19 @@ class NDR_USER_MARSHAL_INFO_LEVEL1 extends Struct {
   external __uintptr__ Reserved;
 }
 
+class NDR_USER_MARSHAL_INFO extends Struct {
+  @Uint32() external int InformationLevel;
+  @Uint32() external int Anonymous;
+}
+
 class MIDL_TYPE_PICKLING_INFO extends Struct {
   @Uint32() external int Version;
   @Uint32() external int Flags;
   external __uintptr__ Reserved;
+}
+
+class NDR_SCONTEXT_1 extends Struct {
+  external ____ pad;
+  external Pointer userContext;
 }
 

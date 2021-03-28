@@ -43,79 +43,6 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class DISPLAYCONFIG_RATIONAL extends Struct {
-  @Uint32() external int Numerator;
-  @Uint32() external int Denominator;
-}
-
-class DISPLAYCONFIG_2DREGION extends Struct {
-  @Uint32() external int cx;
-  @Uint32() external int cy;
-}
-
-class DISPLAYCONFIG_SOURCE_MODE extends Struct {
-  @Uint32() external int width;
-  @Uint32() external int height;
-  @Uint32() external int pixelFormat;
-  external POINTL position;
-}
-
-class DISPLAYCONFIG_TARGET_MODE extends Struct {
-  external DISPLAYCONFIG_VIDEO_SIGNAL_INFO targetVideoSignalInfo;
-}
-
-class DISPLAYCONFIG_DESKTOP_IMAGE_INFO extends Struct {
-  external POINTL PathSourceSize;
-  external RECTL DesktopImageRegion;
-  external RECTL DesktopImageClip;
-}
-
-class DISPLAYCONFIG_PATH_INFO extends Struct {
-  external DISPLAYCONFIG_PATH_SOURCE_INFO sourceInfo;
-  external DISPLAYCONFIG_PATH_TARGET_INFO targetInfo;
-  @Uint32() external int flags;
-}
-
-class DISPLAYCONFIG_DEVICE_INFO_HEADER extends Struct {
-  @Uint32() external int type;
-  @Uint32() external int size;
-  external LUID adapterId;
-  @Uint32() external int id;
-}
-
-class DISPLAYCONFIG_SOURCE_DEVICE_NAME extends Struct {
-  external DISPLAYCONFIG_DEVICE_INFO_HEADER header;
-  external __ushort__ viewGdiDeviceName;
-}
-
-class DISPLAYCONFIG_TARGET_DEVICE_NAME extends Struct {
-  external DISPLAYCONFIG_DEVICE_INFO_HEADER header;
-  external DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS flags;
-  @Uint32() external int outputTechnology;
-  @Uint16() external int edidManufactureId;
-  @Uint16() external int edidProductCodeId;
-  @Uint32() external int connectorInstance;
-  external __ushort__ monitorFriendlyDeviceName;
-  external __ushort__ monitorDevicePath;
-}
-
-class DISPLAYCONFIG_TARGET_PREFERRED_MODE extends Struct {
-  external DISPLAYCONFIG_DEVICE_INFO_HEADER header;
-  @Uint32() external int width;
-  @Uint32() external int height;
-  external DISPLAYCONFIG_TARGET_MODE targetMode;
-}
-
-class DISPLAYCONFIG_ADAPTER_NAME extends Struct {
-  external DISPLAYCONFIG_DEVICE_INFO_HEADER header;
-  external __ushort__ adapterDevicePath;
-}
-
-class DISPLAYCONFIG_TARGET_BASE_TYPE extends Struct {
-  external DISPLAYCONFIG_DEVICE_INFO_HEADER header;
-  @Uint32() external int baseOutputTechnology;
-}
-
 class RECT extends Struct {
   @Int32() external int left;
   @Int32() external int top;
@@ -150,112 +77,158 @@ class POINTS extends Struct {
   @Int16() external int y;
 }
 
-class DDKERNELCAPS extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwCaps;
-  @Uint32() external int dwIRQCaps;
+class DEVMODEW extends Struct {
+  external __ushort__ dmDeviceName;
+  @Uint16() external int dmSpecVersion;
+  @Uint16() external int dmDriverVersion;
+  @Uint16() external int dmSize;
+  @Uint16() external int dmDriverExtra;
+  @Uint32() external int dmFields;
+  @Uint32() external int Anonymous1;
+  @Int16() external int dmColor;
+  @Int16() external int dmDuplex;
+  @Int16() external int dmYResolution;
+  @Int16() external int dmTTOption;
+  @Int16() external int dmCollate;
+  external __ushort__ dmFormName;
+  @Uint16() external int dmLogPixels;
+  @Uint32() external int dmBitsPerPel;
+  @Uint32() external int dmPelsWidth;
+  @Uint32() external int dmPelsHeight;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int dmDisplayFrequency;
+  @Uint32() external int dmICMMethod;
+  @Uint32() external int dmICMIntent;
+  @Uint32() external int dmMediaType;
+  @Uint32() external int dmDitherType;
+  @Uint32() external int dmReserved1;
+  @Uint32() external int dmReserved2;
+  @Uint32() external int dmPanningWidth;
+  @Uint32() external int dmPanningHeight;
 }
 
-class HEAPALIGNMENT extends Struct {
-  @Uint32() external int dwSize;
-  external DDSCAPS ddsCaps;
-  @Uint32() external int dwReserved;
-  external SURFACEALIGNMENT ExecuteBuffer;
-  external SURFACEALIGNMENT Overlay;
-  external SURFACEALIGNMENT Texture;
-  external SURFACEALIGNMENT ZBuffer;
-  external SURFACEALIGNMENT AlphaBuffer;
-  external SURFACEALIGNMENT Offscreen;
-  external SURFACEALIGNMENT FlipTarget;
+class DISPLAYCONFIG_RATIONAL extends Struct {
+  @Uint32() external int Numerator;
+  @Uint32() external int Denominator;
 }
 
-class VMEMHEAP extends Struct {
-  @Uint32() external int dwFlags;
-  @Uint32() external int stride;
-  external Pointer freeList;
-  external Pointer allocList;
-  @Uint32() external int dwTotalSize;
-  @IntPtr() external int fpGARTLin;
-  @IntPtr() external int fpGARTDev;
-  @Uint32() external int dwCommitedSize;
-  @Uint32() external int dwCoalesceCount;
-  external HEAPALIGNMENT Alignment;
-  external DDSCAPSEX ddsCapsEx;
-  external DDSCAPSEX ddsCapsExAlt;
-  @Int64() external int liPhysAGPBase;
-  @IntPtr() external int hdevAGP;
-  external Pointer pvPhysRsrv;
-  external Pointer<Uint8> pAgpCommitMask;
-  @Uint32() external int dwAgpCommitMaskSize;
+class DISPLAYCONFIG_2DREGION extends Struct {
+  @Uint32() external int cx;
+  @Uint32() external int cy;
 }
 
-class DDCORECAPS extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwCaps;
-  @Uint32() external int dwCaps2;
-  @Uint32() external int dwCKeyCaps;
-  @Uint32() external int dwFXCaps;
-  @Uint32() external int dwFXAlphaCaps;
-  @Uint32() external int dwPalCaps;
-  @Uint32() external int dwSVCaps;
-  @Uint32() external int dwAlphaBltConstBitDepths;
-  @Uint32() external int dwAlphaBltPixelBitDepths;
-  @Uint32() external int dwAlphaBltSurfaceBitDepths;
-  @Uint32() external int dwAlphaOverlayConstBitDepths;
-  @Uint32() external int dwAlphaOverlayPixelBitDepths;
-  @Uint32() external int dwAlphaOverlaySurfaceBitDepths;
-  @Uint32() external int dwZBufferBitDepths;
-  @Uint32() external int dwVidMemTotal;
-  @Uint32() external int dwVidMemFree;
-  @Uint32() external int dwMaxVisibleOverlays;
-  @Uint32() external int dwCurrVisibleOverlays;
-  @Uint32() external int dwNumFourCCCodes;
-  @Uint32() external int dwAlignBoundarySrc;
-  @Uint32() external int dwAlignSizeSrc;
-  @Uint32() external int dwAlignBoundaryDest;
-  @Uint32() external int dwAlignSizeDest;
-  @Uint32() external int dwAlignStrideAlign;
-  external __uint__ dwRops;
-  external DDSCAPS ddsCaps;
-  @Uint32() external int dwMinOverlayStretch;
-  @Uint32() external int dwMaxOverlayStretch;
-  @Uint32() external int dwMinLiveVideoStretch;
-  @Uint32() external int dwMaxLiveVideoStretch;
-  @Uint32() external int dwMinHwCodecStretch;
-  @Uint32() external int dwMaxHwCodecStretch;
-  @Uint32() external int dwReserved1;
-  @Uint32() external int dwReserved2;
-  @Uint32() external int dwReserved3;
-  @Uint32() external int dwSVBCaps;
-  @Uint32() external int dwSVBCKeyCaps;
-  @Uint32() external int dwSVBFXCaps;
-  external __uint__ dwSVBRops;
-  @Uint32() external int dwVSBCaps;
-  @Uint32() external int dwVSBCKeyCaps;
-  @Uint32() external int dwVSBFXCaps;
-  external __uint__ dwVSBRops;
-  @Uint32() external int dwSSBCaps;
-  @Uint32() external int dwSSBCKeyCaps;
-  @Uint32() external int dwSSBFXCaps;
-  external __uint__ dwSSBRops;
-  @Uint32() external int dwMaxVideoPorts;
-  @Uint32() external int dwCurrVideoPorts;
-  @Uint32() external int dwSVBCaps2;
+class DISPLAYCONFIG_VIDEO_SIGNAL_INFO extends Struct {
+  @Uint64() external int pixelRate;
+  external DISPLAYCONFIG_RATIONAL hSyncFreq;
+  external DISPLAYCONFIG_RATIONAL vSyncFreq;
+  external DISPLAYCONFIG_2DREGION activeSize;
+  external DISPLAYCONFIG_2DREGION totalSize;
+  @Uint32() external int Anonymous;
+  @Uint32() external int scanLineOrdering;
 }
 
-class DDHAL_WAITFORVERTICALBLANKDATA extends Struct {
-  external Pointer<DDRAWI_DIRECTDRAW_GBL> lpDD;
-  @Uint32() external int dwFlags;
-  @Uint32() external int bIsInVB;
-  @IntPtr() external int hEvent;
-  @Int32() external int ddRVal;
-  external Pointer<DDHAL_WAITFORVERTICALBLANK> WaitForVerticalBlank;
+class DISPLAYCONFIG_SOURCE_MODE extends Struct {
+  @Uint32() external int width;
+  @Uint32() external int height;
+  @Uint32() external int pixelFormat;
+  external POINTL position;
 }
 
-class DDHAL_DESTROYDDLOCALDATA extends Struct {
-  @Uint32() external int dwFlags;
-  external Pointer<DDRAWI_DIRECTDRAW_LCL> pDDLcl;
-  @Int32() external int ddRVal;
+class DISPLAYCONFIG_TARGET_MODE extends Struct {
+  external DISPLAYCONFIG_VIDEO_SIGNAL_INFO targetVideoSignalInfo;
+}
+
+class DISPLAYCONFIG_DESKTOP_IMAGE_INFO extends Struct {
+  external POINTL PathSourceSize;
+  external RECTL DesktopImageRegion;
+  external RECTL DesktopImageClip;
+}
+
+class DISPLAYCONFIG_MODE_INFO extends Struct {
+  @Uint32() external int infoType;
+  @Uint32() external int id;
+  external LUID adapterId;
+  @Uint32() external int Anonymous;
+}
+
+class DISPLAYCONFIG_PATH_SOURCE_INFO extends Struct {
+  external LUID adapterId;
+  @Uint32() external int id;
+  @Uint32() external int Anonymous;
+  @Uint32() external int statusFlags;
+}
+
+class DISPLAYCONFIG_PATH_TARGET_INFO extends Struct {
+  external LUID adapterId;
+  @Uint32() external int id;
+  @Uint32() external int Anonymous;
+  @Uint32() external int outputTechnology;
+  @Uint32() external int rotation;
+  @Uint32() external int scaling;
+  external DISPLAYCONFIG_RATIONAL refreshRate;
+  @Uint32() external int scanLineOrdering;
+  @Int32() external int targetAvailable;
+  @Uint32() external int statusFlags;
+}
+
+class DISPLAYCONFIG_PATH_INFO extends Struct {
+  external DISPLAYCONFIG_PATH_SOURCE_INFO sourceInfo;
+  external DISPLAYCONFIG_PATH_TARGET_INFO targetInfo;
+  @Uint32() external int flags;
+}
+
+class DISPLAYCONFIG_DEVICE_INFO_HEADER extends Struct {
+  @Uint32() external int type;
+  @Uint32() external int size;
+  external LUID adapterId;
+  @Uint32() external int id;
+}
+
+class DISPLAYCONFIG_SOURCE_DEVICE_NAME extends Struct {
+  external DISPLAYCONFIG_DEVICE_INFO_HEADER header;
+  external __ushort__ viewGdiDeviceName;
+}
+
+class DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS extends Struct {
+  @Uint32() external int Anonymous;
+}
+
+class DISPLAYCONFIG_TARGET_DEVICE_NAME extends Struct {
+  external DISPLAYCONFIG_DEVICE_INFO_HEADER header;
+  external DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS flags;
+  @Uint32() external int outputTechnology;
+  @Uint16() external int edidManufactureId;
+  @Uint16() external int edidProductCodeId;
+  @Uint32() external int connectorInstance;
+  external __ushort__ monitorFriendlyDeviceName;
+  external __ushort__ monitorDevicePath;
+}
+
+class DISPLAYCONFIG_TARGET_PREFERRED_MODE extends Struct {
+  external DISPLAYCONFIG_DEVICE_INFO_HEADER header;
+  @Uint32() external int width;
+  @Uint32() external int height;
+  external DISPLAYCONFIG_TARGET_MODE targetMode;
+}
+
+class DISPLAYCONFIG_ADAPTER_NAME extends Struct {
+  external DISPLAYCONFIG_DEVICE_INFO_HEADER header;
+  external __ushort__ adapterDevicePath;
+}
+
+class DISPLAYCONFIG_TARGET_BASE_TYPE extends Struct {
+  external DISPLAYCONFIG_DEVICE_INFO_HEADER header;
+  @Uint32() external int baseOutputTechnology;
+}
+
+class DISPLAYCONFIG_SET_TARGET_PERSISTENCE extends Struct {
+  external DISPLAYCONFIG_DEVICE_INFO_HEADER header;
+  @Uint32() external int Anonymous;
+}
+
+class DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION extends Struct {
+  external DISPLAYCONFIG_DEVICE_INFO_HEADER header;
+  @Uint32() external int Anonymous;
 }
 
 class VIDEOPARAMETERS extends Struct {
@@ -348,6 +321,15 @@ class DDVIDEOPORTBANDWIDTH extends Struct {
 }
 
 class DD_GETHEAPALIGNMENTDATA extends Struct {
+}
+
+class VIDEOMEMORY extends Struct {
+  @Uint32() external int dwFlags;
+  @IntPtr() external int fpStart;
+  @Uint32() external int Anonymous1;
+  external DDSCAPS ddsCaps;
+  external DDSCAPS ddsCapsAlt;
+  @Uint32() external int Anonymous2;
 }
 
 class VIDEOMEMORYINFO extends Struct {
@@ -512,12 +494,40 @@ class DD_SURFACE_INT extends Struct {
   external Pointer<DD_SURFACE_LOCAL> lpLcl;
 }
 
+class DD_SURFACE_GLOBAL extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  @IntPtr() external int fpVidMem;
+  @Uint32() external int Anonymous3;
+  @Int32() external int yHint;
+  @Int32() external int xHint;
+  @Uint32() external int wHeight;
+  @Uint32() external int wWidth;
+  @IntPtr() external int dwReserved1;
+  external DDPIXELFORMAT ddpfSurface;
+  @IntPtr() external int fpHeapOffset;
+  @IntPtr() external int hCreatorProcess;
+}
+
 class DD_SURFACE_MORE extends Struct {
   @Uint32() external int dwMipMapCount;
   external Pointer<DD_VIDEOPORT_LOCAL> lpVideoPort;
   @Uint32() external int dwOverlayFlags;
   external DDSCAPSEX ddsCapsEx;
   @Uint32() external int dwSurfaceHandle;
+}
+
+class DD_SURFACE_LOCAL extends Struct {
+  external Pointer<DD_SURFACE_GLOBAL> lpGbl;
+  @Uint32() external int dwFlags;
+  external DDSCAPS ddsCaps;
+  @IntPtr() external int dwReserved1;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  external Pointer<DD_SURFACE_MORE> lpSurfMore;
+  external Pointer<DD_ATTACHLIST> lpAttachList;
+  external Pointer<DD_ATTACHLIST> lpAttachListFrom;
+  external RECT rcOverlaySrc;
 }
 
 class DD_D3DBUFCALLBACKS extends Struct {
@@ -577,6 +587,12 @@ class DD_MOTIONCOMP_LOCAL extends Struct {
   external Pointer lpDriverReserved1;
   external Pointer lpDriverReserved2;
   external Pointer lpDriverReserved3;
+}
+
+class DD_MORESURFACECAPS extends Struct {
+  @Uint32() external int dwSize;
+  external DDSCAPSEX ddsCapsMore;
+  external ____ ddsExtendedHeapRestrictions;
 }
 
 class DD_STEREOMODE extends Struct {
@@ -1124,11 +1140,19 @@ class DD_CREATESURFACEEXDATA extends Struct {
   @Int32() external int ddRVal;
 }
 
+class DD_GETDRIVERSTATEDATA extends Struct {
+  @Uint32() external int dwFlags;
+  @Uint32() external int Anonymous;
+  external Pointer<Uint32> lpdwStates;
+  @Uint32() external int dwLength;
+  @Int32() external int ddRVal;
+}
+
 class FD_XFORM extends Struct {
-  @Uint32() external int eXX;
-  @Uint32() external int eXY;
-  @Uint32() external int eYX;
-  @Uint32() external int eYY;
+  @Float() external double eXX;
+  @Float() external double eXY;
+  @Float() external double eYX;
+  @Float() external double eYY;
 }
 
 class FD_DEVICEMETRICS extends Struct {
@@ -1261,6 +1285,7 @@ class IFIMETRICS extends Struct {
   @Uint32() external int cKerningPairs;
   @Uint32() external int ulPanoseCulture;
   external PANOSE panose;
+  external Pointer Align;
 }
 
 class IFIEXTRA extends Struct {
@@ -1301,19 +1326,19 @@ class LINEATTRS extends Struct {
   @Uint32() external int iJoin;
   @Uint32() external int iEndCap;
   external FLOAT_LONG elWidth;
-  @Uint32() external int eMiterLimit;
+  @Float() external double eMiterLimit;
   @Uint32() external int cstyle;
   external Pointer<FLOAT_LONG> pstyle;
   external FLOAT_LONG elStyleState;
 }
 
 class XFORML extends Struct {
-  @Uint32() external int eM11;
-  @Uint32() external int eM12;
-  @Uint32() external int eM21;
-  @Uint32() external int eM22;
-  @Uint32() external int eDx;
-  @Uint32() external int eDy;
+  @Float() external double eM11;
+  @Float() external double eM12;
+  @Float() external double eM21;
+  @Float() external double eM22;
+  @Float() external double eDx;
+  @Float() external double eDy;
 }
 
 class CIECHROMA extends Struct {
@@ -1407,8 +1432,8 @@ class CLIPOBJ extends Struct {
 class DRIVEROBJ extends Struct {
   external Pointer pvObj;
   external FREEOBJPROC pFreeProc;
-  external HDEV hdev;
-  external DHPDEV dhpdev;
+  @IntPtr() external int hdev;
+  @IntPtr() external int dhpdev;
 }
 
 class FONTOBJ extends Struct {
@@ -1438,10 +1463,10 @@ class PATHOBJ extends Struct {
 }
 
 class SURFOBJ extends Struct {
-  external DHSURF dhsurf;
-  external HSURF hsurf;
-  external DHPDEV dhpdev;
-  external HDEV hdev;
+  @IntPtr() external int dhsurf;
+  @IntPtr() external int hsurf;
+  @IntPtr() external int dhpdev;
+  @IntPtr() external int hdev;
   external SIZE sizlBitmap;
   @Uint32() external int cjBits;
   external Pointer pvBits;
@@ -1580,18 +1605,13 @@ class ENGSAFESEMAPHORE extends Struct {
   @Int32() external int lCount;
 }
 
-class FLOATOBJ extends Struct {
-  @Uint32() external int ul1;
-  @Uint32() external int ul2;
-}
-
 class FLOATOBJ_XFORM extends Struct {
-  external FLOATOBJ eM11;
-  external FLOATOBJ eM12;
-  external FLOATOBJ eM21;
-  external FLOATOBJ eM22;
-  external FLOATOBJ eDx;
-  external FLOATOBJ eDy;
+  @Float() external double eM11;
+  @Float() external double eM12;
+  @Float() external double eM21;
+  @Float() external double eM22;
+  @Float() external double eDx;
+  @Float() external double eDy;
 }
 
 class ENG_TIME_FIELDS extends Struct {
@@ -1603,5 +1623,117 @@ class ENG_TIME_FIELDS extends Struct {
   @Uint16() external int usSecond;
   @Uint16() external int usMilliseconds;
   @Uint16() external int usWeekday;
+}
+
+class DDKERNELCAPS extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwCaps;
+  @Uint32() external int dwIRQCaps;
+}
+
+class SURFACEALIGNMENT extends Struct {
+  @Uint32() external int Anonymous;
+}
+
+class HEAPALIGNMENT extends Struct {
+  @Uint32() external int dwSize;
+  external DDSCAPS ddsCaps;
+  @Uint32() external int dwReserved;
+  external SURFACEALIGNMENT ExecuteBuffer;
+  external SURFACEALIGNMENT Overlay;
+  external SURFACEALIGNMENT Texture;
+  external SURFACEALIGNMENT ZBuffer;
+  external SURFACEALIGNMENT AlphaBuffer;
+  external SURFACEALIGNMENT Offscreen;
+  external SURFACEALIGNMENT FlipTarget;
+}
+
+class VMEMHEAP extends Struct {
+  @Uint32() external int dwFlags;
+  @Uint32() external int stride;
+  external Pointer freeList;
+  external Pointer allocList;
+  @Uint32() external int dwTotalSize;
+  @IntPtr() external int fpGARTLin;
+  @IntPtr() external int fpGARTDev;
+  @Uint32() external int dwCommitedSize;
+  @Uint32() external int dwCoalesceCount;
+  external HEAPALIGNMENT Alignment;
+  external DDSCAPSEX ddsCapsEx;
+  external DDSCAPSEX ddsCapsExAlt;
+  @Int64() external int liPhysAGPBase;
+  @IntPtr() external int hdevAGP;
+  external Pointer pvPhysRsrv;
+  external Pointer<Uint8> pAgpCommitMask;
+  @Uint32() external int dwAgpCommitMaskSize;
+}
+
+class DDCORECAPS extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwCaps;
+  @Uint32() external int dwCaps2;
+  @Uint32() external int dwCKeyCaps;
+  @Uint32() external int dwFXCaps;
+  @Uint32() external int dwFXAlphaCaps;
+  @Uint32() external int dwPalCaps;
+  @Uint32() external int dwSVCaps;
+  @Uint32() external int dwAlphaBltConstBitDepths;
+  @Uint32() external int dwAlphaBltPixelBitDepths;
+  @Uint32() external int dwAlphaBltSurfaceBitDepths;
+  @Uint32() external int dwAlphaOverlayConstBitDepths;
+  @Uint32() external int dwAlphaOverlayPixelBitDepths;
+  @Uint32() external int dwAlphaOverlaySurfaceBitDepths;
+  @Uint32() external int dwZBufferBitDepths;
+  @Uint32() external int dwVidMemTotal;
+  @Uint32() external int dwVidMemFree;
+  @Uint32() external int dwMaxVisibleOverlays;
+  @Uint32() external int dwCurrVisibleOverlays;
+  @Uint32() external int dwNumFourCCCodes;
+  @Uint32() external int dwAlignBoundarySrc;
+  @Uint32() external int dwAlignSizeSrc;
+  @Uint32() external int dwAlignBoundaryDest;
+  @Uint32() external int dwAlignSizeDest;
+  @Uint32() external int dwAlignStrideAlign;
+  external __uint__ dwRops;
+  external DDSCAPS ddsCaps;
+  @Uint32() external int dwMinOverlayStretch;
+  @Uint32() external int dwMaxOverlayStretch;
+  @Uint32() external int dwMinLiveVideoStretch;
+  @Uint32() external int dwMaxLiveVideoStretch;
+  @Uint32() external int dwMinHwCodecStretch;
+  @Uint32() external int dwMaxHwCodecStretch;
+  @Uint32() external int dwReserved1;
+  @Uint32() external int dwReserved2;
+  @Uint32() external int dwReserved3;
+  @Uint32() external int dwSVBCaps;
+  @Uint32() external int dwSVBCKeyCaps;
+  @Uint32() external int dwSVBFXCaps;
+  external __uint__ dwSVBRops;
+  @Uint32() external int dwVSBCaps;
+  @Uint32() external int dwVSBCKeyCaps;
+  @Uint32() external int dwVSBFXCaps;
+  external __uint__ dwVSBRops;
+  @Uint32() external int dwSSBCaps;
+  @Uint32() external int dwSSBCKeyCaps;
+  @Uint32() external int dwSSBFXCaps;
+  external __uint__ dwSSBRops;
+  @Uint32() external int dwMaxVideoPorts;
+  @Uint32() external int dwCurrVideoPorts;
+  @Uint32() external int dwSVBCaps2;
+}
+
+class DDHAL_WAITFORVERTICALBLANKDATA extends Struct {
+  external Pointer<DDRAWI_DIRECTDRAW_GBL> lpDD;
+  @Uint32() external int dwFlags;
+  @Uint32() external int bIsInVB;
+  @IntPtr() external int hEvent;
+  @Int32() external int ddRVal;
+  external Pointer<DDHAL_WAITFORVERTICALBLANK> WaitForVerticalBlank;
+}
+
+class DDHAL_DESTROYDDLOCALDATA extends Struct {
+  @Uint32() external int dwFlags;
+  external Pointer<DDRAWI_DIRECTDRAW_LCL> pDDLcl;
+  @Int32() external int ddRVal;
 }
 

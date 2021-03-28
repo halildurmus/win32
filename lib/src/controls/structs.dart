@@ -43,7 +43,7 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class HIMAGELIST extends Struct {
+class HSYNTHETICPOINTERDEVICE extends Struct {
   @IntPtr() external int Value;
 }
 
@@ -51,7 +51,7 @@ class HPROPSHEETPAGE extends Struct {
   @IntPtr() external int Value;
 }
 
-class HSYNTHETICPOINTERDEVICE extends Struct {
+class HIMAGELIST extends Struct {
   @IntPtr() external int Value;
 }
 
@@ -59,154 +59,184 @@ class HTREEITEM extends Struct {
   @IntPtr() external int Value;
 }
 
-class NMHDR extends Struct {
-  @IntPtr() external int hwndFrom;
-  @IntPtr() external int idFrom;
-  @Uint32() external int code;
+class PROPSHEETPAGEA_V1 extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwFlags;
+  @IntPtr() external int hInstance;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  external Pointer<Utf8> pszTitle;
+  external Pointer<NativeFunction<DlgProc>> pfnDlgProc;
+  @IntPtr() external int lParam;
+  external Pointer<FNPSPCALLBACKA> pfnCallback;
+  external Pointer<Uint32> pcRefParent;
 }
 
-class MEASUREITEMSTRUCT extends Struct {
-  @Uint32() external int CtlType;
-  @Uint32() external int CtlID;
-  @Uint32() external int itemID;
-  @Uint32() external int itemWidth;
-  @Uint32() external int itemHeight;
-  @IntPtr() external int itemData;
+class PROPSHEETPAGEA_V2 extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwFlags;
+  @IntPtr() external int hInstance;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  external Pointer<Utf8> pszTitle;
+  external Pointer<NativeFunction<DlgProc>> pfnDlgProc;
+  @IntPtr() external int lParam;
+  external Pointer<FNPSPCALLBACKA> pfnCallback;
+  external Pointer<Uint32> pcRefParent;
+  external Pointer<Utf8> pszHeaderTitle;
+  external Pointer<Utf8> pszHeaderSubTitle;
 }
 
-class DRAWITEMSTRUCT extends Struct {
-  @Uint32() external int CtlType;
-  @Uint32() external int CtlID;
-  @Uint32() external int itemID;
-  @Uint32() external int itemAction;
-  @Uint32() external int itemState;
-  @IntPtr() external int hwndItem;
-  @IntPtr() external int hDC;
-  external RECT rcItem;
-  @IntPtr() external int itemData;
+class PROPSHEETPAGEA_V3 extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwFlags;
+  @IntPtr() external int hInstance;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  external Pointer<Utf8> pszTitle;
+  external Pointer<NativeFunction<DlgProc>> pfnDlgProc;
+  @IntPtr() external int lParam;
+  external Pointer<FNPSPCALLBACKA> pfnCallback;
+  external Pointer<Uint32> pcRefParent;
+  external Pointer<Utf8> pszHeaderTitle;
+  external Pointer<Utf8> pszHeaderSubTitle;
+  @IntPtr() external int hActCtx;
 }
 
-class DELETEITEMSTRUCT extends Struct {
-  @Uint32() external int CtlType;
-  @Uint32() external int CtlID;
-  @Uint32() external int itemID;
-  @IntPtr() external int hwndItem;
-  @IntPtr() external int itemData;
+class PROPSHEETPAGEA extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwFlags;
+  @IntPtr() external int hInstance;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  external Pointer<Utf8> pszTitle;
+  external Pointer<NativeFunction<DlgProc>> pfnDlgProc;
+  @IntPtr() external int lParam;
+  external Pointer<FNPSPCALLBACKA> pfnCallback;
+  external Pointer<Uint32> pcRefParent;
+  external Pointer<Utf8> pszHeaderTitle;
+  external Pointer<Utf8> pszHeaderSubTitle;
+  @IntPtr() external int hActCtx;
+  @Uint32() external int Anonymous3;
 }
 
-class COMPAREITEMSTRUCT extends Struct {
-  @Uint32() external int CtlType;
-  @Uint32() external int CtlID;
-  @IntPtr() external int hwndItem;
-  @Uint32() external int itemID1;
-  @IntPtr() external int itemData1;
-  @Uint32() external int itemID2;
-  @IntPtr() external int itemData2;
-  @Uint32() external int dwLocaleId;
+class PROPSHEETPAGEW_V1 extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwFlags;
+  @IntPtr() external int hInstance;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  external Pointer<Utf16> pszTitle;
+  external Pointer<NativeFunction<DlgProc>> pfnDlgProc;
+  @IntPtr() external int lParam;
+  external Pointer<FNPSPCALLBACKW> pfnCallback;
+  external Pointer<Uint32> pcRefParent;
 }
 
-class USAGE_PROPERTIES extends Struct {
-  @Uint16() external int level;
-  @Uint16() external int page;
-  @Uint16() external int usage;
-  @Int32() external int logicalMinimum;
-  @Int32() external int logicalMaximum;
-  @Uint16() external int unit;
-  @Uint16() external int exponent;
-  @Uint8() external int count;
-  @Int32() external int physicalMinimum;
-  @Int32() external int physicalMaximum;
+class PROPSHEETPAGEW_V2 extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwFlags;
+  @IntPtr() external int hInstance;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  external Pointer<Utf16> pszTitle;
+  external Pointer<NativeFunction<DlgProc>> pfnDlgProc;
+  @IntPtr() external int lParam;
+  external Pointer<FNPSPCALLBACKW> pfnCallback;
+  external Pointer<Uint32> pcRefParent;
+  external Pointer<Utf16> pszHeaderTitle;
+  external Pointer<Utf16> pszHeaderSubTitle;
 }
 
-class INPUT_INJECTION_VALUE extends Struct {
-  @Uint16() external int page;
-  @Uint16() external int usage;
-  @Int32() external int value;
-  @Uint16() external int index;
+class PROPSHEETPAGEW_V3 extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwFlags;
+  @IntPtr() external int hInstance;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  external Pointer<Utf16> pszTitle;
+  external Pointer<NativeFunction<DlgProc>> pfnDlgProc;
+  @IntPtr() external int lParam;
+  external Pointer<FNPSPCALLBACKW> pfnCallback;
+  external Pointer<Uint32> pcRefParent;
+  external Pointer<Utf16> pszHeaderTitle;
+  external Pointer<Utf16> pszHeaderSubTitle;
+  @IntPtr() external int hActCtx;
 }
 
-class TOUCH_HIT_TESTING_PROXIMITY_EVALUATION extends Struct {
-  @Uint16() external int score;
-  external POINT adjustedPoint;
+class PROPSHEETPAGEW extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwFlags;
+  @IntPtr() external int hInstance;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  external Pointer<Utf16> pszTitle;
+  external Pointer<NativeFunction<DlgProc>> pfnDlgProc;
+  @IntPtr() external int lParam;
+  external Pointer<FNPSPCALLBACKW> pfnCallback;
+  external Pointer<Uint32> pcRefParent;
+  external Pointer<Utf16> pszHeaderTitle;
+  external Pointer<Utf16> pszHeaderSubTitle;
+  @IntPtr() external int hActCtx;
+  @Uint32() external int Anonymous3;
 }
 
-class TOUCH_HIT_TESTING_INPUT extends Struct {
-  @Uint32() external int pointerId;
-  external POINT point;
-  external RECT boundingBox;
-  external RECT nonOccludedBoundingBox;
-  @Uint32() external int orientation;
+class PROPSHEETHEADERA_V1 extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwFlags;
+  @IntPtr() external int hwndParent;
+  @IntPtr() external int hInstance;
+  @Uint32() external int Anonymous1;
+  external Pointer<Utf8> pszCaption;
+  @Uint32() external int nPages;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Anonymous3;
+  external PFNPROPSHEETCALLBACK pfnCallback;
 }
 
-class SCROLLINFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int fMask;
-  @Int32() external int nMin;
-  @Int32() external int nMax;
-  @Uint32() external int nPage;
-  @Int32() external int nPos;
-  @Int32() external int nTrackPos;
+class PROPSHEETHEADERA_V2 extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwFlags;
+  @IntPtr() external int hwndParent;
+  @IntPtr() external int hInstance;
+  @Uint32() external int Anonymous1;
+  external Pointer<Utf8> pszCaption;
+  @Uint32() external int nPages;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Anonymous3;
+  external PFNPROPSHEETCALLBACK pfnCallback;
+  @Uint32() external int Anonymous4;
+  @IntPtr() external int hplWatermark;
+  @Uint32() external int Anonymous5;
 }
 
-class SCROLLBARINFO extends Struct {
-  @Uint32() external int cbSize;
-  external RECT rcScrollBar;
-  @Int32() external int dxyLineButton;
-  @Int32() external int xyThumbTop;
-  @Int32() external int xyThumbBottom;
-  @Int32() external int reserved;
-  external __uint__ rgstate;
+class PROPSHEETHEADERW_V1 extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwFlags;
+  @IntPtr() external int hwndParent;
+  @IntPtr() external int hInstance;
+  @Uint32() external int Anonymous1;
+  external Pointer<Utf16> pszCaption;
+  @Uint32() external int nPages;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Anonymous3;
+  external PFNPROPSHEETCALLBACK pfnCallback;
 }
 
-class COMBOBOXINFO extends Struct {
-  @Uint32() external int cbSize;
-  external RECT rcItem;
-  external RECT rcButton;
-  @Uint32() external int stateButton;
-  @IntPtr() external int hwndCombo;
-  @IntPtr() external int hwndItem;
-  @IntPtr() external int hwndList;
-}
-
-class POINTER_DEVICE_INFO extends Struct {
-  @Uint32() external int displayOrientation;
-  @IntPtr() external int device;
-  @Uint32() external int pointerDeviceType;
-  @IntPtr() external int monitor;
-  @Uint32() external int startingCursorId;
-  @Uint16() external int maxActiveContacts;
-  external __ushort__ productString;
-}
-
-class POINTER_DEVICE_PROPERTY extends Struct {
-  @Int32() external int logicalMin;
-  @Int32() external int logicalMax;
-  @Int32() external int physicalMin;
-  @Int32() external int physicalMax;
-  @Uint32() external int unit;
-  @Uint32() external int unitExponent;
-  @Uint16() external int usagePageId;
-  @Uint16() external int usageId;
-}
-
-class POINTER_DEVICE_CURSOR_INFO extends Struct {
-  @Uint32() external int cursorId;
-  @Uint32() external int cursor;
-}
-
-class INPUT_MESSAGE_SOURCE extends Struct {
-  @Uint32() external int deviceType;
-  @Uint32() external int originId;
-}
-
-class CRGB extends Struct {
-  @Uint8() external int bRed;
-  @Uint8() external int bGreen;
-  @Uint8() external int bBlue;
-  @Uint8() external int bExtra;
-}
-
-class _PSP extends Struct {
+class PROPSHEETHEADERW_V2 extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwFlags;
+  @IntPtr() external int hwndParent;
+  @IntPtr() external int hInstance;
+  @Uint32() external int Anonymous1;
+  external Pointer<Utf16> pszCaption;
+  @Uint32() external int nPages;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Anonymous3;
+  external PFNPROPSHEETCALLBACK pfnCallback;
+  @Uint32() external int Anonymous4;
+  @IntPtr() external int hplWatermark;
+  @Uint32() external int Anonymous5;
 }
 
 class PSHNOTIFY extends Struct {
@@ -297,7 +327,7 @@ class _IMAGELIST extends Struct {
 
 class IMAGELISTDRAWPARAMS extends Struct {
   @Uint32() external int cbSize;
-  external HIMAGELIST himl;
+  @IntPtr() external int himl;
   @Int32() external int i;
   @IntPtr() external int hdcDst;
   @Int32() external int x;
@@ -447,7 +477,7 @@ class NMTBCUSTOMDRAW extends Struct {
 }
 
 class TBADDBITMAP extends Struct {
-  @Uint32() external int hInst;
+  @IntPtr() external int hInst;
   @IntPtr() external int nID;
 }
 
@@ -598,7 +628,7 @@ class NMTOOLBARW extends Struct {
 class REBARINFO extends Struct {
   @Uint32() external int cbSize;
   @Uint32() external int fMask;
-  external HIMAGELIST himl;
+  @IntPtr() external int himl;
 }
 
 class REBARBANDINFOA extends Struct {
@@ -1211,6 +1241,18 @@ class TVITEMEXW extends Struct {
   @Int32() external int iReserved;
 }
 
+class TVINSERTSTRUCTA extends Struct {
+  external Pointer<_TREEITEM> hParent;
+  external Pointer<_TREEITEM> hInsertAfter;
+  @Uint32() external int Anonymous;
+}
+
+class TVINSERTSTRUCTW extends Struct {
+  external Pointer<_TREEITEM> hParent;
+  external Pointer<_TREEITEM> hInsertAfter;
+  @Uint32() external int Anonymous;
+}
+
 class TVHITTESTINFO extends Struct {
   external POINT pt;
   @Uint32() external int flags;
@@ -1247,12 +1289,12 @@ class NMTREEVIEWW extends Struct {
 
 class NMTVDISPINFOA extends Struct {
   external NMHDR hdr;
-  @Uint32() external int item;
+  external TVITEMA item;
 }
 
 class NMTVDISPINFOW extends Struct {
   external NMHDR hdr;
-  @Uint32() external int item;
+  external TVITEMW item;
 }
 
 class NMTVDISPINFOEXA extends Struct {
@@ -1573,7 +1615,7 @@ class NMPGHOTITEM extends Struct {
 }
 
 class BUTTON_IMAGELIST extends Struct {
-  external HIMAGELIST himl;
+  @IntPtr() external int himl;
   external RECT margin;
   @Uint32() external int uAlign;
 }
@@ -1585,7 +1627,7 @@ class NMBCHOTITEM extends Struct {
 
 class BUTTON_SPLITINFO extends Struct {
   @Uint32() external int mask;
-  external HIMAGELIST himlGlyph;
+  @IntPtr() external int himlGlyph;
   @Uint32() external int uSplitStyle;
   external SIZE size;
 }
@@ -1612,6 +1654,33 @@ class NMSEARCHWEB extends Struct {
 class TASKDIALOG_BUTTON extends Struct {
   @Int32() external int nButtonID;
   external Pointer<Utf16> pszButtonText;
+}
+
+class TASKDIALOGCONFIG extends Struct {
+  @Uint32() external int cbSize;
+  @IntPtr() external int hwndParent;
+  @IntPtr() external int hInstance;
+  @Int32() external int dwFlags;
+  @Int32() external int dwCommonButtons;
+  external Pointer<Utf16> pszWindowTitle;
+  @Uint32() external int Anonymous1;
+  external Pointer<Utf16> pszMainInstruction;
+  external Pointer<Utf16> pszContent;
+  @Uint32() external int cButtons;
+  external Pointer<TASKDIALOG_BUTTON> pButtons;
+  @Int32() external int nDefaultButton;
+  @Uint32() external int cRadioButtons;
+  external Pointer<TASKDIALOG_BUTTON> pRadioButtons;
+  @Int32() external int nDefaultRadioButton;
+  external Pointer<Utf16> pszVerificationText;
+  external Pointer<Utf16> pszExpandedInformation;
+  external Pointer<Utf16> pszExpandedControlText;
+  external Pointer<Utf16> pszCollapsedControlText;
+  @Uint32() external int Anonymous2;
+  external Pointer<Utf16> pszFooter;
+  external PFTASKDIALOGCALLBACK pfCallback;
+  @IntPtr() external int lpCallbackData;
+  @Uint32() external int cxWidth;
 }
 
 class _DSA extends Struct {
@@ -1708,6 +1777,36 @@ class CHARFORMATW extends Struct {
   external __ushort__ szFaceName;
 }
 
+class CHARFORMAT2W extends Struct {
+  external CHARFORMATW __AnonymousBase_richedit_L711_C23;
+  @Uint16() external int wWeight;
+  @Int16() external int sSpacing;
+  @Uint32() external int crBackColor;
+  @Uint32() external int lcid;
+  @Uint32() external int Anonymous;
+  @Int16() external int sStyle;
+  @Uint16() external int wKerning;
+  @Uint8() external int bUnderlineType;
+  @Uint8() external int bAnimation;
+  @Uint8() external int bRevAuthor;
+  @Uint8() external int bUnderlineColor;
+}
+
+class CHARFORMAT2A extends Struct {
+  external CHARFORMATA __AnonymousBase_richedit_L736_C23;
+  @Uint16() external int wWeight;
+  @Int16() external int sSpacing;
+  @Uint32() external int crBackColor;
+  @Uint32() external int lcid;
+  @Uint32() external int Anonymous;
+  @Int16() external int sStyle;
+  @Uint16() external int wKerning;
+  @Uint8() external int bUnderlineType;
+  @Uint8() external int bAnimation;
+  @Uint8() external int bRevAuthor;
+  @Uint8() external int bUnderlineColor;
+}
+
 class CHARRANGE extends Struct {
   @Int32() external int cpMin;
   @Int32() external int cpMax;
@@ -1759,13 +1858,26 @@ class FORMATRANGE extends Struct {
   external CHARRANGE chrg;
 }
 
+class PARAFORMAT extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwMask;
+  @Uint16() external int wNumbering;
+  @Uint32() external int Anonymous;
+  @Int32() external int dxStartIndent;
+  @Int32() external int dxRightIndent;
+  @Int32() external int dxOffset;
+  @Uint32() external int wAlignment;
+  @Int16() external int cTabCount;
+  external __uint__ rgxTabs;
+}
+
 class PARAFORMAT2 extends Struct {
   external PARAFORMAT __AnonymousBase_richedit_L1149_C22;
   @Int32() external int dySpaceBefore;
   @Int32() external int dySpaceAfter;
   @Int32() external int dyLineSpacing;
   @Int16() external int sStyle;
-  @Uint32() external int bLineSpacingRule;
+  @Uint8() external int bLineSpacingRule;
   @Uint8() external int bOutlineLevel;
   @Uint16() external int wShadingWeight;
   @Uint32() external int wShadingStyle;
@@ -2041,5 +2153,150 @@ class BP_PAINTPARAMS extends Struct {
   @Uint32() external int dwFlags;
   external Pointer<RECT> prcExclude;
   external Pointer<BLENDFUNCTION> pBlendFunction;
+}
+
+class NMHDR extends Struct {
+  @IntPtr() external int hwndFrom;
+  @IntPtr() external int idFrom;
+  @Uint32() external int code;
+}
+
+class MEASUREITEMSTRUCT extends Struct {
+  @Uint32() external int CtlType;
+  @Uint32() external int CtlID;
+  @Uint32() external int itemID;
+  @Uint32() external int itemWidth;
+  @Uint32() external int itemHeight;
+  @IntPtr() external int itemData;
+}
+
+class DRAWITEMSTRUCT extends Struct {
+  @Uint32() external int CtlType;
+  @Uint32() external int CtlID;
+  @Uint32() external int itemID;
+  @Uint32() external int itemAction;
+  @Uint32() external int itemState;
+  @IntPtr() external int hwndItem;
+  @IntPtr() external int hDC;
+  external RECT rcItem;
+  @IntPtr() external int itemData;
+}
+
+class DELETEITEMSTRUCT extends Struct {
+  @Uint32() external int CtlType;
+  @Uint32() external int CtlID;
+  @Uint32() external int itemID;
+  @IntPtr() external int hwndItem;
+  @IntPtr() external int itemData;
+}
+
+class COMPAREITEMSTRUCT extends Struct {
+  @Uint32() external int CtlType;
+  @Uint32() external int CtlID;
+  @IntPtr() external int hwndItem;
+  @Uint32() external int itemID1;
+  @IntPtr() external int itemData1;
+  @Uint32() external int itemID2;
+  @IntPtr() external int itemData2;
+  @Uint32() external int dwLocaleId;
+}
+
+class USAGE_PROPERTIES extends Struct {
+  @Uint16() external int level;
+  @Uint16() external int page;
+  @Uint16() external int usage;
+  @Int32() external int logicalMinimum;
+  @Int32() external int logicalMaximum;
+  @Uint16() external int unit;
+  @Uint16() external int exponent;
+  @Uint8() external int count;
+  @Int32() external int physicalMinimum;
+  @Int32() external int physicalMaximum;
+}
+
+class POINTER_TYPE_INFO extends Struct {
+  @Uint32() external int type;
+  @Uint32() external int Anonymous;
+}
+
+class INPUT_INJECTION_VALUE extends Struct {
+  @Uint16() external int page;
+  @Uint16() external int usage;
+  @Int32() external int value;
+  @Uint16() external int index;
+}
+
+class TOUCH_HIT_TESTING_PROXIMITY_EVALUATION extends Struct {
+  @Uint16() external int score;
+  external POINT adjustedPoint;
+}
+
+class TOUCH_HIT_TESTING_INPUT extends Struct {
+  @Uint32() external int pointerId;
+  external POINT point;
+  external RECT boundingBox;
+  external RECT nonOccludedBoundingBox;
+  @Uint32() external int orientation;
+}
+
+class SCROLLINFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int fMask;
+  @Int32() external int nMin;
+  @Int32() external int nMax;
+  @Uint32() external int nPage;
+  @Int32() external int nPos;
+  @Int32() external int nTrackPos;
+}
+
+class SCROLLBARINFO extends Struct {
+  @Uint32() external int cbSize;
+  external RECT rcScrollBar;
+  @Int32() external int dxyLineButton;
+  @Int32() external int xyThumbTop;
+  @Int32() external int xyThumbBottom;
+  @Int32() external int reserved;
+  external __uint__ rgstate;
+}
+
+class COMBOBOXINFO extends Struct {
+  @Uint32() external int cbSize;
+  external RECT rcItem;
+  external RECT rcButton;
+  @Uint32() external int stateButton;
+  @IntPtr() external int hwndCombo;
+  @IntPtr() external int hwndItem;
+  @IntPtr() external int hwndList;
+}
+
+class POINTER_DEVICE_INFO extends Struct {
+  @Uint32() external int displayOrientation;
+  @IntPtr() external int device;
+  @Uint32() external int pointerDeviceType;
+  @IntPtr() external int monitor;
+  @Uint32() external int startingCursorId;
+  @Uint16() external int maxActiveContacts;
+  external __ushort__ productString;
+}
+
+class POINTER_DEVICE_PROPERTY extends Struct {
+  @Int32() external int logicalMin;
+  @Int32() external int logicalMax;
+  @Int32() external int physicalMin;
+  @Int32() external int physicalMax;
+  @Uint32() external int unit;
+  @Uint32() external int unitExponent;
+  @Uint16() external int usagePageId;
+  @Uint16() external int usageId;
+}
+
+class POINTER_DEVICE_CURSOR_INFO extends Struct {
+  @Uint32() external int cursorId;
+  @Uint32() external int cursor;
+}
+
+class INPUT_MESSAGE_SOURCE extends Struct {
+  @Uint32() external int deviceType;
+  @Uint32() external int originId;
 }
 

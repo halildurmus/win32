@@ -43,13 +43,13 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class COMPRESSOR_HANDLE extends Struct {
+  @IntPtr() external int Value;
+}
+
 class COMPRESS_ALLOCATION_ROUTINES extends Struct {
   external PFN_COMPRESS_ALLOCATE Allocate;
   external PFN_COMPRESS_FREE Free;
   external Pointer UserContext;
-}
-
-class COMPRESSOR_HANDLE extends Struct {
-  @IntPtr() external int Value;
 }
 

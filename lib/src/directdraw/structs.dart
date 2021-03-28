@@ -60,12 +60,51 @@ class DDRGBA extends Struct {
   @Uint8() external int alpha;
 }
 
+class DDBLTFX extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwDDFX;
+  @Uint32() external int dwROP;
+  @Uint32() external int dwDDROP;
+  @Uint32() external int dwRotationAngle;
+  @Uint32() external int dwZBufferOpCode;
+  @Uint32() external int dwZBufferLow;
+  @Uint32() external int dwZBufferHigh;
+  @Uint32() external int dwZBufferBaseDest;
+  @Uint32() external int dwZDestConstBitDepth;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int dwZSrcConstBitDepth;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int dwAlphaEdgeBlendBitDepth;
+  @Uint32() external int dwAlphaEdgeBlend;
+  @Uint32() external int dwReserved;
+  @Uint32() external int dwAlphaDestConstBitDepth;
+  @Uint32() external int Anonymous3;
+  @Uint32() external int dwAlphaSrcConstBitDepth;
+  @Uint32() external int Anonymous4;
+  @Uint32() external int Anonymous5;
+  external DDCOLORKEY ddckDestColorkey;
+  external DDCOLORKEY ddckSrcColorkey;
+}
+
 class DDSCAPS extends Struct {
   @Uint32() external int dwCaps;
 }
 
 class DDOSCAPS extends Struct {
   @Uint32() external int dwCaps;
+}
+
+class DDSCAPSEX extends Struct {
+  @Uint32() external int dwCaps2;
+  @Uint32() external int dwCaps3;
+  @Uint32() external int Anonymous;
+}
+
+class DDSCAPS2 extends Struct {
+  @Uint32() external int dwCaps;
+  @Uint32() external int dwCaps2;
+  @Uint32() external int dwCaps3;
+  @Uint32() external int Anonymous;
 }
 
 class DDCAPS_DX1 extends Struct {
@@ -340,6 +379,32 @@ class DDCAPS_DX7 extends Struct {
   external DDSCAPS2 ddsCaps;
 }
 
+class DDPIXELFORMAT extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwFourCC;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Anonymous3;
+  @Uint32() external int Anonymous4;
+  @Uint32() external int Anonymous5;
+}
+
+class DDOVERLAYFX extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwAlphaEdgeBlendBitDepth;
+  @Uint32() external int dwAlphaEdgeBlend;
+  @Uint32() external int dwReserved;
+  @Uint32() external int dwAlphaDestConstBitDepth;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int dwAlphaSrcConstBitDepth;
+  @Uint32() external int Anonymous2;
+  external DDCOLORKEY dckDestColorkey;
+  external DDCOLORKEY dckSrcColorkey;
+  @Uint32() external int dwDDFX;
+  @Uint32() external int dwFlags;
+}
+
 class DDBLTBATCH extends Struct {
   external Pointer<RECT> lprDest;
   external Pointer lpDDSSrc;
@@ -375,6 +440,45 @@ class DDDEVICEIDENTIFIER2 extends Struct {
   @Uint32() external int dwRevision;
   external GUID guidDeviceIdentifier;
   @Uint32() external int dwWHQLLevel;
+}
+
+class DDSURFACEDESC extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwHeight;
+  @Uint32() external int dwWidth;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int dwBackBufferCount;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int dwAlphaBitDepth;
+  @Uint32() external int dwReserved;
+  external Pointer lpSurface;
+  external DDCOLORKEY ddckCKDestOverlay;
+  external DDCOLORKEY ddckCKDestBlt;
+  external DDCOLORKEY ddckCKSrcOverlay;
+  external DDCOLORKEY ddckCKSrcBlt;
+  external DDPIXELFORMAT ddpfPixelFormat;
+  external DDSCAPS ddsCaps;
+}
+
+class DDSURFACEDESC2 extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwHeight;
+  @Uint32() external int dwWidth;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Anonymous3;
+  @Uint32() external int dwAlphaBitDepth;
+  @Uint32() external int dwReserved;
+  external Pointer lpSurface;
+  @Uint32() external int Anonymous4;
+  external DDCOLORKEY ddckCKDestBlt;
+  external DDCOLORKEY ddckCKSrcOverlay;
+  external DDCOLORKEY ddckCKSrcBlt;
+  @Uint32() external int Anonymous5;
+  external DDSCAPS2 ddsCaps;
+  @Uint32() external int dwTextureStage;
 }
 
 class DDOPTSURFACEDESC extends Struct {

@@ -323,6 +323,12 @@ class NDIS_802_11_AUTHENTICATION_EVENT extends Struct {
   external NDIS_802_11_AUTHENTICATION_REQUEST Request;
 }
 
+class NDIS_802_11_TEST extends Struct {
+  @Uint32() external int Length;
+  @Uint32() external int Type;
+  @Uint32() external int Anonymous;
+}
+
 class BSSID_INFO extends Struct {
   external __ubyte__ BSSID;
   external __ubyte__ PMKID;
@@ -529,6 +535,13 @@ class NDIS_LINK_SPEED extends Struct {
   @Uint64() external int RcvLinkSpeed;
 }
 
+class NDIS_GUID extends Struct {
+  external GUID Guid;
+  @Uint32() external int Anonymous;
+  @Uint32() external int Size;
+  @Uint32() external int Flags;
+}
+
 class NDIS_IRDA_PACKET_INFO extends Struct {
   @Uint32() external int ExtraBOFs;
   @Uint32() external int MinTurnAroundTime;
@@ -594,6 +607,28 @@ class NDIS_OFFLOAD_PARAMETERS extends Struct {
   @Uint32() external int Flags;
 }
 
+class NDIS_TCP_LARGE_SEND_OFFLOAD_V1 extends Struct {
+  @Uint32() external int IPv4;
+}
+
+class NDIS_TCP_IP_CHECKSUM_OFFLOAD extends Struct {
+  @Uint32() external int IPv4Transmit;
+  @Uint32() external int IPv4Receive;
+  @Uint32() external int IPv6Transmit;
+  @Uint32() external int IPv6Receive;
+}
+
+class NDIS_IPSEC_OFFLOAD_V1 extends Struct {
+  @Uint32() external int Supported;
+  @Uint32() external int IPv4AH;
+  @Uint32() external int IPv4ESP;
+}
+
+class NDIS_TCP_LARGE_SEND_OFFLOAD_V2 extends Struct {
+  @Uint32() external int IPv4;
+  @Uint32() external int IPv6;
+}
+
 class NDIS_OFFLOAD extends Struct {
   external NDIS_OBJECT_HEADER Header;
   external NDIS_TCP_IP_CHECKSUM_OFFLOAD Checksum;
@@ -601,6 +636,28 @@ class NDIS_OFFLOAD extends Struct {
   external NDIS_IPSEC_OFFLOAD_V1 IPsecV1;
   external NDIS_TCP_LARGE_SEND_OFFLOAD_V2 LsoV2;
   @Uint32() external int Flags;
+}
+
+class NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1 extends Struct {
+  @Uint32() external int IPv4;
+}
+
+class NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD extends Struct {
+  @Uint32() external int IPv4Transmit;
+  @Uint32() external int IPv4Receive;
+  @Uint32() external int IPv6Transmit;
+  @Uint32() external int IPv6Receive;
+}
+
+class NDIS_WMI_IPSEC_OFFLOAD_V1 extends Struct {
+  @Uint32() external int Supported;
+  @Uint32() external int IPv4AH;
+  @Uint32() external int IPv4ESP;
+}
+
+class NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2 extends Struct {
+  @Uint32() external int IPv4;
+  @Uint32() external int IPv6;
 }
 
 class NDIS_WMI_OFFLOAD extends Struct {
@@ -1128,6 +1185,13 @@ class DOT11_RECV_SENSITIVITY extends Struct {
   @Int32() external int lRSSIMax;
 }
 
+class DOT11_RECV_SENSITIVITY_LIST extends Struct {
+  @Uint32() external int Anonymous;
+  @Uint32() external int uNumOfEntries;
+  @Uint32() external int uTotalNumOfEntries;
+  external DOT11_RECV_SENSITIVITY dot11RecvSensitivity;
+}
+
 class DOT11_WME_AC_PARAMETERS extends Struct {
   @Uint8() external int ucAccessCategoryIndex;
   @Uint8() external int ucAIFSN;
@@ -1188,6 +1252,11 @@ class DOT11_BYTE_ARRAY extends Struct {
   @Uint32() external int uNumOfBytes;
   @Uint32() external int uTotalNumOfBytes;
   external __ubyte__ ucBuffer;
+}
+
+class DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO extends Struct {
+  @Uint32() external int uChCenterFrequency;
+  @Uint32() external int FHSS;
 }
 
 class DOT11_BSS_ENTRY extends Struct {
@@ -1492,6 +1561,23 @@ class DOT11_ERP_PHY_ATTRIBUTES extends Struct {
   @Uint8() external int bShortSlotTimeOptionImplemented;
 }
 
+class DOT11_PHY_ATTRIBUTES extends Struct {
+  external NDIS_OBJECT_HEADER Header;
+  @Uint32() external int PhyType;
+  @Uint8() external int bHardwarePhyState;
+  @Uint8() external int bSoftwarePhyState;
+  @Uint8() external int bCFPollable;
+  @Uint32() external int uMPDUMaxLength;
+  @Uint32() external int TempType;
+  @Uint32() external int DiversitySupport;
+  @Uint32() external int PhySpecificAttributes;
+  @Uint32() external int uNumberSupportedPowerLevels;
+  external __uint__ TxPowerLevels;
+  @Uint32() external int uNumDataRateMappingEntries;
+  external DOT11_DATA_RATE_MAPPING_ENTRY DataRateMappingEntries;
+  external DOT11_SUPPORTED_DATA_RATES_VALUE_V2 SupportedDataRatesValue;
+}
+
 class DOT11_EXTSTA_ATTRIBUTES extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uScanSSIDListSize;
@@ -1775,6 +1861,12 @@ class DOT11_INCOMING_ASSOC_COMPLETION_PARAMETERS extends Struct {
 class DOT11_STOP_AP_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int ulReason;
+}
+
+class DOT11_PHY_FREQUENCY_ADOPTED_PARAMETERS extends Struct {
+  external NDIS_OBJECT_HEADER Header;
+  @Uint32() external int ulPhyId;
+  @Uint32() external int Anonymous;
 }
 
 class DOT11_CAN_SUSTAIN_AP_PARAMETERS extends Struct {
@@ -2470,6 +2562,12 @@ class DOT11_NETWORK extends Struct {
 class WLAN_RAW_DATA extends Struct {
   @Uint32() external int dwDataSize;
   external __ubyte__ DataBlob;
+}
+
+class WLAN_RAW_DATA_LIST extends Struct {
+  @Uint32() external int dwTotalSize;
+  @Uint32() external int dwNumberOfItems;
+  external ____ DataList;
 }
 
 class WLAN_RATE_SET extends Struct {

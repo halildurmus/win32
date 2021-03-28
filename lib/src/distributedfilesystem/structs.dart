@@ -53,9 +53,20 @@ class DFS_INFO_1 extends Struct {
   external Pointer<Utf16> EntryPath;
 }
 
+class DFS_INFO_1_32 extends Struct {
+  @Uint32() external int EntryPath;
+}
+
 class DFS_INFO_2 extends Struct {
   external Pointer<Utf16> EntryPath;
   external Pointer<Utf16> Comment;
+  @Uint32() external int State;
+  @Uint32() external int NumberOfStorages;
+}
+
+class DFS_INFO_2_32 extends Struct {
+  @Uint32() external int EntryPath;
+  @Uint32() external int Comment;
   @Uint32() external int State;
   @Uint32() external int NumberOfStorages;
 }
@@ -64,6 +75,12 @@ class DFS_STORAGE_INFO extends Struct {
   @Uint32() external int State;
   external Pointer<Utf16> ServerName;
   external Pointer<Utf16> ShareName;
+}
+
+class DFS_STORAGE_INFO_0_32 extends Struct {
+  @Uint32() external int State;
+  @Uint32() external int ServerName;
+  @Uint32() external int ShareName;
 }
 
 class DFS_STORAGE_INFO_1 extends Struct {
@@ -81,6 +98,14 @@ class DFS_INFO_3 extends Struct {
   external Pointer<DFS_STORAGE_INFO> Storage;
 }
 
+class DFS_INFO_3_32 extends Struct {
+  @Uint32() external int EntryPath;
+  @Uint32() external int Comment;
+  @Uint32() external int State;
+  @Uint32() external int NumberOfStorages;
+  @Uint32() external int Storage;
+}
+
 class DFS_INFO_4 extends Struct {
   external Pointer<Utf16> EntryPath;
   external Pointer<Utf16> Comment;
@@ -89,6 +114,16 @@ class DFS_INFO_4 extends Struct {
   external GUID Guid;
   @Uint32() external int NumberOfStorages;
   external Pointer<DFS_STORAGE_INFO> Storage;
+}
+
+class DFS_INFO_4_32 extends Struct {
+  @Uint32() external int EntryPath;
+  @Uint32() external int Comment;
+  @Uint32() external int State;
+  @Uint32() external int Timeout;
+  external GUID Guid;
+  @Uint32() external int NumberOfStorages;
+  @Uint32() external int Storage;
 }
 
 class DFS_INFO_5 extends Struct {
@@ -127,7 +162,7 @@ class DFS_INFO_8 extends Struct {
   @Uint32() external int PropertyFlags;
   @Uint32() external int MetadataSize;
   @Uint32() external int SdLengthReserved;
-  external Pointer pSecurityDescriptor;
+  external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
   @Uint32() external int NumberOfStorages;
 }
 
@@ -140,7 +175,7 @@ class DFS_INFO_9 extends Struct {
   @Uint32() external int PropertyFlags;
   @Uint32() external int MetadataSize;
   @Uint32() external int SdLengthReserved;
-  external Pointer pSecurityDescriptor;
+  external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
   @Uint32() external int NumberOfStorages;
   external Pointer<DFS_STORAGE_INFO_1> Storage;
 }
@@ -192,12 +227,12 @@ class DFS_INFO_107 extends Struct {
   @Uint32() external int PropertyFlagMask;
   @Uint32() external int PropertyFlags;
   @Uint32() external int SdLengthReserved;
-  external Pointer pSecurityDescriptor;
+  external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
 }
 
 class DFS_INFO_150 extends Struct {
   @Uint32() external int SdLengthReserved;
-  external Pointer pSecurityDescriptor;
+  external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
 }
 
 class DFS_INFO_200 extends Struct {

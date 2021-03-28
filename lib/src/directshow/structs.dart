@@ -43,53 +43,23 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class BITMAPINFOHEADER extends Struct {
-  @Uint32() external int biSize;
-  @Int32() external int biWidth;
-  @Int32() external int biHeight;
-  @Uint16() external int biPlanes;
-  @Uint16() external int biBitCount;
-  @Uint32() external int biCompression;
-  @Uint32() external int biSizeImage;
-  @Int32() external int biXPelsPerMeter;
-  @Int32() external int biYPelsPerMeter;
-  @Uint32() external int biClrUsed;
-  @Uint32() external int biClrImportant;
+class KSTOPOLOGY_CONNECTION extends Struct {
+  @Uint32() external int FromNode;
+  @Uint32() external int FromNodePin;
+  @Uint32() external int ToNode;
+  @Uint32() external int ToNodePin;
 }
 
-class MPEG1WAVEFORMAT extends Struct {
-  external WAVEFORMATEX wfx;
-  @Uint16() external int fwHeadLayer;
-  @Uint32() external int dwHeadBitrate;
-  @Uint16() external int fwHeadMode;
-  @Uint16() external int fwHeadModeExt;
-  @Uint16() external int wHeadEmphasis;
-  @Uint16() external int fwHeadFlags;
-  @Uint32() external int dwPTSLow;
-  @Uint32() external int dwPTSHigh;
+class TIMECODE extends Struct {
+  @Uint32() external int Anonymous;
+  @Uint64() external int qw;
 }
 
-class MPEGLAYER3WAVEFORMAT extends Struct {
-  external WAVEFORMATEX wfx;
-  @Uint16() external int wID;
-  @Uint32() external int fdwFlags;
-  @Uint16() external int nBlockSize;
-  @Uint16() external int nFramesPerBlock;
-  @Uint16() external int nCodecDelay;
-}
-
-class HEAACWAVEINFO extends Struct {
-  external WAVEFORMATEX wfx;
-  @Uint16() external int wPayloadType;
-  @Uint16() external int wAudioProfileLevelIndication;
-  @Uint16() external int wStructType;
-  @Uint16() external int wReserved1;
-  @Uint32() external int dwReserved2;
-}
-
-class HEAACWAVEFORMAT extends Struct {
-  external HEAACWAVEINFO wfInfo;
-  external __ubyte__ pbAudioSpecificConfig;
+class TIMECODE_SAMPLE extends Struct {
+  @Int64() external int qwTick;
+  external TIMECODE timecode;
+  @Uint32() external int dwUser;
+  @Uint32() external int dwFlags;
 }
 
 class SystemTuningSpaces extends Struct {
@@ -498,6 +468,39 @@ class TID_EXTENSION extends Struct {
   @Uint16() external int wCount;
 }
 
+class SECTION extends Struct {
+  @Uint8() external int TableId;
+  @Uint32() external int Header;
+  external __ubyte__ SectionData;
+}
+
+class LONG_SECTION extends Struct {
+  @Uint8() external int TableId;
+  @Uint32() external int Header;
+  @Uint16() external int TableIdExtension;
+  @Uint32() external int Version;
+  @Uint8() external int SectionNumber;
+  @Uint8() external int LastSectionNumber;
+  external __ubyte__ RemainingData;
+}
+
+class DSMCC_SECTION extends Struct {
+  @Uint8() external int TableId;
+  @Uint32() external int Header;
+  @Uint16() external int TableIdExtension;
+  @Uint32() external int Version;
+  @Uint8() external int SectionNumber;
+  @Uint8() external int LastSectionNumber;
+  @Uint8() external int ProtocolDiscriminator;
+  @Uint8() external int DsmccType;
+  @Uint16() external int MessageId;
+  @Uint32() external int TransactionId;
+  @Uint8() external int Reserved;
+  @Uint8() external int AdaptationLength;
+  @Uint16() external int MessageLength;
+  external __ubyte__ RemainingData;
+}
+
 class MPEG_RQST_PACKET extends Struct {
   @Uint32() external int dwLength;
   external Pointer<SECTION> pSection;
@@ -556,6 +559,12 @@ class MPEG2_FILTER extends Struct {
   external ATSC_FILTER_OPTIONS Atsc;
 }
 
+class MPEG2_FILTER2 extends Struct {
+  @Uint32() external int Anonymous;
+  @Int32() external int fSpecifyDvbEitOptions;
+  external DVB_EIT_FILTER_OPTIONS DvbEit;
+}
+
 class MPEG_STREAM_BUFFER extends Struct {
   @Int32() external int hr;
   @Uint32() external int dwDataBufferSize;
@@ -586,6 +595,11 @@ class MPEG_BCS_DEMUX extends Struct {
 
 class MPEG_WINSOCK extends Struct {
   @Uint32() external int AVMGraphId;
+}
+
+class MPEG_CONTEXT extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int U;
 }
 
 class MPEG_SERVICE_REQUEST extends Struct {
@@ -668,6 +682,12 @@ class VA_OPTIONAL_VIDEO_PROPERTIES extends Struct {
   @Uint32() external int VAMatrixCoefficients;
 }
 
+class TRANSPORT_PROPERTIES extends Struct {
+  @Uint32() external int PID;
+  @Int64() external int PCR;
+  @Uint32() external int Fields;
+}
+
 class PBDA_TAG_ATTRIBUTE extends Struct {
   external GUID TableUUId;
   @Uint8() external int TableId;
@@ -701,6 +721,18 @@ class KSP_BDA_NODE_PIN extends Struct {
   @Uint32() external int ulNodeType;
   @Uint32() external int ulInputPinId;
   @Uint32() external int ulOutputPinId;
+}
+
+class KSM_BDA_PIN extends Struct {
+  external KSIDENTIFIER Method;
+  @Uint32() external int Anonymous;
+  @Uint32() external int Reserved;
+}
+
+class KSM_BDA_PIN_PAIR extends Struct {
+  external KSIDENTIFIER Method;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
 }
 
 class KSP_NODE_ESPID extends Struct {
@@ -973,6 +1005,11 @@ class EVENTID_ChannelTypeSpanningEvent extends Struct {
 class ChannelTypeInfo extends Struct {
   @Uint32() external int channelType;
   @Uint64() external int timeStamp;
+}
+
+class ChannelInfo extends Struct {
+  @Int32() external int lFrequency;
+  @Uint32() external int Anonymous;
 }
 
 class EVENTID_ChannelInfoSpanningEvent extends Struct {
@@ -1566,9 +1603,127 @@ class MPEG_HEADER_VERSION_BITS extends Struct {
   @Uint8() external int _bitfield;
 }
 
+class MPEG1WAVEFORMAT extends Struct {
+  external WAVEFORMATEX wfx;
+  @Uint16() external int fwHeadLayer;
+  @Uint32() external int dwHeadBitrate;
+  @Uint16() external int fwHeadMode;
+  @Uint16() external int fwHeadModeExt;
+  @Uint16() external int wHeadEmphasis;
+  @Uint16() external int fwHeadFlags;
+  @Uint32() external int dwPTSLow;
+  @Uint32() external int dwPTSHigh;
+}
+
+class MPEGLAYER3WAVEFORMAT extends Struct {
+  external WAVEFORMATEX wfx;
+  @Uint16() external int wID;
+  @Uint32() external int fdwFlags;
+  @Uint16() external int nBlockSize;
+  @Uint16() external int nFramesPerBlock;
+  @Uint16() external int nCodecDelay;
+}
+
+class HEAACWAVEINFO extends Struct {
+  external WAVEFORMATEX wfx;
+  @Uint16() external int wPayloadType;
+  @Uint16() external int wAudioProfileLevelIndication;
+  @Uint16() external int wStructType;
+  @Uint16() external int wReserved1;
+  @Uint32() external int dwReserved2;
+}
+
+class HEAACWAVEFORMAT extends Struct {
+  external HEAACWAVEINFO wfInfo;
+  external __ubyte__ pbAudioSpecificConfig;
+}
+
 class DDCOLORKEY extends Struct {
   @Uint32() external int dwColorSpaceLowValue;
   @Uint32() external int dwColorSpaceHighValue;
+}
+
+class DMO_MEDIA_TYPE extends Struct {
+  external GUID majortype;
+  external GUID subtype;
+  @Int32() external int bFixedSizeSamples;
+  @Int32() external int bTemporalCompression;
+  @Uint32() external int lSampleSize;
+  external GUID formattype;
+  external Pointer pUnk;
+  @Uint32() external int cbFormat;
+  external Pointer<Uint8> pbFormat;
+}
+
+class DMO_OUTPUT_DATA_BUFFER extends Struct {
+  external Pointer pBuffer;
+  @Uint32() external int dwStatus;
+  @Int64() external int rtTimestamp;
+  @Int64() external int rtTimelength;
+}
+
+class DXVA_COPPSetProtectionLevelCmdData extends Struct {
+  @Uint32() external int ProtType;
+  @Uint32() external int ProtLevel;
+  @Uint32() external int ExtendedInfoChangeMask;
+  @Uint32() external int ExtendedInfoData;
+}
+
+class DXVA_COPPSetSignalingCmdData extends Struct {
+  @Uint32() external int ActiveTVProtectionStandard;
+  @Uint32() external int AspectRatioChangeMask1;
+  @Uint32() external int AspectRatioData1;
+  @Uint32() external int AspectRatioChangeMask2;
+  @Uint32() external int AspectRatioData2;
+  @Uint32() external int AspectRatioChangeMask3;
+  @Uint32() external int AspectRatioData3;
+  external __uint__ ExtendedInfoChangeMask;
+  external __uint__ ExtendedInfoData;
+  @Uint32() external int Reserved;
+}
+
+class DXVA_COPPStatusData extends Struct {
+  external GUID rApp;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwData;
+  @Uint32() external int ExtendedInfoValidMask;
+  @Uint32() external int ExtendedInfoData;
+}
+
+class DXVA_COPPStatusDisplayData extends Struct {
+  external GUID rApp;
+  @Uint32() external int dwFlags;
+  @Uint32() external int DisplayWidth;
+  @Uint32() external int DisplayHeight;
+  @Uint32() external int Format;
+  @Uint32() external int d3dFormat;
+  @Uint32() external int FreqNumerator;
+  @Uint32() external int FreqDenominator;
+}
+
+class DXVA_COPPStatusHDCPKeyData extends Struct {
+  external GUID rApp;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwHDCPFlags;
+  external GUID BKey;
+  external GUID Reserved1;
+  external GUID Reserved2;
+}
+
+class DXVA_COPPStatusSignalingCmdData extends Struct {
+  external GUID rApp;
+  @Uint32() external int dwFlags;
+  @Uint32() external int AvailableTVProtectionStandards;
+  @Uint32() external int ActiveTVProtectionStandard;
+  @Uint32() external int TVType;
+  @Uint32() external int AspectRatioValidMask1;
+  @Uint32() external int AspectRatioData1;
+  @Uint32() external int AspectRatioValidMask2;
+  @Uint32() external int AspectRatioData2;
+  @Uint32() external int AspectRatioValidMask3;
+  @Uint32() external int AspectRatioData3;
+  external __uint__ ExtendedInfoValidMask;
+  external __uint__ ExtendedInfoData;
 }
 
 class AMVPSIZE extends Struct {
@@ -1679,6 +1834,12 @@ class REGFILTERPINS2 extends Struct {
   @Uint32() external int nMediums;
   external Pointer<REGPINMEDIUM> lpMedium;
   external Pointer<GUID> clsPinCategory;
+}
+
+class REGFILTER2 extends Struct {
+  @Uint32() external int dwVersion;
+  @Uint32() external int dwMerit;
+  @Uint32() external int Anonymous;
 }
 
 class Quality extends Struct {
@@ -1964,6 +2125,16 @@ class DVD_SubpictureAttributes extends Struct {
   @Uint32() external int CodingMode;
   @Uint32() external int Language;
   @Uint32() external int LanguageExtension;
+}
+
+class DVD_TitleAttributes extends Struct {
+  @Uint32() external int Anonymous;
+  external DVD_VideoAttributes VideoAttributes;
+  @Uint32() external int ulNumberOfAudioStreams;
+  external DVD_AudioAttributes AudioAttributes;
+  external DVD_MultichannelAudioAttributes MultichannelAudioAttributes;
+  @Uint32() external int ulNumberOfSubpictureStreams;
+  external DVD_SubpictureAttributes SubpictureAttributes;
 }
 
 class DVD_MenuAttributes extends Struct {
@@ -2398,6 +2569,16 @@ class VIDEOINFOHEADER extends Struct {
   external BITMAPINFOHEADER bmiHeader;
 }
 
+class VIDEOINFO extends Struct {
+  external RECT rcSource;
+  external RECT rcTarget;
+  @Uint32() external int dwBitRate;
+  @Uint32() external int dwBitErrorRate;
+  @Int64() external int AvgTimePerFrame;
+  external BITMAPINFOHEADER bmiHeader;
+  @Uint32() external int Anonymous;
+}
+
 class MPEG1VIDEOINFO extends Struct {
   external VIDEOINFOHEADER hdr;
   @Uint32() external int dwStartTimeCode;
@@ -2629,6 +2810,31 @@ class AVIEXTHEADER extends Struct {
   external __uint__ dwFuture;
 }
 
+class AVISTREAMHEADER extends Struct {
+  @Uint32() external int fcc;
+  @Uint32() external int cb;
+  @Uint32() external int fccType;
+  @Uint32() external int fccHandler;
+  @Uint32() external int dwFlags;
+  @Uint16() external int wPriority;
+  @Uint16() external int wLanguage;
+  @Uint32() external int dwInitialFrames;
+  @Uint32() external int dwScale;
+  @Uint32() external int dwRate;
+  @Uint32() external int dwStart;
+  @Uint32() external int dwLength;
+  @Uint32() external int dwSuggestedBufferSize;
+  @Uint32() external int dwQuality;
+  @Uint32() external int dwSampleSize;
+  @Uint32() external int rcFrame;
+}
+
+class AVIOLDINDEX extends Struct {
+  @Uint32() external int fcc;
+  @Uint32() external int cb;
+  @Uint32() external int aIndex;
+}
+
 class TIMECODEDATA extends Struct {
   external TIMECODE time;
   @Uint32() external int dwSMPTEflags;
@@ -2645,6 +2851,18 @@ class AVIMETAINDEX extends Struct {
   @Uint32() external int dwChunkId;
   external __uint__ dwReserved;
   @Uint32() external int adwIndex;
+}
+
+class AVISUPERINDEX extends Struct {
+  @Uint32() external int fcc;
+  @Uint32() external int cb;
+  @Uint16() external int wLongsPerEntry;
+  @Uint8() external int bIndexSubType;
+  @Uint8() external int bIndexType;
+  @Uint32() external int nEntriesInUse;
+  @Uint32() external int dwChunkId;
+  external __uint__ dwReserved;
+  external ____ aIndex;
 }
 
 class AVISTDINDEX_ENTRY extends Struct {
@@ -2716,6 +2934,19 @@ class _avitcdlindex extends Struct {
   external __uint__ dwReserved;
   external AVITCDLINDEX_ENTRY aIndex;
   external __uint__ adwTrailingFill;
+}
+
+class AVIFIELDINDEX extends Struct {
+  @Uint32() external int fcc;
+  @Uint32() external int cb;
+  @Uint16() external int wLongsPerEntry;
+  @Uint8() external int bIndexSubType;
+  @Uint8() external int bIndexType;
+  @Uint32() external int nEntriesInUse;
+  @Uint32() external int dwChunkId;
+  @Uint64() external int qwBaseOffset;
+  @Uint32() external int dwReserved3;
+  @Uint32() external int aIndex;
 }
 
 class MainAVIHeader extends Struct {
@@ -2856,6 +3087,21 @@ class DVD_REGION extends Struct {
   @Uint8() external int ResetCount;
 }
 
+class VIDEOINFOHEADER2 extends Struct {
+  external RECT rcSource;
+  external RECT rcTarget;
+  @Uint32() external int dwBitRate;
+  @Uint32() external int dwBitErrorRate;
+  @Int64() external int AvgTimePerFrame;
+  @Uint32() external int dwInterlaceFlags;
+  @Uint32() external int dwCopyProtectFlags;
+  @Uint32() external int dwPictAspectRatioX;
+  @Uint32() external int dwPictAspectRatioY;
+  @Uint32() external int Anonymous;
+  @Uint32() external int dwReserved2;
+  external BITMAPINFOHEADER bmiHeader;
+}
+
 class MPEG2VIDEOINFO extends Struct {
   external VIDEOINFOHEADER2 hdr;
   @Uint32() external int dwStartTimeCode;
@@ -2914,102 +3160,5 @@ class MP_ENVELOPE_SEGMENT extends Struct {
 class DMO_PARTIAL_MEDIATYPE extends Struct {
   external GUID type;
   external GUID subtype;
-}
-
-class KSTOPOLOGY_CONNECTION extends Struct {
-  @Uint32() external int FromNode;
-  @Uint32() external int FromNodePin;
-  @Uint32() external int ToNode;
-  @Uint32() external int ToNodePin;
-}
-
-class TIMECODE_SAMPLE extends Struct {
-  @Int64() external int qwTick;
-  external TIMECODE timecode;
-  @Uint32() external int dwUser;
-  @Uint32() external int dwFlags;
-}
-
-class DMO_MEDIA_TYPE extends Struct {
-  external GUID majortype;
-  external GUID subtype;
-  @Int32() external int bFixedSizeSamples;
-  @Int32() external int bTemporalCompression;
-  @Uint32() external int lSampleSize;
-  external GUID formattype;
-  external Pointer pUnk;
-  @Uint32() external int cbFormat;
-  external Pointer<Uint8> pbFormat;
-}
-
-class DMO_OUTPUT_DATA_BUFFER extends Struct {
-  external Pointer pBuffer;
-  @Uint32() external int dwStatus;
-  @Int64() external int rtTimestamp;
-  @Int64() external int rtTimelength;
-}
-
-class DXVA_COPPSetProtectionLevelCmdData extends Struct {
-  @Uint32() external int ProtType;
-  @Uint32() external int ProtLevel;
-  @Uint32() external int ExtendedInfoChangeMask;
-  @Uint32() external int ExtendedInfoData;
-}
-
-class DXVA_COPPSetSignalingCmdData extends Struct {
-  @Uint32() external int ActiveTVProtectionStandard;
-  @Uint32() external int AspectRatioChangeMask1;
-  @Uint32() external int AspectRatioData1;
-  @Uint32() external int AspectRatioChangeMask2;
-  @Uint32() external int AspectRatioData2;
-  @Uint32() external int AspectRatioChangeMask3;
-  @Uint32() external int AspectRatioData3;
-  external __uint__ ExtendedInfoChangeMask;
-  external __uint__ ExtendedInfoData;
-  @Uint32() external int Reserved;
-}
-
-class DXVA_COPPStatusData extends Struct {
-  external GUID rApp;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwData;
-  @Uint32() external int ExtendedInfoValidMask;
-  @Uint32() external int ExtendedInfoData;
-}
-
-class DXVA_COPPStatusDisplayData extends Struct {
-  external GUID rApp;
-  @Uint32() external int dwFlags;
-  @Uint32() external int DisplayWidth;
-  @Uint32() external int DisplayHeight;
-  @Uint32() external int Format;
-  @Uint32() external int d3dFormat;
-  @Uint32() external int FreqNumerator;
-  @Uint32() external int FreqDenominator;
-}
-
-class DXVA_COPPStatusHDCPKeyData extends Struct {
-  external GUID rApp;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwHDCPFlags;
-  external GUID BKey;
-  external GUID Reserved1;
-  external GUID Reserved2;
-}
-
-class DXVA_COPPStatusSignalingCmdData extends Struct {
-  external GUID rApp;
-  @Uint32() external int dwFlags;
-  @Uint32() external int AvailableTVProtectionStandards;
-  @Uint32() external int ActiveTVProtectionStandard;
-  @Uint32() external int TVType;
-  @Uint32() external int AspectRatioValidMask1;
-  @Uint32() external int AspectRatioData1;
-  @Uint32() external int AspectRatioValidMask2;
-  @Uint32() external int AspectRatioData2;
-  @Uint32() external int AspectRatioValidMask3;
-  @Uint32() external int AspectRatioData3;
-  external __uint__ ExtendedInfoValidMask;
-  external __uint__ ExtendedInfoData;
 }
 

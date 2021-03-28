@@ -53,9 +53,15 @@ class IP4_ARRAY extends Struct {
 }
 
 class IP6_ADDRESS extends Struct {
+  external __uint64__ IP6Qword;
   external __uint__ IP6Dword;
   external __ushort__ IP6Word;
   external __ubyte__ IP6Byte;
+}
+
+class DNS_ADDR extends Struct {
+  external __byte__ MaxSa;
+  @Uint32() external int Data;
 }
 
 class DNS_ADDR_ARRAY extends Struct {
@@ -427,6 +433,52 @@ class DNS_RECORD_FLAGS extends Struct {
   @Uint32() external int _bitfield;
 }
 
+class DNS_RECORDW extends Struct {
+  external Pointer<DNS_RECORD> pNext;
+  external Pointer<Utf16> pName;
+  @Uint16() external int wType;
+  @Uint16() external int wDataLength;
+  @Uint32() external int Flags;
+  @Uint32() external int dwTtl;
+  @Uint32() external int dwReserved;
+  @Uint32() external int Data;
+}
+
+class _DnsRecordOptW extends Struct {
+  external Pointer<DNS_RECORD> pNext;
+  external Pointer<Utf16> pName;
+  @Uint16() external int wType;
+  @Uint16() external int wDataLength;
+  @Uint32() external int Flags;
+  external DNS_HEADER_EXT ExtHeader;
+  @Uint16() external int wPayloadSize;
+  @Uint16() external int wReserved;
+  @Uint32() external int Data;
+}
+
+class DNS_RECORDA extends Struct {
+  external Pointer<DNS_RECORDA> pNext;
+  external Pointer<Utf8> pName;
+  @Uint16() external int wType;
+  @Uint16() external int wDataLength;
+  @Uint32() external int Flags;
+  @Uint32() external int dwTtl;
+  @Uint32() external int dwReserved;
+  @Uint32() external int Data;
+}
+
+class _DnsRecordOptA extends Struct {
+  external Pointer<DNS_RECORDA> pNext;
+  external Pointer<Utf8> pName;
+  @Uint16() external int wType;
+  @Uint16() external int wDataLength;
+  @Uint32() external int Flags;
+  external DNS_HEADER_EXT ExtHeader;
+  @Uint16() external int wPayloadSize;
+  @Uint16() external int wReserved;
+  @Uint32() external int Data;
+}
+
 class DNS_RRSET extends Struct {
   external Pointer<DNS_RECORDA> pFirstRR;
   external Pointer<DNS_RECORDA> pLastRR;
@@ -464,6 +516,14 @@ class DNS_QUERY_CANCEL extends Struct {
 class DNS_MESSAGE_BUFFER extends Struct {
   external DNS_HEADER MessageHead;
   external __byte__ MessageBody;
+}
+
+class DNS_CONNECTION_PROXY_INFO extends Struct {
+  @Uint32() external int Version;
+  external Pointer<Utf16> pwszFriendlyName;
+  @Uint32() external int Flags;
+  @Uint32() external int Switch;
+  @Uint32() external int Anonymous;
 }
 
 class DNS_CONNECTION_PROXY_INFO_EX extends Struct {
@@ -534,6 +594,14 @@ class DNS_SERVICE_INSTANCE extends Struct {
 
 class DNS_SERVICE_CANCEL extends Struct {
   external Pointer reserved;
+}
+
+class DNS_SERVICE_BROWSE_REQUEST extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int InterfaceIndex;
+  external Pointer<Utf16> QueryName;
+  @Uint32() external int Anonymous;
+  external Pointer pQueryContext;
 }
 
 class DNS_SERVICE_RESOLVE_REQUEST extends Struct {

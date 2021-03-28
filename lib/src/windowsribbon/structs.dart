@@ -58,3 +58,8 @@ class UI_EVENTPARAMS_COMMAND extends Struct {
   @Uint32() external int Location;
 }
 
+class UI_EVENTPARAMS extends Struct {
+  @Uint32() external int EventType;
+  @Uint32() external int Anonymous;
+}
+

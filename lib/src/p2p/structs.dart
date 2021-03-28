@@ -61,6 +61,20 @@ class PNRPINFO_V1 extends Struct {
   @Uint32() external int enNameState;
 }
 
+class PNRPINFO_V2 extends Struct {
+  @Uint32() external int dwSize;
+  external Pointer<Utf16> lpwszIdentity;
+  @Uint32() external int nMaxResolve;
+  @Uint32() external int dwTimeout;
+  @Uint32() external int dwLifetime;
+  @Uint32() external int enResolveCriteria;
+  @Uint32() external int dwFlags;
+  external SOCKET_ADDRESS saHint;
+  @Uint32() external int enNameState;
+  @Uint32() external int enExtendedPayloadType;
+  @Uint32() external int Anonymous;
+}
+
 class PNRPCLOUDINFO extends Struct {
   @Uint32() external int dwSize;
   external PNRP_CLOUD_ID Cloud;
@@ -170,6 +184,11 @@ class PEER_GRAPH_EVENT_REGISTRATION extends Struct {
   external Pointer<GUID> pType;
 }
 
+class PEER_GRAPH_EVENT_DATA extends Struct {
+  @Uint32() external int eventType;
+  @Uint32() external int Anonymous;
+}
+
 class PEER_SECURITY_INTERFACE extends Struct {
   @Uint32() external int dwSize;
   external Pointer<Utf16> pwzSspFilename;
@@ -254,6 +273,11 @@ class PEER_EVENT_MEMBER_CHANGE_DATA extends Struct {
 class PEER_GROUP_EVENT_REGISTRATION extends Struct {
   @Uint32() external int eventType;
   external Pointer<GUID> pType;
+}
+
+class PEER_GROUP_EVENT_DATA extends Struct {
+  @Uint32() external int eventType;
+  @Uint32() external int Anonymous;
 }
 
 class PEER_NAME_PAIR extends Struct {
@@ -371,6 +395,11 @@ class PEER_EVENT_REQUEST_STATUS_CHANGED_DATA extends Struct {
   @Int32() external int hrChange;
 }
 
+class PEER_COLLAB_EVENT_DATA extends Struct {
+  @Uint32() external int eventType;
+  @Uint32() external int Anonymous;
+}
+
 class PEER_PNRP_ENDPOINT_INFO extends Struct {
   external Pointer<Utf16> pwzPeerName;
   @Uint32() external int cAddresses;
@@ -473,6 +502,13 @@ class DRT_SEARCH_RESULT extends Struct {
   @Uint32() external int type;
   external Pointer pvContext;
   external DRT_REGISTRATION registration;
+}
+
+class DRT_EVENT_DATA extends Struct {
+  @Uint32() external int type;
+  @Int32() external int hr;
+  external Pointer pvContext;
+  @Uint32() external int Anonymous;
 }
 
 class PEERDIST_PUBLICATION_OPTIONS extends Struct {

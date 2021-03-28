@@ -1272,10 +1272,22 @@ class WS_POLICY_PROPERTIES extends Struct {
   @Uint32() external int propertyCount;
 }
 
+class WS_SECURITY_BINDING_PROPERTY_CONSTRAINT extends Struct {
+  @Uint32() external int id;
+  external Pointer allowedValues;
+  @Uint32() external int allowedValuesSize;
+  @Uint32() external int out;
+}
+
 class WS_SECURITY_BINDING_CONSTRAINT extends Struct {
   @Uint32() external int type;
   external Pointer<WS_SECURITY_BINDING_PROPERTY_CONSTRAINT> propertyConstraints;
   @Uint32() external int propertyConstraintCount;
+}
+
+class WS_SSL_TRANSPORT_SECURITY_BINDING_CONSTRAINT extends Struct {
+  external WS_SECURITY_BINDING_CONSTRAINT bindingConstraint;
+  @Uint32() external int out;
 }
 
 class WS_USERNAME_MESSAGE_SECURITY_BINDING_CONSTRAINT extends Struct {
@@ -1301,6 +1313,30 @@ class WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_CONSTRAINT extends Struct {
   @Uint32() external int bindingUsage;
 }
 
+class WS_REQUEST_SECURITY_TOKEN_PROPERTY_CONSTRAINT extends Struct {
+  @Uint32() external int id;
+  external Pointer allowedValues;
+  @Uint32() external int allowedValuesSize;
+  @Uint32() external int out;
+}
+
+class WS_ISSUED_TOKEN_MESSAGE_SECURITY_BINDING_CONSTRAINT extends Struct {
+  external WS_SECURITY_BINDING_CONSTRAINT bindingConstraint;
+  @Uint32() external int bindingUsage;
+  external Pointer<WS_XML_STRING> claimConstraints;
+  @Uint32() external int claimConstraintCount;
+  external Pointer<WS_REQUEST_SECURITY_TOKEN_PROPERTY_CONSTRAINT> requestSecurityTokenPropertyConstraints;
+  @Uint32() external int requestSecurityTokenPropertyConstraintCount;
+  @Uint32() external int out;
+}
+
+class WS_SECURITY_PROPERTY_CONSTRAINT extends Struct {
+  @Uint32() external int id;
+  external Pointer allowedValues;
+  @Uint32() external int allowedValuesSize;
+  @Uint32() external int out;
+}
+
 class WS_SECURITY_CONSTRAINTS extends Struct {
   external Pointer<WS_SECURITY_PROPERTY_CONSTRAINT> securityPropertyConstraints;
   @Uint32() external int securityPropertyConstraintCount;
@@ -1314,8 +1350,22 @@ class WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_CONSTRAINT extends Struct {
   external Pointer<WS_SECURITY_CONSTRAINTS> bootstrapSecurityConstraint;
 }
 
+class WS_CHANNEL_PROPERTY_CONSTRAINT extends Struct {
+  @Uint32() external int id;
+  external Pointer allowedValues;
+  @Uint32() external int allowedValuesSize;
+  @Uint32() external int out;
+}
+
 class WS_POLICY_EXTENSION extends Struct {
   @Uint32() external int type;
+}
+
+class WS_ENDPOINT_POLICY_EXTENSION extends Struct {
+  external WS_POLICY_EXTENSION policyExtension;
+  external Pointer<WS_XML_STRING> assertionName;
+  external Pointer<WS_XML_STRING> assertionNs;
+  @Uint32() external int out;
 }
 
 class WS_POLICY_CONSTRAINTS extends Struct {

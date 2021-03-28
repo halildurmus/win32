@@ -153,6 +153,14 @@ class HH_GLOBAL_PROPERTY extends Struct {
   external VARIANT var;
 }
 
+class CProperty extends Struct {
+  @Uint32() external int dwPropID;
+  @Uint32() external int cbData;
+  @Uint32() external int dwType;
+  @Uint32() external int Anonymous;
+  @Int32() external int fPersist;
+}
+
 class IITGroup extends Struct {
 }
 

@@ -43,6 +43,10 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class GetDcContextHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
 class CQFORM extends Struct {
   @Uint32() external int cbStruct;
   @Uint32() external int dwFlags;
@@ -60,6 +64,16 @@ class CQPAGE extends Struct {
   @Int32() external int idPageTemplate;
   external Pointer<NativeFunction<DlgProc>> pDlgProc;
   @IntPtr() external int lParam;
+}
+
+class OPENQUERYWINDOW extends Struct {
+  @Uint32() external int cbStruct;
+  @Uint32() external int dwFlags;
+  external GUID clsidHandler;
+  external Pointer pHandlerParameters;
+  external GUID clsidDefaultForm;
+  external IPersistQuery pPersistQuery;
+  @Uint32() external int Anonymous;
 }
 
 class PropertyEntry extends Struct {
@@ -228,6 +242,11 @@ class ADS_DN_WITH_BINARY extends Struct {
 class ADS_DN_WITH_STRING extends Struct {
   external Pointer<Utf16> pszStringValue;
   external Pointer<Utf16> pszDNString;
+}
+
+class ADSVALUE extends Struct {
+  @Uint32() external int dwType;
+  @Uint32() external int Anonymous;
 }
 
 class ADS_ATTR_INFO extends Struct {
@@ -1051,9 +1070,5 @@ class DS_DOMAIN_TRUSTSA extends Struct {
   @Uint32() external int TrustAttributes;
   external Pointer DomainSid;
   external GUID DomainGuid;
-}
-
-class GetDcContextHandle extends Struct {
-  @IntPtr() external int Value;
 }
 

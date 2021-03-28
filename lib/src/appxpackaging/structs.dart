@@ -96,6 +96,10 @@ class APPX_ENCRYPTED_EXEMPTIONS extends Struct {
   external Pointer<Pointer<Utf16>> plainTextFiles;
 }
 
+class PACKAGE_VERSION extends Struct {
+  @Uint32() external int Anonymous;
+}
+
 class PACKAGE_ID extends Struct {
   @Uint32() external int reserved;
   @Uint32() external int processorArchitecture;

@@ -43,6 +43,13 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class DWRITE_COLOR_F extends Struct {
+  @Float() external double r;
+  @Float() external double g;
+  @Float() external double b;
+  @Float() external double a;
+}
+
 class DWRITE_FONT_METRICS extends Struct {
   @Uint16() external int designUnitsPerEm;
   @Uint16() external int ascent;
@@ -234,6 +241,15 @@ class DWRITE_CARET_METRICS extends Struct {
   @Int16() external int offset;
 }
 
+class DWRITE_PANOSE extends Struct {
+  external __ubyte__ values;
+  @Uint8() external int familyKind;
+  @Uint32() external int text;
+  @Uint32() external int script;
+  @Uint32() external int decorative;
+  @Uint32() external int symbol;
+}
+
 class DWRITE_UNICODE_RANGE extends Struct {
   @Uint32() external int first;
   @Uint32() external int last;
@@ -264,7 +280,7 @@ class DWRITE_COLOR_GLYPH_RUN extends Struct {
   external Pointer<DWRITE_GLYPH_RUN_DESCRIPTION> glyphRunDescription;
   @Float() external double baselineOriginX;
   @Float() external double baselineOriginY;
-  external DXGI_RGBA runColor;
+  external DWRITE_COLOR_F runColor;
   @Uint16() external int paletteIndex;
 }
 

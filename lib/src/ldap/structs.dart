@@ -43,6 +43,25 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class ldap extends Struct {
+  @Uint32() external int ld_sb;
+  external Pointer<Utf8> ld_host;
+  @Uint32() external int ld_version;
+  @Uint8() external int ld_lberoptions;
+  @Uint32() external int ld_deref;
+  @Uint32() external int ld_timelimit;
+  @Uint32() external int ld_sizelimit;
+  @Uint32() external int ld_errno;
+  external Pointer<Utf8> ld_matched;
+  external Pointer<Utf8> ld_error;
+  @Uint32() external int ld_msgid;
+  external __ubyte__ Reserved3;
+  @Uint32() external int ld_cldaptries;
+  @Uint32() external int ld_cldaptimeout;
+  @Uint32() external int ld_refhoplimit;
+  @Uint32() external int ld_options;
+}
+
 class LDAP_TIMEVAL extends Struct {
   @Int32() external int tv_sec;
   @Int32() external int tv_usec;
@@ -79,6 +98,18 @@ class ldapcontrolW extends Struct {
   external Pointer<Utf16> ldctl_oid;
   external LDAP_BERVAL ldctl_value;
   @Uint8() external int ldctl_iscritical;
+}
+
+class ldapmodW extends Struct {
+  @Uint32() external int mod_op;
+  external Pointer<Utf16> mod_type;
+  @Uint32() external int mod_vals;
+}
+
+class ldapmodA extends Struct {
+  @Uint32() external int mod_op;
+  external Pointer<Utf8> mod_type;
+  @Uint32() external int mod_vals;
 }
 
 class berelement extends Struct {

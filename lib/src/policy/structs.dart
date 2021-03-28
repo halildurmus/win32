@@ -98,6 +98,13 @@ class POLICYSETTINGSTATUSINFO extends Struct {
   external SYSTEMTIME timeLogged;
 }
 
+class INSTALLSPEC extends Struct {
+  @Uint32() external int AppName;
+  external Pointer<Utf16> FileExt;
+  external Pointer<Utf16> ProgId;
+  @Uint32() external int COMClass;
+}
+
 class INSTALLDATA extends Struct {
   @Uint32() external int Type;
   external INSTALLSPEC Spec;

@@ -43,151 +43,72 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class DRVCONFIGINFOEX extends Struct {
-  @Uint32() external int dwDCISize;
-  external Pointer<Utf16> lpszDCISectionName;
-  external Pointer<Utf16> lpszDCIAliasName;
-  @Uint32() external int dnDevNode;
+class HMIDI extends Struct {
+  @IntPtr() external int Value;
 }
 
-class DRVCONFIGINFO extends Struct {
-  @Uint32() external int dwDCISize;
-  external Pointer<Utf16> lpszDCISectionName;
-  external Pointer<Utf16> lpszDCIAliasName;
+class HMIDIIN extends Struct {
+  @IntPtr() external int Value;
 }
 
-class MMIOINFO extends Struct {
-  @Uint32() external int dwFlags;
-  @Uint32() external int fccIOProc;
-  external Pointer<MMIOPROC> pIOProc;
-  @Uint32() external int wErrorRet;
-  external HTASK htask;
-  @Int32() external int cchBuffer;
-  external Pointer<Int8> pchBuffer;
-  external Pointer<Int8> pchNext;
-  external Pointer<Int8> pchEndRead;
-  external Pointer<Int8> pchEndWrite;
-  @Int32() external int lBufOffset;
-  @Int32() external int lDiskOffset;
-  external __uint__ adwInfo;
-  @Uint32() external int dwReserved1;
-  @Uint32() external int dwReserved2;
-  external HMMIO hmmio;
+class HMIDIOUT extends Struct {
+  @IntPtr() external int Value;
 }
 
-class MMCKINFO extends Struct {
-  @Uint32() external int ckid;
-  @Uint32() external int cksize;
-  @Uint32() external int fccType;
-  @Uint32() external int dwDataOffset;
-  @Uint32() external int dwFlags;
+class HMIDISTRM extends Struct {
+  @IntPtr() external int Value;
 }
 
-class WAVEHDR extends Struct {
-  external Pointer<Utf8> lpData;
-  @Uint32() external int dwBufferLength;
-  @Uint32() external int dwBytesRecorded;
-  @IntPtr() external int dwUser;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwLoops;
-  external Pointer<WAVEHDR> lpNext;
-  @IntPtr() external int reserved;
+class HMIXER extends Struct {
+  @IntPtr() external int Value;
 }
 
-class WAVEOUTCAPSA extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
-  @Uint32() external int dwFormats;
-  @Uint16() external int wChannels;
-  @Uint16() external int wReserved1;
-  @Uint32() external int dwSupport;
+class HMIXEROBJ extends Struct {
+  @IntPtr() external int Value;
 }
 
-class WAVEOUTCAPSW extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
-  @Uint32() external int dwFormats;
-  @Uint16() external int wChannels;
-  @Uint16() external int wReserved1;
-  @Uint32() external int dwSupport;
+class HWAVE extends Struct {
+  @IntPtr() external int Value;
 }
 
-class WAVEOUTCAPS2A extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
-  @Uint32() external int dwFormats;
-  @Uint16() external int wChannels;
-  @Uint16() external int wReserved1;
-  @Uint32() external int dwSupport;
-  external GUID ManufacturerGuid;
-  external GUID ProductGuid;
-  external GUID NameGuid;
+class HWAVEOUT extends Struct {
+  @IntPtr() external int Value;
 }
 
-class WAVEOUTCAPS2W extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
-  @Uint32() external int dwFormats;
-  @Uint16() external int wChannels;
-  @Uint16() external int wReserved1;
-  @Uint32() external int dwSupport;
-  external GUID ManufacturerGuid;
-  external GUID ProductGuid;
-  external GUID NameGuid;
+class HWAVEIN extends Struct {
+  @IntPtr() external int Value;
 }
 
-class WAVEINCAPSA extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
-  @Uint32() external int dwFormats;
-  @Uint16() external int wChannels;
-  @Uint16() external int wReserved1;
+class HMMIO extends Struct {
+  @IntPtr() external int Value;
 }
 
-class WAVEINCAPSW extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
-  @Uint32() external int dwFormats;
-  @Uint16() external int wChannels;
-  @Uint16() external int wReserved1;
+class HDRVR extends Struct {
+  @IntPtr() external int Value;
 }
 
-class WAVEINCAPS2A extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
-  @Uint32() external int dwFormats;
-  @Uint16() external int wChannels;
-  @Uint16() external int wReserved1;
-  external GUID ManufacturerGuid;
-  external GUID ProductGuid;
-  external GUID NameGuid;
+class HACMDRIVERID extends Struct {
+  @IntPtr() external int Value;
 }
 
-class WAVEINCAPS2W extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
-  @Uint32() external int dwFormats;
-  @Uint16() external int wChannels;
-  @Uint16() external int wReserved1;
-  external GUID ManufacturerGuid;
-  external GUID ProductGuid;
-  external GUID NameGuid;
+class HACMDRIVER extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HACMSTREAM extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HACMOBJ extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HIC extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HVIDEO extends Struct {
+  @IntPtr() external int Value;
 }
 
 class WAVEFORMAT extends Struct {
@@ -213,387 +134,6 @@ class WAVEFORMATEX extends Struct {
   @Uint16() external int cbSize;
 }
 
-class MIDIOUTCAPSA extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
-  @Uint16() external int wTechnology;
-  @Uint16() external int wVoices;
-  @Uint16() external int wNotes;
-  @Uint16() external int wChannelMask;
-  @Uint32() external int dwSupport;
-}
-
-class MIDIOUTCAPSW extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
-  @Uint16() external int wTechnology;
-  @Uint16() external int wVoices;
-  @Uint16() external int wNotes;
-  @Uint16() external int wChannelMask;
-  @Uint32() external int dwSupport;
-}
-
-class MIDIOUTCAPS2A extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
-  @Uint16() external int wTechnology;
-  @Uint16() external int wVoices;
-  @Uint16() external int wNotes;
-  @Uint16() external int wChannelMask;
-  @Uint32() external int dwSupport;
-  external GUID ManufacturerGuid;
-  external GUID ProductGuid;
-  external GUID NameGuid;
-}
-
-class MIDIOUTCAPS2W extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
-  @Uint16() external int wTechnology;
-  @Uint16() external int wVoices;
-  @Uint16() external int wNotes;
-  @Uint16() external int wChannelMask;
-  @Uint32() external int dwSupport;
-  external GUID ManufacturerGuid;
-  external GUID ProductGuid;
-  external GUID NameGuid;
-}
-
-class MIDIINCAPSA extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
-  @Uint32() external int dwSupport;
-}
-
-class MIDIINCAPSW extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
-  @Uint32() external int dwSupport;
-}
-
-class MIDIINCAPS2A extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
-  @Uint32() external int dwSupport;
-  external GUID ManufacturerGuid;
-  external GUID ProductGuid;
-  external GUID NameGuid;
-}
-
-class MIDIINCAPS2W extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
-  @Uint32() external int dwSupport;
-  external GUID ManufacturerGuid;
-  external GUID ProductGuid;
-  external GUID NameGuid;
-}
-
-class MIDIHDR extends Struct {
-  external Pointer<Utf8> lpData;
-  @Uint32() external int dwBufferLength;
-  @Uint32() external int dwBytesRecorded;
-  @IntPtr() external int dwUser;
-  @Uint32() external int dwFlags;
-  external Pointer<MIDIHDR> lpNext;
-  @IntPtr() external int reserved;
-  @Uint32() external int dwOffset;
-  external __uintptr__ dwReserved;
-}
-
-class MIDIEVENT extends Struct {
-  @Uint32() external int dwDeltaTime;
-  @Uint32() external int dwStreamID;
-  @Uint32() external int dwEvent;
-  external __uint__ dwParms;
-}
-
-class MIDISTRMBUFFVER extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int dwMid;
-  @Uint32() external int dwOEMVersion;
-}
-
-class MIDIPROPTIMEDIV extends Struct {
-  @Uint32() external int cbStruct;
-  @Uint32() external int dwTimeDiv;
-}
-
-class MIDIPROPTEMPO extends Struct {
-  @Uint32() external int cbStruct;
-  @Uint32() external int dwTempo;
-}
-
-class AUXCAPSA extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
-  @Uint16() external int wTechnology;
-  @Uint16() external int wReserved1;
-  @Uint32() external int dwSupport;
-}
-
-class AUXCAPSW extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
-  @Uint16() external int wTechnology;
-  @Uint16() external int wReserved1;
-  @Uint32() external int dwSupport;
-}
-
-class AUXCAPS2A extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
-  @Uint16() external int wTechnology;
-  @Uint16() external int wReserved1;
-  @Uint32() external int dwSupport;
-  external GUID ManufacturerGuid;
-  external GUID ProductGuid;
-  external GUID NameGuid;
-}
-
-class AUXCAPS2W extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
-  @Uint16() external int wTechnology;
-  @Uint16() external int wReserved1;
-  @Uint32() external int dwSupport;
-  external GUID ManufacturerGuid;
-  external GUID ProductGuid;
-  external GUID NameGuid;
-}
-
-class MIXERCAPSA extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
-  @Uint32() external int fdwSupport;
-  @Uint32() external int cDestinations;
-}
-
-class MIXERCAPSW extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
-  @Uint32() external int fdwSupport;
-  @Uint32() external int cDestinations;
-}
-
-class MIXERCAPS2A extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
-  @Uint32() external int fdwSupport;
-  @Uint32() external int cDestinations;
-  external GUID ManufacturerGuid;
-  external GUID ProductGuid;
-  external GUID NameGuid;
-}
-
-class MIXERCAPS2W extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
-  @Uint32() external int fdwSupport;
-  @Uint32() external int cDestinations;
-  external GUID ManufacturerGuid;
-  external GUID ProductGuid;
-  external GUID NameGuid;
-}
-
-class MIXERCONTROLDETAILS_LISTTEXTA extends Struct {
-  @Uint32() external int dwParam1;
-  @Uint32() external int dwParam2;
-  external __byte__ szName;
-}
-
-class MIXERCONTROLDETAILS_LISTTEXTW extends Struct {
-  @Uint32() external int dwParam1;
-  @Uint32() external int dwParam2;
-  external __ushort__ szName;
-}
-
-class MIXERCONTROLDETAILS_BOOLEAN extends Struct {
-  @Int32() external int fValue;
-}
-
-class MIXERCONTROLDETAILS_SIGNED extends Struct {
-  @Int32() external int lValue;
-}
-
-class MIXERCONTROLDETAILS_UNSIGNED extends Struct {
-  @Uint32() external int dwValue;
-}
-
-class TIMECAPS extends Struct {
-  @Uint32() external int wPeriodMin;
-  @Uint32() external int wPeriodMax;
-}
-
-class JOYCAPSA extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  external __byte__ szPname;
-  @Uint32() external int wXmin;
-  @Uint32() external int wXmax;
-  @Uint32() external int wYmin;
-  @Uint32() external int wYmax;
-  @Uint32() external int wZmin;
-  @Uint32() external int wZmax;
-  @Uint32() external int wNumButtons;
-  @Uint32() external int wPeriodMin;
-  @Uint32() external int wPeriodMax;
-  @Uint32() external int wRmin;
-  @Uint32() external int wRmax;
-  @Uint32() external int wUmin;
-  @Uint32() external int wUmax;
-  @Uint32() external int wVmin;
-  @Uint32() external int wVmax;
-  @Uint32() external int wCaps;
-  @Uint32() external int wMaxAxes;
-  @Uint32() external int wNumAxes;
-  @Uint32() external int wMaxButtons;
-  external __byte__ szRegKey;
-  external __byte__ szOEMVxD;
-}
-
-class JOYCAPSW extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  external __ushort__ szPname;
-  @Uint32() external int wXmin;
-  @Uint32() external int wXmax;
-  @Uint32() external int wYmin;
-  @Uint32() external int wYmax;
-  @Uint32() external int wZmin;
-  @Uint32() external int wZmax;
-  @Uint32() external int wNumButtons;
-  @Uint32() external int wPeriodMin;
-  @Uint32() external int wPeriodMax;
-  @Uint32() external int wRmin;
-  @Uint32() external int wRmax;
-  @Uint32() external int wUmin;
-  @Uint32() external int wUmax;
-  @Uint32() external int wVmin;
-  @Uint32() external int wVmax;
-  @Uint32() external int wCaps;
-  @Uint32() external int wMaxAxes;
-  @Uint32() external int wNumAxes;
-  @Uint32() external int wMaxButtons;
-  external __ushort__ szRegKey;
-  external __ushort__ szOEMVxD;
-}
-
-class JOYCAPS2A extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  external __byte__ szPname;
-  @Uint32() external int wXmin;
-  @Uint32() external int wXmax;
-  @Uint32() external int wYmin;
-  @Uint32() external int wYmax;
-  @Uint32() external int wZmin;
-  @Uint32() external int wZmax;
-  @Uint32() external int wNumButtons;
-  @Uint32() external int wPeriodMin;
-  @Uint32() external int wPeriodMax;
-  @Uint32() external int wRmin;
-  @Uint32() external int wRmax;
-  @Uint32() external int wUmin;
-  @Uint32() external int wUmax;
-  @Uint32() external int wVmin;
-  @Uint32() external int wVmax;
-  @Uint32() external int wCaps;
-  @Uint32() external int wMaxAxes;
-  @Uint32() external int wNumAxes;
-  @Uint32() external int wMaxButtons;
-  external __byte__ szRegKey;
-  external __byte__ szOEMVxD;
-  external GUID ManufacturerGuid;
-  external GUID ProductGuid;
-  external GUID NameGuid;
-}
-
-class JOYCAPS2W extends Struct {
-  @Uint16() external int wMid;
-  @Uint16() external int wPid;
-  external __ushort__ szPname;
-  @Uint32() external int wXmin;
-  @Uint32() external int wXmax;
-  @Uint32() external int wYmin;
-  @Uint32() external int wYmax;
-  @Uint32() external int wZmin;
-  @Uint32() external int wZmax;
-  @Uint32() external int wNumButtons;
-  @Uint32() external int wPeriodMin;
-  @Uint32() external int wPeriodMax;
-  @Uint32() external int wRmin;
-  @Uint32() external int wRmax;
-  @Uint32() external int wUmin;
-  @Uint32() external int wUmax;
-  @Uint32() external int wVmin;
-  @Uint32() external int wVmax;
-  @Uint32() external int wCaps;
-  @Uint32() external int wMaxAxes;
-  @Uint32() external int wNumAxes;
-  @Uint32() external int wMaxButtons;
-  external __ushort__ szRegKey;
-  external __ushort__ szOEMVxD;
-  external GUID ManufacturerGuid;
-  external GUID ProductGuid;
-  external GUID NameGuid;
-}
-
-class JOYINFO extends Struct {
-  @Uint32() external int wXpos;
-  @Uint32() external int wYpos;
-  @Uint32() external int wZpos;
-  @Uint32() external int wButtons;
-}
-
-class JOYINFOEX extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwXpos;
-  @Uint32() external int dwYpos;
-  @Uint32() external int dwZpos;
-  @Uint32() external int dwRpos;
-  @Uint32() external int dwUpos;
-  @Uint32() external int dwVpos;
-  @Uint32() external int dwButtons;
-  @Uint32() external int dwButtonNumber;
-  @Uint32() external int dwPOV;
-  @Uint32() external int dwReserved1;
-  @Uint32() external int dwReserved2;
-}
-
 class KSDATAFORMAT_SUBTYPE_PCM extends Struct {
 }
 
@@ -601,6 +141,13 @@ class KSDATAFORMAT_SUBTYPE_IEEE_FLOAT extends Struct {
 }
 
 class KSDATAFORMAT_SUBTYPE_WAVEFORMATEX extends Struct {
+}
+
+class WAVEFORMATEXTENSIBLE extends Struct {
+  external WAVEFORMATEX Format;
+  @Uint32() external int Samples;
+  @Uint32() external int dwChannelMask;
+  external GUID SubFormat;
 }
 
 class ADPCMCOEFSET extends Struct {
@@ -844,6 +391,622 @@ class JPEGINFOHEADER extends Struct {
   @Uint32() external int JPEGBitsPerSample;
   @Uint32() external int JPEGHSubSampling;
   @Uint32() external int JPEGVSubSampling;
+}
+
+class MMTIME extends Struct {
+  @Uint32() external int wType;
+  @Uint32() external int u;
+}
+
+class DRVCONFIGINFOEX extends Struct {
+  @Uint32() external int dwDCISize;
+  external Pointer<Utf16> lpszDCISectionName;
+  external Pointer<Utf16> lpszDCIAliasName;
+  @Uint32() external int dnDevNode;
+}
+
+class DRVCONFIGINFO extends Struct {
+  @Uint32() external int dwDCISize;
+  external Pointer<Utf16> lpszDCISectionName;
+  external Pointer<Utf16> lpszDCIAliasName;
+}
+
+class MMIOINFO extends Struct {
+  @Uint32() external int dwFlags;
+  @Uint32() external int fccIOProc;
+  external Pointer<MMIOPROC> pIOProc;
+  @Uint32() external int wErrorRet;
+  @IntPtr() external int htask;
+  @Int32() external int cchBuffer;
+  external Pointer<Int8> pchBuffer;
+  external Pointer<Int8> pchNext;
+  external Pointer<Int8> pchEndRead;
+  external Pointer<Int8> pchEndWrite;
+  @Int32() external int lBufOffset;
+  @Int32() external int lDiskOffset;
+  external __uint__ adwInfo;
+  @Uint32() external int dwReserved1;
+  @Uint32() external int dwReserved2;
+  @IntPtr() external int hmmio;
+}
+
+class MMCKINFO extends Struct {
+  @Uint32() external int ckid;
+  @Uint32() external int cksize;
+  @Uint32() external int fccType;
+  @Uint32() external int dwDataOffset;
+  @Uint32() external int dwFlags;
+}
+
+class WAVEHDR extends Struct {
+  external Pointer<Utf8> lpData;
+  @Uint32() external int dwBufferLength;
+  @Uint32() external int dwBytesRecorded;
+  @IntPtr() external int dwUser;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwLoops;
+  external Pointer<WAVEHDR> lpNext;
+  @IntPtr() external int reserved;
+}
+
+class WAVEOUTCAPSA extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __byte__ szPname;
+  @Uint32() external int dwFormats;
+  @Uint16() external int wChannels;
+  @Uint16() external int wReserved1;
+  @Uint32() external int dwSupport;
+}
+
+class WAVEOUTCAPSW extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __ushort__ szPname;
+  @Uint32() external int dwFormats;
+  @Uint16() external int wChannels;
+  @Uint16() external int wReserved1;
+  @Uint32() external int dwSupport;
+}
+
+class WAVEOUTCAPS2A extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __byte__ szPname;
+  @Uint32() external int dwFormats;
+  @Uint16() external int wChannels;
+  @Uint16() external int wReserved1;
+  @Uint32() external int dwSupport;
+  external GUID ManufacturerGuid;
+  external GUID ProductGuid;
+  external GUID NameGuid;
+}
+
+class WAVEOUTCAPS2W extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __ushort__ szPname;
+  @Uint32() external int dwFormats;
+  @Uint16() external int wChannels;
+  @Uint16() external int wReserved1;
+  @Uint32() external int dwSupport;
+  external GUID ManufacturerGuid;
+  external GUID ProductGuid;
+  external GUID NameGuid;
+}
+
+class WAVEINCAPSA extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __byte__ szPname;
+  @Uint32() external int dwFormats;
+  @Uint16() external int wChannels;
+  @Uint16() external int wReserved1;
+}
+
+class WAVEINCAPSW extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __ushort__ szPname;
+  @Uint32() external int dwFormats;
+  @Uint16() external int wChannels;
+  @Uint16() external int wReserved1;
+}
+
+class WAVEINCAPS2A extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __byte__ szPname;
+  @Uint32() external int dwFormats;
+  @Uint16() external int wChannels;
+  @Uint16() external int wReserved1;
+  external GUID ManufacturerGuid;
+  external GUID ProductGuid;
+  external GUID NameGuid;
+}
+
+class WAVEINCAPS2W extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __ushort__ szPname;
+  @Uint32() external int dwFormats;
+  @Uint16() external int wChannels;
+  @Uint16() external int wReserved1;
+  external GUID ManufacturerGuid;
+  external GUID ProductGuid;
+  external GUID NameGuid;
+}
+
+class MIDIOUTCAPSA extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __byte__ szPname;
+  @Uint16() external int wTechnology;
+  @Uint16() external int wVoices;
+  @Uint16() external int wNotes;
+  @Uint16() external int wChannelMask;
+  @Uint32() external int dwSupport;
+}
+
+class MIDIOUTCAPSW extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __ushort__ szPname;
+  @Uint16() external int wTechnology;
+  @Uint16() external int wVoices;
+  @Uint16() external int wNotes;
+  @Uint16() external int wChannelMask;
+  @Uint32() external int dwSupport;
+}
+
+class MIDIOUTCAPS2A extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __byte__ szPname;
+  @Uint16() external int wTechnology;
+  @Uint16() external int wVoices;
+  @Uint16() external int wNotes;
+  @Uint16() external int wChannelMask;
+  @Uint32() external int dwSupport;
+  external GUID ManufacturerGuid;
+  external GUID ProductGuid;
+  external GUID NameGuid;
+}
+
+class MIDIOUTCAPS2W extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __ushort__ szPname;
+  @Uint16() external int wTechnology;
+  @Uint16() external int wVoices;
+  @Uint16() external int wNotes;
+  @Uint16() external int wChannelMask;
+  @Uint32() external int dwSupport;
+  external GUID ManufacturerGuid;
+  external GUID ProductGuid;
+  external GUID NameGuid;
+}
+
+class MIDIINCAPSA extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __byte__ szPname;
+  @Uint32() external int dwSupport;
+}
+
+class MIDIINCAPSW extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __ushort__ szPname;
+  @Uint32() external int dwSupport;
+}
+
+class MIDIINCAPS2A extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __byte__ szPname;
+  @Uint32() external int dwSupport;
+  external GUID ManufacturerGuid;
+  external GUID ProductGuid;
+  external GUID NameGuid;
+}
+
+class MIDIINCAPS2W extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __ushort__ szPname;
+  @Uint32() external int dwSupport;
+  external GUID ManufacturerGuid;
+  external GUID ProductGuid;
+  external GUID NameGuid;
+}
+
+class MIDIHDR extends Struct {
+  external Pointer<Utf8> lpData;
+  @Uint32() external int dwBufferLength;
+  @Uint32() external int dwBytesRecorded;
+  @IntPtr() external int dwUser;
+  @Uint32() external int dwFlags;
+  external Pointer<MIDIHDR> lpNext;
+  @IntPtr() external int reserved;
+  @Uint32() external int dwOffset;
+  external __uintptr__ dwReserved;
+}
+
+class MIDIEVENT extends Struct {
+  @Uint32() external int dwDeltaTime;
+  @Uint32() external int dwStreamID;
+  @Uint32() external int dwEvent;
+  external __uint__ dwParms;
+}
+
+class MIDISTRMBUFFVER extends Struct {
+  @Uint32() external int dwVersion;
+  @Uint32() external int dwMid;
+  @Uint32() external int dwOEMVersion;
+}
+
+class MIDIPROPTIMEDIV extends Struct {
+  @Uint32() external int cbStruct;
+  @Uint32() external int dwTimeDiv;
+}
+
+class MIDIPROPTEMPO extends Struct {
+  @Uint32() external int cbStruct;
+  @Uint32() external int dwTempo;
+}
+
+class AUXCAPSA extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __byte__ szPname;
+  @Uint16() external int wTechnology;
+  @Uint16() external int wReserved1;
+  @Uint32() external int dwSupport;
+}
+
+class AUXCAPSW extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __ushort__ szPname;
+  @Uint16() external int wTechnology;
+  @Uint16() external int wReserved1;
+  @Uint32() external int dwSupport;
+}
+
+class AUXCAPS2A extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __byte__ szPname;
+  @Uint16() external int wTechnology;
+  @Uint16() external int wReserved1;
+  @Uint32() external int dwSupport;
+  external GUID ManufacturerGuid;
+  external GUID ProductGuid;
+  external GUID NameGuid;
+}
+
+class AUXCAPS2W extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __ushort__ szPname;
+  @Uint16() external int wTechnology;
+  @Uint16() external int wReserved1;
+  @Uint32() external int dwSupport;
+  external GUID ManufacturerGuid;
+  external GUID ProductGuid;
+  external GUID NameGuid;
+}
+
+class MIXERCAPSA extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __byte__ szPname;
+  @Uint32() external int fdwSupport;
+  @Uint32() external int cDestinations;
+}
+
+class MIXERCAPSW extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __ushort__ szPname;
+  @Uint32() external int fdwSupport;
+  @Uint32() external int cDestinations;
+}
+
+class MIXERCAPS2A extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __byte__ szPname;
+  @Uint32() external int fdwSupport;
+  @Uint32() external int cDestinations;
+  external GUID ManufacturerGuid;
+  external GUID ProductGuid;
+  external GUID NameGuid;
+}
+
+class MIXERCAPS2W extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  @Uint32() external int vDriverVersion;
+  external __ushort__ szPname;
+  @Uint32() external int fdwSupport;
+  @Uint32() external int cDestinations;
+  external GUID ManufacturerGuid;
+  external GUID ProductGuid;
+  external GUID NameGuid;
+}
+
+class MIXERLINEA extends Struct {
+  @Uint32() external int cbStruct;
+  @Uint32() external int dwDestination;
+  @Uint32() external int dwSource;
+  @Uint32() external int dwLineID;
+  @Uint32() external int fdwLine;
+  @IntPtr() external int dwUser;
+  @Uint32() external int dwComponentType;
+  @Uint32() external int cChannels;
+  @Uint32() external int cConnections;
+  @Uint32() external int cControls;
+  external __byte__ szShortName;
+  external __byte__ szName;
+  @Uint32() external int Target;
+}
+
+class MIXERLINEW extends Struct {
+  @Uint32() external int cbStruct;
+  @Uint32() external int dwDestination;
+  @Uint32() external int dwSource;
+  @Uint32() external int dwLineID;
+  @Uint32() external int fdwLine;
+  @IntPtr() external int dwUser;
+  @Uint32() external int dwComponentType;
+  @Uint32() external int cChannels;
+  @Uint32() external int cConnections;
+  @Uint32() external int cControls;
+  external __ushort__ szShortName;
+  external __ushort__ szName;
+  @Uint32() external int Target;
+}
+
+class MIXERCONTROLA extends Struct {
+  @Uint32() external int cbStruct;
+  @Uint32() external int dwControlID;
+  @Uint32() external int dwControlType;
+  @Uint32() external int fdwControl;
+  @Uint32() external int cMultipleItems;
+  external __byte__ szShortName;
+  external __byte__ szName;
+  @Uint32() external int Bounds;
+  @Uint32() external int Metrics;
+}
+
+class MIXERCONTROLW extends Struct {
+  @Uint32() external int cbStruct;
+  @Uint32() external int dwControlID;
+  @Uint32() external int dwControlType;
+  @Uint32() external int fdwControl;
+  @Uint32() external int cMultipleItems;
+  external __ushort__ szShortName;
+  external __ushort__ szName;
+  @Uint32() external int Bounds;
+  @Uint32() external int Metrics;
+}
+
+class MIXERLINECONTROLSA extends Struct {
+  @Uint32() external int cbStruct;
+  @Uint32() external int dwLineID;
+  @Uint32() external int Anonymous;
+  @Uint32() external int cControls;
+  @Uint32() external int cbmxctrl;
+  external Pointer<MIXERCONTROLA> pamxctrl;
+}
+
+class MIXERLINECONTROLSW extends Struct {
+  @Uint32() external int cbStruct;
+  @Uint32() external int dwLineID;
+  @Uint32() external int Anonymous;
+  @Uint32() external int cControls;
+  @Uint32() external int cbmxctrl;
+  external Pointer<MIXERCONTROL> pamxctrl;
+}
+
+class MIXERCONTROLDETAILS extends Struct {
+  @Uint32() external int cbStruct;
+  @Uint32() external int dwControlID;
+  @Uint32() external int cChannels;
+  @Uint32() external int Anonymous;
+  @Uint32() external int cbDetails;
+  external Pointer paDetails;
+}
+
+class MIXERCONTROLDETAILS_LISTTEXTA extends Struct {
+  @Uint32() external int dwParam1;
+  @Uint32() external int dwParam2;
+  external __byte__ szName;
+}
+
+class MIXERCONTROLDETAILS_LISTTEXTW extends Struct {
+  @Uint32() external int dwParam1;
+  @Uint32() external int dwParam2;
+  external __ushort__ szName;
+}
+
+class MIXERCONTROLDETAILS_BOOLEAN extends Struct {
+  @Int32() external int fValue;
+}
+
+class MIXERCONTROLDETAILS_SIGNED extends Struct {
+  @Int32() external int lValue;
+}
+
+class MIXERCONTROLDETAILS_UNSIGNED extends Struct {
+  @Uint32() external int dwValue;
+}
+
+class TIMECAPS extends Struct {
+  @Uint32() external int wPeriodMin;
+  @Uint32() external int wPeriodMax;
+}
+
+class JOYCAPSA extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  external __byte__ szPname;
+  @Uint32() external int wXmin;
+  @Uint32() external int wXmax;
+  @Uint32() external int wYmin;
+  @Uint32() external int wYmax;
+  @Uint32() external int wZmin;
+  @Uint32() external int wZmax;
+  @Uint32() external int wNumButtons;
+  @Uint32() external int wPeriodMin;
+  @Uint32() external int wPeriodMax;
+  @Uint32() external int wRmin;
+  @Uint32() external int wRmax;
+  @Uint32() external int wUmin;
+  @Uint32() external int wUmax;
+  @Uint32() external int wVmin;
+  @Uint32() external int wVmax;
+  @Uint32() external int wCaps;
+  @Uint32() external int wMaxAxes;
+  @Uint32() external int wNumAxes;
+  @Uint32() external int wMaxButtons;
+  external __byte__ szRegKey;
+  external __byte__ szOEMVxD;
+}
+
+class JOYCAPSW extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  external __ushort__ szPname;
+  @Uint32() external int wXmin;
+  @Uint32() external int wXmax;
+  @Uint32() external int wYmin;
+  @Uint32() external int wYmax;
+  @Uint32() external int wZmin;
+  @Uint32() external int wZmax;
+  @Uint32() external int wNumButtons;
+  @Uint32() external int wPeriodMin;
+  @Uint32() external int wPeriodMax;
+  @Uint32() external int wRmin;
+  @Uint32() external int wRmax;
+  @Uint32() external int wUmin;
+  @Uint32() external int wUmax;
+  @Uint32() external int wVmin;
+  @Uint32() external int wVmax;
+  @Uint32() external int wCaps;
+  @Uint32() external int wMaxAxes;
+  @Uint32() external int wNumAxes;
+  @Uint32() external int wMaxButtons;
+  external __ushort__ szRegKey;
+  external __ushort__ szOEMVxD;
+}
+
+class JOYCAPS2A extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  external __byte__ szPname;
+  @Uint32() external int wXmin;
+  @Uint32() external int wXmax;
+  @Uint32() external int wYmin;
+  @Uint32() external int wYmax;
+  @Uint32() external int wZmin;
+  @Uint32() external int wZmax;
+  @Uint32() external int wNumButtons;
+  @Uint32() external int wPeriodMin;
+  @Uint32() external int wPeriodMax;
+  @Uint32() external int wRmin;
+  @Uint32() external int wRmax;
+  @Uint32() external int wUmin;
+  @Uint32() external int wUmax;
+  @Uint32() external int wVmin;
+  @Uint32() external int wVmax;
+  @Uint32() external int wCaps;
+  @Uint32() external int wMaxAxes;
+  @Uint32() external int wNumAxes;
+  @Uint32() external int wMaxButtons;
+  external __byte__ szRegKey;
+  external __byte__ szOEMVxD;
+  external GUID ManufacturerGuid;
+  external GUID ProductGuid;
+  external GUID NameGuid;
+}
+
+class JOYCAPS2W extends Struct {
+  @Uint16() external int wMid;
+  @Uint16() external int wPid;
+  external __ushort__ szPname;
+  @Uint32() external int wXmin;
+  @Uint32() external int wXmax;
+  @Uint32() external int wYmin;
+  @Uint32() external int wYmax;
+  @Uint32() external int wZmin;
+  @Uint32() external int wZmax;
+  @Uint32() external int wNumButtons;
+  @Uint32() external int wPeriodMin;
+  @Uint32() external int wPeriodMax;
+  @Uint32() external int wRmin;
+  @Uint32() external int wRmax;
+  @Uint32() external int wUmin;
+  @Uint32() external int wUmax;
+  @Uint32() external int wVmin;
+  @Uint32() external int wVmax;
+  @Uint32() external int wCaps;
+  @Uint32() external int wMaxAxes;
+  @Uint32() external int wNumAxes;
+  @Uint32() external int wMaxButtons;
+  external __ushort__ szRegKey;
+  external __ushort__ szOEMVxD;
+  external GUID ManufacturerGuid;
+  external GUID ProductGuid;
+  external GUID NameGuid;
+}
+
+class JOYINFO extends Struct {
+  @Uint32() external int wXpos;
+  @Uint32() external int wYpos;
+  @Uint32() external int wZpos;
+  @Uint32() external int wButtons;
+}
+
+class JOYINFOEX extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwXpos;
+  @Uint32() external int dwYpos;
+  @Uint32() external int dwZpos;
+  @Uint32() external int dwRpos;
+  @Uint32() external int dwUpos;
+  @Uint32() external int dwVpos;
+  @Uint32() external int dwButtons;
+  @Uint32() external int dwButtonNumber;
+  @Uint32() external int dwPOV;
+  @Uint32() external int dwReserved1;
+  @Uint32() external int dwReserved2;
 }
 
 class MCI_DGV_RECT_PARMS extends Struct {
@@ -1449,7 +1612,7 @@ class ICDRAWSUGGEST extends Struct {
   @Int32() external int dySrc;
   @Int32() external int dxDst;
   @Int32() external int dyDst;
-  external HIC hicDecompressor;
+  @IntPtr() external int hicDecompressor;
 }
 
 class ICPALETTE extends Struct {
@@ -1462,7 +1625,7 @@ class ICPALETTE extends Struct {
 class COMPVARS extends Struct {
   @Int32() external int cbSize;
   @Uint32() external int dwFlags;
-  external HIC hic;
+  @IntPtr() external int hic;
   @Uint32() external int fccType;
   @Uint32() external int fccHandler;
   external Pointer<BITMAPINFO> lpbiIn;
@@ -1670,7 +1833,7 @@ class DRVM_IOCTL_DATA extends Struct {
 }
 
 class WAVEOPENDESC extends Struct {
-  external HWAVE hWave;
+  @IntPtr() external int hWave;
   external Pointer<WAVEFORMAT> lpFormat;
   @IntPtr() external int dwCallback;
   @IntPtr() external int dwInstance;
@@ -1684,7 +1847,7 @@ class midiopenstrmid_tag extends Struct {
 }
 
 class tMIXEROPENDESC extends Struct {
-  external HMIXER hmx;
+  @IntPtr() external int hmx;
   external Pointer pReserved0;
   @IntPtr() external int dwCallback;
   @IntPtr() external int dwInstance;
@@ -1748,73 +1911,5 @@ class MCI_OPEN_DRIVER_PARMS extends Struct {
   external Pointer<Utf16> lpstrParams;
   @Uint32() external int wCustomCommandTable;
   @Uint32() external int wType;
-}
-
-class HACMDRIVER extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HACMDRIVERID extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HACMOBJ extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HACMSTREAM extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HDRVR extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HIC extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HMIDI extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HMIDIIN extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HMIDIOUT extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HMIDISTRM extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HMIXER extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HMIXEROBJ extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HMMIO extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HVIDEO extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HWAVE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HWAVEIN extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HWAVEOUT extends Struct {
-  @IntPtr() external int Value;
 }
 

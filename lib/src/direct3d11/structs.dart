@@ -205,6 +205,11 @@ class D3D11_TEXTURE3D_DESC extends Struct {
   @Uint32() external int MiscFlags;
 }
 
+class D3D11_BUFFER_SRV extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+}
+
 class D3D11_BUFFEREX_SRV extends Struct {
   @Uint32() external int FirstElement;
   @Uint32() external int NumElements;
@@ -261,6 +266,17 @@ class D3D11_TEX2DMS_ARRAY_SRV extends Struct {
   @Uint32() external int ArraySize;
 }
 
+class D3D11_SHADER_RESOURCE_VIEW_DESC extends Struct {
+  @Uint32() external int Format;
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Anonymous;
+}
+
+class D3D11_BUFFER_RTV extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+}
+
 class D3D11_TEX1D_RTV extends Struct {
   @Uint32() external int MipSlice;
 }
@@ -296,6 +312,12 @@ class D3D11_TEX3D_RTV extends Struct {
   @Uint32() external int WSize;
 }
 
+class D3D11_RENDER_TARGET_VIEW_DESC extends Struct {
+  @Uint32() external int Format;
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Anonymous;
+}
+
 class D3D11_TEX1D_DSV extends Struct {
   @Uint32() external int MipSlice;
 }
@@ -323,6 +345,13 @@ class D3D11_TEX2DMS_DSV extends Struct {
 class D3D11_TEX2DMS_ARRAY_DSV extends Struct {
   @Uint32() external int FirstArraySlice;
   @Uint32() external int ArraySize;
+}
+
+class D3D11_DEPTH_STENCIL_VIEW_DESC extends Struct {
+  @Uint32() external int Format;
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Flags;
+  @Uint32() external int Anonymous;
 }
 
 class D3D11_BUFFER_UAV extends Struct {
@@ -355,6 +384,12 @@ class D3D11_TEX3D_UAV extends Struct {
   @Uint32() external int MipSlice;
   @Uint32() external int FirstWSlice;
   @Uint32() external int WSize;
+}
+
+class D3D11_UNORDERED_ACCESS_VIEW_DESC extends Struct {
+  @Uint32() external int Format;
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Anonymous;
 }
 
 class D3D11_SAMPLER_DESC extends Struct {
@@ -531,6 +566,11 @@ class D3D11_FEATURE_DATA_D3D11_OPTIONS5 extends Struct {
 class CD3D11_VIDEO_DEFAULT extends Struct {
 }
 
+class D3D11_AUTHENTICATED_PROTECTION_FLAGS extends Struct {
+  @Uint32() external int Flags;
+  @Uint32() external int Value;
+}
+
 class D3D11_MESSAGE extends Struct {
   @Uint32() external int Category;
   @Uint32() external int Severity;
@@ -677,6 +717,12 @@ class D3D11_TEX2D_ARRAY_SRV1 extends Struct {
   @Uint32() external int PlaneSlice;
 }
 
+class D3D11_SHADER_RESOURCE_VIEW_DESC1 extends Struct {
+  @Uint32() external int Format;
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Anonymous;
+}
+
 class D3D11_TEX2D_RTV1 extends Struct {
   @Uint32() external int MipSlice;
   @Uint32() external int PlaneSlice;
@@ -689,6 +735,12 @@ class D3D11_TEX2D_ARRAY_RTV1 extends Struct {
   @Uint32() external int PlaneSlice;
 }
 
+class D3D11_RENDER_TARGET_VIEW_DESC1 extends Struct {
+  @Uint32() external int Format;
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Anonymous;
+}
+
 class D3D11_TEX2D_UAV1 extends Struct {
   @Uint32() external int MipSlice;
   @Uint32() external int PlaneSlice;
@@ -699,6 +751,12 @@ class D3D11_TEX2D_ARRAY_UAV1 extends Struct {
   @Uint32() external int FirstArraySlice;
   @Uint32() external int ArraySize;
   @Uint32() external int PlaneSlice;
+}
+
+class D3D11_UNORDERED_ACCESS_VIEW_DESC1 extends Struct {
+  @Uint32() external int Format;
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Anonymous;
 }
 
 class D3D11_QUERY_DESC1 extends Struct {
@@ -911,6 +969,12 @@ class D3D11_COMPUTE_SHADER_TRACE_DESC extends Struct {
   external __uint__ ThreadGroupID;
 }
 
+class D3D11_SHADER_TRACE_DESC extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int Flags;
+  @Uint32() external int Anonymous;
+}
+
 class D3D11_TRACE_STATS extends Struct {
   external D3D11_SHADER_TRACE_DESC TraceDesc;
   @Uint8() external int NumInvocationsInStamp;
@@ -940,6 +1004,13 @@ class D3D11_TRACE_STATS extends Struct {
 class D3D11_TRACE_VALUE extends Struct {
   external __uint__ Bits;
   @Uint8() external int ValidMask;
+}
+
+class D3D11_TRACE_REGISTER extends Struct {
+  @Uint32() external int RegType;
+  @Uint32() external int Anonymous;
+  @Uint8() external int OperandIndex;
+  @Uint8() external int Flags;
 }
 
 class D3D11_TRACE_STEP extends Struct {

@@ -43,6 +43,30 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class D3DVECTOR extends Struct {
+  @Float() external double x;
+  @Float() external double y;
+  @Float() external double z;
+}
+
+class D3DCOLORVALUE extends Struct {
+  @Float() external double r;
+  @Float() external double g;
+  @Float() external double b;
+  @Float() external double a;
+}
+
+class D3DRECT extends Struct {
+  @Int32() external int x1;
+  @Int32() external int y1;
+  @Int32() external int x2;
+  @Int32() external int y2;
+}
+
+class D3DMATRIX extends Struct {
+  @Uint32() external int Anonymous;
+}
+
 class D3DVIEWPORT9 extends Struct {
   @Uint32() external int X;
   @Uint32() external int Y;
@@ -58,18 +82,18 @@ class D3DCLIPSTATUS9 extends Struct {
 }
 
 class D3DMATERIAL9 extends Struct {
-  external DXGI_RGBA Diffuse;
-  external DXGI_RGBA Ambient;
-  external DXGI_RGBA Specular;
-  external DXGI_RGBA Emissive;
+  external D3DCOLORVALUE Diffuse;
+  external D3DCOLORVALUE Ambient;
+  external D3DCOLORVALUE Specular;
+  external D3DCOLORVALUE Emissive;
   @Float() external double Power;
 }
 
 class D3DLIGHT9 extends Struct {
   @Uint32() external int Type;
-  external DXGI_RGBA Diffuse;
-  external DXGI_RGBA Specular;
-  external DXGI_RGBA Ambient;
+  external D3DCOLORVALUE Diffuse;
+  external D3DCOLORVALUE Specular;
+  external D3DCOLORVALUE Ambient;
   external D3DVECTOR Position;
   external D3DVECTOR Direction;
   @Float() external double Range;
@@ -347,6 +371,10 @@ class D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT extends Struct {
   @IntPtr() external int hChannel;
   @Uint32() external int SequenceNumber;
   @Int32() external int ReturnCode;
+}
+
+class D3DAUTHENTICATEDCHANNEL_PROTECTION_FLAGS extends Struct {
+  @Uint32() external int Anonymous;
 }
 
 class D3DAUTHENTICATEDCHANNEL_QUERYPROTECTION_OUTPUT extends Struct {

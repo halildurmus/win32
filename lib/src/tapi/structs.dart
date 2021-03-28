@@ -155,6 +155,12 @@ class LINEAGENTCAPS extends Struct {
   external GUID ProxyGUID;
 }
 
+class LINEAGENTGROUPENTRY extends Struct {
+  @Uint32() external int GroupID;
+  @Uint32() external int dwNameSize;
+  @Uint32() external int dwNameOffset;
+}
+
 class LINEAGENTGROUPLIST extends Struct {
   @Uint32() external int dwTotalSize;
   @Uint32() external int dwNeededSize;
@@ -615,6 +621,15 @@ class LINEGENERATETONE extends Struct {
   @Uint32() external int dwVolume;
 }
 
+class LINEINITIALIZEEXPARAMS extends Struct {
+  @Uint32() external int dwTotalSize;
+  @Uint32() external int dwNeededSize;
+  @Uint32() external int dwUsedSize;
+  @Uint32() external int dwOptions;
+  @Uint32() external int Handles;
+  @Uint32() external int dwCompletionKey;
+}
+
 class LINELOCATIONENTRY extends Struct {
   @Uint32() external int dwPermanentLocationID;
   @Uint32() external int dwLocationNameSize;
@@ -691,6 +706,17 @@ class LINEPROVIDERLIST extends Struct {
   @Uint32() external int dwNumProviders;
   @Uint32() external int dwProviderListSize;
   @Uint32() external int dwProviderListOffset;
+}
+
+class LINEPROXYREQUEST extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwClientMachineNameSize;
+  @Uint32() external int dwClientMachineNameOffset;
+  @Uint32() external int dwClientUserNameSize;
+  @Uint32() external int dwClientUserNameOffset;
+  @Uint32() external int dwClientAppAPIVersion;
+  @Uint32() external int dwRequestType;
+  @Uint32() external int Anonymous;
 }
 
 class LINEREQMAKECALL extends Struct {
@@ -835,6 +861,15 @@ class PHONEEXTENSIONID extends Struct {
   @Uint32() external int dwExtensionID3;
 }
 
+class PHONEINITIALIZEEXPARAMS extends Struct {
+  @Uint32() external int dwTotalSize;
+  @Uint32() external int dwNeededSize;
+  @Uint32() external int dwUsedSize;
+  @Uint32() external int dwOptions;
+  @Uint32() external int Handles;
+  @Uint32() external int dwCompletionKey;
+}
+
 class PHONEMESSAGE extends Struct {
   @Uint32() external int hDevice;
   @Uint32() external int dwMessageID;
@@ -904,6 +939,13 @@ class TAPI_DETECTTONE extends Struct {
   @Uint32() external int dwFrequency1;
   @Uint32() external int dwFrequency2;
   @Uint32() external int dwFrequency3;
+}
+
+class MSP_EVENT_INFO extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int Event;
+  external Pointer<Int32> hCall;
+  @Uint32() external int Anonymous;
 }
 
 class Rendezvous extends Struct {

@@ -798,7 +798,7 @@ class AT_INFO extends Struct {
   @IntPtr() external int JobTime;
   @Uint32() external int DaysOfMonth;
   @Uint8() external int DaysOfWeek;
-  @Uint32() external int Flags;
+  @Uint8() external int Flags;
   external Pointer<Utf16> Command;
 }
 
@@ -807,7 +807,7 @@ class AT_ENUM extends Struct {
   @IntPtr() external int JobTime;
   @Uint32() external int DaysOfMonth;
   @Uint8() external int DaysOfWeek;
-  @Uint32() external int Flags;
+  @Uint8() external int Flags;
   external Pointer<Utf16> Command;
 }
 

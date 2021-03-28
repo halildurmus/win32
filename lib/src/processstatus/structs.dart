@@ -49,9 +49,19 @@ class MODULEINFO extends Struct {
   external Pointer EntryPoint;
 }
 
+class PSAPI_WORKING_SET_BLOCK extends Struct {
+  @IntPtr() external int Flags;
+  @Uint32() external int Anonymous;
+}
+
 class PSAPI_WORKING_SET_INFORMATION extends Struct {
   @IntPtr() external int NumberOfEntries;
   external PSAPI_WORKING_SET_BLOCK WorkingSetInfo;
+}
+
+class PSAPI_WORKING_SET_EX_BLOCK extends Struct {
+  @IntPtr() external int Flags;
+  @Uint32() external int Anonymous;
 }
 
 class PSAPI_WORKING_SET_EX_INFORMATION extends Struct {

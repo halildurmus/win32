@@ -43,11 +43,11 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class HDESK extends Struct {
+class HWINSTA extends Struct {
   @IntPtr() external int Value;
 }
 
-class HWINSTA extends Struct {
+class HDESK extends Struct {
   @IntPtr() external int Value;
 }
 

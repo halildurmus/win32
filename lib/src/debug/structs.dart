@@ -44,31 +44,58 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class CONTEXT extends Struct {
+  @Uint64() external int P1Home;
+  @Uint64() external int P2Home;
+  @Uint64() external int P3Home;
+  @Uint64() external int P4Home;
+  @Uint64() external int P5Home;
+  @Uint64() external int P6Home;
   @Uint32() external int ContextFlags;
-  @Uint32() external int Dr0;
-  @Uint32() external int Dr1;
-  @Uint32() external int Dr2;
-  @Uint32() external int Dr3;
-  @Uint32() external int Dr6;
-  @Uint32() external int Dr7;
-  external FLOATING_SAVE_AREA FloatSave;
-  @Uint32() external int SegGs;
-  @Uint32() external int SegFs;
-  @Uint32() external int SegEs;
-  @Uint32() external int SegDs;
-  @Uint32() external int Edi;
-  @Uint32() external int Esi;
-  @Uint32() external int Ebx;
-  @Uint32() external int Edx;
-  @Uint32() external int Ecx;
-  @Uint32() external int Eax;
-  @Uint32() external int Ebp;
-  @Uint32() external int Eip;
-  @Uint32() external int SegCs;
+  @Uint32() external int MxCsr;
+  @Uint16() external int SegCs;
+  @Uint16() external int SegDs;
+  @Uint16() external int SegEs;
+  @Uint16() external int SegFs;
+  @Uint16() external int SegGs;
+  @Uint16() external int SegSs;
   @Uint32() external int EFlags;
-  @Uint32() external int Esp;
-  @Uint32() external int SegSs;
-  external __ubyte__ ExtendedRegisters;
+  @Uint64() external int Dr0;
+  @Uint64() external int Dr1;
+  @Uint64() external int Dr2;
+  @Uint64() external int Dr3;
+  @Uint64() external int Dr6;
+  @Uint64() external int Dr7;
+  @Uint64() external int Rax;
+  @Uint64() external int Rcx;
+  @Uint64() external int Rdx;
+  @Uint64() external int Rbx;
+  @Uint64() external int Rsp;
+  @Uint64() external int Rbp;
+  @Uint64() external int Rsi;
+  @Uint64() external int Rdi;
+  @Uint64() external int R8;
+  @Uint64() external int R9;
+  @Uint64() external int R10;
+  @Uint64() external int R11;
+  @Uint64() external int R12;
+  @Uint64() external int R13;
+  @Uint64() external int R14;
+  @Uint64() external int R15;
+  @Uint64() external int Rip;
+  @Uint32() external int Anonymous;
+  external M128A VectorRegister;
+  @Uint64() external int VectorControl;
+  @Uint64() external int DebugControl;
+  @Uint64() external int LastBranchToRip;
+  @Uint64() external int LastBranchFromRip;
+  @Uint64() external int LastExceptionToRip;
+  @Uint64() external int LastExceptionFromRip;
+}
+
+class LDT_ENTRY extends Struct {
+  @Uint16() external int LimitLow;
+  @Uint16() external int BaseLow;
+  @Uint32() external int HighWord;
 }
 
 class WOW64_FLOATING_SAVE_AREA extends Struct {
@@ -109,6 +136,12 @@ class WOW64_CONTEXT extends Struct {
   @Uint32() external int Esp;
   @Uint32() external int SegSs;
   external __ubyte__ ExtendedRegisters;
+}
+
+class WOW64_LDT_ENTRY extends Struct {
+  @Uint16() external int LimitLow;
+  @Uint16() external int BaseLow;
+  @Uint32() external int HighWord;
 }
 
 class EXCEPTION_RECORD extends Struct {
@@ -187,6 +220,19 @@ class IMAGE_NT_HEADERS64 extends Struct {
   @Uint32() external int Signature;
   external IMAGE_FILE_HEADER FileHeader;
   external IMAGE_OPTIONAL_HEADER64 OptionalHeader;
+}
+
+class IMAGE_SECTION_HEADER extends Struct {
+  external __ubyte__ Name;
+  @Uint32() external int Misc;
+  @Uint32() external int VirtualAddress;
+  @Uint32() external int SizeOfRawData;
+  @Uint32() external int PointerToRawData;
+  @Uint32() external int PointerToRelocations;
+  @Uint32() external int PointerToLinenumbers;
+  @Uint16() external int NumberOfRelocations;
+  @Uint16() external int NumberOfLinenumbers;
+  @Uint32() external int Characteristics;
 }
 
 class IMAGE_LOAD_CONFIG_DIRECTORY32 extends Struct {
@@ -319,6 +365,12 @@ class IMAGE_FUNCTION_ENTRY extends Struct {
   @Uint32() external int EndOfPrologue;
 }
 
+class IMAGE_FUNCTION_ENTRY64 extends Struct {
+  @Uint64() external int StartingAddress;
+  @Uint64() external int EndingAddress;
+  @Uint32() external int Anonymous;
+}
+
 class EXCEPTION_DEBUG_INFO extends Struct {
   external EXCEPTION_RECORD ExceptionRecord;
   @Uint32() external int dwFirstChance;
@@ -375,12 +427,25 @@ class RIP_INFO extends Struct {
   @Uint32() external int dwType;
 }
 
+class DEBUG_EVENT extends Struct {
+  @Uint32() external int dwDebugEventCode;
+  @Uint32() external int dwProcessId;
+  @Uint32() external int dwThreadId;
+  @Uint32() external int u;
+}
+
 class FLASHWINFO extends Struct {
   @Uint32() external int cbSize;
   @IntPtr() external int hwnd;
   @Uint32() external int dwFlags;
   @Uint32() external int uCount;
   @Uint32() external int dwTimeout;
+}
+
+class WAITCHAIN_NODE_INFO extends Struct {
+  @Uint32() external int ObjectType;
+  @Uint32() external int ObjectStatus;
+  @Uint32() external int Anonymous;
 }
 
 class MINIDUMP_LOCATION_DESCRIPTOR extends Struct {
@@ -403,6 +468,16 @@ class MINIDUMP_MEMORY_DESCRIPTOR64 extends Struct {
   @Uint64() external int DataSize;
 }
 
+class MINIDUMP_HEADER extends Struct {
+  @Uint32() external int Signature;
+  @Uint32() external int Version;
+  @Uint32() external int NumberOfStreams;
+  @Uint32() external int StreamDirectoryRva;
+  @Uint32() external int CheckSum;
+  @Uint32() external int Anonymous;
+  @Uint64() external int Flags;
+}
+
 class MINIDUMP_DIRECTORY extends Struct {
   @Uint32() external int StreamType;
   external MINIDUMP_LOCATION_DESCRIPTOR Location;
@@ -411,6 +486,25 @@ class MINIDUMP_DIRECTORY extends Struct {
 class MINIDUMP_STRING extends Struct {
   @Uint32() external int Length;
   external __ushort__ Buffer;
+}
+
+class CPU_INFORMATION extends Struct {
+  @Uint32() external int X86CpuInfo;
+  @Uint32() external int OtherCpuInfo;
+}
+
+class MINIDUMP_SYSTEM_INFO extends Struct {
+  @Uint32() external int ProcessorArchitecture;
+  @Uint16() external int ProcessorLevel;
+  @Uint16() external int ProcessorRevision;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int MajorVersion;
+  @Uint32() external int MinorVersion;
+  @Uint32() external int BuildNumber;
+  @Uint32() external int PlatformId;
+  @Uint32() external int CSDVersionRva;
+  @Uint32() external int Anonymous2;
+  external CPU_INFORMATION Cpu;
 }
 
 class MINIDUMP_THREAD extends Struct {
@@ -977,6 +1071,17 @@ class MINIDUMP_VM_POST_READ_CALLBACK extends Struct {
   @Int32() external int Status;
 }
 
+class MINIDUMP_CALLBACK_INPUT extends Struct {
+  @Uint32() external int ProcessId;
+  @IntPtr() external int ProcessHandle;
+  @Uint32() external int CallbackType;
+  @Uint32() external int Anonymous;
+}
+
+class MINIDUMP_CALLBACK_OUTPUT extends Struct {
+  @Uint32() external int Anonymous;
+}
+
 class MINIDUMP_CALLBACK_INFORMATION extends Struct {
   external MINIDUMP_CALLBACK_ROUTINE CallbackRoutine;
   external Pointer CallbackParam;
@@ -1051,9 +1156,29 @@ class PROFILER_PROPERTY_TYPE_SUBSTRING_INFO extends Struct {
   external Pointer<Utf16> value;
 }
 
+class PROFILER_HEAP_OBJECT_RELATIONSHIP extends Struct {
+  @Uint32() external int relationshipId;
+  @Uint32() external int relationshipInfo;
+  @Uint32() external int Anonymous;
+}
+
 class PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST extends Struct {
   @Uint32() external int count;
   external PROFILER_HEAP_OBJECT_RELATIONSHIP elements;
+}
+
+class PROFILER_HEAP_OBJECT_OPTIONAL_INFO extends Struct {
+  @Uint32() external int infoType;
+  @Uint32() external int Anonymous;
+}
+
+class PROFILER_HEAP_OBJECT extends Struct {
+  @Uint32() external int size;
+  @Uint32() external int Anonymous;
+  @Uint32() external int typeNameId;
+  @Uint32() external int flags;
+  @Uint16() external int unused;
+  @Uint16() external int optionalInfoCount;
 }
 
 class PROFILER_HEAP_SUMMARY extends Struct {
@@ -1948,5 +2073,427 @@ class HTML_PAINT_DRAW_INFO extends Struct {
   external RECT rcViewport;
   @IntPtr() external int hrgnUpdate;
   external HTML_PAINT_XFORM xform;
+}
+
+class LOADED_IMAGE extends Struct {
+  external Pointer<Utf8> ModuleName;
+  @IntPtr() external int hFile;
+  external Pointer<Uint8> MappedAddress;
+  external Pointer<IMAGE_NT_HEADERS64> FileHeader;
+  external Pointer<IMAGE_SECTION_HEADER> LastRvaSection;
+  @Uint32() external int NumberOfSections;
+  external Pointer<IMAGE_SECTION_HEADER> Sections;
+  @Uint32() external int Characteristics;
+  @Uint8() external int fSystemImage;
+  @Uint8() external int fDOSImage;
+  @Uint8() external int fReadOnly;
+  @Uint8() external int Version;
+  external LIST_ENTRY Links;
+  @Uint32() external int SizeOfImage;
+}
+
+class MODLOAD_DATA extends Struct {
+  @Uint32() external int ssize;
+  @Uint32() external int ssig;
+  external Pointer data;
+  @Uint32() external int size;
+  @Uint32() external int flags;
+}
+
+class MODLOAD_CVMISC extends Struct {
+  @Uint32() external int oCV;
+  @IntPtr() external int cCV;
+  @Uint32() external int oMisc;
+  @IntPtr() external int cMisc;
+  @Uint32() external int dtImage;
+  @Uint32() external int cImage;
+}
+
+class MODLOAD_PDBGUID_PDBAGE extends Struct {
+  external GUID PdbGuid;
+  @Uint32() external int PdbAge;
+}
+
+class ADDRESS64 extends Struct {
+  @Uint64() external int Offset;
+  @Uint16() external int Segment;
+  @Uint32() external int Mode;
+}
+
+class KDHELP64 extends Struct {
+  @Uint64() external int Thread;
+  @Uint32() external int ThCallbackStack;
+  @Uint32() external int ThCallbackBStore;
+  @Uint32() external int NextCallback;
+  @Uint32() external int FramePointer;
+  @Uint64() external int KiCallUserMode;
+  @Uint64() external int KeUserCallbackDispatcher;
+  @Uint64() external int SystemRangeStart;
+  @Uint64() external int KiUserExceptionDispatcher;
+  @Uint64() external int StackBase;
+  @Uint64() external int StackLimit;
+  @Uint32() external int BuildVersion;
+  @Uint32() external int RetpolineStubFunctionTableSize;
+  @Uint64() external int RetpolineStubFunctionTable;
+  @Uint32() external int RetpolineStubOffset;
+  @Uint32() external int RetpolineStubSize;
+  external __uint64__ Reserved0;
+}
+
+class STACKFRAME64 extends Struct {
+  external ADDRESS64 AddrPC;
+  external ADDRESS64 AddrReturn;
+  external ADDRESS64 AddrFrame;
+  external ADDRESS64 AddrStack;
+  external ADDRESS64 AddrBStore;
+  external Pointer FuncTableEntry;
+  external __uint64__ Params;
+  @Int32() external int Far;
+  @Int32() external int Virtual;
+  external __uint64__ Reserved;
+  external KDHELP64 KdHelp;
+}
+
+class STACKFRAME_EX extends Struct {
+  external ADDRESS64 AddrPC;
+  external ADDRESS64 AddrReturn;
+  external ADDRESS64 AddrFrame;
+  external ADDRESS64 AddrStack;
+  external ADDRESS64 AddrBStore;
+  external Pointer FuncTableEntry;
+  external __uint64__ Params;
+  @Int32() external int Far;
+  @Int32() external int Virtual;
+  external __uint64__ Reserved;
+  external KDHELP64 KdHelp;
+  @Uint32() external int StackFrameSize;
+  @Uint32() external int InlineFrameContext;
+}
+
+class API_VERSION extends Struct {
+  @Uint16() external int MajorVersion;
+  @Uint16() external int MinorVersion;
+  @Uint16() external int Revision;
+  @Uint16() external int Reserved;
+}
+
+class IMAGEHLP_SYMBOL64 extends Struct {
+  @Uint32() external int SizeOfStruct;
+  @Uint64() external int Address;
+  @Uint32() external int Size;
+  @Uint32() external int Flags;
+  @Uint32() external int MaxNameLength;
+  external __byte__ Name;
+}
+
+class IMAGEHLP_SYMBOL64_PACKAGE extends Struct {
+  external IMAGEHLP_SYMBOL64 sym;
+  external __byte__ name;
+}
+
+class IMAGEHLP_SYMBOLW64 extends Struct {
+  @Uint32() external int SizeOfStruct;
+  @Uint64() external int Address;
+  @Uint32() external int Size;
+  @Uint32() external int Flags;
+  @Uint32() external int MaxNameLength;
+  external __ushort__ Name;
+}
+
+class IMAGEHLP_SYMBOLW64_PACKAGE extends Struct {
+  external IMAGEHLP_SYMBOLW64 sym;
+  external __ushort__ name;
+}
+
+class IMAGEHLP_MODULE64 extends Struct {
+  @Uint32() external int SizeOfStruct;
+  @Uint64() external int BaseOfImage;
+  @Uint32() external int ImageSize;
+  @Uint32() external int TimeDateStamp;
+  @Uint32() external int CheckSum;
+  @Uint32() external int NumSyms;
+  @Uint32() external int SymType;
+  external __byte__ ModuleName;
+  external __byte__ ImageName;
+  external __byte__ LoadedImageName;
+  external __byte__ LoadedPdbName;
+  @Uint32() external int CVSig;
+  external __byte__ CVData;
+  @Uint32() external int PdbSig;
+  external GUID PdbSig70;
+  @Uint32() external int PdbAge;
+  @Int32() external int PdbUnmatched;
+  @Int32() external int DbgUnmatched;
+  @Int32() external int LineNumbers;
+  @Int32() external int GlobalSymbols;
+  @Int32() external int TypeInfo;
+  @Int32() external int SourceIndexed;
+  @Int32() external int Publics;
+  @Uint32() external int MachineType;
+  @Uint32() external int Reserved;
+}
+
+class IMAGEHLP_MODULEW64 extends Struct {
+  @Uint32() external int SizeOfStruct;
+  @Uint64() external int BaseOfImage;
+  @Uint32() external int ImageSize;
+  @Uint32() external int TimeDateStamp;
+  @Uint32() external int CheckSum;
+  @Uint32() external int NumSyms;
+  @Uint32() external int SymType;
+  external __ushort__ ModuleName;
+  external __ushort__ ImageName;
+  external __ushort__ LoadedImageName;
+  external __ushort__ LoadedPdbName;
+  @Uint32() external int CVSig;
+  external __ushort__ CVData;
+  @Uint32() external int PdbSig;
+  external GUID PdbSig70;
+  @Uint32() external int PdbAge;
+  @Int32() external int PdbUnmatched;
+  @Int32() external int DbgUnmatched;
+  @Int32() external int LineNumbers;
+  @Int32() external int GlobalSymbols;
+  @Int32() external int TypeInfo;
+  @Int32() external int SourceIndexed;
+  @Int32() external int Publics;
+  @Uint32() external int MachineType;
+  @Uint32() external int Reserved;
+}
+
+class IMAGEHLP_LINE64 extends Struct {
+  @Uint32() external int SizeOfStruct;
+  external Pointer Key;
+  @Uint32() external int LineNumber;
+  external Pointer<Utf8> FileName;
+  @Uint64() external int Address;
+}
+
+class IMAGEHLP_LINEW64 extends Struct {
+  @Uint32() external int SizeOfStruct;
+  external Pointer Key;
+  @Uint32() external int LineNumber;
+  external Pointer<Utf16> FileName;
+  @Uint64() external int Address;
+}
+
+class SOURCEFILE extends Struct {
+  @Uint64() external int ModBase;
+  external Pointer<Utf8> FileName;
+}
+
+class SOURCEFILEW extends Struct {
+  @Uint64() external int ModBase;
+  external Pointer<Utf16> FileName;
+}
+
+class IMAGEHLP_CBA_READ_MEMORY extends Struct {
+  @Uint64() external int addr;
+  external Pointer buf;
+  @Uint32() external int bytes;
+  external Pointer<Uint32> bytesread;
+}
+
+class IMAGEHLP_CBA_EVENT extends Struct {
+  @Uint32() external int severity;
+  @Uint32() external int code;
+  external Pointer<Utf8> desc;
+  external Pointer object;
+}
+
+class IMAGEHLP_CBA_EVENTW extends Struct {
+  @Uint32() external int severity;
+  @Uint32() external int code;
+  external Pointer<Utf16> desc;
+  external Pointer object;
+}
+
+class IMAGEHLP_DEFERRED_SYMBOL_LOAD64 extends Struct {
+  @Uint32() external int SizeOfStruct;
+  @Uint64() external int BaseOfImage;
+  @Uint32() external int CheckSum;
+  @Uint32() external int TimeDateStamp;
+  external __byte__ FileName;
+  @Uint8() external int Reparse;
+  @IntPtr() external int hFile;
+  @Uint32() external int Flags;
+}
+
+class IMAGEHLP_DEFERRED_SYMBOL_LOADW64 extends Struct {
+  @Uint32() external int SizeOfStruct;
+  @Uint64() external int BaseOfImage;
+  @Uint32() external int CheckSum;
+  @Uint32() external int TimeDateStamp;
+  external __ushort__ FileName;
+  @Uint8() external int Reparse;
+  @IntPtr() external int hFile;
+  @Uint32() external int Flags;
+}
+
+class IMAGEHLP_DUPLICATE_SYMBOL64 extends Struct {
+  @Uint32() external int SizeOfStruct;
+  @Uint32() external int NumberOfDups;
+  external Pointer<IMAGEHLP_SYMBOL64> Symbol;
+  @Uint32() external int SelectedSymbol;
+}
+
+class OMAP extends Struct {
+  @Uint32() external int rva;
+  @Uint32() external int rvaTo;
+}
+
+class SRCCODEINFO extends Struct {
+  @Uint32() external int SizeOfStruct;
+  external Pointer Key;
+  @Uint64() external int ModBase;
+  external __byte__ Obj;
+  external __byte__ FileName;
+  @Uint32() external int LineNumber;
+  @Uint64() external int Address;
+}
+
+class SRCCODEINFOW extends Struct {
+  @Uint32() external int SizeOfStruct;
+  external Pointer Key;
+  @Uint64() external int ModBase;
+  external __ushort__ Obj;
+  external __ushort__ FileName;
+  @Uint32() external int LineNumber;
+  @Uint64() external int Address;
+}
+
+class IMAGEHLP_SYMBOL_SRC extends Struct {
+  @Uint32() external int sizeofstruct;
+  @Uint32() external int type;
+  external __byte__ file;
+}
+
+class MODULE_TYPE_INFO extends Struct {
+  @Uint16() external int dataLength;
+  @Uint16() external int leaf;
+  external __ubyte__ data;
+}
+
+class SYMBOL_INFO extends Struct {
+  @Uint32() external int SizeOfStruct;
+  @Uint32() external int TypeIndex;
+  external __uint64__ Reserved;
+  @Uint32() external int Index;
+  @Uint32() external int Size;
+  @Uint64() external int ModBase;
+  @Uint32() external int Flags;
+  @Uint64() external int Value;
+  @Uint64() external int Address;
+  @Uint32() external int Register;
+  @Uint32() external int Scope;
+  @Uint32() external int Tag;
+  @Uint32() external int NameLen;
+  @Uint32() external int MaxNameLen;
+  external __byte__ Name;
+}
+
+class SYMBOL_INFO_PACKAGE extends Struct {
+  external SYMBOL_INFO si;
+  external __byte__ name;
+}
+
+class SYMBOL_INFOW extends Struct {
+  @Uint32() external int SizeOfStruct;
+  @Uint32() external int TypeIndex;
+  external __uint64__ Reserved;
+  @Uint32() external int Index;
+  @Uint32() external int Size;
+  @Uint64() external int ModBase;
+  @Uint32() external int Flags;
+  @Uint64() external int Value;
+  @Uint64() external int Address;
+  @Uint32() external int Register;
+  @Uint32() external int Scope;
+  @Uint32() external int Tag;
+  @Uint32() external int NameLen;
+  @Uint32() external int MaxNameLen;
+  external __ushort__ Name;
+}
+
+class SYMBOL_INFO_PACKAGEW extends Struct {
+  external SYMBOL_INFOW si;
+  external __ushort__ name;
+}
+
+class IMAGEHLP_STACK_FRAME extends Struct {
+  @Uint64() external int InstructionOffset;
+  @Uint64() external int ReturnOffset;
+  @Uint64() external int FrameOffset;
+  @Uint64() external int StackOffset;
+  @Uint64() external int BackingStoreOffset;
+  @Uint64() external int FuncTableEntry;
+  external __uint64__ Params;
+  external __uint64__ Reserved;
+  @Int32() external int Virtual;
+  @Uint32() external int Reserved2;
+}
+
+class TI_FINDCHILDREN_PARAMS extends Struct {
+  @Uint32() external int Count;
+  @Uint32() external int Start;
+  external __uint__ ChildId;
+}
+
+class IMAGEHLP_GET_TYPE_INFO_PARAMS extends Struct {
+  @Uint32() external int SizeOfStruct;
+  @Uint32() external int Flags;
+  @Uint32() external int NumIds;
+  external Pointer<Uint32> TypeIds;
+  @Uint64() external int TagFilter;
+  @Uint32() external int NumReqs;
+  external Pointer<Uint32> ReqKinds;
+  external Pointer<Uint64> ReqOffsets;
+  external Pointer<Uint32> ReqSizes;
+  @IntPtr() external int ReqStride;
+  @IntPtr() external int BufferSize;
+  external Pointer Buffer;
+  @Uint32() external int EntriesMatched;
+  @Uint32() external int EntriesFilled;
+  @Uint64() external int TagsFound;
+  @Uint64() external int AllReqsValid;
+  @Uint32() external int NumReqsValid;
+  external Pointer<Uint64> ReqsValid;
+}
+
+class SYMSRV_INDEX_INFO extends Struct {
+  @Uint32() external int sizeofstruct;
+  external __byte__ file;
+  @Int32() external int stripped;
+  @Uint32() external int timestamp;
+  @Uint32() external int size;
+  external __byte__ dbgfile;
+  external __byte__ pdbfile;
+  external GUID guid;
+  @Uint32() external int sig;
+  @Uint32() external int age;
+}
+
+class SYMSRV_INDEX_INFOW extends Struct {
+  @Uint32() external int sizeofstruct;
+  external __ushort__ file;
+  @Int32() external int stripped;
+  @Uint32() external int timestamp;
+  @Uint32() external int size;
+  external __ushort__ dbgfile;
+  external __ushort__ pdbfile;
+  external GUID guid;
+  @Uint32() external int sig;
+  @Uint32() external int age;
+}
+
+class SYMSRV_EXTENDED_OUTPUT_DATA extends Struct {
+  @Uint32() external int sizeOfStruct;
+  @Uint32() external int version;
+  external __ushort__ filePtrMsg;
+}
+
+class DBGHELP_DATA_REPORT_STRUCT extends Struct {
+  external Pointer<Utf16> pBinPathNonExist;
+  external Pointer<Utf16> pSymbolPathNonExist;
 }
 

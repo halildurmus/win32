@@ -661,6 +661,11 @@ class RFX_GFX_MSG_RDP_DATA extends Struct {
   external __ubyte__ rdpData;
 }
 
+class WTS_SOCKADDR extends Struct {
+  @Uint16() external int sin_family;
+  @Uint32() external int u;
+}
+
 class WTS_SMALL_RECT extends Struct {
   @Int16() external int Left;
   @Int16() external int Top;
@@ -847,6 +852,11 @@ class WTS_DISPLAY_IOCTL extends Struct {
   @Uint32() external int cbDisplayIOCtlData;
 }
 
+class WTS_PROPERTY_VALUE extends Struct {
+  @Uint16() external int Type;
+  @Uint32() external int u;
+}
+
 class WTS_LICENSE_CAPABILITIES extends Struct {
   @Uint32() external int KeyExchangeAlg;
   @Uint32() external int ProtocolVer;
@@ -992,11 +1002,6 @@ class WRDS_SETTINGS extends Struct {
   external WRDS_SETTING WRdsSetting;
 }
 
-class WTSSESSION_NOTIFICATION extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwSessionId;
-}
-
 class APO_CONNECTION_PROPERTY extends Struct {
   @IntPtr() external int pBuffer;
   @Uint32() external int u32ValidFrameCount;
@@ -1011,5 +1016,10 @@ class AE_CURRENT_POSITION extends Struct {
   @Int64() external int hnsQPCPosition;
   @Float() external double f32FramesPerSecond;
   @Uint32() external int Flag;
+}
+
+class WTSSESSION_NOTIFICATION extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwSessionId;
 }
 

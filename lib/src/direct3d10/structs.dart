@@ -183,6 +183,11 @@ class D3D10_MAPPED_TEXTURE3D extends Struct {
   @Uint32() external int DepthPitch;
 }
 
+class D3D10_BUFFER_SRV extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+}
+
 class D3D10_TEX1D_SRV extends Struct {
   @Uint32() external int MostDetailedMip;
   @Uint32() external int MipLevels;
@@ -226,6 +231,17 @@ class D3D10_TEX2DMS_ARRAY_SRV extends Struct {
   @Uint32() external int ArraySize;
 }
 
+class D3D10_SHADER_RESOURCE_VIEW_DESC extends Struct {
+  @Uint32() external int Format;
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Anonymous;
+}
+
+class D3D10_BUFFER_RTV extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+}
+
 class D3D10_TEX1D_RTV extends Struct {
   @Uint32() external int MipSlice;
 }
@@ -261,6 +277,12 @@ class D3D10_TEX3D_RTV extends Struct {
   @Uint32() external int WSize;
 }
 
+class D3D10_RENDER_TARGET_VIEW_DESC extends Struct {
+  @Uint32() external int Format;
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Anonymous;
+}
+
 class D3D10_TEX1D_DSV extends Struct {
   @Uint32() external int MipSlice;
 }
@@ -288,6 +310,12 @@ class D3D10_TEX2DMS_DSV extends Struct {
 class D3D10_TEX2DMS_ARRAY_DSV extends Struct {
   @Uint32() external int FirstArraySlice;
   @Uint32() external int ArraySize;
+}
+
+class D3D10_DEPTH_STENCIL_VIEW_DESC extends Struct {
+  @Uint32() external int Format;
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Anonymous;
 }
 
 class D3D10_SAMPLER_DESC extends Struct {
@@ -551,6 +579,12 @@ class D3D10_TEXCUBE_ARRAY_SRV1 extends Struct {
   @Uint32() external int MipLevels;
   @Uint32() external int First2DArrayFace;
   @Uint32() external int NumCubes;
+}
+
+class D3D10_SHADER_RESOURCE_VIEW_DESC1 extends Struct {
+  @Uint32() external int Format;
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Anonymous;
 }
 
 class D3D10_SHADER_DEBUG_TOKEN_INFO extends Struct {

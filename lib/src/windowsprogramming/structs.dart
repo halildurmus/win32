@@ -43,6 +43,49 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class HKEY extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HWINWATCH extends Struct {
+  @IntPtr() external int Value;
+}
+
+class FEATURE_STATE_CHANGE_SUBSCRIPTION extends Struct {
+  @IntPtr() external int Value;
+}
+
+class FH_SERVICE_PIPE_HANDLE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class NETLOGON_INFO_1 extends Struct {
+  @Uint32() external int netlog1_flags;
+  @Uint32() external int netlog1_pdc_connection_status;
+}
+
+class NETLOGON_INFO_2 extends Struct {
+  @Uint32() external int netlog2_flags;
+  @Uint32() external int netlog2_pdc_connection_status;
+  external Pointer<Utf16> netlog2_trusted_dc_name;
+  @Uint32() external int netlog2_tc_connection_status;
+}
+
+class NETLOGON_INFO_3 extends Struct {
+  @Uint32() external int netlog3_flags;
+  @Uint32() external int netlog3_logon_attempts;
+  @Uint32() external int netlog3_reserved1;
+  @Uint32() external int netlog3_reserved2;
+  @Uint32() external int netlog3_reserved3;
+  @Uint32() external int netlog3_reserved4;
+  @Uint32() external int netlog3_reserved5;
+}
+
+class NETLOGON_INFO_4 extends Struct {
+  external Pointer<Utf16> netlog4_trusted_dc_name;
+  external Pointer<Utf16> netlog4_trusted_domain_name;
+}
+
 class OSVERSIONINFOA extends Struct {
   @Uint32() external int dwOSVersionInfoSize;
   @Uint32() external int dwMajorVersion;
@@ -71,7 +114,7 @@ class OSVERSIONINFOEXA extends Struct {
   @Uint16() external int wServicePackMajor;
   @Uint16() external int wServicePackMinor;
   @Uint16() external int wSuiteMask;
-  @Uint32() external int wProductType;
+  @Uint8() external int wProductType;
   @Uint8() external int wReserved;
 }
 
@@ -85,7 +128,7 @@ class OSVERSIONINFOEXW extends Struct {
   @Uint16() external int wServicePackMajor;
   @Uint16() external int wServicePackMinor;
   @Uint16() external int wSuiteMask;
-  @Uint32() external int wProductType;
+  @Uint8() external int wProductType;
   @Uint8() external int wReserved;
 }
 
@@ -94,7 +137,56 @@ class FILETIME extends Struct {
   @Uint32() external int dwHighDateTime;
 }
 
+class SYSTEMTIME extends Struct {
+  @Uint16() external int wYear;
+  @Uint16() external int wMonth;
+  @Uint16() external int wDayOfWeek;
+  @Uint16() external int wDay;
+  @Uint16() external int wHour;
+  @Uint16() external int wMinute;
+  @Uint16() external int wSecond;
+  @Uint16() external int wMilliseconds;
+}
+
+class UpdateAssessment extends Struct {
+  @Uint32() external int status;
+  @Uint32() external int impact;
+  @Uint32() external int daysOutOfDate;
+}
+
+class OSUpdateAssessment extends Struct {
+  @Int32() external int isEndOfSupport;
+  external UpdateAssessment assessmentForCurrent;
+  external UpdateAssessment assessmentForUpToDate;
+  @Uint32() external int securityStatus;
+  external FILETIME assessmentTime;
+  external FILETIME releaseInfoTime;
+  external Pointer<Utf16> currentOSBuild;
+  external FILETIME currentOSReleaseTime;
+  external Pointer<Utf16> upToDateOSBuild;
+  external FILETIME upToDateOSReleaseTime;
+}
+
+class STRING extends Struct {
+  @Uint16() external int Length;
+  @Uint16() external int MaximumLength;
+  external Pointer<Utf8> Buffer;
+}
+
 class _PROC_THREAD_ATTRIBUTE_LIST extends Struct {
+}
+
+class SYSTEM_INFO extends Struct {
+  @Uint32() external int Anonymous;
+  @Uint32() external int dwPageSize;
+  external Pointer lpMinimumApplicationAddress;
+  external Pointer lpMaximumApplicationAddress;
+  @IntPtr() external int dwActiveProcessorMask;
+  @Uint32() external int dwNumberOfProcessors;
+  @Uint32() external int dwProcessorType;
+  @Uint32() external int dwAllocationGranularity;
+  @Uint16() external int wProcessorLevel;
+  @Uint16() external int wProcessorRevision;
 }
 
 class JIT_DEBUG_INFO extends Struct {
@@ -249,6 +341,19 @@ class CLIENT_ID extends Struct {
   @IntPtr() external int UniqueThread;
 }
 
+class LDR_DATA_TABLE_ENTRY extends Struct {
+  external ____ Reserved1;
+  external LIST_ENTRY InMemoryOrderLinks;
+  external ____ Reserved2;
+  external Pointer DllBase;
+  external ____ Reserved3;
+  external UNICODE_STRING FullDllName;
+  external __ubyte__ Reserved4;
+  external ____ Reserved5;
+  @Uint32() external int Anonymous;
+  @Uint32() external int TimeDateStamp;
+}
+
 class OBJECT_ATTRIBUTES extends Struct {
   @Uint32() external int Length;
   @IntPtr() external int RootDirectory;
@@ -256,6 +361,11 @@ class OBJECT_ATTRIBUTES extends Struct {
   @Uint32() external int Attributes;
   external Pointer SecurityDescriptor;
   external Pointer SecurityQualityOfService;
+}
+
+class IO_STATUS_BLOCK extends Struct {
+  @Uint32() external int Anonymous;
+  @IntPtr() external int Information;
 }
 
 class PROCESS_BASIC_INFORMATION extends Struct {
@@ -442,6 +552,12 @@ class FDICABINETINFO extends Struct {
   @Int32() external int hasnext;
 }
 
+class FDIDECRYPT extends Struct {
+  @Uint32() external int fdidt;
+  external Pointer pvUser;
+  @Uint32() external int Anonymous;
+}
+
 class FDINOTIFICATION extends Struct {
   @Int32() external int cb;
   external Pointer<Int8> psz1;
@@ -461,6 +577,52 @@ class FDINOTIFICATION extends Struct {
 class FDISPILLFILE extends Struct {
   external __byte__ ach;
   @Int32() external int cbFile;
+}
+
+class FLOATING_SAVE_AREA extends Struct {
+  @Uint32() external int ControlWord;
+  @Uint32() external int StatusWord;
+  @Uint32() external int TagWord;
+  @Uint32() external int ErrorOffset;
+  @Uint32() external int ErrorSelector;
+  @Uint32() external int DataOffset;
+  @Uint32() external int DataSelector;
+  external __ubyte__ RegisterArea;
+  @Uint32() external int Cr0NpxState;
+}
+
+class VDMCONTEXT extends Struct {
+  @Uint32() external int ContextFlags;
+  @Uint32() external int Dr0;
+  @Uint32() external int Dr1;
+  @Uint32() external int Dr2;
+  @Uint32() external int Dr3;
+  @Uint32() external int Dr6;
+  @Uint32() external int Dr7;
+  external FLOATING_SAVE_AREA FloatSave;
+  @Uint32() external int SegGs;
+  @Uint32() external int SegFs;
+  @Uint32() external int SegEs;
+  @Uint32() external int SegDs;
+  @Uint32() external int Edi;
+  @Uint32() external int Esi;
+  @Uint32() external int Ebx;
+  @Uint32() external int Edx;
+  @Uint32() external int Ecx;
+  @Uint32() external int Eax;
+  @Uint32() external int Ebp;
+  @Uint32() external int Eip;
+  @Uint32() external int SegCs;
+  @Uint32() external int EFlags;
+  @Uint32() external int Esp;
+  @Uint32() external int SegSs;
+  external __ubyte__ ExtendedRegisters;
+}
+
+class VDMLDT_ENTRY extends Struct {
+  @Uint16() external int LimitLow;
+  @Uint16() external int BaseLow;
+  @Uint32() external int HighWord;
 }
 
 class VDMCONTEXT_WITHOUT_XSAVE extends Struct {
@@ -744,6 +906,15 @@ class DDVERSIONDATA extends Struct {
   @IntPtr() external int dwReserved2;
 }
 
+class VIDMEM extends Struct {
+  @Uint32() external int dwFlags;
+  @IntPtr() external int fpStart;
+  @Uint32() external int Anonymous1;
+  external DDSCAPS ddsCaps;
+  external DDSCAPS ddsCapsAlt;
+  @Uint32() external int Anonymous2;
+}
+
 class VIDMEMINFO extends Struct {
   @IntPtr() external int fpPrimary;
   @Uint32() external int dwFlags;
@@ -906,6 +1077,12 @@ class DDNONLOCALVIDMEMCAPS extends Struct {
   external __uint__ dwNLVBRops;
 }
 
+class DDMORESURFACECAPS extends Struct {
+  @Uint32() external int dwSize;
+  external DDSCAPSEX ddsCapsMore;
+  external ____ ddsExtendedHeapRestrictions;
+}
+
 class DDSTEREOMODE extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwHeight;
@@ -920,6 +1097,19 @@ class DDRAWI_DDRAWPALETTE_INT extends Struct {
   external Pointer<DDRAWI_DDRAWPALETTE_LCL> lpLcl;
   external Pointer<DDRAWI_DDRAWPALETTE_INT> lpLink;
   @Uint32() external int dwIntRefCnt;
+}
+
+class DDRAWI_DDRAWPALETTE_GBL extends Struct {
+  @Uint32() external int dwRefCnt;
+  @Uint32() external int dwFlags;
+  external Pointer<DDRAWI_DIRECTDRAW_LCL> lpDD_lcl;
+  @Uint32() external int dwProcessId;
+  external Pointer<PALETTEENTRY> lpColorTable;
+  @Uint32() external int Anonymous;
+  @Uint32() external int dwDriverReserved;
+  @Uint32() external int dwContentsStamp;
+  @Uint32() external int dwSaveStamp;
+  @Uint32() external int dwHandle;
 }
 
 class DDRAWI_DDRAWPALETTE_LCL extends Struct {
@@ -993,6 +1183,43 @@ class DDRAWI_DDRAWSURFACE_INT extends Struct {
   @Uint32() external int dwIntRefCnt;
 }
 
+class DDRAWI_DDRAWSURFACE_GBL extends Struct {
+  @Uint32() external int dwRefCnt;
+  @Uint32() external int dwGlobalFlags;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int Anonymous3;
+  @IntPtr() external int fpVidMem;
+  @Uint32() external int Anonymous4;
+  @Uint16() external int wHeight;
+  @Uint16() external int wWidth;
+  @Uint32() external int dwUsageCount;
+  @IntPtr() external int dwReserved1;
+  external DDPIXELFORMAT ddpfSurface;
+}
+
+class DDRAWI_DDRAWSURFACE_GBL_MORE extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int Anonymous;
+  external Pointer<Uint32> pPageTable;
+  @Uint32() external int cPages;
+  @IntPtr() external int dwSavedDCContext;
+  @IntPtr() external int fpAliasedVidMem;
+  @IntPtr() external int dwDriverReserved;
+  @IntPtr() external int dwHELReserved;
+  @Uint32() external int cPageUnlocks;
+  @IntPtr() external int hKernelSurface;
+  @Uint32() external int dwKernelRefCnt;
+  external Pointer<DDCOLORCONTROL> lpColorInfo;
+  @IntPtr() external int fpNTAlias;
+  @Uint32() external int dwContentsStamp;
+  external Pointer lpvUnswappedDriverReserved;
+  external Pointer lpDDRAWReserved2;
+  @Uint32() external int dwDDRAWReserved1;
+  @Uint32() external int dwDDRAWReserved2;
+  @IntPtr() external int fpAliasOfVidMem;
+}
+
 class DDRAWI_DDRAWSURFACE_MORE extends Struct {
   @Uint32() external int dwSize;
   external Pointer<IUNKNOWN_LIST> lpIUnknowns;
@@ -1025,6 +1252,36 @@ class DDRAWI_DDRAWSURFACE_MORE extends Struct {
   external Pointer<Pointer<DDRAWI_DDRAWSURFACE_LCL>> slist;
   @Uint32() external int dwFVF;
   external Pointer lpVB;
+}
+
+class DDRAWI_DDRAWSURFACE_LCL extends Struct {
+  external Pointer<DDRAWI_DDRAWSURFACE_MORE> lpSurfMore;
+  external Pointer<DDRAWI_DDRAWSURFACE_GBL> lpGbl;
+  @IntPtr() external int hDDSurface;
+  external Pointer<ATTACHLIST> lpAttachList;
+  external Pointer<ATTACHLIST> lpAttachListFrom;
+  @Uint32() external int dwLocalRefCnt;
+  @Uint32() external int dwProcessId;
+  @Uint32() external int dwFlags;
+  external DDSCAPS ddsCaps;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int dwModeCreatedIn;
+  @Uint32() external int dwBackBufferCount;
+  external DDCOLORKEY ddckCKDestBlt;
+  external DDCOLORKEY ddckCKSrcBlt;
+  @IntPtr() external int hDC;
+  @IntPtr() external int dwReserved1;
+  external DDCOLORKEY ddckCKSrcOverlay;
+  external DDCOLORKEY ddckCKDestOverlay;
+  external Pointer<DDRAWI_DDRAWSURFACE_INT> lpSurfaceOverlaying;
+  external DBLNODE dbnOverlayNode;
+  external RECT rcOverlaySrc;
+  external RECT rcOverlayDest;
+  @Uint32() external int dwClrXparent;
+  @Uint32() external int dwAlpha;
+  @Int32() external int lOverlayX;
+  @Int32() external int lOverlayY;
 }
 
 class DDHALMODEINFO extends Struct {
@@ -1665,6 +1922,14 @@ class DDHAL_CREATESURFACEEXDATA extends Struct {
   @Int32() external int ddRVal;
 }
 
+class DDHAL_GETDRIVERSTATEDATA extends Struct {
+  @Uint32() external int dwFlags;
+  @Uint32() external int Anonymous;
+  external Pointer<Uint32> lpdwStates;
+  @Uint32() external int dwLength;
+  @Int32() external int ddRVal;
+}
+
 class DDHAL_SYNCSURFACEDATA extends Struct {
   @Uint32() external int dwSize;
   external Pointer<DDRAWI_DIRECTDRAW_LCL> lpDD;
@@ -2043,6 +2308,11 @@ class tcp_request_query_information_ex_xp extends Struct {
   external __uintptr__ Context;
 }
 
+class tcp_request_query_information_ex32_xp extends Struct {
+  external TDIObjectID ID;
+  external __uint__ Context;
+}
+
 class tcp_request_query_information_ex_w2k extends Struct {
   external TDIObjectID ID;
   external __ubyte__ Context;
@@ -2052,6 +2322,16 @@ class tcp_request_set_information_ex extends Struct {
   external TDIObjectID ID;
   @Uint32() external int BufferSize;
   external __ubyte__ Buffer;
+}
+
+class TDI_TL_IO_CONTROL_ENDPOINT extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int Level;
+  @Uint32() external int Anonymous;
+  external Pointer InputBuffer;
+  @Uint32() external int InputBufferLength;
+  external Pointer OutputBuffer;
+  @Uint32() external int OutputBufferLength;
 }
 
 class WLDP_HOST_INFORMATION extends Struct {
@@ -2071,6 +2351,11 @@ class DEV_OBJECT extends Struct {
   external Pointer<Utf16> pszObjectId;
   @Uint32() external int cPropertyCount;
   external Pointer<DEVPROPERTY> pProperties;
+}
+
+class DEV_QUERY_RESULT_ACTION_DATA extends Struct {
+  @Uint32() external int Action;
+  @Uint32() external int Data;
 }
 
 class DEV_QUERY_PARAMETER extends Struct {
@@ -2140,84 +2425,5 @@ class _pfLogFrame extends Struct {
   @Uint32() external int dwInterfaceName;
   @Uint32() external int dwIPIndex;
   external __ubyte__ bPacketData;
-}
-
-class NETLOGON_INFO_1 extends Struct {
-  @Uint32() external int netlog1_flags;
-  @Uint32() external int netlog1_pdc_connection_status;
-}
-
-class NETLOGON_INFO_2 extends Struct {
-  @Uint32() external int netlog2_flags;
-  @Uint32() external int netlog2_pdc_connection_status;
-  external Pointer<Utf16> netlog2_trusted_dc_name;
-  @Uint32() external int netlog2_tc_connection_status;
-}
-
-class NETLOGON_INFO_3 extends Struct {
-  @Uint32() external int netlog3_flags;
-  @Uint32() external int netlog3_logon_attempts;
-  @Uint32() external int netlog3_reserved1;
-  @Uint32() external int netlog3_reserved2;
-  @Uint32() external int netlog3_reserved3;
-  @Uint32() external int netlog3_reserved4;
-  @Uint32() external int netlog3_reserved5;
-}
-
-class NETLOGON_INFO_4 extends Struct {
-  external Pointer<Utf16> netlog4_trusted_dc_name;
-  external Pointer<Utf16> netlog4_trusted_domain_name;
-}
-
-class FEATURE_STATE_CHANGE_SUBSCRIPTION extends Struct {
-  @IntPtr() external int Value;
-}
-
-class FH_SERVICE_PIPE_HANDLE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HKEY extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HWINWATCH extends Struct {
-  @IntPtr() external int Value;
-}
-
-class SYSTEMTIME extends Struct {
-  @Uint16() external int wYear;
-  @Uint16() external int wMonth;
-  @Uint16() external int wDayOfWeek;
-  @Uint16() external int wDay;
-  @Uint16() external int wHour;
-  @Uint16() external int wMinute;
-  @Uint16() external int wSecond;
-  @Uint16() external int wMilliseconds;
-}
-
-class UpdateAssessment extends Struct {
-  @Uint32() external int status;
-  @Uint32() external int impact;
-  @Uint32() external int daysOutOfDate;
-}
-
-class OSUpdateAssessment extends Struct {
-  @Int32() external int isEndOfSupport;
-  external UpdateAssessment assessmentForCurrent;
-  external UpdateAssessment assessmentForUpToDate;
-  @Uint32() external int securityStatus;
-  external FILETIME assessmentTime;
-  external FILETIME releaseInfoTime;
-  external Pointer<Utf16> currentOSBuild;
-  external FILETIME currentOSReleaseTime;
-  external Pointer<Utf16> upToDateOSBuild;
-  external FILETIME upToDateOSReleaseTime;
-}
-
-class STRING extends Struct {
-  @Uint16() external int Length;
-  @Uint16() external int MaximumLength;
-  external Pointer<Utf8> Buffer;
 }
 

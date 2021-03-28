@@ -43,6 +43,66 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class FindFileHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class FindFileNameHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class FindStreamHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class FindChangeNotificationHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class FindVolumeHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class FindVolumeMointPointHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class FILE_ID_128 extends Struct {
+  external __ubyte__ Identifier;
+}
+
+class FILE_NOTIFY_INFORMATION extends Struct {
+  @Uint32() external int NextEntryOffset;
+  @Uint32() external int Action;
+  @Uint32() external int FileNameLength;
+  external __ushort__ FileName;
+}
+
+class FILE_NOTIFY_EXTENDED_INFORMATION extends Struct {
+  @Uint32() external int NextEntryOffset;
+  @Uint32() external int Action;
+  @Int64() external int CreationTime;
+  @Int64() external int LastModificationTime;
+  @Int64() external int LastChangeTime;
+  @Int64() external int LastAccessTime;
+  @Int64() external int AllocatedLength;
+  @Int64() external int FileSize;
+  @Uint32() external int FileAttributes;
+  @Uint32() external int ReparsePointTag;
+  @Int64() external int FileId;
+  @Int64() external int ParentFileId;
+  @Uint32() external int FileNameLength;
+  external __ushort__ FileName;
+}
+
+class REPARSE_GUID_DATA_BUFFER extends Struct {
+  @Uint32() external int ReparseTag;
+  @Uint16() external int ReparseDataLength;
+  @Uint16() external int Reserved;
+  external GUID ReparseGuid;
+  @Uint32() external int GenericReparseBuffer;
+}
+
 class TRANSACTION_NOTIFICATION extends Struct {
   external Pointer TransactionKey;
   @Uint32() external int TransactionNotification;
@@ -150,96 +210,6 @@ class CREATEFILE2_EXTENDED_PARAMETERS extends Struct {
 class WIN32_FIND_STREAM_DATA extends Struct {
   @Int64() external int StreamSize;
   external __ushort__ cStreamName;
-}
-
-class EFS_CERTIFICATE_BLOB extends Struct {
-  @Uint32() external int dwCertEncodingType;
-  @Uint32() external int cbData;
-  external Pointer<Uint8> pbData;
-}
-
-class EFS_HASH_BLOB extends Struct {
-  @Uint32() external int cbData;
-  external Pointer<Uint8> pbData;
-}
-
-class EFS_RPC_BLOB extends Struct {
-  @Uint32() external int cbData;
-  external Pointer<Uint8> pbData;
-}
-
-class EFS_PIN_BLOB extends Struct {
-  @Uint32() external int cbPadding;
-  @Uint32() external int cbData;
-  external Pointer<Uint8> pbData;
-}
-
-class EFS_KEY_INFO extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int Entropy;
-  @Uint32() external int Algorithm;
-  @Uint32() external int KeyLength;
-}
-
-class EFS_COMPATIBILITY_INFO extends Struct {
-  @Uint32() external int EfsVersion;
-}
-
-class EFS_VERSION_INFO extends Struct {
-  @Uint32() external int EfsVersion;
-  @Uint32() external int SubVersion;
-}
-
-class EFS_DECRYPTION_STATUS_INFO extends Struct {
-  @Uint32() external int dwDecryptionError;
-  @Uint32() external int dwHashOffset;
-  @Uint32() external int cbHash;
-}
-
-class EFS_ENCRYPTION_STATUS_INFO extends Struct {
-  @Int32() external int bHasCurrentKey;
-  @Uint32() external int dwEncryptionError;
-}
-
-class ENCRYPTION_CERTIFICATE extends Struct {
-  @Uint32() external int cbTotalLength;
-  external Pointer<SID> pUserSid;
-  external Pointer<EFS_CERTIFICATE_BLOB> pCertBlob;
-}
-
-class ENCRYPTION_CERTIFICATE_HASH extends Struct {
-  @Uint32() external int cbTotalLength;
-  external Pointer<SID> pUserSid;
-  external Pointer<EFS_HASH_BLOB> pHash;
-  external Pointer<Utf16> lpDisplayInformation;
-}
-
-class ENCRYPTION_CERTIFICATE_HASH_LIST extends Struct {
-  @Uint32() external int nCert_Hash;
-  external Pointer<Pointer<ENCRYPTION_CERTIFICATE_HASH>> pUsers;
-}
-
-class ENCRYPTION_CERTIFICATE_LIST extends Struct {
-  @Uint32() external int nUsers;
-  external Pointer<Pointer<ENCRYPTION_CERTIFICATE>> pUsers;
-}
-
-class ENCRYPTED_FILE_METADATA_SIGNATURE extends Struct {
-  @Uint32() external int dwEfsAccessType;
-  external Pointer<ENCRYPTION_CERTIFICATE_HASH_LIST> pCertificatesAdded;
-  external Pointer<ENCRYPTION_CERTIFICATE> pEncryptionCertificate;
-  external Pointer<EFS_RPC_BLOB> pEfsStreamSignature;
-}
-
-class ENCRYPTION_PROTECTOR extends Struct {
-  @Uint32() external int cbTotalLength;
-  external Pointer<SID> pUserSid;
-  external Pointer<Utf16> lpProtectorDescriptor;
-}
-
-class ENCRYPTION_PROTECTOR_LIST extends Struct {
-  @Uint32() external int nProtectors;
-  external Pointer<Pointer<ENCRYPTION_PROTECTOR>> pProtectors;
 }
 
 class NTMS_ASYNC_IO extends Struct {
@@ -560,6 +530,32 @@ class NTMS_COMPUTERINFORMATION extends Struct {
   @Uint32() external int dwMediaPoolPolicy;
 }
 
+class NTMS_OBJECTINFORMATIONA extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwType;
+  external SYSTEMTIME Created;
+  external SYSTEMTIME Modified;
+  external GUID ObjectGuid;
+  @Int32() external int Enabled;
+  @Uint32() external int dwOperationalState;
+  external __byte__ szName;
+  external __byte__ szDescription;
+  @Uint32() external int Info;
+}
+
+class NTMS_OBJECTINFORMATIONW extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwType;
+  external SYSTEMTIME Created;
+  external SYSTEMTIME Modified;
+  external GUID ObjectGuid;
+  @Int32() external int Enabled;
+  @Uint32() external int dwOperationalState;
+  external __ushort__ szName;
+  external __ushort__ szDescription;
+  @Uint32() external int Info;
+}
+
 class NTMS_I1_LIBRARYINFORMATION extends Struct {
   @Uint32() external int LibraryType;
   external GUID CleanerSlot;
@@ -698,6 +694,32 @@ class NTMS_I1_OPREQUESTINFORMATIONW extends Struct {
   external __ushort__ szComputer;
 }
 
+class NTMS_I1_OBJECTINFORMATIONA extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwType;
+  external SYSTEMTIME Created;
+  external SYSTEMTIME Modified;
+  external GUID ObjectGuid;
+  @Int32() external int Enabled;
+  @Uint32() external int dwOperationalState;
+  external __byte__ szName;
+  external __byte__ szDescription;
+  @Uint32() external int Info;
+}
+
+class NTMS_I1_OBJECTINFORMATIONW extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwType;
+  external SYSTEMTIME Created;
+  external SYSTEMTIME Modified;
+  external GUID ObjectGuid;
+  @Int32() external int Enabled;
+  @Uint32() external int dwOperationalState;
+  external __ushort__ szName;
+  external __ushort__ szDescription;
+  @Uint32() external int Info;
+}
+
 class NTMS_FILESYSTEM_INFO extends Struct {
   external __ushort__ FileSystemType;
   external __ushort__ VolumeName;
@@ -811,6 +833,14 @@ class CLS_ARCHIVE_DESCRIPTOR extends Struct {
   external CLS_CONTAINER_INFORMATION infoContainer;
 }
 
+class CLFS_MGMT_POLICY extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int LengthInBytes;
+  @Uint32() external int PolicyFlags;
+  @Uint32() external int PolicyType;
+  @Uint32() external int PolicyParameters;
+}
+
 class CLFS_MGMT_NOTIFICATION extends Struct {
   @Uint32() external int Notification;
   external CLS_LSN Lsn;
@@ -828,6 +858,96 @@ class DISKQUOTA_USER_INFORMATION extends Struct {
   @Int64() external int QuotaUsed;
   @Int64() external int QuotaThreshold;
   @Int64() external int QuotaLimit;
+}
+
+class EFS_CERTIFICATE_BLOB extends Struct {
+  @Uint32() external int dwCertEncodingType;
+  @Uint32() external int cbData;
+  external Pointer<Uint8> pbData;
+}
+
+class EFS_HASH_BLOB extends Struct {
+  @Uint32() external int cbData;
+  external Pointer<Uint8> pbData;
+}
+
+class EFS_RPC_BLOB extends Struct {
+  @Uint32() external int cbData;
+  external Pointer<Uint8> pbData;
+}
+
+class EFS_PIN_BLOB extends Struct {
+  @Uint32() external int cbPadding;
+  @Uint32() external int cbData;
+  external Pointer<Uint8> pbData;
+}
+
+class EFS_KEY_INFO extends Struct {
+  @Uint32() external int dwVersion;
+  @Uint32() external int Entropy;
+  @Uint32() external int Algorithm;
+  @Uint32() external int KeyLength;
+}
+
+class EFS_COMPATIBILITY_INFO extends Struct {
+  @Uint32() external int EfsVersion;
+}
+
+class EFS_VERSION_INFO extends Struct {
+  @Uint32() external int EfsVersion;
+  @Uint32() external int SubVersion;
+}
+
+class EFS_DECRYPTION_STATUS_INFO extends Struct {
+  @Uint32() external int dwDecryptionError;
+  @Uint32() external int dwHashOffset;
+  @Uint32() external int cbHash;
+}
+
+class EFS_ENCRYPTION_STATUS_INFO extends Struct {
+  @Int32() external int bHasCurrentKey;
+  @Uint32() external int dwEncryptionError;
+}
+
+class ENCRYPTION_CERTIFICATE extends Struct {
+  @Uint32() external int cbTotalLength;
+  external Pointer<SID> pUserSid;
+  external Pointer<EFS_CERTIFICATE_BLOB> pCertBlob;
+}
+
+class ENCRYPTION_CERTIFICATE_HASH extends Struct {
+  @Uint32() external int cbTotalLength;
+  external Pointer<SID> pUserSid;
+  external Pointer<EFS_HASH_BLOB> pHash;
+  external Pointer<Utf16> lpDisplayInformation;
+}
+
+class ENCRYPTION_CERTIFICATE_HASH_LIST extends Struct {
+  @Uint32() external int nCert_Hash;
+  external Pointer<Pointer<ENCRYPTION_CERTIFICATE_HASH>> pUsers;
+}
+
+class ENCRYPTION_CERTIFICATE_LIST extends Struct {
+  @Uint32() external int nUsers;
+  external Pointer<Pointer<ENCRYPTION_CERTIFICATE>> pUsers;
+}
+
+class ENCRYPTED_FILE_METADATA_SIGNATURE extends Struct {
+  @Uint32() external int dwEfsAccessType;
+  external Pointer<ENCRYPTION_CERTIFICATE_HASH_LIST> pCertificatesAdded;
+  external Pointer<ENCRYPTION_CERTIFICATE> pEncryptionCertificate;
+  external Pointer<EFS_RPC_BLOB> pEfsStreamSignature;
+}
+
+class ENCRYPTION_PROTECTOR extends Struct {
+  @Uint32() external int cbTotalLength;
+  external Pointer<SID> pUserSid;
+  external Pointer<Utf16> lpProtectorDescriptor;
+}
+
+class ENCRYPTION_PROTECTOR_LIST extends Struct {
+  @Uint32() external int nProtectors;
+  external Pointer<Pointer<ENCRYPTION_PROTECTOR>> pProtectors;
 }
 
 class WIM_ENTRY_INFO extends Struct {
@@ -853,6 +973,10 @@ class WOF_FILE_COMPRESSION_INFO_V0 extends Struct {
 class WOF_FILE_COMPRESSION_INFO_V1 extends Struct {
   @Uint32() external int Algorithm;
   @Uint32() external int Flags;
+}
+
+class TXF_ID extends Struct {
+  @Uint32() external int Anonymous;
 }
 
 class TXF_LOG_RECORD_BASE extends Struct {
@@ -1034,7 +1158,7 @@ class SHARE_INFO_502 extends Struct {
   external Pointer<Utf16> shi502_path;
   external Pointer<Utf16> shi502_passwd;
   @Uint32() external int shi502_reserved;
-  external Pointer shi502_security_descriptor;
+  external Pointer<SECURITY_DESCRIPTOR> shi502_security_descriptor;
 }
 
 class SHARE_INFO_503 extends Struct {
@@ -1048,7 +1172,7 @@ class SHARE_INFO_503 extends Struct {
   external Pointer<Utf16> shi503_passwd;
   external Pointer<Utf16> shi503_servername;
   @Uint32() external int shi503_reserved;
-  external Pointer shi503_security_descriptor;
+  external Pointer<SECURITY_DESCRIPTOR> shi503_security_descriptor;
 }
 
 class SHARE_INFO_1004 extends Struct {
@@ -1065,7 +1189,7 @@ class SHARE_INFO_1006 extends Struct {
 
 class SHARE_INFO_1501 extends Struct {
   @Uint32() external int shi1501_reserved;
-  external Pointer shi1501_security_descriptor;
+  external Pointer<SECURITY_DESCRIPTOR> shi1501_security_descriptor;
 }
 
 class SHARE_INFO_1503 extends Struct {
@@ -1220,203 +1344,6 @@ class STAT_SERVER_0 extends Struct {
   @Uint32() external int sts0_avresponse;
   @Uint32() external int sts0_reqbufneed;
   @Uint32() external int sts0_bigbufneed;
-}
-
-class FILE_ID_128 extends Struct {
-  external __ubyte__ Identifier;
-}
-
-class FILE_NOTIFY_INFORMATION extends Struct {
-  @Uint32() external int NextEntryOffset;
-  @Uint32() external int Action;
-  @Uint32() external int FileNameLength;
-  external __ushort__ FileName;
-}
-
-class FILE_NOTIFY_EXTENDED_INFORMATION extends Struct {
-  @Uint32() external int NextEntryOffset;
-  @Uint32() external int Action;
-  @Int64() external int CreationTime;
-  @Int64() external int LastModificationTime;
-  @Int64() external int LastChangeTime;
-  @Int64() external int LastAccessTime;
-  @Int64() external int AllocatedLength;
-  @Int64() external int FileSize;
-  @Uint32() external int FileAttributes;
-  @Uint32() external int ReparsePointTag;
-  @Int64() external int FileId;
-  @Int64() external int ParentFileId;
-  @Uint32() external int FileNameLength;
-  external __ushort__ FileName;
-}
-
-class OFSTRUCT extends Struct {
-  @Uint8() external int cBytes;
-  @Uint8() external int fFixedDisk;
-  @Uint16() external int nErrCode;
-  @Uint16() external int Reserved1;
-  @Uint16() external int Reserved2;
-  external __byte__ szPathName;
-}
-
-class COPYFILE2_EXTENDED_PARAMETERS extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwCopyFlags;
-  external Pointer<Int32> pfCancel;
-  external PCOPYFILE2_PROGRESS_ROUTINE pProgressRoutine;
-  external Pointer pvCallbackContext;
-}
-
-class FILE_BASIC_INFO extends Struct {
-  @Int64() external int CreationTime;
-  @Int64() external int LastAccessTime;
-  @Int64() external int LastWriteTime;
-  @Int64() external int ChangeTime;
-  @Uint32() external int FileAttributes;
-}
-
-class FILE_STANDARD_INFO extends Struct {
-  @Int64() external int AllocationSize;
-  @Int64() external int EndOfFile;
-  @Uint32() external int NumberOfLinks;
-  @Uint8() external int DeletePending;
-  @Uint8() external int Directory;
-}
-
-class FILE_NAME_INFO extends Struct {
-  @Uint32() external int FileNameLength;
-  external __ushort__ FileName;
-}
-
-class FILE_ALLOCATION_INFO extends Struct {
-  @Int64() external int AllocationSize;
-}
-
-class FILE_END_OF_FILE_INFO extends Struct {
-  @Int64() external int EndOfFile;
-}
-
-class FILE_STREAM_INFO extends Struct {
-  @Uint32() external int NextEntryOffset;
-  @Uint32() external int StreamNameLength;
-  @Int64() external int StreamSize;
-  @Int64() external int StreamAllocationSize;
-  external __ushort__ StreamName;
-}
-
-class FILE_COMPRESSION_INFO extends Struct {
-  @Int64() external int CompressedFileSize;
-  @Uint16() external int CompressionFormat;
-  @Uint8() external int CompressionUnitShift;
-  @Uint8() external int ChunkShift;
-  @Uint8() external int ClusterShift;
-  external __ubyte__ Reserved;
-}
-
-class FILE_ATTRIBUTE_TAG_INFO extends Struct {
-  @Uint32() external int FileAttributes;
-  @Uint32() external int ReparseTag;
-}
-
-class FILE_DISPOSITION_INFO extends Struct {
-  @Uint8() external int DeleteFileA;
-}
-
-class FILE_ID_BOTH_DIR_INFO extends Struct {
-  @Uint32() external int NextEntryOffset;
-  @Uint32() external int FileIndex;
-  @Int64() external int CreationTime;
-  @Int64() external int LastAccessTime;
-  @Int64() external int LastWriteTime;
-  @Int64() external int ChangeTime;
-  @Int64() external int EndOfFile;
-  @Int64() external int AllocationSize;
-  @Uint32() external int FileAttributes;
-  @Uint32() external int FileNameLength;
-  @Uint32() external int EaSize;
-  @Int8() external int ShortNameLength;
-  external __ushort__ ShortName;
-  @Int64() external int FileId;
-  external __ushort__ FileName;
-}
-
-class FILE_FULL_DIR_INFO extends Struct {
-  @Uint32() external int NextEntryOffset;
-  @Uint32() external int FileIndex;
-  @Int64() external int CreationTime;
-  @Int64() external int LastAccessTime;
-  @Int64() external int LastWriteTime;
-  @Int64() external int ChangeTime;
-  @Int64() external int EndOfFile;
-  @Int64() external int AllocationSize;
-  @Uint32() external int FileAttributes;
-  @Uint32() external int FileNameLength;
-  @Uint32() external int EaSize;
-  external __ushort__ FileName;
-}
-
-class FILE_IO_PRIORITY_HINT_INFO extends Struct {
-  @Uint32() external int PriorityHint;
-}
-
-class FILE_ALIGNMENT_INFO extends Struct {
-  @Uint32() external int AlignmentRequirement;
-}
-
-class FILE_STORAGE_INFO extends Struct {
-  @Uint32() external int LogicalBytesPerSector;
-  @Uint32() external int PhysicalBytesPerSectorForAtomicity;
-  @Uint32() external int PhysicalBytesPerSectorForPerformance;
-  @Uint32() external int FileSystemEffectivePhysicalBytesPerSectorForAtomicity;
-  @Uint32() external int Flags;
-  @Uint32() external int ByteOffsetForSectorAlignment;
-  @Uint32() external int ByteOffsetForPartitionAlignment;
-}
-
-class FILE_ID_INFO extends Struct {
-  @Uint64() external int VolumeSerialNumber;
-  external FILE_ID_128 FileId;
-}
-
-class FILE_ID_EXTD_DIR_INFO extends Struct {
-  @Uint32() external int NextEntryOffset;
-  @Uint32() external int FileIndex;
-  @Int64() external int CreationTime;
-  @Int64() external int LastAccessTime;
-  @Int64() external int LastWriteTime;
-  @Int64() external int ChangeTime;
-  @Int64() external int EndOfFile;
-  @Int64() external int AllocationSize;
-  @Uint32() external int FileAttributes;
-  @Uint32() external int FileNameLength;
-  @Uint32() external int EaSize;
-  @Uint32() external int ReparsePointTag;
-  external FILE_ID_128 FileId;
-  external __ushort__ FileName;
-}
-
-class FindChangeNotificationHandle extends Struct {
-  @IntPtr() external int Value;
-}
-
-class FindFileHandle extends Struct {
-  @IntPtr() external int Value;
-}
-
-class FindFileNameHandle extends Struct {
-  @IntPtr() external int Value;
-}
-
-class FindStreamHandle extends Struct {
-  @IntPtr() external int Value;
-}
-
-class FindVolumeHandle extends Struct {
-  @IntPtr() external int Value;
-}
-
-class FindVolumeMointPointHandle extends Struct {
-  @IntPtr() external int Value;
 }
 
 class OVERLAPPED_ENTRY extends Struct {
@@ -1650,6 +1577,11 @@ class STORAGE_TEMPERATURE_THRESHOLD extends Struct {
   @Uint8() external int Reserved;
 }
 
+class STORAGE_SPEC_VERSION extends Struct {
+  @Uint32() external int Anonymous;
+  @Uint32() external int AsUlong;
+}
+
 class STORAGE_PHYSICAL_DEVICE_DATA extends Struct {
   @Uint32() external int DeviceId;
   @Uint32() external int Role;
@@ -1866,8 +1798,23 @@ class CREATE_DISK_MBR extends Struct {
   @Uint32() external int Signature;
 }
 
+class CREATE_DISK extends Struct {
+  @Uint32() external int PartitionStyle;
+  @Uint32() external int Anonymous;
+}
+
 class GET_LENGTH_INFORMATION extends Struct {
   @Int64() external int Length;
+}
+
+class PARTITION_INFORMATION_EX extends Struct {
+  @Uint32() external int PartitionStyle;
+  @Int64() external int StartingOffset;
+  @Int64() external int PartitionLength;
+  @Uint32() external int PartitionNumber;
+  @Uint8() external int RewritePartition;
+  @Uint8() external int IsServicePartition;
+  @Uint32() external int Anonymous;
 }
 
 class DRIVE_LAYOUT_INFORMATION_GPT extends Struct {
@@ -1880,6 +1827,13 @@ class DRIVE_LAYOUT_INFORMATION_GPT extends Struct {
 class DRIVE_LAYOUT_INFORMATION_MBR extends Struct {
   @Uint32() external int Signature;
   @Uint32() external int CheckSum;
+}
+
+class DRIVE_LAYOUT_INFORMATION_EX extends Struct {
+  @Uint32() external int PartitionStyle;
+  @Uint32() external int PartitionCount;
+  @Uint32() external int Anonymous;
+  external PARTITION_INFORMATION_EX PartitionEntry;
 }
 
 class DISK_INT13_INFO extends Struct {
@@ -1901,10 +1855,33 @@ class DISK_EX_INT13_INFO extends Struct {
   @Uint16() external int ExReserved;
 }
 
+class DISK_DETECTION_INFO extends Struct {
+  @Uint32() external int SizeOfDetectInfo;
+  @Uint32() external int DetectionType;
+  @Uint32() external int Anonymous;
+}
+
+class DISK_PARTITION_INFO extends Struct {
+  @Uint32() external int SizeOfPartitionInfo;
+  @Uint32() external int PartitionStyle;
+  @Uint32() external int Anonymous;
+}
+
 class DISK_GEOMETRY_EX extends Struct {
   external DISK_GEOMETRY Geometry;
   @Int64() external int DiskSize;
   external __ubyte__ Data;
+}
+
+class DISK_CACHE_INFORMATION extends Struct {
+  @Uint8() external int ParametersSavable;
+  @Uint8() external int ReadCacheEnabled;
+  @Uint8() external int WriteCacheEnabled;
+  @Uint32() external int ReadRetentionPriority;
+  @Uint32() external int WriteRetentionPriority;
+  @Uint16() external int DisablePrefetchTransferLength;
+  @Uint8() external int PrefetchScalar;
+  @Uint32() external int Anonymous;
 }
 
 class DISK_GROW_PARTITION extends Struct {
@@ -1984,6 +1961,12 @@ class VOLUME_BITMAP_BUFFER extends Struct {
 
 class STARTING_VCN_INPUT_BUFFER extends Struct {
   @Int64() external int StartingVcn;
+}
+
+class RETRIEVAL_POINTERS_BUFFER extends Struct {
+  @Uint32() external int ExtentCount;
+  @Int64() external int StartingVcn;
+  external ____ Extents;
 }
 
 class NTFS_FILE_RECORD_INPUT_BUFFER extends Struct {
@@ -2170,6 +2153,18 @@ class DELETE_USN_JOURNAL_DATA extends Struct {
   @Uint32() external int DeleteFlags;
 }
 
+class MARK_HANDLE_INFO extends Struct {
+  @Uint32() external int Anonymous;
+  @IntPtr() external int VolumeHandle;
+  @Uint32() external int HandleInfo;
+}
+
+class MARK_HANDLE_INFO32 extends Struct {
+  @Uint32() external int Anonymous;
+  @Uint32() external int VolumeHandle;
+  @Uint32() external int HandleInfo;
+}
+
 class FILESYSTEM_STATISTICS extends Struct {
   @Uint32() external int FileSystemType;
   @Uint16() external int Version;
@@ -2212,6 +2207,55 @@ class EXFAT_STATISTICS extends Struct {
   @Uint32() external int NonCachedDiskWrites;
 }
 
+class NTFS_STATISTICS extends Struct {
+  @Uint32() external int LogFileFullExceptions;
+  @Uint32() external int OtherExceptions;
+  @Uint32() external int MftReads;
+  @Uint32() external int MftReadBytes;
+  @Uint32() external int MftWrites;
+  @Uint32() external int MftWriteBytes;
+  @Uint32() external int MftWritesUserLevel;
+  @Uint16() external int MftWritesFlushForLogFileFull;
+  @Uint16() external int MftWritesLazyWriter;
+  @Uint16() external int MftWritesUserRequest;
+  @Uint32() external int Mft2Writes;
+  @Uint32() external int Mft2WriteBytes;
+  @Uint32() external int Mft2WritesUserLevel;
+  @Uint16() external int Mft2WritesFlushForLogFileFull;
+  @Uint16() external int Mft2WritesLazyWriter;
+  @Uint16() external int Mft2WritesUserRequest;
+  @Uint32() external int RootIndexReads;
+  @Uint32() external int RootIndexReadBytes;
+  @Uint32() external int RootIndexWrites;
+  @Uint32() external int RootIndexWriteBytes;
+  @Uint32() external int BitmapReads;
+  @Uint32() external int BitmapReadBytes;
+  @Uint32() external int BitmapWrites;
+  @Uint32() external int BitmapWriteBytes;
+  @Uint16() external int BitmapWritesFlushForLogFileFull;
+  @Uint16() external int BitmapWritesLazyWriter;
+  @Uint16() external int BitmapWritesUserRequest;
+  @Uint32() external int BitmapWritesUserLevel;
+  @Uint32() external int MftBitmapReads;
+  @Uint32() external int MftBitmapReadBytes;
+  @Uint32() external int MftBitmapWrites;
+  @Uint32() external int MftBitmapWriteBytes;
+  @Uint16() external int MftBitmapWritesFlushForLogFileFull;
+  @Uint16() external int MftBitmapWritesLazyWriter;
+  @Uint16() external int MftBitmapWritesUserRequest;
+  @Uint32() external int MftBitmapWritesUserLevel;
+  @Uint32() external int UserIndexReads;
+  @Uint32() external int UserIndexReadBytes;
+  @Uint32() external int UserIndexWrites;
+  @Uint32() external int UserIndexWriteBytes;
+  @Uint32() external int LogFileReads;
+  @Uint32() external int LogFileReadBytes;
+  @Uint32() external int LogFileWrites;
+  @Uint32() external int LogFileWriteBytes;
+  @Uint32() external int Allocate;
+  @Uint32() external int DiskResourcesExhausted;
+}
+
 class FILESYSTEM_STATISTICS_EX extends Struct {
   @Uint32() external int FileSystemType;
   @Uint16() external int Version;
@@ -2228,6 +2272,71 @@ class FILESYSTEM_STATISTICS_EX extends Struct {
   @Uint64() external int MetaDataWrites;
   @Uint64() external int MetaDataWriteBytes;
   @Uint64() external int MetaDataDiskWrites;
+}
+
+class NTFS_STATISTICS_EX extends Struct {
+  @Uint32() external int LogFileFullExceptions;
+  @Uint32() external int OtherExceptions;
+  @Uint64() external int MftReads;
+  @Uint64() external int MftReadBytes;
+  @Uint64() external int MftWrites;
+  @Uint64() external int MftWriteBytes;
+  @Uint32() external int MftWritesUserLevel;
+  @Uint32() external int MftWritesFlushForLogFileFull;
+  @Uint32() external int MftWritesLazyWriter;
+  @Uint32() external int MftWritesUserRequest;
+  @Uint64() external int Mft2Writes;
+  @Uint64() external int Mft2WriteBytes;
+  @Uint32() external int Mft2WritesUserLevel;
+  @Uint32() external int Mft2WritesFlushForLogFileFull;
+  @Uint32() external int Mft2WritesLazyWriter;
+  @Uint32() external int Mft2WritesUserRequest;
+  @Uint64() external int RootIndexReads;
+  @Uint64() external int RootIndexReadBytes;
+  @Uint64() external int RootIndexWrites;
+  @Uint64() external int RootIndexWriteBytes;
+  @Uint64() external int BitmapReads;
+  @Uint64() external int BitmapReadBytes;
+  @Uint64() external int BitmapWrites;
+  @Uint64() external int BitmapWriteBytes;
+  @Uint32() external int BitmapWritesFlushForLogFileFull;
+  @Uint32() external int BitmapWritesLazyWriter;
+  @Uint32() external int BitmapWritesUserRequest;
+  @Uint32() external int BitmapWritesUserLevel;
+  @Uint64() external int MftBitmapReads;
+  @Uint64() external int MftBitmapReadBytes;
+  @Uint64() external int MftBitmapWrites;
+  @Uint64() external int MftBitmapWriteBytes;
+  @Uint32() external int MftBitmapWritesFlushForLogFileFull;
+  @Uint32() external int MftBitmapWritesLazyWriter;
+  @Uint32() external int MftBitmapWritesUserRequest;
+  @Uint32() external int MftBitmapWritesUserLevel;
+  @Uint64() external int UserIndexReads;
+  @Uint64() external int UserIndexReadBytes;
+  @Uint64() external int UserIndexWrites;
+  @Uint64() external int UserIndexWriteBytes;
+  @Uint64() external int LogFileReads;
+  @Uint64() external int LogFileReadBytes;
+  @Uint64() external int LogFileWrites;
+  @Uint64() external int LogFileWriteBytes;
+  @Uint32() external int Allocate;
+  @Uint32() external int DiskResourcesExhausted;
+  @Uint64() external int VolumeTrimCount;
+  @Uint64() external int VolumeTrimTime;
+  @Uint64() external int VolumeTrimByteCount;
+  @Uint64() external int FileLevelTrimCount;
+  @Uint64() external int FileLevelTrimTime;
+  @Uint64() external int FileLevelTrimByteCount;
+  @Uint64() external int VolumeTrimSkippedCount;
+  @Uint64() external int VolumeTrimSkippedByteCount;
+  @Uint64() external int NtfsFillStatInfoFromMftRecordCalledCount;
+  @Uint64() external int NtfsFillStatInfoFromMftRecordBailedBecauseOfAttributeListCount;
+  @Uint64() external int NtfsFillStatInfoFromMftRecordBailedBecauseOfNonResReparsePointCount;
+}
+
+class FILE_OBJECTID_BUFFER extends Struct {
+  external __ubyte__ ObjectId;
+  @Uint32() external int Anonymous;
 }
 
 class FILE_SET_SPARSE_BUFFER extends Struct {
@@ -2325,6 +2434,13 @@ class TXFS_QUERY_RM_INFORMATION extends Struct {
   @Uint32() external int TmLogPathOffset;
 }
 
+class TXFS_GET_METADATA_INFO_OUT extends Struct {
+  @Uint32() external int TxfFileId;
+  external GUID LockingTransaction;
+  @Uint64() external int LastLsn;
+  @Uint32() external int TransactionState;
+}
+
 class TXFS_LIST_TRANSACTION_LOCKED_FILES_ENTRY extends Struct {
   @Uint64() external int Offset;
   @Uint32() external int NameFlags;
@@ -2355,6 +2471,10 @@ class TXFS_LIST_TRANSACTIONS extends Struct {
   @Uint64() external int BufferSizeRequired;
 }
 
+class TXFS_READ_BACKUP_INFORMATION_OUT extends Struct {
+  @Uint32() external int Anonymous;
+}
+
 class TXFS_WRITE_BACKUP_INFORMATION extends Struct {
   external __ubyte__ Buffer;
 }
@@ -2382,6 +2502,11 @@ class TXFS_CREATE_MINIVERSION_INFO extends Struct {
 
 class TXFS_TRANSACTION_ACTIVE_INFO extends Struct {
   @Uint8() external int TransactionsActiveAtSnapshot;
+}
+
+class BOOT_AREA_INFO extends Struct {
+  @Uint32() external int BootSectorCount;
+  external ____ BootSectors;
 }
 
 class RETRIEVAL_POINTER_BASE extends Struct {
@@ -2578,5 +2703,182 @@ class VOLUME_DISK_EXTENTS extends Struct {
 
 class VOLUME_GET_GPT_ATTRIBUTES_INFORMATION extends Struct {
   @Uint64() external int GptAttributes;
+}
+
+class OFSTRUCT extends Struct {
+  @Uint8() external int cBytes;
+  @Uint8() external int fFixedDisk;
+  @Uint16() external int nErrCode;
+  @Uint16() external int Reserved1;
+  @Uint16() external int Reserved2;
+  external __byte__ szPathName;
+}
+
+class COPYFILE2_MESSAGE extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int dwPadding;
+  @Uint32() external int Info;
+}
+
+class COPYFILE2_EXTENDED_PARAMETERS extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwCopyFlags;
+  external Pointer<Int32> pfCancel;
+  external PCOPYFILE2_PROGRESS_ROUTINE pProgressRoutine;
+  external Pointer pvCallbackContext;
+}
+
+class FILE_BASIC_INFO extends Struct {
+  @Int64() external int CreationTime;
+  @Int64() external int LastAccessTime;
+  @Int64() external int LastWriteTime;
+  @Int64() external int ChangeTime;
+  @Uint32() external int FileAttributes;
+}
+
+class FILE_STANDARD_INFO extends Struct {
+  @Int64() external int AllocationSize;
+  @Int64() external int EndOfFile;
+  @Uint32() external int NumberOfLinks;
+  @Uint8() external int DeletePending;
+  @Uint8() external int Directory;
+}
+
+class FILE_NAME_INFO extends Struct {
+  @Uint32() external int FileNameLength;
+  external __ushort__ FileName;
+}
+
+class FILE_RENAME_INFO extends Struct {
+  @Uint32() external int Anonymous;
+  @IntPtr() external int RootDirectory;
+  @Uint32() external int FileNameLength;
+  external __ushort__ FileName;
+}
+
+class FILE_ALLOCATION_INFO extends Struct {
+  @Int64() external int AllocationSize;
+}
+
+class FILE_END_OF_FILE_INFO extends Struct {
+  @Int64() external int EndOfFile;
+}
+
+class FILE_STREAM_INFO extends Struct {
+  @Uint32() external int NextEntryOffset;
+  @Uint32() external int StreamNameLength;
+  @Int64() external int StreamSize;
+  @Int64() external int StreamAllocationSize;
+  external __ushort__ StreamName;
+}
+
+class FILE_COMPRESSION_INFO extends Struct {
+  @Int64() external int CompressedFileSize;
+  @Uint16() external int CompressionFormat;
+  @Uint8() external int CompressionUnitShift;
+  @Uint8() external int ChunkShift;
+  @Uint8() external int ClusterShift;
+  external __ubyte__ Reserved;
+}
+
+class FILE_ATTRIBUTE_TAG_INFO extends Struct {
+  @Uint32() external int FileAttributes;
+  @Uint32() external int ReparseTag;
+}
+
+class FILE_DISPOSITION_INFO extends Struct {
+  @Uint8() external int DeleteFileA;
+}
+
+class FILE_ID_BOTH_DIR_INFO extends Struct {
+  @Uint32() external int NextEntryOffset;
+  @Uint32() external int FileIndex;
+  @Int64() external int CreationTime;
+  @Int64() external int LastAccessTime;
+  @Int64() external int LastWriteTime;
+  @Int64() external int ChangeTime;
+  @Int64() external int EndOfFile;
+  @Int64() external int AllocationSize;
+  @Uint32() external int FileAttributes;
+  @Uint32() external int FileNameLength;
+  @Uint32() external int EaSize;
+  @Int8() external int ShortNameLength;
+  external __ushort__ ShortName;
+  @Int64() external int FileId;
+  external __ushort__ FileName;
+}
+
+class FILE_FULL_DIR_INFO extends Struct {
+  @Uint32() external int NextEntryOffset;
+  @Uint32() external int FileIndex;
+  @Int64() external int CreationTime;
+  @Int64() external int LastAccessTime;
+  @Int64() external int LastWriteTime;
+  @Int64() external int ChangeTime;
+  @Int64() external int EndOfFile;
+  @Int64() external int AllocationSize;
+  @Uint32() external int FileAttributes;
+  @Uint32() external int FileNameLength;
+  @Uint32() external int EaSize;
+  external __ushort__ FileName;
+}
+
+class FILE_IO_PRIORITY_HINT_INFO extends Struct {
+  @Uint32() external int PriorityHint;
+}
+
+class FILE_ALIGNMENT_INFO extends Struct {
+  @Uint32() external int AlignmentRequirement;
+}
+
+class FILE_STORAGE_INFO extends Struct {
+  @Uint32() external int LogicalBytesPerSector;
+  @Uint32() external int PhysicalBytesPerSectorForAtomicity;
+  @Uint32() external int PhysicalBytesPerSectorForPerformance;
+  @Uint32() external int FileSystemEffectivePhysicalBytesPerSectorForAtomicity;
+  @Uint32() external int Flags;
+  @Uint32() external int ByteOffsetForSectorAlignment;
+  @Uint32() external int ByteOffsetForPartitionAlignment;
+}
+
+class FILE_ID_INFO extends Struct {
+  @Uint64() external int VolumeSerialNumber;
+  external FILE_ID_128 FileId;
+}
+
+class FILE_ID_EXTD_DIR_INFO extends Struct {
+  @Uint32() external int NextEntryOffset;
+  @Uint32() external int FileIndex;
+  @Int64() external int CreationTime;
+  @Int64() external int LastAccessTime;
+  @Int64() external int LastWriteTime;
+  @Int64() external int ChangeTime;
+  @Int64() external int EndOfFile;
+  @Int64() external int AllocationSize;
+  @Uint32() external int FileAttributes;
+  @Uint32() external int FileNameLength;
+  @Uint32() external int EaSize;
+  @Uint32() external int ReparsePointTag;
+  external FILE_ID_128 FileId;
+  external __ushort__ FileName;
+}
+
+class FILE_REMOTE_PROTOCOL_INFO extends Struct {
+  @Uint16() external int StructureVersion;
+  @Uint16() external int StructureSize;
+  @Uint32() external int Protocol;
+  @Uint16() external int ProtocolMajorVersion;
+  @Uint16() external int ProtocolMinorVersion;
+  @Uint16() external int ProtocolRevision;
+  @Uint16() external int Reserved;
+  @Uint32() external int Flags;
+  @Uint32() external int GenericReserved;
+  @Uint32() external int ProtocolSpecific;
+}
+
+class FILE_ID_DESCRIPTOR extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int Type;
+  @Uint32() external int Anonymous;
 }
 

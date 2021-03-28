@@ -43,11 +43,8 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class METAFILEPICT extends Struct {
-  @Int32() external int mm;
-  @Int32() external int xExt;
-  @Int32() external int yExt;
-  @IntPtr() external int hMF;
+class HSZ extends Struct {
+  @IntPtr() external int Value;
 }
 
 class HCONV extends Struct {
@@ -60,16 +57,6 @@ class HCONVLIST extends Struct {
 
 class HDDEDATA extends Struct {
   @IntPtr() external int Value;
-}
-
-class HSZ extends Struct {
-  @IntPtr() external int Value;
-}
-
-class COPYDATASTRUCT extends Struct {
-  @IntPtr() external int dwData;
-  @Uint32() external int cbData;
-  external Pointer lpData;
 }
 
 class DDEACK extends Struct {
@@ -105,8 +92,8 @@ class DDEUP extends Struct {
 }
 
 class HSZPAIR extends Struct {
-  external HSZ hszSvc;
-  external HSZ hszTopic;
+  @IntPtr() external int hszSvc;
+  @IntPtr() external int hszTopic;
 }
 
 class CONVCONTEXT extends Struct {
@@ -122,17 +109,17 @@ class CONVCONTEXT extends Struct {
 class CONVINFO extends Struct {
   @Uint32() external int cb;
   @IntPtr() external int hUser;
-  external HCONV hConvPartner;
-  external HSZ hszSvcPartner;
-  external HSZ hszServiceReq;
-  external HSZ hszTopic;
-  external HSZ hszItem;
+  @IntPtr() external int hConvPartner;
+  @IntPtr() external int hszSvcPartner;
+  @IntPtr() external int hszServiceReq;
+  @IntPtr() external int hszTopic;
+  @IntPtr() external int hszItem;
   @Uint32() external int wFmt;
   @Uint32() external int wType;
   @Uint32() external int wStatus;
   @Uint32() external int wConvst;
   @Uint32() external int wLastError;
-  external HCONVLIST hConvList;
+  @IntPtr() external int hConvList;
   external CONVCONTEXT ConvCtxt;
   @IntPtr() external int hwnd;
   @IntPtr() external int hwndPartner;
@@ -163,10 +150,10 @@ class MONCBSTRUCT extends Struct {
   @Uint32() external int dwRet;
   @Uint32() external int wType;
   @Uint32() external int wFmt;
-  external HCONV hConv;
-  external HSZ hsz1;
-  external HSZ hsz2;
-  external HDDEDATA hData;
+  @IntPtr() external int hConv;
+  @IntPtr() external int hsz1;
+  @IntPtr() external int hsz2;
+  @IntPtr() external int hData;
   @IntPtr() external int dwData1;
   @IntPtr() external int dwData2;
   external CONVCONTEXT cc;
@@ -178,7 +165,7 @@ class MONHSZSTRUCTA extends Struct {
   @Uint32() external int cb;
   @Int32() external int fsAction;
   @Uint32() external int dwTime;
-  external HSZ hsz;
+  @IntPtr() external int hsz;
   @IntPtr() external int hTask;
   external __byte__ str;
 }
@@ -187,7 +174,7 @@ class MONHSZSTRUCTW extends Struct {
   @Uint32() external int cb;
   @Int32() external int fsAction;
   @Uint32() external int dwTime;
-  external HSZ hsz;
+  @IntPtr() external int hsz;
   @IntPtr() external int hTask;
   external __ushort__ str;
 }
@@ -205,13 +192,13 @@ class MONLINKSTRUCT extends Struct {
   @IntPtr() external int hTask;
   @Int32() external int fEstablished;
   @Int32() external int fNoData;
-  external HSZ hszSvc;
-  external HSZ hszTopic;
-  external HSZ hszItem;
+  @IntPtr() external int hszSvc;
+  @IntPtr() external int hszTopic;
+  @IntPtr() external int hszItem;
   @Uint32() external int wFmt;
   @Int32() external int fServer;
-  external HCONV hConvServer;
-  external HCONV hConvClient;
+  @IntPtr() external int hConvServer;
+  @IntPtr() external int hConvClient;
 }
 
 class MONCONVSTRUCT extends Struct {
@@ -219,9 +206,22 @@ class MONCONVSTRUCT extends Struct {
   @Int32() external int fConnect;
   @Uint32() external int dwTime;
   @IntPtr() external int hTask;
-  external HSZ hszSvc;
-  external HSZ hszTopic;
-  external HCONV hConvClient;
-  external HCONV hConvServer;
+  @IntPtr() external int hszSvc;
+  @IntPtr() external int hszTopic;
+  @IntPtr() external int hConvClient;
+  @IntPtr() external int hConvServer;
+}
+
+class METAFILEPICT extends Struct {
+  @Int32() external int mm;
+  @Int32() external int xExt;
+  @Int32() external int yExt;
+  @IntPtr() external int hMF;
+}
+
+class COPYDATASTRUCT extends Struct {
+  @IntPtr() external int dwData;
+  @Uint32() external int cbData;
+  external Pointer lpData;
 }
 

@@ -47,6 +47,20 @@ class HCMNOTIFICATION extends Struct {
   @IntPtr() external int Value;
 }
 
+class SP_ALTPLATFORM_INFO_V3 extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int Platform;
+  @Uint32() external int MajorVersion;
+  @Uint32() external int MinorVersion;
+  @Uint16() external int ProcessorArchitecture;
+  @Uint32() external int Anonymous;
+  @Uint32() external int FirstValidatedMajorVersion;
+  @Uint32() external int FirstValidatedMinorVersion;
+  @Uint8() external int ProductType;
+  @Uint16() external int SuiteMask;
+  @Uint32() external int BuildNumber;
+}
+
 class SP_DEVINFO_DATA extends Struct {
   @Uint32() external int cbSize;
   external GUID ClassGuid;
@@ -285,7 +299,7 @@ class COINSTALLER_CONTEXT_DATA extends Struct {
 
 class SP_CLASSIMAGELIST_DATA extends Struct {
   @Uint32() external int cbSize;
-  external HIMAGELIST ImageList;
+  @IntPtr() external int ImageList;
   @IntPtr() external int Reserved;
 }
 
@@ -566,5 +580,19 @@ class HWProfileInfo_sW extends Struct {
   @Uint32() external int HWPI_ulHWProfile;
   external __ushort__ HWPI_szFriendlyName;
   @Uint32() external int HWPI_dwFlags;
+}
+
+class CM_NOTIFY_FILTER extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int Flags;
+  @Uint32() external int FilterType;
+  @Uint32() external int Reserved;
+  @Uint32() external int u;
+}
+
+class CM_NOTIFY_EVENT_DATA extends Struct {
+  @Uint32() external int FilterType;
+  @Uint32() external int Reserved;
+  @Uint32() external int u;
 }
 

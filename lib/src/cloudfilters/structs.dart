@@ -43,6 +43,10 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class CF_CONNECTION_KEY extends Struct {
+  @IntPtr() external int Value;
+}
+
 class CF_FS_METADATA extends Struct {
   external FILE_BASIC_INFO BasicInfo;
   @Int64() external int FileSize;
@@ -122,7 +126,7 @@ class CF_SYNC_REGISTRATION extends Struct {
 
 class CF_CALLBACK_INFO extends Struct {
   @Uint32() external int StructSize;
-  external CF_CONNECTION_KEY ConnectionKey;
+  @IntPtr() external int ConnectionKey;
   external Pointer CallbackContext;
   external Pointer<Utf16> VolumeGuidName;
   external Pointer<Utf16> VolumeDosName;
@@ -142,6 +146,11 @@ class CF_CALLBACK_INFO extends Struct {
   @Int64() external int RequestKey;
 }
 
+class CF_CALLBACK_PARAMETERS extends Struct {
+  @Uint32() external int ParamSize;
+  @Uint32() external int Anonymous;
+}
+
 class CF_CALLBACK_REGISTRATION extends Struct {
   @Uint32() external int Type;
   external CF_CALLBACK Callback;
@@ -159,11 +168,16 @@ class CF_SYNC_STATUS extends Struct {
 class CF_OPERATION_INFO extends Struct {
   @Uint32() external int StructSize;
   @Uint32() external int Type;
-  external CF_CONNECTION_KEY ConnectionKey;
+  @IntPtr() external int ConnectionKey;
   @Int64() external int TransferKey;
   external Pointer<CORRELATION_VECTOR> CorrelationVector;
   external Pointer<CF_SYNC_STATUS> SyncStatus;
   @Int64() external int RequestKey;
+}
+
+class CF_OPERATION_PARAMETERS extends Struct {
+  @Uint32() external int ParamSize;
+  @Uint32() external int Anonymous;
 }
 
 class CF_FILE_RANGE extends Struct {
@@ -214,9 +228,5 @@ class CF_SYNC_ROOT_STANDARD_INFO extends Struct {
   external __ushort__ ProviderVersion;
   @Uint32() external int SyncRootIdentityLength;
   external __ubyte__ SyncRootIdentity;
-}
-
-class CF_CONNECTION_KEY extends Struct {
-  @IntPtr() external int Value;
 }
 

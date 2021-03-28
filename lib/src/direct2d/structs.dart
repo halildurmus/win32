@@ -43,7 +43,18 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class ID2D1SimplifiedGeometrySink extends Struct {
+class D2D_COLOR_F extends Struct {
+  @Float() external double r;
+  @Float() external double g;
+  @Float() external double b;
+  @Float() external double a;
+}
+
+class D2D1_COLOR_F extends Struct {
+  @Float() external double r;
+  @Float() external double g;
+  @Float() external double b;
+  @Float() external double a;
 }
 
 class D2D1_PIXEL_FORMAT extends Struct {
@@ -103,6 +114,22 @@ class D2D_SIZE_U extends Struct {
   @Uint32() external int height;
 }
 
+class D2D_MATRIX_3X2_F extends Struct {
+  @Uint32() external int Anonymous;
+}
+
+class D2D_MATRIX_4X3_F extends Struct {
+  @Uint32() external int Anonymous;
+}
+
+class D2D_MATRIX_4X4_F extends Struct {
+  @Uint32() external int Anonymous;
+}
+
+class D2D_MATRIX_5X4_F extends Struct {
+  @Uint32() external int Anonymous;
+}
+
 class D2D1_BITMAP_PROPERTIES extends Struct {
   external D2D1_PIXEL_FORMAT pixelFormat;
   @Float() external double dpiX;
@@ -111,7 +138,7 @@ class D2D1_BITMAP_PROPERTIES extends Struct {
 
 class D2D1_GRADIENT_STOP extends Struct {
   @Float() external double position;
-  external DXGI_RGBA color;
+  external D2D1_COLOR_F color;
 }
 
 class D2D1_BRUSH_PROPERTIES extends Struct {
@@ -447,10 +474,10 @@ class D2D1_GRADIENT_MESH_PATCH extends Struct {
   external D2D_POINT_2F point31;
   external D2D_POINT_2F point32;
   external D2D_POINT_2F point33;
-  external DXGI_RGBA color00;
-  external DXGI_RGBA color03;
-  external DXGI_RGBA color30;
-  external DXGI_RGBA color33;
+  external D2D1_COLOR_F color00;
+  external D2D1_COLOR_F color03;
+  external D2D1_COLOR_F color30;
+  external D2D1_COLOR_F color33;
   @Uint32() external int topEdgeMode;
   @Uint32() external int leftEdgeMode;
   @Uint32() external int bottomEdgeMode;

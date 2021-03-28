@@ -43,6 +43,94 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class HCRYPTASYNC extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HCERTCHAINENGINE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class LsaHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class PSID extends Struct {
+  @IntPtr() external int Value;
+}
+
+class AUTHZ_ACCESS_CHECK_RESULTS_HANDLE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class AUTHZ_CLIENT_CONTEXT_HANDLE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class AUTHZ_RESOURCE_MANAGER_HANDLE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class AUTHZ_AUDIT_EVENT_HANDLE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class AUTHZ_AUDIT_EVENT_TYPE_HANDLE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HDIAGNOSTIC_DATA_QUERY_SESSION extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HDIAGNOSTIC_REPORT extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HDIAGNOSTIC_EVENT_TAG_DESCRIPTION extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HDIAGNOSTIC_RECORD extends Struct {
+  @IntPtr() external int Value;
+}
+
+class NCRYPT_DESCRIPTOR_HANDLE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class NCRYPT_STREAM_HANDLE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class SAFER_LEVEL_HANDLE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class SC_HANDLE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class SERVICE_STATUS_HANDLE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class MSA_INFO_0 extends Struct {
+  @Uint32() external int State;
+}
+
 class GENERIC_MAPPING extends Struct {
   @Uint32() external int GenericRead;
   @Uint32() external int GenericWrite;
@@ -62,7 +150,7 @@ class SID_IDENTIFIER_AUTHORITY extends Struct {
 class SID extends Struct {
   @Uint8() external int Revision;
   @Uint8() external int SubAuthorityCount;
-  external SID_IDENTIFIER_AUTHORITY IdentifierAuthority;
+  external __ubyte__ IdentifierAuthority;
   external __uint__ SubAuthority;
 }
 
@@ -86,8 +174,8 @@ class ACL extends Struct {
 }
 
 class ACE_HEADER extends Struct {
-  @Uint32() external int AceType;
-  @Uint32() external int AceFlags;
+  @Uint8() external int AceType;
+  @Uint8() external int AceFlags;
   @Uint16() external int AceSize;
 }
 
@@ -272,7 +360,7 @@ class TOKEN_GROUPS extends Struct {
 
 class TOKEN_PRIVILEGES extends Struct {
   @Uint32() external int PrivilegeCount;
-  @Uint32() external int Privileges;
+  external LUID_AND_ATTRIBUTES Privileges;
 }
 
 class TOKEN_OWNER extends Struct {
@@ -387,6 +475,31 @@ class CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE extends Struct {
   @Uint32() external int ValueLength;
 }
 
+class CLAIM_SECURITY_ATTRIBUTE_V1 extends Struct {
+  external Pointer<Utf16> Name;
+  @Uint32() external int ValueType;
+  @Uint16() external int Reserved;
+  @Uint32() external int Flags;
+  @Uint32() external int ValueCount;
+  @Uint32() external int Values;
+}
+
+class CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1 extends Struct {
+  @Uint32() external int Name;
+  @Uint32() external int ValueType;
+  @Uint16() external int Reserved;
+  @Uint32() external int Flags;
+  @Uint32() external int ValueCount;
+  @Uint32() external int Values;
+}
+
+class CLAIM_SECURITY_ATTRIBUTES_INFORMATION extends Struct {
+  @Uint16() external int Version;
+  @Uint16() external int Reserved;
+  @Uint32() external int AttributeCount;
+  @Uint32() external int Attribute;
+}
+
 class SECURITY_QUALITY_OF_SERVICE extends Struct {
   @Uint32() external int Length;
   @Uint32() external int ImpersonationLevel;
@@ -410,88 +523,24 @@ class QUOTA_LIMITS extends Struct {
   @Int64() external int TimeLimit;
 }
 
-class MSA_INFO_0 extends Struct {
-  @Uint32() external int State;
+class SEC_WINNT_AUTH_IDENTITY_W extends Struct {
+  external Pointer<Uint16> User;
+  @Uint32() external int UserLength;
+  external Pointer<Uint16> Domain;
+  @Uint32() external int DomainLength;
+  external Pointer<Uint16> Password;
+  @Uint32() external int PasswordLength;
+  @Uint32() external int Flags;
 }
 
-class AUTHZ_ACCESS_CHECK_RESULTS_HANDLE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class AUTHZ_AUDIT_EVENT_HANDLE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class AUTHZ_AUDIT_EVENT_TYPE_HANDLE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class AUTHZ_CLIENT_CONTEXT_HANDLE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class AUTHZ_RESOURCE_MANAGER_HANDLE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HCERTCHAINENGINE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HCRYPTASYNC extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HDIAGNOSTIC_DATA_QUERY_SESSION extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HDIAGNOSTIC_EVENT_TAG_DESCRIPTION extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HDIAGNOSTIC_RECORD extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HDIAGNOSTIC_REPORT extends Struct {
-  @IntPtr() external int Value;
-}
-
-class LsaHandle extends Struct {
-  @IntPtr() external int Value;
-}
-
-class NCRYPT_DESCRIPTOR_HANDLE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class NCRYPT_STREAM_HANDLE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class SAFER_LEVEL_HANDLE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class SC_HANDLE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class SERVICE_STATUS_HANDLE extends Struct {
-  @IntPtr() external int Value;
+class SEC_WINNT_AUTH_IDENTITY_A extends Struct {
+  external Pointer<Uint8> User;
+  @Uint32() external int UserLength;
+  external Pointer<Uint8> Domain;
+  @Uint32() external int DomainLength;
+  external Pointer<Uint8> Password;
+  @Uint32() external int PasswordLength;
+  @Uint32() external int Flags;
 }
 
 class NETRESOURCEA extends Struct {
@@ -550,2275 +599,12 @@ class UNICODE_STRING extends Struct {
   external Pointer<Utf16> Buffer;
 }
 
-class SEC_WINNT_AUTH_IDENTITY_W extends Struct {
-  external Pointer<Uint16> User;
-  @Uint32() external int UserLength;
-  external Pointer<Uint16> Domain;
-  @Uint32() external int DomainLength;
-  external Pointer<Uint16> Password;
-  @Uint32() external int PasswordLength;
-  @Uint32() external int Flags;
-}
-
-class SEC_WINNT_AUTH_IDENTITY_A extends Struct {
-  external Pointer<Uint8> User;
-  @Uint32() external int UserLength;
-  external Pointer<Uint8> Domain;
-  @Uint32() external int DomainLength;
-  external Pointer<Uint8> Password;
-  @Uint32() external int PasswordLength;
-  @Uint32() external int Flags;
-}
-
-class CMS_KEY_INFO extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int Algid;
-  external Pointer<Uint8> pbOID;
-  @Uint32() external int cbOID;
-}
-
-class HMAC_Info extends Struct {
-  @Uint32() external int HashAlgid;
-  external Pointer<Uint8> pbInnerString;
-  @Uint32() external int cbInnerString;
-  external Pointer<Uint8> pbOuterString;
-  @Uint32() external int cbOuterString;
-}
-
-class SCHANNEL_ALG extends Struct {
-  @Uint32() external int dwUse;
-  @Uint32() external int Algid;
-  @Uint32() external int cBits;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwReserved;
-}
-
-class PROV_ENUMALGS extends Struct {
-  @Uint32() external int aiAlgid;
-  @Uint32() external int dwBitLen;
-  @Uint32() external int dwNameLen;
-  external __byte__ szName;
-}
-
-class PROV_ENUMALGS_EX extends Struct {
-  @Uint32() external int aiAlgid;
-  @Uint32() external int dwDefaultLen;
-  @Uint32() external int dwMinLen;
-  @Uint32() external int dwMaxLen;
-  @Uint32() external int dwProtocols;
-  @Uint32() external int dwNameLen;
-  external __byte__ szName;
-  @Uint32() external int dwLongNameLen;
-  external __byte__ szLongName;
-}
-
-class PUBLICKEYSTRUC extends Struct {
-  @Uint8() external int bType;
-  @Uint8() external int bVersion;
-  @Uint16() external int reserved;
-  @Uint32() external int aiKeyAlg;
-}
-
-class RSAPUBKEY extends Struct {
-  @Uint32() external int magic;
-  @Uint32() external int bitlen;
-  @Uint32() external int pubexp;
-}
-
-class PUBKEY extends Struct {
-  @Uint32() external int magic;
-  @Uint32() external int bitlen;
-}
-
-class DSSSEED extends Struct {
-  @Uint32() external int counter;
-  external __ubyte__ seed;
-}
-
-class PUBKEYVER3 extends Struct {
-  @Uint32() external int magic;
-  @Uint32() external int bitlenP;
-  @Uint32() external int bitlenQ;
-  @Uint32() external int bitlenJ;
-  external DSSSEED DSSSeed;
-}
-
-class PRIVKEYVER3 extends Struct {
-  @Uint32() external int magic;
-  @Uint32() external int bitlenP;
-  @Uint32() external int bitlenQ;
-  @Uint32() external int bitlenJ;
-  @Uint32() external int bitlenX;
-  external DSSSEED DSSSeed;
-}
-
-class KEY_TYPE_SUBTYPE extends Struct {
-  @Uint32() external int dwKeySpec;
-  external GUID Type;
-  external GUID Subtype;
-}
-
-class CERT_FORTEZZA_DATA_PROP extends Struct {
-  external __ubyte__ SerialNumber;
-  @Int32() external int CertIndex;
-  external __ubyte__ CertLabel;
-}
-
-class CRYPT_RC4_KEY_STATE extends Struct {
-  external __ubyte__ Key;
-  external __ubyte__ SBox;
-  @Uint8() external int i;
-  @Uint8() external int j;
-}
-
-class CRYPT_DES_KEY_STATE extends Struct {
-  external __ubyte__ Key;
-  external __ubyte__ IV;
-  external __ubyte__ Feedback;
-}
-
-class CRYPT_3DES_KEY_STATE extends Struct {
-  external __ubyte__ Key;
-  external __ubyte__ IV;
-  external __ubyte__ Feedback;
-}
-
-class CRYPT_AES_128_KEY_STATE extends Struct {
-  external __ubyte__ Key;
-  external __ubyte__ IV;
-  external __ubyte__ EncryptionState;
-  external __ubyte__ DecryptionState;
-  external __ubyte__ Feedback;
-}
-
-class CRYPT_AES_256_KEY_STATE extends Struct {
-  external __ubyte__ Key;
-  external __ubyte__ IV;
-  external __ubyte__ EncryptionState;
-  external __ubyte__ DecryptionState;
-  external __ubyte__ Feedback;
-}
-
-class CRYPTOAPI_BLOB extends Struct {
-  @Uint32() external int cbData;
-  external Pointer<Uint8> pbData;
-}
-
-class CMS_DH_KEY_INFO extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int Algid;
-  external Pointer<Utf8> pszContentEncObjId;
-  external CRYPTOAPI_BLOB PubInfo;
-  external Pointer pReserved;
-}
-
-class BCRYPT_KEY_LENGTHS_STRUCT extends Struct {
-  @Uint32() external int dwMinLength;
-  @Uint32() external int dwMaxLength;
-  @Uint32() external int dwIncrement;
-}
-
-class BCRYPT_OID extends Struct {
-  @Uint32() external int cbOID;
-  external Pointer<Uint8> pbOID;
-}
-
-class BCRYPT_OID_LIST extends Struct {
-  @Uint32() external int dwOIDCount;
-  external Pointer<BCRYPT_OID> pOIDs;
-}
-
-class BCRYPT_PKCS1_PADDING_INFO extends Struct {
-  external Pointer<Utf16> pszAlgId;
-}
-
-class BCRYPT_PSS_PADDING_INFO extends Struct {
-  external Pointer<Utf16> pszAlgId;
-  @Uint32() external int cbSalt;
-}
-
-class BCRYPT_OAEP_PADDING_INFO extends Struct {
-  external Pointer<Utf16> pszAlgId;
-  external Pointer<Uint8> pbLabel;
-  @Uint32() external int cbLabel;
-}
-
-class BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwInfoVersion;
-  external Pointer<Uint8> pbNonce;
-  @Uint32() external int cbNonce;
-  external Pointer<Uint8> pbAuthData;
-  @Uint32() external int cbAuthData;
-  external Pointer<Uint8> pbTag;
-  @Uint32() external int cbTag;
-  external Pointer<Uint8> pbMacContext;
-  @Uint32() external int cbMacContext;
-  @Uint32() external int cbAAD;
-  @Uint64() external int cbData;
-  @Uint32() external int dwFlags;
-}
-
-class BCryptBuffer extends Struct {
-  @Uint32() external int cbBuffer;
-  @Uint32() external int BufferType;
-  external Pointer pvBuffer;
-}
-
-class BCryptBufferDesc extends Struct {
-  @Uint32() external int ulVersion;
-  @Uint32() external int cBuffers;
-  external Pointer<BCryptBuffer> pBuffers;
-}
-
-class BCRYPT_KEY_BLOB extends Struct {
-  @Uint32() external int Magic;
-}
-
-class BCRYPT_RSAKEY_BLOB extends Struct {
-  @Uint32() external int Magic;
-  @Uint32() external int BitLength;
-  @Uint32() external int cbPublicExp;
-  @Uint32() external int cbModulus;
-  @Uint32() external int cbPrime1;
-  @Uint32() external int cbPrime2;
-}
-
-class BCRYPT_ECCKEY_BLOB extends Struct {
-  @Uint32() external int dwMagic;
-  @Uint32() external int cbKey;
-}
-
-class SSL_ECCKEY_BLOB extends Struct {
-  @Uint32() external int dwCurveType;
-  @Uint32() external int cbKey;
-}
-
-class BCRYPT_ECCFULLKEY_BLOB extends Struct {
-  @Uint32() external int dwMagic;
-  @Uint32() external int dwVersion;
-  @Uint32() external int dwCurveType;
-  @Uint32() external int dwCurveGenerationAlgId;
-  @Uint32() external int cbFieldLength;
-  @Uint32() external int cbSubgroupOrder;
-  @Uint32() external int cbCofactor;
-  @Uint32() external int cbSeed;
-}
-
-class BCRYPT_DH_KEY_BLOB extends Struct {
-  @Uint32() external int dwMagic;
-  @Uint32() external int cbKey;
-}
-
-class BCRYPT_DH_PARAMETER_HEADER extends Struct {
-  @Uint32() external int cbLength;
-  @Uint32() external int dwMagic;
-  @Uint32() external int cbKeyLength;
-}
-
-class BCRYPT_DSA_KEY_BLOB extends Struct {
-  @Uint32() external int dwMagic;
-  @Uint32() external int cbKey;
-  external __ubyte__ Count;
-  external __ubyte__ Seed;
-  external __ubyte__ q;
-}
-
-class BCRYPT_DSA_KEY_BLOB_V2 extends Struct {
-  @Uint32() external int dwMagic;
-  @Uint32() external int cbKey;
-  @Uint32() external int hashAlgorithm;
-  @Uint32() external int standardVersion;
-  @Uint32() external int cbSeedLength;
-  @Uint32() external int cbGroupSize;
-  external __ubyte__ Count;
-}
-
-class BCRYPT_KEY_DATA_BLOB_HEADER extends Struct {
-  @Uint32() external int dwMagic;
-  @Uint32() external int dwVersion;
-  @Uint32() external int cbKeyData;
-}
-
-class BCRYPT_DSA_PARAMETER_HEADER extends Struct {
-  @Uint32() external int cbLength;
-  @Uint32() external int dwMagic;
-  @Uint32() external int cbKeyLength;
-  external __ubyte__ Count;
-  external __ubyte__ Seed;
-  external __ubyte__ q;
-}
-
-class BCRYPT_DSA_PARAMETER_HEADER_V2 extends Struct {
-  @Uint32() external int cbLength;
-  @Uint32() external int dwMagic;
-  @Uint32() external int cbKeyLength;
-  @Uint32() external int hashAlgorithm;
-  @Uint32() external int standardVersion;
-  @Uint32() external int cbSeedLength;
-  @Uint32() external int cbGroupSize;
-  external __ubyte__ Count;
-}
-
-class BCRYPT_ECC_CURVE_NAMES extends Struct {
-  @Uint32() external int dwEccCurveNames;
-  external Pointer<Pointer<Utf16>> pEccCurveNames;
-}
-
-class BCRYPT_MULTI_HASH_OPERATION extends Struct {
-  @Uint32() external int iHash;
-  @Uint32() external int hashOperation;
-  external Pointer<Uint8> pbBuffer;
-  @Uint32() external int cbBuffer;
-}
-
-class BCRYPT_MULTI_OBJECT_LENGTH_STRUCT extends Struct {
-  @Uint32() external int cbPerObject;
-  @Uint32() external int cbPerElement;
-}
-
-class BCRYPT_ALGORITHM_IDENTIFIER extends Struct {
-  external Pointer<Utf16> pszName;
-  @Uint32() external int dwClass;
-  @Uint32() external int dwFlags;
-}
-
-class BCRYPT_PROVIDER_NAME extends Struct {
-  external Pointer<Utf16> pszProviderName;
-}
-
-class BCRYPT_INTERFACE_VERSION extends Struct {
-  @Uint16() external int MajorVersion;
-  @Uint16() external int MinorVersion;
-}
-
-class CRYPT_INTERFACE_REG extends Struct {
-  @Uint32() external int dwInterface;
-  @Uint32() external int dwFlags;
-  @Uint32() external int cFunctions;
-  external Pointer<Pointer<Utf16>> rgpszFunctions;
-}
-
-class CRYPT_IMAGE_REG extends Struct {
-  external Pointer<Utf16> pszImage;
-  @Uint32() external int cInterfaces;
-  external Pointer<Pointer<CRYPT_INTERFACE_REG>> rgpInterfaces;
-}
-
-class CRYPT_PROVIDER_REG extends Struct {
-  @Uint32() external int cAliases;
-  external Pointer<Pointer<Utf16>> rgpszAliases;
-  external Pointer<CRYPT_IMAGE_REG> pUM;
-  external Pointer<CRYPT_IMAGE_REG> pKM;
-}
-
-class CRYPT_PROVIDERS extends Struct {
-  @Uint32() external int cProviders;
-  external Pointer<Pointer<Utf16>> rgpszProviders;
-}
-
-class CRYPT_CONTEXT_CONFIG extends Struct {
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwReserved;
-}
-
-class CRYPT_CONTEXT_FUNCTION_CONFIG extends Struct {
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwReserved;
-}
-
-class CRYPT_CONTEXTS extends Struct {
-  @Uint32() external int cContexts;
-  external Pointer<Pointer<Utf16>> rgpszContexts;
-}
-
-class CRYPT_CONTEXT_FUNCTIONS extends Struct {
-  @Uint32() external int cFunctions;
-  external Pointer<Pointer<Utf16>> rgpszFunctions;
-}
-
-class CRYPT_CONTEXT_FUNCTION_PROVIDERS extends Struct {
-  @Uint32() external int cProviders;
-  external Pointer<Pointer<Utf16>> rgpszProviders;
-}
-
-class CRYPT_PROPERTY_REF extends Struct {
-  external Pointer<Utf16> pszProperty;
-  @Uint32() external int cbValue;
-  external Pointer<Uint8> pbValue;
-}
-
-class CRYPT_IMAGE_REF extends Struct {
-  external Pointer<Utf16> pszImage;
-  @Uint32() external int dwFlags;
-}
-
-class CRYPT_PROVIDER_REF extends Struct {
-  @Uint32() external int dwInterface;
-  external Pointer<Utf16> pszFunction;
-  external Pointer<Utf16> pszProvider;
-  @Uint32() external int cProperties;
-  external Pointer<Pointer<CRYPT_PROPERTY_REF>> rgpProperties;
-  external Pointer<CRYPT_IMAGE_REF> pUM;
-  external Pointer<CRYPT_IMAGE_REF> pKM;
-}
-
-class CRYPT_PROVIDER_REFS extends Struct {
-  @Uint32() external int cProviders;
-  external Pointer<Pointer<CRYPT_PROVIDER_REF>> rgpProviders;
-}
-
-class NCRYPT_ALLOC_PARA extends Struct {
-  @Uint32() external int cbSize;
-  external PFN_NCRYPT_ALLOC pfnAlloc;
-  external PFN_NCRYPT_FREE pfnFree;
-}
-
-class NCRYPT_CIPHER_PADDING_INFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-  external Pointer<Uint8> pbIV;
-  @Uint32() external int cbIV;
-  external Pointer<Uint8> pbOtherInfo;
-  @Uint32() external int cbOtherInfo;
-}
-
-class NCRYPT_PLATFORM_ATTEST_PADDING_INFO extends Struct {
-  @Uint32() external int magic;
-  @Uint32() external int pcrMask;
-}
-
-class NCRYPT_KEY_ATTEST_PADDING_INFO extends Struct {
-  @Uint32() external int magic;
-  external Pointer<Uint8> pbKeyBlob;
-  @Uint32() external int cbKeyBlob;
-  external Pointer<Uint8> pbKeyAuth;
-  @Uint32() external int cbKeyAuth;
-}
-
-class NCRYPT_ISOLATED_KEY_ATTESTED_ATTRIBUTES extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int Flags;
-  @Uint32() external int cbPublicKeyBlob;
-}
-
-class NCRYPT_VSM_KEY_ATTESTATION_STATEMENT extends Struct {
-  @Uint32() external int Magic;
-  @Uint32() external int Version;
-  @Uint32() external int cbSignature;
-  @Uint32() external int cbReport;
-  @Uint32() external int cbAttributes;
-}
-
-class NCRYPT_VSM_KEY_ATTESTATION_CLAIM_RESTRICTIONS extends Struct {
-  @Uint32() external int Version;
-  @Uint64() external int TrustletId;
-  @Uint32() external int MinSvn;
-  @Uint32() external int FlagsMask;
-  @Uint32() external int FlagsExpected;
-  @Uint32() external int _bitfield;
-}
-
-class NCRYPT_EXPORTED_ISOLATED_KEY_HEADER extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int KeyUsage;
-  @Uint32() external int _bitfield;
-  @Uint32() external int cbAlgName;
-  @Uint32() external int cbNonce;
-  @Uint32() external int cbAuthTag;
-  @Uint32() external int cbWrappingKey;
-  @Uint32() external int cbIsolatedKey;
-}
-
-class NCRYPT_EXPORTED_ISOLATED_KEY_ENVELOPE extends Struct {
-  external NCRYPT_EXPORTED_ISOLATED_KEY_HEADER Header;
-}
-
-class __NCRYPT_PCP_TPM_WEB_AUTHN_ATTESTATION_STATEMENT extends Struct {
-  @Uint32() external int Magic;
-  @Uint32() external int Version;
-  @Uint32() external int HeaderSize;
-  @Uint32() external int cbCertifyInfo;
-  @Uint32() external int cbSignature;
-  @Uint32() external int cbTpmPublic;
-}
-
-class NCRYPT_TPM_PLATFORM_ATTESTATION_STATEMENT extends Struct {
-  @Uint32() external int Magic;
-  @Uint32() external int Version;
-  @Uint32() external int pcrAlg;
-  @Uint32() external int cbSignature;
-  @Uint32() external int cbQuote;
-  @Uint32() external int cbPcrs;
-}
-
-class NCryptAlgorithmName extends Struct {
-  external Pointer<Utf16> pszName;
-  @Uint32() external int dwClass;
-  @Uint32() external int dwAlgOperations;
-  @Uint32() external int dwFlags;
-}
-
-class NCryptKeyName extends Struct {
-  external Pointer<Utf16> pszName;
-  external Pointer<Utf16> pszAlgid;
-  @Uint32() external int dwLegacyKeySpec;
-  @Uint32() external int dwFlags;
-}
-
-class NCryptProviderName extends Struct {
-  external Pointer<Utf16> pszName;
-  external Pointer<Utf16> pszComment;
-}
-
-class NCRYPT_UI_POLICY extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int dwFlags;
-  external Pointer<Utf16> pszCreationTitle;
-  external Pointer<Utf16> pszFriendlyName;
-  external Pointer<Utf16> pszDescription;
-}
-
-class __NCRYPT_KEY_ACCESS_POLICY_BLOB extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int dwPolicyFlags;
-  @Uint32() external int cbUserSid;
-  @Uint32() external int cbApplicationSid;
-}
-
-class NCRYPT_SUPPORTED_LENGTHS extends Struct {
-  @Uint32() external int dwMinLength;
-  @Uint32() external int dwMaxLength;
-  @Uint32() external int dwIncrement;
-  @Uint32() external int dwDefaultLength;
-}
-
-class __NCRYPT_PCP_HMAC_AUTH_SIGNATURE_INFO extends Struct {
-  @Uint32() external int dwVersion;
-  @Int32() external int iExpiration;
-  external __ubyte__ pabNonce;
-  external __ubyte__ pabPolicyRef;
-  external __ubyte__ pabHMAC;
-}
-
-class __NCRYPT_PCP_TPM_FW_VERSION_INFO extends Struct {
-  @Uint16() external int major1;
-  @Uint16() external int major2;
-  @Uint16() external int minor1;
-  @Uint16() external int minor2;
-}
-
-class __NCRYPT_PCP_RAW_POLICYDIGEST extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int cbDigest;
-}
-
-class NCRYPT_KEY_BLOB_HEADER extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwMagic;
-  @Uint32() external int cbAlgName;
-  @Uint32() external int cbKeyData;
-}
-
-class NCRYPT_TPM_LOADABLE_KEY_BLOB_HEADER extends Struct {
-  @Uint32() external int magic;
-  @Uint32() external int cbHeader;
-  @Uint32() external int cbPublic;
-  @Uint32() external int cbPrivate;
-  @Uint32() external int cbName;
-}
-
-class CRYPT_BIT_BLOB extends Struct {
-  @Uint32() external int cbData;
-  external Pointer<Uint8> pbData;
-  @Uint32() external int cUnusedBits;
-}
-
-class CRYPT_ALGORITHM_IDENTIFIER extends Struct {
-  external Pointer<Utf8> pszObjId;
-  external CRYPTOAPI_BLOB Parameters;
-}
-
-class CRYPT_OBJID_TABLE extends Struct {
-  @Uint32() external int dwAlgId;
-  external Pointer<Utf8> pszObjId;
-}
-
-class CRYPT_HASH_INFO extends Struct {
-  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
-  external CRYPTOAPI_BLOB Hash;
-}
-
-class CERT_EXTENSION extends Struct {
-  external Pointer<Utf8> pszObjId;
-  @Int32() external int fCritical;
-  external CRYPTOAPI_BLOB Value;
-}
-
-class CRYPT_ATTRIBUTE_TYPE_VALUE extends Struct {
-  external Pointer<Utf8> pszObjId;
-  external CRYPTOAPI_BLOB Value;
-}
-
-class CRYPT_ATTRIBUTE extends Struct {
-  external Pointer<Utf8> pszObjId;
-  @Uint32() external int cValue;
-  external Pointer<CRYPTOAPI_BLOB> rgValue;
-}
-
-class CRYPT_ATTRIBUTES extends Struct {
-  @Uint32() external int cAttr;
-  external Pointer<CRYPT_ATTRIBUTE> rgAttr;
-}
-
-class CERT_RDN_ATTR extends Struct {
-  external Pointer<Utf8> pszObjId;
-  @Uint32() external int dwValueType;
-  external CRYPTOAPI_BLOB Value;
-}
-
-class CERT_RDN extends Struct {
-  @Uint32() external int cRDNAttr;
-  external Pointer<CERT_RDN_ATTR> rgRDNAttr;
-}
-
-class CERT_NAME_INFO extends Struct {
-  @Uint32() external int cRDN;
-  external Pointer<CERT_RDN> rgRDN;
-}
-
-class CERT_NAME_VALUE extends Struct {
-  @Uint32() external int dwValueType;
-  external CRYPTOAPI_BLOB Value;
-}
-
-class CERT_PUBLIC_KEY_INFO extends Struct {
-  external CRYPT_ALGORITHM_IDENTIFIER Algorithm;
-  external CRYPT_BIT_BLOB PublicKey;
-}
-
-class CRYPT_ECC_PRIVATE_KEY_INFO extends Struct {
-  @Uint32() external int dwVersion;
-  external CRYPTOAPI_BLOB PrivateKey;
-  external Pointer<Utf8> szCurveOid;
-  external CRYPT_BIT_BLOB PublicKey;
-}
-
-class CRYPT_PRIVATE_KEY_INFO extends Struct {
-  @Uint32() external int Version;
-  external CRYPT_ALGORITHM_IDENTIFIER Algorithm;
-  external CRYPTOAPI_BLOB PrivateKey;
-  external Pointer<CRYPT_ATTRIBUTES> pAttributes;
-}
-
-class CRYPT_ENCRYPTED_PRIVATE_KEY_INFO extends Struct {
-  external CRYPT_ALGORITHM_IDENTIFIER EncryptionAlgorithm;
-  external CRYPTOAPI_BLOB EncryptedPrivateKey;
-}
-
-class CRYPT_PKCS8_IMPORT_PARAMS extends Struct {
-  external CRYPTOAPI_BLOB PrivateKey;
-  external PCRYPT_RESOLVE_HCRYPTPROV_FUNC pResolvehCryptProvFunc;
-  external Pointer pVoidResolveFunc;
-  external PCRYPT_DECRYPT_PRIVATE_KEY_FUNC pDecryptPrivateKeyFunc;
-  external Pointer pVoidDecryptFunc;
-}
-
-class CRYPT_PKCS8_EXPORT_PARAMS extends Struct {
-  @IntPtr() external int hCryptProv;
-  @Uint32() external int dwKeySpec;
-  external Pointer<Utf8> pszPrivateKeyObjId;
-  external PCRYPT_ENCRYPT_PRIVATE_KEY_FUNC pEncryptPrivateKeyFunc;
-  external Pointer pVoidEncryptFunc;
-}
-
-class CERT_INFO extends Struct {
-  @Uint32() external int dwVersion;
-  external CRYPTOAPI_BLOB SerialNumber;
-  external CRYPT_ALGORITHM_IDENTIFIER SignatureAlgorithm;
-  external CRYPTOAPI_BLOB Issuer;
-  external FILETIME NotBefore;
-  external FILETIME NotAfter;
-  external CRYPTOAPI_BLOB Subject;
-  external CERT_PUBLIC_KEY_INFO SubjectPublicKeyInfo;
-  external CRYPT_BIT_BLOB IssuerUniqueId;
-  external CRYPT_BIT_BLOB SubjectUniqueId;
-  @Uint32() external int cExtension;
-  external Pointer<CERT_EXTENSION> rgExtension;
-}
-
-class CRL_ENTRY extends Struct {
-  external CRYPTOAPI_BLOB SerialNumber;
-  external FILETIME RevocationDate;
-  @Uint32() external int cExtension;
-  external Pointer<CERT_EXTENSION> rgExtension;
-}
-
-class CRL_INFO extends Struct {
-  @Uint32() external int dwVersion;
-  external CRYPT_ALGORITHM_IDENTIFIER SignatureAlgorithm;
-  external CRYPTOAPI_BLOB Issuer;
-  external FILETIME ThisUpdate;
-  external FILETIME NextUpdate;
-  @Uint32() external int cCRLEntry;
-  external Pointer<CRL_ENTRY> rgCRLEntry;
-  @Uint32() external int cExtension;
-  external Pointer<CERT_EXTENSION> rgExtension;
-}
-
-class CERT_OR_CRL_BLOB extends Struct {
-  @Uint32() external int dwChoice;
-  @Uint32() external int cbEncoded;
-  external Pointer<Uint8> pbEncoded;
-}
-
-class CERT_OR_CRL_BUNDLE extends Struct {
-  @Uint32() external int cItem;
-  external Pointer<CERT_OR_CRL_BLOB> rgItem;
-}
-
-class CERT_REQUEST_INFO extends Struct {
-  @Uint32() external int dwVersion;
-  external CRYPTOAPI_BLOB Subject;
-  external CERT_PUBLIC_KEY_INFO SubjectPublicKeyInfo;
-  @Uint32() external int cAttribute;
-  external Pointer<CRYPT_ATTRIBUTE> rgAttribute;
-}
-
-class CERT_KEYGEN_REQUEST_INFO extends Struct {
-  @Uint32() external int dwVersion;
-  external CERT_PUBLIC_KEY_INFO SubjectPublicKeyInfo;
-  external Pointer<Utf16> pwszChallengeString;
-}
-
-class CERT_SIGNED_CONTENT_INFO extends Struct {
-  external CRYPTOAPI_BLOB ToBeSigned;
-  external CRYPT_ALGORITHM_IDENTIFIER SignatureAlgorithm;
-  external CRYPT_BIT_BLOB Signature;
-}
-
-class CTL_USAGE extends Struct {
-  @Uint32() external int cUsageIdentifier;
-  external Pointer<Pointer<Utf8>> rgpszUsageIdentifier;
-}
-
-class CTL_ENTRY extends Struct {
-  external CRYPTOAPI_BLOB SubjectIdentifier;
-  @Uint32() external int cAttribute;
-  external Pointer<CRYPT_ATTRIBUTE> rgAttribute;
-}
-
-class CTL_INFO extends Struct {
-  @Uint32() external int dwVersion;
-  external CTL_USAGE SubjectUsage;
-  external CRYPTOAPI_BLOB ListIdentifier;
-  external CRYPTOAPI_BLOB SequenceNumber;
-  external FILETIME ThisUpdate;
-  external FILETIME NextUpdate;
-  external CRYPT_ALGORITHM_IDENTIFIER SubjectAlgorithm;
-  @Uint32() external int cCTLEntry;
-  external Pointer<CTL_ENTRY> rgCTLEntry;
-  @Uint32() external int cExtension;
-  external Pointer<CERT_EXTENSION> rgExtension;
-}
-
-class CRYPT_TIME_STAMP_REQUEST_INFO extends Struct {
-  external Pointer<Utf8> pszTimeStampAlgorithm;
-  external Pointer<Utf8> pszContentType;
-  external CRYPTOAPI_BLOB Content;
-  @Uint32() external int cAttribute;
-  external Pointer<CRYPT_ATTRIBUTE> rgAttribute;
-}
-
-class CRYPT_ENROLLMENT_NAME_VALUE_PAIR extends Struct {
-  external Pointer<Utf16> pwszName;
-  external Pointer<Utf16> pwszValue;
-}
-
-class CRYPT_CSP_PROVIDER extends Struct {
-  @Uint32() external int dwKeySpec;
-  external Pointer<Utf16> pwszProviderName;
-  external CRYPT_BIT_BLOB Signature;
-}
-
-class CRYPT_ENCODE_PARA extends Struct {
-  @Uint32() external int cbSize;
-  external PFN_CRYPT_ALLOC pfnAlloc;
-  external PFN_CRYPT_FREE pfnFree;
-}
-
-class CRYPT_DECODE_PARA extends Struct {
-  @Uint32() external int cbSize;
-  external PFN_CRYPT_ALLOC pfnAlloc;
-  external PFN_CRYPT_FREE pfnFree;
-}
-
-class CERT_EXTENSIONS extends Struct {
-  @Uint32() external int cExtension;
-  external Pointer<CERT_EXTENSION> rgExtension;
-}
-
-class CERT_AUTHORITY_KEY_ID_INFO extends Struct {
-  external CRYPTOAPI_BLOB KeyId;
-  external CRYPTOAPI_BLOB CertIssuer;
-  external CRYPTOAPI_BLOB CertSerialNumber;
-}
-
-class CERT_PRIVATE_KEY_VALIDITY extends Struct {
-  external FILETIME NotBefore;
-  external FILETIME NotAfter;
-}
-
-class CERT_KEY_ATTRIBUTES_INFO extends Struct {
-  external CRYPTOAPI_BLOB KeyId;
-  external CRYPT_BIT_BLOB IntendedKeyUsage;
-  external Pointer<CERT_PRIVATE_KEY_VALIDITY> pPrivateKeyUsagePeriod;
-}
-
-class CERT_POLICY_ID extends Struct {
-  @Uint32() external int cCertPolicyElementId;
-  external Pointer<Pointer<Utf8>> rgpszCertPolicyElementId;
-}
-
-class CERT_KEY_USAGE_RESTRICTION_INFO extends Struct {
-  @Uint32() external int cCertPolicyId;
-  external Pointer<CERT_POLICY_ID> rgCertPolicyId;
-  external CRYPT_BIT_BLOB RestrictedKeyUsage;
-}
-
-class CERT_OTHER_NAME extends Struct {
-  external Pointer<Utf8> pszObjId;
-  external CRYPTOAPI_BLOB Value;
-}
-
-class CERT_ALT_NAME_INFO extends Struct {
-  @Uint32() external int cAltEntry;
-  external Pointer<CERT_ALT_NAME_ENTRY> rgAltEntry;
-}
-
-class CERT_BASIC_CONSTRAINTS_INFO extends Struct {
-  external CRYPT_BIT_BLOB SubjectType;
-  @Int32() external int fPathLenConstraint;
-  @Uint32() external int dwPathLenConstraint;
-  @Uint32() external int cSubtreesConstraint;
-  external Pointer<CRYPTOAPI_BLOB> rgSubtreesConstraint;
-}
-
-class CERT_BASIC_CONSTRAINTS2_INFO extends Struct {
-  @Int32() external int fCA;
-  @Int32() external int fPathLenConstraint;
-  @Uint32() external int dwPathLenConstraint;
-}
-
-class CERT_POLICY_QUALIFIER_INFO extends Struct {
-  external Pointer<Utf8> pszPolicyQualifierId;
-  external CRYPTOAPI_BLOB Qualifier;
-}
-
-class CERT_POLICY_INFO extends Struct {
-  external Pointer<Utf8> pszPolicyIdentifier;
-  @Uint32() external int cPolicyQualifier;
-  external Pointer<CERT_POLICY_QUALIFIER_INFO> rgPolicyQualifier;
-}
-
-class CERT_POLICIES_INFO extends Struct {
-  @Uint32() external int cPolicyInfo;
-  external Pointer<CERT_POLICY_INFO> rgPolicyInfo;
-}
-
-class CERT_POLICY_QUALIFIER_NOTICE_REFERENCE extends Struct {
-  external Pointer<Utf8> pszOrganization;
-  @Uint32() external int cNoticeNumbers;
-  external Pointer<Int32> rgNoticeNumbers;
-}
-
-class CERT_POLICY_QUALIFIER_USER_NOTICE extends Struct {
-  external Pointer<CERT_POLICY_QUALIFIER_NOTICE_REFERENCE> pNoticeReference;
-  external Pointer<Utf16> pszDisplayText;
-}
-
-class CPS_URLS extends Struct {
-  external Pointer<Utf16> pszURL;
-  external Pointer<CRYPT_ALGORITHM_IDENTIFIER> pAlgorithm;
-  external Pointer<CRYPTOAPI_BLOB> pDigest;
-}
-
-class CERT_POLICY95_QUALIFIER1 extends Struct {
-  external Pointer<Utf16> pszPracticesReference;
-  external Pointer<Utf8> pszNoticeIdentifier;
-  external Pointer<Utf8> pszNSINoticeIdentifier;
-  @Uint32() external int cCPSURLs;
-  external Pointer<CPS_URLS> rgCPSURLs;
-}
-
-class CERT_POLICY_MAPPING extends Struct {
-  external Pointer<Utf8> pszIssuerDomainPolicy;
-  external Pointer<Utf8> pszSubjectDomainPolicy;
-}
-
-class CERT_POLICY_MAPPINGS_INFO extends Struct {
-  @Uint32() external int cPolicyMapping;
-  external Pointer<CERT_POLICY_MAPPING> rgPolicyMapping;
-}
-
-class CERT_POLICY_CONSTRAINTS_INFO extends Struct {
-  @Int32() external int fRequireExplicitPolicy;
-  @Uint32() external int dwRequireExplicitPolicySkipCerts;
-  @Int32() external int fInhibitPolicyMapping;
-  @Uint32() external int dwInhibitPolicyMappingSkipCerts;
-}
-
-class CRYPT_CONTENT_INFO_SEQUENCE_OF_ANY extends Struct {
-  external Pointer<Utf8> pszObjId;
-  @Uint32() external int cValue;
-  external Pointer<CRYPTOAPI_BLOB> rgValue;
-}
-
-class CRYPT_CONTENT_INFO extends Struct {
-  external Pointer<Utf8> pszObjId;
-  external CRYPTOAPI_BLOB Content;
-}
-
-class CRYPT_SEQUENCE_OF_ANY extends Struct {
-  @Uint32() external int cValue;
-  external Pointer<CRYPTOAPI_BLOB> rgValue;
-}
-
-class CERT_AUTHORITY_KEY_ID2_INFO extends Struct {
-  external CRYPTOAPI_BLOB KeyId;
-  external CERT_ALT_NAME_INFO AuthorityCertIssuer;
-  external CRYPTOAPI_BLOB AuthorityCertSerialNumber;
-}
-
-class CERT_ACCESS_DESCRIPTION extends Struct {
-  external Pointer<Utf8> pszAccessMethod;
-  external CERT_ALT_NAME_ENTRY AccessLocation;
-}
-
-class CERT_AUTHORITY_INFO_ACCESS extends Struct {
-  @Uint32() external int cAccDescr;
-  external Pointer<CERT_ACCESS_DESCRIPTION> rgAccDescr;
-}
-
-class CRL_DIST_POINT extends Struct {
-  external CRL_DIST_POINT_NAME DistPointName;
-  external CRYPT_BIT_BLOB ReasonFlags;
-  external CERT_ALT_NAME_INFO CRLIssuer;
-}
-
-class CRL_DIST_POINTS_INFO extends Struct {
-  @Uint32() external int cDistPoint;
-  external Pointer<CRL_DIST_POINT> rgDistPoint;
-}
-
-class CROSS_CERT_DIST_POINTS_INFO extends Struct {
-  @Uint32() external int dwSyncDeltaTime;
-  @Uint32() external int cDistPoint;
-  external Pointer<CERT_ALT_NAME_INFO> rgDistPoint;
-}
-
-class CERT_PAIR extends Struct {
-  external CRYPTOAPI_BLOB Forward;
-  external CRYPTOAPI_BLOB Reverse;
-}
-
-class CRL_ISSUING_DIST_POINT extends Struct {
-  external CRL_DIST_POINT_NAME DistPointName;
-  @Int32() external int fOnlyContainsUserCerts;
-  @Int32() external int fOnlyContainsCACerts;
-  external CRYPT_BIT_BLOB OnlySomeReasonFlags;
-  @Int32() external int fIndirectCRL;
-}
-
-class CERT_GENERAL_SUBTREE extends Struct {
-  external CERT_ALT_NAME_ENTRY Base;
-  @Uint32() external int dwMinimum;
-  @Int32() external int fMaximum;
-  @Uint32() external int dwMaximum;
-}
-
-class CERT_NAME_CONSTRAINTS_INFO extends Struct {
-  @Uint32() external int cPermittedSubtree;
-  external Pointer<CERT_GENERAL_SUBTREE> rgPermittedSubtree;
-  @Uint32() external int cExcludedSubtree;
-  external Pointer<CERT_GENERAL_SUBTREE> rgExcludedSubtree;
-}
-
-class CERT_DSS_PARAMETERS extends Struct {
-  external CRYPTOAPI_BLOB p;
-  external CRYPTOAPI_BLOB q;
-  external CRYPTOAPI_BLOB g;
-}
-
-class CERT_DH_PARAMETERS extends Struct {
-  external CRYPTOAPI_BLOB p;
-  external CRYPTOAPI_BLOB g;
-}
-
-class CERT_ECC_SIGNATURE extends Struct {
-  external CRYPTOAPI_BLOB r;
-  external CRYPTOAPI_BLOB s;
-}
-
-class CERT_X942_DH_VALIDATION_PARAMS extends Struct {
-  external CRYPT_BIT_BLOB seed;
-  @Uint32() external int pgenCounter;
-}
-
-class CERT_X942_DH_PARAMETERS extends Struct {
-  external CRYPTOAPI_BLOB p;
-  external CRYPTOAPI_BLOB g;
-  external CRYPTOAPI_BLOB q;
-  external CRYPTOAPI_BLOB j;
-  external Pointer<CERT_X942_DH_VALIDATION_PARAMS> pValidationParams;
-}
-
-class CRYPT_X942_OTHER_INFO extends Struct {
-  external Pointer<Utf8> pszContentEncryptionObjId;
-  external __ubyte__ rgbCounter;
-  external __ubyte__ rgbKeyLength;
-  external CRYPTOAPI_BLOB PubInfo;
-}
-
-class CRYPT_ECC_CMS_SHARED_INFO extends Struct {
-  external CRYPT_ALGORITHM_IDENTIFIER Algorithm;
-  external CRYPTOAPI_BLOB EntityUInfo;
-  external __ubyte__ rgbSuppPubInfo;
-}
-
-class CRYPT_RC2_CBC_PARAMETERS extends Struct {
-  @Uint32() external int dwVersion;
-  @Int32() external int fIV;
-  external __ubyte__ rgbIV;
-}
-
-class CRYPT_SMIME_CAPABILITY extends Struct {
-  external Pointer<Utf8> pszObjId;
-  external CRYPTOAPI_BLOB Parameters;
-}
-
-class CRYPT_SMIME_CAPABILITIES extends Struct {
-  @Uint32() external int cCapability;
-  external Pointer<CRYPT_SMIME_CAPABILITY> rgCapability;
-}
-
-class CERT_QC_STATEMENT extends Struct {
-  external Pointer<Utf8> pszStatementId;
-  external CRYPTOAPI_BLOB StatementInfo;
-}
-
-class CERT_QC_STATEMENTS_EXT_INFO extends Struct {
-  @Uint32() external int cStatement;
-  external Pointer<CERT_QC_STATEMENT> rgStatement;
-}
-
-class CRYPT_MASK_GEN_ALGORITHM extends Struct {
-  external Pointer<Utf8> pszObjId;
-  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
-}
-
-class CRYPT_RSA_SSA_PSS_PARAMETERS extends Struct {
-  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
-  external CRYPT_MASK_GEN_ALGORITHM MaskGenAlgorithm;
-  @Uint32() external int dwSaltLength;
-  @Uint32() external int dwTrailerField;
-}
-
-class CRYPT_PSOURCE_ALGORITHM extends Struct {
-  external Pointer<Utf8> pszObjId;
-  external CRYPTOAPI_BLOB EncodingParameters;
-}
-
-class CRYPT_RSAES_OAEP_PARAMETERS extends Struct {
-  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
-  external CRYPT_MASK_GEN_ALGORITHM MaskGenAlgorithm;
-  external CRYPT_PSOURCE_ALGORITHM PSourceAlgorithm;
-}
-
-class CMC_TAGGED_ATTRIBUTE extends Struct {
-  @Uint32() external int dwBodyPartID;
-  external CRYPT_ATTRIBUTE Attribute;
-}
-
-class CMC_TAGGED_CERT_REQUEST extends Struct {
-  @Uint32() external int dwBodyPartID;
-  external CRYPTOAPI_BLOB SignedCertRequest;
-}
-
-class CMC_TAGGED_CONTENT_INFO extends Struct {
-  @Uint32() external int dwBodyPartID;
-  external CRYPTOAPI_BLOB EncodedContentInfo;
-}
-
-class CMC_TAGGED_OTHER_MSG extends Struct {
-  @Uint32() external int dwBodyPartID;
-  external Pointer<Utf8> pszObjId;
-  external CRYPTOAPI_BLOB Value;
-}
-
-class CMC_DATA_INFO extends Struct {
-  @Uint32() external int cTaggedAttribute;
-  external Pointer<CMC_TAGGED_ATTRIBUTE> rgTaggedAttribute;
-  @Uint32() external int cTaggedRequest;
-  external Pointer<CMC_TAGGED_REQUEST> rgTaggedRequest;
-  @Uint32() external int cTaggedContentInfo;
-  external Pointer<CMC_TAGGED_CONTENT_INFO> rgTaggedContentInfo;
-  @Uint32() external int cTaggedOtherMsg;
-  external Pointer<CMC_TAGGED_OTHER_MSG> rgTaggedOtherMsg;
-}
-
-class CMC_RESPONSE_INFO extends Struct {
-  @Uint32() external int cTaggedAttribute;
-  external Pointer<CMC_TAGGED_ATTRIBUTE> rgTaggedAttribute;
-  @Uint32() external int cTaggedContentInfo;
-  external Pointer<CMC_TAGGED_CONTENT_INFO> rgTaggedContentInfo;
-  @Uint32() external int cTaggedOtherMsg;
-  external Pointer<CMC_TAGGED_OTHER_MSG> rgTaggedOtherMsg;
-}
-
-class CMC_PEND_INFO extends Struct {
-  external CRYPTOAPI_BLOB PendToken;
-  external FILETIME PendTime;
-}
-
-class CMC_ADD_EXTENSIONS_INFO extends Struct {
-  @Uint32() external int dwCmcDataReference;
-  @Uint32() external int cCertReference;
-  external Pointer<Uint32> rgdwCertReference;
-  @Uint32() external int cExtension;
-  external Pointer<CERT_EXTENSION> rgExtension;
-}
-
-class CMC_ADD_ATTRIBUTES_INFO extends Struct {
-  @Uint32() external int dwCmcDataReference;
-  @Uint32() external int cCertReference;
-  external Pointer<Uint32> rgdwCertReference;
-  @Uint32() external int cAttribute;
-  external Pointer<CRYPT_ATTRIBUTE> rgAttribute;
-}
-
-class CERT_TEMPLATE_EXT extends Struct {
-  external Pointer<Utf8> pszObjId;
-  @Uint32() external int dwMajorVersion;
-  @Int32() external int fMinorVersion;
-  @Uint32() external int dwMinorVersion;
-}
-
-class CERT_HASHED_URL extends Struct {
-  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
-  external CRYPTOAPI_BLOB Hash;
-  external Pointer<Utf16> pwszUrl;
-}
-
-class CERT_LOGOTYPE_DETAILS extends Struct {
-  external Pointer<Utf16> pwszMimeType;
-  @Uint32() external int cHashedUrl;
-  external Pointer<CERT_HASHED_URL> rgHashedUrl;
-}
-
-class CERT_LOGOTYPE_REFERENCE extends Struct {
-  @Uint32() external int cHashedUrl;
-  external Pointer<CERT_HASHED_URL> rgHashedUrl;
-}
-
-class CERT_LOGOTYPE_IMAGE extends Struct {
-  external CERT_LOGOTYPE_DETAILS LogotypeDetails;
-  external Pointer<CERT_LOGOTYPE_IMAGE_INFO> pLogotypeImageInfo;
-}
-
-class CERT_LOGOTYPE_AUDIO_INFO extends Struct {
-  @Uint32() external int dwFileSize;
-  @Uint32() external int dwPlayTime;
-  @Uint32() external int dwChannels;
-  @Uint32() external int dwSampleRate;
-  external Pointer<Utf16> pwszLanguage;
-}
-
-class CERT_LOGOTYPE_AUDIO extends Struct {
-  external CERT_LOGOTYPE_DETAILS LogotypeDetails;
-  external Pointer<CERT_LOGOTYPE_AUDIO_INFO> pLogotypeAudioInfo;
-}
-
-class CERT_LOGOTYPE_DATA extends Struct {
-  @Uint32() external int cLogotypeImage;
-  external Pointer<CERT_LOGOTYPE_IMAGE> rgLogotypeImage;
-  @Uint32() external int cLogotypeAudio;
-  external Pointer<CERT_LOGOTYPE_AUDIO> rgLogotypeAudio;
-}
-
-class CERT_OTHER_LOGOTYPE_INFO extends Struct {
-  external Pointer<Utf8> pszObjId;
-  external CERT_LOGOTYPE_INFO LogotypeInfo;
-}
-
-class CERT_LOGOTYPE_EXT_INFO extends Struct {
-  @Uint32() external int cCommunityLogo;
-  external Pointer<CERT_LOGOTYPE_INFO> rgCommunityLogo;
-  external Pointer<CERT_LOGOTYPE_INFO> pIssuerLogo;
-  external Pointer<CERT_LOGOTYPE_INFO> pSubjectLogo;
-  @Uint32() external int cOtherLogo;
-  external Pointer<CERT_OTHER_LOGOTYPE_INFO> rgOtherLogo;
-}
-
-class CERT_BIOMETRIC_EXT_INFO extends Struct {
-  @Uint32() external int cBiometricData;
-  external Pointer<CERT_BIOMETRIC_DATA> rgBiometricData;
-}
-
-class OCSP_SIGNATURE_INFO extends Struct {
-  external CRYPT_ALGORITHM_IDENTIFIER SignatureAlgorithm;
-  external CRYPT_BIT_BLOB Signature;
-  @Uint32() external int cCertEncoded;
-  external Pointer<CRYPTOAPI_BLOB> rgCertEncoded;
-}
-
-class OCSP_SIGNED_REQUEST_INFO extends Struct {
-  external CRYPTOAPI_BLOB ToBeSigned;
-  external Pointer<OCSP_SIGNATURE_INFO> pOptionalSignatureInfo;
-}
-
-class OCSP_CERT_ID extends Struct {
-  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
-  external CRYPTOAPI_BLOB IssuerNameHash;
-  external CRYPTOAPI_BLOB IssuerKeyHash;
-  external CRYPTOAPI_BLOB SerialNumber;
-}
-
-class OCSP_REQUEST_ENTRY extends Struct {
-  external OCSP_CERT_ID CertId;
-  @Uint32() external int cExtension;
-  external Pointer<CERT_EXTENSION> rgExtension;
-}
-
-class OCSP_REQUEST_INFO extends Struct {
-  @Uint32() external int dwVersion;
-  external Pointer<CERT_ALT_NAME_ENTRY> pRequestorName;
-  @Uint32() external int cRequestEntry;
-  external Pointer<OCSP_REQUEST_ENTRY> rgRequestEntry;
-  @Uint32() external int cExtension;
-  external Pointer<CERT_EXTENSION> rgExtension;
-}
-
-class OCSP_RESPONSE_INFO extends Struct {
-  @Uint32() external int dwStatus;
-  external Pointer<Utf8> pszObjId;
-  external CRYPTOAPI_BLOB Value;
-}
-
-class OCSP_BASIC_SIGNED_RESPONSE_INFO extends Struct {
-  external CRYPTOAPI_BLOB ToBeSigned;
-  external OCSP_SIGNATURE_INFO SignatureInfo;
-}
-
-class OCSP_BASIC_REVOKED_INFO extends Struct {
-  external FILETIME RevocationDate;
-  @Uint32() external int dwCrlReasonCode;
-}
-
-class CERT_SUPPORTED_ALGORITHM_INFO extends Struct {
-  external CRYPT_ALGORITHM_IDENTIFIER Algorithm;
-  external CRYPT_BIT_BLOB IntendedKeyUsage;
-  external CERT_POLICIES_INFO IntendedCertPolicies;
-}
-
-class CERT_TPM_SPECIFICATION_INFO extends Struct {
-  external Pointer<Utf16> pwszFamily;
-  @Uint32() external int dwLevel;
-  @Uint32() external int dwRevision;
-}
-
-class CRYPT_OID_FUNC_ENTRY extends Struct {
-  external Pointer<Utf8> pszOID;
-  external Pointer pvFuncAddr;
-}
-
-class CERT_STRONG_SIGN_SERIALIZED_INFO extends Struct {
-  @Uint32() external int dwFlags;
-  external Pointer<Utf16> pwszCNGSignHashAlgids;
-  external Pointer<Utf16> pwszCNGPubKeyMinBitLengths;
-}
-
-class CERT_ISSUER_SERIAL_NUMBER extends Struct {
-  external CRYPTOAPI_BLOB Issuer;
-  external CRYPTOAPI_BLOB SerialNumber;
-}
-
-class CMSG_SIGNED_ENCODE_INFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int cSigners;
-  external Pointer<CMSG_SIGNER_ENCODE_INFO> rgSigners;
-  @Uint32() external int cCertEncoded;
-  external Pointer<CRYPTOAPI_BLOB> rgCertEncoded;
-  @Uint32() external int cCrlEncoded;
-  external Pointer<CRYPTOAPI_BLOB> rgCrlEncoded;
-}
-
-class CMSG_ENVELOPED_ENCODE_INFO extends Struct {
-  @Uint32() external int cbSize;
-  @IntPtr() external int hCryptProv;
-  external CRYPT_ALGORITHM_IDENTIFIER ContentEncryptionAlgorithm;
-  external Pointer pvEncryptionAuxInfo;
-  @Uint32() external int cRecipients;
-  external Pointer<Pointer<CERT_INFO>> rgpRecipients;
-}
-
-class CMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO extends Struct {
-  @Uint32() external int cbSize;
-  external CRYPT_ALGORITHM_IDENTIFIER KeyEncryptionAlgorithm;
-  external Pointer pvKeyEncryptionAuxInfo;
-  @IntPtr() external int hCryptProv;
-  external CRYPT_BIT_BLOB RecipientPublicKey;
-  external CERT_ID RecipientId;
-}
-
-class CMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO extends Struct {
-  @Uint32() external int cbSize;
-  external CRYPT_BIT_BLOB RecipientPublicKey;
-  external CERT_ID RecipientId;
-  external FILETIME Date;
-  external Pointer<CRYPT_ATTRIBUTE_TYPE_VALUE> pOtherAttr;
-}
-
-class CMSG_RC2_AUX_INFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwBitLen;
-}
-
-class CMSG_SP3_COMPATIBLE_AUX_INFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-}
-
-class CMSG_RC4_AUX_INFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwBitLen;
-}
-
-class CMSG_SIGNED_AND_ENVELOPED_ENCODE_INFO extends Struct {
-  @Uint32() external int cbSize;
-  external CMSG_SIGNED_ENCODE_INFO SignedInfo;
-  external CMSG_ENVELOPED_ENCODE_INFO EnvelopedInfo;
-}
-
-class CMSG_HASHED_ENCODE_INFO extends Struct {
-  @Uint32() external int cbSize;
-  @IntPtr() external int hCryptProv;
-  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
-  external Pointer pvHashAuxInfo;
-}
-
-class CMSG_ENCRYPTED_ENCODE_INFO extends Struct {
-  @Uint32() external int cbSize;
-  external CRYPT_ALGORITHM_IDENTIFIER ContentEncryptionAlgorithm;
-  external Pointer pvEncryptionAuxInfo;
-}
-
-class CMSG_STREAM_INFO extends Struct {
-  @Uint32() external int cbContent;
-  external PFN_CMSG_STREAM_OUTPUT pfnStreamOutput;
-  external Pointer pvArg;
-}
-
-class CMSG_SIGNER_INFO extends Struct {
-  @Uint32() external int dwVersion;
-  external CRYPTOAPI_BLOB Issuer;
-  external CRYPTOAPI_BLOB SerialNumber;
-  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
-  external CRYPT_ALGORITHM_IDENTIFIER HashEncryptionAlgorithm;
-  external CRYPTOAPI_BLOB EncryptedHash;
-  external CRYPT_ATTRIBUTES AuthAttrs;
-  external CRYPT_ATTRIBUTES UnauthAttrs;
-}
-
-class CMSG_CMS_SIGNER_INFO extends Struct {
-  @Uint32() external int dwVersion;
-  external CERT_ID SignerId;
-  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
-  external CRYPT_ALGORITHM_IDENTIFIER HashEncryptionAlgorithm;
-  external CRYPTOAPI_BLOB EncryptedHash;
-  external CRYPT_ATTRIBUTES AuthAttrs;
-  external CRYPT_ATTRIBUTES UnauthAttrs;
-}
-
-class CMSG_KEY_TRANS_RECIPIENT_INFO extends Struct {
-  @Uint32() external int dwVersion;
-  external CERT_ID RecipientId;
-  external CRYPT_ALGORITHM_IDENTIFIER KeyEncryptionAlgorithm;
-  external CRYPTOAPI_BLOB EncryptedKey;
-}
-
-class CMSG_RECIPIENT_ENCRYPTED_KEY_INFO extends Struct {
-  external CERT_ID RecipientId;
-  external CRYPTOAPI_BLOB EncryptedKey;
-  external FILETIME Date;
-  external Pointer<CRYPT_ATTRIBUTE_TYPE_VALUE> pOtherAttr;
-}
-
-class CMSG_MAIL_LIST_RECIPIENT_INFO extends Struct {
-  @Uint32() external int dwVersion;
-  external CRYPTOAPI_BLOB KeyId;
-  external CRYPT_ALGORITHM_IDENTIFIER KeyEncryptionAlgorithm;
-  external CRYPTOAPI_BLOB EncryptedKey;
-  external FILETIME Date;
-  external Pointer<CRYPT_ATTRIBUTE_TYPE_VALUE> pOtherAttr;
-}
-
-class CMSG_CTRL_VERIFY_SIGNATURE_EX_PARA extends Struct {
-  @Uint32() external int cbSize;
-  @IntPtr() external int hCryptProv;
-  @Uint32() external int dwSignerIndex;
-  @Uint32() external int dwSignerType;
-  external Pointer pvSigner;
-}
-
-class CMSG_CTRL_ADD_SIGNER_UNAUTH_ATTR_PARA extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwSignerIndex;
-  external CRYPTOAPI_BLOB blob;
-}
-
-class CMSG_CTRL_DEL_SIGNER_UNAUTH_ATTR_PARA extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwSignerIndex;
-  @Uint32() external int dwUnauthAttrIndex;
-}
-
-class CMSG_KEY_TRANS_ENCRYPT_INFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwRecipientIndex;
-  external CRYPT_ALGORITHM_IDENTIFIER KeyEncryptionAlgorithm;
-  external CRYPTOAPI_BLOB EncryptedKey;
-  @Uint32() external int dwFlags;
-}
-
-class CMSG_KEY_AGREE_KEY_ENCRYPT_INFO extends Struct {
-  @Uint32() external int cbSize;
-  external CRYPTOAPI_BLOB EncryptedKey;
-}
-
-class CMSG_MAIL_LIST_ENCRYPT_INFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwRecipientIndex;
-  external CRYPT_ALGORITHM_IDENTIFIER KeyEncryptionAlgorithm;
-  external CRYPTOAPI_BLOB EncryptedKey;
-  @Uint32() external int dwFlags;
-}
-
-class CMSG_CNG_CONTENT_DECRYPT_INFO extends Struct {
-  @Uint32() external int cbSize;
-  external CRYPT_ALGORITHM_IDENTIFIER ContentEncryptionAlgorithm;
-  external PFN_CMSG_ALLOC pfnAlloc;
-  external PFN_CMSG_FREE pfnFree;
-  @IntPtr() external int hNCryptKey;
-  external Pointer<Uint8> pbContentEncryptKey;
-  @Uint32() external int cbContentEncryptKey;
-  external Pointer hCNGContentEncryptKey;
-  external Pointer<Uint8> pbCNGContentEncryptKeyObject;
-}
-
-class CERT_CONTEXT extends Struct {
-  @Uint32() external int dwCertEncodingType;
-  external Pointer<Uint8> pbCertEncoded;
-  @Uint32() external int cbCertEncoded;
-  external Pointer<CERT_INFO> pCertInfo;
-  external Pointer hCertStore;
-}
-
-class CRL_CONTEXT extends Struct {
-  @Uint32() external int dwCertEncodingType;
-  external Pointer<Uint8> pbCrlEncoded;
-  @Uint32() external int cbCrlEncoded;
-  external Pointer<CRL_INFO> pCrlInfo;
-  external Pointer hCertStore;
-}
-
-class CTL_CONTEXT extends Struct {
-  @Uint32() external int dwMsgAndCertEncodingType;
-  external Pointer<Uint8> pbCtlEncoded;
-  @Uint32() external int cbCtlEncoded;
-  external Pointer<CTL_INFO> pCtlInfo;
-  external Pointer hCertStore;
-  external Pointer hCryptMsg;
-  external Pointer<Uint8> pbCtlContent;
-  @Uint32() external int cbCtlContent;
-}
-
-class CRYPT_KEY_PROV_PARAM extends Struct {
-  @Uint32() external int dwParam;
-  external Pointer<Uint8> pbData;
-  @Uint32() external int cbData;
-  @Uint32() external int dwFlags;
-}
-
-class CRYPT_KEY_PROV_INFO extends Struct {
-  external Pointer<Utf16> pwszContainerName;
-  external Pointer<Utf16> pwszProvName;
-  @Uint32() external int dwProvType;
-  @Uint32() external int dwFlags;
-  @Uint32() external int cProvParam;
-  external Pointer<CRYPT_KEY_PROV_PARAM> rgProvParam;
-  @Uint32() external int dwKeySpec;
-}
-
-class ROOT_INFO_LUID extends Struct {
-  @Uint32() external int LowPart;
-  @Int32() external int HighPart;
-}
-
-class CRYPT_SMART_CARD_ROOT_INFO extends Struct {
-  external __ubyte__ rgbCardID;
-  external ROOT_INFO_LUID luid;
-}
-
-class CERT_REGISTRY_STORE_CLIENT_GPT_PARA extends Struct {
-  @IntPtr() external int hKeyBase;
-  external Pointer<Utf16> pwszRegPath;
-}
-
-class CERT_REGISTRY_STORE_ROAMING_PARA extends Struct {
-  @IntPtr() external int hKey;
-  external Pointer<Utf16> pwszStoreDirectory;
-}
-
-class CERT_LDAP_STORE_OPENED_PARA extends Struct {
-  external Pointer pvLdapSessionHandle;
-  external Pointer<Utf16> pwszLdapUrl;
-}
-
-class CERT_STORE_PROV_INFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int cStoreProvFunc;
-  external Pointer<Pointer> rgpvStoreProvFunc;
-  external Pointer hStoreProv;
-  @Uint32() external int dwStoreProvFlags;
-  external Pointer hStoreProvFuncAddr2;
-}
-
-class CERT_STORE_PROV_FIND_INFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwMsgAndCertEncodingType;
-  @Uint32() external int dwFindFlags;
-  @Uint32() external int dwFindType;
-  external Pointer pvFindPara;
-}
-
-class CRL_FIND_ISSUED_FOR_PARA extends Struct {
-  external Pointer<CERT_CONTEXT> pSubjectCert;
-  external Pointer<CERT_CONTEXT> pIssuerCert;
-}
-
-class CTL_ANY_SUBJECT_INFO extends Struct {
-  external CRYPT_ALGORITHM_IDENTIFIER SubjectAlgorithm;
-  external CRYPTOAPI_BLOB SubjectIdentifier;
-}
-
-class CTL_FIND_USAGE_PARA extends Struct {
-  @Uint32() external int cbSize;
-  external CTL_USAGE SubjectUsage;
-  external CRYPTOAPI_BLOB ListIdentifier;
-  external Pointer<CERT_INFO> pSigner;
-}
-
-class CTL_FIND_SUBJECT_PARA extends Struct {
-  @Uint32() external int cbSize;
-  external Pointer<CTL_FIND_USAGE_PARA> pUsagePara;
-  @Uint32() external int dwSubjectType;
-  external Pointer pvSubject;
-}
-
-class CERT_CREATE_CONTEXT_PARA extends Struct {
-  @Uint32() external int cbSize;
-  external PFN_CRYPT_FREE pfnFree;
-  external Pointer pvFree;
-  external PFN_CERT_CREATE_CONTEXT_SORT_FUNC pfnSort;
-  external Pointer pvSort;
-}
-
-class CERT_SYSTEM_STORE_INFO extends Struct {
-  @Uint32() external int cbSize;
-}
-
-class CERT_PHYSICAL_STORE_INFO extends Struct {
-  @Uint32() external int cbSize;
-  external Pointer<Utf8> pszOpenStoreProvider;
-  @Uint32() external int dwOpenEncodingType;
-  @Uint32() external int dwOpenFlags;
-  external CRYPTOAPI_BLOB OpenParameters;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwPriority;
-}
-
-class CTL_VERIFY_USAGE_PARA extends Struct {
-  @Uint32() external int cbSize;
-  external CRYPTOAPI_BLOB ListIdentifier;
-  @Uint32() external int cCtlStore;
-  external Pointer<Pointer> rghCtlStore;
-  @Uint32() external int cSignerStore;
-  external Pointer<Pointer> rghSignerStore;
-}
-
-class CTL_VERIFY_USAGE_STATUS extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwError;
-  @Uint32() external int dwFlags;
-  external Pointer<Pointer<CTL_CONTEXT>> ppCtl;
-  @Uint32() external int dwCtlEntryIndex;
-  external Pointer<Pointer<CERT_CONTEXT>> ppSigner;
-  @Uint32() external int dwSignerIndex;
-}
-
-class CERT_REVOCATION_CRL_INFO extends Struct {
-  @Uint32() external int cbSize;
-  external Pointer<CRL_CONTEXT> pBaseCrlContext;
-  external Pointer<CRL_CONTEXT> pDeltaCrlContext;
-  external Pointer<CRL_ENTRY> pCrlEntry;
-  @Int32() external int fDeltaCrlEntry;
-}
-
-class CERT_REVOCATION_PARA extends Struct {
-  @Uint32() external int cbSize;
-  external Pointer<CERT_CONTEXT> pIssuerCert;
-  @Uint32() external int cCertStore;
-  external Pointer<Pointer> rgCertStore;
-  external Pointer hCrlStore;
-  external Pointer<FILETIME> pftTimeToUse;
-}
-
-class CERT_REVOCATION_STATUS extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwIndex;
-  @Uint32() external int dwError;
-  @Uint32() external int dwReason;
-  @Int32() external int fHasFreshnessTime;
-  @Uint32() external int dwFreshnessTime;
-}
-
-class CRYPT_VERIFY_CERT_SIGN_STRONG_PROPERTIES_INFO extends Struct {
-  external CRYPTOAPI_BLOB CertSignHashCNGAlgPropData;
-  external CRYPTOAPI_BLOB CertIssuerPubKeyBitLengthPropData;
-}
-
-class CRYPT_VERIFY_CERT_SIGN_WEAK_HASH_INFO extends Struct {
-  @Uint32() external int cCNGHashAlgid;
-  external Pointer<Pointer<Utf16>> rgpwszCNGHashAlgid;
-  @Uint32() external int dwWeakIndex;
-}
-
-class CRYPT_DEFAULT_CONTEXT_MULTI_OID_PARA extends Struct {
-  @Uint32() external int cOID;
-  external Pointer<Pointer<Utf8>> rgpszOID;
-}
-
-class CRYPT_SIGN_MESSAGE_PARA extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwMsgEncodingType;
-  external Pointer<CERT_CONTEXT> pSigningCert;
-  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
-  external Pointer pvHashAuxInfo;
-  @Uint32() external int cMsgCert;
-  external Pointer<Pointer<CERT_CONTEXT>> rgpMsgCert;
-  @Uint32() external int cMsgCrl;
-  external Pointer<Pointer<CRL_CONTEXT>> rgpMsgCrl;
-  @Uint32() external int cAuthAttr;
-  external Pointer<CRYPT_ATTRIBUTE> rgAuthAttr;
-  @Uint32() external int cUnauthAttr;
-  external Pointer<CRYPT_ATTRIBUTE> rgUnauthAttr;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwInnerContentType;
-}
-
-class CRYPT_VERIFY_MESSAGE_PARA extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwMsgAndCertEncodingType;
-  @IntPtr() external int hCryptProv;
-  external PFN_CRYPT_GET_SIGNER_CERTIFICATE pfnGetSignerCertificate;
-  external Pointer pvGetArg;
-}
-
-class CRYPT_ENCRYPT_MESSAGE_PARA extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwMsgEncodingType;
-  @IntPtr() external int hCryptProv;
-  external CRYPT_ALGORITHM_IDENTIFIER ContentEncryptionAlgorithm;
-  external Pointer pvEncryptionAuxInfo;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwInnerContentType;
-}
-
-class CRYPT_DECRYPT_MESSAGE_PARA extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwMsgAndCertEncodingType;
-  @Uint32() external int cCertStore;
-  external Pointer<Pointer> rghCertStore;
-}
-
-class CRYPT_HASH_MESSAGE_PARA extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwMsgEncodingType;
-  @IntPtr() external int hCryptProv;
-  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
-  external Pointer pvHashAuxInfo;
-}
-
-class CRYPT_KEY_VERIFY_MESSAGE_PARA extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwMsgEncodingType;
-  @IntPtr() external int hCryptProv;
-}
-
-class CERT_CHAIN extends Struct {
-  @Uint32() external int cCerts;
-  external Pointer<CRYPTOAPI_BLOB> certs;
-  external CRYPT_KEY_PROV_INFO keyLocatorInfo;
-}
-
-class CRYPT_BLOB_ARRAY extends Struct {
-  @Uint32() external int cBlob;
-  external Pointer<CRYPTOAPI_BLOB> rgBlob;
-}
-
-class CRYPT_CREDENTIALS extends Struct {
-  @Uint32() external int cbSize;
-  external Pointer<Utf8> pszCredentialsOid;
-  external Pointer pvCredentials;
-}
-
-class CRYPT_PASSWORD_CREDENTIALSA extends Struct {
-  @Uint32() external int cbSize;
-  external Pointer<Utf8> pszUsername;
-  external Pointer<Utf8> pszPassword;
-}
-
-class CRYPT_PASSWORD_CREDENTIALSW extends Struct {
-  @Uint32() external int cbSize;
-  external Pointer<Utf16> pszUsername;
-  external Pointer<Utf16> pszPassword;
-}
-
-class CRYPTNET_URL_CACHE_PRE_FETCH_INFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwObjectType;
-  @Uint32() external int dwError;
-  @Uint32() external int dwReserved;
-  external FILETIME ThisUpdateTime;
-  external FILETIME NextUpdateTime;
-  external FILETIME PublishTime;
-}
-
-class CRYPTNET_URL_CACHE_FLUSH_INFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwExemptSeconds;
-  external FILETIME ExpireTime;
-}
-
-class CRYPTNET_URL_CACHE_RESPONSE_INFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint16() external int wResponseType;
-  @Uint16() external int wResponseFlags;
-  external FILETIME LastModifiedTime;
-  @Uint32() external int dwMaxAge;
-  external Pointer<Utf16> pwszETag;
-  @Uint32() external int dwProxyId;
-}
-
-class CRYPT_RETRIEVE_AUX_INFO extends Struct {
-  @Uint32() external int cbSize;
-  external Pointer<FILETIME> pLastSyncTime;
-  @Uint32() external int dwMaxUrlRetrievalByteCount;
-  external Pointer<CRYPTNET_URL_CACHE_PRE_FETCH_INFO> pPreFetchInfo;
-  external Pointer<CRYPTNET_URL_CACHE_FLUSH_INFO> pFlushInfo;
-  external Pointer<Pointer<CRYPTNET_URL_CACHE_RESPONSE_INFO>> ppResponseInfo;
-  external Pointer<Utf16> pwszCacheFileNamePrefix;
-  external Pointer<FILETIME> pftCacheResync;
-  @Int32() external int fProxyCacheRetrieval;
-  @Uint32() external int dwHttpStatusCode;
-  external Pointer<Pointer<Utf16>> ppwszErrorResponseHeaders;
-  external Pointer<Pointer<CRYPTOAPI_BLOB>> ppErrorContentBlob;
-}
-
-class CRYPT_ASYNC_RETRIEVAL_COMPLETION extends Struct {
-  external PFN_CRYPT_ASYNC_RETRIEVAL_COMPLETION_FUNC pfnCompletion;
-  external Pointer pvCompletion;
-}
-
-class CRYPT_URL_ARRAY extends Struct {
-  @Uint32() external int cUrl;
-  external Pointer<Pointer<Utf16>> rgwszUrl;
-}
-
-class CRYPT_URL_INFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwSyncDeltaTime;
-  @Uint32() external int cGroup;
-  external Pointer<Uint32> rgcGroupEntry;
-}
-
-class CERT_CRL_CONTEXT_PAIR extends Struct {
-  external Pointer<CERT_CONTEXT> pCertContext;
-  external Pointer<CRL_CONTEXT> pCrlContext;
-}
-
-class CRYPT_GET_TIME_VALID_OBJECT_EXTRA_INFO extends Struct {
-  @Uint32() external int cbSize;
-  @Int32() external int iDeltaCrlIndicator;
-  external Pointer<FILETIME> pftCacheResync;
-  external Pointer<FILETIME> pLastSyncTime;
-  external Pointer<FILETIME> pMaxAgeTime;
-  external Pointer<CERT_REVOCATION_CHAIN_PARA> pChainPara;
-  external Pointer<CRYPTOAPI_BLOB> pDeltaCrlIndicator;
-}
-
-class CERT_CHAIN_ENGINE_CONFIG extends Struct {
-  @Uint32() external int cbSize;
-  external Pointer hRestrictedRoot;
-  external Pointer hRestrictedTrust;
-  external Pointer hRestrictedOther;
-  @Uint32() external int cAdditionalStore;
-  external Pointer<Pointer> rghAdditionalStore;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwUrlRetrievalTimeout;
-  @Uint32() external int MaximumCachedCertificates;
-  @Uint32() external int CycleDetectionModulus;
-  external Pointer hExclusiveRoot;
-  external Pointer hExclusiveTrustedPeople;
-  @Uint32() external int dwExclusiveFlags;
-}
-
-class CERT_TRUST_STATUS extends Struct {
-  @Uint32() external int dwErrorStatus;
-  @Uint32() external int dwInfoStatus;
-}
-
-class CERT_REVOCATION_INFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwRevocationResult;
-  external Pointer<Utf8> pszRevocationOid;
-  external Pointer pvOidSpecificInfo;
-  @Int32() external int fHasFreshnessTime;
-  @Uint32() external int dwFreshnessTime;
-  external Pointer<CERT_REVOCATION_CRL_INFO> pCrlInfo;
-}
-
-class CERT_TRUST_LIST_INFO extends Struct {
-  @Uint32() external int cbSize;
-  external Pointer<CTL_ENTRY> pCtlEntry;
-  external Pointer<CTL_CONTEXT> pCtlContext;
-}
-
-class CERT_CHAIN_ELEMENT extends Struct {
-  @Uint32() external int cbSize;
-  external Pointer<CERT_CONTEXT> pCertContext;
-  external CERT_TRUST_STATUS TrustStatus;
-  external Pointer<CERT_REVOCATION_INFO> pRevocationInfo;
-  external Pointer<CTL_USAGE> pIssuanceUsage;
-  external Pointer<CTL_USAGE> pApplicationUsage;
-  external Pointer<Utf16> pwszExtendedErrorInfo;
-}
-
-class CERT_SIMPLE_CHAIN extends Struct {
-  @Uint32() external int cbSize;
-  external CERT_TRUST_STATUS TrustStatus;
-  @Uint32() external int cElement;
-  external Pointer<Pointer<CERT_CHAIN_ELEMENT>> rgpElement;
-  external Pointer<CERT_TRUST_LIST_INFO> pTrustListInfo;
-  @Int32() external int fHasRevocationFreshnessTime;
-  @Uint32() external int dwRevocationFreshnessTime;
-}
-
-class CERT_CHAIN_CONTEXT extends Struct {
-  @Uint32() external int cbSize;
-  external CERT_TRUST_STATUS TrustStatus;
-  @Uint32() external int cChain;
-  external Pointer<Pointer<CERT_SIMPLE_CHAIN>> rgpChain;
-  @Uint32() external int cLowerQualityChainContext;
-  external Pointer<Pointer<CERT_CHAIN_CONTEXT>> rgpLowerQualityChainContext;
-  @Int32() external int fHasRevocationFreshnessTime;
-  @Uint32() external int dwRevocationFreshnessTime;
-  @Uint32() external int dwCreateFlags;
-  external GUID ChainId;
-}
-
-class CERT_USAGE_MATCH extends Struct {
-  @Uint32() external int dwType;
-  external CTL_USAGE Usage;
-}
-
-class CTL_USAGE_MATCH extends Struct {
-  @Uint32() external int dwType;
-  external CTL_USAGE Usage;
-}
-
-class CERT_CHAIN_PARA extends Struct {
-  @Uint32() external int cbSize;
-  external CERT_USAGE_MATCH RequestedUsage;
-}
-
-class CERT_REVOCATION_CHAIN_PARA extends Struct {
-  @Uint32() external int cbSize;
-  external HCERTCHAINENGINE hChainEngine;
-  external Pointer hAdditionalStore;
-  @Uint32() external int dwChainFlags;
-  @Uint32() external int dwUrlRetrievalTimeout;
-  external Pointer<FILETIME> pftCurrentTime;
-  external Pointer<FILETIME> pftCacheResync;
-  @Uint32() external int cbMaxUrlRetrievalByteCount;
-}
-
-class CRL_REVOCATION_INFO extends Struct {
-  external Pointer<CRL_ENTRY> pCrlEntry;
-  external Pointer<CRL_CONTEXT> pCrlContext;
-  external Pointer<CERT_CHAIN_CONTEXT> pCrlIssuerChain;
-}
-
-class CERT_CHAIN_FIND_BY_ISSUER_PARA extends Struct {
-  @Uint32() external int cbSize;
-  external Pointer<Utf8> pszUsageIdentifier;
-  @Uint32() external int dwKeySpec;
-  @Uint32() external int dwAcquirePrivateKeyFlags;
-  @Uint32() external int cIssuer;
-  external Pointer<CRYPTOAPI_BLOB> rgIssuer;
-  external PFN_CERT_CHAIN_FIND_BY_ISSUER_CALLBACK pfnFindCallback;
-  external Pointer pvFindArg;
-}
-
-class CERT_CHAIN_POLICY_PARA extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-  external Pointer pvExtraPolicyPara;
-}
-
-class CERT_CHAIN_POLICY_STATUS extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwError;
-  @Int32() external int lChainIndex;
-  @Int32() external int lElementIndex;
-  external Pointer pvExtraPolicyStatus;
-}
-
-class AUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_PARA extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwRegPolicySettings;
-  external Pointer<CMSG_SIGNER_INFO> pSignerInfo;
-}
-
-class AUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_STATUS extends Struct {
-  @Uint32() external int cbSize;
-  @Int32() external int fCommercial;
-}
-
-class AUTHENTICODE_TS_EXTRA_CERT_CHAIN_POLICY_PARA extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwRegPolicySettings;
-  @Int32() external int fCommercial;
-}
-
-class EV_EXTRA_CERT_CHAIN_POLICY_PARA extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwRootProgramQualifierFlags;
-}
-
-class EV_EXTRA_CERT_CHAIN_POLICY_STATUS extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwQualifiers;
-  @Uint32() external int dwIssuanceUsageIndex;
-}
-
-class SSL_F12_EXTRA_CERT_CHAIN_POLICY_STATUS extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwErrorLevel;
-  @Uint32() external int dwErrorCategory;
-  @Uint32() external int dwReserved;
-  external __ushort__ wszErrorText;
-}
-
-class SSL_HPKP_HEADER_EXTRA_CERT_CHAIN_POLICY_PARA extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwReserved;
-  external Pointer<Utf16> pwszServerName;
-  external ____ rgpszHpkpValue;
-}
-
-class SSL_KEY_PIN_EXTRA_CERT_CHAIN_POLICY_PARA extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwReserved;
-  external Pointer<Utf16> pwszServerName;
-}
-
-class SSL_KEY_PIN_EXTRA_CERT_CHAIN_POLICY_STATUS extends Struct {
-  @Uint32() external int cbSize;
-  @Int32() external int lError;
-  external __ushort__ wszErrorText;
-}
-
-class CRYPT_PKCS12_PBE_PARAMS extends Struct {
-  @Int32() external int iIterations;
-  @Uint32() external int cbSalt;
-}
-
-class PKCS12_PBES2_EXPORT_PARAMS extends Struct {
-  @Uint32() external int dwSize;
-  external Pointer hNcryptDescriptor;
-  external Pointer<Utf16> pwszPbes2Alg;
-}
-
-class CERT_SERVER_OCSP_RESPONSE_CONTEXT extends Struct {
-  @Uint32() external int cbSize;
-  external Pointer<Uint8> pbEncodedOcspResponse;
-  @Uint32() external int cbEncodedOcspResponse;
-}
-
-class CERT_SERVER_OCSP_RESPONSE_OPEN_PARA extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-  external Pointer<Uint32> pcbUsedSize;
-  external Pointer<Utf16> pwszOcspDirectory;
-  external PFN_CERT_SERVER_OCSP_RESPONSE_UPDATE_CALLBACK pfnUpdateCallback;
-  external Pointer pvUpdateCallbackArg;
-}
-
-class CERT_SELECT_CHAIN_PARA extends Struct {
-  external HCERTCHAINENGINE hChainEngine;
-  external Pointer<FILETIME> pTime;
-  external Pointer hAdditionalStore;
-  external Pointer<CERT_CHAIN_PARA> pChainPara;
-  @Uint32() external int dwFlags;
-}
-
-class CERT_SELECT_CRITERIA extends Struct {
-  @Uint32() external int dwType;
-  @Uint32() external int cPara;
-  external Pointer<Pointer> ppPara;
-}
-
-class CRYPT_TIMESTAMP_REQUEST extends Struct {
-  @Uint32() external int dwVersion;
-  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
-  external CRYPTOAPI_BLOB HashedMessage;
-  external Pointer<Utf8> pszTSAPolicyId;
-  external CRYPTOAPI_BLOB Nonce;
-  @Int32() external int fCertReq;
-  @Uint32() external int cExtension;
-  external Pointer<CERT_EXTENSION> rgExtension;
-}
-
-class CRYPT_TIMESTAMP_RESPONSE extends Struct {
-  @Uint32() external int dwStatus;
-  @Uint32() external int cFreeText;
-  external Pointer<Pointer<Utf16>> rgFreeText;
-  external CRYPT_BIT_BLOB FailureInfo;
-  external CRYPTOAPI_BLOB ContentInfo;
-}
-
-class CRYPT_TIMESTAMP_ACCURACY extends Struct {
-  @Uint32() external int dwSeconds;
-  @Uint32() external int dwMillis;
-  @Uint32() external int dwMicros;
-}
-
-class CRYPT_TIMESTAMP_INFO extends Struct {
-  @Uint32() external int dwVersion;
-  external Pointer<Utf8> pszTSAPolicyId;
-  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
-  external CRYPTOAPI_BLOB HashedMessage;
-  external CRYPTOAPI_BLOB SerialNumber;
-  external FILETIME ftTime;
-  external Pointer<CRYPT_TIMESTAMP_ACCURACY> pvAccuracy;
-  @Int32() external int fOrdering;
-  external CRYPTOAPI_BLOB Nonce;
-  external CRYPTOAPI_BLOB Tsa;
-  @Uint32() external int cExtension;
-  external Pointer<CERT_EXTENSION> rgExtension;
-}
-
-class CRYPT_TIMESTAMP_CONTEXT extends Struct {
-  @Uint32() external int cbEncoded;
-  external Pointer<Uint8> pbEncoded;
-  external Pointer<CRYPT_TIMESTAMP_INFO> pTimeStamp;
-}
-
-class CRYPT_TIMESTAMP_PARA extends Struct {
-  external Pointer<Utf8> pszTSAPolicyId;
-  @Int32() external int fRequestCerts;
-  external CRYPTOAPI_BLOB Nonce;
-  @Uint32() external int cExtension;
-  external Pointer<CERT_EXTENSION> rgExtension;
-}
-
-class CRYPT_OBJECT_LOCATOR_PROVIDER_TABLE extends Struct {
-  @Uint32() external int cbSize;
-  external PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_GET pfnGet;
-  external PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_RELEASE pfnRelease;
-  external PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_PASSWORD pfnFreePassword;
-  external PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE pfnFree;
-  external PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_IDENTIFIER pfnFreeIdentifier;
-}
-
-class CRYPTPROTECT_PROMPTSTRUCT extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwPromptFlags;
-  @IntPtr() external int hwndApp;
-  external Pointer<Utf16> szPrompt;
-}
-
-class SCARD_READERSTATEA extends Struct {
-  external Pointer<Utf8> szReader;
-  external Pointer pvUserData;
-  @Uint32() external int dwCurrentState;
-  @Uint32() external int dwEventState;
-  @Uint32() external int cbAtr;
-  external __ubyte__ rgbAtr;
-}
-
-class SCARD_READERSTATEW extends Struct {
-  external Pointer<Utf16> szReader;
-  external Pointer pvUserData;
-  @Uint32() external int dwCurrentState;
-  @Uint32() external int dwEventState;
-  @Uint32() external int cbAtr;
-  external __ubyte__ rgbAtr;
-}
-
-class SCARD_ATRMASK extends Struct {
-  @Uint32() external int cbAtr;
-  external __ubyte__ rgbAtr;
-  external __ubyte__ rgbMask;
-}
-
-class OPENCARD_SEARCH_CRITERIAA extends Struct {
-  @Uint32() external int dwStructSize;
-  external Pointer<Utf8> lpstrGroupNames;
-  @Uint32() external int nMaxGroupNames;
-  external Pointer<GUID> rgguidInterfaces;
-  @Uint32() external int cguidInterfaces;
-  external Pointer<Utf8> lpstrCardNames;
-  @Uint32() external int nMaxCardNames;
-  external Pointer<OCNCHKPROC> lpfnCheck;
-  external Pointer<OCNCONNPROCA> lpfnConnect;
-  external Pointer<OCNDSCPROC> lpfnDisconnect;
-  external Pointer pvUserData;
-  @Uint32() external int dwShareMode;
-  @Uint32() external int dwPreferredProtocols;
-}
-
-class OPENCARD_SEARCH_CRITERIAW extends Struct {
-  @Uint32() external int dwStructSize;
-  external Pointer<Utf16> lpstrGroupNames;
-  @Uint32() external int nMaxGroupNames;
-  external Pointer<GUID> rgguidInterfaces;
-  @Uint32() external int cguidInterfaces;
-  external Pointer<Utf16> lpstrCardNames;
-  @Uint32() external int nMaxCardNames;
-  external Pointer<OCNCHKPROC> lpfnCheck;
-  external Pointer<OCNCONNPROCW> lpfnConnect;
-  external Pointer<OCNDSCPROC> lpfnDisconnect;
-  external Pointer pvUserData;
-  @Uint32() external int dwShareMode;
-  @Uint32() external int dwPreferredProtocols;
-}
-
-class OPENCARDNAME_EXA extends Struct {
-  @Uint32() external int dwStructSize;
-  @IntPtr() external int hSCardContext;
-  @IntPtr() external int hwndOwner;
-  @Uint32() external int dwFlags;
-  external Pointer<Utf8> lpstrTitle;
-  external Pointer<Utf8> lpstrSearchDesc;
-  @IntPtr() external int hIcon;
-  external Pointer<OPENCARD_SEARCH_CRITERIAA> pOpenCardSearchCriteria;
-  external Pointer<OCNCONNPROCA> lpfnConnect;
-  external Pointer pvUserData;
-  @Uint32() external int dwShareMode;
-  @Uint32() external int dwPreferredProtocols;
-  external Pointer<Utf8> lpstrRdr;
-  @Uint32() external int nMaxRdr;
-  external Pointer<Utf8> lpstrCard;
-  @Uint32() external int nMaxCard;
-  @Uint32() external int dwActiveProtocol;
-  @IntPtr() external int hCardHandle;
-}
-
-class OPENCARDNAME_EXW extends Struct {
-  @Uint32() external int dwStructSize;
-  @IntPtr() external int hSCardContext;
-  @IntPtr() external int hwndOwner;
-  @Uint32() external int dwFlags;
-  external Pointer<Utf16> lpstrTitle;
-  external Pointer<Utf16> lpstrSearchDesc;
-  @IntPtr() external int hIcon;
-  external Pointer<OPENCARD_SEARCH_CRITERIA> pOpenCardSearchCriteria;
-  external Pointer<OCNCONNPROCW> lpfnConnect;
-  external Pointer pvUserData;
-  @Uint32() external int dwShareMode;
-  @Uint32() external int dwPreferredProtocols;
-  external Pointer<Utf16> lpstrRdr;
-  @Uint32() external int nMaxRdr;
-  external Pointer<Utf16> lpstrCard;
-  @Uint32() external int nMaxCard;
-  @Uint32() external int dwActiveProtocol;
-  @IntPtr() external int hCardHandle;
-}
-
-class READER_SEL_RESPONSE extends Struct {
-  @Uint32() external int cbReaderNameOffset;
-  @Uint32() external int cchReaderNameLength;
-  @Uint32() external int cbCardNameOffset;
-  @Uint32() external int cchCardNameLength;
-}
-
-class OPENCARDNAMEA extends Struct {
-  @Uint32() external int dwStructSize;
-  @IntPtr() external int hwndOwner;
-  @IntPtr() external int hSCardContext;
-  external Pointer<Utf8> lpstrGroupNames;
-  @Uint32() external int nMaxGroupNames;
-  external Pointer<Utf8> lpstrCardNames;
-  @Uint32() external int nMaxCardNames;
-  external Pointer<GUID> rgguidInterfaces;
-  @Uint32() external int cguidInterfaces;
-  external Pointer<Utf8> lpstrRdr;
-  @Uint32() external int nMaxRdr;
-  external Pointer<Utf8> lpstrCard;
-  @Uint32() external int nMaxCard;
-  external Pointer<Utf8> lpstrTitle;
-  @Uint32() external int dwFlags;
-  external Pointer pvUserData;
-  @Uint32() external int dwShareMode;
-  @Uint32() external int dwPreferredProtocols;
-  @Uint32() external int dwActiveProtocol;
-  external Pointer<OCNCONNPROCA> lpfnConnect;
-  external Pointer<OCNCHKPROC> lpfnCheck;
-  external Pointer<OCNDSCPROC> lpfnDisconnect;
-  @IntPtr() external int hCardHandle;
-}
-
-class OPENCARDNAMEW extends Struct {
-  @Uint32() external int dwStructSize;
-  @IntPtr() external int hwndOwner;
-  @IntPtr() external int hSCardContext;
-  external Pointer<Utf16> lpstrGroupNames;
-  @Uint32() external int nMaxGroupNames;
-  external Pointer<Utf16> lpstrCardNames;
-  @Uint32() external int nMaxCardNames;
-  external Pointer<GUID> rgguidInterfaces;
-  @Uint32() external int cguidInterfaces;
-  external Pointer<Utf16> lpstrRdr;
-  @Uint32() external int nMaxRdr;
-  external Pointer<Utf16> lpstrCard;
-  @Uint32() external int nMaxCard;
-  external Pointer<Utf16> lpstrTitle;
-  @Uint32() external int dwFlags;
-  external Pointer pvUserData;
-  @Uint32() external int dwShareMode;
-  @Uint32() external int dwPreferredProtocols;
-  @Uint32() external int dwActiveProtocol;
-  external Pointer<OCNCONNPROCW> lpfnConnect;
-  external Pointer<OCNCHKPROC> lpfnCheck;
-  external Pointer<OCNDSCPROC> lpfnDisconnect;
-  @IntPtr() external int hCardHandle;
-}
-
 class SERVICE_TRIGGER_CUSTOM_STATE_ID extends Struct {
   external __uint__ Data;
+}
+
+class SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM extends Struct {
+  @Uint32() external int u;
 }
 
 class SERVICE_DESCRIPTIONA extends Struct {
@@ -3102,7 +888,7 @@ class SE_ADT_ACCESS_REASON extends Struct {
   external __uint__ AccessReasons;
   @Uint32() external int ObjectTypeIndex;
   @Uint32() external int AccessGranted;
-  external Pointer SecurityDescriptor;
+  external Pointer<SECURITY_DESCRIPTOR> SecurityDescriptor;
 }
 
 class SE_ADT_CLAIMS extends Struct {
@@ -3300,6 +1086,13 @@ class LSA_FOREST_TRUST_BINARY_DATA extends Struct {
   external Pointer<Uint8> Buffer;
 }
 
+class LSA_FOREST_TRUST_RECORD extends Struct {
+  @Uint32() external int Flags;
+  @Uint32() external int ForestTrustType;
+  @Int64() external int Time;
+  @Uint32() external int ForestTrustData;
+}
+
 class LSA_FOREST_TRUST_INFORMATION extends Struct {
   @Uint32() external int RecordCount;
   external Pointer<Pointer<LSA_FOREST_TRUST_RECORD>> Entries;
@@ -3360,9 +1153,9 @@ class CENTRAL_ACCESS_POLICY_ENTRY extends Struct {
   @Uint32() external int LengthAppliesTo;
   external Pointer<Uint8> AppliesTo;
   @Uint32() external int LengthSD;
-  external Pointer SD;
+  external Pointer<SECURITY_DESCRIPTOR> SD;
   @Uint32() external int LengthStagedSD;
-  external Pointer StagedSD;
+  external Pointer<SECURITY_DESCRIPTOR> StagedSD;
   @Uint32() external int Flags;
 }
 
@@ -4908,6 +2701,11 @@ class SECPKG_NEGO2_INFO extends Struct {
   @Uint32() external int PackageFlags;
 }
 
+class SECPKG_EXTENDED_INFORMATION extends Struct {
+  @Uint32() external int Class;
+  @Uint32() external int Info;
+}
+
 class SECPKG_TARGETINFO extends Struct {
   external Pointer DomainSid;
   external Pointer<Utf16> ComputerName;
@@ -5205,6 +3003,2334 @@ class SecPkgCred_ClientCertPolicy extends Struct {
   @Int32() external int fOmitUsageCheck;
   external Pointer<Utf16> pwszSslCtlStoreName;
   external Pointer<Utf16> pwszSslCtlIdentifier;
+}
+
+class CMS_KEY_INFO extends Struct {
+  @Uint32() external int dwVersion;
+  @Uint32() external int Algid;
+  external Pointer<Uint8> pbOID;
+  @Uint32() external int cbOID;
+}
+
+class HMAC_Info extends Struct {
+  @Uint32() external int HashAlgid;
+  external Pointer<Uint8> pbInnerString;
+  @Uint32() external int cbInnerString;
+  external Pointer<Uint8> pbOuterString;
+  @Uint32() external int cbOuterString;
+}
+
+class SCHANNEL_ALG extends Struct {
+  @Uint32() external int dwUse;
+  @Uint32() external int Algid;
+  @Uint32() external int cBits;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwReserved;
+}
+
+class PROV_ENUMALGS extends Struct {
+  @Uint32() external int aiAlgid;
+  @Uint32() external int dwBitLen;
+  @Uint32() external int dwNameLen;
+  external __byte__ szName;
+}
+
+class PROV_ENUMALGS_EX extends Struct {
+  @Uint32() external int aiAlgid;
+  @Uint32() external int dwDefaultLen;
+  @Uint32() external int dwMinLen;
+  @Uint32() external int dwMaxLen;
+  @Uint32() external int dwProtocols;
+  @Uint32() external int dwNameLen;
+  external __byte__ szName;
+  @Uint32() external int dwLongNameLen;
+  external __byte__ szLongName;
+}
+
+class PUBLICKEYSTRUC extends Struct {
+  @Uint8() external int bType;
+  @Uint8() external int bVersion;
+  @Uint16() external int reserved;
+  @Uint32() external int aiKeyAlg;
+}
+
+class RSAPUBKEY extends Struct {
+  @Uint32() external int magic;
+  @Uint32() external int bitlen;
+  @Uint32() external int pubexp;
+}
+
+class PUBKEY extends Struct {
+  @Uint32() external int magic;
+  @Uint32() external int bitlen;
+}
+
+class DSSSEED extends Struct {
+  @Uint32() external int counter;
+  external __ubyte__ seed;
+}
+
+class PUBKEYVER3 extends Struct {
+  @Uint32() external int magic;
+  @Uint32() external int bitlenP;
+  @Uint32() external int bitlenQ;
+  @Uint32() external int bitlenJ;
+  external DSSSEED DSSSeed;
+}
+
+class PRIVKEYVER3 extends Struct {
+  @Uint32() external int magic;
+  @Uint32() external int bitlenP;
+  @Uint32() external int bitlenQ;
+  @Uint32() external int bitlenJ;
+  @Uint32() external int bitlenX;
+  external DSSSEED DSSSeed;
+}
+
+class KEY_TYPE_SUBTYPE extends Struct {
+  @Uint32() external int dwKeySpec;
+  external GUID Type;
+  external GUID Subtype;
+}
+
+class CERT_FORTEZZA_DATA_PROP extends Struct {
+  external __ubyte__ SerialNumber;
+  @Int32() external int CertIndex;
+  external __ubyte__ CertLabel;
+}
+
+class CRYPT_RC4_KEY_STATE extends Struct {
+  external __ubyte__ Key;
+  external __ubyte__ SBox;
+  @Uint8() external int i;
+  @Uint8() external int j;
+}
+
+class CRYPT_DES_KEY_STATE extends Struct {
+  external __ubyte__ Key;
+  external __ubyte__ IV;
+  external __ubyte__ Feedback;
+}
+
+class CRYPT_3DES_KEY_STATE extends Struct {
+  external __ubyte__ Key;
+  external __ubyte__ IV;
+  external __ubyte__ Feedback;
+}
+
+class CRYPT_AES_128_KEY_STATE extends Struct {
+  external __ubyte__ Key;
+  external __ubyte__ IV;
+  external __ubyte__ EncryptionState;
+  external __ubyte__ DecryptionState;
+  external __ubyte__ Feedback;
+}
+
+class CRYPT_AES_256_KEY_STATE extends Struct {
+  external __ubyte__ Key;
+  external __ubyte__ IV;
+  external __ubyte__ EncryptionState;
+  external __ubyte__ DecryptionState;
+  external __ubyte__ Feedback;
+}
+
+class CRYPTOAPI_BLOB extends Struct {
+  @Uint32() external int cbData;
+  external Pointer<Uint8> pbData;
+}
+
+class CMS_DH_KEY_INFO extends Struct {
+  @Uint32() external int dwVersion;
+  @Uint32() external int Algid;
+  external Pointer<Utf8> pszContentEncObjId;
+  external CRYPTOAPI_BLOB PubInfo;
+  external Pointer pReserved;
+}
+
+class BCRYPT_KEY_LENGTHS_STRUCT extends Struct {
+  @Uint32() external int dwMinLength;
+  @Uint32() external int dwMaxLength;
+  @Uint32() external int dwIncrement;
+}
+
+class BCRYPT_OID extends Struct {
+  @Uint32() external int cbOID;
+  external Pointer<Uint8> pbOID;
+}
+
+class BCRYPT_OID_LIST extends Struct {
+  @Uint32() external int dwOIDCount;
+  external Pointer<BCRYPT_OID> pOIDs;
+}
+
+class BCRYPT_PKCS1_PADDING_INFO extends Struct {
+  external Pointer<Utf16> pszAlgId;
+}
+
+class BCRYPT_PSS_PADDING_INFO extends Struct {
+  external Pointer<Utf16> pszAlgId;
+  @Uint32() external int cbSalt;
+}
+
+class BCRYPT_OAEP_PADDING_INFO extends Struct {
+  external Pointer<Utf16> pszAlgId;
+  external Pointer<Uint8> pbLabel;
+  @Uint32() external int cbLabel;
+}
+
+class BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwInfoVersion;
+  external Pointer<Uint8> pbNonce;
+  @Uint32() external int cbNonce;
+  external Pointer<Uint8> pbAuthData;
+  @Uint32() external int cbAuthData;
+  external Pointer<Uint8> pbTag;
+  @Uint32() external int cbTag;
+  external Pointer<Uint8> pbMacContext;
+  @Uint32() external int cbMacContext;
+  @Uint32() external int cbAAD;
+  @Uint64() external int cbData;
+  @Uint32() external int dwFlags;
+}
+
+class BCryptBuffer extends Struct {
+  @Uint32() external int cbBuffer;
+  @Uint32() external int BufferType;
+  external Pointer pvBuffer;
+}
+
+class BCryptBufferDesc extends Struct {
+  @Uint32() external int ulVersion;
+  @Uint32() external int cBuffers;
+  external Pointer<BCryptBuffer> pBuffers;
+}
+
+class BCRYPT_KEY_BLOB extends Struct {
+  @Uint32() external int Magic;
+}
+
+class BCRYPT_RSAKEY_BLOB extends Struct {
+  @Uint32() external int Magic;
+  @Uint32() external int BitLength;
+  @Uint32() external int cbPublicExp;
+  @Uint32() external int cbModulus;
+  @Uint32() external int cbPrime1;
+  @Uint32() external int cbPrime2;
+}
+
+class BCRYPT_ECCKEY_BLOB extends Struct {
+  @Uint32() external int dwMagic;
+  @Uint32() external int cbKey;
+}
+
+class SSL_ECCKEY_BLOB extends Struct {
+  @Uint32() external int dwCurveType;
+  @Uint32() external int cbKey;
+}
+
+class BCRYPT_ECCFULLKEY_BLOB extends Struct {
+  @Uint32() external int dwMagic;
+  @Uint32() external int dwVersion;
+  @Uint32() external int dwCurveType;
+  @Uint32() external int dwCurveGenerationAlgId;
+  @Uint32() external int cbFieldLength;
+  @Uint32() external int cbSubgroupOrder;
+  @Uint32() external int cbCofactor;
+  @Uint32() external int cbSeed;
+}
+
+class BCRYPT_DH_KEY_BLOB extends Struct {
+  @Uint32() external int dwMagic;
+  @Uint32() external int cbKey;
+}
+
+class BCRYPT_DH_PARAMETER_HEADER extends Struct {
+  @Uint32() external int cbLength;
+  @Uint32() external int dwMagic;
+  @Uint32() external int cbKeyLength;
+}
+
+class BCRYPT_DSA_KEY_BLOB extends Struct {
+  @Uint32() external int dwMagic;
+  @Uint32() external int cbKey;
+  external __ubyte__ Count;
+  external __ubyte__ Seed;
+  external __ubyte__ q;
+}
+
+class BCRYPT_DSA_KEY_BLOB_V2 extends Struct {
+  @Uint32() external int dwMagic;
+  @Uint32() external int cbKey;
+  @Uint32() external int hashAlgorithm;
+  @Uint32() external int standardVersion;
+  @Uint32() external int cbSeedLength;
+  @Uint32() external int cbGroupSize;
+  external __ubyte__ Count;
+}
+
+class BCRYPT_KEY_DATA_BLOB_HEADER extends Struct {
+  @Uint32() external int dwMagic;
+  @Uint32() external int dwVersion;
+  @Uint32() external int cbKeyData;
+}
+
+class BCRYPT_DSA_PARAMETER_HEADER extends Struct {
+  @Uint32() external int cbLength;
+  @Uint32() external int dwMagic;
+  @Uint32() external int cbKeyLength;
+  external __ubyte__ Count;
+  external __ubyte__ Seed;
+  external __ubyte__ q;
+}
+
+class BCRYPT_DSA_PARAMETER_HEADER_V2 extends Struct {
+  @Uint32() external int cbLength;
+  @Uint32() external int dwMagic;
+  @Uint32() external int cbKeyLength;
+  @Uint32() external int hashAlgorithm;
+  @Uint32() external int standardVersion;
+  @Uint32() external int cbSeedLength;
+  @Uint32() external int cbGroupSize;
+  external __ubyte__ Count;
+}
+
+class BCRYPT_ECC_CURVE_NAMES extends Struct {
+  @Uint32() external int dwEccCurveNames;
+  external Pointer<Pointer<Utf16>> pEccCurveNames;
+}
+
+class BCRYPT_MULTI_HASH_OPERATION extends Struct {
+  @Uint32() external int iHash;
+  @Uint32() external int hashOperation;
+  external Pointer<Uint8> pbBuffer;
+  @Uint32() external int cbBuffer;
+}
+
+class BCRYPT_MULTI_OBJECT_LENGTH_STRUCT extends Struct {
+  @Uint32() external int cbPerObject;
+  @Uint32() external int cbPerElement;
+}
+
+class BCRYPT_ALGORITHM_IDENTIFIER extends Struct {
+  external Pointer<Utf16> pszName;
+  @Uint32() external int dwClass;
+  @Uint32() external int dwFlags;
+}
+
+class BCRYPT_PROVIDER_NAME extends Struct {
+  external Pointer<Utf16> pszProviderName;
+}
+
+class BCRYPT_INTERFACE_VERSION extends Struct {
+  @Uint16() external int MajorVersion;
+  @Uint16() external int MinorVersion;
+}
+
+class CRYPT_INTERFACE_REG extends Struct {
+  @Uint32() external int dwInterface;
+  @Uint32() external int dwFlags;
+  @Uint32() external int cFunctions;
+  external Pointer<Pointer<Utf16>> rgpszFunctions;
+}
+
+class CRYPT_IMAGE_REG extends Struct {
+  external Pointer<Utf16> pszImage;
+  @Uint32() external int cInterfaces;
+  external Pointer<Pointer<CRYPT_INTERFACE_REG>> rgpInterfaces;
+}
+
+class CRYPT_PROVIDER_REG extends Struct {
+  @Uint32() external int cAliases;
+  external Pointer<Pointer<Utf16>> rgpszAliases;
+  external Pointer<CRYPT_IMAGE_REG> pUM;
+  external Pointer<CRYPT_IMAGE_REG> pKM;
+}
+
+class CRYPT_PROVIDERS extends Struct {
+  @Uint32() external int cProviders;
+  external Pointer<Pointer<Utf16>> rgpszProviders;
+}
+
+class CRYPT_CONTEXT_CONFIG extends Struct {
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwReserved;
+}
+
+class CRYPT_CONTEXT_FUNCTION_CONFIG extends Struct {
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwReserved;
+}
+
+class CRYPT_CONTEXTS extends Struct {
+  @Uint32() external int cContexts;
+  external Pointer<Pointer<Utf16>> rgpszContexts;
+}
+
+class CRYPT_CONTEXT_FUNCTIONS extends Struct {
+  @Uint32() external int cFunctions;
+  external Pointer<Pointer<Utf16>> rgpszFunctions;
+}
+
+class CRYPT_CONTEXT_FUNCTION_PROVIDERS extends Struct {
+  @Uint32() external int cProviders;
+  external Pointer<Pointer<Utf16>> rgpszProviders;
+}
+
+class CRYPT_PROPERTY_REF extends Struct {
+  external Pointer<Utf16> pszProperty;
+  @Uint32() external int cbValue;
+  external Pointer<Uint8> pbValue;
+}
+
+class CRYPT_IMAGE_REF extends Struct {
+  external Pointer<Utf16> pszImage;
+  @Uint32() external int dwFlags;
+}
+
+class CRYPT_PROVIDER_REF extends Struct {
+  @Uint32() external int dwInterface;
+  external Pointer<Utf16> pszFunction;
+  external Pointer<Utf16> pszProvider;
+  @Uint32() external int cProperties;
+  external Pointer<Pointer<CRYPT_PROPERTY_REF>> rgpProperties;
+  external Pointer<CRYPT_IMAGE_REF> pUM;
+  external Pointer<CRYPT_IMAGE_REF> pKM;
+}
+
+class CRYPT_PROVIDER_REFS extends Struct {
+  @Uint32() external int cProviders;
+  external Pointer<Pointer<CRYPT_PROVIDER_REF>> rgpProviders;
+}
+
+class NCRYPT_ALLOC_PARA extends Struct {
+  @Uint32() external int cbSize;
+  external PFN_NCRYPT_ALLOC pfnAlloc;
+  external PFN_NCRYPT_FREE pfnFree;
+}
+
+class NCRYPT_CIPHER_PADDING_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwFlags;
+  external Pointer<Uint8> pbIV;
+  @Uint32() external int cbIV;
+  external Pointer<Uint8> pbOtherInfo;
+  @Uint32() external int cbOtherInfo;
+}
+
+class NCRYPT_PLATFORM_ATTEST_PADDING_INFO extends Struct {
+  @Uint32() external int magic;
+  @Uint32() external int pcrMask;
+}
+
+class NCRYPT_KEY_ATTEST_PADDING_INFO extends Struct {
+  @Uint32() external int magic;
+  external Pointer<Uint8> pbKeyBlob;
+  @Uint32() external int cbKeyBlob;
+  external Pointer<Uint8> pbKeyAuth;
+  @Uint32() external int cbKeyAuth;
+}
+
+class NCRYPT_ISOLATED_KEY_ATTESTED_ATTRIBUTES extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Flags;
+  @Uint32() external int cbPublicKeyBlob;
+}
+
+class NCRYPT_VSM_KEY_ATTESTATION_STATEMENT extends Struct {
+  @Uint32() external int Magic;
+  @Uint32() external int Version;
+  @Uint32() external int cbSignature;
+  @Uint32() external int cbReport;
+  @Uint32() external int cbAttributes;
+}
+
+class NCRYPT_VSM_KEY_ATTESTATION_CLAIM_RESTRICTIONS extends Struct {
+  @Uint32() external int Version;
+  @Uint64() external int TrustletId;
+  @Uint32() external int MinSvn;
+  @Uint32() external int FlagsMask;
+  @Uint32() external int FlagsExpected;
+  @Uint32() external int _bitfield;
+}
+
+class NCRYPT_EXPORTED_ISOLATED_KEY_HEADER extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int KeyUsage;
+  @Uint32() external int _bitfield;
+  @Uint32() external int cbAlgName;
+  @Uint32() external int cbNonce;
+  @Uint32() external int cbAuthTag;
+  @Uint32() external int cbWrappingKey;
+  @Uint32() external int cbIsolatedKey;
+}
+
+class NCRYPT_EXPORTED_ISOLATED_KEY_ENVELOPE extends Struct {
+  external NCRYPT_EXPORTED_ISOLATED_KEY_HEADER Header;
+}
+
+class __NCRYPT_PCP_TPM_WEB_AUTHN_ATTESTATION_STATEMENT extends Struct {
+  @Uint32() external int Magic;
+  @Uint32() external int Version;
+  @Uint32() external int HeaderSize;
+  @Uint32() external int cbCertifyInfo;
+  @Uint32() external int cbSignature;
+  @Uint32() external int cbTpmPublic;
+}
+
+class NCRYPT_TPM_PLATFORM_ATTESTATION_STATEMENT extends Struct {
+  @Uint32() external int Magic;
+  @Uint32() external int Version;
+  @Uint32() external int pcrAlg;
+  @Uint32() external int cbSignature;
+  @Uint32() external int cbQuote;
+  @Uint32() external int cbPcrs;
+}
+
+class NCryptAlgorithmName extends Struct {
+  external Pointer<Utf16> pszName;
+  @Uint32() external int dwClass;
+  @Uint32() external int dwAlgOperations;
+  @Uint32() external int dwFlags;
+}
+
+class NCryptKeyName extends Struct {
+  external Pointer<Utf16> pszName;
+  external Pointer<Utf16> pszAlgid;
+  @Uint32() external int dwLegacyKeySpec;
+  @Uint32() external int dwFlags;
+}
+
+class NCryptProviderName extends Struct {
+  external Pointer<Utf16> pszName;
+  external Pointer<Utf16> pszComment;
+}
+
+class NCRYPT_UI_POLICY extends Struct {
+  @Uint32() external int dwVersion;
+  @Uint32() external int dwFlags;
+  external Pointer<Utf16> pszCreationTitle;
+  external Pointer<Utf16> pszFriendlyName;
+  external Pointer<Utf16> pszDescription;
+}
+
+class __NCRYPT_KEY_ACCESS_POLICY_BLOB extends Struct {
+  @Uint32() external int dwVersion;
+  @Uint32() external int dwPolicyFlags;
+  @Uint32() external int cbUserSid;
+  @Uint32() external int cbApplicationSid;
+}
+
+class NCRYPT_SUPPORTED_LENGTHS extends Struct {
+  @Uint32() external int dwMinLength;
+  @Uint32() external int dwMaxLength;
+  @Uint32() external int dwIncrement;
+  @Uint32() external int dwDefaultLength;
+}
+
+class __NCRYPT_PCP_HMAC_AUTH_SIGNATURE_INFO extends Struct {
+  @Uint32() external int dwVersion;
+  @Int32() external int iExpiration;
+  external __ubyte__ pabNonce;
+  external __ubyte__ pabPolicyRef;
+  external __ubyte__ pabHMAC;
+}
+
+class __NCRYPT_PCP_TPM_FW_VERSION_INFO extends Struct {
+  @Uint16() external int major1;
+  @Uint16() external int major2;
+  @Uint16() external int minor1;
+  @Uint16() external int minor2;
+}
+
+class __NCRYPT_PCP_RAW_POLICYDIGEST extends Struct {
+  @Uint32() external int dwVersion;
+  @Uint32() external int cbDigest;
+}
+
+class NCRYPT_KEY_BLOB_HEADER extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwMagic;
+  @Uint32() external int cbAlgName;
+  @Uint32() external int cbKeyData;
+}
+
+class NCRYPT_TPM_LOADABLE_KEY_BLOB_HEADER extends Struct {
+  @Uint32() external int magic;
+  @Uint32() external int cbHeader;
+  @Uint32() external int cbPublic;
+  @Uint32() external int cbPrivate;
+  @Uint32() external int cbName;
+}
+
+class CRYPT_BIT_BLOB extends Struct {
+  @Uint32() external int cbData;
+  external Pointer<Uint8> pbData;
+  @Uint32() external int cUnusedBits;
+}
+
+class CRYPT_ALGORITHM_IDENTIFIER extends Struct {
+  external Pointer<Utf8> pszObjId;
+  external CRYPTOAPI_BLOB Parameters;
+}
+
+class CRYPT_OBJID_TABLE extends Struct {
+  @Uint32() external int dwAlgId;
+  external Pointer<Utf8> pszObjId;
+}
+
+class CRYPT_HASH_INFO extends Struct {
+  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
+  external CRYPTOAPI_BLOB Hash;
+}
+
+class CERT_EXTENSION extends Struct {
+  external Pointer<Utf8> pszObjId;
+  @Int32() external int fCritical;
+  external CRYPTOAPI_BLOB Value;
+}
+
+class CRYPT_ATTRIBUTE_TYPE_VALUE extends Struct {
+  external Pointer<Utf8> pszObjId;
+  external CRYPTOAPI_BLOB Value;
+}
+
+class CRYPT_ATTRIBUTE extends Struct {
+  external Pointer<Utf8> pszObjId;
+  @Uint32() external int cValue;
+  external Pointer<CRYPTOAPI_BLOB> rgValue;
+}
+
+class CRYPT_ATTRIBUTES extends Struct {
+  @Uint32() external int cAttr;
+  external Pointer<CRYPT_ATTRIBUTE> rgAttr;
+}
+
+class CERT_RDN_ATTR extends Struct {
+  external Pointer<Utf8> pszObjId;
+  @Uint32() external int dwValueType;
+  external CRYPTOAPI_BLOB Value;
+}
+
+class CERT_RDN extends Struct {
+  @Uint32() external int cRDNAttr;
+  external Pointer<CERT_RDN_ATTR> rgRDNAttr;
+}
+
+class CERT_NAME_INFO extends Struct {
+  @Uint32() external int cRDN;
+  external Pointer<CERT_RDN> rgRDN;
+}
+
+class CERT_NAME_VALUE extends Struct {
+  @Uint32() external int dwValueType;
+  external CRYPTOAPI_BLOB Value;
+}
+
+class CERT_PUBLIC_KEY_INFO extends Struct {
+  external CRYPT_ALGORITHM_IDENTIFIER Algorithm;
+  external CRYPT_BIT_BLOB PublicKey;
+}
+
+class CRYPT_ECC_PRIVATE_KEY_INFO extends Struct {
+  @Uint32() external int dwVersion;
+  external CRYPTOAPI_BLOB PrivateKey;
+  external Pointer<Utf8> szCurveOid;
+  external CRYPT_BIT_BLOB PublicKey;
+}
+
+class CRYPT_PRIVATE_KEY_INFO extends Struct {
+  @Uint32() external int Version;
+  external CRYPT_ALGORITHM_IDENTIFIER Algorithm;
+  external CRYPTOAPI_BLOB PrivateKey;
+  external Pointer<CRYPT_ATTRIBUTES> pAttributes;
+}
+
+class CRYPT_ENCRYPTED_PRIVATE_KEY_INFO extends Struct {
+  external CRYPT_ALGORITHM_IDENTIFIER EncryptionAlgorithm;
+  external CRYPTOAPI_BLOB EncryptedPrivateKey;
+}
+
+class CRYPT_PKCS8_IMPORT_PARAMS extends Struct {
+  external CRYPTOAPI_BLOB PrivateKey;
+  external PCRYPT_RESOLVE_HCRYPTPROV_FUNC pResolvehCryptProvFunc;
+  external Pointer pVoidResolveFunc;
+  external PCRYPT_DECRYPT_PRIVATE_KEY_FUNC pDecryptPrivateKeyFunc;
+  external Pointer pVoidDecryptFunc;
+}
+
+class CRYPT_PKCS8_EXPORT_PARAMS extends Struct {
+  @IntPtr() external int hCryptProv;
+  @Uint32() external int dwKeySpec;
+  external Pointer<Utf8> pszPrivateKeyObjId;
+  external PCRYPT_ENCRYPT_PRIVATE_KEY_FUNC pEncryptPrivateKeyFunc;
+  external Pointer pVoidEncryptFunc;
+}
+
+class CERT_INFO extends Struct {
+  @Uint32() external int dwVersion;
+  external CRYPTOAPI_BLOB SerialNumber;
+  external CRYPT_ALGORITHM_IDENTIFIER SignatureAlgorithm;
+  external CRYPTOAPI_BLOB Issuer;
+  external FILETIME NotBefore;
+  external FILETIME NotAfter;
+  external CRYPTOAPI_BLOB Subject;
+  external CERT_PUBLIC_KEY_INFO SubjectPublicKeyInfo;
+  external CRYPT_BIT_BLOB IssuerUniqueId;
+  external CRYPT_BIT_BLOB SubjectUniqueId;
+  @Uint32() external int cExtension;
+  external Pointer<CERT_EXTENSION> rgExtension;
+}
+
+class CRL_ENTRY extends Struct {
+  external CRYPTOAPI_BLOB SerialNumber;
+  external FILETIME RevocationDate;
+  @Uint32() external int cExtension;
+  external Pointer<CERT_EXTENSION> rgExtension;
+}
+
+class CRL_INFO extends Struct {
+  @Uint32() external int dwVersion;
+  external CRYPT_ALGORITHM_IDENTIFIER SignatureAlgorithm;
+  external CRYPTOAPI_BLOB Issuer;
+  external FILETIME ThisUpdate;
+  external FILETIME NextUpdate;
+  @Uint32() external int cCRLEntry;
+  external Pointer<CRL_ENTRY> rgCRLEntry;
+  @Uint32() external int cExtension;
+  external Pointer<CERT_EXTENSION> rgExtension;
+}
+
+class CERT_OR_CRL_BLOB extends Struct {
+  @Uint32() external int dwChoice;
+  @Uint32() external int cbEncoded;
+  external Pointer<Uint8> pbEncoded;
+}
+
+class CERT_OR_CRL_BUNDLE extends Struct {
+  @Uint32() external int cItem;
+  external Pointer<CERT_OR_CRL_BLOB> rgItem;
+}
+
+class CERT_REQUEST_INFO extends Struct {
+  @Uint32() external int dwVersion;
+  external CRYPTOAPI_BLOB Subject;
+  external CERT_PUBLIC_KEY_INFO SubjectPublicKeyInfo;
+  @Uint32() external int cAttribute;
+  external Pointer<CRYPT_ATTRIBUTE> rgAttribute;
+}
+
+class CERT_KEYGEN_REQUEST_INFO extends Struct {
+  @Uint32() external int dwVersion;
+  external CERT_PUBLIC_KEY_INFO SubjectPublicKeyInfo;
+  external Pointer<Utf16> pwszChallengeString;
+}
+
+class CERT_SIGNED_CONTENT_INFO extends Struct {
+  external CRYPTOAPI_BLOB ToBeSigned;
+  external CRYPT_ALGORITHM_IDENTIFIER SignatureAlgorithm;
+  external CRYPT_BIT_BLOB Signature;
+}
+
+class CTL_USAGE extends Struct {
+  @Uint32() external int cUsageIdentifier;
+  external Pointer<Pointer<Utf8>> rgpszUsageIdentifier;
+}
+
+class CTL_ENTRY extends Struct {
+  external CRYPTOAPI_BLOB SubjectIdentifier;
+  @Uint32() external int cAttribute;
+  external Pointer<CRYPT_ATTRIBUTE> rgAttribute;
+}
+
+class CTL_INFO extends Struct {
+  @Uint32() external int dwVersion;
+  external CTL_USAGE SubjectUsage;
+  external CRYPTOAPI_BLOB ListIdentifier;
+  external CRYPTOAPI_BLOB SequenceNumber;
+  external FILETIME ThisUpdate;
+  external FILETIME NextUpdate;
+  external CRYPT_ALGORITHM_IDENTIFIER SubjectAlgorithm;
+  @Uint32() external int cCTLEntry;
+  external Pointer<CTL_ENTRY> rgCTLEntry;
+  @Uint32() external int cExtension;
+  external Pointer<CERT_EXTENSION> rgExtension;
+}
+
+class CRYPT_TIME_STAMP_REQUEST_INFO extends Struct {
+  external Pointer<Utf8> pszTimeStampAlgorithm;
+  external Pointer<Utf8> pszContentType;
+  external CRYPTOAPI_BLOB Content;
+  @Uint32() external int cAttribute;
+  external Pointer<CRYPT_ATTRIBUTE> rgAttribute;
+}
+
+class CRYPT_ENROLLMENT_NAME_VALUE_PAIR extends Struct {
+  external Pointer<Utf16> pwszName;
+  external Pointer<Utf16> pwszValue;
+}
+
+class CRYPT_CSP_PROVIDER extends Struct {
+  @Uint32() external int dwKeySpec;
+  external Pointer<Utf16> pwszProviderName;
+  external CRYPT_BIT_BLOB Signature;
+}
+
+class CRYPT_ENCODE_PARA extends Struct {
+  @Uint32() external int cbSize;
+  external PFN_CRYPT_ALLOC pfnAlloc;
+  external PFN_CRYPT_FREE pfnFree;
+}
+
+class CRYPT_DECODE_PARA extends Struct {
+  @Uint32() external int cbSize;
+  external PFN_CRYPT_ALLOC pfnAlloc;
+  external PFN_CRYPT_FREE pfnFree;
+}
+
+class CERT_EXTENSIONS extends Struct {
+  @Uint32() external int cExtension;
+  external Pointer<CERT_EXTENSION> rgExtension;
+}
+
+class CERT_AUTHORITY_KEY_ID_INFO extends Struct {
+  external CRYPTOAPI_BLOB KeyId;
+  external CRYPTOAPI_BLOB CertIssuer;
+  external CRYPTOAPI_BLOB CertSerialNumber;
+}
+
+class CERT_PRIVATE_KEY_VALIDITY extends Struct {
+  external FILETIME NotBefore;
+  external FILETIME NotAfter;
+}
+
+class CERT_KEY_ATTRIBUTES_INFO extends Struct {
+  external CRYPTOAPI_BLOB KeyId;
+  external CRYPT_BIT_BLOB IntendedKeyUsage;
+  external Pointer<CERT_PRIVATE_KEY_VALIDITY> pPrivateKeyUsagePeriod;
+}
+
+class CERT_POLICY_ID extends Struct {
+  @Uint32() external int cCertPolicyElementId;
+  external Pointer<Pointer<Utf8>> rgpszCertPolicyElementId;
+}
+
+class CERT_KEY_USAGE_RESTRICTION_INFO extends Struct {
+  @Uint32() external int cCertPolicyId;
+  external Pointer<CERT_POLICY_ID> rgCertPolicyId;
+  external CRYPT_BIT_BLOB RestrictedKeyUsage;
+}
+
+class CERT_OTHER_NAME extends Struct {
+  external Pointer<Utf8> pszObjId;
+  external CRYPTOAPI_BLOB Value;
+}
+
+class CERT_ALT_NAME_ENTRY extends Struct {
+  @Uint32() external int dwAltNameChoice;
+  @Uint32() external int Anonymous;
+}
+
+class CERT_ALT_NAME_INFO extends Struct {
+  @Uint32() external int cAltEntry;
+  external Pointer<CERT_ALT_NAME_ENTRY> rgAltEntry;
+}
+
+class CERT_BASIC_CONSTRAINTS_INFO extends Struct {
+  external CRYPT_BIT_BLOB SubjectType;
+  @Int32() external int fPathLenConstraint;
+  @Uint32() external int dwPathLenConstraint;
+  @Uint32() external int cSubtreesConstraint;
+  external Pointer<CRYPTOAPI_BLOB> rgSubtreesConstraint;
+}
+
+class CERT_BASIC_CONSTRAINTS2_INFO extends Struct {
+  @Int32() external int fCA;
+  @Int32() external int fPathLenConstraint;
+  @Uint32() external int dwPathLenConstraint;
+}
+
+class CERT_POLICY_QUALIFIER_INFO extends Struct {
+  external Pointer<Utf8> pszPolicyQualifierId;
+  external CRYPTOAPI_BLOB Qualifier;
+}
+
+class CERT_POLICY_INFO extends Struct {
+  external Pointer<Utf8> pszPolicyIdentifier;
+  @Uint32() external int cPolicyQualifier;
+  external Pointer<CERT_POLICY_QUALIFIER_INFO> rgPolicyQualifier;
+}
+
+class CERT_POLICIES_INFO extends Struct {
+  @Uint32() external int cPolicyInfo;
+  external Pointer<CERT_POLICY_INFO> rgPolicyInfo;
+}
+
+class CERT_POLICY_QUALIFIER_NOTICE_REFERENCE extends Struct {
+  external Pointer<Utf8> pszOrganization;
+  @Uint32() external int cNoticeNumbers;
+  external Pointer<Int32> rgNoticeNumbers;
+}
+
+class CERT_POLICY_QUALIFIER_USER_NOTICE extends Struct {
+  external Pointer<CERT_POLICY_QUALIFIER_NOTICE_REFERENCE> pNoticeReference;
+  external Pointer<Utf16> pszDisplayText;
+}
+
+class CPS_URLS extends Struct {
+  external Pointer<Utf16> pszURL;
+  external Pointer<CRYPT_ALGORITHM_IDENTIFIER> pAlgorithm;
+  external Pointer<CRYPTOAPI_BLOB> pDigest;
+}
+
+class CERT_POLICY95_QUALIFIER1 extends Struct {
+  external Pointer<Utf16> pszPracticesReference;
+  external Pointer<Utf8> pszNoticeIdentifier;
+  external Pointer<Utf8> pszNSINoticeIdentifier;
+  @Uint32() external int cCPSURLs;
+  external Pointer<CPS_URLS> rgCPSURLs;
+}
+
+class CERT_POLICY_MAPPING extends Struct {
+  external Pointer<Utf8> pszIssuerDomainPolicy;
+  external Pointer<Utf8> pszSubjectDomainPolicy;
+}
+
+class CERT_POLICY_MAPPINGS_INFO extends Struct {
+  @Uint32() external int cPolicyMapping;
+  external Pointer<CERT_POLICY_MAPPING> rgPolicyMapping;
+}
+
+class CERT_POLICY_CONSTRAINTS_INFO extends Struct {
+  @Int32() external int fRequireExplicitPolicy;
+  @Uint32() external int dwRequireExplicitPolicySkipCerts;
+  @Int32() external int fInhibitPolicyMapping;
+  @Uint32() external int dwInhibitPolicyMappingSkipCerts;
+}
+
+class CRYPT_CONTENT_INFO_SEQUENCE_OF_ANY extends Struct {
+  external Pointer<Utf8> pszObjId;
+  @Uint32() external int cValue;
+  external Pointer<CRYPTOAPI_BLOB> rgValue;
+}
+
+class CRYPT_CONTENT_INFO extends Struct {
+  external Pointer<Utf8> pszObjId;
+  external CRYPTOAPI_BLOB Content;
+}
+
+class CRYPT_SEQUENCE_OF_ANY extends Struct {
+  @Uint32() external int cValue;
+  external Pointer<CRYPTOAPI_BLOB> rgValue;
+}
+
+class CERT_AUTHORITY_KEY_ID2_INFO extends Struct {
+  external CRYPTOAPI_BLOB KeyId;
+  external CERT_ALT_NAME_INFO AuthorityCertIssuer;
+  external CRYPTOAPI_BLOB AuthorityCertSerialNumber;
+}
+
+class CERT_ACCESS_DESCRIPTION extends Struct {
+  external Pointer<Utf8> pszAccessMethod;
+  external CERT_ALT_NAME_ENTRY AccessLocation;
+}
+
+class CERT_AUTHORITY_INFO_ACCESS extends Struct {
+  @Uint32() external int cAccDescr;
+  external Pointer<CERT_ACCESS_DESCRIPTION> rgAccDescr;
+}
+
+class CRL_DIST_POINT_NAME extends Struct {
+  @Uint32() external int dwDistPointNameChoice;
+  @Uint32() external int Anonymous;
+}
+
+class CRL_DIST_POINT extends Struct {
+  external CRL_DIST_POINT_NAME DistPointName;
+  external CRYPT_BIT_BLOB ReasonFlags;
+  external CERT_ALT_NAME_INFO CRLIssuer;
+}
+
+class CRL_DIST_POINTS_INFO extends Struct {
+  @Uint32() external int cDistPoint;
+  external Pointer<CRL_DIST_POINT> rgDistPoint;
+}
+
+class CROSS_CERT_DIST_POINTS_INFO extends Struct {
+  @Uint32() external int dwSyncDeltaTime;
+  @Uint32() external int cDistPoint;
+  external Pointer<CERT_ALT_NAME_INFO> rgDistPoint;
+}
+
+class CERT_PAIR extends Struct {
+  external CRYPTOAPI_BLOB Forward;
+  external CRYPTOAPI_BLOB Reverse;
+}
+
+class CRL_ISSUING_DIST_POINT extends Struct {
+  external CRL_DIST_POINT_NAME DistPointName;
+  @Int32() external int fOnlyContainsUserCerts;
+  @Int32() external int fOnlyContainsCACerts;
+  external CRYPT_BIT_BLOB OnlySomeReasonFlags;
+  @Int32() external int fIndirectCRL;
+}
+
+class CERT_GENERAL_SUBTREE extends Struct {
+  external CERT_ALT_NAME_ENTRY Base;
+  @Uint32() external int dwMinimum;
+  @Int32() external int fMaximum;
+  @Uint32() external int dwMaximum;
+}
+
+class CERT_NAME_CONSTRAINTS_INFO extends Struct {
+  @Uint32() external int cPermittedSubtree;
+  external Pointer<CERT_GENERAL_SUBTREE> rgPermittedSubtree;
+  @Uint32() external int cExcludedSubtree;
+  external Pointer<CERT_GENERAL_SUBTREE> rgExcludedSubtree;
+}
+
+class CERT_DSS_PARAMETERS extends Struct {
+  external CRYPTOAPI_BLOB p;
+  external CRYPTOAPI_BLOB q;
+  external CRYPTOAPI_BLOB g;
+}
+
+class CERT_DH_PARAMETERS extends Struct {
+  external CRYPTOAPI_BLOB p;
+  external CRYPTOAPI_BLOB g;
+}
+
+class CERT_ECC_SIGNATURE extends Struct {
+  external CRYPTOAPI_BLOB r;
+  external CRYPTOAPI_BLOB s;
+}
+
+class CERT_X942_DH_VALIDATION_PARAMS extends Struct {
+  external CRYPT_BIT_BLOB seed;
+  @Uint32() external int pgenCounter;
+}
+
+class CERT_X942_DH_PARAMETERS extends Struct {
+  external CRYPTOAPI_BLOB p;
+  external CRYPTOAPI_BLOB g;
+  external CRYPTOAPI_BLOB q;
+  external CRYPTOAPI_BLOB j;
+  external Pointer<CERT_X942_DH_VALIDATION_PARAMS> pValidationParams;
+}
+
+class CRYPT_X942_OTHER_INFO extends Struct {
+  external Pointer<Utf8> pszContentEncryptionObjId;
+  external __ubyte__ rgbCounter;
+  external __ubyte__ rgbKeyLength;
+  external CRYPTOAPI_BLOB PubInfo;
+}
+
+class CRYPT_ECC_CMS_SHARED_INFO extends Struct {
+  external CRYPT_ALGORITHM_IDENTIFIER Algorithm;
+  external CRYPTOAPI_BLOB EntityUInfo;
+  external __ubyte__ rgbSuppPubInfo;
+}
+
+class CRYPT_RC2_CBC_PARAMETERS extends Struct {
+  @Uint32() external int dwVersion;
+  @Int32() external int fIV;
+  external __ubyte__ rgbIV;
+}
+
+class CRYPT_SMIME_CAPABILITY extends Struct {
+  external Pointer<Utf8> pszObjId;
+  external CRYPTOAPI_BLOB Parameters;
+}
+
+class CRYPT_SMIME_CAPABILITIES extends Struct {
+  @Uint32() external int cCapability;
+  external Pointer<CRYPT_SMIME_CAPABILITY> rgCapability;
+}
+
+class CERT_QC_STATEMENT extends Struct {
+  external Pointer<Utf8> pszStatementId;
+  external CRYPTOAPI_BLOB StatementInfo;
+}
+
+class CERT_QC_STATEMENTS_EXT_INFO extends Struct {
+  @Uint32() external int cStatement;
+  external Pointer<CERT_QC_STATEMENT> rgStatement;
+}
+
+class CRYPT_MASK_GEN_ALGORITHM extends Struct {
+  external Pointer<Utf8> pszObjId;
+  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
+}
+
+class CRYPT_RSA_SSA_PSS_PARAMETERS extends Struct {
+  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
+  external CRYPT_MASK_GEN_ALGORITHM MaskGenAlgorithm;
+  @Uint32() external int dwSaltLength;
+  @Uint32() external int dwTrailerField;
+}
+
+class CRYPT_PSOURCE_ALGORITHM extends Struct {
+  external Pointer<Utf8> pszObjId;
+  external CRYPTOAPI_BLOB EncodingParameters;
+}
+
+class CRYPT_RSAES_OAEP_PARAMETERS extends Struct {
+  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
+  external CRYPT_MASK_GEN_ALGORITHM MaskGenAlgorithm;
+  external CRYPT_PSOURCE_ALGORITHM PSourceAlgorithm;
+}
+
+class CMC_TAGGED_ATTRIBUTE extends Struct {
+  @Uint32() external int dwBodyPartID;
+  external CRYPT_ATTRIBUTE Attribute;
+}
+
+class CMC_TAGGED_CERT_REQUEST extends Struct {
+  @Uint32() external int dwBodyPartID;
+  external CRYPTOAPI_BLOB SignedCertRequest;
+}
+
+class CMC_TAGGED_REQUEST extends Struct {
+  @Uint32() external int dwTaggedRequestChoice;
+  @Uint32() external int Anonymous;
+}
+
+class CMC_TAGGED_CONTENT_INFO extends Struct {
+  @Uint32() external int dwBodyPartID;
+  external CRYPTOAPI_BLOB EncodedContentInfo;
+}
+
+class CMC_TAGGED_OTHER_MSG extends Struct {
+  @Uint32() external int dwBodyPartID;
+  external Pointer<Utf8> pszObjId;
+  external CRYPTOAPI_BLOB Value;
+}
+
+class CMC_DATA_INFO extends Struct {
+  @Uint32() external int cTaggedAttribute;
+  external Pointer<CMC_TAGGED_ATTRIBUTE> rgTaggedAttribute;
+  @Uint32() external int cTaggedRequest;
+  external Pointer<CMC_TAGGED_REQUEST> rgTaggedRequest;
+  @Uint32() external int cTaggedContentInfo;
+  external Pointer<CMC_TAGGED_CONTENT_INFO> rgTaggedContentInfo;
+  @Uint32() external int cTaggedOtherMsg;
+  external Pointer<CMC_TAGGED_OTHER_MSG> rgTaggedOtherMsg;
+}
+
+class CMC_RESPONSE_INFO extends Struct {
+  @Uint32() external int cTaggedAttribute;
+  external Pointer<CMC_TAGGED_ATTRIBUTE> rgTaggedAttribute;
+  @Uint32() external int cTaggedContentInfo;
+  external Pointer<CMC_TAGGED_CONTENT_INFO> rgTaggedContentInfo;
+  @Uint32() external int cTaggedOtherMsg;
+  external Pointer<CMC_TAGGED_OTHER_MSG> rgTaggedOtherMsg;
+}
+
+class CMC_PEND_INFO extends Struct {
+  external CRYPTOAPI_BLOB PendToken;
+  external FILETIME PendTime;
+}
+
+class CMC_STATUS_INFO extends Struct {
+  @Uint32() external int dwStatus;
+  @Uint32() external int cBodyList;
+  external Pointer<Uint32> rgdwBodyList;
+  external Pointer<Utf16> pwszStatusString;
+  @Uint32() external int dwOtherInfoChoice;
+  @Uint32() external int Anonymous;
+}
+
+class CMC_ADD_EXTENSIONS_INFO extends Struct {
+  @Uint32() external int dwCmcDataReference;
+  @Uint32() external int cCertReference;
+  external Pointer<Uint32> rgdwCertReference;
+  @Uint32() external int cExtension;
+  external Pointer<CERT_EXTENSION> rgExtension;
+}
+
+class CMC_ADD_ATTRIBUTES_INFO extends Struct {
+  @Uint32() external int dwCmcDataReference;
+  @Uint32() external int cCertReference;
+  external Pointer<Uint32> rgdwCertReference;
+  @Uint32() external int cAttribute;
+  external Pointer<CRYPT_ATTRIBUTE> rgAttribute;
+}
+
+class CERT_TEMPLATE_EXT extends Struct {
+  external Pointer<Utf8> pszObjId;
+  @Uint32() external int dwMajorVersion;
+  @Int32() external int fMinorVersion;
+  @Uint32() external int dwMinorVersion;
+}
+
+class CERT_HASHED_URL extends Struct {
+  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
+  external CRYPTOAPI_BLOB Hash;
+  external Pointer<Utf16> pwszUrl;
+}
+
+class CERT_LOGOTYPE_DETAILS extends Struct {
+  external Pointer<Utf16> pwszMimeType;
+  @Uint32() external int cHashedUrl;
+  external Pointer<CERT_HASHED_URL> rgHashedUrl;
+}
+
+class CERT_LOGOTYPE_REFERENCE extends Struct {
+  @Uint32() external int cHashedUrl;
+  external Pointer<CERT_HASHED_URL> rgHashedUrl;
+}
+
+class CERT_LOGOTYPE_IMAGE_INFO extends Struct {
+  @Uint32() external int dwLogotypeImageInfoChoice;
+  @Uint32() external int dwFileSize;
+  @Uint32() external int dwXSize;
+  @Uint32() external int dwYSize;
+  @Uint32() external int dwLogotypeImageResolutionChoice;
+  @Uint32() external int Anonymous;
+  external Pointer<Utf16> pwszLanguage;
+}
+
+class CERT_LOGOTYPE_IMAGE extends Struct {
+  external CERT_LOGOTYPE_DETAILS LogotypeDetails;
+  external Pointer<CERT_LOGOTYPE_IMAGE_INFO> pLogotypeImageInfo;
+}
+
+class CERT_LOGOTYPE_AUDIO_INFO extends Struct {
+  @Uint32() external int dwFileSize;
+  @Uint32() external int dwPlayTime;
+  @Uint32() external int dwChannels;
+  @Uint32() external int dwSampleRate;
+  external Pointer<Utf16> pwszLanguage;
+}
+
+class CERT_LOGOTYPE_AUDIO extends Struct {
+  external CERT_LOGOTYPE_DETAILS LogotypeDetails;
+  external Pointer<CERT_LOGOTYPE_AUDIO_INFO> pLogotypeAudioInfo;
+}
+
+class CERT_LOGOTYPE_DATA extends Struct {
+  @Uint32() external int cLogotypeImage;
+  external Pointer<CERT_LOGOTYPE_IMAGE> rgLogotypeImage;
+  @Uint32() external int cLogotypeAudio;
+  external Pointer<CERT_LOGOTYPE_AUDIO> rgLogotypeAudio;
+}
+
+class CERT_LOGOTYPE_INFO extends Struct {
+  @Uint32() external int dwLogotypeInfoChoice;
+  @Uint32() external int Anonymous;
+}
+
+class CERT_OTHER_LOGOTYPE_INFO extends Struct {
+  external Pointer<Utf8> pszObjId;
+  external CERT_LOGOTYPE_INFO LogotypeInfo;
+}
+
+class CERT_LOGOTYPE_EXT_INFO extends Struct {
+  @Uint32() external int cCommunityLogo;
+  external Pointer<CERT_LOGOTYPE_INFO> rgCommunityLogo;
+  external Pointer<CERT_LOGOTYPE_INFO> pIssuerLogo;
+  external Pointer<CERT_LOGOTYPE_INFO> pSubjectLogo;
+  @Uint32() external int cOtherLogo;
+  external Pointer<CERT_OTHER_LOGOTYPE_INFO> rgOtherLogo;
+}
+
+class CERT_BIOMETRIC_DATA extends Struct {
+  @Uint32() external int dwTypeOfBiometricDataChoice;
+  @Uint32() external int Anonymous;
+  external CERT_HASHED_URL HashedUrl;
+}
+
+class CERT_BIOMETRIC_EXT_INFO extends Struct {
+  @Uint32() external int cBiometricData;
+  external Pointer<CERT_BIOMETRIC_DATA> rgBiometricData;
+}
+
+class OCSP_SIGNATURE_INFO extends Struct {
+  external CRYPT_ALGORITHM_IDENTIFIER SignatureAlgorithm;
+  external CRYPT_BIT_BLOB Signature;
+  @Uint32() external int cCertEncoded;
+  external Pointer<CRYPTOAPI_BLOB> rgCertEncoded;
+}
+
+class OCSP_SIGNED_REQUEST_INFO extends Struct {
+  external CRYPTOAPI_BLOB ToBeSigned;
+  external Pointer<OCSP_SIGNATURE_INFO> pOptionalSignatureInfo;
+}
+
+class OCSP_CERT_ID extends Struct {
+  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
+  external CRYPTOAPI_BLOB IssuerNameHash;
+  external CRYPTOAPI_BLOB IssuerKeyHash;
+  external CRYPTOAPI_BLOB SerialNumber;
+}
+
+class OCSP_REQUEST_ENTRY extends Struct {
+  external OCSP_CERT_ID CertId;
+  @Uint32() external int cExtension;
+  external Pointer<CERT_EXTENSION> rgExtension;
+}
+
+class OCSP_REQUEST_INFO extends Struct {
+  @Uint32() external int dwVersion;
+  external Pointer<CERT_ALT_NAME_ENTRY> pRequestorName;
+  @Uint32() external int cRequestEntry;
+  external Pointer<OCSP_REQUEST_ENTRY> rgRequestEntry;
+  @Uint32() external int cExtension;
+  external Pointer<CERT_EXTENSION> rgExtension;
+}
+
+class OCSP_RESPONSE_INFO extends Struct {
+  @Uint32() external int dwStatus;
+  external Pointer<Utf8> pszObjId;
+  external CRYPTOAPI_BLOB Value;
+}
+
+class OCSP_BASIC_SIGNED_RESPONSE_INFO extends Struct {
+  external CRYPTOAPI_BLOB ToBeSigned;
+  external OCSP_SIGNATURE_INFO SignatureInfo;
+}
+
+class OCSP_BASIC_REVOKED_INFO extends Struct {
+  external FILETIME RevocationDate;
+  @Uint32() external int dwCrlReasonCode;
+}
+
+class OCSP_BASIC_RESPONSE_ENTRY extends Struct {
+  external OCSP_CERT_ID CertId;
+  @Uint32() external int dwCertStatus;
+  @Uint32() external int Anonymous;
+  external FILETIME ThisUpdate;
+  external FILETIME NextUpdate;
+  @Uint32() external int cExtension;
+  external Pointer<CERT_EXTENSION> rgExtension;
+}
+
+class OCSP_BASIC_RESPONSE_INFO extends Struct {
+  @Uint32() external int dwVersion;
+  @Uint32() external int dwResponderIdChoice;
+  @Uint32() external int Anonymous;
+  external FILETIME ProducedAt;
+  @Uint32() external int cResponseEntry;
+  external Pointer<OCSP_BASIC_RESPONSE_ENTRY> rgResponseEntry;
+  @Uint32() external int cExtension;
+  external Pointer<CERT_EXTENSION> rgExtension;
+}
+
+class CERT_SUPPORTED_ALGORITHM_INFO extends Struct {
+  external CRYPT_ALGORITHM_IDENTIFIER Algorithm;
+  external CRYPT_BIT_BLOB IntendedKeyUsage;
+  external CERT_POLICIES_INFO IntendedCertPolicies;
+}
+
+class CERT_TPM_SPECIFICATION_INFO extends Struct {
+  external Pointer<Utf16> pwszFamily;
+  @Uint32() external int dwLevel;
+  @Uint32() external int dwRevision;
+}
+
+class CRYPT_OID_FUNC_ENTRY extends Struct {
+  external Pointer<Utf8> pszOID;
+  external Pointer pvFuncAddr;
+}
+
+class CRYPT_OID_INFO extends Struct {
+  @Uint32() external int cbSize;
+  external Pointer<Utf8> pszOID;
+  external Pointer<Utf16> pwszName;
+  @Uint32() external int dwGroupId;
+  @Uint32() external int Anonymous;
+  external CRYPTOAPI_BLOB ExtraInfo;
+}
+
+class CERT_STRONG_SIGN_SERIALIZED_INFO extends Struct {
+  @Uint32() external int dwFlags;
+  external Pointer<Utf16> pwszCNGSignHashAlgids;
+  external Pointer<Utf16> pwszCNGPubKeyMinBitLengths;
+}
+
+class CERT_STRONG_SIGN_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwInfoChoice;
+  @Uint32() external int Anonymous;
+}
+
+class CERT_ISSUER_SERIAL_NUMBER extends Struct {
+  external CRYPTOAPI_BLOB Issuer;
+  external CRYPTOAPI_BLOB SerialNumber;
+}
+
+class CERT_ID extends Struct {
+  @Uint32() external int dwIdChoice;
+  @Uint32() external int Anonymous;
+}
+
+class CMSG_SIGNER_ENCODE_INFO extends Struct {
+  @Uint32() external int cbSize;
+  external Pointer<CERT_INFO> pCertInfo;
+  @Uint32() external int Anonymous;
+  @Uint32() external int dwKeySpec;
+  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
+  external Pointer pvHashAuxInfo;
+  @Uint32() external int cAuthAttr;
+  external Pointer<CRYPT_ATTRIBUTE> rgAuthAttr;
+  @Uint32() external int cUnauthAttr;
+  external Pointer<CRYPT_ATTRIBUTE> rgUnauthAttr;
+}
+
+class CMSG_SIGNED_ENCODE_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int cSigners;
+  external Pointer<CMSG_SIGNER_ENCODE_INFO> rgSigners;
+  @Uint32() external int cCertEncoded;
+  external Pointer<CRYPTOAPI_BLOB> rgCertEncoded;
+  @Uint32() external int cCrlEncoded;
+  external Pointer<CRYPTOAPI_BLOB> rgCrlEncoded;
+}
+
+class CMSG_ENVELOPED_ENCODE_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @IntPtr() external int hCryptProv;
+  external CRYPT_ALGORITHM_IDENTIFIER ContentEncryptionAlgorithm;
+  external Pointer pvEncryptionAuxInfo;
+  @Uint32() external int cRecipients;
+  external Pointer<Pointer<CERT_INFO>> rgpRecipients;
+}
+
+class CMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO extends Struct {
+  @Uint32() external int cbSize;
+  external CRYPT_ALGORITHM_IDENTIFIER KeyEncryptionAlgorithm;
+  external Pointer pvKeyEncryptionAuxInfo;
+  @IntPtr() external int hCryptProv;
+  external CRYPT_BIT_BLOB RecipientPublicKey;
+  external CERT_ID RecipientId;
+}
+
+class CMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO extends Struct {
+  @Uint32() external int cbSize;
+  external CRYPT_BIT_BLOB RecipientPublicKey;
+  external CERT_ID RecipientId;
+  external FILETIME Date;
+  external Pointer<CRYPT_ATTRIBUTE_TYPE_VALUE> pOtherAttr;
+}
+
+class CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO extends Struct {
+  @Uint32() external int cbSize;
+  external CRYPT_ALGORITHM_IDENTIFIER KeyEncryptionAlgorithm;
+  external Pointer pvKeyEncryptionAuxInfo;
+  external CRYPT_ALGORITHM_IDENTIFIER KeyWrapAlgorithm;
+  external Pointer pvKeyWrapAuxInfo;
+  @IntPtr() external int hCryptProv;
+  @Uint32() external int dwKeySpec;
+  @Uint32() external int dwKeyChoice;
+  @Uint32() external int Anonymous;
+  external CRYPTOAPI_BLOB UserKeyingMaterial;
+  @Uint32() external int cRecipientEncryptedKeys;
+  external Pointer<Pointer<CMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO>> rgpRecipientEncryptedKeys;
+}
+
+class CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO extends Struct {
+  @Uint32() external int cbSize;
+  external CRYPT_ALGORITHM_IDENTIFIER KeyEncryptionAlgorithm;
+  external Pointer pvKeyEncryptionAuxInfo;
+  @IntPtr() external int hCryptProv;
+  @Uint32() external int dwKeyChoice;
+  @Uint32() external int Anonymous;
+  external CRYPTOAPI_BLOB KeyId;
+  external FILETIME Date;
+  external Pointer<CRYPT_ATTRIBUTE_TYPE_VALUE> pOtherAttr;
+}
+
+class CMSG_RECIPIENT_ENCODE_INFO extends Struct {
+  @Uint32() external int dwRecipientChoice;
+  @Uint32() external int Anonymous;
+}
+
+class CMSG_RC2_AUX_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwBitLen;
+}
+
+class CMSG_SP3_COMPATIBLE_AUX_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwFlags;
+}
+
+class CMSG_RC4_AUX_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwBitLen;
+}
+
+class CMSG_SIGNED_AND_ENVELOPED_ENCODE_INFO extends Struct {
+  @Uint32() external int cbSize;
+  external CMSG_SIGNED_ENCODE_INFO SignedInfo;
+  external CMSG_ENVELOPED_ENCODE_INFO EnvelopedInfo;
+}
+
+class CMSG_HASHED_ENCODE_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @IntPtr() external int hCryptProv;
+  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
+  external Pointer pvHashAuxInfo;
+}
+
+class CMSG_ENCRYPTED_ENCODE_INFO extends Struct {
+  @Uint32() external int cbSize;
+  external CRYPT_ALGORITHM_IDENTIFIER ContentEncryptionAlgorithm;
+  external Pointer pvEncryptionAuxInfo;
+}
+
+class CMSG_STREAM_INFO extends Struct {
+  @Uint32() external int cbContent;
+  external PFN_CMSG_STREAM_OUTPUT pfnStreamOutput;
+  external Pointer pvArg;
+}
+
+class CMSG_SIGNER_INFO extends Struct {
+  @Uint32() external int dwVersion;
+  external CRYPTOAPI_BLOB Issuer;
+  external CRYPTOAPI_BLOB SerialNumber;
+  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
+  external CRYPT_ALGORITHM_IDENTIFIER HashEncryptionAlgorithm;
+  external CRYPTOAPI_BLOB EncryptedHash;
+  external CRYPT_ATTRIBUTES AuthAttrs;
+  external CRYPT_ATTRIBUTES UnauthAttrs;
+}
+
+class CMSG_CMS_SIGNER_INFO extends Struct {
+  @Uint32() external int dwVersion;
+  external CERT_ID SignerId;
+  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
+  external CRYPT_ALGORITHM_IDENTIFIER HashEncryptionAlgorithm;
+  external CRYPTOAPI_BLOB EncryptedHash;
+  external CRYPT_ATTRIBUTES AuthAttrs;
+  external CRYPT_ATTRIBUTES UnauthAttrs;
+}
+
+class CMSG_KEY_TRANS_RECIPIENT_INFO extends Struct {
+  @Uint32() external int dwVersion;
+  external CERT_ID RecipientId;
+  external CRYPT_ALGORITHM_IDENTIFIER KeyEncryptionAlgorithm;
+  external CRYPTOAPI_BLOB EncryptedKey;
+}
+
+class CMSG_RECIPIENT_ENCRYPTED_KEY_INFO extends Struct {
+  external CERT_ID RecipientId;
+  external CRYPTOAPI_BLOB EncryptedKey;
+  external FILETIME Date;
+  external Pointer<CRYPT_ATTRIBUTE_TYPE_VALUE> pOtherAttr;
+}
+
+class CMSG_KEY_AGREE_RECIPIENT_INFO extends Struct {
+  @Uint32() external int dwVersion;
+  @Uint32() external int dwOriginatorChoice;
+  @Uint32() external int Anonymous;
+  external CRYPTOAPI_BLOB UserKeyingMaterial;
+  external CRYPT_ALGORITHM_IDENTIFIER KeyEncryptionAlgorithm;
+  @Uint32() external int cRecipientEncryptedKeys;
+  external Pointer<Pointer<CMSG_RECIPIENT_ENCRYPTED_KEY_INFO>> rgpRecipientEncryptedKeys;
+}
+
+class CMSG_MAIL_LIST_RECIPIENT_INFO extends Struct {
+  @Uint32() external int dwVersion;
+  external CRYPTOAPI_BLOB KeyId;
+  external CRYPT_ALGORITHM_IDENTIFIER KeyEncryptionAlgorithm;
+  external CRYPTOAPI_BLOB EncryptedKey;
+  external FILETIME Date;
+  external Pointer<CRYPT_ATTRIBUTE_TYPE_VALUE> pOtherAttr;
+}
+
+class CMSG_CMS_RECIPIENT_INFO extends Struct {
+  @Uint32() external int dwRecipientChoice;
+  @Uint32() external int Anonymous;
+}
+
+class CMSG_CTRL_VERIFY_SIGNATURE_EX_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @IntPtr() external int hCryptProv;
+  @Uint32() external int dwSignerIndex;
+  @Uint32() external int dwSignerType;
+  external Pointer pvSigner;
+}
+
+class CMSG_CTRL_DECRYPT_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int Anonymous;
+  @Uint32() external int dwKeySpec;
+  @Uint32() external int dwRecipientIndex;
+}
+
+class CMSG_CTRL_KEY_TRANS_DECRYPT_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int Anonymous;
+  @Uint32() external int dwKeySpec;
+  external Pointer<CMSG_KEY_TRANS_RECIPIENT_INFO> pKeyTrans;
+  @Uint32() external int dwRecipientIndex;
+}
+
+class CMSG_CTRL_KEY_AGREE_DECRYPT_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int Anonymous;
+  @Uint32() external int dwKeySpec;
+  external Pointer<CMSG_KEY_AGREE_RECIPIENT_INFO> pKeyAgree;
+  @Uint32() external int dwRecipientIndex;
+  @Uint32() external int dwRecipientEncryptedKeyIndex;
+  external CRYPT_BIT_BLOB OriginatorPublicKey;
+}
+
+class CMSG_CTRL_MAIL_LIST_DECRYPT_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @IntPtr() external int hCryptProv;
+  external Pointer<CMSG_MAIL_LIST_RECIPIENT_INFO> pMailList;
+  @Uint32() external int dwRecipientIndex;
+  @Uint32() external int dwKeyChoice;
+  @Uint32() external int Anonymous;
+}
+
+class CMSG_CTRL_ADD_SIGNER_UNAUTH_ATTR_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwSignerIndex;
+  external CRYPTOAPI_BLOB blob;
+}
+
+class CMSG_CTRL_DEL_SIGNER_UNAUTH_ATTR_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwSignerIndex;
+  @Uint32() external int dwUnauthAttrIndex;
+}
+
+class CMSG_CONTENT_ENCRYPT_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @IntPtr() external int hCryptProv;
+  external CRYPT_ALGORITHM_IDENTIFIER ContentEncryptionAlgorithm;
+  external Pointer pvEncryptionAuxInfo;
+  @Uint32() external int cRecipients;
+  external Pointer<CMSG_RECIPIENT_ENCODE_INFO> rgCmsRecipients;
+  external PFN_CMSG_ALLOC pfnAlloc;
+  external PFN_CMSG_FREE pfnFree;
+  @Uint32() external int dwEncryptFlags;
+  @Uint32() external int Anonymous;
+  @Uint32() external int dwFlags;
+  @Int32() external int fCNG;
+  external Pointer<Uint8> pbCNGContentEncryptKeyObject;
+  external Pointer<Uint8> pbContentEncryptKey;
+  @Uint32() external int cbContentEncryptKey;
+}
+
+class CMSG_KEY_TRANS_ENCRYPT_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwRecipientIndex;
+  external CRYPT_ALGORITHM_IDENTIFIER KeyEncryptionAlgorithm;
+  external CRYPTOAPI_BLOB EncryptedKey;
+  @Uint32() external int dwFlags;
+}
+
+class CMSG_KEY_AGREE_KEY_ENCRYPT_INFO extends Struct {
+  @Uint32() external int cbSize;
+  external CRYPTOAPI_BLOB EncryptedKey;
+}
+
+class CMSG_KEY_AGREE_ENCRYPT_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwRecipientIndex;
+  external CRYPT_ALGORITHM_IDENTIFIER KeyEncryptionAlgorithm;
+  external CRYPTOAPI_BLOB UserKeyingMaterial;
+  @Uint32() external int dwOriginatorChoice;
+  @Uint32() external int Anonymous;
+  @Uint32() external int cKeyAgreeKeyEncryptInfo;
+  external Pointer<Pointer<CMSG_KEY_AGREE_KEY_ENCRYPT_INFO>> rgpKeyAgreeKeyEncryptInfo;
+  @Uint32() external int dwFlags;
+}
+
+class CMSG_MAIL_LIST_ENCRYPT_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwRecipientIndex;
+  external CRYPT_ALGORITHM_IDENTIFIER KeyEncryptionAlgorithm;
+  external CRYPTOAPI_BLOB EncryptedKey;
+  @Uint32() external int dwFlags;
+}
+
+class CMSG_CNG_CONTENT_DECRYPT_INFO extends Struct {
+  @Uint32() external int cbSize;
+  external CRYPT_ALGORITHM_IDENTIFIER ContentEncryptionAlgorithm;
+  external PFN_CMSG_ALLOC pfnAlloc;
+  external PFN_CMSG_FREE pfnFree;
+  @IntPtr() external int hNCryptKey;
+  external Pointer<Uint8> pbContentEncryptKey;
+  @Uint32() external int cbContentEncryptKey;
+  external Pointer hCNGContentEncryptKey;
+  external Pointer<Uint8> pbCNGContentEncryptKeyObject;
+}
+
+class CERT_CONTEXT extends Struct {
+  @Uint32() external int dwCertEncodingType;
+  external Pointer<Uint8> pbCertEncoded;
+  @Uint32() external int cbCertEncoded;
+  external Pointer<CERT_INFO> pCertInfo;
+  external Pointer hCertStore;
+}
+
+class CRL_CONTEXT extends Struct {
+  @Uint32() external int dwCertEncodingType;
+  external Pointer<Uint8> pbCrlEncoded;
+  @Uint32() external int cbCrlEncoded;
+  external Pointer<CRL_INFO> pCrlInfo;
+  external Pointer hCertStore;
+}
+
+class CTL_CONTEXT extends Struct {
+  @Uint32() external int dwMsgAndCertEncodingType;
+  external Pointer<Uint8> pbCtlEncoded;
+  @Uint32() external int cbCtlEncoded;
+  external Pointer<CTL_INFO> pCtlInfo;
+  external Pointer hCertStore;
+  external Pointer hCryptMsg;
+  external Pointer<Uint8> pbCtlContent;
+  @Uint32() external int cbCtlContent;
+}
+
+class CRYPT_KEY_PROV_PARAM extends Struct {
+  @Uint32() external int dwParam;
+  external Pointer<Uint8> pbData;
+  @Uint32() external int cbData;
+  @Uint32() external int dwFlags;
+}
+
+class CRYPT_KEY_PROV_INFO extends Struct {
+  external Pointer<Utf16> pwszContainerName;
+  external Pointer<Utf16> pwszProvName;
+  @Uint32() external int dwProvType;
+  @Uint32() external int dwFlags;
+  @Uint32() external int cProvParam;
+  external Pointer<CRYPT_KEY_PROV_PARAM> rgProvParam;
+  @Uint32() external int dwKeySpec;
+}
+
+class CERT_KEY_CONTEXT extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int Anonymous;
+  @Uint32() external int dwKeySpec;
+}
+
+class ROOT_INFO_LUID extends Struct {
+  @Uint32() external int LowPart;
+  @Int32() external int HighPart;
+}
+
+class CRYPT_SMART_CARD_ROOT_INFO extends Struct {
+  external __ubyte__ rgbCardID;
+  external ROOT_INFO_LUID luid;
+}
+
+class CERT_SYSTEM_STORE_RELOCATE_PARA extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+}
+
+class CERT_REGISTRY_STORE_CLIENT_GPT_PARA extends Struct {
+  @IntPtr() external int hKeyBase;
+  external Pointer<Utf16> pwszRegPath;
+}
+
+class CERT_REGISTRY_STORE_ROAMING_PARA extends Struct {
+  @IntPtr() external int hKey;
+  external Pointer<Utf16> pwszStoreDirectory;
+}
+
+class CERT_LDAP_STORE_OPENED_PARA extends Struct {
+  external Pointer pvLdapSessionHandle;
+  external Pointer<Utf16> pwszLdapUrl;
+}
+
+class CERT_STORE_PROV_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int cStoreProvFunc;
+  external Pointer<Pointer> rgpvStoreProvFunc;
+  external Pointer hStoreProv;
+  @Uint32() external int dwStoreProvFlags;
+  external Pointer hStoreProvFuncAddr2;
+}
+
+class CERT_STORE_PROV_FIND_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwMsgAndCertEncodingType;
+  @Uint32() external int dwFindFlags;
+  @Uint32() external int dwFindType;
+  external Pointer pvFindPara;
+}
+
+class CRL_FIND_ISSUED_FOR_PARA extends Struct {
+  external Pointer<CERT_CONTEXT> pSubjectCert;
+  external Pointer<CERT_CONTEXT> pIssuerCert;
+}
+
+class CTL_ANY_SUBJECT_INFO extends Struct {
+  external CRYPT_ALGORITHM_IDENTIFIER SubjectAlgorithm;
+  external CRYPTOAPI_BLOB SubjectIdentifier;
+}
+
+class CTL_FIND_USAGE_PARA extends Struct {
+  @Uint32() external int cbSize;
+  external CTL_USAGE SubjectUsage;
+  external CRYPTOAPI_BLOB ListIdentifier;
+  external Pointer<CERT_INFO> pSigner;
+}
+
+class CTL_FIND_SUBJECT_PARA extends Struct {
+  @Uint32() external int cbSize;
+  external Pointer<CTL_FIND_USAGE_PARA> pUsagePara;
+  @Uint32() external int dwSubjectType;
+  external Pointer pvSubject;
+}
+
+class CERT_CREATE_CONTEXT_PARA extends Struct {
+  @Uint32() external int cbSize;
+  external PFN_CRYPT_FREE pfnFree;
+  external Pointer pvFree;
+  external PFN_CERT_CREATE_CONTEXT_SORT_FUNC pfnSort;
+  external Pointer pvSort;
+}
+
+class CERT_SYSTEM_STORE_INFO extends Struct {
+  @Uint32() external int cbSize;
+}
+
+class CERT_PHYSICAL_STORE_INFO extends Struct {
+  @Uint32() external int cbSize;
+  external Pointer<Utf8> pszOpenStoreProvider;
+  @Uint32() external int dwOpenEncodingType;
+  @Uint32() external int dwOpenFlags;
+  external CRYPTOAPI_BLOB OpenParameters;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwPriority;
+}
+
+class CTL_VERIFY_USAGE_PARA extends Struct {
+  @Uint32() external int cbSize;
+  external CRYPTOAPI_BLOB ListIdentifier;
+  @Uint32() external int cCtlStore;
+  external Pointer<Pointer> rghCtlStore;
+  @Uint32() external int cSignerStore;
+  external Pointer<Pointer> rghSignerStore;
+}
+
+class CTL_VERIFY_USAGE_STATUS extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwError;
+  @Uint32() external int dwFlags;
+  external Pointer<Pointer<CTL_CONTEXT>> ppCtl;
+  @Uint32() external int dwCtlEntryIndex;
+  external Pointer<Pointer<CERT_CONTEXT>> ppSigner;
+  @Uint32() external int dwSignerIndex;
+}
+
+class CERT_REVOCATION_CRL_INFO extends Struct {
+  @Uint32() external int cbSize;
+  external Pointer<CRL_CONTEXT> pBaseCrlContext;
+  external Pointer<CRL_CONTEXT> pDeltaCrlContext;
+  external Pointer<CRL_ENTRY> pCrlEntry;
+  @Int32() external int fDeltaCrlEntry;
+}
+
+class CERT_REVOCATION_PARA extends Struct {
+  @Uint32() external int cbSize;
+  external Pointer<CERT_CONTEXT> pIssuerCert;
+  @Uint32() external int cCertStore;
+  external Pointer<Pointer> rgCertStore;
+  external Pointer hCrlStore;
+  external Pointer<FILETIME> pftTimeToUse;
+}
+
+class CERT_REVOCATION_STATUS extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwIndex;
+  @Uint32() external int dwError;
+  @Uint32() external int dwReason;
+  @Int32() external int fHasFreshnessTime;
+  @Uint32() external int dwFreshnessTime;
+}
+
+class CRYPT_VERIFY_CERT_SIGN_STRONG_PROPERTIES_INFO extends Struct {
+  external CRYPTOAPI_BLOB CertSignHashCNGAlgPropData;
+  external CRYPTOAPI_BLOB CertIssuerPubKeyBitLengthPropData;
+}
+
+class CRYPT_VERIFY_CERT_SIGN_WEAK_HASH_INFO extends Struct {
+  @Uint32() external int cCNGHashAlgid;
+  external Pointer<Pointer<Utf16>> rgpwszCNGHashAlgid;
+  @Uint32() external int dwWeakIndex;
+}
+
+class CRYPT_DEFAULT_CONTEXT_MULTI_OID_PARA extends Struct {
+  @Uint32() external int cOID;
+  external Pointer<Pointer<Utf8>> rgpszOID;
+}
+
+class CRYPT_SIGN_MESSAGE_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwMsgEncodingType;
+  external Pointer<CERT_CONTEXT> pSigningCert;
+  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
+  external Pointer pvHashAuxInfo;
+  @Uint32() external int cMsgCert;
+  external Pointer<Pointer<CERT_CONTEXT>> rgpMsgCert;
+  @Uint32() external int cMsgCrl;
+  external Pointer<Pointer<CRL_CONTEXT>> rgpMsgCrl;
+  @Uint32() external int cAuthAttr;
+  external Pointer<CRYPT_ATTRIBUTE> rgAuthAttr;
+  @Uint32() external int cUnauthAttr;
+  external Pointer<CRYPT_ATTRIBUTE> rgUnauthAttr;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwInnerContentType;
+}
+
+class CRYPT_VERIFY_MESSAGE_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwMsgAndCertEncodingType;
+  @IntPtr() external int hCryptProv;
+  external PFN_CRYPT_GET_SIGNER_CERTIFICATE pfnGetSignerCertificate;
+  external Pointer pvGetArg;
+}
+
+class CRYPT_ENCRYPT_MESSAGE_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwMsgEncodingType;
+  @IntPtr() external int hCryptProv;
+  external CRYPT_ALGORITHM_IDENTIFIER ContentEncryptionAlgorithm;
+  external Pointer pvEncryptionAuxInfo;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwInnerContentType;
+}
+
+class CRYPT_DECRYPT_MESSAGE_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwMsgAndCertEncodingType;
+  @Uint32() external int cCertStore;
+  external Pointer<Pointer> rghCertStore;
+}
+
+class CRYPT_HASH_MESSAGE_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwMsgEncodingType;
+  @IntPtr() external int hCryptProv;
+  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
+  external Pointer pvHashAuxInfo;
+}
+
+class CRYPT_KEY_SIGN_MESSAGE_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwMsgAndCertEncodingType;
+  @Uint32() external int Anonymous;
+  @Uint32() external int dwKeySpec;
+  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
+  external Pointer pvHashAuxInfo;
+  external CRYPT_ALGORITHM_IDENTIFIER PubKeyAlgorithm;
+}
+
+class CRYPT_KEY_VERIFY_MESSAGE_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwMsgEncodingType;
+  @IntPtr() external int hCryptProv;
+}
+
+class CERT_CHAIN extends Struct {
+  @Uint32() external int cCerts;
+  external Pointer<CRYPTOAPI_BLOB> certs;
+  external CRYPT_KEY_PROV_INFO keyLocatorInfo;
+}
+
+class CRYPT_BLOB_ARRAY extends Struct {
+  @Uint32() external int cBlob;
+  external Pointer<CRYPTOAPI_BLOB> rgBlob;
+}
+
+class CRYPT_CREDENTIALS extends Struct {
+  @Uint32() external int cbSize;
+  external Pointer<Utf8> pszCredentialsOid;
+  external Pointer pvCredentials;
+}
+
+class CRYPT_PASSWORD_CREDENTIALSA extends Struct {
+  @Uint32() external int cbSize;
+  external Pointer<Utf8> pszUsername;
+  external Pointer<Utf8> pszPassword;
+}
+
+class CRYPT_PASSWORD_CREDENTIALSW extends Struct {
+  @Uint32() external int cbSize;
+  external Pointer<Utf16> pszUsername;
+  external Pointer<Utf16> pszPassword;
+}
+
+class CRYPTNET_URL_CACHE_PRE_FETCH_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwObjectType;
+  @Uint32() external int dwError;
+  @Uint32() external int dwReserved;
+  external FILETIME ThisUpdateTime;
+  external FILETIME NextUpdateTime;
+  external FILETIME PublishTime;
+}
+
+class CRYPTNET_URL_CACHE_FLUSH_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwExemptSeconds;
+  external FILETIME ExpireTime;
+}
+
+class CRYPTNET_URL_CACHE_RESPONSE_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint16() external int wResponseType;
+  @Uint16() external int wResponseFlags;
+  external FILETIME LastModifiedTime;
+  @Uint32() external int dwMaxAge;
+  external Pointer<Utf16> pwszETag;
+  @Uint32() external int dwProxyId;
+}
+
+class CRYPT_RETRIEVE_AUX_INFO extends Struct {
+  @Uint32() external int cbSize;
+  external Pointer<FILETIME> pLastSyncTime;
+  @Uint32() external int dwMaxUrlRetrievalByteCount;
+  external Pointer<CRYPTNET_URL_CACHE_PRE_FETCH_INFO> pPreFetchInfo;
+  external Pointer<CRYPTNET_URL_CACHE_FLUSH_INFO> pFlushInfo;
+  external Pointer<Pointer<CRYPTNET_URL_CACHE_RESPONSE_INFO>> ppResponseInfo;
+  external Pointer<Utf16> pwszCacheFileNamePrefix;
+  external Pointer<FILETIME> pftCacheResync;
+  @Int32() external int fProxyCacheRetrieval;
+  @Uint32() external int dwHttpStatusCode;
+  external Pointer<Pointer<Utf16>> ppwszErrorResponseHeaders;
+  external Pointer<Pointer<CRYPTOAPI_BLOB>> ppErrorContentBlob;
+}
+
+class CRYPT_ASYNC_RETRIEVAL_COMPLETION extends Struct {
+  external PFN_CRYPT_ASYNC_RETRIEVAL_COMPLETION_FUNC pfnCompletion;
+  external Pointer pvCompletion;
+}
+
+class CRYPT_URL_ARRAY extends Struct {
+  @Uint32() external int cUrl;
+  external Pointer<Pointer<Utf16>> rgwszUrl;
+}
+
+class CRYPT_URL_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwSyncDeltaTime;
+  @Uint32() external int cGroup;
+  external Pointer<Uint32> rgcGroupEntry;
+}
+
+class CERT_CRL_CONTEXT_PAIR extends Struct {
+  external Pointer<CERT_CONTEXT> pCertContext;
+  external Pointer<CRL_CONTEXT> pCrlContext;
+}
+
+class CRYPT_GET_TIME_VALID_OBJECT_EXTRA_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @Int32() external int iDeltaCrlIndicator;
+  external Pointer<FILETIME> pftCacheResync;
+  external Pointer<FILETIME> pLastSyncTime;
+  external Pointer<FILETIME> pMaxAgeTime;
+  external Pointer<CERT_REVOCATION_CHAIN_PARA> pChainPara;
+  external Pointer<CRYPTOAPI_BLOB> pDeltaCrlIndicator;
+}
+
+class CERT_CHAIN_ENGINE_CONFIG extends Struct {
+  @Uint32() external int cbSize;
+  external Pointer hRestrictedRoot;
+  external Pointer hRestrictedTrust;
+  external Pointer hRestrictedOther;
+  @Uint32() external int cAdditionalStore;
+  external Pointer<Pointer> rghAdditionalStore;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwUrlRetrievalTimeout;
+  @Uint32() external int MaximumCachedCertificates;
+  @Uint32() external int CycleDetectionModulus;
+  external Pointer hExclusiveRoot;
+  external Pointer hExclusiveTrustedPeople;
+  @Uint32() external int dwExclusiveFlags;
+}
+
+class CERT_TRUST_STATUS extends Struct {
+  @Uint32() external int dwErrorStatus;
+  @Uint32() external int dwInfoStatus;
+}
+
+class CERT_REVOCATION_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwRevocationResult;
+  external Pointer<Utf8> pszRevocationOid;
+  external Pointer pvOidSpecificInfo;
+  @Int32() external int fHasFreshnessTime;
+  @Uint32() external int dwFreshnessTime;
+  external Pointer<CERT_REVOCATION_CRL_INFO> pCrlInfo;
+}
+
+class CERT_TRUST_LIST_INFO extends Struct {
+  @Uint32() external int cbSize;
+  external Pointer<CTL_ENTRY> pCtlEntry;
+  external Pointer<CTL_CONTEXT> pCtlContext;
+}
+
+class CERT_CHAIN_ELEMENT extends Struct {
+  @Uint32() external int cbSize;
+  external Pointer<CERT_CONTEXT> pCertContext;
+  external CERT_TRUST_STATUS TrustStatus;
+  external Pointer<CERT_REVOCATION_INFO> pRevocationInfo;
+  external Pointer<CTL_USAGE> pIssuanceUsage;
+  external Pointer<CTL_USAGE> pApplicationUsage;
+  external Pointer<Utf16> pwszExtendedErrorInfo;
+}
+
+class CERT_SIMPLE_CHAIN extends Struct {
+  @Uint32() external int cbSize;
+  external CERT_TRUST_STATUS TrustStatus;
+  @Uint32() external int cElement;
+  external Pointer<Pointer<CERT_CHAIN_ELEMENT>> rgpElement;
+  external Pointer<CERT_TRUST_LIST_INFO> pTrustListInfo;
+  @Int32() external int fHasRevocationFreshnessTime;
+  @Uint32() external int dwRevocationFreshnessTime;
+}
+
+class CERT_CHAIN_CONTEXT extends Struct {
+  @Uint32() external int cbSize;
+  external CERT_TRUST_STATUS TrustStatus;
+  @Uint32() external int cChain;
+  external Pointer<Pointer<CERT_SIMPLE_CHAIN>> rgpChain;
+  @Uint32() external int cLowerQualityChainContext;
+  external Pointer<Pointer<CERT_CHAIN_CONTEXT>> rgpLowerQualityChainContext;
+  @Int32() external int fHasRevocationFreshnessTime;
+  @Uint32() external int dwRevocationFreshnessTime;
+  @Uint32() external int dwCreateFlags;
+  external GUID ChainId;
+}
+
+class CERT_USAGE_MATCH extends Struct {
+  @Uint32() external int dwType;
+  external CTL_USAGE Usage;
+}
+
+class CTL_USAGE_MATCH extends Struct {
+  @Uint32() external int dwType;
+  external CTL_USAGE Usage;
+}
+
+class CERT_CHAIN_PARA extends Struct {
+  @Uint32() external int cbSize;
+  external CERT_USAGE_MATCH RequestedUsage;
+}
+
+class CERT_REVOCATION_CHAIN_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @IntPtr() external int hChainEngine;
+  external Pointer hAdditionalStore;
+  @Uint32() external int dwChainFlags;
+  @Uint32() external int dwUrlRetrievalTimeout;
+  external Pointer<FILETIME> pftCurrentTime;
+  external Pointer<FILETIME> pftCacheResync;
+  @Uint32() external int cbMaxUrlRetrievalByteCount;
+}
+
+class CRL_REVOCATION_INFO extends Struct {
+  external Pointer<CRL_ENTRY> pCrlEntry;
+  external Pointer<CRL_CONTEXT> pCrlContext;
+  external Pointer<CERT_CHAIN_CONTEXT> pCrlIssuerChain;
+}
+
+class CERT_CHAIN_FIND_BY_ISSUER_PARA extends Struct {
+  @Uint32() external int cbSize;
+  external Pointer<Utf8> pszUsageIdentifier;
+  @Uint32() external int dwKeySpec;
+  @Uint32() external int dwAcquirePrivateKeyFlags;
+  @Uint32() external int cIssuer;
+  external Pointer<CRYPTOAPI_BLOB> rgIssuer;
+  external PFN_CERT_CHAIN_FIND_BY_ISSUER_CALLBACK pfnFindCallback;
+  external Pointer pvFindArg;
+}
+
+class CERT_CHAIN_POLICY_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwFlags;
+  external Pointer pvExtraPolicyPara;
+}
+
+class CERT_CHAIN_POLICY_STATUS extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwError;
+  @Int32() external int lChainIndex;
+  @Int32() external int lElementIndex;
+  external Pointer pvExtraPolicyStatus;
+}
+
+class AUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwRegPolicySettings;
+  external Pointer<CMSG_SIGNER_INFO> pSignerInfo;
+}
+
+class AUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_STATUS extends Struct {
+  @Uint32() external int cbSize;
+  @Int32() external int fCommercial;
+}
+
+class AUTHENTICODE_TS_EXTRA_CERT_CHAIN_POLICY_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwRegPolicySettings;
+  @Int32() external int fCommercial;
+}
+
+class HTTPSPolicyCallbackData extends Struct {
+  @Uint32() external int Anonymous;
+  @Uint32() external int dwAuthType;
+  @Uint32() external int fdwChecks;
+  external Pointer<Utf16> pwszServerName;
+}
+
+class EV_EXTRA_CERT_CHAIN_POLICY_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwRootProgramQualifierFlags;
+}
+
+class EV_EXTRA_CERT_CHAIN_POLICY_STATUS extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwQualifiers;
+  @Uint32() external int dwIssuanceUsageIndex;
+}
+
+class SSL_F12_EXTRA_CERT_CHAIN_POLICY_STATUS extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwErrorLevel;
+  @Uint32() external int dwErrorCategory;
+  @Uint32() external int dwReserved;
+  external __ushort__ wszErrorText;
+}
+
+class SSL_HPKP_HEADER_EXTRA_CERT_CHAIN_POLICY_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwReserved;
+  external Pointer<Utf16> pwszServerName;
+  external ____ rgpszHpkpValue;
+}
+
+class SSL_KEY_PIN_EXTRA_CERT_CHAIN_POLICY_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwReserved;
+  external Pointer<Utf16> pwszServerName;
+}
+
+class SSL_KEY_PIN_EXTRA_CERT_CHAIN_POLICY_STATUS extends Struct {
+  @Uint32() external int cbSize;
+  @Int32() external int lError;
+  external __ushort__ wszErrorText;
+}
+
+class CRYPT_PKCS12_PBE_PARAMS extends Struct {
+  @Int32() external int iIterations;
+  @Uint32() external int cbSalt;
+}
+
+class PKCS12_PBES2_EXPORT_PARAMS extends Struct {
+  @Uint32() external int dwSize;
+  external Pointer hNcryptDescriptor;
+  external Pointer<Utf16> pwszPbes2Alg;
+}
+
+class CERT_SERVER_OCSP_RESPONSE_CONTEXT extends Struct {
+  @Uint32() external int cbSize;
+  external Pointer<Uint8> pbEncodedOcspResponse;
+  @Uint32() external int cbEncodedOcspResponse;
+}
+
+class CERT_SERVER_OCSP_RESPONSE_OPEN_PARA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwFlags;
+  external Pointer<Uint32> pcbUsedSize;
+  external Pointer<Utf16> pwszOcspDirectory;
+  external PFN_CERT_SERVER_OCSP_RESPONSE_UPDATE_CALLBACK pfnUpdateCallback;
+  external Pointer pvUpdateCallbackArg;
+}
+
+class CERT_SELECT_CHAIN_PARA extends Struct {
+  @IntPtr() external int hChainEngine;
+  external Pointer<FILETIME> pTime;
+  external Pointer hAdditionalStore;
+  external Pointer<CERT_CHAIN_PARA> pChainPara;
+  @Uint32() external int dwFlags;
+}
+
+class CERT_SELECT_CRITERIA extends Struct {
+  @Uint32() external int dwType;
+  @Uint32() external int cPara;
+  external Pointer<Pointer> ppPara;
+}
+
+class CRYPT_TIMESTAMP_REQUEST extends Struct {
+  @Uint32() external int dwVersion;
+  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
+  external CRYPTOAPI_BLOB HashedMessage;
+  external Pointer<Utf8> pszTSAPolicyId;
+  external CRYPTOAPI_BLOB Nonce;
+  @Int32() external int fCertReq;
+  @Uint32() external int cExtension;
+  external Pointer<CERT_EXTENSION> rgExtension;
+}
+
+class CRYPT_TIMESTAMP_RESPONSE extends Struct {
+  @Uint32() external int dwStatus;
+  @Uint32() external int cFreeText;
+  external Pointer<Pointer<Utf16>> rgFreeText;
+  external CRYPT_BIT_BLOB FailureInfo;
+  external CRYPTOAPI_BLOB ContentInfo;
+}
+
+class CRYPT_TIMESTAMP_ACCURACY extends Struct {
+  @Uint32() external int dwSeconds;
+  @Uint32() external int dwMillis;
+  @Uint32() external int dwMicros;
+}
+
+class CRYPT_TIMESTAMP_INFO extends Struct {
+  @Uint32() external int dwVersion;
+  external Pointer<Utf8> pszTSAPolicyId;
+  external CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;
+  external CRYPTOAPI_BLOB HashedMessage;
+  external CRYPTOAPI_BLOB SerialNumber;
+  external FILETIME ftTime;
+  external Pointer<CRYPT_TIMESTAMP_ACCURACY> pvAccuracy;
+  @Int32() external int fOrdering;
+  external CRYPTOAPI_BLOB Nonce;
+  external CRYPTOAPI_BLOB Tsa;
+  @Uint32() external int cExtension;
+  external Pointer<CERT_EXTENSION> rgExtension;
+}
+
+class CRYPT_TIMESTAMP_CONTEXT extends Struct {
+  @Uint32() external int cbEncoded;
+  external Pointer<Uint8> pbEncoded;
+  external Pointer<CRYPT_TIMESTAMP_INFO> pTimeStamp;
+}
+
+class CRYPT_TIMESTAMP_PARA extends Struct {
+  external Pointer<Utf8> pszTSAPolicyId;
+  @Int32() external int fRequestCerts;
+  external CRYPTOAPI_BLOB Nonce;
+  @Uint32() external int cExtension;
+  external Pointer<CERT_EXTENSION> rgExtension;
+}
+
+class CRYPT_OBJECT_LOCATOR_PROVIDER_TABLE extends Struct {
+  @Uint32() external int cbSize;
+  external PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_GET pfnGet;
+  external PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_RELEASE pfnRelease;
+  external PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_PASSWORD pfnFreePassword;
+  external PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE pfnFree;
+  external PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_IDENTIFIER pfnFreeIdentifier;
+}
+
+class CRYPTPROTECT_PROMPTSTRUCT extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwPromptFlags;
+  @IntPtr() external int hwndApp;
+  external Pointer<Utf16> szPrompt;
 }
 
 class SecPkgContext_RemoteCredentialInfo extends Struct {
@@ -5561,6 +5687,12 @@ class TRUSTEE_ACCESSW extends Struct {
   @Uint32() external int fReturnedAccess;
 }
 
+class ACTRL_OVERLAPPED extends Struct {
+  @Uint32() external int Anonymous;
+  @Uint32() external int Reserved2;
+  @IntPtr() external int hEvent;
+}
+
 class ACTRL_ACCESS_INFOA extends Struct {
   @Uint32() external int fAccessPermission;
   external Pointer<Utf8> lpAccessPermissionName;
@@ -5838,6 +5970,170 @@ class NOTIFYCANCEL extends Struct {
   @Int32() external int fForce;
 }
 
+class SCARD_READERSTATEA extends Struct {
+  external Pointer<Utf8> szReader;
+  external Pointer pvUserData;
+  @Uint32() external int dwCurrentState;
+  @Uint32() external int dwEventState;
+  @Uint32() external int cbAtr;
+  external __ubyte__ rgbAtr;
+}
+
+class SCARD_READERSTATEW extends Struct {
+  external Pointer<Utf16> szReader;
+  external Pointer pvUserData;
+  @Uint32() external int dwCurrentState;
+  @Uint32() external int dwEventState;
+  @Uint32() external int cbAtr;
+  external __ubyte__ rgbAtr;
+}
+
+class SCARD_ATRMASK extends Struct {
+  @Uint32() external int cbAtr;
+  external __ubyte__ rgbAtr;
+  external __ubyte__ rgbMask;
+}
+
+class OPENCARD_SEARCH_CRITERIAA extends Struct {
+  @Uint32() external int dwStructSize;
+  external Pointer<Utf8> lpstrGroupNames;
+  @Uint32() external int nMaxGroupNames;
+  external Pointer<GUID> rgguidInterfaces;
+  @Uint32() external int cguidInterfaces;
+  external Pointer<Utf8> lpstrCardNames;
+  @Uint32() external int nMaxCardNames;
+  external Pointer<OCNCHKPROC> lpfnCheck;
+  external Pointer<OCNCONNPROCA> lpfnConnect;
+  external Pointer<OCNDSCPROC> lpfnDisconnect;
+  external Pointer pvUserData;
+  @Uint32() external int dwShareMode;
+  @Uint32() external int dwPreferredProtocols;
+}
+
+class OPENCARD_SEARCH_CRITERIAW extends Struct {
+  @Uint32() external int dwStructSize;
+  external Pointer<Utf16> lpstrGroupNames;
+  @Uint32() external int nMaxGroupNames;
+  external Pointer<GUID> rgguidInterfaces;
+  @Uint32() external int cguidInterfaces;
+  external Pointer<Utf16> lpstrCardNames;
+  @Uint32() external int nMaxCardNames;
+  external Pointer<OCNCHKPROC> lpfnCheck;
+  external Pointer<OCNCONNPROCW> lpfnConnect;
+  external Pointer<OCNDSCPROC> lpfnDisconnect;
+  external Pointer pvUserData;
+  @Uint32() external int dwShareMode;
+  @Uint32() external int dwPreferredProtocols;
+}
+
+class OPENCARDNAME_EXA extends Struct {
+  @Uint32() external int dwStructSize;
+  @IntPtr() external int hSCardContext;
+  @IntPtr() external int hwndOwner;
+  @Uint32() external int dwFlags;
+  external Pointer<Utf8> lpstrTitle;
+  external Pointer<Utf8> lpstrSearchDesc;
+  @IntPtr() external int hIcon;
+  external Pointer<OPENCARD_SEARCH_CRITERIAA> pOpenCardSearchCriteria;
+  external Pointer<OCNCONNPROCA> lpfnConnect;
+  external Pointer pvUserData;
+  @Uint32() external int dwShareMode;
+  @Uint32() external int dwPreferredProtocols;
+  external Pointer<Utf8> lpstrRdr;
+  @Uint32() external int nMaxRdr;
+  external Pointer<Utf8> lpstrCard;
+  @Uint32() external int nMaxCard;
+  @Uint32() external int dwActiveProtocol;
+  @IntPtr() external int hCardHandle;
+}
+
+class OPENCARDNAME_EXW extends Struct {
+  @Uint32() external int dwStructSize;
+  @IntPtr() external int hSCardContext;
+  @IntPtr() external int hwndOwner;
+  @Uint32() external int dwFlags;
+  external Pointer<Utf16> lpstrTitle;
+  external Pointer<Utf16> lpstrSearchDesc;
+  @IntPtr() external int hIcon;
+  external Pointer<OPENCARD_SEARCH_CRITERIA> pOpenCardSearchCriteria;
+  external Pointer<OCNCONNPROCW> lpfnConnect;
+  external Pointer pvUserData;
+  @Uint32() external int dwShareMode;
+  @Uint32() external int dwPreferredProtocols;
+  external Pointer<Utf16> lpstrRdr;
+  @Uint32() external int nMaxRdr;
+  external Pointer<Utf16> lpstrCard;
+  @Uint32() external int nMaxCard;
+  @Uint32() external int dwActiveProtocol;
+  @IntPtr() external int hCardHandle;
+}
+
+class READER_SEL_REQUEST extends Struct {
+  @Uint32() external int dwShareMode;
+  @Uint32() external int dwPreferredProtocols;
+  @Uint32() external int MatchType;
+  @Uint32() external int Anonymous;
+}
+
+class READER_SEL_RESPONSE extends Struct {
+  @Uint32() external int cbReaderNameOffset;
+  @Uint32() external int cchReaderNameLength;
+  @Uint32() external int cbCardNameOffset;
+  @Uint32() external int cchCardNameLength;
+}
+
+class OPENCARDNAMEA extends Struct {
+  @Uint32() external int dwStructSize;
+  @IntPtr() external int hwndOwner;
+  @IntPtr() external int hSCardContext;
+  external Pointer<Utf8> lpstrGroupNames;
+  @Uint32() external int nMaxGroupNames;
+  external Pointer<Utf8> lpstrCardNames;
+  @Uint32() external int nMaxCardNames;
+  external Pointer<GUID> rgguidInterfaces;
+  @Uint32() external int cguidInterfaces;
+  external Pointer<Utf8> lpstrRdr;
+  @Uint32() external int nMaxRdr;
+  external Pointer<Utf8> lpstrCard;
+  @Uint32() external int nMaxCard;
+  external Pointer<Utf8> lpstrTitle;
+  @Uint32() external int dwFlags;
+  external Pointer pvUserData;
+  @Uint32() external int dwShareMode;
+  @Uint32() external int dwPreferredProtocols;
+  @Uint32() external int dwActiveProtocol;
+  external Pointer<OCNCONNPROCA> lpfnConnect;
+  external Pointer<OCNCHKPROC> lpfnCheck;
+  external Pointer<OCNDSCPROC> lpfnDisconnect;
+  @IntPtr() external int hCardHandle;
+}
+
+class OPENCARDNAMEW extends Struct {
+  @Uint32() external int dwStructSize;
+  @IntPtr() external int hwndOwner;
+  @IntPtr() external int hSCardContext;
+  external Pointer<Utf16> lpstrGroupNames;
+  @Uint32() external int nMaxGroupNames;
+  external Pointer<Utf16> lpstrCardNames;
+  @Uint32() external int nMaxCardNames;
+  external Pointer<GUID> rgguidInterfaces;
+  @Uint32() external int cguidInterfaces;
+  external Pointer<Utf16> lpstrRdr;
+  @Uint32() external int nMaxRdr;
+  external Pointer<Utf16> lpstrCard;
+  @Uint32() external int nMaxCard;
+  external Pointer<Utf16> lpstrTitle;
+  @Uint32() external int dwFlags;
+  external Pointer pvUserData;
+  @Uint32() external int dwShareMode;
+  @Uint32() external int dwPreferredProtocols;
+  @Uint32() external int dwActiveProtocol;
+  external Pointer<OCNCONNPROCW> lpfnConnect;
+  external Pointer<OCNCHKPROC> lpfnCheck;
+  external Pointer<OCNDSCPROC> lpfnDisconnect;
+  @IntPtr() external int hCardHandle;
+}
+
 class LOGON_HOURS extends Struct {
   @Uint16() external int UnitsPerWeek;
   external Pointer<Uint8> LogonHours;
@@ -5961,6 +6257,14 @@ class AUDIT_IP_ADDRESS extends Struct {
   external __ubyte__ pIpAddress;
 }
 
+class AUDIT_PARAM extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int Length;
+  @Uint32() external int Flags;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+}
+
 class AUDIT_PARAMS extends Struct {
   @Uint32() external int Length;
   @Uint32() external int Flags;
@@ -6016,6 +6320,22 @@ class AUTHZ_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE extends Struct {
   @Uint32() external int ValueLength;
 }
 
+class AUTHZ_SECURITY_ATTRIBUTE_V1 extends Struct {
+  external Pointer<Utf16> pName;
+  @Uint16() external int ValueType;
+  @Uint16() external int Reserved;
+  @Uint32() external int Flags;
+  @Uint32() external int ValueCount;
+  @Uint32() external int Values;
+}
+
+class AUTHZ_SECURITY_ATTRIBUTES_INFORMATION extends Struct {
+  @Uint16() external int Version;
+  @Uint16() external int Reserved;
+  @Uint32() external int AttributeCount;
+  @Uint32() external int Attribute;
+}
+
 class AUTHZ_RPC_INIT_INFO_CLIENT extends Struct {
   @Uint16() external int version;
   external Pointer<Utf16> ObjectUuid;
@@ -6039,6 +6359,18 @@ class AUTHZ_INIT_INFO extends Struct {
 class AUTHZ_REGISTRATION_OBJECT_TYPE_NAME_OFFSET extends Struct {
   external Pointer<Utf16> szObjectTypeName;
   @Uint32() external int dwOffset;
+}
+
+class AUTHZ_SOURCE_SCHEMA_REGISTRATION extends Struct {
+  @Uint32() external int dwFlags;
+  external Pointer<Utf16> szEventSourceName;
+  external Pointer<Utf16> szEventMessageFile;
+  external Pointer<Utf16> szEventSourceXmlSchemaFile;
+  external Pointer<Utf16> szEventAccessStringsFile;
+  external Pointer<Utf16> szExecutableImagePath;
+  @Uint32() external int Anonymous;
+  @Uint32() external int dwObjectTypeNameCount;
+  external AUTHZ_REGISTRATION_OBJECT_TYPE_NAME_OFFSET ObjectTypeNames;
 }
 
 class AzAuthorizationStore extends Struct {
@@ -6470,14 +6802,29 @@ class CRYPT_XML_KEY_RSA_KEY_VALUE extends Struct {
   external CRYPT_XML_DATA_BLOB Exponent;
 }
 
+class CRYPT_XML_KEY_VALUE extends Struct {
+  @Uint32() external int dwType;
+  @Uint32() external int Anonymous;
+}
+
 class CRYPT_XML_ISSUER_SERIAL extends Struct {
   external Pointer<Utf16> wszIssuer;
   external Pointer<Utf16> wszSerial;
 }
 
+class CRYPT_XML_X509DATA_ITEM extends Struct {
+  @Uint32() external int dwType;
+  @Uint32() external int Anonymous;
+}
+
 class CRYPT_XML_X509DATA extends Struct {
   @Uint32() external int cX509Data;
   external Pointer<CRYPT_XML_X509DATA_ITEM> rgX509Data;
+}
+
+class CRYPT_XML_KEY_INFO_ITEM extends Struct {
+  @Uint32() external int dwType;
+  @Uint32() external int Anonymous;
 }
 
 class CRYPT_XML_KEY_INFO extends Struct {
@@ -6638,6 +6985,10 @@ class CAINFO extends Struct {
   @Uint32() external int fAdvancedServer;
 }
 
+class LLFILETIME extends Struct {
+  @Uint32() external int Anonymous;
+}
+
 class CERT_SELECT_STRUCT_A extends Struct {
   @Uint32() external int dwSize;
   @IntPtr() external int hwndParent;
@@ -6770,6 +7121,22 @@ class CTL_MODIFY_REQUEST extends Struct {
   @Uint32() external int dwError;
 }
 
+class WINTRUST_DATA extends Struct {
+  @Uint32() external int cbStruct;
+  external Pointer pPolicyCallbackData;
+  external Pointer pSIPClientData;
+  @Uint32() external int dwUIChoice;
+  @Uint32() external int fdwRevocationChecks;
+  @Uint32() external int dwUnionChoice;
+  @Uint32() external int Anonymous;
+  @Uint32() external int dwStateAction;
+  @IntPtr() external int hWVTStateData;
+  external Pointer<Utf16> pwszURLReference;
+  @Uint32() external int dwProvFlags;
+  @Uint32() external int dwUIContext;
+  external Pointer<WINTRUST_SIGNATURE_SETTINGS> pSignatureSettings;
+}
+
 class WINTRUST_SIGNATURE_SETTINGS extends Struct {
   @Uint32() external int cbStruct;
   @Uint32() external int dwIndex;
@@ -6825,6 +7192,42 @@ class WINTRUST_CERT_INFO extends Struct {
   external Pointer<Pointer> pahStores;
   @Uint32() external int dwFlags;
   external Pointer<FILETIME> psftVerifyAsOf;
+}
+
+class CRYPT_PROVIDER_DATA extends Struct {
+  @Uint32() external int cbStruct;
+  external Pointer<WINTRUST_DATA> pWintrustData;
+  @Int32() external int fOpenedFile;
+  @IntPtr() external int hWndParent;
+  external Pointer<GUID> pgActionID;
+  @IntPtr() external int hProv;
+  @Uint32() external int dwError;
+  @Uint32() external int dwRegSecuritySettings;
+  @Uint32() external int dwRegPolicySettings;
+  external Pointer<CRYPT_PROVIDER_FUNCTIONS> psPfns;
+  @Uint32() external int cdwTrustStepErrors;
+  external Pointer<Uint32> padwTrustStepErrors;
+  @Uint32() external int chStores;
+  external Pointer<Pointer> pahStores;
+  @Uint32() external int dwEncoding;
+  external Pointer hMsg;
+  @Uint32() external int csSigners;
+  external Pointer<CRYPT_PROVIDER_SGNR> pasSigners;
+  @Uint32() external int csProvPrivData;
+  external Pointer<CRYPT_PROVIDER_PRIVDATA> pasProvPrivData;
+  @Uint32() external int dwSubjectChoice;
+  @Uint32() external int Anonymous;
+  external Pointer<Int8> pszUsageOID;
+  @Int32() external int fRecallWithState;
+  external FILETIME sftSystemTime;
+  external Pointer<Int8> pszCTLSignerUsageOID;
+  @Uint32() external int dwProvFlags;
+  @Uint32() external int dwFinalError;
+  external Pointer<CERT_USAGE_MATCH> pRequestUsage;
+  @Uint32() external int dwTrustPubSettings;
+  @Uint32() external int dwUIStateFlags;
+  external Pointer<CRYPT_PROVIDER_SIGSTATE> pSigState;
+  external Pointer<WINTRUST_SIGNATURE_SETTINGS> pSigSettings;
 }
 
 class CRYPT_PROVIDER_SIGSTATE extends Struct {
@@ -6978,6 +7381,11 @@ class SPC_SIGINFO extends Struct {
   @Uint32() external int dwReserved5;
 }
 
+class SPC_LINK extends Struct {
+  @Uint32() external int dwLinkChoice;
+  @Uint32() external int Anonymous;
+}
+
 class SPC_PE_IMAGE_DATA extends Struct {
   external CRYPT_BIT_BLOB Flags;
   external Pointer<SPC_LINK> pFile;
@@ -7125,6 +7533,13 @@ class CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE_INFO extends Struct {
   @Uint32() external int dwProvType;
 }
 
+class CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO extends Struct {
+  @Uint32() external int dwSize;
+  external Pointer<Utf16> pwszSigningCertFileName;
+  @Uint32() external int dwPvkChoice;
+  @Uint32() external int Anonymous;
+}
+
 class CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwAttrFlags;
@@ -7135,6 +7550,17 @@ class CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO extends Struct {
   external Pointer hAdditionalCertStore;
   external Pointer<CRYPT_ATTRIBUTES> psAuthenticated;
   external Pointer<CRYPT_ATTRIBUTES> psUnauthenticated;
+}
+
+class CRYPTUI_WIZ_DIGITAL_SIGN_INFO extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwSubjectChoice;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int dwSigningCertChoice;
+  @Uint32() external int Anonymous2;
+  external Pointer<Utf16> pwszTimestampURL;
+  @Uint32() external int dwAdditionalCertChoice;
+  external Pointer<CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO> pSignExtInfo;
 }
 
 class CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT extends Struct {
@@ -7148,6 +7574,57 @@ class CRYPTUI_INITDIALOG_STRUCT extends Struct {
   external Pointer<CERT_CONTEXT> pCertContext;
 }
 
+class CRYPTUI_VIEWCERTIFICATE_STRUCTW extends Struct {
+  @Uint32() external int dwSize;
+  @IntPtr() external int hwndParent;
+  @Uint32() external int dwFlags;
+  external Pointer<Utf16> szTitle;
+  external Pointer<CERT_CONTEXT> pCertContext;
+  external Pointer<Pointer<Utf8>> rgszPurposes;
+  @Uint32() external int cPurposes;
+  @Uint32() external int Anonymous;
+  @Int32() external int fpCryptProviderDataTrustedUsage;
+  @Uint32() external int idxSigner;
+  @Uint32() external int idxCert;
+  @Int32() external int fCounterSigner;
+  @Uint32() external int idxCounterSigner;
+  @Uint32() external int cStores;
+  external Pointer<Pointer> rghStores;
+  @Uint32() external int cPropSheetPages;
+  external Pointer<PROPSHEETPAGE> rgPropSheetPages;
+  @Uint32() external int nStartPage;
+}
+
+class CRYPTUI_VIEWCERTIFICATE_STRUCTA extends Struct {
+  @Uint32() external int dwSize;
+  @IntPtr() external int hwndParent;
+  @Uint32() external int dwFlags;
+  external Pointer<Utf8> szTitle;
+  external Pointer<CERT_CONTEXT> pCertContext;
+  external Pointer<Pointer<Utf8>> rgszPurposes;
+  @Uint32() external int cPurposes;
+  @Uint32() external int Anonymous;
+  @Int32() external int fpCryptProviderDataTrustedUsage;
+  @Uint32() external int idxSigner;
+  @Uint32() external int idxCert;
+  @Int32() external int fCounterSigner;
+  @Uint32() external int idxCounterSigner;
+  @Uint32() external int cStores;
+  external Pointer<Pointer> rghStores;
+  @Uint32() external int cPropSheetPages;
+  external Pointer<PROPSHEETPAGEA> rgPropSheetPages;
+  @Uint32() external int nStartPage;
+}
+
+class CRYPTUI_WIZ_EXPORT_INFO extends Struct {
+  @Uint32() external int dwSize;
+  external Pointer<Utf16> pwszExportFileName;
+  @Uint32() external int dwSubjectChoice;
+  @Uint32() external int Anonymous;
+  @Uint32() external int cStores;
+  external Pointer<Pointer> rghStores;
+}
+
 class CRYPTUI_WIZ_EXPORT_CERTCONTEXT_INFO extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwExportFormat;
@@ -7155,6 +7632,35 @@ class CRYPTUI_WIZ_EXPORT_CERTCONTEXT_INFO extends Struct {
   @Int32() external int fExportPrivateKeys;
   external Pointer<Utf16> pwszPassword;
   @Int32() external int fStrongEncryption;
+}
+
+class CRYPTUI_WIZ_IMPORT_SRC_INFO extends Struct {
+  @Uint32() external int dwSize;
+  @Uint32() external int dwSubjectChoice;
+  @Uint32() external int Anonymous;
+  @Uint32() external int dwFlags;
+  external Pointer<Utf16> pwszPassword;
+}
+
+class SIP_SUBJECTINFO extends Struct {
+  @Uint32() external int cbSize;
+  external Pointer<GUID> pgSubjectType;
+  @IntPtr() external int hFile;
+  external Pointer<Utf16> pwsFileName;
+  external Pointer<Utf16> pwsDisplayName;
+  @Uint32() external int dwReserved1;
+  @Uint32() external int dwIntVersion;
+  @IntPtr() external int hProv;
+  external CRYPT_ALGORITHM_IDENTIFIER DigestAlgorithm;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwEncodingType;
+  @Uint32() external int dwReserved2;
+  @Uint32() external int fdwCAPISettings;
+  @Uint32() external int fdwSecuritySettings;
+  @Uint32() external int dwIndex;
+  @Uint32() external int dwUnionChoice;
+  @Uint32() external int Anonymous;
+  external Pointer pClientData;
 }
 
 class MS_ADDINFO_FLAT extends Struct {
@@ -7181,6 +7687,13 @@ class SIP_CAP_SET_V2 extends Struct {
   @Uint32() external int dwVersion;
   @Int32() external int isMultiSign;
   @Uint32() external int dwReserved;
+}
+
+class SIP_CAP_SET_V3 extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwVersion;
+  @Int32() external int isMultiSign;
+  @Uint32() external int Anonymous;
 }
 
 class SIP_INDIRECT_DATA extends Struct {

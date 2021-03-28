@@ -56,6 +56,10 @@ class WNV_NOTIFICATION_PARAM extends Struct {
   external Pointer<Uint8> Buffer;
 }
 
+class WNV_IP_ADDRESS extends Struct {
+  @Uint32() external int IP;
+}
+
 class WNV_POLICY_MISMATCH_PARAM extends Struct {
   @Uint16() external int CAFamily;
   @Uint16() external int PAFamily;
@@ -78,6 +82,11 @@ class WNV_CUSTOMER_ADDRESS_CHANGE_PARAM extends Struct {
   @Uint16() external int PAFamily;
   external WNV_IP_ADDRESS PA;
   @Uint32() external int NotificationReason;
+}
+
+class WNV_OBJECT_CHANGE_PARAM extends Struct {
+  @Uint32() external int ObjectType;
+  @Uint32() external int ObjectParam;
 }
 
 class WNV_REDIRECT_PARAM extends Struct {

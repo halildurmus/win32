@@ -43,6 +43,10 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class HSWDEVICE extends Struct {
+  @IntPtr() external int Value;
+}
+
 class SW_DEVICE_CREATE_INFO extends Struct {
   @Uint32() external int cbSize;
   external Pointer<Utf16> pszInstanceId;
@@ -53,9 +57,5 @@ class SW_DEVICE_CREATE_INFO extends Struct {
   external Pointer<Utf16> pszDeviceDescription;
   external Pointer<Utf16> pszDeviceLocation;
   external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
-}
-
-class HSWDEVICE extends Struct {
-  @IntPtr() external int Value;
 }
 

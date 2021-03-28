@@ -309,6 +309,11 @@ class RESOURCE_TERMINAL_FAILURE_INFO_BUFFER extends Struct {
   @Uint32() external int restartPeriodRemaining;
 }
 
+class CLUSPROP_SYNTAX extends Struct {
+  @Uint32() external int dw;
+  @Uint32() external int Anonymous;
+}
+
 class CLUSPROP_VALUE extends Struct {
   external CLUSPROP_SYNTAX Syntax;
   @Uint32() external int cbLength;
@@ -349,9 +354,18 @@ class CLUSPROP_LARGE_INTEGER extends Struct {
   @Int64() external int li;
 }
 
+class CLUSPROP_SECURITY_DESCRIPTOR extends Struct {
+  external CLUSPROP_VALUE __AnonymousBase_clusapi_L5174_C54;
+  @Uint32() external int Anonymous;
+}
+
 class CLUSPROP_FILETIME extends Struct {
   external CLUSPROP_VALUE __AnonymousBase_clusapi_L5188_C14;
   external FILETIME ft;
+}
+
+class CLUS_RESOURCE_CLASS_INFO extends Struct {
+  @Uint32() external int Anonymous;
 }
 
 class CLUSPROP_RESOURCE_CLASS extends Struct {
@@ -438,6 +452,11 @@ class CLUSTER_SHARED_VOLUME_STATE_INFO_EX extends Struct {
   @Uint64() external int VolumeRedirectedIOReason;
 }
 
+class CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME extends Struct {
+  @Uint32() external int InputType;
+  @Uint32() external int Anonymous;
+}
+
 class CLUSTER_SHARED_VOLUME_RENAME_INPUT_NAME extends Struct {
   external __ushort__ NewVolumeName;
 }
@@ -498,6 +517,10 @@ class CLUS_FTSET_INFO extends Struct {
 class CLUSPROP_FTSET_INFO extends Struct {
   external CLUSPROP_VALUE __AnonymousBase_clusapi_L5518_C14;
   external CLUS_FTSET_INFO __AnonymousBase_clusapi_L5519_C14;
+}
+
+class CLUS_SCSI_ADDRESS extends Struct {
+  @Uint32() external int Anonymous;
 }
 
 class CLUSPROP_SCSI_ADDRESS extends Struct {
@@ -798,6 +821,12 @@ class CLRES_V4_FUNCTIONS extends Struct {
   external PBEGIN_RESTYPECALL_AS_USER_ROUTINE BeginResourceTypeControlAsUser;
 }
 
+class CLRES_FUNCTION_TABLE extends Struct {
+  @Uint32() external int TableSize;
+  @Uint32() external int Version;
+  @Uint32() external int Anonymous;
+}
+
 class RESUTIL_LARGEINT_DATA extends Struct {
   @Int64() external int Default;
   @Int64() external int Minimum;
@@ -814,6 +843,17 @@ class RESUTIL_FILETIME_DATA extends Struct {
   external FILETIME Default;
   external FILETIME Minimum;
   external FILETIME Maximum;
+}
+
+class RESUTIL_PROPERTY_ITEM extends Struct {
+  external Pointer<Utf16> Name;
+  external Pointer<Utf16> KeyName;
+  @Uint32() external int Format;
+  @Uint32() external int Anonymous;
+  @Uint32() external int Minimum;
+  @Uint32() external int Maximum;
+  @Uint32() external int Flags;
+  @Uint32() external int Offset;
 }
 
 class CLRES_CALLBACK_FUNCTION_TABLE extends Struct {

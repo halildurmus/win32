@@ -43,6 +43,62 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class HDC extends Struct {
+  @IntPtr() external int Value;
+}
+
+class CreatedHDC extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HGDIOBJ extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HBITMAP extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HRGN extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HPEN extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HBRUSH extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HFONT extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HMETAFILE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HENHMETAFILE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HMONITOR extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HPALETTE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HdcMetdataFileHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HdcMetdataEnhFileHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
 class XFORM extends Struct {
   @Float() external double eM11;
   @Float() external double eM12;
@@ -81,6 +137,20 @@ class BITMAPCOREHEADER extends Struct {
   @Uint16() external int bcHeight;
   @Uint16() external int bcPlanes;
   @Uint16() external int bcBitCount;
+}
+
+class BITMAPINFOHEADER extends Struct {
+  @Uint32() external int biSize;
+  @Int32() external int biWidth;
+  @Int32() external int biHeight;
+  @Uint16() external int biPlanes;
+  @Uint16() external int biBitCount;
+  @Uint32() external int biCompression;
+  @Uint32() external int biSizeImage;
+  @Int32() external int biXPelsPerMeter;
+  @Int32() external int biYPelsPerMeter;
+  @Uint32() external int biClrUsed;
+  @Uint32() external int biClrImportant;
 }
 
 class BITMAPV4HEADER extends Struct {
@@ -451,6 +521,18 @@ class DISPLAY_DEVICEW extends Struct {
   external __ushort__ DeviceKey;
 }
 
+class DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO extends Struct {
+  external DISPLAYCONFIG_DEVICE_INFO_HEADER header;
+  @Uint32() external int Anonymous;
+  @Uint32() external int colorEncoding;
+  @Uint32() external int bitsPerColorChannel;
+}
+
+class DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE extends Struct {
+  external DISPLAYCONFIG_DEVICE_INFO_HEADER header;
+  @Uint32() external int Anonymous;
+}
+
 class DISPLAYCONFIG_SDR_WHITE_LEVEL extends Struct {
   external DISPLAYCONFIG_DEVICE_INFO_HEADER header;
   @Uint32() external int SDRWhiteLevel;
@@ -614,7 +696,7 @@ class GCP_RESULTSA extends Struct {
   external Pointer<Uint32> lpOrder;
   external Pointer<Int32> lpDx;
   external Pointer<Int32> lpCaretPos;
-  @Uint32() external int lpClass;
+  external Pointer<Utf8> lpClass;
   external Pointer<Utf16> lpGlyphs;
   @Uint32() external int nGlyphs;
   @Int32() external int nMaxFit;
@@ -626,7 +708,7 @@ class GCP_RESULTSW extends Struct {
   external Pointer<Uint32> lpOrder;
   external Pointer<Int32> lpDx;
   external Pointer<Int32> lpCaretPos;
-  @Uint32() external int lpClass;
+  external Pointer<Utf8> lpClass;
   external Pointer<Utf16> lpGlyphs;
   @Uint32() external int nGlyphs;
   @Int32() external int nMaxFit;
@@ -1429,58 +1511,6 @@ class MxdcS0PagePassthroughEscape extends Struct {
 class MxdcS0PageResourceEscape extends Struct {
   external MxdcEscapeHeader mxdcEscape;
   external MxdcXpsS0PageResource xpsS0PageResourcePassthrough;
-}
-
-class HBITMAP extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HBRUSH extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HDC extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HdcMetdataEnhFileHandle extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HdcMetdataFileHandle extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HENHMETAFILE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HFONT extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HGDIOBJ extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HMETAFILE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HMONITOR extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HPALETTE extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HPEN extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HRGN extends Struct {
-  @IntPtr() external int Value;
 }
 
 class PAINTSTRUCT extends Struct {

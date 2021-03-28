@@ -275,6 +275,18 @@ class STATUS_OBJECT_NOTIFICATION extends Struct {
   external Pointer<SPropValue> lpPropVals;
 }
 
+class NOTIFICATION extends Struct {
+  @Uint32() external int ulEventType;
+  @Uint32() external int ulAlignPad;
+  @Uint32() external int info;
+}
+
+class MAPINAMEID extends Struct {
+  external Pointer<GUID> lpguid;
+  @Uint32() external int ulKind;
+  @Uint32() external int Kind;
+}
+
 class SSortOrder extends Struct {
   @Uint32() external int ulPropTag;
   @Uint32() external int ulOrder;
@@ -347,6 +359,11 @@ class SCommentRestriction extends Struct {
   @Uint32() external int cValues;
   external Pointer<SRestriction> lpRes;
   external Pointer<SPropValue> lpProp;
+}
+
+class SRestriction extends Struct {
+  @Uint32() external int rt;
+  @Uint32() external int res;
 }
 
 class _flaglist extends Struct {

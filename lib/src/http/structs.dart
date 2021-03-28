@@ -174,7 +174,7 @@ class HTTP_LOGGING_INFO extends Struct {
   @Uint16() external int MaxRecordSize;
   @Uint32() external int RolloverType;
   @Uint32() external int RolloverSize;
-  external Pointer pSecurityDescriptor;
+  external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
 }
 
 class HTTP_BINDING_INFO extends Struct {
@@ -244,6 +244,11 @@ class HTTP_LOG_FIELDS_DATA extends Struct {
   @Uint32() external int Win32Status;
   @Uint32() external int MethodNum;
   @Uint16() external int SubStatus;
+}
+
+class HTTP_DATA_CHUNK extends Struct {
+  @Uint32() external int DataChunkType;
+  @Uint32() external int Anonymous;
 }
 
 class HTTP_REQUEST_HEADERS extends Struct {
@@ -460,6 +465,12 @@ class HTTP_PERFORMANCE_PARAM extends Struct {
   @Uint32() external int MaxConcurrentClientStreams;
 }
 
+class HTTP_SERVICE_CONFIG_SSL_PARAM_EX extends Struct {
+  @Uint32() external int ParamType;
+  @Uint64() external int Flags;
+  @Uint32() external int Anonymous;
+}
+
 class HTTP_SERVICE_CONFIG_SSL_SET extends Struct {
   external HTTP_SERVICE_CONFIG_SSL_KEY KeyDesc;
   external HTTP_SERVICE_CONFIG_SSL_PARAM ParamDesc;
@@ -577,7 +588,7 @@ class HTTP_REQUEST_PROPERTY_SNI extends Struct {
 }
 
 class WINHTTP_ASYNC_RESULT extends Struct {
-  @Uint32() external int dwResult;
+  @IntPtr() external int dwResult;
   @Uint32() external int dwError;
 }
 
@@ -684,6 +695,11 @@ class WINHTTP_REQUEST_STATS extends Struct {
   @Uint32() external int ulIndex;
   @Uint32() external int cStats;
   external __uint64__ rgullStats;
+}
+
+class WINHTTP_EXTENDED_HEADER extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
 }
 
 class WINHTTP_CREDS extends Struct {

@@ -82,3 +82,7 @@ class POINTER_PEN_INFO extends Struct {
   @Int32() external int tiltY;
 }
 
+class INPUT_TRANSFORM extends Struct {
+  @Uint32() external int Anonymous;
+}
+

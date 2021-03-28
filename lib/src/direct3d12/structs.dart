@@ -429,6 +429,11 @@ class D3D12_DEPTH_STENCIL_VALUE extends Struct {
   @Uint8() external int Stencil;
 }
 
+class D3D12_CLEAR_VALUE extends Struct {
+  @Uint32() external int Format;
+  @Uint32() external int Anonymous;
+}
+
 class D3D12_RANGE extends Struct {
   @IntPtr() external int Begin;
   @IntPtr() external int End;
@@ -501,6 +506,12 @@ class D3D12_RESOURCE_UAV_BARRIER extends Struct {
   external ID3D12Resource pResource;
 }
 
+class D3D12_RESOURCE_BARRIER extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int Flags;
+  @Uint32() external int Anonymous;
+}
+
 class D3D12_SUBRESOURCE_FOOTPRINT extends Struct {
   @Uint32() external int Format;
   @Uint32() external int Width;
@@ -512,6 +523,12 @@ class D3D12_SUBRESOURCE_FOOTPRINT extends Struct {
 class D3D12_PLACED_SUBRESOURCE_FOOTPRINT extends Struct {
   @Uint64() external int Offset;
   external D3D12_SUBRESOURCE_FOOTPRINT Footprint;
+}
+
+class D3D12_TEXTURE_COPY_LOCATION extends Struct {
+  external ID3D12Resource pResource;
+  @Uint32() external int Type;
+  @Uint32() external int Anonymous;
 }
 
 class D3D12_SAMPLE_POSITION extends Struct {
@@ -600,6 +617,13 @@ class D3D12_RAYTRACING_ACCELERATION_STRUCTURE_SRV extends Struct {
   @Uint64() external int Location;
 }
 
+class D3D12_SHADER_RESOURCE_VIEW_DESC extends Struct {
+  @Uint32() external int Format;
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Shader4ComponentMapping;
+  @Uint32() external int Anonymous;
+}
+
 class D3D12_CONSTANT_BUFFER_VIEW_DESC extends Struct {
   @Uint64() external int BufferLocation;
   @Uint32() external int SizeInBytes;
@@ -654,6 +678,12 @@ class D3D12_TEX3D_UAV extends Struct {
   @Uint32() external int WSize;
 }
 
+class D3D12_UNORDERED_ACCESS_VIEW_DESC extends Struct {
+  @Uint32() external int Format;
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Anonymous;
+}
+
 class D3D12_BUFFER_RTV extends Struct {
   @Uint64() external int FirstElement;
   @Uint32() external int NumElements;
@@ -696,6 +726,12 @@ class D3D12_TEX3D_RTV extends Struct {
   @Uint32() external int WSize;
 }
 
+class D3D12_RENDER_TARGET_VIEW_DESC extends Struct {
+  @Uint32() external int Format;
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Anonymous;
+}
+
 class D3D12_TEX1D_DSV extends Struct {
   @Uint32() external int MipSlice;
 }
@@ -723,6 +759,13 @@ class D3D12_TEX2DMS_DSV extends Struct {
 class D3D12_TEX2DMS_ARRAY_DSV extends Struct {
   @Uint32() external int FirstArraySlice;
   @Uint32() external int ArraySize;
+}
+
+class D3D12_DEPTH_STENCIL_VIEW_DESC extends Struct {
+  @Uint32() external int Format;
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Flags;
+  @Uint32() external int Anonymous;
 }
 
 class D3D12_DESCRIPTOR_HEAP_DESC extends Struct {
@@ -754,6 +797,12 @@ class D3D12_ROOT_CONSTANTS extends Struct {
 class D3D12_ROOT_DESCRIPTOR extends Struct {
   @Uint32() external int ShaderRegister;
   @Uint32() external int RegisterSpace;
+}
+
+class D3D12_ROOT_PARAMETER extends Struct {
+  @Uint32() external int ParameterType;
+  @Uint32() external int Anonymous;
+  @Uint32() external int ShaderVisibility;
 }
 
 class D3D12_STATIC_SAMPLER_DESC extends Struct {
@@ -800,12 +849,23 @@ class D3D12_ROOT_DESCRIPTOR1 extends Struct {
   @Uint32() external int Flags;
 }
 
+class D3D12_ROOT_PARAMETER1 extends Struct {
+  @Uint32() external int ParameterType;
+  @Uint32() external int Anonymous;
+  @Uint32() external int ShaderVisibility;
+}
+
 class D3D12_ROOT_SIGNATURE_DESC1 extends Struct {
   @Uint32() external int NumParameters;
   external Pointer<D3D12_ROOT_PARAMETER1> pParameters;
   @Uint32() external int NumStaticSamplers;
   external Pointer<D3D12_STATIC_SAMPLER_DESC> pStaticSamplers;
   @Uint32() external int Flags;
+}
+
+class D3D12_VERSIONED_ROOT_SIGNATURE_DESC extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Anonymous;
 }
 
 class D3D12_CPU_DESCRIPTOR_HANDLE extends Struct {
@@ -885,6 +945,11 @@ class D3D12_INDEX_BUFFER_VIEW extends Struct {
   @Uint64() external int BufferLocation;
   @Uint32() external int SizeInBytes;
   @Uint32() external int Format;
+}
+
+class D3D12_INDIRECT_ARGUMENT_DESC extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int Anonymous;
 }
 
 class D3D12_COMMAND_SIGNATURE_DESC extends Struct {
@@ -1089,6 +1154,20 @@ class D3D12_RAYTRACING_INSTANCE_DESC extends Struct {
   @Uint64() external int AccelerationStructure;
 }
 
+class D3D12_RAYTRACING_GEOMETRY_DESC extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int Flags;
+  @Uint32() external int Anonymous;
+}
+
+class D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int Flags;
+  @Uint32() external int NumDescs;
+  @Uint32() external int DescsLayout;
+  @Uint32() external int Anonymous;
+}
+
 class D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC extends Struct {
   @Uint64() external int DestAccelerationStructureData;
   external D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS Inputs;
@@ -1187,6 +1266,11 @@ class D3D12_DEVICE_REMOVED_EXTENDED_DATA2 extends Struct {
   external D3D12_DRED_PAGE_FAULT_OUTPUT1 PageFaultOutput;
 }
 
+class D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA extends Struct {
+  @Uint32() external int Version;
+  @Uint32() external int Anonymous;
+}
+
 class D3D12_FEATURE_DATA_PROTECTED_RESOURCE_SESSION_TYPE_COUNT extends Struct {
   @Uint32() external int NodeIndex;
   @Uint32() external int Count;
@@ -1208,6 +1292,11 @@ class D3D12_RENDER_PASS_BEGINNING_ACCESS_CLEAR_PARAMETERS extends Struct {
   external D3D12_CLEAR_VALUE ClearValue;
 }
 
+class D3D12_RENDER_PASS_BEGINNING_ACCESS extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int Anonymous;
+}
+
 class D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_SUBRESOURCE_PARAMETERS extends Struct {
   @Uint32() external int SrcSubresource;
   @Uint32() external int DstSubresource;
@@ -1224,6 +1313,11 @@ class D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS extends Struct {
   @Uint32() external int Format;
   @Uint32() external int ResolveMode;
   @Int32() external int PreserveResolveSource;
+}
+
+class D3D12_RENDER_PASS_ENDING_ACCESS extends Struct {
+  @Uint32() external int Type;
+  @Uint32() external int Anonymous;
 }
 
 class D3D12_RENDER_PASS_RENDER_TARGET_DESC extends Struct {

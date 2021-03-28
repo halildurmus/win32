@@ -43,6 +43,34 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class BM_REQUEST_TYPE extends Struct {
+  @Uint32() external int s;
+  @Uint8() external int B;
+}
+
+class USB_DEFAULT_PIPE_SETUP_PACKET extends Struct {
+  external BM_REQUEST_TYPE bmRequestType;
+  @Uint8() external int bRequest;
+  @Uint32() external int wValue;
+  @Uint32() external int wIndex;
+  @Uint16() external int wLength;
+}
+
+class USB_DEVICE_STATUS extends Struct {
+  @Uint16() external int AsUshort16;
+  @Uint32() external int Anonymous;
+}
+
+class USB_INTERFACE_STATUS extends Struct {
+  @Uint16() external int AsUshort16;
+  @Uint32() external int Anonymous;
+}
+
+class USB_ENDPOINT_STATUS extends Struct {
+  @Uint16() external int AsUshort16;
+  @Uint32() external int Anonymous;
+}
+
 class USB_COMMON_DESCRIPTOR extends Struct {
   @Uint8() external int bLength;
   @Uint8() external int bDescriptorType;
@@ -84,6 +112,40 @@ class USB_BOS_DESCRIPTOR extends Struct {
   @Uint8() external int bNumDeviceCaps;
 }
 
+class USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR extends Struct {
+  @Uint8() external int bLength;
+  @Uint8() external int bDescriptorType;
+  @Uint8() external int bDevCapabilityType;
+  @Uint32() external int bmAttributes;
+}
+
+class USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR extends Struct {
+  @Uint8() external int bLength;
+  @Uint8() external int bDescriptorType;
+  @Uint8() external int bDevCapabilityType;
+  @Uint8() external int bReserved;
+  @Uint32() external int bmAttributes;
+  @Uint16() external int bmProviderPorts;
+  @Uint16() external int bmConsumerPorts;
+  @Uint16() external int bcdBCVersion;
+  @Uint16() external int bcdPDVersion;
+  @Uint16() external int bcdUSBTypeCVersion;
+}
+
+class USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR extends Struct {
+  @Uint8() external int bLength;
+  @Uint8() external int bDescriptorType;
+  @Uint8() external int bDevCapabilityType;
+  @Uint8() external int bReserved;
+  @Uint32() external int bmCapabilities;
+  @Uint16() external int wMinVoltage;
+  @Uint16() external int wMaxVoltage;
+  @Uint16() external int wReserved;
+  @Uint32() external int dwMaxOperatingPower;
+  @Uint32() external int dwMaxPeakPower;
+  @Uint32() external int dwMaxPeakPowerTime;
+}
+
 class USB_DEVICE_CAPABILITY_SUPERSPEED_USB_DESCRIPTOR extends Struct {
   @Uint8() external int bLength;
   @Uint8() external int bDescriptorType;
@@ -93,6 +155,22 @@ class USB_DEVICE_CAPABILITY_SUPERSPEED_USB_DESCRIPTOR extends Struct {
   @Uint8() external int bFunctionalitySupport;
   @Uint8() external int bU1DevExitLat;
   @Uint16() external int wU2DevExitLat;
+}
+
+class USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED extends Struct {
+  @Uint32() external int AsUlong32;
+  @Uint32() external int Anonymous;
+}
+
+class USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR extends Struct {
+  @Uint8() external int bLength;
+  @Uint8() external int bDescriptorType;
+  @Uint8() external int bDevCapabilityType;
+  @Uint8() external int bReserved;
+  @Uint32() external int bmAttributes;
+  @Uint32() external int wFunctionalitySupport;
+  @Uint16() external int wReserved;
+  external USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED bmSublinkSpeedAttr;
 }
 
 class USB_DEVICE_CAPABILITY_CONTAINER_ID_DESCRIPTOR extends Struct {
@@ -110,6 +188,27 @@ class USB_DEVICE_CAPABILITY_PLATFORM_DESCRIPTOR extends Struct {
   @Uint8() external int bReserved;
   external GUID PlatformCapabilityUuid;
   external __ubyte__ CapabililityData;
+}
+
+class USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR extends Struct {
+  @Uint8() external int bLength;
+  @Uint8() external int bDescriptorType;
+  @Uint8() external int bDevCapabilityType;
+  @Uint8() external int iAddtionalInfoURL;
+  @Uint8() external int bNumberOfAlternateModes;
+  @Uint8() external int bPreferredAlternateMode;
+  @Uint32() external int VconnPower;
+  external __ubyte__ bmConfigured;
+  @Uint32() external int bReserved;
+  external ____ AlternateMode;
+}
+
+class USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR extends Struct {
+  @Uint8() external int bLength;
+  @Uint8() external int bDescriptorType;
+  @Uint8() external int bDevCapabilityType;
+  @Uint8() external int bcdDescriptorVersion;
+  @Uint32() external int bmAttributes;
 }
 
 class USB_DEVICE_CAPABILITY_DESCRIPTOR extends Struct {
@@ -171,6 +270,14 @@ class USB_STRING_DESCRIPTOR extends Struct {
   external __ushort__ bString;
 }
 
+class USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR extends Struct {
+  @Uint8() external int bLength;
+  @Uint8() external int bDescriptorType;
+  @Uint8() external int bMaxBurst;
+  @Uint32() external int bmAttributes;
+  @Uint16() external int wBytesPerInterval;
+}
+
 class USB_SUPERSPEEDPLUS_ISOCH_ENDPOINT_COMPANION_DESCRIPTOR extends Struct {
   @Uint8() external int bLength;
   @Uint8() external int bDescriptorType;
@@ -200,6 +307,41 @@ class USB_30_HUB_DESCRIPTOR extends Struct {
   @Uint16() external int DeviceRemovable;
 }
 
+class USB_HUB_STATUS extends Struct {
+  @Uint16() external int AsUshort16;
+  @Uint32() external int Anonymous;
+}
+
+class USB_HUB_CHANGE extends Struct {
+  @Uint16() external int AsUshort16;
+  @Uint32() external int Anonymous;
+}
+
+class USB_HUB_STATUS_AND_CHANGE extends Struct {
+  @Uint32() external int AsUlong32;
+  @Uint32() external int Anonymous;
+}
+
+class USB_20_PORT_STATUS extends Struct {
+  @Uint16() external int AsUshort16;
+  @Uint32() external int Anonymous;
+}
+
+class USB_20_PORT_CHANGE extends Struct {
+  @Uint16() external int AsUshort16;
+  @Uint32() external int Anonymous;
+}
+
+class USB_30_PORT_STATUS extends Struct {
+  @Uint16() external int AsUshort16;
+  @Uint32() external int Anonymous;
+}
+
+class USB_30_PORT_CHANGE extends Struct {
+  @Uint16() external int AsUshort16;
+  @Uint32() external int Anonymous;
+}
+
 class USB_PORT_STATUS extends Struct {
   @Uint16() external int AsUshort16;
   external USB_20_PORT_STATUS Usb20PortStatus;
@@ -210,6 +352,31 @@ class USB_PORT_CHANGE extends Struct {
   @Uint16() external int AsUshort16;
   external USB_20_PORT_CHANGE Usb20PortChange;
   external USB_30_PORT_CHANGE Usb30PortChange;
+}
+
+class USB_PORT_EXT_STATUS extends Struct {
+  @Uint32() external int AsUlong32;
+  @Uint32() external int Anonymous;
+}
+
+class USB_PORT_STATUS_AND_CHANGE extends Struct {
+  @Uint32() external int AsUlong32;
+  @Uint32() external int Anonymous;
+}
+
+class USB_PORT_EXT_STATUS_AND_CHANGE extends Struct {
+  @Uint64() external int AsUlong64;
+  @Uint32() external int Anonymous;
+}
+
+class USB_HUB_30_PORT_REMOTE_WAKE_MASK extends Struct {
+  @Uint8() external int AsUchar8;
+  @Uint32() external int Anonymous;
+}
+
+class USB_FUNCTION_SUSPEND_OPTIONS extends Struct {
+  @Uint8() external int AsUchar;
+  @Uint32() external int Anonymous;
 }
 
 class USB_CONFIGURATION_POWER_DESCRIPTOR extends Struct {
@@ -433,6 +600,14 @@ class _URB_CONTROL_GET_CONFIGURATION_REQUEST extends Struct {
   external __ubyte__ Reserved1;
 }
 
+class OS_STRING extends Struct {
+  @Uint8() external int bLength;
+  @Uint8() external int bDescriptorType;
+  external __ushort__ MicrosoftString;
+  @Uint8() external int bVendorCode;
+  @Uint32() external int Anonymous;
+}
+
 class _URB_OS_FEATURE_DESCRIPTOR_REQUEST extends Struct {
   external _URB_HEADER Hdr;
   external Pointer Reserved;
@@ -527,6 +702,10 @@ class _URB_GET_ISOCH_PIPE_TRANSFER_PATH_DELAYS extends Struct {
   external Pointer PipeHandle;
   @Uint32() external int MaximumSendPathDelayInMilliSeconds;
   @Uint32() external int MaximumCompletionPathDelayInMilliSeconds;
+}
+
+class URB extends Struct {
+  @Uint32() external int Anonymous;
 }
 
 class USB_IDLE_CALLBACK_INFO extends Struct {

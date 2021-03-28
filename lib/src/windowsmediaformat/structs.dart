@@ -43,6 +43,11 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class AM_WMT_EVENT_DATA extends Struct {
+  @Int32() external int hrStatus;
+  external Pointer pData;
+}
+
 class WM_STREAM_PRIORITY_RECORD extends Struct {
   @Uint16() external int wStreamNumber;
   @Int32() external int fMandatory;
@@ -353,10 +358,5 @@ class DRM_COPY_OPL extends Struct {
   @Uint16() external int wMinimumCopyLevel;
   external DRM_OPL_OUTPUT_IDS oplIdIncludes;
   external DRM_OPL_OUTPUT_IDS oplIdExcludes;
-}
-
-class AM_WMT_EVENT_DATA extends Struct {
-  @Int32() external int hrStatus;
-  external Pointer pData;
 }
 

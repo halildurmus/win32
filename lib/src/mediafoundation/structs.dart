@@ -43,12 +43,6 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class CodecAPIEventData extends Struct {
-  external GUID guid;
-  @Uint32() external int dataLength;
-  external __uint__ reserved;
-}
-
 class D3D11_VIDEO_DECODER_DESC extends Struct {
   external GUID Guid;
   @Uint32() external int SampleWidth;
@@ -178,6 +172,10 @@ class D3D11_VIDEO_COLOR_YCbCrA extends Struct {
   @Float() external double Cb;
   @Float() external double Cr;
   @Float() external double A;
+}
+
+class D3D11_VIDEO_COLOR extends Struct {
+  @Uint32() external int Anonymous;
 }
 
 class D3D11_VIDEO_PROCESSOR_COLOR_SPACE extends Struct {
@@ -370,9 +368,21 @@ class D3D11_TEX2D_VDOV extends Struct {
   @Uint32() external int ArraySlice;
 }
 
+class D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC extends Struct {
+  external GUID DecodeProfile;
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Anonymous;
+}
+
 class D3D11_TEX2D_VPIV extends Struct {
   @Uint32() external int MipSlice;
   @Uint32() external int ArraySlice;
+}
+
+class D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC extends Struct {
+  @Uint32() external int FourCC;
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Anonymous;
 }
 
 class D3D11_TEX2D_VPOV extends Struct {
@@ -383,6 +393,11 @@ class D3D11_TEX2D_ARRAY_VPOV extends Struct {
   @Uint32() external int MipSlice;
   @Uint32() external int FirstArraySlice;
   @Uint32() external int ArraySize;
+}
+
+class D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC extends Struct {
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Anonymous;
 }
 
 class D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK extends Struct {
@@ -1390,6 +1405,8 @@ class DXVA_VideoSample extends Struct {
 }
 
 class DXVA_VideoSample2 extends Struct {
+  @Uint32() external int Size;
+  @Uint32() external int Reserved;
   @Int64() external int rtStart;
   @Int64() external int rtEnd;
   @Uint32() external int SampleFormat;
@@ -1409,6 +1426,29 @@ class DXVA_DeinterlaceCaps extends Struct {
   @Uint32() external int d3dOutputFormat;
   @Uint32() external int VideoProcessingCaps;
   @Uint32() external int DeinterlaceTechnology;
+}
+
+class DXVA_VideoSample32 extends Struct {
+  @Int64() external int rtStart;
+  @Int64() external int rtEnd;
+  @Uint32() external int SampleFormat;
+  @Uint32() external int SampleFlags;
+  @Uint32() external int lpDDSSrcSurface;
+  external RECT rcSrc;
+  external RECT rcDst;
+  external DXVA_AYUVsample2 Palette;
+}
+
+class DXVA_DeinterlaceBltEx32 extends Struct {
+  @Uint32() external int Size;
+  external DXVA_AYUVsample2 BackgroundColor;
+  external RECT rcTarget;
+  @Int64() external int rtTarget;
+  @Uint32() external int NumSourceSurfaces;
+  @Float() external double Alpha;
+  external DXVA_VideoSample32 Source;
+  @Uint32() external int DestinationFormat;
+  @Uint32() external int DestinationFlags;
 }
 
 class DXVA_DeinterlaceBlt extends Struct {
@@ -1585,6 +1625,10 @@ class DXVAHD_BLT_STATE_BACKGROUND_COLOR_DATA extends Struct {
   external DXVAHD_COLOR BackgroundColor;
 }
 
+class DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA extends Struct {
+  @Uint32() external int Anonymous;
+}
+
 class DXVAHD_BLT_STATE_ALPHA_FILL_DATA extends Struct {
   @Uint32() external int Mode;
   @Uint32() external int StreamNumber;
@@ -1607,6 +1651,10 @@ class DXVAHD_STREAM_STATE_D3DFORMAT_DATA extends Struct {
 
 class DXVAHD_STREAM_STATE_FRAME_FORMAT_DATA extends Struct {
   @Uint32() external int FrameFormat;
+}
+
+class DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA extends Struct {
+  @Uint32() external int Anonymous;
 }
 
 class DXVAHD_STREAM_STATE_OUTPUT_RATE_DATA extends Struct {
@@ -1746,6 +1794,10 @@ class DXVAHDETW_DESTROYVIDEOPROCESSOR extends Struct {
   @Uint64() external int pObject;
 }
 
+class DXVA2_ExtendedFormat extends Struct {
+  @Uint32() external int Anonymous;
+}
+
 class DXVA2_Frequency extends Struct {
   @Uint32() external int Numerator;
   @Uint32() external int Denominator;
@@ -1773,6 +1825,10 @@ class DXVA2_VideoProcessorCaps extends Struct {
   @Uint32() external int VideoProcessorOperations;
   @Uint32() external int NoiseFilterTechnology;
   @Uint32() external int DetailFilterTechnology;
+}
+
+class DXVA2_Fixed32 extends Struct {
+  @Uint32() external int Anonymous;
 }
 
 class DXVA2_AYUVSample8 extends Struct {
@@ -2170,6 +2226,13 @@ class ASF_FLAT_SYNCHRONISED_LYRICS extends Struct {
   @Uint8() external int bTimeStampFormat;
   @Uint8() external int bContentType;
   @Uint32() external int dwLyricsLen;
+}
+
+class MFTOPONODE_ATTRIBUTE_UPDATE extends Struct {
+  @Uint64() external int NodeId;
+  external GUID guidAttributeKey;
+  @Uint32() external int attrType;
+  @Uint32() external int Anonymous;
 }
 
 class MF_LEAKY_BUCKET_PAIR extends Struct {
@@ -2585,6 +2648,18 @@ class MFVideoAlphaBitmapParams extends Struct {
   external MFVideoNormalizedRect nrcDest;
   @Float() external double fAlpha;
   @Uint32() external int dwFilterMode;
+}
+
+class MFVideoAlphaBitmap extends Struct {
+  @Int32() external int GetBitmapFromDC;
+  @Uint32() external int bitmap;
+  external MFVideoAlphaBitmapParams params;
+}
+
+class CodecAPIEventData extends Struct {
+  external GUID guid;
+  @Uint32() external int dataLength;
+  external __uint__ reserved;
 }
 
 class D3DOVERLAYCAPS extends Struct {

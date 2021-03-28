@@ -55,6 +55,25 @@ class PXE_DHCP_OPTION extends Struct {
   external __ubyte__ OptionValue;
 }
 
+class PXE_DHCP_MESSAGE extends Struct {
+  @Uint8() external int Operation;
+  @Uint8() external int HardwareAddressType;
+  @Uint8() external int HardwareAddressLength;
+  @Uint8() external int HopCount;
+  @Uint32() external int TransactionID;
+  @Uint16() external int SecondsSinceBoot;
+  @Uint16() external int Reserved;
+  @Uint32() external int ClientIpAddress;
+  @Uint32() external int YourIpAddress;
+  @Uint32() external int BootstrapServerAddress;
+  @Uint32() external int RelayAgentIpAddress;
+  external __ubyte__ HardwareAddress;
+  external __ubyte__ HostName;
+  external __ubyte__ BootFileName;
+  @Uint32() external int Anonymous;
+  external PXE_DHCP_OPTION Option;
+}
+
 class PXE_DHCPV6_OPTION extends Struct {
   @Uint16() external int OptionCode;
   @Uint16() external int DataLength;
@@ -88,6 +107,13 @@ class PXE_PROVIDER extends Struct {
   external Pointer<Utf16> pwszFilePath;
   @Int32() external int bIsCritical;
   @Uint32() external int uIndex;
+}
+
+class PXE_ADDRESS extends Struct {
+  @Uint32() external int uFlags;
+  @Uint32() external int Anonymous;
+  @Uint32() external int uAddrLen;
+  @Uint16() external int uPort;
 }
 
 class PXE_DHCPV6_NESTED_RELAY_MESSAGE extends Struct {

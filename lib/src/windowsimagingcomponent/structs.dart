@@ -43,15 +43,6 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class IWICColorContext extends Struct {
-}
-
-class IWICImagingFactory extends Struct {
-}
-
-class IWICBitmapFrameDecode extends Struct {
-}
-
 class WICRect extends Struct {
   @Int32() external int X;
   @Int32() external int Y;

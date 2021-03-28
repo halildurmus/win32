@@ -145,6 +145,25 @@ class PSS_VA_SPACE_ENTRY extends Struct {
   external Pointer<Utf16> MappedFileName;
 }
 
+class PSS_HANDLE_ENTRY extends Struct {
+  @IntPtr() external int Handle;
+  @Uint32() external int Flags;
+  @Uint32() external int ObjectType;
+  external FILETIME CaptureTime;
+  @Uint32() external int Attributes;
+  @Uint32() external int GrantedAccess;
+  @Uint32() external int HandleCount;
+  @Uint32() external int PointerCount;
+  @Uint32() external int PagedPoolCharge;
+  @Uint32() external int NonPagedPoolCharge;
+  external FILETIME CreationTime;
+  @Uint16() external int TypeNameLength;
+  external Pointer<Utf16> TypeName;
+  @Uint16() external int ObjectNameLength;
+  external Pointer<Utf16> ObjectName;
+  @Uint32() external int TypeSpecificInformation;
+}
+
 class PSS_THREAD_ENTRY extends Struct {
   @Uint32() external int ExitStatus;
   external Pointer TebBaseAddress;

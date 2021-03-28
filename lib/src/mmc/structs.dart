@@ -178,6 +178,19 @@ class MMC_TASK_DISPLAY_BITMAP extends Struct {
   external Pointer<Utf16> szMouseOffBitmap;
 }
 
+class MMC_TASK_DISPLAY_OBJECT extends Struct {
+  @Uint32() external int eDisplayType;
+  @Uint32() external int Anonymous;
+}
+
+class MMC_TASK extends Struct {
+  external MMC_TASK_DISPLAY_OBJECT sDisplayObject;
+  external Pointer<Utf16> szText;
+  external Pointer<Utf16> szHelpString;
+  @Uint32() external int eActionType;
+  @Uint32() external int Anonymous;
+}
+
 class MMC_LISTPAD_INFO extends Struct {
   external Pointer<Utf16> szTitle;
   external Pointer<Utf16> szButtonText;
@@ -222,6 +235,13 @@ class RDCOMPARE extends Struct {
   @IntPtr() external int lUserParam;
   external Pointer<RDITEMHDR> prdch1;
   external Pointer<RDITEMHDR> prdch2;
+}
+
+class RESULT_VIEW_TYPE_INFO extends Struct {
+  external Pointer<Utf16> pstrPersistableViewDescription;
+  @Uint32() external int eViewType;
+  @Uint32() external int dwMiscOptions;
+  @Uint32() external int Anonymous;
 }
 
 class CONTEXTMENUITEM2 extends Struct {

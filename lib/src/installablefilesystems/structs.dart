@@ -43,12 +43,48 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class HFILTER extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HFILTER_INSTANCE extends Struct {
+  @IntPtr() external int Value;
+}
+
+class FilterFindHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class FilterVolumeFindHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class FilterInstanceFindHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class FilterVolumeInstanceFindHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
 class FILTER_FULL_INFORMATION extends Struct {
   @Uint32() external int NextEntryOffset;
   @Uint32() external int FrameID;
   @Uint32() external int NumberOfInstances;
   @Uint16() external int FilterNameLength;
   external __ushort__ FilterNameBuffer;
+}
+
+class FILTER_AGGREGATE_BASIC_INFORMATION extends Struct {
+  @Uint32() external int NextEntryOffset;
+  @Uint32() external int Flags;
+  @Uint32() external int Type;
+}
+
+class FILTER_AGGREGATE_STANDARD_INFORMATION extends Struct {
+  @Uint32() external int NextEntryOffset;
+  @Uint32() external int Flags;
+  @Uint32() external int Type;
 }
 
 class FILTER_VOLUME_BASIC_INFORMATION extends Struct {
@@ -91,6 +127,12 @@ class INSTANCE_FULL_INFORMATION extends Struct {
   @Uint16() external int FilterNameBufferOffset;
 }
 
+class INSTANCE_AGGREGATE_STANDARD_INFORMATION extends Struct {
+  @Uint32() external int NextEntryOffset;
+  @Uint32() external int Flags;
+  @Uint32() external int Type;
+}
+
 class FILTER_MESSAGE_HEADER extends Struct {
   @Uint32() external int ReplyLength;
   @Uint64() external int MessageId;
@@ -99,29 +141,5 @@ class FILTER_MESSAGE_HEADER extends Struct {
 class FILTER_REPLY_HEADER extends Struct {
   @Int32() external int Status;
   @Uint64() external int MessageId;
-}
-
-class FilterFindHandle extends Struct {
-  @IntPtr() external int Value;
-}
-
-class FilterInstanceFindHandle extends Struct {
-  @IntPtr() external int Value;
-}
-
-class FilterVolumeFindHandle extends Struct {
-  @IntPtr() external int Value;
-}
-
-class FilterVolumeInstanceFindHandle extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HFILTER extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HFILTER_INSTANCE extends Struct {
-  @IntPtr() external int Value;
 }
 

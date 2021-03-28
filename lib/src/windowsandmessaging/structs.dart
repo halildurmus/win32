@@ -43,6 +43,22 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class HWND extends Struct {
+  @IntPtr() external int Value;
+}
+
+class LPARAM extends Struct {
+  @IntPtr() external int Value;
+}
+
+class WPARAM extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HHOOK extends Struct {
+  @IntPtr() external int Value;
+}
+
 class MESSAGE_RESOURCE_ENTRY extends Struct {
   @Uint16() external int Length;
   @Uint16() external int Flags;
@@ -58,22 +74,6 @@ class MESSAGE_RESOURCE_BLOCK extends Struct {
 class MESSAGE_RESOURCE_DATA extends Struct {
   @Uint32() external int NumberOfBlocks;
   external MESSAGE_RESOURCE_BLOCK Blocks;
-}
-
-class HHOOK extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HWND extends Struct {
-  @IntPtr() external int Value;
-}
-
-class LPARAM extends Struct {
-  @IntPtr() external int Value;
-}
-
-class WPARAM extends Struct {
-  @IntPtr() external int Value;
 }
 
 class VS_FIXEDFILEINFO extends Struct {
@@ -111,7 +111,7 @@ class OPENFILENAME_NT4A extends Struct {
   @Uint16() external int nFileExtension;
   external Pointer<Utf8> lpstrDefExt;
   @IntPtr() external int lCustData;
-  external Pointer<OFNHOOKPROC> lpfnHook;
+  external Pointer<NativeFunction<OFNHookProc>> lpfnHook;
   external Pointer<Utf8> lpTemplateName;
 }
 
@@ -134,7 +134,7 @@ class OPENFILENAME_NT4W extends Struct {
   @Uint16() external int nFileExtension;
   external Pointer<Utf16> lpstrDefExt;
   @IntPtr() external int lCustData;
-  external Pointer<OFNHOOKPROC> lpfnHook;
+  external Pointer<NativeFunction<OFNHookProc>> lpfnHook;
   external Pointer<Utf16> lpTemplateName;
 }
 
@@ -157,7 +157,7 @@ class OPENFILENAMEA extends Struct {
   @Uint16() external int nFileExtension;
   external Pointer<Utf8> lpstrDefExt;
   @IntPtr() external int lCustData;
-  external Pointer<OFNHOOKPROC> lpfnHook;
+  external Pointer<NativeFunction<OFNHookProc>> lpfnHook;
   external Pointer<Utf8> lpTemplateName;
   external Pointer pvReserved;
   @Uint32() external int dwReserved;
@@ -183,7 +183,7 @@ class OPENFILENAMEW extends Struct {
   @Uint16() external int nFileExtension;
   external Pointer<Utf16> lpstrDefExt;
   @IntPtr() external int lCustData;
-  external Pointer<OFNHOOKPROC> lpfnHook;
+  external Pointer<NativeFunction<OFNHookProc>> lpfnHook;
   external Pointer<Utf16> lpTemplateName;
   external Pointer pvReserved;
   @Uint32() external int dwReserved;
@@ -224,7 +224,7 @@ class CHOOSECOLORA extends Struct {
   external Pointer<Uint32> lpCustColors;
   @Uint32() external int Flags;
   @IntPtr() external int lCustData;
-  external Pointer<CCHOOKPROC> lpfnHook;
+  external Pointer<NativeFunction<CCHookProc>> lpfnHook;
   external Pointer<Utf8> lpTemplateName;
 }
 
@@ -236,7 +236,7 @@ class CHOOSECOLORW extends Struct {
   external Pointer<Uint32> lpCustColors;
   @Uint32() external int Flags;
   @IntPtr() external int lCustData;
-  external Pointer<CCHOOKPROC> lpfnHook;
+  external Pointer<NativeFunction<CCHookProc>> lpfnHook;
   external Pointer<Utf16> lpTemplateName;
 }
 
@@ -250,7 +250,7 @@ class FINDREPLACEA extends Struct {
   @Uint16() external int wFindWhatLen;
   @Uint16() external int wReplaceWithLen;
   @IntPtr() external int lCustData;
-  external Pointer<FRHOOKPROC> lpfnHook;
+  external Pointer<NativeFunction<FRHookProc>> lpfnHook;
   external Pointer<Utf8> lpTemplateName;
 }
 
@@ -264,7 +264,7 @@ class FINDREPLACEW extends Struct {
   @Uint16() external int wFindWhatLen;
   @Uint16() external int wReplaceWithLen;
   @IntPtr() external int lCustData;
-  external Pointer<FRHOOKPROC> lpfnHook;
+  external Pointer<NativeFunction<FRHookProc>> lpfnHook;
   external Pointer<Utf16> lpTemplateName;
 }
 
@@ -277,7 +277,7 @@ class CHOOSEFONTA extends Struct {
   @Uint32() external int Flags;
   @Uint32() external int rgbColors;
   @IntPtr() external int lCustData;
-  external Pointer<CFHOOKPROC> lpfnHook;
+  external Pointer<NativeFunction<CFHookProc>> lpfnHook;
   external Pointer<Utf8> lpTemplateName;
   @IntPtr() external int hInstance;
   external Pointer<Utf8> lpszStyle;
@@ -296,7 +296,7 @@ class CHOOSEFONTW extends Struct {
   @Uint32() external int Flags;
   @Uint32() external int rgbColors;
   @IntPtr() external int lCustData;
-  external Pointer<CFHOOKPROC> lpfnHook;
+  external Pointer<NativeFunction<CFHookProc>> lpfnHook;
   external Pointer<Utf16> lpTemplateName;
   @IntPtr() external int hInstance;
   external Pointer<Utf16> lpszStyle;
@@ -533,7 +533,7 @@ class HARDWAREHOOKSTRUCT extends Struct {
 class WNDCLASSEXA extends Struct {
   @Uint32() external int cbSize;
   @Uint32() external int style;
-  external WNDPROC lpfnWndProc;
+  external Pointer<NativeFunction<WindowProc>> lpfnWndProc;
   @Int32() external int cbClsExtra;
   @Int32() external int cbWndExtra;
   @IntPtr() external int hInstance;
@@ -548,7 +548,7 @@ class WNDCLASSEXA extends Struct {
 class WNDCLASSEXW extends Struct {
   @Uint32() external int cbSize;
   @Uint32() external int style;
-  external WNDPROC lpfnWndProc;
+  external Pointer<NativeFunction<WindowProc>> lpfnWndProc;
   @Int32() external int cbClsExtra;
   @Int32() external int cbWndExtra;
   @IntPtr() external int hInstance;
@@ -562,7 +562,7 @@ class WNDCLASSEXW extends Struct {
 
 class WNDCLASSA extends Struct {
   @Uint32() external int style;
-  external WNDPROC lpfnWndProc;
+  external Pointer<NativeFunction<WindowProc>> lpfnWndProc;
   @Int32() external int cbClsExtra;
   @Int32() external int cbWndExtra;
   @IntPtr() external int hInstance;
@@ -575,7 +575,7 @@ class WNDCLASSA extends Struct {
 
 class WNDCLASSW extends Struct {
   @Uint32() external int style;
-  external WNDPROC lpfnWndProc;
+  external Pointer<NativeFunction<WindowProc>> lpfnWndProc;
   @Int32() external int cbClsExtra;
   @Int32() external int cbWndExtra;
   @IntPtr() external int hInstance;
@@ -625,7 +625,7 @@ class NCCALCSIZE_PARAMS extends Struct {
 }
 
 class ACCEL extends Struct {
-  @Uint32() external int fVirt;
+  @Uint8() external int fVirt;
   @Uint16() external int key;
   @Uint16() external int cmd;
 }

@@ -43,3 +43,9 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class EC_VARIANT extends Struct {
+  @Uint32() external int Anonymous;
+  @Uint32() external int Count;
+  @Uint32() external int Type;
+}
+

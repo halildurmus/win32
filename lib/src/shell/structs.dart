@@ -43,6 +43,29 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class ShFindChangeNotificationHandle extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HDROP extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HPSXA extends Struct {
+  @IntPtr() external int Value;
+}
+
+class APPCATEGORYINFO extends Struct {
+  @Uint32() external int Locale;
+  external Pointer<Utf16> pszDescription;
+  external GUID AppCategoryId;
+}
+
+class APPCATEGORYINFOLIST extends Struct {
+  @Uint32() external int cCategory;
+  external Pointer<APPCATEGORYINFO> pCategoryInfo;
+}
+
 class LOGFONTA extends Struct {
   @Int32() external int lfHeight;
   @Int32() external int lfWidth;
@@ -77,157 +100,66 @@ class LOGFONTW extends Struct {
   external __ushort__ lfFaceName;
 }
 
+class SOFTDISTINFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwAdState;
+  external Pointer<Utf16> szTitle;
+  external Pointer<Utf16> szAbstract;
+  external Pointer<Utf16> szHREF;
+  @Uint32() external int dwInstalledVersionMS;
+  @Uint32() external int dwInstalledVersionLS;
+  @Uint32() external int dwUpdateVersionMS;
+  @Uint32() external int dwUpdateVersionLS;
+  @Uint32() external int dwAdvertisedVersionMS;
+  @Uint32() external int dwAdvertisedVersionLS;
+  @Uint32() external int dwReserved;
+}
+
 class SERIALIZEDPROPERTYVALUE extends Struct {
   @Uint32() external int dwType;
   external __ubyte__ rgb;
 }
 
-class HDROP extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HPSXA extends Struct {
-  @IntPtr() external int Value;
-}
-
-class ShFindChangeNotificationHandle extends Struct {
-  @IntPtr() external int Value;
-}
-
-class DRAGINFOA extends Struct {
-  @Uint32() external int uSize;
-  external POINT pt;
-  @Int32() external int fNC;
-  external Pointer<Utf8> lpFileList;
-  @Uint32() external int grfKeyState;
-}
-
-class DRAGINFOW extends Struct {
-  @Uint32() external int uSize;
-  external POINT pt;
-  @Int32() external int fNC;
-  external Pointer<Utf16> lpFileList;
-  @Uint32() external int grfKeyState;
-}
-
-class APPBARDATA extends Struct {
+class HELPINFO extends Struct {
   @Uint32() external int cbSize;
-  @IntPtr() external int hWnd;
-  @Uint32() external int uCallbackMessage;
-  @Uint32() external int uEdge;
-  external RECT rc;
-  @IntPtr() external int lParam;
+  @Int32() external int iContextType;
+  @Int32() external int iCtrlId;
+  @IntPtr() external int hItemHandle;
+  @IntPtr() external int dwContextId;
+  external POINT MousePos;
 }
 
-class SHFILEOPSTRUCTA extends Struct {
-  @IntPtr() external int hwnd;
-  @Uint32() external int wFunc;
-  external Pointer<Int8> pFrom;
-  external Pointer<Int8> pTo;
-  @Uint16() external int fFlags;
-  @Int32() external int fAnyOperationsAborted;
-  external Pointer hNameMappings;
-  external Pointer<Utf8> lpszProgressTitle;
+class MULTIKEYHELPA extends Struct {
+  @Uint32() external int mkSize;
+  @Int8() external int mkKeylist;
+  external __byte__ szKeyphrase;
 }
 
-class SHFILEOPSTRUCTW extends Struct {
-  @IntPtr() external int hwnd;
-  @Uint32() external int wFunc;
-  external Pointer<Utf16> pFrom;
-  external Pointer<Utf16> pTo;
-  @Uint16() external int fFlags;
-  @Int32() external int fAnyOperationsAborted;
-  external Pointer hNameMappings;
-  external Pointer<Utf16> lpszProgressTitle;
+class MULTIKEYHELPW extends Struct {
+  @Uint32() external int mkSize;
+  @Uint16() external int mkKeylist;
+  external __ushort__ szKeyphrase;
 }
 
-class SHNAMEMAPPINGA extends Struct {
-  external Pointer<Utf8> pszOldPath;
-  external Pointer<Utf8> pszNewPath;
-  @Int32() external int cchOldPath;
-  @Int32() external int cchNewPath;
+class HELPWININFOA extends Struct {
+  @Int32() external int wStructSize;
+  @Int32() external int x;
+  @Int32() external int y;
+  @Int32() external int dx;
+  @Int32() external int dy;
+  @Int32() external int wMax;
+  external __byte__ rgchMember;
 }
 
-class SHNAMEMAPPINGW extends Struct {
-  external Pointer<Utf16> pszOldPath;
-  external Pointer<Utf16> pszNewPath;
-  @Int32() external int cchOldPath;
-  @Int32() external int cchNewPath;
-}
-
-class SHCREATEPROCESSINFOW extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int fMask;
-  @IntPtr() external int hwnd;
-  external Pointer<Utf16> pszFile;
-  external Pointer<Utf16> pszParameters;
-  external Pointer<Utf16> pszCurrentDirectory;
-  @IntPtr() external int hUserToken;
-  external Pointer<SECURITY_ATTRIBUTES> lpProcessAttributes;
-  external Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes;
-  @Int32() external int bInheritHandles;
-  @Uint32() external int dwCreationFlags;
-  external Pointer<STARTUPINFO> lpStartupInfo;
-  external Pointer<PROCESS_INFORMATION> lpProcessInformation;
-}
-
-class ASSOCIATIONELEMENT extends Struct {
-  @Uint32() external int ac;
-  @IntPtr() external int hkClass;
-  external Pointer<Utf16> pszClass;
-}
-
-class SHQUERYRBINFO extends Struct {
-  @Uint32() external int cbSize;
-  @Int64() external int i64Size;
-  @Int64() external int i64NumItems;
-}
-
-class NOTIFYICONIDENTIFIER extends Struct {
-  @Uint32() external int cbSize;
-  @IntPtr() external int hWnd;
-  @Uint32() external int uID;
-  external GUID guidItem;
-}
-
-class SHFILEINFOA extends Struct {
-  @IntPtr() external int hIcon;
-  @Int32() external int iIcon;
-  @Uint32() external int dwAttributes;
-  external __byte__ szDisplayName;
-  external __byte__ szTypeName;
-}
-
-class SHFILEINFOW extends Struct {
-  @IntPtr() external int hIcon;
-  @Int32() external int iIcon;
-  @Uint32() external int dwAttributes;
-  external __ushort__ szDisplayName;
-  external __ushort__ szTypeName;
-}
-
-class SHSTOCKICONINFO extends Struct {
-  @Uint32() external int cbSize;
-  @IntPtr() external int hIcon;
-  @Int32() external int iSysImageIndex;
-  @Int32() external int iIcon;
-  external __ushort__ szPath;
-}
-
-class OPEN_PRINTER_PROPS_INFOA extends Struct {
-  @Uint32() external int dwSize;
-  external Pointer<Utf8> pszSheetName;
-  @Uint32() external int uSheetIndex;
-  @Uint32() external int dwFlags;
-  @Int32() external int bModal;
-}
-
-class OPEN_PRINTER_PROPS_INFOW extends Struct {
-  @Uint32() external int dwSize;
-  external Pointer<Utf16> pszSheetName;
-  @Uint32() external int uSheetIndex;
-  @Uint32() external int dwFlags;
-  @Int32() external int bModal;
+class HELPWININFOW extends Struct {
+  @Int32() external int wStructSize;
+  @Int32() external int x;
+  @Int32() external int y;
+  @Int32() external int dx;
+  @Int32() external int dy;
+  @Int32() external int wMax;
+  external __ushort__ rgchMember;
 }
 
 class QueryCancelAutoPlay extends Struct {
@@ -321,6 +253,11 @@ class SHITEMID extends Struct {
 
 class ITEMIDLIST extends Struct {
   external SHITEMID mkid;
+}
+
+class STRRET extends Struct {
+  @Uint32() external int uType;
+  @Uint32() external int Anonymous;
 }
 
 class SHELLDETAILS extends Struct {
@@ -491,7 +428,7 @@ class CMINVOKECOMMANDINFOEX extends Struct {
 }
 
 class PERSIST_FOLDER_TARGET_INFO extends Struct {
-  external Pointer<Uint32> pidlTargetFolder;
+  external Pointer<ITEMIDLIST> pidlTargetFolder;
   external __ushort__ szTargetParsingName;
   external __ushort__ szNetworkProvider;
   @Uint32() external int dwAttributes;
@@ -593,8 +530,8 @@ class SMDATA extends Struct {
   @Uint32() external int uIdParent;
   @Uint32() external int uIdAncestor;
   external Pointer punk;
-  external Pointer<Uint32> pidlFolder;
-  external Pointer<Uint32> pidlItem;
+  external Pointer<ITEMIDLIST> pidlFolder;
+  external Pointer<ITEMIDLIST> pidlItem;
   external Pointer psf;
   external Pointer pvUserData;
 }
@@ -608,8 +545,8 @@ class SMINFO extends Struct {
 
 class SMCSHCHANGENOTIFYSTRUCT extends Struct {
   @Int32() external int lEvent;
-  external Pointer<Uint32> pidl1;
-  external Pointer<Uint32> pidl2;
+  external Pointer<ITEMIDLIST> pidl1;
+  external Pointer<ITEMIDLIST> pidl2;
 }
 
 class KNOWNFOLDER_DEFINITION extends Struct {
@@ -645,7 +582,7 @@ class NSTCCUSTOMDRAW extends Struct {
   @Uint32() external int nstcis;
   external Pointer<Utf16> pszText;
   @Int32() external int iImage;
-  external HIMAGELIST himl;
+  @IntPtr() external int himl;
   @Int32() external int iLevel;
   @Int32() external int iIndent;
 }
@@ -751,7 +688,7 @@ class SHFOLDERCUSTOMSETTINGS extends Struct {
 
 class BROWSEINFOA extends Struct {
   @IntPtr() external int hwndOwner;
-  external Pointer<Uint32> pidlRoot;
+  external Pointer<ITEMIDLIST> pidlRoot;
   external Pointer<Utf8> pszDisplayName;
   external Pointer<Utf8> lpszTitle;
   @Uint32() external int ulFlags;
@@ -762,7 +699,7 @@ class BROWSEINFOA extends Struct {
 
 class BROWSEINFOW extends Struct {
   @IntPtr() external int hwndOwner;
-  external Pointer<Uint32> pidlRoot;
+  external Pointer<ITEMIDLIST> pidlRoot;
   external Pointer<Utf16> pszDisplayName;
   external Pointer<Utf16> lpszTitle;
   @Uint32() external int ulFlags;
@@ -840,7 +777,7 @@ class DROPDESCRIPTION extends Struct {
 }
 
 class SHChangeNotifyEntry extends Struct {
-  external Pointer<Uint32> pidl;
+  external Pointer<ITEMIDLIST> pidl;
   @Int32() external int fRecursive;
 }
 
@@ -850,7 +787,7 @@ class SHARDAPPIDINFO extends Struct {
 }
 
 class SHARDAPPIDINFOIDLIST extends Struct {
-  external Pointer<Uint32> pidl;
+  external Pointer<ITEMIDLIST> pidl;
   external Pointer<Utf16> pszAppID;
 }
 
@@ -921,7 +858,7 @@ class QCMINFO extends Struct {
 }
 
 class DETAILSINFO extends Struct {
-  external Pointer<Uint32> pidl;
+  external Pointer<ITEMIDLIST> pidl;
   @Int32() external int fmt;
   @Int32() external int cxChar;
   external STRRET str;
@@ -956,10 +893,10 @@ class SFV_CREATE extends Struct {
 class DEFCONTEXTMENU extends Struct {
   @IntPtr() external int hwnd;
   external Pointer pcmcb;
-  external Pointer<Uint32> pidlFolder;
+  external Pointer<ITEMIDLIST> pidlFolder;
   external Pointer psf;
   @Uint32() external int cidl;
-  external Pointer<Pointer<Uint32>> apidl;
+  external Pointer<Pointer<ITEMIDLIST>> apidl;
   external Pointer punkAssociationInfo;
   @Uint32() external int cKeys;
   external Pointer<IntPtr> aKeys;
@@ -979,7 +916,7 @@ class CSFV extends Struct {
   @Uint32() external int cbSize;
   external Pointer pshf;
   external IShellView psvOuter;
-  external Pointer<Uint32> pidl;
+  external Pointer<ITEMIDLIST> pidl;
   @Int32() external int lEvents;
   external Pointer<FNVIEWCALLBACK> pfnCallback;
   @Uint32() external int fvm;
@@ -1021,7 +958,7 @@ class BANDINFOSFB extends Struct {
   @Uint16() external int wViewMode;
   @Uint16() external int wAlign;
   external Pointer psf;
-  external Pointer<Uint32> pidl;
+  external Pointer<ITEMIDLIST> pidl;
 }
 
 class SHCOLUMNINFO extends Struct {
@@ -1060,7 +997,7 @@ class TBINFO extends Struct {
 }
 
 class SFV_SETITEMPOS extends Struct {
-  external Pointer<Uint32> pidl;
+  external Pointer<ITEMIDLIST> pidl;
   external POINT pt;
 }
 
@@ -1076,6 +1013,214 @@ class AASHELLMENUITEM extends Struct {
   @Uint32() external int uiReserved;
   external Pointer<AASHELLMENUFILENAME> lpName;
   external Pointer<Utf16> psz;
+}
+
+class DRAGINFOA extends Struct {
+  @Uint32() external int uSize;
+  external POINT pt;
+  @Int32() external int fNC;
+  external Pointer<Utf8> lpFileList;
+  @Uint32() external int grfKeyState;
+}
+
+class DRAGINFOW extends Struct {
+  @Uint32() external int uSize;
+  external POINT pt;
+  @Int32() external int fNC;
+  external Pointer<Utf16> lpFileList;
+  @Uint32() external int grfKeyState;
+}
+
+class APPBARDATA extends Struct {
+  @Uint32() external int cbSize;
+  @IntPtr() external int hWnd;
+  @Uint32() external int uCallbackMessage;
+  @Uint32() external int uEdge;
+  external RECT rc;
+  @IntPtr() external int lParam;
+}
+
+class SHFILEOPSTRUCTA extends Struct {
+  @IntPtr() external int hwnd;
+  @Uint32() external int wFunc;
+  external Pointer<Int8> pFrom;
+  external Pointer<Int8> pTo;
+  @Uint16() external int fFlags;
+  @Int32() external int fAnyOperationsAborted;
+  external Pointer hNameMappings;
+  external Pointer<Utf8> lpszProgressTitle;
+}
+
+class SHFILEOPSTRUCTW extends Struct {
+  @IntPtr() external int hwnd;
+  @Uint32() external int wFunc;
+  external Pointer<Utf16> pFrom;
+  external Pointer<Utf16> pTo;
+  @Uint16() external int fFlags;
+  @Int32() external int fAnyOperationsAborted;
+  external Pointer hNameMappings;
+  external Pointer<Utf16> lpszProgressTitle;
+}
+
+class SHNAMEMAPPINGA extends Struct {
+  external Pointer<Utf8> pszOldPath;
+  external Pointer<Utf8> pszNewPath;
+  @Int32() external int cchOldPath;
+  @Int32() external int cchNewPath;
+}
+
+class SHNAMEMAPPINGW extends Struct {
+  external Pointer<Utf16> pszOldPath;
+  external Pointer<Utf16> pszNewPath;
+  @Int32() external int cchOldPath;
+  @Int32() external int cchNewPath;
+}
+
+class SHELLEXECUTEINFOA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int fMask;
+  @IntPtr() external int hwnd;
+  external Pointer<Utf8> lpVerb;
+  external Pointer<Utf8> lpFile;
+  external Pointer<Utf8> lpParameters;
+  external Pointer<Utf8> lpDirectory;
+  @Int32() external int nShow;
+  @IntPtr() external int hInstApp;
+  external Pointer lpIDList;
+  external Pointer<Utf8> lpClass;
+  @IntPtr() external int hkeyClass;
+  @Uint32() external int dwHotKey;
+  @Uint32() external int Anonymous;
+  @IntPtr() external int hProcess;
+}
+
+class SHELLEXECUTEINFOW extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int fMask;
+  @IntPtr() external int hwnd;
+  external Pointer<Utf16> lpVerb;
+  external Pointer<Utf16> lpFile;
+  external Pointer<Utf16> lpParameters;
+  external Pointer<Utf16> lpDirectory;
+  @Int32() external int nShow;
+  @IntPtr() external int hInstApp;
+  external Pointer lpIDList;
+  external Pointer<Utf16> lpClass;
+  @IntPtr() external int hkeyClass;
+  @Uint32() external int dwHotKey;
+  @Uint32() external int Anonymous;
+  @IntPtr() external int hProcess;
+}
+
+class SHCREATEPROCESSINFOW extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int fMask;
+  @IntPtr() external int hwnd;
+  external Pointer<Utf16> pszFile;
+  external Pointer<Utf16> pszParameters;
+  external Pointer<Utf16> pszCurrentDirectory;
+  @IntPtr() external int hUserToken;
+  external Pointer<SECURITY_ATTRIBUTES> lpProcessAttributes;
+  external Pointer<SECURITY_ATTRIBUTES> lpThreadAttributes;
+  @Int32() external int bInheritHandles;
+  @Uint32() external int dwCreationFlags;
+  external Pointer<STARTUPINFO> lpStartupInfo;
+  external Pointer<PROCESS_INFORMATION> lpProcessInformation;
+}
+
+class ASSOCIATIONELEMENT extends Struct {
+  @Uint32() external int ac;
+  @IntPtr() external int hkClass;
+  external Pointer<Utf16> pszClass;
+}
+
+class SHQUERYRBINFO extends Struct {
+  @Uint32() external int cbSize;
+  @Int64() external int i64Size;
+  @Int64() external int i64NumItems;
+}
+
+class NOTIFYICONDATAA extends Struct {
+  @Uint32() external int cbSize;
+  @IntPtr() external int hWnd;
+  @Uint32() external int uID;
+  @Uint32() external int uFlags;
+  @Uint32() external int uCallbackMessage;
+  @IntPtr() external int hIcon;
+  external __byte__ szTip;
+  @Uint32() external int dwState;
+  @Uint32() external int dwStateMask;
+  external __byte__ szInfo;
+  @Uint32() external int Anonymous;
+  external __byte__ szInfoTitle;
+  @Uint32() external int dwInfoFlags;
+  external GUID guidItem;
+  @IntPtr() external int hBalloonIcon;
+}
+
+class NOTIFYICONDATAW extends Struct {
+  @Uint32() external int cbSize;
+  @IntPtr() external int hWnd;
+  @Uint32() external int uID;
+  @Uint32() external int uFlags;
+  @Uint32() external int uCallbackMessage;
+  @IntPtr() external int hIcon;
+  external __ushort__ szTip;
+  @Uint32() external int dwState;
+  @Uint32() external int dwStateMask;
+  external __ushort__ szInfo;
+  @Uint32() external int Anonymous;
+  external __ushort__ szInfoTitle;
+  @Uint32() external int dwInfoFlags;
+  external GUID guidItem;
+  @IntPtr() external int hBalloonIcon;
+}
+
+class NOTIFYICONIDENTIFIER extends Struct {
+  @Uint32() external int cbSize;
+  @IntPtr() external int hWnd;
+  @Uint32() external int uID;
+  external GUID guidItem;
+}
+
+class SHFILEINFOA extends Struct {
+  @IntPtr() external int hIcon;
+  @Int32() external int iIcon;
+  @Uint32() external int dwAttributes;
+  external __byte__ szDisplayName;
+  external __byte__ szTypeName;
+}
+
+class SHFILEINFOW extends Struct {
+  @IntPtr() external int hIcon;
+  @Int32() external int iIcon;
+  @Uint32() external int dwAttributes;
+  external __ushort__ szDisplayName;
+  external __ushort__ szTypeName;
+}
+
+class SHSTOCKICONINFO extends Struct {
+  @Uint32() external int cbSize;
+  @IntPtr() external int hIcon;
+  @Int32() external int iSysImageIndex;
+  @Int32() external int iIcon;
+  external __ushort__ szPath;
+}
+
+class OPEN_PRINTER_PROPS_INFOA extends Struct {
+  @Uint32() external int dwSize;
+  external Pointer<Utf8> pszSheetName;
+  @Uint32() external int uSheetIndex;
+  @Uint32() external int dwFlags;
+  @Int32() external int bModal;
+}
+
+class OPEN_PRINTER_PROPS_INFOW extends Struct {
+  @Uint32() external int dwSize;
+  external Pointer<Utf16> pszSheetName;
+  @Uint32() external int uSheetIndex;
+  @Uint32() external int dwFlags;
+  @Int32() external int bModal;
 }
 
 class PARSEDURLA extends Struct {
@@ -1322,7 +1467,7 @@ class TrackShellMenu extends Struct {
 class WINDOWDATA extends Struct {
   @Uint32() external int dwWindowID;
   @Uint32() external int uiCP;
-  external Pointer<Uint32> pidl;
+  external Pointer<ITEMIDLIST> pidl;
   external Pointer<Utf16> lpszUrl;
   external Pointer<Utf16> lpszUrlLocation;
   external Pointer<Utf16> lpszTitle;
@@ -1356,14 +1501,14 @@ class BASEBROWSERDATAXP extends Struct {
   @Int32() external int _eSecureLockIcon;
   @Uint32() external int _bitfield;
   @Uint32() external int _uActivateState;
-  external Pointer<Uint32> _pidlViewState;
+  external Pointer<ITEMIDLIST> _pidlViewState;
   external Pointer _pctView;
-  external Pointer<Uint32> _pidlCur;
+  external Pointer<ITEMIDLIST> _pidlCur;
   external IShellView _psv;
   external Pointer _psf;
   @IntPtr() external int _hwndView;
   external Pointer<Utf16> _pszTitleCur;
-  external Pointer<Uint32> _pidlPending;
+  external Pointer<ITEMIDLIST> _pidlPending;
   external IShellView _psvPending;
   external Pointer _psfPending;
   @IntPtr() external int _hwndViewPending;
@@ -1385,14 +1530,14 @@ class BASEBROWSERDATALH extends Struct {
   @Int32() external int _eSecureLockIcon;
   @Uint32() external int _bitfield;
   @Uint32() external int _uActivateState;
-  external Pointer<Uint32> _pidlViewState;
+  external Pointer<ITEMIDLIST> _pidlViewState;
   external Pointer _pctView;
-  external Pointer<Uint32> _pidlCur;
+  external Pointer<ITEMIDLIST> _pidlCur;
   external IShellView _psv;
   external Pointer _psf;
   @IntPtr() external int _hwndView;
   external Pointer<Utf16> _pszTitleCur;
-  external Pointer<Uint32> _pidlPending;
+  external Pointer<ITEMIDLIST> _pidlPending;
   external IShellView _psvPending;
   external Pointer _psfPending;
   @IntPtr() external int _hwndViewPending;
@@ -1497,73 +1642,5 @@ class NC_ADDRESS extends Struct {
   external Pointer<NET_ADDRESS_INFO> pAddrInfo;
   @Uint16() external int PortNumber;
   @Uint8() external int PrefixLength;
-}
-
-class APPCATEGORYINFO extends Struct {
-  @Uint32() external int Locale;
-  external Pointer<Utf16> pszDescription;
-  external GUID AppCategoryId;
-}
-
-class APPCATEGORYINFOLIST extends Struct {
-  @Uint32() external int cCategory;
-  external Pointer<APPCATEGORYINFO> pCategoryInfo;
-}
-
-class HELPINFO extends Struct {
-  @Uint32() external int cbSize;
-  @Int32() external int iContextType;
-  @Int32() external int iCtrlId;
-  @IntPtr() external int hItemHandle;
-  @IntPtr() external int dwContextId;
-  external POINT MousePos;
-}
-
-class MULTIKEYHELPA extends Struct {
-  @Uint32() external int mkSize;
-  @Int8() external int mkKeylist;
-  external __byte__ szKeyphrase;
-}
-
-class MULTIKEYHELPW extends Struct {
-  @Uint32() external int mkSize;
-  @Uint16() external int mkKeylist;
-  external __ushort__ szKeyphrase;
-}
-
-class HELPWININFOA extends Struct {
-  @Int32() external int wStructSize;
-  @Int32() external int x;
-  @Int32() external int y;
-  @Int32() external int dx;
-  @Int32() external int dy;
-  @Int32() external int wMax;
-  external __byte__ rgchMember;
-}
-
-class HELPWININFOW extends Struct {
-  @Int32() external int wStructSize;
-  @Int32() external int x;
-  @Int32() external int y;
-  @Int32() external int dx;
-  @Int32() external int dy;
-  @Int32() external int wMax;
-  external __ushort__ rgchMember;
-}
-
-class SOFTDISTINFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwAdState;
-  external Pointer<Utf16> szTitle;
-  external Pointer<Utf16> szAbstract;
-  external Pointer<Utf16> szHREF;
-  @Uint32() external int dwInstalledVersionMS;
-  @Uint32() external int dwInstalledVersionLS;
-  @Uint32() external int dwUpdateVersionMS;
-  @Uint32() external int dwUpdateVersionLS;
-  @Uint32() external int dwAdvertisedVersionMS;
-  @Uint32() external int dwAdvertisedVersionLS;
-  @Uint32() external int dwReserved;
 }
 

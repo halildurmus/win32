@@ -58,12 +58,23 @@ class DIAG_SOCKADDR extends Struct {
   external __byte__ data;
 }
 
+class HELPER_ATTRIBUTE extends Struct {
+  external Pointer<Utf16> pwszName;
+  @Uint32() external int type;
+  @Uint32() external int Anonymous;
+}
+
 class ShellCommandInfo extends Struct {
   external Pointer<Utf16> pwszOperation;
   external Pointer<Utf16> pwszFile;
   external Pointer<Utf16> pwszParameters;
   external Pointer<Utf16> pwszDirectory;
   @Uint32() external int nShowCmd;
+}
+
+class UiInfo extends Struct {
+  @Uint32() external int type;
+  @Uint32() external int Anonymous;
 }
 
 class RepairInfo extends Struct {

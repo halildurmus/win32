@@ -43,6 +43,10 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class HCOLORSPACE extends Struct {
+  @IntPtr() external int Value;
+}
+
 class CIEXYZ extends Struct {
   @Int32() external int ciexyzX;
   @Int32() external int ciexyzY;
@@ -79,10 +83,6 @@ class LOGCOLORSPACEW extends Struct {
   @Uint32() external int lcsGammaGreen;
   @Uint32() external int lcsGammaBlue;
   external __ushort__ lcsFilename;
-}
-
-class HCOLORSPACE extends Struct {
-  @IntPtr() external int Value;
 }
 
 class XYZColorF extends Struct {
@@ -209,6 +209,19 @@ class HiFiCOLOR extends Struct {
   external __ubyte__ channel;
 }
 
+class COLOR extends Struct {
+  external GRAYCOLOR gray;
+  external RGBCOLOR rgb;
+  external CMYKCOLOR cmyk;
+  external XYZCOLOR XYZ;
+  external YxyCOLOR Yxy;
+  external LabCOLOR Lab;
+  external GENERIC3CHANNEL gen3ch;
+  external NAMEDCOLOR named;
+  external HiFiCOLOR hifi;
+  @Uint32() external int Anonymous;
+}
+
 class PROFILEHEADER extends Struct {
   @Uint32() external int phSize;
   @Uint32() external int phCMMType;
@@ -329,6 +342,14 @@ class XYYPoint extends Struct {
   @Float() external double x;
   @Float() external double y;
   @Float() external double Y;
+}
+
+class WhitePoint extends Struct {
+  @Int32() external int type;
+  @Uint32() external int Anonymous;
+  @Int32() external int CHROMATICITY;
+  @Int32() external int TEMPERATURE;
+  @Int32() external int D65;
 }
 
 class DisplayID extends Struct {

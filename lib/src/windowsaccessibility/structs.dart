@@ -43,7 +43,7 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class HUIAEVENT extends Struct {
+class HWINEVENTHOOK extends Struct {
   @IntPtr() external int Value;
 }
 
@@ -59,111 +59,8 @@ class HUIATEXTRANGE extends Struct {
   @IntPtr() external int Value;
 }
 
-class HWINEVENTHOOK extends Struct {
+class HUIAEVENT extends Struct {
   @IntPtr() external int Value;
-}
-
-class SERIALKEYSA extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-  external Pointer<Utf8> lpszActivePort;
-  external Pointer<Utf8> lpszPort;
-  @Uint32() external int iBaudRate;
-  @Uint32() external int iPortState;
-  @Uint32() external int iActive;
-}
-
-class SERIALKEYSW extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-  external Pointer<Utf16> lpszActivePort;
-  external Pointer<Utf16> lpszPort;
-  @Uint32() external int iBaudRate;
-  @Uint32() external int iPortState;
-  @Uint32() external int iActive;
-}
-
-class HIGHCONTRASTA extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-  external Pointer<Utf8> lpszDefaultScheme;
-}
-
-class HIGHCONTRASTW extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-  external Pointer<Utf16> lpszDefaultScheme;
-}
-
-class FILTERKEYS extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-  @Uint32() external int iWaitMSec;
-  @Uint32() external int iDelayMSec;
-  @Uint32() external int iRepeatMSec;
-  @Uint32() external int iBounceMSec;
-}
-
-class STICKYKEYS extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-}
-
-class MOUSEKEYS extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-  @Uint32() external int iMaxSpeed;
-  @Uint32() external int iTimeToMaxSpeed;
-  @Uint32() external int iCtrlSpeed;
-  @Uint32() external int dwReserved1;
-  @Uint32() external int dwReserved2;
-}
-
-class ACCESSTIMEOUT extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-  @Uint32() external int iTimeOutMSec;
-}
-
-class SOUNDSENTRYA extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-  @Uint32() external int iFSTextEffect;
-  @Uint32() external int iFSTextEffectMSec;
-  @Uint32() external int iFSTextEffectColorBits;
-  @Uint32() external int iFSGrafEffect;
-  @Uint32() external int iFSGrafEffectMSec;
-  @Uint32() external int iFSGrafEffectColor;
-  @Uint32() external int iWindowsEffect;
-  @Uint32() external int iWindowsEffectMSec;
-  external Pointer<Utf8> lpszWindowsEffectDLL;
-  @Uint32() external int iWindowsEffectOrdinal;
-}
-
-class SOUNDSENTRYW extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-  @Uint32() external int iFSTextEffect;
-  @Uint32() external int iFSTextEffectMSec;
-  @Uint32() external int iFSTextEffectColorBits;
-  @Uint32() external int iFSGrafEffect;
-  @Uint32() external int iFSGrafEffectMSec;
-  @Uint32() external int iFSGrafEffectColor;
-  @Uint32() external int iWindowsEffect;
-  @Uint32() external int iWindowsEffectMSec;
-  external Pointer<Utf16> lpszWindowsEffectDLL;
-  @Uint32() external int iWindowsEffectOrdinal;
-}
-
-class TOGGLEKEYS extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-}
-
-class IRawElementProviderWindowlessSite extends Struct {
-}
-
-class IRawElementProviderSimple extends Struct {
 }
 
 class MSAAControl extends Struct {
@@ -350,5 +247,102 @@ class CUIAutomation8 extends Struct {
 class ExtendedProperty extends Struct {
   external Pointer<Utf16> PropertyName;
   external Pointer<Utf16> PropertyValue;
+}
+
+class SERIALKEYSA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwFlags;
+  external Pointer<Utf8> lpszActivePort;
+  external Pointer<Utf8> lpszPort;
+  @Uint32() external int iBaudRate;
+  @Uint32() external int iPortState;
+  @Uint32() external int iActive;
+}
+
+class SERIALKEYSW extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwFlags;
+  external Pointer<Utf16> lpszActivePort;
+  external Pointer<Utf16> lpszPort;
+  @Uint32() external int iBaudRate;
+  @Uint32() external int iPortState;
+  @Uint32() external int iActive;
+}
+
+class HIGHCONTRASTA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwFlags;
+  external Pointer<Utf8> lpszDefaultScheme;
+}
+
+class HIGHCONTRASTW extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwFlags;
+  external Pointer<Utf16> lpszDefaultScheme;
+}
+
+class FILTERKEYS extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwFlags;
+  @Uint32() external int iWaitMSec;
+  @Uint32() external int iDelayMSec;
+  @Uint32() external int iRepeatMSec;
+  @Uint32() external int iBounceMSec;
+}
+
+class STICKYKEYS extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwFlags;
+}
+
+class MOUSEKEYS extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwFlags;
+  @Uint32() external int iMaxSpeed;
+  @Uint32() external int iTimeToMaxSpeed;
+  @Uint32() external int iCtrlSpeed;
+  @Uint32() external int dwReserved1;
+  @Uint32() external int dwReserved2;
+}
+
+class ACCESSTIMEOUT extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwFlags;
+  @Uint32() external int iTimeOutMSec;
+}
+
+class SOUNDSENTRYA extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwFlags;
+  @Uint32() external int iFSTextEffect;
+  @Uint32() external int iFSTextEffectMSec;
+  @Uint32() external int iFSTextEffectColorBits;
+  @Uint32() external int iFSGrafEffect;
+  @Uint32() external int iFSGrafEffectMSec;
+  @Uint32() external int iFSGrafEffectColor;
+  @Uint32() external int iWindowsEffect;
+  @Uint32() external int iWindowsEffectMSec;
+  external Pointer<Utf8> lpszWindowsEffectDLL;
+  @Uint32() external int iWindowsEffectOrdinal;
+}
+
+class SOUNDSENTRYW extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwFlags;
+  @Uint32() external int iFSTextEffect;
+  @Uint32() external int iFSTextEffectMSec;
+  @Uint32() external int iFSTextEffectColorBits;
+  @Uint32() external int iFSGrafEffect;
+  @Uint32() external int iFSGrafEffectMSec;
+  @Uint32() external int iFSGrafEffectColor;
+  @Uint32() external int iWindowsEffect;
+  @Uint32() external int iWindowsEffectMSec;
+  external Pointer<Utf16> lpszWindowsEffectDLL;
+  @Uint32() external int iWindowsEffectOrdinal;
+}
+
+class TOGGLEKEYS extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwFlags;
 }
 

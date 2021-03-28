@@ -47,6 +47,50 @@ class NL_INTERFACE_OFFLOAD_ROD extends Struct {
   @Uint8() external int _bitfield;
 }
 
+class MIB_IF_ROW2 extends Struct {
+  external NET_LUID_LH InterfaceLuid;
+  @Uint32() external int InterfaceIndex;
+  external GUID InterfaceGuid;
+  external __ushort__ Alias;
+  external __ushort__ Description;
+  @Uint32() external int PhysicalAddressLength;
+  external __ubyte__ PhysicalAddress;
+  external __ubyte__ PermanentPhysicalAddress;
+  @Uint32() external int Mtu;
+  @Uint32() external int Type;
+  @Uint32() external int TunnelType;
+  @Uint32() external int MediaType;
+  @Uint32() external int PhysicalMediumType;
+  @Uint32() external int AccessType;
+  @Uint32() external int DirectionType;
+  @Uint32() external int InterfaceAndOperStatusFlags;
+  @Uint32() external int OperStatus;
+  @Uint32() external int AdminStatus;
+  @Uint32() external int MediaConnectState;
+  external GUID NetworkGuid;
+  @Uint32() external int ConnectionType;
+  @Uint64() external int TransmitLinkSpeed;
+  @Uint64() external int ReceiveLinkSpeed;
+  @Uint64() external int InOctets;
+  @Uint64() external int InUcastPkts;
+  @Uint64() external int InNUcastPkts;
+  @Uint64() external int InDiscards;
+  @Uint64() external int InErrors;
+  @Uint64() external int InUnknownProtos;
+  @Uint64() external int InUcastOctets;
+  @Uint64() external int InMulticastOctets;
+  @Uint64() external int InBroadcastOctets;
+  @Uint64() external int OutOctets;
+  @Uint64() external int OutUcastPkts;
+  @Uint64() external int OutNUcastPkts;
+  @Uint64() external int OutDiscards;
+  @Uint64() external int OutErrors;
+  @Uint64() external int OutUcastOctets;
+  @Uint64() external int OutMulticastOctets;
+  @Uint64() external int OutBroadcastOctets;
+  @Uint64() external int OutQLen;
+}
+
 class MIB_IF_TABLE2 extends Struct {
   @Uint32() external int NumEntries;
   external MIB_IF_ROW2 Table;
@@ -187,9 +231,35 @@ class MIB_IPFORWARD_TABLE2 extends Struct {
   external MIB_IPFORWARD_ROW2 Table;
 }
 
+class MIB_IPPATH_ROW extends Struct {
+  external SOCKADDR_INET Source;
+  external SOCKADDR_INET Destination;
+  external NET_LUID_LH InterfaceLuid;
+  @Uint32() external int InterfaceIndex;
+  external SOCKADDR_INET CurrentNextHop;
+  @Uint32() external int PathMtu;
+  @Uint32() external int RttMean;
+  @Uint32() external int RttDeviation;
+  @Uint32() external int Anonymous;
+  @Uint8() external int IsReachable;
+  @Uint64() external int LinkTransmitSpeed;
+  @Uint64() external int LinkReceiveSpeed;
+}
+
 class MIB_IPPATH_TABLE extends Struct {
   @Uint32() external int NumEntries;
   external MIB_IPPATH_ROW Table;
+}
+
+class MIB_IPNET_ROW2 extends Struct {
+  external SOCKADDR_INET Address;
+  @Uint32() external int InterfaceIndex;
+  external NET_LUID_LH InterfaceLuid;
+  external __ubyte__ PhysicalAddress;
+  @Uint32() external int PhysicalAddressLength;
+  @Uint32() external int State;
+  @Uint32() external int Anonymous;
+  @Uint32() external int ReachabilityTime;
 }
 
 class MIB_IPNET_TABLE2 extends Struct {
@@ -267,9 +337,34 @@ class MIB_IPFORWARDNUMBER extends Struct {
   @Uint32() external int dwValue;
 }
 
+class MIB_IPFORWARDROW extends Struct {
+  @Uint32() external int dwForwardDest;
+  @Uint32() external int dwForwardMask;
+  @Uint32() external int dwForwardPolicy;
+  @Uint32() external int dwForwardNextHop;
+  @Uint32() external int dwForwardIfIndex;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int dwForwardAge;
+  @Uint32() external int dwForwardNextHopAS;
+  @Uint32() external int dwForwardMetric1;
+  @Uint32() external int dwForwardMetric2;
+  @Uint32() external int dwForwardMetric3;
+  @Uint32() external int dwForwardMetric4;
+  @Uint32() external int dwForwardMetric5;
+}
+
 class MIB_IPFORWARDTABLE extends Struct {
   @Uint32() external int dwNumEntries;
   external MIB_IPFORWARDROW table;
+}
+
+class MIB_IPNETROW_LH extends Struct {
+  @Uint32() external int dwIndex;
+  @Uint32() external int dwPhysAddrLen;
+  external __ubyte__ bPhysAddr;
+  @Uint32() external int dwAddr;
+  @Uint32() external int Anonymous;
 }
 
 class MIB_IPNETROW_W2K extends Struct {
@@ -283,6 +378,32 @@ class MIB_IPNETROW_W2K extends Struct {
 class MIB_IPNETTABLE extends Struct {
   @Uint32() external int dwNumEntries;
   external MIB_IPNETROW_LH table;
+}
+
+class MIB_IPSTATS_LH extends Struct {
+  @Uint32() external int Anonymous;
+  @Uint32() external int dwDefaultTTL;
+  @Uint32() external int dwInReceives;
+  @Uint32() external int dwInHdrErrors;
+  @Uint32() external int dwInAddrErrors;
+  @Uint32() external int dwForwDatagrams;
+  @Uint32() external int dwInUnknownProtos;
+  @Uint32() external int dwInDiscards;
+  @Uint32() external int dwInDelivers;
+  @Uint32() external int dwOutRequests;
+  @Uint32() external int dwRoutingDiscards;
+  @Uint32() external int dwOutDiscards;
+  @Uint32() external int dwOutNoRoutes;
+  @Uint32() external int dwReasmTimeout;
+  @Uint32() external int dwReasmReqds;
+  @Uint32() external int dwReasmOks;
+  @Uint32() external int dwReasmFails;
+  @Uint32() external int dwFragOks;
+  @Uint32() external int dwFragFails;
+  @Uint32() external int dwFragCreates;
+  @Uint32() external int dwNumIf;
+  @Uint32() external int dwNumAddr;
+  @Uint32() external int dwNumRoutes;
 }
 
 class MIB_IPSTATS_W2K extends Struct {
@@ -478,6 +599,14 @@ class MIB_IPMCAST_IF_TABLE extends Struct {
   external MIB_IPMCAST_IF_ENTRY table;
 }
 
+class MIB_TCPROW_LH extends Struct {
+  @Uint32() external int Anonymous;
+  @Uint32() external int dwLocalAddr;
+  @Uint32() external int dwLocalPort;
+  @Uint32() external int dwRemoteAddr;
+  @Uint32() external int dwRemotePort;
+}
+
 class MIB_TCPROW_W2K extends Struct {
   @Uint32() external int dwState;
   @Uint32() external int dwLocalAddr;
@@ -602,6 +731,24 @@ class MIB_TCP6TABLE_OWNER_MODULE extends Struct {
   external MIB_TCP6ROW_OWNER_MODULE table;
 }
 
+class MIB_TCPSTATS_LH extends Struct {
+  @Uint32() external int Anonymous;
+  @Uint32() external int dwRtoMin;
+  @Uint32() external int dwRtoMax;
+  @Uint32() external int dwMaxConn;
+  @Uint32() external int dwActiveOpens;
+  @Uint32() external int dwPassiveOpens;
+  @Uint32() external int dwAttemptFails;
+  @Uint32() external int dwEstabResets;
+  @Uint32() external int dwCurrEstab;
+  @Uint32() external int dwInSegs;
+  @Uint32() external int dwOutSegs;
+  @Uint32() external int dwRetransSegs;
+  @Uint32() external int dwInErrs;
+  @Uint32() external int dwOutRsts;
+  @Uint32() external int dwNumConns;
+}
+
 class MIB_TCPSTATS_W2K extends Struct {
   @Uint32() external int dwRtoAlgorithm;
   @Uint32() external int dwRtoMin;
@@ -659,6 +806,15 @@ class MIB_UDPTABLE_OWNER_PID extends Struct {
   external MIB_UDPROW_OWNER_PID table;
 }
 
+class MIB_UDPROW_OWNER_MODULE extends Struct {
+  @Uint32() external int dwLocalAddr;
+  @Uint32() external int dwLocalPort;
+  @Uint32() external int dwOwningPid;
+  @Int64() external int liCreateTimestamp;
+  @Uint32() external int Anonymous;
+  external __uint64__ OwningModuleInfo;
+}
+
 class MIB_UDPTABLE_OWNER_MODULE extends Struct {
   @Uint32() external int dwNumEntries;
   external MIB_UDPROW_OWNER_MODULE table;
@@ -685,6 +841,16 @@ class MIB_UDP6ROW_OWNER_PID extends Struct {
 class MIB_UDP6TABLE_OWNER_PID extends Struct {
   @Uint32() external int dwNumEntries;
   external MIB_UDP6ROW_OWNER_PID table;
+}
+
+class MIB_UDP6ROW_OWNER_MODULE extends Struct {
+  external __ubyte__ ucLocalAddr;
+  @Uint32() external int dwLocalScopeId;
+  @Uint32() external int dwLocalPort;
+  @Uint32() external int dwOwningPid;
+  @Int64() external int liCreateTimestamp;
+  @Uint32() external int Anonymous;
+  external __uint64__ OwningModuleInfo;
 }
 
 class MIB_UDP6TABLE_OWNER_MODULE extends Struct {
@@ -754,5 +920,10 @@ class MIB_IFSTATUS extends Struct {
   @Uint32() external int dwOperationalStatus;
   @Int32() external int bMHbeatActive;
   @Int32() external int bMHbeatAlive;
+}
+
+class MIB_OPAQUE_INFO extends Struct {
+  @Uint32() external int dwId;
+  @Uint32() external int Anonymous;
 }
 

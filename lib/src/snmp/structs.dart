@@ -54,6 +54,11 @@ class AsnObjectIdentifier extends Struct {
   external Pointer<Uint32> ids;
 }
 
+class AsnAny extends Struct {
+  @Uint8() external int asnType;
+  @Uint32() external int asnValue;
+}
+
 class SnmpVarBind extends Struct {
   external AsnObjectIdentifier name;
   external AsnAny value;
@@ -77,6 +82,11 @@ class smiOID extends Struct {
 class smiCNTR64 extends Struct {
   @Uint32() external int hipart;
   @Uint32() external int lopart;
+}
+
+class smiVALUE extends Struct {
+  @Uint32() external int syntax;
+  @Uint32() external int value;
 }
 
 class smiVENDORINFO extends Struct {

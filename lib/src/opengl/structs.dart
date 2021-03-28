@@ -43,6 +43,10 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class HGLRC extends Struct {
+  @IntPtr() external int Value;
+}
+
 class PIXELFORMATDESCRIPTOR extends Struct {
   @Uint16() external int nSize;
   @Uint16() external int nVersion;
@@ -110,9 +114,5 @@ class LAYERPLANEDESCRIPTOR extends Struct {
   @Uint8() external int iLayerPlane;
   @Uint8() external int bReserved;
   @Uint32() external int crTransparent;
-}
-
-class HGLRC extends Struct {
-  @IntPtr() external int Value;
 }
 

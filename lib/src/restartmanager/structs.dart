@@ -58,3 +58,10 @@ class RM_PROCESS_INFO extends Struct {
   @Int32() external int bRestartable;
 }
 
+class RM_FILTER_INFO extends Struct {
+  @Uint32() external int FilterAction;
+  @Uint32() external int FilterTrigger;
+  @Uint32() external int cbNextOffset;
+  @Uint32() external int Anonymous;
+}
+

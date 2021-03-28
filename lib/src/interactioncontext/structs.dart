@@ -43,6 +43,10 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class HINTERACTIONCONTEXT extends Struct {
+  @IntPtr() external int Value;
+}
+
 class MANIPULATION_TRANSFORM extends Struct {
   @Float() external double translationX;
   @Float() external double translationY;
@@ -73,6 +77,26 @@ class INTERACTION_ARGUMENTS_CROSS_SLIDE extends Struct {
   @Uint32() external int flags;
 }
 
+class INTERACTION_CONTEXT_OUTPUT extends Struct {
+  @Uint32() external int interactionId;
+  @Uint32() external int interactionFlags;
+  @Uint32() external int inputType;
+  @Float() external double x;
+  @Float() external double y;
+  @Uint32() external int arguments;
+}
+
+class INTERACTION_CONTEXT_OUTPUT2 extends Struct {
+  @Uint32() external int interactionId;
+  @Uint32() external int interactionFlags;
+  @Uint32() external int inputType;
+  @Uint32() external int contactCount;
+  @Uint32() external int currentContactCount;
+  @Float() external double x;
+  @Float() external double y;
+  @Uint32() external int arguments;
+}
+
 class INTERACTION_CONTEXT_CONFIGURATION extends Struct {
   @Uint32() external int interactionId;
   @Uint32() external int enable;
@@ -81,9 +105,5 @@ class INTERACTION_CONTEXT_CONFIGURATION extends Struct {
 class CROSS_SLIDE_PARAMETER extends Struct {
   @Uint32() external int threshold;
   @Float() external double distance;
-}
-
-class HINTERACTIONCONTEXT extends Struct {
-  @IntPtr() external int Value;
 }
 

@@ -157,6 +157,12 @@ class WMDM_PROP_VALUES_ENUM extends Struct {
   external Pointer<PROPVARIANT> pValues;
 }
 
+class WMDM_PROP_DESC extends Struct {
+  external Pointer<Utf16> pwszPropName;
+  @Uint32() external int ValidValuesForm;
+  @Uint32() external int ValidValues;
+}
+
 class WMDM_PROP_CONFIG extends Struct {
   @Uint32() external int nPreference;
   @Uint32() external int nPropDesc;

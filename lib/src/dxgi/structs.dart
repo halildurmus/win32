@@ -43,6 +43,13 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class DXGI_RGBA extends Struct {
+  @Float() external double r;
+  @Float() external double g;
+  @Float() external double b;
+  @Float() external double a;
+}
+
 class DXGI_RATIONAL extends Struct {
   @Uint32() external int Numerator;
   @Uint32() external int Denominator;
@@ -57,13 +64,6 @@ class DXGI_RGB extends Struct {
   @Float() external double Red;
   @Float() external double Green;
   @Float() external double Blue;
-}
-
-class DXGI_RGBA extends Struct {
-  @Float() external double r;
-  @Float() external double g;
-  @Float() external double b;
-  @Float() external double a;
 }
 
 class DXGI_GAMMA_CONTROL extends Struct {

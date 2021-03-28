@@ -94,6 +94,10 @@ class BTH_HCI_EVENT_INFO extends Struct {
   @Uint8() external int connected;
 }
 
+class BLUETOOTH_ADDRESS extends Struct {
+  @Uint32() external int Anonymous;
+}
+
 class BLUETOOTH_LOCAL_SERVICE_INFO extends Struct {
   @Int32() external int Enabled;
   external BLUETOOTH_ADDRESS btAddr;
@@ -124,6 +128,14 @@ class BLUETOOTH_DEVICE_INFO extends Struct {
   external SYSTEMTIME stLastSeen;
   external SYSTEMTIME stLastUsed;
   external __ushort__ szName;
+}
+
+class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
+  external BLUETOOTH_DEVICE_INFO deviceInfo;
+  @Uint32() external int authenticationMethod;
+  @Uint32() external int ioCapability;
+  @Uint32() external int authenticationRequirements;
+  @Uint32() external int Anonymous;
 }
 
 class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
@@ -176,6 +188,19 @@ class BLUETOOTH_NUMERIC_COMPARISON_INFO extends Struct {
 
 class BLUETOOTH_PASSKEY_INFO extends Struct {
   @Uint32() external int passkey;
+}
+
+class BLUETOOTH_AUTHENTICATE_RESPONSE extends Struct {
+  external BLUETOOTH_ADDRESS bthAddressRemote;
+  @Uint32() external int authMethod;
+  @Uint32() external int Anonymous;
+  @Uint8() external int negativeResponse;
+}
+
+class SDP_ELEMENT_DATA extends Struct {
+  @Uint32() external int type;
+  @Uint32() external int specificType;
+  @Uint32() external int data;
 }
 
 class SDP_STRING_TYPE_DATA extends Struct {
@@ -232,6 +257,11 @@ class RFCOMM_RPN_DATA extends Struct {
   @Uint8() external int ParameterMask2;
 }
 
+class RFCOMM_COMMAND extends Struct {
+  @Uint32() external int CmdType;
+  @Uint32() external int Data;
+}
+
 class BTH_PING_REQ extends Struct {
   @Uint64() external int btAddr;
   @Uint8() external int dataLen;
@@ -246,5 +276,11 @@ class BTH_PING_RSP extends Struct {
 class BTH_INFO_REQ extends Struct {
   @Uint64() external int btAddr;
   @Uint16() external int infoType;
+}
+
+class BTH_INFO_RSP extends Struct {
+  @Uint16() external int result;
+  @Uint8() external int dataLen;
+  @Uint32() external int Anonymous;
 }
 

@@ -48,6 +48,10 @@ class LUID extends Struct {
   @Int32() external int HighPart;
 }
 
+class QUAD extends Struct {
+  @Uint32() external int Anonymous;
+}
+
 class CSTRING extends Struct {
   @Uint16() external int Length;
   @Uint16() external int MaximumLength;
@@ -61,6 +65,11 @@ class LIST_ENTRY extends Struct {
 
 class SINGLE_LIST_ENTRY extends Struct {
   external Pointer<SINGLE_LIST_ENTRY> Next;
+}
+
+class RTL_BALANCED_NODE extends Struct {
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
 }
 
 class LIST_ENTRY32 extends Struct {

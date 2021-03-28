@@ -84,6 +84,11 @@ class HARDWAREINPUT extends Struct {
   @Uint16() external int wParamH;
 }
 
+class INPUT extends Struct {
+  @Uint32() external int type;
+  @Uint32() external int Anonymous;
+}
+
 class LASTINPUTINFO extends Struct {
   @Uint32() external int cbSize;
   @Uint32() external int dwTime;
@@ -94,6 +99,15 @@ class RAWINPUTHEADER extends Struct {
   @Uint32() external int dwSize;
   @IntPtr() external int hDevice;
   @IntPtr() external int wParam;
+}
+
+class RAWMOUSE extends Struct {
+  @Uint16() external int usFlags;
+  @Uint32() external int Anonymous;
+  @Uint32() external int ulRawButtons;
+  @Int32() external int lLastX;
+  @Int32() external int lLastY;
+  @Uint32() external int ulExtraInformation;
 }
 
 class RAWKEYBOARD extends Struct {
@@ -109,6 +123,11 @@ class RAWHID extends Struct {
   @Uint32() external int dwSizeHid;
   @Uint32() external int dwCount;
   external __ubyte__ bRawData;
+}
+
+class RAWINPUT extends Struct {
+  external RAWINPUTHEADER header;
+  @Uint32() external int data;
 }
 
 class RID_DEVICE_INFO_MOUSE extends Struct {
@@ -133,6 +152,12 @@ class RID_DEVICE_INFO_HID extends Struct {
   @Uint32() external int dwVersionNumber;
   @Uint16() external int usUsagePage;
   @Uint16() external int usUsage;
+}
+
+class RID_DEVICE_INFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwType;
+  @Uint32() external int Anonymous;
 }
 
 class RAWINPUTDEVICE extends Struct {

@@ -43,7 +43,11 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class HACCEL extends Struct {
+class HICON extends Struct {
+  @IntPtr() external int Value;
+}
+
+class HMENU extends Struct {
   @IntPtr() external int Value;
 }
 
@@ -51,11 +55,7 @@ class HCURSOR extends Struct {
   @IntPtr() external int Value;
 }
 
-class HICON extends Struct {
-  @IntPtr() external int Value;
-}
-
-class HMENU extends Struct {
+class HACCEL extends Struct {
   @IntPtr() external int Value;
 }
 

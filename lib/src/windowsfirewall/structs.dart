@@ -91,6 +91,15 @@ class INET_FIREWALL_AC_BINARIES extends Struct {
   external Pointer<Pointer<Utf16>> binaries;
 }
 
+class INET_FIREWALL_AC_CHANGE extends Struct {
+  @Uint32() external int changeType;
+  @Uint32() external int createType;
+  external Pointer<SID> appContainerSid;
+  external Pointer<SID> userSid;
+  external Pointer<Utf16> displayName;
+  @Uint32() external int Anonymous;
+}
+
 class INET_FIREWALL_APP_CONTAINER extends Struct {
   external Pointer<SID> appContainerSid;
   external Pointer<SID> userSid;

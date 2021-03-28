@@ -643,4 +643,3 @@ class DIB_USAGE {
   static const DIB_RGB_COLORS = 0x00000000;
   static const DIB_PAL_COLORS = 0x00000001;
 }
-

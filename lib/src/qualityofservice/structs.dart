@@ -43,12 +43,6 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class QOS extends Struct {
-  external FLOWSPEC SendingFlowspec;
-  external FLOWSPEC ReceivingFlowspec;
-  external WSABUF ProviderSpecific;
-}
-
 class LPM_HANDLE extends Struct {
   @IntPtr() external int Value;
 }
@@ -96,9 +90,19 @@ class Session_IPv4 extends Struct {
   @Uint16() external int sess_destport;
 }
 
+class RSVP_SESSION extends Struct {
+  external RsvpObjHdr sess_header;
+  @Uint32() external int sess_u;
+}
+
 class Rsvp_Hop_IPv4 extends Struct {
   external in_addr hop_ipaddr;
   @Uint32() external int hop_LIH;
+}
+
+class RSVP_HOP extends Struct {
+  external RsvpObjHdr hop_header;
+  @Uint32() external int hop_u;
 }
 
 class RESV_STYLE extends Struct {
@@ -117,8 +121,18 @@ class Filter_Spec_IPv4GPI extends Struct {
   @Uint32() external int filt_gpi;
 }
 
+class FILTER_SPEC extends Struct {
+  external RsvpObjHdr filt_header;
+  @Uint32() external int filt_u;
+}
+
 class Scope_list_ipv4 extends Struct {
   external in_addr scopl_ipaddr;
+}
+
+class RSVP_SCOPE extends Struct {
+  external RsvpObjHdr scopl_header;
+  @Uint32() external int scope_u;
 }
 
 class Error_Spec_IPv4 extends Struct {
@@ -126,6 +140,11 @@ class Error_Spec_IPv4 extends Struct {
   @Uint8() external int errs_flags;
   @Uint8() external int errs_code;
   @Uint16() external int errs_value;
+}
+
+class ERROR_SPEC extends Struct {
+  external RsvpObjHdr errs_header;
+  @Uint32() external int errs_u;
 }
 
 class POLICY_DATA extends Struct {
@@ -188,6 +207,11 @@ class QualAppFlowSpec extends Struct {
   external QualTspecParms Q_spec_parms;
 }
 
+class IntServTspecBody extends Struct {
+  external IntServMainHdr st_mh;
+  @Uint32() external int tspec_u;
+}
+
 class SENDER_TSPEC extends Struct {
   external RsvpObjHdr stspec_header;
   external IntServTspecBody stspec_body;
@@ -212,9 +236,19 @@ class GuarFlowSpec extends Struct {
   external GuarRspec Guar_Rspec;
 }
 
+class IntServFlowSpec extends Struct {
+  external IntServMainHdr spec_mh;
+  @Uint32() external int spec_u;
+}
+
 class IS_FLOWSPEC extends Struct {
   external RsvpObjHdr flow_header;
   external IntServFlowSpec flow_body;
+}
+
+class flow_desc extends Struct {
+  @Uint32() external int u1;
+  @Uint32() external int u2;
 }
 
 class Gads_parms_t extends Struct {
@@ -398,6 +432,21 @@ class TC_GEN_FLOW extends Struct {
   external QOS_OBJECT_HDR TcObjects;
 }
 
+class IP_PATTERN extends Struct {
+  @Uint32() external int Reserved1;
+  @Uint32() external int Reserved2;
+  @Uint32() external int SrcAddr;
+  @Uint32() external int DstAddr;
+  @Uint32() external int S_un;
+  @Uint8() external int ProtocolId;
+  external __ubyte__ Reserved3;
+}
+
+class IPX_PATTERN extends Struct {
+  @Uint32() external int Src;
+  @Uint32() external int Dest;
+}
+
 class ENUMERATION_BUFFER extends Struct {
   @Uint32() external int Length;
   @Uint32() external int OwnerProcessId;
@@ -406,5 +455,11 @@ class ENUMERATION_BUFFER extends Struct {
   external Pointer<TC_GEN_FLO> pFlow;
   @Uint32() external int NumberOfFilters;
   external TC_GEN_FILTER GenericFilter;
+}
+
+class QOS extends Struct {
+  external FLOWSPEC SendingFlowspec;
+  external FLOWSPEC ReceivingFlowspec;
+  external WSABUF ProviderSpecific;
 }
 

@@ -54,9 +54,14 @@ class RASIPADDR extends Struct {
   @Uint8() external int d;
 }
 
+class RASTUNNELENDPOINT extends Struct {
+  @Uint32() external int dwType;
+  @Uint32() external int Anonymous;
+}
+
 class RASCONNW extends Struct {
   @Uint32() external int dwSize;
-  external HRASCONN hrasconn;
+  @IntPtr() external int hrasconn;
   external __ushort__ szEntryName;
   external __ushort__ szDeviceType;
   external __ushort__ szDeviceName;
@@ -70,7 +75,7 @@ class RASCONNW extends Struct {
 
 class RASCONNA extends Struct {
   @Uint32() external int dwSize;
-  external HRASCONN hrasconn;
+  @IntPtr() external int hrasconn;
   external __byte__ szEntryName;
   external __byte__ szDeviceType;
   external __byte__ szDeviceName;
@@ -327,6 +332,12 @@ class RASIKEV2_PROJECTION_INFO extends Struct {
   external Pointer<in_addr> ipv4ServerAddresses;
   @Uint32() external int numIPv6ServerAddresses;
   external Pointer<in6_addr> ipv6ServerAddresses;
+}
+
+class RAS_PROJECTION_INFO extends Struct {
+  @Uint32() external int version;
+  @Uint32() external int type;
+  @Uint32() external int Anonymous;
 }
 
 class RASDEVINFOW extends Struct {
@@ -1151,6 +1162,16 @@ class IKEV2_PROJECTION_INFO2 extends Struct {
   @Uint32() external int dwEncryptionMethod;
 }
 
+class PROJECTION_INFO extends Struct {
+  @Uint8() external int projectionInfoType;
+  @Uint32() external int Anonymous;
+}
+
+class PROJECTION_INFO2 extends Struct {
+  @Uint8() external int projectionInfoType;
+  @Uint32() external int Anonymous;
+}
+
 class RAS_CONNECTION_EX extends Struct {
   external MPRAPI_OBJECT_HEADER Header;
   @Uint32() external int dwConnectDuration;
@@ -1242,6 +1263,11 @@ class MPR_CERT_EKU extends Struct {
   @Uint32() external int dwSize;
   @Int32() external int IsEKUOID;
   external Pointer<Utf16> pwszEKU;
+}
+
+class VPN_TS_IP_ADDRESS extends Struct {
+  @Uint16() external int Type;
+  @Uint32() external int Anonymous;
 }
 
 class _MPR_VPN_SELECTOR extends Struct {
@@ -1539,6 +1565,15 @@ class RTM_NEXTHOP_LIST extends Struct {
   external __intptr__ NextHops;
 }
 
+class RTM_DEST_INFO extends Struct {
+  @IntPtr() external int DestHandle;
+  external RTM_NET_ADDRESS DestAddress;
+  external FILETIME LastChanged;
+  @Uint32() external int BelongsToViews;
+  @Uint32() external int NumberOfViews;
+  external ____ ViewInfo;
+}
+
 class RTM_ROUTE_INFO extends Struct {
   @IntPtr() external int DestHandle;
   @IntPtr() external int RouteOwner;
@@ -1560,6 +1595,10 @@ class RTM_NEXTHOP_INFO extends Struct {
   @Uint16() external int Flags;
   external Pointer EntitySpecificInfo;
   @IntPtr() external int RemoteNextHop;
+}
+
+class RTM_ENTITY_ID extends Struct {
+  @Uint32() external int Anonymous;
 }
 
 class RTM_ENTITY_INFO extends Struct {

@@ -43,23 +43,6 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class FONTSIGNATURE extends Struct {
-  external __uint__ fsUsb;
-  external __uint__ fsCsb;
-}
-
-class CHARSETINFO extends Struct {
-  @Uint32() external int ciCharset;
-  @Uint32() external int ciACP;
-  external FONTSIGNATURE fs;
-}
-
-class LOCALESIGNATURE extends Struct {
-  external __uint__ lsUsb;
-  external __uint__ lsCsbDefault;
-  external __uint__ lsCsbSupported;
-}
-
 class HIMC extends Struct {
   @IntPtr() external int Value;
 }
@@ -348,6 +331,43 @@ class IMEDLG extends Struct {
   @Int32() external int nTabId;
 }
 
+class WDD extends Struct {
+  @Uint16() external int wDispPos;
+  @Uint32() external int Anonymous1;
+  @Uint16() external int cchDisp;
+  @Uint32() external int Anonymous2;
+  @Uint32() external int WDD_nReserve1;
+  @Uint16() external int nPos;
+  @Uint16() external int _bitfield;
+  external Pointer pReserved;
+}
+
+class MORRSLT extends Struct {
+  @Uint32() external int dwSize;
+  external Pointer<Utf16> pwchOutput;
+  @Uint16() external int cchOutput;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+  external Pointer<Uint16> pchInputPos;
+  external Pointer<Uint16> pchOutputIdxWDD;
+  @Uint32() external int Anonymous3;
+  external Pointer<Uint16> paMonoRubyPos;
+  external Pointer<WDD> pWDD;
+  @Int32() external int cWDD;
+  external Pointer pPrivate;
+  @Uint16() external int BLKBuff;
+}
+
+class IMEWRD extends Struct {
+  external Pointer<Utf16> pwchReading;
+  external Pointer<Utf16> pwchDisplay;
+  @Uint32() external int Anonymous;
+  external __uint__ rgulAttrs;
+  @Int32() external int cbComment;
+  @Uint32() external int uct;
+  external Pointer pvComment;
+}
+
 class IMESHF extends Struct {
   @Uint16() external int cbShf;
   @Uint16() external int verDic;
@@ -372,22 +392,30 @@ class IMEKMSINIT extends Struct {
   @IntPtr() external int hWnd;
 }
 
+class IMEKMSKEY extends Struct {
+  @Uint32() external int dwStatus;
+  @Uint32() external int dwCompStatus;
+  @Uint32() external int dwVKEY;
+  @Uint32() external int Anonymous1;
+  @Uint32() external int Anonymous2;
+}
+
 class IMEKMS extends Struct {
   @Int32() external int cbSize;
-  external HIMC hIMC;
+  @IntPtr() external int hIMC;
   @Uint32() external int cKeyList;
   external Pointer<IMEKMSKEY> pKeyList;
 }
 
 class IMEKMSNTFY extends Struct {
   @Int32() external int cbSize;
-  external HIMC hIMC;
+  @IntPtr() external int hIMC;
   @Int32() external int fSelect;
 }
 
 class IMEKMSKMP extends Struct {
   @Int32() external int cbSize;
-  external HIMC hIMC;
+  @IntPtr() external int hIMC;
   @Uint16() external int idLang;
   @Uint16() external int wVKStart;
   @Uint16() external int wVKEnd;
@@ -397,7 +425,7 @@ class IMEKMSKMP extends Struct {
 
 class IMEKMSINVK extends Struct {
   @Int32() external int cbSize;
-  external HIMC hIMC;
+  @IntPtr() external int hIMC;
   @Uint32() external int dwControl;
 }
 
@@ -463,6 +491,26 @@ class CANDIDATEINFO extends Struct {
   external __uint__ dwOffset;
   @Uint32() external int dwPrivateSize;
   @Uint32() external int dwPrivateOffset;
+}
+
+class INPUTCONTEXT extends Struct {
+  @IntPtr() external int hWnd;
+  @Int32() external int fOpen;
+  external POINT ptStatusWndPos;
+  external POINT ptSoftKbdPos;
+  @Uint32() external int fdwConversion;
+  @Uint32() external int fdwSentence;
+  @Uint32() external int lfFont;
+  external COMPOSITIONFORM cfCompForm;
+  external CANDIDATEFORM cfCandForm;
+  @IntPtr() external int hCompStr;
+  @IntPtr() external int hCandInfo;
+  @IntPtr() external int hGuideLine;
+  @IntPtr() external int hPrivate;
+  @Uint32() external int dwNumMsgBuf;
+  @IntPtr() external int hMsgBuf;
+  @Uint32() external int fdwInit;
+  external __uint__ dwReserve;
 }
 
 class IMEINFO extends Struct {
@@ -876,5 +924,22 @@ class UTransPosition extends Struct {
 }
 
 class CActiveIMM extends Struct {
+}
+
+class FONTSIGNATURE extends Struct {
+  external __uint__ fsUsb;
+  external __uint__ fsCsb;
+}
+
+class CHARSETINFO extends Struct {
+  @Uint32() external int ciCharset;
+  @Uint32() external int ciACP;
+  external FONTSIGNATURE fs;
+}
+
+class LOCALESIGNATURE extends Struct {
+  external __uint__ lsUsb;
+  external __uint__ lsCsbDefault;
+  external __uint__ lsCsbSupported;
 }
 

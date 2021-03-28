@@ -154,6 +154,11 @@ class TF_PRESERVEDKEY extends Struct {
   @Uint32() external int uModifiers;
 }
 
+class TF_DA_COLOR extends Struct {
+  @Uint32() external int type;
+  @Uint32() external int Anonymous;
+}
+
 class TF_DISPLAYATTRIBUTE extends Struct {
   external TF_DA_COLOR crText;
   external TF_DA_COLOR crBk;
@@ -161,5 +166,13 @@ class TF_DISPLAYATTRIBUTE extends Struct {
   @Int32() external int fBoldLine;
   external TF_DA_COLOR crLine;
   @Uint32() external int bAttr;
+}
+
+class TF_LMLATTELEMENT extends Struct {
+  @Uint32() external int dwFrameStart;
+  @Uint32() external int dwFrameLen;
+  @Uint32() external int dwFlags;
+  @Uint32() external int Anonymous;
+  external Pointer<Utf16> bstrText;
 }
 
