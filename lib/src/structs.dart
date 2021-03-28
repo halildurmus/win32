@@ -1350,328 +1350,27 @@ class WIN32_FIND_DATA extends Struct {
   @Uint32()
   external int dwReserved1;
 
-  // WCHAR cFileName[MAX_PATH];
-  // (260 + 14) * 2 = 548 bytes)
-  @Uint32()
-  external int _cFileName0;
-  @Uint32()
-  external int _cFileName1;
-  @Uint32()
-  external int _cFileName2;
-  @Uint32()
-  external int _cFileName3;
-  @Uint32()
-  external int _cFileName4;
-  @Uint32()
-  external int _cFileName5;
-  @Uint32()
-  external int _cFileName6;
-  @Uint32()
-  external int _cFileName7;
-  @Uint32()
-  external int _cFileName8;
-  @Uint32()
-  external int _cFileName9;
-  @Uint32()
-  external int _cFileName10;
-  @Uint32()
-  external int _cFileName11;
-  @Uint32()
-  external int _cFileName12;
-  @Uint32()
-  external int _cFileName13;
-  @Uint32()
-  external int _cFileName14;
-  @Uint32()
-  external int _cFileName15;
-  @Uint32()
-  external int _cFileName16;
-  @Uint32()
-  external int _cFileName17;
-  @Uint32()
-  external int _cFileName18;
-  @Uint32()
-  external int _cFileName19;
-  @Uint32()
-  external int _cFileName20;
-  @Uint32()
-  external int _cFileName21;
-  @Uint32()
-  external int _cFileName22;
-  @Uint32()
-  external int _cFileName23;
-  @Uint32()
-  external int _cFileName24;
-  @Uint32()
-  external int _cFileName25;
-  @Uint32()
-  external int _cFileName26;
-  @Uint32()
-  external int _cFileName27;
-  @Uint32()
-  external int _cFileName28;
-  @Uint32()
-  external int _cFileName29;
-  @Uint32()
-  external int _cFileName30;
-  @Uint32()
-  external int _cFileName31;
-  @Uint32()
-  external int _cFileName32;
-  @Uint32()
-  external int _cFileName33;
-  @Uint32()
-  external int _cFileName34;
-  @Uint32()
-  external int _cFileName35;
-  @Uint32()
-  external int _cFileName36;
-  @Uint32()
-  external int _cFileName37;
-  @Uint32()
-  external int _cFileName38;
-  @Uint32()
-  external int _cFileName39;
-  @Uint32()
-  external int _cFileName40;
-  @Uint32()
-  external int _cFileName41;
-  @Uint32()
-  external int _cFileName42;
-  @Uint32()
-  external int _cFileName43;
-  @Uint32()
-  external int _cFileName44;
-  @Uint32()
-  external int _cFileName45;
-  @Uint32()
-  external int _cFileName46;
-  @Uint32()
-  external int _cFileName47;
-  @Uint32()
-  external int _cFileName48;
-  @Uint32()
-  external int _cFileName49;
-  @Uint32()
-  external int _cFileName50;
-  @Uint32()
-  external int _cFileName51;
-  @Uint32()
-  external int _cFileName52;
-  @Uint32()
-  external int _cFileName53;
-  @Uint32()
-  external int _cFileName54;
-  @Uint32()
-  external int _cFileName55;
-  @Uint32()
-  external int _cFileName56;
-  @Uint32()
-  external int _cFileName57;
-  @Uint32()
-  external int _cFileName58;
-  @Uint32()
-  external int _cFileName59;
-  @Uint32()
-  external int _cFileName60;
-  @Uint32()
-  external int _cFileName61;
-  @Uint32()
-  external int _cFileName62;
-  @Uint32()
-  external int _cFileName63;
-  @Uint32()
-  external int _cFileName64;
-  @Uint32()
-  external int _cFileName65;
-  @Uint32()
-  external int _cFileName66;
-  @Uint32()
-  external int _cFileName67;
-  @Uint32()
-  external int _cFileName68;
-  @Uint32()
-  external int _cFileName69;
-  @Uint32()
-  external int _cFileName70;
-  @Uint32()
-  external int _cFileName71;
-  @Uint32()
-  external int _cFileName72;
-  @Uint32()
-  external int _cFileName73;
-  @Uint32()
-  external int _cFileName74;
-  @Uint32()
-  external int _cFileName75;
-  @Uint32()
-  external int _cFileName76;
-  @Uint32()
-  external int _cFileName77;
-  @Uint32()
-  external int _cFileName78;
-  @Uint32()
-  external int _cFileName79;
-  @Uint32()
-  external int _cFileName80;
-  @Uint32()
-  external int _cFileName81;
-  @Uint32()
-  external int _cFileName82;
-  @Uint32()
-  external int _cFileName83;
-  @Uint32()
-  external int _cFileName84;
-  @Uint32()
-  external int _cFileName85;
-  @Uint32()
-  external int _cFileName86;
-  @Uint32()
-  external int _cFileName87;
-  @Uint32()
-  external int _cFileName88;
-  @Uint32()
-  external int _cFileName89;
-  @Uint32()
-  external int _cFileName90;
-  @Uint32()
-  external int _cFileName91;
-  @Uint32()
-  external int _cFileName92;
-  @Uint32()
-  external int _cFileName93;
-  @Uint32()
-  external int _cFileName94;
-  @Uint32()
-  external int _cFileName95;
-  @Uint32()
-  external int _cFileName96;
-  @Uint32()
-  external int _cFileName97;
-  @Uint32()
-  external int _cFileName98;
-  @Uint32()
-  external int _cFileName99;
-  @Uint32()
-  external int _cFileName100;
-  @Uint32()
-  external int _cFileName101;
-  @Uint32()
-  external int _cFileName102;
-  @Uint32()
-  external int _cFileName103;
-  @Uint32()
-  external int _cFileName104;
-  @Uint32()
-  external int _cFileName105;
-  @Uint32()
-  external int _cFileName106;
-  @Uint32()
-  external int _cFileName107;
-  @Uint32()
-  external int _cFileName108;
-  @Uint32()
-  external int _cFileName109;
-  @Uint32()
-  external int _cFileName110;
-  @Uint32()
-  external int _cFileName111;
-  @Uint32()
-  external int _cFileName112;
-  @Uint32()
-  external int _cFileName113;
-  @Uint32()
-  external int _cFileName114;
-  @Uint32()
-  external int _cFileName115;
-  @Uint32()
-  external int _cFileName116;
-  @Uint32()
-  external int _cFileName117;
-  @Uint32()
-  external int _cFileName118;
-  @Uint32()
-  external int _cFileName119;
-  @Uint32()
-  external int _cFileName120;
-  @Uint32()
-  external int _cFileName121;
-  @Uint32()
-  external int _cFileName122;
-  @Uint32()
-  external int _cFileName123;
-  @Uint32()
-  external int _cFileName124;
-  @Uint32()
-  external int _cFileName125;
-  @Uint32()
-  external int _cFileName126;
-  @Uint32()
-  external int _cFileName127;
-  @Uint32()
-  external int _cFileName128;
-  @Uint32()
-  external int _cFileName129;
+  @Array(260)
+  external Array<Uint16> _cFileName;
 
-  // WCHAR cFileName[MAX_PATH]; (260 * 2 = 520 / 4 = 130)
-  String get cFileName => String.fromCharCodes(Uint32List.fromList([
-        _cFileName0, _cFileName1, _cFileName2, _cFileName3, //
-        _cFileName4, _cFileName5, _cFileName6, _cFileName7,
-        _cFileName8, _cFileName9, _cFileName10, _cFileName11,
-        _cFileName12, _cFileName13, _cFileName14, _cFileName15,
-        _cFileName16, _cFileName17, _cFileName18, _cFileName19,
-        _cFileName20, _cFileName21, _cFileName22, _cFileName23,
-        _cFileName24, _cFileName25, _cFileName26, _cFileName27,
-        _cFileName28, _cFileName29, _cFileName30, _cFileName31,
-        _cFileName32, _cFileName33, _cFileName34, _cFileName35,
-        _cFileName36, _cFileName37, _cFileName38, _cFileName39,
-        _cFileName40, _cFileName41, _cFileName42, _cFileName43,
-        _cFileName44, _cFileName45, _cFileName46, _cFileName47,
-        _cFileName48, _cFileName49, _cFileName50, _cFileName51,
-        _cFileName52, _cFileName53, _cFileName54, _cFileName55,
-        _cFileName56, _cFileName57, _cFileName58, _cFileName59,
-        _cFileName60, _cFileName61, _cFileName62, _cFileName63,
-        _cFileName64, _cFileName65, _cFileName66, _cFileName67,
-        _cFileName68, _cFileName69, _cFileName70, _cFileName71,
-        _cFileName72, _cFileName73, _cFileName74, _cFileName75,
-        _cFileName76, _cFileName77, _cFileName78, _cFileName79,
-        _cFileName80, _cFileName81, _cFileName82, _cFileName83,
-        _cFileName84, _cFileName85, _cFileName86, _cFileName87,
-        _cFileName88, _cFileName89, _cFileName90, _cFileName91,
-        _cFileName92, _cFileName93, _cFileName94, _cFileName95,
-        _cFileName96, _cFileName97, _cFileName98, _cFileName99,
-        _cFileName100, _cFileName101, _cFileName102, _cFileName103,
-        _cFileName104, _cFileName105, _cFileName106, _cFileName107,
-        _cFileName108, _cFileName109, _cFileName110, _cFileName111,
-        _cFileName112, _cFileName113, _cFileName114, _cFileName115,
-        _cFileName116, _cFileName117, _cFileName118, _cFileName119,
-        _cFileName120, _cFileName121, _cFileName122, _cFileName123,
-        _cFileName124, _cFileName125, _cFileName126, _cFileName127,
-        _cFileName128, _cFileName129
-      ]).buffer.asUint16List());
+  String get cFileName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 260; i++) {
+      charCodes.add(_cFileName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
 
-  // WCHAR cAlternateFileName[14];
-  @Uint32()
-  external int _cAlternateFileName0;
-  @Uint32()
-  external int _cAlternateFileName1;
-  @Uint32()
-  external int _cAlternateFileName2;
-  @Uint32()
-  external int _cAlternateFileName3;
-  @Uint32()
-  external int _cAlternateFileName4;
-  @Uint32()
-  external int _cAlternateFileName5;
-  @Uint32()
-  external int _cAlternateFileName6;
+  @Array(14)
+  external Array<Uint16> _cAlternateFileName;
 
-  String get cAlternateFileName => String.fromCharCodes(Uint32List.fromList([
-        _cAlternateFileName0, _cAlternateFileName1,
-        _cAlternateFileName2, _cAlternateFileName3, //
-        _cAlternateFileName4, _cAlternateFileName5,
-        _cAlternateFileName6
-      ]).buffer.asUint16List());
+  String get cAlternateFileName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 14; i++) {
+      charCodes.add(_cAlternateFileName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
 }
 
 // typedef struct tagWAVEOUTCAPSW {
@@ -1699,47 +1398,16 @@ class WAVEOUTCAPS extends Struct {
   @Uint32()
   external int vDriverVersion;
 
-  // Need to use @Uint32() here because of the lack of fixed-size arrays
-  // MAXPNAMELEN is 32 (words)
-  @Uint32()
-  external int _szPname0;
-  @Uint32()
-  external int _szPname1;
-  @Uint32()
-  external int _szPname2;
-  @Uint32()
-  external int _szPname3;
-  @Uint32()
-  external int _szPname4;
-  @Uint32()
-  external int _szPname5;
-  @Uint32()
-  external int _szPname6;
-  @Uint32()
-  external int _szPname7;
-  @Uint32()
-  external int _szPname8;
-  @Uint32()
-  external int _szPname9;
-  @Uint32()
-  external int _szPname10;
-  @Uint32()
-  external int _szPname11;
-  @Uint32()
-  external int _szPname12;
-  @Uint32()
-  external int _szPname13;
-  @Uint32()
-  external int _szPname14;
-  @Uint32()
-  external int _szPname15;
+  @Array(32)
+  external Array<Uint16> _szPname;
 
-  String get szPname => String.fromCharCodes(Uint32List.fromList([
-        _szPname0, _szPname1, _szPname2, _szPname3, //
-        _szPname4, _szPname5, _szPname6, _szPname7,
-        _szPname8, _szPname9, _szPname10, _szPname11,
-        _szPname12, _szPname13, _szPname14, _szPname15,
-      ]).buffer.asUint16List());
+  String get szPname {
+    final charCodes = <int>[];
+    for (var i = 0; i < 32; i++) {
+      charCodes.add(_szPname[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
 
   @Uint32()
   external int dwFormats;
@@ -1887,121 +1555,23 @@ class NOTIFYICONDATA extends Struct {
   @IntPtr()
   external int hIcon;
 
-  // WCHAR szTip[128]
-  @Uint64()
-  external int _szTip0;
-  @Uint64()
-  external int _szTip1;
-  @Uint64()
-  external int _szTip2;
-  @Uint64()
-  external int _szTip3;
-  @Uint64()
-  external int _szTip4;
-  @Uint64()
-  external int _szTip5;
-  @Uint64()
-  external int _szTip6;
-  @Uint64()
-  external int _szTip7;
-  @Uint64()
-  external int _szTip8;
-  @Uint64()
-  external int _szTip9;
-  @Uint64()
-  external int _szTip10;
-  @Uint64()
-  external int _szTip11;
-  @Uint64()
-  external int _szTip12;
-  @Uint64()
-  external int _szTip13;
-  @Uint64()
-  external int _szTip14;
-  @Uint64()
-  external int _szTip15;
-  @Uint64()
-  external int _szTip16;
-  @Uint64()
-  external int _szTip17;
-  @Uint64()
-  external int _szTip18;
-  @Uint64()
-  external int _szTip19;
-  @Uint64()
-  external int _szTip20;
-  @Uint64()
-  external int _szTip21;
-  @Uint64()
-  external int _szTip22;
-  @Uint64()
-  external int _szTip23;
-  @Uint64()
-  external int _szTip24;
-  @Uint64()
-  external int _szTip25;
-  @Uint64()
-  external int _szTip26;
-  @Uint64()
-  external int _szTip27;
-  @Uint64()
-  external int _szTip28;
-  @Uint64()
-  external int _szTip29;
-  @Uint64()
-  external int _szTip30;
-  @Uint64()
-  external int _szTip31;
+  @Array(128)
+  external Array<Uint16> _szTip;
 
-  String get szTip => String.fromCharCodes(Uint64List.fromList([
-        _szTip0, _szTip1, _szTip2, _szTip3, //
-        _szTip4, _szTip5, _szTip6, _szTip7,
-        _szTip8, _szTip9, _szTip10, _szTip11,
-        _szTip12, _szTip13, _szTip14, _szTip15,
-        _szTip16, _szTip17, _szTip18, _szTip19,
-        _szTip20, _szTip21, _szTip22, _szTip23,
-        _szTip24, _szTip25, _szTip26, _szTip27,
-        _szTip28, _szTip29, _szTip30, _szTip31
-      ]).buffer.asUint16List());
+  String get szTip {
+    final charCodes = <int>[];
+    for (var i = 0; i < 128; i++) {
+      charCodes.add(_szTip[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
 
   set szTip(String value) {
     // Pad with null characters
     final stringToStore = value.padRight(128, '\x00');
-    final byteData64 =
-        Uint16List.fromList(stringToStore.codeUnits).buffer.asUint64List();
-
-    _szTip0 = byteData64[0];
-    _szTip1 = byteData64[1];
-    _szTip2 = byteData64[2];
-    _szTip3 = byteData64[3];
-    _szTip4 = byteData64[4];
-    _szTip5 = byteData64[5];
-    _szTip6 = byteData64[6];
-    _szTip7 = byteData64[7];
-    _szTip8 = byteData64[8];
-    _szTip9 = byteData64[9];
-    _szTip10 = byteData64[10];
-    _szTip11 = byteData64[11];
-    _szTip12 = byteData64[12];
-    _szTip13 = byteData64[13];
-    _szTip14 = byteData64[14];
-    _szTip15 = byteData64[15];
-    _szTip16 = byteData64[16];
-    _szTip17 = byteData64[17];
-    _szTip18 = byteData64[18];
-    _szTip19 = byteData64[19];
-    _szTip20 = byteData64[20];
-    _szTip21 = byteData64[21];
-    _szTip22 = byteData64[22];
-    _szTip23 = byteData64[23];
-    _szTip24 = byteData64[24];
-    _szTip25 = byteData64[25];
-    _szTip26 = byteData64[26];
-    _szTip27 = byteData64[27];
-    _szTip28 = byteData64[28];
-    _szTip29 = byteData64[29];
-    _szTip30 = byteData64[30];
-    _szTip31 = byteData64[31];
+    for (var i = 0; i < 128; i++) {
+      _szTip[i] = stringToStore.codeUnitAt(i);
+    }
   }
 
   @Uint32()
@@ -2009,155 +1579,24 @@ class NOTIFYICONDATA extends Struct {
 
   @Uint32()
   external int dwStateMask;
+  @Array(256)
+  external Array<Uint16> _szInfo;
 
-  // WCHAR szInfo[256]
-  @Uint64()
-  external int _szInfo0;
-  @Uint64()
-  external int _szInfo1;
-  @Uint64()
-  external int _szInfo2;
-  @Uint64()
-  external int _szInfo3;
-  @Uint64()
-  external int _szInfo4;
-  @Uint64()
-  external int _szInfo5;
-  @Uint64()
-  external int _szInfo6;
-  @Uint64()
-  external int _szInfo7;
-  @Uint64()
-  external int _szInfo8;
-  @Uint64()
-  external int _szInfo9;
-  @Uint64()
-  external int _szInfo10;
-  @Uint64()
-  external int _szInfo11;
-  @Uint64()
-  external int _szInfo12;
-  @Uint64()
-  external int _szInfo13;
-  @Uint64()
-  external int _szInfo14;
-  @Uint64()
-  external int _szInfo15;
-  @Uint64()
-  external int _szInfo16;
-  @Uint64()
-  external int _szInfo17;
-  @Uint64()
-  external int _szInfo18;
-  @Uint64()
-  external int _szInfo19;
-  @Uint64()
-  external int _szInfo20;
-  @Uint64()
-  external int _szInfo21;
-  @Uint64()
-  external int _szInfo22;
-  @Uint64()
-  external int _szInfo23;
-  @Uint64()
-  external int _szInfo24;
-  @Uint64()
-  external int _szInfo25;
-  @Uint64()
-  external int _szInfo26;
-  @Uint64()
-  external int _szInfo27;
-  @Uint64()
-  external int _szInfo28;
-  @Uint64()
-  external int _szInfo29;
-  @Uint64()
-  external int _szInfo30;
-  @Uint64()
-  external int _szInfo31;
-  @Uint64()
-  external int _szInfo32;
-  @Uint64()
-  external int _szInfo33;
-  @Uint64()
-  external int _szInfo34;
-  @Uint64()
-  external int _szInfo35;
-  @Uint64()
-  external int _szInfo36;
-  @Uint64()
-  external int _szInfo37;
-  @Uint64()
-  external int _szInfo38;
-  @Uint64()
-  external int _szInfo39;
-  @Uint64()
-  external int _szInfo40;
-  @Uint64()
-  external int _szInfo41;
-  @Uint64()
-  external int _szInfo42;
-  @Uint64()
-  external int _szInfo43;
-  @Uint64()
-  external int _szInfo44;
-  @Uint64()
-  external int _szInfo45;
-  @Uint64()
-  external int _szInfo46;
-  @Uint64()
-  external int _szInfo47;
-  @Uint64()
-  external int _szInfo48;
-  @Uint64()
-  external int _szInfo49;
-  @Uint64()
-  external int _szInfo50;
-  @Uint64()
-  external int _szInfo51;
-  @Uint64()
-  external int _szInfo52;
-  @Uint64()
-  external int _szInfo53;
-  @Uint64()
-  external int _szInfo54;
-  @Uint64()
-  external int _szInfo55;
-  @Uint64()
-  external int _szInfo56;
-  @Uint64()
-  external int _szInfo57;
-  @Uint64()
-  external int _szInfo58;
-  @Uint64()
-  external int _szInfo59;
-  @Uint64()
-  external int _szInfo60;
-  @Uint64()
-  external int _szInfo61;
-  @Uint64()
-  external int _szInfo62;
-  @Uint64()
-  external int _szInfo63;
+  String get szInfo {
+    final charCodes = <int>[];
+    for (var i = 0; i < 256; i++) {
+      charCodes.add(_szInfo[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
 
-  String get szInfo => String.fromCharCodes(Uint64List.fromList([
-        _szInfo0, _szInfo1, _szInfo2, _szInfo3, //
-        _szInfo4, _szInfo5, _szInfo6, _szInfo7,
-        _szInfo8, _szInfo9, _szInfo10, _szInfo11,
-        _szInfo12, _szInfo13, _szInfo14, _szInfo15,
-        _szInfo16, _szInfo17, _szInfo18, _szInfo19,
-        _szInfo20, _szInfo21, _szInfo22, _szInfo23,
-        _szInfo24, _szInfo25, _szInfo26, _szInfo27,
-        _szInfo28, _szInfo29, _szInfo30, _szInfo31,
-        _szInfo32, _szInfo33, _szInfo34, _szInfo35,
-        _szInfo36, _szInfo37, _szInfo38, _szInfo39,
-        _szInfo40, _szInfo41, _szInfo42, _szInfo43,
-        _szInfo44, _szInfo45, _szInfo46, _szInfo47,
-        _szInfo48, _szInfo49, _szInfo50, _szInfo51,
-        _szInfo52, _szInfo53, _szInfo54, _szInfo55,
-        _szInfo56, _szInfo57, _szInfo58, _szInfo59,
-        _szInfo60, _szInfo61, _szInfo62, _szInfo63
-      ]).buffer.asUint16List());
+  set szInfo(String value) {
+    // Pad with null characters
+    final stringToStore = value.padRight(256, '\x00');
+    for (var i = 0; i < 256; i++) {
+      _szInfo[i] = stringToStore.codeUnitAt(i);
+    }
+  }
 
   @Uint32()
   external int uTimeout;
@@ -2166,84 +1605,24 @@ class NOTIFYICONDATA extends Struct {
   int get uVersion => uTimeout;
   set uVersion(int value) => uTimeout = value;
 
-  // WCHAR szInfoTitle[64]
-  // Because Dart FFI has a tendency to align on IntPtr boundaries, we split this
-  // carefully.
-  @Uint32()
-  external int _szInfoTitle0;
-  @Uint32()
-  external int _szInfoTitle1;
-  @Uint32()
-  external int _szInfoTitle2;
-  @Uint32()
-  external int _szInfoTitle3;
-  @Uint32()
-  external int _szInfoTitle4;
-  @Uint32()
-  external int _szInfoTitle5;
-  @Uint32()
-  external int _szInfoTitle6;
-  @Uint32()
-  external int _szInfoTitle7;
-  @Uint32()
-  external int _szInfoTitle8;
-  @Uint32()
-  external int _szInfoTitle9;
-  @Uint32()
-  external int _szInfoTitle10;
-  @Uint32()
-  external int _szInfoTitle11;
-  @Uint32()
-  external int _szInfoTitle12;
-  @Uint32()
-  external int _szInfoTitle13;
-  @Uint32()
-  external int _szInfoTitle14;
-  @Uint32()
-  external int _szInfoTitle15;
-  @Uint32()
-  external int _szInfoTitle16;
-  @Uint32()
-  external int _szInfoTitle17;
-  @Uint32()
-  external int _szInfoTitle18;
-  @Uint32()
-  external int _szInfoTitle19;
-  @Uint32()
-  external int _szInfoTitle20;
-  @Uint32()
-  external int _szInfoTitle21;
-  @Uint32()
-  external int _szInfoTitle22;
-  @Uint32()
-  external int _szInfoTitle23;
-  @Uint32()
-  external int _szInfoTitle24;
-  @Uint32()
-  external int _szInfoTitle25;
-  @Uint32()
-  external int _szInfoTitle26;
-  @Uint32()
-  external int _szInfoTitle27;
-  @Uint32()
-  external int _szInfoTitle28;
-  @Uint32()
-  external int _szInfoTitle29;
-  @Uint32()
-  external int _szInfoTitle30;
-  @Uint32()
-  external int _szInfoTitle31;
+  @Array(64)
+  external Array<Uint16> _szInfoTitle;
 
-  String get szInfoTitle => String.fromCharCodes(Uint32List.fromList([
-        _szInfoTitle0, _szInfoTitle1, _szInfoTitle2, _szInfoTitle3, //
-        _szInfoTitle4, _szInfoTitle5, _szInfoTitle6, _szInfoTitle7,
-        _szInfoTitle8, _szInfoTitle9, _szInfoTitle10, _szInfoTitle11,
-        _szInfoTitle12, _szInfoTitle13, _szInfoTitle14, _szInfoTitle15,
-        _szInfoTitle16, _szInfoTitle17, _szInfoTitle18, _szInfoTitle19,
-        _szInfoTitle20, _szInfoTitle21, _szInfoTitle22, _szInfoTitle23,
-        _szInfoTitle24, _szInfoTitle25, _szInfoTitle26, _szInfoTitle27,
-        _szInfoTitle28, _szInfoTitle29, _szInfoTitle30, _szInfoTitle31
-      ]).buffer.asUint16List());
+  String get szInfoTitle {
+    final charCodes = <int>[];
+    for (var i = 0; i < 64; i++) {
+      charCodes.add(_szInfoTitle[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szInfoTitle(String value) {
+    // Pad with null characters
+    final stringToStore = value.padRight(64, '\x00');
+    for (var i = 0; i < 64; i++) {
+      _szInfoTitle[i] = stringToStore.codeUnitAt(i);
+    }
+  }
 
   @Uint32()
   external int dwInfoFlags;
