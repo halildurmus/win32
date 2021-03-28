@@ -1,3 +1,8 @@
+## 0.4.11
+
+- Update to latest win32metadata `.winmd` file.
+- Use metadata for Win32 intrinsic value types
+
 ## 0.4.10
 
 - Update to latest win32metadata `.winmd` file.
