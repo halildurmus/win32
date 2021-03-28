@@ -191,6 +191,29 @@ class BITMAPINFOHEADER extends Struct {
   external int biClrImportant;
 }
 
+/// The BLUETOOTH_DEVICE_SEARCH_PARAMS structure specifies search criteria
+/// for Bluetooth device searches.
+///
+/// {@category Struct}
+class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
+  @Uint32()
+  external int dwSize;
+  @Int32()
+  external int fReturnAuthenticated;
+  @Int32()
+  external int fReturnRemembered;
+  @Int32()
+  external int fReturnUnknown;
+  @Int32()
+  external int fReturnConnected;
+  @Int32()
+  external int fIssueInquiry;
+  @Uint8()
+  external int cTimeoutMultiplier;
+  @IntPtr()
+  external int hRadio;
+}
+
 /// The BLUETOOTH_FIND_RADIO_PARAMS structure facilitates enumerating
 /// installed Bluetooth radios.
 ///
@@ -221,6 +244,42 @@ class CHOOSECOLOR extends Struct {
   external int lCustData;
   external Pointer<NativeFunction<CCHookProc>> lpfnHook;
   external Pointer<Utf16> lpTemplateName;
+}
+
+/// Contains information that the ChooseFont function uses to initialize
+/// the Font dialog box. After the user closes the dialog box, the system
+/// returns information about the user's selection in this structure.
+///
+/// {@category Struct}
+class CHOOSEFONT extends Struct {
+  @Uint32()
+  external int lStructSize;
+  @IntPtr()
+  external int hwndOwner;
+  @IntPtr()
+  external int hDC;
+  external Pointer<LOGFONT> lpLogFont;
+  @Int32()
+  external int iPointSize;
+  @Uint32()
+  external int Flags;
+  @Uint32()
+  external int rgbColors;
+  @IntPtr()
+  external int lCustData;
+  external Pointer<NativeFunction<CFHookProc>> lpfnHook;
+  external Pointer<Utf16> lpTemplateName;
+  @IntPtr()
+  external int hInstance;
+  external Pointer<Utf16> lpszStyle;
+  @Uint32()
+  external int nFontType;
+  @Uint16()
+  external int ___MISSING_ALIGNMENT__;
+  @Int32()
+  external int nSizeMin;
+  @Int32()
+  external int nSizeMax;
 }
 
 /// Used generically to filter elements.
@@ -538,6 +597,21 @@ class LOGBRUSH extends Struct {
   external int lbHatch;
 }
 
+/// The MCI_OPEN_PARMS structure contains information for the MCI_OPEN
+/// command.
+///
+/// {@category Struct}
+@Packed(4)
+class MCI_OPEN_PARMS extends Struct {
+  @IntPtr()
+  external int dwCallback;
+  @Uint32()
+  external int wDeviceID;
+  external Pointer<Utf16> lpstrDeviceType;
+  external Pointer<Utf16> lpstrElementName;
+  external Pointer<Utf16> lpstrAlias;
+}
+
 /// The MCI_PLAY_PARMS structure contains positioning information for the
 /// MCI_PLAY command.
 ///
@@ -547,6 +621,18 @@ class MCI_PLAY_PARMS extends Struct {
   external int dwCallback;
   @Uint32()
   external int dwFrom;
+  @Uint32()
+  external int dwTo;
+}
+
+/// The MCI_SEEK_PARMS structure contains positioning information for the
+/// MCI_SEEK command.
+///
+/// {@category Struct}
+@Packed(4)
+class MCI_SEEK_PARMS extends Struct {
+  @IntPtr()
+  external int dwCallback;
   @Uint32()
   external int dwTo;
 }
@@ -683,6 +769,51 @@ class MSG extends Struct {
   @Uint32()
   external int time;
   external POINT pt;
+}
+
+/// Contains information that the GetOpenFileName and GetSaveFileName
+/// functions use to initialize an Open or Save As dialog box. After the
+/// user closes the dialog box, the system returns information about the
+/// user's selection in this structure.
+///
+/// {@category Struct}
+class OPENFILENAME extends Struct {
+  @Uint32()
+  external int lStructSize;
+  @IntPtr()
+  external int hwndOwner;
+  @IntPtr()
+  external int hInstance;
+  external Pointer<Utf16> lpstrFilter;
+  external Pointer<Utf16> lpstrCustomFilter;
+  @Uint32()
+  external int nMaxCustFilter;
+  @Uint32()
+  external int nFilterIndex;
+  external Pointer<Utf16> lpstrFile;
+  @Uint32()
+  external int nMaxFile;
+  external Pointer<Utf16> lpstrFileTitle;
+  @Uint32()
+  external int nMaxFileTitle;
+  external Pointer<Utf16> lpstrInitialDir;
+  external Pointer<Utf16> lpstrTitle;
+  @Uint32()
+  external int Flags;
+  @Uint16()
+  external int nFileOffset;
+  @Uint16()
+  external int nFileExtension;
+  external Pointer<Utf16> lpstrDefExt;
+  @IntPtr()
+  external int lCustData;
+  external Pointer<NativeFunction<OFNHookProc>> lpfnHook;
+  external Pointer<Utf16> lpTemplateName;
+  external Pointer pvReserved;
+  @Uint32()
+  external int dwReserved;
+  @Uint32()
+  external int FlagsEx;
 }
 
 /// The PALETTEENTRY structure specifies the color and usage of an entry in

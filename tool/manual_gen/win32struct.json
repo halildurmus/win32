@@ -32,6 +32,10 @@
         "namespace": "Windows.Win32.Gdi.BITMAPINFOHEADER",
         "comment": "The BITMAPINFOHEADER structure contains information about the dimensions and color format of a device-independent bitmap (DIB)."
     },
+    "BLUETOOTH_DEVICE_SEARCH_PARAMS": {
+        "namespace": "Windows.Win32.Bluetooth.BLUETOOTH_DEVICE_SEARCH_PARAMS",
+        "comment": "The BLUETOOTH_DEVICE_SEARCH_PARAMS structure specifies search criteria for Bluetooth device searches."
+    },
     "BLUETOOTH_FIND_RADIO_PARAMS": {
         "namespace": "Windows.Win32.Bluetooth.BLUETOOTH_FIND_RADIO_PARAMS",
         "comment": "The BLUETOOTH_FIND_RADIO_PARAMS structure facilitates enumerating installed Bluetooth radios."
@@ -39,6 +43,10 @@
     "CHOOSECOLOR": {
         "namespace": "Windows.Win32.WindowsAndMessaging.CHOOSECOLORW",
         "comment": "Contains information the ChooseColor function uses to initialize the Color dialog box. After the user closes the dialog box, the system returns information about the user's selection in this structure."
+    },
+    "CHOOSEFONT": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.CHOOSEFONTW",
+        "comment": "Contains information that the ChooseFont function uses to initialize the Font dialog box. After the user closes the dialog box, the system returns information about the user's selection in this structure."
     },
     "COMDLG_FILTERSPEC": {
         "namespace": "Windows.Win32.Shell.COMDLG_FILTERSPEC",
@@ -122,9 +130,19 @@
         "namespace": "Windows.Win32.Gdi.LOGBRUSH",
         "comment": "The LOGBRUSH structure defines the style, color, and pattern of a physical brush. It is used by the CreateBrushIndirect and ExtCreatePen functions."
     },
+    "MCI_OPEN_PARMS": {
+        "namespace": "Windows.Win32.CoreAudio.MCI_OPEN_PARMSW",
+        "comment": "The MCI_OPEN_PARMS structure contains information for the MCI_OPEN command.",
+        "packing": 4
+    },
     "MCI_PLAY_PARMS": {
         "namespace": "Windows.Win32.CoreAudio.MCI_PLAY_PARMS",
         "comment": "The MCI_PLAY_PARMS structure contains positioning information for the MCI_PLAY command."
+    },
+    "MCI_SEEK_PARMS": {
+        "namespace": "Windows.Win32.CoreAudio.MCI_SEEK_PARMS",
+        "comment": "The MCI_SEEK_PARMS structure contains positioning information for the MCI_SEEK command.",
+        "packing": 4
     },
     "MCI_STATUS_PARMS": {
         "namespace": "Windows.Win32.CoreAudio.MCI_STATUS_PARMS",
@@ -157,6 +175,10 @@
     "MSG": {
         "namespace": "Windows.Win32.WindowsAndMessaging.MSG",
         "comment": "Contains message information from a thread's message queue."
+    },
+    "OPENFILENAME": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.OPENFILENAMEW",
+        "comment": "Contains information that the GetOpenFileName and GetSaveFileName functions use to initialize an Open or Save As dialog box. After the user closes the dialog box, the system returns information about the user's selection in this structure."
     },
     "PALETTEENTRY": {
         "namespace": "Windows.Win32.Gdi.PALETTEENTRY",

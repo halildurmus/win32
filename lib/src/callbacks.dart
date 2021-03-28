@@ -16,6 +16,11 @@ import 'structs.g.dart';
 /// procedure of the Color dialog box.
 typedef CCHookProc = IntPtr Function(IntPtr, Uint32, IntPtr, IntPtr);
 
+/// Application-defined callback function used with the ChooseFont function.
+/// Receives messages or notifications intended for the default dialog box
+/// procedure of the Font dialog box.
+typedef CFHookProc = IntPtr Function(IntPtr, Uint32, IntPtr, IntPtr);
+
 /// Application-defined callback function used with the CreateDialog and
 /// DialogBox families of functions. It processes messages sent to a modal or
 /// modeless dialog box.
@@ -55,6 +60,12 @@ typedef HandlerProc = Int32 Function(Uint32 dwCtrlType);
 /// function. It receives display monitors in the calculated enumeration set.
 typedef MonitorEnumProc = Int32 Function(
     IntPtr hMonitor, IntPtr hDC, Pointer lpRect, IntPtr lParam);
+
+/// Application-defined callback function used with the Explorer-style Open and
+/// Save As dialog boxes. Receives notification messages sent from the dialog
+/// box. The function also receives messages for any additional controls that
+/// you defined by specifying a child dialog template.
+typedef OFNHookProc = IntPtr Function(IntPtr, Uint32, IntPtr, IntPtr);
 
 /// Application-defined callback function used with the GrayString function. It
 /// is used to draw a string.
