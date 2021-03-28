@@ -1231,6 +1231,17 @@ class BLUETOOTH_PIN_INFO extends Struct {
     }
     return Uint8List.fromList(pin);
   }
+
+  set pin(Uint8List value) {
+    final paddedList = List<int>.from(value);
+    while (paddedList.length < 16) {
+      paddedList.add(0);
+    }
+
+    for (var i = 0; i < 16; i++) {
+      _pin[i] = paddedList[i];
+    }
+  }
 }
 
 // typedef struct _BLUETOOTH_OOB_DATA_INFO {
