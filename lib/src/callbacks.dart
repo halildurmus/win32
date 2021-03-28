@@ -45,6 +45,11 @@ typedef EnumResNameProc = Int32 Function(IntPtr hModule, Pointer<Utf16> lpType,
 typedef EnumResTypeProc = Int32 Function(
     IntPtr hModule, Pointer<Utf16> lpszType, IntPtr lParam);
 
+/// Application-defined callback function used with the IDispatch::Invoke
+/// function to defer filling in bstrDescription, bstrHelpFile, and
+/// dwHelpContext fields until they are needed.
+typedef ExcepInfoProc = IntPtr Function(Pointer<EXCEPINFO>);
+
 /// Application-defined callback function used with the FindText or ReplaceText
 /// function. Receives messages or notifications intended for the default dialog
 /// box procedure of the Find or Replace dialog box.

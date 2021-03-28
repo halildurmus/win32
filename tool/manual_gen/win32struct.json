@@ -102,6 +102,10 @@
         "namespace": "Windows.Win32.Gdi.DRAWTEXTPARAMS",
         "comment": "The DRAWTEXTPARAMS structure contains extended formatting options for the DrawTextEx function."
     },
+    "EXCEPINFO": {
+        "namespace": "Windows.Win32.Automation.EXCEPINFO",
+        "comment": "Describes an exception that occurred during IDispatch::Invoke."
+    },
     "FILETIME": {
         "namespace": "Windows.Win32.WindowsProgramming.FILETIME",
         "comment": "Contains a 64-bit value representing the number of 100-nanosecond intervals since January 1, 1601 (UTC)."
@@ -277,6 +281,11 @@
     "VS_FIXEDFILEINFO": {
         "namespace": "Windows.Win32.WindowsAndMessaging.VS_FIXEDFILEINFO",
         "comment": "Contains version information for a file. This information is language and code page independent."
+    },
+    "WAVEFORMATEX": {
+        "namespace": "Windows.Win32.Multimedia.WAVEFORMATEX",
+        "comment": "The WAVEFORMATEX structure defines the format of waveform-audio data. Only format information common to all waveform-audio data formats is included in this structure. For formats that require additional information, this structure is included as the first member in another structure, along with the additional information.",
+        "packing": 1
     },
     "WAVEHDR": {
         "namespace": "Windows.Win32.Multimedia.WAVEHDR",

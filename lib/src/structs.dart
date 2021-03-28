@@ -2440,64 +2440,6 @@ class WAVEOUTCAPS extends Struct {
   external int dwSupport;
 }
 
-// typedef struct tWAVEFORMATEX {
-//   WORD  wFormatTag;
-//   WORD  nChannels;
-//   DWORD nSamplesPerSec;
-//   DWORD nAvgBytesPerSec;
-//   WORD  nBlockAlign;
-//   WORD  wBitsPerSample;
-//   WORD  cbSize;
-// } WAVEFORMATEX, *PWAVEFORMATEX, *NPWAVEFORMATEX, *LPWAVEFORMATEX;
-
-/// The WAVEFORMATEX structure defines the format of waveform-audio data. Only
-/// format information common to all waveform-audio data formats is included in
-/// this structure. For formats that require additional information, this
-/// structure is included as the first member in another structure, along with
-/// the additional information.
-///
-/// {@category Struct}
-class WAVEFORMATEX extends Struct {
-  @Uint16()
-  external int wFormatTag;
-
-  @Uint16()
-  external int nChannels;
-
-  // Work around overpadding by Dart FFI.
-  @Uint16()
-  external int _nSamplesPerSecHi;
-  @Uint16()
-  external int _nSamplesPerSecLo;
-
-  @Uint16()
-  external int _nAvgBytesPerSecHi;
-  @Uint16()
-  external int _nAvgBytesPerSecLo;
-
-  @Uint16()
-  external int nBlockAlign;
-
-  @Uint16()
-  external int wBitsPerSample;
-
-  @Uint16()
-  external int cbSize;
-
-  int get nSamplesPerSec => (_nSamplesPerSecHi << 16) + _nSamplesPerSecLo;
-  int get nAvgBytesPerSec => (_nAvgBytesPerSecHi << 16) + _nAvgBytesPerSecLo;
-
-  set nSamplesPerSec(int value) {
-    _nSamplesPerSecHi = (value & 0xFF00) << 16;
-    _nSamplesPerSecLo = value & 0xFF;
-  }
-
-  set nAvgBytesPerSec(int value) {
-    _nAvgBytesPerSecHi = (value & 0xFF00) << 16;
-    _nAvgBytesPerSecLo = value & 0xFF;
-  }
-}
-
 // typedef struct mmtime_tag {
 //   UINT  wType;
 //   union {
@@ -2573,11 +2515,6 @@ class MMTIME extends Struct {
 // OBJECTS CAN BE GENERATED
 // -----------------------------------------------------------------------------
 
-/// Describes an exception that occurred during IDispatch::Invoke.
-///
-/// {@category Struct}
-class EXCEPINFO extends Opaque {}
-
 /// The PROPVARIANT structure is used in the ReadMultiple and WriteMultiple
 /// methods of IPropertyStorage to define the type tag and the value of a
 /// property in a property set.
@@ -2612,8 +2549,6 @@ class NLM_SIMULATED_PROFILE_INFO extends Opaque {}
 //   GUID guidItem;
 //   HICON hBalloonIcon;
 // } NOTIFYICONDATAW, *PNOTIFYICONDATAW;
-
-// FFI support for packed structs https://github.com/dart-lang/sdk/issues/38158
 
 /// The NOTIFYICONDATA contains information that the system needs to display
 /// notifications in the notification area. Used by Shell_NotifyIcon.

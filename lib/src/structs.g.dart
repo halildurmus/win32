@@ -494,6 +494,25 @@ class DRAWTEXTPARAMS extends Struct {
   external int uiLengthDrawn;
 }
 
+/// Describes an exception that occurred during IDispatch::Invoke.
+///
+/// {@category Struct}
+class EXCEPINFO extends Struct {
+  @Uint16()
+  external int wCode;
+  @Uint16()
+  external int wReserved;
+  external Pointer<Utf16> bstrSource;
+  external Pointer<Utf16> bstrDescription;
+  external Pointer<Utf16> bstrHelpFile;
+  @Uint32()
+  external int dwHelpContext;
+  external Pointer pvReserved;
+  external Pointer<NativeFunction<ExcepInfoProc>> pfnDeferredFillIn;
+  @Int32()
+  external int scode;
+}
+
 /// Contains a 64-bit value representing the number of 100-nanosecond
 /// intervals since January 1, 1601 (UTC).
 ///
@@ -1253,6 +1272,31 @@ class VS_FIXEDFILEINFO extends Struct {
   external int dwFileDateMS;
   @Uint32()
   external int dwFileDateLS;
+}
+
+/// The WAVEFORMATEX structure defines the format of waveform-audio data.
+/// Only format information common to all waveform-audio data formats is
+/// included in this structure. For formats that require additional
+/// information, this structure is included as the first member in another
+/// structure, along with the additional information.
+///
+/// {@category Struct}
+@Packed(1)
+class WAVEFORMATEX extends Struct {
+  @Uint16()
+  external int wFormatTag;
+  @Uint16()
+  external int nChannels;
+  @Uint32()
+  external int nSamplesPerSec;
+  @Uint32()
+  external int nAvgBytesPerSec;
+  @Uint16()
+  external int nBlockAlign;
+  @Uint16()
+  external int wBitsPerSample;
+  @Uint16()
+  external int cbSize;
 }
 
 /// The WAVEHDR structure defines the header used to identify a
