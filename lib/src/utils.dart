@@ -219,10 +219,15 @@ TypeTuple parseTypeFromSignature(
       // Format is [Type ArrayShape] (see §II.23.2.13)
       final arrayTuple =
           parseTypeFromSignature(signatureBlob.sublist(1), reader);
-      runtimeType.name = arrayTuple.typeIdentifier.name;
-      runtimeType.type = arrayTuple.typeIdentifier.type;
       dataLength = 1 + arrayTuple.offsetLength;
-      // TODO: Parse ArrayShape
+      runtimeType.typeArgs.add(arrayTuple.typeIdentifier);
+      final dimensionsCount = signatureBlob[dataLength++]; // rank
+      final dimensionUpperBounds = List<int>.filled(dimensionsCount, 0);
+      final numSizes = signatureBlob[dataLength++];
+      for (var i = 0; i < numSizes; i++) {
+        dimensionUpperBounds[i] = signatureBlob[dataLength++];
+      }
+      runtimeType.arrayDimensions = dimensionUpperBounds;
       break;
 
     default:

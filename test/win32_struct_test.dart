@@ -31,7 +31,18 @@ void main() {
     expect(procInfo.fields.last.name, equals('bmiColors'));
     expect(procInfo.fields.last.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_ARRAY));
-    expect(procInfo.fields.last.typeIdentifier.name, endsWith('RGBQUAD'));
+    expect(procInfo.fields.last.typeIdentifier.typeArgs.first.name,
+        endsWith('RGBQUAD'));
+  });
+
+  test('Struct array field has expected name and type 2', () {
+    final procInfo = scope['Windows.Win32.Gdi.DESIGNVECTOR']!;
+    expect(procInfo.fields.last.name, equals('dvValues'));
+    expect(procInfo.fields.last.typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_ARRAY));
+    expect(procInfo.fields.last.typeIdentifier.typeArgs.first.corType,
+        equals(CorElementType.ELEMENT_TYPE_I4));
+    expect(procInfo.fields.last.typeIdentifier.arrayDimensions, equals([16]));
   });
 
   test('Struct array field projects correctly', () {

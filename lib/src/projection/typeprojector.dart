@@ -163,6 +163,7 @@ class TypeProjector {
       case CorElementType.ELEMENT_TYPE_OBJECT:
         return 'COMObject';
       case CorElementType.ELEMENT_TYPE_GENERICINST:
+      case CorElementType.ELEMENT_TYPE_ARRAY:
         // TODO: Assume a Vector for now
         return TypeProjector(typeIdentifier.typeArgs.first).nativeType;
       case CorElementType.ELEMENT_TYPE_PTR:
