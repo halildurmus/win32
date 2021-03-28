@@ -282,6 +282,39 @@ class CHOOSEFONT extends Struct {
   external int nSizeMax;
 }
 
+/// The COLORADJUSTMENT structure defines the color adjustment values used
+/// by the StretchBlt and StretchDIBits functions when the stretch mode is
+/// HALFTONE. You can set the color adjustment values by calling the
+/// SetColorAdjustment function.
+///
+/// {@category Struct}
+class COLORADJUSTMENT extends Struct {
+  @Uint16()
+  external int caSize;
+  @Uint16()
+  external int caFlags;
+  @Uint16()
+  external int caIlluminantIndex;
+  @Uint16()
+  external int caRedGamma;
+  @Uint16()
+  external int caGreenGamma;
+  @Uint16()
+  external int caBlueGamma;
+  @Uint16()
+  external int caReferenceBlack;
+  @Uint16()
+  external int caReferenceWhite;
+  @Int16()
+  external int caContrast;
+  @Int16()
+  external int caBrightness;
+  @Int16()
+  external int caColorfulness;
+  @Int16()
+  external int caRedGreenTint;
+}
+
 /// Used generically to filter elements.
 ///
 /// {@category Struct}
@@ -720,6 +753,21 @@ class MENUITEMINFO extends Struct {
   external int hbmpItem;
 }
 
+/// Defines the metafile picture format used for exchanging metafile data
+/// through the clipboard.
+///
+/// {@category Struct}
+class METAFILEPICT extends Struct {
+  @Int32()
+  external int mm;
+  @Int32()
+  external int xExt;
+  @Int32()
+  external int yExt;
+  @IntPtr()
+  external int hMF;
+}
+
 /// Contains information about a window's maximized size and position and
 /// its minimum and maximum tracking size.
 ///
@@ -788,6 +836,61 @@ class MSG extends Struct {
   @Uint32()
   external int time;
   external POINT pt;
+}
+
+/// The NEWTEXTMETRIC structure contains data that describes a physical
+/// font.
+///
+/// {@category Struct}
+class NEWTEXTMETRIC extends Struct {
+  @Int32()
+  external int tmHeight;
+  @Int32()
+  external int tmAscent;
+  @Int32()
+  external int tmDescent;
+  @Int32()
+  external int tmInternalLeading;
+  @Int32()
+  external int tmExternalLeading;
+  @Int32()
+  external int tmAveCharWidth;
+  @Int32()
+  external int tmMaxCharWidth;
+  @Int32()
+  external int tmWeight;
+  @Int32()
+  external int tmOverhang;
+  @Int32()
+  external int tmDigitizedAspectX;
+  @Int32()
+  external int tmDigitizedAspectY;
+  @Uint16()
+  external int tmFirstChar;
+  @Uint16()
+  external int tmLastChar;
+  @Uint16()
+  external int tmDefaultChar;
+  @Uint16()
+  external int tmBreakChar;
+  @Uint8()
+  external int tmItalic;
+  @Uint8()
+  external int tmUnderlined;
+  @Uint8()
+  external int tmStruckOut;
+  @Uint8()
+  external int tmPitchAndFamily;
+  @Uint8()
+  external int tmCharSet;
+  @Uint32()
+  external int ntmFlags;
+  @Uint32()
+  external int ntmSizeEM;
+  @Uint32()
+  external int ntmCellHeight;
+  @Uint32()
+  external int ntmAvgWidth;
 }
 
 /// Contains information that the GetOpenFileName and GetSaveFileName
@@ -859,6 +962,24 @@ class POINT extends Struct {
   external int x;
   @Int32()
   external int y;
+}
+
+/// The POLYTEXT structure describes how the PolyTextOut function should
+/// draw a string of text.
+///
+/// {@category Struct}
+class POLYTEXT extends Struct {
+  @Int32()
+  external int x;
+  @Int32()
+  external int y;
+  @Uint32()
+  external int n;
+  external Pointer<Utf16> lpstr;
+  @Uint32()
+  external int uiFlags;
+  external RECT rcl;
+  external Pointer<Int32> pdx;
 }
 
 /// Contains information about a newly created process and its primary

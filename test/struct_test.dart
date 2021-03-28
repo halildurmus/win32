@@ -218,6 +218,34 @@ void main() {
       expect(sizeOf<MENUITEMINFO>(), equals(48));
     }
   });
+  test('Struct COLORADJUSTMENT is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<COLORADJUSTMENT>(), equals(24));
+    } else {
+      expect(sizeOf<COLORADJUSTMENT>(), equals(24));
+    }
+  });
+  test('Struct METAFILEPICT is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<METAFILEPICT>(), equals(24));
+    } else {
+      expect(sizeOf<METAFILEPICT>(), equals(16));
+    }
+  });
+  test('Struct NEWTEXTMETRIC is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<NEWTEXTMETRIC>(), equals(76));
+    } else {
+      expect(sizeOf<NEWTEXTMETRIC>(), equals(76));
+    }
+  });
+  test('Struct POLYTEXT is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<POLYTEXT>(), equals(56));
+    } else {
+      expect(sizeOf<POLYTEXT>(), equals(40));
+    }
+  });
   test('Struct MSG is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<MSG>(), equals(48));

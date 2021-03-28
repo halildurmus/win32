@@ -57,6 +57,10 @@ void main()
     printf("  'CREATESTRUCT': %zu,\n", sizeof(CREATESTRUCT));
     printf("  'MENUINFO': %zu,\n", sizeof(MENUINFO));
     printf("  'MENUITEMINFO': %zu,\n", sizeof(MENUITEMINFO));
+    printf("  'COLORADJUSTMENT': %zu,\n", sizeof(COLORADJUSTMENT));
+    printf("  'METAFILEPICT': %zu,\n", sizeof(METAFILEPICT));
+    printf("  'NEWTEXTMETRIC': %zu,\n", sizeof(NEWTEXTMETRICW));
+    printf("  'POLYTEXT': %zu,\n", sizeof(POLYTEXTW));
     printf("  'MSG': %zu,\n", sizeof(MSG));
     printf("  'SIZE': %zu,\n", sizeof(SIZE));
     printf("  'MINMAXINFO': %zu,\n", sizeof(MINMAXINFO));
@@ -123,7 +127,6 @@ void main()
     printf("  'PROPERTYKEY': %zu,\n", sizeof(PROPERTYKEY));
     printf("  'PROPVARIANT': %zu,\n", sizeof(PROPVARIANT));
     printf("  'SAFEARRAY': %zu,\n", sizeof(SAFEARRAY));
-    printf("  'CLSID': %zu,\n", sizeof(CLSID));
     printf("  'STATSTG': %zu,\n", sizeof(STATSTG));
     printf("  'NLM_SIMULATED_PROFILE_INFO': %zu,\n", sizeof(NLM_SIMULATED_PROFILE_INFO));
     printf("  'NOTIFYICONDATA': %zu,\n", sizeof(NOTIFYICONDATAW));
