@@ -11,7 +11,7 @@ void main() {
     final typeDef = MetadataStore.getMetadataForType(type)!;
     final dartClass = TypePrinter.printType(typeDef);
 
-    // File('test/goldens/IAsyncInfo.comparison').writeAsStringSync(dartClass);
+    File('test/goldens/IAsyncInfo.comparison').writeAsStringSync(dartClass);
     final golden = File('test/goldens/IAsyncInfo.golden').readAsStringSync();
     expect(dartClass, equalsIgnoringWhitespace(golden));
   });
@@ -23,7 +23,7 @@ void main() {
 
     final dartClass = TypePrinter.printType(typedef);
 
-    // File('test/goldens/INetwork.comparison').writeAsStringSync(dartClass);
+    File('test/goldens/INetwork.comparison').writeAsStringSync(dartClass);
     final golden = File('test/goldens/INetwork.golden').readAsStringSync();
 
     expect(dartClass, equalsIgnoringWhitespace(golden));
