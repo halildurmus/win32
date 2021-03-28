@@ -11,6 +11,11 @@ import 'package:ffi/ffi.dart';
 import 'structs.dart';
 import 'structs.g.dart';
 
+/// Application-defined callback function used with the ChooseColor function.
+/// Receives messages or notifications intended for the default dialog box
+/// procedure of the Color dialog box.
+typedef CCHookProc = IntPtr Function(IntPtr, Uint32, IntPtr, IntPtr);
+
 /// Application-defined callback function used with the CreateDialog and
 /// DialogBox families of functions. It processes messages sent to a modal or
 /// modeless dialog box.
@@ -34,6 +39,11 @@ typedef EnumResNameProc = Int32 Function(IntPtr hModule, Pointer<Utf16> lpType,
 /// EnumResourceTypesEx functions. It receives resource types.
 typedef EnumResTypeProc = Int32 Function(
     IntPtr hModule, Pointer<Utf16> lpszType, IntPtr lParam);
+
+/// Application-defined callback function used with the FindText or ReplaceText
+/// function. Receives messages or notifications intended for the default dialog
+/// box procedure of the Find or Replace dialog box.
+typedef FRHookProc = IntPtr Function(IntPtr, Uint32, IntPtr, IntPtr);
 
 /// Application-defined callback function used with the SetConsoleCtrlHandler
 /// function. A console process uses this function to handle control signals

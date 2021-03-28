@@ -1,4 +1,8 @@
 {
+    "ACCEL": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.ACCEL",
+        "comment": "Defines an accelerator key used in an accelerator table."
+    },
     "ACL": {
         "namespace": "Windows.Win32.Security.ACL",
         "comment": "The ACL structure is the header of an access control list (ACL). A complete ACL consists of an ACL structure followed by an ordered list of zero or more access control entries (ACEs)."
@@ -15,6 +19,11 @@
         "namespace": "Windows.Win32.Gdi.BITMAP",
         "comment": "The BITMAP structure defines the type, width, height, color format, and bit values of a bitmap."
     },
+    "BITMAPFILEHEADER": {
+        "namespace": "Windows.Win32.Gdi.BITMAPFILEHEADER",
+        "comment": "The BITMAPFILEHEADER structure contains information about the type, size, and layout of a file that contains a DIB.",
+        "packing": 2
+    },
     "BITMAPINFO": {
         "namespace": "Windows.Win32.Gdi.BITMAPINFO",
         "comment": "The BITMAPINFO structure defines the dimensions and color information for a device-independent bitmap (DIB)."
@@ -26,6 +35,14 @@
     "BLUETOOTH_FIND_RADIO_PARAMS": {
         "namespace": "Windows.Win32.Bluetooth.BLUETOOTH_FIND_RADIO_PARAMS",
         "comment": "The BLUETOOTH_FIND_RADIO_PARAMS structure facilitates enumerating installed Bluetooth radios."
+    },
+    "CHOOSECOLOR": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.CHOOSECOLORW",
+        "comment": "Contains information the ChooseColor function uses to initialize the Color dialog box. After the user closes the dialog box, the system returns information about the user's selection in this structure."
+    },
+    "COMDLG_FILTERSPEC": {
+        "namespace": "Windows.Win32.Shell.COMDLG_FILTERSPEC",
+        "comment": "Used generically to filter elements."
     },
     "CONSOLE_CURSOR_INFO": {
         "namespace": "Windows.Win32.SystemServices.CONSOLE_CURSOR_INFO",
@@ -59,6 +76,16 @@
         "namespace": "Windows.Win32.Automation.DISPPARAMS",
         "comment": "Contains the arguments passed to a method or property."
     },
+    "DLGITEMTEMPLATE": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.DLGITEMTEMPLATE",
+        "comment": "Defines the dimensions and style of a control in a dialog box. One or more of these structures are combined with a DLGTEMPLATE structure to form a standard template for a dialog box.",
+        "packing": 2
+    },
+    "DLGTEMPLATE": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.DLGTEMPLATE",
+        "comment": "Defines the dimensions and style of a dialog box. This structure, always the first in a standard template for a dialog box, also specifies the number of controls in the dialog box and therefore specifies the number of subsequent DLGITEMTEMPLATE structures in the template.",
+        "packing": 2
+    },
     "DLLVERSIONINFO": {
         "namespace": "Windows.Win32.Shell.DLLVERSIONINFO",
         "comment": "Receives DLL-specific version information. It is used with the DllGetVersion function."
@@ -71,6 +98,10 @@
         "namespace": "Windows.Win32.WindowsProgramming.FILETIME",
         "comment": "Contains a 64-bit value representing the number of 100-nanosecond intervals since January 1, 1601 (UTC)."
     },
+    "FINDREPLACE": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.FINDREPLACEW",
+        "comment": "Contains information that the FindText and ReplaceText functions use to initialize the Find and Replace dialog boxes. The FINDMSGSTRING registered message uses this structure to pass the user's search or replacement input to the owner window of a Find or Replace dialog box."
+    },
     "INITCOMMONCONTROLSEX": {
         "namespace": "Windows.Win32.Controls.INITCOMMONCONTROLSEX",
         "comment": "Carries information used to load common control classes from the dynamic-link library (DLL). This structure is used with the InitCommonControlsEx function."
@@ -82,6 +113,10 @@
     "KNOWNFOLDER_DEFINITION": {
         "namespace": "Windows.Win32.Shell.KNOWNFOLDER_DEFINITION",
         "comment": "Defines the specifics of a known folder."
+    },
+    "LASTINPUTINFO": {
+        "namespace": "Windows.Win32.KeyboardAndMouseInput.LASTINPUTINFO",
+        "comment": "Contains the time of the last input."
     },
     "LOGBRUSH": {
         "namespace": "Windows.Win32.Gdi.LOGBRUSH",
@@ -228,5 +263,9 @@
     "WINDOWINFO": {
         "namespace": "Windows.Win32.WindowsAndMessaging.WINDOWINFO",
         "comment": "Contains window information."
+    },
+    "WNDCLASS": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.WNDCLASSW",
+        "comment": "Contains the window class attributes that are registered by the RegisterClass function."
     }
 }

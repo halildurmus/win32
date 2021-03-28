@@ -8,7 +8,7 @@ import 'dart:ffi';
 
 import 'callbacks.dart';
 import 'constants.dart';
-import 'structs.dart';
+import 'structs.g.dart';
 import 'user32.dart';
 
 /// Creates a WORD value by concatenating the specified values.

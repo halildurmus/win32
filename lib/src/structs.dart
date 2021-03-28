@@ -45,51 +45,6 @@ import 'combase.dart';
 import 'oleaut32.dart';
 import 'structs.g.dart';
 
-// typedef struct tagWNDCLASSW {
-//   UINT      style;
-//   WNDPROC   lpfnWndProc;
-//   int       cbClsExtra;
-//   int       cbWndExtra;
-//   HINSTANCE hInstance;
-//   HICON     hIcon;
-//   HCURSOR   hCursor;
-//   HBRUSH    hbrBackground;
-//   LPCWSTR   lpszMenuName;
-//   LPCWSTR   lpszClassName;
-// } WNDCLASSW, *PWNDCLASSW, *NPWNDCLASSW, *LPWNDCLASSW;
-
-/// Contains the window class attributes that are registered by the
-/// RegisterClass function.
-///
-/// {@category Struct}
-class WNDCLASS extends Struct {
-  @Uint32()
-  external int style;
-
-  external Pointer<NativeFunction<WindowProc>> lpfnWndProc;
-
-  @Int32()
-  external int cbClsExtra;
-
-  @Int32()
-  external int cbWndExtra;
-
-  @IntPtr()
-  external int hInstance;
-
-  @IntPtr()
-  external int hIcon;
-
-  @IntPtr()
-  external int hCursor;
-
-  @IntPtr()
-  external int hbrBackground;
-
-  external Pointer<Utf16> lpszMenuName;
-  external Pointer<Utf16> lpszClassName;
-}
-
 // typedef struct _SYSTEM_INFO {
 //   union {
 //     DWORD dwOemId;
@@ -366,52 +321,6 @@ class VARIANT extends Struct {
   external int _data2;
 }
 
-// typedef struct _COMDLG_FILTERSPEC {
-//   LPCWSTR pszName;
-//   LPCWSTR pszSpec;
-// } COMDLG_FILTERSPEC;
-
-/// Used generically to filter elements.
-///
-/// {@category Struct}
-class COMDLG_FILTERSPEC extends Struct {
-  external Pointer<Utf16> pszName;
-  external Pointer<Utf16> pszSpec;
-}
-
-// typedef struct tagACCEL {
-//     BYTE   fVirt;               /* Also called the flags field */
-//     WORD   key;
-//     WORD  cmd;
-// } ACCEL, *LPACCEL;
-
-/// Defines an accelerator key used in an accelerator table.
-///
-/// {@category Struct}
-class ACCEL extends Struct {
-  @Uint8()
-  external int fVirt;
-  @Uint16()
-  external int key;
-  @Uint16()
-  external int cmd;
-}
-
-// typedef struct tagLASTINPUTINFO {
-//   UINT  cbSize;
-//   DWORD dwTime;
-// } LASTINPUTINFO, *PLASTINPUTINFO;
-
-/// Contains the time of the last input.
-///
-/// {@category Struct}
-class LASTINPUTINFO extends Struct {
-  @Uint32()
-  external int cbSize;
-  @Uint32()
-  external int dwTime;
-}
-
 const PHYSICAL_MONITOR_DESCRIPTION_SIZE = 128;
 
 // typedef struct _PHYSICAL_MONITOR {
@@ -509,91 +418,6 @@ class PHYSICAL_MONITOR extends Struct {
         _szPhysicalMonitorDescription28, _szPhysicalMonitorDescription29,
         _szPhysicalMonitorDescription30, _szPhysicalMonitorDescription31
       ]).buffer.asUint16List());
-}
-
-// typedef struct tagCHOOSECOLORW {
-//   DWORD        lStructSize;
-//   HWND         hwndOwner;
-//   HWND         hInstance;
-//   COLORREF     rgbResult;
-//   COLORREF     *lpCustColors;
-//   DWORD        Flags;
-//   LPARAM       lCustData;
-//   LPCCHOOKPROC lpfnHook;
-//   LPCWSTR      lpTemplateName;
-// } CHOOSECOLORW, *LPCHOOSECOLORW;
-
-/// Contains information the ChooseColor function uses to initialize the Color
-/// dialog box. After the user closes the dialog box, the system returns
-/// information about the user's selection in this structure.
-///
-/// {@category Struct}
-class CHOOSECOLOR extends Struct {
-  @Uint32()
-  external int lStructSize;
-
-  @IntPtr()
-  external int hwndOwner;
-
-  @IntPtr()
-  external int hInstance;
-
-  /// COLORREF is a DWORD that contains RGB values in the form 0x00bbggrr
-  @Int32()
-  external int rgbResult;
-
-  /// COLORREF is a DWORD that contains RGB values in the form 0x00bbggrr
-  external Pointer<Uint32> lpCustColors;
-
-  @Uint32()
-  external int Flags;
-
-  @IntPtr()
-  external int lCustData;
-
-  external Pointer<IntPtr> lpfnHook;
-  external Pointer<Uint16> lpTemplateName;
-}
-
-// typedef struct tagFINDREPLACEW {
-//   DWORD        lStructSize;
-//   HWND         hwndOwner;
-//   HINSTANCE    hInstance;
-//   DWORD        Flags;
-//   LPWSTR       lpstrFindWhat;
-//   LPWSTR       lpstrReplaceWith;
-//   WORD         wFindWhatLen;
-//   WORD         wReplaceWithLen;
-//   LPARAM       lCustData;
-//   LPFRHOOKPROC lpfnHook;
-//   LPCWSTR      lpTemplateName;
-// } FINDREPLACEW, *LPFINDREPLACEW;
-
-/// Contains information that the FindText and ReplaceText functions use to
-/// initialize the Find and Replace dialog boxes. The FINDMSGSTRING registered
-/// message uses this structure to pass the user's search or replacement input
-/// to the owner window of a Find or Replace dialog box.
-///
-/// {@category Struct}
-class FINDREPLACE extends Struct {
-  @Uint32()
-  external int lStructSize;
-  @IntPtr()
-  external int hwndOwner;
-  @IntPtr()
-  external int hInstance;
-  @Uint32()
-  external int Flags;
-  external Pointer<Utf16> lpstrFindWhat;
-  external Pointer<Utf16> lpstrReplaceWith;
-  @Uint16()
-  external int wFindWhatLen;
-  @Uint16()
-  external int wReplaceWithLen;
-  @IntPtr()
-  external int lCustData;
-  external Pointer<NativeFunction<DlgProc>> lpfnHook;
-  external Pointer<Utf16> lpTemplateName;
 }
 
 // typedef struct tagCHOOSEFONTW {
@@ -1454,49 +1278,6 @@ class GUID extends Struct {
   }
 }
 
-// typedef struct tagBITMAPFILEHEADER {
-//   WORD  bfType;
-//   DWORD bfSize;
-//   WORD  bfReserved1;
-//   WORD  bfReserved2;
-//   DWORD bfOffBits;
-// } BITMAPFILEHEADER, *LPBITMAPFILEHEADER, *PBITMAPFILEHEADER;
-
-/// The BITMAPFILEHEADER structure contains information about the type, size,
-/// and layout of a file that contains a DIB.
-///
-/// {@category Struct}
-class BITMAPFILEHEADER extends Struct {
-  @Uint16()
-  external int bfType;
-  @Uint16()
-  external int _bfSizeLo;
-  @Uint16()
-  external int _bfSizeHi;
-  @Uint16()
-  external int bfReserved1;
-  @Uint16()
-  external int bfReserved2;
-  @Uint16()
-  external int _bfOffBitsLo;
-  @Uint16()
-  external int _bfOffBitsHi;
-
-  int get bfSize => (_bfSizeHi << 16) + _bfSizeLo;
-
-  set bfSize(int value) {
-    _bfSizeHi = (value & 0xFFFF0000) >> 16;
-    _bfSizeLo = value & 0xFFFF;
-  }
-
-  int get bfOffBits => (_bfOffBitsHi << 16) + _bfOffBitsLo;
-
-  set bfOffBits(int value) {
-    _bfOffBitsHi = (value & 0xFFFF0000) >> 16;
-    _bfOffBitsLo = value & 0xFFFF;
-  }
-}
-
 // typedef struct _SHITEMID
 //     {
 //     USHORT cb;
@@ -1532,63 +1313,6 @@ class CHAR_INFO extends Struct {
 
   @Int16()
   external int Attributes;
-}
-
-// typedef struct {
-//   DWORD style;
-//   DWORD dwExtendedStyle;
-//   WORD  cdit;
-//   short x;
-//   short y;
-//   short cx;
-//   short cy;
-// } DLGTEMPLATE;
-
-/// Defines the dimensions and style of a dialog box. This structure, always the
-/// first in a standard template for a dialog box, also specifies the number of
-/// controls in the dialog box and therefore specifies the number of subsequent
-/// DLGITEMTEMPLATE structures in the template.
-///
-/// {@category Struct}
-@Packed(2)
-class DLGTEMPLATE extends Struct {
-  @Uint32()
-  external int style;
-  @Uint32()
-  external int dwExtendedStyle;
-  @Uint16()
-  external int cdit;
-  @Uint16()
-  external int x;
-  @Uint16()
-  external int y;
-  @Uint16()
-  external int cx;
-  @Uint16()
-  external int cy;
-}
-
-/// Defines the dimensions and style of a control in a dialog box. One or more
-/// of these structures are combined with a DLGTEMPLATE structure to form a
-/// standard template for a dialog box.
-///
-/// {@category Struct}
-@Packed(2)
-class DLGITEMTEMPLATE extends Struct {
-  @Uint32()
-  external int style;
-  @Uint32()
-  external int dwExtendedStyle;
-  @Int16()
-  external int x;
-  @Int16()
-  external int y;
-  @Int16()
-  external int cx;
-  @Int16()
-  external int cy;
-  @Uint16()
-  external int id;
 }
 
 // typedef struct _TASKDIALOGCONFIG {
