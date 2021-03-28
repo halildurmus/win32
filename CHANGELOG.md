@@ -1,3 +1,8 @@
+## 0.4.12
+
+- Update to latest win32metadata `.winmd` file.
+- Support nested classes
+
 ## 0.4.11
 
 - Update to latest win32metadata `.winmd` file.
