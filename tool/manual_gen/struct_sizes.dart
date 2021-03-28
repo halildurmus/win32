@@ -212,12 +212,6 @@ const structSize32 = {
 };
 
 const skipStructs = [
-  // Packed structs
-  'TASKDIALOGCONFIG', 'TASKDIALOG_BUTTON',
-
-  // Overallocates
-  'PROPERTYKEY',
-
   // Opaque types
   'EXCEPINFO',
   'PROPVARIANT',

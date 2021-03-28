@@ -137,7 +137,8 @@
     },
     "PROPERTYKEY": {
         "namespace": "Windows.Win32.WindowsPropertiesSystem.PROPERTYKEY",
-        "comment": "Specifies the FMTID/PID identifier that programmatically identifies a property."
+        "comment": "Specifies the FMTID/PID identifier that programmatically identifies a property.",
+        "packing": 4
     },
     "RECT": {
         "namespace": "Windows.Win32.DisplayDevices.RECT",
@@ -201,7 +202,8 @@
     },
     "TASKDIALOG_BUTTON": {
         "namespace": "Windows.Win32.Controls.TASKDIALOG_BUTTON",
-        "comment": "The TASKDIALOG_BUTTON structure contains information used to display a button in a task dialog. The TASKDIALOGCONFIG structure uses this structure."
+        "comment": "The TASKDIALOG_BUTTON structure contains information used to display a button in a task dialog. The TASKDIALOGCONFIG structure uses this structure.",
+        "packing": 4
     },
     "TEXTMETRIC": {
         "namespace": "Windows.Win32.Gdi.TEXTMETRICW",

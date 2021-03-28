@@ -1396,6 +1396,7 @@ class SHELLEXECUTEINFO extends Struct {
 /// Represents a globally unique identifier (GUID).
 ///
 /// {@category Struct}
+@Packed(4)
 class GUID extends Struct {
   @Uint32()
   external int Data1;
@@ -1505,21 +1506,12 @@ class BITMAPFILEHEADER extends Struct {
 /// Defines an item identifier.
 ///
 /// {@category Struct}
+@Packed(1)
 class SHITEMID extends Struct {
-  // Splitting this is necessary becaue otherwise Dart allocates the struct as 4
-  // bytes.
-  @Uint8()
-  external int _cb_hi;
-  @Uint8()
-  external int _cb_lo;
+  @Uint16()
+  external int cb;
   @Uint8()
   external int abID;
-
-  int get cb => (_cb_hi << 8) + _cb_lo;
-  set cb(int value) {
-    _cb_hi = (value & 0xFF00) >> 8;
-    _cb_lo = value & 0x00FF;
-  }
 }
 
 // typedef struct _CHAR_INFO {
@@ -1558,17 +1550,12 @@ class CHAR_INFO extends Struct {
 /// DLGITEMTEMPLATE structures in the template.
 ///
 /// {@category Struct}
+@Packed(2)
 class DLGTEMPLATE extends Struct {
-  // Work around struct packing issues in Dart
-  @Uint16()
-  external int _styleLo;
-  @Uint16()
-  external int _styleHi;
-  @Uint16()
-  external int _dwExtendedStyleLo;
-  @Uint16()
-  external int _dwExtendedStyleHi;
-
+  @Uint32()
+  external int style;
+  @Uint32()
+  external int dwExtendedStyle;
   @Uint16()
   external int cdit;
   @Uint16()
@@ -1579,19 +1566,6 @@ class DLGTEMPLATE extends Struct {
   external int cx;
   @Uint16()
   external int cy;
-
-  int get style => (_styleHi << 16) + _styleLo;
-  int get dwExtendedStyle => (_dwExtendedStyleHi << 16) + _dwExtendedStyleLo;
-
-  set style(int value) {
-    _styleHi = (value & 0xFFFF0000) >> 16;
-    _styleLo = value & 0xFFFF;
-  }
-
-  set dwExtendedStyle(int value) {
-    _dwExtendedStyleHi = (value & 0xFFFF0000) >> 16;
-    _dwExtendedStyleLo = value & 0xFFFF;
-  }
 }
 
 /// Defines the dimensions and style of a control in a dialog box. One or more
@@ -1599,44 +1573,22 @@ class DLGTEMPLATE extends Struct {
 /// standard template for a dialog box.
 ///
 /// {@category Struct}
+@Packed(2)
 class DLGITEMTEMPLATE extends Struct {
-  // Work around struct packing issues in Dart
-  @Uint16()
-  external int _styleLo;
-  @Uint16()
-  external int _styleHi;
-  @Uint16()
-  external int _dwExtendedStyleLo;
-  @Uint16()
-  external int _dwExtendedStyleHi;
-
+  @Uint32()
+  external int style;
+  @Uint32()
+  external int dwExtendedStyle;
   @Int16()
   external int x;
-
   @Int16()
   external int y;
-
   @Int16()
   external int cx;
-
   @Int16()
   external int cy;
-
   @Uint16()
   external int id;
-
-  int get style => (_styleHi << 16) + _styleLo;
-  int get dwExtendedStyle => (_dwExtendedStyleHi << 16) + _dwExtendedStyleLo;
-
-  set style(int value) {
-    _styleHi = (value & 0xFFFF0000) >> 16;
-    _styleLo = value & 0xFFFF;
-  }
-
-  set dwExtendedStyle(int value) {
-    _dwExtendedStyleHi = (value & 0xFFFF0000) >> 16;
-    _dwExtendedStyleLo = value & 0xFFFF;
-  }
 }
 
 // typedef struct _TASKDIALOGCONFIG {
@@ -1673,14 +1625,11 @@ class DLGITEMTEMPLATE extends Struct {
 //   UINT                           cxWidth;
 // } TASKDIALOGCONFIG;
 
-// This struct is packed (#include <pshpack1.h> before the struct declaration in
-// CommCtrl.h. Unfortunately Dart FFI does not yet support packed structs
-// (https://github.com/dart-lang/sdk/issues/38158), so this cannot yet be used.
-
 /// The TASKDIALOGCONFIG structure contains information used to display a task
 /// dialog. The TaskDialogIndirect function uses this structure.
 ///
 /// {@category Struct}
+@Packed(4)
 class TASKDIALOGCONFIG extends Struct {
   @Uint32()
   external int cbSize;

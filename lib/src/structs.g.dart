@@ -585,6 +585,7 @@ class PROCESS_INFORMATION extends Struct {
 /// property.
 ///
 /// {@category Struct}
+@Packed(4)
 class PROPERTYKEY extends Struct {
   external GUID fmtid;
   @Uint32()
@@ -866,6 +867,7 @@ class SYSTEMTIME extends Struct {
 /// structure.
 ///
 /// {@category Struct}
+@Packed(4)
 class TASKDIALOG_BUTTON extends Struct {
   @Int32()
   external int nButtonID;

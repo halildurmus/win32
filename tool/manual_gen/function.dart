@@ -19,15 +19,20 @@ const windowsBuilds = <String, int>{
 class Win32Struct {
   final String namespace;
   final String comment;
+  final int packing;
 
-  Map<String, dynamic> toJson() =>
-      <String, dynamic>{'namespace': namespace, 'comment': comment};
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'namespace': namespace,
+        'comment': comment,
+        if (packing != 0) 'packing': packing
+      };
 
   Win32Struct.fromJson(Map<String, dynamic> json)
       : assert(json['namespace'] != null),
         assert(json['comment'] != null),
         namespace = json['namespace'] as String,
-        comment = json['comment'] as String;
+        comment = json['comment'] as String,
+        packing = json['packing'] != null ? json['packing'] as int : 0;
 }
 
 /// Converts to/from win32api.json
