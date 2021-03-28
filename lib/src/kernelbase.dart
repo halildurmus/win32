@@ -19,6 +19,24 @@ import 'structs.g.dart';
 
 final _kernelbase = DynamicLibrary.open('kernelbase.dll');
 
+/// Compares two object handles to determine if they refer to the same
+/// underlying kernel object.
+///
+/// ```c
+/// BOOL CompareObjectHandles(
+///   HANDLE hFirstObjectHandle,
+///   HANDLE hSecondObjectHandle
+/// );
+/// ```
+/// {@category kernel32}
+int CompareObjectHandles(int hFirstObjectHandle, int hSecondObjectHandle) {
+  final _CompareObjectHandles = _kernelbase.lookupFunction<
+      Int32 Function(IntPtr hFirstObjectHandle, IntPtr hSecondObjectHandle),
+      int Function(int hFirstObjectHandle,
+          int hSecondObjectHandle)>('CompareObjectHandles');
+  return _CompareObjectHandles(hFirstObjectHandle, hSecondObjectHandle);
+}
+
 /// Retrieves the best estimate of the diagonal size of the built-in
 /// screen, in inches.
 ///

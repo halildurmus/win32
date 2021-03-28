@@ -50,6 +50,18 @@ import 'combase.dart';
 import 'oleaut32.dart';
 import 'structs.dart';
 
+/// Defines an accelerator key used in an accelerator table.
+///
+/// {@category Struct}
+class ACCEL extends Struct {
+  @Uint8()
+  external int fVirt;
+  @Uint16()
+  external int key;
+  @Uint16()
+  external int cmd;
+}
+
 /// The ACL structure is the header of an access control list (ACL). A
 /// complete ACL consists of an ACL structure followed by an ordered list
 /// of zero or more access control entries (ACEs).
@@ -123,6 +135,24 @@ class BITMAP extends Struct {
   external Pointer bmBits;
 }
 
+/// The BITMAPFILEHEADER structure contains information about the type,
+/// size, and layout of a file that contains a DIB.
+///
+/// {@category Struct}
+@Packed(2)
+class BITMAPFILEHEADER extends Struct {
+  @Uint16()
+  external int bfType;
+  @Uint32()
+  external int bfSize;
+  @Uint16()
+  external int bfReserved1;
+  @Uint16()
+  external int bfReserved2;
+  @Uint32()
+  external int bfOffBits;
+}
+
 /// The BITMAPINFO structure defines the dimensions and color information
 /// for a device-independent bitmap (DIB).
 ///
@@ -161,6 +191,29 @@ class BITMAPINFOHEADER extends Struct {
   external int biClrImportant;
 }
 
+/// The BLUETOOTH_DEVICE_SEARCH_PARAMS structure specifies search criteria
+/// for Bluetooth device searches.
+///
+/// {@category Struct}
+class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
+  @Uint32()
+  external int dwSize;
+  @Int32()
+  external int fReturnAuthenticated;
+  @Int32()
+  external int fReturnRemembered;
+  @Int32()
+  external int fReturnUnknown;
+  @Int32()
+  external int fReturnConnected;
+  @Int32()
+  external int fIssueInquiry;
+  @Uint8()
+  external int cTimeoutMultiplier;
+  @IntPtr()
+  external int hRadio;
+}
+
 /// The BLUETOOTH_FIND_RADIO_PARAMS structure facilitates enumerating
 /// installed Bluetooth radios.
 ///
@@ -168,6 +221,73 @@ class BITMAPINFOHEADER extends Struct {
 class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
   @Uint32()
   external int dwSize;
+}
+
+/// Contains information the ChooseColor function uses to initialize the
+/// Color dialog box. After the user closes the dialog box, the system
+/// returns information about the user's selection in this structure.
+///
+/// {@category Struct}
+class CHOOSECOLOR extends Struct {
+  @Uint32()
+  external int lStructSize;
+  @IntPtr()
+  external int hwndOwner;
+  @IntPtr()
+  external int hInstance;
+  @Uint32()
+  external int rgbResult;
+  external Pointer<Uint32> lpCustColors;
+  @Uint32()
+  external int Flags;
+  @IntPtr()
+  external int lCustData;
+  external Pointer<NativeFunction<CCHookProc>> lpfnHook;
+  external Pointer<Utf16> lpTemplateName;
+}
+
+/// Contains information that the ChooseFont function uses to initialize
+/// the Font dialog box. After the user closes the dialog box, the system
+/// returns information about the user's selection in this structure.
+///
+/// {@category Struct}
+class CHOOSEFONT extends Struct {
+  @Uint32()
+  external int lStructSize;
+  @IntPtr()
+  external int hwndOwner;
+  @IntPtr()
+  external int hDC;
+  external Pointer<LOGFONT> lpLogFont;
+  @Int32()
+  external int iPointSize;
+  @Uint32()
+  external int Flags;
+  @Uint32()
+  external int rgbColors;
+  @IntPtr()
+  external int lCustData;
+  external Pointer<NativeFunction<CFHookProc>> lpfnHook;
+  external Pointer<Utf16> lpTemplateName;
+  @IntPtr()
+  external int hInstance;
+  external Pointer<Utf16> lpszStyle;
+  @Uint32()
+  external int nFontType;
+  @Uint16()
+  external int ___MISSING_ALIGNMENT__;
+  @Int32()
+  external int nSizeMin;
+  @Int32()
+  external int nSizeMax;
+}
+
+/// Used generically to filter elements.
+///
+/// {@category Struct}
+class COMDLG_FILTERSPEC extends Struct {
+  external Pointer<Utf16> pszName;
+  external Pointer<Utf16> pszSpec;
 }
 
 /// Contains information about the console cursor.
@@ -292,6 +412,54 @@ class DISPPARAMS extends Struct {
   external int cNamedArgs;
 }
 
+/// Defines the dimensions and style of a control in a dialog box. One or
+/// more of these structures are combined with a DLGTEMPLATE structure to
+/// form a standard template for a dialog box.
+///
+/// {@category Struct}
+@Packed(2)
+class DLGITEMTEMPLATE extends Struct {
+  @Uint32()
+  external int style;
+  @Uint32()
+  external int dwExtendedStyle;
+  @Int16()
+  external int x;
+  @Int16()
+  external int y;
+  @Int16()
+  external int cx;
+  @Int16()
+  external int cy;
+  @Uint16()
+  external int id;
+}
+
+/// Defines the dimensions and style of a dialog box. This structure,
+/// always the first in a standard template for a dialog box, also
+/// specifies the number of controls in the dialog box and therefore
+/// specifies the number of subsequent DLGITEMTEMPLATE structures in the
+/// template.
+///
+/// {@category Struct}
+@Packed(2)
+class DLGTEMPLATE extends Struct {
+  @Uint32()
+  external int style;
+  @Uint32()
+  external int dwExtendedStyle;
+  @Uint16()
+  external int cdit;
+  @Int16()
+  external int x;
+  @Int16()
+  external int y;
+  @Int16()
+  external int cx;
+  @Int16()
+  external int cy;
+}
+
 /// Receives DLL-specific version information. It is used with the
 /// DllGetVersion function.
 ///
@@ -326,6 +494,25 @@ class DRAWTEXTPARAMS extends Struct {
   external int uiLengthDrawn;
 }
 
+/// Describes an exception that occurred during IDispatch::Invoke.
+///
+/// {@category Struct}
+class EXCEPINFO extends Struct {
+  @Uint16()
+  external int wCode;
+  @Uint16()
+  external int wReserved;
+  external Pointer<Utf16> bstrSource;
+  external Pointer<Utf16> bstrDescription;
+  external Pointer<Utf16> bstrHelpFile;
+  @Uint32()
+  external int dwHelpContext;
+  external Pointer pvReserved;
+  external Pointer<NativeFunction<ExcepInfoProc>> pfnDeferredFillIn;
+  @Int32()
+  external int scode;
+}
+
 /// Contains a 64-bit value representing the number of 100-nanosecond
 /// intervals since January 1, 1601 (UTC).
 ///
@@ -335,6 +522,33 @@ class FILETIME extends Struct {
   external int dwLowDateTime;
   @Uint32()
   external int dwHighDateTime;
+}
+
+/// Contains information that the FindText and ReplaceText functions use to
+/// initialize the Find and Replace dialog boxes. The FINDMSGSTRING
+/// registered message uses this structure to pass the user's search or
+/// replacement input to the owner window of a Find or Replace dialog box.
+///
+/// {@category Struct}
+class FINDREPLACE extends Struct {
+  @Uint32()
+  external int lStructSize;
+  @IntPtr()
+  external int hwndOwner;
+  @IntPtr()
+  external int hInstance;
+  @Uint32()
+  external int Flags;
+  external Pointer<Utf16> lpstrFindWhat;
+  external Pointer<Utf16> lpstrReplaceWith;
+  @Uint16()
+  external int wFindWhatLen;
+  @Uint16()
+  external int wReplaceWithLen;
+  @IntPtr()
+  external int lCustData;
+  external Pointer<NativeFunction<FRHookProc>> lpfnHook;
+  external Pointer<Utf16> lpTemplateName;
 }
 
 /// Carries information used to load common control classes from the
@@ -347,6 +561,13 @@ class INITCOMMONCONTROLSEX extends Struct {
   external int dwSize;
   @Uint32()
   external int dwICC;
+}
+
+/// Contains a list of item identifiers.
+///
+/// {@category Struct}
+class ITEMIDLIST extends Struct {
+  external SHITEMID mkid;
 }
 
 /// Defines the specifics of a known folder.
@@ -371,6 +592,16 @@ class KNOWNFOLDER_DEFINITION extends Struct {
   external GUID ftidType;
 }
 
+/// Contains the time of the last input.
+///
+/// {@category Struct}
+class LASTINPUTINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int dwTime;
+}
+
 /// The LOGBRUSH structure defines the style, color, and pattern of a
 /// physical brush. It is used by the CreateBrushIndirect and ExtCreatePen
 /// functions.
@@ -385,6 +616,21 @@ class LOGBRUSH extends Struct {
   external int lbHatch;
 }
 
+/// The MCI_OPEN_PARMS structure contains information for the MCI_OPEN
+/// command.
+///
+/// {@category Struct}
+@Packed(4)
+class MCI_OPEN_PARMS extends Struct {
+  @IntPtr()
+  external int dwCallback;
+  @Uint32()
+  external int wDeviceID;
+  external Pointer<Utf16> lpstrDeviceType;
+  external Pointer<Utf16> lpstrElementName;
+  external Pointer<Utf16> lpstrAlias;
+}
+
 /// The MCI_PLAY_PARMS structure contains positioning information for the
 /// MCI_PLAY command.
 ///
@@ -394,6 +640,18 @@ class MCI_PLAY_PARMS extends Struct {
   external int dwCallback;
   @Uint32()
   external int dwFrom;
+  @Uint32()
+  external int dwTo;
+}
+
+/// The MCI_SEEK_PARMS structure contains positioning information for the
+/// MCI_SEEK command.
+///
+/// {@category Struct}
+@Packed(4)
+class MCI_SEEK_PARMS extends Struct {
+  @IntPtr()
+  external int dwCallback;
   @Uint32()
   external int dwTo;
 }
@@ -474,6 +732,21 @@ class MINMAXINFO extends Struct {
   external POINT ptMaxTrackSize;
 }
 
+/// Contains module data.
+///
+/// {@category Struct}
+class MODLOAD_DATA extends Struct {
+  @Uint32()
+  external int ssize;
+  @Uint32()
+  external int ssig;
+  external Pointer data;
+  @Uint32()
+  external int size;
+  @Uint32()
+  external int flags;
+}
+
 /// The MONITORINFO structure contains information about a display monitor.
 ///
 /// {@category Struct}
@@ -515,6 +788,51 @@ class MSG extends Struct {
   @Uint32()
   external int time;
   external POINT pt;
+}
+
+/// Contains information that the GetOpenFileName and GetSaveFileName
+/// functions use to initialize an Open or Save As dialog box. After the
+/// user closes the dialog box, the system returns information about the
+/// user's selection in this structure.
+///
+/// {@category Struct}
+class OPENFILENAME extends Struct {
+  @Uint32()
+  external int lStructSize;
+  @IntPtr()
+  external int hwndOwner;
+  @IntPtr()
+  external int hInstance;
+  external Pointer<Utf16> lpstrFilter;
+  external Pointer<Utf16> lpstrCustomFilter;
+  @Uint32()
+  external int nMaxCustFilter;
+  @Uint32()
+  external int nFilterIndex;
+  external Pointer<Utf16> lpstrFile;
+  @Uint32()
+  external int nMaxFile;
+  external Pointer<Utf16> lpstrFileTitle;
+  @Uint32()
+  external int nMaxFileTitle;
+  external Pointer<Utf16> lpstrInitialDir;
+  external Pointer<Utf16> lpstrTitle;
+  @Uint32()
+  external int Flags;
+  @Uint16()
+  external int nFileOffset;
+  @Uint16()
+  external int nFileExtension;
+  external Pointer<Utf16> lpstrDefExt;
+  @IntPtr()
+  external int lCustData;
+  external Pointer<NativeFunction<OFNHookProc>> lpfnHook;
+  external Pointer<Utf16> lpTemplateName;
+  external Pointer pvReserved;
+  @Uint32()
+  external int dwReserved;
+  @Uint32()
+  external int FlagsEx;
 }
 
 /// The PALETTEENTRY structure specifies the color and usage of an entry in
@@ -563,6 +881,7 @@ class PROCESS_INFORMATION extends Struct {
 /// property.
 ///
 /// {@category Struct}
+@Packed(4)
 class PROPERTYKEY extends Struct {
   external GUID fmtid;
   @Uint32()
@@ -844,6 +1163,7 @@ class SYSTEMTIME extends Struct {
 /// structure.
 ///
 /// {@category Struct}
+@Packed(4)
 class TASKDIALOG_BUTTON extends Struct {
   @Int32()
   external int nButtonID;
@@ -954,6 +1274,31 @@ class VS_FIXEDFILEINFO extends Struct {
   external int dwFileDateLS;
 }
 
+/// The WAVEFORMATEX structure defines the format of waveform-audio data.
+/// Only format information common to all waveform-audio data formats is
+/// included in this structure. For formats that require additional
+/// information, this structure is included as the first member in another
+/// structure, along with the additional information.
+///
+/// {@category Struct}
+@Packed(1)
+class WAVEFORMATEX extends Struct {
+  @Uint16()
+  external int wFormatTag;
+  @Uint16()
+  external int nChannels;
+  @Uint32()
+  external int nSamplesPerSec;
+  @Uint32()
+  external int nAvgBytesPerSec;
+  @Uint16()
+  external int nBlockAlign;
+  @Uint16()
+  external int wBitsPerSample;
+  @Uint16()
+  external int cbSize;
+}
+
 /// The WAVEHDR structure defines the header used to identify a
 /// waveform-audio buffer.
 ///
@@ -997,4 +1342,28 @@ class WINDOWINFO extends Struct {
   external int atomWindowType;
   @Uint16()
   external int wCreatorVersion;
+}
+
+/// Contains the window class attributes that are registered by the
+/// RegisterClass function.
+///
+/// {@category Struct}
+class WNDCLASS extends Struct {
+  @Uint32()
+  external int style;
+  external Pointer<NativeFunction<WindowProc>> lpfnWndProc;
+  @Int32()
+  external int cbClsExtra;
+  @Int32()
+  external int cbWndExtra;
+  @IntPtr()
+  external int hInstance;
+  @IntPtr()
+  external int hIcon;
+  @IntPtr()
+  external int hCursor;
+  @IntPtr()
+  external int hbrBackground;
+  external Pointer<Utf16> lpszMenuName;
+  external Pointer<Utf16> lpszClassName;
 }

@@ -135,13 +135,8 @@ final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ?
 ''');
 
     // Subset of functions that belong to the library we're projecting.
-    // SetWindowLongPtrW is missing from the metadata, per
-    // https://github.com/microsoft/win32metadata/issues/142 so we have to
-    // manually exclude it, otherwise we'll fail.
     final filteredFunctionList = Map<String, Win32Function>.of(win32.functions)
-      ..removeWhere((key, value) => value.dllLibrary != library)
-      ..removeWhere(
-          (key, value) => value.prototype.contains('SetWindowLongPtrW'));
+      ..removeWhere((key, value) => value.dllLibrary != library);
 
     for (final function in filteredFunctionList.keys) {
       try {

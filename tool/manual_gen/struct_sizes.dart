@@ -103,7 +103,6 @@ const structSize64 = {
   'PROPERTYKEY': 20,
   'PROPVARIANT': 24,
   'SAFEARRAY': 32,
-  'CLSID': 16,
   'STATSTG': 80,
   'NLM_SIMULATED_PROFILE_INFO': 524,
   'NOTIFYICONDATA': 976,
@@ -206,7 +205,6 @@ const structSize32 = {
   'PROPERTYKEY': 20,
   'PROPVARIANT': 16,
   'SAFEARRAY': 24,
-  'CLSID': 16,
   'STATSTG': 72,
   'NLM_SIMULATED_PROFILE_INFO': 524,
   'NOTIFYICONDATA': 956,
@@ -214,15 +212,8 @@ const structSize32 = {
 };
 
 const skipStructs = [
-  // Packed structs
-  'TASKDIALOGCONFIG', 'TASKDIALOG_BUTTON',
-
   // Opaque types
   'EXCEPINFO',
-  'PROPERTYKEY',
   'PROPVARIANT',
-  'SAFEARRAY',
-  'CLSID',
-  'STATSTG',
   'NLM_SIMULATED_PROFILE_INFO'
 ];

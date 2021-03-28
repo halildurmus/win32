@@ -20,6 +20,9 @@ import '../utils.dart';
 import 'IUnknown.dart';
 
 /// @nodoc
+const CLSID_ShellItem = '{9AC9FBE1-E0A2-4AD6-B4EE-E212013EA917}';
+
+/// @nodoc
 const IID_IShellItem = '{43826D1E-E718-42EE-BC55-A1E261C37BFE}';
 
 typedef _BindToHandler_Native = Int32 Function(Pointer obj, Pointer pbc,
@@ -80,4 +83,26 @@ class IShellItem extends IUnknown {
       Pointer<NativeFunction<_Compare_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(7).value)
           .asFunction<_Compare_Dart>()(ptr.ref.lpVtbl, psi, hint, piOrder);
+}
+
+/// {@category com}
+class ShellItem extends IShellItem {
+  ShellItem(Pointer<COMObject> ptr) : super(ptr);
+
+  factory ShellItem.createInstance() {
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..ref.setGUID(CLSID_ShellItem);
+    final iid = calloc<GUID>()..ref.setGUID(IID_IShellItem);
+
+    try {
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return ShellItem(ptr);
+    } finally {
+      free(clsid);
+      free(iid);
+    }
+  }
 }

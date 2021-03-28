@@ -46,5 +46,8 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.markdownlint": true
     },
-    "dart.analysisExcludedFolders": ["example/explorer"],
+    "dart.analysisExcludedFolders": [
+        "example/explorer"
+    ],
+    "dart.sdkPath": "c:\\tools\\dart64",
 }

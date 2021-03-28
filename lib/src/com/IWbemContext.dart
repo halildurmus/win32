@@ -20,6 +20,9 @@ import '../utils.dart';
 import 'IUnknown.dart';
 
 /// @nodoc
+const CLSID_WbemContext = '{674B6698-EE92-11D0-AD71-00C04FD8FDFF}';
+
+/// @nodoc
 const IID_IWbemContext = '{44ACA674-E8FC-11D0-A07C-00C04FB68820}';
 
 typedef _Clone_Native = Int32 Function(Pointer obj, Pointer<Pointer> ppNewCopy);
@@ -112,4 +115,26 @@ class IWbemContext extends IUnknown {
   int DeleteAll() => Pointer<NativeFunction<_DeleteAll_Native>>.fromAddress(
           ptr.ref.vtable.elementAt(11).value)
       .asFunction<_DeleteAll_Dart>()(ptr.ref.lpVtbl);
+}
+
+/// {@category com}
+class WbemContext extends IWbemContext {
+  WbemContext(Pointer<COMObject> ptr) : super(ptr);
+
+  factory WbemContext.createInstance() {
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..ref.setGUID(CLSID_WbemContext);
+    final iid = calloc<GUID>()..ref.setGUID(IID_IWbemContext);
+
+    try {
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return WbemContext(ptr);
+    } finally {
+      free(clsid);
+      free(iid);
+    }
+  }
 }

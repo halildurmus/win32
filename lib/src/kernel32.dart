@@ -582,6 +582,95 @@ int DisconnectNamedPipe(int hNamedPipe) {
   return _DisconnectNamedPipe(hNamedPipe);
 }
 
+/// Converts a DNS-style host name to a NetBIOS-style computer name.
+///
+/// ```c
+/// BOOL DnsHostnameToComputerNameW(
+///   LPCWSTR Hostname,
+///   LPWSTR  ComputerName,
+///   LPDWORD nSize
+/// );
+/// ```
+/// {@category kernel32}
+int DnsHostnameToComputerName(Pointer<Utf16> Hostname,
+    Pointer<Utf16> ComputerName, Pointer<Uint32> nSize) {
+  final _DnsHostnameToComputerName = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> Hostname, Pointer<Utf16> ComputerName,
+          Pointer<Uint32> nSize),
+      int Function(Pointer<Utf16> Hostname, Pointer<Utf16> ComputerName,
+          Pointer<Uint32> nSize)>('DnsHostnameToComputerNameW');
+  return _DnsHostnameToComputerName(Hostname, ComputerName, nSize);
+}
+
+/// Converts MS-DOS date and time values to a file time.
+///
+/// ```c
+/// BOOL DosDateTimeToFileTime(
+///   WORD       wFatDate,
+///   WORD       wFatTime,
+///   LPFILETIME lpFileTime
+/// );
+/// ```
+/// {@category kernel32}
+int DosDateTimeToFileTime(
+    int wFatDate, int wFatTime, Pointer<FILETIME> lpFileTime) {
+  final _DosDateTimeToFileTime = _kernel32.lookupFunction<
+      Int32 Function(
+          Uint16 wFatDate, Uint16 wFatTime, Pointer<FILETIME> lpFileTime),
+      int Function(int wFatDate, int wFatTime,
+          Pointer<FILETIME> lpFileTime)>('DosDateTimeToFileTime');
+  return _DosDateTimeToFileTime(wFatDate, wFatTime, lpFileTime);
+}
+
+/// Duplicates an object handle.
+///
+/// ```c
+/// BOOL DuplicateHandle(
+///   HANDLE   hSourceProcessHandle,
+///   HANDLE   hSourceHandle,
+///   HANDLE   hTargetProcessHandle,
+///   LPHANDLE lpTargetHandle,
+///   DWORD    dwDesiredAccess,
+///   BOOL     bInheritHandle,
+///   DWORD    dwOptions
+/// );
+/// ```
+/// {@category kernel32}
+int DuplicateHandle(
+    int hSourceProcessHandle,
+    int hSourceHandle,
+    int hTargetProcessHandle,
+    Pointer<IntPtr> lpTargetHandle,
+    int dwDesiredAccess,
+    int bInheritHandle,
+    int dwOptions) {
+  final _DuplicateHandle = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr hSourceProcessHandle,
+          IntPtr hSourceHandle,
+          IntPtr hTargetProcessHandle,
+          Pointer<IntPtr> lpTargetHandle,
+          Uint32 dwDesiredAccess,
+          Int32 bInheritHandle,
+          Uint32 dwOptions),
+      int Function(
+          int hSourceProcessHandle,
+          int hSourceHandle,
+          int hTargetProcessHandle,
+          Pointer<IntPtr> lpTargetHandle,
+          int dwDesiredAccess,
+          int bInheritHandle,
+          int dwOptions)>('DuplicateHandle');
+  return _DuplicateHandle(
+      hSourceProcessHandle,
+      hSourceHandle,
+      hTargetProcessHandle,
+      lpTargetHandle,
+      dwDesiredAccess,
+      bInheritHandle,
+      dwOptions);
+}
+
 /// Commits or discards changes made prior to a call to UpdateResource.
 ///
 /// ```c
@@ -737,6 +826,26 @@ void ExitProcess(int uExitCode) {
   final _ExitProcess = _kernel32.lookupFunction<Void Function(Uint32 uExitCode),
       void Function(int uExitCode)>('ExitProcess');
   return _ExitProcess(uExitCode);
+}
+
+/// Converts a file time to MS-DOS date and time values.
+///
+/// ```c
+/// BOOL FileTimeToDosDateTime(
+///   const FILETIME *lpFileTime,
+///   LPWORD         lpFatDate,
+///   LPWORD         lpFatTime
+/// );
+/// ```
+/// {@category kernel32}
+int FileTimeToDosDateTime(Pointer<FILETIME> lpFileTime,
+    Pointer<Uint16> lpFatDate, Pointer<Uint16> lpFatTime) {
+  final _FileTimeToDosDateTime = _kernel32.lookupFunction<
+      Int32 Function(Pointer<FILETIME> lpFileTime, Pointer<Uint16> lpFatDate,
+          Pointer<Uint16> lpFatTime),
+      int Function(Pointer<FILETIME> lpFileTime, Pointer<Uint16> lpFatDate,
+          Pointer<Uint16> lpFatTime)>('FileTimeToDosDateTime');
+  return _FileTimeToDosDateTime(lpFileTime, lpFatDate, lpFatTime);
 }
 
 /// Sets the character attributes for a specified number of character
@@ -1121,6 +1230,25 @@ int GetBinaryType(
   return _GetBinaryType(lpApplicationName, lpBinaryType);
 }
 
+/// Retrieves the NetBIOS name of the local computer. This name is
+/// established at system startup, when the system reads it from the
+/// registry.
+///
+/// ```c
+/// BOOL GetComputerNameW(
+///   LPWSTR  lpBuffer,
+///   LPDWORD nSize
+/// );
+/// ```
+/// {@category kernel32}
+int GetComputerName(Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize) {
+  final _GetComputerName = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize),
+      int Function(
+          Pointer<Utf16> lpBuffer, Pointer<Uint32> nSize)>('GetComputerNameW');
+  return _GetComputerName(lpBuffer, nSize);
+}
+
 /// Retrieves a NetBIOS or DNS name associated with the local computer. The
 /// names are established at system startup, when the system reads them
 /// from the registry.
@@ -1312,6 +1440,23 @@ int GetFileAttributesEx(
       int Function(Pointer<Utf16> lpFileName, int fInfoLevelId,
           Pointer lpFileInformation)>('GetFileAttributesExW');
   return _GetFileAttributesEx(lpFileName, fInfoLevelId, lpFileInformation);
+}
+
+/// Retrieves certain properties of an object handle.
+///
+/// ```c
+/// BOOL GetHandleInformation(
+///   HANDLE  hObject,
+///   LPDWORD lpdwFlags
+/// );
+/// ```
+/// {@category kernel32}
+int GetHandleInformation(int hObject, Pointer<Uint32> lpdwFlags) {
+  final _GetHandleInformation = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hObject, Pointer<Uint32> lpdwFlags),
+      int Function(
+          int hObject, Pointer<Uint32> lpdwFlags)>('GetHandleInformation');
+  return _GetHandleInformation(hObject, lpdwFlags);
 }
 
 /// Retrieves the size of the largest possible console window, based on the
@@ -1783,6 +1928,18 @@ int GetUserDefaultLangID() {
   return _GetUserDefaultLangID();
 }
 
+/// Returns the locale identifier for the user default locale.
+///
+/// ```c
+/// LCID GetUserDefaultLCID();
+/// ```
+/// {@category kernel32}
+int GetUserDefaultLCID() {
+  final _GetUserDefaultLCID = _kernel32
+      .lookupFunction<Uint32 Function(), int Function()>('GetUserDefaultLCID');
+  return _GetUserDefaultLCID();
+}
+
 /// Retrieves the user default locale name.
 ///
 /// ```c
@@ -2001,6 +2158,21 @@ int IsDebuggerPresent() {
   final _IsDebuggerPresent = _kernel32
       .lookupFunction<Int32 Function(), int Function()>('IsDebuggerPresent');
   return _IsDebuggerPresent();
+}
+
+/// Indicates if the OS was booted from a VHD container.
+///
+/// ```c
+/// BOOL IsNativeVhdBoot(
+///   PBOOL NativeVhdBoot
+/// );
+/// ```
+/// {@category kernel32}
+int IsNativeVhdBoot(Pointer<Int32> NativeVhdBoot) {
+  final _IsNativeVhdBoot = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Int32> NativeVhdBoot),
+      int Function(Pointer<Int32> NativeVhdBoot)>('IsNativeVhdBoot');
+  return _IsNativeVhdBoot(NativeVhdBoot);
 }
 
 /// Determines if the specified locale name is valid for a locale that is
@@ -2649,6 +2821,69 @@ int SetFileShortName(int hFile, Pointer<Utf16> lpShortName) {
       Int32 Function(IntPtr hFile, Pointer<Utf16> lpShortName),
       int Function(int hFile, Pointer<Utf16> lpShortName)>('SetFileShortNameW');
   return _SetFileShortName(hFile, lpShortName);
+}
+
+/// Sets the value of the specified firmware environment variable.
+///
+/// ```c
+/// BOOL SetFirmwareEnvironmentVariableW(
+///   LPCWSTR lpName,
+///   LPCWSTR lpGuid,
+///   PVOID   pValue,
+///   DWORD   nSize
+/// );
+/// ```
+/// {@category kernel32}
+int SetFirmwareEnvironmentVariable(
+    Pointer<Utf16> lpName, Pointer<Utf16> lpGuid, Pointer pValue, int nSize) {
+  final _SetFirmwareEnvironmentVariable = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpName, Pointer<Utf16> lpGuid,
+          Pointer pValue, Uint32 nSize),
+      int Function(Pointer<Utf16> lpName, Pointer<Utf16> lpGuid, Pointer pValue,
+          int nSize)>('SetFirmwareEnvironmentVariableW');
+  return _SetFirmwareEnvironmentVariable(lpName, lpGuid, pValue, nSize);
+}
+
+/// Sets the value of the specified firmware environment variable and the
+/// attributes that indicate how this variable is stored and maintained.
+///
+/// ```c
+/// BOOL SetFirmwareEnvironmentVariableExW(
+///   LPCWSTR lpName,
+///   LPCWSTR lpGuid,
+///   PVOID   pValue,
+///   DWORD   nSize,
+///   DWORD   dwAttributes
+/// );
+/// ```
+/// {@category kernel32}
+int SetFirmwareEnvironmentVariableEx(Pointer<Utf16> lpName,
+    Pointer<Utf16> lpGuid, Pointer pValue, int nSize, int dwAttributes) {
+  final _SetFirmwareEnvironmentVariableEx = _kernel32.lookupFunction<
+      Int32 Function(Pointer<Utf16> lpName, Pointer<Utf16> lpGuid,
+          Pointer pValue, Uint32 nSize, Uint32 dwAttributes),
+      int Function(Pointer<Utf16> lpName, Pointer<Utf16> lpGuid, Pointer pValue,
+          int nSize, int dwAttributes)>('SetFirmwareEnvironmentVariableExW');
+  return _SetFirmwareEnvironmentVariableEx(
+      lpName, lpGuid, pValue, nSize, dwAttributes);
+}
+
+/// Sets certain properties of an object handle.
+///
+/// ```c
+/// BOOL SetHandleInformation(
+///   HANDLE hObject,
+///   DWORD  dwMask,
+///   DWORD  dwFlags
+/// );
+/// ```
+/// {@category kernel32}
+int SetHandleInformation(int hObject, int dwMask, int dwFlags) {
+  final _SetHandleInformation = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hObject, Uint32 dwMask, Uint32 dwFlags),
+      int Function(
+          int hObject, int dwMask, int dwFlags)>('SetHandleInformation');
+  return _SetHandleInformation(hObject, dwMask, dwFlags);
 }
 
 /// Sets the read mode and the blocking mode of the specified named pipe.

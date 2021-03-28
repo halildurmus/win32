@@ -9,7 +9,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 
 import '../constants.dart';
-import '../structs.dart';
+import '../structs.g.dart';
 
 import 'set_string.dart';
 

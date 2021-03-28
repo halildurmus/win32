@@ -20,6 +20,9 @@ import '../utils.dart';
 import 'IUnknown.dart';
 
 /// @nodoc
+const CLSID_WbemClassObject = '{9A653086-174F-11D2-B5F9-00104B703EFD}';
+
+/// @nodoc
 const IID_IWbemClassObject = '{DC12A681-737F-11CF-884D-00AA004B2E24}';
 
 typedef _GetQualifierSet_Native = Int32 Function(
@@ -327,4 +330,26 @@ class IWbemClassObject extends IUnknown {
                   ptr.ref.vtable.elementAt(26).value)
               .asFunction<_GetMethodOrigin_Dart>()(
           ptr.ref.lpVtbl, wszMethodName, pstrClassName);
+}
+
+/// {@category com}
+class WbemClassObject extends IWbemClassObject {
+  WbemClassObject(Pointer<COMObject> ptr) : super(ptr);
+
+  factory WbemClassObject.createInstance() {
+    final ptr = calloc<COMObject>();
+    final clsid = calloc<GUID>()..ref.setGUID(CLSID_WbemClassObject);
+    final iid = calloc<GUID>()..ref.setGUID(IID_IWbemClassObject);
+
+    try {
+      final hr = CoCreateInstance(clsid, nullptr, CLSCTX_ALL, iid, ptr.cast());
+
+      if (FAILED(hr)) throw WindowsException(hr);
+
+      return WbemClassObject(ptr);
+    } finally {
+      free(clsid);
+      free(iid);
+    }
+  }
 }

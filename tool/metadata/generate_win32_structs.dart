@@ -75,11 +75,15 @@ int generateStructs(Win32API win32) {
   writer.writeStringSync(structFileHeader);
 
   for (final struct in win32.structs.keys) {
-    final typedef = scope[win32.structs[struct]!.namespace]!;
+    final win32struct = win32.structs[struct]!;
+    final typedef = scope[win32struct.namespace]!;
 
-    writer.writeStringSync(wrapCommentText(win32.structs[struct]!.comment));
+    writer.writeStringSync(wrapCommentText(win32struct.comment));
 
     writer.writeStringSync('\n///\n/// {@category Struct}\n');
+    if (win32struct.packing > 0) {
+      writer.writeStringSync('@Packed(${win32struct.packing})\n');
+    }
 
     writer.writeStringSync(TypePrinter.printStruct(typedef, struct));
     structsGenerated++;

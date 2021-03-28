@@ -463,6 +463,20 @@ void main() {
       expect(sizeOf<DLGITEMTEMPLATE>(), equals(18));
     }
   });
+  test('Struct TASKDIALOGCONFIG is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<TASKDIALOGCONFIG>(), equals(160));
+    } else {
+      expect(sizeOf<TASKDIALOGCONFIG>(), equals(96));
+    }
+  });
+  test('Struct TASKDIALOG_BUTTON is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<TASKDIALOG_BUTTON>(), equals(12));
+    } else {
+      expect(sizeOf<TASKDIALOG_BUTTON>(), equals(8));
+    }
+  });
   test('Struct DLLVERSIONINFO is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<DLLVERSIONINFO>(), equals(20));
@@ -636,6 +650,27 @@ void main() {
       expect(sizeOf<MMTIME>(), equals(12));
     } else {
       expect(sizeOf<MMTIME>(), equals(12));
+    }
+  });
+  test('Struct PROPERTYKEY is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<PROPERTYKEY>(), equals(20));
+    } else {
+      expect(sizeOf<PROPERTYKEY>(), equals(20));
+    }
+  });
+  test('Struct SAFEARRAY is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<SAFEARRAY>(), equals(32));
+    } else {
+      expect(sizeOf<SAFEARRAY>(), equals(24));
+    }
+  });
+  test('Struct STATSTG is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<STATSTG>(), equals(80));
+    } else {
+      expect(sizeOf<STATSTG>(), equals(72));
     }
   });
   test('Struct NOTIFYICONDATA is the right size', () {

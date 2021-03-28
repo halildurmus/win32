@@ -122,16 +122,6 @@ const APPMODEL_ERROR_DYNAMIC_PROPERTY_INVALID = 15705;
 const APPMODEL_ERROR_PACKAGE_NOT_AVAILABLE = 15706;
 const APPMODEL_ERROR_NO_MUTABLE_DIRECTORY = 15707;
 
-// Windows Runtime errors
-const RO_E_METADATA_NAME_NOT_FOUND = 0x8000000F;
-const RO_E_METADATA_NAME_IS_NAMESPACE = 0x80000010;
-const RO_E_METADATA_INVALID_TYPE_FORMAT = 0x80000011;
-const RO_E_INVALID_METADATA_FILE = 0x80000012;
-const RO_E_CLOSED = 0x80000013;
-const RO_E_EXCLUSIVE_WRITE = 0x80000014;
-const RO_E_CHANGE_NOTIFICATION_IN_PROGRESS = 0x80000015;
-const RO_E_ERROR_STRING_NOT_FOUND = 0x80000016;
-
 // -----------------------------------------------------------------------------
 // WindowMessage constants
 // -----------------------------------------------------------------------------
@@ -393,29 +383,6 @@ const SYSTEM_FONT = 13;
 const DEVICE_DEFAULT_FONT = 14;
 const DEFAULT_PALETTE = 15;
 const SYSTEM_FIXED_FONT = 16;
-
-// In the original header files, these take the form:
-//   #define IDI_APPLICATION     MAKEINTRESOURCE(32512)
-// The MAKEINTRESOURCE() macro creates a pointer to a known memory address. The
-// address itself has no meaning other than as a marker.
-
-final IDI_APPLICATION = Pointer<Utf16>.fromAddress(32512);
-final IDI_HAND = Pointer<Utf16>.fromAddress(32513);
-final IDI_QUESTION = Pointer<Utf16>.fromAddress(32514);
-final IDI_EXCLAMATION = Pointer<Utf16>.fromAddress(32515);
-final IDI_ASTERISK = Pointer<Utf16>.fromAddress(32516);
-final IDI_WINLOGO = Pointer<Utf16>.fromAddress(32517);
-final IDI_SHIELD = Pointer<Utf16>.fromAddress(32518);
-final IDI_WARNING = IDI_EXCLAMATION;
-final IDI_ERROR = IDI_HAND;
-final IDI_INFORMATION = IDI_ASTERISK;
-
-// Stock cursors
-final IDC_ARROW = Pointer<Utf16>.fromAddress(32512);
-final IDC_IBEAM = Pointer<Utf16>.fromAddress(32513);
-final IDC_WAIT = Pointer<Utf16>.fromAddress(32514);
-final IDC_CROSS = Pointer<Utf16>.fromAddress(32515);
-final IDC_UPARROW = Pointer<Utf16>.fromAddress(32516);
 
 // Background modes
 const TRANSPARENT = 1;
@@ -1612,15 +1579,6 @@ class SIGDN {
   static const SIGDN_PARENTRELATIVEFORADDRESSBAR = 0x8007c001;
   static const SIGDN_PARENTRELATIVE = 0x80080001;
   static const SIGDN_PARENTRELATIVEFORUI = 0x8009400;
-}
-
-/// {@category Enum}
-class ACTIVATEOPTIONS {
-  static const AO_NONE = 0x00000000;
-  static const AO_DESIGNMODE = 0x00000001;
-  static const AO_NOERRORUI = 0x00000002;
-  static const AO_NOSPLASHSCREEN = 0x00000004;
-  static const AO_PRELAUNCH = 0x02000000;
 }
 
 /// {@category Enum}

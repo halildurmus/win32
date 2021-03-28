@@ -6,6 +6,10 @@
 
 // ignore_for_file: camel_case_types
 
+import 'dart:ffi';
+
+import 'package:ffi/ffi.dart';
+
 // -----------------------------------------------------------------------------
 // General constants
 // -----------------------------------------------------------------------------
@@ -341,6 +345,34 @@ const ERROR_TOO_MANY_SEM_REQUESTS = 103;
 const ERROR_INVALID_AT_INTERRUPT_TIME = 104;
 
 // -----------------------------------------------------------------------------
+// Windows Runtime errors
+// -----------------------------------------------------------------------------
+
+/// Typename or Namespace was not found in metadata file.
+const RO_E_METADATA_NAME_NOT_FOUND = 0x8000000F;
+
+/// Name is an existing namespace rather than a typename.
+const RO_E_METADATA_NAME_IS_NAMESPACE = 0x80000010;
+
+/// Typename has an invalid format.
+const RO_E_METADATA_INVALID_TYPE_FORMAT = 0x80000011;
+
+/// Metadata file is invalid or corrupted.
+const RO_E_INVALID_METADATA_FILE = 0x80000012;
+
+/// The object has been closed.
+const RO_E_CLOSED = 0x80000013;
+
+/// Only one thread may access the object during a write operation.
+const RO_E_EXCLUSIVE_WRITE = 0x80000014;
+
+/// Operation is prohibited during change notification.
+const RO_E_CHANGE_NOTIFICATION_IN_PROGRESS = 0x80000015;
+
+/// The text associated with this error code could not be found.
+const RO_E_ERROR_STRING_NOT_FOUND = 0x80000016;
+
+// -----------------------------------------------------------------------------
 // Process and file access types
 // -----------------------------------------------------------------------------
 
@@ -598,6 +630,18 @@ const FILE_FLAG_OPEN_NO_RECALL = 0x00100000;
 /// creation of the first instance succeeds, but creation of the next instance
 /// fails with ERROR_ACCESS_DENIED.
 const FILE_FLAG_FIRST_PIPE_INSTANCE = 0x00080000;
+
+// -----------------------------------------------------------------------------
+// Handle flags
+// -----------------------------------------------------------------------------
+
+/// If this flag is set, a child process created with the bInheritHandles
+/// parameter of CreateProcess set to TRUE will inherit the object handle.
+const HANDLE_FLAG_INHERIT = 0x00000001;
+
+/// If this flag is set, calling the CloseHandle function will not close the
+/// object handle.
+const HANDLE_FLAG_PROTECT_FROM_CLOSE = 0x00000002;
 
 // -----------------------------------------------------------------------------
 // Get Binary Type flags
@@ -5429,6 +5473,87 @@ const IMAGE_CURSOR = 2;
 const IMAGE_ENHMETAFILE = 3;
 
 // -----------------------------------------------------------------------------
+// Stock icons and cursors
+// -----------------------------------------------------------------------------
+
+// In the original header files, these take the form:
+//   #define IDI_APPLICATION     MAKEINTRESOURCE(32512)
+// The MAKEINTRESOURCE() macro creates a pointer to a known memory address. The
+// address itself has no meaning other than as a marker.
+
+/// Default application icon.
+final IDI_APPLICATION = Pointer<Utf16>.fromAddress(32512);
+
+/// Hand-shaped icon. Same as IDI_ERROR.
+final IDI_HAND = Pointer<Utf16>.fromAddress(32513);
+
+/// Question mark icon.
+final IDI_QUESTION = Pointer<Utf16>.fromAddress(32514);
+
+/// Exclamation point icon. Same as IDI_WARNING.
+final IDI_EXCLAMATION = Pointer<Utf16>.fromAddress(32515);
+
+/// Asterisk icon. Same as IDI_INFORMATION.
+final IDI_ASTERISK = Pointer<Utf16>.fromAddress(32516);
+
+/// Windows logo icon.
+final IDI_WINLOGO = Pointer<Utf16>.fromAddress(32517);
+
+/// Security Shield icon.
+final IDI_SHIELD = Pointer<Utf16>.fromAddress(32518);
+
+/// Exclamation point icon.
+final IDI_WARNING = IDI_EXCLAMATION;
+
+/// Hand-shaped icon.
+final IDI_ERROR = IDI_HAND;
+
+/// Asterisk icon.
+final IDI_INFORMATION = IDI_ASTERISK;
+
+/// Standard arrow
+final IDC_ARROW = Pointer<Utf16>.fromAddress(32512);
+
+/// I-beam
+final IDC_IBEAM = Pointer<Utf16>.fromAddress(32513);
+
+/// Hourglass
+final IDC_WAIT = Pointer<Utf16>.fromAddress(32514);
+
+/// Crosshair
+final IDC_CROSS = Pointer<Utf16>.fromAddress(32515);
+
+/// Vertical arrow
+final IDC_UPARROW = Pointer<Utf16>.fromAddress(32516);
+
+/// Double-pointed arrow pointing northwest and southeast
+final IDC_SIZENWSE = Pointer<Utf16>.fromAddress(32642);
+
+/// Double-pointed arrow pointing northeast and southwest
+final IDC_SIZENESW = Pointer<Utf16>.fromAddress(32643);
+
+/// Double-pointed arrow pointing west and east
+final IDC_SIZEWE = Pointer<Utf16>.fromAddress(32644);
+
+/// Double-pointed arrow pointing north and south
+final IDC_SIZENS = Pointer<Utf16>.fromAddress(32645);
+
+/// Four-pointed arrow pointing north, south, east, and west
+final IDC_SIZEALL = Pointer<Utf16>.fromAddress(32646);
+
+/// Slashed circle
+final IDC_NO = Pointer<Utf16>.fromAddress(32648);
+
+/// Hand
+final IDC_HAND = Pointer<Utf16>.fromAddress(32649);
+
+/// Standard arrow and small hourglass
+final IDC_APPSTARTING = Pointer<Utf16>.fromAddress(32650);
+
+/// Arrow and question mark
+final IDC_HELP = Pointer<Utf16>.fromAddress(32651);
+
+// -----------------------------------------------------------------------------
 // LoadImage fuLoad constants
 // -----------------------------------------------------------------------------
 
@@ -5524,4 +5649,34 @@ class CORRECTIVE_ACTION {
 
   /// The user should be prompted to delete the indicated erroneous text.
   static const DELETE = 3;
+}
+
+// -----------------------------------------------------------------------------
+// IApplicationActivationManager constants
+// -----------------------------------------------------------------------------
+
+/// Flags used to support design mode, debugging, and testing scenarios.
+class ACTIVATEOPTIONS {
+  /// No flags are set.
+  static const AO_NONE = 0;
+
+  /// The app is being activated for design mode, so it can't create its normal
+  /// window. The creation of the app's window must be done by design tools that
+  /// load the necessary components by communicating with a designer-specified
+  /// service on the site chain established through the activation manager. Note
+  /// that this means that the splash screen seen during regular activations
+  /// won't be seen.
+  static const AO_DESIGNMODE = 0x1;
+
+  /// Do not display an error dialog if the app fails to activate.
+  static const AO_NOERRORUI = 0x2;
+
+  /// Do not display the app's splash screen when the app is activated. You must
+  /// enable debug mode on the app's package when you use this flag; otherwise,
+  /// the PLM will terminate the app after a few seconds.
+  static const AO_NOSPLASHSCREEN = 0x4;
+
+  /// The application is being activated in prelaunch mode. This value is
+  /// supported starting in Windows 10.
+  static const AO_PRELAUNCH = 0x2000000;
 }
