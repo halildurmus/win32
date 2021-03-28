@@ -56,12 +56,13 @@ class TypeDef extends AttributeObject {
   factory TypeDef.fromToken(IMetaDataImport2 reader, int token) {
     if (tokenIsTypeRef(token)) {
       return TypeDef.fromTypeRefToken(reader, token);
-    } else if (tokenIsTypeDef(token)) {
-      return TypeDef.fromTypeDefToken(reader, token);
-    } else {
-      print('Unrecognized token $token');
-      return TypeDef(reader);
     }
+    if (tokenIsTypeDef(token)) {
+      return TypeDef.fromTypeDefToken(reader, token);
+    }
+
+    print('Unrecognized token $token');
+    return TypeDef(reader);
   }
 
   /// Instantiate a typedef from a TypeDef token.
@@ -119,8 +120,15 @@ class TypeDef extends AttributeObject {
           if (systemTokens.containsValue(typeName)) {
             return TypeDef(reader, 0, typeName);
           }
-          throw WinmdException(
-              'Unable to find scope for $typeName [${typeRefToken.toHexString(32)}]...');
+          // Perhaps we can find it in the current scope after all (for example,
+          // it's a nested class)
+          try {
+            final typedef = TypeDef.fromTypeDefToken(reader, typeRefToken);
+            return typedef;
+          } catch (exception) {
+            throw WinmdException(
+                'Unable to find scope for $typeName [${typeRefToken.toHexString(32)}]...');
+          }
         }
       } else {
         throw WindowsException(hr);
