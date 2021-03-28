@@ -334,90 +334,17 @@ const PHYSICAL_MONITOR_DESCRIPTION_SIZE = 128;
 class PHYSICAL_MONITOR extends Struct {
   @IntPtr()
   external int hPhysicalMonitor;
-  @Uint64()
-  external int _szPhysicalMonitorDescription0;
-  @Uint64()
-  external int _szPhysicalMonitorDescription1;
-  @Uint64()
-  external int _szPhysicalMonitorDescription2;
-  @Uint64()
-  external int _szPhysicalMonitorDescription3;
-  @Uint64()
-  external int _szPhysicalMonitorDescription4;
-  @Uint64()
-  external int _szPhysicalMonitorDescription5;
-  @Uint64()
-  external int _szPhysicalMonitorDescription6;
-  @Uint64()
-  external int _szPhysicalMonitorDescription7;
-  @Uint64()
-  external int _szPhysicalMonitorDescription8;
-  @Uint64()
-  external int _szPhysicalMonitorDescription9;
-  @Uint64()
-  external int _szPhysicalMonitorDescription10;
-  @Uint64()
-  external int _szPhysicalMonitorDescription11;
-  @Uint64()
-  external int _szPhysicalMonitorDescription12;
-  @Uint64()
-  external int _szPhysicalMonitorDescription13;
-  @Uint64()
-  external int _szPhysicalMonitorDescription14;
-  @Uint64()
-  external int _szPhysicalMonitorDescription15;
-  @Uint64()
-  external int _szPhysicalMonitorDescription16;
-  @Uint64()
-  external int _szPhysicalMonitorDescription17;
-  @Uint64()
-  external int _szPhysicalMonitorDescription18;
-  @Uint64()
-  external int _szPhysicalMonitorDescription19;
-  @Uint64()
-  external int _szPhysicalMonitorDescription20;
-  @Uint64()
-  external int _szPhysicalMonitorDescription21;
-  @Uint64()
-  external int _szPhysicalMonitorDescription22;
-  @Uint64()
-  external int _szPhysicalMonitorDescription23;
-  @Uint64()
-  external int _szPhysicalMonitorDescription24;
-  @Uint64()
-  external int _szPhysicalMonitorDescription25;
-  @Uint64()
-  external int _szPhysicalMonitorDescription26;
-  @Uint64()
-  external int _szPhysicalMonitorDescription27;
-  @Uint64()
-  external int _szPhysicalMonitorDescription28;
-  @Uint64()
-  external int _szPhysicalMonitorDescription29;
-  @Uint64()
-  external int _szPhysicalMonitorDescription30;
-  @Uint64()
-  external int _szPhysicalMonitorDescription31;
 
-  String get szPhysicalMonitorDescription =>
-      String.fromCharCodes(Uint64List.fromList([
-        _szPhysicalMonitorDescription0, _szPhysicalMonitorDescription1,
-        _szPhysicalMonitorDescription2, _szPhysicalMonitorDescription3, //
-        _szPhysicalMonitorDescription4, _szPhysicalMonitorDescription5,
-        _szPhysicalMonitorDescription6, _szPhysicalMonitorDescription7,
-        _szPhysicalMonitorDescription8, _szPhysicalMonitorDescription9,
-        _szPhysicalMonitorDescription10, _szPhysicalMonitorDescription11,
-        _szPhysicalMonitorDescription12, _szPhysicalMonitorDescription13,
-        _szPhysicalMonitorDescription14, _szPhysicalMonitorDescription15,
-        _szPhysicalMonitorDescription16, _szPhysicalMonitorDescription17,
-        _szPhysicalMonitorDescription18, _szPhysicalMonitorDescription19,
-        _szPhysicalMonitorDescription20, _szPhysicalMonitorDescription21,
-        _szPhysicalMonitorDescription22, _szPhysicalMonitorDescription23,
-        _szPhysicalMonitorDescription24, _szPhysicalMonitorDescription25,
-        _szPhysicalMonitorDescription26, _szPhysicalMonitorDescription27,
-        _szPhysicalMonitorDescription28, _szPhysicalMonitorDescription29,
-        _szPhysicalMonitorDescription30, _szPhysicalMonitorDescription31
-      ]).buffer.asUint16List());
+  @Array(128)
+  external Array<Uint16> _szPhysicalMonitorDescription;
+
+  String get szPhysicalMonitorDescription {
+    final charCodes = <int>[];
+    for (var i = 0; i < PHYSICAL_MONITOR_DESCRIPTION_SIZE; i++) {
+      charCodes.add(_szPhysicalMonitorDescription[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
 }
 
 // typedef struct _STRRET {
@@ -638,47 +565,16 @@ class LOGFONT extends Struct {
   @Uint8()
   external int lfPitchAndFamily;
 
-  // Need to use @Int32() here, both because of the lack of fixed-size
-  // arrays, and because @Int64() doesn't line up with word boundaries
-  @Uint32()
-  external int _lfFaceName0;
-  @Uint32()
-  external int _lfFaceName1;
-  @Uint32()
-  external int _lfFaceName2;
-  @Uint32()
-  external int _lfFaceName3;
-  @Uint32()
-  external int _lfFaceName4;
-  @Uint32()
-  external int _lfFaceName5;
-  @Uint32()
-  external int _lfFaceName6;
-  @Uint32()
-  external int _lfFaceName7;
-  @Uint32()
-  external int _lfFaceName8;
-  @Uint32()
-  external int _lfFaceName9;
-  @Uint32()
-  external int _lfFaceName10;
-  @Uint32()
-  external int _lfFaceName11;
-  @Uint32()
-  external int _lfFaceName12;
-  @Uint32()
-  external int _lfFaceName13;
-  @Uint32()
-  external int _lfFaceName14;
-  @Uint32()
-  external int _lfFaceName15;
+  @Array(32)
+  external Array<Uint16> _lfFaceName;
 
-  String get lfFaceName => String.fromCharCodes(Uint32List.fromList([
-        _lfFaceName0, _lfFaceName1, _lfFaceName2, _lfFaceName3, //
-        _lfFaceName4, _lfFaceName5, _lfFaceName6, _lfFaceName7,
-        _lfFaceName8, _lfFaceName9, _lfFaceName10, _lfFaceName11,
-        _lfFaceName12, _lfFaceName13, _lfFaceName14, _lfFaceName15,
-      ]).buffer.asUint16List());
+  String get lfFaceName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 32; i++) {
+      charCodes.add(_lfFaceName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
 }
 
 // typedef struct tagENUMLOGFONTEXW {
@@ -694,160 +590,38 @@ class LOGFONT extends Struct {
 class ENUMLOGFONTEX extends Struct {
   external LOGFONT elfLogFont;
 
-  @Uint32()
-  external int _elfFullName0;
-  @Uint32()
-  external int _elfFullName1;
-  @Uint32()
-  external int _elfFullName2;
-  @Uint32()
-  external int _elfFullName3;
-  @Uint32()
-  external int _elfFullName4;
-  @Uint32()
-  external int _elfFullName5;
-  @Uint32()
-  external int _elfFullName6;
-  @Uint32()
-  external int _elfFullName7;
-  @Uint32()
-  external int _elfFullName8;
-  @Uint32()
-  external int _elfFullName9;
-  @Uint32()
-  external int _elfFullName10;
-  @Uint32()
-  external int _elfFullName11;
-  @Uint32()
-  external int _elfFullName12;
-  @Uint32()
-  external int _elfFullName13;
-  @Uint32()
-  external int _elfFullName14;
-  @Uint32()
-  external int _elfFullName15;
-  @Uint32()
-  external int _elfFullName16;
-  @Uint32()
-  external int _elfFullName17;
-  @Uint32()
-  external int _elfFullName18;
-  @Uint32()
-  external int _elfFullName19;
-  @Uint32()
-  external int _elfFullName20;
-  @Uint32()
-  external int _elfFullName21;
-  @Uint32()
-  external int _elfFullName22;
-  @Uint32()
-  external int _elfFullName23;
-  @Uint32()
-  external int _elfFullName24;
-  @Uint32()
-  external int _elfFullName25;
-  @Uint32()
-  external int _elfFullName26;
-  @Uint32()
-  external int _elfFullName27;
-  @Uint32()
-  external int _elfFullName28;
-  @Uint32()
-  external int _elfFullName29;
-  @Uint32()
-  external int _elfFullName30;
-  @Uint32()
-  external int _elfFullName31;
+  @Array(64)
+  external Array<Uint16> _elfFullName;
 
-  String get elfFullName => String.fromCharCodes(Uint32List.fromList([
-        _elfFullName0, _elfFullName1, _elfFullName2, _elfFullName3, //
-        _elfFullName4, _elfFullName5, _elfFullName6, _elfFullName7,
-        _elfFullName8, _elfFullName9, _elfFullName10, _elfFullName11,
-        _elfFullName12, _elfFullName13, _elfFullName14, _elfFullName15,
-        _elfFullName16, _elfFullName17, _elfFullName18, _elfFullName19,
-        _elfFullName20, _elfFullName21, _elfFullName22, _elfFullName23,
-        _elfFullName24, _elfFullName25, _elfFullName26, _elfFullName27,
-        _elfFullName28, _elfFullName29, _elfFullName30, _elfFullName31
-      ]).buffer.asUint16List());
+  String get elfFullName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 64; i++) {
+      charCodes.add(_elfFullName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
 
-  @Uint32()
-  external int _elfStyle0;
-  @Uint32()
-  external int _elfStyle1;
-  @Uint32()
-  external int _elfStyle2;
-  @Uint32()
-  external int _elfStyle3;
-  @Uint32()
-  external int _elfStyle4;
-  @Uint32()
-  external int _elfStyle5;
-  @Uint32()
-  external int _elfStyle6;
-  @Uint32()
-  external int _elfStyle7;
-  @Uint32()
-  external int _elfStyle8;
-  @Uint32()
-  external int _elfStyle9;
-  @Uint32()
-  external int _elfStyle10;
-  @Uint32()
-  external int _elfStyle11;
-  @Uint32()
-  external int _elfStyle12;
-  @Uint32()
-  external int _elfStyle13;
-  @Uint32()
-  external int _elfStyle14;
-  @Uint32()
-  external int _elfStyle15;
-  String get elfStyle => String.fromCharCodes(Uint32List.fromList([
-        _elfStyle0, _elfStyle1, _elfStyle2, _elfStyle3, //
-        _elfStyle4, _elfStyle5, _elfStyle6, _elfStyle7,
-        _elfStyle8, _elfStyle9, _elfStyle10, _elfStyle11,
-        _elfStyle12, _elfStyle13, _elfStyle14, _elfStyle15,
-      ]).buffer.asUint16List());
+  @Array(32)
+  external Array<Uint16> _elfStyle;
 
-  @Uint32()
-  external int _elfScript0;
-  @Uint32()
-  external int _elfScript1;
-  @Uint32()
-  external int _elfScript2;
-  @Uint32()
-  external int _elfScript3;
-  @Uint32()
-  external int _elfScript4;
-  @Uint32()
-  external int _elfScript5;
-  @Uint32()
-  external int _elfScript6;
-  @Uint32()
-  external int _elfScript7;
-  @Uint32()
-  external int _elfScript8;
-  @Uint32()
-  external int _elfScript9;
-  @Uint32()
-  external int _elfScript10;
-  @Uint32()
-  external int _elfScript11;
-  @Uint32()
-  external int _elfScript12;
-  @Uint32()
-  external int _elfScript13;
-  @Uint32()
-  external int _elfScript14;
-  @Uint32()
-  external int _elfScript15;
+  String get elfStyle {
+    final charCodes = <int>[];
+    for (var i = 0; i < 32; i++) {
+      charCodes.add(_elfStyle[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
 
-  String get elfScript => String.fromCharCodes(Uint32List.fromList([
-        _elfScript0, _elfScript1, _elfScript2, _elfScript3, //
-        _elfScript4, _elfScript5, _elfScript6, _elfScript7,
-        _elfScript8, _elfScript9, _elfScript10, _elfScript11,
-        _elfScript12, _elfScript13, _elfScript14, _elfScript15,
-      ]).buffer.asUint16List());
+  @Array(32)
+  external Array<Uint16> _elfScript;
+
+  String get elfScript {
+    final charCodes = <int>[];
+    for (var i = 0; i < 32; i++) {
+      charCodes.add(_elfScript[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
 }
 
 // typedef struct tagPAINTSTRUCT {
@@ -876,14 +650,9 @@ class PAINTSTRUCT extends Struct {
   external int fRestore;
   @Int32()
   external int fIncUpdate;
-  @Uint64()
-  external int rgb1;
-  @Uint64()
-  external int rgb2;
-  @Uint64()
-  external int rgb3;
-  @Uint64()
-  external int rgb4;
+
+  @Array(32)
+  external Array<Uint8> rgbReserved;
 }
 
 // typedef struct tagINPUT {
@@ -1290,155 +1059,16 @@ class OSVERSIONINFO extends Struct {
   @Uint32()
   external int dwPlatformId;
 
-  // These fields are never used directly, but ensure that sizeOf returns at
-  // least the right size, so heap allocations are sufficient.
-  @Uint32()
-  external int _szCSDVersion0;
-  @Uint32()
-  external int _szCSDVersion1;
-  @Uint32()
-  external int _szCSDVersion2;
-  @Uint32()
-  external int _szCSDVersion3;
-  @Uint32()
-  external int _szCSDVersion4;
-  @Uint32()
-  external int _szCSDVersion5;
-  @Uint32()
-  external int _szCSDVersion6;
-  @Uint32()
-  external int _szCSDVersion7;
-  @Uint32()
-  external int _szCSDVersion8;
-  @Uint32()
-  external int _szCSDVersion9;
-  @Uint32()
-  external int _szCSDVersion10;
-  @Uint32()
-  external int _szCSDVersion11;
-  @Uint32()
-  external int _szCSDVersion12;
-  @Uint32()
-  external int _szCSDVersion13;
-  @Uint32()
-  external int _szCSDVersion14;
-  @Uint32()
-  external int _szCSDVersion15;
-  @Uint32()
-  external int _szCSDVersion16;
-  @Uint32()
-  external int _szCSDVersion17;
-  @Uint32()
-  external int _szCSDVersion18;
-  @Uint32()
-  external int _szCSDVersion19;
-  @Uint32()
-  external int _szCSDVersion20;
-  @Uint32()
-  external int _szCSDVersion21;
-  @Uint32()
-  external int _szCSDVersion22;
-  @Uint32()
-  external int _szCSDVersion23;
-  @Uint32()
-  external int _szCSDVersion24;
-  @Uint32()
-  external int _szCSDVersion25;
-  @Uint32()
-  external int _szCSDVersion26;
-  @Uint32()
-  external int _szCSDVersion27;
-  @Uint32()
-  external int _szCSDVersion28;
-  @Uint32()
-  external int _szCSDVersion29;
-  @Uint32()
-  external int _szCSDVersion30;
-  @Uint32()
-  external int _szCSDVersion31;
-  @Uint32()
-  external int _szCSDVersion32;
-  @Uint32()
-  external int _szCSDVersion33;
-  @Uint32()
-  external int _szCSDVersion34;
-  @Uint32()
-  external int _szCSDVersion35;
-  @Uint32()
-  external int _szCSDVersion36;
-  @Uint32()
-  external int _szCSDVersion37;
-  @Uint32()
-  external int _szCSDVersion38;
-  @Uint32()
-  external int _szCSDVersion39;
-  @Uint32()
-  external int _szCSDVersion40;
-  @Uint32()
-  external int _szCSDVersion41;
-  @Uint32()
-  external int _szCSDVersion42;
-  @Uint32()
-  external int _szCSDVersion43;
-  @Uint32()
-  external int _szCSDVersion44;
-  @Uint32()
-  external int _szCSDVersion45;
-  @Uint32()
-  external int _szCSDVersion46;
-  @Uint32()
-  external int _szCSDVersion47;
-  @Uint32()
-  external int _szCSDVersion48;
-  @Uint32()
-  external int _szCSDVersion49;
-  @Uint32()
-  external int _szCSDVersion50;
-  @Uint32()
-  external int _szCSDVersion51;
-  @Uint32()
-  external int _szCSDVersion52;
-  @Uint32()
-  external int _szCSDVersion53;
-  @Uint32()
-  external int _szCSDVersion54;
-  @Uint32()
-  external int _szCSDVersion55;
-  @Uint32()
-  external int _szCSDVersion56;
-  @Uint32()
-  external int _szCSDVersion57;
-  @Uint32()
-  external int _szCSDVersion58;
-  @Uint32()
-  external int _szCSDVersion59;
-  @Uint32()
-  external int _szCSDVersion60;
-  @Uint32()
-  external int _szCSDVersion61;
-  @Uint32()
-  external int _szCSDVersion62;
-  @Uint32()
-  external int _szCSDVersion63;
+  @Array(128)
+  external Array<Uint16> _szCSDVersion;
 
-  String get szCSDVersion => String.fromCharCodes(Uint32List.fromList([
-        _szCSDVersion0, _szCSDVersion1, _szCSDVersion2, _szCSDVersion3, //
-        _szCSDVersion4, _szCSDVersion5, _szCSDVersion6, _szCSDVersion7,
-        _szCSDVersion8, _szCSDVersion9, _szCSDVersion10, _szCSDVersion11,
-        _szCSDVersion12, _szCSDVersion13, _szCSDVersion14, _szCSDVersion15,
-        _szCSDVersion16, _szCSDVersion17, _szCSDVersion18, _szCSDVersion19,
-        _szCSDVersion20, _szCSDVersion21, _szCSDVersion22, _szCSDVersion23,
-        _szCSDVersion24, _szCSDVersion25, _szCSDVersion26, _szCSDVersion27,
-        _szCSDVersion28, _szCSDVersion29, _szCSDVersion30, _szCSDVersion31,
-        _szCSDVersion32, _szCSDVersion33, _szCSDVersion34, _szCSDVersion35,
-        _szCSDVersion36, _szCSDVersion37, _szCSDVersion38, _szCSDVersion39,
-        _szCSDVersion40, _szCSDVersion41, _szCSDVersion42, _szCSDVersion43,
-        _szCSDVersion44, _szCSDVersion45, _szCSDVersion46, _szCSDVersion47,
-        _szCSDVersion48, _szCSDVersion49, _szCSDVersion50, _szCSDVersion51,
-        _szCSDVersion52, _szCSDVersion53, _szCSDVersion54, _szCSDVersion55,
-        _szCSDVersion56, _szCSDVersion57, _szCSDVersion58, _szCSDVersion59,
-        _szCSDVersion60, _szCSDVersion61, _szCSDVersion62, _szCSDVersion63
-      ]).buffer.asUint16List());
+  String get szCSDVersion {
+    final charCodes = <int>[];
+    for (var i = 0; i < 128; i++) {
+      charCodes.add(_szCSDVersion[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
 }
 
 // typedef struct _BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS {
@@ -1505,149 +1135,16 @@ class BLUETOOTH_DEVICE_INFO extends Struct {
   external SYSTEMTIME stLastSeen;
   external SYSTEMTIME stLastUsed;
 
-  @Uint64()
-  external int _szName0;
-  @Uint64()
-  external int _szName1;
-  @Uint64()
-  external int _szName2;
-  @Uint64()
-  external int _szName3;
-  @Uint64()
-  external int _szName4;
-  @Uint64()
-  external int _szName5;
-  @Uint64()
-  external int _szName6;
-  @Uint64()
-  external int _szName7;
-  @Uint64()
-  external int _szName8;
-  @Uint64()
-  external int _szName9;
-  @Uint64()
-  external int _szName10;
-  @Uint64()
-  external int _szName11;
-  @Uint64()
-  external int _szName12;
-  @Uint64()
-  external int _szName13;
-  @Uint64()
-  external int _szName14;
-  @Uint64()
-  external int _szName15;
-  @Uint64()
-  external int _szName16;
-  @Uint64()
-  external int _szName17;
-  @Uint64()
-  external int _szName18;
-  @Uint64()
-  external int _szName19;
-  @Uint64()
-  external int _szName20;
-  @Uint64()
-  external int _szName21;
-  @Uint64()
-  external int _szName22;
-  @Uint64()
-  external int _szName23;
-  @Uint64()
-  external int _szName24;
-  @Uint64()
-  external int _szName25;
-  @Uint64()
-  external int _szName26;
-  @Uint64()
-  external int _szName27;
-  @Uint64()
-  external int _szName28;
-  @Uint64()
-  external int _szName29;
-  @Uint64()
-  external int _szName30;
-  @Uint64()
-  external int _szName31;
-  @Uint64()
-  external int _szName32;
-  @Uint64()
-  external int _szName33;
-  @Uint64()
-  external int _szName34;
-  @Uint64()
-  external int _szName35;
-  @Uint64()
-  external int _szName36;
-  @Uint64()
-  external int _szName37;
-  @Uint64()
-  external int _szName38;
-  @Uint64()
-  external int _szName39;
-  @Uint64()
-  external int _szName40;
-  @Uint64()
-  external int _szName41;
-  @Uint64()
-  external int _szName42;
-  @Uint64()
-  external int _szName43;
-  @Uint64()
-  external int _szName44;
-  @Uint64()
-  external int _szName45;
-  @Uint64()
-  external int _szName46;
-  @Uint64()
-  external int _szName47;
-  @Uint64()
-  external int _szName48;
-  @Uint64()
-  external int _szName49;
-  @Uint64()
-  external int _szName50;
-  @Uint64()
-  external int _szName51;
-  @Uint64()
-  external int _szName52;
-  @Uint64()
-  external int _szName53;
-  @Uint64()
-  external int _szName54;
-  @Uint64()
-  external int _szName55;
-  @Uint64()
-  external int _szName56;
-  @Uint64()
-  external int _szName57;
-  @Uint64()
-  external int _szName58;
-  @Uint64()
-  external int _szName59;
-  @Uint64()
-  external int _szName60;
-  @Uint64()
-  external int _szName61;
+  @Array(248)
+  external Array<Uint16> _szName;
 
-  String get szName => String.fromCharCodes(Uint64List.fromList([
-        _szName0, _szName1, _szName2, _szName3, //
-        _szName4, _szName5, _szName6, _szName7,
-        _szName8, _szName9, _szName10, _szName11,
-        _szName12, _szName13, _szName14, _szName15,
-        _szName16, _szName17, _szName18, _szName19,
-        _szName20, _szName21, _szName22, _szName23,
-        _szName24, _szName25, _szName26, _szName27,
-        _szName28, _szName29, _szName30, _szName31,
-        _szName32, _szName33, _szName34, _szName35,
-        _szName36, _szName37, _szName38, _szName39,
-        _szName40, _szName41, _szName42, _szName43,
-        _szName44, _szName45, _szName46, _szName47,
-        _szName48, _szName49, _szName50, _szName51,
-        _szName52, _szName53, _szName54, _szName55,
-        _szName56, _szName57, _szName58, _szName59,
-        _szName60, _szName61
-      ]).buffer.asUint16List());
+  String get szName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 248; i++) {
+      charCodes.add(_szName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
 }
 
 // typedef struct _BLUETOOTH_ADDRESS {
@@ -1693,131 +1190,16 @@ class BLUETOOTH_RADIO_INFO extends Struct {
 
   external BLUETOOTH_ADDRESS address;
 
-  // WCHAR szName[ BLUETOOTH_MAX_NAME_SIZE ];
-  @Uint64()
-  external int _szName0;
-  @Uint64()
-  external int _szName1;
-  @Uint64()
-  external int _szName2;
-  @Uint64()
-  external int _szName3;
-  @Uint64()
-  external int _szName4;
-  @Uint64()
-  external int _szName5;
-  @Uint64()
-  external int _szName6;
-  @Uint64()
-  external int _szName7;
-  @Uint64()
-  external int _szName8;
-  @Uint64()
-  external int _szName9;
-  @Uint64()
-  external int _szName10;
-  @Uint64()
-  external int _szName11;
-  @Uint64()
-  external int _szName12;
-  @Uint64()
-  external int _szName13;
-  @Uint64()
-  external int _szName14;
-  @Uint64()
-  external int _szName15;
-  @Uint64()
-  external int _szName16;
-  @Uint64()
-  external int _szName17;
-  @Uint64()
-  external int _szName18;
-  @Uint64()
-  external int _szName19;
-  @Uint64()
-  external int _szName20;
-  @Uint64()
-  external int _szName21;
-  @Uint64()
-  external int _szName22;
-  @Uint64()
-  external int _szName23;
-  @Uint64()
-  external int _szName24;
-  @Uint64()
-  external int _szName25;
-  @Uint64()
-  external int _szName26;
-  @Uint64()
-  external int _szName27;
-  @Uint64()
-  external int _szName28;
-  @Uint64()
-  external int _szName29;
-  @Uint64()
-  external int _szName30;
-  @Uint64()
-  external int _szName31;
-  @Uint64()
-  external int _szName32;
-  @Uint64()
-  external int _szName33;
-  @Uint64()
-  external int _szName34;
-  @Uint64()
-  external int _szName35;
-  @Uint64()
-  external int _szName36;
-  @Uint64()
-  external int _szName37;
-  @Uint64()
-  external int _szName38;
-  @Uint64()
-  external int _szName39;
-  @Uint64()
-  external int _szName40;
-  @Uint64()
-  external int _szName41;
-  @Uint64()
-  external int _szName42;
-  @Uint64()
-  external int _szName43;
-  @Uint64()
-  external int _szName44;
-  @Uint64()
-  external int _szName45;
-  @Uint64()
-  external int _szName46;
-  @Uint64()
-  external int _szName47;
-  @Uint64()
-  external int _szName48;
-  @Uint64()
-  external int _szName49;
-  @Uint64()
-  external int _szName50;
-  @Uint64()
-  external int _szName51;
-  @Uint64()
-  external int _szName52;
-  @Uint64()
-  external int _szName53;
-  @Uint64()
-  external int _szName54;
-  @Uint64()
-  external int _szName55;
-  @Uint64()
-  external int _szName56;
-  @Uint64()
-  external int _szName57;
-  @Uint64()
-  external int _szName58;
-  @Uint64()
-  external int _szName59;
-  @Uint64()
-  external int _szName60;
-  @Uint64()
-  external int _szName61;
+  @Array(248)
+  external Array<Uint16> _szName;
+
+  String get szName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 248; i++) {
+      charCodes.add(_szName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
 
   @Uint32()
   external int ulClassOfDevice;
@@ -1825,25 +1207,6 @@ class BLUETOOTH_RADIO_INFO extends Struct {
   external int lmpSubversion;
   @Uint16()
   external int manufacturer;
-
-  String get szName => String.fromCharCodes(Uint64List.fromList([
-        _szName0, _szName1, _szName2, _szName3, //
-        _szName4, _szName5, _szName6, _szName7,
-        _szName8, _szName9, _szName10, _szName11,
-        _szName12, _szName13, _szName14, _szName15,
-        _szName16, _szName17, _szName18, _szName19,
-        _szName20, _szName21, _szName22, _szName23,
-        _szName24, _szName25, _szName26, _szName27,
-        _szName28, _szName29, _szName30, _szName31,
-        _szName32, _szName33, _szName34, _szName35,
-        _szName36, _szName37, _szName38, _szName39,
-        _szName40, _szName41, _szName42, _szName43,
-        _szName44, _szName45, _szName46, _szName47,
-        _szName48, _szName49, _szName50, _szName51,
-        _szName52, _szName53, _szName54, _szName55,
-        _szName56, _szName57, _szName58, _szName59,
-        _szName60, _szName61
-      ]).buffer.asUint16List());
 }
 
 // typedef struct _BLUETOOTH_PIN_INFO {
@@ -1856,66 +1219,17 @@ class BLUETOOTH_RADIO_INFO extends Struct {
 ///
 /// {@category Struct}
 class BLUETOOTH_PIN_INFO extends Struct {
-  @Int8()
-  external int _pin0;
-  @Int8()
-  external int _pin1;
-  @Int8()
-  external int _pin2;
-  @Int8()
-  external int _pin3;
-  @Int8()
-  external int _pin4;
-  @Int8()
-  external int _pin5;
-  @Int8()
-  external int _pin6;
-  @Int8()
-  external int _pin7;
-  @Int8()
-  external int _pin8;
-  @Int8()
-  external int _pin9;
-  @Int8()
-  external int _pin10;
-  @Int8()
-  external int _pin11;
-  @Int8()
-  external int _pin12;
-  @Int8()
-  external int _pin13;
-  @Int8()
-  external int _pin14;
-  @Int8()
-  external int _pin15;
+  @Array(16)
+  external Array<Uint8> _pin;
   @Int8()
   external int pinLength;
 
-  Uint8List get pin => Uint8List.fromList([
-        _pin0, _pin1, _pin2, _pin3, //
-        _pin4, _pin5, _pin6, _pin7,
-        _pin8, _pin9, _pin10, _pin11,
-        _pin12, _pin13, _pin14, _pin15
-      ]);
-
-  set pin(Uint8List value) {
-    final length = value.length;
-    _pin0 = (length >= 1 ? value[0] : 0);
-    _pin1 = (length >= 2 ? value[1] : 0);
-    _pin2 = (length >= 3 ? value[2] : 0);
-    _pin3 = (length >= 4 ? value[3] : 0);
-    _pin4 = (length >= 5 ? value[4] : 0);
-    _pin5 = (length >= 6 ? value[5] : 0);
-    _pin6 = (length >= 7 ? value[6] : 0);
-    _pin7 = (length >= 8 ? value[7] : 0);
-    _pin8 = (length >= 9 ? value[8] : 0);
-    _pin9 = (length >= 10 ? value[9] : 0);
-    _pin10 = (length >= 11 ? value[10] : 0);
-    _pin11 = (length >= 12 ? value[11] : 0);
-    _pin12 = (length >= 13 ? value[12] : 0);
-    _pin13 = (length >= 14 ? value[13] : 0);
-    _pin14 = (length >= 15 ? value[14] : 0);
-    _pin15 = (length >= 16 ? value[15] : 0);
+  Uint8List get pin {
+    final pin = <int>[];
+    for (var i = 0; i < 16; i++) {
+      pin.add(_pin[i]);
+    }
+    return Uint8List.fromList(pin);
   }
 }
 
