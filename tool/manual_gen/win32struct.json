@@ -138,6 +138,10 @@
         "namespace": "Windows.Win32.Gdi.LOGBRUSH",
         "comment": "The LOGBRUSH structure defines the style, color, and pattern of a physical brush. It is used by the CreateBrushIndirect and ExtCreatePen functions."
     },
+    "LOGPALETTE": {
+        "namespace": "Windows.Win32.Gdi.LOGPALETTE",
+        "comment": "The LOGPALETTE structure defines a logical palette."
+    },
     "MCI_OPEN_PARMS": {
         "namespace": "Windows.Win32.CoreAudio.MCI_OPEN_PARMSW",
         "comment": "The MCI_OPEN_PARMS structure contains information for the MCI_OPEN command.",

@@ -53,6 +53,7 @@ void main()
     printf("  'CHOOSEFONT': %zu,\n", sizeof(CHOOSEFONT));
     printf("  'OPENFILENAME': %zu,\n", sizeof(OPENFILENAME));
     printf("  'LOGFONT': %zu,\n", sizeof(LOGFONTW));
+    printf("  'LOGPALETTE': %zu,\n", sizeof(LOGPALETTE));
     printf("  'ENUMLOGFONTEX': %zu,\n", sizeof(ENUMLOGFONTEXW));
     printf("  'CREATESTRUCT': %zu,\n", sizeof(CREATESTRUCT));
     printf("  'MENUINFO': %zu,\n", sizeof(MENUINFO));

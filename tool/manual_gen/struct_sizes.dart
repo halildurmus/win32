@@ -218,10 +218,3 @@ const structSize32 = {
   'NOTIFYICONDATA': 956,
   'TPMPARAMS': 20,
 };
-
-const skipStructs = [
-  // Opaque types
-  'EXCEPINFO',
-  'PROPVARIANT',
-  'NLM_SIMULATED_PROFILE_INFO'
-];

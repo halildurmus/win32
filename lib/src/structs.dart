@@ -1503,24 +1503,59 @@ class MMTIME extends Struct {
   set midi(_midi value) => ms = value.songptrpos;
 }
 
-// -----------------------------------------------------------------------------
-// UNIMPLEMENTED OR PARTIALLY IMPLEMENTED CLASSES THAT ARE INCLUDED SO THAT COM
-// OBJECTS CAN BE GENERATED
-// -----------------------------------------------------------------------------
-
 /// The PROPVARIANT structure is used in the ReadMultiple and WriteMultiple
 /// methods of IPropertyStorage to define the type tag and the value of a
 /// property in a property set.
 ///
 /// {@category Struct}
-class PROPVARIANT extends Opaque {}
+class PROPVARIANT extends Struct {
+  @Uint16()
+  external int vt;
+  @Uint16()
+  external int wReserved1;
+  @Uint16()
+  external int wReserved2;
+  @Uint16()
+  external int wReserved3;
+  @IntPtr()
+  external int val1;
+  @IntPtr()
+  external int val2;
+}
+
+// typedef struct NLM_SIMULATED_PROFILE_INFO {
+//   WCHAR               ProfileName[256];
+//   NLM_CONNECTION_COST cost;
+//   DWORD               UsageInMegabytes;
+//   DWORD               DataLimitInMegabytes;
+// } NLM_SIMULATED_PROFILE_INFO;
 
 /// Used to specify values that are used by SetSimulatedProfileInfo to override
 /// current internet connection profile values in an RDP Child Session to
 /// support the simulation of specific metered internet connection conditions.
 ///
 /// {@category Struct}
-class NLM_SIMULATED_PROFILE_INFO extends Opaque {}
+class NLM_SIMULATED_PROFILE_INFO extends Struct {
+  @Array(256)
+  external Array<Uint16> _ProfileName;
+
+  String get ProfileName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 256; i++) {
+      charCodes.add(_ProfileName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  @Uint32()
+  external int cost;
+
+  @Uint32()
+  external int UsageInMegabytes;
+
+  @Uint32()
+  external int DataLimitInMegabytes;
+}
 
 // typedef struct _NOTIFYICONDATAW {
 //   DWORD cbSize;

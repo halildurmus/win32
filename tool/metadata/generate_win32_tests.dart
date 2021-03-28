@@ -131,8 +131,7 @@ void main() {
   final is64bitOS = sizeOf<IntPtr>() == 8;
 ''');
 
-  for (final struct
-      in structSize64.keys.where((struct) => !skipStructs.contains(struct))) {
+  for (final struct in structSize64.keys) {
     writer.writeStringSync('''
   test('Struct $struct is the right size', () {
     if (is64bitOS) {
