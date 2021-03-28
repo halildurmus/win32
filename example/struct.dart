@@ -11,12 +11,21 @@ void printStruct(String typedef) =>
 //     "comment": "Specifies a Unicode or ANSI character and its attributes. This structure is used by console functions to read from and write to a console screen buffer."
 // },
 
-// Nested Unicode struct
+// Bug: https://github.com/microsoft/win32metadata/issues/390
 // 'Windows.Win32.SystemServices.STARTUPINFOEXW'
+
+// Array
+// "SYSTEM_BATTERY_STATE": {
+//     "namespace": "Windows.Win32.SystemServices.SYSTEM_BATTERY_STATE",
+//     "comment": "Contains information about the current state of the system battery."
+// },
 
 void main() {
   // printStruct('Windows.Win32.Gdi.XFORM');
   // printStruct('Windows.Win32.SystemServices.PROCESS_INFORMATION');
   // printStruct('Windows.Win32.SystemServices.STARTUPINFOEXW');
-  printStruct('Windows.Win32.StructuredStorage.STATSTG');
+  // printStruct('Windows.Win32.StructuredStorage.STATSTG');
+  // printStruct('Windows.Win32.SystemServices.POWERBROADCAST_SETTING');
+  // printStruct('Windows.Win32.Automation.EXCEPINFO');
+  printStruct('Windows.Win32.SystemServices.SYSTEM_BATTERY_STATE');
 }

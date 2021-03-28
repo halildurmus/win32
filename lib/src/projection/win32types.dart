@@ -313,8 +313,13 @@ const win32TypeMap = <String, String>{
   'CONSOLE_READCONSOLE_CONTROL': 'Void',
 
   // Callbacks
+  'LPCCHOOKPROC': 'Pointer<NativeFunction<CCHookProc>>',
+  'LPCFHOOKPROC': 'Pointer<NativeFunction<CFHookProc>>',
+  'LPFRHOOKPROC': 'Pointer<NativeFunction<FRHookProc>>',
+  'LPOFNHOOKPROC': 'Pointer<NativeFunction<OFNHookProc>>',
   'DLGPROC': 'Pointer<NativeFunction<DlgProc>>',
   'DRAWSTATEPROC': 'Pointer<NativeFunction<DrawStateProc>>',
+  'WNDPROC': 'Pointer<NativeFunction<WindowProc>>',
   'WNDENUMPROC': 'Pointer<NativeFunction<EnumWindowsProc>>',
   'FONTENUMPROCW': 'Pointer<NativeFunction<EnumFontFamExProc>>',
   'ENUMRESNAMEPROCW': 'Pointer<NativeFunction<EnumResNameProc>>',
@@ -327,6 +332,7 @@ const win32TypeMap = <String, String>{
       'Pointer<NativeFunction<PfnAuthenticationCallbackEx>>',
   'PSYM_ENUMERATESYMBOLS_CALLBACKW':
       'Pointer<NativeFunction<SymEnumSymbolsProc>>',
+  'LPEXCEPFINO_DEFERRED_FILLIN': 'Pointer<NativeFunction<ExcepInfoProc>>',
 
   // Void pointers
   'LPVOID': 'Pointer', 'PVOID': 'Pointer', 'LPCVOID': 'Pointer',
