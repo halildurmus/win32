@@ -353,4 +353,27 @@ void main() {
     expect(param.typeIdentifier.typeArgs.first.type?.parent?.typeName,
         equals('System.Enum'));
   });
+
+  test('Delegates are appropriately marked', () {
+    final delegate = scope['Windows.Win32.Gdi.MFENUMPROC']!;
+    expect(delegate.isDelegate, isTrue);
+  });
+
+  test('Non-delegates are appropriately marked', () {
+    final notADelegate = scope['Windows.Win32.SystemServices.Apis']!;
+    expect(notADelegate.isDelegate, isFalse);
+  });
+
+  test('Delegates are appropriately exposed', () {
+    final delegate = scope['Windows.Win32.Gdi.MFENUMPROC']!;
+
+    final api = delegate.findMethod('Invoke')!;
+    final param = api.parameters.first;
+
+    expect(param.name, equals('hdc'));
+  });
+
+  test('Scope contains an expected quantity of delegates', () {
+    expect(scope.delegates.length, greaterThan(1000));
+  });
 }

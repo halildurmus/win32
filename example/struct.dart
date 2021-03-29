@@ -14,21 +14,8 @@ void printStruct(String typedef) =>
 // Bug: https://github.com/microsoft/win32metadata/issues/390
 // 'Windows.Win32.SystemServices.STARTUPINFOEXW'
 
-// Array
-// "SYSTEM_BATTERY_STATE": {
-//     "namespace": "Windows.Win32.SystemServices.SYSTEM_BATTERY_STATE",
-//     "comment": "Contains information about the current state of the system battery."
-// },
-
-// [6, 20, 8, 1, 1, 16, 1, 0]
-// xx array i4 dims1 num1 size16 lonum1 lo0
-
 void main() {
-  // printStruct('Windows.Win32.Gdi.XFORM');
-  printStruct('Windows.Win32.Gdi.DESIGNVECTOR');
-  // printStruct('Windows.Win32.SystemServices.PROCESS_INFORMATION');
+  // printStruct('Windows.Win32.DisplayDevices.DEVMODEW');
   // printStruct('Windows.Win32.SystemServices.STARTUPINFOEXW');
-  // printStruct('Windows.Win32.StructuredStorage.STATSTG');
-  // printStruct('Windows.Win32.SystemServices.POWERBROADCAST_SETTING');
-  // printStruct('Windows.Win32.SystemServices.SYSTEM_BATTERY_STATE');
+  printStruct('Windows.Win32.SystemServices.CHAR_INFO');
 }

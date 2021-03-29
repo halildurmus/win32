@@ -30,6 +30,8 @@ class TypeDef extends AttributeObject {
   bool get isInterface =>
       flags & CorTypeAttr.tdInterface == CorTypeAttr.tdInterface;
 
+  bool get isDelegate => parent?.typeName == 'System.MulticastDelegate';
+
   /// Is the type a non-Windows Runtime type, such as System.Object or
   /// IInspectable?
   ///

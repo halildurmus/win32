@@ -71,6 +71,9 @@ class Scope {
     return _typedefs;
   }
 
+  List<TypeDef> get delegates =>
+      typeDefs.where((typeDef) => typeDef.isDelegate).toList();
+
   /// Get an enumerated list of modules for this scope.
   List<Module> get modules {
     if (_modules.isEmpty) {
