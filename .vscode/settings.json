@@ -4,5 +4,6 @@
     },
     "editor.codeActionsOnSave": {
         "source.fixAll.markdownlint": true
-    }
+    },
+    "dart.sdkPath": "c:\\tools\\dart64"
 }
