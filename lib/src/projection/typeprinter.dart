@@ -6,8 +6,8 @@
 // parameters, as well as the logic necessary to emit a Dart language
 // representation (a projection) of the underlying API.
 
+import '../constants.dart';
 import '../typedef.dart';
-
 import 'classprojector.dart';
 import 'projections.dart';
 import 'typeprojector.dart';
@@ -320,20 +320,27 @@ void main() {
 
   static String printStruct(TypeDef typedef, String structName) {
     try {
-      // TODO: Handle arrays after Dart 2.13 stable, per:
-      //   https://github.com/dart-lang/sdk/issues/35763
       final buffer = StringBuffer();
 
       buffer.writeln('class $structName extends Struct {');
 
       for (final field in typedef.fields) {
-        final nativeType = TypeProjector(field.typeIdentifier).nativeType;
-        final dartType = TypeProjector(field.typeIdentifier).dartType;
+        if (field.typeIdentifier.corType == CorElementType.ELEMENT_TYPE_ARRAY) {
+          final dimensions = field.typeIdentifier.arrayDimensions!.first;
+          final nativeType = TypeProjector(field.typeIdentifier).nativeType;
 
-        if (dartType == 'int' || dartType == 'double') {
-          buffer.writeln('  @$nativeType() external $dartType ${field.name};');
+          buffer.writeln('  @Array($dimensions)');
+          buffer.writeln('  external Array<$nativeType> ${field.name};');
         } else {
-          buffer.writeln('  external $dartType ${field.name};');
+          final nativeType = TypeProjector(field.typeIdentifier).nativeType;
+          final dartType = TypeProjector(field.typeIdentifier).dartType;
+
+          if (dartType == 'int' || dartType == 'double') {
+            buffer
+                .writeln('  @$nativeType() external $dartType ${field.name};');
+          } else {
+            buffer.writeln('  external $dartType ${field.name};');
+          }
         }
       }
       buffer.writeln('}\n');
