@@ -267,7 +267,8 @@
     },
     "SHITEMID": {
         "namespace": "Windows.Win32.Shell.SHITEMID",
-        "comment": "Defines an item identifier."
+        "comment": "Defines an item identifier.",
+        "packing": 1
     },
     "SHQUERYRBINFO": {
         "namespace": "Windows.Win32.Shell.SHQUERYRBINFO",

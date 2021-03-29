@@ -1192,6 +1192,7 @@ class SECURITY_DESCRIPTOR extends Struct {
 /// Defines an item identifier.
 ///
 /// {@category Struct}
+@Packed(1)
 class SHITEMID extends Struct {
   @Uint16()
   external int cb;
