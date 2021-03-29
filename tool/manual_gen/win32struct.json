@@ -40,6 +40,10 @@
         "namespace": "Windows.Win32.Bluetooth.BLUETOOTH_FIND_RADIO_PARAMS",
         "comment": "The BLUETOOTH_FIND_RADIO_PARAMS structure facilitates enumerating installed Bluetooth radios."
     },
+    "BLUETOOTH_OOB_DATA_INFO": {
+        "namespace": "Windows.Win32.Bluetooth.BLUETOOTH_OOB_DATA_INFO",
+        "comment": "The BLUETOOTH_OOB_DATA_INFO structure contains data used to authenticate prior to establishing an Out-of-Band device pairing."
+    },
     "CHOOSECOLOR": {
         "namespace": "Windows.Win32.WindowsAndMessaging.CHOOSECOLORW",
         "comment": "Contains information the ChooseColor function uses to initialize the Color dialog box. After the user closes the dialog box, the system returns information about the user's selection in this structure."
@@ -83,6 +87,14 @@
     "CREDENTIAL_ATTRIBUTE": {
         "namespace": "Windows.Win32.Security.CREDENTIAL_ATTRIBUTEW",
         "comment": "The CREDENTIAL_ATTRIBUTE structure contains an application-defined attribute of the credential. An attribute is a keyword-value pair. It is up to the application to define the meaning of the attribute."
+    },
+    "DESIGNVECTOR": {
+        "namespace": "Windows.Win32.Gdi.DESIGNVECTOR",
+        "comment": "The DESIGNVECTOR structure is used by an application to specify values for the axes of a multiple master font."
+    },
+    "DIBSECTION": {
+        "namespace": "Windows.Win32.Gdi.DIBSECTION",
+        "comment": "The DIBSECTION structure contains information about a DIB created by calling the CreateDIBSection function. A DIBSECTION structure includes information about the bitmap's dimensions, color format, color masks, optional file mapping object, and optional bit values storage offset. An application can obtain a filled-in DIBSECTION structure for a given DIB by calling the GetObject function."
     },
     "DISPPARAMS": {
         "namespace": "Windows.Win32.Automation.DISPPARAMS",
@@ -212,6 +224,10 @@
         "namespace": "Windows.Win32.Gdi.POLYTEXTW",
         "comment": "The POLYTEXT structure describes how the PolyTextOut function should draw a string of text."
     },
+    "POWERBROADCAST_SETTING": {
+        "namespace": "Windows.Win32.SystemServices.POWERBROADCAST_SETTING",
+        "comment": "Sent with a power setting event and contains data about the specific change."
+    },
     "PROCESS_INFORMATION": {
         "namespace": "Windows.Win32.SystemServices.PROCESS_INFORMATION",
         "comment": "Contains information about a newly created process and its primary thread. It is used with the CreateProcess, CreateProcessAsUser, CreateProcessWithLogonW, or CreateProcessWithTokenW function."
@@ -249,6 +265,10 @@
         "namespace": "Windows.Win32.Security.SECURITY_DESCRIPTOR",
         "comment": "The SECURITY_DESCRIPTOR structure contains the security information associated with an object. Applications use this structure to set and query an object's security status."
     },
+    "SHITEMID": {
+        "namespace": "Windows.Win32.Shell.SHITEMID",
+        "comment": "Defines an item identifier."
+    },
     "SHQUERYRBINFO": {
         "namespace": "Windows.Win32.Shell.SHQUERYRBINFO",
         "comment": "Contains the size and item count information retrieved by the SHQueryRecycleBin function."
@@ -272,6 +292,14 @@
     "STATSTG": {
         "namespace": "Windows.Win32.StructuredStorage.STATSTG",
         "comment": "The STATSTG structure contains statistical data about an open storage, stream, or byte-array object. This structure is used in the IEnumSTATSTG, ILockBytes, IStorage, and IStream interfaces."
+    },
+    "SYMBOL_INFO": {
+        "namespace": "Windows.Win32.Debug.SYMBOL_INFOW",
+        "comment": "Contains symbol information."
+    },
+    "SYSTEM_BATTERY_STATE": {
+        "namespace": "Windows.Win32.SystemServices.SYSTEM_BATTERY_STATE",
+        "comment": "Contains information about the current state of the system battery."
     },
     "SYSTEM_POWER_STATUS": {
         "namespace": "Windows.Win32.SystemServices.SYSTEM_POWER_STATUS",
@@ -318,5 +346,9 @@
     "WNDCLASS": {
         "namespace": "Windows.Win32.WindowsAndMessaging.WNDCLASSW",
         "comment": "Contains the window class attributes that are registered by the RegisterClass function."
+    },
+    "XFORM": {
+        "namespace": "Windows.Win32.Gdi.XFORM",
+        "comment": "The XFORM structure specifies a world-space to page-space transformation."
     }
 }

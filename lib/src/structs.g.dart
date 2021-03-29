@@ -224,6 +224,17 @@ class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
   external int dwSize;
 }
 
+/// The BLUETOOTH_OOB_DATA_INFO structure contains data used to
+/// authenticate prior to establishing an Out-of-Band device pairing.
+///
+/// {@category Struct}
+class BLUETOOTH_OOB_DATA_INFO extends Struct {
+  @Array(16)
+  external Array<Uint8> C;
+  @Array(16)
+  external Array<Uint8> R;
+}
+
 /// Contains information the ChooseColor function uses to initialize the
 /// Color dialog box. After the user closes the dialog box, the system
 /// returns information about the user's selection in this structure.
@@ -432,6 +443,38 @@ class CREDENTIAL_ATTRIBUTE extends Struct {
   @Uint32()
   external int ValueSize;
   external Pointer<Uint8> Value;
+}
+
+/// The DESIGNVECTOR structure is used by an application to specify values
+/// for the axes of a multiple master font.
+///
+/// {@category Struct}
+class DESIGNVECTOR extends Struct {
+  @Uint32()
+  external int dvReserved;
+  @Uint32()
+  external int dvNumAxes;
+  @Array(16)
+  external Array<Int32> dvValues;
+}
+
+/// The DIBSECTION structure contains information about a DIB created by
+/// calling the CreateDIBSection function. A DIBSECTION structure includes
+/// information about the bitmap's dimensions, color format, color masks,
+/// optional file mapping object, and optional bit values storage offset.
+/// An application can obtain a filled-in DIBSECTION structure for a given
+/// DIB by calling the GetObject function.
+///
+/// {@category Struct}
+class DIBSECTION extends Struct {
+  external BITMAP dsBm;
+  external BITMAPINFOHEADER dsBmih;
+  @Array(3)
+  external Array<Uint32> dsBitfields;
+  @IntPtr()
+  external int dshSection;
+  @Uint32()
+  external int dsOffset;
 }
 
 /// Contains the arguments passed to a method or property.
@@ -995,6 +1038,18 @@ class POLYTEXT extends Struct {
   external Pointer<Int32> pdx;
 }
 
+/// Sent with a power setting event and contains data about the specific
+/// change.
+///
+/// {@category Struct}
+class POWERBROADCAST_SETTING extends Struct {
+  external GUID PowerSetting;
+  @Uint32()
+  external int DataLength;
+  @Array(1)
+  external Array<Uint8> Data;
+}
+
 /// Contains information about a newly created process and its primary
 /// thread. It is used with the CreateProcess, CreateProcessAsUser,
 /// CreateProcessWithLogonW, or CreateProcessWithTokenW function.
@@ -1134,6 +1189,16 @@ class SECURITY_DESCRIPTOR extends Struct {
   external Pointer<ACL> Dacl;
 }
 
+/// Defines an item identifier.
+///
+/// {@category Struct}
+class SHITEMID extends Struct {
+  @Uint16()
+  external int cb;
+  @Array(1)
+  external Array<Uint8> abID;
+}
+
 /// Contains the size and item count information retrieved by the
 /// SHQueryRecycleBin function.
 ///
@@ -1248,6 +1313,72 @@ class STATSTG extends Struct {
   external int grfStateBits;
   @Uint32()
   external int reserved;
+}
+
+/// Contains symbol information.
+///
+/// {@category Struct}
+class SYMBOL_INFO extends Struct {
+  @Uint32()
+  external int SizeOfStruct;
+  @Uint32()
+  external int TypeIndex;
+  @Array(2)
+  external Array<Uint64> Reserved;
+  @Uint32()
+  external int Index;
+  @Uint32()
+  external int Size;
+  @Uint64()
+  external int ModBase;
+  @Uint32()
+  external int Flags;
+  @Uint64()
+  external int Value;
+  @Uint64()
+  external int Address;
+  @Uint32()
+  external int Register;
+  @Uint32()
+  external int Scope;
+  @Uint32()
+  external int Tag;
+  @Uint32()
+  external int NameLen;
+  @Uint32()
+  external int MaxNameLen;
+  @Array(1)
+  external Array<Uint16> Name;
+}
+
+/// Contains information about the current state of the system battery.
+///
+/// {@category Struct}
+class SYSTEM_BATTERY_STATE extends Struct {
+  @Uint8()
+  external int AcOnLine;
+  @Uint8()
+  external int BatteryPresent;
+  @Uint8()
+  external int Charging;
+  @Uint8()
+  external int Discharging;
+  @Array(3)
+  external Array<Uint8> Spare1;
+  @Uint8()
+  external int Tag;
+  @Uint32()
+  external int MaxCapacity;
+  @Uint32()
+  external int RemainingCapacity;
+  @Uint32()
+  external int Rate;
+  @Uint32()
+  external int EstimatedTime;
+  @Uint32()
+  external int DefaultAlert1;
+  @Uint32()
+  external int DefaultAlert2;
 }
 
 /// Contains information about the power status of the system.
@@ -1501,4 +1632,23 @@ class WNDCLASS extends Struct {
   external int hbrBackground;
   external Pointer<Utf16> lpszMenuName;
   external Pointer<Utf16> lpszClassName;
+}
+
+/// The XFORM structure specifies a world-space to page-space
+/// transformation.
+///
+/// {@category Struct}
+class XFORM extends Struct {
+  @Float()
+  external double eM11;
+  @Float()
+  external double eM12;
+  @Float()
+  external double eM21;
+  @Float()
+  external double eM22;
+  @Float()
+  external double eDx;
+  @Float()
+  external double eDy;
 }
