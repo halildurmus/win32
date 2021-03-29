@@ -649,6 +649,17 @@ class LOGBRUSH extends Struct {
   external int lbHatch;
 }
 
+/// The LOGPALETTE structure defines a logical palette.
+///
+/// {@category Struct}
+class LOGPALETTE extends Struct {
+  @Uint16()
+  external int palVersion;
+  @Uint16()
+  external int palNumEntries;
+  external PALETTEENTRY palPalEntry;
+}
+
 /// The MCI_OPEN_PARMS structure contains information for the MCI_OPEN
 /// command.
 ///

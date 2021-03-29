@@ -680,11 +680,25 @@ void main() {
       expect(sizeOf<MMTIME>(), equals(12));
     }
   });
+  test('Struct EXCEPINFO is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<EXCEPINFO>(), equals(64));
+    } else {
+      expect(sizeOf<EXCEPINFO>(), equals(32));
+    }
+  });
   test('Struct PROPERTYKEY is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<PROPERTYKEY>(), equals(20));
     } else {
       expect(sizeOf<PROPERTYKEY>(), equals(20));
+    }
+  });
+  test('Struct PROPVARIANT is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<PROPVARIANT>(), equals(24));
+    } else {
+      expect(sizeOf<PROPVARIANT>(), equals(16));
     }
   });
   test('Struct SAFEARRAY is the right size', () {
@@ -699,6 +713,13 @@ void main() {
       expect(sizeOf<STATSTG>(), equals(80));
     } else {
       expect(sizeOf<STATSTG>(), equals(72));
+    }
+  });
+  test('Struct NLM_SIMULATED_PROFILE_INFO is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<NLM_SIMULATED_PROFILE_INFO>(), equals(524));
+    } else {
+      expect(sizeOf<NLM_SIMULATED_PROFILE_INFO>(), equals(524));
     }
   });
   test('Struct NOTIFYICONDATA is the right size', () {
