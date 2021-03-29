@@ -159,7 +159,8 @@ class BITMAPFILEHEADER extends Struct {
 /// {@category Struct}
 class BITMAPINFO extends Struct {
   external BITMAPINFOHEADER bmiHeader;
-  external RGBQUAD bmiColors;
+  @Array(1)
+  external Array<RGBQUAD> bmiColors;
 }
 
 /// The BITMAPINFOHEADER structure contains information about the
@@ -657,7 +658,8 @@ class LOGPALETTE extends Struct {
   external int palVersion;
   @Uint16()
   external int palNumEntries;
-  external PALETTEENTRY palPalEntry;
+  @Array(1)
+  external Array<PALETTEENTRY> palPalEntry;
 }
 
 /// The MCI_OPEN_PARMS structure contains information for the MCI_OPEN
@@ -1063,7 +1065,8 @@ class SAFEARRAY extends Struct {
   @Uint32()
   external int cLocks;
   external Pointer pvData;
-  external SAFEARRAYBOUND rgsabound;
+  @Array(1)
+  external Array<SAFEARRAYBOUND> rgsabound;
 }
 
 /// Represents the bounds of one dimension of the array.
