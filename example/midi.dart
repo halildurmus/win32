@@ -4,9 +4,6 @@
 
 // Plays a MIDI file using MCI_OPEN and MCI_PLAY.
 
-// Currently broken because of lack of packed struct support in Dart FFI:
-// https://github.com/dart-lang/sdk/issues/38158
-
 import 'dart:ffi';
 import 'dart:io';
 
@@ -21,8 +18,6 @@ void main() {
   final mciOpenParams = calloc<MCI_OPEN_PARMS>()
     ..ref.lpstrDeviceType = deviceType
     ..ref.lpstrElementName = elementName;
-  free(deviceType);
-  free(elementName);
 
   var dwReturn = mciSendCommand(
       NULL, MCI_OPEN, MCI_OPEN_TYPE | MCI_OPEN_ELEMENT, mciOpenParams.address);
@@ -79,6 +74,16 @@ void main() {
   }
 
   final message = TEXT('Press OK to stop');
-  MessageBox(NULL, message, nullptr, MB_OK);
+  final caption = TEXT('Midi Sample');
+  MessageBox(NULL, message, caption, MB_OK);
+
+  // Clear up
   free(message);
+  free(caption);
+
+  free(mciPlayParams);
+  free(mciStatusParams);
+  free(mciOpenParams);
+  free(deviceType);
+  free(elementName);
 }

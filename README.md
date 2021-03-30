@@ -104,6 +104,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `guid.dart`        | Creates a globally unique identifier (GUID)               |
 | `knownfolder.dart` | Retrieves known folders from the current user profile     |
 | `manifest\`        | Demonstrates the use of app manifests for compiled apps   |
+| `midi.dart`        | Demonstrates MIDI playback using MCI commands             |
 | `modules.dart`     | Enumerates all loaded modules on the current system       |
 | `monitor.dart`     | Uses DDC and monitor-config API to get monitor caps       |
 | `msgbox.dart`      | Demonstrates a MessageBox from the console                |

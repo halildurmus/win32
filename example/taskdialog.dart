@@ -58,7 +58,6 @@ void showSimpleTaskDialog() {
   }
 }
 
-// Broken until https://github.com/dart-lang/sdk/issues/38158 is fixed.
 void showCustomTaskDialog() {
   print(sizeOf<TASKDIALOGCONFIG>());
   final buttonSelected = calloc<Int32>();
