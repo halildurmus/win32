@@ -81,8 +81,9 @@ int generateStructs(Win32API win32) {
     writer.writeStringSync(wrapCommentText(win32struct.comment));
 
     writer.writeStringSync('\n///\n/// {@category Struct}\n');
-    if (win32struct.packing > 0) {
-      writer.writeStringSync('@Packed(${win32struct.packing})\n');
+    final packingAlignment = typedef.classLayout.packingAlignment;
+    if (packingAlignment != null && packingAlignment > 0) {
+      writer.writeStringSync('@Packed($packingAlignment)\n');
     }
 
     writer.writeStringSync(TypePrinter.printStruct(typedef, struct));

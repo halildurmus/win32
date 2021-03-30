@@ -21,8 +21,7 @@
     },
     "BITMAPFILEHEADER": {
         "namespace": "Windows.Win32.Gdi.BITMAPFILEHEADER",
-        "comment": "The BITMAPFILEHEADER structure contains information about the type, size, and layout of a file that contains a DIB.",
-        "packing": 2
+        "comment": "The BITMAPFILEHEADER structure contains information about the type, size, and layout of a file that contains a DIB."
     },
     "BITMAPINFO": {
         "namespace": "Windows.Win32.Gdi.BITMAPINFO",
@@ -102,13 +101,11 @@
     },
     "DLGITEMTEMPLATE": {
         "namespace": "Windows.Win32.WindowsAndMessaging.DLGITEMTEMPLATE",
-        "comment": "Defines the dimensions and style of a control in a dialog box. One or more of these structures are combined with a DLGTEMPLATE structure to form a standard template for a dialog box.",
-        "packing": 2
+        "comment": "Defines the dimensions and style of a control in a dialog box. One or more of these structures are combined with a DLGTEMPLATE structure to form a standard template for a dialog box."
     },
     "DLGTEMPLATE": {
         "namespace": "Windows.Win32.WindowsAndMessaging.DLGTEMPLATE",
-        "comment": "Defines the dimensions and style of a dialog box. This structure, always the first in a standard template for a dialog box, also specifies the number of controls in the dialog box and therefore specifies the number of subsequent DLGITEMTEMPLATE structures in the template.",
-        "packing": 2
+        "comment": "Defines the dimensions and style of a dialog box. This structure, always the first in a standard template for a dialog box, also specifies the number of controls in the dialog box and therefore specifies the number of subsequent DLGITEMTEMPLATE structures in the template."
     },
     "DLLVERSIONINFO": {
         "namespace": "Windows.Win32.Shell.DLLVERSIONINFO",
@@ -156,8 +153,7 @@
     },
     "MCI_OPEN_PARMS": {
         "namespace": "Windows.Win32.CoreAudio.MCI_OPEN_PARMSW",
-        "comment": "The MCI_OPEN_PARMS structure contains information for the MCI_OPEN command.",
-        "packing": 4
+        "comment": "The MCI_OPEN_PARMS structure contains information for the MCI_OPEN command."
     },
     "MCI_PLAY_PARMS": {
         "namespace": "Windows.Win32.CoreAudio.MCI_PLAY_PARMS",
@@ -165,8 +161,7 @@
     },
     "MCI_SEEK_PARMS": {
         "namespace": "Windows.Win32.CoreAudio.MCI_SEEK_PARMS",
-        "comment": "The MCI_SEEK_PARMS structure contains positioning information for the MCI_SEEK command.",
-        "packing": 4
+        "comment": "The MCI_SEEK_PARMS structure contains positioning information for the MCI_SEEK command."
     },
     "MCI_STATUS_PARMS": {
         "namespace": "Windows.Win32.CoreAudio.MCI_STATUS_PARMS",
@@ -234,8 +229,7 @@
     },
     "PROPERTYKEY": {
         "namespace": "Windows.Win32.WindowsPropertiesSystem.PROPERTYKEY",
-        "comment": "Specifies the FMTID/PID identifier that programmatically identifies a property.",
-        "packing": 4
+        "comment": "Specifies the FMTID/PID identifier that programmatically identifies a property."
     },
     "RECT": {
         "namespace": "Windows.Win32.DisplayDevices.RECT",
@@ -267,8 +261,7 @@
     },
     "SHITEMID": {
         "namespace": "Windows.Win32.Shell.SHITEMID",
-        "comment": "Defines an item identifier.",
-        "packing": 1
+        "comment": "Defines an item identifier."
     },
     "SHQUERYRBINFO": {
         "namespace": "Windows.Win32.Shell.SHQUERYRBINFO",
@@ -312,8 +305,7 @@
     },
     "TASKDIALOG_BUTTON": {
         "namespace": "Windows.Win32.Controls.TASKDIALOG_BUTTON",
-        "comment": "The TASKDIALOG_BUTTON structure contains information used to display a button in a task dialog. The TASKDIALOGCONFIG structure uses this structure.",
-        "packing": 4
+        "comment": "The TASKDIALOG_BUTTON structure contains information used to display a button in a task dialog. The TASKDIALOGCONFIG structure uses this structure."
     },
     "TEXTMETRIC": {
         "namespace": "Windows.Win32.Gdi.TEXTMETRICW",
@@ -333,8 +325,7 @@
     },
     "WAVEFORMATEX": {
         "namespace": "Windows.Win32.Multimedia.WAVEFORMATEX",
-        "comment": "The WAVEFORMATEX structure defines the format of waveform-audio data. Only format information common to all waveform-audio data formats is included in this structure. For formats that require additional information, this structure is included as the first member in another structure, along with the additional information.",
-        "packing": 1
+        "comment": "The WAVEFORMATEX structure defines the format of waveform-audio data. Only format information common to all waveform-audio data formats is included in this structure. For formats that require additional information, this structure is included as the first member in another structure, along with the additional information."
     },
     "WAVEHDR": {
         "namespace": "Windows.Win32.Multimedia.WAVEHDR",

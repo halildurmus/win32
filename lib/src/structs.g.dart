@@ -709,7 +709,7 @@ class LOGPALETTE extends Struct {
 /// command.
 ///
 /// {@category Struct}
-@Packed(4)
+@Packed(1)
 class MCI_OPEN_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
@@ -724,6 +724,7 @@ class MCI_OPEN_PARMS extends Struct {
 /// MCI_PLAY command.
 ///
 /// {@category Struct}
+@Packed(1)
 class MCI_PLAY_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
@@ -737,7 +738,7 @@ class MCI_PLAY_PARMS extends Struct {
 /// MCI_SEEK command.
 ///
 /// {@category Struct}
-@Packed(4)
+@Packed(1)
 class MCI_SEEK_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
@@ -749,6 +750,7 @@ class MCI_SEEK_PARMS extends Struct {
 /// command.
 ///
 /// {@category Struct}
+@Packed(1)
 class MCI_STATUS_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
@@ -1070,7 +1072,6 @@ class PROCESS_INFORMATION extends Struct {
 /// property.
 ///
 /// {@category Struct}
-@Packed(4)
 class PROPERTYKEY extends Struct {
   external GUID fmtid;
   @Uint32()
@@ -1430,7 +1431,7 @@ class SYSTEMTIME extends Struct {
 /// structure.
 ///
 /// {@category Struct}
-@Packed(4)
+@Packed(1)
 class TASKDIALOG_BUTTON extends Struct {
   @Int32()
   external int nButtonID;
@@ -1570,6 +1571,7 @@ class WAVEFORMATEX extends Struct {
 /// waveform-audio buffer.
 ///
 /// {@category Struct}
+@Packed(1)
 class WAVEHDR extends Struct {
   external Pointer<Utf8> lpData;
   @Uint32()
