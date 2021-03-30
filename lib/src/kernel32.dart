@@ -2136,12 +2136,12 @@ int HeapFree(int hHeap, int dwFlags, Pointer lpMem) {
 /// );
 /// ```
 /// {@category kernel32}
-int InitializeProcThreadAttributeList(int lpAttributeList, int dwAttributeCount,
-    int dwFlags, Pointer<IntPtr> lpSize) {
+int InitializeProcThreadAttributeList(Pointer lpAttributeList,
+    int dwAttributeCount, int dwFlags, Pointer<IntPtr> lpSize) {
   final _InitializeProcThreadAttributeList = _kernel32.lookupFunction<
-      Int32 Function(IntPtr lpAttributeList, Uint32 dwAttributeCount,
+      Int32 Function(Pointer lpAttributeList, Uint32 dwAttributeCount,
           Uint32 dwFlags, Pointer<IntPtr> lpSize),
-      int Function(int lpAttributeList, int dwAttributeCount, int dwFlags,
+      int Function(Pointer lpAttributeList, int dwAttributeCount, int dwFlags,
           Pointer<IntPtr> lpSize)>('InitializeProcThreadAttributeList');
   return _InitializeProcThreadAttributeList(
       lpAttributeList, dwAttributeCount, dwFlags, lpSize);
@@ -3074,7 +3074,7 @@ int TransactNamedPipe(
 /// ```
 /// {@category kernel32}
 int UpdateProcThreadAttribute(
-    int lpAttributeList,
+    Pointer lpAttributeList,
     int dwFlags,
     int Attribute,
     Pointer lpValue,
@@ -3083,7 +3083,7 @@ int UpdateProcThreadAttribute(
     Pointer<IntPtr> lpReturnSize) {
   final _UpdateProcThreadAttribute = _kernel32.lookupFunction<
       Int32 Function(
-          IntPtr lpAttributeList,
+          Pointer lpAttributeList,
           Uint32 dwFlags,
           IntPtr Attribute,
           Pointer lpValue,
@@ -3091,7 +3091,7 @@ int UpdateProcThreadAttribute(
           Pointer lpPreviousValue,
           Pointer<IntPtr> lpReturnSize),
       int Function(
-          int lpAttributeList,
+          Pointer lpAttributeList,
           int dwFlags,
           int Attribute,
           Pointer lpValue,

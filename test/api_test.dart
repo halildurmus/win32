@@ -983,9 +983,12 @@ void main() {
     test('Can instantiate InitializeProcThreadAttributeList', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final InitializeProcThreadAttributeList = kernel32.lookupFunction<
-          Int32 Function(IntPtr lpAttributeList, Uint32 dwAttributeCount,
+          Int32 Function(Pointer lpAttributeList, Uint32 dwAttributeCount,
               Uint32 dwFlags, Pointer<IntPtr> lpSize),
-          int Function(int lpAttributeList, int dwAttributeCount, int dwFlags,
+          int Function(
+              Pointer lpAttributeList,
+              int dwAttributeCount,
+              int dwFlags,
               Pointer<IntPtr> lpSize)>('InitializeProcThreadAttributeList');
       expect(InitializeProcThreadAttributeList, isA<Function>());
     });
@@ -1425,7 +1428,7 @@ void main() {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final UpdateProcThreadAttribute = kernel32.lookupFunction<
           Int32 Function(
-              IntPtr lpAttributeList,
+              Pointer lpAttributeList,
               Uint32 dwFlags,
               IntPtr Attribute,
               Pointer lpValue,
@@ -1433,7 +1436,7 @@ void main() {
               Pointer lpPreviousValue,
               Pointer<IntPtr> lpReturnSize),
           int Function(
-              int lpAttributeList,
+              Pointer lpAttributeList,
               int dwFlags,
               int Attribute,
               Pointer lpValue,
