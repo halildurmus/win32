@@ -116,6 +116,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `sendinput.dart`   | Sends keyboard and mouse input to another window          |
 | `snake.dart`       | Snake game using various GDI features                     |
 | `sysinfo.dart`     | Examples of getting device information from native C APIs |
+| `taskdialog.dart`  | Demonstrates using modern task dialog boxes               |
 | `tetris\main.dart` | Port of an open-source Tetris game to Dart                |
 | `wallpaper.dart`   | Shows what wallpaper and background color are set         |
 | `window.dart`      | Enumerates open windows and basic window manipulation     |
