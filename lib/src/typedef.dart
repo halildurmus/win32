@@ -8,6 +8,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import '_base.dart';
+import 'classlayout.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'field.dart';
@@ -31,6 +32,8 @@ class TypeDef extends AttributeObject {
       flags & CorTypeAttr.tdInterface == CorTypeAttr.tdInterface;
 
   bool get isDelegate => parent?.typeName == 'System.MulticastDelegate';
+
+  ClassLayout get classLayout => ClassLayout(reader, token);
 
   /// Is the type a non-Windows Runtime type, such as System.Object or
   /// IInspectable?
@@ -186,8 +189,6 @@ class TypeDef extends AttributeObject {
       calloc.free(phEnum);
       calloc.free(rImpls);
       calloc.free(pcImpls);
-
-      // dispose phEnum crashes here, so leave it allocated
     }
   }
 

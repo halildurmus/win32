@@ -21,17 +21,21 @@ abstract class TokenObject {
   bool get isValidToken => reader.IsValidToken(token) == TRUE;
 
   bool get isGlobal {
-    final pIsGlobal = calloc<Int32>();
+    if (isValidToken) {
+      final pIsGlobal = calloc<Int32>();
 
-    try {
-      final hr = reader.IsGlobal(token, pIsGlobal);
-      if (SUCCEEDED(hr)) {
-        return pIsGlobal.value == 1;
-      } else {
-        throw WindowsException(hr);
+      try {
+        final hr = reader.IsGlobal(token, pIsGlobal);
+        if (SUCCEEDED(hr)) {
+          return pIsGlobal.value == 1;
+        } else {
+          throw WindowsException(hr);
+        }
+      } finally {
+        calloc.free(pIsGlobal);
       }
-    } finally {
-      calloc.free(pIsGlobal);
+    } else {
+      return false;
     }
   }
 
@@ -96,7 +100,7 @@ abstract class AttributeObject extends TokenObject {
   }
 
   /// Enumerate all attributes that this object has.
-  List<Attribute> get attributes {
+  List<Attribute> get customAttributes {
     final attributes = <Attribute>[];
 
     final phEnum = calloc<IntPtr>();

@@ -240,7 +240,7 @@ class Method extends AttributeObject {
     const nativeTypeInfoToken = 0x0A000004;
 
     for (final param in parameters) {
-      for (final attr in param.attributes) {
+      for (final attr in param.customAttributes) {
         if (attr.tokenType == nativeTypeInfoToken) {
           if (attr.signatureBlob[2] == 0x14) // ASCII
           {

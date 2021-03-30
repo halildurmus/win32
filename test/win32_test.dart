@@ -95,7 +95,7 @@ void main() {
     final api = typedef.findMethod('AddFontResourceW')!;
     final returnType = api.returnType;
 
-    expect(returnType.attributes.length, isZero);
+    expect(returnType.customAttributes.length, isZero);
   });
 
   test('Functions can correctly return an int type', () {
@@ -375,5 +375,28 @@ void main() {
 
   test('Scope contains an expected quantity of delegates', () {
     expect(scope.delegates.length, greaterThan(1000));
+  });
+
+  test('Packing instructions are available', () {
+    final packedStruct = scope['Windows.Win32.Gdi.BITMAPFILEHEADER']!;
+    expect(packedStruct.classLayout.packingAlignment, equals(2));
+    expect(packedStruct.classLayout.minimumSize, isZero);
+  });
+  test('Packing instructions are available 2', () {
+    final packedStruct = scope['Windows.Win32.Bluetooth.BTH_QUERY_SERVICE']!;
+    expect(packedStruct.classLayout.packingAlignment, equals(1));
+    expect(packedStruct.classLayout.minimumSize, isZero);
+  });
+
+  test('Packing instructions are unavailable for an unpacked class', () {
+    final packedStruct = scope['Windows.Win32.Shell.NOTIFYICONIDENTIFIER']!;
+    expect(packedStruct.classLayout.packingAlignment, isNull);
+    expect(packedStruct.classLayout.minimumSize, isNull);
+  });
+
+  test('No crash when calling GetClassLayout on an enum', () {
+    final packedStruct = scope['Windows.Win32.Shell.KNOWN_FOLDER_FLAG']!;
+    expect(packedStruct.classLayout.packingAlignment, isNull);
+    expect(packedStruct.classLayout.minimumSize, isNull);
   });
 }
