@@ -651,6 +651,14 @@ void main() {
               'GetCurrentProcess');
       expect(GetCurrentProcess, isA<Function>());
     });
+    test('Can instantiate GetDllDirectory', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetDllDirectory = kernel32.lookupFunction<
+          Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
+          int Function(
+              int nBufferLength, Pointer<Utf16> lpBuffer)>('GetDllDirectoryW');
+      expect(GetDllDirectory, isA<Function>());
+    });
     test('Can instantiate GetExitCodeProcess', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetExitCodeProcess = kernel32.lookupFunction<
@@ -746,6 +754,22 @@ void main() {
           IntPtr Function(Pointer<Utf16> lpModuleName),
           int Function(Pointer<Utf16> lpModuleName)>('GetModuleHandleW');
       expect(GetModuleHandle, isA<Function>());
+    });
+    test('Can instantiate GetNamedPipeClientProcessId', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetNamedPipeClientProcessId = kernel32.lookupFunction<
+          Int32 Function(IntPtr Pipe, Pointer<Uint32> ClientProcessId),
+          int Function(int Pipe,
+              Pointer<Uint32> ClientProcessId)>('GetNamedPipeClientProcessId');
+      expect(GetNamedPipeClientProcessId, isA<Function>());
+    });
+    test('Can instantiate GetNamedPipeClientSessionId', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetNamedPipeClientSessionId = kernel32.lookupFunction<
+          Int32 Function(IntPtr Pipe, Pointer<Uint32> ClientSessionId),
+          int Function(int Pipe,
+              Pointer<Uint32> ClientSessionId)>('GetNamedPipeClientSessionId');
+      expect(GetNamedPipeClientSessionId, isA<Function>());
     });
     test('Can instantiate GetNamedPipeInfo', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');

@@ -1114,6 +1114,11 @@
         "dllLibrary": "user32",
         "comment": "Retrieves the title or text associated with a control in a dialog box."
     },
+    "GetDllDirectory": {
+        "prototype": "DWORD GetDllDirectoryW(\n  DWORD  nBufferLength,\n  LPWSTR lpBuffer\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the application-specific portion of the search path used to locate DLLs for the application."
+    },
     "GetDoubleClickTime": {
         "prototype": "UINT GetDoubleClickTime();",
         "dllLibrary": "user32",
@@ -1354,6 +1359,16 @@
         "prototype": "int GetMouseMovePointsEx(\n  UINT             cbSize,\n  LPMOUSEMOVEPOINT lppt,\n  LPMOUSEMOVEPOINT lpptBuf,\n  int              nBufPoints,\n  DWORD            resolution\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves a history of up to 64 previous coordinates of the mouse or pen."
+    },
+    "GetNamedPipeClientProcessId": {
+        "prototype": "BOOL GetNamedPipeClientProcessId(\n  HANDLE Pipe,\n  PULONG ClientProcessId\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the client process identifier for the specified named pipe."
+    },
+    "GetNamedPipeClientSessionId": {
+        "prototype": "BOOL GetNamedPipeClientSessionId(\n  HANDLE Pipe,\n  PULONG ClientSessionId\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the client process identifier for the specified named pipe."
     },
     "GetNamedPipeInfo": {
         "prototype": "BOOL GetNamedPipeInfo(\n  HANDLE  hNamedPipe,\n  LPDWORD lpFlags,\n  LPDWORD lpOutBufferSize,\n  LPDWORD lpInBufferSize,\n  LPDWORD lpMaxInstances);",
