@@ -1594,6 +1594,17 @@ void main() {
           int Function(int hwnd)>('AddClipboardFormatListener');
       expect(AddClipboardFormatListener, isA<Function>());
     });
+    if (windowsBuildNumber >= 14393) {
+      test('Can instantiate AdjustWindowRectExForDpi', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final AdjustWindowRectExForDpi = user32.lookupFunction<
+            Int32 Function(Pointer<RECT> lpRect, Uint32 dwStyle, Int32 bMenu,
+                Uint32 dwExStyle, Uint32 dpi),
+            int Function(Pointer<RECT> lpRect, int dwStyle, int bMenu,
+                int dwExStyle, int dpi)>('AdjustWindowRectExForDpi');
+        expect(AdjustWindowRectExForDpi, isA<Function>());
+      });
+    }
     test('Can instantiate AnimateWindow', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final AnimateWindow = user32.lookupFunction<
@@ -1610,6 +1621,16 @@ void main() {
               Pointer<Utf16> lpNewItem)>('AppendMenuW');
       expect(AppendMenu, isA<Function>());
     });
+    if (windowsBuildNumber >= 14393) {
+      test('Can instantiate AreDpiAwarenessContextsEqual', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final AreDpiAwarenessContextsEqual = user32.lookupFunction<
+            Int32 Function(IntPtr dpiContextA, IntPtr dpiContextB),
+            int Function(int dpiContextA,
+                int dpiContextB)>('AreDpiAwarenessContextsEqual');
+        expect(AreDpiAwarenessContextsEqual, isA<Function>());
+      });
+    }
     test('Can instantiate BeginPaint', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final BeginPaint = user32.lookupFunction<
@@ -1892,6 +1913,15 @@ void main() {
               int hMenu, int uIDEnableItem, int uEnable)>('EnableMenuItem');
       expect(EnableMenuItem, isA<Function>());
     });
+    if (windowsBuildNumber >= 14393) {
+      test('Can instantiate EnableNonClientDpiScaling', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final EnableNonClientDpiScaling = user32.lookupFunction<
+            Int32 Function(IntPtr hwnd),
+            int Function(int hwnd)>('EnableNonClientDpiScaling');
+        expect(EnableNonClientDpiScaling, isA<Function>());
+      });
+    }
     test('Can instantiate EnableWindow', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final EnableWindow = user32.lookupFunction<
@@ -2022,6 +2052,15 @@ void main() {
           int Function(int vKey)>('GetAsyncKeyState');
       expect(GetAsyncKeyState, isA<Function>());
     });
+    if (windowsBuildNumber >= 14393) {
+      test('Can instantiate GetAwarenessFromDpiAwarenessContext', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetAwarenessFromDpiAwarenessContext = user32.lookupFunction<
+            Uint32 Function(IntPtr value),
+            int Function(int value)>('GetAwarenessFromDpiAwarenessContext');
+        expect(GetAwarenessFromDpiAwarenessContext, isA<Function>());
+      });
+    }
     test('Can instantiate GetCapture', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetCapture = user32
@@ -2130,6 +2169,24 @@ void main() {
               'GetDialogBaseUnits');
       expect(GetDialogBaseUnits, isA<Function>());
     });
+    if (windowsBuildNumber >= 14393) {
+      test('Can instantiate GetDialogControlDpiChangeBehavior', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetDialogControlDpiChangeBehavior = user32.lookupFunction<
+            Uint32 Function(IntPtr hWnd),
+            int Function(int hWnd)>('GetDialogControlDpiChangeBehavior');
+        expect(GetDialogControlDpiChangeBehavior, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 14393) {
+      test('Can instantiate GetDialogDpiChangeBehavior', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetDialogDpiChangeBehavior = user32.lookupFunction<
+            Uint32 Function(IntPtr hDlg),
+            int Function(int hDlg)>('GetDialogDpiChangeBehavior');
+        expect(GetDialogDpiChangeBehavior, isA<Function>());
+      });
+    }
     test('Can instantiate GetDlgItem', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetDlgItem = user32.lookupFunction<
@@ -2178,6 +2235,15 @@ void main() {
             Uint32 Function(IntPtr hwnd),
             int Function(int hwnd)>('GetDpiForWindow');
         expect(GetDpiForWindow, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 17134) {
+      test('Can instantiate GetDpiFromDpiAwarenessContext', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetDpiFromDpiAwarenessContext = user32.lookupFunction<
+            Uint32 Function(IntPtr value),
+            int Function(int value)>('GetDpiFromDpiAwarenessContext');
+        expect(GetDpiFromDpiAwarenessContext, isA<Function>());
       });
     }
     test('Can instantiate GetFocus', () {
@@ -2418,6 +2484,24 @@ void main() {
               Pointer<Int32> lpnTabStopPositions)>('GetTabbedTextExtentW');
       expect(GetTabbedTextExtent, isA<Function>());
     });
+    if (windowsBuildNumber >= 14393) {
+      test('Can instantiate GetThreadDpiAwarenessContext', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetThreadDpiAwarenessContext =
+            user32.lookupFunction<IntPtr Function(), int Function()>(
+                'GetThreadDpiAwarenessContext');
+        expect(GetThreadDpiAwarenessContext, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 17134) {
+      test('Can instantiate GetThreadDpiHostingBehavior', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetThreadDpiHostingBehavior =
+            user32.lookupFunction<Uint32 Function(), int Function()>(
+                'GetThreadDpiHostingBehavior');
+        expect(GetThreadDpiHostingBehavior, isA<Function>());
+      });
+    }
     test('Can instantiate GetTopWindow', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetTopWindow = user32.lookupFunction<IntPtr Function(IntPtr hWnd),
@@ -2469,6 +2553,24 @@ void main() {
               Pointer<Uint32> pdwAffinity)>('GetWindowDisplayAffinity');
       expect(GetWindowDisplayAffinity, isA<Function>());
     });
+    if (windowsBuildNumber >= 14393) {
+      test('Can instantiate GetWindowDpiAwarenessContext', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetWindowDpiAwarenessContext = user32.lookupFunction<
+            IntPtr Function(IntPtr hwnd),
+            int Function(int hwnd)>('GetWindowDpiAwarenessContext');
+        expect(GetWindowDpiAwarenessContext, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 17134) {
+      test('Can instantiate GetWindowDpiHostingBehavior', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final GetWindowDpiHostingBehavior = user32.lookupFunction<
+            Uint32 Function(IntPtr hwnd),
+            int Function(int hwnd)>('GetWindowDpiHostingBehavior');
+        expect(GetWindowDpiHostingBehavior, isA<Function>());
+      });
+    }
     test('Can instantiate GetWindowInfo', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetWindowInfo = user32.lookupFunction<
@@ -2656,6 +2758,15 @@ void main() {
           int Function(Pointer<RECT> lprc)>('IsRectEmpty');
       expect(IsRectEmpty, isA<Function>());
     });
+    if (windowsBuildNumber >= 14393) {
+      test('Can instantiate IsValidDpiAwarenessContext', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final IsValidDpiAwarenessContext = user32.lookupFunction<
+            Int32 Function(IntPtr value),
+            int Function(int value)>('IsValidDpiAwarenessContext');
+        expect(IsValidDpiAwarenessContext, isA<Function>());
+      });
+    }
     test('Can instantiate IsWindow', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final IsWindow = user32.lookupFunction<Int32 Function(IntPtr hWnd),
@@ -2746,6 +2857,16 @@ void main() {
               int hWnd, Pointer<POINT> lpPoint)>('LogicalToPhysicalPoint');
       expect(LogicalToPhysicalPoint, isA<Function>());
     });
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate LogicalToPhysicalPointForPerMonitorDPI', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final LogicalToPhysicalPointForPerMonitorDPI = user32.lookupFunction<
+                Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
+                int Function(int hWnd, Pointer<POINT> lpPoint)>(
+            'LogicalToPhysicalPointForPerMonitorDPI');
+        expect(LogicalToPhysicalPointForPerMonitorDPI, isA<Function>());
+      });
+    }
     test('Can instantiate MapDialogRect', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final MapDialogRect = user32.lookupFunction<
@@ -2860,6 +2981,16 @@ void main() {
               int hWnd, Pointer<POINT> lpPoint)>('PhysicalToLogicalPoint');
       expect(PhysicalToLogicalPoint, isA<Function>());
     });
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate PhysicalToLogicalPointForPerMonitorDPI', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final PhysicalToLogicalPointForPerMonitorDPI = user32.lookupFunction<
+                Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
+                int Function(int hWnd, Pointer<POINT> lpPoint)>(
+            'PhysicalToLogicalPointForPerMonitorDPI');
+        expect(PhysicalToLogicalPointForPerMonitorDPI, isA<Function>());
+      });
+    }
     test('Can instantiate PostMessage', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final PostMessage = user32.lookupFunction<
@@ -3047,6 +3178,26 @@ void main() {
           int Function(int X, int Y)>('SetCursorPos');
       expect(SetCursorPos, isA<Function>());
     });
+    if (windowsBuildNumber >= 15063) {
+      test('Can instantiate SetDialogControlDpiChangeBehavior', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final SetDialogControlDpiChangeBehavior = user32.lookupFunction<
+            Int32 Function(IntPtr hWnd, Uint32 mask, Uint32 values),
+            int Function(int hWnd, int mask,
+                int values)>('SetDialogControlDpiChangeBehavior');
+        expect(SetDialogControlDpiChangeBehavior, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 15063) {
+      test('Can instantiate SetDialogDpiChangeBehavior', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final SetDialogDpiChangeBehavior = user32.lookupFunction<
+            Int32 Function(IntPtr hDlg, Uint32 mask, Uint32 values),
+            int Function(
+                int hDlg, int mask, int values)>('SetDialogDpiChangeBehavior');
+        expect(SetDialogDpiChangeBehavior, isA<Function>());
+      });
+    }
     test('Can instantiate SetDlgItemInt', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final SetDlgItemInt = user32.lookupFunction<
@@ -3138,6 +3289,15 @@ void main() {
               'SetProcessDPIAware');
       expect(SetProcessDPIAware, isA<Function>());
     });
+    if (windowsBuildNumber >= 15063) {
+      test('Can instantiate SetProcessDpiAwarenessContext', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final SetProcessDpiAwarenessContext = user32.lookupFunction<
+            Int32 Function(IntPtr value),
+            int Function(int value)>('SetProcessDpiAwarenessContext');
+        expect(SetProcessDpiAwarenessContext, isA<Function>());
+      });
+    }
     if (windowsBuildNumber >= 14393) {
       test('Can instantiate SetProp', () {
         final user32 = DynamicLibrary.open('user32.dll');
@@ -3182,6 +3342,24 @@ void main() {
               Pointer<Uint32> lpaRgbValues)>('SetSysColors');
       expect(SetSysColors, isA<Function>());
     });
+    if (windowsBuildNumber >= 14393) {
+      test('Can instantiate SetThreadDpiAwarenessContext', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final SetThreadDpiAwarenessContext = user32.lookupFunction<
+            IntPtr Function(IntPtr dpiContext),
+            int Function(int dpiContext)>('SetThreadDpiAwarenessContext');
+        expect(SetThreadDpiAwarenessContext, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 17134) {
+      test('Can instantiate SetThreadDpiHostingBehavior', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final SetThreadDpiHostingBehavior = user32.lookupFunction<
+            Uint32 Function(Uint32 value),
+            int Function(int value)>('SetThreadDpiHostingBehavior');
+        expect(SetThreadDpiHostingBehavior, isA<Function>());
+      });
+    }
     test('Can instantiate SetTimer', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final SetTimer = user32.lookupFunction<
@@ -3294,6 +3472,17 @@ void main() {
               int fWinIni)>('SystemParametersInfoW');
       expect(SystemParametersInfo, isA<Function>());
     });
+    if (windowsBuildNumber >= 14393) {
+      test('Can instantiate SystemParametersInfoForDpi', () {
+        final user32 = DynamicLibrary.open('user32.dll');
+        final SystemParametersInfoForDpi = user32.lookupFunction<
+            Int32 Function(Uint32 uiAction, Uint32 uiParam, Pointer pvParam,
+                Uint32 fWinIni, Uint32 dpi),
+            int Function(int uiAction, int uiParam, Pointer pvParam,
+                int fWinIni, int dpi)>('SystemParametersInfoForDpi');
+        expect(SystemParametersInfoForDpi, isA<Function>());
+      });
+    }
     test('Can instantiate TabbedTextOut', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final TabbedTextOut = user32.lookupFunction<

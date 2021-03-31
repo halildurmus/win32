@@ -54,6 +54,31 @@ int AddClipboardFormatListener(int hwnd) {
   return _AddClipboardFormatListener(hwnd);
 }
 
+/// Calculates the required size of the window rectangle, based on the
+/// desired size of the client rectangle and the provided DPI. This window
+/// rectangle can then be passed to the CreateWindowEx function to create a
+/// window with a client area of the desired size.
+///
+/// ```c
+/// BOOL AdjustWindowRectExForDpi(
+///   LPRECT lpRect,
+///   DWORD  dwStyle,
+///   BOOL   bMenu,
+///   DWORD  dwExStyle,
+///   UINT   dpi
+/// );
+/// ```
+/// {@category user32}
+int AdjustWindowRectExForDpi(
+    Pointer<RECT> lpRect, int dwStyle, int bMenu, int dwExStyle, int dpi) {
+  final _AdjustWindowRectExForDpi = _user32.lookupFunction<
+      Int32 Function(Pointer<RECT> lpRect, Uint32 dwStyle, Int32 bMenu,
+          Uint32 dwExStyle, Uint32 dpi),
+      int Function(Pointer<RECT> lpRect, int dwStyle, int bMenu, int dwExStyle,
+          int dpi)>('AdjustWindowRectExForDpi');
+  return _AdjustWindowRectExForDpi(lpRect, dwStyle, bMenu, dwExStyle, dpi);
+}
+
 /// Enables you to produce special effects when showing or hiding windows.
 /// There are four types of animation: roll, slide, collapse or expand, and
 /// alpha-blended fade.
@@ -94,6 +119,23 @@ int AppendMenu(
       int Function(int hMenu, int uFlags, int uIDNewItem,
           Pointer<Utf16> lpNewItem)>('AppendMenuW');
   return _AppendMenu(hMenu, uFlags, uIDNewItem, lpNewItem);
+}
+
+/// Determines whether two DPI_AWARENESS_CONTEXT values are identical.
+///
+/// ```c
+/// BOOL AreDpiAwarenessContextsEqual(
+///   DPI_AWARENESS_CONTEXT dpiContextA,
+///   DPI_AWARENESS_CONTEXT dpiContextB
+/// );
+/// ```
+/// {@category user32}
+int AreDpiAwarenessContextsEqual(int dpiContextA, int dpiContextB) {
+  final _AreDpiAwarenessContextsEqual = _user32.lookupFunction<
+      Int32 Function(IntPtr dpiContextA, IntPtr dpiContextB),
+      int Function(
+          int dpiContextA, int dpiContextB)>('AreDpiAwarenessContextsEqual');
+  return _AreDpiAwarenessContextsEqual(dpiContextA, dpiContextB);
 }
 
 /// The BeginPaint function prepares the specified window for painting and
@@ -750,6 +792,23 @@ int EnableMenuItem(int hMenu, int uIDEnableItem, int uEnable) {
   return _EnableMenuItem(hMenu, uIDEnableItem, uEnable);
 }
 
+/// In high-DPI displays, enables automatic display scaling of the
+/// non-client area portions of the specified top-level window. Must be
+/// called during the initialization of that window.
+///
+/// ```c
+/// BOOL EnableNonClientDpiScaling(
+///   HWND hwnd
+/// );
+/// ```
+/// {@category user32}
+int EnableNonClientDpiScaling(int hwnd) {
+  final _EnableNonClientDpiScaling = _user32.lookupFunction<
+      Int32 Function(IntPtr hwnd),
+      int Function(int hwnd)>('EnableNonClientDpiScaling');
+  return _EnableNonClientDpiScaling(hwnd);
+}
+
 /// Enables or disables mouse and keyboard input to the specified window or
 /// control. When input is disabled, the window does not receive input such
 /// as mouse clicks and key presses. When input is enabled, the window
@@ -1059,6 +1118,21 @@ int GetAsyncKeyState(int vKey) {
   return _GetAsyncKeyState(vKey);
 }
 
+/// Retrieves the DPI_AWARENESS value from a DPI_AWARENESS_CONTEXT.
+///
+/// ```c
+/// DPI_AWARENESS GetAwarenessFromDpiAwarenessContext(
+///   DPI_AWARENESS_CONTEXT value
+/// );
+/// ```
+/// {@category user32}
+int GetAwarenessFromDpiAwarenessContext(int value) {
+  final _GetAwarenessFromDpiAwarenessContext = _user32.lookupFunction<
+      Uint32 Function(IntPtr value),
+      int Function(int value)>('GetAwarenessFromDpiAwarenessContext');
+  return _GetAwarenessFromDpiAwarenessContext(value);
+}
+
 /// Retrieves a handle to the window (if any) that has captured the mouse.
 /// Only one window at a time can capture the mouse; this window receives
 /// mouse input whether or not the cursor is within its borders.
@@ -1307,6 +1381,39 @@ int GetDialogBaseUnits() {
   return _GetDialogBaseUnits();
 }
 
+/// Retrieves and per-monitor DPI scaling behavior overrides of a child
+/// window in a dialog.
+///
+/// ```c
+/// DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS GetDialogControlDpiChangeBehavior(
+///   HWND hWnd
+/// );
+/// ```
+/// {@category user32}
+int GetDialogControlDpiChangeBehavior(int hWnd) {
+  final _GetDialogControlDpiChangeBehavior = _user32.lookupFunction<
+      Uint32 Function(IntPtr hWnd),
+      int Function(int hWnd)>('GetDialogControlDpiChangeBehavior');
+  return _GetDialogControlDpiChangeBehavior(hWnd);
+}
+
+/// Returns the flags that might have been set on a given dialog by an
+/// earlier call to SetDialogDpiChangeBehavior. If that function was never
+/// called on the dialog, the return value will be zero.
+///
+/// ```c
+/// DIALOG_DPI_CHANGE_BEHAVIORS GetDialogDpiChangeBehavior(
+///   HWND hDlg
+/// );
+/// ```
+/// {@category user32}
+int GetDialogDpiChangeBehavior(int hDlg) {
+  final _GetDialogDpiChangeBehavior = _user32.lookupFunction<
+      Uint32 Function(IntPtr hDlg),
+      int Function(int hDlg)>('GetDialogDpiChangeBehavior');
+  return _GetDialogDpiChangeBehavior(hDlg);
+}
+
 /// Retrieves a handle to a control in the specified dialog box.
 ///
 /// ```c
@@ -1407,6 +1514,22 @@ int GetDpiForWindow(int hwnd) {
   final _GetDpiForWindow = _user32.lookupFunction<Uint32 Function(IntPtr hwnd),
       int Function(int hwnd)>('GetDpiForWindow');
   return _GetDpiForWindow(hwnd);
+}
+
+/// Retrieves the DPI from a given DPI_AWARENESS_CONTEXT handle. This
+/// enables you to determine the DPI of a thread without needed to examine
+/// a window created within that thread.
+///
+/// ```c
+/// UINT GetDpiFromDpiAwarenessContext(
+///   DPI_AWARENESS_CONTEXT value);
+/// ```
+/// {@category user32}
+int GetDpiFromDpiAwarenessContext(int value) {
+  final _GetDpiFromDpiAwarenessContext = _user32.lookupFunction<
+      Uint32 Function(IntPtr value),
+      int Function(int value)>('GetDpiFromDpiAwarenessContext');
+  return _GetDpiFromDpiAwarenessContext(value);
 }
 
 /// Retrieves the handle to the window that has the keyboard focus, if the
@@ -1938,6 +2061,32 @@ int GetTabbedTextExtent(int hdc, Pointer<Utf16> lpString, int chCount,
       hdc, lpString, chCount, nTabPositions, lpnTabStopPositions);
 }
 
+/// Gets the DPI_AWARENESS_CONTEXT for the current thread.
+///
+/// ```c
+/// DPI_AWARENESS_CONTEXT GetThreadDpiAwarenessContext();
+/// ```
+/// {@category user32}
+int GetThreadDpiAwarenessContext() {
+  final _GetThreadDpiAwarenessContext =
+      _user32.lookupFunction<IntPtr Function(), int Function()>(
+          'GetThreadDpiAwarenessContext');
+  return _GetThreadDpiAwarenessContext();
+}
+
+/// Retrieves the DPI_HOSTING_BEHAVIOR from the current thread.
+///
+/// ```c
+/// DPI_HOSTING_BEHAVIOR GetThreadDpiHostingBehavior();
+/// ```
+/// {@category user32}
+int GetThreadDpiHostingBehavior() {
+  final _GetThreadDpiHostingBehavior =
+      _user32.lookupFunction<Uint32 Function(), int Function()>(
+          'GetThreadDpiHostingBehavior');
+  return _GetThreadDpiHostingBehavior();
+}
+
 /// Examines the Z order of the child windows associated with the specified
 /// parent window and retrieves a handle to the child window at the top of
 /// the Z order.
@@ -2067,6 +2216,34 @@ int GetWindowDisplayAffinity(int hWnd, Pointer<Uint32> pdwAffinity) {
       int Function(
           int hWnd, Pointer<Uint32> pdwAffinity)>('GetWindowDisplayAffinity');
   return _GetWindowDisplayAffinity(hWnd, pdwAffinity);
+}
+
+/// Returns the DPI_AWARENESS_CONTEXT associated with a window.
+///
+/// ```c
+/// DPI_AWARENESS_CONTEXT GetWindowDpiAwarenessContext(
+///   HWND hwnd);
+/// ```
+/// {@category user32}
+int GetWindowDpiAwarenessContext(int hwnd) {
+  final _GetWindowDpiAwarenessContext = _user32.lookupFunction<
+      IntPtr Function(IntPtr hwnd),
+      int Function(int hwnd)>('GetWindowDpiAwarenessContext');
+  return _GetWindowDpiAwarenessContext(hwnd);
+}
+
+/// Returns the DPI_HOSTING_BEHAVIOR of the specified window.
+///
+/// ```c
+/// DPI_HOSTING_BEHAVIOR GetWindowDpiHostingBehavior(
+///   HWND hwnd);
+/// ```
+/// {@category user32}
+int GetWindowDpiHostingBehavior(int hwnd) {
+  final _GetWindowDpiHostingBehavior = _user32.lookupFunction<
+      Uint32 Function(IntPtr hwnd),
+      int Function(int hwnd)>('GetWindowDpiHostingBehavior');
+  return _GetWindowDpiHostingBehavior(hwnd);
 }
 
 /// Retrieves information about the specified window.
@@ -2528,6 +2705,21 @@ int IsRectEmpty(Pointer<RECT> lprc) {
   return _IsRectEmpty(lprc);
 }
 
+/// Determines if a specified DPI_AWARENESS_CONTEXT is valid and supported
+/// by the current system.
+///
+/// ```c
+/// BOOL IsValidDpiAwarenessContext(
+///   DPI_AWARENESS_CONTEXT value);
+/// ```
+/// {@category user32}
+int IsValidDpiAwarenessContext(int value) {
+  final _IsValidDpiAwarenessContext = _user32.lookupFunction<
+      Int32 Function(IntPtr value),
+      int Function(int value)>('IsValidDpiAwarenessContext');
+  return _IsValidDpiAwarenessContext(value);
+}
+
 /// Determines whether the specified window handle identifies an existing
 /// window.
 ///
@@ -2733,6 +2925,25 @@ int LogicalToPhysicalPoint(int hWnd, Pointer<POINT> lpPoint) {
       Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
       int Function(int hWnd, Pointer<POINT> lpPoint)>('LogicalToPhysicalPoint');
   return _LogicalToPhysicalPoint(hWnd, lpPoint);
+}
+
+/// Converts a point in a window from logical coordinates into physical
+/// coordinates, regardless of the dots per inch (dpi) awareness of the
+/// caller.
+///
+/// ```c
+/// BOOL LogicalToPhysicalPointForPerMonitorDPI(
+///   HWND    hWnd,
+///   LPPOINT lpPoint
+/// );
+/// ```
+/// {@category user32}
+int LogicalToPhysicalPointForPerMonitorDPI(int hWnd, Pointer<POINT> lpPoint) {
+  final _LogicalToPhysicalPointForPerMonitorDPI = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
+      int Function(int hWnd,
+          Pointer<POINT> lpPoint)>('LogicalToPhysicalPointForPerMonitorDPI');
+  return _LogicalToPhysicalPointForPerMonitorDPI(hWnd, lpPoint);
 }
 
 /// Converts the specified dialog box units to screen units (pixels). The
@@ -3024,6 +3235,25 @@ int PhysicalToLogicalPoint(int hWnd, Pointer<POINT> lpPoint) {
       Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
       int Function(int hWnd, Pointer<POINT> lpPoint)>('PhysicalToLogicalPoint');
   return _PhysicalToLogicalPoint(hWnd, lpPoint);
+}
+
+/// Converts a point in a window from physical coordinates into logical
+/// coordinates, regardless of the dots per inch (dpi) awareness of the
+/// caller.
+///
+/// ```c
+/// BOOL PhysicalToLogicalPointForPerMonitorDPI(
+///   HWND    hWnd,
+///   LPPOINT lpPoint
+/// );
+/// ```
+/// {@category user32}
+int PhysicalToLogicalPointForPerMonitorDPI(int hWnd, Pointer<POINT> lpPoint) {
+  final _PhysicalToLogicalPointForPerMonitorDPI = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Pointer<POINT> lpPoint),
+      int Function(int hWnd,
+          Pointer<POINT> lpPoint)>('PhysicalToLogicalPointForPerMonitorDPI');
+  return _PhysicalToLogicalPointForPerMonitorDPI(hWnd, lpPoint);
 }
 
 /// Places (posts) a message in the message queue associated with the
@@ -3477,6 +3707,48 @@ int SetCursorPos(int X, int Y) {
   return _SetCursorPos(X, Y);
 }
 
+/// Overrides the default per-monitor DPI scaling behavior of a child
+/// window in a dialog.
+///
+/// ```c
+/// BOOL SetDialogControlDpiChangeBehavior(
+///   HWND                                hWnd,
+///   DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS mask,
+///   DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS values
+/// );
+/// ```
+/// {@category user32}
+int SetDialogControlDpiChangeBehavior(int hWnd, int mask, int values) {
+  final _SetDialogControlDpiChangeBehavior = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Uint32 mask, Uint32 values),
+      int Function(
+          int hWnd, int mask, int values)>('SetDialogControlDpiChangeBehavior');
+  return _SetDialogControlDpiChangeBehavior(hWnd, mask, values);
+}
+
+/// Dialogs in Per-Monitor v2 contexts are automatically DPI scaled. This
+/// method lets you customize their DPI change behavior. This function
+/// works in conjunction with the DIALOG_DPI_CHANGE_BEHAVIORS enum in order
+/// to override the default DPI scaling behavior for dialogs. This function
+/// is called on a specified dialog, for which the specified flags are
+/// individually saved.
+///
+/// ```c
+/// BOOL SetDialogDpiChangeBehavior(
+///   HWND                        hDlg,
+///   DIALOG_DPI_CHANGE_BEHAVIORS mask,
+///   DIALOG_DPI_CHANGE_BEHAVIORS values
+/// );
+/// ```
+/// {@category user32}
+int SetDialogDpiChangeBehavior(int hDlg, int mask, int values) {
+  final _SetDialogDpiChangeBehavior = _user32.lookupFunction<
+      Int32 Function(IntPtr hDlg, Uint32 mask, Uint32 values),
+      int Function(
+          int hDlg, int mask, int values)>('SetDialogDpiChangeBehavior');
+  return _SetDialogDpiChangeBehavior(hDlg, mask, values);
+}
+
 /// Sets the text of a control in a dialog box to the string representation
 /// of a specified integer value.
 ///
@@ -3690,6 +3962,26 @@ int SetProcessDPIAware() {
   return _SetProcessDPIAware();
 }
 
+/// It is recommended that you set the process-default DPI awareness via
+/// application manifest. See Setting the default DPI awareness for a
+/// process for more information. Setting the process-default DPI awareness
+/// via API call can lead to unexpected application behavior. Sets the
+/// current process to a specified dots per inch (dpi) awareness context.
+/// The DPI awareness contexts are from the DPI_AWARENESS_CONTEXT value.
+///
+/// ```c
+/// BOOL SetProcessDpiAwarenessContext(
+///   DPI_AWARENESS_CONTEXT value
+/// );
+/// ```
+/// {@category user32}
+int SetProcessDpiAwarenessContext(int value) {
+  final _SetProcessDpiAwarenessContext = _user32.lookupFunction<
+      Int32 Function(IntPtr value),
+      int Function(int value)>('SetProcessDpiAwarenessContext');
+  return _SetProcessDpiAwarenessContext(value);
+}
+
 /// Adds a new entry or changes an existing entry in the property list of
 /// the specified window. The function adds a new entry to the list if the
 /// specified character string does not exist already in the list. The new
@@ -3793,6 +4085,38 @@ int SetSysColors(
       int Function(int cElements, Pointer<Int32> lpaElements,
           Pointer<Uint32> lpaRgbValues)>('SetSysColors');
   return _SetSysColors(cElements, lpaElements, lpaRgbValues);
+}
+
+/// Set the DPI awareness for the current thread to the provided value.
+///
+/// ```c
+/// DPI_AWARENESS_CONTEXT SetThreadDpiAwarenessContext(
+///   DPI_AWARENESS_CONTEXT dpiContext
+/// );
+/// ```
+/// {@category user32}
+int SetThreadDpiAwarenessContext(int dpiContext) {
+  final _SetThreadDpiAwarenessContext = _user32.lookupFunction<
+      IntPtr Function(IntPtr dpiContext),
+      int Function(int dpiContext)>('SetThreadDpiAwarenessContext');
+  return _SetThreadDpiAwarenessContext(dpiContext);
+}
+
+/// Sets the thread's DPI_HOSTING_BEHAVIOR. This behavior allows windows
+/// created in the thread to host child windows with a different
+/// DPI_AWARENESS_CONTEXT.
+///
+/// ```c
+/// DPI_HOSTING_BEHAVIOR SetThreadDpiHostingBehavior(
+///   DPI_HOSTING_BEHAVIOR value
+/// );
+/// ```
+/// {@category user32}
+int SetThreadDpiHostingBehavior(int value) {
+  final _SetThreadDpiHostingBehavior = _user32.lookupFunction<
+      Uint32 Function(Uint32 value),
+      int Function(int value)>('SetThreadDpiHostingBehavior');
+  return _SetThreadDpiHostingBehavior(value);
 }
 
 /// Creates a timer with the specified time-out value.
@@ -4064,6 +4388,29 @@ int SystemParametersInfo(
       int Function(int uiAction, int uiParam, Pointer pvParam,
           int fWinIni)>('SystemParametersInfoW');
   return _SystemParametersInfo(uiAction, uiParam, pvParam, fWinIni);
+}
+
+/// Retrieves the value of one of the system-wide parameters, taking into
+/// account the provided DPI value.
+///
+/// ```c
+/// BOOL SystemParametersInfoForDpi(
+///   UINT  uiAction,
+///   UINT  uiParam,
+///   PVOID pvParam,
+///   UINT  fWinIni,
+///   UINT  dpi
+/// );
+/// ```
+/// {@category user32}
+int SystemParametersInfoForDpi(
+    int uiAction, int uiParam, Pointer pvParam, int fWinIni, int dpi) {
+  final _SystemParametersInfoForDpi = _user32.lookupFunction<
+      Int32 Function(Uint32 uiAction, Uint32 uiParam, Pointer pvParam,
+          Uint32 fWinIni, Uint32 dpi),
+      int Function(int uiAction, int uiParam, Pointer pvParam, int fWinIni,
+          int dpi)>('SystemParametersInfoForDpi');
+  return _SystemParametersInfoForDpi(uiAction, uiParam, pvParam, fWinIni, dpi);
 }
 
 /// The TabbedTextOut function writes a character string at a specified

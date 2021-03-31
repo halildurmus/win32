@@ -4972,6 +4972,55 @@ const WDA_MONITOR = 0x00000001;
 const WDA_EXCLUDEFROMCAPTURE = 0x00000011;
 
 // -----------------------------------------------------------------------------
+/// High DPI constants & enumerations
+// -----------------------------------------------------------------------------
+
+/// Describes per-monitor DPI scaling behavior overrides for child windows
+/// within dialogs. The values in this enumeration are bitfields and can be
+/// combined.
+///
+/// {@category Enum}
+class DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS {
+  /// The default behavior of the dialog manager. The dialog managed will update
+  /// the font, size, and position of the child window on DPI changes.
+  static const DCDC_DEFAULT = 0x0000;
+
+  /// Prevents the dialog manager from sending an updated font to the child
+  /// window via WM_SETFONT in response to a DPI change.
+  static const DCDC_DISABLE_FONT_UPDATE = 0x0001;
+
+  /// Prevents the dialog manager from resizing and repositioning the child
+  /// window in response to a DPI change.
+  static const DCDC_DISABLE_RELAYOUT = 0x0002;
+}
+
+/// In Per Monitor v2 contexts, dialogs will automatically respond to DPI
+/// changes by resizing themselves and re-computing the positions of their child
+/// windows (here referred to as re-layouting). This enum works in conjunction
+/// with SetDialogDpiChangeBehavior in order to override the default DPI scaling
+/// behavior for dialogs.
+///
+/// {@category Enum}
+class DIALOG_DPI_CHANGE_BEHAVIORS {
+  /// The default behavior of the dialog manager. In response to a DPI change,
+  /// the dialog manager will re-layout each control, update the font on each
+  /// control, resize the dialog, and update the dialog's own font.
+  static const DDC_DEFAULT = 0x0000;
+
+  /// Prevents the dialog manager from responding to WM_GETDPISCALEDSIZE and
+  /// WM_DPICHANGED, disabling all default DPI scaling behavior.
+  static const DDC_DISABLE_ALL = 0x0001;
+
+  /// Prevents the dialog manager from resizing the dialog in response to a DPI
+  /// change.
+  static const DDC_DISABLE_RESIZE = 0x0002;
+
+  /// Prevents the dialog manager from re-layouting all of the dialogue's
+  /// immediate children HWNDs in response to a DPI change.
+  static const DDC_DISABLE_CONTROL_RELAYOUT = 0x0004;
+}
+
+// -----------------------------------------------------------------------------
 /// Bluetooth constants & enumerations
 // -----------------------------------------------------------------------------
 

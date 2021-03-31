@@ -29,6 +29,12 @@
         "dllLibrary": "kernel32",
         "comment": "The AddRefActCtx function increments the reference count of the specified activation context."
     },
+    "AdjustWindowRectExForDpi": {
+        "prototype": "BOOL AdjustWindowRectExForDpi(\n  LPRECT lpRect,\n  DWORD  dwStyle,\n  BOOL   bMenu,\n  DWORD  dwExStyle,\n  UINT   dpi\n);",
+        "dllLibrary": "user32",
+        "comment": "Calculates the required size of the window rectangle, based on the desired size of the client rectangle and the provided DPI. This window rectangle can then be passed to the CreateWindowEx function to create a window with a client area of the desired size.",
+        "minimumWindowsVersion": "WIN10_RS1"
+    },
     "AllocConsole": {
         "prototype": "BOOL WINAPI AllocConsole(void);",
         "dllLibrary": "kernel32",
@@ -63,6 +69,12 @@
         "prototype": "BOOL ArcTo(\n  HDC hdc,\n  int left,\n  int top,\n  int right,\n  int bottom,\n  int xr1,\n  int yr1,\n  int xr2,\n  int yr2\n);",
         "dllLibrary": "gdi32",
         "comment": "The ArcTo function draws an elliptical arc."
+    },
+    "AreDpiAwarenessContextsEqual": {
+        "prototype": "BOOL AreDpiAwarenessContextsEqual(\n  DPI_AWARENESS_CONTEXT dpiContextA,\n  DPI_AWARENESS_CONTEXT dpiContextB\n);",
+        "dllLibrary": "user32",
+        "comment": "Determines whether two DPI_AWARENESS_CONTEXT values are identical.",
+        "minimumWindowsVersion": "WIN10_RS1"
     },
     "AttachConsole": {
         "prototype": "BOOL WINAPI AttachConsole(\n  _In_ DWORD dwProcessId\n);",
@@ -678,6 +690,12 @@
         "dllLibrary": "user32",
         "comment": "Enables, disables, or grays the specified menu item."
     },
+    "EnableNonClientDpiScaling": {
+        "prototype": "BOOL EnableNonClientDpiScaling(\n  HWND hwnd\n);",
+        "dllLibrary": "user32",
+        "comment": "In high-DPI displays, enables automatic display scaling of the non-client area portions of the specified top-level window. Must be called during the initialization of that window.",
+        "minimumWindowsVersion": "WIN10_RS1"
+    },
     "EnableWindow": {
         "prototype": "BOOL EnableWindow(\n  HWND hWnd,\n  BOOL bEnable\n);",
         "dllLibrary": "user32",
@@ -928,6 +946,12 @@
         "dllLibrary": "user32",
         "comment": "Determines whether a key is up or down at the time the function is called, and whether the key was pressed after a previous call to GetAsyncKeyState."
     },
+    "GetAwarenessFromDpiAwarenessContext": {
+        "prototype": "DPI_AWARENESS GetAwarenessFromDpiAwarenessContext(\n  DPI_AWARENESS_CONTEXT value\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the DPI_AWARENESS value from a DPI_AWARENESS_CONTEXT.",
+        "minimumWindowsVersion": "WIN10_RS1"
+    },
     "GetBinaryType": {
         "prototype": "BOOL GetBinaryTypeW(\n  LPCWSTR lpApplicationName,\n  LPDWORD lpBinaryType);",
         "dllLibrary": "kernel32",
@@ -1058,6 +1082,18 @@
         "dllLibrary": "user32",
         "comment": "Retrieves the system's dialog base units, which are the average width and height of characters in the system font. For dialog boxes that use the system font, you can use these values to convert between dialog template units, as specified in dialog box templates, and pixels. For dialog boxes that do not use the system font, the conversion from dialog template units to pixels depends on the font used by the dialog box."
     },
+    "GetDialogControlDpiChangeBehavior": {
+        "prototype": "DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS GetDialogControlDpiChangeBehavior(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves and per-monitor DPI scaling behavior overrides of a child window in a dialog.",
+        "minimumWindowsVersion": "WIN10_RS1"
+    },
+    "GetDialogDpiChangeBehavior": {
+        "prototype": "DIALOG_DPI_CHANGE_BEHAVIORS GetDialogDpiChangeBehavior(\n  HWND hDlg\n);",
+        "dllLibrary": "user32",
+        "comment": "Returns the flags that might have been set on a given dialog by an earlier call to SetDialogDpiChangeBehavior. If that function was never called on the dialog, the return value will be zero.",
+        "minimumWindowsVersion": "WIN10_RS1"
+    },
     "GetDIBits": {
         "prototype": "int GetDIBits(\n  HDC          hdc,\n  HBITMAP      hbm,\n  UINT         start,\n  UINT         cLines,\n  LPVOID       lpvBits,\n  LPBITMAPINFO lpbmi,\n  UINT         usage\n);",
         "dllLibrary": "gdi32",
@@ -1100,6 +1136,12 @@
         "dllLibrary": "user32",
         "comment": "Returns the dots per inch (dpi) value for the associated window.",
         "minimumWindowsVersion": "WIN10_RS1"
+    },
+    "GetDpiFromDpiAwarenessContext": {
+        "prototype": "UINT GetDpiFromDpiAwarenessContext(\n  DPI_AWARENESS_CONTEXT value);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the DPI from a given DPI_AWARENESS_CONTEXT handle. This enables you to determine the DPI of a thread without needed to examine a window created within that thread.",
+        "minimumWindowsVersion": "WIN10_RS4"
     },
     "GetExitCodeProcess": {
         "prototype": "BOOL GetExitCodeProcess(\n  HANDLE  hProcess,\n  LPDWORD lpExitCode);",
@@ -1506,6 +1548,18 @@
         "dllLibrary": "gdi32",
         "comment": "The GetTextMetrics function fills the specified buffer with the metrics for the currently selected font."
     },
+    "GetThreadDpiAwarenessContext": {
+        "prototype": "DPI_AWARENESS_CONTEXT GetThreadDpiAwarenessContext();",
+        "dllLibrary": "user32",
+        "comment": "Gets the DPI_AWARENESS_CONTEXT for the current thread.",
+        "minimumWindowsVersion": "WIN10_RS1"
+    },
+    "GetThreadDpiHostingBehavior": {
+        "prototype": "DPI_HOSTING_BEHAVIOR GetThreadDpiHostingBehavior();",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the DPI_HOSTING_BEHAVIOR from the current thread.",
+        "minimumWindowsVersion": "WIN10_RS4"
+    },
     "GetThreadLocale": {
         "prototype": "LCID GetThreadLocale();",
         "dllLibrary": "kernel32",
@@ -1580,6 +1634,18 @@
         "prototype": "BOOL GetWindowDisplayAffinity(\n  HWND  hWnd,\n  DWORD *pdwAffinity\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves the current display affinity setting, from any process, for a given window."
+    },
+    "GetWindowDpiAwarenessContext": {
+        "prototype": "DPI_AWARENESS_CONTEXT GetWindowDpiAwarenessContext(\n  HWND hwnd);",
+        "dllLibrary": "user32",
+        "comment": "Returns the DPI_AWARENESS_CONTEXT associated with a window.",
+        "minimumWindowsVersion": "WIN10_RS1"
+    },
+    "GetWindowDpiHostingBehavior": {
+        "prototype": "DPI_HOSTING_BEHAVIOR GetWindowDpiHostingBehavior(\n  HWND hwnd);",
+        "dllLibrary": "user32",
+        "comment": "Returns the DPI_HOSTING_BEHAVIOR of the specified window.",
+        "minimumWindowsVersion": "WIN10_RS4"
     },
     "GetWindowInfo": {
         "prototype": "BOOL GetWindowInfo(\n  HWND hwnd,\n  PWINDOWINFO pwi\n);",
@@ -1756,6 +1822,12 @@
         "dllLibrary": "user32",
         "comment": "The IsRectEmpty function determines whether the specified rectangle is empty. An empty rectangle is one that has no area; that is, the coordinate of the right side is less than or equal to the coordinate of the left side, or the coordinate of the bottom side is less than or equal to the coordinate of the top side."
     },
+    "IsValidDpiAwarenessContext": {
+        "prototype": "BOOL IsValidDpiAwarenessContext(\n  DPI_AWARENESS_CONTEXT value);",
+        "dllLibrary": "user32",
+        "comment": "Determines if a specified DPI_AWARENESS_CONTEXT is valid and supported by the current system.",
+        "minimumWindowsVersion": "WIN10_RS1"
+    },
     "IsValidLocaleName": {
         "prototype": "BOOL IsValidLocaleName(\n  LPCWSTR lpLocaleName\n  );",
         "dllLibrary": "kernel32",
@@ -1851,6 +1923,12 @@
         "prototype": "BOOL LogicalToPhysicalPoint(\n  HWND    hWnd,\n  LPPOINT lpPoint\n);",
         "dllLibrary": "user32",
         "comment": "Converts the logical coordinates of a point in a window to physical coordinates."
+    },
+    "LogicalToPhysicalPointForPerMonitorDPI": {
+        "prototype": "BOOL LogicalToPhysicalPointForPerMonitorDPI(\n  HWND    hWnd,\n  LPPOINT lpPoint\n);",
+        "dllLibrary": "user32",
+        "comment": "Converts a point in a window from logical coordinates into physical coordinates, regardless of the dots per inch (dpi) awareness of the caller.",
+        "minimumWindowsVersion": "WIN81"
     },
     "MapDialogRect": {
         "prototype": "BOOL MapDialogRect(\n  HWND   hDlg,\n  LPRECT lpRect\n);",
@@ -1998,6 +2076,12 @@
         "prototype": "BOOL PhysicalToLogicalPoint(\n  HWND    hWnd,\n  LPPOINT lpPoint\n);",
         "dllLibrary": "user32",
         "comment": "Converts the physical coordinates of a point in a window to logical coordinates."
+    },
+    "PhysicalToLogicalPointForPerMonitorDPI": {
+        "prototype": "BOOL PhysicalToLogicalPointForPerMonitorDPI(\n  HWND    hWnd,\n  LPPOINT lpPoint\n);",
+        "dllLibrary": "user32",
+        "comment": "Converts a point in a window from physical coordinates into logical coordinates, regardless of the dots per inch (dpi) awareness of the caller.",
+        "minimumWindowsVersion": "WIN81"
     },
     "Pie": {
         "prototype": "BOOL Pie(\n  HDC hdc,\n  int left,\n  int top,\n  int right,\n  int bottom,\n  int xr1,\n  int yr1,\n  int xr2,\n  int yr2\n);",
@@ -2573,6 +2657,18 @@
         "dllLibrary": "user32",
         "comment": "Moves the cursor to the specified screen coordinates. If the new coordinates are not within the screen rectangle set by the most recent ClipCursor function call, the system automatically adjusts the coordinates so that the cursor stays within the rectangle."
     },
+    "SetDialogControlDpiChangeBehavior": {
+        "prototype": "BOOL SetDialogControlDpiChangeBehavior(\n  HWND                                hWnd,\n  DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS mask,\n  DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS values\n);",
+        "dllLibrary": "user32",
+        "comment": "Overrides the default per-monitor DPI scaling behavior of a child window in a dialog.",
+        "minimumWindowsVersion": "WIN10_RS2"
+    },
+    "SetDialogDpiChangeBehavior": {
+        "prototype": "BOOL SetDialogDpiChangeBehavior(\n  HWND                        hDlg,\n  DIALOG_DPI_CHANGE_BEHAVIORS mask,\n  DIALOG_DPI_CHANGE_BEHAVIORS values\n);",
+        "dllLibrary": "user32",
+        "comment": "Dialogs in Per-Monitor v2 contexts are automatically DPI scaled. This method lets you customize their DPI change behavior. This function works in conjunction with the DIALOG_DPI_CHANGE_BEHAVIORS enum in order to override the default DPI scaling behavior for dialogs. This function is called on a specified dialog, for which the specified flags are individually saved.",
+        "minimumWindowsVersion": "WIN10_RS2"
+    },
     "SetDlgItemInt": {
         "prototype": "BOOL SetDlgItemInt(\n  HWND hDlg,\n  int  nIDDlgItem,\n  UINT uValue,\n  BOOL bSigned\n);",
         "dllLibrary": "user32",
@@ -2719,6 +2815,12 @@
         "comment": "Sets the process-default DPI awareness level. This is equivalent to calling SetProcessDpiAwarenessContext with the corresponding DPI_AWARENESS_CONTEXT value.",
         "minimumWindowsVersion": "WIN81"
     },
+    "SetProcessDpiAwarenessContext": {
+        "prototype": "BOOL SetProcessDpiAwarenessContext(\n  DPI_AWARENESS_CONTEXT value\n);",
+        "dllLibrary": "user32",
+        "comment": "It is recommended that you set the process-default DPI awareness via application manifest. See Setting the default DPI awareness for a process for more information. Setting the process-default DPI awareness via API call can lead to unexpected application behavior. Sets the current process to a specified dots per inch (dpi) awareness context. The DPI awareness contexts are from the DPI_AWARENESS_CONTEXT value.",
+        "minimumWindowsVersion": "WIN10_RS2"
+    },
     "SetProp": {
         "prototype": "BOOL SetPropW(\n  HWND    hWnd,\n  LPCWSTR lpString,\n  HANDLE  hData\n);",
         "dllLibrary": "user32",
@@ -2759,6 +2861,18 @@
         "prototype": "COLORREF SetTextColor(\n  HDC      hdc,\n  COLORREF color\n);",
         "dllLibrary": "gdi32",
         "comment": "The SetTextColor function sets the text color for the specified device context to the specified color."
+    },
+    "SetThreadDpiAwarenessContext": {
+        "prototype": "DPI_AWARENESS_CONTEXT SetThreadDpiAwarenessContext(\n  DPI_AWARENESS_CONTEXT dpiContext\n);",
+        "dllLibrary": "user32",
+        "comment": "Set the DPI awareness for the current thread to the provided value.",
+        "minimumWindowsVersion": "WIN10_RS1"
+    },
+    "SetThreadDpiHostingBehavior": {
+        "prototype": "DPI_HOSTING_BEHAVIOR SetThreadDpiHostingBehavior(\n  DPI_HOSTING_BEHAVIOR value\n);",
+        "dllLibrary": "user32",
+        "comment": "Sets the thread's DPI_HOSTING_BEHAVIOR. This behavior allows windows created in the thread to host child windows with a different DPI_AWARENESS_CONTEXT.",
+        "minimumWindowsVersion": "WIN10_RS4"
     },
     "SetThreadExecutionState": {
         "prototype": "EXECUTION_STATE SetThreadExecutionState(\n  EXECUTION_STATE esFlags\n  );",
@@ -3081,6 +3195,12 @@
         "prototype": "BOOL SystemParametersInfoW(\n  UINT  uiAction,\n  UINT  uiParam,\n  PVOID pvParam,\n  UINT  fWinIni\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves or sets the value of one of the system-wide parameters. This function can also update the user profile while setting a parameter."
+    },
+    "SystemParametersInfoForDpi": {
+        "prototype": "BOOL SystemParametersInfoForDpi(\n  UINT  uiAction,\n  UINT  uiParam,\n  PVOID pvParam,\n  UINT  fWinIni,\n  UINT  dpi\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the value of one of the system-wide parameters, taking into account the provided DPI value.",
+        "minimumWindowsVersion": "WIN10_RS1"
     },
     "TabbedTextOut": {
         "prototype": "LONG TabbedTextOutW(\n  HDC       hdc,\n  int       x,\n  int       y,\n  LPCWSTR   lpString,\n  int       chCount,\n  int       nTabPositions,\n  const INT *lpnTabStopPositions,\n  int       nTabOrigin\n);",
