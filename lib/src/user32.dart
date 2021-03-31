@@ -952,6 +952,25 @@ int FillRect(int hDC, Pointer<RECT> lprc, int hbr) {
   return _FillRect(hDC, lprc, hbr);
 }
 
+/// Retrieves a handle to the top-level window whose class name and window
+/// name match the specified strings. This function does not search child
+/// windows. This function does not perform a case-sensitive search.
+///
+/// ```c
+/// HWND FindWindowW(
+///   LPCWSTR lpClassName,
+///   LPCWSTR lpWindowName
+/// );
+/// ```
+/// {@category user32}
+int FindWindow(Pointer<Utf16> lpClassName, Pointer<Utf16> lpWindowName) {
+  final _FindWindow = _user32.lookupFunction<
+      IntPtr Function(Pointer<Utf16> lpClassName, Pointer<Utf16> lpWindowName),
+      int Function(Pointer<Utf16> lpClassName,
+          Pointer<Utf16> lpWindowName)>('FindWindowW');
+  return _FindWindow(lpClassName, lpWindowName);
+}
+
 /// Retrieves a handle to a window whose class name and window name match
 /// the specified strings. The function searches child windows, beginning
 /// with the one following the specified child window. This function does
@@ -1052,6 +1071,48 @@ int GetCapture() {
   final _GetCapture =
       _user32.lookupFunction<IntPtr Function(), int Function()>('GetCapture');
   return _GetCapture();
+}
+
+/// Retrieves information about a window class.
+///
+/// ```c
+/// BOOL GetClassInfoW(
+///   HINSTANCE   hInstance,
+///   LPCWSTR     lpClassName,
+///   LPWNDCLASSW lpWndClass
+/// );
+/// ```
+/// {@category user32}
+int GetClassInfo(
+    int hInstance, Pointer<Utf16> lpClassName, Pointer<WNDCLASS> lpWndClass) {
+  final _GetClassInfo = _user32.lookupFunction<
+      Int32 Function(IntPtr hInstance, Pointer<Utf16> lpClassName,
+          Pointer<WNDCLASS> lpWndClass),
+      int Function(int hInstance, Pointer<Utf16> lpClassName,
+          Pointer<WNDCLASS> lpWndClass)>('GetClassInfoW');
+  return _GetClassInfo(hInstance, lpClassName, lpWndClass);
+}
+
+/// Retrieves information about a window class, including a handle to the
+/// small icon associated with the window class. The GetClassInfo function
+/// does not retrieve a handle to the small icon.
+///
+/// ```c
+/// BOOL GetClassInfoExW(
+///   HINSTANCE     hInstance,
+///   LPCWSTR       lpszClass,
+///   LPWNDCLASSEXW lpwcx
+/// );
+/// ```
+/// {@category user32}
+int GetClassInfoEx(
+    int hInstance, Pointer<Utf16> lpszClass, Pointer<WNDCLASSEX> lpwcx) {
+  final _GetClassInfoEx = _user32.lookupFunction<
+      Int32 Function(IntPtr hInstance, Pointer<Utf16> lpszClass,
+          Pointer<WNDCLASSEX> lpwcx),
+      int Function(int hInstance, Pointer<Utf16> lpszClass,
+          Pointer<WNDCLASSEX> lpwcx)>('GetClassInfoExW');
+  return _GetClassInfoEx(hInstance, lpszClass, lpwcx);
 }
 
 /// Retrieves the coordinates of a window's client area. The client
@@ -2045,6 +2106,23 @@ int GetWindowModuleFileName(
   return _GetWindowModuleFileName(hwnd, pszFileName, cchFileNameMax);
 }
 
+/// Retrieves the show state and the restored, minimized, and maximized
+/// positions of the specified window.
+///
+/// ```c
+/// BOOL GetWindowPlacement(
+///   HWND            hWnd,
+///   WINDOWPLACEMENT *lpwndpl);
+/// ```
+/// {@category user32}
+int GetWindowPlacement(int hWnd, Pointer<WINDOWPLACEMENT> lpwndpl) {
+  final _GetWindowPlacement = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Pointer<WINDOWPLACEMENT> lpwndpl),
+      int Function(
+          int hWnd, Pointer<WINDOWPLACEMENT> lpwndpl)>('GetWindowPlacement');
+  return _GetWindowPlacement(hWnd, lpwndpl);
+}
+
 /// Retrieves the dimensions of the bounding rectangle of the specified
 /// window. The dimensions are given in screen coordinates that are
 /// relative to the upper-left corner of the screen.
@@ -2197,6 +2275,20 @@ int InflateRect(Pointer<RECT> lprc, int dx, int dy) {
   return _InflateRect(lprc, dx, dy);
 }
 
+/// Determines whether the current window procedure is processing a message
+/// that was sent from another thread (in the same process or a different
+/// process) by a call to the SendMessage function.
+///
+/// ```c
+/// BOOL InSendMessage();
+/// ```
+/// {@category user32}
+int InSendMessage() {
+  final _InSendMessage =
+      _user32.lookupFunction<Int32 Function(), int Function()>('InSendMessage');
+  return _InSendMessage();
+}
+
 /// Inserts a new menu item into a menu, moving other items down the menu.
 ///
 /// ```c
@@ -2322,6 +2414,26 @@ int InvertRect(int hDC, Pointer<RECT> lprc) {
   return _InvertRect(hDC, lprc);
 }
 
+/// Determines whether a window is a child window or descendant window of a
+/// specified parent window. A child window is the direct descendant of a
+/// specified parent window if that parent window is in the chain of parent
+/// windows; the chain of parent windows leads from the original overlapped
+/// or pop-up window to the child window.
+///
+/// ```c
+/// BOOL IsChild(
+///   HWND hWndParent,
+///   HWND hWnd
+/// );
+/// ```
+/// {@category user32}
+int IsChild(int hWndParent, int hWnd) {
+  final _IsChild = _user32.lookupFunction<
+      Int32 Function(IntPtr hWndParent, IntPtr hWnd),
+      int Function(int hWndParent, int hWnd)>('IsChild');
+  return _IsChild(hWndParent, hWnd);
+}
+
 /// Determines whether the clipboard contains data in the specified format.
 ///
 /// ```c
@@ -2354,6 +2466,21 @@ int IsDialogMessage(int hDlg, Pointer<MSG> lpMsg) {
   return _IsDialogMessage(hDlg, lpMsg);
 }
 
+/// Determines whether the calling thread is already a GUI thread. It can
+/// also optionally convert the thread to a GUI thread.
+///
+/// ```c
+/// BOOL IsGUIThread(
+///   BOOL bConvert
+/// );
+/// ```
+/// {@category user32}
+int IsGUIThread(int bConvert) {
+  final _IsGUIThread = _user32.lookupFunction<Int32 Function(Int32 bConvert),
+      int Function(int bConvert)>('IsGUIThread');
+  return _IsGUIThread(bConvert);
+}
+
 /// Determines whether the specified window is minimized (iconic).
 ///
 /// ```c
@@ -2366,6 +2493,20 @@ int IsIconic(int hWnd) {
   final _IsIconic = _user32.lookupFunction<Int32 Function(IntPtr hWnd),
       int Function(int hWnd)>('IsIconic');
   return _IsIconic(hWnd);
+}
+
+/// Determines whether the current process is dots per inch (dpi) aware
+/// such that it adjusts the sizes of UI elements to compensate for the dpi
+/// setting.
+///
+/// ```c
+/// BOOL IsProcessDPIAware();
+/// ```
+/// {@category user32}
+int IsProcessDPIAware() {
+  final _IsProcessDPIAware = _user32
+      .lookupFunction<Int32 Function(), int Function()>('IsProcessDPIAware');
+  return _IsProcessDPIAware();
 }
 
 /// The IsRectEmpty function determines whether the specified rectangle is
@@ -2387,6 +2528,20 @@ int IsRectEmpty(Pointer<RECT> lprc) {
   return _IsRectEmpty(lprc);
 }
 
+/// Determines whether the specified window handle identifies an existing
+/// window.
+///
+/// ```c
+/// BOOL IsWindow(
+///   HWND hWnd);
+/// ```
+/// {@category user32}
+int IsWindow(int hWnd) {
+  final _IsWindow = _user32.lookupFunction<Int32 Function(IntPtr hWnd),
+      int Function(int hWnd)>('IsWindow');
+  return _IsWindow(hWnd);
+}
+
 /// Determines whether the specified window is enabled for mouse and
 /// keyboard input.
 ///
@@ -2400,6 +2555,19 @@ int IsWindowEnabled(int hWnd) {
   final _IsWindowEnabled = _user32.lookupFunction<Int32 Function(IntPtr hWnd),
       int Function(int hWnd)>('IsWindowEnabled');
   return _IsWindowEnabled(hWnd);
+}
+
+/// Determines whether the specified window is a native Unicode window.
+///
+/// ```c
+/// BOOL IsWindowUnicode(
+///   HWND hWnd);
+/// ```
+/// {@category user32}
+int IsWindowUnicode(int hWnd) {
+  final _IsWindowUnicode = _user32.lookupFunction<Int32 Function(IntPtr hWnd),
+      int Function(int hWnd)>('IsWindowUnicode');
+  return _IsWindowUnicode(hWnd);
 }
 
 /// Determines the visibility state of the specified window.
@@ -2971,6 +3139,21 @@ int RegisterClass(Pointer<WNDCLASS> lpWndClass) {
   return _RegisterClass(lpWndClass);
 }
 
+/// Registers a window class for subsequent use in calls to the
+/// CreateWindow or CreateWindowEx function.
+///
+/// ```c
+/// ATOM RegisterClassExW(
+///   const WNDCLASSEXW *unnamedParam1);
+/// ```
+/// {@category user32}
+int RegisterClassEx(Pointer<WNDCLASSEX> param0) {
+  final _RegisterClassEx = _user32.lookupFunction<
+      Uint16 Function(Pointer<WNDCLASSEX> param0),
+      int Function(Pointer<WNDCLASSEX> param0)>('RegisterClassExW');
+  return _RegisterClassEx(param0);
+}
+
 /// Registers a new clipboard format. This format can then be used as a
 /// valid clipboard format.
 ///
@@ -3404,6 +3587,25 @@ int SetKeyboardState(Pointer<Uint8> lpKeyState) {
   return _SetKeyboardState(lpKeyState);
 }
 
+/// Sets the opacity and transparency color key of a layered window.
+///
+/// ```c
+/// BOOL SetLayeredWindowAttributes(
+///   HWND     hwnd,
+///   COLORREF crKey,
+///   BYTE     bAlpha,
+///   DWORD    dwFlags
+/// );
+/// ```
+/// {@category user32}
+int SetLayeredWindowAttributes(int hwnd, int crKey, int bAlpha, int dwFlags) {
+  final _SetLayeredWindowAttributes = _user32.lookupFunction<
+      Int32 Function(IntPtr hwnd, Uint32 crKey, Uint8 bAlpha, Uint32 dwFlags),
+      int Function(int hwnd, int crKey, int bAlpha,
+          int dwFlags)>('SetLayeredWindowAttributes');
+  return _SetLayeredWindowAttributes(hwnd, crKey, bAlpha, dwFlags);
+}
+
 /// Sets information for a specified menu.
 ///
 /// ```c
@@ -3441,6 +3643,25 @@ int SetMenuItemInfo(
   return _SetMenuItemInfo(hmenu, item, fByPositon, lpmii);
 }
 
+/// Sets the extra message information for the current thread. Extra
+/// message information is an application- or driver-defined value
+/// associated with the current thread's message queue. An application can
+/// use the GetMessageExtraInfo function to retrieve a thread's extra
+/// message information.
+///
+/// ```c
+/// LPARAM SetMessageExtraInfo(
+///   LPARAM lParam
+/// );
+/// ```
+/// {@category user32}
+int SetMessageExtraInfo(int lParam) {
+  final _SetMessageExtraInfo = _user32.lookupFunction<
+      IntPtr Function(IntPtr lParam),
+      int Function(int lParam)>('SetMessageExtraInfo');
+  return _SetMessageExtraInfo(lParam);
+}
+
 /// Changes the parent window of the specified child window.
 ///
 /// ```c
@@ -3467,6 +3688,27 @@ int SetProcessDPIAware() {
   final _SetProcessDPIAware = _user32
       .lookupFunction<Int32 Function(), int Function()>('SetProcessDPIAware');
   return _SetProcessDPIAware();
+}
+
+/// Adds a new entry or changes an existing entry in the property list of
+/// the specified window. The function adds a new entry to the list if the
+/// specified character string does not exist already in the list. The new
+/// entry contains the string and the handle. Otherwise, the function
+/// replaces the string's current handle with the specified handle.
+///
+/// ```c
+/// BOOL SetPropW(
+///   HWND    hWnd,
+///   LPCWSTR lpString,
+///   HANDLE  hData
+/// );
+/// ```
+/// {@category user32}
+int SetProp(int hWnd, Pointer<Utf16> lpString, int hData) {
+  final _SetProp = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Pointer<Utf16> lpString, IntPtr hData),
+      int Function(int hWnd, Pointer<Utf16> lpString, int hData)>('SetPropW');
+  return _SetProp(hWnd, lpString, hData);
 }
 
 /// The SetRect function sets the coordinates of the specified rectangle.
@@ -3574,6 +3816,22 @@ int SetTimer(int hWnd, int nIDEvent, int uElapse,
   return _SetTimer(hWnd, nIDEvent, uElapse, lpTimerFunc);
 }
 
+/// Specifies where the content of the window can be displayed.
+///
+/// ```c
+/// BOOL SetWindowDisplayAffinity(
+///   HWND  hWnd,
+///   DWORD dwAffinity
+/// );
+/// ```
+/// {@category user32}
+int SetWindowDisplayAffinity(int hWnd, int dwAffinity) {
+  final _SetWindowDisplayAffinity = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Uint32 dwAffinity),
+      int Function(int hWnd, int dwAffinity)>('SetWindowDisplayAffinity');
+  return _SetWindowDisplayAffinity(hWnd, dwAffinity);
+}
+
 /// Changes an attribute of the specified window. The function also sets a
 /// value at the specified offset in the extra window memory.
 ///
@@ -3590,6 +3848,24 @@ int SetWindowLongPtr(int hWnd, int nIndex, int dwNewLong) {
       IntPtr Function(IntPtr hWnd, Uint32 nIndex, IntPtr dwNewLong),
       int Function(int hWnd, int nIndex, int dwNewLong)>('SetWindowLongPtrW');
   return _SetWindowLongPtr(hWnd, nIndex, dwNewLong);
+}
+
+/// Sets the show state and the restored, minimized, and maximized
+/// positions of the specified window.
+///
+/// ```c
+/// BOOL SetWindowPlacement(
+///   HWND                  hWnd,
+///   const WINDOWPLACEMENT *lpwndpl
+/// );
+/// ```
+/// {@category user32}
+int SetWindowPlacement(int hWnd, Pointer<WINDOWPLACEMENT> lpwndpl) {
+  final _SetWindowPlacement = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Pointer<WINDOWPLACEMENT> lpwndpl),
+      int Function(
+          int hWnd, Pointer<WINDOWPLACEMENT> lpwndpl)>('SetWindowPlacement');
+  return _SetWindowPlacement(hWnd, lpwndpl);
 }
 
 /// Changes the size, position, and Z order of a child, pop-up, or
@@ -4103,6 +4379,27 @@ int UnregisterPowerSettingNotification(int Handle) {
       Int32 Function(IntPtr Handle),
       int Function(int Handle)>('UnregisterPowerSettingNotification');
   return _UnregisterPowerSettingNotification(Handle);
+}
+
+/// Updates the position, size, shape, content, and translucency of a
+/// layered window.
+///
+/// ```c
+/// BOOL WINAPI UpdateLayeredWindowIndirect(
+///   HWND hwnd,
+///   const UPDATELAYEREDWINDOWINFO *pULWInfo
+/// );
+/// ```
+/// {@category user32}
+int UpdateLayeredWindowIndirect(
+    int hWnd, Pointer<UPDATELAYEREDWINDOWINFO> pULWInfo) {
+  final _UpdateLayeredWindowIndirect = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Pointer<UPDATELAYEREDWINDOWINFO> pULWInfo),
+      int Function(
+          int hWnd,
+          Pointer<UPDATELAYEREDWINDOWINFO>
+              pULWInfo)>('UpdateLayeredWindowIndirect');
+  return _UpdateLayeredWindowIndirect(hWnd, pULWInfo);
 }
 
 /// The UpdateWindow function updates the client area of the specified

@@ -31,6 +31,10 @@
         "namespace": "Windows.Win32.Gdi.BITMAPINFOHEADER",
         "comment": "The BITMAPINFOHEADER structure contains information about the dimensions and color format of a device-independent bitmap (DIB)."
     },
+    "BLENDFUNCTION": {
+        "namespace": "Windows.Win32.Gdi.BLENDFUNCTION",
+        "comment": "The BLENDFUNCTION structure controls blending by specifying the blending functions for source and destination bitmaps."
+    },
     "BLUETOOTH_DEVICE_SEARCH_PARAMS": {
         "namespace": "Windows.Win32.Bluetooth.BLUETOOTH_DEVICE_SEARCH_PARAMS",
         "comment": "The BLUETOOTH_DEVICE_SEARCH_PARAMS structure specifies search criteria for Bluetooth device searches."
@@ -127,6 +131,10 @@
         "namespace": "Windows.Win32.WindowsAndMessaging.FINDREPLACEW",
         "comment": "Contains information that the FindText and ReplaceText functions use to initialize the Find and Replace dialog boxes. The FINDMSGSTRING registered message uses this structure to pass the user's search or replacement input to the owner window of a Find or Replace dialog box."
     },
+    "GUITHREADINFO": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.GUITHREADINFO",
+        "comment": "Contains information about a GUI thread."
+    },
     "INITCOMMONCONTROLSEX": {
         "namespace": "Windows.Win32.Controls.INITCOMMONCONTROLSEX",
         "comment": "Carries information used to load common control classes from the dynamic-link library (DLL). This structure is used with the InitCommonControlsEx function."
@@ -202,6 +210,10 @@
     "NEWTEXTMETRIC": {
         "namespace": "Windows.Win32.Gdi.NEWTEXTMETRICW",
         "comment": "The NEWTEXTMETRIC structure contains data that describes a physical font."
+    },
+    "NONCLIENTMETRICS": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.NONCLIENTMETRICSW",
+        "comment": "Contains the scalable metrics associated with the nonclient area of a nonminimized window. This structure is used by the SPI_GETNONCLIENTMETRICS and SPI_SETNONCLIENTMETRICS actions of the SystemParametersInfo function."
     },
     "OPENFILENAME": {
         "namespace": "Windows.Win32.WindowsAndMessaging.OPENFILENAMEW",
@@ -287,6 +299,10 @@
         "namespace": "Windows.Win32.StructuredStorage.STATSTG",
         "comment": "The STATSTG structure contains statistical data about an open storage, stream, or byte-array object. This structure is used in the IEnumSTATSTG, ILockBytes, IStorage, and IStream interfaces."
     },
+    "STYLESTRUCT": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.STYLESTRUCT",
+        "comment": "Contains the styles for a window."
+    },
     "SYMBOL_INFO": {
         "namespace": "Windows.Win32.Debug.SYMBOL_INFOW",
         "comment": "Contains symbol information."
@@ -311,9 +327,21 @@
         "namespace": "Windows.Win32.Gdi.TEXTMETRICW",
         "comment": "The TEXTMETRIC structure contains basic information about a physical font. All sizes are specified in logical units; that is, they depend on the current mapping mode of the display context."
     },
+    "TITLEBARINFO": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.TITLEBARINFO",
+        "comment": "Contains title bar information."
+    },
+    "TITLEBARINFOEX": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.TITLEBARINFOEX",
+        "comment": "Expands on the information described in the TITLEBARINFO structure by including the coordinates of each element of the title bar. This structure is sent with the WM_GETTITLEBARINFOEX message."
+    },
     "TPMPARAMS": {
         "namespace": "Windows.Win32.WindowsAndMessaging.TPMPARAMS",
         "comment": "Contains extended parameters for the TrackPopupMenuEx function."
+    },
+    "UPDATELAYEREDWINDOWINFO": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.UPDATELAYEREDWINDOWINFO",
+        "comment": "Used by UpdateLayeredWindowIndirect to provide position, size, shape, content, and translucency information for a layered window."
     },
     "VALENT": {
         "namespace": "Windows.Win32.WindowsProgramming.VALENTW",
@@ -335,9 +363,17 @@
         "namespace": "Windows.Win32.WindowsAndMessaging.WINDOWINFO",
         "comment": "Contains window information."
     },
+    "WINDOWPLACEMENT": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.WINDOWPLACEMENT",
+        "comment": "Contains information about the placement of a window on the screen."
+    },
     "WNDCLASS": {
         "namespace": "Windows.Win32.WindowsAndMessaging.WNDCLASSW",
         "comment": "Contains the window class attributes that are registered by the RegisterClass function."
+    },
+    "WNDCLASSEX": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.WNDCLASSEXW",
+        "comment": "Contains window class information. It is used with the RegisterClassEx and GetClassInfoEx functions. The WNDCLASSEX structure is similar to the WNDCLASS structure. There are two differences. WNDCLASSEX includes the cbSize member, which specifies the size of the structure, and the hIconSm member, which contains a handle to a small icon associated with the window class."
     },
     "XFORM": {
         "namespace": "Windows.Win32.Gdi.XFORM",

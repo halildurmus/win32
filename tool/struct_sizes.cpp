@@ -36,6 +36,7 @@ void main()
     printf("  'BITMAPFILEHEADER': %zu,\n", sizeof(BITMAPFILEHEADER));
     printf("  'BITMAPINFO': %zu,\n", sizeof(BITMAPINFO));
     printf("  'BITMAPINFOHEADER': %zu,\n", sizeof(BITMAPINFOHEADER));
+    printf("  'BLENDFUNCTION': %zu,\n", sizeof(BLENDFUNCTION));
     printf("  'BLUETOOTH_ADDRESS': %zu,\n", sizeof(BLUETOOTH_ADDRESS));
     printf("  'BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS': %zu,\n", sizeof(BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS));
     printf("  'BLUETOOTH_DEVICE_INFO': %zu,\n", sizeof(BLUETOOTH_DEVICE_INFO));
@@ -69,6 +70,7 @@ void main()
     printf("  'FILETIME': %zu,\n", sizeof(FILETIME));
     printf("  'FINDREPLACE': %zu,\n", sizeof(FINDREPLACE));
     printf("  'GUID': %zu,\n", sizeof(GUID));
+    printf("  'GUITHREADINFO': %zu,\n", sizeof(GUITHREADINFO));
     printf("  'INITCOMMONCONTROLSEX': %zu,\n", sizeof(INITCOMMONCONTROLSEX));
     printf("  'INPUT': %zu,\n", sizeof(INPUT));
     printf("  'KNOWNFOLDER_DEFINITION': %zu,\n", sizeof(KNOWNFOLDER_DEFINITION));
@@ -90,6 +92,7 @@ void main()
     printf("  'MSG': %zu,\n", sizeof(MSG));
     printf("  'NEWTEXTMETRIC': %zu,\n", sizeof(NEWTEXTMETRICW));
     printf("  'NLM_SIMULATED_PROFILE_INFO': %zu,\n", sizeof(NLM_SIMULATED_PROFILE_INFO));
+    printf("  'NONCLIENTMETRICS': %zu,\n", sizeof(NONCLIENTMETRICSW));
     printf("  'NOTIFYICONDATA': %zu,\n", sizeof(NOTIFYICONDATAW));
     printf("  'OPENFILENAME': %zu,\n", sizeof(OPENFILENAME));
     printf("  'OSVERSIONINFO': %zu,\n", sizeof(OSVERSIONINFOW));
@@ -118,6 +121,7 @@ void main()
     printf("  'STARTUPINFO': %zu,\n", sizeof(STARTUPINFO));
     printf("  'STARTUPINFOEX': %zu,\n", sizeof(STARTUPINFOEX));
     printf("  'STATSTG': %zu,\n", sizeof(STATSTG));
+    printf("  'STYLESTRUCT': %zu,\n", sizeof(STYLESTRUCT));
     printf("  'SYMBOL_INFO': %zu,\n", sizeof(SYMBOL_INFO));
     printf("  'SYSTEMTIME': %zu,\n", sizeof(SYSTEMTIME));
     printf("  'SYSTEM_BATTERY_STATE': %zu,\n", sizeof(SYSTEM_BATTERY_STATE));
@@ -126,7 +130,10 @@ void main()
     printf("  'TASKDIALOGCONFIG': %zu,\n", sizeof(TASKDIALOGCONFIG));
     printf("  'TASKDIALOG_BUTTON': %zu,\n", sizeof(TASKDIALOG_BUTTON));
     printf("  'TEXTMETRIC': %zu,\n", sizeof(TEXTMETRICW));
+    printf("  'TITLEBARINFO': %zu,\n", sizeof(TITLEBARINFO));
+    printf("  'TITLEBARINFOEX': %zu,\n", sizeof(TITLEBARINFOEX));
     printf("  'TPMPARAMS': %zu,\n", sizeof(TPMPARAMS));
+    printf("  'UPDATELAYEREDWINDOWINFO': %zu,\n", sizeof(UPDATELAYEREDWINDOWINFO));
     printf("  'VALENT': %zu,\n", sizeof(VALENTW));
     printf("  'VARIANT': %zu,\n", sizeof(VARIANT));
     printf("  'VS_FIXEDFILEINFO': %zu,\n", sizeof(VS_FIXEDFILEINFO));
@@ -135,7 +142,9 @@ void main()
     printf("  'WAVEOUTCAPS': %zu,\n", sizeof(WAVEOUTCAPSW));
     printf("  'WIN32_FIND_DATA': %zu,\n", sizeof(WIN32_FIND_DATAW));
     printf("  'WINDOWINFO': %zu,\n", sizeof(WINDOWINFO));
+    printf("  'WINDOWPLACEMENT': %zu,\n", sizeof(WINDOWPLACEMENT));
     printf("  'WNDCLASS': %zu,\n", sizeof(WNDCLASS));
+    printf("  'WNDCLASSEX': %zu,\n", sizeof(WNDCLASSEXW));
     printf("  'XFORM': %zu,\n", sizeof(XFORM));
     printf("};\n");
 }

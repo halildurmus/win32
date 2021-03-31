@@ -873,6 +873,11 @@
         "dllLibrary": "kernel32",
         "comment": "Closes the specified volume search handle. The FindFirstVolume and FindNextVolume functions use this search handle to locate volumes."
     },
+    "FindWindow": {
+        "prototype": "HWND FindWindowW(\n  LPCWSTR lpClassName,\n  LPCWSTR lpWindowName\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a handle to the top-level window whose class name and window name match the specified strings. This function does not search child windows. This function does not perform a case-sensitive search."
+    },
     "FindWindowEx": {
         "prototype": "HWND FindWindowExW(\n  HWND    hWndParent,\n  HWND    hWndChildAfter,\n  LPCWSTR lpszClass,\n  LPCWSTR lpszWindow\n);",
         "dllLibrary": "user32",
@@ -932,6 +937,16 @@
         "prototype": "HWND GetCapture();",
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the window (if any) that has captured the mouse. Only one window at a time can capture the mouse; this window receives mouse input whether or not the cursor is within its borders."
+    },
+    "GetClassInfo": {
+        "prototype": "BOOL GetClassInfoW(\n  HINSTANCE   hInstance,\n  LPCWSTR     lpClassName,\n  LPWNDCLASSW lpWndClass\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves information about a window class."
+    },
+    "GetClassInfoEx": {
+        "prototype": "BOOL GetClassInfoExW(\n  HINSTANCE     hInstance,\n  LPCWSTR       lpszClass,\n  LPWNDCLASSEXW lpwcx\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves information about a window class, including a handle to the small icon associated with the window class. The GetClassInfo function does not retrieve a handle to the small icon."
     },
     "GetClientRect": {
         "prototype": "BOOL GetClientRect(\n  HWND   hWnd,\n  LPRECT lpRect\n);",
@@ -1576,6 +1591,11 @@
         "dllLibrary": "user32",
         "comment": "Retrieves the full path and file name of the module associated with the specified window handle."
     },
+    "GetWindowPlacement": {
+        "prototype": "BOOL GetWindowPlacement(\n  HWND            hWnd,\n  WINDOWPLACEMENT *lpwndpl);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the show state and the restored, minimized, and maximized positions of the specified window."
+    },
     "GetWindowRect": {
         "prototype": "BOOL GetWindowRect(\n  HWND   hWnd,\n  LPRECT lpRect\n);",
         "dllLibrary": "user32",
@@ -1656,6 +1676,11 @@
         "dllLibrary": "advapi32",
         "comment": "Initiates a shutdown and restart of the specified computer, and restarts any applications that have been registered for restart."
     },
+    "InSendMessage": {
+        "prototype": "BOOL InSendMessage();",
+        "dllLibrary": "user32",
+        "comment": "Determines whether the current window procedure is processing a message that was sent from another thread (in the same process or a different process) by a call to the SendMessage function."
+    },
     "InsertMenu": {
         "prototype": "BOOL InsertMenuW(\n  HMENU    hMenu,\n  UINT     uPosition,\n  UINT     uFlags,\n  UINT_PTR uIDNewItem,\n  LPCWSTR  lpNewItem\n);",
         "dllLibrary": "user32",
@@ -1686,6 +1711,11 @@
         "dllLibrary": "user32",
         "comment": "The InvertRect function inverts a rectangle in a window by performing a logical NOT operation on the color values for each pixel in the rectangle's interior."
     },
+    "IsChild": {
+        "prototype": "BOOL IsChild(\n  HWND hWndParent,\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Determines whether a window is a child window or descendant window of a specified parent window. A child window is the direct descendant of a specified parent window if that parent window is in the chain of parent windows; the chain of parent windows leads from the original overlapped or pop-up window to the child window."
+    },
     "IsClipboardFormatAvailable": {
         "prototype": "BOOL IsClipboardFormatAvailable(\n  UINT format\n);",
         "dllLibrary": "user32",
@@ -1701,6 +1731,11 @@
         "dllLibrary": "user32",
         "comment": "Determines whether a message is intended for the specified dialog box and, if it is, processes the message."
     },
+    "IsGUIThread": {
+        "prototype": "BOOL IsGUIThread(\n  BOOL bConvert\n);",
+        "dllLibrary": "user32",
+        "comment": "Determines whether the calling thread is already a GUI thread. It can also optionally convert the thread to a GUI thread."
+    },
     "IsIconic": {
         "prototype": "BOOL IsIconic(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
@@ -1710,6 +1745,11 @@
         "prototype": "BOOL IsNativeVhdBoot(\n  PBOOL NativeVhdBoot\n);",
         "dllLibrary": "kernel32",
         "comment": "Indicates if the OS was booted from a VHD container."
+    },
+    "IsProcessDPIAware": {
+        "prototype": "BOOL IsProcessDPIAware();",
+        "dllLibrary": "user32",
+        "comment": "Determines whether the current process is dots per inch (dpi) aware such that it adjusts the sizes of UI elements to compensate for the dpi setting."
     },
     "IsRectEmpty": {
         "prototype": "BOOL IsRectEmpty(\n  const RECT *lprc\n);",
@@ -1721,10 +1761,20 @@
         "dllLibrary": "kernel32",
         "comment": "Determines if the specified locale name is valid for a locale that is installed or supported on the operating system."
     },
+    "IsWindow": {
+        "prototype": "BOOL IsWindow(\n  HWND hWnd);",
+        "dllLibrary": "user32",
+        "comment": "Determines whether the specified window handle identifies an existing window."
+    },
     "IsWindowEnabled": {
         "prototype": "BOOL IsWindowEnabled(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
         "comment": "Determines whether the specified window is enabled for mouse and keyboard input."
+    },
+    "IsWindowUnicode": {
+        "prototype": "BOOL IsWindowUnicode(\n  HWND hWnd);",
+        "dllLibrary": "user32",
+        "comment": "Determines whether the specified window is a native Unicode window."
     },
     "IsWindowVisible": {
         "prototype": "BOOL IsWindowVisible(\n  HWND hWnd\n);",
@@ -2184,6 +2234,11 @@
         "dllLibrary": "user32",
         "comment": "Registers a window class for subsequent use in calls to the CreateWindow or CreateWindowEx function."
     },
+    "RegisterClassEx": {
+        "prototype": "ATOM RegisterClassExW(\n  const WNDCLASSEXW *unnamedParam1);",
+        "dllLibrary": "user32",
+        "comment": "Registers a window class for subsequent use in calls to the CreateWindow or CreateWindowEx function."
+    },
     "RegisterClipboardFormat": {
         "prototype": "UINT RegisterClipboardFormatW(\n  LPCWSTR lpszFormat\n);",
         "dllLibrary": "user32",
@@ -2578,6 +2633,11 @@
         "dllLibrary": "user32",
         "comment": "Copies an array of keyboard key states into the calling thread's keyboard input-state table. This is the same table accessed by the GetKeyboardState and GetKeyState functions. Changes made to this table do not affect keyboard input to any other thread."
     },
+    "SetLayeredWindowAttributes": {
+        "prototype": "BOOL SetLayeredWindowAttributes(\n  HWND     hwnd,\n  COLORREF crKey,\n  BYTE     bAlpha,\n  DWORD    dwFlags\n);",
+        "dllLibrary": "user32",
+        "comment": "Sets the opacity and transparency color key of a layered window."
+    },
     "SetMapMode": {
         "prototype": "int SetMapMode(\n  HDC hdc,\n  int iMode\n);",
         "dllLibrary": "gdi32",
@@ -2592,6 +2652,11 @@
         "prototype": "BOOL SetMenuItemInfoW(\n  HMENU            hmenu,\n  UINT             item,\n  BOOL             fByPositon,\n  LPCMENUITEMINFOW lpmii\n);",
         "dllLibrary": "user32",
         "comment": "Changes information about a menu item."
+    },
+    "SetMessageExtraInfo": {
+        "prototype": "LPARAM SetMessageExtraInfo(\n  LPARAM lParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Sets the extra message information for the current thread. Extra message information is an application- or driver-defined value associated with the current thread's message queue. An application can use the GetMessageExtraInfo function to retrieve a thread's extra message information."
     },
     "SetMonitorBrightness": {
         "prototype": "_BOOL SetMonitorBrightness(\n  HANDLE hMonitor,\n  DWORD  dwNewBrightness\n);",
@@ -2653,6 +2718,12 @@
         "dllLibrary": "shcore",
         "comment": "Sets the process-default DPI awareness level. This is equivalent to calling SetProcessDpiAwarenessContext with the corresponding DPI_AWARENESS_CONTEXT value.",
         "minimumWindowsVersion": "WIN81"
+    },
+    "SetProp": {
+        "prototype": "BOOL SetPropW(\n  HWND    hWnd,\n  LPCWSTR lpString,\n  HANDLE  hData\n);",
+        "dllLibrary": "user32",
+        "comment": "Adds a new entry or changes an existing entry in the property list of the specified window. The function adds a new entry to the list if the specified character string does not exist already in the list. The new entry contains the string and the handle. Otherwise, the function replaces the string's current handle with the specified handle.",
+        "minimumWindowsVersion": "WIN10_RS1"
     },
     "SetRect": {
         "prototype": "BOOL SetRect(\n  LPRECT lprc,\n  int    xLeft,\n  int    yTop,\n  int    xRight,\n  int    yBottom\n);",
@@ -2719,6 +2790,11 @@
         "dllLibrary": "kernel32",
         "comment": "Sets the label of a file system volume."
     },
+    "SetWindowDisplayAffinity": {
+        "prototype": "BOOL SetWindowDisplayAffinity(\n  HWND  hWnd,\n  DWORD dwAffinity\n);",
+        "dllLibrary": "user32",
+        "comment": "Specifies where the content of the window can be displayed."
+    },
     "SetWindowExtEx": {
         "prototype": "BOOL SetWindowExtEx(\n  HDC    hdc,\n  int    x,\n  int    y,\n  LPSIZE lpsz\n);",
         "dllLibrary": "gdi32",
@@ -2728,6 +2804,11 @@
         "prototype": "LONG_PTR SetWindowLongPtrW(\n  HWND     hWnd,\n  int      nIndex,\n  LONG_PTR dwNewLong\n);",
         "dllLibrary": "user32",
         "comment": "Changes an attribute of the specified window. The function also sets a value at the specified offset in the extra window memory."
+    },
+    "SetWindowPlacement": {
+        "prototype": "BOOL SetWindowPlacement(\n  HWND                  hWnd,\n  const WINDOWPLACEMENT *lpwndpl\n);",
+        "dllLibrary": "user32",
+        "comment": "Sets the show state and the restored, minimized, and maximized positions of the specified window."
     },
     "SetWindowPos": {
         "prototype": "BOOL SetWindowPos(\n  HWND hWnd,\n  HWND hWndInsertAfter,\n  int  X,\n  int  Y,\n  int  cx,\n  int  cy,\n  UINT uFlags\n);",
@@ -3097,6 +3178,11 @@
         "prototype": "BOOL UnregisterPowerSettingNotification(\n  HPOWERNOTIFY Handle\n);",
         "dllLibrary": "user32",
         "comment": "Unregisters the power setting notification."
+    },
+    "UpdateLayeredWindowIndirect": {
+        "prototype": "BOOL WINAPI UpdateLayeredWindowIndirect(\n  HWND hwnd,\n  const UPDATELAYEREDWINDOWINFO *pULWInfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Updates the position, size, shape, content, and translucency of a layered window."
     },
     "UpdateProcThreadAttribute": {
         "prototype": "BOOL UpdateProcThreadAttribute(\n  LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList,\n  DWORD                        dwFlags,\n  DWORD_PTR                    Attribute,\n  PVOID                        lpValue,\n  SIZE_T                       cbSize,\n  PVOID                        lpPreviousValue,\n  PSIZE_T                      lpReturnSize\n);",

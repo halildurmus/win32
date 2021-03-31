@@ -192,6 +192,21 @@ class BITMAPINFOHEADER extends Struct {
   external int biClrImportant;
 }
 
+/// The BLENDFUNCTION structure controls blending by specifying the
+/// blending functions for source and destination bitmaps.
+///
+/// {@category Struct}
+class BLENDFUNCTION extends Struct {
+  @Uint8()
+  external int BlendOp;
+  @Uint8()
+  external int BlendFlags;
+  @Uint8()
+  external int SourceConstantAlpha;
+  @Uint8()
+  external int AlphaFormat;
+}
+
 /// The BLUETOOTH_DEVICE_SEARCH_PARAMS structure specifies search criteria
 /// for Bluetooth device searches.
 ///
@@ -628,6 +643,29 @@ class FINDREPLACE extends Struct {
   external Pointer<Utf16> lpTemplateName;
 }
 
+/// Contains information about a GUI thread.
+///
+/// {@category Struct}
+class GUITHREADINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int flags;
+  @IntPtr()
+  external int hwndActive;
+  @IntPtr()
+  external int hwndFocus;
+  @IntPtr()
+  external int hwndCapture;
+  @IntPtr()
+  external int hwndMenuOwner;
+  @IntPtr()
+  external int hwndMoveSize;
+  @IntPtr()
+  external int hwndCaret;
+  external RECT rcCaret;
+}
+
 /// Carries information used to load common control classes from the
 /// dynamic-link library (DLL). This structure is used with the
 /// InitCommonControlsEx function.
@@ -949,6 +987,42 @@ class NEWTEXTMETRIC extends Struct {
   external int ntmCellHeight;
   @Uint32()
   external int ntmAvgWidth;
+}
+
+/// Contains the scalable metrics associated with the nonclient area of a
+/// nonminimized window. This structure is used by the
+/// SPI_GETNONCLIENTMETRICS and SPI_SETNONCLIENTMETRICS actions of the
+/// SystemParametersInfo function.
+///
+/// {@category Struct}
+class NONCLIENTMETRICS extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Int32()
+  external int iBorderWidth;
+  @Int32()
+  external int iScrollWidth;
+  @Int32()
+  external int iScrollHeight;
+  @Int32()
+  external int iCaptionWidth;
+  @Int32()
+  external int iCaptionHeight;
+  external LOGFONT lfCaptionFont;
+  @Int32()
+  external int iSmCaptionWidth;
+  @Int32()
+  external int iSmCaptionHeight;
+  external LOGFONT lfSmCaptionFont;
+  @Int32()
+  external int iMenuWidth;
+  @Int32()
+  external int iMenuHeight;
+  external LOGFONT lfMenuFont;
+  external LOGFONT lfStatusFont;
+  external LOGFONT lfMessageFont;
+  @Int32()
+  external int iPaddedBorderWidth;
 }
 
 /// Contains information that the GetOpenFileName and GetSaveFileName
@@ -1317,6 +1391,16 @@ class STATSTG extends Struct {
   external int reserved;
 }
 
+/// Contains the styles for a window.
+///
+/// {@category Struct}
+class STYLESTRUCT extends Struct {
+  @Uint32()
+  external int styleOld;
+  @Uint32()
+  external int styleNew;
+}
+
 /// Contains symbol information.
 ///
 /// {@category Struct}
@@ -1486,6 +1570,32 @@ class TEXTMETRIC extends Struct {
   external int tmCharSet;
 }
 
+/// Contains title bar information.
+///
+/// {@category Struct}
+class TITLEBARINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  external RECT rcTitleBar;
+  @Array(6)
+  external Array<Uint32> rgstate;
+}
+
+/// Expands on the information described in the TITLEBARINFO structure by
+/// including the coordinates of each element of the title bar. This
+/// structure is sent with the WM_GETTITLEBARINFOEX message.
+///
+/// {@category Struct}
+class TITLEBARINFOEX extends Struct {
+  @Uint32()
+  external int cbSize;
+  external RECT rcTitleBar;
+  @Array(6)
+  external Array<Uint32> rgstate;
+  @Array(6)
+  external Array<RECT> rgrect;
+}
+
 /// Contains extended parameters for the TrackPopupMenuEx function.
 ///
 /// {@category Struct}
@@ -1493,6 +1603,28 @@ class TPMPARAMS extends Struct {
   @Uint32()
   external int cbSize;
   external RECT rcExclude;
+}
+
+/// Used by UpdateLayeredWindowIndirect to provide position, size, shape,
+/// content, and translucency information for a layered window.
+///
+/// {@category Struct}
+class UPDATELAYEREDWINDOWINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  @IntPtr()
+  external int hdcDst;
+  external Pointer<POINT> pptDst;
+  external Pointer<SIZE> psize;
+  @IntPtr()
+  external int hdcSrc;
+  external Pointer<POINT> pptSrc;
+  @Uint32()
+  external int crKey;
+  external Pointer<BLENDFUNCTION> pblend;
+  @Uint32()
+  external int dwFlags;
+  external Pointer<RECT> prcDirty;
 }
 
 /// Contains information about a registry value. The RegQueryMultipleValues
@@ -1613,6 +1745,21 @@ class WINDOWINFO extends Struct {
   external int wCreatorVersion;
 }
 
+/// Contains information about the placement of a window on the screen.
+///
+/// {@category Struct}
+class WINDOWPLACEMENT extends Struct {
+  @Uint32()
+  external int length;
+  @Uint32()
+  external int flags;
+  @Uint32()
+  external int showCmd;
+  external POINT ptMinPosition;
+  external POINT ptMaxPosition;
+  external RECT rcNormalPosition;
+}
+
 /// Contains the window class attributes that are registered by the
 /// RegisterClass function.
 ///
@@ -1635,6 +1782,38 @@ class WNDCLASS extends Struct {
   external int hbrBackground;
   external Pointer<Utf16> lpszMenuName;
   external Pointer<Utf16> lpszClassName;
+}
+
+/// Contains window class information. It is used with the RegisterClassEx
+/// and GetClassInfoEx functions. The WNDCLASSEX structure is similar to
+/// the WNDCLASS structure. There are two differences. WNDCLASSEX includes
+/// the cbSize member, which specifies the size of the structure, and the
+/// hIconSm member, which contains a handle to a small icon associated with
+/// the window class.
+///
+/// {@category Struct}
+class WNDCLASSEX extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int style;
+  external Pointer<NativeFunction<WindowProc>> lpfnWndProc;
+  @Int32()
+  external int cbClsExtra;
+  @Int32()
+  external int cbWndExtra;
+  @IntPtr()
+  external int hInstance;
+  @IntPtr()
+  external int hIcon;
+  @IntPtr()
+  external int hCursor;
+  @IntPtr()
+  external int hbrBackground;
+  external Pointer<Utf16> lpszMenuName;
+  external Pointer<Utf16> lpszClassName;
+  @IntPtr()
+  external int hIconSm;
 }
 
 /// The XFORM structure specifies a world-space to page-space
