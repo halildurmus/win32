@@ -1977,6 +1977,23 @@ const GWL_USERDATA = -21;
 /// thread.
 const GWL_WNDPROC = -4;
 
+/// Sets a new address for the window procedure.
+const GWLP_WNDPROC = -4;
+
+/// Sets a new application instance handle.
+const GWLP_HINSTANCE = -6;
+
+/// Retrieves a handle to the parent window, if there is one.
+const GWLP_HWNDPARENT = -8;
+
+/// Sets the user data associated with the window. This data is intended for use
+/// by the application that created the window. Its value is initially zero.
+const GWLP_USERDATA = -21;
+
+/// Sets a new identifier of the child window. The window cannot be a top-level
+/// window.
+const GWLP_ID = -12;
+
 // -----------------------------------------------------------------------------
 // Hit testing constants
 // -----------------------------------------------------------------------------
