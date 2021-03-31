@@ -107,9 +107,6 @@ class Method extends AttributeObject {
   bool get hasGenericParameters => signatureBlob[0] & 0x10 == 0x10;
 
   void _parseMethodType() {
-    // Note that COM properties currently do not have special name, per:
-    // https://github.com/microsoft/win32metadata/issues/270
-    // So for now, we treat them just as methods.
     if (isSpecialName && methodName.startsWith('get_')) {
       // Property getter
       isGetProperty = true;
@@ -137,7 +134,9 @@ class Method extends AttributeObject {
   /// method is a property getter). This is documented in §II.23.2.1 and
   /// §II.23.2.5 respectively.
   void _parseSignatureBlob() {
-    if (isGetProperty) {
+    // Win32 properties are declared as such, but are represented as
+    // MethodDefSig objects
+    if (isGetProperty && signatureBlob[0] != 0x20) {
       _parsePropertySig();
     } else {
       _parseMethodDefSig();
@@ -213,25 +212,23 @@ class Method extends AttributeObject {
   }
 
   void _parseParameterNames() {
-    if (!isGetProperty) {
-      final phEnum = calloc<IntPtr>();
-      final ptkParamDef = calloc<Uint32>();
-      final pcTokens = calloc<Uint32>();
+    final phEnum = calloc<IntPtr>();
+    final ptkParamDef = calloc<Uint32>();
+    final pcTokens = calloc<Uint32>();
 
-      try {
-        var hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
-        while (hr == S_OK) {
-          final token = ptkParamDef.value;
+    try {
+      var hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
+      while (hr == S_OK) {
+        final token = ptkParamDef.value;
 
-          parameters.add(Parameter.fromToken(reader, token));
-          hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
-        }
-      } finally {
-        reader.CloseEnum(phEnum.value);
-        calloc.free(phEnum);
-        calloc.free(ptkParamDef);
-        calloc.free(pcTokens);
+        parameters.add(Parameter.fromToken(reader, token));
+        hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
       }
+    } finally {
+      reader.CloseEnum(phEnum.value);
+      calloc.free(phEnum);
+      calloc.free(ptkParamDef);
+      calloc.free(pcTokens);
     }
   }
 

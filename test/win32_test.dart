@@ -308,8 +308,9 @@ void main() {
     final param = api.parameters.first;
 
     expect(param.name, equals('lpAttributeList'));
-    expect(param.typeIdentifier.corType, equals(CorElementType.ELEMENT_TYPE_I));
-    expect(param.typeIdentifier.name, equals('intptr'));
+    expect(param.typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+    expect(param.typeIdentifier.name, endsWith('LPPROC_THREAD_ATTRIBUTE_LIST'));
     expect(param.typeIdentifier.typeArgs, isEmpty);
   });
 

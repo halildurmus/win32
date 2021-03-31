@@ -146,10 +146,10 @@ void main() {
       expect(projection.nativeType, equals('Pointer<Pointer>'));
     });
 
-    test('Properties are represented accurately', () {
+    test('Properties are true for isGetProperty', () {
       final isConnected = iNetwork.findMethod('get_IsConnectedToInternet')!;
       expect(isConnected.isGetProperty, equals(true));
-    }, skip: 'https://github.com/microsoft/win32metadata/issues/270');
+    });
 
     test('Properties are represented accurately', () {
       final isConnected = iNetwork.findMethod('get_IsConnectedToInternet')!;
@@ -176,29 +176,38 @@ void main() {
   group('Projection of INetwork', () {
     final iNetwork =
         scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
-    final projection = ClassProjector(iNetwork).projection;
 
     test('Correct number of projected methods', () {
+      final projection = ClassProjector(iNetwork).projection;
+
       expect(projection.methods.length, equals(13));
     });
 
     test('Correct number of parameters in a test method', () {
+      final projection = ClassProjector(iNetwork).projection;
+
       expect(projection.methods.first.parameters.length, equals(1));
     });
 
     test('Property can be found in projection', () {
+      final projection = ClassProjector(iNetwork).projection;
+
       final isConnected = projection.methods
           .indexWhere((method) => (method.name == 'get_IsConnectedToInternet'));
       expect(isConnected, isNot(-1));
     });
 
     test('isConnectedToInternet property is a property', () {
+      final projection = ClassProjector(iNetwork).projection;
+
       final isConnected = projection.methods
           .firstWhere((method) => (method.name == 'get_IsConnectedToInternet'));
       expect(isConnected.isGetProperty, isTrue);
     });
 
     test('isConnectedToInternet property return is HRESULT', () {
+      final projection = ClassProjector(iNetwork).projection;
+
       final isConnected = projection.methods
           .firstWhere((method) => (method.name == 'get_IsConnectedToInternet'));
       expect(isConnected.returnTypeNative, equals('Int32'));
@@ -206,6 +215,8 @@ void main() {
     });
 
     test('isConnectedToInternet property parameter is VARIANT_BOOL', () {
+      final projection = ClassProjector(iNetwork).projection;
+
       final isConnected = projection.methods
           .firstWhere((method) => (method.name == 'get_IsConnectedToInternet'));
       expect(isConnected.parameters.length, equals(1));
