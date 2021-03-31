@@ -6265,6 +6265,27 @@ void main() {
     }
   });
 
+  group('Test uxtheme functions', () {
+    test('Can instantiate OpenThemeData', () {
+      final uxtheme = DynamicLibrary.open('uxtheme.dll');
+      final OpenThemeData = uxtheme.lookupFunction<
+          IntPtr Function(IntPtr hwnd, Pointer<Utf16> pszClassList),
+          int Function(int hwnd, Pointer<Utf16> pszClassList)>('OpenThemeData');
+      expect(OpenThemeData, isA<Function>());
+    });
+    if (windowsBuildNumber >= 15063) {
+      test('Can instantiate OpenThemeDataForDpi', () {
+        final uxtheme = DynamicLibrary.open('uxtheme.dll');
+        final OpenThemeDataForDpi = uxtheme.lookupFunction<
+            IntPtr Function(
+                IntPtr hwnd, Pointer<Utf16> pszClassList, Uint32 dpi),
+            int Function(int hwnd, Pointer<Utf16> pszClassList,
+                int dpi)>('OpenThemeDataForDpi');
+        expect(OpenThemeDataForDpi, isA<Function>());
+      });
+    }
+  });
+
   group('Test api-ms-win-core-winrt-l1-1-0 functions', () {
     if (windowsBuildNumber >= 9200) {
       test('Can instantiate RoActivateInstance', () {

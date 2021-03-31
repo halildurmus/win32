@@ -25,6 +25,7 @@
 #include <physicalmonitorenumerationapi.h>
 #include <CorHdr.h>
 #include <DbgHelp.h>
+#include <ShellScalingApi.h>
 
 void main()
 {

@@ -4955,6 +4955,101 @@ class MC_SIZE_TYPE {
   static const MC_HEIGHT = 1;
 }
 
+/// Identifies the dots per inch (dpi) setting for a thread, process, or window.
+///
+/// {@category Enum}
+class DPI_AWARENESS {
+  /// Invalid DPI awareness. This is an invalid DPI awareness value.
+  static const DPI_AWARENESS_INVALID = -1;
+
+  /// DPI unaware. This process does not scale for DPI changes and is always
+  /// assumed to have a scale factor of 100% (96 DPI). It will be automatically
+  /// scaled by the system on any other DPI setting.
+  static const DPI_AWARENESS_UNAWARE = 0;
+
+  /// System DPI aware. This process does not scale for DPI changes. It will
+  /// query for the DPI once and use that value for the lifetime of the process.
+  /// If the DPI changes, the process will not adjust to the new DPI value. It
+  /// will be automatically scaled up or down by the system when the DPI changes
+  /// from the system value.
+  static const DPI_AWARENESS_SYSTEM_AWARE = 1;
+
+  /// Per monitor DPI aware. This process checks for the DPI when it is created
+  /// and adjusts the scale factor whenever the DPI changes. These processes are
+  /// not automatically scaled by the system.
+  static const DPI_AWARENESS_PER_MONITOR_AWARE = 2;
+}
+
+/// Identifies the DPI hosting behavior for a window. This behavior allows
+/// windows created in the thread to host child windows with a different
+/// DPI_AWARENESS_CONTEXT.
+///
+/// {@category Enum}
+class DPI_HOSTING_BEHAVIOR {
+  /// Invalid DPI hosting behavior. This usually occurs if the previous
+  /// SetThreadDpiHostingBehavior call used an invalid parameter.
+  static const DPI_HOSTING_BEHAVIOR_INVALID = -1;
+
+  /// Default DPI hosting behavior. The associated window behaves as normal, and
+  /// cannot create or re-parent child windows with a different
+  /// DPI_AWARENESS_CONTEXT.
+  static const DPI_HOSTING_BEHAVIOR_DEFAULT = 0;
+
+  /// Mixed DPI hosting behavior. This enables the creation and re-parenting of
+  /// child windows with different DPI_AWARENESS_CONTEXT. These child windows
+  /// will be independently scaled by the OS.
+  static const DPI_HOSTING_BEHAVIOR_MIXED = 1;
+}
+
+/// Identifies dots per inch (dpi) awareness values. DPI awareness indicates how
+/// much scaling work an application performs for DPI versus how much is done by
+/// the system.
+///
+/// {@category Enum}
+class PROCESS_DPI_AWARENESS {
+  /// DPI unaware. This app does not scale for DPI changes and is always assumed
+  /// to have a scale factor of 100% (96 DPI). It will be automatically scaled
+  /// by the system on any other DPI setting.
+  static const PROCESS_DPI_UNAWARE = 0;
+
+  /// System DPI aware. This app does not scale for DPI changes. It will query
+  /// for the DPI once and use that value for the lifetime of the app. If the
+  /// DPI changes, the app will not adjust to the new DPI value. It will be
+  /// automatically scaled up or down by the system when the DPI changes from
+  /// the system value.
+  static const PROCESS_SYSTEM_DPI_AWARE = 1;
+
+  /// Per monitor DPI aware. This app checks for the DPI when it is created and
+  /// adjusts the scale factor whenever the DPI changes. These applications are
+  /// not automatically scaled by the system.
+  static const PROCESS_PER_MONITOR_DPI_AWARE = 2;
+}
+
+/// Identifies the dots per inch (dpi) setting for a monitor.
+///
+/// {@category Enum}
+class MONITOR_DPI_TYPE {
+  /// The effective DPI. This value should be used when determining the correct
+  /// scale factor for scaling UI elements. This incorporates the scale factor
+  /// set by the user for this specific display.
+  static const MDT_EFFECTIVE_DPI = 0;
+
+  /// The angular DPI. This DPI ensures rendering at a compliant angular
+  /// resolution on the screen. This does not include the scale factor set by
+  /// the user for this specific display.
+  static const MDT_ANGULAR_DPI = 1;
+
+  /// The raw DPI. This value is the linear DPI of the screen as measured on the
+  /// screen itself. Use this value when you want to read the pixel density and
+  /// not the recommended scaling setting. This does not include the scale
+  /// factor set by the user for this specific display and is not guaranteed to
+  /// be a supported DPI value.
+  static const MDT_RAW_DPI = 2;
+
+  /// The default DPI setting for a monitor is MDT_EFFECTIVE_DPI.
+  static const MDT_DEFAULT = MDT_EFFECTIVE_DPI;
+}
+
 // -----------------------------------------------------------------------------
 // Window Display Affinity constants
 // -----------------------------------------------------------------------------

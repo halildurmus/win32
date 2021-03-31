@@ -2067,6 +2067,17 @@
         "dllLibrary": "kernel32",
         "comment": "Opens an existing local process object."
     },
+    "OpenThemeData": {
+        "prototype": "HTHEME OpenThemeData(\n  HWND    hwnd,\n  LPCWSTR pszClassList\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "Opens the theme data for a window and its associated class."
+    },
+    "OpenThemeDataForDpi": {
+        "prototype": "HTHEME OpenThemeDataForDpi(\n  HWND    hwnd,\n  LPCWSTR pszClassList,\n  UINT    dpi\n);",
+        "dllLibrary": "uxtheme",
+        "comment": "A variant of OpenThemeData that opens a theme handle associated with a specific DPI.",
+        "minimumWindowsVersion": "WIN10_RS2"
+    },
     "OutputDebugString": {
         "prototype": "void OutputDebugStringW(\n  LPCWSTR lpOutputString\n);",
         "dllLibrary": "kernel32",
