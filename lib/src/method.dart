@@ -34,6 +34,7 @@ class Method extends TokenObject with CustomAttributes {
   late Parameter returnType;
 
   bool hasAttribute(int attribute) => attributes & attribute == attribute;
+  bool hasImplFlag(int flag) => implFlags & flag == flag;
 
   bool get isPrivate => hasAttribute(CorMethodAttr.mdPrivate);
   bool get isPublic => hasAttribute(CorMethodAttr.mdPublic);

@@ -31,6 +31,37 @@ void main() {
         awr.pinvokeMap.hasAttribute(CorPinvokeMap.pmSupportsLastError), isTrue);
     expect(awr.pinvokeMap.hasAttribute(CorPinvokeMap.pmCallConvWinapi), isTrue);
 
+    expect(awr.returnType.typeIdentifier.name,
+        equals('Windows.Win32.SystemServices.BOOL'));
+    expect(awr.methodName, equals('AdjustWindowRect'));
+
+    expect(awr.parameters.length, equals(3));
+
+    expect(awr.parameters[0].hasAttribute(CorParamAttr.pdIn), isTrue);
+    expect(awr.parameters[0].hasAttribute(CorParamAttr.pdOut), isTrue);
+    expect(awr.parameters[0].name, equals('lpRect'));
+    expect(awr.parameters[0].typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_PTR));
+    expect(awr.parameters[0].typeIdentifier.typeArgs.length, equals(1));
+    expect(awr.parameters[0].typeIdentifier.typeArgs.first.name,
+        equals('Windows.Win32.DisplayDevices.RECT'));
+
+    expect(awr.parameters[1].hasAttribute(CorParamAttr.pdIn), isTrue);
+    expect(awr.parameters[1].name, equals('dwStyle'));
+    expect(awr.parameters[1].typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_U4));
+
+    expect(awr.parameters[2].hasAttribute(CorParamAttr.pdIn), isTrue);
+    expect(awr.parameters[2].name, equals('bMenu'));
+    expect(awr.parameters[2].typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+    expect(awr.parameters[2].typeIdentifier.name,
+        equals('Windows.Win32.SystemServices.BOOL'));
+
+    expect(awr.hasImplFlag(CorMethodImpl.miIL), isTrue);
+    expect(awr.hasImplFlag(CorMethodImpl.miManaged), isTrue);
+    expect(awr.hasImplFlag(CorMethodImpl.miPreserveSig), isTrue);
+
     expect(
         awr.attributeSignature(
             'Windows.Win32.Interop.SupportedOSPlatformAttribute'),

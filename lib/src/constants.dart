@@ -42,7 +42,7 @@ class CorTypeAttr {
   static const tdHasSecurity = 0x00040000;
 }
 
-/// /// Contains values that describe the features of a method.
+/// Contains values that describe the features of a method.
 class CorMethodAttr {
   static const mdMemberAccessMask = 0x0007;
   static const mdPrivateScope = 0x0000;
@@ -70,14 +70,78 @@ class CorMethodAttr {
   static const mdRequireSecObject = 0x8000;
 }
 
+/// Contains values that describe method implementation features.
+class CorMethodImpl {
+  /// Flags that describe code type.
+  static const miCodeTypeMask = 0x0003;
+
+  /// Specifies that the method implementation is Microsoft intermediate language (MSIL).
+  static const miIL = 0x0000;
+
+  /// Specifies that the method implementation is native.
+  static const miNative = 0x0001;
+
+  /// Specifies that the method implementation is OPTIL.
+  static const miOPTIL = 0x0002;
+
+  /// Specifies that the method implementation is provided by the common language runtime.
+  static const miRuntime = 0x0003;
+
+  /// Flags that indicate whether the code is managed or unmanaged.
+  static const miManagedMask = 0x0004;
+
+  /// Specifies that the method implementation is unmanaged.
+  static const miUnmanaged = 0x0004;
+
+  /// Specifies that the method implementation is managed.
+  static const miManaged = 0x0000;
+
+  /// Specifies that the method is defined. This flag is used primarily in merge scenarios.
+  static const miForwardRef = 0x0010;
+
+  /// Specifies that the method signature cannot be mangled for an HRESULT conversion.
+  static const miPreserveSig = 0x0080;
+
+  /// Reserved for internal use by the common language runtime.
+  static const miInternalCall = 0x1000;
+
+  /// Specifies that the method is single-threaded through its body.
+  static const miSynchronized = 0x0020;
+
+  /// Specifies that the method cannot be inlined.
+  static const miNoInlining = 0x0008;
+
+  /// Specifies that the method should be inlined if possible.
+  static const miAggressiveInlining = 0x0100;
+
+  /// Specifies that the method should not be optimized.
+  static const miNoOptimization = 0x0040;
+
+  /// The maximum valid value for a [CorMethodImpl].
+  static const miMaxMethodImplVal = 0xffff;
+}
+
 /// Contains values that describe the metadata of a method parameter.
 class CorParamAttr {
+  /// Specifies that the parameter is passed into the method call.
   static const pdIn = 0x0001;
+
+  /// Specifies that the parameter is passed from the method return.
   static const pdOut = 0x0002;
+
+  /// Specifies that the parameter is optional.
   static const pdOptional = 0x0010;
+
+  /// Reserved for internal use by the common language runtime.
   static const pdReservedMask = 0xf000;
+
+  /// Specifies that the parameter has a default value.
   static const pdHasDefault = 0x1000;
+
+  /// Specifies that the parameter has marshaling information.
   static const pdHasFieldMarshal = 0x2000;
+
+  /// Unused.
   static const pdUnused = 0xcfe0;
 }
 
