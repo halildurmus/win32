@@ -29,6 +29,26 @@
         "dllLibrary": "kernel32",
         "comment": "The AddRefActCtx function increments the reference count of the specified activation context."
     },
+    "AdjustWindowRect": {
+        "prototype": "BOOL AdjustWindowRect(\n  LPRECT lpRect,\n  DWORD  dwStyle,\n  BOOL   bMenu\n);",
+        "dllLibrary": "user32",
+        "comment": "Calculates the required size of the window rectangle, based on the desired client-rectangle size. The window rectangle can then be passed to the CreateWindow function to create a window whose client area is the desired size."
+    },
+    "AdjustWindowRectEx": {
+        "prototype": "BOOL AdjustWindowRectEx(\n  LPRECT lpRect,\n  DWORD  dwStyle,\n  BOOL   bMenu,\n  DWORD  dwExStyle\n);",
+        "dllLibrary": "user32",
+        "comment": "Calculates the required size of the window rectangle, based on the desired size of the client rectangle. The window rectangle can then be passed to the CreateWindowEx function to create a window whose client area is the desired size."
+    },
+    "AllowSetForegroundWindow": {
+        "prototype": "BOOL AllowSetForegroundWindow(\n  DWORD dwProcessId\n);",
+        "dllLibrary": "user32",
+        "comment": "Enables the specified process to set the foreground window using the SetForegroundWindow function. The calling process must already be able to set the foreground window."
+    },
+    "LockSetForegroundWindow": {
+        "prototype": "BOOL LockSetForegroundWindow(\n  UINT uLockCode\n);",
+        "dllLibrary": "user32",
+        "comment": "The foreground process can call the LockSetForegroundWindow function to disable calls to the SetForegroundWindow function."
+    },
     "AdjustWindowRectExForDpi": {
         "prototype": "BOOL AdjustWindowRectExForDpi(\n  LPRECT lpRect,\n  DWORD  dwStyle,\n  BOOL   bMenu,\n  DWORD  dwExStyle,\n  UINT   dpi\n);",
         "dllLibrary": "user32",
@@ -54,6 +74,16 @@
         "prototype": "BOOL AnimateWindow(\n  HWND  hWnd,\n  DWORD dwTime,\n  DWORD dwFlags\n);",
         "dllLibrary": "user32",
         "comment": "Enables you to produce special effects when showing or hiding windows. There are four types of animation: roll, slide, collapse or expand, and alpha-blended fade."
+    },
+    "AnyPopup": {
+        "prototype": "BOOL AnyPopup();",
+        "dllLibrary": "user32",
+        "comment": "Indicates whether an owned, visible, top-level pop-up, or overlapped window exists on the screen. The function searches the entire screen, not just the calling application's client area."
+    },
+    "ArrangeIconicWindows": {
+        "prototype": "UINT ArrangeIconicWindows(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Arranges all the minimized (iconic) child windows of the specified parent window."
     },
     "AppendMenu": {
         "prototype": "BOOL AppendMenuW(\n  HMENU    hMenu,\n  UINT     uFlags,\n  UINT_PTR uIDNewItem,\n  LPCWSTR  lpNewItem\n);",
@@ -85,6 +115,21 @@
         "prototype": "BOOL Beep(\n  DWORD dwFreq,\n  DWORD dwDuration\n);",
         "dllLibrary": "kernel32",
         "comment": "Generates simple tones on the speaker. The function is synchronous; it performs an alertable wait and does not return control to its caller until the sound finishes."
+    },
+    "BeginDeferWindowPos": {
+        "prototype": "HDWP BeginDeferWindowPos(\n  int nNumWindows\n);",
+        "dllLibrary": "user32",
+        "comment": "Allocates memory for a multiple-window- position structure and returns the handle to the structure."
+    },
+    "DeferWindowPos": {
+        "prototype": "HDWP DeferWindowPos(\n  HDWP hWinPosInfo,\n  HWND hWnd,\n  HWND hWndInsertAfter,\n  int  x,\n  int  y,\n  int  cx,\n  int  cy,\n  UINT uFlags\n);",
+        "dllLibrary": "user32",
+        "comment": "Updates the specified multiple-window – position structure for the specified window. The function then returns a handle to the updated structure. The EndDeferWindowPos function uses the information in this structure to change the position and size of a number of windows simultaneously. The BeginDeferWindowPos function creates the structure."
+    },
+    "EndDeferWindowPos": {
+        "prototype": "BOOL EndDeferWindowPos(\n  HDWP hWinPosInfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Simultaneously updates the position and size of one or more windows in a single screen-refreshing cycle."
     },
     "BeginPaint": {
         "prototype": "HDC BeginPaint(\n  HWND          hWnd,\n  LPPAINTSTRUCT lpPaint\n);",
@@ -215,6 +260,36 @@
         "prototype": "BOOL BringWindowToTop(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
         "comment": "Brings the specified window to the top of the Z order. If the window is a top-level window, it is activated. If the window is a child window, the top-level parent window associated with the child window is activated."
+    },
+    "BroadcastSystemMessage": {
+        "prototype": "long BroadcastSystemMessageW(\n  DWORD   flags,\n  LPDWORD lpInfo,\n  UINT    Msg,\n  WPARAM  wParam,\n  LPARAM  lParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Sends a message to the specified recipients. The recipients can be applications, installable drivers, network drivers, system-level device drivers, or any combination of these system components."
+    },
+    "CalculatePopupWindowPosition": {
+        "prototype": "BOOL CalculatePopupWindowPosition(\n  const POINT *anchorPoint,\n  const SIZE  *windowSize,\n  UINT        flags,\n  RECT        *excludeRect,\n  RECT        *popupWindowPosition\n);",
+        "dllLibrary": "user32",
+        "comment": "Calculates an appropriate pop-up window position using the specified anchor point, pop-up window size, flags, and the optional exclude rectangle. When the specified pop-up window size is smaller than the desktop window size, use the CalculatePopupWindowPosition function to ensure that the pop-up window is fully visible on the desktop window, regardless of the specified anchor point."
+    },
+    "CallMsgFilter": {
+        "prototype": "BOOL CallMsgFilterW(\n  LPMSG lpMsg,\n  int   nCode\n);",
+        "dllLibrary": "user32",
+        "comment": "Passes the specified message and hook code to the hook procedures associated with the WH_SYSMSGFILTER and WH_MSGFILTER hooks. A WH_SYSMSGFILTER or WH_MSGFILTER hook procedure is an application-defined callback function that examines and, optionally, modifies messages for a dialog box, message box, menu, or scroll bar."
+    },
+    "CallWindowProc": {
+        "prototype": "LRESULT CallWindowProcW(\n  WNDPROC lpPrevWndFunc,\n  HWND    hWnd,\n  UINT    Msg,\n  WPARAM  wParam,\n  LPARAM  lParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Passes message information to the specified window procedure."
+    },
+    "CascadeWindows": {
+        "prototype": "WORD CascadeWindows(\n  HWND       hwndParent,\n  UINT       wHow,\n  const RECT *lpRect,\n  UINT       cKids,\n  const HWND *lpKids\n);",
+        "dllLibrary": "user32",
+        "comment": "Cascades the specified child windows of the specified parent window."
+    },
+    "CreateMDIWindow": {
+        "prototype": "HWND CreateMDIWindowW(\n  LPCWSTR   lpClassName,\n  LPCWSTR   lpWindowName,\n  DWORD     dwStyle,\n  int       X,\n  int       Y,\n  int       nWidth,\n  int       nHeight,\n  HWND      hWndParent,\n  HINSTANCE hInstance,\n  LPARAM    lParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Creates a multiple-document interface (MDI) child window."
     },
     "CallNtPowerInformation": {
         "prototype": "NTSTATUS CallNtPowerInformation(\n  POWER_INFORMATION_LEVEL InformationLevel,\n  PVOID                   InputBuffer,\n  ULONG                   InputBufferLength,\n  PVOID                   OutputBuffer,\n  ULONG                   OutputBufferLength\n);",
@@ -555,6 +630,11 @@
         "dllLibrary": "advapi32",
         "comment": "Decrypts an encrypted file or directory."
     },
+    "DefMDIChildProc": {
+        "prototype": "LRESULT LRESULT DefMDIChildProcW(\n  HWND   hWnd,\n  UINT   uMsg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Provides default processing for any window message that the window procedure of a multiple-document interface (MDI) child window does not process. A window message not processed by the window procedure must be passed to the DefMDIChildProc function, not to the DefWindowProc function."
+    },
     "DefWindowProc": {
         "prototype": "LRESULT DefWindowProcW(\n  HWND   hWnd,\n  UINT   Msg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
         "dllLibrary": "user32",
@@ -716,6 +796,11 @@
         "dllLibrary": "user32",
         "comment": "The EndPaint function marks the end of painting in the specified window. This function is required for each call to the BeginPaint function, but only after painting is complete."
     },
+    "EndTask": {
+        "prototype": "BOOL EndTask(\n  HWND hWnd,\n  BOOL fShutDown,\n  BOOL fForce\n);",
+        "dllLibrary": "user32",
+        "comment": "Forcibly closes the specified window."
+    },
     "EndPath": {
         "prototype": "BOOL EndPath(\n  HDC hdc\n);",
         "dllLibrary": "gdi32",
@@ -770,6 +855,11 @@
         "prototype": "BOOL EnumResourceTypesW(\n  HMODULE          hModule,\n  ENUMRESTYPEPROCW lpEnumFunc,\n  LONG_PTR         lParam\n);",
         "dllLibrary": "kernel32",
         "comment": "Enumerates resource types within a binary module. Starting with Windows Vista, this is typically a language-neutral Portable Executable (LN file), and the enumeration also includes resources from one of the corresponding language-specific resource files (.mui files)—if one exists—that contain localizable language resources. It is also possible to use hModule to specify a .mui file, in which case only that file is searched for resource types."
+    },
+    "EnumThreadWindows": {
+        "prototype": "BOOL EnumThreadWindows(\n  DWORD       dwThreadId,\n  WNDENUMPROC lpfn,\n  LPARAM      lParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Enumerates all nonchild windows associated with a thread by passing the handle to each window, in turn, to an application-defined callback function. EnumThreadWindows continues until the last window is enumerated or the callback function returns FALSE."
     },
     "EnumWindows": {
         "prototype": "BOOL EnumWindows(\n  WNDENUMPROC lpEnumFunc,\n  LPARAM      lParam\n);",
@@ -971,6 +1061,11 @@
         "prototype": "BOOL GetClassInfoExW(\n  HINSTANCE     hInstance,\n  LPCWSTR       lpszClass,\n  LPWNDCLASSEXW lpwcx\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves information about a window class, including a handle to the small icon associated with the window class. The GetClassInfo function does not retrieve a handle to the small icon."
+    },
+    "GetClassLongPtr": {
+        "prototype": "ULONG_PTR GetClassLongPtrW(\n  HWND hWnd,\n  int  nIndex\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the specified value from the WNDCLASSEX structure associated with the specified window."
     },
     "GetClientRect": {
         "prototype": "BOOL GetClientRect(\n  HWND   hWnd,\n  LPRECT lpRect\n);",
@@ -1280,6 +1375,11 @@
         "dllLibrary": "user32",
         "comment": "Retrieves the extra message information for the current thread. Extra message information is an application- or driver-defined value associated with the current thread's message queue."
     },
+    "GetMessagePos": {
+        "prototype": "DWORD GetMessagePos();",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the cursor position for the last message retrieved by the GetMessage function."
+    },
     "GetMessageTime": {
         "prototype": "LONG GetMessageTime();",
         "dllLibrary": "user32",
@@ -1585,6 +1685,11 @@
         "dllLibrary": "kernel32",
         "comment": "Returns the language identifier of the first user interface language for the current thread."
     },
+    "GetTitleBarInfo": {
+        "prototype": "BOOL GetTitleBarInfo(\n  HWND          hwnd,\n  PTITLEBARINFO pti\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves information about the specified title bar."
+    },
     "GetTopWindow": {
         "prototype": "HWND GetTopWindow(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
@@ -1692,6 +1797,11 @@
         "dllLibrary": "user32",
         "comment": "Copies the text of the specified window's title bar (if it has one) into a buffer. If the specified window is a control, the text of the control is copied. However, GetWindowText cannot retrieve the text of a control in another application."
     },
+    "GetWindowThreadProcessId": {
+        "prototype": "DWORD GetWindowThreadProcessId(\n  HWND    hWnd,\n  LPDWORD lpdwProcessId\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the identifier of the thread that created the specified window and, optionally, the identifier of the process that created the window."
+    },
     "GetWindowTextLength": {
         "prototype": "int GetWindowTextLengthW(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
@@ -1762,6 +1872,11 @@
         "dllLibrary": "user32",
         "comment": "Determines whether the current window procedure is processing a message that was sent from another thread (in the same process or a different process) by a call to the SendMessage function."
     },
+    "InSendMessageEx": {
+        "prototype": "DWORD InSendMessageEx(\n  LPVOID lpReserved\n);",
+        "dllLibrary": "user32",
+        "comment": "Determines whether the current window procedure is processing a message that was sent from another thread (in the same process or a different process)."
+    },
     "InsertMenu": {
         "prototype": "BOOL InsertMenuW(\n  HMENU    hMenu,\n  UINT     uPosition,\n  UINT     uFlags,\n  UINT_PTR uIDNewItem,\n  LPCWSTR  lpNewItem\n);",
         "dllLibrary": "user32",
@@ -1816,6 +1931,11 @@
         "prototype": "BOOL IsGUIThread(\n  BOOL bConvert\n);",
         "dllLibrary": "user32",
         "comment": "Determines whether the calling thread is already a GUI thread. It can also optionally convert the thread to a GUI thread."
+    },
+    "IsHungAppWindow": {
+        "prototype": "BOOL IsHungAppWindow(\n  HWND hwnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Determines whether the system considers that a specified application is not responding. An application is considered to be not responding if it is not waiting for input, is not in startup processing, and has not called PeekMessage within the internal timeout period of 5 seconds."
     },
     "IsIconic": {
         "prototype": "BOOL IsIconic(\n  HWND hWnd\n);",
