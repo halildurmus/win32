@@ -3409,6 +3409,23 @@ void main() {
           int Function(int hWndNewViewer)>('SetClipboardViewer');
       expect(SetClipboardViewer, isA<Function>());
     });
+    test('Can instantiate SetCoalescableTimer', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final SetCoalescableTimer = user32.lookupFunction<
+          IntPtr Function(
+              IntPtr hWnd,
+              IntPtr nIDEvent,
+              Uint32 uElapse,
+              Pointer<NativeFunction<TimerProc>> lpTimerFunc,
+              Uint32 uToleranceDelay),
+          int Function(
+              int hWnd,
+              int nIDEvent,
+              int uElapse,
+              Pointer<NativeFunction<TimerProc>> lpTimerFunc,
+              int uToleranceDelay)>('SetCoalescableTimer');
+      expect(SetCoalescableTimer, isA<Function>());
+    });
     test('Can instantiate SetCursorPos', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final SetCursorPos = user32.lookupFunction<
@@ -3701,6 +3718,13 @@ void main() {
           int Function(int fSwap)>('SwapMouseButton');
       expect(SwapMouseButton, isA<Function>());
     });
+    test('Can instantiate SwitchToThisWindow', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final SwitchToThisWindow = user32.lookupFunction<
+          Void Function(IntPtr hwnd, Int32 fUnknown),
+          void Function(int hwnd, int fUnknown)>('SwitchToThisWindow');
+      expect(SwitchToThisWindow, isA<Function>());
+    });
     test('Can instantiate SystemParametersInfo', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final SystemParametersInfo = user32.lookupFunction<
@@ -3743,6 +3767,15 @@ void main() {
               Pointer<Int32> lpnTabStopPositions,
               int nTabOrigin)>('TabbedTextOutW');
       expect(TabbedTextOut, isA<Function>());
+    });
+    test('Can instantiate TileWindows', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final TileWindows = user32.lookupFunction<
+          Uint16 Function(IntPtr hwndParent, Uint32 wHow, Pointer<RECT> lpRect,
+              Uint32 cKids, Pointer<IntPtr> lpKids),
+          int Function(int hwndParent, int wHow, Pointer<RECT> lpRect,
+              int cKids, Pointer<IntPtr> lpKids)>('TileWindows');
+      expect(TileWindows, isA<Function>());
     });
     test('Can instantiate ToAscii', () {
       final user32 = DynamicLibrary.open('user32.dll');
@@ -3818,6 +3851,14 @@ void main() {
           int Function(int hWnd, int hAccTable,
               Pointer<MSG> lpMsg)>('TranslateAcceleratorW');
       expect(TranslateAccelerator, isA<Function>());
+    });
+    test('Can instantiate TranslateMDISysAccel', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final TranslateMDISysAccel = user32.lookupFunction<
+          Int32 Function(IntPtr hWndClient, Pointer<MSG> lpMsg),
+          int Function(
+              int hWndClient, Pointer<MSG> lpMsg)>('TranslateMDISysAccel');
+      expect(TranslateMDISysAccel, isA<Function>());
     });
     test('Can instantiate TranslateMessage', () {
       final user32 = DynamicLibrary.open('user32.dll');

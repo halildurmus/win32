@@ -4189,6 +4189,38 @@ int SetClipboardViewer(int hWndNewViewer) {
   return _SetClipboardViewer(hWndNewViewer);
 }
 
+/// Creates a timer with the specified time-out value and coalescing
+/// tolerance delay.
+///
+/// ```c
+/// UINT_PTR SetCoalescableTimer(
+///   HWND      hWnd,
+///   UINT_PTR  nIDEvent,
+///   UINT      uElapse,
+///   TIMERPROC lpTimerFunc,
+///   ULONG     uToleranceDelay
+/// );
+/// ```
+/// {@category user32}
+int SetCoalescableTimer(int hWnd, int nIDEvent, int uElapse,
+    Pointer<NativeFunction<TimerProc>> lpTimerFunc, int uToleranceDelay) {
+  final _SetCoalescableTimer = _user32.lookupFunction<
+      IntPtr Function(
+          IntPtr hWnd,
+          IntPtr nIDEvent,
+          Uint32 uElapse,
+          Pointer<NativeFunction<TimerProc>> lpTimerFunc,
+          Uint32 uToleranceDelay),
+      int Function(
+          int hWnd,
+          int nIDEvent,
+          int uElapse,
+          Pointer<NativeFunction<TimerProc>> lpTimerFunc,
+          int uToleranceDelay)>('SetCoalescableTimer');
+  return _SetCoalescableTimer(
+      hWnd, nIDEvent, uElapse, lpTimerFunc, uToleranceDelay);
+}
+
 /// Moves the cursor to the specified screen coordinates. If the new
 /// coordinates are not within the screen rectangle set by the most recent
 /// ClipCursor function call, the system automatically adjusts the
@@ -4868,6 +4900,22 @@ int SwapMouseButton(int fSwap) {
   return _SwapMouseButton(fSwap);
 }
 
+/// Switches focus to the specified window and brings it to the foreground.
+///
+/// ```c
+/// void SwitchToThisWindow(
+///   HWND hwnd,
+///   BOOL fUnknown
+/// );
+/// ```
+/// {@category user32}
+void SwitchToThisWindow(int hwnd, int fUnknown) {
+  final _SwitchToThisWindow = _user32.lookupFunction<
+      Void Function(IntPtr hwnd, Int32 fUnknown),
+      void Function(int hwnd, int fUnknown)>('SwitchToThisWindow');
+  return _SwitchToThisWindow(hwnd, fUnknown);
+}
+
 /// Retrieves or sets the value of one of the system-wide parameters. This
 /// function can also update the user profile while setting a parameter.
 ///
@@ -4954,6 +5002,28 @@ int TabbedTextOut(int hdc, int x, int y, Pointer<Utf16> lpString, int chCount,
           int nTabOrigin)>('TabbedTextOutW');
   return _TabbedTextOut(hdc, x, y, lpString, chCount, nTabPositions,
       lpnTabStopPositions, nTabOrigin);
+}
+
+/// Tiles the specified child windows of the specified parent window.
+///
+/// ```c
+/// WORD TileWindows(
+///   HWND       hwndParent,
+///   UINT       wHow,
+///   const RECT *lpRect,
+///   UINT       cKids,
+///   const HWND *lpKids
+/// );
+/// ```
+/// {@category user32}
+int TileWindows(int hwndParent, int wHow, Pointer<RECT> lpRect, int cKids,
+    Pointer<IntPtr> lpKids) {
+  final _TileWindows = _user32.lookupFunction<
+      Uint16 Function(IntPtr hwndParent, Uint32 wHow, Pointer<RECT> lpRect,
+          Uint32 cKids, Pointer<IntPtr> lpKids),
+      int Function(int hwndParent, int wHow, Pointer<RECT> lpRect, int cKids,
+          Pointer<IntPtr> lpKids)>('TileWindows');
+  return _TileWindows(hwndParent, wHow, lpRect, cKids, lpKids);
 }
 
 /// Translates the specified virtual-key code and keyboard state to the
@@ -5125,6 +5195,26 @@ int TranslateAccelerator(int hWnd, int hAccTable, Pointer<MSG> lpMsg) {
       int Function(int hWnd, int hAccTable,
           Pointer<MSG> lpMsg)>('TranslateAcceleratorW');
   return _TranslateAccelerator(hWnd, hAccTable, lpMsg);
+}
+
+/// Processes accelerator keystrokes for window menu commands of the
+/// multiple-document interface (MDI) child windows associated with the
+/// specified MDI client window. The function translates WM_KEYUP and
+/// WM_KEYDOWN messages to WM_SYSCOMMAND messages and sends them to the
+/// appropriate MDI child windows.
+///
+/// ```c
+/// BOOL TranslateMDISysAccel(
+///   HWND  hWndClient,
+///   LPMSG lpMsg
+/// );
+/// ```
+/// {@category user32}
+int TranslateMDISysAccel(int hWndClient, Pointer<MSG> lpMsg) {
+  final _TranslateMDISysAccel = _user32.lookupFunction<
+      Int32 Function(IntPtr hWndClient, Pointer<MSG> lpMsg),
+      int Function(int hWndClient, Pointer<MSG> lpMsg)>('TranslateMDISysAccel');
+  return _TranslateMDISysAccel(hWndClient, lpMsg);
 }
 
 /// Translates virtual-key messages into character messages. The character
