@@ -18,7 +18,7 @@ import 'utils.dart';
 
 class Method extends TokenObject with CustomAttributes {
   String methodName;
-  int methodFlags;
+  int attributes;
   Uint8List signatureBlob;
   int relativeVirtualAddress;
   int implFlags;
@@ -30,15 +30,15 @@ class Method extends TokenObject with CustomAttributes {
   List<Parameter> parameters = <Parameter>[];
   late Parameter returnType;
 
-  bool _testFlag(int attribute) => methodFlags & attribute == attribute;
+  bool hasAttribute(int attribute) => attributes & attribute == attribute;
 
-  bool get isPrivate => _testFlag(CorMethodAttr.mdPrivate);
-  bool get isPublic => _testFlag(CorMethodAttr.mdPublic);
-  bool get isStatic => _testFlag(CorMethodAttr.mdStatic);
-  bool get isFinal => _testFlag(CorMethodAttr.mdFinal);
-  bool get isVirtual => _testFlag(CorMethodAttr.mdVirtual);
-  bool get isSpecialName => _testFlag(CorMethodAttr.mdSpecialName);
-  bool get isRTSpecialName => _testFlag(CorMethodAttr.mdRTSpecialName);
+  bool get isPrivate => hasAttribute(CorMethodAttr.mdPrivate);
+  bool get isPublic => hasAttribute(CorMethodAttr.mdPublic);
+  bool get isStatic => hasAttribute(CorMethodAttr.mdStatic);
+  bool get isFinal => hasAttribute(CorMethodAttr.mdFinal);
+  bool get isVirtual => hasAttribute(CorMethodAttr.mdVirtual);
+  bool get isSpecialName => hasAttribute(CorMethodAttr.mdSpecialName);
+  bool get isRTSpecialName => hasAttribute(CorMethodAttr.mdRTSpecialName);
 
   Module get module {
     final pdwMappingFlags = calloc<Uint32>();
@@ -61,7 +61,7 @@ class Method extends TokenObject with CustomAttributes {
     }
   }
 
-  Method(IMetaDataImport2 reader, int token, this.methodName, this.methodFlags,
+  Method(IMetaDataImport2 reader, int token, this.methodName, this.attributes,
       this.signatureBlob, this.relativeVirtualAddress, this.implFlags)
       : super(reader, token) {
     _parseMethodType();

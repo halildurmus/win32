@@ -17,11 +17,11 @@ class Field extends TokenObject with CustomAttributes {
   final String name;
   final int value;
   final TypeIdentifier typeIdentifier;
-  final int corType;
-  final int fieldAttribute;
+  final int cPlusTypeFlag;
+  final int attributes;
   final Uint8List signatureBlob;
 
-  bool hasAttribute(int attribute) => fieldAttribute & attribute == attribute;
+  bool hasAttribute(int attribute) => attributes & attribute == attribute;
 
   Field(
       IMetaDataImport2 reader,
@@ -29,8 +29,8 @@ class Field extends TokenObject with CustomAttributes {
       this.name,
       this.value,
       this.typeIdentifier,
-      this.corType,
-      this.fieldAttribute,
+      this.cPlusTypeFlag,
+      this.attributes,
       this.signatureBlob)
       : super(reader, token);
 
@@ -61,7 +61,7 @@ class Field extends TokenObject with CustomAttributes {
 
       if (SUCCEEDED(hr)) {
         final fieldName = szField.toDartString();
-        final ctype = pdwCPlusTypeFlag.value;
+        final cPlusTypeFlag = pdwCPlusTypeFlag.value;
 
         // The first entry of the signature is its FieldAttribute (compare
         // against the CorFieldAttr enumeration), and then follows a type
@@ -74,7 +74,7 @@ class Field extends TokenObject with CustomAttributes {
             fieldName,
             ppValue.value != nullptr ? ppValue.value.value : 0,
             typeTuple.typeIdentifier,
-            ctype,
+            cPlusTypeFlag,
             pdwAttr.value,
             signature);
       } else {

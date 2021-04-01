@@ -12,8 +12,8 @@
 
 library winmd;
 
-export 'src/attribute.dart';
 export 'src/constants.dart';
+export 'src/customattribute.dart';
 export 'src/enumeration.dart';
 export 'src/field.dart';
 export 'src/metadatastore.dart';

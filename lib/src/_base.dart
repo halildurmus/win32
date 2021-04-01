@@ -8,8 +8,8 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'attribute.dart';
 import 'com/IMetaDataImport2.dart';
+import 'customattribute.dart';
 
 // The base object for metadata objects.
 abstract class TokenObject {
@@ -85,8 +85,6 @@ mixin CustomAttributes on TokenObject {
       final hr =
           reader.GetCustomAttributeByName(token, szName, ppData, pcbData);
       if (SUCCEEDED(hr)) {
-        print(
-            'GetCustomAttributeByName(${szName.toDartString()}) returned ${pcbData.value} bytes of data');
         final sigList =
             Pointer<Uint8>.fromAddress(ppData.value).asTypedList(pcbData.value);
         return sigList;
@@ -109,7 +107,7 @@ mixin CustomAttributes on TokenObject {
     final pcAttrs = calloc<Uint32>();
 
     try {
-      // Certain AttributedObjects may not have a valid token (e.g. a return
+      // Certain TokenObjects may not have a valid token (e.g. a return
       // type has a token of 0). In this case, we return an empty set, since
       // calling EnumCustomAttributes with a scope of 0 will return all
       // attributes on all objects in the scope.
