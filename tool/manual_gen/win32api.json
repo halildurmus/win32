@@ -2758,6 +2758,11 @@
         "dllLibrary": "user32",
         "comment": "Adds the specified window to the chain of clipboard viewers."
     },
+    "SetCoalescableTimer": {
+        "prototype": "UINT_PTR SetCoalescableTimer(\n  HWND      hWnd,\n  UINT_PTR  nIDEvent,\n  UINT      uElapse,\n  TIMERPROC lpTimerFunc,\n  ULONG     uToleranceDelay\n);",
+        "dllLibrary": "user32",
+        "comment": "Creates a timer with the specified time-out value and coalescing tolerance delay."
+    },
     "SetConsoleCtrlHandler": {
         "prototype": "BOOL WINAPI SetConsoleCtrlHandler(\n  _In_opt_ PHANDLER_ROUTINE HandlerRoutine,\n  _In_     BOOL             Add\n);",
         "dllLibrary": "kernel32",
@@ -3210,6 +3215,11 @@
         "dllLibrary": "user32",
         "comment": "Reverses or restores the meaning of the left and right mouse buttons."
     },
+    "SwitchToThisWindow": {
+        "prototype": "void SwitchToThisWindow(\n  HWND hwnd,\n  BOOL fUnknown\n);",
+        "dllLibrary": "user32",
+        "comment": "Switches focus to the specified window and brings it to the foreground."
+    },
     "SymCleanup": {
         "prototype": "BOOL IMAGEAPI SymCleanup(\n  HANDLE hProcess);",
         "dllLibrary": "dbghelp",
@@ -3379,6 +3389,11 @@
         "prototype": "int ToAscii(\n  UINT       uVirtKey,\n  UINT       uScanCode,\n  const BYTE *lpKeyState,\n  LPWORD     lpChar,\n  UINT       uFlags\n);",
         "dllLibrary": "user32",
         "comment": "Translates the specified virtual-key code and keyboard state to the corresponding character or characters. The function translates the code using the input language and physical keyboard layout identified by the keyboard layout handle."
+    },
+    "TileWindows": {
+        "prototype": "WORD TileWindows(\n  HWND       hwndParent,\n  UINT       wHow,\n  const RECT *lpRect,\n  UINT       cKids,\n  const HWND *lpKids\n);",
+        "dllLibrary": "user32",
+        "comment": "Tiles the specified child windows of the specified parent window."
     },
     "ToAsciiEx": {
         "prototype": "int ToAsciiEx(\n  UINT       uVirtKey,\n  UINT       uScanCode,\n  const BYTE *lpKeyState,\n  LPWORD     lpChar,\n  UINT       uFlags,\n  HKL        dwhkl\n);",
@@ -3674,6 +3689,11 @@
         "prototype": "HWND WindowFromPoint(\n  POINT Point\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the window that contains the specified point."
+    },
+    "TranslateMDISysAccel": {
+        "prototype": "BOOL TranslateMDISysAccel(\n  HWND  hWndClient,\n  LPMSG lpMsg\n);",
+        "dllLibrary": "user32",
+        "comment": "Processes accelerator keystrokes for window menu commands of the multiple-document interface (MDI) child windows associated with the specified MDI client window. The function translates WM_KEYUP and WM_KEYDOWN messages to WM_SYSCOMMAND messages and sends them to the appropriate MDI child windows."
     },
     "WindowsCreateString": {
         "prototype": "HRESULT WindowsCreateString(\n  PCNZWCH sourceString,\n  UINT32  length,\n  HSTRING *string\n);",
