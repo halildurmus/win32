@@ -17,22 +17,29 @@ import 'method.dart';
 import 'utils.dart';
 
 /// Represents a TypeDef in the Windows Metadata file
-class TypeDef extends AttributeObject {
+class TypeDef extends TokenObject with CustomAttributes {
   final String typeName;
-  final int flags;
+  final int attributes;
   final int baseTypeToken;
 
   /// Is the type a class?
   bool get isClass =>
-      (flags & CorTypeAttr.tdClass == CorTypeAttr.tdClass) &&
-      (flags & CorTypeAttr.tdInterface != CorTypeAttr.tdInterface);
+      hasAttribute(CorTypeAttr.tdClass) &&
+      !hasAttribute(CorTypeAttr.tdInterface);
 
   /// Is the type an interface?
-  bool get isInterface =>
-      flags & CorTypeAttr.tdInterface == CorTypeAttr.tdInterface;
+  bool get isInterface => hasAttribute(CorTypeAttr.tdInterface);
 
+  /// Is the type a delegate?
   bool get isDelegate => parent?.typeName == 'System.MulticastDelegate';
 
+  /// Does the type match the given flag from [CorTypeAttr]?
+  bool hasAttribute(int attribute) => (attributes & attribute) == attribute;
+
+  /// Retrieve class layout information.
+  ///
+  /// This includes the packing alignment, the minimum class size, and the field
+  /// layout (e.g. for sparsely or overlapping structs).
   ClassLayout get classLayout => ClassLayout(reader, token);
 
   /// Is the type a non-Windows Runtime type, such as System.Object or
@@ -49,7 +56,7 @@ class TypeDef extends AttributeObject {
   const TypeDef(IMetaDataImport2 reader,
       [int token = 0,
       this.typeName = '',
-      this.flags = 0,
+      this.attributes = 0,
       this.baseTypeToken = 0])
       : super(reader, token);
 

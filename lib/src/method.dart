@@ -16,7 +16,7 @@ import 'parameter.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
 
-class Method extends AttributeObject {
+class Method extends TokenObject with CustomAttributes {
   String methodName;
   int methodFlags;
   Uint8List signatureBlob;

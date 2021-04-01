@@ -13,13 +13,15 @@ import 'com/IMetaDataImport2.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
 
-class Field extends AttributeObject {
+class Field extends TokenObject with CustomAttributes {
   final String name;
   final int value;
   final TypeIdentifier typeIdentifier;
   final int corType;
   final int fieldAttribute;
   final Uint8List signatureBlob;
+
+  bool hasAttribute(int attribute) => fieldAttribute & attribute == attribute;
 
   Field(
       IMetaDataImport2 reader,

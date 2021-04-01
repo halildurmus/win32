@@ -14,7 +14,7 @@ import 'constants.dart';
 import 'typeidentifier.dart';
 
 /// A parameter or return type.
-class Parameter extends AttributeObject {
+class Parameter extends TokenObject with CustomAttributes {
   final int sequence;
   final int attributeFlags;
   TypeIdentifier typeIdentifier;

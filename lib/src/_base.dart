@@ -47,11 +47,8 @@ abstract class TokenObject {
       other is TokenObject && other.token == token;
 }
 
-/// Represents an object that has attributes associated with it.
-abstract class AttributeObject extends TokenObject {
-  const AttributeObject(IMetaDataImport2 reader, int token)
-      : super(reader, token);
-
+/// Represents an object that has custom (named) attributes associated with it.
+mixin CustomAttributes on TokenObject {
   String attributeAsString(String attrName) {
     final szName = attrName.toNativeUtf16();
     final ppData = calloc<IntPtr>();
