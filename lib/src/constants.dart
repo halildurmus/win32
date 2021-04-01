@@ -44,29 +44,83 @@ class CorTypeAttr {
 
 /// Contains values that describe the features of a method.
 class CorMethodAttr {
+  /// Specifies member access.
   static const mdMemberAccessMask = 0x0007;
+
+  /// Specifies that the member cannot be referenced.
   static const mdPrivateScope = 0x0000;
+
+  /// Specifies that the member is accessible only by the parent type.
   static const mdPrivate = 0x0001;
+
+  /// Specifies that the member is accessible by subtypes only in this assembly.
   static const mdFamANDAssem = 0x0002;
+
+  /// Specifies that the member is accessibly by anyone in the assembly.
   static const mdAssem = 0x0003;
+
+  /// Specifies that the member is accessible only by type and subtypes.
   static const mdFamily = 0x0004;
+
+  /// Specifies that the member is accessible by derived classes and by other
+  /// types in its assembly.
   static const mdFamORAssem = 0x0005;
+
+  /// Specifies that the member is accessible by all types with access to the
+  /// scope.
   static const mdPublic = 0x0006;
+
+  /// Specifies that the member is defined as part of the type rather than as a
+  /// member of an instance.
   static const mdStatic = 0x0010;
+
+  /// Specifies that the method cannot be overridden.
   static const mdFinal = 0x0020;
+
+  /// Specifies that the method can be overridden.
   static const mdVirtual = 0x0040;
+
+  /// Specifies that the method hides by name and signature, rather than just by
+  /// name.
   static const mdHideBySig = 0x0080;
+
+  /// Specifies virtual table layout.
   static const mdVtableLayoutMask = 0x0100;
+
+  /// Specifies that the slot used for this method in the virtual table be
+  /// reused. This is the default.
   static const mdReuseSlot = 0x0000;
+
+  /// Specifies that the method always gets a new slot in the virtual table.
   static const mdNewSlot = 0x0100;
+
+  /// Specifies that the method can be overridden by the same types to which it
+  /// is visible.
   static const mdCheckAccessOnOverride = 0x0200;
+
+  /// Specifies that the method is not implemented.
   static const mdAbstract = 0x0400;
+
+  /// Specifies that the method is special, and that its name describes how.
   static const mdSpecialName = 0x0800;
+
+  /// Specifies that the method implementation is forwarded using PInvoke.
   static const mdPinvokeImpl = 0x2000;
+
+  /// Specifies that the method is a managed method exported to unmanaged code.
   static const mdUnmanagedExport = 0x0008;
+
+  /// Reserved for internal use by the common language runtime.
   static const mdReservedMask = 0xd000;
+
+  /// Specifies that the common language runtime should check the encoding of
+  /// the method name.
   static const mdRTSpecialName = 0x1000;
+
+  /// Specifies that the method has security associated with it.
   static const mdHasSecurity = 0x4000;
+
+  /// Specifies that the method calls another method containing security code.
   static const mdRequireSecObject = 0x8000;
 }
 
@@ -75,7 +129,8 @@ class CorMethodImpl {
   /// Flags that describe code type.
   static const miCodeTypeMask = 0x0003;
 
-  /// Specifies that the method implementation is Microsoft intermediate language (MSIL).
+  /// Specifies that the method implementation is Microsoft intermediate
+  /// language (MSIL).
   static const miIL = 0x0000;
 
   /// Specifies that the method implementation is native.
@@ -84,7 +139,8 @@ class CorMethodImpl {
   /// Specifies that the method implementation is OPTIL.
   static const miOPTIL = 0x0002;
 
-  /// Specifies that the method implementation is provided by the common language runtime.
+  /// Specifies that the method implementation is provided by the common
+  /// language runtime.
   static const miRuntime = 0x0003;
 
   /// Flags that indicate whether the code is managed or unmanaged.
@@ -96,10 +152,12 @@ class CorMethodImpl {
   /// Specifies that the method implementation is managed.
   static const miManaged = 0x0000;
 
-  /// Specifies that the method is defined. This flag is used primarily in merge scenarios.
+  /// Specifies that the method is defined. This flag is used primarily in merge
+  /// scenarios.
   static const miForwardRef = 0x0010;
 
-  /// Specifies that the method signature cannot be mangled for an HRESULT conversion.
+  /// Specifies that the method signature cannot be mangled for an HRESULT
+  /// conversion.
   static const miPreserveSig = 0x0080;
 
   /// Reserved for internal use by the common language runtime.
@@ -287,7 +345,8 @@ class CorPinvokeMap {
   static const pmMaxValue = 0xFFFF;
 }
 
-/// Specifies a common language runtime Type, a type modifier, or information about a type in a metadata type signature.
+/// Specifies a common language runtime Type, a type modifier, or information
+/// about a type in a metadata type signature.
 enum CorElementType {
   ELEMENT_TYPE_END,
   ELEMENT_TYPE_VOID,
