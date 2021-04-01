@@ -55,6 +55,51 @@ int AddClipboardFormatListener(int hwnd) {
 }
 
 /// Calculates the required size of the window rectangle, based on the
+/// desired client-rectangle size. The window rectangle can then be passed
+/// to the CreateWindow function to create a window whose client area is
+/// the desired size.
+///
+/// ```c
+/// BOOL AdjustWindowRect(
+///   LPRECT lpRect,
+///   DWORD  dwStyle,
+///   BOOL   bMenu
+/// );
+/// ```
+/// {@category user32}
+int AdjustWindowRect(Pointer<RECT> lpRect, int dwStyle, int bMenu) {
+  final _AdjustWindowRect = _user32.lookupFunction<
+      Int32 Function(Pointer<RECT> lpRect, Uint32 dwStyle, Int32 bMenu),
+      int Function(
+          Pointer<RECT> lpRect, int dwStyle, int bMenu)>('AdjustWindowRect');
+  return _AdjustWindowRect(lpRect, dwStyle, bMenu);
+}
+
+/// Calculates the required size of the window rectangle, based on the
+/// desired size of the client rectangle. The window rectangle can then be
+/// passed to the CreateWindowEx function to create a window whose client
+/// area is the desired size.
+///
+/// ```c
+/// BOOL AdjustWindowRectEx(
+///   LPRECT lpRect,
+///   DWORD  dwStyle,
+///   BOOL   bMenu,
+///   DWORD  dwExStyle
+/// );
+/// ```
+/// {@category user32}
+int AdjustWindowRectEx(
+    Pointer<RECT> lpRect, int dwStyle, int bMenu, int dwExStyle) {
+  final _AdjustWindowRectEx = _user32.lookupFunction<
+      Int32 Function(
+          Pointer<RECT> lpRect, Uint32 dwStyle, Int32 bMenu, Uint32 dwExStyle),
+      int Function(Pointer<RECT> lpRect, int dwStyle, int bMenu,
+          int dwExStyle)>('AdjustWindowRectEx');
+  return _AdjustWindowRectEx(lpRect, dwStyle, bMenu, dwExStyle);
+}
+
+/// Calculates the required size of the window rectangle, based on the
 /// desired size of the client rectangle and the provided DPI. This window
 /// rectangle can then be passed to the CreateWindowEx function to create a
 /// window with a client area of the desired size.
@@ -79,6 +124,23 @@ int AdjustWindowRectExForDpi(
   return _AdjustWindowRectExForDpi(lpRect, dwStyle, bMenu, dwExStyle, dpi);
 }
 
+/// Enables the specified process to set the foreground window using the
+/// SetForegroundWindow function. The calling process must already be able
+/// to set the foreground window.
+///
+/// ```c
+/// BOOL AllowSetForegroundWindow(
+///   DWORD dwProcessId
+/// );
+/// ```
+/// {@category user32}
+int AllowSetForegroundWindow(int dwProcessId) {
+  final _AllowSetForegroundWindow = _user32.lookupFunction<
+      Int32 Function(Uint32 dwProcessId),
+      int Function(int dwProcessId)>('AllowSetForegroundWindow');
+  return _AllowSetForegroundWindow(dwProcessId);
+}
+
 /// Enables you to produce special effects when showing or hiding windows.
 /// There are four types of animation: roll, slide, collapse or expand, and
 /// alpha-blended fade.
@@ -96,6 +158,20 @@ int AnimateWindow(int hWnd, int dwTime, int dwFlags) {
       Int32 Function(IntPtr hWnd, Uint32 dwTime, Uint32 dwFlags),
       int Function(int hWnd, int dwTime, int dwFlags)>('AnimateWindow');
   return _AnimateWindow(hWnd, dwTime, dwFlags);
+}
+
+/// Indicates whether an owned, visible, top-level pop-up, or overlapped
+/// window exists on the screen. The function searches the entire screen,
+/// not just the calling application's client area.
+///
+/// ```c
+/// BOOL AnyPopup();
+/// ```
+/// {@category user32}
+int AnyPopup() {
+  final _AnyPopup =
+      _user32.lookupFunction<Int32 Function(), int Function()>('AnyPopup');
+  return _AnyPopup();
 }
 
 /// Appends a new item to the end of the specified menu bar, drop-down
@@ -136,6 +212,38 @@ int AreDpiAwarenessContextsEqual(int dpiContextA, int dpiContextB) {
       int Function(
           int dpiContextA, int dpiContextB)>('AreDpiAwarenessContextsEqual');
   return _AreDpiAwarenessContextsEqual(dpiContextA, dpiContextB);
+}
+
+/// Arranges all the minimized (iconic) child windows of the specified
+/// parent window.
+///
+/// ```c
+/// UINT ArrangeIconicWindows(
+///   HWND hWnd
+/// );
+/// ```
+/// {@category user32}
+int ArrangeIconicWindows(int hWnd) {
+  final _ArrangeIconicWindows = _user32.lookupFunction<
+      Uint32 Function(IntPtr hWnd),
+      int Function(int hWnd)>('ArrangeIconicWindows');
+  return _ArrangeIconicWindows(hWnd);
+}
+
+/// Allocates memory for a multiple-window- position structure and returns
+/// the handle to the structure.
+///
+/// ```c
+/// HDWP BeginDeferWindowPos(
+///   int nNumWindows
+/// );
+/// ```
+/// {@category user32}
+int BeginDeferWindowPos(int nNumWindows) {
+  final _BeginDeferWindowPos = _user32.lookupFunction<
+      IntPtr Function(Int32 nNumWindows),
+      int Function(int nNumWindows)>('BeginDeferWindowPos');
+  return _BeginDeferWindowPos(nNumWindows);
 }
 
 /// The BeginPaint function prepares the specified window for painting and
@@ -183,6 +291,134 @@ int BringWindowToTop(int hWnd) {
   final _BringWindowToTop = _user32.lookupFunction<Int32 Function(IntPtr hWnd),
       int Function(int hWnd)>('BringWindowToTop');
   return _BringWindowToTop(hWnd);
+}
+
+/// Sends a message to the specified recipients. The recipients can be
+/// applications, installable drivers, network drivers, system-level device
+/// drivers, or any combination of these system components.
+///
+/// ```c
+/// long BroadcastSystemMessageW(
+///   DWORD   flags,
+///   LPDWORD lpInfo,
+///   UINT    Msg,
+///   WPARAM  wParam,
+///   LPARAM  lParam
+/// );
+/// ```
+/// {@category user32}
+int BroadcastSystemMessage(
+    int flags, Pointer<Uint32> lpInfo, int Msg, int wParam, int lParam) {
+  final _BroadcastSystemMessage = _user32.lookupFunction<
+      Int32 Function(Uint32 flags, Pointer<Uint32> lpInfo, Uint32 Msg,
+          IntPtr wParam, IntPtr lParam),
+      int Function(int flags, Pointer<Uint32> lpInfo, int Msg, int wParam,
+          int lParam)>('BroadcastSystemMessageW');
+  return _BroadcastSystemMessage(flags, lpInfo, Msg, wParam, lParam);
+}
+
+/// Calculates an appropriate pop-up window position using the specified
+/// anchor point, pop-up window size, flags, and the optional exclude
+/// rectangle. When the specified pop-up window size is smaller than the
+/// desktop window size, use the CalculatePopupWindowPosition function to
+/// ensure that the pop-up window is fully visible on the desktop window,
+/// regardless of the specified anchor point.
+///
+/// ```c
+/// BOOL CalculatePopupWindowPosition(
+///   const POINT *anchorPoint,
+///   const SIZE  *windowSize,
+///   UINT        flags,
+///   RECT        *excludeRect,
+///   RECT        *popupWindowPosition
+/// );
+/// ```
+/// {@category user32}
+int CalculatePopupWindowPosition(
+    Pointer<POINT> anchorPoint,
+    Pointer<SIZE> windowSize,
+    int flags,
+    Pointer<RECT> excludeRect,
+    Pointer<RECT> popupWindowPosition) {
+  final _CalculatePopupWindowPosition = _user32.lookupFunction<
+      Int32 Function(
+          Pointer<POINT> anchorPoint,
+          Pointer<SIZE> windowSize,
+          Uint32 flags,
+          Pointer<RECT> excludeRect,
+          Pointer<RECT> popupWindowPosition),
+      int Function(
+          Pointer<POINT> anchorPoint,
+          Pointer<SIZE> windowSize,
+          int flags,
+          Pointer<RECT> excludeRect,
+          Pointer<RECT> popupWindowPosition)>('CalculatePopupWindowPosition');
+  return _CalculatePopupWindowPosition(
+      anchorPoint, windowSize, flags, excludeRect, popupWindowPosition);
+}
+
+/// Passes the specified message and hook code to the hook procedures
+/// associated with the WH_SYSMSGFILTER and WH_MSGFILTER hooks. A
+/// WH_SYSMSGFILTER or WH_MSGFILTER hook procedure is an
+/// application-defined callback function that examines and, optionally,
+/// modifies messages for a dialog box, message box, menu, or scroll bar.
+///
+/// ```c
+/// BOOL CallMsgFilterW(
+///   LPMSG lpMsg,
+///   int   nCode
+/// );
+/// ```
+/// {@category user32}
+int CallMsgFilter(Pointer<MSG> lpMsg, int nCode) {
+  final _CallMsgFilter = _user32.lookupFunction<
+      Int32 Function(Pointer<MSG> lpMsg, Int32 nCode),
+      int Function(Pointer<MSG> lpMsg, int nCode)>('CallMsgFilterW');
+  return _CallMsgFilter(lpMsg, nCode);
+}
+
+/// Passes message information to the specified window procedure.
+///
+/// ```c
+/// LRESULT CallWindowProcW(
+///   WNDPROC lpPrevWndFunc,
+///   HWND    hWnd,
+///   UINT    Msg,
+///   WPARAM  wParam,
+///   LPARAM  lParam
+/// );
+/// ```
+/// {@category user32}
+int CallWindowProc(Pointer<NativeFunction<WindowProc>> lpPrevWndFunc, int hWnd,
+    int Msg, int wParam, int lParam) {
+  final _CallWindowProc = _user32.lookupFunction<
+      IntPtr Function(Pointer<NativeFunction<WindowProc>> lpPrevWndFunc,
+          IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
+      int Function(Pointer<NativeFunction<WindowProc>> lpPrevWndFunc, int hWnd,
+          int Msg, int wParam, int lParam)>('CallWindowProcW');
+  return _CallWindowProc(lpPrevWndFunc, hWnd, Msg, wParam, lParam);
+}
+
+/// Cascades the specified child windows of the specified parent window.
+///
+/// ```c
+/// WORD CascadeWindows(
+///   HWND       hwndParent,
+///   UINT       wHow,
+///   const RECT *lpRect,
+///   UINT       cKids,
+///   const HWND *lpKids
+/// );
+/// ```
+/// {@category user32}
+int CascadeWindows(int hwndParent, int wHow, Pointer<RECT> lpRect, int cKids,
+    Pointer<IntPtr> lpKids) {
+  final _CascadeWindows = _user32.lookupFunction<
+      Uint16 Function(IntPtr hwndParent, Uint32 wHow, Pointer<RECT> lpRect,
+          Uint32 cKids, Pointer<IntPtr> lpKids),
+      int Function(int hwndParent, int wHow, Pointer<RECT> lpRect, int cKids,
+          Pointer<IntPtr> lpKids)>('CascadeWindows');
+  return _CascadeWindows(hwndParent, wHow, lpRect, cKids, lpKids);
 }
 
 /// Removes a specified window from the chain of clipboard viewers.
@@ -431,6 +667,61 @@ int CreateDialogIndirectParam(
       hInstance, lpTemplate, hWndParent, lpDialogFunc, dwInitParam);
 }
 
+/// Creates a multiple-document interface (MDI) child window.
+///
+/// ```c
+/// HWND CreateMDIWindowW(
+///   LPCWSTR   lpClassName,
+///   LPCWSTR   lpWindowName,
+///   DWORD     dwStyle,
+///   int       X,
+///   int       Y,
+///   int       nWidth,
+///   int       nHeight,
+///   HWND      hWndParent,
+///   HINSTANCE hInstance,
+///   LPARAM    lParam
+/// );
+/// ```
+/// {@category user32}
+int CreateMDIWindow(
+    Pointer<Utf16> lpClassName,
+    Pointer<Utf16> lpWindowName,
+    int dwStyle,
+    int X,
+    int Y,
+    int nWidth,
+    int nHeight,
+    int hWndParent,
+    int hInstance,
+    int lParam) {
+  final _CreateMDIWindow = _user32.lookupFunction<
+      IntPtr Function(
+          Pointer<Utf16> lpClassName,
+          Pointer<Utf16> lpWindowName,
+          Uint32 dwStyle,
+          Int32 X,
+          Int32 Y,
+          Int32 nWidth,
+          Int32 nHeight,
+          IntPtr hWndParent,
+          IntPtr hInstance,
+          IntPtr lParam),
+      int Function(
+          Pointer<Utf16> lpClassName,
+          Pointer<Utf16> lpWindowName,
+          int dwStyle,
+          int X,
+          int Y,
+          int nWidth,
+          int nHeight,
+          int hWndParent,
+          int hInstance,
+          int lParam)>('CreateMDIWindowW');
+  return _CreateMDIWindow(lpClassName, lpWindowName, dwStyle, X, Y, nWidth,
+      nHeight, hWndParent, hInstance, lParam);
+}
+
 /// Creates a menu. The menu is initially empty, but it can be filled with
 /// menu items by using the InsertMenuItem, AppendMenu, and InsertMenu
 /// functions.
@@ -509,6 +800,59 @@ int CreateWindowEx(
           Pointer lpParam)>('CreateWindowExW');
   return _CreateWindowEx(dwExStyle, lpClassName, lpWindowName, dwStyle, X, Y,
       nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam);
+}
+
+/// Updates the specified multiple-window – position structure for the
+/// specified window. The function then returns a handle to the updated
+/// structure. The EndDeferWindowPos function uses the information in this
+/// structure to change the position and size of a number of windows
+/// simultaneously. The BeginDeferWindowPos function creates the structure.
+///
+/// ```c
+/// HDWP DeferWindowPos(
+///   HDWP hWinPosInfo,
+///   HWND hWnd,
+///   HWND hWndInsertAfter,
+///   int  x,
+///   int  y,
+///   int  cx,
+///   int  cy,
+///   UINT uFlags
+/// );
+/// ```
+/// {@category user32}
+int DeferWindowPos(int hWinPosInfo, int hWnd, int hWndInsertAfter, int x, int y,
+    int cx, int cy, int uFlags) {
+  final _DeferWindowPos = _user32.lookupFunction<
+      IntPtr Function(IntPtr hWinPosInfo, IntPtr hWnd, IntPtr hWndInsertAfter,
+          Int32 x, Int32 y, Int32 cx, Int32 cy, Uint32 uFlags),
+      int Function(int hWinPosInfo, int hWnd, int hWndInsertAfter, int x, int y,
+          int cx, int cy, int uFlags)>('DeferWindowPos');
+  return _DeferWindowPos(
+      hWinPosInfo, hWnd, hWndInsertAfter, x, y, cx, cy, uFlags);
+}
+
+/// Provides default processing for any window message that the window
+/// procedure of a multiple-document interface (MDI) child window does not
+/// process. A window message not processed by the window procedure must be
+/// passed to the DefMDIChildProc function, not to the DefWindowProc
+/// function.
+///
+/// ```c
+/// LRESULT LRESULT DefMDIChildProcW(
+///   HWND   hWnd,
+///   UINT   uMsg,
+///   WPARAM wParam,
+///   LPARAM lParam
+/// );
+/// ```
+/// {@category user32}
+int DefMDIChildProc(int hWnd, int uMsg, int wParam, int lParam) {
+  final _DefMDIChildProc = _user32.lookupFunction<
+      IntPtr Function(IntPtr hWnd, Uint32 uMsg, IntPtr wParam, IntPtr lParam),
+      int Function(
+          int hWnd, int uMsg, int wParam, int lParam)>('DefMDIChildProcW');
+  return _DefMDIChildProc(hWnd, uMsg, wParam, lParam);
 }
 
 /// Calls the default window procedure to provide default processing for
@@ -828,6 +1172,22 @@ int EnableWindow(int hWnd, int bEnable) {
   return _EnableWindow(hWnd, bEnable);
 }
 
+/// Simultaneously updates the position and size of one or more windows in
+/// a single screen-refreshing cycle.
+///
+/// ```c
+/// BOOL EndDeferWindowPos(
+///   HDWP hWinPosInfo
+/// );
+/// ```
+/// {@category user32}
+int EndDeferWindowPos(int hWinPosInfo) {
+  final _EndDeferWindowPos = _user32.lookupFunction<
+      Int32 Function(IntPtr hWinPosInfo),
+      int Function(int hWinPosInfo)>('EndDeferWindowPos');
+  return _EndDeferWindowPos(hWinPosInfo);
+}
+
 /// Destroys a modal dialog box, causing the system to end any processing
 /// for the dialog box.
 ///
@@ -932,6 +1292,31 @@ int EnumDisplayMonitors(int hdc, Pointer<RECT> lprcClip,
           Pointer<NativeFunction<MonitorEnumProc>> lpfnEnum,
           int dwData)>('EnumDisplayMonitors');
   return _EnumDisplayMonitors(hdc, lprcClip, lpfnEnum, dwData);
+}
+
+/// Enumerates all nonchild windows associated with a thread by passing the
+/// handle to each window, in turn, to an application-defined callback
+/// function. EnumThreadWindows continues until the last window is
+/// enumerated or the callback function returns FALSE.
+///
+/// ```c
+/// BOOL EnumThreadWindows(
+///   DWORD       dwThreadId,
+///   WNDENUMPROC lpfn,
+///   LPARAM      lParam
+/// );
+/// ```
+/// {@category user32}
+int EnumThreadWindows(
+    int dwThreadId, Pointer<NativeFunction<EnumWindowsProc>> lpfn, int lParam) {
+  final _EnumThreadWindows = _user32.lookupFunction<
+      Int32 Function(Uint32 dwThreadId,
+          Pointer<NativeFunction<EnumWindowsProc>> lpfn, IntPtr lParam),
+      int Function(
+          int dwThreadId,
+          Pointer<NativeFunction<EnumWindowsProc>> lpfn,
+          int lParam)>('EnumThreadWindows');
+  return _EnumThreadWindows(dwThreadId, lpfn, lParam);
 }
 
 /// Enumerates all top-level windows on the screen by passing the handle to
@@ -1187,6 +1572,23 @@ int GetClassInfoEx(
       int Function(int hInstance, Pointer<Utf16> lpszClass,
           Pointer<WNDCLASSEX> lpwcx)>('GetClassInfoExW');
   return _GetClassInfoEx(hInstance, lpszClass, lpwcx);
+}
+
+/// Retrieves the specified value from the WNDCLASSEX structure associated
+/// with the specified window.
+///
+/// ```c
+/// ULONG_PTR GetClassLongPtrW(
+///   HWND hWnd,
+///   int  nIndex
+/// );
+/// ```
+/// {@category user32}
+int GetClassLongPtr(int hWnd, int nIndex) {
+  final _GetClassLongPtr = _user32.lookupFunction<
+      IntPtr Function(IntPtr hWnd, Uint32 nIndex),
+      int Function(int hWnd, int nIndex)>('GetClassLongPtrW');
+  return _GetClassLongPtr(hWnd, nIndex);
 }
 
 /// Retrieves the coordinates of a window's client area. The client
@@ -1739,6 +2141,19 @@ int GetMessageExtraInfo() {
   return _GetMessageExtraInfo();
 }
 
+/// Retrieves the cursor position for the last message retrieved by the
+/// GetMessage function.
+///
+/// ```c
+/// DWORD GetMessagePos();
+/// ```
+/// {@category user32}
+int GetMessagePos() {
+  final _GetMessagePos = _user32
+      .lookupFunction<Uint32 Function(), int Function()>('GetMessagePos');
+  return _GetMessagePos();
+}
+
 /// Retrieves the message time for the last message retrieved by the
 /// GetMessage function. The time is a long integer that specifies the
 /// elapsed time, in milliseconds, from the time the system was started to
@@ -2087,6 +2502,22 @@ int GetThreadDpiHostingBehavior() {
   return _GetThreadDpiHostingBehavior();
 }
 
+/// Retrieves information about the specified title bar.
+///
+/// ```c
+/// BOOL GetTitleBarInfo(
+///   HWND          hwnd,
+///   PTITLEBARINFO pti
+/// );
+/// ```
+/// {@category user32}
+int GetTitleBarInfo(int hwnd, Pointer<TITLEBARINFO> pti) {
+  final _GetTitleBarInfo = _user32.lookupFunction<
+      Int32 Function(IntPtr hwnd, Pointer<TITLEBARINFO> pti),
+      int Function(int hwnd, Pointer<TITLEBARINFO> pti)>('GetTitleBarInfo');
+  return _GetTitleBarInfo(hwnd, pti);
+}
+
 /// Examines the Z order of the child windows associated with the specified
 /// parent window and retrieves a handle to the child window at the top of
 /// the Z order.
@@ -2375,6 +2806,25 @@ int GetWindowTextLength(int hWnd) {
   return _GetWindowTextLength(hWnd);
 }
 
+/// Retrieves the identifier of the thread that created the specified
+/// window and, optionally, the identifier of the process that created the
+/// window.
+///
+/// ```c
+/// DWORD GetWindowThreadProcessId(
+///   HWND    hWnd,
+///   LPDWORD lpdwProcessId
+/// );
+/// ```
+/// {@category user32}
+int GetWindowThreadProcessId(int hWnd, Pointer<Uint32> lpdwProcessId) {
+  final _GetWindowThreadProcessId = _user32.lookupFunction<
+      Uint32 Function(IntPtr hWnd, Pointer<Uint32> lpdwProcessId),
+      int Function(
+          int hWnd, Pointer<Uint32> lpdwProcessId)>('GetWindowThreadProcessId');
+  return _GetWindowThreadProcessId(hWnd, lpdwProcessId);
+}
+
 /// The GrayString function draws gray text at the specified location. The
 /// function draws the text by copying it into a memory bitmap, graying the
 /// bitmap, and then copying the bitmap to the screen. The function grays
@@ -2464,6 +2914,23 @@ int InSendMessage() {
   final _InSendMessage =
       _user32.lookupFunction<Int32 Function(), int Function()>('InSendMessage');
   return _InSendMessage();
+}
+
+/// Determines whether the current window procedure is processing a message
+/// that was sent from another thread (in the same process or a different
+/// process).
+///
+/// ```c
+/// DWORD InSendMessageEx(
+///   LPVOID lpReserved
+/// );
+/// ```
+/// {@category user32}
+int InSendMessageEx(Pointer lpReserved) {
+  final _InSendMessageEx = _user32.lookupFunction<
+      Uint32 Function(Pointer lpReserved),
+      int Function(Pointer lpReserved)>('InSendMessageEx');
+  return _InSendMessageEx(lpReserved);
 }
 
 /// Inserts a new menu item into a menu, moving other items down the menu.
@@ -2656,6 +3123,23 @@ int IsGUIThread(int bConvert) {
   final _IsGUIThread = _user32.lookupFunction<Int32 Function(Int32 bConvert),
       int Function(int bConvert)>('IsGUIThread');
   return _IsGUIThread(bConvert);
+}
+
+/// Determines whether the system considers that a specified application is
+/// not responding. An application is considered to be not responding if it
+/// is not waiting for input, is not in startup processing, and has not
+/// called PeekMessage within the internal timeout period of 5 seconds.
+///
+/// ```c
+/// BOOL IsHungAppWindow(
+///   HWND hwnd
+/// );
+/// ```
+/// {@category user32}
+int IsHungAppWindow(int hwnd) {
+  final _IsHungAppWindow = _user32.lookupFunction<Int32 Function(IntPtr hwnd),
+      int Function(int hwnd)>('IsHungAppWindow');
+  return _IsHungAppWindow(hwnd);
 }
 
 /// Determines whether the specified window is minimized (iconic).
@@ -2879,6 +3363,22 @@ int LoadKeyboardLayout(Pointer<Utf16> pwszKLID, int Flags) {
       IntPtr Function(Pointer<Utf16> pwszKLID, Uint32 Flags),
       int Function(Pointer<Utf16> pwszKLID, int Flags)>('LoadKeyboardLayoutW');
   return _LoadKeyboardLayout(pwszKLID, Flags);
+}
+
+/// The foreground process can call the LockSetForegroundWindow function to
+/// disable calls to the SetForegroundWindow function.
+///
+/// ```c
+/// BOOL LockSetForegroundWindow(
+///   UINT uLockCode
+/// );
+/// ```
+/// {@category user32}
+int LockSetForegroundWindow(int uLockCode) {
+  final _LockSetForegroundWindow = _user32.lookupFunction<
+      Int32 Function(Uint32 uLockCode),
+      int Function(int uLockCode)>('LockSetForegroundWindow');
+  return _LockSetForegroundWindow(uLockCode);
 }
 
 /// The LockWindowUpdate function disables or enables drawing in the

@@ -39,16 +39,6 @@
         "dllLibrary": "user32",
         "comment": "Calculates the required size of the window rectangle, based on the desired size of the client rectangle. The window rectangle can then be passed to the CreateWindowEx function to create a window whose client area is the desired size."
     },
-    "AllowSetForegroundWindow": {
-        "prototype": "BOOL AllowSetForegroundWindow(\n  DWORD dwProcessId\n);",
-        "dllLibrary": "user32",
-        "comment": "Enables the specified process to set the foreground window using the SetForegroundWindow function. The calling process must already be able to set the foreground window."
-    },
-    "LockSetForegroundWindow": {
-        "prototype": "BOOL LockSetForegroundWindow(\n  UINT uLockCode\n);",
-        "dllLibrary": "user32",
-        "comment": "The foreground process can call the LockSetForegroundWindow function to disable calls to the SetForegroundWindow function."
-    },
     "AdjustWindowRectExForDpi": {
         "prototype": "BOOL AdjustWindowRectExForDpi(\n  LPRECT lpRect,\n  DWORD  dwStyle,\n  BOOL   bMenu,\n  DWORD  dwExStyle,\n  UINT   dpi\n);",
         "dllLibrary": "user32",
@@ -59,6 +49,11 @@
         "prototype": "BOOL WINAPI AllocConsole(void);",
         "dllLibrary": "kernel32",
         "comment": "Allocates a new console for the calling process."
+    },
+    "AllowSetForegroundWindow": {
+        "prototype": "BOOL AllowSetForegroundWindow(\n  DWORD dwProcessId\n);",
+        "dllLibrary": "user32",
+        "comment": "Enables the specified process to set the foreground window using the SetForegroundWindow function. The calling process must already be able to set the foreground window."
     },
     "AngleArc": {
         "prototype": "BOOL AngleArc(\n  HDC   hdc,\n  int   x,\n  int   y,\n  DWORD r,\n  FLOAT StartAngle,\n  FLOAT SweepAngle\n);",
@@ -79,11 +74,6 @@
         "prototype": "BOOL AnyPopup();",
         "dllLibrary": "user32",
         "comment": "Indicates whether an owned, visible, top-level pop-up, or overlapped window exists on the screen. The function searches the entire screen, not just the calling application's client area."
-    },
-    "ArrangeIconicWindows": {
-        "prototype": "UINT ArrangeIconicWindows(\n  HWND hWnd\n);",
-        "dllLibrary": "user32",
-        "comment": "Arranges all the minimized (iconic) child windows of the specified parent window."
     },
     "AppendMenu": {
         "prototype": "BOOL AppendMenuW(\n  HMENU    hMenu,\n  UINT     uFlags,\n  UINT_PTR uIDNewItem,\n  LPCWSTR  lpNewItem\n);",
@@ -106,6 +96,11 @@
         "comment": "Determines whether two DPI_AWARENESS_CONTEXT values are identical.",
         "minimumWindowsVersion": "WIN10_RS1"
     },
+    "ArrangeIconicWindows": {
+        "prototype": "UINT ArrangeIconicWindows(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Arranges all the minimized (iconic) child windows of the specified parent window."
+    },
     "AttachConsole": {
         "prototype": "BOOL WINAPI AttachConsole(\n  _In_ DWORD dwProcessId\n);",
         "dllLibrary": "kernel32",
@@ -120,16 +115,6 @@
         "prototype": "HDWP BeginDeferWindowPos(\n  int nNumWindows\n);",
         "dllLibrary": "user32",
         "comment": "Allocates memory for a multiple-window- position structure and returns the handle to the structure."
-    },
-    "DeferWindowPos": {
-        "prototype": "HDWP DeferWindowPos(\n  HDWP hWinPosInfo,\n  HWND hWnd,\n  HWND hWndInsertAfter,\n  int  x,\n  int  y,\n  int  cx,\n  int  cy,\n  UINT uFlags\n);",
-        "dllLibrary": "user32",
-        "comment": "Updates the specified multiple-window – position structure for the specified window. The function then returns a handle to the updated structure. The EndDeferWindowPos function uses the information in this structure to change the position and size of a number of windows simultaneously. The BeginDeferWindowPos function creates the structure."
-    },
-    "EndDeferWindowPos": {
-        "prototype": "BOOL EndDeferWindowPos(\n  HDWP hWinPosInfo\n);",
-        "dllLibrary": "user32",
-        "comment": "Simultaneously updates the position and size of one or more windows in a single screen-refreshing cycle."
     },
     "BeginPaint": {
         "prototype": "HDC BeginPaint(\n  HWND          hWnd,\n  LPPAINTSTRUCT lpPaint\n);",
@@ -276,30 +261,25 @@
         "dllLibrary": "user32",
         "comment": "Passes the specified message and hook code to the hook procedures associated with the WH_SYSMSGFILTER and WH_MSGFILTER hooks. A WH_SYSMSGFILTER or WH_MSGFILTER hook procedure is an application-defined callback function that examines and, optionally, modifies messages for a dialog box, message box, menu, or scroll bar."
     },
-    "CallWindowProc": {
-        "prototype": "LRESULT CallWindowProcW(\n  WNDPROC lpPrevWndFunc,\n  HWND    hWnd,\n  UINT    Msg,\n  WPARAM  wParam,\n  LPARAM  lParam\n);",
-        "dllLibrary": "user32",
-        "comment": "Passes message information to the specified window procedure."
-    },
-    "CascadeWindows": {
-        "prototype": "WORD CascadeWindows(\n  HWND       hwndParent,\n  UINT       wHow,\n  const RECT *lpRect,\n  UINT       cKids,\n  const HWND *lpKids\n);",
-        "dllLibrary": "user32",
-        "comment": "Cascades the specified child windows of the specified parent window."
-    },
-    "CreateMDIWindow": {
-        "prototype": "HWND CreateMDIWindowW(\n  LPCWSTR   lpClassName,\n  LPCWSTR   lpWindowName,\n  DWORD     dwStyle,\n  int       X,\n  int       Y,\n  int       nWidth,\n  int       nHeight,\n  HWND      hWndParent,\n  HINSTANCE hInstance,\n  LPARAM    lParam\n);",
-        "dllLibrary": "user32",
-        "comment": "Creates a multiple-document interface (MDI) child window."
-    },
     "CallNtPowerInformation": {
         "prototype": "NTSTATUS CallNtPowerInformation(\n  POWER_INFORMATION_LEVEL InformationLevel,\n  PVOID                   InputBuffer,\n  ULONG                   InputBufferLength,\n  PVOID                   OutputBuffer,\n  ULONG                   OutputBufferLength\n);",
         "dllLibrary": "powrprof",
         "comment": "Sets or retrieves power information."
     },
+    "CallWindowProc": {
+        "prototype": "LRESULT CallWindowProcW(\n  WNDPROC lpPrevWndFunc,\n  HWND    hWnd,\n  UINT    Msg,\n  WPARAM  wParam,\n  LPARAM  lParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Passes message information to the specified window procedure."
+    },
     "CancelDC": {
         "prototype": "BOOL CancelDC(\n  HDC hdc\n);",
         "dllLibrary": "gdi32",
         "comment": "The CancelDC function cancels any pending operation on the specified device context (DC)."
+    },
+    "CascadeWindows": {
+        "prototype": "WORD CascadeWindows(\n  HWND       hwndParent,\n  UINT       wHow,\n  const RECT *lpRect,\n  UINT       cKids,\n  const HWND *lpKids\n);",
+        "dllLibrary": "user32",
+        "comment": "Cascades the specified child windows of the specified parent window."
     },
     "ChangeClipboardChain": {
         "prototype": "BOOL ChangeClipboardChain(\n  HWND hWndRemove,\n  HWND hWndNewNext\n  );",
@@ -544,6 +524,11 @@
         "dllLibrary": "gdi32",
         "comment": "The CreateHatchBrush function creates a logical brush that has the specified hatch pattern and color."
     },
+    "CreateMDIWindow": {
+        "prototype": "HWND CreateMDIWindowW(\n  LPCWSTR   lpClassName,\n  LPCWSTR   lpWindowName,\n  DWORD     dwStyle,\n  int       X,\n  int       Y,\n  int       nWidth,\n  int       nHeight,\n  HWND      hWndParent,\n  HINSTANCE hInstance,\n  LPARAM    lParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Creates a multiple-document interface (MDI) child window."
+    },
     "CreateMenu": {
         "prototype": "HMENU CreateMenu();",
         "dllLibrary": "user32",
@@ -629,6 +614,11 @@
         "prototype": "BOOL DecryptFileW(\n  LPCWSTR lpFileName,\n  DWORD   dwReserved\n);",
         "dllLibrary": "advapi32",
         "comment": "Decrypts an encrypted file or directory."
+    },
+    "DeferWindowPos": {
+        "prototype": "HDWP DeferWindowPos(\n  HDWP hWinPosInfo,\n  HWND hWnd,\n  HWND hWndInsertAfter,\n  int  x,\n  int  y,\n  int  cx,\n  int  cy,\n  UINT uFlags\n);",
+        "dllLibrary": "user32",
+        "comment": "Updates the specified multiple-window – position structure for the specified window. The function then returns a handle to the updated structure. The EndDeferWindowPos function uses the information in this structure to change the position and size of a number of windows simultaneously. The BeginDeferWindowPos function creates the structure."
     },
     "DefMDIChildProc": {
         "prototype": "LRESULT LRESULT DefMDIChildProcW(\n  HWND   hWnd,\n  UINT   uMsg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
@@ -786,6 +776,11 @@
         "dllLibrary": "advapi32",
         "comment": "Encrypts a file or directory. All data streams in a file are encrypted. All new files created in an encrypted directory are encrypted."
     },
+    "EndDeferWindowPos": {
+        "prototype": "BOOL EndDeferWindowPos(\n  HDWP hWinPosInfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Simultaneously updates the position and size of one or more windows in a single screen-refreshing cycle."
+    },
     "EndDialog": {
         "prototype": "BOOL EndDialog(\n  HWND    hDlg,\n  INT_PTR nResult\n);",
         "dllLibrary": "user32",
@@ -796,15 +791,15 @@
         "dllLibrary": "user32",
         "comment": "The EndPaint function marks the end of painting in the specified window. This function is required for each call to the BeginPaint function, but only after painting is complete."
     },
-    "EndTask": {
-        "prototype": "BOOL EndTask(\n  HWND hWnd,\n  BOOL fShutDown,\n  BOOL fForce\n);",
-        "dllLibrary": "user32",
-        "comment": "Forcibly closes the specified window."
-    },
     "EndPath": {
         "prototype": "BOOL EndPath(\n  HDC hdc\n);",
         "dllLibrary": "gdi32",
         "comment": "The EndPath function closes a path bracket and selects the path defined by the bracket into the specified device context."
+    },
+    "EndTask": {
+        "prototype": "BOOL EndTask(\n  HWND hWnd,\n  BOOL fShutDown,\n  BOOL fForce\n);",
+        "dllLibrary": "user32",
+        "comment": "Forcibly closes the specified window."
     },
     "EndUpdateResource": {
         "prototype": "BOOL EndUpdateResourceW(\n  HANDLE hUpdate,\n  BOOL   fDiscard\n);",
@@ -1797,15 +1792,15 @@
         "dllLibrary": "user32",
         "comment": "Copies the text of the specified window's title bar (if it has one) into a buffer. If the specified window is a control, the text of the control is copied. However, GetWindowText cannot retrieve the text of a control in another application."
     },
-    "GetWindowThreadProcessId": {
-        "prototype": "DWORD GetWindowThreadProcessId(\n  HWND    hWnd,\n  LPDWORD lpdwProcessId\n);",
-        "dllLibrary": "user32",
-        "comment": "Retrieves the identifier of the thread that created the specified window and, optionally, the identifier of the process that created the window."
-    },
     "GetWindowTextLength": {
         "prototype": "int GetWindowTextLengthW(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves the length, in characters, of the specified window's title bar text (if the window has a title bar). If the specified window is a control, the function retrieves the length of the text within the control. However, GetWindowTextLength cannot retrieve the length of the text of an edit control in another application."
+    },
+    "GetWindowThreadProcessId": {
+        "prototype": "DWORD GetWindowThreadProcessId(\n  HWND    hWnd,\n  LPDWORD lpdwProcessId\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the identifier of the thread that created the specified window and, optionally, the identifier of the process that created the window."
     },
     "GlobalAlloc": {
         "prototype": "HGLOBAL GlobalAlloc(\n  UINT   uFlags,\n  SIZE_T dwBytes\n);",
@@ -2043,6 +2038,11 @@
         "prototype": "LPVOID LockResource(\n  HGLOBAL hResData\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves a pointer to the specified resource in memory."
+    },
+    "LockSetForegroundWindow": {
+        "prototype": "BOOL LockSetForegroundWindow(\n  UINT uLockCode\n);",
+        "dllLibrary": "user32",
+        "comment": "The foreground process can call the LockSetForegroundWindow function to disable calls to the SetForegroundWindow function."
     },
     "LockWindowUpdate": {
         "prototype": "BOOL LockWindowUpdate(\n  HWND hWndLock\n);",
