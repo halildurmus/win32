@@ -17,12 +17,12 @@ void main() {
     final scope = MetadataStore.getWin32Scope();
     final accel = scope['Windows.Win32.WindowsAndMessaging.ACCEL']!;
 
-    expect(accel.hasAttribute(CorTypeAttr.tdClass), isTrue);
-    expect(accel.hasAttribute(CorTypeAttr.tdPublic), isTrue);
-    expect(accel.hasAttribute(CorTypeAttr.tdSequentialLayout), isTrue);
-    expect(accel.hasAttribute(CorTypeAttr.tdAnsiClass), isTrue);
-    expect(accel.hasAttribute(CorTypeAttr.tdSealed), isTrue);
-    expect(accel.hasAttribute(CorTypeAttr.tdBeforeFieldInit), isTrue);
+    expect(accel.isClass, isTrue);
+    expect(accel.typeVisibility, equals(TypeVisibility.Public));
+    expect(accel.typeLayout, equals(TypeLayout.Sequential));
+    expect(accel.stringFormat, equals(StringFormat.Ansi));
+    expect(accel.isSealed, isTrue);
+    expect(accel.isBeforeFieldInit, isTrue);
 
     expect(accel.typeName, equals('Windows.Win32.WindowsAndMessaging.ACCEL'));
     expect(accel.parent?.typeName, equals('System.ValueType'));

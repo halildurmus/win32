@@ -132,6 +132,8 @@ class Scope {
     return _enums;
   }
 
+  // TODO: Replace this by findTypeDef (since we have a variety of lists in this
+  // class).
   /// Find a typedef by name.
   TypeDef? operator [](String type) {
     final szTypeDef = type.toNativeUtf16();

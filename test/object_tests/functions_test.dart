@@ -20,11 +20,11 @@ void main() {
     final typedef = scope['Windows.Win32.WindowsAndMessaging.Apis']!;
     final awr = typedef.findMethod('AdjustWindowRect')!;
 
-    expect(awr.isPublic, isTrue);
-    expect(awr.hasAttribute(CorMethodAttr.mdHideBySig), isTrue);
+    expect(awr.memberAccess, equals(MemberAccess.Public));
+    expect(awr.isHideBySig, isTrue);
     expect(awr.isStatic, isTrue);
 
-    expect(awr.hasAttribute(CorMethodAttr.mdPinvokeImpl), isTrue);
+    expect(awr.isPinvokeImpl, isTrue);
     expect(awr.pinvokeMap.moduleName, equals('USER32'));
     expect(awr.pinvokeMap.hasAttribute(CorPinvokeMap.pmNoMangle), isTrue);
     expect(
@@ -63,7 +63,7 @@ void main() {
     expect(awr.hasImplFlag(CorMethodImpl.miPreserveSig), isTrue);
 
     expect(
-        awr.attributeSignature(
+        awr.customAttributeAsBytes(
             'Windows.Win32.Interop.SupportedOSPlatformAttribute'),
         equals([
           0x01, 0x00, 0x0a, 0x77, 0x69, 0x6e, 0x64, 0x6f, //

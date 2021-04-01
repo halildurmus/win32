@@ -7,38 +7,107 @@ final CLDB_E_RECORD_NOTFOUND = 0x80131130.toSigned(32);
 
 /// Contains values that indicate type metadata.
 class CorTypeAttr {
+  /// Used for type visibility information.
   static const tdVisibilityMask = 0x00000007;
+
+  /// Specifies that the type is not in public scope.
   static const tdNotPublic = 0x00000000;
+
+  /// Specifies that the type is in public scope.
   static const tdPublic = 0x00000001;
+
+  /// Specifies that the type is nested with public visibility.
   static const tdNestedPublic = 0x00000002;
+
+  /// Specifies that the type is nested with private visibility.
   static const tdNestedPrivate = 0x00000003;
+
+  /// Specifies that the type is nested with family visibility.
   static const tdNestedFamily = 0x00000004;
+
+  /// Specifies that the type is nested with assembly visibility.
   static const tdNestedAssembly = 0x00000005;
+
+  /// Specifies that the type is nested with family and assembly visibility.
   static const tdNestedFamANDAssem = 0x00000006;
+
+  /// Specifies that the type is nested with family or assembly visibility.
   static const tdNestedFamORAssem = 0x00000007;
+
+  /// Gets layout information for the type.
   static const tdLayoutMask = 0x00000018;
+
+  /// Specifies that the fields of this type are laid out automatically.
   static const tdAutoLayout = 0x00000000;
+
+  /// Specifies that the fields of this type are laid out sequentially.
   static const tdSequentialLayout = 0x00000008;
+
+  /// Specifies that field layout is supplied explicitly.
   static const tdExplicitLayout = 0x00000010;
+
+  /// Gets semantic information about the type.
   static const tdClassSemanticsMask = 0x00000020;
+
+  /// Specifies that the type is a class.
   static const tdClass = 0x00000000;
+
+  /// Specifies that the type is an interface.
   static const tdInterface = 0x00000020;
+
+  /// Specifies that the type is abstract.
   static const tdAbstract = 0x00000080;
+
+  /// Specifies that the type cannot be extended.
   static const tdSealed = 0x00000100;
+
+  /// Specifies that the class name is special. Its name describes how.
   static const tdSpecialName = 0x00000400;
+
+  /// Specifies that the type is imported.
   static const tdImport = 0x00001000;
+
+  /// Specifies that the type is serializable.
   static const tdSerializable = 0x00002000;
+
+  /// Specifies that this type is a Windows Runtime type.
   static const tdWindowsRuntime = 0x00004000;
+
+  /// Gets information about how strings are encoded and formatted.
   static const tdStringFormatMask = 0x00030000;
+
+  /// Specifies that this type interprets an LPTSTR as ANSI.
   static const tdAnsiClass = 0x00000000;
+
+  /// Specifies that this type interprets an LPTSTR as Unicode.
   static const tdUnicodeClass = 0x00010000;
+
+  /// Specifies that this type interprets an LPTSTR automatically.
   static const tdAutoClass = 0x00020000;
+
+  /// Specifies that the type has a non-standard encoding, as specified by
+  /// CustomFormatMask.
   static const tdCustomFormatClass = 0x00030000;
+
+  /// Use this mask to get non-standard encoding information for native interop.
+  /// The meaning of the values of these two bits is unspecified.
   static const tdCustomFormatMask = 0x00C00000;
+
+  /// Specifies that the type must be initialized before the first attempt to
+  /// access a static field.
   static const tdBeforeFieldInit = 0x00100000;
+
+  /// Specifies that the type is exported, and a type forwarder.
   static const tdForwarder = 0x00200000;
+
+  /// This flag and the flags below are used internally by the common language
+  /// runtime.
   static const tdReservedMask = 0x00040800;
+
+  /// Specifies that the common language runtime should check the name encoding.
   static const tdRTSpecialName = 0x00000800;
+
+  /// Specifies that the type has security associated with it.
   static const tdHasSecurity = 0x00040000;
 }
 
@@ -205,28 +274,66 @@ class CorParamAttr {
 
 /// Contains values that describe metadata about a field.
 class CorFieldAttr {
+  /// Specifies accessibility information.
   static const fdFieldAccessMask = 0x0007;
+
+  /// Specifies that the field cannot be referenced.
   static const fdPrivateScope = 0x0000;
+
+  /// Specifies that the field is accessible only by its parent type.
   static const fdPrivate = 0x0001;
+
+  /// Specifies that the field is accessible by derived classes in its assembly.
   static const fdFamANDAssem = 0x0002;
+
+  /// Specifies that the field is accessible by all types in its assembly.
   static const fdAssembly = 0x0003;
+
+  /// Specifies that the field is accessible only by its type and derived
+  /// classes.
   static const fdFamily = 0x0004;
+
+  /// Specifies that the field is accessible by derived classes and by all types
+  /// in its assembly.
   static const fdFamORAssem = 0x0005;
+
+  /// Specifies that the field is accessible by all types with visibility of
+  /// this scope.
   static const fdPublic = 0x0006;
 
+  /// Specifies that the field is a member of its type rather than an instance
+  /// member.
   static const fdStatic = 0x0010;
+
+  /// Specifies that the field cannot be changed after it is initialized.
   static const fdInitOnly = 0x0020;
+
+  /// Specifies that the field value is a compile-time constant.
   static const fdLiteral = 0x0040;
+
+  /// Specifies that the field is not serialized when its type is remoted.
   static const fdNotSerialized = 0x0080;
 
+  /// Specifies that the field is special, and that its name describes how.
   static const fdSpecialName = 0x0200;
 
+  /// Specifies that the field implementation is forwarded through PInvoke.
   static const fdPinvokeImpl = 0x2000;
 
+  /// Reserved for internal use by the common language runtime.
   static const fdReservedMask = 0x9500;
+
+  /// Specifies that the common language runtime metadata internal APIs should
+  /// check the encoding of the name.
   static const fdRTSpecialName = 0x0400;
+
+  /// Specifies that the field contains marshaling information.
   static const fdHasFieldMarshal = 0x1000;
+
+  /// Specifies that the field has a default value.
   static const fdHasDefault = 0x8000;
+
+  /// Specifies that the field has a relative virtual address.
   static const fdHasFieldRVA = 0x0100;
 }
 

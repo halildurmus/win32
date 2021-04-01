@@ -17,12 +17,67 @@ import 'pinvokemap.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
 
+enum MemberAccess {
+  PrivateScope,
+  Private,
+  FamilyAndAssembly,
+  Assembly,
+  Family,
+  FamilyOrAssembly,
+  Public
+}
+
+enum VtableLayout { ReuseSlot, NewSlot }
+
 class Method extends TokenObject with CustomAttributes {
   String methodName;
   int attributes;
   Uint8List signatureBlob;
   int relativeVirtualAddress;
   int implFlags;
+
+  MemberAccess get memberAccess =>
+      MemberAccess.values[attributes & CorMethodAttr.mdMemberAccessMask];
+
+  bool get isStatic =>
+      attributes & CorMethodAttr.mdStatic == CorMethodAttr.mdStatic;
+
+  bool get isFinal =>
+      attributes & CorMethodAttr.mdFinal == CorMethodAttr.mdFinal;
+
+  bool get isVirtual =>
+      attributes & CorMethodAttr.mdVirtual == CorMethodAttr.mdVirtual;
+
+  bool get isHideBySig =>
+      attributes & CorMethodAttr.mdHideBySig == CorMethodAttr.mdHideBySig;
+
+  VtableLayout get vTableLayout {
+    switch (attributes & CorMethodAttr.mdVtableLayoutMask) {
+      case CorMethodAttr.mdReuseSlot:
+        return VtableLayout.ReuseSlot;
+      case CorMethodAttr.mdNewSlot:
+        return VtableLayout.NewSlot;
+      default:
+        throw WinmdException('Attribute missing vtable layout information');
+    }
+  }
+
+  bool get isCheckAccessOnOverride =>
+      attributes & CorMethodAttr.mdCheckAccessOnOverride ==
+      CorMethodAttr.mdCheckAccessOnOverride;
+
+  bool get isAbstract =>
+      attributes & CorMethodAttr.mdAbstract == CorMethodAttr.mdAbstract;
+
+  bool get isSpecialName =>
+      attributes & CorMethodAttr.mdSpecialName == CorMethodAttr.mdSpecialName;
+
+  bool get isPinvokeImpl =>
+      attributes & CorMethodAttr.mdPinvokeImpl == CorMethodAttr.mdPinvokeImpl;
+
+  bool get isUnmangedExport =>
+      attributes & CorMethodAttr.mdUnmanagedExport ==
+      CorMethodAttr.mdUnmanagedExport;
 
   PinvokeMap get pinvokeMap => PinvokeMap.fromToken(reader, token);
 
@@ -33,16 +88,7 @@ class Method extends TokenObject with CustomAttributes {
   List<Parameter> parameters = <Parameter>[];
   late Parameter returnType;
 
-  bool hasAttribute(int attribute) => attributes & attribute == attribute;
   bool hasImplFlag(int flag) => implFlags & flag == flag;
-
-  bool get isPrivate => hasAttribute(CorMethodAttr.mdPrivate);
-  bool get isPublic => hasAttribute(CorMethodAttr.mdPublic);
-  bool get isStatic => hasAttribute(CorMethodAttr.mdStatic);
-  bool get isFinal => hasAttribute(CorMethodAttr.mdFinal);
-  bool get isVirtual => hasAttribute(CorMethodAttr.mdVirtual);
-  bool get isSpecialName => hasAttribute(CorMethodAttr.mdSpecialName);
-  bool get isRTSpecialName => hasAttribute(CorMethodAttr.mdRTSpecialName);
 
   Module get module {
     final pdwMappingFlags = calloc<Uint32>();

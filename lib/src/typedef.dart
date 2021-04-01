@@ -17,25 +17,93 @@ import 'method.dart';
 import 'systemtokens.dart';
 import 'utils.dart';
 
+enum TypeVisibility {
+  NotPublic,
+  Public,
+  NestedPublic,
+  NestedPrivate,
+  NestedFamily,
+  NestedAssembly,
+  NestedFamilyAndAssembly,
+  NestedFamilyOrAssembly
+}
+
+enum TypeLayout { Auto, Sequential, Explicit }
+
+enum StringFormat { Ansi, Unicode, Auto, Custom }
+
 /// Represents a TypeDef in the Windows Metadata file
 class TypeDef extends TokenObject with CustomAttributes {
   final String typeName;
   final int attributes;
   final int baseTypeToken;
 
+  TypeVisibility get typeVisibility =>
+      TypeVisibility.values[attributes & CorTypeAttr.tdVisibilityMask];
+
+  TypeLayout get typeLayout {
+    switch (attributes & CorTypeAttr.tdLayoutMask) {
+      case CorTypeAttr.tdAutoLayout:
+        return TypeLayout.Auto;
+      case CorTypeAttr.tdSequentialLayout:
+        return TypeLayout.Sequential;
+      case CorTypeAttr.tdExplicitLayout:
+        return TypeLayout.Explicit;
+      default:
+        throw WinmdException('Attribute missing type layout information');
+    }
+  }
+
   /// Is the type a class?
   bool get isClass =>
-      hasAttribute(CorTypeAttr.tdClass) &&
-      !hasAttribute(CorTypeAttr.tdInterface);
+      attributes & CorTypeAttr.tdClassSemanticsMask == CorTypeAttr.tdClass;
 
   /// Is the type an interface?
-  bool get isInterface => hasAttribute(CorTypeAttr.tdInterface);
+  bool get isInterface =>
+      attributes & CorTypeAttr.tdClassSemanticsMask == CorTypeAttr.tdInterface;
+
+  bool get isAbstract =>
+      attributes & CorTypeAttr.tdAbstract == CorTypeAttr.tdAbstract;
+
+  bool get isSealed =>
+      attributes & CorTypeAttr.tdSealed == CorTypeAttr.tdSealed;
+
+  bool get isSpecialName =>
+      attributes & CorTypeAttr.tdSpecialName == CorTypeAttr.tdSpecialName;
+
+  bool get isImported =>
+      attributes & CorTypeAttr.tdImport == CorTypeAttr.tdImport;
+
+  bool get isSerializable =>
+      attributes & CorTypeAttr.tdSerializable == CorTypeAttr.tdSerializable;
+
+  bool get isWindowsRuntime =>
+      attributes & CorTypeAttr.tdWindowsRuntime == CorTypeAttr.tdWindowsRuntime;
+
+  StringFormat get stringFormat {
+    switch (attributes & CorTypeAttr.tdStringFormatMask) {
+      case CorTypeAttr.tdAnsiClass:
+        return StringFormat.Ansi;
+      case CorTypeAttr.tdUnicodeClass:
+        return StringFormat.Unicode;
+      case CorTypeAttr.tdAutoClass:
+        return StringFormat.Auto;
+      case CorTypeAttr.tdCustomFormatClass:
+        return StringFormat.Custom;
+      default:
+        throw WinmdException('Attribute missing string format information');
+    }
+  }
+
+  bool get isBeforeFieldInit =>
+      attributes & CorTypeAttr.tdBeforeFieldInit ==
+      CorTypeAttr.tdBeforeFieldInit;
+
+  bool get isForwarder =>
+      attributes & CorTypeAttr.tdForwarder == CorTypeAttr.tdForwarder;
 
   /// Is the type a delegate?
   bool get isDelegate => parent?.typeName == 'System.MulticastDelegate';
-
-  /// Does the type match the given flag from [CorTypeAttr]?
-  bool hasAttribute(int attribute) => attributes & attribute == attribute;
 
   /// Retrieve class layout information.
   ///

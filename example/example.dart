@@ -105,7 +105,6 @@ String methodSignature(Method method) {
       '${method.isFinal ? 'final ' : ''}'
       '${method.isGetProperty ? '[propget] ' : ''}'
       '${method.isSetProperty ? '[propset] ' : ''}'
-      '${method.isRTSpecialName ? 'rt_special ' : ''}'
       '${method.returnType.typeIdentifier.name} '
       '${method.isProperty ? method.methodName.substring(4) : method.methodName}');
 

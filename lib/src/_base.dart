@@ -77,7 +77,7 @@ mixin CustomAttributes on TokenObject {
   }
 
   /// Retrieve the blob associated with a specific attribute name.
-  Uint8List attributeSignature(String attrName) {
+  Uint8List customAttributeAsBytes(String attrName) {
     final szName = attrName.toNativeUtf16();
     final ppData = calloc<IntPtr>();
     final pcbData = calloc<Uint32>();
