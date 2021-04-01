@@ -23,7 +23,13 @@ void main() {
     expect(awr.isPublic, isTrue);
     expect(awr.hasAttribute(CorMethodAttr.mdHideBySig), isTrue);
     expect(awr.isStatic, isTrue);
+
     expect(awr.hasAttribute(CorMethodAttr.mdPinvokeImpl), isTrue);
+    expect(awr.pinvokeMap.moduleName, equals('USER32'));
+    expect(awr.pinvokeMap.hasAttribute(CorPinvokeMap.pmNoMangle), isTrue);
+    expect(
+        awr.pinvokeMap.hasAttribute(CorPinvokeMap.pmSupportsLastError), isTrue);
+    expect(awr.pinvokeMap.hasAttribute(CorPinvokeMap.pmCallConvWinapi), isTrue);
 
     expect(
         awr.attributeSignature(

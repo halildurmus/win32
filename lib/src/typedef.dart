@@ -14,6 +14,7 @@ import 'constants.dart';
 import 'field.dart';
 import 'metadatastore.dart';
 import 'method.dart';
+import 'systemtokens.dart';
 import 'utils.dart';
 
 /// Represents a TypeDef in the Windows Metadata file
@@ -34,7 +35,7 @@ class TypeDef extends TokenObject with CustomAttributes {
   bool get isDelegate => parent?.typeName == 'System.MulticastDelegate';
 
   /// Does the type match the given flag from [CorTypeAttr]?
-  bool hasAttribute(int attribute) => (attributes & attribute) == attribute;
+  bool hasAttribute(int attribute) => attributes & attribute == attribute;
 
   /// Retrieve class layout information.
   ///

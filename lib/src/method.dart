@@ -13,6 +13,7 @@ import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'module.dart';
 import 'parameter.dart';
+import 'pinvokemap.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
 
@@ -22,6 +23,8 @@ class Method extends TokenObject with CustomAttributes {
   Uint8List signatureBlob;
   int relativeVirtualAddress;
   int implFlags;
+
+  PinvokeMap get pinvokeMap => PinvokeMap.fromToken(reader, token);
 
   bool get isProperty => isGetProperty | isSetProperty;
   bool isGetProperty = false;
