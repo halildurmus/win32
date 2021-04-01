@@ -11,17 +11,17 @@ import 'package:win32/win32.dart';
 import '_base.dart';
 import 'com/IMetaDataImport2.dart';
 
-/// An attribute.
-class Attribute extends TokenObject {
+/// A custom (named) attribute.
+class CustomAttribute extends TokenObject {
   final int modifiedObjectToken;
   final int tokenType;
   final Uint8List signatureBlob;
 
-  Attribute(IMetaDataImport2 reader, int token, this.modifiedObjectToken,
+  CustomAttribute(IMetaDataImport2 reader, int token, this.modifiedObjectToken,
       this.tokenType, this.signatureBlob)
       : super(reader, token);
 
-  factory Attribute.fromToken(IMetaDataImport2 reader, int token) {
+  factory CustomAttribute.fromToken(IMetaDataImport2 reader, int token) {
     final ptkObj = calloc<Uint32>();
     final ptkType = calloc<Uint32>();
     final ppBlob = calloc<IntPtr>();
@@ -31,7 +31,7 @@ class Attribute extends TokenObject {
       final hr = reader.GetCustomAttributeProps(
           token, ptkObj, ptkType, ppBlob, pcbBlob);
       if (SUCCEEDED(hr)) {
-        return Attribute(
+        return CustomAttribute(
             reader,
             token,
             ptkObj.value,

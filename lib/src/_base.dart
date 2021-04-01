@@ -18,8 +18,10 @@ abstract class TokenObject {
 
   const TokenObject(this.reader, this.token);
 
+  /// Token is valid within the current metadata scope
   bool get isValidToken => reader.IsValidToken(token) == TRUE;
 
+  /// Token is marked as global
   bool get isGlobal {
     if (isValidToken) {
       final pIsGlobal = calloc<Int32>();
@@ -49,6 +51,7 @@ abstract class TokenObject {
 
 /// Represents an object that has custom (named) attributes associated with it.
 mixin CustomAttributes on TokenObject {
+  /// Retrieve the string associated with a specific attribute name.
   String attributeAsString(String attrName) {
     final szName = attrName.toNativeUtf16();
     final ppData = calloc<IntPtr>();
@@ -73,6 +76,7 @@ mixin CustomAttributes on TokenObject {
     }
   }
 
+  /// Retrieve the blob associated with a specific attribute name.
   Uint8List attributeSignature(String attrName) {
     final szName = attrName.toNativeUtf16();
     final ppData = calloc<IntPtr>();
@@ -97,8 +101,8 @@ mixin CustomAttributes on TokenObject {
   }
 
   /// Enumerate all attributes that this object has.
-  List<Attribute> get customAttributes {
-    final attributes = <Attribute>[];
+  List<CustomAttribute> get customAttributes {
+    final attributes = <CustomAttribute>[];
 
     final phEnum = calloc<IntPtr>();
     final rAttrs = calloc<Uint32>();
@@ -116,7 +120,7 @@ mixin CustomAttributes on TokenObject {
       while (hr == S_OK) {
         final attrToken = rAttrs.value;
 
-        attributes.add(Attribute.fromToken(reader, attrToken));
+        attributes.add(CustomAttribute.fromToken(reader, attrToken));
         hr = reader.EnumCustomAttributes(phEnum, token, 0, rAttrs, 1, pcAttrs);
       }
       return attributes;
