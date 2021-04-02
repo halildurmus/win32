@@ -213,6 +213,16 @@ void main() {
     expect(param.typeIdentifier.name, endsWith('HWND'));
   });
 
+  test('Character parameters have the correct type', () {
+    final typedef = scope['Windows.Win32.SystemServices.Apis']!;
+    final api = typedef.findMethod('FillConsoleOutputCharacterW')!;
+    final param = api.parameters[1];
+
+    expect(
+        param.typeIdentifier.corType, equals(CorElementType.ELEMENT_TYPE_CHAR));
+    expect(param.typeIdentifier.name, equals('char'));
+  });
+
   test('UnregisterPowerSettingNotification has the correct parameter type', () {
     final typedef = scope['Windows.Win32.SystemServices.Apis']!;
     final api = typedef.findMethod('UnregisterPowerSettingNotification')!;
