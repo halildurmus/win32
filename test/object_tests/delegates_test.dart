@@ -78,8 +78,8 @@ void main() {
     expect(wndProc.methods[0].parameters[1].name, equals('method'));
     expect(wndProc.methods[0].parameters[1].typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_I));
-    expect(wndProc.methods[0].hasImplFlag(CorMethodImpl.miRuntime), isTrue);
-    expect(wndProc.methods[0].hasImplFlag(CorMethodImpl.miManaged), isTrue);
+    expect(wndProc.methods[0].implFeatures.codeType, equals(CodeType.Runtime));
+    expect(wndProc.methods[0].implFeatures.isManaged, isTrue);
 
     expect(wndProc.methods[1].memberAccess, equals(MemberAccess.Public));
     expect(wndProc.methods[1].isHideBySig, isTrue);
@@ -120,7 +120,7 @@ void main() {
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
     expect(wndProc.methods[1].parameters[3].typeIdentifier.name,
         equals('Windows.Win32.WindowsAndMessaging.LPARAM'));
-    expect(wndProc.methods[1].hasImplFlag(CorMethodImpl.miRuntime), isTrue);
-    expect(wndProc.methods[1].hasImplFlag(CorMethodImpl.miManaged), isTrue);
+    expect(wndProc.methods[1].implFeatures.codeType, equals(CodeType.Runtime));
+    expect(wndProc.methods[1].implFeatures.isManaged, isTrue);
   });
 }

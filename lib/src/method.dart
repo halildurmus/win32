@@ -11,6 +11,7 @@ import 'package:win32/win32.dart';
 import '_base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
+import 'methodimpls.dart';
 import 'module.dart';
 import 'parameter.dart';
 import 'pinvokemap.dart';
@@ -81,14 +82,15 @@ class Method extends TokenObject with CustomAttributes {
 
   PinvokeMap get pinvokeMap => PinvokeMap.fromToken(reader, token);
 
+  MethodImplementationFeatures get implFeatures =>
+      MethodImplementationFeatures(implFlags);
+
   bool get isProperty => isGetProperty | isSetProperty;
   bool isGetProperty = false;
   bool isSetProperty = false;
 
   List<Parameter> parameters = <Parameter>[];
   late Parameter returnType;
-
-  bool hasImplFlag(int flag) => implFlags & flag == flag;
 
   Module get module {
     final pdwMappingFlags = calloc<Uint32>();

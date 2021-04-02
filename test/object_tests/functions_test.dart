@@ -58,9 +58,9 @@ void main() {
     expect(awr.parameters[2].typeIdentifier.name,
         equals('Windows.Win32.SystemServices.BOOL'));
 
-    expect(awr.hasImplFlag(CorMethodImpl.miIL), isTrue);
-    expect(awr.hasImplFlag(CorMethodImpl.miManaged), isTrue);
-    expect(awr.hasImplFlag(CorMethodImpl.miPreserveSig), isTrue);
+    expect(awr.implFeatures.codeType, equals(CodeType.IL));
+    expect(awr.implFeatures.isManaged, isTrue);
+    expect(awr.implFeatures.isPreserveSig, isTrue);
 
     expect(
         awr.customAttributeAsBytes(
