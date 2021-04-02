@@ -5,110 +5,110 @@
 // COM error returned when a Find* method returns no results
 final CLDB_E_RECORD_NOTFOUND = 0x80131130.toSigned(32);
 
-/// Contains values that indicate type metadata.
-class CorTypeAttr {
-  /// Used for type visibility information.
-  static const tdVisibilityMask = 0x00000007;
+/// Specifies a common language runtime Type, a type modifier, or information
+/// about a type in a metadata type signature.
+enum CorElementType {
+  ELEMENT_TYPE_END,
+  ELEMENT_TYPE_VOID,
+  ELEMENT_TYPE_BOOLEAN,
+  ELEMENT_TYPE_CHAR,
+  ELEMENT_TYPE_I1,
+  ELEMENT_TYPE_U1,
+  ELEMENT_TYPE_I2,
+  ELEMENT_TYPE_U2,
+  ELEMENT_TYPE_I4,
+  ELEMENT_TYPE_U4,
+  ELEMENT_TYPE_I8,
+  ELEMENT_TYPE_U8,
+  ELEMENT_TYPE_R4,
+  ELEMENT_TYPE_R8,
+  ELEMENT_TYPE_STRING,
+  ELEMENT_TYPE_PTR,
+  ELEMENT_TYPE_BYREF,
+  ELEMENT_TYPE_VALUETYPE,
+  ELEMENT_TYPE_CLASS,
+  ELEMENT_TYPE_VAR,
+  ELEMENT_TYPE_ARRAY,
+  ELEMENT_TYPE_GENERICINST,
+  ELEMENT_TYPE_TYPEDBYREF,
+  ELEMENT_TYPE_I,
+  ELEMENT_TYPE_U,
+  ELEMENT_TYPE_FNPTR,
+  ELEMENT_TYPE_OBJECT,
+  ELEMENT_TYPE_SZARRAY,
+  ELEMENT_TYPE_MVAR,
+  ELEMENT_TYPE_CMOD_REQD,
+  ELEMENT_TYPE_CMOD_OPT,
+  ELEMENT_TYPE_INTERNAL,
+  ELEMENT_TYPE_MAX,
+  ELEMENT_TYPE_MODIFIER,
+  ELEMENT_TYPE_SENTINEL,
+  ELEMENT_TYPE_PINNED
+}
 
-  /// Specifies that the type is not in public scope.
-  static const tdNotPublic = 0x00000000;
+/// Contains values that describe metadata about a field.
+class CorFieldAttr {
+  /// Specifies accessibility information.
+  static const fdFieldAccessMask = 0x0007;
 
-  /// Specifies that the type is in public scope.
-  static const tdPublic = 0x00000001;
+  /// Specifies that the field cannot be referenced.
+  static const fdPrivateScope = 0x0000;
 
-  /// Specifies that the type is nested with public visibility.
-  static const tdNestedPublic = 0x00000002;
+  /// Specifies that the field is accessible only by its parent type.
+  static const fdPrivate = 0x0001;
 
-  /// Specifies that the type is nested with private visibility.
-  static const tdNestedPrivate = 0x00000003;
+  /// Specifies that the field is accessible by derived classes in its assembly.
+  static const fdFamANDAssem = 0x0002;
 
-  /// Specifies that the type is nested with family visibility.
-  static const tdNestedFamily = 0x00000004;
+  /// Specifies that the field is accessible by all types in its assembly.
+  static const fdAssembly = 0x0003;
 
-  /// Specifies that the type is nested with assembly visibility.
-  static const tdNestedAssembly = 0x00000005;
+  /// Specifies that the field is accessible only by its type and derived
+  /// classes.
+  static const fdFamily = 0x0004;
 
-  /// Specifies that the type is nested with family and assembly visibility.
-  static const tdNestedFamANDAssem = 0x00000006;
+  /// Specifies that the field is accessible by derived classes and by all types
+  /// in its assembly.
+  static const fdFamORAssem = 0x0005;
 
-  /// Specifies that the type is nested with family or assembly visibility.
-  static const tdNestedFamORAssem = 0x00000007;
+  /// Specifies that the field is accessible by all types with visibility of
+  /// this scope.
+  static const fdPublic = 0x0006;
 
-  /// Gets layout information for the type.
-  static const tdLayoutMask = 0x00000018;
+  /// Specifies that the field is a member of its type rather than an instance
+  /// member.
+  static const fdStatic = 0x0010;
 
-  /// Specifies that the fields of this type are laid out automatically.
-  static const tdAutoLayout = 0x00000000;
+  /// Specifies that the field cannot be changed after it is initialized.
+  static const fdInitOnly = 0x0020;
 
-  /// Specifies that the fields of this type are laid out sequentially.
-  static const tdSequentialLayout = 0x00000008;
+  /// Specifies that the field value is a compile-time constant.
+  static const fdLiteral = 0x0040;
 
-  /// Specifies that field layout is supplied explicitly.
-  static const tdExplicitLayout = 0x00000010;
+  /// Specifies that the field is not serialized when its type is remoted.
+  static const fdNotSerialized = 0x0080;
 
-  /// Gets semantic information about the type.
-  static const tdClassSemanticsMask = 0x00000020;
+  /// Specifies that the field is special, and that its name describes how.
+  static const fdSpecialName = 0x0200;
 
-  /// Specifies that the type is a class.
-  static const tdClass = 0x00000000;
+  /// Specifies that the field implementation is forwarded through PInvoke.
+  static const fdPinvokeImpl = 0x2000;
 
-  /// Specifies that the type is an interface.
-  static const tdInterface = 0x00000020;
+  /// Reserved for internal use by the common language runtime.
+  static const fdReservedMask = 0x9500;
 
-  /// Specifies that the type is abstract.
-  static const tdAbstract = 0x00000080;
+  /// Specifies that the common language runtime metadata internal APIs should
+  /// check the encoding of the name.
+  static const fdRTSpecialName = 0x0400;
 
-  /// Specifies that the type cannot be extended.
-  static const tdSealed = 0x00000100;
+  /// Specifies that the field contains marshaling information.
+  static const fdHasFieldMarshal = 0x1000;
 
-  /// Specifies that the class name is special. Its name describes how.
-  static const tdSpecialName = 0x00000400;
+  /// Specifies that the field has a default value.
+  static const fdHasDefault = 0x8000;
 
-  /// Specifies that the type is imported.
-  static const tdImport = 0x00001000;
-
-  /// Specifies that the type is serializable.
-  static const tdSerializable = 0x00002000;
-
-  /// Specifies that this type is a Windows Runtime type.
-  static const tdWindowsRuntime = 0x00004000;
-
-  /// Gets information about how strings are encoded and formatted.
-  static const tdStringFormatMask = 0x00030000;
-
-  /// Specifies that this type interprets an LPTSTR as ANSI.
-  static const tdAnsiClass = 0x00000000;
-
-  /// Specifies that this type interprets an LPTSTR as Unicode.
-  static const tdUnicodeClass = 0x00010000;
-
-  /// Specifies that this type interprets an LPTSTR automatically.
-  static const tdAutoClass = 0x00020000;
-
-  /// Specifies that the type has a non-standard encoding, as specified by
-  /// CustomFormatMask.
-  static const tdCustomFormatClass = 0x00030000;
-
-  /// Use this mask to get non-standard encoding information for native interop.
-  /// The meaning of the values of these two bits is unspecified.
-  static const tdCustomFormatMask = 0x00C00000;
-
-  /// Specifies that the type must be initialized before the first attempt to
-  /// access a static field.
-  static const tdBeforeFieldInit = 0x00100000;
-
-  /// Specifies that the type is exported, and a type forwarder.
-  static const tdForwarder = 0x00200000;
-
-  /// This flag and the flags below are used internally by the common language
-  /// runtime.
-  static const tdReservedMask = 0x00040800;
-
-  /// Specifies that the common language runtime should check the name encoding.
-  static const tdRTSpecialName = 0x00000800;
-
-  /// Specifies that the type has security associated with it.
-  static const tdHasSecurity = 0x00040000;
+  /// Specifies that the field has a relative virtual address.
+  static const fdHasFieldRVA = 0x0100;
 }
 
 /// Contains values that describe the features of a method.
@@ -248,6 +248,57 @@ class CorMethodImpl {
   static const miMaxMethodImplVal = 0xffff;
 }
 
+/// Contains values that describe native unmanaged types.
+class CorNativeType {
+  static const NATIVE_TYPE_END = 0x0;
+  static const NATIVE_TYPE_VOID = 0x1;
+  static const NATIVE_TYPE_BOOLEAN = 0x2;
+  static const NATIVE_TYPE_I1 = 0x3;
+  static const NATIVE_TYPE_U1 = 0x4;
+  static const NATIVE_TYPE_I2 = 0x5;
+  static const NATIVE_TYPE_U2 = 0x6;
+  static const NATIVE_TYPE_I4 = 0x7;
+  static const NATIVE_TYPE_U4 = 0x8;
+  static const NATIVE_TYPE_I8 = 0x9;
+  static const NATIVE_TYPE_U8 = 0xa;
+  static const NATIVE_TYPE_R4 = 0xb;
+  static const NATIVE_TYPE_R8 = 0xc;
+  static const NATIVE_TYPE_SYSCHAR = 0xd;
+  static const NATIVE_TYPE_VARIANT = 0xe;
+  static const NATIVE_TYPE_CURRENCY = 0xf;
+  static const NATIVE_TYPE_PTR = 0x10;
+  static const NATIVE_TYPE_DECIMAL = 0x11;
+  static const NATIVE_TYPE_DATE = 0x12;
+  static const NATIVE_TYPE_BSTR = 0x13;
+  static const NATIVE_TYPE_LPSTR = 0x14;
+  static const NATIVE_TYPE_LPWSTR = 0x15;
+  static const NATIVE_TYPE_LPTSTR = 0x16;
+  static const NATIVE_TYPE_FIXEDSYSSTRING = 0x17;
+  static const NATIVE_TYPE_OBJECTREF = 0x18;
+  static const NATIVE_TYPE_IUNKNOWN = 0x19;
+  static const NATIVE_TYPE_IDISPATCH = 0x1a;
+  static const NATIVE_TYPE_STRUCT = 0x1b;
+  static const NATIVE_TYPE_INTF = 0x1c;
+  static const NATIVE_TYPE_SAFEARRAY = 0x1d;
+  static const NATIVE_TYPE_FIXEDARRAY = 0x1e;
+  static const NATIVE_TYPE_INT = 0x1f;
+  static const NATIVE_TYPE_UINT = 0x20;
+  static const NATIVE_TYPE_NESTEDSTRUCT = 0x21;
+  static const NATIVE_TYPE_BYVALSTR = 0x22;
+  static const NATIVE_TYPE_ANSIBSTR = 0x23;
+  static const NATIVE_TYPE_TBSTR = 0x24;
+  static const NATIVE_TYPE_VARIANTBOOL = 0x25;
+  static const NATIVE_TYPE_FUNC = 0x26;
+  static const NATIVE_TYPE_ASANY = 0x28;
+  static const NATIVE_TYPE_ARRAY = 0x2a;
+  static const NATIVE_TYPE_LPSTRUCT = 0x2b;
+  static const NATIVE_TYPE_CUSTOMMARSHALER = 0x2c;
+  static const NATIVE_TYPE_IINSPECTABLE = 0x2e;
+  static const NATIVE_TYPE_HSTRING = 0x2f;
+  static const NATIVE_TYPE_ERROR = 0x2d;
+  static const NATIVE_TYPE_MAX = 0x50;
+}
+
 /// Contains values that describe the metadata of a method parameter.
 class CorParamAttr {
   /// Specifies that the parameter is passed into the method call.
@@ -270,101 +321,6 @@ class CorParamAttr {
 
   /// Unused.
   static const pdUnused = 0xcfe0;
-}
-
-/// Contains values that describe metadata about a field.
-class CorFieldAttr {
-  /// Specifies accessibility information.
-  static const fdFieldAccessMask = 0x0007;
-
-  /// Specifies that the field cannot be referenced.
-  static const fdPrivateScope = 0x0000;
-
-  /// Specifies that the field is accessible only by its parent type.
-  static const fdPrivate = 0x0001;
-
-  /// Specifies that the field is accessible by derived classes in its assembly.
-  static const fdFamANDAssem = 0x0002;
-
-  /// Specifies that the field is accessible by all types in its assembly.
-  static const fdAssembly = 0x0003;
-
-  /// Specifies that the field is accessible only by its type and derived
-  /// classes.
-  static const fdFamily = 0x0004;
-
-  /// Specifies that the field is accessible by derived classes and by all types
-  /// in its assembly.
-  static const fdFamORAssem = 0x0005;
-
-  /// Specifies that the field is accessible by all types with visibility of
-  /// this scope.
-  static const fdPublic = 0x0006;
-
-  /// Specifies that the field is a member of its type rather than an instance
-  /// member.
-  static const fdStatic = 0x0010;
-
-  /// Specifies that the field cannot be changed after it is initialized.
-  static const fdInitOnly = 0x0020;
-
-  /// Specifies that the field value is a compile-time constant.
-  static const fdLiteral = 0x0040;
-
-  /// Specifies that the field is not serialized when its type is remoted.
-  static const fdNotSerialized = 0x0080;
-
-  /// Specifies that the field is special, and that its name describes how.
-  static const fdSpecialName = 0x0200;
-
-  /// Specifies that the field implementation is forwarded through PInvoke.
-  static const fdPinvokeImpl = 0x2000;
-
-  /// Reserved for internal use by the common language runtime.
-  static const fdReservedMask = 0x9500;
-
-  /// Specifies that the common language runtime metadata internal APIs should
-  /// check the encoding of the name.
-  static const fdRTSpecialName = 0x0400;
-
-  /// Specifies that the field contains marshaling information.
-  static const fdHasFieldMarshal = 0x1000;
-
-  /// Specifies that the field has a default value.
-  static const fdHasDefault = 0x8000;
-
-  /// Specifies that the field has a relative virtual address.
-  static const fdHasFieldRVA = 0x0100;
-}
-
-/// Indicates the type of a metadata token.
-class CorTokenType {
-  static const mdtModule = 0x00000000;
-  static const mdtTypeRef = 0x01000000;
-  static const mdtTypeDef = 0x02000000;
-  static const mdtFieldDef = 0x04000000;
-  static const mdtMethodDef = 0x06000000;
-  static const mdtParamDef = 0x08000000;
-  static const mdtInterfaceImpl = 0x09000000;
-  static const mdtMemberRef = 0x0a000000;
-  static const mdtCustomAttribute = 0x0c000000;
-  static const mdtPermission = 0x0e000000;
-  static const mdtSignature = 0x11000000;
-  static const mdtEvent = 0x14000000;
-  static const mdtProperty = 0x17000000;
-  static const mdtModuleRef = 0x1a000000;
-  static const mdtTypeSpec = 0x1b000000;
-  static const mdtAssembly = 0x20000000;
-  static const mdtAssemblyRef = 0x23000000;
-  static const mdtFile = 0x26000000;
-  static const mdtExportedType = 0x27000000;
-  static const mdtManifestResource = 0x28000000;
-  static const mdtGenericParam = 0x2a000000;
-  static const mdtMethodSpec = 0x2b000000;
-  static const mdtGenericParamConstraint = 0x2c000000;
-  static const mdtString = 0x70000000;
-  static const mdtName = 0x71000000;
-  static const mdtBaseType = 0x72000000;
 }
 
 /// Specifies options for a PInvoke call.
@@ -452,43 +408,138 @@ class CorPinvokeMap {
   static const pmMaxValue = 0xFFFF;
 }
 
-/// Specifies a common language runtime Type, a type modifier, or information
-/// about a type in a metadata type signature.
-enum CorElementType {
-  ELEMENT_TYPE_END,
-  ELEMENT_TYPE_VOID,
-  ELEMENT_TYPE_BOOLEAN,
-  ELEMENT_TYPE_CHAR,
-  ELEMENT_TYPE_I1,
-  ELEMENT_TYPE_U1,
-  ELEMENT_TYPE_I2,
-  ELEMENT_TYPE_U2,
-  ELEMENT_TYPE_I4,
-  ELEMENT_TYPE_U4,
-  ELEMENT_TYPE_I8,
-  ELEMENT_TYPE_U8,
-  ELEMENT_TYPE_R4,
-  ELEMENT_TYPE_R8,
-  ELEMENT_TYPE_STRING,
-  ELEMENT_TYPE_PTR,
-  ELEMENT_TYPE_BYREF,
-  ELEMENT_TYPE_VALUETYPE,
-  ELEMENT_TYPE_CLASS,
-  ELEMENT_TYPE_VAR,
-  ELEMENT_TYPE_ARRAY,
-  ELEMENT_TYPE_GENERICINST,
-  ELEMENT_TYPE_TYPEDBYREF,
-  ELEMENT_TYPE_I,
-  ELEMENT_TYPE_U,
-  ELEMENT_TYPE_FNPTR,
-  ELEMENT_TYPE_OBJECT,
-  ELEMENT_TYPE_SZARRAY,
-  ELEMENT_TYPE_MVAR,
-  ELEMENT_TYPE_CMOD_REQD,
-  ELEMENT_TYPE_CMOD_OPT,
-  ELEMENT_TYPE_INTERNAL,
-  ELEMENT_TYPE_MAX,
-  ELEMENT_TYPE_MODIFIER,
-  ELEMENT_TYPE_SENTINEL,
-  ELEMENT_TYPE_PINNED
+/// Indicates the type of a metadata token.
+class CorTokenType {
+  static const mdtModule = 0x00000000;
+  static const mdtTypeRef = 0x01000000;
+  static const mdtTypeDef = 0x02000000;
+  static const mdtFieldDef = 0x04000000;
+  static const mdtMethodDef = 0x06000000;
+  static const mdtParamDef = 0x08000000;
+  static const mdtInterfaceImpl = 0x09000000;
+  static const mdtMemberRef = 0x0a000000;
+  static const mdtCustomAttribute = 0x0c000000;
+  static const mdtPermission = 0x0e000000;
+  static const mdtSignature = 0x11000000;
+  static const mdtEvent = 0x14000000;
+  static const mdtProperty = 0x17000000;
+  static const mdtModuleRef = 0x1a000000;
+  static const mdtTypeSpec = 0x1b000000;
+  static const mdtAssembly = 0x20000000;
+  static const mdtAssemblyRef = 0x23000000;
+  static const mdtFile = 0x26000000;
+  static const mdtExportedType = 0x27000000;
+  static const mdtManifestResource = 0x28000000;
+  static const mdtGenericParam = 0x2a000000;
+  static const mdtMethodSpec = 0x2b000000;
+  static const mdtGenericParamConstraint = 0x2c000000;
+  static const mdtString = 0x70000000;
+  static const mdtName = 0x71000000;
+  static const mdtBaseType = 0x72000000;
+}
+
+/// Contains values that indicate type metadata.
+class CorTypeAttr {
+  /// Used for type visibility information.
+  static const tdVisibilityMask = 0x00000007;
+
+  /// Specifies that the type is not in public scope.
+  static const tdNotPublic = 0x00000000;
+
+  /// Specifies that the type is in public scope.
+  static const tdPublic = 0x00000001;
+
+  /// Specifies that the type is nested with public visibility.
+  static const tdNestedPublic = 0x00000002;
+
+  /// Specifies that the type is nested with private visibility.
+  static const tdNestedPrivate = 0x00000003;
+
+  /// Specifies that the type is nested with family visibility.
+  static const tdNestedFamily = 0x00000004;
+
+  /// Specifies that the type is nested with assembly visibility.
+  static const tdNestedAssembly = 0x00000005;
+
+  /// Specifies that the type is nested with family and assembly visibility.
+  static const tdNestedFamANDAssem = 0x00000006;
+
+  /// Specifies that the type is nested with family or assembly visibility.
+  static const tdNestedFamORAssem = 0x00000007;
+
+  /// Gets layout information for the type.
+  static const tdLayoutMask = 0x00000018;
+
+  /// Specifies that the fields of this type are laid out automatically.
+  static const tdAutoLayout = 0x00000000;
+
+  /// Specifies that the fields of this type are laid out sequentially.
+  static const tdSequentialLayout = 0x00000008;
+
+  /// Specifies that field layout is supplied explicitly.
+  static const tdExplicitLayout = 0x00000010;
+
+  /// Gets semantic information about the type.
+  static const tdClassSemanticsMask = 0x00000020;
+
+  /// Specifies that the type is a class.
+  static const tdClass = 0x00000000;
+
+  /// Specifies that the type is an interface.
+  static const tdInterface = 0x00000020;
+
+  /// Specifies that the type is abstract.
+  static const tdAbstract = 0x00000080;
+
+  /// Specifies that the type cannot be extended.
+  static const tdSealed = 0x00000100;
+
+  /// Specifies that the class name is special. Its name describes how.
+  static const tdSpecialName = 0x00000400;
+
+  /// Specifies that the type is imported.
+  static const tdImport = 0x00001000;
+
+  /// Specifies that the type is serializable.
+  static const tdSerializable = 0x00002000;
+
+  /// Specifies that this type is a Windows Runtime type.
+  static const tdWindowsRuntime = 0x00004000;
+
+  /// Gets information about how strings are encoded and formatted.
+  static const tdStringFormatMask = 0x00030000;
+
+  /// Specifies that this type interprets an LPTSTR as ANSI.
+  static const tdAnsiClass = 0x00000000;
+
+  /// Specifies that this type interprets an LPTSTR as Unicode.
+  static const tdUnicodeClass = 0x00010000;
+
+  /// Specifies that this type interprets an LPTSTR automatically.
+  static const tdAutoClass = 0x00020000;
+
+  /// Specifies that the type has a non-standard encoding, as specified by
+  /// CustomFormatMask.
+  static const tdCustomFormatClass = 0x00030000;
+
+  /// Use this mask to get non-standard encoding information for native interop.
+  /// The meaning of the values of these two bits is unspecified.
+  static const tdCustomFormatMask = 0x00C00000;
+
+  /// Specifies that the type must be initialized before the first attempt to
+  /// access a static field.
+  static const tdBeforeFieldInit = 0x00100000;
+
+  /// Specifies that the type is exported, and a type forwarder.
+  static const tdForwarder = 0x00200000;
+
+  /// This flag and the flags below are used internally by the common language
+  /// runtime.
+  static const tdReservedMask = 0x00040800;
+
+  /// Specifies that the common language runtime should check the name encoding.
+  static const tdRTSpecialName = 0x00000800;
+
+  /// Specifies that the type has security associated with it.
+  static const tdHasSecurity = 0x00040000;
 }
