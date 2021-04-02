@@ -902,7 +902,7 @@
         "comment": "Sets the character attributes for a specified number of character cells, beginning at the specified coordinates in a screen buffer."
     },
     "FillConsoleOutputCharacter": {
-        "prototype": "BOOL WINAPI FillConsoleOutputCharacterW(\n  _In_  HANDLE  hConsoleOutput,\n  _In_  TCHAR   cCharacter,\n  _In_  DWORD   nLength,\n  _In_  COORD   dwWriteCoord,\n  _Out_ LPDWORD lpNumberOfCharsWritten\n);",
+        "prototype": "BOOL WINAPI FillConsoleOutputCharacterW(\n  _In_  HANDLE  hConsoleOutput,\n  _In_  WCHAR   cCharacter,\n  _In_  DWORD   nLength,\n  _In_  COORD   dwWriteCoord,\n  _Out_ LPDWORD lpNumberOfCharsWritten\n);",
         "dllLibrary": "kernel32",
         "comment": "Writes a character to the console screen buffer a specified number of times, beginning at the specified coordinates."
     },
