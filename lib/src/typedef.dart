@@ -80,6 +80,9 @@ class TypeDef extends TokenObject with CustomAttributes {
   bool get isWindowsRuntime =>
       attributes & CorTypeAttr.tdWindowsRuntime == CorTypeAttr.tdWindowsRuntime;
 
+  bool get isRTSpecialName =>
+      attributes & CorTypeAttr.tdRTSpecialName == CorTypeAttr.tdRTSpecialName;
+
   StringFormat get stringFormat {
     switch (attributes & CorTypeAttr.tdStringFormatMask) {
       case CorTypeAttr.tdAnsiClass:

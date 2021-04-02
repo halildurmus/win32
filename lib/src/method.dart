@@ -76,9 +76,12 @@ class Method extends TokenObject with CustomAttributes {
   bool get isPinvokeImpl =>
       attributes & CorMethodAttr.mdPinvokeImpl == CorMethodAttr.mdPinvokeImpl;
 
-  bool get isUnmangedExport =>
+  bool get isUnmanagedExport =>
       attributes & CorMethodAttr.mdUnmanagedExport ==
       CorMethodAttr.mdUnmanagedExport;
+
+  bool get isRTSpecialName =>
+      attributes & CorMethodAttr.mdSpecialName == CorMethodAttr.mdSpecialName;
 
   PinvokeMap get pinvokeMap => PinvokeMap.fromToken(reader, token);
 
