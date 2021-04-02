@@ -17,6 +17,33 @@ class CustomAttribute extends TokenObject {
   final int tokenType;
   final Uint8List signatureBlob;
 
+  // String get name {
+  //   final szString = calloc<Uint16>(256).cast<Utf16>();
+  //   final ptk = calloc<Uint32>();
+
+  //   final pchString = calloc<Uint32>();
+  //   final ppBlob = calloc<Uint8>(256);
+  //   final pcbBlob = calloc<Uint32>();
+  //   try {
+  //     print('Token: ${token.toHexString(32)}');
+  //     print('Token type: ${tokenType.toHexString(32)}');
+
+  //     final hr = reader.GetMemberRefProps(
+  //         tokenType, ptk, szString, 256, pchString, ppBlob, pcbBlob);
+
+  //     if (SUCCEEDED(hr)) {
+  //       print('success');
+  //       print(pchString.value);
+  //       return szString.toDartString();
+  //     } else {
+  //       throw WindowsException(hr);
+  //     }
+  //   } finally {
+  //     free(pchString);
+  //     free(szString);
+  //   }
+  // }
+
   CustomAttribute(IMetaDataImport2 reader, int token, this.modifiedObjectToken,
       this.tokenType, this.signatureBlob)
       : super(reader, token);

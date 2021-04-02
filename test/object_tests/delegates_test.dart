@@ -46,7 +46,6 @@ void main() {
     expect(wndProc.parent?.typeName, equals('System.MulticastDelegate'));
 
     expect(wndProc.customAttributes.length, equals(1));
-    // TODO: Need more here
     // expect(
     //     wndProc.customAttributes.first.name,
     //     equals(
@@ -63,8 +62,7 @@ void main() {
     expect(wndProc.methods[0].memberAccess, equals(MemberAccess.Public));
     expect(wndProc.methods[0].isHideBySig, isTrue);
     expect(wndProc.methods[0].isSpecialName, isTrue);
-    // expect(
-    //     wndProc.methods[0].hasAttribute(CorMethodAttr.mdRTSpecialName), isTrue);
+    expect(wndProc.methods[0].isRTSpecialName, isTrue);
 
     expect(wndProc.methods[0].returnType.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_VOID));

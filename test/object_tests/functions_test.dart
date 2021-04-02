@@ -3,6 +3,7 @@
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
+/// Exhaustively test a method representation.
 void main() {
   // .method public hidebysig static pinvokeimpl("USER32" nomangle lasterr winapi)
   // 	valuetype Windows.Win32.SystemServices.BOOL AdjustWindowRect (
