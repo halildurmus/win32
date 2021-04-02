@@ -21,7 +21,19 @@ class Parameter extends TokenObject with CustomAttributes {
   String name;
   final Uint8List signatureBlob;
 
-  bool hasAttribute(int attribute) => attributes & attribute == attribute;
+  bool get isInParam => attributes & CorParamAttr.pdIn == CorParamAttr.pdIn;
+
+  bool get isOutParam => attributes & CorParamAttr.pdOut == CorParamAttr.pdOut;
+
+  bool get isOptional =>
+      attributes & CorParamAttr.pdOptional == CorParamAttr.pdOptional;
+
+  bool get hasDefault =>
+      attributes & CorParamAttr.pdHasDefault == CorParamAttr.pdHasDefault;
+
+  bool get hasFieldMarshal =>
+      attributes & CorParamAttr.pdHasFieldMarshal ==
+      CorParamAttr.pdHasFieldMarshal;
 
   Parameter(IMetaDataImport2 reader, int token, this.sequence, this.attributes,
       this.typeIdentifier, this.name, this.signatureBlob)

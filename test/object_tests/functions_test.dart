@@ -38,8 +38,8 @@ void main() {
 
     expect(awr.parameters.length, equals(3));
 
-    expect(awr.parameters[0].hasAttribute(CorParamAttr.pdIn), isTrue);
-    expect(awr.parameters[0].hasAttribute(CorParamAttr.pdOut), isTrue);
+    expect(awr.parameters[0].isInParam, isTrue);
+    expect(awr.parameters[0].isOutParam, isTrue);
     expect(awr.parameters[0].name, equals('lpRect'));
     expect(awr.parameters[0].typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_PTR));
@@ -47,12 +47,12 @@ void main() {
     expect(awr.parameters[0].typeIdentifier.typeArgs.first.name,
         equals('Windows.Win32.DisplayDevices.RECT'));
 
-    expect(awr.parameters[1].hasAttribute(CorParamAttr.pdIn), isTrue);
+    expect(awr.parameters[1].isInParam, isTrue);
     expect(awr.parameters[1].name, equals('dwStyle'));
     expect(awr.parameters[1].typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_U4));
 
-    expect(awr.parameters[2].hasAttribute(CorParamAttr.pdIn), isTrue);
+    expect(awr.parameters[2].isInParam, isTrue);
     expect(awr.parameters[2].name, equals('bMenu'));
     expect(awr.parameters[2].typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));

@@ -89,30 +89,26 @@ void main() {
     expect(wndProc.methods[1].methodName, equals('Invoke'));
     expect(wndProc.methods[1].parameters.length, equals(4));
 
-    expect(wndProc.methods[1].parameters[0].hasAttribute(CorParamAttr.pdIn),
-        isTrue);
+    expect(wndProc.methods[1].parameters[0].isInParam, isTrue);
     expect(wndProc.methods[1].parameters[0].name, equals('param0'));
     expect(wndProc.methods[1].parameters[0].typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
     expect(wndProc.methods[1].parameters[0].typeIdentifier.name,
         equals('Windows.Win32.WindowsAndMessaging.HWND'));
 
-    expect(wndProc.methods[1].parameters[1].hasAttribute(CorParamAttr.pdIn),
-        isTrue);
+    expect(wndProc.methods[1].parameters[1].isInParam, isTrue);
     expect(wndProc.methods[1].parameters[1].name, equals('param1'));
     expect(wndProc.methods[1].parameters[1].typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_U4));
 
-    expect(wndProc.methods[1].parameters[2].hasAttribute(CorParamAttr.pdIn),
-        isTrue);
+    expect(wndProc.methods[1].parameters[2].isInParam, isTrue);
     expect(wndProc.methods[1].parameters[2].name, equals('param2'));
     expect(wndProc.methods[1].parameters[2].typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
     expect(wndProc.methods[1].parameters[2].typeIdentifier.name,
         equals('Windows.Win32.WindowsAndMessaging.WPARAM'));
 
-    expect(wndProc.methods[1].parameters[3].hasAttribute(CorParamAttr.pdIn),
-        isTrue);
+    expect(wndProc.methods[1].parameters[3].isInParam, isTrue);
     expect(wndProc.methods[1].parameters[3].name, equals('param3'));
     expect(wndProc.methods[1].parameters[3].typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
