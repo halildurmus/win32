@@ -59,8 +59,8 @@ typedef _GetSingle_Dart = int Function(Pointer obj, Pointer<Float> result);
 typedef _GetDouble_Native = Int32 Function(Pointer obj, Pointer<Double> result);
 typedef _GetDouble_Dart = int Function(Pointer obj, Pointer<Double> result);
 
-typedef _GetChar16_Native = Int32 Function(Pointer obj, Pointer<Uint8> result);
-typedef _GetChar16_Dart = int Function(Pointer obj, Pointer<Uint8> result);
+typedef _GetChar16_Native = Int32 Function(Pointer obj, Pointer<Uint16> result);
+typedef _GetChar16_Dart = int Function(Pointer obj, Pointer<Uint16> result);
 
 typedef _GetBoolean_Native = Int32 Function(
     Pointer obj, Pointer< /* Boolean */ Uint8> result);
@@ -136,9 +136,9 @@ typedef _GetDoubleArray_Dart = int Function(
     Pointer obj, Pointer<Uint32> __valueSize, Pointer<Double> value);
 
 typedef _GetChar16Array_Native = Int32 Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint8> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint16> value);
 typedef _GetChar16Array_Dart = int Function(
-    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint8> value);
+    Pointer obj, Pointer<Uint32> __valueSize, Pointer<Uint16> value);
 
 typedef _GetBooleanArray_Native = Int32 Function(Pointer obj,
     Pointer<Uint32> __valueSize, Pointer< /* Boolean */ Uint8> value);
@@ -263,7 +263,7 @@ class IPropertyValue extends IInspectable {
               ptr.ref.vtable.elementAt(16).value)
           .asFunction<_GetDouble_Dart>()(ptr.ref.lpVtbl, result);
 
-  int GetChar16(Pointer<Uint8> result) =>
+  int GetChar16(Pointer<Uint16> result) =>
       Pointer<NativeFunction<_GetChar16_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(17).value)
           .asFunction<_GetChar16_Dart>()(ptr.ref.lpVtbl, result);
@@ -362,7 +362,7 @@ class IPropertyValue extends IInspectable {
               .asFunction<_GetDoubleArray_Dart>()(
           ptr.ref.lpVtbl, __valueSize, value);
 
-  int GetChar16Array(Pointer<Uint32> __valueSize, Pointer<Uint8> value) =>
+  int GetChar16Array(Pointer<Uint32> __valueSize, Pointer<Uint16> value) =>
       Pointer<NativeFunction<_GetChar16Array_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(35).value)
               .asFunction<_GetChar16Array_Dart>()(

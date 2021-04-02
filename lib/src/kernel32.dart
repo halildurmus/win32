@@ -883,7 +883,7 @@ int FillConsoleOutputAttribute(int hConsoleOutput, int wAttribute, int nLength,
 /// ```c
 /// BOOL WINAPI FillConsoleOutputCharacterW(
 ///   _In_  HANDLE  hConsoleOutput,
-///   _In_  TCHAR   cCharacter,
+///   _In_  WCHAR   cCharacter,
 ///   _In_  DWORD   nLength,
 ///   _In_  COORD   dwWriteCoord,
 ///   _Out_ LPDWORD lpNumberOfCharsWritten
