@@ -21,7 +21,7 @@ void main() {
 // 	} // end of method IFileOperation2::SetOperationFlags2
 
 // } // end of class Windows.Win32.Shell.IFileOperation2
-  test(('Windows.Win32.Shell.IFileOperation2'), () {
+  test('Windows.Win32.Shell.IFileOperation2', () {
     final scope = MetadataStore.getWin32Scope();
     final ifop2 = scope['Windows.Win32.Shell.IFileOperation2']!;
 

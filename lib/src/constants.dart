@@ -408,6 +408,25 @@ class CorPinvokeMap {
   static const pmMaxValue = 0xFFFF;
 }
 
+/// Contains values that describe the metadata of a property.
+class CorPropertyAttr {
+  /// Specifies that the property is special, and that its name describes how.
+  static const prSpecialName = 0x0200;
+
+  /// Reserved for internal use by the common language runtime.
+  static const prReservedMask = 0xf400;
+
+  /// Specifies that the common language runtime metadata internal APIs should
+  /// check the encoding of the property name.
+  static const prRTSpecialName = 0x0400;
+
+  /// Specifies that the property has a default value.
+  static const prHasDefault = 0x1000;
+
+  /// Unused.
+  static const prUnused = 0xe9ff;
+}
+
 /// Indicates the type of a metadata token.
 class CorTokenType {
   static const mdtModule = 0x00000000;

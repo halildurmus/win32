@@ -14,6 +14,7 @@ import 'constants.dart';
 import 'field.dart';
 import 'metadatastore.dart';
 import 'method.dart';
+import 'property.dart';
 import 'systemtokens.dart';
 import 'utils.dart';
 
@@ -271,6 +272,7 @@ class TypeDef extends TokenObject with CustomAttributes {
     }
   }
 
+  /// Enumerate all fields contained within this type.
   List<Field> get fields {
     final fields = <Field>[];
 
@@ -300,23 +302,49 @@ class TypeDef extends TokenObject with CustomAttributes {
     final methods = <Method>[];
 
     final phEnum = calloc<IntPtr>();
-    final mdMethodDef = calloc<Uint32>();
+    final rgMethods = calloc<Uint32>();
     final pcTokens = calloc<Uint32>();
 
     try {
-      var hr = reader.EnumMethods(phEnum, token, mdMethodDef, 1, pcTokens);
+      var hr = reader.EnumMethods(phEnum, token, rgMethods, 1, pcTokens);
       while (hr == S_OK) {
-        final token = mdMethodDef.value;
+        final token = rgMethods.value;
 
         methods.add(Method.fromToken(reader, token));
-        hr = reader.EnumMethods(phEnum, token, mdMethodDef, 1, pcTokens);
+        hr = reader.EnumMethods(phEnum, token, rgMethods, 1, pcTokens);
       }
       return methods;
     } finally {
       reader.CloseEnum(phEnum.value);
       calloc.free(phEnum);
-      calloc.free(mdMethodDef);
+      calloc.free(rgMethods);
       calloc.free(pcTokens);
+    }
+  }
+
+  /// Enumerate all properties contained within this type.
+  List<Property> get properties {
+    final properties = <Property>[];
+
+    final phEnum = calloc<IntPtr>();
+    final rgProperties = calloc<Uint32>();
+    final pcProperties = calloc<Uint32>();
+
+    try {
+      var hr =
+          reader.EnumProperties(phEnum, token, rgProperties, 1, pcProperties);
+      while (hr == S_OK) {
+        final token = rgProperties.value;
+
+        properties.add(Property.fromToken(reader, token));
+        hr = reader.EnumMethods(phEnum, token, rgProperties, 1, pcProperties);
+      }
+      return properties;
+    } finally {
+      reader.CloseEnum(phEnum.value);
+      calloc.free(phEnum);
+      calloc.free(rgProperties);
+      calloc.free(pcProperties);
     }
   }
 
