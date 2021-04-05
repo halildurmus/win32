@@ -180,6 +180,7 @@ export 'src/com/ISpellCheckerFactory.dart';
 export 'src/com/ISpellingError.dart';
 export 'src/com/IStream.dart';
 export 'src/com/ISupportErrorInfo.dart';
+export 'src/com/ITypeInfo.dart';
 export 'src/com/IUnknown.dart';
 export 'src/com/IWbemClassObject.dart';
 export 'src/com/IWbemContext.dart';

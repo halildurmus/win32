@@ -131,6 +131,10 @@
         "namespace": "Windows.Win32.WindowsAndMessaging.FINDREPLACEW",
         "comment": "Contains information that the FindText and ReplaceText functions use to initialize the Find and Replace dialog boxes. The FINDMSGSTRING registered message uses this structure to pass the user's search or replacement input to the owner window of a Find or Replace dialog box."
     },
+    "FUNCDESC": {
+        "namespace": "Windows.Win32.Automation.FUNCDESC",
+        "comment": "Describes a function."
+    },
     "GUITHREADINFO": {
         "namespace": "Windows.Win32.WindowsAndMessaging.GUITHREADINFO",
         "comment": "Contains information about a GUI thread."
@@ -226,6 +230,14 @@
     "PALETTEENTRY": {
         "namespace": "Windows.Win32.Gdi.PALETTEENTRY",
         "comment": "The PALETTEENTRY structure specifies the color and usage of an entry in a logical palette. A logical palette is defined by a LOGPALETTE structure."
+    },
+    "PARAMDESC": {
+        "namespace": "Windows.Win32.Automation.PARAMDESC",
+        "comment": "Contains information needed for transferring a structure element, parameter, or function return value between processes."
+    },
+    "PARAMDESCEX": {
+        "namespace": "Windows.Win32.Automation.PARAMDESCEX",
+        "comment": "Contains information about the default value of a parameter."
     },
     "POINT": {
         "namespace": "Windows.Win32.DisplayDevices.POINT",

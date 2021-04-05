@@ -10,6 +10,7 @@ const interfacesToGenerate = <String>[
   'Windows.Win32.Automation.IEnumVARIANT',
   'Windows.Win32.Automation.IErrorInfo',
   'Windows.Win32.Automation.ISupportErrorInfo',
+  'Windows.Win32.Automation.ITypeInfo',
   'Windows.Win32.Com.IBindCtx',
   'Windows.Win32.Com.IClassFactory',
   'Windows.Win32.Com.IConnectionPoint',

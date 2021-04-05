@@ -643,6 +643,33 @@ class FINDREPLACE extends Struct {
   external Pointer<Utf16> lpTemplateName;
 }
 
+/// Describes a function.
+///
+/// {@category Struct}
+class FUNCDESC extends Struct {
+  @Int32()
+  external int memid;
+  external Pointer<Int32> lprgscode;
+  external Pointer<ELEMDESC> lprgelemdescParam;
+  @Uint32()
+  external int funckind;
+  @Uint32()
+  external int invkind;
+  @Uint32()
+  external int callconv;
+  @Int16()
+  external int cParams;
+  @Int16()
+  external int cParamsOpt;
+  @Int16()
+  external int oVft;
+  @Int16()
+  external int cScodes;
+  external ELEMDESC elemdescFunc;
+  @Uint16()
+  external int wFuncFlags;
+}
+
 /// Contains information about a GUI thread.
 ///
 /// {@category Struct}
@@ -1094,6 +1121,25 @@ class PALETTEENTRY extends Struct {
   external int peBlue;
   @Uint8()
   external int peFlags;
+}
+
+/// Contains information needed for transferring a structure element,
+/// parameter, or function return value between processes.
+///
+/// {@category Struct}
+class PARAMDESC extends Struct {
+  external Pointer<PARAMDESCEX> pparamdescex;
+  @Uint16()
+  external int wParamFlags;
+}
+
+/// Contains information about the default value of a parameter.
+///
+/// {@category Struct}
+class PARAMDESCEX extends Struct {
+  @Uint32()
+  external int cBytes;
+  external VARIANT varDefaultValue;
 }
 
 /// The POINT structure defines the x- and y-coordinates of a point.
