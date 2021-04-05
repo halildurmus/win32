@@ -29,6 +29,12 @@ const STATUS_SUCCESS = 0;
 // Path length
 const MAX_PATH = 260;
 
+/// The default locale for the operating system.
+const LOCALE_SYSTEM_DEFAULT = 0x0800;
+
+/// The default locale for the user or process.
+const LOCALE_USER_DEFAULT = 0x0400;
+
 // -----------------------------------------------------------------------------
 // COM Error Codes
 // -----------------------------------------------------------------------------
@@ -101,6 +107,25 @@ const CLSCTX_ALL = CLSCTX_INPROC_SERVER |
     CLSCTX_INPROC_HANDLER |
     CLSCTX_LOCAL_SERVER |
     CLSCTX_REMOTE_SERVER;
+
+// -----------------------------------------------------------------------------
+// IDispatch constants
+// -----------------------------------------------------------------------------
+
+/// The member is invoked as a method. If a property has the same name, both
+/// this and the DISPATCH_PROPERTYGET flag can be set.
+const DISPATCH_METHOD = 0x1;
+
+/// The member is retrieved as a property or data member.
+const DISPATCH_PROPERTYGET = 0x2;
+
+/// The member is changed as a property or data member.
+const DISPATCH_PROPERTYPUT = 0x4;
+
+/// The member is changed by a reference assignment, rather than a value
+/// assignment. This flag is valid only when the property accepts a reference to
+/// an object.
+const DISPATCH_PROPERTYPUTREF = 0x8;
 
 // -----------------------------------------------------------------------------
 // Error constants
