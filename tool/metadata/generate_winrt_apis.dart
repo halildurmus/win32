@@ -19,7 +19,6 @@ final typesToGenerate = [
   'Windows.Foundation.IClosable',
   'Windows.Foundation.IStringable',
   'Windows.Globalization.ICalendar',
-  // 'Windows.Media.Playback.MediaPlayer',
   'Windows.Storage.Pickers.IFileOpenPicker'
 ];
 

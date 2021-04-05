@@ -309,6 +309,13 @@ void main() {
       expect(sizeOf<GUITHREADINFO>(), equals(48));
     }
   });
+  test('Struct IDLDESC is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<IDLDESC>(), equals(16));
+    } else {
+      expect(sizeOf<IDLDESC>(), equals(8));
+    }
+  });
   test('Struct INITCOMMONCONTROLSEX is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<INITCOMMONCONTROLSEX>(), equals(8));
@@ -741,6 +748,20 @@ void main() {
       expect(sizeOf<TPMPARAMS>(), equals(20));
     } else {
       expect(sizeOf<TPMPARAMS>(), equals(20));
+    }
+  });
+  test('Struct TYPEATTR is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<TYPEATTR>(), equals(96));
+    } else {
+      expect(sizeOf<TYPEATTR>(), equals(76));
+    }
+  });
+  test('Struct TYPEDESC is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<TYPEDESC>(), equals(16));
+    } else {
+      expect(sizeOf<TYPEDESC>(), equals(8));
     }
   });
   test('Struct UPDATELAYEREDWINDOWINFO is the right size', () {

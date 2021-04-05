@@ -72,6 +72,7 @@ void main()
     printf("  'FINDREPLACE': %zu,\n", sizeof(FINDREPLACE));
     printf("  'GUID': %zu,\n", sizeof(GUID));
     printf("  'GUITHREADINFO': %zu,\n", sizeof(GUITHREADINFO));
+    printf("  'IDLDESC': %zu,\n", sizeof(IDLDESC));
     printf("  'INITCOMMONCONTROLSEX': %zu,\n", sizeof(INITCOMMONCONTROLSEX));
     printf("  'INPUT': %zu,\n", sizeof(INPUT));
     printf("  'KNOWNFOLDER_DEFINITION': %zu,\n", sizeof(KNOWNFOLDER_DEFINITION));
@@ -134,6 +135,8 @@ void main()
     printf("  'TITLEBARINFO': %zu,\n", sizeof(TITLEBARINFO));
     printf("  'TITLEBARINFOEX': %zu,\n", sizeof(TITLEBARINFOEX));
     printf("  'TPMPARAMS': %zu,\n", sizeof(TPMPARAMS));
+    printf("  'TYPEATTR': %zu,\n", sizeof(TYPEATTR));
+    printf("  'TYPEDESC': %zu,\n", sizeof(TYPEDESC));
     printf("  'UPDATELAYEREDWINDOWINFO': %zu,\n", sizeof(UPDATELAYEREDWINDOWINFO));
     printf("  'VALENT': %zu,\n", sizeof(VALENTW));
     printf("  'VARIANT': %zu,\n", sizeof(VARIANT));

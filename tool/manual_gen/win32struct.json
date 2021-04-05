@@ -135,6 +135,10 @@
         "namespace": "Windows.Win32.WindowsAndMessaging.GUITHREADINFO",
         "comment": "Contains information about a GUI thread."
     },
+    "IDLDESC": {
+        "namespace": "Windows.Win32.Automation.IDLDESC",
+        "comment": "Contains the IDL attributes of a type."
+    },
     "INITCOMMONCONTROLSEX": {
         "namespace": "Windows.Win32.Controls.INITCOMMONCONTROLSEX",
         "comment": "Carries information used to load common control classes from the dynamic-link library (DLL). This structure is used with the InitCommonControlsEx function."
@@ -338,6 +342,10 @@
     "TPMPARAMS": {
         "namespace": "Windows.Win32.WindowsAndMessaging.TPMPARAMS",
         "comment": "Contains extended parameters for the TrackPopupMenuEx function."
+    },
+    "TYPEATTR": {
+        "namespace": "Windows.Win32.Automation.TYPEATTR",
+        "comment": "Contains attributes of a type."
     },
     "UPDATELAYEREDWINDOWINFO": {
         "namespace": "Windows.Win32.WindowsAndMessaging.UPDATELAYEREDWINDOWINFO",

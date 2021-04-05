@@ -666,6 +666,16 @@ class GUITHREADINFO extends Struct {
   external RECT rcCaret;
 }
 
+/// Contains the IDL attributes of a type.
+///
+/// {@category Struct}
+class IDLDESC extends Struct {
+  @IntPtr()
+  external int dwReserved;
+  @Uint16()
+  external int wIDLFlags;
+}
+
 /// Carries information used to load common control classes from the
 /// dynamic-link library (DLL). This structure is used with the
 /// InitCommonControlsEx function.
@@ -1603,6 +1613,44 @@ class TPMPARAMS extends Struct {
   @Uint32()
   external int cbSize;
   external RECT rcExclude;
+}
+
+/// Contains attributes of a type.
+///
+/// {@category Struct}
+class TYPEATTR extends Struct {
+  external GUID guid;
+  @Uint32()
+  external int lcid;
+  @Uint32()
+  external int dwReserved;
+  @Int32()
+  external int memidConstructor;
+  @Int32()
+  external int memidDestructor;
+  external Pointer<Utf16> lpstrSchema;
+  @Uint32()
+  external int cbSizeInstance;
+  @Uint32()
+  external int typekind;
+  @Uint16()
+  external int cFuncs;
+  @Uint16()
+  external int cVars;
+  @Uint16()
+  external int cImplTypes;
+  @Uint16()
+  external int cbSizeVft;
+  @Uint16()
+  external int cbAlignment;
+  @Uint16()
+  external int wTypeFlags;
+  @Uint16()
+  external int wMajorVerNum;
+  @Uint16()
+  external int wMinorVerNum;
+  external TYPEDESC tdescAlias;
+  external IDLDESC idldescType;
 }
 
 /// Used by UpdateLayeredWindowIndirect to provide position, size, shape,

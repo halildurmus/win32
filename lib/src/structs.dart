@@ -274,6 +274,28 @@ class PHYSICAL_MONITOR extends Struct {
   }
 }
 
+// typedef struct tagTYPEDESC {
+//   union {
+//     struct tagTYPEDESC *lptdesc;
+//     struct tagARRAYDESC *lpadesc;
+//     HREFTYPE hreftype;
+//   } DUMMYUNIONNAME;
+//   VARTYPE vt;
+// } TYPEDESC;
+
+/// Describes the type of a variable, the return type of a function, or the type
+/// of a function parameter.
+///
+/// {@category Struct}
+class TYPEDESC extends Struct {
+  external Pointer lptdesc;
+  Pointer get lpadesc => lptdesc;
+  int get hreftype => lptdesc.cast<Uint32>().value;
+
+  @Uint16()
+  external int vt;
+}
+
 // typedef struct _STRRET {
 //   UINT  uType;
 //   union {
