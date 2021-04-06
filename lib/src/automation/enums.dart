@@ -1,32 +1,4 @@
 /// {@category Enum}
-class SF_TYPE {
-  static const SF_ERROR = 0x0000000a;
-  static const SF_I1 = 0x00000010;
-  static const SF_I2 = 0x00000002;
-  static const SF_I4 = 0x00000003;
-  static const SF_I8 = 0x00000014;
-  static const SF_BSTR = 0x00000008;
-  static const SF_UNKNOWN = 0x0000000d;
-  static const SF_DISPATCH = 0x00000009;
-  static const SF_VARIANT = 0x0000000c;
-  static const SF_RECORD = 0x00000024;
-  static const SF_HAVEIID = 0x0000800d;
-}
-
-/// {@category Enum}
-class TYPEKIND {
-  static const TKIND_ENUM = 0x00000000;
-  static const TKIND_RECORD = 0x00000001;
-  static const TKIND_MODULE = 0x00000002;
-  static const TKIND_INTERFACE = 0x00000003;
-  static const TKIND_DISPATCH = 0x00000004;
-  static const TKIND_COCLASS = 0x00000005;
-  static const TKIND_ALIAS = 0x00000006;
-  static const TKIND_UNION = 0x00000007;
-  static const TKIND_MAX = 0x00000008;
-}
-
-/// {@category Enum}
 class CALLCONV {
   static const CC_FASTCALL = 0x00000000;
   static const CC_CDECL = 0x00000001;
@@ -39,6 +11,45 @@ class CALLCONV {
   static const CC_MPWCDECL = 0x00000007;
   static const CC_MPWPASCAL = 0x00000008;
   static const CC_MAX = 0x00000009;
+}
+
+/// {@category Enum}
+class CHANGEKIND {
+  static const CHANGEKIND_ADDMEMBER = 0x00000000;
+  static const CHANGEKIND_DELETEMEMBER = 0x00000001;
+  static const CHANGEKIND_SETNAMES = 0x00000002;
+  static const CHANGEKIND_SETDOCUMENTATION = 0x00000003;
+  static const CHANGEKIND_GENERAL = 0x00000004;
+  static const CHANGEKIND_INVALIDATE = 0x00000005;
+  static const CHANGEKIND_CHANGEFAILED = 0x00000006;
+  static const CHANGEKIND_MAX = 0x00000007;
+}
+
+/// {@category Enum}
+class DESCKIND {
+  static const DESCKIND_NONE = 0x00000000;
+  static const DESCKIND_FUNCDESC = 0x00000001;
+  static const DESCKIND_VARDESC = 0x00000002;
+  static const DESCKIND_TYPECOMP = 0x00000003;
+  static const DESCKIND_IMPLICITAPPOBJ = 0x00000004;
+  static const DESCKIND_MAX = 0x00000005;
+}
+
+/// {@category Enum}
+class FUNCFLAGS {
+  static const FUNCFLAG_FRESTRICTED = 0x00000001;
+  static const FUNCFLAG_FSOURCE = 0x00000002;
+  static const FUNCFLAG_FBINDABLE = 0x00000004;
+  static const FUNCFLAG_FREQUESTEDIT = 0x00000008;
+  static const FUNCFLAG_FDISPLAYBIND = 0x00000010;
+  static const FUNCFLAG_FDEFAULTBIND = 0x00000020;
+  static const FUNCFLAG_FHIDDEN = 0x00000040;
+  static const FUNCFLAG_FUSESGETLASTERROR = 0x00000080;
+  static const FUNCFLAG_FDEFAULTCOLLELEM = 0x00000100;
+  static const FUNCFLAG_FUIDEFAULT = 0x00000200;
+  static const FUNCFLAG_FNONBROWSABLE = 0x00000400;
+  static const FUNCFLAG_FREPLACEABLE = 0x00000800;
+  static const FUNCFLAG_FIMMEDIATEBIND = 0x00001000;
 }
 
 /// {@category Enum}
@@ -59,11 +70,41 @@ class INVOKEKIND {
 }
 
 /// {@category Enum}
-class VARKIND {
-  static const VAR_PERINSTANCE = 0x00000000;
-  static const VAR_STATIC = 0x00000001;
-  static const VAR_CONST = 0x00000002;
-  static const VAR_DISPATCH = 0x00000003;
+class LIBFLAGS {
+  static const LIBFLAG_FRESTRICTED = 0x00000001;
+  static const LIBFLAG_FCONTROL = 0x00000002;
+  static const LIBFLAG_FHIDDEN = 0x00000004;
+  static const LIBFLAG_FHASDISKIMAGE = 0x00000008;
+}
+
+/// {@category Enum}
+class REGKIND {
+  static const REGKIND_DEFAULT = 0x00000000;
+  static const REGKIND_REGISTER = 0x00000001;
+  static const REGKIND_NONE = 0x00000002;
+}
+
+/// {@category Enum}
+class SF_TYPE {
+  static const SF_ERROR = 0x0000000a;
+  static const SF_I1 = 0x00000010;
+  static const SF_I2 = 0x00000002;
+  static const SF_I4 = 0x00000003;
+  static const SF_I8 = 0x00000014;
+  static const SF_BSTR = 0x00000008;
+  static const SF_UNKNOWN = 0x0000000d;
+  static const SF_DISPATCH = 0x00000009;
+  static const SF_VARIANT = 0x0000000c;
+  static const SF_RECORD = 0x00000024;
+  static const SF_HAVEIID = 0x0000800d;
+}
+
+/// {@category Enum}
+class SYSKIND {
+  static const SYS_WIN16 = 0x00000000;
+  static const SYS_WIN32 = 0x00000001;
+  static const SYS_MAC = 0x00000002;
+  static const SYS_WIN64 = 0x00000003;
 }
 
 /// {@category Enum}
@@ -86,82 +127,16 @@ class TYPEFLAGS {
 }
 
 /// {@category Enum}
-class FUNCFLAGS {
-  static const FUNCFLAG_FRESTRICTED = 0x00000001;
-  static const FUNCFLAG_FSOURCE = 0x00000002;
-  static const FUNCFLAG_FBINDABLE = 0x00000004;
-  static const FUNCFLAG_FREQUESTEDIT = 0x00000008;
-  static const FUNCFLAG_FDISPLAYBIND = 0x00000010;
-  static const FUNCFLAG_FDEFAULTBIND = 0x00000020;
-  static const FUNCFLAG_FHIDDEN = 0x00000040;
-  static const FUNCFLAG_FUSESGETLASTERROR = 0x00000080;
-  static const FUNCFLAG_FDEFAULTCOLLELEM = 0x00000100;
-  static const FUNCFLAG_FUIDEFAULT = 0x00000200;
-  static const FUNCFLAG_FNONBROWSABLE = 0x00000400;
-  static const FUNCFLAG_FREPLACEABLE = 0x00000800;
-  static const FUNCFLAG_FIMMEDIATEBIND = 0x00001000;
-}
-
-/// {@category Enum}
-class VARFLAGS {
-  static const VARFLAG_FREADONLY = 0x00000001;
-  static const VARFLAG_FSOURCE = 0x00000002;
-  static const VARFLAG_FBINDABLE = 0x00000004;
-  static const VARFLAG_FREQUESTEDIT = 0x00000008;
-  static const VARFLAG_FDISPLAYBIND = 0x00000010;
-  static const VARFLAG_FDEFAULTBIND = 0x00000020;
-  static const VARFLAG_FHIDDEN = 0x00000040;
-  static const VARFLAG_FRESTRICTED = 0x00000080;
-  static const VARFLAG_FDEFAULTCOLLELEM = 0x00000100;
-  static const VARFLAG_FUIDEFAULT = 0x00000200;
-  static const VARFLAG_FNONBROWSABLE = 0x00000400;
-  static const VARFLAG_FREPLACEABLE = 0x00000800;
-  static const VARFLAG_FIMMEDIATEBIND = 0x00001000;
-}
-
-/// {@category Enum}
-class DESCKIND {
-  static const DESCKIND_NONE = 0x00000000;
-  static const DESCKIND_FUNCDESC = 0x00000001;
-  static const DESCKIND_VARDESC = 0x00000002;
-  static const DESCKIND_TYPECOMP = 0x00000003;
-  static const DESCKIND_IMPLICITAPPOBJ = 0x00000004;
-  static const DESCKIND_MAX = 0x00000005;
-}
-
-/// {@category Enum}
-class SYSKIND {
-  static const SYS_WIN16 = 0x00000000;
-  static const SYS_WIN32 = 0x00000001;
-  static const SYS_MAC = 0x00000002;
-  static const SYS_WIN64 = 0x00000003;
-}
-
-/// {@category Enum}
-class LIBFLAGS {
-  static const LIBFLAG_FRESTRICTED = 0x00000001;
-  static const LIBFLAG_FCONTROL = 0x00000002;
-  static const LIBFLAG_FHIDDEN = 0x00000004;
-  static const LIBFLAG_FHASDISKIMAGE = 0x00000008;
-}
-
-/// {@category Enum}
-class CHANGEKIND {
-  static const CHANGEKIND_ADDMEMBER = 0x00000000;
-  static const CHANGEKIND_DELETEMEMBER = 0x00000001;
-  static const CHANGEKIND_SETNAMES = 0x00000002;
-  static const CHANGEKIND_SETDOCUMENTATION = 0x00000003;
-  static const CHANGEKIND_GENERAL = 0x00000004;
-  static const CHANGEKIND_INVALIDATE = 0x00000005;
-  static const CHANGEKIND_CHANGEFAILED = 0x00000006;
-  static const CHANGEKIND_MAX = 0x00000007;
-}
-
-/// {@category Enum}
-class REGKIND {
-  static const REGKIND_DEFAULT = 0x00000000;
-  static const REGKIND_REGISTER = 0x00000001;
-  static const REGKIND_NONE = 0x00000002;
+class TYPEKIND {
+  static const TKIND_ENUM = 0x00000000;
+  static const TKIND_RECORD = 0x00000001;
+  static const TKIND_MODULE = 0x00000002;
+  static const TKIND_INTERFACE = 0x00000003;
+  static const TKIND_DISPATCH = 0x00000004;
+  static const TKIND_COCLASS = 0x00000005;
+  static const TKIND_ALIAS = 0x00000006;
+  static const TKIND_UNION = 0x00000007;
+  static const TKIND_MAX = 0x00000008;
 }
 
 /// {@category Enum}
@@ -218,5 +193,30 @@ class VARENUM {
   static const VT_ILLEGAL = 0x0000ffff;
   static const VT_ILLEGALMASKED = 0x00000fff;
   static const VT_TYPEMASK = 0x00000fff;
+}
+
+/// {@category Enum}
+class VARFLAGS {
+  static const VARFLAG_FREADONLY = 0x00000001;
+  static const VARFLAG_FSOURCE = 0x00000002;
+  static const VARFLAG_FBINDABLE = 0x00000004;
+  static const VARFLAG_FREQUESTEDIT = 0x00000008;
+  static const VARFLAG_FDISPLAYBIND = 0x00000010;
+  static const VARFLAG_FDEFAULTBIND = 0x00000020;
+  static const VARFLAG_FHIDDEN = 0x00000040;
+  static const VARFLAG_FRESTRICTED = 0x00000080;
+  static const VARFLAG_FDEFAULTCOLLELEM = 0x00000100;
+  static const VARFLAG_FUIDEFAULT = 0x00000200;
+  static const VARFLAG_FNONBROWSABLE = 0x00000400;
+  static const VARFLAG_FREPLACEABLE = 0x00000800;
+  static const VARFLAG_FIMMEDIATEBIND = 0x00001000;
+}
+
+/// {@category Enum}
+class VARKIND {
+  static const VAR_PERINSTANCE = 0x00000000;
+  static const VAR_STATIC = 0x00000001;
+  static const VAR_CONST = 0x00000002;
+  static const VAR_DISPATCH = 0x00000003;
 }
 

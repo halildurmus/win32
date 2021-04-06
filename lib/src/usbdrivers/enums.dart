@@ -1,15 +1,16 @@
 /// {@category Enum}
-class USB_DEVICE_SPEED {
-  static const UsbLowSpeed = 0x00000000;
-  static const UsbFullSpeed = 0x00000001;
-  static const UsbHighSpeed = 0x00000002;
-  static const UsbSuperSpeed = 0x00000003;
+class USBD_ENDPOINT_OFFLOAD_MODE {
+  static const UsbdEndpointOffloadModeNotSupported = 0x00000000;
+  static const UsbdEndpointOffloadSoftwareAssisted = 0x00000001;
+  static const UsbdEndpointOffloadHardwareAssisted = 0x00000002;
 }
 
 /// {@category Enum}
-class USB_DEVICE_TYPE {
-  static const Usb11Device = 0x00000000;
-  static const Usb20Device = 0x00000001;
+class USBD_PIPE_TYPE {
+  static const UsbdPipeTypeControl = 0x00000000;
+  static const UsbdPipeTypeIsochronous = 0x00000001;
+  static const UsbdPipeTypeBulk = 0x00000002;
+  static const UsbdPipeTypeInterrupt = 0x00000003;
 }
 
 /// {@category Enum}
@@ -44,18 +45,17 @@ class USB_CONTROLLER_FLAVOR {
 }
 
 /// {@category Enum}
-class USBD_PIPE_TYPE {
-  static const UsbdPipeTypeControl = 0x00000000;
-  static const UsbdPipeTypeIsochronous = 0x00000001;
-  static const UsbdPipeTypeBulk = 0x00000002;
-  static const UsbdPipeTypeInterrupt = 0x00000003;
+class USB_DEVICE_SPEED {
+  static const UsbLowSpeed = 0x00000000;
+  static const UsbFullSpeed = 0x00000001;
+  static const UsbHighSpeed = 0x00000002;
+  static const UsbSuperSpeed = 0x00000003;
 }
 
 /// {@category Enum}
-class USBD_ENDPOINT_OFFLOAD_MODE {
-  static const UsbdEndpointOffloadModeNotSupported = 0x00000000;
-  static const UsbdEndpointOffloadSoftwareAssisted = 0x00000001;
-  static const UsbdEndpointOffloadHardwareAssisted = 0x00000002;
+class USB_DEVICE_TYPE {
+  static const Usb11Device = 0x00000000;
+  static const Usb20Device = 0x00000001;
 }
 
 /// {@category Enum}

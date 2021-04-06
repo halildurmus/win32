@@ -49,18 +49,24 @@ class DnsContextHandle extends Struct {
 
 class IP4_ARRAY extends Struct {
   @Uint32() external int AddrCount;
-  external __uint__ AddrArray;
+  @Array(1)
+  external Array<Uint32> AddrArray;
 }
 
 class IP6_ADDRESS extends Struct {
-  external __uint64__ IP6Qword;
-  external __uint__ IP6Dword;
-  external __ushort__ IP6Word;
-  external __ubyte__ IP6Byte;
+  @Array(2)
+  external Array<Uint64> IP6Qword;
+  @Array(4)
+  external Array<Uint32> IP6Dword;
+  @Array(8)
+  external Array<Uint16> IP6Word;
+  @Array(16)
+  external Array<Uint8> IP6Byte;
 }
 
 class DNS_ADDR extends Struct {
-  external __byte__ MaxSa;
+  @Array(32)
+  external Array<Int8> MaxSa;
   @Uint32() external int Data;
 }
 
@@ -74,7 +80,8 @@ class DNS_ADDR_ARRAY extends Struct {
   @Uint32() external int MatchFlag;
   @Uint32() external int Reserved1;
   @Uint32() external int Reserved2;
-  external DNS_ADDR AddrArray;
+  @Array(1)
+  external Array<DNS_ADDR> AddrArray;
 }
 
 class DNS_HEADER extends Struct {
@@ -161,23 +168,27 @@ class DNS_MX_DATAA extends Struct {
 
 class DNS_TXT_DATAW extends Struct {
   @Uint32() external int dwStringCount;
-  external ____ pStringArray;
+  @Array(1)
+  external Array<Pointer<Uint16>> pStringArray;
 }
 
 class DNS_TXT_DATAA extends Struct {
   @Uint32() external int dwStringCount;
-  external ____ pStringArray;
+  @Array(1)
+  external Array<Pointer<Int8>> pStringArray;
 }
 
 class DNS_NULL_DATA extends Struct {
   @Uint32() external int dwByteCount;
-  external __ubyte__ Data;
+  @Array(1)
+  external Array<Uint8> Data;
 }
 
 class DNS_WKS_DATA extends Struct {
   @Uint32() external int IpAddress;
   @Uint8() external int chProtocol;
-  external __ubyte__ BitMask;
+  @Array(1)
+  external Array<Uint8> BitMask;
 }
 
 class DNS_AAAA_DATA extends Struct {
@@ -194,7 +205,8 @@ class DNS_SIG_DATAW extends Struct {
   @Uint16() external int wKeyTag;
   @Uint16() external int wSignatureLength;
   external Pointer<Utf16> pNameSigner;
-  external __ubyte__ Signature;
+  @Array(1)
+  external Array<Uint8> Signature;
 }
 
 class DNS_SIG_DATAA extends Struct {
@@ -207,7 +219,8 @@ class DNS_SIG_DATAA extends Struct {
   @Uint16() external int wKeyTag;
   @Uint16() external int wSignatureLength;
   external Pointer<Utf8> pNameSigner;
-  external __ubyte__ Signature;
+  @Array(1)
+  external Array<Uint8> Signature;
 }
 
 class DNS_KEY_DATA extends Struct {
@@ -216,26 +229,30 @@ class DNS_KEY_DATA extends Struct {
   @Uint8() external int chAlgorithm;
   @Uint16() external int wKeyLength;
   @Uint16() external int wPad;
-  external __ubyte__ Key;
+  @Array(1)
+  external Array<Uint8> Key;
 }
 
 class DNS_DHCID_DATA extends Struct {
   @Uint32() external int dwByteCount;
-  external __ubyte__ DHCID;
+  @Array(1)
+  external Array<Uint8> DHCID;
 }
 
 class DNS_NSEC_DATAW extends Struct {
   external Pointer<Utf16> pNextDomainName;
   @Uint16() external int wTypeBitMapsLength;
   @Uint16() external int wPad;
-  external __ubyte__ TypeBitMaps;
+  @Array(1)
+  external Array<Uint8> TypeBitMaps;
 }
 
 class DNS_NSEC_DATAA extends Struct {
   external Pointer<Utf8> pNextDomainName;
   @Uint16() external int wTypeBitMapsLength;
   @Uint16() external int wPad;
-  external __ubyte__ TypeBitMaps;
+  @Array(1)
+  external Array<Uint8> TypeBitMaps;
 }
 
 class DNS_NSEC3_DATA extends Struct {
@@ -245,7 +262,8 @@ class DNS_NSEC3_DATA extends Struct {
   @Uint8() external int bSaltLength;
   @Uint8() external int bHashLength;
   @Uint16() external int wTypeBitMapsLength;
-  external __ubyte__ chData;
+  @Array(1)
+  external Array<Uint8> chData;
 }
 
 class DNS_NSEC3PARAM_DATA extends Struct {
@@ -253,8 +271,10 @@ class DNS_NSEC3PARAM_DATA extends Struct {
   @Uint8() external int bFlags;
   @Uint16() external int wIterations;
   @Uint8() external int bSaltLength;
-  external __ubyte__ bPad;
-  external __ubyte__ pbSalt;
+  @Array(3)
+  external Array<Uint8> bPad;
+  @Array(1)
+  external Array<Uint8> pbSalt;
 }
 
 class DNS_TLSA_DATA extends Struct {
@@ -262,8 +282,10 @@ class DNS_TLSA_DATA extends Struct {
   @Uint8() external int bSelector;
   @Uint8() external int bMatchingType;
   @Uint16() external int bCertificateAssociationDataLength;
-  external __ubyte__ bPad;
-  external __ubyte__ bCertificateAssociationData;
+  @Array(3)
+  external Array<Uint8> bPad;
+  @Array(1)
+  external Array<Uint8> bCertificateAssociationData;
 }
 
 class DNS_DS_DATA extends Struct {
@@ -272,13 +294,15 @@ class DNS_DS_DATA extends Struct {
   @Uint8() external int chDigestType;
   @Uint16() external int wDigestLength;
   @Uint16() external int wPad;
-  external __ubyte__ Digest;
+  @Array(1)
+  external Array<Uint8> Digest;
 }
 
 class DNS_OPT_DATA extends Struct {
   @Uint16() external int wDataLength;
   @Uint16() external int wPad;
-  external __ubyte__ Data;
+  @Array(1)
+  external Array<Uint8> Data;
 }
 
 class DNS_LOC_DATA extends Struct {
@@ -294,13 +318,15 @@ class DNS_LOC_DATA extends Struct {
 class DNS_NXT_DATAW extends Struct {
   external Pointer<Utf16> pNameNext;
   @Uint16() external int wNumTypes;
-  external __ushort__ wTypes;
+  @Array(1)
+  external Array<Uint16> wTypes;
 }
 
 class DNS_NXT_DATAA extends Struct {
   external Pointer<Utf8> pNameNext;
   @Uint16() external int wNumTypes;
-  external __ushort__ wTypes;
+  @Array(1)
+  external Array<Uint16> wTypes;
 }
 
 class DNS_SRV_DATAW extends Struct {
@@ -339,7 +365,8 @@ class DNS_NAPTR_DATAA extends Struct {
 
 class DNS_ATMA_DATA extends Struct {
   @Uint8() external int AddressType;
-  external __ubyte__ Address;
+  @Array(20)
+  external Array<Uint8> Address;
 }
 
 class DNS_TKEY_DATAW extends Struct {
@@ -404,7 +431,8 @@ class DNS_TSIG_DATAA extends Struct {
 
 class DNS_UNKNOWN_DATA extends Struct {
   @Uint32() external int dwByteCount;
-  external __ubyte__ bData;
+  @Array(1)
+  external Array<Uint8> bData;
 }
 
 class DNS_WINS_DATA extends Struct {
@@ -412,7 +440,8 @@ class DNS_WINS_DATA extends Struct {
   @Uint32() external int dwLookupTimeout;
   @Uint32() external int dwCacheTimeout;
   @Uint32() external int cWinsServerCount;
-  external __uint__ WinsServers;
+  @Array(1)
+  external Array<Uint32> WinsServers;
 }
 
 class DNS_WINSR_DATAW extends Struct {
@@ -510,12 +539,14 @@ class DNS_QUERY_REQUEST extends Struct {
 }
 
 class DNS_QUERY_CANCEL extends Struct {
-  external __byte__ Reserved;
+  @Array(32)
+  external Array<Int8> Reserved;
 }
 
 class DNS_MESSAGE_BUFFER extends Struct {
   external DNS_HEADER MessageHead;
-  external __byte__ MessageBody;
+  @Array(1)
+  external Array<Int8> MessageBody;
 }
 
 class DNS_CONNECTION_PROXY_INFO extends Struct {
@@ -545,7 +576,8 @@ class DNS_CONNECTION_PROXY_LIST extends Struct {
 }
 
 class DNS_CONNECTION_NAME extends Struct {
-  external __ushort__ wszName;
+  @Array(65)
+  external Array<Uint16> wszName;
 }
 
 class DNS_CONNECTION_NAME_LIST extends Struct {
@@ -623,11 +655,13 @@ class DNS_SERVICE_REGISTER_REQUEST extends Struct {
 }
 
 class MDNS_QUERY_HANDLE extends Struct {
-  external __ushort__ nameBuf;
+  @Array(129)
+  external Array<Uint16> nameBuf;
   @Uint16() external int wType;
   external Pointer pSubscription;
   external Pointer pWnfCallbackParams;
-  external __uint__ stateNameData;
+  @Array(2)
+  external Array<Uint32> stateNameData;
 }
 
 class MDNS_QUERY_REQUEST extends Struct {

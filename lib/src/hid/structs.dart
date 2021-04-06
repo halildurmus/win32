@@ -120,7 +120,8 @@ class DIFILEEFFECT extends Struct {
   @Uint32() external int dwSize;
   external GUID GuidEffect;
   external Pointer<DIEFFECT> lpDiEffect;
-  external __byte__ szFriendlyName;
+  @Array(129)
+  external Array<Int8> szFriendlyName;
 }
 
 class DIEFFESCAPE extends Struct {
@@ -205,7 +206,8 @@ class DIACTIONFORMATA extends Struct {
   @IntPtr() external int hInstString;
   external FILETIME ftTimeStamp;
   @Uint32() external int dwCRC;
-  external __byte__ tszActionMap;
+  @Array(129)
+  external Array<Int8> tszActionMap;
 }
 
 class DIACTIONFORMATW extends Struct {
@@ -222,7 +224,8 @@ class DIACTIONFORMATW extends Struct {
   @IntPtr() external int hInstString;
   external FILETIME ftTimeStamp;
   @Uint32() external int dwCRC;
-  external __ushort__ tszActionMap;
+  @Array(129)
+  external Array<Uint16> tszActionMap;
 }
 
 class DICOLORSET extends Struct {
@@ -260,25 +263,29 @@ class DICONFIGUREDEVICESPARAMSW extends Struct {
 }
 
 class DIDEVICEIMAGEINFOA extends Struct {
-  external __byte__ tszImagePath;
+  @Array(129)
+  external Array<Int8> tszImagePath;
   @Uint32() external int dwFlags;
   @Uint32() external int dwViewID;
   external RECT rcOverlay;
   @Uint32() external int dwObjID;
   @Uint32() external int dwcValidPts;
-  external POINT rgptCalloutLine;
+  @Array(5)
+  external Array<POINT> rgptCalloutLine;
   external RECT rcCalloutRect;
   @Uint32() external int dwTextAlign;
 }
 
 class DIDEVICEIMAGEINFOW extends Struct {
-  external __ushort__ tszImagePath;
+  @Array(129)
+  external Array<Uint16> tszImagePath;
   @Uint32() external int dwFlags;
   @Uint32() external int dwViewID;
   external RECT rcOverlay;
   @Uint32() external int dwObjID;
   @Uint32() external int dwcValidPts;
-  external POINT rgptCalloutLine;
+  @Array(5)
+  external Array<POINT> rgptCalloutLine;
   external RECT rcCalloutRect;
   @Uint32() external int dwTextAlign;
 }
@@ -313,7 +320,8 @@ class DIDEVICEOBJECTINSTANCE_DX3A extends Struct {
   @Uint32() external int dwOfs;
   @Uint32() external int dwType;
   @Uint32() external int dwFlags;
-  external __byte__ tszName;
+  @Array(129)
+  external Array<Int8> tszName;
 }
 
 class DIDEVICEOBJECTINSTANCE_DX3W extends Struct {
@@ -322,7 +330,8 @@ class DIDEVICEOBJECTINSTANCE_DX3W extends Struct {
   @Uint32() external int dwOfs;
   @Uint32() external int dwType;
   @Uint32() external int dwFlags;
-  external __ushort__ tszName;
+  @Array(129)
+  external Array<Uint16> tszName;
 }
 
 class DIDEVICEOBJECTINSTANCEA extends Struct {
@@ -331,7 +340,8 @@ class DIDEVICEOBJECTINSTANCEA extends Struct {
   @Uint32() external int dwOfs;
   @Uint32() external int dwType;
   @Uint32() external int dwFlags;
-  external __byte__ tszName;
+  @Array(129)
+  external Array<Int8> tszName;
   @Uint32() external int dwFFMaxForce;
   @Uint32() external int dwFFForceResolution;
   @Uint16() external int wCollectionNumber;
@@ -349,7 +359,8 @@ class DIDEVICEOBJECTINSTANCEW extends Struct {
   @Uint32() external int dwOfs;
   @Uint32() external int dwType;
   @Uint32() external int dwFlags;
-  external __ushort__ tszName;
+  @Array(129)
+  external Array<Uint16> tszName;
   @Uint32() external int dwFFMaxForce;
   @Uint32() external int dwFFForceResolution;
   @Uint16() external int wCollectionNumber;
@@ -393,19 +404,23 @@ class DIPROPCAL extends Struct {
 
 class DIPROPCALPOV extends Struct {
   external DIPROPHEADER diph;
-  external __int__ lMin;
-  external __int__ lMax;
+  @Array(5)
+  external Array<Int32> lMin;
+  @Array(5)
+  external Array<Int32> lMax;
 }
 
 class DIPROPGUIDANDPATH extends Struct {
   external DIPROPHEADER diph;
   external GUID guidClass;
-  external __ushort__ wszPath;
+  @Array(129)
+  external Array<Uint16> wszPath;
 }
 
 class DIPROPSTRING extends Struct {
   external DIPROPHEADER diph;
-  external __ushort__ wsz;
+  @Array(129)
+  external Array<Uint16> wsz;
 }
 
 class CPOINT extends Struct {
@@ -416,7 +431,8 @@ class CPOINT extends Struct {
 class DIPROPCPOINTS extends Struct {
   external DIPROPHEADER diph;
   @Uint32() external int dwCPointsNum;
-  external CPOINT cp;
+  @Array(8)
+  external Array<CPOINT> cp;
 }
 
 class DIDEVICEOBJECTDATA_DX3 extends Struct {
@@ -439,8 +455,10 @@ class DIDEVICEINSTANCE_DX3A extends Struct {
   external GUID guidInstance;
   external GUID guidProduct;
   @Uint32() external int dwDevType;
-  external __byte__ tszInstanceName;
-  external __byte__ tszProductName;
+  @Array(129)
+  external Array<Int8> tszInstanceName;
+  @Array(129)
+  external Array<Int8> tszProductName;
 }
 
 class DIDEVICEINSTANCE_DX3W extends Struct {
@@ -448,8 +466,10 @@ class DIDEVICEINSTANCE_DX3W extends Struct {
   external GUID guidInstance;
   external GUID guidProduct;
   @Uint32() external int dwDevType;
-  external __ushort__ tszInstanceName;
-  external __ushort__ tszProductName;
+  @Array(129)
+  external Array<Uint16> tszInstanceName;
+  @Array(129)
+  external Array<Uint16> tszProductName;
 }
 
 class DIDEVICEINSTANCEA extends Struct {
@@ -457,8 +477,10 @@ class DIDEVICEINSTANCEA extends Struct {
   external GUID guidInstance;
   external GUID guidProduct;
   @Uint32() external int dwDevType;
-  external __byte__ tszInstanceName;
-  external __byte__ tszProductName;
+  @Array(129)
+  external Array<Int8> tszInstanceName;
+  @Array(129)
+  external Array<Int8> tszProductName;
   external GUID guidFFDriver;
   @Uint16() external int wUsagePage;
   @Uint16() external int wUsage;
@@ -469,8 +491,10 @@ class DIDEVICEINSTANCEW extends Struct {
   external GUID guidInstance;
   external GUID guidProduct;
   @Uint32() external int dwDevType;
-  external __ushort__ tszInstanceName;
-  external __ushort__ tszProductName;
+  @Array(129)
+  external Array<Uint16> tszInstanceName;
+  @Array(129)
+  external Array<Uint16> tszProductName;
   external GUID guidFFDriver;
   @Uint16() external int wUsagePage;
   @Uint16() external int wUsage;
@@ -482,7 +506,8 @@ class DIEFFECTINFOA extends Struct {
   @Uint32() external int dwEffType;
   @Uint32() external int dwStaticParams;
   @Uint32() external int dwDynamicParams;
-  external __byte__ tszName;
+  @Array(129)
+  external Array<Int8> tszName;
 }
 
 class DIEFFECTINFOW extends Struct {
@@ -491,21 +516,24 @@ class DIEFFECTINFOW extends Struct {
   @Uint32() external int dwEffType;
   @Uint32() external int dwStaticParams;
   @Uint32() external int dwDynamicParams;
-  external __ushort__ tszName;
+  @Array(129)
+  external Array<Uint16> tszName;
 }
 
 class DIMOUSESTATE extends Struct {
   @Int32() external int lX;
   @Int32() external int lY;
   @Int32() external int lZ;
-  external __ubyte__ rgbButtons;
+  @Array(4)
+  external Array<Uint8> rgbButtons;
 }
 
 class DIMOUSESTATE2 extends Struct {
   @Int32() external int lX;
   @Int32() external int lY;
   @Int32() external int lZ;
-  external __ubyte__ rgbButtons;
+  @Array(8)
+  external Array<Uint8> rgbButtons;
 }
 
 class DIJOYSTATE extends Struct {
@@ -515,9 +543,12 @@ class DIJOYSTATE extends Struct {
   @Int32() external int lRx;
   @Int32() external int lRy;
   @Int32() external int lRz;
-  external __int__ rglSlider;
-  external __uint__ rgdwPOV;
-  external __ubyte__ rgbButtons;
+  @Array(2)
+  external Array<Int32> rglSlider;
+  @Array(4)
+  external Array<Uint32> rgdwPOV;
+  @Array(32)
+  external Array<Uint8> rgbButtons;
 }
 
 class DIJOYSTATE2 extends Struct {
@@ -527,30 +558,36 @@ class DIJOYSTATE2 extends Struct {
   @Int32() external int lRx;
   @Int32() external int lRy;
   @Int32() external int lRz;
-  external __int__ rglSlider;
-  external __uint__ rgdwPOV;
-  external __ubyte__ rgbButtons;
+  @Array(2)
+  external Array<Int32> rglSlider;
+  @Array(4)
+  external Array<Uint32> rgdwPOV;
+  @Array(128)
+  external Array<Uint8> rgbButtons;
   @Int32() external int lVX;
   @Int32() external int lVY;
   @Int32() external int lVZ;
   @Int32() external int lVRx;
   @Int32() external int lVRy;
   @Int32() external int lVRz;
-  external __int__ rglVSlider;
+  @Array(2)
+  external Array<Int32> rglVSlider;
   @Int32() external int lAX;
   @Int32() external int lAY;
   @Int32() external int lAZ;
   @Int32() external int lARx;
   @Int32() external int lARy;
   @Int32() external int lARz;
-  external __int__ rglASlider;
+  @Array(2)
+  external Array<Int32> rglASlider;
   @Int32() external int lFX;
   @Int32() external int lFY;
   @Int32() external int lFZ;
   @Int32() external int lFRx;
   @Int32() external int lFRy;
   @Int32() external int lFRz;
-  external __int__ rglFSlider;
+  @Array(2)
+  external Array<Int32> rglFSlider;
 }
 
 class DIOBJECTATTRIBUTES extends Struct {
@@ -571,8 +608,10 @@ class DIOBJECTCALIBRATION extends Struct {
 }
 
 class DIPOVCALIBRATION extends Struct {
-  external __int__ lMin;
-  external __int__ lMax;
+  @Array(5)
+  external Array<Int32> lMin;
+  @Array(5)
+  external Array<Int32> lMax;
 }
 
 class DIEFFECTATTRIBUTES extends Struct {
@@ -612,17 +651,22 @@ class DIJOYTYPEINFO_DX5 extends Struct {
   @Uint32() external int dwSize;
   external joyreghwsettings_tag hws;
   external GUID clsidConfig;
-  external __ushort__ wszDisplayName;
-  external __ushort__ wszCallout;
+  @Array(129)
+  external Array<Uint16> wszDisplayName;
+  @Array(129)
+  external Array<Uint16> wszCallout;
 }
 
 class DIJOYTYPEINFO_DX6 extends Struct {
   @Uint32() external int dwSize;
   external joyreghwsettings_tag hws;
   external GUID clsidConfig;
-  external __ushort__ wszDisplayName;
-  external __ushort__ wszCallout;
-  external __ushort__ wszHardwareId;
+  @Array(129)
+  external Array<Uint16> wszDisplayName;
+  @Array(129)
+  external Array<Uint16> wszCallout;
+  @Array(129)
+  external Array<Uint16> wszHardwareId;
   @Uint32() external int dwFlags1;
 }
 
@@ -630,12 +674,16 @@ class DIJOYTYPEINFO extends Struct {
   @Uint32() external int dwSize;
   external joyreghwsettings_tag hws;
   external GUID clsidConfig;
-  external __ushort__ wszDisplayName;
-  external __ushort__ wszCallout;
-  external __ushort__ wszHardwareId;
+  @Array(129)
+  external Array<Uint16> wszDisplayName;
+  @Array(129)
+  external Array<Uint16> wszCallout;
+  @Array(129)
+  external Array<Uint16> wszHardwareId;
   @Uint32() external int dwFlags1;
   @Uint32() external int dwFlags2;
-  external __ushort__ wszMapFile;
+  @Array(129)
+  external Array<Uint16> wszMapFile;
 }
 
 class DIJOYCONFIG_DX5 extends Struct {
@@ -643,8 +691,10 @@ class DIJOYCONFIG_DX5 extends Struct {
   external GUID guidInstance;
   external joyreghwconfig_tag hwc;
   @Uint32() external int dwGain;
-  external __ushort__ wszType;
-  external __ushort__ wszCallout;
+  @Array(129)
+  external Array<Uint16> wszType;
+  @Array(129)
+  external Array<Uint16> wszCallout;
 }
 
 class DIJOYCONFIG extends Struct {
@@ -652,16 +702,20 @@ class DIJOYCONFIG extends Struct {
   external GUID guidInstance;
   external joyreghwconfig_tag hwc;
   @Uint32() external int dwGain;
-  external __ushort__ wszType;
-  external __ushort__ wszCallout;
+  @Array(129)
+  external Array<Uint16> wszType;
+  @Array(129)
+  external Array<Uint16> wszCallout;
   external GUID guidGameport;
 }
 
 class DIJOYUSERVALUES extends Struct {
   @Uint32() external int dwSize;
   external joyreguservalues_tag ruv;
-  external __ushort__ wszGlobalDriver;
-  external __ushort__ wszGameportEmulator;
+  @Array(129)
+  external Array<Uint16> wszGlobalDriver;
+  @Array(129)
+  external Array<Uint16> wszGameportEmulator;
 }
 
 class KEYBOARD_INPUT_DATA extends Struct {
@@ -716,7 +770,8 @@ class INDICATOR_LIST extends Struct {
 
 class KEYBOARD_INDICATOR_TRANSLATION extends Struct {
   @Uint16() external int NumberOfIndicatorKeys;
-  external INDICATOR_LIST IndicatorList;
+  @Array(1)
+  external Array<INDICATOR_LIST> IndicatorList;
 }
 
 class KEYBOARD_UNIT_ID_PARAMETER extends Struct {
@@ -767,7 +822,8 @@ class HIDP_BUTTON_CAPS extends Struct {
   @Uint8() external int IsStringRange;
   @Uint8() external int IsDesignatorRange;
   @Uint8() external int IsAbsolute;
-  external __uint__ Reserved;
+  @Array(10)
+  external Array<Uint32> Reserved;
   @Uint32() external int Anonymous;
 }
 
@@ -787,7 +843,8 @@ class HIDP_VALUE_CAPS extends Struct {
   @Uint8() external int Reserved;
   @Uint16() external int BitSize;
   @Uint16() external int ReportCount;
-  external __ushort__ Reserved2;
+  @Array(5)
+  external Array<Uint16> Reserved2;
   @Uint32() external int UnitsExp;
   @Uint32() external int Units;
   @Int32() external int LogicalMin;
@@ -817,7 +874,8 @@ class HIDP_CAPS extends Struct {
   @Uint16() external int InputReportByteLength;
   @Uint16() external int OutputReportByteLength;
   @Uint16() external int FeatureReportByteLength;
-  external __ushort__ Reserved;
+  @Array(17)
+  external Array<Uint16> Reserved;
   @Uint16() external int NumberLinkCollectionNodes;
   @Uint16() external int NumberInputButtonCaps;
   @Uint16() external int NumberInputValueCaps;
@@ -838,15 +896,18 @@ class HIDP_DATA extends Struct {
 
 class HIDP_UNKNOWN_TOKEN extends Struct {
   @Uint8() external int Token;
-  external __ubyte__ Reserved;
+  @Array(3)
+  external Array<Uint8> Reserved;
   @Uint32() external int BitField;
 }
 
 class HIDP_EXTENDED_ATTRIBUTES extends Struct {
   @Uint8() external int NumGlobalUnknowns;
-  external __ubyte__ Reserved;
+  @Array(3)
+  external Array<Uint8> Reserved;
   external Pointer<HIDP_UNKNOWN_TOKEN> GlobalUnknowns;
-  external __uint__ Data;
+  @Array(1)
+  external Array<Uint32> Data;
 }
 
 class HIDP_KEYBOARD_MODIFIER_STATE extends Struct {
@@ -868,7 +929,8 @@ class HIDD_ATTRIBUTES extends Struct {
 
 class JOYREGHWVALUES extends Struct {
   external joyrange_tag jrvHardware;
-  external __uint__ dwPOVValues;
+  @Array(4)
+  external Array<Uint32> dwPOVValues;
   @Uint32() external int dwCalFlags;
 }
 

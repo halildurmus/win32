@@ -110,7 +110,7 @@ class PEER_RECORD extends Struct {
 
 class PEER_ADDRESS extends Struct {
   @Uint32() external int dwSize;
-  external SOCKADDR_IN6_LH sin6;
+  external SOCKADDR_IN6 sin6;
 }
 
 class PEER_CONNECTION_INFO extends Struct {
@@ -436,29 +436,29 @@ class DRT_REGISTRATION extends Struct {
 
 class DRT_SECURITY_PROVIDER extends Struct {
   external Pointer pvContext;
-  external Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Int32>>>>>>>>> Attach;
+  @IntPtr() external int Attach;
   @IntPtr() external int Detach;
-  external Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Int32>>>>>>>>> RegisterKey;
-  external Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Int32>>>>>>>>> UnregisterKey;
-  external Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Int32>>>>>>>>> ValidateAndUnpackPayload;
-  external Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Int32>>>>>>>>> SecureAndPackPayload;
+  @IntPtr() external int RegisterKey;
+  @IntPtr() external int UnregisterKey;
+  @IntPtr() external int ValidateAndUnpackPayload;
+  @IntPtr() external int SecureAndPackPayload;
   @IntPtr() external int FreeData;
-  external Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Int32>>>>>>>>> EncryptData;
-  external Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Int32>>>>>>>>> DecryptData;
-  external Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Int32>>>>>>>>> GetSerializedCredential;
-  external Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Int32>>>>>>>>> ValidateRemoteCredential;
-  external Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Int32>>>>>>>>> SignData;
-  external Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Int32>>>>>>>>> VerifyData;
+  @IntPtr() external int EncryptData;
+  @IntPtr() external int DecryptData;
+  @IntPtr() external int GetSerializedCredential;
+  @IntPtr() external int ValidateRemoteCredential;
+  @IntPtr() external int SignData;
+  @IntPtr() external int VerifyData;
 }
 
 class DRT_BOOTSTRAP_PROVIDER extends Struct {
   external Pointer pvContext;
-  external Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Int32>>>>>>>>> Attach;
+  @IntPtr() external int Attach;
   @IntPtr() external int Detach;
-  external Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Int32>>>>>>>>> InitResolve;
-  external Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Int32>>>>>>>>> IssueResolve;
+  @IntPtr() external int InitResolve;
+  @IntPtr() external int IssueResolve;
   @IntPtr() external int EndResolve;
-  external Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Int32>>>>>>>>> Register;
+  @IntPtr() external int Register;
   @IntPtr() external int Unregister;
 }
 
@@ -486,7 +486,7 @@ class DRT_SEARCH_INFO extends Struct {
 }
 
 class DRT_ADDRESS extends Struct {
-  external SOCKADDR_STORAGE_LH socketAddress;
+  external SOCKADDR_STORAGE socketAddress;
   @Uint32() external int flags;
   @Int32() external int nearness;
   @Uint32() external int latency;
@@ -494,7 +494,8 @@ class DRT_ADDRESS extends Struct {
 
 class DRT_ADDRESS_LIST extends Struct {
   @Uint32() external int AddressCount;
-  external DRT_ADDRESS AddressList;
+  @Array(1)
+  external Array<DRT_ADDRESS> AddressList;
 }
 
 class DRT_SEARCH_RESULT extends Struct {
@@ -517,7 +518,8 @@ class PEERDIST_PUBLICATION_OPTIONS extends Struct {
 }
 
 class PEERDIST_CONTENT_TAG extends Struct {
-  external __ubyte__ Data;
+  @Array(16)
+  external Array<Uint8> Data;
 }
 
 class PEERDIST_RETRIEVAL_OPTIONS extends Struct {

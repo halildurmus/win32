@@ -45,7 +45,8 @@ import 'package:ffi/ffi.dart';
 
 class __MACINFO extends Struct {
   @Int32() external int fUsed;
-  external __ubyte__ abMacState;
+  @Array(36)
+  external Array<Uint8> abMacState;
 }
 
 class MediaDevMgrClassFactory extends Struct {
@@ -111,13 +112,15 @@ class OPAQUECOMMAND extends Struct {
   external GUID guidCommand;
   @Uint32() external int dwDataLen;
   external Pointer<Uint8> pData;
-  external __ubyte__ abMAC;
+  @Array(20)
+  external Array<Uint8> abMAC;
 }
 
 class WMDMID extends Struct {
   @Uint32() external int cbSize;
   @Uint32() external int dwVendorID;
-  external __ubyte__ pID;
+  @Array(128)
+  external Array<Uint8> pID;
   @Uint32() external int SerialNumberLength;
 }
 
@@ -175,88 +178,170 @@ class WMDM_FORMAT_CAPABILITY extends Struct {
 }
 
 class WMDMDetermineMaxPropStringLen extends Struct {
-  external __ushort__ sz001;
-  external __ushort__ sz002;
-  external __ushort__ sz003;
-  external __ushort__ sz004;
-  external __ushort__ sz005;
-  external __ushort__ sz006;
-  external __ushort__ sz007;
-  external __ushort__ sz008;
-  external __ushort__ sz009;
-  external __ushort__ sz010;
-  external __ushort__ sz011;
-  external __ushort__ sz012;
-  external __ushort__ sz013;
-  external __ushort__ sz014;
-  external __ushort__ sz015;
-  external __ushort__ sz016;
-  external __ushort__ sz017;
-  external __ushort__ sz018;
-  external __ushort__ sz019;
-  external __ushort__ sz020;
-  external __ushort__ sz021;
-  external __ushort__ sz022;
-  external __ushort__ sz023;
-  external __ushort__ sz024;
-  external __ushort__ sz025;
-  external __ushort__ sz026;
-  external __ushort__ sz027;
-  external __ushort__ sz028;
-  external __ushort__ sz029;
-  external __ushort__ sz030;
-  external __ushort__ sz031;
-  external __ushort__ sz032;
-  external __ushort__ sz033;
-  external __ushort__ sz034;
-  external __ushort__ sz035;
-  external __ushort__ sz036;
-  external __ushort__ sz037;
-  external __ushort__ sz041;
-  external __ushort__ sz043;
-  external __ushort__ sz044;
-  external __ushort__ sz045;
-  external __ushort__ sz046;
-  external __ushort__ sz047;
-  external __ushort__ sz048;
-  external __ushort__ sz049;
-  external __ushort__ sz050;
-  external __ushort__ sz051;
-  external __ushort__ sz052;
-  external __ushort__ sz053;
-  external __ushort__ sz054;
-  external __ushort__ sz055;
-  external __ushort__ sz056;
-  external __ushort__ sz057;
-  external __ushort__ sz058;
-  external __ushort__ sz059;
-  external __ushort__ sz060;
-  external __ushort__ sz061;
-  external __ushort__ sz062;
-  external __ushort__ sz063;
-  external __ushort__ sz064;
-  external __ushort__ sz065;
-  external __ushort__ sz066;
-  external __ushort__ sz067;
-  external __ushort__ sz068;
-  external __ushort__ sz069;
-  external __ushort__ sz070;
-  external __ushort__ sz071;
-  external __ushort__ sz072;
-  external __ushort__ sz073;
-  external __ushort__ sz074;
-  external __ushort__ sz075;
-  external __ushort__ sz076;
-  external __ushort__ sz077;
-  external __ushort__ sz078;
-  external __ushort__ sz079;
-  external __ushort__ sz080;
-  external __ushort__ sz081;
-  external __ushort__ sz082;
-  external __ushort__ sz083;
-  external __ushort__ sz084;
-  external __ushort__ sz085;
-  external __ushort__ sz086;
+  @Array(27)
+  external Array<Uint16> sz001;
+  @Array(31)
+  external Array<Uint16> sz002;
+  @Array(14)
+  external Array<Uint16> sz003;
+  @Array(16)
+  external Array<Uint16> sz004;
+  @Array(22)
+  external Array<Uint16> sz005;
+  @Array(14)
+  external Array<Uint16> sz006;
+  @Array(20)
+  external Array<Uint16> sz007;
+  @Array(20)
+  external Array<Uint16> sz008;
+  @Array(22)
+  external Array<Uint16> sz009;
+  @Array(11)
+  external Array<Uint16> sz010;
+  @Array(12)
+  external Array<Uint16> sz011;
+  @Array(17)
+  external Array<Uint16> sz012;
+  @Array(17)
+  external Array<Uint16> sz013;
+  @Array(16)
+  external Array<Uint16> sz014;
+  @Array(17)
+  external Array<Uint16> sz015;
+  @Array(11)
+  external Array<Uint16> sz016;
+  @Array(11)
+  external Array<Uint16> sz017;
+  @Array(15)
+  external Array<Uint16> sz018;
+  @Array(22)
+  external Array<Uint16> sz019;
+  @Array(20)
+  external Array<Uint16> sz020;
+  @Array(22)
+  external Array<Uint16> sz021;
+  @Array(21)
+  external Array<Uint16> sz022;
+  @Array(24)
+  external Array<Uint16> sz023;
+  @Array(20)
+  external Array<Uint16> sz024;
+  @Array(10)
+  external Array<Uint16> sz025;
+  @Array(14)
+  external Array<Uint16> sz026;
+  @Array(11)
+  external Array<Uint16> sz027;
+  @Array(11)
+  external Array<Uint16> sz028;
+  @Array(13)
+  external Array<Uint16> sz029;
+  @Array(17)
+  external Array<Uint16> sz030;
+  @Array(16)
+  external Array<Uint16> sz031;
+  @Array(17)
+  external Array<Uint16> sz032;
+  @Array(20)
+  external Array<Uint16> sz033;
+  @Array(19)
+  external Array<Uint16> sz034;
+  @Array(18)
+  external Array<Uint16> sz035;
+  @Array(18)
+  external Array<Uint16> sz036;
+  @Array(15)
+  external Array<Uint16> sz037;
+  @Array(14)
+  external Array<Uint16> sz041;
+  @Array(22)
+  external Array<Uint16> sz043;
+  @Array(16)
+  external Array<Uint16> sz044;
+  @Array(20)
+  external Array<Uint16> sz045;
+  @Array(14)
+  external Array<Uint16> sz046;
+  @Array(14)
+  external Array<Uint16> sz047;
+  @Array(12)
+  external Array<Uint16> sz048;
+  @Array(25)
+  external Array<Uint16> sz049;
+  @Array(26)
+  external Array<Uint16> sz050;
+  @Array(25)
+  external Array<Uint16> sz051;
+  @Array(16)
+  external Array<Uint16> sz052;
+  @Array(24)
+  external Array<Uint16> sz053;
+  @Array(15)
+  external Array<Uint16> sz054;
+  @Array(21)
+  external Array<Uint16> sz055;
+  @Array(16)
+  external Array<Uint16> sz056;
+  @Array(22)
+  external Array<Uint16> sz057;
+  @Array(14)
+  external Array<Uint16> sz058;
+  @Array(25)
+  external Array<Uint16> sz059;
+  @Array(18)
+  external Array<Uint16> sz060;
+  @Array(22)
+  external Array<Uint16> sz061;
+  @Array(26)
+  external Array<Uint16> sz062;
+  @Array(36)
+  external Array<Uint16> sz063;
+  @Array(23)
+  external Array<Uint16> sz064;
+  @Array(12)
+  external Array<Uint16> sz065;
+  @Array(24)
+  external Array<Uint16> sz066;
+  @Array(11)
+  external Array<Uint16> sz067;
+  @Array(12)
+  external Array<Uint16> sz068;
+  @Array(14)
+  external Array<Uint16> sz069;
+  @Array(20)
+  external Array<Uint16> sz070;
+  @Array(15)
+  external Array<Uint16> sz071;
+  @Array(14)
+  external Array<Uint16> sz072;
+  @Array(31)
+  external Array<Uint16> sz073;
+  @Array(24)
+  external Array<Uint16> sz074;
+  @Array(22)
+  external Array<Uint16> sz075;
+  @Array(24)
+  external Array<Uint16> sz076;
+  @Array(21)
+  external Array<Uint16> sz077;
+  @Array(27)
+  external Array<Uint16> sz078;
+  @Array(27)
+  external Array<Uint16> sz079;
+  @Array(20)
+  external Array<Uint16> sz080;
+  @Array(33)
+  external Array<Uint16> sz081;
+  @Array(21)
+  external Array<Uint16> sz082;
+  @Array(32)
+  external Array<Uint16> sz083;
+  @Array(26)
+  external Array<Uint16> sz084;
+  @Array(18)
+  external Array<Uint16> sz085;
+  @Array(30)
+  external Array<Uint16> sz086;
 }
 
 class WMDMLogger extends Struct {
@@ -265,17 +350,21 @@ class WMDMLogger extends Struct {
 class MTP_COMMAND_DATA_IN extends Struct {
   @Uint16() external int OpCode;
   @Uint32() external int NumParams;
-  external __uint__ Params;
+  @Array(5)
+  external Array<Uint32> Params;
   @Uint32() external int NextPhase;
   @Uint32() external int CommandWriteDataSize;
-  external __ubyte__ CommandWriteData;
+  @Array(1)
+  external Array<Uint8> CommandWriteData;
 }
 
 class MTP_COMMAND_DATA_OUT extends Struct {
   @Uint16() external int ResponseCode;
   @Uint32() external int NumParams;
-  external __uint__ Params;
+  @Array(5)
+  external Array<Uint32> Params;
   @Uint32() external int CommandReadDataSize;
-  external __ubyte__ CommandReadData;
+  @Array(1)
+  external Array<Uint8> CommandReadData;
 }
 

@@ -72,7 +72,8 @@ class PROCESSENTRY32W extends Struct {
   @Uint32() external int th32ParentProcessID;
   @Int32() external int pcPriClassBase;
   @Uint32() external int dwFlags;
-  external __ushort__ szExeFile;
+  @Array(129)
+  external Array<Uint16> szExeFile;
 }
 
 class PROCESSENTRY32 extends Struct {
@@ -85,7 +86,8 @@ class PROCESSENTRY32 extends Struct {
   @Uint32() external int th32ParentProcessID;
   @Int32() external int pcPriClassBase;
   @Uint32() external int dwFlags;
-  external __byte__ szExeFile;
+  @Array(129)
+  external Array<Int8> szExeFile;
 }
 
 class THREADENTRY32 extends Struct {
@@ -107,8 +109,10 @@ class MODULEENTRY32W extends Struct {
   external Pointer<Uint8> modBaseAddr;
   @Uint32() external int modBaseSize;
   @IntPtr() external int hModule;
-  external __ushort__ szModule;
-  external __ushort__ szExePath;
+  @Array(129)
+  external Array<Uint16> szModule;
+  @Array(129)
+  external Array<Uint16> szExePath;
 }
 
 class MODULEENTRY32 extends Struct {
@@ -120,7 +124,9 @@ class MODULEENTRY32 extends Struct {
   external Pointer<Uint8> modBaseAddr;
   @Uint32() external int modBaseSize;
   @IntPtr() external int hModule;
-  external __byte__ szModule;
-  external __byte__ szExePath;
+  @Array(129)
+  external Array<Int8> szModule;
+  @Array(129)
+  external Array<Int8> szExePath;
 }
 

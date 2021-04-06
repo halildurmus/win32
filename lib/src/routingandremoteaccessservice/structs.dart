@@ -62,10 +62,14 @@ class RASTUNNELENDPOINT extends Struct {
 class RASCONNW extends Struct {
   @Uint32() external int dwSize;
   @IntPtr() external int hrasconn;
-  external __ushort__ szEntryName;
-  external __ushort__ szDeviceType;
-  external __ushort__ szDeviceName;
-  external __ushort__ szPhonebook;
+  @Array(129)
+  external Array<Uint16> szEntryName;
+  @Array(17)
+  external Array<Uint16> szDeviceType;
+  @Array(128)
+  external Array<Uint16> szDeviceName;
+  @Array(129)
+  external Array<Uint16> szPhonebook;
   @Uint32() external int dwSubEntry;
   external GUID guidEntry;
   @Uint32() external int dwFlags;
@@ -76,10 +80,14 @@ class RASCONNW extends Struct {
 class RASCONNA extends Struct {
   @Uint32() external int dwSize;
   @IntPtr() external int hrasconn;
-  external __byte__ szEntryName;
-  external __byte__ szDeviceType;
-  external __byte__ szDeviceName;
-  external __byte__ szPhonebook;
+  @Array(129)
+  external Array<Int8> szEntryName;
+  @Array(17)
+  external Array<Int8> szDeviceType;
+  @Array(128)
+  external Array<Int8> szDeviceName;
+  @Array(129)
+  external Array<Int8> szPhonebook;
   @Uint32() external int dwSubEntry;
   external GUID guidEntry;
   @Uint32() external int dwFlags;
@@ -91,9 +99,12 @@ class RASCONNSTATUSW extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int rasconnstate;
   @Uint32() external int dwError;
-  external __ushort__ szDeviceType;
-  external __ushort__ szDeviceName;
-  external __ushort__ szPhoneNumber;
+  @Array(17)
+  external Array<Uint16> szDeviceType;
+  @Array(128)
+  external Array<Uint16> szDeviceName;
+  @Array(128)
+  external Array<Uint16> szPhoneNumber;
   external RASTUNNELENDPOINT localEndPoint;
   external RASTUNNELENDPOINT remoteEndPoint;
   @Uint32() external int rasconnsubstate;
@@ -103,9 +114,12 @@ class RASCONNSTATUSA extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int rasconnstate;
   @Uint32() external int dwError;
-  external __byte__ szDeviceType;
-  external __byte__ szDeviceName;
-  external __byte__ szPhoneNumber;
+  @Array(17)
+  external Array<Int8> szDeviceType;
+  @Array(128)
+  external Array<Int8> szDeviceName;
+  @Array(128)
+  external Array<Int8> szPhoneNumber;
   external RASTUNNELENDPOINT localEndPoint;
   external RASTUNNELENDPOINT remoteEndPoint;
   @Uint32() external int rasconnsubstate;
@@ -113,12 +127,18 @@ class RASCONNSTATUSA extends Struct {
 
 class RASDIALPARAMSW extends Struct {
   @Uint32() external int dwSize;
-  external __ushort__ szEntryName;
-  external __ushort__ szPhoneNumber;
-  external __ushort__ szCallbackNumber;
-  external __ushort__ szUserName;
-  external __ushort__ szPassword;
-  external __ushort__ szDomain;
+  @Array(129)
+  external Array<Uint16> szEntryName;
+  @Array(128)
+  external Array<Uint16> szPhoneNumber;
+  @Array(128)
+  external Array<Uint16> szCallbackNumber;
+  @Array(129)
+  external Array<Uint16> szUserName;
+  @Array(129)
+  external Array<Uint16> szPassword;
+  @Array(16)
+  external Array<Uint16> szDomain;
   @Uint32() external int dwSubEntry;
   @IntPtr() external int dwCallbackId;
   @Uint32() external int dwIfIndex;
@@ -127,12 +147,18 @@ class RASDIALPARAMSW extends Struct {
 
 class RASDIALPARAMSA extends Struct {
   @Uint32() external int dwSize;
-  external __byte__ szEntryName;
-  external __byte__ szPhoneNumber;
-  external __byte__ szCallbackNumber;
-  external __byte__ szUserName;
-  external __byte__ szPassword;
-  external __byte__ szDomain;
+  @Array(129)
+  external Array<Int8> szEntryName;
+  @Array(128)
+  external Array<Int8> szPhoneNumber;
+  @Array(128)
+  external Array<Int8> szCallbackNumber;
+  @Array(129)
+  external Array<Int8> szUserName;
+  @Array(129)
+  external Array<Int8> szPassword;
+  @Array(16)
+  external Array<Int8> szDomain;
   @Uint32() external int dwSubEntry;
   @IntPtr() external int dwCallbackId;
   @Uint32() external int dwIfIndex;
@@ -162,29 +188,35 @@ class RASDIALEXTENSIONS extends Struct {
 
 class RASENTRYNAMEW extends Struct {
   @Uint32() external int dwSize;
-  external __ushort__ szEntryName;
+  @Array(129)
+  external Array<Uint16> szEntryName;
   @Uint32() external int dwFlags;
-  external __ushort__ szPhonebookPath;
+  @Array(129)
+  external Array<Uint16> szPhonebookPath;
 }
 
 class RASENTRYNAMEA extends Struct {
   @Uint32() external int dwSize;
-  external __byte__ szEntryName;
+  @Array(129)
+  external Array<Int8> szEntryName;
   @Uint32() external int dwFlags;
-  external __byte__ szPhonebookPath;
+  @Array(129)
+  external Array<Int8> szPhonebookPath;
 }
 
 class RASAMBW extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwError;
-  external __ushort__ szNetBiosError;
+  @Array(17)
+  external Array<Uint16> szNetBiosError;
   @Uint8() external int bLana;
 }
 
 class RASAMBA extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwError;
-  external __byte__ szNetBiosError;
+  @Array(17)
+  external Array<Int8> szNetBiosError;
   @Uint8() external int bLana;
 }
 
@@ -192,8 +224,10 @@ class RASPPPNBFW extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwError;
   @Uint32() external int dwNetBiosError;
-  external __ushort__ szNetBiosError;
-  external __ushort__ szWorkstationName;
+  @Array(17)
+  external Array<Uint16> szNetBiosError;
+  @Array(17)
+  external Array<Uint16> szWorkstationName;
   @Uint8() external int bLana;
 }
 
@@ -201,28 +235,34 @@ class RASPPPNBFA extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwError;
   @Uint32() external int dwNetBiosError;
-  external __byte__ szNetBiosError;
-  external __byte__ szWorkstationName;
+  @Array(17)
+  external Array<Int8> szNetBiosError;
+  @Array(17)
+  external Array<Int8> szWorkstationName;
   @Uint8() external int bLana;
 }
 
 class RASIPXW extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwError;
-  external __ushort__ szIpxAddress;
+  @Array(22)
+  external Array<Uint16> szIpxAddress;
 }
 
 class RASPPPIPXA extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwError;
-  external __byte__ szIpxAddress;
+  @Array(22)
+  external Array<Int8> szIpxAddress;
 }
 
 class RASPPPIPW extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwError;
-  external __ushort__ szIpAddress;
-  external __ushort__ szServerIpAddress;
+  @Array(16)
+  external Array<Uint16> szIpAddress;
+  @Array(16)
+  external Array<Uint16> szServerIpAddress;
   @Uint32() external int dwOptions;
   @Uint32() external int dwServerOptions;
 }
@@ -230,8 +270,10 @@ class RASPPPIPW extends Struct {
 class RASPPPIPA extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwError;
-  external __byte__ szIpAddress;
-  external __byte__ szServerIpAddress;
+  @Array(16)
+  external Array<Int8> szIpAddress;
+  @Array(16)
+  external Array<Int8> szServerIpAddress;
   @Uint32() external int dwOptions;
   @Uint32() external int dwServerOptions;
 }
@@ -239,10 +281,14 @@ class RASPPPIPA extends Struct {
 class RASPPPIPV6 extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwError;
-  external __ubyte__ bLocalInterfaceIdentifier;
-  external __ubyte__ bPeerInterfaceIdentifier;
-  external __ubyte__ bLocalCompressionProtocol;
-  external __ubyte__ bPeerCompressionProtocol;
+  @Array(8)
+  external Array<Uint8> bLocalInterfaceIdentifier;
+  @Array(8)
+  external Array<Uint8> bPeerInterfaceIdentifier;
+  @Array(2)
+  external Array<Uint8> bLocalCompressionProtocol;
+  @Array(2)
+  external Array<Uint8> bPeerCompressionProtocol;
 }
 
 class RASPPPLCPW extends Struct {
@@ -258,7 +304,8 @@ class RASPPPLCPW extends Struct {
   @Int32() external int fMultilink;
   @Uint32() external int dwTerminateReason;
   @Uint32() external int dwServerTerminateReason;
-  external __ushort__ szReplyMessage;
+  @Array(132)
+  external Array<Uint16> szReplyMessage;
   @Uint32() external int dwOptions;
   @Uint32() external int dwServerOptions;
 }
@@ -276,7 +323,8 @@ class RASPPPLCPA extends Struct {
   @Int32() external int fMultilink;
   @Uint32() external int dwTerminateReason;
   @Uint32() external int dwServerTerminateReason;
-  external __byte__ szReplyMessage;
+  @Array(132)
+  external Array<Int8> szReplyMessage;
   @Uint32() external int dwOptions;
   @Uint32() external int dwServerOptions;
 }
@@ -292,13 +340,15 @@ class RASPPPCCP extends Struct {
 
 class RASPPP_PROJECTION_INFO extends Struct {
   @Uint32() external int dwIPv4NegotiationError;
-  external in_addr ipv4Address;
-  external in_addr ipv4ServerAddress;
+  external IN_ADDR ipv4Address;
+  external IN_ADDR ipv4ServerAddress;
   @Uint32() external int dwIPv4Options;
   @Uint32() external int dwIPv4ServerOptions;
   @Uint32() external int dwIPv6NegotiationError;
-  external __ubyte__ bInterfaceIdentifier;
-  external __ubyte__ bServerInterfaceIdentifier;
+  @Array(8)
+  external Array<Uint8> bInterfaceIdentifier;
+  @Array(8)
+  external Array<Uint8> bServerInterfaceIdentifier;
   @Int32() external int fBundled;
   @Int32() external int fMultilink;
   @Uint32() external int dwAuthenticationProtocol;
@@ -318,20 +368,20 @@ class RASPPP_PROJECTION_INFO extends Struct {
 
 class RASIKEV2_PROJECTION_INFO extends Struct {
   @Uint32() external int dwIPv4NegotiationError;
-  external in_addr ipv4Address;
-  external in_addr ipv4ServerAddress;
+  external IN_ADDR ipv4Address;
+  external IN_ADDR ipv4ServerAddress;
   @Uint32() external int dwIPv6NegotiationError;
-  external in6_addr ipv6Address;
-  external in6_addr ipv6ServerAddress;
+  external IN6_ADDR ipv6Address;
+  external IN6_ADDR ipv6ServerAddress;
   @Uint32() external int dwPrefixLength;
   @Uint32() external int dwAuthenticationProtocol;
   @Uint32() external int dwEapTypeId;
   @Uint32() external int dwFlags;
   @Uint32() external int dwEncryptionMethod;
   @Uint32() external int numIPv4ServerAddresses;
-  external Pointer<in_addr> ipv4ServerAddresses;
+  external Pointer<IN_ADDR> ipv4ServerAddresses;
   @Uint32() external int numIPv6ServerAddresses;
-  external Pointer<in6_addr> ipv6ServerAddresses;
+  external Pointer<IN6_ADDR> ipv6ServerAddresses;
 }
 
 class RAS_PROJECTION_INFO extends Struct {
@@ -342,14 +392,18 @@ class RAS_PROJECTION_INFO extends Struct {
 
 class RASDEVINFOW extends Struct {
   @Uint32() external int dwSize;
-  external __ushort__ szDeviceType;
-  external __ushort__ szDeviceName;
+  @Array(17)
+  external Array<Uint16> szDeviceType;
+  @Array(128)
+  external Array<Uint16> szDeviceName;
 }
 
 class RASDEVINFOA extends Struct {
   @Uint32() external int dwSize;
-  external __byte__ szDeviceType;
-  external __byte__ szDeviceName;
+  @Array(17)
+  external Array<Int8> szDeviceType;
+  @Array(128)
+  external Array<Int8> szDeviceName;
 }
 
 class RASCTRYINFO extends Struct {
@@ -365,8 +419,10 @@ class RASENTRYA extends Struct {
   @Uint32() external int dwfOptions;
   @Uint32() external int dwCountryID;
   @Uint32() external int dwCountryCode;
-  external __byte__ szAreaCode;
-  external __byte__ szLocalPhoneNumber;
+  @Array(11)
+  external Array<Int8> szAreaCode;
+  @Array(128)
+  external Array<Int8> szLocalPhoneNumber;
   @Uint32() external int dwAlternateOffset;
   external RASIPADDR ipaddr;
   external RASIPADDR ipaddrDns;
@@ -376,15 +432,24 @@ class RASENTRYA extends Struct {
   @Uint32() external int dwFrameSize;
   @Uint32() external int dwfNetProtocols;
   @Uint32() external int dwFramingProtocol;
-  external __byte__ szScript;
-  external __byte__ szAutodialDll;
-  external __byte__ szAutodialFunc;
-  external __byte__ szDeviceType;
-  external __byte__ szDeviceName;
-  external __byte__ szX25PadType;
-  external __byte__ szX25Address;
-  external __byte__ szX25Facilities;
-  external __byte__ szX25UserData;
+  @Array(129)
+  external Array<Int8> szScript;
+  @Array(129)
+  external Array<Int8> szAutodialDll;
+  @Array(129)
+  external Array<Int8> szAutodialFunc;
+  @Array(17)
+  external Array<Int8> szDeviceType;
+  @Array(128)
+  external Array<Int8> szDeviceName;
+  @Array(33)
+  external Array<Int8> szX25PadType;
+  @Array(128)
+  external Array<Int8> szX25Address;
+  @Array(128)
+  external Array<Int8> szX25Facilities;
+  @Array(128)
+  external Array<Int8> szX25UserData;
   @Uint32() external int dwChannels;
   @Uint32() external int dwReserved1;
   @Uint32() external int dwReserved2;
@@ -399,25 +464,31 @@ class RASENTRYA extends Struct {
   @Uint32() external int dwEncryptionType;
   @Uint32() external int dwCustomAuthKey;
   external GUID guidId;
-  external __byte__ szCustomDialDll;
+  @Array(129)
+  external Array<Int8> szCustomDialDll;
   @Uint32() external int dwVpnStrategy;
   @Uint32() external int dwfOptions2;
   @Uint32() external int dwfOptions3;
-  external __byte__ szDnsSuffix;
+  @Array(129)
+  external Array<Int8> szDnsSuffix;
   @Uint32() external int dwTcpWindowSize;
-  external __byte__ szPrerequisitePbk;
-  external __byte__ szPrerequisiteEntry;
+  @Array(129)
+  external Array<Int8> szPrerequisitePbk;
+  @Array(129)
+  external Array<Int8> szPrerequisiteEntry;
   @Uint32() external int dwRedialCount;
   @Uint32() external int dwRedialPause;
-  external in6_addr ipv6addrDns;
-  external in6_addr ipv6addrDnsAlt;
+  external IN6_ADDR ipv6addrDns;
+  external IN6_ADDR ipv6addrDnsAlt;
   @Uint32() external int dwIPv4InterfaceMetric;
   @Uint32() external int dwIPv6InterfaceMetric;
-  external in6_addr ipv6addr;
+  external IN6_ADDR ipv6addr;
   @Uint32() external int dwIPv6PrefixLength;
   @Uint32() external int dwNetworkOutageTime;
-  external __byte__ szIDi;
-  external __byte__ szIDr;
+  @Array(129)
+  external Array<Int8> szIDi;
+  @Array(129)
+  external Array<Int8> szIDr;
   @Int32() external int fIsImsConfig;
   @Uint32() external int IdiType;
   @Uint32() external int IdrType;
@@ -429,8 +500,10 @@ class RASENTRYW extends Struct {
   @Uint32() external int dwfOptions;
   @Uint32() external int dwCountryID;
   @Uint32() external int dwCountryCode;
-  external __ushort__ szAreaCode;
-  external __ushort__ szLocalPhoneNumber;
+  @Array(11)
+  external Array<Uint16> szAreaCode;
+  @Array(128)
+  external Array<Uint16> szLocalPhoneNumber;
   @Uint32() external int dwAlternateOffset;
   external RASIPADDR ipaddr;
   external RASIPADDR ipaddrDns;
@@ -440,15 +513,24 @@ class RASENTRYW extends Struct {
   @Uint32() external int dwFrameSize;
   @Uint32() external int dwfNetProtocols;
   @Uint32() external int dwFramingProtocol;
-  external __ushort__ szScript;
-  external __ushort__ szAutodialDll;
-  external __ushort__ szAutodialFunc;
-  external __ushort__ szDeviceType;
-  external __ushort__ szDeviceName;
-  external __ushort__ szX25PadType;
-  external __ushort__ szX25Address;
-  external __ushort__ szX25Facilities;
-  external __ushort__ szX25UserData;
+  @Array(129)
+  external Array<Uint16> szScript;
+  @Array(129)
+  external Array<Uint16> szAutodialDll;
+  @Array(129)
+  external Array<Uint16> szAutodialFunc;
+  @Array(17)
+  external Array<Uint16> szDeviceType;
+  @Array(128)
+  external Array<Uint16> szDeviceName;
+  @Array(33)
+  external Array<Uint16> szX25PadType;
+  @Array(128)
+  external Array<Uint16> szX25Address;
+  @Array(128)
+  external Array<Uint16> szX25Facilities;
+  @Array(128)
+  external Array<Uint16> szX25UserData;
   @Uint32() external int dwChannels;
   @Uint32() external int dwReserved1;
   @Uint32() external int dwReserved2;
@@ -463,25 +545,31 @@ class RASENTRYW extends Struct {
   @Uint32() external int dwEncryptionType;
   @Uint32() external int dwCustomAuthKey;
   external GUID guidId;
-  external __ushort__ szCustomDialDll;
+  @Array(129)
+  external Array<Uint16> szCustomDialDll;
   @Uint32() external int dwVpnStrategy;
   @Uint32() external int dwfOptions2;
   @Uint32() external int dwfOptions3;
-  external __ushort__ szDnsSuffix;
+  @Array(129)
+  external Array<Uint16> szDnsSuffix;
   @Uint32() external int dwTcpWindowSize;
-  external __ushort__ szPrerequisitePbk;
-  external __ushort__ szPrerequisiteEntry;
+  @Array(129)
+  external Array<Uint16> szPrerequisitePbk;
+  @Array(129)
+  external Array<Uint16> szPrerequisiteEntry;
   @Uint32() external int dwRedialCount;
   @Uint32() external int dwRedialPause;
-  external in6_addr ipv6addrDns;
-  external in6_addr ipv6addrDnsAlt;
+  external IN6_ADDR ipv6addrDns;
+  external IN6_ADDR ipv6addrDnsAlt;
   @Uint32() external int dwIPv4InterfaceMetric;
   @Uint32() external int dwIPv6InterfaceMetric;
-  external in6_addr ipv6addr;
+  external IN6_ADDR ipv6addr;
   @Uint32() external int dwIPv6PrefixLength;
   @Uint32() external int dwNetworkOutageTime;
-  external __ushort__ szIDi;
-  external __ushort__ szIDr;
+  @Array(129)
+  external Array<Uint16> szIDi;
+  @Array(129)
+  external Array<Uint16> szIDr;
   @Int32() external int fIsImsConfig;
   @Uint32() external int IdiType;
   @Uint32() external int IdrType;
@@ -499,61 +587,79 @@ class RASADPARAMS extends Struct {
 class RASSUBENTRYA extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwfFlags;
-  external __byte__ szDeviceType;
-  external __byte__ szDeviceName;
-  external __byte__ szLocalPhoneNumber;
+  @Array(17)
+  external Array<Int8> szDeviceType;
+  @Array(128)
+  external Array<Int8> szDeviceName;
+  @Array(128)
+  external Array<Int8> szLocalPhoneNumber;
   @Uint32() external int dwAlternateOffset;
 }
 
 class RASSUBENTRYW extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwfFlags;
-  external __ushort__ szDeviceType;
-  external __ushort__ szDeviceName;
-  external __ushort__ szLocalPhoneNumber;
+  @Array(17)
+  external Array<Uint16> szDeviceType;
+  @Array(128)
+  external Array<Uint16> szDeviceName;
+  @Array(128)
+  external Array<Uint16> szLocalPhoneNumber;
   @Uint32() external int dwAlternateOffset;
 }
 
 class RASCREDENTIALSA extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwMask;
-  external __byte__ szUserName;
-  external __byte__ szPassword;
-  external __byte__ szDomain;
+  @Array(129)
+  external Array<Int8> szUserName;
+  @Array(129)
+  external Array<Int8> szPassword;
+  @Array(16)
+  external Array<Int8> szDomain;
 }
 
 class RASCREDENTIALSW extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwMask;
-  external __ushort__ szUserName;
-  external __ushort__ szPassword;
-  external __ushort__ szDomain;
+  @Array(129)
+  external Array<Uint16> szUserName;
+  @Array(129)
+  external Array<Uint16> szPassword;
+  @Array(16)
+  external Array<Uint16> szDomain;
 }
 
 class RASAUTODIALENTRYA extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwFlags;
   @Uint32() external int dwDialingLocation;
-  external __byte__ szEntry;
+  @Array(129)
+  external Array<Int8> szEntry;
 }
 
 class RASAUTODIALENTRYW extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwFlags;
   @Uint32() external int dwDialingLocation;
-  external __ushort__ szEntry;
+  @Array(129)
+  external Array<Uint16> szEntry;
 }
 
 class RASEAPUSERIDENTITYA extends Struct {
-  external __byte__ szUserName;
+  @Array(129)
+  external Array<Int8> szUserName;
   @Uint32() external int dwSizeofEapInfo;
-  external __ubyte__ pbEapInfo;
+  @Array(1)
+  external Array<Uint8> pbEapInfo;
 }
 
 class RASEAPUSERIDENTITYW extends Struct {
-  external __ushort__ szUserName;
+  @Array(129)
+  external Array<Uint16> szUserName;
   @Uint32() external int dwSizeofEapInfo;
-  external __ubyte__ pbEapInfo;
+  @Array(1)
+  external Array<Uint8> pbEapInfo;
 }
 
 class RASCOMMSETTINGS extends Struct {
@@ -600,18 +706,24 @@ class RASNOUSERW extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwFlags;
   @Uint32() external int dwTimeoutMs;
-  external __ushort__ szUserName;
-  external __ushort__ szPassword;
-  external __ushort__ szDomain;
+  @Array(129)
+  external Array<Uint16> szUserName;
+  @Array(129)
+  external Array<Uint16> szPassword;
+  @Array(16)
+  external Array<Uint16> szDomain;
 }
 
 class RASNOUSERA extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwFlags;
   @Uint32() external int dwTimeoutMs;
-  external __byte__ szUserName;
-  external __byte__ szPassword;
-  external __byte__ szDomain;
+  @Array(129)
+  external Array<Int8> szUserName;
+  @Array(129)
+  external Array<Int8> szPassword;
+  @Array(16)
+  external Array<Int8> szDomain;
 }
 
 class RASPBDLGW extends Struct {
@@ -646,7 +758,8 @@ class RASENTRYDLGW extends Struct {
   @Uint32() external int dwFlags;
   @Int32() external int xDlg;
   @Int32() external int yDlg;
-  external __ushort__ szEntry;
+  @Array(129)
+  external Array<Uint16> szEntry;
   @Uint32() external int dwError;
   @IntPtr() external int reserved;
   @IntPtr() external int reserved2;
@@ -658,7 +771,8 @@ class RASENTRYDLGA extends Struct {
   @Uint32() external int dwFlags;
   @Int32() external int xDlg;
   @Int32() external int yDlg;
-  external __byte__ szEntry;
+  @Array(129)
+  external Array<Int8> szEntry;
   @Uint32() external int dwError;
   @IntPtr() external int reserved;
   @IntPtr() external int reserved2;
@@ -677,7 +791,8 @@ class RASDIALDLG extends Struct {
 }
 
 class MPR_INTERFACE_0 extends Struct {
-  external __ushort__ wszInterfaceName;
+  @Array(129)
+  external Array<Uint16> wszInterfaceName;
   @IntPtr() external int hInterface;
   @Int32() external int fEnabled;
   @Uint32() external int dwIfType;
@@ -687,12 +802,14 @@ class MPR_INTERFACE_0 extends Struct {
 }
 
 class MPR_IPINIP_INTERFACE_0 extends Struct {
-  external __ushort__ wszFriendlyName;
+  @Array(129)
+  external Array<Uint16> wszFriendlyName;
   external GUID Guid;
 }
 
 class MPR_INTERFACE_1 extends Struct {
-  external __ushort__ wszInterfaceName;
+  @Array(129)
+  external Array<Uint16> wszInterfaceName;
   @IntPtr() external int hInterface;
   @Int32() external int fEnabled;
   @Uint32() external int dwIfType;
@@ -703,7 +820,8 @@ class MPR_INTERFACE_1 extends Struct {
 }
 
 class MPR_INTERFACE_2 extends Struct {
-  external __ushort__ wszInterfaceName;
+  @Array(129)
+  external Array<Uint16> wszInterfaceName;
   @IntPtr() external int hInterface;
   @Int32() external int fEnabled;
   @Uint32() external int dwIfType;
@@ -711,7 +829,8 @@ class MPR_INTERFACE_2 extends Struct {
   @Uint32() external int fUnReachabilityReasons;
   @Uint32() external int dwLastError;
   @Uint32() external int dwfOptions;
-  external __ushort__ szLocalPhoneNumber;
+  @Array(128)
+  external Array<Uint16> szLocalPhoneNumber;
   external Pointer<Utf16> szAlternates;
   @Uint32() external int ipaddr;
   @Uint32() external int ipaddrDns;
@@ -719,12 +838,18 @@ class MPR_INTERFACE_2 extends Struct {
   @Uint32() external int ipaddrWins;
   @Uint32() external int ipaddrWinsAlt;
   @Uint32() external int dwfNetProtocols;
-  external __ushort__ szDeviceType;
-  external __ushort__ szDeviceName;
-  external __ushort__ szX25PadType;
-  external __ushort__ szX25Address;
-  external __ushort__ szX25Facilities;
-  external __ushort__ szX25UserData;
+  @Array(17)
+  external Array<Uint16> szDeviceType;
+  @Array(128)
+  external Array<Uint16> szDeviceName;
+  @Array(33)
+  external Array<Uint16> szX25PadType;
+  @Array(128)
+  external Array<Uint16> szX25Address;
+  @Array(128)
+  external Array<Uint16> szX25Facilities;
+  @Array(128)
+  external Array<Uint16> szX25UserData;
   @Uint32() external int dwChannels;
   @Uint32() external int dwSubEntries;
   @Uint32() external int dwDialMode;
@@ -743,7 +868,8 @@ class MPR_INTERFACE_2 extends Struct {
 }
 
 class MPR_INTERFACE_3 extends Struct {
-  external __ushort__ wszInterfaceName;
+  @Array(129)
+  external Array<Uint16> wszInterfaceName;
   @IntPtr() external int hInterface;
   @Int32() external int fEnabled;
   @Uint32() external int dwIfType;
@@ -751,7 +877,8 @@ class MPR_INTERFACE_3 extends Struct {
   @Uint32() external int fUnReachabilityReasons;
   @Uint32() external int dwLastError;
   @Uint32() external int dwfOptions;
-  external __ushort__ szLocalPhoneNumber;
+  @Array(128)
+  external Array<Uint16> szLocalPhoneNumber;
   external Pointer<Utf16> szAlternates;
   @Uint32() external int ipaddr;
   @Uint32() external int ipaddrDns;
@@ -759,12 +886,18 @@ class MPR_INTERFACE_3 extends Struct {
   @Uint32() external int ipaddrWins;
   @Uint32() external int ipaddrWinsAlt;
   @Uint32() external int dwfNetProtocols;
-  external __ushort__ szDeviceType;
-  external __ushort__ szDeviceName;
-  external __ushort__ szX25PadType;
-  external __ushort__ szX25Address;
-  external __ushort__ szX25Facilities;
-  external __ushort__ szX25UserData;
+  @Array(17)
+  external Array<Uint16> szDeviceType;
+  @Array(128)
+  external Array<Uint16> szDeviceName;
+  @Array(33)
+  external Array<Uint16> szX25PadType;
+  @Array(128)
+  external Array<Uint16> szX25Address;
+  @Array(128)
+  external Array<Uint16> szX25Facilities;
+  @Array(128)
+  external Array<Uint16> szX25UserData;
   @Uint32() external int dwChannels;
   @Uint32() external int dwSubEntries;
   @Uint32() external int dwDialMode;
@@ -781,20 +914,25 @@ class MPR_INTERFACE_3 extends Struct {
   external GUID guidId;
   @Uint32() external int dwVpnStrategy;
   @Uint32() external int AddressCount;
-  external in6_addr ipv6addrDns;
-  external in6_addr ipv6addrDnsAlt;
-  external Pointer<in6_addr> ipv6addr;
+  external IN6_ADDR ipv6addrDns;
+  external IN6_ADDR ipv6addrDnsAlt;
+  external Pointer<IN6_ADDR> ipv6addr;
 }
 
 class MPR_DEVICE_0 extends Struct {
-  external __ushort__ szDeviceType;
-  external __ushort__ szDeviceName;
+  @Array(17)
+  external Array<Uint16> szDeviceType;
+  @Array(128)
+  external Array<Uint16> szDeviceName;
 }
 
 class MPR_DEVICE_1 extends Struct {
-  external __ushort__ szDeviceType;
-  external __ushort__ szDeviceName;
-  external __ushort__ szLocalPhoneNumber;
+  @Array(17)
+  external Array<Uint16> szDeviceType;
+  @Array(128)
+  external Array<Uint16> szDeviceName;
+  @Array(128)
+  external Array<Uint16> szLocalPhoneNumber;
   external Pointer<Utf16> szAlternates;
 }
 
@@ -811,13 +949,15 @@ class MPR_CREDENTIALSEX_1 extends Struct {
 class MPR_TRANSPORT_0 extends Struct {
   @Uint32() external int dwTransportId;
   @IntPtr() external int hTransport;
-  external __ushort__ wszTransportName;
+  @Array(41)
+  external Array<Uint16> wszTransportName;
 }
 
 class MPR_IFTRANSPORT_0 extends Struct {
   @Uint32() external int dwTransportId;
   @IntPtr() external int hIfTransport;
-  external __ushort__ wszIfTransportName;
+  @Array(41)
+  external Array<Uint16> wszIfTransportName;
 }
 
 class MPR_SERVER_0 extends Struct {
@@ -849,10 +989,14 @@ class RAS_PORT_0 extends Struct {
   @Uint32() external int dwPortCondition;
   @Uint32() external int dwTotalNumberOfCalls;
   @Uint32() external int dwConnectDuration;
-  external __ushort__ wszPortName;
-  external __ushort__ wszMediaName;
-  external __ushort__ wszDeviceName;
-  external __ushort__ wszDeviceType;
+  @Array(17)
+  external Array<Uint16> wszPortName;
+  @Array(17)
+  external Array<Uint16> wszMediaName;
+  @Array(128)
+  external Array<Uint16> wszDeviceName;
+  @Array(17)
+  external Array<Uint16> wszDeviceType;
 }
 
 class RAS_PORT_1 extends Struct {
@@ -878,10 +1022,14 @@ class RAS_PORT_2 extends Struct {
   @IntPtr() external int hPort;
   @IntPtr() external int hConnection;
   @Uint32() external int dwConn_State;
-  external __ushort__ wszPortName;
-  external __ushort__ wszMediaName;
-  external __ushort__ wszDeviceName;
-  external __ushort__ wszDeviceType;
+  @Array(17)
+  external Array<Uint16> wszPortName;
+  @Array(17)
+  external Array<Uint16> wszMediaName;
+  @Array(128)
+  external Array<Uint16> wszDeviceName;
+  @Array(17)
+  external Array<Uint16> wszDeviceType;
   @Uint32() external int dwHardwareCondition;
   @Uint32() external int dwLineSpeed;
   @Uint32() external int dwCrcErr;
@@ -906,42 +1054,52 @@ class RAS_PORT_2 extends Struct {
 
 class PPP_NBFCP_INFO extends Struct {
   @Uint32() external int dwError;
-  external __ushort__ wszWksta;
+  @Array(17)
+  external Array<Uint16> wszWksta;
 }
 
 class PPP_IPCP_INFO extends Struct {
   @Uint32() external int dwError;
-  external __ushort__ wszAddress;
-  external __ushort__ wszRemoteAddress;
+  @Array(16)
+  external Array<Uint16> wszAddress;
+  @Array(16)
+  external Array<Uint16> wszRemoteAddress;
 }
 
 class PPP_IPCP_INFO2 extends Struct {
   @Uint32() external int dwError;
-  external __ushort__ wszAddress;
-  external __ushort__ wszRemoteAddress;
+  @Array(16)
+  external Array<Uint16> wszAddress;
+  @Array(16)
+  external Array<Uint16> wszRemoteAddress;
   @Uint32() external int dwOptions;
   @Uint32() external int dwRemoteOptions;
 }
 
 class PPP_IPXCP_INFO extends Struct {
   @Uint32() external int dwError;
-  external __ushort__ wszAddress;
+  @Array(23)
+  external Array<Uint16> wszAddress;
 }
 
 class PPP_ATCP_INFO extends Struct {
   @Uint32() external int dwError;
-  external __ushort__ wszAddress;
+  @Array(33)
+  external Array<Uint16> wszAddress;
 }
 
 class PPP_IPV6_CP_INFO extends Struct {
   @Uint32() external int dwVersion;
   @Uint32() external int dwSize;
   @Uint32() external int dwError;
-  external __ubyte__ bInterfaceIdentifier;
-  external __ubyte__ bRemoteInterfaceIdentifier;
+  @Array(8)
+  external Array<Uint8> bInterfaceIdentifier;
+  @Array(8)
+  external Array<Uint8> bRemoteInterfaceIdentifier;
   @Uint32() external int dwOptions;
   @Uint32() external int dwRemoteOptions;
-  external __ubyte__ bPrefix;
+  @Array(8)
+  external Array<Uint8> bPrefix;
   @Uint32() external int dwPrefixLength;
 }
 
@@ -997,10 +1155,14 @@ class RAS_CONNECTION_0 extends Struct {
   @Uint32() external int dwConnectDuration;
   @Uint32() external int dwInterfaceType;
   @Uint32() external int dwConnectionFlags;
-  external __ushort__ wszInterfaceName;
-  external __ushort__ wszUserName;
-  external __ushort__ wszLogonDomain;
-  external __ushort__ wszRemoteComputer;
+  @Array(129)
+  external Array<Uint16> wszInterfaceName;
+  @Array(129)
+  external Array<Uint16> wszUserName;
+  @Array(16)
+  external Array<Uint16> wszLogonDomain;
+  @Array(17)
+  external Array<Uint16> wszRemoteComputer;
 }
 
 class RAS_CONNECTION_1 extends Struct {
@@ -1023,7 +1185,8 @@ class RAS_CONNECTION_1 extends Struct {
 
 class RAS_CONNECTION_2 extends Struct {
   @IntPtr() external int hConnection;
-  external __ushort__ wszUserName;
+  @Array(129)
+  external Array<Uint16> wszUserName;
   @Uint32() external int dwInterfaceType;
   external GUID guid;
   external PPP_INFO_2 PppInfo2;
@@ -1033,7 +1196,8 @@ class RAS_CONNECTION_3 extends Struct {
   @Uint32() external int dwVersion;
   @Uint32() external int dwSize;
   @IntPtr() external int hConnection;
-  external __ushort__ wszUserName;
+  @Array(129)
+  external Array<Uint16> wszUserName;
   @Uint32() external int dwInterfaceType;
   external GUID guid;
   external PPP_INFO_3 PppInfo3;
@@ -1043,12 +1207,14 @@ class RAS_CONNECTION_3 extends Struct {
 
 class RAS_USER_0 extends Struct {
   @Uint8() external int bfPrivilege;
-  external __ushort__ wszPhoneNumber;
+  @Array(128)
+  external Array<Uint16> wszPhoneNumber;
 }
 
 class RAS_USER_1 extends Struct {
   @Uint8() external int bfPrivilege;
-  external __ushort__ wszPhoneNumber;
+  @Array(128)
+  external Array<Uint16> wszPhoneNumber;
   @Uint8() external int bfPrivilege2;
 }
 
@@ -1064,15 +1230,20 @@ class MPRAPI_OBJECT_HEADER extends Struct {
 
 class PPP_PROJECTION_INFO extends Struct {
   @Uint32() external int dwIPv4NegotiationError;
-  external __ushort__ wszAddress;
-  external __ushort__ wszRemoteAddress;
+  @Array(16)
+  external Array<Uint16> wszAddress;
+  @Array(16)
+  external Array<Uint16> wszRemoteAddress;
   @Uint32() external int dwIPv4Options;
   @Uint32() external int dwIPv4RemoteOptions;
   @Uint64() external int IPv4SubInterfaceIndex;
   @Uint32() external int dwIPv6NegotiationError;
-  external __ubyte__ bInterfaceIdentifier;
-  external __ubyte__ bRemoteInterfaceIdentifier;
-  external __ubyte__ bPrefix;
+  @Array(8)
+  external Array<Uint8> bInterfaceIdentifier;
+  @Array(8)
+  external Array<Uint8> bRemoteInterfaceIdentifier;
+  @Array(8)
+  external Array<Uint8> bPrefix;
   @Uint32() external int dwPrefixLength;
   @Uint64() external int IPv6SubInterfaceIndex;
   @Uint32() external int dwLcpError;
@@ -1095,15 +1266,20 @@ class PPP_PROJECTION_INFO extends Struct {
 
 class PPP_PROJECTION_INFO2 extends Struct {
   @Uint32() external int dwIPv4NegotiationError;
-  external __ushort__ wszAddress;
-  external __ushort__ wszRemoteAddress;
+  @Array(16)
+  external Array<Uint16> wszAddress;
+  @Array(16)
+  external Array<Uint16> wszRemoteAddress;
   @Uint32() external int dwIPv4Options;
   @Uint32() external int dwIPv4RemoteOptions;
   @Uint64() external int IPv4SubInterfaceIndex;
   @Uint32() external int dwIPv6NegotiationError;
-  external __ubyte__ bInterfaceIdentifier;
-  external __ubyte__ bRemoteInterfaceIdentifier;
-  external __ubyte__ bPrefix;
+  @Array(8)
+  external Array<Uint8> bInterfaceIdentifier;
+  @Array(8)
+  external Array<Uint8> bRemoteInterfaceIdentifier;
+  @Array(8)
+  external Array<Uint8> bPrefix;
   @Uint32() external int dwPrefixLength;
   @Uint64() external int IPv6SubInterfaceIndex;
   @Uint32() external int dwLcpError;
@@ -1127,13 +1303,18 @@ class PPP_PROJECTION_INFO2 extends Struct {
 
 class IKEV2_PROJECTION_INFO extends Struct {
   @Uint32() external int dwIPv4NegotiationError;
-  external __ushort__ wszAddress;
-  external __ushort__ wszRemoteAddress;
+  @Array(16)
+  external Array<Uint16> wszAddress;
+  @Array(16)
+  external Array<Uint16> wszRemoteAddress;
   @Uint64() external int IPv4SubInterfaceIndex;
   @Uint32() external int dwIPv6NegotiationError;
-  external __ubyte__ bInterfaceIdentifier;
-  external __ubyte__ bRemoteInterfaceIdentifier;
-  external __ubyte__ bPrefix;
+  @Array(8)
+  external Array<Uint8> bInterfaceIdentifier;
+  @Array(8)
+  external Array<Uint8> bRemoteInterfaceIdentifier;
+  @Array(8)
+  external Array<Uint8> bPrefix;
   @Uint32() external int dwPrefixLength;
   @Uint64() external int IPv6SubInterfaceIndex;
   @Uint32() external int dwOptions;
@@ -1145,13 +1326,18 @@ class IKEV2_PROJECTION_INFO extends Struct {
 
 class IKEV2_PROJECTION_INFO2 extends Struct {
   @Uint32() external int dwIPv4NegotiationError;
-  external __ushort__ wszAddress;
-  external __ushort__ wszRemoteAddress;
+  @Array(16)
+  external Array<Uint16> wszAddress;
+  @Array(16)
+  external Array<Uint16> wszRemoteAddress;
   @Uint64() external int IPv4SubInterfaceIndex;
   @Uint32() external int dwIPv6NegotiationError;
-  external __ubyte__ bInterfaceIdentifier;
-  external __ubyte__ bRemoteInterfaceIdentifier;
-  external __ubyte__ bPrefix;
+  @Array(8)
+  external Array<Uint8> bInterfaceIdentifier;
+  @Array(8)
+  external Array<Uint8> bRemoteInterfaceIdentifier;
+  @Array(8)
+  external Array<Uint8> bPrefix;
   @Uint32() external int dwPrefixLength;
   @Uint64() external int IPv6SubInterfaceIndex;
   @Uint32() external int dwOptions;
@@ -1177,10 +1363,14 @@ class RAS_CONNECTION_EX extends Struct {
   @Uint32() external int dwConnectDuration;
   @Uint32() external int dwInterfaceType;
   @Uint32() external int dwConnectionFlags;
-  external __ushort__ wszInterfaceName;
-  external __ushort__ wszUserName;
-  external __ushort__ wszLogonDomain;
-  external __ushort__ wszRemoteComputer;
+  @Array(129)
+  external Array<Uint16> wszInterfaceName;
+  @Array(129)
+  external Array<Uint16> wszUserName;
+  @Array(16)
+  external Array<Uint16> wszLogonDomain;
+  @Array(17)
+  external Array<Uint16> wszRemoteComputer;
   external GUID guid;
   @Uint32() external int rasQuarState;
   external FILETIME probationTime;
@@ -1197,8 +1387,10 @@ class RAS_CONNECTION_EX extends Struct {
   @Uint32() external int dwCompressionRatioIn;
   @Uint32() external int dwCompressionRatioOut;
   @Uint32() external int dwNumSwitchOvers;
-  external __ushort__ wszRemoteEndpointAddress;
-  external __ushort__ wszLocalEndpointAddress;
+  @Array(65)
+  external Array<Uint16> wszRemoteEndpointAddress;
+  @Array(65)
+  external Array<Uint16> wszLocalEndpointAddress;
   external PROJECTION_INFO ProjectionInfo;
   @IntPtr() external int hConnection;
   @IntPtr() external int hInterface;
@@ -1208,10 +1400,14 @@ class RAS_CONNECTION_4 extends Struct {
   @Uint32() external int dwConnectDuration;
   @Uint32() external int dwInterfaceType;
   @Uint32() external int dwConnectionFlags;
-  external __ushort__ wszInterfaceName;
-  external __ushort__ wszUserName;
-  external __ushort__ wszLogonDomain;
-  external __ushort__ wszRemoteComputer;
+  @Array(129)
+  external Array<Uint16> wszInterfaceName;
+  @Array(129)
+  external Array<Uint16> wszUserName;
+  @Array(16)
+  external Array<Uint16> wszLogonDomain;
+  @Array(17)
+  external Array<Uint16> wszRemoteComputer;
   external GUID guid;
   @Uint32() external int rasQuarState;
   external FILETIME probationTime;
@@ -1229,8 +1425,10 @@ class RAS_CONNECTION_4 extends Struct {
   @Uint32() external int dwCompressionRatioIn;
   @Uint32() external int dwCompressionRatioOut;
   @Uint32() external int dwNumSwitchOvers;
-  external __ushort__ wszRemoteEndpointAddress;
-  external __ushort__ wszLocalEndpointAddress;
+  @Array(65)
+  external Array<Uint16> wszRemoteEndpointAddress;
+  @Array(65)
+  external Array<Uint16> wszLocalEndpointAddress;
   external PROJECTION_INFO2 ProjectionInfo;
   @IntPtr() external int hConnection;
   @IntPtr() external int hInterface;
@@ -1472,17 +1670,22 @@ class MPR_SERVER_SET_CONFIG_EX1 extends Struct {
 class AUTH_VALIDATION_EX extends Struct {
   external MPRAPI_OBJECT_HEADER Header;
   @IntPtr() external int hRasConnection;
-  external __ushort__ wszUserName;
-  external __ushort__ wszLogonDomain;
+  @Array(129)
+  external Array<Uint16> wszUserName;
+  @Array(16)
+  external Array<Uint16> wszLogonDomain;
   @Uint32() external int AuthInfoSize;
-  external __ubyte__ AuthInfo;
+  @Array(1)
+  external Array<Uint8> AuthInfo;
 }
 
 class RAS_UPDATE_CONNECTION extends Struct {
   external MPRAPI_OBJECT_HEADER Header;
   @Uint32() external int dwIfIndex;
-  external __ushort__ wszLocalEndpointAddress;
-  external __ushort__ wszRemoteEndpointAddress;
+  @Array(65)
+  external Array<Uint16> wszLocalEndpointAddress;
+  @Array(65)
+  external Array<Uint16> wszRemoteEndpointAddress;
 }
 
 class MPRAPI_ADMIN_DLL_CALLBACKS extends Struct {
@@ -1505,14 +1708,17 @@ class SECURITY_MESSAGE extends Struct {
   @Uint32() external int dwMsgId;
   @IntPtr() external int hPort;
   @Uint32() external int dwError;
-  external __byte__ UserName;
-  external __byte__ Domain;
+  @Array(129)
+  external Array<Int8> UserName;
+  @Array(16)
+  external Array<Int8> Domain;
 }
 
 class RAS_SECURITY_INFO extends Struct {
   @Uint32() external int LastError;
   @Uint32() external int BytesReceived;
-  external __byte__ DeviceName;
+  @Array(128)
+  external Array<Int8> DeviceName;
 }
 
 class MGM_IF_ENTRY extends Struct {
@@ -1552,7 +1758,8 @@ class RTM_REGN_PROFILE extends Struct {
 class RTM_NET_ADDRESS extends Struct {
   @Uint16() external int AddressFamily;
   @Uint16() external int NumBits;
-  external __ubyte__ AddrBits;
+  @Array(16)
+  external Array<Uint8> AddrBits;
 }
 
 class RTM_PREF_INFO extends Struct {
@@ -1562,7 +1769,8 @@ class RTM_PREF_INFO extends Struct {
 
 class RTM_NEXTHOP_LIST extends Struct {
   @Uint16() external int NumNextHops;
-  external __intptr__ NextHops;
+  @Array(1)
+  external Array<IntPtr> NextHops;
 }
 
 class RTM_DEST_INFO extends Struct {
@@ -1571,7 +1779,8 @@ class RTM_DEST_INFO extends Struct {
   external FILETIME LastChanged;
   @Uint32() external int BelongsToViews;
   @Uint32() external int NumberOfViews;
-  external ____ ViewInfo;
+  @Array(1)
+  external Array<Uint32> ViewInfo;
 }
 
 class RTM_ROUTE_INFO extends Struct {
@@ -1610,18 +1819,21 @@ class RTM_ENTITY_INFO extends Struct {
 class RTM_ENTITY_METHOD_INPUT extends Struct {
   @Uint32() external int MethodType;
   @Uint32() external int InputSize;
-  external __ubyte__ InputData;
+  @Array(1)
+  external Array<Uint8> InputData;
 }
 
 class RTM_ENTITY_METHOD_OUTPUT extends Struct {
   @Uint32() external int MethodType;
   @Uint32() external int MethodStatus;
   @Uint32() external int OutputSize;
-  external __ubyte__ OutputData;
+  @Array(1)
+  external Array<Uint8> OutputData;
 }
 
 class RTM_ENTITY_EXPORT_METHODS extends Struct {
   @Uint32() external int NumMethods;
-  external RTM_ENTITY_EXPORT_METHOD Methods;
+  @Array(1)
+  external Array<RTM_ENTITY_EXPORT_METHOD> Methods;
 }
 

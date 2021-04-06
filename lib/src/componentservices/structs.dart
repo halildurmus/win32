@@ -140,7 +140,8 @@ class COMAdminCatalogCollection extends Struct {
 }
 
 class BOID extends Struct {
-  external __ubyte__ rgb;
+  @Array(16)
+  external Array<Uint8> rgb;
 }
 
 class XACTTRANSINFO extends Struct {
@@ -166,18 +167,21 @@ class XACTSTATS extends Struct {
 
 class XACTOPT extends Struct {
   @Uint32() external int ulTimeout;
-  external __ubyte__ szDescription;
+  @Array(40)
+  external Array<Uint8> szDescription;
 }
 
 class xid_t extends Struct {
   @Int32() external int formatID;
   @Int32() external int gtrid_length;
   @Int32() external int bqual_length;
-  external __byte__ data;
+  @Array(128)
+  external Array<Int8> data;
 }
 
 class xa_switch_t extends Struct {
-  external __byte__ name;
+  @Array(32)
+  external Array<Int8> name;
   @Int32() external int flags;
   @Int32() external int version;
   @IntPtr() external int xa_open_entry;
@@ -232,7 +236,8 @@ class CAppStatistics extends Struct {
 
 class CAppData extends Struct {
   @Uint32() external int m_idApp;
-  external __ushort__ m_szAppGuid;
+  @Array(40)
+  external Array<Uint16> m_szAppGuid;
   @Uint32() external int m_dwAppProcessId;
   external CAppStatistics m_AppStatistics;
 }
@@ -375,6 +380,7 @@ class COMEVENTSYSCHANGEINFO extends Struct {
   external Pointer<Utf16> objectId;
   external Pointer<Utf16> partitionId;
   external Pointer<Utf16> applicationId;
-  external GUID reserved;
+  @Array(10)
+  external Array<GUID> reserved;
 }
 

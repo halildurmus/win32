@@ -44,7 +44,7 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class BSTR extends Struct {
-  external Pointer<Uint8> Value;
+  external Pointer<Uint16> Value;
 }
 
 class SAFEARRAYBOUND extends Struct {
@@ -94,7 +94,8 @@ class _wireSAFEARRAY extends Struct {
   @Uint32() external int cbElements;
   @Uint32() external int cLocks;
   external _wireSAFEARRAY_UNION uArrayStructs;
-  external SAFEARRAYBOUND rgsabound;
+  @Array(1)
+  external Array<SAFEARRAYBOUND> rgsabound;
 }
 
 class SAFEARRAY extends Struct {
@@ -103,7 +104,8 @@ class SAFEARRAY extends Struct {
   @Uint32() external int cbElements;
   @Uint32() external int cLocks;
   external Pointer pvData;
-  external SAFEARRAYBOUND rgsabound;
+  @Array(1)
+  external Array<SAFEARRAYBOUND> rgsabound;
 }
 
 class VARIANT extends Struct {
@@ -135,7 +137,8 @@ class TYPEDESC extends Struct {
 class ARRAYDESC extends Struct {
   external TYPEDESC tdescElem;
   @Uint16() external int cDims;
-  external SAFEARRAYBOUND rgbounds;
+  @Array(1)
+  external Array<SAFEARRAYBOUND> rgbounds;
 }
 
 class PARAMDESCEX extends Struct {
@@ -306,7 +309,8 @@ class WIA_RAW_HEADER extends Struct {
   @Uint32() external int BitsPerPixel;
   @Uint32() external int ChannelsPerPixel;
   @Uint32() external int DataType;
-  external __ubyte__ BitsPerChannel;
+  @Array(8)
+  external Array<Uint8> BitsPerChannel;
   @Uint32() external int Compression;
   @Uint32() external int PhotometricInterp;
   @Uint32() external int LineOrder;
@@ -325,7 +329,8 @@ class WIA_BARCODE_INFO extends Struct {
   @Uint32() external int YOffset;
   @Uint32() external int Rotation;
   @Uint32() external int Length;
-  external __ushort__ Text;
+  @Array(1)
+  external Array<Uint16> Text;
 }
 
 class WIA_BARCODES extends Struct {
@@ -333,7 +338,8 @@ class WIA_BARCODES extends Struct {
   @Uint32() external int Version;
   @Uint32() external int Size;
   @Uint32() external int Count;
-  external WIA_BARCODE_INFO Barcodes;
+  @Array(1)
+  external Array<WIA_BARCODE_INFO> Barcodes;
 }
 
 class WIA_PATCH_CODE_INFO extends Struct {
@@ -345,14 +351,16 @@ class WIA_PATCH_CODES extends Struct {
   @Uint32() external int Version;
   @Uint32() external int Size;
   @Uint32() external int Count;
-  external WIA_PATCH_CODE_INFO PatchCodes;
+  @Array(1)
+  external Array<WIA_PATCH_CODE_INFO> PatchCodes;
 }
 
 class WIA_MICR_INFO extends Struct {
   @Uint32() external int Size;
   @Uint32() external int Page;
   @Uint32() external int Length;
-  external __ushort__ Text;
+  @Array(1)
+  external Array<Uint16> Text;
 }
 
 class WIA_MICR extends Struct {
@@ -362,6 +370,7 @@ class WIA_MICR extends Struct {
   @Uint16() external int Placeholder;
   @Uint16() external int Reserved;
   @Uint32() external int Count;
-  external WIA_MICR_INFO Micr;
+  @Array(1)
+  external Array<WIA_MICR_INFO> Micr;
 }
 

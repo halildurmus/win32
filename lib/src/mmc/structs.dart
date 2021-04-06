@@ -137,34 +137,40 @@ class MMC_EXPANDSYNC_STRUCT extends Struct {
 
 class MMC_VISIBLE_COLUMNS extends Struct {
   @Int32() external int nVisibleColumns;
-  external __int__ rgVisibleCols;
+  @Array(1)
+  external Array<Int32> rgVisibleCols;
 }
 
 class SMMCDataObjects extends Struct {
   @Uint32() external int count;
-  external Pointer lpDataObject;
+  @Array(1)
+  external Array<Pointer> lpDataObject;
 }
 
 class SMMCObjectTypes extends Struct {
   @Uint32() external int count;
-  external GUID guid;
+  @Array(1)
+  external Array<GUID> guid;
 }
 
 class SNodeID extends Struct {
   @Uint32() external int cBytes;
-  external __ubyte__ id;
+  @Array(1)
+  external Array<Uint8> id;
 }
 
 class SNodeID2 extends Struct {
   @Uint32() external int dwFlags;
   @Uint32() external int cBytes;
-  external __ubyte__ id;
+  @Array(1)
+  external Array<Uint8> id;
 }
 
 class SColumnSetID extends Struct {
   @Uint32() external int dwFlags;
   @Uint32() external int cBytes;
-  external __ubyte__ id;
+  @Array(1)
+  external Array<Uint8> id;
 }
 
 class MMC_TASK_DISPLAY_SYMBOL extends Struct {

@@ -47,6 +47,27 @@ class HwtsVirtualChannelHandle extends Struct {
   @IntPtr() external int Value;
 }
 
+class APO_CONNECTION_PROPERTY extends Struct {
+  @IntPtr() external int pBuffer;
+  @Uint32() external int u32ValidFrameCount;
+  @Uint32() external int u32BufferFlags;
+  @Uint32() external int u32Signature;
+}
+
+class AE_CURRENT_POSITION extends Struct {
+  @Uint64() external int u64DevicePosition;
+  @Uint64() external int u64StreamPosition;
+  @Uint64() external int u64PaddingFrames;
+  @Int64() external int hnsQPCPosition;
+  @Float() external double f32FramesPerSecond;
+  @Uint32() external int Flag;
+}
+
+class WTSSESSION_NOTIFICATION extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwSessionId;
+}
+
 class TSUserExInterfaces extends Struct {
 }
 
@@ -130,11 +151,16 @@ class WTSCONFIGINFOW extends Struct {
   @Uint32() external int fDisablePrinterRedirection;
   @Uint32() external int fDisableDefaultMainClientPrinter;
   @Uint32() external int ShadowSettings;
-  external __ushort__ LogonUserName;
-  external __ushort__ LogonDomain;
-  external __ushort__ WorkDirectory;
-  external __ushort__ InitialProgram;
-  external __ushort__ ApplicationName;
+  @Array(21)
+  external Array<Uint16> LogonUserName;
+  @Array(18)
+  external Array<Uint16> LogonDomain;
+  @Array(129)
+  external Array<Uint16> WorkDirectory;
+  @Array(129)
+  external Array<Uint16> InitialProgram;
+  @Array(129)
+  external Array<Uint16> ApplicationName;
 }
 
 class WTSCONFIGINFOA extends Struct {
@@ -144,11 +170,16 @@ class WTSCONFIGINFOA extends Struct {
   @Uint32() external int fDisablePrinterRedirection;
   @Uint32() external int fDisableDefaultMainClientPrinter;
   @Uint32() external int ShadowSettings;
-  external __byte__ LogonUserName;
-  external __byte__ LogonDomain;
-  external __byte__ WorkDirectory;
-  external __byte__ InitialProgram;
-  external __byte__ ApplicationName;
+  @Array(21)
+  external Array<Int8> LogonUserName;
+  @Array(18)
+  external Array<Int8> LogonDomain;
+  @Array(129)
+  external Array<Int8> WorkDirectory;
+  @Array(129)
+  external Array<Int8> InitialProgram;
+  @Array(129)
+  external Array<Int8> ApplicationName;
 }
 
 class WTSINFOW extends Struct {
@@ -160,9 +191,12 @@ class WTSINFOW extends Struct {
   @Uint32() external int OutgoingFrames;
   @Uint32() external int IncomingCompressedBytes;
   @Uint32() external int OutgoingCompressedBytes;
-  external __ushort__ WinStationName;
-  external __ushort__ Domain;
-  external __ushort__ UserName;
+  @Array(32)
+  external Array<Uint16> WinStationName;
+  @Array(17)
+  external Array<Uint16> Domain;
+  @Array(21)
+  external Array<Uint16> UserName;
   @Int64() external int ConnectTime;
   @Int64() external int DisconnectTime;
   @Int64() external int LastInputTime;
@@ -179,9 +213,12 @@ class WTSINFOA extends Struct {
   @Uint32() external int OutgoingFrames;
   @Uint32() external int IncomingCompressedBytes;
   @Uint32() external int OutgoingCompressedBy;
-  external __byte__ WinStationName;
-  external __byte__ Domain;
-  external __byte__ UserName;
+  @Array(32)
+  external Array<Int8> WinStationName;
+  @Array(17)
+  external Array<Int8> Domain;
+  @Array(21)
+  external Array<Int8> UserName;
   @Int64() external int ConnectTime;
   @Int64() external int DisconnectTime;
   @Int64() external int LastInputTime;
@@ -193,9 +230,12 @@ class WTSINFOEX_LEVEL1_W extends Struct {
   @Uint32() external int SessionId;
   @Uint32() external int SessionState;
   @Int32() external int SessionFlags;
-  external __ushort__ WinStationName;
-  external __ushort__ UserName;
-  external __ushort__ DomainName;
+  @Array(33)
+  external Array<Uint16> WinStationName;
+  @Array(21)
+  external Array<Uint16> UserName;
+  @Array(18)
+  external Array<Uint16> DomainName;
   @Int64() external int LogonTime;
   @Int64() external int ConnectTime;
   @Int64() external int DisconnectTime;
@@ -213,9 +253,12 @@ class WTSINFOEX_LEVEL1_A extends Struct {
   @Uint32() external int SessionId;
   @Uint32() external int SessionState;
   @Int32() external int SessionFlags;
-  external __byte__ WinStationName;
-  external __byte__ UserName;
-  external __byte__ DomainName;
+  @Array(33)
+  external Array<Int8> WinStationName;
+  @Array(21)
+  external Array<Int8> UserName;
+  @Array(18)
+  external Array<Int8> DomainName;
   @Int64() external int LogonTime;
   @Int64() external int ConnectTime;
   @Int64() external int DisconnectTime;
@@ -248,78 +291,103 @@ class WTSINFOEXA extends Struct {
 }
 
 class WTSCLIENTW extends Struct {
-  external __ushort__ ClientName;
-  external __ushort__ Domain;
-  external __ushort__ UserName;
-  external __ushort__ WorkDirectory;
-  external __ushort__ InitialProgram;
+  @Array(21)
+  external Array<Uint16> ClientName;
+  @Array(18)
+  external Array<Uint16> Domain;
+  @Array(21)
+  external Array<Uint16> UserName;
+  @Array(129)
+  external Array<Uint16> WorkDirectory;
+  @Array(129)
+  external Array<Uint16> InitialProgram;
   @Uint8() external int EncryptionLevel;
   @Uint32() external int ClientAddressFamily;
-  external __ushort__ ClientAddress;
+  @Array(31)
+  external Array<Uint16> ClientAddress;
   @Uint16() external int HRes;
   @Uint16() external int VRes;
   @Uint16() external int ColorDepth;
-  external __ushort__ ClientDirectory;
+  @Array(129)
+  external Array<Uint16> ClientDirectory;
   @Uint32() external int ClientBuildNumber;
   @Uint32() external int ClientHardwareId;
   @Uint16() external int ClientProductId;
   @Uint16() external int OutBufCountHost;
   @Uint16() external int OutBufCountClient;
   @Uint16() external int OutBufLength;
-  external __ushort__ DeviceId;
+  @Array(129)
+  external Array<Uint16> DeviceId;
 }
 
 class WTSCLIENTA extends Struct {
-  external __byte__ ClientName;
-  external __byte__ Domain;
-  external __byte__ UserName;
-  external __byte__ WorkDirectory;
-  external __byte__ InitialProgram;
+  @Array(21)
+  external Array<Int8> ClientName;
+  @Array(18)
+  external Array<Int8> Domain;
+  @Array(21)
+  external Array<Int8> UserName;
+  @Array(129)
+  external Array<Int8> WorkDirectory;
+  @Array(129)
+  external Array<Int8> InitialProgram;
   @Uint8() external int EncryptionLevel;
   @Uint32() external int ClientAddressFamily;
-  external __ushort__ ClientAddress;
+  @Array(31)
+  external Array<Uint16> ClientAddress;
   @Uint16() external int HRes;
   @Uint16() external int VRes;
   @Uint16() external int ColorDepth;
-  external __byte__ ClientDirectory;
+  @Array(129)
+  external Array<Int8> ClientDirectory;
   @Uint32() external int ClientBuildNumber;
   @Uint32() external int ClientHardwareId;
   @Uint16() external int ClientProductId;
   @Uint16() external int OutBufCountHost;
   @Uint16() external int OutBufCountClient;
   @Uint16() external int OutBufLength;
-  external __byte__ DeviceId;
+  @Array(129)
+  external Array<Int8> DeviceId;
 }
 
 class _WTS_PRODUCT_INFOA extends Struct {
-  external __byte__ CompanyName;
-  external __byte__ ProductID;
+  @Array(129)
+  external Array<Int8> CompanyName;
+  @Array(4)
+  external Array<Int8> ProductID;
 }
 
 class _WTS_PRODUCT_INFOW extends Struct {
-  external __ushort__ CompanyName;
-  external __ushort__ ProductID;
+  @Array(129)
+  external Array<Uint16> CompanyName;
+  @Array(4)
+  external Array<Uint16> ProductID;
 }
 
 class WTS_VALIDATION_INFORMATIONA extends Struct {
   external _WTS_PRODUCT_INFOA ProductInfo;
-  external __ubyte__ License;
+  @Array(192)
+  external Array<Uint8> License;
   @Uint32() external int LicenseLength;
-  external __ubyte__ HardwareID;
+  @Array(20)
+  external Array<Uint8> HardwareID;
   @Uint32() external int HardwareIDLength;
 }
 
 class WTS_VALIDATION_INFORMATIONW extends Struct {
   external _WTS_PRODUCT_INFOW ProductInfo;
-  external __ubyte__ License;
+  @Array(192)
+  external Array<Uint8> License;
   @Uint32() external int LicenseLength;
-  external __ubyte__ HardwareID;
+  @Array(20)
+  external Array<Uint8> HardwareID;
   @Uint32() external int HardwareIDLength;
 }
 
 class WTS_CLIENT_ADDRESS extends Struct {
   @Uint32() external int AddressFamily;
-  external __ubyte__ Address;
+  @Array(20)
+  external Array<Uint8> Address;
 }
 
 class WTS_CLIENT_DISPLAY extends Struct {
@@ -342,11 +410,16 @@ class WTSUSERCONFIGA extends Struct {
   @Uint32() external int ReconnectSettings;
   @Uint32() external int ShadowingSettings;
   @Uint32() external int TerminalServerRemoteHomeDir;
-  external __byte__ InitialProgram;
-  external __byte__ WorkDirectory;
-  external __byte__ TerminalServerProfilePath;
-  external __byte__ TerminalServerHomeDir;
-  external __byte__ TerminalServerHomeDirDrive;
+  @Array(129)
+  external Array<Int8> InitialProgram;
+  @Array(129)
+  external Array<Int8> WorkDirectory;
+  @Array(129)
+  external Array<Int8> TerminalServerProfilePath;
+  @Array(129)
+  external Array<Int8> TerminalServerHomeDir;
+  @Array(4)
+  external Array<Int8> TerminalServerHomeDirDrive;
 }
 
 class WTSUSERCONFIGW extends Struct {
@@ -363,16 +436,22 @@ class WTSUSERCONFIGW extends Struct {
   @Uint32() external int ReconnectSettings;
   @Uint32() external int ShadowingSettings;
   @Uint32() external int TerminalServerRemoteHomeDir;
-  external __ushort__ InitialProgram;
-  external __ushort__ WorkDirectory;
-  external __ushort__ TerminalServerProfilePath;
-  external __ushort__ TerminalServerHomeDir;
-  external __ushort__ TerminalServerHomeDirDrive;
+  @Array(129)
+  external Array<Uint16> InitialProgram;
+  @Array(129)
+  external Array<Uint16> WorkDirectory;
+  @Array(129)
+  external Array<Uint16> TerminalServerProfilePath;
+  @Array(129)
+  external Array<Uint16> TerminalServerHomeDir;
+  @Array(4)
+  external Array<Uint16> TerminalServerHomeDirDrive;
 }
 
 class WTS_SESSION_ADDRESS extends Struct {
   @Uint32() external int AddressFamily;
-  external __ubyte__ Address;
+  @Array(20)
+  external Array<Uint8> Address;
 }
 
 class WTS_PROCESS_INFO_EXW extends Struct {
@@ -432,11 +511,16 @@ class WTSLISTENERCONFIGW extends Struct {
   @Uint32() external int SecurityLayer;
   @Uint32() external int MinEncryptionLevel;
   @Uint32() external int UserAuthentication;
-  external __ushort__ Comment;
-  external __ushort__ LogonUserName;
-  external __ushort__ LogonDomain;
-  external __ushort__ WorkDirectory;
-  external __ushort__ InitialProgram;
+  @Array(61)
+  external Array<Uint16> Comment;
+  @Array(21)
+  external Array<Uint16> LogonUserName;
+  @Array(18)
+  external Array<Uint16> LogonDomain;
+  @Array(129)
+  external Array<Uint16> WorkDirectory;
+  @Array(129)
+  external Array<Uint16> InitialProgram;
 }
 
 class WTSLISTENERCONFIGA extends Struct {
@@ -466,30 +550,40 @@ class WTSLISTENERCONFIGA extends Struct {
   @Uint32() external int SecurityLayer;
   @Uint32() external int MinEncryptionLevel;
   @Uint32() external int UserAuthentication;
-  external __byte__ Comment;
-  external __byte__ LogonUserName;
-  external __byte__ LogonDomain;
-  external __byte__ WorkDirectory;
-  external __byte__ InitialProgram;
+  @Array(61)
+  external Array<Int8> Comment;
+  @Array(21)
+  external Array<Int8> LogonUserName;
+  @Array(18)
+  external Array<Int8> LogonDomain;
+  @Array(129)
+  external Array<Int8> WorkDirectory;
+  @Array(129)
+  external Array<Int8> InitialProgram;
 }
 
 class WTSSBX_IP_ADDRESS extends Struct {
   @Uint32() external int AddressFamily;
-  external __ubyte__ Address;
+  @Array(16)
+  external Array<Uint8> Address;
   @Uint16() external int PortNumber;
   @Uint32() external int dwScope;
 }
 
 class WTSSBX_MACHINE_CONNECT_INFO extends Struct {
-  external __ushort__ wczMachineFQDN;
-  external __ushort__ wczMachineNetBiosName;
+  @Array(129)
+  external Array<Uint16> wczMachineFQDN;
+  @Array(17)
+  external Array<Uint16> wczMachineNetBiosName;
   @Uint32() external int dwNumOfIPAddr;
-  external WTSSBX_IP_ADDRESS IPaddr;
+  @Array(12)
+  external Array<WTSSBX_IP_ADDRESS> IPaddr;
 }
 
 class WTSSBX_MACHINE_INFO extends Struct {
   external WTSSBX_MACHINE_CONNECT_INFO ClientConnectInfo;
-  external __ushort__ wczFarmName;
+  @Array(129)
+  external Array<Uint16> wczFarmName;
   external WTSSBX_IP_ADDRESS InternalIPAddress;
   @Uint32() external int dwMaxSessionsLimit;
   @Uint32() external int ServerWeight;
@@ -499,9 +593,12 @@ class WTSSBX_MACHINE_INFO extends Struct {
 }
 
 class WTSSBX_SESSION_INFO extends Struct {
-  external __ushort__ wszUserName;
-  external __ushort__ wszDomainName;
-  external __ushort__ ApplicationType;
+  @Array(105)
+  external Array<Uint16> wszUserName;
+  @Array(129)
+  external Array<Uint16> wszDomainName;
+  @Array(129)
+  external Array<Uint16> ApplicationType;
   @Uint32() external int dwSessionId;
   external FILETIME CreateTime;
   external FILETIME DisconnectTime;
@@ -509,7 +606,8 @@ class WTSSBX_SESSION_INFO extends Struct {
 }
 
 class CHANNEL_DEF extends Struct {
-  external __byte__ name;
+  @Array(8)
+  external Array<Int8> name;
   @Uint32() external int options;
 }
 
@@ -537,15 +635,18 @@ class CLIENT_DISPLAY extends Struct {
 }
 
 class TSSD_ConnectionPoint extends Struct {
-  external __ubyte__ ServerAddressB;
+  @Array(16)
+  external Array<Uint8> ServerAddressB;
   @Uint32() external int AddressType;
   @Uint16() external int PortNumber;
   @Uint32() external int AddressScope;
 }
 
 class VM_NOTIFY_ENTRY extends Struct {
-  external __ushort__ VmName;
-  external __ushort__ VmHost;
+  @Array(128)
+  external Array<Uint16> VmName;
+  @Array(128)
+  external Array<Uint16> VmHost;
 }
 
 class VM_PATCH_INFO extends Struct {
@@ -559,11 +660,15 @@ class VM_NOTIFY_INFO extends Struct {
 }
 
 class pluginResource extends Struct {
-  external __ushort__ alias;
-  external __ushort__ name;
+  @Array(129)
+  external Array<Uint16> alias;
+  @Array(129)
+  external Array<Uint16> name;
   external Pointer<Utf16> resourceFileContents;
-  external __ushort__ fileExtension;
-  external __ushort__ resourcePluginType;
+  @Array(129)
+  external Array<Uint16> fileExtension;
+  @Array(129)
+  external Array<Uint16> resourcePluginType;
   @Uint8() external int isDiscoverable;
   @Int32() external int resourceType;
   @Uint32() external int pceIconSize;
@@ -573,7 +678,8 @@ class pluginResource extends Struct {
 }
 
 class pluginResource2FileAssociation extends Struct {
-  external __ushort__ extName;
+  @Array(129)
+  external Array<Uint16> extName;
   @Uint8() external int primaryHandler;
   @Uint32() external int pceIconSize;
   external Pointer<Uint8> iconContents;
@@ -624,8 +730,10 @@ class RFX_GFX_MSG_CLIENT_DESKTOP_INFO_RESPONSE extends Struct {
   external RFX_GFX_MSG_HEADER channelHdr;
   @Uint32() external int reserved;
   @Uint32() external int monitorCount;
-  external RFX_GFX_MONITOR_INFO MonitorData;
-  external __ushort__ clientUniqueId;
+  @Array(16)
+  external Array<RFX_GFX_MONITOR_INFO> MonitorData;
+  @Array(32)
+  external Array<Uint16> clientUniqueId;
 }
 
 class RFX_GFX_MSG_DESKTOP_CONFIG_CHANGE_NOTIFY extends Struct {
@@ -658,7 +766,8 @@ class RFX_GFX_MSG_DESKTOP_RESEND_REQUEST extends Struct {
 
 class RFX_GFX_MSG_RDP_DATA extends Struct {
   external RFX_GFX_MSG_HEADER channelHdr;
-  external __ubyte__ rdpData;
+  @Array(1)
+  external Array<Uint8> rdpData;
 }
 
 class WTS_SOCKADDR extends Struct {
@@ -684,9 +793,12 @@ class WTS_SESSION_ID extends Struct {
 }
 
 class WTS_USER_CREDENTIAL extends Struct {
-  external __ushort__ UserName;
-  external __ushort__ Password;
-  external __ushort__ Domain;
+  @Array(129)
+  external Array<Uint16> UserName;
+  @Array(129)
+  external Array<Uint16> Password;
+  @Array(129)
+  external Array<Uint16> Domain;
 }
 
 class WTS_SYSTEMTIME extends Struct {
@@ -702,23 +814,28 @@ class WTS_SYSTEMTIME extends Struct {
 
 class WTS_TIME_ZONE_INFORMATION extends Struct {
   @Int32() external int Bias;
-  external __ushort__ StandardName;
+  @Array(32)
+  external Array<Uint16> StandardName;
   external WTS_SYSTEMTIME StandardDate;
   @Int32() external int StandardBias;
-  external __ushort__ DaylightName;
+  @Array(32)
+  external Array<Uint16> DaylightName;
   external WTS_SYSTEMTIME DaylightDate;
   @Int32() external int DaylightBias;
 }
 
 class WRDS_DYNAMIC_TIME_ZONE_INFORMATION extends Struct {
   @Int32() external int Bias;
-  external __ushort__ StandardName;
+  @Array(32)
+  external Array<Uint16> StandardName;
   external WTS_SYSTEMTIME StandardDate;
   @Int32() external int StandardBias;
-  external __ushort__ DaylightName;
+  @Array(32)
+  external Array<Uint16> DaylightName;
   external WTS_SYSTEMTIME DaylightDate;
   @Int32() external int DaylightBias;
-  external __ushort__ TimeZoneKeyName;
+  @Array(128)
+  external Array<Uint16> TimeZoneKeyName;
   @Uint16() external int DynamicDaylightTimeDisabled;
 }
 
@@ -730,48 +847,62 @@ class WTS_CLIENT_DATA extends Struct {
   @Int32() external int fInheritAutoLogon;
   @Uint8() external int fPromptForPassword;
   @Uint8() external int fUsingSavedCreds;
-  external __ushort__ Domain;
-  external __ushort__ UserName;
-  external __ushort__ Password;
+  @Array(129)
+  external Array<Uint16> Domain;
+  @Array(129)
+  external Array<Uint16> UserName;
+  @Array(129)
+  external Array<Uint16> Password;
   @Uint8() external int fPasswordIsScPin;
   @Int32() external int fInheritInitialProgram;
-  external __ushort__ WorkDirectory;
-  external __ushort__ InitialProgram;
+  @Array(129)
+  external Array<Uint16> WorkDirectory;
+  @Array(129)
+  external Array<Uint16> InitialProgram;
   @Uint8() external int fMaximizeShell;
   @Uint8() external int EncryptionLevel;
   @Uint32() external int PerformanceFlags;
-  external __ushort__ ProtocolName;
+  @Array(9)
+  external Array<Uint16> ProtocolName;
   @Uint16() external int ProtocolType;
   @Int32() external int fInheritColorDepth;
   @Uint16() external int HRes;
   @Uint16() external int VRes;
   @Uint16() external int ColorDepth;
-  external __ushort__ DisplayDriverName;
-  external __ushort__ DisplayDeviceName;
+  @Array(9)
+  external Array<Uint16> DisplayDriverName;
+  @Array(20)
+  external Array<Uint16> DisplayDeviceName;
   @Uint8() external int fMouse;
   @Uint32() external int KeyboardLayout;
   @Uint32() external int KeyboardType;
   @Uint32() external int KeyboardSubType;
   @Uint32() external int KeyboardFunctionKey;
-  external __ushort__ imeFileName;
+  @Array(33)
+  external Array<Uint16> imeFileName;
   @Uint32() external int ActiveInputLocale;
   @Uint8() external int fNoAudioPlayback;
   @Uint8() external int fRemoteConsoleAudio;
-  external __ushort__ AudioDriverName;
+  @Array(9)
+  external Array<Uint16> AudioDriverName;
   external WTS_TIME_ZONE_INFORMATION ClientTimeZone;
-  external __ushort__ ClientName;
+  @Array(21)
+  external Array<Uint16> ClientName;
   @Uint32() external int SerialNumber;
   @Uint32() external int ClientAddressFamily;
-  external __ushort__ ClientAddress;
+  @Array(31)
+  external Array<Uint16> ClientAddress;
   external WTS_SOCKADDR ClientSockAddress;
-  external __ushort__ ClientDirectory;
+  @Array(129)
+  external Array<Uint16> ClientDirectory;
   @Uint32() external int ClientBuildNumber;
   @Uint16() external int ClientProductId;
   @Uint16() external int OutBufCountHost;
   @Uint16() external int OutBufCountClient;
   @Uint16() external int OutBufLength;
   @Uint32() external int ClientSessionId;
-  external __ushort__ ClientDigProductId;
+  @Array(33)
+  external Array<Uint16> ClientDigProductId;
   @Uint8() external int fDisableCpm;
   @Uint8() external int fDisableCdm;
   @Uint8() external int fDisableCcm;
@@ -781,8 +912,10 @@ class WTS_CLIENT_DATA extends Struct {
 }
 
 class WTS_USER_DATA extends Struct {
-  external __ushort__ WorkDirectory;
-  external __ushort__ InitialProgram;
+  @Array(129)
+  external Array<Uint16> WorkDirectory;
+  @Array(129)
+  external Array<Uint16> InitialProgram;
   external WTS_TIME_ZONE_INFORMATION UserTimeZone;
 }
 
@@ -805,9 +938,11 @@ class WTS_PROTOCOL_CACHE extends Struct {
 }
 
 class WTS_CACHE_STATS_UN extends Struct {
-  external WTS_PROTOCOL_CACHE ProtocolCache;
+  @Array(4)
+  external Array<WTS_PROTOCOL_CACHE> ProtocolCache;
   @Uint32() external int TShareCacheStats;
-  external __uint__ Reserved;
+  @Array(20)
+  external Array<Uint32> Reserved;
 }
 
 class WTS_CACHE_STATS extends Struct {
@@ -835,7 +970,8 @@ class WTS_PROTOCOL_COUNTERS extends Struct {
   @Uint16() external int ProtocolType;
   @Uint16() external int Length;
   @Uint16() external int Specific;
-  external __uint__ Reserved;
+  @Array(100)
+  external Array<Uint32> Reserved;
 }
 
 class WTS_PROTOCOL_STATUS extends Struct {
@@ -844,11 +980,13 @@ class WTS_PROTOCOL_STATUS extends Struct {
   external WTS_CACHE_STATS Cache;
   @Uint32() external int AsyncSignal;
   @Uint32() external int AsyncSignalMask;
-  @Int64() external int Counters;
+  @Array(100)
+  external Array<Int64> Counters;
 }
 
 class WTS_DISPLAY_IOCTL extends Struct {
-  external __ubyte__ pDisplayIOCtlData;
+  @Array(129)
+  external Array<Uint8> pDisplayIOCtlData;
   @Uint32() external int cbDisplayIOCtlData;
 }
 
@@ -863,7 +1001,8 @@ class WTS_LICENSE_CAPABILITIES extends Struct {
   @Int32() external int fAuthenticateServer;
   @Uint32() external int CertType;
   @Uint32() external int cbClientName;
-  external __ubyte__ rgbClientName;
+  @Array(42)
+  external Array<Uint8> rgbClientName;
 }
 
 class WRDS_LISTENER_SETTINGS_1 extends Struct {
@@ -927,20 +1066,34 @@ class WRDS_CONNECTION_SETTINGS_1 extends Struct {
   @Uint32() external int ClientAddressFamily;
   @Uint32() external int ClientBuildNumber;
   @Uint32() external int ClientSessionId;
-  external __ushort__ WorkDirectory;
-  external __ushort__ InitialProgram;
-  external __ushort__ UserName;
-  external __ushort__ Domain;
-  external __ushort__ Password;
-  external __ushort__ ProtocolName;
-  external __ushort__ DisplayDriverName;
-  external __ushort__ DisplayDeviceName;
-  external __ushort__ imeFileName;
-  external __ushort__ AudioDriverName;
-  external __ushort__ ClientName;
-  external __ushort__ ClientAddress;
-  external __ushort__ ClientDirectory;
-  external __ushort__ ClientDigProductId;
+  @Array(129)
+  external Array<Uint16> WorkDirectory;
+  @Array(129)
+  external Array<Uint16> InitialProgram;
+  @Array(129)
+  external Array<Uint16> UserName;
+  @Array(129)
+  external Array<Uint16> Domain;
+  @Array(129)
+  external Array<Uint16> Password;
+  @Array(9)
+  external Array<Uint16> ProtocolName;
+  @Array(9)
+  external Array<Uint16> DisplayDriverName;
+  @Array(20)
+  external Array<Uint16> DisplayDeviceName;
+  @Array(33)
+  external Array<Uint16> imeFileName;
+  @Array(9)
+  external Array<Uint16> AudioDriverName;
+  @Array(21)
+  external Array<Uint16> ClientName;
+  @Array(31)
+  external Array<Uint16> ClientAddress;
+  @Array(129)
+  external Array<Uint16> ClientDirectory;
+  @Array(33)
+  external Array<Uint16> ClientDigProductId;
   external WTS_SOCKADDR ClientSockAddress;
   external WTS_TIME_ZONE_INFORMATION ClientTimeZone;
   external WRDS_LISTENER_SETTINGS WRdsListenerSettings;
@@ -1000,26 +1153,5 @@ class WRDS_SETTINGS extends Struct {
   @Uint32() external int WRdsSettingType;
   @Uint32() external int WRdsSettingLevel;
   external WRDS_SETTING WRdsSetting;
-}
-
-class APO_CONNECTION_PROPERTY extends Struct {
-  @IntPtr() external int pBuffer;
-  @Uint32() external int u32ValidFrameCount;
-  @Uint32() external int u32BufferFlags;
-  @Uint32() external int u32Signature;
-}
-
-class AE_CURRENT_POSITION extends Struct {
-  @Uint64() external int u64DevicePosition;
-  @Uint64() external int u64StreamPosition;
-  @Uint64() external int u64PaddingFrames;
-  @Int64() external int hnsQPCPosition;
-  @Float() external double f32FramesPerSecond;
-  @Uint32() external int Flag;
-}
-
-class WTSSESSION_NOTIFICATION extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwSessionId;
 }
 

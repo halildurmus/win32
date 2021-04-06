@@ -54,10 +54,12 @@ class RADIUS_ATTRIBUTE extends Struct {
 }
 
 class RADIUS_VSA_FORMAT extends Struct {
-  external __ubyte__ VendorId;
+  @Array(4)
+  external Array<Uint8> VendorId;
   @Uint8() external int VendorType;
   @Uint8() external int VendorLength;
-  external __ubyte__ AttributeSpecific;
+  @Array(1)
+  external Array<Uint8> AttributeSpecific;
 }
 
 class RADIUS_ATTRIBUTE_ARRAY extends Struct {

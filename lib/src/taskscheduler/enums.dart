@@ -1,16 +1,4 @@
 /// {@category Enum}
-class TASK_TRIGGER_TYPE {
-  static const TASK_TIME_TRIGGER_ONCE = 0x00000000;
-  static const TASK_TIME_TRIGGER_DAILY = 0x00000001;
-  static const TASK_TIME_TRIGGER_WEEKLY = 0x00000002;
-  static const TASK_TIME_TRIGGER_MONTHLYDATE = 0x00000003;
-  static const TASK_TIME_TRIGGER_MONTHLYDOW = 0x00000004;
-  static const TASK_EVENT_TRIGGER_ON_IDLE = 0x00000005;
-  static const TASK_EVENT_TRIGGER_AT_SYSTEMSTART = 0x00000006;
-  static const TASK_EVENT_TRIGGER_AT_LOGON = 0x00000007;
-}
-
-/// {@category Enum}
 class TASKPAGE {
   static const TASKPAGE_TASK = 0x00000000;
   static const TASKPAGE_SCHEDULE = 0x00000001;
@@ -18,17 +6,46 @@ class TASKPAGE {
 }
 
 /// {@category Enum}
-class TASK_RUN_FLAGS {
-  static const TASK_RUN_NO_FLAGS = 0x00000000;
-  static const TASK_RUN_AS_SELF = 0x00000001;
-  static const TASK_RUN_IGNORE_CONSTRAINTS = 0x00000002;
-  static const TASK_RUN_USE_SESSION_ID = 0x00000004;
-  static const TASK_RUN_USER_SID = 0x00000008;
+class TASK_ACTION_TYPE {
+  static const TASK_ACTION_EXEC = 0x00000000;
+  static const TASK_ACTION_COM_HANDLER = 0x00000005;
+  static const TASK_ACTION_SEND_EMAIL = 0x00000006;
+  static const TASK_ACTION_SHOW_MESSAGE = 0x00000007;
+}
+
+/// {@category Enum}
+class TASK_COMPATIBILITY {
+  static const TASK_COMPATIBILITY_AT = 0x00000000;
+  static const TASK_COMPATIBILITY_V1 = 0x00000001;
+  static const TASK_COMPATIBILITY_V2 = 0x00000002;
+  static const TASK_COMPATIBILITY_V2_1 = 0x00000003;
+  static const TASK_COMPATIBILITY_V2_2 = 0x00000004;
+  static const TASK_COMPATIBILITY_V2_3 = 0x00000005;
+  static const TASK_COMPATIBILITY_V2_4 = 0x00000006;
+}
+
+/// {@category Enum}
+class TASK_CREATION {
+  static const TASK_VALIDATE_ONLY = 0x00000001;
+  static const TASK_CREATE = 0x00000002;
+  static const TASK_UPDATE = 0x00000004;
+  static const TASK_CREATE_OR_UPDATE = 0x00000006;
+  static const TASK_DISABLE = 0x00000008;
+  static const TASK_DONT_ADD_PRINCIPAL_ACE = 0x00000010;
+  static const TASK_IGNORE_REGISTRATION_TRIGGERS = 0x00000020;
 }
 
 /// {@category Enum}
 class TASK_ENUM_FLAGS {
   static const TASK_ENUM_HIDDEN = 0x00000001;
+}
+
+/// {@category Enum}
+class TASK_INSTANCES_POLICY {
+  static const TASK_INSTANCES_PARALLEL = 0x00000000;
+  static const TASK_INSTANCES_QUEUE = 0x00000001;
+  static const TASK_INSTANCES_IGNORE_NEW = 0x00000002;
+  static const TASK_INSTANCES_STOP_EXISTING = 0x00000003;
 }
 
 /// {@category Enum}
@@ -43,16 +60,35 @@ class TASK_LOGON_TYPE {
 }
 
 /// {@category Enum}
+class TASK_PROCESSTOKENSID_TYPE {
+  static const TASK_PROCESSTOKENSID_NONE = 0x00000000;
+  static const TASK_PROCESSTOKENSID_UNRESTRICTED = 0x00000001;
+  static const TASK_PROCESSTOKENSID_DEFAULT = 0x00000002;
+}
+
+/// {@category Enum}
 class TASK_RUNLEVEL_TYPE {
   static const TASK_RUNLEVEL_LUA = 0x00000000;
   static const TASK_RUNLEVEL_HIGHEST = 0x00000001;
 }
 
 /// {@category Enum}
-class TASK_PROCESSTOKENSID_TYPE {
-  static const TASK_PROCESSTOKENSID_NONE = 0x00000000;
-  static const TASK_PROCESSTOKENSID_UNRESTRICTED = 0x00000001;
-  static const TASK_PROCESSTOKENSID_DEFAULT = 0x00000002;
+class TASK_RUN_FLAGS {
+  static const TASK_RUN_NO_FLAGS = 0x00000000;
+  static const TASK_RUN_AS_SELF = 0x00000001;
+  static const TASK_RUN_IGNORE_CONSTRAINTS = 0x00000002;
+  static const TASK_RUN_USE_SESSION_ID = 0x00000004;
+  static const TASK_RUN_USER_SID = 0x00000008;
+}
+
+/// {@category Enum}
+class TASK_SESSION_STATE_CHANGE_TYPE {
+  static const TASK_CONSOLE_CONNECT = 0x00000001;
+  static const TASK_CONSOLE_DISCONNECT = 0x00000002;
+  static const TASK_REMOTE_CONNECT = 0x00000003;
+  static const TASK_REMOTE_DISCONNECT = 0x00000004;
+  static const TASK_SESSION_LOCK = 0x00000007;
+  static const TASK_SESSION_UNLOCK = 0x00000008;
 }
 
 /// {@category Enum}
@@ -65,14 +101,15 @@ class TASK_STATE {
 }
 
 /// {@category Enum}
-class TASK_CREATION {
-  static const TASK_VALIDATE_ONLY = 0x00000001;
-  static const TASK_CREATE = 0x00000002;
-  static const TASK_UPDATE = 0x00000004;
-  static const TASK_CREATE_OR_UPDATE = 0x00000006;
-  static const TASK_DISABLE = 0x00000008;
-  static const TASK_DONT_ADD_PRINCIPAL_ACE = 0x00000010;
-  static const TASK_IGNORE_REGISTRATION_TRIGGERS = 0x00000020;
+class TASK_TRIGGER_TYPE {
+  static const TASK_TIME_TRIGGER_ONCE = 0x00000000;
+  static const TASK_TIME_TRIGGER_DAILY = 0x00000001;
+  static const TASK_TIME_TRIGGER_WEEKLY = 0x00000002;
+  static const TASK_TIME_TRIGGER_MONTHLYDATE = 0x00000003;
+  static const TASK_TIME_TRIGGER_MONTHLYDOW = 0x00000004;
+  static const TASK_EVENT_TRIGGER_ON_IDLE = 0x00000005;
+  static const TASK_EVENT_TRIGGER_AT_SYSTEMSTART = 0x00000006;
+  static const TASK_EVENT_TRIGGER_AT_LOGON = 0x00000007;
 }
 
 /// {@category Enum}
@@ -89,42 +126,5 @@ class TASK_TRIGGER_TYPE2 {
   static const TASK_TRIGGER_LOGON = 0x00000009;
   static const TASK_TRIGGER_SESSION_STATE_CHANGE = 0x0000000b;
   static const TASK_TRIGGER_CUSTOM_TRIGGER_01 = 0x0000000c;
-}
-
-/// {@category Enum}
-class TASK_SESSION_STATE_CHANGE_TYPE {
-  static const TASK_CONSOLE_CONNECT = 0x00000001;
-  static const TASK_CONSOLE_DISCONNECT = 0x00000002;
-  static const TASK_REMOTE_CONNECT = 0x00000003;
-  static const TASK_REMOTE_DISCONNECT = 0x00000004;
-  static const TASK_SESSION_LOCK = 0x00000007;
-  static const TASK_SESSION_UNLOCK = 0x00000008;
-}
-
-/// {@category Enum}
-class TASK_ACTION_TYPE {
-  static const TASK_ACTION_EXEC = 0x00000000;
-  static const TASK_ACTION_COM_HANDLER = 0x00000005;
-  static const TASK_ACTION_SEND_EMAIL = 0x00000006;
-  static const TASK_ACTION_SHOW_MESSAGE = 0x00000007;
-}
-
-/// {@category Enum}
-class TASK_INSTANCES_POLICY {
-  static const TASK_INSTANCES_PARALLEL = 0x00000000;
-  static const TASK_INSTANCES_QUEUE = 0x00000001;
-  static const TASK_INSTANCES_IGNORE_NEW = 0x00000002;
-  static const TASK_INSTANCES_STOP_EXISTING = 0x00000003;
-}
-
-/// {@category Enum}
-class TASK_COMPATIBILITY {
-  static const TASK_COMPATIBILITY_AT = 0x00000000;
-  static const TASK_COMPATIBILITY_V1 = 0x00000001;
-  static const TASK_COMPATIBILITY_V2 = 0x00000002;
-  static const TASK_COMPATIBILITY_V2_1 = 0x00000003;
-  static const TASK_COMPATIBILITY_V2_2 = 0x00000004;
-  static const TASK_COMPATIBILITY_V2_3 = 0x00000005;
-  static const TASK_COMPATIBILITY_V2_4 = 0x00000006;
 }
 

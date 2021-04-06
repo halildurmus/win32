@@ -1,8 +1,23 @@
 /// {@category Enum}
-class TrustLevel {
-  static const BaseTrust = 0x00000000;
-  static const PartialTrust = 0x00000001;
-  static const FullTrust = 0x00000002;
+class ACTIVATIONTYPE {
+  static const ACTIVATIONTYPE_UNCATEGORIZED = 0x00000000;
+  static const ACTIVATIONTYPE_FROM_MONIKER = 0x00000001;
+  static const ACTIVATIONTYPE_FROM_DATA = 0x00000002;
+  static const ACTIVATIONTYPE_FROM_STORAGE = 0x00000004;
+  static const ACTIVATIONTYPE_FROM_STREAM = 0x00000008;
+  static const ACTIVATIONTYPE_FROM_FILE = 0x00000010;
+}
+
+/// {@category Enum}
+class AgileReferenceOptions {
+  static const AGILEREFERENCE_DEFAULT = 0x00000000;
+  static const AGILEREFERENCE_DELAYEDMARSHAL = 0x00000001;
+}
+
+/// {@category Enum}
+class BSOS_OPTIONS {
+  static const BSOS_DEFAULT = 0x00000000;
+  static const BSOS_PREFERDESTINATIONSTREAM = 0x00000001;
 }
 
 /// {@category Enum}
@@ -41,12 +56,6 @@ class GRAPHICS_EFFECT_PROPERTY_MAPPING {
 }
 
 /// {@category Enum}
-class RO_INIT_TYPE {
-  static const RO_INIT_SINGLETHREADED = 0x00000000;
-  static const RO_INIT_MULTITHREADED = 0x00000001;
-}
-
-/// {@category Enum}
 class RO_ERROR_REPORTING_FLAGS {
   static const RO_ERROR_REPORTING_NONE = 0x00000000;
   static const RO_ERROR_REPORTING_SUPPRESSEXCEPTIONS = 0x00000001;
@@ -56,24 +65,15 @@ class RO_ERROR_REPORTING_FLAGS {
 }
 
 /// {@category Enum}
-class BSOS_OPTIONS {
-  static const BSOS_DEFAULT = 0x00000000;
-  static const BSOS_PREFERDESTINATIONSTREAM = 0x00000001;
+class RO_INIT_TYPE {
+  static const RO_INIT_SINGLETHREADED = 0x00000000;
+  static const RO_INIT_MULTITHREADED = 0x00000001;
 }
 
 /// {@category Enum}
-class ACTIVATIONTYPE {
-  static const ACTIVATIONTYPE_UNCATEGORIZED = 0x00000000;
-  static const ACTIVATIONTYPE_FROM_MONIKER = 0x00000001;
-  static const ACTIVATIONTYPE_FROM_DATA = 0x00000002;
-  static const ACTIVATIONTYPE_FROM_STORAGE = 0x00000004;
-  static const ACTIVATIONTYPE_FROM_STREAM = 0x00000008;
-  static const ACTIVATIONTYPE_FROM_FILE = 0x00000010;
-}
-
-/// {@category Enum}
-class AgileReferenceOptions {
-  static const AGILEREFERENCE_DEFAULT = 0x00000000;
-  static const AGILEREFERENCE_DELAYEDMARSHAL = 0x00000001;
+class TrustLevel {
+  static const BaseTrust = 0x00000000;
+  static const PartialTrust = 0x00000001;
+  static const FullTrust = 0x00000002;
 }
 

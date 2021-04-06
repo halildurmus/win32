@@ -47,44 +47,6 @@ class HCOLORSPACE extends Struct {
   @IntPtr() external int Value;
 }
 
-class CIEXYZ extends Struct {
-  @Int32() external int ciexyzX;
-  @Int32() external int ciexyzY;
-  @Int32() external int ciexyzZ;
-}
-
-class CIEXYZTRIPLE extends Struct {
-  external CIEXYZ ciexyzRed;
-  external CIEXYZ ciexyzGreen;
-  external CIEXYZ ciexyzBlue;
-}
-
-class LOGCOLORSPACEA extends Struct {
-  @Uint32() external int lcsSignature;
-  @Uint32() external int lcsVersion;
-  @Uint32() external int lcsSize;
-  @Int32() external int lcsCSType;
-  @Int32() external int lcsIntent;
-  external CIEXYZTRIPLE lcsEndpoints;
-  @Uint32() external int lcsGammaRed;
-  @Uint32() external int lcsGammaGreen;
-  @Uint32() external int lcsGammaBlue;
-  external __byte__ lcsFilename;
-}
-
-class LOGCOLORSPACEW extends Struct {
-  @Uint32() external int lcsSignature;
-  @Uint32() external int lcsVersion;
-  @Uint32() external int lcsSize;
-  @Int32() external int lcsCSType;
-  @Int32() external int lcsIntent;
-  external CIEXYZTRIPLE lcsEndpoints;
-  @Uint32() external int lcsGammaRed;
-  @Uint32() external int lcsGammaGreen;
-  @Uint32() external int lcsGammaBlue;
-  external __ushort__ lcsFilename;
-}
-
 class XYZColorF extends Struct {
   @Float() external double X;
   @Float() external double Y;
@@ -104,7 +66,8 @@ class JabColorF extends Struct {
 }
 
 class GamutShellTriangle extends Struct {
-  external __uint__ aVertexIndex;
+  @Array(3)
+  external Array<Uint32> aVertexIndex;
 }
 
 class GamutShell extends Struct {
@@ -156,8 +119,10 @@ class NAMED_PROFILE_INFO extends Struct {
   @Uint32() external int dwFlags;
   @Uint32() external int dwCount;
   @Uint32() external int dwCountDevCoordinates;
-  external __byte__ szPrefix;
-  external __byte__ szSuffix;
+  @Array(32)
+  external Array<Int8> szPrefix;
+  @Array(32)
+  external Array<Int8> szSuffix;
 }
 
 class GRAYCOLOR extends Struct {
@@ -206,7 +171,8 @@ class NAMEDCOLOR extends Struct {
 }
 
 class HiFiCOLOR extends Struct {
-  external __ubyte__ channel;
+  @Array(8)
+  external Array<Uint8> channel;
 }
 
 class COLOR extends Struct {
@@ -229,17 +195,20 @@ class PROFILEHEADER extends Struct {
   @Uint32() external int phClass;
   @Uint32() external int phDataColorSpace;
   @Uint32() external int phConnectionSpace;
-  external __uint__ phDateTime;
+  @Array(3)
+  external Array<Uint32> phDateTime;
   @Uint32() external int phSignature;
   @Uint32() external int phPlatform;
   @Uint32() external int phProfileFlags;
   @Uint32() external int phManufacturer;
   @Uint32() external int phModel;
-  external __uint__ phAttributes;
+  @Array(2)
+  external Array<Uint32> phAttributes;
   @Uint32() external int phRenderingIntent;
   external CIEXYZ phIlluminant;
   @Uint32() external int phCreator;
-  external __ubyte__ phReserved;
+  @Array(44)
+  external Array<Uint8> phReserved;
 }
 
 class PROFILE extends Struct {
@@ -255,7 +224,8 @@ class ENUMTYPEA extends Struct {
   external Pointer<Utf8> pDeviceName;
   @Uint32() external int dwMediaType;
   @Uint32() external int dwDitheringMode;
-  external __uint__ dwResolution;
+  @Array(2)
+  external Array<Uint32> dwResolution;
   @Uint32() external int dwCMMType;
   @Uint32() external int dwClass;
   @Uint32() external int dwDataColorSpace;
@@ -265,7 +235,8 @@ class ENUMTYPEA extends Struct {
   @Uint32() external int dwProfileFlags;
   @Uint32() external int dwManufacturer;
   @Uint32() external int dwModel;
-  external __uint__ dwAttributes;
+  @Array(2)
+  external Array<Uint32> dwAttributes;
   @Uint32() external int dwRenderingIntent;
   @Uint32() external int dwCreator;
   @Uint32() external int dwDeviceClass;
@@ -278,7 +249,8 @@ class ENUMTYPEW extends Struct {
   external Pointer<Utf16> pDeviceName;
   @Uint32() external int dwMediaType;
   @Uint32() external int dwDitheringMode;
-  external __uint__ dwResolution;
+  @Array(2)
+  external Array<Uint32> dwResolution;
   @Uint32() external int dwCMMType;
   @Uint32() external int dwClass;
   @Uint32() external int dwDataColorSpace;
@@ -288,7 +260,8 @@ class ENUMTYPEW extends Struct {
   @Uint32() external int dwProfileFlags;
   @Uint32() external int dwManufacturer;
   @Uint32() external int dwModel;
-  external __uint__ dwAttributes;
+  @Array(2)
+  external Array<Uint32> dwAttributes;
   @Uint32() external int dwRenderingIntent;
   @Uint32() external int dwCreator;
   @Uint32() external int dwDeviceClass;
@@ -364,8 +337,51 @@ class DisplayStateID extends Struct {
 }
 
 class DisplayTransformLut extends Struct {
-  external __ushort__ red;
-  external __ushort__ green;
-  external __ushort__ blue;
+  @Array(129)
+  external Array<Uint16> red;
+  @Array(129)
+  external Array<Uint16> green;
+  @Array(129)
+  external Array<Uint16> blue;
+}
+
+class CIEXYZ extends Struct {
+  @Int32() external int ciexyzX;
+  @Int32() external int ciexyzY;
+  @Int32() external int ciexyzZ;
+}
+
+class CIEXYZTRIPLE extends Struct {
+  external CIEXYZ ciexyzRed;
+  external CIEXYZ ciexyzGreen;
+  external CIEXYZ ciexyzBlue;
+}
+
+class LOGCOLORSPACEA extends Struct {
+  @Uint32() external int lcsSignature;
+  @Uint32() external int lcsVersion;
+  @Uint32() external int lcsSize;
+  @Int32() external int lcsCSType;
+  @Int32() external int lcsIntent;
+  external CIEXYZTRIPLE lcsEndpoints;
+  @Uint32() external int lcsGammaRed;
+  @Uint32() external int lcsGammaGreen;
+  @Uint32() external int lcsGammaBlue;
+  @Array(129)
+  external Array<Int8> lcsFilename;
+}
+
+class LOGCOLORSPACEW extends Struct {
+  @Uint32() external int lcsSignature;
+  @Uint32() external int lcsVersion;
+  @Uint32() external int lcsSize;
+  @Int32() external int lcsCSType;
+  @Int32() external int lcsIntent;
+  external CIEXYZTRIPLE lcsEndpoints;
+  @Uint32() external int lcsGammaRed;
+  @Uint32() external int lcsGammaGreen;
+  @Uint32() external int lcsGammaBlue;
+  @Array(129)
+  external Array<Uint16> lcsFilename;
 }
 

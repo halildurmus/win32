@@ -611,7 +611,8 @@ class LINEFORWARD extends Struct {
 class LINEFORWARDLIST extends Struct {
   @Uint32() external int dwTotalSize;
   @Uint32() external int dwNumEntries;
-  external LINEFORWARD ForwardList;
+  @Array(1)
+  external Array<LINEFORWARD> ForwardList;
 }
 
 class LINEGENERATETONE extends Struct {
@@ -720,43 +721,63 @@ class LINEPROXYREQUEST extends Struct {
 }
 
 class LINEREQMAKECALL extends Struct {
-  external __byte__ szDestAddress;
-  external __byte__ szAppName;
-  external __byte__ szCalledParty;
-  external __byte__ szComment;
+  @Array(80)
+  external Array<Int8> szDestAddress;
+  @Array(40)
+  external Array<Int8> szAppName;
+  @Array(40)
+  external Array<Int8> szCalledParty;
+  @Array(80)
+  external Array<Int8> szComment;
 }
 
 class linereqmakecallW_tag extends Struct {
-  external __ushort__ szDestAddress;
-  external __ushort__ szAppName;
-  external __ushort__ szCalledParty;
-  external __ushort__ szComment;
+  @Array(80)
+  external Array<Uint16> szDestAddress;
+  @Array(40)
+  external Array<Uint16> szAppName;
+  @Array(40)
+  external Array<Uint16> szCalledParty;
+  @Array(80)
+  external Array<Uint16> szComment;
 }
 
 class LINEREQMEDIACALL extends Struct {
   @IntPtr() external int hWnd;
   @IntPtr() external int wRequestID;
-  external __byte__ szDeviceClass;
-  external __ubyte__ ucDeviceID;
+  @Array(40)
+  external Array<Int8> szDeviceClass;
+  @Array(40)
+  external Array<Uint8> ucDeviceID;
   @Uint32() external int dwSize;
   @Uint32() external int dwSecure;
-  external __byte__ szDestAddress;
-  external __byte__ szAppName;
-  external __byte__ szCalledParty;
-  external __byte__ szComment;
+  @Array(80)
+  external Array<Int8> szDestAddress;
+  @Array(40)
+  external Array<Int8> szAppName;
+  @Array(40)
+  external Array<Int8> szCalledParty;
+  @Array(80)
+  external Array<Int8> szComment;
 }
 
 class linereqmediacallW_tag extends Struct {
   @IntPtr() external int hWnd;
   @IntPtr() external int wRequestID;
-  external __ushort__ szDeviceClass;
-  external __ubyte__ ucDeviceID;
+  @Array(40)
+  external Array<Uint16> szDeviceClass;
+  @Array(40)
+  external Array<Uint8> ucDeviceID;
   @Uint32() external int dwSize;
   @Uint32() external int dwSecure;
-  external __ushort__ szDestAddress;
-  external __ushort__ szAppName;
-  external __ushort__ szCalledParty;
-  external __ushort__ szComment;
+  @Array(80)
+  external Array<Uint16> szDestAddress;
+  @Array(40)
+  external Array<Uint16> szAppName;
+  @Array(40)
+  external Array<Uint16> szCalledParty;
+  @Array(80)
+  external Array<Uint16> szComment;
 }
 
 class LINETERMCAPS extends Struct {

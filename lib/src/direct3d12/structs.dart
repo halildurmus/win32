@@ -133,7 +133,8 @@ class D3D12_RENDER_TARGET_BLEND_DESC extends Struct {
 class D3D12_BLEND_DESC extends Struct {
   @Int32() external int AlphaToCoverageEnable;
   @Int32() external int IndependentBlendEnable;
-  external D3D12_RENDER_TARGET_BLEND_DESC RenderTarget;
+  @Array(8)
+  external Array<D3D12_RENDER_TARGET_BLEND_DESC> RenderTarget;
 }
 
 class D3D12_RASTERIZER_DESC extends Struct {
@@ -189,7 +190,8 @@ class D3D12_GRAPHICS_PIPELINE_STATE_DESC extends Struct {
   @Uint32() external int IBStripCutValue;
   @Uint32() external int PrimitiveTopologyType;
   @Uint32() external int NumRenderTargets;
-  @Uint32() external int RTVFormats;
+  @Array(8)
+  external Array<Uint32> RTVFormats;
   @Uint32() external int DSVFormat;
   external DXGI_SAMPLE_DESC SampleDesc;
   @Uint32() external int NodeMask;
@@ -206,7 +208,8 @@ class D3D12_COMPUTE_PIPELINE_STATE_DESC extends Struct {
 }
 
 class D3D12_RT_FORMAT_ARRAY extends Struct {
-  @Uint32() external int RTFormats;
+  @Array(8)
+  external Array<Uint32> RTFormats;
   @Uint32() external int NumRenderTargets;
 }
 
@@ -637,7 +640,8 @@ class D3D12_SAMPLER_DESC extends Struct {
   @Float() external double MipLODBias;
   @Uint32() external int MaxAnisotropy;
   @Uint32() external int ComparisonFunc;
-  external __float__ BorderColor;
+  @Array(4)
+  external Array<Float> BorderColor;
   @Float() external double MinLOD;
   @Float() external double MaxLOD;
 }
@@ -1133,7 +1137,8 @@ class D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_SERIALIZATION_DESC 
 
 class D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER extends Struct {
   external GUID DriverOpaqueGUID;
-  external __ubyte__ DriverOpaqueVersioningData;
+  @Array(16)
+  external Array<Uint8> DriverOpaqueVersioningData;
 }
 
 class D3D12_SERIALIZED_RAYTRACING_ACCELERATION_STRUCTURE_HEADER extends Struct {
@@ -1148,7 +1153,8 @@ class D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_CURRENT_SIZE_DESC e
 }
 
 class D3D12_RAYTRACING_INSTANCE_DESC extends Struct {
-  external __float__ Transform;
+  @Array(12)
+  external Array<Float> Transform;
   @Uint32() external int _bitfield1;
   @Uint32() external int _bitfield2;
   @Uint64() external int AccelerationStructure;

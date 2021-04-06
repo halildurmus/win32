@@ -146,9 +146,12 @@ class D3DPRESENT_PARAMETERS extends Struct {
 }
 
 class D3DGAMMARAMP extends Struct {
-  external __ushort__ red;
-  external __ushort__ green;
-  external __ushort__ blue;
+  @Array(129)
+  external Array<Uint16> red;
+  @Array(129)
+  external Array<Uint16> green;
+  @Array(129)
+  external Array<Uint16> blue;
 }
 
 class D3DVERTEXBUFFER_DESC extends Struct {
@@ -232,9 +235,12 @@ class D3DTRIPATCH_INFO extends Struct {
 }
 
 class D3DADAPTER_IDENTIFIER9 extends Struct {
-  external __byte__ Driver;
-  external __byte__ Description;
-  external __byte__ DeviceName;
+  @Array(130)
+  external Array<Int8> Driver;
+  @Array(130)
+  external Array<Int8> Description;
+  @Array(32)
+  external Array<Int8> DeviceName;
   @Int64() external int DriverVersion;
   @Uint32() external int VendorId;
   @Uint32() external int DeviceId;
@@ -264,7 +270,8 @@ class D3DRESOURCESTATS extends Struct {
 }
 
 class D3DDEVINFO_RESOURCEMANAGER extends Struct {
-  external D3DRESOURCESTATS stats;
+  @Array(8)
+  external Array<D3DRESOURCESTATS> stats;
 }
 
 class D3DDEVINFO_D3DVERTEXSTATS extends Struct {
@@ -356,7 +363,8 @@ class D3DDISPLAYMODEFILTER extends Struct {
 }
 
 class D3D_OMAC extends Struct {
-  external __ubyte__ Omac;
+  @Array(16)
+  external Array<Uint8> Omac;
 }
 
 class D3DAUTHENTICATEDCHANNEL_QUERY_INPUT extends Struct {

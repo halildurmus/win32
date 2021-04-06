@@ -51,26 +51,6 @@ class L2_NOTIFICATION_DATA extends Struct {
   external Pointer pData;
 }
 
-class SOCKET_ADDRESS_LIST extends Struct {
-  @Int32() external int iAddressCount;
-  external SOCKET_ADDRESS Address;
-}
-
-class SOCKADDR_STORAGE_LH extends Struct {
-  @Uint16() external int ss_family;
-  external __byte__ __ss_pad1;
-  @Int64() external int __ss_align;
-  external __byte__ __ss_pad2;
-}
-
-class SOCKADDR_IN6_LH extends Struct {
-  @Uint16() external int sin6_family;
-  @Uint16() external int sin6_port;
-  @Uint32() external int sin6_flowinfo;
-  external in6_addr sin6_addr;
-  @Uint32() external int Anonymous;
-}
-
 class NET_PHYSICAL_LOCATION_LH extends Struct {
   @Uint32() external int BusNumber;
   @Uint32() external int SlotNumber;
@@ -79,7 +59,8 @@ class NET_PHYSICAL_LOCATION_LH extends Struct {
 
 class IF_COUNTED_STRING_LH extends Struct {
   @Uint16() external int Length;
-  external __ushort__ String;
+  @Array(129)
+  external Array<Uint16> String;
 }
 
 class NDIS_INTERFACE_INFORMATION extends Struct {
@@ -115,5 +96,32 @@ class NDIS_INTERFACE_INFORMATION extends Struct {
   @Uint64() external int ifHCOutBroadcastOctets;
   @Uint32() external int CompartmentId;
   @Uint32() external int SupportedStatistics;
+}
+
+class SOCKET_ADDRESS_LIST extends Struct {
+  @Int32() external int iAddressCount;
+  @Array(1)
+  external Array<SOCKET_ADDRESS> Address;
+}
+
+class SOCKADDR_STORAGE_XP extends Struct {
+  @Int16() external int ss_family;
+  @Array(6)
+  external Array<Int8> __ss_pad1;
+  @Int64() external int __ss_align;
+  @Array(112)
+  external Array<Int8> __ss_pad2;
+}
+
+class IN6_ADDR extends Struct {
+  @Uint32() external int u;
+}
+
+class SOCKADDR_IN6_W2KSP1 extends Struct {
+  @Int16() external int sin6_family;
+  @Uint16() external int sin6_port;
+  @Uint32() external int sin6_flowinfo;
+  external IN6_ADDR sin6_addr;
+  @Uint32() external int sin6_scope_id;
 }
 

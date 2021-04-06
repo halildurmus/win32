@@ -1,4 +1,10 @@
 /// {@category Enum}
+class ADSI_DIALECT_ENUM {
+  static const ADSI_DIALECT_LDAP = 0x00000000;
+  static const ADSI_DIALECT_SQL = 0x00000001;
+}
+
+/// {@category Enum}
 class ADSTYPEENUM {
   static const ADSTYPE_INVALID = 0x00000000;
   static const ADSTYPE_DN_STRING = 0x00000001;
@@ -32,6 +38,36 @@ class ADSTYPEENUM {
 }
 
 /// {@category Enum}
+class ADS_ACEFLAG_ENUM {
+  static const ADS_ACEFLAG_INHERIT_ACE = 0x00000002;
+  static const ADS_ACEFLAG_NO_PROPAGATE_INHERIT_ACE = 0x00000004;
+  static const ADS_ACEFLAG_INHERIT_ONLY_ACE = 0x00000008;
+  static const ADS_ACEFLAG_INHERITED_ACE = 0x00000010;
+  static const ADS_ACEFLAG_VALID_INHERIT_FLAGS = 0x0000001f;
+  static const ADS_ACEFLAG_SUCCESSFUL_ACCESS = 0x00000040;
+  static const ADS_ACEFLAG_FAILED_ACCESS = 0x00000080;
+}
+
+/// {@category Enum}
+class ADS_ACETYPE_ENUM {
+  static const ADS_ACETYPE_ACCESS_ALLOWED = 0x00000000;
+  static const ADS_ACETYPE_ACCESS_DENIED = 0x00000001;
+  static const ADS_ACETYPE_SYSTEM_AUDIT = 0x00000002;
+  static const ADS_ACETYPE_ACCESS_ALLOWED_OBJECT = 0x00000005;
+  static const ADS_ACETYPE_ACCESS_DENIED_OBJECT = 0x00000006;
+  static const ADS_ACETYPE_SYSTEM_AUDIT_OBJECT = 0x00000007;
+  static const ADS_ACETYPE_SYSTEM_ALARM_OBJECT = 0x00000008;
+  static const ADS_ACETYPE_ACCESS_ALLOWED_CALLBACK = 0x00000009;
+  static const ADS_ACETYPE_ACCESS_DENIED_CALLBACK = 0x0000000a;
+  static const ADS_ACETYPE_ACCESS_ALLOWED_CALLBACK_OBJECT = 0x0000000b;
+  static const ADS_ACETYPE_ACCESS_DENIED_CALLBACK_OBJECT = 0x0000000c;
+  static const ADS_ACETYPE_SYSTEM_AUDIT_CALLBACK = 0x0000000d;
+  static const ADS_ACETYPE_SYSTEM_ALARM_CALLBACK = 0x0000000e;
+  static const ADS_ACETYPE_SYSTEM_AUDIT_CALLBACK_OBJECT = 0x0000000f;
+  static const ADS_ACETYPE_SYSTEM_ALARM_CALLBACK_OBJECT = 0x00000010;
+}
+
+/// {@category Enum}
 class ADS_AUTHENTICATION_ENUM {
   static const ADS_SECURE_AUTHENTICATION = 0x00000001;
   static const ADS_USE_ENCRYPTION = 0x00000002;
@@ -49,10 +85,11 @@ class ADS_AUTHENTICATION_ENUM {
 }
 
 /// {@category Enum}
-class ADS_STATUSENUM {
-  static const ADS_STATUS_S_OK = 0x00000000;
-  static const ADS_STATUS_INVALID_SEARCHPREF = 0x00000001;
-  static const ADS_STATUS_INVALID_SEARCHPREFVALUE = 0x00000002;
+class ADS_CHASE_REFERRALS_ENUM {
+  static const ADS_CHASE_REFERRALS_NEVER = 0x00000000;
+  static const ADS_CHASE_REFERRALS_SUBORDINATE = 0x00000020;
+  static const ADS_CHASE_REFERRALS_EXTERNAL = 0x00000040;
+  static const ADS_CHASE_REFERRALS_ALWAYS = 0x00000060;
 }
 
 /// {@category Enum}
@@ -64,10 +101,97 @@ class ADS_DEREFENUM {
 }
 
 /// {@category Enum}
-class ADS_SCOPEENUM {
-  static const ADS_SCOPE_BASE = 0x00000000;
-  static const ADS_SCOPE_ONELEVEL = 0x00000001;
-  static const ADS_SCOPE_SUBTREE = 0x00000002;
+class ADS_DISPLAY_ENUM {
+  static const ADS_DISPLAY_FULL = 0x00000001;
+  static const ADS_DISPLAY_VALUE_ONLY = 0x00000002;
+}
+
+/// {@category Enum}
+class ADS_ESCAPE_MODE_ENUM {
+  static const ADS_ESCAPEDMODE_DEFAULT = 0x00000001;
+  static const ADS_ESCAPEDMODE_ON = 0x00000002;
+  static const ADS_ESCAPEDMODE_OFF = 0x00000003;
+  static const ADS_ESCAPEDMODE_OFF_EX = 0x00000004;
+}
+
+/// {@category Enum}
+class ADS_FLAGTYPE_ENUM {
+  static const ADS_FLAG_OBJECT_TYPE_PRESENT = 0x00000001;
+  static const ADS_FLAG_INHERITED_OBJECT_TYPE_PRESENT = 0x00000002;
+}
+
+/// {@category Enum}
+class ADS_FORMAT_ENUM {
+  static const ADS_FORMAT_WINDOWS = 0x00000001;
+  static const ADS_FORMAT_WINDOWS_NO_SERVER = 0x00000002;
+  static const ADS_FORMAT_WINDOWS_DN = 0x00000003;
+  static const ADS_FORMAT_WINDOWS_PARENT = 0x00000004;
+  static const ADS_FORMAT_X500 = 0x00000005;
+  static const ADS_FORMAT_X500_NO_SERVER = 0x00000006;
+  static const ADS_FORMAT_X500_DN = 0x00000007;
+  static const ADS_FORMAT_X500_PARENT = 0x00000008;
+  static const ADS_FORMAT_SERVER = 0x00000009;
+  static const ADS_FORMAT_PROVIDER = 0x0000000a;
+  static const ADS_FORMAT_LEAF = 0x0000000b;
+}
+
+/// {@category Enum}
+class ADS_GROUP_TYPE_ENUM {
+  static const ADS_GROUP_TYPE_GLOBAL_GROUP = 0x00000002;
+  static const ADS_GROUP_TYPE_DOMAIN_LOCAL_GROUP = 0x00000004;
+  static const ADS_GROUP_TYPE_LOCAL_GROUP = 0x00000004;
+  static const ADS_GROUP_TYPE_UNIVERSAL_GROUP = 0x00000008;
+  static const ADS_GROUP_TYPE_SECURITY_ENABLED = 0x80000000;
+}
+
+/// {@category Enum}
+class ADS_NAME_INITTYPE_ENUM {
+  static const ADS_NAME_INITTYPE_DOMAIN = 0x00000001;
+  static const ADS_NAME_INITTYPE_SERVER = 0x00000002;
+  static const ADS_NAME_INITTYPE_GC = 0x00000003;
+}
+
+/// {@category Enum}
+class ADS_NAME_TYPE_ENUM {
+  static const ADS_NAME_TYPE_1779 = 0x00000001;
+  static const ADS_NAME_TYPE_CANONICAL = 0x00000002;
+  static const ADS_NAME_TYPE_NT4 = 0x00000003;
+  static const ADS_NAME_TYPE_DISPLAY = 0x00000004;
+  static const ADS_NAME_TYPE_DOMAIN_SIMPLE = 0x00000005;
+  static const ADS_NAME_TYPE_ENTERPRISE_SIMPLE = 0x00000006;
+  static const ADS_NAME_TYPE_GUID = 0x00000007;
+  static const ADS_NAME_TYPE_UNKNOWN = 0x00000008;
+  static const ADS_NAME_TYPE_USER_PRINCIPAL_NAME = 0x00000009;
+  static const ADS_NAME_TYPE_CANONICAL_EX = 0x0000000a;
+  static const ADS_NAME_TYPE_SERVICE_PRINCIPAL_NAME = 0x0000000b;
+  static const ADS_NAME_TYPE_SID_OR_SID_HISTORY_NAME = 0x0000000c;
+}
+
+/// {@category Enum}
+class ADS_OPTION_ENUM {
+  static const ADS_OPTION_SERVERNAME = 0x00000000;
+  static const ADS_OPTION_REFERRALS = 0x00000001;
+  static const ADS_OPTION_PAGE_SIZE = 0x00000002;
+  static const ADS_OPTION_SECURITY_MASK = 0x00000003;
+  static const ADS_OPTION_MUTUAL_AUTH_STATUS = 0x00000004;
+  static const ADS_OPTION_QUOTA = 0x00000005;
+  static const ADS_OPTION_PASSWORD_PORTNUMBER = 0x00000006;
+  static const ADS_OPTION_PASSWORD_METHOD = 0x00000007;
+  static const ADS_OPTION_ACCUMULATIVE_MODIFICATION = 0x00000008;
+  static const ADS_OPTION_SKIP_SID_LOOKUP = 0x00000009;
+}
+
+/// {@category Enum}
+class ADS_PASSWORD_ENCODING_ENUM {
+  static const ADS_PASSWORD_ENCODE_REQUIRE_SSL = 0x00000000;
+  static const ADS_PASSWORD_ENCODE_CLEAR = 0x00000001;
+}
+
+/// {@category Enum}
+class ADS_PATHTYPE_ENUM {
+  static const ADS_PATH_FILE = 0x00000001;
+  static const ADS_PATH_FILESHARE = 0x00000002;
+  static const ADS_PATH_REGISTRY = 0x00000003;
 }
 
 /// {@category Enum}
@@ -88,17 +212,70 @@ class ADS_PREFERENCES_ENUM {
 }
 
 /// {@category Enum}
-class ADSI_DIALECT_ENUM {
-  static const ADSI_DIALECT_LDAP = 0x00000000;
-  static const ADSI_DIALECT_SQL = 0x00000001;
+class ADS_PROPERTY_OPERATION_ENUM {
+  static const ADS_PROPERTY_CLEAR = 0x00000001;
+  static const ADS_PROPERTY_UPDATE = 0x00000002;
+  static const ADS_PROPERTY_APPEND = 0x00000003;
+  static const ADS_PROPERTY_DELETE = 0x00000004;
 }
 
 /// {@category Enum}
-class ADS_CHASE_REFERRALS_ENUM {
-  static const ADS_CHASE_REFERRALS_NEVER = 0x00000000;
-  static const ADS_CHASE_REFERRALS_SUBORDINATE = 0x00000020;
-  static const ADS_CHASE_REFERRALS_EXTERNAL = 0x00000040;
-  static const ADS_CHASE_REFERRALS_ALWAYS = 0x00000060;
+class ADS_RIGHTS_ENUM {
+  static const ADS_RIGHT_DELETE = 0x00010000;
+  static const ADS_RIGHT_READ_CONTROL = 0x00020000;
+  static const ADS_RIGHT_WRITE_DAC = 0x00040000;
+  static const ADS_RIGHT_WRITE_OWNER = 0x00080000;
+  static const ADS_RIGHT_SYNCHRONIZE = 0x00100000;
+  static const ADS_RIGHT_ACCESS_SYSTEM_SECURITY = 0x01000000;
+  static const ADS_RIGHT_GENERIC_READ = 0x80000000;
+  static const ADS_RIGHT_GENERIC_WRITE = 0x40000000;
+  static const ADS_RIGHT_GENERIC_EXECUTE = 0x20000000;
+  static const ADS_RIGHT_GENERIC_ALL = 0x10000000;
+  static const ADS_RIGHT_DS_CREATE_CHILD = 0x00000001;
+  static const ADS_RIGHT_DS_DELETE_CHILD = 0x00000002;
+  static const ADS_RIGHT_ACTRL_DS_LIST = 0x00000004;
+  static const ADS_RIGHT_DS_SELF = 0x00000008;
+  static const ADS_RIGHT_DS_READ_PROP = 0x00000010;
+  static const ADS_RIGHT_DS_WRITE_PROP = 0x00000020;
+  static const ADS_RIGHT_DS_DELETE_TREE = 0x00000040;
+  static const ADS_RIGHT_DS_LIST_OBJECT = 0x00000080;
+  static const ADS_RIGHT_DS_CONTROL_ACCESS = 0x00000100;
+}
+
+/// {@category Enum}
+class ADS_SCOPEENUM {
+  static const ADS_SCOPE_BASE = 0x00000000;
+  static const ADS_SCOPE_ONELEVEL = 0x00000001;
+  static const ADS_SCOPE_SUBTREE = 0x00000002;
+}
+
+/// {@category Enum}
+class ADS_SD_CONTROL_ENUM {
+  static const ADS_SD_CONTROL_SE_OWNER_DEFAULTED = 0x00000001;
+  static const ADS_SD_CONTROL_SE_GROUP_DEFAULTED = 0x00000002;
+  static const ADS_SD_CONTROL_SE_DACL_PRESENT = 0x00000004;
+  static const ADS_SD_CONTROL_SE_DACL_DEFAULTED = 0x00000008;
+  static const ADS_SD_CONTROL_SE_SACL_PRESENT = 0x00000010;
+  static const ADS_SD_CONTROL_SE_SACL_DEFAULTED = 0x00000020;
+  static const ADS_SD_CONTROL_SE_DACL_AUTO_INHERIT_REQ = 0x00000100;
+  static const ADS_SD_CONTROL_SE_SACL_AUTO_INHERIT_REQ = 0x00000200;
+  static const ADS_SD_CONTROL_SE_DACL_AUTO_INHERITED = 0x00000400;
+  static const ADS_SD_CONTROL_SE_SACL_AUTO_INHERITED = 0x00000800;
+  static const ADS_SD_CONTROL_SE_DACL_PROTECTED = 0x00001000;
+  static const ADS_SD_CONTROL_SE_SACL_PROTECTED = 0x00002000;
+  static const ADS_SD_CONTROL_SE_SELF_RELATIVE = 0x00008000;
+}
+
+/// {@category Enum}
+class ADS_SD_FORMAT_ENUM {
+  static const ADS_SD_FORMAT_IID = 0x00000001;
+  static const ADS_SD_FORMAT_RAW = 0x00000002;
+  static const ADS_SD_FORMAT_HEXSTRING = 0x00000003;
+}
+
+/// {@category Enum}
+class ADS_SD_REVISION_ENUM {
+  static const ADS_SD_REVISION_DS = 0x00000004;
 }
 
 /// {@category Enum}
@@ -125,17 +302,26 @@ class ADS_SEARCHPREF_ENUM {
 }
 
 /// {@category Enum}
-class ADS_PASSWORD_ENCODING_ENUM {
-  static const ADS_PASSWORD_ENCODE_REQUIRE_SSL = 0x00000000;
-  static const ADS_PASSWORD_ENCODE_CLEAR = 0x00000001;
+class ADS_SECURITY_INFO_ENUM {
+  static const ADS_SECURITY_INFO_OWNER = 0x00000001;
+  static const ADS_SECURITY_INFO_GROUP = 0x00000002;
+  static const ADS_SECURITY_INFO_DACL = 0x00000004;
+  static const ADS_SECURITY_INFO_SACL = 0x00000008;
 }
 
 /// {@category Enum}
-class ADS_PROPERTY_OPERATION_ENUM {
-  static const ADS_PROPERTY_CLEAR = 0x00000001;
-  static const ADS_PROPERTY_UPDATE = 0x00000002;
-  static const ADS_PROPERTY_APPEND = 0x00000003;
-  static const ADS_PROPERTY_DELETE = 0x00000004;
+class ADS_SETTYPE_ENUM {
+  static const ADS_SETTYPE_FULL = 0x00000001;
+  static const ADS_SETTYPE_PROVIDER = 0x00000002;
+  static const ADS_SETTYPE_SERVER = 0x00000003;
+  static const ADS_SETTYPE_DN = 0x00000004;
+}
+
+/// {@category Enum}
+class ADS_STATUSENUM {
+  static const ADS_STATUS_S_OK = 0x00000000;
+  static const ADS_STATUS_INVALID_SEARCHPREF = 0x00000001;
+  static const ADS_STATUS_INVALID_SEARCHPREFVALUE = 0x00000002;
 }
 
 /// {@category Enum}
@@ -150,15 +336,6 @@ class ADS_SYSTEMFLAG_ENUM {
   static const ADS_SYSTEMFLAG_CR_NTDS_DOMAIN = 0x00000002;
   static const ADS_SYSTEMFLAG_ATTR_NOT_REPLICATED = 0x00000001;
   static const ADS_SYSTEMFLAG_ATTR_IS_CONSTRUCTED = 0x00000004;
-}
-
-/// {@category Enum}
-class ADS_GROUP_TYPE_ENUM {
-  static const ADS_GROUP_TYPE_GLOBAL_GROUP = 0x00000002;
-  static const ADS_GROUP_TYPE_DOMAIN_LOCAL_GROUP = 0x00000004;
-  static const ADS_GROUP_TYPE_LOCAL_GROUP = 0x00000004;
-  static const ADS_GROUP_TYPE_UNIVERSAL_GROUP = 0x00000008;
-  static const ADS_GROUP_TYPE_SECURITY_ENABLED = 0x80000000;
 }
 
 /// {@category Enum}
@@ -187,180 +364,39 @@ class ADS_USER_FLAG_ENUM {
 }
 
 /// {@category Enum}
-class ADS_RIGHTS_ENUM {
-  static const ADS_RIGHT_DELETE = 0x00010000;
-  static const ADS_RIGHT_READ_CONTROL = 0x00020000;
-  static const ADS_RIGHT_WRITE_DAC = 0x00040000;
-  static const ADS_RIGHT_WRITE_OWNER = 0x00080000;
-  static const ADS_RIGHT_SYNCHRONIZE = 0x00100000;
-  static const ADS_RIGHT_ACCESS_SYSTEM_SECURITY = 0x01000000;
-  static const ADS_RIGHT_GENERIC_READ = 0x80000000;
-  static const ADS_RIGHT_GENERIC_WRITE = 0x40000000;
-  static const ADS_RIGHT_GENERIC_EXECUTE = 0x20000000;
-  static const ADS_RIGHT_GENERIC_ALL = 0x10000000;
-  static const ADS_RIGHT_DS_CREATE_CHILD = 0x00000001;
-  static const ADS_RIGHT_DS_DELETE_CHILD = 0x00000002;
-  static const ADS_RIGHT_ACTRL_DS_LIST = 0x00000004;
-  static const ADS_RIGHT_DS_SELF = 0x00000008;
-  static const ADS_RIGHT_DS_READ_PROP = 0x00000010;
-  static const ADS_RIGHT_DS_WRITE_PROP = 0x00000020;
-  static const ADS_RIGHT_DS_DELETE_TREE = 0x00000040;
-  static const ADS_RIGHT_DS_LIST_OBJECT = 0x00000080;
-  static const ADS_RIGHT_DS_CONTROL_ACCESS = 0x00000100;
+class DSROLE_MACHINE_ROLE {
+  static const DsRole_RoleStandaloneWorkstation = 0x00000000;
+  static const DsRole_RoleMemberWorkstation = 0x00000001;
+  static const DsRole_RoleStandaloneServer = 0x00000002;
+  static const DsRole_RoleMemberServer = 0x00000003;
+  static const DsRole_RoleBackupDomainController = 0x00000004;
+  static const DsRole_RolePrimaryDomainController = 0x00000005;
 }
 
 /// {@category Enum}
-class ADS_ACETYPE_ENUM {
-  static const ADS_ACETYPE_ACCESS_ALLOWED = 0x00000000;
-  static const ADS_ACETYPE_ACCESS_DENIED = 0x00000001;
-  static const ADS_ACETYPE_SYSTEM_AUDIT = 0x00000002;
-  static const ADS_ACETYPE_ACCESS_ALLOWED_OBJECT = 0x00000005;
-  static const ADS_ACETYPE_ACCESS_DENIED_OBJECT = 0x00000006;
-  static const ADS_ACETYPE_SYSTEM_AUDIT_OBJECT = 0x00000007;
-  static const ADS_ACETYPE_SYSTEM_ALARM_OBJECT = 0x00000008;
-  static const ADS_ACETYPE_ACCESS_ALLOWED_CALLBACK = 0x00000009;
-  static const ADS_ACETYPE_ACCESS_DENIED_CALLBACK = 0x0000000a;
-  static const ADS_ACETYPE_ACCESS_ALLOWED_CALLBACK_OBJECT = 0x0000000b;
-  static const ADS_ACETYPE_ACCESS_DENIED_CALLBACK_OBJECT = 0x0000000c;
-  static const ADS_ACETYPE_SYSTEM_AUDIT_CALLBACK = 0x0000000d;
-  static const ADS_ACETYPE_SYSTEM_ALARM_CALLBACK = 0x0000000e;
-  static const ADS_ACETYPE_SYSTEM_AUDIT_CALLBACK_OBJECT = 0x0000000f;
-  static const ADS_ACETYPE_SYSTEM_ALARM_CALLBACK_OBJECT = 0x00000010;
+class DSROLE_OPERATION_STATE {
+  static const DsRoleOperationIdle = 0x00000000;
+  static const DsRoleOperationActive = 0x00000001;
+  static const DsRoleOperationNeedReboot = 0x00000002;
 }
 
 /// {@category Enum}
-class ADS_ACEFLAG_ENUM {
-  static const ADS_ACEFLAG_INHERIT_ACE = 0x00000002;
-  static const ADS_ACEFLAG_NO_PROPAGATE_INHERIT_ACE = 0x00000004;
-  static const ADS_ACEFLAG_INHERIT_ONLY_ACE = 0x00000008;
-  static const ADS_ACEFLAG_INHERITED_ACE = 0x00000010;
-  static const ADS_ACEFLAG_VALID_INHERIT_FLAGS = 0x0000001f;
-  static const ADS_ACEFLAG_SUCCESSFUL_ACCESS = 0x00000040;
-  static const ADS_ACEFLAG_FAILED_ACCESS = 0x00000080;
+class DSROLE_PRIMARY_DOMAIN_INFO_LEVEL {
+  static const DsRolePrimaryDomainInfoBasic = 0x00000001;
+  static const DsRoleUpgradeStatus = 0x00000002;
+  static const DsRoleOperationState = 0x00000003;
 }
 
 /// {@category Enum}
-class ADS_FLAGTYPE_ENUM {
-  static const ADS_FLAG_OBJECT_TYPE_PRESENT = 0x00000001;
-  static const ADS_FLAG_INHERITED_OBJECT_TYPE_PRESENT = 0x00000002;
+class DSROLE_SERVER_STATE {
+  static const DsRoleServerUnknown = 0x00000000;
+  static const DsRoleServerPrimary = 0x00000001;
+  static const DsRoleServerBackup = 0x00000002;
 }
 
 /// {@category Enum}
-class ADS_SD_CONTROL_ENUM {
-  static const ADS_SD_CONTROL_SE_OWNER_DEFAULTED = 0x00000001;
-  static const ADS_SD_CONTROL_SE_GROUP_DEFAULTED = 0x00000002;
-  static const ADS_SD_CONTROL_SE_DACL_PRESENT = 0x00000004;
-  static const ADS_SD_CONTROL_SE_DACL_DEFAULTED = 0x00000008;
-  static const ADS_SD_CONTROL_SE_SACL_PRESENT = 0x00000010;
-  static const ADS_SD_CONTROL_SE_SACL_DEFAULTED = 0x00000020;
-  static const ADS_SD_CONTROL_SE_DACL_AUTO_INHERIT_REQ = 0x00000100;
-  static const ADS_SD_CONTROL_SE_SACL_AUTO_INHERIT_REQ = 0x00000200;
-  static const ADS_SD_CONTROL_SE_DACL_AUTO_INHERITED = 0x00000400;
-  static const ADS_SD_CONTROL_SE_SACL_AUTO_INHERITED = 0x00000800;
-  static const ADS_SD_CONTROL_SE_DACL_PROTECTED = 0x00001000;
-  static const ADS_SD_CONTROL_SE_SACL_PROTECTED = 0x00002000;
-  static const ADS_SD_CONTROL_SE_SELF_RELATIVE = 0x00008000;
-}
-
-/// {@category Enum}
-class ADS_SD_REVISION_ENUM {
-  static const ADS_SD_REVISION_DS = 0x00000004;
-}
-
-/// {@category Enum}
-class ADS_NAME_TYPE_ENUM {
-  static const ADS_NAME_TYPE_1779 = 0x00000001;
-  static const ADS_NAME_TYPE_CANONICAL = 0x00000002;
-  static const ADS_NAME_TYPE_NT4 = 0x00000003;
-  static const ADS_NAME_TYPE_DISPLAY = 0x00000004;
-  static const ADS_NAME_TYPE_DOMAIN_SIMPLE = 0x00000005;
-  static const ADS_NAME_TYPE_ENTERPRISE_SIMPLE = 0x00000006;
-  static const ADS_NAME_TYPE_GUID = 0x00000007;
-  static const ADS_NAME_TYPE_UNKNOWN = 0x00000008;
-  static const ADS_NAME_TYPE_USER_PRINCIPAL_NAME = 0x00000009;
-  static const ADS_NAME_TYPE_CANONICAL_EX = 0x0000000a;
-  static const ADS_NAME_TYPE_SERVICE_PRINCIPAL_NAME = 0x0000000b;
-  static const ADS_NAME_TYPE_SID_OR_SID_HISTORY_NAME = 0x0000000c;
-}
-
-/// {@category Enum}
-class ADS_NAME_INITTYPE_ENUM {
-  static const ADS_NAME_INITTYPE_DOMAIN = 0x00000001;
-  static const ADS_NAME_INITTYPE_SERVER = 0x00000002;
-  static const ADS_NAME_INITTYPE_GC = 0x00000003;
-}
-
-/// {@category Enum}
-class ADS_OPTION_ENUM {
-  static const ADS_OPTION_SERVERNAME = 0x00000000;
-  static const ADS_OPTION_REFERRALS = 0x00000001;
-  static const ADS_OPTION_PAGE_SIZE = 0x00000002;
-  static const ADS_OPTION_SECURITY_MASK = 0x00000003;
-  static const ADS_OPTION_MUTUAL_AUTH_STATUS = 0x00000004;
-  static const ADS_OPTION_QUOTA = 0x00000005;
-  static const ADS_OPTION_PASSWORD_PORTNUMBER = 0x00000006;
-  static const ADS_OPTION_PASSWORD_METHOD = 0x00000007;
-  static const ADS_OPTION_ACCUMULATIVE_MODIFICATION = 0x00000008;
-  static const ADS_OPTION_SKIP_SID_LOOKUP = 0x00000009;
-}
-
-/// {@category Enum}
-class ADS_SECURITY_INFO_ENUM {
-  static const ADS_SECURITY_INFO_OWNER = 0x00000001;
-  static const ADS_SECURITY_INFO_GROUP = 0x00000002;
-  static const ADS_SECURITY_INFO_DACL = 0x00000004;
-  static const ADS_SECURITY_INFO_SACL = 0x00000008;
-}
-
-/// {@category Enum}
-class ADS_SETTYPE_ENUM {
-  static const ADS_SETTYPE_FULL = 0x00000001;
-  static const ADS_SETTYPE_PROVIDER = 0x00000002;
-  static const ADS_SETTYPE_SERVER = 0x00000003;
-  static const ADS_SETTYPE_DN = 0x00000004;
-}
-
-/// {@category Enum}
-class ADS_FORMAT_ENUM {
-  static const ADS_FORMAT_WINDOWS = 0x00000001;
-  static const ADS_FORMAT_WINDOWS_NO_SERVER = 0x00000002;
-  static const ADS_FORMAT_WINDOWS_DN = 0x00000003;
-  static const ADS_FORMAT_WINDOWS_PARENT = 0x00000004;
-  static const ADS_FORMAT_X500 = 0x00000005;
-  static const ADS_FORMAT_X500_NO_SERVER = 0x00000006;
-  static const ADS_FORMAT_X500_DN = 0x00000007;
-  static const ADS_FORMAT_X500_PARENT = 0x00000008;
-  static const ADS_FORMAT_SERVER = 0x00000009;
-  static const ADS_FORMAT_PROVIDER = 0x0000000a;
-  static const ADS_FORMAT_LEAF = 0x0000000b;
-}
-
-/// {@category Enum}
-class ADS_DISPLAY_ENUM {
-  static const ADS_DISPLAY_FULL = 0x00000001;
-  static const ADS_DISPLAY_VALUE_ONLY = 0x00000002;
-}
-
-/// {@category Enum}
-class ADS_ESCAPE_MODE_ENUM {
-  static const ADS_ESCAPEDMODE_DEFAULT = 0x00000001;
-  static const ADS_ESCAPEDMODE_ON = 0x00000002;
-  static const ADS_ESCAPEDMODE_OFF = 0x00000003;
-  static const ADS_ESCAPEDMODE_OFF_EX = 0x00000004;
-}
-
-/// {@category Enum}
-class ADS_PATHTYPE_ENUM {
-  static const ADS_PATH_FILE = 0x00000001;
-  static const ADS_PATH_FILESHARE = 0x00000002;
-  static const ADS_PATH_REGISTRY = 0x00000003;
-}
-
-/// {@category Enum}
-class ADS_SD_FORMAT_ENUM {
-  static const ADS_SD_FORMAT_IID = 0x00000001;
-  static const ADS_SD_FORMAT_RAW = 0x00000002;
-  static const ADS_SD_FORMAT_HEXSTRING = 0x00000003;
+class DS_KCC_TASKID {
+  static const DS_KCC_TASKID_UPDATE_TOPOLOGY = 0x00000000;
 }
 
 /// {@category Enum}
@@ -368,30 +404,6 @@ class DS_MANGLE_FOR {
   static const DS_MANGLE_UNKNOWN = 0x00000000;
   static const DS_MANGLE_OBJECT_RDN_FOR_DELETION = 0x00000001;
   static const DS_MANGLE_OBJECT_RDN_FOR_NAME_CONFLICT = 0x00000002;
-}
-
-/// {@category Enum}
-class DS_NAME_FORMAT {
-  static const DS_UNKNOWN_NAME = 0x00000000;
-  static const DS_FQDN_1779_NAME = 0x00000001;
-  static const DS_NT4_ACCOUNT_NAME = 0x00000002;
-  static const DS_DISPLAY_NAME = 0x00000003;
-  static const DS_UNIQUE_ID_NAME = 0x00000006;
-  static const DS_CANONICAL_NAME = 0x00000007;
-  static const DS_USER_PRINCIPAL_NAME = 0x00000008;
-  static const DS_CANONICAL_NAME_EX = 0x00000009;
-  static const DS_SERVICE_PRINCIPAL_NAME = 0x0000000a;
-  static const DS_SID_OR_SID_HISTORY_NAME = 0x0000000b;
-  static const DS_DNS_DOMAIN_NAME = 0x0000000c;
-}
-
-/// {@category Enum}
-class DS_NAME_FLAGS {
-  static const DS_NAME_NO_FLAGS = 0x00000000;
-  static const DS_NAME_FLAG_SYNTACTICAL_ONLY = 0x00000001;
-  static const DS_NAME_FLAG_EVAL_AT_DC = 0x00000002;
-  static const DS_NAME_FLAG_GCVERIFY = 0x00000004;
-  static const DS_NAME_FLAG_TRUST_REFERRAL = 0x00000008;
 }
 
 /// {@category Enum}
@@ -407,40 +419,27 @@ class DS_NAME_ERROR {
 }
 
 /// {@category Enum}
-class DS_SPN_NAME_TYPE {
-  static const DS_SPN_DNS_HOST = 0x00000000;
-  static const DS_SPN_DN_HOST = 0x00000001;
-  static const DS_SPN_NB_HOST = 0x00000002;
-  static const DS_SPN_DOMAIN = 0x00000003;
-  static const DS_SPN_NB_DOMAIN = 0x00000004;
-  static const DS_SPN_SERVICE = 0x00000005;
+class DS_NAME_FLAGS {
+  static const DS_NAME_NO_FLAGS = 0x00000000;
+  static const DS_NAME_FLAG_SYNTACTICAL_ONLY = 0x00000001;
+  static const DS_NAME_FLAG_EVAL_AT_DC = 0x00000002;
+  static const DS_NAME_FLAG_GCVERIFY = 0x00000004;
+  static const DS_NAME_FLAG_TRUST_REFERRAL = 0x00000008;
 }
 
 /// {@category Enum}
-class DS_SPN_WRITE_OP {
-  static const DS_SPN_ADD_SPN_OP = 0x00000000;
-  static const DS_SPN_REPLACE_SPN_OP = 0x00000001;
-  static const DS_SPN_DELETE_SPN_OP = 0x00000002;
-}
-
-/// {@category Enum}
-class DS_REPSYNCALL_ERROR {
-  static const DS_REPSYNCALL_WIN32_ERROR_CONTACTING_SERVER = 0x00000000;
-  static const DS_REPSYNCALL_WIN32_ERROR_REPLICATING = 0x00000001;
-  static const DS_REPSYNCALL_SERVER_UNREACHABLE = 0x00000002;
-}
-
-/// {@category Enum}
-class DS_REPSYNCALL_EVENT {
-  static const DS_REPSYNCALL_EVENT_ERROR = 0x00000000;
-  static const DS_REPSYNCALL_EVENT_SYNC_STARTED = 0x00000001;
-  static const DS_REPSYNCALL_EVENT_SYNC_COMPLETED = 0x00000002;
-  static const DS_REPSYNCALL_EVENT_FINISHED = 0x00000003;
-}
-
-/// {@category Enum}
-class DS_KCC_TASKID {
-  static const DS_KCC_TASKID_UPDATE_TOPOLOGY = 0x00000000;
+class DS_NAME_FORMAT {
+  static const DS_UNKNOWN_NAME = 0x00000000;
+  static const DS_FQDN_1779_NAME = 0x00000001;
+  static const DS_NT4_ACCOUNT_NAME = 0x00000002;
+  static const DS_DISPLAY_NAME = 0x00000003;
+  static const DS_UNIQUE_ID_NAME = 0x00000006;
+  static const DS_CANONICAL_NAME = 0x00000007;
+  static const DS_USER_PRINCIPAL_NAME = 0x00000008;
+  static const DS_CANONICAL_NAME_EX = 0x00000009;
+  static const DS_SERVICE_PRINCIPAL_NAME = 0x0000000a;
+  static const DS_SID_OR_SID_HISTORY_NAME = 0x0000000b;
+  static const DS_DNS_DOMAIN_NAME = 0x0000000c;
 }
 
 /// {@category Enum}
@@ -470,33 +469,34 @@ class DS_REPL_OP_TYPE {
 }
 
 /// {@category Enum}
-class DSROLE_MACHINE_ROLE {
-  static const DsRole_RoleStandaloneWorkstation = 0x00000000;
-  static const DsRole_RoleMemberWorkstation = 0x00000001;
-  static const DsRole_RoleStandaloneServer = 0x00000002;
-  static const DsRole_RoleMemberServer = 0x00000003;
-  static const DsRole_RoleBackupDomainController = 0x00000004;
-  static const DsRole_RolePrimaryDomainController = 0x00000005;
+class DS_REPSYNCALL_ERROR {
+  static const DS_REPSYNCALL_WIN32_ERROR_CONTACTING_SERVER = 0x00000000;
+  static const DS_REPSYNCALL_WIN32_ERROR_REPLICATING = 0x00000001;
+  static const DS_REPSYNCALL_SERVER_UNREACHABLE = 0x00000002;
 }
 
 /// {@category Enum}
-class DSROLE_SERVER_STATE {
-  static const DsRoleServerUnknown = 0x00000000;
-  static const DsRoleServerPrimary = 0x00000001;
-  static const DsRoleServerBackup = 0x00000002;
+class DS_REPSYNCALL_EVENT {
+  static const DS_REPSYNCALL_EVENT_ERROR = 0x00000000;
+  static const DS_REPSYNCALL_EVENT_SYNC_STARTED = 0x00000001;
+  static const DS_REPSYNCALL_EVENT_SYNC_COMPLETED = 0x00000002;
+  static const DS_REPSYNCALL_EVENT_FINISHED = 0x00000003;
 }
 
 /// {@category Enum}
-class DSROLE_PRIMARY_DOMAIN_INFO_LEVEL {
-  static const DsRolePrimaryDomainInfoBasic = 0x00000001;
-  static const DsRoleUpgradeStatus = 0x00000002;
-  static const DsRoleOperationState = 0x00000003;
+class DS_SPN_NAME_TYPE {
+  static const DS_SPN_DNS_HOST = 0x00000000;
+  static const DS_SPN_DN_HOST = 0x00000001;
+  static const DS_SPN_NB_HOST = 0x00000002;
+  static const DS_SPN_DOMAIN = 0x00000003;
+  static const DS_SPN_NB_DOMAIN = 0x00000004;
+  static const DS_SPN_SERVICE = 0x00000005;
 }
 
 /// {@category Enum}
-class DSROLE_OPERATION_STATE {
-  static const DsRoleOperationIdle = 0x00000000;
-  static const DsRoleOperationActive = 0x00000001;
-  static const DsRoleOperationNeedReboot = 0x00000002;
+class DS_SPN_WRITE_OP {
+  static const DS_SPN_ADD_SPN_OP = 0x00000000;
+  static const DS_SPN_REPLACE_SPN_OP = 0x00000001;
+  static const DS_SPN_DELETE_SPN_OP = 0x00000002;
 }
 

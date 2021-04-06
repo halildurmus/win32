@@ -1,4 +1,10 @@
 /// {@category Enum}
+class GeneratorParametersType {
+  static const RDCGENTYPE_Unused = 0x00000000;
+  static const RDCGENTYPE_FilterMax = 0x00000001;
+}
+
+/// {@category Enum}
 class RDC_ErrorCode {
   static const RDC_NoError = 0x00000000;
   static const RDC_HeaderVersionNewer = 0x00000001;
@@ -14,20 +20,6 @@ class RDC_ErrorCode {
 }
 
 /// {@category Enum}
-class GeneratorParametersType {
-  static const RDCGENTYPE_Unused = 0x00000000;
-  static const RDCGENTYPE_FilterMax = 0x00000001;
-}
-
-/// {@category Enum}
-class RdcNeedType {
-  static const RDCNEED_SOURCE = 0x00000000;
-  static const RDCNEED_TARGET = 0x00000001;
-  static const RDCNEED_SEED = 0x00000002;
-  static const RDCNEED_SEED_MAX = 0x000000ff;
-}
-
-/// {@category Enum}
 class RdcCreatedTables {
   static const RDCTABLE_InvalidOrUnknown = 0x00000000;
   static const RDCTABLE_Existing = 0x00000001;
@@ -39,5 +31,13 @@ class RdcMappingAccessMode {
   static const RDCMAPPING_Undefined = 0x00000000;
   static const RDCMAPPING_ReadOnly = 0x00000001;
   static const RDCMAPPING_ReadWrite = 0x00000002;
+}
+
+/// {@category Enum}
+class RdcNeedType {
+  static const RDCNEED_SOURCE = 0x00000000;
+  static const RDCNEED_TARGET = 0x00000001;
+  static const RDCNEED_SEED = 0x00000002;
+  static const RDCNEED_SEED_MAX = 0x000000ff;
 }
 

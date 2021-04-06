@@ -43,13 +43,6 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class DXGI_RGBA extends Struct {
-  @Float() external double r;
-  @Float() external double g;
-  @Float() external double b;
-  @Float() external double a;
-}
-
 class DXGI_RATIONAL extends Struct {
   @Uint32() external int Numerator;
   @Uint32() external int Denominator;
@@ -69,7 +62,8 @@ class DXGI_RGB extends Struct {
 class DXGI_GAMMA_CONTROL extends Struct {
   external DXGI_RGB Scale;
   external DXGI_RGB Offset;
-  external DXGI_RGB GammaCurve;
+  @Array(132)
+  external Array<DXGI_RGB> GammaCurve;
 }
 
 class DXGI_GAMMA_CONTROL_CAPABILITIES extends Struct {
@@ -77,7 +71,8 @@ class DXGI_GAMMA_CONTROL_CAPABILITIES extends Struct {
   @Float() external double MaxConvertedValue;
   @Float() external double MinConvertedValue;
   @Uint32() external int NumGammaControlPoints;
-  external __float__ ControlPointPositions;
+  @Array(132)
+  external Array<Float> ControlPointPositions;
 }
 
 class DXGI_MODE_DESC extends Struct {
@@ -90,17 +85,22 @@ class DXGI_MODE_DESC extends Struct {
 }
 
 class DXGI_JPEG_DC_HUFFMAN_TABLE extends Struct {
-  external __ubyte__ CodeCounts;
-  external __ubyte__ CodeValues;
+  @Array(12)
+  external Array<Uint8> CodeCounts;
+  @Array(12)
+  external Array<Uint8> CodeValues;
 }
 
 class DXGI_JPEG_AC_HUFFMAN_TABLE extends Struct {
-  external __ubyte__ CodeCounts;
-  external __ubyte__ CodeValues;
+  @Array(16)
+  external Array<Uint8> CodeCounts;
+  @Array(128)
+  external Array<Uint8> CodeValues;
 }
 
 class DXGI_JPEG_QUANTIZATION_TABLE extends Struct {
-  external __ubyte__ Elements;
+  @Array(64)
+  external Array<Uint8> Elements;
 }
 
 class DXGI_FRAME_STATISTICS extends Struct {
@@ -117,7 +117,8 @@ class DXGI_MAPPED_RECT extends Struct {
 }
 
 class DXGI_ADAPTER_DESC extends Struct {
-  external __ushort__ Description;
+  @Array(128)
+  external Array<Uint16> Description;
   @Uint32() external int VendorId;
   @Uint32() external int DeviceId;
   @Uint32() external int SubSysId;
@@ -129,7 +130,8 @@ class DXGI_ADAPTER_DESC extends Struct {
 }
 
 class DXGI_OUTPUT_DESC extends Struct {
-  external __ushort__ DeviceName;
+  @Array(32)
+  external Array<Uint16> DeviceName;
   external RECT DesktopCoordinates;
   @Int32() external int AttachedToDesktop;
   @Uint32() external int Rotation;
@@ -159,7 +161,8 @@ class DXGI_SWAP_CHAIN_DESC extends Struct {
 }
 
 class DXGI_ADAPTER_DESC1 extends Struct {
-  external __ushort__ Description;
+  @Array(128)
+  external Array<Uint16> Description;
   @Uint32() external int VendorId;
   @Uint32() external int DeviceId;
   @Uint32() external int SubSysId;
@@ -172,8 +175,10 @@ class DXGI_ADAPTER_DESC1 extends Struct {
 }
 
 class DXGI_DISPLAY_COLOR_SPACE extends Struct {
-  external __float__ PrimaryCoordinates;
-  external __float__ WhitePoints;
+  @Array(16)
+  external Array<Float> PrimaryCoordinates;
+  @Array(32)
+  external Array<Float> WhitePoints;
 }
 
 class DXGI_OUTDUPL_MOVE_RECT extends Struct {
@@ -250,7 +255,8 @@ class DXGI_PRESENT_PARAMETERS extends Struct {
 }
 
 class DXGI_ADAPTER_DESC2 extends Struct {
-  external __ushort__ Description;
+  @Array(128)
+  external Array<Uint16> Description;
   @Uint32() external int VendorId;
   @Uint32() external int DeviceId;
   @Uint32() external int SubSysId;
@@ -295,10 +301,14 @@ class DXGI_QUERY_VIDEO_MEMORY_INFO extends Struct {
 }
 
 class DXGI_HDR_METADATA_HDR10 extends Struct {
-  external __ushort__ RedPrimary;
-  external __ushort__ GreenPrimary;
-  external __ushort__ BluePrimary;
-  external __ushort__ WhitePoint;
+  @Array(2)
+  external Array<Uint16> RedPrimary;
+  @Array(2)
+  external Array<Uint16> GreenPrimary;
+  @Array(2)
+  external Array<Uint16> BluePrimary;
+  @Array(2)
+  external Array<Uint16> WhitePoint;
   @Uint32() external int MaxMasteringLuminance;
   @Uint32() external int MinMasteringLuminance;
   @Uint16() external int MaxContentLightLevel;
@@ -306,11 +316,13 @@ class DXGI_HDR_METADATA_HDR10 extends Struct {
 }
 
 class DXGI_HDR_METADATA_HDR10PLUS extends Struct {
-  external __ubyte__ Data;
+  @Array(72)
+  external Array<Uint8> Data;
 }
 
 class DXGI_ADAPTER_DESC3 extends Struct {
-  external __ushort__ Description;
+  @Array(128)
+  external Array<Uint16> Description;
   @Uint32() external int VendorId;
   @Uint32() external int DeviceId;
   @Uint32() external int SubSysId;
@@ -325,17 +337,22 @@ class DXGI_ADAPTER_DESC3 extends Struct {
 }
 
 class DXGI_OUTPUT_DESC1 extends Struct {
-  external __ushort__ DeviceName;
+  @Array(32)
+  external Array<Uint16> DeviceName;
   external RECT DesktopCoordinates;
   @Int32() external int AttachedToDesktop;
   @Uint32() external int Rotation;
   @IntPtr() external int Monitor;
   @Uint32() external int BitsPerColor;
   @Uint32() external int ColorSpace;
-  external __float__ RedPrimary;
-  external __float__ GreenPrimary;
-  external __float__ BluePrimary;
-  external __float__ WhitePoint;
+  @Array(2)
+  external Array<Float> RedPrimary;
+  @Array(2)
+  external Array<Float> GreenPrimary;
+  @Array(2)
+  external Array<Float> BluePrimary;
+  @Array(2)
+  external Array<Float> WhitePoint;
   @Float() external double MinLuminance;
   @Float() external double MaxLuminance;
   @Float() external double MaxFullFrameLuminance;
@@ -362,5 +379,12 @@ class DXGI_INFO_QUEUE_FILTER_DESC extends Struct {
 class DXGI_INFO_QUEUE_FILTER extends Struct {
   external DXGI_INFO_QUEUE_FILTER_DESC AllowList;
   external DXGI_INFO_QUEUE_FILTER_DESC DenyList;
+}
+
+class DXGI_RGBA extends Struct {
+  @Float() external double r;
+  @Float() external double g;
+  @Float() external double b;
+  @Float() external double a;
 }
 

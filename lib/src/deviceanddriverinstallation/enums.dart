@@ -1,4 +1,27 @@
 /// {@category Enum}
+class CM_NOTIFY_ACTION {
+  static const CM_NOTIFY_ACTION_DEVICEINTERFACEARRIVAL = 0x00000000;
+  static const CM_NOTIFY_ACTION_DEVICEINTERFACEREMOVAL = 0x00000001;
+  static const CM_NOTIFY_ACTION_DEVICEQUERYREMOVE = 0x00000002;
+  static const CM_NOTIFY_ACTION_DEVICEQUERYREMOVEFAILED = 0x00000003;
+  static const CM_NOTIFY_ACTION_DEVICEREMOVEPENDING = 0x00000004;
+  static const CM_NOTIFY_ACTION_DEVICEREMOVECOMPLETE = 0x00000005;
+  static const CM_NOTIFY_ACTION_DEVICECUSTOMEVENT = 0x00000006;
+  static const CM_NOTIFY_ACTION_DEVICEINSTANCEENUMERATED = 0x00000007;
+  static const CM_NOTIFY_ACTION_DEVICEINSTANCESTARTED = 0x00000008;
+  static const CM_NOTIFY_ACTION_DEVICEINSTANCEREMOVED = 0x00000009;
+  static const CM_NOTIFY_ACTION_MAX = 0x0000000a;
+}
+
+/// {@category Enum}
+class CM_NOTIFY_FILTER_TYPE {
+  static const CM_NOTIFY_FILTER_TYPE_DEVICEINTERFACE = 0x00000000;
+  static const CM_NOTIFY_FILTER_TYPE_DEVICEHANDLE = 0x00000001;
+  static const CM_NOTIFY_FILTER_TYPE_DEVICEINSTANCE = 0x00000002;
+  static const CM_NOTIFY_FILTER_TYPE_MAX = 0x00000003;
+}
+
+/// {@category Enum}
 class CONFIGRET {
   static const CR_SUCCESS = 0x00000000;
   static const CR_DEFAULT = 0x00000001;
@@ -68,16 +91,6 @@ class CONFIGRET {
 }
 
 /// {@category Enum}
-class SetupFileLogInfo {
-  static const SetupFileLogSourceFilename = 0x00000000;
-  static const SetupFileLogChecksum = 0x00000001;
-  static const SetupFileLogDiskTagfile = 0x00000002;
-  static const SetupFileLogDiskDescription = 0x00000003;
-  static const SetupFileLogOtherInfo = 0x00000004;
-  static const SetupFileLogMax = 0x00000005;
-}
-
-/// {@category Enum}
 class PNP_VETO_TYPE {
   static const PNP_VetoTypeUnknown = 0x00000000;
   static const PNP_VetoLegacyDevice = 0x00000001;
@@ -96,31 +109,18 @@ class PNP_VETO_TYPE {
 }
 
 /// {@category Enum}
-class CM_NOTIFY_FILTER_TYPE {
-  static const CM_NOTIFY_FILTER_TYPE_DEVICEINTERFACE = 0x00000000;
-  static const CM_NOTIFY_FILTER_TYPE_DEVICEHANDLE = 0x00000001;
-  static const CM_NOTIFY_FILTER_TYPE_DEVICEINSTANCE = 0x00000002;
-  static const CM_NOTIFY_FILTER_TYPE_MAX = 0x00000003;
-}
-
-/// {@category Enum}
-class CM_NOTIFY_ACTION {
-  static const CM_NOTIFY_ACTION_DEVICEINTERFACEARRIVAL = 0x00000000;
-  static const CM_NOTIFY_ACTION_DEVICEINTERFACEREMOVAL = 0x00000001;
-  static const CM_NOTIFY_ACTION_DEVICEQUERYREMOVE = 0x00000002;
-  static const CM_NOTIFY_ACTION_DEVICEQUERYREMOVEFAILED = 0x00000003;
-  static const CM_NOTIFY_ACTION_DEVICEREMOVEPENDING = 0x00000004;
-  static const CM_NOTIFY_ACTION_DEVICEREMOVECOMPLETE = 0x00000005;
-  static const CM_NOTIFY_ACTION_DEVICECUSTOMEVENT = 0x00000006;
-  static const CM_NOTIFY_ACTION_DEVICEINSTANCEENUMERATED = 0x00000007;
-  static const CM_NOTIFY_ACTION_DEVICEINSTANCESTARTED = 0x00000008;
-  static const CM_NOTIFY_ACTION_DEVICEINSTANCEREMOVED = 0x00000009;
-  static const CM_NOTIFY_ACTION_MAX = 0x0000000a;
-}
-
-/// {@category Enum}
 class SetupDiBuildDriverInfoList_DriverTypeFlags {
   static const SPDIT_CLASSDRIVER = 0x00000001;
   static const SPDIT_COMPATDRIVER = 0x00000002;
+}
+
+/// {@category Enum}
+class SetupFileLogInfo {
+  static const SetupFileLogSourceFilename = 0x00000000;
+  static const SetupFileLogChecksum = 0x00000001;
+  static const SetupFileLogDiskTagfile = 0x00000002;
+  static const SetupFileLogDiskDescription = 0x00000003;
+  static const SetupFileLogOtherInfo = 0x00000004;
+  static const SetupFileLogMax = 0x00000005;
 }
 

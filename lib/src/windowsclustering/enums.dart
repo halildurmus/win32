@@ -1,586 +1,4 @@
 /// {@category Enum}
-class CLUSTER_QUORUM_TYPE {
-  static const OperationalQuorum = 0x00000000;
-  static const ModifyQuorum = 0x00000001;
-}
-
-/// {@category Enum}
-class NODE_CLUSTER_STATE {
-  static const ClusterStateNotInstalled = 0x00000000;
-  static const ClusterStateNotConfigured = 0x00000001;
-  static const ClusterStateNotRunning = 0x00000003;
-  static const ClusterStateRunning = 0x00000013;
-}
-
-/// {@category Enum}
-class CLUSTER_RESOURCE_STATE_CHANGE_REASON {
-  static const eResourceStateChangeReasonUnknown = 0x00000000;
-  static const eResourceStateChangeReasonMove = 0x00000001;
-  static const eResourceStateChangeReasonFailover = 0x00000002;
-  static const eResourceStateChangeReasonFailedMove = 0x00000003;
-  static const eResourceStateChangeReasonShutdown = 0x00000004;
-  static const eResourceStateChangeReasonRundown = 0x00000005;
-}
-
-/// {@category Enum}
-class CLUSTER_REG_COMMAND {
-  static const CLUSREG_COMMAND_NONE = 0x00000000;
-  static const CLUSREG_SET_VALUE = 0x00000001;
-  static const CLUSREG_CREATE_KEY = 0x00000002;
-  static const CLUSREG_DELETE_KEY = 0x00000003;
-  static const CLUSREG_DELETE_VALUE = 0x00000004;
-  static const CLUSREG_SET_KEY_SECURITY = 0x00000005;
-  static const CLUSREG_VALUE_DELETED = 0x00000006;
-  static const CLUSREG_READ_KEY = 0x00000007;
-  static const CLUSREG_READ_VALUE = 0x00000008;
-  static const CLUSREG_READ_ERROR = 0x00000009;
-  static const CLUSREG_CONTROL_COMMAND = 0x0000000a;
-  static const CLUSREG_CONDITION_EXISTS = 0x0000000b;
-  static const CLUSREG_CONDITION_NOT_EXISTS = 0x0000000c;
-  static const CLUSREG_CONDITION_IS_EQUAL = 0x0000000d;
-  static const CLUSREG_CONDITION_IS_NOT_EQUAL = 0x0000000e;
-  static const CLUSREG_CONDITION_IS_GREATER_THAN = 0x0000000f;
-  static const CLUSREG_CONDITION_IS_LESS_THAN = 0x00000010;
-  static const CLUSREG_CONDITION_KEY_EXISTS = 0x00000011;
-  static const CLUSREG_CONDITION_KEY_NOT_EXISTS = 0x00000012;
-  static const CLUSREG_LAST_COMMAND = 0x00000013;
-}
-
-/// {@category Enum}
-class CLUSGROUP_TYPE {
-  static const ClusGroupTypeCoreCluster = 0x00000001;
-  static const ClusGroupTypeAvailableStorage = 0x00000002;
-  static const ClusGroupTypeTemporary = 0x00000003;
-  static const ClusGroupTypeSharedVolume = 0x00000004;
-  static const ClusGroupTypeStoragePool = 0x00000005;
-  static const ClusGroupTypeFileServer = 0x00000064;
-  static const ClusGroupTypePrintServer = 0x00000065;
-  static const ClusGroupTypeDhcpServer = 0x00000066;
-  static const ClusGroupTypeDtc = 0x00000067;
-  static const ClusGroupTypeMsmq = 0x00000068;
-  static const ClusGroupTypeWins = 0x00000069;
-  static const ClusGroupTypeStandAloneDfs = 0x0000006a;
-  static const ClusGroupTypeGenericApplication = 0x0000006b;
-  static const ClusGroupTypeGenericService = 0x0000006c;
-  static const ClusGroupTypeGenericScript = 0x0000006d;
-  static const ClusGroupTypeIScsiNameService = 0x0000006e;
-  static const ClusGroupTypeVirtualMachine = 0x0000006f;
-  static const ClusGroupTypeTsSessionBroker = 0x00000070;
-  static const ClusGroupTypeIScsiTarget = 0x00000071;
-  static const ClusGroupTypeScaleoutFileServer = 0x00000072;
-  static const ClusGroupTypeVMReplicaBroker = 0x00000073;
-  static const ClusGroupTypeTaskScheduler = 0x00000074;
-  static const ClusGroupTypeClusterUpdateAgent = 0x00000075;
-  static const ClusGroupTypeScaleoutCluster = 0x00000076;
-  static const ClusGroupTypeStorageReplica = 0x00000077;
-  static const ClusGroupTypeVMReplicaCoordinator = 0x00000078;
-  static const ClusGroupTypeCrossClusterOrchestrator = 0x00000079;
-  static const ClusGroupTypeInfrastructureFileServer = 0x0000007a;
-  static const ClusGroupTypeUnknown = 0x0000270f;
-}
-
-/// {@category Enum}
-class CLUSTER_MGMT_POINT_TYPE {
-  static const CLUSTER_MGMT_POINT_TYPE_NONE = 0x00000000;
-  static const CLUSTER_MGMT_POINT_TYPE_CNO = 0x00000001;
-  static const CLUSTER_MGMT_POINT_TYPE_DNS_ONLY = 0x00000002;
-  static const CLUSTER_MGMT_POINT_TYPE_CNO_ONLY = 0x00000003;
-}
-
-/// {@category Enum}
-class CLUSTER_MGMT_POINT_RESTYPE {
-  static const CLUSTER_MGMT_POINT_RESTYPE_AUTO = 0x00000000;
-  static const CLUSTER_MGMT_POINT_RESTYPE_SNN = 0x00000001;
-  static const CLUSTER_MGMT_POINT_RESTYPE_DNN = 0x00000002;
-}
-
-/// {@category Enum}
-class CLUSTER_CLOUD_TYPE {
-  static const CLUSTER_CLOUD_TYPE_NONE = 0x00000000;
-  static const CLUSTER_CLOUD_TYPE_AZURE = 0x00000001;
-  static const CLUSTER_CLOUD_TYPE_MIXED = 0x00000080;
-  static const CLUSTER_CLOUD_TYPE_UNKNOWN = 0xffffffff;
-}
-
-/// {@category Enum}
-class CLUS_GROUP_START_SETTING {
-  static const CLUS_GROUP_START_ALWAYS = 0x00000000;
-  static const CLUS_GROUP_DO_NOT_START = 0x00000001;
-  static const CLUS_GROUP_START_ALLOWED = 0x00000002;
-}
-
-/// {@category Enum}
-class CLUS_AFFINITY_RULE_TYPE {
-  static const CLUS_AFFINITY_RULE_NONE = 0x00000000;
-  static const CLUS_AFFINITY_RULE_SAME_FAULT_DOMAIN = 0x00000001;
-  static const CLUS_AFFINITY_RULE_SAME_NODE = 0x00000002;
-  static const CLUS_AFFINITY_RULE_DIFFERENT_FAULT_DOMAIN = 0x00000003;
-  static const CLUS_AFFINITY_RULE_DIFFERENT_NODE = 0x00000004;
-  static const CLUS_AFFINITY_RULE_MIN = 0x00000000;
-  static const CLUS_AFFINITY_RULE_MAX = 0x00000004;
-}
-
-/// {@category Enum}
-class CLUSTER_QUORUM_VALUE {
-  static const CLUSTER_QUORUM_MAINTAINED = 0x00000000;
-  static const CLUSTER_QUORUM_LOST = 0x00000001;
-}
-
-/// {@category Enum}
-class CLUSTER_UPGRADE_PHASE {
-  static const ClusterUpgradePhaseInitialize = 0x00000001;
-  static const ClusterUpgradePhaseValidatingUpgrade = 0x00000002;
-  static const ClusterUpgradePhaseUpgradingComponents = 0x00000003;
-  static const ClusterUpgradePhaseInstallingNewComponents = 0x00000004;
-  static const ClusterUpgradePhaseUpgradeComplete = 0x00000005;
-}
-
-/// {@category Enum}
-class CLUSTER_CHANGE {
-  static const CLUSTER_CHANGE_NODE_STATE = 0x00000001;
-  static const CLUSTER_CHANGE_NODE_DELETED = 0x00000002;
-  static const CLUSTER_CHANGE_NODE_ADDED = 0x00000004;
-  static const CLUSTER_CHANGE_NODE_PROPERTY = 0x00000008;
-  static const CLUSTER_CHANGE_REGISTRY_NAME = 0x00000010;
-  static const CLUSTER_CHANGE_REGISTRY_ATTRIBUTES = 0x00000020;
-  static const CLUSTER_CHANGE_REGISTRY_VALUE = 0x00000040;
-  static const CLUSTER_CHANGE_REGISTRY_SUBTREE = 0x00000080;
-  static const CLUSTER_CHANGE_RESOURCE_STATE = 0x00000100;
-  static const CLUSTER_CHANGE_RESOURCE_DELETED = 0x00000200;
-  static const CLUSTER_CHANGE_RESOURCE_ADDED = 0x00000400;
-  static const CLUSTER_CHANGE_RESOURCE_PROPERTY = 0x00000800;
-  static const CLUSTER_CHANGE_GROUP_STATE = 0x00001000;
-  static const CLUSTER_CHANGE_GROUP_DELETED = 0x00002000;
-  static const CLUSTER_CHANGE_GROUP_ADDED = 0x00004000;
-  static const CLUSTER_CHANGE_GROUP_PROPERTY = 0x00008000;
-  static const CLUSTER_CHANGE_RESOURCE_TYPE_DELETED = 0x00010000;
-  static const CLUSTER_CHANGE_RESOURCE_TYPE_ADDED = 0x00020000;
-  static const CLUSTER_CHANGE_RESOURCE_TYPE_PROPERTY = 0x00040000;
-  static const CLUSTER_CHANGE_CLUSTER_RECONNECT = 0x00080000;
-  static const CLUSTER_CHANGE_NETWORK_STATE = 0x00100000;
-  static const CLUSTER_CHANGE_NETWORK_DELETED = 0x00200000;
-  static const CLUSTER_CHANGE_NETWORK_ADDED = 0x00400000;
-  static const CLUSTER_CHANGE_NETWORK_PROPERTY = 0x00800000;
-  static const CLUSTER_CHANGE_NETINTERFACE_STATE = 0x01000000;
-  static const CLUSTER_CHANGE_NETINTERFACE_DELETED = 0x02000000;
-  static const CLUSTER_CHANGE_NETINTERFACE_ADDED = 0x04000000;
-  static const CLUSTER_CHANGE_NETINTERFACE_PROPERTY = 0x08000000;
-  static const CLUSTER_CHANGE_QUORUM_STATE = 0x10000000;
-  static const CLUSTER_CHANGE_CLUSTER_STATE = 0x20000000;
-  static const CLUSTER_CHANGE_CLUSTER_PROPERTY = 0x40000000;
-  static const CLUSTER_CHANGE_HANDLE_CLOSE = 0x80000000;
-  static const CLUSTER_CHANGE_ALL = 0xffffffff;
-}
-
-/// {@category Enum}
-class CLUSTER_NOTIFICATIONS_VERSION {
-  static const CLUSTER_NOTIFICATIONS_V1 = 0x00000001;
-  static const CLUSTER_NOTIFICATIONS_V2 = 0x00000002;
-}
-
-/// {@category Enum}
-class CLUSTER_CHANGE_CLUSTER_V2 {
-  static const CLUSTER_CHANGE_CLUSTER_RECONNECT_V2 = 0x00000001;
-  static const CLUSTER_CHANGE_CLUSTER_STATE_V2 = 0x00000002;
-  static const CLUSTER_CHANGE_CLUSTER_GROUP_ADDED_V2 = 0x00000004;
-  static const CLUSTER_CHANGE_CLUSTER_HANDLE_CLOSE_V2 = 0x00000008;
-  static const CLUSTER_CHANGE_CLUSTER_NETWORK_ADDED_V2 = 0x00000010;
-  static const CLUSTER_CHANGE_CLUSTER_NODE_ADDED_V2 = 0x00000020;
-  static const CLUSTER_CHANGE_CLUSTER_RESOURCE_TYPE_ADDED_V2 = 0x00000040;
-  static const CLUSTER_CHANGE_CLUSTER_COMMON_PROPERTY_V2 = 0x00000080;
-  static const CLUSTER_CHANGE_CLUSTER_PRIVATE_PROPERTY_V2 = 0x00000100;
-  static const CLUSTER_CHANGE_CLUSTER_LOST_NOTIFICATIONS_V2 = 0x00000200;
-  static const CLUSTER_CHANGE_CLUSTER_RENAME_V2 = 0x00000400;
-  static const CLUSTER_CHANGE_CLUSTER_MEMBERSHIP_V2 = 0x00000800;
-  static const CLUSTER_CHANGE_CLUSTER_UPGRADED_V2 = 0x00001000;
-  static const CLUSTER_CHANGE_CLUSTER_ALL_V2 = 0x00001fff;
-}
-
-/// {@category Enum}
-class CLUSTER_CHANGE_GROUP_V2 {
-  static const CLUSTER_CHANGE_GROUP_DELETED_V2 = 0x00000001;
-  static const CLUSTER_CHANGE_GROUP_COMMON_PROPERTY_V2 = 0x00000002;
-  static const CLUSTER_CHANGE_GROUP_PRIVATE_PROPERTY_V2 = 0x00000004;
-  static const CLUSTER_CHANGE_GROUP_STATE_V2 = 0x00000008;
-  static const CLUSTER_CHANGE_GROUP_OWNER_NODE_V2 = 0x00000010;
-  static const CLUSTER_CHANGE_GROUP_PREFERRED_OWNERS_V2 = 0x00000020;
-  static const CLUSTER_CHANGE_GROUP_RESOURCE_ADDED_V2 = 0x00000040;
-  static const CLUSTER_CHANGE_GROUP_RESOURCE_GAINED_V2 = 0x00000080;
-  static const CLUSTER_CHANGE_GROUP_RESOURCE_LOST_V2 = 0x00000100;
-  static const CLUSTER_CHANGE_GROUP_HANDLE_CLOSE_V2 = 0x00000200;
-  static const CLUSTER_CHANGE_GROUP_ALL_V2 = 0x000003ff;
-}
-
-/// {@category Enum}
-class CLUSTER_CHANGE_GROUPSET_V2 {
-  static const CLUSTER_CHANGE_GROUPSET_DELETED_v2 = 0x00000001;
-  static const CLUSTER_CHANGE_GROUPSET_COMMON_PROPERTY_V2 = 0x00000002;
-  static const CLUSTER_CHANGE_GROUPSET_PRIVATE_PROPERTY_V2 = 0x00000004;
-  static const CLUSTER_CHANGE_GROUPSET_STATE_V2 = 0x00000008;
-  static const CLUSTER_CHANGE_GROUPSET_GROUP_ADDED = 0x00000010;
-  static const CLUSTER_CHANGE_GROUPSET_GROUP_REMOVED = 0x00000020;
-  static const CLUSTER_CHANGE_GROUPSET_DEPENDENCIES_V2 = 0x00000040;
-  static const CLUSTER_CHANGE_GROUPSET_DEPENDENTS_V2 = 0x00000080;
-  static const CLUSTER_CHANGE_GROUPSET_HANDLE_CLOSE_v2 = 0x00000100;
-  static const CLUSTER_CHANGE_GROUPSET_ALL_V2 = 0x000001ff;
-}
-
-/// {@category Enum}
-class CLUSTER_CHANGE_RESOURCE_V2 {
-  static const CLUSTER_CHANGE_RESOURCE_COMMON_PROPERTY_V2 = 0x00000001;
-  static const CLUSTER_CHANGE_RESOURCE_PRIVATE_PROPERTY_V2 = 0x00000002;
-  static const CLUSTER_CHANGE_RESOURCE_STATE_V2 = 0x00000004;
-  static const CLUSTER_CHANGE_RESOURCE_OWNER_GROUP_V2 = 0x00000008;
-  static const CLUSTER_CHANGE_RESOURCE_DEPENDENCIES_V2 = 0x00000010;
-  static const CLUSTER_CHANGE_RESOURCE_DEPENDENTS_V2 = 0x00000020;
-  static const CLUSTER_CHANGE_RESOURCE_POSSIBLE_OWNERS_V2 = 0x00000040;
-  static const CLUSTER_CHANGE_RESOURCE_DELETED_V2 = 0x00000080;
-  static const CLUSTER_CHANGE_RESOURCE_DLL_UPGRADED_V2 = 0x00000100;
-  static const CLUSTER_CHANGE_RESOURCE_HANDLE_CLOSE_V2 = 0x00000200;
-  static const CLUSTER_CHANGE_RESOURCE_TERMINAL_STATE_V2 = 0x00000400;
-  static const CLUSTER_CHANGE_RESOURCE_ALL_V2 = 0x000007ff;
-}
-
-/// {@category Enum}
-class CLUSTER_CHANGE_RESOURCE_TYPE_V2 {
-  static const CLUSTER_CHANGE_RESOURCE_TYPE_DELETED_V2 = 0x00000001;
-  static const CLUSTER_CHANGE_RESOURCE_TYPE_COMMON_PROPERTY_V2 = 0x00000002;
-  static const CLUSTER_CHANGE_RESOURCE_TYPE_PRIVATE_PROPERTY_V2 = 0x00000004;
-  static const CLUSTER_CHANGE_RESOURCE_TYPE_POSSIBLE_OWNERS_V2 = 0x00000008;
-  static const CLUSTER_CHANGE_RESOURCE_TYPE_DLL_UPGRADED_V2 = 0x00000010;
-  static const CLUSTER_RESOURCE_TYPE_SPECIFIC_V2 = 0x00000020;
-  static const CLUSTER_CHANGE_RESOURCE_TYPE_ALL_V2 = 0x0000003f;
-}
-
-/// {@category Enum}
-class CLUSTER_CHANGE_NETINTERFACE_V2 {
-  static const CLUSTER_CHANGE_NETINTERFACE_DELETED_V2 = 0x00000001;
-  static const CLUSTER_CHANGE_NETINTERFACE_COMMON_PROPERTY_V2 = 0x00000002;
-  static const CLUSTER_CHANGE_NETINTERFACE_PRIVATE_PROPERTY_V2 = 0x00000004;
-  static const CLUSTER_CHANGE_NETINTERFACE_STATE_V2 = 0x00000008;
-  static const CLUSTER_CHANGE_NETINTERFACE_HANDLE_CLOSE_V2 = 0x00000010;
-  static const CLUSTER_CHANGE_NETINTERFACE_ALL_V2 = 0x0000001f;
-}
-
-/// {@category Enum}
-class CLUSTER_CHANGE_NETWORK_V2 {
-  static const CLUSTER_CHANGE_NETWORK_DELETED_V2 = 0x00000001;
-  static const CLUSTER_CHANGE_NETWORK_COMMON_PROPERTY_V2 = 0x00000002;
-  static const CLUSTER_CHANGE_NETWORK_PRIVATE_PROPERTY_V2 = 0x00000004;
-  static const CLUSTER_CHANGE_NETWORK_STATE_V2 = 0x00000008;
-  static const CLUSTER_CHANGE_NETWORK_HANDLE_CLOSE_V2 = 0x00000010;
-  static const CLUSTER_CHANGE_NETWORK_ALL_V2 = 0x0000001f;
-}
-
-/// {@category Enum}
-class CLUSTER_CHANGE_NODE_V2 {
-  static const CLUSTER_CHANGE_NODE_NETINTERFACE_ADDED_V2 = 0x00000001;
-  static const CLUSTER_CHANGE_NODE_DELETED_V2 = 0x00000002;
-  static const CLUSTER_CHANGE_NODE_COMMON_PROPERTY_V2 = 0x00000004;
-  static const CLUSTER_CHANGE_NODE_PRIVATE_PROPERTY_V2 = 0x00000008;
-  static const CLUSTER_CHANGE_NODE_STATE_V2 = 0x00000010;
-  static const CLUSTER_CHANGE_NODE_GROUP_GAINED_V2 = 0x00000020;
-  static const CLUSTER_CHANGE_NODE_GROUP_LOST_V2 = 0x00000040;
-  static const CLUSTER_CHANGE_NODE_HANDLE_CLOSE_V2 = 0x00000080;
-  static const CLUSTER_CHANGE_NODE_ALL_V2 = 0x000000ff;
-}
-
-/// {@category Enum}
-class CLUSTER_CHANGE_REGISTRY_V2 {
-  static const CLUSTER_CHANGE_REGISTRY_ATTRIBUTES_V2 = 0x00000001;
-  static const CLUSTER_CHANGE_REGISTRY_NAME_V2 = 0x00000002;
-  static const CLUSTER_CHANGE_REGISTRY_SUBTREE_V2 = 0x00000004;
-  static const CLUSTER_CHANGE_REGISTRY_VALUE_V2 = 0x00000008;
-  static const CLUSTER_CHANGE_REGISTRY_HANDLE_CLOSE_V2 = 0x00000010;
-  static const CLUSTER_CHANGE_REGISTRY_ALL_V2 = 0x0000001f;
-}
-
-/// {@category Enum}
-class CLUSTER_CHANGE_QUORUM_V2 {
-  static const CLUSTER_CHANGE_QUORUM_STATE_V2 = 0x00000001;
-  static const CLUSTER_CHANGE_QUORUM_ALL_V2 = 0x00000001;
-}
-
-/// {@category Enum}
-class CLUSTER_CHANGE_SHARED_VOLUME_V2 {
-  static const CLUSTER_CHANGE_SHARED_VOLUME_STATE_V2 = 0x00000001;
-  static const CLUSTER_CHANGE_SHARED_VOLUME_ADDED_V2 = 0x00000002;
-  static const CLUSTER_CHANGE_SHARED_VOLUME_REMOVED_V2 = 0x00000004;
-  static const CLUSTER_CHANGE_SHARED_VOLUME_ALL_V2 = 0x00000007;
-}
-
-/// {@category Enum}
-class CLUSTER_CHANGE_SPACEPORT_V2 {
-  static const CLUSTER_CHANGE_SPACEPORT_CUSTOM_PNP_V2 = 0x00000001;
-}
-
-/// {@category Enum}
-class CLUSTER_CHANGE_NODE_UPGRADE_PHASE_V2 {
-  static const CLUSTER_CHANGE_UPGRADE_NODE_PREPARE = 0x00000001;
-  static const CLUSTER_CHANGE_UPGRADE_NODE_COMMIT = 0x00000002;
-  static const CLUSTER_CHANGE_UPGRADE_NODE_POSTCOMMIT = 0x00000004;
-  static const CLUSTER_CHANGE_UPGRADE_ALL = 0x00000007;
-}
-
-/// {@category Enum}
-class CLUSTER_OBJECT_TYPE {
-  static const CLUSTER_OBJECT_TYPE_NONE = 0x00000000;
-  static const CLUSTER_OBJECT_TYPE_CLUSTER = 0x00000001;
-  static const CLUSTER_OBJECT_TYPE_GROUP = 0x00000002;
-  static const CLUSTER_OBJECT_TYPE_RESOURCE = 0x00000003;
-  static const CLUSTER_OBJECT_TYPE_RESOURCE_TYPE = 0x00000004;
-  static const CLUSTER_OBJECT_TYPE_NETWORK_INTERFACE = 0x00000005;
-  static const CLUSTER_OBJECT_TYPE_NETWORK = 0x00000006;
-  static const CLUSTER_OBJECT_TYPE_NODE = 0x00000007;
-  static const CLUSTER_OBJECT_TYPE_REGISTRY = 0x00000008;
-  static const CLUSTER_OBJECT_TYPE_QUORUM = 0x00000009;
-  static const CLUSTER_OBJECT_TYPE_SHARED_VOLUME = 0x0000000a;
-  static const CLUSTER_OBJECT_TYPE_GROUPSET = 0x0000000d;
-  static const CLUSTER_OBJECT_TYPE_AFFINITYRULE = 0x00000010;
-}
-
-/// {@category Enum}
-class CLUSTERSET_OBJECT_TYPE {
-  static const CLUSTERSET_OBJECT_TYPE_NONE = 0x00000000;
-  static const CLUSTERSET_OBJECT_TYPE_MEMBER = 0x00000001;
-  static const CLUSTERSET_OBJECT_TYPE_WORKLOAD = 0x00000002;
-  static const CLUSTERSET_OBJECT_TYPE_DATABASE = 0x00000003;
-}
-
-/// {@category Enum}
-class CLUSTER_ENUM {
-  static const CLUSTER_ENUM_NODE = 0x00000001;
-  static const CLUSTER_ENUM_RESTYPE = 0x00000002;
-  static const CLUSTER_ENUM_RESOURCE = 0x00000004;
-  static const CLUSTER_ENUM_GROUP = 0x00000008;
-  static const CLUSTER_ENUM_NETWORK = 0x00000010;
-  static const CLUSTER_ENUM_NETINTERFACE = 0x00000020;
-  static const CLUSTER_ENUM_SHARED_VOLUME_GROUP = 0x20000000;
-  static const CLUSTER_ENUM_SHARED_VOLUME_RESOURCE = 0x40000000;
-  static const CLUSTER_ENUM_INTERNAL_NETWORK = 0x80000000;
-  static const CLUSTER_ENUM_ALL = 0x0000003f;
-}
-
-/// {@category Enum}
-class CLUSTER_NODE_ENUM {
-  static const CLUSTER_NODE_ENUM_NETINTERFACES = 0x00000001;
-  static const CLUSTER_NODE_ENUM_GROUPS = 0x00000002;
-  static const CLUSTER_NODE_ENUM_PREFERRED_GROUPS = 0x00000004;
-  static const CLUSTER_NODE_ENUM_ALL = 0x00000003;
-}
-
-/// {@category Enum}
-class CLUSTER_NODE_STATE {
-  static const ClusterNodeStateUnknown = 0xffffffff;
-  static const ClusterNodeUp = 0x00000000;
-  static const ClusterNodeDown = 0x00000001;
-  static const ClusterNodePaused = 0x00000002;
-  static const ClusterNodeJoining = 0x00000003;
-}
-
-/// {@category Enum}
-class CLUSTER_STORAGENODE_STATE {
-  static const ClusterStorageNodeStateUnknown = 0x00000000;
-  static const ClusterStorageNodeUp = 0x00000001;
-  static const ClusterStorageNodeDown = 0x00000002;
-  static const ClusterStorageNodePaused = 0x00000003;
-  static const ClusterStorageNodeStarting = 0x00000004;
-  static const ClusterStorageNodeStopping = 0x00000005;
-}
-
-/// {@category Enum}
-class CLUSTER_NODE_DRAIN_STATUS {
-  static const NodeDrainStatusNotInitiated = 0x00000000;
-  static const NodeDrainStatusInProgress = 0x00000001;
-  static const NodeDrainStatusCompleted = 0x00000002;
-  static const NodeDrainStatusFailed = 0x00000003;
-  static const ClusterNodeDrainStatusCount = 0x00000004;
-}
-
-/// {@category Enum}
-class CLUSTER_NODE_STATUS {
-  static const NodeStatusNormal = 0x00000000;
-  static const NodeStatusIsolated = 0x00000001;
-  static const NodeStatusQuarantined = 0x00000002;
-  static const NodeStatusDrainInProgress = 0x00000004;
-  static const NodeStatusDrainCompleted = 0x00000008;
-  static const NodeStatusDrainFailed = 0x00000010;
-  static const NodeStatusAvoidPlacement = 0x00000020;
-  static const NodeStatusMax = 0x00000033;
-}
-
-/// {@category Enum}
-class CLUSTER_GROUP_ENUM {
-  static const CLUSTER_GROUP_ENUM_CONTAINS = 0x00000001;
-  static const CLUSTER_GROUP_ENUM_NODES = 0x00000002;
-  static const CLUSTER_GROUP_ENUM_ALL = 0x00000003;
-}
-
-/// {@category Enum}
-class CLUSTER_GROUP_STATE {
-  static const ClusterGroupStateUnknown = 0xffffffff;
-  static const ClusterGroupOnline = 0x00000000;
-  static const ClusterGroupOffline = 0x00000001;
-  static const ClusterGroupFailed = 0x00000002;
-  static const ClusterGroupPartialOnline = 0x00000003;
-  static const ClusterGroupPending = 0x00000004;
-}
-
-/// {@category Enum}
-class CLUSTER_GROUP_PRIORITY {
-  static const PriorityDisabled = 0x00000000;
-  static const PriorityLow = 0x000003e8;
-  static const PriorityMedium = 0x000007d0;
-  static const PriorityHigh = 0x00000bb8;
-}
-
-/// {@category Enum}
-class CLUSTER_GROUP_AUTOFAILBACK_TYPE {
-  static const ClusterGroupPreventFailback = 0x00000000;
-  static const ClusterGroupAllowFailback = 0x00000001;
-  static const ClusterGroupFailbackTypeCount = 0x00000002;
-}
-
-/// {@category Enum}
-class CLUSTER_NODE_RESUME_FAILBACK_TYPE {
-  static const DoNotFailbackGroups = 0x00000000;
-  static const FailbackGroupsImmediately = 0x00000001;
-  static const FailbackGroupsPerPolicy = 0x00000002;
-  static const ClusterNodeResumeFailbackTypeCount = 0x00000003;
-}
-
-/// {@category Enum}
-class CLUSTER_RESOURCE_STATE {
-  static const ClusterResourceStateUnknown = 0xffffffff;
-  static const ClusterResourceInherited = 0x00000000;
-  static const ClusterResourceInitializing = 0x00000001;
-  static const ClusterResourceOnline = 0x00000002;
-  static const ClusterResourceOffline = 0x00000003;
-  static const ClusterResourceFailed = 0x00000004;
-  static const ClusterResourcePending = 0x00000080;
-  static const ClusterResourceOnlinePending = 0x00000081;
-  static const ClusterResourceOfflinePending = 0x00000082;
-}
-
-/// {@category Enum}
-class CLUSTER_RESOURCE_RESTART_ACTION {
-  static const ClusterResourceDontRestart = 0x00000000;
-  static const ClusterResourceRestartNoNotify = 0x00000001;
-  static const ClusterResourceRestartNotify = 0x00000002;
-  static const ClusterResourceRestartActionCount = 0x00000003;
-}
-
-/// {@category Enum}
-class CLUSTER_RESOURCE_EMBEDDED_FAILURE_ACTION {
-  static const ClusterResourceEmbeddedFailureActionNone = 0x00000000;
-  static const ClusterResourceEmbeddedFailureActionLogOnly = 0x00000001;
-  static const ClusterResourceEmbeddedFailureActionRecover = 0x00000002;
-}
-
-/// {@category Enum}
-class CLUSTER_RESOURCE_CREATE_FLAGS {
-  static const CLUSTER_RESOURCE_DEFAULT_MONITOR = 0x00000000;
-  static const CLUSTER_RESOURCE_SEPARATE_MONITOR = 0x00000001;
-  static const CLUSTER_RESOURCE_VALID_FLAGS = 0x00000001;
-}
-
-/// {@category Enum}
-class CLUSTER_SHARED_VOLUME_SNAPSHOT_STATE {
-  static const ClusterSharedVolumeSnapshotStateUnknown = 0x00000000;
-  static const ClusterSharedVolumePrepareForHWSnapshot = 0x00000001;
-  static const ClusterSharedVolumeHWSnapshotCompleted = 0x00000002;
-  static const ClusterSharedVolumePrepareForFreeze = 0x00000003;
-}
-
-/// {@category Enum}
-class CLUSTER_PROPERTY_TYPE {
-  static const CLUSPROP_TYPE_UNKNOWN = 0xffffffff;
-  static const CLUSPROP_TYPE_ENDMARK = 0x00000000;
-  static const CLUSPROP_TYPE_LIST_VALUE = 0x00000001;
-  static const CLUSPROP_TYPE_RESCLASS = 0x00000002;
-  static const CLUSPROP_TYPE_RESERVED1 = 0x00000003;
-  static const CLUSPROP_TYPE_NAME = 0x00000004;
-  static const CLUSPROP_TYPE_SIGNATURE = 0x00000005;
-  static const CLUSPROP_TYPE_SCSI_ADDRESS = 0x00000006;
-  static const CLUSPROP_TYPE_DISK_NUMBER = 0x00000007;
-  static const CLUSPROP_TYPE_PARTITION_INFO = 0x00000008;
-  static const CLUSPROP_TYPE_FTSET_INFO = 0x00000009;
-  static const CLUSPROP_TYPE_DISK_SERIALNUMBER = 0x0000000a;
-  static const CLUSPROP_TYPE_DISK_GUID = 0x0000000b;
-  static const CLUSPROP_TYPE_DISK_SIZE = 0x0000000c;
-  static const CLUSPROP_TYPE_PARTITION_INFO_EX = 0x0000000d;
-  static const CLUSPROP_TYPE_PARTITION_INFO_EX2 = 0x0000000e;
-  static const CLUSPROP_TYPE_STORAGE_DEVICE_ID_DESCRIPTOR = 0x0000000f;
-  static const CLUSPROP_TYPE_USER = 0x00008000;
-}
-
-/// {@category Enum}
-class CLUSTER_PROPERTY_FORMAT {
-  static const CLUSPROP_FORMAT_UNKNOWN = 0x00000000;
-  static const CLUSPROP_FORMAT_BINARY = 0x00000001;
-  static const CLUSPROP_FORMAT_DWORD = 0x00000002;
-  static const CLUSPROP_FORMAT_SZ = 0x00000003;
-  static const CLUSPROP_FORMAT_EXPAND_SZ = 0x00000004;
-  static const CLUSPROP_FORMAT_MULTI_SZ = 0x00000005;
-  static const CLUSPROP_FORMAT_ULARGE_INTEGER = 0x00000006;
-  static const CLUSPROP_FORMAT_LONG = 0x00000007;
-  static const CLUSPROP_FORMAT_EXPANDED_SZ = 0x00000008;
-  static const CLUSPROP_FORMAT_SECURITY_DESCRIPTOR = 0x00000009;
-  static const CLUSPROP_FORMAT_LARGE_INTEGER = 0x0000000a;
-  static const CLUSPROP_FORMAT_WORD = 0x0000000b;
-  static const CLUSPROP_FORMAT_FILETIME = 0x0000000c;
-  static const CLUSPROP_FORMAT_VALUE_LIST = 0x0000000d;
-  static const CLUSPROP_FORMAT_PROPERTY_LIST = 0x0000000e;
-  static const CLUSPROP_FORMAT_USER = 0x00008000;
-}
-
-/// {@category Enum}
-class CLUSTER_PROPERTY_SYNTAX {
-  static const CLUSPROP_SYNTAX_ENDMARK = 0x00000000;
-  static const CLUSPROP_SYNTAX_NAME = 0x00040003;
-  static const CLUSPROP_SYNTAX_RESCLASS = 0x00020002;
-  static const CLUSPROP_SYNTAX_LIST_VALUE_SZ = 0x00010003;
-  static const CLUSPROP_SYNTAX_LIST_VALUE_EXPAND_SZ = 0x00010004;
-  static const CLUSPROP_SYNTAX_LIST_VALUE_DWORD = 0x00010002;
-  static const CLUSPROP_SYNTAX_LIST_VALUE_BINARY = 0x00010001;
-  static const CLUSPROP_SYNTAX_LIST_VALUE_MULTI_SZ = 0x00010005;
-  static const CLUSPROP_SYNTAX_LIST_VALUE_LONG = 0x00010007;
-  static const CLUSPROP_SYNTAX_LIST_VALUE_EXPANDED_SZ = 0x00010008;
-  static const CLUSPROP_SYNTAX_LIST_VALUE_SECURITY_DESCRIPTOR = 0x00010009;
-  static const CLUSPROP_SYNTAX_LIST_VALUE_LARGE_INTEGER = 0x0001000a;
-  static const CLUSPROP_SYNTAX_LIST_VALUE_ULARGE_INTEGER = 0x00010006;
-  static const CLUSPROP_SYNTAX_LIST_VALUE_WORD = 0x0001000b;
-  static const CLUSPROP_SYNTAX_LIST_VALUE_PROPERTY_LIST = 0x0001000e;
-  static const CLUSPROP_SYNTAX_LIST_VALUE_FILETIME = 0x0001000c;
-  static const CLUSPROP_SYNTAX_DISK_SIGNATURE = 0x00050002;
-  static const CLUSPROP_SYNTAX_SCSI_ADDRESS = 0x00060002;
-  static const CLUSPROP_SYNTAX_DISK_NUMBER = 0x00070002;
-  static const CLUSPROP_SYNTAX_PARTITION_INFO = 0x00080001;
-  static const CLUSPROP_SYNTAX_FTSET_INFO = 0x00090001;
-  static const CLUSPROP_SYNTAX_DISK_SERIALNUMBER = 0x000a0003;
-  static const CLUSPROP_SYNTAX_DISK_GUID = 0x000b0003;
-  static const CLUSPROP_SYNTAX_DISK_SIZE = 0x000c0006;
-  static const CLUSPROP_SYNTAX_PARTITION_INFO_EX = 0x000d0001;
-  static const CLUSPROP_SYNTAX_PARTITION_INFO_EX2 = 0x000e0001;
-  static const CLUSPROP_SYNTAX_STORAGE_DEVICE_ID_DESCRIPTOR = 0x000f0001;
-}
-
-/// {@category Enum}
-class CLUSTER_CONTROL_OBJECT {
-  static const CLUS_OBJECT_INVALID = 0x00000000;
-  static const CLUS_OBJECT_RESOURCE = 0x00000001;
-  static const CLUS_OBJECT_RESOURCE_TYPE = 0x00000002;
-  static const CLUS_OBJECT_GROUP = 0x00000003;
-  static const CLUS_OBJECT_NODE = 0x00000004;
-  static const CLUS_OBJECT_NETWORK = 0x00000005;
-  static const CLUS_OBJECT_NETINTERFACE = 0x00000006;
-  static const CLUS_OBJECT_CLUSTER = 0x00000007;
-  static const CLUS_OBJECT_GROUPSET = 0x00000008;
-  static const CLUS_OBJECT_AFFINITYRULE = 0x00000009;
-  static const CLUS_OBJECT_USER = 0x00000080;
-}
-
-/// {@category Enum}
 class CLCTL_CODES {
   static const CLCTL_UNKNOWN = 0x00000000;
   static const CLCTL_GET_CHARACTERISTICS = 0x00000005;
@@ -775,6 +193,176 @@ class CLCTL_CODES {
 }
 
 /// {@category Enum}
+class CLUADMEX_OBJECT_TYPE {
+  static const CLUADMEX_OT_NONE = 0x00000000;
+  static const CLUADMEX_OT_CLUSTER = 0x00000001;
+  static const CLUADMEX_OT_NODE = 0x00000002;
+  static const CLUADMEX_OT_GROUP = 0x00000003;
+  static const CLUADMEX_OT_RESOURCE = 0x00000004;
+  static const CLUADMEX_OT_RESOURCETYPE = 0x00000005;
+  static const CLUADMEX_OT_NETWORK = 0x00000006;
+  static const CLUADMEX_OT_NETINTERFACE = 0x00000007;
+}
+
+/// {@category Enum}
+class CLUSCTL_AFFINITYRULE_CODES {
+  static const CLUSCTL_AFFINITYRULE_GET_COMMON_PROPERTIES = 0x09000059;
+  static const CLUSCTL_AFFINITYRULE_GET_RO_COMMON_PROPERTIES = 0x09000055;
+  static const CLUSCTL_AFFINITYRULE_SET_COMMON_PROPERTIES = 0x0940005e;
+  static const CLUSCTL_AFFINITYRULE_GET_ID = 0x09000039;
+  static const CLUSCTL_AFFINITYRULE_GET_GROUPNAMES = 0x09002d71;
+}
+
+/// {@category Enum}
+class CLUSCTL_CLUSTER_CODES {
+  static const CLUSCTL_CLUSTER_UNKNOWN = 0x07000000;
+  static const CLUSCTL_CLUSTER_GET_FQDN = 0x0700003d;
+  static const CLUSCTL_CLUSTER_SET_STORAGE_CONFIGURATION = 0x074002e2;
+  static const CLUSCTL_CLUSTER_GET_STORAGE_CONFIGURATION = 0x070002e5;
+  static const CLUSCTL_CLUSTER_GET_STORAGE_CONFIG_ATTRIBUTES = 0x070002e9;
+  static const CLUSCTL_CLUSTER_ENUM_COMMON_PROPERTIES = 0x07000051;
+  static const CLUSCTL_CLUSTER_GET_RO_COMMON_PROPERTIES = 0x07000055;
+  static const CLUSCTL_CLUSTER_GET_COMMON_PROPERTIES = 0x07000059;
+  static const CLUSCTL_CLUSTER_SET_COMMON_PROPERTIES = 0x0740005e;
+  static const CLUSCTL_CLUSTER_VALIDATE_COMMON_PROPERTIES = 0x07000061;
+  static const CLUSCTL_CLUSTER_ENUM_PRIVATE_PROPERTIES = 0x07000079;
+  static const CLUSCTL_CLUSTER_GET_RO_PRIVATE_PROPERTIES = 0x0700007d;
+  static const CLUSCTL_CLUSTER_GET_PRIVATE_PROPERTIES = 0x07000081;
+  static const CLUSCTL_CLUSTER_SET_PRIVATE_PROPERTIES = 0x07400086;
+  static const CLUSCTL_CLUSTER_VALIDATE_PRIVATE_PROPERTIES = 0x07000089;
+  static const CLUSCTL_CLUSTER_GET_COMMON_PROPERTY_FMTS = 0x07000065;
+  static const CLUSCTL_CLUSTER_GET_PRIVATE_PROPERTY_FMTS = 0x0700008d;
+  static const CLUSCTL_CLUSTER_CHECK_VOTER_EVICT = 0x07000045;
+  static const CLUSCTL_CLUSTER_CHECK_VOTER_DOWN = 0x07000049;
+  static const CLUSCTL_CLUSTER_SHUTDOWN = 0x0700004d;
+  static const CLUSCTL_CLUSTER_BATCH_BLOCK_KEY = 0x0700023e;
+  static const CLUSCTL_CLUSTER_BATCH_UNBLOCK_KEY = 0x07000241;
+  static const CLUSCTL_CLUSTER_GET_SHARED_VOLUME_ID = 0x07000291;
+  static const CLUSCTL_CLUSTER_GET_CLUSDB_TIMESTAMP = 0x070002a9;
+  static const CLUSCTL_CLUSTER_GET_GUM_LOCK_OWNER = 0x070002b9;
+  static const CLUSCTL_CLUSTER_REMOVE_NODE = 0x074002ee;
+  static const CLUSCTL_CLUSTER_SET_ACCOUNT_ACCESS = 0x074000f2;
+  static const CLUSCTL_CLUSTER_CLEAR_NODE_CONNECTION_INFO = 0x07400306;
+  static const CLUSCTL_CLUSTER_SET_DNS_DOMAIN = 0x0740030a;
+  static const CLUSCTL_CLUSTER_SET_CLUSTER_S2D_ENABLED = 0x07402d62;
+  static const CLUSCTL_CLUSTER_SET_CLUSTER_S2D_CACHE_METADATA_RESERVE_BYTES = 0x07402d6e;
+  static const CLUSCTL_CLUSTER_STORAGE_RENAME_SHARED_VOLUME = 0x07002dd6;
+  static const CLUSCTL_CLUSTER_STORAGE_RENAME_SHARED_VOLUME_GUID = 0x07002dda;
+  static const CLUSCTL_CLUSTER_RELOAD_AUTOLOGGER_CONFIG = 0x07002dd2;
+  static const CLUSCTL_CLUSTER_ENUM_AFFINITY_RULE_NAMES = 0x07002ddd;
+}
+
+/// {@category Enum}
+class CLUSCTL_GROUPSET_CODES {
+  static const CLUSCTL_GROUPSET_GET_COMMON_PROPERTIES = 0x08000059;
+  static const CLUSCTL_GROUPSET_GET_RO_COMMON_PROPERTIES = 0x08000055;
+  static const CLUSCTL_GROUPSET_SET_COMMON_PROPERTIES = 0x0840005e;
+  static const CLUSCTL_GROUPSET_GET_GROUPS = 0x08002d71;
+  static const CLUSCTL_GROUPSET_GET_PROVIDER_GROUPS = 0x08002d75;
+  static const CLUSCTL_GROUPSET_GET_PROVIDER_GROUPSETS = 0x08002d79;
+  static const CLUSCTL_GROUP_GET_PROVIDER_GROUPS = 0x08002d7d;
+  static const CLUSCTL_GROUP_GET_PROVIDER_GROUPSETS = 0x08002d81;
+  static const CLUSCTL_GROUPSET_GET_ID = 0x08000039;
+}
+
+/// {@category Enum}
+class CLUSCTL_GROUP_CODES {
+  static const CLUSCTL_GROUP_UNKNOWN = 0x03000000;
+  static const CLUSCTL_GROUP_GET_CHARACTERISTICS = 0x03000005;
+  static const CLUSCTL_GROUP_GET_FLAGS = 0x03000009;
+  static const CLUSCTL_GROUP_GET_NAME = 0x03000029;
+  static const CLUSCTL_GROUP_GET_ID = 0x03000039;
+  static const CLUSCTL_GROUP_ENUM_COMMON_PROPERTIES = 0x03000051;
+  static const CLUSCTL_GROUP_GET_RO_COMMON_PROPERTIES = 0x03000055;
+  static const CLUSCTL_GROUP_GET_COMMON_PROPERTIES = 0x03000059;
+  static const CLUSCTL_GROUP_SET_COMMON_PROPERTIES = 0x0340005e;
+  static const CLUSCTL_GROUP_VALIDATE_COMMON_PROPERTIES = 0x03000061;
+  static const CLUSCTL_GROUP_ENUM_PRIVATE_PROPERTIES = 0x03000079;
+  static const CLUSCTL_GROUP_GET_RO_PRIVATE_PROPERTIES = 0x0300007d;
+  static const CLUSCTL_GROUP_GET_PRIVATE_PROPERTIES = 0x03000081;
+  static const CLUSCTL_GROUP_SET_PRIVATE_PROPERTIES = 0x03400086;
+  static const CLUSCTL_GROUP_VALIDATE_PRIVATE_PROPERTIES = 0x03000089;
+  static const CLUSCTL_GROUP_QUERY_DELETE = 0x030001b9;
+  static const CLUSCTL_GROUP_GET_COMMON_PROPERTY_FMTS = 0x03000065;
+  static const CLUSCTL_GROUP_GET_PRIVATE_PROPERTY_FMTS = 0x0300008d;
+  static const CLUSCTL_GROUP_GET_FAILURE_INFO = 0x03000019;
+  static const CLUSCTL_GROUP_GET_LAST_MOVE_TIME = 0x030002d9;
+  static const CLUSCTL_GROUP_SET_CCF_FROM_MASTER = 0x03402d86;
+}
+
+/// {@category Enum}
+class CLUSCTL_NETINTERFACE_CODES {
+  static const CLUSCTL_NETINTERFACE_UNKNOWN = 0x06000000;
+  static const CLUSCTL_NETINTERFACE_GET_CHARACTERISTICS = 0x06000005;
+  static const CLUSCTL_NETINTERFACE_GET_FLAGS = 0x06000009;
+  static const CLUSCTL_NETINTERFACE_GET_NAME = 0x06000029;
+  static const CLUSCTL_NETINTERFACE_GET_ID = 0x06000039;
+  static const CLUSCTL_NETINTERFACE_GET_NODE = 0x06000031;
+  static const CLUSCTL_NETINTERFACE_GET_NETWORK = 0x06000035;
+  static const CLUSCTL_NETINTERFACE_ENUM_COMMON_PROPERTIES = 0x06000051;
+  static const CLUSCTL_NETINTERFACE_GET_RO_COMMON_PROPERTIES = 0x06000055;
+  static const CLUSCTL_NETINTERFACE_GET_COMMON_PROPERTIES = 0x06000059;
+  static const CLUSCTL_NETINTERFACE_SET_COMMON_PROPERTIES = 0x0640005e;
+  static const CLUSCTL_NETINTERFACE_VALIDATE_COMMON_PROPERTIES = 0x06000061;
+  static const CLUSCTL_NETINTERFACE_ENUM_PRIVATE_PROPERTIES = 0x06000079;
+  static const CLUSCTL_NETINTERFACE_GET_RO_PRIVATE_PROPERTIES = 0x0600007d;
+  static const CLUSCTL_NETINTERFACE_GET_PRIVATE_PROPERTIES = 0x06000081;
+  static const CLUSCTL_NETINTERFACE_SET_PRIVATE_PROPERTIES = 0x06400086;
+  static const CLUSCTL_NETINTERFACE_VALIDATE_PRIVATE_PROPERTIES = 0x06000089;
+  static const CLUSCTL_NETINTERFACE_GET_COMMON_PROPERTY_FMTS = 0x06000065;
+  static const CLUSCTL_NETINTERFACE_GET_PRIVATE_PROPERTY_FMTS = 0x0600008d;
+}
+
+/// {@category Enum}
+class CLUSCTL_NETWORK_CODES {
+  static const CLUSCTL_NETWORK_UNKNOWN = 0x05000000;
+  static const CLUSCTL_NETWORK_GET_CHARACTERISTICS = 0x05000005;
+  static const CLUSCTL_NETWORK_GET_FLAGS = 0x05000009;
+  static const CLUSCTL_NETWORK_GET_NAME = 0x05000029;
+  static const CLUSCTL_NETWORK_GET_ID = 0x05000039;
+  static const CLUSCTL_NETWORK_ENUM_COMMON_PROPERTIES = 0x05000051;
+  static const CLUSCTL_NETWORK_GET_RO_COMMON_PROPERTIES = 0x05000055;
+  static const CLUSCTL_NETWORK_GET_COMMON_PROPERTIES = 0x05000059;
+  static const CLUSCTL_NETWORK_SET_COMMON_PROPERTIES = 0x0540005e;
+  static const CLUSCTL_NETWORK_VALIDATE_COMMON_PROPERTIES = 0x05000061;
+  static const CLUSCTL_NETWORK_ENUM_PRIVATE_PROPERTIES = 0x05000079;
+  static const CLUSCTL_NETWORK_GET_RO_PRIVATE_PROPERTIES = 0x0500007d;
+  static const CLUSCTL_NETWORK_GET_PRIVATE_PROPERTIES = 0x05000081;
+  static const CLUSCTL_NETWORK_SET_PRIVATE_PROPERTIES = 0x05400086;
+  static const CLUSCTL_NETWORK_VALIDATE_PRIVATE_PROPERTIES = 0x05000089;
+  static const CLUSCTL_NETWORK_GET_COMMON_PROPERTY_FMTS = 0x05000065;
+  static const CLUSCTL_NETWORK_GET_PRIVATE_PROPERTY_FMTS = 0x0500008d;
+}
+
+/// {@category Enum}
+class CLUSCTL_NODE_CODES {
+  static const CLUSCTL_NODE_UNKNOWN = 0x04000000;
+  static const CLUSCTL_NODE_GET_CHARACTERISTICS = 0x04000005;
+  static const CLUSCTL_NODE_GET_FLAGS = 0x04000009;
+  static const CLUSCTL_NODE_GET_NAME = 0x04000029;
+  static const CLUSCTL_NODE_GET_ID = 0x04000039;
+  static const CLUSCTL_NODE_ENUM_COMMON_PROPERTIES = 0x04000051;
+  static const CLUSCTL_NODE_GET_RO_COMMON_PROPERTIES = 0x04000055;
+  static const CLUSCTL_NODE_GET_COMMON_PROPERTIES = 0x04000059;
+  static const CLUSCTL_NODE_SET_COMMON_PROPERTIES = 0x0440005e;
+  static const CLUSCTL_NODE_VALIDATE_COMMON_PROPERTIES = 0x04000061;
+  static const CLUSCTL_NODE_ENUM_PRIVATE_PROPERTIES = 0x04000079;
+  static const CLUSCTL_NODE_GET_RO_PRIVATE_PROPERTIES = 0x0400007d;
+  static const CLUSCTL_NODE_GET_PRIVATE_PROPERTIES = 0x04000081;
+  static const CLUSCTL_NODE_SET_PRIVATE_PROPERTIES = 0x04400086;
+  static const CLUSCTL_NODE_VALIDATE_PRIVATE_PROPERTIES = 0x04000089;
+  static const CLUSCTL_NODE_GET_COMMON_PROPERTY_FMTS = 0x04000065;
+  static const CLUSCTL_NODE_GET_PRIVATE_PROPERTY_FMTS = 0x0400008d;
+  static const CLUSCTL_NODE_GET_CLUSTER_SERVICE_ACCOUNT_NAME = 0x04000041;
+  static const CLUSCTL_NODE_GET_STUCK_NODES = 0x040002bd;
+  static const CLUSCTL_NODE_INJECT_GEM_FAULT = 0x040002c1;
+  static const CLUSCTL_NODE_INTRODUCE_GEM_REPAIR_DELAY = 0x040002c5;
+  static const CLUSCTL_NODE_SEND_DUMMY_GEM_MESSAGES = 0x040002c9;
+  static const CLUSCTL_NODE_BLOCK_GEM_SEND_RECV = 0x040002cd;
+  static const CLUSCTL_NODE_GET_GEMID_VECTOR = 0x040002d1;
+}
+
+/// {@category Enum}
 class CLUSCTL_RESOURCE_CODES {
   static const CLUSCTL_RESOURCE_UNKNOWN = 0x01000000;
   static const CLUSCTL_RESOURCE_GET_CHARACTERISTICS = 0x01000005;
@@ -956,215 +544,43 @@ class CLUSCTL_RESOURCE_TYPE_CODES {
 }
 
 /// {@category Enum}
-class CLUSCTL_GROUP_CODES {
-  static const CLUSCTL_GROUP_UNKNOWN = 0x03000000;
-  static const CLUSCTL_GROUP_GET_CHARACTERISTICS = 0x03000005;
-  static const CLUSCTL_GROUP_GET_FLAGS = 0x03000009;
-  static const CLUSCTL_GROUP_GET_NAME = 0x03000029;
-  static const CLUSCTL_GROUP_GET_ID = 0x03000039;
-  static const CLUSCTL_GROUP_ENUM_COMMON_PROPERTIES = 0x03000051;
-  static const CLUSCTL_GROUP_GET_RO_COMMON_PROPERTIES = 0x03000055;
-  static const CLUSCTL_GROUP_GET_COMMON_PROPERTIES = 0x03000059;
-  static const CLUSCTL_GROUP_SET_COMMON_PROPERTIES = 0x0340005e;
-  static const CLUSCTL_GROUP_VALIDATE_COMMON_PROPERTIES = 0x03000061;
-  static const CLUSCTL_GROUP_ENUM_PRIVATE_PROPERTIES = 0x03000079;
-  static const CLUSCTL_GROUP_GET_RO_PRIVATE_PROPERTIES = 0x0300007d;
-  static const CLUSCTL_GROUP_GET_PRIVATE_PROPERTIES = 0x03000081;
-  static const CLUSCTL_GROUP_SET_PRIVATE_PROPERTIES = 0x03400086;
-  static const CLUSCTL_GROUP_VALIDATE_PRIVATE_PROPERTIES = 0x03000089;
-  static const CLUSCTL_GROUP_QUERY_DELETE = 0x030001b9;
-  static const CLUSCTL_GROUP_GET_COMMON_PROPERTY_FMTS = 0x03000065;
-  static const CLUSCTL_GROUP_GET_PRIVATE_PROPERTY_FMTS = 0x0300008d;
-  static const CLUSCTL_GROUP_GET_FAILURE_INFO = 0x03000019;
-  static const CLUSCTL_GROUP_GET_LAST_MOVE_TIME = 0x030002d9;
-  static const CLUSCTL_GROUP_SET_CCF_FROM_MASTER = 0x03402d86;
+class CLUSGROUP_TYPE {
+  static const ClusGroupTypeCoreCluster = 0x00000001;
+  static const ClusGroupTypeAvailableStorage = 0x00000002;
+  static const ClusGroupTypeTemporary = 0x00000003;
+  static const ClusGroupTypeSharedVolume = 0x00000004;
+  static const ClusGroupTypeStoragePool = 0x00000005;
+  static const ClusGroupTypeFileServer = 0x00000064;
+  static const ClusGroupTypePrintServer = 0x00000065;
+  static const ClusGroupTypeDhcpServer = 0x00000066;
+  static const ClusGroupTypeDtc = 0x00000067;
+  static const ClusGroupTypeMsmq = 0x00000068;
+  static const ClusGroupTypeWins = 0x00000069;
+  static const ClusGroupTypeStandAloneDfs = 0x0000006a;
+  static const ClusGroupTypeGenericApplication = 0x0000006b;
+  static const ClusGroupTypeGenericService = 0x0000006c;
+  static const ClusGroupTypeGenericScript = 0x0000006d;
+  static const ClusGroupTypeIScsiNameService = 0x0000006e;
+  static const ClusGroupTypeVirtualMachine = 0x0000006f;
+  static const ClusGroupTypeTsSessionBroker = 0x00000070;
+  static const ClusGroupTypeIScsiTarget = 0x00000071;
+  static const ClusGroupTypeScaleoutFileServer = 0x00000072;
+  static const ClusGroupTypeVMReplicaBroker = 0x00000073;
+  static const ClusGroupTypeTaskScheduler = 0x00000074;
+  static const ClusGroupTypeClusterUpdateAgent = 0x00000075;
+  static const ClusGroupTypeScaleoutCluster = 0x00000076;
+  static const ClusGroupTypeStorageReplica = 0x00000077;
+  static const ClusGroupTypeVMReplicaCoordinator = 0x00000078;
+  static const ClusGroupTypeCrossClusterOrchestrator = 0x00000079;
+  static const ClusGroupTypeInfrastructureFileServer = 0x0000007a;
+  static const ClusGroupTypeUnknown = 0x0000270f;
 }
 
 /// {@category Enum}
-class CLUSCTL_NODE_CODES {
-  static const CLUSCTL_NODE_UNKNOWN = 0x04000000;
-  static const CLUSCTL_NODE_GET_CHARACTERISTICS = 0x04000005;
-  static const CLUSCTL_NODE_GET_FLAGS = 0x04000009;
-  static const CLUSCTL_NODE_GET_NAME = 0x04000029;
-  static const CLUSCTL_NODE_GET_ID = 0x04000039;
-  static const CLUSCTL_NODE_ENUM_COMMON_PROPERTIES = 0x04000051;
-  static const CLUSCTL_NODE_GET_RO_COMMON_PROPERTIES = 0x04000055;
-  static const CLUSCTL_NODE_GET_COMMON_PROPERTIES = 0x04000059;
-  static const CLUSCTL_NODE_SET_COMMON_PROPERTIES = 0x0440005e;
-  static const CLUSCTL_NODE_VALIDATE_COMMON_PROPERTIES = 0x04000061;
-  static const CLUSCTL_NODE_ENUM_PRIVATE_PROPERTIES = 0x04000079;
-  static const CLUSCTL_NODE_GET_RO_PRIVATE_PROPERTIES = 0x0400007d;
-  static const CLUSCTL_NODE_GET_PRIVATE_PROPERTIES = 0x04000081;
-  static const CLUSCTL_NODE_SET_PRIVATE_PROPERTIES = 0x04400086;
-  static const CLUSCTL_NODE_VALIDATE_PRIVATE_PROPERTIES = 0x04000089;
-  static const CLUSCTL_NODE_GET_COMMON_PROPERTY_FMTS = 0x04000065;
-  static const CLUSCTL_NODE_GET_PRIVATE_PROPERTY_FMTS = 0x0400008d;
-  static const CLUSCTL_NODE_GET_CLUSTER_SERVICE_ACCOUNT_NAME = 0x04000041;
-  static const CLUSCTL_NODE_GET_STUCK_NODES = 0x040002bd;
-  static const CLUSCTL_NODE_INJECT_GEM_FAULT = 0x040002c1;
-  static const CLUSCTL_NODE_INTRODUCE_GEM_REPAIR_DELAY = 0x040002c5;
-  static const CLUSCTL_NODE_SEND_DUMMY_GEM_MESSAGES = 0x040002c9;
-  static const CLUSCTL_NODE_BLOCK_GEM_SEND_RECV = 0x040002cd;
-  static const CLUSCTL_NODE_GET_GEMID_VECTOR = 0x040002d1;
-}
-
-/// {@category Enum}
-class CLUSCTL_NETWORK_CODES {
-  static const CLUSCTL_NETWORK_UNKNOWN = 0x05000000;
-  static const CLUSCTL_NETWORK_GET_CHARACTERISTICS = 0x05000005;
-  static const CLUSCTL_NETWORK_GET_FLAGS = 0x05000009;
-  static const CLUSCTL_NETWORK_GET_NAME = 0x05000029;
-  static const CLUSCTL_NETWORK_GET_ID = 0x05000039;
-  static const CLUSCTL_NETWORK_ENUM_COMMON_PROPERTIES = 0x05000051;
-  static const CLUSCTL_NETWORK_GET_RO_COMMON_PROPERTIES = 0x05000055;
-  static const CLUSCTL_NETWORK_GET_COMMON_PROPERTIES = 0x05000059;
-  static const CLUSCTL_NETWORK_SET_COMMON_PROPERTIES = 0x0540005e;
-  static const CLUSCTL_NETWORK_VALIDATE_COMMON_PROPERTIES = 0x05000061;
-  static const CLUSCTL_NETWORK_ENUM_PRIVATE_PROPERTIES = 0x05000079;
-  static const CLUSCTL_NETWORK_GET_RO_PRIVATE_PROPERTIES = 0x0500007d;
-  static const CLUSCTL_NETWORK_GET_PRIVATE_PROPERTIES = 0x05000081;
-  static const CLUSCTL_NETWORK_SET_PRIVATE_PROPERTIES = 0x05400086;
-  static const CLUSCTL_NETWORK_VALIDATE_PRIVATE_PROPERTIES = 0x05000089;
-  static const CLUSCTL_NETWORK_GET_COMMON_PROPERTY_FMTS = 0x05000065;
-  static const CLUSCTL_NETWORK_GET_PRIVATE_PROPERTY_FMTS = 0x0500008d;
-}
-
-/// {@category Enum}
-class CLUSCTL_NETINTERFACE_CODES {
-  static const CLUSCTL_NETINTERFACE_UNKNOWN = 0x06000000;
-  static const CLUSCTL_NETINTERFACE_GET_CHARACTERISTICS = 0x06000005;
-  static const CLUSCTL_NETINTERFACE_GET_FLAGS = 0x06000009;
-  static const CLUSCTL_NETINTERFACE_GET_NAME = 0x06000029;
-  static const CLUSCTL_NETINTERFACE_GET_ID = 0x06000039;
-  static const CLUSCTL_NETINTERFACE_GET_NODE = 0x06000031;
-  static const CLUSCTL_NETINTERFACE_GET_NETWORK = 0x06000035;
-  static const CLUSCTL_NETINTERFACE_ENUM_COMMON_PROPERTIES = 0x06000051;
-  static const CLUSCTL_NETINTERFACE_GET_RO_COMMON_PROPERTIES = 0x06000055;
-  static const CLUSCTL_NETINTERFACE_GET_COMMON_PROPERTIES = 0x06000059;
-  static const CLUSCTL_NETINTERFACE_SET_COMMON_PROPERTIES = 0x0640005e;
-  static const CLUSCTL_NETINTERFACE_VALIDATE_COMMON_PROPERTIES = 0x06000061;
-  static const CLUSCTL_NETINTERFACE_ENUM_PRIVATE_PROPERTIES = 0x06000079;
-  static const CLUSCTL_NETINTERFACE_GET_RO_PRIVATE_PROPERTIES = 0x0600007d;
-  static const CLUSCTL_NETINTERFACE_GET_PRIVATE_PROPERTIES = 0x06000081;
-  static const CLUSCTL_NETINTERFACE_SET_PRIVATE_PROPERTIES = 0x06400086;
-  static const CLUSCTL_NETINTERFACE_VALIDATE_PRIVATE_PROPERTIES = 0x06000089;
-  static const CLUSCTL_NETINTERFACE_GET_COMMON_PROPERTY_FMTS = 0x06000065;
-  static const CLUSCTL_NETINTERFACE_GET_PRIVATE_PROPERTY_FMTS = 0x0600008d;
-}
-
-/// {@category Enum}
-class CLUSCTL_CLUSTER_CODES {
-  static const CLUSCTL_CLUSTER_UNKNOWN = 0x07000000;
-  static const CLUSCTL_CLUSTER_GET_FQDN = 0x0700003d;
-  static const CLUSCTL_CLUSTER_SET_STORAGE_CONFIGURATION = 0x074002e2;
-  static const CLUSCTL_CLUSTER_GET_STORAGE_CONFIGURATION = 0x070002e5;
-  static const CLUSCTL_CLUSTER_GET_STORAGE_CONFIG_ATTRIBUTES = 0x070002e9;
-  static const CLUSCTL_CLUSTER_ENUM_COMMON_PROPERTIES = 0x07000051;
-  static const CLUSCTL_CLUSTER_GET_RO_COMMON_PROPERTIES = 0x07000055;
-  static const CLUSCTL_CLUSTER_GET_COMMON_PROPERTIES = 0x07000059;
-  static const CLUSCTL_CLUSTER_SET_COMMON_PROPERTIES = 0x0740005e;
-  static const CLUSCTL_CLUSTER_VALIDATE_COMMON_PROPERTIES = 0x07000061;
-  static const CLUSCTL_CLUSTER_ENUM_PRIVATE_PROPERTIES = 0x07000079;
-  static const CLUSCTL_CLUSTER_GET_RO_PRIVATE_PROPERTIES = 0x0700007d;
-  static const CLUSCTL_CLUSTER_GET_PRIVATE_PROPERTIES = 0x07000081;
-  static const CLUSCTL_CLUSTER_SET_PRIVATE_PROPERTIES = 0x07400086;
-  static const CLUSCTL_CLUSTER_VALIDATE_PRIVATE_PROPERTIES = 0x07000089;
-  static const CLUSCTL_CLUSTER_GET_COMMON_PROPERTY_FMTS = 0x07000065;
-  static const CLUSCTL_CLUSTER_GET_PRIVATE_PROPERTY_FMTS = 0x0700008d;
-  static const CLUSCTL_CLUSTER_CHECK_VOTER_EVICT = 0x07000045;
-  static const CLUSCTL_CLUSTER_CHECK_VOTER_DOWN = 0x07000049;
-  static const CLUSCTL_CLUSTER_SHUTDOWN = 0x0700004d;
-  static const CLUSCTL_CLUSTER_BATCH_BLOCK_KEY = 0x0700023e;
-  static const CLUSCTL_CLUSTER_BATCH_UNBLOCK_KEY = 0x07000241;
-  static const CLUSCTL_CLUSTER_GET_SHARED_VOLUME_ID = 0x07000291;
-  static const CLUSCTL_CLUSTER_GET_CLUSDB_TIMESTAMP = 0x070002a9;
-  static const CLUSCTL_CLUSTER_GET_GUM_LOCK_OWNER = 0x070002b9;
-  static const CLUSCTL_CLUSTER_REMOVE_NODE = 0x074002ee;
-  static const CLUSCTL_CLUSTER_SET_ACCOUNT_ACCESS = 0x074000f2;
-  static const CLUSCTL_CLUSTER_CLEAR_NODE_CONNECTION_INFO = 0x07400306;
-  static const CLUSCTL_CLUSTER_SET_DNS_DOMAIN = 0x0740030a;
-  static const CLUSCTL_CLUSTER_SET_CLUSTER_S2D_ENABLED = 0x07402d62;
-  static const CLUSCTL_CLUSTER_SET_CLUSTER_S2D_CACHE_METADATA_RESERVE_BYTES = 0x07402d6e;
-  static const CLUSCTL_CLUSTER_STORAGE_RENAME_SHARED_VOLUME = 0x07002dd6;
-  static const CLUSCTL_CLUSTER_STORAGE_RENAME_SHARED_VOLUME_GUID = 0x07002dda;
-  static const CLUSCTL_CLUSTER_RELOAD_AUTOLOGGER_CONFIG = 0x07002dd2;
-  static const CLUSCTL_CLUSTER_ENUM_AFFINITY_RULE_NAMES = 0x07002ddd;
-}
-
-/// {@category Enum}
-class CLUSCTL_GROUPSET_CODES {
-  static const CLUSCTL_GROUPSET_GET_COMMON_PROPERTIES = 0x08000059;
-  static const CLUSCTL_GROUPSET_GET_RO_COMMON_PROPERTIES = 0x08000055;
-  static const CLUSCTL_GROUPSET_SET_COMMON_PROPERTIES = 0x0840005e;
-  static const CLUSCTL_GROUPSET_GET_GROUPS = 0x08002d71;
-  static const CLUSCTL_GROUPSET_GET_PROVIDER_GROUPS = 0x08002d75;
-  static const CLUSCTL_GROUPSET_GET_PROVIDER_GROUPSETS = 0x08002d79;
-  static const CLUSCTL_GROUP_GET_PROVIDER_GROUPS = 0x08002d7d;
-  static const CLUSCTL_GROUP_GET_PROVIDER_GROUPSETS = 0x08002d81;
-  static const CLUSCTL_GROUPSET_GET_ID = 0x08000039;
-}
-
-/// {@category Enum}
-class CLUSCTL_AFFINITYRULE_CODES {
-  static const CLUSCTL_AFFINITYRULE_GET_COMMON_PROPERTIES = 0x09000059;
-  static const CLUSCTL_AFFINITYRULE_GET_RO_COMMON_PROPERTIES = 0x09000055;
-  static const CLUSCTL_AFFINITYRULE_SET_COMMON_PROPERTIES = 0x0940005e;
-  static const CLUSCTL_AFFINITYRULE_GET_ID = 0x09000039;
-  static const CLUSCTL_AFFINITYRULE_GET_GROUPNAMES = 0x09002d71;
-}
-
-/// {@category Enum}
-class CLUSTER_RESOURCE_CLASS {
-  static const CLUS_RESCLASS_UNKNOWN = 0x00000000;
-  static const CLUS_RESCLASS_STORAGE = 0x00000001;
-  static const CLUS_RESCLASS_NETWORK = 0x00000002;
-  static const CLUS_RESCLASS_USER = 0x00008000;
-}
-
-/// {@category Enum}
-class CLUS_RESSUBCLASS {
-  static const CLUS_RESSUBCLASS_SHARED = 0x80000000;
-}
-
-/// {@category Enum}
-class CLUS_RESSUBCLASS_STORAGE {
-  static const CLUS_RESSUBCLASS_STORAGE_SHARED_BUS = 0x80000000;
-  static const CLUS_RESSUBCLASS_STORAGE_DISK = 0x40000000;
-  static const CLUS_RESSUBCLASS_STORAGE_REPLICATION = 0x10000000;
-}
-
-/// {@category Enum}
-class CLUS_RESSUBCLASS_NETWORK {
-  static const CLUS_RESSUBCLASS_NETWORK_INTERNET_PROTOCOL = 0x80000000;
-}
-
-/// {@category Enum}
-class CLUS_CHARACTERISTICS {
-  static const CLUS_CHAR_UNKNOWN = 0x00000000;
-  static const CLUS_CHAR_QUORUM = 0x00000001;
-  static const CLUS_CHAR_DELETE_REQUIRES_ALL_NODES = 0x00000002;
-  static const CLUS_CHAR_LOCAL_QUORUM = 0x00000004;
-  static const CLUS_CHAR_LOCAL_QUORUM_DEBUG = 0x00000008;
-  static const CLUS_CHAR_REQUIRES_STATE_CHANGE_REASON = 0x00000010;
-  static const CLUS_CHAR_BROADCAST_DELETE = 0x00000020;
-  static const CLUS_CHAR_SINGLE_CLUSTER_INSTANCE = 0x00000040;
-  static const CLUS_CHAR_SINGLE_GROUP_INSTANCE = 0x00000080;
-  static const CLUS_CHAR_COEXIST_IN_SHARED_VOLUME_GROUP = 0x00000100;
-  static const CLUS_CHAR_PLACEMENT_DATA = 0x00000200;
-  static const CLUS_CHAR_MONITOR_DETACH = 0x00000400;
-  static const CLUS_CHAR_MONITOR_REATTACH = 0x00000800;
-  static const CLUS_CHAR_OPERATION_CONTEXT = 0x00001000;
-  static const CLUS_CHAR_CLONES = 0x00002000;
-  static const CLUS_CHAR_NOT_PREEMPTABLE = 0x00004000;
-  static const CLUS_CHAR_NOTIFY_NEW_OWNER = 0x00008000;
-  static const CLUS_CHAR_SUPPORTS_UNMONITORED_STATE = 0x00010000;
-  static const CLUS_CHAR_INFRASTRUCTURE = 0x00020000;
-  static const CLUS_CHAR_VETO_DRAIN = 0x00040000;
-}
-
-/// {@category Enum}
-class CLUS_FLAGS {
-  static const CLUS_FLAG_CORE = 0x00000001;
+class CLUSPROP_IPADDR_ENABLENETBIOS {
+  static const CLUSPROP_IPADDR_ENABLENETBIOS_DISABLED = 0x00000000;
+  static const CLUSPROP_IPADDR_ENABLENETBIOS_ENABLED = 0x00000001;
+  static const CLUSPROP_IPADDR_ENABLENETBIOS_TRACK_NIC = 0x00000002;
 }
 
 /// {@category Enum}
@@ -1180,6 +596,218 @@ class CLUSPROP_PIFLAGS {
 }
 
 /// {@category Enum}
+class CLUSTERSET_OBJECT_TYPE {
+  static const CLUSTERSET_OBJECT_TYPE_NONE = 0x00000000;
+  static const CLUSTERSET_OBJECT_TYPE_MEMBER = 0x00000001;
+  static const CLUSTERSET_OBJECT_TYPE_WORKLOAD = 0x00000002;
+  static const CLUSTERSET_OBJECT_TYPE_DATABASE = 0x00000003;
+}
+
+/// {@category Enum}
+class CLUSTER_CHANGE {
+  static const CLUSTER_CHANGE_NODE_STATE = 0x00000001;
+  static const CLUSTER_CHANGE_NODE_DELETED = 0x00000002;
+  static const CLUSTER_CHANGE_NODE_ADDED = 0x00000004;
+  static const CLUSTER_CHANGE_NODE_PROPERTY = 0x00000008;
+  static const CLUSTER_CHANGE_REGISTRY_NAME = 0x00000010;
+  static const CLUSTER_CHANGE_REGISTRY_ATTRIBUTES = 0x00000020;
+  static const CLUSTER_CHANGE_REGISTRY_VALUE = 0x00000040;
+  static const CLUSTER_CHANGE_REGISTRY_SUBTREE = 0x00000080;
+  static const CLUSTER_CHANGE_RESOURCE_STATE = 0x00000100;
+  static const CLUSTER_CHANGE_RESOURCE_DELETED = 0x00000200;
+  static const CLUSTER_CHANGE_RESOURCE_ADDED = 0x00000400;
+  static const CLUSTER_CHANGE_RESOURCE_PROPERTY = 0x00000800;
+  static const CLUSTER_CHANGE_GROUP_STATE = 0x00001000;
+  static const CLUSTER_CHANGE_GROUP_DELETED = 0x00002000;
+  static const CLUSTER_CHANGE_GROUP_ADDED = 0x00004000;
+  static const CLUSTER_CHANGE_GROUP_PROPERTY = 0x00008000;
+  static const CLUSTER_CHANGE_RESOURCE_TYPE_DELETED = 0x00010000;
+  static const CLUSTER_CHANGE_RESOURCE_TYPE_ADDED = 0x00020000;
+  static const CLUSTER_CHANGE_RESOURCE_TYPE_PROPERTY = 0x00040000;
+  static const CLUSTER_CHANGE_CLUSTER_RECONNECT = 0x00080000;
+  static const CLUSTER_CHANGE_NETWORK_STATE = 0x00100000;
+  static const CLUSTER_CHANGE_NETWORK_DELETED = 0x00200000;
+  static const CLUSTER_CHANGE_NETWORK_ADDED = 0x00400000;
+  static const CLUSTER_CHANGE_NETWORK_PROPERTY = 0x00800000;
+  static const CLUSTER_CHANGE_NETINTERFACE_STATE = 0x01000000;
+  static const CLUSTER_CHANGE_NETINTERFACE_DELETED = 0x02000000;
+  static const CLUSTER_CHANGE_NETINTERFACE_ADDED = 0x04000000;
+  static const CLUSTER_CHANGE_NETINTERFACE_PROPERTY = 0x08000000;
+  static const CLUSTER_CHANGE_QUORUM_STATE = 0x10000000;
+  static const CLUSTER_CHANGE_CLUSTER_STATE = 0x20000000;
+  static const CLUSTER_CHANGE_CLUSTER_PROPERTY = 0x40000000;
+  static const CLUSTER_CHANGE_HANDLE_CLOSE = 0x80000000;
+  static const CLUSTER_CHANGE_ALL = 0xffffffff;
+}
+
+/// {@category Enum}
+class CLUSTER_CHANGE_CLUSTER_V2 {
+  static const CLUSTER_CHANGE_CLUSTER_RECONNECT_V2 = 0x00000001;
+  static const CLUSTER_CHANGE_CLUSTER_STATE_V2 = 0x00000002;
+  static const CLUSTER_CHANGE_CLUSTER_GROUP_ADDED_V2 = 0x00000004;
+  static const CLUSTER_CHANGE_CLUSTER_HANDLE_CLOSE_V2 = 0x00000008;
+  static const CLUSTER_CHANGE_CLUSTER_NETWORK_ADDED_V2 = 0x00000010;
+  static const CLUSTER_CHANGE_CLUSTER_NODE_ADDED_V2 = 0x00000020;
+  static const CLUSTER_CHANGE_CLUSTER_RESOURCE_TYPE_ADDED_V2 = 0x00000040;
+  static const CLUSTER_CHANGE_CLUSTER_COMMON_PROPERTY_V2 = 0x00000080;
+  static const CLUSTER_CHANGE_CLUSTER_PRIVATE_PROPERTY_V2 = 0x00000100;
+  static const CLUSTER_CHANGE_CLUSTER_LOST_NOTIFICATIONS_V2 = 0x00000200;
+  static const CLUSTER_CHANGE_CLUSTER_RENAME_V2 = 0x00000400;
+  static const CLUSTER_CHANGE_CLUSTER_MEMBERSHIP_V2 = 0x00000800;
+  static const CLUSTER_CHANGE_CLUSTER_UPGRADED_V2 = 0x00001000;
+  static const CLUSTER_CHANGE_CLUSTER_ALL_V2 = 0x00001fff;
+}
+
+/// {@category Enum}
+class CLUSTER_CHANGE_GROUPSET_V2 {
+  static const CLUSTER_CHANGE_GROUPSET_DELETED_v2 = 0x00000001;
+  static const CLUSTER_CHANGE_GROUPSET_COMMON_PROPERTY_V2 = 0x00000002;
+  static const CLUSTER_CHANGE_GROUPSET_PRIVATE_PROPERTY_V2 = 0x00000004;
+  static const CLUSTER_CHANGE_GROUPSET_STATE_V2 = 0x00000008;
+  static const CLUSTER_CHANGE_GROUPSET_GROUP_ADDED = 0x00000010;
+  static const CLUSTER_CHANGE_GROUPSET_GROUP_REMOVED = 0x00000020;
+  static const CLUSTER_CHANGE_GROUPSET_DEPENDENCIES_V2 = 0x00000040;
+  static const CLUSTER_CHANGE_GROUPSET_DEPENDENTS_V2 = 0x00000080;
+  static const CLUSTER_CHANGE_GROUPSET_HANDLE_CLOSE_v2 = 0x00000100;
+  static const CLUSTER_CHANGE_GROUPSET_ALL_V2 = 0x000001ff;
+}
+
+/// {@category Enum}
+class CLUSTER_CHANGE_GROUP_V2 {
+  static const CLUSTER_CHANGE_GROUP_DELETED_V2 = 0x00000001;
+  static const CLUSTER_CHANGE_GROUP_COMMON_PROPERTY_V2 = 0x00000002;
+  static const CLUSTER_CHANGE_GROUP_PRIVATE_PROPERTY_V2 = 0x00000004;
+  static const CLUSTER_CHANGE_GROUP_STATE_V2 = 0x00000008;
+  static const CLUSTER_CHANGE_GROUP_OWNER_NODE_V2 = 0x00000010;
+  static const CLUSTER_CHANGE_GROUP_PREFERRED_OWNERS_V2 = 0x00000020;
+  static const CLUSTER_CHANGE_GROUP_RESOURCE_ADDED_V2 = 0x00000040;
+  static const CLUSTER_CHANGE_GROUP_RESOURCE_GAINED_V2 = 0x00000080;
+  static const CLUSTER_CHANGE_GROUP_RESOURCE_LOST_V2 = 0x00000100;
+  static const CLUSTER_CHANGE_GROUP_HANDLE_CLOSE_V2 = 0x00000200;
+  static const CLUSTER_CHANGE_GROUP_ALL_V2 = 0x000003ff;
+}
+
+/// {@category Enum}
+class CLUSTER_CHANGE_NETINTERFACE_V2 {
+  static const CLUSTER_CHANGE_NETINTERFACE_DELETED_V2 = 0x00000001;
+  static const CLUSTER_CHANGE_NETINTERFACE_COMMON_PROPERTY_V2 = 0x00000002;
+  static const CLUSTER_CHANGE_NETINTERFACE_PRIVATE_PROPERTY_V2 = 0x00000004;
+  static const CLUSTER_CHANGE_NETINTERFACE_STATE_V2 = 0x00000008;
+  static const CLUSTER_CHANGE_NETINTERFACE_HANDLE_CLOSE_V2 = 0x00000010;
+  static const CLUSTER_CHANGE_NETINTERFACE_ALL_V2 = 0x0000001f;
+}
+
+/// {@category Enum}
+class CLUSTER_CHANGE_NETWORK_V2 {
+  static const CLUSTER_CHANGE_NETWORK_DELETED_V2 = 0x00000001;
+  static const CLUSTER_CHANGE_NETWORK_COMMON_PROPERTY_V2 = 0x00000002;
+  static const CLUSTER_CHANGE_NETWORK_PRIVATE_PROPERTY_V2 = 0x00000004;
+  static const CLUSTER_CHANGE_NETWORK_STATE_V2 = 0x00000008;
+  static const CLUSTER_CHANGE_NETWORK_HANDLE_CLOSE_V2 = 0x00000010;
+  static const CLUSTER_CHANGE_NETWORK_ALL_V2 = 0x0000001f;
+}
+
+/// {@category Enum}
+class CLUSTER_CHANGE_NODE_UPGRADE_PHASE_V2 {
+  static const CLUSTER_CHANGE_UPGRADE_NODE_PREPARE = 0x00000001;
+  static const CLUSTER_CHANGE_UPGRADE_NODE_COMMIT = 0x00000002;
+  static const CLUSTER_CHANGE_UPGRADE_NODE_POSTCOMMIT = 0x00000004;
+  static const CLUSTER_CHANGE_UPGRADE_ALL = 0x00000007;
+}
+
+/// {@category Enum}
+class CLUSTER_CHANGE_NODE_V2 {
+  static const CLUSTER_CHANGE_NODE_NETINTERFACE_ADDED_V2 = 0x00000001;
+  static const CLUSTER_CHANGE_NODE_DELETED_V2 = 0x00000002;
+  static const CLUSTER_CHANGE_NODE_COMMON_PROPERTY_V2 = 0x00000004;
+  static const CLUSTER_CHANGE_NODE_PRIVATE_PROPERTY_V2 = 0x00000008;
+  static const CLUSTER_CHANGE_NODE_STATE_V2 = 0x00000010;
+  static const CLUSTER_CHANGE_NODE_GROUP_GAINED_V2 = 0x00000020;
+  static const CLUSTER_CHANGE_NODE_GROUP_LOST_V2 = 0x00000040;
+  static const CLUSTER_CHANGE_NODE_HANDLE_CLOSE_V2 = 0x00000080;
+  static const CLUSTER_CHANGE_NODE_ALL_V2 = 0x000000ff;
+}
+
+/// {@category Enum}
+class CLUSTER_CHANGE_QUORUM_V2 {
+  static const CLUSTER_CHANGE_QUORUM_STATE_V2 = 0x00000001;
+  static const CLUSTER_CHANGE_QUORUM_ALL_V2 = 0x00000001;
+}
+
+/// {@category Enum}
+class CLUSTER_CHANGE_REGISTRY_V2 {
+  static const CLUSTER_CHANGE_REGISTRY_ATTRIBUTES_V2 = 0x00000001;
+  static const CLUSTER_CHANGE_REGISTRY_NAME_V2 = 0x00000002;
+  static const CLUSTER_CHANGE_REGISTRY_SUBTREE_V2 = 0x00000004;
+  static const CLUSTER_CHANGE_REGISTRY_VALUE_V2 = 0x00000008;
+  static const CLUSTER_CHANGE_REGISTRY_HANDLE_CLOSE_V2 = 0x00000010;
+  static const CLUSTER_CHANGE_REGISTRY_ALL_V2 = 0x0000001f;
+}
+
+/// {@category Enum}
+class CLUSTER_CHANGE_RESOURCE_TYPE_V2 {
+  static const CLUSTER_CHANGE_RESOURCE_TYPE_DELETED_V2 = 0x00000001;
+  static const CLUSTER_CHANGE_RESOURCE_TYPE_COMMON_PROPERTY_V2 = 0x00000002;
+  static const CLUSTER_CHANGE_RESOURCE_TYPE_PRIVATE_PROPERTY_V2 = 0x00000004;
+  static const CLUSTER_CHANGE_RESOURCE_TYPE_POSSIBLE_OWNERS_V2 = 0x00000008;
+  static const CLUSTER_CHANGE_RESOURCE_TYPE_DLL_UPGRADED_V2 = 0x00000010;
+  static const CLUSTER_RESOURCE_TYPE_SPECIFIC_V2 = 0x00000020;
+  static const CLUSTER_CHANGE_RESOURCE_TYPE_ALL_V2 = 0x0000003f;
+}
+
+/// {@category Enum}
+class CLUSTER_CHANGE_RESOURCE_V2 {
+  static const CLUSTER_CHANGE_RESOURCE_COMMON_PROPERTY_V2 = 0x00000001;
+  static const CLUSTER_CHANGE_RESOURCE_PRIVATE_PROPERTY_V2 = 0x00000002;
+  static const CLUSTER_CHANGE_RESOURCE_STATE_V2 = 0x00000004;
+  static const CLUSTER_CHANGE_RESOURCE_OWNER_GROUP_V2 = 0x00000008;
+  static const CLUSTER_CHANGE_RESOURCE_DEPENDENCIES_V2 = 0x00000010;
+  static const CLUSTER_CHANGE_RESOURCE_DEPENDENTS_V2 = 0x00000020;
+  static const CLUSTER_CHANGE_RESOURCE_POSSIBLE_OWNERS_V2 = 0x00000040;
+  static const CLUSTER_CHANGE_RESOURCE_DELETED_V2 = 0x00000080;
+  static const CLUSTER_CHANGE_RESOURCE_DLL_UPGRADED_V2 = 0x00000100;
+  static const CLUSTER_CHANGE_RESOURCE_HANDLE_CLOSE_V2 = 0x00000200;
+  static const CLUSTER_CHANGE_RESOURCE_TERMINAL_STATE_V2 = 0x00000400;
+  static const CLUSTER_CHANGE_RESOURCE_ALL_V2 = 0x000007ff;
+}
+
+/// {@category Enum}
+class CLUSTER_CHANGE_SHARED_VOLUME_V2 {
+  static const CLUSTER_CHANGE_SHARED_VOLUME_STATE_V2 = 0x00000001;
+  static const CLUSTER_CHANGE_SHARED_VOLUME_ADDED_V2 = 0x00000002;
+  static const CLUSTER_CHANGE_SHARED_VOLUME_REMOVED_V2 = 0x00000004;
+  static const CLUSTER_CHANGE_SHARED_VOLUME_ALL_V2 = 0x00000007;
+}
+
+/// {@category Enum}
+class CLUSTER_CHANGE_SPACEPORT_V2 {
+  static const CLUSTER_CHANGE_SPACEPORT_CUSTOM_PNP_V2 = 0x00000001;
+}
+
+/// {@category Enum}
+class CLUSTER_CLOUD_TYPE {
+  static const CLUSTER_CLOUD_TYPE_NONE = 0x00000000;
+  static const CLUSTER_CLOUD_TYPE_AZURE = 0x00000001;
+  static const CLUSTER_CLOUD_TYPE_MIXED = 0x00000080;
+  static const CLUSTER_CLOUD_TYPE_UNKNOWN = 0xffffffff;
+}
+
+/// {@category Enum}
+class CLUSTER_CONTROL_OBJECT {
+  static const CLUS_OBJECT_INVALID = 0x00000000;
+  static const CLUS_OBJECT_RESOURCE = 0x00000001;
+  static const CLUS_OBJECT_RESOURCE_TYPE = 0x00000002;
+  static const CLUS_OBJECT_GROUP = 0x00000003;
+  static const CLUS_OBJECT_NODE = 0x00000004;
+  static const CLUS_OBJECT_NETWORK = 0x00000005;
+  static const CLUS_OBJECT_NETINTERFACE = 0x00000006;
+  static const CLUS_OBJECT_CLUSTER = 0x00000007;
+  static const CLUS_OBJECT_GROUPSET = 0x00000008;
+  static const CLUS_OBJECT_AFFINITYRULE = 0x00000009;
+  static const CLUS_OBJECT_USER = 0x00000080;
+}
+
+/// {@category Enum}
 class CLUSTER_CSV_VOLUME_FAULT_STATE {
   static const VolumeStateNoFaults = 0x00000000;
   static const VolumeStateNoDirectIO = 0x00000001;
@@ -1189,87 +817,64 @@ class CLUSTER_CSV_VOLUME_FAULT_STATE {
 }
 
 /// {@category Enum}
-class CLUSTER_SHARED_VOLUME_BACKUP_STATE {
-  static const VolumeBackupNone = 0x00000000;
-  static const VolumeBackupInProgress = 0x00000001;
+class CLUSTER_ENUM {
+  static const CLUSTER_ENUM_NODE = 0x00000001;
+  static const CLUSTER_ENUM_RESTYPE = 0x00000002;
+  static const CLUSTER_ENUM_RESOURCE = 0x00000004;
+  static const CLUSTER_ENUM_GROUP = 0x00000008;
+  static const CLUSTER_ENUM_NETWORK = 0x00000010;
+  static const CLUSTER_ENUM_NETINTERFACE = 0x00000020;
+  static const CLUSTER_ENUM_SHARED_VOLUME_GROUP = 0x20000000;
+  static const CLUSTER_ENUM_SHARED_VOLUME_RESOURCE = 0x40000000;
+  static const CLUSTER_ENUM_INTERNAL_NETWORK = 0x80000000;
+  static const CLUSTER_ENUM_ALL = 0x0000003f;
 }
 
 /// {@category Enum}
-class CLUSTER_SHARED_VOLUME_STATE {
-  static const SharedVolumeStateUnavailable = 0x00000000;
-  static const SharedVolumeStatePaused = 0x00000001;
-  static const SharedVolumeStateActive = 0x00000002;
-  static const SharedVolumeStateActiveRedirected = 0x00000003;
-  static const SharedVolumeStateActiveVolumeRedirected = 0x00000004;
+class CLUSTER_GROUP_AUTOFAILBACK_TYPE {
+  static const ClusterGroupPreventFailback = 0x00000000;
+  static const ClusterGroupAllowFailback = 0x00000001;
+  static const ClusterGroupFailbackTypeCount = 0x00000002;
 }
 
 /// {@category Enum}
-class CLUSTER_SHARED_VOLUME_RENAME_INPUT_TYPE {
-  static const ClusterSharedVolumeRenameInputTypeNone = 0x00000000;
-  static const ClusterSharedVolumeRenameInputTypeVolumeOffset = 0x00000001;
-  static const ClusterSharedVolumeRenameInputTypeVolumeId = 0x00000002;
-  static const ClusterSharedVolumeRenameInputTypeVolumeName = 0x00000003;
-  static const ClusterSharedVolumeRenameInputTypeVolumeGuid = 0x00000004;
+class CLUSTER_GROUP_ENUM {
+  static const CLUSTER_GROUP_ENUM_CONTAINS = 0x00000001;
+  static const CLUSTER_GROUP_ENUM_NODES = 0x00000002;
+  static const CLUSTER_GROUP_ENUM_ALL = 0x00000003;
 }
 
 /// {@category Enum}
-class MAINTENANCE_MODE_TYPE_ENUM {
-  static const MaintenanceModeTypeDisableIsAliveCheck = 0x00000001;
-  static const MaintenanceModeTypeOfflineResource = 0x00000002;
-  static const MaintenanceModeTypeUnclusterResource = 0x00000003;
+class CLUSTER_GROUP_PRIORITY {
+  static const PriorityDisabled = 0x00000000;
+  static const PriorityLow = 0x000003e8;
+  static const PriorityMedium = 0x000007d0;
+  static const PriorityHigh = 0x00000bb8;
 }
 
 /// {@category Enum}
-class CLUSPROP_IPADDR_ENABLENETBIOS {
-  static const CLUSPROP_IPADDR_ENABLENETBIOS_DISABLED = 0x00000000;
-  static const CLUSPROP_IPADDR_ENABLENETBIOS_ENABLED = 0x00000001;
-  static const CLUSPROP_IPADDR_ENABLENETBIOS_TRACK_NIC = 0x00000002;
+class CLUSTER_GROUP_STATE {
+  static const ClusterGroupStateUnknown = 0xffffffff;
+  static const ClusterGroupOnline = 0x00000000;
+  static const ClusterGroupOffline = 0x00000001;
+  static const ClusterGroupFailed = 0x00000002;
+  static const ClusterGroupPartialOnline = 0x00000003;
+  static const ClusterGroupPending = 0x00000004;
 }
 
 /// {@category Enum}
-class FILESHARE_CHANGE_ENUM {
-  static const FILESHARE_CHANGE_NONE = 0x00000000;
-  static const FILESHARE_CHANGE_ADD = 0x00000001;
-  static const FILESHARE_CHANGE_DEL = 0x00000002;
-  static const FILESHARE_CHANGE_MODIFY = 0x00000003;
+class CLUSTER_MGMT_POINT_RESTYPE {
+  static const CLUSTER_MGMT_POINT_RESTYPE_AUTO = 0x00000000;
+  static const CLUSTER_MGMT_POINT_RESTYPE_SNN = 0x00000001;
+  static const CLUSTER_MGMT_POINT_RESTYPE_DNN = 0x00000002;
 }
 
 /// {@category Enum}
-class CLUSTER_RESOURCE_ENUM {
-  static const CLUSTER_RESOURCE_ENUM_DEPENDS = 0x00000001;
-  static const CLUSTER_RESOURCE_ENUM_PROVIDES = 0x00000002;
-  static const CLUSTER_RESOURCE_ENUM_NODES = 0x00000004;
-  static const CLUSTER_RESOURCE_ENUM_ALL = 0x00000007;
-}
-
-/// {@category Enum}
-class CLUSTER_RESOURCE_TYPE_ENUM {
-  static const CLUSTER_RESOURCE_TYPE_ENUM_NODES = 0x00000001;
-  static const CLUSTER_RESOURCE_TYPE_ENUM_RESOURCES = 0x00000002;
-  static const CLUSTER_RESOURCE_TYPE_ENUM_ALL = 0x00000003;
-}
-
-/// {@category Enum}
-class CLUSTER_NETWORK_ENUM {
-  static const CLUSTER_NETWORK_ENUM_NETINTERFACES = 0x00000001;
-  static const CLUSTER_NETWORK_ENUM_ALL = 0x00000001;
-}
-
-/// {@category Enum}
-class CLUSTER_NETWORK_STATE {
-  static const ClusterNetworkStateUnknown = 0xffffffff;
-  static const ClusterNetworkUnavailable = 0x00000000;
-  static const ClusterNetworkDown = 0x00000001;
-  static const ClusterNetworkPartitioned = 0x00000002;
-  static const ClusterNetworkUp = 0x00000003;
-}
-
-/// {@category Enum}
-class CLUSTER_NETWORK_ROLE {
-  static const ClusterNetworkRoleNone = 0x00000000;
-  static const ClusterNetworkRoleInternalUse = 0x00000001;
-  static const ClusterNetworkRoleClientAccess = 0x00000002;
-  static const ClusterNetworkRoleInternalAndClient = 0x00000003;
+class CLUSTER_MGMT_POINT_TYPE {
+  static const CLUSTER_MGMT_POINT_TYPE_NONE = 0x00000000;
+  static const CLUSTER_MGMT_POINT_TYPE_CNO = 0x00000001;
+  static const CLUSTER_MGMT_POINT_TYPE_DNS_ONLY = 0x00000002;
+  static const CLUSTER_MGMT_POINT_TYPE_CNO_ONLY = 0x00000003;
 }
 
 /// {@category Enum}
@@ -1282,145 +887,204 @@ class CLUSTER_NETINTERFACE_STATE {
 }
 
 /// {@category Enum}
-class CLUSTER_SETUP_PHASE {
-  static const ClusterSetupPhaseInitialize = 0x00000001;
-  static const ClusterSetupPhaseValidateNodeState = 0x00000064;
-  static const ClusterSetupPhaseValidateNetft = 0x00000066;
-  static const ClusterSetupPhaseValidateClusDisk = 0x00000067;
-  static const ClusterSetupPhaseConfigureClusSvc = 0x00000068;
-  static const ClusterSetupPhaseStartingClusSvc = 0x00000069;
-  static const ClusterSetupPhaseQueryClusterNameAccount = 0x0000006a;
-  static const ClusterSetupPhaseValidateClusterNameAccount = 0x0000006b;
-  static const ClusterSetupPhaseCreateClusterAccount = 0x0000006c;
-  static const ClusterSetupPhaseConfigureClusterAccount = 0x0000006d;
-  static const ClusterSetupPhaseFormingCluster = 0x000000c8;
-  static const ClusterSetupPhaseAddClusterProperties = 0x000000c9;
-  static const ClusterSetupPhaseCreateResourceTypes = 0x000000ca;
-  static const ClusterSetupPhaseCreateGroups = 0x000000cb;
-  static const ClusterSetupPhaseCreateIPAddressResources = 0x000000cc;
-  static const ClusterSetupPhaseCreateNetworkName = 0x000000cd;
-  static const ClusterSetupPhaseClusterGroupOnline = 0x000000ce;
-  static const ClusterSetupPhaseGettingCurrentMembership = 0x0000012c;
-  static const ClusterSetupPhaseAddNodeToCluster = 0x0000012d;
-  static const ClusterSetupPhaseNodeUp = 0x0000012e;
-  static const ClusterSetupPhaseMoveGroup = 0x00000190;
-  static const ClusterSetupPhaseDeleteGroup = 0x00000191;
-  static const ClusterSetupPhaseCleanupCOs = 0x00000192;
-  static const ClusterSetupPhaseOfflineGroup = 0x00000193;
-  static const ClusterSetupPhaseEvictNode = 0x00000194;
-  static const ClusterSetupPhaseCleanupNode = 0x00000195;
-  static const ClusterSetupPhaseCoreGroupCleanup = 0x00000196;
-  static const ClusterSetupPhaseFailureCleanup = 0x000003e7;
+class CLUSTER_NETWORK_ENUM {
+  static const CLUSTER_NETWORK_ENUM_NETINTERFACES = 0x00000001;
+  static const CLUSTER_NETWORK_ENUM_ALL = 0x00000001;
 }
 
 /// {@category Enum}
-class CLUSTER_SETUP_PHASE_TYPE {
-  static const ClusterSetupPhaseStart = 0x00000001;
-  static const ClusterSetupPhaseContinue = 0x00000002;
-  static const ClusterSetupPhaseEnd = 0x00000003;
-  static const ClusterSetupPhaseReport = 0x00000004;
+class CLUSTER_NETWORK_ROLE {
+  static const ClusterNetworkRoleNone = 0x00000000;
+  static const ClusterNetworkRoleInternalUse = 0x00000001;
+  static const ClusterNetworkRoleClientAccess = 0x00000002;
+  static const ClusterNetworkRoleInternalAndClient = 0x00000003;
 }
 
 /// {@category Enum}
-class CLUSTER_SETUP_PHASE_SEVERITY {
-  static const ClusterSetupPhaseInformational = 0x00000001;
-  static const ClusterSetupPhaseWarning = 0x00000002;
-  static const ClusterSetupPhaseFatal = 0x00000003;
+class CLUSTER_NETWORK_STATE {
+  static const ClusterNetworkStateUnknown = 0xffffffff;
+  static const ClusterNetworkUnavailable = 0x00000000;
+  static const ClusterNetworkDown = 0x00000001;
+  static const ClusterNetworkPartitioned = 0x00000002;
+  static const ClusterNetworkUp = 0x00000003;
 }
 
 /// {@category Enum}
-class PLACEMENT_OPTIONS {
-  static const PLACEMENT_OPTIONS_MIN_VALUE = 0x00000000;
-  static const PLACEMENT_OPTIONS_DEFAULT_PLACEMENT_OPTIONS = 0x00000000;
-  static const PLACEMENT_OPTIONS_DISABLE_CSV_VM_DEPENDENCY = 0x00000001;
-  static const PLACEMENT_OPTIONS_CONSIDER_OFFLINE_VMS = 0x00000002;
-  static const PLACEMENT_OPTIONS_DONT_USE_MEMORY = 0x00000004;
-  static const PLACEMENT_OPTIONS_DONT_USE_CPU = 0x00000008;
-  static const PLACEMENT_OPTIONS_DONT_USE_LOCAL_TEMP_DISK = 0x00000010;
-  static const PLACEMENT_OPTIONS_DONT_RESUME_VMS_WITH_EXISTING_TEMP_DISK = 0x00000020;
-  static const PLACEMENT_OPTIONS_SAVE_VMS_WITH_LOCAL_DISK_ON_DRAIN_OVERWRITE = 0x00000040;
-  static const PLACEMENT_OPTIONS_DONT_RESUME_AVAILABILTY_SET_VMS_WITH_EXISTING_TEMP_DISK = 0x00000080;
-  static const PLACEMENT_OPTIONS_SAVE_AVAILABILTY_SET_VMS_WITH_LOCAL_DISK_ON_DRAIN_OVERWRITE = 0x00000100;
-  static const PLACEMENT_OPTIONS_AVAILABILITY_SET_DOMAIN_AFFINITY = 0x00000200;
-  static const PLACEMENT_OPTIONS_ALL = 0x000003ff;
+class CLUSTER_NODE_DRAIN_STATUS {
+  static const NodeDrainStatusNotInitiated = 0x00000000;
+  static const NodeDrainStatusInProgress = 0x00000001;
+  static const NodeDrainStatusCompleted = 0x00000002;
+  static const NodeDrainStatusFailed = 0x00000003;
+  static const ClusterNodeDrainStatusCount = 0x00000004;
 }
 
 /// {@category Enum}
-class GRP_PLACEMENT_OPTIONS {
-  static const GRP_PLACEMENT_OPTIONS_MIN_VALUE = 0x00000000;
-  static const GRP_PLACEMENT_OPTIONS_DEFAULT = 0x00000000;
-  static const GRP_PLACEMENT_OPTIONS_DISABLE_AUTOBALANCING = 0x00000001;
-  static const GRP_PLACEMENT_OPTIONS_ALL = 0x00000001;
+class CLUSTER_NODE_ENUM {
+  static const CLUSTER_NODE_ENUM_NETINTERFACES = 0x00000001;
+  static const CLUSTER_NODE_ENUM_GROUPS = 0x00000002;
+  static const CLUSTER_NODE_ENUM_PREFERRED_GROUPS = 0x00000004;
+  static const CLUSTER_NODE_ENUM_ALL = 0x00000003;
 }
 
 /// {@category Enum}
-class SR_REPLICATED_DISK_TYPE {
-  static const SrReplicatedDiskTypeNone = 0x00000000;
-  static const SrReplicatedDiskTypeSource = 0x00000001;
-  static const SrReplicatedDiskTypeLogSource = 0x00000002;
-  static const SrReplicatedDiskTypeDestination = 0x00000003;
-  static const SrReplicatedDiskTypeLogDestination = 0x00000004;
-  static const SrReplicatedDiskTypeNotInParthership = 0x00000005;
-  static const SrReplicatedDiskTypeLogNotInParthership = 0x00000006;
-  static const SrReplicatedDiskTypeOther = 0x00000007;
+class CLUSTER_NODE_RESUME_FAILBACK_TYPE {
+  static const DoNotFailbackGroups = 0x00000000;
+  static const FailbackGroupsImmediately = 0x00000001;
+  static const FailbackGroupsPerPolicy = 0x00000002;
+  static const ClusterNodeResumeFailbackTypeCount = 0x00000003;
 }
 
 /// {@category Enum}
-class SR_DISK_REPLICATION_ELIGIBLE {
-  static const SrDiskReplicationEligibleNone = 0x00000000;
-  static const SrDiskReplicationEligibleYes = 0x00000001;
-  static const SrDiskReplicationEligibleOffline = 0x00000002;
-  static const SrDiskReplicationEligibleNotGpt = 0x00000003;
-  static const SrDiskReplicationEligiblePartitionLayoutMismatch = 0x00000004;
-  static const SrDiskReplicationEligibleInsufficientFreeSpace = 0x00000005;
-  static const SrDiskReplicationEligibleNotInSameSite = 0x00000006;
-  static const SrDiskReplicationEligibleInSameSite = 0x00000007;
-  static const SrDiskReplicationEligibleFileSystemNotSupported = 0x00000008;
-  static const SrDiskReplicationEligibleAlreadyInReplication = 0x00000009;
-  static const SrDiskReplicationEligibleSameAsSpecifiedDisk = 0x0000000a;
-  static const SrDiskReplicationEligibleOther = 0x0000270f;
+class CLUSTER_NODE_STATE {
+  static const ClusterNodeStateUnknown = 0xffffffff;
+  static const ClusterNodeUp = 0x00000000;
+  static const ClusterNodeDown = 0x00000001;
+  static const ClusterNodePaused = 0x00000002;
+  static const ClusterNodeJoining = 0x00000003;
 }
 
 /// {@category Enum}
-class VM_RESDLL_CONTEXT {
-  static const VmResdllContextTurnOff = 0x00000000;
-  static const VmResdllContextSave = 0x00000001;
-  static const VmResdllContextShutdown = 0x00000002;
-  static const VmResdllContextShutdownForce = 0x00000003;
-  static const VmResdllContextLiveMigration = 0x00000004;
+class CLUSTER_NODE_STATUS {
+  static const NodeStatusNormal = 0x00000000;
+  static const NodeStatusIsolated = 0x00000001;
+  static const NodeStatusQuarantined = 0x00000002;
+  static const NodeStatusDrainInProgress = 0x00000004;
+  static const NodeStatusDrainCompleted = 0x00000008;
+  static const NodeStatusDrainFailed = 0x00000010;
+  static const NodeStatusAvoidPlacement = 0x00000020;
+  static const NodeStatusMax = 0x00000033;
 }
 
 /// {@category Enum}
-class RESDLL_CONTEXT_OPERATION_TYPE {
-  static const ResdllContextOperationTypeFailback = 0x00000000;
-  static const ResdllContextOperationTypeDrain = 0x00000001;
-  static const ResdllContextOperationTypeDrainFailure = 0x00000002;
-  static const ResdllContextOperationTypeEmbeddedFailure = 0x00000003;
-  static const ResdllContextOperationTypePreemption = 0x00000004;
-  static const ResdllContextOperationTypeNetworkDisconnect = 0x00000005;
-  static const ResdllContextOperationTypeNetworkDisconnectMoveRetry = 0x00000006;
+class CLUSTER_NOTIFICATIONS_VERSION {
+  static const CLUSTER_NOTIFICATIONS_V1 = 0x00000001;
+  static const CLUSTER_NOTIFICATIONS_V2 = 0x00000002;
 }
 
 /// {@category Enum}
-class LOG_LEVEL {
-  static const LOG_INFORMATION = 0x00000000;
-  static const LOG_WARNING = 0x00000001;
-  static const LOG_ERROR = 0x00000002;
-  static const LOG_SEVERE = 0x00000003;
+class CLUSTER_OBJECT_TYPE {
+  static const CLUSTER_OBJECT_TYPE_NONE = 0x00000000;
+  static const CLUSTER_OBJECT_TYPE_CLUSTER = 0x00000001;
+  static const CLUSTER_OBJECT_TYPE_GROUP = 0x00000002;
+  static const CLUSTER_OBJECT_TYPE_RESOURCE = 0x00000003;
+  static const CLUSTER_OBJECT_TYPE_RESOURCE_TYPE = 0x00000004;
+  static const CLUSTER_OBJECT_TYPE_NETWORK_INTERFACE = 0x00000005;
+  static const CLUSTER_OBJECT_TYPE_NETWORK = 0x00000006;
+  static const CLUSTER_OBJECT_TYPE_NODE = 0x00000007;
+  static const CLUSTER_OBJECT_TYPE_REGISTRY = 0x00000008;
+  static const CLUSTER_OBJECT_TYPE_QUORUM = 0x00000009;
+  static const CLUSTER_OBJECT_TYPE_SHARED_VOLUME = 0x0000000a;
+  static const CLUSTER_OBJECT_TYPE_GROUPSET = 0x0000000d;
+  static const CLUSTER_OBJECT_TYPE_AFFINITYRULE = 0x00000010;
 }
 
 /// {@category Enum}
-class RESOURCE_EXIT_STATE {
-  static const ResourceExitStateContinue = 0x00000000;
-  static const ResourceExitStateTerminate = 0x00000001;
-  static const ResourceExitStateMax = 0x00000002;
+class CLUSTER_PROPERTY_FORMAT {
+  static const CLUSPROP_FORMAT_UNKNOWN = 0x00000000;
+  static const CLUSPROP_FORMAT_BINARY = 0x00000001;
+  static const CLUSPROP_FORMAT_DWORD = 0x00000002;
+  static const CLUSPROP_FORMAT_SZ = 0x00000003;
+  static const CLUSPROP_FORMAT_EXPAND_SZ = 0x00000004;
+  static const CLUSPROP_FORMAT_MULTI_SZ = 0x00000005;
+  static const CLUSPROP_FORMAT_ULARGE_INTEGER = 0x00000006;
+  static const CLUSPROP_FORMAT_LONG = 0x00000007;
+  static const CLUSPROP_FORMAT_EXPANDED_SZ = 0x00000008;
+  static const CLUSPROP_FORMAT_SECURITY_DESCRIPTOR = 0x00000009;
+  static const CLUSPROP_FORMAT_LARGE_INTEGER = 0x0000000a;
+  static const CLUSPROP_FORMAT_WORD = 0x0000000b;
+  static const CLUSPROP_FORMAT_FILETIME = 0x0000000c;
+  static const CLUSPROP_FORMAT_VALUE_LIST = 0x0000000d;
+  static const CLUSPROP_FORMAT_PROPERTY_LIST = 0x0000000e;
+  static const CLUSPROP_FORMAT_USER = 0x00008000;
 }
 
 /// {@category Enum}
-class FAILURE_TYPE {
-  static const FAILURE_TYPE_GENERAL = 0x00000000;
-  static const FAILURE_TYPE_EMBEDDED = 0x00000001;
-  static const FAILURE_TYPE_NETWORK_LOSS = 0x00000002;
+class CLUSTER_PROPERTY_SYNTAX {
+  static const CLUSPROP_SYNTAX_ENDMARK = 0x00000000;
+  static const CLUSPROP_SYNTAX_NAME = 0x00040003;
+  static const CLUSPROP_SYNTAX_RESCLASS = 0x00020002;
+  static const CLUSPROP_SYNTAX_LIST_VALUE_SZ = 0x00010003;
+  static const CLUSPROP_SYNTAX_LIST_VALUE_EXPAND_SZ = 0x00010004;
+  static const CLUSPROP_SYNTAX_LIST_VALUE_DWORD = 0x00010002;
+  static const CLUSPROP_SYNTAX_LIST_VALUE_BINARY = 0x00010001;
+  static const CLUSPROP_SYNTAX_LIST_VALUE_MULTI_SZ = 0x00010005;
+  static const CLUSPROP_SYNTAX_LIST_VALUE_LONG = 0x00010007;
+  static const CLUSPROP_SYNTAX_LIST_VALUE_EXPANDED_SZ = 0x00010008;
+  static const CLUSPROP_SYNTAX_LIST_VALUE_SECURITY_DESCRIPTOR = 0x00010009;
+  static const CLUSPROP_SYNTAX_LIST_VALUE_LARGE_INTEGER = 0x0001000a;
+  static const CLUSPROP_SYNTAX_LIST_VALUE_ULARGE_INTEGER = 0x00010006;
+  static const CLUSPROP_SYNTAX_LIST_VALUE_WORD = 0x0001000b;
+  static const CLUSPROP_SYNTAX_LIST_VALUE_PROPERTY_LIST = 0x0001000e;
+  static const CLUSPROP_SYNTAX_LIST_VALUE_FILETIME = 0x0001000c;
+  static const CLUSPROP_SYNTAX_DISK_SIGNATURE = 0x00050002;
+  static const CLUSPROP_SYNTAX_SCSI_ADDRESS = 0x00060002;
+  static const CLUSPROP_SYNTAX_DISK_NUMBER = 0x00070002;
+  static const CLUSPROP_SYNTAX_PARTITION_INFO = 0x00080001;
+  static const CLUSPROP_SYNTAX_FTSET_INFO = 0x00090001;
+  static const CLUSPROP_SYNTAX_DISK_SERIALNUMBER = 0x000a0003;
+  static const CLUSPROP_SYNTAX_DISK_GUID = 0x000b0003;
+  static const CLUSPROP_SYNTAX_DISK_SIZE = 0x000c0006;
+  static const CLUSPROP_SYNTAX_PARTITION_INFO_EX = 0x000d0001;
+  static const CLUSPROP_SYNTAX_PARTITION_INFO_EX2 = 0x000e0001;
+  static const CLUSPROP_SYNTAX_STORAGE_DEVICE_ID_DESCRIPTOR = 0x000f0001;
+}
+
+/// {@category Enum}
+class CLUSTER_PROPERTY_TYPE {
+  static const CLUSPROP_TYPE_UNKNOWN = 0xffffffff;
+  static const CLUSPROP_TYPE_ENDMARK = 0x00000000;
+  static const CLUSPROP_TYPE_LIST_VALUE = 0x00000001;
+  static const CLUSPROP_TYPE_RESCLASS = 0x00000002;
+  static const CLUSPROP_TYPE_RESERVED1 = 0x00000003;
+  static const CLUSPROP_TYPE_NAME = 0x00000004;
+  static const CLUSPROP_TYPE_SIGNATURE = 0x00000005;
+  static const CLUSPROP_TYPE_SCSI_ADDRESS = 0x00000006;
+  static const CLUSPROP_TYPE_DISK_NUMBER = 0x00000007;
+  static const CLUSPROP_TYPE_PARTITION_INFO = 0x00000008;
+  static const CLUSPROP_TYPE_FTSET_INFO = 0x00000009;
+  static const CLUSPROP_TYPE_DISK_SERIALNUMBER = 0x0000000a;
+  static const CLUSPROP_TYPE_DISK_GUID = 0x0000000b;
+  static const CLUSPROP_TYPE_DISK_SIZE = 0x0000000c;
+  static const CLUSPROP_TYPE_PARTITION_INFO_EX = 0x0000000d;
+  static const CLUSPROP_TYPE_PARTITION_INFO_EX2 = 0x0000000e;
+  static const CLUSPROP_TYPE_STORAGE_DEVICE_ID_DESCRIPTOR = 0x0000000f;
+  static const CLUSPROP_TYPE_USER = 0x00008000;
+}
+
+/// {@category Enum}
+class CLUSTER_QUORUM_TYPE {
+  static const OperationalQuorum = 0x00000000;
+  static const ModifyQuorum = 0x00000001;
+}
+
+/// {@category Enum}
+class CLUSTER_QUORUM_VALUE {
+  static const CLUSTER_QUORUM_MAINTAINED = 0x00000000;
+  static const CLUSTER_QUORUM_LOST = 0x00000001;
+}
+
+/// {@category Enum}
+class CLUSTER_REG_COMMAND {
+  static const CLUSREG_COMMAND_NONE = 0x00000000;
+  static const CLUSREG_SET_VALUE = 0x00000001;
+  static const CLUSREG_CREATE_KEY = 0x00000002;
+  static const CLUSREG_DELETE_KEY = 0x00000003;
+  static const CLUSREG_DELETE_VALUE = 0x00000004;
+  static const CLUSREG_SET_KEY_SECURITY = 0x00000005;
+  static const CLUSREG_VALUE_DELETED = 0x00000006;
+  static const CLUSREG_READ_KEY = 0x00000007;
+  static const CLUSREG_READ_VALUE = 0x00000008;
+  static const CLUSREG_READ_ERROR = 0x00000009;
+  static const CLUSREG_CONTROL_COMMAND = 0x0000000a;
+  static const CLUSREG_CONDITION_EXISTS = 0x0000000b;
+  static const CLUSREG_CONDITION_NOT_EXISTS = 0x0000000c;
+  static const CLUSREG_CONDITION_IS_EQUAL = 0x0000000d;
+  static const CLUSREG_CONDITION_IS_NOT_EQUAL = 0x0000000e;
+  static const CLUSREG_CONDITION_IS_GREATER_THAN = 0x0000000f;
+  static const CLUSREG_CONDITION_IS_LESS_THAN = 0x00000010;
+  static const CLUSREG_CONDITION_KEY_EXISTS = 0x00000011;
+  static const CLUSREG_CONDITION_KEY_NOT_EXISTS = 0x00000012;
+  static const CLUSREG_LAST_COMMAND = 0x00000013;
 }
 
 /// {@category Enum}
@@ -1431,23 +1095,71 @@ class CLUSTER_RESOURCE_APPLICATION_STATE {
 }
 
 /// {@category Enum}
-class RESOURCE_MONITOR_STATE {
-  static const RmonInitializing = 0x00000000;
-  static const RmonIdle = 0x00000001;
-  static const RmonStartingResource = 0x00000002;
-  static const RmonInitializingResource = 0x00000003;
-  static const RmonOnlineResource = 0x00000004;
-  static const RmonOfflineResource = 0x00000005;
-  static const RmonShutdownResource = 0x00000006;
-  static const RmonDeletingResource = 0x00000007;
-  static const RmonIsAlivePoll = 0x00000008;
-  static const RmonLooksAlivePoll = 0x00000009;
-  static const RmonArbitrateResource = 0x0000000a;
-  static const RmonReleaseResource = 0x0000000b;
-  static const RmonResourceControl = 0x0000000c;
-  static const RmonResourceTypeControl = 0x0000000d;
-  static const RmonTerminateResource = 0x0000000e;
-  static const RmonDeadlocked = 0x0000000f;
+class CLUSTER_RESOURCE_CLASS {
+  static const CLUS_RESCLASS_UNKNOWN = 0x00000000;
+  static const CLUS_RESCLASS_STORAGE = 0x00000001;
+  static const CLUS_RESCLASS_NETWORK = 0x00000002;
+  static const CLUS_RESCLASS_USER = 0x00008000;
+}
+
+/// {@category Enum}
+class CLUSTER_RESOURCE_CREATE_FLAGS {
+  static const CLUSTER_RESOURCE_DEFAULT_MONITOR = 0x00000000;
+  static const CLUSTER_RESOURCE_SEPARATE_MONITOR = 0x00000001;
+  static const CLUSTER_RESOURCE_VALID_FLAGS = 0x00000001;
+}
+
+/// {@category Enum}
+class CLUSTER_RESOURCE_EMBEDDED_FAILURE_ACTION {
+  static const ClusterResourceEmbeddedFailureActionNone = 0x00000000;
+  static const ClusterResourceEmbeddedFailureActionLogOnly = 0x00000001;
+  static const ClusterResourceEmbeddedFailureActionRecover = 0x00000002;
+}
+
+/// {@category Enum}
+class CLUSTER_RESOURCE_ENUM {
+  static const CLUSTER_RESOURCE_ENUM_DEPENDS = 0x00000001;
+  static const CLUSTER_RESOURCE_ENUM_PROVIDES = 0x00000002;
+  static const CLUSTER_RESOURCE_ENUM_NODES = 0x00000004;
+  static const CLUSTER_RESOURCE_ENUM_ALL = 0x00000007;
+}
+
+/// {@category Enum}
+class CLUSTER_RESOURCE_RESTART_ACTION {
+  static const ClusterResourceDontRestart = 0x00000000;
+  static const ClusterResourceRestartNoNotify = 0x00000001;
+  static const ClusterResourceRestartNotify = 0x00000002;
+  static const ClusterResourceRestartActionCount = 0x00000003;
+}
+
+/// {@category Enum}
+class CLUSTER_RESOURCE_STATE {
+  static const ClusterResourceStateUnknown = 0xffffffff;
+  static const ClusterResourceInherited = 0x00000000;
+  static const ClusterResourceInitializing = 0x00000001;
+  static const ClusterResourceOnline = 0x00000002;
+  static const ClusterResourceOffline = 0x00000003;
+  static const ClusterResourceFailed = 0x00000004;
+  static const ClusterResourcePending = 0x00000080;
+  static const ClusterResourceOnlinePending = 0x00000081;
+  static const ClusterResourceOfflinePending = 0x00000082;
+}
+
+/// {@category Enum}
+class CLUSTER_RESOURCE_STATE_CHANGE_REASON {
+  static const eResourceStateChangeReasonUnknown = 0x00000000;
+  static const eResourceStateChangeReasonMove = 0x00000001;
+  static const eResourceStateChangeReasonFailover = 0x00000002;
+  static const eResourceStateChangeReasonFailedMove = 0x00000003;
+  static const eResourceStateChangeReasonShutdown = 0x00000004;
+  static const eResourceStateChangeReasonRundown = 0x00000005;
+}
+
+/// {@category Enum}
+class CLUSTER_RESOURCE_TYPE_ENUM {
+  static const CLUSTER_RESOURCE_TYPE_ENUM_NODES = 0x00000001;
+  static const CLUSTER_RESOURCE_TYPE_ENUM_RESOURCES = 0x00000002;
+  static const CLUSTER_RESOURCE_TYPE_ENUM_ALL = 0x00000003;
 }
 
 /// {@category Enum}
@@ -1494,14 +1206,302 @@ class CLUSTER_ROLE_STATE {
 }
 
 /// {@category Enum}
-class CLUADMEX_OBJECT_TYPE {
-  static const CLUADMEX_OT_NONE = 0x00000000;
-  static const CLUADMEX_OT_CLUSTER = 0x00000001;
-  static const CLUADMEX_OT_NODE = 0x00000002;
-  static const CLUADMEX_OT_GROUP = 0x00000003;
-  static const CLUADMEX_OT_RESOURCE = 0x00000004;
-  static const CLUADMEX_OT_RESOURCETYPE = 0x00000005;
-  static const CLUADMEX_OT_NETWORK = 0x00000006;
-  static const CLUADMEX_OT_NETINTERFACE = 0x00000007;
+class CLUSTER_SETUP_PHASE {
+  static const ClusterSetupPhaseInitialize = 0x00000001;
+  static const ClusterSetupPhaseValidateNodeState = 0x00000064;
+  static const ClusterSetupPhaseValidateNetft = 0x00000066;
+  static const ClusterSetupPhaseValidateClusDisk = 0x00000067;
+  static const ClusterSetupPhaseConfigureClusSvc = 0x00000068;
+  static const ClusterSetupPhaseStartingClusSvc = 0x00000069;
+  static const ClusterSetupPhaseQueryClusterNameAccount = 0x0000006a;
+  static const ClusterSetupPhaseValidateClusterNameAccount = 0x0000006b;
+  static const ClusterSetupPhaseCreateClusterAccount = 0x0000006c;
+  static const ClusterSetupPhaseConfigureClusterAccount = 0x0000006d;
+  static const ClusterSetupPhaseFormingCluster = 0x000000c8;
+  static const ClusterSetupPhaseAddClusterProperties = 0x000000c9;
+  static const ClusterSetupPhaseCreateResourceTypes = 0x000000ca;
+  static const ClusterSetupPhaseCreateGroups = 0x000000cb;
+  static const ClusterSetupPhaseCreateIPAddressResources = 0x000000cc;
+  static const ClusterSetupPhaseCreateNetworkName = 0x000000cd;
+  static const ClusterSetupPhaseClusterGroupOnline = 0x000000ce;
+  static const ClusterSetupPhaseGettingCurrentMembership = 0x0000012c;
+  static const ClusterSetupPhaseAddNodeToCluster = 0x0000012d;
+  static const ClusterSetupPhaseNodeUp = 0x0000012e;
+  static const ClusterSetupPhaseMoveGroup = 0x00000190;
+  static const ClusterSetupPhaseDeleteGroup = 0x00000191;
+  static const ClusterSetupPhaseCleanupCOs = 0x00000192;
+  static const ClusterSetupPhaseOfflineGroup = 0x00000193;
+  static const ClusterSetupPhaseEvictNode = 0x00000194;
+  static const ClusterSetupPhaseCleanupNode = 0x00000195;
+  static const ClusterSetupPhaseCoreGroupCleanup = 0x00000196;
+  static const ClusterSetupPhaseFailureCleanup = 0x000003e7;
+}
+
+/// {@category Enum}
+class CLUSTER_SETUP_PHASE_SEVERITY {
+  static const ClusterSetupPhaseInformational = 0x00000001;
+  static const ClusterSetupPhaseWarning = 0x00000002;
+  static const ClusterSetupPhaseFatal = 0x00000003;
+}
+
+/// {@category Enum}
+class CLUSTER_SETUP_PHASE_TYPE {
+  static const ClusterSetupPhaseStart = 0x00000001;
+  static const ClusterSetupPhaseContinue = 0x00000002;
+  static const ClusterSetupPhaseEnd = 0x00000003;
+  static const ClusterSetupPhaseReport = 0x00000004;
+}
+
+/// {@category Enum}
+class CLUSTER_SHARED_VOLUME_BACKUP_STATE {
+  static const VolumeBackupNone = 0x00000000;
+  static const VolumeBackupInProgress = 0x00000001;
+}
+
+/// {@category Enum}
+class CLUSTER_SHARED_VOLUME_RENAME_INPUT_TYPE {
+  static const ClusterSharedVolumeRenameInputTypeNone = 0x00000000;
+  static const ClusterSharedVolumeRenameInputTypeVolumeOffset = 0x00000001;
+  static const ClusterSharedVolumeRenameInputTypeVolumeId = 0x00000002;
+  static const ClusterSharedVolumeRenameInputTypeVolumeName = 0x00000003;
+  static const ClusterSharedVolumeRenameInputTypeVolumeGuid = 0x00000004;
+}
+
+/// {@category Enum}
+class CLUSTER_SHARED_VOLUME_SNAPSHOT_STATE {
+  static const ClusterSharedVolumeSnapshotStateUnknown = 0x00000000;
+  static const ClusterSharedVolumePrepareForHWSnapshot = 0x00000001;
+  static const ClusterSharedVolumeHWSnapshotCompleted = 0x00000002;
+  static const ClusterSharedVolumePrepareForFreeze = 0x00000003;
+}
+
+/// {@category Enum}
+class CLUSTER_SHARED_VOLUME_STATE {
+  static const SharedVolumeStateUnavailable = 0x00000000;
+  static const SharedVolumeStatePaused = 0x00000001;
+  static const SharedVolumeStateActive = 0x00000002;
+  static const SharedVolumeStateActiveRedirected = 0x00000003;
+  static const SharedVolumeStateActiveVolumeRedirected = 0x00000004;
+}
+
+/// {@category Enum}
+class CLUSTER_STORAGENODE_STATE {
+  static const ClusterStorageNodeStateUnknown = 0x00000000;
+  static const ClusterStorageNodeUp = 0x00000001;
+  static const ClusterStorageNodeDown = 0x00000002;
+  static const ClusterStorageNodePaused = 0x00000003;
+  static const ClusterStorageNodeStarting = 0x00000004;
+  static const ClusterStorageNodeStopping = 0x00000005;
+}
+
+/// {@category Enum}
+class CLUSTER_UPGRADE_PHASE {
+  static const ClusterUpgradePhaseInitialize = 0x00000001;
+  static const ClusterUpgradePhaseValidatingUpgrade = 0x00000002;
+  static const ClusterUpgradePhaseUpgradingComponents = 0x00000003;
+  static const ClusterUpgradePhaseInstallingNewComponents = 0x00000004;
+  static const ClusterUpgradePhaseUpgradeComplete = 0x00000005;
+}
+
+/// {@category Enum}
+class CLUS_AFFINITY_RULE_TYPE {
+  static const CLUS_AFFINITY_RULE_NONE = 0x00000000;
+  static const CLUS_AFFINITY_RULE_SAME_FAULT_DOMAIN = 0x00000001;
+  static const CLUS_AFFINITY_RULE_SAME_NODE = 0x00000002;
+  static const CLUS_AFFINITY_RULE_DIFFERENT_FAULT_DOMAIN = 0x00000003;
+  static const CLUS_AFFINITY_RULE_DIFFERENT_NODE = 0x00000004;
+  static const CLUS_AFFINITY_RULE_MIN = 0x00000000;
+  static const CLUS_AFFINITY_RULE_MAX = 0x00000004;
+}
+
+/// {@category Enum}
+class CLUS_CHARACTERISTICS {
+  static const CLUS_CHAR_UNKNOWN = 0x00000000;
+  static const CLUS_CHAR_QUORUM = 0x00000001;
+  static const CLUS_CHAR_DELETE_REQUIRES_ALL_NODES = 0x00000002;
+  static const CLUS_CHAR_LOCAL_QUORUM = 0x00000004;
+  static const CLUS_CHAR_LOCAL_QUORUM_DEBUG = 0x00000008;
+  static const CLUS_CHAR_REQUIRES_STATE_CHANGE_REASON = 0x00000010;
+  static const CLUS_CHAR_BROADCAST_DELETE = 0x00000020;
+  static const CLUS_CHAR_SINGLE_CLUSTER_INSTANCE = 0x00000040;
+  static const CLUS_CHAR_SINGLE_GROUP_INSTANCE = 0x00000080;
+  static const CLUS_CHAR_COEXIST_IN_SHARED_VOLUME_GROUP = 0x00000100;
+  static const CLUS_CHAR_PLACEMENT_DATA = 0x00000200;
+  static const CLUS_CHAR_MONITOR_DETACH = 0x00000400;
+  static const CLUS_CHAR_MONITOR_REATTACH = 0x00000800;
+  static const CLUS_CHAR_OPERATION_CONTEXT = 0x00001000;
+  static const CLUS_CHAR_CLONES = 0x00002000;
+  static const CLUS_CHAR_NOT_PREEMPTABLE = 0x00004000;
+  static const CLUS_CHAR_NOTIFY_NEW_OWNER = 0x00008000;
+  static const CLUS_CHAR_SUPPORTS_UNMONITORED_STATE = 0x00010000;
+  static const CLUS_CHAR_INFRASTRUCTURE = 0x00020000;
+  static const CLUS_CHAR_VETO_DRAIN = 0x00040000;
+}
+
+/// {@category Enum}
+class CLUS_FLAGS {
+  static const CLUS_FLAG_CORE = 0x00000001;
+}
+
+/// {@category Enum}
+class CLUS_GROUP_START_SETTING {
+  static const CLUS_GROUP_START_ALWAYS = 0x00000000;
+  static const CLUS_GROUP_DO_NOT_START = 0x00000001;
+  static const CLUS_GROUP_START_ALLOWED = 0x00000002;
+}
+
+/// {@category Enum}
+class CLUS_RESSUBCLASS {
+  static const CLUS_RESSUBCLASS_SHARED = 0x80000000;
+}
+
+/// {@category Enum}
+class CLUS_RESSUBCLASS_NETWORK {
+  static const CLUS_RESSUBCLASS_NETWORK_INTERNET_PROTOCOL = 0x80000000;
+}
+
+/// {@category Enum}
+class CLUS_RESSUBCLASS_STORAGE {
+  static const CLUS_RESSUBCLASS_STORAGE_SHARED_BUS = 0x80000000;
+  static const CLUS_RESSUBCLASS_STORAGE_DISK = 0x40000000;
+  static const CLUS_RESSUBCLASS_STORAGE_REPLICATION = 0x10000000;
+}
+
+/// {@category Enum}
+class FAILURE_TYPE {
+  static const FAILURE_TYPE_GENERAL = 0x00000000;
+  static const FAILURE_TYPE_EMBEDDED = 0x00000001;
+  static const FAILURE_TYPE_NETWORK_LOSS = 0x00000002;
+}
+
+/// {@category Enum}
+class FILESHARE_CHANGE_ENUM {
+  static const FILESHARE_CHANGE_NONE = 0x00000000;
+  static const FILESHARE_CHANGE_ADD = 0x00000001;
+  static const FILESHARE_CHANGE_DEL = 0x00000002;
+  static const FILESHARE_CHANGE_MODIFY = 0x00000003;
+}
+
+/// {@category Enum}
+class GRP_PLACEMENT_OPTIONS {
+  static const GRP_PLACEMENT_OPTIONS_MIN_VALUE = 0x00000000;
+  static const GRP_PLACEMENT_OPTIONS_DEFAULT = 0x00000000;
+  static const GRP_PLACEMENT_OPTIONS_DISABLE_AUTOBALANCING = 0x00000001;
+  static const GRP_PLACEMENT_OPTIONS_ALL = 0x00000001;
+}
+
+/// {@category Enum}
+class LOG_LEVEL {
+  static const LOG_INFORMATION = 0x00000000;
+  static const LOG_WARNING = 0x00000001;
+  static const LOG_ERROR = 0x00000002;
+  static const LOG_SEVERE = 0x00000003;
+}
+
+/// {@category Enum}
+class MAINTENANCE_MODE_TYPE_ENUM {
+  static const MaintenanceModeTypeDisableIsAliveCheck = 0x00000001;
+  static const MaintenanceModeTypeOfflineResource = 0x00000002;
+  static const MaintenanceModeTypeUnclusterResource = 0x00000003;
+}
+
+/// {@category Enum}
+class NODE_CLUSTER_STATE {
+  static const ClusterStateNotInstalled = 0x00000000;
+  static const ClusterStateNotConfigured = 0x00000001;
+  static const ClusterStateNotRunning = 0x00000003;
+  static const ClusterStateRunning = 0x00000013;
+}
+
+/// {@category Enum}
+class PLACEMENT_OPTIONS {
+  static const PLACEMENT_OPTIONS_MIN_VALUE = 0x00000000;
+  static const PLACEMENT_OPTIONS_DEFAULT_PLACEMENT_OPTIONS = 0x00000000;
+  static const PLACEMENT_OPTIONS_DISABLE_CSV_VM_DEPENDENCY = 0x00000001;
+  static const PLACEMENT_OPTIONS_CONSIDER_OFFLINE_VMS = 0x00000002;
+  static const PLACEMENT_OPTIONS_DONT_USE_MEMORY = 0x00000004;
+  static const PLACEMENT_OPTIONS_DONT_USE_CPU = 0x00000008;
+  static const PLACEMENT_OPTIONS_DONT_USE_LOCAL_TEMP_DISK = 0x00000010;
+  static const PLACEMENT_OPTIONS_DONT_RESUME_VMS_WITH_EXISTING_TEMP_DISK = 0x00000020;
+  static const PLACEMENT_OPTIONS_SAVE_VMS_WITH_LOCAL_DISK_ON_DRAIN_OVERWRITE = 0x00000040;
+  static const PLACEMENT_OPTIONS_DONT_RESUME_AVAILABILTY_SET_VMS_WITH_EXISTING_TEMP_DISK = 0x00000080;
+  static const PLACEMENT_OPTIONS_SAVE_AVAILABILTY_SET_VMS_WITH_LOCAL_DISK_ON_DRAIN_OVERWRITE = 0x00000100;
+  static const PLACEMENT_OPTIONS_AVAILABILITY_SET_DOMAIN_AFFINITY = 0x00000200;
+  static const PLACEMENT_OPTIONS_ALL = 0x000003ff;
+}
+
+/// {@category Enum}
+class RESDLL_CONTEXT_OPERATION_TYPE {
+  static const ResdllContextOperationTypeFailback = 0x00000000;
+  static const ResdllContextOperationTypeDrain = 0x00000001;
+  static const ResdllContextOperationTypeDrainFailure = 0x00000002;
+  static const ResdllContextOperationTypeEmbeddedFailure = 0x00000003;
+  static const ResdllContextOperationTypePreemption = 0x00000004;
+  static const ResdllContextOperationTypeNetworkDisconnect = 0x00000005;
+  static const ResdllContextOperationTypeNetworkDisconnectMoveRetry = 0x00000006;
+}
+
+/// {@category Enum}
+class RESOURCE_EXIT_STATE {
+  static const ResourceExitStateContinue = 0x00000000;
+  static const ResourceExitStateTerminate = 0x00000001;
+  static const ResourceExitStateMax = 0x00000002;
+}
+
+/// {@category Enum}
+class RESOURCE_MONITOR_STATE {
+  static const RmonInitializing = 0x00000000;
+  static const RmonIdle = 0x00000001;
+  static const RmonStartingResource = 0x00000002;
+  static const RmonInitializingResource = 0x00000003;
+  static const RmonOnlineResource = 0x00000004;
+  static const RmonOfflineResource = 0x00000005;
+  static const RmonShutdownResource = 0x00000006;
+  static const RmonDeletingResource = 0x00000007;
+  static const RmonIsAlivePoll = 0x00000008;
+  static const RmonLooksAlivePoll = 0x00000009;
+  static const RmonArbitrateResource = 0x0000000a;
+  static const RmonReleaseResource = 0x0000000b;
+  static const RmonResourceControl = 0x0000000c;
+  static const RmonResourceTypeControl = 0x0000000d;
+  static const RmonTerminateResource = 0x0000000e;
+  static const RmonDeadlocked = 0x0000000f;
+}
+
+/// {@category Enum}
+class SR_DISK_REPLICATION_ELIGIBLE {
+  static const SrDiskReplicationEligibleNone = 0x00000000;
+  static const SrDiskReplicationEligibleYes = 0x00000001;
+  static const SrDiskReplicationEligibleOffline = 0x00000002;
+  static const SrDiskReplicationEligibleNotGpt = 0x00000003;
+  static const SrDiskReplicationEligiblePartitionLayoutMismatch = 0x00000004;
+  static const SrDiskReplicationEligibleInsufficientFreeSpace = 0x00000005;
+  static const SrDiskReplicationEligibleNotInSameSite = 0x00000006;
+  static const SrDiskReplicationEligibleInSameSite = 0x00000007;
+  static const SrDiskReplicationEligibleFileSystemNotSupported = 0x00000008;
+  static const SrDiskReplicationEligibleAlreadyInReplication = 0x00000009;
+  static const SrDiskReplicationEligibleSameAsSpecifiedDisk = 0x0000000a;
+  static const SrDiskReplicationEligibleOther = 0x0000270f;
+}
+
+/// {@category Enum}
+class SR_REPLICATED_DISK_TYPE {
+  static const SrReplicatedDiskTypeNone = 0x00000000;
+  static const SrReplicatedDiskTypeSource = 0x00000001;
+  static const SrReplicatedDiskTypeLogSource = 0x00000002;
+  static const SrReplicatedDiskTypeDestination = 0x00000003;
+  static const SrReplicatedDiskTypeLogDestination = 0x00000004;
+  static const SrReplicatedDiskTypeNotInParthership = 0x00000005;
+  static const SrReplicatedDiskTypeLogNotInParthership = 0x00000006;
+  static const SrReplicatedDiskTypeOther = 0x00000007;
+}
+
+/// {@category Enum}
+class VM_RESDLL_CONTEXT {
+  static const VmResdllContextTurnOff = 0x00000000;
+  static const VmResdllContextSave = 0x00000001;
+  static const VmResdllContextShutdown = 0x00000002;
+  static const VmResdllContextShutdownForce = 0x00000003;
+  static const VmResdllContextLiveMigration = 0x00000004;
 }
 

@@ -133,7 +133,8 @@ class DDCAPS_DX1 extends Struct {
   @Uint32() external int dwAlignBoundaryDest;
   @Uint32() external int dwAlignSizeDest;
   @Uint32() external int dwAlignStrideAlign;
-  external __uint__ dwRops;
+  @Array(8)
+  external Array<Uint32> dwRops;
   external DDSCAPS ddsCaps;
   @Uint32() external int dwMinOverlayStretch;
   @Uint32() external int dwMaxOverlayStretch;
@@ -172,7 +173,8 @@ class DDCAPS_DX3 extends Struct {
   @Uint32() external int dwAlignBoundaryDest;
   @Uint32() external int dwAlignSizeDest;
   @Uint32() external int dwAlignStrideAlign;
-  external __uint__ dwRops;
+  @Array(8)
+  external Array<Uint32> dwRops;
   external DDSCAPS ddsCaps;
   @Uint32() external int dwMinOverlayStretch;
   @Uint32() external int dwMaxOverlayStretch;
@@ -186,15 +188,18 @@ class DDCAPS_DX3 extends Struct {
   @Uint32() external int dwSVBCaps;
   @Uint32() external int dwSVBCKeyCaps;
   @Uint32() external int dwSVBFXCaps;
-  external __uint__ dwSVBRops;
+  @Array(8)
+  external Array<Uint32> dwSVBRops;
   @Uint32() external int dwVSBCaps;
   @Uint32() external int dwVSBCKeyCaps;
   @Uint32() external int dwVSBFXCaps;
-  external __uint__ dwVSBRops;
+  @Array(8)
+  external Array<Uint32> dwVSBRops;
   @Uint32() external int dwSSBCaps;
   @Uint32() external int dwSSBCKeyCaps;
   @Uint32() external int dwSSBFXCaps;
-  external __uint__ dwSSBRops;
+  @Array(8)
+  external Array<Uint32> dwSSBRops;
   @Uint32() external int dwReserved4;
   @Uint32() external int dwReserved5;
   @Uint32() external int dwReserved6;
@@ -226,7 +231,8 @@ class DDCAPS_DX5 extends Struct {
   @Uint32() external int dwAlignBoundaryDest;
   @Uint32() external int dwAlignSizeDest;
   @Uint32() external int dwAlignStrideAlign;
-  external __uint__ dwRops;
+  @Array(8)
+  external Array<Uint32> dwRops;
   external DDSCAPS ddsCaps;
   @Uint32() external int dwMinOverlayStretch;
   @Uint32() external int dwMaxOverlayStretch;
@@ -240,15 +246,18 @@ class DDCAPS_DX5 extends Struct {
   @Uint32() external int dwSVBCaps;
   @Uint32() external int dwSVBCKeyCaps;
   @Uint32() external int dwSVBFXCaps;
-  external __uint__ dwSVBRops;
+  @Array(8)
+  external Array<Uint32> dwSVBRops;
   @Uint32() external int dwVSBCaps;
   @Uint32() external int dwVSBCKeyCaps;
   @Uint32() external int dwVSBFXCaps;
-  external __uint__ dwVSBRops;
+  @Array(8)
+  external Array<Uint32> dwVSBRops;
   @Uint32() external int dwSSBCaps;
   @Uint32() external int dwSSBCKeyCaps;
   @Uint32() external int dwSSBFXCaps;
-  external __uint__ dwSSBRops;
+  @Array(8)
+  external Array<Uint32> dwSSBRops;
   @Uint32() external int dwMaxVideoPorts;
   @Uint32() external int dwCurrVideoPorts;
   @Uint32() external int dwSVBCaps2;
@@ -256,7 +265,8 @@ class DDCAPS_DX5 extends Struct {
   @Uint32() external int dwNLVBCaps2;
   @Uint32() external int dwNLVBCKeyCaps;
   @Uint32() external int dwNLVBFXCaps;
-  external __uint__ dwNLVBRops;
+  @Array(8)
+  external Array<Uint32> dwNLVBRops;
 }
 
 class DDCAPS_DX6 extends Struct {
@@ -285,7 +295,8 @@ class DDCAPS_DX6 extends Struct {
   @Uint32() external int dwAlignBoundaryDest;
   @Uint32() external int dwAlignSizeDest;
   @Uint32() external int dwAlignStrideAlign;
-  external __uint__ dwRops;
+  @Array(8)
+  external Array<Uint32> dwRops;
   external DDSCAPS ddsOldCaps;
   @Uint32() external int dwMinOverlayStretch;
   @Uint32() external int dwMaxOverlayStretch;
@@ -299,15 +310,18 @@ class DDCAPS_DX6 extends Struct {
   @Uint32() external int dwSVBCaps;
   @Uint32() external int dwSVBCKeyCaps;
   @Uint32() external int dwSVBFXCaps;
-  external __uint__ dwSVBRops;
+  @Array(8)
+  external Array<Uint32> dwSVBRops;
   @Uint32() external int dwVSBCaps;
   @Uint32() external int dwVSBCKeyCaps;
   @Uint32() external int dwVSBFXCaps;
-  external __uint__ dwVSBRops;
+  @Array(8)
+  external Array<Uint32> dwVSBRops;
   @Uint32() external int dwSSBCaps;
   @Uint32() external int dwSSBCKeyCaps;
   @Uint32() external int dwSSBFXCaps;
-  external __uint__ dwSSBRops;
+  @Array(8)
+  external Array<Uint32> dwSSBRops;
   @Uint32() external int dwMaxVideoPorts;
   @Uint32() external int dwCurrVideoPorts;
   @Uint32() external int dwSVBCaps2;
@@ -315,7 +329,8 @@ class DDCAPS_DX6 extends Struct {
   @Uint32() external int dwNLVBCaps2;
   @Uint32() external int dwNLVBCKeyCaps;
   @Uint32() external int dwNLVBFXCaps;
-  external __uint__ dwNLVBRops;
+  @Array(8)
+  external Array<Uint32> dwNLVBRops;
   external DDSCAPS2 ddsCaps;
 }
 
@@ -345,7 +360,8 @@ class DDCAPS_DX7 extends Struct {
   @Uint32() external int dwAlignBoundaryDest;
   @Uint32() external int dwAlignSizeDest;
   @Uint32() external int dwAlignStrideAlign;
-  external __uint__ dwRops;
+  @Array(8)
+  external Array<Uint32> dwRops;
   external DDSCAPS ddsOldCaps;
   @Uint32() external int dwMinOverlayStretch;
   @Uint32() external int dwMaxOverlayStretch;
@@ -359,15 +375,18 @@ class DDCAPS_DX7 extends Struct {
   @Uint32() external int dwSVBCaps;
   @Uint32() external int dwSVBCKeyCaps;
   @Uint32() external int dwSVBFXCaps;
-  external __uint__ dwSVBRops;
+  @Array(8)
+  external Array<Uint32> dwSVBRops;
   @Uint32() external int dwVSBCaps;
   @Uint32() external int dwVSBCKeyCaps;
   @Uint32() external int dwVSBFXCaps;
-  external __uint__ dwVSBRops;
+  @Array(8)
+  external Array<Uint32> dwVSBRops;
   @Uint32() external int dwSSBCaps;
   @Uint32() external int dwSSBCKeyCaps;
   @Uint32() external int dwSSBFXCaps;
-  external __uint__ dwSSBRops;
+  @Array(8)
+  external Array<Uint32> dwSSBRops;
   @Uint32() external int dwMaxVideoPorts;
   @Uint32() external int dwCurrVideoPorts;
   @Uint32() external int dwSVBCaps2;
@@ -375,7 +394,8 @@ class DDCAPS_DX7 extends Struct {
   @Uint32() external int dwNLVBCaps2;
   @Uint32() external int dwNLVBCKeyCaps;
   @Uint32() external int dwNLVBFXCaps;
-  external __uint__ dwNLVBRops;
+  @Array(8)
+  external Array<Uint32> dwNLVBRops;
   external DDSCAPS2 ddsCaps;
 }
 
@@ -414,14 +434,19 @@ class DDBLTBATCH extends Struct {
 }
 
 class DDGAMMARAMP extends Struct {
-  external __ushort__ red;
-  external __ushort__ green;
-  external __ushort__ blue;
+  @Array(129)
+  external Array<Uint16> red;
+  @Array(129)
+  external Array<Uint16> green;
+  @Array(129)
+  external Array<Uint16> blue;
 }
 
 class DDDEVICEIDENTIFIER extends Struct {
-  external __byte__ szDriver;
-  external __byte__ szDescription;
+  @Array(130)
+  external Array<Int8> szDriver;
+  @Array(130)
+  external Array<Int8> szDescription;
   @Int64() external int liDriverVersion;
   @Uint32() external int dwVendorId;
   @Uint32() external int dwDeviceId;
@@ -431,8 +456,10 @@ class DDDEVICEIDENTIFIER extends Struct {
 }
 
 class DDDEVICEIDENTIFIER2 extends Struct {
-  external __byte__ szDriver;
-  external __byte__ szDescription;
+  @Array(130)
+  external Array<Int8> szDriver;
+  @Array(130)
+  external Array<Int8> szDescription;
   @Int64() external int liDriverVersion;
   @Uint32() external int dwVendorId;
   @Uint32() external int dwDeviceId;

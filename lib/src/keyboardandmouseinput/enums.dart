@@ -1,26 +1,4 @@
 /// {@category Enum}
-class GetRawInputData_uiCommandFlags {
-  static const RID_HEADER = 0x10000005;
-  static const RID_INPUT = 0x10000003;
-}
-
-/// {@category Enum}
-class RegisterHotKey_fsModifiersFlags {
-  static const MOD_ALT = 0x00000001;
-  static const MOD_CONTROL = 0x00000002;
-  static const MOD_NOREPEAT = 0x00004000;
-  static const MOD_SHIFT = 0x00000004;
-  static const MOD_WIN = 0x00000008;
-}
-
-/// {@category Enum}
-class GetRawInputDeviceInfo_uiCommand {
-  static const RIDI_PREPARSEDDATA = 0x20000005;
-  static const RIDI_DEVICENAME = 0x20000007;
-  static const RIDI_DEVICEINFO = 0x2000000b;
-}
-
-/// {@category Enum}
 class ActivateKeyboardLayout_Flags {
   static const KLF_REORDER = 0x00000008;
   static const KLF_RESET = 0x40000000;
@@ -33,27 +11,33 @@ class ActivateKeyboardLayout_Flags {
 }
 
 /// {@category Enum}
-class ActivateKeyboardLayout_hklFlags {
-  static const HKL_NEXT = 0x00000001;
-  static const HKL_PREV = 0x00000000;
-}
-
-/// {@category Enum}
 class GetMouseMovePointsEx_resolutionFlags {
   static const GMMP_USE_DISPLAY_POINTS = 0x00000001;
   static const GMMP_USE_HIGH_RESOLUTION_POINTS = 0x00000002;
 }
 
 /// {@category Enum}
-class keybd_eventFlags {
-  static const KEYEVENTF_EXTENDEDKEY = 0x00000001;
-  static const KEYEVENTF_KEYUP = 0x00000002;
-  static const KEYEVENTF_SCANCODE = 0x00000008;
-  static const KEYEVENTF_UNICODE = 0x00000004;
+class GetRawInputData_uiCommandFlags {
+  static const RID_HEADER = 0x10000005;
+  static const RID_INPUT = 0x10000003;
 }
 
 /// {@category Enum}
-class mouse_eventFlags {
+class GetRawInputDeviceInfo_uiCommand {
+  static const RIDI_PREPARSEDDATA = 0x20000005;
+  static const RIDI_DEVICENAME = 0x20000007;
+  static const RIDI_DEVICEINFO = 0x2000000b;
+}
+
+/// {@category Enum}
+class INPUT_typeFlags {
+  static const INPUT_MOUSE = 0x00000000;
+  static const INPUT_KEYBOARD = 0x00000001;
+  static const INPUT_HARDWARE = 0x00000002;
+}
+
+/// {@category Enum}
+class MOUSE_EVENT_FLAGS {
   static const MOUSEEVENTF_ABSOLUTE = 0x00008000;
   static const MOUSEEVENTF_LEFTDOWN = 0x00000002;
   static const MOUSEEVENTF_LEFTUP = 0x00000004;
@@ -71,13 +55,6 @@ class mouse_eventFlags {
 }
 
 /// {@category Enum}
-class RID_DEVICE_INFO_dwType {
-  static const RIM_TYPEMOUSE = 0x00000000;
-  static const RIM_TYPEKEYBOARD = 0x00000001;
-  static const RIM_TYPEHID = 0x00000002;
-}
-
-/// {@category Enum}
 class RAWINPUTDEVICE_dwFlags {
   static const RIDEV_REMOVE = 0x00000001;
   static const RIDEV_EXCLUDE = 0x00000010;
@@ -92,10 +69,19 @@ class RAWINPUTDEVICE_dwFlags {
 }
 
 /// {@category Enum}
-class INPUT_typeFlags {
-  static const INPUT_MOUSE = 0x00000000;
-  static const INPUT_KEYBOARD = 0x00000001;
-  static const INPUT_HARDWARE = 0x00000002;
+class RID_DEVICE_INFO_dwType {
+  static const RIM_TYPEMOUSE = 0x00000000;
+  static const RIM_TYPEKEYBOARD = 0x00000001;
+  static const RIM_TYPEHID = 0x00000002;
+}
+
+/// {@category Enum}
+class RegisterHotKey_fsModifiersFlags {
+  static const MOD_ALT = 0x00000001;
+  static const MOD_CONTROL = 0x00000002;
+  static const MOD_NOREPEAT = 0x00004000;
+  static const MOD_SHIFT = 0x00000004;
+  static const MOD_WIN = 0x00000008;
 }
 
 /// {@category Enum}
@@ -108,24 +94,10 @@ class TRACKMOUSEEVENT_dwFlags {
 }
 
 /// {@category Enum}
-class RAWMOUSE_usButtonFlags {
-  static const RI_MOUSE_LEFT_BUTTON_DOWN = 0x00000001;
-  static const RI_MOUSE_LEFT_BUTTON_UP = 0x00000002;
-  static const RI_MOUSE_MIDDLE_BUTTON_DOWN = 0x00000010;
-  static const RI_MOUSE_MIDDLE_BUTTON_UP = 0x00000020;
-  static const RI_MOUSE_RIGHT_BUTTON_DOWN = 0x00000004;
-  static const RI_MOUSE_RIGHT_BUTTON_UP = 0x00000008;
-  static const RI_MOUSE_BUTTON_1_DOWN = 0x00000001;
-  static const RI_MOUSE_BUTTON_1_UP = 0x00000002;
-  static const RI_MOUSE_BUTTON_2_DOWN = 0x00000004;
-  static const RI_MOUSE_BUTTON_2_UP = 0x00000008;
-  static const RI_MOUSE_BUTTON_3_DOWN = 0x00000010;
-  static const RI_MOUSE_BUTTON_3_UP = 0x00000020;
-  static const RI_MOUSE_BUTTON_4_DOWN = 0x00000040;
-  static const RI_MOUSE_BUTTON_4_UP = 0x00000080;
-  static const RI_MOUSE_BUTTON_5_DOWN = 0x00000100;
-  static const RI_MOUSE_BUTTON_5_UP = 0x00000200;
-  static const RI_MOUSE_WHEEL = 0x00000400;
-  static const RI_MOUSE_HWHEEL = 0x00000800;
+class keybd_eventFlags {
+  static const KEYEVENTF_EXTENDEDKEY = 0x00000001;
+  static const KEYEVENTF_KEYUP = 0x00000002;
+  static const KEYEVENTF_SCANCODE = 0x00000008;
+  static const KEYEVENTF_UNICODE = 0x00000004;
 }
 

@@ -220,7 +220,8 @@ class TRUESPEECHWAVEFORMAT extends Struct {
   external WAVEFORMATEX wfx;
   @Uint16() external int wRevision;
   @Uint16() external int nSamplesPerBlock;
-  external __ubyte__ abReserved;
+  @Array(28)
+  external Array<Uint8> abReserved;
 }
 
 class ECHOSC1WAVEFORMAT extends Struct {
@@ -355,7 +356,8 @@ class WAVEFILTER extends Struct {
   @Uint32() external int cbStruct;
   @Uint32() external int dwFilterTag;
   @Uint32() external int fdwFilter;
-  external __uint__ dwReserved;
+  @Array(5)
+  external Array<Uint32> dwReserved;
 }
 
 class VOLUMEWAVEFILTER extends Struct {
@@ -424,7 +426,8 @@ class MMIOINFO extends Struct {
   external Pointer<Int8> pchEndWrite;
   @Int32() external int lBufOffset;
   @Int32() external int lDiskOffset;
-  external __uint__ adwInfo;
+  @Array(3)
+  external Array<Uint32> adwInfo;
   @Uint32() external int dwReserved1;
   @Uint32() external int dwReserved2;
   @IntPtr() external int hmmio;
@@ -453,7 +456,8 @@ class WAVEOUTCAPSA extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
+  @Array(32)
+  external Array<Int8> szPname;
   @Uint32() external int dwFormats;
   @Uint16() external int wChannels;
   @Uint16() external int wReserved1;
@@ -464,7 +468,8 @@ class WAVEOUTCAPSW extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
+  @Array(32)
+  external Array<Uint16> szPname;
   @Uint32() external int dwFormats;
   @Uint16() external int wChannels;
   @Uint16() external int wReserved1;
@@ -475,7 +480,8 @@ class WAVEOUTCAPS2A extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
+  @Array(32)
+  external Array<Int8> szPname;
   @Uint32() external int dwFormats;
   @Uint16() external int wChannels;
   @Uint16() external int wReserved1;
@@ -489,7 +495,8 @@ class WAVEOUTCAPS2W extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
+  @Array(32)
+  external Array<Uint16> szPname;
   @Uint32() external int dwFormats;
   @Uint16() external int wChannels;
   @Uint16() external int wReserved1;
@@ -503,7 +510,8 @@ class WAVEINCAPSA extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
+  @Array(32)
+  external Array<Int8> szPname;
   @Uint32() external int dwFormats;
   @Uint16() external int wChannels;
   @Uint16() external int wReserved1;
@@ -513,7 +521,8 @@ class WAVEINCAPSW extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
+  @Array(32)
+  external Array<Uint16> szPname;
   @Uint32() external int dwFormats;
   @Uint16() external int wChannels;
   @Uint16() external int wReserved1;
@@ -523,7 +532,8 @@ class WAVEINCAPS2A extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
+  @Array(32)
+  external Array<Int8> szPname;
   @Uint32() external int dwFormats;
   @Uint16() external int wChannels;
   @Uint16() external int wReserved1;
@@ -536,7 +546,8 @@ class WAVEINCAPS2W extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
+  @Array(32)
+  external Array<Uint16> szPname;
   @Uint32() external int dwFormats;
   @Uint16() external int wChannels;
   @Uint16() external int wReserved1;
@@ -549,7 +560,8 @@ class MIDIOUTCAPSA extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
+  @Array(32)
+  external Array<Int8> szPname;
   @Uint16() external int wTechnology;
   @Uint16() external int wVoices;
   @Uint16() external int wNotes;
@@ -561,7 +573,8 @@ class MIDIOUTCAPSW extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
+  @Array(32)
+  external Array<Uint16> szPname;
   @Uint16() external int wTechnology;
   @Uint16() external int wVoices;
   @Uint16() external int wNotes;
@@ -573,7 +586,8 @@ class MIDIOUTCAPS2A extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
+  @Array(32)
+  external Array<Int8> szPname;
   @Uint16() external int wTechnology;
   @Uint16() external int wVoices;
   @Uint16() external int wNotes;
@@ -588,7 +602,8 @@ class MIDIOUTCAPS2W extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
+  @Array(32)
+  external Array<Uint16> szPname;
   @Uint16() external int wTechnology;
   @Uint16() external int wVoices;
   @Uint16() external int wNotes;
@@ -603,7 +618,8 @@ class MIDIINCAPSA extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
+  @Array(32)
+  external Array<Int8> szPname;
   @Uint32() external int dwSupport;
 }
 
@@ -611,7 +627,8 @@ class MIDIINCAPSW extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
+  @Array(32)
+  external Array<Uint16> szPname;
   @Uint32() external int dwSupport;
 }
 
@@ -619,7 +636,8 @@ class MIDIINCAPS2A extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
+  @Array(32)
+  external Array<Int8> szPname;
   @Uint32() external int dwSupport;
   external GUID ManufacturerGuid;
   external GUID ProductGuid;
@@ -630,7 +648,8 @@ class MIDIINCAPS2W extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
+  @Array(32)
+  external Array<Uint16> szPname;
   @Uint32() external int dwSupport;
   external GUID ManufacturerGuid;
   external GUID ProductGuid;
@@ -646,14 +665,16 @@ class MIDIHDR extends Struct {
   external Pointer<MIDIHDR> lpNext;
   @IntPtr() external int reserved;
   @Uint32() external int dwOffset;
-  external __uintptr__ dwReserved;
+  @Array(8)
+  external Array<IntPtr> dwReserved;
 }
 
 class MIDIEVENT extends Struct {
   @Uint32() external int dwDeltaTime;
   @Uint32() external int dwStreamID;
   @Uint32() external int dwEvent;
-  external __uint__ dwParms;
+  @Array(1)
+  external Array<Uint32> dwParms;
 }
 
 class MIDISTRMBUFFVER extends Struct {
@@ -676,7 +697,8 @@ class AUXCAPSA extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
+  @Array(32)
+  external Array<Int8> szPname;
   @Uint16() external int wTechnology;
   @Uint16() external int wReserved1;
   @Uint32() external int dwSupport;
@@ -686,7 +708,8 @@ class AUXCAPSW extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
+  @Array(32)
+  external Array<Uint16> szPname;
   @Uint16() external int wTechnology;
   @Uint16() external int wReserved1;
   @Uint32() external int dwSupport;
@@ -696,7 +719,8 @@ class AUXCAPS2A extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
+  @Array(32)
+  external Array<Int8> szPname;
   @Uint16() external int wTechnology;
   @Uint16() external int wReserved1;
   @Uint32() external int dwSupport;
@@ -709,7 +733,8 @@ class AUXCAPS2W extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
+  @Array(32)
+  external Array<Uint16> szPname;
   @Uint16() external int wTechnology;
   @Uint16() external int wReserved1;
   @Uint32() external int dwSupport;
@@ -722,7 +747,8 @@ class MIXERCAPSA extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
+  @Array(32)
+  external Array<Int8> szPname;
   @Uint32() external int fdwSupport;
   @Uint32() external int cDestinations;
 }
@@ -731,7 +757,8 @@ class MIXERCAPSW extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
+  @Array(32)
+  external Array<Uint16> szPname;
   @Uint32() external int fdwSupport;
   @Uint32() external int cDestinations;
 }
@@ -740,7 +767,8 @@ class MIXERCAPS2A extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __byte__ szPname;
+  @Array(32)
+  external Array<Int8> szPname;
   @Uint32() external int fdwSupport;
   @Uint32() external int cDestinations;
   external GUID ManufacturerGuid;
@@ -752,7 +780,8 @@ class MIXERCAPS2W extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
   @Uint32() external int vDriverVersion;
-  external __ushort__ szPname;
+  @Array(32)
+  external Array<Uint16> szPname;
   @Uint32() external int fdwSupport;
   @Uint32() external int cDestinations;
   external GUID ManufacturerGuid;
@@ -771,8 +800,10 @@ class MIXERLINEA extends Struct {
   @Uint32() external int cChannels;
   @Uint32() external int cConnections;
   @Uint32() external int cControls;
-  external __byte__ szShortName;
-  external __byte__ szName;
+  @Array(16)
+  external Array<Int8> szShortName;
+  @Array(64)
+  external Array<Int8> szName;
   @Uint32() external int Target;
 }
 
@@ -787,8 +818,10 @@ class MIXERLINEW extends Struct {
   @Uint32() external int cChannels;
   @Uint32() external int cConnections;
   @Uint32() external int cControls;
-  external __ushort__ szShortName;
-  external __ushort__ szName;
+  @Array(16)
+  external Array<Uint16> szShortName;
+  @Array(64)
+  external Array<Uint16> szName;
   @Uint32() external int Target;
 }
 
@@ -798,8 +831,10 @@ class MIXERCONTROLA extends Struct {
   @Uint32() external int dwControlType;
   @Uint32() external int fdwControl;
   @Uint32() external int cMultipleItems;
-  external __byte__ szShortName;
-  external __byte__ szName;
+  @Array(16)
+  external Array<Int8> szShortName;
+  @Array(64)
+  external Array<Int8> szName;
   @Uint32() external int Bounds;
   @Uint32() external int Metrics;
 }
@@ -810,8 +845,10 @@ class MIXERCONTROLW extends Struct {
   @Uint32() external int dwControlType;
   @Uint32() external int fdwControl;
   @Uint32() external int cMultipleItems;
-  external __ushort__ szShortName;
-  external __ushort__ szName;
+  @Array(16)
+  external Array<Uint16> szShortName;
+  @Array(64)
+  external Array<Uint16> szName;
   @Uint32() external int Bounds;
   @Uint32() external int Metrics;
 }
@@ -846,13 +883,15 @@ class MIXERCONTROLDETAILS extends Struct {
 class MIXERCONTROLDETAILS_LISTTEXTA extends Struct {
   @Uint32() external int dwParam1;
   @Uint32() external int dwParam2;
-  external __byte__ szName;
+  @Array(64)
+  external Array<Int8> szName;
 }
 
 class MIXERCONTROLDETAILS_LISTTEXTW extends Struct {
   @Uint32() external int dwParam1;
   @Uint32() external int dwParam2;
-  external __ushort__ szName;
+  @Array(64)
+  external Array<Uint16> szName;
 }
 
 class MIXERCONTROLDETAILS_BOOLEAN extends Struct {
@@ -875,7 +914,8 @@ class TIMECAPS extends Struct {
 class JOYCAPSA extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
-  external __byte__ szPname;
+  @Array(32)
+  external Array<Int8> szPname;
   @Uint32() external int wXmin;
   @Uint32() external int wXmax;
   @Uint32() external int wYmin;
@@ -895,14 +935,17 @@ class JOYCAPSA extends Struct {
   @Uint32() external int wMaxAxes;
   @Uint32() external int wNumAxes;
   @Uint32() external int wMaxButtons;
-  external __byte__ szRegKey;
-  external __byte__ szOEMVxD;
+  @Array(32)
+  external Array<Int8> szRegKey;
+  @Array(129)
+  external Array<Int8> szOEMVxD;
 }
 
 class JOYCAPSW extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
-  external __ushort__ szPname;
+  @Array(32)
+  external Array<Uint16> szPname;
   @Uint32() external int wXmin;
   @Uint32() external int wXmax;
   @Uint32() external int wYmin;
@@ -922,14 +965,17 @@ class JOYCAPSW extends Struct {
   @Uint32() external int wMaxAxes;
   @Uint32() external int wNumAxes;
   @Uint32() external int wMaxButtons;
-  external __ushort__ szRegKey;
-  external __ushort__ szOEMVxD;
+  @Array(32)
+  external Array<Uint16> szRegKey;
+  @Array(129)
+  external Array<Uint16> szOEMVxD;
 }
 
 class JOYCAPS2A extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
-  external __byte__ szPname;
+  @Array(32)
+  external Array<Int8> szPname;
   @Uint32() external int wXmin;
   @Uint32() external int wXmax;
   @Uint32() external int wYmin;
@@ -949,8 +995,10 @@ class JOYCAPS2A extends Struct {
   @Uint32() external int wMaxAxes;
   @Uint32() external int wNumAxes;
   @Uint32() external int wMaxButtons;
-  external __byte__ szRegKey;
-  external __byte__ szOEMVxD;
+  @Array(32)
+  external Array<Int8> szRegKey;
+  @Array(129)
+  external Array<Int8> szOEMVxD;
   external GUID ManufacturerGuid;
   external GUID ProductGuid;
   external GUID NameGuid;
@@ -959,7 +1007,8 @@ class JOYCAPS2A extends Struct {
 class JOYCAPS2W extends Struct {
   @Uint16() external int wMid;
   @Uint16() external int wPid;
-  external __ushort__ szPname;
+  @Array(32)
+  external Array<Uint16> szPname;
   @Uint32() external int wXmin;
   @Uint32() external int wXmax;
   @Uint32() external int wYmin;
@@ -979,8 +1028,10 @@ class JOYCAPS2W extends Struct {
   @Uint32() external int wMaxAxes;
   @Uint32() external int wNumAxes;
   @Uint32() external int wMaxButtons;
-  external __ushort__ szRegKey;
-  external __ushort__ szOEMVxD;
+  @Array(32)
+  external Array<Uint16> szRegKey;
+  @Array(129)
+  external Array<Uint16> szOEMVxD;
   external GUID ManufacturerGuid;
   external GUID ProductGuid;
   external GUID NameGuid;
@@ -1281,7 +1332,7 @@ class MCI_DGV_WINDOW_PARMSW extends Struct {
   external Pointer<Utf16> lpstrText;
 }
 
-class tACMDRIVERDETAILSA extends Struct {
+class ACMDRIVERDETAILSA extends Struct {
   @Uint32() external int cbStruct;
   @Uint32() external int fccType;
   @Uint32() external int fccComp;
@@ -1293,14 +1344,19 @@ class tACMDRIVERDETAILSA extends Struct {
   @Uint32() external int cFormatTags;
   @Uint32() external int cFilterTags;
   @IntPtr() external int hicon;
-  external __byte__ szShortName;
-  external __byte__ szLongName;
-  external __byte__ szCopyright;
-  external __byte__ szLicensing;
-  external __byte__ szFeatures;
+  @Array(32)
+  external Array<Int8> szShortName;
+  @Array(128)
+  external Array<Int8> szLongName;
+  @Array(80)
+  external Array<Int8> szCopyright;
+  @Array(128)
+  external Array<Int8> szLicensing;
+  @Array(130)
+  external Array<Int8> szFeatures;
 }
 
-class tACMDRIVERDETAILSW extends Struct {
+class ACMDRIVERDETAILSW extends Struct {
   @Uint32() external int cbStruct;
   @Uint32() external int fccType;
   @Uint32() external int fccComp;
@@ -1312,11 +1368,16 @@ class tACMDRIVERDETAILSW extends Struct {
   @Uint32() external int cFormatTags;
   @Uint32() external int cFilterTags;
   @IntPtr() external int hicon;
-  external __ushort__ szShortName;
-  external __ushort__ szLongName;
-  external __ushort__ szCopyright;
-  external __ushort__ szLicensing;
-  external __ushort__ szFeatures;
+  @Array(32)
+  external Array<Uint16> szShortName;
+  @Array(128)
+  external Array<Uint16> szLongName;
+  @Array(80)
+  external Array<Uint16> szCopyright;
+  @Array(128)
+  external Array<Uint16> szLicensing;
+  @Array(130)
+  external Array<Uint16> szFeatures;
 }
 
 class ACMFORMATTAGDETAILSA extends Struct {
@@ -1326,7 +1387,8 @@ class ACMFORMATTAGDETAILSA extends Struct {
   @Uint32() external int cbFormatSize;
   @Uint32() external int fdwSupport;
   @Uint32() external int cStandardFormats;
-  external __byte__ szFormatTag;
+  @Array(48)
+  external Array<Int8> szFormatTag;
 }
 
 class ACMFORMATTAGDETAILSW extends Struct {
@@ -1336,17 +1398,19 @@ class ACMFORMATTAGDETAILSW extends Struct {
   @Uint32() external int cbFormatSize;
   @Uint32() external int fdwSupport;
   @Uint32() external int cStandardFormats;
-  external __ushort__ szFormatTag;
+  @Array(48)
+  external Array<Uint16> szFormatTag;
 }
 
-class tACMFORMATDETAILSA extends Struct {
+class ACMFORMATDETAILSA extends Struct {
   @Uint32() external int cbStruct;
   @Uint32() external int dwFormatIndex;
   @Uint32() external int dwFormatTag;
   @Uint32() external int fdwSupport;
   external Pointer<WAVEFORMATEX> pwfx;
   @Uint32() external int cbwfx;
-  external __byte__ szFormat;
+  @Array(128)
+  external Array<Int8> szFormat;
 }
 
 class tACMFORMATDETAILSW extends Struct {
@@ -1356,18 +1420,21 @@ class tACMFORMATDETAILSW extends Struct {
   @Uint32() external int fdwSupport;
   external Pointer<WAVEFORMATEX> pwfx;
   @Uint32() external int cbwfx;
-  external __ushort__ szFormat;
+  @Array(128)
+  external Array<Uint16> szFormat;
 }
 
-class tACMFORMATCHOOSEA extends Struct {
+class ACMFORMATCHOOSEA extends Struct {
   @Uint32() external int cbStruct;
   @Uint32() external int fdwStyle;
   @IntPtr() external int hwndOwner;
   external Pointer<WAVEFORMATEX> pwfx;
   @Uint32() external int cbwfx;
   external Pointer<Utf8> pszTitle;
-  external __byte__ szFormatTag;
-  external __byte__ szFormat;
+  @Array(48)
+  external Array<Int8> szFormatTag;
+  @Array(128)
+  external Array<Int8> szFormat;
   external Pointer<Utf8> pszName;
   @Uint32() external int cchName;
   @Uint32() external int fdwEnum;
@@ -1378,15 +1445,17 @@ class tACMFORMATCHOOSEA extends Struct {
   external ACMFORMATCHOOSEHOOKPROCA pfnHook;
 }
 
-class tACMFORMATCHOOSEW extends Struct {
+class ACMFORMATCHOOSEW extends Struct {
   @Uint32() external int cbStruct;
   @Uint32() external int fdwStyle;
   @IntPtr() external int hwndOwner;
   external Pointer<WAVEFORMATEX> pwfx;
   @Uint32() external int cbwfx;
   external Pointer<Utf16> pszTitle;
-  external __ushort__ szFormatTag;
-  external __ushort__ szFormat;
+  @Array(48)
+  external Array<Uint16> szFormatTag;
+  @Array(128)
+  external Array<Uint16> szFormat;
   external Pointer<Utf16> pszName;
   @Uint32() external int cchName;
   @Uint32() external int fdwEnum;
@@ -1404,7 +1473,8 @@ class ACMFILTERTAGDETAILSA extends Struct {
   @Uint32() external int cbFilterSize;
   @Uint32() external int fdwSupport;
   @Uint32() external int cStandardFilters;
-  external __byte__ szFilterTag;
+  @Array(48)
+  external Array<Int8> szFilterTag;
 }
 
 class ACMFILTERTAGDETAILSW extends Struct {
@@ -1414,38 +1484,43 @@ class ACMFILTERTAGDETAILSW extends Struct {
   @Uint32() external int cbFilterSize;
   @Uint32() external int fdwSupport;
   @Uint32() external int cStandardFilters;
-  external __ushort__ szFilterTag;
+  @Array(48)
+  external Array<Uint16> szFilterTag;
 }
 
-class tACMFILTERDETAILSA extends Struct {
+class ACMFILTERDETAILSA extends Struct {
   @Uint32() external int cbStruct;
   @Uint32() external int dwFilterIndex;
   @Uint32() external int dwFilterTag;
   @Uint32() external int fdwSupport;
   external Pointer<WAVEFILTER> pwfltr;
   @Uint32() external int cbwfltr;
-  external __byte__ szFilter;
+  @Array(128)
+  external Array<Int8> szFilter;
 }
 
-class tACMFILTERDETAILSW extends Struct {
+class ACMFILTERDETAILSW extends Struct {
   @Uint32() external int cbStruct;
   @Uint32() external int dwFilterIndex;
   @Uint32() external int dwFilterTag;
   @Uint32() external int fdwSupport;
   external Pointer<WAVEFILTER> pwfltr;
   @Uint32() external int cbwfltr;
-  external __ushort__ szFilter;
+  @Array(128)
+  external Array<Uint16> szFilter;
 }
 
-class tACMFILTERCHOOSEA extends Struct {
+class ACMFILTERCHOOSEA extends Struct {
   @Uint32() external int cbStruct;
   @Uint32() external int fdwStyle;
   @IntPtr() external int hwndOwner;
   external Pointer<WAVEFILTER> pwfltr;
   @Uint32() external int cbwfltr;
   external Pointer<Utf8> pszTitle;
-  external __byte__ szFilterTag;
-  external __byte__ szFilter;
+  @Array(48)
+  external Array<Int8> szFilterTag;
+  @Array(128)
+  external Array<Int8> szFilter;
   external Pointer<Utf8> pszName;
   @Uint32() external int cchName;
   @Uint32() external int fdwEnum;
@@ -1456,15 +1531,17 @@ class tACMFILTERCHOOSEA extends Struct {
   external ACMFILTERCHOOSEHOOKPROCA pfnHook;
 }
 
-class tACMFILTERCHOOSEW extends Struct {
+class ACMFILTERCHOOSEW extends Struct {
   @Uint32() external int cbStruct;
   @Uint32() external int fdwStyle;
   @IntPtr() external int hwndOwner;
   external Pointer<WAVEFILTER> pwfltr;
   @Uint32() external int cbwfltr;
   external Pointer<Utf16> pszTitle;
-  external __ushort__ szFilterTag;
-  external __ushort__ szFilter;
+  @Array(48)
+  external Array<Uint16> szFilterTag;
+  @Array(128)
+  external Array<Uint16> szFilter;
   external Pointer<Utf16> pszName;
   @Uint32() external int cchName;
   @Uint32() external int fdwEnum;
@@ -1487,7 +1564,8 @@ class ACMSTREAMHEADER extends Struct {
   @Uint32() external int cbDstLength;
   @Uint32() external int cbDstLengthUsed;
   @IntPtr() external int dwDstUser;
-  external __uint__ dwReservedDriver;
+  @Array(15)
+  external Array<Uint32> dwReservedDriver;
 }
 
 class ICOPEN extends Struct {
@@ -1509,9 +1587,12 @@ class ICINFO extends Struct {
   @Uint32() external int dwFlags;
   @Uint32() external int dwVersion;
   @Uint32() external int dwVersionICM;
-  external __ushort__ szName;
-  external __ushort__ szDescription;
-  external __ushort__ szDriver;
+  @Array(16)
+  external Array<Uint16> szName;
+  @Array(128)
+  external Array<Uint16> szDescription;
+  @Array(128)
+  external Array<Uint16> szDriver;
 }
 
 class ICCOMPRESS extends Struct {
@@ -1669,7 +1750,8 @@ class AVISTREAMINFOW extends Struct {
   external RECT rcFrame;
   @Uint32() external int dwEditCount;
   @Uint32() external int dwFormatChangeCount;
-  external __ushort__ szName;
+  @Array(64)
+  external Array<Uint16> szName;
 }
 
 class AVISTREAMINFOA extends Struct {
@@ -1690,7 +1772,8 @@ class AVISTREAMINFOA extends Struct {
   external RECT rcFrame;
   @Uint32() external int dwEditCount;
   @Uint32() external int dwFormatChangeCount;
-  external __byte__ szName;
+  @Array(64)
+  external Array<Int8> szName;
 }
 
 class AVIFILEINFOW extends Struct {
@@ -1705,7 +1788,8 @@ class AVIFILEINFOW extends Struct {
   @Uint32() external int dwRate;
   @Uint32() external int dwLength;
   @Uint32() external int dwEditCount;
-  external __ushort__ szFileType;
+  @Array(64)
+  external Array<Uint16> szFileType;
 }
 
 class AVIFILEINFOA extends Struct {
@@ -1720,7 +1804,8 @@ class AVIFILEINFOA extends Struct {
   @Uint32() external int dwRate;
   @Uint32() external int dwLength;
   @Uint32() external int dwEditCount;
-  external __byte__ szFileType;
+  @Array(64)
+  external Array<Int8> szFileType;
 }
 
 class AVICOMPRESSOPTIONS extends Struct {
@@ -1744,7 +1829,8 @@ class VIDEOHDR extends Struct {
   @Uint32() external int dwTimeCaptured;
   @IntPtr() external int dwUser;
   @Uint32() external int dwFlags;
-  external __uintptr__ dwReserved;
+  @Array(4)
+  external Array<IntPtr> dwReserved;
 }
 
 class channel_caps_tag extends Struct {

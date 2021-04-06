@@ -73,7 +73,8 @@ class BTH_DEVICE_INFO extends Struct {
   @Uint32() external int flags;
   @Uint64() external int address;
   @Uint32() external int classOfDevice;
-  external __byte__ name;
+  @Array(128)
+  external Array<Int8> name;
 }
 
 class BTH_RADIO_IN_RANGE extends Struct {
@@ -101,8 +102,10 @@ class BLUETOOTH_ADDRESS extends Struct {
 class BLUETOOTH_LOCAL_SERVICE_INFO extends Struct {
   @Int32() external int Enabled;
   external BLUETOOTH_ADDRESS btAddr;
-  external __ushort__ szName;
-  external __ushort__ szDeviceString;
+  @Array(129)
+  external Array<Uint16> szName;
+  @Array(129)
+  external Array<Uint16> szDeviceString;
 }
 
 class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
@@ -112,7 +115,8 @@ class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
 class BLUETOOTH_RADIO_INFO extends Struct {
   @Uint32() external int dwSize;
   external BLUETOOTH_ADDRESS address;
-  external __ushort__ szName;
+  @Array(128)
+  external Array<Uint16> szName;
   @Uint32() external int ulClassofDevice;
   @Uint16() external int lmpSubversion;
   @Uint16() external int manufacturer;
@@ -127,7 +131,8 @@ class BLUETOOTH_DEVICE_INFO extends Struct {
   @Int32() external int fAuthenticated;
   external SYSTEMTIME stLastSeen;
   external SYSTEMTIME stLastUsed;
-  external __ushort__ szName;
+  @Array(128)
+  external Array<Uint16> szName;
 }
 
 class BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS extends Struct {
@@ -173,13 +178,16 @@ class BLUETOOTH_SELECT_DEVICE_PARAMS extends Struct {
 }
 
 class BLUETOOTH_PIN_INFO extends Struct {
-  external __ubyte__ pin;
+  @Array(16)
+  external Array<Uint8> pin;
   @Uint8() external int pinLength;
 }
 
 class BLUETOOTH_OOB_DATA_INFO extends Struct {
-  external __ubyte__ C;
-  external __ubyte__ R;
+  @Array(16)
+  external Array<Uint8> C;
+  @Array(16)
+  external Array<Uint8> R;
 }
 
 class BLUETOOTH_NUMERIC_COMPARISON_INFO extends Struct {
@@ -220,9 +228,11 @@ class BTH_SET_SERVICE extends Struct {
   external Pointer<Uint32> pSdpVersion;
   external Pointer<IntPtr> pRecordHandle;
   @Uint32() external int fCodService;
-  external __uint__ Reserved;
+  @Array(5)
+  external Array<Uint32> Reserved;
   @Uint32() external int ulRecordLength;
-  external __ubyte__ pRecord;
+  @Array(1)
+  external Array<Uint8> pRecord;
 }
 
 class BTH_QUERY_DEVICE extends Struct {
@@ -233,9 +243,11 @@ class BTH_QUERY_DEVICE extends Struct {
 class BTH_QUERY_SERVICE extends Struct {
   @Uint32() external int type;
   @Uint32() external int serviceHandle;
-  external SdpQueryUuid uuids;
+  @Array(12)
+  external Array<SdpQueryUuid> uuids;
   @Uint32() external int numRange;
-  external SdpAttributeRange pRange;
+  @Array(1)
+  external Array<SdpAttributeRange> pRange;
 }
 
 class RFCOMM_MSC_DATA extends Struct {
@@ -265,12 +277,14 @@ class RFCOMM_COMMAND extends Struct {
 class BTH_PING_REQ extends Struct {
   @Uint64() external int btAddr;
   @Uint8() external int dataLen;
-  external __ubyte__ data;
+  @Array(44)
+  external Array<Uint8> data;
 }
 
 class BTH_PING_RSP extends Struct {
   @Uint8() external int dataLen;
-  external __ubyte__ data;
+  @Array(44)
+  external Array<Uint8> data;
 }
 
 class BTH_INFO_REQ extends Struct {

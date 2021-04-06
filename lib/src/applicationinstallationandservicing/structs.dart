@@ -47,73 +47,6 @@ class MSIHANDLE extends Struct {
   @Uint32() external int Value;
 }
 
-class ACTIVATION_CONTEXT_QUERY_INDEX extends Struct {
-  @Uint32() external int ulAssemblyIndex;
-  @Uint32() external int ulFileIndexInAssembly;
-}
-
-class ASSEMBLY_FILE_DETAILED_INFORMATION extends Struct {
-  @Uint32() external int ulFlags;
-  @Uint32() external int ulFilenameLength;
-  @Uint32() external int ulPathLength;
-  external Pointer<Utf16> lpFileName;
-  external Pointer<Utf16> lpFilePath;
-}
-
-class ACTIVATION_CONTEXT_ASSEMBLY_DETAILED_INFORMATION extends Struct {
-  @Uint32() external int ulFlags;
-  @Uint32() external int ulEncodedAssemblyIdentityLength;
-  @Uint32() external int ulManifestPathType;
-  @Uint32() external int ulManifestPathLength;
-  @Int64() external int liManifestLastWriteTime;
-  @Uint32() external int ulPolicyPathType;
-  @Uint32() external int ulPolicyPathLength;
-  @Int64() external int liPolicyLastWriteTime;
-  @Uint32() external int ulMetadataSatelliteRosterIndex;
-  @Uint32() external int ulManifestVersionMajor;
-  @Uint32() external int ulManifestVersionMinor;
-  @Uint32() external int ulPolicyVersionMajor;
-  @Uint32() external int ulPolicyVersionMinor;
-  @Uint32() external int ulAssemblyDirectoryNameLength;
-  external Pointer<Utf16> lpAssemblyEncodedAssemblyIdentity;
-  external Pointer<Utf16> lpAssemblyManifestPath;
-  external Pointer<Utf16> lpAssemblyPolicyPath;
-  external Pointer<Utf16> lpAssemblyDirectoryName;
-  @Uint32() external int ulFileCount;
-}
-
-class ACTIVATION_CONTEXT_RUN_LEVEL_INFORMATION extends Struct {
-  @Uint32() external int ulFlags;
-  @Uint32() external int RunLevel;
-  @Uint32() external int UiAccess;
-}
-
-class COMPATIBILITY_CONTEXT_ELEMENT extends Struct {
-  external GUID Id;
-  @Uint32() external int Type;
-  @Uint64() external int MaxVersionTested;
-}
-
-class ACTIVATION_CONTEXT_COMPATIBILITY_INFORMATION extends Struct {
-  @Uint32() external int ElementCount;
-  external COMPATIBILITY_CONTEXT_ELEMENT Elements;
-}
-
-class ACTIVATION_CONTEXT_DETAILED_INFORMATION extends Struct {
-  @Uint32() external int dwFlags;
-  @Uint32() external int ulFormatVersion;
-  @Uint32() external int ulAssemblyCount;
-  @Uint32() external int ulRootManifestPathType;
-  @Uint32() external int ulRootManifestPathChars;
-  @Uint32() external int ulRootConfigurationPathType;
-  @Uint32() external int ulRootConfigurationPathChars;
-  @Uint32() external int ulAppDirPathType;
-  @Uint32() external int ulAppDirPathChars;
-  external Pointer<Utf16> lpRootManifestPath;
-  external Pointer<Utf16> lpRootConfigurationPath;
-  external Pointer<Utf16> lpAppDirPath;
-}
-
 class INFCONTEXT extends Struct {
   external Pointer Inf;
   external Pointer CurrentInf;
@@ -124,7 +57,8 @@ class INFCONTEXT extends Struct {
 class SP_INF_INFORMATION extends Struct {
   @Uint32() external int InfStyle;
   @Uint32() external int InfCount;
-  external __ubyte__ VersionData;
+  @Array(1)
+  external Array<Uint8> VersionData;
 }
 
 class SP_ALTPLATFORM_INFO_V2 extends Struct {
@@ -149,14 +83,18 @@ class SP_ALTPLATFORM_INFO_V1 extends Struct {
 
 class SP_ORIGINAL_FILE_INFO_A extends Struct {
   @Uint32() external int cbSize;
-  external __byte__ OriginalInfName;
-  external __byte__ OriginalCatalogName;
+  @Array(129)
+  external Array<Int8> OriginalInfName;
+  @Array(129)
+  external Array<Int8> OriginalCatalogName;
 }
 
 class SP_ORIGINAL_FILE_INFO_W extends Struct {
   @Uint32() external int cbSize;
-  external __ushort__ OriginalInfName;
-  external __ushort__ OriginalCatalogName;
+  @Array(129)
+  external Array<Uint16> OriginalInfName;
+  @Array(129)
+  external Array<Uint16> OriginalCatalogName;
 }
 
 class FILEPATHS_A extends Struct {
@@ -234,7 +172,8 @@ class FILE_IN_CABINET_INFO_A extends Struct {
   @Uint16() external int DosDate;
   @Uint16() external int DosTime;
   @Uint16() external int DosAttribs;
-  external __byte__ FullTargetName;
+  @Array(129)
+  external Array<Int8> FullTargetName;
 }
 
 class FILE_IN_CABINET_INFO_W extends Struct {
@@ -244,7 +183,8 @@ class FILE_IN_CABINET_INFO_W extends Struct {
   @Uint16() external int DosDate;
   @Uint16() external int DosTime;
   @Uint16() external int DosAttribs;
-  external __ushort__ FullTargetName;
+  @Array(129)
+  external Array<Uint16> FullTargetName;
 }
 
 class SP_REGISTER_CONTROL_STATUSA extends Struct {
@@ -293,32 +233,111 @@ class SP_FILE_COPY_PARAMS_W extends Struct {
 
 class SP_INF_SIGNER_INFO_V1_A extends Struct {
   @Uint32() external int cbSize;
-  external __byte__ CatalogFile;
-  external __byte__ DigitalSigner;
-  external __byte__ DigitalSignerVersion;
+  @Array(129)
+  external Array<Int8> CatalogFile;
+  @Array(129)
+  external Array<Int8> DigitalSigner;
+  @Array(129)
+  external Array<Int8> DigitalSignerVersion;
 }
 
 class SP_INF_SIGNER_INFO_V1_W extends Struct {
   @Uint32() external int cbSize;
-  external __ushort__ CatalogFile;
-  external __ushort__ DigitalSigner;
-  external __ushort__ DigitalSignerVersion;
+  @Array(129)
+  external Array<Uint16> CatalogFile;
+  @Array(129)
+  external Array<Uint16> DigitalSigner;
+  @Array(129)
+  external Array<Uint16> DigitalSignerVersion;
 }
 
 class SP_INF_SIGNER_INFO_V2_A extends Struct {
   @Uint32() external int cbSize;
-  external __byte__ CatalogFile;
-  external __byte__ DigitalSigner;
-  external __byte__ DigitalSignerVersion;
+  @Array(129)
+  external Array<Int8> CatalogFile;
+  @Array(129)
+  external Array<Int8> DigitalSigner;
+  @Array(129)
+  external Array<Int8> DigitalSignerVersion;
   @Uint32() external int SignerScore;
 }
 
 class SP_INF_SIGNER_INFO_V2_W extends Struct {
   @Uint32() external int cbSize;
-  external __ushort__ CatalogFile;
-  external __ushort__ DigitalSigner;
-  external __ushort__ DigitalSignerVersion;
+  @Array(129)
+  external Array<Uint16> CatalogFile;
+  @Array(129)
+  external Array<Uint16> DigitalSigner;
+  @Array(129)
+  external Array<Uint16> DigitalSignerVersion;
   @Uint32() external int SignerScore;
+}
+
+class ACTIVATION_CONTEXT_QUERY_INDEX extends Struct {
+  @Uint32() external int ulAssemblyIndex;
+  @Uint32() external int ulFileIndexInAssembly;
+}
+
+class ASSEMBLY_FILE_DETAILED_INFORMATION extends Struct {
+  @Uint32() external int ulFlags;
+  @Uint32() external int ulFilenameLength;
+  @Uint32() external int ulPathLength;
+  external Pointer<Utf16> lpFileName;
+  external Pointer<Utf16> lpFilePath;
+}
+
+class ACTIVATION_CONTEXT_ASSEMBLY_DETAILED_INFORMATION extends Struct {
+  @Uint32() external int ulFlags;
+  @Uint32() external int ulEncodedAssemblyIdentityLength;
+  @Uint32() external int ulManifestPathType;
+  @Uint32() external int ulManifestPathLength;
+  @Int64() external int liManifestLastWriteTime;
+  @Uint32() external int ulPolicyPathType;
+  @Uint32() external int ulPolicyPathLength;
+  @Int64() external int liPolicyLastWriteTime;
+  @Uint32() external int ulMetadataSatelliteRosterIndex;
+  @Uint32() external int ulManifestVersionMajor;
+  @Uint32() external int ulManifestVersionMinor;
+  @Uint32() external int ulPolicyVersionMajor;
+  @Uint32() external int ulPolicyVersionMinor;
+  @Uint32() external int ulAssemblyDirectoryNameLength;
+  external Pointer<Utf16> lpAssemblyEncodedAssemblyIdentity;
+  external Pointer<Utf16> lpAssemblyManifestPath;
+  external Pointer<Utf16> lpAssemblyPolicyPath;
+  external Pointer<Utf16> lpAssemblyDirectoryName;
+  @Uint32() external int ulFileCount;
+}
+
+class ACTIVATION_CONTEXT_RUN_LEVEL_INFORMATION extends Struct {
+  @Uint32() external int ulFlags;
+  @Uint32() external int RunLevel;
+  @Uint32() external int UiAccess;
+}
+
+class COMPATIBILITY_CONTEXT_ELEMENT extends Struct {
+  external GUID Id;
+  @Uint32() external int Type;
+  @Uint64() external int MaxVersionTested;
+}
+
+class ACTIVATION_CONTEXT_COMPATIBILITY_INFORMATION extends Struct {
+  @Uint32() external int ElementCount;
+  external COMPATIBILITY_CONTEXT_ELEMENT Elements;
+}
+
+class ACTIVATION_CONTEXT_DETAILED_INFORMATION extends Struct {
+  @Uint32() external int dwFlags;
+  @Uint32() external int ulFormatVersion;
+  @Uint32() external int ulAssemblyCount;
+  @Uint32() external int ulRootManifestPathType;
+  @Uint32() external int ulRootManifestPathChars;
+  @Uint32() external int ulRootConfigurationPathType;
+  @Uint32() external int ulRootConfigurationPathChars;
+  @Uint32() external int ulAppDirPathType;
+  @Uint32() external int ulAppDirPathChars;
+  external Pointer<Utf16> lpRootManifestPath;
+  external Pointer<Utf16> lpRootConfigurationPath;
+  external Pointer<Utf16> lpAppDirPath;
 }
 
 class MsmMerge extends Struct {
@@ -344,7 +363,8 @@ class MSIPATCHSEQUENCEINFOW extends Struct {
 
 class MSIFILEHASHINFO extends Struct {
   @Uint32() external int dwFileHashInfoSize;
-  external __uint__ dwData;
+  @Array(4)
+  external Array<Uint32> dwData;
 }
 
 class ASSEMBLY_INFO extends Struct {
@@ -364,7 +384,8 @@ class FUSION_INSTALL_REFERENCE extends Struct {
 }
 
 class PROTECTED_FILE_DATA extends Struct {
-  external __ushort__ FileName;
+  @Array(129)
+  external Array<Uint16> FileName;
   @Uint32() external int FileNumber;
 }
 

@@ -8,14 +8,14 @@ class HH_GPROPID {
 }
 
 /// {@category Enum}
+class IITWordWheel_OpenFlags {
+  static const ITWW_OPEN_CONNECT = 0x00000000;
+}
+
+/// {@category Enum}
 class PRIORITY {
   static const PRIORITY_LOW = 0x00000000;
   static const PRIORITY_NORMAL = 0x00000001;
   static const PRIORITY_HIGH = 0x00000002;
-}
-
-/// {@category Enum}
-class IITWordWheel_OpenFlags {
-  static const ITWW_OPEN_CONNECT = 0x00000000;
 }
 

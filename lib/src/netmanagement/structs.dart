@@ -188,12 +188,14 @@ class USER_INFO_20 extends Struct {
 }
 
 class USER_INFO_21 extends Struct {
-  external __ubyte__ usri21_password;
+  @Array(16)
+  external Array<Uint8> usri21_password;
 }
 
 class USER_INFO_22 extends Struct {
   external Pointer<Utf16> usri22_name;
-  external __ubyte__ usri22_password;
+  @Array(16)
+  external Array<Uint8> usri22_password;
   @Uint32() external int usri22_password_age;
   @Uint32() external int usri22_priv;
   external Pointer<Utf16> usri22_home_dir;
@@ -571,8 +573,10 @@ class NETSETUP_PROVISIONING_PARAMS extends Struct {
 
 class STD_ALERT extends Struct {
   @Uint32() external int alrt_timestamp;
-  external __ushort__ alrt_eventname;
-  external __ushort__ alrt_servicename;
+  @Array(17)
+  external Array<Uint16> alrt_eventname;
+  @Array(81)
+  external Array<Uint16> alrt_servicename;
 }
 
 class ADMIN_OTHER_INFO extends Struct {
@@ -1512,7 +1516,8 @@ class SERVER_TRANSPORT_INFO_3 extends Struct {
   external Pointer<Utf16> svti3_domain;
   @Uint32() external int svti3_flags;
   @Uint32() external int svti3_passwordlength;
-  external __ubyte__ svti3_password;
+  @Array(129)
+  external Array<Uint8> svti3_password;
 }
 
 class SERVICE_INFO_0 extends Struct {

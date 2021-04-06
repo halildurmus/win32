@@ -1,11 +1,4 @@
 /// {@category Enum}
-class JsRuntimeVersion {
-  static const JsRuntimeVersion10 = 0x00000000;
-  static const JsRuntimeVersion11 = 0x00000001;
-  static const JsRuntimeVersionEdge = 0xffffffff;
-}
-
-/// {@category Enum}
 class JsErrorCode {
   static const JsNoError = 0x00000000;
   static const JsErrorCategoryUsage = 0x00010000;
@@ -39,6 +32,13 @@ class JsErrorCode {
 }
 
 /// {@category Enum}
+class JsMemoryEventType {
+  static const JsMemoryAllocate = 0x00000000;
+  static const JsMemoryFree = 0x00000001;
+  static const JsMemoryFailure = 0x00000002;
+}
+
+/// {@category Enum}
 class JsRuntimeAttributes {
   static const JsRuntimeAttributeNone = 0x00000000;
   static const JsRuntimeAttributeDisableBackgroundWork = 0x00000001;
@@ -49,10 +49,10 @@ class JsRuntimeAttributes {
 }
 
 /// {@category Enum}
-class JsMemoryEventType {
-  static const JsMemoryAllocate = 0x00000000;
-  static const JsMemoryFree = 0x00000001;
-  static const JsMemoryFailure = 0x00000002;
+class JsRuntimeVersion {
+  static const JsRuntimeVersion10 = 0x00000000;
+  static const JsRuntimeVersion11 = 0x00000001;
+  static const JsRuntimeVersionEdge = 0xffffffff;
 }
 
 /// {@category Enum}

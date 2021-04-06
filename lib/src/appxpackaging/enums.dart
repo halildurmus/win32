@@ -1,28 +1,16 @@
 /// {@category Enum}
-class APPX_COMPRESSION_OPTION {
-  static const APPX_COMPRESSION_OPTION_NONE = 0x00000000;
-  static const APPX_COMPRESSION_OPTION_NORMAL = 0x00000001;
-  static const APPX_COMPRESSION_OPTION_MAXIMUM = 0x00000002;
-  static const APPX_COMPRESSION_OPTION_FAST = 0x00000003;
-  static const APPX_COMPRESSION_OPTION_SUPERFAST = 0x00000004;
-}
-
-/// {@category Enum}
-class APPX_FOOTPRINT_FILE_TYPE {
-  static const APPX_FOOTPRINT_FILE_TYPE_MANIFEST = 0x00000000;
-  static const APPX_FOOTPRINT_FILE_TYPE_BLOCKMAP = 0x00000001;
-  static const APPX_FOOTPRINT_FILE_TYPE_SIGNATURE = 0x00000002;
-  static const APPX_FOOTPRINT_FILE_TYPE_CODEINTEGRITY = 0x00000003;
-  static const APPX_FOOTPRINT_FILE_TYPE_CONTENTGROUPMAP = 0x00000004;
-}
-
-/// {@category Enum}
 class APPX_BUNDLE_FOOTPRINT_FILE_TYPE {
   static const APPX_BUNDLE_FOOTPRINT_FILE_TYPE_FIRST = 0x00000000;
   static const APPX_BUNDLE_FOOTPRINT_FILE_TYPE_MANIFEST = 0x00000000;
   static const APPX_BUNDLE_FOOTPRINT_FILE_TYPE_BLOCKMAP = 0x00000001;
   static const APPX_BUNDLE_FOOTPRINT_FILE_TYPE_SIGNATURE = 0x00000002;
   static const APPX_BUNDLE_FOOTPRINT_FILE_TYPE_LAST = 0x00000002;
+}
+
+/// {@category Enum}
+class APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE {
+  static const APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE_APPLICATION = 0x00000000;
+  static const APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE_RESOURCE = 0x00000001;
 }
 
 /// {@category Enum}
@@ -39,6 +27,41 @@ class APPX_CAPABILITIES {
   static const APPX_CAPABILITY_REMOVABLE_STORAGE = 0x00000200;
   static const APPX_CAPABILITY_APPOINTMENTS = 0x00000400;
   static const APPX_CAPABILITY_CONTACTS = 0x00000800;
+}
+
+/// {@category Enum}
+class APPX_CAPABILITY_CLASS_TYPE {
+  static const APPX_CAPABILITY_CLASS_DEFAULT = 0x00000000;
+  static const APPX_CAPABILITY_CLASS_GENERAL = 0x00000001;
+  static const APPX_CAPABILITY_CLASS_RESTRICTED = 0x00000002;
+  static const APPX_CAPABILITY_CLASS_WINDOWS = 0x00000004;
+  static const APPX_CAPABILITY_CLASS_ALL = 0x00000007;
+  static const APPX_CAPABILITY_CLASS_CUSTOM = 0x00000008;
+}
+
+/// {@category Enum}
+class APPX_COMPRESSION_OPTION {
+  static const APPX_COMPRESSION_OPTION_NONE = 0x00000000;
+  static const APPX_COMPRESSION_OPTION_NORMAL = 0x00000001;
+  static const APPX_COMPRESSION_OPTION_MAXIMUM = 0x00000002;
+  static const APPX_COMPRESSION_OPTION_FAST = 0x00000003;
+  static const APPX_COMPRESSION_OPTION_SUPERFAST = 0x00000004;
+}
+
+/// {@category Enum}
+class APPX_ENCRYPTED_PACKAGE_OPTIONS {
+  static const APPX_ENCRYPTED_PACKAGE_OPTION_NONE = 0x00000000;
+  static const APPX_ENCRYPTED_PACKAGE_OPTION_DIFFUSION = 0x00000001;
+  static const APPX_ENCRYPTED_PACKAGE_OPTION_PAGE_HASHING = 0x00000002;
+}
+
+/// {@category Enum}
+class APPX_FOOTPRINT_FILE_TYPE {
+  static const APPX_FOOTPRINT_FILE_TYPE_MANIFEST = 0x00000000;
+  static const APPX_FOOTPRINT_FILE_TYPE_BLOCKMAP = 0x00000001;
+  static const APPX_FOOTPRINT_FILE_TYPE_SIGNATURE = 0x00000002;
+  static const APPX_FOOTPRINT_FILE_TYPE_CODEINTEGRITY = 0x00000003;
+  static const APPX_FOOTPRINT_FILE_TYPE_CONTENTGROUPMAP = 0x00000004;
 }
 
 /// {@category Enum}
@@ -62,27 +85,15 @@ class APPX_PACKAGE_ARCHITECTURE2 {
 }
 
 /// {@category Enum}
-class APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE {
-  static const APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE_APPLICATION = 0x00000000;
-  static const APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE_RESOURCE = 0x00000001;
+class APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTIONS {
+  static const APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTION_NONE = 0x00000000;
+  static const APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTION_SKIP_VALIDATION = 0x00000001;
+  static const APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTION_LOCALIZED = 0x00000002;
 }
 
 /// {@category Enum}
-class DX_FEATURE_LEVEL {
-  static const DX_FEATURE_LEVEL_UNSPECIFIED = 0x00000000;
-  static const DX_FEATURE_LEVEL_9 = 0x00000001;
-  static const DX_FEATURE_LEVEL_10 = 0x00000002;
-  static const DX_FEATURE_LEVEL_11 = 0x00000003;
-}
-
-/// {@category Enum}
-class APPX_CAPABILITY_CLASS_TYPE {
-  static const APPX_CAPABILITY_CLASS_DEFAULT = 0x00000000;
-  static const APPX_CAPABILITY_CLASS_GENERAL = 0x00000001;
-  static const APPX_CAPABILITY_CLASS_RESTRICTED = 0x00000002;
-  static const APPX_CAPABILITY_CLASS_WINDOWS = 0x00000004;
-  static const APPX_CAPABILITY_CLASS_ALL = 0x00000007;
-  static const APPX_CAPABILITY_CLASS_CUSTOM = 0x00000008;
+class APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_OPTION {
+  static const APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_OPTION_APPEND_DELTA = 0x00000000;
 }
 
 /// {@category Enum}
@@ -94,32 +105,63 @@ class APPX_PACKAGING_CONTEXT_CHANGE_TYPE {
 }
 
 /// {@category Enum}
-class APPX_ENCRYPTED_PACKAGE_OPTIONS {
-  static const APPX_ENCRYPTED_PACKAGE_OPTION_NONE = 0x00000000;
-  static const APPX_ENCRYPTED_PACKAGE_OPTION_DIFFUSION = 0x00000001;
-  static const APPX_ENCRYPTED_PACKAGE_OPTION_PAGE_HASHING = 0x00000002;
+class AppPolicyClrCompat {
+  static const AppPolicyClrCompat_Other = 0x00000000;
+  static const AppPolicyClrCompat_ClassicDesktop = 0x00000001;
+  static const AppPolicyClrCompat_Universal = 0x00000002;
+  static const AppPolicyClrCompat_PackagedDesktop = 0x00000003;
 }
 
 /// {@category Enum}
-class APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_OPTION {
-  static const APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_OPTION_APPEND_DELTA = 0x00000000;
+class AppPolicyCreateFileAccess {
+  static const AppPolicyCreateFileAccess_Full = 0x00000000;
+  static const AppPolicyCreateFileAccess_Limited = 0x00000001;
 }
 
 /// {@category Enum}
-class APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTIONS {
-  static const APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTION_NONE = 0x00000000;
-  static const APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTION_SKIP_VALIDATION = 0x00000001;
-  static const APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTION_LOCALIZED = 0x00000002;
+class AppPolicyLifecycleManagement {
+  static const AppPolicyLifecycleManagement_Unmanaged = 0x00000000;
+  static const AppPolicyLifecycleManagement_Managed = 0x00000001;
 }
 
 /// {@category Enum}
-class PackagePathType {
-  static const PackagePathType_Install = 0x00000000;
-  static const PackagePathType_Mutable = 0x00000001;
-  static const PackagePathType_Effective = 0x00000002;
-  static const PackagePathType_MachineExternal = 0x00000003;
-  static const PackagePathType_UserExternal = 0x00000004;
-  static const PackagePathType_EffectiveExternal = 0x00000005;
+class AppPolicyMediaFoundationCodecLoading {
+  static const AppPolicyMediaFoundationCodecLoading_All = 0x00000000;
+  static const AppPolicyMediaFoundationCodecLoading_InboxOnly = 0x00000001;
+}
+
+/// {@category Enum}
+class AppPolicyProcessTerminationMethod {
+  static const AppPolicyProcessTerminationMethod_ExitProcess = 0x00000000;
+  static const AppPolicyProcessTerminationMethod_TerminateProcess = 0x00000001;
+}
+
+/// {@category Enum}
+class AppPolicyShowDeveloperDiagnostic {
+  static const AppPolicyShowDeveloperDiagnostic_None = 0x00000000;
+  static const AppPolicyShowDeveloperDiagnostic_ShowUI = 0x00000001;
+}
+
+/// {@category Enum}
+class AppPolicyThreadInitializationType {
+  static const AppPolicyThreadInitializationType_None = 0x00000000;
+  static const AppPolicyThreadInitializationType_InitializeWinRT = 0x00000001;
+}
+
+/// {@category Enum}
+class AppPolicyWindowingModel {
+  static const AppPolicyWindowingModel_None = 0x00000000;
+  static const AppPolicyWindowingModel_Universal = 0x00000001;
+  static const AppPolicyWindowingModel_ClassicDesktop = 0x00000002;
+  static const AppPolicyWindowingModel_ClassicPhone = 0x00000003;
+}
+
+/// {@category Enum}
+class DX_FEATURE_LEVEL {
+  static const DX_FEATURE_LEVEL_UNSPECIFIED = 0x00000000;
+  static const DX_FEATURE_LEVEL_9 = 0x00000001;
+  static const DX_FEATURE_LEVEL_10 = 0x00000002;
+  static const DX_FEATURE_LEVEL_11 = 0x00000003;
 }
 
 /// {@category Enum}
@@ -134,54 +176,12 @@ class PackageOrigin {
 }
 
 /// {@category Enum}
-class AppPolicyLifecycleManagement {
-  static const AppPolicyLifecycleManagement_Unmanaged = 0x00000000;
-  static const AppPolicyLifecycleManagement_Managed = 0x00000001;
-}
-
-/// {@category Enum}
-class AppPolicyWindowingModel {
-  static const AppPolicyWindowingModel_None = 0x00000000;
-  static const AppPolicyWindowingModel_Universal = 0x00000001;
-  static const AppPolicyWindowingModel_ClassicDesktop = 0x00000002;
-  static const AppPolicyWindowingModel_ClassicPhone = 0x00000003;
-}
-
-/// {@category Enum}
-class AppPolicyMediaFoundationCodecLoading {
-  static const AppPolicyMediaFoundationCodecLoading_All = 0x00000000;
-  static const AppPolicyMediaFoundationCodecLoading_InboxOnly = 0x00000001;
-}
-
-/// {@category Enum}
-class AppPolicyClrCompat {
-  static const AppPolicyClrCompat_Other = 0x00000000;
-  static const AppPolicyClrCompat_ClassicDesktop = 0x00000001;
-  static const AppPolicyClrCompat_Universal = 0x00000002;
-  static const AppPolicyClrCompat_PackagedDesktop = 0x00000003;
-}
-
-/// {@category Enum}
-class AppPolicyThreadInitializationType {
-  static const AppPolicyThreadInitializationType_None = 0x00000000;
-  static const AppPolicyThreadInitializationType_InitializeWinRT = 0x00000001;
-}
-
-/// {@category Enum}
-class AppPolicyShowDeveloperDiagnostic {
-  static const AppPolicyShowDeveloperDiagnostic_None = 0x00000000;
-  static const AppPolicyShowDeveloperDiagnostic_ShowUI = 0x00000001;
-}
-
-/// {@category Enum}
-class AppPolicyProcessTerminationMethod {
-  static const AppPolicyProcessTerminationMethod_ExitProcess = 0x00000000;
-  static const AppPolicyProcessTerminationMethod_TerminateProcess = 0x00000001;
-}
-
-/// {@category Enum}
-class AppPolicyCreateFileAccess {
-  static const AppPolicyCreateFileAccess_Full = 0x00000000;
-  static const AppPolicyCreateFileAccess_Limited = 0x00000001;
+class PackagePathType {
+  static const PackagePathType_Install = 0x00000000;
+  static const PackagePathType_Mutable = 0x00000001;
+  static const PackagePathType_Effective = 0x00000002;
+  static const PackagePathType_MachineExternal = 0x00000003;
+  static const PackagePathType_UserExternal = 0x00000004;
+  static const PackagePathType_EffectiveExternal = 0x00000005;
 }
 

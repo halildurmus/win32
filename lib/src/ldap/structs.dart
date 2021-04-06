@@ -55,7 +55,8 @@ class ldap extends Struct {
   external Pointer<Utf8> ld_matched;
   external Pointer<Utf8> ld_error;
   @Uint32() external int ld_msgid;
-  external __ubyte__ Reserved3;
+  @Array(25)
+  external Array<Uint8> Reserved3;
   @Uint32() external int ld_cldaptries;
   @Uint32() external int ld_cldaptimeout;
   @Uint32() external int ld_refhoplimit;
@@ -127,7 +128,7 @@ class ldapapiinfoA extends Struct {
   @Int32() external int ldapai_api_version;
   @Int32() external int ldapai_protocol_version;
   external Pointer<Pointer<Int8>> ldapai_extensions;
-  external Pointer<Int8> ldapai_vendor_name;
+  external Pointer<Utf8> ldapai_vendor_name;
   @Int32() external int ldapai_vendor_version;
 }
 
@@ -142,7 +143,7 @@ class ldapapiinfoW extends Struct {
 
 class LDAPAPIFeatureInfoA extends Struct {
   @Int32() external int ldapaif_info_version;
-  external Pointer<Int8> ldapaif_name;
+  external Pointer<Utf8> ldapaif_name;
   @Int32() external int ldapaif_version;
 }
 

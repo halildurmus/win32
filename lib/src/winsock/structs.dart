@@ -52,13 +52,10 @@ class BLOB extends Struct {
   external Pointer<Uint8> pBlobData;
 }
 
-class in_addr extends Struct {
-  @Uint32() external int S_un;
-}
-
 class SOCKADDR extends Struct {
   @Uint16() external int sa_family;
-  external __byte__ sa_data;
+  @Array(14)
+  external Array<Int8> sa_data;
 }
 
 class SOCKET_ADDRESS extends Struct {
@@ -73,11 +70,13 @@ class CSADDR_INFO extends Struct {
   @Int32() external int iProtocol;
 }
 
-class sockaddr_storage_xp extends Struct {
-  @Int16() external int ss_family;
-  external __byte__ __ss_pad1;
+class SOCKADDR_STORAGE extends Struct {
+  @Uint16() external int ss_family;
+  @Array(6)
+  external Array<Int8> __ss_pad1;
   @Int64() external int __ss_align;
-  external __byte__ __ss_pad2;
+  @Array(112)
+  external Array<Int8> __ss_pad2;
 }
 
 class SOCKET_PROCESSOR_AFFINITY extends Struct {
@@ -90,22 +89,25 @@ class SCOPE_ID extends Struct {
   @Uint32() external int Anonymous;
 }
 
-class sockaddr_in extends Struct {
+class SOCKADDR_IN extends Struct {
   @Uint16() external int sin_family;
   @Uint16() external int sin_port;
-  external in_addr sin_addr;
-  external __byte__ sin_zero;
+  external IN_ADDR sin_addr;
+  @Array(8)
+  external Array<Int8> sin_zero;
 }
 
-class sockaddr_dl extends Struct {
+class SOCKADDR_DL extends Struct {
   @Uint16() external int sdl_family;
-  external __ubyte__ sdl_data;
-  external __ubyte__ sdl_zero;
+  @Array(8)
+  external Array<Uint8> sdl_data;
+  @Array(4)
+  external Array<Uint8> sdl_zero;
 }
 
 class WSABUF extends Struct {
   @Uint32() external int len;
-  external Pointer<Int8> buf;
+  external Pointer<Utf8> buf;
 }
 
 class WSAMSG extends Struct {
@@ -129,7 +131,7 @@ class ADDRINFOA extends Struct {
   @Int32() external int ai_socktype;
   @Int32() external int ai_protocol;
   @IntPtr() external int ai_addrlen;
-  external Pointer<Int8> ai_canonname;
+  external Pointer<Utf8> ai_canonname;
   external Pointer<SOCKADDR> ai_addr;
   external Pointer<ADDRINFOA> ai_next;
 }
@@ -151,7 +153,7 @@ class addrinfoexA extends Struct {
   @Int32() external int ai_socktype;
   @Int32() external int ai_protocol;
   @IntPtr() external int ai_addrlen;
-  external Pointer<Int8> ai_canonname;
+  external Pointer<Utf8> ai_canonname;
   external Pointer<SOCKADDR> ai_addr;
   external Pointer ai_blob;
   @IntPtr() external int ai_bloblen;
@@ -179,14 +181,14 @@ class addrinfoex2A extends Struct {
   @Int32() external int ai_socktype;
   @Int32() external int ai_protocol;
   @IntPtr() external int ai_addrlen;
-  external Pointer<Int8> ai_canonname;
+  external Pointer<Utf8> ai_canonname;
   external Pointer<SOCKADDR> ai_addr;
   external Pointer ai_blob;
   @IntPtr() external int ai_bloblen;
   external Pointer<GUID> ai_provider;
   external Pointer<addrinfoex2A> ai_next;
   @Int32() external int ai_version;
-  external Pointer<Int8> ai_fqdn;
+  external Pointer<Utf8> ai_fqdn;
 }
 
 class addrinfoex2W extends Struct {
@@ -242,7 +244,8 @@ class addrinfoex4 extends Struct {
 
 class fd_set extends Struct {
   @Uint32() external int fd_count;
-  external __uintptr__ fd_array;
+  @Array(64)
+  external Array<IntPtr> fd_array;
 }
 
 class timeval extends Struct {
@@ -251,7 +254,7 @@ class timeval extends Struct {
 }
 
 class hostent extends Struct {
-  external Pointer<Int8> h_name;
+  external Pointer<Utf8> h_name;
   external Pointer<Pointer<Int8>> h_aliases;
   @Int16() external int h_addrtype;
   @Int16() external int h_length;
@@ -259,21 +262,21 @@ class hostent extends Struct {
 }
 
 class netent extends Struct {
-  external Pointer<Int8> n_name;
+  external Pointer<Utf8> n_name;
   external Pointer<Pointer<Int8>> n_aliases;
   @Int16() external int n_addrtype;
   @Uint32() external int n_net;
 }
 
 class servent extends Struct {
-  external Pointer<Int8> s_name;
+  external Pointer<Utf8> s_name;
   external Pointer<Pointer<Int8>> s_aliases;
-  external Pointer<Int8> s_proto;
+  external Pointer<Utf8> s_proto;
   @Int16() external int s_port;
 }
 
 class protoent extends Struct {
-  external Pointer<Int8> p_name;
+  external Pointer<Utf8> p_name;
   external Pointer<Pointer<Int8>> p_aliases;
   @Int16() external int p_proto;
 }
@@ -283,9 +286,11 @@ class WSAData extends Struct {
   @Uint16() external int wHighVersion;
   @Uint16() external int iMaxSockets;
   @Uint16() external int iMaxUdpDg;
-  external Pointer<Int8> lpVendorInfo;
-  external __byte__ szDescription;
-  external __byte__ szSystemStatus;
+  external Pointer<Utf8> lpVendorInfo;
+  @Array(129)
+  external Array<Int8> szDescription;
+  @Array(128)
+  external Array<Int8> szSystemStatus;
 }
 
 class sockproto extends Struct {
@@ -300,12 +305,14 @@ class linger extends Struct {
 
 class WSANETWORKEVENTS extends Struct {
   @Int32() external int lNetworkEvents;
-  external __int__ iErrorCode;
+  @Array(10)
+  external Array<Int32> iErrorCode;
 }
 
 class WSAPROTOCOLCHAIN extends Struct {
   @Int32() external int ChainLen;
-  external __uint__ ChainEntries;
+  @Array(7)
+  external Array<Uint32> ChainEntries;
 }
 
 class WSAPROTOCOL_INFOA extends Struct {
@@ -328,7 +335,8 @@ class WSAPROTOCOL_INFOA extends Struct {
   @Int32() external int iSecurityScheme;
   @Uint32() external int dwMessageSize;
   @Uint32() external int dwProviderReserved;
-  external __byte__ szProtocol;
+  @Array(129)
+  external Array<Int8> szProtocol;
 }
 
 class WSAPROTOCOL_INFOW extends Struct {
@@ -351,7 +359,8 @@ class WSAPROTOCOL_INFOW extends Struct {
   @Int32() external int iSecurityScheme;
   @Uint32() external int dwMessageSize;
   @Uint32() external int dwProviderReserved;
-  external __ushort__ szProtocol;
+  @Array(129)
+  external Array<Uint16> szProtocol;
 }
 
 class WSACOMPLETION extends Struct {
@@ -509,20 +518,16 @@ class WSAPOLLFD extends Struct {
   @Int16() external int revents;
 }
 
-class in6_addr extends Struct {
-  @Uint32() external int u;
-}
-
 class sockaddr_in6_old extends Struct {
   @Int16() external int sin6_family;
   @Uint16() external int sin6_port;
   @Uint32() external int sin6_flowinfo;
-  external in6_addr sin6_addr;
+  external IN6_ADDR sin6_addr;
 }
 
 class sockaddr_gen extends Struct {
   external SOCKADDR Address;
-  external sockaddr_in AddressIn;
+  external SOCKADDR_IN AddressIn;
   external sockaddr_in6_old AddressIn6;
 }
 
@@ -540,85 +545,87 @@ class INTERFACE_INFO_EX extends Struct {
   external SOCKET_ADDRESS iiNetmask;
 }
 
-class sockaddr_in6_w2ksp1 extends Struct {
-  @Int16() external int sin6_family;
+class SOCKADDR_IN6 extends Struct {
+  @Uint16() external int sin6_family;
   @Uint16() external int sin6_port;
   @Uint32() external int sin6_flowinfo;
-  external in6_addr sin6_addr;
-  @Uint32() external int sin6_scope_id;
+  external IN6_ADDR sin6_addr;
+  @Uint32() external int Anonymous;
 }
 
-class ip_mreq extends Struct {
-  external in_addr imr_multiaddr;
-  external in_addr imr_interface;
+class IP_MREQ extends Struct {
+  external IN_ADDR imr_multiaddr;
+  external IN_ADDR imr_interface;
 }
 
-class ip_mreq_source extends Struct {
-  external in_addr imr_multiaddr;
-  external in_addr imr_sourceaddr;
-  external in_addr imr_interface;
+class IP_MREQ_SOURCE extends Struct {
+  external IN_ADDR imr_multiaddr;
+  external IN_ADDR imr_sourceaddr;
+  external IN_ADDR imr_interface;
 }
 
-class ip_msfilter extends Struct {
-  external in_addr imsf_multiaddr;
-  external in_addr imsf_interface;
+class IP_MSFILTER extends Struct {
+  external IN_ADDR imsf_multiaddr;
+  external IN_ADDR imsf_interface;
   @Uint32() external int imsf_fmode;
   @Uint32() external int imsf_numsrc;
-  external in_addr imsf_slist;
+  @Array(1)
+  external Array<IN_ADDR> imsf_slist;
 }
 
-class ipv6_mreq extends Struct {
-  external in6_addr ipv6mr_multiaddr;
+class IPV6_MREQ extends Struct {
+  external IN6_ADDR ipv6mr_multiaddr;
   @Uint32() external int ipv6mr_interface;
 }
 
-class group_req extends Struct {
+class GROUP_REQ extends Struct {
   @Uint32() external int gr_interface;
-  external SOCKADDR_STORAGE_LH gr_group;
+  external SOCKADDR_STORAGE gr_group;
 }
 
-class group_source_req extends Struct {
+class GROUP_SOURCE_REQ extends Struct {
   @Uint32() external int gsr_interface;
-  external SOCKADDR_STORAGE_LH gsr_group;
-  external SOCKADDR_STORAGE_LH gsr_source;
+  external SOCKADDR_STORAGE gsr_group;
+  external SOCKADDR_STORAGE gsr_source;
 }
 
-class group_filter extends Struct {
+class GROUP_FILTER extends Struct {
   @Uint32() external int gf_interface;
-  external SOCKADDR_STORAGE_LH gf_group;
+  external SOCKADDR_STORAGE gf_group;
   @Uint32() external int gf_fmode;
   @Uint32() external int gf_numsrc;
-  external SOCKADDR_STORAGE_LH gf_slist;
+  @Array(1)
+  external Array<SOCKADDR_STORAGE> gf_slist;
 }
 
-class in_pktinfo extends Struct {
-  external in_addr ipi_addr;
+class IN_PKTINFO extends Struct {
+  external IN_ADDR ipi_addr;
   @Uint32() external int ipi_ifindex;
 }
 
-class in6_pktinfo extends Struct {
-  external in6_addr ipi6_addr;
+class IN6_PKTINFO extends Struct {
+  external IN6_ADDR ipi6_addr;
   @Uint32() external int ipi6_ifindex;
 }
 
-class in_pktinfo_ex extends Struct {
-  external in_pktinfo pkt_info;
+class IN_PKTINFO_EX extends Struct {
+  external IN_PKTINFO pkt_info;
   external SCOPE_ID scope_id;
 }
 
 class in6_pktinfo_ex extends Struct {
-  external in6_pktinfo pkt_info;
+  external IN6_PKTINFO pkt_info;
   external SCOPE_ID scope_id;
 }
 
-class in_recverr extends Struct {
+class IN_RECVERR extends Struct {
   @Uint32() external int protocol;
   @Uint32() external int info;
   @Uint8() external int type;
   @Uint8() external int code;
 }
 
-class icmp_error_info extends Struct {
+class ICMP_ERROR_INFO extends Struct {
   external SOCKADDR_INET srcaddress;
   @Uint32() external int protocol;
   @Uint8() external int type;
@@ -677,8 +684,10 @@ class RM_FEC_INFO extends Struct {
 
 class IPX_ADDRESS_DATA extends Struct {
   @Int32() external int adapternum;
-  external __ubyte__ netnum;
-  external __ubyte__ nodenum;
+  @Array(4)
+  external Array<Uint8> netnum;
+  @Array(6)
+  external Array<Uint8> nodenum;
   @Uint8() external int wan;
   @Uint8() external int status;
   @Int32() external int maxpkt;
@@ -686,11 +695,13 @@ class IPX_ADDRESS_DATA extends Struct {
 }
 
 class IPX_NETNUM_DATA extends Struct {
-  external __ubyte__ netnum;
+  @Array(4)
+  external Array<Uint8> netnum;
   @Uint16() external int hopcount;
   @Uint16() external int netdelay;
   @Int32() external int cardnum;
-  external __ubyte__ router;
+  @Array(6)
+  external Array<Uint8> router;
 }
 
 class IPX_SPXCONNSTATUS_DATA extends Struct {
@@ -704,9 +715,12 @@ class IPX_SPXCONNSTATUS_DATA extends Struct {
   @Uint16() external int RemoteAckNumber;
   @Uint16() external int RemoteAllocNumber;
   @Uint16() external int LocalSocket;
-  external __ubyte__ ImmediateAddress;
-  external __ubyte__ RemoteNetwork;
-  external __ubyte__ RemoteNode;
+  @Array(6)
+  external Array<Uint8> ImmediateAddress;
+  @Array(4)
+  external Array<Uint8> RemoteNetwork;
+  @Array(6)
+  external Array<Uint8> RemoteNode;
   @Uint16() external int RemoteSocket;
   @Uint16() external int RetransmissionCount;
   @Uint16() external int EstimatedRoundTripDelay;
@@ -727,45 +741,59 @@ class LM_IRPARMS extends Struct {
 
 class SOCKADDR_IRDA extends Struct {
   @Uint16() external int irdaAddressFamily;
-  external __ubyte__ irdaDeviceID;
-  external __byte__ irdaServiceName;
+  @Array(4)
+  external Array<Uint8> irdaDeviceID;
+  @Array(25)
+  external Array<Int8> irdaServiceName;
 }
 
 class WINDOWS_IRDA_DEVICE_INFO extends Struct {
-  external __ubyte__ irdaDeviceID;
-  external __byte__ irdaDeviceName;
+  @Array(4)
+  external Array<Uint8> irdaDeviceID;
+  @Array(22)
+  external Array<Int8> irdaDeviceName;
   @Uint8() external int irdaDeviceHints1;
   @Uint8() external int irdaDeviceHints2;
   @Uint8() external int irdaCharSet;
 }
 
 class WCE_IRDA_DEVICE_INFO extends Struct {
-  external __ubyte__ irdaDeviceID;
-  external __byte__ irdaDeviceName;
-  external __ubyte__ Reserved;
+  @Array(4)
+  external Array<Uint8> irdaDeviceID;
+  @Array(22)
+  external Array<Int8> irdaDeviceName;
+  @Array(2)
+  external Array<Uint8> Reserved;
 }
 
 class WINDOWS_DEVICELIST extends Struct {
   @Uint32() external int numDevice;
-  external WINDOWS_IRDA_DEVICE_INFO Device;
+  @Array(1)
+  external Array<WINDOWS_IRDA_DEVICE_INFO> Device;
 }
 
 class WCE_DEVICELIST extends Struct {
   @Uint32() external int numDevice;
-  external WCE_IRDA_DEVICE_INFO Device;
+  @Array(1)
+  external Array<WCE_IRDA_DEVICE_INFO> Device;
 }
 
 class WINDOWS_IAS_SET extends Struct {
-  external __byte__ irdaClassName;
-  external __byte__ irdaAttribName;
+  @Array(64)
+  external Array<Int8> irdaClassName;
+  @Array(129)
+  external Array<Int8> irdaAttribName;
   @Uint32() external int irdaAttribType;
   @Uint32() external int irdaAttribute;
 }
 
 class WINDOWS_IAS_QUERY extends Struct {
-  external __ubyte__ irdaDeviceID;
-  external __byte__ irdaClassName;
-  external __byte__ irdaAttribName;
+  @Array(4)
+  external Array<Uint8> irdaDeviceID;
+  @Array(64)
+  external Array<Int8> irdaClassName;
+  @Array(129)
+  external Array<Int8> irdaAttribName;
   @Uint32() external int irdaAttribType;
   @Uint32() external int irdaAttribute;
 }
@@ -911,25 +939,27 @@ class SOCKET_SECURITY_SETTINGS_IPSEC extends Struct {
   @Uint32() external int UserNameStringLen;
   @Uint32() external int DomainNameStringLen;
   @Uint32() external int PasswordStringLen;
-  external __ushort__ AllStrings;
+  @Array(1)
+  external Array<Uint16> AllStrings;
 }
 
 class SOCKET_PEER_TARGET_NAME extends Struct {
   @Uint32() external int SecurityProtocol;
-  external SOCKADDR_STORAGE_LH PeerAddress;
+  external SOCKADDR_STORAGE PeerAddress;
   @Uint32() external int PeerTargetNameStringLen;
-  external __ushort__ AllStrings;
+  @Array(1)
+  external Array<Uint16> AllStrings;
 }
 
 class SOCKET_SECURITY_QUERY_TEMPLATE extends Struct {
   @Uint32() external int SecurityProtocol;
-  external SOCKADDR_STORAGE_LH PeerAddress;
+  external SOCKADDR_STORAGE PeerAddress;
   @Uint32() external int PeerTokenAccessMask;
 }
 
 class SOCKET_SECURITY_QUERY_TEMPLATE_IPSEC2 extends Struct {
   @Uint32() external int SecurityProtocol;
-  external SOCKADDR_STORAGE_LH PeerAddress;
+  external SOCKADDR_STORAGE PeerAddress;
   @Uint32() external int PeerTokenAccessMask;
   @Uint32() external int Flags;
   @Uint32() external int FieldMask;
@@ -991,7 +1021,8 @@ class RIO_CMSG_BUFFER extends Struct {
 class ATM_ADDRESS extends Struct {
   @Uint32() external int AddressType;
   @Uint32() external int NumofDigits;
-  external __ubyte__ Addr;
+  @Array(20)
+  external Array<Uint8> Addr;
 }
 
 class ATM_BLLI extends Struct {
@@ -1000,13 +1031,15 @@ class ATM_BLLI extends Struct {
   @Uint32() external int Layer3Protocol;
   @Uint32() external int Layer3UserSpecifiedProtocol;
   @Uint32() external int Layer3IPI;
-  external __ubyte__ SnapID;
+  @Array(5)
+  external Array<Uint8> SnapID;
 }
 
 class ATM_BHLI extends Struct {
   @Uint32() external int HighLayerInfoType;
   @Uint32() external int HighLayerInfoLength;
-  external __ubyte__ HighLayerInfo;
+  @Array(8)
+  external Array<Uint8> HighLayerInfo;
 }
 
 class sockaddr_atm extends Struct {
@@ -1019,7 +1052,8 @@ class sockaddr_atm extends Struct {
 class Q2931_IE extends Struct {
   @Uint32() external int IEType;
   @Uint32() external int IELength;
-  external __ubyte__ IE;
+  @Array(1)
+  external Array<Uint8> IE;
 }
 
 class AAL5_PARAMETERS extends Struct {
@@ -1073,7 +1107,8 @@ class ATM_BLLI_IE extends Struct {
   @Uint8() external int Layer3PacketWindowSize;
   @Uint32() external int Layer3UserSpecifiedProtocol;
   @Uint32() external int Layer3IPI;
-  external __ubyte__ SnapID;
+  @Array(5)
+  external Array<Uint8> SnapID;
 }
 
 class ATM_CALLING_PARTY_NUMBER_IE extends Struct {
@@ -1086,7 +1121,8 @@ class ATM_CAUSE_IE extends Struct {
   @Uint8() external int Location;
   @Uint8() external int Cause;
   @Uint8() external int DiagnosticsLength;
-  external __ubyte__ Diagnostics;
+  @Array(4)
+  external Array<Uint8> Diagnostics;
 }
 
 class ATM_QOS_CLASS_IE extends Struct {
@@ -1098,7 +1134,8 @@ class ATM_TRANSIT_NETWORK_SELECTION_IE extends Struct {
   @Uint8() external int TypeOfNetworkId;
   @Uint8() external int NetworkIdPlan;
   @Uint8() external int NetworkIdLength;
-  external __ubyte__ NetworkId;
+  @Array(1)
+  external Array<Uint8> NetworkId;
 }
 
 class ATM_CONNECTION_ID extends Struct {
@@ -1149,7 +1186,8 @@ class WSAPOLLDATA extends Struct {
   @Int32() external int result;
   @Uint32() external int fds;
   @Int32() external int timeout;
-  external WSAPOLLFD fdArray;
+  @Array(1)
+  external Array<WSAPOLLFD> fdArray;
 }
 
 class WSASENDMSG extends Struct {
@@ -1185,7 +1223,8 @@ class RIO_EXTENSION_FUNCTION_TABLE extends Struct {
 class WSPData extends Struct {
   @Uint16() external int wVersion;
   @Uint16() external int wHighVersion;
-  external __ushort__ szDescription;
+  @Array(129)
+  external Array<Uint16> szDescription;
 }
 
 class WSATHREADID extends Struct {
@@ -1316,19 +1355,22 @@ class SERVICE_TYPE_VALUE_ABSW extends Struct {
 class SERVICE_TYPE_INFO extends Struct {
   @Uint32() external int dwTypeNameOffset;
   @Uint32() external int dwValueCount;
-  external SERVICE_TYPE_VALUE Values;
+  @Array(1)
+  external Array<SERVICE_TYPE_VALUE> Values;
 }
 
 class SERVICE_TYPE_INFO_ABSA extends Struct {
   external Pointer<Utf8> lpTypeName;
   @Uint32() external int dwValueCount;
-  external SERVICE_TYPE_VALUE_ABSA Values;
+  @Array(1)
+  external Array<SERVICE_TYPE_VALUE_ABSA> Values;
 }
 
 class SERVICE_TYPE_INFO_ABSW extends Struct {
   external Pointer<Utf16> lpTypeName;
   @Uint32() external int dwValueCount;
-  external SERVICE_TYPE_VALUE_ABSW Values;
+  @Array(1)
+  external Array<SERVICE_TYPE_VALUE_ABSW> Values;
 }
 
 class SERVICE_ADDRESS extends Struct {
@@ -1342,7 +1384,8 @@ class SERVICE_ADDRESS extends Struct {
 
 class SERVICE_ADDRESSES extends Struct {
   @Uint32() external int dwAddressCount;
-  external SERVICE_ADDRESS Addresses;
+  @Array(1)
+  external Array<SERVICE_ADDRESS> Addresses;
 }
 
 class SERVICE_INFOA extends Struct {

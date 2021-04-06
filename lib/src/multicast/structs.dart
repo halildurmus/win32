@@ -45,7 +45,8 @@ import 'package:ffi/ffi.dart';
 
 class IPNG_ADDRESS extends Struct {
   @Uint32() external int IpAddrV4;
-  external __ubyte__ IpAddrV6;
+  @Array(16)
+  external Array<Uint8> IpAddrV6;
 }
 
 class MCAST_CLIENT_UID extends Struct {

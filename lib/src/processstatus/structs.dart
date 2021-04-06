@@ -56,7 +56,8 @@ class PSAPI_WORKING_SET_BLOCK extends Struct {
 
 class PSAPI_WORKING_SET_INFORMATION extends Struct {
   @IntPtr() external int NumberOfEntries;
-  external PSAPI_WORKING_SET_BLOCK WorkingSetInfo;
+  @Array(1)
+  external Array<PSAPI_WORKING_SET_BLOCK> WorkingSetInfo;
 }
 
 class PSAPI_WORKING_SET_EX_BLOCK extends Struct {

@@ -30,12 +30,6 @@ String processEnumeration(Enumeration enumClass) {
     dartClass = dartClass.substring(1);
   }
 
-  // Some weirdness in Win32 metadata, see:
-  // https://github.com/microsoft/win32metadata/issues/297
-  if (dartClass.startsWith('MIDL___')) {
-    return '';
-  }
-
   buffer.writeln('/// {@category Enum}');
   buffer.writeln('class $dartClass {');
 
@@ -59,8 +53,10 @@ void main() {
   for (final namespace in namespaces) {
     final folderName = namespace.split('.').last.toLowerCase();
 
-    final filteredEnums =
-        scope.enums.where((typedef) => typedef.typeName.startsWith(namespace));
+    final filteredEnums = scope.enums
+        .where((typedef) => typedef.typeName.startsWith(namespace))
+        .toList()
+          ..sort((a, b) => a.typeName.compareTo(b.typeName));
 
     if (filteredEnums.isNotEmpty) {
       Directory('lib/src/$folderName').createSync();

@@ -130,7 +130,8 @@ class HH_WINTYPE extends Struct {
   @Int32() external int curNavType;
   @Int32() external int tabpos;
   @Int32() external int idNotify;
-  external __ubyte__ tabOrder;
+  @Array(20)
+  external Array<Uint8> tabOrder;
   @Int32() external int cHistory;
   external Pointer<Int8> pszJump1;
   external Pointer<Int8> pszJump2;

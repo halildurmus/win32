@@ -47,14 +47,16 @@ class RESTOREPOINTINFOA extends Struct {
   @Uint32() external int dwEventType;
   @Uint32() external int dwRestorePtType;
   @Int64() external int llSequenceNumber;
-  external __byte__ szDescription;
+  @Array(64)
+  external Array<Int8> szDescription;
 }
 
 class RESTOREPOINTINFOW extends Struct {
   @Uint32() external int dwEventType;
   @Uint32() external int dwRestorePtType;
   @Int64() external int llSequenceNumber;
-  external __ushort__ szDescription;
+  @Array(129)
+  external Array<Uint16> szDescription;
 }
 
 class _RESTOREPTINFOEX extends Struct {
@@ -62,7 +64,8 @@ class _RESTOREPTINFOEX extends Struct {
   @Uint32() external int dwEventType;
   @Uint32() external int dwRestorePtType;
   @Uint32() external int dwRPNum;
-  external __ushort__ szDescription;
+  @Array(129)
+  external Array<Uint16> szDescription;
 }
 
 class STATEMGRSTATUS extends Struct {

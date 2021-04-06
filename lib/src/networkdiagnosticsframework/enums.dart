@@ -18,11 +18,24 @@ class ATTRIBUTE_TYPE {
 }
 
 /// {@category Enum}
-class REPAIR_SCOPE {
-  static const RS_SYSTEM = 0x00000000;
-  static const RS_USER = 0x00000001;
-  static const RS_APPLICATION = 0x00000002;
-  static const RS_PROCESS = 0x00000003;
+class DIAGNOSIS_STATUS {
+  static const DS_NOT_IMPLEMENTED = 0x00000000;
+  static const DS_CONFIRMED = 0x00000001;
+  static const DS_REJECTED = 0x00000002;
+  static const DS_INDETERMINATE = 0x00000003;
+  static const DS_DEFERRED = 0x00000004;
+  static const DS_PASSTHROUGH = 0x00000005;
+}
+
+/// {@category Enum}
+class PROBLEM_TYPE {
+  static const PT_INVALID = 0x00000000;
+  static const PT_LOW_HEALTH = 0x00000001;
+  static const PT_LOWER_HEALTH = 0x00000002;
+  static const PT_DOWN_STREAM_HEALTH = 0x00000004;
+  static const PT_HIGH_UTILIZATION = 0x00000008;
+  static const PT_HIGHER_UTILIZATION = 0x00000010;
+  static const PT_UP_STREAM_UTILIZATION = 0x00000020;
 }
 
 /// {@category Enum}
@@ -33,22 +46,11 @@ class REPAIR_RISK {
 }
 
 /// {@category Enum}
-class UI_INFO_TYPE {
-  static const UIT_INVALID = 0x00000000;
-  static const UIT_NONE = 0x00000001;
-  static const UIT_SHELL_COMMAND = 0x00000002;
-  static const UIT_HELP_PANE = 0x00000003;
-  static const UIT_DUI = 0x00000004;
-}
-
-/// {@category Enum}
-class DIAGNOSIS_STATUS {
-  static const DS_NOT_IMPLEMENTED = 0x00000000;
-  static const DS_CONFIRMED = 0x00000001;
-  static const DS_REJECTED = 0x00000002;
-  static const DS_INDETERMINATE = 0x00000003;
-  static const DS_DEFERRED = 0x00000004;
-  static const DS_PASSTHROUGH = 0x00000005;
+class REPAIR_SCOPE {
+  static const RS_SYSTEM = 0x00000000;
+  static const RS_USER = 0x00000001;
+  static const RS_APPLICATION = 0x00000002;
+  static const RS_PROCESS = 0x00000003;
 }
 
 /// {@category Enum}
@@ -61,13 +63,11 @@ class REPAIR_STATUS {
 }
 
 /// {@category Enum}
-class PROBLEM_TYPE {
-  static const PT_INVALID = 0x00000000;
-  static const PT_LOW_HEALTH = 0x00000001;
-  static const PT_LOWER_HEALTH = 0x00000002;
-  static const PT_DOWN_STREAM_HEALTH = 0x00000004;
-  static const PT_HIGH_UTILIZATION = 0x00000008;
-  static const PT_HIGHER_UTILIZATION = 0x00000010;
-  static const PT_UP_STREAM_UTILIZATION = 0x00000020;
+class UI_INFO_TYPE {
+  static const UIT_INVALID = 0x00000000;
+  static const UIT_NONE = 0x00000001;
+  static const UIT_SHELL_COMMAND = 0x00000002;
+  static const UIT_HELP_PANE = 0x00000003;
+  static const UIT_DUI = 0x00000004;
 }
 

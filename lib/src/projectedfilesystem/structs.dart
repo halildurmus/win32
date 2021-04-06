@@ -76,8 +76,10 @@ class PRJ_VIRTUALIZATION_INSTANCE_INFO extends Struct {
 }
 
 class PRJ_PLACEHOLDER_VERSION_INFO extends Struct {
-  external __ubyte__ ProviderID;
-  external __ubyte__ ContentID;
+  @Array(128)
+  external Array<Uint8> ProviderID;
+  @Array(128)
+  external Array<Uint8> ContentID;
 }
 
 class PRJ_FILE_BASIC_INFO extends Struct {
@@ -96,7 +98,8 @@ class PRJ_PLACEHOLDER_INFO extends Struct {
   @Uint32() external int SecurityInformation;
   @Uint32() external int StreamsInformation;
   external PRJ_PLACEHOLDER_VERSION_INFO VersionInfo;
-  external __ubyte__ VariableData;
+  @Array(1)
+  external Array<Uint8> VariableData;
 }
 
 class PRJ_CALLBACK_DATA extends Struct {

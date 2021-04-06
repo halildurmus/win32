@@ -44,18 +44,22 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class CYPHER_BLOCK extends Struct {
-  external __byte__ data;
+  @Array(8)
+  external Array<Int8> data;
 }
 
 class LM_OWF_PASSWORD extends Struct {
-  external CYPHER_BLOCK data;
+  @Array(2)
+  external Array<CYPHER_BLOCK> data;
 }
 
 class SAMPR_ENCRYPTED_USER_PASSWORD extends Struct {
-  external __ubyte__ Buffer;
+  @Array(130)
+  external Array<Uint8> Buffer;
 }
 
 class ENCRYPTED_LM_OWF_PASSWORD extends Struct {
-  external CYPHER_BLOCK data;
+  @Array(2)
+  external Array<CYPHER_BLOCK> data;
 }
 

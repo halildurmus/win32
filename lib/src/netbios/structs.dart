@@ -50,19 +50,23 @@ class NCB extends Struct {
   @Uint8() external int ncb_num;
   external Pointer<Uint8> ncb_buffer;
   @Uint16() external int ncb_length;
-  external __ubyte__ ncb_callname;
-  external __ubyte__ ncb_name;
+  @Array(16)
+  external Array<Uint8> ncb_callname;
+  @Array(16)
+  external Array<Uint8> ncb_name;
   @Uint8() external int ncb_rto;
   @Uint8() external int ncb_sto;
   @IntPtr() external int ncb_post;
   @Uint8() external int ncb_lana_num;
   @Uint8() external int ncb_cmd_cplt;
-  external __ubyte__ ncb_reserve;
+  @Array(18)
+  external Array<Uint8> ncb_reserve;
   @IntPtr() external int ncb_event;
 }
 
 class ADAPTER_STATUS extends Struct {
-  external __ubyte__ adapter_address;
+  @Array(6)
+  external Array<Uint8> adapter_address;
   @Uint8() external int rev_major;
   @Uint8() external int reserved0;
   @Uint8() external int adapter_type;
@@ -92,7 +96,8 @@ class ADAPTER_STATUS extends Struct {
 }
 
 class NAME_BUFFER extends Struct {
-  external __ubyte__ name;
+  @Array(16)
+  external Array<Uint8> name;
   @Uint8() external int name_num;
   @Uint8() external int name_flags;
 }
@@ -107,15 +112,18 @@ class SESSION_HEADER extends Struct {
 class SESSION_BUFFER extends Struct {
   @Uint8() external int lsn;
   @Uint8() external int state;
-  external __ubyte__ local_name;
-  external __ubyte__ remote_name;
+  @Array(16)
+  external Array<Uint8> local_name;
+  @Array(16)
+  external Array<Uint8> remote_name;
   @Uint8() external int rcvs_outstanding;
   @Uint8() external int sends_outstanding;
 }
 
 class LANA_ENUM extends Struct {
   @Uint8() external int length;
-  external __ubyte__ lana;
+  @Array(128)
+  external Array<Uint8> lana;
 }
 
 class FIND_NAME_HEADER extends Struct {
@@ -128,9 +136,12 @@ class FIND_NAME_BUFFER extends Struct {
   @Uint8() external int length;
   @Uint8() external int access_control;
   @Uint8() external int frame_control;
-  external __ubyte__ destination_addr;
-  external __ubyte__ source_addr;
-  external __ubyte__ routing_info;
+  @Array(6)
+  external Array<Uint8> destination_addr;
+  @Array(6)
+  external Array<Uint8> source_addr;
+  @Array(18)
+  external Array<Uint8> routing_info;
 }
 
 class ACTION_HEADER extends Struct {

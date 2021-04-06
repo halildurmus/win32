@@ -120,9 +120,6 @@ class WSDUdpRetransmitParams extends Struct {
   @Uint32() external int ulRepeatUpperDelay;
 }
 
-class SOCKADDR_STORAGE extends Struct {
-}
-
 class WSD_OPERATION extends Struct {
   external Pointer<WSDXML_TYPE> RequestType;
   external Pointer<WSDXML_TYPE> ResponseType;

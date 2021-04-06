@@ -74,7 +74,8 @@ class PSFEATURE_CUSTPAPER extends Struct {
 }
 
 class DEVMODEA extends Struct {
-  external __ubyte__ dmDeviceName;
+  @Array(32)
+  external Array<Uint8> dmDeviceName;
   @Uint16() external int dmSpecVersion;
   @Uint16() external int dmDriverVersion;
   @Uint16() external int dmSize;
@@ -86,7 +87,8 @@ class DEVMODEA extends Struct {
   @Int16() external int dmYResolution;
   @Int16() external int dmTTOption;
   @Int16() external int dmCollate;
-  external __ubyte__ dmFormName;
+  @Array(32)
+  external Array<Uint8> dmFormName;
   @Uint16() external int dmLogPixels;
   @Uint32() external int dmBitsPerPel;
   @Uint32() external int dmPelsWidth;

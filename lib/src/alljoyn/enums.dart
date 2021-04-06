@@ -1,10 +1,4 @@
 /// {@category Enum}
-class alljoyn_about_announceflag {
-  static const UNANNOUNCED = 0x00000000;
-  static const ANNOUNCED = 0x00000001;
-}
-
-/// {@category Enum}
 class QStatus {
   static const ER_OK = 0x00000000;
   static const ER_FAIL = 0x00000001;
@@ -404,6 +398,59 @@ class QStatus {
 }
 
 /// {@category Enum}
+class alljoyn_about_announceflag {
+  static const UNANNOUNCED = 0x00000000;
+  static const ANNOUNCED = 0x00000001;
+}
+
+/// {@category Enum}
+class alljoyn_applicationstate {
+  static const NOT_CLAIMABLE = 0x00000000;
+  static const CLAIMABLE = 0x00000001;
+  static const CLAIMED = 0x00000002;
+  static const NEED_UPDATE = 0x00000003;
+}
+
+/// {@category Enum}
+class alljoyn_claimcapability_masks {
+  static const CAPABLE_ECDHE_NULL = 0x00000001;
+  static const CAPABLE_ECDHE_ECDSA = 0x00000004;
+  static const CAPABLE_ECDHE_SPEKE = 0x00000008;
+}
+
+/// {@category Enum}
+class alljoyn_claimcapabilityadditionalinfo_masks {
+  static const PASSWORD_GENERATED_BY_SECURITY_MANAGER = 0x00000001;
+  static const PASSWORD_GENERATED_BY_APPLICATION = 0x00000002;
+}
+
+/// {@category Enum}
+class alljoyn_interfacedescription_securitypolicy {
+  static const AJ_IFC_SECURITY_INHERIT = 0x00000000;
+  static const AJ_IFC_SECURITY_REQUIRED = 0x00000001;
+  static const AJ_IFC_SECURITY_OFF = 0x00000002;
+}
+
+/// {@category Enum}
+class alljoyn_messagetype {
+  static const ALLJOYN_MESSAGE_INVALID = 0x00000000;
+  static const ALLJOYN_MESSAGE_METHOD_CALL = 0x00000001;
+  static const ALLJOYN_MESSAGE_METHOD_RET = 0x00000002;
+  static const ALLJOYN_MESSAGE_ERROR = 0x00000003;
+  static const ALLJOYN_MESSAGE_SIGNAL = 0x00000004;
+}
+
+/// {@category Enum}
+class alljoyn_sessionlostreason {
+  static const ALLJOYN_SESSIONLOST_INVALID = 0x00000000;
+  static const ALLJOYN_SESSIONLOST_REMOTE_END_LEFT_SESSION = 0x00000001;
+  static const ALLJOYN_SESSIONLOST_REMOTE_END_CLOSED_ABRUPTLY = 0x00000002;
+  static const ALLJOYN_SESSIONLOST_REMOVED_BY_BINDER = 0x00000003;
+  static const ALLJOYN_SESSIONLOST_LINK_TIMEOUT = 0x00000004;
+  static const ALLJOYN_SESSIONLOST_REASON_OTHER = 0x00000005;
+}
+
+/// {@category Enum}
 class alljoyn_typeid {
   static const ALLJOYN_INVALID = 0x00000000;
   static const ALLJOYN_ARRAY = 0x00000061;
@@ -437,52 +484,5 @@ class alljoyn_typeid {
   static const ALLJOYN_INT64_ARRAY = 0x00007861;
   static const ALLJOYN_BYTE_ARRAY = 0x00007961;
   static const ALLJOYN_WILDCARD = 0x0000002a;
-}
-
-/// {@category Enum}
-class alljoyn_applicationstate {
-  static const NOT_CLAIMABLE = 0x00000000;
-  static const CLAIMABLE = 0x00000001;
-  static const CLAIMED = 0x00000002;
-  static const NEED_UPDATE = 0x00000003;
-}
-
-/// {@category Enum}
-class alljoyn_claimcapability_masks {
-  static const CAPABLE_ECDHE_NULL = 0x00000001;
-  static const CAPABLE_ECDHE_ECDSA = 0x00000004;
-  static const CAPABLE_ECDHE_SPEKE = 0x00000008;
-}
-
-/// {@category Enum}
-class alljoyn_claimcapabilityadditionalinfo_masks {
-  static const PASSWORD_GENERATED_BY_SECURITY_MANAGER = 0x00000001;
-  static const PASSWORD_GENERATED_BY_APPLICATION = 0x00000002;
-}
-
-/// {@category Enum}
-class alljoyn_messagetype {
-  static const ALLJOYN_MESSAGE_INVALID = 0x00000000;
-  static const ALLJOYN_MESSAGE_METHOD_CALL = 0x00000001;
-  static const ALLJOYN_MESSAGE_METHOD_RET = 0x00000002;
-  static const ALLJOYN_MESSAGE_ERROR = 0x00000003;
-  static const ALLJOYN_MESSAGE_SIGNAL = 0x00000004;
-}
-
-/// {@category Enum}
-class alljoyn_interfacedescription_securitypolicy {
-  static const AJ_IFC_SECURITY_INHERIT = 0x00000000;
-  static const AJ_IFC_SECURITY_REQUIRED = 0x00000001;
-  static const AJ_IFC_SECURITY_OFF = 0x00000002;
-}
-
-/// {@category Enum}
-class alljoyn_sessionlostreason {
-  static const ALLJOYN_SESSIONLOST_INVALID = 0x00000000;
-  static const ALLJOYN_SESSIONLOST_REMOTE_END_LEFT_SESSION = 0x00000001;
-  static const ALLJOYN_SESSIONLOST_REMOTE_END_CLOSED_ABRUPTLY = 0x00000002;
-  static const ALLJOYN_SESSIONLOST_REMOVED_BY_BINDER = 0x00000003;
-  static const ALLJOYN_SESSIONLOST_LINK_TIMEOUT = 0x00000004;
-  static const ALLJOYN_SESSIONLOST_REASON_OTHER = 0x00000005;
 }
 

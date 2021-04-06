@@ -45,7 +45,8 @@ import 'package:ffi/ffi.dart';
 
 class PHYSICAL_MONITOR extends Struct {
   @IntPtr() external int hPhysicalMonitor;
-  external __ushort__ szPhysicalMonitorDescription;
+  @Array(128)
+  external Array<Uint16> szPhysicalMonitorDescription;
 }
 
 class MC_TIMING_REPORT extends Struct {

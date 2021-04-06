@@ -44,7 +44,8 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class MAGTRANSFORM extends Struct {
-  external __float__ v;
+  @Array(9)
+  external Array<Float> v;
 }
 
 class MAGIMAGEHEADER extends Struct {
@@ -57,6 +58,7 @@ class MAGIMAGEHEADER extends Struct {
 }
 
 class MAGCOLOREFFECT extends Struct {
-  external __float__ transform;
+  @Array(25)
+  external Array<Float> transform;
 }
 

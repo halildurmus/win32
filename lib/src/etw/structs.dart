@@ -324,7 +324,8 @@ class PROFILE_SOURCE_INFO extends Struct {
   @Uint32() external int MinInterval;
   @Uint32() external int MaxInterval;
   @Uint64() external int Reserved;
-  external __ushort__ Description;
+  @Array(1)
+  external Array<Uint16> Description;
 }
 
 class EVENT_TRACE extends Struct {
@@ -391,7 +392,8 @@ class ENABLE_TRACE_PARAMETERS extends Struct {
 class CLASSIC_EVENT_ID extends Struct {
   external GUID EventGuid;
   @Uint8() external int Type;
-  external __ubyte__ Reserved;
+  @Array(7)
+  external Array<Uint8> Reserved;
 }
 
 class TRACE_PROFILE_INTERVAL extends Struct {
@@ -449,7 +451,8 @@ class EVENT_FILTER_DESCRIPTOR extends Struct {
 class EVENT_FILTER_HEADER extends Struct {
   @Uint16() external int Id;
   @Uint8() external int Version;
-  external __ubyte__ Reserved;
+  @Array(5)
+  external Array<Uint8> Reserved;
   @Uint64() external int InstanceId;
   @Uint32() external int Size;
   @Uint32() external int NextOffset;
@@ -459,7 +462,8 @@ class EVENT_FILTER_EVENT_ID extends Struct {
   @Uint8() external int FilterIn;
   @Uint8() external int Reserved;
   @Uint16() external int Count;
-  external __ushort__ Events;
+  @Array(1)
+  external Array<Uint16> Events;
 }
 
 class EVENT_FILTER_EVENT_NAME extends Struct {
@@ -468,7 +472,8 @@ class EVENT_FILTER_EVENT_NAME extends Struct {
   @Uint8() external int Level;
   @Uint8() external int FilterIn;
   @Uint16() external int NameCount;
-  external __ubyte__ Names;
+  @Array(1)
+  external Array<Uint8> Names;
 }
 
 class EVENT_FILTER_LEVEL_KW extends Struct {
@@ -502,12 +507,14 @@ class EVENT_EXTENDED_ITEM_TS_ID extends Struct {
 
 class EVENT_EXTENDED_ITEM_STACK_TRACE32 extends Struct {
   @Uint64() external int MatchId;
-  external __uint__ Address;
+  @Array(1)
+  external Array<Uint32> Address;
 }
 
 class EVENT_EXTENDED_ITEM_STACK_TRACE64 extends Struct {
   @Uint64() external int MatchId;
-  external __uint64__ Address;
+  @Array(1)
+  external Array<Uint64> Address;
 }
 
 class EVENT_EXTENDED_ITEM_PEBS_INDEX extends Struct {
@@ -515,7 +522,8 @@ class EVENT_EXTENDED_ITEM_PEBS_INDEX extends Struct {
 }
 
 class EVENT_EXTENDED_ITEM_PMC_COUNTERS extends Struct {
-  external __uint64__ Counter;
+  @Array(1)
+  external Array<Uint64> Counter;
 }
 
 class EVENT_EXTENDED_ITEM_PROCESS_START_KEY extends Struct {
@@ -560,7 +568,8 @@ class EVENT_MAP_INFO extends Struct {
   @Uint32() external int Flag;
   @Uint32() external int EntryCount;
   @Uint32() external int Anonymous;
-  external EVENT_MAP_ENTRY MapEntryArray;
+  @Array(1)
+  external Array<EVENT_MAP_ENTRY> MapEntryArray;
 }
 
 class EVENT_PROPERTY_INFO extends Struct {
@@ -592,7 +601,8 @@ class TRACE_EVENT_INFO extends Struct {
   @Uint32() external int PropertyCount;
   @Uint32() external int TopLevelPropertyCount;
   @Uint32() external int Anonymous3;
-  external EVENT_PROPERTY_INFO EventPropertyInfoArray;
+  @Array(1)
+  external Array<EVENT_PROPERTY_INFO> EventPropertyInfoArray;
 }
 
 class PROPERTY_DATA_DESCRIPTOR extends Struct {
@@ -613,7 +623,8 @@ class PROVIDER_FILTER_INFO extends Struct {
   @Uint32() external int MessageOffset;
   @Uint32() external int Reserved;
   @Uint32() external int PropertyCount;
-  external EVENT_PROPERTY_INFO EventPropertyInfoArray;
+  @Array(1)
+  external Array<EVENT_PROPERTY_INFO> EventPropertyInfoArray;
 }
 
 class PROVIDER_FIELD_INFO extends Struct {
@@ -625,7 +636,8 @@ class PROVIDER_FIELD_INFO extends Struct {
 class PROVIDER_FIELD_INFOARRAY extends Struct {
   @Uint32() external int NumberOfElements;
   @Uint32() external int FieldType;
-  external PROVIDER_FIELD_INFO FieldInfoArray;
+  @Array(1)
+  external Array<PROVIDER_FIELD_INFO> FieldInfoArray;
 }
 
 class TRACE_PROVIDER_INFO extends Struct {
@@ -637,13 +649,15 @@ class TRACE_PROVIDER_INFO extends Struct {
 class PROVIDER_ENUMERATION_INFO extends Struct {
   @Uint32() external int NumberOfProviders;
   @Uint32() external int Reserved;
-  external TRACE_PROVIDER_INFO TraceProviderInfoArray;
+  @Array(1)
+  external Array<TRACE_PROVIDER_INFO> TraceProviderInfoArray;
 }
 
 class PROVIDER_EVENT_INFO extends Struct {
   @Uint32() external int NumberOfEvents;
   @Uint32() external int Reserved;
-  external EVENT_DESCRIPTOR EventDescriptorsArray;
+  @Array(1)
+  external Array<EVENT_DESCRIPTOR> EventDescriptorsArray;
 }
 
 class TDH_CONTEXT extends Struct {

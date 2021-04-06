@@ -63,7 +63,8 @@ class DHCPV6CAPI_CLASSID extends Struct {
 }
 
 class DHCPV6Prefix extends Struct {
-  external __ubyte__ prefix;
+  @Array(16)
+  external Array<Uint8> prefix;
   @Uint32() external int prefixLength;
   @Uint32() external int preferredLifeTime;
   @Uint32() external int validLifeTime;
@@ -112,12 +113,12 @@ class DHCP_SERVER_OPTIONS extends Struct {
   external Pointer<Uint32> Server;
   external Pointer<Uint8> ParameterRequestList;
   @Uint32() external int ParameterRequestListLength;
-  external Pointer<Int8> MachineName;
+  external Pointer<Utf8> MachineName;
   @Uint32() external int MachineNameLength;
   @Uint8() external int ClientHardwareAddressType;
   @Uint8() external int ClientHardwareAddressLength;
   external Pointer<Uint8> ClientHardwareAddress;
-  external Pointer<Int8> ClassIdentifier;
+  external Pointer<Utf8> ClassIdentifier;
   @Uint32() external int ClassIdentifierLength;
   external Pointer<Uint8> VendorClass;
   @Uint32() external int VendorClassLength;
@@ -125,7 +126,7 @@ class DHCP_SERVER_OPTIONS extends Struct {
   @Uint32() external int DNSNameLength;
   external Pointer<Uint8> DNSName;
   @Uint8() external int DSDomainNameRequested;
-  external Pointer<Int8> DSDomainName;
+  external Pointer<Utf8> DSDomainName;
   @Uint32() external int DSDomainNameLen;
   external Pointer<Uint32> ScopeId;
 }
@@ -230,7 +231,8 @@ class DHCP_ADDR_PATTERN extends Struct {
   @Uint8() external int HWType;
   @Int32() external int IsWildcard;
   @Uint8() external int Length;
-  external __ubyte__ Pattern;
+  @Array(128)
+  external Array<Uint8> Pattern;
 }
 
 class DHCP_FILTER_ADD_INFO extends Struct {

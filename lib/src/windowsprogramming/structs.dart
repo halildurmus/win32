@@ -92,7 +92,8 @@ class OSVERSIONINFOA extends Struct {
   @Uint32() external int dwMinorVersion;
   @Uint32() external int dwBuildNumber;
   @Uint32() external int dwPlatformId;
-  external __byte__ szCSDVersion;
+  @Array(128)
+  external Array<Int8> szCSDVersion;
 }
 
 class OSVERSIONINFOW extends Struct {
@@ -101,7 +102,8 @@ class OSVERSIONINFOW extends Struct {
   @Uint32() external int dwMinorVersion;
   @Uint32() external int dwBuildNumber;
   @Uint32() external int dwPlatformId;
-  external __ushort__ szCSDVersion;
+  @Array(128)
+  external Array<Uint16> szCSDVersion;
 }
 
 class OSVERSIONINFOEXA extends Struct {
@@ -110,7 +112,8 @@ class OSVERSIONINFOEXA extends Struct {
   @Uint32() external int dwMinorVersion;
   @Uint32() external int dwBuildNumber;
   @Uint32() external int dwPlatformId;
-  external __byte__ szCSDVersion;
+  @Array(128)
+  external Array<Int8> szCSDVersion;
   @Uint16() external int wServicePackMajor;
   @Uint16() external int wServicePackMinor;
   @Uint16() external int wSuiteMask;
@@ -124,7 +127,8 @@ class OSVERSIONINFOEXW extends Struct {
   @Uint32() external int dwMinorVersion;
   @Uint32() external int dwBuildNumber;
   @Uint32() external int dwPlatformId;
-  external __ushort__ szCSDVersion;
+  @Array(128)
+  external Array<Uint16> szCSDVersion;
   @Uint16() external int wServicePackMajor;
   @Uint16() external int wServicePackMinor;
   @Uint16() external int wSuiteMask;
@@ -173,9 +177,6 @@ class STRING extends Struct {
   external Pointer<Utf8> Buffer;
 }
 
-class _PROC_THREAD_ATTRIBUTE_LIST extends Struct {
-}
-
 class SYSTEM_INFO extends Struct {
   @Uint32() external int Anonymous;
   @Uint32() external int dwPageSize;
@@ -201,35 +202,44 @@ class JIT_DEBUG_INFO extends Struct {
 
 class HW_PROFILE_INFOA extends Struct {
   @Uint32() external int dwDockInfo;
-  external __byte__ szHwProfileGuid;
-  external __byte__ szHwProfileName;
+  @Array(39)
+  external Array<Int8> szHwProfileGuid;
+  @Array(80)
+  external Array<Int8> szHwProfileName;
 }
 
 class HW_PROFILE_INFOW extends Struct {
   @Uint32() external int dwDockInfo;
-  external __ushort__ szHwProfileGuid;
-  external __ushort__ szHwProfileName;
+  @Array(39)
+  external Array<Uint16> szHwProfileGuid;
+  @Array(80)
+  external Array<Uint16> szHwProfileName;
 }
 
 class TIME_ZONE_INFORMATION extends Struct {
   @Int32() external int Bias;
-  external __ushort__ StandardName;
+  @Array(32)
+  external Array<Uint16> StandardName;
   external SYSTEMTIME StandardDate;
   @Int32() external int StandardBias;
-  external __ushort__ DaylightName;
+  @Array(32)
+  external Array<Uint16> DaylightName;
   external SYSTEMTIME DaylightDate;
   @Int32() external int DaylightBias;
 }
 
 class DYNAMIC_TIME_ZONE_INFORMATION extends Struct {
   @Int32() external int Bias;
-  external __ushort__ StandardName;
+  @Array(32)
+  external Array<Uint16> StandardName;
   external SYSTEMTIME StandardDate;
   @Int32() external int StandardBias;
-  external __ushort__ DaylightName;
+  @Array(32)
+  external Array<Uint16> DaylightName;
   external SYSTEMTIME DaylightDate;
   @Int32() external int DaylightBias;
-  external __ushort__ TimeZoneKeyName;
+  @Array(128)
+  external Array<Uint16> TimeZoneKeyName;
   @Uint8() external int DynamicDaylightTimeDisabled;
 }
 
@@ -342,14 +352,19 @@ class CLIENT_ID extends Struct {
 }
 
 class LDR_DATA_TABLE_ENTRY extends Struct {
-  external ____ Reserved1;
+  @Array(2)
+  external Array<Pointer> Reserved1;
   external LIST_ENTRY InMemoryOrderLinks;
-  external ____ Reserved2;
+  @Array(2)
+  external Array<Pointer> Reserved2;
   external Pointer DllBase;
-  external ____ Reserved3;
+  @Array(2)
+  external Array<Pointer> Reserved3;
   external UNICODE_STRING FullDllName;
-  external __ubyte__ Reserved4;
-  external ____ Reserved5;
+  @Array(8)
+  external Array<Uint8> Reserved4;
+  @Array(3)
+  external Array<Pointer> Reserved5;
   @Uint32() external int Anonymous;
   @Uint32() external int TimeDateStamp;
 }
@@ -371,7 +386,8 @@ class IO_STATUS_BLOCK extends Struct {
 class PROCESS_BASIC_INFORMATION extends Struct {
   external Pointer Reserved1;
   external Pointer<PEB> PebBaseAddress;
-  external ____ Reserved2;
+  @Array(2)
+  external Array<Pointer> Reserved2;
   @IntPtr() external int UniqueProcessId;
   external Pointer Reserved3;
 }
@@ -380,14 +396,16 @@ class SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION extends Struct {
   @Int64() external int IdleTime;
   @Int64() external int KernelTime;
   @Int64() external int UserTime;
-  @Int64() external int Reserved1;
+  @Array(2)
+  external Array<Int64> Reserved1;
   @Uint32() external int Reserved2;
 }
 
 class SYSTEM_PROCESS_INFORMATION extends Struct {
   @Uint32() external int NextEntryOffset;
   @Uint32() external int NumberOfThreads;
-  external __ubyte__ Reserved1;
+  @Array(48)
+  external Array<Uint8> Reserved1;
   external UNICODE_STRING ImageName;
   @Int32() external int BasePriority;
   @IntPtr() external int UniqueProcessId;
@@ -407,11 +425,13 @@ class SYSTEM_PROCESS_INFORMATION extends Struct {
   @IntPtr() external int PagefileUsage;
   @IntPtr() external int PeakPagefileUsage;
   @IntPtr() external int PrivatePageCount;
-  @Int64() external int Reserved7;
+  @Array(6)
+  external Array<Int64> Reserved7;
 }
 
 class SYSTEM_THREAD_INFORMATION extends Struct {
-  @Int64() external int Reserved1;
+  @Array(3)
+  external Array<Int64> Reserved1;
   @Uint32() external int Reserved2;
   external Pointer StartAddress;
   external CLIENT_ID ClientId;
@@ -429,34 +449,43 @@ class SYSTEM_REGISTRY_QUOTA_INFORMATION extends Struct {
 }
 
 class SYSTEM_BASIC_INFORMATION extends Struct {
-  external __ubyte__ Reserved1;
-  external ____ Reserved2;
+  @Array(24)
+  external Array<Uint8> Reserved1;
+  @Array(4)
+  external Array<Pointer> Reserved2;
   @Int8() external int NumberOfProcessors;
 }
 
 class SYSTEM_TIMEOFDAY_INFORMATION extends Struct {
-  external __ubyte__ Reserved1;
+  @Array(48)
+  external Array<Uint8> Reserved1;
 }
 
 class SYSTEM_PERFORMANCE_INFORMATION extends Struct {
-  external __ubyte__ Reserved1;
+  @Array(129)
+  external Array<Uint8> Reserved1;
 }
 
 class SYSTEM_EXCEPTION_INFORMATION extends Struct {
-  external __ubyte__ Reserved1;
+  @Array(16)
+  external Array<Uint8> Reserved1;
 }
 
 class SYSTEM_LOOKASIDE_INFORMATION extends Struct {
-  external __ubyte__ Reserved1;
+  @Array(32)
+  external Array<Uint8> Reserved1;
 }
 
 class SYSTEM_INTERRUPT_INFORMATION extends Struct {
-  external __ubyte__ Reserved1;
+  @Array(24)
+  external Array<Uint8> Reserved1;
 }
 
 class SYSTEM_POLICY_INFORMATION extends Struct {
-  external ____ Reserved1;
-  external __uint__ Reserved2;
+  @Array(2)
+  external Array<Pointer> Reserved1;
+  @Array(3)
+  external Array<Uint32> Reserved2;
 }
 
 class SYSTEM_CODEINTEGRITY_INFORMATION extends Struct {
@@ -469,12 +498,14 @@ class PUBLIC_OBJECT_BASIC_INFORMATION extends Struct {
   @Uint32() external int GrantedAccess;
   @Uint32() external int HandleCount;
   @Uint32() external int PointerCount;
-  external __uint__ Reserved;
+  @Array(10)
+  external Array<Uint32> Reserved;
 }
 
-class __PUBLIC_OBJECT_TYPE_INFORMATION extends Struct {
+class PUBLIC_OBJECT_TYPE_INFORMATION extends Struct {
   external UNICODE_STRING TypeName;
-  external __uint__ Reserved;
+  @Array(22)
+  external Array<Uint32> Reserved;
 }
 
 class KEY_VALUE_ENTRY extends Struct {
@@ -485,15 +516,18 @@ class KEY_VALUE_ENTRY extends Struct {
 }
 
 class WINSTATIONINFORMATIONW extends Struct {
-  external __ubyte__ Reserved2;
+  @Array(70)
+  external Array<Uint8> Reserved2;
   @Uint32() external int LogonId;
-  external __ubyte__ Reserved3;
+  @Array(132)
+  external Array<Uint8> Reserved3;
 }
 
 class AVRF_BACKTRACE_INFORMATION extends Struct {
   @Uint32() external int Depth;
   @Uint32() external int Index;
-  external __uint64__ ReturnAddresses;
+  @Array(32)
+  external Array<Uint64> ReturnAddresses;
 }
 
 class AVRF_HEAP_ALLOCATION extends Struct {
@@ -536,9 +570,12 @@ class CCAB extends Struct {
   @Int32() external int iDisk;
   @Int32() external int fFailOnIncompressible;
   @Uint16() external int setID;
-  external __byte__ szDisk;
-  external __byte__ szCab;
-  external __byte__ szCabPath;
+  @Array(129)
+  external Array<Int8> szDisk;
+  @Array(129)
+  external Array<Int8> szCab;
+  @Array(129)
+  external Array<Int8> szCabPath;
 }
 
 class FDICABINETINFO extends Struct {
@@ -560,9 +597,9 @@ class FDIDECRYPT extends Struct {
 
 class FDINOTIFICATION extends Struct {
   @Int32() external int cb;
-  external Pointer<Int8> psz1;
-  external Pointer<Int8> psz2;
-  external Pointer<Int8> psz3;
+  external Pointer<Utf8> psz1;
+  external Pointer<Utf8> psz2;
+  external Pointer<Utf8> psz3;
   external Pointer pv;
   @IntPtr() external int hf;
   @Uint16() external int date;
@@ -575,7 +612,8 @@ class FDINOTIFICATION extends Struct {
 }
 
 class FDISPILLFILE extends Struct {
-  external __byte__ ach;
+  @Array(2)
+  external Array<Int8> ach;
   @Int32() external int cbFile;
 }
 
@@ -587,7 +625,8 @@ class FLOATING_SAVE_AREA extends Struct {
   @Uint32() external int ErrorSelector;
   @Uint32() external int DataOffset;
   @Uint32() external int DataSelector;
-  external __ubyte__ RegisterArea;
+  @Array(80)
+  external Array<Uint8> RegisterArea;
   @Uint32() external int Cr0NpxState;
 }
 
@@ -616,7 +655,8 @@ class VDMCONTEXT extends Struct {
   @Uint32() external int EFlags;
   @Uint32() external int Esp;
   @Uint32() external int SegSs;
-  external __ubyte__ ExtendedRegisters;
+  @Array(130)
+  external Array<Uint8> ExtendedRegisters;
 }
 
 class VDMLDT_ENTRY extends Struct {
@@ -656,25 +696,31 @@ class SEGMENT_NOTE extends Struct {
   @Uint16() external int Selector1;
   @Uint16() external int Selector2;
   @Uint16() external int Segment;
-  external __byte__ Module;
-  external __byte__ FileName;
+  @Array(10)
+  external Array<Int8> Module;
+  @Array(129)
+  external Array<Int8> FileName;
   @Uint16() external int Type;
   @Uint32() external int Length;
 }
 
 class IMAGE_NOTE extends Struct {
-  external __byte__ Module;
-  external __byte__ FileName;
+  @Array(10)
+  external Array<Int8> Module;
+  @Array(129)
+  external Array<Int8> FileName;
   @Uint16() external int hModule;
   @Uint16() external int hTask;
 }
 
 class MODULEENTRY extends Struct {
   @Uint32() external int dwSize;
-  external __byte__ szModule;
+  @Array(10)
+  external Array<Int8> szModule;
   @IntPtr() external int hModule;
   @Uint16() external int wcUsage;
-  external __byte__ szExePath;
+  @Array(129)
+  external Array<Int8> szExePath;
   @Uint16() external int wNext;
 }
 
@@ -689,8 +735,10 @@ class VDM_SEGINFO extends Struct {
   @Uint16() external int SegNumber;
   @Uint32() external int Length;
   @Uint16() external int Type;
-  external __byte__ ModuleName;
-  external __byte__ FileName;
+  @Array(9)
+  external Array<Int8> ModuleName;
+  @Array(128)
+  external Array<Int8> FileName;
 }
 
 class GLOBALENTRY extends Struct {
@@ -749,7 +797,8 @@ class DCICMD extends Struct {
 class DCICREATEINPUT extends Struct {
   external DCICMD cmd;
   @Uint32() external int dwCompression;
-  external __uint__ dwMask;
+  @Array(3)
+  external Array<Uint32> dwMask;
   @Uint32() external int dwWidth;
   @Uint32() external int dwHeight;
   @Uint32() external int dwDCICaps;
@@ -761,7 +810,8 @@ class DCISURFACEINFO extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwDCICaps;
   @Uint32() external int dwCompression;
-  external __uint__ dwMask;
+  @Array(3)
+  external Array<Uint32> dwMask;
   @Uint32() external int dwWidth;
   @Uint32() external int dwHeight;
   @Int32() external int lStride;
@@ -895,8 +945,10 @@ class IDirectDrawGammaControlVtbl extends Struct {
 }
 
 class DD32BITDRIVERDATA extends Struct {
-  external __byte__ szName;
-  external __byte__ szEntryPoint;
+  @Array(129)
+  external Array<Int8> szName;
+  @Array(64)
+  external Array<Int8> szEntryPoint;
   @Uint32() external int dwContext;
 }
 
@@ -1074,13 +1126,15 @@ class DDNONLOCALVIDMEMCAPS extends Struct {
   @Uint32() external int dwNLVBCaps2;
   @Uint32() external int dwNLVBCKeyCaps;
   @Uint32() external int dwNLVBFXCaps;
-  external __uint__ dwNLVBRops;
+  @Array(8)
+  external Array<Uint32> dwNLVBRops;
 }
 
 class DDMORESURFACECAPS extends Struct {
   @Uint32() external int dwSize;
   external DDSCAPSEX ddsCapsMore;
-  external ____ ddsExtendedHeapRestrictions;
+  @Array(1)
+  external Array<Uint32> ddsExtendedHeapRestrictions;
 }
 
 class DDSTEREOMODE extends Struct {
@@ -1245,7 +1299,8 @@ class DDRAWI_DDRAWSURFACE_MORE extends Struct {
   external Pointer<Uint32> lpOriginalGammaRamp;
   external Pointer lpDDrawReserved6;
   @Uint32() external int dwSurfaceHandle;
-  external __uint__ qwDDrawReserved8;
+  @Array(2)
+  external Array<Uint32> qwDDrawReserved8;
   external Pointer lpDDrawReserved9;
   @Uint32() external int cSurfaces;
   external Pointer<DDSURFACEDESC2> pCreatedDDSurfaceDesc2;
@@ -1335,7 +1390,8 @@ class DDRAWI_DIRECTDRAW_GBL extends Struct {
   @IntPtr() external int fpPrimaryOrig;
   external DDCORECAPS ddCaps;
   @Uint32() external int dwInternal1;
-  external __uint__ dwUnused1;
+  @Array(9)
+  external Array<Uint32> dwUnused1;
   external Pointer<DDHAL_CALLBACKS> lpDDCBtmp;
   external Pointer<DDRAWI_DDRAWSURFACE_INT> dsList;
   external Pointer<DDRAWI_DDRAWPALETTE_INT> palList;
@@ -1345,7 +1401,8 @@ class DDRAWI_DIRECTDRAW_GBL extends Struct {
   @Uint32() external int dwCurrOverlays;
   @Uint32() external int dwMonitorFrequency;
   external DDCORECAPS ddHELCaps;
-  external __uint__ dwUnused2;
+  @Array(50)
+  external Array<Uint32> dwUnused2;
   external DDCOLORKEY ddckCKDestOverlay;
   external DDCOLORKEY ddckCKSrcOverlay;
   external VIDMEMINFO vmiData;
@@ -1362,7 +1419,8 @@ class DDRAWI_DIRECTDRAW_GBL extends Struct {
   @Uint32() external int dwAliasedLockCnt;
   @IntPtr() external int dwReserved3;
   @IntPtr() external int hDD;
-  external __byte__ cObsolete;
+  @Array(12)
+  external Array<Int8> cObsolete;
   @Uint32() external int dwReserved1;
   @Uint32() external int dwReserved2;
   external DBLNODE dbnOverlayRoot;
@@ -1393,7 +1451,8 @@ class DDRAWI_DIRECTDRAW_GBL extends Struct {
   @IntPtr() external int lpD3DExtendedCaps;
   @Uint32() external int dwDOSBoxEvent;
   external RECT rectDesktop;
-  external __byte__ cDriverName;
+  @Array(32)
+  external Array<Int8> cDriverName;
   @IntPtr() external int lpD3DHALCallbacks3;
   @Uint32() external int dwNumZPixelFormats;
   external Pointer<DDPIXELFORMAT> lpZPixelFormats;
@@ -2109,40 +2168,54 @@ class STRTABLEW extends Struct {
   external Pointer<STRENTRY> pse;
 }
 
-class _CabInfoA extends Struct {
+class CABINFOA extends Struct {
   external Pointer<Utf8> pszCab;
   external Pointer<Utf8> pszInf;
   external Pointer<Utf8> pszSection;
-  external __byte__ szSrcPath;
+  @Array(129)
+  external Array<Int8> szSrcPath;
   @Uint32() external int dwFlags;
 }
 
-class _CabInfoW extends Struct {
+class CABINFOW extends Struct {
   external Pointer<Utf16> pszCab;
   external Pointer<Utf16> pszInf;
   external Pointer<Utf16> pszSection;
-  external __ushort__ szSrcPath;
+  @Array(129)
+  external Array<Uint16> szSrcPath;
   @Uint32() external int dwFlags;
 }
 
 class PERUSERSECTIONA extends Struct {
-  external __byte__ szGUID;
-  external __byte__ szDispName;
-  external __byte__ szLocale;
-  external __byte__ szStub;
-  external __byte__ szVersion;
-  external __byte__ szCompID;
+  @Array(59)
+  external Array<Int8> szGUID;
+  @Array(128)
+  external Array<Int8> szDispName;
+  @Array(10)
+  external Array<Int8> szLocale;
+  @Array(132)
+  external Array<Int8> szStub;
+  @Array(32)
+  external Array<Int8> szVersion;
+  @Array(128)
+  external Array<Int8> szCompID;
   @Uint32() external int dwIsInstalled;
   @Int32() external int bRollback;
 }
 
 class PERUSERSECTIONW extends Struct {
-  external __ushort__ szGUID;
-  external __ushort__ szDispName;
-  external __ushort__ szLocale;
-  external __ushort__ szStub;
-  external __ushort__ szVersion;
-  external __ushort__ szCompID;
+  @Array(59)
+  external Array<Uint16> szGUID;
+  @Array(128)
+  external Array<Uint16> szDispName;
+  @Array(10)
+  external Array<Uint16> szLocale;
+  @Array(132)
+  external Array<Uint16> szStub;
+  @Array(32)
+  external Array<Uint16> szVersion;
+  @Array(128)
+  external Array<Uint16> szCompID;
   @Uint32() external int dwIsInstalled;
   @Int32() external int bRollback;
 }
@@ -2196,18 +2269,24 @@ class IMEPROA extends Struct {
   @IntPtr() external int hWnd;
   external DATETIME InstDate;
   @Uint32() external int wVersion;
-  external __ubyte__ szDescription;
-  external __ubyte__ szName;
-  external __ubyte__ szOptions;
+  @Array(50)
+  external Array<Uint8> szDescription;
+  @Array(80)
+  external Array<Uint8> szName;
+  @Array(30)
+  external Array<Uint8> szOptions;
 }
 
 class IMEPROW extends Struct {
   @IntPtr() external int hWnd;
   external DATETIME InstDate;
   @Uint32() external int wVersion;
-  external __ushort__ szDescription;
-  external __ushort__ szName;
-  external __ushort__ szOptions;
+  @Array(50)
+  external Array<Uint16> szDescription;
+  @Array(80)
+  external Array<Uint16> szName;
+  @Array(30)
+  external Array<Uint16> szOptions;
 }
 
 class WebBrowser_V1 extends Struct {
@@ -2305,23 +2384,27 @@ class TDIObjectID extends Struct {
 
 class tcp_request_query_information_ex_xp extends Struct {
   external TDIObjectID ID;
-  external __uintptr__ Context;
+  @Array(2)
+  external Array<IntPtr> Context;
 }
 
 class tcp_request_query_information_ex32_xp extends Struct {
   external TDIObjectID ID;
-  external __uint__ Context;
+  @Array(4)
+  external Array<Uint32> Context;
 }
 
 class tcp_request_query_information_ex_w2k extends Struct {
   external TDIObjectID ID;
-  external __ubyte__ Context;
+  @Array(16)
+  external Array<Uint8> Context;
 }
 
 class tcp_request_set_information_ex extends Struct {
   external TDIObjectID ID;
   @Uint32() external int BufferSize;
-  external __ubyte__ Buffer;
+  @Array(1)
+  external Array<Uint8> Buffer;
 }
 
 class TDI_TL_IO_CONTROL_ENDPOINT extends Struct {
@@ -2406,7 +2489,8 @@ class PF_INTERFACE_STATS extends Struct {
   @Int64() external int liSYN;
   @Int64() external int liTotalLogged;
   @Uint32() external int dwLostLogEntries;
-  external PF_FILTER_STATS FilterInfo;
+  @Array(1)
+  external Array<PF_FILTER_STATS> FilterInfo;
 }
 
 class PF_LATEBIND_INFO extends Struct {
@@ -2415,7 +2499,7 @@ class PF_LATEBIND_INFO extends Struct {
   external Pointer<Uint8> Mask;
 }
 
-class _pfLogFrame extends Struct {
+class PFLOGFRAME extends Struct {
   @Int64() external int Timestamp;
   @Uint32() external int pfeTypeOfFrame;
   @Uint32() external int dwTotalSizeUsed;
@@ -2424,6 +2508,7 @@ class _pfLogFrame extends Struct {
   @Uint16() external int wSizeOfIpHeader;
   @Uint32() external int dwInterfaceName;
   @Uint32() external int dwIPIndex;
-  external __ubyte__ bPacketData;
+  @Array(1)
+  external Array<Uint8> bPacketData;
 }
 

@@ -331,7 +331,8 @@ class FAX_JOB_PARAMA extends Struct {
   external Pointer<Utf8> DeliveryReportAddress;
   external Pointer<Utf8> DocumentName;
   @Uint32() external int CallHandle;
-  external __uintptr__ Reserved;
+  @Array(3)
+  external Array<IntPtr> Reserved;
 }
 
 class FAX_JOB_PARAMW extends Struct {
@@ -349,7 +350,8 @@ class FAX_JOB_PARAMW extends Struct {
   external Pointer<Utf16> DeliveryReportAddress;
   external Pointer<Utf16> DocumentName;
   @Uint32() external int CallHandle;
-  external __uintptr__ Reserved;
+  @Array(3)
+  external Array<IntPtr> Reserved;
 }
 
 class FAX_EVENTA extends Struct {
@@ -399,13 +401,15 @@ class FAX_PRINT_INFOW extends Struct {
 class FAX_CONTEXT_INFOA extends Struct {
   @Uint32() external int SizeOfStruct;
   @IntPtr() external int hDC;
-  external __byte__ ServerName;
+  @Array(16)
+  external Array<Int8> ServerName;
 }
 
 class FAX_CONTEXT_INFOW extends Struct {
   @Uint32() external int SizeOfStruct;
   @IntPtr() external int hDC;
-  external __ushort__ ServerName;
+  @Array(16)
+  external Array<Uint16> ServerName;
 }
 
 class FAX_SEND extends Struct {
@@ -417,7 +421,8 @@ class FAX_SEND extends Struct {
   external Pointer<Utf16> ReceiverNumber;
   @Int32() external int Branding;
   @Uint32() external int CallHandle;
-  external __uint__ Reserved;
+  @Array(3)
+  external Array<Uint32> Reserved;
 }
 
 class FAX_RECEIVE extends Struct {
@@ -425,7 +430,8 @@ class FAX_RECEIVE extends Struct {
   external Pointer<Utf16> FileName;
   external Pointer<Utf16> ReceiverName;
   external Pointer<Utf16> ReceiverNumber;
-  external __uint__ Reserved;
+  @Array(4)
+  external Array<Uint32> Reserved;
 }
 
 class FAX_DEV_STATUS extends Struct {
@@ -437,7 +443,8 @@ class FAX_DEV_STATUS extends Struct {
   external Pointer<Utf16> CallerId;
   external Pointer<Utf16> RoutingInfo;
   @Uint32() external int ErrorCode;
-  external __uint__ Reserved;
+  @Array(3)
+  external Array<Uint32> Reserved;
 }
 
 class FaxServer extends Struct {

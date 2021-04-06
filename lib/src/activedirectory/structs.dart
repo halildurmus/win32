@@ -184,7 +184,8 @@ class ADS_PATH extends Struct {
 }
 
 class ADS_POSTALADDRESS extends Struct {
-  external ____ PostalAddress;
+  @Array(6)
+  external Array<Pointer<Uint16>> PostalAddress;
 }
 
 class ADS_TIMESTAMP extends Struct {
@@ -326,7 +327,8 @@ class DSOBJECT extends Struct {
 class DSOBJECTNAMES extends Struct {
   external GUID clsidNamespace;
   @Uint32() external int cItems;
-  external DSOBJECT aObjects;
+  @Array(1)
+  external Array<DSOBJECT> aObjects;
 }
 
 class DSDISPLAYSPECOPTIONS extends Struct {
@@ -358,7 +360,8 @@ class DOMAINDESC extends Struct {
 class DOMAIN_TREE extends Struct {
   @Uint32() external int dsSize;
   @Uint32() external int dwCount;
-  external DOMAINDESC aDomains;
+  @Array(1)
+  external Array<DOMAINDESC> aDomains;
 }
 
 class DSCLASSCREATIONINFO extends Struct {
@@ -366,7 +369,8 @@ class DSCLASSCREATIONINFO extends Struct {
   external GUID clsidWizardDialog;
   external GUID clsidWizardPrimaryPage;
   @Uint32() external int cWizardExtensions;
-  external GUID aWizardExtensions;
+  @Array(1)
+  external Array<GUID> aWizardExtensions;
 }
 
 class DSBROWSEINFOW extends Struct {
@@ -412,8 +416,10 @@ class DSBITEMW extends Struct {
   @Uint32() external int dwMask;
   @Uint32() external int dwState;
   @Uint32() external int dwStateMask;
-  external __ushort__ szDisplayName;
-  external __ushort__ szIconLocation;
+  @Array(64)
+  external Array<Uint16> szDisplayName;
+  @Array(129)
+  external Array<Uint16> szIconLocation;
   @Int32() external int iIconResID;
 }
 
@@ -424,8 +430,10 @@ class DSBITEMA extends Struct {
   @Uint32() external int dwMask;
   @Uint32() external int dwState;
   @Uint32() external int dwStateMask;
-  external __byte__ szDisplayName;
-  external __byte__ szIconLocation;
+  @Array(64)
+  external Array<Int8> szDisplayName;
+  @Array(129)
+  external Array<Int8> szIconLocation;
   @Int32() external int iIconResID;
 }
 
@@ -472,7 +480,8 @@ class DS_SELECTION extends Struct {
 class DS_SELECTION_LIST extends Struct {
   @Uint32() external int cItems;
   @Uint32() external int cFetchedAttributes;
-  external DS_SELECTION aDsSelection;
+  @Array(1)
+  external Array<DS_SELECTION> aDsSelection;
 }
 
 class DSQUERYINITPARAMS extends Struct {
@@ -501,13 +510,15 @@ class DSQUERYPARAMS extends Struct {
   @Int32() external int offsetQuery;
   @Int32() external int iColumns;
   @Uint32() external int dwReserved;
-  external DSCOLUMN aColumns;
+  @Array(1)
+  external Array<DSCOLUMN> aColumns;
 }
 
 class DSQUERYCLASSLIST extends Struct {
   @Uint32() external int cbStruct;
   @Int32() external int cClasses;
-  external __uint__ offsetClass;
+  @Array(1)
+  external Array<Uint32> offsetClass;
 }
 
 class DSA_NEWOBJ_DISPINFO extends Struct {
@@ -544,7 +555,8 @@ class SCHEDULE extends Struct {
   @Uint32() external int Size;
   @Uint32() external int Bandwidth;
   @Uint32() external int NumberOfSchedules;
-  external SCHEDULE_HEADER Schedules;
+  @Array(1)
+  external Array<SCHEDULE_HEADER> Schedules;
 }
 
 class DS_NAME_RESULT_ITEMA extends Struct {
@@ -759,7 +771,8 @@ class DS_REPL_NEIGHBORW_BLOB extends Struct {
 class DS_REPL_NEIGHBORSW extends Struct {
   @Uint32() external int cNumNeighbors;
   @Uint32() external int dwReserved;
-  external DS_REPL_NEIGHBORW rgNeighbor;
+  @Array(1)
+  external Array<DS_REPL_NEIGHBORW> rgNeighbor;
 }
 
 class DS_REPL_CURSOR extends Struct {
@@ -790,19 +803,22 @@ class DS_REPL_CURSOR_BLOB extends Struct {
 class DS_REPL_CURSORS extends Struct {
   @Uint32() external int cNumCursors;
   @Uint32() external int dwReserved;
-  external DS_REPL_CURSOR rgCursor;
+  @Array(1)
+  external Array<DS_REPL_CURSOR> rgCursor;
 }
 
 class DS_REPL_CURSORS_2 extends Struct {
   @Uint32() external int cNumCursors;
   @Uint32() external int dwEnumerationContext;
-  external DS_REPL_CURSOR_2 rgCursor;
+  @Array(1)
+  external Array<DS_REPL_CURSOR_2> rgCursor;
 }
 
 class DS_REPL_CURSORS_3W extends Struct {
   @Uint32() external int cNumCursors;
   @Uint32() external int dwEnumerationContext;
-  external DS_REPL_CURSOR_3W rgCursor;
+  @Array(1)
+  external Array<DS_REPL_CURSOR_3W> rgCursor;
 }
 
 class DS_REPL_ATTR_META_DATA extends Struct {
@@ -837,13 +853,15 @@ class DS_REPL_ATTR_META_DATA_BLOB extends Struct {
 class DS_REPL_OBJ_META_DATA extends Struct {
   @Uint32() external int cNumEntries;
   @Uint32() external int dwReserved;
-  external DS_REPL_ATTR_META_DATA rgMetaData;
+  @Array(1)
+  external Array<DS_REPL_ATTR_META_DATA> rgMetaData;
 }
 
 class DS_REPL_OBJ_META_DATA_2 extends Struct {
   @Uint32() external int cNumEntries;
   @Uint32() external int dwReserved;
-  external DS_REPL_ATTR_META_DATA_2 rgMetaData;
+  @Array(1)
+  external Array<DS_REPL_ATTR_META_DATA_2> rgMetaData;
 }
 
 class DS_REPL_KCC_DSA_FAILUREW extends Struct {
@@ -865,7 +883,8 @@ class DS_REPL_KCC_DSA_FAILUREW_BLOB extends Struct {
 class DS_REPL_KCC_DSA_FAILURESW extends Struct {
   @Uint32() external int cNumEntries;
   @Uint32() external int dwReserved;
-  external DS_REPL_KCC_DSA_FAILUREW rgDsaFailure;
+  @Array(1)
+  external Array<DS_REPL_KCC_DSA_FAILUREW> rgDsaFailure;
 }
 
 class DS_REPL_OPW extends Struct {
@@ -897,7 +916,8 @@ class DS_REPL_OPW_BLOB extends Struct {
 class DS_REPL_PENDING_OPSW extends Struct {
   external FILETIME ftimeCurrentOpStarted;
   @Uint32() external int cNumPendingOps;
-  external DS_REPL_OPW rgPendingOp;
+  @Array(1)
+  external Array<DS_REPL_OPW> rgPendingOp;
 }
 
 class DS_REPL_VALUE_META_DATA extends Struct {
@@ -983,19 +1003,22 @@ class DS_REPL_VALUE_META_DATA_BLOB_EXT extends Struct {
 class DS_REPL_ATTR_VALUE_META_DATA extends Struct {
   @Uint32() external int cNumEntries;
   @Uint32() external int dwEnumerationContext;
-  external DS_REPL_VALUE_META_DATA rgMetaData;
+  @Array(1)
+  external Array<DS_REPL_VALUE_META_DATA> rgMetaData;
 }
 
 class DS_REPL_ATTR_VALUE_META_DATA_2 extends Struct {
   @Uint32() external int cNumEntries;
   @Uint32() external int dwEnumerationContext;
-  external DS_REPL_VALUE_META_DATA_2 rgMetaData;
+  @Array(1)
+  external Array<DS_REPL_VALUE_META_DATA_2> rgMetaData;
 }
 
 class DS_REPL_ATTR_VALUE_META_DATA_EXT extends Struct {
   @Uint32() external int cNumEntries;
   @Uint32() external int dwEnumerationContext;
-  external DS_REPL_VALUE_META_DATA_EXT rgMetaData;
+  @Array(1)
+  external Array<DS_REPL_VALUE_META_DATA_EXT> rgMetaData;
 }
 
 class DS_REPL_QUEUE_STATISTICSW extends Struct {

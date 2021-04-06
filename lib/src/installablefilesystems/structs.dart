@@ -72,7 +72,8 @@ class FILTER_FULL_INFORMATION extends Struct {
   @Uint32() external int FrameID;
   @Uint32() external int NumberOfInstances;
   @Uint16() external int FilterNameLength;
-  external __ushort__ FilterNameBuffer;
+  @Array(1)
+  external Array<Uint16> FilterNameBuffer;
 }
 
 class FILTER_AGGREGATE_BASIC_INFORMATION extends Struct {
@@ -89,7 +90,8 @@ class FILTER_AGGREGATE_STANDARD_INFORMATION extends Struct {
 
 class FILTER_VOLUME_BASIC_INFORMATION extends Struct {
   @Uint16() external int FilterVolumeNameLength;
-  external __ushort__ FilterVolumeName;
+  @Array(1)
+  external Array<Uint16> FilterVolumeName;
 }
 
 class FILTER_VOLUME_STANDARD_INFORMATION extends Struct {
@@ -98,7 +100,8 @@ class FILTER_VOLUME_STANDARD_INFORMATION extends Struct {
   @Uint32() external int FrameID;
   @Uint32() external int FileSystemType;
   @Uint16() external int FilterVolumeNameLength;
-  external __ushort__ FilterVolumeName;
+  @Array(1)
+  external Array<Uint16> FilterVolumeName;
 }
 
 class INSTANCE_BASIC_INFORMATION extends Struct {

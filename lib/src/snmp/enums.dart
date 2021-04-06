@@ -1,14 +1,4 @@
 /// {@category Enum}
-class SNMP_PDU_TYPE {
-  static const SNMP_PDU_GET = 0x000000a0;
-  static const SNMP_PDU_GETNEXT = 0x000000a1;
-  static const SNMP_PDU_RESPONSE = 0x000000a2;
-  static const SNMP_PDU_SET = 0x000000a3;
-  static const SNMP_PDU_GETBULK = 0x000000a5;
-  static const SNMP_PDU_TRAP = 0x000000a7;
-}
-
-/// {@category Enum}
 class SNMP_EXTENSION_REQUEST_TYPE {
   static const SNMP_EXTENSION_GET = 0x000000a0;
   static const SNMP_EXTENSION_GET_NEXT = 0x000000a1;
@@ -16,33 +6,6 @@ class SNMP_EXTENSION_REQUEST_TYPE {
   static const SNMP_EXTENSION_SET_COMMIT = 0x000000a3;
   static const SNMP_EXTENSION_SET_UNDO = 0x000000e1;
   static const SNMP_EXTENSION_SET_CLEANUP = 0x000000e2;
-}
-
-/// {@category Enum}
-class AS_ANY_TYPE {
-  static const ASN_INTEGER = 0x00000002;
-  static const ASN_INTEGER32 = 0x00000002;
-  static const ASN_UNSIGNED32 = 0x00000047;
-  static const ASN_COUNTER64 = 0x00000046;
-  static const ASN_OCTETSTRING = 0x00000004;
-  static const ASN_BITS = 0x00000003;
-  static const ASN_OBJECTIDENTIFIER = 0x00000006;
-  static const ASN_SEQUENCE = 0x00000030;
-  static const ASN_IPADDRESS = 0x00000040;
-  static const ASN_COUNTER32 = 0x00000041;
-  static const ASN_GAUGE32 = 0x00000042;
-  static const ASN_TIMETICKS = 0x00000043;
-  static const ASN_OPAQUE = 0x00000044;
-  static const SNMP_EXCEPTION_NOSUCHOBJECT = 0x00000080;
-  static const SNMP_EXCEPTION_NOSUCHINSTANCE = 0x00000081;
-  static const SNMP_EXCEPTION_ENDOFMIBVIEW = 0x00000082;
-}
-
-/// {@category Enum}
-class Snmp_nTranslateMode {
-  static const SNMPAPI_TRANSLATED = 0x00000000;
-  static const SNMPAPI_UNTRANSLATED_V1 = 0x00000001;
-  static const SNMPAPI_UNTRANSLATED_V2 = 0x00000002;
 }
 
 /// {@category Enum}
@@ -54,6 +17,26 @@ class SNMP_GENERICTRAP {
   static const SNMP_GENERICTRAP_AUTHFAILURE = 0x00000004;
   static const SNMP_GENERICTRAP_EGPNEIGHLOSS = 0x00000005;
   static const SNMP_GENERICTRAP_ENTERSPECIFIC = 0x00000006;
+}
+
+/// {@category Enum}
+class SNMP_LOG {
+  static const SNMP_LOG_SILENT = 0x00000000;
+  static const SNMP_LOG_FATAL = 0x00000001;
+  static const SNMP_LOG_ERROR = 0x00000002;
+  static const SNMP_LOG_WARNING = 0x00000003;
+  static const SNMP_LOG_TRACE = 0x00000004;
+  static const SNMP_LOG_VERBOSE = 0x00000005;
+}
+
+/// {@category Enum}
+class SNMP_PDU_TYPE {
+  static const SNMP_PDU_GET = 0x000000a0;
+  static const SNMP_PDU_GETNEXT = 0x000000a1;
+  static const SNMP_PDU_RESPONSE = 0x000000a2;
+  static const SNMP_PDU_SET = 0x000000a3;
+  static const SNMP_PDU_GETBULK = 0x000000a5;
+  static const SNMP_PDU_TRAP = 0x000000a7;
 }
 
 /// {@category Enum}
@@ -80,29 +63,6 @@ class SnmpExtensionQueryEx_pErrorStatusFlags {
 }
 
 /// {@category Enum}
-class Snmp_lStatus {
-  static const SNMPAPI_ON = 0x00000001;
-  static const SNMPAPI_OFF = 0x00000000;
-}
-
-/// {@category Enum}
-class SnmpSvcSetLogType_nLogTypeFlags {
-  static const SNMP_OUTPUT_TO_CONSOLE = 0x00000001;
-  static const SNMP_OUTPUT_TO_LOGFILE = 0x00000002;
-  static const SNMP_OUTPUT_TO_DEBUGGER = 0x00000008;
-}
-
-/// {@category Enum}
-class SNMP_LOG {
-  static const SNMP_LOG_SILENT = 0x00000000;
-  static const SNMP_LOG_FATAL = 0x00000001;
-  static const SNMP_LOG_ERROR = 0x00000002;
-  static const SNMP_LOG_WARNING = 0x00000003;
-  static const SNMP_LOG_TRACE = 0x00000004;
-  static const SNMP_LOG_VERBOSE = 0x00000005;
-}
-
-/// {@category Enum}
 class SnmpGetPduData_error_statusFlags {
   static const SNMP_ERROR_NOERROR = 0x00000000;
   static const SNMP_ERROR_TOOBIG = 0x00000001;
@@ -123,5 +83,25 @@ class SnmpGetPduData_error_statusFlags {
   static const SNMP_ERROR_AUTHORIZATIONERROR = 0x00000010;
   static const SNMP_ERROR_NOTWRITABLE = 0x00000011;
   static const SNMP_ERROR_INCONSISTENTNAME = 0x00000012;
+}
+
+/// {@category Enum}
+class SnmpSvcSetLogType_nLogTypeFlags {
+  static const SNMP_OUTPUT_TO_CONSOLE = 0x00000001;
+  static const SNMP_OUTPUT_TO_LOGFILE = 0x00000002;
+  static const SNMP_OUTPUT_TO_DEBUGGER = 0x00000008;
+}
+
+/// {@category Enum}
+class Snmp_lStatus {
+  static const SNMPAPI_ON = 0x00000001;
+  static const SNMPAPI_OFF = 0x00000000;
+}
+
+/// {@category Enum}
+class Snmp_nTranslateMode {
+  static const SNMPAPI_TRANSLATED = 0x00000000;
+  static const SNMPAPI_UNTRANSLATED_V1 = 0x00000001;
+  static const SNMPAPI_UNTRANSLATED_V2 = 0x00000002;
 }
 

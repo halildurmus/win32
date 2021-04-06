@@ -23,18 +23,18 @@ class AUDIO_FLOW_TYPE {
 }
 
 /// {@category Enum}
+class DMUS_CLOCKTYPE {
+  static const DMUS_CLOCK_SYSTEM = 0x00000000;
+  static const DMUS_CLOCK_WAVE = 0x00000001;
+}
+
+/// {@category Enum}
 class EAudioConstriction {
   static const eAudioConstrictionOff = 0x00000000;
   static const eAudioConstriction48_16 = 0x00000001;
   static const eAudioConstriction44_16 = 0x00000002;
   static const eAudioConstriction14_14 = 0x00000003;
   static const eAudioConstrictionMute = 0x00000004;
-}
-
-/// {@category Enum}
-class DMUS_CLOCKTYPE {
-  static const DMUS_CLOCK_SYSTEM = 0x00000000;
-  static const DMUS_CLOCK_WAVE = 0x00000001;
 }
 
 /// {@category Enum}

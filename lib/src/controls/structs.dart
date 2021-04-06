@@ -449,7 +449,8 @@ class TBBUTTON extends Struct {
   @Int32() external int idCommand;
   @Uint8() external int fsState;
   @Uint8() external int fsStyle;
-  external __ubyte__ bReserved;
+  @Array(6)
+  external Array<Uint8> bReserved;
   @IntPtr() external int dwData;
   @IntPtr() external int iString;
 }
@@ -781,7 +782,8 @@ class TTHITTESTINFOW extends Struct {
 class NMTTDISPINFOA extends Struct {
   external NMHDR hdr;
   external Pointer<Utf8> lpszText;
-  external __byte__ szText;
+  @Array(80)
+  external Array<Int8> szText;
   @IntPtr() external int hinst;
   @Uint32() external int uFlags;
   @IntPtr() external int lParam;
@@ -790,7 +792,8 @@ class NMTTDISPINFOA extends Struct {
 class NMTTDISPINFOW extends Struct {
   external NMHDR hdr;
   external Pointer<Utf16> lpszText;
-  external __ushort__ szText;
+  @Array(80)
+  external Array<Uint16> szText;
   @IntPtr() external int hinst;
   @Uint32() external int uFlags;
   @IntPtr() external int lParam;
@@ -829,8 +832,10 @@ class LITEM extends Struct {
   @Int32() external int iLink;
   @Uint32() external int state;
   @Uint32() external int stateMask;
-  external __ushort__ szID;
-  external __ushort__ szUrl;
+  @Array(48)
+  external Array<Uint16> szID;
+  @Array(136)
+  external Array<Uint16> szUrl;
 }
 
 class LHITTESTINFO extends Struct {
@@ -1166,7 +1171,8 @@ class NMLVSCROLL extends Struct {
 class NMLVEMPTYMARKUP extends Struct {
   external NMHDR hdr;
   @Uint32() external int dwFlags;
-  external __ushort__ szMarkup;
+  @Array(136)
+  external Array<Uint16> szMarkup;
 }
 
 class _TREEITEM extends Struct {
@@ -1392,20 +1398,23 @@ class NMCOMBOBOXEXW extends Struct {
 class NMCBEDRAGBEGINW extends Struct {
   external NMHDR hdr;
   @Int32() external int iItemid;
-  external __ushort__ szText;
+  @Array(129)
+  external Array<Uint16> szText;
 }
 
 class NMCBEDRAGBEGINA extends Struct {
   external NMHDR hdr;
   @Int32() external int iItemid;
-  external __byte__ szText;
+  @Array(129)
+  external Array<Int8> szText;
 }
 
 class NMCBEENDEDITW extends Struct {
   external NMHDR hdr;
   @Int32() external int fChanged;
   @Int32() external int iNewSelection;
-  external __ushort__ szText;
+  @Array(129)
+  external Array<Uint16> szText;
   @Int32() external int iWhy;
 }
 
@@ -1413,7 +1422,8 @@ class NMCBEENDEDITA extends Struct {
   external NMHDR hdr;
   @Int32() external int fChanged;
   @Int32() external int iNewSelection;
-  external __byte__ szText;
+  @Array(129)
+  external Array<Int8> szText;
   @Int32() external int iWhy;
 }
 
@@ -1561,7 +1571,8 @@ class NMDATETIMEFORMATA extends Struct {
   external Pointer<Utf8> pszFormat;
   external SYSTEMTIME st;
   external Pointer<Utf8> pszDisplay;
-  external __byte__ szDisplay;
+  @Array(64)
+  external Array<Int8> szDisplay;
 }
 
 class NMDATETIMEFORMATW extends Struct {
@@ -1569,7 +1580,8 @@ class NMDATETIMEFORMATW extends Struct {
   external Pointer<Utf16> pszFormat;
   external SYSTEMTIME st;
   external Pointer<Utf16> pszDisplay;
-  external __ushort__ szDisplay;
+  @Array(64)
+  external Array<Uint16> szDisplay;
 }
 
 class NMDATETIMEFORMATQUERYA extends Struct {
@@ -1762,7 +1774,8 @@ class CHARFORMATA extends Struct {
   @Uint32() external int crTextColor;
   @Uint8() external int bCharSet;
   @Uint8() external int bPitchAndFamily;
-  external __byte__ szFaceName;
+  @Array(32)
+  external Array<Int8> szFaceName;
 }
 
 class CHARFORMATW extends Struct {
@@ -1774,7 +1787,8 @@ class CHARFORMATW extends Struct {
   @Uint32() external int crTextColor;
   @Uint8() external int bCharSet;
   @Uint8() external int bPitchAndFamily;
-  external __ushort__ szFaceName;
+  @Array(32)
+  external Array<Uint16> szFaceName;
 }
 
 class CHARFORMAT2W extends Struct {
@@ -1868,7 +1882,8 @@ class PARAFORMAT extends Struct {
   @Int32() external int dxOffset;
   @Uint32() external int wAlignment;
   @Int16() external int cTabCount;
-  external __uint__ rgxTabs;
+  @Array(32)
+  external Array<Uint32> rgxTabs;
 }
 
 class PARAFORMAT2 extends Struct {
@@ -1968,7 +1983,7 @@ class ENLINK extends Struct {
 
 class ENLOWFIRTF extends Struct {
   external NMHDR nmhdr;
-  external Pointer<Int8> szControl;
+  external Pointer<Utf8> szControl;
 }
 
 class ENCORRECTTEXT extends Struct {
@@ -2115,7 +2130,8 @@ class MARGINS extends Struct {
 
 class INTLIST extends Struct {
   @Int32() external int iValueCount;
-  external __int__ iValues;
+  @Array(129)
+  external Array<Int32> iValues;
 }
 
 class WTA_OPTIONS extends Struct {
@@ -2256,7 +2272,8 @@ class SCROLLBARINFO extends Struct {
   @Int32() external int xyThumbTop;
   @Int32() external int xyThumbBottom;
   @Int32() external int reserved;
-  external __uint__ rgstate;
+  @Array(6)
+  external Array<Uint32> rgstate;
 }
 
 class COMBOBOXINFO extends Struct {
@@ -2276,7 +2293,8 @@ class POINTER_DEVICE_INFO extends Struct {
   @IntPtr() external int monitor;
   @Uint32() external int startingCursorId;
   @Uint16() external int maxActiveContacts;
-  external __ushort__ productString;
+  @Array(130)
+  external Array<Uint16> productString;
 }
 
 class POINTER_DEVICE_PROPERTY extends Struct {

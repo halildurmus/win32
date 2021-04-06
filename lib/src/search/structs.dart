@@ -76,7 +76,8 @@ class DB_NUMERIC extends Struct {
   @Uint8() external int precision;
   @Uint8() external int scale;
   @Uint8() external int sign;
-  external __ubyte__ val;
+  @Array(16)
+  external Array<Uint8> val;
 }
 
 class DBVECTOR extends Struct {
@@ -110,7 +111,8 @@ class DB_VARNUMERIC extends Struct {
   @Uint8() external int precision;
   @Int8() external int scale;
   @Uint8() external int sign;
-  external __ubyte__ val;
+  @Array(1)
+  external Array<Uint8> val;
 }
 
 class SEC_OBJECT_ELEMENT extends Struct {

@@ -43,33 +43,6 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class STATSTG extends Struct {
-  external Pointer<Utf16> pwcsName;
-  @Uint32() external int type;
-  @Uint64() external int cbSize;
-  external FILETIME mtime;
-  external FILETIME ctime;
-  external FILETIME atime;
-  @Uint32() external int grfMode;
-  @Uint32() external int grfLocksSupported;
-  external GUID clsid;
-  @Uint32() external int grfStateBits;
-  @Uint32() external int reserved;
-}
-
-class RemSNB extends Struct {
-  @Uint32() external int ulCntStr;
-  @Uint32() external int ulCntChar;
-  external __ushort__ rgString;
-}
-
-class StorageLayout extends Struct {
-  @Uint32() external int LayoutType;
-  external Pointer<Utf16> pwcsElementName;
-  @Int64() external int cOffset;
-  @Int64() external int cBytes;
-}
-
 class VERSIONEDSTREAM extends Struct {
   external GUID guidVersion;
   external Pointer pStream;
@@ -77,7 +50,7 @@ class VERSIONEDSTREAM extends Struct {
 
 class CAC extends Struct {
   @Uint32() external int cElems;
-  external Pointer<Int8> pElems;
+  external Pointer<Utf8> pElems;
 }
 
 class CAUB extends Struct {
@@ -222,12 +195,13 @@ class PMemoryAllocator extends Struct {
 
 class JET_INDEXID extends Struct {
   @Uint32() external int cbStruct;
-  external __ubyte__ rgbIndexId;
+  @Array(16)
+  external Array<Uint8> rgbIndexId;
 }
 
 class JET_RSTMAP_A extends Struct {
-  external Pointer<Int8> szDatabaseName;
-  external Pointer<Int8> szNewDatabaseName;
+  external Pointer<Utf8> szDatabaseName;
+  external Pointer<Utf8> szNewDatabaseName;
 }
 
 class JET_RSTMAP_W extends Struct {
@@ -236,7 +210,7 @@ class JET_RSTMAP_W extends Struct {
 }
 
 class CONVERT_A extends Struct {
-  external Pointer<Int8> szOldDll;
+  external Pointer<Utf8> szOldDll;
   @Uint32() external int Anonymous;
 }
 
@@ -329,8 +303,10 @@ class JET_COLUMNBASE_A extends Struct {
   @Uint16() external int wFiller;
   @Uint32() external int cbMax;
   @Uint32() external int grbit;
-  external __byte__ szBaseTableName;
-  external __byte__ szBaseColumnName;
+  @Array(129)
+  external Array<Int8> szBaseTableName;
+  @Array(129)
+  external Array<Int8> szBaseColumnName;
 }
 
 class JET_COLUMNBASE_W extends Struct {
@@ -343,8 +319,10 @@ class JET_COLUMNBASE_W extends Struct {
   @Uint16() external int wFiller;
   @Uint32() external int cbMax;
   @Uint32() external int grbit;
-  external __ushort__ szBaseTableName;
-  external __ushort__ szBaseColumnName;
+  @Array(129)
+  external Array<Uint16> szBaseTableName;
+  @Array(129)
+  external Array<Uint16> szBaseColumnName;
 }
 
 class JET_INDEXLIST extends Struct {
@@ -371,7 +349,7 @@ class JET_INDEXLIST extends Struct {
 
 class JET_COLUMNCREATE_A extends Struct {
   @Uint32() external int cbStruct;
-  external Pointer<Int8> szColumnName;
+  external Pointer<Utf8> szColumnName;
   @Uint32() external int coltyp;
   @Uint32() external int cbMax;
   @Uint32() external int grbit;
@@ -396,10 +374,10 @@ class JET_COLUMNCREATE_W extends Struct {
 }
 
 class JET_USERDEFINEDDEFAULT_A extends Struct {
-  external Pointer<Int8> szCallback;
+  external Pointer<Utf8> szCallback;
   external Pointer<Uint8> pbUserData;
   @Uint32() external int cbUserData;
-  external Pointer<Int8> szDependantColumns;
+  external Pointer<Utf8> szDependantColumns;
 }
 
 class JET_USERDEFINEDDEFAULT_W extends Struct {
@@ -411,7 +389,7 @@ class JET_USERDEFINEDDEFAULT_W extends Struct {
 
 class JET_CONDITIONALCOLUMN_A extends Struct {
   @Uint32() external int cbStruct;
-  external Pointer<Int8> szColumnName;
+  external Pointer<Utf8> szColumnName;
   @Uint32() external int grbit;
 }
 
@@ -452,8 +430,8 @@ class JET_SPACEHINTS extends Struct {
 
 class JET_INDEXCREATE_A extends Struct {
   @Uint32() external int cbStruct;
-  external Pointer<Int8> szIndexName;
-  external Pointer<Int8> szKey;
+  external Pointer<Utf8> szIndexName;
+  external Pointer<Utf8> szKey;
   @Uint32() external int cbKey;
   @Uint32() external int grbit;
   @Uint32() external int ulDensity;
@@ -482,8 +460,8 @@ class JET_INDEXCREATE_W extends Struct {
 
 class JET_INDEXCREATE2_A extends Struct {
   @Uint32() external int cbStruct;
-  external Pointer<Int8> szIndexName;
-  external Pointer<Int8> szKey;
+  external Pointer<Utf8> szIndexName;
+  external Pointer<Utf8> szKey;
   @Uint32() external int cbKey;
   @Uint32() external int grbit;
   @Uint32() external int ulDensity;
@@ -514,8 +492,8 @@ class JET_INDEXCREATE2_W extends Struct {
 
 class JET_INDEXCREATE3_A extends Struct {
   @Uint32() external int cbStruct;
-  external Pointer<Int8> szIndexName;
-  external Pointer<Int8> szKey;
+  external Pointer<Utf8> szIndexName;
+  external Pointer<Utf8> szKey;
   @Uint32() external int cbKey;
   @Uint32() external int grbit;
   @Uint32() external int ulDensity;
@@ -546,8 +524,8 @@ class JET_INDEXCREATE3_W extends Struct {
 
 class JET_TABLECREATE_A extends Struct {
   @Uint32() external int cbStruct;
-  external Pointer<Int8> szTableName;
-  external Pointer<Int8> szTemplateTableName;
+  external Pointer<Utf8> szTableName;
+  external Pointer<Utf8> szTemplateTableName;
   @Uint32() external int ulPages;
   @Uint32() external int ulDensity;
   external Pointer<JET_COLUMNCREATE_A> rgcolumncreate;
@@ -576,15 +554,15 @@ class JET_TABLECREATE_W extends Struct {
 
 class JET_TABLECREATE2_A extends Struct {
   @Uint32() external int cbStruct;
-  external Pointer<Int8> szTableName;
-  external Pointer<Int8> szTemplateTableName;
+  external Pointer<Utf8> szTableName;
+  external Pointer<Utf8> szTemplateTableName;
   @Uint32() external int ulPages;
   @Uint32() external int ulDensity;
   external Pointer<JET_COLUMNCREATE_A> rgcolumncreate;
   @Uint32() external int cColumns;
   external Pointer<JET_INDEXCREATE_A> rgindexcreate;
   @Uint32() external int cIndexes;
-  external Pointer<Int8> szCallback;
+  external Pointer<Utf8> szCallback;
   @Uint32() external int cbtyp;
   @Uint32() external int grbit;
   @Uint64() external int tableid;
@@ -610,15 +588,15 @@ class JET_TABLECREATE2_W extends Struct {
 
 class JET_TABLECREATE3_A extends Struct {
   @Uint32() external int cbStruct;
-  external Pointer<Int8> szTableName;
-  external Pointer<Int8> szTemplateTableName;
+  external Pointer<Utf8> szTableName;
+  external Pointer<Utf8> szTemplateTableName;
   @Uint32() external int ulPages;
   @Uint32() external int ulDensity;
   external Pointer<JET_COLUMNCREATE_A> rgcolumncreate;
   @Uint32() external int cColumns;
   external Pointer<JET_INDEXCREATE2_A> rgindexcreate;
   @Uint32() external int cIndexes;
-  external Pointer<Int8> szCallback;
+  external Pointer<Utf8> szCallback;
   @Uint32() external int cbtyp;
   @Uint32() external int grbit;
   external Pointer<JET_SPACEHINTS> pSeqSpacehints;
@@ -650,15 +628,15 @@ class JET_TABLECREATE3_W extends Struct {
 
 class JET_TABLECREATE4_A extends Struct {
   @Uint32() external int cbStruct;
-  external Pointer<Int8> szTableName;
-  external Pointer<Int8> szTemplateTableName;
+  external Pointer<Utf8> szTableName;
+  external Pointer<Utf8> szTemplateTableName;
   @Uint32() external int ulPages;
   @Uint32() external int ulDensity;
   external Pointer<JET_COLUMNCREATE_A> rgcolumncreate;
   @Uint32() external int cColumns;
   external Pointer<JET_INDEXCREATE3_A> rgindexcreate;
   @Uint32() external int cIndexes;
-  external Pointer<Int8> szCallback;
+  external Pointer<Utf8> szCallback;
   @Uint32() external int cbtyp;
   @Uint32() external int grbit;
   external Pointer<JET_SPACEHINTS> pSeqSpacehints;
@@ -791,7 +769,8 @@ class JET_LGPOS extends Struct {
 class JET_SIGNATURE extends Struct {
   @Uint32() external int ulRandom;
   external JET_LOGTIME logtimeCreate;
-  external __byte__ szComputerName;
+  @Array(16)
+  external Array<Int8> szComputerName;
 }
 
 class JET_BKINFO extends Struct {
@@ -992,9 +971,11 @@ class JET_ERRINFOBASIC_W extends Struct {
   @Uint32() external int cbStruct;
   @Int32() external int errValue;
   @Uint32() external int errcatMostSpecific;
-  external __ubyte__ rgCategoricalHierarchy;
+  @Array(8)
+  external Array<Uint8> rgCategoricalHierarchy;
   @Uint32() external int lSourceLine;
-  external __ushort__ rgszSourceFile;
+  @Array(64)
+  external Array<Uint16> rgszSourceFile;
 }
 
 class JET_COMMIT_ID extends Struct {
@@ -1024,7 +1005,7 @@ class JET_SETCOLUMN extends Struct {
 class JET_SETSYSPARAM_A extends Struct {
   @Uint32() external int paramid;
   @Uint64() external int lParam;
-  external Pointer<Int8> sz;
+  external Pointer<Utf8> sz;
   @Int32() external int err;
 }
 
@@ -1095,19 +1076,21 @@ class JET_LOGINFO_A extends Struct {
   @Uint32() external int cbSize;
   @Uint32() external int ulGenLow;
   @Uint32() external int ulGenHigh;
-  external __byte__ szBaseName;
+  @Array(4)
+  external Array<Int8> szBaseName;
 }
 
 class JET_LOGINFO_W extends Struct {
   @Uint32() external int cbSize;
   @Uint32() external int ulGenLow;
   @Uint32() external int ulGenHigh;
-  external __ushort__ szBaseName;
+  @Array(4)
+  external Array<Uint16> szBaseName;
 }
 
 class JET_INSTANCE_INFO_A extends Struct {
   @Uint64() external int hInstanceId;
-  external Pointer<Int8> szInstanceName;
+  external Pointer<Utf8> szInstanceName;
   @Uint64() external int cDatabases;
   external Pointer<Pointer<Int8>> szDatabaseFileName;
   external Pointer<Pointer<Int8>> szDatabaseDisplayName;
@@ -1121,5 +1104,33 @@ class JET_INSTANCE_INFO_W extends Struct {
   external Pointer<Pointer<Uint16>> szDatabaseFileName;
   external Pointer<Pointer<Uint16>> szDatabaseDisplayName;
   external Pointer<Pointer<Uint16>> szDatabaseSLVFileName_Obsolete;
+}
+
+class STATSTG extends Struct {
+  external Pointer<Utf16> pwcsName;
+  @Uint32() external int type;
+  @Uint64() external int cbSize;
+  external FILETIME mtime;
+  external FILETIME ctime;
+  external FILETIME atime;
+  @Uint32() external int grfMode;
+  @Uint32() external int grfLocksSupported;
+  external GUID clsid;
+  @Uint32() external int grfStateBits;
+  @Uint32() external int reserved;
+}
+
+class RemSNB extends Struct {
+  @Uint32() external int ulCntStr;
+  @Uint32() external int ulCntChar;
+  @Array(1)
+  external Array<Uint16> rgString;
+}
+
+class StorageLayout extends Struct {
+  @Uint32() external int LayoutType;
+  external Pointer<Utf16> pwcsElementName;
+  @Int64() external int cOffset;
+  @Int64() external int cBytes;
 }
 

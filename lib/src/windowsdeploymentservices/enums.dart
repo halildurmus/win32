@@ -1,28 +1,4 @@
 /// {@category Enum}
-class PROCESSOR_ARCHITECTURE {
-  static const PROCESSOR_ARCHITECTURE_AMD64 = 0x00000009;
-  static const PROCESSOR_ARCHITECTURE_IA64 = 0x00000006;
-  static const PROCESSOR_ARCHITECTURE_INTEL = 0x00000000;
-  static const PROCESSOR_ARCHITECTURE_ARM = 0x00000005;
-  static const PROCESSOR_ARCHITECTURE_ARM64 = 0x0000000c;
-  static const PROCESSOR_ARCHITECTURE_UNKNOWN = 0x0000ffff;
-}
-
-/// {@category Enum}
-class PxeProviderSetAttribute_pParameterBufferFlags {
-  static const PXE_PROV_FILTER_ALL = 0x00000000;
-  static const PXE_PROV_FILTER_DHCP_ONLY = 0x00000001;
-  static const PXE_PROV_FILTER_PXE_ONLY = 0x00000002;
-}
-
-/// {@category Enum}
-class WdsBpInitialize_bPacketTypeFlags {
-  static const WDSBP_PK_TYPE_WDSNBP = 0x00000002;
-  static const WDSBP_PK_TYPE_BCD = 0x00000004;
-  static const WDSBP_PK_TYPE_DHCPV6 = 0x00000008;
-}
-
-/// {@category Enum}
 class PFN_WdsCliCallback_dwMessageIdFlags {
   static const WDS_CLI_MSG_START = 0x00000000;
   static const WDS_CLI_MSG_COMPLETE = 0x00000001;
@@ -31,31 +7,23 @@ class PFN_WdsCliCallback_dwMessageIdFlags {
 }
 
 /// {@category Enum}
-class WDS_TRANSPORTCLIENT_REQUEST_ulAuthLevelFlags {
-  static const WDS_TRANSPORTCLIENT_AUTH = 0x00000001;
-  static const WDS_TRANSPORTCLIENT_NO_AUTH = 0x00000002;
+class PROCESSOR_ARCHITECTURE {
+  static const PROCESSOR_ARCHITECTURE_AMD64 = 0x00000009;
+  static const PROCESSOR_ARCHITECTURE_IA64 = 0x00000006;
+  static const PROCESSOR_ARCHITECTURE_INTEL = 0x00000000;
+  static const PROCESSOR_ARCHITECTURE_ARM = 0x00000005;
+  static const PROCESSOR_ARCHITECTURE_UNKNOWN = 0x0000ffff;
 }
 
 /// {@category Enum}
-class WDS_CLI_IMAGE_TYPE {
-  static const WDS_CLI_IMAGE_TYPE_UNKNOWN = 0x00000000;
-  static const WDS_CLI_IMAGE_TYPE_WIM = 0x00000001;
-  static const WDS_CLI_IMAGE_TYPE_VHD = 0x00000002;
-  static const WDS_CLI_IMAGE_TYPE_VHDX = 0x00000003;
-}
-
-/// {@category Enum}
-class WDS_CLI_FIRMWARE_TYPE {
-  static const WDS_CLI_FIRMWARE_UNKNOWN = 0x00000000;
-  static const WDS_CLI_FIRMWARE_BIOS = 0x00000001;
-  static const WDS_CLI_FIRMWARE_EFI = 0x00000002;
-}
-
-/// {@category Enum}
-class WDS_CLI_IMAGE_PARAM_TYPE {
-  static const WDS_CLI_IMAGE_PARAM_UNKNOWN = 0x00000000;
-  static const WDS_CLI_IMAGE_PARAM_SPARSE_FILE = 0x00000001;
-  static const WDS_CLI_IMAGE_PARAM_SUPPORTED_FIRMWARES = 0x00000002;
+class TRANSPORTCLIENT_CALLBACK_ID {
+  static const WDS_TRANSPORTCLIENT_SESSION_START = 0x00000000;
+  static const WDS_TRANSPORTCLIENT_RECEIVE_CONTENTS = 0x00000001;
+  static const WDS_TRANSPORTCLIENT_SESSION_COMPLETE = 0x00000002;
+  static const WDS_TRANSPORTCLIENT_RECEIVE_METADATA = 0x00000003;
+  static const WDS_TRANSPORTCLIENT_SESSION_STARTEX = 0x00000004;
+  static const WDS_TRANSPORTCLIENT_SESSION_NEGOTIATE = 0x00000005;
+  static const WDS_TRANSPORTCLIENT_MAX_CALLBACKS = 0x00000006;
 }
 
 /// {@category Enum}
@@ -76,35 +44,11 @@ class TRANSPORTPROVIDER_CALLBACK_ID {
 }
 
 /// {@category Enum}
-class TRANSPORTCLIENT_CALLBACK_ID {
-  static const WDS_TRANSPORTCLIENT_SESSION_START = 0x00000000;
-  static const WDS_TRANSPORTCLIENT_RECEIVE_CONTENTS = 0x00000001;
-  static const WDS_TRANSPORTCLIENT_SESSION_COMPLETE = 0x00000002;
-  static const WDS_TRANSPORTCLIENT_RECEIVE_METADATA = 0x00000003;
-  static const WDS_TRANSPORTCLIENT_SESSION_STARTEX = 0x00000004;
-  static const WDS_TRANSPORTCLIENT_SESSION_NEGOTIATE = 0x00000005;
-  static const WDS_TRANSPORTCLIENT_MAX_CALLBACKS = 0x00000006;
-}
-
-/// {@category Enum}
-class WDSTRANSPORT_FEATURE_FLAGS {
-  static const WdsTptFeatureAdminPack = 0x00000001;
-  static const WdsTptFeatureTransportServer = 0x00000002;
-  static const WdsTptFeatureDeploymentServer = 0x00000004;
-}
-
-/// {@category Enum}
-class WDSTRANSPORT_PROTOCOL_FLAGS {
-  static const WdsTptProtocolUnicast = 0x00000001;
-  static const WdsTptProtocolMulticast = 0x00000002;
-}
-
-/// {@category Enum}
-class WDSTRANSPORT_NAMESPACE_TYPE {
-  static const WdsTptNamespaceTypeUnknown = 0x00000000;
-  static const WdsTptNamespaceTypeAutoCast = 0x00000001;
-  static const WdsTptNamespaceTypeScheduledCastManualStart = 0x00000002;
-  static const WdsTptNamespaceTypeScheduledCastAutoStart = 0x00000003;
+class WDSTRANSPORT_DIAGNOSTICS_COMPONENT_FLAGS {
+  static const WdsTptDiagnosticsComponentPxe = 0x00000001;
+  static const WdsTptDiagnosticsComponentTftp = 0x00000002;
+  static const WdsTptDiagnosticsComponentImageServer = 0x00000004;
+  static const WdsTptDiagnosticsComponentMulticast = 0x00000008;
 }
 
 /// {@category Enum}
@@ -115,9 +59,17 @@ class WDSTRANSPORT_DISCONNECT_TYPE {
 }
 
 /// {@category Enum}
-class WDSTRANSPORT_SERVICE_NOTIFICATION {
-  static const WdsTptServiceNotifyUnknown = 0x00000000;
-  static const WdsTptServiceNotifyReadSettings = 0x00000001;
+class WDSTRANSPORT_FEATURE_FLAGS {
+  static const WdsTptFeatureAdminPack = 0x00000001;
+  static const WdsTptFeatureTransportServer = 0x00000002;
+  static const WdsTptFeatureDeploymentServer = 0x00000004;
+}
+
+/// {@category Enum}
+class WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE {
+  static const WdsTptIpAddressSourceUnknown = 0x00000000;
+  static const WdsTptIpAddressSourceDhcp = 0x00000001;
+  static const WdsTptIpAddressSourceRange = 0x00000002;
 }
 
 /// {@category Enum}
@@ -128,10 +80,11 @@ class WDSTRANSPORT_IP_ADDRESS_TYPE {
 }
 
 /// {@category Enum}
-class WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE {
-  static const WdsTptIpAddressSourceUnknown = 0x00000000;
-  static const WdsTptIpAddressSourceDhcp = 0x00000001;
-  static const WdsTptIpAddressSourceRange = 0x00000002;
+class WDSTRANSPORT_NAMESPACE_TYPE {
+  static const WdsTptNamespaceTypeUnknown = 0x00000000;
+  static const WdsTptNamespaceTypeAutoCast = 0x00000001;
+  static const WdsTptNamespaceTypeScheduledCastManualStart = 0x00000002;
+  static const WdsTptNamespaceTypeScheduledCastAutoStart = 0x00000003;
 }
 
 /// {@category Enum}
@@ -144,11 +97,15 @@ class WDSTRANSPORT_NETWORK_PROFILE_TYPE {
 }
 
 /// {@category Enum}
-class WDSTRANSPORT_DIAGNOSTICS_COMPONENT_FLAGS {
-  static const WdsTptDiagnosticsComponentPxe = 0x00000001;
-  static const WdsTptDiagnosticsComponentTftp = 0x00000002;
-  static const WdsTptDiagnosticsComponentImageServer = 0x00000004;
-  static const WdsTptDiagnosticsComponentMulticast = 0x00000008;
+class WDSTRANSPORT_PROTOCOL_FLAGS {
+  static const WdsTptProtocolUnicast = 0x00000001;
+  static const WdsTptProtocolMulticast = 0x00000002;
+}
+
+/// {@category Enum}
+class WDSTRANSPORT_SERVICE_NOTIFICATION {
+  static const WdsTptServiceNotifyUnknown = 0x00000000;
+  static const WdsTptServiceNotifyReadSettings = 0x00000001;
 }
 
 /// {@category Enum}
@@ -160,14 +117,42 @@ class WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE {
 }
 
 /// {@category Enum}
+class WDSTRANSPORT_TFTP_CAPABILITY {
+  static const WdsTptTftpCapMaximumBlockSize = 0x00000001;
+  static const WdsTptTftpCapVariableWindow = 0x00000002;
+}
+
+/// {@category Enum}
 class WDSTRANSPORT_UDP_PORT_POLICY {
   static const WdsTptUdpPortPolicyDynamic = 0x00000000;
   static const WdsTptUdpPortPolicyFixed = 0x00000001;
 }
 
 /// {@category Enum}
-class WDSTRANSPORT_TFTP_CAPABILITY {
-  static const WdsTptTftpCapMaximumBlockSize = 0x00000001;
-  static const WdsTptTftpCapVariableWindow = 0x00000002;
+class WDS_CLI_FIRMWARE_TYPE {
+  static const WDS_CLI_FIRMWARE_UNKNOWN = 0x00000000;
+  static const WDS_CLI_FIRMWARE_BIOS = 0x00000001;
+  static const WDS_CLI_FIRMWARE_EFI = 0x00000002;
+}
+
+/// {@category Enum}
+class WDS_CLI_IMAGE_PARAM_TYPE {
+  static const WDS_CLI_IMAGE_PARAM_UNKNOWN = 0x00000000;
+  static const WDS_CLI_IMAGE_PARAM_SPARSE_FILE = 0x00000001;
+  static const WDS_CLI_IMAGE_PARAM_SUPPORTED_FIRMWARES = 0x00000002;
+}
+
+/// {@category Enum}
+class WDS_CLI_IMAGE_TYPE {
+  static const WDS_CLI_IMAGE_TYPE_UNKNOWN = 0x00000000;
+  static const WDS_CLI_IMAGE_TYPE_WIM = 0x00000001;
+  static const WDS_CLI_IMAGE_TYPE_VHD = 0x00000002;
+  static const WDS_CLI_IMAGE_TYPE_VHDX = 0x00000003;
+}
+
+/// {@category Enum}
+class WDS_TRANSPORTCLIENT_REQUEST_ulAuthLevelFlags {
+  static const WDS_TRANSPORTCLIENT_AUTH = 0x00000001;
+  static const WDS_TRANSPORTCLIENT_NO_AUTH = 0x00000002;
 }
 

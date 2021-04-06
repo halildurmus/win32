@@ -55,7 +55,8 @@ class LIFE_TIME extends Struct {
 
 class DIAG_SOCKADDR extends Struct {
   @Uint16() external int family;
-  external __byte__ data;
+  @Array(126)
+  external Array<Int8> data;
 }
 
 class HELPER_ATTRIBUTE extends Struct {

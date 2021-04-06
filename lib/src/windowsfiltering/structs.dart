@@ -44,15 +44,18 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class FWP_BITMAP_ARRAY64_ extends Struct {
-  external __ubyte__ bitmapArray64;
+  @Array(8)
+  external Array<Uint8> bitmapArray64;
 }
 
 class FWP_BYTE_ARRAY6 extends Struct {
-  external __ubyte__ byteArray6;
+  @Array(6)
+  external Array<Uint8> byteArray6;
 }
 
 class FWP_BYTE_ARRAY16 extends Struct {
-  external __ubyte__ byteArray16;
+  @Array(16)
+  external Array<Uint8> byteArray16;
 }
 
 class FWP_BYTE_BLOB extends Struct {
@@ -78,7 +81,8 @@ class FWP_V4_ADDR_AND_MASK extends Struct {
 }
 
 class FWP_V6_ADDR_AND_MASK extends Struct {
-  external __ubyte__ addr;
+  @Array(16)
+  external Array<Uint8> addr;
   @Uint8() external int prefixLength;
 }
 
@@ -320,7 +324,8 @@ class IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS1 extends Struct {
 class IKEEXT_KEYMODULE_STATISTICS0 extends Struct {
   external IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS0 v4Statistics;
   external IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS0 v6Statistics;
-  external __uint__ errorFrequencyTable;
+  @Array(97)
+  external Array<Uint32> errorFrequencyTable;
   @Uint32() external int mainModeNegotiationTime;
   @Uint32() external int quickModeNegotiationTime;
   @Uint32() external int extendedModeNegotiationTime;
@@ -329,7 +334,8 @@ class IKEEXT_KEYMODULE_STATISTICS0 extends Struct {
 class IKEEXT_KEYMODULE_STATISTICS1 extends Struct {
   external IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS1 v4Statistics;
   external IKEEXT_IP_VERSION_SPECIFIC_KEYMODULE_STATISTICS1 v6Statistics;
-  external __uint__ errorFrequencyTable;
+  @Array(97)
+  external Array<Uint32> errorFrequencyTable;
   @Uint32() external int mainModeNegotiationTime;
   @Uint32() external int quickModeNegotiationTime;
   @Uint32() external int extendedModeNegotiationTime;
@@ -981,8 +987,10 @@ class IPSEC_DOSP_STATISTICS0 extends Struct {
 }
 
 class IPSEC_DOSP_STATE0 extends Struct {
-  external __ubyte__ publicHostV6Addr;
-  external __ubyte__ internalHostV6Addr;
+  @Array(16)
+  external Array<Uint8> publicHostV6Addr;
+  @Array(16)
+  external Array<Uint8> internalHostV6Addr;
   @Uint64() external int totalInboundIPv6IPsecAuthPackets;
   @Uint64() external int totalOutboundIPv6IPsecAuthPackets;
   @Uint32() external int durationSecs;
@@ -1356,7 +1364,8 @@ class FWPM_NET_EVENT_IKEEXT_MM_FAILURE0 extends Struct {
   @Uint32() external int mmState;
   @Uint32() external int saRole;
   @Uint32() external int mmAuthMethod;
-  external __ubyte__ endCertHash;
+  @Array(20)
+  external Array<Uint8> endCertHash;
   @Uint64() external int mmId;
   @Uint64() external int mmFilterId;
 }
@@ -1369,7 +1378,8 @@ class FWPM_NET_EVENT_IKEEXT_MM_FAILURE1 extends Struct {
   @Uint32() external int mmState;
   @Uint32() external int saRole;
   @Uint32() external int mmAuthMethod;
-  external __ubyte__ endCertHash;
+  @Array(20)
+  external Array<Uint8> endCertHash;
   @Uint64() external int mmId;
   @Uint64() external int mmFilterId;
   external Pointer<Utf16> localPrincipalNameForAuth;
@@ -1388,7 +1398,8 @@ class FWPM_NET_EVENT_IKEEXT_MM_FAILURE2_ extends Struct {
   @Uint32() external int mmState;
   @Uint32() external int saRole;
   @Uint32() external int mmAuthMethod;
-  external __ubyte__ endCertHash;
+  @Array(20)
+  external Array<Uint8> endCertHash;
   @Uint64() external int mmId;
   @Uint64() external int mmFilterId;
   external Pointer<Utf16> localPrincipalNameForAuth;
@@ -1433,7 +1444,8 @@ class FWPM_NET_EVENT_IKEEXT_EM_FAILURE0 extends Struct {
   @Uint32() external int emState;
   @Uint32() external int saRole;
   @Uint32() external int emAuthMethod;
-  external __ubyte__ endCertHash;
+  @Array(20)
+  external Array<Uint8> endCertHash;
   @Uint64() external int mmId;
   @Uint64() external int qmFilterId;
 }
@@ -1445,7 +1457,8 @@ class FWPM_NET_EVENT_IKEEXT_EM_FAILURE1 extends Struct {
   @Uint32() external int emState;
   @Uint32() external int saRole;
   @Uint32() external int emAuthMethod;
-  external __ubyte__ endCertHash;
+  @Array(20)
+  external Array<Uint8> endCertHash;
   @Uint64() external int mmId;
   @Uint64() external int qmFilterId;
   external Pointer<Utf16> localPrincipalNameForAuth;
@@ -1657,25 +1670,30 @@ class IPSEC_KEY_MANAGER_CALLBACKS0 extends Struct {
 }
 
 class DL_OUI extends Struct {
-  external __ubyte__ Byte;
+  @Array(3)
+  external Array<Uint8> Byte;
   @Uint32() external int Anonymous;
 }
 
 class DL_EI48 extends Struct {
-  external __ubyte__ Byte;
+  @Array(3)
+  external Array<Uint8> Byte;
 }
 
 class DL_EUI48 extends Struct {
-  external __ubyte__ Byte;
+  @Array(6)
+  external Array<Uint8> Byte;
   @Uint32() external int Anonymous;
 }
 
 class DL_EI64 extends Struct {
-  external __ubyte__ Byte;
+  @Array(5)
+  external Array<Uint8> Byte;
 }
 
 class DL_EUI64 extends Struct {
-  external __ubyte__ Byte;
+  @Array(8)
+  external Array<Uint8> Byte;
   @Uint64() external int Value;
   @Uint32() external int Anonymous;
 }
@@ -1684,7 +1702,8 @@ class SNAP_HEADER extends Struct {
   @Uint8() external int Dsap;
   @Uint8() external int Ssap;
   @Uint8() external int Control;
-  external __ubyte__ Oui;
+  @Array(3)
+  external Array<Uint8> Oui;
   @Uint16() external int Type;
 }
 
@@ -1719,8 +1738,8 @@ class IPV4_HEADER extends Struct {
   @Uint8() external int TimeToLive;
   @Uint8() external int Protocol;
   @Uint16() external int HeaderChecksum;
-  external in_addr SourceAddress;
-  external in_addr DestinationAddress;
+  external IN_ADDR SourceAddress;
+  external IN_ADDR DestinationAddress;
 }
 
 class IPV4_OPTION_HEADER extends Struct {
@@ -1748,7 +1767,7 @@ class ICMPV4_ROUTER_ADVERT_HEADER extends Struct {
 }
 
 class ICMPV4_ROUTER_ADVERT_ENTRY extends Struct {
-  external in_addr RouterAdvertAddr;
+  external IN_ADDR RouterAdvertAddr;
   @Int32() external int PreferenceLevel;
 }
 
@@ -1770,21 +1789,22 @@ class ARP_HEADER extends Struct {
   @Uint8() external int HardwareAddressLength;
   @Uint8() external int ProtocolAddressLength;
   @Uint16() external int Opcode;
-  external __ubyte__ SenderHardwareAddress;
+  @Array(1)
+  external Array<Uint8> SenderHardwareAddress;
 }
 
 class IGMP_HEADER extends Struct {
   @Uint32() external int Anonymous1;
   @Uint32() external int Anonymous2;
   @Uint16() external int Checksum;
-  external in_addr MulticastAddress;
+  external IN_ADDR MulticastAddress;
 }
 
 class IGMPV3_QUERY_HEADER extends Struct {
   @Uint8() external int Type;
   @Uint32() external int Anonymous1;
   @Uint16() external int Checksum;
-  external in_addr MulticastAddress;
+  external IN_ADDR MulticastAddress;
   @Uint8() external int _bitfield;
   @Uint32() external int Anonymous2;
   @Uint16() external int SourceCount;
@@ -1794,7 +1814,7 @@ class IGMPV3_REPORT_RECORD_HEADER extends Struct {
   @Uint8() external int Type;
   @Uint8() external int AuxillaryDataLength;
   @Uint16() external int SourceCount;
-  external in_addr MulticastAddress;
+  external IN_ADDR MulticastAddress;
 }
 
 class IGMPV3_REPORT_HEADER extends Struct {
@@ -1810,8 +1830,8 @@ class IPV6_HEADER extends Struct {
   @Uint16() external int PayloadLength;
   @Uint8() external int NextHeader;
   @Uint8() external int HopLimit;
-  external in6_addr SourceAddress;
-  external in6_addr DestinationAddress;
+  external IN6_ADDR SourceAddress;
+  external IN6_ADDR DestinationAddress;
 }
 
 class IPV6_FRAGMENT_HEADER extends Struct {
@@ -1833,12 +1853,14 @@ class IPV6_OPTION_HEADER extends Struct {
 
 class IPV6_OPTION_JUMBOGRAM extends Struct {
   external IPV6_OPTION_HEADER Header;
-  external __ubyte__ JumbogramLength;
+  @Array(4)
+  external Array<Uint8> JumbogramLength;
 }
 
 class IPV6_OPTION_ROUTER_ALERT extends Struct {
   external IPV6_OPTION_HEADER Header;
-  external __ubyte__ Value;
+  @Array(2)
+  external Array<Uint8> Value;
 }
 
 class IPV6_ROUTING_HEADER extends Struct {
@@ -1846,7 +1868,8 @@ class IPV6_ROUTING_HEADER extends Struct {
   @Uint8() external int Length;
   @Uint8() external int RoutingType;
   @Uint8() external int SegmentsLeft;
-  external __ubyte__ Reserved;
+  @Array(4)
+  external Array<Uint8> Reserved;
 }
 
 class nd_router_solicit extends Struct {
@@ -1866,12 +1889,12 @@ class IPV6_ROUTER_ADVERTISEMENT_FLAGS extends Struct {
 
 class nd_neighbor_solicit extends Struct {
   external ICMP_MESSAGE nd_ns_hdr;
-  external in6_addr nd_ns_target;
+  external IN6_ADDR nd_ns_target;
 }
 
 class nd_neighbor_advert extends Struct {
   external ICMP_MESSAGE nd_na_hdr;
-  external in6_addr nd_na_target;
+  external IN6_ADDR nd_na_target;
 }
 
 class IPV6_NEIGHBOR_ADVERTISEMENT_FLAGS extends Struct {
@@ -1881,8 +1904,8 @@ class IPV6_NEIGHBOR_ADVERTISEMENT_FLAGS extends Struct {
 
 class nd_redirect extends Struct {
   external ICMP_MESSAGE nd_rd_hdr;
-  external in6_addr nd_rd_target;
-  external in6_addr nd_rd_dst;
+  external IN6_ADDR nd_rd_target;
+  external IN6_ADDR nd_rd_dst;
 }
 
 class nd_opt_hdr extends Struct {
@@ -1898,7 +1921,7 @@ class nd_opt_prefix_info extends Struct {
   @Uint32() external int nd_opt_pi_valid_time;
   @Uint32() external int nd_opt_pi_preferred_time;
   @Uint32() external int Anonymous2;
-  external in6_addr nd_opt_pi_prefix;
+  external IN6_ADDR nd_opt_pi_prefix;
 }
 
 class nd_opt_rd_hdr extends Struct {
@@ -1921,7 +1944,7 @@ class nd_opt_route_info extends Struct {
   @Uint8() external int nd_opt_ri_prefix_len;
   @Uint32() external int Anonymous;
   @Uint32() external int nd_opt_ri_route_lifetime;
-  external in6_addr nd_opt_ri_prefix;
+  external IN6_ADDR nd_opt_ri_prefix;
 }
 
 class nd_opt_rdnss extends Struct {
@@ -1942,14 +1965,14 @@ class MLD_HEADER extends Struct {
   external ICMP_HEADER IcmpHeader;
   @Uint16() external int MaxRespTime;
   @Uint16() external int Reserved;
-  external in6_addr MulticastAddress;
+  external IN6_ADDR MulticastAddress;
 }
 
 class MLDV2_QUERY_HEADER extends Struct {
   external ICMP_HEADER IcmpHeader;
   @Uint32() external int Anonymous1;
   @Uint16() external int Reserved;
-  external in6_addr MulticastAddress;
+  external IN6_ADDR MulticastAddress;
   @Uint8() external int _bitfield;
   @Uint32() external int Anonymous2;
   @Uint16() external int SourceCount;
@@ -1959,7 +1982,7 @@ class MLDV2_REPORT_RECORD_HEADER extends Struct {
   @Uint8() external int Type;
   @Uint8() external int AuxillaryDataLength;
   @Uint16() external int SourceCount;
-  external in6_addr MulticastAddress;
+  external IN6_ADDR MulticastAddress;
 }
 
 class MLDV2_REPORT_HEADER extends Struct {
@@ -2000,7 +2023,8 @@ class tcp_opt_sack_permitted extends Struct {
 class tcp_opt_sack extends Struct {
   @Uint8() external int Kind;
   @Uint8() external int Length;
-  external ____ Block;
+  @Array(1)
+  external Array<Uint32> Block;
 }
 
 class tcp_opt_ts extends Struct {
@@ -2018,22 +2042,26 @@ class tcp_opt_unknown extends Struct {
 class tcp_opt_fastopen extends Struct {
   @Uint8() external int Kind;
   @Uint8() external int Length;
-  external __ubyte__ Cookie;
+  @Array(1)
+  external Array<Uint8> Cookie;
 }
 
 class DL_TUNNEL_ADDRESS extends Struct {
   @Uint32() external int CompartmentId;
   external SCOPE_ID ScopeId;
-  external __ubyte__ IpAddress;
+  @Array(1)
+  external Array<Uint8> IpAddress;
 }
 
 class DL_TEREDO_ADDRESS extends Struct {
-  external __ubyte__ Reserved;
+  @Array(6)
+  external Array<Uint8> Reserved;
   @Uint32() external int Anonymous;
 }
 
 class DL_TEREDO_ADDRESS_PRV extends Struct {
-  external __ubyte__ Reserved;
+  @Array(6)
+  external Array<Uint8> Reserved;
   @Uint32() external int Anonymous;
 }
 

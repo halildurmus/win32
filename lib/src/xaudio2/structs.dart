@@ -45,8 +45,10 @@ import 'package:ffi/ffi.dart';
 
 class XAPO_REGISTRATION_PROPERTIES extends Struct {
   external GUID clsid;
-  external __ushort__ FriendlyName;
-  external __ushort__ CopyrightInfo;
+  @Array(129)
+  external Array<Uint16> FriendlyName;
+  @Array(129)
+  external Array<Uint16> CopyrightInfo;
   @Uint32() external int MajorVersion;
   @Uint32() external int MinorVersion;
   @Uint32() external int Flags;
@@ -259,7 +261,8 @@ class HrtfPosition extends Struct {
 }
 
 class HrtfOrientation extends Struct {
-  external __float__ element;
+  @Array(9)
+  external Array<Float> element;
 }
 
 class HrtfDirectivity extends Struct {

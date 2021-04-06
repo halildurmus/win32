@@ -45,12 +45,14 @@ import 'package:ffi/ffi.dart';
 
 class RPC_BINDING_VECTOR extends Struct {
   @Uint32() external int Count;
-  external ____ BindingH;
+  @Array(1)
+  external Array<Pointer> BindingH;
 }
 
 class UUID_VECTOR extends Struct {
   @Uint32() external int Count;
-  external ____ Uuid;
+  @Array(1)
+  external Array<Pointer<GUID>> Uuid;
 }
 
 class RPC_IF_ID extends Struct {
@@ -61,12 +63,14 @@ class RPC_IF_ID extends Struct {
 
 class RPC_PROTSEQ_VECTORA extends Struct {
   @Uint32() external int Count;
-  external ____ Protseq;
+  @Array(1)
+  external Array<Pointer<Uint8>> Protseq;
 }
 
 class RPC_PROTSEQ_VECTORW extends Struct {
   @Uint32() external int Count;
-  external ____ Protseq;
+  @Array(1)
+  external Array<Pointer<Uint16>> Protseq;
 }
 
 class RPC_POLICY extends Struct {
@@ -77,12 +81,14 @@ class RPC_POLICY extends Struct {
 
 class RPC_STATS_VECTOR extends Struct {
   @Uint32() external int Count;
-  external __uint__ Stats;
+  @Array(1)
+  external Array<Uint32> Stats;
 }
 
 class RPC_IF_ID_VECTOR extends Struct {
   @Uint32() external int Count;
-  external ____ IfId;
+  @Array(1)
+  external Array<Pointer<RPC_IF_ID>> IfId;
 }
 
 class RPC_SECURITY_QOS extends Struct {
@@ -411,11 +417,11 @@ class RPC_TRANSFER_SYNTAX extends Struct {
 
 class RPC_C_OPT_COOKIE_AUTH_DESCRIPTOR extends Struct {
   @Uint32() external int BufferSize;
-  external Pointer<Int8> Buffer;
+  external Pointer<Utf8> Buffer;
 }
 
 class RDR_CALLOUT_STATE extends Struct {
-  @Int32() external int LastError;
+  @Uint32() external int LastError;
   external Pointer LastEEInfo;
   @Uint32() external int LastCalledStage;
   external Pointer<Uint16> ServerName;
@@ -462,7 +468,8 @@ class RPC_ASYNC_STATE extends Struct {
   @Uint32() external int Event;
   @Uint32() external int NotificationType;
   external RPC_ASYNC_NOTIFICATION_INFO u;
-  external __intptr__ Reserved;
+  @Array(4)
+  external Array<IntPtr> Reserved;
 }
 
 class BinaryParam extends Struct {
@@ -485,7 +492,8 @@ class RPC_EXTENDED_ERROR_INFO extends Struct {
   @Uint16() external int DetectionLocation;
   @Uint16() external int Flags;
   @Int32() external int NumberOfParameters;
-  external RPC_EE_INFO_PARAM Parameters;
+  @Array(4)
+  external Array<RPC_EE_INFO_PARAM> Parameters;
 }
 
 class RPC_ERROR_ENUM_HANDLE extends Struct {
@@ -614,7 +622,8 @@ class RPC_CALL_ATTRIBUTES_V3_A extends Struct {
 }
 
 class __AnonymousRecord_rpcndr_L275_C9 extends Struct {
-  external ____ pad;
+  @Array(2)
+  external Array<Pointer> pad;
   external Pointer userContext;
 }
 
@@ -880,7 +889,8 @@ class NDR_USER_MARSHAL_INFO_LEVEL1 extends Struct {
   @IntPtr() external int pfnAllocate;
   @IntPtr() external int pfnFree;
   external Pointer pRpcChannelBuffer;
-  external __uintptr__ Reserved;
+  @Array(5)
+  external Array<IntPtr> Reserved;
 }
 
 class NDR_USER_MARSHAL_INFO extends Struct {
@@ -891,11 +901,13 @@ class NDR_USER_MARSHAL_INFO extends Struct {
 class MIDL_TYPE_PICKLING_INFO extends Struct {
   @Uint32() external int Version;
   @Uint32() external int Flags;
-  external __uintptr__ Reserved;
+  @Array(3)
+  external Array<IntPtr> Reserved;
 }
 
 class NDR_SCONTEXT_1 extends Struct {
-  external ____ pad;
+  @Array(2)
+  external Array<Pointer> pad;
   external Pointer userContext;
 }
 

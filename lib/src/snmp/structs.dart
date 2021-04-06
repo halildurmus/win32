@@ -90,10 +90,14 @@ class smiVALUE extends Struct {
 }
 
 class smiVENDORINFO extends Struct {
-  external __byte__ vendorName;
-  external __byte__ vendorContact;
-  external __byte__ vendorVersionId;
-  external __byte__ vendorVersionDate;
+  @Array(64)
+  external Array<Int8> vendorName;
+  @Array(64)
+  external Array<Int8> vendorContact;
+  @Array(32)
+  external Array<Int8> vendorVersionId;
+  @Array(32)
+  external Array<Int8> vendorVersionDate;
   @Uint32() external int vendorEnterprise;
 }
 

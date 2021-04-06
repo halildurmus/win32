@@ -62,8 +62,10 @@ class FeedWatcher extends Struct {
 }
 
 class TimedLevel extends Struct {
-  external __ubyte__ frequency;
-  external __ubyte__ waveform;
+  @Array(136)
+  external Array<Uint8> frequency;
+  @Array(136)
+  external Array<Uint8> waveform;
   @Int32() external int state;
   @Int64() external int timeStamp;
 }
@@ -85,6 +87,7 @@ class WMP_WMDM_METADATA_ROUND_TRIP_DEVICE2PC extends Struct {
   @Uint32() external int dwUnretrievedObjectCount;
   @Uint32() external int dwDeletedObjectStartingOffset;
   @Uint32() external int dwFlags;
-  external __ushort__ wsObjectPathnameList;
+  @Array(1)
+  external Array<Uint16> wsObjectPathnameList;
 }
 

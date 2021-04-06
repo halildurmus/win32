@@ -1,7 +1,7 @@
 /// {@category Enum}
-class ITfSystemDeviceTypeLangBarItem_SetIconModeFlags {
-  static const None = 0x00000000;
-  static const TF_DTLBI_USEPROFILEICON = 0x00000001;
+class IAnchor_GetChangeHistory_pdwHistoryFlags {
+  static const TS_CH_PRECEDING_DEL = 0x00000001;
+  static const TS_CH_FOLLOWING_DEL = 0x00000002;
 }
 
 /// {@category Enum}
@@ -17,31 +17,6 @@ class ITextStoreAnchorSink_OnTextChangeFlags {
 }
 
 /// {@category Enum}
-class ITfInsertAtSelection_InsertTextAtSelectionFlags {
-  static const TF_IAS_NOQUERY = 0x00000001;
-  static const TF_IAS_QUERYONLY = 0x00000002;
-  static const TF_IAS_NO_DEFAULT_COMPOSITION = 0x80000000;
-}
-
-/// {@category Enum}
-class IAnchor_GetChangeHistory_pdwHistoryFlags {
-  static const TS_CH_PRECEDING_DEL = 0x00000001;
-  static const TS_CH_FOLLOWING_DEL = 0x00000002;
-}
-
-/// {@category Enum}
-class OnLockGranted_dwLockFlags {
-  static const TS_LF_READ = 0x00000002;
-  static const TS_LF_READWRITE = 0x00000006;
-}
-
-/// {@category Enum}
-class ITfEditRecord_GetTextAndPropertyUpdatesFlags {
-  static const None = 0x00000000;
-  static const TF_GTP_INCL_TEXT = 0x00000001;
-}
-
-/// {@category Enum}
 class ITfContext_RequestEditSessionFlags {
   static const TF_ES_ASYNCDONTCARE = 0x00000000;
   static const TF_ES_SYNC = 0x00000001;
@@ -51,138 +26,22 @@ class ITfContext_RequestEditSessionFlags {
 }
 
 /// {@category Enum}
-class TsActiveSelEnd {
-  static const TS_AE_NONE = 0x00000000;
-  static const TS_AE_START = 0x00000001;
-  static const TS_AE_END = 0x00000002;
+class ITfEditRecord_GetTextAndPropertyUpdatesFlags {
+  static const None = 0x00000000;
+  static const TF_GTP_INCL_TEXT = 0x00000001;
 }
 
 /// {@category Enum}
-class TsLayoutCode {
-  static const TS_LC_CREATE = 0x00000000;
-  static const TS_LC_CHANGE = 0x00000001;
-  static const TS_LC_DESTROY = 0x00000002;
+class ITfInsertAtSelection_InsertTextAtSelectionFlags {
+  static const TF_IAS_NOQUERY = 0x00000001;
+  static const TF_IAS_QUERYONLY = 0x00000002;
+  static const TF_IAS_NO_DEFAULT_COMPOSITION = 0x80000000;
 }
 
 /// {@category Enum}
-class TsRunType {
-  static const TS_RT_PLAIN = 0x00000000;
-  static const TS_RT_HIDDEN = 0x00000001;
-  static const TS_RT_OPAQUE = 0x00000002;
-}
-
-/// {@category Enum}
-class TsGravity {
-  static const TS_GR_BACKWARD = 0x00000000;
-  static const TS_GR_FORWARD = 0x00000001;
-}
-
-/// {@category Enum}
-class TsShiftDir {
-  static const TS_SD_BACKWARD = 0x00000000;
-  static const TS_SD_FORWARD = 0x00000001;
-}
-
-/// {@category Enum}
-class TfLBIClick {
-  static const TF_LBI_CLK_RIGHT = 0x00000001;
-  static const TF_LBI_CLK_LEFT = 0x00000002;
-}
-
-/// {@category Enum}
-class TfLBBalloonStyle {
-  static const TF_LB_BALLOON_RECO = 0x00000000;
-  static const TF_LB_BALLOON_SHOW = 0x00000001;
-  static const TF_LB_BALLOON_MISS = 0x00000002;
-}
-
-/// {@category Enum}
-class TfAnchor {
-  static const TF_ANCHOR_START = 0x00000000;
-  static const TF_ANCHOR_END = 0x00000001;
-}
-
-/// {@category Enum}
-class TfActiveSelEnd {
-  static const TF_AE_NONE = 0x00000000;
-  static const TF_AE_START = 0x00000001;
-  static const TF_AE_END = 0x00000002;
-}
-
-/// {@category Enum}
-class TfLayoutCode {
-  static const TF_LC_CREATE = 0x00000000;
-  static const TF_LC_CHANGE = 0x00000001;
-  static const TF_LC_DESTROY = 0x00000002;
-}
-
-/// {@category Enum}
-class TfGravity {
-  static const TF_GRAVITY_BACKWARD = 0x00000000;
-  static const TF_GRAVITY_FORWARD = 0x00000001;
-}
-
-/// {@category Enum}
-class TfShiftDir {
-  static const TF_SD_BACKWARD = 0x00000000;
-  static const TF_SD_FORWARD = 0x00000001;
-}
-
-/// {@category Enum}
-class TF_DA_LINESTYLE {
-  static const TF_LS_NONE = 0x00000000;
-  static const TF_LS_SOLID = 0x00000001;
-  static const TF_LS_DOT = 0x00000002;
-  static const TF_LS_DASH = 0x00000003;
-  static const TF_LS_SQUIGGLE = 0x00000004;
-}
-
-/// {@category Enum}
-class TF_DA_COLORTYPE {
-  static const TF_CT_NONE = 0x00000000;
-  static const TF_CT_SYSCOLOR = 0x00000001;
-  static const TF_CT_COLORREF = 0x00000002;
-}
-
-/// {@category Enum}
-class TF_DA_ATTR_INFO {
-  static const TF_ATTR_INPUT = 0x00000000;
-  static const TF_ATTR_TARGET_CONVERTED = 0x00000001;
-  static const TF_ATTR_CONVERTED = 0x00000002;
-  static const TF_ATTR_TARGET_NOTCONVERTED = 0x00000003;
-  static const TF_ATTR_INPUT_ERROR = 0x00000004;
-  static const TF_ATTR_FIXEDCONVERTED = 0x00000005;
-  static const TF_ATTR_OTHER = 0xffffffff;
-}
-
-/// {@category Enum}
-class TfCandidateResult {
-  static const CAND_FINALIZED = 0x00000000;
-  static const CAND_SELECTED = 0x00000001;
-  static const CAND_CANCELED = 0x00000002;
-}
-
-/// {@category Enum}
-class TfSapiObject {
-  static const GETIF_RESMGR = 0x00000000;
-  static const GETIF_RECOCONTEXT = 0x00000001;
-  static const GETIF_RECOGNIZER = 0x00000002;
-  static const GETIF_VOICE = 0x00000003;
-  static const GETIF_DICTGRAM = 0x00000004;
-  static const GETIF_RECOGNIZERNOINIT = 0x00000005;
-}
-
-/// {@category Enum}
-class TfIntegratableCandidateListSelectionStyle {
-  static const STYLE_ACTIVE_SELECTION = 0x00000000;
-  static const STYLE_IMPLIED_SELECTION = 0x00000001;
-}
-
-/// {@category Enum}
-class TKBLayoutType {
-  static const TKBLT_UNDEFINED = 0x00000000;
-  static const TKBLT_CLASSIC = 0x00000001;
-  static const TKBLT_OPTIMIZED = 0x00000002;
+class ITfSystemDeviceTypeLangBarItem_SetIconModeFlags {
+  static const None = 0x00000000;
+  static const TF_DTLBI_USEPROFILEICON = 0x00000001;
 }
 
 /// {@category Enum}
@@ -261,5 +120,146 @@ class InputScope {
   static const IS_SRGS = 0xfffffffd;
   static const IS_XML = 0xfffffffc;
   static const IS_ENUMSTRING = 0xfffffffb;
+}
+
+/// {@category Enum}
+class OnLockGranted_dwLockFlags {
+  static const TS_LF_READ = 0x00000002;
+  static const TS_LF_READWRITE = 0x00000006;
+}
+
+/// {@category Enum}
+class TF_DA_ATTR_INFO {
+  static const TF_ATTR_INPUT = 0x00000000;
+  static const TF_ATTR_TARGET_CONVERTED = 0x00000001;
+  static const TF_ATTR_CONVERTED = 0x00000002;
+  static const TF_ATTR_TARGET_NOTCONVERTED = 0x00000003;
+  static const TF_ATTR_INPUT_ERROR = 0x00000004;
+  static const TF_ATTR_FIXEDCONVERTED = 0x00000005;
+  static const TF_ATTR_OTHER = 0xffffffff;
+}
+
+/// {@category Enum}
+class TF_DA_COLORTYPE {
+  static const TF_CT_NONE = 0x00000000;
+  static const TF_CT_SYSCOLOR = 0x00000001;
+  static const TF_CT_COLORREF = 0x00000002;
+}
+
+/// {@category Enum}
+class TF_DA_LINESTYLE {
+  static const TF_LS_NONE = 0x00000000;
+  static const TF_LS_SOLID = 0x00000001;
+  static const TF_LS_DOT = 0x00000002;
+  static const TF_LS_DASH = 0x00000003;
+  static const TF_LS_SQUIGGLE = 0x00000004;
+}
+
+/// {@category Enum}
+class TKBLayoutType {
+  static const TKBLT_UNDEFINED = 0x00000000;
+  static const TKBLT_CLASSIC = 0x00000001;
+  static const TKBLT_OPTIMIZED = 0x00000002;
+}
+
+/// {@category Enum}
+class TfActiveSelEnd {
+  static const TF_AE_NONE = 0x00000000;
+  static const TF_AE_START = 0x00000001;
+  static const TF_AE_END = 0x00000002;
+}
+
+/// {@category Enum}
+class TfAnchor {
+  static const TF_ANCHOR_START = 0x00000000;
+  static const TF_ANCHOR_END = 0x00000001;
+}
+
+/// {@category Enum}
+class TfCandidateResult {
+  static const CAND_FINALIZED = 0x00000000;
+  static const CAND_SELECTED = 0x00000001;
+  static const CAND_CANCELED = 0x00000002;
+}
+
+/// {@category Enum}
+class TfGravity {
+  static const TF_GRAVITY_BACKWARD = 0x00000000;
+  static const TF_GRAVITY_FORWARD = 0x00000001;
+}
+
+/// {@category Enum}
+class TfIntegratableCandidateListSelectionStyle {
+  static const STYLE_ACTIVE_SELECTION = 0x00000000;
+  static const STYLE_IMPLIED_SELECTION = 0x00000001;
+}
+
+/// {@category Enum}
+class TfLBBalloonStyle {
+  static const TF_LB_BALLOON_RECO = 0x00000000;
+  static const TF_LB_BALLOON_SHOW = 0x00000001;
+  static const TF_LB_BALLOON_MISS = 0x00000002;
+}
+
+/// {@category Enum}
+class TfLBIClick {
+  static const TF_LBI_CLK_RIGHT = 0x00000001;
+  static const TF_LBI_CLK_LEFT = 0x00000002;
+}
+
+/// {@category Enum}
+class TfLayoutCode {
+  static const TF_LC_CREATE = 0x00000000;
+  static const TF_LC_CHANGE = 0x00000001;
+  static const TF_LC_DESTROY = 0x00000002;
+}
+
+/// {@category Enum}
+class TfSapiObject {
+  static const GETIF_RESMGR = 0x00000000;
+  static const GETIF_RECOCONTEXT = 0x00000001;
+  static const GETIF_RECOGNIZER = 0x00000002;
+  static const GETIF_VOICE = 0x00000003;
+  static const GETIF_DICTGRAM = 0x00000004;
+  static const GETIF_RECOGNIZERNOINIT = 0x00000005;
+}
+
+/// {@category Enum}
+class TfShiftDir {
+  static const TF_SD_BACKWARD = 0x00000000;
+  static const TF_SD_FORWARD = 0x00000001;
+}
+
+/// {@category Enum}
+class TsActiveSelEnd {
+  static const TS_AE_NONE = 0x00000000;
+  static const TS_AE_START = 0x00000001;
+  static const TS_AE_END = 0x00000002;
+}
+
+/// {@category Enum}
+class TsGravity {
+  static const TS_GR_BACKWARD = 0x00000000;
+  static const TS_GR_FORWARD = 0x00000001;
+}
+
+/// {@category Enum}
+class TsLayoutCode {
+  static const TS_LC_CREATE = 0x00000000;
+  static const TS_LC_CHANGE = 0x00000001;
+  static const TS_LC_DESTROY = 0x00000002;
+}
+
+/// {@category Enum}
+class TsRunType {
+  static const TS_RT_PLAIN = 0x00000000;
+  static const TS_RT_HIDDEN = 0x00000001;
+  static const TS_RT_OPAQUE = 0x00000002;
+}
+
+/// {@category Enum}
+class TsShiftDir {
+  static const TS_SD_BACKWARD = 0x00000000;
+  static const TS_SD_FORWARD = 0x00000001;
 }
 

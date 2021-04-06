@@ -43,20 +43,6 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class D2D_COLOR_F extends Struct {
-  @Float() external double r;
-  @Float() external double g;
-  @Float() external double b;
-  @Float() external double a;
-}
-
-class D2D1_COLOR_F extends Struct {
-  @Float() external double r;
-  @Float() external double g;
-  @Float() external double b;
-  @Float() external double a;
-}
-
 class D2D1_PIXEL_FORMAT extends Struct {
   @Uint32() external int format;
   @Uint32() external int alphaMode;
@@ -398,7 +384,8 @@ class D2D1_BLEND_DESCRIPTION extends Struct {
   @Uint32() external int sourceBlendAlpha;
   @Uint32() external int destinationBlendAlpha;
   @Uint32() external int blendOperationAlpha;
-  external __float__ blendFactor;
+  @Array(4)
+  external Array<Float> blendFactor;
 }
 
 class D2D1_INPUT_DESCRIPTION extends Struct {
@@ -490,5 +477,19 @@ class D2D1_SIMPLE_COLOR_PROFILE extends Struct {
   external D2D_POINT_2F bluePrimary;
   external D2D_POINT_2F whitePointXZ;
   @Uint32() external int gamma;
+}
+
+class D2D_COLOR_F extends Struct {
+  @Float() external double r;
+  @Float() external double g;
+  @Float() external double b;
+  @Float() external double a;
+}
+
+class D2D1_COLOR_F extends Struct {
+  @Float() external double r;
+  @Float() external double g;
+  @Float() external double b;
+  @Float() external double a;
 }
 

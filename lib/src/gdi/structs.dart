@@ -205,12 +205,14 @@ class BITMAPV5HEADER extends Struct {
 
 class BITMAPINFO extends Struct {
   external BITMAPINFOHEADER bmiHeader;
-  external RGBQUAD bmiColors;
+  @Array(1)
+  external Array<RGBQUAD> bmiColors;
 }
 
 class BITMAPCOREINFO extends Struct {
   external BITMAPCOREHEADER bmciHeader;
-  external RGBTRIPLE bmciColors;
+  @Array(1)
+  external Array<RGBTRIPLE> bmciColors;
 }
 
 class BITMAPFILEHEADER extends Struct {
@@ -222,13 +224,15 @@ class BITMAPFILEHEADER extends Struct {
 }
 
 class HANDLETABLE extends Struct {
-  external __intptr__ objectHandle;
+  @Array(1)
+  external Array<IntPtr> objectHandle;
 }
 
 class METARECORD extends Struct {
   @Uint32() external int rdSize;
   @Uint16() external int rdFunction;
-  external __ushort__ rdParm;
+  @Array(1)
+  external Array<Uint16> rdParm;
 }
 
 class METAHEADER extends Struct {
@@ -244,7 +248,8 @@ class METAHEADER extends Struct {
 class ENHMETARECORD extends Struct {
   @Uint32() external int iType;
   @Uint32() external int nSize;
-  external __uint__ dParm;
+  @Array(1)
+  external Array<Uint32> dParm;
 }
 
 class ENHMETAHEADER extends Struct {
@@ -412,7 +417,8 @@ class EXTLOGPEN extends Struct {
   @Uint32() external int elpColor;
   @IntPtr() external int elpHatch;
   @Uint32() external int elpNumEntries;
-  external __uint__ elpStyleEntry;
+  @Array(1)
+  external Array<Uint32> elpStyleEntry;
 }
 
 class EXTLOGPEN32 extends Struct {
@@ -422,7 +428,8 @@ class EXTLOGPEN32 extends Struct {
   @Uint32() external int elpColor;
   @Uint32() external int elpHatch;
   @Uint32() external int elpNumEntries;
-  external __uint__ elpStyleEntry;
+  @Array(1)
+  external Array<Uint32> elpStyleEntry;
 }
 
 class PALETTEENTRY extends Struct {
@@ -435,33 +442,44 @@ class PALETTEENTRY extends Struct {
 class LOGPALETTE extends Struct {
   @Uint16() external int palVersion;
   @Uint16() external int palNumEntries;
-  external PALETTEENTRY palPalEntry;
+  @Array(1)
+  external Array<PALETTEENTRY> palPalEntry;
 }
 
 class ENUMLOGFONTA extends Struct {
   external LOGFONTA elfLogFont;
-  external __ubyte__ elfFullName;
-  external __ubyte__ elfStyle;
+  @Array(64)
+  external Array<Uint8> elfFullName;
+  @Array(32)
+  external Array<Uint8> elfStyle;
 }
 
 class ENUMLOGFONTW extends Struct {
   external LOGFONT elfLogFont;
-  external __ushort__ elfFullName;
-  external __ushort__ elfStyle;
+  @Array(64)
+  external Array<Uint16> elfFullName;
+  @Array(32)
+  external Array<Uint16> elfStyle;
 }
 
 class ENUMLOGFONTEXA extends Struct {
   external LOGFONTA elfLogFont;
-  external __ubyte__ elfFullName;
-  external __ubyte__ elfStyle;
-  external __ubyte__ elfScript;
+  @Array(64)
+  external Array<Uint8> elfFullName;
+  @Array(32)
+  external Array<Uint8> elfStyle;
+  @Array(32)
+  external Array<Uint8> elfScript;
 }
 
 class ENUMLOGFONTEXW extends Struct {
   external LOGFONT elfLogFont;
-  external __ushort__ elfFullName;
-  external __ushort__ elfStyle;
-  external __ushort__ elfScript;
+  @Array(64)
+  external Array<Uint16> elfFullName;
+  @Array(32)
+  external Array<Uint16> elfStyle;
+  @Array(32)
+  external Array<Uint16> elfScript;
 }
 
 class PANOSE extends Struct {
@@ -479,46 +497,60 @@ class PANOSE extends Struct {
 
 class EXTLOGFONTA extends Struct {
   external LOGFONTA elfLogFont;
-  external __ubyte__ elfFullName;
-  external __ubyte__ elfStyle;
+  @Array(64)
+  external Array<Uint8> elfFullName;
+  @Array(32)
+  external Array<Uint8> elfStyle;
   @Uint32() external int elfVersion;
   @Uint32() external int elfStyleSize;
   @Uint32() external int elfMatch;
   @Uint32() external int elfReserved;
-  external __ubyte__ elfVendorId;
+  @Array(4)
+  external Array<Uint8> elfVendorId;
   @Uint32() external int elfCulture;
   external PANOSE elfPanose;
 }
 
 class EXTLOGFONTW extends Struct {
   external LOGFONT elfLogFont;
-  external __ushort__ elfFullName;
-  external __ushort__ elfStyle;
+  @Array(64)
+  external Array<Uint16> elfFullName;
+  @Array(32)
+  external Array<Uint16> elfStyle;
   @Uint32() external int elfVersion;
   @Uint32() external int elfStyleSize;
   @Uint32() external int elfMatch;
   @Uint32() external int elfReserved;
-  external __ubyte__ elfVendorId;
+  @Array(4)
+  external Array<Uint8> elfVendorId;
   @Uint32() external int elfCulture;
   external PANOSE elfPanose;
 }
 
 class DISPLAY_DEVICEA extends Struct {
   @Uint32() external int cb;
-  external __byte__ DeviceName;
-  external __byte__ DeviceString;
+  @Array(32)
+  external Array<Int8> DeviceName;
+  @Array(128)
+  external Array<Int8> DeviceString;
   @Uint32() external int StateFlags;
-  external __byte__ DeviceID;
-  external __byte__ DeviceKey;
+  @Array(128)
+  external Array<Int8> DeviceID;
+  @Array(128)
+  external Array<Int8> DeviceKey;
 }
 
 class DISPLAY_DEVICEW extends Struct {
   @Uint32() external int cb;
-  external __ushort__ DeviceName;
-  external __ushort__ DeviceString;
+  @Array(32)
+  external Array<Uint16> DeviceName;
+  @Array(128)
+  external Array<Uint16> DeviceString;
   @Uint32() external int StateFlags;
-  external __ushort__ DeviceID;
-  external __ushort__ DeviceKey;
+  @Array(128)
+  external Array<Uint16> DeviceID;
+  @Array(128)
+  external Array<Uint16> DeviceKey;
 }
 
 class DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO extends Struct {
@@ -548,7 +580,8 @@ class RGNDATAHEADER extends Struct {
 
 class RGNDATA extends Struct {
   external RGNDATAHEADER rdh;
-  external __byte__ Buffer;
+  @Array(1)
+  external Array<Int8> Buffer;
 }
 
 class ABC extends Struct {
@@ -681,7 +714,8 @@ class POINTFX extends Struct {
 class TTPOLYCURVE extends Struct {
   @Uint16() external int wType;
   @Uint16() external int cpfx;
-  external POINTFX apfx;
+  @Array(1)
+  external Array<POINTFX> apfx;
 }
 
 class TTPOLYGONHEADER extends Struct {
@@ -730,37 +764,43 @@ class GLYPHSET extends Struct {
   @Uint32() external int flAccel;
   @Uint32() external int cGlyphsSupported;
   @Uint32() external int cRanges;
-  external WCRANGE ranges;
+  @Array(1)
+  external Array<WCRANGE> ranges;
 }
 
 class DESIGNVECTOR extends Struct {
   @Uint32() external int dvReserved;
   @Uint32() external int dvNumAxes;
-  external __int__ dvValues;
+  @Array(16)
+  external Array<Int32> dvValues;
 }
 
 class AXISINFOA extends Struct {
   @Int32() external int axMinValue;
   @Int32() external int axMaxValue;
-  external __ubyte__ axAxisName;
+  @Array(16)
+  external Array<Uint8> axAxisName;
 }
 
 class AXISINFOW extends Struct {
   @Int32() external int axMinValue;
   @Int32() external int axMaxValue;
-  external __ushort__ axAxisName;
+  @Array(16)
+  external Array<Uint16> axAxisName;
 }
 
 class AXESLISTA extends Struct {
   @Uint32() external int axlReserved;
   @Uint32() external int axlNumAxes;
-  external AXISINFOA axlAxisInfo;
+  @Array(16)
+  external Array<AXISINFOA> axlAxisInfo;
 }
 
 class AXESLISTW extends Struct {
   @Uint32() external int axlReserved;
   @Uint32() external int axlNumAxes;
-  external AXISINFOW axlAxisInfo;
+  @Array(16)
+  external Array<AXISINFOW> axlAxisInfo;
 }
 
 class ENUMLOGFONTEXDVA extends Struct {
@@ -813,7 +853,8 @@ class BLENDFUNCTION extends Struct {
 class DIBSECTION extends Struct {
   external BITMAP dsBm;
   external BITMAPINFOHEADER dsBmih;
-  external __uint__ dsBitfields;
+  @Array(3)
+  external Array<Uint32> dsBitfields;
   @IntPtr() external int dshSection;
   @Uint32() external int dsOffset;
 }
@@ -908,7 +949,8 @@ class EMRSETPALETTEENTRIES extends Struct {
   @Uint32() external int ihPal;
   @Uint32() external int iStart;
   @Uint32() external int cEntries;
-  external PALETTEENTRY aPalEntries;
+  @Array(1)
+  external Array<PALETTEENTRY> aPalEntries;
 }
 
 class EMRSETCOLORADJUSTMENT extends Struct {
@@ -919,7 +961,8 @@ class EMRSETCOLORADJUSTMENT extends Struct {
 class EMRGDICOMMENT extends Struct {
   external EMR emr;
   @Uint32() external int cbData;
-  external __ubyte__ Data;
+  @Array(1)
+  external Array<Uint8> Data;
 }
 
 class EMREOF extends Struct {
@@ -1021,30 +1064,36 @@ class EMRPOLYLINE extends Struct {
   external EMR emr;
   external RECTL rclBounds;
   @Uint32() external int cptl;
-  external POINTL aptl;
+  @Array(1)
+  external Array<POINTL> aptl;
 }
 
 class EMRPOLYLINE16 extends Struct {
   external EMR emr;
   external RECTL rclBounds;
   @Uint32() external int cpts;
-  external POINTS apts;
+  @Array(1)
+  external Array<POINTS> apts;
 }
 
 class EMRPOLYDRAW extends Struct {
   external EMR emr;
   external RECTL rclBounds;
   @Uint32() external int cptl;
-  external POINTL aptl;
-  external __ubyte__ abTypes;
+  @Array(1)
+  external Array<POINTL> aptl;
+  @Array(1)
+  external Array<Uint8> abTypes;
 }
 
 class EMRPOLYDRAW16 extends Struct {
   external EMR emr;
   external RECTL rclBounds;
   @Uint32() external int cpts;
-  external POINTS apts;
-  external __ubyte__ abTypes;
+  @Array(1)
+  external Array<POINTS> apts;
+  @Array(1)
+  external Array<Uint8> abTypes;
 }
 
 class EMRPOLYPOLYLINE extends Struct {
@@ -1052,8 +1101,10 @@ class EMRPOLYPOLYLINE extends Struct {
   external RECTL rclBounds;
   @Uint32() external int nPolys;
   @Uint32() external int cptl;
-  external __uint__ aPolyCounts;
-  external POINTL aptl;
+  @Array(1)
+  external Array<Uint32> aPolyCounts;
+  @Array(1)
+  external Array<POINTL> aptl;
 }
 
 class EMRPOLYPOLYLINE16 extends Struct {
@@ -1061,15 +1112,18 @@ class EMRPOLYPOLYLINE16 extends Struct {
   external RECTL rclBounds;
   @Uint32() external int nPolys;
   @Uint32() external int cpts;
-  external __uint__ aPolyCounts;
-  external POINTS apts;
+  @Array(1)
+  external Array<Uint32> aPolyCounts;
+  @Array(1)
+  external Array<POINTS> apts;
 }
 
 class EMRINVERTRGN extends Struct {
   external EMR emr;
   external RECTL rclBounds;
   @Uint32() external int cbRgnData;
-  external __ubyte__ RgnData;
+  @Array(1)
+  external Array<Uint8> RgnData;
 }
 
 class EMRFILLRGN extends Struct {
@@ -1077,7 +1131,8 @@ class EMRFILLRGN extends Struct {
   external RECTL rclBounds;
   @Uint32() external int cbRgnData;
   @Uint32() external int ihBrush;
-  external __ubyte__ RgnData;
+  @Array(1)
+  external Array<Uint8> RgnData;
 }
 
 class EMRFRAMERGN extends Struct {
@@ -1086,14 +1141,16 @@ class EMRFRAMERGN extends Struct {
   @Uint32() external int cbRgnData;
   @Uint32() external int ihBrush;
   external SIZE szlStroke;
-  external __ubyte__ RgnData;
+  @Array(1)
+  external Array<Uint8> RgnData;
 }
 
 class EMREXTSELECTCLIPRGN extends Struct {
   external EMR emr;
   @Uint32() external int cbRgnData;
   @Uint32() external int iMode;
-  external __ubyte__ RgnData;
+  @Array(1)
+  external Array<Uint8> RgnData;
 }
 
 class EMREXTTEXTOUTA extends Struct {
@@ -1112,7 +1169,8 @@ class EMRPOLYTEXTOUTA extends Struct {
   @Float() external double exScale;
   @Float() external double eyScale;
   @Int32() external int cStrings;
-  external EMRTEXT aemrtext;
+  @Array(1)
+  external Array<EMRTEXT> aemrtext;
 }
 
 class EMRBITBLT extends Struct {
@@ -1184,7 +1242,8 @@ class EMRMASKBLT extends Struct {
 class EMRPLGBLT extends Struct {
   external EMR emr;
   external RECTL rclBounds;
-  external POINTL aptlDest;
+  @Array(3)
+  external Array<POINTL> aptlDest;
   @Int32() external int xSrc;
   @Int32() external int ySrc;
   @Int32() external int cxSrc;
@@ -1306,14 +1365,16 @@ class EMRFORMAT extends Struct {
 class EMRGLSRECORD extends Struct {
   external EMR emr;
   @Uint32() external int cbData;
-  external __ubyte__ Data;
+  @Array(1)
+  external Array<Uint8> Data;
 }
 
 class EMRGLSBOUNDEDRECORD extends Struct {
   external EMR emr;
   external RECTL rclBounds;
   @Uint32() external int cbData;
-  external __ubyte__ Data;
+  @Array(1)
+  external Array<Uint8> Data;
 }
 
 class EMRPIXELFORMAT extends Struct {
@@ -1336,7 +1397,8 @@ class EMREXTESCAPE extends Struct {
   external EMR emr;
   @Int32() external int iEscape;
   @Int32() external int cbEscData;
-  external __ubyte__ EscData;
+  @Array(1)
+  external Array<Uint8> EscData;
 }
 
 class EMRNAMEDESCAPE extends Struct {
@@ -1344,7 +1406,8 @@ class EMRNAMEDESCAPE extends Struct {
   @Int32() external int iEscape;
   @Int32() external int cbDriver;
   @Int32() external int cbEscData;
-  external __ubyte__ EscData;
+  @Array(1)
+  external Array<Uint8> EscData;
 }
 
 class EMRSETICMPROFILE extends Struct {
@@ -1352,7 +1415,8 @@ class EMRSETICMPROFILE extends Struct {
   @Uint32() external int dwFlags;
   @Uint32() external int cbName;
   @Uint32() external int cbData;
-  external __ubyte__ Data;
+  @Array(1)
+  external Array<Uint8> Data;
 }
 
 class EMRCREATECOLORSPACEW extends Struct {
@@ -1361,7 +1425,8 @@ class EMRCREATECOLORSPACEW extends Struct {
   external LOGCOLORSPACEW lcs;
   @Uint32() external int dwFlags;
   @Uint32() external int cbData;
-  external __ubyte__ Data;
+  @Array(1)
+  external Array<Uint8> Data;
 }
 
 class COLORMATCHTOTARGET extends Struct {
@@ -1370,7 +1435,8 @@ class COLORMATCHTOTARGET extends Struct {
   @Uint32() external int dwFlags;
   @Uint32() external int cbName;
   @Uint32() external int cbData;
-  external __ubyte__ Data;
+  @Array(1)
+  external Array<Uint8> Data;
 }
 
 class COLORCORRECTPALETTE extends Struct {
@@ -1408,7 +1474,8 @@ class EMRGRADIENTFILL extends Struct {
   @Uint32() external int nVer;
   @Uint32() external int nTri;
   @Uint32() external int ulMode;
-  external TRIVERTEX Ver;
+  @Array(1)
+  external Array<TRIVERTEX> Ver;
 }
 
 class EMRTRANSPARENTBLT extends Struct {
@@ -1477,25 +1544,30 @@ class MxdcEscapeHeader extends Struct {
 
 class MxdcGetFileNameData extends Struct {
   @Uint32() external int cbOutput;
-  external __ushort__ wszData;
+  @Array(1)
+  external Array<Uint16> wszData;
 }
 
 class MxdcS0PageData extends Struct {
   @Uint32() external int dwSize;
-  external __ubyte__ bData;
+  @Array(1)
+  external Array<Uint8> bData;
 }
 
 class MxdcXpsS0PageResource extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwResourceType;
-  external __ubyte__ szUri;
+  @Array(129)
+  external Array<Uint8> szUri;
   @Uint32() external int dwDataSize;
-  external __ubyte__ bData;
+  @Array(1)
+  external Array<Uint8> bData;
 }
 
 class MxdcPrintTicketPassthrough extends Struct {
   @Uint32() external int dwDataSize;
-  external __ubyte__ bData;
+  @Array(1)
+  external Array<Uint8> bData;
 }
 
 class MxdcPrintTicketEscape extends Struct {
@@ -1519,7 +1591,8 @@ class PAINTSTRUCT extends Struct {
   external RECT rcPaint;
   @Int32() external int fRestore;
   @Int32() external int fIncUpdate;
-  external __ubyte__ rgbReserved;
+  @Array(32)
+  external Array<Uint8> rgbReserved;
 }
 
 class DRAWTEXTPARAMS extends Struct {
@@ -1539,11 +1612,13 @@ class MONITORINFO extends Struct {
 
 class MONITORINFOEXA extends Struct {
   external MONITORINFO __AnonymousBase_winuser_L13554_C43;
-  external __byte__ szDevice;
+  @Array(32)
+  external Array<Int8> szDevice;
 }
 
 class MONITORINFOEXW extends Struct {
   external MONITORINFO __AnonymousBase_winuser_L13558_C43;
-  external __ushort__ szDevice;
+  @Array(32)
+  external Array<Uint16> szDevice;
 }
 

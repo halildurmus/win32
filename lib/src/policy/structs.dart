@@ -53,7 +53,8 @@ class GROUP_POLICY_OBJECTA extends Struct {
   external Pointer<Utf8> lpDSPath;
   external Pointer<Utf8> lpFileSysPath;
   external Pointer<Utf8> lpDisplayName;
-  external __byte__ szGPOName;
+  @Array(50)
+  external Array<Int8> szGPOName;
   @Uint32() external int GPOLink;
   @IntPtr() external int lParam;
   external Pointer<GROUP_POLICY_OBJECTA> pNext;
@@ -69,7 +70,8 @@ class GROUP_POLICY_OBJECTW extends Struct {
   external Pointer<Utf16> lpDSPath;
   external Pointer<Utf16> lpFileSysPath;
   external Pointer<Utf16> lpDisplayName;
-  external __ushort__ szGPOName;
+  @Array(50)
+  external Array<Uint16> szGPOName;
   @Uint32() external int GPOLink;
   @IntPtr() external int lParam;
   external Pointer<GROUP_POLICY_OBJECT> pNext;

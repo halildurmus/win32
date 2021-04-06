@@ -251,9 +251,12 @@ class RECO_GUIDE extends Struct {
 
 class RECO_ATTRS extends Struct {
   @Uint32() external int dwRecoCapabilityFlags;
-  external __ushort__ awcVendorName;
-  external __ushort__ awcFriendlyName;
-  external __ushort__ awLanguageId;
+  @Array(32)
+  external Array<Uint16> awcVendorName;
+  @Array(64)
+  external Array<Uint16> awcFriendlyName;
+  @Array(64)
+  external Array<Uint16> awLanguageId;
 }
 
 class RECO_RANGE extends Struct {

@@ -1,55 +1,4 @@
 /// {@category Enum}
-class SYSNLS_FUNCTION {
-  static const COMPARE_STRING = 0x00000001;
-}
-
-/// {@category Enum}
-class SYSGEOTYPE {
-  static const GEO_NATION = 0x00000001;
-  static const GEO_LATITUDE = 0x00000002;
-  static const GEO_LONGITUDE = 0x00000003;
-  static const GEO_ISO2 = 0x00000004;
-  static const GEO_ISO3 = 0x00000005;
-  static const GEO_RFC1766 = 0x00000006;
-  static const GEO_LCID = 0x00000007;
-  static const GEO_FRIENDLYNAME = 0x00000008;
-  static const GEO_OFFICIALNAME = 0x00000009;
-  static const GEO_TIMEZONES = 0x0000000a;
-  static const GEO_OFFICIALLANGUAGES = 0x0000000b;
-  static const GEO_ISO_UN_NUMBER = 0x0000000c;
-  static const GEO_PARENT = 0x0000000d;
-  static const GEO_DIALINGCODE = 0x0000000e;
-  static const GEO_CURRENCYCODE = 0x0000000f;
-  static const GEO_CURRENCYSYMBOL = 0x00000010;
-  static const GEO_NAME = 0x00000011;
-  static const GEO_ID = 0x00000012;
-}
-
-/// {@category Enum}
-class SYSGEOCLASS {
-  static const GEOCLASS_NATION = 0x00000010;
-  static const GEOCLASS_REGION = 0x0000000e;
-  static const GEOCLASS_ALL = 0x00000000;
-}
-
-/// {@category Enum}
-class NORM_FORM {
-  static const NormalizationOther = 0x00000000;
-  static const NormalizationC = 0x00000001;
-  static const NormalizationD = 0x00000002;
-  static const NormalizationKC = 0x00000005;
-  static const NormalizationKD = 0x00000006;
-}
-
-/// {@category Enum}
-class WORDLIST_TYPE {
-  static const WORDLIST_TYPE_IGNORE = 0x00000000;
-  static const WORDLIST_TYPE_ADD = 0x00000001;
-  static const WORDLIST_TYPE_EXCLUDE = 0x00000002;
-  static const WORDLIST_TYPE_AUTOCORRECT = 0x00000003;
-}
-
-/// {@category Enum}
 class CORRECTIVE_ACTION {
   static const CORRECTIVE_ACTION_NONE = 0x00000000;
   static const CORRECTIVE_ACTION_GET_SUGGESTIONS = 0x00000001;
@@ -58,10 +7,81 @@ class CORRECTIVE_ACTION {
 }
 
 /// {@category Enum}
-class IMEREG {
-  static const IFED_REG_HEAD = 0x00000000;
-  static const IFED_REG_TAIL = 0x00000001;
-  static const IFED_REG_DEL = 0x00000002;
+class CompareStringEx_dwCmpFlags {
+  static const LINGUISTIC_IGNORECASE = 0x00000010;
+  static const LINGUISTIC_IGNOREDIACRITIC = 0x00000020;
+  static const NORM_IGNORECASE = 0x00000001;
+  static const NORM_IGNOREKANATYPE = 0x00010000;
+  static const NORM_IGNORENONSPACE = 0x00000002;
+  static const NORM_IGNORESYMBOLS = 0x00000004;
+  static const NORM_IGNOREWIDTH = 0x00020000;
+  static const NORM_LINGUISTIC_CASING = 0x08000000;
+  static const SORT_DIGITSASNUMBERS = 0x00000008;
+  static const SORT_STRINGSORT = 0x00001000;
+}
+
+/// {@category Enum}
+class EnumDateFormatsExEx_dwFlags {
+  static const DATE_SHORTDATE = 0x00000001;
+  static const DATE_LONGDATE = 0x00000002;
+  static const DATE_YEARMONTH = 0x00000008;
+  static const DATE_MONTHDAY = 0x00000080;
+  static const DATE_AUTOLAYOUT = 0x00000040;
+  static const DATE_LTRREADING = 0x00000010;
+  static const DATE_RTLREADING = 0x00000020;
+  static const DATE_USE_ALT_CALENDAR = 0x00000004;
+}
+
+/// {@category Enum}
+class EnumSystemCodePages_dwFlags {
+  static const CP_INSTALLED = 0x00000001;
+  static const CP_SUPPORTED = 0x00000002;
+}
+
+/// {@category Enum}
+class EnumSystemLanguageGroupsW_dwFlags {
+  static const LGRPID_INSTALLED = 0x00000001;
+  static const LGRPID_SUPPORTED = 0x00000002;
+}
+
+/// {@category Enum}
+class FoldString_dwMapFlags {
+  static const MAP_COMPOSITE = 0x00000040;
+  static const MAP_EXPAND_LIGATURES = 0x00002000;
+  static const MAP_FOLDCZONE = 0x00000010;
+  static const MAP_FOLDDIGITS = 0x00000080;
+  static const MAP_PRECOMPOSED = 0x00000020;
+}
+
+/// {@category Enum}
+class GetTimeFormatEx_dwFlags {
+  static const TIME_NOMINUTESORSECONDS = 0x00000001;
+  static const TIME_NOSECONDS = 0x00000002;
+  static const TIME_NOTIMEMARKER = 0x00000004;
+  static const TIME_FORCE24HOURFORMAT = 0x00000008;
+}
+
+/// {@category Enum}
+class IImePad_Request_reqIdFlags {
+  static const IMEPADREQ_INSERTSTRING = 0x00001001;
+  static const IMEPADREQ_SENDCONTROL = 0x00001004;
+  static const IMEPADREQ_SETAPPLETSIZE = 0x00001008;
+  static const IMEPADREQ_GETCOMPOSITIONSTRING = 0x00001006;
+  static const IMEPADREQ_GETCOMPOSITIONSTRINGINFO = 0x0000100c;
+  static const IMEPADREQ_DELETESTRING = 0x00001010;
+  static const IMEPADREQ_CHANGESTRING = 0x00001011;
+  static const IMEPADREQ_GETAPPLHWND = 0x00001014;
+  static const IMEPADREQ_FORCEIMEPADWINDOWSHOW = 0x00001015;
+  static const IMEPADREQ_POSTMODALNOTIFY = 0x00001016;
+  static const IMEPADREQ_GETDEFAULTUILANGID = 0x00001017;
+  static const IMEPADREQ_GETAPPLETUISTYLE = 0x00001019;
+  static const IMEPADREQ_SETAPPLETUISTYLE = 0x0000101a;
+  static const IMEPADREQ_ISAPPLETACTIVE = 0x0000101b;
+  static const IMEPADREQ_ISIMEPADWINDOWVISIBLE = 0x0000101c;
+  static const IMEPADREQ_SETAPPLETMINMAXSIZE = 0x0000101d;
+  static const IMEPADREQ_GETCONVERSIONSTATUS = 0x0000101e;
+  static const IMEPADREQ_GETVERSION = 0x0000101f;
+  static const IMEPADREQ_GETCURRENTIMEINFO = 0x00001020;
 }
 
 /// {@category Enum}
@@ -96,12 +116,10 @@ class IMEFMT {
 }
 
 /// {@category Enum}
-class IMEUCT {
-  static const IFED_UCT_NONE = 0x00000000;
-  static const IFED_UCT_STRING_SJIS = 0x00000001;
-  static const IFED_UCT_STRING_UNICODE = 0x00000002;
-  static const IFED_UCT_USER_DEFINED = 0x00000003;
-  static const IFED_UCT_MAX = 0x00000004;
+class IMEREG {
+  static const IFED_REG_HEAD = 0x00000000;
+  static const IFED_REG_TAIL = 0x00000001;
+  static const IFED_REG_DEL = 0x00000002;
 }
 
 /// {@category Enum}
@@ -134,6 +152,107 @@ class IMEREL {
 }
 
 /// {@category Enum}
+class IMEUCT {
+  static const IFED_UCT_NONE = 0x00000000;
+  static const IFED_UCT_STRING_SJIS = 0x00000001;
+  static const IFED_UCT_STRING_UNICODE = 0x00000002;
+  static const IFED_UCT_USER_DEFINED = 0x00000003;
+  static const IFED_UCT_MAX = 0x00000004;
+}
+
+/// {@category Enum}
+class ImmEnumInputContext_idThread {
+  static const None = 0x00000000;
+  static const idThread1 = 0x00000001;
+}
+
+/// {@category Enum}
+class ImmGetConversionList_uFlag {
+  static const GCL_CONVERSION = 0x00000001;
+  static const GCL_REVERSECONVERSION = 0x00000002;
+  static const GCL_REVERSE_LENGTH = 0x00000003;
+}
+
+/// {@category Enum}
+class ImmGetGuideLine_dwIndex {
+  static const GGL_LEVEL = 0x00000001;
+  static const GGL_INDEX = 0x00000002;
+  static const GGL_STRING = 0x00000003;
+  static const GGL_PRIVATE = 0x00000004;
+}
+
+/// {@category Enum}
+class ImmNotifyIME_dwAction {
+  static const NI_CHANGECANDIDATELIST = 0x00000013;
+  static const NI_CLOSECANDIDATE = 0x00000011;
+  static const NI_COMPOSITIONSTR = 0x00000015;
+  static const NI_IMEMENUSELECTED = 0x00000018;
+  static const NI_OPENCANDIDATE = 0x00000010;
+  static const NI_SELECTCANDIDATESTR = 0x00000012;
+  static const NI_SETCANDIDATE_PAGESIZE = 0x00000017;
+  static const NI_SETCANDIDATE_PAGESTART = 0x00000016;
+}
+
+/// {@category Enum}
+class ImmNotifyIME_dwIndex {
+  static const CPS_CANCEL = 0x00000004;
+  static const CPS_COMPLETE = 0x00000001;
+  static const CPS_CONVERT = 0x00000002;
+  static const CPS_REVERT = 0x00000003;
+}
+
+/// {@category Enum}
+class ImmSetCompositionString_dwIndex {
+  static const SCS_SETSTR = 0x00000009;
+  static const SCS_CHANGEATTR = 0x00000012;
+  static const SCS_CHANGECLAUSE = 0x00000024;
+  static const SCS_SETRECONVERTSTRING = 0x00010000;
+  static const SCS_QUERYRECONVERTSTRING = 0x00020000;
+}
+
+/// {@category Enum}
+class IsTextUnicode_lpiResultFlags {
+  static const IS_TEXT_UNICODE_ASCII16 = 0x00000001;
+  static const IS_TEXT_UNICODE_REVERSE_ASCII16 = 0x00000010;
+  static const IS_TEXT_UNICODE_STATISTICS = 0x00000002;
+  static const IS_TEXT_UNICODE_REVERSE_STATISTICS = 0x00000020;
+  static const IS_TEXT_UNICODE_CONTROLS = 0x00000004;
+  static const IS_TEXT_UNICODE_REVERSE_CONTROLS = 0x00000040;
+  static const IS_TEXT_UNICODE_SIGNATURE = 0x00000008;
+  static const IS_TEXT_UNICODE_REVERSE_SIGNATURE = 0x00000080;
+  static const IS_TEXT_UNICODE_ILLEGAL_CHARS = 0x00000100;
+  static const IS_TEXT_UNICODE_ODD_LENGTH = 0x00000200;
+  static const IS_TEXT_UNICODE_NULL_BYTES = 0x00001000;
+  static const IS_TEXT_UNICODE_UNICODE_MASK = 0x0000000f;
+  static const IS_TEXT_UNICODE_REVERSE_MASK = 0x000000f0;
+  static const IS_TEXT_UNICODE_NOT_UNICODE_MASK = 0x00000f00;
+  static const IS_TEXT_UNICODE_NOT_ASCII_MASK = 0x0000f000;
+}
+
+/// {@category Enum}
+class IsValidLocale_dwFlags {
+  static const LCID_INSTALLED = 0x00000001;
+  static const LCID_SUPPORTED = 0x00000002;
+}
+
+/// {@category Enum}
+class MultiByteToWideChar_dwFlags {
+  static const MB_COMPOSITE = 0x00000002;
+  static const MB_ERR_INVALID_CHARS = 0x00000008;
+  static const MB_PRECOMPOSED = 0x00000001;
+  static const MB_USEGLYPHCHARS = 0x00000004;
+}
+
+/// {@category Enum}
+class NORM_FORM {
+  static const NormalizationOther = 0x00000000;
+  static const NormalizationC = 0x00000001;
+  static const NormalizationD = 0x00000002;
+  static const NormalizationKC = 0x00000005;
+  static const NormalizationKD = 0x00000006;
+}
+
+/// {@category Enum}
 class SCRIPT_JUSTIFY {
   static const SCRIPT_JUSTIFY_NONE = 0x00000000;
   static const SCRIPT_JUSTIFY_ARABIC_BLANK = 0x00000001;
@@ -154,436 +273,62 @@ class SCRIPT_JUSTIFY {
 }
 
 /// {@category Enum}
-class UErrorCode {
-  static const U_USING_FALLBACK_WARNING = 0xffffff80;
-  static const U_ERROR_WARNING_START = 0xffffff80;
-  static const U_USING_DEFAULT_WARNING = 0xffffff81;
-  static const U_SAFECLONE_ALLOCATED_WARNING = 0xffffff82;
-  static const U_STATE_OLD_WARNING = 0xffffff83;
-  static const U_STRING_NOT_TERMINATED_WARNING = 0xffffff84;
-  static const U_SORT_KEY_TOO_SHORT_WARNING = 0xffffff85;
-  static const U_AMBIGUOUS_ALIAS_WARNING = 0xffffff86;
-  static const U_DIFFERENT_UCA_VERSION = 0xffffff87;
-  static const U_PLUGIN_CHANGED_LEVEL_WARNING = 0xffffff88;
-  static const U_ZERO_ERROR = 0x00000000;
-  static const U_ILLEGAL_ARGUMENT_ERROR = 0x00000001;
-  static const U_MISSING_RESOURCE_ERROR = 0x00000002;
-  static const U_INVALID_FORMAT_ERROR = 0x00000003;
-  static const U_FILE_ACCESS_ERROR = 0x00000004;
-  static const U_INTERNAL_PROGRAM_ERROR = 0x00000005;
-  static const U_MESSAGE_PARSE_ERROR = 0x00000006;
-  static const U_MEMORY_ALLOCATION_ERROR = 0x00000007;
-  static const U_INDEX_OUTOFBOUNDS_ERROR = 0x00000008;
-  static const U_PARSE_ERROR = 0x00000009;
-  static const U_INVALID_CHAR_FOUND = 0x0000000a;
-  static const U_TRUNCATED_CHAR_FOUND = 0x0000000b;
-  static const U_ILLEGAL_CHAR_FOUND = 0x0000000c;
-  static const U_INVALID_TABLE_FORMAT = 0x0000000d;
-  static const U_INVALID_TABLE_FILE = 0x0000000e;
-  static const U_BUFFER_OVERFLOW_ERROR = 0x0000000f;
-  static const U_UNSUPPORTED_ERROR = 0x00000010;
-  static const U_RESOURCE_TYPE_MISMATCH = 0x00000011;
-  static const U_ILLEGAL_ESCAPE_SEQUENCE = 0x00000012;
-  static const U_UNSUPPORTED_ESCAPE_SEQUENCE = 0x00000013;
-  static const U_NO_SPACE_AVAILABLE = 0x00000014;
-  static const U_CE_NOT_FOUND_ERROR = 0x00000015;
-  static const U_PRIMARY_TOO_LONG_ERROR = 0x00000016;
-  static const U_STATE_TOO_OLD_ERROR = 0x00000017;
-  static const U_TOO_MANY_ALIASES_ERROR = 0x00000018;
-  static const U_ENUM_OUT_OF_SYNC_ERROR = 0x00000019;
-  static const U_INVARIANT_CONVERSION_ERROR = 0x0000001a;
-  static const U_INVALID_STATE_ERROR = 0x0000001b;
-  static const U_COLLATOR_VERSION_MISMATCH = 0x0000001c;
-  static const U_USELESS_COLLATOR_ERROR = 0x0000001d;
-  static const U_NO_WRITE_PERMISSION = 0x0000001e;
-  static const U_BAD_VARIABLE_DEFINITION = 0x00010000;
-  static const U_PARSE_ERROR_START = 0x00010000;
-  static const U_MALFORMED_RULE = 0x00010001;
-  static const U_MALFORMED_SET = 0x00010002;
-  static const U_MALFORMED_SYMBOL_REFERENCE = 0x00010003;
-  static const U_MALFORMED_UNICODE_ESCAPE = 0x00010004;
-  static const U_MALFORMED_VARIABLE_DEFINITION = 0x00010005;
-  static const U_MALFORMED_VARIABLE_REFERENCE = 0x00010006;
-  static const U_MISMATCHED_SEGMENT_DELIMITERS = 0x00010007;
-  static const U_MISPLACED_ANCHOR_START = 0x00010008;
-  static const U_MISPLACED_CURSOR_OFFSET = 0x00010009;
-  static const U_MISPLACED_QUANTIFIER = 0x0001000a;
-  static const U_MISSING_OPERATOR = 0x0001000b;
-  static const U_MISSING_SEGMENT_CLOSE = 0x0001000c;
-  static const U_MULTIPLE_ANTE_CONTEXTS = 0x0001000d;
-  static const U_MULTIPLE_CURSORS = 0x0001000e;
-  static const U_MULTIPLE_POST_CONTEXTS = 0x0001000f;
-  static const U_TRAILING_BACKSLASH = 0x00010010;
-  static const U_UNDEFINED_SEGMENT_REFERENCE = 0x00010011;
-  static const U_UNDEFINED_VARIABLE = 0x00010012;
-  static const U_UNQUOTED_SPECIAL = 0x00010013;
-  static const U_UNTERMINATED_QUOTE = 0x00010014;
-  static const U_RULE_MASK_ERROR = 0x00010015;
-  static const U_MISPLACED_COMPOUND_FILTER = 0x00010016;
-  static const U_MULTIPLE_COMPOUND_FILTERS = 0x00010017;
-  static const U_INVALID_RBT_SYNTAX = 0x00010018;
-  static const U_INVALID_PROPERTY_PATTERN = 0x00010019;
-  static const U_MALFORMED_PRAGMA = 0x0001001a;
-  static const U_UNCLOSED_SEGMENT = 0x0001001b;
-  static const U_ILLEGAL_CHAR_IN_SEGMENT = 0x0001001c;
-  static const U_VARIABLE_RANGE_EXHAUSTED = 0x0001001d;
-  static const U_VARIABLE_RANGE_OVERLAP = 0x0001001e;
-  static const U_ILLEGAL_CHARACTER = 0x0001001f;
-  static const U_INTERNAL_TRANSLITERATOR_ERROR = 0x00010020;
-  static const U_INVALID_ID = 0x00010021;
-  static const U_INVALID_FUNCTION = 0x00010022;
-  static const U_UNEXPECTED_TOKEN = 0x00010100;
-  static const U_FMT_PARSE_ERROR_START = 0x00010100;
-  static const U_MULTIPLE_DECIMAL_SEPARATORS = 0x00010101;
-  static const U_MULTIPLE_DECIMAL_SEPERATORS = 0x00010101;
-  static const U_MULTIPLE_EXPONENTIAL_SYMBOLS = 0x00010102;
-  static const U_MALFORMED_EXPONENTIAL_PATTERN = 0x00010103;
-  static const U_MULTIPLE_PERCENT_SYMBOLS = 0x00010104;
-  static const U_MULTIPLE_PERMILL_SYMBOLS = 0x00010105;
-  static const U_MULTIPLE_PAD_SPECIFIERS = 0x00010106;
-  static const U_PATTERN_SYNTAX_ERROR = 0x00010107;
-  static const U_ILLEGAL_PAD_POSITION = 0x00010108;
-  static const U_UNMATCHED_BRACES = 0x00010109;
-  static const U_UNSUPPORTED_PROPERTY = 0x0001010a;
-  static const U_UNSUPPORTED_ATTRIBUTE = 0x0001010b;
-  static const U_ARGUMENT_TYPE_MISMATCH = 0x0001010c;
-  static const U_DUPLICATE_KEYWORD = 0x0001010d;
-  static const U_UNDEFINED_KEYWORD = 0x0001010e;
-  static const U_DEFAULT_KEYWORD_MISSING = 0x0001010f;
-  static const U_DECIMAL_NUMBER_SYNTAX_ERROR = 0x00010110;
-  static const U_FORMAT_INEXACT_ERROR = 0x00010111;
-  static const U_NUMBER_ARG_OUTOFBOUNDS_ERROR = 0x00010112;
-  static const U_NUMBER_SKELETON_SYNTAX_ERROR = 0x00010113;
-  static const U_BRK_INTERNAL_ERROR = 0x00010200;
-  static const U_BRK_ERROR_START = 0x00010200;
-  static const U_BRK_HEX_DIGITS_EXPECTED = 0x00010201;
-  static const U_BRK_SEMICOLON_EXPECTED = 0x00010202;
-  static const U_BRK_RULE_SYNTAX = 0x00010203;
-  static const U_BRK_UNCLOSED_SET = 0x00010204;
-  static const U_BRK_ASSIGN_ERROR = 0x00010205;
-  static const U_BRK_VARIABLE_REDFINITION = 0x00010206;
-  static const U_BRK_MISMATCHED_PAREN = 0x00010207;
-  static const U_BRK_NEW_LINE_IN_QUOTED_STRING = 0x00010208;
-  static const U_BRK_UNDEFINED_VARIABLE = 0x00010209;
-  static const U_BRK_INIT_ERROR = 0x0001020a;
-  static const U_BRK_RULE_EMPTY_SET = 0x0001020b;
-  static const U_BRK_UNRECOGNIZED_OPTION = 0x0001020c;
-  static const U_BRK_MALFORMED_RULE_TAG = 0x0001020d;
-  static const U_REGEX_INTERNAL_ERROR = 0x00010300;
-  static const U_REGEX_ERROR_START = 0x00010300;
-  static const U_REGEX_RULE_SYNTAX = 0x00010301;
-  static const U_REGEX_INVALID_STATE = 0x00010302;
-  static const U_REGEX_BAD_ESCAPE_SEQUENCE = 0x00010303;
-  static const U_REGEX_PROPERTY_SYNTAX = 0x00010304;
-  static const U_REGEX_UNIMPLEMENTED = 0x00010305;
-  static const U_REGEX_MISMATCHED_PAREN = 0x00010306;
-  static const U_REGEX_NUMBER_TOO_BIG = 0x00010307;
-  static const U_REGEX_BAD_INTERVAL = 0x00010308;
-  static const U_REGEX_MAX_LT_MIN = 0x00010309;
-  static const U_REGEX_INVALID_BACK_REF = 0x0001030a;
-  static const U_REGEX_INVALID_FLAG = 0x0001030b;
-  static const U_REGEX_LOOK_BEHIND_LIMIT = 0x0001030c;
-  static const U_REGEX_SET_CONTAINS_STRING = 0x0001030d;
-  static const U_REGEX_MISSING_CLOSE_BRACKET = 0x0001030f;
-  static const U_REGEX_INVALID_RANGE = 0x00010310;
-  static const U_REGEX_STACK_OVERFLOW = 0x00010311;
-  static const U_REGEX_TIME_OUT = 0x00010312;
-  static const U_REGEX_STOPPED_BY_CALLER = 0x00010313;
-  static const U_REGEX_PATTERN_TOO_BIG = 0x00010314;
-  static const U_REGEX_INVALID_CAPTURE_GROUP_NAME = 0x00010315;
-  static const U_IDNA_PROHIBITED_ERROR = 0x00010400;
-  static const U_IDNA_ERROR_START = 0x00010400;
-  static const U_IDNA_UNASSIGNED_ERROR = 0x00010401;
-  static const U_IDNA_CHECK_BIDI_ERROR = 0x00010402;
-  static const U_IDNA_STD3_ASCII_RULES_ERROR = 0x00010403;
-  static const U_IDNA_ACE_PREFIX_ERROR = 0x00010404;
-  static const U_IDNA_VERIFICATION_ERROR = 0x00010405;
-  static const U_IDNA_LABEL_TOO_LONG_ERROR = 0x00010406;
-  static const U_IDNA_ZERO_LENGTH_LABEL_ERROR = 0x00010407;
-  static const U_IDNA_DOMAIN_NAME_TOO_LONG_ERROR = 0x00010408;
-  static const U_STRINGPREP_PROHIBITED_ERROR = 0x00010400;
-  static const U_STRINGPREP_UNASSIGNED_ERROR = 0x00010401;
-  static const U_STRINGPREP_CHECK_BIDI_ERROR = 0x00010402;
-  static const U_PLUGIN_ERROR_START = 0x00010500;
-  static const U_PLUGIN_TOO_HIGH = 0x00010500;
-  static const U_PLUGIN_DIDNT_SET_LEVEL = 0x00010501;
+class SYSGEOCLASS {
+  static const GEOCLASS_NATION = 0x00000010;
+  static const GEOCLASS_REGION = 0x0000000e;
+  static const GEOCLASS_ALL = 0x00000000;
 }
 
 /// {@category Enum}
-class UTraceLevel {
-  static const UTRACE_OFF = 0xffffffff;
-  static const UTRACE_ERROR = 0x00000000;
-  static const UTRACE_WARNING = 0x00000003;
-  static const UTRACE_OPEN_CLOSE = 0x00000005;
-  static const UTRACE_INFO = 0x00000007;
-  static const UTRACE_VERBOSE = 0x00000009;
+class SYSGEOTYPE {
+  static const GEO_NATION = 0x00000001;
+  static const GEO_LATITUDE = 0x00000002;
+  static const GEO_LONGITUDE = 0x00000003;
+  static const GEO_ISO2 = 0x00000004;
+  static const GEO_ISO3 = 0x00000005;
+  static const GEO_RFC1766 = 0x00000006;
+  static const GEO_LCID = 0x00000007;
+  static const GEO_FRIENDLYNAME = 0x00000008;
+  static const GEO_OFFICIALNAME = 0x00000009;
+  static const GEO_TIMEZONES = 0x0000000a;
+  static const GEO_OFFICIALLANGUAGES = 0x0000000b;
+  static const GEO_ISO_UN_NUMBER = 0x0000000c;
+  static const GEO_PARENT = 0x0000000d;
+  static const GEO_DIALINGCODE = 0x0000000e;
+  static const GEO_CURRENCYCODE = 0x0000000f;
+  static const GEO_CURRENCYSYMBOL = 0x00000010;
+  static const GEO_NAME = 0x00000011;
+  static const GEO_ID = 0x00000012;
 }
 
 /// {@category Enum}
-class UTraceFunctionNumber {
-  static const UTRACE_FUNCTION_START = 0x00000000;
-  static const UTRACE_U_INIT = 0x00000000;
-  static const UTRACE_U_CLEANUP = 0x00000001;
-  static const UTRACE_CONVERSION_START = 0x00001000;
-  static const UTRACE_UCNV_OPEN = 0x00001000;
-  static const UTRACE_UCNV_OPEN_PACKAGE = 0x00001001;
-  static const UTRACE_UCNV_OPEN_ALGORITHMIC = 0x00001002;
-  static const UTRACE_UCNV_CLONE = 0x00001003;
-  static const UTRACE_UCNV_CLOSE = 0x00001004;
-  static const UTRACE_UCNV_FLUSH_CACHE = 0x00001005;
-  static const UTRACE_UCNV_LOAD = 0x00001006;
-  static const UTRACE_UCNV_UNLOAD = 0x00001007;
-  static const UTRACE_COLLATION_START = 0x00002000;
-  static const UTRACE_UCOL_OPEN = 0x00002000;
-  static const UTRACE_UCOL_CLOSE = 0x00002001;
-  static const UTRACE_UCOL_STRCOLL = 0x00002002;
-  static const UTRACE_UCOL_GET_SORTKEY = 0x00002003;
-  static const UTRACE_UCOL_GETLOCALE = 0x00002004;
-  static const UTRACE_UCOL_NEXTSORTKEYPART = 0x00002005;
-  static const UTRACE_UCOL_STRCOLLITER = 0x00002006;
-  static const UTRACE_UCOL_OPEN_FROM_SHORT_STRING = 0x00002007;
-  static const UTRACE_UCOL_STRCOLLUTF8 = 0x00002008;
+class SYSNLS_FUNCTION {
+  static const COMPARE_STRING = 0x00000001;
 }
 
 /// {@category Enum}
-class UStringTrieResult {
-  static const USTRINGTRIE_NO_MATCH = 0x00000000;
-  static const USTRINGTRIE_NO_VALUE = 0x00000001;
-  static const USTRINGTRIE_FINAL_VALUE = 0x00000002;
-  static const USTRINGTRIE_INTERMEDIATE_VALUE = 0x00000003;
+class ScriptIsComplex_dwFlags {
+  static const SIC_ASCIIDIGIT = 0x00000002;
+  static const SIC_COMPLEX = 0x00000001;
+  static const SIC_NEUTRAL = 0x00000004;
 }
 
 /// {@category Enum}
-class UScriptCode {
-  static const USCRIPT_INVALID_CODE = 0xffffffff;
-  static const USCRIPT_COMMON = 0x00000000;
-  static const USCRIPT_INHERITED = 0x00000001;
-  static const USCRIPT_ARABIC = 0x00000002;
-  static const USCRIPT_ARMENIAN = 0x00000003;
-  static const USCRIPT_BENGALI = 0x00000004;
-  static const USCRIPT_BOPOMOFO = 0x00000005;
-  static const USCRIPT_CHEROKEE = 0x00000006;
-  static const USCRIPT_COPTIC = 0x00000007;
-  static const USCRIPT_CYRILLIC = 0x00000008;
-  static const USCRIPT_DESERET = 0x00000009;
-  static const USCRIPT_DEVANAGARI = 0x0000000a;
-  static const USCRIPT_ETHIOPIC = 0x0000000b;
-  static const USCRIPT_GEORGIAN = 0x0000000c;
-  static const USCRIPT_GOTHIC = 0x0000000d;
-  static const USCRIPT_GREEK = 0x0000000e;
-  static const USCRIPT_GUJARATI = 0x0000000f;
-  static const USCRIPT_GURMUKHI = 0x00000010;
-  static const USCRIPT_HAN = 0x00000011;
-  static const USCRIPT_HANGUL = 0x00000012;
-  static const USCRIPT_HEBREW = 0x00000013;
-  static const USCRIPT_HIRAGANA = 0x00000014;
-  static const USCRIPT_KANNADA = 0x00000015;
-  static const USCRIPT_KATAKANA = 0x00000016;
-  static const USCRIPT_KHMER = 0x00000017;
-  static const USCRIPT_LAO = 0x00000018;
-  static const USCRIPT_LATIN = 0x00000019;
-  static const USCRIPT_MALAYALAM = 0x0000001a;
-  static const USCRIPT_MONGOLIAN = 0x0000001b;
-  static const USCRIPT_MYANMAR = 0x0000001c;
-  static const USCRIPT_OGHAM = 0x0000001d;
-  static const USCRIPT_OLD_ITALIC = 0x0000001e;
-  static const USCRIPT_ORIYA = 0x0000001f;
-  static const USCRIPT_RUNIC = 0x00000020;
-  static const USCRIPT_SINHALA = 0x00000021;
-  static const USCRIPT_SYRIAC = 0x00000022;
-  static const USCRIPT_TAMIL = 0x00000023;
-  static const USCRIPT_TELUGU = 0x00000024;
-  static const USCRIPT_THAANA = 0x00000025;
-  static const USCRIPT_THAI = 0x00000026;
-  static const USCRIPT_TIBETAN = 0x00000027;
-  static const USCRIPT_CANADIAN_ABORIGINAL = 0x00000028;
-  static const USCRIPT_UCAS = 0x00000028;
-  static const USCRIPT_YI = 0x00000029;
-  static const USCRIPT_TAGALOG = 0x0000002a;
-  static const USCRIPT_HANUNOO = 0x0000002b;
-  static const USCRIPT_BUHID = 0x0000002c;
-  static const USCRIPT_TAGBANWA = 0x0000002d;
-  static const USCRIPT_BRAILLE = 0x0000002e;
-  static const USCRIPT_CYPRIOT = 0x0000002f;
-  static const USCRIPT_LIMBU = 0x00000030;
-  static const USCRIPT_LINEAR_B = 0x00000031;
-  static const USCRIPT_OSMANYA = 0x00000032;
-  static const USCRIPT_SHAVIAN = 0x00000033;
-  static const USCRIPT_TAI_LE = 0x00000034;
-  static const USCRIPT_UGARITIC = 0x00000035;
-  static const USCRIPT_KATAKANA_OR_HIRAGANA = 0x00000036;
-  static const USCRIPT_BUGINESE = 0x00000037;
-  static const USCRIPT_GLAGOLITIC = 0x00000038;
-  static const USCRIPT_KHAROSHTHI = 0x00000039;
-  static const USCRIPT_SYLOTI_NAGRI = 0x0000003a;
-  static const USCRIPT_NEW_TAI_LUE = 0x0000003b;
-  static const USCRIPT_TIFINAGH = 0x0000003c;
-  static const USCRIPT_OLD_PERSIAN = 0x0000003d;
-  static const USCRIPT_BALINESE = 0x0000003e;
-  static const USCRIPT_BATAK = 0x0000003f;
-  static const USCRIPT_BLISSYMBOLS = 0x00000040;
-  static const USCRIPT_BRAHMI = 0x00000041;
-  static const USCRIPT_CHAM = 0x00000042;
-  static const USCRIPT_CIRTH = 0x00000043;
-  static const USCRIPT_OLD_CHURCH_SLAVONIC_CYRILLIC = 0x00000044;
-  static const USCRIPT_DEMOTIC_EGYPTIAN = 0x00000045;
-  static const USCRIPT_HIERATIC_EGYPTIAN = 0x00000046;
-  static const USCRIPT_EGYPTIAN_HIEROGLYPHS = 0x00000047;
-  static const USCRIPT_KHUTSURI = 0x00000048;
-  static const USCRIPT_SIMPLIFIED_HAN = 0x00000049;
-  static const USCRIPT_TRADITIONAL_HAN = 0x0000004a;
-  static const USCRIPT_PAHAWH_HMONG = 0x0000004b;
-  static const USCRIPT_OLD_HUNGARIAN = 0x0000004c;
-  static const USCRIPT_HARAPPAN_INDUS = 0x0000004d;
-  static const USCRIPT_JAVANESE = 0x0000004e;
-  static const USCRIPT_KAYAH_LI = 0x0000004f;
-  static const USCRIPT_LATIN_FRAKTUR = 0x00000050;
-  static const USCRIPT_LATIN_GAELIC = 0x00000051;
-  static const USCRIPT_LEPCHA = 0x00000052;
-  static const USCRIPT_LINEAR_A = 0x00000053;
-  static const USCRIPT_MANDAIC = 0x00000054;
-  static const USCRIPT_MANDAEAN = 0x00000054;
-  static const USCRIPT_MAYAN_HIEROGLYPHS = 0x00000055;
-  static const USCRIPT_MEROITIC_HIEROGLYPHS = 0x00000056;
-  static const USCRIPT_MEROITIC = 0x00000056;
-  static const USCRIPT_NKO = 0x00000057;
-  static const USCRIPT_ORKHON = 0x00000058;
-  static const USCRIPT_OLD_PERMIC = 0x00000059;
-  static const USCRIPT_PHAGS_PA = 0x0000005a;
-  static const USCRIPT_PHOENICIAN = 0x0000005b;
-  static const USCRIPT_MIAO = 0x0000005c;
-  static const USCRIPT_PHONETIC_POLLARD = 0x0000005c;
-  static const USCRIPT_RONGORONGO = 0x0000005d;
-  static const USCRIPT_SARATI = 0x0000005e;
-  static const USCRIPT_ESTRANGELO_SYRIAC = 0x0000005f;
-  static const USCRIPT_WESTERN_SYRIAC = 0x00000060;
-  static const USCRIPT_EASTERN_SYRIAC = 0x00000061;
-  static const USCRIPT_TENGWAR = 0x00000062;
-  static const USCRIPT_VAI = 0x00000063;
-  static const USCRIPT_VISIBLE_SPEECH = 0x00000064;
-  static const USCRIPT_CUNEIFORM = 0x00000065;
-  static const USCRIPT_UNWRITTEN_LANGUAGES = 0x00000066;
-  static const USCRIPT_UNKNOWN = 0x00000067;
-  static const USCRIPT_CARIAN = 0x00000068;
-  static const USCRIPT_JAPANESE = 0x00000069;
-  static const USCRIPT_LANNA = 0x0000006a;
-  static const USCRIPT_LYCIAN = 0x0000006b;
-  static const USCRIPT_LYDIAN = 0x0000006c;
-  static const USCRIPT_OL_CHIKI = 0x0000006d;
-  static const USCRIPT_REJANG = 0x0000006e;
-  static const USCRIPT_SAURASHTRA = 0x0000006f;
-  static const USCRIPT_SIGN_WRITING = 0x00000070;
-  static const USCRIPT_SUNDANESE = 0x00000071;
-  static const USCRIPT_MOON = 0x00000072;
-  static const USCRIPT_MEITEI_MAYEK = 0x00000073;
-  static const USCRIPT_IMPERIAL_ARAMAIC = 0x00000074;
-  static const USCRIPT_AVESTAN = 0x00000075;
-  static const USCRIPT_CHAKMA = 0x00000076;
-  static const USCRIPT_KOREAN = 0x00000077;
-  static const USCRIPT_KAITHI = 0x00000078;
-  static const USCRIPT_MANICHAEAN = 0x00000079;
-  static const USCRIPT_INSCRIPTIONAL_PAHLAVI = 0x0000007a;
-  static const USCRIPT_PSALTER_PAHLAVI = 0x0000007b;
-  static const USCRIPT_BOOK_PAHLAVI = 0x0000007c;
-  static const USCRIPT_INSCRIPTIONAL_PARTHIAN = 0x0000007d;
-  static const USCRIPT_SAMARITAN = 0x0000007e;
-  static const USCRIPT_TAI_VIET = 0x0000007f;
-  static const USCRIPT_MATHEMATICAL_NOTATION = 0x00000080;
-  static const USCRIPT_SYMBOLS = 0x00000081;
-  static const USCRIPT_BAMUM = 0x00000082;
-  static const USCRIPT_LISU = 0x00000083;
-  static const USCRIPT_NAKHI_GEBA = 0x00000084;
-  static const USCRIPT_OLD_SOUTH_ARABIAN = 0x00000085;
-  static const USCRIPT_BASSA_VAH = 0x00000086;
-  static const USCRIPT_DUPLOYAN = 0x00000087;
-  static const USCRIPT_ELBASAN = 0x00000088;
-  static const USCRIPT_GRANTHA = 0x00000089;
-  static const USCRIPT_KPELLE = 0x0000008a;
-  static const USCRIPT_LOMA = 0x0000008b;
-  static const USCRIPT_MENDE = 0x0000008c;
-  static const USCRIPT_MEROITIC_CURSIVE = 0x0000008d;
-  static const USCRIPT_OLD_NORTH_ARABIAN = 0x0000008e;
-  static const USCRIPT_NABATAEAN = 0x0000008f;
-  static const USCRIPT_PALMYRENE = 0x00000090;
-  static const USCRIPT_KHUDAWADI = 0x00000091;
-  static const USCRIPT_SINDHI = 0x00000091;
-  static const USCRIPT_WARANG_CITI = 0x00000092;
-  static const USCRIPT_AFAKA = 0x00000093;
-  static const USCRIPT_JURCHEN = 0x00000094;
-  static const USCRIPT_MRO = 0x00000095;
-  static const USCRIPT_NUSHU = 0x00000096;
-  static const USCRIPT_SHARADA = 0x00000097;
-  static const USCRIPT_SORA_SOMPENG = 0x00000098;
-  static const USCRIPT_TAKRI = 0x00000099;
-  static const USCRIPT_TANGUT = 0x0000009a;
-  static const USCRIPT_WOLEAI = 0x0000009b;
-  static const USCRIPT_ANATOLIAN_HIEROGLYPHS = 0x0000009c;
-  static const USCRIPT_KHOJKI = 0x0000009d;
-  static const USCRIPT_TIRHUTA = 0x0000009e;
-  static const USCRIPT_CAUCASIAN_ALBANIAN = 0x0000009f;
-  static const USCRIPT_MAHAJANI = 0x000000a0;
-  static const USCRIPT_AHOM = 0x000000a1;
-  static const USCRIPT_HATRAN = 0x000000a2;
-  static const USCRIPT_MODI = 0x000000a3;
-  static const USCRIPT_MULTANI = 0x000000a4;
-  static const USCRIPT_PAU_CIN_HAU = 0x000000a5;
-  static const USCRIPT_SIDDHAM = 0x000000a6;
-  static const USCRIPT_ADLAM = 0x000000a7;
-  static const USCRIPT_BHAIKSUKI = 0x000000a8;
-  static const USCRIPT_MARCHEN = 0x000000a9;
-  static const USCRIPT_NEWA = 0x000000aa;
-  static const USCRIPT_OSAGE = 0x000000ab;
-  static const USCRIPT_HAN_WITH_BOPOMOFO = 0x000000ac;
-  static const USCRIPT_JAMO = 0x000000ad;
-  static const USCRIPT_SYMBOLS_EMOJI = 0x000000ae;
-  static const USCRIPT_MASARAM_GONDI = 0x000000af;
-  static const USCRIPT_SOYOMBO = 0x000000b0;
-  static const USCRIPT_ZANABAZAR_SQUARE = 0x000000b1;
-  static const USCRIPT_DOGRA = 0x000000b2;
-  static const USCRIPT_GUNJALA_GONDI = 0x000000b3;
-  static const USCRIPT_MAKASAR = 0x000000b4;
-  static const USCRIPT_MEDEFAIDRIN = 0x000000b5;
-  static const USCRIPT_HANIFI_ROHINGYA = 0x000000b6;
-  static const USCRIPT_SOGDIAN = 0x000000b7;
-  static const USCRIPT_OLD_SOGDIAN = 0x000000b8;
-  static const USCRIPT_ELYMAIC = 0x000000b9;
-  static const USCRIPT_NYIAKENG_PUACHUE_HMONG = 0x000000ba;
-  static const USCRIPT_NANDINAGARI = 0x000000bb;
-  static const USCRIPT_WANCHO = 0x000000bc;
+class ScriptStringOut_uOptionsFlags {
+  static const ETO_CLIPPED = 0x00000004;
+  static const ETO_OPAQUE = 0x00000002;
+  static const ETO_GLYPH_INDEX = 0x00000010;
+  static const ETO_IGNORELANGUAGE = 0x00001000;
+  static const ETO_NUMERICSLATIN = 0x00000800;
+  static const ETO_NUMERICSLOCAL = 0x00000400;
 }
 
 /// {@category Enum}
-class UScriptUsage {
-  static const USCRIPT_USAGE_NOT_ENCODED = 0x00000000;
-  static const USCRIPT_USAGE_UNKNOWN = 0x00000001;
-  static const USCRIPT_USAGE_EXCLUDED = 0x00000002;
-  static const USCRIPT_USAGE_LIMITED_USE = 0x00000003;
-  static const USCRIPT_USAGE_ASPIRATIONAL = 0x00000004;
-  static const USCRIPT_USAGE_RECOMMENDED = 0x00000005;
-}
-
-/// {@category Enum}
-class UCharIteratorOrigin {
-  static const UITER_START = 0x00000000;
-  static const UITER_CURRENT = 0x00000001;
-  static const UITER_LIMIT = 0x00000002;
-  static const UITER_ZERO = 0x00000003;
-  static const UITER_LENGTH = 0x00000004;
-}
-
-/// {@category Enum}
-class ULocDataLocaleType {
-  static const ULOC_ACTUAL_LOCALE = 0x00000000;
-  static const ULOC_VALID_LOCALE = 0x00000001;
-}
-
-/// {@category Enum}
-class ULayoutType {
-  static const ULOC_LAYOUT_LTR = 0x00000000;
-  static const ULOC_LAYOUT_RTL = 0x00000001;
-  static const ULOC_LAYOUT_TTB = 0x00000002;
-  static const ULOC_LAYOUT_BTT = 0x00000003;
-  static const ULOC_LAYOUT_UNKNOWN = 0x00000004;
+class TranslateCharsetInfo_dwFlags {
+  static const TCI_SRCCHARSET = 0x00000001;
+  static const TCI_SRCCODEPAGE = 0x00000002;
+  static const TCI_SRCFONTSIG = 0x00000003;
+  static const TCI_SRCLOCALE = 0x00001000;
 }
 
 /// {@category Enum}
@@ -594,308 +339,42 @@ class UAcceptResult {
 }
 
 /// {@category Enum}
-class UResType {
-  static const URES_NONE = 0xffffffff;
-  static const URES_STRING = 0x00000000;
-  static const URES_BINARY = 0x00000001;
-  static const URES_TABLE = 0x00000002;
-  static const URES_ALIAS = 0x00000003;
-  static const URES_INT = 0x00000007;
-  static const URES_ARRAY = 0x00000008;
-  static const URES_INT_VECTOR = 0x0000000e;
+class UBiDiDirection {
+  static const UBIDI_LTR = 0x00000000;
+  static const UBIDI_RTL = 0x00000001;
+  static const UBIDI_MIXED = 0x00000002;
+  static const UBIDI_NEUTRAL = 0x00000003;
 }
 
 /// {@category Enum}
-class UDisplayContextType {
-  static const UDISPCTX_TYPE_DIALECT_HANDLING = 0x00000000;
-  static const UDISPCTX_TYPE_CAPITALIZATION = 0x00000001;
-  static const UDISPCTX_TYPE_DISPLAY_LENGTH = 0x00000002;
-  static const UDISPCTX_TYPE_SUBSTITUTE_HANDLING = 0x00000003;
+class UBiDiMirroring {
+  static const UBIDI_MIRRORING_OFF = 0x00000000;
+  static const UBIDI_MIRRORING_ON = 0x00000001;
 }
 
 /// {@category Enum}
-class UDisplayContext {
-  static const UDISPCTX_STANDARD_NAMES = 0x00000000;
-  static const UDISPCTX_DIALECT_NAMES = 0x00000001;
-  static const UDISPCTX_CAPITALIZATION_NONE = 0x00000100;
-  static const UDISPCTX_CAPITALIZATION_FOR_MIDDLE_OF_SENTENCE = 0x00000101;
-  static const UDISPCTX_CAPITALIZATION_FOR_BEGINNING_OF_SENTENCE = 0x00000102;
-  static const UDISPCTX_CAPITALIZATION_FOR_UI_LIST_OR_MENU = 0x00000103;
-  static const UDISPCTX_CAPITALIZATION_FOR_STANDALONE = 0x00000104;
-  static const UDISPCTX_LENGTH_FULL = 0x00000200;
-  static const UDISPCTX_LENGTH_SHORT = 0x00000201;
-  static const UDISPCTX_SUBSTITUTE = 0x00000300;
-  static const UDISPCTX_NO_SUBSTITUTE = 0x00000301;
+class UBiDiOrder {
+  static const UBIDI_LOGICAL = 0x00000000;
+  static const UBIDI_VISUAL = 0x00000001;
 }
 
 /// {@category Enum}
-class UDialectHandling {
-  static const ULDN_STANDARD_NAMES = 0x00000000;
-  static const ULDN_DIALECT_NAMES = 0x00000001;
+class UBiDiReorderingMode {
+  static const UBIDI_REORDER_DEFAULT = 0x00000000;
+  static const UBIDI_REORDER_NUMBERS_SPECIAL = 0x00000001;
+  static const UBIDI_REORDER_GROUP_NUMBERS_WITH_R = 0x00000002;
+  static const UBIDI_REORDER_RUNS_ONLY = 0x00000003;
+  static const UBIDI_REORDER_INVERSE_NUMBERS_AS_L = 0x00000004;
+  static const UBIDI_REORDER_INVERSE_LIKE_DIRECT = 0x00000005;
+  static const UBIDI_REORDER_INVERSE_FOR_NUMBERS_SPECIAL = 0x00000006;
 }
 
 /// {@category Enum}
-class UCurrencyUsage {
-  static const UCURR_USAGE_STANDARD = 0x00000000;
-  static const UCURR_USAGE_CASH = 0x00000001;
-}
-
-/// {@category Enum}
-class UCurrNameStyle {
-  static const UCURR_SYMBOL_NAME = 0x00000000;
-  static const UCURR_LONG_NAME = 0x00000001;
-  static const UCURR_NARROW_SYMBOL_NAME = 0x00000002;
-}
-
-/// {@category Enum}
-class UCurrCurrencyType {
-  static const UCURR_ALL = 0x7fffffff;
-  static const UCURR_COMMON = 0x00000001;
-  static const UCURR_UNCOMMON = 0x00000002;
-  static const UCURR_DEPRECATED = 0x00000004;
-  static const UCURR_NON_DEPRECATED = 0x00000008;
-}
-
-/// {@category Enum}
-class UConverterCallbackReason {
-  static const UCNV_UNASSIGNED = 0x00000000;
-  static const UCNV_ILLEGAL = 0x00000001;
-  static const UCNV_IRREGULAR = 0x00000002;
-  static const UCNV_RESET = 0x00000003;
-  static const UCNV_CLOSE = 0x00000004;
-  static const UCNV_CLONE = 0x00000005;
-}
-
-/// {@category Enum}
-class UConverterType {
-  static const UCNV_UNSUPPORTED_CONVERTER = 0xffffffff;
-  static const UCNV_SBCS = 0x00000000;
-  static const UCNV_DBCS = 0x00000001;
-  static const UCNV_MBCS = 0x00000002;
-  static const UCNV_LATIN_1 = 0x00000003;
-  static const UCNV_UTF8 = 0x00000004;
-  static const UCNV_UTF16_BigEndian = 0x00000005;
-  static const UCNV_UTF16_LittleEndian = 0x00000006;
-  static const UCNV_UTF32_BigEndian = 0x00000007;
-  static const UCNV_UTF32_LittleEndian = 0x00000008;
-  static const UCNV_EBCDIC_STATEFUL = 0x00000009;
-  static const UCNV_ISO_2022 = 0x0000000a;
-  static const UCNV_LMBCS_1 = 0x0000000b;
-  static const UCNV_LMBCS_2 = 0x0000000c;
-  static const UCNV_LMBCS_3 = 0x0000000d;
-  static const UCNV_LMBCS_4 = 0x0000000e;
-  static const UCNV_LMBCS_5 = 0x0000000f;
-  static const UCNV_LMBCS_6 = 0x00000010;
-  static const UCNV_LMBCS_8 = 0x00000011;
-  static const UCNV_LMBCS_11 = 0x00000012;
-  static const UCNV_LMBCS_16 = 0x00000013;
-  static const UCNV_LMBCS_17 = 0x00000014;
-  static const UCNV_LMBCS_18 = 0x00000015;
-  static const UCNV_LMBCS_19 = 0x00000016;
-  static const UCNV_LMBCS_LAST = 0x00000016;
-  static const UCNV_HZ = 0x00000017;
-  static const UCNV_SCSU = 0x00000018;
-  static const UCNV_ISCII = 0x00000019;
-  static const UCNV_US_ASCII = 0x0000001a;
-  static const UCNV_UTF7 = 0x0000001b;
-  static const UCNV_BOCU1 = 0x0000001c;
-  static const UCNV_UTF16 = 0x0000001d;
-  static const UCNV_UTF32 = 0x0000001e;
-  static const UCNV_CESU8 = 0x0000001f;
-  static const UCNV_IMAP_MAILBOX = 0x00000020;
-  static const UCNV_COMPOUND_TEXT = 0x00000021;
-  static const UCNV_NUMBER_OF_SUPPORTED_CONVERTER_TYPES = 0x00000022;
-}
-
-/// {@category Enum}
-class UConverterPlatform {
-  static const UCNV_UNKNOWN = 0xffffffff;
-  static const UCNV_IBM = 0x00000000;
-}
-
-/// {@category Enum}
-class UConverterUnicodeSet {
-  static const UCNV_ROUNDTRIP_SET = 0x00000000;
-  static const UCNV_ROUNDTRIP_AND_FALLBACK_SET = 0x00000001;
-}
-
-/// {@category Enum}
-class UProperty {
-  static const UCHAR_ALPHABETIC = 0x00000000;
-  static const UCHAR_BINARY_START = 0x00000000;
-  static const UCHAR_ASCII_HEX_DIGIT = 0x00000001;
-  static const UCHAR_BIDI_CONTROL = 0x00000002;
-  static const UCHAR_BIDI_MIRRORED = 0x00000003;
-  static const UCHAR_DASH = 0x00000004;
-  static const UCHAR_DEFAULT_IGNORABLE_CODE_POINT = 0x00000005;
-  static const UCHAR_DEPRECATED = 0x00000006;
-  static const UCHAR_DIACRITIC = 0x00000007;
-  static const UCHAR_EXTENDER = 0x00000008;
-  static const UCHAR_FULL_COMPOSITION_EXCLUSION = 0x00000009;
-  static const UCHAR_GRAPHEME_BASE = 0x0000000a;
-  static const UCHAR_GRAPHEME_EXTEND = 0x0000000b;
-  static const UCHAR_GRAPHEME_LINK = 0x0000000c;
-  static const UCHAR_HEX_DIGIT = 0x0000000d;
-  static const UCHAR_HYPHEN = 0x0000000e;
-  static const UCHAR_ID_CONTINUE = 0x0000000f;
-  static const UCHAR_ID_START = 0x00000010;
-  static const UCHAR_IDEOGRAPHIC = 0x00000011;
-  static const UCHAR_IDS_BINARY_OPERATOR = 0x00000012;
-  static const UCHAR_IDS_TRINARY_OPERATOR = 0x00000013;
-  static const UCHAR_JOIN_CONTROL = 0x00000014;
-  static const UCHAR_LOGICAL_ORDER_EXCEPTION = 0x00000015;
-  static const UCHAR_LOWERCASE = 0x00000016;
-  static const UCHAR_MATH = 0x00000017;
-  static const UCHAR_NONCHARACTER_CODE_POINT = 0x00000018;
-  static const UCHAR_QUOTATION_MARK = 0x00000019;
-  static const UCHAR_RADICAL = 0x0000001a;
-  static const UCHAR_SOFT_DOTTED = 0x0000001b;
-  static const UCHAR_TERMINAL_PUNCTUATION = 0x0000001c;
-  static const UCHAR_UNIFIED_IDEOGRAPH = 0x0000001d;
-  static const UCHAR_UPPERCASE = 0x0000001e;
-  static const UCHAR_WHITE_SPACE = 0x0000001f;
-  static const UCHAR_XID_CONTINUE = 0x00000020;
-  static const UCHAR_XID_START = 0x00000021;
-  static const UCHAR_CASE_SENSITIVE = 0x00000022;
-  static const UCHAR_S_TERM = 0x00000023;
-  static const UCHAR_VARIATION_SELECTOR = 0x00000024;
-  static const UCHAR_NFD_INERT = 0x00000025;
-  static const UCHAR_NFKD_INERT = 0x00000026;
-  static const UCHAR_NFC_INERT = 0x00000027;
-  static const UCHAR_NFKC_INERT = 0x00000028;
-  static const UCHAR_SEGMENT_STARTER = 0x00000029;
-  static const UCHAR_PATTERN_SYNTAX = 0x0000002a;
-  static const UCHAR_PATTERN_WHITE_SPACE = 0x0000002b;
-  static const UCHAR_POSIX_ALNUM = 0x0000002c;
-  static const UCHAR_POSIX_BLANK = 0x0000002d;
-  static const UCHAR_POSIX_GRAPH = 0x0000002e;
-  static const UCHAR_POSIX_PRINT = 0x0000002f;
-  static const UCHAR_POSIX_XDIGIT = 0x00000030;
-  static const UCHAR_CASED = 0x00000031;
-  static const UCHAR_CASE_IGNORABLE = 0x00000032;
-  static const UCHAR_CHANGES_WHEN_LOWERCASED = 0x00000033;
-  static const UCHAR_CHANGES_WHEN_UPPERCASED = 0x00000034;
-  static const UCHAR_CHANGES_WHEN_TITLECASED = 0x00000035;
-  static const UCHAR_CHANGES_WHEN_CASEFOLDED = 0x00000036;
-  static const UCHAR_CHANGES_WHEN_CASEMAPPED = 0x00000037;
-  static const UCHAR_CHANGES_WHEN_NFKC_CASEFOLDED = 0x00000038;
-  static const UCHAR_EMOJI = 0x00000039;
-  static const UCHAR_EMOJI_PRESENTATION = 0x0000003a;
-  static const UCHAR_EMOJI_MODIFIER = 0x0000003b;
-  static const UCHAR_EMOJI_MODIFIER_BASE = 0x0000003c;
-  static const UCHAR_EMOJI_COMPONENT = 0x0000003d;
-  static const UCHAR_REGIONAL_INDICATOR = 0x0000003e;
-  static const UCHAR_PREPENDED_CONCATENATION_MARK = 0x0000003f;
-  static const UCHAR_EXTENDED_PICTOGRAPHIC = 0x00000040;
-  static const UCHAR_BIDI_CLASS = 0x00001000;
-  static const UCHAR_INT_START = 0x00001000;
-  static const UCHAR_BLOCK = 0x00001001;
-  static const UCHAR_CANONICAL_COMBINING_CLASS = 0x00001002;
-  static const UCHAR_DECOMPOSITION_TYPE = 0x00001003;
-  static const UCHAR_EAST_ASIAN_WIDTH = 0x00001004;
-  static const UCHAR_GENERAL_CATEGORY = 0x00001005;
-  static const UCHAR_JOINING_GROUP = 0x00001006;
-  static const UCHAR_JOINING_TYPE = 0x00001007;
-  static const UCHAR_LINE_BREAK = 0x00001008;
-  static const UCHAR_NUMERIC_TYPE = 0x00001009;
-  static const UCHAR_SCRIPT = 0x0000100a;
-  static const UCHAR_HANGUL_SYLLABLE_TYPE = 0x0000100b;
-  static const UCHAR_NFD_QUICK_CHECK = 0x0000100c;
-  static const UCHAR_NFKD_QUICK_CHECK = 0x0000100d;
-  static const UCHAR_NFC_QUICK_CHECK = 0x0000100e;
-  static const UCHAR_NFKC_QUICK_CHECK = 0x0000100f;
-  static const UCHAR_LEAD_CANONICAL_COMBINING_CLASS = 0x00001010;
-  static const UCHAR_TRAIL_CANONICAL_COMBINING_CLASS = 0x00001011;
-  static const UCHAR_GRAPHEME_CLUSTER_BREAK = 0x00001012;
-  static const UCHAR_SENTENCE_BREAK = 0x00001013;
-  static const UCHAR_WORD_BREAK = 0x00001014;
-  static const UCHAR_BIDI_PAIRED_BRACKET_TYPE = 0x00001015;
-  static const UCHAR_INDIC_POSITIONAL_CATEGORY = 0x00001016;
-  static const UCHAR_INDIC_SYLLABIC_CATEGORY = 0x00001017;
-  static const UCHAR_VERTICAL_ORIENTATION = 0x00001018;
-  static const UCHAR_GENERAL_CATEGORY_MASK = 0x00002000;
-  static const UCHAR_MASK_START = 0x00002000;
-  static const UCHAR_NUMERIC_VALUE = 0x00003000;
-  static const UCHAR_DOUBLE_START = 0x00003000;
-  static const UCHAR_AGE = 0x00004000;
-  static const UCHAR_STRING_START = 0x00004000;
-  static const UCHAR_BIDI_MIRRORING_GLYPH = 0x00004001;
-  static const UCHAR_CASE_FOLDING = 0x00004002;
-  static const UCHAR_LOWERCASE_MAPPING = 0x00004004;
-  static const UCHAR_NAME = 0x00004005;
-  static const UCHAR_SIMPLE_CASE_FOLDING = 0x00004006;
-  static const UCHAR_SIMPLE_LOWERCASE_MAPPING = 0x00004007;
-  static const UCHAR_SIMPLE_TITLECASE_MAPPING = 0x00004008;
-  static const UCHAR_SIMPLE_UPPERCASE_MAPPING = 0x00004009;
-  static const UCHAR_TITLECASE_MAPPING = 0x0000400a;
-  static const UCHAR_UPPERCASE_MAPPING = 0x0000400c;
-  static const UCHAR_BIDI_PAIRED_BRACKET = 0x0000400d;
-  static const UCHAR_SCRIPT_EXTENSIONS = 0x00007000;
-  static const UCHAR_OTHER_PROPERTY_START = 0x00007000;
-  static const UCHAR_INVALID_CODE = 0xffffffff;
-}
-
-/// {@category Enum}
-class UCharCategory {
-  static const U_UNASSIGNED = 0x00000000;
-  static const U_GENERAL_OTHER_TYPES = 0x00000000;
-  static const U_UPPERCASE_LETTER = 0x00000001;
-  static const U_LOWERCASE_LETTER = 0x00000002;
-  static const U_TITLECASE_LETTER = 0x00000003;
-  static const U_MODIFIER_LETTER = 0x00000004;
-  static const U_OTHER_LETTER = 0x00000005;
-  static const U_NON_SPACING_MARK = 0x00000006;
-  static const U_ENCLOSING_MARK = 0x00000007;
-  static const U_COMBINING_SPACING_MARK = 0x00000008;
-  static const U_DECIMAL_DIGIT_NUMBER = 0x00000009;
-  static const U_LETTER_NUMBER = 0x0000000a;
-  static const U_OTHER_NUMBER = 0x0000000b;
-  static const U_SPACE_SEPARATOR = 0x0000000c;
-  static const U_LINE_SEPARATOR = 0x0000000d;
-  static const U_PARAGRAPH_SEPARATOR = 0x0000000e;
-  static const U_CONTROL_CHAR = 0x0000000f;
-  static const U_FORMAT_CHAR = 0x00000010;
-  static const U_PRIVATE_USE_CHAR = 0x00000011;
-  static const U_SURROGATE = 0x00000012;
-  static const U_DASH_PUNCTUATION = 0x00000013;
-  static const U_START_PUNCTUATION = 0x00000014;
-  static const U_END_PUNCTUATION = 0x00000015;
-  static const U_CONNECTOR_PUNCTUATION = 0x00000016;
-  static const U_OTHER_PUNCTUATION = 0x00000017;
-  static const U_MATH_SYMBOL = 0x00000018;
-  static const U_CURRENCY_SYMBOL = 0x00000019;
-  static const U_MODIFIER_SYMBOL = 0x0000001a;
-  static const U_OTHER_SYMBOL = 0x0000001b;
-  static const U_INITIAL_PUNCTUATION = 0x0000001c;
-  static const U_FINAL_PUNCTUATION = 0x0000001d;
-  static const U_CHAR_CATEGORY_COUNT = 0x0000001e;
-}
-
-/// {@category Enum}
-class UCharDirection {
-  static const U_LEFT_TO_RIGHT = 0x00000000;
-  static const U_RIGHT_TO_LEFT = 0x00000001;
-  static const U_EUROPEAN_NUMBER = 0x00000002;
-  static const U_EUROPEAN_NUMBER_SEPARATOR = 0x00000003;
-  static const U_EUROPEAN_NUMBER_TERMINATOR = 0x00000004;
-  static const U_ARABIC_NUMBER = 0x00000005;
-  static const U_COMMON_NUMBER_SEPARATOR = 0x00000006;
-  static const U_BLOCK_SEPARATOR = 0x00000007;
-  static const U_SEGMENT_SEPARATOR = 0x00000008;
-  static const U_WHITE_SPACE_NEUTRAL = 0x00000009;
-  static const U_OTHER_NEUTRAL = 0x0000000a;
-  static const U_LEFT_TO_RIGHT_EMBEDDING = 0x0000000b;
-  static const U_LEFT_TO_RIGHT_OVERRIDE = 0x0000000c;
-  static const U_RIGHT_TO_LEFT_ARABIC = 0x0000000d;
-  static const U_RIGHT_TO_LEFT_EMBEDDING = 0x0000000e;
-  static const U_RIGHT_TO_LEFT_OVERRIDE = 0x0000000f;
-  static const U_POP_DIRECTIONAL_FORMAT = 0x00000010;
-  static const U_DIR_NON_SPACING_MARK = 0x00000011;
-  static const U_BOUNDARY_NEUTRAL = 0x00000012;
-  static const U_FIRST_STRONG_ISOLATE = 0x00000013;
-  static const U_LEFT_TO_RIGHT_ISOLATE = 0x00000014;
-  static const U_RIGHT_TO_LEFT_ISOLATE = 0x00000015;
-  static const U_POP_DIRECTIONAL_ISOLATE = 0x00000016;
+class UBiDiReorderingOption {
+  static const UBIDI_OPTION_DEFAULT = 0x00000000;
+  static const UBIDI_OPTION_INSERT_MARKS = 0x00000001;
+  static const UBIDI_OPTION_REMOVE_CONTROLS = 0x00000002;
+  static const UBIDI_OPTION_STREAMING = 0x00000004;
 }
 
 /// {@category Enum}
@@ -1214,13 +693,195 @@ class UBlockCode {
 }
 
 /// {@category Enum}
-class UEastAsianWidth {
-  static const U_EA_NEUTRAL = 0x00000000;
-  static const U_EA_AMBIGUOUS = 0x00000001;
-  static const U_EA_HALFWIDTH = 0x00000002;
-  static const U_EA_FULLWIDTH = 0x00000003;
-  static const U_EA_NARROW = 0x00000004;
-  static const U_EA_WIDE = 0x00000005;
+class UBreakIteratorType {
+  static const UBRK_CHARACTER = 0x00000000;
+  static const UBRK_WORD = 0x00000001;
+  static const UBRK_LINE = 0x00000002;
+  static const UBRK_SENTENCE = 0x00000003;
+}
+
+/// {@category Enum}
+class UCalendarAMPMs {
+  static const UCAL_AM = 0x00000000;
+  static const UCAL_PM = 0x00000001;
+}
+
+/// {@category Enum}
+class UCalendarAttribute {
+  static const UCAL_LENIENT = 0x00000000;
+  static const UCAL_FIRST_DAY_OF_WEEK = 0x00000001;
+  static const UCAL_MINIMAL_DAYS_IN_FIRST_WEEK = 0x00000002;
+  static const UCAL_REPEATED_WALL_TIME = 0x00000003;
+  static const UCAL_SKIPPED_WALL_TIME = 0x00000004;
+}
+
+/// {@category Enum}
+class UCalendarDateFields {
+  static const UCAL_ERA = 0x00000000;
+  static const UCAL_YEAR = 0x00000001;
+  static const UCAL_MONTH = 0x00000002;
+  static const UCAL_WEEK_OF_YEAR = 0x00000003;
+  static const UCAL_WEEK_OF_MONTH = 0x00000004;
+  static const UCAL_DATE = 0x00000005;
+  static const UCAL_DAY_OF_YEAR = 0x00000006;
+  static const UCAL_DAY_OF_WEEK = 0x00000007;
+  static const UCAL_DAY_OF_WEEK_IN_MONTH = 0x00000008;
+  static const UCAL_AM_PM = 0x00000009;
+  static const UCAL_HOUR = 0x0000000a;
+  static const UCAL_HOUR_OF_DAY = 0x0000000b;
+  static const UCAL_MINUTE = 0x0000000c;
+  static const UCAL_SECOND = 0x0000000d;
+  static const UCAL_MILLISECOND = 0x0000000e;
+  static const UCAL_ZONE_OFFSET = 0x0000000f;
+  static const UCAL_DST_OFFSET = 0x00000010;
+  static const UCAL_YEAR_WOY = 0x00000011;
+  static const UCAL_DOW_LOCAL = 0x00000012;
+  static const UCAL_EXTENDED_YEAR = 0x00000013;
+  static const UCAL_JULIAN_DAY = 0x00000014;
+  static const UCAL_MILLISECONDS_IN_DAY = 0x00000015;
+  static const UCAL_IS_LEAP_MONTH = 0x00000016;
+  static const UCAL_FIELD_COUNT = 0x00000017;
+  static const UCAL_DAY_OF_MONTH = 0x00000005;
+}
+
+/// {@category Enum}
+class UCalendarDaysOfWeek {
+  static const UCAL_SUNDAY = 0x00000001;
+  static const UCAL_MONDAY = 0x00000002;
+  static const UCAL_TUESDAY = 0x00000003;
+  static const UCAL_WEDNESDAY = 0x00000004;
+  static const UCAL_THURSDAY = 0x00000005;
+  static const UCAL_FRIDAY = 0x00000006;
+  static const UCAL_SATURDAY = 0x00000007;
+}
+
+/// {@category Enum}
+class UCalendarDisplayNameType {
+  static const UCAL_STANDARD = 0x00000000;
+  static const UCAL_SHORT_STANDARD = 0x00000001;
+  static const UCAL_DST = 0x00000002;
+  static const UCAL_SHORT_DST = 0x00000003;
+}
+
+/// {@category Enum}
+class UCalendarLimitType {
+  static const UCAL_MINIMUM = 0x00000000;
+  static const UCAL_MAXIMUM = 0x00000001;
+  static const UCAL_GREATEST_MINIMUM = 0x00000002;
+  static const UCAL_LEAST_MAXIMUM = 0x00000003;
+  static const UCAL_ACTUAL_MINIMUM = 0x00000004;
+  static const UCAL_ACTUAL_MAXIMUM = 0x00000005;
+}
+
+/// {@category Enum}
+class UCalendarMonths {
+  static const UCAL_JANUARY = 0x00000000;
+  static const UCAL_FEBRUARY = 0x00000001;
+  static const UCAL_MARCH = 0x00000002;
+  static const UCAL_APRIL = 0x00000003;
+  static const UCAL_MAY = 0x00000004;
+  static const UCAL_JUNE = 0x00000005;
+  static const UCAL_JULY = 0x00000006;
+  static const UCAL_AUGUST = 0x00000007;
+  static const UCAL_SEPTEMBER = 0x00000008;
+  static const UCAL_OCTOBER = 0x00000009;
+  static const UCAL_NOVEMBER = 0x0000000a;
+  static const UCAL_DECEMBER = 0x0000000b;
+  static const UCAL_UNDECIMBER = 0x0000000c;
+}
+
+/// {@category Enum}
+class UCalendarType {
+  static const UCAL_TRADITIONAL = 0x00000000;
+  static const UCAL_DEFAULT = 0x00000000;
+  static const UCAL_GREGORIAN = 0x00000001;
+}
+
+/// {@category Enum}
+class UCalendarWallTimeOption {
+  static const UCAL_WALLTIME_LAST = 0x00000000;
+  static const UCAL_WALLTIME_FIRST = 0x00000001;
+  static const UCAL_WALLTIME_NEXT_VALID = 0x00000002;
+}
+
+/// {@category Enum}
+class UCalendarWeekdayType {
+  static const UCAL_WEEKDAY = 0x00000000;
+  static const UCAL_WEEKEND = 0x00000001;
+  static const UCAL_WEEKEND_ONSET = 0x00000002;
+  static const UCAL_WEEKEND_CEASE = 0x00000003;
+}
+
+/// {@category Enum}
+class UCharCategory {
+  static const U_UNASSIGNED = 0x00000000;
+  static const U_GENERAL_OTHER_TYPES = 0x00000000;
+  static const U_UPPERCASE_LETTER = 0x00000001;
+  static const U_LOWERCASE_LETTER = 0x00000002;
+  static const U_TITLECASE_LETTER = 0x00000003;
+  static const U_MODIFIER_LETTER = 0x00000004;
+  static const U_OTHER_LETTER = 0x00000005;
+  static const U_NON_SPACING_MARK = 0x00000006;
+  static const U_ENCLOSING_MARK = 0x00000007;
+  static const U_COMBINING_SPACING_MARK = 0x00000008;
+  static const U_DECIMAL_DIGIT_NUMBER = 0x00000009;
+  static const U_LETTER_NUMBER = 0x0000000a;
+  static const U_OTHER_NUMBER = 0x0000000b;
+  static const U_SPACE_SEPARATOR = 0x0000000c;
+  static const U_LINE_SEPARATOR = 0x0000000d;
+  static const U_PARAGRAPH_SEPARATOR = 0x0000000e;
+  static const U_CONTROL_CHAR = 0x0000000f;
+  static const U_FORMAT_CHAR = 0x00000010;
+  static const U_PRIVATE_USE_CHAR = 0x00000011;
+  static const U_SURROGATE = 0x00000012;
+  static const U_DASH_PUNCTUATION = 0x00000013;
+  static const U_START_PUNCTUATION = 0x00000014;
+  static const U_END_PUNCTUATION = 0x00000015;
+  static const U_CONNECTOR_PUNCTUATION = 0x00000016;
+  static const U_OTHER_PUNCTUATION = 0x00000017;
+  static const U_MATH_SYMBOL = 0x00000018;
+  static const U_CURRENCY_SYMBOL = 0x00000019;
+  static const U_MODIFIER_SYMBOL = 0x0000001a;
+  static const U_OTHER_SYMBOL = 0x0000001b;
+  static const U_INITIAL_PUNCTUATION = 0x0000001c;
+  static const U_FINAL_PUNCTUATION = 0x0000001d;
+  static const U_CHAR_CATEGORY_COUNT = 0x0000001e;
+}
+
+/// {@category Enum}
+class UCharDirection {
+  static const U_LEFT_TO_RIGHT = 0x00000000;
+  static const U_RIGHT_TO_LEFT = 0x00000001;
+  static const U_EUROPEAN_NUMBER = 0x00000002;
+  static const U_EUROPEAN_NUMBER_SEPARATOR = 0x00000003;
+  static const U_EUROPEAN_NUMBER_TERMINATOR = 0x00000004;
+  static const U_ARABIC_NUMBER = 0x00000005;
+  static const U_COMMON_NUMBER_SEPARATOR = 0x00000006;
+  static const U_BLOCK_SEPARATOR = 0x00000007;
+  static const U_SEGMENT_SEPARATOR = 0x00000008;
+  static const U_WHITE_SPACE_NEUTRAL = 0x00000009;
+  static const U_OTHER_NEUTRAL = 0x0000000a;
+  static const U_LEFT_TO_RIGHT_EMBEDDING = 0x0000000b;
+  static const U_LEFT_TO_RIGHT_OVERRIDE = 0x0000000c;
+  static const U_RIGHT_TO_LEFT_ARABIC = 0x0000000d;
+  static const U_RIGHT_TO_LEFT_EMBEDDING = 0x0000000e;
+  static const U_RIGHT_TO_LEFT_OVERRIDE = 0x0000000f;
+  static const U_POP_DIRECTIONAL_FORMAT = 0x00000010;
+  static const U_DIR_NON_SPACING_MARK = 0x00000011;
+  static const U_BOUNDARY_NEUTRAL = 0x00000012;
+  static const U_FIRST_STRONG_ISOLATE = 0x00000013;
+  static const U_LEFT_TO_RIGHT_ISOLATE = 0x00000014;
+  static const U_RIGHT_TO_LEFT_ISOLATE = 0x00000015;
+  static const U_POP_DIRECTIONAL_ISOLATE = 0x00000016;
+}
+
+/// {@category Enum}
+class UCharIteratorOrigin {
+  static const UITER_START = 0x00000000;
+  static const UITER_CURRENT = 0x00000001;
+  static const UITER_LIMIT = 0x00000002;
+  static const UITER_ZERO = 0x00000003;
+  static const UITER_LENGTH = 0x00000004;
 }
 
 /// {@category Enum}
@@ -1231,9 +892,321 @@ class UCharNameChoice {
 }
 
 /// {@category Enum}
-class UPropertyNameChoice {
-  static const U_SHORT_PROPERTY_NAME = 0x00000000;
-  static const U_LONG_PROPERTY_NAME = 0x00000001;
+class UColAttribute {
+  static const UCOL_FRENCH_COLLATION = 0x00000000;
+  static const UCOL_ALTERNATE_HANDLING = 0x00000001;
+  static const UCOL_CASE_FIRST = 0x00000002;
+  static const UCOL_CASE_LEVEL = 0x00000003;
+  static const UCOL_NORMALIZATION_MODE = 0x00000004;
+  static const UCOL_DECOMPOSITION_MODE = 0x00000004;
+  static const UCOL_STRENGTH = 0x00000005;
+  static const UCOL_NUMERIC_COLLATION = 0x00000007;
+  static const UCOL_ATTRIBUTE_COUNT = 0x00000008;
+}
+
+/// {@category Enum}
+class UColAttributeValue {
+  static const UCOL_DEFAULT = 0xffffffff;
+  static const UCOL_PRIMARY = 0x00000000;
+  static const UCOL_SECONDARY = 0x00000001;
+  static const UCOL_TERTIARY = 0x00000002;
+  static const UCOL_DEFAULT_STRENGTH = 0x00000002;
+  static const UCOL_CE_STRENGTH_LIMIT = 0x00000003;
+  static const UCOL_QUATERNARY = 0x00000003;
+  static const UCOL_IDENTICAL = 0x0000000f;
+  static const UCOL_STRENGTH_LIMIT = 0x00000010;
+  static const UCOL_OFF = 0x00000010;
+  static const UCOL_ON = 0x00000011;
+  static const UCOL_SHIFTED = 0x00000014;
+  static const UCOL_NON_IGNORABLE = 0x00000015;
+  static const UCOL_LOWER_FIRST = 0x00000018;
+  static const UCOL_UPPER_FIRST = 0x00000019;
+}
+
+/// {@category Enum}
+class UColBoundMode {
+  static const UCOL_BOUND_LOWER = 0x00000000;
+  static const UCOL_BOUND_UPPER = 0x00000001;
+  static const UCOL_BOUND_UPPER_LONG = 0x00000002;
+}
+
+/// {@category Enum}
+class UColReorderCode {
+  static const UCOL_REORDER_CODE_DEFAULT = 0xffffffff;
+  static const UCOL_REORDER_CODE_NONE = 0x00000067;
+  static const UCOL_REORDER_CODE_OTHERS = 0x00000067;
+  static const UCOL_REORDER_CODE_SPACE = 0x00001000;
+  static const UCOL_REORDER_CODE_FIRST = 0x00001000;
+  static const UCOL_REORDER_CODE_PUNCTUATION = 0x00001001;
+  static const UCOL_REORDER_CODE_SYMBOL = 0x00001002;
+  static const UCOL_REORDER_CODE_CURRENCY = 0x00001003;
+  static const UCOL_REORDER_CODE_DIGIT = 0x00001004;
+}
+
+/// {@category Enum}
+class UColRuleOption {
+  static const UCOL_TAILORING_ONLY = 0x00000000;
+  static const UCOL_FULL_RULES = 0x00000001;
+}
+
+/// {@category Enum}
+class UCollationResult {
+  static const UCOL_EQUAL = 0x00000000;
+  static const UCOL_GREATER = 0x00000001;
+  static const UCOL_LESS = 0xffffffff;
+}
+
+/// {@category Enum}
+class UConverterCallbackReason {
+  static const UCNV_UNASSIGNED = 0x00000000;
+  static const UCNV_ILLEGAL = 0x00000001;
+  static const UCNV_IRREGULAR = 0x00000002;
+  static const UCNV_RESET = 0x00000003;
+  static const UCNV_CLOSE = 0x00000004;
+  static const UCNV_CLONE = 0x00000005;
+}
+
+/// {@category Enum}
+class UConverterPlatform {
+  static const UCNV_UNKNOWN = 0xffffffff;
+  static const UCNV_IBM = 0x00000000;
+}
+
+/// {@category Enum}
+class UConverterType {
+  static const UCNV_UNSUPPORTED_CONVERTER = 0xffffffff;
+  static const UCNV_SBCS = 0x00000000;
+  static const UCNV_DBCS = 0x00000001;
+  static const UCNV_MBCS = 0x00000002;
+  static const UCNV_LATIN_1 = 0x00000003;
+  static const UCNV_UTF8 = 0x00000004;
+  static const UCNV_UTF16_BigEndian = 0x00000005;
+  static const UCNV_UTF16_LittleEndian = 0x00000006;
+  static const UCNV_UTF32_BigEndian = 0x00000007;
+  static const UCNV_UTF32_LittleEndian = 0x00000008;
+  static const UCNV_EBCDIC_STATEFUL = 0x00000009;
+  static const UCNV_ISO_2022 = 0x0000000a;
+  static const UCNV_LMBCS_1 = 0x0000000b;
+  static const UCNV_LMBCS_2 = 0x0000000c;
+  static const UCNV_LMBCS_3 = 0x0000000d;
+  static const UCNV_LMBCS_4 = 0x0000000e;
+  static const UCNV_LMBCS_5 = 0x0000000f;
+  static const UCNV_LMBCS_6 = 0x00000010;
+  static const UCNV_LMBCS_8 = 0x00000011;
+  static const UCNV_LMBCS_11 = 0x00000012;
+  static const UCNV_LMBCS_16 = 0x00000013;
+  static const UCNV_LMBCS_17 = 0x00000014;
+  static const UCNV_LMBCS_18 = 0x00000015;
+  static const UCNV_LMBCS_19 = 0x00000016;
+  static const UCNV_LMBCS_LAST = 0x00000016;
+  static const UCNV_HZ = 0x00000017;
+  static const UCNV_SCSU = 0x00000018;
+  static const UCNV_ISCII = 0x00000019;
+  static const UCNV_US_ASCII = 0x0000001a;
+  static const UCNV_UTF7 = 0x0000001b;
+  static const UCNV_BOCU1 = 0x0000001c;
+  static const UCNV_UTF16 = 0x0000001d;
+  static const UCNV_UTF32 = 0x0000001e;
+  static const UCNV_CESU8 = 0x0000001f;
+  static const UCNV_IMAP_MAILBOX = 0x00000020;
+  static const UCNV_COMPOUND_TEXT = 0x00000021;
+  static const UCNV_NUMBER_OF_SUPPORTED_CONVERTER_TYPES = 0x00000022;
+}
+
+/// {@category Enum}
+class UConverterUnicodeSet {
+  static const UCNV_ROUNDTRIP_SET = 0x00000000;
+  static const UCNV_ROUNDTRIP_AND_FALLBACK_SET = 0x00000001;
+}
+
+/// {@category Enum}
+class UCurrCurrencyType {
+  static const UCURR_ALL = 0x7fffffff;
+  static const UCURR_COMMON = 0x00000001;
+  static const UCURR_UNCOMMON = 0x00000002;
+  static const UCURR_DEPRECATED = 0x00000004;
+  static const UCURR_NON_DEPRECATED = 0x00000008;
+}
+
+/// {@category Enum}
+class UCurrNameStyle {
+  static const UCURR_SYMBOL_NAME = 0x00000000;
+  static const UCURR_LONG_NAME = 0x00000001;
+  static const UCURR_NARROW_SYMBOL_NAME = 0x00000002;
+}
+
+/// {@category Enum}
+class UCurrencySpacing {
+  static const UNUM_CURRENCY_MATCH = 0x00000000;
+  static const UNUM_CURRENCY_SURROUNDING_MATCH = 0x00000001;
+  static const UNUM_CURRENCY_INSERT = 0x00000002;
+  static const UNUM_CURRENCY_SPACING_COUNT = 0x00000003;
+}
+
+/// {@category Enum}
+class UCurrencyUsage {
+  static const UCURR_USAGE_STANDARD = 0x00000000;
+  static const UCURR_USAGE_CASH = 0x00000001;
+}
+
+/// {@category Enum}
+class UDateFormatBooleanAttribute {
+  static const UDAT_PARSE_ALLOW_WHITESPACE = 0x00000000;
+  static const UDAT_PARSE_ALLOW_NUMERIC = 0x00000001;
+  static const UDAT_PARSE_PARTIAL_LITERAL_MATCH = 0x00000002;
+  static const UDAT_PARSE_MULTIPLE_PATTERNS_FOR_MATCH = 0x00000003;
+  static const UDAT_BOOLEAN_ATTRIBUTE_COUNT = 0x00000004;
+}
+
+/// {@category Enum}
+class UDateFormatField {
+  static const UDAT_ERA_FIELD = 0x00000000;
+  static const UDAT_YEAR_FIELD = 0x00000001;
+  static const UDAT_MONTH_FIELD = 0x00000002;
+  static const UDAT_DATE_FIELD = 0x00000003;
+  static const UDAT_HOUR_OF_DAY1_FIELD = 0x00000004;
+  static const UDAT_HOUR_OF_DAY0_FIELD = 0x00000005;
+  static const UDAT_MINUTE_FIELD = 0x00000006;
+  static const UDAT_SECOND_FIELD = 0x00000007;
+  static const UDAT_FRACTIONAL_SECOND_FIELD = 0x00000008;
+  static const UDAT_DAY_OF_WEEK_FIELD = 0x00000009;
+  static const UDAT_DAY_OF_YEAR_FIELD = 0x0000000a;
+  static const UDAT_DAY_OF_WEEK_IN_MONTH_FIELD = 0x0000000b;
+  static const UDAT_WEEK_OF_YEAR_FIELD = 0x0000000c;
+  static const UDAT_WEEK_OF_MONTH_FIELD = 0x0000000d;
+  static const UDAT_AM_PM_FIELD = 0x0000000e;
+  static const UDAT_HOUR1_FIELD = 0x0000000f;
+  static const UDAT_HOUR0_FIELD = 0x00000010;
+  static const UDAT_TIMEZONE_FIELD = 0x00000011;
+  static const UDAT_YEAR_WOY_FIELD = 0x00000012;
+  static const UDAT_DOW_LOCAL_FIELD = 0x00000013;
+  static const UDAT_EXTENDED_YEAR_FIELD = 0x00000014;
+  static const UDAT_JULIAN_DAY_FIELD = 0x00000015;
+  static const UDAT_MILLISECONDS_IN_DAY_FIELD = 0x00000016;
+  static const UDAT_TIMEZONE_RFC_FIELD = 0x00000017;
+  static const UDAT_TIMEZONE_GENERIC_FIELD = 0x00000018;
+  static const UDAT_STANDALONE_DAY_FIELD = 0x00000019;
+  static const UDAT_STANDALONE_MONTH_FIELD = 0x0000001a;
+  static const UDAT_QUARTER_FIELD = 0x0000001b;
+  static const UDAT_STANDALONE_QUARTER_FIELD = 0x0000001c;
+  static const UDAT_TIMEZONE_SPECIAL_FIELD = 0x0000001d;
+  static const UDAT_YEAR_NAME_FIELD = 0x0000001e;
+  static const UDAT_TIMEZONE_LOCALIZED_GMT_OFFSET_FIELD = 0x0000001f;
+  static const UDAT_TIMEZONE_ISO_FIELD = 0x00000020;
+  static const UDAT_TIMEZONE_ISO_LOCAL_FIELD = 0x00000021;
+  static const UDAT_AM_PM_MIDNIGHT_NOON_FIELD = 0x00000023;
+  static const UDAT_FLEXIBLE_DAY_PERIOD_FIELD = 0x00000024;
+}
+
+/// {@category Enum}
+class UDateFormatStyle {
+  static const UDAT_FULL = 0x00000000;
+  static const UDAT_LONG = 0x00000001;
+  static const UDAT_MEDIUM = 0x00000002;
+  static const UDAT_SHORT = 0x00000003;
+  static const UDAT_DEFAULT = 0x00000002;
+  static const UDAT_RELATIVE = 0x00000080;
+  static const UDAT_FULL_RELATIVE = 0x00000080;
+  static const UDAT_LONG_RELATIVE = 0x00000081;
+  static const UDAT_MEDIUM_RELATIVE = 0x00000082;
+  static const UDAT_SHORT_RELATIVE = 0x00000083;
+  static const UDAT_NONE = 0xffffffff;
+  static const UDAT_PATTERN = 0xfffffffe;
+}
+
+/// {@category Enum}
+class UDateFormatSymbolType {
+  static const UDAT_ERAS = 0x00000000;
+  static const UDAT_MONTHS = 0x00000001;
+  static const UDAT_SHORT_MONTHS = 0x00000002;
+  static const UDAT_WEEKDAYS = 0x00000003;
+  static const UDAT_SHORT_WEEKDAYS = 0x00000004;
+  static const UDAT_AM_PMS = 0x00000005;
+  static const UDAT_LOCALIZED_CHARS = 0x00000006;
+  static const UDAT_ERA_NAMES = 0x00000007;
+  static const UDAT_NARROW_MONTHS = 0x00000008;
+  static const UDAT_NARROW_WEEKDAYS = 0x00000009;
+  static const UDAT_STANDALONE_MONTHS = 0x0000000a;
+  static const UDAT_STANDALONE_SHORT_MONTHS = 0x0000000b;
+  static const UDAT_STANDALONE_NARROW_MONTHS = 0x0000000c;
+  static const UDAT_STANDALONE_WEEKDAYS = 0x0000000d;
+  static const UDAT_STANDALONE_SHORT_WEEKDAYS = 0x0000000e;
+  static const UDAT_STANDALONE_NARROW_WEEKDAYS = 0x0000000f;
+  static const UDAT_QUARTERS = 0x00000010;
+  static const UDAT_SHORT_QUARTERS = 0x00000011;
+  static const UDAT_STANDALONE_QUARTERS = 0x00000012;
+  static const UDAT_STANDALONE_SHORT_QUARTERS = 0x00000013;
+  static const UDAT_SHORTER_WEEKDAYS = 0x00000014;
+  static const UDAT_STANDALONE_SHORTER_WEEKDAYS = 0x00000015;
+  static const UDAT_CYCLIC_YEARS_WIDE = 0x00000016;
+  static const UDAT_CYCLIC_YEARS_ABBREVIATED = 0x00000017;
+  static const UDAT_CYCLIC_YEARS_NARROW = 0x00000018;
+  static const UDAT_ZODIAC_NAMES_WIDE = 0x00000019;
+  static const UDAT_ZODIAC_NAMES_ABBREVIATED = 0x0000001a;
+  static const UDAT_ZODIAC_NAMES_NARROW = 0x0000001b;
+}
+
+/// {@category Enum}
+class UDateRelativeDateTimeFormatterStyle {
+  static const UDAT_STYLE_LONG = 0x00000000;
+  static const UDAT_STYLE_SHORT = 0x00000001;
+  static const UDAT_STYLE_NARROW = 0x00000002;
+}
+
+/// {@category Enum}
+class UDateTimePGDisplayWidth {
+  static const UDATPG_WIDE = 0x00000000;
+  static const UDATPG_ABBREVIATED = 0x00000001;
+  static const UDATPG_NARROW = 0x00000002;
+}
+
+/// {@category Enum}
+class UDateTimePatternConflict {
+  static const UDATPG_NO_CONFLICT = 0x00000000;
+  static const UDATPG_BASE_CONFLICT = 0x00000001;
+  static const UDATPG_CONFLICT = 0x00000002;
+}
+
+/// {@category Enum}
+class UDateTimePatternField {
+  static const UDATPG_ERA_FIELD = 0x00000000;
+  static const UDATPG_YEAR_FIELD = 0x00000001;
+  static const UDATPG_QUARTER_FIELD = 0x00000002;
+  static const UDATPG_MONTH_FIELD = 0x00000003;
+  static const UDATPG_WEEK_OF_YEAR_FIELD = 0x00000004;
+  static const UDATPG_WEEK_OF_MONTH_FIELD = 0x00000005;
+  static const UDATPG_WEEKDAY_FIELD = 0x00000006;
+  static const UDATPG_DAY_OF_YEAR_FIELD = 0x00000007;
+  static const UDATPG_DAY_OF_WEEK_IN_MONTH_FIELD = 0x00000008;
+  static const UDATPG_DAY_FIELD = 0x00000009;
+  static const UDATPG_DAYPERIOD_FIELD = 0x0000000a;
+  static const UDATPG_HOUR_FIELD = 0x0000000b;
+  static const UDATPG_MINUTE_FIELD = 0x0000000c;
+  static const UDATPG_SECOND_FIELD = 0x0000000d;
+  static const UDATPG_FRACTIONAL_SECOND_FIELD = 0x0000000e;
+  static const UDATPG_ZONE_FIELD = 0x0000000f;
+  static const UDATPG_FIELD_COUNT = 0x00000010;
+}
+
+/// {@category Enum}
+class UDateTimePatternMatchOptions {
+  static const UDATPG_MATCH_NO_OPTIONS = 0x00000000;
+  static const UDATPG_MATCH_HOUR_FIELD_LENGTH = 0x00000800;
+  static const UDATPG_MATCH_ALL_FIELDS_LENGTH = 0x0000ffff;
+}
+
+/// {@category Enum}
+class UDateTimeScale {
+  static const UDTS_JAVA_TIME = 0x00000000;
+  static const UDTS_UNIX_TIME = 0x00000001;
+  static const UDTS_ICU4C_TIME = 0x00000002;
+  static const UDTS_WINDOWS_FILE_TIME = 0x00000003;
+  static const UDTS_DOTNET_DATE_TIME = 0x00000004;
+  static const UDTS_MAC_OLD_TIME = 0x00000005;
+  static const UDTS_MAC_TIME = 0x00000006;
+  static const UDTS_EXCEL_TIME = 0x00000007;
+  static const UDTS_DB2_TIME = 0x00000008;
+  static const UDTS_UNIX_MICROSECONDS_TIME = 0x00000009;
 }
 
 /// {@category Enum}
@@ -1259,13 +1232,307 @@ class UDecompositionType {
 }
 
 /// {@category Enum}
-class UJoiningType {
-  static const U_JT_NON_JOINING = 0x00000000;
-  static const U_JT_JOIN_CAUSING = 0x00000001;
-  static const U_JT_DUAL_JOINING = 0x00000002;
-  static const U_JT_LEFT_JOINING = 0x00000003;
-  static const U_JT_RIGHT_JOINING = 0x00000004;
-  static const U_JT_TRANSPARENT = 0x00000005;
+class UDialectHandling {
+  static const ULDN_STANDARD_NAMES = 0x00000000;
+  static const ULDN_DIALECT_NAMES = 0x00000001;
+}
+
+/// {@category Enum}
+class UDisplayContext {
+  static const UDISPCTX_STANDARD_NAMES = 0x00000000;
+  static const UDISPCTX_DIALECT_NAMES = 0x00000001;
+  static const UDISPCTX_CAPITALIZATION_NONE = 0x00000100;
+  static const UDISPCTX_CAPITALIZATION_FOR_MIDDLE_OF_SENTENCE = 0x00000101;
+  static const UDISPCTX_CAPITALIZATION_FOR_BEGINNING_OF_SENTENCE = 0x00000102;
+  static const UDISPCTX_CAPITALIZATION_FOR_UI_LIST_OR_MENU = 0x00000103;
+  static const UDISPCTX_CAPITALIZATION_FOR_STANDALONE = 0x00000104;
+  static const UDISPCTX_LENGTH_FULL = 0x00000200;
+  static const UDISPCTX_LENGTH_SHORT = 0x00000201;
+  static const UDISPCTX_SUBSTITUTE = 0x00000300;
+  static const UDISPCTX_NO_SUBSTITUTE = 0x00000301;
+}
+
+/// {@category Enum}
+class UDisplayContextType {
+  static const UDISPCTX_TYPE_DIALECT_HANDLING = 0x00000000;
+  static const UDISPCTX_TYPE_CAPITALIZATION = 0x00000001;
+  static const UDISPCTX_TYPE_DISPLAY_LENGTH = 0x00000002;
+  static const UDISPCTX_TYPE_SUBSTITUTE_HANDLING = 0x00000003;
+}
+
+/// {@category Enum}
+class UEastAsianWidth {
+  static const U_EA_NEUTRAL = 0x00000000;
+  static const U_EA_AMBIGUOUS = 0x00000001;
+  static const U_EA_HALFWIDTH = 0x00000002;
+  static const U_EA_FULLWIDTH = 0x00000003;
+  static const U_EA_NARROW = 0x00000004;
+  static const U_EA_WIDE = 0x00000005;
+}
+
+/// {@category Enum}
+class UErrorCode {
+  static const U_USING_FALLBACK_WARNING = 0xffffff80;
+  static const U_ERROR_WARNING_START = 0xffffff80;
+  static const U_USING_DEFAULT_WARNING = 0xffffff81;
+  static const U_SAFECLONE_ALLOCATED_WARNING = 0xffffff82;
+  static const U_STATE_OLD_WARNING = 0xffffff83;
+  static const U_STRING_NOT_TERMINATED_WARNING = 0xffffff84;
+  static const U_SORT_KEY_TOO_SHORT_WARNING = 0xffffff85;
+  static const U_AMBIGUOUS_ALIAS_WARNING = 0xffffff86;
+  static const U_DIFFERENT_UCA_VERSION = 0xffffff87;
+  static const U_PLUGIN_CHANGED_LEVEL_WARNING = 0xffffff88;
+  static const U_ZERO_ERROR = 0x00000000;
+  static const U_ILLEGAL_ARGUMENT_ERROR = 0x00000001;
+  static const U_MISSING_RESOURCE_ERROR = 0x00000002;
+  static const U_INVALID_FORMAT_ERROR = 0x00000003;
+  static const U_FILE_ACCESS_ERROR = 0x00000004;
+  static const U_INTERNAL_PROGRAM_ERROR = 0x00000005;
+  static const U_MESSAGE_PARSE_ERROR = 0x00000006;
+  static const U_MEMORY_ALLOCATION_ERROR = 0x00000007;
+  static const U_INDEX_OUTOFBOUNDS_ERROR = 0x00000008;
+  static const U_PARSE_ERROR = 0x00000009;
+  static const U_INVALID_CHAR_FOUND = 0x0000000a;
+  static const U_TRUNCATED_CHAR_FOUND = 0x0000000b;
+  static const U_ILLEGAL_CHAR_FOUND = 0x0000000c;
+  static const U_INVALID_TABLE_FORMAT = 0x0000000d;
+  static const U_INVALID_TABLE_FILE = 0x0000000e;
+  static const U_BUFFER_OVERFLOW_ERROR = 0x0000000f;
+  static const U_UNSUPPORTED_ERROR = 0x00000010;
+  static const U_RESOURCE_TYPE_MISMATCH = 0x00000011;
+  static const U_ILLEGAL_ESCAPE_SEQUENCE = 0x00000012;
+  static const U_UNSUPPORTED_ESCAPE_SEQUENCE = 0x00000013;
+  static const U_NO_SPACE_AVAILABLE = 0x00000014;
+  static const U_CE_NOT_FOUND_ERROR = 0x00000015;
+  static const U_PRIMARY_TOO_LONG_ERROR = 0x00000016;
+  static const U_STATE_TOO_OLD_ERROR = 0x00000017;
+  static const U_TOO_MANY_ALIASES_ERROR = 0x00000018;
+  static const U_ENUM_OUT_OF_SYNC_ERROR = 0x00000019;
+  static const U_INVARIANT_CONVERSION_ERROR = 0x0000001a;
+  static const U_INVALID_STATE_ERROR = 0x0000001b;
+  static const U_COLLATOR_VERSION_MISMATCH = 0x0000001c;
+  static const U_USELESS_COLLATOR_ERROR = 0x0000001d;
+  static const U_NO_WRITE_PERMISSION = 0x0000001e;
+  static const U_BAD_VARIABLE_DEFINITION = 0x00010000;
+  static const U_PARSE_ERROR_START = 0x00010000;
+  static const U_MALFORMED_RULE = 0x00010001;
+  static const U_MALFORMED_SET = 0x00010002;
+  static const U_MALFORMED_SYMBOL_REFERENCE = 0x00010003;
+  static const U_MALFORMED_UNICODE_ESCAPE = 0x00010004;
+  static const U_MALFORMED_VARIABLE_DEFINITION = 0x00010005;
+  static const U_MALFORMED_VARIABLE_REFERENCE = 0x00010006;
+  static const U_MISMATCHED_SEGMENT_DELIMITERS = 0x00010007;
+  static const U_MISPLACED_ANCHOR_START = 0x00010008;
+  static const U_MISPLACED_CURSOR_OFFSET = 0x00010009;
+  static const U_MISPLACED_QUANTIFIER = 0x0001000a;
+  static const U_MISSING_OPERATOR = 0x0001000b;
+  static const U_MISSING_SEGMENT_CLOSE = 0x0001000c;
+  static const U_MULTIPLE_ANTE_CONTEXTS = 0x0001000d;
+  static const U_MULTIPLE_CURSORS = 0x0001000e;
+  static const U_MULTIPLE_POST_CONTEXTS = 0x0001000f;
+  static const U_TRAILING_BACKSLASH = 0x00010010;
+  static const U_UNDEFINED_SEGMENT_REFERENCE = 0x00010011;
+  static const U_UNDEFINED_VARIABLE = 0x00010012;
+  static const U_UNQUOTED_SPECIAL = 0x00010013;
+  static const U_UNTERMINATED_QUOTE = 0x00010014;
+  static const U_RULE_MASK_ERROR = 0x00010015;
+  static const U_MISPLACED_COMPOUND_FILTER = 0x00010016;
+  static const U_MULTIPLE_COMPOUND_FILTERS = 0x00010017;
+  static const U_INVALID_RBT_SYNTAX = 0x00010018;
+  static const U_INVALID_PROPERTY_PATTERN = 0x00010019;
+  static const U_MALFORMED_PRAGMA = 0x0001001a;
+  static const U_UNCLOSED_SEGMENT = 0x0001001b;
+  static const U_ILLEGAL_CHAR_IN_SEGMENT = 0x0001001c;
+  static const U_VARIABLE_RANGE_EXHAUSTED = 0x0001001d;
+  static const U_VARIABLE_RANGE_OVERLAP = 0x0001001e;
+  static const U_ILLEGAL_CHARACTER = 0x0001001f;
+  static const U_INTERNAL_TRANSLITERATOR_ERROR = 0x00010020;
+  static const U_INVALID_ID = 0x00010021;
+  static const U_INVALID_FUNCTION = 0x00010022;
+  static const U_UNEXPECTED_TOKEN = 0x00010100;
+  static const U_FMT_PARSE_ERROR_START = 0x00010100;
+  static const U_MULTIPLE_DECIMAL_SEPARATORS = 0x00010101;
+  static const U_MULTIPLE_DECIMAL_SEPERATORS = 0x00010101;
+  static const U_MULTIPLE_EXPONENTIAL_SYMBOLS = 0x00010102;
+  static const U_MALFORMED_EXPONENTIAL_PATTERN = 0x00010103;
+  static const U_MULTIPLE_PERCENT_SYMBOLS = 0x00010104;
+  static const U_MULTIPLE_PERMILL_SYMBOLS = 0x00010105;
+  static const U_MULTIPLE_PAD_SPECIFIERS = 0x00010106;
+  static const U_PATTERN_SYNTAX_ERROR = 0x00010107;
+  static const U_ILLEGAL_PAD_POSITION = 0x00010108;
+  static const U_UNMATCHED_BRACES = 0x00010109;
+  static const U_UNSUPPORTED_PROPERTY = 0x0001010a;
+  static const U_UNSUPPORTED_ATTRIBUTE = 0x0001010b;
+  static const U_ARGUMENT_TYPE_MISMATCH = 0x0001010c;
+  static const U_DUPLICATE_KEYWORD = 0x0001010d;
+  static const U_UNDEFINED_KEYWORD = 0x0001010e;
+  static const U_DEFAULT_KEYWORD_MISSING = 0x0001010f;
+  static const U_DECIMAL_NUMBER_SYNTAX_ERROR = 0x00010110;
+  static const U_FORMAT_INEXACT_ERROR = 0x00010111;
+  static const U_NUMBER_ARG_OUTOFBOUNDS_ERROR = 0x00010112;
+  static const U_NUMBER_SKELETON_SYNTAX_ERROR = 0x00010113;
+  static const U_BRK_INTERNAL_ERROR = 0x00010200;
+  static const U_BRK_ERROR_START = 0x00010200;
+  static const U_BRK_HEX_DIGITS_EXPECTED = 0x00010201;
+  static const U_BRK_SEMICOLON_EXPECTED = 0x00010202;
+  static const U_BRK_RULE_SYNTAX = 0x00010203;
+  static const U_BRK_UNCLOSED_SET = 0x00010204;
+  static const U_BRK_ASSIGN_ERROR = 0x00010205;
+  static const U_BRK_VARIABLE_REDFINITION = 0x00010206;
+  static const U_BRK_MISMATCHED_PAREN = 0x00010207;
+  static const U_BRK_NEW_LINE_IN_QUOTED_STRING = 0x00010208;
+  static const U_BRK_UNDEFINED_VARIABLE = 0x00010209;
+  static const U_BRK_INIT_ERROR = 0x0001020a;
+  static const U_BRK_RULE_EMPTY_SET = 0x0001020b;
+  static const U_BRK_UNRECOGNIZED_OPTION = 0x0001020c;
+  static const U_BRK_MALFORMED_RULE_TAG = 0x0001020d;
+  static const U_REGEX_INTERNAL_ERROR = 0x00010300;
+  static const U_REGEX_ERROR_START = 0x00010300;
+  static const U_REGEX_RULE_SYNTAX = 0x00010301;
+  static const U_REGEX_INVALID_STATE = 0x00010302;
+  static const U_REGEX_BAD_ESCAPE_SEQUENCE = 0x00010303;
+  static const U_REGEX_PROPERTY_SYNTAX = 0x00010304;
+  static const U_REGEX_UNIMPLEMENTED = 0x00010305;
+  static const U_REGEX_MISMATCHED_PAREN = 0x00010306;
+  static const U_REGEX_NUMBER_TOO_BIG = 0x00010307;
+  static const U_REGEX_BAD_INTERVAL = 0x00010308;
+  static const U_REGEX_MAX_LT_MIN = 0x00010309;
+  static const U_REGEX_INVALID_BACK_REF = 0x0001030a;
+  static const U_REGEX_INVALID_FLAG = 0x0001030b;
+  static const U_REGEX_LOOK_BEHIND_LIMIT = 0x0001030c;
+  static const U_REGEX_SET_CONTAINS_STRING = 0x0001030d;
+  static const U_REGEX_MISSING_CLOSE_BRACKET = 0x0001030f;
+  static const U_REGEX_INVALID_RANGE = 0x00010310;
+  static const U_REGEX_STACK_OVERFLOW = 0x00010311;
+  static const U_REGEX_TIME_OUT = 0x00010312;
+  static const U_REGEX_STOPPED_BY_CALLER = 0x00010313;
+  static const U_REGEX_PATTERN_TOO_BIG = 0x00010314;
+  static const U_REGEX_INVALID_CAPTURE_GROUP_NAME = 0x00010315;
+  static const U_IDNA_PROHIBITED_ERROR = 0x00010400;
+  static const U_IDNA_ERROR_START = 0x00010400;
+  static const U_IDNA_UNASSIGNED_ERROR = 0x00010401;
+  static const U_IDNA_CHECK_BIDI_ERROR = 0x00010402;
+  static const U_IDNA_STD3_ASCII_RULES_ERROR = 0x00010403;
+  static const U_IDNA_ACE_PREFIX_ERROR = 0x00010404;
+  static const U_IDNA_VERIFICATION_ERROR = 0x00010405;
+  static const U_IDNA_LABEL_TOO_LONG_ERROR = 0x00010406;
+  static const U_IDNA_ZERO_LENGTH_LABEL_ERROR = 0x00010407;
+  static const U_IDNA_DOMAIN_NAME_TOO_LONG_ERROR = 0x00010408;
+  static const U_STRINGPREP_PROHIBITED_ERROR = 0x00010400;
+  static const U_STRINGPREP_UNASSIGNED_ERROR = 0x00010401;
+  static const U_STRINGPREP_CHECK_BIDI_ERROR = 0x00010402;
+  static const U_PLUGIN_ERROR_START = 0x00010500;
+  static const U_PLUGIN_TOO_HIGH = 0x00010500;
+  static const U_PLUGIN_DIDNT_SET_LEVEL = 0x00010501;
+}
+
+/// {@category Enum}
+class UFormattableType {
+  static const UFMT_DATE = 0x00000000;
+  static const UFMT_DOUBLE = 0x00000001;
+  static const UFMT_LONG = 0x00000002;
+  static const UFMT_STRING = 0x00000003;
+  static const UFMT_ARRAY = 0x00000004;
+  static const UFMT_INT64 = 0x00000005;
+  static const UFMT_OBJECT = 0x00000006;
+}
+
+/// {@category Enum}
+class UGender {
+  static const UGENDER_MALE = 0x00000000;
+  static const UGENDER_FEMALE = 0x00000001;
+  static const UGENDER_OTHER = 0x00000002;
+}
+
+/// {@category Enum}
+class UGraphemeClusterBreak {
+  static const U_GCB_OTHER = 0x00000000;
+  static const U_GCB_CONTROL = 0x00000001;
+  static const U_GCB_CR = 0x00000002;
+  static const U_GCB_EXTEND = 0x00000003;
+  static const U_GCB_L = 0x00000004;
+  static const U_GCB_LF = 0x00000005;
+  static const U_GCB_LV = 0x00000006;
+  static const U_GCB_LVT = 0x00000007;
+  static const U_GCB_T = 0x00000008;
+  static const U_GCB_V = 0x00000009;
+  static const U_GCB_SPACING_MARK = 0x0000000a;
+  static const U_GCB_PREPEND = 0x0000000b;
+  static const U_GCB_REGIONAL_INDICATOR = 0x0000000c;
+  static const U_GCB_E_BASE = 0x0000000d;
+  static const U_GCB_E_BASE_GAZ = 0x0000000e;
+  static const U_GCB_E_MODIFIER = 0x0000000f;
+  static const U_GCB_GLUE_AFTER_ZWJ = 0x00000010;
+  static const U_GCB_ZWJ = 0x00000011;
+}
+
+/// {@category Enum}
+class UHangulSyllableType {
+  static const U_HST_NOT_APPLICABLE = 0x00000000;
+  static const U_HST_LEADING_JAMO = 0x00000001;
+  static const U_HST_VOWEL_JAMO = 0x00000002;
+  static const U_HST_TRAILING_JAMO = 0x00000003;
+  static const U_HST_LV_SYLLABLE = 0x00000004;
+  static const U_HST_LVT_SYLLABLE = 0x00000005;
+}
+
+/// {@category Enum}
+class UIndicPositionalCategory {
+  static const U_INPC_NA = 0x00000000;
+  static const U_INPC_BOTTOM = 0x00000001;
+  static const U_INPC_BOTTOM_AND_LEFT = 0x00000002;
+  static const U_INPC_BOTTOM_AND_RIGHT = 0x00000003;
+  static const U_INPC_LEFT = 0x00000004;
+  static const U_INPC_LEFT_AND_RIGHT = 0x00000005;
+  static const U_INPC_OVERSTRUCK = 0x00000006;
+  static const U_INPC_RIGHT = 0x00000007;
+  static const U_INPC_TOP = 0x00000008;
+  static const U_INPC_TOP_AND_BOTTOM = 0x00000009;
+  static const U_INPC_TOP_AND_BOTTOM_AND_RIGHT = 0x0000000a;
+  static const U_INPC_TOP_AND_LEFT = 0x0000000b;
+  static const U_INPC_TOP_AND_LEFT_AND_RIGHT = 0x0000000c;
+  static const U_INPC_TOP_AND_RIGHT = 0x0000000d;
+  static const U_INPC_VISUAL_ORDER_LEFT = 0x0000000e;
+}
+
+/// {@category Enum}
+class UIndicSyllabicCategory {
+  static const U_INSC_OTHER = 0x00000000;
+  static const U_INSC_AVAGRAHA = 0x00000001;
+  static const U_INSC_BINDU = 0x00000002;
+  static const U_INSC_BRAHMI_JOINING_NUMBER = 0x00000003;
+  static const U_INSC_CANTILLATION_MARK = 0x00000004;
+  static const U_INSC_CONSONANT = 0x00000005;
+  static const U_INSC_CONSONANT_DEAD = 0x00000006;
+  static const U_INSC_CONSONANT_FINAL = 0x00000007;
+  static const U_INSC_CONSONANT_HEAD_LETTER = 0x00000008;
+  static const U_INSC_CONSONANT_INITIAL_POSTFIXED = 0x00000009;
+  static const U_INSC_CONSONANT_KILLER = 0x0000000a;
+  static const U_INSC_CONSONANT_MEDIAL = 0x0000000b;
+  static const U_INSC_CONSONANT_PLACEHOLDER = 0x0000000c;
+  static const U_INSC_CONSONANT_PRECEDING_REPHA = 0x0000000d;
+  static const U_INSC_CONSONANT_PREFIXED = 0x0000000e;
+  static const U_INSC_CONSONANT_SUBJOINED = 0x0000000f;
+  static const U_INSC_CONSONANT_SUCCEEDING_REPHA = 0x00000010;
+  static const U_INSC_CONSONANT_WITH_STACKER = 0x00000011;
+  static const U_INSC_GEMINATION_MARK = 0x00000012;
+  static const U_INSC_INVISIBLE_STACKER = 0x00000013;
+  static const U_INSC_JOINER = 0x00000014;
+  static const U_INSC_MODIFYING_LETTER = 0x00000015;
+  static const U_INSC_NON_JOINER = 0x00000016;
+  static const U_INSC_NUKTA = 0x00000017;
+  static const U_INSC_NUMBER = 0x00000018;
+  static const U_INSC_NUMBER_JOINER = 0x00000019;
+  static const U_INSC_PURE_KILLER = 0x0000001a;
+  static const U_INSC_REGISTER_SHIFTER = 0x0000001b;
+  static const U_INSC_SYLLABLE_MODIFIER = 0x0000001c;
+  static const U_INSC_TONE_LETTER = 0x0000001d;
+  static const U_INSC_TONE_MARK = 0x0000001e;
+  static const U_INSC_VIRAMA = 0x0000001f;
+  static const U_INSC_VISARGA = 0x00000020;
+  static const U_INSC_VOWEL = 0x00000021;
+  static const U_INSC_VOWEL_DEPENDENT = 0x00000022;
+  static const U_INSC_VOWEL_INDEPENDENT = 0x00000023;
 }
 
 /// {@category Enum}
@@ -1376,71 +1643,22 @@ class UJoiningGroup {
 }
 
 /// {@category Enum}
-class UGraphemeClusterBreak {
-  static const U_GCB_OTHER = 0x00000000;
-  static const U_GCB_CONTROL = 0x00000001;
-  static const U_GCB_CR = 0x00000002;
-  static const U_GCB_EXTEND = 0x00000003;
-  static const U_GCB_L = 0x00000004;
-  static const U_GCB_LF = 0x00000005;
-  static const U_GCB_LV = 0x00000006;
-  static const U_GCB_LVT = 0x00000007;
-  static const U_GCB_T = 0x00000008;
-  static const U_GCB_V = 0x00000009;
-  static const U_GCB_SPACING_MARK = 0x0000000a;
-  static const U_GCB_PREPEND = 0x0000000b;
-  static const U_GCB_REGIONAL_INDICATOR = 0x0000000c;
-  static const U_GCB_E_BASE = 0x0000000d;
-  static const U_GCB_E_BASE_GAZ = 0x0000000e;
-  static const U_GCB_E_MODIFIER = 0x0000000f;
-  static const U_GCB_GLUE_AFTER_ZWJ = 0x00000010;
-  static const U_GCB_ZWJ = 0x00000011;
+class UJoiningType {
+  static const U_JT_NON_JOINING = 0x00000000;
+  static const U_JT_JOIN_CAUSING = 0x00000001;
+  static const U_JT_DUAL_JOINING = 0x00000002;
+  static const U_JT_LEFT_JOINING = 0x00000003;
+  static const U_JT_RIGHT_JOINING = 0x00000004;
+  static const U_JT_TRANSPARENT = 0x00000005;
 }
 
 /// {@category Enum}
-class UWordBreakValues {
-  static const U_WB_OTHER = 0x00000000;
-  static const U_WB_ALETTER = 0x00000001;
-  static const U_WB_FORMAT = 0x00000002;
-  static const U_WB_KATAKANA = 0x00000003;
-  static const U_WB_MIDLETTER = 0x00000004;
-  static const U_WB_MIDNUM = 0x00000005;
-  static const U_WB_NUMERIC = 0x00000006;
-  static const U_WB_EXTENDNUMLET = 0x00000007;
-  static const U_WB_CR = 0x00000008;
-  static const U_WB_EXTEND = 0x00000009;
-  static const U_WB_LF = 0x0000000a;
-  static const U_WB_MIDNUMLET = 0x0000000b;
-  static const U_WB_NEWLINE = 0x0000000c;
-  static const U_WB_REGIONAL_INDICATOR = 0x0000000d;
-  static const U_WB_HEBREW_LETTER = 0x0000000e;
-  static const U_WB_SINGLE_QUOTE = 0x0000000f;
-  static const U_WB_DOUBLE_QUOTE = 0x00000010;
-  static const U_WB_E_BASE = 0x00000011;
-  static const U_WB_E_BASE_GAZ = 0x00000012;
-  static const U_WB_E_MODIFIER = 0x00000013;
-  static const U_WB_GLUE_AFTER_ZWJ = 0x00000014;
-  static const U_WB_ZWJ = 0x00000015;
-  static const U_WB_WSEGSPACE = 0x00000016;
-}
-
-/// {@category Enum}
-class USentenceBreak {
-  static const U_SB_OTHER = 0x00000000;
-  static const U_SB_ATERM = 0x00000001;
-  static const U_SB_CLOSE = 0x00000002;
-  static const U_SB_FORMAT = 0x00000003;
-  static const U_SB_LOWER = 0x00000004;
-  static const U_SB_NUMERIC = 0x00000005;
-  static const U_SB_OLETTER = 0x00000006;
-  static const U_SB_SEP = 0x00000007;
-  static const U_SB_SP = 0x00000008;
-  static const U_SB_STERM = 0x00000009;
-  static const U_SB_UPPER = 0x0000000a;
-  static const U_SB_CR = 0x0000000b;
-  static const U_SB_EXTEND = 0x0000000c;
-  static const U_SB_LF = 0x0000000d;
-  static const U_SB_SCONTINUE = 0x0000000e;
+class ULayoutType {
+  static const ULOC_LAYOUT_LTR = 0x00000000;
+  static const ULOC_LAYOUT_RTL = 0x00000001;
+  static const ULOC_LAYOUT_TTB = 0x00000002;
+  static const ULOC_LAYOUT_BTT = 0x00000003;
+  static const ULOC_LAYOUT_UNKNOWN = 0x00000004;
 }
 
 /// {@category Enum}
@@ -1492,134 +1710,40 @@ class ULineBreak {
 }
 
 /// {@category Enum}
-class UNumericType {
-  static const U_NT_NONE = 0x00000000;
-  static const U_NT_DECIMAL = 0x00000001;
-  static const U_NT_DIGIT = 0x00000002;
-  static const U_NT_NUMERIC = 0x00000003;
+class ULineBreakTag {
+  static const UBRK_LINE_SOFT = 0x00000000;
+  static const UBRK_LINE_SOFT_LIMIT = 0x00000064;
+  static const UBRK_LINE_HARD = 0x00000064;
+  static const UBRK_LINE_HARD_LIMIT = 0x000000c8;
 }
 
 /// {@category Enum}
-class UHangulSyllableType {
-  static const U_HST_NOT_APPLICABLE = 0x00000000;
-  static const U_HST_LEADING_JAMO = 0x00000001;
-  static const U_HST_VOWEL_JAMO = 0x00000002;
-  static const U_HST_TRAILING_JAMO = 0x00000003;
-  static const U_HST_LV_SYLLABLE = 0x00000004;
-  static const U_HST_LVT_SYLLABLE = 0x00000005;
+class ULocDataLocaleType {
+  static const ULOC_ACTUAL_LOCALE = 0x00000000;
+  static const ULOC_VALID_LOCALE = 0x00000001;
 }
 
 /// {@category Enum}
-class UIndicPositionalCategory {
-  static const U_INPC_NA = 0x00000000;
-  static const U_INPC_BOTTOM = 0x00000001;
-  static const U_INPC_BOTTOM_AND_LEFT = 0x00000002;
-  static const U_INPC_BOTTOM_AND_RIGHT = 0x00000003;
-  static const U_INPC_LEFT = 0x00000004;
-  static const U_INPC_LEFT_AND_RIGHT = 0x00000005;
-  static const U_INPC_OVERSTRUCK = 0x00000006;
-  static const U_INPC_RIGHT = 0x00000007;
-  static const U_INPC_TOP = 0x00000008;
-  static const U_INPC_TOP_AND_BOTTOM = 0x00000009;
-  static const U_INPC_TOP_AND_BOTTOM_AND_RIGHT = 0x0000000a;
-  static const U_INPC_TOP_AND_LEFT = 0x0000000b;
-  static const U_INPC_TOP_AND_LEFT_AND_RIGHT = 0x0000000c;
-  static const U_INPC_TOP_AND_RIGHT = 0x0000000d;
-  static const U_INPC_VISUAL_ORDER_LEFT = 0x0000000e;
+class ULocaleDataDelimiterType {
+  static const ULOCDATA_QUOTATION_START = 0x00000000;
+  static const ULOCDATA_QUOTATION_END = 0x00000001;
+  static const ULOCDATA_ALT_QUOTATION_START = 0x00000002;
+  static const ULOCDATA_ALT_QUOTATION_END = 0x00000003;
 }
 
 /// {@category Enum}
-class UIndicSyllabicCategory {
-  static const U_INSC_OTHER = 0x00000000;
-  static const U_INSC_AVAGRAHA = 0x00000001;
-  static const U_INSC_BINDU = 0x00000002;
-  static const U_INSC_BRAHMI_JOINING_NUMBER = 0x00000003;
-  static const U_INSC_CANTILLATION_MARK = 0x00000004;
-  static const U_INSC_CONSONANT = 0x00000005;
-  static const U_INSC_CONSONANT_DEAD = 0x00000006;
-  static const U_INSC_CONSONANT_FINAL = 0x00000007;
-  static const U_INSC_CONSONANT_HEAD_LETTER = 0x00000008;
-  static const U_INSC_CONSONANT_INITIAL_POSTFIXED = 0x00000009;
-  static const U_INSC_CONSONANT_KILLER = 0x0000000a;
-  static const U_INSC_CONSONANT_MEDIAL = 0x0000000b;
-  static const U_INSC_CONSONANT_PLACEHOLDER = 0x0000000c;
-  static const U_INSC_CONSONANT_PRECEDING_REPHA = 0x0000000d;
-  static const U_INSC_CONSONANT_PREFIXED = 0x0000000e;
-  static const U_INSC_CONSONANT_SUBJOINED = 0x0000000f;
-  static const U_INSC_CONSONANT_SUCCEEDING_REPHA = 0x00000010;
-  static const U_INSC_CONSONANT_WITH_STACKER = 0x00000011;
-  static const U_INSC_GEMINATION_MARK = 0x00000012;
-  static const U_INSC_INVISIBLE_STACKER = 0x00000013;
-  static const U_INSC_JOINER = 0x00000014;
-  static const U_INSC_MODIFYING_LETTER = 0x00000015;
-  static const U_INSC_NON_JOINER = 0x00000016;
-  static const U_INSC_NUKTA = 0x00000017;
-  static const U_INSC_NUMBER = 0x00000018;
-  static const U_INSC_NUMBER_JOINER = 0x00000019;
-  static const U_INSC_PURE_KILLER = 0x0000001a;
-  static const U_INSC_REGISTER_SHIFTER = 0x0000001b;
-  static const U_INSC_SYLLABLE_MODIFIER = 0x0000001c;
-  static const U_INSC_TONE_LETTER = 0x0000001d;
-  static const U_INSC_TONE_MARK = 0x0000001e;
-  static const U_INSC_VIRAMA = 0x0000001f;
-  static const U_INSC_VISARGA = 0x00000020;
-  static const U_INSC_VOWEL = 0x00000021;
-  static const U_INSC_VOWEL_DEPENDENT = 0x00000022;
-  static const U_INSC_VOWEL_INDEPENDENT = 0x00000023;
+class ULocaleDataExemplarSetType {
+  static const ULOCDATA_ES_STANDARD = 0x00000000;
+  static const ULOCDATA_ES_AUXILIARY = 0x00000001;
+  static const ULOCDATA_ES_INDEX = 0x00000002;
+  static const ULOCDATA_ES_PUNCTUATION = 0x00000003;
 }
 
 /// {@category Enum}
-class UVerticalOrientation {
-  static const U_VO_ROTATED = 0x00000000;
-  static const U_VO_TRANSFORMED_ROTATED = 0x00000001;
-  static const U_VO_TRANSFORMED_UPRIGHT = 0x00000002;
-  static const U_VO_UPRIGHT = 0x00000003;
-}
-
-/// {@category Enum}
-class UBiDiDirection {
-  static const UBIDI_LTR = 0x00000000;
-  static const UBIDI_RTL = 0x00000001;
-  static const UBIDI_MIXED = 0x00000002;
-  static const UBIDI_NEUTRAL = 0x00000003;
-}
-
-/// {@category Enum}
-class UBiDiReorderingMode {
-  static const UBIDI_REORDER_DEFAULT = 0x00000000;
-  static const UBIDI_REORDER_NUMBERS_SPECIAL = 0x00000001;
-  static const UBIDI_REORDER_GROUP_NUMBERS_WITH_R = 0x00000002;
-  static const UBIDI_REORDER_RUNS_ONLY = 0x00000003;
-  static const UBIDI_REORDER_INVERSE_NUMBERS_AS_L = 0x00000004;
-  static const UBIDI_REORDER_INVERSE_LIKE_DIRECT = 0x00000005;
-  static const UBIDI_REORDER_INVERSE_FOR_NUMBERS_SPECIAL = 0x00000006;
-}
-
-/// {@category Enum}
-class UBiDiReorderingOption {
-  static const UBIDI_OPTION_DEFAULT = 0x00000000;
-  static const UBIDI_OPTION_INSERT_MARKS = 0x00000001;
-  static const UBIDI_OPTION_REMOVE_CONTROLS = 0x00000002;
-  static const UBIDI_OPTION_STREAMING = 0x00000004;
-}
-
-/// {@category Enum}
-class UBiDiOrder {
-  static const UBIDI_LOGICAL = 0x00000000;
-  static const UBIDI_VISUAL = 0x00000001;
-}
-
-/// {@category Enum}
-class UBiDiMirroring {
-  static const UBIDI_MIRRORING_OFF = 0x00000000;
-  static const UBIDI_MIRRORING_ON = 0x00000001;
-}
-
-/// {@category Enum}
-class USetSpanCondition {
-  static const USET_SPAN_NOT_CONTAINED = 0x00000000;
-  static const USET_SPAN_CONTAINED = 0x00000001;
-  static const USET_SPAN_SIMPLE = 0x00000002;
+class UMeasurementSystem {
+  static const UMS_SI = 0x00000000;
+  static const UMS_US = 0x00000001;
+  static const UMS_UK = 0x00000002;
 }
 
 /// {@category Enum}
@@ -1650,411 +1774,9 @@ class UNormalizationMode {
 }
 
 /// {@category Enum}
-class UStringPrepProfileType {
-  static const USPREP_RFC3491_NAMEPREP = 0x00000000;
-  static const USPREP_RFC3530_NFS4_CS_PREP = 0x00000001;
-  static const USPREP_RFC3530_NFS4_CS_PREP_CI = 0x00000002;
-  static const USPREP_RFC3530_NFS4_CIS_PREP = 0x00000003;
-  static const USPREP_RFC3530_NFS4_MIXED_PREP_PREFIX = 0x00000004;
-  static const USPREP_RFC3530_NFS4_MIXED_PREP_SUFFIX = 0x00000005;
-  static const USPREP_RFC3722_ISCSI = 0x00000006;
-  static const USPREP_RFC3920_NODEPREP = 0x00000007;
-  static const USPREP_RFC3920_RESOURCEPREP = 0x00000008;
-  static const USPREP_RFC4011_MIB = 0x00000009;
-  static const USPREP_RFC4013_SASLPREP = 0x0000000a;
-  static const USPREP_RFC4505_TRACE = 0x0000000b;
-  static const USPREP_RFC4518_LDAP = 0x0000000c;
-  static const USPREP_RFC4518_LDAP_CI = 0x0000000d;
-}
-
-/// {@category Enum}
-class UBreakIteratorType {
-  static const UBRK_CHARACTER = 0x00000000;
-  static const UBRK_WORD = 0x00000001;
-  static const UBRK_LINE = 0x00000002;
-  static const UBRK_SENTENCE = 0x00000003;
-}
-
-/// {@category Enum}
-class UWordBreak {
-  static const UBRK_WORD_NONE = 0x00000000;
-  static const UBRK_WORD_NONE_LIMIT = 0x00000064;
-  static const UBRK_WORD_NUMBER = 0x00000064;
-  static const UBRK_WORD_NUMBER_LIMIT = 0x000000c8;
-  static const UBRK_WORD_LETTER = 0x000000c8;
-  static const UBRK_WORD_LETTER_LIMIT = 0x0000012c;
-  static const UBRK_WORD_KANA = 0x0000012c;
-  static const UBRK_WORD_KANA_LIMIT = 0x00000190;
-  static const UBRK_WORD_IDEO = 0x00000190;
-  static const UBRK_WORD_IDEO_LIMIT = 0x000001f4;
-}
-
-/// {@category Enum}
-class ULineBreakTag {
-  static const UBRK_LINE_SOFT = 0x00000000;
-  static const UBRK_LINE_SOFT_LIMIT = 0x00000064;
-  static const UBRK_LINE_HARD = 0x00000064;
-  static const UBRK_LINE_HARD_LIMIT = 0x000000c8;
-}
-
-/// {@category Enum}
-class USentenceBreakTag {
-  static const UBRK_SENTENCE_TERM = 0x00000000;
-  static const UBRK_SENTENCE_TERM_LIMIT = 0x00000064;
-  static const UBRK_SENTENCE_SEP = 0x00000064;
-  static const UBRK_SENTENCE_SEP_LIMIT = 0x000000c8;
-}
-
-/// {@category Enum}
-class UCalendarType {
-  static const UCAL_TRADITIONAL = 0x00000000;
-  static const UCAL_DEFAULT = 0x00000000;
-  static const UCAL_GREGORIAN = 0x00000001;
-}
-
-/// {@category Enum}
-class UCalendarDateFields {
-  static const UCAL_ERA = 0x00000000;
-  static const UCAL_YEAR = 0x00000001;
-  static const UCAL_MONTH = 0x00000002;
-  static const UCAL_WEEK_OF_YEAR = 0x00000003;
-  static const UCAL_WEEK_OF_MONTH = 0x00000004;
-  static const UCAL_DATE = 0x00000005;
-  static const UCAL_DAY_OF_YEAR = 0x00000006;
-  static const UCAL_DAY_OF_WEEK = 0x00000007;
-  static const UCAL_DAY_OF_WEEK_IN_MONTH = 0x00000008;
-  static const UCAL_AM_PM = 0x00000009;
-  static const UCAL_HOUR = 0x0000000a;
-  static const UCAL_HOUR_OF_DAY = 0x0000000b;
-  static const UCAL_MINUTE = 0x0000000c;
-  static const UCAL_SECOND = 0x0000000d;
-  static const UCAL_MILLISECOND = 0x0000000e;
-  static const UCAL_ZONE_OFFSET = 0x0000000f;
-  static const UCAL_DST_OFFSET = 0x00000010;
-  static const UCAL_YEAR_WOY = 0x00000011;
-  static const UCAL_DOW_LOCAL = 0x00000012;
-  static const UCAL_EXTENDED_YEAR = 0x00000013;
-  static const UCAL_JULIAN_DAY = 0x00000014;
-  static const UCAL_MILLISECONDS_IN_DAY = 0x00000015;
-  static const UCAL_IS_LEAP_MONTH = 0x00000016;
-  static const UCAL_FIELD_COUNT = 0x00000017;
-  static const UCAL_DAY_OF_MONTH = 0x00000005;
-}
-
-/// {@category Enum}
-class UCalendarDaysOfWeek {
-  static const UCAL_SUNDAY = 0x00000001;
-  static const UCAL_MONDAY = 0x00000002;
-  static const UCAL_TUESDAY = 0x00000003;
-  static const UCAL_WEDNESDAY = 0x00000004;
-  static const UCAL_THURSDAY = 0x00000005;
-  static const UCAL_FRIDAY = 0x00000006;
-  static const UCAL_SATURDAY = 0x00000007;
-}
-
-/// {@category Enum}
-class UCalendarMonths {
-  static const UCAL_JANUARY = 0x00000000;
-  static const UCAL_FEBRUARY = 0x00000001;
-  static const UCAL_MARCH = 0x00000002;
-  static const UCAL_APRIL = 0x00000003;
-  static const UCAL_MAY = 0x00000004;
-  static const UCAL_JUNE = 0x00000005;
-  static const UCAL_JULY = 0x00000006;
-  static const UCAL_AUGUST = 0x00000007;
-  static const UCAL_SEPTEMBER = 0x00000008;
-  static const UCAL_OCTOBER = 0x00000009;
-  static const UCAL_NOVEMBER = 0x0000000a;
-  static const UCAL_DECEMBER = 0x0000000b;
-  static const UCAL_UNDECIMBER = 0x0000000c;
-}
-
-/// {@category Enum}
-class UCalendarAMPMs {
-  static const UCAL_AM = 0x00000000;
-  static const UCAL_PM = 0x00000001;
-}
-
-/// {@category Enum}
-class USystemTimeZoneType {
-  static const UCAL_ZONE_TYPE_ANY = 0x00000000;
-  static const UCAL_ZONE_TYPE_CANONICAL = 0x00000001;
-  static const UCAL_ZONE_TYPE_CANONICAL_LOCATION = 0x00000002;
-}
-
-/// {@category Enum}
-class UCalendarDisplayNameType {
-  static const UCAL_STANDARD = 0x00000000;
-  static const UCAL_SHORT_STANDARD = 0x00000001;
-  static const UCAL_DST = 0x00000002;
-  static const UCAL_SHORT_DST = 0x00000003;
-}
-
-/// {@category Enum}
-class UCalendarAttribute {
-  static const UCAL_LENIENT = 0x00000000;
-  static const UCAL_FIRST_DAY_OF_WEEK = 0x00000001;
-  static const UCAL_MINIMAL_DAYS_IN_FIRST_WEEK = 0x00000002;
-  static const UCAL_REPEATED_WALL_TIME = 0x00000003;
-  static const UCAL_SKIPPED_WALL_TIME = 0x00000004;
-}
-
-/// {@category Enum}
-class UCalendarWallTimeOption {
-  static const UCAL_WALLTIME_LAST = 0x00000000;
-  static const UCAL_WALLTIME_FIRST = 0x00000001;
-  static const UCAL_WALLTIME_NEXT_VALID = 0x00000002;
-}
-
-/// {@category Enum}
-class UCalendarLimitType {
-  static const UCAL_MINIMUM = 0x00000000;
-  static const UCAL_MAXIMUM = 0x00000001;
-  static const UCAL_GREATEST_MINIMUM = 0x00000002;
-  static const UCAL_LEAST_MAXIMUM = 0x00000003;
-  static const UCAL_ACTUAL_MINIMUM = 0x00000004;
-  static const UCAL_ACTUAL_MAXIMUM = 0x00000005;
-}
-
-/// {@category Enum}
-class UCalendarWeekdayType {
-  static const UCAL_WEEKDAY = 0x00000000;
-  static const UCAL_WEEKEND = 0x00000001;
-  static const UCAL_WEEKEND_ONSET = 0x00000002;
-  static const UCAL_WEEKEND_CEASE = 0x00000003;
-}
-
-/// {@category Enum}
-class UTimeZoneTransitionType {
-  static const UCAL_TZ_TRANSITION_NEXT = 0x00000000;
-  static const UCAL_TZ_TRANSITION_NEXT_INCLUSIVE = 0x00000001;
-  static const UCAL_TZ_TRANSITION_PREVIOUS = 0x00000002;
-  static const UCAL_TZ_TRANSITION_PREVIOUS_INCLUSIVE = 0x00000003;
-}
-
-/// {@category Enum}
-class UCollationResult {
-  static const UCOL_EQUAL = 0x00000000;
-  static const UCOL_GREATER = 0x00000001;
-  static const UCOL_LESS = 0xffffffff;
-}
-
-/// {@category Enum}
-class UColAttributeValue {
-  static const UCOL_DEFAULT = 0xffffffff;
-  static const UCOL_PRIMARY = 0x00000000;
-  static const UCOL_SECONDARY = 0x00000001;
-  static const UCOL_TERTIARY = 0x00000002;
-  static const UCOL_DEFAULT_STRENGTH = 0x00000002;
-  static const UCOL_CE_STRENGTH_LIMIT = 0x00000003;
-  static const UCOL_QUATERNARY = 0x00000003;
-  static const UCOL_IDENTICAL = 0x0000000f;
-  static const UCOL_STRENGTH_LIMIT = 0x00000010;
-  static const UCOL_OFF = 0x00000010;
-  static const UCOL_ON = 0x00000011;
-  static const UCOL_SHIFTED = 0x00000014;
-  static const UCOL_NON_IGNORABLE = 0x00000015;
-  static const UCOL_LOWER_FIRST = 0x00000018;
-  static const UCOL_UPPER_FIRST = 0x00000019;
-}
-
-/// {@category Enum}
-class UColReorderCode {
-  static const UCOL_REORDER_CODE_DEFAULT = 0xffffffff;
-  static const UCOL_REORDER_CODE_NONE = 0x00000067;
-  static const UCOL_REORDER_CODE_OTHERS = 0x00000067;
-  static const UCOL_REORDER_CODE_SPACE = 0x00001000;
-  static const UCOL_REORDER_CODE_FIRST = 0x00001000;
-  static const UCOL_REORDER_CODE_PUNCTUATION = 0x00001001;
-  static const UCOL_REORDER_CODE_SYMBOL = 0x00001002;
-  static const UCOL_REORDER_CODE_CURRENCY = 0x00001003;
-  static const UCOL_REORDER_CODE_DIGIT = 0x00001004;
-}
-
-/// {@category Enum}
-class UColAttribute {
-  static const UCOL_FRENCH_COLLATION = 0x00000000;
-  static const UCOL_ALTERNATE_HANDLING = 0x00000001;
-  static const UCOL_CASE_FIRST = 0x00000002;
-  static const UCOL_CASE_LEVEL = 0x00000003;
-  static const UCOL_NORMALIZATION_MODE = 0x00000004;
-  static const UCOL_DECOMPOSITION_MODE = 0x00000004;
-  static const UCOL_STRENGTH = 0x00000005;
-  static const UCOL_NUMERIC_COLLATION = 0x00000007;
-  static const UCOL_ATTRIBUTE_COUNT = 0x00000008;
-}
-
-/// {@category Enum}
-class UColRuleOption {
-  static const UCOL_TAILORING_ONLY = 0x00000000;
-  static const UCOL_FULL_RULES = 0x00000001;
-}
-
-/// {@category Enum}
-class UColBoundMode {
-  static const UCOL_BOUND_LOWER = 0x00000000;
-  static const UCOL_BOUND_UPPER = 0x00000001;
-  static const UCOL_BOUND_UPPER_LONG = 0x00000002;
-}
-
-/// {@category Enum}
-class UDateTimePatternField {
-  static const UDATPG_ERA_FIELD = 0x00000000;
-  static const UDATPG_YEAR_FIELD = 0x00000001;
-  static const UDATPG_QUARTER_FIELD = 0x00000002;
-  static const UDATPG_MONTH_FIELD = 0x00000003;
-  static const UDATPG_WEEK_OF_YEAR_FIELD = 0x00000004;
-  static const UDATPG_WEEK_OF_MONTH_FIELD = 0x00000005;
-  static const UDATPG_WEEKDAY_FIELD = 0x00000006;
-  static const UDATPG_DAY_OF_YEAR_FIELD = 0x00000007;
-  static const UDATPG_DAY_OF_WEEK_IN_MONTH_FIELD = 0x00000008;
-  static const UDATPG_DAY_FIELD = 0x00000009;
-  static const UDATPG_DAYPERIOD_FIELD = 0x0000000a;
-  static const UDATPG_HOUR_FIELD = 0x0000000b;
-  static const UDATPG_MINUTE_FIELD = 0x0000000c;
-  static const UDATPG_SECOND_FIELD = 0x0000000d;
-  static const UDATPG_FRACTIONAL_SECOND_FIELD = 0x0000000e;
-  static const UDATPG_ZONE_FIELD = 0x0000000f;
-  static const UDATPG_FIELD_COUNT = 0x00000010;
-}
-
-/// {@category Enum}
-class UDateTimePGDisplayWidth {
-  static const UDATPG_WIDE = 0x00000000;
-  static const UDATPG_ABBREVIATED = 0x00000001;
-  static const UDATPG_NARROW = 0x00000002;
-}
-
-/// {@category Enum}
-class UDateTimePatternMatchOptions {
-  static const UDATPG_MATCH_NO_OPTIONS = 0x00000000;
-  static const UDATPG_MATCH_HOUR_FIELD_LENGTH = 0x00000800;
-  static const UDATPG_MATCH_ALL_FIELDS_LENGTH = 0x0000ffff;
-}
-
-/// {@category Enum}
-class UDateTimePatternConflict {
-  static const UDATPG_NO_CONFLICT = 0x00000000;
-  static const UDATPG_BASE_CONFLICT = 0x00000001;
-  static const UDATPG_CONFLICT = 0x00000002;
-}
-
-/// {@category Enum}
-class UFormattableType {
-  static const UFMT_DATE = 0x00000000;
-  static const UFMT_DOUBLE = 0x00000001;
-  static const UFMT_LONG = 0x00000002;
-  static const UFMT_STRING = 0x00000003;
-  static const UFMT_ARRAY = 0x00000004;
-  static const UFMT_INT64 = 0x00000005;
-  static const UFMT_OBJECT = 0x00000006;
-}
-
-/// {@category Enum}
-class UGender {
-  static const UGENDER_MALE = 0x00000000;
-  static const UGENDER_FEMALE = 0x00000001;
-  static const UGENDER_OTHER = 0x00000002;
-}
-
-/// {@category Enum}
-class ULocaleDataExemplarSetType {
-  static const ULOCDATA_ES_STANDARD = 0x00000000;
-  static const ULOCDATA_ES_AUXILIARY = 0x00000001;
-  static const ULOCDATA_ES_INDEX = 0x00000002;
-  static const ULOCDATA_ES_PUNCTUATION = 0x00000003;
-}
-
-/// {@category Enum}
-class ULocaleDataDelimiterType {
-  static const ULOCDATA_QUOTATION_START = 0x00000000;
-  static const ULOCDATA_QUOTATION_END = 0x00000001;
-  static const ULOCDATA_ALT_QUOTATION_START = 0x00000002;
-  static const ULOCDATA_ALT_QUOTATION_END = 0x00000003;
-}
-
-/// {@category Enum}
-class UMeasurementSystem {
-  static const UMS_SI = 0x00000000;
-  static const UMS_US = 0x00000001;
-  static const UMS_UK = 0x00000002;
-}
-
-/// {@category Enum}
-class UNumberFormatStyle {
-  static const UNUM_PATTERN_DECIMAL = 0x00000000;
-  static const UNUM_DECIMAL = 0x00000001;
-  static const UNUM_CURRENCY = 0x00000002;
-  static const UNUM_PERCENT = 0x00000003;
-  static const UNUM_SCIENTIFIC = 0x00000004;
-  static const UNUM_SPELLOUT = 0x00000005;
-  static const UNUM_ORDINAL = 0x00000006;
-  static const UNUM_DURATION = 0x00000007;
-  static const UNUM_NUMBERING_SYSTEM = 0x00000008;
-  static const UNUM_PATTERN_RULEBASED = 0x00000009;
-  static const UNUM_CURRENCY_ISO = 0x0000000a;
-  static const UNUM_CURRENCY_PLURAL = 0x0000000b;
-  static const UNUM_CURRENCY_ACCOUNTING = 0x0000000c;
-  static const UNUM_CASH_CURRENCY = 0x0000000d;
-  static const UNUM_DECIMAL_COMPACT_SHORT = 0x0000000e;
-  static const UNUM_DECIMAL_COMPACT_LONG = 0x0000000f;
-  static const UNUM_CURRENCY_STANDARD = 0x00000010;
-  static const UNUM_DEFAULT = 0x00000001;
-  static const UNUM_IGNORE = 0x00000000;
-}
-
-/// {@category Enum}
-class UNumberFormatRoundingMode {
-  static const UNUM_ROUND_CEILING = 0x00000000;
-  static const UNUM_ROUND_FLOOR = 0x00000001;
-  static const UNUM_ROUND_DOWN = 0x00000002;
-  static const UNUM_ROUND_UP = 0x00000003;
-  static const UNUM_ROUND_HALFEVEN = 0x00000004;
-  static const UNUM_ROUND_HALFDOWN = 0x00000005;
-  static const UNUM_ROUND_HALFUP = 0x00000006;
-  static const UNUM_ROUND_UNNECESSARY = 0x00000007;
-}
-
-/// {@category Enum}
-class UNumberFormatPadPosition {
-  static const UNUM_PAD_BEFORE_PREFIX = 0x00000000;
-  static const UNUM_PAD_AFTER_PREFIX = 0x00000001;
-  static const UNUM_PAD_BEFORE_SUFFIX = 0x00000002;
-  static const UNUM_PAD_AFTER_SUFFIX = 0x00000003;
-}
-
-/// {@category Enum}
 class UNumberCompactStyle {
   static const UNUM_SHORT = 0x00000000;
   static const UNUM_LONG = 0x00000001;
-}
-
-/// {@category Enum}
-class UCurrencySpacing {
-  static const UNUM_CURRENCY_MATCH = 0x00000000;
-  static const UNUM_CURRENCY_SURROUNDING_MATCH = 0x00000001;
-  static const UNUM_CURRENCY_INSERT = 0x00000002;
-  static const UNUM_CURRENCY_SPACING_COUNT = 0x00000003;
-}
-
-/// {@category Enum}
-class UNumberFormatFields {
-  static const UNUM_INTEGER_FIELD = 0x00000000;
-  static const UNUM_FRACTION_FIELD = 0x00000001;
-  static const UNUM_DECIMAL_SEPARATOR_FIELD = 0x00000002;
-  static const UNUM_EXPONENT_SYMBOL_FIELD = 0x00000003;
-  static const UNUM_EXPONENT_SIGN_FIELD = 0x00000004;
-  static const UNUM_EXPONENT_FIELD = 0x00000005;
-  static const UNUM_GROUPING_SEPARATOR_FIELD = 0x00000006;
-  static const UNUM_CURRENCY_FIELD = 0x00000007;
-  static const UNUM_PERCENT_FIELD = 0x00000008;
-  static const UNUM_PERMILL_FIELD = 0x00000009;
-  static const UNUM_SIGN_FIELD = 0x0000000a;
-}
-
-/// {@category Enum}
-class UNumberFormatAttributeValue {
-  static const UNUM_FORMAT_ATTRIBUTE_VALUE_HIDDEN = 0x00000000;
 }
 
 /// {@category Enum}
@@ -2088,15 +1810,66 @@ class UNumberFormatAttribute {
 }
 
 /// {@category Enum}
-class UNumberFormatTextAttribute {
-  static const UNUM_POSITIVE_PREFIX = 0x00000000;
-  static const UNUM_POSITIVE_SUFFIX = 0x00000001;
-  static const UNUM_NEGATIVE_PREFIX = 0x00000002;
-  static const UNUM_NEGATIVE_SUFFIX = 0x00000003;
-  static const UNUM_PADDING_CHARACTER = 0x00000004;
-  static const UNUM_CURRENCY_CODE = 0x00000005;
-  static const UNUM_DEFAULT_RULESET = 0x00000006;
-  static const UNUM_PUBLIC_RULESETS = 0x00000007;
+class UNumberFormatAttributeValue {
+  static const UNUM_FORMAT_ATTRIBUTE_VALUE_HIDDEN = 0x00000000;
+}
+
+/// {@category Enum}
+class UNumberFormatFields {
+  static const UNUM_INTEGER_FIELD = 0x00000000;
+  static const UNUM_FRACTION_FIELD = 0x00000001;
+  static const UNUM_DECIMAL_SEPARATOR_FIELD = 0x00000002;
+  static const UNUM_EXPONENT_SYMBOL_FIELD = 0x00000003;
+  static const UNUM_EXPONENT_SIGN_FIELD = 0x00000004;
+  static const UNUM_EXPONENT_FIELD = 0x00000005;
+  static const UNUM_GROUPING_SEPARATOR_FIELD = 0x00000006;
+  static const UNUM_CURRENCY_FIELD = 0x00000007;
+  static const UNUM_PERCENT_FIELD = 0x00000008;
+  static const UNUM_PERMILL_FIELD = 0x00000009;
+  static const UNUM_SIGN_FIELD = 0x0000000a;
+}
+
+/// {@category Enum}
+class UNumberFormatPadPosition {
+  static const UNUM_PAD_BEFORE_PREFIX = 0x00000000;
+  static const UNUM_PAD_AFTER_PREFIX = 0x00000001;
+  static const UNUM_PAD_BEFORE_SUFFIX = 0x00000002;
+  static const UNUM_PAD_AFTER_SUFFIX = 0x00000003;
+}
+
+/// {@category Enum}
+class UNumberFormatRoundingMode {
+  static const UNUM_ROUND_CEILING = 0x00000000;
+  static const UNUM_ROUND_FLOOR = 0x00000001;
+  static const UNUM_ROUND_DOWN = 0x00000002;
+  static const UNUM_ROUND_UP = 0x00000003;
+  static const UNUM_ROUND_HALFEVEN = 0x00000004;
+  static const UNUM_ROUND_HALFDOWN = 0x00000005;
+  static const UNUM_ROUND_HALFUP = 0x00000006;
+  static const UNUM_ROUND_UNNECESSARY = 0x00000007;
+}
+
+/// {@category Enum}
+class UNumberFormatStyle {
+  static const UNUM_PATTERN_DECIMAL = 0x00000000;
+  static const UNUM_DECIMAL = 0x00000001;
+  static const UNUM_CURRENCY = 0x00000002;
+  static const UNUM_PERCENT = 0x00000003;
+  static const UNUM_SCIENTIFIC = 0x00000004;
+  static const UNUM_SPELLOUT = 0x00000005;
+  static const UNUM_ORDINAL = 0x00000006;
+  static const UNUM_DURATION = 0x00000007;
+  static const UNUM_NUMBERING_SYSTEM = 0x00000008;
+  static const UNUM_PATTERN_RULEBASED = 0x00000009;
+  static const UNUM_CURRENCY_ISO = 0x0000000a;
+  static const UNUM_CURRENCY_PLURAL = 0x0000000b;
+  static const UNUM_CURRENCY_ACCOUNTING = 0x0000000c;
+  static const UNUM_CASH_CURRENCY = 0x0000000d;
+  static const UNUM_DECIMAL_COMPACT_SHORT = 0x0000000e;
+  static const UNUM_DECIMAL_COMPACT_LONG = 0x0000000f;
+  static const UNUM_CURRENCY_STANDARD = 0x00000010;
+  static const UNUM_DEFAULT = 0x00000001;
+  static const UNUM_IGNORE = 0x00000000;
 }
 
 /// {@category Enum}
@@ -2132,106 +1905,151 @@ class UNumberFormatSymbol {
 }
 
 /// {@category Enum}
-class UDateFormatStyle {
-  static const UDAT_FULL = 0x00000000;
-  static const UDAT_LONG = 0x00000001;
-  static const UDAT_MEDIUM = 0x00000002;
-  static const UDAT_SHORT = 0x00000003;
-  static const UDAT_DEFAULT = 0x00000002;
-  static const UDAT_RELATIVE = 0x00000080;
-  static const UDAT_FULL_RELATIVE = 0x00000080;
-  static const UDAT_LONG_RELATIVE = 0x00000081;
-  static const UDAT_MEDIUM_RELATIVE = 0x00000082;
-  static const UDAT_SHORT_RELATIVE = 0x00000083;
-  static const UDAT_NONE = 0xffffffff;
-  static const UDAT_PATTERN = 0xfffffffe;
+class UNumberFormatTextAttribute {
+  static const UNUM_POSITIVE_PREFIX = 0x00000000;
+  static const UNUM_POSITIVE_SUFFIX = 0x00000001;
+  static const UNUM_NEGATIVE_PREFIX = 0x00000002;
+  static const UNUM_NEGATIVE_SUFFIX = 0x00000003;
+  static const UNUM_PADDING_CHARACTER = 0x00000004;
+  static const UNUM_CURRENCY_CODE = 0x00000005;
+  static const UNUM_DEFAULT_RULESET = 0x00000006;
+  static const UNUM_PUBLIC_RULESETS = 0x00000007;
 }
 
 /// {@category Enum}
-class UDateFormatField {
-  static const UDAT_ERA_FIELD = 0x00000000;
-  static const UDAT_YEAR_FIELD = 0x00000001;
-  static const UDAT_MONTH_FIELD = 0x00000002;
-  static const UDAT_DATE_FIELD = 0x00000003;
-  static const UDAT_HOUR_OF_DAY1_FIELD = 0x00000004;
-  static const UDAT_HOUR_OF_DAY0_FIELD = 0x00000005;
-  static const UDAT_MINUTE_FIELD = 0x00000006;
-  static const UDAT_SECOND_FIELD = 0x00000007;
-  static const UDAT_FRACTIONAL_SECOND_FIELD = 0x00000008;
-  static const UDAT_DAY_OF_WEEK_FIELD = 0x00000009;
-  static const UDAT_DAY_OF_YEAR_FIELD = 0x0000000a;
-  static const UDAT_DAY_OF_WEEK_IN_MONTH_FIELD = 0x0000000b;
-  static const UDAT_WEEK_OF_YEAR_FIELD = 0x0000000c;
-  static const UDAT_WEEK_OF_MONTH_FIELD = 0x0000000d;
-  static const UDAT_AM_PM_FIELD = 0x0000000e;
-  static const UDAT_HOUR1_FIELD = 0x0000000f;
-  static const UDAT_HOUR0_FIELD = 0x00000010;
-  static const UDAT_TIMEZONE_FIELD = 0x00000011;
-  static const UDAT_YEAR_WOY_FIELD = 0x00000012;
-  static const UDAT_DOW_LOCAL_FIELD = 0x00000013;
-  static const UDAT_EXTENDED_YEAR_FIELD = 0x00000014;
-  static const UDAT_JULIAN_DAY_FIELD = 0x00000015;
-  static const UDAT_MILLISECONDS_IN_DAY_FIELD = 0x00000016;
-  static const UDAT_TIMEZONE_RFC_FIELD = 0x00000017;
-  static const UDAT_TIMEZONE_GENERIC_FIELD = 0x00000018;
-  static const UDAT_STANDALONE_DAY_FIELD = 0x00000019;
-  static const UDAT_STANDALONE_MONTH_FIELD = 0x0000001a;
-  static const UDAT_QUARTER_FIELD = 0x0000001b;
-  static const UDAT_STANDALONE_QUARTER_FIELD = 0x0000001c;
-  static const UDAT_TIMEZONE_SPECIAL_FIELD = 0x0000001d;
-  static const UDAT_YEAR_NAME_FIELD = 0x0000001e;
-  static const UDAT_TIMEZONE_LOCALIZED_GMT_OFFSET_FIELD = 0x0000001f;
-  static const UDAT_TIMEZONE_ISO_FIELD = 0x00000020;
-  static const UDAT_TIMEZONE_ISO_LOCAL_FIELD = 0x00000021;
-  static const UDAT_AM_PM_MIDNIGHT_NOON_FIELD = 0x00000023;
-  static const UDAT_FLEXIBLE_DAY_PERIOD_FIELD = 0x00000024;
-}
-
-/// {@category Enum}
-class UDateFormatBooleanAttribute {
-  static const UDAT_PARSE_ALLOW_WHITESPACE = 0x00000000;
-  static const UDAT_PARSE_ALLOW_NUMERIC = 0x00000001;
-  static const UDAT_PARSE_PARTIAL_LITERAL_MATCH = 0x00000002;
-  static const UDAT_PARSE_MULTIPLE_PATTERNS_FOR_MATCH = 0x00000003;
-  static const UDAT_BOOLEAN_ATTRIBUTE_COUNT = 0x00000004;
-}
-
-/// {@category Enum}
-class UDateFormatSymbolType {
-  static const UDAT_ERAS = 0x00000000;
-  static const UDAT_MONTHS = 0x00000001;
-  static const UDAT_SHORT_MONTHS = 0x00000002;
-  static const UDAT_WEEKDAYS = 0x00000003;
-  static const UDAT_SHORT_WEEKDAYS = 0x00000004;
-  static const UDAT_AM_PMS = 0x00000005;
-  static const UDAT_LOCALIZED_CHARS = 0x00000006;
-  static const UDAT_ERA_NAMES = 0x00000007;
-  static const UDAT_NARROW_MONTHS = 0x00000008;
-  static const UDAT_NARROW_WEEKDAYS = 0x00000009;
-  static const UDAT_STANDALONE_MONTHS = 0x0000000a;
-  static const UDAT_STANDALONE_SHORT_MONTHS = 0x0000000b;
-  static const UDAT_STANDALONE_NARROW_MONTHS = 0x0000000c;
-  static const UDAT_STANDALONE_WEEKDAYS = 0x0000000d;
-  static const UDAT_STANDALONE_SHORT_WEEKDAYS = 0x0000000e;
-  static const UDAT_STANDALONE_NARROW_WEEKDAYS = 0x0000000f;
-  static const UDAT_QUARTERS = 0x00000010;
-  static const UDAT_SHORT_QUARTERS = 0x00000011;
-  static const UDAT_STANDALONE_QUARTERS = 0x00000012;
-  static const UDAT_STANDALONE_SHORT_QUARTERS = 0x00000013;
-  static const UDAT_SHORTER_WEEKDAYS = 0x00000014;
-  static const UDAT_STANDALONE_SHORTER_WEEKDAYS = 0x00000015;
-  static const UDAT_CYCLIC_YEARS_WIDE = 0x00000016;
-  static const UDAT_CYCLIC_YEARS_ABBREVIATED = 0x00000017;
-  static const UDAT_CYCLIC_YEARS_NARROW = 0x00000018;
-  static const UDAT_ZODIAC_NAMES_WIDE = 0x00000019;
-  static const UDAT_ZODIAC_NAMES_ABBREVIATED = 0x0000001a;
-  static const UDAT_ZODIAC_NAMES_NARROW = 0x0000001b;
+class UNumericType {
+  static const U_NT_NONE = 0x00000000;
+  static const U_NT_DECIMAL = 0x00000001;
+  static const U_NT_DIGIT = 0x00000002;
+  static const U_NT_NUMERIC = 0x00000003;
 }
 
 /// {@category Enum}
 class UPluralType {
   static const UPLURAL_TYPE_CARDINAL = 0x00000000;
   static const UPLURAL_TYPE_ORDINAL = 0x00000001;
+}
+
+/// {@category Enum}
+class UProperty {
+  static const UCHAR_ALPHABETIC = 0x00000000;
+  static const UCHAR_BINARY_START = 0x00000000;
+  static const UCHAR_ASCII_HEX_DIGIT = 0x00000001;
+  static const UCHAR_BIDI_CONTROL = 0x00000002;
+  static const UCHAR_BIDI_MIRRORED = 0x00000003;
+  static const UCHAR_DASH = 0x00000004;
+  static const UCHAR_DEFAULT_IGNORABLE_CODE_POINT = 0x00000005;
+  static const UCHAR_DEPRECATED = 0x00000006;
+  static const UCHAR_DIACRITIC = 0x00000007;
+  static const UCHAR_EXTENDER = 0x00000008;
+  static const UCHAR_FULL_COMPOSITION_EXCLUSION = 0x00000009;
+  static const UCHAR_GRAPHEME_BASE = 0x0000000a;
+  static const UCHAR_GRAPHEME_EXTEND = 0x0000000b;
+  static const UCHAR_GRAPHEME_LINK = 0x0000000c;
+  static const UCHAR_HEX_DIGIT = 0x0000000d;
+  static const UCHAR_HYPHEN = 0x0000000e;
+  static const UCHAR_ID_CONTINUE = 0x0000000f;
+  static const UCHAR_ID_START = 0x00000010;
+  static const UCHAR_IDEOGRAPHIC = 0x00000011;
+  static const UCHAR_IDS_BINARY_OPERATOR = 0x00000012;
+  static const UCHAR_IDS_TRINARY_OPERATOR = 0x00000013;
+  static const UCHAR_JOIN_CONTROL = 0x00000014;
+  static const UCHAR_LOGICAL_ORDER_EXCEPTION = 0x00000015;
+  static const UCHAR_LOWERCASE = 0x00000016;
+  static const UCHAR_MATH = 0x00000017;
+  static const UCHAR_NONCHARACTER_CODE_POINT = 0x00000018;
+  static const UCHAR_QUOTATION_MARK = 0x00000019;
+  static const UCHAR_RADICAL = 0x0000001a;
+  static const UCHAR_SOFT_DOTTED = 0x0000001b;
+  static const UCHAR_TERMINAL_PUNCTUATION = 0x0000001c;
+  static const UCHAR_UNIFIED_IDEOGRAPH = 0x0000001d;
+  static const UCHAR_UPPERCASE = 0x0000001e;
+  static const UCHAR_WHITE_SPACE = 0x0000001f;
+  static const UCHAR_XID_CONTINUE = 0x00000020;
+  static const UCHAR_XID_START = 0x00000021;
+  static const UCHAR_CASE_SENSITIVE = 0x00000022;
+  static const UCHAR_S_TERM = 0x00000023;
+  static const UCHAR_VARIATION_SELECTOR = 0x00000024;
+  static const UCHAR_NFD_INERT = 0x00000025;
+  static const UCHAR_NFKD_INERT = 0x00000026;
+  static const UCHAR_NFC_INERT = 0x00000027;
+  static const UCHAR_NFKC_INERT = 0x00000028;
+  static const UCHAR_SEGMENT_STARTER = 0x00000029;
+  static const UCHAR_PATTERN_SYNTAX = 0x0000002a;
+  static const UCHAR_PATTERN_WHITE_SPACE = 0x0000002b;
+  static const UCHAR_POSIX_ALNUM = 0x0000002c;
+  static const UCHAR_POSIX_BLANK = 0x0000002d;
+  static const UCHAR_POSIX_GRAPH = 0x0000002e;
+  static const UCHAR_POSIX_PRINT = 0x0000002f;
+  static const UCHAR_POSIX_XDIGIT = 0x00000030;
+  static const UCHAR_CASED = 0x00000031;
+  static const UCHAR_CASE_IGNORABLE = 0x00000032;
+  static const UCHAR_CHANGES_WHEN_LOWERCASED = 0x00000033;
+  static const UCHAR_CHANGES_WHEN_UPPERCASED = 0x00000034;
+  static const UCHAR_CHANGES_WHEN_TITLECASED = 0x00000035;
+  static const UCHAR_CHANGES_WHEN_CASEFOLDED = 0x00000036;
+  static const UCHAR_CHANGES_WHEN_CASEMAPPED = 0x00000037;
+  static const UCHAR_CHANGES_WHEN_NFKC_CASEFOLDED = 0x00000038;
+  static const UCHAR_EMOJI = 0x00000039;
+  static const UCHAR_EMOJI_PRESENTATION = 0x0000003a;
+  static const UCHAR_EMOJI_MODIFIER = 0x0000003b;
+  static const UCHAR_EMOJI_MODIFIER_BASE = 0x0000003c;
+  static const UCHAR_EMOJI_COMPONENT = 0x0000003d;
+  static const UCHAR_REGIONAL_INDICATOR = 0x0000003e;
+  static const UCHAR_PREPENDED_CONCATENATION_MARK = 0x0000003f;
+  static const UCHAR_EXTENDED_PICTOGRAPHIC = 0x00000040;
+  static const UCHAR_BIDI_CLASS = 0x00001000;
+  static const UCHAR_INT_START = 0x00001000;
+  static const UCHAR_BLOCK = 0x00001001;
+  static const UCHAR_CANONICAL_COMBINING_CLASS = 0x00001002;
+  static const UCHAR_DECOMPOSITION_TYPE = 0x00001003;
+  static const UCHAR_EAST_ASIAN_WIDTH = 0x00001004;
+  static const UCHAR_GENERAL_CATEGORY = 0x00001005;
+  static const UCHAR_JOINING_GROUP = 0x00001006;
+  static const UCHAR_JOINING_TYPE = 0x00001007;
+  static const UCHAR_LINE_BREAK = 0x00001008;
+  static const UCHAR_NUMERIC_TYPE = 0x00001009;
+  static const UCHAR_SCRIPT = 0x0000100a;
+  static const UCHAR_HANGUL_SYLLABLE_TYPE = 0x0000100b;
+  static const UCHAR_NFD_QUICK_CHECK = 0x0000100c;
+  static const UCHAR_NFKD_QUICK_CHECK = 0x0000100d;
+  static const UCHAR_NFC_QUICK_CHECK = 0x0000100e;
+  static const UCHAR_NFKC_QUICK_CHECK = 0x0000100f;
+  static const UCHAR_LEAD_CANONICAL_COMBINING_CLASS = 0x00001010;
+  static const UCHAR_TRAIL_CANONICAL_COMBINING_CLASS = 0x00001011;
+  static const UCHAR_GRAPHEME_CLUSTER_BREAK = 0x00001012;
+  static const UCHAR_SENTENCE_BREAK = 0x00001013;
+  static const UCHAR_WORD_BREAK = 0x00001014;
+  static const UCHAR_BIDI_PAIRED_BRACKET_TYPE = 0x00001015;
+  static const UCHAR_INDIC_POSITIONAL_CATEGORY = 0x00001016;
+  static const UCHAR_INDIC_SYLLABIC_CATEGORY = 0x00001017;
+  static const UCHAR_VERTICAL_ORIENTATION = 0x00001018;
+  static const UCHAR_GENERAL_CATEGORY_MASK = 0x00002000;
+  static const UCHAR_MASK_START = 0x00002000;
+  static const UCHAR_NUMERIC_VALUE = 0x00003000;
+  static const UCHAR_DOUBLE_START = 0x00003000;
+  static const UCHAR_AGE = 0x00004000;
+  static const UCHAR_STRING_START = 0x00004000;
+  static const UCHAR_BIDI_MIRRORING_GLYPH = 0x00004001;
+  static const UCHAR_CASE_FOLDING = 0x00004002;
+  static const UCHAR_LOWERCASE_MAPPING = 0x00004004;
+  static const UCHAR_NAME = 0x00004005;
+  static const UCHAR_SIMPLE_CASE_FOLDING = 0x00004006;
+  static const UCHAR_SIMPLE_LOWERCASE_MAPPING = 0x00004007;
+  static const UCHAR_SIMPLE_TITLECASE_MAPPING = 0x00004008;
+  static const UCHAR_SIMPLE_UPPERCASE_MAPPING = 0x00004009;
+  static const UCHAR_TITLECASE_MAPPING = 0x0000400a;
+  static const UCHAR_UPPERCASE_MAPPING = 0x0000400c;
+  static const UCHAR_BIDI_PAIRED_BRACKET = 0x0000400d;
+  static const UCHAR_SCRIPT_EXTENSIONS = 0x00007000;
+  static const UCHAR_OTHER_PROPERTY_START = 0x00007000;
+  static const UCHAR_INVALID_CODE = 0xffffffff;
+}
+
+/// {@category Enum}
+class UPropertyNameChoice {
+  static const U_SHORT_PROPERTY_NAME = 0x00000000;
+  static const U_LONG_PROPERTY_NAME = 0x00000001;
 }
 
 /// {@category Enum}
@@ -2258,13 +2076,6 @@ class URegionType {
 }
 
 /// {@category Enum}
-class UDateRelativeDateTimeFormatterStyle {
-  static const UDAT_STYLE_LONG = 0x00000000;
-  static const UDAT_STYLE_SHORT = 0x00000001;
-  static const UDAT_STYLE_NARROW = 0x00000002;
-}
-
-/// {@category Enum}
 class URelativeDateTimeUnit {
   static const UDAT_REL_UNIT_YEAR = 0x00000000;
   static const UDAT_REL_UNIT_QUARTER = 0x00000001;
@@ -2284,6 +2095,238 @@ class URelativeDateTimeUnit {
 }
 
 /// {@category Enum}
+class UResType {
+  static const URES_NONE = 0xffffffff;
+  static const URES_STRING = 0x00000000;
+  static const URES_BINARY = 0x00000001;
+  static const URES_TABLE = 0x00000002;
+  static const URES_ALIAS = 0x00000003;
+  static const URES_INT = 0x00000007;
+  static const URES_ARRAY = 0x00000008;
+  static const URES_INT_VECTOR = 0x0000000e;
+}
+
+/// {@category Enum}
+class URestrictionLevel {
+  static const USPOOF_ASCII = 0x10000000;
+  static const USPOOF_SINGLE_SCRIPT_RESTRICTIVE = 0x20000000;
+  static const USPOOF_HIGHLY_RESTRICTIVE = 0x30000000;
+  static const USPOOF_MODERATELY_RESTRICTIVE = 0x40000000;
+  static const USPOOF_MINIMALLY_RESTRICTIVE = 0x50000000;
+  static const USPOOF_UNRESTRICTIVE = 0x60000000;
+  static const USPOOF_RESTRICTION_LEVEL_MASK = 0x7f000000;
+}
+
+/// {@category Enum}
+class UScriptCode {
+  static const USCRIPT_INVALID_CODE = 0xffffffff;
+  static const USCRIPT_COMMON = 0x00000000;
+  static const USCRIPT_INHERITED = 0x00000001;
+  static const USCRIPT_ARABIC = 0x00000002;
+  static const USCRIPT_ARMENIAN = 0x00000003;
+  static const USCRIPT_BENGALI = 0x00000004;
+  static const USCRIPT_BOPOMOFO = 0x00000005;
+  static const USCRIPT_CHEROKEE = 0x00000006;
+  static const USCRIPT_COPTIC = 0x00000007;
+  static const USCRIPT_CYRILLIC = 0x00000008;
+  static const USCRIPT_DESERET = 0x00000009;
+  static const USCRIPT_DEVANAGARI = 0x0000000a;
+  static const USCRIPT_ETHIOPIC = 0x0000000b;
+  static const USCRIPT_GEORGIAN = 0x0000000c;
+  static const USCRIPT_GOTHIC = 0x0000000d;
+  static const USCRIPT_GREEK = 0x0000000e;
+  static const USCRIPT_GUJARATI = 0x0000000f;
+  static const USCRIPT_GURMUKHI = 0x00000010;
+  static const USCRIPT_HAN = 0x00000011;
+  static const USCRIPT_HANGUL = 0x00000012;
+  static const USCRIPT_HEBREW = 0x00000013;
+  static const USCRIPT_HIRAGANA = 0x00000014;
+  static const USCRIPT_KANNADA = 0x00000015;
+  static const USCRIPT_KATAKANA = 0x00000016;
+  static const USCRIPT_KHMER = 0x00000017;
+  static const USCRIPT_LAO = 0x00000018;
+  static const USCRIPT_LATIN = 0x00000019;
+  static const USCRIPT_MALAYALAM = 0x0000001a;
+  static const USCRIPT_MONGOLIAN = 0x0000001b;
+  static const USCRIPT_MYANMAR = 0x0000001c;
+  static const USCRIPT_OGHAM = 0x0000001d;
+  static const USCRIPT_OLD_ITALIC = 0x0000001e;
+  static const USCRIPT_ORIYA = 0x0000001f;
+  static const USCRIPT_RUNIC = 0x00000020;
+  static const USCRIPT_SINHALA = 0x00000021;
+  static const USCRIPT_SYRIAC = 0x00000022;
+  static const USCRIPT_TAMIL = 0x00000023;
+  static const USCRIPT_TELUGU = 0x00000024;
+  static const USCRIPT_THAANA = 0x00000025;
+  static const USCRIPT_THAI = 0x00000026;
+  static const USCRIPT_TIBETAN = 0x00000027;
+  static const USCRIPT_CANADIAN_ABORIGINAL = 0x00000028;
+  static const USCRIPT_UCAS = 0x00000028;
+  static const USCRIPT_YI = 0x00000029;
+  static const USCRIPT_TAGALOG = 0x0000002a;
+  static const USCRIPT_HANUNOO = 0x0000002b;
+  static const USCRIPT_BUHID = 0x0000002c;
+  static const USCRIPT_TAGBANWA = 0x0000002d;
+  static const USCRIPT_BRAILLE = 0x0000002e;
+  static const USCRIPT_CYPRIOT = 0x0000002f;
+  static const USCRIPT_LIMBU = 0x00000030;
+  static const USCRIPT_LINEAR_B = 0x00000031;
+  static const USCRIPT_OSMANYA = 0x00000032;
+  static const USCRIPT_SHAVIAN = 0x00000033;
+  static const USCRIPT_TAI_LE = 0x00000034;
+  static const USCRIPT_UGARITIC = 0x00000035;
+  static const USCRIPT_KATAKANA_OR_HIRAGANA = 0x00000036;
+  static const USCRIPT_BUGINESE = 0x00000037;
+  static const USCRIPT_GLAGOLITIC = 0x00000038;
+  static const USCRIPT_KHAROSHTHI = 0x00000039;
+  static const USCRIPT_SYLOTI_NAGRI = 0x0000003a;
+  static const USCRIPT_NEW_TAI_LUE = 0x0000003b;
+  static const USCRIPT_TIFINAGH = 0x0000003c;
+  static const USCRIPT_OLD_PERSIAN = 0x0000003d;
+  static const USCRIPT_BALINESE = 0x0000003e;
+  static const USCRIPT_BATAK = 0x0000003f;
+  static const USCRIPT_BLISSYMBOLS = 0x00000040;
+  static const USCRIPT_BRAHMI = 0x00000041;
+  static const USCRIPT_CHAM = 0x00000042;
+  static const USCRIPT_CIRTH = 0x00000043;
+  static const USCRIPT_OLD_CHURCH_SLAVONIC_CYRILLIC = 0x00000044;
+  static const USCRIPT_DEMOTIC_EGYPTIAN = 0x00000045;
+  static const USCRIPT_HIERATIC_EGYPTIAN = 0x00000046;
+  static const USCRIPT_EGYPTIAN_HIEROGLYPHS = 0x00000047;
+  static const USCRIPT_KHUTSURI = 0x00000048;
+  static const USCRIPT_SIMPLIFIED_HAN = 0x00000049;
+  static const USCRIPT_TRADITIONAL_HAN = 0x0000004a;
+  static const USCRIPT_PAHAWH_HMONG = 0x0000004b;
+  static const USCRIPT_OLD_HUNGARIAN = 0x0000004c;
+  static const USCRIPT_HARAPPAN_INDUS = 0x0000004d;
+  static const USCRIPT_JAVANESE = 0x0000004e;
+  static const USCRIPT_KAYAH_LI = 0x0000004f;
+  static const USCRIPT_LATIN_FRAKTUR = 0x00000050;
+  static const USCRIPT_LATIN_GAELIC = 0x00000051;
+  static const USCRIPT_LEPCHA = 0x00000052;
+  static const USCRIPT_LINEAR_A = 0x00000053;
+  static const USCRIPT_MANDAIC = 0x00000054;
+  static const USCRIPT_MANDAEAN = 0x00000054;
+  static const USCRIPT_MAYAN_HIEROGLYPHS = 0x00000055;
+  static const USCRIPT_MEROITIC_HIEROGLYPHS = 0x00000056;
+  static const USCRIPT_MEROITIC = 0x00000056;
+  static const USCRIPT_NKO = 0x00000057;
+  static const USCRIPT_ORKHON = 0x00000058;
+  static const USCRIPT_OLD_PERMIC = 0x00000059;
+  static const USCRIPT_PHAGS_PA = 0x0000005a;
+  static const USCRIPT_PHOENICIAN = 0x0000005b;
+  static const USCRIPT_MIAO = 0x0000005c;
+  static const USCRIPT_PHONETIC_POLLARD = 0x0000005c;
+  static const USCRIPT_RONGORONGO = 0x0000005d;
+  static const USCRIPT_SARATI = 0x0000005e;
+  static const USCRIPT_ESTRANGELO_SYRIAC = 0x0000005f;
+  static const USCRIPT_WESTERN_SYRIAC = 0x00000060;
+  static const USCRIPT_EASTERN_SYRIAC = 0x00000061;
+  static const USCRIPT_TENGWAR = 0x00000062;
+  static const USCRIPT_VAI = 0x00000063;
+  static const USCRIPT_VISIBLE_SPEECH = 0x00000064;
+  static const USCRIPT_CUNEIFORM = 0x00000065;
+  static const USCRIPT_UNWRITTEN_LANGUAGES = 0x00000066;
+  static const USCRIPT_UNKNOWN = 0x00000067;
+  static const USCRIPT_CARIAN = 0x00000068;
+  static const USCRIPT_JAPANESE = 0x00000069;
+  static const USCRIPT_LANNA = 0x0000006a;
+  static const USCRIPT_LYCIAN = 0x0000006b;
+  static const USCRIPT_LYDIAN = 0x0000006c;
+  static const USCRIPT_OL_CHIKI = 0x0000006d;
+  static const USCRIPT_REJANG = 0x0000006e;
+  static const USCRIPT_SAURASHTRA = 0x0000006f;
+  static const USCRIPT_SIGN_WRITING = 0x00000070;
+  static const USCRIPT_SUNDANESE = 0x00000071;
+  static const USCRIPT_MOON = 0x00000072;
+  static const USCRIPT_MEITEI_MAYEK = 0x00000073;
+  static const USCRIPT_IMPERIAL_ARAMAIC = 0x00000074;
+  static const USCRIPT_AVESTAN = 0x00000075;
+  static const USCRIPT_CHAKMA = 0x00000076;
+  static const USCRIPT_KOREAN = 0x00000077;
+  static const USCRIPT_KAITHI = 0x00000078;
+  static const USCRIPT_MANICHAEAN = 0x00000079;
+  static const USCRIPT_INSCRIPTIONAL_PAHLAVI = 0x0000007a;
+  static const USCRIPT_PSALTER_PAHLAVI = 0x0000007b;
+  static const USCRIPT_BOOK_PAHLAVI = 0x0000007c;
+  static const USCRIPT_INSCRIPTIONAL_PARTHIAN = 0x0000007d;
+  static const USCRIPT_SAMARITAN = 0x0000007e;
+  static const USCRIPT_TAI_VIET = 0x0000007f;
+  static const USCRIPT_MATHEMATICAL_NOTATION = 0x00000080;
+  static const USCRIPT_SYMBOLS = 0x00000081;
+  static const USCRIPT_BAMUM = 0x00000082;
+  static const USCRIPT_LISU = 0x00000083;
+  static const USCRIPT_NAKHI_GEBA = 0x00000084;
+  static const USCRIPT_OLD_SOUTH_ARABIAN = 0x00000085;
+  static const USCRIPT_BASSA_VAH = 0x00000086;
+  static const USCRIPT_DUPLOYAN = 0x00000087;
+  static const USCRIPT_ELBASAN = 0x00000088;
+  static const USCRIPT_GRANTHA = 0x00000089;
+  static const USCRIPT_KPELLE = 0x0000008a;
+  static const USCRIPT_LOMA = 0x0000008b;
+  static const USCRIPT_MENDE = 0x0000008c;
+  static const USCRIPT_MEROITIC_CURSIVE = 0x0000008d;
+  static const USCRIPT_OLD_NORTH_ARABIAN = 0x0000008e;
+  static const USCRIPT_NABATAEAN = 0x0000008f;
+  static const USCRIPT_PALMYRENE = 0x00000090;
+  static const USCRIPT_KHUDAWADI = 0x00000091;
+  static const USCRIPT_SINDHI = 0x00000091;
+  static const USCRIPT_WARANG_CITI = 0x00000092;
+  static const USCRIPT_AFAKA = 0x00000093;
+  static const USCRIPT_JURCHEN = 0x00000094;
+  static const USCRIPT_MRO = 0x00000095;
+  static const USCRIPT_NUSHU = 0x00000096;
+  static const USCRIPT_SHARADA = 0x00000097;
+  static const USCRIPT_SORA_SOMPENG = 0x00000098;
+  static const USCRIPT_TAKRI = 0x00000099;
+  static const USCRIPT_TANGUT = 0x0000009a;
+  static const USCRIPT_WOLEAI = 0x0000009b;
+  static const USCRIPT_ANATOLIAN_HIEROGLYPHS = 0x0000009c;
+  static const USCRIPT_KHOJKI = 0x0000009d;
+  static const USCRIPT_TIRHUTA = 0x0000009e;
+  static const USCRIPT_CAUCASIAN_ALBANIAN = 0x0000009f;
+  static const USCRIPT_MAHAJANI = 0x000000a0;
+  static const USCRIPT_AHOM = 0x000000a1;
+  static const USCRIPT_HATRAN = 0x000000a2;
+  static const USCRIPT_MODI = 0x000000a3;
+  static const USCRIPT_MULTANI = 0x000000a4;
+  static const USCRIPT_PAU_CIN_HAU = 0x000000a5;
+  static const USCRIPT_SIDDHAM = 0x000000a6;
+  static const USCRIPT_ADLAM = 0x000000a7;
+  static const USCRIPT_BHAIKSUKI = 0x000000a8;
+  static const USCRIPT_MARCHEN = 0x000000a9;
+  static const USCRIPT_NEWA = 0x000000aa;
+  static const USCRIPT_OSAGE = 0x000000ab;
+  static const USCRIPT_HAN_WITH_BOPOMOFO = 0x000000ac;
+  static const USCRIPT_JAMO = 0x000000ad;
+  static const USCRIPT_SYMBOLS_EMOJI = 0x000000ae;
+  static const USCRIPT_MASARAM_GONDI = 0x000000af;
+  static const USCRIPT_SOYOMBO = 0x000000b0;
+  static const USCRIPT_ZANABAZAR_SQUARE = 0x000000b1;
+  static const USCRIPT_DOGRA = 0x000000b2;
+  static const USCRIPT_GUNJALA_GONDI = 0x000000b3;
+  static const USCRIPT_MAKASAR = 0x000000b4;
+  static const USCRIPT_MEDEFAIDRIN = 0x000000b5;
+  static const USCRIPT_HANIFI_ROHINGYA = 0x000000b6;
+  static const USCRIPT_SOGDIAN = 0x000000b7;
+  static const USCRIPT_OLD_SOGDIAN = 0x000000b8;
+  static const USCRIPT_ELYMAIC = 0x000000b9;
+  static const USCRIPT_NYIAKENG_PUACHUE_HMONG = 0x000000ba;
+  static const USCRIPT_NANDINAGARI = 0x000000bb;
+  static const USCRIPT_WANCHO = 0x000000bc;
+}
+
+/// {@category Enum}
+class UScriptUsage {
+  static const USCRIPT_USAGE_NOT_ENCODED = 0x00000000;
+  static const USCRIPT_USAGE_UNKNOWN = 0x00000001;
+  static const USCRIPT_USAGE_EXCLUDED = 0x00000002;
+  static const USCRIPT_USAGE_LIMITED_USE = 0x00000003;
+  static const USCRIPT_USAGE_ASPIRATIONAL = 0x00000004;
+  static const USCRIPT_USAGE_RECOMMENDED = 0x00000005;
+}
+
+/// {@category Enum}
 class USearchAttribute {
   static const USEARCH_OVERLAP = 0x00000000;
   static const USEARCH_ELEMENT_COMPARISON = 0x00000002;
@@ -2297,6 +2340,40 @@ class USearchAttributeValue {
   static const USEARCH_STANDARD_ELEMENT_COMPARISON = 0x00000002;
   static const USEARCH_PATTERN_BASE_WEIGHT_IS_WILDCARD = 0x00000003;
   static const USEARCH_ANY_BASE_WEIGHT_IS_WILDCARD = 0x00000004;
+}
+
+/// {@category Enum}
+class USentenceBreak {
+  static const U_SB_OTHER = 0x00000000;
+  static const U_SB_ATERM = 0x00000001;
+  static const U_SB_CLOSE = 0x00000002;
+  static const U_SB_FORMAT = 0x00000003;
+  static const U_SB_LOWER = 0x00000004;
+  static const U_SB_NUMERIC = 0x00000005;
+  static const U_SB_OLETTER = 0x00000006;
+  static const U_SB_SEP = 0x00000007;
+  static const U_SB_SP = 0x00000008;
+  static const U_SB_STERM = 0x00000009;
+  static const U_SB_UPPER = 0x0000000a;
+  static const U_SB_CR = 0x0000000b;
+  static const U_SB_EXTEND = 0x0000000c;
+  static const U_SB_LF = 0x0000000d;
+  static const U_SB_SCONTINUE = 0x0000000e;
+}
+
+/// {@category Enum}
+class USentenceBreakTag {
+  static const UBRK_SENTENCE_TERM = 0x00000000;
+  static const UBRK_SENTENCE_TERM_LIMIT = 0x00000064;
+  static const UBRK_SENTENCE_SEP = 0x00000064;
+  static const UBRK_SENTENCE_SEP_LIMIT = 0x000000c8;
+}
+
+/// {@category Enum}
+class USetSpanCondition {
+  static const USET_SPAN_NOT_CONTAINED = 0x00000000;
+  static const USET_SPAN_CONTAINED = 0x00000001;
+  static const USET_SPAN_SIMPLE = 0x00000002;
 }
 
 /// {@category Enum}
@@ -2314,28 +2391,36 @@ class USpoofChecks {
 }
 
 /// {@category Enum}
-class URestrictionLevel {
-  static const USPOOF_ASCII = 0x10000000;
-  static const USPOOF_SINGLE_SCRIPT_RESTRICTIVE = 0x20000000;
-  static const USPOOF_HIGHLY_RESTRICTIVE = 0x30000000;
-  static const USPOOF_MODERATELY_RESTRICTIVE = 0x40000000;
-  static const USPOOF_MINIMALLY_RESTRICTIVE = 0x50000000;
-  static const USPOOF_UNRESTRICTIVE = 0x60000000;
-  static const USPOOF_RESTRICTION_LEVEL_MASK = 0x7f000000;
+class UStringPrepProfileType {
+  static const USPREP_RFC3491_NAMEPREP = 0x00000000;
+  static const USPREP_RFC3530_NFS4_CS_PREP = 0x00000001;
+  static const USPREP_RFC3530_NFS4_CS_PREP_CI = 0x00000002;
+  static const USPREP_RFC3530_NFS4_CIS_PREP = 0x00000003;
+  static const USPREP_RFC3530_NFS4_MIXED_PREP_PREFIX = 0x00000004;
+  static const USPREP_RFC3530_NFS4_MIXED_PREP_SUFFIX = 0x00000005;
+  static const USPREP_RFC3722_ISCSI = 0x00000006;
+  static const USPREP_RFC3920_NODEPREP = 0x00000007;
+  static const USPREP_RFC3920_RESOURCEPREP = 0x00000008;
+  static const USPREP_RFC4011_MIB = 0x00000009;
+  static const USPREP_RFC4013_SASLPREP = 0x0000000a;
+  static const USPREP_RFC4505_TRACE = 0x0000000b;
+  static const USPREP_RFC4518_LDAP = 0x0000000c;
+  static const USPREP_RFC4518_LDAP_CI = 0x0000000d;
 }
 
 /// {@category Enum}
-class UDateTimeScale {
-  static const UDTS_JAVA_TIME = 0x00000000;
-  static const UDTS_UNIX_TIME = 0x00000001;
-  static const UDTS_ICU4C_TIME = 0x00000002;
-  static const UDTS_WINDOWS_FILE_TIME = 0x00000003;
-  static const UDTS_DOTNET_DATE_TIME = 0x00000004;
-  static const UDTS_MAC_OLD_TIME = 0x00000005;
-  static const UDTS_MAC_TIME = 0x00000006;
-  static const UDTS_EXCEL_TIME = 0x00000007;
-  static const UDTS_DB2_TIME = 0x00000008;
-  static const UDTS_UNIX_MICROSECONDS_TIME = 0x00000009;
+class UStringTrieResult {
+  static const USTRINGTRIE_NO_MATCH = 0x00000000;
+  static const USTRINGTRIE_NO_VALUE = 0x00000001;
+  static const USTRINGTRIE_FINAL_VALUE = 0x00000002;
+  static const USTRINGTRIE_INTERMEDIATE_VALUE = 0x00000003;
+}
+
+/// {@category Enum}
+class USystemTimeZoneType {
+  static const UCAL_ZONE_TYPE_ANY = 0x00000000;
+  static const UCAL_ZONE_TYPE_CANONICAL = 0x00000001;
+  static const UCAL_ZONE_TYPE_CANONICAL_LOCATION = 0x00000002;
 }
 
 /// {@category Enum}
@@ -2349,235 +2434,109 @@ class UTimeScaleValue {
 }
 
 /// {@category Enum}
+class UTimeZoneTransitionType {
+  static const UCAL_TZ_TRANSITION_NEXT = 0x00000000;
+  static const UCAL_TZ_TRANSITION_NEXT_INCLUSIVE = 0x00000001;
+  static const UCAL_TZ_TRANSITION_PREVIOUS = 0x00000002;
+  static const UCAL_TZ_TRANSITION_PREVIOUS_INCLUSIVE = 0x00000003;
+}
+
+/// {@category Enum}
+class UTraceFunctionNumber {
+  static const UTRACE_FUNCTION_START = 0x00000000;
+  static const UTRACE_U_INIT = 0x00000000;
+  static const UTRACE_U_CLEANUP = 0x00000001;
+  static const UTRACE_CONVERSION_START = 0x00001000;
+  static const UTRACE_UCNV_OPEN = 0x00001000;
+  static const UTRACE_UCNV_OPEN_PACKAGE = 0x00001001;
+  static const UTRACE_UCNV_OPEN_ALGORITHMIC = 0x00001002;
+  static const UTRACE_UCNV_CLONE = 0x00001003;
+  static const UTRACE_UCNV_CLOSE = 0x00001004;
+  static const UTRACE_UCNV_FLUSH_CACHE = 0x00001005;
+  static const UTRACE_UCNV_LOAD = 0x00001006;
+  static const UTRACE_UCNV_UNLOAD = 0x00001007;
+  static const UTRACE_COLLATION_START = 0x00002000;
+  static const UTRACE_UCOL_OPEN = 0x00002000;
+  static const UTRACE_UCOL_CLOSE = 0x00002001;
+  static const UTRACE_UCOL_STRCOLL = 0x00002002;
+  static const UTRACE_UCOL_GET_SORTKEY = 0x00002003;
+  static const UTRACE_UCOL_GETLOCALE = 0x00002004;
+  static const UTRACE_UCOL_NEXTSORTKEYPART = 0x00002005;
+  static const UTRACE_UCOL_STRCOLLITER = 0x00002006;
+  static const UTRACE_UCOL_OPEN_FROM_SHORT_STRING = 0x00002007;
+  static const UTRACE_UCOL_STRCOLLUTF8 = 0x00002008;
+}
+
+/// {@category Enum}
+class UTraceLevel {
+  static const UTRACE_OFF = 0xffffffff;
+  static const UTRACE_ERROR = 0x00000000;
+  static const UTRACE_WARNING = 0x00000003;
+  static const UTRACE_OPEN_CLOSE = 0x00000005;
+  static const UTRACE_INFO = 0x00000007;
+  static const UTRACE_VERBOSE = 0x00000009;
+}
+
+/// {@category Enum}
 class UTransDirection {
   static const UTRANS_FORWARD = 0x00000000;
   static const UTRANS_REVERSE = 0x00000001;
 }
 
 /// {@category Enum}
-class IGP_ID {
-  static const IGP_GETIMEVERSION = 0xfffffffc;
-  static const IGP_CONVERSION = 0x00000008;
-  static const IGP_PROPERTY = 0x00000004;
-  static const IGP_SELECT = 0x00000018;
-  static const IGP_SENTENCE = 0x0000000c;
-  static const IGP_SETCOMPSTR = 0x00000014;
-  static const IGP_UI = 0x00000010;
+class UVerticalOrientation {
+  static const U_VO_ROTATED = 0x00000000;
+  static const U_VO_TRANSFORMED_ROTATED = 0x00000001;
+  static const U_VO_TRANSFORMED_UPRIGHT = 0x00000002;
+  static const U_VO_UPRIGHT = 0x00000003;
 }
 
 /// {@category Enum}
-class ScriptStringOut_uOptionsFlags {
-  static const ETO_CLIPPED = 0x00000004;
-  static const ETO_OPAQUE = 0x00000002;
-  static const ETO_GLYPH_INDEX = 0x00000010;
-  static const ETO_IGNORELANGUAGE = 0x00001000;
-  static const ETO_NUMERICSLATIN = 0x00000800;
-  static const ETO_NUMERICSLOCAL = 0x00000400;
+class UWordBreak {
+  static const UBRK_WORD_NONE = 0x00000000;
+  static const UBRK_WORD_NONE_LIMIT = 0x00000064;
+  static const UBRK_WORD_NUMBER = 0x00000064;
+  static const UBRK_WORD_NUMBER_LIMIT = 0x000000c8;
+  static const UBRK_WORD_LETTER = 0x000000c8;
+  static const UBRK_WORD_LETTER_LIMIT = 0x0000012c;
+  static const UBRK_WORD_KANA = 0x0000012c;
+  static const UBRK_WORD_KANA_LIMIT = 0x00000190;
+  static const UBRK_WORD_IDEO = 0x00000190;
+  static const UBRK_WORD_IDEO_LIMIT = 0x000001f4;
 }
 
 /// {@category Enum}
-class FoldString_dwMapFlags {
-  static const MAP_COMPOSITE = 0x00000040;
-  static const MAP_EXPAND_LIGATURES = 0x00002000;
-  static const MAP_FOLDCZONE = 0x00000010;
-  static const MAP_FOLDDIGITS = 0x00000080;
-  static const MAP_PRECOMPOSED = 0x00000020;
+class UWordBreakValues {
+  static const U_WB_OTHER = 0x00000000;
+  static const U_WB_ALETTER = 0x00000001;
+  static const U_WB_FORMAT = 0x00000002;
+  static const U_WB_KATAKANA = 0x00000003;
+  static const U_WB_MIDLETTER = 0x00000004;
+  static const U_WB_MIDNUM = 0x00000005;
+  static const U_WB_NUMERIC = 0x00000006;
+  static const U_WB_EXTENDNUMLET = 0x00000007;
+  static const U_WB_CR = 0x00000008;
+  static const U_WB_EXTEND = 0x00000009;
+  static const U_WB_LF = 0x0000000a;
+  static const U_WB_MIDNUMLET = 0x0000000b;
+  static const U_WB_NEWLINE = 0x0000000c;
+  static const U_WB_REGIONAL_INDICATOR = 0x0000000d;
+  static const U_WB_HEBREW_LETTER = 0x0000000e;
+  static const U_WB_SINGLE_QUOTE = 0x0000000f;
+  static const U_WB_DOUBLE_QUOTE = 0x00000010;
+  static const U_WB_E_BASE = 0x00000011;
+  static const U_WB_E_BASE_GAZ = 0x00000012;
+  static const U_WB_E_MODIFIER = 0x00000013;
+  static const U_WB_GLUE_AFTER_ZWJ = 0x00000014;
+  static const U_WB_ZWJ = 0x00000015;
+  static const U_WB_WSEGSPACE = 0x00000016;
 }
 
 /// {@category Enum}
-class ImmUnregisterWord_DWORD {
-  static const IME_REGWORD_STYLE_EUDC = 0x00000001;
-}
-
-/// {@category Enum}
-class ImmSetCompositionString_dwIndex {
-  static const SCS_SETSTR = 0x00000009;
-  static const SCS_CHANGEATTR = 0x00000012;
-  static const SCS_CHANGECLAUSE = 0x00000024;
-  static const SCS_SETRECONVERTSTRING = 0x00010000;
-  static const SCS_QUERYRECONVERTSTRING = 0x00020000;
-}
-
-/// {@category Enum}
-class IME_CONFIG {
-  static const IME_CONFIG_GENERAL = 0x00000001;
-  static const IME_CONFIG_REGISTERWORD = 0x00000002;
-  static const IME_CONFIG_SELECTDICTIONARY = 0x00000003;
-}
-
-/// {@category Enum}
-class ImmGetImeMenuItems_Arg3 {
-  static const IGIMII_CMODE = 0x00000001;
-  static const IGIMII_SMODE = 0x00000002;
-  static const IGIMII_CONFIGURE = 0x00000004;
-  static const IGIMII_TOOLS = 0x00000008;
-  static const IGIMII_HELP = 0x00000010;
-  static const IGIMII_OTHER = 0x00000020;
-  static const IGIMII_INPUTTOOLS = 0x00000040;
-}
-
-/// {@category Enum}
-class ImmGetGuideLine_dwIndex {
-  static const GGL_LEVEL = 0x00000001;
-  static const GGL_INDEX = 0x00000002;
-  static const GGL_STRING = 0x00000003;
-  static const GGL_PRIVATE = 0x00000004;
-}
-
-/// {@category Enum}
-class EnumDateFormatsExEx_dwFlags {
-  static const DATE_SHORTDATE = 0x00000001;
-  static const DATE_LONGDATE = 0x00000002;
-  static const DATE_YEARMONTH = 0x00000008;
-  static const DATE_MONTHDAY = 0x00000080;
-  static const DATE_AUTOLAYOUT = 0x00000040;
-  static const DATE_LTRREADING = 0x00000010;
-  static const DATE_RTLREADING = 0x00000020;
-  static const DATE_USE_ALT_CALENDAR = 0x00000004;
-}
-
-/// {@category Enum}
-class ImmNotifyIME_dwIndex {
-  static const CPS_CANCEL = 0x00000004;
-  static const CPS_COMPLETE = 0x00000001;
-  static const CPS_CONVERT = 0x00000002;
-  static const CPS_REVERT = 0x00000003;
-}
-
-/// {@category Enum}
-class TranslateCharsetInfo_dwFlags {
-  static const TCI_SRCCHARSET = 0x00000001;
-  static const TCI_SRCCODEPAGE = 0x00000002;
-  static const TCI_SRCFONTSIG = 0x00000003;
-  static const TCI_SRCLOCALE = 0x00001000;
-}
-
-/// {@category Enum}
-class ImmAssociateContextEx_arg3 {
-  static const IACE_CHILDREN = 0x00000001;
-  static const IACE_DEFAULT = 0x00000010;
-  static const IACE_IGNORENOCONTEXT = 0x00000020;
-}
-
-/// {@category Enum}
-class GetTimeFormatEx_dwFlags {
-  static const TIME_NOMINUTESORSECONDS = 0x00000001;
-  static const TIME_NOSECONDS = 0x00000002;
-  static const TIME_NOTIMEMARKER = 0x00000004;
-  static const TIME_FORCE24HOURFORMAT = 0x00000008;
-}
-
-/// {@category Enum}
-class ImmNotifyIME_dwAction {
-  static const NI_CHANGECANDIDATELIST = 0x00000013;
-  static const NI_CLOSECANDIDATE = 0x00000011;
-  static const NI_COMPOSITIONSTR = 0x00000015;
-  static const NI_IMEMENUSELECTED = 0x00000018;
-  static const NI_OPENCANDIDATE = 0x00000010;
-  static const NI_SELECTCANDIDATESTR = 0x00000012;
-  static const NI_SETCANDIDATE_PAGESIZE = 0x00000017;
-  static const NI_SETCANDIDATE_PAGESTART = 0x00000016;
-}
-
-/// {@category Enum}
-class ImmGetConversionList_uFlag {
-  static const GCL_CONVERSION = 0x00000001;
-  static const GCL_REVERSECONVERSION = 0x00000002;
-  static const GCL_REVERSE_LENGTH = 0x00000003;
-}
-
-/// {@category Enum}
-class EnumSystemLanguageGroupsW_dwFlags {
-  static const LGRPID_INSTALLED = 0x00000001;
-  static const LGRPID_SUPPORTED = 0x00000002;
-}
-
-/// {@category Enum}
-class MultiByteToWideChar_dwFlags {
-  static const MB_COMPOSITE = 0x00000002;
-  static const MB_ERR_INVALID_CHARS = 0x00000008;
-  static const MB_PRECOMPOSED = 0x00000001;
-  static const MB_USEGLYPHCHARS = 0x00000004;
-}
-
-/// {@category Enum}
-class CompareStringEx_dwCmpFlags {
-  static const LINGUISTIC_IGNORECASE = 0x00000010;
-  static const LINGUISTIC_IGNOREDIACRITIC = 0x00000020;
-  static const NORM_IGNORECASE = 0x00000001;
-  static const NORM_IGNOREKANATYPE = 0x00010000;
-  static const NORM_IGNORENONSPACE = 0x00000002;
-  static const NORM_IGNORESYMBOLS = 0x00000004;
-  static const NORM_IGNOREWIDTH = 0x00020000;
-  static const NORM_LINGUISTIC_CASING = 0x08000000;
-  static const SORT_DIGITSASNUMBERS = 0x00000008;
-  static const SORT_STRINGSORT = 0x00001000;
-}
-
-/// {@category Enum}
-class ImmEnumInputContext_idThread {
-  static const None = 0x00000000;
-  static const idThread1 = 0x00000001;
-}
-
-/// {@category Enum}
-class IsValidLocale_dwFlags {
-  static const LCID_INSTALLED = 0x00000001;
-  static const LCID_SUPPORTED = 0x00000002;
-}
-
-/// {@category Enum}
-class EnumSystemCodePages_dwFlags {
-  static const CP_INSTALLED = 0x00000001;
-  static const CP_SUPPORTED = 0x00000002;
-}
-
-/// {@category Enum}
-class IImePad_Request_reqIdFlags {
-  static const IMEPADREQ_INSERTSTRING = 0x00001001;
-  static const IMEPADREQ_SENDCONTROL = 0x00001004;
-  static const IMEPADREQ_SETAPPLETSIZE = 0x00001008;
-  static const IMEPADREQ_GETCOMPOSITIONSTRING = 0x00001006;
-  static const IMEPADREQ_GETCOMPOSITIONSTRINGINFO = 0x0000100c;
-  static const IMEPADREQ_DELETESTRING = 0x00001010;
-  static const IMEPADREQ_CHANGESTRING = 0x00001011;
-  static const IMEPADREQ_GETAPPLHWND = 0x00001014;
-  static const IMEPADREQ_FORCEIMEPADWINDOWSHOW = 0x00001015;
-  static const IMEPADREQ_POSTMODALNOTIFY = 0x00001016;
-  static const IMEPADREQ_GETDEFAULTUILANGID = 0x00001017;
-  static const IMEPADREQ_GETAPPLETUISTYLE = 0x00001019;
-  static const IMEPADREQ_SETAPPLETUISTYLE = 0x0000101a;
-  static const IMEPADREQ_ISAPPLETACTIVE = 0x0000101b;
-  static const IMEPADREQ_ISIMEPADWINDOWVISIBLE = 0x0000101c;
-  static const IMEPADREQ_SETAPPLETMINMAXSIZE = 0x0000101d;
-  static const IMEPADREQ_GETCONVERSIONSTATUS = 0x0000101e;
-  static const IMEPADREQ_GETVERSION = 0x0000101f;
-  static const IMEPADREQ_GETCURRENTIMEINFO = 0x00001020;
-}
-
-/// {@category Enum}
-class ScriptIsComplex_dwFlags {
-  static const SIC_ASCIIDIGIT = 0x00000002;
-  static const SIC_COMPLEX = 0x00000001;
-  static const SIC_NEUTRAL = 0x00000004;
-}
-
-/// {@category Enum}
-class IsTextUnicode_lpiResultFlags {
-  static const IS_TEXT_UNICODE_ASCII16 = 0x00000001;
-  static const IS_TEXT_UNICODE_REVERSE_ASCII16 = 0x00000010;
-  static const IS_TEXT_UNICODE_STATISTICS = 0x00000002;
-  static const IS_TEXT_UNICODE_REVERSE_STATISTICS = 0x00000020;
-  static const IS_TEXT_UNICODE_CONTROLS = 0x00000004;
-  static const IS_TEXT_UNICODE_REVERSE_CONTROLS = 0x00000040;
-  static const IS_TEXT_UNICODE_SIGNATURE = 0x00000008;
-  static const IS_TEXT_UNICODE_REVERSE_SIGNATURE = 0x00000080;
-  static const IS_TEXT_UNICODE_ILLEGAL_CHARS = 0x00000100;
-  static const IS_TEXT_UNICODE_ODD_LENGTH = 0x00000200;
-  static const IS_TEXT_UNICODE_NULL_BYTES = 0x00001000;
-  static const IS_TEXT_UNICODE_UNICODE_MASK = 0x0000000f;
-  static const IS_TEXT_UNICODE_REVERSE_MASK = 0x000000f0;
-  static const IS_TEXT_UNICODE_NOT_UNICODE_MASK = 0x00000f00;
-  static const IS_TEXT_UNICODE_NOT_ASCII_MASK = 0x0000f000;
+class WORDLIST_TYPE {
+  static const WORDLIST_TYPE_IGNORE = 0x00000000;
+  static const WORDLIST_TYPE_ADD = 0x00000001;
+  static const WORDLIST_TYPE_EXCLUDE = 0x00000002;
+  static const WORDLIST_TYPE_AUTOCORRECT = 0x00000003;
 }
 

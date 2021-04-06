@@ -288,7 +288,8 @@ class SPWORDPRONUNCIATION extends Struct {
   @Uint16() external int LangID;
   @Uint16() external int wPronunciationFlags;
   @Uint32() external int ePartOfSpeech;
-  external __ushort__ szPronunciation;
+  @Array(1)
+  external Array<Uint16> szPronunciation;
 }
 
 class SPWORDPRONUNCIATIONLIST extends Struct {
@@ -394,7 +395,8 @@ class SPPROPERTYINFO extends Struct {
 
 class SPRECOCONTEXTSTATUS extends Struct {
   @Uint32() external int eInterference;
-  external __ushort__ szRequestTypeOfUI;
+  @Array(128)
+  external Array<Uint16> szRequestTypeOfUI;
   @Uint32() external int dwReserved1;
   @Uint32() external int dwReserved2;
 }
@@ -406,7 +408,8 @@ class SPRECOGNIZERSTATUS extends Struct {
   @Uint32() external int ulNumActive;
   external GUID clsidEngine;
   @Uint32() external int cLangIDs;
-  external __ushort__ aLangID;
+  @Array(20)
+  external Array<Uint16> aLangID;
   @Uint64() external int ullRecognitionStreamTime;
 }
 

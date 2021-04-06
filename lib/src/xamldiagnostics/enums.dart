@@ -1,10 +1,4 @@
 /// {@category Enum}
-class VisualMutationType {
-  static const Add = 0x00000000;
-  static const Remove = 0x00000001;
-}
-
-/// {@category Enum}
 class BaseValueSource {
   static const BaseValueSourceUnknown = 0x00000000;
   static const BaseValueSourceDefault = 0x00000001;
@@ -52,5 +46,11 @@ class VisualElementState {
   static const ErrorResolved = 0x00000000;
   static const ErrorResourceNotFound = 0x00000001;
   static const ErrorInvalidResource = 0x00000002;
+}
+
+/// {@category Enum}
+class VisualMutationType {
+  static const Add = 0x00000000;
+  static const Remove = 0x00000001;
 }
 

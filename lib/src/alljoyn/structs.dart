@@ -226,16 +226,16 @@ class alljoyn_buslistener_callbacks extends Struct {
 class alljoyn_interfacedescription_member extends Struct {
   @IntPtr() external int iface;
   @Uint32() external int memberType;
-  external Pointer<Int8> name;
-  external Pointer<Int8> signature;
-  external Pointer<Int8> returnSignature;
-  external Pointer<Int8> argNames;
+  external Pointer<Utf8> name;
+  external Pointer<Utf8> signature;
+  external Pointer<Utf8> returnSignature;
+  external Pointer<Utf8> argNames;
   external Pointer internal_member;
 }
 
 class alljoyn_interfacedescription_property extends Struct {
-  external Pointer<Int8> name;
-  external Pointer<Int8> signature;
+  external Pointer<Utf8> name;
+  external Pointer<Utf8> signature;
   @Uint8() external int access;
   external Pointer internal_property;
 }

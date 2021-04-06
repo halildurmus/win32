@@ -132,7 +132,8 @@ class D3D11_RENDER_TARGET_BLEND_DESC extends Struct {
 class D3D11_BLEND_DESC extends Struct {
   @Int32() external int AlphaToCoverageEnable;
   @Int32() external int IndependentBlendEnable;
-  external D3D11_RENDER_TARGET_BLEND_DESC RenderTarget;
+  @Array(8)
+  external Array<D3D11_RENDER_TARGET_BLEND_DESC> RenderTarget;
 }
 
 class D3D11_RASTERIZER_DESC extends Struct {
@@ -400,7 +401,8 @@ class D3D11_SAMPLER_DESC extends Struct {
   @Float() external double MipLODBias;
   @Uint32() external int MaxAnisotropy;
   @Uint32() external int ComparisonFunc;
-  external __float__ BorderColor;
+  @Array(4)
+  external Array<Float> BorderColor;
   @Float() external double MinLOD;
   @Float() external double MaxLOD;
 }
@@ -609,7 +611,8 @@ class D3D11_RENDER_TARGET_BLEND_DESC1 extends Struct {
 class D3D11_BLEND_DESC1 extends Struct {
   @Int32() external int AlphaToCoverageEnable;
   @Int32() external int IndependentBlendEnable;
-  external D3D11_RENDER_TARGET_BLEND_DESC1 RenderTarget;
+  @Array(8)
+  external Array<D3D11_RENDER_TARGET_BLEND_DESC1> RenderTarget;
 }
 
 class D3D11_RASTERIZER_DESC1 extends Struct {
@@ -965,8 +968,10 @@ class D3D11_PIXEL_SHADER_TRACE_DESC extends Struct {
 
 class D3D11_COMPUTE_SHADER_TRACE_DESC extends Struct {
   @Uint64() external int Invocation;
-  external __uint__ ThreadIDInGroup;
-  external __uint__ ThreadGroupID;
+  @Array(3)
+  external Array<Uint32> ThreadIDInGroup;
+  @Array(3)
+  external Array<Uint32> ThreadGroupID;
 }
 
 class D3D11_SHADER_TRACE_DESC extends Struct {
@@ -980,29 +985,42 @@ class D3D11_TRACE_STATS extends Struct {
   @Uint8() external int NumInvocationsInStamp;
   @Uint8() external int TargetStampIndex;
   @Uint32() external int NumTraceSteps;
-  external __ubyte__ InputMask;
-  external __ubyte__ OutputMask;
+  @Array(32)
+  external Array<Uint8> InputMask;
+  @Array(32)
+  external Array<Uint8> OutputMask;
   @Uint16() external int NumTemps;
   @Uint16() external int MaxIndexableTempIndex;
-  external __ushort__ IndexableTempSize;
+  @Array(144)
+  external Array<Uint16> IndexableTempSize;
   @Uint16() external int ImmediateConstantBufferSize;
-  external __uint__ PixelPosition;
-  external __uint64__ PixelCoverageMask;
-  external __uint64__ PixelDiscardedMask;
-  external __uint64__ PixelCoverageMaskAfterShader;
-  external __uint64__ PixelCoverageMaskAfterA2CSampleMask;
-  external __uint64__ PixelCoverageMaskAfterA2CSampleMaskDepth;
-  external __uint64__ PixelCoverageMaskAfterA2CSampleMaskDepthStencil;
+  @Array(8)
+  external Array<Uint32> PixelPosition;
+  @Array(4)
+  external Array<Uint64> PixelCoverageMask;
+  @Array(4)
+  external Array<Uint64> PixelDiscardedMask;
+  @Array(4)
+  external Array<Uint64> PixelCoverageMaskAfterShader;
+  @Array(4)
+  external Array<Uint64> PixelCoverageMaskAfterA2CSampleMask;
+  @Array(4)
+  external Array<Uint64> PixelCoverageMaskAfterA2CSampleMaskDepth;
+  @Array(4)
+  external Array<Uint64> PixelCoverageMaskAfterA2CSampleMaskDepthStencil;
   @Int32() external int PSOutputsDepth;
   @Int32() external int PSOutputsMask;
   @Uint32() external int GSInputPrimitive;
   @Int32() external int GSInputsPrimitiveID;
-  external __ubyte__ HSOutputPatchConstantMask;
-  external __ubyte__ DSInputPatchConstantMask;
+  @Array(32)
+  external Array<Uint8> HSOutputPatchConstantMask;
+  @Array(32)
+  external Array<Uint8> DSInputPatchConstantMask;
 }
 
 class D3D11_TRACE_VALUE extends Struct {
-  external __uint__ Bits;
+  @Array(4)
+  external Array<Uint32> Bits;
   @Uint8() external int ValidMask;
 }
 
@@ -1025,15 +1043,18 @@ class D3D11_TRACE_STEP extends Struct {
 
 class D3DX11_FFT_DESC extends Struct {
   @Uint32() external int NumDimensions;
-  external __uint__ ElementLengths;
+  @Array(32)
+  external Array<Uint32> ElementLengths;
   @Uint32() external int DimensionMask;
   @Uint32() external int Type;
 }
 
 class D3DX11_FFT_BUFFER_INFO extends Struct {
   @Uint32() external int NumTempBufferSizes;
-  external __uint__ TempBufferFloatSizes;
+  @Array(4)
+  external Array<Uint32> TempBufferFloatSizes;
   @Uint32() external int NumPrecomputeBufferSizes;
-  external __uint__ PrecomputeBufferFloatSizes;
+  @Array(4)
+  external Array<Uint32> PrecomputeBufferFloatSizes;
 }
 

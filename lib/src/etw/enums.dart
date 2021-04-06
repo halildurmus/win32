@@ -1,17 +1,60 @@
 /// {@category Enum}
-class TraceMessage_MessageFlags {
-  static const TRACE_MESSAGE_COMPONENTID = 0x00000004;
-  static const TRACE_MESSAGE_GUID = 0x00000002;
-  static const TRACE_MESSAGE_SEQUENCE = 0x00000001;
-  static const TRACE_MESSAGE_SYSTEMINFO = 0x00000020;
-  static const TRACE_MESSAGE_TIMESTAMP = 0x00000008;
+class DECODING_SOURCE {
+  static const DecodingSourceXMLFile = 0x00000000;
+  static const DecodingSourceWbem = 0x00000001;
+  static const DecodingSourceWPP = 0x00000002;
+  static const DecodingSourceTlg = 0x00000003;
+  static const DecodingSourceMax = 0x00000004;
 }
 
 /// {@category Enum}
-class PENABLECALLBACK_IsEnabledFlags {
-  static const EVENT_CONTROL_CODE_DISABLE_PROVIDER = 0x00000000;
-  static const EVENT_CONTROL_CODE_ENABLE_PROVIDER = 0x00000001;
-  static const EVENT_CONTROL_CODE_CAPTURE_STATE = 0x00000002;
+class ETW_COMPRESSION_RESUMPTION_MODE {
+  static const EtwCompressionModeRestart = 0x00000000;
+  static const EtwCompressionModeNoDisable = 0x00000001;
+  static const EtwCompressionModeNoRestart = 0x00000002;
+}
+
+/// {@category Enum}
+class ETW_PROCESS_HANDLE_INFO_TYPE {
+  static const EtwQueryPartitionInformation = 0x00000001;
+  static const EtwQueryPartitionInformationV2 = 0x00000002;
+  static const EtwQueryLastDroppedTimes = 0x00000003;
+  static const EtwQueryProcessHandleInfoMax = 0x00000004;
+}
+
+/// {@category Enum}
+class ETW_PROVIDER_TRAIT_TYPE {
+  static const EtwProviderTraitTypeGroup = 0x00000001;
+  static const EtwProviderTraitDecodeGuid = 0x00000002;
+  static const EtwProviderTraitTypeMax = 0x00000003;
+}
+
+/// {@category Enum}
+class EVENTSECURITYOPERATION {
+  static const EventSecuritySetDACL = 0x00000000;
+  static const EventSecuritySetSACL = 0x00000001;
+  static const EventSecurityAddDACL = 0x00000002;
+  static const EventSecurityAddSACL = 0x00000003;
+  static const EventSecurityMax = 0x00000004;
+}
+
+/// {@category Enum}
+class EVENT_FIELD_TYPE {
+  static const EventKeywordInformation = 0x00000000;
+  static const EventLevelInformation = 0x00000001;
+  static const EventChannelInformation = 0x00000002;
+  static const EventTaskInformation = 0x00000003;
+  static const EventOpcodeInformation = 0x00000004;
+  static const EventInformationMax = 0x00000005;
+}
+
+/// {@category Enum}
+class EVENT_INFO_CLASS {
+  static const EventProviderBinaryTrackInfo = 0x00000000;
+  static const EventProviderSetReserved1 = 0x00000001;
+  static const EventProviderSetTraits = 0x00000002;
+  static const EventProviderUseDescriptorType = 0x00000003;
+  static const MaxEventInfo = 0x00000004;
 }
 
 /// {@category Enum}
@@ -54,25 +97,74 @@ class EVENT_TRACE_FLAG {
 }
 
 /// {@category Enum}
-class WMIDPREQUESTCODE {
-  static const WMI_GET_ALL_DATA = 0x00000000;
-  static const WMI_GET_SINGLE_INSTANCE = 0x00000001;
-  static const WMI_SET_SINGLE_INSTANCE = 0x00000002;
-  static const WMI_SET_SINGLE_ITEM = 0x00000003;
-  static const WMI_ENABLE_EVENTS = 0x00000004;
-  static const WMI_DISABLE_EVENTS = 0x00000005;
-  static const WMI_ENABLE_COLLECTION = 0x00000006;
-  static const WMI_DISABLE_COLLECTION = 0x00000007;
-  static const WMI_REGINFO = 0x00000008;
-  static const WMI_EXECUTE_METHOD = 0x00000009;
-  static const WMI_CAPTURE_STATE = 0x0000000a;
+class MAP_FLAGS {
+  static const EVENTMAP_INFO_FLAG_MANIFEST_VALUEMAP = 0x00000001;
+  static const EVENTMAP_INFO_FLAG_MANIFEST_BITMAP = 0x00000002;
+  static const EVENTMAP_INFO_FLAG_MANIFEST_PATTERNMAP = 0x00000004;
+  static const EVENTMAP_INFO_FLAG_WBEM_VALUEMAP = 0x00000008;
+  static const EVENTMAP_INFO_FLAG_WBEM_BITMAP = 0x00000010;
+  static const EVENTMAP_INFO_FLAG_WBEM_FLAG = 0x00000020;
+  static const EVENTMAP_INFO_FLAG_WBEM_NO_MAP = 0x00000040;
 }
 
 /// {@category Enum}
-class ETW_COMPRESSION_RESUMPTION_MODE {
-  static const EtwCompressionModeRestart = 0x00000000;
-  static const EtwCompressionModeNoDisable = 0x00000001;
-  static const EtwCompressionModeNoRestart = 0x00000002;
+class MAP_VALUETYPE {
+  static const EVENTMAP_ENTRY_VALUETYPE_ULONG = 0x00000000;
+  static const EVENTMAP_ENTRY_VALUETYPE_STRING = 0x00000001;
+}
+
+/// {@category Enum}
+class PAYLOAD_OPERATOR {
+  static const PAYLOADFIELD_EQ = 0x00000000;
+  static const PAYLOADFIELD_NE = 0x00000001;
+  static const PAYLOADFIELD_LE = 0x00000002;
+  static const PAYLOADFIELD_GT = 0x00000003;
+  static const PAYLOADFIELD_LT = 0x00000004;
+  static const PAYLOADFIELD_GE = 0x00000005;
+  static const PAYLOADFIELD_BETWEEN = 0x00000006;
+  static const PAYLOADFIELD_NOTBETWEEN = 0x00000007;
+  static const PAYLOADFIELD_MODULO = 0x00000008;
+  static const PAYLOADFIELD_CONTAINS = 0x00000014;
+  static const PAYLOADFIELD_DOESNTCONTAIN = 0x00000015;
+  static const PAYLOADFIELD_IS = 0x0000001e;
+  static const PAYLOADFIELD_ISNOT = 0x0000001f;
+  static const PAYLOADFIELD_INVALID = 0x00000020;
+}
+
+/// {@category Enum}
+class PENABLECALLBACK_IsEnabledFlags {
+  static const EVENT_CONTROL_CODE_DISABLE_PROVIDER = 0x00000000;
+  static const EVENT_CONTROL_CODE_ENABLE_PROVIDER = 0x00000001;
+  static const EVENT_CONTROL_CODE_CAPTURE_STATE = 0x00000002;
+}
+
+/// {@category Enum}
+class PROPERTY_FLAGS {
+  static const PropertyStruct = 0x00000001;
+  static const PropertyParamLength = 0x00000002;
+  static const PropertyParamCount = 0x00000004;
+  static const PropertyWBEMXmlFragment = 0x00000008;
+  static const PropertyParamFixedLength = 0x00000010;
+  static const PropertyParamFixedCount = 0x00000020;
+  static const PropertyHasTags = 0x00000040;
+  static const PropertyHasCustomSchema = 0x00000080;
+}
+
+/// {@category Enum}
+class TDH_CONTEXT_TYPE {
+  static const TDH_CONTEXT_WPP_TMFFILE = 0x00000000;
+  static const TDH_CONTEXT_WPP_TMFSEARCHPATH = 0x00000001;
+  static const TDH_CONTEXT_WPP_GMT = 0x00000002;
+  static const TDH_CONTEXT_POINTERSIZE = 0x00000003;
+  static const TDH_CONTEXT_PDB_PATH = 0x00000004;
+  static const TDH_CONTEXT_MAXIMUM = 0x00000005;
+}
+
+/// {@category Enum}
+class TEMPLATE_FLAGS {
+  static const TEMPLATE_EVENT_DATA = 0x00000001;
+  static const TEMPLATE_USER_DATA = 0x00000002;
+  static const TEMPLATE_CONTROL_GUID = 0x00000004;
 }
 
 /// {@category Enum}
@@ -104,53 +196,27 @@ class TRACE_QUERY_INFO_CLASS {
 }
 
 /// {@category Enum}
-class ETW_PROCESS_HANDLE_INFO_TYPE {
-  static const EtwQueryPartitionInformation = 0x00000001;
-  static const EtwQueryPartitionInformationV2 = 0x00000002;
-  static const EtwQueryLastDroppedTimes = 0x00000003;
-  static const EtwQueryProcessHandleInfoMax = 0x00000004;
+class TraceMessage_MessageFlags {
+  static const TRACE_MESSAGE_COMPONENTID = 0x00000004;
+  static const TRACE_MESSAGE_GUID = 0x00000002;
+  static const TRACE_MESSAGE_SEQUENCE = 0x00000001;
+  static const TRACE_MESSAGE_SYSTEMINFO = 0x00000020;
+  static const TRACE_MESSAGE_TIMESTAMP = 0x00000008;
 }
 
 /// {@category Enum}
-class EVENT_INFO_CLASS {
-  static const EventProviderBinaryTrackInfo = 0x00000000;
-  static const EventProviderSetReserved1 = 0x00000001;
-  static const EventProviderSetTraits = 0x00000002;
-  static const EventProviderUseDescriptorType = 0x00000003;
-  static const MaxEventInfo = 0x00000004;
-}
-
-/// {@category Enum}
-class ETW_PROVIDER_TRAIT_TYPE {
-  static const EtwProviderTraitTypeGroup = 0x00000001;
-  static const EtwProviderTraitDecodeGuid = 0x00000002;
-  static const EtwProviderTraitTypeMax = 0x00000003;
-}
-
-/// {@category Enum}
-class EVENTSECURITYOPERATION {
-  static const EventSecuritySetDACL = 0x00000000;
-  static const EventSecuritySetSACL = 0x00000001;
-  static const EventSecurityAddDACL = 0x00000002;
-  static const EventSecurityAddSACL = 0x00000003;
-  static const EventSecurityMax = 0x00000004;
-}
-
-/// {@category Enum}
-class MAP_FLAGS {
-  static const EVENTMAP_INFO_FLAG_MANIFEST_VALUEMAP = 0x00000001;
-  static const EVENTMAP_INFO_FLAG_MANIFEST_BITMAP = 0x00000002;
-  static const EVENTMAP_INFO_FLAG_MANIFEST_PATTERNMAP = 0x00000004;
-  static const EVENTMAP_INFO_FLAG_WBEM_VALUEMAP = 0x00000008;
-  static const EVENTMAP_INFO_FLAG_WBEM_BITMAP = 0x00000010;
-  static const EVENTMAP_INFO_FLAG_WBEM_FLAG = 0x00000020;
-  static const EVENTMAP_INFO_FLAG_WBEM_NO_MAP = 0x00000040;
-}
-
-/// {@category Enum}
-class MAP_VALUETYPE {
-  static const EVENTMAP_ENTRY_VALUETYPE_ULONG = 0x00000000;
-  static const EVENTMAP_ENTRY_VALUETYPE_STRING = 0x00000001;
+class WMIDPREQUESTCODE {
+  static const WMI_GET_ALL_DATA = 0x00000000;
+  static const WMI_GET_SINGLE_INSTANCE = 0x00000001;
+  static const WMI_SET_SINGLE_INSTANCE = 0x00000002;
+  static const WMI_SET_SINGLE_ITEM = 0x00000003;
+  static const WMI_ENABLE_EVENTS = 0x00000004;
+  static const WMI_DISABLE_EVENTS = 0x00000005;
+  static const WMI_ENABLE_COLLECTION = 0x00000006;
+  static const WMI_DISABLE_COLLECTION = 0x00000007;
+  static const WMI_REGINFO = 0x00000008;
+  static const WMI_EXECUTE_METHOD = 0x00000009;
+  static const WMI_CAPTURE_STATE = 0x0000000a;
 }
 
 /// {@category Enum}
@@ -237,71 +303,5 @@ class TDH_OUT_TYPE {
   static const TDH_OUTTYPE_DATETIME_UTC = 0x00000026;
   static const TDH_OUTTYPE_REDUCEDSTRING = 0x0000012c;
   static const TDH_OUTTYPE_NOPRINT = 0x0000012d;
-}
-
-/// {@category Enum}
-class PROPERTY_FLAGS {
-  static const PropertyStruct = 0x00000001;
-  static const PropertyParamLength = 0x00000002;
-  static const PropertyParamCount = 0x00000004;
-  static const PropertyWBEMXmlFragment = 0x00000008;
-  static const PropertyParamFixedLength = 0x00000010;
-  static const PropertyParamFixedCount = 0x00000020;
-  static const PropertyHasTags = 0x00000040;
-  static const PropertyHasCustomSchema = 0x00000080;
-}
-
-/// {@category Enum}
-class DECODING_SOURCE {
-  static const DecodingSourceXMLFile = 0x00000000;
-  static const DecodingSourceWbem = 0x00000001;
-  static const DecodingSourceWPP = 0x00000002;
-  static const DecodingSourceTlg = 0x00000003;
-  static const DecodingSourceMax = 0x00000004;
-}
-
-/// {@category Enum}
-class TEMPLATE_FLAGS {
-  static const TEMPLATE_EVENT_DATA = 0x00000001;
-  static const TEMPLATE_USER_DATA = 0x00000002;
-  static const TEMPLATE_CONTROL_GUID = 0x00000004;
-}
-
-/// {@category Enum}
-class PAYLOAD_OPERATOR {
-  static const PAYLOADFIELD_EQ = 0x00000000;
-  static const PAYLOADFIELD_NE = 0x00000001;
-  static const PAYLOADFIELD_LE = 0x00000002;
-  static const PAYLOADFIELD_GT = 0x00000003;
-  static const PAYLOADFIELD_LT = 0x00000004;
-  static const PAYLOADFIELD_GE = 0x00000005;
-  static const PAYLOADFIELD_BETWEEN = 0x00000006;
-  static const PAYLOADFIELD_NOTBETWEEN = 0x00000007;
-  static const PAYLOADFIELD_MODULO = 0x00000008;
-  static const PAYLOADFIELD_CONTAINS = 0x00000014;
-  static const PAYLOADFIELD_DOESNTCONTAIN = 0x00000015;
-  static const PAYLOADFIELD_IS = 0x0000001e;
-  static const PAYLOADFIELD_ISNOT = 0x0000001f;
-  static const PAYLOADFIELD_INVALID = 0x00000020;
-}
-
-/// {@category Enum}
-class EVENT_FIELD_TYPE {
-  static const EventKeywordInformation = 0x00000000;
-  static const EventLevelInformation = 0x00000001;
-  static const EventChannelInformation = 0x00000002;
-  static const EventTaskInformation = 0x00000003;
-  static const EventOpcodeInformation = 0x00000004;
-  static const EventInformationMax = 0x00000005;
-}
-
-/// {@category Enum}
-class TDH_CONTEXT_TYPE {
-  static const TDH_CONTEXT_WPP_TMFFILE = 0x00000000;
-  static const TDH_CONTEXT_WPP_TMFSEARCHPATH = 0x00000001;
-  static const TDH_CONTEXT_WPP_GMT = 0x00000002;
-  static const TDH_CONTEXT_POINTERSIZE = 0x00000003;
-  static const TDH_CONTEXT_PDB_PATH = 0x00000004;
-  static const TDH_CONTEXT_MAXIMUM = 0x00000005;
 }
 

@@ -84,7 +84,7 @@ class RsvpObjHdr extends Struct {
 }
 
 class Session_IPv4 extends Struct {
-  external in_addr sess_destaddr;
+  external IN_ADDR sess_destaddr;
   @Uint8() external int sess_protid;
   @Uint8() external int sess_flags;
   @Uint16() external int sess_destport;
@@ -96,7 +96,7 @@ class RSVP_SESSION extends Struct {
 }
 
 class Rsvp_Hop_IPv4 extends Struct {
-  external in_addr hop_ipaddr;
+  external IN_ADDR hop_ipaddr;
   @Uint32() external int hop_LIH;
 }
 
@@ -111,13 +111,13 @@ class RESV_STYLE extends Struct {
 }
 
 class Filter_Spec_IPv4 extends Struct {
-  external in_addr filt_ipaddr;
+  external IN_ADDR filt_ipaddr;
   @Uint16() external int filt_unused;
   @Uint16() external int filt_port;
 }
 
 class Filter_Spec_IPv4GPI extends Struct {
-  external in_addr filt_ipaddr;
+  external IN_ADDR filt_ipaddr;
   @Uint32() external int filt_gpi;
 }
 
@@ -127,7 +127,8 @@ class FILTER_SPEC extends Struct {
 }
 
 class Scope_list_ipv4 extends Struct {
-  external in_addr scopl_ipaddr;
+  @Array(1)
+  external Array<IN_ADDR> scopl_ipaddr;
 }
 
 class RSVP_SCOPE extends Struct {
@@ -136,7 +137,7 @@ class RSVP_SCOPE extends Struct {
 }
 
 class Error_Spec_IPv4 extends Struct {
-  external in_addr errs_errnode;
+  external IN_ADDR errs_errnode;
   @Uint8() external int errs_flags;
   @Uint8() external int errs_code;
   @Uint16() external int errs_value;
@@ -156,7 +157,8 @@ class POLICY_DATA extends Struct {
 class POLICY_ELEMENT extends Struct {
   @Uint16() external int usPeLength;
   @Uint16() external int usPeType;
-  external __ubyte__ ucPeData;
+  @Array(4)
+  external Array<Uint8> ucPeData;
 }
 
 class IntServMainHdr extends Struct {
@@ -291,7 +293,8 @@ class ID_ERROR_OBJECT extends Struct {
   @Uint8() external int ucSubType;
   @Uint16() external int usReserved;
   @Uint16() external int usIdErrorValue;
-  external __ubyte__ ucIdErrData;
+  @Array(4)
+  external Array<Uint8> ucIdErrData;
 }
 
 class RSVP_MSG_OBJS extends Struct {
@@ -328,8 +331,8 @@ class LPM_INIT_INFO extends Struct {
 class lpmiptable extends Struct {
   @Uint32() external int ulIfIndex;
   @Uint32() external int MediaType;
-  external in_addr IfIpAddr;
-  external in_addr IfNetMask;
+  external IN_ADDR IfIpAddr;
+  external IN_ADDR IfNetMask;
 }
 
 class QOS_PACKET_PRIORITY extends Struct {
@@ -361,7 +364,8 @@ class QOS_VERSION extends Struct {
 
 class QOS_FRIENDLY_NAME extends Struct {
   external QOS_OBJECT_HDR ObjectHdr;
-  external __ushort__ FriendlyName;
+  @Array(129)
+  external Array<Uint16> FriendlyName;
 }
 
 class QOS_TRAFFIC_CLASS extends Struct {
@@ -377,7 +381,8 @@ class QOS_DS_CLASS extends Struct {
 class QOS_DIFFSERV extends Struct {
   external QOS_OBJECT_HDR ObjectHdr;
   @Uint32() external int DSFieldCount;
-  external __ubyte__ DiffservRule;
+  @Array(1)
+  external Array<Uint8> DiffservRule;
 }
 
 class QOS_DIFFSERV_RULE extends Struct {
@@ -413,7 +418,8 @@ class TC_IFC_DESCRIPTOR extends Struct {
 
 class TC_SUPPORTED_INFO_BUFFER extends Struct {
   @Uint16() external int InstanceIDLength;
-  external __ushort__ InstanceID;
+  @Array(129)
+  external Array<Uint16> InstanceID;
   @Uint64() external int InterfaceLuid;
   external ADDRESS_LIST_DESCRIPTOR AddrListDesc;
 }
@@ -429,7 +435,8 @@ class TC_GEN_FLOW extends Struct {
   external FLOWSPEC SendingFlowspec;
   external FLOWSPEC ReceivingFlowspec;
   @Uint32() external int TcObjectsLength;
-  external QOS_OBJECT_HDR TcObjects;
+  @Array(1)
+  external Array<QOS_OBJECT_HDR> TcObjects;
 }
 
 class IP_PATTERN extends Struct {
@@ -439,7 +446,8 @@ class IP_PATTERN extends Struct {
   @Uint32() external int DstAddr;
   @Uint32() external int S_un;
   @Uint8() external int ProtocolId;
-  external __ubyte__ Reserved3;
+  @Array(3)
+  external Array<Uint8> Reserved3;
 }
 
 class IPX_PATTERN extends Struct {
@@ -451,10 +459,12 @@ class ENUMERATION_BUFFER extends Struct {
   @Uint32() external int Length;
   @Uint32() external int OwnerProcessId;
   @Uint16() external int FlowNameLength;
-  external __ushort__ FlowName;
+  @Array(129)
+  external Array<Uint16> FlowName;
   external Pointer<TC_GEN_FLO> pFlow;
   @Uint32() external int NumberOfFilters;
-  external TC_GEN_FILTER GenericFilter;
+  @Array(1)
+  external Array<TC_GEN_FILTER> GenericFilter;
 }
 
 class QOS extends Struct {

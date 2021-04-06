@@ -43,6 +43,15 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class MilMatrix3x2D extends Struct {
+  @Double() external double S_11;
+  @Double() external double S_12;
+  @Double() external double S_21;
+  @Double() external double S_22;
+  @Double() external double DX;
+  @Double() external double DY;
+}
+
 class MilRectD extends Struct {
   @Double() external double left;
   @Double() external double top;
@@ -72,14 +81,5 @@ class MILMatrixF extends Struct {
   @Double() external double _42;
   @Double() external double _43;
   @Double() external double _44;
-}
-
-class MilMatrix3x2D extends Struct {
-  @Double() external double S_11;
-  @Double() external double S_12;
-  @Double() external double S_21;
-  @Double() external double S_22;
-  @Double() external double DX;
-  @Double() external double DY;
 }
 

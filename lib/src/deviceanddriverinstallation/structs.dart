@@ -77,26 +77,30 @@ class SP_DEVICE_INTERFACE_DATA extends Struct {
 
 class SP_DEVICE_INTERFACE_DETAIL_DATA_A extends Struct {
   @Uint32() external int cbSize;
-  external __byte__ DevicePath;
+  @Array(1)
+  external Array<Int8> DevicePath;
 }
 
 class SP_DEVICE_INTERFACE_DETAIL_DATA_W extends Struct {
   @Uint32() external int cbSize;
-  external __ushort__ DevicePath;
+  @Array(1)
+  external Array<Uint16> DevicePath;
 }
 
 class SP_DEVINFO_LIST_DETAIL_DATA_A extends Struct {
   @Uint32() external int cbSize;
   external GUID ClassGuid;
   @IntPtr() external int RemoteMachineHandle;
-  external __byte__ RemoteMachineName;
+  @Array(129)
+  external Array<Int8> RemoteMachineName;
 }
 
 class SP_DEVINFO_LIST_DETAIL_DATA_W extends Struct {
   @Uint32() external int cbSize;
   external GUID ClassGuid;
   @IntPtr() external int RemoteMachineHandle;
-  external __ushort__ RemoteMachineName;
+  @Array(129)
+  external Array<Uint16> RemoteMachineName;
 }
 
 class SP_DEVINSTALL_PARAMS_A extends Struct {
@@ -109,7 +113,8 @@ class SP_DEVINSTALL_PARAMS_A extends Struct {
   external Pointer FileQueue;
   @IntPtr() external int ClassInstallReserved;
   @Uint32() external int Reserved;
-  external __byte__ DriverPath;
+  @Array(129)
+  external Array<Int8> DriverPath;
 }
 
 class SP_DEVINSTALL_PARAMS_W extends Struct {
@@ -122,7 +127,8 @@ class SP_DEVINSTALL_PARAMS_W extends Struct {
   external Pointer FileQueue;
   @IntPtr() external int ClassInstallReserved;
   @Uint32() external int Reserved;
-  external __ushort__ DriverPath;
+  @Array(129)
+  external Array<Uint16> DriverPath;
 }
 
 class SP_CLASSINSTALL_HEADER extends Struct {
@@ -157,19 +163,28 @@ class SP_UNREMOVEDEVICE_PARAMS extends Struct {
 
 class SP_SELECTDEVICE_PARAMS_A extends Struct {
   external SP_CLASSINSTALL_HEADER ClassInstallHeader;
-  external __byte__ Title;
-  external __byte__ Instructions;
-  external __byte__ ListLabel;
-  external __byte__ SubTitle;
-  external __ubyte__ Reserved;
+  @Array(60)
+  external Array<Int8> Title;
+  @Array(129)
+  external Array<Int8> Instructions;
+  @Array(30)
+  external Array<Int8> ListLabel;
+  @Array(129)
+  external Array<Int8> SubTitle;
+  @Array(2)
+  external Array<Uint8> Reserved;
 }
 
 class SP_SELECTDEVICE_PARAMS_W extends Struct {
   external SP_CLASSINSTALL_HEADER ClassInstallHeader;
-  external __ushort__ Title;
-  external __ushort__ Instructions;
-  external __ushort__ ListLabel;
-  external __ushort__ SubTitle;
+  @Array(60)
+  external Array<Uint16> Title;
+  @Array(129)
+  external Array<Uint16> Instructions;
+  @Array(30)
+  external Array<Uint16> ListLabel;
+  @Array(129)
+  external Array<Uint16> SubTitle;
 }
 
 class SP_DETECTDEVICE_PARAMS extends Struct {
@@ -181,7 +196,8 @@ class SP_DETECTDEVICE_PARAMS extends Struct {
 class SP_INSTALLWIZARD_DATA extends Struct {
   external SP_CLASSINSTALL_HEADER ClassInstallHeader;
   @Uint32() external int Flags;
-  external __intptr__ DynamicPages;
+  @Array(20)
+  external Array<IntPtr> DynamicPages;
   @Uint32() external int NumDynamicPages;
   @Uint32() external int DynamicPageFlags;
   @Uint32() external int PrivateFlags;
@@ -192,40 +208,50 @@ class SP_INSTALLWIZARD_DATA extends Struct {
 class SP_NEWDEVICEWIZARD_DATA extends Struct {
   external SP_CLASSINSTALL_HEADER ClassInstallHeader;
   @Uint32() external int Flags;
-  external __intptr__ DynamicPages;
+  @Array(20)
+  external Array<IntPtr> DynamicPages;
   @Uint32() external int NumDynamicPages;
   @IntPtr() external int hwndWizardDlg;
 }
 
 class SP_TROUBLESHOOTER_PARAMS_A extends Struct {
   external SP_CLASSINSTALL_HEADER ClassInstallHeader;
-  external __byte__ ChmFile;
-  external __byte__ HtmlTroubleShooter;
+  @Array(129)
+  external Array<Int8> ChmFile;
+  @Array(129)
+  external Array<Int8> HtmlTroubleShooter;
 }
 
 class SP_TROUBLESHOOTER_PARAMS_W extends Struct {
   external SP_CLASSINSTALL_HEADER ClassInstallHeader;
-  external __ushort__ ChmFile;
-  external __ushort__ HtmlTroubleShooter;
+  @Array(129)
+  external Array<Uint16> ChmFile;
+  @Array(129)
+  external Array<Uint16> HtmlTroubleShooter;
 }
 
 class SP_POWERMESSAGEWAKE_PARAMS_A extends Struct {
   external SP_CLASSINSTALL_HEADER ClassInstallHeader;
-  external __byte__ PowerMessageWake;
+  @Array(130)
+  external Array<Int8> PowerMessageWake;
 }
 
 class SP_POWERMESSAGEWAKE_PARAMS_W extends Struct {
   external SP_CLASSINSTALL_HEADER ClassInstallHeader;
-  external __ushort__ PowerMessageWake;
+  @Array(130)
+  external Array<Uint16> PowerMessageWake;
 }
 
 class SP_DRVINFO_DATA_V2_A extends Struct {
   @Uint32() external int cbSize;
   @Uint32() external int DriverType;
   @IntPtr() external int Reserved;
-  external __byte__ Description;
-  external __byte__ MfgName;
-  external __byte__ ProviderName;
+  @Array(129)
+  external Array<Int8> Description;
+  @Array(129)
+  external Array<Int8> MfgName;
+  @Array(129)
+  external Array<Int8> ProviderName;
   external FILETIME DriverDate;
   @Uint64() external int DriverVersion;
 }
@@ -234,9 +260,12 @@ class SP_DRVINFO_DATA_V2_W extends Struct {
   @Uint32() external int cbSize;
   @Uint32() external int DriverType;
   @IntPtr() external int Reserved;
-  external __ushort__ Description;
-  external __ushort__ MfgName;
-  external __ushort__ ProviderName;
+  @Array(129)
+  external Array<Uint16> Description;
+  @Array(129)
+  external Array<Uint16> MfgName;
+  @Array(129)
+  external Array<Uint16> ProviderName;
   external FILETIME DriverDate;
   @Uint64() external int DriverVersion;
 }
@@ -245,18 +274,24 @@ class SP_DRVINFO_DATA_V1_A extends Struct {
   @Uint32() external int cbSize;
   @Uint32() external int DriverType;
   @IntPtr() external int Reserved;
-  external __byte__ Description;
-  external __byte__ MfgName;
-  external __byte__ ProviderName;
+  @Array(129)
+  external Array<Int8> Description;
+  @Array(129)
+  external Array<Int8> MfgName;
+  @Array(129)
+  external Array<Int8> ProviderName;
 }
 
 class SP_DRVINFO_DATA_V1_W extends Struct {
   @Uint32() external int cbSize;
   @Uint32() external int DriverType;
   @IntPtr() external int Reserved;
-  external __ushort__ Description;
-  external __ushort__ MfgName;
-  external __ushort__ ProviderName;
+  @Array(129)
+  external Array<Uint16> Description;
+  @Array(129)
+  external Array<Uint16> MfgName;
+  @Array(129)
+  external Array<Uint16> ProviderName;
 }
 
 class SP_DRVINFO_DETAIL_DATA_A extends Struct {
@@ -265,10 +300,14 @@ class SP_DRVINFO_DETAIL_DATA_A extends Struct {
   @Uint32() external int CompatIDsOffset;
   @Uint32() external int CompatIDsLength;
   @IntPtr() external int Reserved;
-  external __byte__ SectionName;
-  external __byte__ InfFileName;
-  external __byte__ DrvDescription;
-  external __byte__ HardwareID;
+  @Array(129)
+  external Array<Int8> SectionName;
+  @Array(129)
+  external Array<Int8> InfFileName;
+  @Array(129)
+  external Array<Int8> DrvDescription;
+  @Array(1)
+  external Array<Int8> HardwareID;
 }
 
 class SP_DRVINFO_DETAIL_DATA_W extends Struct {
@@ -277,10 +316,14 @@ class SP_DRVINFO_DETAIL_DATA_W extends Struct {
   @Uint32() external int CompatIDsOffset;
   @Uint32() external int CompatIDsLength;
   @IntPtr() external int Reserved;
-  external __ushort__ SectionName;
-  external __ushort__ InfFileName;
-  external __ushort__ DrvDescription;
-  external __ushort__ HardwareID;
+  @Array(129)
+  external Array<Uint16> SectionName;
+  @Array(129)
+  external Array<Uint16> InfFileName;
+  @Array(129)
+  external Array<Uint16> DrvDescription;
+  @Array(1)
+  external Array<Uint16> HardwareID;
 }
 
 class SP_DRVINSTALL_PARAMS extends Struct {
@@ -312,27 +355,33 @@ class SP_PROPSHEETPAGE_REQUEST extends Struct {
 
 class SP_BACKUP_QUEUE_PARAMS_V2_A extends Struct {
   @Uint32() external int cbSize;
-  external __byte__ FullInfPath;
+  @Array(129)
+  external Array<Int8> FullInfPath;
   @Int32() external int FilenameOffset;
-  external __byte__ ReinstallInstance;
+  @Array(129)
+  external Array<Int8> ReinstallInstance;
 }
 
 class SP_BACKUP_QUEUE_PARAMS_V2_W extends Struct {
   @Uint32() external int cbSize;
-  external __ushort__ FullInfPath;
+  @Array(129)
+  external Array<Uint16> FullInfPath;
   @Int32() external int FilenameOffset;
-  external __ushort__ ReinstallInstance;
+  @Array(129)
+  external Array<Uint16> ReinstallInstance;
 }
 
 class SP_BACKUP_QUEUE_PARAMS_V1_A extends Struct {
   @Uint32() external int cbSize;
-  external __byte__ FullInfPath;
+  @Array(129)
+  external Array<Int8> FullInfPath;
   @Int32() external int FilenameOffset;
 }
 
 class SP_BACKUP_QUEUE_PARAMS_V1_W extends Struct {
   @Uint32() external int cbSize;
-  external __ushort__ FullInfPath;
+  @Array(129)
+  external Array<Uint16> FullInfPath;
   @Int32() external int FilenameOffset;
 }
 
@@ -342,7 +391,8 @@ class CONFLICT_DETAILS_A extends Struct {
   @Uint32() external int CD_dnDevInst;
   @IntPtr() external int CD_rdResDes;
   @Uint32() external int CD_ulFlags;
-  external __byte__ CD_szDescription;
+  @Array(129)
+  external Array<Int8> CD_szDescription;
 }
 
 class CONFLICT_DETAILS_W extends Struct {
@@ -351,7 +401,8 @@ class CONFLICT_DETAILS_W extends Struct {
   @Uint32() external int CD_dnDevInst;
   @IntPtr() external int CD_rdResDes;
   @Uint32() external int CD_ulFlags;
-  external __ushort__ CD_szDescription;
+  @Array(129)
+  external Array<Uint16> CD_szDescription;
 }
 
 class MEM_RANGE extends Struct {
@@ -374,7 +425,8 @@ class MEM_DES extends Struct {
 
 class MEM_RESOURCE extends Struct {
   external MEM_DES MEM_Header;
-  external MEM_RANGE MEM_Data;
+  @Array(1)
+  external Array<MEM_RANGE> MEM_Data;
 }
 
 class Mem_Large_Range_s extends Struct {
@@ -397,7 +449,8 @@ class Mem_Large_Des_s extends Struct {
 
 class Mem_Large_Resource_s extends Struct {
   external Mem_Large_Des_s MEM_LARGE_Header;
-  external Mem_Large_Range_s MEM_LARGE_Data;
+  @Array(1)
+  external Array<Mem_Large_Range_s> MEM_LARGE_Data;
 }
 
 class IO_RANGE extends Struct {
@@ -419,7 +472,8 @@ class IO_DES extends Struct {
 
 class IO_RESOURCE extends Struct {
   external IO_DES IO_Header;
-  external IO_RANGE IO_Data;
+  @Array(1)
+  external Array<IO_RANGE> IO_Data;
 }
 
 class DMA_RANGE extends Struct {
@@ -437,7 +491,8 @@ class DMA_DES extends Struct {
 
 class DMA_RESOURCE extends Struct {
   external DMA_DES DMA_Header;
-  external DMA_RANGE DMA_Data;
+  @Array(1)
+  external Array<DMA_RANGE> DMA_Data;
 }
 
 class IRQ_RANGE extends Struct {
@@ -464,12 +519,14 @@ class IRQ_DES_64 extends Struct {
 
 class IRQ_RESOURCE_32 extends Struct {
   external IRQ_DES_32 IRQ_Header;
-  external IRQ_RANGE IRQ_Data;
+  @Array(1)
+  external Array<IRQ_RANGE> IRQ_Data;
 }
 
 class IRQ_RESOURCE_64 extends Struct {
   external IRQ_DES_64 IRQ_Header;
-  external IRQ_RANGE IRQ_Data;
+  @Array(1)
+  external Array<IRQ_RANGE> IRQ_Data;
 }
 
 class DevPrivate_Range_s extends Struct {
@@ -489,7 +546,8 @@ class DevPrivate_Des_s extends Struct {
 
 class DevPrivate_Resource_s extends Struct {
   external DevPrivate_Des_s PRV_Header;
-  external DevPrivate_Range_s PRV_Data;
+  @Array(1)
+  external Array<DevPrivate_Range_s> PRV_Data;
 }
 
 class CS_DES extends Struct {
@@ -498,7 +556,8 @@ class CS_DES extends Struct {
   @Uint32() external int CSD_LegacyDataSize;
   @Uint32() external int CSD_Flags;
   external GUID CSD_ClassGuid;
-  external __ubyte__ CSD_Signature;
+  @Array(1)
+  external Array<Uint8> CSD_Signature;
 }
 
 class CS_RESOURCE extends Struct {
@@ -510,12 +569,16 @@ class PCCARD_DES extends Struct {
   @Uint32() external int PCD_Type;
   @Uint32() external int PCD_Flags;
   @Uint8() external int PCD_ConfigIndex;
-  external __ubyte__ PCD_Reserved;
+  @Array(3)
+  external Array<Uint8> PCD_Reserved;
   @Uint32() external int PCD_MemoryCardBase1;
   @Uint32() external int PCD_MemoryCardBase2;
-  external __uint__ PCD_MemoryCardBase;
-  external __ushort__ PCD_MemoryFlags;
-  external __ubyte__ PCD_IoFlags;
+  @Array(2)
+  external Array<Uint32> PCD_MemoryCardBase;
+  @Array(2)
+  external Array<Uint16> PCD_MemoryFlags;
+  @Array(2)
+  external Array<Uint8> PCD_IoFlags;
 }
 
 class PCCARD_RESOURCE extends Struct {
@@ -528,7 +591,8 @@ class MFCARD_DES extends Struct {
   @Uint32() external int PMF_Flags;
   @Uint8() external int PMF_ConfigOptions;
   @Uint8() external int PMF_IoResourceIndex;
-  external __ubyte__ PMF_Reserved;
+  @Array(2)
+  external Array<Uint8> PMF_Reserved;
   @Uint32() external int PMF_ConfigRegisterBase;
 }
 
@@ -553,7 +617,8 @@ class BUSNUMBER_DES extends Struct {
 
 class BUSNUMBER_RESOURCE extends Struct {
   external BUSNUMBER_DES BusNumber_Header;
-  external BUSNUMBER_RANGE BusNumber_Data;
+  @Array(1)
+  external Array<BUSNUMBER_RANGE> BusNumber_Data;
 }
 
 class Connection_Des_s extends Struct {
@@ -572,13 +637,15 @@ class Connection_Resource_s extends Struct {
 
 class HWProfileInfo_sA extends Struct {
   @Uint32() external int HWPI_ulHWProfile;
-  external __byte__ HWPI_szFriendlyName;
+  @Array(80)
+  external Array<Int8> HWPI_szFriendlyName;
   @Uint32() external int HWPI_dwFlags;
 }
 
 class HWProfileInfo_sW extends Struct {
   @Uint32() external int HWPI_ulHWProfile;
-  external __ushort__ HWPI_szFriendlyName;
+  @Array(80)
+  external Array<Uint16> HWPI_szFriendlyName;
   @Uint32() external int HWPI_dwFlags;
 }
 

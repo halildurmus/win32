@@ -110,7 +110,8 @@ class RdcNeedPointer extends Struct {
 }
 
 class RdcSignature extends Struct {
-  external __ubyte__ m_Signature;
+  @Array(16)
+  external Array<Uint8> m_Signature;
   @Uint16() external int m_BlockLength;
 }
 
@@ -126,7 +127,8 @@ class SimilarityMappedViewInfo extends Struct {
 }
 
 class SimilarityData extends Struct {
-  external __ubyte__ m_Data;
+  @Array(16)
+  external Array<Uint8> m_Data;
 }
 
 class FindSimilarFileIndexResults extends Struct {
@@ -140,6 +142,7 @@ class SimilarityDumpData extends Struct {
 }
 
 class SimilarityFileId extends Struct {
-  external __ubyte__ m_FileId;
+  @Array(32)
+  external Array<Uint8> m_FileId;
 }
 

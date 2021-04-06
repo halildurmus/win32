@@ -51,31 +51,6 @@ class HIFTIMESTAMPCHANGE extends Struct {
   @IntPtr() external int Value;
 }
 
-class SOCKADDR_INET extends Struct {
-  external sockaddr_in Ipv4;
-  external SOCKADDR_IN6_LH Ipv6;
-  @Uint16() external int si_family;
-}
-
-class SOCKADDR_IN6_PAIR extends Struct {
-  external Pointer<SOCKADDR_IN6_LH> SourceAddress;
-  external Pointer<SOCKADDR_IN6_LH> DestinationAddress;
-}
-
-class NL_NETWORK_CONNECTIVITY_HINT extends Struct {
-  @Uint32() external int ConnectivityLevel;
-  @Uint32() external int ConnectivityCost;
-  @Uint8() external int ApproachingDataLimit;
-  @Uint8() external int OverDataLimit;
-  @Uint8() external int Roaming;
-}
-
-class NL_BANDWIDTH_INFORMATION extends Struct {
-  @Uint64() external int Bandwidth;
-  @Uint64() external int Instability;
-  @Uint8() external int BandwidthPeaked;
-}
-
 class ip_option_information extends Struct {
   @Uint8() external int Ttl;
   @Uint8() external int Tos;
@@ -115,7 +90,8 @@ class icmp_echo_reply32 extends Struct {
 class IPV6_ADDRESS_EX extends Struct {
   @Uint16() external int sin6_port;
   @Uint32() external int sin6_flowinfo;
-  external __ushort__ sin6_addr;
+  @Array(8)
+  external Array<Uint16> sin6_addr;
   @Uint32() external int sin6_scope_id;
 }
 
@@ -137,22 +113,26 @@ class tcp_reserve_port_range extends Struct {
 
 class IP_ADAPTER_INDEX_MAP extends Struct {
   @Uint32() external int Index;
-  external __ushort__ Name;
+  @Array(128)
+  external Array<Uint16> Name;
 }
 
 class IP_INTERFACE_INFO extends Struct {
   @Int32() external int NumAdapters;
-  external IP_ADAPTER_INDEX_MAP Adapter;
+  @Array(1)
+  external Array<IP_ADAPTER_INDEX_MAP> Adapter;
 }
 
 class IP_UNIDIRECTIONAL_ADAPTER_ADDRESS extends Struct {
   @Uint32() external int NumAdapters;
-  external __uint__ Address;
+  @Array(1)
+  external Array<Uint32> Address;
 }
 
 class IP_ADAPTER_ORDER_MAP extends Struct {
   @Uint32() external int NumAdapters;
-  external __uint__ AdapterOrder;
+  @Array(1)
+  external Array<Uint32> AdapterOrder;
 }
 
 class IP_MCAST_COUNTER_INFO extends Struct {
@@ -180,7 +160,8 @@ class NET_LUID_LH extends Struct {
 
 class IF_PHYSICAL_ADDRESS_LH extends Struct {
   @Uint16() external int Length;
-  external __ubyte__ Address;
+  @Array(32)
+  external Array<Uint8> Address;
 }
 
 class IP_ADDRESS_PREFIX extends Struct {
@@ -228,7 +209,8 @@ class MIB_IPDESTROW extends Struct {
 
 class MIB_IPDESTTABLE extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_IPDESTROW table;
+  @Array(1)
+  external Array<MIB_IPDESTROW> table;
 }
 
 class MIB_ROUTESTATE extends Struct {
@@ -236,7 +218,8 @@ class MIB_ROUTESTATE extends Struct {
 }
 
 class IP_ADDRESS_STRING extends Struct {
-  external __byte__ String;
+  @Array(16)
+  external Array<Int8> String;
 }
 
 class IP_ADDR_STRING extends Struct {
@@ -249,10 +232,13 @@ class IP_ADDR_STRING extends Struct {
 class IP_ADAPTER_INFO extends Struct {
   external Pointer<IP_ADAPTER_INFO> Next;
   @Uint32() external int ComboIndex;
-  external __byte__ AdapterName;
-  external __byte__ Description;
+  @Array(129)
+  external Array<Int8> AdapterName;
+  @Array(128)
+  external Array<Int8> Description;
   @Uint32() external int AddressLength;
-  external __ubyte__ Address;
+  @Array(8)
+  external Array<Uint8> Address;
   @Uint32() external int Index;
   @Uint32() external int Type;
   @Uint32() external int DhcpEnabled;
@@ -331,7 +317,8 @@ class IP_ADAPTER_PREFIX_XP extends Struct {
 
 class IP_ADAPTER_DNS_SUFFIX extends Struct {
   external Pointer<IP_ADAPTER_DNS_SUFFIX> Next;
-  external __ushort__ String;
+  @Array(129)
+  external Array<Uint16> String;
 }
 
 class IP_ADAPTER_ADDRESSES_LH extends Struct {
@@ -345,14 +332,16 @@ class IP_ADAPTER_ADDRESSES_LH extends Struct {
   external Pointer<Utf16> DnsSuffix;
   external Pointer<Utf16> Description;
   external Pointer<Utf16> FriendlyName;
-  external __ubyte__ PhysicalAddress;
+  @Array(8)
+  external Array<Uint8> PhysicalAddress;
   @Uint32() external int PhysicalAddressLength;
   @Uint32() external int Anonymous2;
   @Uint32() external int Mtu;
   @Uint32() external int IfType;
   @Uint32() external int OperStatus;
   @Uint32() external int Ipv6IfIndex;
-  external __uint__ ZoneIndices;
+  @Array(16)
+  external Array<Uint32> ZoneIndices;
   external Pointer<IP_ADAPTER_PREFIX_XP> FirstPrefix;
   @Uint64() external int TransmitLinkSpeed;
   @Uint64() external int ReceiveLinkSpeed;
@@ -367,7 +356,8 @@ class IP_ADAPTER_ADDRESSES_LH extends Struct {
   @Uint32() external int ConnectionType;
   @Uint32() external int TunnelType;
   external SOCKET_ADDRESS Dhcpv6Server;
-  external __ubyte__ Dhcpv6ClientDuid;
+  @Array(128)
+  external Array<Uint8> Dhcpv6ClientDuid;
   @Uint32() external int Dhcpv6ClientDuidLength;
   @Uint32() external int Dhcpv6Iaid;
   external Pointer<IP_ADAPTER_DNS_SUFFIX> FirstDnsSuffix;
@@ -384,14 +374,16 @@ class IP_ADAPTER_ADDRESSES_XP extends Struct {
   external Pointer<Utf16> DnsSuffix;
   external Pointer<Utf16> Description;
   external Pointer<Utf16> FriendlyName;
-  external __ubyte__ PhysicalAddress;
+  @Array(8)
+  external Array<Uint8> PhysicalAddress;
   @Uint32() external int PhysicalAddressLength;
   @Uint32() external int Flags;
   @Uint32() external int Mtu;
   @Uint32() external int IfType;
   @Uint32() external int OperStatus;
   @Uint32() external int Ipv6IfIndex;
-  external __uint__ ZoneIndices;
+  @Array(16)
+  external Array<Uint32> ZoneIndices;
   external Pointer<IP_ADAPTER_PREFIX_XP> FirstPrefix;
 }
 
@@ -403,12 +395,15 @@ class IP_PER_ADAPTER_INFO_W2KSP1 extends Struct {
 }
 
 class FIXED_INFO_W2KSP1 extends Struct {
-  external __byte__ HostName;
-  external __byte__ DomainName;
+  @Array(128)
+  external Array<Int8> HostName;
+  @Array(128)
+  external Array<Int8> DomainName;
   external Pointer<IP_ADDR_STRING> CurrentDnsServer;
   external IP_ADDR_STRING DnsServerList;
   @Uint32() external int NodeType;
-  external __byte__ ScopeId;
+  @Array(129)
+  external Array<Int8> ScopeId;
   @Uint32() external int EnableRouting;
   @Uint32() external int EnableProxy;
   @Uint32() external int EnableDns;
@@ -629,5 +624,34 @@ class INTERFACE_HARDWARE_CROSSTIMESTAMP extends Struct {
 }
 
 class NET_ADDRESS_INFO extends Struct {
+}
+
+class IN_ADDR extends Struct {
+  @Uint32() external int S_un;
+}
+
+class SOCKADDR_INET extends Struct {
+  external SOCKADDR_IN Ipv4;
+  external SOCKADDR_IN6 Ipv6;
+  @Uint16() external int si_family;
+}
+
+class SOCKADDR_IN6_PAIR extends Struct {
+  external Pointer<SOCKADDR_IN6> SourceAddress;
+  external Pointer<SOCKADDR_IN6> DestinationAddress;
+}
+
+class NL_NETWORK_CONNECTIVITY_HINT extends Struct {
+  @Uint32() external int ConnectivityLevel;
+  @Uint32() external int ConnectivityCost;
+  @Uint8() external int ApproachingDataLimit;
+  @Uint8() external int OverDataLimit;
+  @Uint8() external int Roaming;
+}
+
+class NL_BANDWIDTH_INFORMATION extends Struct {
+  @Uint64() external int Bandwidth;
+  @Uint64() external int Instability;
+  @Uint8() external int BandwidthPeaked;
 }
 

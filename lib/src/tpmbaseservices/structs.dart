@@ -54,7 +54,8 @@ class TBS_CONTEXT_PARAMS2 extends Struct {
 
 class tdTPM_WNF_PROVISIONING extends Struct {
   @Uint32() external int status;
-  external __ubyte__ message;
+  @Array(28)
+  external Array<Uint8> message;
 }
 
 class TPM_DEVICE_INFO extends Struct {

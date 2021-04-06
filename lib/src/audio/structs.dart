@@ -63,8 +63,10 @@ class APO_CONNECTION_DESCRIPTOR extends Struct {
 class APO_REG_PROPERTIES extends Struct {
   external GUID clsid;
   @Uint32() external int Flags;
-  external __ushort__ szFriendlyName;
-  external __ushort__ szCopyrightInfo;
+  @Array(129)
+  external Array<Uint16> szFriendlyName;
+  @Array(129)
+  external Array<Uint16> szCopyrightInfo;
   @Uint32() external int u32MajorVersion;
   @Uint32() external int u32MinorVersion;
   @Uint32() external int u32MinInputConnections;
@@ -73,7 +75,8 @@ class APO_REG_PROPERTIES extends Struct {
   @Uint32() external int u32MaxOutputConnections;
   @Uint32() external int u32MaxInstances;
   @Uint32() external int u32NumAPOInterfaces;
-  external GUID iidAPOInterfaceList;
+  @Array(1)
+  external Array<GUID> iidAPOInterfaceList;
 }
 
 class APOInitBaseStruct extends Struct {
@@ -111,7 +114,8 @@ class DLSID extends Struct {
   @Uint32() external int ulData1;
   @Uint16() external int usData2;
   @Uint16() external int usData3;
-  external __ubyte__ abData4;
+  @Array(8)
+  external Array<Uint8> abData4;
 }
 
 class DLSVERSION extends Struct {
@@ -198,7 +202,8 @@ class DMUS_DOWNLOADINFO extends Struct {
 }
 
 class DMUS_OFFSETTABLE extends Struct {
-  external __uint__ ulOffsetTable;
+  @Array(1)
+  external Array<Uint32> ulOffsetTable;
 }
 
 class DMUS_INSTRUMENT extends Struct {
@@ -220,7 +225,8 @@ class DMUS_REGION extends Struct {
   @Uint32() external int ulFirstExtCkIdx;
   external WAVELINK WaveLink;
   external _rwsmp WSMP;
-  external _rloop WLOOP;
+  @Array(1)
+  external Array<_rloop> WLOOP;
 }
 
 class DMUS_LFOPARAMS extends Struct {
@@ -277,17 +283,20 @@ class DMUS_EXTENSIONCHUNK extends Struct {
   @Uint32() external int cbSize;
   @Uint32() external int ulNextExtCkIdx;
   @Uint32() external int ExtCkID;
-  external __ubyte__ byExtCk;
+  @Array(4)
+  external Array<Uint8> byExtCk;
 }
 
 class DMUS_COPYRIGHT extends Struct {
   @Uint32() external int cbSize;
-  external __ubyte__ byCopyright;
+  @Array(4)
+  external Array<Uint8> byCopyright;
 }
 
 class DMUS_WAVEDATA extends Struct {
   @Uint32() external int cbSize;
-  external __ubyte__ byData;
+  @Array(4)
+  external Array<Uint8> byData;
 }
 
 class DMUS_WAVE extends Struct {
@@ -557,7 +566,8 @@ class DMUS_PORTCAPS extends Struct {
   @Uint32() external int dwMaxVoices;
   @Uint32() external int dwMaxAudioChannels;
   @Uint32() external int dwEffectFlags;
-  external __ushort__ wszDescription;
+  @Array(128)
+  external Array<Uint16> wszDescription;
 }
 
 class _DMUS_PORTPARAMS extends Struct {
@@ -617,14 +627,16 @@ class DMUS_CLOCKINFO7 extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int ctType;
   external GUID guidClock;
-  external __ushort__ wszDescription;
+  @Array(128)
+  external Array<Uint16> wszDescription;
 }
 
 class DMUS_CLOCKINFO8 extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int ctType;
   external GUID guidClock;
-  external __ushort__ wszDescription;
+  @Array(128)
+  external Array<Uint16> wszDescription;
   @Uint32() external int dwFlags;
 }
 
@@ -652,6 +664,7 @@ class MIDIOPENDESC extends Struct {
   @IntPtr() external int dwInstance;
   @IntPtr() external int dnDevNode;
   @Uint32() external int cIds;
-  external midiopenstrmid_tag rgIds;
+  @Array(1)
+  external Array<midiopenstrmid_tag> rgIds;
 }
 

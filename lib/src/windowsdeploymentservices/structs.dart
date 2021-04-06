@@ -52,7 +52,8 @@ class WDS_CLI_CRED extends Struct {
 class PXE_DHCP_OPTION extends Struct {
   @Uint8() external int OptionType;
   @Uint8() external int OptionLength;
-  external __ubyte__ OptionValue;
+  @Array(1)
+  external Array<Uint8> OptionValue;
 }
 
 class PXE_DHCP_MESSAGE extends Struct {
@@ -67,9 +68,12 @@ class PXE_DHCP_MESSAGE extends Struct {
   @Uint32() external int YourIpAddress;
   @Uint32() external int BootstrapServerAddress;
   @Uint32() external int RelayAgentIpAddress;
-  external __ubyte__ HardwareAddress;
-  external __ubyte__ HostName;
-  external __ubyte__ BootFileName;
+  @Array(16)
+  external Array<Uint8> HardwareAddress;
+  @Array(64)
+  external Array<Uint8> HostName;
+  @Array(128)
+  external Array<Uint8> BootFileName;
   @Uint32() external int Anonymous;
   external PXE_DHCP_OPTION Option;
 }
@@ -77,12 +81,14 @@ class PXE_DHCP_MESSAGE extends Struct {
 class PXE_DHCPV6_OPTION extends Struct {
   @Uint16() external int OptionCode;
   @Uint16() external int DataLength;
-  external __ubyte__ Data;
+  @Array(1)
+  external Array<Uint8> Data;
 }
 
 class PXE_DHCPV6_MESSAGE_HEADER extends Struct {
   @Uint8() external int MessageType;
-  external __ubyte__ Message;
+  @Array(1)
+  external Array<Uint8> Message;
 }
 
 class PXE_DHCPV6_MESSAGE extends Struct {
@@ -90,15 +96,19 @@ class PXE_DHCPV6_MESSAGE extends Struct {
   @Uint8() external int TransactionIDByte1;
   @Uint8() external int TransactionIDByte2;
   @Uint8() external int TransactionIDByte3;
-  external PXE_DHCPV6_OPTION Options;
+  @Array(1)
+  external Array<PXE_DHCPV6_OPTION> Options;
 }
 
 class PXE_DHCPV6_RELAY_MESSAGE extends Struct {
   @Uint8() external int MessageType;
   @Uint8() external int HopCount;
-  external __ubyte__ LinkAddress;
-  external __ubyte__ PeerAddress;
-  external PXE_DHCPV6_OPTION Options;
+  @Array(16)
+  external Array<Uint8> LinkAddress;
+  @Array(16)
+  external Array<Uint8> PeerAddress;
+  @Array(1)
+  external Array<PXE_DHCPV6_OPTION> Options;
 }
 
 class PXE_PROVIDER extends Struct {

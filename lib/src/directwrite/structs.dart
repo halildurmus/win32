@@ -242,7 +242,8 @@ class DWRITE_CARET_METRICS extends Struct {
 }
 
 class DWRITE_PANOSE extends Struct {
-  external __ubyte__ values;
+  @Array(10)
+  external Array<Uint8> values;
   @Uint8() external int familyKind;
   @Uint32() external int text;
   @Uint32() external int script;

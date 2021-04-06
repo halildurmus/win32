@@ -44,7 +44,8 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class NgcTicketContext extends Struct {
-  external __ushort__ wszTicket;
+  @Array(45)
+  external Array<Uint16> wszTicket;
   @IntPtr() external int hKey;
   @IntPtr() external int hImpersonateToken;
 }
@@ -58,8 +59,10 @@ class RAS_AUTH_ATTRIBUTE extends Struct {
 class PPP_EAP_PACKET extends Struct {
   @Uint8() external int Code;
   @Uint8() external int Id;
-  external __ubyte__ Length;
-  external __ubyte__ Data;
+  @Array(2)
+  external Array<Uint8> Length;
+  @Array(1)
+  external Array<Uint8> Data;
 }
 
 class PPP_EAP_INPUT extends Struct {
@@ -290,7 +293,8 @@ class EapUsernamePasswordCredential extends Struct {
 }
 
 class EapCertificateCredential extends Struct {
-  external __ubyte__ certHash;
+  @Array(20)
+  external Array<Uint8> certHash;
   external Pointer<Utf16> password;
 }
 
@@ -333,8 +337,10 @@ class EapHostPeerMethodResult extends Struct {
 class EapPacket extends Struct {
   @Uint8() external int Code;
   @Uint8() external int Id;
-  external __ubyte__ Length;
-  external __ubyte__ Data;
+  @Array(2)
+  external Array<Uint8> Length;
+  @Array(1)
+  external Array<Uint8> Data;
 }
 
 class EAP_METHOD_AUTHENTICATOR_RESULT extends Struct {

@@ -127,6 +127,26 @@ class SERVICE_STATUS_HANDLE extends Struct {
   @IntPtr() external int Value;
 }
 
+class SEC_WINNT_AUTH_IDENTITY_W extends Struct {
+  external Pointer<Uint16> User;
+  @Uint32() external int UserLength;
+  external Pointer<Uint16> Domain;
+  @Uint32() external int DomainLength;
+  external Pointer<Uint16> Password;
+  @Uint32() external int PasswordLength;
+  @Uint32() external int Flags;
+}
+
+class SEC_WINNT_AUTH_IDENTITY_A extends Struct {
+  external Pointer<Uint8> User;
+  @Uint32() external int UserLength;
+  external Pointer<Uint8> Domain;
+  @Uint32() external int DomainLength;
+  external Pointer<Uint8> Password;
+  @Uint32() external int PasswordLength;
+  @Uint32() external int Flags;
+}
+
 class MSA_INFO_0 extends Struct {
   @Uint32() external int State;
 }
@@ -144,14 +164,16 @@ class LUID_AND_ATTRIBUTES extends Struct {
 }
 
 class SID_IDENTIFIER_AUTHORITY extends Struct {
-  external __ubyte__ Value;
+  @Array(6)
+  external Array<Uint8> Value;
 }
 
 class SID extends Struct {
   @Uint8() external int Revision;
   @Uint8() external int SubAuthorityCount;
-  external __ubyte__ IdentifierAuthority;
-  external __uint__ SubAuthority;
+  @Uint8() external int IdentifierAuthority;
+  @Array(1)
+  external Array<Uint32> SubAuthority;
 }
 
 class SID_AND_ATTRIBUTES extends Struct {
@@ -162,7 +184,8 @@ class SID_AND_ATTRIBUTES extends Struct {
 class SID_AND_ATTRIBUTES_HASH extends Struct {
   @Uint32() external int SidCount;
   external Pointer<SID_AND_ATTRIBUTES> SidAttr;
-  external __uintptr__ Hash;
+  @Array(32)
+  external Array<IntPtr> Hash;
 }
 
 class ACL extends Struct {
@@ -346,7 +369,8 @@ class OBJECT_TYPE_LIST extends Struct {
 class PRIVILEGE_SET extends Struct {
   @Uint32() external int PrivilegeCount;
   @Uint32() external int Control;
-  external LUID_AND_ATTRIBUTES Privilege;
+  @Array(1)
+  external Array<LUID_AND_ATTRIBUTES> Privilege;
 }
 
 class TOKEN_USER extends Struct {
@@ -355,12 +379,14 @@ class TOKEN_USER extends Struct {
 
 class TOKEN_GROUPS extends Struct {
   @Uint32() external int GroupCount;
-  external SID_AND_ATTRIBUTES Groups;
+  @Array(1)
+  external Array<SID_AND_ATTRIBUTES> Groups;
 }
 
 class TOKEN_PRIVILEGES extends Struct {
   @Uint32() external int PrivilegeCount;
-  external LUID_AND_ATTRIBUTES Privileges;
+  @Array(1)
+  external Array<LUID_AND_ATTRIBUTES> Privileges;
 }
 
 class TOKEN_OWNER extends Struct {
@@ -429,11 +455,13 @@ class TOKEN_ACCESS_INFORMATION extends Struct {
 }
 
 class TOKEN_AUDIT_POLICY extends Struct {
-  external __ubyte__ PerUserPolicy;
+  @Array(30)
+  external Array<Uint8> PerUserPolicy;
 }
 
 class TOKEN_SOURCE extends Struct {
-  external __byte__ SourceName;
+  @Array(8)
+  external Array<Int8> SourceName;
   external LUID SourceIdentifier;
 }
 
@@ -523,76 +551,6 @@ class QUOTA_LIMITS extends Struct {
   @Int64() external int TimeLimit;
 }
 
-class SEC_WINNT_AUTH_IDENTITY_W extends Struct {
-  external Pointer<Uint16> User;
-  @Uint32() external int UserLength;
-  external Pointer<Uint16> Domain;
-  @Uint32() external int DomainLength;
-  external Pointer<Uint16> Password;
-  @Uint32() external int PasswordLength;
-  @Uint32() external int Flags;
-}
-
-class SEC_WINNT_AUTH_IDENTITY_A extends Struct {
-  external Pointer<Uint8> User;
-  @Uint32() external int UserLength;
-  external Pointer<Uint8> Domain;
-  @Uint32() external int DomainLength;
-  external Pointer<Uint8> Password;
-  @Uint32() external int PasswordLength;
-  @Uint32() external int Flags;
-}
-
-class NETRESOURCEA extends Struct {
-  @Uint32() external int dwScope;
-  @Uint32() external int dwType;
-  @Uint32() external int dwDisplayType;
-  @Uint32() external int dwUsage;
-  external Pointer<Utf8> lpLocalName;
-  external Pointer<Utf8> lpRemoteName;
-  external Pointer<Utf8> lpComment;
-  external Pointer<Utf8> lpProvider;
-}
-
-class NETRESOURCEW extends Struct {
-  @Uint32() external int dwScope;
-  @Uint32() external int dwType;
-  @Uint32() external int dwDisplayType;
-  @Uint32() external int dwUsage;
-  external Pointer<Utf16> lpLocalName;
-  external Pointer<Utf16> lpRemoteName;
-  external Pointer<Utf16> lpComment;
-  external Pointer<Utf16> lpProvider;
-}
-
-class UNIVERSAL_NAME_INFOA extends Struct {
-  external Pointer<Utf8> lpUniversalName;
-}
-
-class UNIVERSAL_NAME_INFOW extends Struct {
-  external Pointer<Utf16> lpUniversalName;
-}
-
-class REMOTE_NAME_INFOA extends Struct {
-  external Pointer<Utf8> lpUniversalName;
-  external Pointer<Utf8> lpConnectionName;
-  external Pointer<Utf8> lpRemainingPath;
-}
-
-class REMOTE_NAME_INFOW extends Struct {
-  external Pointer<Utf16> lpUniversalName;
-  external Pointer<Utf16> lpConnectionName;
-  external Pointer<Utf16> lpRemainingPath;
-}
-
-class NETCONNECTINFOSTRUCT extends Struct {
-  @Uint32() external int cbStructure;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwSpeed;
-  @Uint32() external int dwDelay;
-  @Uint32() external int dwOptDataSize;
-}
-
 class UNICODE_STRING extends Struct {
   @Uint16() external int Length;
   @Uint16() external int MaximumLength;
@@ -600,7 +558,8 @@ class UNICODE_STRING extends Struct {
 }
 
 class SERVICE_TRIGGER_CUSTOM_STATE_ID extends Struct {
-  external __uint__ Data;
+  @Array(2)
+  external Array<Uint32> Data;
 }
 
 class SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM extends Struct {
@@ -879,13 +838,15 @@ class SE_ADT_OBJECT_TYPE extends Struct {
 class SE_ADT_PARAMETER_ARRAY_ENTRY extends Struct {
   @Uint32() external int Type;
   @Uint32() external int Length;
-  external __uintptr__ Data;
+  @Array(2)
+  external Array<IntPtr> Data;
   external Pointer Address;
 }
 
 class SE_ADT_ACCESS_REASON extends Struct {
   @Uint32() external int AccessMask;
-  external __uint__ AccessReasons;
+  @Array(32)
+  external Array<Uint32> AccessReasons;
   @Uint32() external int ObjectTypeIndex;
   @Uint32() external int AccessGranted;
   external Pointer<SECURITY_DESCRIPTOR> SecurityDescriptor;
@@ -904,7 +865,8 @@ class SE_ADT_PARAMETER_ARRAY extends Struct {
   @Uint16() external int FlatSubCategoryId;
   @Uint16() external int Type;
   @Uint32() external int Flags;
-  external SE_ADT_PARAMETER_ARRAY_ENTRY Parameters;
+  @Array(32)
+  external Array<SE_ADT_PARAMETER_ARRAY_ENTRY> Parameters;
 }
 
 class SE_ADT_PARAMETER_ARRAY_EX extends Struct {
@@ -916,7 +878,8 @@ class SE_ADT_PARAMETER_ARRAY_EX extends Struct {
   @Uint16() external int FlatSubCategoryId;
   @Uint16() external int Type;
   @Uint32() external int Flags;
-  external SE_ADT_PARAMETER_ARRAY_ENTRY Parameters;
+  @Array(32)
+  external Array<SE_ADT_PARAMETER_ARRAY_ENTRY> Parameters;
 }
 
 class LSA_TRANSLATED_SID extends Struct {
@@ -1174,7 +1137,8 @@ class NEGOTIATE_PACKAGE_PREFIX extends Struct {
   external Pointer PackageDataA;
   external Pointer PackageDataW;
   @IntPtr() external int PrefixLen;
-  external __ubyte__ Prefix;
+  @Array(32)
+  external Array<Uint8> Prefix;
 }
 
 class NEGOTIATE_PACKAGE_PREFIXES extends Struct {
@@ -1233,7 +1197,8 @@ class MSV1_0_LM20_LOGON extends Struct {
   external UNICODE_STRING LogonDomainName;
   external UNICODE_STRING UserName;
   external UNICODE_STRING Workstation;
-  external __ubyte__ ChallengeToClient;
+  @Array(8)
+  external Array<Uint8> ChallengeToClient;
   external STRING CaseSensitiveChallengeResponse;
   external STRING CaseInsensitiveChallengeResponse;
   @Uint32() external int ParameterControl;
@@ -1244,7 +1209,8 @@ class MSV1_0_SUBAUTH_LOGON extends Struct {
   external UNICODE_STRING LogonDomainName;
   external UNICODE_STRING UserName;
   external UNICODE_STRING Workstation;
-  external __ubyte__ ChallengeToClient;
+  @Array(8)
+  external Array<Uint8> ChallengeToClient;
   external STRING AuthenticationInfo1;
   external STRING AuthenticationInfo2;
   @Uint32() external int ParameterControl;
@@ -1263,28 +1229,34 @@ class MSV1_0_LM20_LOGON_PROFILE extends Struct {
   @Int64() external int KickOffTime;
   @Int64() external int LogoffTime;
   @Uint32() external int UserFlags;
-  external __ubyte__ UserSessionKey;
+  @Array(16)
+  external Array<Uint8> UserSessionKey;
   external UNICODE_STRING LogonDomainName;
-  external __ubyte__ LanmanSessionKey;
+  @Array(8)
+  external Array<Uint8> LanmanSessionKey;
   external UNICODE_STRING LogonServer;
   external UNICODE_STRING UserParameters;
 }
 
 class MSV1_0_CREDENTIAL_KEY extends Struct {
-  external __ubyte__ Data;
+  @Array(20)
+  external Array<Uint8> Data;
 }
 
 class MSV1_0_SUPPLEMENTAL_CREDENTIAL extends Struct {
   @Uint32() external int Version;
   @Uint32() external int Flags;
-  external __ubyte__ LmPassword;
-  external __ubyte__ NtPassword;
+  @Array(16)
+  external Array<Uint8> LmPassword;
+  @Array(16)
+  external Array<Uint8> NtPassword;
 }
 
 class MSV1_0_SUPPLEMENTAL_CREDENTIAL_V2 extends Struct {
   @Uint32() external int Version;
   @Uint32() external int Flags;
-  external __ubyte__ NtPassword;
+  @Array(16)
+  external Array<Uint8> NtPassword;
   external MSV1_0_CREDENTIAL_KEY CredentialKey;
 }
 
@@ -1292,15 +1264,18 @@ class MSV1_0_SUPPLEMENTAL_CREDENTIAL_V3 extends Struct {
   @Uint32() external int Version;
   @Uint32() external int Flags;
   @Uint32() external int CredentialKeyType;
-  external __ubyte__ NtPassword;
+  @Array(16)
+  external Array<Uint8> NtPassword;
   external MSV1_0_CREDENTIAL_KEY CredentialKey;
-  external __ubyte__ ShaPassword;
+  @Array(20)
+  external Array<Uint8> ShaPassword;
 }
 
 class MSV1_0_IUM_SUPPLEMENTAL_CREDENTIAL extends Struct {
   @Uint32() external int Version;
   @Uint32() external int EncryptedCredsSize;
-  external __ubyte__ EncryptedCreds;
+  @Array(1)
+  external Array<Uint8> EncryptedCreds;
 }
 
 class MSV1_0_REMOTE_SUPPLEMENTAL_CREDENTIAL extends Struct {
@@ -1309,19 +1284,23 @@ class MSV1_0_REMOTE_SUPPLEMENTAL_CREDENTIAL extends Struct {
   external MSV1_0_CREDENTIAL_KEY CredentialKey;
   @Uint32() external int CredentialKeyType;
   @Uint32() external int EncryptedCredsSize;
-  external __ubyte__ EncryptedCreds;
+  @Array(1)
+  external Array<Uint8> EncryptedCreds;
 }
 
 class MSV1_0_NTLM3_RESPONSE extends Struct {
-  external __ubyte__ Response;
+  @Array(16)
+  external Array<Uint8> Response;
   @Uint8() external int RespType;
   @Uint8() external int HiRespType;
   @Uint16() external int Flags;
   @Uint32() external int MsgWord;
   @Uint64() external int TimeStamp;
-  external __ubyte__ ChallengeFromClient;
+  @Array(8)
+  external Array<Uint8> ChallengeFromClient;
   @Uint32() external int AvPairsOff;
-  external __ubyte__ Buffer;
+  @Array(1)
+  external Array<Uint8> Buffer;
 }
 
 class MSV1_0_AV_PAIR extends Struct {
@@ -1544,25 +1523,29 @@ class KERB_TICKET_CACHE_INFO_EX3 extends Struct {
 class KERB_QUERY_TKT_CACHE_RESPONSE extends Struct {
   @Uint32() external int MessageType;
   @Uint32() external int CountOfTickets;
-  external KERB_TICKET_CACHE_INFO Tickets;
+  @Array(1)
+  external Array<KERB_TICKET_CACHE_INFO> Tickets;
 }
 
 class KERB_QUERY_TKT_CACHE_EX_RESPONSE extends Struct {
   @Uint32() external int MessageType;
   @Uint32() external int CountOfTickets;
-  external KERB_TICKET_CACHE_INFO_EX Tickets;
+  @Array(1)
+  external Array<KERB_TICKET_CACHE_INFO_EX> Tickets;
 }
 
 class KERB_QUERY_TKT_CACHE_EX2_RESPONSE extends Struct {
   @Uint32() external int MessageType;
   @Uint32() external int CountOfTickets;
-  external KERB_TICKET_CACHE_INFO_EX2 Tickets;
+  @Array(1)
+  external Array<KERB_TICKET_CACHE_INFO_EX2> Tickets;
 }
 
 class KERB_QUERY_TKT_CACHE_EX3_RESPONSE extends Struct {
   @Uint32() external int MessageType;
   @Uint32() external int CountOfTickets;
-  external KERB_TICKET_CACHE_INFO_EX3 Tickets;
+  @Array(1)
+  external Array<KERB_TICKET_CACHE_INFO_EX3> Tickets;
 }
 
 class SecHandle extends Struct {
@@ -1584,13 +1567,15 @@ class KERB_NET_ADDRESS extends Struct {
 
 class KERB_NET_ADDRESSES extends Struct {
   @Uint32() external int Number;
-  external KERB_NET_ADDRESS Addresses;
+  @Array(1)
+  external Array<KERB_NET_ADDRESS> Addresses;
 }
 
 class KERB_EXTERNAL_NAME extends Struct {
   @Int16() external int NameType;
   @Uint16() external int NameCount;
-  external UNICODE_STRING Names;
+  @Array(1)
+  external Array<UNICODE_STRING> Names;
 }
 
 class KERB_EXTERNAL_TICKET extends Struct {
@@ -1775,7 +1760,8 @@ class KERB_DECRYPT_REQUEST extends Struct {
 }
 
 class KERB_DECRYPT_RESPONSE extends Struct {
-  external __ubyte__ DecryptedData;
+  @Array(1)
+  external Array<Uint8> DecryptedData;
 }
 
 class KERB_ADD_BINDING_CACHE_ENTRY_REQUEST extends Struct {
@@ -1804,7 +1790,8 @@ class KERB_ADD_CREDENTIALS_REQUEST extends Struct {
 class KERB_ADD_CREDENTIALS_REQUEST_EX extends Struct {
   external KERB_ADD_CREDENTIALS_REQUEST Credentials;
   @Uint32() external int PrincipalNameCount;
-  external UNICODE_STRING PrincipalNames;
+  @Array(1)
+  external Array<UNICODE_STRING> PrincipalNames;
 }
 
 class KERB_TRANSFER_CRED_REQUEST extends Struct {
@@ -1959,39 +1946,46 @@ class SEC_CHANNEL_BINDINGS extends Struct {
 class SEC_APPLICATION_PROTOCOL_LIST extends Struct {
   @Uint32() external int ProtoNegoExt;
   @Uint16() external int ProtocolListSize;
-  external __ubyte__ ProtocolList;
+  @Array(1)
+  external Array<Uint8> ProtocolList;
 }
 
 class SEC_APPLICATION_PROTOCOLS extends Struct {
   @Uint32() external int ProtocolListsSize;
-  external SEC_APPLICATION_PROTOCOL_LIST ProtocolLists;
+  @Array(1)
+  external Array<SEC_APPLICATION_PROTOCOL_LIST> ProtocolLists;
 }
 
 class SEC_SRTP_PROTECTION_PROFILES extends Struct {
   @Uint16() external int ProfilesSize;
-  external __ushort__ ProfilesList;
+  @Array(1)
+  external Array<Uint16> ProfilesList;
 }
 
 class SEC_SRTP_MASTER_KEY_IDENTIFIER extends Struct {
   @Uint8() external int MasterKeyIdentifierSize;
-  external __ubyte__ MasterKeyIdentifier;
+  @Array(1)
+  external Array<Uint8> MasterKeyIdentifier;
 }
 
 class SEC_TOKEN_BINDING extends Struct {
   @Uint8() external int MajorVersion;
   @Uint8() external int MinorVersion;
   @Uint16() external int KeyParametersSize;
-  external __ubyte__ KeyParameters;
+  @Array(1)
+  external Array<Uint8> KeyParameters;
 }
 
 class SEC_PRESHAREDKEY extends Struct {
   @Uint16() external int KeySize;
-  external __ubyte__ Key;
+  @Array(1)
+  external Array<Uint8> Key;
 }
 
 class SEC_PRESHAREDKEY_IDENTITY extends Struct {
   @Uint16() external int KeyIdentitySize;
-  external __ubyte__ KeyIdentity;
+  @Array(1)
+  external Array<Uint8> KeyIdentity;
 }
 
 class SEC_DTLS_MTU extends Struct {
@@ -2003,16 +1997,20 @@ class SEC_FLAGS extends Struct {
 }
 
 class SEC_TRAFFIC_SECRETS extends Struct {
-  external __ushort__ SymmetricAlgId;
-  external __ushort__ ChainingMode;
-  external __ushort__ HashAlgId;
+  @Array(64)
+  external Array<Uint16> SymmetricAlgId;
+  @Array(64)
+  external Array<Uint16> ChainingMode;
+  @Array(64)
+  external Array<Uint16> HashAlgId;
   @Uint16() external int KeySize;
   @Uint16() external int IvSize;
   @Uint16() external int MsgSequenceStart;
   @Uint16() external int MsgSequenceEnd;
   @Uint32() external int TrafficSecretType;
   @Uint16() external int TrafficSecretSize;
-  external __ubyte__ TrafficSecret;
+  @Array(1)
+  external Array<Uint8> TrafficSecret;
 }
 
 class SecPkgCredentials_NamesW extends Struct {
@@ -2026,13 +2024,13 @@ class SecPkgCredentials_NamesA extends Struct {
 class SecPkgCredentials_SSIProviderW extends Struct {
   external Pointer<Uint16> sProviderName;
   @Uint32() external int ProviderInfoLength;
-  external Pointer<Int8> ProviderInfo;
+  external Pointer<Utf8> ProviderInfo;
 }
 
 class SecPkgCredentials_SSIProviderA extends Struct {
   external Pointer<Int8> sProviderName;
   @Uint32() external int ProviderInfoLength;
-  external Pointer<Int8> ProviderInfo;
+  external Pointer<Utf8> ProviderInfo;
 }
 
 class SecPkgCredentials_KdcProxySettingsW extends Struct {
@@ -2218,12 +2216,12 @@ class SecPkgContext_TargetInformation extends Struct {
 
 class SecPkgContext_AuthzID extends Struct {
   @Uint32() external int AuthzIDLength;
-  external Pointer<Int8> AuthzID;
+  external Pointer<Utf8> AuthzID;
 }
 
 class SecPkgContext_Target extends Struct {
   @Uint32() external int TargetLength;
-  external Pointer<Int8> Target;
+  external Pointer<Utf8> Target;
 }
 
 class SecPkgContext_ClientSpecifiedTarget extends Struct {
@@ -2239,7 +2237,8 @@ class SecPkgContext_ApplicationProtocol extends Struct {
   @Uint32() external int ProtoNegoStatus;
   @Uint32() external int ProtoNegoExt;
   @Uint8() external int ProtocolIdSize;
-  external __ubyte__ ProtocolId;
+  @Array(128)
+  external Array<Uint8> ProtocolId;
 }
 
 class SecPkgContext_NegotiatedTlsExtensions extends Struct {
@@ -2456,7 +2455,8 @@ class CREDENTIAL_TARGET_INFORMATIONW extends Struct {
 
 class CERT_CREDENTIAL_INFO extends Struct {
   @Uint32() external int cbSize;
-  external __ubyte__ rgbHashOfCert;
+  @Array(20)
+  external Array<Uint8> rgbHashOfCert;
 }
 
 class USERNAME_TARGET_CREDENTIAL_INFO extends Struct {
@@ -2606,7 +2606,8 @@ class SECPKG_CREDENTIAL extends Struct {
 
 class SECPKG_SUPPLEMENTAL_CRED_ARRAY extends Struct {
   @Uint32() external int CredentialCount;
-  external SECPKG_SUPPLEMENTAL_CRED Credentials;
+  @Array(1)
+  external Array<SECPKG_SUPPLEMENTAL_CRED> Credentials;
 }
 
 class SECPKG_SURROGATE_LOGON_ENTRY extends Struct {
@@ -2669,12 +2670,14 @@ class SECPKG_PARAMETERS extends Struct {
 
 class SECPKG_GSS_INFO extends Struct {
   @Uint32() external int EncodedIdLength;
-  external __ubyte__ EncodedId;
+  @Array(4)
+  external Array<Uint8> EncodedId;
 }
 
 class SECPKG_CONTEXT_THUNKS extends Struct {
   @Uint32() external int InfoLevelCount;
-  external __uint__ Levels;
+  @Array(1)
+  external Array<Uint32> Levels;
 }
 
 class SECPKG_MUTUAL_AUTH_LEVEL extends Struct {
@@ -2688,16 +2691,19 @@ class SECPKG_WOW_CLIENT_DLL extends Struct {
 class SECPKG_SERIALIZED_OID extends Struct {
   @Uint32() external int OidLength;
   @Uint32() external int OidAttributes;
-  external __ubyte__ OidValue;
+  @Array(32)
+  external Array<Uint8> OidValue;
 }
 
 class SECPKG_EXTRA_OIDS extends Struct {
   @Uint32() external int OidCount;
-  external SECPKG_SERIALIZED_OID Oids;
+  @Array(1)
+  external Array<SECPKG_SERIALIZED_OID> Oids;
 }
 
 class SECPKG_NEGO2_INFO extends Struct {
-  external __ubyte__ AuthScheme;
+  @Array(16)
+  external Array<Uint8> AuthScheme;
   @Uint32() external int PackageFlags;
 }
 
@@ -3032,7 +3038,8 @@ class PROV_ENUMALGS extends Struct {
   @Uint32() external int aiAlgid;
   @Uint32() external int dwBitLen;
   @Uint32() external int dwNameLen;
-  external __byte__ szName;
+  @Array(20)
+  external Array<Int8> szName;
 }
 
 class PROV_ENUMALGS_EX extends Struct {
@@ -3042,9 +3049,11 @@ class PROV_ENUMALGS_EX extends Struct {
   @Uint32() external int dwMaxLen;
   @Uint32() external int dwProtocols;
   @Uint32() external int dwNameLen;
-  external __byte__ szName;
+  @Array(20)
+  external Array<Int8> szName;
   @Uint32() external int dwLongNameLen;
-  external __byte__ szLongName;
+  @Array(40)
+  external Array<Int8> szLongName;
 }
 
 class PUBLICKEYSTRUC extends Struct {
@@ -3067,7 +3076,8 @@ class PUBKEY extends Struct {
 
 class DSSSEED extends Struct {
   @Uint32() external int counter;
-  external __ubyte__ seed;
+  @Array(20)
+  external Array<Uint8> seed;
 }
 
 class PUBKEYVER3 extends Struct {
@@ -3094,44 +3104,64 @@ class KEY_TYPE_SUBTYPE extends Struct {
 }
 
 class CERT_FORTEZZA_DATA_PROP extends Struct {
-  external __ubyte__ SerialNumber;
+  @Array(8)
+  external Array<Uint8> SerialNumber;
   @Int32() external int CertIndex;
-  external __ubyte__ CertLabel;
+  @Array(36)
+  external Array<Uint8> CertLabel;
 }
 
 class CRYPT_RC4_KEY_STATE extends Struct {
-  external __ubyte__ Key;
-  external __ubyte__ SBox;
+  @Array(16)
+  external Array<Uint8> Key;
+  @Array(129)
+  external Array<Uint8> SBox;
   @Uint8() external int i;
   @Uint8() external int j;
 }
 
 class CRYPT_DES_KEY_STATE extends Struct {
-  external __ubyte__ Key;
-  external __ubyte__ IV;
-  external __ubyte__ Feedback;
+  @Array(8)
+  external Array<Uint8> Key;
+  @Array(8)
+  external Array<Uint8> IV;
+  @Array(8)
+  external Array<Uint8> Feedback;
 }
 
 class CRYPT_3DES_KEY_STATE extends Struct {
-  external __ubyte__ Key;
-  external __ubyte__ IV;
-  external __ubyte__ Feedback;
+  @Array(24)
+  external Array<Uint8> Key;
+  @Array(8)
+  external Array<Uint8> IV;
+  @Array(8)
+  external Array<Uint8> Feedback;
 }
 
 class CRYPT_AES_128_KEY_STATE extends Struct {
-  external __ubyte__ Key;
-  external __ubyte__ IV;
-  external __ubyte__ EncryptionState;
-  external __ubyte__ DecryptionState;
-  external __ubyte__ Feedback;
+  @Array(16)
+  external Array<Uint8> Key;
+  @Array(16)
+  external Array<Uint8> IV;
+  @Array(128)
+  external Array<Uint8> EncryptionState;
+  @Array(128)
+  external Array<Uint8> DecryptionState;
+  @Array(16)
+  external Array<Uint8> Feedback;
 }
 
 class CRYPT_AES_256_KEY_STATE extends Struct {
-  external __ubyte__ Key;
-  external __ubyte__ IV;
-  external __ubyte__ EncryptionState;
-  external __ubyte__ DecryptionState;
-  external __ubyte__ Feedback;
+  @Array(32)
+  external Array<Uint8> Key;
+  @Array(16)
+  external Array<Uint8> IV;
+  @Array(128)
+  external Array<Uint8> EncryptionState;
+  @Array(128)
+  external Array<Uint8> DecryptionState;
+  @Array(16)
+  external Array<Uint8> Feedback;
 }
 
 class CRYPTOAPI_BLOB extends Struct {
@@ -3254,9 +3284,12 @@ class BCRYPT_DH_PARAMETER_HEADER extends Struct {
 class BCRYPT_DSA_KEY_BLOB extends Struct {
   @Uint32() external int dwMagic;
   @Uint32() external int cbKey;
-  external __ubyte__ Count;
-  external __ubyte__ Seed;
-  external __ubyte__ q;
+  @Array(4)
+  external Array<Uint8> Count;
+  @Array(20)
+  external Array<Uint8> Seed;
+  @Array(20)
+  external Array<Uint8> q;
 }
 
 class BCRYPT_DSA_KEY_BLOB_V2 extends Struct {
@@ -3266,7 +3299,8 @@ class BCRYPT_DSA_KEY_BLOB_V2 extends Struct {
   @Uint32() external int standardVersion;
   @Uint32() external int cbSeedLength;
   @Uint32() external int cbGroupSize;
-  external __ubyte__ Count;
+  @Array(4)
+  external Array<Uint8> Count;
 }
 
 class BCRYPT_KEY_DATA_BLOB_HEADER extends Struct {
@@ -3279,9 +3313,12 @@ class BCRYPT_DSA_PARAMETER_HEADER extends Struct {
   @Uint32() external int cbLength;
   @Uint32() external int dwMagic;
   @Uint32() external int cbKeyLength;
-  external __ubyte__ Count;
-  external __ubyte__ Seed;
-  external __ubyte__ q;
+  @Array(4)
+  external Array<Uint8> Count;
+  @Array(20)
+  external Array<Uint8> Seed;
+  @Array(20)
+  external Array<Uint8> q;
 }
 
 class BCRYPT_DSA_PARAMETER_HEADER_V2 extends Struct {
@@ -3292,7 +3329,8 @@ class BCRYPT_DSA_PARAMETER_HEADER_V2 extends Struct {
   @Uint32() external int standardVersion;
   @Uint32() external int cbSeedLength;
   @Uint32() external int cbGroupSize;
-  external __ubyte__ Count;
+  @Array(4)
+  external Array<Uint8> Count;
 }
 
 class BCRYPT_ECC_CURVE_NAMES extends Struct {
@@ -3531,9 +3569,12 @@ class NCRYPT_SUPPORTED_LENGTHS extends Struct {
 class __NCRYPT_PCP_HMAC_AUTH_SIGNATURE_INFO extends Struct {
   @Uint32() external int dwVersion;
   @Int32() external int iExpiration;
-  external __ubyte__ pabNonce;
-  external __ubyte__ pabPolicyRef;
-  external __ubyte__ pabHMAC;
+  @Array(32)
+  external Array<Uint8> pabNonce;
+  @Array(32)
+  external Array<Uint8> pabPolicyRef;
+  @Array(32)
+  external Array<Uint8> pabHMAC;
 }
 
 class __NCRYPT_PCP_TPM_FW_VERSION_INFO extends Struct {
@@ -4020,21 +4061,25 @@ class CERT_X942_DH_PARAMETERS extends Struct {
 
 class CRYPT_X942_OTHER_INFO extends Struct {
   external Pointer<Utf8> pszContentEncryptionObjId;
-  external __ubyte__ rgbCounter;
-  external __ubyte__ rgbKeyLength;
+  @Array(4)
+  external Array<Uint8> rgbCounter;
+  @Array(4)
+  external Array<Uint8> rgbKeyLength;
   external CRYPTOAPI_BLOB PubInfo;
 }
 
 class CRYPT_ECC_CMS_SHARED_INFO extends Struct {
   external CRYPT_ALGORITHM_IDENTIFIER Algorithm;
   external CRYPTOAPI_BLOB EntityUInfo;
-  external __ubyte__ rgbSuppPubInfo;
+  @Array(4)
+  external Array<Uint8> rgbSuppPubInfo;
 }
 
 class CRYPT_RC2_CBC_PARAMETERS extends Struct {
   @Uint32() external int dwVersion;
   @Int32() external int fIV;
-  external __ubyte__ rgbIV;
+  @Array(8)
+  external Array<Uint8> rgbIV;
 }
 
 class CRYPT_SMIME_CAPABILITY extends Struct {
@@ -4717,7 +4762,8 @@ class ROOT_INFO_LUID extends Struct {
 }
 
 class CRYPT_SMART_CARD_ROOT_INFO extends Struct {
-  external __ubyte__ rgbCardID;
+  @Array(16)
+  external Array<Uint8> rgbCardID;
   external ROOT_INFO_LUID luid;
 }
 
@@ -5201,14 +5247,16 @@ class SSL_F12_EXTRA_CERT_CHAIN_POLICY_STATUS extends Struct {
   @Uint32() external int dwErrorLevel;
   @Uint32() external int dwErrorCategory;
   @Uint32() external int dwReserved;
-  external __ushort__ wszErrorText;
+  @Array(129)
+  external Array<Uint16> wszErrorText;
 }
 
 class SSL_HPKP_HEADER_EXTRA_CERT_CHAIN_POLICY_PARA extends Struct {
   @Uint32() external int cbSize;
   @Uint32() external int dwReserved;
   external Pointer<Utf16> pwszServerName;
-  external ____ rgpszHpkpValue;
+  @Array(2)
+  external Array<Pointer<Int8>> rgpszHpkpValue;
 }
 
 class SSL_KEY_PIN_EXTRA_CERT_CHAIN_POLICY_PARA extends Struct {
@@ -5220,7 +5268,8 @@ class SSL_KEY_PIN_EXTRA_CERT_CHAIN_POLICY_PARA extends Struct {
 class SSL_KEY_PIN_EXTRA_CERT_CHAIN_POLICY_STATUS extends Struct {
   @Uint32() external int cbSize;
   @Int32() external int lError;
-  external __ushort__ wszErrorText;
+  @Array(130)
+  external Array<Uint16> wszErrorText;
 }
 
 class CRYPT_PKCS12_PBE_PARAMS extends Struct {
@@ -5372,11 +5421,14 @@ class SecPkgContext_ConnectionInfo extends Struct {
 class SecPkgContext_ConnectionInfoEx extends Struct {
   @Uint32() external int dwVersion;
   @Uint32() external int dwProtocol;
-  external __ushort__ szCipher;
+  @Array(64)
+  external Array<Uint16> szCipher;
   @Uint32() external int dwCipherStrength;
-  external __ushort__ szHash;
+  @Array(64)
+  external Array<Uint16> szHash;
   @Uint32() external int dwHashStrength;
-  external __ushort__ szExchange;
+  @Array(64)
+  external Array<Uint16> szExchange;
   @Uint32() external int dwExchStrength;
 }
 
@@ -5385,22 +5437,29 @@ class SecPkgContext_CipherInfo extends Struct {
   @Uint32() external int dwProtocol;
   @Uint32() external int dwCipherSuite;
   @Uint32() external int dwBaseCipherSuite;
-  external __ushort__ szCipherSuite;
-  external __ushort__ szCipher;
+  @Array(64)
+  external Array<Uint16> szCipherSuite;
+  @Array(64)
+  external Array<Uint16> szCipher;
   @Uint32() external int dwCipherLen;
   @Uint32() external int dwCipherBlockLen;
-  external __ushort__ szHash;
+  @Array(64)
+  external Array<Uint16> szHash;
   @Uint32() external int dwHashLen;
-  external __ushort__ szExchange;
+  @Array(64)
+  external Array<Uint16> szExchange;
   @Uint32() external int dwMinExchangeLen;
   @Uint32() external int dwMaxExchangeLen;
-  external __ushort__ szCertificate;
+  @Array(64)
+  external Array<Uint16> szCertificate;
   @Uint32() external int dwKeyType;
 }
 
 class SecPkgContext_EapKeyBlock extends Struct {
-  external __ubyte__ rgbKeys;
-  external __ubyte__ rgbIVs;
+  @Array(128)
+  external Array<Uint8> rgbKeys;
+  @Array(64)
+  external Array<Uint8> rgbIVs;
 }
 
 class SecPkgContext_MappedCredAttr extends Struct {
@@ -5411,7 +5470,8 @@ class SecPkgContext_MappedCredAttr extends Struct {
 class SecPkgContext_SessionInfo extends Struct {
   @Uint32() external int dwFlags;
   @Uint32() external int cbSessionId;
-  external __ubyte__ rgbSessionId;
+  @Array(32)
+  external Array<Uint8> rgbSessionId;
 }
 
 class SecPkgContext_SessionAppData extends Struct {
@@ -5514,7 +5574,8 @@ class SEND_GENERIC_TLS_EXTENSION extends Struct {
   @Uint16() external int HandshakeType;
   @Uint32() external int Flags;
   @Uint16() external int BufferSize;
-  external __ubyte__ Buffer;
+  @Array(1)
+  external Array<Uint8> Buffer;
 }
 
 class TLS_EXTENSION_SUBSCRIPTION extends Struct {
@@ -5525,22 +5586,26 @@ class TLS_EXTENSION_SUBSCRIPTION extends Struct {
 class SUBSCRIBE_GENERIC_TLS_EXTENSION extends Struct {
   @Uint32() external int Flags;
   @Uint32() external int SubscriptionsCount;
-  external TLS_EXTENSION_SUBSCRIPTION Subscriptions;
+  @Array(1)
+  external Array<TLS_EXTENSION_SUBSCRIPTION> Subscriptions;
 }
 
 class SCHANNEL_CERT_HASH extends Struct {
   @Uint32() external int dwLength;
   @Uint32() external int dwFlags;
   @IntPtr() external int hProv;
-  external __ubyte__ ShaHash;
+  @Array(20)
+  external Array<Uint8> ShaHash;
 }
 
 class SCHANNEL_CERT_HASH_STORE extends Struct {
   @Uint32() external int dwLength;
   @Uint32() external int dwFlags;
   @IntPtr() external int hProv;
-  external __ubyte__ ShaHash;
-  external __ushort__ pwszStoreName;
+  @Array(20)
+  external Array<Uint8> ShaHash;
+  @Array(128)
+  external Array<Uint16> pwszStoreName;
 }
 
 class SCHANNEL_ALERT_TOKEN extends Struct {
@@ -5558,8 +5623,10 @@ class SCHANNEL_CLIENT_SIGNATURE extends Struct {
   @Uint32() external int cbLength;
   @Uint32() external int aiHash;
   @Uint32() external int cbHash;
-  external __ubyte__ HashValue;
-  external __ubyte__ CertThumbprint;
+  @Array(36)
+  external Array<Uint8> HashValue;
+  @Array(20)
+  external Array<Uint8> CertThumbprint;
 }
 
 class SSL_CREDENTIAL_CERTIFICATE extends Struct {
@@ -5600,12 +5667,14 @@ class SCH_CRED_PUBLIC_CERTCHAIN extends Struct {
 class PctPublicKey extends Struct {
   @Uint32() external int Type;
   @Uint32() external int cbKey;
-  external __ubyte__ pKey;
+  @Array(1)
+  external Array<Uint8> pKey;
 }
 
 class X509Certificate extends Struct {
   @Uint32() external int Version;
-  external __uint__ SerialNumber;
+  @Array(4)
+  external Array<Uint32> SerialNumber;
   @Uint32() external int SignatureAlgorithm;
   external FILETIME ValidFrom;
   external FILETIME ValidUntil;
@@ -5756,9 +5825,12 @@ class WLX_MPR_NOTIFY_INFO extends Struct {
 }
 
 class WLX_TERMINAL_SERVICES_DATA extends Struct {
-  external __ushort__ ProfilePath;
-  external __ushort__ HomeDir;
-  external __ushort__ HomeDirDrive;
+  @Array(129)
+  external Array<Uint16> ProfilePath;
+  @Array(129)
+  external Array<Uint16> HomeDir;
+  @Array(4)
+  external Array<Uint16> HomeDirDrive;
 }
 
 class WLX_CLIENT_CREDENTIALS_INFO_V1_0 extends Struct {
@@ -5976,7 +6048,8 @@ class SCARD_READERSTATEA extends Struct {
   @Uint32() external int dwCurrentState;
   @Uint32() external int dwEventState;
   @Uint32() external int cbAtr;
-  external __ubyte__ rgbAtr;
+  @Array(36)
+  external Array<Uint8> rgbAtr;
 }
 
 class SCARD_READERSTATEW extends Struct {
@@ -5985,13 +6058,16 @@ class SCARD_READERSTATEW extends Struct {
   @Uint32() external int dwCurrentState;
   @Uint32() external int dwEventState;
   @Uint32() external int cbAtr;
-  external __ubyte__ rgbAtr;
+  @Array(36)
+  external Array<Uint8> rgbAtr;
 }
 
 class SCARD_ATRMASK extends Struct {
   @Uint32() external int cbAtr;
-  external __ubyte__ rgbAtr;
-  external __ubyte__ rgbMask;
+  @Array(36)
+  external Array<Uint8> rgbAtr;
+  @Array(36)
+  external Array<Uint8> rgbMask;
 }
 
 class OPENCARD_SEARCH_CRITERIAA extends Struct {
@@ -6181,11 +6257,13 @@ class USER_ALL_INFORMATION extends Struct {
 }
 
 class CLEAR_BLOCK extends Struct {
-  external __byte__ data;
+  @Array(8)
+  external Array<Int8> data;
 }
 
 class USER_SESSION_KEY extends Struct {
-  external CYPHER_BLOCK data;
+  @Array(2)
+  external Array<CYPHER_BLOCK> data;
 }
 
 class NETLOGON_LOGON_IDENTITY_INFO extends Struct {
@@ -6254,7 +6332,8 @@ class AUDIT_OBJECT_TYPES extends Struct {
 }
 
 class AUDIT_IP_ADDRESS extends Struct {
-  external __ubyte__ pIpAddress;
+  @Array(128)
+  external Array<Uint8> pIpAddress;
 }
 
 class AUDIT_PARAM extends Struct {
@@ -6370,7 +6449,8 @@ class AUTHZ_SOURCE_SCHEMA_REGISTRATION extends Struct {
   external Pointer<Utf16> szExecutableImagePath;
   @Uint32() external int Anonymous;
   @Uint32() external int dwObjectTypeNameCount;
-  external AUTHZ_REGISTRATION_OBJECT_TYPE_NAME_OFFSET ObjectTypeNames;
+  @Array(1)
+  external Array<AUTHZ_REGISTRATION_OBJECT_TYPE_NAME_OFFSET> ObjectTypeNames;
 }
 
 class AzAuthorizationStore extends Struct {
@@ -6413,7 +6493,8 @@ class SID_INFO extends Struct {
 
 class SID_INFO_LIST extends Struct {
   @Uint32() external int cItems;
-  external SID_INFO aSidInfo;
+  @Array(1)
+  external Array<SID_INFO> aSidInfo;
 }
 
 class SECURITY_OBJECT extends Struct {
@@ -7217,10 +7298,10 @@ class CRYPT_PROVIDER_DATA extends Struct {
   external Pointer<CRYPT_PROVIDER_PRIVDATA> pasProvPrivData;
   @Uint32() external int dwSubjectChoice;
   @Uint32() external int Anonymous;
-  external Pointer<Int8> pszUsageOID;
+  external Pointer<Utf8> pszUsageOID;
   @Int32() external int fRecallWithState;
   external FILETIME sftSystemTime;
-  external Pointer<Int8> pszCTLSignerUsageOID;
+  external Pointer<Utf8> pszCTLSignerUsageOID;
   @Uint32() external int dwProvFlags;
   @Uint32() external int dwFinalError;
   external Pointer<CERT_USAGE_MATCH> pRequestUsage;
@@ -7355,8 +7436,8 @@ class CRYPT_PROVIDER_REGDEFUSAGE extends Struct {
   @Uint32() external int cbStruct;
   external Pointer<GUID> pgActionID;
   external Pointer<Utf16> pwszDllName;
-  external Pointer<Int8> pwszLoadCallbackDataFunctionName;
-  external Pointer<Int8> pwszFreeCallbackDataFunctionName;
+  external Pointer<Utf8> pwszLoadCallbackDataFunctionName;
+  external Pointer<Utf8> pwszFreeCallbackDataFunctionName;
 }
 
 class CRYPT_PROVIDER_DEFUSAGE extends Struct {
@@ -7367,7 +7448,8 @@ class CRYPT_PROVIDER_DEFUSAGE extends Struct {
 }
 
 class SPC_SERIALIZED_OBJECT extends Struct {
-  external __ubyte__ ClassId;
+  @Array(16)
+  external Array<Uint8> ClassId;
   external CRYPTOAPI_BLOB SerializedData;
 }
 
@@ -7466,7 +7548,8 @@ class WIN_CERTIFICATE extends Struct {
   @Uint32() external int dwLength;
   @Uint16() external int wRevision;
   @Uint16() external int wCertificateType;
-  external __ubyte__ bCertificate;
+  @Array(1)
+  external Array<Uint8> bCertificate;
 }
 
 class WIN_TRUST_ACTDATA_CONTEXT_WITH_SUBJECT extends Struct {
@@ -7775,7 +7858,8 @@ class CRYPTCATCDF extends Struct {
 
 class CATALOG_INFO extends Struct {
   @Uint32() external int cbStruct;
-  external __ushort__ wszCatalogFile;
+  @Array(129)
+  external Array<Uint16> wszCatalogFile;
 }
 
 class CEnroll2 extends Struct {
@@ -7820,7 +7904,8 @@ class SAFER_CODE_PROPERTIES_V1 extends Struct {
   external Pointer<Utf16> ImagePath;
   @IntPtr() external int hImageFileHandle;
   @Uint32() external int UrlZoneId;
-  external __ubyte__ ImageHash;
+  @Array(64)
+  external Array<Uint8> ImageHash;
   @Uint32() external int dwImageHashSize;
   @Int64() external int ImageSize;
   @Uint32() external int HashAlgorithm;
@@ -7835,7 +7920,8 @@ class SAFER_CODE_PROPERTIES_V2 extends Struct {
   external Pointer<Utf16> ImagePath;
   @IntPtr() external int hImageFileHandle;
   @Uint32() external int UrlZoneId;
-  external __ubyte__ ImageHash;
+  @Array(64)
+  external Array<Uint8> ImageHash;
   @Uint32() external int dwImageHashSize;
   @Int64() external int ImageSize;
   @Uint32() external int HashAlgorithm;
@@ -7858,17 +7944,21 @@ class SAFER_IDENTIFICATION_HEADER extends Struct {
 
 class SAFER_PATHNAME_IDENTIFICATION extends Struct {
   external SAFER_IDENTIFICATION_HEADER header;
-  external __ushort__ Description;
+  @Array(129)
+  external Array<Uint16> Description;
   external Pointer<Utf16> ImageName;
   @Uint32() external int dwSaferFlags;
 }
 
 class SAFER_HASH_IDENTIFICATION extends Struct {
   external SAFER_IDENTIFICATION_HEADER header;
-  external __ushort__ Description;
-  external __ushort__ FriendlyName;
+  @Array(129)
+  external Array<Uint16> Description;
+  @Array(129)
+  external Array<Uint16> FriendlyName;
   @Uint32() external int HashSize;
-  external __ubyte__ ImageHash;
+  @Array(64)
+  external Array<Uint8> ImageHash;
   @Uint32() external int HashAlgorithm;
   @Int64() external int ImageSize;
   @Uint32() external int dwSaferFlags;
@@ -7877,7 +7967,8 @@ class SAFER_HASH_IDENTIFICATION extends Struct {
 class SAFER_HASH_IDENTIFICATION2 extends Struct {
   external SAFER_HASH_IDENTIFICATION hashIdentification;
   @Uint32() external int HashSize;
-  external __ubyte__ ImageHash;
+  @Array(64)
+  external Array<Uint8> ImageHash;
   @Uint32() external int HashAlgorithm;
 }
 
@@ -7914,8 +8005,10 @@ class SL_NONGENUINE_UI_OPTIONS extends Struct {
 }
 
 class SL_SYSTEM_POLICY_INFORMATION extends Struct {
-  external ____ Reserved1;
-  external __uint__ Reserved2;
+  @Array(2)
+  external Array<Pointer> Reserved1;
+  @Array(3)
+  external Array<Uint32> Reserved2;
 }
 
 class DIAGNOSTIC_DATA_RECORD extends Struct {
@@ -7988,13 +8081,17 @@ class DIAGNOSTIC_DATA_EVENT_TRANSCRIPT_CONFIGURATION extends Struct {
 }
 
 class DIAGNOSTIC_REPORT_PARAMETER extends Struct {
-  external __ushort__ name;
-  external __ushort__ value;
+  @Array(128)
+  external Array<Uint16> name;
+  @Array(129)
+  external Array<Uint16> value;
 }
 
 class DIAGNOSTIC_REPORT_SIGNATURE extends Struct {
-  external __ushort__ eventName;
-  external DIAGNOSTIC_REPORT_PARAMETER parameters;
+  @Array(65)
+  external Array<Uint16> eventName;
+  @Array(10)
+  external Array<DIAGNOSTIC_REPORT_PARAMETER> parameters;
 }
 
 class DIAGNOSTIC_REPORT_DATA extends Struct {
@@ -8015,5 +8112,55 @@ class DIAGNOSTIC_REPORT_DATA extends Struct {
   external Pointer<Utf16> bucketIdString;
   @Uint64() external int legacyBucketId;
   external Pointer<Utf16> reportKey;
+}
+
+class NETRESOURCEA extends Struct {
+  @Uint32() external int dwScope;
+  @Uint32() external int dwType;
+  @Uint32() external int dwDisplayType;
+  @Uint32() external int dwUsage;
+  external Pointer<Utf8> lpLocalName;
+  external Pointer<Utf8> lpRemoteName;
+  external Pointer<Utf8> lpComment;
+  external Pointer<Utf8> lpProvider;
+}
+
+class NETRESOURCEW extends Struct {
+  @Uint32() external int dwScope;
+  @Uint32() external int dwType;
+  @Uint32() external int dwDisplayType;
+  @Uint32() external int dwUsage;
+  external Pointer<Utf16> lpLocalName;
+  external Pointer<Utf16> lpRemoteName;
+  external Pointer<Utf16> lpComment;
+  external Pointer<Utf16> lpProvider;
+}
+
+class UNIVERSAL_NAME_INFOA extends Struct {
+  external Pointer<Utf8> lpUniversalName;
+}
+
+class UNIVERSAL_NAME_INFOW extends Struct {
+  external Pointer<Utf16> lpUniversalName;
+}
+
+class REMOTE_NAME_INFOA extends Struct {
+  external Pointer<Utf8> lpUniversalName;
+  external Pointer<Utf8> lpConnectionName;
+  external Pointer<Utf8> lpRemainingPath;
+}
+
+class REMOTE_NAME_INFOW extends Struct {
+  external Pointer<Utf16> lpUniversalName;
+  external Pointer<Utf16> lpConnectionName;
+  external Pointer<Utf16> lpRemainingPath;
+}
+
+class NETCONNECTINFOSTRUCT extends Struct {
+  @Uint32() external int cbStructure;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwSpeed;
+  @Uint32() external int dwDelay;
+  @Uint32() external int dwOptDataSize;
 }
 

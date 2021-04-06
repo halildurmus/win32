@@ -1,9 +1,4 @@
 /// {@category Enum}
-class PrintWindow_nFlags {
-  static const PW_CLIENTONLY = 0x00000001;
-}
-
-/// {@category Enum}
 class DeviceCapabilities_fwCapability {
   static const DC_BINNAMES = 0x0000000c;
   static const DC_BINS = 0x00000006;
@@ -35,6 +30,19 @@ class DeviceCapabilities_fwCapability {
   static const DC_STAPLE = 0x0000001e;
   static const DC_TRUETYPE = 0x0000000f;
   static const DC_VERSION = 0x0000000a;
+}
+
+/// {@category Enum}
+class EDefaultDevmodeType {
+  static const kUserDefaultDevmode = 0x00000000;
+  static const kPrinterDefaultDevmode = 0x00000001;
+}
+
+/// {@category Enum}
+class EPrintTicketScope {
+  static const kPTPageScope = 0x00000000;
+  static const kPTDocumentScope = 0x00000001;
+  static const kPTJobScope = 0x00000002;
 }
 
 /// {@category Enum}
@@ -73,18 +81,145 @@ class PSINJECT_POINT {
 }
 
 /// {@category Enum}
-class XPS_TILE_MODE {
-  static const XPS_TILE_MODE_NONE = 0x00000001;
-  static const XPS_TILE_MODE_TILE = 0x00000002;
-  static const XPS_TILE_MODE_FLIPX = 0x00000003;
-  static const XPS_TILE_MODE_FLIPY = 0x00000004;
-  static const XPS_TILE_MODE_FLIPXY = 0x00000005;
+class PrintDocumentPackageCompletion {
+  static const PrintDocumentPackageCompletion_InProgress = 0x00000000;
+  static const PrintDocumentPackageCompletion_Completed = 0x00000001;
+  static const PrintDocumentPackageCompletion_Canceled = 0x00000002;
+  static const PrintDocumentPackageCompletion_Failed = 0x00000003;
+}
+
+/// {@category Enum}
+class PrintWindow_nFlags {
+  static const PW_CLIENTONLY = 0x00000001;
 }
 
 /// {@category Enum}
 class XPS_COLOR_INTERPOLATION {
   static const XPS_COLOR_INTERPOLATION_SCRGBLINEAR = 0x00000001;
   static const XPS_COLOR_INTERPOLATION_SRGBLINEAR = 0x00000002;
+}
+
+/// {@category Enum}
+class XPS_COLOR_TYPE {
+  static const XPS_COLOR_TYPE_SRGB = 0x00000001;
+  static const XPS_COLOR_TYPE_SCRGB = 0x00000002;
+  static const XPS_COLOR_TYPE_CONTEXT = 0x00000003;
+}
+
+/// {@category Enum}
+class XPS_DASH_CAP {
+  static const XPS_DASH_CAP_FLAT = 0x00000001;
+  static const XPS_DASH_CAP_ROUND = 0x00000002;
+  static const XPS_DASH_CAP_SQUARE = 0x00000003;
+  static const XPS_DASH_CAP_TRIANGLE = 0x00000004;
+}
+
+/// {@category Enum}
+class XPS_DOCUMENT_TYPE {
+  static const XPS_DOCUMENT_TYPE_UNSPECIFIED = 0x00000001;
+  static const XPS_DOCUMENT_TYPE_XPS = 0x00000002;
+  static const XPS_DOCUMENT_TYPE_OPENXPS = 0x00000003;
+}
+
+/// {@category Enum}
+class XPS_FILL_RULE {
+  static const XPS_FILL_RULE_EVENODD = 0x00000001;
+  static const XPS_FILL_RULE_NONZERO = 0x00000002;
+}
+
+/// {@category Enum}
+class XPS_FONT_EMBEDDING {
+  static const XPS_FONT_EMBEDDING_NORMAL = 0x00000001;
+  static const XPS_FONT_EMBEDDING_OBFUSCATED = 0x00000002;
+  static const XPS_FONT_EMBEDDING_RESTRICTED = 0x00000003;
+  static const XPS_FONT_EMBEDDING_RESTRICTED_UNOBFUSCATED = 0x00000004;
+}
+
+/// {@category Enum}
+class XPS_IMAGE_TYPE {
+  static const XPS_IMAGE_TYPE_JPEG = 0x00000001;
+  static const XPS_IMAGE_TYPE_PNG = 0x00000002;
+  static const XPS_IMAGE_TYPE_TIFF = 0x00000003;
+  static const XPS_IMAGE_TYPE_WDP = 0x00000004;
+  static const XPS_IMAGE_TYPE_JXR = 0x00000005;
+}
+
+/// {@category Enum}
+class XPS_INTERLEAVING {
+  static const XPS_INTERLEAVING_OFF = 0x00000001;
+  static const XPS_INTERLEAVING_ON = 0x00000002;
+}
+
+/// {@category Enum}
+class XPS_LINE_CAP {
+  static const XPS_LINE_CAP_FLAT = 0x00000001;
+  static const XPS_LINE_CAP_ROUND = 0x00000002;
+  static const XPS_LINE_CAP_SQUARE = 0x00000003;
+  static const XPS_LINE_CAP_TRIANGLE = 0x00000004;
+}
+
+/// {@category Enum}
+class XPS_LINE_JOIN {
+  static const XPS_LINE_JOIN_MITER = 0x00000001;
+  static const XPS_LINE_JOIN_BEVEL = 0x00000002;
+  static const XPS_LINE_JOIN_ROUND = 0x00000003;
+}
+
+/// {@category Enum}
+class XPS_OBJECT_TYPE {
+  static const XPS_OBJECT_TYPE_CANVAS = 0x00000001;
+  static const XPS_OBJECT_TYPE_GLYPHS = 0x00000002;
+  static const XPS_OBJECT_TYPE_PATH = 0x00000003;
+  static const XPS_OBJECT_TYPE_MATRIX_TRANSFORM = 0x00000004;
+  static const XPS_OBJECT_TYPE_GEOMETRY = 0x00000005;
+  static const XPS_OBJECT_TYPE_SOLID_COLOR_BRUSH = 0x00000006;
+  static const XPS_OBJECT_TYPE_IMAGE_BRUSH = 0x00000007;
+  static const XPS_OBJECT_TYPE_LINEAR_GRADIENT_BRUSH = 0x00000008;
+  static const XPS_OBJECT_TYPE_RADIAL_GRADIENT_BRUSH = 0x00000009;
+  static const XPS_OBJECT_TYPE_VISUAL_BRUSH = 0x0000000a;
+}
+
+/// {@category Enum}
+class XPS_SEGMENT_STROKE_PATTERN {
+  static const XPS_SEGMENT_STROKE_PATTERN_ALL = 0x00000001;
+  static const XPS_SEGMENT_STROKE_PATTERN_NONE = 0x00000002;
+  static const XPS_SEGMENT_STROKE_PATTERN_MIXED = 0x00000003;
+}
+
+/// {@category Enum}
+class XPS_SEGMENT_TYPE {
+  static const XPS_SEGMENT_TYPE_ARC_LARGE_CLOCKWISE = 0x00000001;
+  static const XPS_SEGMENT_TYPE_ARC_LARGE_COUNTERCLOCKWISE = 0x00000002;
+  static const XPS_SEGMENT_TYPE_ARC_SMALL_CLOCKWISE = 0x00000003;
+  static const XPS_SEGMENT_TYPE_ARC_SMALL_COUNTERCLOCKWISE = 0x00000004;
+  static const XPS_SEGMENT_TYPE_BEZIER = 0x00000005;
+  static const XPS_SEGMENT_TYPE_LINE = 0x00000006;
+  static const XPS_SEGMENT_TYPE_QUADRATIC_BEZIER = 0x00000007;
+}
+
+/// {@category Enum}
+class XPS_SIGNATURE_STATUS {
+  static const XPS_SIGNATURE_STATUS_INCOMPLIANT = 0x00000001;
+  static const XPS_SIGNATURE_STATUS_INCOMPLETE = 0x00000002;
+  static const XPS_SIGNATURE_STATUS_BROKEN = 0x00000003;
+  static const XPS_SIGNATURE_STATUS_QUESTIONABLE = 0x00000004;
+  static const XPS_SIGNATURE_STATUS_VALID = 0x00000005;
+}
+
+/// {@category Enum}
+class XPS_SIGN_FLAGS {
+  static const XPS_SIGN_FLAGS_NONE = 0x00000000;
+  static const XPS_SIGN_FLAGS_IGNORE_MARKUP_COMPATIBILITY = 0x00000001;
+}
+
+/// {@category Enum}
+class XPS_SIGN_POLICY {
+  static const XPS_SIGN_POLICY_NONE = 0x00000000;
+  static const XPS_SIGN_POLICY_CORE_PROPERTIES = 0x00000001;
+  static const XPS_SIGN_POLICY_SIGNATURE_RELATIONSHIPS = 0x00000002;
+  static const XPS_SIGN_POLICY_PRINT_TICKET = 0x00000004;
+  static const XPS_SIGN_POLICY_DISCARD_CONTROL = 0x00000008;
+  static const XPS_SIGN_POLICY_ALL = 0x0000000f;
 }
 
 /// {@category Enum}
@@ -103,91 +238,6 @@ class XPS_STYLE_SIMULATION {
 }
 
 /// {@category Enum}
-class XPS_LINE_CAP {
-  static const XPS_LINE_CAP_FLAT = 0x00000001;
-  static const XPS_LINE_CAP_ROUND = 0x00000002;
-  static const XPS_LINE_CAP_SQUARE = 0x00000003;
-  static const XPS_LINE_CAP_TRIANGLE = 0x00000004;
-}
-
-/// {@category Enum}
-class XPS_DASH_CAP {
-  static const XPS_DASH_CAP_FLAT = 0x00000001;
-  static const XPS_DASH_CAP_ROUND = 0x00000002;
-  static const XPS_DASH_CAP_SQUARE = 0x00000003;
-  static const XPS_DASH_CAP_TRIANGLE = 0x00000004;
-}
-
-/// {@category Enum}
-class XPS_LINE_JOIN {
-  static const XPS_LINE_JOIN_MITER = 0x00000001;
-  static const XPS_LINE_JOIN_BEVEL = 0x00000002;
-  static const XPS_LINE_JOIN_ROUND = 0x00000003;
-}
-
-/// {@category Enum}
-class XPS_IMAGE_TYPE {
-  static const XPS_IMAGE_TYPE_JPEG = 0x00000001;
-  static const XPS_IMAGE_TYPE_PNG = 0x00000002;
-  static const XPS_IMAGE_TYPE_TIFF = 0x00000003;
-  static const XPS_IMAGE_TYPE_WDP = 0x00000004;
-  static const XPS_IMAGE_TYPE_JXR = 0x00000005;
-}
-
-/// {@category Enum}
-class XPS_COLOR_TYPE {
-  static const XPS_COLOR_TYPE_SRGB = 0x00000001;
-  static const XPS_COLOR_TYPE_SCRGB = 0x00000002;
-  static const XPS_COLOR_TYPE_CONTEXT = 0x00000003;
-}
-
-/// {@category Enum}
-class XPS_FILL_RULE {
-  static const XPS_FILL_RULE_EVENODD = 0x00000001;
-  static const XPS_FILL_RULE_NONZERO = 0x00000002;
-}
-
-/// {@category Enum}
-class XPS_SEGMENT_TYPE {
-  static const XPS_SEGMENT_TYPE_ARC_LARGE_CLOCKWISE = 0x00000001;
-  static const XPS_SEGMENT_TYPE_ARC_LARGE_COUNTERCLOCKWISE = 0x00000002;
-  static const XPS_SEGMENT_TYPE_ARC_SMALL_CLOCKWISE = 0x00000003;
-  static const XPS_SEGMENT_TYPE_ARC_SMALL_COUNTERCLOCKWISE = 0x00000004;
-  static const XPS_SEGMENT_TYPE_BEZIER = 0x00000005;
-  static const XPS_SEGMENT_TYPE_LINE = 0x00000006;
-  static const XPS_SEGMENT_TYPE_QUADRATIC_BEZIER = 0x00000007;
-}
-
-/// {@category Enum}
-class XPS_SEGMENT_STROKE_PATTERN {
-  static const XPS_SEGMENT_STROKE_PATTERN_ALL = 0x00000001;
-  static const XPS_SEGMENT_STROKE_PATTERN_NONE = 0x00000002;
-  static const XPS_SEGMENT_STROKE_PATTERN_MIXED = 0x00000003;
-}
-
-/// {@category Enum}
-class XPS_FONT_EMBEDDING {
-  static const XPS_FONT_EMBEDDING_NORMAL = 0x00000001;
-  static const XPS_FONT_EMBEDDING_OBFUSCATED = 0x00000002;
-  static const XPS_FONT_EMBEDDING_RESTRICTED = 0x00000003;
-  static const XPS_FONT_EMBEDDING_RESTRICTED_UNOBFUSCATED = 0x00000004;
-}
-
-/// {@category Enum}
-class XPS_OBJECT_TYPE {
-  static const XPS_OBJECT_TYPE_CANVAS = 0x00000001;
-  static const XPS_OBJECT_TYPE_GLYPHS = 0x00000002;
-  static const XPS_OBJECT_TYPE_PATH = 0x00000003;
-  static const XPS_OBJECT_TYPE_MATRIX_TRANSFORM = 0x00000004;
-  static const XPS_OBJECT_TYPE_GEOMETRY = 0x00000005;
-  static const XPS_OBJECT_TYPE_SOLID_COLOR_BRUSH = 0x00000006;
-  static const XPS_OBJECT_TYPE_IMAGE_BRUSH = 0x00000007;
-  static const XPS_OBJECT_TYPE_LINEAR_GRADIENT_BRUSH = 0x00000008;
-  static const XPS_OBJECT_TYPE_RADIAL_GRADIENT_BRUSH = 0x00000009;
-  static const XPS_OBJECT_TYPE_VISUAL_BRUSH = 0x0000000a;
-}
-
-/// {@category Enum}
 class XPS_THUMBNAIL_SIZE {
   static const XPS_THUMBNAIL_SIZE_VERYSMALL = 0x00000001;
   static const XPS_THUMBNAIL_SIZE_SMALL = 0x00000002;
@@ -196,61 +246,11 @@ class XPS_THUMBNAIL_SIZE {
 }
 
 /// {@category Enum}
-class XPS_INTERLEAVING {
-  static const XPS_INTERLEAVING_OFF = 0x00000001;
-  static const XPS_INTERLEAVING_ON = 0x00000002;
-}
-
-/// {@category Enum}
-class XPS_DOCUMENT_TYPE {
-  static const XPS_DOCUMENT_TYPE_UNSPECIFIED = 0x00000001;
-  static const XPS_DOCUMENT_TYPE_XPS = 0x00000002;
-  static const XPS_DOCUMENT_TYPE_OPENXPS = 0x00000003;
-}
-
-/// {@category Enum}
-class XPS_SIGNATURE_STATUS {
-  static const XPS_SIGNATURE_STATUS_INCOMPLIANT = 0x00000001;
-  static const XPS_SIGNATURE_STATUS_INCOMPLETE = 0x00000002;
-  static const XPS_SIGNATURE_STATUS_BROKEN = 0x00000003;
-  static const XPS_SIGNATURE_STATUS_QUESTIONABLE = 0x00000004;
-  static const XPS_SIGNATURE_STATUS_VALID = 0x00000005;
-}
-
-/// {@category Enum}
-class XPS_SIGN_POLICY {
-  static const XPS_SIGN_POLICY_NONE = 0x00000000;
-  static const XPS_SIGN_POLICY_CORE_PROPERTIES = 0x00000001;
-  static const XPS_SIGN_POLICY_SIGNATURE_RELATIONSHIPS = 0x00000002;
-  static const XPS_SIGN_POLICY_PRINT_TICKET = 0x00000004;
-  static const XPS_SIGN_POLICY_DISCARD_CONTROL = 0x00000008;
-  static const XPS_SIGN_POLICY_ALL = 0x0000000f;
-}
-
-/// {@category Enum}
-class XPS_SIGN_FLAGS {
-  static const XPS_SIGN_FLAGS_NONE = 0x00000000;
-  static const XPS_SIGN_FLAGS_IGNORE_MARKUP_COMPATIBILITY = 0x00000001;
-}
-
-/// {@category Enum}
-class PrintDocumentPackageCompletion {
-  static const PrintDocumentPackageCompletion_InProgress = 0x00000000;
-  static const PrintDocumentPackageCompletion_Completed = 0x00000001;
-  static const PrintDocumentPackageCompletion_Canceled = 0x00000002;
-  static const PrintDocumentPackageCompletion_Failed = 0x00000003;
-}
-
-/// {@category Enum}
-class EDefaultDevmodeType {
-  static const kUserDefaultDevmode = 0x00000000;
-  static const kPrinterDefaultDevmode = 0x00000001;
-}
-
-/// {@category Enum}
-class EPrintTicketScope {
-  static const kPTPageScope = 0x00000000;
-  static const kPTDocumentScope = 0x00000001;
-  static const kPTJobScope = 0x00000002;
+class XPS_TILE_MODE {
+  static const XPS_TILE_MODE_NONE = 0x00000001;
+  static const XPS_TILE_MODE_TILE = 0x00000002;
+  static const XPS_TILE_MODE_FLIPX = 0x00000003;
+  static const XPS_TILE_MODE_FLIPY = 0x00000004;
+  static const XPS_TILE_MODE_FLIPXY = 0x00000005;
 }
 

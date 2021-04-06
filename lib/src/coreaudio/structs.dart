@@ -671,7 +671,8 @@ class KSPIN_CONNECT extends Struct {
 class KSPIN_PHYSICALCONNECTION extends Struct {
   @Uint32() external int Size;
   @Uint32() external int Pin;
-  external __ushort__ SymbolicLinkName;
+  @Array(1)
+  external Array<Uint16> SymbolicLinkName;
 }
 
 class KSEVENTSETID_PinCapsChange extends Struct {
@@ -764,7 +765,8 @@ class KSALLOCATOR_FRAMING_EX extends Struct {
   @Uint32() external int PinFlags;
   external KS_COMPRESSION OutputCompression;
   @Uint32() external int PinWeight;
-  external KS_FRAMING_ITEM FramingItem;
+  @Array(1)
+  external Array<KS_FRAMING_ITEM> FramingItem;
 }
 
 class KSMEMORY_TYPE_SYSTEM extends Struct {
@@ -1281,7 +1283,8 @@ class KSAUDIO_PACKETSIZE_CONSTRAINTS extends Struct {
   @Uint32() external int PacketSizeFileAlignment;
   @Uint32() external int Reserved;
   @Uint32() external int NumProcessingModeConstraints;
-  external _KSAUDIO_PACKETSIZE_SIGNALPROCESSINGMODE_CONSTRAINT ProcessingModeConstraints;
+  @Array(1)
+  external Array<_KSAUDIO_PACKETSIZE_SIGNALPROCESSINGMODE_CONSTRAINT> ProcessingModeConstraints;
 }
 
 class KSAUDIO_PACKETSIZE_CONSTRAINTS2 extends Struct {
@@ -1289,7 +1292,8 @@ class KSAUDIO_PACKETSIZE_CONSTRAINTS2 extends Struct {
   @Uint32() external int PacketSizeFileAlignment;
   @Uint32() external int MaxPacketSizeInBytes;
   @Uint32() external int NumProcessingModeConstraints;
-  external _KSAUDIO_PACKETSIZE_SIGNALPROCESSINGMODE_CONSTRAINT ProcessingModeConstraints;
+  @Array(1)
+  external Array<_KSAUDIO_PACKETSIZE_SIGNALPROCESSINGMODE_CONSTRAINT> ProcessingModeConstraints;
 }
 
 class KSAUDIO_MICROPHONE_COORDINATES extends Struct {
@@ -1311,7 +1315,8 @@ class KSAUDIO_MIC_ARRAY_GEOMETRY extends Struct {
   @Uint16() external int usFrequencyBandLo;
   @Uint16() external int usFrequencyBandHi;
   @Uint16() external int usNumberOfMicrophones;
-  external KSAUDIO_MICROPHONE_COORDINATES KsMicCoord;
+  @Array(1)
+  external Array<KSAUDIO_MICROPHONE_COORDINATES> KsMicCoord;
 }
 
 class DS3DVECTOR extends Struct {
@@ -1608,7 +1613,8 @@ class KSAUDIO_MIX_CAPS extends Struct {
 class KSAUDIO_MIXCAP_TABLE extends Struct {
   @Uint32() external int InputChannels;
   @Uint32() external int OutputChannels;
-  external KSAUDIO_MIX_CAPS Capabilities;
+  @Array(1)
+  external Array<KSAUDIO_MIX_CAPS> Capabilities;
 }
 
 class KSAUDIO_POSITIONEX extends Struct {
@@ -1640,7 +1646,8 @@ class KSPROPSETID_TelephonyTopology extends Struct {
 }
 
 class KSTOPOLOGY_ENDPOINTID extends Struct {
-  external __ushort__ TopologyName;
+  @Array(129)
+  external Array<Uint16> TopologyName;
   @Uint32() external int PinId;
 }
 
@@ -2274,7 +2281,8 @@ class KS_DVD_YUV extends Struct {
 }
 
 class KSPROPERTY_SPPAL extends Struct {
-  external KS_DVD_YUV sppal;
+  @Array(16)
+  external Array<KS_DVD_YUV> sppal;
 }
 
 class KS_COLCON extends Struct {
@@ -2300,30 +2308,39 @@ class KSPROPSETID_CopyProt extends Struct {
 }
 
 class KS_DVDCOPY_CHLGKEY extends Struct {
-  external __ubyte__ ChlgKey;
-  external __ubyte__ Reserved;
+  @Array(10)
+  external Array<Uint8> ChlgKey;
+  @Array(2)
+  external Array<Uint8> Reserved;
 }
 
 class KS_DVDCOPY_BUSKEY extends Struct {
-  external __ubyte__ BusKey;
-  external __ubyte__ Reserved;
+  @Array(5)
+  external Array<Uint8> BusKey;
+  @Array(1)
+  external Array<Uint8> Reserved;
 }
 
 class KS_DVDCOPY_DISCKEY extends Struct {
-  external __ubyte__ DiscKey;
+  @Array(136)
+  external Array<Uint8> DiscKey;
 }
 
 class KS_DVDCOPY_REGION extends Struct {
   @Uint8() external int Reserved;
   @Uint8() external int RegionData;
-  external __ubyte__ Reserved2;
+  @Array(2)
+  external Array<Uint8> Reserved2;
 }
 
 class KS_DVDCOPY_TITLEKEY extends Struct {
   @Uint32() external int KeyFlags;
-  external __uint__ ReservedNT;
-  external __ubyte__ TitleKey;
-  external __ubyte__ Reserved;
+  @Array(2)
+  external Array<Uint32> ReservedNT;
+  @Array(6)
+  external Array<Uint8> TitleKey;
+  @Array(2)
+  external Array<Uint8> Reserved;
 }
 
 class KS_COPY_MACROVISION extends Struct {
@@ -2458,8 +2475,10 @@ class KS_BITMAPINFOHEADER extends Struct {
 }
 
 class KS_TRUECOLORINFO extends Struct {
-  external __uint__ dwBitMasks;
-  external KS_RGBQUAD bmiColors;
+  @Array(3)
+  external Array<Uint32> dwBitMasks;
+  @Array(129)
+  external Array<KS_RGBQUAD> bmiColors;
 }
 
 class KS_VIDEOINFOHEADER extends Struct {
@@ -2529,7 +2548,8 @@ class KS_MPEG1VIDEOINFO extends Struct {
   external KS_VIDEOINFOHEADER hdr;
   @Uint32() external int dwStartTimeCode;
   @Uint32() external int cbSequenceHeader;
-  external __ubyte__ bSequenceHeader;
+  @Array(1)
+  external Array<Uint8> bSequenceHeader;
 }
 
 class KS_MPEGVIDEOINFO2 extends Struct {
@@ -2539,7 +2559,8 @@ class KS_MPEGVIDEOINFO2 extends Struct {
   @Uint32() external int dwProfile;
   @Uint32() external int dwLevel;
   @Uint32() external int dwFlags;
-  external __uint__ bSequenceHeader;
+  @Array(1)
+  external Array<Uint32> bSequenceHeader;
 }
 
 class KS_H264VIDEOINFO extends Struct {
@@ -2749,18 +2770,21 @@ class NABTSFEC_BUFFER extends Struct {
   @Uint32() external int dataSize;
   @Uint16() external int groupID;
   @Uint16() external int Reserved;
-  external __ubyte__ data;
+  @Array(129)
+  external Array<Uint8> data;
 }
 
 class KSPROPSETID_VBICodecFiltering extends Struct {
 }
 
 class VBICODECFILTERING_SCANLINES extends Struct {
-  external __uint__ DwordBitArray;
+  @Array(32)
+  external Array<Uint32> DwordBitArray;
 }
 
 class VBICODECFILTERING_NABTS_SUBSTREAMS extends Struct {
-  external __uint__ SubstreamMask;
+  @Array(128)
+  external Array<Uint32> SubstreamMask;
 }
 
 class VBICODECFILTERING_CC_SUBSTREAMS extends Struct {
@@ -2768,7 +2792,8 @@ class VBICODECFILTERING_CC_SUBSTREAMS extends Struct {
 }
 
 class CC_BYTE_PAIR extends Struct {
-  external __ubyte__ Decoded;
+  @Array(2)
+  external Array<Uint8> Decoded;
   @Uint16() external int Reserved;
 }
 
@@ -2776,28 +2801,33 @@ class CC_HW_FIELD extends Struct {
   external VBICODECFILTERING_SCANLINES ScanlinesRequested;
   @Uint32() external int fieldFlags;
   @Int64() external int PictureNumber;
-  external CC_BYTE_PAIR Lines;
+  @Array(12)
+  external Array<CC_BYTE_PAIR> Lines;
 }
 
 class NABTS_BUFFER_LINE extends Struct {
   @Uint8() external int Confidence;
-  external __ubyte__ Bytes;
+  @Array(36)
+  external Array<Uint8> Bytes;
 }
 
 class NABTS_BUFFER extends Struct {
   external VBICODECFILTERING_SCANLINES ScanlinesRequested;
   @Int64() external int PictureNumber;
-  external NABTS_BUFFER_LINE NabtsLines;
+  @Array(11)
+  external Array<NABTS_BUFFER_LINE> NabtsLines;
 }
 
 class WST_BUFFER_LINE extends Struct {
   @Uint8() external int Confidence;
-  external __ubyte__ Bytes;
+  @Array(42)
+  external Array<Uint8> Bytes;
 }
 
 class WST_BUFFER extends Struct {
   external VBICODECFILTERING_SCANLINES ScanlinesRequested;
-  external WST_BUFFER_LINE WstLines;
+  @Array(17)
+  external Array<WST_BUFFER_LINE> WstLines;
 }
 
 class VBICODECFILTERING_STATISTICS_COMMON extends Struct {
@@ -2960,7 +2990,8 @@ class VRAM_SURFACE_INFO extends Struct {
   @Uint32() external int dwHeight;
   @Uint32() external int dwLinearSize;
   @Int32() external int lPitch;
-  external __uint64__ ullReserved;
+  @Array(16)
+  external Array<Uint64> ullReserved;
 }
 
 class VRAM_SURFACE_INFO_PROPERTY_S extends Struct {
@@ -2972,7 +3003,8 @@ class SECURE_BUFFER_INFO extends Struct {
   external GUID guidBufferIdentifier;
   @Uint32() external int cbBufferSize;
   @Uint32() external int cbCaptured;
-  external __uint64__ ullReserved;
+  @Array(16)
+  external Array<Uint64> ullReserved;
 }
 
 class KS_SECURE_CAMERA_SCENARIO_ID extends Struct {
@@ -3709,8 +3741,10 @@ class TRANSPORTBASICPARMS extends Struct {
   @Int32() external int ServoRef;
   @Int32() external int WarnGenlock;
   @Int32() external int SetTracking;
-  external __byte__ VolumeName;
-  external __int__ Ballistic;
+  @Array(40)
+  external Array<Int8> VolumeName;
+  @Array(20)
+  external Array<Int32> Ballistic;
   @Int32() external int Speed;
   @Int32() external int CounterFormat;
   @Int32() external int TunerChannel;
@@ -3860,7 +3894,8 @@ class KSDISPLAYCHANGE extends Struct {
   @Uint32() external int PelsWidth;
   @Uint32() external int PelsHeight;
   @Uint32() external int BitsPerPel;
-  external __ushort__ DeviceID;
+  @Array(1)
+  external Array<Uint16> DeviceID;
 }
 
 class PROPSETID_VIDCAP_VIDEOCONTROL extends Struct {
@@ -3989,7 +4024,8 @@ class KSGOP_USERDATA extends Struct {
   @Uint32() external int sc;
   @Uint32() external int reserved1;
   @Uint8() external int cFields;
-  external __byte__ l21Data;
+  @Array(3)
+  external Array<Int8> l21Data;
 }
 
 class KSDATAFORMAT_TYPE_DVD_ENCRYPTED_PACK extends Struct {
@@ -4065,7 +4101,8 @@ class KSJACK_SINK_INFORMATION extends Struct {
   @Int32() external int HDCPCapable;
   @Int32() external int AICapable;
   @Uint8() external int SinkDescriptionLength;
-  external __ushort__ SinkDescription;
+  @Array(32)
+  external Array<Uint16> SinkDescription;
   external LUID PortId;
 }
 
@@ -4213,7 +4250,8 @@ class KSAUDIOMODULE_DESCRIPTOR extends Struct {
   @Uint32() external int InstanceId;
   @Uint32() external int VersionMajor;
   @Uint32() external int VersionMinor;
-  external __ushort__ Name;
+  @Array(128)
+  external Array<Uint16> Name;
 }
 
 class KSAUDIOMODULE_PROPERTY extends Struct {
@@ -4348,7 +4386,8 @@ class AUDIO_VOLUME_NOTIFICATION_DATA extends Struct {
   @Int32() external int bMuted;
   @Float() external double fMasterVolume;
   @Uint32() external int nChannels;
-  external __float__ afChannelVolumes;
+  @Array(1)
+  external Array<Float> afChannelVolumes;
 }
 
 class SpatialAudioMetadataItemsInfo extends Struct {

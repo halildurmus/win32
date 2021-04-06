@@ -1,4 +1,12 @@
 /// {@category Enum}
+class DNS_CHARSET {
+  static const DnsCharSetUnknown = 0x00000000;
+  static const DnsCharSetUnicode = 0x00000001;
+  static const DnsCharSetUtf8 = 0x00000002;
+  static const DnsCharSetAnsi = 0x00000003;
+}
+
+/// {@category Enum}
 class DNS_CONFIG_TYPE {
   static const DnsConfigPrimaryDomainName_W = 0x00000000;
   static const DnsConfigPrimaryDomainName_A = 0x00000001;
@@ -22,27 +30,26 @@ class DNS_CONFIG_TYPE {
 }
 
 /// {@category Enum}
-class DNS_SECTION {
-  static const DnsSectionQuestion = 0x00000000;
-  static const DnsSectionAnswer = 0x00000001;
-  static const DnsSectionAuthority = 0x00000002;
-  static const DnsSectionAddtional = 0x00000003;
+class DNS_CONNECTION_POLICY_TAG {
+  static const TAG_DNS_CONNECTION_POLICY_TAG_DEFAULT = 0x00000000;
+  static const TAG_DNS_CONNECTION_POLICY_TAG_CONNECTION_MANAGER = 0x00000001;
+  static const TAG_DNS_CONNECTION_POLICY_TAG_WWWPT = 0x00000002;
 }
 
 /// {@category Enum}
-class DNS_PROXY_INFORMATION_TYPE {
-  static const DNS_PROXY_INFORMATION_DIRECT = 0x00000000;
-  static const DNS_PROXY_INFORMATION_DEFAULT_SETTINGS = 0x00000001;
-  static const DNS_PROXY_INFORMATION_PROXY_NAME = 0x00000002;
-  static const DNS_PROXY_INFORMATION_DOES_NOT_EXIST = 0x00000003;
+class DNS_CONNECTION_PROXY_INFO_SWITCH {
+  static const DNS_CONNECTION_PROXY_INFO_SWITCH_CONFIG = 0x00000000;
+  static const DNS_CONNECTION_PROXY_INFO_SWITCH_SCRIPT = 0x00000001;
+  static const DNS_CONNECTION_PROXY_INFO_SWITCH_WPAD = 0x00000002;
 }
 
 /// {@category Enum}
-class DNS_CHARSET {
-  static const DnsCharSetUnknown = 0x00000000;
-  static const DnsCharSetUnicode = 0x00000001;
-  static const DnsCharSetUtf8 = 0x00000002;
-  static const DnsCharSetAnsi = 0x00000003;
+class DNS_CONNECTION_PROXY_TYPE {
+  static const DNS_CONNECTION_PROXY_TYPE_NULL = 0x00000000;
+  static const DNS_CONNECTION_PROXY_TYPE_HTTP = 0x00000001;
+  static const DNS_CONNECTION_PROXY_TYPE_WAP = 0x00000002;
+  static const DNS_CONNECTION_PROXY_TYPE_SOCKS4 = 0x00000004;
+  static const DNS_CONNECTION_PROXY_TYPE_SOCKS5 = 0x00000005;
 }
 
 /// {@category Enum}
@@ -64,25 +71,18 @@ class DNS_NAME_FORMAT {
 }
 
 /// {@category Enum}
-class DNS_CONNECTION_PROXY_TYPE {
-  static const DNS_CONNECTION_PROXY_TYPE_NULL = 0x00000000;
-  static const DNS_CONNECTION_PROXY_TYPE_HTTP = 0x00000001;
-  static const DNS_CONNECTION_PROXY_TYPE_WAP = 0x00000002;
-  static const DNS_CONNECTION_PROXY_TYPE_SOCKS4 = 0x00000004;
-  static const DNS_CONNECTION_PROXY_TYPE_SOCKS5 = 0x00000005;
+class DNS_PROXY_INFORMATION_TYPE {
+  static const DNS_PROXY_INFORMATION_DIRECT = 0x00000000;
+  static const DNS_PROXY_INFORMATION_DEFAULT_SETTINGS = 0x00000001;
+  static const DNS_PROXY_INFORMATION_PROXY_NAME = 0x00000002;
+  static const DNS_PROXY_INFORMATION_DOES_NOT_EXIST = 0x00000003;
 }
 
 /// {@category Enum}
-class DNS_CONNECTION_PROXY_INFO_SWITCH {
-  static const DNS_CONNECTION_PROXY_INFO_SWITCH_CONFIG = 0x00000000;
-  static const DNS_CONNECTION_PROXY_INFO_SWITCH_SCRIPT = 0x00000001;
-  static const DNS_CONNECTION_PROXY_INFO_SWITCH_WPAD = 0x00000002;
-}
-
-/// {@category Enum}
-class DNS_CONNECTION_POLICY_TAG {
-  static const TAG_DNS_CONNECTION_POLICY_TAG_DEFAULT = 0x00000000;
-  static const TAG_DNS_CONNECTION_POLICY_TAG_CONNECTION_MANAGER = 0x00000001;
-  static const TAG_DNS_CONNECTION_POLICY_TAG_WWWPT = 0x00000002;
+class DNS_SECTION {
+  static const DnsSectionQuestion = 0x00000000;
+  static const DnsSectionAnswer = 0x00000001;
+  static const DnsSectionAuthority = 0x00000002;
+  static const DnsSectionAddtional = 0x00000003;
 }
 

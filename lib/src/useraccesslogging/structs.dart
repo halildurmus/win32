@@ -47,7 +47,8 @@ class UAL_DATA_BLOB extends Struct {
   @Uint32() external int Size;
   external GUID RoleGuid;
   external GUID TenantId;
-  external SOCKADDR_STORAGE_LH Address;
-  external __ushort__ UserName;
+  external SOCKADDR_STORAGE Address;
+  @Array(129)
+  external Array<Uint16> UserName;
 }
 

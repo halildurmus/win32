@@ -170,7 +170,8 @@ class USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR extends Struct {
   @Uint32() external int bmAttributes;
   @Uint32() external int wFunctionalitySupport;
   @Uint16() external int wReserved;
-  external USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED bmSublinkSpeedAttr;
+  @Array(1)
+  external Array<USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED> bmSublinkSpeedAttr;
 }
 
 class USB_DEVICE_CAPABILITY_CONTAINER_ID_DESCRIPTOR extends Struct {
@@ -178,7 +179,8 @@ class USB_DEVICE_CAPABILITY_CONTAINER_ID_DESCRIPTOR extends Struct {
   @Uint8() external int bDescriptorType;
   @Uint8() external int bDevCapabilityType;
   @Uint8() external int bReserved;
-  external __ubyte__ ContainerID;
+  @Array(16)
+  external Array<Uint8> ContainerID;
 }
 
 class USB_DEVICE_CAPABILITY_PLATFORM_DESCRIPTOR extends Struct {
@@ -187,7 +189,8 @@ class USB_DEVICE_CAPABILITY_PLATFORM_DESCRIPTOR extends Struct {
   @Uint8() external int bDevCapabilityType;
   @Uint8() external int bReserved;
   external GUID PlatformCapabilityUuid;
-  external __ubyte__ CapabililityData;
+  @Array(1)
+  external Array<Uint8> CapabililityData;
 }
 
 class USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR extends Struct {
@@ -198,9 +201,11 @@ class USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR extends Struct {
   @Uint8() external int bNumberOfAlternateModes;
   @Uint8() external int bPreferredAlternateMode;
   @Uint32() external int VconnPower;
-  external __ubyte__ bmConfigured;
+  @Array(32)
+  external Array<Uint8> bmConfigured;
   @Uint32() external int bReserved;
-  external ____ AlternateMode;
+  @Array(1)
+  external Array<Uint32> AlternateMode;
 }
 
 class USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR extends Struct {
@@ -267,7 +272,8 @@ class USB_HIGH_SPEED_MAXPACKET extends Struct {
 class USB_STRING_DESCRIPTOR extends Struct {
   @Uint8() external int bLength;
   @Uint8() external int bDescriptorType;
-  external __ushort__ bString;
+  @Array(1)
+  external Array<Uint16> bString;
 }
 
 class USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR extends Struct {
@@ -292,7 +298,8 @@ class USB_HUB_DESCRIPTOR extends Struct {
   @Uint16() external int wHubCharacteristics;
   @Uint8() external int bPowerOnToPowerGood;
   @Uint8() external int bHubControlCurrent;
-  external __ubyte__ bRemoveAndPowerMask;
+  @Array(64)
+  external Array<Uint8> bRemoveAndPowerMask;
 }
 
 class USB_30_HUB_DESCRIPTOR extends Struct {
@@ -382,7 +389,8 @@ class USB_FUNCTION_SUSPEND_OPTIONS extends Struct {
 class USB_CONFIGURATION_POWER_DESCRIPTOR extends Struct {
   @Uint8() external int bLength;
   @Uint8() external int bDescriptorType;
-  external __ubyte__ SelfPowerConsumedD0;
+  @Array(3)
+  external Array<Uint8> SelfPowerConsumedD0;
   @Uint8() external int bPowerSummaryId;
   @Uint8() external int bBusPowerSavingD1;
   @Uint8() external int bSelfPowerSavingD1;
@@ -459,11 +467,13 @@ class USBD_INTERFACE_INFORMATION extends Struct {
   @Uint8() external int Reserved;
   external Pointer InterfaceHandle;
   @Uint32() external int NumberOfPipes;
-  external USBD_PIPE_INFORMATION Pipes;
+  @Array(1)
+  external Array<USBD_PIPE_INFORMATION> Pipes;
 }
 
 class _URB_HCD_AREA extends Struct {
-  external ____ Reserved8;
+  @Array(8)
+  external Array<Pointer> Reserved8;
 }
 
 class _URB_HEADER extends Struct {
@@ -538,7 +548,8 @@ class _URB_CONTROL_GET_STATUS_REQUEST extends Struct {
   external Pointer TransferBufferMDL;
   external Pointer<URB> UrbLink;
   external _URB_HCD_AREA hca;
-  external __ubyte__ Reserved1;
+  @Array(4)
+  external Array<Uint8> Reserved1;
   @Uint16() external int Index;
   @Uint16() external int Reserved2;
 }
@@ -583,7 +594,8 @@ class _URB_CONTROL_GET_INTERFACE_REQUEST extends Struct {
   external Pointer TransferBufferMDL;
   external Pointer<URB> UrbLink;
   external _URB_HCD_AREA hca;
-  external __ubyte__ Reserved1;
+  @Array(4)
+  external Array<Uint8> Reserved1;
   @Uint16() external int Interface;
   @Uint16() external int Reserved2;
 }
@@ -597,13 +609,15 @@ class _URB_CONTROL_GET_CONFIGURATION_REQUEST extends Struct {
   external Pointer TransferBufferMDL;
   external Pointer<URB> UrbLink;
   external _URB_HCD_AREA hca;
-  external __ubyte__ Reserved1;
+  @Array(8)
+  external Array<Uint8> Reserved1;
 }
 
 class OS_STRING extends Struct {
   @Uint8() external int bLength;
   @Uint8() external int bDescriptorType;
-  external __ushort__ MicrosoftString;
+  @Array(7)
+  external Array<Uint16> MicrosoftString;
   @Uint8() external int bVendorCode;
   @Uint32() external int Anonymous;
 }
@@ -634,7 +648,8 @@ class _URB_CONTROL_TRANSFER extends Struct {
   external Pointer TransferBufferMDL;
   external Pointer<URB> UrbLink;
   external _URB_HCD_AREA hca;
-  external __ubyte__ SetupPacket;
+  @Array(8)
+  external Array<Uint8> SetupPacket;
 }
 
 class _URB_CONTROL_TRANSFER_EX extends Struct {
@@ -646,7 +661,8 @@ class _URB_CONTROL_TRANSFER_EX extends Struct {
   external Pointer TransferBufferMDL;
   @Uint32() external int Timeout;
   external _URB_HCD_AREA hca;
-  external __ubyte__ SetupPacket;
+  @Array(8)
+  external Array<Uint8> SetupPacket;
 }
 
 class _URB_BULK_OR_INTERRUPT_TRANSFER extends Struct {
@@ -678,7 +694,8 @@ class _URB_ISOCH_TRANSFER extends Struct {
   @Uint32() external int StartFrame;
   @Uint32() external int NumberOfPackets;
   @Uint32() external int ErrorCount;
-  external USBD_ISO_PACKET_DESCRIPTOR IsoPacket;
+  @Array(1)
+  external Array<USBD_ISO_PACKET_DESCRIPTOR> IsoPacket;
 }
 
 class USBD_STREAM_INFORMATION extends Struct {
@@ -730,9 +747,11 @@ class PACKET_PARAMETERS extends Struct {
   @Uint16() external int HubDeviceAddress;
   @Uint16() external int PortTTNumber;
   @Uint8() external int ErrorCount;
-  external __ubyte__ Pad;
+  @Array(3)
+  external Array<Uint8> Pad;
   @Int32() external int UsbdStatusCode;
-  external __ubyte__ Data;
+  @Array(4)
+  external Array<Uint8> Data;
 }
 
 class USBUSER_SEND_ONE_PACKET extends Struct {
@@ -787,7 +806,8 @@ class USBUSER_CONTROLLER_INFO_0 extends Struct {
 
 class USB_UNICODE_NAME extends Struct {
   @Uint32() external int Length;
-  external __ushort__ String;
+  @Array(1)
+  external Array<Uint16> String;
 }
 
 class USBUSER_CONTROLLER_UNICODE_NAME extends Struct {
@@ -798,7 +818,8 @@ class USBUSER_CONTROLLER_UNICODE_NAME extends Struct {
 class USB_PASS_THRU_PARAMETERS extends Struct {
   external GUID FunctionGUID;
   @Uint32() external int ParameterLength;
-  external __ubyte__ Parameters;
+  @Array(4)
+  external Array<Uint8> Parameters;
 }
 
 class USBUSER_PASS_THRU_REQUEST extends Struct {
@@ -854,7 +875,8 @@ class USB_SEND_RAW_COMMAND_PARAMETERS extends Struct {
   @Uint32() external int Timeout;
   @Uint32() external int DataLength;
   @Int32() external int UsbdStatusCode;
-  external __ubyte__ Data;
+  @Array(4)
+  external Array<Uint8> Data;
 }
 
 class USBUSER_SEND_RAW_COMMAND extends Struct {

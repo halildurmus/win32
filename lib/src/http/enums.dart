@@ -1,56 +1,8 @@
 /// {@category Enum}
-class HTTP_SERVER_PROPERTY {
-  static const HttpServerAuthenticationProperty = 0x00000000;
-  static const HttpServerLoggingProperty = 0x00000001;
-  static const HttpServerQosProperty = 0x00000002;
-  static const HttpServerTimeoutsProperty = 0x00000003;
-  static const HttpServerQueueLengthProperty = 0x00000004;
-  static const HttpServerStateProperty = 0x00000005;
-  static const HttpServer503VerbosityProperty = 0x00000006;
-  static const HttpServerBindingProperty = 0x00000007;
-  static const HttpServerExtendedAuthenticationProperty = 0x00000008;
-  static const HttpServerListenEndpointProperty = 0x00000009;
-  static const HttpServerChannelBindProperty = 0x0000000a;
-  static const HttpServerProtectionLevelProperty = 0x0000000b;
-}
-
-/// {@category Enum}
-class HTTP_ENABLED_STATE {
-  static const HttpEnabledStateActive = 0x00000000;
-  static const HttpEnabledStateInactive = 0x00000001;
-}
-
-/// {@category Enum}
 class HTTP_503_RESPONSE_VERBOSITY {
   static const Http503ResponseVerbosityBasic = 0x00000000;
   static const Http503ResponseVerbosityLimited = 0x00000001;
   static const Http503ResponseVerbosityFull = 0x00000002;
-}
-
-/// {@category Enum}
-class HTTP_QOS_SETTING_TYPE {
-  static const HttpQosSettingTypeBandwidth = 0x00000000;
-  static const HttpQosSettingTypeConnectionLimit = 0x00000001;
-  static const HttpQosSettingTypeFlowRate = 0x00000002;
-}
-
-/// {@category Enum}
-class HTTP_SERVICE_CONFIG_TIMEOUT_KEY {
-  static const IdleConnectionTimeout = 0x00000000;
-  static const HeaderWaitTimeout = 0x00000001;
-}
-
-/// {@category Enum}
-class HTTP_SERVICE_CONFIG_SETTING_KEY {
-  static const HttpNone = 0x00000000;
-  static const HttpTlsThrottle = 0x00000001;
-}
-
-/// {@category Enum}
-class HTTP_SERVICE_BINDING_TYPE {
-  static const HttpServiceBindingTypeNone = 0x00000000;
-  static const HttpServiceBindingTypeW = 0x00000001;
-  static const HttpServiceBindingTypeA = 0x00000002;
 }
 
 /// {@category Enum}
@@ -61,59 +13,38 @@ class HTTP_AUTHENTICATION_HARDENING_LEVELS {
 }
 
 /// {@category Enum}
-class HTTP_LOGGING_TYPE {
-  static const HttpLoggingTypeW3C = 0x00000000;
-  static const HttpLoggingTypeIIS = 0x00000001;
-  static const HttpLoggingTypeNCSA = 0x00000002;
-  static const HttpLoggingTypeRaw = 0x00000003;
+class HTTP_AUTH_STATUS {
+  static const HttpAuthStatusSuccess = 0x00000000;
+  static const HttpAuthStatusNotAuthenticated = 0x00000001;
+  static const HttpAuthStatusFailure = 0x00000002;
 }
 
 /// {@category Enum}
-class HTTP_LOGGING_ROLLOVER_TYPE {
-  static const HttpLoggingRolloverSize = 0x00000000;
-  static const HttpLoggingRolloverDaily = 0x00000001;
-  static const HttpLoggingRolloverWeekly = 0x00000002;
-  static const HttpLoggingRolloverMonthly = 0x00000003;
-  static const HttpLoggingRolloverHourly = 0x00000004;
+class HTTP_CACHE_POLICY_TYPE {
+  static const HttpCachePolicyNocache = 0x00000000;
+  static const HttpCachePolicyUserInvalidates = 0x00000001;
+  static const HttpCachePolicyTimeToLive = 0x00000002;
+  static const HttpCachePolicyMaximum = 0x00000003;
 }
 
 /// {@category Enum}
-class HTTP_PROTECTION_LEVEL_TYPE {
-  static const HttpProtectionLevelUnrestricted = 0x00000000;
-  static const HttpProtectionLevelEdgeRestricted = 0x00000001;
-  static const HttpProtectionLevelRestricted = 0x00000002;
+class HTTP_DATA_CHUNK_TYPE {
+  static const HttpDataChunkFromMemory = 0x00000000;
+  static const HttpDataChunkFromFileHandle = 0x00000001;
+  static const HttpDataChunkFromFragmentCache = 0x00000002;
+  static const HttpDataChunkFromFragmentCacheEx = 0x00000003;
+  static const HttpDataChunkMaximum = 0x00000004;
 }
 
 /// {@category Enum}
-class HTTP_URI_SCHEME {
-  static const HttpSchemeHttp = 0x00000000;
-  static const HttpSchemeHttps = 0x00000001;
-  static const HttpSchemeMaximum = 0x00000002;
+class HTTP_DELEGATE_REQUEST_PROPERTY_ID {
+  static const DelegateRequestReservedProperty = 0x00000000;
 }
 
 /// {@category Enum}
-class HTTP_VERB {
-  static const HttpVerbUnparsed = 0x00000000;
-  static const HttpVerbUnknown = 0x00000001;
-  static const HttpVerbInvalid = 0x00000002;
-  static const HttpVerbOPTIONS = 0x00000003;
-  static const HttpVerbGET = 0x00000004;
-  static const HttpVerbHEAD = 0x00000005;
-  static const HttpVerbPOST = 0x00000006;
-  static const HttpVerbPUT = 0x00000007;
-  static const HttpVerbDELETE = 0x00000008;
-  static const HttpVerbTRACE = 0x00000009;
-  static const HttpVerbCONNECT = 0x0000000a;
-  static const HttpVerbTRACK = 0x0000000b;
-  static const HttpVerbMOVE = 0x0000000c;
-  static const HttpVerbCOPY = 0x0000000d;
-  static const HttpVerbPROPFIND = 0x0000000e;
-  static const HttpVerbPROPPATCH = 0x0000000f;
-  static const HttpVerbMKCOL = 0x00000010;
-  static const HttpVerbLOCK = 0x00000011;
-  static const HttpVerbUNLOCK = 0x00000012;
-  static const HttpVerbSEARCH = 0x00000013;
-  static const HttpVerbMaximum = 0x00000014;
+class HTTP_ENABLED_STATE {
+  static const HttpEnabledStateActive = 0x00000000;
+  static const HttpEnabledStateInactive = 0x00000001;
 }
 
 /// {@category Enum}
@@ -175,29 +106,45 @@ class HTTP_HEADER_ID {
 }
 
 /// {@category Enum}
+class HTTP_INITIALIZE {
+  static const HTTP_INITIALIZE_CONFIG = 0x00000002;
+  static const HTTP_INITIALIZE_SERVER = 0x00000001;
+}
+
+/// {@category Enum}
+class HTTP_LOGGING_ROLLOVER_TYPE {
+  static const HttpLoggingRolloverSize = 0x00000000;
+  static const HttpLoggingRolloverDaily = 0x00000001;
+  static const HttpLoggingRolloverWeekly = 0x00000002;
+  static const HttpLoggingRolloverMonthly = 0x00000003;
+  static const HttpLoggingRolloverHourly = 0x00000004;
+}
+
+/// {@category Enum}
+class HTTP_LOGGING_TYPE {
+  static const HttpLoggingTypeW3C = 0x00000000;
+  static const HttpLoggingTypeIIS = 0x00000001;
+  static const HttpLoggingTypeNCSA = 0x00000002;
+  static const HttpLoggingTypeRaw = 0x00000003;
+}
+
+/// {@category Enum}
 class HTTP_LOG_DATA_TYPE {
   static const HttpLogDataTypeFields = 0x00000000;
 }
 
 /// {@category Enum}
-class HTTP_DATA_CHUNK_TYPE {
-  static const HttpDataChunkFromMemory = 0x00000000;
-  static const HttpDataChunkFromFileHandle = 0x00000001;
-  static const HttpDataChunkFromFragmentCache = 0x00000002;
-  static const HttpDataChunkFromFragmentCacheEx = 0x00000003;
-  static const HttpDataChunkMaximum = 0x00000004;
+class HTTP_PROTECTION_LEVEL_TYPE {
+  static const HttpProtectionLevelUnrestricted = 0x00000000;
+  static const HttpProtectionLevelEdgeRestricted = 0x00000001;
+  static const HttpProtectionLevelRestricted = 0x00000002;
 }
 
 /// {@category Enum}
-class HTTP_DELEGATE_REQUEST_PROPERTY_ID {
-  static const DelegateRequestReservedProperty = 0x00000000;
-}
-
-/// {@category Enum}
-class HTTP_AUTH_STATUS {
-  static const HttpAuthStatusSuccess = 0x00000000;
-  static const HttpAuthStatusNotAuthenticated = 0x00000001;
-  static const HttpAuthStatusFailure = 0x00000002;
+class HTTP_QOS_SETTING_TYPE {
+  static const HttpQosSettingTypeBandwidth = 0x00000000;
+  static const HttpQosSettingTypeConnectionLimit = 0x00000001;
+  static const HttpQosSettingTypeFlowRate = 0x00000002;
 }
 
 /// {@category Enum}
@@ -208,6 +155,29 @@ class HTTP_REQUEST_AUTH_TYPE {
   static const HttpRequestAuthTypeNTLM = 0x00000003;
   static const HttpRequestAuthTypeNegotiate = 0x00000004;
   static const HttpRequestAuthTypeKerberos = 0x00000005;
+}
+
+/// {@category Enum}
+class HTTP_REQUEST_INFO_TYPE {
+  static const HttpRequestInfoTypeAuth = 0x00000000;
+  static const HttpRequestInfoTypeChannelBind = 0x00000001;
+  static const HttpRequestInfoTypeSslProtocol = 0x00000002;
+  static const HttpRequestInfoTypeSslTokenBindingDraft = 0x00000003;
+  static const HttpRequestInfoTypeSslTokenBinding = 0x00000004;
+  static const HttpRequestInfoTypeRequestTiming = 0x00000005;
+  static const HttpRequestInfoTypeTcpInfoV0 = 0x00000006;
+  static const HttpRequestInfoTypeRequestSizing = 0x00000007;
+  static const HttpRequestInfoTypeQuicStats = 0x00000008;
+  static const HttpRequestInfoTypeTcpInfoV1 = 0x00000009;
+}
+
+/// {@category Enum}
+class HTTP_REQUEST_PROPERTY {
+  static const HttpRequestPropertyIsb = 0x00000000;
+  static const HttpRequestPropertyTcpInfoV0 = 0x00000001;
+  static const HttpRequestPropertyQuicStats = 0x00000002;
+  static const HttpRequestPropertyTcpInfoV1 = 0x00000003;
+  static const HttpRequestPropertySni = 0x00000004;
 }
 
 /// {@category Enum}
@@ -256,20 +226,6 @@ class HTTP_REQUEST_TIMING_TYPE {
 }
 
 /// {@category Enum}
-class HTTP_REQUEST_INFO_TYPE {
-  static const HttpRequestInfoTypeAuth = 0x00000000;
-  static const HttpRequestInfoTypeChannelBind = 0x00000001;
-  static const HttpRequestInfoTypeSslProtocol = 0x00000002;
-  static const HttpRequestInfoTypeSslTokenBindingDraft = 0x00000003;
-  static const HttpRequestInfoTypeSslTokenBinding = 0x00000004;
-  static const HttpRequestInfoTypeRequestTiming = 0x00000005;
-  static const HttpRequestInfoTypeTcpInfoV0 = 0x00000006;
-  static const HttpRequestInfoTypeRequestSizing = 0x00000007;
-  static const HttpRequestInfoTypeQuicStats = 0x00000008;
-  static const HttpRequestInfoTypeTcpInfoV1 = 0x00000009;
-}
-
-/// {@category Enum}
 class HTTP_RESPONSE_INFO_TYPE {
   static const HttpResponseInfoTypeMultipleKnownHeaders = 0x00000000;
   static const HttpResponseInfoTypeAuthenticationProperty = 0x00000001;
@@ -278,11 +234,32 @@ class HTTP_RESPONSE_INFO_TYPE {
 }
 
 /// {@category Enum}
-class HTTP_CACHE_POLICY_TYPE {
-  static const HttpCachePolicyNocache = 0x00000000;
-  static const HttpCachePolicyUserInvalidates = 0x00000001;
-  static const HttpCachePolicyTimeToLive = 0x00000002;
-  static const HttpCachePolicyMaximum = 0x00000003;
+class HTTP_SERVER_PROPERTY {
+  static const HttpServerAuthenticationProperty = 0x00000000;
+  static const HttpServerLoggingProperty = 0x00000001;
+  static const HttpServerQosProperty = 0x00000002;
+  static const HttpServerTimeoutsProperty = 0x00000003;
+  static const HttpServerQueueLengthProperty = 0x00000004;
+  static const HttpServerStateProperty = 0x00000005;
+  static const HttpServer503VerbosityProperty = 0x00000006;
+  static const HttpServerBindingProperty = 0x00000007;
+  static const HttpServerExtendedAuthenticationProperty = 0x00000008;
+  static const HttpServerListenEndpointProperty = 0x00000009;
+  static const HttpServerChannelBindProperty = 0x0000000a;
+  static const HttpServerProtectionLevelProperty = 0x0000000b;
+}
+
+/// {@category Enum}
+class HTTP_SERVICE_BINDING_TYPE {
+  static const HttpServiceBindingTypeNone = 0x00000000;
+  static const HttpServiceBindingTypeW = 0x00000001;
+  static const HttpServiceBindingTypeA = 0x00000002;
+}
+
+/// {@category Enum}
+class HTTP_SERVICE_CONFIG_CACHE_KEY {
+  static const MaxCacheResponseSize = 0x00000000;
+  static const CacheRangeChunkSize = 0x00000001;
 }
 
 /// {@category Enum}
@@ -311,6 +288,26 @@ class HTTP_SERVICE_CONFIG_QUERY_TYPE {
 }
 
 /// {@category Enum}
+class HTTP_SERVICE_CONFIG_SETTING_KEY {
+  static const HttpNone = 0x00000000;
+  static const HttpTlsThrottle = 0x00000001;
+}
+
+/// {@category Enum}
+class HTTP_SERVICE_CONFIG_SSL_PARAM_DefaultCertCheckModeFlags {
+  static const None = 0x00000000;
+  static const DefaultCertCheckMode1 = 0x00000001;
+  static const DefaultCertCheckMode2 = 0x00000002;
+  static const DefaultCertCheckMode4 = 0x00000004;
+}
+
+/// {@category Enum}
+class HTTP_SERVICE_CONFIG_TIMEOUT_KEY {
+  static const IdleConnectionTimeout = 0x00000000;
+  static const HeaderWaitTimeout = 0x00000001;
+}
+
+/// {@category Enum}
 class HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE {
   static const ExParamTypeHttp2Window = 0x00000000;
   static const ExParamTypeHttp2SettingsLimits = 0x00000001;
@@ -319,18 +316,69 @@ class HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE {
 }
 
 /// {@category Enum}
-class HTTP_SERVICE_CONFIG_CACHE_KEY {
-  static const MaxCacheResponseSize = 0x00000000;
-  static const CacheRangeChunkSize = 0x00000001;
+class HTTP_VERB {
+  static const HttpVerbUnparsed = 0x00000000;
+  static const HttpVerbUnknown = 0x00000001;
+  static const HttpVerbInvalid = 0x00000002;
+  static const HttpVerbOPTIONS = 0x00000003;
+  static const HttpVerbGET = 0x00000004;
+  static const HttpVerbHEAD = 0x00000005;
+  static const HttpVerbPOST = 0x00000006;
+  static const HttpVerbPUT = 0x00000007;
+  static const HttpVerbDELETE = 0x00000008;
+  static const HttpVerbTRACE = 0x00000009;
+  static const HttpVerbCONNECT = 0x0000000a;
+  static const HttpVerbTRACK = 0x0000000b;
+  static const HttpVerbMOVE = 0x0000000c;
+  static const HttpVerbCOPY = 0x0000000d;
+  static const HttpVerbPROPFIND = 0x0000000e;
+  static const HttpVerbPROPPATCH = 0x0000000f;
+  static const HttpVerbMKCOL = 0x00000010;
+  static const HttpVerbLOCK = 0x00000011;
+  static const HttpVerbUNLOCK = 0x00000012;
+  static const HttpVerbSEARCH = 0x00000013;
+  static const HttpVerbMaximum = 0x00000014;
 }
 
 /// {@category Enum}
-class HTTP_REQUEST_PROPERTY {
-  static const HttpRequestPropertyIsb = 0x00000000;
-  static const HttpRequestPropertyTcpInfoV0 = 0x00000001;
-  static const HttpRequestPropertyQuicStats = 0x00000002;
-  static const HttpRequestPropertyTcpInfoV1 = 0x00000003;
-  static const HttpRequestPropertySni = 0x00000004;
+class HttpReceiveHttpRequest_Flags {
+  static const HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY = 0x00000001;
+  static const HTTP_RECEIVE_REQUEST_FLAG_FLUSH_BODY = 0x00000002;
+}
+
+/// {@category Enum}
+class URL_COMPONENTS_nSchemeFlags {
+  static const INTERNET_SCHEME_HTTP = 0x00000001;
+  static const INTERNET_SCHEME_HTTPS = 0x00000002;
+}
+
+/// {@category Enum}
+class WINHTTP_CREDS_dwAuthScheme {
+  static const WINHTTP_AUTH_SCHEME_BASIC = 0x00000001;
+  static const WINHTTP_AUTH_SCHEME_NTLM = 0x00000002;
+  static const WINHTTP_AUTH_SCHEME_NEGOTIATE = 0x00000010;
+}
+
+/// {@category Enum}
+class WINHTTP_REQUEST_STAT_ENTRY {
+  static const WinHttpConnectFailureCount = 0x00000000;
+  static const WinHttpProxyFailureCount = 0x00000001;
+  static const WinHttpTlsHandshakeClientLeg1Size = 0x00000002;
+  static const WinHttpTlsHandshakeServerLeg1Size = 0x00000003;
+  static const WinHttpTlsHandshakeClientLeg2Size = 0x00000004;
+  static const WinHttpTlsHandshakeServerLeg2Size = 0x00000005;
+  static const WinHttpRequestHeadersSize = 0x00000006;
+  static const WinHttpRequestHeadersCompressedSize = 0x00000007;
+  static const WinHttpResponseHeadersSize = 0x00000008;
+  static const WinHttpResponseHeadersCompressedSize = 0x00000009;
+  static const WinHttpResponseBodySize = 0x0000000a;
+  static const WinHttpResponseBodyCompressedSize = 0x0000000b;
+  static const WinHttpProxyTlsHandshakeClientLeg1Size = 0x0000000c;
+  static const WinHttpProxyTlsHandshakeServerLeg1Size = 0x0000000d;
+  static const WinHttpProxyTlsHandshakeClientLeg2Size = 0x0000000e;
+  static const WinHttpProxyTlsHandshakeServerLeg2Size = 0x0000000f;
+  static const WinHttpRequestStatLast = 0x00000010;
+  static const WinHttpRequestStatMax = 0x00000020;
 }
 
 /// {@category Enum}
@@ -376,36 +424,6 @@ class WINHTTP_REQUEST_TIME_ENTRY {
 }
 
 /// {@category Enum}
-class WINHTTP_REQUEST_STAT_ENTRY {
-  static const WinHttpConnectFailureCount = 0x00000000;
-  static const WinHttpProxyFailureCount = 0x00000001;
-  static const WinHttpTlsHandshakeClientLeg1Size = 0x00000002;
-  static const WinHttpTlsHandshakeServerLeg1Size = 0x00000003;
-  static const WinHttpTlsHandshakeClientLeg2Size = 0x00000004;
-  static const WinHttpTlsHandshakeServerLeg2Size = 0x00000005;
-  static const WinHttpRequestHeadersSize = 0x00000006;
-  static const WinHttpRequestHeadersCompressedSize = 0x00000007;
-  static const WinHttpResponseHeadersSize = 0x00000008;
-  static const WinHttpResponseHeadersCompressedSize = 0x00000009;
-  static const WinHttpResponseBodySize = 0x0000000a;
-  static const WinHttpResponseBodyCompressedSize = 0x0000000b;
-  static const WinHttpProxyTlsHandshakeClientLeg1Size = 0x0000000c;
-  static const WinHttpProxyTlsHandshakeServerLeg1Size = 0x0000000d;
-  static const WinHttpProxyTlsHandshakeClientLeg2Size = 0x0000000e;
-  static const WinHttpProxyTlsHandshakeServerLeg2Size = 0x0000000f;
-  static const WinHttpRequestStatLast = 0x00000010;
-  static const WinHttpRequestStatMax = 0x00000020;
-}
-
-/// {@category Enum}
-class WINHTTP_WEB_SOCKET_OPERATION {
-  static const WINHTTP_WEB_SOCKET_SEND_OPERATION = 0x00000000;
-  static const WINHTTP_WEB_SOCKET_RECEIVE_OPERATION = 0x00000001;
-  static const WINHTTP_WEB_SOCKET_CLOSE_OPERATION = 0x00000002;
-  static const WINHTTP_WEB_SOCKET_SHUTDOWN_OPERATION = 0x00000003;
-}
-
-/// {@category Enum}
 class WINHTTP_WEB_SOCKET_BUFFER_TYPE {
   static const WINHTTP_WEB_SOCKET_BINARY_MESSAGE_BUFFER_TYPE = 0x00000000;
   static const WINHTTP_WEB_SOCKET_BINARY_FRAGMENT_BUFFER_TYPE = 0x00000001;
@@ -431,14 +449,11 @@ class WINHTTP_WEB_SOCKET_CLOSE_STATUS {
 }
 
 /// {@category Enum}
-class WINHTTP_STATUS_CALLBACK_lpvStatusInformationFlags {
-  static const WINHTTP_CALLBACK_STATUS_FLAG_CERT_REV_FAILED = 0x00000001;
-  static const WINHTTP_CALLBACK_STATUS_FLAG_INVALID_CERT = 0x00000002;
-  static const WINHTTP_CALLBACK_STATUS_FLAG_CERT_REVOKED = 0x00000004;
-  static const WINHTTP_CALLBACK_STATUS_FLAG_INVALID_CA = 0x00000008;
-  static const WINHTTP_CALLBACK_STATUS_FLAG_CERT_CN_INVALID = 0x00000010;
-  static const WINHTTP_CALLBACK_STATUS_FLAG_CERT_DATE_INVALID = 0x00000020;
-  static const WINHTTP_CALLBACK_STATUS_FLAG_SECURITY_CHANNEL_ERROR = 0x80000000;
+class WINHTTP_WEB_SOCKET_OPERATION {
+  static const WINHTTP_WEB_SOCKET_SEND_OPERATION = 0x00000000;
+  static const WINHTTP_WEB_SOCKET_RECEIVE_OPERATION = 0x00000001;
+  static const WINHTTP_WEB_SOCKET_CLOSE_OPERATION = 0x00000002;
+  static const WINHTTP_WEB_SOCKET_SHUTDOWN_OPERATION = 0x00000003;
 }
 
 /// {@category Enum}
@@ -446,6 +461,13 @@ class WinHttpConnect_nServerPortFlags {
   static const INTERNET_DEFAULT_HTTP_PORT = 0x00000050;
   static const INTERNET_DEFAULT_HTTPS_PORT = 0x000001bb;
   static const INTERNET_DEFAULT_PORT = 0x00000000;
+}
+
+/// {@category Enum}
+class WinHttpCreateUrl_dwFlags {
+  static const ICU_ESCAPE = 0x80000000;
+  static const ICU_REJECT_USERPWD = 0x00004000;
+  static const ICU_DECODE = 0x10000000;
 }
 
 /// {@category Enum}
@@ -460,25 +482,6 @@ class WinHttpOpenRequest_dwFlags {
 }
 
 /// {@category Enum}
-class WinHttpCreateUrl_dwFlags {
-  static const ICU_ESCAPE = 0x80000000;
-  static const ICU_REJECT_USERPWD = 0x00004000;
-  static const ICU_DECODE = 0x10000000;
-}
-
-/// {@category Enum}
-class HttpReceiveHttpRequest_Flags {
-  static const HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY = 0x00000001;
-  static const HTTP_RECEIVE_REQUEST_FLAG_FLUSH_BODY = 0x00000002;
-}
-
-/// {@category Enum}
-class HTTP_INITIALIZE {
-  static const HTTP_INITIALIZE_CONFIG = 0x00000002;
-  static const HTTP_INITIALIZE_SERVER = 0x00000001;
-}
-
-/// {@category Enum}
 class WinHttpOpen_dwAccessTypeFlags {
   static const WINHTTP_ACCESS_TYPE_NO_PROXY = 0x00000001;
   static const WINHTTP_ACCESS_TYPE_DEFAULT_PROXY = 0x00000000;
@@ -487,32 +490,9 @@ class WinHttpOpen_dwAccessTypeFlags {
 }
 
 /// {@category Enum}
-class WINHTTP_ASYNC_RESULT_dwResultFlags {
-  static const API_RECEIVE_RESPONSE = 0x00000001;
-  static const API_QUERY_DATA_AVAILABLE = 0x00000002;
-  static const API_READ_DATA = 0x00000003;
-  static const API_WRITE_DATA = 0x00000004;
-  static const API_SEND_REQUEST = 0x00000005;
-}
-
-/// {@category Enum}
-class URL_COMPONENTS_nSchemeFlags {
-  static const INTERNET_SCHEME_HTTP = 0x00000001;
-  static const INTERNET_SCHEME_HTTPS = 0x00000002;
-}
-
-/// {@category Enum}
-class HTTP_SERVICE_CONFIG_SSL_PARAM_DefaultCertCheckModeFlags {
-  static const None = 0x00000000;
-  static const DefaultCertCheckMode1 = 0x00000001;
-  static const DefaultCertCheckMode2 = 0x00000002;
-  static const DefaultCertCheckMode4 = 0x00000004;
-}
-
-/// {@category Enum}
-class WINHTTP_CREDS_dwAuthScheme {
-  static const WINHTTP_AUTH_SCHEME_BASIC = 0x00000001;
-  static const WINHTTP_AUTH_SCHEME_NTLM = 0x00000002;
-  static const WINHTTP_AUTH_SCHEME_NEGOTIATE = 0x00000010;
+class HTTP_URI_SCHEME {
+  static const HttpSchemeHttp = 0x00000000;
+  static const HttpSchemeHttps = 0x00000001;
+  static const HttpSchemeMaximum = 0x00000002;
 }
 

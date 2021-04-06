@@ -63,11 +63,13 @@ class NLM_DATAPLAN_STATUS extends Struct {
 }
 
 class NLM_SOCKADDR extends Struct {
-  external __ubyte__ data;
+  @Array(128)
+  external Array<Uint8> data;
 }
 
 class NLM_SIMULATED_PROFILE_INFO extends Struct {
-  external __ushort__ ProfileName;
+  @Array(129)
+  external Array<Uint16> ProfileName;
   @Uint32() external int cost;
   @Uint32() external int UsageInMegabytes;
   @Uint32() external int DataLimitInMegabytes;

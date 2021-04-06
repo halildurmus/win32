@@ -83,7 +83,8 @@ class CONTEXT extends Struct {
   @Uint64() external int R15;
   @Uint64() external int Rip;
   @Uint32() external int Anonymous;
-  external M128A VectorRegister;
+  @Array(26)
+  external Array<M128A> VectorRegister;
   @Uint64() external int VectorControl;
   @Uint64() external int DebugControl;
   @Uint64() external int LastBranchToRip;
@@ -106,7 +107,8 @@ class WOW64_FLOATING_SAVE_AREA extends Struct {
   @Uint32() external int ErrorSelector;
   @Uint32() external int DataOffset;
   @Uint32() external int DataSelector;
-  external __ubyte__ RegisterArea;
+  @Array(80)
+  external Array<Uint8> RegisterArea;
   @Uint32() external int Cr0NpxState;
 }
 
@@ -135,7 +137,8 @@ class WOW64_CONTEXT extends Struct {
   @Uint32() external int EFlags;
   @Uint32() external int Esp;
   @Uint32() external int SegSs;
-  external __ubyte__ ExtendedRegisters;
+  @Array(130)
+  external Array<Uint8> ExtendedRegisters;
 }
 
 class WOW64_LDT_ENTRY extends Struct {
@@ -150,7 +153,8 @@ class EXCEPTION_RECORD extends Struct {
   external Pointer<EXCEPTION_RECORD> ExceptionRecord;
   external Pointer ExceptionAddress;
   @Uint32() external int NumberParameters;
-  external __uintptr__ ExceptionInformation;
+  @Array(15)
+  external Array<IntPtr> ExceptionInformation;
 }
 
 class EXCEPTION_RECORD64 extends Struct {
@@ -160,7 +164,8 @@ class EXCEPTION_RECORD64 extends Struct {
   @Uint64() external int ExceptionAddress;
   @Uint32() external int NumberParameters;
   @Uint32() external int __unusedAlignment;
-  external __uint64__ ExceptionInformation;
+  @Array(15)
+  external Array<Uint64> ExceptionInformation;
 }
 
 class EXCEPTION_POINTERS extends Struct {
@@ -181,6 +186,41 @@ class IMAGE_FILE_HEADER extends Struct {
 class IMAGE_DATA_DIRECTORY extends Struct {
   @Uint32() external int VirtualAddress;
   @Uint32() external int Size;
+}
+
+class IMAGE_OPTIONAL_HEADER32 extends Struct {
+  @Uint32() external int Magic;
+  @Uint8() external int MajorLinkerVersion;
+  @Uint8() external int MinorLinkerVersion;
+  @Uint32() external int SizeOfCode;
+  @Uint32() external int SizeOfInitializedData;
+  @Uint32() external int SizeOfUninitializedData;
+  @Uint32() external int AddressOfEntryPoint;
+  @Uint32() external int BaseOfCode;
+  @Uint32() external int BaseOfData;
+  @Uint32() external int ImageBase;
+  @Uint32() external int SectionAlignment;
+  @Uint32() external int FileAlignment;
+  @Uint16() external int MajorOperatingSystemVersion;
+  @Uint16() external int MinorOperatingSystemVersion;
+  @Uint16() external int MajorImageVersion;
+  @Uint16() external int MinorImageVersion;
+  @Uint16() external int MajorSubsystemVersion;
+  @Uint16() external int MinorSubsystemVersion;
+  @Uint32() external int Win32VersionValue;
+  @Uint32() external int SizeOfImage;
+  @Uint32() external int SizeOfHeaders;
+  @Uint32() external int CheckSum;
+  @Uint32() external int Subsystem;
+  @Uint32() external int DllCharacteristics;
+  @Uint32() external int SizeOfStackReserve;
+  @Uint32() external int SizeOfStackCommit;
+  @Uint32() external int SizeOfHeapReserve;
+  @Uint32() external int SizeOfHeapCommit;
+  @Uint32() external int LoaderFlags;
+  @Uint32() external int NumberOfRvaAndSizes;
+  @Array(16)
+  external Array<IMAGE_DATA_DIRECTORY> DataDirectory;
 }
 
 class IMAGE_OPTIONAL_HEADER64 extends Struct {
@@ -205,15 +245,16 @@ class IMAGE_OPTIONAL_HEADER64 extends Struct {
   @Uint32() external int SizeOfImage;
   @Uint32() external int SizeOfHeaders;
   @Uint32() external int CheckSum;
-  @Uint16() external int Subsystem;
-  @Uint16() external int DllCharacteristics;
+  @Uint32() external int Subsystem;
+  @Uint32() external int DllCharacteristics;
   @Uint64() external int SizeOfStackReserve;
   @Uint64() external int SizeOfStackCommit;
   @Uint64() external int SizeOfHeapReserve;
   @Uint64() external int SizeOfHeapCommit;
   @Uint32() external int LoaderFlags;
   @Uint32() external int NumberOfRvaAndSizes;
-  external IMAGE_DATA_DIRECTORY DataDirectory;
+  @Array(16)
+  external Array<IMAGE_DATA_DIRECTORY> DataDirectory;
 }
 
 class IMAGE_NT_HEADERS64 extends Struct {
@@ -222,8 +263,15 @@ class IMAGE_NT_HEADERS64 extends Struct {
   external IMAGE_OPTIONAL_HEADER64 OptionalHeader;
 }
 
+class IMAGE_NT_HEADERS32 extends Struct {
+  @Uint32() external int Signature;
+  external IMAGE_FILE_HEADER FileHeader;
+  external IMAGE_OPTIONAL_HEADER32 OptionalHeader;
+}
+
 class IMAGE_SECTION_HEADER extends Struct {
-  external __ubyte__ Name;
+  @Array(8)
+  external Array<Uint8> Name;
   @Uint32() external int Misc;
   @Uint32() external int VirtualAddress;
   @Uint32() external int SizeOfRawData;
@@ -371,6 +419,14 @@ class IMAGE_FUNCTION_ENTRY64 extends Struct {
   @Uint32() external int Anonymous;
 }
 
+class FLASHWINFO extends Struct {
+  @Uint32() external int cbSize;
+  @IntPtr() external int hwnd;
+  @Uint32() external int dwFlags;
+  @Uint32() external int uCount;
+  @Uint32() external int dwTimeout;
+}
+
 class EXCEPTION_DEBUG_INFO extends Struct {
   external EXCEPTION_RECORD ExceptionRecord;
   @Uint32() external int dwFirstChance;
@@ -434,14 +490,6 @@ class DEBUG_EVENT extends Struct {
   @Uint32() external int u;
 }
 
-class FLASHWINFO extends Struct {
-  @Uint32() external int cbSize;
-  @IntPtr() external int hwnd;
-  @Uint32() external int dwFlags;
-  @Uint32() external int uCount;
-  @Uint32() external int dwTimeout;
-}
-
 class WAITCHAIN_NODE_INFO extends Struct {
   @Uint32() external int ObjectType;
   @Uint32() external int ObjectStatus;
@@ -485,7 +533,8 @@ class MINIDUMP_DIRECTORY extends Struct {
 
 class MINIDUMP_STRING extends Struct {
   @Uint32() external int Length;
-  external __ushort__ Buffer;
+  @Array(1)
+  external Array<Uint16> Buffer;
 }
 
 class CPU_INFORMATION extends Struct {
@@ -519,7 +568,8 @@ class MINIDUMP_THREAD extends Struct {
 
 class MINIDUMP_THREAD_LIST extends Struct {
   @Uint32() external int NumberOfThreads;
-  external MINIDUMP_THREAD Threads;
+  @Array(1)
+  external Array<MINIDUMP_THREAD> Threads;
 }
 
 class MINIDUMP_THREAD_EX extends Struct {
@@ -535,7 +585,8 @@ class MINIDUMP_THREAD_EX extends Struct {
 
 class MINIDUMP_THREAD_EX_LIST extends Struct {
   @Uint32() external int NumberOfThreads;
-  external MINIDUMP_THREAD_EX Threads;
+  @Array(1)
+  external Array<MINIDUMP_THREAD_EX> Threads;
 }
 
 class MINIDUMP_EXCEPTION extends Struct {
@@ -545,7 +596,8 @@ class MINIDUMP_EXCEPTION extends Struct {
   @Uint64() external int ExceptionAddress;
   @Uint32() external int NumberParameters;
   @Uint32() external int __unusedAlignment;
-  external __uint64__ ExceptionInformation;
+  @Array(15)
+  external Array<Uint64> ExceptionInformation;
 }
 
 class MINIDUMP_EXCEPTION_STREAM extends Struct {
@@ -570,18 +622,21 @@ class MINIDUMP_MODULE extends Struct {
 
 class MINIDUMP_MODULE_LIST extends Struct {
   @Uint32() external int NumberOfModules;
-  external MINIDUMP_MODULE Modules;
+  @Array(1)
+  external Array<MINIDUMP_MODULE> Modules;
 }
 
 class MINIDUMP_MEMORY_LIST extends Struct {
   @Uint32() external int NumberOfMemoryRanges;
-  external MINIDUMP_MEMORY_DESCRIPTOR MemoryRanges;
+  @Array(1)
+  external Array<MINIDUMP_MEMORY_DESCRIPTOR> MemoryRanges;
 }
 
 class MINIDUMP_MEMORY64_LIST extends Struct {
   @Uint64() external int NumberOfMemoryRanges;
   @Uint64() external int BaseRva;
-  external MINIDUMP_MEMORY_DESCRIPTOR64 MemoryRanges;
+  @Array(1)
+  external Array<MINIDUMP_MEMORY_DESCRIPTOR64> MemoryRanges;
 }
 
 class MINIDUMP_EXCEPTION_INFORMATION extends Struct {
@@ -674,7 +729,8 @@ class XSTATE_CONFIG_FEATURE_MSC_INFO extends Struct {
   @Uint32() external int SizeOfInfo;
   @Uint32() external int ContextSize;
   @Uint64() external int EnabledFeatures;
-  external XSTATE_FEATURE Features;
+  @Array(64)
+  external Array<XSTATE_FEATURE> Features;
 }
 
 class MINIDUMP_MISC_INFO extends Struct {
@@ -736,8 +792,10 @@ class MINIDUMP_MISC_INFO_4 extends Struct {
   @Uint32() external int ProtectedProcess;
   @Uint32() external int TimeZoneId;
   external TIME_ZONE_INFORMATION TimeZone;
-  external __ushort__ BuildString;
-  external __ushort__ DbgBldStr;
+  @Array(129)
+  external Array<Uint16> BuildString;
+  @Array(40)
+  external Array<Uint16> DbgBldStr;
 }
 
 class MINIDUMP_MISC_INFO_5 extends Struct {
@@ -757,8 +815,10 @@ class MINIDUMP_MISC_INFO_5 extends Struct {
   @Uint32() external int ProtectedProcess;
   @Uint32() external int TimeZoneId;
   external TIME_ZONE_INFORMATION TimeZone;
-  external __ushort__ BuildString;
-  external __ushort__ DbgBldStr;
+  @Array(129)
+  external Array<Uint16> BuildString;
+  @Array(40)
+  external Array<Uint16> DbgBldStr;
   external XSTATE_CONFIG_FEATURE_MSC_INFO XStateData;
   @Uint32() external int ProcessCookie;
 }
@@ -788,7 +848,8 @@ class MINIDUMP_THREAD_NAME extends Struct {
 
 class MINIDUMP_THREAD_NAME_LIST extends Struct {
   @Uint32() external int NumberOfThreadNames;
-  external MINIDUMP_THREAD_NAME ThreadNames;
+  @Array(1)
+  external Array<MINIDUMP_THREAD_NAME> ThreadNames;
 }
 
 class MINIDUMP_THREAD_INFO extends Struct {
@@ -1148,7 +1209,8 @@ class DebugStackFrameDescriptor64 extends Struct {
 
 class PROFILER_HEAP_OBJECT_SCOPE_LIST extends Struct {
   @Uint32() external int count;
-  external __uintptr__ scopes;
+  @Array(1)
+  external Array<IntPtr> scopes;
 }
 
 class PROFILER_PROPERTY_TYPE_SUBSTRING_INFO extends Struct {
@@ -1164,7 +1226,8 @@ class PROFILER_HEAP_OBJECT_RELATIONSHIP extends Struct {
 
 class PROFILER_HEAP_OBJECT_RELATIONSHIP_LIST extends Struct {
   @Uint32() external int count;
-  external PROFILER_HEAP_OBJECT_RELATIONSHIP elements;
+  @Array(1)
+  external Array<PROFILER_HEAP_OBJECT_RELATIONSHIP> elements;
 }
 
 class PROFILER_HEAP_OBJECT_OPTIONAL_INFO extends Struct {
@@ -1184,895 +1247,6 @@ class PROFILER_HEAP_OBJECT extends Struct {
 class PROFILER_HEAP_SUMMARY extends Struct {
   @Uint32() external int version;
   @Uint32() external int totalHeapSize;
-}
-
-class HTMLCSSStyleDeclaration extends Struct {
-}
-
-class HTMLStyle extends Struct {
-}
-
-class HTMLRuleStyle extends Struct {
-}
-
-class HTMLCSSRule extends Struct {
-}
-
-class HTMLCSSImportRule extends Struct {
-}
-
-class HTMLCSSMediaRule extends Struct {
-}
-
-class HTMLCSSMediaList extends Struct {
-}
-
-class HTMLCSSNamespaceRule extends Struct {
-}
-
-class HTMLMSCSSKeyframeRule extends Struct {
-}
-
-class HTMLMSCSSKeyframesRule extends Struct {
-}
-
-class HTMLRenderStyle extends Struct {
-}
-
-class HTMLCurrentStyle extends Struct {
-}
-
-class HTMLDOMAttribute extends Struct {
-}
-
-class HTMLDOMTextNode extends Struct {
-}
-
-class HTMLDOMImplementation extends Struct {
-}
-
-class HTMLAttributeCollection extends Struct {
-}
-
-class StaticNodeList extends Struct {
-}
-
-class DOMChildrenCollection extends Struct {
-}
-
-class HTMLDefaults extends Struct {
-}
-
-class HTCDefaultDispatch extends Struct {
-}
-
-class HTCPropertyBehavior extends Struct {
-}
-
-class HTCMethodBehavior extends Struct {
-}
-
-class HTCEventBehavior extends Struct {
-}
-
-class HTCAttachBehavior extends Struct {
-}
-
-class HTCDescBehavior extends Struct {
-}
-
-class HTMLUrnCollection extends Struct {
-}
-
-class HTMLGenericElement extends Struct {
-}
-
-class HTMLStyleSheetRule extends Struct {
-}
-
-class HTMLStyleSheetRulesCollection extends Struct {
-}
-
-class HTMLStyleSheetPage extends Struct {
-}
-
-class HTMLStyleSheetPagesCollection extends Struct {
-}
-
-class HTMLStyleSheet extends Struct {
-}
-
-class HTMLStyleSheetsCollection extends Struct {
-}
-
-class HTMLLinkElement extends Struct {
-}
-
-class HTMLDOMRange extends Struct {
-}
-
-class HTMLFormElement extends Struct {
-}
-
-class HTMLTextElement extends Struct {
-}
-
-class HTMLImg extends Struct {
-}
-
-class HTMLImageElementFactory extends Struct {
-}
-
-class HTMLBody extends Struct {
-}
-
-class HTMLFontElement extends Struct {
-}
-
-class HTMLAnchorElement extends Struct {
-}
-
-class HTMLLabelElement extends Struct {
-}
-
-class HTMLListElement extends Struct {
-}
-
-class HTMLUListElement extends Struct {
-}
-
-class HTMLOListElement extends Struct {
-}
-
-class HTMLLIElement extends Struct {
-}
-
-class HTMLBlockElement extends Struct {
-}
-
-class HTMLDivElement extends Struct {
-}
-
-class HTMLDDElement extends Struct {
-}
-
-class HTMLDTElement extends Struct {
-}
-
-class HTMLBRElement extends Struct {
-}
-
-class HTMLDListElement extends Struct {
-}
-
-class HTMLHRElement extends Struct {
-}
-
-class HTMLParaElement extends Struct {
-}
-
-class HTMLElementCollection extends Struct {
-}
-
-class HTMLHeaderElement extends Struct {
-}
-
-class HTMLSelectElement extends Struct {
-}
-
-class HTMLWndSelectElement extends Struct {
-}
-
-class HTMLOptionElement extends Struct {
-}
-
-class HTMLOptionElementFactory extends Struct {
-}
-
-class HTMLWndOptionElement extends Struct {
-}
-
-class HTMLInputElement extends Struct {
-}
-
-class HTMLTextAreaElement extends Struct {
-}
-
-class HTMLRichtextElement extends Struct {
-}
-
-class HTMLButtonElement extends Struct {
-}
-
-class HTMLMarqueeElement extends Struct {
-}
-
-class HTMLHtmlElement extends Struct {
-}
-
-class HTMLHeadElement extends Struct {
-}
-
-class HTMLTitleElement extends Struct {
-}
-
-class HTMLMetaElement extends Struct {
-}
-
-class HTMLBaseElement extends Struct {
-}
-
-class HTMLIsIndexElement extends Struct {
-}
-
-class HTMLNextIdElement extends Struct {
-}
-
-class HTMLBaseFontElement extends Struct {
-}
-
-class HTMLUnknownElement extends Struct {
-}
-
-class HTMLHistory extends Struct {
-}
-
-class COpsProfile extends Struct {
-}
-
-class HTMLNavigator extends Struct {
-}
-
-class HTMLLocation extends Struct {
-}
-
-class CMimeTypes extends Struct {
-}
-
-class CPlugins extends Struct {
-}
-
-class CEventObj extends Struct {
-}
-
-class HTMLStyleMedia extends Struct {
-}
-
-class FramesCollection extends Struct {
-}
-
-class HTMLScreen extends Struct {
-}
-
-class HTMLWindow2 extends Struct {
-}
-
-class HTMLWindowProxy extends Struct {
-}
-
-class HTMLDocumentCompatibleInfo extends Struct {
-}
-
-class HTMLDocumentCompatibleInfoCollection extends Struct {
-}
-
-class HTMLDocument extends Struct {
-}
-
-class Scriptlet extends Struct {
-}
-
-class HTMLEmbed extends Struct {
-}
-
-class HTMLAreasCollection extends Struct {
-}
-
-class HTMLMapElement extends Struct {
-}
-
-class HTMLAreaElement extends Struct {
-}
-
-class HTMLTableCaption extends Struct {
-}
-
-class HTMLCommentElement extends Struct {
-}
-
-class HTMLPhraseElement extends Struct {
-}
-
-class HTMLSpanElement extends Struct {
-}
-
-class HTMLTable extends Struct {
-}
-
-class HTMLTableCol extends Struct {
-}
-
-class HTMLTableSection extends Struct {
-}
-
-class HTMLTableRow extends Struct {
-}
-
-class HTMLTableCell extends Struct {
-}
-
-class HTMLScriptElement extends Struct {
-}
-
-class HTMLNoShowElement extends Struct {
-}
-
-class HTMLObjectElement extends Struct {
-}
-
-class HTMLParamElement extends Struct {
-}
-
-class HTMLFrameBase extends Struct {
-}
-
-class HTMLFrameElement extends Struct {
-}
-
-class HTMLIFrame extends Struct {
-}
-
-class HTMLDivPosition extends Struct {
-}
-
-class HTMLFieldSetElement extends Struct {
-}
-
-class HTMLLegendElement extends Struct {
-}
-
-class HTMLSpanFlow extends Struct {
-}
-
-class HTMLFrameSetSite extends Struct {
-}
-
-class HTMLBGsound extends Struct {
-}
-
-class HTMLStyleElement extends Struct {
-}
-
-class HTMLStyleFontFace extends Struct {
-}
-
-class XDomainRequest extends Struct {
-}
-
-class XDomainRequestFactory extends Struct {
-}
-
-class HTMLStorage extends Struct {
-}
-
-class DOMEvent extends Struct {
-}
-
-class DOMUIEvent extends Struct {
-}
-
-class DOMMouseEvent extends Struct {
-}
-
-class DOMDragEvent extends Struct {
-}
-
-class DOMMouseWheelEvent extends Struct {
-}
-
-class DOMWheelEvent extends Struct {
-}
-
-class DOMTextEvent extends Struct {
-}
-
-class DOMKeyboardEvent extends Struct {
-}
-
-class DOMCompositionEvent extends Struct {
-}
-
-class DOMMutationEvent extends Struct {
-}
-
-class DOMBeforeUnloadEvent extends Struct {
-}
-
-class DOMFocusEvent extends Struct {
-}
-
-class DOMCustomEvent extends Struct {
-}
-
-class CanvasGradient extends Struct {
-}
-
-class CanvasPattern extends Struct {
-}
-
-class CanvasTextMetrics extends Struct {
-}
-
-class CanvasImageData extends Struct {
-}
-
-class CanvasRenderingContext2D extends Struct {
-}
-
-class HTMLCanvasElement extends Struct {
-}
-
-class DOMProgressEvent extends Struct {
-}
-
-class DOMMessageEvent extends Struct {
-}
-
-class DOMSiteModeEvent extends Struct {
-}
-
-class DOMStorageEvent extends Struct {
-}
-
-class XMLHttpRequestEventTarget extends Struct {
-}
-
-class HTMLXMLHttpRequest extends Struct {
-}
-
-class HTMLXMLHttpRequestFactory extends Struct {
-}
-
-class SVGAngle extends Struct {
-}
-
-class SVGAnimatedAngle extends Struct {
-}
-
-class SVGAnimatedTransformList extends Struct {
-}
-
-class SVGAnimatedBoolean extends Struct {
-}
-
-class SVGAnimatedEnumeration extends Struct {
-}
-
-class SVGAnimatedInteger extends Struct {
-}
-
-class SVGAnimatedLength extends Struct {
-}
-
-class SVGAnimatedLengthList extends Struct {
-}
-
-class SVGAnimatedNumber extends Struct {
-}
-
-class SVGAnimatedNumberList extends Struct {
-}
-
-class SVGAnimatedRect extends Struct {
-}
-
-class SVGAnimatedString extends Struct {
-}
-
-class SVGClipPathElement extends Struct {
-}
-
-class SVGElement extends Struct {
-}
-
-class SVGLength extends Struct {
-}
-
-class SVGLengthList extends Struct {
-}
-
-class SVGMatrix extends Struct {
-}
-
-class SVGNumber extends Struct {
-}
-
-class SVGNumberList extends Struct {
-}
-
-class SVGPatternElement extends Struct {
-}
-
-class SVGPathSeg extends Struct {
-}
-
-class SVGPathSegArcAbs extends Struct {
-}
-
-class SVGPathSegArcRel extends Struct {
-}
-
-class SVGPathSegClosePath extends Struct {
-}
-
-class SVGPathSegMovetoAbs extends Struct {
-}
-
-class SVGPathSegMovetoRel extends Struct {
-}
-
-class SVGPathSegLinetoAbs extends Struct {
-}
-
-class SVGPathSegLinetoRel extends Struct {
-}
-
-class SVGPathSegCurvetoCubicAbs extends Struct {
-}
-
-class SVGPathSegCurvetoCubicRel extends Struct {
-}
-
-class SVGPathSegCurvetoCubicSmoothAbs extends Struct {
-}
-
-class SVGPathSegCurvetoCubicSmoothRel extends Struct {
-}
-
-class SVGPathSegCurvetoQuadraticAbs extends Struct {
-}
-
-class SVGPathSegCurvetoQuadraticRel extends Struct {
-}
-
-class SVGPathSegCurvetoQuadraticSmoothAbs extends Struct {
-}
-
-class SVGPathSegCurvetoQuadraticSmoothRel extends Struct {
-}
-
-class SVGPathSegLinetoHorizontalAbs extends Struct {
-}
-
-class SVGPathSegLinetoHorizontalRel extends Struct {
-}
-
-class SVGPathSegLinetoVerticalAbs extends Struct {
-}
-
-class SVGPathSegLinetoVerticalRel extends Struct {
-}
-
-class SVGPathSegList extends Struct {
-}
-
-class SVGPoint extends Struct {
-}
-
-class SVGPointList extends Struct {
-}
-
-class SVGRect extends Struct {
-}
-
-class SVGStringList extends Struct {
-}
-
-class SVGTransform extends Struct {
-}
-
-class SVGSVGElement extends Struct {
-}
-
-class SVGUseElement extends Struct {
-}
-
-class HTMLStyleSheetRulesAppliedCollection extends Struct {
-}
-
-class RulesApplied extends Struct {
-}
-
-class RulesAppliedCollection extends Struct {
-}
-
-class HTMLW3CComputedStyle extends Struct {
-}
-
-class SVGTransformList extends Struct {
-}
-
-class SVGCircleElement extends Struct {
-}
-
-class SVGEllipseElement extends Struct {
-}
-
-class SVGLineElement extends Struct {
-}
-
-class SVGRectElement extends Struct {
-}
-
-class SVGPolygonElement extends Struct {
-}
-
-class SVGPolylineElement extends Struct {
-}
-
-class SVGGElement extends Struct {
-}
-
-class SVGSymbolElement extends Struct {
-}
-
-class SVGDefsElement extends Struct {
-}
-
-class SVGPathElement extends Struct {
-}
-
-class SVGPreserveAspectRatio extends Struct {
-}
-
-class SVGTextElement extends Struct {
-}
-
-class SVGAnimatedPreserveAspectRatio extends Struct {
-}
-
-class SVGImageElement extends Struct {
-}
-
-class SVGStopElement extends Struct {
-}
-
-class SVGGradientElement extends Struct {
-}
-
-class SVGLinearGradientElement extends Struct {
-}
-
-class SVGRadialGradientElement extends Struct {
-}
-
-class SVGMaskElement extends Struct {
-}
-
-class SVGMarkerElement extends Struct {
-}
-
-class SVGZoomEvent extends Struct {
-}
-
-class SVGAElement extends Struct {
-}
-
-class SVGViewElement extends Struct {
-}
-
-class HTMLMediaError extends Struct {
-}
-
-class HTMLTimeRanges extends Struct {
-}
-
-class HTMLMediaElement extends Struct {
-}
-
-class HTMLSourceElement extends Struct {
-}
-
-class HTMLAudioElement extends Struct {
-}
-
-class HTMLAudioElementFactory extends Struct {
-}
-
-class HTMLVideoElement extends Struct {
-}
-
-class SVGSwitchElement extends Struct {
-}
-
-class SVGDescElement extends Struct {
-}
-
-class SVGTitleElement extends Struct {
-}
-
-class SVGMetadataElement extends Struct {
-}
-
-class SVGElementInstance extends Struct {
-}
-
-class SVGElementInstanceList extends Struct {
-}
-
-class DOMException extends Struct {
-}
-
-class RangeException extends Struct {
-}
-
-class SVGException extends Struct {
-}
-
-class EventException extends Struct {
-}
-
-class SVGScriptElement extends Struct {
-}
-
-class SVGStyleElement extends Struct {
-}
-
-class SVGTextContentElement extends Struct {
-}
-
-class SVGTextPositioningElement extends Struct {
-}
-
-class DOMDocumentType extends Struct {
-}
-
-class NodeIterator extends Struct {
-}
-
-class TreeWalker extends Struct {
-}
-
-class DOMProcessingInstruction extends Struct {
-}
-
-class HTMLPerformance extends Struct {
-}
-
-class HTMLPerformanceNavigation extends Struct {
-}
-
-class HTMLPerformanceTiming extends Struct {
-}
-
-class SVGTSpanElement extends Struct {
-}
-
-class CTemplatePrinter extends Struct {
-}
-
-class CPrintManagerTemplatePrinter extends Struct {
-}
-
-class SVGTextPathElement extends Struct {
-}
-
-class XMLSerializer extends Struct {
-}
-
-class DOMParser extends Struct {
-}
-
-class HTMLDOMXmlSerializerFactory extends Struct {
-}
-
-class DOMParserFactory extends Struct {
-}
-
-class HTMLSemanticElement extends Struct {
-}
-
-class HTMLProgressElement extends Struct {
-}
-
-class DOMMSTransitionEvent extends Struct {
-}
-
-class DOMMSAnimationEvent extends Struct {
-}
-
-class WebGeolocation extends Struct {
-}
-
-class WebGeocoordinates extends Struct {
-}
-
-class WebGeopositionError extends Struct {
-}
-
-class WebGeoposition extends Struct {
-}
-
-class CClientCaps extends Struct {
-}
-
-class DOMMSManipulationEvent extends Struct {
-}
-
-class DOMCloseEvent extends Struct {
-}
-
-class ApplicationCache extends Struct {
-}
-
-class HtmlDlgSafeHelper extends Struct {
-}
-
-class BlockFormats extends Struct {
-}
-
-class FontNames extends Struct {
-}
-
-class HTMLNamespace extends Struct {
-}
-
-class HTMLNamespaceCollection extends Struct {
-}
-
-class ThreadDialogProcParam extends Struct {
-}
-
-class HTMLDialog extends Struct {
-}
-
-class HTMLPopup extends Struct {
-}
-
-class HTMLAppBehavior extends Struct {
-}
-
-class OldHTMLDocument extends Struct {
-}
-
-class OldHTMLFormElement extends Struct {
-}
-
-class HTMLInputButtonElement extends Struct {
-}
-
-class HTMLInputTextElement extends Struct {
-}
-
-class HTMLInputFileElement extends Struct {
-}
-
-class HTMLOptionButtonElement extends Struct {
-}
-
-class HTMLInputImage extends Struct {
-}
-
-class HTML_PAINTER_INFO extends Struct {
-  @Int32() external int lFlags;
-  @Int32() external int lZOrder;
-  external GUID iidDrawObject;
-  external RECT rcExpand;
-}
-
-class HTML_PAINT_XFORM extends Struct {
-  @Float() external double eM11;
-  @Float() external double eM12;
-  @Float() external double eM21;
-  @Float() external double eM22;
-  @Float() external double eDx;
-  @Float() external double eDy;
-}
-
-class HTML_PAINT_DRAW_INFO extends Struct {
-  external RECT rcViewport;
-  @IntPtr() external int hrgnUpdate;
-  external HTML_PAINT_XFORM xform;
 }
 
 class LOADED_IMAGE extends Struct {
@@ -2137,7 +1311,8 @@ class KDHELP64 extends Struct {
   @Uint64() external int RetpolineStubFunctionTable;
   @Uint32() external int RetpolineStubOffset;
   @Uint32() external int RetpolineStubSize;
-  external __uint64__ Reserved0;
+  @Array(2)
+  external Array<Uint64> Reserved0;
 }
 
 class STACKFRAME64 extends Struct {
@@ -2147,10 +1322,12 @@ class STACKFRAME64 extends Struct {
   external ADDRESS64 AddrStack;
   external ADDRESS64 AddrBStore;
   external Pointer FuncTableEntry;
-  external __uint64__ Params;
+  @Array(4)
+  external Array<Uint64> Params;
   @Int32() external int Far;
   @Int32() external int Virtual;
-  external __uint64__ Reserved;
+  @Array(3)
+  external Array<Uint64> Reserved;
   external KDHELP64 KdHelp;
 }
 
@@ -2161,10 +1338,12 @@ class STACKFRAME_EX extends Struct {
   external ADDRESS64 AddrStack;
   external ADDRESS64 AddrBStore;
   external Pointer FuncTableEntry;
-  external __uint64__ Params;
+  @Array(4)
+  external Array<Uint64> Params;
   @Int32() external int Far;
   @Int32() external int Virtual;
-  external __uint64__ Reserved;
+  @Array(3)
+  external Array<Uint64> Reserved;
   external KDHELP64 KdHelp;
   @Uint32() external int StackFrameSize;
   @Uint32() external int InlineFrameContext;
@@ -2183,12 +1362,14 @@ class IMAGEHLP_SYMBOL64 extends Struct {
   @Uint32() external int Size;
   @Uint32() external int Flags;
   @Uint32() external int MaxNameLength;
-  external __byte__ Name;
+  @Array(1)
+  external Array<Int8> Name;
 }
 
 class IMAGEHLP_SYMBOL64_PACKAGE extends Struct {
   external IMAGEHLP_SYMBOL64 sym;
-  external __byte__ name;
+  @Array(135)
+  external Array<Int8> name;
 }
 
 class IMAGEHLP_SYMBOLW64 extends Struct {
@@ -2197,12 +1378,14 @@ class IMAGEHLP_SYMBOLW64 extends Struct {
   @Uint32() external int Size;
   @Uint32() external int Flags;
   @Uint32() external int MaxNameLength;
-  external __ushort__ Name;
+  @Array(1)
+  external Array<Uint16> Name;
 }
 
 class IMAGEHLP_SYMBOLW64_PACKAGE extends Struct {
   external IMAGEHLP_SYMBOLW64 sym;
-  external __ushort__ name;
+  @Array(135)
+  external Array<Uint16> name;
 }
 
 class IMAGEHLP_MODULE64 extends Struct {
@@ -2213,12 +1396,17 @@ class IMAGEHLP_MODULE64 extends Struct {
   @Uint32() external int CheckSum;
   @Uint32() external int NumSyms;
   @Uint32() external int SymType;
-  external __byte__ ModuleName;
-  external __byte__ ImageName;
-  external __byte__ LoadedImageName;
-  external __byte__ LoadedPdbName;
+  @Array(32)
+  external Array<Int8> ModuleName;
+  @Array(129)
+  external Array<Int8> ImageName;
+  @Array(129)
+  external Array<Int8> LoadedImageName;
+  @Array(129)
+  external Array<Int8> LoadedPdbName;
   @Uint32() external int CVSig;
-  external __byte__ CVData;
+  @Array(131)
+  external Array<Int8> CVData;
   @Uint32() external int PdbSig;
   external GUID PdbSig70;
   @Uint32() external int PdbAge;
@@ -2241,12 +1429,17 @@ class IMAGEHLP_MODULEW64 extends Struct {
   @Uint32() external int CheckSum;
   @Uint32() external int NumSyms;
   @Uint32() external int SymType;
-  external __ushort__ ModuleName;
-  external __ushort__ ImageName;
-  external __ushort__ LoadedImageName;
-  external __ushort__ LoadedPdbName;
+  @Array(32)
+  external Array<Uint16> ModuleName;
+  @Array(129)
+  external Array<Uint16> ImageName;
+  @Array(129)
+  external Array<Uint16> LoadedImageName;
+  @Array(129)
+  external Array<Uint16> LoadedPdbName;
   @Uint32() external int CVSig;
-  external __ushort__ CVData;
+  @Array(131)
+  external Array<Uint16> CVData;
   @Uint32() external int PdbSig;
   external GUID PdbSig70;
   @Uint32() external int PdbAge;
@@ -2313,7 +1506,8 @@ class IMAGEHLP_DEFERRED_SYMBOL_LOAD64 extends Struct {
   @Uint64() external int BaseOfImage;
   @Uint32() external int CheckSum;
   @Uint32() external int TimeDateStamp;
-  external __byte__ FileName;
+  @Array(129)
+  external Array<Int8> FileName;
   @Uint8() external int Reparse;
   @IntPtr() external int hFile;
   @Uint32() external int Flags;
@@ -2324,7 +1518,8 @@ class IMAGEHLP_DEFERRED_SYMBOL_LOADW64 extends Struct {
   @Uint64() external int BaseOfImage;
   @Uint32() external int CheckSum;
   @Uint32() external int TimeDateStamp;
-  external __ushort__ FileName;
+  @Array(129)
+  external Array<Uint16> FileName;
   @Uint8() external int Reparse;
   @IntPtr() external int hFile;
   @Uint32() external int Flags;
@@ -2346,8 +1541,10 @@ class SRCCODEINFO extends Struct {
   @Uint32() external int SizeOfStruct;
   external Pointer Key;
   @Uint64() external int ModBase;
-  external __byte__ Obj;
-  external __byte__ FileName;
+  @Array(129)
+  external Array<Int8> Obj;
+  @Array(129)
+  external Array<Int8> FileName;
   @Uint32() external int LineNumber;
   @Uint64() external int Address;
 }
@@ -2356,8 +1553,10 @@ class SRCCODEINFOW extends Struct {
   @Uint32() external int SizeOfStruct;
   external Pointer Key;
   @Uint64() external int ModBase;
-  external __ushort__ Obj;
-  external __ushort__ FileName;
+  @Array(129)
+  external Array<Uint16> Obj;
+  @Array(129)
+  external Array<Uint16> FileName;
   @Uint32() external int LineNumber;
   @Uint64() external int Address;
 }
@@ -2365,19 +1564,22 @@ class SRCCODEINFOW extends Struct {
 class IMAGEHLP_SYMBOL_SRC extends Struct {
   @Uint32() external int sizeofstruct;
   @Uint32() external int type;
-  external __byte__ file;
+  @Array(129)
+  external Array<Int8> file;
 }
 
 class MODULE_TYPE_INFO extends Struct {
   @Uint16() external int dataLength;
   @Uint16() external int leaf;
-  external __ubyte__ data;
+  @Array(1)
+  external Array<Uint8> data;
 }
 
 class SYMBOL_INFO extends Struct {
   @Uint32() external int SizeOfStruct;
   @Uint32() external int TypeIndex;
-  external __uint64__ Reserved;
+  @Array(2)
+  external Array<Uint64> Reserved;
   @Uint32() external int Index;
   @Uint32() external int Size;
   @Uint64() external int ModBase;
@@ -2389,18 +1591,21 @@ class SYMBOL_INFO extends Struct {
   @Uint32() external int Tag;
   @Uint32() external int NameLen;
   @Uint32() external int MaxNameLen;
-  external __byte__ Name;
+  @Array(1)
+  external Array<Int8> Name;
 }
 
 class SYMBOL_INFO_PACKAGE extends Struct {
   external SYMBOL_INFO si;
-  external __byte__ name;
+  @Array(135)
+  external Array<Int8> name;
 }
 
 class SYMBOL_INFOW extends Struct {
   @Uint32() external int SizeOfStruct;
   @Uint32() external int TypeIndex;
-  external __uint64__ Reserved;
+  @Array(2)
+  external Array<Uint64> Reserved;
   @Uint32() external int Index;
   @Uint32() external int Size;
   @Uint64() external int ModBase;
@@ -2412,12 +1617,14 @@ class SYMBOL_INFOW extends Struct {
   @Uint32() external int Tag;
   @Uint32() external int NameLen;
   @Uint32() external int MaxNameLen;
-  external __ushort__ Name;
+  @Array(1)
+  external Array<Uint16> Name;
 }
 
 class SYMBOL_INFO_PACKAGEW extends Struct {
   external SYMBOL_INFOW si;
-  external __ushort__ name;
+  @Array(135)
+  external Array<Uint16> name;
 }
 
 class IMAGEHLP_STACK_FRAME extends Struct {
@@ -2427,8 +1634,10 @@ class IMAGEHLP_STACK_FRAME extends Struct {
   @Uint64() external int StackOffset;
   @Uint64() external int BackingStoreOffset;
   @Uint64() external int FuncTableEntry;
-  external __uint64__ Params;
-  external __uint64__ Reserved;
+  @Array(4)
+  external Array<Uint64> Params;
+  @Array(5)
+  external Array<Uint64> Reserved;
   @Int32() external int Virtual;
   @Uint32() external int Reserved2;
 }
@@ -2436,7 +1645,8 @@ class IMAGEHLP_STACK_FRAME extends Struct {
 class TI_FINDCHILDREN_PARAMS extends Struct {
   @Uint32() external int Count;
   @Uint32() external int Start;
-  external __uint__ ChildId;
+  @Array(1)
+  external Array<Uint32> ChildId;
 }
 
 class IMAGEHLP_GET_TYPE_INFO_PARAMS extends Struct {
@@ -2462,12 +1672,15 @@ class IMAGEHLP_GET_TYPE_INFO_PARAMS extends Struct {
 
 class SYMSRV_INDEX_INFO extends Struct {
   @Uint32() external int sizeofstruct;
-  external __byte__ file;
+  @Array(129)
+  external Array<Int8> file;
   @Int32() external int stripped;
   @Uint32() external int timestamp;
   @Uint32() external int size;
-  external __byte__ dbgfile;
-  external __byte__ pdbfile;
+  @Array(129)
+  external Array<Int8> dbgfile;
+  @Array(129)
+  external Array<Int8> pdbfile;
   external GUID guid;
   @Uint32() external int sig;
   @Uint32() external int age;
@@ -2475,12 +1688,15 @@ class SYMSRV_INDEX_INFO extends Struct {
 
 class SYMSRV_INDEX_INFOW extends Struct {
   @Uint32() external int sizeofstruct;
-  external __ushort__ file;
+  @Array(129)
+  external Array<Uint16> file;
   @Int32() external int stripped;
   @Uint32() external int timestamp;
   @Uint32() external int size;
-  external __ushort__ dbgfile;
-  external __ushort__ pdbfile;
+  @Array(129)
+  external Array<Uint16> dbgfile;
+  @Array(129)
+  external Array<Uint16> pdbfile;
   external GUID guid;
   @Uint32() external int sig;
   @Uint32() external int age;
@@ -2489,7 +1705,8 @@ class SYMSRV_INDEX_INFOW extends Struct {
 class SYMSRV_EXTENDED_OUTPUT_DATA extends Struct {
   @Uint32() external int sizeOfStruct;
   @Uint32() external int version;
-  external __ushort__ filePtrMsg;
+  @Array(129)
+  external Array<Uint16> filePtrMsg;
 }
 
 class DBGHELP_DATA_REPORT_STRUCT extends Struct {

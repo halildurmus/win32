@@ -123,8 +123,10 @@ class CLUSTERVERSIONINFO_NT4 extends Struct {
   @Uint16() external int MajorVersion;
   @Uint16() external int MinorVersion;
   @Uint16() external int BuildNumber;
-  external __ushort__ szVendorId;
-  external __ushort__ szCSDVersion;
+  @Array(64)
+  external Array<Uint16> szVendorId;
+  @Array(64)
+  external Array<Uint16> szCSDVersion;
 }
 
 class CLUSTERVERSIONINFO extends Struct {
@@ -132,8 +134,10 @@ class CLUSTERVERSIONINFO extends Struct {
   @Uint16() external int MajorVersion;
   @Uint16() external int MinorVersion;
   @Uint16() external int BuildNumber;
-  external __ushort__ szVendorId;
-  external __ushort__ szCSDVersion;
+  @Array(64)
+  external Array<Uint16> szVendorId;
+  @Array(64)
+  external Array<Uint16> szCSDVersion;
   @Uint32() external int dwClusterHighestVersion;
   @Uint32() external int dwClusterLowestVersion;
   @Uint32() external int dwFlags;
@@ -242,7 +246,8 @@ class NOTIFY_FILTER_AND_TYPE extends Struct {
 class CLUSTER_MEMBERSHIP_INFO extends Struct {
   @Int32() external int HasQuorum;
   @Uint32() external int UpnodesSize;
-  external __ubyte__ Upnodes;
+  @Array(1)
+  external Array<Uint8> Upnodes;
 }
 
 class CLUSTER_AVAILABILITY_SET_CONFIG extends Struct {
@@ -388,27 +393,34 @@ class CLUS_FORCE_QUORUM_INFO extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwNodeBitMask;
   @Uint32() external int dwMaxNumberofNodes;
-  external __ushort__ multiszNodeList;
+  @Array(1)
+  external Array<Uint16> multiszNodeList;
 }
 
 class CLUS_PARTITION_INFO extends Struct {
   @Uint32() external int dwFlags;
-  external __ushort__ szDeviceName;
-  external __ushort__ szVolumeLabel;
+  @Array(129)
+  external Array<Uint16> szDeviceName;
+  @Array(129)
+  external Array<Uint16> szVolumeLabel;
   @Uint32() external int dwSerialNumber;
   @Uint32() external int rgdwMaximumComponentLength;
   @Uint32() external int dwFileSystemFlags;
-  external __ushort__ szFileSystem;
+  @Array(32)
+  external Array<Uint16> szFileSystem;
 }
 
 class CLUS_PARTITION_INFO_EX extends Struct {
   @Uint32() external int dwFlags;
-  external __ushort__ szDeviceName;
-  external __ushort__ szVolumeLabel;
+  @Array(129)
+  external Array<Uint16> szDeviceName;
+  @Array(129)
+  external Array<Uint16> szVolumeLabel;
   @Uint32() external int dwSerialNumber;
   @Uint32() external int rgdwMaximumComponentLength;
   @Uint32() external int dwFileSystemFlags;
-  external __ushort__ szFileSystem;
+  @Array(32)
+  external Array<Uint16> szFileSystem;
   @Uint64() external int TotalSizeInBytes;
   @Uint64() external int FreeSizeInBytes;
   @Uint32() external int DeviceNumber;
@@ -418,7 +430,8 @@ class CLUS_PARTITION_INFO_EX extends Struct {
 
 class CLUS_PARTITION_INFO_EX2 extends Struct {
   external GUID GptPartitionId;
-  external __ushort__ szPartitionName;
+  @Array(129)
+  external Array<Uint16> szPartitionName;
   @Uint32() external int EncryptionFlags;
 }
 
@@ -427,27 +440,36 @@ class CLUS_CSV_VOLUME_INFO extends Struct {
   @Uint32() external int PartitionNumber;
   @Uint32() external int FaultState;
   @Uint32() external int BackupState;
-  external __ushort__ szVolumeFriendlyName;
-  external __ushort__ szVolumeName;
+  @Array(129)
+  external Array<Uint16> szVolumeFriendlyName;
+  @Array(50)
+  external Array<Uint16> szVolumeName;
 }
 
 class CLUS_CSV_VOLUME_NAME extends Struct {
   @Int64() external int VolumeOffset;
-  external __ushort__ szVolumeName;
-  external __ushort__ szRootPath;
+  @Array(129)
+  external Array<Uint16> szVolumeName;
+  @Array(129)
+  external Array<Uint16> szRootPath;
 }
 
 class CLUSTER_SHARED_VOLUME_STATE_INFO extends Struct {
-  external __ushort__ szVolumeName;
-  external __ushort__ szNodeName;
+  @Array(129)
+  external Array<Uint16> szVolumeName;
+  @Array(129)
+  external Array<Uint16> szNodeName;
   @Uint32() external int VolumeState;
 }
 
 class CLUSTER_SHARED_VOLUME_STATE_INFO_EX extends Struct {
-  external __ushort__ szVolumeName;
-  external __ushort__ szNodeName;
+  @Array(129)
+  external Array<Uint16> szVolumeName;
+  @Array(129)
+  external Array<Uint16> szNodeName;
   @Uint32() external int VolumeState;
-  external __ushort__ szVolumeFriendlyName;
+  @Array(129)
+  external Array<Uint16> szVolumeFriendlyName;
   @Uint64() external int RedirectedIOReason;
   @Uint64() external int VolumeRedirectedIOReason;
 }
@@ -458,12 +480,15 @@ class CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME extends Struct {
 }
 
 class CLUSTER_SHARED_VOLUME_RENAME_INPUT_NAME extends Struct {
-  external __ushort__ NewVolumeName;
+  @Array(129)
+  external Array<Uint16> NewVolumeName;
 }
 
 class CLUSTER_SHARED_VOLUME_RENAME_INPUT_GUID_NAME extends Struct {
-  external __ushort__ NewVolumeName;
-  external __ushort__ NewVolumeGuid;
+  @Array(129)
+  external Array<Uint16> NewVolumeName;
+  @Array(50)
+  external Array<Uint16> NewVolumeGuid;
 }
 
 class CLUSTER_SHARED_VOLUME_RENAME_INPUT extends Struct {
@@ -480,7 +505,8 @@ class CLUS_CHKDSK_INFO extends Struct {
   @Uint32() external int PartitionNumber;
   @Uint32() external int ChkdskState;
   @Uint32() external int FileIdCount;
-  external __uint64__ FileIdList;
+  @Array(1)
+  external Array<Uint64> FileIdList;
 }
 
 class CLUS_DISK_NUMBER_INFO extends Struct {
@@ -491,7 +517,8 @@ class CLUS_DISK_NUMBER_INFO extends Struct {
 class CLUS_SHARED_VOLUME_BACKUP_MODE extends Struct {
   @Uint32() external int BackupState;
   @Uint32() external int DelayTimerInSecs;
-  external __ushort__ VolumeName;
+  @Array(129)
+  external Array<Uint16> VolumeName;
 }
 
 class CLUSPROP_PARTITION_INFO extends Struct {
@@ -536,16 +563,22 @@ class CLUS_NETNAME_VS_TOKEN_INFO extends Struct {
 
 class CLUS_NETNAME_PWD_INFO extends Struct {
   @Uint32() external int Flags;
-  external __ushort__ Password;
-  external __ushort__ CreatingDC;
-  external __ushort__ ObjectGuid;
+  @Array(16)
+  external Array<Uint16> Password;
+  @Array(129)
+  external Array<Uint16> CreatingDC;
+  @Array(64)
+  external Array<Uint16> ObjectGuid;
 }
 
 class CLUS_NETNAME_PWD_INFOEX extends Struct {
   @Uint32() external int Flags;
-  external __ushort__ Password;
-  external __ushort__ CreatingDC;
-  external __ushort__ ObjectGuid;
+  @Array(128)
+  external Array<Uint16> Password;
+  @Array(129)
+  external Array<Uint16> CreatingDC;
+  @Array(64)
+  external Array<Uint16> ObjectGuid;
 }
 
 class CLUS_DNN_LEADER_STATUS extends Struct {
@@ -561,13 +594,16 @@ class CLUS_DNN_SODAFS_CLONE_STATUS extends Struct {
 class CLUS_NETNAME_IP_INFO_ENTRY extends Struct {
   @Uint32() external int NodeId;
   @Uint32() external int AddressSize;
-  external __ubyte__ Address;
+  @Array(1)
+  external Array<Uint8> Address;
 }
 
 class CLUS_NETNAME_IP_INFO_FOR_MULTICHANNEL extends Struct {
-  external __ushort__ szName;
+  @Array(64)
+  external Array<Uint16> szName;
   @Uint32() external int NumEntries;
-  external CLUS_NETNAME_IP_INFO_ENTRY IpInfo;
+  @Array(1)
+  external Array<CLUS_NETNAME_IP_INFO_ENTRY> IpInfo;
 }
 
 class CLUS_MAINTENANCE_MODE_INFO extends Struct {
@@ -576,7 +612,8 @@ class CLUS_MAINTENANCE_MODE_INFO extends Struct {
 
 class CLUS_CSV_MAINTENANCE_MODE_INFO extends Struct {
   @Int32() external int InMaintenance;
-  external __ushort__ VolumeName;
+  @Array(129)
+  external Array<Uint16> VolumeName;
 }
 
 class CLUS_MAINTENANCE_MODE_INFOEX extends Struct {
@@ -589,7 +626,8 @@ class CLUS_MAINTENANCE_MODE_INFOEX extends Struct {
 class CLUS_SET_MAINTENANCE_MODE_INPUT extends Struct {
   @Int32() external int InMaintenance;
   @Uint32() external int ExtraParameterSize;
-  external __ubyte__ ExtraParameter;
+  @Array(1)
+  external Array<Uint8> ExtraParameter;
 }
 
 class CLUS_STORAGE_SET_DRIVELETTER extends Struct {
@@ -609,15 +647,18 @@ class CLUS_STORAGE_REMAP_DRIVELETTER extends Struct {
 class CLUS_PROVIDER_STATE_CHANGE_INFO extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int resourceState;
-  external __ushort__ szProviderId;
+  @Array(1)
+  external Array<Uint16> szProviderId;
 }
 
 class CLUS_CREATE_INFRASTRUCTURE_FILESERVER_INPUT extends Struct {
-  external __ushort__ FileServerName;
+  @Array(16)
+  external Array<Uint16> FileServerName;
 }
 
 class CLUS_CREATE_INFRASTRUCTURE_FILESERVER_OUTPUT extends Struct {
-  external __ushort__ FileServerName;
+  @Array(129)
+  external Array<Uint16> FileServerName;
 }
 
 class CLUSPROP_LIST extends Struct {
@@ -627,12 +668,14 @@ class CLUSPROP_LIST extends Struct {
 
 class FILESHARE_CHANGE extends Struct {
   @Uint32() external int Change;
-  external __ushort__ ShareName;
+  @Array(84)
+  external Array<Uint16> ShareName;
 }
 
 class FILESHARE_CHANGE_LIST extends Struct {
   @Uint32() external int NumEntries;
-  external FILESHARE_CHANGE ChangeEntry;
+  @Array(1)
+  external Array<FILESHARE_CHANGE> ChangeEntry;
 }
 
 class CLUSCTL_GROUP_GET_LAST_MOVE_TIME_OUTPUT extends Struct {
@@ -679,7 +722,8 @@ class SR_RESOURCE_TYPE_REPLICATED_PARTITION_INFO extends Struct {
 
 class SR_RESOURCE_TYPE_REPLICATED_PARTITION_ARRAY extends Struct {
   @Uint32() external int Count;
-  external SR_RESOURCE_TYPE_REPLICATED_PARTITION_INFO PartitionArray;
+  @Array(1)
+  external Array<SR_RESOURCE_TYPE_REPLICATED_PARTITION_INFO> PartitionArray;
 }
 
 class SR_RESOURCE_TYPE_QUERY_ELIGIBLE_LOGDISKS extends Struct {
@@ -706,19 +750,22 @@ class SR_RESOURCE_TYPE_DISK_INFO extends Struct {
 
 class SR_RESOURCE_TYPE_ELIGIBLE_DISKS_RESULT extends Struct {
   @Uint16() external int Count;
-  external SR_RESOURCE_TYPE_DISK_INFO DiskInfo;
+  @Array(1)
+  external Array<SR_RESOURCE_TYPE_DISK_INFO> DiskInfo;
 }
 
 class SR_RESOURCE_TYPE_REPLICATED_DISK extends Struct {
   @Uint32() external int Type;
   external GUID ClusterDiskResourceGuid;
   external GUID ReplicationGroupId;
-  external __ushort__ ReplicationGroupName;
+  @Array(129)
+  external Array<Uint16> ReplicationGroupName;
 }
 
 class SR_RESOURCE_TYPE_REPLICATED_DISKS_RESULT extends Struct {
   @Uint16() external int Count;
-  external SR_RESOURCE_TYPE_REPLICATED_DISK ReplicatedDisks;
+  @Array(1)
+  external Array<SR_RESOURCE_TYPE_REPLICATED_DISK> ReplicatedDisks;
 }
 
 class CLUSCTL_RESOURCE_TYPE_STORAGE_GET_AVAILABLE_DISKS_EX2_INPUT extends Struct {

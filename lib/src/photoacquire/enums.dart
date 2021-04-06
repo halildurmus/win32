@@ -1,7 +1,12 @@
 /// {@category Enum}
-class USER_INPUT_STRING_TYPE {
-  static const USER_INPUT_DEFAULT = 0x00000000;
-  static const USER_INPUT_PATH_ELEMENT = 0x00000001;
+class DEVICE_SELECTION_DEVICE_TYPE {
+  static const DST_UNKNOWN_DEVICE = 0x00000000;
+  static const DST_WPD_DEVICE = 0x00000001;
+  static const DST_WIA_DEVICE = 0x00000002;
+  static const DST_STI_DEVICE = 0x00000003;
+  static const DSF_TWAIN_DEVICE = 0x00000004;
+  static const DST_FS_DEVICE = 0x00000005;
+  static const DST_DV_DEVICE = 0x00000006;
 }
 
 /// {@category Enum}
@@ -24,6 +29,11 @@ class ERROR_ADVISE_RESULT {
 }
 
 /// {@category Enum}
+class PROGRESS_DIALOG_CHECKBOX_ID {
+  static const PROGRESS_DIALOG_CHECKBOX_ID_DEFAULT = 0x00000000;
+}
+
+/// {@category Enum}
 class PROGRESS_DIALOG_IMAGE_TYPE {
   static const PROGRESS_DIALOG_ICON_SMALL = 0x00000000;
   static const PROGRESS_DIALOG_ICON_LARGE = 0x00000001;
@@ -32,18 +42,8 @@ class PROGRESS_DIALOG_IMAGE_TYPE {
 }
 
 /// {@category Enum}
-class PROGRESS_DIALOG_CHECKBOX_ID {
-  static const PROGRESS_DIALOG_CHECKBOX_ID_DEFAULT = 0x00000000;
-}
-
-/// {@category Enum}
-class DEVICE_SELECTION_DEVICE_TYPE {
-  static const DST_UNKNOWN_DEVICE = 0x00000000;
-  static const DST_WPD_DEVICE = 0x00000001;
-  static const DST_WIA_DEVICE = 0x00000002;
-  static const DST_STI_DEVICE = 0x00000003;
-  static const DSF_TWAIN_DEVICE = 0x00000004;
-  static const DST_FS_DEVICE = 0x00000005;
-  static const DST_DV_DEVICE = 0x00000006;
+class USER_INPUT_STRING_TYPE {
+  static const USER_INPUT_DEFAULT = 0x00000000;
+  static const USER_INPUT_PATH_ELEMENT = 0x00000001;
 }
 

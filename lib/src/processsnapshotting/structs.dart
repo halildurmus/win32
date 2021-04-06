@@ -77,7 +77,8 @@ class PSS_PROCESS_INFORMATION extends Struct {
   @IntPtr() external int PeakPagefileUsage;
   @IntPtr() external int PrivateUsage;
   @Uint32() external int ExecuteFlags;
-  external __ushort__ ImageFileName;
+  @Array(129)
+  external Array<Uint16> ImageFileName;
 }
 
 class PSS_VA_CLONE_INFORMATION extends Struct {

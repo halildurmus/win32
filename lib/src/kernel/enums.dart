@@ -5,31 +5,17 @@ class COMPARTMENT_ID {
 }
 
 /// {@category Enum}
-class EXCEPTION_DISPOSITION {
-  static const ExceptionContinueExecution = 0x00000000;
-  static const ExceptionContinueSearch = 0x00000001;
-  static const ExceptionNestedException = 0x00000002;
-  static const ExceptionCollidedUnwind = 0x00000003;
-}
-
-/// {@category Enum}
 class EVENT_TYPE {
   static const NotificationEvent = 0x00000000;
   static const SynchronizationEvent = 0x00000001;
 }
 
 /// {@category Enum}
-class TIMER_TYPE {
-  static const NotificationTimer = 0x00000000;
-  static const SynchronizationTimer = 0x00000001;
-}
-
-/// {@category Enum}
-class WAIT_TYPE {
-  static const WaitAll = 0x00000000;
-  static const WaitAny = 0x00000001;
-  static const WaitNotification = 0x00000002;
-  static const WaitDequeue = 0x00000003;
+class EXCEPTION_DISPOSITION {
+  static const ExceptionContinueExecution = 0x00000000;
+  static const ExceptionContinueSearch = 0x00000001;
+  static const ExceptionNestedException = 0x00000002;
+  static const ExceptionCollidedUnwind = 0x00000003;
 }
 
 /// {@category Enum}
@@ -60,5 +46,19 @@ class SUITE_TYPE {
   static const PhoneNT = 0x00000010;
   static const MultiUserTS = 0x00000011;
   static const MaxSuiteType = 0x00000012;
+}
+
+/// {@category Enum}
+class TIMER_TYPE {
+  static const NotificationTimer = 0x00000000;
+  static const SynchronizationTimer = 0x00000001;
+}
+
+/// {@category Enum}
+class WAIT_TYPE {
+  static const WaitAll = 0x00000000;
+  static const WaitAny = 0x00000001;
+  static const WaitNotification = 0x00000002;
+  static const WaitDequeue = 0x00000003;
 }
 

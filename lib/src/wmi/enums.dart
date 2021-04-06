@@ -1,314 +1,4 @@
 /// {@category Enum}
-class WBEM_PATH_STATUS_FLAG {
-  static const WBEMPATH_INFO_ANON_LOCAL_MACHINE = 0x00000001;
-  static const WBEMPATH_INFO_HAS_MACHINE_NAME = 0x00000002;
-  static const WBEMPATH_INFO_IS_CLASS_REF = 0x00000004;
-  static const WBEMPATH_INFO_IS_INST_REF = 0x00000008;
-  static const WBEMPATH_INFO_HAS_SUBSCOPES = 0x00000010;
-  static const WBEMPATH_INFO_IS_COMPOUND = 0x00000020;
-  static const WBEMPATH_INFO_HAS_V2_REF_PATHS = 0x00000040;
-  static const WBEMPATH_INFO_HAS_IMPLIED_KEY = 0x00000080;
-  static const WBEMPATH_INFO_CONTAINS_SINGLETON = 0x00000100;
-  static const WBEMPATH_INFO_V1_COMPLIANT = 0x00000200;
-  static const WBEMPATH_INFO_V2_COMPLIANT = 0x00000400;
-  static const WBEMPATH_INFO_CIM_COMPLIANT = 0x00000800;
-  static const WBEMPATH_INFO_IS_SINGLETON = 0x00001000;
-  static const WBEMPATH_INFO_IS_PARENT = 0x00002000;
-  static const WBEMPATH_INFO_SERVER_NAMESPACE_ONLY = 0x00004000;
-  static const WBEMPATH_INFO_NATIVE_PATH = 0x00008000;
-  static const WBEMPATH_INFO_WMI_PATH = 0x00010000;
-  static const WBEMPATH_INFO_PATH_HAD_SERVER = 0x00020000;
-}
-
-/// {@category Enum}
-class WBEM_PATH_CREATE_FLAG {
-  static const WBEMPATH_CREATE_ACCEPT_RELATIVE = 0x00000001;
-  static const WBEMPATH_CREATE_ACCEPT_ABSOLUTE = 0x00000002;
-  static const WBEMPATH_CREATE_ACCEPT_ALL = 0x00000004;
-  static const WBEMPATH_TREAT_SINGLE_IDENT_AS_NS = 0x00000008;
-}
-
-/// {@category Enum}
-class WBEM_GET_TEXT_FLAGS {
-  static const WBEMPATH_COMPRESSED = 0x00000001;
-  static const WBEMPATH_GET_RELATIVE_ONLY = 0x00000002;
-  static const WBEMPATH_GET_SERVER_TOO = 0x00000004;
-  static const WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY = 0x00000008;
-  static const WBEMPATH_GET_NAMESPACE_ONLY = 0x00000010;
-  static const WBEMPATH_GET_ORIGINAL = 0x00000020;
-}
-
-/// {@category Enum}
-class WBEM_GET_KEY_FLAGS {
-  static const WBEMPATH_TEXT = 0x00000001;
-  static const WBEMPATH_QUOTEDTEXT = 0x00000002;
-}
-
-/// {@category Enum}
-class WMIQ_ANALYSIS_TYPE {
-  static const WMIQ_ANALYSIS_RPN_SEQUENCE = 0x00000001;
-  static const WMIQ_ANALYSIS_ASSOC_QUERY = 0x00000002;
-  static const WMIQ_ANALYSIS_PROP_ANALYSIS_MATRIX = 0x00000003;
-  static const WMIQ_ANALYSIS_QUERY_TEXT = 0x00000004;
-  static const WMIQ_ANALYSIS_RESERVED = 0x08000000;
-}
-
-/// {@category Enum}
-class WMIQ_RPN_TOKEN_FLAGS {
-  static const WMIQ_RPN_TOKEN_EXPRESSION = 0x00000001;
-  static const WMIQ_RPN_TOKEN_AND = 0x00000002;
-  static const WMIQ_RPN_TOKEN_OR = 0x00000003;
-  static const WMIQ_RPN_TOKEN_NOT = 0x00000004;
-  static const WMIQ_RPN_OP_UNDEFINED = 0x00000000;
-  static const WMIQ_RPN_OP_EQ = 0x00000001;
-  static const WMIQ_RPN_OP_NE = 0x00000002;
-  static const WMIQ_RPN_OP_GE = 0x00000003;
-  static const WMIQ_RPN_OP_LE = 0x00000004;
-  static const WMIQ_RPN_OP_LT = 0x00000005;
-  static const WMIQ_RPN_OP_GT = 0x00000006;
-  static const WMIQ_RPN_OP_LIKE = 0x00000007;
-  static const WMIQ_RPN_OP_ISA = 0x00000008;
-  static const WMIQ_RPN_OP_ISNOTA = 0x00000009;
-  static const WMIQ_RPN_OP_ISNULL = 0x0000000a;
-  static const WMIQ_RPN_OP_ISNOTNULL = 0x0000000b;
-  static const WMIQ_RPN_LEFT_PROPERTY_NAME = 0x00000001;
-  static const WMIQ_RPN_RIGHT_PROPERTY_NAME = 0x00000002;
-  static const WMIQ_RPN_CONST2 = 0x00000004;
-  static const WMIQ_RPN_CONST = 0x00000008;
-  static const WMIQ_RPN_RELOP = 0x00000010;
-  static const WMIQ_RPN_LEFT_FUNCTION = 0x00000020;
-  static const WMIQ_RPN_RIGHT_FUNCTION = 0x00000040;
-  static const WMIQ_RPN_GET_TOKEN_TYPE = 0x00000001;
-  static const WMIQ_RPN_GET_EXPR_SHAPE = 0x00000002;
-  static const WMIQ_RPN_GET_LEFT_FUNCTION = 0x00000003;
-  static const WMIQ_RPN_GET_RIGHT_FUNCTION = 0x00000004;
-  static const WMIQ_RPN_GET_RELOP = 0x00000005;
-  static const WMIQ_RPN_NEXT_TOKEN = 0x00000001;
-  static const WMIQ_RPN_FROM_UNARY = 0x00000001;
-  static const WMIQ_RPN_FROM_PATH = 0x00000002;
-  static const WMIQ_RPN_FROM_CLASS_LIST = 0x00000004;
-  static const WMIQ_RPN_FROM_MULTIPLE = 0x00000008;
-}
-
-/// {@category Enum}
-class WMIQ_ASSOCQ_FLAGS {
-  static const WMIQ_ASSOCQ_ASSOCIATORS = 0x00000001;
-  static const WMIQ_ASSOCQ_REFERENCES = 0x00000002;
-  static const WMIQ_ASSOCQ_RESULTCLASS = 0x00000004;
-  static const WMIQ_ASSOCQ_ASSOCCLASS = 0x00000008;
-  static const WMIQ_ASSOCQ_ROLE = 0x00000010;
-  static const WMIQ_ASSOCQ_RESULTROLE = 0x00000020;
-  static const WMIQ_ASSOCQ_REQUIREDQUALIFIER = 0x00000040;
-  static const WMIQ_ASSOCQ_REQUIREDASSOCQUALIFIER = 0x00000080;
-  static const WMIQ_ASSOCQ_CLASSDEFSONLY = 0x00000100;
-  static const WMIQ_ASSOCQ_KEYSONLY = 0x00000200;
-  static const WMIQ_ASSOCQ_SCHEMAONLY = 0x00000400;
-  static const WMIQ_ASSOCQ_CLASSREFSONLY = 0x00000800;
-}
-
-/// {@category Enum}
-class WMIQ_LANGUAGE_FEATURES {
-  static const WMIQ_LF1_BASIC_SELECT = 0x00000001;
-  static const WMIQ_LF2_CLASS_NAME_IN_QUERY = 0x00000002;
-  static const WMIQ_LF3_STRING_CASE_FUNCTIONS = 0x00000003;
-  static const WMIQ_LF4_PROP_TO_PROP_TESTS = 0x00000004;
-  static const WMIQ_LF5_COUNT_STAR = 0x00000005;
-  static const WMIQ_LF6_ORDER_BY = 0x00000006;
-  static const WMIQ_LF7_DISTINCT = 0x00000007;
-  static const WMIQ_LF8_ISA = 0x00000008;
-  static const WMIQ_LF9_THIS = 0x00000009;
-  static const WMIQ_LF10_COMPEX_SUBEXPRESSIONS = 0x0000000a;
-  static const WMIQ_LF11_ALIASING = 0x0000000b;
-  static const WMIQ_LF12_GROUP_BY_HAVING = 0x0000000c;
-  static const WMIQ_LF13_WMI_WITHIN = 0x0000000d;
-  static const WMIQ_LF14_SQL_WRITE_OPERATIONS = 0x0000000e;
-  static const WMIQ_LF15_GO = 0x0000000f;
-  static const WMIQ_LF16_SINGLE_LEVEL_TRANSACTIONS = 0x00000010;
-  static const WMIQ_LF17_QUALIFIED_NAMES = 0x00000011;
-  static const WMIQ_LF18_ASSOCIATONS = 0x00000012;
-  static const WMIQ_LF19_SYSTEM_PROPERTIES = 0x00000013;
-  static const WMIQ_LF20_EXTENDED_SYSTEM_PROPERTIES = 0x00000014;
-  static const WMIQ_LF21_SQL89_JOINS = 0x00000015;
-  static const WMIQ_LF22_SQL92_JOINS = 0x00000016;
-  static const WMIQ_LF23_SUBSELECTS = 0x00000017;
-  static const WMIQ_LF24_UMI_EXTENSIONS = 0x00000018;
-  static const WMIQ_LF25_DATEPART = 0x00000019;
-  static const WMIQ_LF26_LIKE = 0x0000001a;
-  static const WMIQ_LF27_CIM_TEMPORAL_CONSTRUCTS = 0x0000001b;
-  static const WMIQ_LF28_STANDARD_AGGREGATES = 0x0000001c;
-  static const WMIQ_LF29_MULTI_LEVEL_ORDER_BY = 0x0000001d;
-  static const WMIQ_LF30_WMI_PRAGMAS = 0x0000001e;
-  static const WMIQ_LF31_QUALIFIER_TESTS = 0x0000001f;
-  static const WMIQ_LF32_SP_EXECUTE = 0x00000020;
-  static const WMIQ_LF33_ARRAY_ACCESS = 0x00000021;
-  static const WMIQ_LF34_UNION = 0x00000022;
-  static const WMIQ_LF35_COMPLEX_SELECT_TARGET = 0x00000023;
-  static const WMIQ_LF36_REFERENCE_TESTS = 0x00000024;
-  static const WMIQ_LF37_SELECT_INTO = 0x00000025;
-  static const WMIQ_LF38_BASIC_DATETIME_TESTS = 0x00000026;
-  static const WMIQ_LF39_COUNT_COLUMN = 0x00000027;
-  static const WMIQ_LF40_BETWEEN = 0x00000028;
-  static const WMIQ_LF_LAST = 0x00000028;
-}
-
-/// {@category Enum}
-class WMIQ_RPNQ_FEATURE {
-  static const WMIQ_RPNF_WHERE_CLAUSE_PRESENT = 0x00000001;
-  static const WMIQ_RPNF_QUERY_IS_CONJUNCTIVE = 0x00000002;
-  static const WMIQ_RPNF_QUERY_IS_DISJUNCTIVE = 0x00000004;
-  static const WMIQ_RPNF_PROJECTION = 0x00000008;
-  static const WMIQ_RPNF_FEATURE_SELECT_STAR = 0x00000010;
-  static const WMIQ_RPNF_EQUALITY_TESTS_ONLY = 0x00000020;
-  static const WMIQ_RPNF_COUNT_STAR = 0x00000040;
-  static const WMIQ_RPNF_QUALIFIED_NAMES_USED = 0x00000080;
-  static const WMIQ_RPNF_SYSPROP_CLASS_USED = 0x00000100;
-  static const WMIQ_RPNF_PROP_TO_PROP_TESTS = 0x00000200;
-  static const WMIQ_RPNF_ORDER_BY = 0x00000400;
-  static const WMIQ_RPNF_ISA_USED = 0x00000800;
-  static const WMIQ_RPNF_GROUP_BY_HAVING = 0x00001000;
-  static const WMIQ_RPNF_ARRAY_ACCESS_USED = 0x00002000;
-}
-
-/// {@category Enum}
-class WBEM_GENUS_TYPE {
-  static const WBEM_GENUS_CLASS = 0x00000001;
-  static const WBEM_GENUS_INSTANCE = 0x00000002;
-}
-
-/// {@category Enum}
-class WBEM_CHANGE_FLAG_TYPE {
-  static const WBEM_FLAG_CREATE_OR_UPDATE = 0x00000000;
-  static const WBEM_FLAG_UPDATE_ONLY = 0x00000001;
-  static const WBEM_FLAG_CREATE_ONLY = 0x00000002;
-  static const WBEM_FLAG_UPDATE_COMPATIBLE = 0x00000000;
-  static const WBEM_FLAG_UPDATE_SAFE_MODE = 0x00000020;
-  static const WBEM_FLAG_UPDATE_FORCE_MODE = 0x00000040;
-  static const WBEM_MASK_UPDATE_MODE = 0x00000060;
-  static const WBEM_FLAG_ADVISORY = 0x00010000;
-}
-
-/// {@category Enum}
-class WBEM_GENERIC_FLAG_TYPE {
-  static const WBEM_FLAG_RETURN_IMMEDIATELY = 0x00000010;
-  static const WBEM_FLAG_RETURN_WBEM_COMPLETE = 0x00000000;
-  static const WBEM_FLAG_BIDIRECTIONAL = 0x00000000;
-  static const WBEM_FLAG_FORWARD_ONLY = 0x00000020;
-  static const WBEM_FLAG_NO_ERROR_OBJECT = 0x00000040;
-  static const WBEM_FLAG_RETURN_ERROR_OBJECT = 0x00000000;
-  static const WBEM_FLAG_SEND_STATUS = 0x00000080;
-  static const WBEM_FLAG_DONT_SEND_STATUS = 0x00000000;
-  static const WBEM_FLAG_ENSURE_LOCATABLE = 0x00000100;
-  static const WBEM_FLAG_DIRECT_READ = 0x00000200;
-  static const WBEM_FLAG_SEND_ONLY_SELECTED = 0x00000000;
-  static const WBEM_RETURN_WHEN_COMPLETE = 0x00000000;
-  static const WBEM_RETURN_IMMEDIATELY = 0x00000010;
-  static const WBEM_MASK_RESERVED_FLAGS = 0x0001f000;
-  static const WBEM_FLAG_USE_AMENDED_QUALIFIERS = 0x00020000;
-  static const WBEM_FLAG_STRONG_VALIDATION = 0x00100000;
-}
-
-/// {@category Enum}
-class WBEM_STATUS_TYPE {
-  static const WBEM_STATUS_COMPLETE = 0x00000000;
-  static const WBEM_STATUS_REQUIREMENTS = 0x00000001;
-  static const WBEM_STATUS_PROGRESS = 0x00000002;
-  static const WBEM_STATUS_LOGGING_INFORMATION = 0x00000100;
-  static const WBEM_STATUS_LOGGING_INFORMATION_PROVIDER = 0x00000200;
-  static const WBEM_STATUS_LOGGING_INFORMATION_HOST = 0x00000400;
-  static const WBEM_STATUS_LOGGING_INFORMATION_REPOSITORY = 0x00000800;
-  static const WBEM_STATUS_LOGGING_INFORMATION_ESS = 0x00001000;
-}
-
-/// {@category Enum}
-class WBEM_TIMEOUT_TYPE {
-  static const WBEM_NO_WAIT = 0x00000000;
-  static const WBEM_INFINITE = 0xffffffff;
-}
-
-/// {@category Enum}
-class WBEM_CONDITION_FLAG_TYPE {
-  static const WBEM_FLAG_ALWAYS = 0x00000000;
-  static const WBEM_FLAG_ONLY_IF_TRUE = 0x00000001;
-  static const WBEM_FLAG_ONLY_IF_FALSE = 0x00000002;
-  static const WBEM_FLAG_ONLY_IF_IDENTICAL = 0x00000003;
-  static const WBEM_MASK_PRIMARY_CONDITION = 0x00000003;
-  static const WBEM_FLAG_KEYS_ONLY = 0x00000004;
-  static const WBEM_FLAG_REFS_ONLY = 0x00000008;
-  static const WBEM_FLAG_LOCAL_ONLY = 0x00000010;
-  static const WBEM_FLAG_PROPAGATED_ONLY = 0x00000020;
-  static const WBEM_FLAG_SYSTEM_ONLY = 0x00000030;
-  static const WBEM_FLAG_NONSYSTEM_ONLY = 0x00000040;
-  static const WBEM_MASK_CONDITION_ORIGIN = 0x00000070;
-  static const WBEM_FLAG_CLASS_OVERRIDES_ONLY = 0x00000100;
-  static const WBEM_FLAG_CLASS_LOCAL_AND_OVERRIDES = 0x00000200;
-  static const WBEM_MASK_CLASS_CONDITION = 0x00000300;
-}
-
-/// {@category Enum}
-class WBEM_FLAVOR_TYPE {
-  static const WBEM_FLAVOR_DONT_PROPAGATE = 0x00000000;
-  static const WBEM_FLAVOR_FLAG_PROPAGATE_TO_INSTANCE = 0x00000001;
-  static const WBEM_FLAVOR_FLAG_PROPAGATE_TO_DERIVED_CLASS = 0x00000002;
-  static const WBEM_FLAVOR_MASK_PROPAGATION = 0x0000000f;
-  static const WBEM_FLAVOR_OVERRIDABLE = 0x00000000;
-  static const WBEM_FLAVOR_NOT_OVERRIDABLE = 0x00000010;
-  static const WBEM_FLAVOR_MASK_PERMISSIONS = 0x00000010;
-  static const WBEM_FLAVOR_ORIGIN_LOCAL = 0x00000000;
-  static const WBEM_FLAVOR_ORIGIN_PROPAGATED = 0x00000020;
-  static const WBEM_FLAVOR_ORIGIN_SYSTEM = 0x00000040;
-  static const WBEM_FLAVOR_MASK_ORIGIN = 0x00000060;
-  static const WBEM_FLAVOR_NOT_AMENDED = 0x00000000;
-  static const WBEM_FLAVOR_AMENDED = 0x00000080;
-  static const WBEM_FLAVOR_MASK_AMENDED = 0x00000080;
-}
-
-/// {@category Enum}
-class WBEM_QUERY_FLAG_TYPE {
-  static const WBEM_FLAG_DEEP = 0x00000000;
-  static const WBEM_FLAG_SHALLOW = 0x00000001;
-  static const WBEM_FLAG_PROTOTYPE = 0x00000002;
-}
-
-/// {@category Enum}
-class WBEM_SECURITY_FLAGS {
-  static const WBEM_ENABLE = 0x00000001;
-  static const WBEM_METHOD_EXECUTE = 0x00000002;
-  static const WBEM_FULL_WRITE_REP = 0x00000004;
-  static const WBEM_PARTIAL_WRITE_REP = 0x00000008;
-  static const WBEM_WRITE_PROVIDER = 0x00000010;
-  static const WBEM_REMOTE_ACCESS = 0x00000020;
-  static const WBEM_RIGHT_SUBSCRIBE = 0x00000040;
-  static const WBEM_RIGHT_PUBLISH = 0x00000080;
-}
-
-/// {@category Enum}
-class WBEM_LIMITATION_FLAG_TYPE {
-  static const WBEM_FLAG_EXCLUDE_OBJECT_QUALIFIERS = 0x00000010;
-  static const WBEM_FLAG_EXCLUDE_PROPERTY_QUALIFIERS = 0x00000020;
-}
-
-/// {@category Enum}
-class WBEM_TEXT_FLAG_TYPE {
-  static const WBEM_FLAG_NO_FLAVORS = 0x00000001;
-}
-
-/// {@category Enum}
-class WBEM_COMPARISON_FLAG {
-  static const WBEM_COMPARISON_INCLUDE_ALL = 0x00000000;
-  static const WBEM_FLAG_IGNORE_QUALIFIERS = 0x00000001;
-  static const WBEM_FLAG_IGNORE_OBJECT_SOURCE = 0x00000002;
-  static const WBEM_FLAG_IGNORE_DEFAULT_VALUES = 0x00000004;
-  static const WBEM_FLAG_IGNORE_CLASS = 0x00000008;
-  static const WBEM_FLAG_IGNORE_CASE = 0x00000010;
-  static const WBEM_FLAG_IGNORE_FLAVOR = 0x00000020;
-}
-
-/// {@category Enum}
-class WBEM_LOCKING {
-  static const WBEM_FLAG_ALLOW_READ = 0x00000001;
-}
-
-/// {@category Enum}
 class CIMTYPE_ENUMERATION {
   static const CIM_ILLEGAL = 0x00000fff;
   static const CIM_EMPTY = 0x00000000;
@@ -329,40 +19,6 @@ class CIMTYPE_ENUMERATION {
   static const CIM_CHAR16 = 0x00000067;
   static const CIM_OBJECT = 0x0000000d;
   static const CIM_FLAG_ARRAY = 0x00002000;
-}
-
-/// {@category Enum}
-class WBEM_BACKUP_RESTORE_FLAGS {
-  static const WBEM_FLAG_BACKUP_RESTORE_DEFAULT = 0x00000000;
-  static const WBEM_FLAG_BACKUP_RESTORE_FORCE_SHUTDOWN = 0x00000001;
-}
-
-/// {@category Enum}
-class WBEM_REFRESHER_FLAGS {
-  static const WBEM_FLAG_REFRESH_AUTO_RECONNECT = 0x00000000;
-  static const WBEM_FLAG_REFRESH_NO_AUTO_RECONNECT = 0x00000001;
-}
-
-/// {@category Enum}
-class WBEM_SHUTDOWN_FLAGS {
-  static const WBEM_SHUTDOWN_UNLOAD_COMPONENT = 0x00000001;
-  static const WBEM_SHUTDOWN_WMI = 0x00000002;
-  static const WBEM_SHUTDOWN_OS = 0x00000003;
-}
-
-/// {@category Enum}
-class WBEMSTATUS_FORMAT {
-  static const WBEMSTATUS_FORMAT_NEWLINE = 0x00000000;
-  static const WBEMSTATUS_FORMAT_NO_NEWLINE = 0x00000001;
-}
-
-/// {@category Enum}
-class WBEM_LIMITS {
-  static const WBEM_MAX_IDENTIFIER = 0x00001000;
-  static const WBEM_MAX_QUERY = 0x00004000;
-  static const WBEM_MAX_PATH = 0x00002000;
-  static const WBEM_MAX_OBJECT_NESTING = 0x00000040;
-  static const WBEM_MAX_USER_PROPERTIES = 0x00000400;
 }
 
 /// {@category Enum}
@@ -563,6 +219,410 @@ class WBEMSTATUS {
 }
 
 /// {@category Enum}
+class WBEMSTATUS_FORMAT {
+  static const WBEMSTATUS_FORMAT_NEWLINE = 0x00000000;
+  static const WBEMSTATUS_FORMAT_NO_NEWLINE = 0x00000001;
+}
+
+/// {@category Enum}
+class WBEM_BACKUP_RESTORE_FLAGS {
+  static const WBEM_FLAG_BACKUP_RESTORE_DEFAULT = 0x00000000;
+  static const WBEM_FLAG_BACKUP_RESTORE_FORCE_SHUTDOWN = 0x00000001;
+}
+
+/// {@category Enum}
+class WBEM_BATCH_TYPE {
+  static const WBEM_FLAG_BATCH_IF_NEEDED = 0x00000000;
+  static const WBEM_FLAG_MUST_BATCH = 0x00000001;
+  static const WBEM_FLAG_MUST_NOT_BATCH = 0x00000002;
+}
+
+/// {@category Enum}
+class WBEM_CHANGE_FLAG_TYPE {
+  static const WBEM_FLAG_CREATE_OR_UPDATE = 0x00000000;
+  static const WBEM_FLAG_UPDATE_ONLY = 0x00000001;
+  static const WBEM_FLAG_CREATE_ONLY = 0x00000002;
+  static const WBEM_FLAG_UPDATE_COMPATIBLE = 0x00000000;
+  static const WBEM_FLAG_UPDATE_SAFE_MODE = 0x00000020;
+  static const WBEM_FLAG_UPDATE_FORCE_MODE = 0x00000040;
+  static const WBEM_MASK_UPDATE_MODE = 0x00000060;
+  static const WBEM_FLAG_ADVISORY = 0x00010000;
+}
+
+/// {@category Enum}
+class WBEM_COMPARISON_FLAG {
+  static const WBEM_COMPARISON_INCLUDE_ALL = 0x00000000;
+  static const WBEM_FLAG_IGNORE_QUALIFIERS = 0x00000001;
+  static const WBEM_FLAG_IGNORE_OBJECT_SOURCE = 0x00000002;
+  static const WBEM_FLAG_IGNORE_DEFAULT_VALUES = 0x00000004;
+  static const WBEM_FLAG_IGNORE_CLASS = 0x00000008;
+  static const WBEM_FLAG_IGNORE_CASE = 0x00000010;
+  static const WBEM_FLAG_IGNORE_FLAVOR = 0x00000020;
+}
+
+/// {@category Enum}
+class WBEM_COMPILER_OPTIONS {
+  static const WBEM_FLAG_CHECK_ONLY = 0x00000001;
+  static const WBEM_FLAG_AUTORECOVER = 0x00000002;
+  static const WBEM_FLAG_WMI_CHECK = 0x00000004;
+  static const WBEM_FLAG_CONSOLE_PRINT = 0x00000008;
+  static const WBEM_FLAG_DONT_ADD_TO_LIST = 0x00000010;
+  static const WBEM_FLAG_SPLIT_FILES = 0x00000020;
+  static const WBEM_FLAG_STORE_FILE = 0x00000100;
+}
+
+/// {@category Enum}
+class WBEM_CONDITION_FLAG_TYPE {
+  static const WBEM_FLAG_ALWAYS = 0x00000000;
+  static const WBEM_FLAG_ONLY_IF_TRUE = 0x00000001;
+  static const WBEM_FLAG_ONLY_IF_FALSE = 0x00000002;
+  static const WBEM_FLAG_ONLY_IF_IDENTICAL = 0x00000003;
+  static const WBEM_MASK_PRIMARY_CONDITION = 0x00000003;
+  static const WBEM_FLAG_KEYS_ONLY = 0x00000004;
+  static const WBEM_FLAG_REFS_ONLY = 0x00000008;
+  static const WBEM_FLAG_LOCAL_ONLY = 0x00000010;
+  static const WBEM_FLAG_PROPAGATED_ONLY = 0x00000020;
+  static const WBEM_FLAG_SYSTEM_ONLY = 0x00000030;
+  static const WBEM_FLAG_NONSYSTEM_ONLY = 0x00000040;
+  static const WBEM_MASK_CONDITION_ORIGIN = 0x00000070;
+  static const WBEM_FLAG_CLASS_OVERRIDES_ONLY = 0x00000100;
+  static const WBEM_FLAG_CLASS_LOCAL_AND_OVERRIDES = 0x00000200;
+  static const WBEM_MASK_CLASS_CONDITION = 0x00000300;
+}
+
+/// {@category Enum}
+class WBEM_CONNECT_OPTIONS {
+  static const WBEM_FLAG_CONNECT_REPOSITORY_ONLY = 0x00000040;
+  static const WBEM_FLAG_CONNECT_USE_MAX_WAIT = 0x00000080;
+  static const WBEM_FLAG_CONNECT_PROVIDERS = 0x00000100;
+}
+
+/// {@category Enum}
+class WBEM_EXTRA_RETURN_CODES {
+  static const WBEM_S_INITIALIZED = 0x00000000;
+  static const WBEM_S_LIMITED_SERVICE = 0x00043001;
+  static const WBEM_S_INDIRECTLY_UPDATED = 0x00043002;
+  static const WBEM_S_SUBJECT_TO_SDS = 0x00043003;
+  static const WBEM_E_RETRY_LATER = 0x80043001;
+  static const WBEM_E_RESOURCE_CONTENTION = 0x80043002;
+}
+
+/// {@category Enum}
+class WBEM_FLAVOR_TYPE {
+  static const WBEM_FLAVOR_DONT_PROPAGATE = 0x00000000;
+  static const WBEM_FLAVOR_FLAG_PROPAGATE_TO_INSTANCE = 0x00000001;
+  static const WBEM_FLAVOR_FLAG_PROPAGATE_TO_DERIVED_CLASS = 0x00000002;
+  static const WBEM_FLAVOR_MASK_PROPAGATION = 0x0000000f;
+  static const WBEM_FLAVOR_OVERRIDABLE = 0x00000000;
+  static const WBEM_FLAVOR_NOT_OVERRIDABLE = 0x00000010;
+  static const WBEM_FLAVOR_MASK_PERMISSIONS = 0x00000010;
+  static const WBEM_FLAVOR_ORIGIN_LOCAL = 0x00000000;
+  static const WBEM_FLAVOR_ORIGIN_PROPAGATED = 0x00000020;
+  static const WBEM_FLAVOR_ORIGIN_SYSTEM = 0x00000040;
+  static const WBEM_FLAVOR_MASK_ORIGIN = 0x00000060;
+  static const WBEM_FLAVOR_NOT_AMENDED = 0x00000000;
+  static const WBEM_FLAVOR_AMENDED = 0x00000080;
+  static const WBEM_FLAVOR_MASK_AMENDED = 0x00000080;
+}
+
+/// {@category Enum}
+class WBEM_GENERIC_FLAG_TYPE {
+  static const WBEM_FLAG_RETURN_IMMEDIATELY = 0x00000010;
+  static const WBEM_FLAG_RETURN_WBEM_COMPLETE = 0x00000000;
+  static const WBEM_FLAG_BIDIRECTIONAL = 0x00000000;
+  static const WBEM_FLAG_FORWARD_ONLY = 0x00000020;
+  static const WBEM_FLAG_NO_ERROR_OBJECT = 0x00000040;
+  static const WBEM_FLAG_RETURN_ERROR_OBJECT = 0x00000000;
+  static const WBEM_FLAG_SEND_STATUS = 0x00000080;
+  static const WBEM_FLAG_DONT_SEND_STATUS = 0x00000000;
+  static const WBEM_FLAG_ENSURE_LOCATABLE = 0x00000100;
+  static const WBEM_FLAG_DIRECT_READ = 0x00000200;
+  static const WBEM_FLAG_SEND_ONLY_SELECTED = 0x00000000;
+  static const WBEM_RETURN_WHEN_COMPLETE = 0x00000000;
+  static const WBEM_RETURN_IMMEDIATELY = 0x00000010;
+  static const WBEM_MASK_RESERVED_FLAGS = 0x0001f000;
+  static const WBEM_FLAG_USE_AMENDED_QUALIFIERS = 0x00020000;
+  static const WBEM_FLAG_STRONG_VALIDATION = 0x00100000;
+}
+
+/// {@category Enum}
+class WBEM_GENUS_TYPE {
+  static const WBEM_GENUS_CLASS = 0x00000001;
+  static const WBEM_GENUS_INSTANCE = 0x00000002;
+}
+
+/// {@category Enum}
+class WBEM_GET_KEY_FLAGS {
+  static const WBEMPATH_TEXT = 0x00000001;
+  static const WBEMPATH_QUOTEDTEXT = 0x00000002;
+}
+
+/// {@category Enum}
+class WBEM_GET_TEXT_FLAGS {
+  static const WBEMPATH_COMPRESSED = 0x00000001;
+  static const WBEMPATH_GET_RELATIVE_ONLY = 0x00000002;
+  static const WBEMPATH_GET_SERVER_TOO = 0x00000004;
+  static const WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY = 0x00000008;
+  static const WBEMPATH_GET_NAMESPACE_ONLY = 0x00000010;
+  static const WBEMPATH_GET_ORIGINAL = 0x00000020;
+}
+
+/// {@category Enum}
+class WBEM_INFORMATION_FLAG_TYPE {
+  static const WBEM_FLAG_SHORT_NAME = 0x00000001;
+  static const WBEM_FLAG_LONG_NAME = 0x00000002;
+}
+
+/// {@category Enum}
+class WBEM_LIMITATION_FLAG_TYPE {
+  static const WBEM_FLAG_EXCLUDE_OBJECT_QUALIFIERS = 0x00000010;
+  static const WBEM_FLAG_EXCLUDE_PROPERTY_QUALIFIERS = 0x00000020;
+}
+
+/// {@category Enum}
+class WBEM_LIMITS {
+  static const WBEM_MAX_IDENTIFIER = 0x00001000;
+  static const WBEM_MAX_QUERY = 0x00004000;
+  static const WBEM_MAX_PATH = 0x00002000;
+  static const WBEM_MAX_OBJECT_NESTING = 0x00000040;
+  static const WBEM_MAX_USER_PROPERTIES = 0x00000400;
+}
+
+/// {@category Enum}
+class WBEM_LOCKING {
+  static const WBEM_FLAG_ALLOW_READ = 0x00000001;
+}
+
+/// {@category Enum}
+class WBEM_PATH_CREATE_FLAG {
+  static const WBEMPATH_CREATE_ACCEPT_RELATIVE = 0x00000001;
+  static const WBEMPATH_CREATE_ACCEPT_ABSOLUTE = 0x00000002;
+  static const WBEMPATH_CREATE_ACCEPT_ALL = 0x00000004;
+  static const WBEMPATH_TREAT_SINGLE_IDENT_AS_NS = 0x00000008;
+}
+
+/// {@category Enum}
+class WBEM_PATH_STATUS_FLAG {
+  static const WBEMPATH_INFO_ANON_LOCAL_MACHINE = 0x00000001;
+  static const WBEMPATH_INFO_HAS_MACHINE_NAME = 0x00000002;
+  static const WBEMPATH_INFO_IS_CLASS_REF = 0x00000004;
+  static const WBEMPATH_INFO_IS_INST_REF = 0x00000008;
+  static const WBEMPATH_INFO_HAS_SUBSCOPES = 0x00000010;
+  static const WBEMPATH_INFO_IS_COMPOUND = 0x00000020;
+  static const WBEMPATH_INFO_HAS_V2_REF_PATHS = 0x00000040;
+  static const WBEMPATH_INFO_HAS_IMPLIED_KEY = 0x00000080;
+  static const WBEMPATH_INFO_CONTAINS_SINGLETON = 0x00000100;
+  static const WBEMPATH_INFO_V1_COMPLIANT = 0x00000200;
+  static const WBEMPATH_INFO_V2_COMPLIANT = 0x00000400;
+  static const WBEMPATH_INFO_CIM_COMPLIANT = 0x00000800;
+  static const WBEMPATH_INFO_IS_SINGLETON = 0x00001000;
+  static const WBEMPATH_INFO_IS_PARENT = 0x00002000;
+  static const WBEMPATH_INFO_SERVER_NAMESPACE_ONLY = 0x00004000;
+  static const WBEMPATH_INFO_NATIVE_PATH = 0x00008000;
+  static const WBEMPATH_INFO_WMI_PATH = 0x00010000;
+  static const WBEMPATH_INFO_PATH_HAD_SERVER = 0x00020000;
+}
+
+/// {@category Enum}
+class WBEM_PROVIDER_FLAGS {
+  static const WBEM_FLAG_OWNER_UPDATE = 0x00010000;
+}
+
+/// {@category Enum}
+class WBEM_PROVIDER_REQUIREMENTS_TYPE {
+  static const WBEM_REQUIREMENTS_START_POSTFILTER = 0x00000000;
+  static const WBEM_REQUIREMENTS_STOP_POSTFILTER = 0x00000001;
+  static const WBEM_REQUIREMENTS_RECHECK_SUBSCRIPTIONS = 0x00000002;
+}
+
+/// {@category Enum}
+class WBEM_QUERY_FLAG_TYPE {
+  static const WBEM_FLAG_DEEP = 0x00000000;
+  static const WBEM_FLAG_SHALLOW = 0x00000001;
+  static const WBEM_FLAG_PROTOTYPE = 0x00000002;
+}
+
+/// {@category Enum}
+class WBEM_REFRESHER_FLAGS {
+  static const WBEM_FLAG_REFRESH_AUTO_RECONNECT = 0x00000000;
+  static const WBEM_FLAG_REFRESH_NO_AUTO_RECONNECT = 0x00000001;
+}
+
+/// {@category Enum}
+class WBEM_SECURITY_FLAGS {
+  static const WBEM_ENABLE = 0x00000001;
+  static const WBEM_METHOD_EXECUTE = 0x00000002;
+  static const WBEM_FULL_WRITE_REP = 0x00000004;
+  static const WBEM_PARTIAL_WRITE_REP = 0x00000008;
+  static const WBEM_WRITE_PROVIDER = 0x00000010;
+  static const WBEM_REMOTE_ACCESS = 0x00000020;
+  static const WBEM_RIGHT_SUBSCRIBE = 0x00000040;
+  static const WBEM_RIGHT_PUBLISH = 0x00000080;
+}
+
+/// {@category Enum}
+class WBEM_SHUTDOWN_FLAGS {
+  static const WBEM_SHUTDOWN_UNLOAD_COMPONENT = 0x00000001;
+  static const WBEM_SHUTDOWN_WMI = 0x00000002;
+  static const WBEM_SHUTDOWN_OS = 0x00000003;
+}
+
+/// {@category Enum}
+class WBEM_STATUS_TYPE {
+  static const WBEM_STATUS_COMPLETE = 0x00000000;
+  static const WBEM_STATUS_REQUIREMENTS = 0x00000001;
+  static const WBEM_STATUS_PROGRESS = 0x00000002;
+  static const WBEM_STATUS_LOGGING_INFORMATION = 0x00000100;
+  static const WBEM_STATUS_LOGGING_INFORMATION_PROVIDER = 0x00000200;
+  static const WBEM_STATUS_LOGGING_INFORMATION_HOST = 0x00000400;
+  static const WBEM_STATUS_LOGGING_INFORMATION_REPOSITORY = 0x00000800;
+  static const WBEM_STATUS_LOGGING_INFORMATION_ESS = 0x00001000;
+}
+
+/// {@category Enum}
+class WBEM_TEXT_FLAG_TYPE {
+  static const WBEM_FLAG_NO_FLAVORS = 0x00000001;
+}
+
+/// {@category Enum}
+class WBEM_TIMEOUT_TYPE {
+  static const WBEM_NO_WAIT = 0x00000000;
+  static const WBEM_INFINITE = 0xffffffff;
+}
+
+/// {@category Enum}
+class WBEM_UNSECAPP_FLAG_TYPE {
+  static const WBEM_FLAG_UNSECAPP_DEFAULT_CHECK_ACCESS = 0x00000000;
+  static const WBEM_FLAG_UNSECAPP_CHECK_ACCESS = 0x00000001;
+  static const WBEM_FLAG_UNSECAPP_DONT_CHECK_ACCESS = 0x00000002;
+}
+
+/// {@category Enum}
+class WMIQ_ANALYSIS_TYPE {
+  static const WMIQ_ANALYSIS_RPN_SEQUENCE = 0x00000001;
+  static const WMIQ_ANALYSIS_ASSOC_QUERY = 0x00000002;
+  static const WMIQ_ANALYSIS_PROP_ANALYSIS_MATRIX = 0x00000003;
+  static const WMIQ_ANALYSIS_QUERY_TEXT = 0x00000004;
+  static const WMIQ_ANALYSIS_RESERVED = 0x08000000;
+}
+
+/// {@category Enum}
+class WMIQ_ASSOCQ_FLAGS {
+  static const WMIQ_ASSOCQ_ASSOCIATORS = 0x00000001;
+  static const WMIQ_ASSOCQ_REFERENCES = 0x00000002;
+  static const WMIQ_ASSOCQ_RESULTCLASS = 0x00000004;
+  static const WMIQ_ASSOCQ_ASSOCCLASS = 0x00000008;
+  static const WMIQ_ASSOCQ_ROLE = 0x00000010;
+  static const WMIQ_ASSOCQ_RESULTROLE = 0x00000020;
+  static const WMIQ_ASSOCQ_REQUIREDQUALIFIER = 0x00000040;
+  static const WMIQ_ASSOCQ_REQUIREDASSOCQUALIFIER = 0x00000080;
+  static const WMIQ_ASSOCQ_CLASSDEFSONLY = 0x00000100;
+  static const WMIQ_ASSOCQ_KEYSONLY = 0x00000200;
+  static const WMIQ_ASSOCQ_SCHEMAONLY = 0x00000400;
+  static const WMIQ_ASSOCQ_CLASSREFSONLY = 0x00000800;
+}
+
+/// {@category Enum}
+class WMIQ_LANGUAGE_FEATURES {
+  static const WMIQ_LF1_BASIC_SELECT = 0x00000001;
+  static const WMIQ_LF2_CLASS_NAME_IN_QUERY = 0x00000002;
+  static const WMIQ_LF3_STRING_CASE_FUNCTIONS = 0x00000003;
+  static const WMIQ_LF4_PROP_TO_PROP_TESTS = 0x00000004;
+  static const WMIQ_LF5_COUNT_STAR = 0x00000005;
+  static const WMIQ_LF6_ORDER_BY = 0x00000006;
+  static const WMIQ_LF7_DISTINCT = 0x00000007;
+  static const WMIQ_LF8_ISA = 0x00000008;
+  static const WMIQ_LF9_THIS = 0x00000009;
+  static const WMIQ_LF10_COMPEX_SUBEXPRESSIONS = 0x0000000a;
+  static const WMIQ_LF11_ALIASING = 0x0000000b;
+  static const WMIQ_LF12_GROUP_BY_HAVING = 0x0000000c;
+  static const WMIQ_LF13_WMI_WITHIN = 0x0000000d;
+  static const WMIQ_LF14_SQL_WRITE_OPERATIONS = 0x0000000e;
+  static const WMIQ_LF15_GO = 0x0000000f;
+  static const WMIQ_LF16_SINGLE_LEVEL_TRANSACTIONS = 0x00000010;
+  static const WMIQ_LF17_QUALIFIED_NAMES = 0x00000011;
+  static const WMIQ_LF18_ASSOCIATONS = 0x00000012;
+  static const WMIQ_LF19_SYSTEM_PROPERTIES = 0x00000013;
+  static const WMIQ_LF20_EXTENDED_SYSTEM_PROPERTIES = 0x00000014;
+  static const WMIQ_LF21_SQL89_JOINS = 0x00000015;
+  static const WMIQ_LF22_SQL92_JOINS = 0x00000016;
+  static const WMIQ_LF23_SUBSELECTS = 0x00000017;
+  static const WMIQ_LF24_UMI_EXTENSIONS = 0x00000018;
+  static const WMIQ_LF25_DATEPART = 0x00000019;
+  static const WMIQ_LF26_LIKE = 0x0000001a;
+  static const WMIQ_LF27_CIM_TEMPORAL_CONSTRUCTS = 0x0000001b;
+  static const WMIQ_LF28_STANDARD_AGGREGATES = 0x0000001c;
+  static const WMIQ_LF29_MULTI_LEVEL_ORDER_BY = 0x0000001d;
+  static const WMIQ_LF30_WMI_PRAGMAS = 0x0000001e;
+  static const WMIQ_LF31_QUALIFIER_TESTS = 0x0000001f;
+  static const WMIQ_LF32_SP_EXECUTE = 0x00000020;
+  static const WMIQ_LF33_ARRAY_ACCESS = 0x00000021;
+  static const WMIQ_LF34_UNION = 0x00000022;
+  static const WMIQ_LF35_COMPLEX_SELECT_TARGET = 0x00000023;
+  static const WMIQ_LF36_REFERENCE_TESTS = 0x00000024;
+  static const WMIQ_LF37_SELECT_INTO = 0x00000025;
+  static const WMIQ_LF38_BASIC_DATETIME_TESTS = 0x00000026;
+  static const WMIQ_LF39_COUNT_COLUMN = 0x00000027;
+  static const WMIQ_LF40_BETWEEN = 0x00000028;
+  static const WMIQ_LF_LAST = 0x00000028;
+}
+
+/// {@category Enum}
+class WMIQ_RPNQ_FEATURE {
+  static const WMIQ_RPNF_WHERE_CLAUSE_PRESENT = 0x00000001;
+  static const WMIQ_RPNF_QUERY_IS_CONJUNCTIVE = 0x00000002;
+  static const WMIQ_RPNF_QUERY_IS_DISJUNCTIVE = 0x00000004;
+  static const WMIQ_RPNF_PROJECTION = 0x00000008;
+  static const WMIQ_RPNF_FEATURE_SELECT_STAR = 0x00000010;
+  static const WMIQ_RPNF_EQUALITY_TESTS_ONLY = 0x00000020;
+  static const WMIQ_RPNF_COUNT_STAR = 0x00000040;
+  static const WMIQ_RPNF_QUALIFIED_NAMES_USED = 0x00000080;
+  static const WMIQ_RPNF_SYSPROP_CLASS_USED = 0x00000100;
+  static const WMIQ_RPNF_PROP_TO_PROP_TESTS = 0x00000200;
+  static const WMIQ_RPNF_ORDER_BY = 0x00000400;
+  static const WMIQ_RPNF_ISA_USED = 0x00000800;
+  static const WMIQ_RPNF_GROUP_BY_HAVING = 0x00001000;
+  static const WMIQ_RPNF_ARRAY_ACCESS_USED = 0x00002000;
+}
+
+/// {@category Enum}
+class WMIQ_RPN_TOKEN_FLAGS {
+  static const WMIQ_RPN_TOKEN_EXPRESSION = 0x00000001;
+  static const WMIQ_RPN_TOKEN_AND = 0x00000002;
+  static const WMIQ_RPN_TOKEN_OR = 0x00000003;
+  static const WMIQ_RPN_TOKEN_NOT = 0x00000004;
+  static const WMIQ_RPN_OP_UNDEFINED = 0x00000000;
+  static const WMIQ_RPN_OP_EQ = 0x00000001;
+  static const WMIQ_RPN_OP_NE = 0x00000002;
+  static const WMIQ_RPN_OP_GE = 0x00000003;
+  static const WMIQ_RPN_OP_LE = 0x00000004;
+  static const WMIQ_RPN_OP_LT = 0x00000005;
+  static const WMIQ_RPN_OP_GT = 0x00000006;
+  static const WMIQ_RPN_OP_LIKE = 0x00000007;
+  static const WMIQ_RPN_OP_ISA = 0x00000008;
+  static const WMIQ_RPN_OP_ISNOTA = 0x00000009;
+  static const WMIQ_RPN_OP_ISNULL = 0x0000000a;
+  static const WMIQ_RPN_OP_ISNOTNULL = 0x0000000b;
+  static const WMIQ_RPN_LEFT_PROPERTY_NAME = 0x00000001;
+  static const WMIQ_RPN_RIGHT_PROPERTY_NAME = 0x00000002;
+  static const WMIQ_RPN_CONST2 = 0x00000004;
+  static const WMIQ_RPN_CONST = 0x00000008;
+  static const WMIQ_RPN_RELOP = 0x00000010;
+  static const WMIQ_RPN_LEFT_FUNCTION = 0x00000020;
+  static const WMIQ_RPN_RIGHT_FUNCTION = 0x00000040;
+  static const WMIQ_RPN_GET_TOKEN_TYPE = 0x00000001;
+  static const WMIQ_RPN_GET_EXPR_SHAPE = 0x00000002;
+  static const WMIQ_RPN_GET_LEFT_FUNCTION = 0x00000003;
+  static const WMIQ_RPN_GET_RIGHT_FUNCTION = 0x00000004;
+  static const WMIQ_RPN_GET_RELOP = 0x00000005;
+  static const WMIQ_RPN_NEXT_TOKEN = 0x00000001;
+  static const WMIQ_RPN_FROM_UNARY = 0x00000001;
+  static const WMIQ_RPN_FROM_PATH = 0x00000002;
+  static const WMIQ_RPN_FROM_CLASS_LIST = 0x00000004;
+  static const WMIQ_RPN_FROM_MULTIPLE = 0x00000008;
+}
+
+/// {@category Enum}
 class WMI_OBJ_TEXT {
   static const WMI_OBJ_TEXT_CIM_DTD_2_0 = 0x00000001;
   static const WMI_OBJ_TEXT_WMI_DTD_2_0 = 0x00000002;
@@ -580,63 +640,14 @@ class WMI_OBJ_TEXT {
 }
 
 /// {@category Enum}
-class WBEM_COMPILER_OPTIONS {
-  static const WBEM_FLAG_CHECK_ONLY = 0x00000001;
-  static const WBEM_FLAG_AUTORECOVER = 0x00000002;
-  static const WBEM_FLAG_WMI_CHECK = 0x00000004;
-  static const WBEM_FLAG_CONSOLE_PRINT = 0x00000008;
-  static const WBEM_FLAG_DONT_ADD_TO_LIST = 0x00000010;
-  static const WBEM_FLAG_SPLIT_FILES = 0x00000020;
-  static const WBEM_FLAG_STORE_FILE = 0x00000100;
-}
-
-/// {@category Enum}
-class WBEM_CONNECT_OPTIONS {
-  static const WBEM_FLAG_CONNECT_REPOSITORY_ONLY = 0x00000040;
-  static const WBEM_FLAG_CONNECT_USE_MAX_WAIT = 0x00000080;
-  static const WBEM_FLAG_CONNECT_PROVIDERS = 0x00000100;
-}
-
-/// {@category Enum}
-class WBEM_UNSECAPP_FLAG_TYPE {
-  static const WBEM_FLAG_UNSECAPP_DEFAULT_CHECK_ACCESS = 0x00000000;
-  static const WBEM_FLAG_UNSECAPP_CHECK_ACCESS = 0x00000001;
-  static const WBEM_FLAG_UNSECAPP_DONT_CHECK_ACCESS = 0x00000002;
-}
-
-/// {@category Enum}
-class WBEM_INFORMATION_FLAG_TYPE {
-  static const WBEM_FLAG_SHORT_NAME = 0x00000001;
-  static const WBEM_FLAG_LONG_NAME = 0x00000002;
-}
-
-/// {@category Enum}
-class WBEM_PROVIDER_REQUIREMENTS_TYPE {
-  static const WBEM_REQUIREMENTS_START_POSTFILTER = 0x00000000;
-  static const WBEM_REQUIREMENTS_STOP_POSTFILTER = 0x00000001;
-  static const WBEM_REQUIREMENTS_RECHECK_SUBSCRIPTIONS = 0x00000002;
-}
-
-/// {@category Enum}
-class WBEM_EXTRA_RETURN_CODES {
-  static const WBEM_S_INITIALIZED = 0x00000000;
-  static const WBEM_S_LIMITED_SERVICE = 0x00043001;
-  static const WBEM_S_INDIRECTLY_UPDATED = 0x00043002;
-  static const WBEM_S_SUBJECT_TO_SDS = 0x00043003;
-  static const WBEM_E_RETRY_LATER = 0x80043001;
-  static const WBEM_E_RESOURCE_CONTENTION = 0x80043002;
-}
-
-/// {@category Enum}
-class WBEM_PROVIDER_FLAGS {
-  static const WBEM_FLAG_OWNER_UPDATE = 0x00010000;
-}
-
-/// {@category Enum}
-class WBEM_BATCH_TYPE {
-  static const WBEM_FLAG_BATCH_IF_NEEDED = 0x00000000;
-  static const WBEM_FLAG_MUST_BATCH = 0x00000001;
-  static const WBEM_FLAG_MUST_NOT_BATCH = 0x00000002;
+class WbemAuthenticationLevelEnum {
+  static const wbemAuthenticationLevelDefault = 0x00000000;
+  static const wbemAuthenticationLevelNone = 0x00000001;
+  static const wbemAuthenticationLevelConnect = 0x00000002;
+  static const wbemAuthenticationLevelCall = 0x00000003;
+  static const wbemAuthenticationLevelPkt = 0x00000004;
+  static const wbemAuthenticationLevelPktIntegrity = 0x00000005;
+  static const wbemAuthenticationLevelPktPrivacy = 0x00000006;
 }
 
 /// {@category Enum}
@@ -649,53 +660,6 @@ class WbemChangeFlagEnum {
   static const wbemChangeFlagUpdateForceMode = 0x00000040;
   static const wbemChangeFlagStrongValidation = 0x00000080;
   static const wbemChangeFlagAdvisory = 0x00010000;
-}
-
-/// {@category Enum}
-class WbemFlagEnum {
-  static const wbemFlagReturnImmediately = 0x00000010;
-  static const wbemFlagReturnWhenComplete = 0x00000000;
-  static const wbemFlagBidirectional = 0x00000000;
-  static const wbemFlagForwardOnly = 0x00000020;
-  static const wbemFlagNoErrorObject = 0x00000040;
-  static const wbemFlagReturnErrorObject = 0x00000000;
-  static const wbemFlagSendStatus = 0x00000080;
-  static const wbemFlagDontSendStatus = 0x00000000;
-  static const wbemFlagEnsureLocatable = 0x00000100;
-  static const wbemFlagDirectRead = 0x00000200;
-  static const wbemFlagSendOnlySelected = 0x00000000;
-  static const wbemFlagUseAmendedQualifiers = 0x00020000;
-  static const wbemFlagGetDefault = 0x00000000;
-  static const wbemFlagSpawnInstance = 0x00000001;
-  static const wbemFlagUseCurrentTime = 0x00000001;
-}
-
-/// {@category Enum}
-class WbemQueryFlagEnum {
-  static const wbemQueryFlagDeep = 0x00000000;
-  static const wbemQueryFlagShallow = 0x00000001;
-  static const wbemQueryFlagPrototype = 0x00000002;
-}
-
-/// {@category Enum}
-class WbemTextFlagEnum {
-  static const wbemTextFlagNoFlavors = 0x00000001;
-}
-
-/// {@category Enum}
-class WbemTimeout {
-  static const wbemTimeoutInfinite = 0xffffffff;
-}
-
-/// {@category Enum}
-class WbemComparisonFlagEnum {
-  static const wbemComparisonFlagIncludeAll = 0x00000000;
-  static const wbemComparisonFlagIgnoreQualifiers = 0x00000001;
-  static const wbemComparisonFlagIgnoreObjectSource = 0x00000002;
-  static const wbemComparisonFlagIgnoreDefaultValues = 0x00000004;
-  static const wbemComparisonFlagIgnoreClass = 0x00000008;
-  static const wbemComparisonFlagIgnoreCase = 0x00000010;
-  static const wbemComparisonFlagIgnoreFlavor = 0x00000020;
 }
 
 /// {@category Enum}
@@ -716,6 +680,22 @@ class WbemCimtypeEnum {
   static const wbemCimtypeReference = 0x00000066;
   static const wbemCimtypeChar16 = 0x00000067;
   static const wbemCimtypeObject = 0x0000000d;
+}
+
+/// {@category Enum}
+class WbemComparisonFlagEnum {
+  static const wbemComparisonFlagIncludeAll = 0x00000000;
+  static const wbemComparisonFlagIgnoreQualifiers = 0x00000001;
+  static const wbemComparisonFlagIgnoreObjectSource = 0x00000002;
+  static const wbemComparisonFlagIgnoreDefaultValues = 0x00000004;
+  static const wbemComparisonFlagIgnoreClass = 0x00000008;
+  static const wbemComparisonFlagIgnoreCase = 0x00000010;
+  static const wbemComparisonFlagIgnoreFlavor = 0x00000020;
+}
+
+/// {@category Enum}
+class WbemConnectOptionsEnum {
+  static const wbemConnectFlagUseMaxWait = 0x00000080;
 }
 
 /// {@category Enum}
@@ -851,14 +831,22 @@ class WbemErrorEnum {
 }
 
 /// {@category Enum}
-class WbemAuthenticationLevelEnum {
-  static const wbemAuthenticationLevelDefault = 0x00000000;
-  static const wbemAuthenticationLevelNone = 0x00000001;
-  static const wbemAuthenticationLevelConnect = 0x00000002;
-  static const wbemAuthenticationLevelCall = 0x00000003;
-  static const wbemAuthenticationLevelPkt = 0x00000004;
-  static const wbemAuthenticationLevelPktIntegrity = 0x00000005;
-  static const wbemAuthenticationLevelPktPrivacy = 0x00000006;
+class WbemFlagEnum {
+  static const wbemFlagReturnImmediately = 0x00000010;
+  static const wbemFlagReturnWhenComplete = 0x00000000;
+  static const wbemFlagBidirectional = 0x00000000;
+  static const wbemFlagForwardOnly = 0x00000020;
+  static const wbemFlagNoErrorObject = 0x00000040;
+  static const wbemFlagReturnErrorObject = 0x00000000;
+  static const wbemFlagSendStatus = 0x00000080;
+  static const wbemFlagDontSendStatus = 0x00000000;
+  static const wbemFlagEnsureLocatable = 0x00000100;
+  static const wbemFlagDirectRead = 0x00000200;
+  static const wbemFlagSendOnlySelected = 0x00000000;
+  static const wbemFlagUseAmendedQualifiers = 0x00020000;
+  static const wbemFlagGetDefault = 0x00000000;
+  static const wbemFlagSpawnInstance = 0x00000001;
+  static const wbemFlagUseCurrentTime = 0x00000001;
 }
 
 /// {@category Enum}
@@ -867,6 +855,12 @@ class WbemImpersonationLevelEnum {
   static const wbemImpersonationLevelIdentify = 0x00000002;
   static const wbemImpersonationLevelImpersonate = 0x00000003;
   static const wbemImpersonationLevelDelegate = 0x00000004;
+}
+
+/// {@category Enum}
+class WbemObjectTextFormatEnum {
+  static const wbemObjectTextFormatCIMDTD20 = 0x00000001;
+  static const wbemObjectTextFormatWMIDTD20 = 0x00000002;
 }
 
 /// {@category Enum}
@@ -901,13 +895,19 @@ class WbemPrivilegeEnum {
 }
 
 /// {@category Enum}
-class WbemObjectTextFormatEnum {
-  static const wbemObjectTextFormatCIMDTD20 = 0x00000001;
-  static const wbemObjectTextFormatWMIDTD20 = 0x00000002;
+class WbemQueryFlagEnum {
+  static const wbemQueryFlagDeep = 0x00000000;
+  static const wbemQueryFlagShallow = 0x00000001;
+  static const wbemQueryFlagPrototype = 0x00000002;
 }
 
 /// {@category Enum}
-class WbemConnectOptionsEnum {
-  static const wbemConnectFlagUseMaxWait = 0x00000080;
+class WbemTextFlagEnum {
+  static const wbemTextFlagNoFlavors = 0x00000001;
+}
+
+/// {@category Enum}
+class WbemTimeout {
+  static const wbemTimeoutInfinite = 0xffffffff;
 }
 

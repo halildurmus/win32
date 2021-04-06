@@ -43,6 +43,9 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+class WiaVideo extends Struct {
+}
+
 class WIA_DITHER_PATTERN_DATA extends Struct {
   @Int32() external int lSize;
   external Pointer<Utf16> bstrPatternName;
@@ -94,8 +97,5 @@ class WIA_DEV_CAP extends Struct {
   external Pointer<Utf16> bstrDescription;
   external Pointer<Utf16> bstrIcon;
   external Pointer<Utf16> bstrCommandline;
-}
-
-class WiaVideo extends Struct {
 }
 

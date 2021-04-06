@@ -49,14 +49,16 @@ class WCM_POLICY_VALUE extends Struct {
 }
 
 class WCM_PROFILE_INFO extends Struct {
-  external __ushort__ strProfileName;
+  @Array(129)
+  external Array<Uint16> strProfileName;
   external GUID AdapterGUID;
   @Uint32() external int Media;
 }
 
 class WCM_PROFILE_INFO_LIST extends Struct {
   @Uint32() external int dwNumberOfItems;
-  external WCM_PROFILE_INFO ProfileInfo;
+  @Array(1)
+  external Array<WCM_PROFILE_INFO> ProfileInfo;
 }
 
 class WCM_CONNECTION_COST_DATA extends Struct {

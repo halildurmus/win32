@@ -56,7 +56,8 @@ class SCSI_PASS_THROUGH extends Struct {
   @Uint32() external int TimeOutValue;
   @IntPtr() external int DataBufferOffset;
   @Uint32() external int SenseInfoOffset;
-  external __ubyte__ Cdb;
+  @Array(16)
+  external Array<Uint8> Cdb;
 }
 
 class SCSI_PASS_THROUGH_DIRECT extends Struct {
@@ -72,7 +73,8 @@ class SCSI_PASS_THROUGH_DIRECT extends Struct {
   @Uint32() external int TimeOutValue;
   external Pointer DataBuffer;
   @Uint32() external int SenseInfoOffset;
-  external __ubyte__ Cdb;
+  @Array(16)
+  external Array<Uint8> Cdb;
 }
 
 class SCSI_PASS_THROUGH32 extends Struct {
@@ -88,7 +90,8 @@ class SCSI_PASS_THROUGH32 extends Struct {
   @Uint32() external int TimeOutValue;
   @Uint32() external int DataBufferOffset;
   @Uint32() external int SenseInfoOffset;
-  external __ubyte__ Cdb;
+  @Array(16)
+  external Array<Uint8> Cdb;
 }
 
 class SCSI_PASS_THROUGH_DIRECT32 extends Struct {
@@ -104,7 +107,8 @@ class SCSI_PASS_THROUGH_DIRECT32 extends Struct {
   @Uint32() external int TimeOutValue;
   external Pointer DataBuffer;
   @Uint32() external int SenseInfoOffset;
-  external __ubyte__ Cdb;
+  @Array(16)
+  external Array<Uint8> Cdb;
 }
 
 class SCSI_PASS_THROUGH_EX extends Struct {
@@ -123,7 +127,8 @@ class SCSI_PASS_THROUGH_EX extends Struct {
   @Uint32() external int DataInTransferLength;
   @IntPtr() external int DataOutBufferOffset;
   @IntPtr() external int DataInBufferOffset;
-  external __ubyte__ Cdb;
+  @Array(1)
+  external Array<Uint8> Cdb;
 }
 
 class SCSI_PASS_THROUGH_DIRECT_EX extends Struct {
@@ -142,7 +147,8 @@ class SCSI_PASS_THROUGH_DIRECT_EX extends Struct {
   @Uint32() external int DataInTransferLength;
   external Pointer DataOutBuffer;
   external Pointer DataInBuffer;
-  external __ubyte__ Cdb;
+  @Array(1)
+  external Array<Uint8> Cdb;
 }
 
 class SCSI_PASS_THROUGH32_EX extends Struct {
@@ -161,7 +167,8 @@ class SCSI_PASS_THROUGH32_EX extends Struct {
   @Uint32() external int DataInTransferLength;
   @Uint32() external int DataOutBufferOffset;
   @Uint32() external int DataInBufferOffset;
-  external __ubyte__ Cdb;
+  @Array(1)
+  external Array<Uint8> Cdb;
 }
 
 class SCSI_PASS_THROUGH_DIRECT32_EX extends Struct {
@@ -180,7 +187,8 @@ class SCSI_PASS_THROUGH_DIRECT32_EX extends Struct {
   @Uint32() external int DataInTransferLength;
   external Pointer DataOutBuffer;
   external Pointer DataInBuffer;
-  external __ubyte__ Cdb;
+  @Array(1)
+  external Array<Uint8> Cdb;
 }
 
 class ATA_PASS_THROUGH_EX extends Struct {
@@ -194,8 +202,10 @@ class ATA_PASS_THROUGH_EX extends Struct {
   @Uint32() external int TimeOutValue;
   @Uint32() external int ReservedAsUlong;
   @IntPtr() external int DataBufferOffset;
-  external __ubyte__ PreviousTaskFile;
-  external __ubyte__ CurrentTaskFile;
+  @Array(8)
+  external Array<Uint8> PreviousTaskFile;
+  @Array(8)
+  external Array<Uint8> CurrentTaskFile;
 }
 
 class ATA_PASS_THROUGH_DIRECT extends Struct {
@@ -209,8 +219,10 @@ class ATA_PASS_THROUGH_DIRECT extends Struct {
   @Uint32() external int TimeOutValue;
   @Uint32() external int ReservedAsUlong;
   external Pointer DataBuffer;
-  external __ubyte__ PreviousTaskFile;
-  external __ubyte__ CurrentTaskFile;
+  @Array(8)
+  external Array<Uint8> PreviousTaskFile;
+  @Array(8)
+  external Array<Uint8> CurrentTaskFile;
 }
 
 class ATA_PASS_THROUGH_EX32 extends Struct {
@@ -224,8 +236,10 @@ class ATA_PASS_THROUGH_EX32 extends Struct {
   @Uint32() external int TimeOutValue;
   @Uint32() external int ReservedAsUlong;
   @Uint32() external int DataBufferOffset;
-  external __ubyte__ PreviousTaskFile;
-  external __ubyte__ CurrentTaskFile;
+  @Array(8)
+  external Array<Uint8> PreviousTaskFile;
+  @Array(8)
+  external Array<Uint8> CurrentTaskFile;
 }
 
 class ATA_PASS_THROUGH_DIRECT32 extends Struct {
@@ -239,13 +253,16 @@ class ATA_PASS_THROUGH_DIRECT32 extends Struct {
   @Uint32() external int TimeOutValue;
   @Uint32() external int ReservedAsUlong;
   external Pointer DataBuffer;
-  external __ubyte__ PreviousTaskFile;
-  external __ubyte__ CurrentTaskFile;
+  @Array(8)
+  external Array<Uint8> PreviousTaskFile;
+  @Array(8)
+  external Array<Uint8> CurrentTaskFile;
 }
 
 class IDE_IO_CONTROL extends Struct {
   @Uint32() external int HeaderLength;
-  external __ubyte__ Signature;
+  @Array(8)
+  external Array<Uint8> Signature;
   @Uint32() external int Timeout;
   @Uint32() external int ControlCode;
   @Uint32() external int ReturnStatus;
@@ -332,7 +349,8 @@ class SCSI_BUS_DATA extends Struct {
 
 class SCSI_ADAPTER_BUS_INFO extends Struct {
   @Uint8() external int NumberOfBuses;
-  external SCSI_BUS_DATA BusData;
+  @Array(1)
+  external Array<SCSI_BUS_DATA> BusData;
 }
 
 class SCSI_INQUIRY_DATA extends Struct {
@@ -342,12 +360,14 @@ class SCSI_INQUIRY_DATA extends Struct {
   @Uint8() external int DeviceClaimed;
   @Uint32() external int InquiryDataLength;
   @Uint32() external int NextInquiryDataOffset;
-  external __ubyte__ InquiryData;
+  @Array(1)
+  external Array<Uint8> InquiryData;
 }
 
 class SRB_IO_CONTROL extends Struct {
   @Uint32() external int HeaderLength;
-  external __ubyte__ Signature;
+  @Array(8)
+  external Array<Uint8> Signature;
   @Uint32() external int Timeout;
   @Uint32() external int ControlCode;
   @Uint32() external int ReturnCode;
@@ -392,7 +412,8 @@ class NVCACHE_HINT_PAYLOAD extends Struct {
   @Uint8() external int LBA47_40;
   @Uint8() external int Auxiliary7_0;
   @Uint8() external int Auxiliary23_16;
-  external __ubyte__ Reserved;
+  @Array(4)
+  external Array<Uint8> Reserved;
 }
 
 class NV_SEP_CACHE_PARAMETER extends Struct {
@@ -401,7 +422,8 @@ class NV_SEP_CACHE_PARAMETER extends Struct {
   @Uint32() external int Flags;
   @Uint8() external int WriteCacheType;
   @Uint8() external int WriteCacheTypeEffective;
-  external __ubyte__ ParameterReserve1;
+  @Array(3)
+  external Array<Uint8> ParameterReserve1;
 }
 
 class STORAGE_DIAGNOSTIC_MP_REQUEST extends Struct {
@@ -412,7 +434,8 @@ class STORAGE_DIAGNOSTIC_MP_REQUEST extends Struct {
   external GUID ProviderId;
   @Uint32() external int BufferSize;
   @Uint32() external int Reserved;
-  external __ubyte__ DataBuffer;
+  @Array(1)
+  external Array<Uint8> DataBuffer;
 }
 
 class MP_DEVICE_DATA_SET_RANGE extends Struct {
@@ -425,9 +448,11 @@ class DSM_NOTIFICATION_REQUEST_BLOCK extends Struct {
   @Uint32() external int Version;
   @Uint32() external int NotifyFlags;
   @Uint32() external int DataSetProfile;
-  external __uint__ Reserved;
+  @Array(3)
+  external Array<Uint32> Reserved;
   @Uint32() external int DataSetRangesCount;
-  external MP_DEVICE_DATA_SET_RANGE DataSetRanges;
+  @Array(1)
+  external Array<MP_DEVICE_DATA_SET_RANGE> DataSetRanges;
 }
 
 class HYBRID_REQUEST_BLOCK extends Struct {
@@ -441,7 +466,8 @@ class HYBRID_REQUEST_BLOCK extends Struct {
 
 class NVCACHE_PRIORITY_LEVEL_DESCRIPTOR extends Struct {
   @Uint8() external int PriorityLevel;
-  external __ubyte__ Reserved0;
+  @Array(3)
+  external Array<Uint8> Reserved0;
   @Uint32() external int ConsumedNVMSizeFraction;
   @Uint32() external int ConsumedMappingResourcesFraction;
   @Uint32() external int ConsumedNVMSizeForDirtyDataFraction;
@@ -491,15 +517,18 @@ class FIRMWARE_REQUEST_BLOCK extends Struct {
 class STORAGE_FIRMWARE_SLOT_INFO extends Struct {
   @Uint8() external int SlotNumber;
   @Uint8() external int ReadOnly;
-  external __ubyte__ Reserved;
+  @Array(6)
+  external Array<Uint8> Reserved;
   @Uint32() external int Revision;
 }
 
 class STORAGE_FIRMWARE_SLOT_INFO_V2 extends Struct {
   @Uint8() external int SlotNumber;
   @Uint8() external int ReadOnly;
-  external __ubyte__ Reserved;
-  external __ubyte__ Revision;
+  @Array(6)
+  external Array<Uint8> Reserved;
+  @Array(16)
+  external Array<Uint8> Revision;
 }
 
 class STORAGE_FIRMWARE_INFO extends Struct {
@@ -510,7 +539,8 @@ class STORAGE_FIRMWARE_INFO extends Struct {
   @Uint8() external int ActiveSlot;
   @Uint8() external int PendingActivateSlot;
   @Uint32() external int Reserved;
-  external STORAGE_FIRMWARE_SLOT_INFO Slot;
+  @Array(1)
+  external Array<STORAGE_FIRMWARE_SLOT_INFO> Slot;
 }
 
 class STORAGE_FIRMWARE_INFO_V2 extends Struct {
@@ -521,10 +551,12 @@ class STORAGE_FIRMWARE_INFO_V2 extends Struct {
   @Uint8() external int ActiveSlot;
   @Uint8() external int PendingActivateSlot;
   @Uint8() external int FirmwareShared;
-  external __ubyte__ Reserved;
+  @Array(3)
+  external Array<Uint8> Reserved;
   @Uint32() external int ImagePayloadAlignment;
   @Uint32() external int ImagePayloadMaxSize;
-  external STORAGE_FIRMWARE_SLOT_INFO_V2 Slot;
+  @Array(1)
+  external Array<STORAGE_FIRMWARE_SLOT_INFO_V2> Slot;
 }
 
 class STORAGE_FIRMWARE_DOWNLOAD extends Struct {
@@ -532,7 +564,8 @@ class STORAGE_FIRMWARE_DOWNLOAD extends Struct {
   @Uint32() external int Size;
   @Uint64() external int Offset;
   @Uint64() external int BufferSize;
-  external __ubyte__ ImageBuffer;
+  @Array(1)
+  external Array<Uint8> ImageBuffer;
 }
 
 class STORAGE_FIRMWARE_DOWNLOAD_V2 extends Struct {
@@ -541,16 +574,19 @@ class STORAGE_FIRMWARE_DOWNLOAD_V2 extends Struct {
   @Uint64() external int Offset;
   @Uint64() external int BufferSize;
   @Uint8() external int Slot;
-  external __ubyte__ Reserved;
+  @Array(3)
+  external Array<Uint8> Reserved;
   @Uint32() external int ImageSize;
-  external __ubyte__ ImageBuffer;
+  @Array(1)
+  external Array<Uint8> ImageBuffer;
 }
 
 class STORAGE_FIRMWARE_ACTIVATE extends Struct {
   @Uint32() external int Version;
   @Uint32() external int Size;
   @Uint8() external int SlotToActivate;
-  external __ubyte__ Reserved0;
+  @Array(3)
+  external Array<Uint8> Reserved0;
 }
 
 class IO_SCSI_CAPABILITIES extends Struct {
@@ -589,7 +625,8 @@ class DUMP_POINTERS extends Struct {
   @Uint32() external int CommonBufferSize;
   @Uint8() external int AllocateCommonBuffers;
   @Uint8() external int UseDiskDump;
-  external __ubyte__ Spare1;
+  @Array(2)
+  external Array<Uint8> Spare1;
   external Pointer DeviceObject;
 }
 
@@ -614,8 +651,10 @@ class DUMP_POINTERS_EX extends Struct {
 
 class DUMP_DRIVER extends Struct {
   external Pointer DumpDriverList;
-  external __ushort__ DriverName;
-  external __ushort__ BaseName;
+  @Array(15)
+  external Array<Uint16> DriverName;
+  @Array(15)
+  external Array<Uint16> BaseName;
 }
 
 class NTSCSI_UNICODE_STRING extends Struct {
@@ -626,8 +665,10 @@ class NTSCSI_UNICODE_STRING extends Struct {
 
 class DUMP_DRIVER_EX extends Struct {
   external Pointer DumpDriverList;
-  external __ushort__ DriverName;
-  external __ushort__ BaseName;
+  @Array(15)
+  external Array<Uint16> DriverName;
+  @Array(15)
+  external Array<Uint16> BaseName;
   external NTSCSI_UNICODE_STRING DriverFullPath;
 }
 
@@ -636,8 +677,10 @@ class STORAGE_ENDURANCE_INFO extends Struct {
   @Uint32() external int GroupId;
   @Uint32() external int Flags;
   @Uint32() external int LifePercentage;
-  external __ubyte__ BytesReadCount;
-  external __ubyte__ ByteWriteCount;
+  @Array(16)
+  external Array<Uint8> BytesReadCount;
+  @Array(16)
+  external Array<Uint8> ByteWriteCount;
 }
 
 class STORAGE_ENDURANCE_DATA_DESCRIPTOR extends Struct {
@@ -687,9 +730,12 @@ class SCSI_LUN_LIST extends Struct {
 }
 
 class ISCSI_TARGET_MAPPINGW extends Struct {
-  external __ushort__ InitiatorName;
-  external __ushort__ TargetName;
-  external __ushort__ OSDeviceName;
+  @Array(129)
+  external Array<Uint16> InitiatorName;
+  @Array(128)
+  external Array<Uint16> TargetName;
+  @Array(129)
+  external Array<Uint16> OSDeviceName;
   external ISCSI_UNIQUE_SESSION_ID SessionId;
   @Uint32() external int OSBusNumber;
   @Uint32() external int OSTargetNumber;
@@ -698,9 +744,12 @@ class ISCSI_TARGET_MAPPINGW extends Struct {
 }
 
 class ISCSI_TARGET_MAPPINGA extends Struct {
-  external __byte__ InitiatorName;
-  external __byte__ TargetName;
-  external __byte__ OSDeviceName;
+  @Array(129)
+  external Array<Int8> InitiatorName;
+  @Array(128)
+  external Array<Int8> TargetName;
+  @Array(129)
+  external Array<Int8> OSDeviceName;
   external ISCSI_UNIQUE_SESSION_ID SessionId;
   @Uint32() external int OSBusNumber;
   @Uint32() external int OSTargetNumber;
@@ -709,48 +758,64 @@ class ISCSI_TARGET_MAPPINGA extends Struct {
 }
 
 class ISCSI_TARGET_PORTALW extends Struct {
-  external __ushort__ SymbolicName;
-  external __ushort__ Address;
+  @Array(129)
+  external Array<Uint16> SymbolicName;
+  @Array(129)
+  external Array<Uint16> Address;
   @Uint16() external int Socket;
 }
 
 class ISCSI_TARGET_PORTALA extends Struct {
-  external __byte__ SymbolicName;
-  external __byte__ Address;
+  @Array(129)
+  external Array<Int8> SymbolicName;
+  @Array(129)
+  external Array<Int8> Address;
   @Uint16() external int Socket;
 }
 
 class ISCSI_TARGET_PORTAL_INFOW extends Struct {
-  external __ushort__ InitiatorName;
+  @Array(129)
+  external Array<Uint16> InitiatorName;
   @Uint32() external int InitiatorPortNumber;
-  external __ushort__ SymbolicName;
-  external __ushort__ Address;
+  @Array(129)
+  external Array<Uint16> SymbolicName;
+  @Array(129)
+  external Array<Uint16> Address;
   @Uint16() external int Socket;
 }
 
 class ISCSI_TARGET_PORTAL_INFOA extends Struct {
-  external __byte__ InitiatorName;
+  @Array(129)
+  external Array<Int8> InitiatorName;
   @Uint32() external int InitiatorPortNumber;
-  external __byte__ SymbolicName;
-  external __byte__ Address;
+  @Array(129)
+  external Array<Int8> SymbolicName;
+  @Array(129)
+  external Array<Int8> Address;
   @Uint16() external int Socket;
 }
 
 class ISCSI_TARGET_PORTAL_INFO_EXW extends Struct {
-  external __ushort__ InitiatorName;
+  @Array(129)
+  external Array<Uint16> InitiatorName;
   @Uint32() external int InitiatorPortNumber;
-  external __ushort__ SymbolicName;
-  external __ushort__ Address;
+  @Array(129)
+  external Array<Uint16> SymbolicName;
+  @Array(129)
+  external Array<Uint16> Address;
   @Uint16() external int Socket;
   @Uint64() external int SecurityFlags;
   external ISCSI_LOGIN_OPTIONS LoginOptions;
 }
 
 class ISCSI_TARGET_PORTAL_INFO_EXA extends Struct {
-  external __byte__ InitiatorName;
+  @Array(129)
+  external Array<Int8> InitiatorName;
   @Uint32() external int InitiatorPortNumber;
-  external __byte__ SymbolicName;
-  external __byte__ Address;
+  @Array(129)
+  external Array<Int8> SymbolicName;
+  @Array(129)
+  external Array<Int8> Address;
   @Uint16() external int Socket;
   @Uint64() external int SecurityFlags;
   external ISCSI_LOGIN_OPTIONS LoginOptions;
@@ -758,12 +823,14 @@ class ISCSI_TARGET_PORTAL_INFO_EXA extends Struct {
 
 class ISCSI_TARGET_PORTAL_GROUPW extends Struct {
   @Uint32() external int Count;
-  external ISCSI_TARGET_PORTALW Portals;
+  @Array(1)
+  external Array<ISCSI_TARGET_PORTALW> Portals;
 }
 
 class ISCSI_TARGET_PORTAL_GROUPA extends Struct {
   @Uint32() external int Count;
-  external ISCSI_TARGET_PORTALA Portals;
+  @Array(1)
+  external Array<ISCSI_TARGET_PORTALA> Portals;
 }
 
 class ISCSI_CONNECTION_INFOW extends Struct {
@@ -772,7 +839,8 @@ class ISCSI_CONNECTION_INFOW extends Struct {
   external Pointer<Utf16> TargetAddress;
   @Uint16() external int InitiatorSocket;
   @Uint16() external int TargetSocket;
-  external __ubyte__ CID;
+  @Array(2)
+  external Array<Uint8> CID;
 }
 
 class ISCSI_SESSION_INFOW extends Struct {
@@ -780,8 +848,10 @@ class ISCSI_SESSION_INFOW extends Struct {
   external Pointer<Utf16> InitiatorName;
   external Pointer<Utf16> TargetNodeName;
   external Pointer<Utf16> TargetName;
-  external __ubyte__ ISID;
-  external __ubyte__ TSID;
+  @Array(6)
+  external Array<Uint8> ISID;
+  @Array(2)
+  external Array<Uint8> TSID;
   @Uint32() external int ConnectionCount;
   external Pointer<ISCSI_CONNECTION_INFO> Connections;
 }
@@ -792,7 +862,8 @@ class ISCSI_CONNECTION_INFOA extends Struct {
   external Pointer<Utf8> TargetAddress;
   @Uint16() external int InitiatorSocket;
   @Uint16() external int TargetSocket;
-  external __ubyte__ CID;
+  @Array(2)
+  external Array<Uint8> CID;
 }
 
 class ISCSI_SESSION_INFOA extends Struct {
@@ -800,8 +871,10 @@ class ISCSI_SESSION_INFOA extends Struct {
   external Pointer<Utf8> InitiatorName;
   external Pointer<Utf8> TargetNodeName;
   external Pointer<Utf8> TargetName;
-  external __ubyte__ ISID;
-  external __ubyte__ TSID;
+  @Array(6)
+  external Array<Uint8> ISID;
+  @Array(2)
+  external Array<Uint8> TSID;
   @Uint32() external int ConnectionCount;
   external Pointer<ISCSI_CONNECTION_INFOA> Connections;
 }
@@ -835,31 +908,41 @@ class ISCSI_SESSION_INFO_EX extends Struct {
 }
 
 class ISCSI_DEVICE_ON_SESSIONW extends Struct {
-  external __ushort__ InitiatorName;
-  external __ushort__ TargetName;
+  @Array(129)
+  external Array<Uint16> InitiatorName;
+  @Array(128)
+  external Array<Uint16> TargetName;
   external SCSI_ADDRESS ScsiAddress;
   external GUID DeviceInterfaceType;
-  external __ushort__ DeviceInterfaceName;
-  external __ushort__ LegacyName;
+  @Array(129)
+  external Array<Uint16> DeviceInterfaceName;
+  @Array(129)
+  external Array<Uint16> LegacyName;
   external STORAGE_DEVICE_NUMBER StorageDeviceNumber;
   @Uint32() external int DeviceInstance;
 }
 
 class ISCSI_DEVICE_ON_SESSIONA extends Struct {
-  external __byte__ InitiatorName;
-  external __byte__ TargetName;
+  @Array(129)
+  external Array<Int8> InitiatorName;
+  @Array(128)
+  external Array<Int8> TargetName;
   external SCSI_ADDRESS ScsiAddress;
   external GUID DeviceInterfaceType;
-  external __byte__ DeviceInterfaceName;
-  external __byte__ LegacyName;
+  @Array(129)
+  external Array<Int8> DeviceInterfaceName;
+  @Array(129)
+  external Array<Int8> LegacyName;
   external STORAGE_DEVICE_NUMBER StorageDeviceNumber;
   @Uint32() external int DeviceInstance;
 }
 
 class PERSISTENT_ISCSI_LOGIN_INFOW extends Struct {
-  external __ushort__ TargetName;
+  @Array(128)
+  external Array<Uint16> TargetName;
   @Uint8() external int IsInformationalSession;
-  external __ushort__ InitiatorInstance;
+  @Array(129)
+  external Array<Uint16> InitiatorInstance;
   @Uint32() external int InitiatorPortNumber;
   external ISCSI_TARGET_PORTALW TargetPortal;
   @Uint64() external int SecurityFlags;
@@ -868,9 +951,11 @@ class PERSISTENT_ISCSI_LOGIN_INFOW extends Struct {
 }
 
 class PERSISTENT_ISCSI_LOGIN_INFOA extends Struct {
-  external __byte__ TargetName;
+  @Array(128)
+  external Array<Int8> TargetName;
   @Uint8() external int IsInformationalSession;
-  external __byte__ InitiatorInstance;
+  @Array(129)
+  external Array<Int8> InitiatorInstance;
   @Uint32() external int InitiatorPortNumber;
   external ISCSI_TARGET_PORTALA TargetPortal;
   @Uint64() external int SecurityFlags;

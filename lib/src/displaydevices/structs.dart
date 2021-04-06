@@ -43,42 +43,9 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class RECT extends Struct {
-  @Int32() external int left;
-  @Int32() external int top;
-  @Int32() external int right;
-  @Int32() external int bottom;
-}
-
-class RECTL extends Struct {
-  @Int32() external int left;
-  @Int32() external int top;
-  @Int32() external int right;
-  @Int32() external int bottom;
-}
-
-class POINT extends Struct {
-  @Int32() external int x;
-  @Int32() external int y;
-}
-
-class POINTL extends Struct {
-  @Int32() external int x;
-  @Int32() external int y;
-}
-
-class SIZE extends Struct {
-  @Int32() external int cx;
-  @Int32() external int cy;
-}
-
-class POINTS extends Struct {
-  @Int16() external int x;
-  @Int16() external int y;
-}
-
 class DEVMODEW extends Struct {
-  external __ushort__ dmDeviceName;
+  @Array(32)
+  external Array<Uint16> dmDeviceName;
   @Uint16() external int dmSpecVersion;
   @Uint16() external int dmDriverVersion;
   @Uint16() external int dmSize;
@@ -90,7 +57,8 @@ class DEVMODEW extends Struct {
   @Int16() external int dmYResolution;
   @Int16() external int dmTTOption;
   @Int16() external int dmCollate;
-  external __ushort__ dmFormName;
+  @Array(32)
+  external Array<Uint16> dmFormName;
   @Uint16() external int dmLogPixels;
   @Uint32() external int dmBitsPerPel;
   @Uint32() external int dmPelsWidth;
@@ -186,7 +154,8 @@ class DISPLAYCONFIG_DEVICE_INFO_HEADER extends Struct {
 
 class DISPLAYCONFIG_SOURCE_DEVICE_NAME extends Struct {
   external DISPLAYCONFIG_DEVICE_INFO_HEADER header;
-  external __ushort__ viewGdiDeviceName;
+  @Array(32)
+  external Array<Uint16> viewGdiDeviceName;
 }
 
 class DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS extends Struct {
@@ -200,8 +169,10 @@ class DISPLAYCONFIG_TARGET_DEVICE_NAME extends Struct {
   @Uint16() external int edidManufactureId;
   @Uint16() external int edidProductCodeId;
   @Uint32() external int connectorInstance;
-  external __ushort__ monitorFriendlyDeviceName;
-  external __ushort__ monitorDevicePath;
+  @Array(64)
+  external Array<Uint16> monitorFriendlyDeviceName;
+  @Array(128)
+  external Array<Uint16> monitorDevicePath;
 }
 
 class DISPLAYCONFIG_TARGET_PREFERRED_MODE extends Struct {
@@ -213,7 +184,8 @@ class DISPLAYCONFIG_TARGET_PREFERRED_MODE extends Struct {
 
 class DISPLAYCONFIG_ADAPTER_NAME extends Struct {
   external DISPLAYCONFIG_DEVICE_INFO_HEADER header;
-  external __ushort__ adapterDevicePath;
+  @Array(128)
+  external Array<Uint16> adapterDevicePath;
 }
 
 class DISPLAYCONFIG_TARGET_BASE_TYPE extends Struct {
@@ -231,30 +203,38 @@ class DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION extends Struct {
   @Uint32() external int Anonymous;
 }
 
-class VIDEOPARAMETERS extends Struct {
-  external GUID Guid;
-  @Uint32() external int dwOffset;
-  @Uint32() external int dwCommand;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwMode;
-  @Uint32() external int dwTVStandard;
-  @Uint32() external int dwAvailableModes;
-  @Uint32() external int dwAvailableTVStandard;
-  @Uint32() external int dwFlickerFilter;
-  @Uint32() external int dwOverScanX;
-  @Uint32() external int dwOverScanY;
-  @Uint32() external int dwMaxUnscaledX;
-  @Uint32() external int dwMaxUnscaledY;
-  @Uint32() external int dwPositionX;
-  @Uint32() external int dwPositionY;
-  @Uint32() external int dwBrightness;
-  @Uint32() external int dwContrast;
-  @Uint32() external int dwCPType;
-  @Uint32() external int dwCPCommand;
-  @Uint32() external int dwCPStandard;
-  @Uint32() external int dwCPKey;
-  @Uint32() external int bCP_APSTriggerBits;
-  external __ubyte__ bOEMCopyProtection;
+class RECT extends Struct {
+  @Int32() external int left;
+  @Int32() external int top;
+  @Int32() external int right;
+  @Int32() external int bottom;
+}
+
+class RECTL extends Struct {
+  @Int32() external int left;
+  @Int32() external int top;
+  @Int32() external int right;
+  @Int32() external int bottom;
+}
+
+class POINT extends Struct {
+  @Int32() external int x;
+  @Int32() external int y;
+}
+
+class POINTL extends Struct {
+  @Int32() external int x;
+  @Int32() external int y;
+}
+
+class SIZE extends Struct {
+  @Int32() external int cx;
+  @Int32() external int cy;
+}
+
+class POINTS extends Struct {
+  @Int16() external int x;
+  @Int16() external int y;
 }
 
 class DDVIDEOPORTCAPS extends Struct {
@@ -465,7 +445,8 @@ class DD_NONLOCALVIDMEMCAPS extends Struct {
   @Uint32() external int dwNLVBCaps2;
   @Uint32() external int dwNLVBCKeyCaps;
   @Uint32() external int dwNLVBFXCaps;
-  external __uint__ dwNLVBRops;
+  @Array(8)
+  external Array<Uint32> dwNLVBRops;
 }
 
 class DD_PALETTE_GLOBAL extends Struct {
@@ -592,7 +573,8 @@ class DD_MOTIONCOMP_LOCAL extends Struct {
 class DD_MORESURFACECAPS extends Struct {
   @Uint32() external int dwSize;
   external DDSCAPSEX ddsCapsMore;
-  external ____ ddsExtendedHeapRestrictions;
+  @Array(1)
+  external Array<Uint32> ddsExtendedHeapRestrictions;
 }
 
 class DD_STEREOMODE extends Struct {
@@ -1177,7 +1159,8 @@ class FD_DEVICEMETRICS extends Struct {
   @Int32() external int lMinA;
   @Int32() external int lMinC;
   @Int32() external int lMinD;
-  external __int__ alReserved;
+  @Array(1)
+  external Array<Int32> alReserved;
 }
 
 class WCRUN extends Struct {
@@ -1191,14 +1174,16 @@ class FD_GLYPHSET extends Struct {
   @Uint32() external int flAccel;
   @Uint32() external int cGlyphsSupported;
   @Uint32() external int cRuns;
-  external WCRUN awcrun;
+  @Array(1)
+  external Array<WCRUN> awcrun;
 }
 
 class FD_GLYPHATTR extends Struct {
   @Uint32() external int cjThis;
   @Uint32() external int cGlyphs;
   @Uint32() external int iMode;
-  external __ubyte__ aGlyphAttr;
+  @Array(1)
+  external Array<Uint8> aGlyphAttr;
 }
 
 class FD_KERNINGPAIR extends Struct {
@@ -1281,7 +1266,8 @@ class IFIMETRICS extends Struct {
   external POINTL ptlAspect;
   external POINTL ptlCaret;
   external RECTL rclFontBox;
-  external __ubyte__ achVendId;
+  @Array(4)
+  external Array<Uint8> achVendId;
   @Uint32() external int cKerningPairs;
   @Uint32() external int ulPanoseCulture;
   external PANOSE panose;
@@ -1294,7 +1280,8 @@ class IFIEXTRA extends Struct {
   @Uint32() external int cig;
   @Int32() external int dpDesignVector;
   @Int32() external int dpAxesInfoW;
-  external __uint__ aulReserved;
+  @Array(1)
+  external Array<Uint32> aulReserved;
 }
 
 class DRVFN extends Struct {
@@ -1496,13 +1483,15 @@ class XLATEOBJ extends Struct {
 
 class ENUMRECTS extends Struct {
   @Uint32() external int c;
-  external RECTL arcl;
+  @Array(1)
+  external Array<RECTL> arcl;
 }
 
 class GLYPHBITS extends Struct {
   external POINTL ptlOrigin;
   external SIZE sizlBitmap;
-  external __ubyte__ aj;
+  @Array(1)
+  external Array<Uint8> aj;
 }
 
 class GLYPHDEF extends Struct {
@@ -1563,7 +1552,8 @@ class CLIPLINE extends Struct {
   external POINTFIX ptfxB;
   @Int32() external int lStyleState;
   @Uint32() external int c;
-  external RUN arun;
+  @Array(1)
+  external Array<RUN> arun;
 }
 
 class PERBANDINFO extends Struct {
@@ -1574,9 +1564,12 @@ class PERBANDINFO extends Struct {
 }
 
 class GAMMARAMP extends Struct {
-  external __ushort__ Red;
-  external __ushort__ Green;
-  external __ushort__ Blue;
+  @Array(129)
+  external Array<Uint16> Red;
+  @Array(129)
+  external Array<Uint16> Green;
+  @Array(129)
+  external Array<Uint16> Blue;
 }
 
 class DEVHTINFO extends Struct {
@@ -1623,6 +1616,33 @@ class ENG_TIME_FIELDS extends Struct {
   @Uint16() external int usSecond;
   @Uint16() external int usMilliseconds;
   @Uint16() external int usWeekday;
+}
+
+class VIDEOPARAMETERS extends Struct {
+  external GUID Guid;
+  @Uint32() external int dwOffset;
+  @Uint32() external int dwCommand;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwMode;
+  @Uint32() external int dwTVStandard;
+  @Uint32() external int dwAvailableModes;
+  @Uint32() external int dwAvailableTVStandard;
+  @Uint32() external int dwFlickerFilter;
+  @Uint32() external int dwOverScanX;
+  @Uint32() external int dwOverScanY;
+  @Uint32() external int dwMaxUnscaledX;
+  @Uint32() external int dwMaxUnscaledY;
+  @Uint32() external int dwPositionX;
+  @Uint32() external int dwPositionY;
+  @Uint32() external int dwBrightness;
+  @Uint32() external int dwContrast;
+  @Uint32() external int dwCPType;
+  @Uint32() external int dwCPCommand;
+  @Uint32() external int dwCPStandard;
+  @Uint32() external int dwCPKey;
+  @Uint32() external int bCP_APSTriggerBits;
+  @Array(129)
+  external Array<Uint8> bOEMCopyProtection;
 }
 
 class DDKERNELCAPS extends Struct {
@@ -1694,7 +1714,8 @@ class DDCORECAPS extends Struct {
   @Uint32() external int dwAlignBoundaryDest;
   @Uint32() external int dwAlignSizeDest;
   @Uint32() external int dwAlignStrideAlign;
-  external __uint__ dwRops;
+  @Array(8)
+  external Array<Uint32> dwRops;
   external DDSCAPS ddsCaps;
   @Uint32() external int dwMinOverlayStretch;
   @Uint32() external int dwMaxOverlayStretch;
@@ -1708,15 +1729,18 @@ class DDCORECAPS extends Struct {
   @Uint32() external int dwSVBCaps;
   @Uint32() external int dwSVBCKeyCaps;
   @Uint32() external int dwSVBFXCaps;
-  external __uint__ dwSVBRops;
+  @Array(8)
+  external Array<Uint32> dwSVBRops;
   @Uint32() external int dwVSBCaps;
   @Uint32() external int dwVSBCKeyCaps;
   @Uint32() external int dwVSBFXCaps;
-  external __uint__ dwVSBRops;
+  @Array(8)
+  external Array<Uint32> dwVSBRops;
   @Uint32() external int dwSSBCaps;
   @Uint32() external int dwSSBCKeyCaps;
   @Uint32() external int dwSSBFXCaps;
-  external __uint__ dwSSBRops;
+  @Array(8)
+  external Array<Uint32> dwSSBRops;
   @Uint32() external int dwMaxVideoPorts;
   @Uint32() external int dwCurrVideoPorts;
   @Uint32() external int dwSVBCaps2;

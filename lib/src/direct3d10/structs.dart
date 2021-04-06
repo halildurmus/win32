@@ -99,14 +99,16 @@ class D3D10_DEPTH_STENCIL_DESC extends Struct {
 
 class D3D10_BLEND_DESC extends Struct {
   @Int32() external int AlphaToCoverageEnable;
-  external ____ BlendEnable;
+  @Array(8)
+  external Array<Pointer<Int32>> BlendEnable;
   @Uint32() external int SrcBlend;
   @Uint32() external int DestBlend;
   @Uint32() external int BlendOp;
   @Uint32() external int SrcBlendAlpha;
   @Uint32() external int DestBlendAlpha;
   @Uint32() external int BlendOpAlpha;
-  external __ubyte__ RenderTargetWriteMask;
+  @Array(8)
+  external Array<Uint8> RenderTargetWriteMask;
 }
 
 class D3D10_RASTERIZER_DESC extends Struct {
@@ -326,7 +328,8 @@ class D3D10_SAMPLER_DESC extends Struct {
   @Float() external double MipLODBias;
   @Uint32() external int MaxAnisotropy;
   @Uint32() external int ComparisonFunc;
-  external __float__ BorderColor;
+  @Array(4)
+  external Array<Float> BorderColor;
   @Float() external double MinLOD;
   @Float() external double MaxLOD;
 }
@@ -470,18 +473,28 @@ class D3D10_SIGNATURE_PARAMETER_DESC extends Struct {
 
 class D3D10_STATE_BLOCK_MASK extends Struct {
   @Uint8() external int VS;
-  external __ubyte__ VSSamplers;
-  external __ubyte__ VSShaderResources;
-  external __ubyte__ VSConstantBuffers;
+  @Array(2)
+  external Array<Uint8> VSSamplers;
+  @Array(16)
+  external Array<Uint8> VSShaderResources;
+  @Array(2)
+  external Array<Uint8> VSConstantBuffers;
   @Uint8() external int GS;
-  external __ubyte__ GSSamplers;
-  external __ubyte__ GSShaderResources;
-  external __ubyte__ GSConstantBuffers;
+  @Array(2)
+  external Array<Uint8> GSSamplers;
+  @Array(16)
+  external Array<Uint8> GSShaderResources;
+  @Array(2)
+  external Array<Uint8> GSConstantBuffers;
   @Uint8() external int PS;
-  external __ubyte__ PSSamplers;
-  external __ubyte__ PSShaderResources;
-  external __ubyte__ PSConstantBuffers;
-  external __ubyte__ IAVertexBuffers;
+  @Array(2)
+  external Array<Uint8> PSSamplers;
+  @Array(16)
+  external Array<Uint8> PSShaderResources;
+  @Array(2)
+  external Array<Uint8> PSConstantBuffers;
+  @Array(2)
+  external Array<Uint8> IAVertexBuffers;
   @Uint8() external int IAIndexBuffer;
   @Uint8() external int IAInputLayout;
   @Uint8() external int IAPrimitiveTopology;
@@ -534,7 +547,8 @@ class D3D10_PASS_DESC extends Struct {
   @IntPtr() external int IAInputSignatureSize;
   @Uint32() external int StencilRef;
   @Uint32() external int SampleMask;
-  external __float__ BlendFactor;
+  @Array(4)
+  external Array<Float> BlendFactor;
 }
 
 class D3D10_PASS_SHADER_DESC extends Struct {
@@ -571,7 +585,8 @@ class D3D10_RENDER_TARGET_BLEND_DESC1 extends Struct {
 class D3D10_BLEND_DESC1 extends Struct {
   @Int32() external int AlphaToCoverageEnable;
   @Int32() external int IndependentBlendEnable;
-  external D3D10_RENDER_TARGET_BLEND_DESC1 RenderTarget;
+  @Array(8)
+  external Array<D3D10_RENDER_TARGET_BLEND_DESC1> RenderTarget;
 }
 
 class D3D10_TEXCUBE_ARRAY_SRV1 extends Struct {
@@ -651,8 +666,10 @@ class D3D10_SHADER_DEBUG_OUTPUTREG_INFO extends Struct {
   @Uint32() external int OutputRegisterSet;
   @Uint32() external int OutputReg;
   @Uint32() external int TempArrayReg;
-  external __uint__ OutputComponents;
-  external D3D10_SHADER_DEBUG_OUTPUTVAR OutputVars;
+  @Array(4)
+  external Array<Uint32> OutputComponents;
+  @Array(4)
+  external Array<D3D10_SHADER_DEBUG_OUTPUTVAR> OutputVars;
   @Uint32() external int IndexReg;
   @Uint32() external int IndexComp;
 }
@@ -661,7 +678,8 @@ class D3D10_SHADER_DEBUG_INST_INFO extends Struct {
   @Uint32() external int Id;
   @Uint32() external int Opcode;
   @Uint32() external int uOutputs;
-  external D3D10_SHADER_DEBUG_OUTPUTREG_INFO pOutputs;
+  @Array(2)
+  external Array<D3D10_SHADER_DEBUG_OUTPUTREG_INFO> pOutputs;
   @Uint32() external int TokenId;
   @Uint32() external int NestingLevel;
   @Uint32() external int Scopes;

@@ -59,6 +59,19 @@ class HDDEDATA extends Struct {
   @IntPtr() external int Value;
 }
 
+class METAFILEPICT extends Struct {
+  @Int32() external int mm;
+  @Int32() external int xExt;
+  @Int32() external int yExt;
+  @IntPtr() external int hMF;
+}
+
+class COPYDATASTRUCT extends Struct {
+  @IntPtr() external int dwData;
+  @Uint32() external int cbData;
+  external Pointer lpData;
+}
+
 class DDEACK extends Struct {
   @Uint16() external int _bitfield;
 }
@@ -71,13 +84,15 @@ class DDEADVISE extends Struct {
 class DDEDATA extends Struct {
   @Uint16() external int _bitfield;
   @Int16() external int cfFormat;
-  external __ubyte__ Value;
+  @Array(1)
+  external Array<Uint8> Value;
 }
 
 class DDEPOKE extends Struct {
   @Uint16() external int _bitfield;
   @Int16() external int cfFormat;
-  external __ubyte__ Value;
+  @Array(1)
+  external Array<Uint8> Value;
 }
 
 class DDELN extends Struct {
@@ -88,7 +103,8 @@ class DDELN extends Struct {
 class DDEUP extends Struct {
   @Uint16() external int _bitfield;
   @Int16() external int cfFormat;
-  external __ubyte__ rgb;
+  @Array(1)
+  external Array<Uint8> rgb;
 }
 
 class HSZPAIR extends Struct {
@@ -129,7 +145,8 @@ class DDEML_MSG_HOOK_DATA extends Struct {
   @IntPtr() external int uiLo;
   @IntPtr() external int uiHi;
   @Uint32() external int cbData;
-  external __uint__ Data;
+  @Array(8)
+  external Array<Uint32> Data;
 }
 
 class MONMSGSTRUCT extends Struct {
@@ -158,7 +175,8 @@ class MONCBSTRUCT extends Struct {
   @IntPtr() external int dwData2;
   external CONVCONTEXT cc;
   @Uint32() external int cbData;
-  external __uint__ Data;
+  @Array(8)
+  external Array<Uint32> Data;
 }
 
 class MONHSZSTRUCTA extends Struct {
@@ -167,7 +185,8 @@ class MONHSZSTRUCTA extends Struct {
   @Uint32() external int dwTime;
   @IntPtr() external int hsz;
   @IntPtr() external int hTask;
-  external __byte__ str;
+  @Array(1)
+  external Array<Int8> str;
 }
 
 class MONHSZSTRUCTW extends Struct {
@@ -176,7 +195,8 @@ class MONHSZSTRUCTW extends Struct {
   @Uint32() external int dwTime;
   @IntPtr() external int hsz;
   @IntPtr() external int hTask;
-  external __ushort__ str;
+  @Array(1)
+  external Array<Uint16> str;
 }
 
 class MONERRSTRUCT extends Struct {
@@ -210,18 +230,5 @@ class MONCONVSTRUCT extends Struct {
   @IntPtr() external int hszTopic;
   @IntPtr() external int hConvClient;
   @IntPtr() external int hConvServer;
-}
-
-class METAFILEPICT extends Struct {
-  @Int32() external int mm;
-  @Int32() external int xExt;
-  @Int32() external int yExt;
-  @IntPtr() external int hMF;
-}
-
-class COPYDATASTRUCT extends Struct {
-  @IntPtr() external int dwData;
-  @Uint32() external int cbData;
-  external Pointer lpData;
 }
 

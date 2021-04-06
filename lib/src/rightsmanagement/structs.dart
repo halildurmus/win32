@@ -79,9 +79,13 @@ class DRM_ACTSERV_INFO extends Struct {
 
 class DRM_CLIENT_VERSION_INFO extends Struct {
   @Uint32() external int uStructVersion;
-  external __uint__ dwVersion;
-  external __ushort__ wszHierarchy;
-  external __ushort__ wszProductId;
-  external __ushort__ wszProductDescription;
+  @Array(4)
+  external Array<Uint32> dwVersion;
+  @Array(129)
+  external Array<Uint16> wszHierarchy;
+  @Array(129)
+  external Array<Uint16> wszProductId;
+  @Array(129)
+  external Array<Uint16> wszProductDescription;
 }
 

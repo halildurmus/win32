@@ -55,28 +55,58 @@ class HSAVEDUILANGUAGES extends Struct {
   @IntPtr() external int Value;
 }
 
+class FONTSIGNATURE extends Struct {
+  @Array(4)
+  external Array<Uint32> fsUsb;
+  @Array(2)
+  external Array<Uint32> fsCsb;
+}
+
+class CHARSETINFO extends Struct {
+  @Uint32() external int ciCharset;
+  @Uint32() external int ciACP;
+  external FONTSIGNATURE fs;
+}
+
+class LOCALESIGNATURE extends Struct {
+  @Array(4)
+  external Array<Uint32> lsUsb;
+  @Array(2)
+  external Array<Uint32> lsCsbDefault;
+  @Array(2)
+  external Array<Uint32> lsCsbSupported;
+}
+
 class CPINFO extends Struct {
   @Uint32() external int MaxCharSize;
-  external __ubyte__ DefaultChar;
-  external __ubyte__ LeadByte;
+  @Array(2)
+  external Array<Uint8> DefaultChar;
+  @Array(12)
+  external Array<Uint8> LeadByte;
 }
 
 class CPINFOEXA extends Struct {
   @Uint32() external int MaxCharSize;
-  external __ubyte__ DefaultChar;
-  external __ubyte__ LeadByte;
+  @Array(2)
+  external Array<Uint8> DefaultChar;
+  @Array(12)
+  external Array<Uint8> LeadByte;
   @Uint16() external int UnicodeDefaultChar;
   @Uint32() external int CodePage;
-  external __byte__ CodePageName;
+  @Array(129)
+  external Array<Int8> CodePageName;
 }
 
 class CPINFOEXW extends Struct {
   @Uint32() external int MaxCharSize;
-  external __ubyte__ DefaultChar;
-  external __ubyte__ LeadByte;
+  @Array(2)
+  external Array<Uint8> DefaultChar;
+  @Array(12)
+  external Array<Uint8> LeadByte;
   @Uint16() external int UnicodeDefaultChar;
   @Uint32() external int CodePage;
-  external __ushort__ CodePageName;
+  @Array(129)
+  external Array<Uint16> CodePageName;
 }
 
 class NUMBERFMTA extends Struct {
@@ -139,8 +169,10 @@ class FILEMUIINFO extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwVersion;
   @Uint32() external int dwFileType;
-  external __ubyte__ pChecksum;
-  external __ubyte__ pServiceChecksum;
+  @Array(16)
+  external Array<Uint8> pChecksum;
+  @Array(16)
+  external Array<Uint8> pServiceChecksum;
   @Uint32() external int dwLanguageNameOffset;
   @Uint32() external int dwTypeIDMainSize;
   @Uint32() external int dwTypeIDMainOffset;
@@ -148,7 +180,8 @@ class FILEMUIINFO extends Struct {
   @Uint32() external int dwTypeIDMUISize;
   @Uint32() external int dwTypeIDMUIOffset;
   @Uint32() external int dwTypeNameMUIOffset;
-  external __ubyte__ abBuffer;
+  @Array(8)
+  external Array<Uint8> abBuffer;
 }
 
 class COMPOSITIONFORM extends Struct {
@@ -171,7 +204,8 @@ class CANDIDATELIST extends Struct {
   @Uint32() external int dwSelection;
   @Uint32() external int dwPageStart;
   @Uint32() external int dwPageSize;
-  external __uint__ dwOffset;
+  @Array(1)
+  external Array<Uint32> dwOffset;
 }
 
 class REGISTERWORDA extends Struct {
@@ -197,12 +231,14 @@ class RECONVERTSTRING extends Struct {
 
 class STYLEBUFA extends Struct {
   @Uint32() external int dwStyle;
-  external __byte__ szDescription;
+  @Array(32)
+  external Array<Int8> szDescription;
 }
 
 class STYLEBUFW extends Struct {
   @Uint32() external int dwStyle;
-  external __ushort__ szDescription;
+  @Array(32)
+  external Array<Uint16> szDescription;
 }
 
 class IMEMENUITEMINFOA extends Struct {
@@ -213,7 +249,8 @@ class IMEMENUITEMINFOA extends Struct {
   @IntPtr() external int hbmpChecked;
   @IntPtr() external int hbmpUnchecked;
   @Uint32() external int dwItemData;
-  external __byte__ szString;
+  @Array(80)
+  external Array<Int8> szString;
   @IntPtr() external int hbmpItem;
 }
 
@@ -225,7 +262,8 @@ class IMEMENUITEMINFOW extends Struct {
   @IntPtr() external int hbmpChecked;
   @IntPtr() external int hbmpUnchecked;
   @Uint32() external int dwItemData;
-  external __ushort__ szString;
+  @Array(80)
+  external Array<Uint16> szString;
   @IntPtr() external int hbmpItem;
 }
 
@@ -362,7 +400,8 @@ class IMEWRD extends Struct {
   external Pointer<Utf16> pwchReading;
   external Pointer<Utf16> pwchDisplay;
   @Uint32() external int Anonymous;
-  external __uint__ rgulAttrs;
+  @Array(2)
+  external Array<Uint32> rgulAttrs;
   @Int32() external int cbComment;
   @Uint32() external int uct;
   external Pointer pvComment;
@@ -371,9 +410,12 @@ class IMEWRD extends Struct {
 class IMESHF extends Struct {
   @Uint16() external int cbShf;
   @Uint16() external int verDic;
-  external __byte__ szTitle;
-  external __byte__ szDescription;
-  external __byte__ szCopyright;
+  @Array(48)
+  external Array<Int8> szTitle;
+  @Array(129)
+  external Array<Int8> szDescription;
+  @Array(128)
+  external Array<Int8> szCopyright;
 }
 
 class POSTBL extends Struct {
@@ -433,7 +475,8 @@ class IMEKMSFUNCDESC extends Struct {
   @Int32() external int cbSize;
   @Uint16() external int idLang;
   @Uint32() external int dwControl;
-  external __ushort__ pwszDescription;
+  @Array(128)
+  external Array<Uint16> pwszDescription;
 }
 
 class COMPOSITIONSTRING extends Struct {
@@ -482,13 +525,15 @@ class TRANSMSG extends Struct {
 
 class TRANSMSGLIST extends Struct {
   @Uint32() external int uMsgCount;
-  external TRANSMSG TransMsg;
+  @Array(1)
+  external Array<TRANSMSG> TransMsg;
 }
 
 class CANDIDATEINFO extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwCount;
-  external __uint__ dwOffset;
+  @Array(32)
+  external Array<Uint32> dwOffset;
   @Uint32() external int dwPrivateSize;
   @Uint32() external int dwPrivateOffset;
 }
@@ -502,7 +547,8 @@ class INPUTCONTEXT extends Struct {
   @Uint32() external int fdwSentence;
   @Uint32() external int lfFont;
   external COMPOSITIONFORM cfCompForm;
-  external CANDIDATEFORM cfCandForm;
+  @Array(4)
+  external Array<CANDIDATEFORM> cfCandForm;
   @IntPtr() external int hCompStr;
   @IntPtr() external int hCandInfo;
   @IntPtr() external int hGuideLine;
@@ -510,7 +556,8 @@ class INPUTCONTEXT extends Struct {
   @Uint32() external int dwNumMsgBuf;
   @IntPtr() external int hMsgBuf;
   @Uint32() external int fdwInit;
-  external __uint__ dwReserve;
+  @Array(3)
+  external Array<Uint32> dwReserve;
 }
 
 class IMEINFO extends Struct {
@@ -525,7 +572,8 @@ class IMEINFO extends Struct {
 
 class SOFTKBDDATA extends Struct {
   @Uint32() external int uCount;
-  external __ushort__ wCode;
+  @Array(129)
+  external Array<Uint16> wCode;
 }
 
 class APPLETIDLIST extends Struct {
@@ -535,7 +583,8 @@ class APPLETIDLIST extends Struct {
 
 class IMESTRINGCANDIDATE extends Struct {
   @Uint32() external int uCount;
-  external ____ lpwstr;
+  @Array(1)
+  external Array<Pointer<Uint16>> lpwstr;
 }
 
 class IMEITEM extends Struct {
@@ -546,7 +595,8 @@ class IMEITEM extends Struct {
 
 class IMEITEMCANDIDATE extends Struct {
   @Uint32() external int uCount;
-  external IMEITEM imeItem;
+  @Array(1)
+  external Array<IMEITEM> imeItem;
 }
 
 class tabIMESTRINGINFO extends Struct {
@@ -557,7 +607,8 @@ class tabIMESTRINGINFO extends Struct {
 class tabIMEFAREASTINFO extends Struct {
   @Uint32() external int dwSize;
   @Uint32() external int dwType;
-  external __uint__ dwData;
+  @Array(1)
+  external Array<Uint32> dwData;
 }
 
 class IMESTRINGCANDIDATEINFO extends Struct {
@@ -566,7 +617,8 @@ class IMESTRINGCANDIDATEINFO extends Struct {
   @Uint32() external int fInfoMask;
   @Int32() external int iSelIndex;
   @Uint32() external int uCount;
-  external ____ lpwstr;
+  @Array(1)
+  external Array<Pointer<Uint16>> lpwstr;
 }
 
 class IMECOMPOSITIONSTRINGINFO extends Struct {
@@ -585,8 +637,10 @@ class IMECHARINFO extends Struct {
 
 class IMEAPPLETCFG extends Struct {
   @Uint32() external int dwConfig;
-  external __ushort__ wchTitle;
-  external __ushort__ wchTitleFontFace;
+  @Array(64)
+  external Array<Uint16> wchTitle;
+  @Array(32)
+  external Array<Uint16> wchTitleFontFace;
   @Uint32() external int dwCharSet;
   @Int32() external int iCategory;
   @IntPtr() external int hIcon;
@@ -744,8 +798,8 @@ class UConverterFromUnicodeArgs extends Struct {
   external Pointer<UConverter> converter;
   external Pointer<Uint16> source;
   external Pointer<Uint16> sourceLimit;
-  external Pointer<Int8> target;
-  external Pointer<Int8> targetLimit;
+  external Pointer<Utf8> target;
+  external Pointer<Utf8> targetLimit;
   external Pointer<Int32> offsets;
 }
 
@@ -753,8 +807,8 @@ class UConverterToUnicodeArgs extends Struct {
   @Uint16() external int size;
   @Int8() external int flush;
   external Pointer<UConverter> converter;
-  external Pointer<Int8> source;
-  external Pointer<Int8> sourceLimit;
+  external Pointer<Utf8> source;
+  external Pointer<Utf8> sourceLimit;
   external Pointer<Uint16> target;
   external Pointer<Uint16> targetLimit;
   external Pointer<Int32> offsets;
@@ -819,7 +873,8 @@ class USerializedSet extends Struct {
   external Pointer<Uint16> array;
   @Int32() external int bmpLength;
   @Int32() external int length;
-  external __ushort__ staticArray;
+  @Array(8)
+  external Array<Uint16> staticArray;
 }
 
 class UNormalizer2 extends Struct {
@@ -837,8 +892,10 @@ class UCaseMap extends Struct {
 class UParseError extends Struct {
   @Int32() external int line;
   @Int32() external int offset;
-  external __ushort__ preContext;
-  external __ushort__ postContext;
+  @Array(16)
+  external Array<Uint16> preContext;
+  @Array(16)
+  external Array<Uint16> postContext;
 }
 
 class UStringPrepProfile extends Struct {
@@ -924,22 +981,5 @@ class UTransPosition extends Struct {
 }
 
 class CActiveIMM extends Struct {
-}
-
-class FONTSIGNATURE extends Struct {
-  external __uint__ fsUsb;
-  external __uint__ fsCsb;
-}
-
-class CHARSETINFO extends Struct {
-  @Uint32() external int ciCharset;
-  @Uint32() external int ciACP;
-  external FONTSIGNATURE fs;
-}
-
-class LOCALESIGNATURE extends Struct {
-  external __uint__ lsUsb;
-  external __uint__ lsCsbDefault;
-  external __uint__ lsCsbSupported;
 }
 

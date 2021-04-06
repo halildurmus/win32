@@ -1,4 +1,318 @@
 /// {@category Enum}
+class AccSetRunningUtilityState_dwUtilityStateFlags {
+  static const ANRUS_ON_SCREEN_KEYBOARD_ACTIVE = 0x00000001;
+  static const ANRUS_TOUCH_MODIFICATION_ACTIVE = 0x00000002;
+  static const ANRUS_PRIORITY_AUDIO_ACTIVE = 0x00000004;
+  static const ANRUS_PRIORITY_AUDIO_ACTIVE_NODUCK = 0x00000008;
+}
+
+/// {@category Enum}
+class ActiveEnd {
+  static const ActiveEnd_None = 0x00000000;
+  static const ActiveEnd_Start = 0x00000001;
+  static const ActiveEnd_End = 0x00000002;
+}
+
+/// {@category Enum}
+class AnimationStyle {
+  static const AnimationStyle_None = 0x00000000;
+  static const AnimationStyle_LasVegasLights = 0x00000001;
+  static const AnimationStyle_BlinkingBackground = 0x00000002;
+  static const AnimationStyle_SparkleText = 0x00000003;
+  static const AnimationStyle_MarchingBlackAnts = 0x00000004;
+  static const AnimationStyle_MarchingRedAnts = 0x00000005;
+  static const AnimationStyle_Shimmer = 0x00000006;
+  static const AnimationStyle_Other = 0xffffffff;
+}
+
+/// {@category Enum}
+class AnnoScope {
+  static const ANNO_THIS = 0x00000000;
+  static const ANNO_CONTAINER = 0x00000001;
+}
+
+/// {@category Enum}
+class AsyncContentLoadedState {
+  static const AsyncContentLoadedState_Beginning = 0x00000000;
+  static const AsyncContentLoadedState_Progress = 0x00000001;
+  static const AsyncContentLoadedState_Completed = 0x00000002;
+}
+
+/// {@category Enum}
+class AutomationElementMode {
+  static const AutomationElementMode_None = 0x00000000;
+  static const AutomationElementMode_Full = 0x00000001;
+}
+
+/// {@category Enum}
+class AutomationIdentifierType {
+  static const AutomationIdentifierType_Property = 0x00000000;
+  static const AutomationIdentifierType_Pattern = 0x00000001;
+  static const AutomationIdentifierType_Event = 0x00000002;
+  static const AutomationIdentifierType_ControlType = 0x00000003;
+  static const AutomationIdentifierType_TextAttribute = 0x00000004;
+  static const AutomationIdentifierType_LandmarkType = 0x00000005;
+  static const AutomationIdentifierType_Annotation = 0x00000006;
+  static const AutomationIdentifierType_Changes = 0x00000007;
+  static const AutomationIdentifierType_Style = 0x00000008;
+}
+
+/// {@category Enum}
+class BulletStyle {
+  static const BulletStyle_None = 0x00000000;
+  static const BulletStyle_HollowRoundBullet = 0x00000001;
+  static const BulletStyle_FilledRoundBullet = 0x00000002;
+  static const BulletStyle_HollowSquareBullet = 0x00000003;
+  static const BulletStyle_FilledSquareBullet = 0x00000004;
+  static const BulletStyle_DashBullet = 0x00000005;
+  static const BulletStyle_Other = 0xffffffff;
+}
+
+/// {@category Enum}
+class CapStyle {
+  static const CapStyle_None = 0x00000000;
+  static const CapStyle_SmallCap = 0x00000001;
+  static const CapStyle_AllCap = 0x00000002;
+  static const CapStyle_AllPetiteCaps = 0x00000003;
+  static const CapStyle_PetiteCaps = 0x00000004;
+  static const CapStyle_Unicase = 0x00000005;
+  static const CapStyle_Titling = 0x00000006;
+  static const CapStyle_Other = 0xffffffff;
+}
+
+/// {@category Enum}
+class CaretBidiMode {
+  static const CaretBidiMode_LTR = 0x00000000;
+  static const CaretBidiMode_RTL = 0x00000001;
+}
+
+/// {@category Enum}
+class CaretPosition {
+  static const CaretPosition_Unknown = 0x00000000;
+  static const CaretPosition_EndOfLine = 0x00000001;
+  static const CaretPosition_BeginningOfLine = 0x00000002;
+}
+
+/// {@category Enum}
+class CoalesceEventsOptions {
+  static const CoalesceEventsOptions_Disabled = 0x00000000;
+  static const CoalesceEventsOptions_Enabled = 0x00000001;
+}
+
+/// {@category Enum}
+class ConditionType {
+  static const ConditionType_True = 0x00000000;
+  static const ConditionType_False = 0x00000001;
+  static const ConditionType_Property = 0x00000002;
+  static const ConditionType_And = 0x00000003;
+  static const ConditionType_Or = 0x00000004;
+  static const ConditionType_Not = 0x00000005;
+}
+
+/// {@category Enum}
+class ConnectionRecoveryBehaviorOptions {
+  static const ConnectionRecoveryBehaviorOptions_Disabled = 0x00000000;
+  static const ConnectionRecoveryBehaviorOptions_Enabled = 0x00000001;
+}
+
+/// {@category Enum}
+class DockPosition {
+  static const DockPosition_Top = 0x00000000;
+  static const DockPosition_Left = 0x00000001;
+  static const DockPosition_Bottom = 0x00000002;
+  static const DockPosition_Right = 0x00000003;
+  static const DockPosition_Fill = 0x00000004;
+  static const DockPosition_None = 0x00000005;
+}
+
+/// {@category Enum}
+class EventArgsType {
+  static const EventArgsType_Simple = 0x00000000;
+  static const EventArgsType_PropertyChanged = 0x00000001;
+  static const EventArgsType_StructureChanged = 0x00000002;
+  static const EventArgsType_AsyncContentLoaded = 0x00000003;
+  static const EventArgsType_WindowClosed = 0x00000004;
+  static const EventArgsType_TextEditTextChanged = 0x00000005;
+  static const EventArgsType_Changes = 0x00000006;
+  static const EventArgsType_Notification = 0x00000007;
+  static const EventArgsType_ActiveTextPositionChanged = 0x00000008;
+  static const EventArgsType_StructuredMarkup = 0x00000009;
+}
+
+/// {@category Enum}
+class ExpandCollapseState {
+  static const ExpandCollapseState_Collapsed = 0x00000000;
+  static const ExpandCollapseState_Expanded = 0x00000001;
+  static const ExpandCollapseState_PartiallyExpanded = 0x00000002;
+  static const ExpandCollapseState_LeafNode = 0x00000003;
+}
+
+/// {@category Enum}
+class FillType {
+  static const FillType_None = 0x00000000;
+  static const FillType_Color = 0x00000001;
+  static const FillType_Gradient = 0x00000002;
+  static const FillType_Picture = 0x00000003;
+  static const FillType_Pattern = 0x00000004;
+}
+
+/// {@category Enum}
+class FlowDirections {
+  static const FlowDirections_Default = 0x00000000;
+  static const FlowDirections_RightToLeft = 0x00000001;
+  static const FlowDirections_BottomToTop = 0x00000002;
+  static const FlowDirections_Vertical = 0x00000004;
+}
+
+/// {@category Enum}
+class HIGHCONTRASTW_dwFlags {
+  static const HCF_HIGHCONTRASTON = 0x00000001;
+  static const HCF_AVAILABLE = 0x00000002;
+  static const HCF_HOTKEYACTIVE = 0x00000004;
+  static const HCF_CONFIRMHOTKEY = 0x00000008;
+  static const HCF_HOTKEYSOUND = 0x00000010;
+  static const HCF_INDICATOR = 0x00000020;
+  static const HCF_HOTKEYAVAILABLE = 0x00000040;
+  static const HCF_OPTION_NOTHEMECHANGE = 0x00001000;
+}
+
+/// {@category Enum}
+class HorizontalTextAlignment {
+  static const HorizontalTextAlignment_Left = 0x00000000;
+  static const HorizontalTextAlignment_Centered = 0x00000001;
+  static const HorizontalTextAlignment_Right = 0x00000002;
+  static const HorizontalTextAlignment_Justified = 0x00000003;
+}
+
+/// {@category Enum}
+class LiveSetting {
+  static const Off = 0x00000000;
+  static const Polite = 0x00000001;
+  static const Assertive = 0x00000002;
+}
+
+/// {@category Enum}
+class NavigateDirection {
+  static const NavigateDirection_Parent = 0x00000000;
+  static const NavigateDirection_NextSibling = 0x00000001;
+  static const NavigateDirection_PreviousSibling = 0x00000002;
+  static const NavigateDirection_FirstChild = 0x00000003;
+  static const NavigateDirection_LastChild = 0x00000004;
+}
+
+/// {@category Enum}
+class NormalizeState {
+  static const NormalizeState_None = 0x00000000;
+  static const NormalizeState_View = 0x00000001;
+  static const NormalizeState_Custom = 0x00000002;
+}
+
+/// {@category Enum}
+class NotificationKind {
+  static const NotificationKind_ItemAdded = 0x00000000;
+  static const NotificationKind_ItemRemoved = 0x00000001;
+  static const NotificationKind_ActionCompleted = 0x00000002;
+  static const NotificationKind_ActionAborted = 0x00000003;
+  static const NotificationKind_Other = 0x00000004;
+}
+
+/// {@category Enum}
+class NotificationProcessing {
+  static const NotificationProcessing_ImportantAll = 0x00000000;
+  static const NotificationProcessing_ImportantMostRecent = 0x00000001;
+  static const NotificationProcessing_All = 0x00000002;
+  static const NotificationProcessing_MostRecent = 0x00000003;
+  static const NotificationProcessing_CurrentThenMostRecent = 0x00000004;
+}
+
+/// {@category Enum}
+class OrientationType {
+  static const OrientationType_None = 0x00000000;
+  static const OrientationType_Horizontal = 0x00000001;
+  static const OrientationType_Vertical = 0x00000002;
+}
+
+/// {@category Enum}
+class OutlineStyles {
+  static const OutlineStyles_None = 0x00000000;
+  static const OutlineStyles_Outline = 0x00000001;
+  static const OutlineStyles_Shadow = 0x00000002;
+  static const OutlineStyles_Engraved = 0x00000004;
+  static const OutlineStyles_Embossed = 0x00000008;
+}
+
+/// {@category Enum}
+class PropertyConditionFlags {
+  static const PropertyConditionFlags_None = 0x00000000;
+  static const PropertyConditionFlags_IgnoreCase = 0x00000001;
+  static const PropertyConditionFlags_MatchSubstring = 0x00000002;
+}
+
+/// {@category Enum}
+class ProviderOptions {
+  static const ProviderOptions_ClientSideProvider = 0x00000001;
+  static const ProviderOptions_ServerSideProvider = 0x00000002;
+  static const ProviderOptions_NonClientAreaProvider = 0x00000004;
+  static const ProviderOptions_OverrideProvider = 0x00000008;
+  static const ProviderOptions_ProviderOwnsSetFocus = 0x00000010;
+  static const ProviderOptions_UseComThreading = 0x00000020;
+  static const ProviderOptions_RefuseNonClientSupport = 0x00000040;
+  static const ProviderOptions_HasNativeIAccessible = 0x00000080;
+  static const ProviderOptions_UseClientCoordinates = 0x00000100;
+}
+
+/// {@category Enum}
+class ProviderType {
+  static const ProviderType_BaseHwnd = 0x00000000;
+  static const ProviderType_Proxy = 0x00000001;
+  static const ProviderType_NonClientArea = 0x00000002;
+}
+
+/// {@category Enum}
+class RowOrColumnMajor {
+  static const RowOrColumnMajor_RowMajor = 0x00000000;
+  static const RowOrColumnMajor_ColumnMajor = 0x00000001;
+  static const RowOrColumnMajor_Indeterminate = 0x00000002;
+}
+
+/// {@category Enum}
+class SERIALKEYSW_dwFlags {
+  static const SERKF_AVAILABLE = 0x00000002;
+  static const SERKF_INDICATOR = 0x00000004;
+  static const SERKF_SERIALKEYSON = 0x00000001;
+}
+
+/// {@category Enum}
+class SOUNDSENTRYA_iFSTextEffect {
+  static const SSTF_BORDER = 0x00000002;
+  static const SSTF_CHARS = 0x00000001;
+  static const SSTF_DISPLAY = 0x00000003;
+  static const SSTF_NONE = 0x00000000;
+}
+
+/// {@category Enum}
+class SOUNDSENTRYA_iWindowsEffect {
+  static const SSWF_CUSTOM = 0x00000004;
+  static const SSWF_DISPLAY = 0x00000003;
+  static const SSWF_NONE = 0x00000000;
+  static const SSWF_TITLE = 0x00000001;
+  static const SSWF_WINDOW = 0x00000002;
+}
+
+/// {@category Enum}
+class SOUNDSENTRYW_iFSGrafEffect {
+  static const SSGF_DISPLAY = 0x00000003;
+  static const SSGF_NONE = 0x00000000;
+}
+
+/// {@category Enum}
+class SOUNDSENTRY_FLAGS {
+  static const SSF_SOUNDSENTRYON = 0x00000001;
+  static const SSF_AVAILABLE = 0x00000002;
+  static const SSF_INDICATOR = 0x00000004;
+}
+
+/// {@category Enum}
 class STICKYKEYS_FLAGS {
   static const SKF_STICKYKEYSON = 0x00000001;
   static const SKF_AVAILABLE = 0x00000002;
@@ -25,184 +339,6 @@ class STICKYKEYS_FLAGS {
   static const SKF_RSHIFTLOCKED = 0x00020000;
   static const SKF_LWINLOCKED = 0x00400000;
   static const SKF_RWINLOCKED = 0x00800000;
-}
-
-/// {@category Enum}
-class SOUNDSENTRY_FLAGS {
-  static const SSF_SOUNDSENTRYON = 0x00000001;
-  static const SSF_AVAILABLE = 0x00000002;
-  static const SSF_INDICATOR = 0x00000004;
-}
-
-/// {@category Enum}
-class AccSetRunningUtilityState_dwUtilityStateFlags {
-  static const ANRUS_ON_SCREEN_KEYBOARD_ACTIVE = 0x00000001;
-  static const ANRUS_TOUCH_MODIFICATION_ACTIVE = 0x00000002;
-  static const ANRUS_PRIORITY_AUDIO_ACTIVE = 0x00000004;
-  static const ANRUS_PRIORITY_AUDIO_ACTIVE_NODUCK = 0x00000008;
-}
-
-/// {@category Enum}
-class SOUNDSENTRYW_iFSGrafEffect {
-  static const SSGF_DISPLAY = 0x00000003;
-  static const SSGF_NONE = 0x00000000;
-}
-
-/// {@category Enum}
-class SERIALKEYSW_dwFlags {
-  static const SERKF_AVAILABLE = 0x00000002;
-  static const SERKF_INDICATOR = 0x00000004;
-  static const SERKF_SERIALKEYSON = 0x00000001;
-}
-
-/// {@category Enum}
-class HIGHCONTRASTW_dwFlags {
-  static const HCF_HIGHCONTRASTON = 0x00000001;
-  static const HCF_AVAILABLE = 0x00000002;
-  static const HCF_HOTKEYACTIVE = 0x00000004;
-  static const HCF_CONFIRMHOTKEY = 0x00000008;
-  static const HCF_HOTKEYSOUND = 0x00000010;
-  static const HCF_INDICATOR = 0x00000020;
-  static const HCF_HOTKEYAVAILABLE = 0x00000040;
-  static const HCF_OPTION_NOTHEMECHANGE = 0x00001000;
-}
-
-/// {@category Enum}
-class SOUNDSENTRYA_iFSTextEffect {
-  static const SSTF_BORDER = 0x00000002;
-  static const SSTF_CHARS = 0x00000001;
-  static const SSTF_DISPLAY = 0x00000003;
-  static const SSTF_NONE = 0x00000000;
-}
-
-/// {@category Enum}
-class SOUNDSENTRYA_iWindowsEffect {
-  static const SSWF_CUSTOM = 0x00000004;
-  static const SSWF_DISPLAY = 0x00000003;
-  static const SSWF_NONE = 0x00000000;
-  static const SSWF_TITLE = 0x00000001;
-  static const SSWF_WINDOW = 0x00000002;
-}
-
-/// {@category Enum}
-class AnnoScope {
-  static const ANNO_THIS = 0x00000000;
-  static const ANNO_CONTAINER = 0x00000001;
-}
-
-/// {@category Enum}
-class NavigateDirection {
-  static const NavigateDirection_Parent = 0x00000000;
-  static const NavigateDirection_NextSibling = 0x00000001;
-  static const NavigateDirection_PreviousSibling = 0x00000002;
-  static const NavigateDirection_FirstChild = 0x00000003;
-  static const NavigateDirection_LastChild = 0x00000004;
-}
-
-/// {@category Enum}
-class ProviderOptions {
-  static const ProviderOptions_ClientSideProvider = 0x00000001;
-  static const ProviderOptions_ServerSideProvider = 0x00000002;
-  static const ProviderOptions_NonClientAreaProvider = 0x00000004;
-  static const ProviderOptions_OverrideProvider = 0x00000008;
-  static const ProviderOptions_ProviderOwnsSetFocus = 0x00000010;
-  static const ProviderOptions_UseComThreading = 0x00000020;
-  static const ProviderOptions_RefuseNonClientSupport = 0x00000040;
-  static const ProviderOptions_HasNativeIAccessible = 0x00000080;
-  static const ProviderOptions_UseClientCoordinates = 0x00000100;
-}
-
-/// {@category Enum}
-class StructureChangeType {
-  static const StructureChangeType_ChildAdded = 0x00000000;
-  static const StructureChangeType_ChildRemoved = 0x00000001;
-  static const StructureChangeType_ChildrenInvalidated = 0x00000002;
-  static const StructureChangeType_ChildrenBulkAdded = 0x00000003;
-  static const StructureChangeType_ChildrenBulkRemoved = 0x00000004;
-  static const StructureChangeType_ChildrenReordered = 0x00000005;
-}
-
-/// {@category Enum}
-class TextEditChangeType {
-  static const TextEditChangeType_None = 0x00000000;
-  static const TextEditChangeType_AutoCorrect = 0x00000001;
-  static const TextEditChangeType_Composition = 0x00000002;
-  static const TextEditChangeType_CompositionFinalized = 0x00000003;
-  static const TextEditChangeType_AutoComplete = 0x00000004;
-}
-
-/// {@category Enum}
-class OrientationType {
-  static const OrientationType_None = 0x00000000;
-  static const OrientationType_Horizontal = 0x00000001;
-  static const OrientationType_Vertical = 0x00000002;
-}
-
-/// {@category Enum}
-class DockPosition {
-  static const DockPosition_Top = 0x00000000;
-  static const DockPosition_Left = 0x00000001;
-  static const DockPosition_Bottom = 0x00000002;
-  static const DockPosition_Right = 0x00000003;
-  static const DockPosition_Fill = 0x00000004;
-  static const DockPosition_None = 0x00000005;
-}
-
-/// {@category Enum}
-class ExpandCollapseState {
-  static const ExpandCollapseState_Collapsed = 0x00000000;
-  static const ExpandCollapseState_Expanded = 0x00000001;
-  static const ExpandCollapseState_PartiallyExpanded = 0x00000002;
-  static const ExpandCollapseState_LeafNode = 0x00000003;
-}
-
-/// {@category Enum}
-class ScrollAmount {
-  static const ScrollAmount_LargeDecrement = 0x00000000;
-  static const ScrollAmount_SmallDecrement = 0x00000001;
-  static const ScrollAmount_NoAmount = 0x00000002;
-  static const ScrollAmount_LargeIncrement = 0x00000003;
-  static const ScrollAmount_SmallIncrement = 0x00000004;
-}
-
-/// {@category Enum}
-class RowOrColumnMajor {
-  static const RowOrColumnMajor_RowMajor = 0x00000000;
-  static const RowOrColumnMajor_ColumnMajor = 0x00000001;
-  static const RowOrColumnMajor_Indeterminate = 0x00000002;
-}
-
-/// {@category Enum}
-class ToggleState {
-  static const ToggleState_Off = 0x00000000;
-  static const ToggleState_On = 0x00000001;
-  static const ToggleState_Indeterminate = 0x00000002;
-}
-
-/// {@category Enum}
-class WindowVisualState {
-  static const WindowVisualState_Normal = 0x00000000;
-  static const WindowVisualState_Maximized = 0x00000001;
-  static const WindowVisualState_Minimized = 0x00000002;
-}
-
-/// {@category Enum}
-class SynchronizedInputType {
-  static const SynchronizedInputType_KeyUp = 0x00000001;
-  static const SynchronizedInputType_KeyDown = 0x00000002;
-  static const SynchronizedInputType_LeftMouseUp = 0x00000004;
-  static const SynchronizedInputType_LeftMouseDown = 0x00000008;
-  static const SynchronizedInputType_RightMouseUp = 0x00000010;
-  static const SynchronizedInputType_RightMouseDown = 0x00000020;
-}
-
-/// {@category Enum}
-class WindowInteractionState {
-  static const WindowInteractionState_Running = 0x00000000;
-  static const WindowInteractionState_Closing = 0x00000001;
-  static const WindowInteractionState_ReadyForUserInteraction = 0x00000002;
-  static const WindowInteractionState_BlockedByModalWindow = 0x00000003;
-  static const WindowInteractionState_NotResponding = 0x00000004;
 }
 
 /// {@category Enum}
@@ -237,20 +373,22 @@ class SayAsInterpretAs {
 }
 
 /// {@category Enum}
-class TextUnit {
-  static const TextUnit_Character = 0x00000000;
-  static const TextUnit_Format = 0x00000001;
-  static const TextUnit_Word = 0x00000002;
-  static const TextUnit_Line = 0x00000003;
-  static const TextUnit_Paragraph = 0x00000004;
-  static const TextUnit_Page = 0x00000005;
-  static const TextUnit_Document = 0x00000006;
+class ScrollAmount {
+  static const ScrollAmount_LargeDecrement = 0x00000000;
+  static const ScrollAmount_SmallDecrement = 0x00000001;
+  static const ScrollAmount_NoAmount = 0x00000002;
+  static const ScrollAmount_LargeIncrement = 0x00000003;
+  static const ScrollAmount_SmallIncrement = 0x00000004;
 }
 
 /// {@category Enum}
-class TextPatternRangeEndpoint {
-  static const TextPatternRangeEndpoint_Start = 0x00000000;
-  static const TextPatternRangeEndpoint_End = 0x00000001;
+class StructureChangeType {
+  static const StructureChangeType_ChildAdded = 0x00000000;
+  static const StructureChangeType_ChildRemoved = 0x00000001;
+  static const StructureChangeType_ChildrenInvalidated = 0x00000002;
+  static const StructureChangeType_ChildrenBulkAdded = 0x00000003;
+  static const StructureChangeType_ChildrenBulkRemoved = 0x00000004;
+  static const StructureChangeType_ChildrenReordered = 0x00000005;
 }
 
 /// {@category Enum}
@@ -261,108 +399,13 @@ class SupportedTextSelection {
 }
 
 /// {@category Enum}
-class LiveSetting {
-  static const Off = 0x00000000;
-  static const Polite = 0x00000001;
-  static const Assertive = 0x00000002;
-}
-
-/// {@category Enum}
-class ActiveEnd {
-  static const ActiveEnd_None = 0x00000000;
-  static const ActiveEnd_Start = 0x00000001;
-  static const ActiveEnd_End = 0x00000002;
-}
-
-/// {@category Enum}
-class CaretPosition {
-  static const CaretPosition_Unknown = 0x00000000;
-  static const CaretPosition_EndOfLine = 0x00000001;
-  static const CaretPosition_BeginningOfLine = 0x00000002;
-}
-
-/// {@category Enum}
-class CaretBidiMode {
-  static const CaretBidiMode_LTR = 0x00000000;
-  static const CaretBidiMode_RTL = 0x00000001;
-}
-
-/// {@category Enum}
-class ZoomUnit {
-  static const ZoomUnit_NoAmount = 0x00000000;
-  static const ZoomUnit_LargeDecrement = 0x00000001;
-  static const ZoomUnit_SmallDecrement = 0x00000002;
-  static const ZoomUnit_LargeIncrement = 0x00000003;
-  static const ZoomUnit_SmallIncrement = 0x00000004;
-}
-
-/// {@category Enum}
-class AnimationStyle {
-  static const AnimationStyle_None = 0x00000000;
-  static const AnimationStyle_LasVegasLights = 0x00000001;
-  static const AnimationStyle_BlinkingBackground = 0x00000002;
-  static const AnimationStyle_SparkleText = 0x00000003;
-  static const AnimationStyle_MarchingBlackAnts = 0x00000004;
-  static const AnimationStyle_MarchingRedAnts = 0x00000005;
-  static const AnimationStyle_Shimmer = 0x00000006;
-  static const AnimationStyle_Other = 0xffffffff;
-}
-
-/// {@category Enum}
-class BulletStyle {
-  static const BulletStyle_None = 0x00000000;
-  static const BulletStyle_HollowRoundBullet = 0x00000001;
-  static const BulletStyle_FilledRoundBullet = 0x00000002;
-  static const BulletStyle_HollowSquareBullet = 0x00000003;
-  static const BulletStyle_FilledSquareBullet = 0x00000004;
-  static const BulletStyle_DashBullet = 0x00000005;
-  static const BulletStyle_Other = 0xffffffff;
-}
-
-/// {@category Enum}
-class CapStyle {
-  static const CapStyle_None = 0x00000000;
-  static const CapStyle_SmallCap = 0x00000001;
-  static const CapStyle_AllCap = 0x00000002;
-  static const CapStyle_AllPetiteCaps = 0x00000003;
-  static const CapStyle_PetiteCaps = 0x00000004;
-  static const CapStyle_Unicase = 0x00000005;
-  static const CapStyle_Titling = 0x00000006;
-  static const CapStyle_Other = 0xffffffff;
-}
-
-/// {@category Enum}
-class FillType {
-  static const FillType_None = 0x00000000;
-  static const FillType_Color = 0x00000001;
-  static const FillType_Gradient = 0x00000002;
-  static const FillType_Picture = 0x00000003;
-  static const FillType_Pattern = 0x00000004;
-}
-
-/// {@category Enum}
-class FlowDirections {
-  static const FlowDirections_Default = 0x00000000;
-  static const FlowDirections_RightToLeft = 0x00000001;
-  static const FlowDirections_BottomToTop = 0x00000002;
-  static const FlowDirections_Vertical = 0x00000004;
-}
-
-/// {@category Enum}
-class HorizontalTextAlignment {
-  static const HorizontalTextAlignment_Left = 0x00000000;
-  static const HorizontalTextAlignment_Centered = 0x00000001;
-  static const HorizontalTextAlignment_Right = 0x00000002;
-  static const HorizontalTextAlignment_Justified = 0x00000003;
-}
-
-/// {@category Enum}
-class OutlineStyles {
-  static const OutlineStyles_None = 0x00000000;
-  static const OutlineStyles_Outline = 0x00000001;
-  static const OutlineStyles_Shadow = 0x00000002;
-  static const OutlineStyles_Engraved = 0x00000004;
-  static const OutlineStyles_Embossed = 0x00000008;
+class SynchronizedInputType {
+  static const SynchronizedInputType_KeyUp = 0x00000001;
+  static const SynchronizedInputType_KeyDown = 0x00000002;
+  static const SynchronizedInputType_LeftMouseUp = 0x00000004;
+  static const SynchronizedInputType_LeftMouseDown = 0x00000008;
+  static const SynchronizedInputType_RightMouseUp = 0x00000010;
+  static const SynchronizedInputType_RightMouseDown = 0x00000020;
 }
 
 /// {@category Enum}
@@ -389,31 +432,54 @@ class TextDecorationLineStyle {
 }
 
 /// {@category Enum}
-class VisualEffects {
-  static const VisualEffects_None = 0x00000000;
-  static const VisualEffects_Shadow = 0x00000001;
-  static const VisualEffects_Reflection = 0x00000002;
-  static const VisualEffects_Glow = 0x00000004;
-  static const VisualEffects_SoftEdges = 0x00000008;
-  static const VisualEffects_Bevel = 0x00000010;
+class TextEditChangeType {
+  static const TextEditChangeType_None = 0x00000000;
+  static const TextEditChangeType_AutoCorrect = 0x00000001;
+  static const TextEditChangeType_Composition = 0x00000002;
+  static const TextEditChangeType_CompositionFinalized = 0x00000003;
+  static const TextEditChangeType_AutoComplete = 0x00000004;
 }
 
 /// {@category Enum}
-class NotificationProcessing {
-  static const NotificationProcessing_ImportantAll = 0x00000000;
-  static const NotificationProcessing_ImportantMostRecent = 0x00000001;
-  static const NotificationProcessing_All = 0x00000002;
-  static const NotificationProcessing_MostRecent = 0x00000003;
-  static const NotificationProcessing_CurrentThenMostRecent = 0x00000004;
+class TextPatternRangeEndpoint {
+  static const TextPatternRangeEndpoint_Start = 0x00000000;
+  static const TextPatternRangeEndpoint_End = 0x00000001;
 }
 
 /// {@category Enum}
-class NotificationKind {
-  static const NotificationKind_ItemAdded = 0x00000000;
-  static const NotificationKind_ItemRemoved = 0x00000001;
-  static const NotificationKind_ActionCompleted = 0x00000002;
-  static const NotificationKind_ActionAborted = 0x00000003;
-  static const NotificationKind_Other = 0x00000004;
+class TextUnit {
+  static const TextUnit_Character = 0x00000000;
+  static const TextUnit_Format = 0x00000001;
+  static const TextUnit_Word = 0x00000002;
+  static const TextUnit_Line = 0x00000003;
+  static const TextUnit_Paragraph = 0x00000004;
+  static const TextUnit_Page = 0x00000005;
+  static const TextUnit_Document = 0x00000006;
+}
+
+/// {@category Enum}
+class ToggleState {
+  static const ToggleState_Off = 0x00000000;
+  static const ToggleState_On = 0x00000001;
+  static const ToggleState_Indeterminate = 0x00000002;
+}
+
+/// {@category Enum}
+class TreeScope {
+  static const TreeScope_None = 0x00000000;
+  static const TreeScope_Element = 0x00000001;
+  static const TreeScope_Children = 0x00000002;
+  static const TreeScope_Descendants = 0x00000004;
+  static const TreeScope_Parent = 0x00000008;
+  static const TreeScope_Ancestors = 0x00000010;
+  static const TreeScope_Subtree = 0x00000007;
+}
+
+/// {@category Enum}
+class TreeTraversalOptions {
+  static const TreeTraversalOptions_Default = 0x00000000;
+  static const TreeTraversalOptions_PostOrder = 0x00000001;
+  static const TreeTraversalOptions_LastToFirstOrder = 0x00000002;
 }
 
 /// {@category Enum}
@@ -451,91 +517,37 @@ class UIAutomationType {
 }
 
 /// {@category Enum}
-class TreeScope {
-  static const TreeScope_None = 0x00000000;
-  static const TreeScope_Element = 0x00000001;
-  static const TreeScope_Children = 0x00000002;
-  static const TreeScope_Descendants = 0x00000004;
-  static const TreeScope_Parent = 0x00000008;
-  static const TreeScope_Ancestors = 0x00000010;
-  static const TreeScope_Subtree = 0x00000007;
+class VisualEffects {
+  static const VisualEffects_None = 0x00000000;
+  static const VisualEffects_Shadow = 0x00000001;
+  static const VisualEffects_Reflection = 0x00000002;
+  static const VisualEffects_Glow = 0x00000004;
+  static const VisualEffects_SoftEdges = 0x00000008;
+  static const VisualEffects_Bevel = 0x00000010;
 }
 
 /// {@category Enum}
-class ConditionType {
-  static const ConditionType_True = 0x00000000;
-  static const ConditionType_False = 0x00000001;
-  static const ConditionType_Property = 0x00000002;
-  static const ConditionType_And = 0x00000003;
-  static const ConditionType_Or = 0x00000004;
-  static const ConditionType_Not = 0x00000005;
+class WindowInteractionState {
+  static const WindowInteractionState_Running = 0x00000000;
+  static const WindowInteractionState_Closing = 0x00000001;
+  static const WindowInteractionState_ReadyForUserInteraction = 0x00000002;
+  static const WindowInteractionState_BlockedByModalWindow = 0x00000003;
+  static const WindowInteractionState_NotResponding = 0x00000004;
 }
 
 /// {@category Enum}
-class PropertyConditionFlags {
-  static const PropertyConditionFlags_None = 0x00000000;
-  static const PropertyConditionFlags_IgnoreCase = 0x00000001;
-  static const PropertyConditionFlags_MatchSubstring = 0x00000002;
+class WindowVisualState {
+  static const WindowVisualState_Normal = 0x00000000;
+  static const WindowVisualState_Maximized = 0x00000001;
+  static const WindowVisualState_Minimized = 0x00000002;
 }
 
 /// {@category Enum}
-class AutomationElementMode {
-  static const AutomationElementMode_None = 0x00000000;
-  static const AutomationElementMode_Full = 0x00000001;
-}
-
-/// {@category Enum}
-class NormalizeState {
-  static const NormalizeState_None = 0x00000000;
-  static const NormalizeState_View = 0x00000001;
-  static const NormalizeState_Custom = 0x00000002;
-}
-
-/// {@category Enum}
-class TreeTraversalOptions {
-  static const TreeTraversalOptions_Default = 0x00000000;
-  static const TreeTraversalOptions_PostOrder = 0x00000001;
-  static const TreeTraversalOptions_LastToFirstOrder = 0x00000002;
-}
-
-/// {@category Enum}
-class ProviderType {
-  static const ProviderType_BaseHwnd = 0x00000000;
-  static const ProviderType_Proxy = 0x00000001;
-  static const ProviderType_NonClientArea = 0x00000002;
-}
-
-/// {@category Enum}
-class AutomationIdentifierType {
-  static const AutomationIdentifierType_Property = 0x00000000;
-  static const AutomationIdentifierType_Pattern = 0x00000001;
-  static const AutomationIdentifierType_Event = 0x00000002;
-  static const AutomationIdentifierType_ControlType = 0x00000003;
-  static const AutomationIdentifierType_TextAttribute = 0x00000004;
-  static const AutomationIdentifierType_LandmarkType = 0x00000005;
-  static const AutomationIdentifierType_Annotation = 0x00000006;
-  static const AutomationIdentifierType_Changes = 0x00000007;
-  static const AutomationIdentifierType_Style = 0x00000008;
-}
-
-/// {@category Enum}
-class EventArgsType {
-  static const EventArgsType_Simple = 0x00000000;
-  static const EventArgsType_PropertyChanged = 0x00000001;
-  static const EventArgsType_StructureChanged = 0x00000002;
-  static const EventArgsType_AsyncContentLoaded = 0x00000003;
-  static const EventArgsType_WindowClosed = 0x00000004;
-  static const EventArgsType_TextEditTextChanged = 0x00000005;
-  static const EventArgsType_Changes = 0x00000006;
-  static const EventArgsType_Notification = 0x00000007;
-  static const EventArgsType_ActiveTextPositionChanged = 0x00000008;
-  static const EventArgsType_StructuredMarkup = 0x00000009;
-}
-
-/// {@category Enum}
-class AsyncContentLoadedState {
-  static const AsyncContentLoadedState_Beginning = 0x00000000;
-  static const AsyncContentLoadedState_Progress = 0x00000001;
-  static const AsyncContentLoadedState_Completed = 0x00000002;
+class ZoomUnit {
+  static const ZoomUnit_NoAmount = 0x00000000;
+  static const ZoomUnit_LargeDecrement = 0x00000001;
+  static const ZoomUnit_SmallDecrement = 0x00000002;
+  static const ZoomUnit_LargeIncrement = 0x00000003;
+  static const ZoomUnit_SmallIncrement = 0x00000004;
 }
 

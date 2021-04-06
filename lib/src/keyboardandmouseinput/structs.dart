@@ -122,7 +122,8 @@ class RAWKEYBOARD extends Struct {
 class RAWHID extends Struct {
   @Uint32() external int dwSizeHid;
   @Uint32() external int dwCount;
-  external __ubyte__ bRawData;
+  @Array(1)
+  external Array<Uint8> bRawData;
 }
 
 class RAWINPUT extends Struct {

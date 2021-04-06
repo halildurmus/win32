@@ -1,8 +1,248 @@
 /// {@category Enum}
-class POINTER_FEEDBACK_MODE {
-  static const POINTER_FEEDBACK_DEFAULT = 0x00000001;
-  static const POINTER_FEEDBACK_INDIRECT = 0x00000002;
-  static const POINTER_FEEDBACK_NONE = 0x00000003;
+class BP_ANIMATIONSTYLE {
+  static const BPAS_NONE = 0x00000000;
+  static const BPAS_LINEAR = 0x00000001;
+  static const BPAS_CUBIC = 0x00000002;
+  static const BPAS_SINE = 0x00000003;
+}
+
+/// {@category Enum}
+class BP_BUFFERFORMAT {
+  static const BPBF_COMPATIBLEBITMAP = 0x00000000;
+  static const BPBF_DIB = 0x00000001;
+  static const BPBF_TOPDOWNDIB = 0x00000002;
+  static const BPBF_TOPDOWNMONODIB = 0x00000003;
+}
+
+/// {@category Enum}
+class BP_PAINTPARAMSFlags {
+  static const BPPF_ERASE = 0x00000001;
+  static const BPPF_NOCLIP = 0x00000002;
+  static const BPPF_NONCLIENT = 0x00000004;
+}
+
+/// {@category Enum}
+class BUTTON_IMAGELIST_uAlignFlags {
+  static const BUTTON_IMAGELIST_ALIGN_LEFT = 0x00000000;
+  static const BUTTON_IMAGELIST_ALIGN_RIGHT = 0x00000001;
+  static const BUTTON_IMAGELIST_ALIGN_TOP = 0x00000002;
+  static const BUTTON_IMAGELIST_ALIGN_BOTTOM = 0x00000003;
+  static const BUTTON_IMAGELIST_ALIGN_CENTER = 0x00000004;
+}
+
+/// {@category Enum}
+class CARET_FLAGS {
+  static const CARET_NONE = 0x00000000;
+  static const CARET_CUSTOM = 0x00000001;
+  static const CARET_RTL = 0x00000002;
+  static const CARET_ITALIC = 0x00000020;
+  static const CARET_NULL = 0x00000040;
+  static const CARET_ROTATE90 = 0x00000080;
+}
+
+/// {@category Enum}
+class CFE_EFFECTS {
+  static const CFE_ALLCAPS = 0x00000080;
+  static const CFE_AUTOBACKCOLOR = 0x04000000;
+  static const CFE_DISABLED = 0x00002000;
+  static const CFE_EMBOSS = 0x00000800;
+  static const CFE_HIDDEN = 0x00000100;
+  static const CFE_IMPRINT = 0x00001000;
+  static const CFE_OUTLINE = 0x00000200;
+  static const CFE_REVISED = 0x00004000;
+  static const CFE_SHADOW = 0x00000400;
+  static const CFE_SMALLCAPS = 0x00000040;
+  static const CFE_AUTOCOLOR = 0x40000000;
+  static const CFE_BOLD = 0x00000001;
+  static const CFE_ITALIC = 0x00000002;
+  static const CFE_STRIKEOUT = 0x00000008;
+  static const CFE_UNDERLINE = 0x00000004;
+  static const CFE_PROTECTED = 0x00000010;
+  static const CFE_LINK = 0x00000020;
+  static const CFE_SUBSCRIPT = 0x00010000;
+  static const CFE_SUPERSCRIPT = 0x00020000;
+  static const CFE_FONTBOUND = 0x00100000;
+  static const CFE_LINKPROTECTED = 0x00800000;
+  static const CFE_EXTENDED = 0x02000000;
+  static const CFE_MATHNOBUILDUP = 0x08000000;
+  static const CFE_MATH = 0x10000000;
+  static const CFE_MATHORDINARY = 0x20000000;
+}
+
+/// {@category Enum}
+class CFM_MASK {
+  static const CFM_SUBSCRIPT = 0x00030000;
+  static const CFM_EFFECTS = 0x4000003f;
+  static const CFM_ALL = 0xf800003f;
+  static const CFM_BOLD = 0x00000001;
+  static const CFM_CHARSET = 0x08000000;
+  static const CFM_COLOR = 0x40000000;
+  static const CFM_FACE = 0x20000000;
+  static const CFM_ITALIC = 0x00000002;
+  static const CFM_OFFSET = 0x10000000;
+  static const CFM_PROTECTED = 0x00000010;
+  static const CFM_SIZE = 0x80000000;
+  static const CFM_STRIKEOUT = 0x00000008;
+  static const CFM_UNDERLINE = 0x00000004;
+  static const CFM_LINK = 0x00000020;
+  static const CFM_SMALLCAPS = 0x00000040;
+  static const CFM_ALLCAPS = 0x00000080;
+  static const CFM_HIDDEN = 0x00000100;
+  static const CFM_OUTLINE = 0x00000200;
+  static const CFM_SHADOW = 0x00000400;
+  static const CFM_EMBOSS = 0x00000800;
+  static const CFM_IMPRINT = 0x00001000;
+  static const CFM_DISABLED = 0x00002000;
+  static const CFM_REVISED = 0x00004000;
+  static const CFM_REVAUTHOR = 0x00008000;
+  static const CFM_ANIMATION = 0x00040000;
+  static const CFM_STYLE = 0x00080000;
+  static const CFM_KERNING = 0x00100000;
+  static const CFM_SPACING = 0x00200000;
+  static const CFM_WEIGHT = 0x00400000;
+  static const CFM_UNDERLINETYPE = 0x00800000;
+  static const CFM_COOKIE = 0x01000000;
+  static const CFM_LCID = 0x02000000;
+  static const CFM_BACKCOLOR = 0x04000000;
+  static const CFM_SUPERSCRIPT = 0x00030000;
+  static const CFM_EFFECTS2 = 0x44037fff;
+  static const CFM_ALL2 = 0xffffffff;
+  static const CFM_FONTBOUND = 0x00100000;
+  static const CFM_LINKPROTECTED = 0x00800000;
+  static const CFM_EXTENDED = 0x02000000;
+  static const CFM_MATHNOBUILDUP = 0x08000000;
+  static const CFM_MATH = 0x10000000;
+  static const CFM_MATHORDINARY = 0x20000000;
+  static const CFM_ALLEFFECTS = 0x7e137fff;
+}
+
+/// {@category Enum}
+class CHANGETYPE {
+  static const CN_GENERIC = 0x00000000;
+  static const CN_TEXTCHANGED = 0x00000001;
+  static const CN_NEWUNDO = 0x00000002;
+  static const CN_NEWREDO = 0x00000004;
+}
+
+/// {@category Enum}
+class COMBOBOXEXITEMW_mask {
+  static const CBEIF_DI_SETITEM = 0x10000000;
+  static const CBEIF_IMAGE = 0x00000002;
+  static const CBEIF_INDENT = 0x00000010;
+  static const CBEIF_LPARAM = 0x00000020;
+  static const CBEIF_OVERLAY = 0x00000008;
+  static const CBEIF_SELECTEDIMAGE = 0x00000004;
+  static const CBEIF_TEXT = 0x00000001;
+}
+
+/// {@category Enum}
+class COMBOBOXINFO_stateButtonFlags {
+  static const STATE_SYSTEM_INVISIBLE = 0x00008000;
+  static const STATE_SYSTEM_PRESSED = 0x00000008;
+  static const STATE_SYSTEM_FOCUSABLE = 0x00100000;
+  static const STATE_SYSTEM_OFFSCREEN = 0x00010000;
+  static const STATE_SYSTEM_UNAVAILABLE = 0x00000001;
+}
+
+/// {@category Enum}
+class CheckDlgButton_uCheck {
+  static const BST_CHECKED = 0x00000001;
+  static const BST_INDETERMINATE = 0x00000002;
+  static const BST_UNCHECKED = 0x00000000;
+}
+
+/// {@category Enum}
+class DRAGLISTINFO_NOTIFICATION_FLAGS {
+  static const DL_BEGINDRAG = 0x00000485;
+  static const DL_CANCELDRAG = 0x00000488;
+  static const DL_DRAGGING = 0x00000486;
+  static const DL_DROPPED = 0x00000487;
+}
+
+/// {@category Enum}
+class DRAWITEMSTRUCT_CtlTypeFlags {
+  static const ODT_BUTTON = 0x00000004;
+  static const ODT_COMBOBOX = 0x00000003;
+  static const ODT_LISTBOX = 0x00000002;
+  static const ODT_LISTVIEW = 0x00000066;
+  static const ODT_MENU = 0x00000001;
+  static const ODT_STATIC = 0x00000005;
+  static const ODT_TAB = 0x00000065;
+}
+
+/// {@category Enum}
+class DlgDirList_uFiletype {
+  static const DDL_ARCHIVE = 0x00000020;
+  static const DDL_DIRECTORY = 0x00000010;
+  static const DDL_DRIVES = 0x00004000;
+  static const DDL_EXCLUSIVE = 0x00008000;
+  static const DDL_HIDDEN = 0x00000002;
+  static const DDL_READONLY = 0x00000001;
+  static const DDL_READWRITE = 0x00000000;
+  static const DDL_SYSTEM = 0x00000004;
+  static const DDL_POSTMSGS = 0x00002000;
+}
+
+/// {@category Enum}
+class DrawThemeParentBackgroundEx_dwFlags {
+  static const DTPB_WINDOWDC = 0x00000001;
+  static const DTPB_USECTLCOLORSTATIC = 0x00000002;
+  static const DTPB_USEERASEBKGND = 0x00000004;
+}
+
+/// {@category Enum}
+class EC_ENDOFLINE {
+  static const EC_ENDOFLINE_DETECTFROMCONTENT = 0x00000000;
+  static const EC_ENDOFLINE_CRLF = 0x00000001;
+  static const EC_ENDOFLINE_CR = 0x00000002;
+  static const EC_ENDOFLINE_LF = 0x00000003;
+}
+
+/// {@category Enum}
+class EC_SEARCHWEB_ENTRYPOINT {
+  static const EC_SEARCHWEB_ENTRYPOINT_EXTERNAL = 0x00000000;
+  static const EC_SEARCHWEB_ENTRYPOINT_CONTEXTMENU = 0x00000001;
+}
+
+/// {@category Enum}
+class EDITBALLOONTIP_ttiIconFlags {
+  static const TTI_ERROR = 0x00000003;
+  static const TTI_INFO = 0x00000001;
+  static const TTI_NONE = 0x00000000;
+  static const TTI_WARNING = 0x00000002;
+  static const TTI_INFO_LARGE = 0x00000004;
+  static const TTI_WARNING_LARGE = 0x00000005;
+  static const TTI_ERROR_LARGE = 0x00000006;
+}
+
+/// {@category Enum}
+class EDITWORDBREAKPROC_code {
+  static const WB_CLASSIFY = 0x00000003;
+  static const WB_ISDELIMITER = 0x00000002;
+  static const WB_LEFT = 0x00000000;
+  static const WB_LEFTBREAK = 0x00000006;
+  static const WB_MOVEWORDLEFT = 0x00000004;
+  static const WB_MOVEWORDRIGHT = 0x00000005;
+  static const WB_RIGHT = 0x00000001;
+  static const WB_RIGHTBREAK = 0x00000007;
+}
+
+/// {@category Enum}
+class ENDCOMPOSITIONNOTIFY_dwCodeFlags {
+  static const ECN_ENDCOMPOSITION = 0x00000001;
+  static const ECN_NEWTEXT = 0x00000002;
+}
+
+/// {@category Enum}
+class EnableScrollBar_wArrows {
+  static const ESB_DISABLE_BOTH = 0x00000003;
+  static const ESB_DISABLE_DOWN = 0x00000002;
+  static const ESB_DISABLE_LEFT = 0x00000001;
+  static const ESB_DISABLE_LTUP = 0x00000001;
+  static const ESB_DISABLE_RIGHT = 0x00000002;
+  static const ESB_DISABLE_RTDN = 0x00000002;
+  static const ESB_DISABLE_UP = 0x00000001;
+  static const ESB_ENABLE_BOTH = 0x00000000;
 }
 
 /// {@category Enum}
@@ -22,20 +262,70 @@ class FEEDBACK_TYPE {
 }
 
 /// {@category Enum}
-class POINTER_DEVICE_TYPE {
-  static const POINTER_DEVICE_TYPE_INTEGRATED_PEN = 0x00000001;
-  static const POINTER_DEVICE_TYPE_EXTERNAL_PEN = 0x00000002;
-  static const POINTER_DEVICE_TYPE_TOUCH = 0x00000003;
-  static const POINTER_DEVICE_TYPE_TOUCH_PAD = 0x00000004;
-  static const POINTER_DEVICE_TYPE_MAX = 0xffffffff;
+class GETTEXTEX_flags {
+  static const GT_DEFAULT = 0x00000000;
+  static const GT_NOHIDDENTEXT = 0x00000008;
+  static const GT_RAWTEXT = 0x00000004;
+  static const GT_SELECTION = 0x00000002;
+  static const GT_USECRLF = 0x00000001;
 }
 
 /// {@category Enum}
-class POINTER_DEVICE_CURSOR_TYPE {
-  static const POINTER_DEVICE_CURSOR_TYPE_UNKNOWN = 0x00000000;
-  static const POINTER_DEVICE_CURSOR_TYPE_TIP = 0x00000001;
-  static const POINTER_DEVICE_CURSOR_TYPE_ERASER = 0x00000002;
-  static const POINTER_DEVICE_CURSOR_TYPE_MAX = 0xffffffff;
+class GETTEXTLENGTHEX_flags {
+  static const GTL_DEFAULT = 0x00000000;
+  static const GTL_USECRLF = 0x00000001;
+  static const GTL_PRECISE = 0x00000002;
+  static const GTL_CLOSE = 0x00000004;
+  static const GTL_NUMCHARS = 0x00000008;
+  static const GTL_NUMBYTES = 0x00000010;
+}
+
+/// {@category Enum}
+class GetThemeBitmap_dwFlags {
+  static const GBF_DIRECT = 0x00000001;
+  static const GBF_COPY = 0x00000002;
+  static const GBF_VALIDBITS = 0x00000003;
+}
+
+/// {@category Enum}
+class HDI_MASK {
+  static const HDI_WIDTH = 0x00000001;
+  static const HDI_BITMAP = 0x00000010;
+  static const HDI_DI_SETITEM = 0x00000040;
+  static const HDI_FORMAT = 0x00000004;
+  static const HDI_FILTER = 0x00000100;
+  static const HDI_HEIGHT = 0x00000001;
+  static const HDI_IMAGE = 0x00000020;
+  static const HDI_LPARAM = 0x00000008;
+  static const HDI_ORDER = 0x00000080;
+  static const HDI_STATE = 0x00000200;
+  static const HDI_TEXT = 0x00000002;
+}
+
+/// {@category Enum}
+class IMECOMPTEXT_flags {
+  static const ICT_RESULTREADSTR = 0x00000001;
+}
+
+/// {@category Enum}
+class INITCOMMONCONTROLSEX_dwICCFlags {
+  static const ICC_ANIMATE_CLASS = 0x00000080;
+  static const ICC_BAR_CLASSES = 0x00000004;
+  static const ICC_COOL_CLASSES = 0x00000400;
+  static const ICC_DATE_CLASSES = 0x00000100;
+  static const ICC_HOTKEY_CLASS = 0x00000040;
+  static const ICC_INTERNET_CLASSES = 0x00000800;
+  static const ICC_LINK_CLASS = 0x00008000;
+  static const ICC_LISTVIEW_CLASSES = 0x00000001;
+  static const ICC_NATIVEFNTCTL_CLASS = 0x00002000;
+  static const ICC_PAGESCROLLER_CLASS = 0x00001000;
+  static const ICC_PROGRESS_CLASS = 0x00000020;
+  static const ICC_STANDARD_CLASSES = 0x00004000;
+  static const ICC_TAB_CLASSES = 0x00000008;
+  static const ICC_TREEVIEW_CLASSES = 0x00000002;
+  static const ICC_UPDOWN_CLASS = 0x00000010;
+  static const ICC_USEREX_CLASSES = 0x00000200;
+  static const ICC_WIN95_CLASSES = 0x000000ff;
 }
 
 /// {@category Enum}
@@ -57,44 +347,497 @@ class INPUT_MESSAGE_ORIGIN_ID {
 }
 
 /// {@category Enum}
-class TVITEMPART {
-  static const TVGIPR_BUTTON = 0x00000001;
+class IRichEditOleCallback_GetContextMenu_seltypeFlags {
+  static const SEL_EMPTY = 0x00000000;
+  static const SEL_TEXT = 0x00000001;
+  static const SEL_OBJECT = 0x00000002;
+  static const SEL_MULTICHAR = 0x00000004;
+  static const SEL_MULTIOBJECT = 0x00000008;
+  static const GCM_RIGHTMOUSEDROP = 0x00008000;
 }
 
 /// {@category Enum}
-class EC_ENDOFLINE {
-  static const EC_ENDOFLINE_DETECTFROMCONTENT = 0x00000000;
-  static const EC_ENDOFLINE_CRLF = 0x00000001;
-  static const EC_ENDOFLINE_CR = 0x00000002;
-  static const EC_ENDOFLINE_LF = 0x00000003;
+class IRichEditOle_GetObjectFlags {
+  static const REO_GETOBJ_POLEOBJ = 0x00000001;
+  static const REO_GETOBJ_PSTG = 0x00000002;
+  static const REO_GETOBJ_POLESITE = 0x00000004;
+  static const REO_GETOBJ_NO_INTERFACES = 0x00000000;
+  static const REO_GETOBJ_ALL_INTERFACES = 0x00000007;
 }
 
 /// {@category Enum}
-class EC_SEARCHWEB_ENTRYPOINT {
-  static const EC_SEARCHWEB_ENTRYPOINT_EXTERNAL = 0x00000000;
-  static const EC_SEARCHWEB_ENTRYPOINT_CONTEXTMENU = 0x00000001;
+class ImageListDrawEx_rgbFg {
+  static const CLR_NONE = 0xffffffff;
+  static const CLR_DEFAULT = 0xff000000;
 }
 
 /// {@category Enum}
-class TASKDIALOG_FLAGS {
-  static const TDF_ENABLE_HYPERLINKS = 0x00000001;
-  static const TDF_USE_HICON_MAIN = 0x00000002;
-  static const TDF_USE_HICON_FOOTER = 0x00000004;
-  static const TDF_ALLOW_DIALOG_CANCELLATION = 0x00000008;
-  static const TDF_USE_COMMAND_LINKS = 0x00000010;
-  static const TDF_USE_COMMAND_LINKS_NO_ICON = 0x00000020;
-  static const TDF_EXPAND_FOOTER_AREA = 0x00000040;
-  static const TDF_EXPANDED_BY_DEFAULT = 0x00000080;
-  static const TDF_VERIFICATION_FLAG_CHECKED = 0x00000100;
-  static const TDF_SHOW_PROGRESS_BAR = 0x00000200;
-  static const TDF_SHOW_MARQUEE_PROGRESS_BAR = 0x00000400;
-  static const TDF_CALLBACK_TIMER = 0x00000800;
-  static const TDF_POSITION_RELATIVE_TO_WINDOW = 0x00001000;
-  static const TDF_RTL_LAYOUT = 0x00002000;
-  static const TDF_NO_DEFAULT_RADIO_BUTTON = 0x00004000;
-  static const TDF_CAN_BE_MINIMIZED = 0x00008000;
-  static const TDF_NO_SET_FOREGROUND = 0x00010000;
-  static const TDF_SIZE_TO_CONTENT = 0x01000000;
+class ImageListDraw_fStyle {
+  static const ILD_BLEND = 0x00000004;
+  static const ILD_BLEND50 = 0x00000004;
+  static const ILD_FOCUS = 0x00000002;
+  static const ILD_MASK = 0x00000010;
+  static const ILD_NORMAL = 0x00000000;
+  static const ILD_SELECTED = 0x00000004;
+}
+
+/// {@category Enum}
+class ImageListLoadImage_uFlags {
+  static const LR_CREATEDIBSECTION = 0x00002000;
+  static const LR_DEFAULTCOLOR = 0x00000000;
+  static const LR_DEFAULTSIZE = 0x00000040;
+  static const LR_LOADFROMFILE = 0x00000010;
+  static const LR_LOADMAP3DCOLORS = 0x00001000;
+  static const LR_LOADTRANSPARENT = 0x00000020;
+  static const LR_MONOCHROME = 0x00000001;
+  static const LR_SHARED = 0x00008000;
+  static const LR_VGACOLOR = 0x00000080;
+  static const LR_COPYDELETEORG = 0x00000008;
+  static const LR_COPYFROMRESOURCE = 0x00004000;
+  static const LR_COPYRETURNORG = 0x00000004;
+}
+
+/// {@category Enum}
+class ImageList_CopyFlags {
+  static const ILCF_MOVE = 0x00000000;
+  static const ILCF_SWAP = 0x00000001;
+}
+
+/// {@category Enum}
+class InsertImage_Type {
+  static const TA_BASELINE = 0x00000018;
+  static const TA_BOTTOM = 0x00000008;
+  static const TA_TOP = 0x00000000;
+}
+
+/// {@category Enum}
+class KHYPH {
+  static const khyphNil = 0x00000000;
+  static const khyphNormal = 0x00000001;
+  static const khyphAddBefore = 0x00000002;
+  static const khyphChangeBefore = 0x00000003;
+  static const khyphDeleteBefore = 0x00000004;
+  static const khyphChangeAfter = 0x00000005;
+  static const khyphDelAndChange = 0x00000006;
+}
+
+/// {@category Enum}
+class LPFNPSPCALLBACK_uMsg {
+  static const PSPCB_ADDREF = 0x00000000;
+  static const PSPCB_CREATE = 0x00000002;
+  static const PSPCB_RELEASE = 0x00000001;
+}
+
+/// {@category Enum}
+class LVCOLUMNW_fmt {
+  static const LVCFMT_LEFT = 0x00000000;
+  static const LVCFMT_RIGHT = 0x00000001;
+  static const LVCFMT_CENTER = 0x00000002;
+  static const LVCFMT_JUSTIFYMASK = 0x00000003;
+  static const LVCFMT_IMAGE = 0x00000800;
+  static const LVCFMT_BITMAP_ON_RIGHT = 0x00001000;
+  static const LVCFMT_COL_HAS_IMAGES = 0x00008000;
+  static const LVCFMT_FIXED_WIDTH = 0x00000100;
+  static const LVCFMT_NO_DPI_SCALE = 0x00040000;
+  static const LVCFMT_FIXED_RATIO = 0x00080000;
+  static const LVCFMT_SPLITBUTTON = 0x01000000;
+}
+
+/// {@category Enum}
+class LVCOLUMNW_mask {
+  static const LVCF_FMT = 0x00000001;
+  static const LVCF_WIDTH = 0x00000002;
+  static const LVCF_TEXT = 0x00000004;
+  static const LVCF_SUBITEM = 0x00000008;
+  static const LVCF_IMAGE = 0x00000010;
+  static const LVCF_ORDER = 0x00000020;
+  static const LVCF_MINWIDTH = 0x00000040;
+  static const LVCF_DEFAULTWIDTH = 0x00000080;
+  static const LVCF_IDEALWIDTH = 0x00000100;
+}
+
+/// {@category Enum}
+class LVFINDINFOW_flags {
+  static const LVFI_PARAM = 0x00000001;
+  static const LVFI_PARTIAL = 0x00000008;
+  static const LVFI_STRING = 0x00000002;
+  static const LVFI_SUBSTRING = 0x00000004;
+  static const LVFI_WRAP = 0x00000020;
+  static const LVFI_NEARESTXY = 0x00000040;
+}
+
+/// {@category Enum}
+class LVFOOTERITEM_maskFlags {
+  static const LVFIF_TEXT = 0x00000001;
+  static const LVFIF_STATE = 0x00000002;
+}
+
+/// {@category Enum}
+class LVGROUP_maskFlags {
+  static const LVGF_NONE = 0x00000000;
+  static const LVGF_HEADER = 0x00000001;
+  static const LVGF_FOOTER = 0x00000002;
+  static const LVGF_STATE = 0x00000004;
+}
+
+/// {@category Enum}
+class LVHITTESTINFO_flags {
+  static const LVHT_ABOVE = 0x00000008;
+  static const LVHT_BELOW = 0x00000010;
+  static const LVHT_NOWHERE = 0x00000001;
+  static const LVHT_ONITEMICON = 0x00000002;
+  static const LVHT_ONITEMLABEL = 0x00000004;
+  static const LVHT_ONITEMSTATEICON = 0x00000008;
+  static const LVHT_TOLEFT = 0x00000040;
+  static const LVHT_TORIGHT = 0x00000020;
+  static const LVHT_EX_GROUP_HEADER = 0x10000000;
+  static const LVHT_EX_GROUP_FOOTER = 0x20000000;
+  static const LVHT_EX_GROUP_COLLAPSE = 0x40000000;
+  static const LVHT_EX_GROUP_BACKGROUND = 0x80000000;
+  static const LVHT_EX_GROUP_STATEICON = 0x01000000;
+  static const LVHT_EX_GROUP_SUBSETLINK = 0x02000000;
+  static const LVHT_EX_GROUP = 0xf3000000;
+  static const LVHT_EX_ONCONTENTS = 0x04000000;
+  static const LVHT_EX_FOOTER = 0x08000000;
+}
+
+/// {@category Enum}
+class LVITEMA_iGroupId {
+  static const I_GROUPIDCALLBACK = 0xffffffff;
+  static const I_GROUPIDNONE = 0xfffffffe;
+}
+
+/// {@category Enum}
+class LVTILEVIEWINFO_dwFlags {
+  static const LVTVIF_EXTENDED = 0x00000004;
+}
+
+/// {@category Enum}
+class MANCODE {
+  static const MBOLD = 0x00000010;
+  static const MITAL = 0x00000020;
+  static const MGREEK = 0x00000040;
+  static const MROMN = 0x00000000;
+  static const MSCRP = 0x00000001;
+  static const MFRAK = 0x00000002;
+  static const MOPEN = 0x00000003;
+  static const MSANS = 0x00000004;
+  static const MMONO = 0x00000005;
+  static const MMATH = 0x00000006;
+  static const MISOL = 0x00000007;
+  static const MINIT = 0x00000008;
+  static const MTAIL = 0x00000009;
+  static const MSTRCH = 0x0000000a;
+  static const MLOOP = 0x0000000b;
+  static const MOPENA = 0x0000000c;
+}
+
+/// {@category Enum}
+class MCGRIDINFO_dwFlags {
+  static const MCGIF_DATE = 0x00000001;
+  static const MCGIF_RECT = 0x00000002;
+  static const MCGIF_NAME = 0x00000004;
+}
+
+/// {@category Enum}
+class MCGRIDINFO_dwPartFlags {
+  static const MCGIP_CALENDARCONTROL = 0x00000000;
+  static const MCGIP_NEXT = 0x00000001;
+  static const MCGIP_PREV = 0x00000002;
+  static const MCGIP_FOOTER = 0x00000003;
+  static const MCGIP_CALENDAR = 0x00000004;
+  static const MCGIP_CALENDARHEADER = 0x00000005;
+  static const MCGIP_CALENDARBODY = 0x00000006;
+  static const MCGIP_CALENDARROW = 0x00000007;
+  static const MCGIP_CALENDARCELL = 0x00000008;
+}
+
+/// {@category Enum}
+class NMCUSTOMDRAW_dwDrawStageFlags {
+  static const CDDS_POSTPAINT = 0x00000002;
+  static const CDDS_PREERASE = 0x00000003;
+  static const CDDS_PREPAINT = 0x00000001;
+  static const CDDS_ITEMPOSTERASE = 0x00010004;
+  static const CDDS_ITEMPOSTPAINT = 0x00010002;
+  static const CDDS_ITEMPREERASE = 0x00010003;
+  static const CDDS_ITEMPREPAINT = 0x00010001;
+  static const CDDS_SUBITEM = 0x00020000;
+}
+
+/// {@category Enum}
+class NMHEADERA_iButton {
+  static const None = 0x00000000;
+  static const iButton1 = 0x00000001;
+  static const iButton2 = 0x00000002;
+}
+
+/// {@category Enum}
+class NMLVCUSTOMDRAW_dwItemTypeFlags {
+  static const LVCDI_ITEM = 0x00000000;
+  static const LVCDI_GROUP = 0x00000001;
+  static const LVCDI_ITEMSLIST = 0x00000002;
+}
+
+/// {@category Enum}
+class NMLVCUSTOMDRAW_uAlignFlags {
+  static const LVGA_HEADER_CENTER = 0x00000002;
+  static const LVGA_HEADER_LEFT = 0x00000001;
+  static const LVGA_HEADER_RIGHT = 0x00000004;
+}
+
+/// {@category Enum}
+class NMLVEMPTYMARKUP_dwFlags {
+  static const EMF_CENTERED = 0x00000001;
+}
+
+/// {@category Enum}
+class NMPGCALCSIZE_dwFlagFlags {
+  static const PGF_CALCHEIGHT = 0x00000002;
+  static const PGF_CALCWIDTH = 0x00000001;
+}
+
+/// {@category Enum}
+class NMPGSCROLL_fwKeysFlags {
+  static const None = 0x00000000;
+  static const PGK_SHIFT = 0x00000001;
+  static const PGK_CONTROL = 0x00000002;
+  static const PGK_MENU = 0x00000004;
+}
+
+/// {@category Enum}
+class NMPGSCROLL_iDirFlags {
+  static const PGF_SCROLLDOWN = 0x00000002;
+  static const PGF_SCROLLLEFT = 0x00000004;
+  static const PGF_SCROLLRIGHT = 0x00000008;
+  static const PGF_SCROLLUP = 0x00000001;
+}
+
+/// {@category Enum}
+class NMREBAR_dwMaskFlags {
+  static const RBNM_ID = 0x00000001;
+  static const RBNM_LPARAM = 0x00000004;
+  static const RBNM_STYLE = 0x00000002;
+}
+
+/// {@category Enum}
+class NMTBDISPINFOW_dwMask {
+  static const TBNF_IMAGE = 0x00000001;
+  static const TBNF_TEXT = 0x00000002;
+  static const TBNF_DI_SETITEM = 0x10000000;
+}
+
+/// {@category Enum}
+class NMTBHOTITEM_dwFlags {
+  static const HICF_ACCELERATOR = 0x00000004;
+  static const HICF_ARROWKEYS = 0x00000002;
+  static const HICF_DUPACCEL = 0x00000008;
+  static const HICF_ENTERING = 0x00000010;
+  static const HICF_LEAVING = 0x00000020;
+  static const HICF_LMOUSE = 0x00000080;
+  static const HICF_MOUSE = 0x00000001;
+  static const HICF_OTHER = 0x00000000;
+  static const HICF_RESELECT = 0x00000040;
+  static const HICF_TOGGLEDROPDOWN = 0x00000100;
+}
+
+/// {@category Enum}
+class OBJECTTYPE {
+  static const tomSimpleText = 0x00000000;
+  static const tomRuby = 0x00000001;
+  static const tomHorzVert = 0x00000002;
+  static const tomWarichu = 0x00000003;
+  static const tomEq = 0x00000009;
+  static const tomMath = 0x0000000a;
+  static const tomAccent = 0x0000000a;
+  static const tomBox = 0x0000000b;
+  static const tomBoxedFormula = 0x0000000c;
+  static const tomBrackets = 0x0000000d;
+  static const tomBracketsWithSeps = 0x0000000e;
+  static const tomEquationArray = 0x0000000f;
+  static const tomFraction = 0x00000010;
+  static const tomFunctionApply = 0x00000011;
+  static const tomLeftSubSup = 0x00000012;
+  static const tomLowerLimit = 0x00000013;
+  static const tomMatrix = 0x00000014;
+  static const tomNary = 0x00000015;
+  static const tomOpChar = 0x00000016;
+  static const tomOverbar = 0x00000017;
+  static const tomPhantom = 0x00000018;
+  static const tomRadical = 0x00000019;
+  static const tomSlashedFraction = 0x0000001a;
+  static const tomStack = 0x0000001b;
+  static const tomStretchStack = 0x0000001c;
+  static const tomSubscript = 0x0000001d;
+  static const tomSubSup = 0x0000001e;
+  static const tomSuperscript = 0x0000001f;
+  static const tomUnderbar = 0x00000020;
+  static const tomUpperLimit = 0x00000021;
+  static const tomObjectMax = 0x00000021;
+}
+
+/// {@category Enum}
+class OpenThemeDataEx_dwFlags {
+  static const OTD_FORCE_RECT_SIZING = 0x00000001;
+  static const OTD_NONCLIENT = 0x00000002;
+}
+
+/// {@category Enum}
+class PARAFORMAT2_wBordersFlags {
+  static const wBorders1 = 0x00000001;
+  static const wBorders2 = 0x00000002;
+  static const wBorders4 = 0x00000004;
+  static const wBorders8 = 0x00000008;
+  static const wBorders16 = 0x00000010;
+  static const wBorders32 = 0x00000020;
+  static const wBorders64 = 0x00000040;
+}
+
+/// {@category Enum}
+class PARAFORMAT2_wNumberingStyleFlags {
+  static const PFNS_PAREN = 0x00000000;
+  static const PFNS_PARENS = 0x00000100;
+  static const PFNS_PERIOD = 0x00000200;
+  static const PFNS_PLAIN = 0x00000300;
+  static const PFNS_NONUMBER = 0x00000400;
+  static const PFNS_NEWNUMBER = 0x00008000;
+}
+
+/// {@category Enum}
+class PARAFORMAT2_wShadingStyleFlags {
+  static const None = 0x00000000;
+  static const wShadingStyle1 = 0x00000001;
+  static const wShadingStyle2 = 0x00000002;
+  static const wShadingStyle3 = 0x00000003;
+  static const wShadingStyle4 = 0x00000004;
+  static const wShadingStyle5 = 0x00000005;
+  static const wShadingStyle6 = 0x00000006;
+  static const wShadingStyle7 = 0x00000007;
+  static const wShadingStyle8 = 0x00000008;
+  static const wShadingStyle9 = 0x00000009;
+  static const wShadingStyle10 = 0x0000000a;
+  static const wShadingStyle11 = 0x0000000b;
+  static const wShadingStyle12 = 0x0000000c;
+}
+
+/// {@category Enum}
+class PARAFORMAT_MASK {
+  static const PFM_ALIGNMENT = 0x00000008;
+  static const PFM_NUMBERING = 0x00000020;
+  static const PFM_OFFSET = 0x00000004;
+  static const PFM_OFFSETINDENT = 0x80000000;
+  static const PFM_RIGHTINDENT = 0x00000002;
+  static const PFM_RTLPARA = 0x00010000;
+  static const PFM_STARTINDENT = 0x00000001;
+  static const PFM_TABSTOPS = 0x00000010;
+}
+
+/// {@category Enum}
+class PARAFORMAT_wAlignmentFlags {
+  static const PFA_CENTER = 0x00000003;
+  static const PFA_LEFT = 0x00000001;
+  static const PFA_RIGHT = 0x00000002;
+}
+
+/// {@category Enum}
+class PFNDPAMERGE_uMsg {
+  static const DPAMM_MERGE = 0x00000001;
+  static const DPAMM_DELETE = 0x00000002;
+  static const DPAMM_INSERT = 0x00000003;
+}
+
+/// {@category Enum}
+class POINTER_DEVICE_CURSOR_TYPE {
+  static const POINTER_DEVICE_CURSOR_TYPE_UNKNOWN = 0x00000000;
+  static const POINTER_DEVICE_CURSOR_TYPE_TIP = 0x00000001;
+  static const POINTER_DEVICE_CURSOR_TYPE_ERASER = 0x00000002;
+  static const POINTER_DEVICE_CURSOR_TYPE_MAX = 0xffffffff;
+}
+
+/// {@category Enum}
+class POINTER_DEVICE_TYPE {
+  static const POINTER_DEVICE_TYPE_INTEGRATED_PEN = 0x00000001;
+  static const POINTER_DEVICE_TYPE_EXTERNAL_PEN = 0x00000002;
+  static const POINTER_DEVICE_TYPE_TOUCH = 0x00000003;
+  static const POINTER_DEVICE_TYPE_TOUCH_PAD = 0x00000004;
+  static const POINTER_DEVICE_TYPE_MAX = 0xffffffff;
+}
+
+/// {@category Enum}
+class POINTER_FEEDBACK_MODE {
+  static const POINTER_FEEDBACK_DEFAULT = 0x00000001;
+  static const POINTER_FEEDBACK_INDIRECT = 0x00000002;
+  static const POINTER_FEEDBACK_NONE = 0x00000003;
+}
+
+/// {@category Enum}
+class PROPERTYORIGIN {
+  static const PO_STATE = 0x00000000;
+  static const PO_PART = 0x00000001;
+  static const PO_CLASS = 0x00000002;
+  static const PO_GLOBAL = 0x00000003;
+  static const PO_NOTFOUND = 0x00000004;
+}
+
+/// {@category Enum}
+class REOBJECT_dwFlags {
+  static const REO_ALIGNTORIGHT = 0x00000100;
+  static const REO_BELOWBASELINE = 0x00000002;
+  static const REO_BLANK = 0x00000010;
+  static const REO_CANROTATE = 0x00000080;
+  static const REO_DONTNEEDPALETTE = 0x00000020;
+  static const REO_DYNAMICSIZE = 0x00000008;
+  static const REO_GETMETAFILE = 0x00400000;
+  static const REO_HILITED = 0x01000000;
+  static const REO_INPLACEACTIVE = 0x02000000;
+  static const REO_INVERTEDSELECT = 0x00000004;
+  static const REO_LINK = 0x80000000;
+  static const REO_LINKAVAILABLE = 0x00800000;
+  static const REO_OPEN = 0x04000000;
+  static const REO_OWNERDRAWSELECT = 0x00000040;
+  static const REO_RESIZABLE = 0x00000001;
+  static const REO_SELECTED = 0x08000000;
+  static const REO_STATIC = 0x40000000;
+  static const REO_USEASBACKGROUND = 0x00000400;
+  static const REO_WRAPTEXTAROUND = 0x00000200;
+}
+
+/// {@category Enum}
+class SCROLLBAR_CONSTANTS {
+  static const SB_BOTH = 0x00000003;
+  static const SB_CTL = 0x00000002;
+  static const SB_HORZ = 0x00000000;
+  static const SB_VERT = 0x00000001;
+}
+
+/// {@category Enum}
+class SCROLLBAR_OBJID {
+  static const OBJID_CLIENT = 0xfffffffc;
+  static const OBJID_HSCROLL = 0xfffffffa;
+  static const OBJID_VSCROLL = 0xfffffffb;
+}
+
+/// {@category Enum}
+class SCROLLINFO_fMaskFlags {
+  static const SIF_ALL = 0x00000017;
+  static const SIF_DISABLENOSCROLL = 0x00000008;
+  static const SIF_PAGE = 0x00000002;
+  static const SIF_POS = 0x00000004;
+  static const SIF_RANGE = 0x00000001;
+  static const SIF_TRACKPOS = 0x00000010;
+}
+
+/// {@category Enum}
+class TASKDIALOG_ELEMENTS {
+  static const TDE_CONTENT = 0x00000000;
+  static const TDE_EXPANDED_INFORMATION = 0x00000001;
+  static const TDE_FOOTER = 0x00000002;
+  static const TDE_MAIN_INSTRUCTION = 0x00000003;
+}
+
+/// {@category Enum}
+class TASKDIALOG_ICON_ELEMENTS {
+  static const TDIE_ICON_MAIN = 0x00000000;
+  static const TDIE_ICON_FOOTER = 0x00000001;
 }
 
 /// {@category Enum}
@@ -132,33 +875,81 @@ class TASKDIALOG_NOTIFICATIONS {
 }
 
 /// {@category Enum}
-class TASKDIALOG_ELEMENTS {
-  static const TDE_CONTENT = 0x00000000;
-  static const TDE_EXPANDED_INFORMATION = 0x00000001;
-  static const TDE_FOOTER = 0x00000002;
-  static const TDE_MAIN_INSTRUCTION = 0x00000003;
+class TA_PROPERTY {
+  static const TAP_FLAGS = 0x00000000;
+  static const TAP_TRANSFORMCOUNT = 0x00000001;
+  static const TAP_STAGGERDELAY = 0x00000002;
+  static const TAP_STAGGERDELAYCAP = 0x00000003;
+  static const TAP_STAGGERDELAYFACTOR = 0x00000004;
+  static const TAP_ZORDER = 0x00000005;
 }
 
 /// {@category Enum}
-class TASKDIALOG_ICON_ELEMENTS {
-  static const TDIE_ICON_MAIN = 0x00000000;
-  static const TDIE_ICON_FOOTER = 0x00000001;
+class TA_PROPERTY_FLAG {
+  static const TAPF_NONE = 0x00000000;
+  static const TAPF_HASSTAGGER = 0x00000001;
+  static const TAPF_ISRTLAWARE = 0x00000002;
+  static const TAPF_ALLOWCOLLECTION = 0x00000004;
+  static const TAPF_HASBACKGROUND = 0x00000008;
+  static const TAPF_HASPERSPECTIVE = 0x00000010;
 }
 
 /// {@category Enum}
-class TASKDIALOG_COMMON_BUTTON_FLAGS {
-  static const TDCBF_OK_BUTTON = 0x00000001;
-  static const TDCBF_YES_BUTTON = 0x00000002;
-  static const TDCBF_NO_BUTTON = 0x00000004;
-  static const TDCBF_CANCEL_BUTTON = 0x00000008;
-  static const TDCBF_RETRY_BUTTON = 0x00000010;
-  static const TDCBF_CLOSE_BUTTON = 0x00000020;
+class TA_TIMINGFUNCTION_TYPE {
+  static const TTFT_UNDEFINED = 0x00000000;
+  static const TTFT_CUBIC_BEZIER = 0x00000001;
 }
 
 /// {@category Enum}
-class LI_METRIC {
-  static const LIM_SMALL = 0x00000000;
-  static const LIM_LARGE = 0x00000001;
+class TA_TRANSFORM_FLAG {
+  static const TATF_NONE = 0x00000000;
+  static const TATF_TARGETVALUES_USER = 0x00000001;
+  static const TATF_HASINITIALVALUES = 0x00000002;
+  static const TATF_HASORIGINVALUES = 0x00000004;
+}
+
+/// {@category Enum}
+class TA_TRANSFORM_TYPE {
+  static const TATT_TRANSLATE_2D = 0x00000000;
+  static const TATT_SCALE_2D = 0x00000001;
+  static const TATT_OPACITY = 0x00000002;
+  static const TATT_CLIP = 0x00000003;
+}
+
+/// {@category Enum}
+class TBBUTTONINFOW_dwMask {
+  static const TBIF_BYINDEX = 0x80000000;
+  static const TBIF_COMMAND = 0x00000020;
+  static const TBIF_IMAGE = 0x00000001;
+  static const TBIF_LPARAM = 0x00000010;
+  static const TBIF_SIZE = 0x00000040;
+  static const TBIF_STATE = 0x00000004;
+  static const TBIF_STYLE = 0x00000008;
+  static const TBIF_TEXT = 0x00000002;
+}
+
+/// {@category Enum}
+class TBINSERTMARK_dwFlags {
+  static const None = 0x00000000;
+  static const TBIMHT_AFTER = 0x00000001;
+  static const TBIMHT_BACKGROUND = 0x00000002;
+}
+
+/// {@category Enum}
+class TCHITTESTINFO_flags {
+  static const TCHT_NOWHERE = 0x00000001;
+  static const TCHT_ONITEM = 0x00000006;
+  static const TCHT_ONITEMICON = 0x00000002;
+  static const TCHT_ONITEMLABEL = 0x00000004;
+}
+
+/// {@category Enum}
+class TCITEMHEADERA_mask {
+  static const TCIF_IMAGE = 0x00000002;
+  static const TCIF_RTLREADING = 0x00000004;
+  static const TCIF_TEXT = 0x00000001;
+  static const TCIF_PARAM = 0x00000008;
+  static const TCIF_STATE = 0x00000010;
 }
 
 /// {@category Enum}
@@ -169,6 +960,93 @@ class TEXTMODE {
   static const TM_MULTILEVELUNDO = 0x00000008;
   static const TM_SINGLECODEPAGE = 0x00000010;
   static const TM_MULTICODEPAGE = 0x00000020;
+}
+
+/// {@category Enum}
+class THEMESIZE {
+  static const TS_MIN = 0x00000000;
+  static const TS_TRUE = 0x00000001;
+  static const TS_DRAW = 0x00000002;
+}
+
+/// {@category Enum}
+class TOUCH_FEEDBACK_MODE {
+  static const TOUCH_FEEDBACK_DEFAULT = 0x00000001;
+  static const TOUCH_FEEDBACK_INDIRECT = 0x00000002;
+  static const TOUCH_FEEDBACK_NONE = 0x00000003;
+}
+
+/// {@category Enum}
+class TVHITTESTINFO_flags {
+  static const TVHT_ABOVE = 0x00000100;
+  static const TVHT_BELOW = 0x00000200;
+  static const TVHT_NOWHERE = 0x00000001;
+  static const TVHT_ONITEM = 0x00000046;
+  static const TVHT_ONITEMBUTTON = 0x00000010;
+  static const TVHT_ONITEMICON = 0x00000002;
+  static const TVHT_ONITEMINDENT = 0x00000008;
+  static const TVHT_ONITEMLABEL = 0x00000004;
+  static const TVHT_ONITEMRIGHT = 0x00000020;
+  static const TVHT_ONITEMSTATEICON = 0x00000040;
+  static const TVHT_TOLEFT = 0x00000800;
+  static const TVHT_TORIGHT = 0x00000400;
+}
+
+/// {@category Enum}
+class TVITEMA_mask {
+  static const TVIF_CHILDREN = 0x00000040;
+  static const TVIF_DI_SETITEM = 0x00001000;
+  static const TVIF_HANDLE = 0x00000010;
+  static const TVIF_IMAGE = 0x00000002;
+  static const TVIF_PARAM = 0x00000004;
+  static const TVIF_SELECTEDIMAGE = 0x00000020;
+  static const TVIF_STATE = 0x00000008;
+  static const TVIF_TEXT = 0x00000001;
+  static const TVIF_EXPANDEDIMAGE = 0x00000200;
+  static const TVIF_INTEGRAL = 0x00000080;
+  static const TVIF_STATEEX = 0x00000100;
+}
+
+/// {@category Enum}
+class TVITEMEXW_cChildren {
+  static const I_CHILDRENCALLBACK = 0xffffffff;
+  static const I_CHILDRENAUTO = 0xfffffffe;
+}
+
+/// {@category Enum}
+class TVITEMPART {
+  static const TVGIPR_BUTTON = 0x00000001;
+}
+
+/// {@category Enum}
+class TXTBACKSTYLE {
+  static const TXTBACK_TRANSPARENT = 0x00000000;
+  static const TXTBACK_OPAQUE = 0x00000001;
+}
+
+/// {@category Enum}
+class TXTHITRESULT {
+  static const TXTHITRESULT_NOHIT = 0x00000000;
+  static const TXTHITRESULT_TRANSPARENT = 0x00000001;
+  static const TXTHITRESULT_CLOSE = 0x00000002;
+  static const TXTHITRESULT_HIT = 0x00000003;
+}
+
+/// {@category Enum}
+class TXTNATURALSIZE {
+  static const TXTNS_FITTOCONTENT2 = 0x00000000;
+  static const TXTNS_FITTOCONTENT = 0x00000001;
+  static const TXTNS_ROUNDTOLINE = 0x00000002;
+  static const TXTNS_FITTOCONTENT3 = 0x00000003;
+  static const TXTNS_FITTOCONTENTWSP = 0x00000004;
+  static const TXTNS_INCLUDELASTLINE = 0x40000000;
+  static const TXTNS_EMU = 0x80000000;
+}
+
+/// {@category Enum}
+class TXTVIEW {
+  static const TXTVIEW_ACTIVE = 0x00000000;
+  static const TXTVIEW_INACTIVE = 0xffffffff;
 }
 
 /// {@category Enum}
@@ -183,14 +1061,62 @@ class UNDONAMEID {
 }
 
 /// {@category Enum}
-class KHYPH {
-  static const khyphNil = 0x00000000;
-  static const khyphNormal = 0x00000001;
-  static const khyphAddBefore = 0x00000002;
-  static const khyphChangeBefore = 0x00000003;
-  static const khyphDeleteBefore = 0x00000004;
-  static const khyphChangeAfter = 0x00000005;
-  static const khyphDelAndChange = 0x00000006;
+class WINDOWTHEMEATTRIBUTETYPE {
+  static const WTA_NONCLIENT = 0x00000001;
+}
+
+/// {@category Enum}
+class WSB_PROP {
+  static const WSB_PROP_CXHSCROLL = 0x00000002;
+  static const WSB_PROP_CXHTHUMB = 0x00000010;
+  static const WSB_PROP_CXVSCROLL = 0x00000008;
+  static const WSB_PROP_CYHSCROLL = 0x00000004;
+  static const WSB_PROP_CYVSCROLL = 0x00000001;
+  static const WSB_PROP_CYVTHUMB = 0x00000020;
+  static const WSB_PROP_HBKGCOLOR = 0x00000080;
+  static const WSB_PROP_HSTYLE = 0x00000200;
+  static const WSB_PROP_PALETTE = 0x00000800;
+  static const WSB_PROP_VBKGCOLOR = 0x00000040;
+  static const WSB_PROP_VSTYLE = 0x00000100;
+  static const WSB_PROP_WINSTYLE = 0x00000400;
+}
+
+/// {@category Enum}
+class LI_METRIC {
+  static const LIM_SMALL = 0x00000000;
+  static const LIM_LARGE = 0x00000001;
+}
+
+/// {@category Enum}
+class TASKDIALOG_COMMON_BUTTON_FLAGS {
+  static const TDCBF_OK_BUTTON = 0x00000001;
+  static const TDCBF_YES_BUTTON = 0x00000002;
+  static const TDCBF_NO_BUTTON = 0x00000004;
+  static const TDCBF_CANCEL_BUTTON = 0x00000008;
+  static const TDCBF_RETRY_BUTTON = 0x00000010;
+  static const TDCBF_CLOSE_BUTTON = 0x00000020;
+}
+
+/// {@category Enum}
+class TASKDIALOG_FLAGS {
+  static const TDF_ENABLE_HYPERLINKS = 0x00000001;
+  static const TDF_USE_HICON_MAIN = 0x00000002;
+  static const TDF_USE_HICON_FOOTER = 0x00000004;
+  static const TDF_ALLOW_DIALOG_CANCELLATION = 0x00000008;
+  static const TDF_USE_COMMAND_LINKS = 0x00000010;
+  static const TDF_USE_COMMAND_LINKS_NO_ICON = 0x00000020;
+  static const TDF_EXPAND_FOOTER_AREA = 0x00000040;
+  static const TDF_EXPANDED_BY_DEFAULT = 0x00000080;
+  static const TDF_VERIFICATION_FLAG_CHECKED = 0x00000100;
+  static const TDF_SHOW_PROGRESS_BAR = 0x00000200;
+  static const TDF_SHOW_MARQUEE_PROGRESS_BAR = 0x00000400;
+  static const TDF_CALLBACK_TIMER = 0x00000800;
+  static const TDF_POSITION_RELATIVE_TO_WINDOW = 0x00001000;
+  static const TDF_RTL_LAYOUT = 0x00002000;
+  static const TDF_NO_DEFAULT_RADIO_BUTTON = 0x00004000;
+  static const TDF_CAN_BE_MINIMIZED = 0x00008000;
+  static const TDF_NO_SET_FOREGROUND = 0x00010000;
+  static const TDF_SIZE_TO_CONTENT = 0x01000000;
 }
 
 /// {@category Enum}
@@ -779,1101 +1705,5 @@ class tomConstants {
   static const tomRowApplyDefault = 0x00000000;
   static const tomCellStructureChangeOnly = 0x00000001;
   static const tomRowHeightActual = 0x0000080b;
-}
-
-/// {@category Enum}
-class OBJECTTYPE {
-  static const tomSimpleText = 0x00000000;
-  static const tomRuby = 0x00000001;
-  static const tomHorzVert = 0x00000002;
-  static const tomWarichu = 0x00000003;
-  static const tomEq = 0x00000009;
-  static const tomMath = 0x0000000a;
-  static const tomAccent = 0x0000000a;
-  static const tomBox = 0x0000000b;
-  static const tomBoxedFormula = 0x0000000c;
-  static const tomBrackets = 0x0000000d;
-  static const tomBracketsWithSeps = 0x0000000e;
-  static const tomEquationArray = 0x0000000f;
-  static const tomFraction = 0x00000010;
-  static const tomFunctionApply = 0x00000011;
-  static const tomLeftSubSup = 0x00000012;
-  static const tomLowerLimit = 0x00000013;
-  static const tomMatrix = 0x00000014;
-  static const tomNary = 0x00000015;
-  static const tomOpChar = 0x00000016;
-  static const tomOverbar = 0x00000017;
-  static const tomPhantom = 0x00000018;
-  static const tomRadical = 0x00000019;
-  static const tomSlashedFraction = 0x0000001a;
-  static const tomStack = 0x0000001b;
-  static const tomStretchStack = 0x0000001c;
-  static const tomSubscript = 0x0000001d;
-  static const tomSubSup = 0x0000001e;
-  static const tomSuperscript = 0x0000001f;
-  static const tomUnderbar = 0x00000020;
-  static const tomUpperLimit = 0x00000021;
-  static const tomObjectMax = 0x00000021;
-}
-
-/// {@category Enum}
-class MANCODE {
-  static const MBOLD = 0x00000010;
-  static const MITAL = 0x00000020;
-  static const MGREEK = 0x00000040;
-  static const MROMN = 0x00000000;
-  static const MSCRP = 0x00000001;
-  static const MFRAK = 0x00000002;
-  static const MOPEN = 0x00000003;
-  static const MSANS = 0x00000004;
-  static const MMONO = 0x00000005;
-  static const MMATH = 0x00000006;
-  static const MISOL = 0x00000007;
-  static const MINIT = 0x00000008;
-  static const MTAIL = 0x00000009;
-  static const MSTRCH = 0x0000000a;
-  static const MLOOP = 0x0000000b;
-  static const MOPENA = 0x0000000c;
-}
-
-/// {@category Enum}
-class TXTBACKSTYLE {
-  static const TXTBACK_TRANSPARENT = 0x00000000;
-  static const TXTBACK_OPAQUE = 0x00000001;
-}
-
-/// {@category Enum}
-class TXTHITRESULT {
-  static const TXTHITRESULT_NOHIT = 0x00000000;
-  static const TXTHITRESULT_TRANSPARENT = 0x00000001;
-  static const TXTHITRESULT_CLOSE = 0x00000002;
-  static const TXTHITRESULT_HIT = 0x00000003;
-}
-
-/// {@category Enum}
-class TXTNATURALSIZE {
-  static const TXTNS_FITTOCONTENT2 = 0x00000000;
-  static const TXTNS_FITTOCONTENT = 0x00000001;
-  static const TXTNS_ROUNDTOLINE = 0x00000002;
-  static const TXTNS_FITTOCONTENT3 = 0x00000003;
-  static const TXTNS_FITTOCONTENTWSP = 0x00000004;
-  static const TXTNS_INCLUDELASTLINE = 0x40000000;
-  static const TXTNS_EMU = 0x80000000;
-}
-
-/// {@category Enum}
-class TXTVIEW {
-  static const TXTVIEW_ACTIVE = 0x00000000;
-  static const TXTVIEW_INACTIVE = 0xffffffff;
-}
-
-/// {@category Enum}
-class CHANGETYPE {
-  static const CN_GENERIC = 0x00000000;
-  static const CN_TEXTCHANGED = 0x00000001;
-  static const CN_NEWUNDO = 0x00000002;
-  static const CN_NEWREDO = 0x00000004;
-}
-
-/// {@category Enum}
-class CARET_FLAGS {
-  static const CARET_NONE = 0x00000000;
-  static const CARET_CUSTOM = 0x00000001;
-  static const CARET_RTL = 0x00000002;
-  static const CARET_ITALIC = 0x00000020;
-  static const CARET_NULL = 0x00000040;
-  static const CARET_ROTATE90 = 0x00000080;
-}
-
-/// {@category Enum}
-class TA_PROPERTY {
-  static const TAP_FLAGS = 0x00000000;
-  static const TAP_TRANSFORMCOUNT = 0x00000001;
-  static const TAP_STAGGERDELAY = 0x00000002;
-  static const TAP_STAGGERDELAYCAP = 0x00000003;
-  static const TAP_STAGGERDELAYFACTOR = 0x00000004;
-  static const TAP_ZORDER = 0x00000005;
-}
-
-/// {@category Enum}
-class TA_PROPERTY_FLAG {
-  static const TAPF_NONE = 0x00000000;
-  static const TAPF_HASSTAGGER = 0x00000001;
-  static const TAPF_ISRTLAWARE = 0x00000002;
-  static const TAPF_ALLOWCOLLECTION = 0x00000004;
-  static const TAPF_HASBACKGROUND = 0x00000008;
-  static const TAPF_HASPERSPECTIVE = 0x00000010;
-}
-
-/// {@category Enum}
-class TA_TRANSFORM_TYPE {
-  static const TATT_TRANSLATE_2D = 0x00000000;
-  static const TATT_SCALE_2D = 0x00000001;
-  static const TATT_OPACITY = 0x00000002;
-  static const TATT_CLIP = 0x00000003;
-}
-
-/// {@category Enum}
-class TA_TRANSFORM_FLAG {
-  static const TATF_NONE = 0x00000000;
-  static const TATF_TARGETVALUES_USER = 0x00000001;
-  static const TATF_HASINITIALVALUES = 0x00000002;
-  static const TATF_HASORIGINVALUES = 0x00000004;
-}
-
-/// {@category Enum}
-class TA_TIMINGFUNCTION_TYPE {
-  static const TTFT_UNDEFINED = 0x00000000;
-  static const TTFT_CUBIC_BEZIER = 0x00000001;
-}
-
-/// {@category Enum}
-class THEMESIZE {
-  static const TS_MIN = 0x00000000;
-  static const TS_TRUE = 0x00000001;
-  static const TS_DRAW = 0x00000002;
-}
-
-/// {@category Enum}
-class PROPERTYORIGIN {
-  static const PO_STATE = 0x00000000;
-  static const PO_PART = 0x00000001;
-  static const PO_CLASS = 0x00000002;
-  static const PO_GLOBAL = 0x00000003;
-  static const PO_NOTFOUND = 0x00000004;
-}
-
-/// {@category Enum}
-class WINDOWTHEMEATTRIBUTETYPE {
-  static const WTA_NONCLIENT = 0x00000001;
-}
-
-/// {@category Enum}
-class BP_BUFFERFORMAT {
-  static const BPBF_COMPATIBLEBITMAP = 0x00000000;
-  static const BPBF_DIB = 0x00000001;
-  static const BPBF_TOPDOWNDIB = 0x00000002;
-  static const BPBF_TOPDOWNMONODIB = 0x00000003;
-}
-
-/// {@category Enum}
-class BP_ANIMATIONSTYLE {
-  static const BPAS_NONE = 0x00000000;
-  static const BPAS_LINEAR = 0x00000001;
-  static const BPAS_CUBIC = 0x00000002;
-  static const BPAS_SINE = 0x00000003;
-}
-
-/// {@category Enum}
-class SCROLLBAR_CONSTANTS {
-  static const SB_BOTH = 0x00000003;
-  static const SB_CTL = 0x00000002;
-  static const SB_HORZ = 0x00000000;
-  static const SB_VERT = 0x00000001;
-}
-
-/// {@category Enum}
-class TOUCH_FEEDBACK_MODE {
-  static const TOUCH_FEEDBACK_DEFAULT = 0x00000001;
-  static const TOUCH_FEEDBACK_INDIRECT = 0x00000002;
-  static const TOUCH_FEEDBACK_NONE = 0x00000003;
-}
-
-/// {@category Enum}
-class SCROLLBAR_OBJID {
-  static const OBJID_CLIENT = 0xfffffffc;
-  static const OBJID_HSCROLL = 0xfffffffa;
-  static const OBJID_VSCROLL = 0xfffffffb;
-}
-
-/// {@category Enum}
-class HDI_MASK {
-  static const HDI_WIDTH = 0x00000001;
-  static const HDI_BITMAP = 0x00000010;
-  static const HDI_DI_SETITEM = 0x00000040;
-  static const HDI_FORMAT = 0x00000004;
-  static const HDI_FILTER = 0x00000100;
-  static const HDI_HEIGHT = 0x00000001;
-  static const HDI_IMAGE = 0x00000020;
-  static const HDI_LPARAM = 0x00000008;
-  static const HDI_ORDER = 0x00000080;
-  static const HDI_STATE = 0x00000200;
-  static const HDI_TEXT = 0x00000002;
-}
-
-/// {@category Enum}
-class CFM_MASK {
-  static const CFM_SUBSCRIPT = 0x00030000;
-  static const CFM_EFFECTS = 0x4000003f;
-  static const CFM_ALL = 0xf800003f;
-  static const CFM_BOLD = 0x00000001;
-  static const CFM_CHARSET = 0x08000000;
-  static const CFM_COLOR = 0x40000000;
-  static const CFM_FACE = 0x20000000;
-  static const CFM_ITALIC = 0x00000002;
-  static const CFM_OFFSET = 0x10000000;
-  static const CFM_PROTECTED = 0x00000010;
-  static const CFM_SIZE = 0x80000000;
-  static const CFM_STRIKEOUT = 0x00000008;
-  static const CFM_ANIMATION = 0x00040000;
-  static const CFM_BACKCOLOR = 0x04000000;
-  static const CFM_KERNING = 0x00100000;
-  static const CFM_LCID = 0x02000000;
-  static const CFM_REVAUTHOR = 0x00008000;
-  static const CFM_SPACING = 0x00200000;
-  static const CFM_STYLE = 0x00080000;
-  static const CFM_UNDERLINETYPE = 0x00800000;
-  static const CFM_WEIGHT = 0x00400000;
-  static const CFM_UNDERLINE = 0x00000004;
-  static const CFM_LINK = 0x00000020;
-  static const CFM_SMALLCAPS = 0x00000040;
-  static const CFM_ALLCAPS = 0x00000080;
-  static const CFM_HIDDEN = 0x00000100;
-  static const CFM_OUTLINE = 0x00000200;
-  static const CFM_SHADOW = 0x00000400;
-  static const CFM_EMBOSS = 0x00000800;
-  static const CFM_IMPRINT = 0x00001000;
-  static const CFM_DISABLED = 0x00002000;
-  static const CFM_REVISED = 0x00004000;
-  static const CFM_COOKIE = 0x01000000;
-  static const CFM_SUPERSCRIPT = 0x00030000;
-  static const CFM_EFFECTS2 = 0x44037fff;
-  static const CFM_ALL2 = 0xffffffff;
-  static const CFM_FONTBOUND = 0x00100000;
-  static const CFM_LINKPROTECTED = 0x00800000;
-  static const CFM_EXTENDED = 0x02000000;
-  static const CFM_MATHNOBUILDUP = 0x08000000;
-  static const CFM_MATH = 0x10000000;
-  static const CFM_MATHORDINARY = 0x20000000;
-  static const CFM_ALLEFFECTS = 0x7e137fff;
-}
-
-/// {@category Enum}
-class CFE_EFFECTS {
-  static const CFE_ALLCAPS = 0x00000080;
-  static const CFE_AUTOBACKCOLOR = 0x04000000;
-  static const CFE_DISABLED = 0x00002000;
-  static const CFE_EMBOSS = 0x00000800;
-  static const CFE_HIDDEN = 0x00000100;
-  static const CFE_IMPRINT = 0x00001000;
-  static const CFE_OUTLINE = 0x00000200;
-  static const CFE_REVISED = 0x00004000;
-  static const CFE_SHADOW = 0x00000400;
-  static const CFE_SMALLCAPS = 0x00000040;
-  static const CFE_AUTOCOLOR = 0x40000000;
-  static const CFE_BOLD = 0x00000001;
-  static const CFE_EXTENDED = 0x02000000;
-  static const CFE_FONTBOUND = 0x00100000;
-  static const CFE_ITALIC = 0x00000002;
-  static const CFE_LINK = 0x00000020;
-  static const CFE_LINKPROTECTED = 0x00800000;
-  static const CFE_MATH = 0x10000000;
-  static const CFE_MATHNOBUILDUP = 0x08000000;
-  static const CFE_MATHORDINARY = 0x20000000;
-  static const CFE_PROTECTED = 0x00000010;
-  static const CFE_STRIKEOUT = 0x00000008;
-  static const CFE_SUBSCRIPT = 0x00010000;
-  static const CFE_SUPERSCRIPT = 0x00020000;
-  static const CFE_UNDERLINE = 0x00000004;
-}
-
-/// {@category Enum}
-class CFE_UNDERLINE {
-  static const CFU_CF1UNDERLINE = 0x000000ff;
-  static const CFU_INVERT = 0x000000fe;
-  static const CFU_UNDERLINE = 0x00000001;
-  static const CFU_UNDERLINEDASH = 0x00000005;
-  static const CFU_UNDERLINEDASHDOT = 0x00000006;
-  static const CFU_UNDERLINEDASHDOTDOT = 0x00000007;
-  static const CFU_UNDERLINEDOTTED = 0x00000004;
-  static const CFU_UNDERLINEDOUBLE = 0x00000003;
-  static const CFU_UNDERLINEDOUBLEWAVE = 0x0000000b;
-  static const CFU_UNDERLINEHAIRLINE = 0x0000000a;
-  static const CFU_UNDERLINEHEAVYWAVE = 0x0000000c;
-  static const CFU_UNDERLINELONGDASH = 0x0000000d;
-  static const CFU_UNDERLINENONE = 0x00000000;
-  static const CFU_UNDERLINETHICK = 0x00000009;
-  static const CFU_UNDERLINETHICKDASH = 0x0000000e;
-  static const CFU_UNDERLINETHICKDASHDOT = 0x0000000f;
-  static const CFU_UNDERLINETHICKDASHDOTDOT = 0x00000010;
-  static const CFU_UNDERLINETHICKDOTTED = 0x00000011;
-  static const CFU_UNDERLINETHICKLONGDASH = 0x00000012;
-  static const CFU_UNDERLINEWAVE = 0x00000008;
-  static const CFU_UNDERLINEWORD = 0x00000002;
-}
-
-/// {@category Enum}
-class PARAFORMAT_MASK {
-  static const PFM_ALIGNMENT = 0x00000008;
-  static const PFM_NUMBERING = 0x00000020;
-  static const PFM_OFFSET = 0x00000004;
-  static const PFM_OFFSETINDENT = 0x80000000;
-  static const PFM_RIGHTINDENT = 0x00000002;
-  static const PFM_RTLPARA = 0x00010000;
-  static const PFM_STARTINDENT = 0x00000001;
-  static const PFM_TABSTOPS = 0x00000010;
-  static const PFM_DONOTHYPHEN = 0x00400000;
-  static const PFM_EFFECTS = 0x50ff0000;
-  static const PFM_KEEP = 0x00020000;
-  static const PFM_KEEPNEXT = 0x00040000;
-  static const PFM_NOLINENUMBER = 0x00100000;
-  static const PFM_NOWIDOWCONTROL = 0x00200000;
-  static const PFM_PAGEBREAKBEFORE = 0x00080000;
-  static const PFM_SIDEBYSIDE = 0x00800000;
-  static const PFM_TABLE = 0x40000000;
-  static const PFM_TABLEROWDELIMITER = 0x10000000;
-}
-
-/// {@category Enum}
-class DRAGLISTINFO_NOTIFICATION_FLAGS {
-  static const DL_BEGINDRAG = 0x00000485;
-  static const DL_CANCELDRAG = 0x00000488;
-  static const DL_DRAGGING = 0x00000486;
-  static const DL_DROPPED = 0x00000487;
-}
-
-/// {@category Enum}
-class PARAFORMAT2_EFFECTS {
-  static const PFE_DONOTHYPHEN = 0x00000040;
-  static const PFE_KEEP = 0x00000002;
-  static const PFE_KEEPNEXT = 0x00000004;
-  static const PFE_NOLINENUMBER = 0x00000010;
-  static const PFE_NOWIDOWCONTROL = 0x00000020;
-  static const PFE_PAGEBREAKBEFORE = 0x00000008;
-  static const PFE_RTLPARA = 0x00000001;
-  static const PFE_SIDEBYSIDE = 0x00000080;
-  static const PFE_TABLE = 0x00004000;
-  static const PFE_TABLEROWDELIMITER = 0x00001000;
-}
-
-/// {@category Enum}
-class InsertImage_Type {
-  static const TA_BASELINE = 0x00000018;
-  static const TA_BOTTOM = 0x00000008;
-  static const TA_TOP = 0x00000000;
-}
-
-/// {@category Enum}
-class EDITWORDBREAKPROC_code {
-  static const WB_CLASSIFY = 0x00000003;
-  static const WB_ISDELIMITER = 0x00000002;
-  static const WB_LEFT = 0x00000000;
-  static const WB_LEFTBREAK = 0x00000006;
-  static const WB_MOVEWORDLEFT = 0x00000004;
-  static const WB_MOVEWORDRIGHT = 0x00000005;
-  static const WB_RIGHT = 0x00000001;
-  static const WB_RIGHTBREAK = 0x00000007;
-}
-
-/// {@category Enum}
-class ListView_iImageList {
-  static const LVSIL_NORMAL = 0x00000000;
-  static const LVSIL_SMALL = 0x00000001;
-  static const LVSIL_STATE = 0x00000002;
-  static const LVSIL_GROUPHEADER = 0x00000003;
-}
-
-/// {@category Enum}
-class PFNDPAMERGE_uMsg {
-  static const DPAMM_MERGE = 0x00000001;
-  static const DPAMM_DELETE = 0x00000002;
-  static const DPAMM_INSERT = 0x00000003;
-}
-
-/// {@category Enum}
-class ImageListLoadImage_uFlags {
-  static const LR_CREATEDIBSECTION = 0x00002000;
-  static const LR_DEFAULTCOLOR = 0x00000000;
-  static const LR_DEFAULTSIZE = 0x00000040;
-  static const LR_LOADFROMFILE = 0x00000010;
-  static const LR_LOADMAP3DCOLORS = 0x00001000;
-  static const LR_LOADTRANSPARENT = 0x00000020;
-  static const LR_MONOCHROME = 0x00000001;
-  static const LR_SHARED = 0x00008000;
-  static const LR_VGACOLOR = 0x00000080;
-  static const LR_COPYDELETEORG = 0x00000008;
-  static const LR_COPYFROMRESOURCE = 0x00004000;
-  static const LR_COPYRETURNORG = 0x00000004;
-}
-
-/// {@category Enum}
-class DlgDirList_uFiletype {
-  static const DDL_ARCHIVE = 0x00000020;
-  static const DDL_DIRECTORY = 0x00000010;
-  static const DDL_DRIVES = 0x00004000;
-  static const DDL_EXCLUSIVE = 0x00008000;
-  static const DDL_HIDDEN = 0x00000002;
-  static const DDL_READONLY = 0x00000001;
-  static const DDL_READWRITE = 0x00000000;
-  static const DDL_SYSTEM = 0x00000004;
-  static const DDL_POSTMSGS = 0x00002000;
-}
-
-/// {@category Enum}
-class OpenThemeDataEx_dwFlags {
-  static const OTD_FORCE_RECT_SIZING = 0x00000001;
-  static const OTD_NONCLIENT = 0x00000002;
-}
-
-/// {@category Enum}
-class SetScrollInfo_lpsiFlags {
-  static const SIF_DISABLENOSCROLL = 0x00000008;
-  static const SIF_PAGE = 0x00000002;
-  static const SIF_POS = 0x00000004;
-  static const SIF_RANGE = 0x00000001;
-  static const SIF_TRACKPOS = 0x00000010;
-  static const SIF_ALL = 0x00000017;
-}
-
-/// {@category Enum}
-class GetThemeBitmap_dwFlags {
-  static const GBF_DIRECT = 0x00000001;
-  static const GBF_COPY = 0x00000002;
-  static const GBF_VALIDBITS = 0x00000003;
-}
-
-/// {@category Enum}
-class ListView_Arrange_codeFlags {
-  static const LVA_ALIGNLEFT = 0x00000001;
-  static const LVA_ALIGNTOP = 0x00000002;
-  static const LVA_DEFAULT = 0x00000000;
-  static const LVA_SNAPTOGRID = 0x00000005;
-}
-
-/// {@category Enum}
-class DPA_SortedInsertPtr_optionsFlags {
-  static const DPAS_INSERTBEFORE = 0x00000002;
-  static const DPAS_INSERTAFTER = 0x00000004;
-}
-
-/// {@category Enum}
-class PropSheet_SetButtonText_dwButtonFlags {
-  static const PSWIZB_BACK = 0x00000001;
-  static const PSWIZB_NEXT = 0x00000002;
-  static const PSWIZB_FINISH = 0x00000004;
-  static const PSWIZB_CANCEL = 0x00000010;
-}
-
-/// {@category Enum}
-class EnableScrollBar_wArrows {
-  static const ESB_DISABLE_BOTH = 0x00000003;
-  static const ESB_DISABLE_DOWN = 0x00000002;
-  static const ESB_DISABLE_LEFT = 0x00000001;
-  static const ESB_DISABLE_LTUP = 0x00000001;
-  static const ESB_DISABLE_RIGHT = 0x00000002;
-  static const ESB_DISABLE_RTDN = 0x00000002;
-  static const ESB_DISABLE_UP = 0x00000001;
-  static const ESB_ENABLE_BOTH = 0x00000000;
-}
-
-/// {@category Enum}
-class TreeView_iImage {
-  static const TVSIL_NORMAL = 0x00000000;
-  static const TVSIL_STATE = 0x00000002;
-}
-
-/// {@category Enum}
-class ImageListDraw_fStyle {
-  static const ILD_BLEND = 0x00000004;
-  static const ILD_BLEND50 = 0x00000004;
-  static const ILD_FOCUS = 0x00000002;
-  static const ILD_MASK = 0x00000010;
-  static const ILD_NORMAL = 0x00000000;
-  static const ILD_SELECTED = 0x00000004;
-}
-
-/// {@category Enum}
-class WSB_PROP {
-  static const WSB_PROP_CXHSCROLL = 0x00000002;
-  static const WSB_PROP_CXHTHUMB = 0x00000010;
-  static const WSB_PROP_CXVSCROLL = 0x00000008;
-  static const WSB_PROP_CYHSCROLL = 0x00000004;
-  static const WSB_PROP_CYVSCROLL = 0x00000001;
-  static const WSB_PROP_CYVTHUMB = 0x00000020;
-  static const WSB_PROP_HBKGCOLOR = 0x00000080;
-  static const WSB_PROP_HSTYLE = 0x00000200;
-  static const WSB_PROP_PALETTE = 0x00000800;
-  static const WSB_PROP_VBKGCOLOR = 0x00000040;
-  static const WSB_PROP_VSTYLE = 0x00000100;
-  static const WSB_PROP_WINSTYLE = 0x00000400;
-}
-
-/// {@category Enum}
-class LPFNPSPCALLBACK_uMsg {
-  static const PSPCB_ADDREF = 0x00000000;
-  static const PSPCB_CREATE = 0x00000002;
-  static const PSPCB_RELEASE = 0x00000001;
-}
-
-/// {@category Enum}
-class ListView_SetItemState_dataFlags {
-  static const LVIS_CUT = 0x00000004;
-  static const LVIS_DROPHILITED = 0x00000008;
-  static const LVIS_FOCUSED = 0x00000001;
-  static const LVIS_SELECTED = 0x00000002;
-}
-
-/// {@category Enum}
-class ImageList_CopyFlags {
-  static const ILCF_MOVE = 0x00000000;
-  static const ILCF_SWAP = 0x00000001;
-}
-
-/// {@category Enum}
-class Button_SetCheck_check {
-  static const BST_CHECKED = 0x00000001;
-  static const BST_INDETERMINATE = 0x00000002;
-  static const BST_UNCHECKED = 0x00000000;
-}
-
-/// {@category Enum}
-class DrawThemeParentBackgroundEx_dwFlags {
-  static const DTPB_WINDOWDC = 0x00000001;
-  static const DTPB_USECTLCOLORSTATIC = 0x00000002;
-  static const DTPB_USEERASEBKGND = 0x00000004;
-}
-
-/// {@category Enum}
-class TreeView_Select_codeFlags {
-  static const TVGN_CARET = 0x00000009;
-  static const TVGN_DROPHILITE = 0x00000008;
-  static const TVGN_FIRSTVISIBLE = 0x00000005;
-  static const TVGN_CHILD = 0x00000004;
-}
-
-/// {@category Enum}
-class DateTime_SetSystemtime_gdFlags {
-  static const GDT_VALID = 0x00000000;
-  static const GDT_NONE = 0x00000001;
-}
-
-/// {@category Enum}
-class ListView_GetGroupRect_typeFlags {
-  static const LVGGR_GROUP = 0x00000000;
-  static const LVGGR_HEADER = 0x00000001;
-  static const LVGGR_LABEL = 0x00000002;
-  static const LVGGR_SUBSETLINK = 0x00000003;
-}
-
-/// {@category Enum}
-class ListView_GetItemIndexRect_codeFlags {
-  static const LVIR_BOUNDS = 0x00000000;
-  static const LVIR_ICON = 0x00000001;
-  static const LVIR_LABEL = 0x00000002;
-}
-
-/// {@category Enum}
-class ImageListDrawEx_rgbFg {
-  static const CLR_NONE = 0xffffffff;
-  static const CLR_DEFAULT = 0xff000000;
-}
-
-/// {@category Enum}
-class IRichEditOleCallback_GetContextMenu_seltypeFlags {
-  static const SEL_EMPTY = 0x00000000;
-  static const SEL_TEXT = 0x00000001;
-  static const SEL_OBJECT = 0x00000002;
-  static const SEL_MULTICHAR = 0x00000004;
-  static const SEL_MULTIOBJECT = 0x00000008;
-  static const GCM_RIGHTMOUSEDROP = 0x00008000;
-}
-
-/// {@category Enum}
-class TreeView_SetBorderFlags {
-  static const TVSBF_XBORDER = 0x00000001;
-  static const TVSBF_YBORDER = 0x00000002;
-}
-
-/// {@category Enum}
-class PropSheet_PressButton_iButtonFlags {
-  static const PSBTN_APPLYNOW = 0x00000004;
-  static const PSBTN_BACK = 0x00000000;
-  static const PSBTN_CANCEL = 0x00000005;
-  static const PSBTN_FINISH = 0x00000002;
-  static const PSBTN_HELP = 0x00000006;
-  static const PSBTN_NEXT = 0x00000001;
-  static const PSBTN_OK = 0x00000003;
-}
-
-/// {@category Enum}
-class IRichEditOle_GetObjectFlags {
-  static const REO_GETOBJ_POLEOBJ = 0x00000001;
-  static const REO_GETOBJ_PSTG = 0x00000002;
-  static const REO_GETOBJ_POLESITE = 0x00000004;
-  static const REO_GETOBJ_NO_INTERFACES = 0x00000000;
-  static const REO_GETOBJ_ALL_INTERFACES = 0x00000007;
-}
-
-/// {@category Enum}
-class NMREBAR_dwMaskFlags {
-  static const RBNM_ID = 0x00000001;
-  static const RBNM_LPARAM = 0x00000004;
-  static const RBNM_STYLE = 0x00000002;
-}
-
-/// {@category Enum}
-class EDITBALLOONTIP_ttiIconFlags {
-  static const TTI_ERROR = 0x00000003;
-  static const TTI_INFO = 0x00000001;
-  static const TTI_NONE = 0x00000000;
-  static const TTI_WARNING = 0x00000002;
-  static const TTI_INFO_LARGE = 0x00000004;
-  static const TTI_WARNING_LARGE = 0x00000005;
-  static const TTI_ERROR_LARGE = 0x00000006;
-}
-
-/// {@category Enum}
-class LVCOLUMNW_fmt {
-  static const LVCFMT_LEFT = 0x00000000;
-  static const LVCFMT_RIGHT = 0x00000001;
-  static const LVCFMT_CENTER = 0x00000002;
-  static const LVCFMT_JUSTIFYMASK = 0x00000003;
-  static const LVCFMT_IMAGE = 0x00000800;
-  static const LVCFMT_BITMAP_ON_RIGHT = 0x00001000;
-  static const LVCFMT_COL_HAS_IMAGES = 0x00008000;
-  static const LVCFMT_FIXED_WIDTH = 0x00000100;
-  static const LVCFMT_NO_DPI_SCALE = 0x00040000;
-  static const LVCFMT_FIXED_RATIO = 0x00080000;
-  static const LVCFMT_SPLITBUTTON = 0x01000000;
-}
-
-/// {@category Enum}
-class NMPGSCROLL_fwKeysFlags {
-  static const None = 0x00000000;
-  static const PGK_SHIFT = 0x00000001;
-  static const PGK_CONTROL = 0x00000002;
-  static const PGK_MENU = 0x00000004;
-}
-
-/// {@category Enum}
-class COMBOBOXEXITEMW_mask {
-  static const CBEIF_DI_SETITEM = 0x10000000;
-  static const CBEIF_IMAGE = 0x00000002;
-  static const CBEIF_INDENT = 0x00000010;
-  static const CBEIF_LPARAM = 0x00000020;
-  static const CBEIF_OVERLAY = 0x00000008;
-  static const CBEIF_SELECTEDIMAGE = 0x00000004;
-  static const CBEIF_TEXT = 0x00000001;
-}
-
-/// {@category Enum}
-class TVITEMEXW_cChildren {
-  static const I_CHILDRENCALLBACK = 0xffffffff;
-  static const I_CHILDRENAUTO = 0xfffffffe;
-}
-
-/// {@category Enum}
-class PARAFORMAT_rgxTabs {
-  static const None = 0x00000000;
-  static const rgxTabs1 = 0x00000001;
-  static const rgxTabs2 = 0x00000002;
-  static const rgxTabs3 = 0x00000003;
-  static const rgxTabs4 = 0x00000004;
-}
-
-/// {@category Enum}
-class TVITEMA_mask {
-  static const TVIF_CHILDREN = 0x00000040;
-  static const TVIF_DI_SETITEM = 0x00001000;
-  static const TVIF_HANDLE = 0x00000010;
-  static const TVIF_IMAGE = 0x00000002;
-  static const TVIF_PARAM = 0x00000004;
-  static const TVIF_SELECTEDIMAGE = 0x00000020;
-  static const TVIF_STATE = 0x00000008;
-  static const TVIF_TEXT = 0x00000001;
-  static const TVIF_EXPANDEDIMAGE = 0x00000200;
-  static const TVIF_INTEGRAL = 0x00000080;
-  static const TVIF_STATEEX = 0x00000100;
-}
-
-/// {@category Enum}
-class TCITEMHEADERA_mask {
-  static const TCIF_IMAGE = 0x00000002;
-  static const TCIF_RTLREADING = 0x00000004;
-  static const TCIF_TEXT = 0x00000001;
-  static const TCIF_PARAM = 0x00000008;
-  static const TCIF_STATE = 0x00000010;
-}
-
-/// {@category Enum}
-class TCHITTESTINFO_flags {
-  static const TCHT_NOWHERE = 0x00000001;
-  static const TCHT_ONITEM = 0x00000006;
-  static const TCHT_ONITEMICON = 0x00000002;
-  static const TCHT_ONITEMLABEL = 0x00000004;
-}
-
-/// {@category Enum}
-class PARAFORMAT_wReservedFlags {
-  static const None = 0x00000000;
-}
-
-/// {@category Enum}
-class COMBOBOXINFO_stateButtonFlags {
-  static const STATE_SYSTEM_INVISIBLE = 0x00008000;
-  static const STATE_SYSTEM_PRESSED = 0x00000008;
-  static const STATE_SYSTEM_FOCUSABLE = 0x00100000;
-  static const STATE_SYSTEM_OFFSCREEN = 0x00010000;
-  static const STATE_SYSTEM_UNAVAILABLE = 0x00000001;
-}
-
-/// {@category Enum}
-class NMCUSTOMDRAW_dwDrawStageFlags {
-  static const CDDS_POSTPAINT = 0x00000002;
-  static const CDDS_PREERASE = 0x00000003;
-  static const CDDS_PREPAINT = 0x00000001;
-  static const CDDS_ITEMPOSTERASE = 0x00010004;
-  static const CDDS_ITEMPOSTPAINT = 0x00010002;
-  static const CDDS_ITEMPREERASE = 0x00010003;
-  static const CDDS_ITEMPREPAINT = 0x00010001;
-  static const CDDS_SUBITEM = 0x00020000;
-}
-
-/// {@category Enum}
-class MCGRIDINFO_dwPartFlags {
-  static const MCGIP_CALENDARCONTROL = 0x00000000;
-  static const MCGIP_NEXT = 0x00000001;
-  static const MCGIP_PREV = 0x00000002;
-  static const MCGIP_FOOTER = 0x00000003;
-  static const MCGIP_CALENDAR = 0x00000004;
-  static const MCGIP_CALENDARHEADER = 0x00000005;
-  static const MCGIP_CALENDARBODY = 0x00000006;
-  static const MCGIP_CALENDARROW = 0x00000007;
-  static const MCGIP_CALENDARCELL = 0x00000008;
-}
-
-/// {@category Enum}
-class PARAFORMAT2_wBordersFlags {
-  static const wBorders1 = 0x00000001;
-  static const wBorders2 = 0x00000002;
-  static const wBorders4 = 0x00000004;
-  static const wBorders8 = 0x00000008;
-  static const wBorders16 = 0x00000010;
-  static const wBorders32 = 0x00000020;
-  static const wBorders64 = 0x00000040;
-}
-
-/// {@category Enum}
-class LVITEMA_iGroupId {
-  static const I_GROUPIDCALLBACK = 0xffffffff;
-  static const I_GROUPIDNONE = 0xfffffffe;
-}
-
-/// {@category Enum}
-class NMTBHOTITEM_dwFlags {
-  static const HICF_ACCELERATOR = 0x00000004;
-  static const HICF_ARROWKEYS = 0x00000002;
-  static const HICF_DUPACCEL = 0x00000008;
-  static const HICF_ENTERING = 0x00000010;
-  static const HICF_LEAVING = 0x00000020;
-  static const HICF_LMOUSE = 0x00000080;
-  static const HICF_MOUSE = 0x00000001;
-  static const HICF_OTHER = 0x00000000;
-  static const HICF_RESELECT = 0x00000040;
-  static const HICF_TOGGLEDROPDOWN = 0x00000100;
-}
-
-/// {@category Enum}
-class PARAFORMAT2_bLineSpacingRuleFlags {
-  static const None = 0x00000000;
-  static const bLineSpacingRule1 = 0x00000001;
-  static const bLineSpacingRule2 = 0x00000002;
-  static const bLineSpacingRule3 = 0x00000003;
-  static const bLineSpacingRule4 = 0x00000004;
-  static const bLineSpacingRule5 = 0x00000005;
-}
-
-/// {@category Enum}
-class LVTILEVIEWINFO_dwFlags {
-  static const LVTVIF_EXTENDED = 0x00000004;
-}
-
-/// {@category Enum}
-class NMPGSCROLL_iDirFlags {
-  static const PGF_SCROLLDOWN = 0x00000002;
-  static const PGF_SCROLLLEFT = 0x00000004;
-  static const PGF_SCROLLRIGHT = 0x00000008;
-  static const PGF_SCROLLUP = 0x00000001;
-}
-
-/// {@category Enum}
-class PARAFORMAT2_wAlignmentFlags {
-  static const PFA_LEFT = 0x00000001;
-  static const PFA_RIGHT = 0x00000002;
-  static const PFA_CENTER = 0x00000003;
-  static const PFA_JUSTIFY = 0x00000004;
-  static const PFA_FULL_INTERWORD = 0x00000004;
-}
-
-/// {@category Enum}
-class PARAFORMAT2_wShadingStyleFlags {
-  static const None = 0x00000000;
-  static const wShadingStyle1 = 0x00000001;
-  static const wShadingStyle2 = 0x00000002;
-  static const wShadingStyle3 = 0x00000003;
-  static const wShadingStyle4 = 0x00000004;
-  static const wShadingStyle5 = 0x00000005;
-  static const wShadingStyle6 = 0x00000006;
-  static const wShadingStyle7 = 0x00000007;
-  static const wShadingStyle8 = 0x00000008;
-  static const wShadingStyle9 = 0x00000009;
-  static const wShadingStyle10 = 0x0000000a;
-  static const wShadingStyle11 = 0x0000000b;
-  static const wShadingStyle12 = 0x0000000c;
-}
-
-/// {@category Enum}
-class LVCOLUMNW_mask {
-  static const LVCF_FMT = 0x00000001;
-  static const LVCF_WIDTH = 0x00000002;
-  static const LVCF_TEXT = 0x00000004;
-  static const LVCF_SUBITEM = 0x00000008;
-  static const LVCF_IMAGE = 0x00000010;
-  static const LVCF_ORDER = 0x00000020;
-  static const LVCF_MINWIDTH = 0x00000040;
-  static const LVCF_DEFAULTWIDTH = 0x00000080;
-  static const LVCF_IDEALWIDTH = 0x00000100;
-}
-
-/// {@category Enum}
-class GETTEXTEX_flags {
-  static const GT_DEFAULT = 0x00000000;
-  static const GT_NOHIDDENTEXT = 0x00000008;
-  static const GT_RAWTEXT = 0x00000004;
-  static const GT_SELECTION = 0x00000002;
-  static const GT_USECRLF = 0x00000001;
-}
-
-/// {@category Enum}
-class LVFINDINFOW_flags {
-  static const LVFI_PARAM = 0x00000001;
-  static const LVFI_PARTIAL = 0x00000008;
-  static const LVFI_STRING = 0x00000002;
-  static const LVFI_SUBSTRING = 0x00000004;
-  static const LVFI_WRAP = 0x00000020;
-  static const LVFI_NEARESTXY = 0x00000040;
-}
-
-/// {@category Enum}
-class BUTTON_IMAGELIST_uAlignFlags {
-  static const BUTTON_IMAGELIST_ALIGN_LEFT = 0x00000000;
-  static const BUTTON_IMAGELIST_ALIGN_RIGHT = 0x00000001;
-  static const BUTTON_IMAGELIST_ALIGN_TOP = 0x00000002;
-  static const BUTTON_IMAGELIST_ALIGN_BOTTOM = 0x00000003;
-  static const BUTTON_IMAGELIST_ALIGN_CENTER = 0x00000004;
-}
-
-/// {@category Enum}
-class TBBUTTONINFOW_dwMask {
-  static const TBIF_BYINDEX = 0x80000000;
-  static const TBIF_COMMAND = 0x00000020;
-  static const TBIF_IMAGE = 0x00000001;
-  static const TBIF_LPARAM = 0x00000010;
-  static const TBIF_SIZE = 0x00000040;
-  static const TBIF_STATE = 0x00000004;
-  static const TBIF_STYLE = 0x00000008;
-  static const TBIF_TEXT = 0x00000002;
-}
-
-/// {@category Enum}
-class TBINSERTMARK_dwFlags {
-  static const None = 0x00000000;
-  static const TBIMHT_AFTER = 0x00000001;
-  static const TBIMHT_BACKGROUND = 0x00000002;
-}
-
-/// {@category Enum}
-class LVGROUP_maskFlags {
-  static const LVGF_NONE = 0x00000000;
-  static const LVGF_HEADER = 0x00000001;
-  static const LVGF_FOOTER = 0x00000002;
-  static const LVGF_STATE = 0x00000004;
-}
-
-/// {@category Enum}
-class BP_PAINTPARAMSFlags {
-  static const BPPF_ERASE = 0x00000001;
-  static const BPPF_NOCLIP = 0x00000002;
-  static const BPPF_NONCLIENT = 0x00000004;
-}
-
-/// {@category Enum}
-class TVHITTESTINFO_flags {
-  static const TVHT_ABOVE = 0x00000100;
-  static const TVHT_BELOW = 0x00000200;
-  static const TVHT_NOWHERE = 0x00000001;
-  static const TVHT_ONITEM = 0x00000046;
-  static const TVHT_ONITEMBUTTON = 0x00000010;
-  static const TVHT_ONITEMICON = 0x00000002;
-  static const TVHT_ONITEMINDENT = 0x00000008;
-  static const TVHT_ONITEMLABEL = 0x00000004;
-  static const TVHT_ONITEMRIGHT = 0x00000020;
-  static const TVHT_ONITEMSTATEICON = 0x00000040;
-  static const TVHT_TOLEFT = 0x00000800;
-  static const TVHT_TORIGHT = 0x00000400;
-}
-
-/// {@category Enum}
-class DRAWITEMSTRUCT_CtlTypeFlags {
-  static const ODT_BUTTON = 0x00000004;
-  static const ODT_COMBOBOX = 0x00000003;
-  static const ODT_LISTBOX = 0x00000002;
-  static const ODT_LISTVIEW = 0x00000066;
-  static const ODT_MENU = 0x00000001;
-  static const ODT_STATIC = 0x00000005;
-  static const ODT_TAB = 0x00000065;
-}
-
-/// {@category Enum}
-class NMPGCALCSIZE_dwFlagFlags {
-  static const PGF_CALCHEIGHT = 0x00000002;
-  static const PGF_CALCWIDTH = 0x00000001;
-}
-
-/// {@category Enum}
-class ENDCOMPOSITIONNOTIFY_dwCodeFlags {
-  static const ECN_ENDCOMPOSITION = 0x00000001;
-  static const ECN_NEWTEXT = 0x00000002;
-}
-
-/// {@category Enum}
-class NMLVCUSTOMDRAW_uAlignFlags {
-  static const LVGA_HEADER_CENTER = 0x00000002;
-  static const LVGA_HEADER_LEFT = 0x00000001;
-  static const LVGA_HEADER_RIGHT = 0x00000004;
-}
-
-/// {@category Enum}
-class IMECOMPTEXT_flags {
-  static const ICT_RESULTREADSTR = 0x00000001;
-}
-
-/// {@category Enum}
-class MCGRIDINFO_dwFlags {
-  static const MCGIF_DATE = 0x00000001;
-  static const MCGIF_RECT = 0x00000002;
-  static const MCGIF_NAME = 0x00000004;
-}
-
-/// {@category Enum}
-class GETTEXTLENGTHEX_flags {
-  static const GTL_DEFAULT = 0x00000000;
-  static const GTL_USECRLF = 0x00000001;
-  static const GTL_PRECISE = 0x00000002;
-  static const GTL_CLOSE = 0x00000004;
-  static const GTL_NUMCHARS = 0x00000008;
-  static const GTL_NUMBYTES = 0x00000010;
-}
-
-/// {@category Enum}
-class LVHITTESTINFO_flags {
-  static const LVHT_ABOVE = 0x00000008;
-  static const LVHT_BELOW = 0x00000010;
-  static const LVHT_NOWHERE = 0x00000001;
-  static const LVHT_ONITEMICON = 0x00000002;
-  static const LVHT_ONITEMLABEL = 0x00000004;
-  static const LVHT_ONITEMSTATEICON = 0x00000008;
-  static const LVHT_TOLEFT = 0x00000040;
-  static const LVHT_TORIGHT = 0x00000020;
-  static const LVHT_EX_GROUP_HEADER = 0x10000000;
-  static const LVHT_EX_GROUP_FOOTER = 0x20000000;
-  static const LVHT_EX_GROUP_COLLAPSE = 0x40000000;
-  static const LVHT_EX_GROUP_BACKGROUND = 0x80000000;
-  static const LVHT_EX_GROUP_STATEICON = 0x01000000;
-  static const LVHT_EX_GROUP_SUBSETLINK = 0x02000000;
-  static const LVHT_EX_GROUP = 0xf3000000;
-  static const LVHT_EX_ONCONTENTS = 0x04000000;
-  static const LVHT_EX_FOOTER = 0x08000000;
-}
-
-/// {@category Enum}
-class INITCOMMONCONTROLSEX_dwICCFlags {
-  static const ICC_ANIMATE_CLASS = 0x00000080;
-  static const ICC_BAR_CLASSES = 0x00000004;
-  static const ICC_COOL_CLASSES = 0x00000400;
-  static const ICC_DATE_CLASSES = 0x00000100;
-  static const ICC_HOTKEY_CLASS = 0x00000040;
-  static const ICC_INTERNET_CLASSES = 0x00000800;
-  static const ICC_LINK_CLASS = 0x00008000;
-  static const ICC_LISTVIEW_CLASSES = 0x00000001;
-  static const ICC_NATIVEFNTCTL_CLASS = 0x00002000;
-  static const ICC_PAGESCROLLER_CLASS = 0x00001000;
-  static const ICC_PROGRESS_CLASS = 0x00000020;
-  static const ICC_STANDARD_CLASSES = 0x00004000;
-  static const ICC_TAB_CLASSES = 0x00000008;
-  static const ICC_TREEVIEW_CLASSES = 0x00000002;
-  static const ICC_UPDOWN_CLASS = 0x00000010;
-  static const ICC_USEREX_CLASSES = 0x00000200;
-  static const ICC_WIN95_CLASSES = 0x000000ff;
-}
-
-/// {@category Enum}
-class NMLVCUSTOMDRAW_dwItemTypeFlags {
-  static const LVCDI_ITEM = 0x00000000;
-  static const LVCDI_GROUP = 0x00000001;
-  static const LVCDI_ITEMSLIST = 0x00000002;
-}
-
-/// {@category Enum}
-class NMTBDISPINFOW_dwMask {
-  static const TBNF_IMAGE = 0x00000001;
-  static const TBNF_TEXT = 0x00000002;
-  static const TBNF_DI_SETITEM = 0x10000000;
-}
-
-/// {@category Enum}
-class REOBJECT_dwFlags {
-  static const REO_ALIGNTORIGHT = 0x00000100;
-  static const REO_BELOWBASELINE = 0x00000002;
-  static const REO_BLANK = 0x00000010;
-  static const REO_CANROTATE = 0x00000080;
-  static const REO_DONTNEEDPALETTE = 0x00000020;
-  static const REO_DYNAMICSIZE = 0x00000008;
-  static const REO_GETMETAFILE = 0x00400000;
-  static const REO_HILITED = 0x01000000;
-  static const REO_INPLACEACTIVE = 0x02000000;
-  static const REO_INVERTEDSELECT = 0x00000004;
-  static const REO_LINK = 0x80000000;
-  static const REO_LINKAVAILABLE = 0x00800000;
-  static const REO_OPEN = 0x04000000;
-  static const REO_OWNERDRAWSELECT = 0x00000040;
-  static const REO_RESIZABLE = 0x00000001;
-  static const REO_SELECTED = 0x08000000;
-  static const REO_STATIC = 0x40000000;
-  static const REO_USEASBACKGROUND = 0x00000400;
-  static const REO_WRAPTEXTAROUND = 0x00000200;
-}
-
-/// {@category Enum}
-class NMLVEMPTYMARKUP_dwFlags {
-  static const EMF_CENTERED = 0x00000001;
-}
-
-/// {@category Enum}
-class PARAFORMAT2_wNumberingStyleFlags {
-  static const PFNS_PAREN = 0x00000000;
-  static const PFNS_PARENS = 0x00000100;
-  static const PFNS_PERIOD = 0x00000200;
-  static const PFNS_PLAIN = 0x00000300;
-  static const PFNS_NONUMBER = 0x00000400;
-  static const PFNS_NEWNUMBER = 0x00008000;
-}
-
-/// {@category Enum}
-class TBADDBITMAP_hInstFlags {
-  static const IDB_STD_LARGE_COLOR = 0x00000001;
-  static const IDB_STD_SMALL_COLOR = 0x00000000;
-  static const IDB_VIEW_LARGE_COLOR = 0x00000005;
-  static const IDB_VIEW_SMALL_COLOR = 0x00000004;
-  static const IDB_HIST_NORMAL = 0x0000000c;
-  static const IDB_HIST_HOT = 0x0000000d;
-  static const IDB_HIST_DISABLED = 0x0000000e;
-  static const IDB_HIST_PRESSED = 0x0000000f;
-}
-
-/// {@category Enum}
-class LVFOOTERITEM_maskFlags {
-  static const LVFIF_TEXT = 0x00000001;
-  static const LVFIF_STATE = 0x00000002;
 }
 

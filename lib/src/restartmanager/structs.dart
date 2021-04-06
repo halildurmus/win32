@@ -50,8 +50,10 @@ class RM_UNIQUE_PROCESS extends Struct {
 
 class RM_PROCESS_INFO extends Struct {
   external RM_UNIQUE_PROCESS Process;
-  external __ushort__ strAppName;
-  external __ushort__ strServiceShortName;
+  @Array(129)
+  external Array<Uint16> strAppName;
+  @Array(64)
+  external Array<Uint16> strServiceShortName;
   @Uint32() external int ApplicationType;
   @Uint32() external int AppStatus;
   @Uint32() external int TSSessionId;

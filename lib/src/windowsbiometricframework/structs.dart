@@ -162,8 +162,10 @@ class WINBIO_PRESENCE extends Struct {
 class WINBIO_BSP_SCHEMA extends Struct {
   @Uint32() external int BiometricFactor;
   external GUID BspId;
-  external __ushort__ Description;
-  external __ushort__ Vendor;
+  @Array(129)
+  external Array<Uint16> Description;
+  @Array(129)
+  external Array<Uint16> Vendor;
   external WINBIO_VERSION Version;
 }
 
@@ -173,11 +175,16 @@ class WINBIO_UNIT_SCHEMA extends Struct {
   @Uint32() external int BiometricFactor;
   @Uint32() external int SensorSubType;
   @Uint32() external int Capabilities;
-  external __ushort__ DeviceInstanceId;
-  external __ushort__ Description;
-  external __ushort__ Manufacturer;
-  external __ushort__ Model;
-  external __ushort__ SerialNumber;
+  @Array(129)
+  external Array<Uint16> DeviceInstanceId;
+  @Array(129)
+  external Array<Uint16> Description;
+  @Array(129)
+  external Array<Uint16> Manufacturer;
+  @Array(129)
+  external Array<Uint16> Model;
+  @Array(129)
+  external Array<Uint16> SerialNumber;
   external WINBIO_VERSION FirmwareVersion;
 }
 
@@ -186,8 +193,10 @@ class WINBIO_STORAGE_SCHEMA extends Struct {
   external GUID DatabaseId;
   external GUID DataFormat;
   @Uint32() external int Attributes;
-  external __ushort__ FilePath;
-  external __ushort__ ConnectionString;
+  @Array(129)
+  external Array<Uint16> FilePath;
+  @Array(129)
+  external Array<Uint16> ConnectionString;
 }
 
 class WINBIO_EXTENDED_SENSOR_INFO extends Struct {
@@ -248,7 +257,8 @@ class WINBIO_PROTECTION_POLICY extends Struct {
   external GUID DatabaseId;
   @Uint64() external int UserState;
   @IntPtr() external int PolicySize;
-  external __ubyte__ Policy;
+  @Array(128)
+  external Array<Uint8> Policy;
 }
 
 class WINBIO_GESTURE_METADATA extends Struct {

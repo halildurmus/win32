@@ -46,25 +46,37 @@ import 'package:ffi/ffi.dart';
 class WER_REPORT_INFORMATION extends Struct {
   @Uint32() external int dwSize;
   @IntPtr() external int hProcess;
-  external __ushort__ wzConsentKey;
-  external __ushort__ wzFriendlyEventName;
-  external __ushort__ wzApplicationName;
-  external __ushort__ wzApplicationPath;
-  external __ushort__ wzDescription;
+  @Array(64)
+  external Array<Uint16> wzConsentKey;
+  @Array(128)
+  external Array<Uint16> wzFriendlyEventName;
+  @Array(128)
+  external Array<Uint16> wzApplicationName;
+  @Array(129)
+  external Array<Uint16> wzApplicationPath;
+  @Array(130)
+  external Array<Uint16> wzDescription;
   @IntPtr() external int hwndParent;
 }
 
 class WER_REPORT_INFORMATION_V3 extends Struct {
   @Uint32() external int dwSize;
   @IntPtr() external int hProcess;
-  external __ushort__ wzConsentKey;
-  external __ushort__ wzFriendlyEventName;
-  external __ushort__ wzApplicationName;
-  external __ushort__ wzApplicationPath;
-  external __ushort__ wzDescription;
+  @Array(64)
+  external Array<Uint16> wzConsentKey;
+  @Array(128)
+  external Array<Uint16> wzFriendlyEventName;
+  @Array(128)
+  external Array<Uint16> wzApplicationName;
+  @Array(129)
+  external Array<Uint16> wzApplicationPath;
+  @Array(130)
+  external Array<Uint16> wzDescription;
   @IntPtr() external int hwndParent;
-  external __ushort__ wzNamespacePartner;
-  external __ushort__ wzNamespaceGroup;
+  @Array(64)
+  external Array<Uint16> wzNamespacePartner;
+  @Array(64)
+  external Array<Uint16> wzNamespaceGroup;
 }
 
 class WER_DUMP_CUSTOM_OPTIONS extends Struct {
@@ -78,7 +90,8 @@ class WER_DUMP_CUSTOM_OPTIONS extends Struct {
   @Uint32() external int dwOtherThreadExFlags;
   @Uint32() external int dwPreferredModuleFlags;
   @Uint32() external int dwOtherModuleFlags;
-  external __ushort__ wzPreferredModuleList;
+  @Array(129)
+  external Array<Uint16> wzPreferredModuleList;
 }
 
 class WER_DUMP_CUSTOM_OPTIONS_V2 extends Struct {
@@ -92,7 +105,8 @@ class WER_DUMP_CUSTOM_OPTIONS_V2 extends Struct {
   @Uint32() external int dwOtherThreadExFlags;
   @Uint32() external int dwPreferredModuleFlags;
   @Uint32() external int dwOtherModuleFlags;
-  external __ushort__ wzPreferredModuleList;
+  @Array(129)
+  external Array<Uint16> wzPreferredModuleList;
   @Uint32() external int dwPreferredModuleResetFlags;
   @Uint32() external int dwOtherModuleResetFlags;
 }
@@ -100,15 +114,23 @@ class WER_DUMP_CUSTOM_OPTIONS_V2 extends Struct {
 class WER_REPORT_INFORMATION_V4 extends Struct {
   @Uint32() external int dwSize;
   @IntPtr() external int hProcess;
-  external __ushort__ wzConsentKey;
-  external __ushort__ wzFriendlyEventName;
-  external __ushort__ wzApplicationName;
-  external __ushort__ wzApplicationPath;
-  external __ushort__ wzDescription;
+  @Array(64)
+  external Array<Uint16> wzConsentKey;
+  @Array(128)
+  external Array<Uint16> wzFriendlyEventName;
+  @Array(128)
+  external Array<Uint16> wzApplicationName;
+  @Array(129)
+  external Array<Uint16> wzApplicationPath;
+  @Array(130)
+  external Array<Uint16> wzDescription;
   @IntPtr() external int hwndParent;
-  external __ushort__ wzNamespacePartner;
-  external __ushort__ wzNamespaceGroup;
-  external __ubyte__ rgbApplicationIdentity;
+  @Array(64)
+  external Array<Uint16> wzNamespacePartner;
+  @Array(64)
+  external Array<Uint16> wzNamespaceGroup;
+  @Array(16)
+  external Array<Uint8> rgbApplicationIdentity;
   @IntPtr() external int hSnapshot;
   @IntPtr() external int hDeleteFilesImpersonationToken;
 }
@@ -116,15 +138,23 @@ class WER_REPORT_INFORMATION_V4 extends Struct {
 class WER_REPORT_INFORMATION_V5 extends Struct {
   @Uint32() external int dwSize;
   @IntPtr() external int hProcess;
-  external __ushort__ wzConsentKey;
-  external __ushort__ wzFriendlyEventName;
-  external __ushort__ wzApplicationName;
-  external __ushort__ wzApplicationPath;
-  external __ushort__ wzDescription;
+  @Array(64)
+  external Array<Uint16> wzConsentKey;
+  @Array(128)
+  external Array<Uint16> wzFriendlyEventName;
+  @Array(128)
+  external Array<Uint16> wzApplicationName;
+  @Array(129)
+  external Array<Uint16> wzApplicationPath;
+  @Array(130)
+  external Array<Uint16> wzDescription;
   @IntPtr() external int hwndParent;
-  external __ushort__ wzNamespacePartner;
-  external __ushort__ wzNamespaceGroup;
-  external __ubyte__ rgbApplicationIdentity;
+  @Array(64)
+  external Array<Uint16> wzNamespacePartner;
+  @Array(64)
+  external Array<Uint16> wzNamespaceGroup;
+  @Array(16)
+  external Array<Uint8> rgbApplicationIdentity;
   @IntPtr() external int hSnapshot;
   @IntPtr() external int hDeleteFilesImpersonationToken;
   @Uint32() external int submitResultMax;
@@ -141,7 +171,8 @@ class WER_DUMP_CUSTOM_OPTIONS_V3 extends Struct {
   @Uint32() external int dwOtherThreadExFlags;
   @Uint32() external int dwPreferredModuleFlags;
   @Uint32() external int dwOtherModuleFlags;
-  external __ushort__ wzPreferredModuleList;
+  @Array(129)
+  external Array<Uint16> wzPreferredModuleList;
   @Uint32() external int dwPreferredModuleResetFlags;
   @Uint32() external int dwOtherModuleResetFlags;
   external Pointer pvDumpKey;
@@ -166,13 +197,17 @@ class WER_RUNTIME_EXCEPTION_INFORMATION extends Struct {
 }
 
 class WER_REPORT_PARAMETER extends Struct {
-  external __ushort__ Name;
-  external __ushort__ Value;
+  @Array(128)
+  external Array<Uint16> Name;
+  @Array(129)
+  external Array<Uint16> Value;
 }
 
 class WER_REPORT_SIGNATURE extends Struct {
-  external __ushort__ EventName;
-  external WER_REPORT_PARAMETER Parameters;
+  @Array(65)
+  external Array<Uint16> EventName;
+  @Array(10)
+  external Array<WER_REPORT_PARAMETER> Parameters;
 }
 
 class WER_REPORT_METADATA_V2 extends Struct {
@@ -181,7 +216,8 @@ class WER_REPORT_METADATA_V2 extends Struct {
   external GUID ReportId;
   external FILETIME CreationTime;
   @Uint64() external int SizeInBytes;
-  external __ushort__ CabId;
+  @Array(129)
+  external Array<Uint16> CabId;
   @Uint32() external int ReportStatus;
   external GUID ReportIntegratorId;
   @Uint32() external int NumberOfFiles;
@@ -195,17 +231,23 @@ class WER_REPORT_METADATA_V3 extends Struct {
   external GUID ReportId;
   external FILETIME CreationTime;
   @Uint64() external int SizeInBytes;
-  external __ushort__ CabId;
+  @Array(129)
+  external Array<Uint16> CabId;
   @Uint32() external int ReportStatus;
   external GUID ReportIntegratorId;
   @Uint32() external int NumberOfFiles;
   @Uint32() external int SizeOfFileNames;
   external Pointer<Utf16> FileNames;
-  external __ushort__ FriendlyEventName;
-  external __ushort__ ApplicationName;
-  external __ushort__ ApplicationPath;
-  external __ushort__ Description;
-  external __ushort__ BucketIdString;
+  @Array(128)
+  external Array<Uint16> FriendlyEventName;
+  @Array(128)
+  external Array<Uint16> ApplicationName;
+  @Array(129)
+  external Array<Uint16> ApplicationPath;
+  @Array(130)
+  external Array<Uint16> Description;
+  @Array(129)
+  external Array<Uint16> BucketIdString;
   @Uint64() external int LegacyBucketId;
 }
 

@@ -1,4 +1,26 @@
 /// {@category Enum}
+class DWMFLIP3DWINDOWPOLICY {
+  static const DWMFLIP3D_DEFAULT = 0x00000000;
+  static const DWMFLIP3D_EXCLUDEBELOW = 0x00000001;
+  static const DWMFLIP3D_EXCLUDEABOVE = 0x00000002;
+  static const DWMFLIP3D_LAST = 0x00000003;
+}
+
+/// {@category Enum}
+class DWMNCRENDERINGPOLICY {
+  static const DWMNCRP_USEWINDOWSTYLE = 0x00000000;
+  static const DWMNCRP_DISABLED = 0x00000001;
+  static const DWMNCRP_ENABLED = 0x00000002;
+  static const DWMNCRP_LAST = 0x00000003;
+}
+
+/// {@category Enum}
+class DWMTRANSITION_OWNEDWINDOW_TARGET {
+  static const DWMTRANSITION_OWNEDWINDOW_NULL = 0xffffffff;
+  static const DWMTRANSITION_OWNEDWINDOW_REPOSITION = 0x00000000;
+}
+
+/// {@category Enum}
 class DWMWINDOWATTRIBUTE {
   static const DWMWA_NCRENDERING_ENABLED = 0x00000001;
   static const DWMWA_NCRENDERING_POLICY = 0x00000002;
@@ -20,50 +42,6 @@ class DWMWINDOWATTRIBUTE {
 }
 
 /// {@category Enum}
-class DWMNCRENDERINGPOLICY {
-  static const DWMNCRP_USEWINDOWSTYLE = 0x00000000;
-  static const DWMNCRP_DISABLED = 0x00000001;
-  static const DWMNCRP_ENABLED = 0x00000002;
-  static const DWMNCRP_LAST = 0x00000003;
-}
-
-/// {@category Enum}
-class DWMFLIP3DWINDOWPOLICY {
-  static const DWMFLIP3D_DEFAULT = 0x00000000;
-  static const DWMFLIP3D_EXCLUDEBELOW = 0x00000001;
-  static const DWMFLIP3D_EXCLUDEABOVE = 0x00000002;
-  static const DWMFLIP3D_LAST = 0x00000003;
-}
-
-/// {@category Enum}
-class DWM_SOURCE_FRAME_SAMPLING {
-  static const DWM_SOURCE_FRAME_SAMPLING_POINT = 0x00000000;
-  static const DWM_SOURCE_FRAME_SAMPLING_COVERAGE = 0x00000001;
-  static const DWM_SOURCE_FRAME_SAMPLING_LAST = 0x00000002;
-}
-
-/// {@category Enum}
-class DWMTRANSITION_OWNEDWINDOW_TARGET {
-  static const DWMTRANSITION_OWNEDWINDOW_NULL = 0xffffffff;
-  static const DWMTRANSITION_OWNEDWINDOW_REPOSITION = 0x00000000;
-}
-
-/// {@category Enum}
-class GESTURE_TYPE {
-  static const GT_PEN_TAP = 0x00000000;
-  static const GT_PEN_DOUBLETAP = 0x00000001;
-  static const GT_PEN_RIGHTTAP = 0x00000002;
-  static const GT_PEN_PRESSANDHOLD = 0x00000003;
-  static const GT_PEN_PRESSANDHOLDABORT = 0x00000004;
-  static const GT_TOUCH_TAP = 0x00000005;
-  static const GT_TOUCH_DOUBLETAP = 0x00000006;
-  static const GT_TOUCH_RIGHTTAP = 0x00000007;
-  static const GT_TOUCH_PRESSANDHOLD = 0x00000008;
-  static const GT_TOUCH_PRESSANDHOLDABORT = 0x00000009;
-  static const GT_TOUCH_PRESSANDTAP = 0x0000000a;
-}
-
-/// {@category Enum}
 class DWM_SHOWCONTACT {
   static const DWMSC_DOWN = 0x00000001;
   static const DWMSC_UP = 0x00000002;
@@ -72,6 +50,13 @@ class DWM_SHOWCONTACT {
   static const DWMSC_PENBARREL = 0x00000010;
   static const DWMSC_NONE = 0x00000000;
   static const DWMSC_ALL = 0xffffffff;
+}
+
+/// {@category Enum}
+class DWM_SOURCE_FRAME_SAMPLING {
+  static const DWM_SOURCE_FRAME_SAMPLING_POINT = 0x00000000;
+  static const DWM_SOURCE_FRAME_SAMPLING_COVERAGE = 0x00000001;
+  static const DWM_SOURCE_FRAME_SAMPLING_LAST = 0x00000002;
 }
 
 /// {@category Enum}
@@ -87,5 +72,20 @@ class DWM_TAB_WINDOW_REQUIREMENTS {
   static const DWMTWR_USER_POLICY = 0x00000080;
   static const DWMTWR_GROUP_POLICY = 0x00000100;
   static const DWMTWR_APP_COMPAT = 0x00000200;
+}
+
+/// {@category Enum}
+class GESTURE_TYPE {
+  static const GT_PEN_TAP = 0x00000000;
+  static const GT_PEN_DOUBLETAP = 0x00000001;
+  static const GT_PEN_RIGHTTAP = 0x00000002;
+  static const GT_PEN_PRESSANDHOLD = 0x00000003;
+  static const GT_PEN_PRESSANDHOLDABORT = 0x00000004;
+  static const GT_TOUCH_TAP = 0x00000005;
+  static const GT_TOUCH_DOUBLETAP = 0x00000006;
+  static const GT_TOUCH_RIGHTTAP = 0x00000007;
+  static const GT_TOUCH_PRESSANDHOLD = 0x00000008;
+  static const GT_TOUCH_PRESSANDHOLDABORT = 0x00000009;
+  static const GT_TOUCH_PRESSANDTAP = 0x0000000a;
 }
 

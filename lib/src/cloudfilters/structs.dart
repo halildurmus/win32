@@ -191,7 +191,8 @@ class CF_PLACEHOLDER_BASIC_INFO extends Struct {
   @Int64() external int FileId;
   @Int64() external int SyncRootFileId;
   @Uint32() external int FileIdentityLength;
-  external __ubyte__ FileIdentity;
+  @Array(1)
+  external Array<Uint8> FileIdentity;
 }
 
 class CF_PLACEHOLDER_STANDARD_INFO extends Struct {
@@ -204,7 +205,8 @@ class CF_PLACEHOLDER_STANDARD_INFO extends Struct {
   @Int64() external int FileId;
   @Int64() external int SyncRootFileId;
   @Uint32() external int FileIdentityLength;
-  external __ubyte__ FileIdentity;
+  @Array(1)
+  external Array<Uint8> FileIdentity;
 }
 
 class CF_SYNC_ROOT_BASIC_INFO extends Struct {
@@ -213,8 +215,10 @@ class CF_SYNC_ROOT_BASIC_INFO extends Struct {
 
 class CF_SYNC_ROOT_PROVIDER_INFO extends Struct {
   @Uint32() external int ProviderStatus;
-  external __ushort__ ProviderName;
-  external __ushort__ ProviderVersion;
+  @Array(129)
+  external Array<Uint16> ProviderName;
+  @Array(129)
+  external Array<Uint16> ProviderVersion;
 }
 
 class CF_SYNC_ROOT_STANDARD_INFO extends Struct {
@@ -224,9 +228,12 @@ class CF_SYNC_ROOT_STANDARD_INFO extends Struct {
   @Uint32() external int InSyncPolicy;
   @Uint32() external int HardLinkPolicy;
   @Uint32() external int ProviderStatus;
-  external __ushort__ ProviderName;
-  external __ushort__ ProviderVersion;
+  @Array(129)
+  external Array<Uint16> ProviderName;
+  @Array(129)
+  external Array<Uint16> ProviderVersion;
   @Uint32() external int SyncRootIdentityLength;
-  external __ubyte__ SyncRootIdentity;
+  @Array(1)
+  external Array<Uint8> SyncRootIdentity;
 }
 

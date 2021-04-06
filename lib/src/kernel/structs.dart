@@ -55,7 +55,7 @@ class QUAD extends Struct {
 class CSTRING extends Struct {
   @Uint16() external int Length;
   @Uint16() external int MaximumLength;
-  external Pointer<Int8> Buffer;
+  external Pointer<Utf8> Buffer;
 }
 
 class LIST_ENTRY extends Struct {
@@ -87,7 +87,8 @@ class SINGLE_LIST_ENTRY32 extends Struct {
 }
 
 class WNF_STATE_NAME extends Struct {
-  external __uint__ Data;
+  @Array(2)
+  external Array<Uint32> Data;
 }
 
 class STRING32 extends Struct {

@@ -1,8 +1,26 @@
 /// {@category Enum}
-class GPMRSOPMode {
-  static const rsopUnknown = 0x00000000;
-  static const rsopPlanning = 0x00000001;
-  static const rsopLogging = 0x00000002;
+class GPMBackupType {
+  static const typeGPO = 0x00000000;
+  static const typeStarterGPO = 0x00000001;
+}
+
+/// {@category Enum}
+class GPMDestinationOption {
+  static const opDestinationSameAsSource = 0x00000000;
+  static const opDestinationNone = 0x00000001;
+  static const opDestinationByRelativeName = 0x00000002;
+  static const opDestinationSet = 0x00000003;
+}
+
+/// {@category Enum}
+class GPMEntryType {
+  static const typeUser = 0x00000000;
+  static const typeComputer = 0x00000001;
+  static const typeLocalGroup = 0x00000002;
+  static const typeGlobalGroup = 0x00000003;
+  static const typeUniversalGroup = 0x00000004;
+  static const typeUNCPath = 0x00000005;
+  static const typeUnknown = 0x00000006;
 }
 
 /// {@category Enum}
@@ -29,30 +47,10 @@ class GPMPermissionType {
 }
 
 /// {@category Enum}
-class GPMSearchProperty {
-  static const gpoPermissions = 0x00000000;
-  static const gpoEffectivePermissions = 0x00000001;
-  static const gpoDisplayName = 0x00000002;
-  static const gpoWMIFilter = 0x00000003;
-  static const gpoID = 0x00000004;
-  static const gpoComputerExtensions = 0x00000005;
-  static const gpoUserExtensions = 0x00000006;
-  static const somLinks = 0x00000007;
-  static const gpoDomain = 0x00000008;
-  static const backupMostRecent = 0x00000009;
-  static const starterGPOPermissions = 0x0000000a;
-  static const starterGPOEffectivePermissions = 0x0000000b;
-  static const starterGPODisplayName = 0x0000000c;
-  static const starterGPOID = 0x0000000d;
-  static const starterGPODomain = 0x0000000e;
-}
-
-/// {@category Enum}
-class GPMSearchOperation {
-  static const opEquals = 0x00000000;
-  static const opContains = 0x00000001;
-  static const opNotContains = 0x00000002;
-  static const opNotEquals = 0x00000003;
+class GPMRSOPMode {
+  static const rsopUnknown = 0x00000000;
+  static const rsopPlanning = 0x00000001;
+  static const rsopLogging = 0x00000002;
 }
 
 /// {@category Enum}
@@ -63,25 +61,6 @@ class GPMReportType {
   static const repInfraRefreshXML = 0x00000003;
   static const repClientHealthXML = 0x00000004;
   static const repClientHealthRefreshXML = 0x00000005;
-}
-
-/// {@category Enum}
-class GPMEntryType {
-  static const typeUser = 0x00000000;
-  static const typeComputer = 0x00000001;
-  static const typeLocalGroup = 0x00000002;
-  static const typeGlobalGroup = 0x00000003;
-  static const typeUniversalGroup = 0x00000004;
-  static const typeUNCPath = 0x00000005;
-  static const typeUnknown = 0x00000006;
-}
-
-/// {@category Enum}
-class GPMDestinationOption {
-  static const opDestinationSameAsSource = 0x00000000;
-  static const opDestinationNone = 0x00000001;
-  static const opDestinationByRelativeName = 0x00000002;
-  static const opDestinationSet = 0x00000003;
 }
 
 /// {@category Enum}
@@ -98,9 +77,30 @@ class GPMSOMType {
 }
 
 /// {@category Enum}
-class GPMBackupType {
-  static const typeGPO = 0x00000000;
-  static const typeStarterGPO = 0x00000001;
+class GPMSearchOperation {
+  static const opEquals = 0x00000000;
+  static const opContains = 0x00000001;
+  static const opNotContains = 0x00000002;
+  static const opNotEquals = 0x00000003;
+}
+
+/// {@category Enum}
+class GPMSearchProperty {
+  static const gpoPermissions = 0x00000000;
+  static const gpoEffectivePermissions = 0x00000001;
+  static const gpoDisplayName = 0x00000002;
+  static const gpoWMIFilter = 0x00000003;
+  static const gpoID = 0x00000004;
+  static const gpoComputerExtensions = 0x00000005;
+  static const gpoUserExtensions = 0x00000006;
+  static const somLinks = 0x00000007;
+  static const gpoDomain = 0x00000008;
+  static const backupMostRecent = 0x00000009;
+  static const starterGPOPermissions = 0x0000000a;
+  static const starterGPOEffectivePermissions = 0x0000000b;
+  static const starterGPODisplayName = 0x0000000c;
+  static const starterGPOID = 0x0000000d;
+  static const starterGPODomain = 0x0000000e;
 }
 
 /// {@category Enum}

@@ -58,6 +58,7 @@ class PERFORMANCE_DATA extends Struct {
   @Uint64() external int CycleTime;
   @Uint32() external int RetryCount;
   @Uint32() external int Reserved;
-  external HARDWARE_COUNTER_DATA HwCounters;
+  @Array(16)
+  external Array<HARDWARE_COUNTER_DATA> HwCounters;
 }
 

@@ -43,421 +43,25 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class D3D11_VIDEO_DECODER_DESC extends Struct {
-  external GUID Guid;
-  @Uint32() external int SampleWidth;
-  @Uint32() external int SampleHeight;
-  @Uint32() external int OutputFormat;
-}
-
-class D3D11_VIDEO_DECODER_CONFIG extends Struct {
-  external GUID guidConfigBitstreamEncryption;
-  external GUID guidConfigMBcontrolEncryption;
-  external GUID guidConfigResidDiffEncryption;
-  @Uint32() external int ConfigBitstreamRaw;
-  @Uint32() external int ConfigMBcontrolRasterOrder;
-  @Uint32() external int ConfigResidDiffHost;
-  @Uint32() external int ConfigSpatialResid8;
-  @Uint32() external int ConfigResid8Subtraction;
-  @Uint32() external int ConfigSpatialHost8or9Clipping;
-  @Uint32() external int ConfigSpatialResidInterleaved;
-  @Uint32() external int ConfigIntraResidUnsigned;
-  @Uint32() external int ConfigResidDiffAccelerator;
-  @Uint32() external int ConfigHostInverseScan;
-  @Uint32() external int ConfigSpecificIDCT;
-  @Uint32() external int Config4GroupedCoefs;
-  @Uint16() external int ConfigMinRenderTargetBuffCount;
-  @Uint16() external int ConfigDecoderSpecific;
-}
-
-class D3D11_AES_CTR_IV extends Struct {
-  @Uint64() external int IV;
-  @Uint64() external int Count;
-}
-
-class D3D11_ENCRYPTED_BLOCK_INFO extends Struct {
-  @Uint32() external int NumEncryptedBytesAtBeginning;
-  @Uint32() external int NumBytesInSkipPattern;
-  @Uint32() external int NumBytesInEncryptPattern;
-}
-
-class D3D11_VIDEO_DECODER_BUFFER_DESC extends Struct {
-  @Uint32() external int BufferType;
-  @Uint32() external int BufferIndex;
-  @Uint32() external int DataOffset;
-  @Uint32() external int DataSize;
-  @Uint32() external int FirstMBaddress;
-  @Uint32() external int NumMBsInBuffer;
-  @Uint32() external int Width;
-  @Uint32() external int Height;
-  @Uint32() external int Stride;
-  @Uint32() external int ReservedBits;
-  external Pointer pIV;
-  @Uint32() external int IVSize;
-  @Int32() external int PartialEncryption;
-  external D3D11_ENCRYPTED_BLOCK_INFO EncryptedBlockInfo;
-}
-
-class D3D11_VIDEO_DECODER_EXTENSION extends Struct {
-  @Uint32() external int Function;
-  external Pointer pPrivateInputData;
-  @Uint32() external int PrivateInputDataSize;
-  external Pointer pPrivateOutputData;
-  @Uint32() external int PrivateOutputDataSize;
-  @Uint32() external int ResourceCount;
-  external Pointer<ID3D11Resource> ppResourceList;
-}
-
-class D3D11_VIDEO_PROCESSOR_CAPS extends Struct {
-  @Uint32() external int DeviceCaps;
-  @Uint32() external int FeatureCaps;
-  @Uint32() external int FilterCaps;
-  @Uint32() external int InputFormatCaps;
-  @Uint32() external int AutoStreamCaps;
-  @Uint32() external int StereoCaps;
-  @Uint32() external int RateConversionCapsCount;
-  @Uint32() external int MaxInputStreams;
-  @Uint32() external int MaxStreamStates;
-}
-
-class D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS extends Struct {
-  @Uint32() external int PastFrames;
-  @Uint32() external int FutureFrames;
-  @Uint32() external int ProcessorCaps;
-  @Uint32() external int ITelecineCaps;
-  @Uint32() external int CustomRateCount;
-}
-
-class D3D11_VIDEO_CONTENT_PROTECTION_CAPS extends Struct {
+class D3DOVERLAYCAPS extends Struct {
   @Uint32() external int Caps;
-  @Uint32() external int KeyExchangeTypeCount;
+  @Uint32() external int MaxOverlayDisplayWidth;
+  @Uint32() external int MaxOverlayDisplayHeight;
+}
+
+class D3DCONTENTPROTECTIONCAPS extends Struct {
+  @Uint32() external int Caps;
+  external GUID KeyExchangeType;
+  @Uint32() external int BufferAlignmentStart;
   @Uint32() external int BlockAlignmentSize;
   @Uint64() external int ProtectedMemorySize;
 }
 
-class D3D11_VIDEO_PROCESSOR_CUSTOM_RATE extends Struct {
-  external DXGI_RATIONAL CustomRate;
-  @Uint32() external int OutputFrames;
-  @Int32() external int InputInterlaced;
-  @Uint32() external int InputFramesOrFields;
-}
-
-class D3D11_VIDEO_PROCESSOR_FILTER_RANGE extends Struct {
-  @Int32() external int Minimum;
-  @Int32() external int Maximum;
-  @Int32() external int Default;
-  @Float() external double Multiplier;
-}
-
-class D3D11_VIDEO_PROCESSOR_CONTENT_DESC extends Struct {
-  @Uint32() external int InputFrameFormat;
-  external DXGI_RATIONAL InputFrameRate;
-  @Uint32() external int InputWidth;
-  @Uint32() external int InputHeight;
-  external DXGI_RATIONAL OutputFrameRate;
-  @Uint32() external int OutputWidth;
-  @Uint32() external int OutputHeight;
-  @Uint32() external int Usage;
-}
-
-class D3D11_VIDEO_COLOR_RGBA extends Struct {
-  @Float() external double R;
-  @Float() external double G;
-  @Float() external double B;
-  @Float() external double A;
-}
-
-class D3D11_VIDEO_COLOR_YCbCrA extends Struct {
-  @Float() external double Y;
-  @Float() external double Cb;
-  @Float() external double Cr;
-  @Float() external double A;
-}
-
-class D3D11_VIDEO_COLOR extends Struct {
-  @Uint32() external int Anonymous;
-}
-
-class D3D11_VIDEO_PROCESSOR_COLOR_SPACE extends Struct {
-  @Uint32() external int _bitfield;
-}
-
-class D3D11_VIDEO_PROCESSOR_STREAM extends Struct {
-  @Int32() external int Enable;
-  @Uint32() external int OutputIndex;
-  @Uint32() external int InputFrameOrField;
-  @Uint32() external int PastFrames;
-  @Uint32() external int FutureFrames;
-  external Pointer<ID3D11VideoProcessorInputView> ppPastSurfaces;
-  external ID3D11VideoProcessorInputView pInputSurface;
-  external Pointer<ID3D11VideoProcessorInputView> ppFutureSurfaces;
-  external Pointer<ID3D11VideoProcessorInputView> ppPastSurfacesRight;
-  external ID3D11VideoProcessorInputView pInputSurfaceRight;
-  external Pointer<ID3D11VideoProcessorInputView> ppFutureSurfacesRight;
-}
-
-class D3D11_OMAC extends Struct {
-  external __ubyte__ Omac;
-}
-
-class D3D11_AUTHENTICATED_QUERY_INPUT extends Struct {
-  external GUID QueryType;
-  @IntPtr() external int hChannel;
-  @Uint32() external int SequenceNumber;
-}
-
-class D3D11_AUTHENTICATED_QUERY_OUTPUT extends Struct {
-  external D3D11_OMAC omac;
-  external GUID QueryType;
-  @IntPtr() external int hChannel;
-  @Uint32() external int SequenceNumber;
-  @Int32() external int ReturnCode;
-}
-
-class D3D11_AUTHENTICATED_QUERY_PROTECTION_OUTPUT extends Struct {
-  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
-  external D3D11_AUTHENTICATED_PROTECTION_FLAGS ProtectionFlags;
-}
-
-class D3D11_AUTHENTICATED_QUERY_CHANNEL_TYPE_OUTPUT extends Struct {
-  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
-  @Uint32() external int ChannelType;
-}
-
-class D3D11_AUTHENTICATED_QUERY_DEVICE_HANDLE_OUTPUT extends Struct {
-  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
-  @IntPtr() external int DeviceHandle;
-}
-
-class D3D11_AUTHENTICATED_QUERY_CRYPTO_SESSION_INPUT extends Struct {
-  external D3D11_AUTHENTICATED_QUERY_INPUT Input;
-  @IntPtr() external int DecoderHandle;
-}
-
-class D3D11_AUTHENTICATED_QUERY_CRYPTO_SESSION_OUTPUT extends Struct {
-  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
-  @IntPtr() external int DecoderHandle;
-  @IntPtr() external int CryptoSessionHandle;
-  @IntPtr() external int DeviceHandle;
-}
-
-class D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_COUNT_OUTPUT extends Struct {
-  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
-  @Uint32() external int RestrictedSharedResourceProcessCount;
-}
-
-class D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_INPUT extends Struct {
-  external D3D11_AUTHENTICATED_QUERY_INPUT Input;
-  @Uint32() external int ProcessIndex;
-}
-
-class D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_OUTPUT extends Struct {
-  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
-  @Uint32() external int ProcessIndex;
-  @Uint32() external int ProcessIdentifier;
-  @IntPtr() external int ProcessHandle;
-}
-
-class D3D11_AUTHENTICATED_QUERY_UNRESTRICTED_PROTECTED_SHARED_RESOURCE_COUNT_OUTPUT extends Struct {
-  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
-  @Uint32() external int UnrestrictedProtectedSharedResourceCount;
-}
-
-class D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_COUNT_INPUT extends Struct {
-  external D3D11_AUTHENTICATED_QUERY_INPUT Input;
-  @IntPtr() external int DeviceHandle;
-  @IntPtr() external int CryptoSessionHandle;
-}
-
-class D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_COUNT_OUTPUT extends Struct {
-  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
-  @IntPtr() external int DeviceHandle;
-  @IntPtr() external int CryptoSessionHandle;
-  @Uint32() external int OutputIDCount;
-}
-
-class D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_INPUT extends Struct {
-  external D3D11_AUTHENTICATED_QUERY_INPUT Input;
-  @IntPtr() external int DeviceHandle;
-  @IntPtr() external int CryptoSessionHandle;
-  @Uint32() external int OutputIDIndex;
-}
-
-class D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_OUTPUT extends Struct {
-  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
-  @IntPtr() external int DeviceHandle;
-  @IntPtr() external int CryptoSessionHandle;
-  @Uint32() external int OutputIDIndex;
-  @Uint64() external int OutputID;
-}
-
-class D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_OUTPUT extends Struct {
-  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
-  @Uint32() external int BusType;
-  @Int32() external int AccessibleInContiguousBlocks;
-  @Int32() external int AccessibleInNonContiguousBlocks;
-}
-
-class D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_COUNT_OUTPUT extends Struct {
-  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
-  @Uint32() external int EncryptionGuidCount;
-}
-
-class D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_INPUT extends Struct {
-  external D3D11_AUTHENTICATED_QUERY_INPUT Input;
-  @Uint32() external int EncryptionGuidIndex;
-}
-
-class D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_OUTPUT extends Struct {
-  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
-  @Uint32() external int EncryptionGuidIndex;
-  external GUID EncryptionGuid;
-}
-
-class D3D11_AUTHENTICATED_QUERY_CURRENT_ACCESSIBILITY_ENCRYPTION_OUTPUT extends Struct {
-  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
-  external GUID EncryptionGuid;
-}
-
-class D3D11_AUTHENTICATED_CONFIGURE_INPUT extends Struct {
-  external D3D11_OMAC omac;
-  external GUID ConfigureType;
-  @IntPtr() external int hChannel;
-  @Uint32() external int SequenceNumber;
-}
-
-class D3D11_AUTHENTICATED_CONFIGURE_OUTPUT extends Struct {
-  external D3D11_OMAC omac;
-  external GUID ConfigureType;
-  @IntPtr() external int hChannel;
-  @Uint32() external int SequenceNumber;
-  @Int32() external int ReturnCode;
-}
-
-class D3D11_AUTHENTICATED_CONFIGURE_INITIALIZE_INPUT extends Struct {
-  external D3D11_AUTHENTICATED_CONFIGURE_INPUT Parameters;
-  @Uint32() external int StartSequenceQuery;
-  @Uint32() external int StartSequenceConfigure;
-}
-
-class D3D11_AUTHENTICATED_CONFIGURE_PROTECTION_INPUT extends Struct {
-  external D3D11_AUTHENTICATED_CONFIGURE_INPUT Parameters;
-  external D3D11_AUTHENTICATED_PROTECTION_FLAGS Protections;
-}
-
-class D3D11_AUTHENTICATED_CONFIGURE_CRYPTO_SESSION_INPUT extends Struct {
-  external D3D11_AUTHENTICATED_CONFIGURE_INPUT Parameters;
-  @IntPtr() external int DecoderHandle;
-  @IntPtr() external int CryptoSessionHandle;
-  @IntPtr() external int DeviceHandle;
-}
-
-class D3D11_AUTHENTICATED_CONFIGURE_SHARED_RESOURCE_INPUT extends Struct {
-  external D3D11_AUTHENTICATED_CONFIGURE_INPUT Parameters;
-  @Uint32() external int ProcessType;
-  @IntPtr() external int ProcessHandle;
-  @Int32() external int AllowAccess;
-}
-
-class D3D11_AUTHENTICATED_CONFIGURE_ACCESSIBLE_ENCRYPTION_INPUT extends Struct {
-  external D3D11_AUTHENTICATED_CONFIGURE_INPUT Parameters;
-  external GUID EncryptionGuid;
-}
-
-class D3D11_TEX2D_VDOV extends Struct {
-  @Uint32() external int ArraySlice;
-}
-
-class D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC extends Struct {
-  external GUID DecodeProfile;
-  @Uint32() external int ViewDimension;
-  @Uint32() external int Anonymous;
-}
-
-class D3D11_TEX2D_VPIV extends Struct {
-  @Uint32() external int MipSlice;
-  @Uint32() external int ArraySlice;
-}
-
-class D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC extends Struct {
-  @Uint32() external int FourCC;
-  @Uint32() external int ViewDimension;
-  @Uint32() external int Anonymous;
-}
-
-class D3D11_TEX2D_VPOV extends Struct {
-  @Uint32() external int MipSlice;
-}
-
-class D3D11_TEX2D_ARRAY_VPOV extends Struct {
-  @Uint32() external int MipSlice;
-  @Uint32() external int FirstArraySlice;
-  @Uint32() external int ArraySize;
-}
-
-class D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC extends Struct {
-  @Uint32() external int ViewDimension;
-  @Uint32() external int Anonymous;
-}
-
-class D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK extends Struct {
-  @Uint32() external int ClearSize;
-  @Uint32() external int EncryptedSize;
-}
-
-class D3D11_VIDEO_DECODER_BUFFER_DESC1 extends Struct {
-  @Uint32() external int BufferType;
-  @Uint32() external int DataOffset;
-  @Uint32() external int DataSize;
-  external Pointer pIV;
-  @Uint32() external int IVSize;
-  external Pointer<D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK> pSubSampleMappingBlock;
-  @Uint32() external int SubSampleMappingCount;
-}
-
-class D3D11_VIDEO_DECODER_BEGIN_FRAME_CRYPTO_SESSION extends Struct {
-  external ID3D11CryptoSession pCryptoSession;
-  @Uint32() external int BlobSize;
-  external Pointer pBlob;
-  external Pointer<GUID> pKeyInfoId;
-  @Uint32() external int PrivateDataSize;
-  external Pointer pPrivateData;
-}
-
-class D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT extends Struct {
-  @Int32() external int Enable;
-  @Uint32() external int Width;
-  @Uint32() external int Height;
-  @Uint32() external int Format;
-}
-
-class D3D11_KEY_EXCHANGE_HW_PROTECTION_INPUT_DATA extends Struct {
-  @Uint32() external int PrivateDataSize;
-  @Uint32() external int HWProtectionDataSize;
-  external __ubyte__ pbInput;
-}
-
-class D3D11_KEY_EXCHANGE_HW_PROTECTION_OUTPUT_DATA extends Struct {
-  @Uint32() external int PrivateDataSize;
-  @Uint32() external int MaxHWProtectionDataSize;
-  @Uint32() external int HWProtectionDataSize;
-  @Uint64() external int TransportTime;
-  @Uint64() external int ExecutionTime;
-  external __ubyte__ pbOutput;
-}
-
-class D3D11_KEY_EXCHANGE_HW_PROTECTION_DATA extends Struct {
-  @Uint32() external int HWProtectionFunctionID;
-  external Pointer<D3D11_KEY_EXCHANGE_HW_PROTECTION_INPUT_DATA> pInputData;
-  external Pointer<D3D11_KEY_EXCHANGE_HW_PROTECTION_OUTPUT_DATA> pOutputData;
-  @Int32() external int Status;
-}
-
-class D3D11_VIDEO_SAMPLE_DESC extends Struct {
-  @Uint32() external int Width;
-  @Uint32() external int Height;
-  @Uint32() external int Format;
-  @Uint32() external int ColorSpace;
+class CodecAPIEventData extends Struct {
+  external GUID guid;
+  @Uint32() external int dataLength;
+  @Array(3)
+  external Array<Uint32> reserved;
 }
 
 class D3D12_VIDEO_FORMAT extends Struct {
@@ -536,7 +140,8 @@ class D3D12_VIDEO_PROCESS_OUTPUT_STREAM_DESC extends Struct {
   @Uint32() external int ColorSpace;
   @Uint32() external int AlphaFillMode;
   @Uint32() external int AlphaFillModeSourceStreamIndex;
-  external __float__ BackgroundColor;
+  @Array(4)
+  external Array<Float> BackgroundColor;
   external DXGI_RATIONAL FrameRate;
   @Int32() external int EnableStereo;
 }
@@ -660,7 +265,8 @@ class D3D12_VIDEO_DECODE_CONVERSION_ARGUMENTS extends Struct {
 
 class D3D12_VIDEO_DECODE_INPUT_STREAM_ARGUMENTS extends Struct {
   @Uint32() external int NumFrameArguments;
-  external D3D12_VIDEO_DECODE_FRAME_ARGUMENT FrameArguments;
+  @Array(10)
+  external Array<D3D12_VIDEO_DECODE_FRAME_ARGUMENT> FrameArguments;
   external D3D12_VIDEO_DECODE_REFERENCE_FRAMES ReferenceFrames;
   external D3D12_VIDEO_DECODE_COMPRESSED_BITSTREAM CompressedBitstream;
   external ID3D12VideoDecoderHeap pHeap;
@@ -694,7 +300,8 @@ class D3D12_FEATURE_DATA_VIDEO_PROCESS_SUPPORT extends Struct {
   @Uint32() external int DeinterlaceSupport;
   @Uint32() external int AutoProcessingSupport;
   @Uint32() external int FilterSupport;
-  external D3D12_VIDEO_PROCESS_FILTER_RANGE FilterRangeSupport;
+  @Array(32)
+  external Array<D3D12_VIDEO_PROCESS_FILTER_RANGE> FilterRangeSupport;
 }
 
 class D3D12_FEATURE_DATA_VIDEO_PROCESS_MAX_INPUT_STREAMS extends Struct {
@@ -741,11 +348,13 @@ class D3D12_VIDEO_PROCESS_INPUT_STREAM extends Struct {
 }
 
 class D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS extends Struct {
-  external D3D12_VIDEO_PROCESS_INPUT_STREAM InputStream;
+  @Array(2)
+  external Array<D3D12_VIDEO_PROCESS_INPUT_STREAM> InputStream;
   external D3D12_VIDEO_PROCESS_TRANSFORM Transform;
   @Uint32() external int Flags;
   external D3D12_VIDEO_PROCESS_INPUT_STREAM_RATE RateInfo;
-  external __int__ FilterLevels;
+  @Array(32)
+  external Array<Int32> FilterLevels;
   external D3D12_VIDEO_PROCESS_ALPHA_BLENDING AlphaBlending;
 }
 
@@ -755,7 +364,8 @@ class D3D12_VIDEO_PROCESS_OUTPUT_STREAM extends Struct {
 }
 
 class D3D12_VIDEO_PROCESS_OUTPUT_STREAM_ARGUMENTS extends Struct {
-  external D3D12_VIDEO_PROCESS_OUTPUT_STREAM OutputStream;
+  @Array(2)
+  external Array<D3D12_VIDEO_PROCESS_OUTPUT_STREAM> OutputStream;
   external RECT TargetRectangle;
 }
 
@@ -778,15 +388,18 @@ class D3D12_VIDEO_DECODE_OUTPUT_STREAM_ARGUMENTS1 extends Struct {
   external ID3D12Resource pOutputTexture2D;
   @Uint32() external int OutputSubresource;
   external D3D12_VIDEO_DECODE_CONVERSION_ARGUMENTS1 ConversionArguments;
-  external D3D12_VIDEO_DECODE_OUTPUT_HISTOGRAM Histograms;
+  @Array(4)
+  external Array<D3D12_VIDEO_DECODE_OUTPUT_HISTOGRAM> Histograms;
 }
 
 class D3D12_VIDEO_PROCESS_INPUT_STREAM_ARGUMENTS1 extends Struct {
-  external D3D12_VIDEO_PROCESS_INPUT_STREAM InputStream;
+  @Array(2)
+  external Array<D3D12_VIDEO_PROCESS_INPUT_STREAM> InputStream;
   external D3D12_VIDEO_PROCESS_TRANSFORM Transform;
   @Uint32() external int Flags;
   external D3D12_VIDEO_PROCESS_INPUT_STREAM_RATE RateInfo;
-  external __int__ FilterLevels;
+  @Array(32)
+  external Array<Int32> FilterLevels;
   external D3D12_VIDEO_PROCESS_ALPHA_BLENDING AlphaBlending;
   @Uint32() external int FieldType;
 }
@@ -1299,7 +912,8 @@ class DXVA_BufferDescription extends Struct {
 
 class DXVA_ConfigPictureDecode extends Struct {
   @Uint32() external int dwFunction;
-  external __uint__ dwReservedBits;
+  @Array(3)
+  external Array<Uint32> dwReservedBits;
   external GUID guidConfigBitstreamEncryption;
   external GUID guidConfigMBcontrolEncryption;
   external GUID guidConfigResidDiffEncryption;
@@ -1414,7 +1028,8 @@ class DXVA_VideoSample2 extends Struct {
   external Pointer lpDDSSrcSurface;
   external RECT rcSrc;
   external RECT rcDst;
-  external DXVA_AYUVsample2 Palette;
+  @Array(16)
+  external Array<DXVA_AYUVsample2> Palette;
 }
 
 class DXVA_DeinterlaceCaps extends Struct {
@@ -1436,7 +1051,8 @@ class DXVA_VideoSample32 extends Struct {
   @Uint32() external int lpDDSSrcSurface;
   external RECT rcSrc;
   external RECT rcDst;
-  external DXVA_AYUVsample2 Palette;
+  @Array(16)
+  external Array<DXVA_AYUVsample2> Palette;
 }
 
 class DXVA_DeinterlaceBltEx32 extends Struct {
@@ -1446,7 +1062,8 @@ class DXVA_DeinterlaceBltEx32 extends Struct {
   @Int64() external int rtTarget;
   @Uint32() external int NumSourceSurfaces;
   @Float() external double Alpha;
-  external DXVA_VideoSample32 Source;
+  @Array(32)
+  external Array<DXVA_VideoSample32> Source;
   @Uint32() external int DestinationFormat;
   @Uint32() external int DestinationFlags;
 }
@@ -1459,7 +1076,8 @@ class DXVA_DeinterlaceBlt extends Struct {
   external RECT SrcRect;
   @Uint32() external int NumSourceSurfaces;
   @Float() external double Alpha;
-  external DXVA_VideoSample Source;
+  @Array(32)
+  external Array<DXVA_VideoSample> Source;
 }
 
 class DXVA_DeinterlaceBltEx extends Struct {
@@ -1469,7 +1087,8 @@ class DXVA_DeinterlaceBltEx extends Struct {
   @Int64() external int rtTarget;
   @Uint32() external int NumSourceSurfaces;
   @Float() external double Alpha;
-  external DXVA_VideoSample2 Source;
+  @Array(32)
+  external Array<DXVA_VideoSample2> Source;
   @Uint32() external int DestinationFormat;
   @Uint32() external int DestinationFlags;
 }
@@ -1477,7 +1096,8 @@ class DXVA_DeinterlaceBltEx extends Struct {
 class DXVA_DeinterlaceQueryAvailableModes extends Struct {
   @Uint32() external int Size;
   @Uint32() external int NumGuids;
-  external GUID Guids;
+  @Array(32)
+  external Array<GUID> Guids;
 }
 
 class DXVA_DeinterlaceQueryModeCaps extends Struct {
@@ -1519,7 +1139,8 @@ class DXVA_ProcAmpControlBlt extends Struct {
 }
 
 class DXVA_COPPSignature extends Struct {
-  external __ubyte__ Signature;
+  @Array(129)
+  external Array<Uint8> Signature;
 }
 
 class DXVA_COPPCommand extends Struct {
@@ -1527,7 +1148,8 @@ class DXVA_COPPCommand extends Struct {
   external GUID guidCommandID;
   @Uint32() external int dwSequence;
   @Uint32() external int cbSizeData;
-  external __ubyte__ CommandData;
+  @Array(143)
+  external Array<Uint8> CommandData;
 }
 
 class DXVA_COPPStatusInput extends Struct {
@@ -1535,13 +1157,15 @@ class DXVA_COPPStatusInput extends Struct {
   external GUID guidStatusRequestID;
   @Uint32() external int dwSequence;
   @Uint32() external int cbSizeData;
-  external __ubyte__ StatusData;
+  @Array(143)
+  external Array<Uint8> StatusData;
 }
 
 class DXVA_COPPStatusOutput extends Struct {
   external GUID macKDI;
   @Uint32() external int cbSizeData;
-  external __ubyte__ COPPStatus;
+  @Array(143)
+  external Array<Uint8> COPPStatus;
 }
 
 class DXVAHD_RATIONAL extends Struct {
@@ -1852,7 +1476,8 @@ class DXVA2_VideoSample extends Struct {
   external IDirect3DSurface9 SrcSurface;
   external RECT SrcRect;
   external RECT DstRect;
-  external DXVA2_AYUVSample8 Pal;
+  @Array(16)
+  external Array<DXVA2_AYUVSample8> Pal;
   external DXVA2_Fixed32 PlanarAlpha;
   @Uint32() external int SampleData;
 }
@@ -1947,15 +1572,18 @@ class DXVA2_DecodeExecuteParams extends Struct {
 }
 
 class OPM_RANDOM_NUMBER extends Struct {
-  external __ubyte__ abRandomNumber;
+  @Array(16)
+  external Array<Uint8> abRandomNumber;
 }
 
 class OPM_OMAC extends Struct {
-  external __ubyte__ abOMAC;
+  @Array(16)
+  external Array<Uint8> abOMAC;
 }
 
 class OPM_ENCRYPTED_INITIALIZATION_PARAMETERS extends Struct {
-  external __ubyte__ abEncryptedInitializationParameters;
+  @Array(129)
+  external Array<Uint8> abEncryptedInitializationParameters;
 }
 
 class OPM_GET_INFO_PARAMETERS extends Struct {
@@ -1964,7 +1592,8 @@ class OPM_GET_INFO_PARAMETERS extends Struct {
   external GUID guidInformation;
   @Uint32() external int ulSequenceNumber;
   @Uint32() external int cbParametersSize;
-  external __ubyte__ abParameters;
+  @Array(143)
+  external Array<Uint8> abParameters;
 }
 
 class OPM_COPP_COMPATIBLE_GET_INFO_PARAMETERS extends Struct {
@@ -1972,11 +1601,13 @@ class OPM_COPP_COMPATIBLE_GET_INFO_PARAMETERS extends Struct {
   external GUID guidInformation;
   @Uint32() external int ulSequenceNumber;
   @Uint32() external int cbParametersSize;
-  external __ubyte__ abParameters;
+  @Array(143)
+  external Array<Uint8> abParameters;
 }
 
 class OPM_HDCP_KEY_SELECTION_VECTOR extends Struct {
-  external __ubyte__ abKeySelectionVector;
+  @Array(5)
+  external Array<Uint8> abKeySelectionVector;
 }
 
 class OPM_CONNECTED_HDCP_DEVICE_INFORMATION extends Struct {
@@ -1984,15 +1615,19 @@ class OPM_CONNECTED_HDCP_DEVICE_INFORMATION extends Struct {
   @Uint32() external int ulStatusFlags;
   @Uint32() external int ulHDCPFlags;
   external OPM_HDCP_KEY_SELECTION_VECTOR ksvB;
-  external __ubyte__ Reserved;
-  external __ubyte__ Reserved2;
-  external __ubyte__ Reserved3;
+  @Array(11)
+  external Array<Uint8> Reserved;
+  @Array(16)
+  external Array<Uint8> Reserved2;
+  @Array(16)
+  external Array<Uint8> Reserved3;
 }
 
 class OPM_REQUESTED_INFORMATION extends Struct {
   external OPM_OMAC omac;
   @Uint32() external int cbRequestedInformationSize;
-  external __ubyte__ abRequestedInformation;
+  @Array(143)
+  external Array<Uint8> abRequestedInformation;
 }
 
 class OPM_STANDARD_INFORMATION extends Struct {
@@ -2026,8 +1661,10 @@ class OPM_ACP_AND_CGMSA_SIGNALING extends Struct {
   @Uint32() external int ulAspectRatioData2;
   @Uint32() external int ulAspectRatioValidMask3;
   @Uint32() external int ulAspectRatioData3;
-  external __uint__ ulReserved2;
-  external __uint__ ulReserved3;
+  @Array(4)
+  external Array<Uint32> ulReserved2;
+  @Array(4)
+  external Array<Uint32> ulReserved3;
 }
 
 class OPM_OUTPUT_ID_DATA extends Struct {
@@ -2041,7 +1678,8 @@ class OPM_CONFIGURE_PARAMETERS extends Struct {
   external GUID guidSetting;
   @Uint32() external int ulSequenceNumber;
   @Uint32() external int cbParametersSize;
-  external __ubyte__ abParameters;
+  @Array(143)
+  external Array<Uint8> abParameters;
 }
 
 class OPM_SET_PROTECTION_LEVEL_PARAMETERS extends Struct {
@@ -2059,8 +1697,10 @@ class OPM_SET_ACP_AND_CGMSA_SIGNALING_PARAMETERS extends Struct {
   @Uint32() external int ulAspectRatioData2;
   @Uint32() external int ulAspectRatioChangeMask3;
   @Uint32() external int ulAspectRatioData3;
-  external __uint__ ulReserved;
-  external __uint__ ulReserved2;
+  @Array(4)
+  external Array<Uint32> ulReserved;
+  @Array(4)
+  external Array<Uint32> ulReserved2;
   @Uint32() external int ulReserved3;
 }
 
@@ -2070,7 +1710,8 @@ class OPM_SET_HDCP_SRM_PARAMETERS extends Struct {
 
 class OPM_GET_CODEC_INFO_PARAMETERS extends Struct {
   @Uint32() external int cbVerifier;
-  external __ubyte__ Verifier;
+  @Array(143)
+  external Array<Uint8> Verifier;
 }
 
 class OPM_GET_CODEC_INFO_INFORMATION extends Struct {
@@ -2142,7 +1783,8 @@ class MFPaletteEntry extends Struct {
 class MFVideoSurfaceInfo extends Struct {
   @Uint32() external int Format;
   @Uint32() external int PaletteEntries;
-  external MFPaletteEntry Palette;
+  @Array(1)
+  external Array<MFPaletteEntry> Palette;
 }
 
 class MFVideoCompressedInfo extends Struct {
@@ -2206,9 +1848,12 @@ class MFCLOCK_PROPERTIES extends Struct {
 
 class MFRR_COMPONENT_HASH_INFO extends Struct {
   @Uint32() external int ulReason;
-  external __ushort__ rgHeaderHash;
-  external __ushort__ rgPublicKeyHash;
-  external __ushort__ wszName;
+  @Array(43)
+  external Array<Uint16> rgHeaderHash;
+  @Array(43)
+  external Array<Uint16> rgPublicKeyHash;
+  @Array(129)
+  external Array<Uint16> wszName;
 }
 
 class MFRR_COMPONENTS extends Struct {
@@ -2281,7 +1926,8 @@ class MFINPUTTRUSTAUTHORITY_ACCESS_PARAMS extends Struct {
   @Uint32() external int cbExtensionOffset;
   @Uint32() external int cbExtensionSize;
   @Uint32() external int cActions;
-  external MFINPUTTRUSTAUTHORITY_ACCESS_ACTION rgOutputActions;
+  @Array(1)
+  external Array<MFINPUTTRUSTAUTHORITY_ACCESS_ACTION> rgOutputActions;
 }
 
 class MF_TRANSCODE_SINK_INFO extends Struct {
@@ -2307,7 +1953,8 @@ class MFCONTENTPROTECTIONDEVICE_INPUT_DATA extends Struct {
   @Uint32() external int PrivateDataByteCount;
   @Uint32() external int HWProtectionDataByteCount;
   @Uint32() external int Reserved;
-  external __ubyte__ InputData;
+  @Array(4)
+  external Array<Uint8> InputData;
 }
 
 class MFCONTENTPROTECTIONDEVICE_OUTPUT_DATA extends Struct {
@@ -2317,12 +1964,14 @@ class MFCONTENTPROTECTIONDEVICE_OUTPUT_DATA extends Struct {
   @Int32() external int Status;
   @Int64() external int TransportTimeInHundredsOfNanoseconds;
   @Int64() external int ExecutionTimeInHundredsOfNanoseconds;
-  external __ubyte__ OutputData;
+  @Array(4)
+  external Array<Uint8> OutputData;
 }
 
 class MFCONTENTPROTECTIONDEVICE_REALTIMECLIENT_DATA extends Struct {
   @Uint32() external int TaskIndex;
-  external __ushort__ ClassName;
+  @Array(129)
+  external Array<Uint16> ClassName;
   @Int32() external int BasePriority;
 }
 
@@ -2385,7 +2034,8 @@ class ASF_INDEX_IDENTIFIER extends Struct {
 class ASF_INDEX_DESCRIPTOR extends Struct {
   external ASF_INDEX_IDENTIFIER Identifier;
   @Uint16() external int cPerEntryBytes;
-  external __ushort__ szDescription;
+  @Array(32)
+  external Array<Uint16> szDescription;
   @Uint32() external int dwInterval;
 }
 
@@ -2409,13 +2059,15 @@ class MOVE_RECT extends Struct {
 class DIRTYRECT_INFO extends Struct {
   @Uint32() external int FrameNumber;
   @Uint32() external int NumDirtyRects;
-  external RECT DirtyRects;
+  @Array(1)
+  external Array<RECT> DirtyRects;
 }
 
 class MOVEREGION_INFO extends Struct {
   @Uint32() external int FrameNumber;
   @Uint32() external int NumMoveRegions;
-  external MOVE_RECT MoveRegions;
+  @Array(1)
+  external Array<MOVE_RECT> MoveRegions;
 }
 
 class ROI_AREA extends Struct {
@@ -2435,7 +2087,8 @@ class MFFOLDDOWN_MATRIX extends Struct {
   @Uint32() external int cSrcChannels;
   @Uint32() external int cDstChannels;
   @Uint32() external int dwChannelMask;
-  external __int__ Coeff;
+  @Array(64)
+  external Array<Int32> Coeff;
 }
 
 class MT_CUSTOM_VIDEO_PRIMARIES extends Struct {
@@ -2484,7 +2137,8 @@ class MFCameraExtrinsic_CalibratedTransform extends Struct {
 
 class MFCameraExtrinsics extends Struct {
   @Uint32() external int TransformCount;
-  external MFCameraExtrinsic_CalibratedTransform CalibratedTransforms;
+  @Array(1)
+  external Array<MFCameraExtrinsic_CalibratedTransform> CalibratedTransforms;
 }
 
 class MFCameraIntrinsic_PinholeCameraModel extends Struct {
@@ -2509,7 +2163,8 @@ class MFPinholeCameraIntrinsic_IntrinsicModel extends Struct {
 
 class MFPinholeCameraIntrinsics extends Struct {
   @Uint32() external int IntrinsicModelCount;
-  external MFPinholeCameraIntrinsic_IntrinsicModel IntrinsicModels;
+  @Array(1)
+  external Array<MFPinholeCameraIntrinsic_IntrinsicModel> IntrinsicModels;
 }
 
 class MFMPEG2DLNASINKSTATS extends Struct {
@@ -2656,23 +2311,423 @@ class MFVideoAlphaBitmap extends Struct {
   external MFVideoAlphaBitmapParams params;
 }
 
-class CodecAPIEventData extends Struct {
-  external GUID guid;
-  @Uint32() external int dataLength;
-  external __uint__ reserved;
+class D3D11_VIDEO_DECODER_DESC extends Struct {
+  external GUID Guid;
+  @Uint32() external int SampleWidth;
+  @Uint32() external int SampleHeight;
+  @Uint32() external int OutputFormat;
 }
 
-class D3DOVERLAYCAPS extends Struct {
-  @Uint32() external int Caps;
-  @Uint32() external int MaxOverlayDisplayWidth;
-  @Uint32() external int MaxOverlayDisplayHeight;
+class D3D11_VIDEO_DECODER_CONFIG extends Struct {
+  external GUID guidConfigBitstreamEncryption;
+  external GUID guidConfigMBcontrolEncryption;
+  external GUID guidConfigResidDiffEncryption;
+  @Uint32() external int ConfigBitstreamRaw;
+  @Uint32() external int ConfigMBcontrolRasterOrder;
+  @Uint32() external int ConfigResidDiffHost;
+  @Uint32() external int ConfigSpatialResid8;
+  @Uint32() external int ConfigResid8Subtraction;
+  @Uint32() external int ConfigSpatialHost8or9Clipping;
+  @Uint32() external int ConfigSpatialResidInterleaved;
+  @Uint32() external int ConfigIntraResidUnsigned;
+  @Uint32() external int ConfigResidDiffAccelerator;
+  @Uint32() external int ConfigHostInverseScan;
+  @Uint32() external int ConfigSpecificIDCT;
+  @Uint32() external int Config4GroupedCoefs;
+  @Uint16() external int ConfigMinRenderTargetBuffCount;
+  @Uint16() external int ConfigDecoderSpecific;
 }
 
-class D3DCONTENTPROTECTIONCAPS extends Struct {
+class D3D11_AES_CTR_IV extends Struct {
+  @Uint64() external int IV;
+  @Uint64() external int Count;
+}
+
+class D3D11_ENCRYPTED_BLOCK_INFO extends Struct {
+  @Uint32() external int NumEncryptedBytesAtBeginning;
+  @Uint32() external int NumBytesInSkipPattern;
+  @Uint32() external int NumBytesInEncryptPattern;
+}
+
+class D3D11_VIDEO_DECODER_BUFFER_DESC extends Struct {
+  @Uint32() external int BufferType;
+  @Uint32() external int BufferIndex;
+  @Uint32() external int DataOffset;
+  @Uint32() external int DataSize;
+  @Uint32() external int FirstMBaddress;
+  @Uint32() external int NumMBsInBuffer;
+  @Uint32() external int Width;
+  @Uint32() external int Height;
+  @Uint32() external int Stride;
+  @Uint32() external int ReservedBits;
+  external Pointer pIV;
+  @Uint32() external int IVSize;
+  @Int32() external int PartialEncryption;
+  external D3D11_ENCRYPTED_BLOCK_INFO EncryptedBlockInfo;
+}
+
+class D3D11_VIDEO_DECODER_EXTENSION extends Struct {
+  @Uint32() external int Function;
+  external Pointer pPrivateInputData;
+  @Uint32() external int PrivateInputDataSize;
+  external Pointer pPrivateOutputData;
+  @Uint32() external int PrivateOutputDataSize;
+  @Uint32() external int ResourceCount;
+  external Pointer<ID3D11Resource> ppResourceList;
+}
+
+class D3D11_VIDEO_PROCESSOR_CAPS extends Struct {
+  @Uint32() external int DeviceCaps;
+  @Uint32() external int FeatureCaps;
+  @Uint32() external int FilterCaps;
+  @Uint32() external int InputFormatCaps;
+  @Uint32() external int AutoStreamCaps;
+  @Uint32() external int StereoCaps;
+  @Uint32() external int RateConversionCapsCount;
+  @Uint32() external int MaxInputStreams;
+  @Uint32() external int MaxStreamStates;
+}
+
+class D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS extends Struct {
+  @Uint32() external int PastFrames;
+  @Uint32() external int FutureFrames;
+  @Uint32() external int ProcessorCaps;
+  @Uint32() external int ITelecineCaps;
+  @Uint32() external int CustomRateCount;
+}
+
+class D3D11_VIDEO_CONTENT_PROTECTION_CAPS extends Struct {
   @Uint32() external int Caps;
-  external GUID KeyExchangeType;
-  @Uint32() external int BufferAlignmentStart;
+  @Uint32() external int KeyExchangeTypeCount;
   @Uint32() external int BlockAlignmentSize;
   @Uint64() external int ProtectedMemorySize;
+}
+
+class D3D11_VIDEO_PROCESSOR_CUSTOM_RATE extends Struct {
+  external DXGI_RATIONAL CustomRate;
+  @Uint32() external int OutputFrames;
+  @Int32() external int InputInterlaced;
+  @Uint32() external int InputFramesOrFields;
+}
+
+class D3D11_VIDEO_PROCESSOR_FILTER_RANGE extends Struct {
+  @Int32() external int Minimum;
+  @Int32() external int Maximum;
+  @Int32() external int Default;
+  @Float() external double Multiplier;
+}
+
+class D3D11_VIDEO_PROCESSOR_CONTENT_DESC extends Struct {
+  @Uint32() external int InputFrameFormat;
+  external DXGI_RATIONAL InputFrameRate;
+  @Uint32() external int InputWidth;
+  @Uint32() external int InputHeight;
+  external DXGI_RATIONAL OutputFrameRate;
+  @Uint32() external int OutputWidth;
+  @Uint32() external int OutputHeight;
+  @Uint32() external int Usage;
+}
+
+class D3D11_VIDEO_COLOR_RGBA extends Struct {
+  @Float() external double R;
+  @Float() external double G;
+  @Float() external double B;
+  @Float() external double A;
+}
+
+class D3D11_VIDEO_COLOR_YCbCrA extends Struct {
+  @Float() external double Y;
+  @Float() external double Cb;
+  @Float() external double Cr;
+  @Float() external double A;
+}
+
+class D3D11_VIDEO_COLOR extends Struct {
+  @Uint32() external int Anonymous;
+}
+
+class D3D11_VIDEO_PROCESSOR_COLOR_SPACE extends Struct {
+  @Uint32() external int _bitfield;
+}
+
+class D3D11_VIDEO_PROCESSOR_STREAM extends Struct {
+  @Int32() external int Enable;
+  @Uint32() external int OutputIndex;
+  @Uint32() external int InputFrameOrField;
+  @Uint32() external int PastFrames;
+  @Uint32() external int FutureFrames;
+  external Pointer<ID3D11VideoProcessorInputView> ppPastSurfaces;
+  external ID3D11VideoProcessorInputView pInputSurface;
+  external Pointer<ID3D11VideoProcessorInputView> ppFutureSurfaces;
+  external Pointer<ID3D11VideoProcessorInputView> ppPastSurfacesRight;
+  external ID3D11VideoProcessorInputView pInputSurfaceRight;
+  external Pointer<ID3D11VideoProcessorInputView> ppFutureSurfacesRight;
+}
+
+class D3D11_OMAC extends Struct {
+  @Array(16)
+  external Array<Uint8> Omac;
+}
+
+class D3D11_AUTHENTICATED_QUERY_INPUT extends Struct {
+  external GUID QueryType;
+  @IntPtr() external int hChannel;
+  @Uint32() external int SequenceNumber;
+}
+
+class D3D11_AUTHENTICATED_QUERY_OUTPUT extends Struct {
+  external D3D11_OMAC omac;
+  external GUID QueryType;
+  @IntPtr() external int hChannel;
+  @Uint32() external int SequenceNumber;
+  @Int32() external int ReturnCode;
+}
+
+class D3D11_AUTHENTICATED_QUERY_PROTECTION_OUTPUT extends Struct {
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+  external D3D11_AUTHENTICATED_PROTECTION_FLAGS ProtectionFlags;
+}
+
+class D3D11_AUTHENTICATED_QUERY_CHANNEL_TYPE_OUTPUT extends Struct {
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+  @Uint32() external int ChannelType;
+}
+
+class D3D11_AUTHENTICATED_QUERY_DEVICE_HANDLE_OUTPUT extends Struct {
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+  @IntPtr() external int DeviceHandle;
+}
+
+class D3D11_AUTHENTICATED_QUERY_CRYPTO_SESSION_INPUT extends Struct {
+  external D3D11_AUTHENTICATED_QUERY_INPUT Input;
+  @IntPtr() external int DecoderHandle;
+}
+
+class D3D11_AUTHENTICATED_QUERY_CRYPTO_SESSION_OUTPUT extends Struct {
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+  @IntPtr() external int DecoderHandle;
+  @IntPtr() external int CryptoSessionHandle;
+  @IntPtr() external int DeviceHandle;
+}
+
+class D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_COUNT_OUTPUT extends Struct {
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+  @Uint32() external int RestrictedSharedResourceProcessCount;
+}
+
+class D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_INPUT extends Struct {
+  external D3D11_AUTHENTICATED_QUERY_INPUT Input;
+  @Uint32() external int ProcessIndex;
+}
+
+class D3D11_AUTHENTICATED_QUERY_RESTRICTED_SHARED_RESOURCE_PROCESS_OUTPUT extends Struct {
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+  @Uint32() external int ProcessIndex;
+  @Uint32() external int ProcessIdentifier;
+  @IntPtr() external int ProcessHandle;
+}
+
+class D3D11_AUTHENTICATED_QUERY_UNRESTRICTED_PROTECTED_SHARED_RESOURCE_COUNT_OUTPUT extends Struct {
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+  @Uint32() external int UnrestrictedProtectedSharedResourceCount;
+}
+
+class D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_COUNT_INPUT extends Struct {
+  external D3D11_AUTHENTICATED_QUERY_INPUT Input;
+  @IntPtr() external int DeviceHandle;
+  @IntPtr() external int CryptoSessionHandle;
+}
+
+class D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_COUNT_OUTPUT extends Struct {
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+  @IntPtr() external int DeviceHandle;
+  @IntPtr() external int CryptoSessionHandle;
+  @Uint32() external int OutputIDCount;
+}
+
+class D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_INPUT extends Struct {
+  external D3D11_AUTHENTICATED_QUERY_INPUT Input;
+  @IntPtr() external int DeviceHandle;
+  @IntPtr() external int CryptoSessionHandle;
+  @Uint32() external int OutputIDIndex;
+}
+
+class D3D11_AUTHENTICATED_QUERY_OUTPUT_ID_OUTPUT extends Struct {
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+  @IntPtr() external int DeviceHandle;
+  @IntPtr() external int CryptoSessionHandle;
+  @Uint32() external int OutputIDIndex;
+  @Uint64() external int OutputID;
+}
+
+class D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_OUTPUT extends Struct {
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+  @Uint32() external int BusType;
+  @Int32() external int AccessibleInContiguousBlocks;
+  @Int32() external int AccessibleInNonContiguousBlocks;
+}
+
+class D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_COUNT_OUTPUT extends Struct {
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+  @Uint32() external int EncryptionGuidCount;
+}
+
+class D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_INPUT extends Struct {
+  external D3D11_AUTHENTICATED_QUERY_INPUT Input;
+  @Uint32() external int EncryptionGuidIndex;
+}
+
+class D3D11_AUTHENTICATED_QUERY_ACCESSIBILITY_ENCRYPTION_GUID_OUTPUT extends Struct {
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+  @Uint32() external int EncryptionGuidIndex;
+  external GUID EncryptionGuid;
+}
+
+class D3D11_AUTHENTICATED_QUERY_CURRENT_ACCESSIBILITY_ENCRYPTION_OUTPUT extends Struct {
+  external D3D11_AUTHENTICATED_QUERY_OUTPUT Output;
+  external GUID EncryptionGuid;
+}
+
+class D3D11_AUTHENTICATED_CONFIGURE_INPUT extends Struct {
+  external D3D11_OMAC omac;
+  external GUID ConfigureType;
+  @IntPtr() external int hChannel;
+  @Uint32() external int SequenceNumber;
+}
+
+class D3D11_AUTHENTICATED_CONFIGURE_OUTPUT extends Struct {
+  external D3D11_OMAC omac;
+  external GUID ConfigureType;
+  @IntPtr() external int hChannel;
+  @Uint32() external int SequenceNumber;
+  @Int32() external int ReturnCode;
+}
+
+class D3D11_AUTHENTICATED_CONFIGURE_INITIALIZE_INPUT extends Struct {
+  external D3D11_AUTHENTICATED_CONFIGURE_INPUT Parameters;
+  @Uint32() external int StartSequenceQuery;
+  @Uint32() external int StartSequenceConfigure;
+}
+
+class D3D11_AUTHENTICATED_CONFIGURE_PROTECTION_INPUT extends Struct {
+  external D3D11_AUTHENTICATED_CONFIGURE_INPUT Parameters;
+  external D3D11_AUTHENTICATED_PROTECTION_FLAGS Protections;
+}
+
+class D3D11_AUTHENTICATED_CONFIGURE_CRYPTO_SESSION_INPUT extends Struct {
+  external D3D11_AUTHENTICATED_CONFIGURE_INPUT Parameters;
+  @IntPtr() external int DecoderHandle;
+  @IntPtr() external int CryptoSessionHandle;
+  @IntPtr() external int DeviceHandle;
+}
+
+class D3D11_AUTHENTICATED_CONFIGURE_SHARED_RESOURCE_INPUT extends Struct {
+  external D3D11_AUTHENTICATED_CONFIGURE_INPUT Parameters;
+  @Uint32() external int ProcessType;
+  @IntPtr() external int ProcessHandle;
+  @Int32() external int AllowAccess;
+}
+
+class D3D11_AUTHENTICATED_CONFIGURE_ACCESSIBLE_ENCRYPTION_INPUT extends Struct {
+  external D3D11_AUTHENTICATED_CONFIGURE_INPUT Parameters;
+  external GUID EncryptionGuid;
+}
+
+class D3D11_TEX2D_VDOV extends Struct {
+  @Uint32() external int ArraySlice;
+}
+
+class D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC extends Struct {
+  external GUID DecodeProfile;
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Anonymous;
+}
+
+class D3D11_TEX2D_VPIV extends Struct {
+  @Uint32() external int MipSlice;
+  @Uint32() external int ArraySlice;
+}
+
+class D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC extends Struct {
+  @Uint32() external int FourCC;
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Anonymous;
+}
+
+class D3D11_TEX2D_VPOV extends Struct {
+  @Uint32() external int MipSlice;
+}
+
+class D3D11_TEX2D_ARRAY_VPOV extends Struct {
+  @Uint32() external int MipSlice;
+  @Uint32() external int FirstArraySlice;
+  @Uint32() external int ArraySize;
+}
+
+class D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC extends Struct {
+  @Uint32() external int ViewDimension;
+  @Uint32() external int Anonymous;
+}
+
+class D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK extends Struct {
+  @Uint32() external int ClearSize;
+  @Uint32() external int EncryptedSize;
+}
+
+class D3D11_VIDEO_DECODER_BUFFER_DESC1 extends Struct {
+  @Uint32() external int BufferType;
+  @Uint32() external int DataOffset;
+  @Uint32() external int DataSize;
+  external Pointer pIV;
+  @Uint32() external int IVSize;
+  external Pointer<D3D11_VIDEO_DECODER_SUB_SAMPLE_MAPPING_BLOCK> pSubSampleMappingBlock;
+  @Uint32() external int SubSampleMappingCount;
+}
+
+class D3D11_VIDEO_DECODER_BEGIN_FRAME_CRYPTO_SESSION extends Struct {
+  external ID3D11CryptoSession pCryptoSession;
+  @Uint32() external int BlobSize;
+  external Pointer pBlob;
+  external Pointer<GUID> pKeyInfoId;
+  @Uint32() external int PrivateDataSize;
+  external Pointer pPrivateData;
+}
+
+class D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT extends Struct {
+  @Int32() external int Enable;
+  @Uint32() external int Width;
+  @Uint32() external int Height;
+  @Uint32() external int Format;
+}
+
+class D3D11_KEY_EXCHANGE_HW_PROTECTION_INPUT_DATA extends Struct {
+  @Uint32() external int PrivateDataSize;
+  @Uint32() external int HWProtectionDataSize;
+  @Array(4)
+  external Array<Uint8> pbInput;
+}
+
+class D3D11_KEY_EXCHANGE_HW_PROTECTION_OUTPUT_DATA extends Struct {
+  @Uint32() external int PrivateDataSize;
+  @Uint32() external int MaxHWProtectionDataSize;
+  @Uint32() external int HWProtectionDataSize;
+  @Uint64() external int TransportTime;
+  @Uint64() external int ExecutionTime;
+  @Array(4)
+  external Array<Uint8> pbOutput;
+}
+
+class D3D11_KEY_EXCHANGE_HW_PROTECTION_DATA extends Struct {
+  @Uint32() external int HWProtectionFunctionID;
+  external Pointer<D3D11_KEY_EXCHANGE_HW_PROTECTION_INPUT_DATA> pInputData;
+  external Pointer<D3D11_KEY_EXCHANGE_HW_PROTECTION_OUTPUT_DATA> pOutputData;
+  @Int32() external int Status;
+}
+
+class D3D11_VIDEO_SAMPLE_DESC extends Struct {
+  @Uint32() external int Width;
+  @Uint32() external int Height;
+  @Uint32() external int Format;
+  @Uint32() external int ColorSpace;
 }
 

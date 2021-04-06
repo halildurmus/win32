@@ -251,7 +251,8 @@ class DFS_SITENAME_INFO extends Struct {
 
 class DFS_SITELIST_INFO extends Struct {
   @Uint32() external int cSites;
-  external DFS_SITENAME_INFO Site;
+  @Array(1)
+  external Array<DFS_SITENAME_INFO> Site;
 }
 
 class DFS_SUPPORTED_NAMESPACE_VERSION_INFO extends Struct {
@@ -268,6 +269,7 @@ class DFS_GET_PKT_ENTRY_STATE_ARG extends Struct {
   @Uint16() external int ServerNameLen;
   @Uint16() external int ShareNameLen;
   @Uint32() external int Level;
-  external __ushort__ Buffer;
+  @Array(1)
+  external Array<Uint16> Buffer;
 }
 

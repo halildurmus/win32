@@ -80,7 +80,8 @@ class LOGFONTA extends Struct {
   @Uint8() external int lfClipPrecision;
   @Uint8() external int lfQuality;
   @Uint8() external int lfPitchAndFamily;
-  external __byte__ lfFaceName;
+  @Array(32)
+  external Array<Int8> lfFaceName;
 }
 
 class LOGFONTW extends Struct {
@@ -97,28 +98,8 @@ class LOGFONTW extends Struct {
   @Uint8() external int lfClipPrecision;
   @Uint8() external int lfQuality;
   @Uint8() external int lfPitchAndFamily;
-  external __ushort__ lfFaceName;
-}
-
-class SOFTDISTINFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwAdState;
-  external Pointer<Utf16> szTitle;
-  external Pointer<Utf16> szAbstract;
-  external Pointer<Utf16> szHREF;
-  @Uint32() external int dwInstalledVersionMS;
-  @Uint32() external int dwInstalledVersionLS;
-  @Uint32() external int dwUpdateVersionMS;
-  @Uint32() external int dwUpdateVersionLS;
-  @Uint32() external int dwAdvertisedVersionMS;
-  @Uint32() external int dwAdvertisedVersionLS;
-  @Uint32() external int dwReserved;
-}
-
-class SERIALIZEDPROPERTYVALUE extends Struct {
-  @Uint32() external int dwType;
-  external __ubyte__ rgb;
+  @Array(32)
+  external Array<Uint16> lfFaceName;
 }
 
 class HELPINFO extends Struct {
@@ -133,13 +114,15 @@ class HELPINFO extends Struct {
 class MULTIKEYHELPA extends Struct {
   @Uint32() external int mkSize;
   @Int8() external int mkKeylist;
-  external __byte__ szKeyphrase;
+  @Array(1)
+  external Array<Int8> szKeyphrase;
 }
 
 class MULTIKEYHELPW extends Struct {
   @Uint32() external int mkSize;
   @Uint16() external int mkKeylist;
-  external __ushort__ szKeyphrase;
+  @Array(1)
+  external Array<Uint16> szKeyphrase;
 }
 
 class HELPWININFOA extends Struct {
@@ -149,7 +132,8 @@ class HELPWININFOA extends Struct {
   @Int32() external int dx;
   @Int32() external int dy;
   @Int32() external int wMax;
-  external __byte__ rgchMember;
+  @Array(2)
+  external Array<Int8> rgchMember;
 }
 
 class HELPWININFOW extends Struct {
@@ -159,7 +143,8 @@ class HELPWININFOW extends Struct {
   @Int32() external int dx;
   @Int32() external int dy;
   @Int32() external int wMax;
-  external __ushort__ rgchMember;
+  @Array(2)
+  external Array<Uint16> rgchMember;
 }
 
 class QueryCancelAutoPlay extends Struct {
@@ -248,7 +233,8 @@ class StorageProviderBanners extends Struct {
 
 class SHITEMID extends Struct {
   @Uint16() external int cb;
-  external __ubyte__ abID;
+  @Array(1)
+  external Array<Uint8> abID;
 }
 
 class ITEMIDLIST extends Struct {
@@ -429,16 +415,20 @@ class CMINVOKECOMMANDINFOEX extends Struct {
 
 class PERSIST_FOLDER_TARGET_INFO extends Struct {
   external Pointer<ITEMIDLIST> pidlTargetFolder;
-  external __ushort__ szTargetParsingName;
-  external __ushort__ szNetworkProvider;
+  @Array(129)
+  external Array<Uint16> szTargetParsingName;
+  @Array(129)
+  external Array<Uint16> szNetworkProvider;
   @Uint32() external int dwAttributes;
   @Int32() external int csidl;
 }
 
 class EXTRASEARCH extends Struct {
   external GUID guidSearch;
-  external __ushort__ wszFriendlyName;
-  external __ushort__ wszUrl;
+  @Array(80)
+  external Array<Uint16> wszFriendlyName;
+  @Array(136)
+  external Array<Uint16> wszUrl;
 }
 
 class FOLDERSETTINGS extends Struct {
@@ -468,17 +458,20 @@ class CM_COLUMNINFO extends Struct {
   @Uint32() external int uWidth;
   @Uint32() external int uDefaultWidth;
   @Uint32() external int uIdealWidth;
-  external __ushort__ wszName;
+  @Array(80)
+  external Array<Uint16> wszName;
 }
 
 class SHELL_ITEM_RESOURCE extends Struct {
   external GUID guidType;
-  external __ushort__ szName;
+  @Array(129)
+  external Array<Uint16> szName;
 }
 
 class CATEGORY_INFO extends Struct {
   @Uint32() external int cif;
-  external __ushort__ wszName;
+  @Array(129)
+  external Array<Uint16> wszName;
 }
 
 class SHDRAGIMAGE extends Struct {
@@ -494,7 +487,8 @@ class DESKBANDINFO extends Struct {
   external POINTL ptMaxSize;
   external POINTL ptIntegral;
   external POINTL ptActual;
-  external __ushort__ wszTitle;
+  @Array(129)
+  external Array<Uint16> wszTitle;
   @Uint32() external int dwModeFlags;
   @Uint32() external int crBkgnd;
 }
@@ -504,7 +498,8 @@ class THUMBBUTTON extends Struct {
   @Uint32() external int iId;
   @Uint32() external int iBitmap;
   @IntPtr() external int hIcon;
-  external __ushort__ szTip;
+  @Array(129)
+  external Array<Uint16> szTip;
   @Uint32() external int dwFlags;
 }
 
@@ -518,7 +513,8 @@ class DELEGATEITEMID extends Struct {
   @Uint16() external int cbSize;
   @Uint16() external int wOuter;
   @Uint16() external int cbInner;
-  external __ubyte__ rgb;
+  @Array(1)
+  external Array<Uint8> rgb;
 }
 
 class SMDATA extends Struct {
@@ -625,7 +621,8 @@ class NT_CONSOLE_PROPS extends Struct {
   external COORD dwFontSize;
   @Uint32() external int uFontFamily;
   @Uint32() external int uFontWeight;
-  external __ushort__ FaceName;
+  @Array(32)
+  external Array<Uint16> FaceName;
   @Uint32() external int uCursorSize;
   @Int32() external int bFullScreen;
   @Int32() external int bQuickEdit;
@@ -634,7 +631,8 @@ class NT_CONSOLE_PROPS extends Struct {
   @Uint32() external int uHistoryBufferSize;
   @Uint32() external int uNumberOfHistoryBuffers;
   @Int32() external int bHistoryNoDup;
-  external __uint__ ColorTable;
+  @Array(16)
+  external Array<Uint32> ColorTable;
 }
 
 class NT_FE_CONSOLE_PROPS extends Struct {
@@ -644,8 +642,10 @@ class NT_FE_CONSOLE_PROPS extends Struct {
 
 class EXP_DARWIN_LINK extends Struct {
   external DATABLOCK_HEADER dbh;
-  external __byte__ szDarwinID;
-  external __ushort__ szwDarwinID;
+  @Array(129)
+  external Array<Int8> szDarwinID;
+  @Array(129)
+  external Array<Uint16> szwDarwinID;
 }
 
 class EXP_SPECIAL_FOLDER extends Struct {
@@ -658,14 +658,17 @@ class EXP_SPECIAL_FOLDER extends Struct {
 class EXP_SZ_LINK extends Struct {
   @Uint32() external int cbSize;
   @Uint32() external int dwSignature;
-  external __byte__ szTarget;
-  external __ushort__ swzTarget;
+  @Array(129)
+  external Array<Int8> szTarget;
+  @Array(129)
+  external Array<Uint16> swzTarget;
 }
 
 class EXP_PROPERTYSTORAGE extends Struct {
   @Uint32() external int cbSize;
   @Uint32() external int dwSignature;
-  external __ubyte__ abPropertyStorage;
+  @Array(1)
+  external Array<Uint8> abPropertyStorage;
 }
 
 class SHFOLDERCUSTOMSETTINGS extends Struct {
@@ -710,12 +713,14 @@ class BROWSEINFOW extends Struct {
 
 class NRESARRAY extends Struct {
   @Uint32() external int cItems;
-  external NETRESOURCEA nr;
+  @Array(1)
+  external Array<NETRESOURCEA> nr;
 }
 
 class CIDA extends Struct {
   @Uint32() external int cidl;
-  external __uint__ aoffset;
+  @Array(1)
+  external Array<Uint32> aoffset;
 }
 
 class FILEDESCRIPTORA extends Struct {
@@ -729,7 +734,8 @@ class FILEDESCRIPTORA extends Struct {
   external FILETIME ftLastWriteTime;
   @Uint32() external int nFileSizeHigh;
   @Uint32() external int nFileSizeLow;
-  external __byte__ cFileName;
+  @Array(129)
+  external Array<Int8> cFileName;
 }
 
 class FILEDESCRIPTORW extends Struct {
@@ -743,17 +749,20 @@ class FILEDESCRIPTORW extends Struct {
   external FILETIME ftLastWriteTime;
   @Uint32() external int nFileSizeHigh;
   @Uint32() external int nFileSizeLow;
-  external __ushort__ cFileName;
+  @Array(129)
+  external Array<Uint16> cFileName;
 }
 
 class FILEGROUPDESCRIPTORA extends Struct {
   @Uint32() external int cItems;
-  external FILEDESCRIPTORA fgd;
+  @Array(1)
+  external Array<FILEDESCRIPTORA> fgd;
 }
 
 class FILEGROUPDESCRIPTORW extends Struct {
   @Uint32() external int cItems;
-  external FILEDESCRIPTORW fgd;
+  @Array(1)
+  external Array<FILEDESCRIPTORW> fgd;
 }
 
 class DROPFILES extends Struct {
@@ -767,13 +776,16 @@ class FILE_ATTRIBUTES_ARRAY extends Struct {
   @Uint32() external int cItems;
   @Uint32() external int dwSumFileAttributes;
   @Uint32() external int dwProductFileAttributes;
-  external __uint__ rgdwFileAttributes;
+  @Array(1)
+  external Array<Uint32> rgdwFileAttributes;
 }
 
 class DROPDESCRIPTION extends Struct {
   @Uint32() external int type;
-  external __ushort__ szMessage;
-  external __ushort__ szInsert;
+  @Array(129)
+  external Array<Uint16> szMessage;
+  @Array(129)
+  external Array<Uint16> szInsert;
 }
 
 class SHChangeNotifyEntry extends Struct {
@@ -809,7 +821,8 @@ class SHChangeUpdateImageIDList extends Struct {
   @Int32() external int iCurIndex;
   @Uint32() external int uFlags;
   @Uint32() external int dwProcessID;
-  external __ushort__ szName;
+  @Array(129)
+  external Array<Uint16> szName;
   @Uint16() external int cbZero;
 }
 
@@ -822,8 +835,10 @@ class AUTO_SCROLL_DATA extends Struct {
   @Int32() external int iNextSample;
   @Uint32() external int dwLastScroll;
   @Int32() external int bFull;
-  external POINT pts;
-  external __uint__ dwTimes;
+  @Array(3)
+  external Array<POINT> pts;
+  @Array(3)
+  external Array<Uint32> dwTimes;
 }
 
 class CABINETSTATE extends Struct {
@@ -846,7 +861,8 @@ class QCMINFO_IDMAP_PLACEMENT extends Struct {
 
 class QCMINFO_IDMAP extends Struct {
   @Uint32() external int nMaxIds;
-  external QCMINFO_IDMAP_PLACEMENT pIdList;
+  @Array(1)
+  external Array<QCMINFO_IDMAP_PLACEMENT> pIdList;
 }
 
 class QCMINFO extends Struct {
@@ -872,8 +888,10 @@ class SFVM_PROPPAGE_DATA extends Struct {
 }
 
 class SFVM_HELPTOPIC_DATA extends Struct {
-  external __ushort__ wszHelpFile;
-  external __ushort__ wszHelpTopic;
+  @Array(129)
+  external Array<Uint16> wszHelpFile;
+  @Array(129)
+  external Array<Uint16> wszHelpTopic;
 }
 
 class ITEMSPACING extends Struct {
@@ -967,14 +985,17 @@ class SHCOLUMNINFO extends Struct {
   @Uint32() external int fmt;
   @Uint32() external int cChars;
   @Uint32() external int csFlags;
-  external __ushort__ wszTitle;
-  external __ushort__ wszDescription;
+  @Array(80)
+  external Array<Uint16> wszTitle;
+  @Array(128)
+  external Array<Uint16> wszDescription;
 }
 
 class SHCOLUMNINIT extends Struct {
   @Uint32() external int dwFlags;
   @Uint32() external int dwReserved;
-  external __ushort__ wszFolder;
+  @Array(129)
+  external Array<Uint16> wszFolder;
 }
 
 class SHCOLUMNDATA extends Struct {
@@ -982,12 +1003,14 @@ class SHCOLUMNDATA extends Struct {
   @Uint32() external int dwFileAttributes;
   @Uint32() external int dwReserved;
   external Pointer<Utf16> pwszExt;
-  external __ushort__ wszFile;
+  @Array(129)
+  external Array<Uint16> wszFile;
 }
 
 class SHChangeProductKeyAsIDList extends Struct {
   @Uint16() external int cb;
-  external __ushort__ wszProductKey;
+  @Array(39)
+  external Array<Uint16> wszProductKey;
   @Uint16() external int cbZero;
 }
 
@@ -1003,8 +1026,10 @@ class SFV_SETITEMPOS extends Struct {
 
 class AASHELLMENUFILENAME extends Struct {
   @Int16() external int cbTotal;
-  external __ubyte__ rgbReserved;
-  external __ushort__ szFileName;
+  @Array(12)
+  external Array<Uint8> rgbReserved;
+  @Array(1)
+  external Array<Uint16> szFileName;
 }
 
 class AASHELLMENUITEM extends Struct {
@@ -1147,12 +1172,15 @@ class NOTIFYICONDATAA extends Struct {
   @Uint32() external int uFlags;
   @Uint32() external int uCallbackMessage;
   @IntPtr() external int hIcon;
-  external __byte__ szTip;
+  @Array(128)
+  external Array<Int8> szTip;
   @Uint32() external int dwState;
   @Uint32() external int dwStateMask;
-  external __byte__ szInfo;
+  @Array(129)
+  external Array<Int8> szInfo;
   @Uint32() external int Anonymous;
-  external __byte__ szInfoTitle;
+  @Array(64)
+  external Array<Int8> szInfoTitle;
   @Uint32() external int dwInfoFlags;
   external GUID guidItem;
   @IntPtr() external int hBalloonIcon;
@@ -1165,12 +1193,15 @@ class NOTIFYICONDATAW extends Struct {
   @Uint32() external int uFlags;
   @Uint32() external int uCallbackMessage;
   @IntPtr() external int hIcon;
-  external __ushort__ szTip;
+  @Array(128)
+  external Array<Uint16> szTip;
   @Uint32() external int dwState;
   @Uint32() external int dwStateMask;
-  external __ushort__ szInfo;
+  @Array(129)
+  external Array<Uint16> szInfo;
   @Uint32() external int Anonymous;
-  external __ushort__ szInfoTitle;
+  @Array(64)
+  external Array<Uint16> szInfoTitle;
   @Uint32() external int dwInfoFlags;
   external GUID guidItem;
   @IntPtr() external int hBalloonIcon;
@@ -1187,16 +1218,20 @@ class SHFILEINFOA extends Struct {
   @IntPtr() external int hIcon;
   @Int32() external int iIcon;
   @Uint32() external int dwAttributes;
-  external __byte__ szDisplayName;
-  external __byte__ szTypeName;
+  @Array(129)
+  external Array<Int8> szDisplayName;
+  @Array(80)
+  external Array<Int8> szTypeName;
 }
 
 class SHFILEINFOW extends Struct {
   @IntPtr() external int hIcon;
   @Int32() external int iIcon;
   @Uint32() external int dwAttributes;
-  external __ushort__ szDisplayName;
-  external __ushort__ szTypeName;
+  @Array(129)
+  external Array<Uint16> szDisplayName;
+  @Array(80)
+  external Array<Uint16> szTypeName;
 }
 
 class SHSTOCKICONINFO extends Struct {
@@ -1204,7 +1239,8 @@ class SHSTOCKICONINFO extends Struct {
   @IntPtr() external int hIcon;
   @Int32() external int iSysImageIndex;
   @Int32() external int iIcon;
-  external __ushort__ szPath;
+  @Array(129)
+  external Array<Uint16> szPath;
 }
 
 class OPEN_PRINTER_PROPS_INFOA extends Struct {
@@ -1415,7 +1451,8 @@ class SharedBitmap extends Struct {
 }
 
 class WTS_THUMBNAILID extends Struct {
-  external __ubyte__ rgbKey;
+  @Array(16)
+  external Array<Uint8> rgbKey;
 }
 
 class ShellImageDataFactory extends Struct {
@@ -1447,7 +1484,8 @@ class SYNCMGRITEM extends Struct {
   external GUID ItemID;
   @Uint32() external int dwItemState;
   @IntPtr() external int hIcon;
-  external __ushort__ wszItemName;
+  @Array(128)
+  external Array<Uint16> wszItemName;
   external FILETIME ftLastUpdate;
 }
 
@@ -1455,7 +1493,8 @@ class SYNCMGRHANDLERINFO extends Struct {
   @Uint32() external int cbSize;
   @IntPtr() external int hIcon;
   @Uint32() external int SyncMgrHandlerFlags;
-  external __ushort__ wszHandlerName;
+  @Array(32)
+  external Array<Uint16> wszHandlerName;
 }
 
 class ThumbnailStreamCache extends Struct {
@@ -1580,9 +1619,12 @@ class NEWCPLINFOA extends Struct {
   @Uint32() external int dwHelpContext;
   @IntPtr() external int lData;
   @IntPtr() external int hIcon;
-  external __byte__ szName;
-  external __byte__ szInfo;
-  external __byte__ szHelpFile;
+  @Array(32)
+  external Array<Int8> szName;
+  @Array(64)
+  external Array<Int8> szInfo;
+  @Array(128)
+  external Array<Int8> szHelpFile;
 }
 
 class NEWCPLINFOW extends Struct {
@@ -1591,9 +1633,12 @@ class NEWCPLINFOW extends Struct {
   @Uint32() external int dwHelpContext;
   @IntPtr() external int lData;
   @IntPtr() external int hIcon;
-  external __ushort__ szName;
-  external __ushort__ szInfo;
-  external __ushort__ szHelpFile;
+  @Array(32)
+  external Array<Uint16> szName;
+  @Array(64)
+  external Array<Uint16> szInfo;
+  @Array(128)
+  external Array<Uint16> szHelpFile;
 }
 
 class PROFILEINFOA extends Struct {
@@ -1642,5 +1687,27 @@ class NC_ADDRESS extends Struct {
   external Pointer<NET_ADDRESS_INFO> pAddrInfo;
   @Uint16() external int PortNumber;
   @Uint8() external int PrefixLength;
+}
+
+class SERIALIZEDPROPERTYVALUE extends Struct {
+  @Uint32() external int dwType;
+  @Array(1)
+  external Array<Uint8> rgb;
+}
+
+class SOFTDISTINFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwAdState;
+  external Pointer<Utf16> szTitle;
+  external Pointer<Utf16> szAbstract;
+  external Pointer<Utf16> szHREF;
+  @Uint32() external int dwInstalledVersionMS;
+  @Uint32() external int dwInstalledVersionLS;
+  @Uint32() external int dwUpdateVersionMS;
+  @Uint32() external int dwUpdateVersionLS;
+  @Uint32() external int dwAdvertisedVersionMS;
+  @Uint32() external int dwAdvertisedVersionLS;
+  @Uint32() external int dwReserved;
 }
 

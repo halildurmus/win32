@@ -1,4 +1,88 @@
 /// {@category Enum}
+class IKEV2_ID_PAYLOAD_TYPE {
+  static const IKEV2_ID_PAYLOAD_TYPE_INVALID = 0x00000000;
+  static const IKEV2_ID_PAYLOAD_TYPE_IPV4_ADDR = 0x00000001;
+  static const IKEV2_ID_PAYLOAD_TYPE_FQDN = 0x00000002;
+  static const IKEV2_ID_PAYLOAD_TYPE_RFC822_ADDR = 0x00000003;
+  static const IKEV2_ID_PAYLOAD_TYPE_RESERVED1 = 0x00000004;
+  static const IKEV2_ID_PAYLOAD_TYPE_ID_IPV6_ADDR = 0x00000005;
+  static const IKEV2_ID_PAYLOAD_TYPE_RESERVED2 = 0x00000006;
+  static const IKEV2_ID_PAYLOAD_TYPE_RESERVED3 = 0x00000007;
+  static const IKEV2_ID_PAYLOAD_TYPE_RESERVED4 = 0x00000008;
+  static const IKEV2_ID_PAYLOAD_TYPE_DER_ASN1_DN = 0x00000009;
+  static const IKEV2_ID_PAYLOAD_TYPE_DER_ASN1_GN = 0x0000000a;
+  static const IKEV2_ID_PAYLOAD_TYPE_KEY_ID = 0x0000000b;
+  static const IKEV2_ID_PAYLOAD_TYPE_MAX = 0x0000000c;
+}
+
+/// {@category Enum}
+class MGM_ENUM_TYPES {
+  static const ANY_SOURCE = 0x00000000;
+  static const ALL_SOURCES = 0x00000001;
+}
+
+/// {@category Enum}
+class MPRAPI_OBJECT_TYPE {
+  static const MPRAPI_OBJECT_TYPE_RAS_CONNECTION_OBJECT = 0x00000001;
+  static const MPRAPI_OBJECT_TYPE_MPR_SERVER_OBJECT = 0x00000002;
+  static const MPRAPI_OBJECT_TYPE_MPR_SERVER_SET_CONFIG_OBJECT = 0x00000003;
+  static const MPRAPI_OBJECT_TYPE_AUTH_VALIDATION_OBJECT = 0x00000004;
+  static const MPRAPI_OBJECT_TYPE_UPDATE_CONNECTION_OBJECT = 0x00000005;
+  static const MPRAPI_OBJECT_TYPE_IF_CUSTOM_CONFIG_OBJECT = 0x00000006;
+}
+
+/// {@category Enum}
+class MPR_ET {
+  static const MPR_ET_None = 0x00000000;
+  static const MPR_ET_Require = 0x00000001;
+  static const MPR_ET_RequireMax = 0x00000002;
+  static const MPR_ET_Optional = 0x00000003;
+}
+
+/// {@category Enum}
+class MPR_INTERFACE_2_dwIdleDisconnectSeconds {
+  static const MPRIDS_Disabled = 0xffffffff;
+  static const MPRIDS_UseGlobalValue = 0x00000000;
+}
+
+/// {@category Enum}
+class MPR_INTERFACE_DIAL_MODE {
+  static const MPRDM_DialFirst = 0x00000000;
+  static const MPRDM_DialAll = 0x00000001;
+  static const MPRDM_DialAsNeeded = 0x00000002;
+}
+
+/// {@category Enum}
+class MPR_VPN_TS_TYPE {
+  static const MPR_VPN_TS_IPv4_ADDR_RANGE = 0x00000007;
+  static const MPR_VPN_TS_IPv6_ADDR_RANGE = 0x00000008;
+}
+
+/// {@category Enum}
+class MPR_VS {
+  static const MPR_VS_Default = 0x00000000;
+  static const MPR_VS_PptpOnly = 0x00000001;
+  static const MPR_VS_PptpFirst = 0x00000002;
+  static const MPR_VS_L2tpOnly = 0x00000003;
+  static const MPR_VS_L2tpFirst = 0x00000004;
+}
+
+/// {@category Enum}
+class PPP_LCP {
+  static const PPP_LCP_PAP = 0x0000c023;
+  static const PPP_LCP_CHAP = 0x0000c223;
+  static const PPP_LCP_EAP = 0x0000c227;
+  static const PPP_LCP_SPAP = 0x0000c027;
+}
+
+/// {@category Enum}
+class PPP_LCP_INFO_dwAuthenticationData {
+  static const PPP_LCP_CHAP_MD5 = 0x00000005;
+  static const PPP_LCP_CHAP_MS = 0x00000080;
+  static const PPP_LCP_CHAP_MSV2 = 0x00000081;
+}
+
+/// {@category Enum}
 class RASAPIVERSION {
   static const RASAPIVERSION_500 = 0x00000001;
   static const RASAPIVERSION_501 = 0x00000002;
@@ -51,6 +135,34 @@ class RASCONNSUBSTATE {
 }
 
 /// {@category Enum}
+class RASENTRY_DIAL_MODE {
+  static const RASEDM_DialAll = 0x00000001;
+  static const RASEDM_DialAsNeeded = 0x00000002;
+}
+
+/// {@category Enum}
+class RASIKEV2_PROJECTION_INFOFlags {
+  static const RASIKEv2_FLAGS_MOBIKESUPPORTED = 0x00000001;
+  static const RASIKEv2_FLAGS_BEHIND_NAT = 0x00000002;
+  static const RASIKEv2_FLAGS_SERVERBEHIND_NAT = 0x00000004;
+}
+
+/// {@category Enum}
+class RASPPP_PROJECTION_INFO_dwServerAuthenticationData {
+  static const RASLCPAD_CHAP_MD5 = 0x00000005;
+  static const RASLCPAD_CHAP_MS = 0x00000080;
+  static const RASLCPAD_CHAP_MSV2 = 0x00000081;
+}
+
+/// {@category Enum}
+class RASPPP_PROJECTION_INFO_dwServerAuthenticationProtocol {
+  static const RASLCPAP_PAP = 0x0000c023;
+  static const RASLCPAP_SPAP = 0x0000c027;
+  static const RASLCPAP_CHAP = 0x0000c223;
+  static const RASLCPAP_EAP = 0x0000c227;
+}
+
+/// {@category Enum}
 class RASPROJECTION {
   static const RASP_Amb = 0x00010000;
   static const RASP_PppNbf = 0x0000803f;
@@ -68,20 +180,46 @@ class RASPROJECTION_INFO_TYPE {
 }
 
 /// {@category Enum}
-class IKEV2_ID_PAYLOAD_TYPE {
-  static const IKEV2_ID_PAYLOAD_TYPE_INVALID = 0x00000000;
-  static const IKEV2_ID_PAYLOAD_TYPE_IPV4_ADDR = 0x00000001;
-  static const IKEV2_ID_PAYLOAD_TYPE_FQDN = 0x00000002;
-  static const IKEV2_ID_PAYLOAD_TYPE_RFC822_ADDR = 0x00000003;
-  static const IKEV2_ID_PAYLOAD_TYPE_RESERVED1 = 0x00000004;
-  static const IKEV2_ID_PAYLOAD_TYPE_ID_IPV6_ADDR = 0x00000005;
-  static const IKEV2_ID_PAYLOAD_TYPE_RESERVED2 = 0x00000006;
-  static const IKEV2_ID_PAYLOAD_TYPE_RESERVED3 = 0x00000007;
-  static const IKEV2_ID_PAYLOAD_TYPE_RESERVED4 = 0x00000008;
-  static const IKEV2_ID_PAYLOAD_TYPE_DER_ASN1_DN = 0x00000009;
-  static const IKEV2_ID_PAYLOAD_TYPE_DER_ASN1_GN = 0x0000000a;
-  static const IKEV2_ID_PAYLOAD_TYPE_KEY_ID = 0x0000000b;
-  static const IKEV2_ID_PAYLOAD_TYPE_MAX = 0x0000000c;
+class RAS_FLAGS {
+  static const RAS_FLAGS_PPP_CONNECTION = 0x00000001;
+  static const RAS_FLAGS_MESSENGER_PRESENT = 0x00000002;
+  static const RAS_FLAGS_QUARANTINE_PRESENT = 0x00000008;
+  static const RAS_FLAGS_ARAP_CONNECTION = 0x00000010;
+  static const RAS_FLAGS_IKEV2_CONNECTION = 0x00000010;
+  static const RAS_FLAGS_DORMANT = 0x00000020;
+}
+
+/// {@category Enum}
+class RAS_HARDWARE_CONDITION {
+  static const RAS_HARDWARE_OPERATIONAL = 0x00000000;
+  static const RAS_HARDWARE_FAILURE = 0x00000001;
+}
+
+/// {@category Enum}
+class RAS_PORT_CONDITION {
+  static const RAS_PORT_NON_OPERATIONAL = 0x00000000;
+  static const RAS_PORT_DISCONNECTED = 0x00000001;
+  static const RAS_PORT_CALLING_BACK = 0x00000002;
+  static const RAS_PORT_LISTENING = 0x00000003;
+  static const RAS_PORT_AUTHENTICATING = 0x00000004;
+  static const RAS_PORT_AUTHENTICATED = 0x00000005;
+  static const RAS_PORT_INITIALIZING = 0x00000006;
+}
+
+/// {@category Enum}
+class RAS_QUARANTINE_STATE {
+  static const RAS_QUAR_STATE_NORMAL = 0x00000000;
+  static const RAS_QUAR_STATE_QUARANTINE = 0x00000001;
+  static const RAS_QUAR_STATE_PROBATION = 0x00000002;
+  static const RAS_QUAR_STATE_NOT_CAPABLE = 0x00000003;
+}
+
+/// {@category Enum}
+class ROUTER_CONNECTION_STATE {
+  static const ROUTER_IF_STATE_UNREACHABLE = 0x00000000;
+  static const ROUTER_IF_STATE_DISCONNECTED = 0x00000001;
+  static const ROUTER_IF_STATE_CONNECTING = 0x00000002;
+  static const ROUTER_IF_STATE_CONNECTED = 0x00000003;
 }
 
 /// {@category Enum}
@@ -98,179 +236,11 @@ class ROUTER_INTERFACE_TYPE {
 }
 
 /// {@category Enum}
-class ROUTER_CONNECTION_STATE {
-  static const ROUTER_IF_STATE_UNREACHABLE = 0x00000000;
-  static const ROUTER_IF_STATE_DISCONNECTED = 0x00000001;
-  static const ROUTER_IF_STATE_CONNECTING = 0x00000002;
-  static const ROUTER_IF_STATE_CONNECTED = 0x00000003;
-}
-
-/// {@category Enum}
-class RAS_PORT_CONDITION {
-  static const RAS_PORT_NON_OPERATIONAL = 0x00000000;
-  static const RAS_PORT_DISCONNECTED = 0x00000001;
-  static const RAS_PORT_CALLING_BACK = 0x00000002;
-  static const RAS_PORT_LISTENING = 0x00000003;
-  static const RAS_PORT_AUTHENTICATING = 0x00000004;
-  static const RAS_PORT_AUTHENTICATED = 0x00000005;
-  static const RAS_PORT_INITIALIZING = 0x00000006;
-}
-
-/// {@category Enum}
-class RAS_HARDWARE_CONDITION {
-  static const RAS_HARDWARE_OPERATIONAL = 0x00000000;
-  static const RAS_HARDWARE_FAILURE = 0x00000001;
-}
-
-/// {@category Enum}
-class RAS_QUARANTINE_STATE {
-  static const RAS_QUAR_STATE_NORMAL = 0x00000000;
-  static const RAS_QUAR_STATE_QUARANTINE = 0x00000001;
-  static const RAS_QUAR_STATE_PROBATION = 0x00000002;
-  static const RAS_QUAR_STATE_NOT_CAPABLE = 0x00000003;
-}
-
-/// {@category Enum}
-class MPRAPI_OBJECT_TYPE {
-  static const MPRAPI_OBJECT_TYPE_RAS_CONNECTION_OBJECT = 0x00000001;
-  static const MPRAPI_OBJECT_TYPE_MPR_SERVER_OBJECT = 0x00000002;
-  static const MPRAPI_OBJECT_TYPE_MPR_SERVER_SET_CONFIG_OBJECT = 0x00000003;
-  static const MPRAPI_OBJECT_TYPE_AUTH_VALIDATION_OBJECT = 0x00000004;
-  static const MPRAPI_OBJECT_TYPE_UPDATE_CONNECTION_OBJECT = 0x00000005;
-  static const MPRAPI_OBJECT_TYPE_IF_CUSTOM_CONFIG_OBJECT = 0x00000006;
-}
-
-/// {@category Enum}
-class MPR_VPN_TS_TYPE {
-  static const MPR_VPN_TS_IPv4_ADDR_RANGE = 0x00000007;
-  static const MPR_VPN_TS_IPv6_ADDR_RANGE = 0x00000008;
-}
-
-/// {@category Enum}
-class MGM_ENUM_TYPES {
-  static const ANY_SOURCE = 0x00000000;
-  static const ALL_SOURCES = 0x00000001;
-}
-
-/// {@category Enum}
 class RTM_EVENT_TYPE {
   static const RTM_ENTITY_REGISTERED = 0x00000000;
   static const RTM_ENTITY_DEREGISTERED = 0x00000001;
   static const RTM_ROUTE_EXPIRED = 0x00000002;
   static const RTM_CHANGE_NOTIFICATION = 0x00000003;
-}
-
-/// {@category Enum}
-class MPR_INTERFACE_DIAL_MODE {
-  static const MPRDM_DialFirst = 0x00000000;
-  static const MPRDM_DialAll = 0x00000001;
-  static const MPRDM_DialAsNeeded = 0x00000002;
-}
-
-/// {@category Enum}
-class RASENTRY_DIAL_MODE {
-  static const RASEDM_DialAll = 0x00000001;
-  static const RASEDM_DialAsNeeded = 0x00000002;
-}
-
-/// {@category Enum}
-class Ras_arg1 {
-  static const RASADP_DisableConnectionQuery = 0x00000000;
-  static const RASADP_LoginSessionDisable = 0x00000001;
-  static const RASADP_SavedAddressesLimit = 0x00000002;
-  static const RASADP_FailedConnectionTimeout = 0x00000003;
-  static const RASADP_ConnectionQueryTimeout = 0x00000004;
-}
-
-/// {@category Enum}
-class RtmAddNextHop_NextHopInfoFlags {
-  static const RTM_NEXTHOP_FLAGS_REMOTE = 0x00000001;
-  static const RTM_NEXTHOP_FLAGS_DOWN = 0x00000002;
-}
-
-/// {@category Enum}
-class RasDial_arg4 {
-  static const None = 0x00000000;
-  static const arg41 = 0x00000001;
-  static const arg42 = 0x00000002;
-}
-
-/// {@category Enum}
-class RasConnectionNotification_arg3 {
-  static const RASCN_Connection = 0x00000001;
-  static const RASCN_Disconnection = 0x00000002;
-  static const RASCN_BandwidthAdded = 0x00000004;
-  static const RASCN_BandwidthRemoved = 0x00000008;
-}
-
-/// {@category Enum}
-class MPR_INTERFACE_2_dwIdleDisconnectSeconds {
-  static const MPRIDS_Disabled = 0xffffffff;
-  static const MPRIDS_UseGlobalValue = 0x00000000;
-}
-
-/// {@category Enum}
-class RAS_FLAGS {
-  static const RAS_FLAGS_PPP_CONNECTION = 0x00000001;
-  static const RAS_FLAGS_MESSENGER_PRESENT = 0x00000002;
-  static const RAS_FLAGS_QUARANTINE_PRESENT = 0x00000008;
-  static const RAS_FLAGS_ARAP_CONNECTION = 0x00000010;
-  static const RAS_FLAGS_IKEV2_CONNECTION = 0x00000010;
-  static const RAS_FLAGS_DORMANT = 0x00000020;
-}
-
-/// {@category Enum}
-class MPR_ET {
-  static const MPR_ET_None = 0x00000000;
-  static const MPR_ET_Require = 0x00000001;
-  static const MPR_ET_RequireMax = 0x00000002;
-  static const MPR_ET_Optional = 0x00000003;
-}
-
-/// {@category Enum}
-class RASPPP_PROJECTION_INFO_dwServerAuthenticationData {
-  static const RASLCPAD_CHAP_MD5 = 0x00000005;
-  static const RASLCPAD_CHAP_MS = 0x00000080;
-  static const RASLCPAD_CHAP_MSV2 = 0x00000081;
-}
-
-/// {@category Enum}
-class PPP_LCP {
-  static const PPP_LCP_PAP = 0x0000c023;
-  static const PPP_LCP_CHAP = 0x0000c223;
-  static const PPP_LCP_EAP = 0x0000c227;
-  static const PPP_LCP_SPAP = 0x0000c027;
-}
-
-/// {@category Enum}
-class RASPPP_PROJECTION_INFO_dwServerAuthenticationProtocol {
-  static const RASLCPAP_PAP = 0x0000c023;
-  static const RASLCPAP_SPAP = 0x0000c027;
-  static const RASLCPAP_CHAP = 0x0000c223;
-  static const RASLCPAP_EAP = 0x0000c227;
-}
-
-/// {@category Enum}
-class PPP_LCP_INFO_dwAuthenticationData {
-  static const PPP_LCP_CHAP_MD5 = 0x00000005;
-  static const PPP_LCP_CHAP_MS = 0x00000080;
-  static const PPP_LCP_CHAP_MSV2 = 0x00000081;
-}
-
-/// {@category Enum}
-class RASIKEV2_PROJECTION_INFOFlags {
-  static const RASIKEv2_FLAGS_MOBIKESUPPORTED = 0x00000001;
-  static const RASIKEv2_FLAGS_BEHIND_NAT = 0x00000002;
-  static const RASIKEv2_FLAGS_SERVERBEHIND_NAT = 0x00000004;
-}
-
-/// {@category Enum}
-class MPR_VS {
-  static const MPR_VS_Default = 0x00000000;
-  static const MPR_VS_PptpOnly = 0x00000001;
-  static const MPR_VS_PptpFirst = 0x00000002;
-  static const MPR_VS_L2tpOnly = 0x00000003;
-  static const MPR_VS_L2tpFirst = 0x00000004;
 }
 
 /// {@category Enum}

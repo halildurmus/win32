@@ -1,29 +1,22 @@
 /// {@category Enum}
-class WMDM_TAG_DATATYPE {
-  static const WMDM_TYPE_DWORD = 0x00000000;
-  static const WMDM_TYPE_STRING = 0x00000001;
-  static const WMDM_TYPE_BINARY = 0x00000002;
-  static const WMDM_TYPE_BOOL = 0x00000003;
-  static const WMDM_TYPE_QWORD = 0x00000004;
-  static const WMDM_TYPE_WORD = 0x00000005;
-  static const WMDM_TYPE_GUID = 0x00000006;
-  static const WMDM_TYPE_DATE = 0x00000007;
+class WMDMMessage {
+  static const WMDM_MSG_DEVICE_ARRIVAL = 0x00000000;
+  static const WMDM_MSG_DEVICE_REMOVAL = 0x00000001;
+  static const WMDM_MSG_MEDIA_ARRIVAL = 0x00000002;
+  static const WMDM_MSG_MEDIA_REMOVAL = 0x00000003;
 }
 
 /// {@category Enum}
-class WMDM_SESSION_TYPE {
-  static const WMDM_SESSION_NONE = 0x00000000;
-  static const WMDM_SESSION_TRANSFER_TO_DEVICE = 0x00000001;
-  static const WMDM_SESSION_TRANSFER_FROM_DEVICE = 0x00000010;
-  static const WMDM_SESSION_DELETE = 0x00000100;
-  static const WMDM_SESSION_CUSTOM = 0x00001000;
+class WMDM_ENUM_PROP_VALID_VALUES_FORM {
+  static const WMDM_ENUM_PROP_VALID_VALUES_ANY = 0x00000000;
+  static const WMDM_ENUM_PROP_VALID_VALUES_RANGE = 0x00000001;
+  static const WMDM_ENUM_PROP_VALID_VALUES_ENUM = 0x00000002;
 }
 
 /// {@category Enum}
-class WMDM_STORAGE_ENUM_MODE {
-  static const ENUM_MODE_RAW = 0x00000000;
-  static const ENUM_MODE_USE_DEVICE_PREF = 0x00000001;
-  static const ENUM_MODE_METADATA_VIEWS = 0x00000002;
+class WMDM_FIND_SCOPE {
+  static const WMDM_FIND_SCOPE_GLOBAL = 0x00000000;
+  static const WMDM_FIND_SCOPE_IMMEDIATE_CHILDREN = 0x00000001;
 }
 
 /// {@category Enum}
@@ -126,23 +119,30 @@ class WMDM_FORMATCODE {
 }
 
 /// {@category Enum}
-class WMDM_ENUM_PROP_VALID_VALUES_FORM {
-  static const WMDM_ENUM_PROP_VALID_VALUES_ANY = 0x00000000;
-  static const WMDM_ENUM_PROP_VALID_VALUES_RANGE = 0x00000001;
-  static const WMDM_ENUM_PROP_VALID_VALUES_ENUM = 0x00000002;
+class WMDM_SESSION_TYPE {
+  static const WMDM_SESSION_NONE = 0x00000000;
+  static const WMDM_SESSION_TRANSFER_TO_DEVICE = 0x00000001;
+  static const WMDM_SESSION_TRANSFER_FROM_DEVICE = 0x00000010;
+  static const WMDM_SESSION_DELETE = 0x00000100;
+  static const WMDM_SESSION_CUSTOM = 0x00001000;
 }
 
 /// {@category Enum}
-class WMDM_FIND_SCOPE {
-  static const WMDM_FIND_SCOPE_GLOBAL = 0x00000000;
-  static const WMDM_FIND_SCOPE_IMMEDIATE_CHILDREN = 0x00000001;
+class WMDM_STORAGE_ENUM_MODE {
+  static const ENUM_MODE_RAW = 0x00000000;
+  static const ENUM_MODE_USE_DEVICE_PREF = 0x00000001;
+  static const ENUM_MODE_METADATA_VIEWS = 0x00000002;
 }
 
 /// {@category Enum}
-class WMDMMessage {
-  static const WMDM_MSG_DEVICE_ARRIVAL = 0x00000000;
-  static const WMDM_MSG_DEVICE_REMOVAL = 0x00000001;
-  static const WMDM_MSG_MEDIA_ARRIVAL = 0x00000002;
-  static const WMDM_MSG_MEDIA_REMOVAL = 0x00000003;
+class WMDM_TAG_DATATYPE {
+  static const WMDM_TYPE_DWORD = 0x00000000;
+  static const WMDM_TYPE_STRING = 0x00000001;
+  static const WMDM_TYPE_BINARY = 0x00000002;
+  static const WMDM_TYPE_BOOL = 0x00000003;
+  static const WMDM_TYPE_QWORD = 0x00000004;
+  static const WMDM_TYPE_WORD = 0x00000005;
+  static const WMDM_TYPE_GUID = 0x00000006;
+  static const WMDM_TYPE_DATE = 0x00000007;
 }
 

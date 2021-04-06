@@ -131,7 +131,8 @@ class WICRawToneCurvePoint extends Struct {
 
 class WICRawToneCurve extends Struct {
   @Uint32() external int cPoints;
-  external WICRawToneCurvePoint aPoints;
+  @Array(1)
+  external Array<WICRawToneCurvePoint> aPoints;
 }
 
 class WICDdsParameters extends Struct {

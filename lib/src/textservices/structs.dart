@@ -91,7 +91,8 @@ class TF_LANGBARITEMINFO extends Struct {
   external GUID guidItem;
   @Uint32() external int dwStyle;
   @Uint32() external int ulSort;
-  external __ushort__ szDescription;
+  @Array(32)
+  external Array<Uint16> szDescription;
 }
 
 class TF_LBBALLOONINFO extends Struct {

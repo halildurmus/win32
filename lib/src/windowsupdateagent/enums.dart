@@ -1,10 +1,41 @@
 /// {@category Enum}
+class AddServiceFlag {
+  static const asfAllowPendingRegistration = 0x00000001;
+  static const asfAllowOnlineRegistration = 0x00000002;
+  static const asfRegisterServiceWithAU = 0x00000004;
+}
+
+/// {@category Enum}
+class AutoDownloadMode {
+  static const adLetWindowsUpdateDecide = 0x00000000;
+  static const adNeverAutoDownload = 0x00000001;
+  static const adAlwaysAutoDownload = 0x00000002;
+}
+
+/// {@category Enum}
+class AutoSelectionMode {
+  static const asLetWindowsUpdateDecide = 0x00000000;
+  static const asAutoSelectIfDownloaded = 0x00000001;
+  static const asNeverAutoSelect = 0x00000002;
+  static const asAlwaysAutoSelect = 0x00000003;
+}
+
+/// {@category Enum}
 class AutomaticUpdatesNotificationLevel {
   static const aunlNotConfigured = 0x00000000;
   static const aunlDisabled = 0x00000001;
   static const aunlNotifyBeforeDownload = 0x00000002;
   static const aunlNotifyBeforeInstallation = 0x00000003;
   static const aunlScheduledInstallation = 0x00000004;
+}
+
+/// {@category Enum}
+class AutomaticUpdatesPermissionType {
+  static const auptSetNotificationLevel = 0x00000001;
+  static const auptDisableAutomaticUpdates = 0x00000002;
+  static const auptSetIncludeRecommendedUpdates = 0x00000003;
+  static const auptSetFeaturedUpdatesEnabled = 0x00000004;
+  static const auptSetNonAdministratorsElevated = 0x00000005;
 }
 
 /// {@category Enum}
@@ -20,6 +51,21 @@ class AutomaticUpdatesScheduledInstallationDay {
 }
 
 /// {@category Enum}
+class AutomaticUpdatesUserType {
+  static const auutCurrentUser = 0x00000001;
+  static const auutLocalAdministrator = 0x00000002;
+}
+
+/// {@category Enum}
+class DeploymentAction {
+  static const daNone = 0x00000000;
+  static const daInstallation = 0x00000001;
+  static const daUninstallation = 0x00000002;
+  static const daDetection = 0x00000003;
+  static const daOptionalInstallation = 0x00000004;
+}
+
+/// {@category Enum}
 class DownloadPhase {
   static const dphInitializing = 0x00000001;
   static const dphDownloading = 0x00000002;
@@ -32,21 +78,6 @@ class DownloadPriority {
   static const dpNormal = 0x00000002;
   static const dpHigh = 0x00000003;
   static const dpExtraHigh = 0x00000004;
-}
-
-/// {@category Enum}
-class AutoSelectionMode {
-  static const asLetWindowsUpdateDecide = 0x00000000;
-  static const asAutoSelectIfDownloaded = 0x00000001;
-  static const asNeverAutoSelect = 0x00000002;
-  static const asAlwaysAutoSelect = 0x00000003;
-}
-
-/// {@category Enum}
-class AutoDownloadMode {
-  static const adLetWindowsUpdateDecide = 0x00000000;
-  static const adNeverAutoDownload = 0x00000001;
-  static const adAlwaysAutoDownload = 0x00000002;
 }
 
 /// {@category Enum}
@@ -74,32 +105,21 @@ class OperationResultCode {
 }
 
 /// {@category Enum}
+class SearchScope {
+  static const searchScopeDefault = 0x00000000;
+  static const searchScopeMachineOnly = 0x00000001;
+  static const searchScopeCurrentUserOnly = 0x00000002;
+  static const searchScopeMachineAndCurrentUser = 0x00000003;
+  static const searchScopeMachineAndAllUsers = 0x00000004;
+  static const searchScopeAllUsers = 0x00000005;
+}
+
+/// {@category Enum}
 class ServerSelection {
   static const ssDefault = 0x00000000;
   static const ssManagedServer = 0x00000001;
   static const ssWindowsUpdate = 0x00000002;
   static const ssOthers = 0x00000003;
-}
-
-/// {@category Enum}
-class UpdateType {
-  static const utSoftware = 0x00000001;
-  static const utDriver = 0x00000002;
-}
-
-/// {@category Enum}
-class UpdateOperation {
-  static const uoInstallation = 0x00000001;
-  static const uoUninstallation = 0x00000002;
-}
-
-/// {@category Enum}
-class DeploymentAction {
-  static const daNone = 0x00000000;
-  static const daInstallation = 0x00000001;
-  static const daUninstallation = 0x00000002;
-  static const daDetection = 0x00000003;
-  static const daOptionalInstallation = 0x00000004;
 }
 
 /// {@category Enum}
@@ -111,18 +131,19 @@ class UpdateExceptionContext {
 }
 
 /// {@category Enum}
-class AutomaticUpdatesUserType {
-  static const auutCurrentUser = 0x00000001;
-  static const auutLocalAdministrator = 0x00000002;
+class UpdateLockdownOption {
+  static const uloForWebsiteAccess = 0x00000001;
 }
 
 /// {@category Enum}
-class AutomaticUpdatesPermissionType {
-  static const auptSetNotificationLevel = 0x00000001;
-  static const auptDisableAutomaticUpdates = 0x00000002;
-  static const auptSetIncludeRecommendedUpdates = 0x00000003;
-  static const auptSetFeaturedUpdatesEnabled = 0x00000004;
-  static const auptSetNonAdministratorsElevated = 0x00000005;
+class UpdateOperation {
+  static const uoInstallation = 0x00000001;
+  static const uoUninstallation = 0x00000002;
+}
+
+/// {@category Enum}
+class UpdateServiceOption {
+  static const usoNonVolatileService = 0x00000001;
 }
 
 /// {@category Enum}
@@ -133,29 +154,8 @@ class UpdateServiceRegistrationState {
 }
 
 /// {@category Enum}
-class SearchScope {
-  static const searchScopeDefault = 0x00000000;
-  static const searchScopeMachineOnly = 0x00000001;
-  static const searchScopeCurrentUserOnly = 0x00000002;
-  static const searchScopeMachineAndCurrentUser = 0x00000003;
-  static const searchScopeMachineAndAllUsers = 0x00000004;
-  static const searchScopeAllUsers = 0x00000005;
-}
-
-/// {@category Enum}
-class UpdateLockdownOption {
-  static const uloForWebsiteAccess = 0x00000001;
-}
-
-/// {@category Enum}
-class AddServiceFlag {
-  static const asfAllowPendingRegistration = 0x00000001;
-  static const asfAllowOnlineRegistration = 0x00000002;
-  static const asfRegisterServiceWithAU = 0x00000004;
-}
-
-/// {@category Enum}
-class UpdateServiceOption {
-  static const usoNonVolatileService = 0x00000001;
+class UpdateType {
+  static const utSoftware = 0x00000001;
+  static const utDriver = 0x00000002;
 }
 

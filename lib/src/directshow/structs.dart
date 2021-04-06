@@ -210,7 +210,8 @@ class CXDSData extends Struct {
 }
 
 class WMDRMProtectionInfo extends Struct {
-  external __ushort__ wszKID;
+  @Array(25)
+  external Array<Uint16> wszKID;
   @Uint64() external int qwCounter;
   @Uint64() external int qwIndex;
   @Uint8() external int bOffset;
@@ -471,7 +472,8 @@ class TID_EXTENSION extends Struct {
 class SECTION extends Struct {
   @Uint8() external int TableId;
   @Uint32() external int Header;
-  external __ubyte__ SectionData;
+  @Array(1)
+  external Array<Uint8> SectionData;
 }
 
 class LONG_SECTION extends Struct {
@@ -481,7 +483,8 @@ class LONG_SECTION extends Struct {
   @Uint32() external int Version;
   @Uint8() external int SectionNumber;
   @Uint8() external int LastSectionNumber;
-  external __ubyte__ RemainingData;
+  @Array(1)
+  external Array<Uint8> RemainingData;
 }
 
 class DSMCC_SECTION extends Struct {
@@ -498,7 +501,8 @@ class DSMCC_SECTION extends Struct {
   @Uint8() external int Reserved;
   @Uint8() external int AdaptationLength;
   @Uint16() external int MessageLength;
-  external __ubyte__ RemainingData;
+  @Array(1)
+  external Array<Uint8> RemainingData;
 }
 
 class MPEG_RQST_PACKET extends Struct {
@@ -508,7 +512,8 @@ class MPEG_RQST_PACKET extends Struct {
 
 class MPEG_PACKET_LIST extends Struct {
   @Uint16() external int wPacketCount;
-  external ____ PacketList;
+  @Array(1)
+  external Array<Pointer<MPEG_RQST_PACKET>> PacketList;
 }
 
 class DSMCC_FILTER_OPTIONS extends Struct {
@@ -543,8 +548,10 @@ class MPEG2_FILTER extends Struct {
   @Uint8() external int bVersionNumber;
   @Uint16() external int wFilterSize;
   @Int32() external int fUseRawFilteringBits;
-  external __ubyte__ Filter;
-  external __ubyte__ Mask;
+  @Array(16)
+  external Array<Uint8> Filter;
+  @Array(16)
+  external Array<Uint8> Mask;
   @Int32() external int fSpecifyTableIdExtension;
   @Uint16() external int TableIdExtension;
   @Int32() external int fSpecifyVersion;
@@ -634,14 +641,18 @@ class MPEG_STREAM_FILTER extends Struct {
   @Uint16() external int wPidValue;
   @Uint32() external int dwFilterSize;
   @Int32() external int fCrcEnabled;
-  external __ubyte__ rgchFilter;
-  external __ubyte__ rgchMask;
+  @Array(16)
+  external Array<Uint8> rgchFilter;
+  @Array(16)
+  external Array<Uint8> rgchMask;
 }
 
 class Mpeg2TableSampleHdr extends Struct {
   @Uint8() external int SectionCount;
-  external __ubyte__ Reserved;
-  external __int__ SectionOffsets;
+  @Array(3)
+  external Array<Uint8> Reserved;
+  @Array(1)
+  external Array<Int32> SectionOffsets;
 }
 
 class Mpeg2DataLib extends Struct {
@@ -654,7 +665,8 @@ class ProgramElement extends Struct {
 
 class UDCR_TAG extends Struct {
   @Uint8() external int bVersion;
-  external __ubyte__ KID;
+  @Array(25)
+  external Array<Uint8> KID;
   @Uint64() external int ullBaseCounter;
   @Uint64() external int ullBaseCounterRange;
   @Int32() external int fScrambled;
@@ -693,7 +705,8 @@ class PBDA_TAG_ATTRIBUTE extends Struct {
   @Uint8() external int TableId;
   @Uint16() external int VersionNo;
   @Uint32() external int TableDataSize;
-  external __ubyte__ TableData;
+  @Array(1)
+  external Array<Uint8> TableData;
 }
 
 class CAPTURE_STREAMTIME extends Struct {
@@ -744,14 +757,16 @@ class KSM_BDA_DEBUG_LEVEL extends Struct {
   external KSIDENTIFIER Method;
   @Uint8() external int ucDebugLevel;
   @Uint32() external int ulDebugStringSize;
-  external __ubyte__ argbDebugString;
+  @Array(1)
+  external Array<Uint8> argbDebugString;
 }
 
 class BDA_DEBUG_DATA extends Struct {
   @Int32() external int lResult;
   external GUID uuidDebugDataType;
   @Uint32() external int ulDataSize;
-  external __ubyte__ argbDebugData;
+  @Array(1)
+  external Array<Uint8> argbDebugData;
 }
 
 class BDA_EVENT_DATA extends Struct {
@@ -759,7 +774,8 @@ class BDA_EVENT_DATA extends Struct {
   @Uint32() external int ulEventID;
   external GUID uuidEventType;
   @Uint32() external int ulEventDataLength;
-  external __ubyte__ argbEventData;
+  @Array(1)
+  external Array<Uint8> argbEventData;
 }
 
 class KSM_BDA_EVENT_COMPLETE extends Struct {
@@ -776,7 +792,8 @@ class KSM_BDA_DRM_SETDRM extends Struct {
 class KSM_BDA_BUFFER extends Struct {
   external KSM_NODE NodeMethod;
   @Uint32() external int ulBufferSize;
-  external __ubyte__ argbBuffer;
+  @Array(1)
+  external Array<Uint8> argbBuffer;
 }
 
 class KSM_BDA_WMDRM_LICENSE extends Struct {
@@ -788,15 +805,18 @@ class KSM_BDA_WMDRM_RENEWLICENSE extends Struct {
   external KSM_NODE NodeMethod;
   @Uint32() external int ulXMRLicenseLength;
   @Uint32() external int ulEntitlementTokenLength;
-  external __ubyte__ argbDataBuffer;
+  @Array(1)
+  external Array<Uint8> argbDataBuffer;
 }
 
 class KSM_BDA_WMDRMTUNER_PURCHASEENTITLEMENT extends Struct {
   external KSM_NODE NodeMethod;
   @Uint32() external int ulDialogRequest;
-  external __byte__ cLanguage;
+  @Array(12)
+  external Array<Int8> cLanguage;
   @Uint32() external int ulPurchaseTokenLength;
-  external __ubyte__ argbDataBuffer;
+  @Array(1)
+  external Array<Uint8> argbDataBuffer;
 }
 
 class KSM_BDA_WMDRMTUNER_SETPIDPROTECTION extends Struct {
@@ -818,23 +838,28 @@ class KSM_BDA_WMDRMTUNER_SYNCVALUE extends Struct {
 class KSM_BDA_TUNER_TUNEREQUEST extends Struct {
   external KSIDENTIFIER Method;
   @Uint32() external int ulTuneLength;
-  external __ubyte__ argbTuneData;
+  @Array(1)
+  external Array<Uint8> argbTuneData;
 }
 
 class KSM_BDA_GPNV_GETVALUE extends Struct {
   external KSIDENTIFIER Method;
   @Uint32() external int ulNameLength;
-  external __byte__ cLanguage;
-  external __ubyte__ argbData;
+  @Array(12)
+  external Array<Int8> cLanguage;
+  @Array(1)
+  external Array<Uint8> argbData;
 }
 
 class KSM_BDA_GPNV_SETVALUE extends Struct {
   external KSIDENTIFIER Method;
   @Uint32() external int ulDialogRequest;
-  external __byte__ cLanguage;
+  @Array(12)
+  external Array<Int8> cLanguage;
   @Uint32() external int ulNameLength;
   @Uint32() external int ulValueLength;
-  external __ubyte__ argbName;
+  @Array(1)
+  external Array<Uint8> argbName;
 }
 
 class KSM_BDA_GPNV_NAMEINDEX extends Struct {
@@ -851,7 +876,8 @@ class KSM_BDA_SCAN_FILTER extends Struct {
   external KSIDENTIFIER Method;
   @Uint32() external int ulScanModulationTypeSize;
   @Uint64() external int AnalogVideoStandards;
-  external __ubyte__ argbScanModulationTypes;
+  @Array(1)
+  external Array<Uint8> argbScanModulationTypes;
 }
 
 class KSM_BDA_SCAN_START extends Struct {
@@ -868,7 +894,8 @@ class KSM_BDA_GDDS_TUNEXMLFROMIDX extends Struct {
 class KSM_BDA_GDDS_SERVICEFROMTUNEXML extends Struct {
   external KSIDENTIFIER Method;
   @Uint32() external int ulTuneXmlLength;
-  external __ubyte__ argbTuneXml;
+  @Array(1)
+  external Array<Uint8> argbTuneXml;
 }
 
 class KSM_BDA_USERACTIVITY_USEREASON extends Struct {
@@ -879,29 +906,34 @@ class KSM_BDA_USERACTIVITY_USEREASON extends Struct {
 class KSM_BDA_CAS_ENTITLEMENTTOKEN extends Struct {
   external KSM_NODE NodeMethod;
   @Uint32() external int ulDialogRequest;
-  external __byte__ cLanguage;
+  @Array(12)
+  external Array<Int8> cLanguage;
   @Uint32() external int ulRequestType;
   @Uint32() external int ulEntitlementTokenLen;
-  external __ubyte__ argbEntitlementToken;
+  @Array(1)
+  external Array<Uint8> argbEntitlementToken;
 }
 
 class KSM_BDA_CAS_CAPTURETOKEN extends Struct {
   external KSM_NODE NodeMethod;
   @Uint32() external int ulTokenLength;
-  external __ubyte__ argbToken;
+  @Array(1)
+  external Array<Uint8> argbToken;
 }
 
 class KSM_BDA_CAS_OPENBROADCASTMMI extends Struct {
   external KSM_NODE NodeMethod;
   @Uint32() external int ulDialogRequest;
-  external __byte__ cLanguage;
+  @Array(12)
+  external Array<Int8> cLanguage;
   @Uint32() external int ulEventId;
 }
 
 class KSM_BDA_CAS_CLOSEMMIDIALOG extends Struct {
   external KSM_NODE NodeMethod;
   @Uint32() external int ulDialogRequest;
-  external __byte__ cLanguage;
+  @Array(12)
+  external Array<Int8> cLanguage;
   @Uint32() external int ulDialogNumber;
   @Uint32() external int ulReason;
 }
@@ -910,7 +942,8 @@ class KSM_BDA_ISDBCAS_REQUEST extends Struct {
   external KSM_NODE NodeMethod;
   @Uint32() external int ulRequestID;
   @Uint32() external int ulIsdbCommandSize;
-  external __ubyte__ argbIsdbCommandData;
+  @Array(1)
+  external Array<Uint8> argbIsdbCommandData;
 }
 
 class KSM_BDA_TS_SELECTOR_SETTSID extends Struct {
@@ -1022,7 +1055,8 @@ class SpanningEventDescriptor extends Struct {
   @Uint16() external int wDataLen;
   @Uint16() external int wProgNumber;
   @Uint16() external int wSID;
-  external __ubyte__ bDescriptor;
+  @Array(1)
+  external Array<Uint8> bDescriptor;
 }
 
 class EVENTID_CSDescriptorSpanningEvent extends Struct {
@@ -1055,7 +1089,8 @@ class SpanningEventEmmMessage extends Struct {
   @Uint8() external int bFormatVersion;
   @Uint8() external int bDisplayPosition;
   @Uint16() external int wMessageLength;
-  external __ushort__ szMessageArea;
+  @Array(1)
+  external Array<Uint16> szMessageArea;
 }
 
 class EVENTID_EmmMessageSpanningEvent extends Struct {
@@ -1093,7 +1128,8 @@ class EVENTID_PIDListSpanningEvent extends Struct {
 
 class PIDListSpanningEvent extends Struct {
   @Uint16() external int wPIDCount;
-  external __uint__ pulPIDs;
+  @Array(1)
+  external Array<Uint32> pulPIDs;
 }
 
 class EVENTID_AudioDescriptorSpanningEvent extends Struct {
@@ -1119,7 +1155,8 @@ class RATING_ATTRIBUTE extends Struct {
 class RATING_SYSTEM extends Struct {
   external GUID rating_system_id;
   @Uint8() external int _bitfield;
-  external __ubyte__ country_code;
+  @Array(3)
+  external Array<Uint8> country_code;
   @Uint32() external int rating_attribute_count;
   external Pointer<RATING_ATTRIBUTE> lpratingattrib;
 }
@@ -1144,13 +1181,15 @@ class EVENTID_DvbParentalRatingDescriptor extends Struct {
 }
 
 class DvbParentalRatingParam extends Struct {
-  external __byte__ szCountryCode;
+  @Array(4)
+  external Array<Int8> szCountryCode;
   @Uint8() external int bRating;
 }
 
 class DvbParentalRatingDescriptor extends Struct {
   @Uint32() external int ulNumParams;
-  external DvbParentalRatingParam pParams;
+  @Array(1)
+  external Array<DvbParentalRatingParam> pParams;
 }
 
 class EVENTID_DFNWithNoActualAVData extends Struct {
@@ -1635,95 +1674,8 @@ class HEAACWAVEINFO extends Struct {
 
 class HEAACWAVEFORMAT extends Struct {
   external HEAACWAVEINFO wfInfo;
-  external __ubyte__ pbAudioSpecificConfig;
-}
-
-class DDCOLORKEY extends Struct {
-  @Uint32() external int dwColorSpaceLowValue;
-  @Uint32() external int dwColorSpaceHighValue;
-}
-
-class DMO_MEDIA_TYPE extends Struct {
-  external GUID majortype;
-  external GUID subtype;
-  @Int32() external int bFixedSizeSamples;
-  @Int32() external int bTemporalCompression;
-  @Uint32() external int lSampleSize;
-  external GUID formattype;
-  external Pointer pUnk;
-  @Uint32() external int cbFormat;
-  external Pointer<Uint8> pbFormat;
-}
-
-class DMO_OUTPUT_DATA_BUFFER extends Struct {
-  external Pointer pBuffer;
-  @Uint32() external int dwStatus;
-  @Int64() external int rtTimestamp;
-  @Int64() external int rtTimelength;
-}
-
-class DXVA_COPPSetProtectionLevelCmdData extends Struct {
-  @Uint32() external int ProtType;
-  @Uint32() external int ProtLevel;
-  @Uint32() external int ExtendedInfoChangeMask;
-  @Uint32() external int ExtendedInfoData;
-}
-
-class DXVA_COPPSetSignalingCmdData extends Struct {
-  @Uint32() external int ActiveTVProtectionStandard;
-  @Uint32() external int AspectRatioChangeMask1;
-  @Uint32() external int AspectRatioData1;
-  @Uint32() external int AspectRatioChangeMask2;
-  @Uint32() external int AspectRatioData2;
-  @Uint32() external int AspectRatioChangeMask3;
-  @Uint32() external int AspectRatioData3;
-  external __uint__ ExtendedInfoChangeMask;
-  external __uint__ ExtendedInfoData;
-  @Uint32() external int Reserved;
-}
-
-class DXVA_COPPStatusData extends Struct {
-  external GUID rApp;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwData;
-  @Uint32() external int ExtendedInfoValidMask;
-  @Uint32() external int ExtendedInfoData;
-}
-
-class DXVA_COPPStatusDisplayData extends Struct {
-  external GUID rApp;
-  @Uint32() external int dwFlags;
-  @Uint32() external int DisplayWidth;
-  @Uint32() external int DisplayHeight;
-  @Uint32() external int Format;
-  @Uint32() external int d3dFormat;
-  @Uint32() external int FreqNumerator;
-  @Uint32() external int FreqDenominator;
-}
-
-class DXVA_COPPStatusHDCPKeyData extends Struct {
-  external GUID rApp;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwHDCPFlags;
-  external GUID BKey;
-  external GUID Reserved1;
-  external GUID Reserved2;
-}
-
-class DXVA_COPPStatusSignalingCmdData extends Struct {
-  external GUID rApp;
-  @Uint32() external int dwFlags;
-  @Uint32() external int AvailableTVProtectionStandards;
-  @Uint32() external int ActiveTVProtectionStandard;
-  @Uint32() external int TVType;
-  @Uint32() external int AspectRatioValidMask1;
-  @Uint32() external int AspectRatioData1;
-  @Uint32() external int AspectRatioValidMask2;
-  @Uint32() external int AspectRatioData2;
-  @Uint32() external int AspectRatioValidMask3;
-  @Uint32() external int AspectRatioData3;
-  external __uint__ ExtendedInfoValidMask;
-  external __uint__ ExtendedInfoData;
+  @Array(1)
+  external Array<Uint8> pbAudioSpecificConfig;
 }
 
 class AMVPSIZE extends Struct {
@@ -1777,11 +1729,13 @@ class ALLOCATOR_PROPERTIES extends Struct {
 class PIN_INFO extends Struct {
   external IBaseFilter pFilter;
   @Uint32() external int dir;
-  external __ushort__ achName;
+  @Array(128)
+  external Array<Uint16> achName;
 }
 
 class FILTER_INFO extends Struct {
-  external __ushort__ achName;
+  @Array(128)
+  external Array<Uint16> achName;
   external Pointer pGraph;
 }
 
@@ -1908,7 +1862,8 @@ class DVINFO extends Struct {
   @Uint32() external int dwDVAAuxCtl1;
   @Uint32() external int dwDVVAuxSrc;
   @Uint32() external int dwDVVAuxCtl;
-  external __uint__ dwDVReserved;
+  @Array(2)
+  external Array<Uint32> dwDVReserved;
 }
 
 class STREAM_ID_MAP extends Struct {
@@ -1919,7 +1874,8 @@ class STREAM_ID_MAP extends Struct {
 }
 
 class AMCOPPSignature extends Struct {
-  external __ubyte__ Signature;
+  @Array(129)
+  external Array<Uint8> Signature;
 }
 
 class AMCOPPCommand extends Struct {
@@ -1927,7 +1883,8 @@ class AMCOPPCommand extends Struct {
   external GUID guidCommandID;
   @Uint32() external int dwSequence;
   @Uint32() external int cbSizeData;
-  external __ubyte__ CommandData;
+  @Array(143)
+  external Array<Uint8> CommandData;
 }
 
 class AMCOPPStatusInput extends Struct {
@@ -1935,13 +1892,15 @@ class AMCOPPStatusInput extends Struct {
   external GUID guidStatusRequestID;
   @Uint32() external int dwSequence;
   @Uint32() external int cbSizeData;
-  external __ubyte__ StatusData;
+  @Array(143)
+  external Array<Uint8> StatusData;
 }
 
 class AMCOPPStatusOutput extends Struct {
   external GUID macKDI;
   @Uint32() external int cbSizeData;
-  external __ubyte__ COPPStatus;
+  @Array(143)
+  external Array<Uint8> COPPStatus;
 }
 
 class VMRPRESENTATIONINFO extends Struct {
@@ -1984,8 +1943,10 @@ class VMRMONITORINFO extends Struct {
   external RECT rcMonitor;
   @IntPtr() external int hMon;
   @Uint32() external int dwFlags;
-  external __ushort__ szDevice;
-  external __ushort__ szDescription;
+  @Array(32)
+  external Array<Uint16> szDevice;
+  @Array(129)
+  external Array<Uint16> szDescription;
   @Int64() external int liDriverVersion;
   @Uint32() external int dwVendorId;
   @Uint32() external int dwDeviceId;
@@ -2038,7 +1999,8 @@ class VMRVIDEOSTREAMINFO extends Struct {
 
 class DVD_ATR extends Struct {
   @Uint32() external int ulCAT;
-  external __ubyte__ pbATRI;
+  @Array(131)
+  external Array<Uint8> pbATRI;
 }
 
 class DVD_TIMECODE extends Struct {
@@ -2075,7 +2037,8 @@ class DVD_AudioAttributes extends Struct {
   @Uint32() external int dwFrequency;
   @Uint8() external int bQuantization;
   @Uint8() external int bNumberOfChannels;
-  external __uint__ dwReserved;
+  @Array(2)
+  external Array<Uint32> dwReserved;
 }
 
 class DVD_MUA_MixingInfo extends Struct {
@@ -2092,8 +2055,10 @@ class DVD_MUA_Coeff extends Struct {
 }
 
 class DVD_MultichannelAudioAttributes extends Struct {
-  external DVD_MUA_MixingInfo Info;
-  external DVD_MUA_Coeff Coeff;
+  @Array(8)
+  external Array<DVD_MUA_MixingInfo> Info;
+  @Array(8)
+  external Array<DVD_MUA_Coeff> Coeff;
 }
 
 class DVD_KaraokeAttributes extends Struct {
@@ -2101,7 +2066,8 @@ class DVD_KaraokeAttributes extends Struct {
   @Int32() external int fMasterOfCeremoniesInGuideVocal1;
   @Int32() external int fDuet;
   @Uint32() external int ChannelAssignment;
-  external __ushort__ wChannelContents;
+  @Array(8)
+  external Array<Uint16> wChannelContents;
 }
 
 class DVD_VideoAttributes extends Struct {
@@ -2131,14 +2097,18 @@ class DVD_TitleAttributes extends Struct {
   @Uint32() external int Anonymous;
   external DVD_VideoAttributes VideoAttributes;
   @Uint32() external int ulNumberOfAudioStreams;
-  external DVD_AudioAttributes AudioAttributes;
-  external DVD_MultichannelAudioAttributes MultichannelAudioAttributes;
+  @Array(8)
+  external Array<DVD_AudioAttributes> AudioAttributes;
+  @Array(8)
+  external Array<DVD_MultichannelAudioAttributes> MultichannelAudioAttributes;
   @Uint32() external int ulNumberOfSubpictureStreams;
-  external DVD_SubpictureAttributes SubpictureAttributes;
+  @Array(32)
+  external Array<DVD_SubpictureAttributes> SubpictureAttributes;
 }
 
 class DVD_MenuAttributes extends Struct {
-  external ____ fCompatibleRegion;
+  @Array(8)
+  external Array<Pointer<Int32>> fCompatibleRegion;
   external DVD_VideoAttributes VideoAttributes;
   @Int32() external int fAudioPresent;
   external DVD_AudioAttributes AudioAttributes;
@@ -2194,30 +2164,36 @@ class KS_BDA_FRAME_INFO extends Struct {
 }
 
 class BDA_ETHERNET_ADDRESS extends Struct {
-  external __ubyte__ rgbAddress;
+  @Array(6)
+  external Array<Uint8> rgbAddress;
 }
 
 class BDA_ETHERNET_ADDRESS_LIST extends Struct {
   @Uint32() external int ulcAddresses;
-  external BDA_ETHERNET_ADDRESS rgAddressl;
+  @Array(1)
+  external Array<BDA_ETHERNET_ADDRESS> rgAddressl;
 }
 
 class BDA_IPv4_ADDRESS extends Struct {
-  external __ubyte__ rgbAddress;
+  @Array(4)
+  external Array<Uint8> rgbAddress;
 }
 
 class BDA_IPv4_ADDRESS_LIST extends Struct {
   @Uint32() external int ulcAddresses;
-  external BDA_IPv4_ADDRESS rgAddressl;
+  @Array(1)
+  external Array<BDA_IPv4_ADDRESS> rgAddressl;
 }
 
 class BDA_IPv6_ADDRESS extends Struct {
-  external __ubyte__ rgbAddress;
+  @Array(6)
+  external Array<Uint8> rgbAddress;
 }
 
 class BDA_IPv6_ADDRESS_LIST extends Struct {
   @Uint32() external int ulcAddresses;
-  external BDA_IPv6_ADDRESS rgAddressl;
+  @Array(1)
+  external Array<BDA_IPv6_ADDRESS> rgAddressl;
 }
 
 class BDANODE_DESCRIPTOR extends Struct {
@@ -2230,19 +2206,22 @@ class BDA_TABLE_SECTION extends Struct {
   @Uint32() external int ulPrimarySectionId;
   @Uint32() external int ulSecondarySectionId;
   @Uint32() external int ulcbSectionLength;
-  external __uint__ argbSectionData;
+  @Array(1)
+  external Array<Uint32> argbSectionData;
 }
 
 class BDA_DISEQC_SEND extends Struct {
   @Uint32() external int ulRequestId;
   @Uint32() external int ulPacketLength;
-  external __ubyte__ argbPacketData;
+  @Array(8)
+  external Array<Uint8> argbPacketData;
 }
 
 class BDA_DISEQC_RESPONSE extends Struct {
   @Uint32() external int ulRequestId;
   @Uint32() external int ulPacketLength;
-  external __ubyte__ argbPacketData;
+  @Array(8)
+  external Array<Uint8> argbPacketData;
 }
 
 class PID_MAP extends Struct {
@@ -2253,31 +2232,36 @@ class PID_MAP extends Struct {
 class BDA_PID_MAP extends Struct {
   @Uint32() external int MediaSampleContent;
   @Uint32() external int ulcPIDs;
-  external __uint__ aulPIDs;
+  @Array(1)
+  external Array<Uint32> aulPIDs;
 }
 
 class BDA_PID_UNMAP extends Struct {
   @Uint32() external int ulcPIDs;
-  external __uint__ aulPIDs;
+  @Array(1)
+  external Array<Uint32> aulPIDs;
 }
 
 class BDA_CA_MODULE_UI extends Struct {
   @Uint32() external int ulFormat;
   @Uint32() external int ulbcDesc;
-  external __uint__ ulDesc;
+  @Array(1)
+  external Array<Uint32> ulDesc;
 }
 
 class BDA_PROGRAM_PID_LIST extends Struct {
   @Uint32() external int ulProgramNumber;
   @Uint32() external int ulcPIDs;
-  external __uint__ ulPID;
+  @Array(1)
+  external Array<Uint32> ulPID;
 }
 
 class BDA_DRM_DRMSTATUS extends Struct {
   @Int32() external int lResult;
   external GUID DRMuuid;
   @Uint32() external int ulDrmUuidListStringSize;
-  external GUID argbDrmUuidListString;
+  @Array(1)
+  external Array<GUID> argbDrmUuidListString;
 }
 
 class BDA_WMDRM_STATUS extends Struct {
@@ -2296,20 +2280,23 @@ class BDA_WMDRM_STATUS extends Struct {
 class BDA_WMDRM_KEYINFOLIST extends Struct {
   @Int32() external int lResult;
   @Uint32() external int ulKeyuuidBufferLen;
-  external GUID argKeyuuidBuffer;
+  @Array(1)
+  external Array<GUID> argKeyuuidBuffer;
 }
 
 class BDA_BUFFER extends Struct {
   @Int32() external int lResult;
   @Uint32() external int ulBufferSize;
-  external __ubyte__ argbBuffer;
+  @Array(1)
+  external Array<Uint8> argbBuffer;
 }
 
 class BDA_WMDRM_RENEWLICENSE extends Struct {
   @Int32() external int lResult;
   @Uint32() external int ulDescrambleStatus;
   @Uint32() external int ulXmrLicenseOutputLength;
-  external __ubyte__ argbXmrLicenceOutputBuffer;
+  @Array(1)
+  external Array<Uint8> argbXmrLicenceOutputBuffer;
 }
 
 class BDA_WMDRMTUNER_PIDPROTECTION extends Struct {
@@ -2321,13 +2308,15 @@ class BDA_WMDRMTUNER_PURCHASEENTITLEMENT extends Struct {
   @Int32() external int lResult;
   @Uint32() external int ulDescrambleStatus;
   @Uint32() external int ulCaptureTokenLength;
-  external __ubyte__ argbCaptureTokenBuffer;
+  @Array(1)
+  external Array<Uint8> argbCaptureTokenBuffer;
 }
 
 class BDA_TUNER_TUNERSTATE extends Struct {
   @Int32() external int lResult;
   @Uint32() external int ulTuneLength;
-  external __ubyte__ argbTuneData;
+  @Array(1)
+  external Array<Uint8> argbTuneData;
 }
 
 class BDA_TUNER_DIAGNOSTICS extends Struct {
@@ -2340,7 +2329,8 @@ class BDA_TUNER_DIAGNOSTICS extends Struct {
 class BDA_STRING extends Struct {
   @Int32() external int lResult;
   @Uint32() external int ulStringSize;
-  external __ubyte__ argbString;
+  @Array(1)
+  external Array<Uint8> argbString;
 }
 
 class BDA_SCAN_CAPABILTIES extends Struct {
@@ -2370,7 +2360,8 @@ class BDA_GDDS_DATA extends Struct {
   @Int32() external int lResult;
   @Uint32() external int ulDataLength;
   @Uint32() external int ulPercentageProgress;
-  external __ubyte__ argbData;
+  @Array(1)
+  external Array<Uint8> argbData;
 }
 
 class BDA_USERACTIVITY_INTERVAL extends Struct {
@@ -2400,7 +2391,8 @@ class BDA_CAS_OPENMMIDATA extends Struct {
   @Uint32() external int ulDialogRequest;
   external GUID uuidDialogType;
   @Uint16() external int usDialogDataLength;
-  external __ubyte__ argbDialogData;
+  @Array(1)
+  external Array<Uint8> argbDialogData;
 }
 
 class BDA_CAS_CLOSEMMIDATA extends Struct {
@@ -2409,9 +2401,11 @@ class BDA_CAS_CLOSEMMIDATA extends Struct {
 
 class BDA_ISDBCAS_REQUESTHEADER extends Struct {
   @Uint8() external int bInstruction;
-  external __ubyte__ bReserved;
+  @Array(3)
+  external Array<Uint8> bReserved;
   @Uint32() external int ulDataLength;
-  external __ubyte__ argbIsdbCommand;
+  @Array(1)
+  external Array<Uint8> argbIsdbCommand;
 }
 
 class BDA_ISDBCAS_RESPONSEDATA extends Struct {
@@ -2419,7 +2413,8 @@ class BDA_ISDBCAS_RESPONSEDATA extends Struct {
   @Uint32() external int ulRequestID;
   @Uint32() external int ulIsdbStatus;
   @Uint32() external int ulIsdbDataSize;
-  external __ubyte__ argbIsdbCommandData;
+  @Array(1)
+  external Array<Uint8> argbIsdbCommandData;
 }
 
 class BDA_ISDBCAS_EMG_REQ extends Struct {
@@ -2428,11 +2423,13 @@ class BDA_ISDBCAS_EMG_REQ extends Struct {
   @Uint8() external int bP1;
   @Uint8() external int bP2;
   @Uint8() external int bLC;
-  external __ubyte__ bCardId;
+  @Array(6)
+  external Array<Uint8> bCardId;
   @Uint8() external int bProtocol;
   @Uint8() external int bCABroadcasterGroupId;
   @Uint8() external int bMessageControl;
-  external __ubyte__ bMessageCode;
+  @Array(1)
+  external Array<Uint8> bMessageCode;
 }
 
 class BDA_MUX_PIDLISTITEM extends Struct {
@@ -2443,14 +2440,17 @@ class BDA_MUX_PIDLISTITEM extends Struct {
 
 class BDA_TS_SELECTORINFO extends Struct {
   @Uint8() external int bTSInfolength;
-  external __ubyte__ bReserved;
+  @Array(2)
+  external Array<Uint8> bReserved;
   external GUID guidNetworkType;
   @Uint8() external int bTSIDCount;
-  external __ushort__ usTSID;
+  @Array(1)
+  external Array<Uint16> usTSID;
 }
 
 class BDA_TS_SELECTORINFO_ISDBS_EXT extends Struct {
-  external __ubyte__ bTMCC;
+  @Array(48)
+  external Array<Uint8> bTMCC;
 }
 
 class BDA_DVBT2_L1_SIGNALLING_DATA extends Struct {
@@ -2458,21 +2458,30 @@ class BDA_DVBT2_L1_SIGNALLING_DATA extends Struct {
   @Uint8() external int L1Pre_BWT_S1_S2;
   @Uint8() external int L1Pre_REPETITION_GUARD_PAPR;
   @Uint8() external int L1Pre_MOD_COD_FEC;
-  external __ubyte__ L1Pre_POSTSIZE_INFO_PILOT;
+  @Array(5)
+  external Array<Uint8> L1Pre_POSTSIZE_INFO_PILOT;
   @Uint8() external int L1Pre_TX_ID_AVAIL;
-  external __ubyte__ L1Pre_CELL_ID;
-  external __ubyte__ L1Pre_NETWORK_ID;
-  external __ubyte__ L1Pre_T2SYSTEM_ID;
+  @Array(2)
+  external Array<Uint8> L1Pre_CELL_ID;
+  @Array(2)
+  external Array<Uint8> L1Pre_NETWORK_ID;
+  @Array(2)
+  external Array<Uint8> L1Pre_T2SYSTEM_ID;
   @Uint8() external int L1Pre_NUM_T2_FRAMES;
-  external __ubyte__ L1Pre_NUM_DATA_REGENFLAG_L1POSTEXT;
-  external __ubyte__ L1Pre_NUMRF_CURRENTRF_RESERVED;
-  external __ubyte__ L1Pre_CRC32;
-  external __ubyte__ L1PostData;
+  @Array(2)
+  external Array<Uint8> L1Pre_NUM_DATA_REGENFLAG_L1POSTEXT;
+  @Array(2)
+  external Array<Uint8> L1Pre_NUMRF_CURRENTRF_RESERVED;
+  @Array(4)
+  external Array<Uint8> L1Pre_CRC32;
+  @Array(1)
+  external Array<Uint8> L1PostData;
 }
 
 class BDA_RATING_PINRESET extends Struct {
   @Uint8() external int bPinLength;
-  external __ubyte__ argbNewPin;
+  @Array(1)
+  external Array<Uint8> argbNewPin;
 }
 
 class MPEG2_TRANSPORT_STRIDE extends Struct {
@@ -2556,8 +2565,10 @@ class AM_WST_PAGE extends Struct {
 }
 
 class TRUECOLORINFO extends Struct {
-  external __uint__ dwBitMasks;
-  external RGBQUAD bmiColors;
+  @Array(3)
+  external Array<Uint32> dwBitMasks;
+  @Array(129)
+  external Array<RGBQUAD> bmiColors;
 }
 
 class VIDEOINFOHEADER extends Struct {
@@ -2583,7 +2594,8 @@ class MPEG1VIDEOINFO extends Struct {
   external VIDEOINFOHEADER hdr;
   @Uint32() external int dwStartTimeCode;
   @Uint32() external int cbSequenceHeader;
-  external __ubyte__ bSequenceHeader;
+  @Array(1)
+  external Array<Uint8> bSequenceHeader;
 }
 
 class ANALOGVIDEOINFO extends Struct {
@@ -2659,13 +2671,15 @@ class AM_MPEGSTREAMTYPE extends Struct {
   @Uint32() external int dwStreamId;
   @Uint32() external int dwReserved;
   external AM_MEDIA_TYPE mt;
-  external __ubyte__ bFormat;
+  @Array(1)
+  external Array<Uint8> bFormat;
 }
 
 class AM_MPEGSYSTEMTYPE extends Struct {
   @Uint32() external int dwBitRate;
   @Uint32() external int cStreams;
-  external AM_MPEGSTREAMTYPE Streams;
+  @Array(1)
+  external Array<AM_MPEGSTREAMTYPE> Streams;
 }
 
 class VMR9PresentationInfo extends Struct {
@@ -2732,8 +2746,10 @@ class VMR9MonitorInfo extends Struct {
   external RECT rcMonitor;
   @IntPtr() external int hMon;
   @Uint32() external int dwFlags;
-  external __ushort__ szDevice;
-  external __ushort__ szDescription;
+  @Array(32)
+  external Array<Uint16> szDevice;
+  @Array(130)
+  external Array<Uint16> szDescription;
   @Int64() external int liDriverVersion;
   @Uint32() external int dwVendorId;
   @Uint32() external int dwDeviceId;
@@ -2800,14 +2816,16 @@ class AVIMAINHEADER extends Struct {
   @Uint32() external int dwSuggestedBufferSize;
   @Uint32() external int dwWidth;
   @Uint32() external int dwHeight;
-  external __uint__ dwReserved;
+  @Array(4)
+  external Array<Uint32> dwReserved;
 }
 
 class AVIEXTHEADER extends Struct {
   @Uint32() external int fcc;
   @Uint32() external int cb;
   @Uint32() external int dwGrandFrames;
-  external __uint__ dwFuture;
+  @Array(61)
+  external Array<Uint32> dwFuture;
 }
 
 class AVISTREAMHEADER extends Struct {
@@ -2849,7 +2867,8 @@ class AVIMETAINDEX extends Struct {
   @Uint8() external int bIndexType;
   @Uint32() external int nEntriesInUse;
   @Uint32() external int dwChunkId;
-  external __uint__ dwReserved;
+  @Array(3)
+  external Array<Uint32> dwReserved;
   @Uint32() external int adwIndex;
 }
 
@@ -2861,8 +2880,10 @@ class AVISUPERINDEX extends Struct {
   @Uint8() external int bIndexType;
   @Uint32() external int nEntriesInUse;
   @Uint32() external int dwChunkId;
-  external __uint__ dwReserved;
-  external ____ aIndex;
+  @Array(3)
+  external Array<Uint32> dwReserved;
+  @Array(131)
+  external Array<Uint32> aIndex;
 }
 
 class AVISTDINDEX_ENTRY extends Struct {
@@ -2880,7 +2901,8 @@ class AVISTDINDEX extends Struct {
   @Uint32() external int dwChunkId;
   @Uint64() external int qwBaseOffset;
   @Uint32() external int dwReserved_3;
-  external AVISTDINDEX_ENTRY aIndex;
+  @Array(135)
+  external Array<AVISTDINDEX_ENTRY> aIndex;
 }
 
 class AVITIMEDINDEX_ENTRY extends Struct {
@@ -2899,8 +2921,10 @@ class _avitimedindex extends Struct {
   @Uint32() external int dwChunkId;
   @Uint64() external int qwBaseOffset;
   @Uint32() external int dwReserved_3;
-  external AVITIMEDINDEX_ENTRY aIndex;
-  external __uint__ adwTrailingFill;
+  @Array(133)
+  external Array<AVITIMEDINDEX_ENTRY> aIndex;
+  @Array(138)
+  external Array<Uint32> adwTrailingFill;
 }
 
 class AVITIMECODEINDEX extends Struct {
@@ -2911,8 +2935,10 @@ class AVITIMECODEINDEX extends Struct {
   @Uint8() external int bIndexType;
   @Uint32() external int nEntriesInUse;
   @Uint32() external int dwChunkId;
-  external __uint__ dwReserved;
-  external TIMECODEDATA aIndex;
+  @Array(3)
+  external Array<Uint32> dwReserved;
+  @Array(131)
+  external Array<TIMECODEDATA> aIndex;
 }
 
 class AVITCDLINDEX_ENTRY extends Struct {
@@ -2920,7 +2946,8 @@ class AVITCDLINDEX_ENTRY extends Struct {
   external TIMECODE time;
   @Uint32() external int dwSMPTEflags;
   @Uint32() external int dwUser;
-  external __byte__ szReelId;
+  @Array(12)
+  external Array<Int8> szReelId;
 }
 
 class _avitcdlindex extends Struct {
@@ -2931,9 +2958,12 @@ class _avitcdlindex extends Struct {
   @Uint8() external int bIndexType;
   @Uint32() external int nEntriesInUse;
   @Uint32() external int dwChunkId;
-  external __uint__ dwReserved;
-  external AVITCDLINDEX_ENTRY aIndex;
-  external __uint__ adwTrailingFill;
+  @Array(3)
+  external Array<Uint32> dwReserved;
+  @Array(130)
+  external Array<AVITCDLINDEX_ENTRY> aIndex;
+  @Array(141)
+  external Array<Uint32> adwTrailingFill;
 }
 
 class AVIFIELDINDEX extends Struct {
@@ -2960,7 +2990,8 @@ class MainAVIHeader extends Struct {
   @Uint32() external int dwSuggestedBufferSize;
   @Uint32() external int dwWidth;
   @Uint32() external int dwHeight;
-  external __uint__ dwReserved;
+  @Array(4)
+  external Array<Uint32> dwReserved;
 }
 
 class AVIStreamHeader extends Struct {
@@ -3029,7 +3060,8 @@ class AM_DVD_YUV extends Struct {
 }
 
 class AM_PROPERTY_SPPAL extends Struct {
-  external AM_DVD_YUV sppal;
+  @Array(16)
+  external Array<AM_DVD_YUV> sppal;
 }
 
 class AM_COLCON extends Struct {
@@ -3052,24 +3084,32 @@ class AM_PROPERTY_SPHLI extends Struct {
 }
 
 class AM_DVDCOPY_CHLGKEY extends Struct {
-  external __ubyte__ ChlgKey;
-  external __ubyte__ Reserved;
+  @Array(10)
+  external Array<Uint8> ChlgKey;
+  @Array(2)
+  external Array<Uint8> Reserved;
 }
 
 class AM_DVDCOPY_BUSKEY extends Struct {
-  external __ubyte__ BusKey;
-  external __ubyte__ Reserved;
+  @Array(5)
+  external Array<Uint8> BusKey;
+  @Array(1)
+  external Array<Uint8> Reserved;
 }
 
 class AM_DVDCOPY_DISCKEY extends Struct {
-  external __ubyte__ DiscKey;
+  @Array(136)
+  external Array<Uint8> DiscKey;
 }
 
 class AM_DVDCOPY_TITLEKEY extends Struct {
   @Uint32() external int KeyFlags;
-  external __uint__ Reserved1;
-  external __ubyte__ TitleKey;
-  external __ubyte__ Reserved2;
+  @Array(2)
+  external Array<Uint32> Reserved1;
+  @Array(6)
+  external Array<Uint8> TitleKey;
+  @Array(2)
+  external Array<Uint8> Reserved2;
 }
 
 class AM_COPY_MACROVISION extends Struct {
@@ -3109,7 +3149,8 @@ class MPEG2VIDEOINFO extends Struct {
   @Uint32() external int dwProfile;
   @Uint32() external int dwLevel;
   @Uint32() external int dwFlags;
-  external __uint__ dwSequenceHeader;
+  @Array(1)
+  external Array<Uint32> dwSequenceHeader;
 }
 
 class AM_DvdKaraokeData extends Struct {
@@ -3144,8 +3185,10 @@ class MP_PARAMINFO extends Struct {
   @Float() external double mpdMinValue;
   @Float() external double mpdMaxValue;
   @Float() external double mpdNeutralValue;
-  external __ushort__ szUnitText;
-  external __ushort__ szLabel;
+  @Array(32)
+  external Array<Uint16> szUnitText;
+  @Array(32)
+  external Array<Uint16> szLabel;
 }
 
 class MP_ENVELOPE_SEGMENT extends Struct {
@@ -3160,5 +3203,97 @@ class MP_ENVELOPE_SEGMENT extends Struct {
 class DMO_PARTIAL_MEDIATYPE extends Struct {
   external GUID type;
   external GUID subtype;
+}
+
+class DMO_MEDIA_TYPE extends Struct {
+  external GUID majortype;
+  external GUID subtype;
+  @Int32() external int bFixedSizeSamples;
+  @Int32() external int bTemporalCompression;
+  @Uint32() external int lSampleSize;
+  external GUID formattype;
+  external Pointer pUnk;
+  @Uint32() external int cbFormat;
+  external Pointer<Uint8> pbFormat;
+}
+
+class DMO_OUTPUT_DATA_BUFFER extends Struct {
+  external Pointer pBuffer;
+  @Uint32() external int dwStatus;
+  @Int64() external int rtTimestamp;
+  @Int64() external int rtTimelength;
+}
+
+class DXVA_COPPSetProtectionLevelCmdData extends Struct {
+  @Uint32() external int ProtType;
+  @Uint32() external int ProtLevel;
+  @Uint32() external int ExtendedInfoChangeMask;
+  @Uint32() external int ExtendedInfoData;
+}
+
+class DXVA_COPPSetSignalingCmdData extends Struct {
+  @Uint32() external int ActiveTVProtectionStandard;
+  @Uint32() external int AspectRatioChangeMask1;
+  @Uint32() external int AspectRatioData1;
+  @Uint32() external int AspectRatioChangeMask2;
+  @Uint32() external int AspectRatioData2;
+  @Uint32() external int AspectRatioChangeMask3;
+  @Uint32() external int AspectRatioData3;
+  @Array(4)
+  external Array<Uint32> ExtendedInfoChangeMask;
+  @Array(4)
+  external Array<Uint32> ExtendedInfoData;
+  @Uint32() external int Reserved;
+}
+
+class DXVA_COPPStatusData extends Struct {
+  external GUID rApp;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwData;
+  @Uint32() external int ExtendedInfoValidMask;
+  @Uint32() external int ExtendedInfoData;
+}
+
+class DXVA_COPPStatusDisplayData extends Struct {
+  external GUID rApp;
+  @Uint32() external int dwFlags;
+  @Uint32() external int DisplayWidth;
+  @Uint32() external int DisplayHeight;
+  @Uint32() external int Format;
+  @Uint32() external int d3dFormat;
+  @Uint32() external int FreqNumerator;
+  @Uint32() external int FreqDenominator;
+}
+
+class DXVA_COPPStatusHDCPKeyData extends Struct {
+  external GUID rApp;
+  @Uint32() external int dwFlags;
+  @Uint32() external int dwHDCPFlags;
+  external GUID BKey;
+  external GUID Reserved1;
+  external GUID Reserved2;
+}
+
+class DXVA_COPPStatusSignalingCmdData extends Struct {
+  external GUID rApp;
+  @Uint32() external int dwFlags;
+  @Uint32() external int AvailableTVProtectionStandards;
+  @Uint32() external int ActiveTVProtectionStandard;
+  @Uint32() external int TVType;
+  @Uint32() external int AspectRatioValidMask1;
+  @Uint32() external int AspectRatioData1;
+  @Uint32() external int AspectRatioValidMask2;
+  @Uint32() external int AspectRatioData2;
+  @Uint32() external int AspectRatioValidMask3;
+  @Uint32() external int AspectRatioData3;
+  @Array(4)
+  external Array<Uint32> ExtendedInfoValidMask;
+  @Array(4)
+  external Array<Uint32> ExtendedInfoData;
+}
+
+class DDCOLORKEY extends Struct {
+  @Uint32() external int dwColorSpaceLowValue;
+  @Uint32() external int dwColorSpaceHighValue;
 }
 

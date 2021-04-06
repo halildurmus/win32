@@ -145,7 +145,8 @@ class WMT_WEBSTREAM_SAMPLE_HEADER extends Struct {
   @Uint16() external int wPart;
   @Uint16() external int cTotalParts;
   @Uint16() external int wSampleType;
-  external __ushort__ wszURL;
+  @Array(1)
+  external Array<Uint16> wszURL;
 }
 
 class WM_ADDRESS_ACCESSENTRY extends Struct {
@@ -293,7 +294,8 @@ class WMMPEG2VIDEOINFO extends Struct {
   @Uint32() external int dwProfile;
   @Uint32() external int dwLevel;
   @Uint32() external int dwFlags;
-  external __uint__ dwSequenceHeader;
+  @Array(1)
+  external Array<Uint32> dwSequenceHeader;
 }
 
 class WMSCRIPTFORMAT extends Struct {
@@ -314,7 +316,8 @@ class WMT_TIMECODE_EXTENSION_DATA extends Struct {
 }
 
 class DRM_VAL16 extends Struct {
-  external __ubyte__ val;
+  @Array(16)
+  external Array<Uint8> val;
 }
 
 class WMDRM_IMPORT_INIT_STRUCT extends Struct {

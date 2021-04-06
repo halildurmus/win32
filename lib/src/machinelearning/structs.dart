@@ -135,26 +135,26 @@ class MLOperatorSchemaEdgeDescription extends Struct {
 }
 
 class MLOperatorEdgeTypeConstraint extends Struct {
-  external Pointer<Int8> typeLabel;
+  external Pointer<Utf8> typeLabel;
   external Pointer<MLOperatorEdgeDescription> allowedTypes;
   @Uint32() external int allowedTypeCount;
 }
 
 class MLOperatorAttribute extends Struct {
-  external Pointer<Int8> name;
+  external Pointer<Utf8> name;
   @Uint32() external int type;
   external bool required;
 }
 
 class MLOperatorAttributeNameValue extends Struct {
-  external Pointer<Int8> name;
+  external Pointer<Utf8> name;
   @Uint32() external int type;
   @Uint32() external int valueCount;
   @Uint32() external int Anonymous;
 }
 
 class MLOperatorSchemaDescription extends Struct {
-  external Pointer<Int8> name;
+  external Pointer<Utf8> name;
   @Int32() external int operatorSetVersionAtLastChange;
   external Pointer<MLOperatorSchemaEdgeDescription> inputs;
   @Uint32() external int inputCount;
@@ -169,13 +169,13 @@ class MLOperatorSchemaDescription extends Struct {
 }
 
 class MLOperatorSetId extends Struct {
-  external Pointer<Int8> domain;
+  external Pointer<Utf8> domain;
   @Int32() external int version;
 }
 
 class MLOperatorKernelDescription extends Struct {
-  external Pointer<Int8> domain;
-  external Pointer<Int8> name;
+  external Pointer<Utf8> domain;
+  external Pointer<Utf8> name;
   @Int32() external int minimumOperatorSetVersion;
   @Uint32() external int executionType;
   external Pointer<MLOperatorEdgeTypeConstraint> typeConstraints;

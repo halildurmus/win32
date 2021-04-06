@@ -256,7 +256,8 @@ class HTTP_REQUEST_HEADERS extends Struct {
   external Pointer<HTTP_UNKNOWN_HEADER> pUnknownHeaders;
   @Uint16() external int TrailerCount;
   external Pointer<HTTP_UNKNOWN_HEADER> pTrailers;
-  external HTTP_KNOWN_HEADER KnownHeaders;
+  @Array(41)
+  external Array<HTTP_KNOWN_HEADER> KnownHeaders;
 }
 
 class HTTP_RESPONSE_HEADERS extends Struct {
@@ -264,7 +265,8 @@ class HTTP_RESPONSE_HEADERS extends Struct {
   external Pointer<HTTP_UNKNOWN_HEADER> pUnknownHeaders;
   @Uint16() external int TrailerCount;
   external Pointer<HTTP_UNKNOWN_HEADER> pTrailers;
-  external HTTP_KNOWN_HEADER KnownHeaders;
+  @Array(30)
+  external Array<HTTP_KNOWN_HEADER> KnownHeaders;
 }
 
 class HTTP_DELEGATE_REQUEST_PROPERTY_INFO extends Struct {
@@ -322,12 +324,14 @@ class HTTP_REQUEST_SIZING_INFO extends Struct {
   @Uint64() external int Flags;
   @Uint32() external int RequestIndex;
   @Uint32() external int RequestSizingCount;
-  external __uint64__ RequestSizing;
+  @Array(5)
+  external Array<Uint64> RequestSizing;
 }
 
 class HTTP_REQUEST_TIMING_INFO extends Struct {
   @Uint32() external int RequestTimingCount;
-  external __uint64__ RequestTiming;
+  @Array(30)
+  external Array<Uint64> RequestTiming;
 }
 
 class HTTP_REQUEST_INFO extends Struct {
@@ -424,16 +428,16 @@ class HTTP_SERVICE_CONFIG_SSL_KEY extends Struct {
 }
 
 class HTTP_SERVICE_CONFIG_SSL_KEY_EX extends Struct {
-  external SOCKADDR_STORAGE_LH IpPort;
+  external SOCKADDR_STORAGE IpPort;
 }
 
 class HTTP_SERVICE_CONFIG_SSL_SNI_KEY extends Struct {
-  external SOCKADDR_STORAGE_LH IpPort;
+  external SOCKADDR_STORAGE IpPort;
   external Pointer<Utf16> Host;
 }
 
 class HTTP_SERVICE_CONFIG_SSL_CCS_KEY extends Struct {
-  external SOCKADDR_STORAGE_LH LocalAddress;
+  external SOCKADDR_STORAGE LocalAddress;
 }
 
 class HTTP_SERVICE_CONFIG_SSL_PARAM extends Struct {
@@ -547,7 +551,8 @@ class HTTP_SERVICE_CONFIG_IP_LISTEN_PARAM extends Struct {
 
 class HTTP_SERVICE_CONFIG_IP_LISTEN_QUERY extends Struct {
   @Uint32() external int AddrCount;
-  external SOCKADDR_STORAGE_LH AddrList;
+  @Array(1)
+  external Array<SOCKADDR_STORAGE> AddrList;
 }
 
 class HTTP_SERVICE_CONFIG_URLACL_KEY extends Struct {
@@ -583,7 +588,8 @@ class HTTP_QUERY_REQUEST_QUALIFIER_QUIC extends Struct {
 }
 
 class HTTP_REQUEST_PROPERTY_SNI extends Struct {
-  external __ushort__ Hostname;
+  @Array(129)
+  external Array<Uint16> Hostname;
   @Uint32() external int Flags;
 }
 
@@ -646,7 +652,8 @@ class WINHTTP_PROXY_RESULT_EX extends Struct {
 }
 
 class _WinHttpProxyNetworkKey extends Struct {
-  external __ubyte__ pbBuffer;
+  @Array(128)
+  external Array<Uint8> pbBuffer;
 }
 
 class WINHTTP_PROXY_SETTINGS extends Struct {
@@ -681,20 +688,22 @@ class WINHTTP_CERTIFICATE_INFO extends Struct {
 
 class WINHTTP_CONNECTION_INFO extends Struct {
   @Uint32() external int cbSize;
-  external SOCKADDR_STORAGE_LH LocalAddress;
-  external SOCKADDR_STORAGE_LH RemoteAddress;
+  external SOCKADDR_STORAGE LocalAddress;
+  external SOCKADDR_STORAGE RemoteAddress;
 }
 
 class WINHTTP_REQUEST_TIMES extends Struct {
   @Uint32() external int cTimes;
-  external __uint64__ rgullTimes;
+  @Array(64)
+  external Array<Uint64> rgullTimes;
 }
 
 class WINHTTP_REQUEST_STATS extends Struct {
   @Uint64() external int ullFlags;
   @Uint32() external int ulIndex;
   @Uint32() external int cStats;
-  external __uint64__ rgullStats;
+  @Array(32)
+  external Array<Uint64> rgullStats;
 }
 
 class WINHTTP_EXTENDED_HEADER extends Struct {

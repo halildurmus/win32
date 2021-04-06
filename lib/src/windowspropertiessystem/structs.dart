@@ -63,15 +63,21 @@ class PROPERTYKEY extends Struct {
 class PROPPRG extends Struct {
   @Uint16() external int flPrg;
   @Uint16() external int flPrgInit;
-  external __byte__ achTitle;
-  external __byte__ achCmdLine;
-  external __byte__ achWorkDir;
+  @Array(30)
+  external Array<Int8> achTitle;
+  @Array(128)
+  external Array<Int8> achCmdLine;
+  @Array(64)
+  external Array<Int8> achWorkDir;
   @Uint16() external int wHotKey;
-  external __byte__ achIconFile;
+  @Array(80)
+  external Array<Int8> achIconFile;
   @Uint16() external int wIconIndex;
   @Uint32() external int dwEnhModeFlags;
   @Uint32() external int dwRealModeFlags;
-  external __byte__ achOtherFile;
-  external __byte__ achPIFFile;
+  @Array(80)
+  external Array<Int8> achOtherFile;
+  @Array(129)
+  external Array<Int8> achPIFFile;
 }
 

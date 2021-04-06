@@ -45,7 +45,8 @@ import 'package:ffi/ffi.dart';
 
 class DOT11_SSID extends Struct {
   @Uint32() external int uSSIDLength;
-  external __ubyte__ ucSSID;
+  @Array(32)
+  external Array<Uint8> ucSSID;
 }
 
 class DOT11_AUTH_CIPHER_PAIR extends Struct {
@@ -55,7 +56,8 @@ class DOT11_AUTH_CIPHER_PAIR extends Struct {
 
 class DOT11_OI extends Struct {
   @Uint16() external int OILength;
-  external __ubyte__ OI;
+  @Array(5)
+  external Array<Uint8> OI;
 }
 
 class DOT11_ACCESSNETWORKOPTIONS extends Struct {
@@ -74,14 +76,16 @@ class DOT11_VENUEINFO extends Struct {
 class NDIS_STATISTICS_VALUE extends Struct {
   @Uint32() external int Oid;
   @Uint32() external int DataLength;
-  external __ubyte__ Data;
+  @Array(1)
+  external Array<Uint8> Data;
 }
 
 class NDIS_STATISTICS_VALUE_EX extends Struct {
   @Uint32() external int Oid;
   @Uint32() external int DataLength;
   @Uint32() external int Length;
-  external __ubyte__ Data;
+  @Array(1)
+  external Array<Uint8> Data;
 }
 
 class NDIS_VAR_DATA_DESC extends Struct {
@@ -129,7 +133,8 @@ class NDIS_TIMEOUT_DPC_REQUEST_CAPABILITIES extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int Flags;
   @Uint32() external int TimeoutArrayLength;
-  external __uint__ TimeoutArray;
+  @Array(1)
+  external Array<Uint32> TimeoutArray;
 }
 
 class NDIS_PCI_DEVICE_CUSTOM_PROPERTIES extends Struct {
@@ -154,24 +159,28 @@ class NDIS_802_11_STATUS_INDICATION extends Struct {
 
 class NDIS_802_11_AUTHENTICATION_REQUEST extends Struct {
   @Uint32() external int Length;
-  external __ubyte__ Bssid;
+  @Array(6)
+  external Array<Uint8> Bssid;
   @Uint32() external int Flags;
 }
 
 class PMKID_CANDIDATE extends Struct {
-  external __ubyte__ BSSID;
+  @Array(6)
+  external Array<Uint8> BSSID;
   @Uint32() external int Flags;
 }
 
 class NDIS_802_11_PMKID_CANDIDATE_LIST extends Struct {
   @Uint32() external int Version;
   @Uint32() external int NumCandidates;
-  external PMKID_CANDIDATE CandidateList;
+  @Array(1)
+  external Array<PMKID_CANDIDATE> CandidateList;
 }
 
 class NDIS_802_11_NETWORK_TYPE_LIST extends Struct {
   @Uint32() external int NumberOfItems;
-  @Uint32() external int NetworkType;
+  @Array(1)
+  external Array<Uint32> NetworkType;
 }
 
 class NDIS_802_11_CONFIGURATION_FH extends Struct {
@@ -221,69 +230,84 @@ class NDIS_802_11_KEY extends Struct {
   @Uint32() external int Length;
   @Uint32() external int KeyIndex;
   @Uint32() external int KeyLength;
-  external __ubyte__ BSSID;
+  @Array(6)
+  external Array<Uint8> BSSID;
   @Uint64() external int KeyRSC;
-  external __ubyte__ KeyMaterial;
+  @Array(1)
+  external Array<Uint8> KeyMaterial;
 }
 
 class NDIS_802_11_REMOVE_KEY extends Struct {
   @Uint32() external int Length;
   @Uint32() external int KeyIndex;
-  external __ubyte__ BSSID;
+  @Array(6)
+  external Array<Uint8> BSSID;
 }
 
 class NDIS_802_11_WEP extends Struct {
   @Uint32() external int Length;
   @Uint32() external int KeyIndex;
   @Uint32() external int KeyLength;
-  external __ubyte__ KeyMaterial;
+  @Array(1)
+  external Array<Uint8> KeyMaterial;
 }
 
 class NDIS_802_11_SSID extends Struct {
   @Uint32() external int SsidLength;
-  external __ubyte__ Ssid;
+  @Array(32)
+  external Array<Uint8> Ssid;
 }
 
 class NDIS_WLAN_BSSID extends Struct {
   @Uint32() external int Length;
-  external __ubyte__ MacAddress;
-  external __ubyte__ Reserved;
+  @Array(6)
+  external Array<Uint8> MacAddress;
+  @Array(2)
+  external Array<Uint8> Reserved;
   external NDIS_802_11_SSID Ssid;
   @Uint32() external int Privacy;
   @Int32() external int Rssi;
   @Uint32() external int NetworkTypeInUse;
   external NDIS_802_11_CONFIGURATION Configuration;
   @Uint32() external int InfrastructureMode;
-  external __ubyte__ SupportedRates;
+  @Array(8)
+  external Array<Uint8> SupportedRates;
 }
 
 class NDIS_802_11_BSSID_LIST extends Struct {
   @Uint32() external int NumberOfItems;
-  external NDIS_WLAN_BSSID Bssid;
+  @Array(1)
+  external Array<NDIS_WLAN_BSSID> Bssid;
 }
 
 class NDIS_WLAN_BSSID_EX extends Struct {
   @Uint32() external int Length;
-  external __ubyte__ MacAddress;
-  external __ubyte__ Reserved;
+  @Array(6)
+  external Array<Uint8> MacAddress;
+  @Array(2)
+  external Array<Uint8> Reserved;
   external NDIS_802_11_SSID Ssid;
   @Uint32() external int Privacy;
   @Int32() external int Rssi;
   @Uint32() external int NetworkTypeInUse;
   external NDIS_802_11_CONFIGURATION Configuration;
   @Uint32() external int InfrastructureMode;
-  external __ubyte__ SupportedRates;
+  @Array(16)
+  external Array<Uint8> SupportedRates;
   @Uint32() external int IELength;
-  external __ubyte__ IEs;
+  @Array(1)
+  external Array<Uint8> IEs;
 }
 
 class NDIS_802_11_BSSID_LIST_EX extends Struct {
   @Uint32() external int NumberOfItems;
-  external NDIS_WLAN_BSSID_EX Bssid;
+  @Array(1)
+  external Array<NDIS_WLAN_BSSID_EX> Bssid;
 }
 
 class NDIS_802_11_FIXED_IEs extends Struct {
-  external __ubyte__ Timestamp;
+  @Array(8)
+  external Array<Uint8> Timestamp;
   @Uint16() external int BeaconInterval;
   @Uint16() external int Capabilities;
 }
@@ -291,13 +315,15 @@ class NDIS_802_11_FIXED_IEs extends Struct {
 class NDIS_802_11_VARIABLE_IEs extends Struct {
   @Uint8() external int ElementID;
   @Uint8() external int Length;
-  external __ubyte__ data;
+  @Array(1)
+  external Array<Uint8> data;
 }
 
 class NDIS_802_11_AI_REQFI extends Struct {
   @Uint16() external int Capabilities;
   @Uint16() external int ListenInterval;
-  external __ubyte__ CurrentAPAddress;
+  @Array(6)
+  external Array<Uint8> CurrentAPAddress;
 }
 
 class NDIS_802_11_AI_RESFI extends Struct {
@@ -320,7 +346,8 @@ class NDIS_802_11_ASSOCIATION_INFORMATION extends Struct {
 
 class NDIS_802_11_AUTHENTICATION_EVENT extends Struct {
   external NDIS_802_11_STATUS_INDICATION Status;
-  external NDIS_802_11_AUTHENTICATION_REQUEST Request;
+  @Array(1)
+  external Array<NDIS_802_11_AUTHENTICATION_REQUEST> Request;
 }
 
 class NDIS_802_11_TEST extends Struct {
@@ -330,14 +357,17 @@ class NDIS_802_11_TEST extends Struct {
 }
 
 class BSSID_INFO extends Struct {
-  external __ubyte__ BSSID;
-  external __ubyte__ PMKID;
+  @Array(6)
+  external Array<Uint8> BSSID;
+  @Array(16)
+  external Array<Uint8> PMKID;
 }
 
 class NDIS_802_11_PMKID extends Struct {
   @Uint32() external int Length;
   @Uint32() external int BSSIDInfoCount;
-  external BSSID_INFO BSSIDInfo;
+  @Array(1)
+  external Array<BSSID_INFO> BSSIDInfo;
 }
 
 class NDIS_802_11_AUTHENTICATION_ENCRYPTION extends Struct {
@@ -350,12 +380,14 @@ class NDIS_802_11_CAPABILITY extends Struct {
   @Uint32() external int Version;
   @Uint32() external int NoOfPMKIDs;
   @Uint32() external int NoOfAuthEncryptPairsSupported;
-  external NDIS_802_11_AUTHENTICATION_ENCRYPTION AuthenticationEncryptionSupported;
+  @Array(1)
+  external Array<NDIS_802_11_AUTHENTICATION_ENCRYPTION> AuthenticationEncryptionSupported;
 }
 
 class NDIS_802_11_NON_BCAST_SSID_LIST extends Struct {
   @Uint32() external int NumberOfItems;
-  external NDIS_802_11_SSID Non_Bcast_Ssid;
+  @Array(1)
+  external Array<NDIS_802_11_SSID> Non_Bcast_Ssid;
 }
 
 class NDIS_CO_DEVICE_PROFILE extends Struct {
@@ -415,10 +447,12 @@ class OFFLOAD_IPSEC_ADD_SA extends Struct {
   @Uint32() external int DestTunnelAddr;
   @Uint16() external int Flags;
   @Int16() external int NumSAs;
-  external OFFLOAD_SECURITY_ASSOCIATION SecAssoc;
+  @Array(3)
+  external Array<OFFLOAD_SECURITY_ASSOCIATION> SecAssoc;
   @IntPtr() external int OffloadHandle;
   @Uint32() external int KeyLen;
-  external __ubyte__ KeyMat;
+  @Array(1)
+  external Array<Uint8> KeyMat;
 }
 
 class OFFLOAD_IPSEC_DELETE_SA extends Struct {
@@ -442,12 +476,14 @@ class OFFLOAD_IPSEC_ADD_UDPESP_SA extends Struct {
   @Uint32() external int DstTunnelAddr;
   @Uint16() external int Flags;
   @Int16() external int NumSAs;
-  external OFFLOAD_SECURITY_ASSOCIATION SecAssoc;
+  @Array(3)
+  external Array<OFFLOAD_SECURITY_ASSOCIATION> SecAssoc;
   @IntPtr() external int OffloadHandle;
   external OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY EncapTypeEntry;
   @IntPtr() external int EncapTypeEntryOffldHandle;
   @Uint32() external int KeyLen;
-  external __ubyte__ KeyMat;
+  @Array(1)
+  external Array<Uint8> KeyMat;
 }
 
 class OFFLOAD_IPSEC_DELETE_UDPESP_SA extends Struct {
@@ -463,31 +499,36 @@ class TRANSPORT_HEADER_OFFSET extends Struct {
 class NETWORK_ADDRESS extends Struct {
   @Uint16() external int AddressLength;
   @Uint16() external int AddressType;
-  external __ubyte__ Address;
+  @Array(1)
+  external Array<Uint8> Address;
 }
 
 class NETWORK_ADDRESS_LIST extends Struct {
   @Int32() external int AddressCount;
   @Uint16() external int AddressType;
-  external NETWORK_ADDRESS Address;
+  @Array(1)
+  external Array<NETWORK_ADDRESS> Address;
 }
 
 class NETWORK_ADDRESS_IP extends Struct {
   @Uint16() external int sin_port;
-  @Uint32() external int in_addr;
-  external __ubyte__ sin_zero;
+  @Uint32() external int IN_ADDR;
+  @Array(8)
+  external Array<Uint8> sin_zero;
 }
 
 class NETWORK_ADDRESS_IP6 extends Struct {
   @Uint16() external int sin6_port;
   @Uint32() external int sin6_flowinfo;
-  external __ushort__ sin6_addr;
+  @Array(8)
+  external Array<Uint16> sin6_addr;
   @Uint32() external int sin6_scope_id;
 }
 
 class NETWORK_ADDRESS_IPX extends Struct {
   @Uint32() external int NetworkAddress;
-  external __ubyte__ NodeAddress;
+  @Array(6)
+  external Array<Uint8> NodeAddress;
   @Uint16() external int Socket;
 }
 
@@ -582,7 +623,8 @@ class NDIS_IP_OPER_STATUS_INFO extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int Flags;
   @Uint32() external int NumberofAddressFamiliesReturned;
-  external NDIS_IP_OPER_STATUS IpOperationalStatus;
+  @Array(32)
+  external Array<NDIS_IP_OPER_STATUS> IpOperationalStatus;
 }
 
 class NDIS_IP_OPER_STATE extends Struct {
@@ -702,7 +744,8 @@ class NDIS_WMI_METHOD_HEADER extends Struct {
   external NET_LUID_LH NetLuid;
   @Uint64() external int RequestId;
   @Uint32() external int Timeout;
-  external __ubyte__ Padding;
+  @Array(4)
+  external Array<Uint8> Padding;
 }
 
 class NDIS_WMI_SET_HEADER extends Struct {
@@ -711,7 +754,8 @@ class NDIS_WMI_SET_HEADER extends Struct {
   external NET_LUID_LH NetLuid;
   @Uint64() external int RequestId;
   @Uint32() external int Timeout;
-  external __ubyte__ Padding;
+  @Array(4)
+  external Array<Uint8> Padding;
 }
 
 class NDIS_WMI_EVENT_HEADER extends Struct {
@@ -722,7 +766,8 @@ class NDIS_WMI_EVENT_HEADER extends Struct {
   @Uint32() external int PortNumber;
   @Uint32() external int DeviceNameLength;
   @Uint32() external int DeviceNameOffset;
-  external __ubyte__ Padding;
+  @Array(4)
+  external Array<Uint8> Padding;
 }
 
 class NDIS_WMI_ENUM_ADAPTER extends Struct {
@@ -730,7 +775,8 @@ class NDIS_WMI_ENUM_ADAPTER extends Struct {
   @Uint32() external int IfIndex;
   external NET_LUID_LH NetLuid;
   @Uint16() external int DeviceNameLength;
-  external __byte__ DeviceName;
+  @Array(1)
+  external Array<Int8> DeviceName;
 }
 
 class NDIS_WMI_OUTPUT_INFO extends Struct {
@@ -807,7 +853,8 @@ class NDIS_PORT_ARRAY extends Struct {
   @Uint32() external int NumberOfPorts;
   @Uint32() external int OffsetFirstPort;
   @Uint32() external int ElementSize;
-  external NDIS_PORT_CHARACTERISTICS Ports;
+  @Array(1)
+  external Array<NDIS_PORT_CHARACTERISTICS> Ports;
 }
 
 class NDIS_TIMESTAMP_CAPABILITY_FLAGS extends Struct {
@@ -848,17 +895,20 @@ class DOT11_BSSID_LIST extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external __ubyte__ BSSIDs;
+  @Array(6)
+  external Array<Uint8> BSSIDs;
 }
 
 class DOT11_RATE_SET extends Struct {
   @Uint32() external int uRateSetLength;
-  external __ubyte__ ucRateSet;
+  @Array(126)
+  external Array<Uint8> ucRateSet;
 }
 
 class DOT11_WFD_SESSION_INFO extends Struct {
   @Uint16() external int uSessionInfoLength;
-  external __ubyte__ ucSessionInfo;
+  @Array(128)
+  external Array<Uint8> ucSessionInfo;
 }
 
 class DOT11_OFFLOAD_CAPABILITY extends Struct {
@@ -890,13 +940,17 @@ class DOT11_WEP_OFFLOAD extends Struct {
   @Uint8() external int bRowIsOutbound;
   @Uint8() external int bUseDefault;
   @Uint32() external int uFlags;
-  external __ubyte__ ucMacAddress;
+  @Array(6)
+  external Array<Uint8> ucMacAddress;
   @Uint32() external int uNumOfRWsOnPeer;
   @Uint32() external int uNumOfRWsOnMe;
-  external DOT11_IV48_COUNTER dot11IV48Counters;
-  external __ushort__ usDot11RWBitMaps;
+  @Array(16)
+  external Array<DOT11_IV48_COUNTER> dot11IV48Counters;
+  @Array(16)
+  external Array<Uint16> usDot11RWBitMaps;
   @Uint16() external int usKeyLength;
-  external __ubyte__ ucKey;
+  @Array(1)
+  external Array<Uint8> ucKey;
 }
 
 class DOT11_WEP_UPLOAD extends Struct {
@@ -904,8 +958,10 @@ class DOT11_WEP_UPLOAD extends Struct {
   @Uint32() external int dot11OffloadType;
   @IntPtr() external int hOffload;
   @Uint32() external int uNumOfRWsUsed;
-  external DOT11_IV48_COUNTER dot11IV48Counters;
-  external __ushort__ usDot11RWBitMaps;
+  @Array(16)
+  external Array<DOT11_IV48_COUNTER> dot11IV48Counters;
+  @Array(16)
+  external Array<Uint16> usDot11RWBitMaps;
 }
 
 class DOT11_DEFAULT_WEP_OFFLOAD extends Struct {
@@ -917,12 +973,16 @@ class DOT11_DEFAULT_WEP_OFFLOAD extends Struct {
   @Uint32() external int dwAlgorithm;
   @Uint32() external int uFlags;
   @Uint32() external int dot11KeyDirection;
-  external __ubyte__ ucMacAddress;
+  @Array(6)
+  external Array<Uint8> ucMacAddress;
   @Uint32() external int uNumOfRWsOnMe;
-  external DOT11_IV48_COUNTER dot11IV48Counters;
-  external __ushort__ usDot11RWBitMaps;
+  @Array(16)
+  external Array<DOT11_IV48_COUNTER> dot11IV48Counters;
+  @Array(16)
+  external Array<Uint16> usDot11RWBitMaps;
   @Uint16() external int usKeyLength;
-  external __ubyte__ ucKey;
+  @Array(1)
+  external Array<Uint8> ucKey;
 }
 
 class DOT11_DEFAULT_WEP_UPLOAD extends Struct {
@@ -930,8 +990,10 @@ class DOT11_DEFAULT_WEP_UPLOAD extends Struct {
   @Uint32() external int dot11OffloadType;
   @IntPtr() external int hOffload;
   @Uint32() external int uNumOfRWsUsed;
-  external DOT11_IV48_COUNTER dot11IV48Counters;
-  external __ushort__ usDot11RWBitMaps;
+  @Array(16)
+  external Array<DOT11_IV48_COUNTER> dot11IV48Counters;
+  @Array(16)
+  external Array<Uint16> usDot11RWBitMaps;
 }
 
 class DOT11_OPERATION_MODE_CAPABILITY extends Struct {
@@ -950,7 +1012,8 @@ class DOT11_CURRENT_OPERATION_MODE extends Struct {
 
 class DOT11_SCAN_REQUEST extends Struct {
   @Uint32() external int dot11BSSType;
-  external __ubyte__ dot11BSSID;
+  @Array(6)
+  external Array<Uint8> dot11BSSID;
   external DOT11_SSID dot11SSID;
   @Uint32() external int dot11ScanType;
   @Uint8() external int bRestrictedScan;
@@ -961,7 +1024,8 @@ class DOT11_SCAN_REQUEST extends Struct {
   @Uint32() external int uNumOfPhyTypes;
   @Uint32() external int uIEsOffset;
   @Uint32() external int uIEsLength;
-  external __ubyte__ ucBuffer;
+  @Array(1)
+  external Array<Uint8> ucBuffer;
 }
 
 class DOT11_PHY_TYPE_INFO extends Struct {
@@ -972,12 +1036,14 @@ class DOT11_PHY_TYPE_INFO extends Struct {
   @Uint32() external int uMaxChannelTime;
   @Uint32() external int ChDescriptionType;
   @Uint32() external int uChannelListSize;
-  external __ubyte__ ucChannelListBuffer;
+  @Array(1)
+  external Array<Uint8> ucChannelListBuffer;
 }
 
 class DOT11_SCAN_REQUEST_V2 extends Struct {
   @Uint32() external int dot11BSSType;
-  external __ubyte__ dot11BSSID;
+  @Array(6)
+  external Array<Uint8> dot11BSSID;
   @Uint32() external int dot11ScanType;
   @Uint8() external int bRestrictedScan;
   @Uint32() external int udot11SSIDsOffset;
@@ -989,25 +1055,29 @@ class DOT11_SCAN_REQUEST_V2 extends Struct {
   @Uint32() external int uNumOfPhyTypeInfos;
   @Uint32() external int uIEsOffset;
   @Uint32() external int uIEsLength;
-  external __ubyte__ ucBuffer;
+  @Array(1)
+  external Array<Uint8> ucBuffer;
 }
 
 class DOT11_PHY_TYPE_LIST extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  @Uint32() external int dot11PhyType;
+  @Array(1)
+  external Array<Uint32> dot11PhyType;
 }
 
 class DOT11_BSS_DESCRIPTION extends Struct {
   @Uint32() external int uReserved;
-  external __ubyte__ dot11BSSID;
+  @Array(6)
+  external Array<Uint8> dot11BSSID;
   @Uint32() external int dot11BSSType;
   @Uint16() external int usBeaconPeriod;
   @Uint64() external int ullTimestamp;
   @Uint16() external int usCapabilityInformation;
   @Uint32() external int uBufferLength;
-  external __ubyte__ ucBuffer;
+  @Array(1)
+  external Array<Uint8> ucBuffer;
 }
 
 class DOT11_JOIN_REQUEST extends Struct {
@@ -1027,12 +1097,14 @@ class DOT11_START_REQUEST extends Struct {
 class DOT11_UPDATE_IE extends Struct {
   @Uint32() external int dot11UpdateIEOp;
   @Uint32() external int uBufferLength;
-  external __ubyte__ ucBuffer;
+  @Array(1)
+  external Array<Uint8> ucBuffer;
 }
 
 class DOT11_RESET_REQUEST extends Struct {
   @Uint32() external int dot11ResetType;
-  external __ubyte__ dot11MacAddress;
+  @Array(6)
+  external Array<Uint8> dot11MacAddress;
   @Uint8() external int bSetDefaultMIB;
 }
 
@@ -1078,12 +1150,14 @@ class DOT11_COUNTERS_ENTRY extends Struct {
 class DOT11_SUPPORTED_PHY_TYPES extends Struct {
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  @Uint32() external int dot11PHYType;
+  @Array(1)
+  external Array<Uint32> dot11PHYType;
 }
 
 class DOT11_SUPPORTED_POWER_LEVELS extends Struct {
   @Uint32() external int uNumOfSupportedPowerLevels;
-  external __uint__ uTxPowerLevelValues;
+  @Array(8)
+  external Array<Uint32> uTxPowerLevelValues;
 }
 
 class DOT11_REG_DOMAIN_VALUE extends Struct {
@@ -1094,7 +1168,8 @@ class DOT11_REG_DOMAIN_VALUE extends Struct {
 class DOT11_REG_DOMAINS_SUPPORT_VALUE extends Struct {
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external DOT11_REG_DOMAIN_VALUE dot11RegDomainValue;
+  @Array(1)
+  external Array<DOT11_REG_DOMAIN_VALUE> dot11RegDomainValue;
 }
 
 class DOT11_SUPPORTED_ANTENNA extends Struct {
@@ -1105,7 +1180,8 @@ class DOT11_SUPPORTED_ANTENNA extends Struct {
 class DOT11_SUPPORTED_ANTENNA_LIST extends Struct {
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external DOT11_SUPPORTED_ANTENNA dot11SupportedAntenna;
+  @Array(1)
+  external Array<DOT11_SUPPORTED_ANTENNA> dot11SupportedAntenna;
 }
 
 class DOT11_DIVERSITY_SELECTION_RX extends Struct {
@@ -1116,17 +1192,22 @@ class DOT11_DIVERSITY_SELECTION_RX extends Struct {
 class DOT11_DIVERSITY_SELECTION_RX_LIST extends Struct {
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external DOT11_DIVERSITY_SELECTION_RX dot11DiversitySelectionRx;
+  @Array(1)
+  external Array<DOT11_DIVERSITY_SELECTION_RX> dot11DiversitySelectionRx;
 }
 
 class DOT11_SUPPORTED_DATA_RATES_VALUE extends Struct {
-  external __ubyte__ ucSupportedTxDataRatesValue;
-  external __ubyte__ ucSupportedRxDataRatesValue;
+  @Array(8)
+  external Array<Uint8> ucSupportedTxDataRatesValue;
+  @Array(8)
+  external Array<Uint8> ucSupportedRxDataRatesValue;
 }
 
 class DOT11_SUPPORTED_DATA_RATES_VALUE_V2 extends Struct {
-  external __ubyte__ ucSupportedTxDataRatesValue;
-  external __ubyte__ ucSupportedRxDataRatesValue;
+  @Array(128)
+  external Array<Uint8> ucSupportedTxDataRatesValue;
+  @Array(128)
+  external Array<Uint8> ucSupportedRxDataRatesValue;
 }
 
 class DOT11_MULTI_DOMAIN_CAPABILITY_ENTRY extends Struct {
@@ -1139,7 +1220,8 @@ class DOT11_MULTI_DOMAIN_CAPABILITY_ENTRY extends Struct {
 class DOT11_MD_CAPABILITY_ENTRY_LIST extends Struct {
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external DOT11_MULTI_DOMAIN_CAPABILITY_ENTRY dot11MDCapabilityEntry;
+  @Array(1)
+  external Array<DOT11_MULTI_DOMAIN_CAPABILITY_ENTRY> dot11MDCapabilityEntry;
 }
 
 class DOT11_HOPPING_PATTERN_ENTRY extends Struct {
@@ -1150,7 +1232,8 @@ class DOT11_HOPPING_PATTERN_ENTRY extends Struct {
 class DOT11_HOPPING_PATTERN_ENTRY_LIST extends Struct {
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external DOT11_HOPPING_PATTERN_ENTRY dot11HoppingPatternEntry;
+  @Array(1)
+  external Array<DOT11_HOPPING_PATTERN_ENTRY> dot11HoppingPatternEntry;
 }
 
 class DOT11_WPA_TSC extends Struct {
@@ -1169,7 +1252,8 @@ class DOT11_RSSI_RANGE extends Struct {
 class DOT11_NIC_SPECIFIC_EXTENSION extends Struct {
   @Uint32() external int uBufferLength;
   @Uint32() external int uTotalBufferLength;
-  external __ubyte__ ucBuffer;
+  @Array(1)
+  external Array<Uint8> ucBuffer;
 }
 
 class DOT11_AP_JOIN_REQUEST extends Struct {
@@ -1189,7 +1273,8 @@ class DOT11_RECV_SENSITIVITY_LIST extends Struct {
   @Uint32() external int Anonymous;
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external DOT11_RECV_SENSITIVITY dot11RecvSensitivity;
+  @Array(1)
+  external Array<DOT11_RECV_SENSITIVITY> dot11RecvSensitivity;
 }
 
 class DOT11_WME_AC_PARAMETERS extends Struct {
@@ -1203,7 +1288,8 @@ class DOT11_WME_AC_PARAMETERS extends Struct {
 class _DOT11_WME_AC_PARAMTERS_LIST extends Struct {
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external DOT11_WME_AC_PARAMETERS dot11WMEACParameters;
+  @Array(1)
+  external Array<DOT11_WME_AC_PARAMETERS> dot11WMEACParameters;
 }
 
 class DOT11_WME_UPDATE_IE extends Struct {
@@ -1212,7 +1298,8 @@ class DOT11_WME_UPDATE_IE extends Struct {
   @Uint32() external int uWMEInfoElemLength;
   @Uint32() external int uWMEParamElemOffset;
   @Uint32() external int uWMEParamElemLength;
-  external __ubyte__ ucBuffer;
+  @Array(1)
+  external Array<Uint8> ucBuffer;
 }
 
 class DOT11_QOS_TX_DURATION extends Struct {
@@ -1222,7 +1309,8 @@ class DOT11_QOS_TX_DURATION extends Struct {
 }
 
 class DOT11_QOS_TX_MEDIUM_TIME extends Struct {
-  external __ubyte__ dot11PeerAddress;
+  @Array(6)
+  external Array<Uint8> dot11PeerAddress;
   @Uint8() external int ucQoSPriority;
   @Uint32() external int uMediumTimeAdmited;
 }
@@ -1234,7 +1322,8 @@ class DOT11_SUPPORTED_OFDM_FREQUENCY extends Struct {
 class DOT11_SUPPORTED_OFDM_FREQUENCY_LIST extends Struct {
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external DOT11_SUPPORTED_OFDM_FREQUENCY dot11SupportedOFDMFrequency;
+  @Array(1)
+  external Array<DOT11_SUPPORTED_OFDM_FREQUENCY> dot11SupportedOFDMFrequency;
 }
 
 class DOT11_SUPPORTED_DSSS_CHANNEL extends Struct {
@@ -1244,14 +1333,16 @@ class DOT11_SUPPORTED_DSSS_CHANNEL extends Struct {
 class DOT11_SUPPORTED_DSSS_CHANNEL_LIST extends Struct {
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external DOT11_SUPPORTED_DSSS_CHANNEL dot11SupportedDSSSChannel;
+  @Array(1)
+  external Array<DOT11_SUPPORTED_DSSS_CHANNEL> dot11SupportedDSSSChannel;
 }
 
 class DOT11_BYTE_ARRAY extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uNumOfBytes;
   @Uint32() external int uTotalNumOfBytes;
-  external __ubyte__ ucBuffer;
+  @Array(1)
+  external Array<Uint8> ucBuffer;
 }
 
 class DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO extends Struct {
@@ -1262,7 +1353,8 @@ class DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO extends Struct {
 class DOT11_BSS_ENTRY extends Struct {
   @Uint32() external int uPhyId;
   external DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO PhySpecificInfo;
-  external __ubyte__ dot11BSSID;
+  @Array(6)
+  external Array<Uint8> dot11BSSID;
   @Uint32() external int dot11BSSType;
   @Int32() external int lRSSI;
   @Uint32() external int uLinkQuality;
@@ -1272,26 +1364,31 @@ class DOT11_BSS_ENTRY extends Struct {
   @Uint64() external int ullHostTimestamp;
   @Uint16() external int usCapabilityInformation;
   @Uint32() external int uBufferLength;
-  external __ubyte__ ucBuffer;
+  @Array(1)
+  external Array<Uint8> ucBuffer;
 }
 
 class DOT11_SSID_LIST extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external DOT11_SSID SSIDs;
+  @Array(1)
+  external Array<DOT11_SSID> SSIDs;
 }
 
 class DOT11_MAC_ADDRESS_LIST extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external __ubyte__ MacAddrs;
+  @Array(6)
+  external Array<Uint8> MacAddrs;
 }
 
 class DOT11_PMKID_ENTRY extends Struct {
-  external __ubyte__ BSSID;
-  external __ubyte__ PMKID;
+  @Array(6)
+  external Array<Uint8> BSSID;
+  @Array(16)
+  external Array<Uint8> PMKID;
   @Uint32() external int uFlags;
 }
 
@@ -1299,7 +1396,8 @@ class DOT11_PMKID_LIST extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external DOT11_PMKID_ENTRY PMKIDs;
+  @Array(1)
+  external Array<DOT11_PMKID_ENTRY> PMKIDs;
 }
 
 class DOT11_PHY_FRAME_STATISTICS extends Struct {
@@ -1347,7 +1445,8 @@ class DOT11_STATISTICS extends Struct {
   @Uint64() external int ullReserved;
   external DOT11_MAC_FRAME_STATISTICS MacUcastCounters;
   external DOT11_MAC_FRAME_STATISTICS MacMcastCounters;
-  external DOT11_PHY_FRAME_STATISTICS PhyCounters;
+  @Array(1)
+  external Array<DOT11_PHY_FRAME_STATISTICS> PhyCounters;
 }
 
 class DOT11_PRIVACY_EXEMPTION extends Struct {
@@ -1360,94 +1459,117 @@ class DOT11_PRIVACY_EXEMPTION_LIST extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external DOT11_PRIVACY_EXEMPTION PrivacyExemptionEntries;
+  @Array(1)
+  external Array<DOT11_PRIVACY_EXEMPTION> PrivacyExemptionEntries;
 }
 
 class DOT11_AUTH_ALGORITHM_LIST extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  @Uint32() external int AlgorithmIds;
+  @Array(1)
+  external Array<Uint32> AlgorithmIds;
 }
 
 class DOT11_AUTH_CIPHER_PAIR_LIST extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external DOT11_AUTH_CIPHER_PAIR AuthCipherPairs;
+  @Array(1)
+  external Array<DOT11_AUTH_CIPHER_PAIR> AuthCipherPairs;
 }
 
 class DOT11_CIPHER_ALGORITHM_LIST extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  @Uint32() external int AlgorithmIds;
+  @Array(1)
+  external Array<Uint32> AlgorithmIds;
 }
 
 class DOT11_CIPHER_DEFAULT_KEY_VALUE extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uKeyIndex;
   @Uint32() external int AlgorithmId;
-  external __ubyte__ MacAddr;
+  @Array(6)
+  external Array<Uint8> MacAddr;
   @Uint8() external int bDelete;
   @Uint8() external int bStatic;
   @Uint16() external int usKeyLength;
-  external __ubyte__ ucKey;
+  @Array(1)
+  external Array<Uint8> ucKey;
 }
 
 class DOT11_KEY_ALGO_TKIP_MIC extends Struct {
-  external __ubyte__ ucIV48Counter;
+  @Array(6)
+  external Array<Uint8> ucIV48Counter;
   @Uint32() external int ulTKIPKeyLength;
   @Uint32() external int ulMICKeyLength;
-  external __ubyte__ ucTKIPMICKeys;
+  @Array(1)
+  external Array<Uint8> ucTKIPMICKeys;
 }
 
 class DOT11_KEY_ALGO_CCMP extends Struct {
-  external __ubyte__ ucIV48Counter;
+  @Array(6)
+  external Array<Uint8> ucIV48Counter;
   @Uint32() external int ulCCMPKeyLength;
-  external __ubyte__ ucCCMPKey;
+  @Array(1)
+  external Array<Uint8> ucCCMPKey;
 }
 
 class DOT11_KEY_ALGO_GCMP extends Struct {
-  external __ubyte__ ucIV48Counter;
+  @Array(6)
+  external Array<Uint8> ucIV48Counter;
   @Uint32() external int ulGCMPKeyLength;
-  external __ubyte__ ucGCMPKey;
+  @Array(1)
+  external Array<Uint8> ucGCMPKey;
 }
 
 class DOT11_KEY_ALGO_GCMP_256 extends Struct {
-  external __ubyte__ ucIV48Counter;
+  @Array(6)
+  external Array<Uint8> ucIV48Counter;
   @Uint32() external int ulGCMP256KeyLength;
-  external __ubyte__ ucGCMP256Key;
+  @Array(1)
+  external Array<Uint8> ucGCMP256Key;
 }
 
 class DOT11_KEY_ALGO_BIP extends Struct {
-  external __ubyte__ ucIPN;
+  @Array(6)
+  external Array<Uint8> ucIPN;
   @Uint32() external int ulBIPKeyLength;
-  external __ubyte__ ucBIPKey;
+  @Array(1)
+  external Array<Uint8> ucBIPKey;
 }
 
 class DOT11_KEY_ALGO_BIP_GMAC_256 extends Struct {
-  external __ubyte__ ucIPN;
+  @Array(6)
+  external Array<Uint8> ucIPN;
   @Uint32() external int ulBIPGmac256KeyLength;
-  external __ubyte__ ucBIPGmac256Key;
+  @Array(1)
+  external Array<Uint8> ucBIPGmac256Key;
 }
 
 class DOT11_CIPHER_KEY_MAPPING_KEY_VALUE extends Struct {
-  external __ubyte__ PeerMacAddr;
+  @Array(6)
+  external Array<Uint8> PeerMacAddr;
   @Uint32() external int AlgorithmId;
   @Uint32() external int Direction;
   @Uint8() external int bDelete;
   @Uint8() external int bStatic;
   @Uint16() external int usKeyLength;
-  external __ubyte__ ucKey;
+  @Array(1)
+  external Array<Uint8> ucKey;
 }
 
 class DOT11_ASSOCIATION_INFO_EX extends Struct {
-  external __ubyte__ PeerMacAddress;
-  external __ubyte__ BSSID;
+  @Array(6)
+  external Array<Uint8> PeerMacAddress;
+  @Array(6)
+  external Array<Uint8> BSSID;
   @Uint16() external int usCapabilityInformation;
   @Uint16() external int usListenInterval;
-  external __ubyte__ ucPeerSupportedRates;
+  @Array(128)
+  external Array<Uint8> ucPeerSupportedRates;
   @Uint16() external int usAssociationID;
   @Uint32() external int dot11AssociationState;
   @Uint32() external int dot11PowerMode;
@@ -1462,14 +1584,16 @@ class DOT11_ASSOCIATION_INFO_LIST extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external DOT11_ASSOCIATION_INFO_EX dot11AssocInfo;
+  @Array(1)
+  external Array<DOT11_ASSOCIATION_INFO_EX> dot11AssocInfo;
 }
 
 class DOT11_PHY_ID_LIST extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external __uint__ dot11PhyId;
+  @Array(1)
+  external Array<Uint32> dot11PhyId;
 }
 
 class DOT11_EXTSTA_CAPABILITY extends Struct {
@@ -1495,19 +1619,22 @@ class DOT11_DATA_RATE_MAPPING_ENTRY extends Struct {
 class DOT11_DATA_RATE_MAPPING_TABLE extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uDataRateMappingLength;
-  external DOT11_DATA_RATE_MAPPING_ENTRY DataRateMappingEntries;
+  @Array(126)
+  external Array<DOT11_DATA_RATE_MAPPING_ENTRY> DataRateMappingEntries;
 }
 
 class DOT11_COUNTRY_OR_REGION_STRING_LIST extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external __ubyte__ CountryOrRegionStrings;
+  @Array(3)
+  external Array<Uint8> CountryOrRegionStrings;
 }
 
 class DOT11_PORT_STATE_NOTIFICATION extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ PeerMac;
+  @Array(6)
+  external Array<Uint8> PeerMac;
   @Uint8() external int bOpen;
 }
 
@@ -1525,7 +1652,8 @@ class DOT11_QOS_PARAMS extends Struct {
 
 class DOT11_ASSOCIATION_PARAMS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ BSSID;
+  @Array(6)
+  external Array<Uint8> BSSID;
   @Uint32() external int uAssocRequestIEsOffset;
   @Uint32() external int uAssocRequestIEsLength;
 }
@@ -1572,9 +1700,11 @@ class DOT11_PHY_ATTRIBUTES extends Struct {
   @Uint32() external int DiversitySupport;
   @Uint32() external int PhySpecificAttributes;
   @Uint32() external int uNumberSupportedPowerLevels;
-  external __uint__ TxPowerLevels;
+  @Array(8)
+  external Array<Uint32> TxPowerLevels;
   @Uint32() external int uNumDataRateMappingEntries;
-  external DOT11_DATA_RATE_MAPPING_ENTRY DataRateMappingEntries;
+  @Array(126)
+  external Array<DOT11_DATA_RATE_MAPPING_ENTRY> DataRateMappingEntries;
   external DOT11_SUPPORTED_DATA_RATES_VALUE_V2 SupportedDataRatesValue;
 }
 
@@ -1626,7 +1756,8 @@ class DOT11_RECV_EXTENSION_INFO extends Struct {
   @Uint32() external int uRSSI;
   @Uint8() external int ucPriority;
   @Uint8() external int ucDataRate;
-  external __ubyte__ ucPeerMacAddress;
+  @Array(6)
+  external Array<Uint8> ucPeerMacAddress;
   @Uint32() external int dwExtendedStatus;
   @IntPtr() external int hWEPOffloadContext;
   @IntPtr() external int hAuthOffloadContext;
@@ -1638,7 +1769,8 @@ class DOT11_RECV_EXTENSION_INFO extends Struct {
   @Uint16() external int usDot11RightRWBitMap;
   @Uint16() external int usNumberOfMPDUsReceived;
   @Uint16() external int usNumberOfFragments;
-  external ____ pNdisPackets;
+  @Array(1)
+  external Array<Pointer> pNdisPackets;
 }
 
 class DOT11_RECV_EXTENSION_INFO_V2 extends Struct {
@@ -1650,7 +1782,8 @@ class DOT11_RECV_EXTENSION_INFO_V2 extends Struct {
   @Uint32() external int uRSSI;
   @Uint8() external int ucPriority;
   @Uint8() external int ucDataRate;
-  external __ubyte__ ucPeerMacAddress;
+  @Array(6)
+  external Array<Uint8> ucPeerMacAddress;
   @Uint32() external int dwExtendedStatus;
   @IntPtr() external int hWEPOffloadContext;
   @IntPtr() external int hAuthOffloadContext;
@@ -1662,7 +1795,8 @@ class DOT11_RECV_EXTENSION_INFO_V2 extends Struct {
   @Uint16() external int usDot11RightRWBitMap;
   @Uint16() external int usNumberOfMPDUsReceived;
   @Uint16() external int usNumberOfFragments;
-  external ____ pNdisPackets;
+  @Array(1)
+  external Array<Pointer> pNdisPackets;
 }
 
 class DOT11_STATUS_INDICATION extends Struct {
@@ -1678,7 +1812,8 @@ class DOT11_MPDU_MAX_LENGTH_INDICATION extends Struct {
 
 class DOT11_ASSOCIATION_START_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ MacAddr;
+  @Array(6)
+  external Array<Uint8> MacAddr;
   external DOT11_SSID SSID;
   @Uint32() external int uIHVDataOffset;
   @Uint32() external int uIHVDataSize;
@@ -1691,7 +1826,8 @@ class DOT11_ENCAP_ENTRY extends Struct {
 
 class DOT11_ASSOCIATION_COMPLETION_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ MacAddr;
+  @Array(6)
+  external Array<Uint8> MacAddr;
   @Uint32() external int uStatus;
   @Uint8() external int bReAssocReq;
   @Uint8() external int bReAssocResp;
@@ -1721,7 +1857,8 @@ class DOT11_ASSOCIATION_COMPLETION_PARAMETERS extends Struct {
 class DOT11_CONNECTION_START_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int BSSType;
-  external __ubyte__ AdhocBSSID;
+  @Array(6)
+  external Array<Uint8> AdhocBSSID;
   external DOT11_SSID AdhocSSID;
 }
 
@@ -1732,7 +1869,8 @@ class DOT11_CONNECTION_COMPLETION_PARAMETERS extends Struct {
 
 class DOT11_ROAMING_START_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ AdhocBSSID;
+  @Array(6)
+  external Array<Uint8> AdhocBSSID;
   external DOT11_SSID AdhocSSID;
   @Uint32() external int uRoamingReason;
 }
@@ -1744,7 +1882,8 @@ class DOT11_ROAMING_COMPLETION_PARAMETERS extends Struct {
 
 class DOT11_DISASSOCIATION_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ MacAddr;
+  @Array(6)
+  external Array<Uint8> MacAddr;
   @Uint32() external int uReason;
   @Uint32() external int uIHVDataOffset;
   @Uint32() external int uIHVDataSize;
@@ -1754,7 +1893,8 @@ class DOT11_TKIPMIC_FAILURE_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint8() external int bDefaultKeyFailure;
   @Uint32() external int uKeyIndex;
-  external __ubyte__ PeerMac;
+  @Array(6)
+  external Array<Uint8> PeerMac;
 }
 
 class DOT11_PMKID_CANDIDATE_LIST_PARAMETERS extends Struct {
@@ -1764,7 +1904,8 @@ class DOT11_PMKID_CANDIDATE_LIST_PARAMETERS extends Struct {
 }
 
 class DOT11_BSSID_CANDIDATE extends Struct {
-  external __ubyte__ BSSID;
+  @Array(6)
+  external Array<Uint8> BSSID;
   @Uint32() external int uFlags;
 }
 
@@ -1776,7 +1917,8 @@ class DOT11_PHY_STATE_PARAMETERS extends Struct {
 }
 
 class DOT11_LINK_QUALITY_ENTRY extends Struct {
-  external __ubyte__ PeerMacAddr;
+  @Array(6)
+  external Array<Uint8> PeerMacAddr;
   @Uint8() external int ucLinkQuality;
 }
 
@@ -1827,12 +1969,14 @@ class DOT11_EXTAP_ATTRIBUTES extends Struct {
 
 class DOT11_INCOMING_ASSOC_STARTED_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ PeerMacAddr;
+  @Array(6)
+  external Array<Uint8> PeerMacAddr;
 }
 
 class DOT11_INCOMING_ASSOC_REQUEST_RECEIVED_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ PeerMacAddr;
+  @Array(6)
+  external Array<Uint8> PeerMacAddr;
   @Uint8() external int bReAssocReq;
   @Uint32() external int uAssocReqOffset;
   @Uint32() external int uAssocReqSize;
@@ -1840,7 +1984,8 @@ class DOT11_INCOMING_ASSOC_REQUEST_RECEIVED_PARAMETERS extends Struct {
 
 class DOT11_INCOMING_ASSOC_COMPLETION_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ PeerMacAddr;
+  @Array(6)
+  external Array<Uint8> PeerMacAddr;
   @Uint32() external int uStatus;
   @Uint8() external int ucErrorSource;
   @Uint8() external int bReAssocReq;
@@ -1878,25 +2023,29 @@ class DOT11_AVAILABLE_CHANNEL_LIST extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external __uint__ uChannelNumber;
+  @Array(1)
+  external Array<Uint32> uChannelNumber;
 }
 
 class DOT11_AVAILABLE_FREQUENCY_LIST extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external __uint__ uFrequencyValue;
+  @Array(1)
+  external Array<Uint32> uFrequencyValue;
 }
 
 class DOT11_DISASSOCIATE_PEER_REQUEST extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ PeerMacAddr;
+  @Array(6)
+  external Array<Uint8> PeerMacAddr;
   @Uint16() external int usReason;
 }
 
 class DOT11_INCOMING_ASSOC_DECISION extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ PeerMacAddr;
+  @Array(6)
+  external Array<Uint8> PeerMacAddr;
   @Uint8() external int bAccept;
   @Uint16() external int usReasonCode;
   @Uint32() external int uAssocResponseIEsOffset;
@@ -1905,7 +2054,8 @@ class DOT11_INCOMING_ASSOC_DECISION extends Struct {
 
 class DOT11_INCOMING_ASSOC_DECISION_V2 extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ PeerMacAddr;
+  @Array(6)
+  external Array<Uint8> PeerMacAddr;
   @Uint8() external int bAccept;
   @Uint16() external int usReasonCode;
   @Uint32() external int uAssocResponseIEsOffset;
@@ -1931,14 +2081,16 @@ class DOT11_PEER_STATISTICS extends Struct {
 }
 
 class DOT11_PEER_INFO extends Struct {
-  external __ubyte__ MacAddress;
+  @Array(6)
+  external Array<Uint8> MacAddress;
   @Uint16() external int usCapabilityInformation;
   @Uint32() external int AuthAlgo;
   @Uint32() external int UnicastCipherAlgo;
   @Uint32() external int MulticastCipherAlgo;
   @Uint8() external int bWpsEnabled;
   @Uint16() external int usListenInterval;
-  external __ubyte__ ucSupportedRates;
+  @Array(128)
+  external Array<Uint8> ucSupportedRates;
   @Uint16() external int usAssociationID;
   @Uint32() external int AssociationState;
   @Uint32() external int PowerMode;
@@ -1950,7 +2102,8 @@ class DOT11_PEER_INFO_LIST extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external DOT11_PEER_INFO PeerInfo;
+  @Array(1)
+  external Array<DOT11_PEER_INFO> PeerInfo;
 }
 
 class DOT11_VWIFI_COMBINATION extends Struct {
@@ -1980,7 +2133,8 @@ class DOT11_VWIFI_COMBINATION_V3 extends Struct {
 class DOT11_VWIFI_ATTRIBUTES extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uTotalNumOfEntries;
-  external DOT11_VWIFI_COMBINATION Combinations;
+  @Array(1)
+  external Array<DOT11_VWIFI_COMBINATION> Combinations;
 }
 
 class DOT11_MAC_PARAMETERS extends Struct {
@@ -1991,7 +2145,8 @@ class DOT11_MAC_PARAMETERS extends Struct {
 class DOT11_MAC_INFO extends Struct {
   @Uint32() external int uReserved;
   @Uint32() external int uNdisPortNumber;
-  external __ubyte__ MacAddr;
+  @Array(6)
+  external Array<Uint8> MacAddr;
 }
 
 class DOT11_WFD_ATTRIBUTES extends Struct {
@@ -2003,7 +2158,8 @@ class DOT11_WFD_ATTRIBUTES extends Struct {
   @Uint8() external int bClientDiscoverabilitySupported;
   @Uint8() external int bInfrastructureManagementSupported;
   @Uint32() external int uMaxSecondaryDeviceTypeListSize;
-  external __ubyte__ DeviceAddress;
+  @Array(6)
+  external Array<Uint8> DeviceAddress;
   @Uint32() external int uInterfaceAddressListCount;
   external Pointer<Uint8> pInterfaceAddressList;
   @Uint32() external int uNumSupportedCountryOrRegionStrings;
@@ -2015,12 +2171,14 @@ class DOT11_WFD_ATTRIBUTES extends Struct {
 class DOT11_WFD_DEVICE_TYPE extends Struct {
   @Uint16() external int CategoryID;
   @Uint16() external int SubCategoryID;
-  external __ubyte__ OUI;
+  @Array(4)
+  external Array<Uint8> OUI;
 }
 
 class DOT11_WPS_DEVICE_NAME extends Struct {
   @Uint32() external int uDeviceNameLength;
-  external __ubyte__ ucDeviceName;
+  @Array(32)
+  external Array<Uint8> ucDeviceName;
 }
 
 class DOT11_WFD_CONFIGURATION_TIMEOUT extends Struct {
@@ -2029,7 +2187,8 @@ class DOT11_WFD_CONFIGURATION_TIMEOUT extends Struct {
 }
 
 class DOT11_WFD_GROUP_ID extends Struct {
-  external __ubyte__ DeviceAddress;
+  @Array(6)
+  external Array<Uint8> DeviceAddress;
   external DOT11_SSID SSID;
 }
 
@@ -2038,7 +2197,8 @@ class DOT11_WFD_GO_INTENT extends Struct {
 }
 
 class DOT11_WFD_CHANNEL extends Struct {
-  external __ubyte__ CountryRegionString;
+  @Array(3)
+  external Array<Uint8> CountryRegionString;
   @Uint8() external int OperatingClass;
   @Uint8() external int ChannelNumber;
 }
@@ -2051,29 +2211,34 @@ class WFDSVC_CONNECTION_CAPABILITY extends Struct {
 
 class DOT11_WFD_SERVICE_HASH_LIST extends Struct {
   @Uint16() external int ServiceHashCount;
-  external __ubyte__ ServiceHash;
+  @Array(6)
+  external Array<Uint8> ServiceHash;
 }
 
 class DOT11_WFD_ADVERTISEMENT_ID extends Struct {
   @Uint32() external int AdvertisementID;
-  external __ubyte__ ServiceAddress;
+  @Array(6)
+  external Array<Uint8> ServiceAddress;
 }
 
 class DOT11_WFD_SESSION_ID extends Struct {
   @Uint32() external int SessionID;
-  external __ubyte__ SessionAddress;
+  @Array(6)
+  external Array<Uint8> SessionAddress;
 }
 
 class DOT11_WFD_ADVERTISED_SERVICE_DESCRIPTOR extends Struct {
   @Uint32() external int AdvertisementID;
   @Uint16() external int ConfigMethods;
   @Uint8() external int ServiceNameLength;
-  external __ubyte__ ServiceName;
+  @Array(128)
+  external Array<Uint8> ServiceName;
 }
 
 class DOT11_WFD_ADVERTISED_SERVICE_LIST extends Struct {
   @Uint16() external int ServiceCount;
-  external DOT11_WFD_ADVERTISED_SERVICE_DESCRIPTOR AdvertisedService;
+  @Array(1)
+  external Array<DOT11_WFD_ADVERTISED_SERVICE_DESCRIPTOR> AdvertisedService;
 }
 
 class DOT11_WFD_DISCOVER_COMPLETE_PARAMETERS extends Struct {
@@ -2087,7 +2252,8 @@ class DOT11_WFD_DISCOVER_COMPLETE_PARAMETERS extends Struct {
 
 class DOT11_GO_NEGOTIATION_REQUEST_SEND_COMPLETE_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ PeerDeviceAddress;
+  @Array(6)
+  external Array<Uint8> PeerDeviceAddress;
   @Uint8() external int DialogToken;
   @Int32() external int Status;
   @Uint32() external int uIEsOffset;
@@ -2096,7 +2262,8 @@ class DOT11_GO_NEGOTIATION_REQUEST_SEND_COMPLETE_PARAMETERS extends Struct {
 
 class DOT11_RECEIVED_GO_NEGOTIATION_REQUEST_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ PeerDeviceAddress;
+  @Array(6)
+  external Array<Uint8> PeerDeviceAddress;
   @Uint8() external int DialogToken;
   external Pointer RequestContext;
   @Uint32() external int uIEsOffset;
@@ -2105,7 +2272,8 @@ class DOT11_RECEIVED_GO_NEGOTIATION_REQUEST_PARAMETERS extends Struct {
 
 class DOT11_GO_NEGOTIATION_RESPONSE_SEND_COMPLETE_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ PeerDeviceAddress;
+  @Array(6)
+  external Array<Uint8> PeerDeviceAddress;
   @Uint8() external int DialogToken;
   @Int32() external int Status;
   @Uint32() external int uIEsOffset;
@@ -2114,7 +2282,8 @@ class DOT11_GO_NEGOTIATION_RESPONSE_SEND_COMPLETE_PARAMETERS extends Struct {
 
 class DOT11_RECEIVED_GO_NEGOTIATION_RESPONSE_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ PeerDeviceAddress;
+  @Array(6)
+  external Array<Uint8> PeerDeviceAddress;
   @Uint8() external int DialogToken;
   external Pointer ResponseContext;
   @Uint32() external int uIEsOffset;
@@ -2123,7 +2292,8 @@ class DOT11_RECEIVED_GO_NEGOTIATION_RESPONSE_PARAMETERS extends Struct {
 
 class DOT11_GO_NEGOTIATION_CONFIRMATION_SEND_COMPLETE_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ PeerDeviceAddress;
+  @Array(6)
+  external Array<Uint8> PeerDeviceAddress;
   @Uint8() external int DialogToken;
   @Int32() external int Status;
   @Uint32() external int uIEsOffset;
@@ -2132,7 +2302,8 @@ class DOT11_GO_NEGOTIATION_CONFIRMATION_SEND_COMPLETE_PARAMETERS extends Struct 
 
 class DOT11_RECEIVED_GO_NEGOTIATION_CONFIRMATION_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ PeerDeviceAddress;
+  @Array(6)
+  external Array<Uint8> PeerDeviceAddress;
   @Uint8() external int DialogToken;
   @Uint32() external int uIEsOffset;
   @Uint32() external int uIEsLength;
@@ -2140,8 +2311,10 @@ class DOT11_RECEIVED_GO_NEGOTIATION_CONFIRMATION_PARAMETERS extends Struct {
 
 class DOT11_INVITATION_REQUEST_SEND_COMPLETE_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ PeerDeviceAddress;
-  external __ubyte__ ReceiverAddress;
+  @Array(6)
+  external Array<Uint8> PeerDeviceAddress;
+  @Array(6)
+  external Array<Uint8> ReceiverAddress;
   @Uint8() external int DialogToken;
   @Int32() external int Status;
   @Uint32() external int uIEsOffset;
@@ -2150,8 +2323,10 @@ class DOT11_INVITATION_REQUEST_SEND_COMPLETE_PARAMETERS extends Struct {
 
 class DOT11_RECEIVED_INVITATION_REQUEST_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ TransmitterDeviceAddress;
-  external __ubyte__ BSSID;
+  @Array(6)
+  external Array<Uint8> TransmitterDeviceAddress;
+  @Array(6)
+  external Array<Uint8> BSSID;
   @Uint8() external int DialogToken;
   external Pointer RequestContext;
   @Uint32() external int uIEsOffset;
@@ -2160,7 +2335,8 @@ class DOT11_RECEIVED_INVITATION_REQUEST_PARAMETERS extends Struct {
 
 class DOT11_INVITATION_RESPONSE_SEND_COMPLETE_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ ReceiverDeviceAddress;
+  @Array(6)
+  external Array<Uint8> ReceiverDeviceAddress;
   @Uint8() external int DialogToken;
   @Int32() external int Status;
   @Uint32() external int uIEsOffset;
@@ -2169,8 +2345,10 @@ class DOT11_INVITATION_RESPONSE_SEND_COMPLETE_PARAMETERS extends Struct {
 
 class DOT11_RECEIVED_INVITATION_RESPONSE_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ TransmitterDeviceAddress;
-  external __ubyte__ BSSID;
+  @Array(6)
+  external Array<Uint8> TransmitterDeviceAddress;
+  @Array(6)
+  external Array<Uint8> BSSID;
   @Uint8() external int DialogToken;
   @Uint32() external int uIEsOffset;
   @Uint32() external int uIEsLength;
@@ -2178,8 +2356,10 @@ class DOT11_RECEIVED_INVITATION_RESPONSE_PARAMETERS extends Struct {
 
 class DOT11_PROVISION_DISCOVERY_REQUEST_SEND_COMPLETE_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ PeerDeviceAddress;
-  external __ubyte__ ReceiverAddress;
+  @Array(6)
+  external Array<Uint8> PeerDeviceAddress;
+  @Array(6)
+  external Array<Uint8> ReceiverAddress;
   @Uint8() external int DialogToken;
   @Int32() external int Status;
   @Uint32() external int uIEsOffset;
@@ -2188,8 +2368,10 @@ class DOT11_PROVISION_DISCOVERY_REQUEST_SEND_COMPLETE_PARAMETERS extends Struct 
 
 class DOT11_RECEIVED_PROVISION_DISCOVERY_REQUEST_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ TransmitterDeviceAddress;
-  external __ubyte__ BSSID;
+  @Array(6)
+  external Array<Uint8> TransmitterDeviceAddress;
+  @Array(6)
+  external Array<Uint8> BSSID;
   @Uint8() external int DialogToken;
   external Pointer RequestContext;
   @Uint32() external int uIEsOffset;
@@ -2198,7 +2380,8 @@ class DOT11_RECEIVED_PROVISION_DISCOVERY_REQUEST_PARAMETERS extends Struct {
 
 class DOT11_PROVISION_DISCOVERY_RESPONSE_SEND_COMPLETE_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ ReceiverDeviceAddress;
+  @Array(6)
+  external Array<Uint8> ReceiverDeviceAddress;
   @Uint8() external int DialogToken;
   @Int32() external int Status;
   @Uint32() external int uIEsOffset;
@@ -2207,8 +2390,10 @@ class DOT11_PROVISION_DISCOVERY_RESPONSE_SEND_COMPLETE_PARAMETERS extends Struct
 
 class DOT11_RECEIVED_PROVISION_DISCOVERY_RESPONSE_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ TransmitterDeviceAddress;
-  external __ubyte__ BSSID;
+  @Array(6)
+  external Array<Uint8> TransmitterDeviceAddress;
+  @Array(6)
+  external Array<Uint8> BSSID;
   @Uint8() external int DialogToken;
   @Uint32() external int uIEsOffset;
   @Uint32() external int uIEsLength;
@@ -2255,7 +2440,8 @@ class DOT11_WFD_GROUP_OWNER_CAPABILITY_CONFIG_V2 extends Struct {
 
 class DOT11_WFD_DEVICE_INFO extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ DeviceAddress;
+  @Array(6)
+  external Array<Uint8> DeviceAddress;
   @Uint16() external int ConfigMethods;
   external DOT11_WFD_DEVICE_TYPE PrimaryDeviceType;
   external DOT11_WPS_DEVICE_NAME DeviceName;
@@ -2265,11 +2451,13 @@ class DOT11_WFD_SECONDARY_DEVICE_TYPE_LIST extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint32() external int uNumOfEntries;
   @Uint32() external int uTotalNumOfEntries;
-  external DOT11_WFD_DEVICE_TYPE SecondaryDeviceTypes;
+  @Array(1)
+  external Array<DOT11_WFD_DEVICE_TYPE> SecondaryDeviceTypes;
 }
 
 class DOT11_WFD_DISCOVER_DEVICE_FILTER extends Struct {
-  external __ubyte__ DeviceID;
+  @Array(6)
+  external Array<Uint8> DeviceID;
   @Uint8() external int ucBitmask;
   external DOT11_SSID GroupSSID;
 }
@@ -2289,9 +2477,11 @@ class DOT11_WFD_DISCOVER_REQUEST extends Struct {
 class DOT11_WFD_DEVICE_ENTRY extends Struct {
   @Uint32() external int uPhyId;
   external DOT11_BSS_ENTRY_PHY_SPECIFIC_INFO PhySpecificInfo;
-  external __ubyte__ dot11BSSID;
+  @Array(6)
+  external Array<Uint8> dot11BSSID;
   @Uint32() external int dot11BSSType;
-  external __ubyte__ TransmitterAddress;
+  @Array(6)
+  external Array<Uint8> TransmitterAddress;
   @Int32() external int lRSSI;
   @Uint32() external int uLinkQuality;
   @Uint16() external int usBeaconPeriod;
@@ -2317,12 +2507,14 @@ class DOT11_WFD_ADDITIONAL_IE extends Struct {
 
 class DOT11_SEND_GO_NEGOTIATION_REQUEST_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ PeerDeviceAddress;
+  @Array(6)
+  external Array<Uint8> PeerDeviceAddress;
   @Uint8() external int DialogToken;
   @Uint32() external int uSendTimeout;
   external DOT11_WFD_GO_INTENT GroupOwnerIntent;
   external DOT11_WFD_CONFIGURATION_TIMEOUT MinimumConfigTimeout;
-  external __ubyte__ IntendedInterfaceAddress;
+  @Array(6)
+  external Array<Uint8> IntendedInterfaceAddress;
   @Uint8() external int GroupCapability;
   @Uint32() external int uIEsOffset;
   @Uint32() external int uIEsLength;
@@ -2330,14 +2522,16 @@ class DOT11_SEND_GO_NEGOTIATION_REQUEST_PARAMETERS extends Struct {
 
 class DOT11_SEND_GO_NEGOTIATION_RESPONSE_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ PeerDeviceAddress;
+  @Array(6)
+  external Array<Uint8> PeerDeviceAddress;
   @Uint8() external int DialogToken;
   external Pointer RequestContext;
   @Uint32() external int uSendTimeout;
   @Uint8() external int Status;
   external DOT11_WFD_GO_INTENT GroupOwnerIntent;
   external DOT11_WFD_CONFIGURATION_TIMEOUT MinimumConfigTimeout;
-  external __ubyte__ IntendedInterfaceAddress;
+  @Array(6)
+  external Array<Uint8> IntendedInterfaceAddress;
   @Uint8() external int GroupCapability;
   external DOT11_WFD_GROUP_ID GroupID;
   @Uint8() external int bUseGroupID;
@@ -2347,7 +2541,8 @@ class DOT11_SEND_GO_NEGOTIATION_RESPONSE_PARAMETERS extends Struct {
 
 class DOT11_SEND_GO_NEGOTIATION_CONFIRMATION_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ PeerDeviceAddress;
+  @Array(6)
+  external Array<Uint8> PeerDeviceAddress;
   @Uint8() external int DialogToken;
   external Pointer ResponseContext;
   @Uint32() external int uSendTimeout;
@@ -2366,11 +2561,13 @@ class DOT11_WFD_INVITATION_FLAGS extends Struct {
 class DOT11_SEND_INVITATION_REQUEST_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint8() external int DialogToken;
-  external __ubyte__ PeerDeviceAddress;
+  @Array(6)
+  external Array<Uint8> PeerDeviceAddress;
   @Uint32() external int uSendTimeout;
   external DOT11_WFD_CONFIGURATION_TIMEOUT MinimumConfigTimeout;
   external DOT11_WFD_INVITATION_FLAGS InvitationFlags;
-  external __ubyte__ GroupBSSID;
+  @Array(6)
+  external Array<Uint8> GroupBSSID;
   @Uint8() external int bUseGroupBSSID;
   external DOT11_WFD_CHANNEL OperatingChannel;
   @Uint8() external int bUseSpecifiedOperatingChannel;
@@ -2382,13 +2579,15 @@ class DOT11_SEND_INVITATION_REQUEST_PARAMETERS extends Struct {
 
 class DOT11_SEND_INVITATION_RESPONSE_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ ReceiverDeviceAddress;
+  @Array(6)
+  external Array<Uint8> ReceiverDeviceAddress;
   @Uint8() external int DialogToken;
   external Pointer RequestContext;
   @Uint32() external int uSendTimeout;
   @Uint8() external int Status;
   external DOT11_WFD_CONFIGURATION_TIMEOUT MinimumConfigTimeout;
-  external __ubyte__ GroupBSSID;
+  @Array(6)
+  external Array<Uint8> GroupBSSID;
   @Uint8() external int bUseGroupBSSID;
   external DOT11_WFD_CHANNEL OperatingChannel;
   @Uint8() external int bUseSpecifiedOperatingChannel;
@@ -2399,7 +2598,8 @@ class DOT11_SEND_INVITATION_RESPONSE_PARAMETERS extends Struct {
 class DOT11_SEND_PROVISION_DISCOVERY_REQUEST_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
   @Uint8() external int DialogToken;
-  external __ubyte__ PeerDeviceAddress;
+  @Array(6)
+  external Array<Uint8> PeerDeviceAddress;
   @Uint32() external int uSendTimeout;
   @Uint8() external int GroupCapability;
   external DOT11_WFD_GROUP_ID GroupID;
@@ -2410,7 +2610,8 @@ class DOT11_SEND_PROVISION_DISCOVERY_REQUEST_PARAMETERS extends Struct {
 
 class DOT11_SEND_PROVISION_DISCOVERY_RESPONSE_PARAMETERS extends Struct {
   external NDIS_OBJECT_HEADER Header;
-  external __ubyte__ ReceiverDeviceAddress;
+  @Array(6)
+  external Array<Uint8> ReceiverDeviceAddress;
   @Uint8() external int DialogToken;
   external Pointer RequestContext;
   @Uint32() external int uSendTimeout;
@@ -2457,7 +2658,8 @@ class DOT11_OFFLOAD_NETWORK extends Struct {
   external DOT11_SSID Ssid;
   @Uint32() external int UnicastCipher;
   @Uint32() external int AuthAlgo;
-  external DOT11_CHANNEL_HINT Dot11ChannelHints;
+  @Array(4)
+  external Array<DOT11_CHANNEL_HINT> Dot11ChannelHints;
 }
 
 class DOT11_OFFLOAD_NETWORK_LIST_INFO extends Struct {
@@ -2467,7 +2669,8 @@ class DOT11_OFFLOAD_NETWORK_LIST_INFO extends Struct {
   @Uint32() external int FastScanIterations;
   @Uint32() external int SlowScanPeriod;
   @Uint32() external int uNumOfEntries;
-  external DOT11_OFFLOAD_NETWORK offloadNetworkList;
+  @Array(1)
+  external Array<DOT11_OFFLOAD_NETWORK> offloadNetworkList;
 }
 
 class DOT11_OFFLOAD_NETWORK_STATUS_PARAMETERS extends Struct {
@@ -2478,7 +2681,8 @@ class DOT11_OFFLOAD_NETWORK_STATUS_PARAMETERS extends Struct {
 class DOT11_MANUFACTURING_TEST extends Struct {
   @Uint32() external int dot11ManufacturingTestType;
   @Uint32() external int uBufferLength;
-  external __ubyte__ ucBuffer;
+  @Array(1)
+  external Array<Uint8> ucBuffer;
 }
 
 class DOT11_MANUFACTURING_SELF_TEST_SET_PARAMS extends Struct {
@@ -2487,7 +2691,8 @@ class DOT11_MANUFACTURING_SELF_TEST_SET_PARAMS extends Struct {
   @Uint32() external int uPinBitMask;
   external Pointer pvContext;
   @Uint32() external int uBufferLength;
-  external __ubyte__ ucBufferIn;
+  @Array(1)
+  external Array<Uint8> ucBufferIn;
 }
 
 class DOT11_MANUFACTURING_SELF_TEST_QUERY_RESULTS extends Struct {
@@ -2497,7 +2702,8 @@ class DOT11_MANUFACTURING_SELF_TEST_QUERY_RESULTS extends Struct {
   @Uint32() external int uPinFailedBitMask;
   external Pointer pvContext;
   @Uint32() external int uBytesWrittenOut;
-  external __ubyte__ ucBufferOut;
+  @Array(1)
+  external Array<Uint8> ucBufferOut;
 }
 
 class DOT11_MANUFACTURING_FUNCTIONAL_TEST_RX extends Struct {
@@ -2526,7 +2732,8 @@ class DOT11_MANUFACTURING_TEST_SET_DATA extends Struct {
   @Uint32() external int uKey;
   @Uint32() external int uOffset;
   @Uint32() external int uBufferLength;
-  external __ubyte__ ucBufferIn;
+  @Array(1)
+  external Array<Uint8> ucBufferIn;
 }
 
 class DOT11_MANUFACTURING_TEST_QUERY_DATA extends Struct {
@@ -2534,7 +2741,8 @@ class DOT11_MANUFACTURING_TEST_QUERY_DATA extends Struct {
   @Uint32() external int uOffset;
   @Uint32() external int uBufferLength;
   @Uint32() external int uBytesRead;
-  external __ubyte__ ucBufferOut;
+  @Array(1)
+  external Array<Uint8> ucBufferOut;
 }
 
 class DOT11_MANUFACTURING_TEST_SLEEP extends Struct {
@@ -2550,7 +2758,8 @@ class DOT11_MANUFACTURING_CALLBACK_PARAMETERS extends Struct {
 }
 
 class WLAN_PROFILE_INFO extends Struct {
-  external __ushort__ strProfileName;
+  @Array(129)
+  external Array<Uint16> strProfileName;
   @Uint32() external int dwFlags;
 }
 
@@ -2561,29 +2770,34 @@ class DOT11_NETWORK extends Struct {
 
 class WLAN_RAW_DATA extends Struct {
   @Uint32() external int dwDataSize;
-  external __ubyte__ DataBlob;
+  @Array(1)
+  external Array<Uint8> DataBlob;
 }
 
 class WLAN_RAW_DATA_LIST extends Struct {
   @Uint32() external int dwTotalSize;
   @Uint32() external int dwNumberOfItems;
-  external ____ DataList;
+  @Array(1)
+  external Array<Uint32> DataList;
 }
 
 class WLAN_RATE_SET extends Struct {
   @Uint32() external int uRateSetLength;
-  external __ushort__ usRateSet;
+  @Array(126)
+  external Array<Uint16> usRateSet;
 }
 
 class WLAN_AVAILABLE_NETWORK extends Struct {
-  external __ushort__ strProfileName;
+  @Array(129)
+  external Array<Uint16> strProfileName;
   external DOT11_SSID dot11Ssid;
   @Uint32() external int dot11BssType;
   @Uint32() external int uNumberOfBssids;
   @Int32() external int bNetworkConnectable;
   @Uint32() external int wlanNotConnectableReason;
   @Uint32() external int uNumberOfPhyTypes;
-  @Uint32() external int dot11PhyTypes;
+  @Array(8)
+  external Array<Uint32> dot11PhyTypes;
   @Int32() external int bMorePhyTypes;
   @Uint32() external int wlanSignalQuality;
   @Int32() external int bSecurityEnabled;
@@ -2594,14 +2808,16 @@ class WLAN_AVAILABLE_NETWORK extends Struct {
 }
 
 class WLAN_AVAILABLE_NETWORK_V2 extends Struct {
-  external __ushort__ strProfileName;
+  @Array(129)
+  external Array<Uint16> strProfileName;
   external DOT11_SSID dot11Ssid;
   @Uint32() external int dot11BssType;
   @Uint32() external int uNumberOfBssids;
   @Int32() external int bNetworkConnectable;
   @Uint32() external int wlanNotConnectableReason;
   @Uint32() external int uNumberOfPhyTypes;
-  @Uint32() external int dot11PhyTypes;
+  @Array(8)
+  external Array<Uint32> dot11PhyTypes;
   @Int32() external int bMorePhyTypes;
   @Uint32() external int wlanSignalQuality;
   @Int32() external int bSecurityEnabled;
@@ -2609,7 +2825,8 @@ class WLAN_AVAILABLE_NETWORK_V2 extends Struct {
   @Uint32() external int dot11DefaultCipherAlgorithm;
   @Uint32() external int dwFlags;
   external DOT11_ACCESSNETWORKOPTIONS AccessNetworkOptions;
-  external __ubyte__ dot11HESSID;
+  @Array(6)
+  external Array<Uint8> dot11HESSID;
   external DOT11_VENUEINFO VenueInfo;
   @Uint32() external int dwReserved;
 }
@@ -2617,7 +2834,8 @@ class WLAN_AVAILABLE_NETWORK_V2 extends Struct {
 class WLAN_BSS_ENTRY extends Struct {
   external DOT11_SSID dot11Ssid;
   @Uint32() external int uPhyId;
-  external __ubyte__ dot11Bssid;
+  @Array(6)
+  external Array<Uint8> dot11Bssid;
   @Uint32() external int dot11BssType;
   @Uint32() external int dot11BssPhyType;
   @Int32() external int lRssi;
@@ -2636,19 +2854,22 @@ class WLAN_BSS_ENTRY extends Struct {
 class WLAN_BSS_LIST extends Struct {
   @Uint32() external int dwTotalSize;
   @Uint32() external int dwNumberOfItems;
-  external WLAN_BSS_ENTRY wlanBssEntries;
+  @Array(1)
+  external Array<WLAN_BSS_ENTRY> wlanBssEntries;
 }
 
 class WLAN_INTERFACE_INFO extends Struct {
   external GUID InterfaceGuid;
-  external __ushort__ strInterfaceDescription;
+  @Array(129)
+  external Array<Uint16> strInterfaceDescription;
   @Uint32() external int isState;
 }
 
 class WLAN_ASSOCIATION_ATTRIBUTES extends Struct {
   external DOT11_SSID dot11Ssid;
   @Uint32() external int dot11BssType;
-  external __ubyte__ dot11Bssid;
+  @Array(6)
+  external Array<Uint8> dot11Bssid;
   @Uint32() external int dot11PhyType;
   @Uint32() external int uDot11PhyIndex;
   @Uint32() external int wlanSignalQuality;
@@ -2666,7 +2887,8 @@ class WLAN_SECURITY_ATTRIBUTES extends Struct {
 class WLAN_CONNECTION_ATTRIBUTES extends Struct {
   @Uint32() external int isState;
   @Uint32() external int wlanConnectionMode;
-  external __ushort__ strProfileName;
+  @Array(129)
+  external Array<Uint16> strProfileName;
   external WLAN_ASSOCIATION_ATTRIBUTES wlanAssociationAttributes;
   external WLAN_SECURITY_ATTRIBUTES wlanSecurityAttributes;
 }
@@ -2679,7 +2901,8 @@ class WLAN_PHY_RADIO_STATE extends Struct {
 
 class WLAN_RADIO_STATE extends Struct {
   @Uint32() external int dwNumberOfPhys;
-  external WLAN_PHY_RADIO_STATE PhyRadioState;
+  @Array(64)
+  external Array<WLAN_PHY_RADIO_STATE> PhyRadioState;
 }
 
 class WLAN_INTERFACE_CAPABILITY extends Struct {
@@ -2688,47 +2911,55 @@ class WLAN_INTERFACE_CAPABILITY extends Struct {
   @Uint32() external int dwMaxDesiredSsidListSize;
   @Uint32() external int dwMaxDesiredBssidListSize;
   @Uint32() external int dwNumberOfSupportedPhys;
-  @Uint32() external int dot11PhyTypes;
+  @Array(64)
+  external Array<Uint32> dot11PhyTypes;
 }
 
 class WLAN_AUTH_CIPHER_PAIR_LIST extends Struct {
   @Uint32() external int dwNumberOfItems;
-  external DOT11_AUTH_CIPHER_PAIR pAuthCipherPairList;
+  @Array(1)
+  external Array<DOT11_AUTH_CIPHER_PAIR> pAuthCipherPairList;
 }
 
 class WLAN_COUNTRY_OR_REGION_STRING_LIST extends Struct {
   @Uint32() external int dwNumberOfItems;
-  external __ubyte__ pCountryOrRegionStringList;
+  @Array(3)
+  external Array<Uint8> pCountryOrRegionStringList;
 }
 
 class WLAN_PROFILE_INFO_LIST extends Struct {
   @Uint32() external int dwNumberOfItems;
   @Uint32() external int dwIndex;
-  external WLAN_PROFILE_INFO ProfileInfo;
+  @Array(1)
+  external Array<WLAN_PROFILE_INFO> ProfileInfo;
 }
 
 class WLAN_AVAILABLE_NETWORK_LIST extends Struct {
   @Uint32() external int dwNumberOfItems;
   @Uint32() external int dwIndex;
-  external WLAN_AVAILABLE_NETWORK Network;
+  @Array(1)
+  external Array<WLAN_AVAILABLE_NETWORK> Network;
 }
 
 class WLAN_AVAILABLE_NETWORK_LIST_V2 extends Struct {
   @Uint32() external int dwNumberOfItems;
   @Uint32() external int dwIndex;
-  external WLAN_AVAILABLE_NETWORK_V2 Network;
+  @Array(1)
+  external Array<WLAN_AVAILABLE_NETWORK_V2> Network;
 }
 
 class WLAN_INTERFACE_INFO_LIST extends Struct {
   @Uint32() external int dwNumberOfItems;
   @Uint32() external int dwIndex;
-  external WLAN_INTERFACE_INFO InterfaceInfo;
+  @Array(1)
+  external Array<WLAN_INTERFACE_INFO> InterfaceInfo;
 }
 
 class DOT11_NETWORK_LIST extends Struct {
   @Uint32() external int dwNumberOfItems;
   @Uint32() external int dwIndex;
-  external DOT11_NETWORK Network;
+  @Array(1)
+  external Array<DOT11_NETWORK> Network;
 }
 
 class WLAN_CONNECTION_PARAMETERS extends Struct {
@@ -2753,10 +2984,12 @@ class WLAN_CONNECTION_PARAMETERS_V2 extends Struct {
 
 class WLAN_MSM_NOTIFICATION_DATA extends Struct {
   @Uint32() external int wlanConnectionMode;
-  external __ushort__ strProfileName;
+  @Array(129)
+  external Array<Uint16> strProfileName;
   external DOT11_SSID dot11Ssid;
   @Uint32() external int dot11BssType;
-  external __ubyte__ dot11MacAddr;
+  @Array(6)
+  external Array<Uint8> dot11MacAddr;
   @Int32() external int bSecurityEnabled;
   @Int32() external int bFirstPeer;
   @Int32() external int bLastPeer;
@@ -2765,20 +2998,23 @@ class WLAN_MSM_NOTIFICATION_DATA extends Struct {
 
 class WLAN_CONNECTION_NOTIFICATION_DATA extends Struct {
   @Uint32() external int wlanConnectionMode;
-  external __ushort__ strProfileName;
+  @Array(129)
+  external Array<Uint16> strProfileName;
   external DOT11_SSID dot11Ssid;
   @Uint32() external int dot11BssType;
   @Int32() external int bSecurityEnabled;
   @Uint32() external int wlanReasonCode;
   @Uint32() external int dwFlags;
-  external __ushort__ strProfileXml;
+  @Array(1)
+  external Array<Uint16> strProfileXml;
 }
 
 class WLAN_DEVICE_SERVICE_NOTIFICATION_DATA extends Struct {
   external GUID DeviceService;
   @Uint32() external int dwOpCode;
   @Uint32() external int dwDataSize;
-  external __ubyte__ DataBlob;
+  @Array(1)
+  external Array<Uint8> DataBlob;
 }
 
 class WLAN_PHY_FRAME_STATISTICS extends Struct {
@@ -2824,22 +3060,26 @@ class WLAN_STATISTICS extends Struct {
   external WLAN_MAC_FRAME_STATISTICS MacUcastCounters;
   external WLAN_MAC_FRAME_STATISTICS MacMcastCounters;
   @Uint32() external int dwNumberOfPhys;
-  external WLAN_PHY_FRAME_STATISTICS PhyCounters;
+  @Array(1)
+  external Array<WLAN_PHY_FRAME_STATISTICS> PhyCounters;
 }
 
 class WLAN_DEVICE_SERVICE_GUID_LIST extends Struct {
   @Uint32() external int dwNumberOfItems;
   @Uint32() external int dwIndex;
-  external GUID DeviceService;
+  @Array(1)
+  external Array<GUID> DeviceService;
 }
 
 class WFD_GROUP_ID extends Struct {
-  external __ubyte__ DeviceAddress;
+  @Array(6)
+  external Array<Uint8> DeviceAddress;
   external DOT11_SSID GroupSSID;
 }
 
 class WLAN_HOSTED_NETWORK_PEER_STATE extends Struct {
-  external __ubyte__ PeerMacAddress;
+  @Array(6)
+  external Array<Uint8> PeerMacAddress;
   @Uint32() external int PeerAuthState;
 }
 
@@ -2873,11 +3113,13 @@ class WLAN_HOSTED_NETWORK_SECURITY_SETTINGS extends Struct {
 class WLAN_HOSTED_NETWORK_STATUS extends Struct {
   @Uint32() external int HostedNetworkState;
   external GUID IPDeviceID;
-  external __ubyte__ wlanHostedNetworkBSSID;
+  @Array(6)
+  external Array<Uint8> wlanHostedNetworkBSSID;
   @Uint32() external int dot11PhyType;
   @Uint32() external int ulChannelFrequency;
   @Uint32() external int dwNumberOfPeers;
-  external WLAN_HOSTED_NETWORK_PEER_STATE PeerList;
+  @Array(1)
+  external Array<WLAN_HOSTED_NETWORK_PEER_STATE> PeerList;
 }
 
 class ONEX_VARIABLE_BLOB extends Struct {

@@ -43,19 +43,19 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class NL_INTERFACE_OFFLOAD_ROD extends Struct {
-  @Uint8() external int _bitfield;
-}
-
 class MIB_IF_ROW2 extends Struct {
   external NET_LUID_LH InterfaceLuid;
   @Uint32() external int InterfaceIndex;
   external GUID InterfaceGuid;
-  external __ushort__ Alias;
-  external __ushort__ Description;
+  @Array(129)
+  external Array<Uint16> Alias;
+  @Array(129)
+  external Array<Uint16> Description;
   @Uint32() external int PhysicalAddressLength;
-  external __ubyte__ PhysicalAddress;
-  external __ubyte__ PermanentPhysicalAddress;
+  @Array(32)
+  external Array<Uint8> PhysicalAddress;
+  @Array(32)
+  external Array<Uint8> PermanentPhysicalAddress;
   @Uint32() external int Mtu;
   @Uint32() external int Type;
   @Uint32() external int TunnelType;
@@ -93,7 +93,8 @@ class MIB_IF_ROW2 extends Struct {
 
 class MIB_IF_TABLE2 extends Struct {
   @Uint32() external int NumEntries;
-  external MIB_IF_ROW2 Table;
+  @Array(1)
+  external Array<MIB_IF_ROW2> Table;
 }
 
 class MIB_IPINTERFACE_ROW extends Struct {
@@ -120,7 +121,8 @@ class MIB_IPINTERFACE_ROW extends Struct {
   @Uint32() external int PathMtuDiscoveryTimeout;
   @Uint32() external int LinkLocalAddressBehavior;
   @Uint32() external int LinkLocalAddressTimeout;
-  external __uint__ ZoneIndices;
+  @Array(16)
+  external Array<Uint32> ZoneIndices;
   @Uint32() external int SitePrefixLength;
   @Uint32() external int Metric;
   @Uint32() external int NlMtu;
@@ -136,7 +138,8 @@ class MIB_IPINTERFACE_ROW extends Struct {
 
 class MIB_IPINTERFACE_TABLE extends Struct {
   @Uint32() external int NumEntries;
-  external MIB_IPINTERFACE_ROW Table;
+  @Array(1)
+  external Array<MIB_IPINTERFACE_ROW> Table;
 }
 
 class MIB_IFSTACK_ROW extends Struct {
@@ -151,12 +154,14 @@ class MIB_INVERTEDIFSTACK_ROW extends Struct {
 
 class MIB_IFSTACK_TABLE extends Struct {
   @Uint32() external int NumEntries;
-  external MIB_IFSTACK_ROW Table;
+  @Array(1)
+  external Array<MIB_IFSTACK_ROW> Table;
 }
 
 class MIB_INVERTEDIFSTACK_TABLE extends Struct {
   @Uint32() external int NumEntries;
-  external MIB_INVERTEDIFSTACK_ROW Table;
+  @Array(1)
+  external Array<MIB_INVERTEDIFSTACK_ROW> Table;
 }
 
 class MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES extends Struct {
@@ -181,7 +186,8 @@ class MIB_UNICASTIPADDRESS_ROW extends Struct {
 
 class MIB_UNICASTIPADDRESS_TABLE extends Struct {
   @Uint32() external int NumEntries;
-  external MIB_UNICASTIPADDRESS_ROW Table;
+  @Array(1)
+  external Array<MIB_UNICASTIPADDRESS_ROW> Table;
 }
 
 class MIB_ANYCASTIPADDRESS_ROW extends Struct {
@@ -193,7 +199,8 @@ class MIB_ANYCASTIPADDRESS_ROW extends Struct {
 
 class MIB_ANYCASTIPADDRESS_TABLE extends Struct {
   @Uint32() external int NumEntries;
-  external MIB_ANYCASTIPADDRESS_ROW Table;
+  @Array(1)
+  external Array<MIB_ANYCASTIPADDRESS_ROW> Table;
 }
 
 class MIB_MULTICASTIPADDRESS_ROW extends Struct {
@@ -205,7 +212,8 @@ class MIB_MULTICASTIPADDRESS_ROW extends Struct {
 
 class MIB_MULTICASTIPADDRESS_TABLE extends Struct {
   @Uint32() external int NumEntries;
-  external MIB_MULTICASTIPADDRESS_ROW Table;
+  @Array(1)
+  external Array<MIB_MULTICASTIPADDRESS_ROW> Table;
 }
 
 class MIB_IPFORWARD_ROW2 extends Struct {
@@ -228,7 +236,8 @@ class MIB_IPFORWARD_ROW2 extends Struct {
 
 class MIB_IPFORWARD_TABLE2 extends Struct {
   @Uint32() external int NumEntries;
-  external MIB_IPFORWARD_ROW2 Table;
+  @Array(1)
+  external Array<MIB_IPFORWARD_ROW2> Table;
 }
 
 class MIB_IPPATH_ROW extends Struct {
@@ -248,14 +257,16 @@ class MIB_IPPATH_ROW extends Struct {
 
 class MIB_IPPATH_TABLE extends Struct {
   @Uint32() external int NumEntries;
-  external MIB_IPPATH_ROW Table;
+  @Array(1)
+  external Array<MIB_IPPATH_ROW> Table;
 }
 
 class MIB_IPNET_ROW2 extends Struct {
   external SOCKADDR_INET Address;
   @Uint32() external int InterfaceIndex;
   external NET_LUID_LH InterfaceLuid;
-  external __ubyte__ PhysicalAddress;
+  @Array(32)
+  external Array<Uint8> PhysicalAddress;
   @Uint32() external int PhysicalAddressLength;
   @Uint32() external int State;
   @Uint32() external int Anonymous;
@@ -264,12 +275,14 @@ class MIB_IPNET_ROW2 extends Struct {
 
 class MIB_IPNET_TABLE2 extends Struct {
   @Uint32() external int NumEntries;
-  external MIB_IPNET_ROW2 Table;
+  @Array(1)
+  external Array<MIB_IPNET_ROW2> Table;
 }
 
 class MIB_OPAQUE_QUERY extends Struct {
   @Uint32() external int dwVarId;
-  external __uint__ rgdwVarIndex;
+  @Array(1)
+  external Array<Uint32> rgdwVarIndex;
 }
 
 class MIB_IFNUMBER extends Struct {
@@ -277,13 +290,15 @@ class MIB_IFNUMBER extends Struct {
 }
 
 class MIB_IFROW extends Struct {
-  external __ushort__ wszName;
+  @Array(129)
+  external Array<Uint16> wszName;
   @Uint32() external int dwIndex;
   @Uint32() external int dwType;
   @Uint32() external int dwMtu;
   @Uint32() external int dwSpeed;
   @Uint32() external int dwPhysAddrLen;
-  external __ubyte__ bPhysAddr;
+  @Array(8)
+  external Array<Uint8> bPhysAddr;
   @Uint32() external int dwAdminStatus;
   @Uint32() external int dwOperStatus;
   @Uint32() external int dwLastChange;
@@ -300,12 +315,14 @@ class MIB_IFROW extends Struct {
   @Uint32() external int dwOutErrors;
   @Uint32() external int dwOutQLen;
   @Uint32() external int dwDescrLen;
-  external __ubyte__ bDescr;
+  @Array(129)
+  external Array<Uint8> bDescr;
 }
 
 class MIB_IFTABLE extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_IFROW table;
+  @Array(1)
+  external Array<MIB_IFROW> table;
 }
 
 class MIB_IPADDRROW_XP extends Struct {
@@ -330,7 +347,8 @@ class MIB_IPADDRROW_W2K extends Struct {
 
 class MIB_IPADDRTABLE extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_IPADDRROW_XP table;
+  @Array(1)
+  external Array<MIB_IPADDRROW_XP> table;
 }
 
 class MIB_IPFORWARDNUMBER extends Struct {
@@ -356,13 +374,15 @@ class MIB_IPFORWARDROW extends Struct {
 
 class MIB_IPFORWARDTABLE extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_IPFORWARDROW table;
+  @Array(1)
+  external Array<MIB_IPFORWARDROW> table;
 }
 
 class MIB_IPNETROW_LH extends Struct {
   @Uint32() external int dwIndex;
   @Uint32() external int dwPhysAddrLen;
-  external __ubyte__ bPhysAddr;
+  @Array(8)
+  external Array<Uint8> bPhysAddr;
   @Uint32() external int dwAddr;
   @Uint32() external int Anonymous;
 }
@@ -370,14 +390,16 @@ class MIB_IPNETROW_LH extends Struct {
 class MIB_IPNETROW_W2K extends Struct {
   @Uint32() external int dwIndex;
   @Uint32() external int dwPhysAddrLen;
-  external __ubyte__ bPhysAddr;
+  @Array(8)
+  external Array<Uint8> bPhysAddr;
   @Uint32() external int dwAddr;
   @Uint32() external int dwType;
 }
 
 class MIB_IPNETTABLE extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_IPNETROW_LH table;
+  @Array(1)
+  external Array<MIB_IPNETROW_LH> table;
 }
 
 class MIB_IPSTATS_LH extends Struct {
@@ -460,7 +482,8 @@ class MIB_ICMP extends Struct {
 class MIBICMPSTATS_EX_XPSP1 extends Struct {
   @Uint32() external int dwMsgs;
   @Uint32() external int dwErrors;
-  external __uint__ rgdwTypeCount;
+  @Array(129)
+  external Array<Uint32> rgdwTypeCount;
 }
 
 class MIB_ICMP_EX_XPSP1 extends Struct {
@@ -498,12 +521,14 @@ class MIB_IPMCAST_MFE extends Struct {
   @Uint32() external int ulNumOutIf;
   @Uint32() external int fFlags;
   @Uint32() external int dwReserved;
-  external MIB_IPMCAST_OIF_XP rgmioOutInfo;
+  @Array(1)
+  external Array<MIB_IPMCAST_OIF_XP> rgmioOutInfo;
 }
 
 class MIB_MFE_TABLE extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_IPMCAST_MFE table;
+  @Array(1)
+  external Array<MIB_IPMCAST_MFE> table;
 }
 
 class MIB_IPMCAST_OIF_STATS_LH extends Struct {
@@ -543,12 +568,14 @@ class MIB_IPMCAST_MFE_STATS extends Struct {
   @Uint32() external int ulInOctets;
   @Uint32() external int ulPktsDifferentIf;
   @Uint32() external int ulQueueOverflow;
-  external MIB_IPMCAST_OIF_STATS_LH rgmiosOutStats;
+  @Array(1)
+  external Array<MIB_IPMCAST_OIF_STATS_LH> rgmiosOutStats;
 }
 
 class MIB_MFE_STATS_TABLE extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_IPMCAST_MFE_STATS table;
+  @Array(1)
+  external Array<MIB_IPMCAST_MFE_STATS> table;
 }
 
 class MIB_IPMCAST_MFE_STATS_EX_XP extends Struct {
@@ -573,12 +600,14 @@ class MIB_IPMCAST_MFE_STATS_EX_XP extends Struct {
   @Uint32() external int ulInDiscards;
   @Uint32() external int ulInHdrErrors;
   @Uint32() external int ulTotalOutPackets;
-  external MIB_IPMCAST_OIF_STATS_LH rgmiosOutStats;
+  @Array(1)
+  external Array<MIB_IPMCAST_OIF_STATS_LH> rgmiosOutStats;
 }
 
 class MIB_MFE_STATS_TABLE_EX_XP extends Struct {
   @Uint32() external int dwNumEntries;
-  external ____ table;
+  @Array(1)
+  external Array<Pointer<MIB_IPMCAST_MFE_STATS_EX_XP>> table;
 }
 
 class MIB_IPMCAST_GLOBAL extends Struct {
@@ -596,7 +625,8 @@ class MIB_IPMCAST_IF_ENTRY extends Struct {
 
 class MIB_IPMCAST_IF_TABLE extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_IPMCAST_IF_ENTRY table;
+  @Array(1)
+  external Array<MIB_IPMCAST_IF_ENTRY> table;
 }
 
 class MIB_TCPROW_LH extends Struct {
@@ -617,7 +647,8 @@ class MIB_TCPROW_W2K extends Struct {
 
 class MIB_TCPTABLE extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_TCPROW_LH table;
+  @Array(1)
+  external Array<MIB_TCPROW_LH> table;
 }
 
 class MIB_TCPROW2 extends Struct {
@@ -632,7 +663,8 @@ class MIB_TCPROW2 extends Struct {
 
 class MIB_TCPTABLE2 extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_TCPROW2 table;
+  @Array(1)
+  external Array<MIB_TCPROW2> table;
 }
 
 class MIB_TCPROW_OWNER_PID extends Struct {
@@ -646,7 +678,8 @@ class MIB_TCPROW_OWNER_PID extends Struct {
 
 class MIB_TCPTABLE_OWNER_PID extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_TCPROW_OWNER_PID table;
+  @Array(1)
+  external Array<MIB_TCPROW_OWNER_PID> table;
 }
 
 class MIB_TCPROW_OWNER_MODULE extends Struct {
@@ -657,34 +690,37 @@ class MIB_TCPROW_OWNER_MODULE extends Struct {
   @Uint32() external int dwRemotePort;
   @Uint32() external int dwOwningPid;
   @Int64() external int liCreateTimestamp;
-  external __uint64__ OwningModuleInfo;
+  @Array(16)
+  external Array<Uint64> OwningModuleInfo;
 }
 
 class MIB_TCPTABLE_OWNER_MODULE extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_TCPROW_OWNER_MODULE table;
+  @Array(1)
+  external Array<MIB_TCPROW_OWNER_MODULE> table;
 }
 
 class MIB_TCP6ROW extends Struct {
   @Uint32() external int State;
-  external in6_addr LocalAddr;
+  external IN6_ADDR LocalAddr;
   @Uint32() external int dwLocalScopeId;
   @Uint32() external int dwLocalPort;
-  external in6_addr RemoteAddr;
+  external IN6_ADDR RemoteAddr;
   @Uint32() external int dwRemoteScopeId;
   @Uint32() external int dwRemotePort;
 }
 
 class MIB_TCP6TABLE extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_TCP6ROW table;
+  @Array(1)
+  external Array<MIB_TCP6ROW> table;
 }
 
 class MIB_TCP6ROW2 extends Struct {
-  external in6_addr LocalAddr;
+  external IN6_ADDR LocalAddr;
   @Uint32() external int dwLocalScopeId;
   @Uint32() external int dwLocalPort;
-  external in6_addr RemoteAddr;
+  external IN6_ADDR RemoteAddr;
   @Uint32() external int dwRemoteScopeId;
   @Uint32() external int dwRemotePort;
   @Uint32() external int State;
@@ -694,14 +730,17 @@ class MIB_TCP6ROW2 extends Struct {
 
 class MIB_TCP6TABLE2 extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_TCP6ROW2 table;
+  @Array(1)
+  external Array<MIB_TCP6ROW2> table;
 }
 
 class MIB_TCP6ROW_OWNER_PID extends Struct {
-  external __ubyte__ ucLocalAddr;
+  @Array(16)
+  external Array<Uint8> ucLocalAddr;
   @Uint32() external int dwLocalScopeId;
   @Uint32() external int dwLocalPort;
-  external __ubyte__ ucRemoteAddr;
+  @Array(16)
+  external Array<Uint8> ucRemoteAddr;
   @Uint32() external int dwRemoteScopeId;
   @Uint32() external int dwRemotePort;
   @Uint32() external int dwState;
@@ -710,25 +749,30 @@ class MIB_TCP6ROW_OWNER_PID extends Struct {
 
 class MIB_TCP6TABLE_OWNER_PID extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_TCP6ROW_OWNER_PID table;
+  @Array(1)
+  external Array<MIB_TCP6ROW_OWNER_PID> table;
 }
 
 class MIB_TCP6ROW_OWNER_MODULE extends Struct {
-  external __ubyte__ ucLocalAddr;
+  @Array(16)
+  external Array<Uint8> ucLocalAddr;
   @Uint32() external int dwLocalScopeId;
   @Uint32() external int dwLocalPort;
-  external __ubyte__ ucRemoteAddr;
+  @Array(16)
+  external Array<Uint8> ucRemoteAddr;
   @Uint32() external int dwRemoteScopeId;
   @Uint32() external int dwRemotePort;
   @Uint32() external int dwState;
   @Uint32() external int dwOwningPid;
   @Int64() external int liCreateTimestamp;
-  external __uint64__ OwningModuleInfo;
+  @Array(16)
+  external Array<Uint64> OwningModuleInfo;
 }
 
 class MIB_TCP6TABLE_OWNER_MODULE extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_TCP6ROW_OWNER_MODULE table;
+  @Array(1)
+  external Array<MIB_TCP6ROW_OWNER_MODULE> table;
 }
 
 class MIB_TCPSTATS_LH extends Struct {
@@ -792,7 +836,8 @@ class MIB_UDPROW extends Struct {
 
 class MIB_UDPTABLE extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_UDPROW table;
+  @Array(1)
+  external Array<MIB_UDPROW> table;
 }
 
 class MIB_UDPROW_OWNER_PID extends Struct {
@@ -803,7 +848,8 @@ class MIB_UDPROW_OWNER_PID extends Struct {
 
 class MIB_UDPTABLE_OWNER_PID extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_UDPROW_OWNER_PID table;
+  @Array(1)
+  external Array<MIB_UDPROW_OWNER_PID> table;
 }
 
 class MIB_UDPROW_OWNER_MODULE extends Struct {
@@ -812,27 +858,31 @@ class MIB_UDPROW_OWNER_MODULE extends Struct {
   @Uint32() external int dwOwningPid;
   @Int64() external int liCreateTimestamp;
   @Uint32() external int Anonymous;
-  external __uint64__ OwningModuleInfo;
+  @Array(16)
+  external Array<Uint64> OwningModuleInfo;
 }
 
 class MIB_UDPTABLE_OWNER_MODULE extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_UDPROW_OWNER_MODULE table;
+  @Array(1)
+  external Array<MIB_UDPROW_OWNER_MODULE> table;
 }
 
 class MIB_UDP6ROW extends Struct {
-  external in6_addr dwLocalAddr;
+  external IN6_ADDR dwLocalAddr;
   @Uint32() external int dwLocalScopeId;
   @Uint32() external int dwLocalPort;
 }
 
 class MIB_UDP6TABLE extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_UDP6ROW table;
+  @Array(1)
+  external Array<MIB_UDP6ROW> table;
 }
 
 class MIB_UDP6ROW_OWNER_PID extends Struct {
-  external __ubyte__ ucLocalAddr;
+  @Array(16)
+  external Array<Uint8> ucLocalAddr;
   @Uint32() external int dwLocalScopeId;
   @Uint32() external int dwLocalPort;
   @Uint32() external int dwOwningPid;
@@ -840,22 +890,26 @@ class MIB_UDP6ROW_OWNER_PID extends Struct {
 
 class MIB_UDP6TABLE_OWNER_PID extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_UDP6ROW_OWNER_PID table;
+  @Array(1)
+  external Array<MIB_UDP6ROW_OWNER_PID> table;
 }
 
 class MIB_UDP6ROW_OWNER_MODULE extends Struct {
-  external __ubyte__ ucLocalAddr;
+  @Array(16)
+  external Array<Uint8> ucLocalAddr;
   @Uint32() external int dwLocalScopeId;
   @Uint32() external int dwLocalPort;
   @Uint32() external int dwOwningPid;
   @Int64() external int liCreateTimestamp;
   @Uint32() external int Anonymous;
-  external __uint64__ OwningModuleInfo;
+  @Array(16)
+  external Array<Uint64> OwningModuleInfo;
 }
 
 class MIB_UDP6TABLE_OWNER_MODULE extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_UDP6ROW_OWNER_MODULE table;
+  @Array(1)
+  external Array<MIB_UDP6ROW_OWNER_MODULE> table;
 }
 
 class MIB_UDPSTATS extends Struct {
@@ -883,7 +937,8 @@ class MIB_IPMCAST_BOUNDARY extends Struct {
 
 class MIB_IPMCAST_BOUNDARY_TABLE extends Struct {
   @Uint32() external int dwNumEntries;
-  external MIB_IPMCAST_BOUNDARY table;
+  @Array(1)
+  external Array<MIB_IPMCAST_BOUNDARY> table;
 }
 
 class MIB_BOUNDARYROW extends Struct {
@@ -899,7 +954,8 @@ class MIB_MCAST_LIMIT_ROW extends Struct {
 class MIB_IPMCAST_SCOPE extends Struct {
   @Uint32() external int dwGroupAddress;
   @Uint32() external int dwGroupMask;
-  external __ushort__ snNameBuffer;
+  @Array(129)
+  external Array<Uint16> snNameBuffer;
   @Uint32() external int dwStatus;
 }
 
@@ -925,5 +981,9 @@ class MIB_IFSTATUS extends Struct {
 class MIB_OPAQUE_INFO extends Struct {
   @Uint32() external int dwId;
   @Uint32() external int Anonymous;
+}
+
+class NL_INTERFACE_OFFLOAD_ROD extends Struct {
+  @Uint8() external int _bitfield;
 }
 

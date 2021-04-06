@@ -65,6 +65,362 @@ class COMPRESS_ALLOCATION_ROUTINES extends Struct {
   external Pointer UserContext;
 }
 
+class CSPLATFORM extends Struct {
+  @Uint32() external int dwPlatformId;
+  @Uint32() external int dwVersionHi;
+  @Uint32() external int dwVersionLo;
+  @Uint32() external int dwProcessorArch;
+}
+
+class QUERYCONTEXT extends Struct {
+  @Uint32() external int dwContext;
+  external CSPLATFORM Platform;
+  @Uint32() external int Locale;
+  @Uint32() external int dwVersionHi;
+  @Uint32() external int dwVersionLo;
+}
+
+class SecurityIdentity extends Struct {
+}
+
+class SecurityCallers extends Struct {
+}
+
+class SecurityCallContext extends Struct {
+}
+
+class GetSecurityCallContextAppObject extends Struct {
+}
+
+class Dummy30040732 extends Struct {
+}
+
+class TransactionContext extends Struct {
+}
+
+class TransactionContextEx extends Struct {
+}
+
+class ByotServerEx extends Struct {
+}
+
+class CServiceConfig extends Struct {
+}
+
+class ServicePool extends Struct {
+}
+
+class ServicePoolConfig extends Struct {
+}
+
+class SharedProperty extends Struct {
+}
+
+class SharedPropertyGroup extends Struct {
+}
+
+class SharedPropertyGroupManager extends Struct {
+}
+
+class COMEvents extends Struct {
+}
+
+class CoMTSLocator extends Struct {
+}
+
+class MtsGrp extends Struct {
+}
+
+class ComServiceEvents extends Struct {
+}
+
+class ComSystemAppEventData extends Struct {
+}
+
+class CRMClerk extends Struct {
+}
+
+class CRMRecoveryClerk extends Struct {
+}
+
+class LBEvents extends Struct {
+}
+
+class MessageMover extends Struct {
+}
+
+class DispenserManager extends Struct {
+}
+
+class PoolMgr extends Struct {
+}
+
+class EventServer extends Struct {
+}
+
+class TrackerServer extends Struct {
+}
+
+class AppDomainHelper extends Struct {
+}
+
+class ClrAssemblyLocator extends Struct {
+}
+
+class COMAdminCatalog extends Struct {
+}
+
+class COMAdminCatalogObject extends Struct {
+}
+
+class COMAdminCatalogCollection extends Struct {
+}
+
+class BOID extends Struct {
+  @Array(16)
+  external Array<Uint8> rgb;
+}
+
+class XACTTRANSINFO extends Struct {
+  external BOID uow;
+  @Int32() external int isoLevel;
+  @Uint32() external int isoFlags;
+  @Uint32() external int grfTCSupported;
+  @Uint32() external int grfRMSupported;
+  @Uint32() external int grfTCSupportedRetaining;
+  @Uint32() external int grfRMSupportedRetaining;
+}
+
+class XACTSTATS extends Struct {
+  @Uint32() external int cOpen;
+  @Uint32() external int cCommitting;
+  @Uint32() external int cCommitted;
+  @Uint32() external int cAborting;
+  @Uint32() external int cAborted;
+  @Uint32() external int cInDoubt;
+  @Uint32() external int cHeuristicDecision;
+  external FILETIME timeTransactionsUp;
+}
+
+class XACTOPT extends Struct {
+  @Uint32() external int ulTimeout;
+  @Array(40)
+  external Array<Uint8> szDescription;
+}
+
+class xid_t extends Struct {
+  @Int32() external int formatID;
+  @Int32() external int gtrid_length;
+  @Int32() external int bqual_length;
+  @Array(128)
+  external Array<Int8> data;
+}
+
+class xa_switch_t extends Struct {
+  @Array(32)
+  external Array<Int8> name;
+  @Int32() external int flags;
+  @Int32() external int version;
+  @IntPtr() external int xa_open_entry;
+  @IntPtr() external int xa_close_entry;
+  @IntPtr() external int xa_start_entry;
+  @IntPtr() external int xa_end_entry;
+  @IntPtr() external int xa_rollback_entry;
+  @IntPtr() external int xa_prepare_entry;
+  @IntPtr() external int xa_commit_entry;
+  @IntPtr() external int xa_recover_entry;
+  @IntPtr() external int xa_forget_entry;
+  @IntPtr() external int xa_complete_entry;
+}
+
+class _ProxyConfigParams extends Struct {
+  @Uint16() external int wcThreadsMax;
+}
+
+class COMSVCSEVENTINFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int dwPid;
+  @Int64() external int lTime;
+  @Int32() external int lMicroTime;
+  @Int64() external int perfCount;
+  external GUID guidApp;
+  external Pointer<Utf16> sMachineName;
+}
+
+class RECYCLE_INFO extends Struct {
+  external GUID guidCombaseProcessIdentifier;
+  @Int64() external int ProcessStartTime;
+  @Uint32() external int dwRecycleLifetimeLimit;
+  @Uint32() external int dwRecycleMemoryLimit;
+  @Uint32() external int dwRecycleExpirationTimeout;
+}
+
+class HANG_INFO extends Struct {
+  @Int32() external int fAppHangMonitorEnabled;
+  @Int32() external int fTerminateOnHang;
+  @Uint32() external int DumpType;
+  @Uint32() external int dwHangTimeout;
+  @Uint32() external int dwDumpCount;
+  @Uint32() external int dwInfoMsgCount;
+}
+
+class CAppStatistics extends Struct {
+  @Uint32() external int m_cTotalCalls;
+  @Uint32() external int m_cTotalInstances;
+  @Uint32() external int m_cTotalClasses;
+  @Uint32() external int m_cCallsPerSecond;
+}
+
+class CAppData extends Struct {
+  @Uint32() external int m_idApp;
+  @Array(40)
+  external Array<Uint16> m_szAppGuid;
+  @Uint32() external int m_dwAppProcessId;
+  external CAppStatistics m_AppStatistics;
+}
+
+class CCLSIDData extends Struct {
+  external GUID m_clsid;
+  @Uint32() external int m_cReferences;
+  @Uint32() external int m_cBound;
+  @Uint32() external int m_cPooled;
+  @Uint32() external int m_cInCall;
+  @Uint32() external int m_dwRespTime;
+  @Uint32() external int m_cCallsCompleted;
+  @Uint32() external int m_cCallsFailed;
+}
+
+class CCLSIDData2 extends Struct {
+  external GUID m_clsid;
+  external GUID m_appid;
+  external GUID m_partid;
+  external Pointer<Utf16> m_pwszAppName;
+  external Pointer<Utf16> m_pwszCtxName;
+  @Uint32() external int m_eAppType;
+  @Uint32() external int m_cReferences;
+  @Uint32() external int m_cBound;
+  @Uint32() external int m_cPooled;
+  @Uint32() external int m_cInCall;
+  @Uint32() external int m_dwRespTime;
+  @Uint32() external int m_cCallsCompleted;
+  @Uint32() external int m_cCallsFailed;
+}
+
+class ApplicationProcessSummary extends Struct {
+  external GUID PartitionIdPrimaryApplication;
+  external GUID ApplicationIdPrimaryApplication;
+  external GUID ApplicationInstanceId;
+  @Uint32() external int ProcessId;
+  @Uint32() external int Type;
+  external Pointer<Utf16> ProcessExeName;
+  @Int32() external int IsService;
+  @Int32() external int IsPaused;
+  @Int32() external int IsRecycled;
+}
+
+class ApplicationProcessStatistics extends Struct {
+  @Uint32() external int NumCallsOutstanding;
+  @Uint32() external int NumTrackedComponents;
+  @Uint32() external int NumComponentInstances;
+  @Uint32() external int AvgCallsPerSecond;
+  @Uint32() external int Reserved1;
+  @Uint32() external int Reserved2;
+  @Uint32() external int Reserved3;
+  @Uint32() external int Reserved4;
+}
+
+class ApplicationProcessRecycleInfo extends Struct {
+  @Int32() external int IsRecyclable;
+  @Int32() external int IsRecycled;
+  external FILETIME TimeRecycled;
+  external FILETIME TimeToTerminate;
+  @Int32() external int RecycleReasonCode;
+  @Int32() external int IsPendingRecycle;
+  @Int32() external int HasAutomaticLifetimeRecycling;
+  external FILETIME TimeForAutomaticRecycling;
+  @Uint32() external int MemoryLimitInKB;
+  @Uint32() external int MemoryUsageInKBLastCheck;
+  @Uint32() external int ActivationLimit;
+  @Uint32() external int NumActivationsLastReported;
+  @Uint32() external int CallLimit;
+  @Uint32() external int NumCallsLastReported;
+}
+
+class ApplicationSummary extends Struct {
+  external GUID ApplicationInstanceId;
+  external GUID PartitionId;
+  external GUID ApplicationId;
+  @Uint32() external int Type;
+  external Pointer<Utf16> ApplicationName;
+  @Uint32() external int NumTrackedComponents;
+  @Uint32() external int NumComponentInstances;
+}
+
+class ComponentSummary extends Struct {
+  external GUID ApplicationInstanceId;
+  external GUID PartitionId;
+  external GUID ApplicationId;
+  external GUID Clsid;
+  external Pointer<Utf16> ClassName;
+  external Pointer<Utf16> ApplicationName;
+}
+
+class ComponentStatistics extends Struct {
+  @Uint32() external int NumInstances;
+  @Uint32() external int NumBoundReferences;
+  @Uint32() external int NumPooledObjects;
+  @Uint32() external int NumObjectsInCall;
+  @Uint32() external int AvgResponseTimeInMs;
+  @Uint32() external int NumCallsCompletedRecent;
+  @Uint32() external int NumCallsFailedRecent;
+  @Uint32() external int NumCallsCompletedTotal;
+  @Uint32() external int NumCallsFailedTotal;
+  @Uint32() external int Reserved1;
+  @Uint32() external int Reserved2;
+  @Uint32() external int Reserved3;
+  @Uint32() external int Reserved4;
+}
+
+class ComponentHangMonitorInfo extends Struct {
+  @Int32() external int IsMonitored;
+  @Int32() external int TerminateOnHang;
+  @Uint32() external int AvgCallThresholdInMs;
+}
+
+class CrmLogRecordRead extends Struct {
+  @Uint32() external int dwCrmFlags;
+  @Uint32() external int dwSequenceNumber;
+  external BLOB blobUserData;
+}
+
+class CEventSystem extends Struct {
+}
+
+class CEventPublisher extends Struct {
+}
+
+class CEventClass extends Struct {
+}
+
+class CEventSubscription extends Struct {
+}
+
+class EventObjectChange extends Struct {
+}
+
+class EventObjectChange2 extends Struct {
+}
+
+class COMEVENTSYSCHANGEINFO extends Struct {
+  @Uint32() external int cbSize;
+  @Uint32() external int changeType;
+  external Pointer<Utf16> objectId;
+  external Pointer<Utf16> partitionId;
+  external Pointer<Utf16> applicationId;
+  @Array(10)
+  external Array<GUID> reserved;
+}
+
 class COAUTHIDENTITY extends Struct {
   external Pointer<Uint16> User;
   @Uint32() external int UserLength;
@@ -87,29 +443,34 @@ class COAUTHINFO extends Struct {
 
 class BYTE_BLOB extends Struct {
   @Uint32() external int clSize;
-  external __ubyte__ abData;
+  @Array(1)
+  external Array<Uint8> abData;
 }
 
 class WORD_BLOB extends Struct {
   @Uint32() external int clSize;
-  external __ushort__ asData;
+  @Array(1)
+  external Array<Uint16> asData;
 }
 
 class DWORD_BLOB extends Struct {
   @Uint32() external int clSize;
-  external __uint__ alData;
+  @Array(1)
+  external Array<Uint32> alData;
 }
 
 class FLAGGED_BYTE_BLOB extends Struct {
   @Uint32() external int fFlags;
   @Uint32() external int clSize;
-  external __ubyte__ abData;
+  @Array(1)
+  external Array<Uint8> abData;
 }
 
 class FLAGGED_WORD_BLOB extends Struct {
   @Uint32() external int fFlags;
   @Uint32() external int clSize;
-  external __ushort__ asData;
+  @Array(1)
+  external Array<Uint16> asData;
 }
 
 class BYTE_SIZEDARR extends Struct {
@@ -157,7 +518,8 @@ class RPCOLEMESSAGE extends Struct {
   external Pointer Buffer;
   @Uint32() external int cbBuffer;
   @Uint32() external int iMethod;
-  external ____ reserved2;
+  @Array(5)
+  external Array<Pointer> reserved2;
   @Uint32() external int rpcFlags;
 }
 
@@ -196,7 +558,7 @@ class BIND_OPTS extends Struct {
 }
 
 class BIND_OPTS2 extends Struct {
-  external BIND_OPTS __AnonymousBase_objidl_L8477_C36;
+  external BIND_OPTS __AnonymousBase_objidl_L8479_C36;
   @Uint32() external int dwTrackFlags;
   @Uint32() external int dwClassContext;
   @Uint32() external int locale;
@@ -204,7 +566,7 @@ class BIND_OPTS2 extends Struct {
 }
 
 class BIND_OPTS3 extends Struct {
-  external BIND_OPTS2 __AnonymousBase_objidl_L8501_C36;
+  external BIND_OPTS2 __AnonymousBase_objidl_L8503_C36;
   @IntPtr() external int hwnd;
 }
 
@@ -214,7 +576,8 @@ class DVTARGETDEVICE extends Struct {
   @Uint16() external int tdDeviceNameOffset;
   @Uint16() external int tdPortNameOffset;
   @Uint16() external int tdExtDevmodeOffset;
-  external __ubyte__ tdData;
+  @Array(1)
+  external Array<Uint8> tdData;
 }
 
 class FORMATETC extends Struct {
@@ -238,7 +601,8 @@ class RemSTGMEDIUM extends Struct {
   @Uint32() external int pData;
   @Uint32() external int pUnkForRelease;
   @Uint32() external int cbData;
-  external __ubyte__ data;
+  @Array(1)
+  external Array<Uint8> data;
 }
 
 class STGMEDIUM extends Struct {
@@ -294,7 +658,8 @@ class OIFI extends Struct {
 }
 
 class OleMenuGroupWidths extends Struct {
-  external __int__ width;
+  @Array(6)
+  external Array<Int32> width;
 }
 
 class OLEVERB extends Struct {
@@ -371,9 +736,12 @@ class StartParam extends Struct {
 
 class ZONEATTRIBUTES extends Struct {
   @Uint32() external int cbSize;
-  external __ushort__ szDisplayName;
-  external __ushort__ szDescription;
-  external __ushort__ szIconPath;
+  @Array(129)
+  external Array<Uint16> szDisplayName;
+  @Array(128)
+  external Array<Uint16> szDescription;
+  @Array(129)
+  external Array<Uint16> szIconPath;
   @Uint32() external int dwTemplateMinLevel;
   @Uint32() external int dwTemplateRecommended;
   @Uint32() external int dwTemplateCurrentLevel;
@@ -568,7 +936,8 @@ class PAGESET extends Struct {
   @Int32() external int fOddPages;
   @Int32() external int fEvenPages;
   @Uint32() external int cPageRange;
-  external PAGERANGE rgPages;
+  @Array(1)
+  external Array<PAGERANGE> rgPages;
 }
 
 class OLECMD extends Struct {
@@ -580,7 +949,8 @@ class OLECMDTEXT extends Struct {
   @Uint32() external int cmdtextf;
   @Uint32() external int cwActual;
   @Uint32() external int cwBuf;
-  external __ushort__ rgwz;
+  @Array(1)
+  external Array<Uint16> rgwz;
 }
 
 class OLEUIINSERTOBJECTW extends Struct {
@@ -733,7 +1103,8 @@ class OLEUICHANGEICONW extends Struct {
   @IntPtr() external int hResource;
   @IntPtr() external int hMetaPict;
   external GUID clsid;
-  external __ushort__ szIconExe;
+  @Array(129)
+  external Array<Uint16> szIconExe;
   @Int32() external int cchIconExe;
 }
 
@@ -749,7 +1120,8 @@ class OLEUICHANGEICONA extends Struct {
   @IntPtr() external int hResource;
   @IntPtr() external int hMetaPict;
   external GUID clsid;
-  external __byte__ szIconExe;
+  @Array(129)
+  external Array<Int8> szIconExe;
   @Int32() external int cchIconExe;
 }
 
@@ -842,7 +1214,8 @@ class OLEUICHANGESOURCEW extends Struct {
   external Pointer<Utf16> lpszTemplate;
   @IntPtr() external int hResource;
   external Pointer<OPENFILENAME> lpOFN;
-  external __uint__ dwReserved1;
+  @Array(4)
+  external Array<Uint32> dwReserved1;
   external Pointer lpOleUILinkContainer;
   @Uint32() external int dwLink;
   external Pointer<Utf16> lpszDisplayName;
@@ -862,7 +1235,8 @@ class OLEUICHANGESOURCEA extends Struct {
   external Pointer<Utf8> lpszTemplate;
   @IntPtr() external int hResource;
   external Pointer<OPENFILENAMEA> lpOFN;
-  external __uint__ dwReserved1;
+  @Array(4)
+  external Array<Uint32> dwReserved1;
   external Pointer lpOleUILinkContainer;
   @Uint32() external int dwLink;
   external Pointer<Utf8> lpszDisplayName;
@@ -874,30 +1248,36 @@ class OLEUICHANGESOURCEA extends Struct {
 class OLEUIGNRLPROPSW extends Struct {
   @Uint32() external int cbStruct;
   @Uint32() external int dwFlags;
-  external __uint__ dwReserved1;
+  @Array(2)
+  external Array<Uint32> dwReserved1;
   external Pointer<FNOLEUIHOOK> lpfnHook;
   @IntPtr() external int lCustData;
-  external __uint__ dwReserved2;
+  @Array(3)
+  external Array<Uint32> dwReserved2;
   external Pointer<OLEUIOBJECTPROPS> lpOP;
 }
 
 class OLEUIGNRLPROPSA extends Struct {
   @Uint32() external int cbStruct;
   @Uint32() external int dwFlags;
-  external __uint__ dwReserved1;
+  @Array(2)
+  external Array<Uint32> dwReserved1;
   external Pointer<FNOLEUIHOOK> lpfnHook;
   @IntPtr() external int lCustData;
-  external __uint__ dwReserved2;
+  @Array(3)
+  external Array<Uint32> dwReserved2;
   external Pointer<OLEUIOBJECTPROPSA> lpOP;
 }
 
 class OLEUIVIEWPROPSW extends Struct {
   @Uint32() external int cbStruct;
   @Uint32() external int dwFlags;
-  external __uint__ dwReserved1;
+  @Array(2)
+  external Array<Uint32> dwReserved1;
   external Pointer<FNOLEUIHOOK> lpfnHook;
   @IntPtr() external int lCustData;
-  external __uint__ dwReserved2;
+  @Array(3)
+  external Array<Uint32> dwReserved2;
   external Pointer<OLEUIOBJECTPROPS> lpOP;
   @Int32() external int nScaleMin;
   @Int32() external int nScaleMax;
@@ -906,10 +1286,12 @@ class OLEUIVIEWPROPSW extends Struct {
 class OLEUIVIEWPROPSA extends Struct {
   @Uint32() external int cbStruct;
   @Uint32() external int dwFlags;
-  external __uint__ dwReserved1;
+  @Array(2)
+  external Array<Uint32> dwReserved1;
   external Pointer<FNOLEUIHOOK> lpfnHook;
   @IntPtr() external int lCustData;
-  external __uint__ dwReserved2;
+  @Array(3)
+  external Array<Uint32> dwReserved2;
   external Pointer<OLEUIOBJECTPROPSA> lpOP;
   @Int32() external int nScaleMin;
   @Int32() external int nScaleMax;
@@ -918,20 +1300,24 @@ class OLEUIVIEWPROPSA extends Struct {
 class OLEUILINKPROPSW extends Struct {
   @Uint32() external int cbStruct;
   @Uint32() external int dwFlags;
-  external __uint__ dwReserved1;
+  @Array(2)
+  external Array<Uint32> dwReserved1;
   external Pointer<FNOLEUIHOOK> lpfnHook;
   @IntPtr() external int lCustData;
-  external __uint__ dwReserved2;
+  @Array(3)
+  external Array<Uint32> dwReserved2;
   external Pointer<OLEUIOBJECTPROPS> lpOP;
 }
 
 class OLEUILINKPROPSA extends Struct {
   @Uint32() external int cbStruct;
   @Uint32() external int dwFlags;
-  external __uint__ dwReserved1;
+  @Array(2)
+  external Array<Uint32> dwReserved1;
   external Pointer<FNOLEUIHOOK> lpfnHook;
   @IntPtr() external int lCustData;
-  external __uint__ dwReserved2;
+  @Array(3)
+  external Array<Uint32> dwReserved2;
   external Pointer<OLEUIOBJECTPROPSA> lpOP;
 }
 
@@ -964,7 +1350,8 @@ class OLEUIOBJECTPROPSA extends Struct {
 class CATEGORYINFO extends Struct {
   external GUID catid;
   @Uint32() external int lcid;
-  external __ushort__ szDescription;
+  @Array(128)
+  external Array<Uint16> szDescription;
 }
 
 class CALLFRAMEINFO extends Struct {
@@ -995,356 +1382,6 @@ class CALLFRAME_MARSHALCONTEXT extends Struct {
   external Pointer pvDestContext;
   external Pointer punkReserved;
   external GUID guidTransferSyntax;
-}
-
-class CSPLATFORM extends Struct {
-  @Uint32() external int dwPlatformId;
-  @Uint32() external int dwVersionHi;
-  @Uint32() external int dwVersionLo;
-  @Uint32() external int dwProcessorArch;
-}
-
-class QUERYCONTEXT extends Struct {
-  @Uint32() external int dwContext;
-  external CSPLATFORM Platform;
-  @Uint32() external int Locale;
-  @Uint32() external int dwVersionHi;
-  @Uint32() external int dwVersionLo;
-}
-
-class SecurityIdentity extends Struct {
-}
-
-class SecurityCallers extends Struct {
-}
-
-class SecurityCallContext extends Struct {
-}
-
-class GetSecurityCallContextAppObject extends Struct {
-}
-
-class Dummy30040732 extends Struct {
-}
-
-class TransactionContext extends Struct {
-}
-
-class TransactionContextEx extends Struct {
-}
-
-class ByotServerEx extends Struct {
-}
-
-class CServiceConfig extends Struct {
-}
-
-class ServicePool extends Struct {
-}
-
-class ServicePoolConfig extends Struct {
-}
-
-class SharedProperty extends Struct {
-}
-
-class SharedPropertyGroup extends Struct {
-}
-
-class SharedPropertyGroupManager extends Struct {
-}
-
-class COMEvents extends Struct {
-}
-
-class CoMTSLocator extends Struct {
-}
-
-class MtsGrp extends Struct {
-}
-
-class ComServiceEvents extends Struct {
-}
-
-class ComSystemAppEventData extends Struct {
-}
-
-class CRMClerk extends Struct {
-}
-
-class CRMRecoveryClerk extends Struct {
-}
-
-class LBEvents extends Struct {
-}
-
-class MessageMover extends Struct {
-}
-
-class DispenserManager extends Struct {
-}
-
-class PoolMgr extends Struct {
-}
-
-class EventServer extends Struct {
-}
-
-class TrackerServer extends Struct {
-}
-
-class AppDomainHelper extends Struct {
-}
-
-class ClrAssemblyLocator extends Struct {
-}
-
-class COMAdminCatalog extends Struct {
-}
-
-class COMAdminCatalogObject extends Struct {
-}
-
-class COMAdminCatalogCollection extends Struct {
-}
-
-class BOID extends Struct {
-  external __ubyte__ rgb;
-}
-
-class XACTTRANSINFO extends Struct {
-  external BOID uow;
-  @Int32() external int isoLevel;
-  @Uint32() external int isoFlags;
-  @Uint32() external int grfTCSupported;
-  @Uint32() external int grfRMSupported;
-  @Uint32() external int grfTCSupportedRetaining;
-  @Uint32() external int grfRMSupportedRetaining;
-}
-
-class XACTSTATS extends Struct {
-  @Uint32() external int cOpen;
-  @Uint32() external int cCommitting;
-  @Uint32() external int cCommitted;
-  @Uint32() external int cAborting;
-  @Uint32() external int cAborted;
-  @Uint32() external int cInDoubt;
-  @Uint32() external int cHeuristicDecision;
-  external FILETIME timeTransactionsUp;
-}
-
-class XACTOPT extends Struct {
-  @Uint32() external int ulTimeout;
-  external __ubyte__ szDescription;
-}
-
-class xid_t extends Struct {
-  @Int32() external int formatID;
-  @Int32() external int gtrid_length;
-  @Int32() external int bqual_length;
-  external __byte__ data;
-}
-
-class xa_switch_t extends Struct {
-  external __byte__ name;
-  @Int32() external int flags;
-  @Int32() external int version;
-  @IntPtr() external int xa_open_entry;
-  @IntPtr() external int xa_close_entry;
-  @IntPtr() external int xa_start_entry;
-  @IntPtr() external int xa_end_entry;
-  @IntPtr() external int xa_rollback_entry;
-  @IntPtr() external int xa_prepare_entry;
-  @IntPtr() external int xa_commit_entry;
-  @IntPtr() external int xa_recover_entry;
-  @IntPtr() external int xa_forget_entry;
-  @IntPtr() external int xa_complete_entry;
-}
-
-class _ProxyConfigParams extends Struct {
-  @Uint16() external int wcThreadsMax;
-}
-
-class COMSVCSEVENTINFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwPid;
-  @Int64() external int lTime;
-  @Int32() external int lMicroTime;
-  @Int64() external int perfCount;
-  external GUID guidApp;
-  external Pointer<Utf16> sMachineName;
-}
-
-class RECYCLE_INFO extends Struct {
-  external GUID guidCombaseProcessIdentifier;
-  @Int64() external int ProcessStartTime;
-  @Uint32() external int dwRecycleLifetimeLimit;
-  @Uint32() external int dwRecycleMemoryLimit;
-  @Uint32() external int dwRecycleExpirationTimeout;
-}
-
-class HANG_INFO extends Struct {
-  @Int32() external int fAppHangMonitorEnabled;
-  @Int32() external int fTerminateOnHang;
-  @Uint32() external int DumpType;
-  @Uint32() external int dwHangTimeout;
-  @Uint32() external int dwDumpCount;
-  @Uint32() external int dwInfoMsgCount;
-}
-
-class CAppStatistics extends Struct {
-  @Uint32() external int m_cTotalCalls;
-  @Uint32() external int m_cTotalInstances;
-  @Uint32() external int m_cTotalClasses;
-  @Uint32() external int m_cCallsPerSecond;
-}
-
-class CAppData extends Struct {
-  @Uint32() external int m_idApp;
-  external __ushort__ m_szAppGuid;
-  @Uint32() external int m_dwAppProcessId;
-  external CAppStatistics m_AppStatistics;
-}
-
-class CCLSIDData extends Struct {
-  external GUID m_clsid;
-  @Uint32() external int m_cReferences;
-  @Uint32() external int m_cBound;
-  @Uint32() external int m_cPooled;
-  @Uint32() external int m_cInCall;
-  @Uint32() external int m_dwRespTime;
-  @Uint32() external int m_cCallsCompleted;
-  @Uint32() external int m_cCallsFailed;
-}
-
-class CCLSIDData2 extends Struct {
-  external GUID m_clsid;
-  external GUID m_appid;
-  external GUID m_partid;
-  external Pointer<Utf16> m_pwszAppName;
-  external Pointer<Utf16> m_pwszCtxName;
-  @Uint32() external int m_eAppType;
-  @Uint32() external int m_cReferences;
-  @Uint32() external int m_cBound;
-  @Uint32() external int m_cPooled;
-  @Uint32() external int m_cInCall;
-  @Uint32() external int m_dwRespTime;
-  @Uint32() external int m_cCallsCompleted;
-  @Uint32() external int m_cCallsFailed;
-}
-
-class ApplicationProcessSummary extends Struct {
-  external GUID PartitionIdPrimaryApplication;
-  external GUID ApplicationIdPrimaryApplication;
-  external GUID ApplicationInstanceId;
-  @Uint32() external int ProcessId;
-  @Uint32() external int Type;
-  external Pointer<Utf16> ProcessExeName;
-  @Int32() external int IsService;
-  @Int32() external int IsPaused;
-  @Int32() external int IsRecycled;
-}
-
-class ApplicationProcessStatistics extends Struct {
-  @Uint32() external int NumCallsOutstanding;
-  @Uint32() external int NumTrackedComponents;
-  @Uint32() external int NumComponentInstances;
-  @Uint32() external int AvgCallsPerSecond;
-  @Uint32() external int Reserved1;
-  @Uint32() external int Reserved2;
-  @Uint32() external int Reserved3;
-  @Uint32() external int Reserved4;
-}
-
-class ApplicationProcessRecycleInfo extends Struct {
-  @Int32() external int IsRecyclable;
-  @Int32() external int IsRecycled;
-  external FILETIME TimeRecycled;
-  external FILETIME TimeToTerminate;
-  @Int32() external int RecycleReasonCode;
-  @Int32() external int IsPendingRecycle;
-  @Int32() external int HasAutomaticLifetimeRecycling;
-  external FILETIME TimeForAutomaticRecycling;
-  @Uint32() external int MemoryLimitInKB;
-  @Uint32() external int MemoryUsageInKBLastCheck;
-  @Uint32() external int ActivationLimit;
-  @Uint32() external int NumActivationsLastReported;
-  @Uint32() external int CallLimit;
-  @Uint32() external int NumCallsLastReported;
-}
-
-class ApplicationSummary extends Struct {
-  external GUID ApplicationInstanceId;
-  external GUID PartitionId;
-  external GUID ApplicationId;
-  @Uint32() external int Type;
-  external Pointer<Utf16> ApplicationName;
-  @Uint32() external int NumTrackedComponents;
-  @Uint32() external int NumComponentInstances;
-}
-
-class ComponentSummary extends Struct {
-  external GUID ApplicationInstanceId;
-  external GUID PartitionId;
-  external GUID ApplicationId;
-  external GUID Clsid;
-  external Pointer<Utf16> ClassName;
-  external Pointer<Utf16> ApplicationName;
-}
-
-class ComponentStatistics extends Struct {
-  @Uint32() external int NumInstances;
-  @Uint32() external int NumBoundReferences;
-  @Uint32() external int NumPooledObjects;
-  @Uint32() external int NumObjectsInCall;
-  @Uint32() external int AvgResponseTimeInMs;
-  @Uint32() external int NumCallsCompletedRecent;
-  @Uint32() external int NumCallsFailedRecent;
-  @Uint32() external int NumCallsCompletedTotal;
-  @Uint32() external int NumCallsFailedTotal;
-  @Uint32() external int Reserved1;
-  @Uint32() external int Reserved2;
-  @Uint32() external int Reserved3;
-  @Uint32() external int Reserved4;
-}
-
-class ComponentHangMonitorInfo extends Struct {
-  @Int32() external int IsMonitored;
-  @Int32() external int TerminateOnHang;
-  @Uint32() external int AvgCallThresholdInMs;
-}
-
-class CrmLogRecordRead extends Struct {
-  @Uint32() external int dwCrmFlags;
-  @Uint32() external int dwSequenceNumber;
-  external BLOB blobUserData;
-}
-
-class CEventSystem extends Struct {
-}
-
-class CEventPublisher extends Struct {
-}
-
-class CEventClass extends Struct {
-}
-
-class CEventSubscription extends Struct {
-}
-
-class EventObjectChange extends Struct {
-}
-
-class EventObjectChange2 extends Struct {
-}
-
-class COMEVENTSYSCHANGEINFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int changeType;
-  external Pointer<Utf16> objectId;
-  external Pointer<Utf16> partitionId;
-  external Pointer<Utf16> applicationId;
-  external GUID reserved;
 }
 
 class ACTRL_ACCESS_ENTRYA extends Struct {

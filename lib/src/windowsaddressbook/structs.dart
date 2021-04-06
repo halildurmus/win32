@@ -44,17 +44,21 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class ENTRYID extends Struct {
-  external __ubyte__ abFlags;
-  external __ubyte__ ab;
+  @Array(4)
+  external Array<Uint8> abFlags;
+  @Array(1)
+  external Array<Uint8> ab;
 }
 
 class MAPIUID extends Struct {
-  external __ubyte__ ab;
+  @Array(16)
+  external Array<Uint8> ab;
 }
 
 class SPropTagArray extends Struct {
   @Uint32() external int cValues;
-  external __uint__ aulPropTag;
+  @Array(1)
+  external Array<Uint32> aulPropTag;
 }
 
 class SBinary extends Struct {
@@ -167,29 +171,34 @@ class SPropProblem extends Struct {
 
 class SPropProblemArray extends Struct {
   @Uint32() external int cProblem;
-  external SPropProblem aProblem;
+  @Array(1)
+  external Array<SPropProblem> aProblem;
 }
 
 class FLATENTRY extends Struct {
   @Uint32() external int cb;
-  external __ubyte__ abEntry;
+  @Array(1)
+  external Array<Uint8> abEntry;
 }
 
 class FLATENTRYLIST extends Struct {
   @Uint32() external int cEntries;
   @Uint32() external int cbEntries;
-  external __ubyte__ abEntries;
+  @Array(1)
+  external Array<Uint8> abEntries;
 }
 
 class MTSID extends Struct {
   @Uint32() external int cb;
-  external __ubyte__ ab;
+  @Array(1)
+  external Array<Uint8> ab;
 }
 
 class FLATMTSIDLIST extends Struct {
   @Uint32() external int cMTSIDs;
   @Uint32() external int cbMTSIDs;
-  external __ubyte__ abMTSIDs;
+  @Array(1)
+  external Array<Uint8> abMTSIDs;
 }
 
 class ADRENTRY extends Struct {
@@ -200,7 +209,8 @@ class ADRENTRY extends Struct {
 
 class ADRLIST extends Struct {
   @Uint32() external int cEntries;
-  external ADRENTRY aEntries;
+  @Array(1)
+  external Array<ADRENTRY> aEntries;
 }
 
 class SRow extends Struct {
@@ -211,7 +221,8 @@ class SRow extends Struct {
 
 class SRowSet extends Struct {
   @Uint32() external int cRows;
-  external SRow aRow;
+  @Array(1)
+  external Array<SRow> aRow;
 }
 
 class MAPIERROR extends Struct {
@@ -296,7 +307,8 @@ class SSortOrderSet extends Struct {
   @Uint32() external int cSorts;
   @Uint32() external int cCategories;
   @Uint32() external int cExpanded;
-  external SSortOrder aSort;
+  @Array(1)
+  external Array<SSortOrder> aSort;
 }
 
 class SAndRestriction extends Struct {
@@ -368,7 +380,8 @@ class SRestriction extends Struct {
 
 class _flaglist extends Struct {
   @Uint32() external int cFlags;
-  external __uint__ ulFlag;
+  @Array(1)
+  external Array<Uint32> ulFlag;
 }
 
 class ADRPARM extends Struct {

@@ -1,70 +1,4 @@
 /// {@category Enum}
-class UpdateICMRegKey_command {
-  static const ICM_ADDPROFILE = 0x00000001;
-  static const ICM_DELETEPROFILE = 0x00000002;
-  static const ICM_QUERYPROFILE = 0x00000003;
-  static const ICM_SETDEFAULTPROFILE = 0x00000004;
-  static const ICM_REGISTERICMATCHER = 0x00000005;
-  static const ICM_UNREGISTERICMATCHER = 0x00000006;
-  static const ICM_QUERYMATCH = 0x00000007;
-}
-
-/// {@category Enum}
-class ColorMatchToTarget_actionFlags {
-  static const CS_ENABLE = 0x00000001;
-  static const CS_DISABLE = 0x00000002;
-  static const CS_DELETE_TRANSFORM = 0x00000003;
-}
-
-/// {@category Enum}
-class COLORTYPE {
-  static const COLOR_GRAY = 0x00000001;
-  static const COLOR_RGB = 0x00000002;
-  static const COLOR_XYZ = 0x00000003;
-  static const COLOR_Yxy = 0x00000004;
-  static const COLOR_Lab = 0x00000005;
-  static const COLOR_3_CHANNEL = 0x00000006;
-  static const COLOR_CMYK = 0x00000007;
-  static const COLOR_5_CHANNEL = 0x00000008;
-  static const COLOR_6_CHANNEL = 0x00000009;
-  static const COLOR_7_CHANNEL = 0x0000000a;
-  static const COLOR_8_CHANNEL = 0x0000000b;
-  static const COLOR_NAMED = 0x0000000c;
-}
-
-/// {@category Enum}
-class COLORPROFILETYPE {
-  static const CPT_ICC = 0x00000000;
-  static const CPT_DMP = 0x00000001;
-  static const CPT_CAMP = 0x00000002;
-  static const CPT_GMMP = 0x00000003;
-}
-
-/// {@category Enum}
-class COLORPROFILESUBTYPE {
-  static const CPST_PERCEPTUAL = 0x00000000;
-  static const CPST_RELATIVE_COLORIMETRIC = 0x00000001;
-  static const CPST_SATURATION = 0x00000002;
-  static const CPST_ABSOLUTE_COLORIMETRIC = 0x00000003;
-  static const CPST_NONE = 0x00000004;
-  static const CPST_RGB_WORKING_SPACE = 0x00000005;
-  static const CPST_CUSTOM_WORKING_SPACE = 0x00000006;
-  static const CPST_STANDARD_DISPLAY_COLOR_MODE = 0x00000007;
-  static const CPST_EXTENDED_DISPLAY_COLOR_MODE = 0x00000008;
-}
-
-/// {@category Enum}
-class COLORDATATYPE {
-  static const COLOR_BYTE = 0x00000001;
-  static const COLOR_WORD = 0x00000002;
-  static const COLOR_FLOAT = 0x00000003;
-  static const COLOR_S2DOT13FIXED = 0x00000004;
-  static const COLOR_10b_R10G10B10A2 = 0x00000005;
-  static const COLOR_10b_R10G10B10A2_XR = 0x00000006;
-  static const COLOR_FLOAT16 = 0x00000007;
-}
-
-/// {@category Enum}
 class BMFORMAT {
   static const BM_x555RGB = 0x00000000;
   static const BM_x555XYZ = 0x00000101;
@@ -107,6 +41,72 @@ class BMFORMAT {
   static const BM_R10G10B10A2 = 0x00000701;
   static const BM_R10G10B10A2_XR = 0x00000702;
   static const BM_R16G16B16A16_FLOAT = 0x00000703;
+}
+
+/// {@category Enum}
+class COLORDATATYPE {
+  static const COLOR_BYTE = 0x00000001;
+  static const COLOR_WORD = 0x00000002;
+  static const COLOR_FLOAT = 0x00000003;
+  static const COLOR_S2DOT13FIXED = 0x00000004;
+  static const COLOR_10b_R10G10B10A2 = 0x00000005;
+  static const COLOR_10b_R10G10B10A2_XR = 0x00000006;
+  static const COLOR_FLOAT16 = 0x00000007;
+}
+
+/// {@category Enum}
+class COLORPROFILESUBTYPE {
+  static const CPST_PERCEPTUAL = 0x00000000;
+  static const CPST_RELATIVE_COLORIMETRIC = 0x00000001;
+  static const CPST_SATURATION = 0x00000002;
+  static const CPST_ABSOLUTE_COLORIMETRIC = 0x00000003;
+  static const CPST_NONE = 0x00000004;
+  static const CPST_RGB_WORKING_SPACE = 0x00000005;
+  static const CPST_CUSTOM_WORKING_SPACE = 0x00000006;
+  static const CPST_STANDARD_DISPLAY_COLOR_MODE = 0x00000007;
+  static const CPST_EXTENDED_DISPLAY_COLOR_MODE = 0x00000008;
+}
+
+/// {@category Enum}
+class COLORPROFILETYPE {
+  static const CPT_ICC = 0x00000000;
+  static const CPT_DMP = 0x00000001;
+  static const CPT_CAMP = 0x00000002;
+  static const CPT_GMMP = 0x00000003;
+}
+
+/// {@category Enum}
+class COLORTYPE {
+  static const COLOR_GRAY = 0x00000001;
+  static const COLOR_RGB = 0x00000002;
+  static const COLOR_XYZ = 0x00000003;
+  static const COLOR_Yxy = 0x00000004;
+  static const COLOR_Lab = 0x00000005;
+  static const COLOR_3_CHANNEL = 0x00000006;
+  static const COLOR_CMYK = 0x00000007;
+  static const COLOR_5_CHANNEL = 0x00000008;
+  static const COLOR_6_CHANNEL = 0x00000009;
+  static const COLOR_7_CHANNEL = 0x0000000a;
+  static const COLOR_8_CHANNEL = 0x0000000b;
+  static const COLOR_NAMED = 0x0000000c;
+}
+
+/// {@category Enum}
+class ColorMatchToTarget_actionFlags {
+  static const CS_ENABLE = 0x00000001;
+  static const CS_DISABLE = 0x00000002;
+  static const CS_DELETE_TRANSFORM = 0x00000003;
+}
+
+/// {@category Enum}
+class UpdateICMRegKey_command {
+  static const ICM_ADDPROFILE = 0x00000001;
+  static const ICM_DELETEPROFILE = 0x00000002;
+  static const ICM_QUERYPROFILE = 0x00000003;
+  static const ICM_SETDEFAULTPROFILE = 0x00000004;
+  static const ICM_REGISTERICMATCHER = 0x00000005;
+  static const ICM_UNREGISTERICMATCHER = 0x00000006;
+  static const ICM_QUERYMATCH = 0x00000007;
 }
 
 /// {@category Enum}

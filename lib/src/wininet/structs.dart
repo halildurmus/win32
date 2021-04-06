@@ -186,13 +186,13 @@ class IncomingCookieState extends Struct {
   @Int32() external int cLeashed;
   @Int32() external int cDowngraded;
   @Int32() external int cBlocked;
-  external Pointer<Int8> pszLocation;
+  external Pointer<Utf8> pszLocation;
 }
 
 class OutgoingCookieState extends Struct {
   @Int32() external int cSent;
   @Int32() external int cSuppressed;
-  external Pointer<Int8> pszLocation;
+  external Pointer<Utf8> pszLocation;
 }
 
 class InternetCookieHistory extends Struct {
@@ -208,21 +208,25 @@ class CookieDecision extends Struct {
 }
 
 class GOPHER_FIND_DATAA extends Struct {
-  external __byte__ DisplayString;
+  @Array(128)
+  external Array<Int8> DisplayString;
   @Uint32() external int GopherType;
   @Uint32() external int SizeLow;
   @Uint32() external int SizeHigh;
   external FILETIME LastModificationTime;
-  external __byte__ Locator;
+  @Array(130)
+  external Array<Int8> Locator;
 }
 
 class GOPHER_FIND_DATAW extends Struct {
-  external __ushort__ DisplayString;
+  @Array(128)
+  external Array<Uint16> DisplayString;
   @Uint32() external int GopherType;
   @Uint32() external int SizeLow;
   @Uint32() external int SizeHigh;
   external FILETIME LastModificationTime;
-  external __ushort__ Locator;
+  @Array(130)
+  external Array<Uint16> Locator;
 }
 
 class GOPHER_ADMIN_ATTRIBUTE_TYPE extends Struct {
@@ -376,8 +380,10 @@ class INTERNET_CACHE_GROUP_INFOA extends Struct {
   @Uint32() external int dwGroupType;
   @Uint32() external int dwDiskUsage;
   @Uint32() external int dwDiskQuota;
-  external __uint__ dwOwnerStorage;
-  external __byte__ szGroupName;
+  @Array(4)
+  external Array<Uint32> dwOwnerStorage;
+  @Array(120)
+  external Array<Int8> szGroupName;
 }
 
 class INTERNET_CACHE_GROUP_INFOW extends Struct {
@@ -386,19 +392,21 @@ class INTERNET_CACHE_GROUP_INFOW extends Struct {
   @Uint32() external int dwGroupType;
   @Uint32() external int dwDiskUsage;
   @Uint32() external int dwDiskQuota;
-  external __uint__ dwOwnerStorage;
-  external __ushort__ szGroupName;
+  @Array(4)
+  external Array<Uint32> dwOwnerStorage;
+  @Array(120)
+  external Array<Uint16> szGroupName;
 }
 
 class AutoProxyHelperVtbl extends Struct {
-  external Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Int32>>>>>>>>>> IsResolvable;
+  @IntPtr() external int IsResolvable;
   @IntPtr() external int GetIPAddress;
   @IntPtr() external int ResolveHostName;
-  external Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Int32>>>>>>>>>> IsInNet;
-  external Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Int32>>>>>>>>>> IsResolvableEx;
+  @IntPtr() external int IsInNet;
+  @IntPtr() external int IsResolvableEx;
   @IntPtr() external int GetIPAddressEx;
   @IntPtr() external int ResolveHostNameEx;
-  external Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Int32>>>>>>>>>> IsInNetEx;
+  @IntPtr() external int IsInNetEx;
   @IntPtr() external int SortIpList;
 }
 
@@ -441,7 +449,8 @@ class INTERNET_DOWNLOAD_MODE_HANDLE extends Struct {
 
 class HTTP_REQUEST_TIMES extends Struct {
   @Uint32() external int cTimes;
-  external __uint64__ rgTimes;
+  @Array(32)
+  external Array<Uint64> rgTimes;
 }
 
 class INTERNET_SERVER_CONNECTION_STATE extends Struct {
@@ -512,12 +521,14 @@ class COOKIE_DLG_INFO extends Struct {
 }
 
 class INTERNET_CACHE_CONFIG_PATH_ENTRYA extends Struct {
-  external __byte__ CachePath;
+  @Array(129)
+  external Array<Int8> CachePath;
   @Uint32() external int dwCacheSize;
 }
 
 class INTERNET_CACHE_CONFIG_PATH_ENTRYW extends Struct {
-  external __ushort__ CachePath;
+  @Array(129)
+  external Array<Uint16> CachePath;
   @Uint32() external int dwCacheSize;
 }
 

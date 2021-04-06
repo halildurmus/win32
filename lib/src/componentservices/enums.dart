@@ -1,64 +1,50 @@
 /// {@category Enum}
-class ICOMAdminCatalog_InstallApplication_lOptionsFlags {
-  static const COMAdminInstallNoUsers = 0x00000000;
-  static const COMAdminInstallUsers = 0x00000001;
-  static const COMAdminInstallForceOverwriteOfFiles = 0x00000002;
-  static const COMAdminInstallForceOverwriteOfFile = 0x00000002;
+class AUTHENTICATION_LEVEL {
+  static const NO_AUTHENTICATION_REQUIRED = 0x00000000;
+  static const INCOMING_AUTHENTICATION_REQUIRED = 0x00000001;
+  static const MUTUAL_AUTHENTICATION_REQUIRED = 0x00000002;
 }
 
 /// {@category Enum}
-class ICOMAdminCatalog_ExportApplication_lOptionsFlags {
-  static const COMAdminExportNoUsers = 0x00000000;
-  static const COMAdminExportUsers = 0x00000001;
-  static const COMAdminExportApplicationProxy = 0x00000002;
-  static const COMAdminExportForceOverwriteOfFile = 0x00000004;
-  static const COMAdminExportIn10Format = 0x00000010;
+class AutoSvcs_Error_Constants {
+  static const mtsErrCtxAborted = 0x8004e002;
+  static const mtsErrCtxAborting = 0x8004e003;
+  static const mtsErrCtxNoContext = 0x8004e004;
+  static const mtsErrCtxNotRegistered = 0x8004e005;
+  static const mtsErrCtxSynchTimeout = 0x8004e006;
+  static const mtsErrCtxOldReference = 0x8004e007;
+  static const mtsErrCtxRoleNotFound = 0x8004e00c;
+  static const mtsErrCtxNoSecurity = 0x8004e00d;
+  static const mtsErrCtxWrongThread = 0x8004e00e;
+  static const mtsErrCtxTMNotAvailable = 0x8004e00f;
+  static const comQCErrApplicationNotQueued = 0x80110600;
+  static const comQCErrNoQueueableInterfaces = 0x80110601;
+  static const comQCErrQueuingServiceNotAvailable = 0x80110602;
+  static const comQCErrQueueTransactMismatch = 0x80110603;
+  static const comqcErrRecorderMarshalled = 0x80110604;
+  static const comqcErrOutParam = 0x80110605;
+  static const comqcErrRecorderNotTrusted = 0x80110606;
+  static const comqcErrPSLoad = 0x80110607;
+  static const comqcErrMarshaledObjSameTxn = 0x80110608;
+  static const comqcErrInvalidMessage = 0x80110650;
+  static const comqcErrMsmqSidUnavailable = 0x80110651;
+  static const comqcErrWrongMsgExtension = 0x80110652;
+  static const comqcErrMsmqServiceUnavailable = 0x80110653;
+  static const comqcErrMsgNotAuthenticated = 0x80110654;
+  static const comqcErrMsmqConnectorUsed = 0x80110655;
+  static const comqcErrBadMarshaledObject = 0x80110656;
 }
 
 /// {@category Enum}
-class ICOMAdminCatalog2_IsSafeToDelete_pCOMAdminInUseFlags {
-  static const COMAdminNotInUse = 0x00000000;
-  static const COMAdminInUseByCatalog = 0x00000001;
-  static const COMAdminInUseByRegistryUnknown = 0x00000002;
-  static const COMAdminInUseByRegistryProxyStub = 0x00000003;
-  static const COMAdminInUseByRegistryTypeLib = 0x00000004;
-  static const COMAdminInUseByRegistryClsid = 0x00000005;
+class COMAdminAccessChecksLevelOptions {
+  static const COMAdminAccessChecksApplicationLevel = 0x00000000;
+  static const COMAdminAccessChecksApplicationComponentLevel = 0x00000001;
 }
 
 /// {@category Enum}
-class CoGetDefaultContext_aptTypeFlags {
-  static const APTTYPE_MTA = 0x00000001;
-  static const APTTYPE_NA = 0x00000002;
-  static const APTTYPE_MAINSTA = 0x00000003;
-}
-
-/// {@category Enum}
-class ImportUnconfiguredComponents_pVarComponentType {
-  static const COMAdmin32BitComponent = 0x00000001;
-  static const COMAdmin64BitComponent = 0x00000002;
-}
-
-/// {@category Enum}
-class COMAdminInUse {
-  static const COMAdminNotInUse = 0x00000000;
-  static const COMAdminInUseByCatalog = 0x00000001;
-  static const COMAdminInUseByRegistryUnknown = 0x00000002;
-  static const COMAdminInUseByRegistryProxyStub = 0x00000003;
-  static const COMAdminInUseByRegistryTypeLib = 0x00000004;
-  static const COMAdminInUseByRegistryClsid = 0x00000005;
-}
-
-/// {@category Enum}
-class COMAdminComponentType {
-  static const COMAdmin32BitComponent = 0x00000001;
-  static const COMAdmin64BitComponent = 0x00000002;
-}
-
-/// {@category Enum}
-class COMAdminApplicationInstallOptions {
-  static const COMAdminInstallNoUsers = 0x00000000;
-  static const COMAdminInstallUsers = 0x00000001;
-  static const COMAdminInstallForceOverwriteOfFiles = 0x00000002;
+class COMAdminActivationOptions {
+  static const COMAdminActivationInproc = 0x00000000;
+  static const COMAdminActivationLocal = 0x00000001;
 }
 
 /// {@category Enum}
@@ -71,52 +57,18 @@ class COMAdminApplicationExportOptions {
 }
 
 /// {@category Enum}
-class COMAdminThreadingModels {
-  static const COMAdminThreadingModelApartment = 0x00000000;
-  static const COMAdminThreadingModelFree = 0x00000001;
-  static const COMAdminThreadingModelMain = 0x00000002;
-  static const COMAdminThreadingModelBoth = 0x00000003;
-  static const COMAdminThreadingModelNeutral = 0x00000004;
-  static const COMAdminThreadingModelNotSpecified = 0x00000005;
+class COMAdminApplicationInstallOptions {
+  static const COMAdminInstallNoUsers = 0x00000000;
+  static const COMAdminInstallUsers = 0x00000001;
+  static const COMAdminInstallForceOverwriteOfFiles = 0x00000002;
 }
 
 /// {@category Enum}
-class COMAdminTransactionOptions {
-  static const COMAdminTransactionIgnored = 0x00000000;
-  static const COMAdminTransactionNone = 0x00000001;
-  static const COMAdminTransactionSupported = 0x00000002;
-  static const COMAdminTransactionRequired = 0x00000003;
-  static const COMAdminTransactionRequiresNew = 0x00000004;
-}
-
-/// {@category Enum}
-class COMAdminTxIsolationLevelOptions {
-  static const COMAdminTxIsolationLevelAny = 0x00000000;
-  static const COMAdminTxIsolationLevelReadUnCommitted = 0x00000001;
-  static const COMAdminTxIsolationLevelReadCommitted = 0x00000002;
-  static const COMAdminTxIsolationLevelRepeatableRead = 0x00000003;
-  static const COMAdminTxIsolationLevelSerializable = 0x00000004;
-}
-
-/// {@category Enum}
-class COMAdminSynchronizationOptions {
-  static const COMAdminSynchronizationIgnored = 0x00000000;
-  static const COMAdminSynchronizationNone = 0x00000001;
-  static const COMAdminSynchronizationSupported = 0x00000002;
-  static const COMAdminSynchronizationRequired = 0x00000003;
-  static const COMAdminSynchronizationRequiresNew = 0x00000004;
-}
-
-/// {@category Enum}
-class COMAdminActivationOptions {
-  static const COMAdminActivationInproc = 0x00000000;
-  static const COMAdminActivationLocal = 0x00000001;
-}
-
-/// {@category Enum}
-class COMAdminAccessChecksLevelOptions {
-  static const COMAdminAccessChecksApplicationLevel = 0x00000000;
-  static const COMAdminAccessChecksApplicationComponentLevel = 0x00000001;
+class COMAdminAuthenticationCapabilitiesOptions {
+  static const COMAdminAuthenticationCapabilitiesNone = 0x00000000;
+  static const COMAdminAuthenticationCapabilitiesSecureReference = 0x00000002;
+  static const COMAdminAuthenticationCapabilitiesStaticCloaking = 0x00000020;
+  static const COMAdminAuthenticationCapabilitiesDynamicCloaking = 0x00000040;
 }
 
 /// {@category Enum}
@@ -131,110 +83,6 @@ class COMAdminAuthenticationLevelOptions {
 }
 
 /// {@category Enum}
-class COMAdminImpersonationLevelOptions {
-  static const COMAdminImpersonationAnonymous = 0x00000001;
-  static const COMAdminImpersonationIdentify = 0x00000002;
-  static const COMAdminImpersonationImpersonate = 0x00000003;
-  static const COMAdminImpersonationDelegate = 0x00000004;
-}
-
-/// {@category Enum}
-class COMAdminAuthenticationCapabilitiesOptions {
-  static const COMAdminAuthenticationCapabilitiesNone = 0x00000000;
-  static const COMAdminAuthenticationCapabilitiesSecureReference = 0x00000002;
-  static const COMAdminAuthenticationCapabilitiesStaticCloaking = 0x00000020;
-  static const COMAdminAuthenticationCapabilitiesDynamicCloaking = 0x00000040;
-}
-
-/// {@category Enum}
-class COMAdminOS {
-  static const COMAdminOSNotInitialized = 0x00000000;
-  static const COMAdminOSWindows3_1 = 0x00000001;
-  static const COMAdminOSWindows9x = 0x00000002;
-  static const COMAdminOSWindows2000 = 0x00000003;
-  static const COMAdminOSWindows2000AdvancedServer = 0x00000004;
-  static const COMAdminOSWindows2000Unknown = 0x00000005;
-  static const COMAdminOSUnknown = 0x00000006;
-  static const COMAdminOSWindowsXPPersonal = 0x0000000b;
-  static const COMAdminOSWindowsXPProfessional = 0x0000000c;
-  static const COMAdminOSWindowsNETStandardServer = 0x0000000d;
-  static const COMAdminOSWindowsNETEnterpriseServer = 0x0000000e;
-  static const COMAdminOSWindowsNETDatacenterServer = 0x0000000f;
-  static const COMAdminOSWindowsNETWebServer = 0x00000010;
-  static const COMAdminOSWindowsLonghornPersonal = 0x00000011;
-  static const COMAdminOSWindowsLonghornProfessional = 0x00000012;
-  static const COMAdminOSWindowsLonghornStandardServer = 0x00000013;
-  static const COMAdminOSWindowsLonghornEnterpriseServer = 0x00000014;
-  static const COMAdminOSWindowsLonghornDatacenterServer = 0x00000015;
-  static const COMAdminOSWindowsLonghornWebServer = 0x00000016;
-  static const COMAdminOSWindows7Personal = 0x00000017;
-  static const COMAdminOSWindows7Professional = 0x00000018;
-  static const COMAdminOSWindows7StandardServer = 0x00000019;
-  static const COMAdminOSWindows7EnterpriseServer = 0x0000001a;
-  static const COMAdminOSWindows7DatacenterServer = 0x0000001b;
-  static const COMAdminOSWindows7WebServer = 0x0000001c;
-  static const COMAdminOSWindows8Personal = 0x0000001d;
-  static const COMAdminOSWindows8Professional = 0x0000001e;
-  static const COMAdminOSWindows8StandardServer = 0x0000001f;
-  static const COMAdminOSWindows8EnterpriseServer = 0x00000020;
-  static const COMAdminOSWindows8DatacenterServer = 0x00000021;
-  static const COMAdminOSWindows8WebServer = 0x00000022;
-  static const COMAdminOSWindowsBluePersonal = 0x00000023;
-  static const COMAdminOSWindowsBlueProfessional = 0x00000024;
-  static const COMAdminOSWindowsBlueStandardServer = 0x00000025;
-  static const COMAdminOSWindowsBlueEnterpriseServer = 0x00000026;
-  static const COMAdminOSWindowsBlueDatacenterServer = 0x00000027;
-  static const COMAdminOSWindowsBlueWebServer = 0x00000028;
-}
-
-/// {@category Enum}
-class COMAdminServiceOptions {
-  static const COMAdminServiceLoadBalanceRouter = 0x00000001;
-}
-
-/// {@category Enum}
-class COMAdminServiceStatusOptions {
-  static const COMAdminServiceStopped = 0x00000000;
-  static const COMAdminServiceStartPending = 0x00000001;
-  static const COMAdminServiceStopPending = 0x00000002;
-  static const COMAdminServiceRunning = 0x00000003;
-  static const COMAdminServiceContinuePending = 0x00000004;
-  static const COMAdminServicePausePending = 0x00000005;
-  static const COMAdminServicePaused = 0x00000006;
-  static const COMAdminServiceUnknownState = 0x00000007;
-}
-
-/// {@category Enum}
-class COMAdminQCMessageAuthenticateOptions {
-  static const COMAdminQCMessageAuthenticateSecureApps = 0x00000000;
-  static const COMAdminQCMessageAuthenticateOff = 0x00000001;
-  static const COMAdminQCMessageAuthenticateOn = 0x00000002;
-}
-
-/// {@category Enum}
-class COMAdminFileFlags {
-  static const COMAdminFileFlagLoadable = 0x00000001;
-  static const COMAdminFileFlagCOM = 0x00000002;
-  static const COMAdminFileFlagContainsPS = 0x00000004;
-  static const COMAdminFileFlagContainsComp = 0x00000008;
-  static const COMAdminFileFlagContainsTLB = 0x00000010;
-  static const COMAdminFileFlagSelfReg = 0x00000020;
-  static const COMAdminFileFlagSelfUnReg = 0x00000040;
-  static const COMAdminFileFlagUnloadableDLL = 0x00000080;
-  static const COMAdminFileFlagDoesNotExist = 0x00000100;
-  static const COMAdminFileFlagAlreadyInstalled = 0x00000200;
-  static const COMAdminFileFlagBadTLB = 0x00000400;
-  static const COMAdminFileFlagGetClassObjFailed = 0x00000800;
-  static const COMAdminFileFlagClassNotAvailable = 0x00001000;
-  static const COMAdminFileFlagRegistrar = 0x00002000;
-  static const COMAdminFileFlagNoRegistrar = 0x00004000;
-  static const COMAdminFileFlagDLLRegsvrFailed = 0x00008000;
-  static const COMAdminFileFlagRegTLBFailed = 0x00010000;
-  static const COMAdminFileFlagRegistrarFailed = 0x00020000;
-  static const COMAdminFileFlagError = 0x00040000;
-}
-
-/// {@category Enum}
 class COMAdminComponentFlags {
   static const COMAdminCompFlagTypeInfoFound = 0x00000001;
   static const COMAdminCompFlagCOMPlusPropertiesFound = 0x00000002;
@@ -242,6 +90,12 @@ class COMAdminComponentFlags {
   static const COMAdminCompFlagInterfacesFound = 0x00000008;
   static const COMAdminCompFlagAlreadyInstalled = 0x00000010;
   static const COMAdminCompFlagNotInApplication = 0x00000020;
+}
+
+/// {@category Enum}
+class COMAdminComponentType {
+  static const COMAdmin32BitComponent = 0x00000001;
+  static const COMAdmin64BitComponent = 0x00000002;
 }
 
 /// {@category Enum}
@@ -337,21 +191,283 @@ class COMAdminErrorCodes {
 }
 
 /// {@category Enum}
-class TX_MISC_CONSTANTS {
-  static const MAX_TRAN_DESC = 0x00000028;
+class COMAdminFileFlags {
+  static const COMAdminFileFlagLoadable = 0x00000001;
+  static const COMAdminFileFlagCOM = 0x00000002;
+  static const COMAdminFileFlagContainsPS = 0x00000004;
+  static const COMAdminFileFlagContainsComp = 0x00000008;
+  static const COMAdminFileFlagContainsTLB = 0x00000010;
+  static const COMAdminFileFlagSelfReg = 0x00000020;
+  static const COMAdminFileFlagSelfUnReg = 0x00000040;
+  static const COMAdminFileFlagUnloadableDLL = 0x00000080;
+  static const COMAdminFileFlagDoesNotExist = 0x00000100;
+  static const COMAdminFileFlagAlreadyInstalled = 0x00000200;
+  static const COMAdminFileFlagBadTLB = 0x00000400;
+  static const COMAdminFileFlagGetClassObjFailed = 0x00000800;
+  static const COMAdminFileFlagClassNotAvailable = 0x00001000;
+  static const COMAdminFileFlagRegistrar = 0x00002000;
+  static const COMAdminFileFlagNoRegistrar = 0x00004000;
+  static const COMAdminFileFlagDLLRegsvrFailed = 0x00008000;
+  static const COMAdminFileFlagRegTLBFailed = 0x00010000;
+  static const COMAdminFileFlagRegistrarFailed = 0x00020000;
+  static const COMAdminFileFlagError = 0x00040000;
 }
 
 /// {@category Enum}
-class ISOLATIONLEVEL {
-  static const ISOLATIONLEVEL_UNSPECIFIED = 0xffffffff;
-  static const ISOLATIONLEVEL_CHAOS = 0x00000010;
-  static const ISOLATIONLEVEL_READUNCOMMITTED = 0x00000100;
-  static const ISOLATIONLEVEL_BROWSE = 0x00000100;
-  static const ISOLATIONLEVEL_CURSORSTABILITY = 0x00001000;
-  static const ISOLATIONLEVEL_READCOMMITTED = 0x00001000;
-  static const ISOLATIONLEVEL_REPEATABLEREAD = 0x00010000;
-  static const ISOLATIONLEVEL_SERIALIZABLE = 0x00100000;
-  static const ISOLATIONLEVEL_ISOLATED = 0x00100000;
+class COMAdminImpersonationLevelOptions {
+  static const COMAdminImpersonationAnonymous = 0x00000001;
+  static const COMAdminImpersonationIdentify = 0x00000002;
+  static const COMAdminImpersonationImpersonate = 0x00000003;
+  static const COMAdminImpersonationDelegate = 0x00000004;
+}
+
+/// {@category Enum}
+class COMAdminInUse {
+  static const COMAdminNotInUse = 0x00000000;
+  static const COMAdminInUseByCatalog = 0x00000001;
+  static const COMAdminInUseByRegistryUnknown = 0x00000002;
+  static const COMAdminInUseByRegistryProxyStub = 0x00000003;
+  static const COMAdminInUseByRegistryTypeLib = 0x00000004;
+  static const COMAdminInUseByRegistryClsid = 0x00000005;
+}
+
+/// {@category Enum}
+class COMAdminOS {
+  static const COMAdminOSNotInitialized = 0x00000000;
+  static const COMAdminOSWindows3_1 = 0x00000001;
+  static const COMAdminOSWindows9x = 0x00000002;
+  static const COMAdminOSWindows2000 = 0x00000003;
+  static const COMAdminOSWindows2000AdvancedServer = 0x00000004;
+  static const COMAdminOSWindows2000Unknown = 0x00000005;
+  static const COMAdminOSUnknown = 0x00000006;
+  static const COMAdminOSWindowsXPPersonal = 0x0000000b;
+  static const COMAdminOSWindowsXPProfessional = 0x0000000c;
+  static const COMAdminOSWindowsNETStandardServer = 0x0000000d;
+  static const COMAdminOSWindowsNETEnterpriseServer = 0x0000000e;
+  static const COMAdminOSWindowsNETDatacenterServer = 0x0000000f;
+  static const COMAdminOSWindowsNETWebServer = 0x00000010;
+  static const COMAdminOSWindowsLonghornPersonal = 0x00000011;
+  static const COMAdminOSWindowsLonghornProfessional = 0x00000012;
+  static const COMAdminOSWindowsLonghornStandardServer = 0x00000013;
+  static const COMAdminOSWindowsLonghornEnterpriseServer = 0x00000014;
+  static const COMAdminOSWindowsLonghornDatacenterServer = 0x00000015;
+  static const COMAdminOSWindowsLonghornWebServer = 0x00000016;
+  static const COMAdminOSWindows7Personal = 0x00000017;
+  static const COMAdminOSWindows7Professional = 0x00000018;
+  static const COMAdminOSWindows7StandardServer = 0x00000019;
+  static const COMAdminOSWindows7EnterpriseServer = 0x0000001a;
+  static const COMAdminOSWindows7DatacenterServer = 0x0000001b;
+  static const COMAdminOSWindows7WebServer = 0x0000001c;
+  static const COMAdminOSWindows8Personal = 0x0000001d;
+  static const COMAdminOSWindows8Professional = 0x0000001e;
+  static const COMAdminOSWindows8StandardServer = 0x0000001f;
+  static const COMAdminOSWindows8EnterpriseServer = 0x00000020;
+  static const COMAdminOSWindows8DatacenterServer = 0x00000021;
+  static const COMAdminOSWindows8WebServer = 0x00000022;
+  static const COMAdminOSWindowsBluePersonal = 0x00000023;
+  static const COMAdminOSWindowsBlueProfessional = 0x00000024;
+  static const COMAdminOSWindowsBlueStandardServer = 0x00000025;
+  static const COMAdminOSWindowsBlueEnterpriseServer = 0x00000026;
+  static const COMAdminOSWindowsBlueDatacenterServer = 0x00000027;
+  static const COMAdminOSWindowsBlueWebServer = 0x00000028;
+}
+
+/// {@category Enum}
+class COMAdminQCMessageAuthenticateOptions {
+  static const COMAdminQCMessageAuthenticateSecureApps = 0x00000000;
+  static const COMAdminQCMessageAuthenticateOff = 0x00000001;
+  static const COMAdminQCMessageAuthenticateOn = 0x00000002;
+}
+
+/// {@category Enum}
+class COMAdminServiceOptions {
+  static const COMAdminServiceLoadBalanceRouter = 0x00000001;
+}
+
+/// {@category Enum}
+class COMAdminServiceStatusOptions {
+  static const COMAdminServiceStopped = 0x00000000;
+  static const COMAdminServiceStartPending = 0x00000001;
+  static const COMAdminServiceStopPending = 0x00000002;
+  static const COMAdminServiceRunning = 0x00000003;
+  static const COMAdminServiceContinuePending = 0x00000004;
+  static const COMAdminServicePausePending = 0x00000005;
+  static const COMAdminServicePaused = 0x00000006;
+  static const COMAdminServiceUnknownState = 0x00000007;
+}
+
+/// {@category Enum}
+class COMAdminSynchronizationOptions {
+  static const COMAdminSynchronizationIgnored = 0x00000000;
+  static const COMAdminSynchronizationNone = 0x00000001;
+  static const COMAdminSynchronizationSupported = 0x00000002;
+  static const COMAdminSynchronizationRequired = 0x00000003;
+  static const COMAdminSynchronizationRequiresNew = 0x00000004;
+}
+
+/// {@category Enum}
+class COMAdminThreadingModels {
+  static const COMAdminThreadingModelApartment = 0x00000000;
+  static const COMAdminThreadingModelFree = 0x00000001;
+  static const COMAdminThreadingModelMain = 0x00000002;
+  static const COMAdminThreadingModelBoth = 0x00000003;
+  static const COMAdminThreadingModelNeutral = 0x00000004;
+  static const COMAdminThreadingModelNotSpecified = 0x00000005;
+}
+
+/// {@category Enum}
+class COMAdminTransactionOptions {
+  static const COMAdminTransactionIgnored = 0x00000000;
+  static const COMAdminTransactionNone = 0x00000001;
+  static const COMAdminTransactionSupported = 0x00000002;
+  static const COMAdminTransactionRequired = 0x00000003;
+  static const COMAdminTransactionRequiresNew = 0x00000004;
+}
+
+/// {@category Enum}
+class COMAdminTxIsolationLevelOptions {
+  static const COMAdminTxIsolationLevelAny = 0x00000000;
+  static const COMAdminTxIsolationLevelReadUnCommitted = 0x00000001;
+  static const COMAdminTxIsolationLevelReadCommitted = 0x00000002;
+  static const COMAdminTxIsolationLevelRepeatableRead = 0x00000003;
+  static const COMAdminTxIsolationLevelSerializable = 0x00000004;
+}
+
+/// {@category Enum}
+class COMPLUS_APPTYPE {
+  static const APPTYPE_UNKNOWN = 0xffffffff;
+  static const APPTYPE_SERVER = 0x00000001;
+  static const APPTYPE_LIBRARY = 0x00000000;
+  static const APPTYPE_SWC = 0x00000002;
+}
+
+/// {@category Enum}
+class CRMFLAGS {
+  static const CRMFLAG_FORGETTARGET = 0x00000001;
+  static const CRMFLAG_WRITTENDURINGPREPARE = 0x00000002;
+  static const CRMFLAG_WRITTENDURINGCOMMIT = 0x00000004;
+  static const CRMFLAG_WRITTENDURINGABORT = 0x00000008;
+  static const CRMFLAG_WRITTENDURINGRECOVERY = 0x00000010;
+  static const CRMFLAG_WRITTENDURINGREPLAY = 0x00000020;
+  static const CRMFLAG_REPLAYINPROGRESS = 0x00000040;
+}
+
+/// {@category Enum}
+class CRMREGFLAGS {
+  static const CRMREGFLAG_PREPAREPHASE = 0x00000001;
+  static const CRMREGFLAG_COMMITPHASE = 0x00000002;
+  static const CRMREGFLAG_ABORTPHASE = 0x00000004;
+  static const CRMREGFLAG_ALLPHASES = 0x00000007;
+  static const CRMREGFLAG_FAILIFINDOUBTSREMAIN = 0x00000010;
+}
+
+/// {@category Enum}
+class CSC_Binding {
+  static const CSC_NoBinding = 0x00000000;
+  static const CSC_BindToPoolThread = 0x00000001;
+}
+
+/// {@category Enum}
+class CSC_COMTIIntrinsicsConfig {
+  static const CSC_NoCOMTIIntrinsics = 0x00000000;
+  static const CSC_InheritCOMTIIntrinsics = 0x00000001;
+}
+
+/// {@category Enum}
+class CSC_IISIntrinsicsConfig {
+  static const CSC_NoIISIntrinsics = 0x00000000;
+  static const CSC_InheritIISIntrinsics = 0x00000001;
+}
+
+/// {@category Enum}
+class CSC_InheritanceConfig {
+  static const CSC_Inherit = 0x00000000;
+  static const CSC_Ignore = 0x00000001;
+}
+
+/// {@category Enum}
+class CSC_PartitionConfig {
+  static const CSC_NoPartition = 0x00000000;
+  static const CSC_InheritPartition = 0x00000001;
+  static const CSC_NewPartition = 0x00000002;
+}
+
+/// {@category Enum}
+class CSC_SxsConfig {
+  static const CSC_NoSxs = 0x00000000;
+  static const CSC_InheritSxs = 0x00000001;
+  static const CSC_NewSxs = 0x00000002;
+}
+
+/// {@category Enum}
+class CSC_SynchronizationConfig {
+  static const CSC_NoSynchronization = 0x00000000;
+  static const CSC_IfContainerIsSynchronized = 0x00000001;
+  static const CSC_NewSynchronizationIfNecessary = 0x00000002;
+  static const CSC_NewSynchronization = 0x00000003;
+}
+
+/// {@category Enum}
+class CSC_ThreadPool {
+  static const CSC_ThreadPoolNone = 0x00000000;
+  static const CSC_ThreadPoolInherit = 0x00000001;
+  static const CSC_STAThreadPool = 0x00000002;
+  static const CSC_MTAThreadPool = 0x00000003;
+}
+
+/// {@category Enum}
+class CSC_TrackerConfig {
+  static const CSC_DontUseTracker = 0x00000000;
+  static const CSC_UseTracker = 0x00000001;
+}
+
+/// {@category Enum}
+class CSC_TransactionConfig {
+  static const CSC_NoTransaction = 0x00000000;
+  static const CSC_IfContainerIsTransactional = 0x00000001;
+  static const CSC_CreateTransactionIfNecessary = 0x00000002;
+  static const CSC_NewTransaction = 0x00000003;
+}
+
+/// {@category Enum}
+class CrmTransactionState {
+  static const TxState_Active = 0x00000000;
+  static const TxState_Committed = 0x00000001;
+  static const TxState_Aborted = 0x00000002;
+  static const TxState_Indoubt = 0x00000003;
+}
+
+/// {@category Enum}
+class DUMPTYPE {
+  static const DUMPTYPE_FULL = 0x00000000;
+  static const DUMPTYPE_MINI = 0x00000001;
+  static const DUMPTYPE_NONE = 0x00000002;
+}
+
+/// {@category Enum}
+class GetAppTrackerDataFlags {
+  static const GATD_INCLUDE_PROCESS_EXE_NAME = 0x00000001;
+  static const GATD_INCLUDE_LIBRARY_APPS = 0x00000002;
+  static const GATD_INCLUDE_SWC = 0x00000004;
+  static const GATD_INCLUDE_CLASS_NAME = 0x00000008;
+  static const GATD_INCLUDE_APPLICATION_NAME = 0x00000010;
+}
+
+/// {@category Enum}
+class ICOMAdminCatalog_ExportApplication_lOptionsFlags {
+  static const COMAdminExportNoUsers = 0x00000000;
+  static const COMAdminExportUsers = 0x00000001;
+  static const COMAdminExportApplicationProxy = 0x00000002;
+  static const COMAdminExportForceOverwriteOfFile = 0x00000004;
+  static const COMAdminExportIn10Format = 0x00000010;
+}
+
+/// {@category Enum}
+class ICOMAdminCatalog_InstallApplication_lOptionsFlags {
+  static const COMAdminInstallNoUsers = 0x00000000;
+  static const COMAdminInstallUsers = 0x00000001;
+  static const COMAdminInstallForceOverwriteOfFiles = 0x00000002;
+  static const COMAdminInstallForceOverwriteOfFile = 0x00000002;
 }
 
 /// {@category Enum}
@@ -370,19 +486,46 @@ class ISOFLAG {
 }
 
 /// {@category Enum}
-class XACTTC {
-  static const XACTTC_NONE = 0x00000000;
-  static const XACTTC_SYNC_PHASEONE = 0x00000001;
-  static const XACTTC_SYNC_PHASETWO = 0x00000002;
-  static const XACTTC_SYNC = 0x00000002;
-  static const XACTTC_ASYNC_PHASEONE = 0x00000004;
-  static const XACTTC_ASYNC = 0x00000004;
+class ISOLATIONLEVEL {
+  static const ISOLATIONLEVEL_UNSPECIFIED = 0xffffffff;
+  static const ISOLATIONLEVEL_CHAOS = 0x00000010;
+  static const ISOLATIONLEVEL_READUNCOMMITTED = 0x00000100;
+  static const ISOLATIONLEVEL_BROWSE = 0x00000100;
+  static const ISOLATIONLEVEL_CURSORSTABILITY = 0x00001000;
+  static const ISOLATIONLEVEL_READCOMMITTED = 0x00001000;
+  static const ISOLATIONLEVEL_REPEATABLEREAD = 0x00010000;
+  static const ISOLATIONLEVEL_SERIALIZABLE = 0x00100000;
+  static const ISOLATIONLEVEL_ISOLATED = 0x00100000;
 }
 
 /// {@category Enum}
-class XACTRM {
-  static const XACTRM_OPTIMISTICLASTWINS = 0x00000001;
-  static const XACTRM_NOREADONLYPREPARES = 0x00000002;
+class LockModes {
+  static const LockSetGet = 0x00000000;
+  static const LockMethod = 0x00000001;
+}
+
+/// {@category Enum}
+class ReleaseModes {
+  static const Standard = 0x00000000;
+  static const Process = 0x00000001;
+}
+
+/// {@category Enum}
+class TRACKING_COLL_TYPE {
+  static const TRKCOLL_PROCESSES = 0x00000000;
+  static const TRKCOLL_APPLICATIONS = 0x00000001;
+  static const TRKCOLL_COMPONENTS = 0x00000002;
+}
+
+/// {@category Enum}
+class TX_MISC_CONSTANTS {
+  static const MAX_TRAN_DESC = 0x00000028;
+}
+
+/// {@category Enum}
+class TransactionVote {
+  static const TxCommit = 0x00000000;
+  static const TxAbort = 0x00000001;
 }
 
 /// {@category Enum}
@@ -396,6 +539,12 @@ class XACTHEURISTIC {
   static const XACTHEURISTIC_COMMIT = 0x00000002;
   static const XACTHEURISTIC_DAMAGE = 0x00000003;
   static const XACTHEURISTIC_DANGER = 0x00000004;
+}
+
+/// {@category Enum}
+class XACTRM {
+  static const XACTRM_OPTIMISTICLASTWINS = 0x00000001;
+  static const XACTRM_NOREADONLYPREPARES = 0x00000002;
 }
 
 /// {@category Enum}
@@ -426,10 +575,13 @@ class XACTSTAT {
 }
 
 /// {@category Enum}
-class AUTHENTICATION_LEVEL {
-  static const NO_AUTHENTICATION_REQUIRED = 0x00000000;
-  static const INCOMING_AUTHENTICATION_REQUIRED = 0x00000001;
-  static const MUTUAL_AUTHENTICATION_REQUIRED = 0x00000002;
+class XACTTC {
+  static const XACTTC_NONE = 0x00000000;
+  static const XACTTC_SYNC_PHASEONE = 0x00000001;
+  static const XACTTC_SYNC_PHASETWO = 0x00000002;
+  static const XACTTC_SYNC = 0x00000002;
+  static const XACTTC_ASYNC_PHASEONE = 0x00000004;
+  static const XACTTC_ASYNC = 0x00000004;
 }
 
 /// {@category Enum}
@@ -460,42 +612,6 @@ class XACT_DTC_CONSTANTS {
 }
 
 /// {@category Enum}
-class DtcLu_LocalRecovery_Work {
-  static const DTCINITIATEDRECOVERYWORK_CHECKLUSTATUS = 0x00000001;
-  static const DTCINITIATEDRECOVERYWORK_TRANS = 0x00000002;
-  static const DTCINITIATEDRECOVERYWORK_TMDOWN = 0x00000003;
-}
-
-/// {@category Enum}
-class DtcLu_Xln {
-  static const DTCLUXLN_COLD = 0x00000001;
-  static const DTCLUXLN_WARM = 0x00000002;
-}
-
-/// {@category Enum}
-class DtcLu_Xln_Confirmation {
-  static const DTCLUXLNCONFIRMATION_CONFIRM = 0x00000001;
-  static const DTCLUXLNCONFIRMATION_LOGNAMEMISMATCH = 0x00000002;
-  static const DTCLUXLNCONFIRMATION_COLDWARMMISMATCH = 0x00000003;
-  static const DTCLUXLNCONFIRMATION_OBSOLETE = 0x00000004;
-}
-
-/// {@category Enum}
-class DtcLu_Xln_Response {
-  static const DTCLUXLNRESPONSE_OK_SENDOURXLNBACK = 0x00000001;
-  static const DTCLUXLNRESPONSE_OK_SENDCONFIRMATION = 0x00000002;
-  static const DTCLUXLNRESPONSE_LOGNAMEMISMATCH = 0x00000003;
-  static const DTCLUXLNRESPONSE_COLDWARMMISMATCH = 0x00000004;
-}
-
-/// {@category Enum}
-class DtcLu_Xln_Error {
-  static const DTCLUXLNERROR_PROTOCOL = 0x00000001;
-  static const DTCLUXLNERROR_LOGNAMEMISMATCH = 0x00000002;
-  static const DTCLUXLNERROR_COLDWARMMISMATCH = 0x00000003;
-}
-
-/// {@category Enum}
 class DtcLu_CompareState {
   static const DTCLUCOMPARESTATE_COMMITTED = 0x00000001;
   static const DTCLUCOMPARESTATE_HEURISTICCOMMITTED = 0x00000002;
@@ -523,177 +639,38 @@ class DtcLu_CompareStates_Response {
 }
 
 /// {@category Enum}
-class TRACKING_COLL_TYPE {
-  static const TRKCOLL_PROCESSES = 0x00000000;
-  static const TRKCOLL_APPLICATIONS = 0x00000001;
-  static const TRKCOLL_COMPONENTS = 0x00000002;
+class DtcLu_LocalRecovery_Work {
+  static const DTCINITIATEDRECOVERYWORK_CHECKLUSTATUS = 0x00000001;
+  static const DTCINITIATEDRECOVERYWORK_TRANS = 0x00000002;
+  static const DTCINITIATEDRECOVERYWORK_TMDOWN = 0x00000003;
 }
 
 /// {@category Enum}
-class DUMPTYPE {
-  static const DUMPTYPE_FULL = 0x00000000;
-  static const DUMPTYPE_MINI = 0x00000001;
-  static const DUMPTYPE_NONE = 0x00000002;
+class DtcLu_Xln {
+  static const DTCLUXLN_COLD = 0x00000001;
+  static const DTCLUXLN_WARM = 0x00000002;
 }
 
 /// {@category Enum}
-class COMPLUS_APPTYPE {
-  static const APPTYPE_UNKNOWN = 0xffffffff;
-  static const APPTYPE_SERVER = 0x00000001;
-  static const APPTYPE_LIBRARY = 0x00000000;
-  static const APPTYPE_SWC = 0x00000002;
+class DtcLu_Xln_Confirmation {
+  static const DTCLUXLNCONFIRMATION_CONFIRM = 0x00000001;
+  static const DTCLUXLNCONFIRMATION_LOGNAMEMISMATCH = 0x00000002;
+  static const DTCLUXLNCONFIRMATION_COLDWARMMISMATCH = 0x00000003;
+  static const DTCLUXLNCONFIRMATION_OBSOLETE = 0x00000004;
 }
 
 /// {@category Enum}
-class GetAppTrackerDataFlags {
-  static const GATD_INCLUDE_PROCESS_EXE_NAME = 0x00000001;
-  static const GATD_INCLUDE_LIBRARY_APPS = 0x00000002;
-  static const GATD_INCLUDE_SWC = 0x00000004;
-  static const GATD_INCLUDE_CLASS_NAME = 0x00000008;
-  static const GATD_INCLUDE_APPLICATION_NAME = 0x00000010;
+class DtcLu_Xln_Error {
+  static const DTCLUXLNERROR_PROTOCOL = 0x00000001;
+  static const DTCLUXLNERROR_LOGNAMEMISMATCH = 0x00000002;
+  static const DTCLUXLNERROR_COLDWARMMISMATCH = 0x00000003;
 }
 
 /// {@category Enum}
-class TransactionVote {
-  static const TxCommit = 0x00000000;
-  static const TxAbort = 0x00000001;
-}
-
-/// {@category Enum}
-class CrmTransactionState {
-  static const TxState_Active = 0x00000000;
-  static const TxState_Committed = 0x00000001;
-  static const TxState_Aborted = 0x00000002;
-  static const TxState_Indoubt = 0x00000003;
-}
-
-/// {@category Enum}
-class CSC_InheritanceConfig {
-  static const CSC_Inherit = 0x00000000;
-  static const CSC_Ignore = 0x00000001;
-}
-
-/// {@category Enum}
-class CSC_ThreadPool {
-  static const CSC_ThreadPoolNone = 0x00000000;
-  static const CSC_ThreadPoolInherit = 0x00000001;
-  static const CSC_STAThreadPool = 0x00000002;
-  static const CSC_MTAThreadPool = 0x00000003;
-}
-
-/// {@category Enum}
-class CSC_Binding {
-  static const CSC_NoBinding = 0x00000000;
-  static const CSC_BindToPoolThread = 0x00000001;
-}
-
-/// {@category Enum}
-class CSC_TransactionConfig {
-  static const CSC_NoTransaction = 0x00000000;
-  static const CSC_IfContainerIsTransactional = 0x00000001;
-  static const CSC_CreateTransactionIfNecessary = 0x00000002;
-  static const CSC_NewTransaction = 0x00000003;
-}
-
-/// {@category Enum}
-class CSC_SynchronizationConfig {
-  static const CSC_NoSynchronization = 0x00000000;
-  static const CSC_IfContainerIsSynchronized = 0x00000001;
-  static const CSC_NewSynchronizationIfNecessary = 0x00000002;
-  static const CSC_NewSynchronization = 0x00000003;
-}
-
-/// {@category Enum}
-class CSC_TrackerConfig {
-  static const CSC_DontUseTracker = 0x00000000;
-  static const CSC_UseTracker = 0x00000001;
-}
-
-/// {@category Enum}
-class CSC_PartitionConfig {
-  static const CSC_NoPartition = 0x00000000;
-  static const CSC_InheritPartition = 0x00000001;
-  static const CSC_NewPartition = 0x00000002;
-}
-
-/// {@category Enum}
-class CSC_IISIntrinsicsConfig {
-  static const CSC_NoIISIntrinsics = 0x00000000;
-  static const CSC_InheritIISIntrinsics = 0x00000001;
-}
-
-/// {@category Enum}
-class CSC_COMTIIntrinsicsConfig {
-  static const CSC_NoCOMTIIntrinsics = 0x00000000;
-  static const CSC_InheritCOMTIIntrinsics = 0x00000001;
-}
-
-/// {@category Enum}
-class CSC_SxsConfig {
-  static const CSC_NoSxs = 0x00000000;
-  static const CSC_InheritSxs = 0x00000001;
-  static const CSC_NewSxs = 0x00000002;
-}
-
-/// {@category Enum}
-class AutoSvcs_Error_Constants {
-  static const mtsErrCtxAborted = 0x8004e002;
-  static const mtsErrCtxAborting = 0x8004e003;
-  static const mtsErrCtxNoContext = 0x8004e004;
-  static const mtsErrCtxNotRegistered = 0x8004e005;
-  static const mtsErrCtxSynchTimeout = 0x8004e006;
-  static const mtsErrCtxOldReference = 0x8004e007;
-  static const mtsErrCtxRoleNotFound = 0x8004e00c;
-  static const mtsErrCtxNoSecurity = 0x8004e00d;
-  static const mtsErrCtxWrongThread = 0x8004e00e;
-  static const mtsErrCtxTMNotAvailable = 0x8004e00f;
-  static const comQCErrApplicationNotQueued = 0x80110600;
-  static const comQCErrNoQueueableInterfaces = 0x80110601;
-  static const comQCErrQueuingServiceNotAvailable = 0x80110602;
-  static const comQCErrQueueTransactMismatch = 0x80110603;
-  static const comqcErrRecorderMarshalled = 0x80110604;
-  static const comqcErrOutParam = 0x80110605;
-  static const comqcErrRecorderNotTrusted = 0x80110606;
-  static const comqcErrPSLoad = 0x80110607;
-  static const comqcErrMarshaledObjSameTxn = 0x80110608;
-  static const comqcErrInvalidMessage = 0x80110650;
-  static const comqcErrMsmqSidUnavailable = 0x80110651;
-  static const comqcErrWrongMsgExtension = 0x80110652;
-  static const comqcErrMsmqServiceUnavailable = 0x80110653;
-  static const comqcErrMsgNotAuthenticated = 0x80110654;
-  static const comqcErrMsmqConnectorUsed = 0x80110655;
-  static const comqcErrBadMarshaledObject = 0x80110656;
-}
-
-/// {@category Enum}
-class LockModes {
-  static const LockSetGet = 0x00000000;
-  static const LockMethod = 0x00000001;
-}
-
-/// {@category Enum}
-class ReleaseModes {
-  static const Standard = 0x00000000;
-  static const Process = 0x00000001;
-}
-
-/// {@category Enum}
-class CRMFLAGS {
-  static const CRMFLAG_FORGETTARGET = 0x00000001;
-  static const CRMFLAG_WRITTENDURINGPREPARE = 0x00000002;
-  static const CRMFLAG_WRITTENDURINGCOMMIT = 0x00000004;
-  static const CRMFLAG_WRITTENDURINGABORT = 0x00000008;
-  static const CRMFLAG_WRITTENDURINGRECOVERY = 0x00000010;
-  static const CRMFLAG_WRITTENDURINGREPLAY = 0x00000020;
-  static const CRMFLAG_REPLAYINPROGRESS = 0x00000040;
-}
-
-/// {@category Enum}
-class CRMREGFLAGS {
-  static const CRMREGFLAG_PREPAREPHASE = 0x00000001;
-  static const CRMREGFLAG_COMMITPHASE = 0x00000002;
-  static const CRMREGFLAG_ABORTPHASE = 0x00000004;
-  static const CRMREGFLAG_ALLPHASES = 0x00000007;
-  static const CRMREGFLAG_FAILIFINDOUBTSREMAIN = 0x00000010;
+class DtcLu_Xln_Response {
+  static const DTCLUXLNRESPONSE_OK_SENDOURXLNBACK = 0x00000001;
+  static const DTCLUXLNRESPONSE_OK_SENDCONFIRMATION = 0x00000002;
+  static const DTCLUXLNRESPONSE_LOGNAMEMISMATCH = 0x00000003;
+  static const DTCLUXLNRESPONSE_COLDWARMMISMATCH = 0x00000004;
 }
 

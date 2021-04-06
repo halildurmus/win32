@@ -1,4 +1,33 @@
 /// {@category Enum}
+class EC_SUBSCRIPTION_CONFIGURATION_MODE {
+  static const EcConfigurationModeNormal = 0x00000000;
+  static const EcConfigurationModeCustom = 0x00000001;
+  static const EcConfigurationModeMinLatency = 0x00000002;
+  static const EcConfigurationModeMinBandwidth = 0x00000003;
+}
+
+/// {@category Enum}
+class EC_SUBSCRIPTION_CONTENT_FORMAT {
+  static const EcContentFormatEvents = 0x00000001;
+  static const EcContentFormatRenderedText = 0x00000002;
+}
+
+/// {@category Enum}
+class EC_SUBSCRIPTION_CREDENTIALS_TYPE {
+  static const EcSubscriptionCredDefault = 0x00000000;
+  static const EcSubscriptionCredNegotiate = 0x00000001;
+  static const EcSubscriptionCredDigest = 0x00000002;
+  static const EcSubscriptionCredBasic = 0x00000003;
+  static const EcSubscriptionCredLocalMachine = 0x00000004;
+}
+
+/// {@category Enum}
+class EC_SUBSCRIPTION_DELIVERY_MODE {
+  static const EcDeliveryModePull = 0x00000001;
+  static const EcDeliveryModePush = 0x00000002;
+}
+
+/// {@category Enum}
 class EC_SUBSCRIPTION_PROPERTY_ID {
   static const EcSubscriptionEnabled = 0x00000000;
   static const EcSubscriptionEventSources = 0x00000001;
@@ -36,18 +65,11 @@ class EC_SUBSCRIPTION_PROPERTY_ID {
 }
 
 /// {@category Enum}
-class EC_SUBSCRIPTION_CREDENTIALS_TYPE {
-  static const EcSubscriptionCredDefault = 0x00000000;
-  static const EcSubscriptionCredNegotiate = 0x00000001;
-  static const EcSubscriptionCredDigest = 0x00000002;
-  static const EcSubscriptionCredBasic = 0x00000003;
-  static const EcSubscriptionCredLocalMachine = 0x00000004;
-}
-
-/// {@category Enum}
-class EC_SUBSCRIPTION_TYPE {
-  static const EcSubscriptionTypeSourceInitiated = 0x00000000;
-  static const EcSubscriptionTypeCollectorInitiated = 0x00000001;
+class EC_SUBSCRIPTION_RUNTIME_STATUS_ACTIVE_STATUS {
+  static const EcRuntimeStatusActiveStatusDisabled = 0x00000001;
+  static const EcRuntimeStatusActiveStatusActive = 0x00000002;
+  static const EcRuntimeStatusActiveStatusInactive = 0x00000003;
+  static const EcRuntimeStatusActiveStatusTrying = 0x00000004;
 }
 
 /// {@category Enum}
@@ -63,6 +85,12 @@ class EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID {
 }
 
 /// {@category Enum}
+class EC_SUBSCRIPTION_TYPE {
+  static const EcSubscriptionTypeSourceInitiated = 0x00000000;
+  static const EcSubscriptionTypeCollectorInitiated = 0x00000001;
+}
+
+/// {@category Enum}
 class EC_VARIANT_TYPE {
   static const EcVarTypeNull = 0x00000000;
   static const EcVarTypeBoolean = 0x00000001;
@@ -70,33 +98,5 @@ class EC_VARIANT_TYPE {
   static const EcVarTypeDateTime = 0x00000003;
   static const EcVarTypeString = 0x00000004;
   static const EcVarObjectArrayPropertyHandle = 0x00000005;
-}
-
-/// {@category Enum}
-class EC_SUBSCRIPTION_CONFIGURATION_MODE {
-  static const EcConfigurationModeNormal = 0x00000000;
-  static const EcConfigurationModeCustom = 0x00000001;
-  static const EcConfigurationModeMinLatency = 0x00000002;
-  static const EcConfigurationModeMinBandwidth = 0x00000003;
-}
-
-/// {@category Enum}
-class EC_SUBSCRIPTION_DELIVERY_MODE {
-  static const EcDeliveryModePull = 0x00000001;
-  static const EcDeliveryModePush = 0x00000002;
-}
-
-/// {@category Enum}
-class EC_SUBSCRIPTION_CONTENT_FORMAT {
-  static const EcContentFormatEvents = 0x00000001;
-  static const EcContentFormatRenderedText = 0x00000002;
-}
-
-/// {@category Enum}
-class EC_SUBSCRIPTION_RUNTIME_STATUS_ACTIVE_STATUS {
-  static const EcRuntimeStatusActiveStatusDisabled = 0x00000001;
-  static const EcRuntimeStatusActiveStatusActive = 0x00000002;
-  static const EcRuntimeStatusActiveStatusInactive = 0x00000003;
-  static const EcRuntimeStatusActiveStatusTrying = 0x00000004;
 }
 

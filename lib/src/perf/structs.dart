@@ -51,6 +51,54 @@ class PerfQueryHandle extends Struct {
   @IntPtr() external int Value;
 }
 
+class DataCollectorSet extends Struct {
+}
+
+class TraceSession extends Struct {
+}
+
+class TraceSessionCollection extends Struct {
+}
+
+class TraceDataProvider extends Struct {
+}
+
+class TraceDataProviderCollection extends Struct {
+}
+
+class DataCollectorSetCollection extends Struct {
+}
+
+class LegacyDataCollectorSet extends Struct {
+}
+
+class LegacyDataCollectorSetCollection extends Struct {
+}
+
+class LegacyTraceSession extends Struct {
+}
+
+class LegacyTraceSessionCollection extends Struct {
+}
+
+class ServerDataCollectorSet extends Struct {
+}
+
+class ServerDataCollectorSetCollection extends Struct {
+}
+
+class SystemDataCollectorSet extends Struct {
+}
+
+class SystemDataCollectorSetCollection extends Struct {
+}
+
+class BootTraceSession extends Struct {
+}
+
+class BootTraceSessionCollection extends Struct {
+}
+
 class PERF_COUNTERSET_INFO extends Struct {
   external GUID CounterSetGuid;
   external GUID ProviderGuid;
@@ -258,7 +306,8 @@ class PDH_COUNTER_INFO_A extends Struct {
   external Pointer<Utf8> szFullPath;
   @Uint32() external int Anonymous;
   external Pointer<Utf8> szExplainText;
-  external __uint__ DataBuffer;
+  @Array(1)
+  external Array<Uint32> DataBuffer;
 }
 
 class PDH_COUNTER_INFO_W extends Struct {
@@ -273,7 +322,8 @@ class PDH_COUNTER_INFO_W extends Struct {
   external Pointer<Utf16> szFullPath;
   @Uint32() external int Anonymous;
   external Pointer<Utf16> szExplainText;
-  external __uint__ DataBuffer;
+  @Array(1)
+  external Array<Uint32> DataBuffer;
 }
 
 class PDH_TIME_INFO extends Struct {
@@ -286,7 +336,8 @@ class PDH_RAW_LOG_RECORD extends Struct {
   @Uint32() external int dwStructureSize;
   @Uint32() external int dwRecordType;
   @Uint32() external int dwItems;
-  external __ubyte__ RawBytes;
+  @Array(1)
+  external Array<Uint8> RawBytes;
 }
 
 class PDH_LOG_SERVICE_QUERY_INFO_A extends Struct {
@@ -363,53 +414,5 @@ class PDH_BROWSE_DLG_CONFIG_A extends Struct {
   @Int32() external int CallBackStatus;
   @Uint32() external int dwDefaultDetailLevel;
   external Pointer<Utf8> szDialogBoxCaption;
-}
-
-class DataCollectorSet extends Struct {
-}
-
-class TraceSession extends Struct {
-}
-
-class TraceSessionCollection extends Struct {
-}
-
-class TraceDataProvider extends Struct {
-}
-
-class TraceDataProviderCollection extends Struct {
-}
-
-class DataCollectorSetCollection extends Struct {
-}
-
-class LegacyDataCollectorSet extends Struct {
-}
-
-class LegacyDataCollectorSetCollection extends Struct {
-}
-
-class LegacyTraceSession extends Struct {
-}
-
-class LegacyTraceSessionCollection extends Struct {
-}
-
-class ServerDataCollectorSet extends Struct {
-}
-
-class ServerDataCollectorSetCollection extends Struct {
-}
-
-class SystemDataCollectorSet extends Struct {
-}
-
-class SystemDataCollectorSetCollection extends Struct {
-}
-
-class BootTraceSession extends Struct {
-}
-
-class BootTraceSessionCollection extends Struct {
 }
 

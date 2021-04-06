@@ -1,4 +1,17 @@
 /// {@category Enum}
+class FILTER_INFORMATION_CLASS {
+  static const FilterFullInformation = 0x00000000;
+  static const FilterAggregateBasicInformation = 0x00000001;
+  static const FilterAggregateStandardInformation = 0x00000002;
+}
+
+/// {@category Enum}
+class FILTER_VOLUME_INFORMATION_CLASS {
+  static const FilterVolumeBasicInformation = 0x00000000;
+  static const FilterVolumeStandardInformation = 0x00000001;
+}
+
+/// {@category Enum}
 class FLT_FILESYSTEM_TYPE {
   static const FLT_FSTYPE_UNKNOWN = 0x00000000;
   static const FLT_FSTYPE_RAW = 0x00000001;
@@ -31,19 +44,6 @@ class FLT_FILESYSTEM_TYPE {
   static const FLT_FSTYPE_REFS = 0x0000001c;
   static const FLT_FSTYPE_OPENAFS = 0x0000001d;
   static const FLT_FSTYPE_CIMFS = 0x0000001e;
-}
-
-/// {@category Enum}
-class FILTER_INFORMATION_CLASS {
-  static const FilterFullInformation = 0x00000000;
-  static const FilterAggregateBasicInformation = 0x00000001;
-  static const FilterAggregateStandardInformation = 0x00000002;
-}
-
-/// {@category Enum}
-class FILTER_VOLUME_INFORMATION_CLASS {
-  static const FilterVolumeBasicInformation = 0x00000000;
-  static const FilterVolumeStandardInformation = 0x00000001;
 }
 
 /// {@category Enum}
