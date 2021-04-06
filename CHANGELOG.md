@@ -1,3 +1,16 @@
+## 2.1.0
+
+- Upgrade to Dart 2.13, which supports packed structs and arrays in FFI. This
+  enables support for more automated generation of structs, which in turn
+  increases development velocity for this package.
+
+- Other APIs included in this release include:
+  - More complete Bluetooth support
+  - MIDI support
+  - High DPI support
+  - `IDispatch` support
+  - Many more core user32 APIs
+
 ## 2.0.5
 
 - Add some debugging APIs to allow enumerating exported symbols, along with a

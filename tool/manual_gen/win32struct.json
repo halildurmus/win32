@@ -21,8 +21,7 @@
     },
     "BITMAPFILEHEADER": {
         "namespace": "Windows.Win32.Gdi.BITMAPFILEHEADER",
-        "comment": "The BITMAPFILEHEADER structure contains information about the type, size, and layout of a file that contains a DIB.",
-        "packing": 2
+        "comment": "The BITMAPFILEHEADER structure contains information about the type, size, and layout of a file that contains a DIB."
     },
     "BITMAPINFO": {
         "namespace": "Windows.Win32.Gdi.BITMAPINFO",
@@ -32,6 +31,10 @@
         "namespace": "Windows.Win32.Gdi.BITMAPINFOHEADER",
         "comment": "The BITMAPINFOHEADER structure contains information about the dimensions and color format of a device-independent bitmap (DIB)."
     },
+    "BLENDFUNCTION": {
+        "namespace": "Windows.Win32.Gdi.BLENDFUNCTION",
+        "comment": "The BLENDFUNCTION structure controls blending by specifying the blending functions for source and destination bitmaps."
+    },
     "BLUETOOTH_DEVICE_SEARCH_PARAMS": {
         "namespace": "Windows.Win32.Bluetooth.BLUETOOTH_DEVICE_SEARCH_PARAMS",
         "comment": "The BLUETOOTH_DEVICE_SEARCH_PARAMS structure specifies search criteria for Bluetooth device searches."
@@ -40,6 +43,10 @@
         "namespace": "Windows.Win32.Bluetooth.BLUETOOTH_FIND_RADIO_PARAMS",
         "comment": "The BLUETOOTH_FIND_RADIO_PARAMS structure facilitates enumerating installed Bluetooth radios."
     },
+    "BLUETOOTH_OOB_DATA_INFO": {
+        "namespace": "Windows.Win32.Bluetooth.BLUETOOTH_OOB_DATA_INFO",
+        "comment": "The BLUETOOTH_OOB_DATA_INFO structure contains data used to authenticate prior to establishing an Out-of-Band device pairing."
+    },
     "CHOOSECOLOR": {
         "namespace": "Windows.Win32.WindowsAndMessaging.CHOOSECOLORW",
         "comment": "Contains information the ChooseColor function uses to initialize the Color dialog box. After the user closes the dialog box, the system returns information about the user's selection in this structure."
@@ -47,6 +54,10 @@
     "CHOOSEFONT": {
         "namespace": "Windows.Win32.WindowsAndMessaging.CHOOSEFONTW",
         "comment": "Contains information that the ChooseFont function uses to initialize the Font dialog box. After the user closes the dialog box, the system returns information about the user's selection in this structure."
+    },
+    "COLORADJUSTMENT": {
+        "namespace": "Windows.Win32.Gdi.COLORADJUSTMENT",
+        "comment": "The COLORADJUSTMENT structure defines the color adjustment values used by the StretchBlt and StretchDIBits functions when the stretch mode is HALFTONE. You can set the color adjustment values by calling the SetColorAdjustment function."
     },
     "COMDLG_FILTERSPEC": {
         "namespace": "Windows.Win32.Shell.COMDLG_FILTERSPEC",
@@ -80,19 +91,25 @@
         "namespace": "Windows.Win32.Security.CREDENTIAL_ATTRIBUTEW",
         "comment": "The CREDENTIAL_ATTRIBUTE structure contains an application-defined attribute of the credential. An attribute is a keyword-value pair. It is up to the application to define the meaning of the attribute."
     },
+    "DESIGNVECTOR": {
+        "namespace": "Windows.Win32.Gdi.DESIGNVECTOR",
+        "comment": "The DESIGNVECTOR structure is used by an application to specify values for the axes of a multiple master font."
+    },
+    "DIBSECTION": {
+        "namespace": "Windows.Win32.Gdi.DIBSECTION",
+        "comment": "The DIBSECTION structure contains information about a DIB created by calling the CreateDIBSection function. A DIBSECTION structure includes information about the bitmap's dimensions, color format, color masks, optional file mapping object, and optional bit values storage offset. An application can obtain a filled-in DIBSECTION structure for a given DIB by calling the GetObject function."
+    },
     "DISPPARAMS": {
         "namespace": "Windows.Win32.Automation.DISPPARAMS",
         "comment": "Contains the arguments passed to a method or property."
     },
     "DLGITEMTEMPLATE": {
         "namespace": "Windows.Win32.WindowsAndMessaging.DLGITEMTEMPLATE",
-        "comment": "Defines the dimensions and style of a control in a dialog box. One or more of these structures are combined with a DLGTEMPLATE structure to form a standard template for a dialog box.",
-        "packing": 2
+        "comment": "Defines the dimensions and style of a control in a dialog box. One or more of these structures are combined with a DLGTEMPLATE structure to form a standard template for a dialog box."
     },
     "DLGTEMPLATE": {
         "namespace": "Windows.Win32.WindowsAndMessaging.DLGTEMPLATE",
-        "comment": "Defines the dimensions and style of a dialog box. This structure, always the first in a standard template for a dialog box, also specifies the number of controls in the dialog box and therefore specifies the number of subsequent DLGITEMTEMPLATE structures in the template.",
-        "packing": 2
+        "comment": "Defines the dimensions and style of a dialog box. This structure, always the first in a standard template for a dialog box, also specifies the number of controls in the dialog box and therefore specifies the number of subsequent DLGITEMTEMPLATE structures in the template."
     },
     "DLLVERSIONINFO": {
         "namespace": "Windows.Win32.Shell.DLLVERSIONINFO",
@@ -114,6 +131,18 @@
         "namespace": "Windows.Win32.WindowsAndMessaging.FINDREPLACEW",
         "comment": "Contains information that the FindText and ReplaceText functions use to initialize the Find and Replace dialog boxes. The FINDMSGSTRING registered message uses this structure to pass the user's search or replacement input to the owner window of a Find or Replace dialog box."
     },
+    "FUNCDESC": {
+        "namespace": "Windows.Win32.Automation.FUNCDESC",
+        "comment": "Describes a function."
+    },
+    "GUITHREADINFO": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.GUITHREADINFO",
+        "comment": "Contains information about a GUI thread."
+    },
+    "IDLDESC": {
+        "namespace": "Windows.Win32.Automation.IDLDESC",
+        "comment": "Contains the IDL attributes of a type."
+    },
     "INITCOMMONCONTROLSEX": {
         "namespace": "Windows.Win32.Controls.INITCOMMONCONTROLSEX",
         "comment": "Carries information used to load common control classes from the dynamic-link library (DLL). This structure is used with the InitCommonControlsEx function."
@@ -134,10 +163,13 @@
         "namespace": "Windows.Win32.Gdi.LOGBRUSH",
         "comment": "The LOGBRUSH structure defines the style, color, and pattern of a physical brush. It is used by the CreateBrushIndirect and ExtCreatePen functions."
     },
+    "LOGPALETTE": {
+        "namespace": "Windows.Win32.Gdi.LOGPALETTE",
+        "comment": "The LOGPALETTE structure defines a logical palette."
+    },
     "MCI_OPEN_PARMS": {
         "namespace": "Windows.Win32.CoreAudio.MCI_OPEN_PARMSW",
-        "comment": "The MCI_OPEN_PARMS structure contains information for the MCI_OPEN command.",
-        "packing": 4
+        "comment": "The MCI_OPEN_PARMS structure contains information for the MCI_OPEN command."
     },
     "MCI_PLAY_PARMS": {
         "namespace": "Windows.Win32.CoreAudio.MCI_PLAY_PARMS",
@@ -145,8 +177,7 @@
     },
     "MCI_SEEK_PARMS": {
         "namespace": "Windows.Win32.CoreAudio.MCI_SEEK_PARMS",
-        "comment": "The MCI_SEEK_PARMS structure contains positioning information for the MCI_SEEK command.",
-        "packing": 4
+        "comment": "The MCI_SEEK_PARMS structure contains positioning information for the MCI_SEEK command."
     },
     "MCI_STATUS_PARMS": {
         "namespace": "Windows.Win32.CoreAudio.MCI_STATUS_PARMS",
@@ -159,6 +190,38 @@
     "MENUITEMINFO": {
         "namespace": "Windows.Win32.WindowsAndMessaging.MENUITEMINFOW",
         "comment": "Contains information about a menu item."
+    },
+    "METAFILEPICT": {
+        "namespace": "Windows.Win32.DataExchange.METAFILEPICT",
+        "comment": "Defines the metafile picture format used for exchanging metafile data through the clipboard."
+    },
+    "MIDIEVENT": {
+        "namespace": "Windows.Win32.Multimedia.MIDIEVENT",
+        "comment": "The MIDIEVENT structure describes a MIDI event in a stream buffer."
+    },
+    "MIDIHDR": {
+        "namespace": "Windows.Win32.Multimedia.MIDIHDR",
+        "comment": "The MIDIHDR structure defines the header used to identify a MIDI system-exclusive or stream buffer."
+    },
+    "MIDIINCAPS": {
+        "namespace": "Windows.Win32.Multimedia.MIDIINCAPSW",
+        "comment": "The MIDIINCAPS structure describes the capabilities of a MIDI input device."
+    },
+    "MIDIOUTCAPS": {
+        "namespace": "Windows.Win32.Multimedia.MIDIOUTCAPSW",
+        "comment": "The MIDIOUTCAPS structure describes the capabilities of a MIDI output device."
+    },
+    "MIDIPROPTEMPO": {
+        "namespace": "Windows.Win32.Multimedia.MIDIPROPTEMPO",
+        "comment": "The MIDIPROPTEMPO structure contains the tempo property for a stream."
+    },
+    "MIDIPROPTIMEDIV": {
+        "namespace": "Windows.Win32.Multimedia.MIDIPROPTIMEDIV",
+        "comment": "The MIDIPROPTIMEDIV structure contains the time division property for a stream."
+    },
+    "MIDISTRMBUFFVER": {
+        "namespace": "Windows.Win32.Multimedia.MIDISTRMBUFFVER",
+        "comment": "The MIDISTRMBUFFVER structure contains version information for a long MIDI event of the MEVT_VERSION type."
     },
     "MINMAXINFO": {
         "namespace": "Windows.Win32.WindowsAndMessaging.MINMAXINFO",
@@ -180,6 +243,14 @@
         "namespace": "Windows.Win32.WindowsAndMessaging.MSG",
         "comment": "Contains message information from a thread's message queue."
     },
+    "NEWTEXTMETRIC": {
+        "namespace": "Windows.Win32.Gdi.NEWTEXTMETRICW",
+        "comment": "The NEWTEXTMETRIC structure contains data that describes a physical font."
+    },
+    "NONCLIENTMETRICS": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.NONCLIENTMETRICSW",
+        "comment": "Contains the scalable metrics associated with the nonclient area of a nonminimized window. This structure is used by the SPI_GETNONCLIENTMETRICS and SPI_SETNONCLIENTMETRICS actions of the SystemParametersInfo function."
+    },
     "OPENFILENAME": {
         "namespace": "Windows.Win32.WindowsAndMessaging.OPENFILENAMEW",
         "comment": "Contains information that the GetOpenFileName and GetSaveFileName functions use to initialize an Open or Save As dialog box. After the user closes the dialog box, the system returns information about the user's selection in this structure."
@@ -188,9 +259,25 @@
         "namespace": "Windows.Win32.Gdi.PALETTEENTRY",
         "comment": "The PALETTEENTRY structure specifies the color and usage of an entry in a logical palette. A logical palette is defined by a LOGPALETTE structure."
     },
+    "PARAMDESC": {
+        "namespace": "Windows.Win32.Automation.PARAMDESC",
+        "comment": "Contains information needed for transferring a structure element, parameter, or function return value between processes."
+    },
+    "PARAMDESCEX": {
+        "namespace": "Windows.Win32.Automation.PARAMDESCEX",
+        "comment": "Contains information about the default value of a parameter."
+    },
     "POINT": {
         "namespace": "Windows.Win32.DisplayDevices.POINT",
         "comment": "The POINT structure defines the x- and y-coordinates of a point."
+    },
+    "POLYTEXT": {
+        "namespace": "Windows.Win32.Gdi.POLYTEXTW",
+        "comment": "The POLYTEXT structure describes how the PolyTextOut function should draw a string of text."
+    },
+    "POWERBROADCAST_SETTING": {
+        "namespace": "Windows.Win32.SystemServices.POWERBROADCAST_SETTING",
+        "comment": "Sent with a power setting event and contains data about the specific change."
     },
     "PROCESS_INFORMATION": {
         "namespace": "Windows.Win32.SystemServices.PROCESS_INFORMATION",
@@ -198,8 +285,7 @@
     },
     "PROPERTYKEY": {
         "namespace": "Windows.Win32.WindowsPropertiesSystem.PROPERTYKEY",
-        "comment": "Specifies the FMTID/PID identifier that programmatically identifies a property.",
-        "packing": 4
+        "comment": "Specifies the FMTID/PID identifier that programmatically identifies a property."
     },
     "RECT": {
         "namespace": "Windows.Win32.DisplayDevices.RECT",
@@ -229,6 +315,10 @@
         "namespace": "Windows.Win32.Security.SECURITY_DESCRIPTOR",
         "comment": "The SECURITY_DESCRIPTOR structure contains the security information associated with an object. Applications use this structure to set and query an object's security status."
     },
+    "SHITEMID": {
+        "namespace": "Windows.Win32.Shell.SHITEMID",
+        "comment": "Defines an item identifier."
+    },
     "SHQUERYRBINFO": {
         "namespace": "Windows.Win32.Shell.SHQUERYRBINFO",
         "comment": "Contains the size and item count information retrieved by the SHQueryRecycleBin function."
@@ -253,6 +343,18 @@
         "namespace": "Windows.Win32.StructuredStorage.STATSTG",
         "comment": "The STATSTG structure contains statistical data about an open storage, stream, or byte-array object. This structure is used in the IEnumSTATSTG, ILockBytes, IStorage, and IStream interfaces."
     },
+    "STYLESTRUCT": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.STYLESTRUCT",
+        "comment": "Contains the styles for a window."
+    },
+    "SYMBOL_INFO": {
+        "namespace": "Windows.Win32.Debug.SYMBOL_INFOW",
+        "comment": "Contains symbol information."
+    },
+    "SYSTEM_BATTERY_STATE": {
+        "namespace": "Windows.Win32.SystemServices.SYSTEM_BATTERY_STATE",
+        "comment": "Contains information about the current state of the system battery."
+    },
     "SYSTEM_POWER_STATUS": {
         "namespace": "Windows.Win32.SystemServices.SYSTEM_POWER_STATUS",
         "comment": "Contains information about the power status of the system."
@@ -263,16 +365,31 @@
     },
     "TASKDIALOG_BUTTON": {
         "namespace": "Windows.Win32.Controls.TASKDIALOG_BUTTON",
-        "comment": "The TASKDIALOG_BUTTON structure contains information used to display a button in a task dialog. The TASKDIALOGCONFIG structure uses this structure.",
-        "packing": 4
+        "comment": "The TASKDIALOG_BUTTON structure contains information used to display a button in a task dialog. The TASKDIALOGCONFIG structure uses this structure."
     },
     "TEXTMETRIC": {
         "namespace": "Windows.Win32.Gdi.TEXTMETRICW",
         "comment": "The TEXTMETRIC structure contains basic information about a physical font. All sizes are specified in logical units; that is, they depend on the current mapping mode of the display context."
     },
+    "TITLEBARINFO": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.TITLEBARINFO",
+        "comment": "Contains title bar information."
+    },
+    "TITLEBARINFOEX": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.TITLEBARINFOEX",
+        "comment": "Expands on the information described in the TITLEBARINFO structure by including the coordinates of each element of the title bar. This structure is sent with the WM_GETTITLEBARINFOEX message."
+    },
     "TPMPARAMS": {
         "namespace": "Windows.Win32.WindowsAndMessaging.TPMPARAMS",
         "comment": "Contains extended parameters for the TrackPopupMenuEx function."
+    },
+    "TYPEATTR": {
+        "namespace": "Windows.Win32.Automation.TYPEATTR",
+        "comment": "Contains attributes of a type."
+    },
+    "UPDATELAYEREDWINDOWINFO": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.UPDATELAYEREDWINDOWINFO",
+        "comment": "Used by UpdateLayeredWindowIndirect to provide position, size, shape, content, and translucency information for a layered window."
     },
     "VALENT": {
         "namespace": "Windows.Win32.WindowsProgramming.VALENTW",
@@ -284,8 +401,7 @@
     },
     "WAVEFORMATEX": {
         "namespace": "Windows.Win32.Multimedia.WAVEFORMATEX",
-        "comment": "The WAVEFORMATEX structure defines the format of waveform-audio data. Only format information common to all waveform-audio data formats is included in this structure. For formats that require additional information, this structure is included as the first member in another structure, along with the additional information.",
-        "packing": 1
+        "comment": "The WAVEFORMATEX structure defines the format of waveform-audio data. Only format information common to all waveform-audio data formats is included in this structure. For formats that require additional information, this structure is included as the first member in another structure, along with the additional information."
     },
     "WAVEHDR": {
         "namespace": "Windows.Win32.Multimedia.WAVEHDR",
@@ -295,8 +411,20 @@
         "namespace": "Windows.Win32.WindowsAndMessaging.WINDOWINFO",
         "comment": "Contains window information."
     },
+    "WINDOWPLACEMENT": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.WINDOWPLACEMENT",
+        "comment": "Contains information about the placement of a window on the screen."
+    },
     "WNDCLASS": {
         "namespace": "Windows.Win32.WindowsAndMessaging.WNDCLASSW",
         "comment": "Contains the window class attributes that are registered by the RegisterClass function."
+    },
+    "WNDCLASSEX": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.WNDCLASSEXW",
+        "comment": "Contains window class information. It is used with the RegisterClassEx and GetClassInfoEx functions. The WNDCLASSEX structure is similar to the WNDCLASS structure. There are two differences. WNDCLASSEX includes the cbSize member, which specifies the size of the structure, and the hIconSm member, which contains a handle to a small icon associated with the window class."
+    },
+    "XFORM": {
+        "namespace": "Windows.Win32.Gdi.XFORM",
+        "comment": "The XFORM structure specifies a world-space to page-space transformation."
     }
 }

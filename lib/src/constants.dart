@@ -29,6 +29,12 @@ const STATUS_SUCCESS = 0;
 // Path length
 const MAX_PATH = 260;
 
+/// The default locale for the operating system.
+const LOCALE_SYSTEM_DEFAULT = 0x0800;
+
+/// The default locale for the user or process.
+const LOCALE_USER_DEFAULT = 0x0400;
+
 // -----------------------------------------------------------------------------
 // COM Error Codes
 // -----------------------------------------------------------------------------
@@ -101,6 +107,25 @@ const CLSCTX_ALL = CLSCTX_INPROC_SERVER |
     CLSCTX_INPROC_HANDLER |
     CLSCTX_LOCAL_SERVER |
     CLSCTX_REMOTE_SERVER;
+
+// -----------------------------------------------------------------------------
+// IDispatch constants
+// -----------------------------------------------------------------------------
+
+/// The member is invoked as a method. If a property has the same name, both
+/// this and the DISPATCH_PROPERTYGET flag can be set.
+const DISPATCH_METHOD = 0x1;
+
+/// The member is retrieved as a property or data member.
+const DISPATCH_PROPERTYGET = 0x2;
+
+/// The member is changed as a property or data member.
+const DISPATCH_PROPERTYPUT = 0x4;
+
+/// The member is changed by a reference assignment, rather than a value
+/// assignment. This flag is valid only when the property accepts a reference to
+/// an object.
+const DISPATCH_PROPERTYPUTREF = 0x8;
 
 // -----------------------------------------------------------------------------
 // Error constants
@@ -1976,6 +2001,23 @@ const GWL_USERDATA = -21;
 /// attribute if the window does not belong to the same process as the calling
 /// thread.
 const GWL_WNDPROC = -4;
+
+/// Sets a new address for the window procedure.
+const GWLP_WNDPROC = -4;
+
+/// Sets a new application instance handle.
+const GWLP_HINSTANCE = -6;
+
+/// Retrieves a handle to the parent window, if there is one.
+const GWLP_HWNDPARENT = -8;
+
+/// Sets the user data associated with the window. This data is intended for use
+/// by the application that created the window. Its value is initially zero.
+const GWLP_USERDATA = -21;
+
+/// Sets a new identifier of the child window. The window cannot be a top-level
+/// window.
+const GWLP_ID = -12;
 
 // -----------------------------------------------------------------------------
 // Hit testing constants
@@ -4953,6 +4995,166 @@ class MC_POSITION_TYPE {
 class MC_SIZE_TYPE {
   static const MC_WIDTH = 0;
   static const MC_HEIGHT = 1;
+}
+
+/// Identifies the dots per inch (dpi) setting for a thread, process, or window.
+///
+/// {@category Enum}
+class DPI_AWARENESS {
+  /// Invalid DPI awareness. This is an invalid DPI awareness value.
+  static const DPI_AWARENESS_INVALID = -1;
+
+  /// DPI unaware. This process does not scale for DPI changes and is always
+  /// assumed to have a scale factor of 100% (96 DPI). It will be automatically
+  /// scaled by the system on any other DPI setting.
+  static const DPI_AWARENESS_UNAWARE = 0;
+
+  /// System DPI aware. This process does not scale for DPI changes. It will
+  /// query for the DPI once and use that value for the lifetime of the process.
+  /// If the DPI changes, the process will not adjust to the new DPI value. It
+  /// will be automatically scaled up or down by the system when the DPI changes
+  /// from the system value.
+  static const DPI_AWARENESS_SYSTEM_AWARE = 1;
+
+  /// Per monitor DPI aware. This process checks for the DPI when it is created
+  /// and adjusts the scale factor whenever the DPI changes. These processes are
+  /// not automatically scaled by the system.
+  static const DPI_AWARENESS_PER_MONITOR_AWARE = 2;
+}
+
+/// Identifies the DPI hosting behavior for a window. This behavior allows
+/// windows created in the thread to host child windows with a different
+/// DPI_AWARENESS_CONTEXT.
+///
+/// {@category Enum}
+class DPI_HOSTING_BEHAVIOR {
+  /// Invalid DPI hosting behavior. This usually occurs if the previous
+  /// SetThreadDpiHostingBehavior call used an invalid parameter.
+  static const DPI_HOSTING_BEHAVIOR_INVALID = -1;
+
+  /// Default DPI hosting behavior. The associated window behaves as normal, and
+  /// cannot create or re-parent child windows with a different
+  /// DPI_AWARENESS_CONTEXT.
+  static const DPI_HOSTING_BEHAVIOR_DEFAULT = 0;
+
+  /// Mixed DPI hosting behavior. This enables the creation and re-parenting of
+  /// child windows with different DPI_AWARENESS_CONTEXT. These child windows
+  /// will be independently scaled by the OS.
+  static const DPI_HOSTING_BEHAVIOR_MIXED = 1;
+}
+
+/// Identifies dots per inch (dpi) awareness values. DPI awareness indicates how
+/// much scaling work an application performs for DPI versus how much is done by
+/// the system.
+///
+/// {@category Enum}
+class PROCESS_DPI_AWARENESS {
+  /// DPI unaware. This app does not scale for DPI changes and is always assumed
+  /// to have a scale factor of 100% (96 DPI). It will be automatically scaled
+  /// by the system on any other DPI setting.
+  static const PROCESS_DPI_UNAWARE = 0;
+
+  /// System DPI aware. This app does not scale for DPI changes. It will query
+  /// for the DPI once and use that value for the lifetime of the app. If the
+  /// DPI changes, the app will not adjust to the new DPI value. It will be
+  /// automatically scaled up or down by the system when the DPI changes from
+  /// the system value.
+  static const PROCESS_SYSTEM_DPI_AWARE = 1;
+
+  /// Per monitor DPI aware. This app checks for the DPI when it is created and
+  /// adjusts the scale factor whenever the DPI changes. These applications are
+  /// not automatically scaled by the system.
+  static const PROCESS_PER_MONITOR_DPI_AWARE = 2;
+}
+
+/// Identifies the dots per inch (dpi) setting for a monitor.
+///
+/// {@category Enum}
+class MONITOR_DPI_TYPE {
+  /// The effective DPI. This value should be used when determining the correct
+  /// scale factor for scaling UI elements. This incorporates the scale factor
+  /// set by the user for this specific display.
+  static const MDT_EFFECTIVE_DPI = 0;
+
+  /// The angular DPI. This DPI ensures rendering at a compliant angular
+  /// resolution on the screen. This does not include the scale factor set by
+  /// the user for this specific display.
+  static const MDT_ANGULAR_DPI = 1;
+
+  /// The raw DPI. This value is the linear DPI of the screen as measured on the
+  /// screen itself. Use this value when you want to read the pixel density and
+  /// not the recommended scaling setting. This does not include the scale
+  /// factor set by the user for this specific display and is not guaranteed to
+  /// be a supported DPI value.
+  static const MDT_RAW_DPI = 2;
+
+  /// The default DPI setting for a monitor is MDT_EFFECTIVE_DPI.
+  static const MDT_DEFAULT = MDT_EFFECTIVE_DPI;
+}
+
+// -----------------------------------------------------------------------------
+// Window Display Affinity constants
+// -----------------------------------------------------------------------------
+
+/// Imposes no restrictions on where the window can be displayed.
+const WDA_NONE = 0x00000000;
+
+/// The window content is displayed only on a monitor. Everywhere else, the
+/// window appears with no content.
+const WDA_MONITOR = 0x00000001;
+
+/// The window is displayed only on a monitor. Everywhere else, the window does
+/// not appear at all. One use for this affinity is for windows that show video
+/// recording controls, so that the controls are not included in the capture.
+const WDA_EXCLUDEFROMCAPTURE = 0x00000011;
+
+// -----------------------------------------------------------------------------
+/// High DPI constants & enumerations
+// -----------------------------------------------------------------------------
+
+/// Describes per-monitor DPI scaling behavior overrides for child windows
+/// within dialogs. The values in this enumeration are bitfields and can be
+/// combined.
+///
+/// {@category Enum}
+class DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS {
+  /// The default behavior of the dialog manager. The dialog managed will update
+  /// the font, size, and position of the child window on DPI changes.
+  static const DCDC_DEFAULT = 0x0000;
+
+  /// Prevents the dialog manager from sending an updated font to the child
+  /// window via WM_SETFONT in response to a DPI change.
+  static const DCDC_DISABLE_FONT_UPDATE = 0x0001;
+
+  /// Prevents the dialog manager from resizing and repositioning the child
+  /// window in response to a DPI change.
+  static const DCDC_DISABLE_RELAYOUT = 0x0002;
+}
+
+/// In Per Monitor v2 contexts, dialogs will automatically respond to DPI
+/// changes by resizing themselves and re-computing the positions of their child
+/// windows (here referred to as re-layouting). This enum works in conjunction
+/// with SetDialogDpiChangeBehavior in order to override the default DPI scaling
+/// behavior for dialogs.
+///
+/// {@category Enum}
+class DIALOG_DPI_CHANGE_BEHAVIORS {
+  /// The default behavior of the dialog manager. In response to a DPI change,
+  /// the dialog manager will re-layout each control, update the font on each
+  /// control, resize the dialog, and update the dialog's own font.
+  static const DDC_DEFAULT = 0x0000;
+
+  /// Prevents the dialog manager from responding to WM_GETDPISCALEDSIZE and
+  /// WM_DPICHANGED, disabling all default DPI scaling behavior.
+  static const DDC_DISABLE_ALL = 0x0001;
+
+  /// Prevents the dialog manager from resizing the dialog in response to a DPI
+  /// change.
+  static const DDC_DISABLE_RESIZE = 0x0002;
+
+  /// Prevents the dialog manager from re-layouting all of the dialogue's
+  /// immediate children HWNDs in response to a DPI change.
+  static const DDC_DISABLE_CONTROL_RELAYOUT = 0x0004;
 }
 
 // -----------------------------------------------------------------------------

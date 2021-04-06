@@ -1094,6 +1094,28 @@ final TD_INFORMATION_ICON = Pointer<Utf16>.fromAddress(0xFFFD);
 final TD_SHIELD_ICON = Pointer<Utf16>.fromAddress(0xFFFC);
 
 /// {@category Enum}
+class TASKDIALOG_FLAGS {
+  static const int TDF_ENABLE_HYPERLINKS = 0x0001;
+  static const int TDF_USE_HICON_MAIN = 0x0002;
+  static const int TDF_USE_HICON_FOOTER = 0x0004;
+  static const int TDF_ALLOW_DIALOG_CANCELLATION = 0x0008;
+  static const int TDF_USE_COMMAND_LINKS = 0x0010;
+  static const int TDF_USE_COMMAND_LINKS_NO_ICON = 0x0020;
+  static const int TDF_EXPAND_FOOTER_AREA = 0x0040;
+  static const int TDF_EXPANDED_BY_DEFAULT = 0x0080;
+  static const int TDF_VERIFICATION_FLAG_CHECKED = 0x0100;
+  static const int TDF_SHOW_PROGRESS_BAR = 0x0200;
+  static const int TDF_SHOW_MARQUEE_PROGRESS_BAR = 0x0400;
+  static const int TDF_CALLBACK_TIMER = 0x0800;
+  static const int TDF_POSITION_RELATIVE_TO_WINDOW = 0x1000;
+  static const int TDF_RTL_LAYOUT = 0x2000;
+  static const int TDF_NO_DEFAULT_RADIO_BUTTON = 0x4000;
+  static const int TDF_CAN_BE_MINIMIZED = 0x8000;
+  static const int TDF_NO_SET_FOREGROUND = 0x00010000;
+  static const int TDF_SIZE_TO_CONTENT = 0x01000000;
+}
+
+/// {@category Enum}
 class TASKDIALOG_COMMON_BUTTON_FLAGS {
   static const int TDCBF_OK_BUTTON = 0x0001;
   static const int TDCBF_YES_BUTTON = 0x0002;

@@ -122,6 +122,365 @@ int mciSendString(Pointer<Utf16> lpstrCommand, Pointer<Utf16> lpstrReturnString,
       lpstrCommand, lpstrReturnString, uReturnLength, hwndCallback);
 }
 
+/// The midiConnect function connects a MIDI input device to a MIDI thru or
+/// output device, or connects a MIDI thru device to a MIDI output device.
+///
+/// ```c
+/// MMRESULT midiConnect(
+///   HMIDI    hmi,
+///   HMIDIOUT hmo,
+///   LPVOID   pReserved
+/// );
+/// ```
+/// {@category winmm}
+int midiConnect(int hmi, int hmo, Pointer pReserved) {
+  final _midiConnect = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hmi, IntPtr hmo, Pointer pReserved),
+      int Function(int hmi, int hmo, Pointer pReserved)>('midiConnect');
+  return _midiConnect(hmi, hmo, pReserved);
+}
+
+/// The midiDisconnect function disconnects a MIDI input device from a MIDI
+/// thru or output device, or disconnects a MIDI thru device from a MIDI
+/// output device.
+///
+/// ```c
+/// MMRESULT midiDisconnect(
+///   HMIDI    hmi,
+///   HMIDIOUT hmo,
+///   LPVOID   pReserved
+/// );
+/// ```
+/// {@category winmm}
+int midiDisconnect(int hmi, int hmo, Pointer pReserved) {
+  final _midiDisconnect = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hmi, IntPtr hmo, Pointer pReserved),
+      int Function(int hmi, int hmo, Pointer pReserved)>('midiDisconnect');
+  return _midiDisconnect(hmi, hmo, pReserved);
+}
+
+/// The midiInClose function closes the specified MIDI input device.
+///
+/// ```c
+/// MMRESULT midiInClose(
+///   HMIDIIN hmi
+/// );
+/// ```
+/// {@category winmm}
+int midiInClose(int hmi) {
+  final _midiInClose =
+      _winmm.lookupFunction<Uint32 Function(IntPtr hmi), int Function(int hmi)>(
+          'midiInClose');
+  return _midiInClose(hmi);
+}
+
+/// The midiInGetDevCaps function determines the capabilities of a
+/// specified MIDI input device.
+///
+/// ```c
+/// MMRESULT midiInGetDevCapsW(
+///   UINT_PTR      uDeviceID,
+///   LPMIDIINCAPSW pmic,
+///   UINT          cbmic
+/// );
+/// ```
+/// {@category winmm}
+int midiInGetDevCaps(int uDeviceID, Pointer<MIDIINCAPS> pmic, int cbmic) {
+  final _midiInGetDevCaps = _winmm.lookupFunction<
+      Uint32 Function(IntPtr uDeviceID, Pointer<MIDIINCAPS> pmic, Uint32 cbmic),
+      int Function(int uDeviceID, Pointer<MIDIINCAPS> pmic,
+          int cbmic)>('midiInGetDevCapsW');
+  return _midiInGetDevCaps(uDeviceID, pmic, cbmic);
+}
+
+/// The midiInGetErrorText function retrieves a textual description for an
+/// error identified by the specified error code.
+///
+/// ```c
+/// MMRESULT midiInGetErrorTextW(
+///   MMRESULT mmrError,
+///   LPWSTR   pszText,
+///   UINT     cchText
+/// );
+/// ```
+/// {@category winmm}
+int midiInGetErrorText(int mmrError, Pointer<Utf16> pszText, int cchText) {
+  final _midiInGetErrorText = _winmm.lookupFunction<
+      Uint32 Function(Uint32 mmrError, Pointer<Utf16> pszText, Uint32 cchText),
+      int Function(int mmrError, Pointer<Utf16> pszText,
+          int cchText)>('midiInGetErrorTextW');
+  return _midiInGetErrorText(mmrError, pszText, cchText);
+}
+
+/// The midiInGetID function gets the device identifier for the given MIDI
+/// input device.
+///
+/// ```c
+/// MMRESULT midiInGetID(
+///   HMIDIIN hmi,
+///   LPUINT  puDeviceID
+/// );
+/// ```
+/// {@category winmm}
+int midiInGetID(int hmi, Pointer<Uint32> puDeviceID) {
+  final _midiInGetID = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hmi, Pointer<Uint32> puDeviceID),
+      int Function(int hmi, Pointer<Uint32> puDeviceID)>('midiInGetID');
+  return _midiInGetID(hmi, puDeviceID);
+}
+
+/// The midiInGetNumDevs function retrieves the number of MIDI input
+/// devices in the system.
+///
+/// ```c
+/// UINT midiInGetNumDevs();
+/// ```
+/// {@category winmm}
+int midiInGetNumDevs() {
+  final _midiInGetNumDevs = _winmm
+      .lookupFunction<Uint32 Function(), int Function()>('midiInGetNumDevs');
+  return _midiInGetNumDevs();
+}
+
+/// The midiInMessage function sends a message to the MIDI device driver.
+///
+/// ```c
+/// MMRESULT midiInMessage(
+///   HMIDIIN   hmi,
+///   UINT      uMsg,
+///   DWORD_PTR dw1,
+///   DWORD_PTR dw2
+/// );
+/// ```
+/// {@category winmm}
+int midiInMessage(int hmi, int uMsg, int dw1, int dw2) {
+  final _midiInMessage = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hmi, Uint32 uMsg, IntPtr dw1, IntPtr dw2),
+      int Function(int hmi, int uMsg, int dw1, int dw2)>('midiInMessage');
+  return _midiInMessage(hmi, uMsg, dw1, dw2);
+}
+
+/// The midiInOpen function opens a specified MIDI input device.
+///
+/// ```c
+/// MMRESULT midiInOpen(
+///   LPHMIDIIN phmi,
+///   UINT      uDeviceID,
+///   DWORD_PTR dwCallback,
+///   DWORD_PTR dwInstance,
+///   DWORD     fdwOpen
+/// );
+/// ```
+/// {@category winmm}
+int midiInOpen(Pointer<IntPtr> phmi, int uDeviceID, int dwCallback,
+    int dwInstance, int fdwOpen) {
+  final _midiInOpen = _winmm.lookupFunction<
+      Uint32 Function(Pointer<IntPtr> phmi, Uint32 uDeviceID, IntPtr dwCallback,
+          IntPtr dwInstance, Uint32 fdwOpen),
+      int Function(Pointer<IntPtr> phmi, int uDeviceID, int dwCallback,
+          int dwInstance, int fdwOpen)>('midiInOpen');
+  return _midiInOpen(phmi, uDeviceID, dwCallback, dwInstance, fdwOpen);
+}
+
+/// The midiInPrepareHeader function prepares a buffer for MIDI input.
+///
+/// ```c
+/// MMRESULT midiInPrepareHeader(
+///   HMIDIIN   hmi,
+///   LPMIDIHDR pmh,
+///   UINT      cbmh
+/// );
+/// ```
+/// {@category winmm}
+int midiInPrepareHeader(int hmi, Pointer<MIDIHDR> pmh, int cbmh) {
+  final _midiInPrepareHeader = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hmi, Pointer<MIDIHDR> pmh, Uint32 cbmh),
+      int Function(
+          int hmi, Pointer<MIDIHDR> pmh, int cbmh)>('midiInPrepareHeader');
+  return _midiInPrepareHeader(hmi, pmh, cbmh);
+}
+
+/// The midiInReset function stops input on a given MIDI input device.
+///
+/// ```c
+/// MMRESULT midiInReset(
+///   HMIDIIN hmi
+/// );
+/// ```
+/// {@category winmm}
+int midiInReset(int hmi) {
+  final _midiInReset =
+      _winmm.lookupFunction<Uint32 Function(IntPtr hmi), int Function(int hmi)>(
+          'midiInReset');
+  return _midiInReset(hmi);
+}
+
+/// The midiInStart function starts MIDI input on the specified MIDI input
+/// device.
+///
+/// ```c
+/// MMRESULT midiInStart(
+///   HMIDIIN hmi
+/// );
+/// ```
+/// {@category winmm}
+int midiInStart(int hmi) {
+  final _midiInStart =
+      _winmm.lookupFunction<Uint32 Function(IntPtr hmi), int Function(int hmi)>(
+          'midiInStart');
+  return _midiInStart(hmi);
+}
+
+/// The midiInStop function stops MIDI input on the specified MIDI input
+/// device.
+///
+/// ```c
+/// MMRESULT midiInStop(
+///   HMIDIIN hmi
+/// );
+/// ```
+/// {@category winmm}
+int midiInStop(int hmi) {
+  final _midiInStop =
+      _winmm.lookupFunction<Uint32 Function(IntPtr hmi), int Function(int hmi)>(
+          'midiInStop');
+  return _midiInStop(hmi);
+}
+
+/// The midiInUnprepareHeader function cleans up the preparation performed
+/// by the midiInPrepareHeader function.
+///
+/// ```c
+/// MMRESULT midiInUnprepareHeader(
+///   HMIDIIN   hmi,
+///   LPMIDIHDR pmh,
+///   UINT      cbmh
+/// );
+/// ```
+/// {@category winmm}
+int midiInUnprepareHeader(int hmi, Pointer<MIDIHDR> pmh, int cbmh) {
+  final _midiInUnprepareHeader = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hmi, Pointer<MIDIHDR> pmh, Uint32 cbmh),
+      int Function(
+          int hmi, Pointer<MIDIHDR> pmh, int cbmh)>('midiInUnprepareHeader');
+  return _midiInUnprepareHeader(hmi, pmh, cbmh);
+}
+
+/// The midiOutCacheDrumPatches function requests that an internal MIDI
+/// synthesizer device preload and cache a specified set of key-based
+/// percussion patches.
+///
+/// ```c
+/// MMRESULT midiOutCacheDrumPatches(
+///   HMIDIOUT hmo,
+///   UINT     uPatch,
+///   LPWORD   pwkya,
+///   UINT     fuCache
+/// );
+/// ```
+/// {@category winmm}
+int midiOutCacheDrumPatches(
+    int hmo, int uPatch, Pointer<Uint16> pwkya, int fuCache) {
+  final _midiOutCacheDrumPatches = _winmm.lookupFunction<
+      Uint32 Function(
+          IntPtr hmo, Uint32 uPatch, Pointer<Uint16> pwkya, Uint32 fuCache),
+      int Function(int hmo, int uPatch, Pointer<Uint16> pwkya,
+          int fuCache)>('midiOutCacheDrumPatches');
+  return _midiOutCacheDrumPatches(hmo, uPatch, pwkya, fuCache);
+}
+
+/// The midiOutCachePatches function requests that an internal MIDI
+/// synthesizer device preload and cache a specified set of patches.
+///
+/// ```c
+/// MMRESULT midiOutCachePatches(
+///   HMIDIOUT hmo,
+///   UINT     uBank,
+///   LPWORD   pwpa,
+///   UINT     fuCache
+/// );
+/// ```
+/// {@category winmm}
+int midiOutCachePatches(int hmo, int uBank, Pointer<Uint16> pwpa, int fuCache) {
+  final _midiOutCachePatches = _winmm.lookupFunction<
+      Uint32 Function(
+          IntPtr hmo, Uint32 uBank, Pointer<Uint16> pwpa, Uint32 fuCache),
+      int Function(int hmo, int uBank, Pointer<Uint16> pwpa,
+          int fuCache)>('midiOutCachePatches');
+  return _midiOutCachePatches(hmo, uBank, pwpa, fuCache);
+}
+
+/// The midiOutClose function closes the specified MIDI output device.
+///
+/// ```c
+/// MMRESULT midiOutClose(
+///   HMIDIOUT hmo
+/// );
+/// ```
+/// {@category winmm}
+int midiOutClose(int hmo) {
+  final _midiOutClose =
+      _winmm.lookupFunction<Uint32 Function(IntPtr hmo), int Function(int hmo)>(
+          'midiOutClose');
+  return _midiOutClose(hmo);
+}
+
+/// The midiOutGetDevCaps function queries a specified MIDI output device
+/// to determine its capabilities.
+///
+/// ```c
+/// MMRESULT midiOutGetDevCapsW(
+///   UINT_PTR       uDeviceID,
+///   LPMIDIOUTCAPSW pmoc,
+///   UINT           cbmoc
+/// );
+/// ```
+/// {@category winmm}
+int midiOutGetDevCaps(int uDeviceID, Pointer<MIDIOUTCAPS> pmoc, int cbmoc) {
+  final _midiOutGetDevCaps = _winmm.lookupFunction<
+      Uint32 Function(
+          IntPtr uDeviceID, Pointer<MIDIOUTCAPS> pmoc, Uint32 cbmoc),
+      int Function(int uDeviceID, Pointer<MIDIOUTCAPS> pmoc,
+          int cbmoc)>('midiOutGetDevCapsW');
+  return _midiOutGetDevCaps(uDeviceID, pmoc, cbmoc);
+}
+
+/// The midiOutGetErrorText function retrieves a textual description for an
+/// error identified by the specified error code.
+///
+/// ```c
+/// MMRESULT midiOutGetErrorTextW(
+///   MMRESULT mmrError,
+///   LPWSTR   pszText,
+///   UINT     cchText
+/// );
+/// ```
+/// {@category winmm}
+int midiOutGetErrorText(int mmrError, Pointer<Utf16> pszText, int cchText) {
+  final _midiOutGetErrorText = _winmm.lookupFunction<
+      Uint32 Function(Uint32 mmrError, Pointer<Utf16> pszText, Uint32 cchText),
+      int Function(int mmrError, Pointer<Utf16> pszText,
+          int cchText)>('midiOutGetErrorTextW');
+  return _midiOutGetErrorText(mmrError, pszText, cchText);
+}
+
+/// The midiOutGetID function retrieves the device identifier for the given
+/// MIDI output device.
+///
+/// ```c
+/// MMRESULT midiOutGetID(
+///   HMIDIOUT hmo,
+///   LPUINT   puDeviceID
+/// );
+/// ```
+/// {@category winmm}
+int midiOutGetID(int hmo, Pointer<Uint32> puDeviceID) {
+  final _midiOutGetID = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hmo, Pointer<Uint32> puDeviceID),
+      int Function(int hmo, Pointer<Uint32> puDeviceID)>('midiOutGetID');
+  return _midiOutGetID(hmo, puDeviceID);
+}
+
 /// The midiOutGetNumDevs function retrieves the number of MIDI output
 /// devices present in the system.
 ///
@@ -133,6 +492,170 @@ int midiOutGetNumDevs() {
   final _midiOutGetNumDevs = _winmm
       .lookupFunction<Uint32 Function(), int Function()>('midiOutGetNumDevs');
   return _midiOutGetNumDevs();
+}
+
+/// The midiOutGetVolume function retrieves the current volume setting of a
+/// MIDI output device.
+///
+/// ```c
+/// MMRESULT midiOutGetVolume(
+///   HMIDIOUT hmo,
+///   LPDWORD  pdwVolume
+/// );
+/// ```
+/// {@category winmm}
+int midiOutGetVolume(int hmo, Pointer<Uint32> pdwVolume) {
+  final _midiOutGetVolume = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hmo, Pointer<Uint32> pdwVolume),
+      int Function(int hmo, Pointer<Uint32> pdwVolume)>('midiOutGetVolume');
+  return _midiOutGetVolume(hmo, pdwVolume);
+}
+
+/// The midiOutLongMsg function sends a system-exclusive MIDI message to
+/// the specified MIDI output device.
+///
+/// ```c
+/// MMRESULT midiOutLongMsg(
+///   HMIDIOUT  hmo,
+///   LPMIDIHDR pmh,
+///   UINT      cbmh
+/// );
+/// ```
+/// {@category winmm}
+int midiOutLongMsg(int hmo, Pointer<MIDIHDR> pmh, int cbmh) {
+  final _midiOutLongMsg = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hmo, Pointer<MIDIHDR> pmh, Uint32 cbmh),
+      int Function(int hmo, Pointer<MIDIHDR> pmh, int cbmh)>('midiOutLongMsg');
+  return _midiOutLongMsg(hmo, pmh, cbmh);
+}
+
+/// The midiOutMessage function sends a message to the MIDI device drivers.
+/// This function is used only for driver-specific messages that are not
+/// supported by the MIDI API.
+///
+/// ```c
+/// MMRESULT midiOutMessage(
+///   HMIDIOUT  hmo,
+///   UINT      uMsg,
+///   DWORD_PTR dw1,
+///   DWORD_PTR dw2
+/// );
+/// ```
+/// {@category winmm}
+int midiOutMessage(int hmo, int uMsg, int dw1, int dw2) {
+  final _midiOutMessage = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hmo, Uint32 uMsg, IntPtr dw1, IntPtr dw2),
+      int Function(int hmo, int uMsg, int dw1, int dw2)>('midiOutMessage');
+  return _midiOutMessage(hmo, uMsg, dw1, dw2);
+}
+
+/// The midiOutOpen function opens a MIDI output device for playback.
+///
+/// ```c
+/// MMRESULT midiOutOpen(
+///   LPHMIDIOUT phmo,
+///   UINT       uDeviceID,
+///   DWORD_PTR  dwCallback,
+///   DWORD_PTR  dwInstance,
+///   DWORD      fdwOpen
+/// );
+/// ```
+/// {@category winmm}
+int midiOutOpen(Pointer<IntPtr> phmo, int uDeviceID, int dwCallback,
+    int dwInstance, int fdwOpen) {
+  final _midiOutOpen = _winmm.lookupFunction<
+      Uint32 Function(Pointer<IntPtr> phmo, Uint32 uDeviceID, IntPtr dwCallback,
+          IntPtr dwInstance, Uint32 fdwOpen),
+      int Function(Pointer<IntPtr> phmo, int uDeviceID, int dwCallback,
+          int dwInstance, int fdwOpen)>('midiOutOpen');
+  return _midiOutOpen(phmo, uDeviceID, dwCallback, dwInstance, fdwOpen);
+}
+
+/// The midiOutPrepareHeader function prepares a MIDI system-exclusive or
+/// stream buffer for output.
+///
+/// ```c
+/// MMRESULT midiOutPrepareHeader(
+///   HMIDIOUT  hmo,
+///   LPMIDIHDR pmh,
+///   UINT      cbmh
+/// );
+/// ```
+/// {@category winmm}
+int midiOutPrepareHeader(int hmo, Pointer<MIDIHDR> pmh, int cbmh) {
+  final _midiOutPrepareHeader = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hmo, Pointer<MIDIHDR> pmh, Uint32 cbmh),
+      int Function(
+          int hmo, Pointer<MIDIHDR> pmh, int cbmh)>('midiOutPrepareHeader');
+  return _midiOutPrepareHeader(hmo, pmh, cbmh);
+}
+
+/// The midiOutReset function turns off all notes on all MIDI channels for
+/// the specified MIDI output device.
+///
+/// ```c
+/// MMRESULT midiOutReset(
+///   HMIDIOUT hmo
+/// );
+/// ```
+/// {@category winmm}
+int midiOutReset(int hmo) {
+  final _midiOutReset =
+      _winmm.lookupFunction<Uint32 Function(IntPtr hmo), int Function(int hmo)>(
+          'midiOutReset');
+  return _midiOutReset(hmo);
+}
+
+/// The midiOutSetVolume function sets the volume of a MIDI output device.
+///
+/// ```c
+/// MMRESULT midiOutSetVolume(
+///   HMIDIOUT hmo,
+///   DWORD    dwVolume
+/// );
+/// ```
+/// {@category winmm}
+int midiOutSetVolume(int hmo, int dwVolume) {
+  final _midiOutSetVolume = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hmo, Uint32 dwVolume),
+      int Function(int hmo, int dwVolume)>('midiOutSetVolume');
+  return _midiOutSetVolume(hmo, dwVolume);
+}
+
+/// The midiOutShortMsg function sends a short MIDI message to the
+/// specified MIDI output device.
+///
+/// ```c
+/// MMRESULT midiOutShortMsg(
+///   HMIDIOUT hmo,
+///   DWORD    dwMsg
+/// );
+/// ```
+/// {@category winmm}
+int midiOutShortMsg(int hmo, int dwMsg) {
+  final _midiOutShortMsg = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hmo, Uint32 dwMsg),
+      int Function(int hmo, int dwMsg)>('midiOutShortMsg');
+  return _midiOutShortMsg(hmo, dwMsg);
+}
+
+/// The midiOutUnprepareHeader function cleans up the preparation performed
+/// by the midiOutPrepareHeader function.
+///
+/// ```c
+/// MMRESULT midiOutUnprepareHeader(
+///   HMIDIOUT  hmo,
+///   LPMIDIHDR pmh,
+///   UINT      cbmh
+/// );
+/// ```
+/// {@category winmm}
+int midiOutUnprepareHeader(int hmo, Pointer<MIDIHDR> pmh, int cbmh) {
+  final _midiOutUnprepareHeader = _winmm.lookupFunction<
+      Uint32 Function(IntPtr hmo, Pointer<MIDIHDR> pmh, Uint32 cbmh),
+      int Function(
+          int hmo, Pointer<MIDIHDR> pmh, int cbmh)>('midiOutUnprepareHeader');
+  return _midiOutUnprepareHeader(hmo, pmh, cbmh);
 }
 
 /// The PlaySound function plays a sound specified by the given file name,

@@ -159,7 +159,8 @@ class BITMAPFILEHEADER extends Struct {
 /// {@category Struct}
 class BITMAPINFO extends Struct {
   external BITMAPINFOHEADER bmiHeader;
-  external RGBQUAD bmiColors;
+  @Array(1)
+  external Array<RGBQUAD> bmiColors;
 }
 
 /// The BITMAPINFOHEADER structure contains information about the
@@ -189,6 +190,21 @@ class BITMAPINFOHEADER extends Struct {
   external int biClrUsed;
   @Uint32()
   external int biClrImportant;
+}
+
+/// The BLENDFUNCTION structure controls blending by specifying the
+/// blending functions for source and destination bitmaps.
+///
+/// {@category Struct}
+class BLENDFUNCTION extends Struct {
+  @Uint8()
+  external int BlendOp;
+  @Uint8()
+  external int BlendFlags;
+  @Uint8()
+  external int SourceConstantAlpha;
+  @Uint8()
+  external int AlphaFormat;
 }
 
 /// The BLUETOOTH_DEVICE_SEARCH_PARAMS structure specifies search criteria
@@ -221,6 +237,17 @@ class BLUETOOTH_DEVICE_SEARCH_PARAMS extends Struct {
 class BLUETOOTH_FIND_RADIO_PARAMS extends Struct {
   @Uint32()
   external int dwSize;
+}
+
+/// The BLUETOOTH_OOB_DATA_INFO structure contains data used to
+/// authenticate prior to establishing an Out-of-Band device pairing.
+///
+/// {@category Struct}
+class BLUETOOTH_OOB_DATA_INFO extends Struct {
+  @Array(16)
+  external Array<Uint8> C;
+  @Array(16)
+  external Array<Uint8> R;
 }
 
 /// Contains information the ChooseColor function uses to initialize the
@@ -280,6 +307,39 @@ class CHOOSEFONT extends Struct {
   external int nSizeMin;
   @Int32()
   external int nSizeMax;
+}
+
+/// The COLORADJUSTMENT structure defines the color adjustment values used
+/// by the StretchBlt and StretchDIBits functions when the stretch mode is
+/// HALFTONE. You can set the color adjustment values by calling the
+/// SetColorAdjustment function.
+///
+/// {@category Struct}
+class COLORADJUSTMENT extends Struct {
+  @Uint16()
+  external int caSize;
+  @Uint16()
+  external int caFlags;
+  @Uint16()
+  external int caIlluminantIndex;
+  @Uint16()
+  external int caRedGamma;
+  @Uint16()
+  external int caGreenGamma;
+  @Uint16()
+  external int caBlueGamma;
+  @Uint16()
+  external int caReferenceBlack;
+  @Uint16()
+  external int caReferenceWhite;
+  @Int16()
+  external int caContrast;
+  @Int16()
+  external int caBrightness;
+  @Int16()
+  external int caColorfulness;
+  @Int16()
+  external int caRedGreenTint;
 }
 
 /// Used generically to filter elements.
@@ -398,6 +458,38 @@ class CREDENTIAL_ATTRIBUTE extends Struct {
   @Uint32()
   external int ValueSize;
   external Pointer<Uint8> Value;
+}
+
+/// The DESIGNVECTOR structure is used by an application to specify values
+/// for the axes of a multiple master font.
+///
+/// {@category Struct}
+class DESIGNVECTOR extends Struct {
+  @Uint32()
+  external int dvReserved;
+  @Uint32()
+  external int dvNumAxes;
+  @Array(16)
+  external Array<Int32> dvValues;
+}
+
+/// The DIBSECTION structure contains information about a DIB created by
+/// calling the CreateDIBSection function. A DIBSECTION structure includes
+/// information about the bitmap's dimensions, color format, color masks,
+/// optional file mapping object, and optional bit values storage offset.
+/// An application can obtain a filled-in DIBSECTION structure for a given
+/// DIB by calling the GetObject function.
+///
+/// {@category Struct}
+class DIBSECTION extends Struct {
+  external BITMAP dsBm;
+  external BITMAPINFOHEADER dsBmih;
+  @Array(3)
+  external Array<Uint32> dsBitfields;
+  @IntPtr()
+  external int dshSection;
+  @Uint32()
+  external int dsOffset;
 }
 
 /// Contains the arguments passed to a method or property.
@@ -551,6 +643,66 @@ class FINDREPLACE extends Struct {
   external Pointer<Utf16> lpTemplateName;
 }
 
+/// Describes a function.
+///
+/// {@category Struct}
+class FUNCDESC extends Struct {
+  @Int32()
+  external int memid;
+  external Pointer<Int32> lprgscode;
+  external Pointer<ELEMDESC> lprgelemdescParam;
+  @Uint32()
+  external int funckind;
+  @Uint32()
+  external int invkind;
+  @Uint32()
+  external int callconv;
+  @Int16()
+  external int cParams;
+  @Int16()
+  external int cParamsOpt;
+  @Int16()
+  external int oVft;
+  @Int16()
+  external int cScodes;
+  external ELEMDESC elemdescFunc;
+  @Uint16()
+  external int wFuncFlags;
+}
+
+/// Contains information about a GUI thread.
+///
+/// {@category Struct}
+class GUITHREADINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int flags;
+  @IntPtr()
+  external int hwndActive;
+  @IntPtr()
+  external int hwndFocus;
+  @IntPtr()
+  external int hwndCapture;
+  @IntPtr()
+  external int hwndMenuOwner;
+  @IntPtr()
+  external int hwndMoveSize;
+  @IntPtr()
+  external int hwndCaret;
+  external RECT rcCaret;
+}
+
+/// Contains the IDL attributes of a type.
+///
+/// {@category Struct}
+class IDLDESC extends Struct {
+  @IntPtr()
+  external int dwReserved;
+  @Uint16()
+  external int wIDLFlags;
+}
+
 /// Carries information used to load common control classes from the
 /// dynamic-link library (DLL). This structure is used with the
 /// InitCommonControlsEx function.
@@ -616,11 +768,23 @@ class LOGBRUSH extends Struct {
   external int lbHatch;
 }
 
+/// The LOGPALETTE structure defines a logical palette.
+///
+/// {@category Struct}
+class LOGPALETTE extends Struct {
+  @Uint16()
+  external int palVersion;
+  @Uint16()
+  external int palNumEntries;
+  @Array(1)
+  external Array<PALETTEENTRY> palPalEntry;
+}
+
 /// The MCI_OPEN_PARMS structure contains information for the MCI_OPEN
 /// command.
 ///
 /// {@category Struct}
-@Packed(4)
+@Packed(1)
 class MCI_OPEN_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
@@ -635,6 +799,7 @@ class MCI_OPEN_PARMS extends Struct {
 /// MCI_PLAY command.
 ///
 /// {@category Struct}
+@Packed(1)
 class MCI_PLAY_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
@@ -648,7 +813,7 @@ class MCI_PLAY_PARMS extends Struct {
 /// MCI_SEEK command.
 ///
 /// {@category Struct}
-@Packed(4)
+@Packed(1)
 class MCI_SEEK_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
@@ -660,6 +825,7 @@ class MCI_SEEK_PARMS extends Struct {
 /// command.
 ///
 /// {@category Struct}
+@Packed(1)
 class MCI_STATUS_PARMS extends Struct {
   @IntPtr()
   external int dwCallback;
@@ -718,6 +884,141 @@ class MENUITEMINFO extends Struct {
   external int cch;
   @IntPtr()
   external int hbmpItem;
+}
+
+/// Defines the metafile picture format used for exchanging metafile data
+/// through the clipboard.
+///
+/// {@category Struct}
+class METAFILEPICT extends Struct {
+  @Int32()
+  external int mm;
+  @Int32()
+  external int xExt;
+  @Int32()
+  external int yExt;
+  @IntPtr()
+  external int hMF;
+}
+
+/// The MIDIEVENT structure describes a MIDI event in a stream buffer.
+///
+/// {@category Struct}
+@Packed(1)
+class MIDIEVENT extends Struct {
+  @Uint32()
+  external int dwDeltaTime;
+  @Uint32()
+  external int dwStreamID;
+  @Uint32()
+  external int dwEvent;
+  @Array(1)
+  external Array<Uint32> dwParms;
+}
+
+/// The MIDIHDR structure defines the header used to identify a MIDI
+/// system-exclusive or stream buffer.
+///
+/// {@category Struct}
+@Packed(1)
+class MIDIHDR extends Struct {
+  external Pointer<Utf8> lpData;
+  @Uint32()
+  external int dwBufferLength;
+  @Uint32()
+  external int dwBytesRecorded;
+  @IntPtr()
+  external int dwUser;
+  @Uint32()
+  external int dwFlags;
+  external Pointer<MIDIHDR> lpNext;
+  @IntPtr()
+  external int reserved;
+  @Uint32()
+  external int dwOffset;
+  @Array(8)
+  external Array<IntPtr> dwReserved;
+}
+
+/// The MIDIINCAPS structure describes the capabilities of a MIDI input
+/// device.
+///
+/// {@category Struct}
+@Packed(1)
+class MIDIINCAPS extends Struct {
+  @Uint16()
+  external int wMid;
+  @Uint16()
+  external int wPid;
+  @Uint32()
+  external int vDriverVersion;
+  @Array(32)
+  external Array<Uint16> szPname;
+  @Uint32()
+  external int dwSupport;
+}
+
+/// The MIDIOUTCAPS structure describes the capabilities of a MIDI output
+/// device.
+///
+/// {@category Struct}
+@Packed(1)
+class MIDIOUTCAPS extends Struct {
+  @Uint16()
+  external int wMid;
+  @Uint16()
+  external int wPid;
+  @Uint32()
+  external int vDriverVersion;
+  @Array(32)
+  external Array<Uint16> szPname;
+  @Uint16()
+  external int wTechnology;
+  @Uint16()
+  external int wVoices;
+  @Uint16()
+  external int wNotes;
+  @Uint16()
+  external int wChannelMask;
+  @Uint32()
+  external int dwSupport;
+}
+
+/// The MIDIPROPTEMPO structure contains the tempo property for a stream.
+///
+/// {@category Struct}
+@Packed(1)
+class MIDIPROPTEMPO extends Struct {
+  @Uint32()
+  external int cbStruct;
+  @Uint32()
+  external int dwTempo;
+}
+
+/// The MIDIPROPTIMEDIV structure contains the time division property for a
+/// stream.
+///
+/// {@category Struct}
+@Packed(1)
+class MIDIPROPTIMEDIV extends Struct {
+  @Uint32()
+  external int cbStruct;
+  @Uint32()
+  external int dwTimeDiv;
+}
+
+/// The MIDISTRMBUFFVER structure contains version information for a long
+/// MIDI event of the MEVT_VERSION type.
+///
+/// {@category Struct}
+@Packed(1)
+class MIDISTRMBUFFVER extends Struct {
+  @Uint32()
+  external int dwVersion;
+  @Uint32()
+  external int dwMid;
+  @Uint32()
+  external int dwOEMVersion;
 }
 
 /// Contains information about a window's maximized size and position and
@@ -790,6 +1091,97 @@ class MSG extends Struct {
   external POINT pt;
 }
 
+/// The NEWTEXTMETRIC structure contains data that describes a physical
+/// font.
+///
+/// {@category Struct}
+class NEWTEXTMETRIC extends Struct {
+  @Int32()
+  external int tmHeight;
+  @Int32()
+  external int tmAscent;
+  @Int32()
+  external int tmDescent;
+  @Int32()
+  external int tmInternalLeading;
+  @Int32()
+  external int tmExternalLeading;
+  @Int32()
+  external int tmAveCharWidth;
+  @Int32()
+  external int tmMaxCharWidth;
+  @Int32()
+  external int tmWeight;
+  @Int32()
+  external int tmOverhang;
+  @Int32()
+  external int tmDigitizedAspectX;
+  @Int32()
+  external int tmDigitizedAspectY;
+  @Uint16()
+  external int tmFirstChar;
+  @Uint16()
+  external int tmLastChar;
+  @Uint16()
+  external int tmDefaultChar;
+  @Uint16()
+  external int tmBreakChar;
+  @Uint8()
+  external int tmItalic;
+  @Uint8()
+  external int tmUnderlined;
+  @Uint8()
+  external int tmStruckOut;
+  @Uint8()
+  external int tmPitchAndFamily;
+  @Uint8()
+  external int tmCharSet;
+  @Uint32()
+  external int ntmFlags;
+  @Uint32()
+  external int ntmSizeEM;
+  @Uint32()
+  external int ntmCellHeight;
+  @Uint32()
+  external int ntmAvgWidth;
+}
+
+/// Contains the scalable metrics associated with the nonclient area of a
+/// nonminimized window. This structure is used by the
+/// SPI_GETNONCLIENTMETRICS and SPI_SETNONCLIENTMETRICS actions of the
+/// SystemParametersInfo function.
+///
+/// {@category Struct}
+class NONCLIENTMETRICS extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Int32()
+  external int iBorderWidth;
+  @Int32()
+  external int iScrollWidth;
+  @Int32()
+  external int iScrollHeight;
+  @Int32()
+  external int iCaptionWidth;
+  @Int32()
+  external int iCaptionHeight;
+  external LOGFONT lfCaptionFont;
+  @Int32()
+  external int iSmCaptionWidth;
+  @Int32()
+  external int iSmCaptionHeight;
+  external LOGFONT lfSmCaptionFont;
+  @Int32()
+  external int iMenuWidth;
+  @Int32()
+  external int iMenuHeight;
+  external LOGFONT lfMenuFont;
+  external LOGFONT lfStatusFont;
+  external LOGFONT lfMessageFont;
+  @Int32()
+  external int iPaddedBorderWidth;
+}
+
 /// Contains information that the GetOpenFileName and GetSaveFileName
 /// functions use to initialize an Open or Save As dialog box. After the
 /// user closes the dialog box, the system returns information about the
@@ -851,6 +1243,25 @@ class PALETTEENTRY extends Struct {
   external int peFlags;
 }
 
+/// Contains information needed for transferring a structure element,
+/// parameter, or function return value between processes.
+///
+/// {@category Struct}
+class PARAMDESC extends Struct {
+  external Pointer<PARAMDESCEX> pparamdescex;
+  @Uint16()
+  external int wParamFlags;
+}
+
+/// Contains information about the default value of a parameter.
+///
+/// {@category Struct}
+class PARAMDESCEX extends Struct {
+  @Uint32()
+  external int cBytes;
+  external VARIANT varDefaultValue;
+}
+
 /// The POINT structure defines the x- and y-coordinates of a point.
 ///
 /// {@category Struct}
@@ -859,6 +1270,36 @@ class POINT extends Struct {
   external int x;
   @Int32()
   external int y;
+}
+
+/// The POLYTEXT structure describes how the PolyTextOut function should
+/// draw a string of text.
+///
+/// {@category Struct}
+class POLYTEXT extends Struct {
+  @Int32()
+  external int x;
+  @Int32()
+  external int y;
+  @Uint32()
+  external int n;
+  external Pointer<Utf16> lpstr;
+  @Uint32()
+  external int uiFlags;
+  external RECT rcl;
+  external Pointer<Int32> pdx;
+}
+
+/// Sent with a power setting event and contains data about the specific
+/// change.
+///
+/// {@category Struct}
+class POWERBROADCAST_SETTING extends Struct {
+  external GUID PowerSetting;
+  @Uint32()
+  external int DataLength;
+  @Array(1)
+  external Array<Uint8> Data;
 }
 
 /// Contains information about a newly created process and its primary
@@ -881,7 +1322,6 @@ class PROCESS_INFORMATION extends Struct {
 /// property.
 ///
 /// {@category Struct}
-@Packed(4)
 class PROPERTYKEY extends Struct {
   external GUID fmtid;
   @Uint32()
@@ -931,7 +1371,8 @@ class SAFEARRAY extends Struct {
   @Uint32()
   external int cLocks;
   external Pointer pvData;
-  external SAFEARRAYBOUND rgsabound;
+  @Array(1)
+  external Array<SAFEARRAYBOUND> rgsabound;
 }
 
 /// Represents the bounds of one dimension of the array.
@@ -997,6 +1438,17 @@ class SECURITY_DESCRIPTOR extends Struct {
   external Pointer Group;
   external Pointer<ACL> Sacl;
   external Pointer<ACL> Dacl;
+}
+
+/// Defines an item identifier.
+///
+/// {@category Struct}
+@Packed(1)
+class SHITEMID extends Struct {
+  @Uint16()
+  external int cb;
+  @Array(1)
+  external Array<Uint8> abID;
 }
 
 /// Contains the size and item count information retrieved by the
@@ -1115,6 +1567,82 @@ class STATSTG extends Struct {
   external int reserved;
 }
 
+/// Contains the styles for a window.
+///
+/// {@category Struct}
+class STYLESTRUCT extends Struct {
+  @Uint32()
+  external int styleOld;
+  @Uint32()
+  external int styleNew;
+}
+
+/// Contains symbol information.
+///
+/// {@category Struct}
+class SYMBOL_INFO extends Struct {
+  @Uint32()
+  external int SizeOfStruct;
+  @Uint32()
+  external int TypeIndex;
+  @Array(2)
+  external Array<Uint64> Reserved;
+  @Uint32()
+  external int Index;
+  @Uint32()
+  external int Size;
+  @Uint64()
+  external int ModBase;
+  @Uint32()
+  external int Flags;
+  @Uint64()
+  external int Value;
+  @Uint64()
+  external int Address;
+  @Uint32()
+  external int Register;
+  @Uint32()
+  external int Scope;
+  @Uint32()
+  external int Tag;
+  @Uint32()
+  external int NameLen;
+  @Uint32()
+  external int MaxNameLen;
+  @Array(1)
+  external Array<Uint16> Name;
+}
+
+/// Contains information about the current state of the system battery.
+///
+/// {@category Struct}
+class SYSTEM_BATTERY_STATE extends Struct {
+  @Uint8()
+  external int AcOnLine;
+  @Uint8()
+  external int BatteryPresent;
+  @Uint8()
+  external int Charging;
+  @Uint8()
+  external int Discharging;
+  @Array(3)
+  external Array<Uint8> Spare1;
+  @Uint8()
+  external int Tag;
+  @Uint32()
+  external int MaxCapacity;
+  @Uint32()
+  external int RemainingCapacity;
+  @Uint32()
+  external int Rate;
+  @Uint32()
+  external int EstimatedTime;
+  @Uint32()
+  external int DefaultAlert1;
+  @Uint32()
+  external int DefaultAlert2;
+}
+
 /// Contains information about the power status of the system.
 ///
 /// {@category Struct}
@@ -1163,7 +1691,7 @@ class SYSTEMTIME extends Struct {
 /// structure.
 ///
 /// {@category Struct}
-@Packed(4)
+@Packed(1)
 class TASKDIALOG_BUTTON extends Struct {
   @Int32()
   external int nButtonID;
@@ -1218,6 +1746,32 @@ class TEXTMETRIC extends Struct {
   external int tmCharSet;
 }
 
+/// Contains title bar information.
+///
+/// {@category Struct}
+class TITLEBARINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  external RECT rcTitleBar;
+  @Array(6)
+  external Array<Uint32> rgstate;
+}
+
+/// Expands on the information described in the TITLEBARINFO structure by
+/// including the coordinates of each element of the title bar. This
+/// structure is sent with the WM_GETTITLEBARINFOEX message.
+///
+/// {@category Struct}
+class TITLEBARINFOEX extends Struct {
+  @Uint32()
+  external int cbSize;
+  external RECT rcTitleBar;
+  @Array(6)
+  external Array<Uint32> rgstate;
+  @Array(6)
+  external Array<RECT> rgrect;
+}
+
 /// Contains extended parameters for the TrackPopupMenuEx function.
 ///
 /// {@category Struct}
@@ -1225,6 +1779,66 @@ class TPMPARAMS extends Struct {
   @Uint32()
   external int cbSize;
   external RECT rcExclude;
+}
+
+/// Contains attributes of a type.
+///
+/// {@category Struct}
+class TYPEATTR extends Struct {
+  external GUID guid;
+  @Uint32()
+  external int lcid;
+  @Uint32()
+  external int dwReserved;
+  @Int32()
+  external int memidConstructor;
+  @Int32()
+  external int memidDestructor;
+  external Pointer<Utf16> lpstrSchema;
+  @Uint32()
+  external int cbSizeInstance;
+  @Uint32()
+  external int typekind;
+  @Uint16()
+  external int cFuncs;
+  @Uint16()
+  external int cVars;
+  @Uint16()
+  external int cImplTypes;
+  @Uint16()
+  external int cbSizeVft;
+  @Uint16()
+  external int cbAlignment;
+  @Uint16()
+  external int wTypeFlags;
+  @Uint16()
+  external int wMajorVerNum;
+  @Uint16()
+  external int wMinorVerNum;
+  external TYPEDESC tdescAlias;
+  external IDLDESC idldescType;
+}
+
+/// Used by UpdateLayeredWindowIndirect to provide position, size, shape,
+/// content, and translucency information for a layered window.
+///
+/// {@category Struct}
+class UPDATELAYEREDWINDOWINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  @IntPtr()
+  external int hdcDst;
+  external Pointer<POINT> pptDst;
+  external Pointer<SIZE> psize;
+  @IntPtr()
+  external int hdcSrc;
+  external Pointer<POINT> pptSrc;
+  @Uint32()
+  external int crKey;
+  external Pointer<BLENDFUNCTION> pblend;
+  @Uint32()
+  external int dwFlags;
+  external Pointer<RECT> prcDirty;
 }
 
 /// Contains information about a registry value. The RegQueryMultipleValues
@@ -1303,6 +1917,7 @@ class WAVEFORMATEX extends Struct {
 /// waveform-audio buffer.
 ///
 /// {@category Struct}
+@Packed(1)
 class WAVEHDR extends Struct {
   external Pointer<Utf8> lpData;
   @Uint32()
@@ -1344,6 +1959,21 @@ class WINDOWINFO extends Struct {
   external int wCreatorVersion;
 }
 
+/// Contains information about the placement of a window on the screen.
+///
+/// {@category Struct}
+class WINDOWPLACEMENT extends Struct {
+  @Uint32()
+  external int length;
+  @Uint32()
+  external int flags;
+  @Uint32()
+  external int showCmd;
+  external POINT ptMinPosition;
+  external POINT ptMaxPosition;
+  external RECT rcNormalPosition;
+}
+
 /// Contains the window class attributes that are registered by the
 /// RegisterClass function.
 ///
@@ -1366,4 +1996,55 @@ class WNDCLASS extends Struct {
   external int hbrBackground;
   external Pointer<Utf16> lpszMenuName;
   external Pointer<Utf16> lpszClassName;
+}
+
+/// Contains window class information. It is used with the RegisterClassEx
+/// and GetClassInfoEx functions. The WNDCLASSEX structure is similar to
+/// the WNDCLASS structure. There are two differences. WNDCLASSEX includes
+/// the cbSize member, which specifies the size of the structure, and the
+/// hIconSm member, which contains a handle to a small icon associated with
+/// the window class.
+///
+/// {@category Struct}
+class WNDCLASSEX extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int style;
+  external Pointer<NativeFunction<WindowProc>> lpfnWndProc;
+  @Int32()
+  external int cbClsExtra;
+  @Int32()
+  external int cbWndExtra;
+  @IntPtr()
+  external int hInstance;
+  @IntPtr()
+  external int hIcon;
+  @IntPtr()
+  external int hCursor;
+  @IntPtr()
+  external int hbrBackground;
+  external Pointer<Utf16> lpszMenuName;
+  external Pointer<Utf16> lpszClassName;
+  @IntPtr()
+  external int hIconSm;
+}
+
+/// The XFORM structure specifies a world-space to page-space
+/// transformation.
+///
+/// {@category Struct}
+class XFORM extends Struct {
+  @Float()
+  external double eM11;
+  @Float()
+  external double eM12;
+  @Float()
+  external double eM21;
+  @Float()
+  external double eM22;
+  @Float()
+  external double eDx;
+  @Float()
+  external double eDy;
 }

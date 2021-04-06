@@ -883,7 +883,7 @@ int FillConsoleOutputAttribute(int hConsoleOutput, int wAttribute, int nLength,
 /// ```c
 /// BOOL WINAPI FillConsoleOutputCharacterW(
 ///   _In_  HANDLE  hConsoleOutput,
-///   _In_  TCHAR   cCharacter,
+///   _In_  WCHAR   cCharacter,
 ///   _In_  DWORD   nLength,
 ///   _In_  COORD   dwWriteCoord,
 ///   _Out_ LPDWORD lpNumberOfCharsWritten
@@ -1406,6 +1406,24 @@ int GetCurrentProcess() {
   return _GetCurrentProcess();
 }
 
+/// Retrieves the application-specific portion of the search path used to
+/// locate DLLs for the application.
+///
+/// ```c
+/// DWORD GetDllDirectoryW(
+///   DWORD  nBufferLength,
+///   LPWSTR lpBuffer
+/// );
+/// ```
+/// {@category kernel32}
+int GetDllDirectory(int nBufferLength, Pointer<Utf16> lpBuffer) {
+  final _GetDllDirectory = _kernel32.lookupFunction<
+      Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
+      int Function(
+          int nBufferLength, Pointer<Utf16> lpBuffer)>('GetDllDirectoryW');
+  return _GetDllDirectory(nBufferLength, lpBuffer);
+}
+
 /// Retrieves the termination status of the specified process.
 ///
 /// ```c
@@ -1619,6 +1637,40 @@ int GetModuleHandle(Pointer<Utf16> lpModuleName) {
       IntPtr Function(Pointer<Utf16> lpModuleName),
       int Function(Pointer<Utf16> lpModuleName)>('GetModuleHandleW');
   return _GetModuleHandle(lpModuleName);
+}
+
+/// Retrieves the client process identifier for the specified named pipe.
+///
+/// ```c
+/// BOOL GetNamedPipeClientProcessId(
+///   HANDLE Pipe,
+///   PULONG ClientProcessId
+/// );
+/// ```
+/// {@category kernel32}
+int GetNamedPipeClientProcessId(int Pipe, Pointer<Uint32> ClientProcessId) {
+  final _GetNamedPipeClientProcessId = _kernel32.lookupFunction<
+      Int32 Function(IntPtr Pipe, Pointer<Uint32> ClientProcessId),
+      int Function(int Pipe,
+          Pointer<Uint32> ClientProcessId)>('GetNamedPipeClientProcessId');
+  return _GetNamedPipeClientProcessId(Pipe, ClientProcessId);
+}
+
+/// Retrieves the client process identifier for the specified named pipe.
+///
+/// ```c
+/// BOOL GetNamedPipeClientSessionId(
+///   HANDLE Pipe,
+///   PULONG ClientSessionId
+/// );
+/// ```
+/// {@category kernel32}
+int GetNamedPipeClientSessionId(int Pipe, Pointer<Uint32> ClientSessionId) {
+  final _GetNamedPipeClientSessionId = _kernel32.lookupFunction<
+      Int32 Function(IntPtr Pipe, Pointer<Uint32> ClientSessionId),
+      int Function(int Pipe,
+          Pointer<Uint32> ClientSessionId)>('GetNamedPipeClientSessionId');
+  return _GetNamedPipeClientSessionId(Pipe, ClientSessionId);
 }
 
 /// Retrieves information about the specified named pipe.
@@ -2136,12 +2188,12 @@ int HeapFree(int hHeap, int dwFlags, Pointer lpMem) {
 /// );
 /// ```
 /// {@category kernel32}
-int InitializeProcThreadAttributeList(int lpAttributeList, int dwAttributeCount,
-    int dwFlags, Pointer<IntPtr> lpSize) {
+int InitializeProcThreadAttributeList(Pointer lpAttributeList,
+    int dwAttributeCount, int dwFlags, Pointer<IntPtr> lpSize) {
   final _InitializeProcThreadAttributeList = _kernel32.lookupFunction<
-      Int32 Function(IntPtr lpAttributeList, Uint32 dwAttributeCount,
+      Int32 Function(Pointer lpAttributeList, Uint32 dwAttributeCount,
           Uint32 dwFlags, Pointer<IntPtr> lpSize),
-      int Function(int lpAttributeList, int dwAttributeCount, int dwFlags,
+      int Function(Pointer lpAttributeList, int dwAttributeCount, int dwFlags,
           Pointer<IntPtr> lpSize)>('InitializeProcThreadAttributeList');
   return _InitializeProcThreadAttributeList(
       lpAttributeList, dwAttributeCount, dwFlags, lpSize);
@@ -3074,7 +3126,7 @@ int TransactNamedPipe(
 /// ```
 /// {@category kernel32}
 int UpdateProcThreadAttribute(
-    int lpAttributeList,
+    Pointer lpAttributeList,
     int dwFlags,
     int Attribute,
     Pointer lpValue,
@@ -3083,7 +3135,7 @@ int UpdateProcThreadAttribute(
     Pointer<IntPtr> lpReturnSize) {
   final _UpdateProcThreadAttribute = _kernel32.lookupFunction<
       Int32 Function(
-          IntPtr lpAttributeList,
+          Pointer lpAttributeList,
           Uint32 dwFlags,
           IntPtr Attribute,
           Pointer lpValue,
@@ -3091,7 +3143,7 @@ int UpdateProcThreadAttribute(
           Pointer lpPreviousValue,
           Pointer<IntPtr> lpReturnSize),
       int Function(
-          int lpAttributeList,
+          Pointer lpAttributeList,
           int dwFlags,
           int Attribute,
           Pointer lpValue,

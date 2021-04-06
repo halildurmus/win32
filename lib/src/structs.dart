@@ -101,79 +101,6 @@ class SYSTEM_INFO extends Struct {
   external int wProcessorRevision;
 }
 
-// typedef struct {
-//   GUID  PowerSetting;
-//   DWORD DataLength;
-//   UCHAR Data[1];
-// } POWERBROADCAST_SETTING, *PPOWERBROADCAST_SETTING;
-
-/// Sent with a power setting event and contains data about the specific change.
-///
-/// {@category Struct}
-class POWERBROADCAST_SETTING extends Struct {
-  external GUID PowerSetting;
-  @Uint32()
-  external int DataLength;
-  @Uint8()
-  external int Data;
-}
-
-// typedef struct {
-//     BOOLEAN             AcOnLine;
-//     BOOLEAN             BatteryPresent;
-//     BOOLEAN             Charging;
-//     BOOLEAN             Discharging;
-//     BOOLEAN             Spare1[3];
-
-//     BYTE                Tag;
-
-//     DWORD               MaxCapacity;
-//     DWORD               RemainingCapacity;
-//     DWORD               Rate;
-//     DWORD               EstimatedTime;
-
-//     DWORD               DefaultAlert1;
-//     DWORD               DefaultAlert2;
-// } SYSTEM_BATTERY_STATE, *PSYSTEM_BATTERY_STATE;
-
-/// Contains information about the current state of the system battery.
-///
-/// {@category Struct}
-class SYSTEM_BATTERY_STATE extends Struct {
-  @Uint8()
-  external int AcOnLine;
-  @Uint8()
-  external int BatteryPresent;
-  @Uint8()
-  external int Charging;
-  @Uint8()
-  external int Discharging;
-
-  @Uint8()
-  external int Spare1a;
-  @Uint8()
-  external int Spare1b;
-  @Uint8()
-  external int Spare1c;
-
-  @Uint8()
-  external int Tag;
-
-  @Uint32()
-  external int MaxCapacity;
-  @Uint32()
-  external int RemainingCapacity;
-  @Uint32()
-  external int Rate;
-  @Uint32()
-  external int EstimatedTime;
-
-  @Uint32()
-  external int DefaultAlert1;
-  @Uint32()
-  external int DefaultAlert2;
-}
-
 // typedef struct _STARTUPINFOEXW {
 //   STARTUPINFOW                 StartupInfo;
 //   LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList;
@@ -345,6 +272,75 @@ class PHYSICAL_MONITOR extends Struct {
     }
     return String.fromCharCodes(charCodes);
   }
+}
+
+// typedef struct tagTYPEDESC {
+//   union {
+//     struct tagTYPEDESC *lptdesc;
+//     struct tagARRAYDESC *lpadesc;
+//     HREFTYPE hreftype;
+//   } DUMMYUNIONNAME;
+//   VARTYPE vt;
+// } TYPEDESC;
+
+/// Describes the type of a variable, the return type of a function, or the type
+/// of a function parameter.
+///
+/// {@category Struct}
+class TYPEDESC extends Struct {
+  external Pointer lptdesc;
+  Pointer get lpadesc => lptdesc;
+  int get hreftype => lptdesc.cast<Uint32>().value;
+
+  @Uint16()
+  external int vt;
+}
+
+// typedef struct tagELEMDESC {
+//   TYPEDESC tdesc;
+//   union {
+//     IDLDESC   idldesc;
+//     PARAMDESC paramdesc;
+//   } DUMMYUNIONNAME;
+// } ELEMDESC, *LPELEMDESC;
+
+/// Contains the type description and process-transfer information for a
+/// variable, a function, or a function parameter.
+///
+/// {@category Struct}
+class ELEMDESC extends Struct {
+  external TYPEDESC tdesc;
+  external IDLDESC idldesc;
+  // Waiting on union types
+  //   PARAMDESC get paramdesc => idldesc.cast<PARAMDESC>().value;
+}
+
+// typedef struct tagVARDESC {
+//   MEMBERID memid;
+//   LPOLESTR lpstrSchema;
+//   union {
+//     ULONG   oInst;
+//     VARIANT *lpvarValue;
+//   } DUMMYUNIONNAME;
+//   ELEMDESC elemdescVar;
+//   WORD     wVarFlags;
+//   VARKIND  varkind;
+// } VARDESC, *LPVARDESC;
+
+/// Describes a variable, constant, or data member.
+///
+/// {@category Struct}
+class VARDESC extends Struct {
+  @Uint32()
+  external int memid;
+  external Pointer<Utf16> lpstrSchema;
+  external Pointer<VARIANT> lpvarValue;
+  int get oInst => lpvarValue.cast<Uint32>().value;
+  external ELEMDESC elemdescVar;
+  @Uint16()
+  external int wVarFlags;
+  @Uint32()
+  external int varkind;
 }
 
 // typedef struct _STRRET {
@@ -906,23 +902,6 @@ class GUID extends Struct {
   }
 }
 
-// typedef struct _SHITEMID
-//     {
-//     USHORT cb;
-//     BYTE abID[ 1 ];
-//     }
-
-/// Defines an item identifier.
-///
-/// {@category Struct}
-@Packed(1)
-class SHITEMID extends Struct {
-  @Uint16()
-  external int cb;
-  @Uint8()
-  external int abID;
-}
-
 // typedef struct _CHAR_INFO {
 //   union {
 //     WCHAR UnicodeChar;
@@ -1244,42 +1223,6 @@ class BLUETOOTH_PIN_INFO extends Struct {
   }
 }
 
-// typedef struct _BLUETOOTH_OOB_DATA_INFO {
-//   UCHAR C[16];
-//   UCHAR R[16];
-// } BLUETOOTH_OOB_DATA_INFO, *PBLUETOOTH_OOB_DATA_INFO;
-
-/// The BLUETOOTH_OOB_DATA_INFO structure contains data used to authenticate
-/// prior to establishing an Out-of-Band device pairing.
-///
-/// {@category Struct}
-class BLUETOOTH_OOB_DATA_INFO extends Struct {
-  @Int64()
-  external int _data0;
-  @Int64()
-  external int _data1;
-  @Int64()
-  external int _data2;
-  @Int64()
-  external int _data3;
-
-  Uint8List get C =>
-      Uint64List.fromList([_data0, _data1]).buffer.asUint8List(0);
-  set C(Uint8List val) {
-    final val64 = val.buffer.asUint64List(0);
-    _data0 = val64[0];
-    _data1 = val64[1];
-  }
-
-  Uint8List get R =>
-      Uint64List.fromList([_data2, _data3]).buffer.asUint8List(0);
-  set R(Uint8List val) {
-    final val64 = val.buffer.asUint64List(0);
-    _data2 = val64[0];
-    _data3 = val64[1];
-  }
-}
-
 // typedef struct COR_FIELD_OFFSET
 //     {
 //     mdFieldDef ridOfField;
@@ -1503,24 +1446,59 @@ class MMTIME extends Struct {
   set midi(_midi value) => ms = value.songptrpos;
 }
 
-// -----------------------------------------------------------------------------
-// UNIMPLEMENTED OR PARTIALLY IMPLEMENTED CLASSES THAT ARE INCLUDED SO THAT COM
-// OBJECTS CAN BE GENERATED
-// -----------------------------------------------------------------------------
-
 /// The PROPVARIANT structure is used in the ReadMultiple and WriteMultiple
 /// methods of IPropertyStorage to define the type tag and the value of a
 /// property in a property set.
 ///
 /// {@category Struct}
-class PROPVARIANT extends Opaque {}
+class PROPVARIANT extends Struct {
+  @Uint16()
+  external int vt;
+  @Uint16()
+  external int wReserved1;
+  @Uint16()
+  external int wReserved2;
+  @Uint16()
+  external int wReserved3;
+  @IntPtr()
+  external int val1;
+  @IntPtr()
+  external int val2;
+}
+
+// typedef struct NLM_SIMULATED_PROFILE_INFO {
+//   WCHAR               ProfileName[256];
+//   NLM_CONNECTION_COST cost;
+//   DWORD               UsageInMegabytes;
+//   DWORD               DataLimitInMegabytes;
+// } NLM_SIMULATED_PROFILE_INFO;
 
 /// Used to specify values that are used by SetSimulatedProfileInfo to override
 /// current internet connection profile values in an RDP Child Session to
 /// support the simulation of specific metered internet connection conditions.
 ///
 /// {@category Struct}
-class NLM_SIMULATED_PROFILE_INFO extends Opaque {}
+class NLM_SIMULATED_PROFILE_INFO extends Struct {
+  @Array(256)
+  external Array<Uint16> _ProfileName;
+
+  String get ProfileName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 256; i++) {
+      charCodes.add(_ProfileName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  @Uint32()
+  external int cost;
+
+  @Uint32()
+  external int UsageInMegabytes;
+
+  @Uint32()
+  external int DataLimitInMegabytes;
+}
 
 // typedef struct _NOTIFYICONDATAW {
 //   DWORD cbSize;
@@ -1642,60 +1620,4 @@ class NOTIFYICONDATA extends Struct {
 
   @IntPtr()
   external int hBalloonIcon;
-}
-
-// typedef struct _SYMBOL_INFOW {
-//   ULONG   SizeOfStruct;
-//   ULONG   TypeIndex;
-//   ULONG64 Reserved[2];
-//   ULONG   Index;
-//   ULONG   Size;
-//   ULONG64 ModBase;
-//   ULONG   Flags;
-//   ULONG64 Value;
-//   ULONG64 Address;
-//   ULONG   Register;
-//   ULONG   Scope;
-//   ULONG   Tag;
-//   ULONG   NameLen;
-//   ULONG   MaxNameLen;
-//   WCHAR   Name[1];
-// } SYMBOL_INFOW, *PSYMBOL_INFOW;
-
-/// Contains symbol information.
-///
-/// {@category Struct}
-class SYMBOL_INFO extends Struct {
-  @Uint32()
-  external int SizeOfStruct;
-  @Uint32()
-  external int TypeIndex;
-  @Uint64()
-  external int Reserved0;
-  @Uint64()
-  external int Reserved1;
-  @Uint32()
-  external int Index;
-  @Uint32()
-  external int Size;
-  @Uint64()
-  external int ModBase;
-  @Uint32()
-  external int Flags;
-  @Uint64()
-  external int Value;
-  @Uint64()
-  external int Address;
-  @Uint32()
-  external int Register;
-  @Uint32()
-  external int Scope;
-  @Uint32()
-  external int Tag;
-  @Uint32()
-  external int NameLen;
-  @Uint32()
-  external int MaxNameLen;
-  @Uint16()
-  external int Name;
 }

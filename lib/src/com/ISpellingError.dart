@@ -49,54 +49,66 @@ class ISpellingError extends IUnknown {
   int get StartIndex {
     final retValuePtr = calloc<Uint32>();
 
-    final hr = Pointer<NativeFunction<_get_StartIndex_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(3).value)
-        .asFunction<_get_StartIndex_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw WindowsException(hr);
+    try {
+      final hr = Pointer<NativeFunction<_get_StartIndex_Native>>.fromAddress(
+              ptr.ref.vtable.elementAt(3).value)
+          .asFunction<_get_StartIndex_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    final retValue = retValuePtr.value;
-    free(retValuePtr);
-    return retValue;
+      final retValue = retValuePtr.value;
+      return retValue;
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   int get Length {
     final retValuePtr = calloc<Uint32>();
 
-    final hr = Pointer<NativeFunction<_get_Length_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(4).value)
-        .asFunction<_get_Length_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw WindowsException(hr);
+    try {
+      final hr = Pointer<NativeFunction<_get_Length_Native>>.fromAddress(
+              ptr.ref.vtable.elementAt(4).value)
+          .asFunction<_get_Length_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    final retValue = retValuePtr.value;
-    free(retValuePtr);
-    return retValue;
+      final retValue = retValuePtr.value;
+      return retValue;
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   int get CorrectiveAction {
     final retValuePtr = calloc<Uint32>();
 
-    final hr =
-        Pointer<NativeFunction<_get_CorrectiveAction_Native>>.fromAddress(
-                    ptr.ref.vtable.elementAt(5).value)
-                .asFunction<_get_CorrectiveAction_Dart>()(
-            ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw WindowsException(hr);
+    try {
+      final hr =
+          Pointer<NativeFunction<_get_CorrectiveAction_Native>>.fromAddress(
+                      ptr.ref.vtable.elementAt(5).value)
+                  .asFunction<_get_CorrectiveAction_Dart>()(
+              ptr.ref.lpVtbl, retValuePtr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    final retValue = retValuePtr.value;
-    free(retValuePtr);
-    return retValue;
+      final retValue = retValuePtr.value;
+      return retValue;
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   Pointer<Utf16> get Replacement {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
-    final hr = Pointer<NativeFunction<_get_Replacement_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(6).value)
-        .asFunction<_get_Replacement_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw WindowsException(hr);
+    try {
+      final hr = Pointer<NativeFunction<_get_Replacement_Native>>.fromAddress(
+              ptr.ref.vtable.elementAt(6).value)
+          .asFunction<_get_Replacement_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    final retValue = retValuePtr.value;
-    free(retValuePtr);
-    return retValue;
+      final retValue = retValuePtr.value;
+      return retValue;
+    } finally {
+      free(retValuePtr);
+    }
   }
 }
