@@ -136,7 +136,7 @@ void main() {
 
   // Start with the GDI namespace
   final gdi = scope.typeDefs
-      .where((typedef) => (typedef.typeName == 'Windows.Win32.Multimedia.Apis'))
+      .where((typedef) => (typedef.typeName == 'Windows.Win32.Gdi.Apis'))
       .first;
 
   // List of distinct modules in the namespace
