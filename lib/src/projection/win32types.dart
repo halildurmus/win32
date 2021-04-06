@@ -247,7 +247,10 @@ const win32TypeMap = <String, String>{
   'HMIDIIN': 'IntPtr',
 
   // A handle to a MIDI output device. Declared as `HANDLE`.
-  'HMIDIOUT': 'IntPtr,',
+  'HMIDIOUT': 'IntPtr',
+
+  // A handle to a MIDI stream. Declared as `HANDLE`.
+  'HMIDISTRM': 'IntPtr',
 
   // A handle to a module. The is the base address of the module in memory.
   // Declared as `HANDLE`.
