@@ -44,49 +44,71 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class NetEnumHandle extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class CONNECTDLGSTRUCTA extends Struct {
-  @Uint32() external int cbStructure;
-  @IntPtr() external int hwndOwner;
+  @Uint32()
+  external int cbStructure;
+  @IntPtr()
+  external int hwndOwner;
   external Pointer<NETRESOURCEA> lpConnRes;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwDevNum;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwDevNum;
 }
 
 class CONNECTDLGSTRUCTW extends Struct {
-  @Uint32() external int cbStructure;
-  @IntPtr() external int hwndOwner;
+  @Uint32()
+  external int cbStructure;
+  @IntPtr()
+  external int hwndOwner;
   external Pointer<NETRESOURCE> lpConnRes;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwDevNum;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwDevNum;
 }
 
 class DISCDLGSTRUCTA extends Struct {
-  @Uint32() external int cbStructure;
-  @IntPtr() external int hwndOwner;
+  @Uint32()
+  external int cbStructure;
+  @IntPtr()
+  external int hwndOwner;
   external Pointer<Utf8> lpLocalName;
   external Pointer<Utf8> lpRemoteName;
-  @Uint32() external int dwFlags;
+  @Uint32()
+  external int dwFlags;
 }
 
 class DISCDLGSTRUCTW extends Struct {
-  @Uint32() external int cbStructure;
-  @IntPtr() external int hwndOwner;
+  @Uint32()
+  external int cbStructure;
+  @IntPtr()
+  external int hwndOwner;
   external Pointer<Utf16> lpLocalName;
   external Pointer<Utf16> lpRemoteName;
-  @Uint32() external int dwFlags;
+  @Uint32()
+  external int dwFlags;
 }
 
 class NETINFOSTRUCT extends Struct {
-  @Uint32() external int cbStructure;
-  @Uint32() external int dwProviderVersion;
-  @Uint32() external int dwStatus;
-  @Uint32() external int dwCharacteristics;
-  @IntPtr() external int dwHandle;
-  @Uint16() external int wNetType;
-  @Uint32() external int dwPrinters;
-  @Uint32() external int dwDrives;
+  @Uint32()
+  external int cbStructure;
+  @Uint32()
+  external int dwProviderVersion;
+  @Uint32()
+  external int dwStatus;
+  @Uint32()
+  external int dwCharacteristics;
+  @IntPtr()
+  external int dwHandle;
+  @Uint16()
+  external int wNetType;
+  @Uint32()
+  external int dwPrinters;
+  @Uint32()
+  external int dwDrives;
 }
-

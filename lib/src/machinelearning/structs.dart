@@ -44,75 +44,103 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class WINML_TENSOR_BINDING_DESC extends Struct {
-  @Uint32() external int DataType;
-  @Uint32() external int NumDimensions;
+  @Uint32()
+  external int DataType;
+  @Uint32()
+  external int NumDimensions;
   external Pointer<Int64> pShape;
-  @Uint32() external int DataSize;
+  @Uint32()
+  external int DataSize;
   external Pointer pData;
 }
 
 class WINML_SEQUENCE_BINDING_DESC extends Struct {
-  @Uint32() external int ElementCount;
-  @Uint32() external int ElementType;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int ElementCount;
+  @Uint32()
+  external int ElementType;
+  @Uint32()
+  external int Anonymous;
 }
 
 class WINML_MAP_BINDING_DESC extends Struct {
-  @Uint32() external int ElementCount;
-  @Uint32() external int KeyType;
-  @Uint32() external int Anonymous1;
-  @Uint32() external int Fields;
-  @Uint32() external int Anonymous2;
+  @Uint32()
+  external int ElementCount;
+  @Uint32()
+  external int KeyType;
+  @Uint32()
+  external int Anonymous1;
+  @Uint32()
+  external int Fields;
+  @Uint32()
+  external int Anonymous2;
 }
 
 class WINML_IMAGE_BINDING_DESC extends Struct {
-  @Uint32() external int ElementType;
-  @Uint32() external int NumDimensions;
+  @Uint32()
+  external int ElementType;
+  @Uint32()
+  external int NumDimensions;
   external Pointer<Int64> pShape;
-  @Uint32() external int DataSize;
+  @Uint32()
+  external int DataSize;
   external Pointer pData;
 }
 
 class WINML_RESOURCE_BINDING_DESC extends Struct {
-  @Uint32() external int ElementType;
-  @Uint32() external int NumDimensions;
+  @Uint32()
+  external int ElementType;
+  @Uint32()
+  external int NumDimensions;
   external Pointer<Int64> pShape;
   external ID3D12Resource pResource;
 }
 
 class WINML_BINDING_DESC extends Struct {
   external Pointer<Utf16> Name;
-  @Uint32() external int BindType;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int BindType;
+  @Uint32()
+  external int Anonymous;
 }
 
 class WINML_TENSOR_VARIABLE_DESC extends Struct {
-  @Uint32() external int ElementType;
-  @Uint32() external int NumDimensions;
+  @Uint32()
+  external int ElementType;
+  @Uint32()
+  external int NumDimensions;
   external Pointer<Int64> pShape;
 }
 
 class WINML_SEQUENCE_VARIABLE_DESC extends Struct {
-  @Uint32() external int ElementType;
+  @Uint32()
+  external int ElementType;
 }
 
 class WINML_MAP_VARIABLE_DESC extends Struct {
-  @Uint32() external int KeyType;
-  @Uint32() external int Fields;
+  @Uint32()
+  external int KeyType;
+  @Uint32()
+  external int Fields;
 }
 
 class WINML_IMAGE_VARIABLE_DESC extends Struct {
-  @Uint32() external int ElementType;
-  @Uint32() external int NumDimensions;
+  @Uint32()
+  external int ElementType;
+  @Uint32()
+  external int NumDimensions;
   external Pointer<Int64> pShape;
 }
 
 class WINML_VARIABLE_DESC extends Struct {
   external Pointer<Utf16> Name;
   external Pointer<Utf16> Description;
-  @Uint32() external int FeatureType;
-  @Int32() external int Required;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int FeatureType;
+  @Int32()
+  external int Required;
+  @Uint32()
+  external int Anonymous;
 }
 
 class WINML_MODEL_DESC extends Struct {
@@ -120,69 +148,92 @@ class WINML_MODEL_DESC extends Struct {
   external Pointer<Utf16> Name;
   external Pointer<Utf16> Domain;
   external Pointer<Utf16> Description;
-  @IntPtr() external int Version;
+  @IntPtr()
+  external int Version;
 }
 
 class MLOperatorEdgeDescription extends Struct {
-  @Uint32() external int edgeType;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int edgeType;
+  @Uint32()
+  external int Anonymous;
 }
 
 class MLOperatorSchemaEdgeDescription extends Struct {
-  @Uint32() external int options;
-  @Uint32() external int typeFormat;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int options;
+  @Uint32()
+  external int typeFormat;
+  @Uint32()
+  external int Anonymous;
 }
 
 class MLOperatorEdgeTypeConstraint extends Struct {
   external Pointer<Utf8> typeLabel;
   external Pointer<MLOperatorEdgeDescription> allowedTypes;
-  @Uint32() external int allowedTypeCount;
+  @Uint32()
+  external int allowedTypeCount;
 }
 
 class MLOperatorAttribute extends Struct {
   external Pointer<Utf8> name;
-  @Uint32() external int type;
+  @Uint32()
+  external int type;
   external bool required;
 }
 
 class MLOperatorAttributeNameValue extends Struct {
   external Pointer<Utf8> name;
-  @Uint32() external int type;
-  @Uint32() external int valueCount;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int type;
+  @Uint32()
+  external int valueCount;
+  @Uint32()
+  external int Anonymous;
 }
 
 class MLOperatorSchemaDescription extends Struct {
   external Pointer<Utf8> name;
-  @Int32() external int operatorSetVersionAtLastChange;
+  @Int32()
+  external int operatorSetVersionAtLastChange;
   external Pointer<MLOperatorSchemaEdgeDescription> inputs;
-  @Uint32() external int inputCount;
+  @Uint32()
+  external int inputCount;
   external Pointer<MLOperatorSchemaEdgeDescription> outputs;
-  @Uint32() external int outputCount;
+  @Uint32()
+  external int outputCount;
   external Pointer<MLOperatorEdgeTypeConstraint> typeConstraints;
-  @Uint32() external int typeConstraintCount;
+  @Uint32()
+  external int typeConstraintCount;
   external Pointer<MLOperatorAttribute> attributes;
-  @Uint32() external int attributeCount;
+  @Uint32()
+  external int attributeCount;
   external Pointer<MLOperatorAttributeNameValue> defaultAttributes;
-  @Uint32() external int defaultAttributeCount;
+  @Uint32()
+  external int defaultAttributeCount;
 }
 
 class MLOperatorSetId extends Struct {
   external Pointer<Utf8> domain;
-  @Int32() external int version;
+  @Int32()
+  external int version;
 }
 
 class MLOperatorKernelDescription extends Struct {
   external Pointer<Utf8> domain;
   external Pointer<Utf8> name;
-  @Int32() external int minimumOperatorSetVersion;
-  @Uint32() external int executionType;
+  @Int32()
+  external int minimumOperatorSetVersion;
+  @Uint32()
+  external int executionType;
   external Pointer<MLOperatorEdgeTypeConstraint> typeConstraints;
-  @Uint32() external int typeConstraintCount;
+  @Uint32()
+  external int typeConstraintCount;
   external Pointer<MLOperatorAttributeNameValue> defaultAttributes;
-  @Uint32() external int defaultAttributeCount;
-  @Uint32() external int options;
-  @Uint32() external int executionOptions;
+  @Uint32()
+  external int defaultAttributeCount;
+  @Uint32()
+  external int options;
+  @Uint32()
+  external int executionOptions;
 }
-

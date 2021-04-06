@@ -43,99 +43,66 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class MsftDiscMaster2 extends Struct {
-}
+class MsftDiscMaster2 extends Struct {}
 
-class MsftDiscRecorder2 extends Struct {
-}
+class MsftDiscRecorder2 extends Struct {}
 
-class MsftWriteEngine2 extends Struct {
-}
+class MsftWriteEngine2 extends Struct {}
 
-class MsftDiscFormat2Erase extends Struct {
-}
+class MsftDiscFormat2Erase extends Struct {}
 
-class MsftDiscFormat2Data extends Struct {
-}
+class MsftDiscFormat2Data extends Struct {}
 
-class MsftDiscFormat2TrackAtOnce extends Struct {
-}
+class MsftDiscFormat2TrackAtOnce extends Struct {}
 
-class MsftDiscFormat2RawCD extends Struct {
-}
+class MsftDiscFormat2RawCD extends Struct {}
 
-class MsftStreamZero extends Struct {
-}
+class MsftStreamZero extends Struct {}
 
-class MsftStreamPrng001 extends Struct {
-}
+class MsftStreamPrng001 extends Struct {}
 
-class MsftStreamConcatenate extends Struct {
-}
+class MsftStreamConcatenate extends Struct {}
 
-class MsftStreamInterleave extends Struct {
-}
+class MsftStreamInterleave extends Struct {}
 
-class MsftWriteSpeedDescriptor extends Struct {
-}
+class MsftWriteSpeedDescriptor extends Struct {}
 
-class MsftMultisessionSequential extends Struct {
-}
+class MsftMultisessionSequential extends Struct {}
 
-class MsftMultisessionRandomWrite extends Struct {
-}
+class MsftMultisessionRandomWrite extends Struct {}
 
-class MsftRawCDImageCreator extends Struct {
-}
+class MsftRawCDImageCreator extends Struct {}
 
-class BootOptions extends Struct {
-}
+class BootOptions extends Struct {}
 
-class FsiStream extends Struct {
-}
+class FsiStream extends Struct {}
 
-class FileSystemImageResult extends Struct {
-}
+class FileSystemImageResult extends Struct {}
 
-class ProgressItem extends Struct {
-}
+class ProgressItem extends Struct {}
 
-class EnumProgressItems extends Struct {
-}
+class EnumProgressItems extends Struct {}
 
-class ProgressItems extends Struct {
-}
+class ProgressItems extends Struct {}
 
-class FsiDirectoryItem extends Struct {
-}
+class FsiDirectoryItem extends Struct {}
 
-class FsiFileItem extends Struct {
-}
+class FsiFileItem extends Struct {}
 
-class EnumFsiItems extends Struct {
-}
+class EnumFsiItems extends Struct {}
 
-class FsiNamedStreams extends Struct {
-}
+class FsiNamedStreams extends Struct {}
 
-class MsftFileSystemImage extends Struct {
-}
+class MsftFileSystemImage extends Struct {}
 
-class MsftIsoImageManager extends Struct {
-}
+class MsftIsoImageManager extends Struct {}
 
-class BlockRange extends Struct {
-}
+class BlockRange extends Struct {}
 
-class BlockRangeList extends Struct {
-}
+class BlockRangeList extends Struct {}
 
-class MSDiscRecorderObj extends Struct {
-}
+class MSDiscRecorderObj extends Struct {}
 
-class MSDiscMasterObj extends Struct {
-}
+class MSDiscMasterObj extends Struct {}
 
-class MSEnumDiscRecordersObj extends Struct {
-}
-
+class MSEnumDiscRecordersObj extends Struct {}

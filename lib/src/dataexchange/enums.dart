@@ -93,4 +93,3 @@ class DdeNameService_afCmdFlags {
   static const DNS_FILTERON = 0x00000004;
   static const DNS_FILTEROFF = 0x00000008;
 }
-

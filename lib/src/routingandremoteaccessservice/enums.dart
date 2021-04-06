@@ -249,4 +249,3 @@ class SECURITY_MESSAGE_dwMsgIdFlags {
   static const SECURITYMSG_FAILURE = 0x00000002;
   static const SECURITYMSG_ERROR = 0x00000003;
 }
-

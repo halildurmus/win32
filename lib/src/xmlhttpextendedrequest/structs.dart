@@ -43,65 +43,75 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class DOMDocument60 extends Struct {
-}
+class DOMDocument60 extends Struct {}
 
-class FreeThreadedDOMDocument60 extends Struct {
-}
+class FreeThreadedDOMDocument60 extends Struct {}
 
-class XMLSchemaCache60 extends Struct {
-}
+class XMLSchemaCache60 extends Struct {}
 
-class XSLTemplate60 extends Struct {
-}
+class XSLTemplate60 extends Struct {}
 
-class XMLHTTP60 extends Struct {
-}
+class XMLHTTP60 extends Struct {}
 
-class FreeThreadedXMLHTTP60 extends Struct {
-}
+class FreeThreadedXMLHTTP60 extends Struct {}
 
-class ServerXMLHTTP60 extends Struct {
-}
+class ServerXMLHTTP60 extends Struct {}
 
-class SAXXMLReader60 extends Struct {
-}
+class SAXXMLReader60 extends Struct {}
 
-class MXXMLWriter60 extends Struct {
-}
+class MXXMLWriter60 extends Struct {}
 
-class MXHTMLWriter60 extends Struct {
-}
+class MXHTMLWriter60 extends Struct {}
 
-class SAXAttributes60 extends Struct {
-}
+class SAXAttributes60 extends Struct {}
 
-class MXNamespaceManager60 extends Struct {
-}
+class MXNamespaceManager60 extends Struct {}
 
 class __msxml6_ReferenceRemainingTypes__ extends Struct {
-  @Uint32() external int __tagDomNodeType__;
-  @Uint32() external int __domNodeType__;
-  @Uint32() external int __serverXmlHttpOptionEnum__;
-  @Uint32() external int __serverXmlHttpOption__;
-  @Uint32() external int __serverCertOptionEnum__;
-  @Uint32() external int __serverCertOption__;
-  @Uint32() external int __proxySettingEnum__;
-  @Uint32() external int __proxySetting__;
-  @Uint32() external int __somItemTypeEnum__;
-  @Uint32() external int __somItemType__;
-  @Uint32() external int __schemaUseEnum__;
-  @Uint32() external int __schemaUse__;
-  @Uint32() external int __schemaDerivationMethodEnum__;
-  @Uint32() external int __schemaDerivationMethod__;
-  @Uint32() external int __schemaContentTypeEnum__;
-  @Uint32() external int __schemaContentType__;
-  @Uint32() external int __schemaProcessContentsEnum__;
-  @Uint32() external int __schemaProcessContents__;
-  @Uint32() external int __schemaWhitespaceEnum__;
-  @Uint32() external int __schemaWhitespace__;
-  @Uint32() external int __schemaTypeVarietyEnum__;
-  @Uint32() external int __schemaTypeVariety__;
+  @Uint32()
+  external int __tagDomNodeType__;
+  @Uint32()
+  external int __domNodeType__;
+  @Uint32()
+  external int __serverXmlHttpOptionEnum__;
+  @Uint32()
+  external int __serverXmlHttpOption__;
+  @Uint32()
+  external int __serverCertOptionEnum__;
+  @Uint32()
+  external int __serverCertOption__;
+  @Uint32()
+  external int __proxySettingEnum__;
+  @Uint32()
+  external int __proxySetting__;
+  @Uint32()
+  external int __somItemTypeEnum__;
+  @Uint32()
+  external int __somItemType__;
+  @Uint32()
+  external int __schemaUseEnum__;
+  @Uint32()
+  external int __schemaUse__;
+  @Uint32()
+  external int __schemaDerivationMethodEnum__;
+  @Uint32()
+  external int __schemaDerivationMethod__;
+  @Uint32()
+  external int __schemaContentTypeEnum__;
+  @Uint32()
+  external int __schemaContentType__;
+  @Uint32()
+  external int __schemaProcessContentsEnum__;
+  @Uint32()
+  external int __schemaProcessContents__;
+  @Uint32()
+  external int __schemaWhitespaceEnum__;
+  @Uint32()
+  external int __schemaWhitespace__;
+  @Uint32()
+  external int __schemaTypeVarietyEnum__;
+  @Uint32()
+  external int __schemaTypeVariety__;
 }
 
 class XHR_COOKIE extends Struct {
@@ -110,11 +120,12 @@ class XHR_COOKIE extends Struct {
   external Pointer<Utf16> pwszValue;
   external Pointer<Utf16> pwszP3PPolicy;
   external FILETIME ftExpires;
-  @Uint32() external int dwFlags;
+  @Uint32()
+  external int dwFlags;
 }
 
 class XHR_CERT extends Struct {
-  @Uint32() external int cbCert;
+  @Uint32()
+  external int cbCert;
   external Pointer<Uint8> pbCert;
 }
-

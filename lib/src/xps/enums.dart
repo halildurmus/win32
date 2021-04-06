@@ -253,4 +253,3 @@ class XPS_TILE_MODE {
   static const XPS_TILE_MODE_FLIPY = 0x00000004;
   static const XPS_TILE_MODE_FLIPXY = 0x00000005;
 }
-

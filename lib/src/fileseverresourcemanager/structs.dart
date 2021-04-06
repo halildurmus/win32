@@ -43,48 +43,32 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class FsrmSetting extends Struct {
-}
+class FsrmSetting extends Struct {}
 
-class FsrmPathMapper extends Struct {
-}
+class FsrmPathMapper extends Struct {}
 
-class FsrmExportImport extends Struct {
-}
+class FsrmExportImport extends Struct {}
 
-class FsrmQuotaManager extends Struct {
-}
+class FsrmQuotaManager extends Struct {}
 
-class FsrmQuotaTemplateManager extends Struct {
-}
+class FsrmQuotaTemplateManager extends Struct {}
 
-class FsrmFileGroupManager extends Struct {
-}
+class FsrmFileGroupManager extends Struct {}
 
-class FsrmFileScreenManager extends Struct {
-}
+class FsrmFileScreenManager extends Struct {}
 
-class FsrmFileScreenTemplateManager extends Struct {
-}
+class FsrmFileScreenTemplateManager extends Struct {}
 
-class FsrmReportManager extends Struct {
-}
+class FsrmReportManager extends Struct {}
 
-class FsrmReportScheduler extends Struct {
-}
+class FsrmReportScheduler extends Struct {}
 
-class FsrmFileManagementJobManager extends Struct {
-}
+class FsrmFileManagementJobManager extends Struct {}
 
-class FsrmClassificationManager extends Struct {
-}
+class FsrmClassificationManager extends Struct {}
 
-class FsrmPipelineModuleConnector extends Struct {
-}
+class FsrmPipelineModuleConnector extends Struct {}
 
-class AdSyncTask extends Struct {
-}
+class AdSyncTask extends Struct {}
 
-class FsrmAccessDeniedRemediationClient extends Struct {
-}
-
+class FsrmAccessDeniedRemediationClient extends Struct {}

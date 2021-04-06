@@ -45,108 +45,153 @@ import 'package:ffi/ffi.dart';
 
 class FAX_LOG_CATEGORYA extends Struct {
   external Pointer<Utf8> Name;
-  @Uint32() external int Category;
-  @Uint32() external int Level;
+  @Uint32()
+  external int Category;
+  @Uint32()
+  external int Level;
 }
 
 class FAX_LOG_CATEGORYW extends Struct {
   external Pointer<Utf16> Name;
-  @Uint32() external int Category;
-  @Uint32() external int Level;
+  @Uint32()
+  external int Category;
+  @Uint32()
+  external int Level;
 }
 
 class FAX_TIME extends Struct {
-  @Uint16() external int Hour;
-  @Uint16() external int Minute;
+  @Uint16()
+  external int Hour;
+  @Uint16()
+  external int Minute;
 }
 
 class FAX_CONFIGURATIONA extends Struct {
-  @Uint32() external int SizeOfStruct;
-  @Uint32() external int Retries;
-  @Uint32() external int RetryDelay;
-  @Uint32() external int DirtyDays;
-  @Int32() external int Branding;
-  @Int32() external int UseDeviceTsid;
-  @Int32() external int ServerCp;
-  @Int32() external int PauseServerQueue;
+  @Uint32()
+  external int SizeOfStruct;
+  @Uint32()
+  external int Retries;
+  @Uint32()
+  external int RetryDelay;
+  @Uint32()
+  external int DirtyDays;
+  @Int32()
+  external int Branding;
+  @Int32()
+  external int UseDeviceTsid;
+  @Int32()
+  external int ServerCp;
+  @Int32()
+  external int PauseServerQueue;
   external FAX_TIME StartCheapTime;
   external FAX_TIME StopCheapTime;
-  @Int32() external int ArchiveOutgoingFaxes;
+  @Int32()
+  external int ArchiveOutgoingFaxes;
   external Pointer<Utf8> ArchiveDirectory;
   external Pointer<Utf8> Reserved;
 }
 
 class FAX_CONFIGURATIONW extends Struct {
-  @Uint32() external int SizeOfStruct;
-  @Uint32() external int Retries;
-  @Uint32() external int RetryDelay;
-  @Uint32() external int DirtyDays;
-  @Int32() external int Branding;
-  @Int32() external int UseDeviceTsid;
-  @Int32() external int ServerCp;
-  @Int32() external int PauseServerQueue;
+  @Uint32()
+  external int SizeOfStruct;
+  @Uint32()
+  external int Retries;
+  @Uint32()
+  external int RetryDelay;
+  @Uint32()
+  external int DirtyDays;
+  @Int32()
+  external int Branding;
+  @Int32()
+  external int UseDeviceTsid;
+  @Int32()
+  external int ServerCp;
+  @Int32()
+  external int PauseServerQueue;
   external FAX_TIME StartCheapTime;
   external FAX_TIME StopCheapTime;
-  @Int32() external int ArchiveOutgoingFaxes;
+  @Int32()
+  external int ArchiveOutgoingFaxes;
   external Pointer<Utf16> ArchiveDirectory;
   external Pointer<Utf16> Reserved;
 }
 
 class FAX_DEVICE_STATUSA extends Struct {
-  @Uint32() external int SizeOfStruct;
+  @Uint32()
+  external int SizeOfStruct;
   external Pointer<Utf8> CallerId;
   external Pointer<Utf8> Csid;
-  @Uint32() external int CurrentPage;
-  @Uint32() external int DeviceId;
+  @Uint32()
+  external int CurrentPage;
+  @Uint32()
+  external int DeviceId;
   external Pointer<Utf8> DeviceName;
   external Pointer<Utf8> DocumentName;
-  @Uint32() external int JobType;
+  @Uint32()
+  external int JobType;
   external Pointer<Utf8> PhoneNumber;
   external Pointer<Utf8> RoutingString;
   external Pointer<Utf8> SenderName;
   external Pointer<Utf8> RecipientName;
-  @Uint32() external int Size;
+  @Uint32()
+  external int Size;
   external FILETIME StartTime;
-  @Uint32() external int Status;
+  @Uint32()
+  external int Status;
   external Pointer<Utf8> StatusString;
   external FILETIME SubmittedTime;
-  @Uint32() external int TotalPages;
+  @Uint32()
+  external int TotalPages;
   external Pointer<Utf8> Tsid;
   external Pointer<Utf8> UserName;
 }
 
 class FAX_DEVICE_STATUSW extends Struct {
-  @Uint32() external int SizeOfStruct;
+  @Uint32()
+  external int SizeOfStruct;
   external Pointer<Utf16> CallerId;
   external Pointer<Utf16> Csid;
-  @Uint32() external int CurrentPage;
-  @Uint32() external int DeviceId;
+  @Uint32()
+  external int CurrentPage;
+  @Uint32()
+  external int DeviceId;
   external Pointer<Utf16> DeviceName;
   external Pointer<Utf16> DocumentName;
-  @Uint32() external int JobType;
+  @Uint32()
+  external int JobType;
   external Pointer<Utf16> PhoneNumber;
   external Pointer<Utf16> RoutingString;
   external Pointer<Utf16> SenderName;
   external Pointer<Utf16> RecipientName;
-  @Uint32() external int Size;
+  @Uint32()
+  external int Size;
   external FILETIME StartTime;
-  @Uint32() external int Status;
+  @Uint32()
+  external int Status;
   external Pointer<Utf16> StatusString;
   external FILETIME SubmittedTime;
-  @Uint32() external int TotalPages;
+  @Uint32()
+  external int TotalPages;
   external Pointer<Utf16> Tsid;
   external Pointer<Utf16> UserName;
 }
 
 class FAX_JOB_ENTRYA extends Struct {
-  @Uint32() external int SizeOfStruct;
-  @Uint32() external int JobId;
+  @Uint32()
+  external int SizeOfStruct;
+  @Uint32()
+  external int JobId;
   external Pointer<Utf8> UserName;
-  @Uint32() external int JobType;
-  @Uint32() external int QueueStatus;
-  @Uint32() external int Status;
-  @Uint32() external int Size;
-  @Uint32() external int PageCount;
+  @Uint32()
+  external int JobType;
+  @Uint32()
+  external int QueueStatus;
+  @Uint32()
+  external int Status;
+  @Uint32()
+  external int Size;
+  @Uint32()
+  external int PageCount;
   external Pointer<Utf8> RecipientNumber;
   external Pointer<Utf8> RecipientName;
   external Pointer<Utf8> Tsid;
@@ -154,22 +199,31 @@ class FAX_JOB_ENTRYA extends Struct {
   external Pointer<Utf8> SenderCompany;
   external Pointer<Utf8> SenderDept;
   external Pointer<Utf8> BillingCode;
-  @Uint32() external int ScheduleAction;
+  @Uint32()
+  external int ScheduleAction;
   external SYSTEMTIME ScheduleTime;
-  @Uint32() external int DeliveryReportType;
+  @Uint32()
+  external int DeliveryReportType;
   external Pointer<Utf8> DeliveryReportAddress;
   external Pointer<Utf8> DocumentName;
 }
 
 class FAX_JOB_ENTRYW extends Struct {
-  @Uint32() external int SizeOfStruct;
-  @Uint32() external int JobId;
+  @Uint32()
+  external int SizeOfStruct;
+  @Uint32()
+  external int JobId;
   external Pointer<Utf16> UserName;
-  @Uint32() external int JobType;
-  @Uint32() external int QueueStatus;
-  @Uint32() external int Status;
-  @Uint32() external int Size;
-  @Uint32() external int PageCount;
+  @Uint32()
+  external int JobType;
+  @Uint32()
+  external int QueueStatus;
+  @Uint32()
+  external int Status;
+  @Uint32()
+  external int Size;
+  @Uint32()
+  external int PageCount;
   external Pointer<Utf16> RecipientNumber;
   external Pointer<Utf16> RecipientName;
   external Pointer<Utf16> Tsid;
@@ -177,41 +231,58 @@ class FAX_JOB_ENTRYW extends Struct {
   external Pointer<Utf16> SenderCompany;
   external Pointer<Utf16> SenderDept;
   external Pointer<Utf16> BillingCode;
-  @Uint32() external int ScheduleAction;
+  @Uint32()
+  external int ScheduleAction;
   external SYSTEMTIME ScheduleTime;
-  @Uint32() external int DeliveryReportType;
+  @Uint32()
+  external int DeliveryReportType;
   external Pointer<Utf16> DeliveryReportAddress;
   external Pointer<Utf16> DocumentName;
 }
 
 class FAX_PORT_INFOA extends Struct {
-  @Uint32() external int SizeOfStruct;
-  @Uint32() external int DeviceId;
-  @Uint32() external int State;
-  @Uint32() external int Flags;
-  @Uint32() external int Rings;
-  @Uint32() external int Priority;
+  @Uint32()
+  external int SizeOfStruct;
+  @Uint32()
+  external int DeviceId;
+  @Uint32()
+  external int State;
+  @Uint32()
+  external int Flags;
+  @Uint32()
+  external int Rings;
+  @Uint32()
+  external int Priority;
   external Pointer<Utf8> DeviceName;
   external Pointer<Utf8> Tsid;
   external Pointer<Utf8> Csid;
 }
 
 class FAX_PORT_INFOW extends Struct {
-  @Uint32() external int SizeOfStruct;
-  @Uint32() external int DeviceId;
-  @Uint32() external int State;
-  @Uint32() external int Flags;
-  @Uint32() external int Rings;
-  @Uint32() external int Priority;
+  @Uint32()
+  external int SizeOfStruct;
+  @Uint32()
+  external int DeviceId;
+  @Uint32()
+  external int State;
+  @Uint32()
+  external int Flags;
+  @Uint32()
+  external int Rings;
+  @Uint32()
+  external int Priority;
   external Pointer<Utf16> DeviceName;
   external Pointer<Utf16> Tsid;
   external Pointer<Utf16> Csid;
 }
 
 class FAX_ROUTING_METHODA extends Struct {
-  @Uint32() external int SizeOfStruct;
-  @Uint32() external int DeviceId;
-  @Int32() external int Enabled;
+  @Uint32()
+  external int SizeOfStruct;
+  @Uint32()
+  external int DeviceId;
+  @Int32()
+  external int Enabled;
   external Pointer<Utf8> DeviceName;
   external Pointer<Utf8> Guid;
   external Pointer<Utf8> FriendlyName;
@@ -221,9 +292,12 @@ class FAX_ROUTING_METHODA extends Struct {
 }
 
 class FAX_ROUTING_METHODW extends Struct {
-  @Uint32() external int SizeOfStruct;
-  @Uint32() external int DeviceId;
-  @Int32() external int Enabled;
+  @Uint32()
+  external int SizeOfStruct;
+  @Uint32()
+  external int DeviceId;
+  @Int32()
+  external int Enabled;
   external Pointer<Utf16> DeviceName;
   external Pointer<Utf16> Guid;
   external Pointer<Utf16> FriendlyName;
@@ -233,8 +307,10 @@ class FAX_ROUTING_METHODW extends Struct {
 }
 
 class FAX_GLOBAL_ROUTING_INFOA extends Struct {
-  @Uint32() external int SizeOfStruct;
-  @Uint32() external int Priority;
+  @Uint32()
+  external int SizeOfStruct;
+  @Uint32()
+  external int Priority;
   external Pointer<Utf8> Guid;
   external Pointer<Utf8> FriendlyName;
   external Pointer<Utf8> FunctionName;
@@ -243,8 +319,10 @@ class FAX_GLOBAL_ROUTING_INFOA extends Struct {
 }
 
 class FAX_GLOBAL_ROUTING_INFOW extends Struct {
-  @Uint32() external int SizeOfStruct;
-  @Uint32() external int Priority;
+  @Uint32()
+  external int SizeOfStruct;
+  @Uint32()
+  external int Priority;
   external Pointer<Utf16> Guid;
   external Pointer<Utf16> FriendlyName;
   external Pointer<Utf16> FunctionName;
@@ -253,9 +331,11 @@ class FAX_GLOBAL_ROUTING_INFOW extends Struct {
 }
 
 class FAX_COVERPAGE_INFOA extends Struct {
-  @Uint32() external int SizeOfStruct;
+  @Uint32()
+  external int SizeOfStruct;
   external Pointer<Utf8> CoverPageName;
-  @Int32() external int UseServerCoverPage;
+  @Int32()
+  external int UseServerCoverPage;
   external Pointer<Utf8> RecName;
   external Pointer<Utf8> RecFaxNumber;
   external Pointer<Utf8> RecCompany;
@@ -281,13 +361,16 @@ class FAX_COVERPAGE_INFOA extends Struct {
   external Pointer<Utf8> Note;
   external Pointer<Utf8> Subject;
   external SYSTEMTIME TimeSent;
-  @Uint32() external int PageCount;
+  @Uint32()
+  external int PageCount;
 }
 
 class FAX_COVERPAGE_INFOW extends Struct {
-  @Uint32() external int SizeOfStruct;
+  @Uint32()
+  external int SizeOfStruct;
   external Pointer<Utf16> CoverPageName;
-  @Int32() external int UseServerCoverPage;
+  @Int32()
+  external int UseServerCoverPage;
   external Pointer<Utf16> RecName;
   external Pointer<Utf16> RecFaxNumber;
   external Pointer<Utf16> RecCompany;
@@ -313,11 +396,13 @@ class FAX_COVERPAGE_INFOW extends Struct {
   external Pointer<Utf16> Note;
   external Pointer<Utf16> Subject;
   external SYSTEMTIME TimeSent;
-  @Uint32() external int PageCount;
+  @Uint32()
+  external int PageCount;
 }
 
 class FAX_JOB_PARAMA extends Struct {
-  @Uint32() external int SizeOfStruct;
+  @Uint32()
+  external int SizeOfStruct;
   external Pointer<Utf8> RecipientNumber;
   external Pointer<Utf8> RecipientName;
   external Pointer<Utf8> Tsid;
@@ -325,18 +410,22 @@ class FAX_JOB_PARAMA extends Struct {
   external Pointer<Utf8> SenderCompany;
   external Pointer<Utf8> SenderDept;
   external Pointer<Utf8> BillingCode;
-  @Uint32() external int ScheduleAction;
+  @Uint32()
+  external int ScheduleAction;
   external SYSTEMTIME ScheduleTime;
-  @Uint32() external int DeliveryReportType;
+  @Uint32()
+  external int DeliveryReportType;
   external Pointer<Utf8> DeliveryReportAddress;
   external Pointer<Utf8> DocumentName;
-  @Uint32() external int CallHandle;
+  @Uint32()
+  external int CallHandle;
   @Array(3)
   external Array<IntPtr> Reserved;
 }
 
 class FAX_JOB_PARAMW extends Struct {
-  @Uint32() external int SizeOfStruct;
+  @Uint32()
+  external int SizeOfStruct;
   external Pointer<Utf16> RecipientNumber;
   external Pointer<Utf16> RecipientName;
   external Pointer<Utf16> Tsid;
@@ -344,34 +433,46 @@ class FAX_JOB_PARAMW extends Struct {
   external Pointer<Utf16> SenderCompany;
   external Pointer<Utf16> SenderDept;
   external Pointer<Utf16> BillingCode;
-  @Uint32() external int ScheduleAction;
+  @Uint32()
+  external int ScheduleAction;
   external SYSTEMTIME ScheduleTime;
-  @Uint32() external int DeliveryReportType;
+  @Uint32()
+  external int DeliveryReportType;
   external Pointer<Utf16> DeliveryReportAddress;
   external Pointer<Utf16> DocumentName;
-  @Uint32() external int CallHandle;
+  @Uint32()
+  external int CallHandle;
   @Array(3)
   external Array<IntPtr> Reserved;
 }
 
 class FAX_EVENTA extends Struct {
-  @Uint32() external int SizeOfStruct;
+  @Uint32()
+  external int SizeOfStruct;
   external FILETIME TimeStamp;
-  @Uint32() external int DeviceId;
-  @Uint32() external int EventId;
-  @Uint32() external int JobId;
+  @Uint32()
+  external int DeviceId;
+  @Uint32()
+  external int EventId;
+  @Uint32()
+  external int JobId;
 }
 
 class FAX_EVENTW extends Struct {
-  @Uint32() external int SizeOfStruct;
+  @Uint32()
+  external int SizeOfStruct;
   external FILETIME TimeStamp;
-  @Uint32() external int DeviceId;
-  @Uint32() external int EventId;
-  @Uint32() external int JobId;
+  @Uint32()
+  external int DeviceId;
+  @Uint32()
+  external int EventId;
+  @Uint32()
+  external int JobId;
 }
 
 class FAX_PRINT_INFOA extends Struct {
-  @Uint32() external int SizeOfStruct;
+  @Uint32()
+  external int SizeOfStruct;
   external Pointer<Utf8> DocName;
   external Pointer<Utf8> RecipientName;
   external Pointer<Utf8> RecipientNumber;
@@ -385,7 +486,8 @@ class FAX_PRINT_INFOA extends Struct {
 }
 
 class FAX_PRINT_INFOW extends Struct {
-  @Uint32() external int SizeOfStruct;
+  @Uint32()
+  external int SizeOfStruct;
   external Pointer<Utf16> DocName;
   external Pointer<Utf16> RecipientName;
   external Pointer<Utf16> RecipientNumber;
@@ -399,34 +501,42 @@ class FAX_PRINT_INFOW extends Struct {
 }
 
 class FAX_CONTEXT_INFOA extends Struct {
-  @Uint32() external int SizeOfStruct;
-  @IntPtr() external int hDC;
+  @Uint32()
+  external int SizeOfStruct;
+  @IntPtr()
+  external int hDC;
   @Array(16)
   external Array<Int8> ServerName;
 }
 
 class FAX_CONTEXT_INFOW extends Struct {
-  @Uint32() external int SizeOfStruct;
-  @IntPtr() external int hDC;
+  @Uint32()
+  external int SizeOfStruct;
+  @IntPtr()
+  external int hDC;
   @Array(16)
   external Array<Uint16> ServerName;
 }
 
 class FAX_SEND extends Struct {
-  @Uint32() external int SizeOfStruct;
+  @Uint32()
+  external int SizeOfStruct;
   external Pointer<Utf16> FileName;
   external Pointer<Utf16> CallerName;
   external Pointer<Utf16> CallerNumber;
   external Pointer<Utf16> ReceiverName;
   external Pointer<Utf16> ReceiverNumber;
-  @Int32() external int Branding;
-  @Uint32() external int CallHandle;
+  @Int32()
+  external int Branding;
+  @Uint32()
+  external int CallHandle;
   @Array(3)
   external Array<Uint32> Reserved;
 }
 
 class FAX_RECEIVE extends Struct {
-  @Uint32() external int SizeOfStruct;
+  @Uint32()
+  external int SizeOfStruct;
   external Pointer<Utf16> FileName;
   external Pointer<Utf16> ReceiverName;
   external Pointer<Utf16> ReceiverNumber;
@@ -435,170 +545,126 @@ class FAX_RECEIVE extends Struct {
 }
 
 class FAX_DEV_STATUS extends Struct {
-  @Uint32() external int SizeOfStruct;
-  @Uint32() external int StatusId;
-  @Uint32() external int StringId;
-  @Uint32() external int PageCount;
+  @Uint32()
+  external int SizeOfStruct;
+  @Uint32()
+  external int StatusId;
+  @Uint32()
+  external int StringId;
+  @Uint32()
+  external int PageCount;
   external Pointer<Utf16> CSI;
   external Pointer<Utf16> CallerId;
   external Pointer<Utf16> RoutingInfo;
-  @Uint32() external int ErrorCode;
+  @Uint32()
+  external int ErrorCode;
   @Array(3)
   external Array<Uint32> Reserved;
 }
 
-class FaxServer extends Struct {
-}
+class FaxServer extends Struct {}
 
-class FaxDeviceProviders extends Struct {
-}
+class FaxDeviceProviders extends Struct {}
 
-class FaxDevices extends Struct {
-}
+class FaxDevices extends Struct {}
 
-class FaxInboundRouting extends Struct {
-}
+class FaxInboundRouting extends Struct {}
 
-class FaxFolders extends Struct {
-}
+class FaxFolders extends Struct {}
 
-class FaxLoggingOptions extends Struct {
-}
+class FaxLoggingOptions extends Struct {}
 
-class FaxActivity extends Struct {
-}
+class FaxActivity extends Struct {}
 
-class FaxOutboundRouting extends Struct {
-}
+class FaxOutboundRouting extends Struct {}
 
-class FaxReceiptOptions extends Struct {
-}
+class FaxReceiptOptions extends Struct {}
 
-class FaxSecurity extends Struct {
-}
+class FaxSecurity extends Struct {}
 
-class FaxDocument extends Struct {
-}
+class FaxDocument extends Struct {}
 
-class FaxSender extends Struct {
-}
+class FaxSender extends Struct {}
 
-class FaxRecipients extends Struct {
-}
+class FaxRecipients extends Struct {}
 
-class FaxIncomingArchive extends Struct {
-}
+class FaxIncomingArchive extends Struct {}
 
-class FaxIncomingQueue extends Struct {
-}
+class FaxIncomingQueue extends Struct {}
 
-class FaxOutgoingArchive extends Struct {
-}
+class FaxOutgoingArchive extends Struct {}
 
-class FaxOutgoingQueue extends Struct {
-}
+class FaxOutgoingQueue extends Struct {}
 
-class FaxIncomingMessageIterator extends Struct {
-}
+class FaxIncomingMessageIterator extends Struct {}
 
-class FaxIncomingMessage extends Struct {
-}
+class FaxIncomingMessage extends Struct {}
 
-class FaxOutgoingJobs extends Struct {
-}
+class FaxOutgoingJobs extends Struct {}
 
-class FaxOutgoingJob extends Struct {
-}
+class FaxOutgoingJob extends Struct {}
 
-class FaxOutgoingMessageIterator extends Struct {
-}
+class FaxOutgoingMessageIterator extends Struct {}
 
-class FaxOutgoingMessage extends Struct {
-}
+class FaxOutgoingMessage extends Struct {}
 
-class FaxIncomingJobs extends Struct {
-}
+class FaxIncomingJobs extends Struct {}
 
-class FaxIncomingJob extends Struct {
-}
+class FaxIncomingJob extends Struct {}
 
-class FaxDeviceProvider extends Struct {
-}
+class FaxDeviceProvider extends Struct {}
 
-class FaxDevice extends Struct {
-}
+class FaxDevice extends Struct {}
 
-class FaxActivityLogging extends Struct {
-}
+class FaxActivityLogging extends Struct {}
 
-class FaxEventLogging extends Struct {
-}
+class FaxEventLogging extends Struct {}
 
-class FaxOutboundRoutingGroups extends Struct {
-}
+class FaxOutboundRoutingGroups extends Struct {}
 
-class FaxOutboundRoutingGroup extends Struct {
-}
+class FaxOutboundRoutingGroup extends Struct {}
 
-class FaxDeviceIds extends Struct {
-}
+class FaxDeviceIds extends Struct {}
 
-class FaxOutboundRoutingRules extends Struct {
-}
+class FaxOutboundRoutingRules extends Struct {}
 
-class FaxOutboundRoutingRule extends Struct {
-}
+class FaxOutboundRoutingRule extends Struct {}
 
-class FaxInboundRoutingExtensions extends Struct {
-}
+class FaxInboundRoutingExtensions extends Struct {}
 
-class FaxInboundRoutingExtension extends Struct {
-}
+class FaxInboundRoutingExtension extends Struct {}
 
-class FaxInboundRoutingMethods extends Struct {
-}
+class FaxInboundRoutingMethods extends Struct {}
 
-class FaxInboundRoutingMethod extends Struct {
-}
+class FaxInboundRoutingMethod extends Struct {}
 
-class FaxJobStatus extends Struct {
-}
+class FaxJobStatus extends Struct {}
 
-class FaxRecipient extends Struct {
-}
+class FaxRecipient extends Struct {}
 
-class FaxConfiguration extends Struct {
-}
+class FaxConfiguration extends Struct {}
 
-class FaxAccountSet extends Struct {
-}
+class FaxAccountSet extends Struct {}
 
-class FaxAccounts extends Struct {
-}
+class FaxAccounts extends Struct {}
 
-class FaxAccount extends Struct {
-}
+class FaxAccount extends Struct {}
 
-class FaxAccountFolders extends Struct {
-}
+class FaxAccountFolders extends Struct {}
 
-class FaxAccountIncomingQueue extends Struct {
-}
+class FaxAccountIncomingQueue extends Struct {}
 
-class FaxAccountOutgoingQueue extends Struct {
-}
+class FaxAccountOutgoingQueue extends Struct {}
 
-class FaxAccountIncomingArchive extends Struct {
-}
+class FaxAccountIncomingArchive extends Struct {}
 
-class FaxAccountOutgoingArchive extends Struct {
-}
+class FaxAccountOutgoingArchive extends Struct {}
 
-class FaxSecurity2 extends Struct {
-}
+class FaxSecurity2 extends Struct {}
 
 class FAX_ROUTE_CALLBACKROUTINES extends Struct {
-  @Uint32() external int SizeOfStruct;
+  @Uint32()
+  external int SizeOfStruct;
   external PFAXROUTEADDFILE FaxRouteAddFile;
   external PFAXROUTEDELETEFILE FaxRouteDeleteFile;
   external PFAXROUTEGETFILE FaxRouteGetFile;
@@ -607,11 +673,16 @@ class FAX_ROUTE_CALLBACKROUTINES extends Struct {
 }
 
 class FAX_ROUTE extends Struct {
-  @Uint32() external int SizeOfStruct;
-  @Uint32() external int JobId;
-  @Uint64() external int ElapsedTime;
-  @Uint64() external int ReceiveTime;
-  @Uint32() external int PageCount;
+  @Uint32()
+  external int SizeOfStruct;
+  @Uint32()
+  external int JobId;
+  @Uint64()
+  external int ElapsedTime;
+  @Uint64()
+  external int ReceiveTime;
+  @Uint32()
+  external int PageCount;
   external Pointer<Utf16> Csid;
   external Pointer<Utf16> Tsid;
   external Pointer<Utf16> CallerId;
@@ -619,8 +690,9 @@ class FAX_ROUTE extends Struct {
   external Pointer<Utf16> ReceiverName;
   external Pointer<Utf16> ReceiverNumber;
   external Pointer<Utf16> DeviceName;
-  @Uint32() external int DeviceId;
+  @Uint32()
+  external int DeviceId;
   external Pointer<Uint8> RoutingInfoData;
-  @Uint32() external int RoutingInfoDataSize;
+  @Uint32()
+  external int RoutingInfoDataSize;
 }
-

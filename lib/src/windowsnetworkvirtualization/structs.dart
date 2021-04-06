@@ -44,58 +44,78 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class WNV_OBJECT_HEADER extends Struct {
-  @Uint8() external int MajorVersion;
-  @Uint8() external int MinorVersion;
-  @Uint32() external int Size;
+  @Uint8()
+  external int MajorVersion;
+  @Uint8()
+  external int MinorVersion;
+  @Uint32()
+  external int Size;
 }
 
 class WNV_NOTIFICATION_PARAM extends Struct {
   external WNV_OBJECT_HEADER Header;
-  @Uint32() external int NotificationType;
-  @Uint32() external int PendingNotifications;
+  @Uint32()
+  external int NotificationType;
+  @Uint32()
+  external int PendingNotifications;
   external Pointer<Uint8> Buffer;
 }
 
 class WNV_IP_ADDRESS extends Struct {
-  @Uint32() external int IP;
+  @Uint32()
+  external int IP;
 }
 
 class WNV_POLICY_MISMATCH_PARAM extends Struct {
-  @Uint16() external int CAFamily;
-  @Uint16() external int PAFamily;
-  @Uint32() external int VirtualSubnetId;
+  @Uint16()
+  external int CAFamily;
+  @Uint16()
+  external int PAFamily;
+  @Uint32()
+  external int VirtualSubnetId;
   external WNV_IP_ADDRESS CA;
   external WNV_IP_ADDRESS PA;
 }
 
 class WNV_PROVIDER_ADDRESS_CHANGE_PARAM extends Struct {
-  @Uint16() external int PAFamily;
+  @Uint16()
+  external int PAFamily;
   external WNV_IP_ADDRESS PA;
-  @Uint32() external int AddressState;
+  @Uint32()
+  external int AddressState;
 }
 
 class WNV_CUSTOMER_ADDRESS_CHANGE_PARAM extends Struct {
   external DL_EUI48 MACAddress;
-  @Uint16() external int CAFamily;
+  @Uint16()
+  external int CAFamily;
   external WNV_IP_ADDRESS CA;
-  @Uint32() external int VirtualSubnetId;
-  @Uint16() external int PAFamily;
+  @Uint32()
+  external int VirtualSubnetId;
+  @Uint16()
+  external int PAFamily;
   external WNV_IP_ADDRESS PA;
-  @Uint32() external int NotificationReason;
+  @Uint32()
+  external int NotificationReason;
 }
 
 class WNV_OBJECT_CHANGE_PARAM extends Struct {
-  @Uint32() external int ObjectType;
-  @Uint32() external int ObjectParam;
+  @Uint32()
+  external int ObjectType;
+  @Uint32()
+  external int ObjectParam;
 }
 
 class WNV_REDIRECT_PARAM extends Struct {
-  @Uint16() external int CAFamily;
-  @Uint16() external int PAFamily;
-  @Uint16() external int NewPAFamily;
-  @Uint32() external int VirtualSubnetId;
+  @Uint16()
+  external int CAFamily;
+  @Uint16()
+  external int PAFamily;
+  @Uint16()
+  external int NewPAFamily;
+  @Uint32()
+  external int VirtualSubnetId;
   external WNV_IP_ADDRESS CA;
   external WNV_IP_ADDRESS PA;
   external WNV_IP_ADDRESS NewPA;
 }
-

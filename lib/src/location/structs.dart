@@ -43,27 +43,18 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class Location extends Struct {
-}
+class Location extends Struct {}
 
-class DefaultLocation extends Struct {
-}
+class DefaultLocation extends Struct {}
 
-class LatLongReport extends Struct {
-}
+class LatLongReport extends Struct {}
 
-class CivicAddressReport extends Struct {
-}
+class CivicAddressReport extends Struct {}
 
-class LatLongReportFactory extends Struct {
-}
+class LatLongReportFactory extends Struct {}
 
-class CivicAddressReportFactory extends Struct {
-}
+class CivicAddressReportFactory extends Struct {}
 
-class DispLatLongReport extends Struct {
-}
+class DispLatLongReport extends Struct {}
 
-class DispCivicAddressReport extends Struct {
-}
-
+class DispCivicAddressReport extends Struct {}

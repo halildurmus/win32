@@ -45,21 +45,26 @@ import 'package:ffi/ffi.dart';
 
 class DAV_CALLBACK_AUTH_BLOB extends Struct {
   external Pointer pBuffer;
-  @Uint32() external int ulSize;
-  @Uint32() external int ulType;
+  @Uint32()
+  external int ulSize;
+  @Uint32()
+  external int ulType;
 }
 
 class DAV_CALLBACK_AUTH_UNP extends Struct {
   external Pointer<Utf16> pszUserName;
-  @Uint32() external int ulUserNameLength;
+  @Uint32()
+  external int ulUserNameLength;
   external Pointer<Utf16> pszPassword;
-  @Uint32() external int ulPasswordLength;
+  @Uint32()
+  external int ulPasswordLength;
 }
 
 class DAV_CALLBACK_CRED extends Struct {
   external DAV_CALLBACK_AUTH_BLOB AuthBlob;
   external DAV_CALLBACK_AUTH_UNP UNPBlob;
-  @Int32() external int bAuthBlobValid;
-  @Int32() external int bSave;
+  @Int32()
+  external int bAuthBlobValid;
+  @Int32()
+  external int bSave;
 }
-

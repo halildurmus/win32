@@ -44,7 +44,8 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class OCTET_STRING extends Struct {
-  @Uint32() external int dwLength;
+  @Uint32()
+  external int dwLength;
   external Pointer<Uint8> lpValue;
 }
 
@@ -54,15 +55,18 @@ class LIFE_TIME extends Struct {
 }
 
 class DIAG_SOCKADDR extends Struct {
-  @Uint16() external int family;
+  @Uint16()
+  external int family;
   @Array(126)
   external Array<Int8> data;
 }
 
 class HELPER_ATTRIBUTE extends Struct {
   external Pointer<Utf16> pwszName;
-  @Uint32() external int type;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int type;
+  @Uint32()
+  external int Anonymous;
 }
 
 class ShellCommandInfo extends Struct {
@@ -70,60 +74,76 @@ class ShellCommandInfo extends Struct {
   external Pointer<Utf16> pwszFile;
   external Pointer<Utf16> pwszParameters;
   external Pointer<Utf16> pwszDirectory;
-  @Uint32() external int nShowCmd;
+  @Uint32()
+  external int nShowCmd;
 }
 
 class UiInfo extends Struct {
-  @Uint32() external int type;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int type;
+  @Uint32()
+  external int Anonymous;
 }
 
 class RepairInfo extends Struct {
   external GUID guid;
   external Pointer<Utf16> pwszClassName;
   external Pointer<Utf16> pwszDescription;
-  @Uint32() external int sidType;
-  @Int32() external int cost;
-  @Uint32() external int flags;
-  @Uint32() external int scope;
-  @Uint32() external int risk;
+  @Uint32()
+  external int sidType;
+  @Int32()
+  external int cost;
+  @Uint32()
+  external int flags;
+  @Uint32()
+  external int scope;
+  @Uint32()
+  external int risk;
   external UiInfo UiInfo;
-  @Int32() external int rootCauseIndex;
+  @Int32()
+  external int rootCauseIndex;
 }
 
 class RepairInfoEx extends Struct {
   external RepairInfo repair;
-  @Uint16() external int repairRank;
+  @Uint16()
+  external int repairRank;
 }
 
 class RootCauseInfo extends Struct {
   external Pointer<Utf16> pwszDescription;
   external GUID rootCauseID;
-  @Uint32() external int rootCauseFlags;
+  @Uint32()
+  external int rootCauseFlags;
   external GUID networkInterfaceID;
   external Pointer<RepairInfoEx> pRepairs;
-  @Uint16() external int repairCount;
+  @Uint16()
+  external int repairCount;
 }
 
 class HYPOTHESIS extends Struct {
   external Pointer<Utf16> pwszClassName;
   external Pointer<Utf16> pwszDescription;
-  @Uint32() external int celt;
+  @Uint32()
+  external int celt;
   external Pointer<HELPER_ATTRIBUTE> rgAttributes;
 }
 
 class HelperAttributeInfo extends Struct {
   external Pointer<Utf16> pwszName;
-  @Uint32() external int type;
+  @Uint32()
+  external int type;
 }
 
 class DiagnosticsInfo extends Struct {
-  @Int32() external int cost;
-  @Uint32() external int flags;
+  @Int32()
+  external int cost;
+  @Uint32()
+  external int flags;
 }
 
 class HypothesisResult extends Struct {
   external HYPOTHESIS hypothesis;
-  @Uint32() external int pathStatus;
+  @Uint32()
+  external int pathStatus;
 }
-

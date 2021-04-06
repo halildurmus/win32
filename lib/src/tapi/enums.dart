@@ -674,4 +674,3 @@ class TERMINAL_TYPE {
   static const TT_STATIC = 0x00000000;
   static const TT_DYNAMIC = 0x00000001;
 }
-

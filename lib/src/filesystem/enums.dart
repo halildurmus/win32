@@ -1098,4 +1098,3 @@ class WRITE_THROUGH {
   static const WriteThroughNotSupported = 0x00000001;
   static const WriteThroughSupported = 0x00000002;
 }
-

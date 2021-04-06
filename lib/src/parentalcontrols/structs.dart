@@ -43,12 +43,8 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class WpcSettingsProvider extends Struct {
-}
+class WpcSettingsProvider extends Struct {}
 
-class WpcProviderSupport extends Struct {
-}
+class WpcProviderSupport extends Struct {}
 
-class WindowsParentalControls extends Struct {
-}
-
+class WindowsParentalControls extends Struct {}

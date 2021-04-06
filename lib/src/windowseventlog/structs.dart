@@ -44,9 +44,12 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class EVT_VARIANT extends Struct {
-  @Uint32() external int Anonymous;
-  @Uint32() external int Count;
-  @Uint32() external int Type;
+  @Uint32()
+  external int Anonymous;
+  @Uint32()
+  external int Count;
+  @Uint32()
+  external int Type;
 }
 
 class EVT_RPC_LOGIN extends Struct {
@@ -54,6 +57,6 @@ class EVT_RPC_LOGIN extends Struct {
   external Pointer<Utf16> User;
   external Pointer<Utf16> Domain;
   external Pointer<Utf16> Password;
-  @Uint32() external int Flags;
+  @Uint32()
+  external int Flags;
 }
-

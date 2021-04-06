@@ -105,4 +105,3 @@ class STREAM_SEEK {
   static const STREAM_SEEK_CUR = 0x00000001;
   static const STREAM_SEEK_END = 0x00000002;
 }
-

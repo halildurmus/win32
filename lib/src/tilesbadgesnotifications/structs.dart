@@ -47,4 +47,3 @@ class NOTIFICATION_USER_INPUT_DATA extends Struct {
   external Pointer<Utf16> Key;
   external Pointer<Utf16> Value;
 }
-

@@ -43,61 +43,60 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class UPnPNAT extends Struct {
-}
+class UPnPNAT extends Struct {}
 
-class NetSharingManager extends Struct {
-}
+class NetSharingManager extends Struct {}
 
 class NETCON_PROPERTIES extends Struct {
   external GUID guidId;
   external Pointer<Utf16> pszwName;
   external Pointer<Utf16> pszwDeviceName;
-  @Uint32() external int Status;
-  @Uint32() external int MediaType;
-  @Uint32() external int dwCharacter;
+  @Uint32()
+  external int Status;
+  @Uint32()
+  external int MediaType;
+  @Uint32()
+  external int dwCharacter;
   external GUID clsidThisObject;
   external GUID clsidUiObject;
 }
 
-class NetFwRule extends Struct {
-}
+class NetFwRule extends Struct {}
 
-class NetFwOpenPort extends Struct {
-}
+class NetFwOpenPort extends Struct {}
 
-class NetFwAuthorizedApplication extends Struct {
-}
+class NetFwAuthorizedApplication extends Struct {}
 
-class NetFwPolicy2 extends Struct {
-}
+class NetFwPolicy2 extends Struct {}
 
-class NetFwProduct extends Struct {
-}
+class NetFwProduct extends Struct {}
 
-class NetFwProducts extends Struct {
-}
+class NetFwProducts extends Struct {}
 
-class NetFwMgr extends Struct {
-}
+class NetFwMgr extends Struct {}
 
 class INET_FIREWALL_AC_CAPABILITIES extends Struct {
-  @Uint32() external int count;
+  @Uint32()
+  external int count;
   external Pointer<SID_AND_ATTRIBUTES> capabilities;
 }
 
 class INET_FIREWALL_AC_BINARIES extends Struct {
-  @Uint32() external int count;
+  @Uint32()
+  external int count;
   external Pointer<Pointer<Utf16>> binaries;
 }
 
 class INET_FIREWALL_AC_CHANGE extends Struct {
-  @Uint32() external int changeType;
-  @Uint32() external int createType;
+  @Uint32()
+  external int changeType;
+  @Uint32()
+  external int createType;
   external Pointer<SID> appContainerSid;
   external Pointer<SID> userSid;
   external Pointer<Utf16> displayName;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int Anonymous;
 }
 
 class INET_FIREWALL_APP_CONTAINER extends Struct {
@@ -111,4 +110,3 @@ class INET_FIREWALL_APP_CONTAINER extends Struct {
   external Pointer<Utf16> workingDirectory;
   external Pointer<Utf16> packageFullName;
 }
-

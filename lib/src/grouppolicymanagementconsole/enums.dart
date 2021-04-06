@@ -108,4 +108,3 @@ class GPMStarterGPOType {
   static const typeSystem = 0x00000000;
   static const typeCustom = 0x00000001;
 }
-

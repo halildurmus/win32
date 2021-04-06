@@ -44,43 +44,53 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class HSTRING extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class HSTRING_BUFFER extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class ROPARAMIIDHANDLE extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class APARTMENT_SHUTDOWN_REGISTRATION_COOKIE extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class EventRegistrationToken extends Struct {
-  @Int64() external int value;
+  @Int64()
+  external int value;
 }
 
 class HSTRING_HEADER extends Struct {
-  @Uint32() external int Reserved;
+  @Uint32()
+  external int Reserved;
 }
 
 class PDF_RENDER_PARAMS extends Struct {
   external D2D_RECT_F SourceRect;
-  @Uint32() external int DestinationWidth;
-  @Uint32() external int DestinationHeight;
+  @Uint32()
+  external int DestinationWidth;
+  @Uint32()
+  external int DestinationHeight;
   external D2D_COLOR_F BackgroundColor;
-  @Uint8() external int IgnoreHighContrast;
+  @Uint8()
+  external int IgnoreHighContrast;
 }
 
-class __AnonymousRecord_roapi_L45_C9 extends Struct {
-}
+class __AnonymousRecord_roapi_L45_C9 extends Struct {}
 
 class ServerInformation extends Struct {
-  @Uint32() external int dwServerPid;
-  @Uint32() external int dwServerTid;
-  @Uint64() external int ui64ServerAddress;
+  @Uint32()
+  external int dwServerPid;
+  @Uint32()
+  external int dwServerTid;
+  @Uint64()
+  external int ui64ServerAddress;
 }
-

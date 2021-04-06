@@ -269,4 +269,3 @@ class EVT_VARIANT_TYPE {
   static const EvtVarTypeEvtHandle = 0x00000020;
   static const EvtVarTypeEvtXml = 0x00000023;
 }
-

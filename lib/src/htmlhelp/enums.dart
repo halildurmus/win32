@@ -18,4 +18,3 @@ class PRIORITY {
   static const PRIORITY_NORMAL = 0x00000001;
   static const PRIORITY_HIGH = 0x00000002;
 }
-

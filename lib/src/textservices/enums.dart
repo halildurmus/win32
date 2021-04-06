@@ -262,4 +262,3 @@ class TsShiftDir {
   static const TS_SD_BACKWARD = 0x00000000;
   static const TS_SD_FORWARD = 0x00000001;
 }
-

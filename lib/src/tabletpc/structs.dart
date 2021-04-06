@@ -44,92 +44,93 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class HRECOALT extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class HRECOCONTEXT extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class HRECOGNIZER extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class HRECOLATTICE extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class HRECOWORDLIST extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
-class InkDisp extends Struct {
-}
+class InkDisp extends Struct {}
 
-class InkOverlay extends Struct {
-}
+class InkOverlay extends Struct {}
 
-class InkPicture extends Struct {
-}
+class InkPicture extends Struct {}
 
-class InkCollector extends Struct {
-}
+class InkCollector extends Struct {}
 
-class InkDrawingAttributes extends Struct {
-}
+class InkDrawingAttributes extends Struct {}
 
-class InkRectangle extends Struct {
-}
+class InkRectangle extends Struct {}
 
-class InkRenderer extends Struct {
-}
+class InkRenderer extends Struct {}
 
-class InkTransform extends Struct {
-}
+class InkTransform extends Struct {}
 
-class InkRecognizers extends Struct {
-}
+class InkRecognizers extends Struct {}
 
-class InkRecognizerContext extends Struct {
-}
+class InkRecognizerContext extends Struct {}
 
-class InkRecognizerGuide extends Struct {
-}
+class InkRecognizerGuide extends Struct {}
 
-class InkTablets extends Struct {
-}
+class InkTablets extends Struct {}
 
-class InkWordList extends Struct {
-}
+class InkWordList extends Struct {}
 
-class InkStrokes extends Struct {
-}
+class InkStrokes extends Struct {}
 
-class Ink extends Struct {
-}
+class Ink extends Struct {}
 
-class SketchInk extends Struct {
-}
+class SketchInk extends Struct {}
 
 class SYSTEM_EVENT_DATA extends Struct {
-  @Uint8() external int bModifier;
-  @Uint16() external int wKey;
-  @Int32() external int xPos;
-  @Int32() external int yPos;
-  @Uint8() external int bCursorMode;
-  @Uint32() external int dwButtonState;
+  @Uint8()
+  external int bModifier;
+  @Uint16()
+  external int wKey;
+  @Int32()
+  external int xPos;
+  @Int32()
+  external int yPos;
+  @Uint8()
+  external int bCursorMode;
+  @Uint32()
+  external int dwButtonState;
 }
 
 class STROKE_RANGE extends Struct {
-  @Uint32() external int iStrokeBegin;
-  @Uint32() external int iStrokeEnd;
+  @Uint32()
+  external int iStrokeBegin;
+  @Uint32()
+  external int iStrokeEnd;
 }
 
 class PROPERTY_METRICS extends Struct {
-  @Int32() external int nLogicalMin;
-  @Int32() external int nLogicalMax;
-  @Uint32() external int Units;
-  @Float() external double fResolution;
+  @Int32()
+  external int nLogicalMin;
+  @Int32()
+  external int nLogicalMax;
+  @Uint32()
+  external int Units;
+  @Float()
+  external double fResolution;
 }
 
 class PACKET_PROPERTY extends Struct {
@@ -138,54 +139,61 @@ class PACKET_PROPERTY extends Struct {
 }
 
 class PACKET_DESCRIPTION extends Struct {
-  @Uint32() external int cbPacketSize;
-  @Uint32() external int cPacketProperties;
+  @Uint32()
+  external int cbPacketSize;
+  @Uint32()
+  external int cPacketProperties;
   external Pointer<PACKET_PROPERTY> pPacketProperties;
-  @Uint32() external int cButtons;
+  @Uint32()
+  external int cButtons;
   external Pointer<GUID> pguidButtons;
 }
 
 class INKMETRIC extends Struct {
-  @Int32() external int iHeight;
-  @Int32() external int iFontAscent;
-  @Int32() external int iFontDescent;
-  @Uint32() external int dwFlags;
-  @Uint32() external int color;
+  @Int32()
+  external int iHeight;
+  @Int32()
+  external int iFontAscent;
+  @Int32()
+  external int iFontDescent;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int color;
 }
 
 class InkRecoGuide extends Struct {
   external RECT rectWritingBox;
   external RECT rectDrawnBox;
-  @Int32() external int cRows;
-  @Int32() external int cColumns;
-  @Int32() external int midline;
+  @Int32()
+  external int cRows;
+  @Int32()
+  external int cColumns;
+  @Int32()
+  external int midline;
 }
 
-class InkDivider extends Struct {
-}
+class InkDivider extends Struct {}
 
-class HandwrittenTextInsertion extends Struct {
-}
+class HandwrittenTextInsertion extends Struct {}
 
-class PenInputPanel extends Struct {
-}
+class PenInputPanel extends Struct {}
 
-class TextInputPanel extends Struct {
-}
+class TextInputPanel extends Struct {}
 
-class PenInputPanel_Internal extends Struct {
-}
+class PenInputPanel_Internal extends Struct {}
 
 class FLICK_POINT extends Struct {
-  @Int32() external int _bitfield;
+  @Int32()
+  external int _bitfield;
 }
 
 class FLICK_DATA extends Struct {
-  @Int32() external int _bitfield;
+  @Int32()
+  external int _bitfield;
 }
 
-class InkEdit extends Struct {
-}
+class InkEdit extends Struct {}
 
 class IEC_STROKEINFO extends Struct {
   external NMHDR nmhdr;
@@ -205,52 +213,64 @@ class IEC_RECOGNITIONRESULTINFO extends Struct {
   external IInkRecognitionResult RecognitionResult;
 }
 
-class MathInputControl extends Struct {
-}
+class MathInputControl extends Struct {}
 
-class RealTimeStylus extends Struct {
-}
+class RealTimeStylus extends Struct {}
 
-class DynamicRenderer extends Struct {
-}
+class DynamicRenderer extends Struct {}
 
-class GestureRecognizer extends Struct {
-}
+class GestureRecognizer extends Struct {}
 
-class StrokeBuilder extends Struct {
-}
+class StrokeBuilder extends Struct {}
 
 class StylusInfo extends Struct {
-  @Uint32() external int tcid;
-  @Uint32() external int cid;
-  @Int32() external int bIsInvertedCursor;
+  @Uint32()
+  external int tcid;
+  @Uint32()
+  external int cid;
+  @Int32()
+  external int bIsInvertedCursor;
 }
 
 class GESTURE_DATA extends Struct {
-  @Int32() external int gestureId;
-  @Int32() external int recoConfidence;
-  @Int32() external int strokeCount;
+  @Int32()
+  external int gestureId;
+  @Int32()
+  external int recoConfidence;
+  @Int32()
+  external int strokeCount;
 }
 
 class DYNAMIC_RENDERER_CACHED_DATA extends Struct {
-  @Int32() external int strokeId;
+  @Int32()
+  external int strokeId;
   external Pointer dynamicRenderer;
 }
 
 class RECO_GUIDE extends Struct {
-  @Int32() external int xOrigin;
-  @Int32() external int yOrigin;
-  @Int32() external int cxBox;
-  @Int32() external int cyBox;
-  @Int32() external int cxBase;
-  @Int32() external int cyBase;
-  @Int32() external int cHorzBox;
-  @Int32() external int cVertBox;
-  @Int32() external int cyMid;
+  @Int32()
+  external int xOrigin;
+  @Int32()
+  external int yOrigin;
+  @Int32()
+  external int cxBox;
+  @Int32()
+  external int cyBox;
+  @Int32()
+  external int cxBase;
+  @Int32()
+  external int cyBase;
+  @Int32()
+  external int cHorzBox;
+  @Int32()
+  external int cVertBox;
+  @Int32()
+  external int cyMid;
 }
 
 class RECO_ATTRS extends Struct {
-  @Uint32() external int dwRecoCapabilityFlags;
+  @Uint32()
+  external int dwRecoCapabilityFlags;
   @Array(32)
   external Array<Uint16> awcVendorName;
   @Array(64)
@@ -260,8 +280,10 @@ class RECO_ATTRS extends Struct {
 }
 
 class RECO_RANGE extends Struct {
-  @Uint32() external int iwcBegin;
-  @Uint32() external int cCount;
+  @Uint32()
+  external int iwcBegin;
+  @Uint32()
+  external int cCount;
 }
 
 class LINE_SEGMENT extends Struct {
@@ -271,53 +293,66 @@ class LINE_SEGMENT extends Struct {
 
 class LATTICE_METRICS extends Struct {
   external LINE_SEGMENT lsBaseline;
-  @Int16() external int iMidlineOffset;
+  @Int16()
+  external int iMidlineOffset;
 }
 
 class RECO_LATTICE_PROPERTY extends Struct {
   external GUID guidProperty;
-  @Uint16() external int cbPropertyValue;
+  @Uint16()
+  external int cbPropertyValue;
   external Pointer<Uint8> pPropertyValue;
 }
 
 class RECO_LATTICE_PROPERTIES extends Struct {
-  @Uint32() external int cProperties;
+  @Uint32()
+  external int cProperties;
   external Pointer<Pointer<RECO_LATTICE_PROPERTY>> apProps;
 }
 
 class RECO_LATTICE_ELEMENT extends Struct {
-  @Int32() external int score;
-  @Uint16() external int type;
+  @Int32()
+  external int score;
+  @Uint16()
+  external int type;
   external Pointer<Uint8> pData;
-  @Uint32() external int ulNextColumn;
-  @Uint32() external int ulStrokeNumber;
+  @Uint32()
+  external int ulNextColumn;
+  @Uint32()
+  external int ulStrokeNumber;
   external RECO_LATTICE_PROPERTIES epProp;
 }
 
 class RECO_LATTICE_COLUMN extends Struct {
-  @Uint32() external int key;
+  @Uint32()
+  external int key;
   external RECO_LATTICE_PROPERTIES cpProp;
-  @Uint32() external int cStrokes;
+  @Uint32()
+  external int cStrokes;
   external Pointer<Uint32> pStrokes;
-  @Uint32() external int cLatticeElements;
+  @Uint32()
+  external int cLatticeElements;
   external Pointer<RECO_LATTICE_ELEMENT> pLatticeElements;
 }
 
 class RECO_LATTICE extends Struct {
-  @Uint32() external int ulColumnCount;
+  @Uint32()
+  external int ulColumnCount;
   external Pointer<RECO_LATTICE_COLUMN> pLatticeColumns;
-  @Uint32() external int ulPropertyCount;
+  @Uint32()
+  external int ulPropertyCount;
   external Pointer<GUID> pGuidProperties;
-  @Uint32() external int ulBestResultColumnCount;
+  @Uint32()
+  external int ulBestResultColumnCount;
   external Pointer<Uint32> pulBestResultColumns;
   external Pointer<Uint32> pulBestResultIndexes;
 }
 
 class CHARACTER_RANGE extends Struct {
-  @Uint16() external int wcLow;
-  @Uint16() external int cChars;
+  @Uint16()
+  external int wcLow;
+  @Uint16()
+  external int cChars;
 }
 
-class TipAutoCompleteClient extends Struct {
-}
-
+class TipAutoCompleteClient extends Struct {}

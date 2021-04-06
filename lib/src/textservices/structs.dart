@@ -44,28 +44,38 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class HKL extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class TS_STATUS extends Struct {
-  @Uint32() external int dwDynamicFlags;
-  @Uint32() external int dwStaticFlags;
+  @Uint32()
+  external int dwDynamicFlags;
+  @Uint32()
+  external int dwStaticFlags;
 }
 
 class TS_TEXTCHANGE extends Struct {
-  @Int32() external int acpStart;
-  @Int32() external int acpOldEnd;
-  @Int32() external int acpNewEnd;
+  @Int32()
+  external int acpStart;
+  @Int32()
+  external int acpOldEnd;
+  @Int32()
+  external int acpNewEnd;
 }
 
 class TS_SELECTIONSTYLE extends Struct {
-  @Uint32() external int ase;
-  @Int32() external int fInterimChar;
+  @Uint32()
+  external int ase;
+  @Int32()
+  external int fInterimChar;
 }
 
 class TS_SELECTION_ACP extends Struct {
-  @Int32() external int acpStart;
-  @Int32() external int acpEnd;
+  @Int32()
+  external int acpStart;
+  @Int32()
+  external int acpEnd;
   external TS_SELECTIONSTYLE style;
 }
 
@@ -77,49 +87,63 @@ class TS_SELECTION_ANCHOR extends Struct {
 
 class TS_ATTRVAL extends Struct {
   external GUID idAttr;
-  @Uint32() external int dwOverlapId;
+  @Uint32()
+  external int dwOverlapId;
   external VARIANT varValue;
 }
 
 class TS_RUNINFO extends Struct {
-  @Uint32() external int uCount;
-  @Uint32() external int type;
+  @Uint32()
+  external int uCount;
+  @Uint32()
+  external int type;
 }
 
 class TF_LANGBARITEMINFO extends Struct {
   external GUID clsidService;
   external GUID guidItem;
-  @Uint32() external int dwStyle;
-  @Uint32() external int ulSort;
+  @Uint32()
+  external int dwStyle;
+  @Uint32()
+  external int ulSort;
   @Array(32)
   external Array<Uint16> szDescription;
 }
 
 class TF_LBBALLOONINFO extends Struct {
-  @Uint32() external int style;
+  @Uint32()
+  external int style;
   external Pointer<Utf16> bstrText;
 }
 
 class TF_PERSISTENT_PROPERTY_HEADER_ACP extends Struct {
   external GUID guidType;
-  @Int32() external int ichStart;
-  @Int32() external int cch;
-  @Uint32() external int cb;
-  @Uint32() external int dwPrivate;
+  @Int32()
+  external int ichStart;
+  @Int32()
+  external int cch;
+  @Uint32()
+  external int cb;
+  @Uint32()
+  external int dwPrivate;
   external GUID clsidTIP;
 }
 
 class TF_LANGUAGEPROFILE extends Struct {
   external GUID clsid;
-  @Uint16() external int langid;
+  @Uint16()
+  external int langid;
   external GUID catid;
-  @Int32() external int fActive;
+  @Int32()
+  external int fActive;
   external GUID guidProfile;
 }
 
 class TF_SELECTIONSTYLE extends Struct {
-  @Uint32() external int ase;
-  @Int32() external int fInterimChar;
+  @Uint32()
+  external int ase;
+  @Int32()
+  external int fInterimChar;
 }
 
 class TF_SELECTION extends Struct {
@@ -134,46 +158,64 @@ class TF_PROPERTYVAL extends Struct {
 
 class TF_HALTCOND extends Struct {
   external Pointer pHaltRange;
-  @Uint32() external int aHaltPos;
-  @Uint32() external int dwFlags;
+  @Uint32()
+  external int aHaltPos;
+  @Uint32()
+  external int dwFlags;
 }
 
 class TF_INPUTPROCESSORPROFILE extends Struct {
-  @Uint32() external int dwProfileType;
-  @Uint16() external int langid;
+  @Uint32()
+  external int dwProfileType;
+  @Uint16()
+  external int langid;
   external GUID clsid;
   external GUID guidProfile;
   external GUID catid;
-  @IntPtr() external int hklSubstitute;
-  @Uint32() external int dwCaps;
-  @IntPtr() external int hkl;
-  @Uint32() external int dwFlags;
+  @IntPtr()
+  external int hklSubstitute;
+  @Uint32()
+  external int dwCaps;
+  @IntPtr()
+  external int hkl;
+  @Uint32()
+  external int dwFlags;
 }
 
 class TF_PRESERVEDKEY extends Struct {
-  @Uint32() external int uVKey;
-  @Uint32() external int uModifiers;
+  @Uint32()
+  external int uVKey;
+  @Uint32()
+  external int uModifiers;
 }
 
 class TF_DA_COLOR extends Struct {
-  @Uint32() external int type;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int type;
+  @Uint32()
+  external int Anonymous;
 }
 
 class TF_DISPLAYATTRIBUTE extends Struct {
   external TF_DA_COLOR crText;
   external TF_DA_COLOR crBk;
-  @Uint32() external int lsStyle;
-  @Int32() external int fBoldLine;
+  @Uint32()
+  external int lsStyle;
+  @Int32()
+  external int fBoldLine;
   external TF_DA_COLOR crLine;
-  @Uint32() external int bAttr;
+  @Uint32()
+  external int bAttr;
 }
 
 class TF_LMLATTELEMENT extends Struct {
-  @Uint32() external int dwFrameStart;
-  @Uint32() external int dwFrameLen;
-  @Uint32() external int dwFlags;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int dwFrameStart;
+  @Uint32()
+  external int dwFrameLen;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int Anonymous;
   external Pointer<Utf16> bstrText;
 }
-

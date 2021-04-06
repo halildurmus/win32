@@ -499,4 +499,3 @@ class DS_SPN_WRITE_OP {
   static const DS_SPN_REPLACE_SPN_OP = 0x00000001;
   static const DS_SPN_DELETE_SPN_OP = 0x00000002;
 }
-

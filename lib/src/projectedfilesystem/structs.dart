@@ -44,35 +44,46 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class PRJ_DIR_ENTRY_BUFFER_HANDLE extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class PRJ_EXTENDED_INFO extends Struct {
-  @Uint32() external int InfoType;
-  @Uint32() external int NextInfoOffset;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int InfoType;
+  @Uint32()
+  external int NextInfoOffset;
+  @Uint32()
+  external int Anonymous;
 }
 
 class PRJ_NOTIFICATION_MAPPING extends Struct {
-  @Uint32() external int NotificationBitMask;
+  @Uint32()
+  external int NotificationBitMask;
   external Pointer<Utf16> NotificationRoot;
 }
 
 class PRJ_STARTVIRTUALIZING_OPTIONS extends Struct {
-  @Uint32() external int Flags;
-  @Uint32() external int PoolThreadCount;
-  @Uint32() external int ConcurrentThreadCount;
+  @Uint32()
+  external int Flags;
+  @Uint32()
+  external int PoolThreadCount;
+  @Uint32()
+  external int ConcurrentThreadCount;
   external Pointer<PRJ_NOTIFICATION_MAPPING> NotificationMappings;
-  @Uint32() external int NotificationMappingsCount;
+  @Uint32()
+  external int NotificationMappingsCount;
 }
 
 class PRJ_VIRTUALIZATION_INSTANCE_INFO extends Struct {
   external GUID InstanceID;
-  @Uint32() external int WriteAlignment;
+  @Uint32()
+  external int WriteAlignment;
 }
 
 class PRJ_PLACEHOLDER_VERSION_INFO extends Struct {
@@ -83,43 +94,61 @@ class PRJ_PLACEHOLDER_VERSION_INFO extends Struct {
 }
 
 class PRJ_FILE_BASIC_INFO extends Struct {
-  @Uint8() external int IsDirectory;
-  @Int64() external int FileSize;
-  @Int64() external int CreationTime;
-  @Int64() external int LastAccessTime;
-  @Int64() external int LastWriteTime;
-  @Int64() external int ChangeTime;
-  @Uint32() external int FileAttributes;
+  @Uint8()
+  external int IsDirectory;
+  @Int64()
+  external int FileSize;
+  @Int64()
+  external int CreationTime;
+  @Int64()
+  external int LastAccessTime;
+  @Int64()
+  external int LastWriteTime;
+  @Int64()
+  external int ChangeTime;
+  @Uint32()
+  external int FileAttributes;
 }
 
 class PRJ_PLACEHOLDER_INFO extends Struct {
   external PRJ_FILE_BASIC_INFO FileBasicInfo;
-  @Uint32() external int EaInformation;
-  @Uint32() external int SecurityInformation;
-  @Uint32() external int StreamsInformation;
+  @Uint32()
+  external int EaInformation;
+  @Uint32()
+  external int SecurityInformation;
+  @Uint32()
+  external int StreamsInformation;
   external PRJ_PLACEHOLDER_VERSION_INFO VersionInfo;
   @Array(1)
   external Array<Uint8> VariableData;
 }
 
 class PRJ_CALLBACK_DATA extends Struct {
-  @Uint32() external int Size;
-  @Uint32() external int Flags;
-  @IntPtr() external int NamespaceVirtualizationContext;
-  @Int32() external int CommandId;
+  @Uint32()
+  external int Size;
+  @Uint32()
+  external int Flags;
+  @IntPtr()
+  external int NamespaceVirtualizationContext;
+  @Int32()
+  external int CommandId;
   external GUID FileId;
   external GUID DataStreamId;
   external Pointer<Utf16> FilePathName;
   external Pointer<PRJ_PLACEHOLDER_VERSION_INFO> VersionInfo;
-  @Uint32() external int TriggeringProcessId;
+  @Uint32()
+  external int TriggeringProcessId;
   external Pointer<Utf16> TriggeringProcessImageFileName;
   external Pointer InstanceContext;
 }
 
 class PRJ_NOTIFICATION_PARAMETERS extends Struct {
-  @Uint32() external int PostCreate;
-  @Uint32() external int FileRenamed;
-  @Uint32() external int FileDeletedOnHandleClose;
+  @Uint32()
+  external int PostCreate;
+  @Uint32()
+  external int FileRenamed;
+  @Uint32()
+  external int FileDeletedOnHandleClose;
 }
 
 class PRJ_CALLBACKS extends Struct {
@@ -134,7 +163,8 @@ class PRJ_CALLBACKS extends Struct {
 }
 
 class PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS extends Struct {
-  @Uint32() external int CommandType;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int CommandType;
+  @Uint32()
+  external int Anonymous;
 }
-

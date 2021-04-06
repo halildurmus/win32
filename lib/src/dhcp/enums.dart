@@ -200,4 +200,3 @@ class StatusCode {
   static const STATUS_NO_BINDING = 0x00000003;
   static const STATUS_NOPREFIX_AVAIL = 0x00000006;
 }
-

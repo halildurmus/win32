@@ -44,11 +44,11 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class UAL_DATA_BLOB extends Struct {
-  @Uint32() external int Size;
+  @Uint32()
+  external int Size;
   external GUID RoleGuid;
   external GUID TenantId;
   external SOCKADDR_STORAGE Address;
   @Array(129)
   external Array<Uint16> UserName;
 }
-

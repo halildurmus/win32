@@ -43,21 +43,14 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class CInitiateWinSAT extends Struct {
-}
+class CInitiateWinSAT extends Struct {}
 
-class CQueryWinSAT extends Struct {
-}
+class CQueryWinSAT extends Struct {}
 
-class CQueryAllWinSAT extends Struct {
-}
+class CQueryAllWinSAT extends Struct {}
 
-class CProvideWinSATVisuals extends Struct {
-}
+class CProvideWinSATVisuals extends Struct {}
 
-class CAccessiblityWinSAT extends Struct {
-}
+class CAccessiblityWinSAT extends Struct {}
 
-class CQueryOEMWinSATCustomization extends Struct {
-}
-
+class CQueryOEMWinSATCustomization extends Struct {}

@@ -44,55 +44,79 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class HGESTUREINFO extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class HTOUCHINPUT extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class TOUCHINPUT extends Struct {
-  @Int32() external int x;
-  @Int32() external int y;
-  @IntPtr() external int hSource;
-  @Uint32() external int dwID;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwMask;
-  @Uint32() external int dwTime;
-  @IntPtr() external int dwExtraInfo;
-  @Uint32() external int cxContact;
-  @Uint32() external int cyContact;
+  @Int32()
+  external int x;
+  @Int32()
+  external int y;
+  @IntPtr()
+  external int hSource;
+  @Uint32()
+  external int dwID;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwMask;
+  @Uint32()
+  external int dwTime;
+  @IntPtr()
+  external int dwExtraInfo;
+  @Uint32()
+  external int cxContact;
+  @Uint32()
+  external int cyContact;
 }
 
 class GESTUREINFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwID;
-  @IntPtr() external int hwndTarget;
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwID;
+  @IntPtr()
+  external int hwndTarget;
   external POINTS ptsLocation;
-  @Uint32() external int dwInstanceID;
-  @Uint32() external int dwSequenceID;
-  @Uint64() external int ullArguments;
-  @Uint32() external int cbExtraArgs;
+  @Uint32()
+  external int dwInstanceID;
+  @Uint32()
+  external int dwSequenceID;
+  @Uint64()
+  external int ullArguments;
+  @Uint32()
+  external int cbExtraArgs;
 }
 
 class GESTURENOTIFYSTRUCT extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-  @IntPtr() external int hwndTarget;
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int dwFlags;
+  @IntPtr()
+  external int hwndTarget;
   external POINTS ptsLocation;
-  @Uint32() external int dwInstanceID;
+  @Uint32()
+  external int dwInstanceID;
 }
 
 class GESTURECONFIG extends Struct {
-  @Uint32() external int dwID;
-  @Uint32() external int dwWant;
-  @Uint32() external int dwBlock;
+  @Uint32()
+  external int dwID;
+  @Uint32()
+  external int dwWant;
+  @Uint32()
+  external int dwBlock;
 }
 
-class InertiaProcessor extends Struct {
-}
+class InertiaProcessor extends Struct {}
 
-class ManipulationProcessor extends Struct {
-}
-
+class ManipulationProcessor extends Struct {}

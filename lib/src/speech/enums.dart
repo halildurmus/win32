@@ -1477,4 +1477,3 @@ class SpeechWordType {
   static const SWTAdded = 0x00000001;
   static const SWTDeleted = 0x00000002;
 }
-

@@ -43,6 +43,4 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class RendezvousApplication extends Struct {
-}
-
+class RendezvousApplication extends Struct {}

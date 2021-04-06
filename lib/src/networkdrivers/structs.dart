@@ -44,84 +44,130 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class L2_NOTIFICATION_DATA extends Struct {
-  @Uint32() external int NotificationSource;
-  @Uint32() external int NotificationCode;
+  @Uint32()
+  external int NotificationSource;
+  @Uint32()
+  external int NotificationCode;
   external GUID InterfaceGuid;
-  @Uint32() external int dwDataSize;
+  @Uint32()
+  external int dwDataSize;
   external Pointer pData;
 }
 
 class NET_PHYSICAL_LOCATION_LH extends Struct {
-  @Uint32() external int BusNumber;
-  @Uint32() external int SlotNumber;
-  @Uint32() external int FunctionNumber;
+  @Uint32()
+  external int BusNumber;
+  @Uint32()
+  external int SlotNumber;
+  @Uint32()
+  external int FunctionNumber;
 }
 
 class IF_COUNTED_STRING_LH extends Struct {
-  @Uint16() external int Length;
+  @Uint16()
+  external int Length;
   @Array(129)
   external Array<Uint16> String;
 }
 
 class NDIS_INTERFACE_INFORMATION extends Struct {
-  @Uint32() external int ifOperStatus;
-  @Uint32() external int ifOperStatusFlags;
-  @Uint32() external int MediaConnectState;
-  @Uint32() external int MediaDuplexState;
-  @Uint32() external int ifMtu;
-  @Uint8() external int ifPromiscuousMode;
-  @Uint8() external int ifDeviceWakeUpEnable;
-  @Uint64() external int XmitLinkSpeed;
-  @Uint64() external int RcvLinkSpeed;
-  @Uint64() external int ifLastChange;
-  @Uint64() external int ifCounterDiscontinuityTime;
-  @Uint64() external int ifInUnknownProtos;
-  @Uint64() external int ifInDiscards;
-  @Uint64() external int ifInErrors;
-  @Uint64() external int ifHCInOctets;
-  @Uint64() external int ifHCInUcastPkts;
-  @Uint64() external int ifHCInMulticastPkts;
-  @Uint64() external int ifHCInBroadcastPkts;
-  @Uint64() external int ifHCOutOctets;
-  @Uint64() external int ifHCOutUcastPkts;
-  @Uint64() external int ifHCOutMulticastPkts;
-  @Uint64() external int ifHCOutBroadcastPkts;
-  @Uint64() external int ifOutErrors;
-  @Uint64() external int ifOutDiscards;
-  @Uint64() external int ifHCInUcastOctets;
-  @Uint64() external int ifHCInMulticastOctets;
-  @Uint64() external int ifHCInBroadcastOctets;
-  @Uint64() external int ifHCOutUcastOctets;
-  @Uint64() external int ifHCOutMulticastOctets;
-  @Uint64() external int ifHCOutBroadcastOctets;
-  @Uint32() external int CompartmentId;
-  @Uint32() external int SupportedStatistics;
+  @Uint32()
+  external int ifOperStatus;
+  @Uint32()
+  external int ifOperStatusFlags;
+  @Uint32()
+  external int MediaConnectState;
+  @Uint32()
+  external int MediaDuplexState;
+  @Uint32()
+  external int ifMtu;
+  @Uint8()
+  external int ifPromiscuousMode;
+  @Uint8()
+  external int ifDeviceWakeUpEnable;
+  @Uint64()
+  external int XmitLinkSpeed;
+  @Uint64()
+  external int RcvLinkSpeed;
+  @Uint64()
+  external int ifLastChange;
+  @Uint64()
+  external int ifCounterDiscontinuityTime;
+  @Uint64()
+  external int ifInUnknownProtos;
+  @Uint64()
+  external int ifInDiscards;
+  @Uint64()
+  external int ifInErrors;
+  @Uint64()
+  external int ifHCInOctets;
+  @Uint64()
+  external int ifHCInUcastPkts;
+  @Uint64()
+  external int ifHCInMulticastPkts;
+  @Uint64()
+  external int ifHCInBroadcastPkts;
+  @Uint64()
+  external int ifHCOutOctets;
+  @Uint64()
+  external int ifHCOutUcastPkts;
+  @Uint64()
+  external int ifHCOutMulticastPkts;
+  @Uint64()
+  external int ifHCOutBroadcastPkts;
+  @Uint64()
+  external int ifOutErrors;
+  @Uint64()
+  external int ifOutDiscards;
+  @Uint64()
+  external int ifHCInUcastOctets;
+  @Uint64()
+  external int ifHCInMulticastOctets;
+  @Uint64()
+  external int ifHCInBroadcastOctets;
+  @Uint64()
+  external int ifHCOutUcastOctets;
+  @Uint64()
+  external int ifHCOutMulticastOctets;
+  @Uint64()
+  external int ifHCOutBroadcastOctets;
+  @Uint32()
+  external int CompartmentId;
+  @Uint32()
+  external int SupportedStatistics;
 }
 
 class SOCKET_ADDRESS_LIST extends Struct {
-  @Int32() external int iAddressCount;
+  @Int32()
+  external int iAddressCount;
   @Array(1)
   external Array<SOCKET_ADDRESS> Address;
 }
 
 class SOCKADDR_STORAGE_XP extends Struct {
-  @Int16() external int ss_family;
+  @Int16()
+  external int ss_family;
   @Array(6)
   external Array<Int8> __ss_pad1;
-  @Int64() external int __ss_align;
+  @Int64()
+  external int __ss_align;
   @Array(112)
   external Array<Int8> __ss_pad2;
 }
 
 class IN6_ADDR extends Struct {
-  @Uint32() external int u;
+  @Uint32()
+  external int u;
 }
 
 class SOCKADDR_IN6_W2KSP1 extends Struct {
-  @Int16() external int sin6_family;
-  @Uint16() external int sin6_port;
-  @Uint32() external int sin6_flowinfo;
+  @Int16()
+  external int sin6_family;
+  @Uint16()
+  external int sin6_port;
+  @Uint32()
+  external int sin6_flowinfo;
   external IN6_ADDR sin6_addr;
-  @Uint32() external int sin6_scope_id;
+  @Uint32()
+  external int sin6_scope_id;
 }
-

@@ -44,6 +44,6 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class HCOMDB extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
-

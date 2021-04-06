@@ -100,4 +100,3 @@ class keybd_eventFlags {
   static const KEYEVENTF_SCANCODE = 0x00000008;
   static const KEYEVENTF_UNICODE = 0x00000004;
 }
-

@@ -43,65 +43,55 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class RDPViewer extends Struct {
-}
+class RDPViewer extends Struct {}
 
-class RDPSRAPISessionProperties extends Struct {
-}
+class RDPSRAPISessionProperties extends Struct {}
 
-class RDPSRAPIInvitationManager extends Struct {
-}
+class RDPSRAPIInvitationManager extends Struct {}
 
-class RDPSRAPIInvitation extends Struct {
-}
+class RDPSRAPIInvitation extends Struct {}
 
-class RDPSRAPIAttendeeManager extends Struct {
-}
+class RDPSRAPIAttendeeManager extends Struct {}
 
-class RDPSRAPIAttendee extends Struct {
-}
+class RDPSRAPIAttendee extends Struct {}
 
-class RDPSRAPIAttendeeDisconnectInfo extends Struct {
-}
+class RDPSRAPIAttendeeDisconnectInfo extends Struct {}
 
-class RDPSRAPIApplicationFilter extends Struct {
-}
+class RDPSRAPIApplicationFilter extends Struct {}
 
-class RDPSRAPIApplicationList extends Struct {
-}
+class RDPSRAPIApplicationList extends Struct {}
 
-class RDPSRAPIApplication extends Struct {
-}
+class RDPSRAPIApplication extends Struct {}
 
-class RDPSRAPIWindowList extends Struct {
-}
+class RDPSRAPIWindowList extends Struct {}
 
-class RDPSRAPIWindow extends Struct {
-}
+class RDPSRAPIWindow extends Struct {}
 
-class RDPSRAPITcpConnectionInfo extends Struct {
-}
+class RDPSRAPITcpConnectionInfo extends Struct {}
 
-class RDPSession extends Struct {
-}
+class RDPSession extends Struct {}
 
-class RDPSRAPIFrameBuffer extends Struct {
-}
+class RDPSRAPIFrameBuffer extends Struct {}
 
-class RDPTransportStreamBuffer extends Struct {
-}
+class RDPTransportStreamBuffer extends Struct {}
 
-class RDPTransportStreamEvents extends Struct {
-}
+class RDPTransportStreamEvents extends Struct {}
 
 class __ReferenceRemainingTypes__ extends Struct {
-  @Uint32() external int __ctrlLevel__;
-  @Uint32() external int __attendeeDisconnectReason__;
-  @Uint32() external int __channelPriority__;
-  @Uint32() external int __channelFlags__;
-  @Uint32() external int __channelAccessEnum__;
-  @Uint32() external int __rdpencomapiAttendeeFlags__;
-  @Uint32() external int __rdpsrapiWndFlags__;
-  @Uint32() external int __rdpsrapiAppFlags__;
+  @Uint32()
+  external int __ctrlLevel__;
+  @Uint32()
+  external int __attendeeDisconnectReason__;
+  @Uint32()
+  external int __channelPriority__;
+  @Uint32()
+  external int __channelFlags__;
+  @Uint32()
+  external int __channelAccessEnum__;
+  @Uint32()
+  external int __rdpencomapiAttendeeFlags__;
+  @Uint32()
+  external int __rdpsrapiWndFlags__;
+  @Uint32()
+  external int __rdpsrapiAppFlags__;
 }
-

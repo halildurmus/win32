@@ -225,4 +225,3 @@ class XHR_PROPERTY {
   static const XHR_PROP_SET_ENTERPRISEID = 0x0000000a;
   static const XHR_PROP_MAX_CONNECTIONS = 0x0000000b;
 }
-

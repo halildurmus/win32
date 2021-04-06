@@ -14,10 +14,8 @@ import 'package:ffi/ffi.dart';
 
 import '../callbacks.dart';
 import '../combase.dart';
-// import 'structs.dart';
-import '../structs.dart';
-import '../structs.g.dart';
 import 'enums.dart';
+import 'structs.dart';
 
 final _gdi32 = DynamicLibrary.open('GDI32.dll');
 

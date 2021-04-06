@@ -43,63 +43,52 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class WS_XML_READER extends Struct {
-}
+class WS_XML_READER extends Struct {}
 
-class WS_XML_WRITER extends Struct {
-}
+class WS_XML_WRITER extends Struct {}
 
-class WS_XML_BUFFER extends Struct {
-}
+class WS_XML_BUFFER extends Struct {}
 
-class WS_CHANNEL extends Struct {
-}
+class WS_CHANNEL extends Struct {}
 
-class WS_OPERATION_CONTEXT extends Struct {
-}
+class WS_OPERATION_CONTEXT extends Struct {}
 
-class WS_ERROR extends Struct {
-}
+class WS_ERROR extends Struct {}
 
-class WS_HEAP extends Struct {
-}
+class WS_HEAP extends Struct {}
 
-class WS_LISTENER extends Struct {
-}
+class WS_LISTENER extends Struct {}
 
-class WS_MESSAGE extends Struct {
-}
+class WS_MESSAGE extends Struct {}
 
-class WS_SECURITY_TOKEN extends Struct {
-}
+class WS_SECURITY_TOKEN extends Struct {}
 
-class WS_SECURITY_CONTEXT extends Struct {
-}
+class WS_SECURITY_CONTEXT extends Struct {}
 
-class WS_SERVICE_HOST extends Struct {
-}
+class WS_SERVICE_HOST extends Struct {}
 
-class WS_SERVICE_PROXY extends Struct {
-}
+class WS_SERVICE_PROXY extends Struct {}
 
-class WS_METADATA extends Struct {
-}
+class WS_METADATA extends Struct {}
 
-class WS_POLICY extends Struct {
-}
+class WS_POLICY extends Struct {}
 
 class WS_XML_DICTIONARY extends Struct {
   external GUID guid;
   external Pointer<WS_XML_STRING> strings;
-  @Uint32() external int stringCount;
-  @Int32() external int isConst;
+  @Uint32()
+  external int stringCount;
+  @Int32()
+  external int isConst;
 }
 
 class WS_XML_STRING extends Struct {
-  @Uint32() external int length;
+  @Uint32()
+  external int length;
   external Pointer<Uint8> bytes;
   external Pointer<WS_XML_DICTIONARY> dictionary;
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
 }
 
 class WS_XML_QNAME extends Struct {
@@ -113,36 +102,46 @@ class WS_XML_NODE_POSITION extends Struct {
 }
 
 class WS_XML_READER_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_XML_CANONICALIZATION_INCLUSIVE_PREFIXES extends Struct {
-  @Uint32() external int prefixCount;
+  @Uint32()
+  external int prefixCount;
   external Pointer<WS_XML_STRING> prefixes;
 }
 
 class WS_XML_CANONICALIZATION_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_XML_WRITER_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_XML_BUFFER_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_XML_TEXT extends Struct {
-  @Uint32() external int textType;
+  @Uint32()
+  external int textType;
 }
 
 class WS_XML_UTF8_TEXT extends Struct {
@@ -153,43 +152,51 @@ class WS_XML_UTF8_TEXT extends Struct {
 class WS_XML_UTF16_TEXT extends Struct {
   external WS_XML_TEXT text;
   external Pointer<Uint8> bytes;
-  @Uint32() external int byteCount;
+  @Uint32()
+  external int byteCount;
 }
 
 class WS_XML_BASE64_TEXT extends Struct {
   external WS_XML_TEXT text;
   external Pointer<Uint8> bytes;
-  @Uint32() external int length;
+  @Uint32()
+  external int length;
 }
 
 class WS_XML_BOOL_TEXT extends Struct {
   external WS_XML_TEXT text;
-  @Int32() external int value;
+  @Int32()
+  external int value;
 }
 
 class WS_XML_INT32_TEXT extends Struct {
   external WS_XML_TEXT text;
-  @Int32() external int value;
+  @Int32()
+  external int value;
 }
 
 class WS_XML_INT64_TEXT extends Struct {
   external WS_XML_TEXT text;
-  @Int64() external int value;
+  @Int64()
+  external int value;
 }
 
 class WS_XML_UINT64_TEXT extends Struct {
   external WS_XML_TEXT text;
-  @Uint64() external int value;
+  @Uint64()
+  external int value;
 }
 
 class WS_XML_FLOAT_TEXT extends Struct {
   external WS_XML_TEXT text;
-  @Float() external double value;
+  @Float()
+  external double value;
 }
 
 class WS_XML_DOUBLE_TEXT extends Struct {
   external WS_XML_TEXT text;
-  @Double() external double value;
+  @Double()
+  external double value;
 }
 
 class WS_XML_DECIMAL_TEXT extends Struct {
@@ -208,8 +215,10 @@ class WS_XML_UNIQUE_ID_TEXT extends Struct {
 }
 
 class WS_DATETIME extends Struct {
-  @Uint64() external int ticks;
-  @Uint32() external int format;
+  @Uint64()
+  external int ticks;
+  @Uint32()
+  external int format;
 }
 
 class WS_XML_DATETIME_TEXT extends Struct {
@@ -218,7 +227,8 @@ class WS_XML_DATETIME_TEXT extends Struct {
 }
 
 class WS_TIMESPAN extends Struct {
-  @Int64() external int ticks;
+  @Int64()
+  external int ticks;
 }
 
 class WS_XML_TIMESPAN_TEXT extends Struct {
@@ -235,17 +245,21 @@ class WS_XML_QNAME_TEXT extends Struct {
 
 class WS_XML_LIST_TEXT extends Struct {
   external WS_XML_TEXT text;
-  @Uint32() external int itemCount;
+  @Uint32()
+  external int itemCount;
   external Pointer<Pointer<WS_XML_TEXT>> items;
 }
 
 class WS_XML_NODE extends Struct {
-  @Uint32() external int nodeType;
+  @Uint32()
+  external int nodeType;
 }
 
 class WS_XML_ATTRIBUTE extends Struct {
-  @Uint8() external int singleQuote;
-  @Uint8() external int isXmlNs;
+  @Uint8()
+  external int singleQuote;
+  @Uint8()
+  external int isXmlNs;
   external Pointer<WS_XML_STRING> prefix;
   external Pointer<WS_XML_STRING> localName;
   external Pointer<WS_XML_STRING> ns;
@@ -257,9 +271,11 @@ class WS_XML_ELEMENT_NODE extends Struct {
   external Pointer<WS_XML_STRING> prefix;
   external Pointer<WS_XML_STRING> localName;
   external Pointer<WS_XML_STRING> ns;
-  @Uint32() external int attributeCount;
+  @Uint32()
+  external int attributeCount;
   external Pointer<Pointer<WS_XML_ATTRIBUTE>> attributes;
-  @Int32() external int isEmpty;
+  @Int32()
+  external int isEmpty;
 }
 
 class WS_XML_TEXT_NODE extends Struct {
@@ -273,13 +289,15 @@ class WS_XML_COMMENT_NODE extends Struct {
 }
 
 class WS_XML_READER_INPUT extends Struct {
-  @Uint32() external int inputType;
+  @Uint32()
+  external int inputType;
 }
 
 class WS_XML_READER_BUFFER_INPUT extends Struct {
   external WS_XML_READER_INPUT input;
   external Pointer encodedData;
-  @Uint32() external int encodedDataSize;
+  @Uint32()
+  external int encodedDataSize;
 }
 
 class WS_XML_READER_STREAM_INPUT extends Struct {
@@ -289,12 +307,14 @@ class WS_XML_READER_STREAM_INPUT extends Struct {
 }
 
 class WS_XML_READER_ENCODING extends Struct {
-  @Uint32() external int encodingType;
+  @Uint32()
+  external int encodingType;
 }
 
 class WS_XML_READER_TEXT_ENCODING extends Struct {
   external WS_XML_READER_ENCODING encoding;
-  @Uint32() external int charSet;
+  @Uint32()
+  external int charSet;
 }
 
 class WS_XML_READER_BINARY_ENCODING extends Struct {
@@ -304,14 +324,16 @@ class WS_XML_READER_BINARY_ENCODING extends Struct {
 }
 
 class WS_STRING extends Struct {
-  @Uint32() external int length;
+  @Uint32()
+  external int length;
   external Pointer<Utf16> chars;
 }
 
 class WS_XML_READER_MTOM_ENCODING extends Struct {
   external WS_XML_READER_ENCODING encoding;
   external Pointer<WS_XML_READER_ENCODING> textEncoding;
-  @Int32() external int readMimeHeader;
+  @Int32()
+  external int readMimeHeader;
   external WS_STRING startInfo;
   external WS_STRING boundary;
   external WS_STRING startUri;
@@ -322,12 +344,14 @@ class WS_XML_READER_RAW_ENCODING extends Struct {
 }
 
 class WS_XML_WRITER_ENCODING extends Struct {
-  @Uint32() external int encodingType;
+  @Uint32()
+  external int encodingType;
 }
 
 class WS_XML_WRITER_TEXT_ENCODING extends Struct {
   external WS_XML_WRITER_ENCODING encoding;
-  @Uint32() external int charSet;
+  @Uint32()
+  external int charSet;
 }
 
 class WS_XML_WRITER_BINARY_ENCODING extends Struct {
@@ -340,11 +364,13 @@ class WS_XML_WRITER_BINARY_ENCODING extends Struct {
 class WS_XML_WRITER_MTOM_ENCODING extends Struct {
   external WS_XML_WRITER_ENCODING encoding;
   external Pointer<WS_XML_WRITER_ENCODING> textEncoding;
-  @Int32() external int writeMimeHeader;
+  @Int32()
+  external int writeMimeHeader;
   external WS_STRING boundary;
   external WS_STRING startInfo;
   external WS_STRING startUri;
-  @Uint32() external int maxInlineByteCount;
+  @Uint32()
+  external int maxInlineByteCount;
 }
 
 class WS_XML_WRITER_RAW_ENCODING extends Struct {
@@ -352,7 +378,8 @@ class WS_XML_WRITER_RAW_ENCODING extends Struct {
 }
 
 class WS_XML_WRITER_OUTPUT extends Struct {
-  @Uint32() external int outputType;
+  @Uint32()
+  external int outputType;
 }
 
 class WS_XML_WRITER_BUFFER_OUTPUT extends Struct {
@@ -367,12 +394,14 @@ class WS_XML_WRITER_STREAM_OUTPUT extends Struct {
 
 class WS_XML_WRITER_PROPERTIES extends Struct {
   external Pointer<WS_XML_WRITER_PROPERTY> properties;
-  @Uint32() external int propertyCount;
+  @Uint32()
+  external int propertyCount;
 }
 
 class WS_XML_READER_PROPERTIES extends Struct {
   external Pointer<WS_XML_READER_PROPERTY> properties;
-  @Uint32() external int propertyCount;
+  @Uint32()
+  external int propertyCount;
 }
 
 class WS_ASYNC_CONTEXT extends Struct {
@@ -393,9 +422,11 @@ class WS_ASYNC_OPERATION extends Struct {
 }
 
 class WS_CHANNEL_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_CUSTOM_HTTP_PROXY extends Struct {
@@ -405,7 +436,8 @@ class WS_CUSTOM_HTTP_PROXY extends Struct {
 
 class WS_CHANNEL_PROPERTIES extends Struct {
   external Pointer<WS_CHANNEL_PROPERTY> properties;
-  @Uint32() external int propertyCount;
+  @Uint32()
+  external int propertyCount;
 }
 
 class WS_CUSTOM_CHANNEL_CALLBACKS extends Struct {
@@ -427,22 +459,28 @@ class WS_CUSTOM_CHANNEL_CALLBACKS extends Struct {
 
 class WS_HTTP_HEADER_MAPPING extends Struct {
   external WS_XML_STRING headerName;
-  @Uint32() external int headerMappingOptions;
+  @Uint32()
+  external int headerMappingOptions;
 }
 
 class WS_HTTP_MESSAGE_MAPPING extends Struct {
-  @Uint32() external int requestMappingOptions;
-  @Uint32() external int responseMappingOptions;
+  @Uint32()
+  external int requestMappingOptions;
+  @Uint32()
+  external int responseMappingOptions;
   external Pointer<Pointer<WS_HTTP_HEADER_MAPPING>> requestHeaderMappings;
-  @Uint32() external int requestHeaderMappingCount;
+  @Uint32()
+  external int requestHeaderMappingCount;
   external Pointer<Pointer<WS_HTTP_HEADER_MAPPING>> responseHeaderMappings;
-  @Uint32() external int responseHeaderMappingCount;
+  @Uint32()
+  external int responseHeaderMappingCount;
 }
 
 class WS_ELEMENT_DESCRIPTION extends Struct {
   external Pointer<WS_XML_STRING> elementLocalName;
   external Pointer<WS_XML_STRING> elementNs;
-  @Uint32() external int type;
+  @Uint32()
+  external int type;
   external Pointer typeDescription;
 }
 
@@ -477,7 +515,8 @@ class WS_HTTP_REDIRECT_CALLBACK_CONTEXT extends Struct {
 }
 
 class WS_ENDPOINT_IDENTITY extends Struct {
-  @Uint32() external int identityType;
+  @Uint32()
+  external int identityType;
 }
 
 class WS_ENDPOINT_ADDRESS extends Struct {
@@ -503,7 +542,8 @@ class WS_SPN_ENDPOINT_IDENTITY extends Struct {
 }
 
 class WS_BYTES extends Struct {
-  @Uint32() external int length;
+  @Uint32()
+  external int length;
   external Pointer<Uint8> bytes;
 }
 
@@ -524,9 +564,11 @@ class WS_UNKNOWN_ENDPOINT_IDENTITY extends Struct {
 }
 
 class WS_ERROR_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_FAULT_REASON extends Struct {
@@ -542,7 +584,8 @@ class WS_FAULT_CODE extends Struct {
 class WS_FAULT extends Struct {
   external Pointer<WS_FAULT_CODE> code;
   external Pointer<WS_FAULT_REASON> reasons;
-  @Uint32() external int reasonCount;
+  @Uint32()
+  external int reasonCount;
   external WS_STRING actor;
   external WS_STRING node;
   external Pointer<WS_XML_BUFFER> detail;
@@ -554,35 +597,43 @@ class WS_FAULT_DETAIL_DESCRIPTION extends Struct {
 }
 
 class WS_HEAP_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_HEAP_PROPERTIES extends Struct {
   external Pointer<WS_HEAP_PROPERTY> properties;
-  @Uint32() external int propertyCount;
+  @Uint32()
+  external int propertyCount;
 }
 
 class WS_LISTENER_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_DISALLOWED_USER_AGENT_SUBSTRINGS extends Struct {
-  @Uint32() external int subStringCount;
+  @Uint32()
+  external int subStringCount;
   external Pointer<Pointer<WS_STRING>> subStrings;
 }
 
 class WS_LISTENER_PROPERTIES extends Struct {
   external Pointer<WS_LISTENER_PROPERTY> properties;
-  @Uint32() external int propertyCount;
+  @Uint32()
+  external int propertyCount;
 }
 
 class WS_HOST_NAMES extends Struct {
   external Pointer<WS_STRING> hostNames;
-  @Uint32() external int hostNameCount;
+  @Uint32()
+  external int hostNameCount;
 }
 
 class WS_CUSTOM_LISTENER_CALLBACKS extends Struct {
@@ -594,69 +645,95 @@ class WS_CUSTOM_LISTENER_CALLBACKS extends Struct {
   external WS_ABORT_LISTENER_CALLBACK abortListenerCallback;
   external WS_GET_LISTENER_PROPERTY_CALLBACK getListenerPropertyCallback;
   external WS_SET_LISTENER_PROPERTY_CALLBACK setListenerPropertyCallback;
-  external WS_CREATE_CHANNEL_FOR_LISTENER_CALLBACK createChannelForListenerCallback;
+  external WS_CREATE_CHANNEL_FOR_LISTENER_CALLBACK
+      createChannelForListenerCallback;
   external WS_ACCEPT_CHANNEL_CALLBACK acceptChannelCallback;
 }
 
 class WS_MESSAGE_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_MESSAGE_PROPERTIES extends Struct {
   external Pointer<WS_MESSAGE_PROPERTY> properties;
-  @Uint32() external int propertyCount;
+  @Uint32()
+  external int propertyCount;
 }
 
 class WS_SECURITY_ALGORITHM_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_SECURITY_ALGORITHM_SUITE extends Struct {
-  @Uint32() external int canonicalizationAlgorithm;
-  @Uint32() external int digestAlgorithm;
-  @Uint32() external int symmetricSignatureAlgorithm;
-  @Uint32() external int asymmetricSignatureAlgorithm;
-  @Uint32() external int encryptionAlgorithm;
-  @Uint32() external int keyDerivationAlgorithm;
-  @Uint32() external int symmetricKeyWrapAlgorithm;
-  @Uint32() external int asymmetricKeyWrapAlgorithm;
-  @Uint32() external int minSymmetricKeyLength;
-  @Uint32() external int maxSymmetricKeyLength;
-  @Uint32() external int minAsymmetricKeyLength;
-  @Uint32() external int maxAsymmetricKeyLength;
+  @Uint32()
+  external int canonicalizationAlgorithm;
+  @Uint32()
+  external int digestAlgorithm;
+  @Uint32()
+  external int symmetricSignatureAlgorithm;
+  @Uint32()
+  external int asymmetricSignatureAlgorithm;
+  @Uint32()
+  external int encryptionAlgorithm;
+  @Uint32()
+  external int keyDerivationAlgorithm;
+  @Uint32()
+  external int symmetricKeyWrapAlgorithm;
+  @Uint32()
+  external int asymmetricKeyWrapAlgorithm;
+  @Uint32()
+  external int minSymmetricKeyLength;
+  @Uint32()
+  external int maxSymmetricKeyLength;
+  @Uint32()
+  external int minAsymmetricKeyLength;
+  @Uint32()
+  external int maxAsymmetricKeyLength;
   external Pointer<WS_SECURITY_ALGORITHM_PROPERTY> properties;
-  @Uint32() external int propertyCount;
+  @Uint32()
+  external int propertyCount;
 }
 
 class WS_SECURITY_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_SECURITY_PROPERTIES extends Struct {
   external Pointer<WS_SECURITY_PROPERTY> properties;
-  @Uint32() external int propertyCount;
+  @Uint32()
+  external int propertyCount;
 }
 
 class WS_SECURITY_BINDING_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_SECURITY_BINDING_PROPERTIES extends Struct {
   external Pointer<WS_SECURITY_BINDING_PROPERTY> properties;
-  @Uint32() external int propertyCount;
+  @Uint32()
+  external int propertyCount;
 }
 
 class WS_SERVICE_SECURITY_IDENTITIES extends Struct {
   external Pointer<WS_STRING> serviceIdentities;
-  @Uint32() external int serviceIdentityCount;
+  @Uint32()
+  external int serviceIdentityCount;
 }
 
 class WS_CERTIFICATE_VALIDATION_CALLBACK_CONTEXT extends Struct {
@@ -665,19 +742,22 @@ class WS_CERTIFICATE_VALIDATION_CALLBACK_CONTEXT extends Struct {
 }
 
 class WS_CERT_CREDENTIAL extends Struct {
-  @Uint32() external int credentialType;
+  @Uint32()
+  external int credentialType;
 }
 
 class WS_SUBJECT_NAME_CERT_CREDENTIAL extends Struct {
   external WS_CERT_CREDENTIAL credential;
-  @Uint32() external int storeLocation;
+  @Uint32()
+  external int storeLocation;
   external WS_STRING storeName;
   external WS_STRING subjectName;
 }
 
 class WS_THUMBPRINT_CERT_CREDENTIAL extends Struct {
   external WS_CERT_CREDENTIAL credential;
-  @Uint32() external int storeLocation;
+  @Uint32()
+  external int storeLocation;
   external WS_STRING storeName;
   external WS_STRING thumbprint;
 }
@@ -686,12 +766,14 @@ class WS_CUSTOM_CERT_CREDENTIAL extends Struct {
   external WS_CERT_CREDENTIAL credential;
   external WS_GET_CERT_CALLBACK getCertCallback;
   external Pointer getCertCallbackState;
-  external WS_CERT_ISSUER_LIST_NOTIFICATION_CALLBACK certIssuerListNotificationCallback;
+  external WS_CERT_ISSUER_LIST_NOTIFICATION_CALLBACK
+      certIssuerListNotificationCallback;
   external Pointer certIssuerListNotificationCallbackState;
 }
 
 class WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL extends Struct {
-  @Uint32() external int credentialType;
+  @Uint32()
+  external int credentialType;
 }
 
 class WS_STRING_WINDOWS_INTEGRATED_AUTH_CREDENTIAL extends Struct {
@@ -711,7 +793,8 @@ class WS_OPAQUE_WINDOWS_INTEGRATED_AUTH_CREDENTIAL extends Struct {
 }
 
 class WS_USERNAME_CREDENTIAL extends Struct {
-  @Uint32() external int credentialType;
+  @Uint32()
+  external int credentialType;
 }
 
 class WS_STRING_USERNAME_CREDENTIAL extends Struct {
@@ -721,7 +804,8 @@ class WS_STRING_USERNAME_CREDENTIAL extends Struct {
 }
 
 class WS_SECURITY_KEY_HANDLE extends Struct {
-  @Uint32() external int keyHandleType;
+  @Uint32()
+  external int keyHandleType;
 }
 
 class WS_RAW_SYMMETRIC_SECURITY_KEY_HANDLE extends Struct {
@@ -731,19 +815,24 @@ class WS_RAW_SYMMETRIC_SECURITY_KEY_HANDLE extends Struct {
 
 class WS_NCRYPT_ASYMMETRIC_SECURITY_KEY_HANDLE extends Struct {
   external WS_SECURITY_KEY_HANDLE keyHandle;
-  @IntPtr() external int asymmetricKey;
+  @IntPtr()
+  external int asymmetricKey;
 }
 
 class WS_CAPI_ASYMMETRIC_SECURITY_KEY_HANDLE extends Struct {
   external WS_SECURITY_KEY_HANDLE keyHandle;
-  @IntPtr() external int provider;
-  @Uint32() external int keySpec;
+  @IntPtr()
+  external int provider;
+  @Uint32()
+  external int keySpec;
 }
 
 class WS_SECURITY_BINDING extends Struct {
-  @Uint32() external int bindingType;
+  @Uint32()
+  external int bindingType;
   external Pointer<WS_SECURITY_BINDING_PROPERTY> properties;
-  @Uint32() external int propertyCount;
+  @Uint32()
+  external int propertyCount;
 }
 
 class WS_SSL_TRANSPORT_SECURITY_BINDING extends Struct {
@@ -768,13 +857,15 @@ class WS_HTTP_HEADER_AUTH_SECURITY_BINDING extends Struct {
 
 class WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING extends Struct {
   external WS_SECURITY_BINDING binding;
-  @Uint32() external int bindingUsage;
+  @Uint32()
+  external int bindingUsage;
   external Pointer<WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL> clientCredential;
 }
 
 class WS_USERNAME_MESSAGE_SECURITY_BINDING extends Struct {
   external WS_SECURITY_BINDING binding;
-  @Uint32() external int bindingUsage;
+  @Uint32()
+  external int bindingUsage;
   external Pointer<WS_USERNAME_CREDENTIAL> clientCredential;
   external WS_VALIDATE_PASSWORD_CALLBACK passwordValidator;
   external Pointer passwordValidatorCallbackState;
@@ -782,43 +873,53 @@ class WS_USERNAME_MESSAGE_SECURITY_BINDING extends Struct {
 
 class WS_SECURITY_DESCRIPTION extends Struct {
   external Pointer<Pointer<WS_SECURITY_BINDING>> securityBindings;
-  @Uint32() external int securityBindingCount;
+  @Uint32()
+  external int securityBindingCount;
   external Pointer<WS_SECURITY_PROPERTY> properties;
-  @Uint32() external int propertyCount;
+  @Uint32()
+  external int propertyCount;
 }
 
 class WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING extends Struct {
   external WS_SECURITY_BINDING binding;
-  @Uint32() external int bindingUsage;
+  @Uint32()
+  external int bindingUsage;
   external Pointer<WS_SECURITY_DESCRIPTION> bootstrapSecurityDescription;
 }
 
 class WS_SECURITY_CONTEXT_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_XML_SECURITY_TOKEN_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_XML_TOKEN_MESSAGE_SECURITY_BINDING extends Struct {
   external WS_SECURITY_BINDING binding;
-  @Uint32() external int bindingUsage;
+  @Uint32()
+  external int bindingUsage;
   external Pointer<WS_SECURITY_TOKEN> xmlToken;
 }
 
 class WS_SAML_AUTHENTICATOR extends Struct {
-  @Uint32() external int authenticatorType;
+  @Uint32()
+  external int authenticatorType;
 }
 
 class WS_CERT_SIGNED_SAML_AUTHENTICATOR extends Struct {
   external WS_SAML_AUTHENTICATOR authenticator;
   external Pointer<Pointer<CERT_CONTEXT>> trustedIssuerCerts;
-  @Uint32() external int trustedIssuerCertCount;
+  @Uint32()
+  external int trustedIssuerCertCount;
   external Pointer<CERT_CONTEXT> decryptionCert;
   external WS_VALIDATE_SAML_CALLBACK samlValidator;
   external Pointer samlValidatorCallbackState;
@@ -826,14 +927,17 @@ class WS_CERT_SIGNED_SAML_AUTHENTICATOR extends Struct {
 
 class WS_SAML_MESSAGE_SECURITY_BINDING extends Struct {
   external WS_SECURITY_BINDING binding;
-  @Uint32() external int bindingUsage;
+  @Uint32()
+  external int bindingUsage;
   external Pointer<WS_SAML_AUTHENTICATOR> authenticator;
 }
 
 class WS_REQUEST_SECURITY_TOKEN_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_ANY_ATTRIBUTE extends Struct {
@@ -844,11 +948,13 @@ class WS_ANY_ATTRIBUTE extends Struct {
 
 class WS_ANY_ATTRIBUTES extends Struct {
   external Pointer<WS_ANY_ATTRIBUTE> attributes;
-  @Uint32() external int attributeCount;
+  @Uint32()
+  external int attributeCount;
 }
 
 class WS_BOOL_DESCRIPTION extends Struct {
-  @Int32() external int value;
+  @Int32()
+  external int value;
 }
 
 class WS_GUID_DESCRIPTION extends Struct {
@@ -861,15 +967,24 @@ class WS_DATETIME_DESCRIPTION extends Struct {
 }
 
 class WS_DURATION extends Struct {
-  @Int32() external int negative;
-  @Uint32() external int years;
-  @Uint32() external int months;
-  @Uint32() external int days;
-  @Uint32() external int hours;
-  @Uint32() external int minutes;
-  @Uint32() external int seconds;
-  @Uint32() external int milliseconds;
-  @Uint32() external int ticks;
+  @Int32()
+  external int negative;
+  @Uint32()
+  external int years;
+  @Uint32()
+  external int months;
+  @Uint32()
+  external int days;
+  @Uint32()
+  external int hours;
+  @Uint32()
+  external int minutes;
+  @Uint32()
+  external int seconds;
+  @Uint32()
+  external int milliseconds;
+  @Uint32()
+  external int ticks;
 }
 
 class WS_DURATION_DESCRIPTION extends Struct {
@@ -884,95 +999,133 @@ class WS_TIMESPAN_DESCRIPTION extends Struct {
 }
 
 class WS_UNIQUE_ID_DESCRIPTION extends Struct {
-  @Uint32() external int minCharCount;
-  @Uint32() external int maxCharCount;
+  @Uint32()
+  external int minCharCount;
+  @Uint32()
+  external int maxCharCount;
 }
 
 class WS_STRING_DESCRIPTION extends Struct {
-  @Uint32() external int minCharCount;
-  @Uint32() external int maxCharCount;
+  @Uint32()
+  external int minCharCount;
+  @Uint32()
+  external int maxCharCount;
 }
 
 class WS_XML_STRING_DESCRIPTION extends Struct {
-  @Uint32() external int minByteCount;
-  @Uint32() external int maxByteCount;
+  @Uint32()
+  external int minByteCount;
+  @Uint32()
+  external int maxByteCount;
 }
 
 class WS_XML_QNAME_DESCRIPTION extends Struct {
-  @Uint32() external int minLocalNameByteCount;
-  @Uint32() external int maxLocalNameByteCount;
-  @Uint32() external int minNsByteCount;
-  @Uint32() external int maxNsByteCount;
+  @Uint32()
+  external int minLocalNameByteCount;
+  @Uint32()
+  external int maxLocalNameByteCount;
+  @Uint32()
+  external int minNsByteCount;
+  @Uint32()
+  external int maxNsByteCount;
 }
 
 class WS_CHAR_ARRAY_DESCRIPTION extends Struct {
-  @Uint32() external int minCharCount;
-  @Uint32() external int maxCharCount;
+  @Uint32()
+  external int minCharCount;
+  @Uint32()
+  external int maxCharCount;
 }
 
 class WS_BYTE_ARRAY_DESCRIPTION extends Struct {
-  @Uint32() external int minByteCount;
-  @Uint32() external int maxByteCount;
+  @Uint32()
+  external int minByteCount;
+  @Uint32()
+  external int maxByteCount;
 }
 
 class WS_UTF8_ARRAY_DESCRIPTION extends Struct {
-  @Uint32() external int minByteCount;
-  @Uint32() external int maxByteCount;
+  @Uint32()
+  external int minByteCount;
+  @Uint32()
+  external int maxByteCount;
 }
 
 class WS_WSZ_DESCRIPTION extends Struct {
-  @Uint32() external int minCharCount;
-  @Uint32() external int maxCharCount;
+  @Uint32()
+  external int minCharCount;
+  @Uint32()
+  external int maxCharCount;
 }
 
 class WS_INT8_DESCRIPTION extends Struct {
-  @Int8() external int minValue;
-  @Int8() external int maxValue;
+  @Int8()
+  external int minValue;
+  @Int8()
+  external int maxValue;
 }
 
 class WS_UINT8_DESCRIPTION extends Struct {
-  @Uint8() external int minValue;
-  @Uint8() external int maxValue;
+  @Uint8()
+  external int minValue;
+  @Uint8()
+  external int maxValue;
 }
 
 class WS_INT16_DESCRIPTION extends Struct {
-  @Int16() external int minValue;
-  @Int16() external int maxValue;
+  @Int16()
+  external int minValue;
+  @Int16()
+  external int maxValue;
 }
 
 class WS_UINT16_DESCRIPTION extends Struct {
-  @Uint16() external int minValue;
-  @Uint16() external int maxValue;
+  @Uint16()
+  external int minValue;
+  @Uint16()
+  external int maxValue;
 }
 
 class WS_INT32_DESCRIPTION extends Struct {
-  @Int32() external int minValue;
-  @Int32() external int maxValue;
+  @Int32()
+  external int minValue;
+  @Int32()
+  external int maxValue;
 }
 
 class WS_UINT32_DESCRIPTION extends Struct {
-  @Uint32() external int minValue;
-  @Uint32() external int maxValue;
+  @Uint32()
+  external int minValue;
+  @Uint32()
+  external int maxValue;
 }
 
 class WS_INT64_DESCRIPTION extends Struct {
-  @Int64() external int minValue;
-  @Int64() external int maxValue;
+  @Int64()
+  external int minValue;
+  @Int64()
+  external int maxValue;
 }
 
 class WS_UINT64_DESCRIPTION extends Struct {
-  @Uint64() external int minValue;
-  @Uint64() external int maxValue;
+  @Uint64()
+  external int minValue;
+  @Uint64()
+  external int maxValue;
 }
 
 class WS_FLOAT_DESCRIPTION extends Struct {
-  @Float() external double minValue;
-  @Float() external double maxValue;
+  @Float()
+  external double minValue;
+  @Float()
+  external double maxValue;
 }
 
 class WS_DOUBLE_DESCRIPTION extends Struct {
-  @Double() external double minValue;
-  @Double() external double maxValue;
+  @Double()
+  external double minValue;
+  @Double()
+  external double maxValue;
 }
 
 class WS_DECIMAL_DESCRIPTION extends Struct {
@@ -981,90 +1134,119 @@ class WS_DECIMAL_DESCRIPTION extends Struct {
 }
 
 class WS_BYTES_DESCRIPTION extends Struct {
-  @Uint32() external int minByteCount;
-  @Uint32() external int maxByteCount;
+  @Uint32()
+  external int minByteCount;
+  @Uint32()
+  external int maxByteCount;
 }
 
 class WS_ENUM_VALUE extends Struct {
-  @Int32() external int value;
+  @Int32()
+  external int value;
   external Pointer<WS_XML_STRING> name;
 }
 
 class WS_ENUM_DESCRIPTION extends Struct {
   external Pointer<WS_ENUM_VALUE> values;
-  @Uint32() external int valueCount;
-  @Uint32() external int maxByteCount;
+  @Uint32()
+  external int valueCount;
+  @Uint32()
+  external int maxByteCount;
   external Pointer<Uint32> nameIndices;
 }
 
 class WS_ITEM_RANGE extends Struct {
-  @Uint32() external int minItemCount;
-  @Uint32() external int maxItemCount;
+  @Uint32()
+  external int minItemCount;
+  @Uint32()
+  external int maxItemCount;
 }
 
 class WS_DEFAULT_VALUE extends Struct {
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_FIELD_DESCRIPTION extends Struct {
-  @Uint32() external int mapping;
+  @Uint32()
+  external int mapping;
   external Pointer<WS_XML_STRING> localName;
   external Pointer<WS_XML_STRING> ns;
-  @Uint32() external int type;
+  @Uint32()
+  external int type;
   external Pointer typeDescription;
-  @Uint32() external int offset;
-  @Uint32() external int options;
+  @Uint32()
+  external int offset;
+  @Uint32()
+  external int options;
   external Pointer<WS_DEFAULT_VALUE> defaultValue;
-  @Uint32() external int countOffset;
+  @Uint32()
+  external int countOffset;
   external Pointer<WS_XML_STRING> itemLocalName;
   external Pointer<WS_XML_STRING> itemNs;
   external Pointer<WS_ITEM_RANGE> itemRange;
 }
 
 class WS_UNION_FIELD_DESCRIPTION extends Struct {
-  @Int32() external int value;
+  @Int32()
+  external int value;
   external WS_FIELD_DESCRIPTION field;
 }
 
 class WS_STRUCT_DESCRIPTION extends Struct {
-  @Uint32() external int size;
-  @Uint32() external int alignment;
+  @Uint32()
+  external int size;
+  @Uint32()
+  external int alignment;
   external Pointer<Pointer<WS_FIELD_DESCRIPTION>> fields;
-  @Uint32() external int fieldCount;
+  @Uint32()
+  external int fieldCount;
   external Pointer<WS_XML_STRING> typeLocalName;
   external Pointer<WS_XML_STRING> typeNs;
   external Pointer<WS_STRUCT_DESCRIPTION> parentType;
   external Pointer<Pointer<WS_STRUCT_DESCRIPTION>> subTypes;
-  @Uint32() external int subTypeCount;
-  @Uint32() external int structOptions;
+  @Uint32()
+  external int subTypeCount;
+  @Uint32()
+  external int structOptions;
 }
 
 class WS_UNION_DESCRIPTION extends Struct {
-  @Uint32() external int size;
-  @Uint32() external int alignment;
+  @Uint32()
+  external int size;
+  @Uint32()
+  external int alignment;
   external Pointer<Pointer<WS_UNION_FIELD_DESCRIPTION>> fields;
-  @Uint32() external int fieldCount;
-  @Uint32() external int enumOffset;
-  @Int32() external int noneEnumValue;
+  @Uint32()
+  external int fieldCount;
+  @Uint32()
+  external int enumOffset;
+  @Int32()
+  external int noneEnumValue;
   external Pointer<Uint32> valueIndices;
 }
 
 class WS_ENDPOINT_ADDRESS_DESCRIPTION extends Struct {
-  @Uint32() external int addressingVersion;
+  @Uint32()
+  external int addressingVersion;
 }
 
 class WS_FAULT_DESCRIPTION extends Struct {
-  @Uint32() external int envelopeVersion;
+  @Uint32()
+  external int envelopeVersion;
 }
 
 class WS_VOID_DESCRIPTION extends Struct {
-  @Uint32() external int size;
+  @Uint32()
+  external int size;
 }
 
 class WS_CUSTOM_TYPE_DESCRIPTION extends Struct {
-  @Uint32() external int size;
-  @Uint32() external int alignment;
+  @Uint32()
+  external int size;
+  @Uint32()
+  external int alignment;
   external WS_READ_TYPE_CALLBACK readCallback;
   external WS_WRITE_TYPE_CALLBACK writeCallback;
   external Pointer descriptionData;
@@ -1074,30 +1256,40 @@ class WS_CUSTOM_TYPE_DESCRIPTION extends Struct {
 class WS_ATTRIBUTE_DESCRIPTION extends Struct {
   external Pointer<WS_XML_STRING> attributeLocalName;
   external Pointer<WS_XML_STRING> attributeNs;
-  @Uint32() external int type;
+  @Uint32()
+  external int type;
   external Pointer typeDescription;
 }
 
 class WS_PARAMETER_DESCRIPTION extends Struct {
-  @Uint32() external int parameterType;
-  @Uint16() external int inputMessageIndex;
-  @Uint16() external int outputMessageIndex;
+  @Uint32()
+  external int parameterType;
+  @Uint16()
+  external int inputMessageIndex;
+  @Uint16()
+  external int outputMessageIndex;
 }
 
 class WS_OPERATION_DESCRIPTION extends Struct {
-  @Uint32() external int versionInfo;
+  @Uint32()
+  external int versionInfo;
   external Pointer<WS_MESSAGE_DESCRIPTION> inputMessageDescription;
   external Pointer<WS_MESSAGE_DESCRIPTION> outputMessageDescription;
-  @Uint32() external int inputMessageOptions;
-  @Uint32() external int outputMessageOptions;
-  @Uint16() external int parameterCount;
+  @Uint32()
+  external int inputMessageOptions;
+  @Uint32()
+  external int outputMessageOptions;
+  @Uint16()
+  external int parameterCount;
   external Pointer<WS_PARAMETER_DESCRIPTION> parameterDescription;
   external WS_SERVICE_STUB_CALLBACK stubCallback;
-  @Uint32() external int style;
+  @Uint32()
+  external int style;
 }
 
 class WS_CONTRACT_DESCRIPTION extends Struct {
-  @Uint32() external int operationCount;
+  @Uint32()
+  external int operationCount;
   external Pointer<Pointer<WS_OPERATION_DESCRIPTION>> operations;
 }
 
@@ -1108,15 +1300,19 @@ class WS_SERVICE_CONTRACT extends Struct {
 }
 
 class WS_SERVICE_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_SERVICE_ENDPOINT_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_SERVICE_PROPERTY_ACCEPT_CALLBACK extends Struct {
@@ -1129,7 +1325,8 @@ class WS_SERVICE_METADATA_DOCUMENT extends Struct {
 }
 
 class WS_SERVICE_METADATA extends Struct {
-  @Uint32() external int documentCount;
+  @Uint32()
+  external int documentCount;
   external Pointer<Pointer<WS_SERVICE_METADATA_DOCUMENT>> documents;
   external Pointer<WS_XML_STRING> serviceName;
   external Pointer<WS_XML_STRING> serviceNs;
@@ -1147,20 +1344,25 @@ class WS_SERVICE_ENDPOINT_METADATA extends Struct {
 
 class WS_SERVICE_ENDPOINT extends Struct {
   external WS_ENDPOINT_ADDRESS address;
-  @Uint32() external int channelBinding;
-  @Uint32() external int channelType;
+  @Uint32()
+  external int channelBinding;
+  @Uint32()
+  external int channelType;
   external Pointer<WS_SECURITY_DESCRIPTION> securityDescription;
   external Pointer<WS_SERVICE_CONTRACT> contract;
   external WS_SERVICE_SECURITY_CALLBACK authorizationCallback;
   external Pointer<WS_SERVICE_ENDPOINT_PROPERTY> properties;
-  @Uint32() external int propertyCount;
+  @Uint32()
+  external int propertyCount;
   external WS_CHANNEL_PROPERTIES channelProperties;
 }
 
 class WS_PROXY_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_PROXY_MESSAGE_CALLBACK_CONTEXT extends Struct {
@@ -1169,19 +1371,23 @@ class WS_PROXY_MESSAGE_CALLBACK_CONTEXT extends Struct {
 }
 
 class WS_CALL_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_URL extends Struct {
-  @Uint32() external int scheme;
+  @Uint32()
+  external int scheme;
 }
 
 class WS_HTTP_URL extends Struct {
   external WS_URL url;
   external WS_STRING host;
-  @Uint16() external int port;
+  @Uint16()
+  external int port;
   external WS_STRING portAsString;
   external WS_STRING path;
   external WS_STRING query;
@@ -1191,7 +1397,8 @@ class WS_HTTP_URL extends Struct {
 class WS_HTTPS_URL extends Struct {
   external WS_URL url;
   external WS_STRING host;
-  @Uint16() external int port;
+  @Uint16()
+  external int port;
   external WS_STRING portAsString;
   external WS_STRING path;
   external WS_STRING query;
@@ -1201,7 +1408,8 @@ class WS_HTTPS_URL extends Struct {
 class WS_NETTCP_URL extends Struct {
   external WS_URL url;
   external WS_STRING host;
-  @Uint16() external int port;
+  @Uint16()
+  external int port;
   external WS_STRING portAsString;
   external WS_STRING path;
   external WS_STRING query;
@@ -1211,7 +1419,8 @@ class WS_NETTCP_URL extends Struct {
 class WS_SOAPUDP_URL extends Struct {
   external WS_URL url;
   external WS_STRING host;
-  @Uint16() external int port;
+  @Uint16()
+  external int port;
   external WS_STRING portAsString;
   external WS_STRING path;
   external WS_STRING query;
@@ -1221,7 +1430,8 @@ class WS_SOAPUDP_URL extends Struct {
 class WS_NETPIPE_URL extends Struct {
   external WS_URL url;
   external WS_STRING host;
-  @Uint16() external int port;
+  @Uint16()
+  external int port;
   external WS_STRING portAsString;
   external WS_STRING path;
   external WS_STRING query;
@@ -1234,7 +1444,8 @@ class WS_UNIQUE_ID extends Struct {
 }
 
 class WS_BUFFERS extends Struct {
-  @Uint32() external int bufferCount;
+  @Uint32()
+  external int bufferCount;
   external Pointer<WS_BYTES> buffers;
 }
 
@@ -1252,47 +1463,60 @@ class WS_METADATA_ENDPOINT extends Struct {
 
 class WS_METADATA_ENDPOINTS extends Struct {
   external Pointer<WS_METADATA_ENDPOINT> endpoints;
-  @Uint32() external int endpointCount;
+  @Uint32()
+  external int endpointCount;
 }
 
 class WS_METADATA_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_POLICY_PROPERTY extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer value;
-  @Uint32() external int valueSize;
+  @Uint32()
+  external int valueSize;
 }
 
 class WS_POLICY_PROPERTIES extends Struct {
   external Pointer<WS_POLICY_PROPERTY> properties;
-  @Uint32() external int propertyCount;
+  @Uint32()
+  external int propertyCount;
 }
 
 class WS_SECURITY_BINDING_PROPERTY_CONSTRAINT extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer allowedValues;
-  @Uint32() external int allowedValuesSize;
-  @Uint32() external int out;
+  @Uint32()
+  external int allowedValuesSize;
+  @Uint32()
+  external int out;
 }
 
 class WS_SECURITY_BINDING_CONSTRAINT extends Struct {
-  @Uint32() external int type;
+  @Uint32()
+  external int type;
   external Pointer<WS_SECURITY_BINDING_PROPERTY_CONSTRAINT> propertyConstraints;
-  @Uint32() external int propertyConstraintCount;
+  @Uint32()
+  external int propertyConstraintCount;
 }
 
 class WS_SSL_TRANSPORT_SECURITY_BINDING_CONSTRAINT extends Struct {
   external WS_SECURITY_BINDING_CONSTRAINT bindingConstraint;
-  @Uint32() external int out;
+  @Uint32()
+  external int out;
 }
 
 class WS_USERNAME_MESSAGE_SECURITY_BINDING_CONSTRAINT extends Struct {
   external WS_SECURITY_BINDING_CONSTRAINT bindingConstraint;
-  @Uint32() external int bindingUsage;
+  @Uint32()
+  external int bindingUsage;
 }
 
 class WS_HTTP_HEADER_AUTH_SECURITY_BINDING_CONSTRAINT extends Struct {
@@ -1305,76 +1529,101 @@ class WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_CONSTRAINT extends Struct {
 
 class WS_CERT_MESSAGE_SECURITY_BINDING_CONSTRAINT extends Struct {
   external WS_SECURITY_BINDING_CONSTRAINT bindingConstraint;
-  @Uint32() external int bindingUsage;
+  @Uint32()
+  external int bindingUsage;
 }
 
 class WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_CONSTRAINT extends Struct {
   external WS_SECURITY_BINDING_CONSTRAINT bindingConstraint;
-  @Uint32() external int bindingUsage;
+  @Uint32()
+  external int bindingUsage;
 }
 
 class WS_REQUEST_SECURITY_TOKEN_PROPERTY_CONSTRAINT extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer allowedValues;
-  @Uint32() external int allowedValuesSize;
-  @Uint32() external int out;
+  @Uint32()
+  external int allowedValuesSize;
+  @Uint32()
+  external int out;
 }
 
 class WS_ISSUED_TOKEN_MESSAGE_SECURITY_BINDING_CONSTRAINT extends Struct {
   external WS_SECURITY_BINDING_CONSTRAINT bindingConstraint;
-  @Uint32() external int bindingUsage;
+  @Uint32()
+  external int bindingUsage;
   external Pointer<WS_XML_STRING> claimConstraints;
-  @Uint32() external int claimConstraintCount;
-  external Pointer<WS_REQUEST_SECURITY_TOKEN_PROPERTY_CONSTRAINT> requestSecurityTokenPropertyConstraints;
-  @Uint32() external int requestSecurityTokenPropertyConstraintCount;
-  @Uint32() external int out;
+  @Uint32()
+  external int claimConstraintCount;
+  external Pointer<WS_REQUEST_SECURITY_TOKEN_PROPERTY_CONSTRAINT>
+      requestSecurityTokenPropertyConstraints;
+  @Uint32()
+  external int requestSecurityTokenPropertyConstraintCount;
+  @Uint32()
+  external int out;
 }
 
 class WS_SECURITY_PROPERTY_CONSTRAINT extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer allowedValues;
-  @Uint32() external int allowedValuesSize;
-  @Uint32() external int out;
+  @Uint32()
+  external int allowedValuesSize;
+  @Uint32()
+  external int out;
 }
 
 class WS_SECURITY_CONSTRAINTS extends Struct {
   external Pointer<WS_SECURITY_PROPERTY_CONSTRAINT> securityPropertyConstraints;
-  @Uint32() external int securityPropertyConstraintCount;
-  external Pointer<Pointer<WS_SECURITY_BINDING_CONSTRAINT>> securityBindingConstraints;
-  @Uint32() external int securityBindingConstraintCount;
+  @Uint32()
+  external int securityPropertyConstraintCount;
+  external Pointer<Pointer<WS_SECURITY_BINDING_CONSTRAINT>>
+      securityBindingConstraints;
+  @Uint32()
+  external int securityBindingConstraintCount;
 }
 
 class WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_CONSTRAINT extends Struct {
   external WS_SECURITY_BINDING_CONSTRAINT bindingConstraint;
-  @Uint32() external int bindingUsage;
+  @Uint32()
+  external int bindingUsage;
   external Pointer<WS_SECURITY_CONSTRAINTS> bootstrapSecurityConstraint;
 }
 
 class WS_CHANNEL_PROPERTY_CONSTRAINT extends Struct {
-  @Uint32() external int id;
+  @Uint32()
+  external int id;
   external Pointer allowedValues;
-  @Uint32() external int allowedValuesSize;
-  @Uint32() external int out;
+  @Uint32()
+  external int allowedValuesSize;
+  @Uint32()
+  external int out;
 }
 
 class WS_POLICY_EXTENSION extends Struct {
-  @Uint32() external int type;
+  @Uint32()
+  external int type;
 }
 
 class WS_ENDPOINT_POLICY_EXTENSION extends Struct {
   external WS_POLICY_EXTENSION policyExtension;
   external Pointer<WS_XML_STRING> assertionName;
   external Pointer<WS_XML_STRING> assertionNs;
-  @Uint32() external int out;
+  @Uint32()
+  external int out;
 }
 
 class WS_POLICY_CONSTRAINTS extends Struct {
-  @Uint32() external int channelBinding;
+  @Uint32()
+  external int channelBinding;
   external Pointer<WS_CHANNEL_PROPERTY_CONSTRAINT> channelPropertyConstraints;
-  @Uint32() external int channelPropertyConstraintCount;
+  @Uint32()
+  external int channelPropertyConstraintCount;
   external Pointer<WS_SECURITY_CONSTRAINTS> securityConstraints;
   external Pointer<Pointer<WS_POLICY_EXTENSION>> policyExtensions;
-  @Uint32() external int policyExtensionCount;
+  @Uint32()
+  external int policyExtensionCount;
 }
 
 class WS_HTTP_POLICY_DESCRIPTION extends Struct {
@@ -1388,7 +1637,8 @@ class WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION extends Struct {
 class WS_HTTP_SSL_POLICY_DESCRIPTION extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION sslTransportSecurityBinding;
+  external WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+      sslTransportSecurityBinding;
 }
 
 class WS_HTTP_HEADER_AUTH_SECURITY_BINDING_POLICY_DESCRIPTION extends Struct {
@@ -1398,38 +1648,48 @@ class WS_HTTP_HEADER_AUTH_SECURITY_BINDING_POLICY_DESCRIPTION extends Struct {
 class WS_HTTP_HEADER_AUTH_POLICY_DESCRIPTION extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_HTTP_HEADER_AUTH_SECURITY_BINDING_POLICY_DESCRIPTION httpHeaderAuthSecurityBinding;
+  external WS_HTTP_HEADER_AUTH_SECURITY_BINDING_POLICY_DESCRIPTION
+      httpHeaderAuthSecurityBinding;
 }
 
 class WS_HTTP_SSL_HEADER_AUTH_POLICY_DESCRIPTION extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION sslTransportSecurityBinding;
-  external WS_HTTP_HEADER_AUTH_SECURITY_BINDING_POLICY_DESCRIPTION httpHeaderAuthSecurityBinding;
+  external WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+      sslTransportSecurityBinding;
+  external WS_HTTP_HEADER_AUTH_SECURITY_BINDING_POLICY_DESCRIPTION
+      httpHeaderAuthSecurityBinding;
 }
 
 class WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION extends Struct {
   external WS_SECURITY_BINDING_PROPERTIES securityBindingProperties;
-  @Uint32() external int bindingUsage;
+  @Uint32()
+  external int bindingUsage;
 }
 
 class WS_HTTP_SSL_USERNAME_POLICY_DESCRIPTION extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION sslTransportSecurityBinding;
-  external WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION usernameMessageSecurityBinding;
+  external WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+      sslTransportSecurityBinding;
+  external WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+      usernameMessageSecurityBinding;
 }
 
-class WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION extends Struct {
+class WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+    extends Struct {
   external WS_SECURITY_BINDING_PROPERTIES securityBindingProperties;
-  @Uint32() external int bindingUsage;
+  @Uint32()
+  external int bindingUsage;
 }
 
 class WS_HTTP_SSL_KERBEROS_APREQ_POLICY_DESCRIPTION extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION sslTransportSecurityBinding;
-  external WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION kerberosApreqMessageSecurityBinding;
+  external WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+      sslTransportSecurityBinding;
+  external WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+      kerberosApreqMessageSecurityBinding;
 }
 
 class WS_TCP_POLICY_DESCRIPTION extends Struct {
@@ -1443,63 +1703,85 @@ class WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION extends Struct {
 class WS_TCP_SSPI_POLICY_DESCRIPTION extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION sspiTransportSecurityBinding;
+  external WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+      sspiTransportSecurityBinding;
 }
 
 class WS_TCP_SSPI_USERNAME_POLICY_DESCRIPTION extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION sspiTransportSecurityBinding;
-  external WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION usernameMessageSecurityBinding;
+  external WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+      sspiTransportSecurityBinding;
+  external WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+      usernameMessageSecurityBinding;
 }
 
 class WS_TCP_SSPI_KERBEROS_APREQ_POLICY_DESCRIPTION extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION sspiTransportSecurityBinding;
-  external WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION kerberosApreqMessageSecurityBinding;
+  external WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+      sspiTransportSecurityBinding;
+  external WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+      kerberosApreqMessageSecurityBinding;
 }
 
-class WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION extends Struct {
+class WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+    extends Struct {
   external WS_SECURITY_BINDING_PROPERTIES securityBindingProperties;
-  @Uint32() external int bindingUsage;
+  @Uint32()
+  external int bindingUsage;
 }
 
 class WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION extends Struct {
-  external WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION securityContextMessageSecurityBinding;
+  external WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+      securityContextMessageSecurityBinding;
   external WS_SECURITY_PROPERTIES securityProperties;
 }
 
-class WS_TCP_SSPI_KERBEROS_APREQ_SECURITY_CONTEXT_POLICY_DESCRIPTION extends Struct {
+class WS_TCP_SSPI_KERBEROS_APREQ_SECURITY_CONTEXT_POLICY_DESCRIPTION
+    extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION sspiTransportSecurityBinding;
-  external WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION kerberosApreqMessageSecurityBinding;
-  external WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION securityContextSecurityBinding;
+  external WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+      sspiTransportSecurityBinding;
+  external WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+      kerberosApreqMessageSecurityBinding;
+  external WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION
+      securityContextSecurityBinding;
 }
 
 class WS_TCP_SSPI_USERNAME_SECURITY_CONTEXT_POLICY_DESCRIPTION extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION sspiTransportSecurityBinding;
-  external WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION usernameMessageSecurityBinding;
-  external WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION securityContextSecurityBinding;
+  external WS_SSPI_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+      sspiTransportSecurityBinding;
+  external WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+      usernameMessageSecurityBinding;
+  external WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION
+      securityContextSecurityBinding;
 }
 
 class WS_HTTP_SSL_USERNAME_SECURITY_CONTEXT_POLICY_DESCRIPTION extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION sslTransportSecurityBinding;
-  external WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION usernameMessageSecurityBinding;
-  external WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION securityContextSecurityBinding;
+  external WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+      sslTransportSecurityBinding;
+  external WS_USERNAME_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+      usernameMessageSecurityBinding;
+  external WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION
+      securityContextSecurityBinding;
 }
 
-class WS_HTTP_SSL_KERBEROS_APREQ_SECURITY_CONTEXT_POLICY_DESCRIPTION extends Struct {
+class WS_HTTP_SSL_KERBEROS_APREQ_SECURITY_CONTEXT_POLICY_DESCRIPTION
+    extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION sslTransportSecurityBinding;
-  external WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION kerberosApreqMessageSecurityBinding;
-  external WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION securityContextSecurityBinding;
+  external WS_SSL_TRANSPORT_SECURITY_BINDING_POLICY_DESCRIPTION
+      sslTransportSecurityBinding;
+  external WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_POLICY_DESCRIPTION
+      kerberosApreqMessageSecurityBinding;
+  external WS_SECURITY_CONTEXT_SECURITY_BINDING_POLICY_DESCRIPTION
+      securityContextSecurityBinding;
 }
 
 class WS_HTTP_BINDING_TEMPLATE extends Struct {
@@ -1518,7 +1800,8 @@ class WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE extends Struct {
 class WS_HTTP_SSL_BINDING_TEMPLATE extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE sslTransportSecurityBinding;
+  external WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE
+      sslTransportSecurityBinding;
 }
 
 class WS_HTTP_HEADER_AUTH_SECURITY_BINDING_TEMPLATE extends Struct {
@@ -1529,7 +1812,8 @@ class WS_HTTP_HEADER_AUTH_SECURITY_BINDING_TEMPLATE extends Struct {
 class WS_HTTP_HEADER_AUTH_BINDING_TEMPLATE extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_HTTP_HEADER_AUTH_SECURITY_BINDING_TEMPLATE httpHeaderAuthSecurityBinding;
+  external WS_HTTP_HEADER_AUTH_SECURITY_BINDING_TEMPLATE
+      httpHeaderAuthSecurityBinding;
 }
 
 class WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE extends Struct {
@@ -1540,14 +1824,17 @@ class WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE extends Struct {
 class WS_TCP_SSPI_BINDING_TEMPLATE extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE sspiTransportSecurityBinding;
+  external WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE
+      sspiTransportSecurityBinding;
 }
 
 class WS_HTTP_SSL_HEADER_AUTH_BINDING_TEMPLATE extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE sslTransportSecurityBinding;
-  external WS_HTTP_HEADER_AUTH_SECURITY_BINDING_TEMPLATE httpHeaderAuthSecurityBinding;
+  external WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE
+      sslTransportSecurityBinding;
+  external WS_HTTP_HEADER_AUTH_SECURITY_BINDING_TEMPLATE
+      httpHeaderAuthSecurityBinding;
 }
 
 class WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE extends Struct {
@@ -1560,8 +1847,10 @@ class WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE extends Struct {
 class WS_HTTP_SSL_USERNAME_BINDING_TEMPLATE extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE sslTransportSecurityBinding;
-  external WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE usernameMessageSecurityBinding;
+  external WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE
+      sslTransportSecurityBinding;
+  external WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE
+      usernameMessageSecurityBinding;
 }
 
 class WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE extends Struct {
@@ -1572,22 +1861,28 @@ class WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE extends Struct {
 class WS_HTTP_SSL_KERBEROS_APREQ_BINDING_TEMPLATE extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE sslTransportSecurityBinding;
-  external WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE kerberosApreqMessageSecurityBinding;
+  external WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE
+      sslTransportSecurityBinding;
+  external WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE
+      kerberosApreqMessageSecurityBinding;
 }
 
 class WS_TCP_SSPI_USERNAME_BINDING_TEMPLATE extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE sspiTransportSecurityBinding;
-  external WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE usernameMessageSecurityBinding;
+  external WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE
+      sspiTransportSecurityBinding;
+  external WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE
+      usernameMessageSecurityBinding;
 }
 
 class WS_TCP_SSPI_KERBEROS_APREQ_BINDING_TEMPLATE extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE sspiTransportSecurityBinding;
-  external WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE kerberosApreqMessageSecurityBinding;
+  external WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE
+      sspiTransportSecurityBinding;
+  external WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE
+      kerberosApreqMessageSecurityBinding;
 }
 
 class WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_TEMPLATE extends Struct {
@@ -1595,52 +1890,70 @@ class WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_TEMPLATE extends Struct {
 }
 
 class WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE extends Struct {
-  external WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_TEMPLATE securityContextMessageSecurityBinding;
+  external WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_TEMPLATE
+      securityContextMessageSecurityBinding;
   external WS_SECURITY_PROPERTIES securityProperties;
 }
 
 class WS_HTTP_SSL_USERNAME_SECURITY_CONTEXT_BINDING_TEMPLATE extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE sslTransportSecurityBinding;
-  external WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE usernameMessageSecurityBinding;
-  external WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE securityContextSecurityBinding;
+  external WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE
+      sslTransportSecurityBinding;
+  external WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE
+      usernameMessageSecurityBinding;
+  external WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE
+      securityContextSecurityBinding;
 }
 
-class WS_HTTP_SSL_KERBEROS_APREQ_SECURITY_CONTEXT_BINDING_TEMPLATE extends Struct {
+class WS_HTTP_SSL_KERBEROS_APREQ_SECURITY_CONTEXT_BINDING_TEMPLATE
+    extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE sslTransportSecurityBinding;
-  external WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE kerberosApreqMessageSecurityBinding;
-  external WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE securityContextSecurityBinding;
+  external WS_SSL_TRANSPORT_SECURITY_BINDING_TEMPLATE
+      sslTransportSecurityBinding;
+  external WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE
+      kerberosApreqMessageSecurityBinding;
+  external WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE
+      securityContextSecurityBinding;
 }
 
 class WS_TCP_SSPI_USERNAME_SECURITY_CONTEXT_BINDING_TEMPLATE extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE sspiTransportSecurityBinding;
-  external WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE usernameMessageSecurityBinding;
-  external WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE securityContextSecurityBinding;
+  external WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE
+      sspiTransportSecurityBinding;
+  external WS_USERNAME_MESSAGE_SECURITY_BINDING_TEMPLATE
+      usernameMessageSecurityBinding;
+  external WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE
+      securityContextSecurityBinding;
 }
 
-class WS_TCP_SSPI_KERBEROS_APREQ_SECURITY_CONTEXT_BINDING_TEMPLATE extends Struct {
+class WS_TCP_SSPI_KERBEROS_APREQ_SECURITY_CONTEXT_BINDING_TEMPLATE
+    extends Struct {
   external WS_CHANNEL_PROPERTIES channelProperties;
   external WS_SECURITY_PROPERTIES securityProperties;
-  external WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE sspiTransportSecurityBinding;
-  external WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE kerberosApreqMessageSecurityBinding;
-  external WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE securityContextSecurityBinding;
+  external WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TEMPLATE
+      sspiTransportSecurityBinding;
+  external WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TEMPLATE
+      kerberosApreqMessageSecurityBinding;
+  external WS_SECURITY_CONTEXT_SECURITY_BINDING_TEMPLATE
+      securityContextSecurityBinding;
 }
 
 class WEBAUTHN_RP_ENTITY_INFORMATION extends Struct {
-  @Uint32() external int dwVersion;
+  @Uint32()
+  external int dwVersion;
   external Pointer<Utf16> pwszId;
   external Pointer<Utf16> pwszName;
   external Pointer<Utf16> pwszIcon;
 }
 
 class WEBAUTHN_USER_ENTITY_INFORMATION extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int cbId;
+  @Uint32()
+  external int dwVersion;
+  @Uint32()
+  external int cbId;
   external Pointer<Uint8> pbId;
   external Pointer<Utf16> pwszName;
   external Pointer<Utf16> pwszIcon;
@@ -1648,86 +1961,114 @@ class WEBAUTHN_USER_ENTITY_INFORMATION extends Struct {
 }
 
 class WEBAUTHN_CLIENT_DATA extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int cbClientDataJSON;
+  @Uint32()
+  external int dwVersion;
+  @Uint32()
+  external int cbClientDataJSON;
   external Pointer<Uint8> pbClientDataJSON;
   external Pointer<Utf16> pwszHashAlgId;
 }
 
 class WEBAUTHN_COSE_CREDENTIAL_PARAMETER extends Struct {
-  @Uint32() external int dwVersion;
+  @Uint32()
+  external int dwVersion;
   external Pointer<Utf16> pwszCredentialType;
-  @Int32() external int lAlg;
+  @Int32()
+  external int lAlg;
 }
 
 class WEBAUTHN_COSE_CREDENTIAL_PARAMETERS extends Struct {
-  @Uint32() external int cCredentialParameters;
+  @Uint32()
+  external int cCredentialParameters;
   external Pointer<WEBAUTHN_COSE_CREDENTIAL_PARAMETER> pCredentialParameters;
 }
 
 class WEBAUTHN_CREDENTIAL extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int cbId;
+  @Uint32()
+  external int dwVersion;
+  @Uint32()
+  external int cbId;
   external Pointer<Uint8> pbId;
   external Pointer<Utf16> pwszCredentialType;
 }
 
 class WEBAUTHN_CREDENTIALS extends Struct {
-  @Uint32() external int cCredentials;
+  @Uint32()
+  external int cCredentials;
   external Pointer<WEBAUTHN_CREDENTIAL> pCredentials;
 }
 
 class WEBAUTHN_CREDENTIAL_EX extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int cbId;
+  @Uint32()
+  external int dwVersion;
+  @Uint32()
+  external int cbId;
   external Pointer<Uint8> pbId;
   external Pointer<Utf16> pwszCredentialType;
-  @Uint32() external int dwTransports;
+  @Uint32()
+  external int dwTransports;
 }
 
 class WEBAUTHN_CREDENTIAL_LIST extends Struct {
-  @Uint32() external int cCredentials;
+  @Uint32()
+  external int cCredentials;
   external Pointer<Pointer<WEBAUTHN_CREDENTIAL_EX>> ppCredentials;
 }
 
 class WEBAUTHN_CRED_PROTECT_EXTENSION_IN extends Struct {
-  @Uint32() external int dwCredProtect;
-  @Int32() external int bRequireCredProtect;
+  @Uint32()
+  external int dwCredProtect;
+  @Int32()
+  external int bRequireCredProtect;
 }
 
 class WEBAUTHN_EXTENSION extends Struct {
   external Pointer<Utf16> pwszExtensionIdentifier;
-  @Uint32() external int cbExtension;
+  @Uint32()
+  external int cbExtension;
   external Pointer pvExtension;
 }
 
 class WEBAUTHN_EXTENSIONS extends Struct {
-  @Uint32() external int cExtensions;
+  @Uint32()
+  external int cExtensions;
   external Pointer<WEBAUTHN_EXTENSION> pExtensions;
 }
 
 class WEBAUTHN_AUTHENTICATOR_MAKE_CREDENTIAL_OPTIONS extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int dwTimeoutMilliseconds;
+  @Uint32()
+  external int dwVersion;
+  @Uint32()
+  external int dwTimeoutMilliseconds;
   external WEBAUTHN_CREDENTIALS CredentialList;
   external WEBAUTHN_EXTENSIONS Extensions;
-  @Uint32() external int dwAuthenticatorAttachment;
-  @Int32() external int bRequireResidentKey;
-  @Uint32() external int dwUserVerificationRequirement;
-  @Uint32() external int dwAttestationConveyancePreference;
-  @Uint32() external int dwFlags;
+  @Uint32()
+  external int dwAuthenticatorAttachment;
+  @Int32()
+  external int bRequireResidentKey;
+  @Uint32()
+  external int dwUserVerificationRequirement;
+  @Uint32()
+  external int dwAttestationConveyancePreference;
+  @Uint32()
+  external int dwFlags;
   external Pointer<GUID> pCancellationId;
   external Pointer<WEBAUTHN_CREDENTIAL_LIST> pExcludeCredentialList;
 }
 
 class WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int dwTimeoutMilliseconds;
+  @Uint32()
+  external int dwVersion;
+  @Uint32()
+  external int dwTimeoutMilliseconds;
   external WEBAUTHN_CREDENTIALS CredentialList;
   external WEBAUTHN_EXTENSIONS Extensions;
-  @Uint32() external int dwAuthenticatorAttachment;
-  @Uint32() external int dwUserVerificationRequirement;
-  @Uint32() external int dwFlags;
+  @Uint32()
+  external int dwAuthenticatorAttachment;
+  @Uint32()
+  external int dwUserVerificationRequirement;
+  @Uint32()
+  external int dwFlags;
   external Pointer<Utf16> pwszU2fAppId;
   external Pointer<Int32> pbU2fAppId;
   external Pointer<GUID> pCancellationId;
@@ -1735,50 +2076,67 @@ class WEBAUTHN_AUTHENTICATOR_GET_ASSERTION_OPTIONS extends Struct {
 }
 
 class WEBAUTHN_X5C extends Struct {
-  @Uint32() external int cbData;
+  @Uint32()
+  external int cbData;
   external Pointer<Uint8> pbData;
 }
 
 class WEBAUTHN_COMMON_ATTESTATION extends Struct {
-  @Uint32() external int dwVersion;
+  @Uint32()
+  external int dwVersion;
   external Pointer<Utf16> pwszAlg;
-  @Int32() external int lAlg;
-  @Uint32() external int cbSignature;
+  @Int32()
+  external int lAlg;
+  @Uint32()
+  external int cbSignature;
   external Pointer<Uint8> pbSignature;
-  @Uint32() external int cX5c;
+  @Uint32()
+  external int cX5c;
   external Pointer<WEBAUTHN_X5C> pX5c;
   external Pointer<Utf16> pwszVer;
-  @Uint32() external int cbCertInfo;
+  @Uint32()
+  external int cbCertInfo;
   external Pointer<Uint8> pbCertInfo;
-  @Uint32() external int cbPubArea;
+  @Uint32()
+  external int cbPubArea;
   external Pointer<Uint8> pbPubArea;
 }
 
 class WEBAUTHN_CREDENTIAL_ATTESTATION extends Struct {
-  @Uint32() external int dwVersion;
+  @Uint32()
+  external int dwVersion;
   external Pointer<Utf16> pwszFormatType;
-  @Uint32() external int cbAuthenticatorData;
+  @Uint32()
+  external int cbAuthenticatorData;
   external Pointer<Uint8> pbAuthenticatorData;
-  @Uint32() external int cbAttestation;
+  @Uint32()
+  external int cbAttestation;
   external Pointer<Uint8> pbAttestation;
-  @Uint32() external int dwAttestationDecodeType;
+  @Uint32()
+  external int dwAttestationDecodeType;
   external Pointer pvAttestationDecode;
-  @Uint32() external int cbAttestationObject;
+  @Uint32()
+  external int cbAttestationObject;
   external Pointer<Uint8> pbAttestationObject;
-  @Uint32() external int cbCredentialId;
+  @Uint32()
+  external int cbCredentialId;
   external Pointer<Uint8> pbCredentialId;
   external WEBAUTHN_EXTENSIONS Extensions;
-  @Uint32() external int dwUsedTransport;
+  @Uint32()
+  external int dwUsedTransport;
 }
 
 class WEBAUTHN_ASSERTION extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int cbAuthenticatorData;
+  @Uint32()
+  external int dwVersion;
+  @Uint32()
+  external int cbAuthenticatorData;
   external Pointer<Uint8> pbAuthenticatorData;
-  @Uint32() external int cbSignature;
+  @Uint32()
+  external int cbSignature;
   external Pointer<Uint8> pbSignature;
   external WEBAUTHN_CREDENTIAL Credential;
-  @Uint32() external int cbUserId;
+  @Uint32()
+  external int cbUserId;
   external Pointer<Uint8> pbUserId;
 }
-

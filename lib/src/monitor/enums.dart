@@ -55,4 +55,3 @@ class MC_VCP_CODE_TYPE {
   static const MC_MOMENTARY = 0x00000000;
   static const MC_SET_PARAMETER = 0x00000001;
 }
-

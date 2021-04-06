@@ -219,4 +219,3 @@ class VARKIND {
   static const VAR_CONST = 0x00000002;
   static const VAR_DISPATCH = 0x00000003;
 }
-

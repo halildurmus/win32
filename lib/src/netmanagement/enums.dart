@@ -268,4 +268,3 @@ class USE_INFO_1_ui1_asg_type {
   static const USE_SPOOLDEV = 0x00000001;
   static const USE_IPC = 0x00000003;
 }
-

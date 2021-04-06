@@ -34,4 +34,3 @@ class NS_REQS {
   static const NS_REQ_ALLOW_MULTIPLE = 0x00000002;
   static const NS_REQ_ONE_OR_MORE = 0x00000003;
 }
-

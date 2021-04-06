@@ -15,4 +15,3 @@ class Tbsip_Submit_Command_PriorityFlags {
   static const TBS_COMMAND_PRIORITY_HIGH = 0x0000012c;
   static const TBS_COMMAND_PRIORITY_MAX = 0x80000000;
 }
-

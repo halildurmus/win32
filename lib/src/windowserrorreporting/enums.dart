@@ -136,4 +136,3 @@ class WerReportSubmit_dwFlags {
   static const WER_SUBMIT_ARCHIVE_PARAMETERS_ONLY = 0x00001000;
   static const WER_SUBMIT_REPORT_MACHINE_ID = 0x00002000;
 }
-

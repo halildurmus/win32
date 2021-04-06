@@ -45,18 +45,23 @@ import 'package:ffi/ffi.dart';
 
 class AsnOctetString extends Struct {
   external Pointer<Uint8> stream;
-  @Uint32() external int length;
-  @Int32() external int dynamic;
+  @Uint32()
+  external int length;
+  @Int32()
+  external int dynamic;
 }
 
 class AsnObjectIdentifier extends Struct {
-  @Uint32() external int idLength;
+  @Uint32()
+  external int idLength;
   external Pointer<Uint32> ids;
 }
 
 class AsnAny extends Struct {
-  @Uint8() external int asnType;
-  @Uint32() external int asnValue;
+  @Uint8()
+  external int asnType;
+  @Uint32()
+  external int asnValue;
 }
 
 class SnmpVarBind extends Struct {
@@ -66,27 +71,34 @@ class SnmpVarBind extends Struct {
 
 class SnmpVarBindList extends Struct {
   external Pointer<SnmpVarBind> list;
-  @Uint32() external int len;
+  @Uint32()
+  external int len;
 }
 
 class smiOCTETS extends Struct {
-  @Uint32() external int len;
+  @Uint32()
+  external int len;
   external Pointer<Uint8> ptr;
 }
 
 class smiOID extends Struct {
-  @Uint32() external int len;
+  @Uint32()
+  external int len;
   external Pointer<Uint32> ptr;
 }
 
 class smiCNTR64 extends Struct {
-  @Uint32() external int hipart;
-  @Uint32() external int lopart;
+  @Uint32()
+  external int hipart;
+  @Uint32()
+  external int lopart;
 }
 
 class smiVALUE extends Struct {
-  @Uint32() external int syntax;
-  @Uint32() external int value;
+  @Uint32()
+  external int syntax;
+  @Uint32()
+  external int value;
 }
 
 class smiVENDORINFO extends Struct {
@@ -98,6 +110,6 @@ class smiVENDORINFO extends Struct {
   external Array<Int8> vendorVersionId;
   @Array(32)
   external Array<Int8> vendorVersionDate;
-  @Uint32() external int vendorEnterprise;
+  @Uint32()
+  external int vendorEnterprise;
 }
-

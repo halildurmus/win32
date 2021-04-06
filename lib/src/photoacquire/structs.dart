@@ -43,21 +43,14 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class PhotoAcquire extends Struct {
-}
+class PhotoAcquire extends Struct {}
 
-class PhotoAcquireAutoPlayDropTarget extends Struct {
-}
+class PhotoAcquireAutoPlayDropTarget extends Struct {}
 
-class PhotoAcquireAutoPlayHWEventHandler extends Struct {
-}
+class PhotoAcquireAutoPlayHWEventHandler extends Struct {}
 
-class PhotoAcquireOptionsDialog extends Struct {
-}
+class PhotoAcquireOptionsDialog extends Struct {}
 
-class PhotoProgressDialog extends Struct {
-}
+class PhotoProgressDialog extends Struct {}
 
-class PhotoAcquireDeviceSelectionDialog extends Struct {
-}
-
+class PhotoAcquireDeviceSelectionDialog extends Struct {}

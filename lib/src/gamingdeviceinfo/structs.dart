@@ -44,7 +44,8 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class GAMING_DEVICE_MODEL_INFORMATION extends Struct {
-  @Uint32() external int vendorId;
-  @Uint32() external int deviceId;
+  @Uint32()
+  external int vendorId;
+  @Uint32()
+  external int deviceId;
 }
-

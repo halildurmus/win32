@@ -44,25 +44,32 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class ID_PARAMETER_PAIR extends Struct {
-  @Int32() external int fIsVariable;
-  @Uint16() external int cbIdSize;
+  @Int32()
+  external int fIsVariable;
+  @Uint16()
+  external int cbIdSize;
 }
 
 class ID_PARAMETERS extends Struct {
-  @Uint32() external int dwSize;
+  @Uint32()
+  external int dwSize;
   external ID_PARAMETER_PAIR replicaId;
   external ID_PARAMETER_PAIR itemId;
   external ID_PARAMETER_PAIR changeUnitId;
 }
 
 class SYNC_SESSION_STATISTICS extends Struct {
-  @Uint32() external int dwChangesApplied;
-  @Uint32() external int dwChangesFailed;
+  @Uint32()
+  external int dwChangesApplied;
+  @Uint32()
+  external int dwChangesFailed;
 }
 
 class SYNC_VERSION extends Struct {
-  @Uint32() external int dwLastUpdatingReplicaKey;
-  @Uint64() external int ullTickCount;
+  @Uint32()
+  external int dwLastUpdatingReplicaKey;
+  @Uint64()
+  external int ullTickCount;
 }
 
 class SYNC_RANGE extends Struct {
@@ -71,35 +78,43 @@ class SYNC_RANGE extends Struct {
 }
 
 class SYNC_TIME extends Struct {
-  @Uint32() external int dwDate;
-  @Uint32() external int dwTime;
+  @Uint32()
+  external int dwDate;
+  @Uint32()
+  external int dwTime;
 }
 
 class SYNC_FILTER_CHANGE extends Struct {
-  @Int32() external int fMoveIn;
+  @Int32()
+  external int fMoveIn;
   external SYNC_VERSION moveVersion;
 }
 
-class SyncProviderRegistration extends Struct {
-}
+class SyncProviderRegistration extends Struct {}
 
 class SyncProviderConfiguration extends Struct {
-  @Uint32() external int dwVersion;
+  @Uint32()
+  external int dwVersion;
   external GUID guidInstanceId;
   external GUID clsidProvider;
   external GUID guidConfigUIInstanceId;
   external GUID guidContentType;
-  @Uint32() external int dwCapabilities;
-  @Uint32() external int dwSupportedArchitecture;
+  @Uint32()
+  external int dwCapabilities;
+  @Uint32()
+  external int dwSupportedArchitecture;
 }
 
 class SyncProviderConfigUIConfiguration extends Struct {
-  @Uint32() external int dwVersion;
+  @Uint32()
+  external int dwVersion;
   external GUID guidInstanceId;
   external GUID clsidConfigUI;
   external GUID guidContentType;
-  @Uint32() external int dwCapabilities;
-  @Uint32() external int dwSupportedArchitecture;
-  @Int32() external int fIsGlobal;
+  @Uint32()
+  external int dwCapabilities;
+  @Uint32()
+  external int dwSupportedArchitecture;
+  @Int32()
+  external int fIsGlobal;
 }
-

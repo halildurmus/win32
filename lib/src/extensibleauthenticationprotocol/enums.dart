@@ -375,4 +375,3 @@ class RAS_AUTH_ATTRIBUTE_TYPE {
   static const raatSessionId = 0x0000232c;
   static const raatReserved = 0xffffffff;
 }
-

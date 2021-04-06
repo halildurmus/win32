@@ -62,4 +62,3 @@ class ENCRYPTED_LM_OWF_PASSWORD extends Struct {
   @Array(2)
   external Array<CYPHER_BLOCK> data;
 }
-

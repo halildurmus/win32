@@ -61,4 +61,3 @@ class WAIT_TYPE {
   static const WaitNotification = 0x00000002;
   static const WaitDequeue = 0x00000003;
 }
-

@@ -55,4 +55,3 @@ class WcmUserStatus {
   static const UserLoaded = 0x00000003;
   static const UserUnloaded = 0x00000004;
 }
-

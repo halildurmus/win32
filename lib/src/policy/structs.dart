@@ -44,40 +44,51 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class CriticalPolicySectionHandle extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class GROUP_POLICY_OBJECTA extends Struct {
-  @Uint32() external int dwOptions;
-  @Uint32() external int dwVersion;
+  @Uint32()
+  external int dwOptions;
+  @Uint32()
+  external int dwVersion;
   external Pointer<Utf8> lpDSPath;
   external Pointer<Utf8> lpFileSysPath;
   external Pointer<Utf8> lpDisplayName;
   @Array(50)
   external Array<Int8> szGPOName;
-  @Uint32() external int GPOLink;
-  @IntPtr() external int lParam;
+  @Uint32()
+  external int GPOLink;
+  @IntPtr()
+  external int lParam;
   external Pointer<GROUP_POLICY_OBJECTA> pNext;
   external Pointer<GROUP_POLICY_OBJECTA> pPrev;
   external Pointer<Utf8> lpExtensions;
-  @IntPtr() external int lParam2;
+  @IntPtr()
+  external int lParam2;
   external Pointer<Utf8> lpLink;
 }
 
 class GROUP_POLICY_OBJECTW extends Struct {
-  @Uint32() external int dwOptions;
-  @Uint32() external int dwVersion;
+  @Uint32()
+  external int dwOptions;
+  @Uint32()
+  external int dwVersion;
   external Pointer<Utf16> lpDSPath;
   external Pointer<Utf16> lpFileSysPath;
   external Pointer<Utf16> lpDisplayName;
   @Array(50)
   external Array<Uint16> szGPOName;
-  @Uint32() external int GPOLink;
-  @IntPtr() external int lParam;
+  @Uint32()
+  external int GPOLink;
+  @IntPtr()
+  external int lParam;
   external Pointer<GROUP_POLICY_OBJECT> pNext;
   external Pointer<GROUP_POLICY_OBJECT> pPrev;
   external Pointer<Utf16> lpExtensions;
-  @IntPtr() external int lParam2;
+  @IntPtr()
+  external int lParam2;
   external Pointer<Utf16> lpLink;
 }
 
@@ -94,21 +105,27 @@ class POLICYSETTINGSTATUSINFO extends Struct {
   external Pointer<Utf16> szKey;
   external Pointer<Utf16> szEventSource;
   external Pointer<Utf16> szEventLogName;
-  @Uint32() external int dwEventID;
-  @Uint32() external int dwErrorCode;
-  @Uint32() external int status;
+  @Uint32()
+  external int dwEventID;
+  @Uint32()
+  external int dwErrorCode;
+  @Uint32()
+  external int status;
   external SYSTEMTIME timeLogged;
 }
 
 class INSTALLSPEC extends Struct {
-  @Uint32() external int AppName;
+  @Uint32()
+  external int AppName;
   external Pointer<Utf16> FileExt;
   external Pointer<Utf16> ProgId;
-  @Uint32() external int COMClass;
+  @Uint32()
+  external int COMClass;
 }
 
 class INSTALLDATA extends Struct {
-  @Uint32() external int Type;
+  @Uint32()
+  external int Type;
   external INSTALLSPEC Spec;
 }
 
@@ -116,39 +133,52 @@ class LOCALMANAGEDAPPLICATION extends Struct {
   external Pointer<Utf16> pszDeploymentName;
   external Pointer<Utf16> pszPolicyName;
   external Pointer<Utf16> pszProductId;
-  @Uint32() external int dwState;
+  @Uint32()
+  external int dwState;
 }
 
 class MANAGEDAPPLICATION extends Struct {
   external Pointer<Utf16> pszPackageName;
   external Pointer<Utf16> pszPublisher;
-  @Uint32() external int dwVersionHi;
-  @Uint32() external int dwVersionLo;
-  @Uint32() external int dwRevision;
+  @Uint32()
+  external int dwVersionHi;
+  @Uint32()
+  external int dwVersionLo;
+  @Uint32()
+  external int dwRevision;
   external GUID GpoId;
   external Pointer<Utf16> pszPolicyName;
   external GUID ProductId;
-  @Uint16() external int Language;
+  @Uint16()
+  external int Language;
   external Pointer<Utf16> pszOwner;
   external Pointer<Utf16> pszCompany;
   external Pointer<Utf16> pszComments;
   external Pointer<Utf16> pszContact;
   external Pointer<Utf16> pszSupportUrl;
-  @Uint32() external int dwPathType;
-  @Int32() external int bInstalled;
+  @Uint32()
+  external int dwPathType;
+  @Int32()
+  external int bInstalled;
 }
 
 class GPOBROWSEINFO extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwFlags;
-  @IntPtr() external int hwndOwner;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwFlags;
+  @IntPtr()
+  external int hwndOwner;
   external Pointer<Utf16> lpTitle;
   external Pointer<Utf16> lpInitialOU;
   external Pointer<Utf16> lpDSPath;
-  @Uint32() external int dwDSPathSize;
+  @Uint32()
+  external int dwDSPathSize;
   external Pointer<Utf16> lpName;
-  @Uint32() external int dwNameSize;
-  @Uint32() external int gpoType;
-  @Uint32() external int gpoHint;
+  @Uint32()
+  external int dwNameSize;
+  @Uint32()
+  external int gpoType;
+  @Uint32()
+  external int gpoHint;
 }
-

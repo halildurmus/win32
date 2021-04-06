@@ -44,41 +44,51 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class DRMID extends Struct {
-  @Uint32() external int uVersion;
+  @Uint32()
+  external int uVersion;
   external Pointer<Utf16> wszIDType;
   external Pointer<Utf16> wszID;
 }
 
 class DRMBOUNDLICENSEPARAMS extends Struct {
-  @Uint32() external int uVersion;
-  @Uint32() external int hEnablingPrincipal;
-  @Uint32() external int hSecureStore;
+  @Uint32()
+  external int uVersion;
+  @Uint32()
+  external int hEnablingPrincipal;
+  @Uint32()
+  external int hSecureStore;
   external Pointer<Utf16> wszRightsRequested;
   external Pointer<Utf16> wszRightsGroup;
   external DRMID idResource;
-  @Uint32() external int cAuthenticatorCount;
+  @Uint32()
+  external int cAuthenticatorCount;
   external Pointer<Uint32> rghAuthenticators;
   external Pointer<Utf16> wszDefaultEnablingPrincipalCredentials;
-  @Uint32() external int dwFlags;
+  @Uint32()
+  external int dwFlags;
 }
 
 class DRM_LICENSE_ACQ_DATA extends Struct {
-  @Uint32() external int uVersion;
+  @Uint32()
+  external int uVersion;
   external Pointer<Utf16> wszURL;
   external Pointer<Utf16> wszLocalFilename;
   external Pointer<Uint8> pbPostData;
-  @Uint32() external int dwPostDataSize;
+  @Uint32()
+  external int dwPostDataSize;
   external Pointer<Utf16> wszFriendlyName;
 }
 
 class DRM_ACTSERV_INFO extends Struct {
-  @Uint32() external int uVersion;
+  @Uint32()
+  external int uVersion;
   external Pointer<Utf16> wszPubKey;
   external Pointer<Utf16> wszURL;
 }
 
 class DRM_CLIENT_VERSION_INFO extends Struct {
-  @Uint32() external int uStructVersion;
+  @Uint32()
+  external int uStructVersion;
   @Array(4)
   external Array<Uint32> dwVersion;
   @Array(129)
@@ -88,4 +98,3 @@ class DRM_CLIENT_VERSION_INFO extends Struct {
   @Array(129)
   external Array<Uint16> wszProductDescription;
 }
-

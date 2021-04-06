@@ -44,16 +44,20 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class HWINSTA extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class HDESK extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class USEROBJECTFLAGS extends Struct {
-  @Int32() external int fInherit;
-  @Int32() external int fReserved;
-  @Uint32() external int dwFlags;
+  @Int32()
+  external int fInherit;
+  @Int32()
+  external int fReserved;
+  @Uint32()
+  external int dwFlags;
 }
-

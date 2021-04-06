@@ -44,32 +44,42 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class RESTOREPOINTINFOA extends Struct {
-  @Uint32() external int dwEventType;
-  @Uint32() external int dwRestorePtType;
-  @Int64() external int llSequenceNumber;
+  @Uint32()
+  external int dwEventType;
+  @Uint32()
+  external int dwRestorePtType;
+  @Int64()
+  external int llSequenceNumber;
   @Array(64)
   external Array<Int8> szDescription;
 }
 
 class RESTOREPOINTINFOW extends Struct {
-  @Uint32() external int dwEventType;
-  @Uint32() external int dwRestorePtType;
-  @Int64() external int llSequenceNumber;
+  @Uint32()
+  external int dwEventType;
+  @Uint32()
+  external int dwRestorePtType;
+  @Int64()
+  external int llSequenceNumber;
   @Array(129)
   external Array<Uint16> szDescription;
 }
 
 class _RESTOREPTINFOEX extends Struct {
   external FILETIME ftCreation;
-  @Uint32() external int dwEventType;
-  @Uint32() external int dwRestorePtType;
-  @Uint32() external int dwRPNum;
+  @Uint32()
+  external int dwEventType;
+  @Uint32()
+  external int dwRestorePtType;
+  @Uint32()
+  external int dwRPNum;
   @Array(129)
   external Array<Uint16> szDescription;
 }
 
 class STATEMGRSTATUS extends Struct {
-  @Uint32() external int nStatus;
-  @Int64() external int llSequenceNumber;
+  @Uint32()
+  external int nStatus;
+  @Int64()
+  external int llSequenceNumber;
 }
-

@@ -44,56 +44,75 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class WCM_POLICY_VALUE extends Struct {
-  @Int32() external int fValue;
-  @Int32() external int fIsGroupPolicy;
+  @Int32()
+  external int fValue;
+  @Int32()
+  external int fIsGroupPolicy;
 }
 
 class WCM_PROFILE_INFO extends Struct {
   @Array(129)
   external Array<Uint16> strProfileName;
   external GUID AdapterGUID;
-  @Uint32() external int Media;
+  @Uint32()
+  external int Media;
 }
 
 class WCM_PROFILE_INFO_LIST extends Struct {
-  @Uint32() external int dwNumberOfItems;
+  @Uint32()
+  external int dwNumberOfItems;
   @Array(1)
   external Array<WCM_PROFILE_INFO> ProfileInfo;
 }
 
 class WCM_CONNECTION_COST_DATA extends Struct {
-  @Uint32() external int ConnectionCost;
-  @Uint32() external int CostSource;
+  @Uint32()
+  external int ConnectionCost;
+  @Uint32()
+  external int CostSource;
 }
 
 class WCM_TIME_INTERVAL extends Struct {
-  @Uint16() external int wYear;
-  @Uint16() external int wMonth;
-  @Uint16() external int wDay;
-  @Uint16() external int wHour;
-  @Uint16() external int wMinute;
-  @Uint16() external int wSecond;
-  @Uint16() external int wMilliseconds;
+  @Uint16()
+  external int wYear;
+  @Uint16()
+  external int wMonth;
+  @Uint16()
+  external int wDay;
+  @Uint16()
+  external int wHour;
+  @Uint16()
+  external int wMinute;
+  @Uint16()
+  external int wSecond;
+  @Uint16()
+  external int wMilliseconds;
 }
 
 class WCM_USAGE_DATA extends Struct {
-  @Uint32() external int UsageInMegabytes;
+  @Uint32()
+  external int UsageInMegabytes;
   external FILETIME LastSyncTime;
 }
 
 class WCM_BILLING_CYCLE_INFO extends Struct {
   external FILETIME StartDate;
   external WCM_TIME_INTERVAL Duration;
-  @Int32() external int Reset;
+  @Int32()
+  external int Reset;
 }
 
 class WCM_DATAPLAN_STATUS extends Struct {
   external WCM_USAGE_DATA UsageData;
-  @Uint32() external int DataLimitInMegabytes;
-  @Uint32() external int InboundBandwidthInKbps;
-  @Uint32() external int OutboundBandwidthInKbps;
+  @Uint32()
+  external int DataLimitInMegabytes;
+  @Uint32()
+  external int InboundBandwidthInKbps;
+  @Uint32()
+  external int OutboundBandwidthInKbps;
   external WCM_BILLING_CYCLE_INFO BillingCycle;
-  @Uint32() external int MaxTransferSizeInMegabytes;
-  @Uint32() external int Reserved;
+  @Uint32()
+  external int MaxTransferSizeInMegabytes;
+  @Uint32()
+  external int Reserved;
 }
-

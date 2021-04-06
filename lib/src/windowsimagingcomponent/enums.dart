@@ -511,4 +511,3 @@ class WICWebpAnmfProperties {
   static const WICWebpAnmfFrameDuration = 0x00000001;
   static const WICWebpAnmfProperties_FORCE_DWORD = 0x7fffffff;
 }
-

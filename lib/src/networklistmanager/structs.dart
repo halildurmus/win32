@@ -43,23 +43,28 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class NetworkListManager extends Struct {
-}
+class NetworkListManager extends Struct {}
 
 class NLM_USAGE_DATA extends Struct {
-  @Uint32() external int UsageInMegabytes;
+  @Uint32()
+  external int UsageInMegabytes;
   external FILETIME LastSyncTime;
 }
 
 class NLM_DATAPLAN_STATUS extends Struct {
   external GUID InterfaceGuid;
   external NLM_USAGE_DATA UsageData;
-  @Uint32() external int DataLimitInMegabytes;
-  @Uint32() external int InboundBandwidthInKbps;
-  @Uint32() external int OutboundBandwidthInKbps;
+  @Uint32()
+  external int DataLimitInMegabytes;
+  @Uint32()
+  external int InboundBandwidthInKbps;
+  @Uint32()
+  external int OutboundBandwidthInKbps;
   external FILETIME NextBillingCycle;
-  @Uint32() external int MaxTransferSizeInMegabytes;
-  @Uint32() external int Reserved;
+  @Uint32()
+  external int MaxTransferSizeInMegabytes;
+  @Uint32()
+  external int Reserved;
 }
 
 class NLM_SOCKADDR extends Struct {
@@ -70,19 +75,24 @@ class NLM_SOCKADDR extends Struct {
 class NLM_SIMULATED_PROFILE_INFO extends Struct {
   @Array(129)
   external Array<Uint16> ProfileName;
-  @Uint32() external int cost;
-  @Uint32() external int UsageInMegabytes;
-  @Uint32() external int DataLimitInMegabytes;
+  @Uint32()
+  external int cost;
+  @Uint32()
+  external int UsageInMegabytes;
+  @Uint32()
+  external int DataLimitInMegabytes;
 }
 
 class NET_INTERFACE_CONTEXT extends Struct {
-  @Uint32() external int InterfaceIndex;
+  @Uint32()
+  external int InterfaceIndex;
   external Pointer<Utf16> ConfigurationName;
 }
 
 class NET_INTERFACE_CONTEXT_TABLE extends Struct {
-  @IntPtr() external int InterfaceContextHandle;
-  @Uint32() external int NumberOfEntries;
+  @IntPtr()
+  external int InterfaceContextHandle;
+  @Uint32()
+  external int NumberOfEntries;
   external Pointer<NET_INTERFACE_CONTEXT> InterfaceContextArray;
 }
-

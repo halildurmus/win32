@@ -319,4 +319,3 @@ class system_handle_t {
   static const SYSTEM_HANDLE_MAX = 0x0000000c;
   static const SYSTEM_HANDLE_INVALID = 0x000000ff;
 }
-

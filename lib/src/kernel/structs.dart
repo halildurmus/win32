@@ -44,17 +44,22 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class LUID extends Struct {
-  @Uint32() external int LowPart;
-  @Int32() external int HighPart;
+  @Uint32()
+  external int LowPart;
+  @Int32()
+  external int HighPart;
 }
 
 class QUAD extends Struct {
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int Anonymous;
 }
 
 class CSTRING extends Struct {
-  @Uint16() external int Length;
-  @Uint16() external int MaximumLength;
+  @Uint16()
+  external int Length;
+  @Uint16()
+  external int MaximumLength;
   external Pointer<Utf8> Buffer;
 }
 
@@ -68,22 +73,29 @@ class SINGLE_LIST_ENTRY extends Struct {
 }
 
 class RTL_BALANCED_NODE extends Struct {
-  @Uint32() external int Anonymous1;
-  @Uint32() external int Anonymous2;
+  @Uint32()
+  external int Anonymous1;
+  @Uint32()
+  external int Anonymous2;
 }
 
 class LIST_ENTRY32 extends Struct {
-  @Uint32() external int Flink;
-  @Uint32() external int Blink;
+  @Uint32()
+  external int Flink;
+  @Uint32()
+  external int Blink;
 }
 
 class LIST_ENTRY64 extends Struct {
-  @Uint64() external int Flink;
-  @Uint64() external int Blink;
+  @Uint64()
+  external int Flink;
+  @Uint64()
+  external int Blink;
 }
 
 class SINGLE_LIST_ENTRY32 extends Struct {
-  @Uint32() external int Next;
+  @Uint32()
+  external int Next;
 }
 
 class WNF_STATE_NAME extends Struct {
@@ -92,37 +104,55 @@ class WNF_STATE_NAME extends Struct {
 }
 
 class STRING32 extends Struct {
-  @Uint16() external int Length;
-  @Uint16() external int MaximumLength;
-  @Uint32() external int Buffer;
+  @Uint16()
+  external int Length;
+  @Uint16()
+  external int MaximumLength;
+  @Uint32()
+  external int Buffer;
 }
 
 class STRING64 extends Struct {
-  @Uint16() external int Length;
-  @Uint16() external int MaximumLength;
-  @Uint64() external int Buffer;
+  @Uint16()
+  external int Length;
+  @Uint16()
+  external int MaximumLength;
+  @Uint64()
+  external int Buffer;
 }
 
 class OBJECT_ATTRIBUTES64 extends Struct {
-  @Uint32() external int Length;
-  @Uint64() external int RootDirectory;
-  @Uint64() external int ObjectName;
-  @Uint32() external int Attributes;
-  @Uint64() external int SecurityDescriptor;
-  @Uint64() external int SecurityQualityOfService;
+  @Uint32()
+  external int Length;
+  @Uint64()
+  external int RootDirectory;
+  @Uint64()
+  external int ObjectName;
+  @Uint32()
+  external int Attributes;
+  @Uint64()
+  external int SecurityDescriptor;
+  @Uint64()
+  external int SecurityQualityOfService;
 }
 
 class OBJECT_ATTRIBUTES32 extends Struct {
-  @Uint32() external int Length;
-  @Uint32() external int RootDirectory;
-  @Uint32() external int ObjectName;
-  @Uint32() external int Attributes;
-  @Uint32() external int SecurityDescriptor;
-  @Uint32() external int SecurityQualityOfService;
+  @Uint32()
+  external int Length;
+  @Uint32()
+  external int RootDirectory;
+  @Uint32()
+  external int ObjectName;
+  @Uint32()
+  external int Attributes;
+  @Uint32()
+  external int SecurityDescriptor;
+  @Uint32()
+  external int SecurityQualityOfService;
 }
 
 class OBJECTID extends Struct {
   external GUID Lineage;
-  @Uint32() external int Uniquifier;
+  @Uint32()
+  external int Uniquifier;
 }
-

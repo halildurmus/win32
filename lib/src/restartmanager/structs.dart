@@ -44,7 +44,8 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class RM_UNIQUE_PROCESS extends Struct {
-  @Uint32() external int dwProcessId;
+  @Uint32()
+  external int dwProcessId;
   external FILETIME ProcessStartTime;
 }
 
@@ -54,16 +55,23 @@ class RM_PROCESS_INFO extends Struct {
   external Array<Uint16> strAppName;
   @Array(64)
   external Array<Uint16> strServiceShortName;
-  @Uint32() external int ApplicationType;
-  @Uint32() external int AppStatus;
-  @Uint32() external int TSSessionId;
-  @Int32() external int bRestartable;
+  @Uint32()
+  external int ApplicationType;
+  @Uint32()
+  external int AppStatus;
+  @Uint32()
+  external int TSSessionId;
+  @Int32()
+  external int bRestartable;
 }
 
 class RM_FILTER_INFO extends Struct {
-  @Uint32() external int FilterAction;
-  @Uint32() external int FilterTrigger;
-  @Uint32() external int cbNextOffset;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int FilterAction;
+  @Uint32()
+  external int FilterTrigger;
+  @Uint32()
+  external int cbNextOffset;
+  @Uint32()
+  external int Anonymous;
 }
-

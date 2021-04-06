@@ -44,8 +44,10 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class WER_REPORT_INFORMATION extends Struct {
-  @Uint32() external int dwSize;
-  @IntPtr() external int hProcess;
+  @Uint32()
+  external int dwSize;
+  @IntPtr()
+  external int hProcess;
   @Array(64)
   external Array<Uint16> wzConsentKey;
   @Array(128)
@@ -56,12 +58,15 @@ class WER_REPORT_INFORMATION extends Struct {
   external Array<Uint16> wzApplicationPath;
   @Array(130)
   external Array<Uint16> wzDescription;
-  @IntPtr() external int hwndParent;
+  @IntPtr()
+  external int hwndParent;
 }
 
 class WER_REPORT_INFORMATION_V3 extends Struct {
-  @Uint32() external int dwSize;
-  @IntPtr() external int hProcess;
+  @Uint32()
+  external int dwSize;
+  @IntPtr()
+  external int hProcess;
   @Array(64)
   external Array<Uint16> wzConsentKey;
   @Array(128)
@@ -72,7 +77,8 @@ class WER_REPORT_INFORMATION_V3 extends Struct {
   external Array<Uint16> wzApplicationPath;
   @Array(130)
   external Array<Uint16> wzDescription;
-  @IntPtr() external int hwndParent;
+  @IntPtr()
+  external int hwndParent;
   @Array(64)
   external Array<Uint16> wzNamespacePartner;
   @Array(64)
@@ -80,40 +86,64 @@ class WER_REPORT_INFORMATION_V3 extends Struct {
 }
 
 class WER_DUMP_CUSTOM_OPTIONS extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwMask;
-  @Uint32() external int dwDumpFlags;
-  @Int32() external int bOnlyThisThread;
-  @Uint32() external int dwExceptionThreadFlags;
-  @Uint32() external int dwOtherThreadFlags;
-  @Uint32() external int dwExceptionThreadExFlags;
-  @Uint32() external int dwOtherThreadExFlags;
-  @Uint32() external int dwPreferredModuleFlags;
-  @Uint32() external int dwOtherModuleFlags;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwMask;
+  @Uint32()
+  external int dwDumpFlags;
+  @Int32()
+  external int bOnlyThisThread;
+  @Uint32()
+  external int dwExceptionThreadFlags;
+  @Uint32()
+  external int dwOtherThreadFlags;
+  @Uint32()
+  external int dwExceptionThreadExFlags;
+  @Uint32()
+  external int dwOtherThreadExFlags;
+  @Uint32()
+  external int dwPreferredModuleFlags;
+  @Uint32()
+  external int dwOtherModuleFlags;
   @Array(129)
   external Array<Uint16> wzPreferredModuleList;
 }
 
 class WER_DUMP_CUSTOM_OPTIONS_V2 extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwMask;
-  @Uint32() external int dwDumpFlags;
-  @Int32() external int bOnlyThisThread;
-  @Uint32() external int dwExceptionThreadFlags;
-  @Uint32() external int dwOtherThreadFlags;
-  @Uint32() external int dwExceptionThreadExFlags;
-  @Uint32() external int dwOtherThreadExFlags;
-  @Uint32() external int dwPreferredModuleFlags;
-  @Uint32() external int dwOtherModuleFlags;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwMask;
+  @Uint32()
+  external int dwDumpFlags;
+  @Int32()
+  external int bOnlyThisThread;
+  @Uint32()
+  external int dwExceptionThreadFlags;
+  @Uint32()
+  external int dwOtherThreadFlags;
+  @Uint32()
+  external int dwExceptionThreadExFlags;
+  @Uint32()
+  external int dwOtherThreadExFlags;
+  @Uint32()
+  external int dwPreferredModuleFlags;
+  @Uint32()
+  external int dwOtherModuleFlags;
   @Array(129)
   external Array<Uint16> wzPreferredModuleList;
-  @Uint32() external int dwPreferredModuleResetFlags;
-  @Uint32() external int dwOtherModuleResetFlags;
+  @Uint32()
+  external int dwPreferredModuleResetFlags;
+  @Uint32()
+  external int dwOtherModuleResetFlags;
 }
 
 class WER_REPORT_INFORMATION_V4 extends Struct {
-  @Uint32() external int dwSize;
-  @IntPtr() external int hProcess;
+  @Uint32()
+  external int dwSize;
+  @IntPtr()
+  external int hProcess;
   @Array(64)
   external Array<Uint16> wzConsentKey;
   @Array(128)
@@ -124,20 +154,25 @@ class WER_REPORT_INFORMATION_V4 extends Struct {
   external Array<Uint16> wzApplicationPath;
   @Array(130)
   external Array<Uint16> wzDescription;
-  @IntPtr() external int hwndParent;
+  @IntPtr()
+  external int hwndParent;
   @Array(64)
   external Array<Uint16> wzNamespacePartner;
   @Array(64)
   external Array<Uint16> wzNamespaceGroup;
   @Array(16)
   external Array<Uint8> rgbApplicationIdentity;
-  @IntPtr() external int hSnapshot;
-  @IntPtr() external int hDeleteFilesImpersonationToken;
+  @IntPtr()
+  external int hSnapshot;
+  @IntPtr()
+  external int hDeleteFilesImpersonationToken;
 }
 
 class WER_REPORT_INFORMATION_V5 extends Struct {
-  @Uint32() external int dwSize;
-  @IntPtr() external int hProcess;
+  @Uint32()
+  external int dwSize;
+  @IntPtr()
+  external int hProcess;
   @Array(64)
   external Array<Uint16> wzConsentKey;
   @Array(128)
@@ -148,52 +183,76 @@ class WER_REPORT_INFORMATION_V5 extends Struct {
   external Array<Uint16> wzApplicationPath;
   @Array(130)
   external Array<Uint16> wzDescription;
-  @IntPtr() external int hwndParent;
+  @IntPtr()
+  external int hwndParent;
   @Array(64)
   external Array<Uint16> wzNamespacePartner;
   @Array(64)
   external Array<Uint16> wzNamespaceGroup;
   @Array(16)
   external Array<Uint8> rgbApplicationIdentity;
-  @IntPtr() external int hSnapshot;
-  @IntPtr() external int hDeleteFilesImpersonationToken;
-  @Uint32() external int submitResultMax;
+  @IntPtr()
+  external int hSnapshot;
+  @IntPtr()
+  external int hDeleteFilesImpersonationToken;
+  @Uint32()
+  external int submitResultMax;
 }
 
 class WER_DUMP_CUSTOM_OPTIONS_V3 extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwMask;
-  @Uint32() external int dwDumpFlags;
-  @Int32() external int bOnlyThisThread;
-  @Uint32() external int dwExceptionThreadFlags;
-  @Uint32() external int dwOtherThreadFlags;
-  @Uint32() external int dwExceptionThreadExFlags;
-  @Uint32() external int dwOtherThreadExFlags;
-  @Uint32() external int dwPreferredModuleFlags;
-  @Uint32() external int dwOtherModuleFlags;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwMask;
+  @Uint32()
+  external int dwDumpFlags;
+  @Int32()
+  external int bOnlyThisThread;
+  @Uint32()
+  external int dwExceptionThreadFlags;
+  @Uint32()
+  external int dwOtherThreadFlags;
+  @Uint32()
+  external int dwExceptionThreadExFlags;
+  @Uint32()
+  external int dwOtherThreadExFlags;
+  @Uint32()
+  external int dwPreferredModuleFlags;
+  @Uint32()
+  external int dwOtherModuleFlags;
   @Array(129)
   external Array<Uint16> wzPreferredModuleList;
-  @Uint32() external int dwPreferredModuleResetFlags;
-  @Uint32() external int dwOtherModuleResetFlags;
+  @Uint32()
+  external int dwPreferredModuleResetFlags;
+  @Uint32()
+  external int dwOtherModuleResetFlags;
   external Pointer pvDumpKey;
-  @IntPtr() external int hSnapshot;
-  @Uint32() external int dwThreadID;
+  @IntPtr()
+  external int hSnapshot;
+  @Uint32()
+  external int dwThreadID;
 }
 
 class WER_EXCEPTION_INFORMATION extends Struct {
   external Pointer<EXCEPTION_POINTERS> pExceptionPointers;
-  @Int32() external int bClientPointers;
+  @Int32()
+  external int bClientPointers;
 }
 
 class WER_RUNTIME_EXCEPTION_INFORMATION extends Struct {
-  @Uint32() external int dwSize;
-  @IntPtr() external int hProcess;
-  @IntPtr() external int hThread;
+  @Uint32()
+  external int dwSize;
+  @IntPtr()
+  external int hProcess;
+  @IntPtr()
+  external int hThread;
   external EXCEPTION_RECORD exceptionRecord;
   external CONTEXT context;
   external Pointer<Utf16> pwszReportId;
-  @Int32() external int bIsFatal;
-  @Uint32() external int dwReserved;
+  @Int32()
+  external int bIsFatal;
+  @Uint32()
+  external int dwReserved;
 }
 
 class WER_REPORT_PARAMETER extends Struct {
@@ -215,13 +274,17 @@ class WER_REPORT_METADATA_V2 extends Struct {
   external GUID BucketId;
   external GUID ReportId;
   external FILETIME CreationTime;
-  @Uint64() external int SizeInBytes;
+  @Uint64()
+  external int SizeInBytes;
   @Array(129)
   external Array<Uint16> CabId;
-  @Uint32() external int ReportStatus;
+  @Uint32()
+  external int ReportStatus;
   external GUID ReportIntegratorId;
-  @Uint32() external int NumberOfFiles;
-  @Uint32() external int SizeOfFileNames;
+  @Uint32()
+  external int NumberOfFiles;
+  @Uint32()
+  external int SizeOfFileNames;
   external Pointer<Utf16> FileNames;
 }
 
@@ -230,13 +293,17 @@ class WER_REPORT_METADATA_V3 extends Struct {
   external GUID BucketId;
   external GUID ReportId;
   external FILETIME CreationTime;
-  @Uint64() external int SizeInBytes;
+  @Uint64()
+  external int SizeInBytes;
   @Array(129)
   external Array<Uint16> CabId;
-  @Uint32() external int ReportStatus;
+  @Uint32()
+  external int ReportStatus;
   external GUID ReportIntegratorId;
-  @Uint32() external int NumberOfFiles;
-  @Uint32() external int SizeOfFileNames;
+  @Uint32()
+  external int NumberOfFiles;
+  @Uint32()
+  external int SizeOfFileNames;
   external Pointer<Utf16> FileNames;
   @Array(128)
   external Array<Uint16> FriendlyEventName;
@@ -248,7 +315,8 @@ class WER_REPORT_METADATA_V3 extends Struct {
   external Array<Uint16> Description;
   @Array(129)
   external Array<Uint16> BucketIdString;
-  @Uint64() external int LegacyBucketId;
+  @Uint64()
+  external int LegacyBucketId;
 }
 
 class WER_REPORT_METADATA_V1 extends Struct {
@@ -256,6 +324,6 @@ class WER_REPORT_METADATA_V1 extends Struct {
   external GUID BucketId;
   external GUID ReportId;
   external FILETIME CreationTime;
-  @Uint64() external int SizeInBytes;
+  @Uint64()
+  external int SizeInBytes;
 }
-

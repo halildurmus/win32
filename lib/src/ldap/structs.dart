@@ -44,73 +44,102 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class ldap extends Struct {
-  @Uint32() external int ld_sb;
+  @Uint32()
+  external int ld_sb;
   external Pointer<Utf8> ld_host;
-  @Uint32() external int ld_version;
-  @Uint8() external int ld_lberoptions;
-  @Uint32() external int ld_deref;
-  @Uint32() external int ld_timelimit;
-  @Uint32() external int ld_sizelimit;
-  @Uint32() external int ld_errno;
+  @Uint32()
+  external int ld_version;
+  @Uint8()
+  external int ld_lberoptions;
+  @Uint32()
+  external int ld_deref;
+  @Uint32()
+  external int ld_timelimit;
+  @Uint32()
+  external int ld_sizelimit;
+  @Uint32()
+  external int ld_errno;
   external Pointer<Utf8> ld_matched;
   external Pointer<Utf8> ld_error;
-  @Uint32() external int ld_msgid;
+  @Uint32()
+  external int ld_msgid;
   @Array(25)
   external Array<Uint8> Reserved3;
-  @Uint32() external int ld_cldaptries;
-  @Uint32() external int ld_cldaptimeout;
-  @Uint32() external int ld_refhoplimit;
-  @Uint32() external int ld_options;
+  @Uint32()
+  external int ld_cldaptries;
+  @Uint32()
+  external int ld_cldaptimeout;
+  @Uint32()
+  external int ld_refhoplimit;
+  @Uint32()
+  external int ld_options;
 }
 
 class LDAP_TIMEVAL extends Struct {
-  @Int32() external int tv_sec;
-  @Int32() external int tv_usec;
+  @Int32()
+  external int tv_sec;
+  @Int32()
+  external int tv_usec;
 }
 
 class LDAP_BERVAL extends Struct {
-  @Uint32() external int bv_len;
+  @Uint32()
+  external int bv_len;
   external Pointer<Utf8> bv_val;
 }
 
 class LDAPMessage extends Struct {
-  @Uint32() external int lm_msgid;
-  @Uint32() external int lm_msgtype;
+  @Uint32()
+  external int lm_msgid;
+  @Uint32()
+  external int lm_msgtype;
   external Pointer lm_ber;
   external Pointer<LDAPMessage> lm_chain;
   external Pointer<LDAPMessage> lm_next;
-  @Uint32() external int lm_time;
+  @Uint32()
+  external int lm_time;
   external Pointer<ldap> Connection;
   external Pointer Request;
-  @Uint32() external int lm_returncode;
-  @Uint16() external int lm_referral;
-  @Uint8() external int lm_chased;
-  @Uint8() external int lm_eom;
-  @Uint8() external int ConnectionReferenced;
+  @Uint32()
+  external int lm_returncode;
+  @Uint16()
+  external int lm_referral;
+  @Uint8()
+  external int lm_chased;
+  @Uint8()
+  external int lm_eom;
+  @Uint8()
+  external int ConnectionReferenced;
 }
 
 class ldapcontrolA extends Struct {
   external Pointer<Utf8> ldctl_oid;
   external LDAP_BERVAL ldctl_value;
-  @Uint8() external int ldctl_iscritical;
+  @Uint8()
+  external int ldctl_iscritical;
 }
 
 class ldapcontrolW extends Struct {
   external Pointer<Utf16> ldctl_oid;
   external LDAP_BERVAL ldctl_value;
-  @Uint8() external int ldctl_iscritical;
+  @Uint8()
+  external int ldctl_iscritical;
 }
 
 class ldapmodW extends Struct {
-  @Uint32() external int mod_op;
+  @Uint32()
+  external int mod_op;
   external Pointer<Utf16> mod_type;
-  @Uint32() external int mod_vals;
+  @Uint32()
+  external int mod_vals;
 }
 
 class ldapmodA extends Struct {
-  @Uint32() external int mod_op;
+  @Uint32()
+  external int mod_op;
   external Pointer<Utf8> mod_type;
-  @Uint32() external int mod_vals;
+  @Uint32()
+  external int mod_vals;
 }
 
 class berelement extends Struct {
@@ -118,71 +147,92 @@ class berelement extends Struct {
 }
 
 class ldap_version_info extends Struct {
-  @Uint32() external int lv_size;
-  @Uint32() external int lv_major;
-  @Uint32() external int lv_minor;
+  @Uint32()
+  external int lv_size;
+  @Uint32()
+  external int lv_major;
+  @Uint32()
+  external int lv_minor;
 }
 
 class ldapapiinfoA extends Struct {
-  @Int32() external int ldapai_info_version;
-  @Int32() external int ldapai_api_version;
-  @Int32() external int ldapai_protocol_version;
+  @Int32()
+  external int ldapai_info_version;
+  @Int32()
+  external int ldapai_api_version;
+  @Int32()
+  external int ldapai_protocol_version;
   external Pointer<Pointer<Int8>> ldapai_extensions;
   external Pointer<Utf8> ldapai_vendor_name;
-  @Int32() external int ldapai_vendor_version;
+  @Int32()
+  external int ldapai_vendor_version;
 }
 
 class ldapapiinfoW extends Struct {
-  @Int32() external int ldapai_info_version;
-  @Int32() external int ldapai_api_version;
-  @Int32() external int ldapai_protocol_version;
+  @Int32()
+  external int ldapai_info_version;
+  @Int32()
+  external int ldapai_api_version;
+  @Int32()
+  external int ldapai_protocol_version;
   external Pointer<Pointer<Utf16>> ldapai_extensions;
   external Pointer<Utf16> ldapai_vendor_name;
-  @Int32() external int ldapai_vendor_version;
+  @Int32()
+  external int ldapai_vendor_version;
 }
 
 class LDAPAPIFeatureInfoA extends Struct {
-  @Int32() external int ldapaif_info_version;
+  @Int32()
+  external int ldapaif_info_version;
   external Pointer<Utf8> ldapaif_name;
-  @Int32() external int ldapaif_version;
+  @Int32()
+  external int ldapaif_version;
 }
 
 class LDAPAPIFeatureInfoW extends Struct {
-  @Int32() external int ldapaif_info_version;
+  @Int32()
+  external int ldapaif_info_version;
   external Pointer<Utf16> ldapaif_name;
-  @Int32() external int ldapaif_version;
+  @Int32()
+  external int ldapaif_version;
 }
 
-class ldapsearch extends Struct {
-}
+class ldapsearch extends Struct {}
 
 class ldapsortkeyW extends Struct {
   external Pointer<Utf16> sk_attrtype;
   external Pointer<Utf16> sk_matchruleoid;
-  @Uint8() external int sk_reverseorder;
+  @Uint8()
+  external int sk_reverseorder;
 }
 
 class ldapsortkeyA extends Struct {
   external Pointer<Utf8> sk_attrtype;
   external Pointer<Utf8> sk_matchruleoid;
-  @Uint8() external int sk_reverseorder;
+  @Uint8()
+  external int sk_reverseorder;
 }
 
 class ldapvlvinfo extends Struct {
-  @Int32() external int ldvlv_version;
-  @Uint32() external int ldvlv_before_count;
-  @Uint32() external int ldvlv_after_count;
-  @Uint32() external int ldvlv_offset;
-  @Uint32() external int ldvlv_count;
+  @Int32()
+  external int ldvlv_version;
+  @Uint32()
+  external int ldvlv_before_count;
+  @Uint32()
+  external int ldvlv_after_count;
+  @Uint32()
+  external int ldvlv_offset;
+  @Uint32()
+  external int ldvlv_count;
   external Pointer<LDAP_BERVAL> ldvlv_attrvalue;
   external Pointer<LDAP_BERVAL> ldvlv_context;
   external Pointer ldvlv_extradata;
 }
 
 class LDAP_REFERRAL_CALLBACK extends Struct {
-  @Uint32() external int SizeOfCallbacks;
+  @Uint32()
+  external int SizeOfCallbacks;
   external QUERYFORCONNECTION QueryForConnection;
   external NOTIFYOFNEWCONNECTION NotifyRoutine;
   external DEREFERENCECONNECTION DereferenceRoutine;
 }
-

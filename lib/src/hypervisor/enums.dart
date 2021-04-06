@@ -328,4 +328,3 @@ class WHV_X64_UNSUPPORTED_FEATURE_CODE {
   static const WHvUnsupportedFeatureIntercept = 0x00000001;
   static const WHvUnsupportedFeatureTaskSwitchTss = 0x00000002;
 }
-

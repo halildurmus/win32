@@ -43,9 +43,6 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class InkDesktopHost extends Struct {
-}
+class InkDesktopHost extends Struct {}
 
-class InkD2DRenderer extends Struct {
-}
-
+class InkD2DRenderer extends Struct {}

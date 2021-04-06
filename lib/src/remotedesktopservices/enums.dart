@@ -481,4 +481,3 @@ class WTS_VIRTUAL_CLASS {
   static const WTSVirtualClientData = 0x00000000;
   static const WTSVirtualFileHandle = 0x00000001;
 }
-

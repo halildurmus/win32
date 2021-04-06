@@ -43,13 +43,15 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class BackgroundCopyManager extends Struct {
-}
+class BackgroundCopyManager extends Struct {}
 
 class BG_FILE_PROGRESS extends Struct {
-  @Uint64() external int BytesTotal;
-  @Uint64() external int BytesTransferred;
-  @Int32() external int Completed;
+  @Uint64()
+  external int BytesTotal;
+  @Uint64()
+  external int BytesTransferred;
+  @Int32()
+  external int Completed;
 }
 
 class BG_FILE_INFO extends Struct {
@@ -58,10 +60,14 @@ class BG_FILE_INFO extends Struct {
 }
 
 class BG_JOB_PROGRESS extends Struct {
-  @Uint64() external int BytesTotal;
-  @Uint64() external int BytesTransferred;
-  @Uint32() external int FilesTotal;
-  @Uint32() external int FilesTransferred;
+  @Uint64()
+  external int BytesTotal;
+  @Uint64()
+  external int BytesTransferred;
+  @Uint32()
+  external int FilesTotal;
+  @Uint32()
+  external int FilesTransferred;
 }
 
 class BG_JOB_TIMES extends Struct {
@@ -70,12 +76,13 @@ class BG_JOB_TIMES extends Struct {
   external FILETIME TransferCompletionTime;
 }
 
-class BackgroundCopyManager1_5 extends Struct {
-}
+class BackgroundCopyManager1_5 extends Struct {}
 
 class BG_JOB_REPLY_PROGRESS extends Struct {
-  @Uint64() external int BytesTotal;
-  @Uint64() external int BytesTransferred;
+  @Uint64()
+  external int BytesTotal;
+  @Uint64()
+  external int BytesTransferred;
 }
 
 class BG_BASIC_CREDENTIALS extends Struct {
@@ -88,61 +95,59 @@ class BG_AUTH_CREDENTIALS_UNION extends Struct {
 }
 
 class BG_AUTH_CREDENTIALS extends Struct {
-  @Uint32() external int Target;
-  @Uint32() external int Scheme;
+  @Uint32()
+  external int Target;
+  @Uint32()
+  external int Scheme;
   external BG_AUTH_CREDENTIALS_UNION Credentials;
 }
 
-class BackgroundCopyManager2_0 extends Struct {
-}
+class BackgroundCopyManager2_0 extends Struct {}
 
 class BG_FILE_RANGE extends Struct {
-  @Uint64() external int InitialOffset;
-  @Uint64() external int Length;
+  @Uint64()
+  external int InitialOffset;
+  @Uint64()
+  external int Length;
 }
 
-class BackgroundCopyManager2_5 extends Struct {
-}
+class BackgroundCopyManager2_5 extends Struct {}
 
-class BackgroundCopyManager3_0 extends Struct {
-}
+class BackgroundCopyManager3_0 extends Struct {}
 
-class BackgroundCopyManager4_0 extends Struct {
-}
+class BackgroundCopyManager4_0 extends Struct {}
 
-class BackgroundCopyManager5_0 extends Struct {
-}
+class BackgroundCopyManager5_0 extends Struct {}
 
 class BITS_JOB_PROPERTY_VALUE extends Struct {
-  @Uint32() external int Dword;
+  @Uint32()
+  external int Dword;
   external GUID ClsID;
-  @Int32() external int Enable;
-  @Uint64() external int Uint64;
-  @Uint32() external int Target;
+  @Int32()
+  external int Enable;
+  @Uint64()
+  external int Uint64;
+  @Uint32()
+  external int Target;
 }
 
 class BITS_FILE_PROPERTY_VALUE extends Struct {
   external Pointer<Utf16> String;
 }
 
-class BackgroundCopyManager10_1 extends Struct {
-}
+class BackgroundCopyManager10_1 extends Struct {}
 
-class BackgroundCopyManager10_2 extends Struct {
-}
+class BackgroundCopyManager10_2 extends Struct {}
 
-class BackgroundCopyManager10_3 extends Struct {
-}
+class BackgroundCopyManager10_3 extends Struct {}
 
-class BITSExtensionSetupFactory extends Struct {
-}
+class BITSExtensionSetupFactory extends Struct {}
 
-class BackgroundCopyQMgr extends Struct {
-}
+class BackgroundCopyQMgr extends Struct {}
 
 class FILESETINFO extends Struct {
   external Pointer<Utf16> bstrRemoteFile;
   external Pointer<Utf16> bstrLocalFile;
-  @Uint32() external int dwSizeHint;
+  @Uint32()
+  external int dwSizeHint;
 }
-

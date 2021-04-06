@@ -15,4 +15,3 @@ class reconcilef {
   static const RECONCILEF_ONLYYOUWERECHANGED = 0x00000040;
   static const ALL_RECONCILE_FLAGS = 0x0000007f;
 }
-

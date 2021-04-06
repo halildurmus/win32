@@ -44,75 +44,131 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class HGLRC extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class PIXELFORMATDESCRIPTOR extends Struct {
-  @Uint16() external int nSize;
-  @Uint16() external int nVersion;
-  @Uint32() external int dwFlags;
-  @Uint8() external int iPixelType;
-  @Uint8() external int cColorBits;
-  @Uint8() external int cRedBits;
-  @Uint8() external int cRedShift;
-  @Uint8() external int cGreenBits;
-  @Uint8() external int cGreenShift;
-  @Uint8() external int cBlueBits;
-  @Uint8() external int cBlueShift;
-  @Uint8() external int cAlphaBits;
-  @Uint8() external int cAlphaShift;
-  @Uint8() external int cAccumBits;
-  @Uint8() external int cAccumRedBits;
-  @Uint8() external int cAccumGreenBits;
-  @Uint8() external int cAccumBlueBits;
-  @Uint8() external int cAccumAlphaBits;
-  @Uint8() external int cDepthBits;
-  @Uint8() external int cStencilBits;
-  @Uint8() external int cAuxBuffers;
-  @Uint8() external int iLayerType;
-  @Uint8() external int bReserved;
-  @Uint32() external int dwLayerMask;
-  @Uint32() external int dwVisibleMask;
-  @Uint32() external int dwDamageMask;
+  @Uint16()
+  external int nSize;
+  @Uint16()
+  external int nVersion;
+  @Uint32()
+  external int dwFlags;
+  @Uint8()
+  external int iPixelType;
+  @Uint8()
+  external int cColorBits;
+  @Uint8()
+  external int cRedBits;
+  @Uint8()
+  external int cRedShift;
+  @Uint8()
+  external int cGreenBits;
+  @Uint8()
+  external int cGreenShift;
+  @Uint8()
+  external int cBlueBits;
+  @Uint8()
+  external int cBlueShift;
+  @Uint8()
+  external int cAlphaBits;
+  @Uint8()
+  external int cAlphaShift;
+  @Uint8()
+  external int cAccumBits;
+  @Uint8()
+  external int cAccumRedBits;
+  @Uint8()
+  external int cAccumGreenBits;
+  @Uint8()
+  external int cAccumBlueBits;
+  @Uint8()
+  external int cAccumAlphaBits;
+  @Uint8()
+  external int cDepthBits;
+  @Uint8()
+  external int cStencilBits;
+  @Uint8()
+  external int cAuxBuffers;
+  @Uint8()
+  external int iLayerType;
+  @Uint8()
+  external int bReserved;
+  @Uint32()
+  external int dwLayerMask;
+  @Uint32()
+  external int dwVisibleMask;
+  @Uint32()
+  external int dwDamageMask;
 }
 
 class POINTFLOAT extends Struct {
-  @Float() external double x;
-  @Float() external double y;
+  @Float()
+  external double x;
+  @Float()
+  external double y;
 }
 
 class GLYPHMETRICSFLOAT extends Struct {
-  @Float() external double gmfBlackBoxX;
-  @Float() external double gmfBlackBoxY;
+  @Float()
+  external double gmfBlackBoxX;
+  @Float()
+  external double gmfBlackBoxY;
   external POINTFLOAT gmfptGlyphOrigin;
-  @Float() external double gmfCellIncX;
-  @Float() external double gmfCellIncY;
+  @Float()
+  external double gmfCellIncX;
+  @Float()
+  external double gmfCellIncY;
 }
 
 class LAYERPLANEDESCRIPTOR extends Struct {
-  @Uint16() external int nSize;
-  @Uint16() external int nVersion;
-  @Uint32() external int dwFlags;
-  @Uint8() external int iPixelType;
-  @Uint8() external int cColorBits;
-  @Uint8() external int cRedBits;
-  @Uint8() external int cRedShift;
-  @Uint8() external int cGreenBits;
-  @Uint8() external int cGreenShift;
-  @Uint8() external int cBlueBits;
-  @Uint8() external int cBlueShift;
-  @Uint8() external int cAlphaBits;
-  @Uint8() external int cAlphaShift;
-  @Uint8() external int cAccumBits;
-  @Uint8() external int cAccumRedBits;
-  @Uint8() external int cAccumGreenBits;
-  @Uint8() external int cAccumBlueBits;
-  @Uint8() external int cAccumAlphaBits;
-  @Uint8() external int cDepthBits;
-  @Uint8() external int cStencilBits;
-  @Uint8() external int cAuxBuffers;
-  @Uint8() external int iLayerPlane;
-  @Uint8() external int bReserved;
-  @Uint32() external int crTransparent;
+  @Uint16()
+  external int nSize;
+  @Uint16()
+  external int nVersion;
+  @Uint32()
+  external int dwFlags;
+  @Uint8()
+  external int iPixelType;
+  @Uint8()
+  external int cColorBits;
+  @Uint8()
+  external int cRedBits;
+  @Uint8()
+  external int cRedShift;
+  @Uint8()
+  external int cGreenBits;
+  @Uint8()
+  external int cGreenShift;
+  @Uint8()
+  external int cBlueBits;
+  @Uint8()
+  external int cBlueShift;
+  @Uint8()
+  external int cAlphaBits;
+  @Uint8()
+  external int cAlphaShift;
+  @Uint8()
+  external int cAccumBits;
+  @Uint8()
+  external int cAccumRedBits;
+  @Uint8()
+  external int cAccumGreenBits;
+  @Uint8()
+  external int cAccumBlueBits;
+  @Uint8()
+  external int cAccumAlphaBits;
+  @Uint8()
+  external int cDepthBits;
+  @Uint8()
+  external int cStencilBits;
+  @Uint8()
+  external int cAuxBuffers;
+  @Uint8()
+  external int iLayerPlane;
+  @Uint8()
+  external int bReserved;
+  @Uint32()
+  external int crTransparent;
 }
-

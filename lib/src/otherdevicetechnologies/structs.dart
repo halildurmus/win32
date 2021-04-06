@@ -43,81 +43,114 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class PNPXAssociation extends Struct {
-}
+class PNPXAssociation extends Struct {}
 
-class PNPXPairingHandler extends Struct {
-}
+class PNPXPairingHandler extends Struct {}
 
 class WSD_DATETIME extends Struct {
-  @Int32() external int isPositive;
-  @Uint32() external int year;
-  @Uint8() external int month;
-  @Uint8() external int day;
-  @Uint8() external int hour;
-  @Uint8() external int minute;
-  @Uint8() external int second;
-  @Uint32() external int millisecond;
-  @Int32() external int TZIsLocal;
-  @Int32() external int TZIsPositive;
-  @Uint8() external int TZHour;
-  @Uint8() external int TZMinute;
+  @Int32()
+  external int isPositive;
+  @Uint32()
+  external int year;
+  @Uint8()
+  external int month;
+  @Uint8()
+  external int day;
+  @Uint8()
+  external int hour;
+  @Uint8()
+  external int minute;
+  @Uint8()
+  external int second;
+  @Uint32()
+  external int millisecond;
+  @Int32()
+  external int TZIsLocal;
+  @Int32()
+  external int TZIsPositive;
+  @Uint8()
+  external int TZHour;
+  @Uint8()
+  external int TZMinute;
 }
 
 class WSD_DURATION extends Struct {
-  @Int32() external int isPositive;
-  @Uint32() external int year;
-  @Uint32() external int month;
-  @Uint32() external int day;
-  @Uint32() external int hour;
-  @Uint32() external int minute;
-  @Uint32() external int second;
-  @Uint32() external int millisecond;
+  @Int32()
+  external int isPositive;
+  @Uint32()
+  external int year;
+  @Uint32()
+  external int month;
+  @Uint32()
+  external int day;
+  @Uint32()
+  external int hour;
+  @Uint32()
+  external int minute;
+  @Uint32()
+  external int second;
+  @Uint32()
+  external int millisecond;
 }
 
 class WSD_CONFIG_PARAM extends Struct {
-  @Uint32() external int configParamType;
+  @Uint32()
+  external int configParamType;
   external Pointer pConfigData;
-  @Uint32() external int dwConfigDataSize;
+  @Uint32()
+  external int dwConfigDataSize;
 }
 
 class WSD_SECURITY_CERT_VALIDATION_V1 extends Struct {
   external Pointer<Pointer<CERT_CONTEXT>> certMatchArray;
-  @Uint32() external int dwCertMatchArrayCount;
+  @Uint32()
+  external int dwCertMatchArrayCount;
   external Pointer hCertMatchStore;
   external Pointer hCertIssuerStore;
-  @Uint32() external int dwCertCheckOptions;
+  @Uint32()
+  external int dwCertCheckOptions;
 }
 
 class WSD_SECURITY_CERT_VALIDATION extends Struct {
   external Pointer<Pointer<CERT_CONTEXT>> certMatchArray;
-  @Uint32() external int dwCertMatchArrayCount;
+  @Uint32()
+  external int dwCertMatchArrayCount;
   external Pointer hCertMatchStore;
   external Pointer hCertIssuerStore;
-  @Uint32() external int dwCertCheckOptions;
+  @Uint32()
+  external int dwCertCheckOptions;
   external Pointer<Utf16> pszCNGHashAlgId;
   external Pointer<Uint8> pbCertHash;
-  @Uint32() external int dwCertHashSize;
+  @Uint32()
+  external int dwCertHashSize;
 }
 
 class WSD_SECURITY_SIGNATURE_VALIDATION extends Struct {
   external Pointer<Pointer<CERT_CONTEXT>> signingCertArray;
-  @Uint32() external int dwSigningCertArrayCount;
+  @Uint32()
+  external int dwSigningCertArrayCount;
   external Pointer hSigningCertStore;
-  @Uint32() external int dwFlags;
+  @Uint32()
+  external int dwFlags;
 }
 
 class WSD_CONFIG_ADDRESSES extends Struct {
   external Pointer<Pointer> addresses;
-  @Uint32() external int dwAddressCount;
+  @Uint32()
+  external int dwAddressCount;
 }
 
 class WSDUdpRetransmitParams extends Struct {
-  @Uint32() external int ulSendDelay;
-  @Uint32() external int ulRepeat;
-  @Uint32() external int ulRepeatMinDelay;
-  @Uint32() external int ulRepeatMaxDelay;
-  @Uint32() external int ulRepeatUpperDelay;
+  @Uint32()
+  external int ulSendDelay;
+  @Uint32()
+  external int ulRepeat;
+  @Uint32()
+  external int ulRepeatMinDelay;
+  @Uint32()
+  external int ulRepeatMaxDelay;
+  @Uint32()
+  external int ulRepeatUpperDelay;
 }
 
 class WSD_OPERATION extends Struct {
@@ -133,17 +166,22 @@ class WSD_HANDLER_CONTEXT extends Struct {
 }
 
 class WSD_SYNCHRONOUS_RESPONSE_CONTEXT extends Struct {
-  @Int32() external int hr;
-  @IntPtr() external int eventHandle;
+  @Int32()
+  external int hr;
+  @IntPtr()
+  external int eventHandle;
   external Pointer messageParameters;
   external Pointer results;
 }
 
 class WSD_PORT_TYPE extends Struct {
-  @Uint32() external int EncodedName;
-  @Uint32() external int OperationCount;
+  @Uint32()
+  external int EncodedName;
+  @Uint32()
+  external int OperationCount;
   external Pointer<WSD_OPERATION> Operations;
-  @Uint32() external int ProtocolType;
+  @Uint32()
+  external int ProtocolType;
 }
 
 class WSD_RELATIONSHIP_METADATA extends Struct {
@@ -219,9 +257,11 @@ class WSD_SOAP_FAULT extends Struct {
 }
 
 class WSD_APP_SEQUENCE extends Struct {
-  @Uint64() external int InstanceId;
+  @Uint64()
+  external int InstanceId;
   external Pointer<Utf16> SequenceId;
-  @Uint64() external int MessageNumber;
+  @Uint64()
+  external int MessageNumber;
 }
 
 class WSD_HEADER_RELATESTO extends Struct {
@@ -257,7 +297,8 @@ class WSD_RESOLVE_MATCH extends Struct {
   external Pointer<WSD_NAME_LIST> Types;
   external Pointer<WSD_SCOPES> Scopes;
   external Pointer<WSD_URI_LIST> XAddrs;
-  @Uint64() external int MetadataVersion;
+  @Uint64()
+  external int MetadataVersion;
   external Pointer<WSDXML_ELEMENT> Any;
 }
 
@@ -271,7 +312,8 @@ class WSD_PROBE_MATCH extends Struct {
   external Pointer<WSD_NAME_LIST> Types;
   external Pointer<WSD_SCOPES> Scopes;
   external Pointer<WSD_URI_LIST> XAddrs;
-  @Uint64() external int MetadataVersion;
+  @Uint64()
+  external int MetadataVersion;
   external Pointer<WSDXML_ELEMENT> Any;
 }
 
@@ -311,7 +353,8 @@ class WSD_HELLO extends Struct {
   external Pointer<WSD_NAME_LIST> Types;
   external Pointer<WSD_SCOPES> Scopes;
   external Pointer<WSD_URI_LIST> XAddrs;
-  @Uint64() external int MetadataVersion;
+  @Uint64()
+  external int MetadataVersion;
   external Pointer<WSDXML_ELEMENT> Any;
 }
 
@@ -434,8 +477,10 @@ class WSD_UNKNOWN_LOOKUP extends Struct {
 }
 
 class WSD_EVENT extends Struct {
-  @Int32() external int Hr;
-  @Uint32() external int EventType;
+  @Int32()
+  external int Hr;
+  @Uint32()
+  external int EventType;
   external Pointer<Utf16> DispatchTag;
   external WSD_HANDLER_CONTEXT HandlerContext;
   external Pointer<WSD_SOAP_MESSAGE> Soap;
@@ -447,8 +492,10 @@ class WSDXML_NAMESPACE extends Struct {
   external Pointer<Utf16> Uri;
   external Pointer<Utf16> PreferredPrefix;
   external Pointer<WSDXML_NAME> Names;
-  @Uint16() external int NamesCount;
-  @Uint16() external int Encoding;
+  @Uint16()
+  external int NamesCount;
+  @Uint16()
+  external int Encoding;
 }
 
 class WSDXML_NAME extends Struct {
@@ -462,7 +509,8 @@ class WSDXML_TYPE extends Struct {
 }
 
 class WSDXML_PREFIX_MAPPING extends Struct {
-  @Uint32() external int Refs;
+  @Uint32()
+  external int Refs;
   external Pointer<WSDXML_PREFIX_MAPPING> Next;
   external Pointer<WSDXML_NAMESPACE> Space;
   external Pointer<Utf16> Prefix;
@@ -476,11 +524,14 @@ class WSDXML_ATTRIBUTE extends Struct {
 }
 
 class WSDXML_NODE extends Struct {
-  @Int32() external int Type;
+  @Int32()
+  external int Type;
   external Pointer<WSDXML_ELEMENT> Parent;
   external Pointer<WSDXML_NODE> Next;
-  @Int32() external int ElementType;
-  @Int32() external int TextType;
+  @Int32()
+  external int ElementType;
+  @Int32()
+  external int TextType;
 }
 
 class WSDXML_ELEMENT extends Struct {
@@ -500,4 +551,3 @@ class WSDXML_ELEMENT_LIST extends Struct {
   external Pointer<WSDXML_ELEMENT_LIST> Next;
   external Pointer<WSDXML_ELEMENT> Element;
 }
-

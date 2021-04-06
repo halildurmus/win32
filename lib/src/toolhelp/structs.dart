@@ -44,71 +44,116 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class HEAPLIST32 extends Struct {
-  @IntPtr() external int dwSize;
-  @Uint32() external int th32ProcessID;
-  @IntPtr() external int th32HeapID;
-  @Uint32() external int dwFlags;
+  @IntPtr()
+  external int dwSize;
+  @Uint32()
+  external int th32ProcessID;
+  @IntPtr()
+  external int th32HeapID;
+  @Uint32()
+  external int dwFlags;
 }
 
 class HEAPENTRY32 extends Struct {
-  @IntPtr() external int dwSize;
-  @IntPtr() external int hHandle;
-  @IntPtr() external int dwAddress;
-  @IntPtr() external int dwBlockSize;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwLockCount;
-  @Uint32() external int dwResvd;
-  @Uint32() external int th32ProcessID;
-  @IntPtr() external int th32HeapID;
+  @IntPtr()
+  external int dwSize;
+  @IntPtr()
+  external int hHandle;
+  @IntPtr()
+  external int dwAddress;
+  @IntPtr()
+  external int dwBlockSize;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwLockCount;
+  @Uint32()
+  external int dwResvd;
+  @Uint32()
+  external int th32ProcessID;
+  @IntPtr()
+  external int th32HeapID;
 }
 
 class PROCESSENTRY32W extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int cntUsage;
-  @Uint32() external int th32ProcessID;
-  @IntPtr() external int th32DefaultHeapID;
-  @Uint32() external int th32ModuleID;
-  @Uint32() external int cntThreads;
-  @Uint32() external int th32ParentProcessID;
-  @Int32() external int pcPriClassBase;
-  @Uint32() external int dwFlags;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int cntUsage;
+  @Uint32()
+  external int th32ProcessID;
+  @IntPtr()
+  external int th32DefaultHeapID;
+  @Uint32()
+  external int th32ModuleID;
+  @Uint32()
+  external int cntThreads;
+  @Uint32()
+  external int th32ParentProcessID;
+  @Int32()
+  external int pcPriClassBase;
+  @Uint32()
+  external int dwFlags;
   @Array(129)
   external Array<Uint16> szExeFile;
 }
 
 class PROCESSENTRY32 extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int cntUsage;
-  @Uint32() external int th32ProcessID;
-  @IntPtr() external int th32DefaultHeapID;
-  @Uint32() external int th32ModuleID;
-  @Uint32() external int cntThreads;
-  @Uint32() external int th32ParentProcessID;
-  @Int32() external int pcPriClassBase;
-  @Uint32() external int dwFlags;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int cntUsage;
+  @Uint32()
+  external int th32ProcessID;
+  @IntPtr()
+  external int th32DefaultHeapID;
+  @Uint32()
+  external int th32ModuleID;
+  @Uint32()
+  external int cntThreads;
+  @Uint32()
+  external int th32ParentProcessID;
+  @Int32()
+  external int pcPriClassBase;
+  @Uint32()
+  external int dwFlags;
   @Array(129)
   external Array<Int8> szExeFile;
 }
 
 class THREADENTRY32 extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int cntUsage;
-  @Uint32() external int th32ThreadID;
-  @Uint32() external int th32OwnerProcessID;
-  @Int32() external int tpBasePri;
-  @Int32() external int tpDeltaPri;
-  @Uint32() external int dwFlags;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int cntUsage;
+  @Uint32()
+  external int th32ThreadID;
+  @Uint32()
+  external int th32OwnerProcessID;
+  @Int32()
+  external int tpBasePri;
+  @Int32()
+  external int tpDeltaPri;
+  @Uint32()
+  external int dwFlags;
 }
 
 class MODULEENTRY32W extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int th32ModuleID;
-  @Uint32() external int th32ProcessID;
-  @Uint32() external int GlblcntUsage;
-  @Uint32() external int ProccntUsage;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int th32ModuleID;
+  @Uint32()
+  external int th32ProcessID;
+  @Uint32()
+  external int GlblcntUsage;
+  @Uint32()
+  external int ProccntUsage;
   external Pointer<Uint8> modBaseAddr;
-  @Uint32() external int modBaseSize;
-  @IntPtr() external int hModule;
+  @Uint32()
+  external int modBaseSize;
+  @IntPtr()
+  external int hModule;
   @Array(129)
   external Array<Uint16> szModule;
   @Array(129)
@@ -116,17 +161,23 @@ class MODULEENTRY32W extends Struct {
 }
 
 class MODULEENTRY32 extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int th32ModuleID;
-  @Uint32() external int th32ProcessID;
-  @Uint32() external int GlblcntUsage;
-  @Uint32() external int ProccntUsage;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int th32ModuleID;
+  @Uint32()
+  external int th32ProcessID;
+  @Uint32()
+  external int GlblcntUsage;
+  @Uint32()
+  external int ProccntUsage;
   external Pointer<Uint8> modBaseAddr;
-  @Uint32() external int modBaseSize;
-  @IntPtr() external int hModule;
+  @Uint32()
+  external int modBaseSize;
+  @IntPtr()
+  external int hModule;
   @Array(129)
   external Array<Int8> szModule;
   @Array(129)
   external Array<Int8> szExePath;
 }
-

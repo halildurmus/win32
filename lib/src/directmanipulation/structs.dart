@@ -43,21 +43,14 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class DirectManipulationViewport extends Struct {
-}
+class DirectManipulationViewport extends Struct {}
 
-class DirectManipulationUpdateManager extends Struct {
-}
+class DirectManipulationUpdateManager extends Struct {}
 
-class DirectManipulationPrimaryContent extends Struct {
-}
+class DirectManipulationPrimaryContent extends Struct {}
 
-class DirectManipulationManager extends Struct {
-}
+class DirectManipulationManager extends Struct {}
 
-class DirectManipulationSharedManager extends Struct {
-}
+class DirectManipulationSharedManager extends Struct {}
 
-class DCompManipulationCompositor extends Struct {
-}
-
+class DCompManipulationCompositor extends Struct {}

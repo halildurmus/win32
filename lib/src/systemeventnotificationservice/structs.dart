@@ -44,19 +44,25 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class QOCINFO extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwInSpeed;
-  @Uint32() external int dwOutSpeed;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwInSpeed;
+  @Uint32()
+  external int dwOutSpeed;
 }
 
-class SENS extends Struct {
-}
+class SENS extends Struct {}
 
 class SENS_QOCINFO extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwOutSpeed;
-  @Uint32() external int dwInSpeed;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwOutSpeed;
+  @Uint32()
+  external int dwInSpeed;
 }
-

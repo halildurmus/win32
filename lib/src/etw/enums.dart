@@ -304,4 +304,3 @@ class TDH_OUT_TYPE {
   static const TDH_OUTTYPE_REDUCEDSTRING = 0x0000012c;
   static const TDH_OUTTYPE_NOPRINT = 0x0000012d;
 }
-

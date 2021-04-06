@@ -145,4 +145,3 @@ class WMDM_TAG_DATATYPE {
   static const WMDM_TYPE_GUID = 0x00000006;
   static const WMDM_TYPE_DATE = 0x00000007;
 }
-

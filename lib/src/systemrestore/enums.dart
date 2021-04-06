@@ -14,4 +14,3 @@ class RESTOREPOINTINFOA_dwRestorePtType {
   static const MODIFY_SETTINGS = 0x0000000c;
   static const CANCELLED_OPERATION = 0x0000000d;
 }
-

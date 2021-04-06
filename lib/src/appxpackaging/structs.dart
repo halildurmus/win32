@@ -43,23 +43,19 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class AppxFactory extends Struct {
-}
+class AppxFactory extends Struct {}
 
-class AppxBundleFactory extends Struct {
-}
+class AppxBundleFactory extends Struct {}
 
-class AppxPackagingDiagnosticEventSinkManager extends Struct {
-}
+class AppxPackagingDiagnosticEventSinkManager extends Struct {}
 
-class AppxEncryptionFactory extends Struct {
-}
+class AppxEncryptionFactory extends Struct {}
 
-class AppxPackageEditor extends Struct {
-}
+class AppxPackageEditor extends Struct {}
 
 class APPX_PACKAGE_SETTINGS extends Struct {
-  @Int32() external int forceZip32;
+  @Int32()
+  external int forceZip32;
   external Pointer hashMethod;
 }
 
@@ -67,42 +63,53 @@ class APPX_PACKAGE_WRITER_PAYLOAD_STREAM extends Struct {
   external Pointer inputStream;
   external Pointer<Utf16> fileName;
   external Pointer<Utf16> contentType;
-  @Uint32() external int compressionOption;
+  @Uint32()
+  external int compressionOption;
 }
 
 class APPX_ENCRYPTED_PACKAGE_SETTINGS extends Struct {
-  @Uint32() external int keyLength;
+  @Uint32()
+  external int keyLength;
   external Pointer<Utf16> encryptionAlgorithm;
-  @Int32() external int useDiffusion;
+  @Int32()
+  external int useDiffusion;
   external Pointer blockMapHashAlgorithm;
 }
 
 class APPX_ENCRYPTED_PACKAGE_SETTINGS2 extends Struct {
-  @Uint32() external int keyLength;
+  @Uint32()
+  external int keyLength;
   external Pointer<Utf16> encryptionAlgorithm;
   external Pointer blockMapHashAlgorithm;
-  @Uint32() external int options;
+  @Uint32()
+  external int options;
 }
 
 class APPX_KEY_INFO extends Struct {
-  @Uint32() external int keyLength;
-  @Uint32() external int keyIdLength;
+  @Uint32()
+  external int keyLength;
+  @Uint32()
+  external int keyIdLength;
   external Pointer<Uint8> key;
   external Pointer<Uint8> keyId;
 }
 
 class APPX_ENCRYPTED_EXEMPTIONS extends Struct {
-  @Uint32() external int count;
+  @Uint32()
+  external int count;
   external Pointer<Pointer<Utf16>> plainTextFiles;
 }
 
 class PACKAGE_VERSION extends Struct {
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int Anonymous;
 }
 
 class PACKAGE_ID extends Struct {
-  @Uint32() external int reserved;
-  @Uint32() external int processorArchitecture;
+  @Uint32()
+  external int reserved;
+  @Uint32()
+  external int processorArchitecture;
   external PACKAGE_VERSION version;
   external Pointer<Utf16> name;
   external Pointer<Utf16> publisher;
@@ -115,11 +122,12 @@ class _PACKAGE_INFO_REFERENCE extends Struct {
 }
 
 class PACKAGE_INFO extends Struct {
-  @Uint32() external int reserved;
-  @Uint32() external int flags;
+  @Uint32()
+  external int reserved;
+  @Uint32()
+  external int flags;
   external Pointer<Utf16> path;
   external Pointer<Utf16> packageFullName;
   external Pointer<Utf16> packageFamilyName;
   external PACKAGE_ID packageId;
 }
-

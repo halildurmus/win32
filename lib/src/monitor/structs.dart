@@ -44,14 +44,17 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class PHYSICAL_MONITOR extends Struct {
-  @IntPtr() external int hPhysicalMonitor;
+  @IntPtr()
+  external int hPhysicalMonitor;
   @Array(128)
   external Array<Uint16> szPhysicalMonitorDescription;
 }
 
 class MC_TIMING_REPORT extends Struct {
-  @Uint32() external int dwHorizontalFrequencyInHZ;
-  @Uint32() external int dwVerticalFrequencyInHZ;
-  @Uint8() external int bTimingStatusByte;
+  @Uint32()
+  external int dwHorizontalFrequencyInHZ;
+  @Uint32()
+  external int dwVerticalFrequencyInHZ;
+  @Uint8()
+  external int bTimingStatusByte;
 }
-

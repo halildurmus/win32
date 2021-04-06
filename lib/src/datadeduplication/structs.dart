@@ -43,17 +43,20 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class DedupBackupSupport extends Struct {
-}
+class DedupBackupSupport extends Struct {}
 
 class DEDUP_CONTAINER_EXTENT extends Struct {
-  @Uint32() external int ContainerIndex;
-  @Int64() external int StartOffset;
-  @Int64() external int Length;
+  @Uint32()
+  external int ContainerIndex;
+  @Int64()
+  external int StartOffset;
+  @Int64()
+  external int Length;
 }
 
 class DDP_FILE_EXTENT extends Struct {
-  @Int64() external int Length;
-  @Int64() external int Offset;
+  @Int64()
+  external int Length;
+  @Int64()
+  external int Offset;
 }
-

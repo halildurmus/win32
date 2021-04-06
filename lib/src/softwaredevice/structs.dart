@@ -44,18 +44,20 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class HSWDEVICE extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class SW_DEVICE_CREATE_INFO extends Struct {
-  @Uint32() external int cbSize;
+  @Uint32()
+  external int cbSize;
   external Pointer<Utf16> pszInstanceId;
   external Pointer<Utf16> pszzHardwareIds;
   external Pointer<Utf16> pszzCompatibleIds;
   external Pointer<GUID> pContainerId;
-  @Uint32() external int CapabilityFlags;
+  @Uint32()
+  external int CapabilityFlags;
   external Pointer<Utf16> pszDeviceDescription;
   external Pointer<Utf16> pszDeviceLocation;
   external Pointer<SECURITY_DESCRIPTOR> pSecurityDescriptor;
 }
-

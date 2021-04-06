@@ -49,16 +49,20 @@ class MAGTRANSFORM extends Struct {
 }
 
 class MAGIMAGEHEADER extends Struct {
-  @Uint32() external int width;
-  @Uint32() external int height;
+  @Uint32()
+  external int width;
+  @Uint32()
+  external int height;
   external GUID format;
-  @Uint32() external int stride;
-  @Uint32() external int offset;
-  @IntPtr() external int cbSize;
+  @Uint32()
+  external int stride;
+  @Uint32()
+  external int offset;
+  @IntPtr()
+  external int cbSize;
 }
 
 class MAGCOLOREFFECT extends Struct {
   @Array(25)
   external Array<Float> transform;
 }
-

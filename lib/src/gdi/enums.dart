@@ -627,4 +627,3 @@ class TT_ulPrivs {
   static const LICENSE_NOEMBEDDING = 0x00000002;
   static const LICENSE_DEFAULT = 0x00000000;
 }
-

@@ -7,4 +7,3 @@ class SESSION_BUFFER_stateFlags {
   static const HANGUP_COMPLETE = 0x00000005;
   static const SESSION_ABORTED = 0x00000006;
 }
-

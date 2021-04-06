@@ -44,71 +44,100 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class FaceRectInfoBlobHeader extends Struct {
-  @Uint32() external int Size;
-  @Uint32() external int Count;
+  @Uint32()
+  external int Size;
+  @Uint32()
+  external int Count;
 }
 
 class FaceRectInfo extends Struct {
   external RECT Region;
-  @Int32() external int confidenceLevel;
+  @Int32()
+  external int confidenceLevel;
 }
 
 class FaceCharacterizationBlobHeader extends Struct {
-  @Uint32() external int Size;
-  @Uint32() external int Count;
+  @Uint32()
+  external int Size;
+  @Uint32()
+  external int Count;
 }
 
 class FaceCharacterization extends Struct {
-  @Uint32() external int BlinkScoreLeft;
-  @Uint32() external int BlinkScoreRight;
-  @Uint32() external int FacialExpression;
-  @Uint32() external int FacialExpressionScore;
+  @Uint32()
+  external int BlinkScoreLeft;
+  @Uint32()
+  external int BlinkScoreRight;
+  @Uint32()
+  external int FacialExpression;
+  @Uint32()
+  external int FacialExpressionScore;
 }
 
 class CapturedMetadataExposureCompensation extends Struct {
-  @Uint64() external int Flags;
-  @Int32() external int Value;
+  @Uint64()
+  external int Flags;
+  @Int32()
+  external int Value;
 }
 
 class CapturedMetadataISOGains extends Struct {
-  @Float() external double AnalogGain;
-  @Float() external double DigitalGain;
+  @Float()
+  external double AnalogGain;
+  @Float()
+  external double DigitalGain;
 }
 
 class CapturedMetadataWhiteBalanceGains extends Struct {
-  @Float() external double R;
-  @Float() external double G;
-  @Float() external double B;
+  @Float()
+  external double R;
+  @Float()
+  external double G;
+  @Float()
+  external double B;
 }
 
 class MetadataTimeStamps extends Struct {
-  @Uint32() external int Flags;
-  @Int64() external int Device;
-  @Int64() external int Presentation;
+  @Uint32()
+  external int Flags;
+  @Int64()
+  external int Device;
+  @Int64()
+  external int Presentation;
 }
 
 class HistogramGrid extends Struct {
-  @Uint32() external int Width;
-  @Uint32() external int Height;
+  @Uint32()
+  external int Width;
+  @Uint32()
+  external int Height;
   external RECT Region;
 }
 
 class HistogramBlobHeader extends Struct {
-  @Uint32() external int Size;
-  @Uint32() external int Histograms;
+  @Uint32()
+  external int Size;
+  @Uint32()
+  external int Histograms;
 }
 
 class HistogramHeader extends Struct {
-  @Uint32() external int Size;
-  @Uint32() external int Bins;
-  @Uint32() external int FourCC;
-  @Uint32() external int ChannelMasks;
+  @Uint32()
+  external int Size;
+  @Uint32()
+  external int Bins;
+  @Uint32()
+  external int FourCC;
+  @Uint32()
+  external int ChannelMasks;
   external HistogramGrid Grid;
 }
 
 class HistogramDataHeader extends Struct {
-  @Uint32() external int Size;
-  @Uint32() external int ChannelMask;
-  @Uint32() external int Linear;
+  @Uint32()
+  external int Size;
+  @Uint32()
+  external int ChannelMask;
+  @Uint32()
+  external int Linear;
 }
-

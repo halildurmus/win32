@@ -44,24 +44,30 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class WEB_SOCKET_HANDLE extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class WEB_SOCKET_PROPERTY extends Struct {
-  @Uint32() external int Type;
+  @Uint32()
+  external int Type;
   external Pointer pvValue;
-  @Uint32() external int ulValueSize;
+  @Uint32()
+  external int ulValueSize;
 }
 
 class WEB_SOCKET_HTTP_HEADER extends Struct {
   external Pointer<Utf8> pcName;
-  @Uint32() external int ulNameLength;
+  @Uint32()
+  external int ulNameLength;
   external Pointer<Utf8> pcValue;
-  @Uint32() external int ulValueLength;
+  @Uint32()
+  external int ulValueLength;
 }
 
 class WEB_SOCKET_BUFFER extends Struct {
-  @Uint32() external int Data;
-  @Uint32() external int CloseStatus;
+  @Uint32()
+  external int Data;
+  @Uint32()
+  external int CloseStatus;
 }
-

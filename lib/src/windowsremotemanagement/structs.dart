@@ -44,22 +44,27 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class WSMAN_DATA_TEXT extends Struct {
-  @Uint32() external int bufferLength;
+  @Uint32()
+  external int bufferLength;
   external Pointer<Utf16> buffer;
 }
 
 class WSMAN_DATA_BINARY extends Struct {
-  @Uint32() external int dataLength;
+  @Uint32()
+  external int dataLength;
   external Pointer<Uint8> data;
 }
 
 class WSMAN_DATA extends Struct {
-  @Uint32() external int type;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int type;
+  @Uint32()
+  external int Anonymous;
 }
 
 class WSMAN_ERROR extends Struct {
-  @Uint32() external int code;
+  @Uint32()
+  external int code;
   external Pointer<Utf16> errorDetail;
   external Pointer<Utf16> language;
   external Pointer<Utf16> machineName;
@@ -72,26 +77,33 @@ class WSMAN_USERNAME_PASSWORD_CREDS extends Struct {
 }
 
 class WSMAN_AUTHENTICATION_CREDENTIALS extends Struct {
-  @Uint32() external int authenticationMechanism;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int authenticationMechanism;
+  @Uint32()
+  external int Anonymous;
 }
 
 class WSMAN_OPTION extends Struct {
   external Pointer<Utf16> name;
   external Pointer<Utf16> value;
-  @Int32() external int mustComply;
+  @Int32()
+  external int mustComply;
 }
 
 class WSMAN_OPTION_SET extends Struct {
-  @Uint32() external int optionsCount;
+  @Uint32()
+  external int optionsCount;
   external Pointer<WSMAN_OPTION> options;
-  @Int32() external int optionsMustUnderstand;
+  @Int32()
+  external int optionsMustUnderstand;
 }
 
 class WSMAN_OPTION_SETEX extends Struct {
-  @Uint32() external int optionsCount;
+  @Uint32()
+  external int optionsCount;
   external Pointer<WSMAN_OPTION> options;
-  @Int32() external int optionsMustUnderstand;
+  @Int32()
+  external int optionsMustUnderstand;
   external Pointer<Pointer<Utf16>> optionTypes;
 }
 
@@ -101,7 +113,8 @@ class WSMAN_KEY extends Struct {
 }
 
 class WSMAN_SELECTOR_SET extends Struct {
-  @Uint32() external int numberKeys;
+  @Uint32()
+  external int numberKeys;
   external Pointer<WSMAN_KEY> keys;
 }
 
@@ -121,7 +134,8 @@ class WSMAN_OPERATION_INFO extends Struct {
   external WSMAN_SELECTOR_SET selectorSet;
   external WSMAN_OPTION_SET optionSet;
   external Pointer reserved;
-  @Uint32() external int version;
+  @Uint32()
+  external int version;
 }
 
 class WSMAN_OPERATION_INFOEX extends Struct {
@@ -129,33 +143,31 @@ class WSMAN_OPERATION_INFOEX extends Struct {
   external WSMAN_FILTER filter;
   external WSMAN_SELECTOR_SET selectorSet;
   external WSMAN_OPTION_SETEX optionSet;
-  @Uint32() external int version;
+  @Uint32()
+  external int version;
   external Pointer<Utf16> uiLocale;
   external Pointer<Utf16> dataLocale;
 }
 
-class WSMAN_API extends Struct {
-}
+class WSMAN_API extends Struct {}
 
 class WSMAN_PROXY_INFO extends Struct {
-  @Uint32() external int accessType;
+  @Uint32()
+  external int accessType;
   external WSMAN_AUTHENTICATION_CREDENTIALS authenticationCredentials;
 }
 
-class WSMAN_SESSION extends Struct {
-}
+class WSMAN_SESSION extends Struct {}
 
-class WSMAN_OPERATION extends Struct {
-}
+class WSMAN_OPERATION extends Struct {}
 
-class WSMAN_SHELL extends Struct {
-}
+class WSMAN_SHELL extends Struct {}
 
-class WSMAN_COMMAND extends Struct {
-}
+class WSMAN_COMMAND extends Struct {}
 
 class WSMAN_STREAM_ID_SET extends Struct {
-  @Uint32() external int streamIDsCount;
+  @Uint32()
+  external int streamIDsCount;
   external Pointer<Pointer<Utf16>> streamIDs;
 }
 
@@ -165,14 +177,16 @@ class WSMAN_ENVIRONMENT_VARIABLE extends Struct {
 }
 
 class WSMAN_ENVIRONMENT_VARIABLE_SET extends Struct {
-  @Uint32() external int varsCount;
+  @Uint32()
+  external int varsCount;
   external Pointer<WSMAN_ENVIRONMENT_VARIABLE> vars;
 }
 
 class WSMAN_SHELL_STARTUP_INFO_V10 extends Struct {
   external Pointer<WSMAN_STREAM_ID_SET> inputStreamSet;
   external Pointer<WSMAN_STREAM_ID_SET> outputStreamSet;
-  @Uint32() external int idleTimeoutMs;
+  @Uint32()
+  external int idleTimeoutMs;
   external Pointer<Utf16> workingDirectory;
   external Pointer<WSMAN_ENVIRONMENT_VARIABLE_SET> variableSet;
 }
@@ -183,14 +197,16 @@ class WSMAN_SHELL_STARTUP_INFO_V11 extends Struct {
 }
 
 class WSMAN_SHELL_DISCONNECT_INFO extends Struct {
-  @Uint32() external int idleTimeoutMs;
+  @Uint32()
+  external int idleTimeoutMs;
 }
 
 class WSMAN_RECEIVE_DATA_RESULT extends Struct {
   external Pointer<Utf16> streamId;
   external WSMAN_DATA streamData;
   external Pointer<Utf16> commandState;
-  @Uint32() external int exitCode;
+  @Uint32()
+  external int exitCode;
 }
 
 class WSMAN_CONNECT_DATA extends Struct {
@@ -213,7 +229,8 @@ class WSMAN_SHELL_ASYNC extends Struct {
 }
 
 class WSMAN_COMMAND_ARG_SET extends Struct {
-  @Uint32() external int argsCount;
+  @Uint32()
+  external int argsCount;
   external Pointer<Pointer<Utf16>> args;
 }
 
@@ -228,7 +245,8 @@ class WSMAN_SENDER_DETAILS extends Struct {
   external Pointer<Utf16> senderName;
   external Pointer<Utf16> authenticationMechanism;
   external Pointer<WSMAN_CERTIFICATE_DETAILS> certificateDetails;
-  @IntPtr() external int clientToken;
+  @IntPtr()
+  external int clientToken;
   external Pointer<Utf16> httpURL;
 }
 
@@ -237,21 +255,24 @@ class WSMAN_PLUGIN_REQUEST extends Struct {
   external Pointer<Utf16> locale;
   external Pointer<Utf16> resourceUri;
   external Pointer<WSMAN_OPERATION_INFO> operationInfo;
-  @Int32() external int shutdownNotification;
-  @IntPtr() external int shutdownNotificationHandle;
+  @Int32()
+  external int shutdownNotification;
+  @IntPtr()
+  external int shutdownNotificationHandle;
   external Pointer<Utf16> dataLocale;
 }
 
 class WSMAN_AUTHZ_QUOTA extends Struct {
-  @Uint32() external int maxAllowedConcurrentShells;
-  @Uint32() external int maxAllowedConcurrentOperations;
-  @Uint32() external int timeslotSize;
-  @Uint32() external int maxAllowedOperationsPerTimeslot;
+  @Uint32()
+  external int maxAllowedConcurrentShells;
+  @Uint32()
+  external int maxAllowedConcurrentOperations;
+  @Uint32()
+  external int timeslotSize;
+  @Uint32()
+  external int maxAllowedOperationsPerTimeslot;
 }
 
-class WSMan extends Struct {
-}
+class WSMan extends Struct {}
 
-class WSManInternal extends Struct {
-}
-
+class WSManInternal extends Struct {}

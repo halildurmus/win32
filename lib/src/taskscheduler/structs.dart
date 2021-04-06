@@ -44,23 +44,31 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class DAILY extends Struct {
-  @Uint16() external int DaysInterval;
+  @Uint16()
+  external int DaysInterval;
 }
 
 class WEEKLY extends Struct {
-  @Uint16() external int WeeksInterval;
-  @Uint16() external int rgfDaysOfTheWeek;
+  @Uint16()
+  external int WeeksInterval;
+  @Uint16()
+  external int rgfDaysOfTheWeek;
 }
 
 class MONTHLYDATE extends Struct {
-  @Uint32() external int rgfDays;
-  @Uint16() external int rgfMonths;
+  @Uint32()
+  external int rgfDays;
+  @Uint16()
+  external int rgfMonths;
 }
 
 class MONTHLYDOW extends Struct {
-  @Uint16() external int wWhichWeek;
-  @Uint16() external int rgfDaysOfTheWeek;
-  @Uint16() external int rgfMonths;
+  @Uint16()
+  external int wWhichWeek;
+  @Uint16()
+  external int rgfDaysOfTheWeek;
+  @Uint16()
+  external int rgfMonths;
 }
 
 class TRIGGER_TYPE_UNION extends Struct {
@@ -71,31 +79,43 @@ class TRIGGER_TYPE_UNION extends Struct {
 }
 
 class TASK_TRIGGER extends Struct {
-  @Uint16() external int cbTriggerSize;
-  @Uint16() external int Reserved1;
-  @Uint16() external int wBeginYear;
-  @Uint16() external int wBeginMonth;
-  @Uint16() external int wBeginDay;
-  @Uint16() external int wEndYear;
-  @Uint16() external int wEndMonth;
-  @Uint16() external int wEndDay;
-  @Uint16() external int wStartHour;
-  @Uint16() external int wStartMinute;
-  @Uint32() external int MinutesDuration;
-  @Uint32() external int MinutesInterval;
-  @Uint32() external int rgFlags;
-  @Uint32() external int TriggerType;
+  @Uint16()
+  external int cbTriggerSize;
+  @Uint16()
+  external int Reserved1;
+  @Uint16()
+  external int wBeginYear;
+  @Uint16()
+  external int wBeginMonth;
+  @Uint16()
+  external int wBeginDay;
+  @Uint16()
+  external int wEndYear;
+  @Uint16()
+  external int wEndMonth;
+  @Uint16()
+  external int wEndDay;
+  @Uint16()
+  external int wStartHour;
+  @Uint16()
+  external int wStartMinute;
+  @Uint32()
+  external int MinutesDuration;
+  @Uint32()
+  external int MinutesInterval;
+  @Uint32()
+  external int rgFlags;
+  @Uint32()
+  external int TriggerType;
   external TRIGGER_TYPE_UNION Type;
-  @Uint16() external int Reserved2;
-  @Uint16() external int wRandomMinutesInterval;
+  @Uint16()
+  external int Reserved2;
+  @Uint16()
+  external int wRandomMinutesInterval;
 }
 
-class TaskScheduler extends Struct {
-}
+class TaskScheduler extends Struct {}
 
-class TaskHandlerPS extends Struct {
-}
+class TaskHandlerPS extends Struct {}
 
-class TaskHandlerStatusPS extends Struct {
-}
-
+class TaskHandlerStatusPS extends Struct {}

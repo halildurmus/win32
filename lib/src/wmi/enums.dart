@@ -910,4 +910,3 @@ class WbemTextFlagEnum {
 class WbemTimeout {
   static const wbemTimeoutInfinite = 0xffffffff;
 }
-

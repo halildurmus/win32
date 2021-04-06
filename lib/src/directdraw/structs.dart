@@ -43,393 +43,679 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class _DDFXROP extends Struct {
-}
+class _DDFXROP extends Struct {}
 
 class DDARGB extends Struct {
-  @Uint8() external int blue;
-  @Uint8() external int green;
-  @Uint8() external int red;
-  @Uint8() external int alpha;
+  @Uint8()
+  external int blue;
+  @Uint8()
+  external int green;
+  @Uint8()
+  external int red;
+  @Uint8()
+  external int alpha;
 }
 
 class DDRGBA extends Struct {
-  @Uint8() external int red;
-  @Uint8() external int green;
-  @Uint8() external int blue;
-  @Uint8() external int alpha;
+  @Uint8()
+  external int red;
+  @Uint8()
+  external int green;
+  @Uint8()
+  external int blue;
+  @Uint8()
+  external int alpha;
 }
 
 class DDBLTFX extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwDDFX;
-  @Uint32() external int dwROP;
-  @Uint32() external int dwDDROP;
-  @Uint32() external int dwRotationAngle;
-  @Uint32() external int dwZBufferOpCode;
-  @Uint32() external int dwZBufferLow;
-  @Uint32() external int dwZBufferHigh;
-  @Uint32() external int dwZBufferBaseDest;
-  @Uint32() external int dwZDestConstBitDepth;
-  @Uint32() external int Anonymous1;
-  @Uint32() external int dwZSrcConstBitDepth;
-  @Uint32() external int Anonymous2;
-  @Uint32() external int dwAlphaEdgeBlendBitDepth;
-  @Uint32() external int dwAlphaEdgeBlend;
-  @Uint32() external int dwReserved;
-  @Uint32() external int dwAlphaDestConstBitDepth;
-  @Uint32() external int Anonymous3;
-  @Uint32() external int dwAlphaSrcConstBitDepth;
-  @Uint32() external int Anonymous4;
-  @Uint32() external int Anonymous5;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwDDFX;
+  @Uint32()
+  external int dwROP;
+  @Uint32()
+  external int dwDDROP;
+  @Uint32()
+  external int dwRotationAngle;
+  @Uint32()
+  external int dwZBufferOpCode;
+  @Uint32()
+  external int dwZBufferLow;
+  @Uint32()
+  external int dwZBufferHigh;
+  @Uint32()
+  external int dwZBufferBaseDest;
+  @Uint32()
+  external int dwZDestConstBitDepth;
+  @Uint32()
+  external int Anonymous1;
+  @Uint32()
+  external int dwZSrcConstBitDepth;
+  @Uint32()
+  external int Anonymous2;
+  @Uint32()
+  external int dwAlphaEdgeBlendBitDepth;
+  @Uint32()
+  external int dwAlphaEdgeBlend;
+  @Uint32()
+  external int dwReserved;
+  @Uint32()
+  external int dwAlphaDestConstBitDepth;
+  @Uint32()
+  external int Anonymous3;
+  @Uint32()
+  external int dwAlphaSrcConstBitDepth;
+  @Uint32()
+  external int Anonymous4;
+  @Uint32()
+  external int Anonymous5;
   external DDCOLORKEY ddckDestColorkey;
   external DDCOLORKEY ddckSrcColorkey;
 }
 
 class DDSCAPS extends Struct {
-  @Uint32() external int dwCaps;
+  @Uint32()
+  external int dwCaps;
 }
 
 class DDOSCAPS extends Struct {
-  @Uint32() external int dwCaps;
+  @Uint32()
+  external int dwCaps;
 }
 
 class DDSCAPSEX extends Struct {
-  @Uint32() external int dwCaps2;
-  @Uint32() external int dwCaps3;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int dwCaps2;
+  @Uint32()
+  external int dwCaps3;
+  @Uint32()
+  external int Anonymous;
 }
 
 class DDSCAPS2 extends Struct {
-  @Uint32() external int dwCaps;
-  @Uint32() external int dwCaps2;
-  @Uint32() external int dwCaps3;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int dwCaps;
+  @Uint32()
+  external int dwCaps2;
+  @Uint32()
+  external int dwCaps3;
+  @Uint32()
+  external int Anonymous;
 }
 
 class DDCAPS_DX1 extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwCaps;
-  @Uint32() external int dwCaps2;
-  @Uint32() external int dwCKeyCaps;
-  @Uint32() external int dwFXCaps;
-  @Uint32() external int dwFXAlphaCaps;
-  @Uint32() external int dwPalCaps;
-  @Uint32() external int dwSVCaps;
-  @Uint32() external int dwAlphaBltConstBitDepths;
-  @Uint32() external int dwAlphaBltPixelBitDepths;
-  @Uint32() external int dwAlphaBltSurfaceBitDepths;
-  @Uint32() external int dwAlphaOverlayConstBitDepths;
-  @Uint32() external int dwAlphaOverlayPixelBitDepths;
-  @Uint32() external int dwAlphaOverlaySurfaceBitDepths;
-  @Uint32() external int dwZBufferBitDepths;
-  @Uint32() external int dwVidMemTotal;
-  @Uint32() external int dwVidMemFree;
-  @Uint32() external int dwMaxVisibleOverlays;
-  @Uint32() external int dwCurrVisibleOverlays;
-  @Uint32() external int dwNumFourCCCodes;
-  @Uint32() external int dwAlignBoundarySrc;
-  @Uint32() external int dwAlignSizeSrc;
-  @Uint32() external int dwAlignBoundaryDest;
-  @Uint32() external int dwAlignSizeDest;
-  @Uint32() external int dwAlignStrideAlign;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwCaps;
+  @Uint32()
+  external int dwCaps2;
+  @Uint32()
+  external int dwCKeyCaps;
+  @Uint32()
+  external int dwFXCaps;
+  @Uint32()
+  external int dwFXAlphaCaps;
+  @Uint32()
+  external int dwPalCaps;
+  @Uint32()
+  external int dwSVCaps;
+  @Uint32()
+  external int dwAlphaBltConstBitDepths;
+  @Uint32()
+  external int dwAlphaBltPixelBitDepths;
+  @Uint32()
+  external int dwAlphaBltSurfaceBitDepths;
+  @Uint32()
+  external int dwAlphaOverlayConstBitDepths;
+  @Uint32()
+  external int dwAlphaOverlayPixelBitDepths;
+  @Uint32()
+  external int dwAlphaOverlaySurfaceBitDepths;
+  @Uint32()
+  external int dwZBufferBitDepths;
+  @Uint32()
+  external int dwVidMemTotal;
+  @Uint32()
+  external int dwVidMemFree;
+  @Uint32()
+  external int dwMaxVisibleOverlays;
+  @Uint32()
+  external int dwCurrVisibleOverlays;
+  @Uint32()
+  external int dwNumFourCCCodes;
+  @Uint32()
+  external int dwAlignBoundarySrc;
+  @Uint32()
+  external int dwAlignSizeSrc;
+  @Uint32()
+  external int dwAlignBoundaryDest;
+  @Uint32()
+  external int dwAlignSizeDest;
+  @Uint32()
+  external int dwAlignStrideAlign;
   @Array(8)
   external Array<Uint32> dwRops;
   external DDSCAPS ddsCaps;
-  @Uint32() external int dwMinOverlayStretch;
-  @Uint32() external int dwMaxOverlayStretch;
-  @Uint32() external int dwMinLiveVideoStretch;
-  @Uint32() external int dwMaxLiveVideoStretch;
-  @Uint32() external int dwMinHwCodecStretch;
-  @Uint32() external int dwMaxHwCodecStretch;
-  @Uint32() external int dwReserved1;
-  @Uint32() external int dwReserved2;
-  @Uint32() external int dwReserved3;
+  @Uint32()
+  external int dwMinOverlayStretch;
+  @Uint32()
+  external int dwMaxOverlayStretch;
+  @Uint32()
+  external int dwMinLiveVideoStretch;
+  @Uint32()
+  external int dwMaxLiveVideoStretch;
+  @Uint32()
+  external int dwMinHwCodecStretch;
+  @Uint32()
+  external int dwMaxHwCodecStretch;
+  @Uint32()
+  external int dwReserved1;
+  @Uint32()
+  external int dwReserved2;
+  @Uint32()
+  external int dwReserved3;
 }
 
 class DDCAPS_DX3 extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwCaps;
-  @Uint32() external int dwCaps2;
-  @Uint32() external int dwCKeyCaps;
-  @Uint32() external int dwFXCaps;
-  @Uint32() external int dwFXAlphaCaps;
-  @Uint32() external int dwPalCaps;
-  @Uint32() external int dwSVCaps;
-  @Uint32() external int dwAlphaBltConstBitDepths;
-  @Uint32() external int dwAlphaBltPixelBitDepths;
-  @Uint32() external int dwAlphaBltSurfaceBitDepths;
-  @Uint32() external int dwAlphaOverlayConstBitDepths;
-  @Uint32() external int dwAlphaOverlayPixelBitDepths;
-  @Uint32() external int dwAlphaOverlaySurfaceBitDepths;
-  @Uint32() external int dwZBufferBitDepths;
-  @Uint32() external int dwVidMemTotal;
-  @Uint32() external int dwVidMemFree;
-  @Uint32() external int dwMaxVisibleOverlays;
-  @Uint32() external int dwCurrVisibleOverlays;
-  @Uint32() external int dwNumFourCCCodes;
-  @Uint32() external int dwAlignBoundarySrc;
-  @Uint32() external int dwAlignSizeSrc;
-  @Uint32() external int dwAlignBoundaryDest;
-  @Uint32() external int dwAlignSizeDest;
-  @Uint32() external int dwAlignStrideAlign;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwCaps;
+  @Uint32()
+  external int dwCaps2;
+  @Uint32()
+  external int dwCKeyCaps;
+  @Uint32()
+  external int dwFXCaps;
+  @Uint32()
+  external int dwFXAlphaCaps;
+  @Uint32()
+  external int dwPalCaps;
+  @Uint32()
+  external int dwSVCaps;
+  @Uint32()
+  external int dwAlphaBltConstBitDepths;
+  @Uint32()
+  external int dwAlphaBltPixelBitDepths;
+  @Uint32()
+  external int dwAlphaBltSurfaceBitDepths;
+  @Uint32()
+  external int dwAlphaOverlayConstBitDepths;
+  @Uint32()
+  external int dwAlphaOverlayPixelBitDepths;
+  @Uint32()
+  external int dwAlphaOverlaySurfaceBitDepths;
+  @Uint32()
+  external int dwZBufferBitDepths;
+  @Uint32()
+  external int dwVidMemTotal;
+  @Uint32()
+  external int dwVidMemFree;
+  @Uint32()
+  external int dwMaxVisibleOverlays;
+  @Uint32()
+  external int dwCurrVisibleOverlays;
+  @Uint32()
+  external int dwNumFourCCCodes;
+  @Uint32()
+  external int dwAlignBoundarySrc;
+  @Uint32()
+  external int dwAlignSizeSrc;
+  @Uint32()
+  external int dwAlignBoundaryDest;
+  @Uint32()
+  external int dwAlignSizeDest;
+  @Uint32()
+  external int dwAlignStrideAlign;
   @Array(8)
   external Array<Uint32> dwRops;
   external DDSCAPS ddsCaps;
-  @Uint32() external int dwMinOverlayStretch;
-  @Uint32() external int dwMaxOverlayStretch;
-  @Uint32() external int dwMinLiveVideoStretch;
-  @Uint32() external int dwMaxLiveVideoStretch;
-  @Uint32() external int dwMinHwCodecStretch;
-  @Uint32() external int dwMaxHwCodecStretch;
-  @Uint32() external int dwReserved1;
-  @Uint32() external int dwReserved2;
-  @Uint32() external int dwReserved3;
-  @Uint32() external int dwSVBCaps;
-  @Uint32() external int dwSVBCKeyCaps;
-  @Uint32() external int dwSVBFXCaps;
+  @Uint32()
+  external int dwMinOverlayStretch;
+  @Uint32()
+  external int dwMaxOverlayStretch;
+  @Uint32()
+  external int dwMinLiveVideoStretch;
+  @Uint32()
+  external int dwMaxLiveVideoStretch;
+  @Uint32()
+  external int dwMinHwCodecStretch;
+  @Uint32()
+  external int dwMaxHwCodecStretch;
+  @Uint32()
+  external int dwReserved1;
+  @Uint32()
+  external int dwReserved2;
+  @Uint32()
+  external int dwReserved3;
+  @Uint32()
+  external int dwSVBCaps;
+  @Uint32()
+  external int dwSVBCKeyCaps;
+  @Uint32()
+  external int dwSVBFXCaps;
   @Array(8)
   external Array<Uint32> dwSVBRops;
-  @Uint32() external int dwVSBCaps;
-  @Uint32() external int dwVSBCKeyCaps;
-  @Uint32() external int dwVSBFXCaps;
+  @Uint32()
+  external int dwVSBCaps;
+  @Uint32()
+  external int dwVSBCKeyCaps;
+  @Uint32()
+  external int dwVSBFXCaps;
   @Array(8)
   external Array<Uint32> dwVSBRops;
-  @Uint32() external int dwSSBCaps;
-  @Uint32() external int dwSSBCKeyCaps;
-  @Uint32() external int dwSSBFXCaps;
+  @Uint32()
+  external int dwSSBCaps;
+  @Uint32()
+  external int dwSSBCKeyCaps;
+  @Uint32()
+  external int dwSSBFXCaps;
   @Array(8)
   external Array<Uint32> dwSSBRops;
-  @Uint32() external int dwReserved4;
-  @Uint32() external int dwReserved5;
-  @Uint32() external int dwReserved6;
+  @Uint32()
+  external int dwReserved4;
+  @Uint32()
+  external int dwReserved5;
+  @Uint32()
+  external int dwReserved6;
 }
 
 class DDCAPS_DX5 extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwCaps;
-  @Uint32() external int dwCaps2;
-  @Uint32() external int dwCKeyCaps;
-  @Uint32() external int dwFXCaps;
-  @Uint32() external int dwFXAlphaCaps;
-  @Uint32() external int dwPalCaps;
-  @Uint32() external int dwSVCaps;
-  @Uint32() external int dwAlphaBltConstBitDepths;
-  @Uint32() external int dwAlphaBltPixelBitDepths;
-  @Uint32() external int dwAlphaBltSurfaceBitDepths;
-  @Uint32() external int dwAlphaOverlayConstBitDepths;
-  @Uint32() external int dwAlphaOverlayPixelBitDepths;
-  @Uint32() external int dwAlphaOverlaySurfaceBitDepths;
-  @Uint32() external int dwZBufferBitDepths;
-  @Uint32() external int dwVidMemTotal;
-  @Uint32() external int dwVidMemFree;
-  @Uint32() external int dwMaxVisibleOverlays;
-  @Uint32() external int dwCurrVisibleOverlays;
-  @Uint32() external int dwNumFourCCCodes;
-  @Uint32() external int dwAlignBoundarySrc;
-  @Uint32() external int dwAlignSizeSrc;
-  @Uint32() external int dwAlignBoundaryDest;
-  @Uint32() external int dwAlignSizeDest;
-  @Uint32() external int dwAlignStrideAlign;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwCaps;
+  @Uint32()
+  external int dwCaps2;
+  @Uint32()
+  external int dwCKeyCaps;
+  @Uint32()
+  external int dwFXCaps;
+  @Uint32()
+  external int dwFXAlphaCaps;
+  @Uint32()
+  external int dwPalCaps;
+  @Uint32()
+  external int dwSVCaps;
+  @Uint32()
+  external int dwAlphaBltConstBitDepths;
+  @Uint32()
+  external int dwAlphaBltPixelBitDepths;
+  @Uint32()
+  external int dwAlphaBltSurfaceBitDepths;
+  @Uint32()
+  external int dwAlphaOverlayConstBitDepths;
+  @Uint32()
+  external int dwAlphaOverlayPixelBitDepths;
+  @Uint32()
+  external int dwAlphaOverlaySurfaceBitDepths;
+  @Uint32()
+  external int dwZBufferBitDepths;
+  @Uint32()
+  external int dwVidMemTotal;
+  @Uint32()
+  external int dwVidMemFree;
+  @Uint32()
+  external int dwMaxVisibleOverlays;
+  @Uint32()
+  external int dwCurrVisibleOverlays;
+  @Uint32()
+  external int dwNumFourCCCodes;
+  @Uint32()
+  external int dwAlignBoundarySrc;
+  @Uint32()
+  external int dwAlignSizeSrc;
+  @Uint32()
+  external int dwAlignBoundaryDest;
+  @Uint32()
+  external int dwAlignSizeDest;
+  @Uint32()
+  external int dwAlignStrideAlign;
   @Array(8)
   external Array<Uint32> dwRops;
   external DDSCAPS ddsCaps;
-  @Uint32() external int dwMinOverlayStretch;
-  @Uint32() external int dwMaxOverlayStretch;
-  @Uint32() external int dwMinLiveVideoStretch;
-  @Uint32() external int dwMaxLiveVideoStretch;
-  @Uint32() external int dwMinHwCodecStretch;
-  @Uint32() external int dwMaxHwCodecStretch;
-  @Uint32() external int dwReserved1;
-  @Uint32() external int dwReserved2;
-  @Uint32() external int dwReserved3;
-  @Uint32() external int dwSVBCaps;
-  @Uint32() external int dwSVBCKeyCaps;
-  @Uint32() external int dwSVBFXCaps;
+  @Uint32()
+  external int dwMinOverlayStretch;
+  @Uint32()
+  external int dwMaxOverlayStretch;
+  @Uint32()
+  external int dwMinLiveVideoStretch;
+  @Uint32()
+  external int dwMaxLiveVideoStretch;
+  @Uint32()
+  external int dwMinHwCodecStretch;
+  @Uint32()
+  external int dwMaxHwCodecStretch;
+  @Uint32()
+  external int dwReserved1;
+  @Uint32()
+  external int dwReserved2;
+  @Uint32()
+  external int dwReserved3;
+  @Uint32()
+  external int dwSVBCaps;
+  @Uint32()
+  external int dwSVBCKeyCaps;
+  @Uint32()
+  external int dwSVBFXCaps;
   @Array(8)
   external Array<Uint32> dwSVBRops;
-  @Uint32() external int dwVSBCaps;
-  @Uint32() external int dwVSBCKeyCaps;
-  @Uint32() external int dwVSBFXCaps;
+  @Uint32()
+  external int dwVSBCaps;
+  @Uint32()
+  external int dwVSBCKeyCaps;
+  @Uint32()
+  external int dwVSBFXCaps;
   @Array(8)
   external Array<Uint32> dwVSBRops;
-  @Uint32() external int dwSSBCaps;
-  @Uint32() external int dwSSBCKeyCaps;
-  @Uint32() external int dwSSBFXCaps;
+  @Uint32()
+  external int dwSSBCaps;
+  @Uint32()
+  external int dwSSBCKeyCaps;
+  @Uint32()
+  external int dwSSBFXCaps;
   @Array(8)
   external Array<Uint32> dwSSBRops;
-  @Uint32() external int dwMaxVideoPorts;
-  @Uint32() external int dwCurrVideoPorts;
-  @Uint32() external int dwSVBCaps2;
-  @Uint32() external int dwNLVBCaps;
-  @Uint32() external int dwNLVBCaps2;
-  @Uint32() external int dwNLVBCKeyCaps;
-  @Uint32() external int dwNLVBFXCaps;
+  @Uint32()
+  external int dwMaxVideoPorts;
+  @Uint32()
+  external int dwCurrVideoPorts;
+  @Uint32()
+  external int dwSVBCaps2;
+  @Uint32()
+  external int dwNLVBCaps;
+  @Uint32()
+  external int dwNLVBCaps2;
+  @Uint32()
+  external int dwNLVBCKeyCaps;
+  @Uint32()
+  external int dwNLVBFXCaps;
   @Array(8)
   external Array<Uint32> dwNLVBRops;
 }
 
 class DDCAPS_DX6 extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwCaps;
-  @Uint32() external int dwCaps2;
-  @Uint32() external int dwCKeyCaps;
-  @Uint32() external int dwFXCaps;
-  @Uint32() external int dwFXAlphaCaps;
-  @Uint32() external int dwPalCaps;
-  @Uint32() external int dwSVCaps;
-  @Uint32() external int dwAlphaBltConstBitDepths;
-  @Uint32() external int dwAlphaBltPixelBitDepths;
-  @Uint32() external int dwAlphaBltSurfaceBitDepths;
-  @Uint32() external int dwAlphaOverlayConstBitDepths;
-  @Uint32() external int dwAlphaOverlayPixelBitDepths;
-  @Uint32() external int dwAlphaOverlaySurfaceBitDepths;
-  @Uint32() external int dwZBufferBitDepths;
-  @Uint32() external int dwVidMemTotal;
-  @Uint32() external int dwVidMemFree;
-  @Uint32() external int dwMaxVisibleOverlays;
-  @Uint32() external int dwCurrVisibleOverlays;
-  @Uint32() external int dwNumFourCCCodes;
-  @Uint32() external int dwAlignBoundarySrc;
-  @Uint32() external int dwAlignSizeSrc;
-  @Uint32() external int dwAlignBoundaryDest;
-  @Uint32() external int dwAlignSizeDest;
-  @Uint32() external int dwAlignStrideAlign;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwCaps;
+  @Uint32()
+  external int dwCaps2;
+  @Uint32()
+  external int dwCKeyCaps;
+  @Uint32()
+  external int dwFXCaps;
+  @Uint32()
+  external int dwFXAlphaCaps;
+  @Uint32()
+  external int dwPalCaps;
+  @Uint32()
+  external int dwSVCaps;
+  @Uint32()
+  external int dwAlphaBltConstBitDepths;
+  @Uint32()
+  external int dwAlphaBltPixelBitDepths;
+  @Uint32()
+  external int dwAlphaBltSurfaceBitDepths;
+  @Uint32()
+  external int dwAlphaOverlayConstBitDepths;
+  @Uint32()
+  external int dwAlphaOverlayPixelBitDepths;
+  @Uint32()
+  external int dwAlphaOverlaySurfaceBitDepths;
+  @Uint32()
+  external int dwZBufferBitDepths;
+  @Uint32()
+  external int dwVidMemTotal;
+  @Uint32()
+  external int dwVidMemFree;
+  @Uint32()
+  external int dwMaxVisibleOverlays;
+  @Uint32()
+  external int dwCurrVisibleOverlays;
+  @Uint32()
+  external int dwNumFourCCCodes;
+  @Uint32()
+  external int dwAlignBoundarySrc;
+  @Uint32()
+  external int dwAlignSizeSrc;
+  @Uint32()
+  external int dwAlignBoundaryDest;
+  @Uint32()
+  external int dwAlignSizeDest;
+  @Uint32()
+  external int dwAlignStrideAlign;
   @Array(8)
   external Array<Uint32> dwRops;
   external DDSCAPS ddsOldCaps;
-  @Uint32() external int dwMinOverlayStretch;
-  @Uint32() external int dwMaxOverlayStretch;
-  @Uint32() external int dwMinLiveVideoStretch;
-  @Uint32() external int dwMaxLiveVideoStretch;
-  @Uint32() external int dwMinHwCodecStretch;
-  @Uint32() external int dwMaxHwCodecStretch;
-  @Uint32() external int dwReserved1;
-  @Uint32() external int dwReserved2;
-  @Uint32() external int dwReserved3;
-  @Uint32() external int dwSVBCaps;
-  @Uint32() external int dwSVBCKeyCaps;
-  @Uint32() external int dwSVBFXCaps;
+  @Uint32()
+  external int dwMinOverlayStretch;
+  @Uint32()
+  external int dwMaxOverlayStretch;
+  @Uint32()
+  external int dwMinLiveVideoStretch;
+  @Uint32()
+  external int dwMaxLiveVideoStretch;
+  @Uint32()
+  external int dwMinHwCodecStretch;
+  @Uint32()
+  external int dwMaxHwCodecStretch;
+  @Uint32()
+  external int dwReserved1;
+  @Uint32()
+  external int dwReserved2;
+  @Uint32()
+  external int dwReserved3;
+  @Uint32()
+  external int dwSVBCaps;
+  @Uint32()
+  external int dwSVBCKeyCaps;
+  @Uint32()
+  external int dwSVBFXCaps;
   @Array(8)
   external Array<Uint32> dwSVBRops;
-  @Uint32() external int dwVSBCaps;
-  @Uint32() external int dwVSBCKeyCaps;
-  @Uint32() external int dwVSBFXCaps;
+  @Uint32()
+  external int dwVSBCaps;
+  @Uint32()
+  external int dwVSBCKeyCaps;
+  @Uint32()
+  external int dwVSBFXCaps;
   @Array(8)
   external Array<Uint32> dwVSBRops;
-  @Uint32() external int dwSSBCaps;
-  @Uint32() external int dwSSBCKeyCaps;
-  @Uint32() external int dwSSBFXCaps;
+  @Uint32()
+  external int dwSSBCaps;
+  @Uint32()
+  external int dwSSBCKeyCaps;
+  @Uint32()
+  external int dwSSBFXCaps;
   @Array(8)
   external Array<Uint32> dwSSBRops;
-  @Uint32() external int dwMaxVideoPorts;
-  @Uint32() external int dwCurrVideoPorts;
-  @Uint32() external int dwSVBCaps2;
-  @Uint32() external int dwNLVBCaps;
-  @Uint32() external int dwNLVBCaps2;
-  @Uint32() external int dwNLVBCKeyCaps;
-  @Uint32() external int dwNLVBFXCaps;
+  @Uint32()
+  external int dwMaxVideoPorts;
+  @Uint32()
+  external int dwCurrVideoPorts;
+  @Uint32()
+  external int dwSVBCaps2;
+  @Uint32()
+  external int dwNLVBCaps;
+  @Uint32()
+  external int dwNLVBCaps2;
+  @Uint32()
+  external int dwNLVBCKeyCaps;
+  @Uint32()
+  external int dwNLVBFXCaps;
   @Array(8)
   external Array<Uint32> dwNLVBRops;
   external DDSCAPS2 ddsCaps;
 }
 
 class DDCAPS_DX7 extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwCaps;
-  @Uint32() external int dwCaps2;
-  @Uint32() external int dwCKeyCaps;
-  @Uint32() external int dwFXCaps;
-  @Uint32() external int dwFXAlphaCaps;
-  @Uint32() external int dwPalCaps;
-  @Uint32() external int dwSVCaps;
-  @Uint32() external int dwAlphaBltConstBitDepths;
-  @Uint32() external int dwAlphaBltPixelBitDepths;
-  @Uint32() external int dwAlphaBltSurfaceBitDepths;
-  @Uint32() external int dwAlphaOverlayConstBitDepths;
-  @Uint32() external int dwAlphaOverlayPixelBitDepths;
-  @Uint32() external int dwAlphaOverlaySurfaceBitDepths;
-  @Uint32() external int dwZBufferBitDepths;
-  @Uint32() external int dwVidMemTotal;
-  @Uint32() external int dwVidMemFree;
-  @Uint32() external int dwMaxVisibleOverlays;
-  @Uint32() external int dwCurrVisibleOverlays;
-  @Uint32() external int dwNumFourCCCodes;
-  @Uint32() external int dwAlignBoundarySrc;
-  @Uint32() external int dwAlignSizeSrc;
-  @Uint32() external int dwAlignBoundaryDest;
-  @Uint32() external int dwAlignSizeDest;
-  @Uint32() external int dwAlignStrideAlign;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwCaps;
+  @Uint32()
+  external int dwCaps2;
+  @Uint32()
+  external int dwCKeyCaps;
+  @Uint32()
+  external int dwFXCaps;
+  @Uint32()
+  external int dwFXAlphaCaps;
+  @Uint32()
+  external int dwPalCaps;
+  @Uint32()
+  external int dwSVCaps;
+  @Uint32()
+  external int dwAlphaBltConstBitDepths;
+  @Uint32()
+  external int dwAlphaBltPixelBitDepths;
+  @Uint32()
+  external int dwAlphaBltSurfaceBitDepths;
+  @Uint32()
+  external int dwAlphaOverlayConstBitDepths;
+  @Uint32()
+  external int dwAlphaOverlayPixelBitDepths;
+  @Uint32()
+  external int dwAlphaOverlaySurfaceBitDepths;
+  @Uint32()
+  external int dwZBufferBitDepths;
+  @Uint32()
+  external int dwVidMemTotal;
+  @Uint32()
+  external int dwVidMemFree;
+  @Uint32()
+  external int dwMaxVisibleOverlays;
+  @Uint32()
+  external int dwCurrVisibleOverlays;
+  @Uint32()
+  external int dwNumFourCCCodes;
+  @Uint32()
+  external int dwAlignBoundarySrc;
+  @Uint32()
+  external int dwAlignSizeSrc;
+  @Uint32()
+  external int dwAlignBoundaryDest;
+  @Uint32()
+  external int dwAlignSizeDest;
+  @Uint32()
+  external int dwAlignStrideAlign;
   @Array(8)
   external Array<Uint32> dwRops;
   external DDSCAPS ddsOldCaps;
-  @Uint32() external int dwMinOverlayStretch;
-  @Uint32() external int dwMaxOverlayStretch;
-  @Uint32() external int dwMinLiveVideoStretch;
-  @Uint32() external int dwMaxLiveVideoStretch;
-  @Uint32() external int dwMinHwCodecStretch;
-  @Uint32() external int dwMaxHwCodecStretch;
-  @Uint32() external int dwReserved1;
-  @Uint32() external int dwReserved2;
-  @Uint32() external int dwReserved3;
-  @Uint32() external int dwSVBCaps;
-  @Uint32() external int dwSVBCKeyCaps;
-  @Uint32() external int dwSVBFXCaps;
+  @Uint32()
+  external int dwMinOverlayStretch;
+  @Uint32()
+  external int dwMaxOverlayStretch;
+  @Uint32()
+  external int dwMinLiveVideoStretch;
+  @Uint32()
+  external int dwMaxLiveVideoStretch;
+  @Uint32()
+  external int dwMinHwCodecStretch;
+  @Uint32()
+  external int dwMaxHwCodecStretch;
+  @Uint32()
+  external int dwReserved1;
+  @Uint32()
+  external int dwReserved2;
+  @Uint32()
+  external int dwReserved3;
+  @Uint32()
+  external int dwSVBCaps;
+  @Uint32()
+  external int dwSVBCKeyCaps;
+  @Uint32()
+  external int dwSVBFXCaps;
   @Array(8)
   external Array<Uint32> dwSVBRops;
-  @Uint32() external int dwVSBCaps;
-  @Uint32() external int dwVSBCKeyCaps;
-  @Uint32() external int dwVSBFXCaps;
+  @Uint32()
+  external int dwVSBCaps;
+  @Uint32()
+  external int dwVSBCKeyCaps;
+  @Uint32()
+  external int dwVSBFXCaps;
   @Array(8)
   external Array<Uint32> dwVSBRops;
-  @Uint32() external int dwSSBCaps;
-  @Uint32() external int dwSSBCKeyCaps;
-  @Uint32() external int dwSSBFXCaps;
+  @Uint32()
+  external int dwSSBCaps;
+  @Uint32()
+  external int dwSSBCKeyCaps;
+  @Uint32()
+  external int dwSSBFXCaps;
   @Array(8)
   external Array<Uint32> dwSSBRops;
-  @Uint32() external int dwMaxVideoPorts;
-  @Uint32() external int dwCurrVideoPorts;
-  @Uint32() external int dwSVBCaps2;
-  @Uint32() external int dwNLVBCaps;
-  @Uint32() external int dwNLVBCaps2;
-  @Uint32() external int dwNLVBCKeyCaps;
-  @Uint32() external int dwNLVBFXCaps;
+  @Uint32()
+  external int dwMaxVideoPorts;
+  @Uint32()
+  external int dwCurrVideoPorts;
+  @Uint32()
+  external int dwSVBCaps2;
+  @Uint32()
+  external int dwNLVBCaps;
+  @Uint32()
+  external int dwNLVBCaps2;
+  @Uint32()
+  external int dwNLVBCKeyCaps;
+  @Uint32()
+  external int dwNLVBFXCaps;
   @Array(8)
   external Array<Uint32> dwNLVBRops;
   external DDSCAPS2 ddsCaps;
 }
 
 class DDPIXELFORMAT extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwFourCC;
-  @Uint32() external int Anonymous1;
-  @Uint32() external int Anonymous2;
-  @Uint32() external int Anonymous3;
-  @Uint32() external int Anonymous4;
-  @Uint32() external int Anonymous5;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwFourCC;
+  @Uint32()
+  external int Anonymous1;
+  @Uint32()
+  external int Anonymous2;
+  @Uint32()
+  external int Anonymous3;
+  @Uint32()
+  external int Anonymous4;
+  @Uint32()
+  external int Anonymous5;
 }
 
 class DDOVERLAYFX extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwAlphaEdgeBlendBitDepth;
-  @Uint32() external int dwAlphaEdgeBlend;
-  @Uint32() external int dwReserved;
-  @Uint32() external int dwAlphaDestConstBitDepth;
-  @Uint32() external int Anonymous1;
-  @Uint32() external int dwAlphaSrcConstBitDepth;
-  @Uint32() external int Anonymous2;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwAlphaEdgeBlendBitDepth;
+  @Uint32()
+  external int dwAlphaEdgeBlend;
+  @Uint32()
+  external int dwReserved;
+  @Uint32()
+  external int dwAlphaDestConstBitDepth;
+  @Uint32()
+  external int Anonymous1;
+  @Uint32()
+  external int dwAlphaSrcConstBitDepth;
+  @Uint32()
+  external int Anonymous2;
   external DDCOLORKEY dckDestColorkey;
   external DDCOLORKEY dckSrcColorkey;
-  @Uint32() external int dwDDFX;
-  @Uint32() external int dwFlags;
+  @Uint32()
+  external int dwDDFX;
+  @Uint32()
+  external int dwFlags;
 }
 
 class DDBLTBATCH extends Struct {
   external Pointer<RECT> lprDest;
   external Pointer lpDDSSrc;
   external Pointer<RECT> lprSrc;
-  @Uint32() external int dwFlags;
+  @Uint32()
+  external int dwFlags;
   external Pointer<DDBLTFX> lpDDBltFx;
 }
 
@@ -447,11 +733,16 @@ class DDDEVICEIDENTIFIER extends Struct {
   external Array<Int8> szDriver;
   @Array(130)
   external Array<Int8> szDescription;
-  @Int64() external int liDriverVersion;
-  @Uint32() external int dwVendorId;
-  @Uint32() external int dwDeviceId;
-  @Uint32() external int dwSubSysId;
-  @Uint32() external int dwRevision;
+  @Int64()
+  external int liDriverVersion;
+  @Uint32()
+  external int dwVendorId;
+  @Uint32()
+  external int dwDeviceId;
+  @Uint32()
+  external int dwSubSysId;
+  @Uint32()
+  external int dwRevision;
   external GUID guidDeviceIdentifier;
 }
 
@@ -460,25 +751,40 @@ class DDDEVICEIDENTIFIER2 extends Struct {
   external Array<Int8> szDriver;
   @Array(130)
   external Array<Int8> szDescription;
-  @Int64() external int liDriverVersion;
-  @Uint32() external int dwVendorId;
-  @Uint32() external int dwDeviceId;
-  @Uint32() external int dwSubSysId;
-  @Uint32() external int dwRevision;
+  @Int64()
+  external int liDriverVersion;
+  @Uint32()
+  external int dwVendorId;
+  @Uint32()
+  external int dwDeviceId;
+  @Uint32()
+  external int dwSubSysId;
+  @Uint32()
+  external int dwRevision;
   external GUID guidDeviceIdentifier;
-  @Uint32() external int dwWHQLLevel;
+  @Uint32()
+  external int dwWHQLLevel;
 }
 
 class DDSURFACEDESC extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwHeight;
-  @Uint32() external int dwWidth;
-  @Uint32() external int Anonymous1;
-  @Uint32() external int dwBackBufferCount;
-  @Uint32() external int Anonymous2;
-  @Uint32() external int dwAlphaBitDepth;
-  @Uint32() external int dwReserved;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwHeight;
+  @Uint32()
+  external int dwWidth;
+  @Uint32()
+  external int Anonymous1;
+  @Uint32()
+  external int dwBackBufferCount;
+  @Uint32()
+  external int Anonymous2;
+  @Uint32()
+  external int dwAlphaBitDepth;
+  @Uint32()
+  external int dwReserved;
   external Pointer lpSurface;
   external DDCOLORKEY ddckCKDestOverlay;
   external DDCOLORKEY ddckCKDestBlt;
@@ -489,44 +795,68 @@ class DDSURFACEDESC extends Struct {
 }
 
 class DDSURFACEDESC2 extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwHeight;
-  @Uint32() external int dwWidth;
-  @Uint32() external int Anonymous1;
-  @Uint32() external int Anonymous2;
-  @Uint32() external int Anonymous3;
-  @Uint32() external int dwAlphaBitDepth;
-  @Uint32() external int dwReserved;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwHeight;
+  @Uint32()
+  external int dwWidth;
+  @Uint32()
+  external int Anonymous1;
+  @Uint32()
+  external int Anonymous2;
+  @Uint32()
+  external int Anonymous3;
+  @Uint32()
+  external int dwAlphaBitDepth;
+  @Uint32()
+  external int dwReserved;
   external Pointer lpSurface;
-  @Uint32() external int Anonymous4;
+  @Uint32()
+  external int Anonymous4;
   external DDCOLORKEY ddckCKDestBlt;
   external DDCOLORKEY ddckCKSrcOverlay;
   external DDCOLORKEY ddckCKSrcBlt;
-  @Uint32() external int Anonymous5;
+  @Uint32()
+  external int Anonymous5;
   external DDSCAPS2 ddsCaps;
-  @Uint32() external int dwTextureStage;
+  @Uint32()
+  external int dwTextureStage;
 }
 
 class DDOPTSURFACEDESC extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwFlags;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwFlags;
   external DDSCAPS2 ddSCaps;
   external DDOSCAPS ddOSCaps;
   external GUID guid;
-  @Uint32() external int dwCompressionRatio;
+  @Uint32()
+  external int dwCompressionRatio;
 }
 
 class DDCOLORCONTROL extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwFlags;
-  @Int32() external int lBrightness;
-  @Int32() external int lContrast;
-  @Int32() external int lHue;
-  @Int32() external int lSaturation;
-  @Int32() external int lSharpness;
-  @Int32() external int lGamma;
-  @Int32() external int lColorEnable;
-  @Uint32() external int dwReserved1;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwFlags;
+  @Int32()
+  external int lBrightness;
+  @Int32()
+  external int lContrast;
+  @Int32()
+  external int lHue;
+  @Int32()
+  external int lSaturation;
+  @Int32()
+  external int lSharpness;
+  @Int32()
+  external int lGamma;
+  @Int32()
+  external int lColorEnable;
+  @Uint32()
+  external int dwReserved1;
 }
-

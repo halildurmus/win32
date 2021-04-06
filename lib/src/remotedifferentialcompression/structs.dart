@@ -43,87 +43,82 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class RdcLibrary extends Struct {
-}
+class RdcLibrary extends Struct {}
 
-class RdcGeneratorParameters extends Struct {
-}
+class RdcGeneratorParameters extends Struct {}
 
-class RdcGeneratorFilterMaxParameters extends Struct {
-}
+class RdcGeneratorFilterMaxParameters extends Struct {}
 
-class RdcGenerator extends Struct {
-}
+class RdcGenerator extends Struct {}
 
-class RdcFileReader extends Struct {
-}
+class RdcFileReader extends Struct {}
 
-class RdcSignatureReader extends Struct {
-}
+class RdcSignatureReader extends Struct {}
 
-class RdcComparator extends Struct {
-}
+class RdcComparator extends Struct {}
 
-class SimilarityReportProgress extends Struct {
-}
+class SimilarityReportProgress extends Struct {}
 
-class SimilarityTableDumpState extends Struct {
-}
+class SimilarityTableDumpState extends Struct {}
 
-class SimilarityTraitsTable extends Struct {
-}
+class SimilarityTraitsTable extends Struct {}
 
-class SimilarityFileIdTable extends Struct {
-}
+class SimilarityFileIdTable extends Struct {}
 
-class Similarity extends Struct {
-}
+class Similarity extends Struct {}
 
-class RdcSimilarityGenerator extends Struct {
-}
+class RdcSimilarityGenerator extends Struct {}
 
-class FindSimilarResults extends Struct {
-}
+class FindSimilarResults extends Struct {}
 
-class SimilarityTraitsMapping extends Struct {
-}
+class SimilarityTraitsMapping extends Struct {}
 
-class SimilarityTraitsMappedView extends Struct {
-}
+class SimilarityTraitsMappedView extends Struct {}
 
 class RdcNeed extends Struct {
-  @Uint32() external int m_BlockType;
-  @Uint64() external int m_FileOffset;
-  @Uint64() external int m_BlockLength;
+  @Uint32()
+  external int m_BlockType;
+  @Uint64()
+  external int m_FileOffset;
+  @Uint64()
+  external int m_BlockLength;
 }
 
 class RdcBufferPointer extends Struct {
-  @Uint32() external int m_Size;
-  @Uint32() external int m_Used;
+  @Uint32()
+  external int m_Size;
+  @Uint32()
+  external int m_Used;
   external Pointer<Uint8> m_Data;
 }
 
 class RdcNeedPointer extends Struct {
-  @Uint32() external int m_Size;
-  @Uint32() external int m_Used;
+  @Uint32()
+  external int m_Size;
+  @Uint32()
+  external int m_Used;
   external Pointer<RdcNeed> m_Data;
 }
 
 class RdcSignature extends Struct {
   @Array(16)
   external Array<Uint8> m_Signature;
-  @Uint16() external int m_BlockLength;
+  @Uint16()
+  external int m_BlockLength;
 }
 
 class RdcSignaturePointer extends Struct {
-  @Uint32() external int m_Size;
-  @Uint32() external int m_Used;
+  @Uint32()
+  external int m_Size;
+  @Uint32()
+  external int m_Used;
   external Pointer<RdcSignature> m_Data;
 }
 
 class SimilarityMappedViewInfo extends Struct {
   external Pointer<Uint8> m_Data;
-  @Uint32() external int m_Length;
+  @Uint32()
+  external int m_Length;
 }
 
 class SimilarityData extends Struct {
@@ -132,12 +127,15 @@ class SimilarityData extends Struct {
 }
 
 class FindSimilarFileIndexResults extends Struct {
-  @Uint32() external int m_FileIndex;
-  @Uint32() external int m_MatchCount;
+  @Uint32()
+  external int m_FileIndex;
+  @Uint32()
+  external int m_MatchCount;
 }
 
 class SimilarityDumpData extends Struct {
-  @Uint32() external int m_FileIndex;
+  @Uint32()
+  external int m_FileIndex;
   external SimilarityData m_Data;
 }
 
@@ -145,4 +143,3 @@ class SimilarityFileId extends Struct {
   @Array(32)
   external Array<Uint8> m_FileId;
 }
-

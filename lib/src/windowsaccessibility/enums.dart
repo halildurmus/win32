@@ -550,4 +550,3 @@ class ZoomUnit {
   static const ZoomUnit_LargeIncrement = 0x00000003;
   static const ZoomUnit_SmallIncrement = 0x00000004;
 }
-

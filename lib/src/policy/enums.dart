@@ -48,4 +48,3 @@ class SETTINGSTATUS {
   static const RSOPFailed = 0x00000003;
   static const RSOPSubsettingFailed = 0x00000004;
 }
-

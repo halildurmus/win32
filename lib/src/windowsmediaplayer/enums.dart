@@ -326,4 +326,3 @@ class WMPTransactionType {
   static const wmpttDownload = 0x00000001;
   static const wmpttBuy = 0x00000002;
 }
-

@@ -44,14 +44,19 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class OPERATION_START_PARAMETERS extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int OperationId;
-  @Uint32() external int Flags;
+  @Uint32()
+  external int Version;
+  @Uint32()
+  external int OperationId;
+  @Uint32()
+  external int Flags;
 }
 
 class OPERATION_END_PARAMETERS extends Struct {
-  @Uint32() external int Version;
-  @Uint32() external int OperationId;
-  @Uint32() external int Flags;
+  @Uint32()
+  external int Version;
+  @Uint32()
+  external int OperationId;
+  @Uint32()
+  external int Flags;
 }
-

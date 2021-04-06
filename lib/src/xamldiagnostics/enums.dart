@@ -53,4 +53,3 @@ class VisualMutationType {
   static const Add = 0x00000000;
   static const Remove = 0x00000001;
 }
-

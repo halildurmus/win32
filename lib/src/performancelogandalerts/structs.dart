@@ -43,51 +43,34 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class DataCollectorSet extends Struct {
-}
+class DataCollectorSet extends Struct {}
 
-class TraceSession extends Struct {
-}
+class TraceSession extends Struct {}
 
-class TraceSessionCollection extends Struct {
-}
+class TraceSessionCollection extends Struct {}
 
-class TraceDataProvider extends Struct {
-}
+class TraceDataProvider extends Struct {}
 
-class TraceDataProviderCollection extends Struct {
-}
+class TraceDataProviderCollection extends Struct {}
 
-class DataCollectorSetCollection extends Struct {
-}
+class DataCollectorSetCollection extends Struct {}
 
-class LegacyDataCollectorSet extends Struct {
-}
+class LegacyDataCollectorSet extends Struct {}
 
-class LegacyDataCollectorSetCollection extends Struct {
-}
+class LegacyDataCollectorSetCollection extends Struct {}
 
-class LegacyTraceSession extends Struct {
-}
+class LegacyTraceSession extends Struct {}
 
-class LegacyTraceSessionCollection extends Struct {
-}
+class LegacyTraceSessionCollection extends Struct {}
 
-class ServerDataCollectorSet extends Struct {
-}
+class ServerDataCollectorSet extends Struct {}
 
-class ServerDataCollectorSetCollection extends Struct {
-}
+class ServerDataCollectorSetCollection extends Struct {}
 
-class SystemDataCollectorSet extends Struct {
-}
+class SystemDataCollectorSet extends Struct {}
 
-class SystemDataCollectorSetCollection extends Struct {
-}
+class SystemDataCollectorSetCollection extends Struct {}
 
-class BootTraceSession extends Struct {
-}
+class BootTraceSession extends Struct {}
 
-class BootTraceSessionCollection extends Struct {
-}
-
+class BootTraceSessionCollection extends Struct {}

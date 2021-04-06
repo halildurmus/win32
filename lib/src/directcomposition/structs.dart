@@ -44,10 +44,13 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class DCOMPOSITION_FRAME_STATISTICS extends Struct {
-  @Int64() external int lastFrameTime;
+  @Int64()
+  external int lastFrameTime;
   external DXGI_RATIONAL currentCompositionRate;
-  @Int64() external int currentTime;
-  @Int64() external int timeFrequency;
-  @Int64() external int nextEstimatedFrameTime;
+  @Int64()
+  external int currentTime;
+  @Int64()
+  external int timeFrequency;
+  @Int64()
+  external int nextEstimatedFrameTime;
 }
-

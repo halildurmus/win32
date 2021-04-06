@@ -228,4 +228,3 @@ class ViewOptions {
   static const ViewOption_NotPersistable = 0x00000004;
   static const ViewOption_ActionPaneHidden = 0x00000008;
 }
-

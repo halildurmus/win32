@@ -43,23 +43,26 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class UIRibbonFramework extends Struct {
-}
+class UIRibbonFramework extends Struct {}
 
-class UIRibbonImageFromBitmapFactory extends Struct {
-}
+class UIRibbonImageFromBitmapFactory extends Struct {}
 
 class UI_EVENTPARAMS_COMMAND extends Struct {
-  @Uint32() external int CommandID;
+  @Uint32()
+  external int CommandID;
   external Pointer<Utf16> CommandName;
-  @Uint32() external int ParentCommandID;
+  @Uint32()
+  external int ParentCommandID;
   external Pointer<Utf16> ParentCommandName;
-  @Uint32() external int SelectionIndex;
-  @Uint32() external int Location;
+  @Uint32()
+  external int SelectionIndex;
+  @Uint32()
+  external int Location;
 }
 
 class UI_EVENTPARAMS extends Struct {
-  @Uint32() external int EventType;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int EventType;
+  @Uint32()
+  external int Anonymous;
 }
-

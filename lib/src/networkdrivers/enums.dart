@@ -186,4 +186,3 @@ class TUNNEL_TYPE {
   static const TUNNEL_TYPE_TEREDO = 0x0000000e;
   static const TUNNEL_TYPE_IPHTTPS = 0x0000000f;
 }
-

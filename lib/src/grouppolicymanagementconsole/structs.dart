@@ -43,105 +43,70 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class GPM extends Struct {
-}
+class GPM extends Struct {}
 
-class GPMDomain extends Struct {
-}
+class GPMDomain extends Struct {}
 
-class GPMSitesContainer extends Struct {
-}
+class GPMSitesContainer extends Struct {}
 
-class GPMBackupDir extends Struct {
-}
+class GPMBackupDir extends Struct {}
 
-class GPMSOM extends Struct {
-}
+class GPMSOM extends Struct {}
 
-class GPMSearchCriteria extends Struct {
-}
+class GPMSearchCriteria extends Struct {}
 
-class GPMPermission extends Struct {
-}
+class GPMPermission extends Struct {}
 
-class GPMSecurityInfo extends Struct {
-}
+class GPMSecurityInfo extends Struct {}
 
-class GPMBackup extends Struct {
-}
+class GPMBackup extends Struct {}
 
-class GPMBackupCollection extends Struct {
-}
+class GPMBackupCollection extends Struct {}
 
-class GPMSOMCollection extends Struct {
-}
+class GPMSOMCollection extends Struct {}
 
-class GPMWMIFilter extends Struct {
-}
+class GPMWMIFilter extends Struct {}
 
-class GPMWMIFilterCollection extends Struct {
-}
+class GPMWMIFilterCollection extends Struct {}
 
-class GPMRSOP extends Struct {
-}
+class GPMRSOP extends Struct {}
 
-class GPMGPO extends Struct {
-}
+class GPMGPO extends Struct {}
 
-class GPMGPOCollection extends Struct {
-}
+class GPMGPOCollection extends Struct {}
 
-class GPMGPOLink extends Struct {
-}
+class GPMGPOLink extends Struct {}
 
-class GPMGPOLinksCollection extends Struct {
-}
+class GPMGPOLinksCollection extends Struct {}
 
-class GPMAsyncCancel extends Struct {
-}
+class GPMAsyncCancel extends Struct {}
 
-class GPMStatusMsgCollection extends Struct {
-}
+class GPMStatusMsgCollection extends Struct {}
 
-class GPMStatusMessage extends Struct {
-}
+class GPMStatusMessage extends Struct {}
 
-class GPMTrustee extends Struct {
-}
+class GPMTrustee extends Struct {}
 
-class GPMClientSideExtension extends Struct {
-}
+class GPMClientSideExtension extends Struct {}
 
-class GPMCSECollection extends Struct {
-}
+class GPMCSECollection extends Struct {}
 
-class GPMConstants extends Struct {
-}
+class GPMConstants extends Struct {}
 
-class GPMResult extends Struct {
-}
+class GPMResult extends Struct {}
 
-class GPMMapEntryCollection extends Struct {
-}
+class GPMMapEntryCollection extends Struct {}
 
-class GPMMapEntry extends Struct {
-}
+class GPMMapEntry extends Struct {}
 
-class GPMMigrationTable extends Struct {
-}
+class GPMMigrationTable extends Struct {}
 
-class GPMBackupDirEx extends Struct {
-}
+class GPMBackupDirEx extends Struct {}
 
-class GPMStarterGPOBackupCollection extends Struct {
-}
+class GPMStarterGPOBackupCollection extends Struct {}
 
-class GPMStarterGPOBackup extends Struct {
-}
+class GPMStarterGPOBackup extends Struct {}
 
-class GPMTemplate extends Struct {
-}
+class GPMTemplate extends Struct {}
 
-class GPMStarterGPOCollection extends Struct {
-}
-
+class GPMStarterGPOCollection extends Struct {}

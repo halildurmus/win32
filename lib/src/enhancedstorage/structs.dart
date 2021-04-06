@@ -44,57 +44,86 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class ENHANCED_STORAGE_PASSWORD_SILO_INFORMATION extends Struct {
-  @Uint8() external int CurrentAdminFailures;
-  @Uint8() external int CurrentUserFailures;
-  @Uint32() external int TotalUserAuthenticationCount;
-  @Uint32() external int TotalAdminAuthenticationCount;
-  @Int32() external int FipsCompliant;
-  @Int32() external int SecurityIDAvailable;
-  @Int32() external int InitializeInProgress;
-  @Int32() external int ITMSArmed;
-  @Int32() external int ITMSArmable;
-  @Int32() external int UserCreated;
-  @Int32() external int ResetOnPORDefault;
-  @Int32() external int ResetOnPORCurrent;
-  @Uint8() external int MaxAdminFailures;
-  @Uint8() external int MaxUserFailures;
-  @Uint32() external int TimeToCompleteInitialization;
-  @Uint32() external int TimeRemainingToCompleteInitialization;
-  @Uint32() external int MinTimeToAuthenticate;
-  @Uint8() external int MaxAdminPasswordSize;
-  @Uint8() external int MinAdminPasswordSize;
-  @Uint8() external int MaxAdminHintSize;
-  @Uint8() external int MaxUserPasswordSize;
-  @Uint8() external int MinUserPasswordSize;
-  @Uint8() external int MaxUserHintSize;
-  @Uint8() external int MaxUserNameSize;
-  @Uint8() external int MaxSiloNameSize;
-  @Uint16() external int MaxChallengeSize;
+  @Uint8()
+  external int CurrentAdminFailures;
+  @Uint8()
+  external int CurrentUserFailures;
+  @Uint32()
+  external int TotalUserAuthenticationCount;
+  @Uint32()
+  external int TotalAdminAuthenticationCount;
+  @Int32()
+  external int FipsCompliant;
+  @Int32()
+  external int SecurityIDAvailable;
+  @Int32()
+  external int InitializeInProgress;
+  @Int32()
+  external int ITMSArmed;
+  @Int32()
+  external int ITMSArmable;
+  @Int32()
+  external int UserCreated;
+  @Int32()
+  external int ResetOnPORDefault;
+  @Int32()
+  external int ResetOnPORCurrent;
+  @Uint8()
+  external int MaxAdminFailures;
+  @Uint8()
+  external int MaxUserFailures;
+  @Uint32()
+  external int TimeToCompleteInitialization;
+  @Uint32()
+  external int TimeRemainingToCompleteInitialization;
+  @Uint32()
+  external int MinTimeToAuthenticate;
+  @Uint8()
+  external int MaxAdminPasswordSize;
+  @Uint8()
+  external int MinAdminPasswordSize;
+  @Uint8()
+  external int MaxAdminHintSize;
+  @Uint8()
+  external int MaxUserPasswordSize;
+  @Uint8()
+  external int MinUserPasswordSize;
+  @Uint8()
+  external int MaxUserHintSize;
+  @Uint8()
+  external int MaxUserNameSize;
+  @Uint8()
+  external int MaxSiloNameSize;
+  @Uint16()
+  external int MaxChallengeSize;
 }
 
-class EnumEnhancedStorageACT extends Struct {
-}
+class EnumEnhancedStorageACT extends Struct {}
 
-class EnhancedStorageACT extends Struct {
-}
+class EnhancedStorageACT extends Struct {}
 
-class EnhancedStorageSilo extends Struct {
-}
+class EnhancedStorageSilo extends Struct {}
 
-class EnhancedStorageSiloAction extends Struct {
-}
+class EnhancedStorageSiloAction extends Struct {}
 
 class ACT_AUTHORIZATION_STATE extends Struct {
-  @Uint32() external int ulState;
+  @Uint32()
+  external int ulState;
 }
 
 class SILO_INFO extends Struct {
-  @Uint32() external int ulSTID;
-  @Uint8() external int SpecificationMajor;
-  @Uint8() external int SpecificationMinor;
-  @Uint8() external int ImplementationMajor;
-  @Uint8() external int ImplementationMinor;
-  @Uint8() external int type;
-  @Uint8() external int capabilities;
+  @Uint32()
+  external int ulSTID;
+  @Uint8()
+  external int SpecificationMajor;
+  @Uint8()
+  external int SpecificationMinor;
+  @Uint8()
+  external int ImplementationMajor;
+  @Uint8()
+  external int ImplementationMinor;
+  @Uint8()
+  external int type;
+  @Uint8()
+  external int capabilities;
 }
-

@@ -130,4 +130,3 @@ class UI_VIEWVERB {
   static const UI_VIEWVERB_SIZE = 0x00000002;
   static const UI_VIEWVERB_ERROR = 0x00000003;
 }
-

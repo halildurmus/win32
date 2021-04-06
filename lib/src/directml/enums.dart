@@ -210,4 +210,3 @@ class DML_TENSOR_TYPE {
   static const DML_TENSOR_TYPE_INVALID = 0x00000000;
   static const DML_TENSOR_TYPE_BUFFER = 0x00000001;
 }
-

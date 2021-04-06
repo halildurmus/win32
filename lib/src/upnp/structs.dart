@@ -43,33 +43,22 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class UPnPDeviceFinder extends Struct {
-}
+class UPnPDeviceFinder extends Struct {}
 
-class UPnPDevices extends Struct {
-}
+class UPnPDevices extends Struct {}
 
-class UPnPDevice extends Struct {
-}
+class UPnPDevice extends Struct {}
 
-class UPnPServices extends Struct {
-}
+class UPnPServices extends Struct {}
 
-class UPnPService extends Struct {
-}
+class UPnPService extends Struct {}
 
-class UPnPDescriptionDocument extends Struct {
-}
+class UPnPDescriptionDocument extends Struct {}
 
-class UPnPDeviceFinderEx extends Struct {
-}
+class UPnPDeviceFinderEx extends Struct {}
 
-class UPnPDescriptionDocumentEx extends Struct {
-}
+class UPnPDescriptionDocumentEx extends Struct {}
 
-class UPnPRegistrar extends Struct {
-}
+class UPnPRegistrar extends Struct {}
 
-class UPnPRemoteEndpointInfo extends Struct {
-}
-
+class UPnPRemoteEndpointInfo extends Struct {}

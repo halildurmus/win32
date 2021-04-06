@@ -14,4 +14,3 @@ class DFS_TARGET_PRIORITY_CLASS {
   static const DfsSiteCostLowPriorityClass = 0x00000003;
   static const DfsGlobalLowPriorityClass = 0x00000004;
 }
-

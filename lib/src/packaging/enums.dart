@@ -73,4 +73,3 @@ class OPC_WRITE_FLAGS {
   static const OPC_WRITE_DEFAULT = 0x00000000;
   static const OPC_WRITE_FORCE_ZIP32 = 0x00000001;
 }
-

@@ -7,4 +7,3 @@ class GetUserObjectInformation_nIndex {
   static const UOI_TYPE = 0x00000003;
   static const UOI_USER_SID = 0x00000004;
 }
-

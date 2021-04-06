@@ -44,66 +44,96 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class HINTERACTIONCONTEXT extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class MANIPULATION_TRANSFORM extends Struct {
-  @Float() external double translationX;
-  @Float() external double translationY;
-  @Float() external double scale;
-  @Float() external double expansion;
-  @Float() external double rotation;
+  @Float()
+  external double translationX;
+  @Float()
+  external double translationY;
+  @Float()
+  external double scale;
+  @Float()
+  external double expansion;
+  @Float()
+  external double rotation;
 }
 
 class MANIPULATION_VELOCITY extends Struct {
-  @Float() external double velocityX;
-  @Float() external double velocityY;
-  @Float() external double velocityExpansion;
-  @Float() external double velocityAngular;
+  @Float()
+  external double velocityX;
+  @Float()
+  external double velocityY;
+  @Float()
+  external double velocityExpansion;
+  @Float()
+  external double velocityAngular;
 }
 
 class INTERACTION_ARGUMENTS_MANIPULATION extends Struct {
   external MANIPULATION_TRANSFORM delta;
   external MANIPULATION_TRANSFORM cumulative;
   external MANIPULATION_VELOCITY velocity;
-  @Uint32() external int railsState;
+  @Uint32()
+  external int railsState;
 }
 
 class INTERACTION_ARGUMENTS_TAP extends Struct {
-  @Uint32() external int count;
+  @Uint32()
+  external int count;
 }
 
 class INTERACTION_ARGUMENTS_CROSS_SLIDE extends Struct {
-  @Uint32() external int flags;
+  @Uint32()
+  external int flags;
 }
 
 class INTERACTION_CONTEXT_OUTPUT extends Struct {
-  @Uint32() external int interactionId;
-  @Uint32() external int interactionFlags;
-  @Uint32() external int inputType;
-  @Float() external double x;
-  @Float() external double y;
-  @Uint32() external int arguments;
+  @Uint32()
+  external int interactionId;
+  @Uint32()
+  external int interactionFlags;
+  @Uint32()
+  external int inputType;
+  @Float()
+  external double x;
+  @Float()
+  external double y;
+  @Uint32()
+  external int arguments;
 }
 
 class INTERACTION_CONTEXT_OUTPUT2 extends Struct {
-  @Uint32() external int interactionId;
-  @Uint32() external int interactionFlags;
-  @Uint32() external int inputType;
-  @Uint32() external int contactCount;
-  @Uint32() external int currentContactCount;
-  @Float() external double x;
-  @Float() external double y;
-  @Uint32() external int arguments;
+  @Uint32()
+  external int interactionId;
+  @Uint32()
+  external int interactionFlags;
+  @Uint32()
+  external int inputType;
+  @Uint32()
+  external int contactCount;
+  @Uint32()
+  external int currentContactCount;
+  @Float()
+  external double x;
+  @Float()
+  external double y;
+  @Uint32()
+  external int arguments;
 }
 
 class INTERACTION_CONTEXT_CONFIGURATION extends Struct {
-  @Uint32() external int interactionId;
-  @Uint32() external int enable;
+  @Uint32()
+  external int interactionId;
+  @Uint32()
+  external int enable;
 }
 
 class CROSS_SLIDE_PARAMETER extends Struct {
-  @Uint32() external int threshold;
-  @Float() external double distance;
+  @Uint32()
+  external int threshold;
+  @Float()
+  external double distance;
 }
-

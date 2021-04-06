@@ -44,18 +44,23 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class WCN_VALUE_TYPE_PRIMARY_DEVICE_TYPE extends Struct {
-  @Uint16() external int Category;
-  @Uint32() external int SubCategoryOUI;
-  @Uint16() external int SubCategory;
+  @Uint16()
+  external int Category;
+  @Uint32()
+  external int SubCategoryOUI;
+  @Uint16()
+  external int SubCategory;
 }
 
-class WCNDeviceObject extends Struct {
-}
+class WCNDeviceObject extends Struct {}
 
 class WCN_VENDOR_EXTENSION_SPEC extends Struct {
-  @Uint32() external int VendorId;
-  @Uint32() external int SubType;
-  @Uint32() external int Index;
-  @Uint32() external int Flags;
+  @Uint32()
+  external int VendorId;
+  @Uint32()
+  external int SubType;
+  @Uint32()
+  external int Index;
+  @Uint32()
+  external int Flags;
 }
-

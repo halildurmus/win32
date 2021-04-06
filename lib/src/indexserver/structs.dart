@@ -44,27 +44,45 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class DBID extends Struct {
-  @Uint32() external int uGuid;
-  @Uint32() external int eKind;
-  @Uint32() external int uName;
+  @Uint32()
+  external int uGuid;
+  @Uint32()
+  external int eKind;
+  @Uint32()
+  external int uName;
 }
 
 class CI_STATE extends Struct {
-  @Uint32() external int cbStruct;
-  @Uint32() external int cWordList;
-  @Uint32() external int cPersistentIndex;
-  @Uint32() external int cQueries;
-  @Uint32() external int cDocuments;
-  @Uint32() external int cFreshTest;
-  @Uint32() external int dwMergeProgress;
-  @Uint32() external int eState;
-  @Uint32() external int cFilteredDocuments;
-  @Uint32() external int cTotalDocuments;
-  @Uint32() external int cPendingScans;
-  @Uint32() external int dwIndexSize;
-  @Uint32() external int cUniqueKeys;
-  @Uint32() external int cSecQDocuments;
-  @Uint32() external int dwPropCacheSize;
+  @Uint32()
+  external int cbStruct;
+  @Uint32()
+  external int cWordList;
+  @Uint32()
+  external int cPersistentIndex;
+  @Uint32()
+  external int cQueries;
+  @Uint32()
+  external int cDocuments;
+  @Uint32()
+  external int cFreshTest;
+  @Uint32()
+  external int dwMergeProgress;
+  @Uint32()
+  external int eState;
+  @Uint32()
+  external int cFilteredDocuments;
+  @Uint32()
+  external int cTotalDocuments;
+  @Uint32()
+  external int cPendingScans;
+  @Uint32()
+  external int dwIndexSize;
+  @Uint32()
+  external int cUniqueKeys;
+  @Uint32()
+  external int cSecQDocuments;
+  @Uint32()
+  external int dwPropCacheSize;
 }
 
 class FULLPROPSPEC extends Struct {
@@ -73,19 +91,28 @@ class FULLPROPSPEC extends Struct {
 }
 
 class FILTERREGION extends Struct {
-  @Uint32() external int idChunk;
-  @Uint32() external int cwcStart;
-  @Uint32() external int cwcExtent;
+  @Uint32()
+  external int idChunk;
+  @Uint32()
+  external int cwcStart;
+  @Uint32()
+  external int cwcExtent;
 }
 
 class STAT_CHUNK extends Struct {
-  @Uint32() external int idChunk;
-  @Uint32() external int breakType;
-  @Uint32() external int flags;
-  @Uint32() external int locale;
+  @Uint32()
+  external int idChunk;
+  @Uint32()
+  external int breakType;
+  @Uint32()
+  external int flags;
+  @Uint32()
+  external int locale;
   external FULLPROPSPEC attribute;
-  @Uint32() external int idChunkSource;
-  @Uint32() external int cwcStartSource;
-  @Uint32() external int cwcLenSource;
+  @Uint32()
+  external int idChunkSource;
+  @Uint32()
+  external int cwcStartSource;
+  @Uint32()
+  external int cwcLenSource;
 }
-

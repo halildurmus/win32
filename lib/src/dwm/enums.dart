@@ -88,4 +88,3 @@ class GESTURE_TYPE {
   static const GT_TOUCH_PRESSANDHOLDABORT = 0x00000009;
   static const GT_TOUCH_PRESSANDTAP = 0x0000000a;
 }
-

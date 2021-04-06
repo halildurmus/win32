@@ -50,4 +50,3 @@ class TCP_CONNECTION_OFFLOAD_STATE {
   static const TcpConnectionOffloadStateUploading = 0x00000003;
   static const TcpConnectionOffloadStateMax = 0x00000004;
 }
-

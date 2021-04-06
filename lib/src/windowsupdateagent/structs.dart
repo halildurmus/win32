@@ -43,39 +43,26 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class StringCollection extends Struct {
-}
+class StringCollection extends Struct {}
 
-class UpdateSearcher extends Struct {
-}
+class UpdateSearcher extends Struct {}
 
-class WebProxy extends Struct {
-}
+class WebProxy extends Struct {}
 
-class SystemInformation extends Struct {
-}
+class SystemInformation extends Struct {}
 
-class WindowsUpdateAgentInfo extends Struct {
-}
+class WindowsUpdateAgentInfo extends Struct {}
 
-class AutomaticUpdates extends Struct {
-}
+class AutomaticUpdates extends Struct {}
 
-class UpdateCollection extends Struct {
-}
+class UpdateCollection extends Struct {}
 
-class UpdateDownloader extends Struct {
-}
+class UpdateDownloader extends Struct {}
 
-class UpdateInstaller extends Struct {
-}
+class UpdateInstaller extends Struct {}
 
-class UpdateSession extends Struct {
-}
+class UpdateSession extends Struct {}
 
-class UpdateServiceManager extends Struct {
-}
+class UpdateServiceManager extends Struct {}
 
-class InstallationAgent extends Struct {
-}
-
+class InstallationAgent extends Struct {}

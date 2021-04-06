@@ -19,4 +19,3 @@ class RENDEZVOUS_SESSION_STATE {
   static const RSS_DECLINED = 0x00000006;
   static const RSS_TERMINATED = 0x00000007;
 }
-

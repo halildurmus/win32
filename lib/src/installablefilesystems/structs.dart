@@ -44,105 +44,150 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class HFILTER extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class HFILTER_INSTANCE extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class FilterFindHandle extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class FilterVolumeFindHandle extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class FilterInstanceFindHandle extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class FilterVolumeInstanceFindHandle extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class FILTER_FULL_INFORMATION extends Struct {
-  @Uint32() external int NextEntryOffset;
-  @Uint32() external int FrameID;
-  @Uint32() external int NumberOfInstances;
-  @Uint16() external int FilterNameLength;
+  @Uint32()
+  external int NextEntryOffset;
+  @Uint32()
+  external int FrameID;
+  @Uint32()
+  external int NumberOfInstances;
+  @Uint16()
+  external int FilterNameLength;
   @Array(1)
   external Array<Uint16> FilterNameBuffer;
 }
 
 class FILTER_AGGREGATE_BASIC_INFORMATION extends Struct {
-  @Uint32() external int NextEntryOffset;
-  @Uint32() external int Flags;
-  @Uint32() external int Type;
+  @Uint32()
+  external int NextEntryOffset;
+  @Uint32()
+  external int Flags;
+  @Uint32()
+  external int Type;
 }
 
 class FILTER_AGGREGATE_STANDARD_INFORMATION extends Struct {
-  @Uint32() external int NextEntryOffset;
-  @Uint32() external int Flags;
-  @Uint32() external int Type;
+  @Uint32()
+  external int NextEntryOffset;
+  @Uint32()
+  external int Flags;
+  @Uint32()
+  external int Type;
 }
 
 class FILTER_VOLUME_BASIC_INFORMATION extends Struct {
-  @Uint16() external int FilterVolumeNameLength;
+  @Uint16()
+  external int FilterVolumeNameLength;
   @Array(1)
   external Array<Uint16> FilterVolumeName;
 }
 
 class FILTER_VOLUME_STANDARD_INFORMATION extends Struct {
-  @Uint32() external int NextEntryOffset;
-  @Uint32() external int Flags;
-  @Uint32() external int FrameID;
-  @Uint32() external int FileSystemType;
-  @Uint16() external int FilterVolumeNameLength;
+  @Uint32()
+  external int NextEntryOffset;
+  @Uint32()
+  external int Flags;
+  @Uint32()
+  external int FrameID;
+  @Uint32()
+  external int FileSystemType;
+  @Uint16()
+  external int FilterVolumeNameLength;
   @Array(1)
   external Array<Uint16> FilterVolumeName;
 }
 
 class INSTANCE_BASIC_INFORMATION extends Struct {
-  @Uint32() external int NextEntryOffset;
-  @Uint16() external int InstanceNameLength;
-  @Uint16() external int InstanceNameBufferOffset;
+  @Uint32()
+  external int NextEntryOffset;
+  @Uint16()
+  external int InstanceNameLength;
+  @Uint16()
+  external int InstanceNameBufferOffset;
 }
 
 class INSTANCE_PARTIAL_INFORMATION extends Struct {
-  @Uint32() external int NextEntryOffset;
-  @Uint16() external int InstanceNameLength;
-  @Uint16() external int InstanceNameBufferOffset;
-  @Uint16() external int AltitudeLength;
-  @Uint16() external int AltitudeBufferOffset;
+  @Uint32()
+  external int NextEntryOffset;
+  @Uint16()
+  external int InstanceNameLength;
+  @Uint16()
+  external int InstanceNameBufferOffset;
+  @Uint16()
+  external int AltitudeLength;
+  @Uint16()
+  external int AltitudeBufferOffset;
 }
 
 class INSTANCE_FULL_INFORMATION extends Struct {
-  @Uint32() external int NextEntryOffset;
-  @Uint16() external int InstanceNameLength;
-  @Uint16() external int InstanceNameBufferOffset;
-  @Uint16() external int AltitudeLength;
-  @Uint16() external int AltitudeBufferOffset;
-  @Uint16() external int VolumeNameLength;
-  @Uint16() external int VolumeNameBufferOffset;
-  @Uint16() external int FilterNameLength;
-  @Uint16() external int FilterNameBufferOffset;
+  @Uint32()
+  external int NextEntryOffset;
+  @Uint16()
+  external int InstanceNameLength;
+  @Uint16()
+  external int InstanceNameBufferOffset;
+  @Uint16()
+  external int AltitudeLength;
+  @Uint16()
+  external int AltitudeBufferOffset;
+  @Uint16()
+  external int VolumeNameLength;
+  @Uint16()
+  external int VolumeNameBufferOffset;
+  @Uint16()
+  external int FilterNameLength;
+  @Uint16()
+  external int FilterNameBufferOffset;
 }
 
 class INSTANCE_AGGREGATE_STANDARD_INFORMATION extends Struct {
-  @Uint32() external int NextEntryOffset;
-  @Uint32() external int Flags;
-  @Uint32() external int Type;
+  @Uint32()
+  external int NextEntryOffset;
+  @Uint32()
+  external int Flags;
+  @Uint32()
+  external int Type;
 }
 
 class FILTER_MESSAGE_HEADER extends Struct {
-  @Uint32() external int ReplyLength;
-  @Uint64() external int MessageId;
+  @Uint32()
+  external int ReplyLength;
+  @Uint64()
+  external int MessageId;
 }
 
 class FILTER_REPLY_HEADER extends Struct {
-  @Int32() external int Status;
-  @Uint64() external int MessageId;
+  @Int32()
+  external int Status;
+  @Uint64()
+  external int MessageId;
 }
-

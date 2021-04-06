@@ -45,45 +45,59 @@ import 'package:ffi/ffi.dart';
 
 class SourceInfo extends Struct {
   external Pointer<Utf16> FileName;
-  @Uint32() external int LineNumber;
-  @Uint32() external int ColumnNumber;
-  @Uint32() external int CharPosition;
+  @Uint32()
+  external int LineNumber;
+  @Uint32()
+  external int ColumnNumber;
+  @Uint32()
+  external int CharPosition;
   external Pointer<Utf16> Hash;
 }
 
 class ParentChildRelation extends Struct {
-  @Uint64() external int Parent;
-  @Uint64() external int Child;
-  @Uint32() external int ChildIndex;
+  @Uint64()
+  external int Parent;
+  @Uint64()
+  external int Child;
+  @Uint32()
+  external int ChildIndex;
 }
 
 class VisualElement extends Struct {
-  @Uint64() external int Handle;
+  @Uint64()
+  external int Handle;
   external SourceInfo SrcInfo;
   external Pointer<Utf16> Type;
   external Pointer<Utf16> Name;
-  @Uint32() external int NumChildren;
+  @Uint32()
+  external int NumChildren;
 }
 
 class PropertyChainSource extends Struct {
-  @Uint64() external int Handle;
+  @Uint64()
+  external int Handle;
   external Pointer<Utf16> TargetType;
   external Pointer<Utf16> Name;
-  @Uint32() external int Source;
+  @Uint32()
+  external int Source;
   external SourceInfo SrcInfo;
 }
 
 class PropertyChainValue extends Struct {
-  @Uint32() external int Index;
+  @Uint32()
+  external int Index;
   external Pointer<Utf16> Type;
   external Pointer<Utf16> DeclaringType;
   external Pointer<Utf16> ValueType;
   external Pointer<Utf16> ItemType;
   external Pointer<Utf16> Value;
-  @Int32() external int Overridden;
-  @Int64() external int MetadataBits;
+  @Int32()
+  external int Overridden;
+  @Int64()
+  external int MetadataBits;
   external Pointer<Utf16> PropertyName;
-  @Uint32() external int PropertyChainIndex;
+  @Uint32()
+  external int PropertyChainIndex;
 }
 
 class EnumType extends Struct {
@@ -93,16 +107,21 @@ class EnumType extends Struct {
 }
 
 class CollectionElementValue extends Struct {
-  @Uint32() external int Index;
+  @Uint32()
+  external int Index;
   external Pointer<Utf16> ValueType;
   external Pointer<Utf16> Value;
-  @Int64() external int MetadataBits;
+  @Int64()
+  external int MetadataBits;
 }
 
 class BitmapDescription extends Struct {
-  @Uint32() external int Width;
-  @Uint32() external int Height;
-  @Uint32() external int Format;
-  @Uint32() external int AlphaMode;
+  @Uint32()
+  external int Width;
+  @Uint32()
+  external int Height;
+  @Uint32()
+  external int Format;
+  @Uint32()
+  external int AlphaMode;
 }
-

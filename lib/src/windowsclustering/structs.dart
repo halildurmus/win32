@@ -43,86 +43,65 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class _HCLUSTER extends Struct {
-}
+class _HCLUSTER extends Struct {}
 
-class _HNODE extends Struct {
-}
+class _HNODE extends Struct {}
 
-class _HRESOURCE extends Struct {
-}
+class _HRESOURCE extends Struct {}
 
-class _HGROUP extends Struct {
-}
+class _HGROUP extends Struct {}
 
-class _HNETWORK extends Struct {
-}
+class _HNETWORK extends Struct {}
 
-class _HNETINTERFACE extends Struct {
-}
+class _HNETINTERFACE extends Struct {}
 
-class _HCHANGE extends Struct {
-}
+class _HCHANGE extends Struct {}
 
-class _HCLUSENUM extends Struct {
-}
+class _HCLUSENUM extends Struct {}
 
-class _HGROUPENUM extends Struct {
-}
+class _HGROUPENUM extends Struct {}
 
-class _HRESENUM extends Struct {
-}
+class _HRESENUM extends Struct {}
 
-class _HNETWORKENUM extends Struct {
-}
+class _HNETWORKENUM extends Struct {}
 
-class _HNODEENUM extends Struct {
-}
+class _HNODEENUM extends Struct {}
 
-class _HNETINTERFACEENUM extends Struct {
-}
+class _HNETINTERFACEENUM extends Struct {}
 
-class _HRESTYPEENUM extends Struct {
-}
+class _HRESTYPEENUM extends Struct {}
 
-class _HREGBATCH extends Struct {
-}
+class _HREGBATCH extends Struct {}
 
-class _HREGBATCHPORT extends Struct {
-}
+class _HREGBATCHPORT extends Struct {}
 
-class _HREGBATCHNOTIFICATION extends Struct {
-}
+class _HREGBATCHNOTIFICATION extends Struct {}
 
-class _HREGREADBATCH extends Struct {
-}
+class _HREGREADBATCH extends Struct {}
 
-class _HREGREADBATCHREPLY extends Struct {
-}
+class _HREGREADBATCHREPLY extends Struct {}
 
-class _HNODEENUMEX extends Struct {
-}
+class _HNODEENUMEX extends Struct {}
 
-class _HCLUSENUMEX extends Struct {
-}
+class _HCLUSENUMEX extends Struct {}
 
-class _HGROUPENUMEX extends Struct {
-}
+class _HGROUPENUMEX extends Struct {}
 
-class _HRESENUMEX extends Struct {
-}
+class _HRESENUMEX extends Struct {}
 
-class _HGROUPSET extends Struct {
-}
+class _HGROUPSET extends Struct {}
 
-class _HGROUPSETENUM extends Struct {
-}
+class _HGROUPSETENUM extends Struct {}
 
 class CLUSTERVERSIONINFO_NT4 extends Struct {
-  @Uint32() external int dwVersionInfoSize;
-  @Uint16() external int MajorVersion;
-  @Uint16() external int MinorVersion;
-  @Uint16() external int BuildNumber;
+  @Uint32()
+  external int dwVersionInfoSize;
+  @Uint16()
+  external int MajorVersion;
+  @Uint16()
+  external int MinorVersion;
+  @Uint16()
+  external int BuildNumber;
   @Array(64)
   external Array<Uint16> szVendorId;
   @Array(64)
@@ -130,238 +109,325 @@ class CLUSTERVERSIONINFO_NT4 extends Struct {
 }
 
 class CLUSTERVERSIONINFO extends Struct {
-  @Uint32() external int dwVersionInfoSize;
-  @Uint16() external int MajorVersion;
-  @Uint16() external int MinorVersion;
-  @Uint16() external int BuildNumber;
+  @Uint32()
+  external int dwVersionInfoSize;
+  @Uint16()
+  external int MajorVersion;
+  @Uint16()
+  external int MinorVersion;
+  @Uint16()
+  external int BuildNumber;
   @Array(64)
   external Array<Uint16> szVendorId;
   @Array(64)
   external Array<Uint16> szCSDVersion;
-  @Uint32() external int dwClusterHighestVersion;
-  @Uint32() external int dwClusterLowestVersion;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwReserved;
+  @Uint32()
+  external int dwClusterHighestVersion;
+  @Uint32()
+  external int dwClusterLowestVersion;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwReserved;
 }
 
 class CLUS_STARTING_PARAMS extends Struct {
-  @Uint32() external int dwSize;
-  @Int32() external int bForm;
-  @Int32() external int bFirst;
+  @Uint32()
+  external int dwSize;
+  @Int32()
+  external int bForm;
+  @Int32()
+  external int bFirst;
 }
 
 class CLUSCTL_RESOURCE_STATE_CHANGE_REASON_STRUCT extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwVersion;
-  @Uint32() external int eReason;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwVersion;
+  @Uint32()
+  external int eReason;
 }
 
 class CLUSTER_BATCH_COMMAND extends Struct {
-  @Uint32() external int Command;
-  @Uint32() external int dwOptions;
+  @Uint32()
+  external int Command;
+  @Uint32()
+  external int dwOptions;
   external Pointer<Utf16> wzName;
   external Pointer<Uint8> lpData;
-  @Uint32() external int cbData;
+  @Uint32()
+  external int cbData;
 }
 
 class CLUSTER_READ_BATCH_COMMAND extends Struct {
-  @Uint32() external int Command;
-  @Uint32() external int dwOptions;
+  @Uint32()
+  external int Command;
+  @Uint32()
+  external int dwOptions;
   external Pointer<Utf16> wzSubkeyName;
   external Pointer<Utf16> wzValueName;
   external Pointer<Uint8> lpData;
-  @Uint32() external int cbData;
+  @Uint32()
+  external int cbData;
 }
 
 class CLUSTER_ENUM_ITEM extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int dwType;
-  @Uint32() external int cbId;
+  @Uint32()
+  external int dwVersion;
+  @Uint32()
+  external int dwType;
+  @Uint32()
+  external int cbId;
   external Pointer<Utf16> lpszId;
-  @Uint32() external int cbName;
+  @Uint32()
+  external int cbName;
   external Pointer<Utf16> lpszName;
 }
 
 class CLUSTER_CREATE_GROUP_INFO extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int groupType;
+  @Uint32()
+  external int dwVersion;
+  @Uint32()
+  external int groupType;
 }
 
 class CLUSTER_VALIDATE_PATH extends Struct {
-  @Uint16() external int szPath;
+  @Uint16()
+  external int szPath;
 }
 
 class CLUSTER_VALIDATE_DIRECTORY extends Struct {
-  @Uint16() external int szPath;
+  @Uint16()
+  external int szPath;
 }
 
 class CLUSTER_VALIDATE_NETNAME extends Struct {
-  @Uint16() external int szNetworkName;
+  @Uint16()
+  external int szNetworkName;
 }
 
 class CLUSTER_VALIDATE_CSV_FILENAME extends Struct {
-  @Uint16() external int szFileName;
+  @Uint16()
+  external int szFileName;
 }
 
 class CLUSTER_SET_PASSWORD_STATUS extends Struct {
-  @Uint32() external int NodeId;
-  @Uint8() external int SetAttempted;
-  @Uint32() external int ReturnStatus;
+  @Uint32()
+  external int NodeId;
+  @Uint8()
+  external int SetAttempted;
+  @Uint32()
+  external int ReturnStatus;
 }
 
 class CLUSTER_IP_ENTRY extends Struct {
   external Pointer<Utf16> lpszIpAddress;
-  @Uint32() external int dwPrefixLength;
+  @Uint32()
+  external int dwPrefixLength;
 }
 
 class CREATE_CLUSTER_CONFIG extends Struct {
-  @Uint32() external int dwVersion;
+  @Uint32()
+  external int dwVersion;
   external Pointer<Utf16> lpszClusterName;
-  @Uint32() external int cNodes;
+  @Uint32()
+  external int cNodes;
   external Pointer<Pointer<Utf16>> ppszNodeNames;
-  @Uint32() external int cIpEntries;
+  @Uint32()
+  external int cIpEntries;
   external Pointer<CLUSTER_IP_ENTRY> pIpEntries;
-  @Uint8() external int fEmptyCluster;
-  @Uint32() external int managementPointType;
-  @Uint32() external int managementPointResType;
+  @Uint8()
+  external int fEmptyCluster;
+  @Uint32()
+  external int managementPointType;
+  @Uint32()
+  external int managementPointResType;
 }
 
 class CREATE_CLUSTER_NAME_ACCOUNT extends Struct {
-  @Uint32() external int dwVersion;
+  @Uint32()
+  external int dwVersion;
   external Pointer<Utf16> lpszClusterName;
-  @Uint32() external int dwFlags;
+  @Uint32()
+  external int dwFlags;
   external Pointer<Utf16> pszUserName;
   external Pointer<Utf16> pszPassword;
   external Pointer<Utf16> pszDomain;
-  @Uint32() external int managementPointType;
-  @Uint32() external int managementPointResType;
-  @Uint8() external int bUpgradeVCOs;
+  @Uint32()
+  external int managementPointType;
+  @Uint32()
+  external int managementPointResType;
+  @Uint8()
+  external int bUpgradeVCOs;
 }
 
 class NOTIFY_FILTER_AND_TYPE extends Struct {
-  @Uint32() external int dwObjectType;
-  @Int64() external int FilterFlags;
+  @Uint32()
+  external int dwObjectType;
+  @Int64()
+  external int FilterFlags;
 }
 
 class CLUSTER_MEMBERSHIP_INFO extends Struct {
-  @Int32() external int HasQuorum;
-  @Uint32() external int UpnodesSize;
+  @Int32()
+  external int HasQuorum;
+  @Uint32()
+  external int UpnodesSize;
   @Array(1)
   external Array<Uint8> Upnodes;
 }
 
 class CLUSTER_AVAILABILITY_SET_CONFIG extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int dwUpdateDomains;
-  @Uint32() external int dwFaultDomains;
-  @Int32() external int bReserveSpareNode;
+  @Uint32()
+  external int dwVersion;
+  @Uint32()
+  external int dwUpdateDomains;
+  @Uint32()
+  external int dwFaultDomains;
+  @Int32()
+  external int bReserveSpareNode;
 }
 
 class CLUSTER_GROUP_ENUM_ITEM extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int cbId;
+  @Uint32()
+  external int dwVersion;
+  @Uint32()
+  external int cbId;
   external Pointer<Utf16> lpszId;
-  @Uint32() external int cbName;
+  @Uint32()
+  external int cbName;
   external Pointer<Utf16> lpszName;
-  @Uint32() external int state;
-  @Uint32() external int cbOwnerNode;
+  @Uint32()
+  external int state;
+  @Uint32()
+  external int cbOwnerNode;
   external Pointer<Utf16> lpszOwnerNode;
-  @Uint32() external int dwFlags;
-  @Uint32() external int cbProperties;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int cbProperties;
   external Pointer pProperties;
-  @Uint32() external int cbRoProperties;
+  @Uint32()
+  external int cbRoProperties;
   external Pointer pRoProperties;
 }
 
 class CLUSTER_RESOURCE_ENUM_ITEM extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int cbId;
+  @Uint32()
+  external int dwVersion;
+  @Uint32()
+  external int cbId;
   external Pointer<Utf16> lpszId;
-  @Uint32() external int cbName;
+  @Uint32()
+  external int cbName;
   external Pointer<Utf16> lpszName;
-  @Uint32() external int cbOwnerGroupName;
+  @Uint32()
+  external int cbOwnerGroupName;
   external Pointer<Utf16> lpszOwnerGroupName;
-  @Uint32() external int cbOwnerGroupId;
+  @Uint32()
+  external int cbOwnerGroupId;
   external Pointer<Utf16> lpszOwnerGroupId;
-  @Uint32() external int cbProperties;
+  @Uint32()
+  external int cbProperties;
   external Pointer pProperties;
-  @Uint32() external int cbRoProperties;
+  @Uint32()
+  external int cbRoProperties;
   external Pointer pRoProperties;
 }
 
 class GROUP_FAILURE_INFO extends Struct {
-  @Uint32() external int dwFailoverAttemptsRemaining;
-  @Uint32() external int dwFailoverPeriodRemaining;
+  @Uint32()
+  external int dwFailoverAttemptsRemaining;
+  @Uint32()
+  external int dwFailoverPeriodRemaining;
 }
 
 class GROUP_FAILURE_INFO_BUFFER extends Struct {
-  @Uint32() external int dwVersion;
+  @Uint32()
+  external int dwVersion;
   external GROUP_FAILURE_INFO Info;
 }
 
 class RESOURCE_FAILURE_INFO extends Struct {
-  @Uint32() external int dwRestartAttemptsRemaining;
-  @Uint32() external int dwRestartPeriodRemaining;
+  @Uint32()
+  external int dwRestartAttemptsRemaining;
+  @Uint32()
+  external int dwRestartPeriodRemaining;
 }
 
 class RESOURCE_FAILURE_INFO_BUFFER extends Struct {
-  @Uint32() external int dwVersion;
+  @Uint32()
+  external int dwVersion;
   external RESOURCE_FAILURE_INFO Info;
 }
 
 class RESOURCE_TERMINAL_FAILURE_INFO_BUFFER extends Struct {
-  @Int32() external int isTerminalFailure;
-  @Uint32() external int restartPeriodRemaining;
+  @Int32()
+  external int isTerminalFailure;
+  @Uint32()
+  external int restartPeriodRemaining;
 }
 
 class CLUSPROP_SYNTAX extends Struct {
-  @Uint32() external int dw;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int dw;
+  @Uint32()
+  external int Anonymous;
 }
 
 class CLUSPROP_VALUE extends Struct {
   external CLUSPROP_SYNTAX Syntax;
-  @Uint32() external int cbLength;
+  @Uint32()
+  external int cbLength;
 }
 
 class CLUSPROP_BINARY extends Struct {
   external CLUSPROP_VALUE __AnonymousBase_clusapi_L5092_C41;
-  @Uint8() external int rgb;
+  @Uint8()
+  external int rgb;
 }
 
 class CLUSPROP_WORD extends Struct {
   external CLUSPROP_VALUE __AnonymousBase_clusapi_L5102_C39;
-  @Uint16() external int w;
+  @Uint16()
+  external int w;
 }
 
 class CLUSPROP_DWORD extends Struct {
   external CLUSPROP_VALUE __AnonymousBase_clusapi_L5112_C40;
-  @Uint32() external int dw;
+  @Uint32()
+  external int dw;
 }
 
 class CLUSPROP_LONG extends Struct {
   external CLUSPROP_VALUE __AnonymousBase_clusapi_L5122_C39;
-  @Int32() external int l;
+  @Int32()
+  external int l;
 }
 
 class CLUSPROP_SZ extends Struct {
   external CLUSPROP_VALUE __AnonymousBase_clusapi_L5132_C37;
-  @Uint16() external int sz;
+  @Uint16()
+  external int sz;
 }
 
 class CLUSPROP_ULARGE_INTEGER extends Struct {
   external CLUSPROP_VALUE __AnonymousBase_clusapi_L5149_C14;
-  @Uint64() external int li;
+  @Uint64()
+  external int li;
 }
 
 class CLUSPROP_LARGE_INTEGER extends Struct {
   external CLUSPROP_VALUE __AnonymousBase_clusapi_L5162_C14;
-  @Int64() external int li;
+  @Int64()
+  external int li;
 }
 
 class CLUSPROP_SECURITY_DESCRIPTOR extends Struct {
   external CLUSPROP_VALUE __AnonymousBase_clusapi_L5174_C54;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int Anonymous;
 }
 
 class CLUSPROP_FILETIME extends Struct {
@@ -370,12 +436,14 @@ class CLUSPROP_FILETIME extends Struct {
 }
 
 class CLUS_RESOURCE_CLASS_INFO extends Struct {
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int Anonymous;
 }
 
 class CLUSPROP_RESOURCE_CLASS extends Struct {
   external CLUSPROP_VALUE __AnonymousBase_clusapi_L5213_C14;
-  @Uint32() external int rc;
+  @Uint32()
+  external int rc;
 }
 
 class CLUSPROP_RESOURCE_CLASS_INFO extends Struct {
@@ -390,41 +458,56 @@ class CLUSPROP_REQUIRED_DEPENDENCY extends Struct {
 }
 
 class CLUS_FORCE_QUORUM_INFO extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int dwNodeBitMask;
-  @Uint32() external int dwMaxNumberofNodes;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwNodeBitMask;
+  @Uint32()
+  external int dwMaxNumberofNodes;
   @Array(1)
   external Array<Uint16> multiszNodeList;
 }
 
 class CLUS_PARTITION_INFO extends Struct {
-  @Uint32() external int dwFlags;
+  @Uint32()
+  external int dwFlags;
   @Array(129)
   external Array<Uint16> szDeviceName;
   @Array(129)
   external Array<Uint16> szVolumeLabel;
-  @Uint32() external int dwSerialNumber;
-  @Uint32() external int rgdwMaximumComponentLength;
-  @Uint32() external int dwFileSystemFlags;
+  @Uint32()
+  external int dwSerialNumber;
+  @Uint32()
+  external int rgdwMaximumComponentLength;
+  @Uint32()
+  external int dwFileSystemFlags;
   @Array(32)
   external Array<Uint16> szFileSystem;
 }
 
 class CLUS_PARTITION_INFO_EX extends Struct {
-  @Uint32() external int dwFlags;
+  @Uint32()
+  external int dwFlags;
   @Array(129)
   external Array<Uint16> szDeviceName;
   @Array(129)
   external Array<Uint16> szVolumeLabel;
-  @Uint32() external int dwSerialNumber;
-  @Uint32() external int rgdwMaximumComponentLength;
-  @Uint32() external int dwFileSystemFlags;
+  @Uint32()
+  external int dwSerialNumber;
+  @Uint32()
+  external int rgdwMaximumComponentLength;
+  @Uint32()
+  external int dwFileSystemFlags;
   @Array(32)
   external Array<Uint16> szFileSystem;
-  @Uint64() external int TotalSizeInBytes;
-  @Uint64() external int FreeSizeInBytes;
-  @Uint32() external int DeviceNumber;
-  @Uint32() external int PartitionNumber;
+  @Uint64()
+  external int TotalSizeInBytes;
+  @Uint64()
+  external int FreeSizeInBytes;
+  @Uint32()
+  external int DeviceNumber;
+  @Uint32()
+  external int PartitionNumber;
   external GUID VolumeGuid;
 }
 
@@ -432,14 +515,19 @@ class CLUS_PARTITION_INFO_EX2 extends Struct {
   external GUID GptPartitionId;
   @Array(129)
   external Array<Uint16> szPartitionName;
-  @Uint32() external int EncryptionFlags;
+  @Uint32()
+  external int EncryptionFlags;
 }
 
 class CLUS_CSV_VOLUME_INFO extends Struct {
-  @Uint64() external int VolumeOffset;
-  @Uint32() external int PartitionNumber;
-  @Uint32() external int FaultState;
-  @Uint32() external int BackupState;
+  @Uint64()
+  external int VolumeOffset;
+  @Uint32()
+  external int PartitionNumber;
+  @Uint32()
+  external int FaultState;
+  @Uint32()
+  external int BackupState;
   @Array(129)
   external Array<Uint16> szVolumeFriendlyName;
   @Array(50)
@@ -447,7 +535,8 @@ class CLUS_CSV_VOLUME_INFO extends Struct {
 }
 
 class CLUS_CSV_VOLUME_NAME extends Struct {
-  @Int64() external int VolumeOffset;
+  @Int64()
+  external int VolumeOffset;
   @Array(129)
   external Array<Uint16> szVolumeName;
   @Array(129)
@@ -459,7 +548,8 @@ class CLUSTER_SHARED_VOLUME_STATE_INFO extends Struct {
   external Array<Uint16> szVolumeName;
   @Array(129)
   external Array<Uint16> szNodeName;
-  @Uint32() external int VolumeState;
+  @Uint32()
+  external int VolumeState;
 }
 
 class CLUSTER_SHARED_VOLUME_STATE_INFO_EX extends Struct {
@@ -467,16 +557,21 @@ class CLUSTER_SHARED_VOLUME_STATE_INFO_EX extends Struct {
   external Array<Uint16> szVolumeName;
   @Array(129)
   external Array<Uint16> szNodeName;
-  @Uint32() external int VolumeState;
+  @Uint32()
+  external int VolumeState;
   @Array(129)
   external Array<Uint16> szVolumeFriendlyName;
-  @Uint64() external int RedirectedIOReason;
-  @Uint64() external int VolumeRedirectedIOReason;
+  @Uint64()
+  external int RedirectedIOReason;
+  @Uint64()
+  external int VolumeRedirectedIOReason;
 }
 
 class CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME extends Struct {
-  @Uint32() external int InputType;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int InputType;
+  @Uint32()
+  external int Anonymous;
 }
 
 class CLUSTER_SHARED_VOLUME_RENAME_INPUT_NAME extends Struct {
@@ -492,31 +587,42 @@ class CLUSTER_SHARED_VOLUME_RENAME_INPUT_GUID_NAME extends Struct {
 }
 
 class CLUSTER_SHARED_VOLUME_RENAME_INPUT extends Struct {
-  external CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME __AnonymousBase_clusapi_L5427_C14;
-  external CLUSTER_SHARED_VOLUME_RENAME_INPUT_NAME __AnonymousBase_clusapi_L5428_C14;
+  external CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME
+      __AnonymousBase_clusapi_L5427_C14;
+  external CLUSTER_SHARED_VOLUME_RENAME_INPUT_NAME
+      __AnonymousBase_clusapi_L5428_C14;
 }
 
 class CLUSTER_SHARED_VOLUME_RENAME_GUID_INPUT extends Struct {
-  external CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME __AnonymousBase_clusapi_L5438_C14;
-  external CLUSTER_SHARED_VOLUME_RENAME_INPUT_GUID_NAME __AnonymousBase_clusapi_L5439_C14;
+  external CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME
+      __AnonymousBase_clusapi_L5438_C14;
+  external CLUSTER_SHARED_VOLUME_RENAME_INPUT_GUID_NAME
+      __AnonymousBase_clusapi_L5439_C14;
 }
 
 class CLUS_CHKDSK_INFO extends Struct {
-  @Uint32() external int PartitionNumber;
-  @Uint32() external int ChkdskState;
-  @Uint32() external int FileIdCount;
+  @Uint32()
+  external int PartitionNumber;
+  @Uint32()
+  external int ChkdskState;
+  @Uint32()
+  external int FileIdCount;
   @Array(1)
   external Array<Uint64> FileIdList;
 }
 
 class CLUS_DISK_NUMBER_INFO extends Struct {
-  @Uint32() external int DiskNumber;
-  @Uint32() external int BytesPerSector;
+  @Uint32()
+  external int DiskNumber;
+  @Uint32()
+  external int BytesPerSector;
 }
 
 class CLUS_SHARED_VOLUME_BACKUP_MODE extends Struct {
-  @Uint32() external int BackupState;
-  @Uint32() external int DelayTimerInSecs;
+  @Uint32()
+  external int BackupState;
+  @Uint32()
+  external int DelayTimerInSecs;
   @Array(129)
   external Array<Uint16> VolumeName;
 }
@@ -537,8 +643,10 @@ class CLUSPROP_PARTITION_INFO_EX2 extends Struct {
 }
 
 class CLUS_FTSET_INFO extends Struct {
-  @Uint32() external int dwRootSignature;
-  @Uint32() external int dwFtType;
+  @Uint32()
+  external int dwRootSignature;
+  @Uint32()
+  external int dwFtType;
 }
 
 class CLUSPROP_FTSET_INFO extends Struct {
@@ -547,7 +655,8 @@ class CLUSPROP_FTSET_INFO extends Struct {
 }
 
 class CLUS_SCSI_ADDRESS extends Struct {
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int Anonymous;
 }
 
 class CLUSPROP_SCSI_ADDRESS extends Struct {
@@ -556,13 +665,17 @@ class CLUSPROP_SCSI_ADDRESS extends Struct {
 }
 
 class CLUS_NETNAME_VS_TOKEN_INFO extends Struct {
-  @Uint32() external int ProcessID;
-  @Uint32() external int DesiredAccess;
-  @Int32() external int InheritHandle;
+  @Uint32()
+  external int ProcessID;
+  @Uint32()
+  external int DesiredAccess;
+  @Int32()
+  external int InheritHandle;
 }
 
 class CLUS_NETNAME_PWD_INFO extends Struct {
-  @Uint32() external int Flags;
+  @Uint32()
+  external int Flags;
   @Array(16)
   external Array<Uint16> Password;
   @Array(129)
@@ -572,7 +685,8 @@ class CLUS_NETNAME_PWD_INFO extends Struct {
 }
 
 class CLUS_NETNAME_PWD_INFOEX extends Struct {
-  @Uint32() external int Flags;
+  @Uint32()
+  external int Flags;
   @Array(128)
   external Array<Uint16> Password;
   @Array(129)
@@ -582,18 +696,24 @@ class CLUS_NETNAME_PWD_INFOEX extends Struct {
 }
 
 class CLUS_DNN_LEADER_STATUS extends Struct {
-  @Int32() external int IsOnline;
-  @Int32() external int IsFileServerPresent;
+  @Int32()
+  external int IsOnline;
+  @Int32()
+  external int IsFileServerPresent;
 }
 
 class CLUS_DNN_SODAFS_CLONE_STATUS extends Struct {
-  @Uint32() external int NodeId;
-  @Uint32() external int Status;
+  @Uint32()
+  external int NodeId;
+  @Uint32()
+  external int Status;
 }
 
 class CLUS_NETNAME_IP_INFO_ENTRY extends Struct {
-  @Uint32() external int NodeId;
-  @Uint32() external int AddressSize;
+  @Uint32()
+  external int NodeId;
+  @Uint32()
+  external int AddressSize;
   @Array(1)
   external Array<Uint8> Address;
 }
@@ -601,52 +721,68 @@ class CLUS_NETNAME_IP_INFO_ENTRY extends Struct {
 class CLUS_NETNAME_IP_INFO_FOR_MULTICHANNEL extends Struct {
   @Array(64)
   external Array<Uint16> szName;
-  @Uint32() external int NumEntries;
+  @Uint32()
+  external int NumEntries;
   @Array(1)
   external Array<CLUS_NETNAME_IP_INFO_ENTRY> IpInfo;
 }
 
 class CLUS_MAINTENANCE_MODE_INFO extends Struct {
-  @Int32() external int InMaintenance;
+  @Int32()
+  external int InMaintenance;
 }
 
 class CLUS_CSV_MAINTENANCE_MODE_INFO extends Struct {
-  @Int32() external int InMaintenance;
+  @Int32()
+  external int InMaintenance;
   @Array(129)
   external Array<Uint16> VolumeName;
 }
 
 class CLUS_MAINTENANCE_MODE_INFOEX extends Struct {
-  @Int32() external int InMaintenance;
-  @Uint32() external int MaintainenceModeType;
-  @Uint32() external int InternalState;
-  @Uint32() external int Signature;
+  @Int32()
+  external int InMaintenance;
+  @Uint32()
+  external int MaintainenceModeType;
+  @Uint32()
+  external int InternalState;
+  @Uint32()
+  external int Signature;
 }
 
 class CLUS_SET_MAINTENANCE_MODE_INPUT extends Struct {
-  @Int32() external int InMaintenance;
-  @Uint32() external int ExtraParameterSize;
+  @Int32()
+  external int InMaintenance;
+  @Uint32()
+  external int ExtraParameterSize;
   @Array(1)
   external Array<Uint8> ExtraParameter;
 }
 
 class CLUS_STORAGE_SET_DRIVELETTER extends Struct {
-  @Uint32() external int PartitionNumber;
-  @Uint32() external int DriveLetterMask;
+  @Uint32()
+  external int PartitionNumber;
+  @Uint32()
+  external int DriveLetterMask;
 }
 
 class CLUS_STORAGE_GET_AVAILABLE_DRIVELETTERS extends Struct {
-  @Uint32() external int AvailDrivelettersMask;
+  @Uint32()
+  external int AvailDrivelettersMask;
 }
 
 class CLUS_STORAGE_REMAP_DRIVELETTER extends Struct {
-  @Uint32() external int CurrentDriveLetterMask;
-  @Uint32() external int TargetDriveLetterMask;
+  @Uint32()
+  external int CurrentDriveLetterMask;
+  @Uint32()
+  external int TargetDriveLetterMask;
 }
 
 class CLUS_PROVIDER_STATE_CHANGE_INFO extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int resourceState;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int resourceState;
   @Array(1)
   external Array<Uint16> szProviderId;
 }
@@ -662,26 +798,31 @@ class CLUS_CREATE_INFRASTRUCTURE_FILESERVER_OUTPUT extends Struct {
 }
 
 class CLUSPROP_LIST extends Struct {
-  @Uint32() external int nPropertyCount;
+  @Uint32()
+  external int nPropertyCount;
   external CLUSPROP_SZ PropertyName;
 }
 
 class FILESHARE_CHANGE extends Struct {
-  @Uint32() external int Change;
+  @Uint32()
+  external int Change;
   @Array(84)
   external Array<Uint16> ShareName;
 }
 
 class FILESHARE_CHANGE_LIST extends Struct {
-  @Uint32() external int NumEntries;
+  @Uint32()
+  external int NumEntries;
   @Array(1)
   external Array<FILESHARE_CHANGE> ChangeEntry;
 }
 
 class CLUSCTL_GROUP_GET_LAST_MOVE_TIME_OUTPUT extends Struct {
-  @Uint64() external int GetTickCount64;
+  @Uint64()
+  external int GetTickCount64;
   external SYSTEMTIME GetSystemTime;
-  @Uint32() external int NodeId;
+  @Uint32()
+  external int NodeId;
 }
 
 class CLUSPROP_BUFFER_HELPER extends Struct {
@@ -716,46 +857,56 @@ class CLUSPROP_BUFFER_HELPER extends Struct {
 }
 
 class SR_RESOURCE_TYPE_REPLICATED_PARTITION_INFO extends Struct {
-  @Uint64() external int PartitionOffset;
-  @Uint32() external int Capabilities;
+  @Uint64()
+  external int PartitionOffset;
+  @Uint32()
+  external int Capabilities;
 }
 
 class SR_RESOURCE_TYPE_REPLICATED_PARTITION_ARRAY extends Struct {
-  @Uint32() external int Count;
+  @Uint32()
+  external int Count;
   @Array(1)
   external Array<SR_RESOURCE_TYPE_REPLICATED_PARTITION_INFO> PartitionArray;
 }
 
 class SR_RESOURCE_TYPE_QUERY_ELIGIBLE_LOGDISKS extends Struct {
   external GUID DataDiskGuid;
-  @Uint8() external int IncludeOfflineDisks;
+  @Uint8()
+  external int IncludeOfflineDisks;
 }
 
 class SR_RESOURCE_TYPE_QUERY_ELIGIBLE_TARGET_DATADISKS extends Struct {
   external GUID SourceDataDiskGuid;
   external GUID TargetReplicationGroupGuid;
-  @Uint8() external int SkipConnectivityCheck;
-  @Uint8() external int IncludeOfflineDisks;
+  @Uint8()
+  external int SkipConnectivityCheck;
+  @Uint8()
+  external int IncludeOfflineDisks;
 }
 
 class SR_RESOURCE_TYPE_QUERY_ELIGIBLE_SOURCE_DATADISKS extends Struct {
   external GUID DataDiskGuid;
-  @Uint8() external int IncludeAvailableStoargeDisks;
+  @Uint8()
+  external int IncludeAvailableStoargeDisks;
 }
 
 class SR_RESOURCE_TYPE_DISK_INFO extends Struct {
-  @Uint32() external int Reason;
+  @Uint32()
+  external int Reason;
   external GUID DiskGuid;
 }
 
 class SR_RESOURCE_TYPE_ELIGIBLE_DISKS_RESULT extends Struct {
-  @Uint16() external int Count;
+  @Uint16()
+  external int Count;
   @Array(1)
   external Array<SR_RESOURCE_TYPE_DISK_INFO> DiskInfo;
 }
 
 class SR_RESOURCE_TYPE_REPLICATED_DISK extends Struct {
-  @Uint32() external int Type;
+  @Uint32()
+  external int Type;
   external GUID ClusterDiskResourceGuid;
   external GUID ReplicationGroupId;
   @Array(129)
@@ -763,48 +914,70 @@ class SR_RESOURCE_TYPE_REPLICATED_DISK extends Struct {
 }
 
 class SR_RESOURCE_TYPE_REPLICATED_DISKS_RESULT extends Struct {
-  @Uint16() external int Count;
+  @Uint16()
+  external int Count;
   @Array(1)
   external Array<SR_RESOURCE_TYPE_REPLICATED_DISK> ReplicatedDisks;
 }
 
-class CLUSCTL_RESOURCE_TYPE_STORAGE_GET_AVAILABLE_DISKS_EX2_INPUT extends Struct {
-  @Uint32() external int dwFlags;
+class CLUSCTL_RESOURCE_TYPE_STORAGE_GET_AVAILABLE_DISKS_EX2_INPUT
+    extends Struct {
+  @Uint32()
+  external int dwFlags;
   external GUID guidPoolFilter;
 }
 
 class RESOURCE_STATUS extends Struct {
-  @Uint32() external int ResourceState;
-  @Uint32() external int CheckPoint;
-  @Uint32() external int WaitHint;
-  @IntPtr() external int EventHandle;
+  @Uint32()
+  external int ResourceState;
+  @Uint32()
+  external int CheckPoint;
+  @Uint32()
+  external int WaitHint;
+  @IntPtr()
+  external int EventHandle;
 }
 
 class NodeUtilizationInfoElement extends Struct {
-  @Uint64() external int Id;
-  @Uint64() external int AvailableMemory;
-  @Uint64() external int AvailableMemoryAfterReclamation;
+  @Uint64()
+  external int Id;
+  @Uint64()
+  external int AvailableMemory;
+  @Uint64()
+  external int AvailableMemoryAfterReclamation;
 }
 
 class ResourceUtilizationInfoElement extends Struct {
-  @Uint64() external int PhysicalNumaId;
-  @Uint64() external int CurrentMemory;
+  @Uint64()
+  external int PhysicalNumaId;
+  @Uint64()
+  external int CurrentMemory;
 }
 
 class GET_OPERATION_CONTEXT_PARAMS extends Struct {
-  @Uint32() external int Size;
-  @Uint32() external int Version;
-  @Uint32() external int Type;
-  @Uint32() external int Priority;
+  @Uint32()
+  external int Size;
+  @Uint32()
+  external int Version;
+  @Uint32()
+  external int Type;
+  @Uint32()
+  external int Priority;
 }
 
 class RESOURCE_STATUS_EX extends Struct {
-  @Uint32() external int ResourceState;
-  @Uint32() external int CheckPoint;
-  @IntPtr() external int EventHandle;
-  @Uint32() external int ApplicationSpecificErrorCode;
-  @Uint32() external int Flags;
-  @Uint32() external int WaitHint;
+  @Uint32()
+  external int ResourceState;
+  @Uint32()
+  external int CheckPoint;
+  @IntPtr()
+  external int EventHandle;
+  @Uint32()
+  external int ApplicationSpecificErrorCode;
+  @Uint32()
+  external int Flags;
+  @Uint32()
+  external int WaitHint;
 }
 
 class CLRES_V1_FUNCTIONS extends Struct {
@@ -869,21 +1042,30 @@ class CLRES_V4_FUNCTIONS extends Struct {
 }
 
 class CLRES_FUNCTION_TABLE extends Struct {
-  @Uint32() external int TableSize;
-  @Uint32() external int Version;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int TableSize;
+  @Uint32()
+  external int Version;
+  @Uint32()
+  external int Anonymous;
 }
 
 class RESUTIL_LARGEINT_DATA extends Struct {
-  @Int64() external int Default;
-  @Int64() external int Minimum;
-  @Int64() external int Maximum;
+  @Int64()
+  external int Default;
+  @Int64()
+  external int Minimum;
+  @Int64()
+  external int Maximum;
 }
 
 class RESUTIL_ULARGEINT_DATA extends Struct {
-  @Uint64() external int Default;
-  @Uint64() external int Minimum;
-  @Uint64() external int Maximum;
+  @Uint64()
+  external int Default;
+  @Uint64()
+  external int Minimum;
+  @Uint64()
+  external int Maximum;
 }
 
 class RESUTIL_FILETIME_DATA extends Struct {
@@ -895,12 +1077,18 @@ class RESUTIL_FILETIME_DATA extends Struct {
 class RESUTIL_PROPERTY_ITEM extends Struct {
   external Pointer<Utf16> Name;
   external Pointer<Utf16> KeyName;
-  @Uint32() external int Format;
-  @Uint32() external int Anonymous;
-  @Uint32() external int Minimum;
-  @Uint32() external int Maximum;
-  @Uint32() external int Flags;
-  @Uint32() external int Offset;
+  @Uint32()
+  external int Format;
+  @Uint32()
+  external int Anonymous;
+  @Uint32()
+  external int Minimum;
+  @Uint32()
+  external int Maximum;
+  @Uint32()
+  external int Flags;
+  @Uint32()
+  external int Offset;
 }
 
 class CLRES_CALLBACK_FUNCTION_TABLE extends Struct {
@@ -908,7 +1096,8 @@ class CLRES_CALLBACK_FUNCTION_TABLE extends Struct {
   external PSET_RESOURCE_STATUS_ROUTINE_EX SetResourceStatusEx;
   external PSET_RESOURCE_LOCKED_MODE_ROUTINE SetResourceLockedMode;
   external PSIGNAL_FAILURE_ROUTINE SignalFailure;
-  external PSET_RESOURCE_INMEMORY_NODELOCAL_PROPERTIES_ROUTINE SetResourceInMemoryNodeLocalProperties;
+  external PSET_RESOURCE_INMEMORY_NODELOCAL_PROPERTIES_ROUTINE
+      SetResourceInMemoryNodeLocalProperties;
   external PEND_CONTROL_CALL EndControlCall;
   external PEND_TYPE_CONTROL_CALL EndTypeControlCall;
   external PEXTEND_RES_CONTROL_CALL ExtendControlCall;
@@ -921,187 +1110,176 @@ class CLRES_CALLBACK_FUNCTION_TABLE extends Struct {
 }
 
 class MONITOR_STATE extends Struct {
-  @Int64() external int LastUpdate;
-  @Uint32() external int State;
-  @IntPtr() external int ActiveResource;
-  @Int32() external int ResmonStop;
+  @Int64()
+  external int LastUpdate;
+  @Uint32()
+  external int State;
+  @IntPtr()
+  external int ActiveResource;
+  @Int32()
+  external int ResmonStop;
 }
 
 class POST_UPGRADE_VERSION_INFO extends Struct {
-  @Uint32() external int newMajorVersion;
-  @Uint32() external int newUpgradeVersion;
-  @Uint32() external int oldMajorVersion;
-  @Uint32() external int oldUpgradeVersion;
-  @Uint32() external int reserved;
+  @Uint32()
+  external int newMajorVersion;
+  @Uint32()
+  external int newUpgradeVersion;
+  @Uint32()
+  external int oldMajorVersion;
+  @Uint32()
+  external int oldUpgradeVersion;
+  @Uint32()
+  external int reserved;
 }
 
 class CLUSTER_HEALTH_FAULT extends Struct {
   external Pointer<Utf16> Id;
-  @Uint32() external int ErrorType;
-  @Uint32() external int ErrorCode;
+  @Uint32()
+  external int ErrorType;
+  @Uint32()
+  external int ErrorCode;
   external Pointer<Utf16> Description;
   external Pointer<Utf16> Provider;
-  @Uint32() external int Flags;
-  @Uint32() external int Reserved;
+  @Uint32()
+  external int Flags;
+  @Uint32()
+  external int Reserved;
 }
 
 class CLUSTER_HEALTH_FAULT_ARRAY extends Struct {
-  @Uint32() external int numFaults;
+  @Uint32()
+  external int numFaults;
   external Pointer<CLUSTER_HEALTH_FAULT> faults;
 }
 
 class CLUS_WORKER extends Struct {
-  @IntPtr() external int hThread;
-  @Int32() external int Terminate;
+  @IntPtr()
+  external int hThread;
+  @Int32()
+  external int Terminate;
 }
 
-class _HCLUSCRYPTPROVIDER extends Struct {
-}
+class _HCLUSCRYPTPROVIDER extends Struct {}
 
 class PaxosTagCStruct extends Struct {
-  @Uint64() external int __padding__PaxosTagVtable;
-  @Uint64() external int __padding__NextEpochVtable;
-  @Uint64() external int __padding__NextEpoch_DateTimeVtable;
-  @Uint64() external int NextEpoch_DateTime_ticks;
-  @Int32() external int NextEpoch_Value;
-  @Uint32() external int __padding__BoundryNextEpoch;
-  @Uint64() external int __padding__EpochVtable;
-  @Uint64() external int __padding__Epoch_DateTimeVtable;
-  @Uint64() external int Epoch_DateTime_ticks;
-  @Int32() external int Epoch_Value;
-  @Uint32() external int __padding__BoundryEpoch;
-  @Int32() external int Sequence;
-  @Uint32() external int __padding__BoundrySequence;
+  @Uint64()
+  external int __padding__PaxosTagVtable;
+  @Uint64()
+  external int __padding__NextEpochVtable;
+  @Uint64()
+  external int __padding__NextEpoch_DateTimeVtable;
+  @Uint64()
+  external int NextEpoch_DateTime_ticks;
+  @Int32()
+  external int NextEpoch_Value;
+  @Uint32()
+  external int __padding__BoundryNextEpoch;
+  @Uint64()
+  external int __padding__EpochVtable;
+  @Uint64()
+  external int __padding__Epoch_DateTimeVtable;
+  @Uint64()
+  external int Epoch_DateTime_ticks;
+  @Int32()
+  external int Epoch_Value;
+  @Uint32()
+  external int __padding__BoundryEpoch;
+  @Int32()
+  external int Sequence;
+  @Uint32()
+  external int __padding__BoundrySequence;
 }
 
 class WitnessTagUpdateHelper extends Struct {
-  @Int32() external int Version;
+  @Int32()
+  external int Version;
   external PaxosTagCStruct paxosToSet;
   external PaxosTagCStruct paxosToValidate;
 }
 
 class WitnessTagHelper extends Struct {
-  @Int32() external int Version;
+  @Int32()
+  external int Version;
   external PaxosTagCStruct paxosToValidate;
 }
 
-class ClusApplication extends Struct {
-}
+class ClusApplication extends Struct {}
 
-class Cluster extends Struct {
-}
+class Cluster extends Struct {}
 
-class ClusVersion extends Struct {
-}
+class ClusVersion extends Struct {}
 
-class ClusResType extends Struct {
-}
+class ClusResType extends Struct {}
 
-class ClusProperty extends Struct {
-}
+class ClusProperty extends Struct {}
 
-class ClusProperties extends Struct {
-}
+class ClusProperties extends Struct {}
 
-class DomainNames extends Struct {
-}
+class DomainNames extends Struct {}
 
-class ClusNetwork extends Struct {
-}
+class ClusNetwork extends Struct {}
 
-class ClusNetInterface extends Struct {
-}
+class ClusNetInterface extends Struct {}
 
-class ClusNetInterfaces extends Struct {
-}
+class ClusNetInterfaces extends Struct {}
 
-class ClusResDependencies extends Struct {
-}
+class ClusResDependencies extends Struct {}
 
-class ClusResGroupResources extends Struct {
-}
+class ClusResGroupResources extends Struct {}
 
-class ClusResTypeResources extends Struct {
-}
+class ClusResTypeResources extends Struct {}
 
-class ClusResGroupPreferredOwnerNodes extends Struct {
-}
+class ClusResGroupPreferredOwnerNodes extends Struct {}
 
-class ClusResPossibleOwnerNodes extends Struct {
-}
+class ClusResPossibleOwnerNodes extends Struct {}
 
-class ClusNetworks extends Struct {
-}
+class ClusNetworks extends Struct {}
 
-class ClusNetworkNetInterfaces extends Struct {
-}
+class ClusNetworkNetInterfaces extends Struct {}
 
-class ClusNodeNetInterfaces extends Struct {
-}
+class ClusNodeNetInterfaces extends Struct {}
 
-class ClusRefObject extends Struct {
-}
+class ClusRefObject extends Struct {}
 
-class ClusterNames extends Struct {
-}
+class ClusterNames extends Struct {}
 
-class ClusNode extends Struct {
-}
+class ClusNode extends Struct {}
 
-class ClusNodes extends Struct {
-}
+class ClusNodes extends Struct {}
 
-class ClusResGroup extends Struct {
-}
+class ClusResGroup extends Struct {}
 
-class ClusResGroups extends Struct {
-}
+class ClusResGroups extends Struct {}
 
-class ClusResource extends Struct {
-}
+class ClusResource extends Struct {}
 
-class ClusResources extends Struct {
-}
+class ClusResources extends Struct {}
 
-class ClusResTypes extends Struct {
-}
+class ClusResTypes extends Struct {}
 
-class ClusResTypePossibleOwnerNodes extends Struct {
-}
+class ClusResTypePossibleOwnerNodes extends Struct {}
 
-class ClusPropertyValue extends Struct {
-}
+class ClusPropertyValue extends Struct {}
 
-class ClusPropertyValues extends Struct {
-}
+class ClusPropertyValues extends Struct {}
 
-class ClusPropertyValueData extends Struct {
-}
+class ClusPropertyValueData extends Struct {}
 
-class ClusPartition extends Struct {
-}
+class ClusPartition extends Struct {}
 
-class ClusPartitionEx extends Struct {
-}
+class ClusPartitionEx extends Struct {}
 
-class ClusPartitions extends Struct {
-}
+class ClusPartitions extends Struct {}
 
-class ClusDisk extends Struct {
-}
+class ClusDisk extends Struct {}
 
-class ClusDisks extends Struct {
-}
+class ClusDisks extends Struct {}
 
-class ClusScsiAddress extends Struct {
-}
+class ClusScsiAddress extends Struct {}
 
-class ClusRegistryKeys extends Struct {
-}
+class ClusRegistryKeys extends Struct {}
 
-class ClusCryptoKeys extends Struct {
-}
+class ClusCryptoKeys extends Struct {}
 
-class ClusResDependents extends Struct {
-}
-
+class ClusResDependents extends Struct {}

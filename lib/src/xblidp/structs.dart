@@ -43,9 +43,6 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class XblIdpAuthManager extends Struct {
-}
+class XblIdpAuthManager extends Struct {}
 
-class XblIdpAuthTokenResult extends Struct {
-}
-
+class XblIdpAuthTokenResult extends Struct {}

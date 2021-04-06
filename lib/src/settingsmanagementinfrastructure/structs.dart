@@ -43,6 +43,4 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class SettingsEngine extends Struct {
-}
-
+class SettingsEngine extends Struct {}

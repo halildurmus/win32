@@ -99,4 +99,3 @@ class EC_VARIANT_TYPE {
   static const EcVarTypeString = 0x00000004;
   static const EcVarObjectArrayPropertyHandle = 0x00000005;
 }
-

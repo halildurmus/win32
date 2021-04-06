@@ -108,4 +108,3 @@ class WeekDays {
   static const plaSaturday = 0x00000040;
   static const plaEveryday = 0x0000007f;
 }
-

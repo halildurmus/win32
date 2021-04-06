@@ -43,9 +43,6 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class Contact extends Struct {
-}
+class Contact extends Struct {}
 
-class ContactManager extends Struct {
-}
-
+class ContactManager extends Struct {}

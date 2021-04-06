@@ -44,9 +44,12 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class XPS_GLYPH_INDEX extends Struct {
-  @Int32() external int index;
-  @Float() external double advanceWidth;
-  @Float() external double horizontalOffset;
-  @Float() external double verticalOffset;
+  @Int32()
+  external int index;
+  @Float()
+  external double advanceWidth;
+  @Float()
+  external double horizontalOffset;
+  @Float()
+  external double verticalOffset;
 }
-

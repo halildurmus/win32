@@ -44,127 +44,198 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class WICRect extends Struct {
-  @Int32() external int X;
-  @Int32() external int Y;
-  @Int32() external int Width;
-  @Int32() external int Height;
+  @Int32()
+  external int X;
+  @Int32()
+  external int Y;
+  @Int32()
+  external int Width;
+  @Int32()
+  external int Height;
 }
 
 class WICBitmapPattern extends Struct {
-  @Uint64() external int Position;
-  @Uint32() external int Length;
+  @Uint64()
+  external int Position;
+  @Uint32()
+  external int Length;
   external Pointer<Uint8> Pattern;
   external Pointer<Uint8> Mask;
-  @Int32() external int EndOfStream;
+  @Int32()
+  external int EndOfStream;
 }
 
 class WICImageParameters extends Struct {
   external D2D1_PIXEL_FORMAT PixelFormat;
-  @Float() external double DpiX;
-  @Float() external double DpiY;
-  @Float() external double Top;
-  @Float() external double Left;
-  @Uint32() external int PixelWidth;
-  @Uint32() external int PixelHeight;
+  @Float()
+  external double DpiX;
+  @Float()
+  external double DpiY;
+  @Float()
+  external double Top;
+  @Float()
+  external double Left;
+  @Uint32()
+  external int PixelWidth;
+  @Uint32()
+  external int PixelHeight;
 }
 
 class WICBitmapPlaneDescription extends Struct {
   external GUID Format;
-  @Uint32() external int Width;
-  @Uint32() external int Height;
+  @Uint32()
+  external int Width;
+  @Uint32()
+  external int Height;
 }
 
 class WICBitmapPlane extends Struct {
   external GUID Format;
   external Pointer<Uint8> pbBuffer;
-  @Uint32() external int cbStride;
-  @Uint32() external int cbBufferSize;
+  @Uint32()
+  external int cbStride;
+  @Uint32()
+  external int cbBufferSize;
 }
 
 class WICJpegFrameHeader extends Struct {
-  @Uint32() external int Width;
-  @Uint32() external int Height;
-  @Uint32() external int TransferMatrix;
-  @Uint32() external int ScanType;
-  @Uint32() external int cComponents;
-  @Uint32() external int ComponentIdentifiers;
-  @Uint32() external int SampleFactors;
-  @Uint32() external int QuantizationTableIndices;
+  @Uint32()
+  external int Width;
+  @Uint32()
+  external int Height;
+  @Uint32()
+  external int TransferMatrix;
+  @Uint32()
+  external int ScanType;
+  @Uint32()
+  external int cComponents;
+  @Uint32()
+  external int ComponentIdentifiers;
+  @Uint32()
+  external int SampleFactors;
+  @Uint32()
+  external int QuantizationTableIndices;
 }
 
 class WICJpegScanHeader extends Struct {
-  @Uint32() external int cComponents;
-  @Uint32() external int RestartInterval;
-  @Uint32() external int ComponentSelectors;
-  @Uint32() external int HuffmanTableIndices;
-  @Uint8() external int StartSpectralSelection;
-  @Uint8() external int EndSpectralSelection;
-  @Uint8() external int SuccessiveApproximationHigh;
-  @Uint8() external int SuccessiveApproximationLow;
+  @Uint32()
+  external int cComponents;
+  @Uint32()
+  external int RestartInterval;
+  @Uint32()
+  external int ComponentSelectors;
+  @Uint32()
+  external int HuffmanTableIndices;
+  @Uint8()
+  external int StartSpectralSelection;
+  @Uint8()
+  external int EndSpectralSelection;
+  @Uint8()
+  external int SuccessiveApproximationHigh;
+  @Uint8()
+  external int SuccessiveApproximationLow;
 }
 
 class WICRawCapabilitiesInfo extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int CodecMajorVersion;
-  @Uint32() external int CodecMinorVersion;
-  @Uint32() external int ExposureCompensationSupport;
-  @Uint32() external int ContrastSupport;
-  @Uint32() external int RGBWhitePointSupport;
-  @Uint32() external int NamedWhitePointSupport;
-  @Uint32() external int NamedWhitePointSupportMask;
-  @Uint32() external int KelvinWhitePointSupport;
-  @Uint32() external int GammaSupport;
-  @Uint32() external int TintSupport;
-  @Uint32() external int SaturationSupport;
-  @Uint32() external int SharpnessSupport;
-  @Uint32() external int NoiseReductionSupport;
-  @Uint32() external int DestinationColorProfileSupport;
-  @Uint32() external int ToneCurveSupport;
-  @Uint32() external int RotationSupport;
-  @Uint32() external int RenderModeSupport;
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int CodecMajorVersion;
+  @Uint32()
+  external int CodecMinorVersion;
+  @Uint32()
+  external int ExposureCompensationSupport;
+  @Uint32()
+  external int ContrastSupport;
+  @Uint32()
+  external int RGBWhitePointSupport;
+  @Uint32()
+  external int NamedWhitePointSupport;
+  @Uint32()
+  external int NamedWhitePointSupportMask;
+  @Uint32()
+  external int KelvinWhitePointSupport;
+  @Uint32()
+  external int GammaSupport;
+  @Uint32()
+  external int TintSupport;
+  @Uint32()
+  external int SaturationSupport;
+  @Uint32()
+  external int SharpnessSupport;
+  @Uint32()
+  external int NoiseReductionSupport;
+  @Uint32()
+  external int DestinationColorProfileSupport;
+  @Uint32()
+  external int ToneCurveSupport;
+  @Uint32()
+  external int RotationSupport;
+  @Uint32()
+  external int RenderModeSupport;
 }
 
 class WICRawToneCurvePoint extends Struct {
-  @Double() external double Input;
-  @Double() external double Output;
+  @Double()
+  external double Input;
+  @Double()
+  external double Output;
 }
 
 class WICRawToneCurve extends Struct {
-  @Uint32() external int cPoints;
+  @Uint32()
+  external int cPoints;
   @Array(1)
   external Array<WICRawToneCurvePoint> aPoints;
 }
 
 class WICDdsParameters extends Struct {
-  @Uint32() external int Width;
-  @Uint32() external int Height;
-  @Uint32() external int Depth;
-  @Uint32() external int MipLevels;
-  @Uint32() external int ArraySize;
-  @Uint32() external int DxgiFormat;
-  @Uint32() external int Dimension;
-  @Uint32() external int AlphaMode;
+  @Uint32()
+  external int Width;
+  @Uint32()
+  external int Height;
+  @Uint32()
+  external int Depth;
+  @Uint32()
+  external int MipLevels;
+  @Uint32()
+  external int ArraySize;
+  @Uint32()
+  external int DxgiFormat;
+  @Uint32()
+  external int Dimension;
+  @Uint32()
+  external int AlphaMode;
 }
 
 class WICDdsFormatInfo extends Struct {
-  @Uint32() external int DxgiFormat;
-  @Uint32() external int BytesPerBlock;
-  @Uint32() external int BlockWidth;
-  @Uint32() external int BlockHeight;
+  @Uint32()
+  external int DxgiFormat;
+  @Uint32()
+  external int BytesPerBlock;
+  @Uint32()
+  external int BlockWidth;
+  @Uint32()
+  external int BlockHeight;
 }
 
 class WICMetadataPattern extends Struct {
-  @Uint64() external int Position;
-  @Uint32() external int Length;
+  @Uint64()
+  external int Position;
+  @Uint32()
+  external int Length;
   external Pointer<Uint8> Pattern;
   external Pointer<Uint8> Mask;
-  @Uint64() external int DataOffset;
+  @Uint64()
+  external int DataOffset;
 }
 
 class WICMetadataHeader extends Struct {
-  @Uint64() external int Position;
-  @Uint32() external int Length;
+  @Uint64()
+  external int Position;
+  @Uint32()
+  external int Length;
   external Pointer<Uint8> Header;
-  @Uint64() external int DataOffset;
+  @Uint64()
+  external int DataOffset;
 }
-

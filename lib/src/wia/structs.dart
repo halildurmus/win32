@@ -43,59 +43,79 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class WiaVideo extends Struct {
-}
+class WiaVideo extends Struct {}
 
 class WIA_DITHER_PATTERN_DATA extends Struct {
-  @Int32() external int lSize;
+  @Int32()
+  external int lSize;
   external Pointer<Utf16> bstrPatternName;
-  @Int32() external int lPatternWidth;
-  @Int32() external int lPatternLength;
-  @Int32() external int cbPattern;
+  @Int32()
+  external int lPatternWidth;
+  @Int32()
+  external int lPatternLength;
+  @Int32()
+  external int cbPattern;
   external Pointer<Uint8> pbPattern;
 }
 
 class WIA_PROPID_TO_NAME extends Struct {
-  @Uint32() external int propid;
+  @Uint32()
+  external int propid;
   external Pointer<Utf16> pszName;
 }
 
 class WIA_FORMAT_INFO extends Struct {
   external GUID guidFormatID;
-  @Int32() external int lTymed;
+  @Int32()
+  external int lTymed;
 }
 
 class WIA_DATA_CALLBACK_HEADER extends Struct {
-  @Int32() external int lSize;
+  @Int32()
+  external int lSize;
   external GUID guidFormatID;
-  @Int32() external int lBufferSize;
-  @Int32() external int lPageCount;
+  @Int32()
+  external int lBufferSize;
+  @Int32()
+  external int lPageCount;
 }
 
 class WIA_DATA_TRANSFER_INFO extends Struct {
-  @Uint32() external int ulSize;
-  @Uint32() external int ulSection;
-  @Uint32() external int ulBufferSize;
-  @Int32() external int bDoubleBuffer;
-  @Uint32() external int ulReserved1;
-  @Uint32() external int ulReserved2;
-  @Uint32() external int ulReserved3;
+  @Uint32()
+  external int ulSize;
+  @Uint32()
+  external int ulSection;
+  @Uint32()
+  external int ulBufferSize;
+  @Int32()
+  external int bDoubleBuffer;
+  @Uint32()
+  external int ulReserved1;
+  @Uint32()
+  external int ulReserved2;
+  @Uint32()
+  external int ulReserved3;
 }
 
 class WIA_EXTENDED_TRANSFER_INFO extends Struct {
-  @Uint32() external int ulSize;
-  @Uint32() external int ulMinBufferSize;
-  @Uint32() external int ulOptimalBufferSize;
-  @Uint32() external int ulMaxBufferSize;
-  @Uint32() external int ulNumBuffers;
+  @Uint32()
+  external int ulSize;
+  @Uint32()
+  external int ulMinBufferSize;
+  @Uint32()
+  external int ulOptimalBufferSize;
+  @Uint32()
+  external int ulMaxBufferSize;
+  @Uint32()
+  external int ulNumBuffers;
 }
 
 class WIA_DEV_CAP extends Struct {
   external GUID guid;
-  @Uint32() external int ulFlags;
+  @Uint32()
+  external int ulFlags;
   external Pointer<Utf16> bstrName;
   external Pointer<Utf16> bstrDescription;
   external Pointer<Utf16> bstrIcon;
   external Pointer<Utf16> bstrCommandline;
 }
-

@@ -38,4 +38,3 @@ class WCM_PROPERTY {
   static const wcm_intf_property_dataplan_status = 0x00000005;
   static const wcm_intf_property_hotspot_profile = 0x00000006;
 }
-

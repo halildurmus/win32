@@ -44,42 +44,69 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class MilMatrix3x2D extends Struct {
-  @Double() external double S_11;
-  @Double() external double S_12;
-  @Double() external double S_21;
-  @Double() external double S_22;
-  @Double() external double DX;
-  @Double() external double DY;
+  @Double()
+  external double S_11;
+  @Double()
+  external double S_12;
+  @Double()
+  external double S_21;
+  @Double()
+  external double S_22;
+  @Double()
+  external double DX;
+  @Double()
+  external double DY;
 }
 
 class MilRectD extends Struct {
-  @Double() external double left;
-  @Double() external double top;
-  @Double() external double right;
-  @Double() external double bottom;
+  @Double()
+  external double left;
+  @Double()
+  external double top;
+  @Double()
+  external double right;
+  @Double()
+  external double bottom;
 }
 
 class MilPoint2D extends Struct {
-  @Double() external double X;
-  @Double() external double Y;
+  @Double()
+  external double X;
+  @Double()
+  external double Y;
 }
 
 class MILMatrixF extends Struct {
-  @Double() external double _11;
-  @Double() external double _12;
-  @Double() external double _13;
-  @Double() external double _14;
-  @Double() external double _21;
-  @Double() external double _22;
-  @Double() external double _23;
-  @Double() external double _24;
-  @Double() external double _31;
-  @Double() external double _32;
-  @Double() external double _33;
-  @Double() external double _34;
-  @Double() external double _41;
-  @Double() external double _42;
-  @Double() external double _43;
-  @Double() external double _44;
+  @Double()
+  external double _11;
+  @Double()
+  external double _12;
+  @Double()
+  external double _13;
+  @Double()
+  external double _14;
+  @Double()
+  external double _21;
+  @Double()
+  external double _22;
+  @Double()
+  external double _23;
+  @Double()
+  external double _24;
+  @Double()
+  external double _31;
+  @Double()
+  external double _32;
+  @Double()
+  external double _33;
+  @Double()
+  external double _34;
+  @Double()
+  external double _41;
+  @Double()
+  external double _42;
+  @Double()
+  external double _43;
+  @Double()
+  external double _44;
 }
-

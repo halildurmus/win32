@@ -104,4 +104,3 @@ class Snmp_nTranslateMode {
   static const SNMPAPI_UNTRANSLATED_V1 = 0x00000001;
   static const SNMPAPI_UNTRANSLATED_V2 = 0x00000002;
 }
-

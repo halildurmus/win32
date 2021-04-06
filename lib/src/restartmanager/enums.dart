@@ -52,4 +52,3 @@ class RM_SHUTDOWN_TYPE {
   static const RmForceShutdown = 0x00000001;
   static const RmShutdownOnlyRegistered = 0x00000010;
 }
-

@@ -158,4 +158,3 @@ class UpdateType {
   static const utSoftware = 0x00000001;
   static const utDriver = 0x00000002;
 }
-

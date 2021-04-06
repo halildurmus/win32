@@ -843,7 +843,8 @@ class CERTENROLL_OBJECTID {
   static const XCN_OID_PKCS_12_pbeWithSHA1And3KeyTripleDES = 0x00000194;
   static const XCN_OID_PKCS_12_pbeWithSHA1And40BitRC2 = 0x00000195;
   static const XCN_OID_PKCS_12_pbeWithSHA1And40BitRC4 = 0x00000196;
-  static const XCN_OID_PKCS_12_PROTECTED_PASSWORD_SECRET_BAG_TYPE_ID = 0x00000197;
+  static const XCN_OID_PKCS_12_PROTECTED_PASSWORD_SECRET_BAG_TYPE_ID =
+      0x00000197;
   static const XCN_OID_PKINIT_KP_KDC = 0x00000198;
   static const XCN_OID_PKIX_CA_REPOSITORY = 0x00000199;
   static const XCN_OID_PKIX_OCSP_NONCE = 0x0000019a;
@@ -943,7 +944,8 @@ class CERTENROLL_PROPERTYID {
   static const XCN_CERT_PUB_KEY_CNG_ALG_BIT_LENGTH_PROP_ID = 0x0000005d;
   static const XCN_CERT_ISSUER_PUB_KEY_BIT_LENGTH_PROP_ID = 0x0000005e;
   static const XCN_CERT_ISSUER_CHAIN_SIGN_HASH_CNG_ALG_PROP_ID = 0x0000005f;
-  static const XCN_CERT_ISSUER_CHAIN_PUB_KEY_CNG_ALG_BIT_LENGTH_PROP_ID = 0x00000060;
+  static const XCN_CERT_ISSUER_CHAIN_PUB_KEY_CNG_ALG_BIT_LENGTH_PROP_ID =
+      0x00000060;
   static const XCN_CERT_NO_EXPIRE_NOTIFICATION_PROP_ID = 0x00000061;
   static const XCN_CERT_AUTH_ROOT_SHA256_HASH_PROP_ID = 0x00000062;
   static const XCN_CERT_NCRYPT_KEY_HANDLE_TRANSFER_PROP_ID = 0x00000063;
@@ -993,19 +995,22 @@ class CERT_CHAIN_POLICY_PARAFlags {
   static const CERT_CHAIN_POLICY_IGNORE_CTL_NOT_TIME_VALID_FLAG = 0x00000002;
   static const CERT_CHAIN_POLICY_IGNORE_NOT_TIME_NESTED_FLAG = 0x00000004;
   static const CERT_CHAIN_POLICY_IGNORE_ALL_NOT_TIME_VALID_FLAGS = 0x00000007;
-  static const CERT_CHAIN_POLICY_IGNORE_INVALID_BASIC_CONSTRAINTS_FLAG = 0x00000008;
+  static const CERT_CHAIN_POLICY_IGNORE_INVALID_BASIC_CONSTRAINTS_FLAG =
+      0x00000008;
   static const CERT_CHAIN_POLICY_ALLOW_UNKNOWN_CA_FLAG = 0x00000010;
   static const CERT_CHAIN_POLICY_IGNORE_WRONG_USAGE_FLAG = 0x00000020;
   static const CERT_CHAIN_POLICY_IGNORE_INVALID_NAME_FLAG = 0x00000040;
   static const CERT_CHAIN_POLICY_IGNORE_INVALID_POLICY_FLAG = 0x00000080;
   static const CERT_CHAIN_POLICY_IGNORE_END_REV_UNKNOWN_FLAG = 0x00000100;
-  static const CERT_CHAIN_POLICY_IGNORE_CTL_SIGNER_REV_UNKNOWN_FLAG = 0x00000200;
+  static const CERT_CHAIN_POLICY_IGNORE_CTL_SIGNER_REV_UNKNOWN_FLAG =
+      0x00000200;
   static const CERT_CHAIN_POLICY_IGNORE_CA_REV_UNKNOWN_FLAG = 0x00000400;
   static const CERT_CHAIN_POLICY_IGNORE_ROOT_REV_UNKNOWN_FLAG = 0x00000800;
   static const CERT_CHAIN_POLICY_IGNORE_ALL_REV_UNKNOWN_FLAGS = 0x00000f00;
   static const CERT_CHAIN_POLICY_ALLOW_TESTROOT_FLAG = 0x00008000;
   static const CERT_CHAIN_POLICY_TRUST_TESTROOT_FLAG = 0x00004000;
-  static const CERT_CHAIN_POLICY_IGNORE_NOT_SUPPORTED_CRITICAL_EXT_FLAG = 0x00002000;
+  static const CERT_CHAIN_POLICY_IGNORE_NOT_SUPPORTED_CRITICAL_EXT_FLAG =
+      0x00002000;
   static const CERT_CHAIN_POLICY_IGNORE_PEER_TRUST_FLAG = 0x00001000;
 }
 
@@ -1871,7 +1876,8 @@ class CryptUIWizImport_dwFlags {
 class CryptVerifyCertificateSignatureEx_dwFlags {
   static const CRYPT_VERIFY_CERT_SIGN_DISABLE_MD2_MD4_FLAG = 0x00000001;
   static const CRYPT_VERIFY_CERT_SIGN_SET_STRONG_PROPERTIES_FLAG = 0x00000002;
-  static const CRYPT_VERIFY_CERT_SIGN_RETURN_STRONG_PROPERTIES_FLAG = 0x00000004;
+  static const CRYPT_VERIFY_CERT_SIGN_RETURN_STRONG_PROPERTIES_FLAG =
+      0x00000004;
 }
 
 /// {@category Enum}
@@ -2453,13 +2459,19 @@ class KeyAttestationClaimType {
 /// {@category Enum}
 class KeyCredentialManagerOperationErrorStates {
   static const KeyCredentialManagerOperationErrorStateNone = 0x00000000;
-  static const KeyCredentialManagerOperationErrorStateDeviceJoinFailure = 0x00000001;
+  static const KeyCredentialManagerOperationErrorStateDeviceJoinFailure =
+      0x00000001;
   static const KeyCredentialManagerOperationErrorStateTokenFailure = 0x00000002;
-  static const KeyCredentialManagerOperationErrorStateCertificateFailure = 0x00000004;
-  static const KeyCredentialManagerOperationErrorStateRemoteSessionFailure = 0x00000008;
-  static const KeyCredentialManagerOperationErrorStatePolicyFailure = 0x00000010;
-  static const KeyCredentialManagerOperationErrorStateHardwareFailure = 0x00000020;
-  static const KeyCredentialManagerOperationErrorStatePinExistsFailure = 0x00000040;
+  static const KeyCredentialManagerOperationErrorStateCertificateFailure =
+      0x00000004;
+  static const KeyCredentialManagerOperationErrorStateRemoteSessionFailure =
+      0x00000008;
+  static const KeyCredentialManagerOperationErrorStatePolicyFailure =
+      0x00000010;
+  static const KeyCredentialManagerOperationErrorStateHardwareFailure =
+      0x00000020;
+  static const KeyCredentialManagerOperationErrorStatePinExistsFailure =
+      0x00000040;
 }
 
 /// {@category Enum}
@@ -3331,7 +3343,8 @@ class SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT {
 class SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS {
   static const SecApplicationProtocolNegotiationStatus_None = 0x00000000;
   static const SecApplicationProtocolNegotiationStatus_Success = 0x00000001;
-  static const SecApplicationProtocolNegotiationStatus_SelectedClientOnly = 0x00000002;
+  static const SecApplicationProtocolNegotiationStatus_SelectedClientOnly =
+      0x00000002;
 }
 
 /// {@category Enum}
@@ -4141,7 +4154,8 @@ class X509CertificateTemplateEnrollmentFlag {
   static const EnrollmentReuseKeyOnFullSmartCard = 0x00002000;
   static const EnrollmentNoRevocationInfoInCerts = 0x00004000;
   static const EnrollmentIncludeBasicConstraintsForEECerts = 0x00008000;
-  static const EnrollmentPreviousApprovalKeyBasedValidateReenrollment = 0x00010000;
+  static const EnrollmentPreviousApprovalKeyBasedValidateReenrollment =
+      0x00010000;
   static const EnrollmentCertificateIssuancePoliciesFromRequest = 0x00020000;
   static const EnrollmentSkipAutoRenewal = 0x00040000;
 }
@@ -4423,4 +4437,3 @@ class eTlsSignatureAlgorithm {
   static const TlsSignatureAlgorithm_Dsa = 0x00000002;
   static const TlsSignatureAlgorithm_Ecdsa = 0x00000003;
 }
-

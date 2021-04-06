@@ -1706,4 +1706,3 @@ class tomConstants {
   static const tomCellStructureChangeOnly = 0x00000001;
   static const tomRowHeightActual = 0x0000080b;
 }
-

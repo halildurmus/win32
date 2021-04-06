@@ -54,4 +54,3 @@ class int_serv_wkp {
   static const IS_WKP_TB_TSPEC = 0x0000007f;
   static const IS_WKP_Q_TSPEC = 0x00000080;
 }
-

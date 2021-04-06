@@ -45,24 +45,30 @@ import 'package:ffi/ffi.dart';
 
 class MODULEINFO extends Struct {
   external Pointer lpBaseOfDll;
-  @Uint32() external int SizeOfImage;
+  @Uint32()
+  external int SizeOfImage;
   external Pointer EntryPoint;
 }
 
 class PSAPI_WORKING_SET_BLOCK extends Struct {
-  @IntPtr() external int Flags;
-  @Uint32() external int Anonymous;
+  @IntPtr()
+  external int Flags;
+  @Uint32()
+  external int Anonymous;
 }
 
 class PSAPI_WORKING_SET_INFORMATION extends Struct {
-  @IntPtr() external int NumberOfEntries;
+  @IntPtr()
+  external int NumberOfEntries;
   @Array(1)
   external Array<PSAPI_WORKING_SET_BLOCK> WorkingSetInfo;
 }
 
 class PSAPI_WORKING_SET_EX_BLOCK extends Struct {
-  @IntPtr() external int Flags;
-  @Uint32() external int Anonymous;
+  @IntPtr()
+  external int Flags;
+  @Uint32()
+  external int Anonymous;
 }
 
 class PSAPI_WORKING_SET_EX_INFORMATION extends Struct {
@@ -77,59 +83,100 @@ class PSAPI_WS_WATCH_INFORMATION extends Struct {
 
 class PSAPI_WS_WATCH_INFORMATION_EX extends Struct {
   external PSAPI_WS_WATCH_INFORMATION BasicInfo;
-  @IntPtr() external int FaultingThreadId;
-  @IntPtr() external int Flags;
+  @IntPtr()
+  external int FaultingThreadId;
+  @IntPtr()
+  external int Flags;
 }
 
 class PROCESS_MEMORY_COUNTERS extends Struct {
-  @Uint32() external int cb;
-  @Uint32() external int PageFaultCount;
-  @IntPtr() external int PeakWorkingSetSize;
-  @IntPtr() external int WorkingSetSize;
-  @IntPtr() external int QuotaPeakPagedPoolUsage;
-  @IntPtr() external int QuotaPagedPoolUsage;
-  @IntPtr() external int QuotaPeakNonPagedPoolUsage;
-  @IntPtr() external int QuotaNonPagedPoolUsage;
-  @IntPtr() external int PagefileUsage;
-  @IntPtr() external int PeakPagefileUsage;
+  @Uint32()
+  external int cb;
+  @Uint32()
+  external int PageFaultCount;
+  @IntPtr()
+  external int PeakWorkingSetSize;
+  @IntPtr()
+  external int WorkingSetSize;
+  @IntPtr()
+  external int QuotaPeakPagedPoolUsage;
+  @IntPtr()
+  external int QuotaPagedPoolUsage;
+  @IntPtr()
+  external int QuotaPeakNonPagedPoolUsage;
+  @IntPtr()
+  external int QuotaNonPagedPoolUsage;
+  @IntPtr()
+  external int PagefileUsage;
+  @IntPtr()
+  external int PeakPagefileUsage;
 }
 
 class PROCESS_MEMORY_COUNTERS_EX extends Struct {
-  @Uint32() external int cb;
-  @Uint32() external int PageFaultCount;
-  @IntPtr() external int PeakWorkingSetSize;
-  @IntPtr() external int WorkingSetSize;
-  @IntPtr() external int QuotaPeakPagedPoolUsage;
-  @IntPtr() external int QuotaPagedPoolUsage;
-  @IntPtr() external int QuotaPeakNonPagedPoolUsage;
-  @IntPtr() external int QuotaNonPagedPoolUsage;
-  @IntPtr() external int PagefileUsage;
-  @IntPtr() external int PeakPagefileUsage;
-  @IntPtr() external int PrivateUsage;
+  @Uint32()
+  external int cb;
+  @Uint32()
+  external int PageFaultCount;
+  @IntPtr()
+  external int PeakWorkingSetSize;
+  @IntPtr()
+  external int WorkingSetSize;
+  @IntPtr()
+  external int QuotaPeakPagedPoolUsage;
+  @IntPtr()
+  external int QuotaPagedPoolUsage;
+  @IntPtr()
+  external int QuotaPeakNonPagedPoolUsage;
+  @IntPtr()
+  external int QuotaNonPagedPoolUsage;
+  @IntPtr()
+  external int PagefileUsage;
+  @IntPtr()
+  external int PeakPagefileUsage;
+  @IntPtr()
+  external int PrivateUsage;
 }
 
 class PERFORMANCE_INFORMATION extends Struct {
-  @Uint32() external int cb;
-  @IntPtr() external int CommitTotal;
-  @IntPtr() external int CommitLimit;
-  @IntPtr() external int CommitPeak;
-  @IntPtr() external int PhysicalTotal;
-  @IntPtr() external int PhysicalAvailable;
-  @IntPtr() external int SystemCache;
-  @IntPtr() external int KernelTotal;
-  @IntPtr() external int KernelPaged;
-  @IntPtr() external int KernelNonpaged;
-  @IntPtr() external int PageSize;
-  @Uint32() external int HandleCount;
-  @Uint32() external int ProcessCount;
-  @Uint32() external int ThreadCount;
+  @Uint32()
+  external int cb;
+  @IntPtr()
+  external int CommitTotal;
+  @IntPtr()
+  external int CommitLimit;
+  @IntPtr()
+  external int CommitPeak;
+  @IntPtr()
+  external int PhysicalTotal;
+  @IntPtr()
+  external int PhysicalAvailable;
+  @IntPtr()
+  external int SystemCache;
+  @IntPtr()
+  external int KernelTotal;
+  @IntPtr()
+  external int KernelPaged;
+  @IntPtr()
+  external int KernelNonpaged;
+  @IntPtr()
+  external int PageSize;
+  @Uint32()
+  external int HandleCount;
+  @Uint32()
+  external int ProcessCount;
+  @Uint32()
+  external int ThreadCount;
 }
 
 class ENUM_PAGE_FILE_INFORMATION extends Struct {
-  @Uint32() external int cb;
-  @Uint32() external int Reserved;
-  @IntPtr() external int TotalSize;
-  @IntPtr() external int TotalInUse;
-  @IntPtr() external int PeakUsage;
+  @Uint32()
+  external int cb;
+  @Uint32()
+  external int Reserved;
+  @IntPtr()
+  external int TotalSize;
+  @IntPtr()
+  external int TotalInUse;
+  @IntPtr()
+  external int PeakUsage;
 }
-

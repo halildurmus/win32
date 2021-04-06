@@ -85,4 +85,3 @@ class PSS_WALK_INFORMATION_CLASS {
   static const PSS_WALK_HANDLES = 0x00000002;
   static const PSS_WALK_THREADS = 0x00000003;
 }
-

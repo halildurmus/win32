@@ -49,9 +49,10 @@ class MANAGEMENT_SERVICE_INFO extends Struct {
 }
 
 class MANAGEMENT_REGISTRATION_INFO extends Struct {
-  @Int32() external int fDeviceRegisteredWithManagement;
-  @Uint32() external int dwDeviceRegistionKind;
+  @Int32()
+  external int fDeviceRegisteredWithManagement;
+  @Uint32()
+  external int dwDeviceRegistionKind;
   external Pointer<Utf16> pszUPN;
   external Pointer<Utf16> pszMDMServiceUri;
 }
-

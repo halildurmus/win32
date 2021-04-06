@@ -43,43 +43,70 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class SdoMachine extends Struct {
-}
+class SdoMachine extends Struct {}
 
 class RADIUS_ATTRIBUTE extends Struct {
-  @Uint32() external int dwAttrType;
-  @Uint32() external int fDataType;
-  @Uint32() external int cbDataLength;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int dwAttrType;
+  @Uint32()
+  external int fDataType;
+  @Uint32()
+  external int cbDataLength;
+  @Uint32()
+  external int Anonymous;
 }
 
 class RADIUS_VSA_FORMAT extends Struct {
   @Array(4)
   external Array<Uint8> VendorId;
-  @Uint8() external int VendorType;
-  @Uint8() external int VendorLength;
+  @Uint8()
+  external int VendorType;
+  @Uint8()
+  external int VendorLength;
   @Array(1)
   external Array<Uint8> AttributeSpecific;
 }
 
 class RADIUS_ATTRIBUTE_ARRAY extends Struct {
-  @Uint32() external int cbSize;
-  @IntPtr() external int Add;
-  external Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<Pointer<RADIUS_ATTRIBUTE>>>>>>>>>> AttributeAt;
-  @IntPtr() external int GetSize;
-  @IntPtr() external int InsertAt;
-  @IntPtr() external int RemoveAt;
-  @IntPtr() external int SetAt;
+  @Uint32()
+  external int cbSize;
+  @IntPtr()
+  external int Add;
+  external Pointer<
+          Pointer<
+              Pointer<
+                  Pointer<
+                      Pointer<
+                          Pointer<
+                              Pointer<
+                                  Pointer<
+                                      Pointer<Pointer<RADIUS_ATTRIBUTE>>>>>>>>>>
+      AttributeAt;
+  @IntPtr()
+  external int GetSize;
+  @IntPtr()
+  external int InsertAt;
+  @IntPtr()
+  external int RemoveAt;
+  @IntPtr()
+  external int SetAt;
 }
 
 class RADIUS_EXTENSION_CONTROL_BLOCK extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwVersion;
-  @Uint32() external int repPoint;
-  @Uint32() external int rcRequestType;
-  @Uint32() external int rcResponseType;
-  @IntPtr() external int GetRequest;
-  @IntPtr() external int GetResponse;
-  @IntPtr() external int SetResponseType;
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int dwVersion;
+  @Uint32()
+  external int repPoint;
+  @Uint32()
+  external int rcRequestType;
+  @Uint32()
+  external int rcResponseType;
+  @IntPtr()
+  external int GetRequest;
+  @IntPtr()
+  external int GetResponse;
+  @IntPtr()
+  external int SetResponseType;
 }
-

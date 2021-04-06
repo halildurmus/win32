@@ -44,21 +44,31 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class HARDWARE_COUNTER_DATA extends Struct {
-  @Uint32() external int Type;
-  @Uint32() external int Reserved;
-  @Uint64() external int Value;
+  @Uint32()
+  external int Type;
+  @Uint32()
+  external int Reserved;
+  @Uint64()
+  external int Value;
 }
 
 class PERFORMANCE_DATA extends Struct {
-  @Uint16() external int Size;
-  @Uint8() external int Version;
-  @Uint8() external int HwCountersCount;
-  @Uint32() external int ContextSwitchCount;
-  @Uint64() external int WaitReasonBitMap;
-  @Uint64() external int CycleTime;
-  @Uint32() external int RetryCount;
-  @Uint32() external int Reserved;
+  @Uint16()
+  external int Size;
+  @Uint8()
+  external int Version;
+  @Uint8()
+  external int HwCountersCount;
+  @Uint32()
+  external int ContextSwitchCount;
+  @Uint64()
+  external int WaitReasonBitMap;
+  @Uint64()
+  external int CycleTime;
+  @Uint32()
+  external int RetryCount;
+  @Uint32()
+  external int Reserved;
   @Array(16)
   external Array<HARDWARE_COUNTER_DATA> HwCounters;
 }
-

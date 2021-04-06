@@ -54,4 +54,3 @@ class WORDREP_BREAK_TYPE {
   static const WORDREP_BREAK_EOP = 0x00000002;
   static const WORDREP_BREAK_EOC = 0x00000003;
 }
-

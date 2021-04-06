@@ -44,27 +44,20 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class UI_ANIMATION_KEYFRAME extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
-class UIAnimationManager extends Struct {
-}
+class UIAnimationManager extends Struct {}
 
-class UIAnimationManager2 extends Struct {
-}
+class UIAnimationManager2 extends Struct {}
 
-class UIAnimationTransitionLibrary extends Struct {
-}
+class UIAnimationTransitionLibrary extends Struct {}
 
-class UIAnimationTransitionLibrary2 extends Struct {
-}
+class UIAnimationTransitionLibrary2 extends Struct {}
 
-class UIAnimationTransitionFactory extends Struct {
-}
+class UIAnimationTransitionFactory extends Struct {}
 
-class UIAnimationTransitionFactory2 extends Struct {
-}
+class UIAnimationTransitionFactory2 extends Struct {}
 
-class UIAnimationTimer extends Struct {
-}
-
+class UIAnimationTimer extends Struct {}

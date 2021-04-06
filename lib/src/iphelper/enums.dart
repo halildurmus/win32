@@ -146,7 +146,8 @@ class NL_NETWORK_CONNECTIVITY_LEVEL_HINT {
   static const NetworkConnectivityLevelHintNone = 0x00000001;
   static const NetworkConnectivityLevelHintLocalAccess = 0x00000002;
   static const NetworkConnectivityLevelHintInternetAccess = 0x00000003;
-  static const NetworkConnectivityLevelHintConstrainedInternetAccess = 0x00000004;
+  static const NetworkConnectivityLevelHintConstrainedInternetAccess =
+      0x00000004;
   static const NetworkConnectivityLevelHintHidden = 0x00000005;
 }
 
@@ -260,4 +261,3 @@ class UDP_TABLE_CLASS {
   static const UDP_TABLE_OWNER_PID = 0x00000001;
   static const UDP_TABLE_OWNER_MODULE = 0x00000002;
 }
-

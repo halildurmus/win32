@@ -90,4 +90,3 @@ class PRJ_UPDATE_TYPES {
   static const PRJ_UPDATE_ALLOW_READ_ONLY = 0x00000020;
   static const PRJ_UPDATE_MAX_VAL = 0x00000040;
 }
-

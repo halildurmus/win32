@@ -34,4 +34,3 @@ class XAUDIO2_FILTER_TYPE {
   static const LowPassOnePoleFilter = 0x00000004;
   static const HighPassOnePoleFilter = 0x00000005;
 }
-

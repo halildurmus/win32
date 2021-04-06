@@ -3000,4 +3000,3 @@ class textpathSpacingtype {
   static const TEXTPATH_SPACINGTYPE_EXACT = 0x00000002;
   static const textpathSpacingtype_Max = 0x7fffffff;
 }
-

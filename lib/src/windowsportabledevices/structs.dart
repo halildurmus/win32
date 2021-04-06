@@ -45,46 +45,33 @@ import 'package:ffi/ffi.dart';
 
 class WPD_COMMAND_ACCESS_LOOKUP_ENTRY extends Struct {
   external PROPERTYKEY Command;
-  @Uint32() external int AccessType;
+  @Uint32()
+  external int AccessType;
   external PROPERTYKEY AccessProperty;
 }
 
-class WpdSerializer extends Struct {
-}
+class WpdSerializer extends Struct {}
 
-class PortableDeviceValues extends Struct {
-}
+class PortableDeviceValues extends Struct {}
 
-class PortableDeviceKeyCollection extends Struct {
-}
+class PortableDeviceKeyCollection extends Struct {}
 
-class PortableDevicePropVariantCollection extends Struct {
-}
+class PortableDevicePropVariantCollection extends Struct {}
 
-class PortableDeviceValuesCollection extends Struct {
-}
+class PortableDeviceValuesCollection extends Struct {}
 
-class PortableDevice extends Struct {
-}
+class PortableDevice extends Struct {}
 
-class PortableDeviceManager extends Struct {
-}
+class PortableDeviceManager extends Struct {}
 
-class PortableDeviceService extends Struct {
-}
+class PortableDeviceService extends Struct {}
 
-class PortableDeviceDispatchFactory extends Struct {
-}
+class PortableDeviceDispatchFactory extends Struct {}
 
-class PortableDeviceFTM extends Struct {
-}
+class PortableDeviceFTM extends Struct {}
 
-class PortableDeviceServiceFTM extends Struct {
-}
+class PortableDeviceServiceFTM extends Struct {}
 
-class PortableDeviceWebControl extends Struct {
-}
+class PortableDeviceWebControl extends Struct {}
 
-class EnumBthMtpConnectors extends Struct {
-}
-
+class EnumBthMtpConnectors extends Struct {}

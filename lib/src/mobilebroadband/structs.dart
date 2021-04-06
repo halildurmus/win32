@@ -44,15 +44,22 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class MBN_INTERFACE_CAPS extends Struct {
-  @Uint32() external int cellularClass;
-  @Uint32() external int voiceClass;
-  @Uint32() external int dataClass;
+  @Uint32()
+  external int cellularClass;
+  @Uint32()
+  external int voiceClass;
+  @Uint32()
+  external int dataClass;
   external Pointer<Utf16> customDataClass;
-  @Uint32() external int gsmBandClass;
-  @Uint32() external int cdmaBandClass;
+  @Uint32()
+  external int gsmBandClass;
+  @Uint32()
+  external int cdmaBandClass;
   external Pointer<Utf16> customBandClass;
-  @Uint32() external int smsCaps;
-  @Uint32() external int controlCaps;
+  @Uint32()
+  external int smsCaps;
+  @Uint32()
+  external int controlCaps;
   external Pointer<Utf16> deviceID;
   external Pointer<Utf16> manufacturer;
   external Pointer<Utf16> model;
@@ -61,47 +68,64 @@ class MBN_INTERFACE_CAPS extends Struct {
 
 class MBN_PROVIDER extends Struct {
   external Pointer<Utf16> providerID;
-  @Uint32() external int providerState;
+  @Uint32()
+  external int providerState;
   external Pointer<Utf16> providerName;
-  @Uint32() external int dataClass;
+  @Uint32()
+  external int dataClass;
 }
 
 class MBN_PROVIDER2 extends Struct {
   external MBN_PROVIDER provider;
-  @Uint32() external int cellularClass;
-  @Uint32() external int signalStrength;
-  @Uint32() external int signalError;
+  @Uint32()
+  external int cellularClass;
+  @Uint32()
+  external int signalStrength;
+  @Uint32()
+  external int signalError;
 }
 
 class MBN_PIN_INFO extends Struct {
-  @Uint32() external int pinState;
-  @Uint32() external int pinType;
-  @Uint32() external int attemptsRemaining;
+  @Uint32()
+  external int pinState;
+  @Uint32()
+  external int pinType;
+  @Uint32()
+  external int attemptsRemaining;
 }
 
 class MBN_CONTEXT extends Struct {
-  @Uint32() external int contextID;
-  @Uint32() external int contextType;
+  @Uint32()
+  external int contextID;
+  @Uint32()
+  external int contextType;
   external Pointer<Utf16> accessString;
   external Pointer<Utf16> userName;
   external Pointer<Utf16> password;
-  @Uint32() external int compression;
-  @Uint32() external int authType;
+  @Uint32()
+  external int compression;
+  @Uint32()
+  external int authType;
 }
 
 class MBN_SMS_FILTER extends Struct {
-  @Uint32() external int flag;
-  @Uint32() external int messageIndex;
+  @Uint32()
+  external int flag;
+  @Uint32()
+  external int messageIndex;
 }
 
 class MBN_SMS_STATUS_INFO extends Struct {
-  @Uint32() external int flag;
-  @Uint32() external int messageIndex;
+  @Uint32()
+  external int flag;
+  @Uint32()
+  external int messageIndex;
 }
 
 class MBN_DEVICE_SERVICE extends Struct {
   external Pointer<Utf16> deviceServiceID;
-  @Int16() external int dataWriteSupported;
-  @Int16() external int dataReadSupported;
+  @Int16()
+  external int dataWriteSupported;
+  @Int16()
+  external int dataReadSupported;
 }
-

@@ -44,24 +44,31 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class TBS_CONTEXT_PARAMS extends Struct {
-  @Uint32() external int version;
+  @Uint32()
+  external int version;
 }
 
 class TBS_CONTEXT_PARAMS2 extends Struct {
-  @Uint32() external int version;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int version;
+  @Uint32()
+  external int Anonymous;
 }
 
 class tdTPM_WNF_PROVISIONING extends Struct {
-  @Uint32() external int status;
+  @Uint32()
+  external int status;
   @Array(28)
   external Array<Uint8> message;
 }
 
 class TPM_DEVICE_INFO extends Struct {
-  @Uint32() external int structVersion;
-  @Uint32() external int tpmVersion;
-  @Uint32() external int tpmInterfaceType;
-  @Uint32() external int tpmImpRevision;
+  @Uint32()
+  external int structVersion;
+  @Uint32()
+  external int tpmVersion;
+  @Uint32()
+  external int tpmInterfaceType;
+  @Uint32()
+  external int tpmImpRevision;
 }
-

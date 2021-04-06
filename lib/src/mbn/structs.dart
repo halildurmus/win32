@@ -43,36 +43,46 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class MbnConnectionProfileManager extends Struct {
-}
+class MbnConnectionProfileManager extends Struct {}
 
-class MbnInterfaceManager extends Struct {
-}
+class MbnInterfaceManager extends Struct {}
 
-class MbnConnectionManager extends Struct {
-}
+class MbnConnectionManager extends Struct {}
 
-class MbnDeviceServicesManager extends Struct {
-}
+class MbnDeviceServicesManager extends Struct {}
 
 class __mbnapi_ReferenceRemainingTypes__ extends Struct {
-  @Uint32() external int bandClass;
-  @Uint32() external int contextConstants;
-  @Uint32() external int ctrlCaps;
-  @Uint32() external int dataClass;
-  @Uint32() external int interfaceCapsConstants;
-  @Uint32() external int pinConstants;
-  @Uint32() external int providerConstants;
-  @Uint32() external int providerState;
-  @Uint32() external int registrationConstants;
-  @Uint32() external int signalConstants;
-  @Uint32() external int smsCaps;
-  @Uint32() external int smsConstants;
-  @Uint32() external int wwaextSmsConstants;
-  @Uint32() external int smsStatusFlag;
+  @Uint32()
+  external int bandClass;
+  @Uint32()
+  external int contextConstants;
+  @Uint32()
+  external int ctrlCaps;
+  @Uint32()
+  external int dataClass;
+  @Uint32()
+  external int interfaceCapsConstants;
+  @Uint32()
+  external int pinConstants;
+  @Uint32()
+  external int providerConstants;
+  @Uint32()
+  external int providerState;
+  @Uint32()
+  external int registrationConstants;
+  @Uint32()
+  external int signalConstants;
+  @Uint32()
+  external int smsCaps;
+  @Uint32()
+  external int smsConstants;
+  @Uint32()
+  external int wwaextSmsConstants;
+  @Uint32()
+  external int smsStatusFlag;
 }
 
 class __DummyPinType__ extends Struct {
-  @Uint32() external int pinType;
+  @Uint32()
+  external int pinType;
 }
-

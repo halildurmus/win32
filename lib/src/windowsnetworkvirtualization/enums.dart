@@ -20,4 +20,3 @@ class WNV_OBJECT_TYPE {
   static const WnvCustomerAddressType = 0x00000001;
   static const WnvObjectTypeMax = 0x00000002;
 }
-

@@ -43,41 +43,43 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class InMemoryPropertyStore extends Struct {
-}
+class InMemoryPropertyStore extends Struct {}
 
-class InMemoryPropertyStoreMarshalByValue extends Struct {
-}
+class InMemoryPropertyStoreMarshalByValue extends Struct {}
 
-class PropertySystem extends Struct {
-}
+class PropertySystem extends Struct {}
 
-class SERIALIZEDPROPSTORAGE extends Struct {
-}
+class SERIALIZEDPROPSTORAGE extends Struct {}
 
 class PROPERTYKEY extends Struct {
   external GUID fmtid;
-  @Uint32() external int pid;
+  @Uint32()
+  external int pid;
 }
 
 class PROPPRG extends Struct {
-  @Uint16() external int flPrg;
-  @Uint16() external int flPrgInit;
+  @Uint16()
+  external int flPrg;
+  @Uint16()
+  external int flPrgInit;
   @Array(30)
   external Array<Int8> achTitle;
   @Array(128)
   external Array<Int8> achCmdLine;
   @Array(64)
   external Array<Int8> achWorkDir;
-  @Uint16() external int wHotKey;
+  @Uint16()
+  external int wHotKey;
   @Array(80)
   external Array<Int8> achIconFile;
-  @Uint16() external int wIconIndex;
-  @Uint32() external int dwEnhModeFlags;
-  @Uint32() external int dwRealModeFlags;
+  @Uint16()
+  external int wIconIndex;
+  @Uint32()
+  external int dwEnhModeFlags;
+  @Uint32()
+  external int dwRealModeFlags;
   @Array(80)
   external Array<Int8> achOtherFile;
   @Array(129)
   external Array<Int8> achPIFFile;
 }
-

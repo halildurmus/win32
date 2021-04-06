@@ -43,6 +43,4 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class OpcFactory extends Struct {
-}
-
+class OpcFactory extends Struct {}

@@ -44,76 +44,98 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class MapiFileDesc extends Struct {
-  @Uint32() external int ulReserved;
-  @Uint32() external int flFlags;
-  @Uint32() external int nPosition;
+  @Uint32()
+  external int ulReserved;
+  @Uint32()
+  external int flFlags;
+  @Uint32()
+  external int nPosition;
   external Pointer<Utf8> lpszPathName;
   external Pointer<Utf8> lpszFileName;
   external Pointer lpFileType;
 }
 
 class MapiFileDescW extends Struct {
-  @Uint32() external int ulReserved;
-  @Uint32() external int flFlags;
-  @Uint32() external int nPosition;
+  @Uint32()
+  external int ulReserved;
+  @Uint32()
+  external int flFlags;
+  @Uint32()
+  external int nPosition;
   external Pointer<Utf16> lpszPathName;
   external Pointer<Utf16> lpszFileName;
   external Pointer lpFileType;
 }
 
 class MapiFileTagExt extends Struct {
-  @Uint32() external int ulReserved;
-  @Uint32() external int cbTag;
+  @Uint32()
+  external int ulReserved;
+  @Uint32()
+  external int cbTag;
   external Pointer<Uint8> lpTag;
-  @Uint32() external int cbEncoding;
+  @Uint32()
+  external int cbEncoding;
   external Pointer<Uint8> lpEncoding;
 }
 
 class MapiRecipDesc extends Struct {
-  @Uint32() external int ulReserved;
-  @Uint32() external int ulRecipClass;
+  @Uint32()
+  external int ulReserved;
+  @Uint32()
+  external int ulRecipClass;
   external Pointer<Utf8> lpszName;
   external Pointer<Utf8> lpszAddress;
-  @Uint32() external int ulEIDSize;
+  @Uint32()
+  external int ulEIDSize;
   external Pointer lpEntryID;
 }
 
 class MapiRecipDescW extends Struct {
-  @Uint32() external int ulReserved;
-  @Uint32() external int ulRecipClass;
+  @Uint32()
+  external int ulReserved;
+  @Uint32()
+  external int ulRecipClass;
   external Pointer<Utf16> lpszName;
   external Pointer<Utf16> lpszAddress;
-  @Uint32() external int ulEIDSize;
+  @Uint32()
+  external int ulEIDSize;
   external Pointer lpEntryID;
 }
 
 class MapiMessage extends Struct {
-  @Uint32() external int ulReserved;
+  @Uint32()
+  external int ulReserved;
   external Pointer<Utf8> lpszSubject;
   external Pointer<Utf8> lpszNoteText;
   external Pointer<Utf8> lpszMessageType;
   external Pointer<Utf8> lpszDateReceived;
   external Pointer<Utf8> lpszConversationID;
-  @Uint32() external int flFlags;
+  @Uint32()
+  external int flFlags;
   external Pointer<MapiRecipDesc> lpOriginator;
-  @Uint32() external int nRecipCount;
+  @Uint32()
+  external int nRecipCount;
   external Pointer<MapiRecipDesc> lpRecips;
-  @Uint32() external int nFileCount;
+  @Uint32()
+  external int nFileCount;
   external Pointer<MapiFileDesc> lpFiles;
 }
 
 class MapiMessageW extends Struct {
-  @Uint32() external int ulReserved;
+  @Uint32()
+  external int ulReserved;
   external Pointer<Utf16> lpszSubject;
   external Pointer<Utf16> lpszNoteText;
   external Pointer<Utf16> lpszMessageType;
   external Pointer<Utf16> lpszDateReceived;
   external Pointer<Utf16> lpszConversationID;
-  @Uint32() external int flFlags;
+  @Uint32()
+  external int flFlags;
   external Pointer<MapiRecipDesc> lpOriginator;
-  @Uint32() external int nRecipCount;
+  @Uint32()
+  external int nRecipCount;
   external Pointer<MapiRecipDesc> lpRecips;
-  @Uint32() external int nFileCount;
+  @Uint32()
+  external int nFileCount;
   external Pointer<MapiFileDesc> lpFiles;
 }
-

@@ -4,4 +4,3 @@ class AUTHNEXTSTEP {
   static const RetryRequest = 0x00000001;
   static const CancelRequest = 0x00000002;
 }
-

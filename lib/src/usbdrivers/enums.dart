@@ -89,4 +89,3 @@ class WDMUSB_POWER_STATE {
   static const WdmUsbPowerDeviceD2 = 0x000000cb;
   static const WdmUsbPowerDeviceD3 = 0x000000cc;
 }
-

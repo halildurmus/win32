@@ -45,6 +45,6 @@ import 'package:ffi/ffi.dart';
 
 class D3D_SHADER_DATA extends Struct {
   external Pointer pBytecode;
-  @IntPtr() external int BytecodeLength;
+  @IntPtr()
+  external int BytecodeLength;
 }
-

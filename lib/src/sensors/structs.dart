@@ -43,15 +43,10 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class SensorManager extends Struct {
-}
+class SensorManager extends Struct {}
 
-class SensorCollection extends Struct {
-}
+class SensorCollection extends Struct {}
 
-class Sensor extends Struct {
-}
+class Sensor extends Struct {}
 
-class SensorDataReport extends Struct {
-}
-
+class SensorDataReport extends Struct {}

@@ -123,4 +123,3 @@ class SetupFileLogInfo {
   static const SetupFileLogOtherInfo = 0x00000004;
   static const SetupFileLogMax = 0x00000005;
 }
-

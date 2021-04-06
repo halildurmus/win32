@@ -44,132 +44,201 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class HRAWINPUT extends Struct {
-  @IntPtr() external int Value;
+  @IntPtr()
+  external int Value;
 }
 
 class MOUSEMOVEPOINT extends Struct {
-  @Int32() external int x;
-  @Int32() external int y;
-  @Uint32() external int time;
-  @IntPtr() external int dwExtraInfo;
+  @Int32()
+  external int x;
+  @Int32()
+  external int y;
+  @Uint32()
+  external int time;
+  @IntPtr()
+  external int dwExtraInfo;
 }
 
 class TRACKMOUSEEVENT extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwFlags;
-  @IntPtr() external int hwndTrack;
-  @Uint32() external int dwHoverTime;
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int dwFlags;
+  @IntPtr()
+  external int hwndTrack;
+  @Uint32()
+  external int dwHoverTime;
 }
 
 class MOUSEINPUT extends Struct {
-  @Int32() external int dx;
-  @Int32() external int dy;
-  @Uint32() external int mouseData;
-  @Uint32() external int dwFlags;
-  @Uint32() external int time;
-  @IntPtr() external int dwExtraInfo;
+  @Int32()
+  external int dx;
+  @Int32()
+  external int dy;
+  @Uint32()
+  external int mouseData;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int time;
+  @IntPtr()
+  external int dwExtraInfo;
 }
 
 class KEYBDINPUT extends Struct {
-  @Uint16() external int wVk;
-  @Uint16() external int wScan;
-  @Uint32() external int dwFlags;
-  @Uint32() external int time;
-  @IntPtr() external int dwExtraInfo;
+  @Uint16()
+  external int wVk;
+  @Uint16()
+  external int wScan;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int time;
+  @IntPtr()
+  external int dwExtraInfo;
 }
 
 class HARDWAREINPUT extends Struct {
-  @Uint32() external int uMsg;
-  @Uint16() external int wParamL;
-  @Uint16() external int wParamH;
+  @Uint32()
+  external int uMsg;
+  @Uint16()
+  external int wParamL;
+  @Uint16()
+  external int wParamH;
 }
 
 class INPUT extends Struct {
-  @Uint32() external int type;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int type;
+  @Uint32()
+  external int Anonymous;
 }
 
 class LASTINPUTINFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwTime;
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int dwTime;
 }
 
 class RAWINPUTHEADER extends Struct {
-  @Uint32() external int dwType;
-  @Uint32() external int dwSize;
-  @IntPtr() external int hDevice;
-  @IntPtr() external int wParam;
+  @Uint32()
+  external int dwType;
+  @Uint32()
+  external int dwSize;
+  @IntPtr()
+  external int hDevice;
+  @IntPtr()
+  external int wParam;
 }
 
 class RAWMOUSE extends Struct {
-  @Uint16() external int usFlags;
-  @Uint32() external int Anonymous;
-  @Uint32() external int ulRawButtons;
-  @Int32() external int lLastX;
-  @Int32() external int lLastY;
-  @Uint32() external int ulExtraInformation;
+  @Uint16()
+  external int usFlags;
+  @Uint32()
+  external int Anonymous;
+  @Uint32()
+  external int ulRawButtons;
+  @Int32()
+  external int lLastX;
+  @Int32()
+  external int lLastY;
+  @Uint32()
+  external int ulExtraInformation;
 }
 
 class RAWKEYBOARD extends Struct {
-  @Uint16() external int MakeCode;
-  @Uint16() external int Flags;
-  @Uint16() external int Reserved;
-  @Uint16() external int VKey;
-  @Uint32() external int Message;
-  @Uint32() external int ExtraInformation;
+  @Uint16()
+  external int MakeCode;
+  @Uint16()
+  external int Flags;
+  @Uint16()
+  external int Reserved;
+  @Uint16()
+  external int VKey;
+  @Uint32()
+  external int Message;
+  @Uint32()
+  external int ExtraInformation;
 }
 
 class RAWHID extends Struct {
-  @Uint32() external int dwSizeHid;
-  @Uint32() external int dwCount;
+  @Uint32()
+  external int dwSizeHid;
+  @Uint32()
+  external int dwCount;
   @Array(1)
   external Array<Uint8> bRawData;
 }
 
 class RAWINPUT extends Struct {
   external RAWINPUTHEADER header;
-  @Uint32() external int data;
+  @Uint32()
+  external int data;
 }
 
 class RID_DEVICE_INFO_MOUSE extends Struct {
-  @Uint32() external int dwId;
-  @Uint32() external int dwNumberOfButtons;
-  @Uint32() external int dwSampleRate;
-  @Int32() external int fHasHorizontalWheel;
+  @Uint32()
+  external int dwId;
+  @Uint32()
+  external int dwNumberOfButtons;
+  @Uint32()
+  external int dwSampleRate;
+  @Int32()
+  external int fHasHorizontalWheel;
 }
 
 class RID_DEVICE_INFO_KEYBOARD extends Struct {
-  @Uint32() external int dwType;
-  @Uint32() external int dwSubType;
-  @Uint32() external int dwKeyboardMode;
-  @Uint32() external int dwNumberOfFunctionKeys;
-  @Uint32() external int dwNumberOfIndicators;
-  @Uint32() external int dwNumberOfKeysTotal;
+  @Uint32()
+  external int dwType;
+  @Uint32()
+  external int dwSubType;
+  @Uint32()
+  external int dwKeyboardMode;
+  @Uint32()
+  external int dwNumberOfFunctionKeys;
+  @Uint32()
+  external int dwNumberOfIndicators;
+  @Uint32()
+  external int dwNumberOfKeysTotal;
 }
 
 class RID_DEVICE_INFO_HID extends Struct {
-  @Uint32() external int dwVendorId;
-  @Uint32() external int dwProductId;
-  @Uint32() external int dwVersionNumber;
-  @Uint16() external int usUsagePage;
-  @Uint16() external int usUsage;
+  @Uint32()
+  external int dwVendorId;
+  @Uint32()
+  external int dwProductId;
+  @Uint32()
+  external int dwVersionNumber;
+  @Uint16()
+  external int usUsagePage;
+  @Uint16()
+  external int usUsage;
 }
 
 class RID_DEVICE_INFO extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwType;
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int dwType;
+  @Uint32()
+  external int Anonymous;
 }
 
 class RAWINPUTDEVICE extends Struct {
-  @Uint16() external int usUsagePage;
-  @Uint16() external int usUsage;
-  @Uint32() external int dwFlags;
-  @IntPtr() external int hwndTarget;
+  @Uint16()
+  external int usUsagePage;
+  @Uint16()
+  external int usUsage;
+  @Uint32()
+  external int dwFlags;
+  @IntPtr()
+  external int hwndTarget;
 }
 
 class RAWINPUTDEVICELIST extends Struct {
-  @IntPtr() external int hDevice;
-  @Uint32() external int dwType;
+  @IntPtr()
+  external int hDevice;
+  @Uint32()
+  external int dwType;
 }
-

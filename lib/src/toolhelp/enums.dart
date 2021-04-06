@@ -15,4 +15,3 @@ class HEAPENTRY32_dwFlags {
   static const LF32_FREE = 0x00000002;
   static const LF32_MOVEABLE = 0x00000004;
 }
-

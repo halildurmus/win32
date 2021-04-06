@@ -70,4 +70,3 @@ class UI_INFO_TYPE {
   static const UIT_HELP_PANE = 0x00000003;
   static const UIT_DUI = 0x00000004;
 }
-

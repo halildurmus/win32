@@ -45,28 +45,36 @@ import 'package:ffi/ffi.dart';
 
 class WSB_OB_STATUS_ENTRY_VALUE_TYPE_PAIR extends Struct {
   external Pointer<Utf16> m_wszObStatusEntryPairValue;
-  @Uint32() external int m_ObStatusEntryPairType;
+  @Uint32()
+  external int m_ObStatusEntryPairType;
 }
 
 class WSB_OB_STATUS_ENTRY extends Struct {
-  @Uint32() external int m_dwIcon;
-  @Uint32() external int m_dwStatusEntryName;
-  @Uint32() external int m_dwStatusEntryValue;
-  @Uint32() external int m_cValueTypePair;
+  @Uint32()
+  external int m_dwIcon;
+  @Uint32()
+  external int m_dwStatusEntryName;
+  @Uint32()
+  external int m_dwStatusEntryValue;
+  @Uint32()
+  external int m_cValueTypePair;
   external Pointer<WSB_OB_STATUS_ENTRY_VALUE_TYPE_PAIR> m_rgValueTypePair;
 }
 
 class WSB_OB_STATUS_INFO extends Struct {
   external GUID m_guidSnapinId;
-  @Uint32() external int m_cStatusEntry;
+  @Uint32()
+  external int m_cStatusEntry;
   external Pointer<WSB_OB_STATUS_ENTRY> m_rgStatusEntry;
 }
 
 class WSB_OB_REGISTRATION_INFO extends Struct {
   external Pointer<Utf16> m_wszResourceDLL;
   external GUID m_guidSnapinId;
-  @Uint32() external int m_dwProviderName;
-  @Uint32() external int m_dwProviderIcon;
-  @Uint8() external int m_bSupportsRemoting;
+  @Uint32()
+  external int m_dwProviderName;
+  @Uint32()
+  external int m_dwProviderIcon;
+  @Uint8()
+  external int m_bSupportsRemoting;
 }
-

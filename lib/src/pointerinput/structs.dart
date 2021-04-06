@@ -44,45 +44,67 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class POINTER_INFO extends Struct {
-  @Uint32() external int pointerType;
-  @Uint32() external int pointerId;
-  @Uint32() external int frameId;
-  @Uint32() external int pointerFlags;
-  @IntPtr() external int sourceDevice;
-  @IntPtr() external int hwndTarget;
+  @Uint32()
+  external int pointerType;
+  @Uint32()
+  external int pointerId;
+  @Uint32()
+  external int frameId;
+  @Uint32()
+  external int pointerFlags;
+  @IntPtr()
+  external int sourceDevice;
+  @IntPtr()
+  external int hwndTarget;
   external POINT ptPixelLocation;
   external POINT ptHimetricLocation;
   external POINT ptPixelLocationRaw;
   external POINT ptHimetricLocationRaw;
-  @Uint32() external int dwTime;
-  @Uint32() external int historyCount;
-  @Int32() external int InputData;
-  @Uint32() external int dwKeyStates;
-  @Uint64() external int PerformanceCount;
-  @Uint32() external int ButtonChangeType;
+  @Uint32()
+  external int dwTime;
+  @Uint32()
+  external int historyCount;
+  @Int32()
+  external int InputData;
+  @Uint32()
+  external int dwKeyStates;
+  @Uint64()
+  external int PerformanceCount;
+  @Uint32()
+  external int ButtonChangeType;
 }
 
 class POINTER_TOUCH_INFO extends Struct {
   external POINTER_INFO pointerInfo;
-  @Uint32() external int touchFlags;
-  @Uint32() external int touchMask;
+  @Uint32()
+  external int touchFlags;
+  @Uint32()
+  external int touchMask;
   external RECT rcContact;
   external RECT rcContactRaw;
-  @Uint32() external int orientation;
-  @Uint32() external int pressure;
+  @Uint32()
+  external int orientation;
+  @Uint32()
+  external int pressure;
 }
 
 class POINTER_PEN_INFO extends Struct {
   external POINTER_INFO pointerInfo;
-  @Uint32() external int penFlags;
-  @Uint32() external int penMask;
-  @Uint32() external int pressure;
-  @Uint32() external int rotation;
-  @Int32() external int tiltX;
-  @Int32() external int tiltY;
+  @Uint32()
+  external int penFlags;
+  @Uint32()
+  external int penMask;
+  @Uint32()
+  external int pressure;
+  @Uint32()
+  external int rotation;
+  @Int32()
+  external int tiltX;
+  @Int32()
+  external int tiltY;
 }
 
 class INPUT_TRANSFORM extends Struct {
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int Anonymous;
 }
-

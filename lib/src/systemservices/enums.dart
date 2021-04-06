@@ -25,13 +25,15 @@ class ACTIVATION_CONTEXT_INFO_CLASS {
   static const ActivationContextBasicInformation = 0x00000001;
   static const ActivationContextDetailedInformation = 0x00000002;
   static const AssemblyDetailedInformationInActivationContext = 0x00000003;
-  static const FileInformationInAssemblyOfAssemblyInActivationContext = 0x00000004;
+  static const FileInformationInAssemblyOfAssemblyInActivationContext =
+      0x00000004;
   static const RunlevelInformationInActivationContext = 0x00000005;
   static const CompatibilityInformationInActivationContext = 0x00000006;
   static const ActivationContextManifestResourceName = 0x00000007;
   static const MaxActivationContextInfoClass = 0x00000008;
   static const AssemblyDetailedInformationInActivationContxt = 0x00000003;
-  static const FileInformationInAssemblyOfAssemblyInActivationContxt = 0x00000004;
+  static const FileInformationInAssemblyOfAssemblyInActivationContxt =
+      0x00000004;
 }
 
 /// {@category Enum}
@@ -1257,7 +1259,8 @@ class JOB_OBJECT_IO_RATE_CONTROL_FLAGS {
   static const JOB_OBJECT_IO_RATE_CONTROL_ENABLE = 0x00000001;
   static const JOB_OBJECT_IO_RATE_CONTROL_STANDALONE_VOLUME = 0x00000002;
   static const JOB_OBJECT_IO_RATE_CONTROL_FORCE_UNIT_ACCESS_ALL = 0x00000004;
-  static const JOB_OBJECT_IO_RATE_CONTROL_FORCE_UNIT_ACCESS_ON_SOFT_CAP = 0x00000008;
+  static const JOB_OBJECT_IO_RATE_CONTROL_FORCE_UNIT_ACCESS_ON_SOFT_CAP =
+      0x00000008;
   static const JOB_OBJECT_IO_RATE_CONTROL_VALID_FLAGS = 0x0000000f;
 }
 
@@ -2123,8 +2126,10 @@ class SCM_PD_OPERATIONAL_STATUS_REASON {
   static const ScmPhysicalDeviceOpReason_PermanentError = 0x0000000e;
   static const ScmPhysicalDeviceOpReason_LostWritePersistence = 0x0000000f;
   static const ScmPhysicalDeviceOpReason_FatalError = 0x00000010;
-  static const ScmPhysicalDeviceOpReason_DataPersistenceLossImminent = 0x00000011;
-  static const ScmPhysicalDeviceOpReason_WritePersistenceLossImminent = 0x00000012;
+  static const ScmPhysicalDeviceOpReason_DataPersistenceLossImminent =
+      0x00000011;
+  static const ScmPhysicalDeviceOpReason_WritePersistenceLossImminent =
+      0x00000012;
   static const ScmPhysicalDeviceOpReason_MediaRemainingSpareBlock = 0x00000013;
   static const ScmPhysicalDeviceOpReason_PerformanceDegradation = 0x00000014;
   static const ScmPhysicalDeviceOpReason_ExcessiveTemperature = 0x00000015;
@@ -4005,4 +4010,3 @@ class tttoolinfoa_uFlags {
   static const TTF_TRACK = 0x00000020;
   static const TTF_TRANSPARENT = 0x00000100;
 }
-

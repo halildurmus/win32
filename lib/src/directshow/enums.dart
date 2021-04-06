@@ -454,7 +454,8 @@ class BDA_CONDITIONALACCESS_REQUESTTYPE {
   static const CONDITIONALACCESS_ACCESS_UNSPECIFIED = 0x00000000;
   static const CONDITIONALACCESS_ACCESS_NOT_POSSIBLE = 0x00000001;
   static const CONDITIONALACCESS_ACCESS_POSSIBLE = 0x00000002;
-  static const CONDITIONALACCESS_ACCESS_POSSIBLE_NO_STREAMING_DISRUPTION = 0x00000003;
+  static const CONDITIONALACCESS_ACCESS_POSSIBLE_NO_STREAMING_DISRUPTION =
+      0x00000003;
 }
 
 /// {@category Enum}
@@ -747,7 +748,8 @@ class COPP_ImageAspectRatio_EN300294 {
   static const COPP_AspectRatio_EN300294_Box16by9Center = 0x00000003;
   static const COPP_AspectRatio_EN300294_Box16by9Top = 0x00000004;
   static const COPP_AspectRatio_EN300294_BoxGT16by9Center = 0x00000005;
-  static const COPP_AspectRatio_EN300294_FullFormat4by3ProtectedCenter = 0x00000006;
+  static const COPP_AspectRatio_EN300294_FullFormat4by3ProtectedCenter =
+      0x00000006;
   static const COPP_AspectRatio_EN300294_FullFormat16by9Anamorphic = 0x00000007;
   static const COPP_AspectRatio_ForceDWORD = 0x7fffffff;
 }
@@ -3336,4 +3338,3 @@ class DVRESOLUTION {
 class REM_FILTER_FLAGS {
   static const REMFILTERF_LEAVECONNECTED = 0x00000001;
 }
-

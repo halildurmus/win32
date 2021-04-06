@@ -45,11 +45,13 @@ import 'package:ffi/ffi.dart';
 
 class TOKEN_VALUE extends Struct {
   external Pointer<Utf16> pwszToken;
-  @Uint32() external int dwValue;
+  @Uint32()
+  external int dwValue;
 }
 
 class NS_HELPER_ATTRIBUTES extends Struct {
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int Anonymous;
   external GUID guidHelper;
   external PNS_HELPER_START_FN pfnStart;
   external PNS_HELPER_STOP_FN pfnStop;
@@ -58,30 +60,41 @@ class NS_HELPER_ATTRIBUTES extends Struct {
 class CMD_ENTRY extends Struct {
   external Pointer<Utf16> pwszCmdToken;
   external PFN_HANDLE_CMD pfnCmdHandler;
-  @Uint32() external int dwShortCmdHelpToken;
-  @Uint32() external int dwCmdHlpToken;
-  @Uint32() external int dwFlags;
+  @Uint32()
+  external int dwShortCmdHelpToken;
+  @Uint32()
+  external int dwCmdHlpToken;
+  @Uint32()
+  external int dwFlags;
   external PNS_OSVERSIONCHECK pOsVersionCheck;
 }
 
 class CMD_GROUP_ENTRY extends Struct {
   external Pointer<Utf16> pwszCmdGroupToken;
-  @Uint32() external int dwShortCmdHelpToken;
-  @Uint32() external int ulCmdGroupSize;
-  @Uint32() external int dwFlags;
+  @Uint32()
+  external int dwShortCmdHelpToken;
+  @Uint32()
+  external int ulCmdGroupSize;
+  @Uint32()
+  external int dwFlags;
   external Pointer<CMD_ENTRY> pCmdGroup;
   external PNS_OSVERSIONCHECK pOsVersionCheck;
 }
 
 class NS_CONTEXT_ATTRIBUTES extends Struct {
-  @Uint32() external int Anonymous;
+  @Uint32()
+  external int Anonymous;
   external Pointer<Utf16> pwszContext;
   external GUID guidHelper;
-  @Uint32() external int dwFlags;
-  @Uint32() external int ulPriority;
-  @Uint32() external int ulNumTopCmds;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int ulPriority;
+  @Uint32()
+  external int ulNumTopCmds;
   external Pointer<CMD_ENTRY> pTopCmds;
-  @Uint32() external int ulNumGroups;
+  @Uint32()
+  external int ulNumGroups;
   external Pointer<CMD_GROUP_ENTRY> pCmdGroups;
   external PNS_CONTEXT_COMMIT_FN pfnCommitFn;
   external PNS_CONTEXT_DUMP_FN pfnDumpFn;
@@ -92,7 +105,8 @@ class NS_CONTEXT_ATTRIBUTES extends Struct {
 
 class TAG_TYPE extends Struct {
   external Pointer<Utf16> pwszTag;
-  @Uint32() external int dwRequired;
-  @Int32() external int bPresent;
+  @Uint32()
+  external int dwRequired;
+  @Int32()
+  external int bPresent;
 }
-

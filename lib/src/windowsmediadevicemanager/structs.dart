@@ -44,108 +44,141 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class __MACINFO extends Struct {
-  @Int32() external int fUsed;
+  @Int32()
+  external int fUsed;
   @Array(36)
   external Array<Uint8> abMacState;
 }
 
-class MediaDevMgrClassFactory extends Struct {
-}
+class MediaDevMgrClassFactory extends Struct {}
 
-class MediaDevMgr extends Struct {
-}
+class MediaDevMgr extends Struct {}
 
-class WMDMDevice extends Struct {
-}
+class WMDMDevice extends Struct {}
 
-class WMDMStorage extends Struct {
-}
+class WMDMStorage extends Struct {}
 
-class WMDMStorageGlobal extends Struct {
-}
+class WMDMStorageGlobal extends Struct {}
 
-class WMDMDeviceEnum extends Struct {
-}
+class WMDMDeviceEnum extends Struct {}
 
-class WMDMStorageEnum extends Struct {
-}
+class WMDMStorageEnum extends Struct {}
 
 class _WAVEFORMATEX extends Struct {
-  @Uint16() external int wFormatTag;
-  @Uint16() external int nChannels;
-  @Uint32() external int nSamplesPerSec;
-  @Uint32() external int nAvgBytesPerSec;
-  @Uint16() external int nBlockAlign;
-  @Uint16() external int wBitsPerSample;
-  @Uint16() external int cbSize;
+  @Uint16()
+  external int wFormatTag;
+  @Uint16()
+  external int nChannels;
+  @Uint32()
+  external int nSamplesPerSec;
+  @Uint32()
+  external int nAvgBytesPerSec;
+  @Uint16()
+  external int nBlockAlign;
+  @Uint16()
+  external int wBitsPerSample;
+  @Uint16()
+  external int cbSize;
 }
 
 class _BITMAPINFOHEADER extends Struct {
-  @Uint32() external int biSize;
-  @Int32() external int biWidth;
-  @Int32() external int biHeight;
-  @Uint16() external int biPlanes;
-  @Uint16() external int biBitCount;
-  @Uint32() external int biCompression;
-  @Uint32() external int biSizeImage;
-  @Int32() external int biXPelsPerMeter;
-  @Int32() external int biYPelsPerMeter;
-  @Uint32() external int biClrUsed;
-  @Uint32() external int biClrImportant;
+  @Uint32()
+  external int biSize;
+  @Int32()
+  external int biWidth;
+  @Int32()
+  external int biHeight;
+  @Uint16()
+  external int biPlanes;
+  @Uint16()
+  external int biBitCount;
+  @Uint32()
+  external int biCompression;
+  @Uint32()
+  external int biSizeImage;
+  @Int32()
+  external int biXPelsPerMeter;
+  @Int32()
+  external int biYPelsPerMeter;
+  @Uint32()
+  external int biClrUsed;
+  @Uint32()
+  external int biClrImportant;
 }
 
 class _VIDEOINFOHEADER extends Struct {
   external RECT rcSource;
   external RECT rcTarget;
-  @Uint32() external int dwBitRate;
-  @Uint32() external int dwBitErrorRate;
-  @Int64() external int AvgTimePerFrame;
+  @Uint32()
+  external int dwBitRate;
+  @Uint32()
+  external int dwBitErrorRate;
+  @Int64()
+  external int AvgTimePerFrame;
   external _BITMAPINFOHEADER bmiHeader;
 }
 
 class WMFILECAPABILITIES extends Struct {
   external Pointer<Utf16> pwszMimeType;
-  @Uint32() external int dwReserved;
+  @Uint32()
+  external int dwReserved;
 }
 
 class OPAQUECOMMAND extends Struct {
   external GUID guidCommand;
-  @Uint32() external int dwDataLen;
+  @Uint32()
+  external int dwDataLen;
   external Pointer<Uint8> pData;
   @Array(20)
   external Array<Uint8> abMAC;
 }
 
 class WMDMID extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwVendorID;
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int dwVendorID;
   @Array(128)
   external Array<Uint8> pID;
-  @Uint32() external int SerialNumberLength;
+  @Uint32()
+  external int SerialNumberLength;
 }
 
 class WMDMDATETIME extends Struct {
-  @Uint16() external int wYear;
-  @Uint16() external int wMonth;
-  @Uint16() external int wDay;
-  @Uint16() external int wHour;
-  @Uint16() external int wMinute;
-  @Uint16() external int wSecond;
+  @Uint16()
+  external int wYear;
+  @Uint16()
+  external int wMonth;
+  @Uint16()
+  external int wDay;
+  @Uint16()
+  external int wHour;
+  @Uint16()
+  external int wMinute;
+  @Uint16()
+  external int wSecond;
 }
 
 class WMDMRIGHTS extends Struct {
-  @Uint32() external int cbSize;
-  @Uint32() external int dwContentType;
-  @Uint32() external int fuFlags;
-  @Uint32() external int fuRights;
-  @Uint32() external int dwAppSec;
-  @Uint32() external int dwPlaybackCount;
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int dwContentType;
+  @Uint32()
+  external int fuFlags;
+  @Uint32()
+  external int fuRights;
+  @Uint32()
+  external int dwAppSec;
+  @Uint32()
+  external int dwPlaybackCount;
   external WMDMDATETIME ExpirationDate;
 }
 
 class WMDMMetadataView extends Struct {
   external Pointer<Utf16> pwszViewName;
-  @Uint32() external int nDepth;
+  @Uint32()
+  external int nDepth;
   external Pointer<Pointer<Uint16>> ppwszTags;
 }
 
@@ -156,24 +189,30 @@ class WMDM_PROP_VALUES_RANGE extends Struct {
 }
 
 class WMDM_PROP_VALUES_ENUM extends Struct {
-  @Uint32() external int cEnumValues;
+  @Uint32()
+  external int cEnumValues;
   external Pointer<PROPVARIANT> pValues;
 }
 
 class WMDM_PROP_DESC extends Struct {
   external Pointer<Utf16> pwszPropName;
-  @Uint32() external int ValidValuesForm;
-  @Uint32() external int ValidValues;
+  @Uint32()
+  external int ValidValuesForm;
+  @Uint32()
+  external int ValidValues;
 }
 
 class WMDM_PROP_CONFIG extends Struct {
-  @Uint32() external int nPreference;
-  @Uint32() external int nPropDesc;
+  @Uint32()
+  external int nPreference;
+  @Uint32()
+  external int nPropDesc;
   external Pointer<WMDM_PROP_DESC> pPropDesc;
 }
 
 class WMDM_FORMAT_CAPABILITY extends Struct {
-  @Uint32() external int nPropConfig;
+  @Uint32()
+  external int nPropConfig;
   external Pointer<WMDM_PROP_CONFIG> pConfigs;
 }
 
@@ -344,27 +383,32 @@ class WMDMDetermineMaxPropStringLen extends Struct {
   external Array<Uint16> sz086;
 }
 
-class WMDMLogger extends Struct {
-}
+class WMDMLogger extends Struct {}
 
 class MTP_COMMAND_DATA_IN extends Struct {
-  @Uint16() external int OpCode;
-  @Uint32() external int NumParams;
+  @Uint16()
+  external int OpCode;
+  @Uint32()
+  external int NumParams;
   @Array(5)
   external Array<Uint32> Params;
-  @Uint32() external int NextPhase;
-  @Uint32() external int CommandWriteDataSize;
+  @Uint32()
+  external int NextPhase;
+  @Uint32()
+  external int CommandWriteDataSize;
   @Array(1)
   external Array<Uint8> CommandWriteData;
 }
 
 class MTP_COMMAND_DATA_OUT extends Struct {
-  @Uint16() external int ResponseCode;
-  @Uint32() external int NumParams;
+  @Uint16()
+  external int ResponseCode;
+  @Uint32()
+  external int NumParams;
   @Array(5)
   external Array<Uint32> Params;
-  @Uint32() external int CommandReadDataSize;
+  @Uint32()
+  external int CommandReadDataSize;
   @Array(1)
   external Array<Uint8> CommandReadData;
 }
-

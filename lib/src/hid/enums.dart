@@ -10,4 +10,3 @@ class HIDP_REPORT_TYPE {
   static const HidP_Output = 0x00000001;
   static const HidP_Feature = 0x00000002;
 }
-

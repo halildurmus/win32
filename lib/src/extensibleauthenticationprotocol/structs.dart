@@ -46,19 +46,25 @@ import 'package:ffi/ffi.dart';
 class NgcTicketContext extends Struct {
   @Array(45)
   external Array<Uint16> wszTicket;
-  @IntPtr() external int hKey;
-  @IntPtr() external int hImpersonateToken;
+  @IntPtr()
+  external int hKey;
+  @IntPtr()
+  external int hImpersonateToken;
 }
 
 class RAS_AUTH_ATTRIBUTE extends Struct {
-  @Uint32() external int raaType;
-  @Uint32() external int dwLength;
+  @Uint32()
+  external int raaType;
+  @Uint32()
+  external int dwLength;
   external Pointer Value;
 }
 
 class PPP_EAP_PACKET extends Struct {
-  @Uint8() external int Code;
-  @Uint8() external int Id;
+  @Uint8()
+  external int Code;
+  @Uint8()
+  external int Id;
   @Array(2)
   external Array<Uint8> Length;
   @Array(1)
@@ -66,94 +72,139 @@ class PPP_EAP_PACKET extends Struct {
 }
 
 class PPP_EAP_INPUT extends Struct {
-  @Uint32() external int dwSizeInBytes;
-  @Uint32() external int fFlags;
-  @Int32() external int fAuthenticator;
+  @Uint32()
+  external int dwSizeInBytes;
+  @Uint32()
+  external int fFlags;
+  @Int32()
+  external int fAuthenticator;
   external Pointer<Utf16> pwszIdentity;
   external Pointer<Utf16> pwszPassword;
-  @Uint8() external int bInitialId;
+  @Uint8()
+  external int bInitialId;
   external Pointer<RAS_AUTH_ATTRIBUTE> pUserAttributes;
-  @Int32() external int fAuthenticationComplete;
-  @Uint32() external int dwAuthResultCode;
-  @IntPtr() external int hTokenImpersonateUser;
-  @Int32() external int fSuccessPacketReceived;
-  @Int32() external int fDataReceivedFromInteractiveUI;
+  @Int32()
+  external int fAuthenticationComplete;
+  @Uint32()
+  external int dwAuthResultCode;
+  @IntPtr()
+  external int hTokenImpersonateUser;
+  @Int32()
+  external int fSuccessPacketReceived;
+  @Int32()
+  external int fDataReceivedFromInteractiveUI;
   external Pointer<Uint8> pDataFromInteractiveUI;
-  @Uint32() external int dwSizeOfDataFromInteractiveUI;
+  @Uint32()
+  external int dwSizeOfDataFromInteractiveUI;
   external Pointer<Uint8> pConnectionData;
-  @Uint32() external int dwSizeOfConnectionData;
+  @Uint32()
+  external int dwSizeOfConnectionData;
   external Pointer<Uint8> pUserData;
-  @Uint32() external int dwSizeOfUserData;
-  @IntPtr() external int hReserved;
+  @Uint32()
+  external int dwSizeOfUserData;
+  @IntPtr()
+  external int hReserved;
   external GUID guidConnectionId;
-  @Int32() external int isVpn;
+  @Int32()
+  external int isVpn;
 }
 
 class PPP_EAP_OUTPUT extends Struct {
-  @Uint32() external int dwSizeInBytes;
-  @Uint32() external int Action;
-  @Uint32() external int dwAuthResultCode;
+  @Uint32()
+  external int dwSizeInBytes;
+  @Uint32()
+  external int Action;
+  @Uint32()
+  external int dwAuthResultCode;
   external Pointer<RAS_AUTH_ATTRIBUTE> pUserAttributes;
-  @Int32() external int fInvokeInteractiveUI;
+  @Int32()
+  external int fInvokeInteractiveUI;
   external Pointer<Uint8> pUIContextData;
-  @Uint32() external int dwSizeOfUIContextData;
-  @Int32() external int fSaveConnectionData;
+  @Uint32()
+  external int dwSizeOfUIContextData;
+  @Int32()
+  external int fSaveConnectionData;
   external Pointer<Uint8> pConnectionData;
-  @Uint32() external int dwSizeOfConnectionData;
-  @Int32() external int fSaveUserData;
+  @Uint32()
+  external int dwSizeOfConnectionData;
+  @Int32()
+  external int fSaveUserData;
   external Pointer<Uint8> pUserData;
-  @Uint32() external int dwSizeOfUserData;
+  @Uint32()
+  external int dwSizeOfUserData;
   external Pointer<NgcTicketContext> pNgcKerbTicket;
-  @Int32() external int fSaveToCredMan;
+  @Int32()
+  external int fSaveToCredMan;
 }
 
 class PPP_EAP_INFO extends Struct {
-  @Uint32() external int dwSizeInBytes;
-  @Uint32() external int dwEapTypeId;
-  @IntPtr() external int RasEapInitialize;
-  @IntPtr() external int RasEapBegin;
-  @IntPtr() external int RasEapEnd;
-  @IntPtr() external int RasEapMakeMessage;
+  @Uint32()
+  external int dwSizeInBytes;
+  @Uint32()
+  external int dwEapTypeId;
+  @IntPtr()
+  external int RasEapInitialize;
+  @IntPtr()
+  external int RasEapBegin;
+  @IntPtr()
+  external int RasEapEnd;
+  @IntPtr()
+  external int RasEapMakeMessage;
 }
 
 class LEGACY_IDENTITY_UI_PARAMS extends Struct {
-  @Uint32() external int eapType;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwSizeofConnectionData;
+  @Uint32()
+  external int eapType;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwSizeofConnectionData;
   external Pointer<Uint8> pConnectionData;
-  @Uint32() external int dwSizeofUserData;
+  @Uint32()
+  external int dwSizeofUserData;
   external Pointer<Uint8> pUserData;
-  @Uint32() external int dwSizeofUserDataOut;
+  @Uint32()
+  external int dwSizeofUserDataOut;
   external Pointer<Uint8> pUserDataOut;
   external Pointer<Utf16> pwszIdentity;
-  @Uint32() external int dwError;
+  @Uint32()
+  external int dwError;
 }
 
 class LEGACY_INTERACTIVE_UI_PARAMS extends Struct {
-  @Uint32() external int eapType;
-  @Uint32() external int dwSizeofContextData;
+  @Uint32()
+  external int eapType;
+  @Uint32()
+  external int dwSizeofContextData;
   external Pointer<Uint8> pContextData;
-  @Uint32() external int dwSizeofInteractiveUIData;
+  @Uint32()
+  external int dwSizeofInteractiveUIData;
   external Pointer<Uint8> pInteractiveUIData;
-  @Uint32() external int dwError;
+  @Uint32()
+  external int dwError;
 }
 
 class EAP_TYPE extends Struct {
-  @Uint8() external int type;
-  @Uint32() external int dwVendorId;
-  @Uint32() external int dwVendorType;
+  @Uint8()
+  external int type;
+  @Uint32()
+  external int dwVendorId;
+  @Uint32()
+  external int dwVendorType;
 }
 
 class EAP_METHOD_TYPE extends Struct {
   external EAP_TYPE eapType;
-  @Uint32() external int dwAuthorId;
+  @Uint32()
+  external int dwAuthorId;
 }
 
 class EAP_METHOD_INFO extends Struct {
   external EAP_METHOD_TYPE eaptype;
   external Pointer<Utf16> pwszAuthorName;
   external Pointer<Utf16> pwszFriendlyName;
-  @Uint32() external int eapProperties;
+  @Uint32()
+  external int eapProperties;
   external Pointer<EAP_METHOD_INFO> pInnerMethodInfo;
 }
 
@@ -161,24 +212,29 @@ class EAP_METHOD_INFO_EX extends Struct {
   external EAP_METHOD_TYPE eaptype;
   external Pointer<Utf16> pwszAuthorName;
   external Pointer<Utf16> pwszFriendlyName;
-  @Uint32() external int eapProperties;
+  @Uint32()
+  external int eapProperties;
   external Pointer<EAP_METHOD_INFO_ARRAY_EX> pInnerMethodInfoArray;
 }
 
 class EAP_METHOD_INFO_ARRAY extends Struct {
-  @Uint32() external int dwNumberOfMethods;
+  @Uint32()
+  external int dwNumberOfMethods;
   external Pointer<EAP_METHOD_INFO> pEapMethods;
 }
 
 class EAP_METHOD_INFO_ARRAY_EX extends Struct {
-  @Uint32() external int dwNumberOfMethods;
+  @Uint32()
+  external int dwNumberOfMethods;
   external Pointer<EAP_METHOD_INFO_EX> pEapMethods;
 }
 
 class EAP_ERROR extends Struct {
-  @Uint32() external int dwWinError;
+  @Uint32()
+  external int dwWinError;
   external EAP_METHOD_TYPE type;
-  @Uint32() external int dwReasonCode;
+  @Uint32()
+  external int dwReasonCode;
   external GUID rootCauseGuid;
   external GUID repairGuid;
   external GUID helpLinkGuid;
@@ -187,29 +243,39 @@ class EAP_ERROR extends Struct {
 }
 
 class EAP_ATTRIBUTE extends Struct {
-  @Uint32() external int eaType;
-  @Uint32() external int dwLength;
+  @Uint32()
+  external int eaType;
+  @Uint32()
+  external int dwLength;
   external Pointer<Uint8> pValue;
 }
 
 class EAP_ATTRIBUTES extends Struct {
-  @Uint32() external int dwNumberOfAttributes;
+  @Uint32()
+  external int dwNumberOfAttributes;
   external Pointer<EAP_ATTRIBUTE> pAttribs;
 }
 
 class EAP_CONFIG_INPUT_FIELD_DATA extends Struct {
-  @Uint32() external int dwSize;
-  @Uint32() external int Type;
-  @Uint32() external int dwFlagProps;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int Type;
+  @Uint32()
+  external int dwFlagProps;
   external Pointer<Utf16> pwszLabel;
   external Pointer<Utf16> pwszData;
-  @Uint32() external int dwMinDataLength;
-  @Uint32() external int dwMaxDataLength;
+  @Uint32()
+  external int dwMinDataLength;
+  @Uint32()
+  external int dwMaxDataLength;
 }
 
 class EAP_CONFIG_INPUT_FIELD_ARRAY extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int dwNumberOfFields;
+  @Uint32()
+  external int dwVersion;
+  @Uint32()
+  external int dwNumberOfFields;
   external Pointer<EAP_CONFIG_INPUT_FIELD_DATA> pFields;
 }
 
@@ -225,25 +291,34 @@ class EAP_UI_DATA_FORMAT extends Struct {
 }
 
 class EAP_INTERACTIVE_UI_DATA extends Struct {
-  @Uint32() external int dwVersion;
-  @Uint32() external int dwSize;
-  @Uint32() external int dwDataType;
-  @Uint32() external int cbUiData;
+  @Uint32()
+  external int dwVersion;
+  @Uint32()
+  external int dwSize;
+  @Uint32()
+  external int dwDataType;
+  @Uint32()
+  external int cbUiData;
   external EAP_UI_DATA_FORMAT pbUiData;
 }
 
 class EAP_METHOD_PROPERTY_VALUE_BOOL extends Struct {
-  @Uint32() external int length;
-  @Int32() external int value;
+  @Uint32()
+  external int length;
+  @Int32()
+  external int value;
 }
 
 class EAP_METHOD_PROPERTY_VALUE_DWORD extends Struct {
-  @Uint32() external int length;
-  @Uint32() external int value;
+  @Uint32()
+  external int length;
+  @Uint32()
+  external int value;
 }
 
 class EAP_METHOD_PROPERTY_VALUE_STRING extends Struct {
-  @Uint32() external int length;
+  @Uint32()
+  external int length;
   external Pointer<Uint8> value;
 }
 
@@ -254,36 +329,47 @@ class EAP_METHOD_PROPERTY_VALUE extends Struct {
 }
 
 class EAP_METHOD_PROPERTY extends Struct {
-  @Uint32() external int eapMethodPropertyType;
-  @Uint32() external int eapMethodPropertyValueType;
+  @Uint32()
+  external int eapMethodPropertyType;
+  @Uint32()
+  external int eapMethodPropertyValueType;
   external EAP_METHOD_PROPERTY_VALUE eapMethodPropertyValue;
 }
 
 class EAP_METHOD_PROPERTY_ARRAY extends Struct {
-  @Uint32() external int dwNumberOfProperties;
+  @Uint32()
+  external int dwNumberOfProperties;
   external Pointer<EAP_METHOD_PROPERTY> pMethodProperty;
 }
 
 class EAPHOST_IDENTITY_UI_PARAMS extends Struct {
   external EAP_METHOD_TYPE eapMethodType;
-  @Uint32() external int dwFlags;
-  @Uint32() external int dwSizeofConnectionData;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwSizeofConnectionData;
   external Pointer<Uint8> pConnectionData;
-  @Uint32() external int dwSizeofUserData;
+  @Uint32()
+  external int dwSizeofUserData;
   external Pointer<Uint8> pUserData;
-  @Uint32() external int dwSizeofUserDataOut;
+  @Uint32()
+  external int dwSizeofUserDataOut;
   external Pointer<Uint8> pUserDataOut;
   external Pointer<Utf16> pwszIdentity;
-  @Uint32() external int dwError;
+  @Uint32()
+  external int dwError;
   external Pointer<EAP_ERROR> pEapError;
 }
 
 class EAPHOST_INTERACTIVE_UI_PARAMS extends Struct {
-  @Uint32() external int dwSizeofContextData;
+  @Uint32()
+  external int dwSizeofContextData;
   external Pointer<Uint8> pContextData;
-  @Uint32() external int dwSizeofInteractiveUIData;
+  @Uint32()
+  external int dwSizeofInteractiveUIData;
   external Pointer<Uint8> pInteractiveUIData;
-  @Uint32() external int dwError;
+  @Uint32()
+  external int dwError;
   external Pointer<EAP_ERROR> pEapError;
 }
 
@@ -309,34 +395,47 @@ class EapCredentialTypeData extends Struct {
 }
 
 class EapCredential extends Struct {
-  @Uint32() external int credType;
+  @Uint32()
+  external int credType;
   external EapCredentialTypeData credData;
 }
 
 class EAPHOST_AUTH_INFO extends Struct {
-  @Uint32() external int status;
-  @Uint32() external int dwErrorCode;
-  @Uint32() external int dwReasonCode;
+  @Uint32()
+  external int status;
+  @Uint32()
+  external int dwErrorCode;
+  @Uint32()
+  external int dwReasonCode;
 }
 
 class EapHostPeerMethodResult extends Struct {
-  @Int32() external int fIsSuccess;
-  @Uint32() external int dwFailureReasonCode;
-  @Int32() external int fSaveConnectionData;
-  @Uint32() external int dwSizeofConnectionData;
+  @Int32()
+  external int fIsSuccess;
+  @Uint32()
+  external int dwFailureReasonCode;
+  @Int32()
+  external int fSaveConnectionData;
+  @Uint32()
+  external int dwSizeofConnectionData;
   external Pointer<Uint8> pConnectionData;
-  @Int32() external int fSaveUserData;
-  @Uint32() external int dwSizeofUserData;
+  @Int32()
+  external int fSaveUserData;
+  @Uint32()
+  external int dwSizeofUserData;
   external Pointer<Uint8> pUserData;
   external Pointer<EAP_ATTRIBUTES> pAttribArray;
-  @Uint32() external int isolationState;
+  @Uint32()
+  external int isolationState;
   external Pointer<EAP_METHOD_INFO> pEapMethodInfo;
   external Pointer<EAP_ERROR> pEapError;
 }
 
 class EapPacket extends Struct {
-  @Uint8() external int Code;
-  @Uint8() external int Id;
+  @Uint8()
+  external int Code;
+  @Uint8()
+  external int Id;
   @Array(2)
   external Array<Uint8> Length;
   @Array(1)
@@ -344,61 +443,96 @@ class EapPacket extends Struct {
 }
 
 class EAP_METHOD_AUTHENTICATOR_RESULT extends Struct {
-  @Int32() external int fIsSuccess;
-  @Uint32() external int dwFailureReason;
+  @Int32()
+  external int fIsSuccess;
+  @Uint32()
+  external int dwFailureReason;
   external Pointer<EAP_ATTRIBUTES> pAuthAttribs;
 }
 
 class EapPeerMethodOutput extends Struct {
-  @Uint32() external int action;
-  @Int32() external int fAllowNotifications;
+  @Uint32()
+  external int action;
+  @Int32()
+  external int fAllowNotifications;
 }
 
 class EapPeerMethodResult extends Struct {
-  @Int32() external int fIsSuccess;
-  @Uint32() external int dwFailureReasonCode;
-  @Int32() external int fSaveConnectionData;
-  @Uint32() external int dwSizeofConnectionData;
+  @Int32()
+  external int fIsSuccess;
+  @Uint32()
+  external int dwFailureReasonCode;
+  @Int32()
+  external int fSaveConnectionData;
+  @Uint32()
+  external int dwSizeofConnectionData;
   external Pointer<Uint8> pConnectionData;
-  @Int32() external int fSaveUserData;
-  @Uint32() external int dwSizeofUserData;
+  @Int32()
+  external int fSaveUserData;
+  @Uint32()
+  external int dwSizeofUserData;
   external Pointer<Uint8> pUserData;
   external Pointer<EAP_ATTRIBUTES> pAttribArray;
   external Pointer<EAP_ERROR> pEapError;
   external Pointer<NgcTicketContext> pNgcKerbTicket;
-  @Int32() external int fSaveToCredMan;
+  @Int32()
+  external int fSaveToCredMan;
 }
 
 class EAP_PEER_METHOD_ROUTINES extends Struct {
-  @Uint32() external int dwVersion;
+  @Uint32()
+  external int dwVersion;
   external Pointer<EAP_TYPE> pEapType;
-  @IntPtr() external int EapPeerInitialize;
-  @IntPtr() external int EapPeerGetIdentity;
-  @IntPtr() external int EapPeerBeginSession;
-  @IntPtr() external int EapPeerSetCredentials;
-  @IntPtr() external int EapPeerProcessRequestPacket;
-  @IntPtr() external int EapPeerGetResponsePacket;
-  @IntPtr() external int EapPeerGetResult;
-  @IntPtr() external int EapPeerGetUIContext;
-  @IntPtr() external int EapPeerSetUIContext;
-  @IntPtr() external int EapPeerGetResponseAttributes;
-  @IntPtr() external int EapPeerSetResponseAttributes;
-  @IntPtr() external int EapPeerEndSession;
-  @IntPtr() external int EapPeerShutdown;
+  @IntPtr()
+  external int EapPeerInitialize;
+  @IntPtr()
+  external int EapPeerGetIdentity;
+  @IntPtr()
+  external int EapPeerBeginSession;
+  @IntPtr()
+  external int EapPeerSetCredentials;
+  @IntPtr()
+  external int EapPeerProcessRequestPacket;
+  @IntPtr()
+  external int EapPeerGetResponsePacket;
+  @IntPtr()
+  external int EapPeerGetResult;
+  @IntPtr()
+  external int EapPeerGetUIContext;
+  @IntPtr()
+  external int EapPeerSetUIContext;
+  @IntPtr()
+  external int EapPeerGetResponseAttributes;
+  @IntPtr()
+  external int EapPeerSetResponseAttributes;
+  @IntPtr()
+  external int EapPeerEndSession;
+  @IntPtr()
+  external int EapPeerShutdown;
 }
 
 class EAP_AUTHENTICATOR_METHOD_ROUTINES extends Struct {
-  @Uint32() external int dwSizeInBytes;
+  @Uint32()
+  external int dwSizeInBytes;
   external Pointer<EAP_METHOD_TYPE> pEapType;
-  @IntPtr() external int EapMethodAuthenticatorInitialize;
-  @IntPtr() external int EapMethodAuthenticatorBeginSession;
-  @IntPtr() external int EapMethodAuthenticatorUpdateInnerMethodParams;
-  @IntPtr() external int EapMethodAuthenticatorReceivePacket;
-  @IntPtr() external int EapMethodAuthenticatorSendPacket;
-  @IntPtr() external int EapMethodAuthenticatorGetAttributes;
-  @IntPtr() external int EapMethodAuthenticatorSetAttributes;
-  @IntPtr() external int EapMethodAuthenticatorGetResult;
-  @IntPtr() external int EapMethodAuthenticatorEndSession;
-  @IntPtr() external int EapMethodAuthenticatorShutdown;
+  @IntPtr()
+  external int EapMethodAuthenticatorInitialize;
+  @IntPtr()
+  external int EapMethodAuthenticatorBeginSession;
+  @IntPtr()
+  external int EapMethodAuthenticatorUpdateInnerMethodParams;
+  @IntPtr()
+  external int EapMethodAuthenticatorReceivePacket;
+  @IntPtr()
+  external int EapMethodAuthenticatorSendPacket;
+  @IntPtr()
+  external int EapMethodAuthenticatorGetAttributes;
+  @IntPtr()
+  external int EapMethodAuthenticatorSetAttributes;
+  @IntPtr()
+  external int EapMethodAuthenticatorGetResult;
+  @IntPtr()
+  external int EapMethodAuthenticatorEndSession;
+  @IntPtr()
+  external int EapMethodAuthenticatorShutdown;
 }
-

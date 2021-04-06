@@ -85,4 +85,3 @@ class DNS_SECTION {
   static const DnsSectionAuthority = 0x00000002;
   static const DnsSectionAddtional = 0x00000003;
 }
-

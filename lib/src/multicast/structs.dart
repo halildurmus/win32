@@ -44,14 +44,16 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class IPNG_ADDRESS extends Struct {
-  @Uint32() external int IpAddrV4;
+  @Uint32()
+  external int IpAddrV4;
   @Array(16)
   external Array<Uint8> IpAddrV6;
 }
 
 class MCAST_CLIENT_UID extends Struct {
   external Pointer<Uint8> ClientUID;
-  @Uint32() external int ClientUIDLength;
+  @Uint32()
+  external int ClientUIDLength;
 }
 
 class MCAST_SCOPE_CTX extends Struct {
@@ -63,26 +65,35 @@ class MCAST_SCOPE_CTX extends Struct {
 class MCAST_SCOPE_ENTRY extends Struct {
   external MCAST_SCOPE_CTX ScopeCtx;
   external IPNG_ADDRESS LastAddr;
-  @Uint32() external int TTL;
+  @Uint32()
+  external int TTL;
   external UNICODE_STRING ScopeDesc;
 }
 
 class MCAST_LEASE_REQUEST extends Struct {
-  @Int32() external int LeaseStartTime;
-  @Int32() external int MaxLeaseStartTime;
-  @Uint32() external int LeaseDuration;
-  @Uint32() external int MinLeaseDuration;
+  @Int32()
+  external int LeaseStartTime;
+  @Int32()
+  external int MaxLeaseStartTime;
+  @Uint32()
+  external int LeaseDuration;
+  @Uint32()
+  external int MinLeaseDuration;
   external IPNG_ADDRESS ServerAddress;
-  @Uint16() external int MinAddrCount;
-  @Uint16() external int AddrCount;
+  @Uint16()
+  external int MinAddrCount;
+  @Uint16()
+  external int AddrCount;
   external Pointer<Uint8> pAddrBuf;
 }
 
 class MCAST_LEASE_RESPONSE extends Struct {
-  @Int32() external int LeaseStartTime;
-  @Int32() external int LeaseEndTime;
+  @Int32()
+  external int LeaseStartTime;
+  @Int32()
+  external int LeaseEndTime;
   external IPNG_ADDRESS ServerAddress;
-  @Uint16() external int AddrCount;
+  @Uint16()
+  external int AddrCount;
   external Pointer<Uint8> pAddrBuf;
 }
-

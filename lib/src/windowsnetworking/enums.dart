@@ -55,4 +55,3 @@ class WNetUseConnection_dwFlags {
   static const CONNECT_CMD_SAVECRED = 0x00001000;
   static const CONNECT_TEMPORARY = 0x00000004;
 }
-

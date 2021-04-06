@@ -40,4 +40,3 @@ class RdcNeedType {
   static const RDCNEED_SEED = 0x00000002;
   static const RDCNEED_SEED_MAX = 0x000000ff;
 }
-

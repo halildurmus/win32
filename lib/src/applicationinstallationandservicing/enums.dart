@@ -96,7 +96,8 @@ class IAssemblyCache_QueryAssemblyInfoFlags {
 class IAssemblyCache_UninstallAssembly_pulDispositionFlags {
   static const IASSEMBLYCACHE_UNINSTALL_DISPOSITION_UNINSTALLED = 0x00000001;
   static const IASSEMBLYCACHE_UNINSTALL_DISPOSITION_STILL_IN_USE = 0x00000002;
-  static const IASSEMBLYCACHE_UNINSTALL_DISPOSITION_ALREADY_UNINSTALLED = 0x00000003;
+  static const IASSEMBLYCACHE_UNINSTALL_DISPOSITION_ALREADY_UNINSTALLED =
+      0x00000003;
   static const IASSEMBLYCACHE_UNINSTALL_DISPOSITION_DELETE_PENDING = 0x00000004;
 }
 
@@ -603,4 +604,3 @@ class msmErrorType {
   static const msmErrorDirCreate = 0x00000007;
   static const msmErrorFeatureRequired = 0x00000008;
 }
-

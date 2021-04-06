@@ -44,11 +44,12 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 
 class HTHREAD_NETWORK_CONTEXT extends Struct {
-  @Uint32() external int ThreadId;
-  @IntPtr() external int ThreadContext;
+  @Uint32()
+  external int ThreadId;
+  @IntPtr()
+  external int ThreadContext;
 }
 
 class FILE_UNPROTECT_OPTIONS extends Struct {
   external bool audit;
 }
-

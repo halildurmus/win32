@@ -43,9 +43,6 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
-class OfflineFilesSetting extends Struct {
-}
+class OfflineFilesSetting extends Struct {}
 
-class OfflineFilesCache extends Struct {
-}
-
+class OfflineFilesCache extends Struct {}
