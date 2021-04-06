@@ -51,13 +51,11 @@ void main() {
     final methods = winTypeDef.methods;
 
     expect(methods[75].methodName, equals('HourAsPaddedString'));
-    expect(methods[75].isPublic, isTrue);
-    expect(methods[75].isPrivate, isFalse);
+    expect(methods[75].memberAccess, equals(MemberAccess.Public));
     expect(methods[75].isStatic, isFalse);
     expect(methods[75].isFinal, isTrue);
     expect(methods[75].isVirtual, isTrue);
     expect(methods[75].isSpecialName, isFalse);
-    expect(methods[75].isRTSpecialName, isFalse);
   });
 
   test('Find interfaces returns sane results', () {

@@ -95,7 +95,7 @@ void main() {
     final api = typedef.findMethod('AddFontResourceW')!;
     final returnType = api.returnType;
 
-    expect(returnType.attributes.length, isZero);
+    expect(returnType.customAttributes.length, isZero);
   });
 
   test('Functions can correctly return an int type', () {
@@ -213,6 +213,16 @@ void main() {
     expect(param.typeIdentifier.name, endsWith('HWND'));
   });
 
+  test('Character parameters have the correct type', () {
+    final typedef = scope['Windows.Win32.SystemServices.Apis']!;
+    final api = typedef.findMethod('FillConsoleOutputCharacterW')!;
+    final param = api.parameters[1];
+
+    expect(
+        param.typeIdentifier.corType, equals(CorElementType.ELEMENT_TYPE_CHAR));
+    expect(param.typeIdentifier.name, equals('char'));
+  });
+
   test('UnregisterPowerSettingNotification has the correct parameter type', () {
     final typedef = scope['Windows.Win32.SystemServices.Apis']!;
     final api = typedef.findMethod('UnregisterPowerSettingNotification')!;
@@ -308,8 +318,9 @@ void main() {
     final param = api.parameters.first;
 
     expect(param.name, equals('lpAttributeList'));
-    expect(param.typeIdentifier.corType, equals(CorElementType.ELEMENT_TYPE_I));
-    expect(param.typeIdentifier.name, equals('intptr'));
+    expect(param.typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+    expect(param.typeIdentifier.name, endsWith('LPPROC_THREAD_ATTRIBUTE_LIST'));
     expect(param.typeIdentifier.typeArgs, isEmpty);
   });
 
@@ -352,5 +363,51 @@ void main() {
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
     expect(param.typeIdentifier.typeArgs.first.type?.parent?.typeName,
         equals('System.Enum'));
+  });
+
+  test('Delegates are appropriately marked', () {
+    final delegate = scope['Windows.Win32.Gdi.MFENUMPROC']!;
+    expect(delegate.isDelegate, isTrue);
+  });
+
+  test('Non-delegates are appropriately marked', () {
+    final notADelegate = scope['Windows.Win32.SystemServices.Apis']!;
+    expect(notADelegate.isDelegate, isFalse);
+  });
+
+  test('Delegates are appropriately exposed', () {
+    final delegate = scope['Windows.Win32.Gdi.MFENUMPROC']!;
+
+    final api = delegate.findMethod('Invoke')!;
+    final param = api.parameters.first;
+
+    expect(param.name, equals('hdc'));
+  });
+
+  test('Scope contains an expected quantity of delegates', () {
+    expect(scope.delegates.length, greaterThan(1000));
+  });
+
+  test('Packing instructions are available', () {
+    final packedStruct = scope['Windows.Win32.Gdi.BITMAPFILEHEADER']!;
+    expect(packedStruct.classLayout.packingAlignment, equals(2));
+    expect(packedStruct.classLayout.minimumSize, isZero);
+  });
+  test('Packing instructions are available 2', () {
+    final packedStruct = scope['Windows.Win32.Bluetooth.BTH_QUERY_SERVICE']!;
+    expect(packedStruct.classLayout.packingAlignment, equals(1));
+    expect(packedStruct.classLayout.minimumSize, isZero);
+  });
+
+  test('Packing instructions are unavailable for an unpacked class', () {
+    final packedStruct = scope['Windows.Win32.Shell.NOTIFYICONIDENTIFIER']!;
+    expect(packedStruct.classLayout.packingAlignment, isNull);
+    expect(packedStruct.classLayout.minimumSize, isNull);
+  });
+
+  test('No crash when calling GetClassLayout on an enum', () {
+    final packedStruct = scope['Windows.Win32.Shell.KNOWN_FOLDER_FLAG']!;
+    expect(packedStruct.classLayout.packingAlignment, isNull);
+    expect(packedStruct.classLayout.minimumSize, isNull);
   });
 }

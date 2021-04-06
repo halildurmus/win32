@@ -7,7 +7,7 @@ import 'typedef.dart';
 /// Represents an enum in the Windows Metadata file
 class Enumeration extends TypeDef {
   Enumeration(TypeDef type)
-      : super(type.reader, type.token, type.typeName, type.flags,
+      : super(type.reader, type.token, type.typeName, type.attributes,
             type.baseTypeToken);
 
   @override

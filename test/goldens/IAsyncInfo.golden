@@ -64,40 +64,49 @@ class IAsyncInfo extends IInspectable {
     int get Id {
       final retValuePtr = calloc<Uint32>();
       
-      final hr = Pointer<NativeFunction<_get_Id_Native>>.fromAddress(
-        ptr.ref.vtable.elementAt(6).value)
-          .asFunction<_get_Id_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-      if (FAILED(hr)) throw WindowsException(hr);
+      try {
+        final hr = Pointer<NativeFunction<_get_Id_Native>>.fromAddress(
+          ptr.ref.vtable.elementAt(6).value)
+           .asFunction<_get_Id_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+        if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      free(retValuePtr);
-      return retValue;
+        final retValue = retValuePtr.value;
+        return retValue;
+      } finally {
+        free(retValuePtr);
+      }
     }
 
     int get Status {
       final retValuePtr = calloc<Uint32>();
       
-      final hr = Pointer<NativeFunction<_get_Status_Native>>.fromAddress(
-        ptr.ref.vtable.elementAt(7).value)
-          .asFunction<_get_Status_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-      if (FAILED(hr)) throw WindowsException(hr);
+      try {
+        final hr = Pointer<NativeFunction<_get_Status_Native>>.fromAddress(
+          ptr.ref.vtable.elementAt(7).value)
+           .asFunction<_get_Status_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+        if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      free(retValuePtr);
-      return retValue;
+        final retValue = retValuePtr.value;
+        return retValue;
+      } finally {
+        free(retValuePtr);
+      }
     }
 
     int get ErrorCode {
       final retValuePtr = calloc<Uint32>();
       
-      final hr = Pointer<NativeFunction<_get_ErrorCode_Native>>.fromAddress(
-        ptr.ref.vtable.elementAt(8).value)
-          .asFunction<_get_ErrorCode_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-      if (FAILED(hr)) throw WindowsException(hr);
+      try {
+        final hr = Pointer<NativeFunction<_get_ErrorCode_Native>>.fromAddress(
+          ptr.ref.vtable.elementAt(8).value)
+           .asFunction<_get_ErrorCode_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+        if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      free(retValuePtr);
-      return retValue;
+        final retValue = retValuePtr.value;
+        return retValue;
+      } finally {
+        free(retValuePtr);
+      }
     }
 
   int Cancel() =>

@@ -1,8 +1,9 @@
 {
     "markdownlint.config": {
-        "MD041": false,
+        "MD041": false
     },
     "editor.codeActionsOnSave": {
         "source.fixAll.markdownlint": true
-    }
+    },
+    "dart.sdkPath": "c:\\flutter\\bin\\cache\\dart-sdk"
 }

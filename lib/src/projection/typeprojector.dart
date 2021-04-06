@@ -57,6 +57,10 @@ class TypeProjector {
     if (typeIdentifier.name == 'LPSTR') {
       return 'Pointer<Utf8>';
     }
+    // In ECMA-335, 'char' is understood to represent a wide character
+    if (typeIdentifier.name == 'char') {
+      return 'Pointer<Utf16>';
+    }
     if (typeIdentifier.typeArgs.first.type?.parent?.typeName == 'System.Enum') {
       return 'Pointer<Uint32>';
     }
@@ -138,6 +142,7 @@ class TypeProjector {
       case CorElementType.ELEMENT_TYPE_BOOLEAN:
         return '/* Boolean */ Uint8';
       case CorElementType.ELEMENT_TYPE_CHAR:
+        return 'Uint16';
       case CorElementType.ELEMENT_TYPE_U1:
         return 'Uint8';
       case CorElementType.ELEMENT_TYPE_I1:
@@ -163,6 +168,7 @@ class TypeProjector {
       case CorElementType.ELEMENT_TYPE_OBJECT:
         return 'COMObject';
       case CorElementType.ELEMENT_TYPE_GENERICINST:
+      case CorElementType.ELEMENT_TYPE_ARRAY:
         // TODO: Assume a Vector for now
         return TypeProjector(typeIdentifier.typeArgs.first).nativeType;
       case CorElementType.ELEMENT_TYPE_PTR:

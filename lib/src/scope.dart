@@ -71,6 +71,9 @@ class Scope {
     return _typedefs;
   }
 
+  List<TypeDef> get delegates =>
+      typeDefs.where((typeDef) => typeDef.isDelegate).toList();
+
   /// Get an enumerated list of modules for this scope.
   List<Module> get modules {
     if (_modules.isEmpty) {
@@ -129,6 +132,8 @@ class Scope {
     return _enums;
   }
 
+  // TODO: Replace this by findTypeDef (since we have a variety of lists in this
+  // class).
   /// Find a typedef by name.
   TypeDef? operator [](String type) {
     final szTypeDef = type.toNativeUtf16();

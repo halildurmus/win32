@@ -10,26 +10,64 @@ import 'package:win32/win32.dart';
 
 import '_base.dart';
 import 'com/IMetaDataImport2.dart';
+import 'constants.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
 
-class Field extends AttributeObject {
+enum FieldAccess {
+  PrivateScope,
+  Private,
+  FamilyAndAssembly,
+  Assembly,
+  Family,
+  FamilyOrAssembly,
+  Public
+}
+
+class Field extends TokenObject with CustomAttributes {
   final String name;
   final int value;
   final TypeIdentifier typeIdentifier;
-  final int corType;
-  final int fieldAttribute;
+  final CorElementType fieldType;
+  final int attributes;
   final Uint8List signatureBlob;
 
-  Field(
-      IMetaDataImport2 reader,
-      int token,
-      this.name,
-      this.value,
-      this.typeIdentifier,
-      this.corType,
-      this.fieldAttribute,
-      this.signatureBlob)
+  FieldAccess get fieldAccess =>
+      FieldAccess.values[attributes & CorFieldAttr.fdFieldAccessMask];
+
+  bool get isStatic =>
+      attributes & CorFieldAttr.fdStatic == CorFieldAttr.fdStatic;
+
+  bool get isInitOnly =>
+      attributes & CorFieldAttr.fdInitOnly == CorFieldAttr.fdInitOnly;
+
+  bool get isLiteral =>
+      attributes & CorFieldAttr.fdLiteral == CorFieldAttr.fdLiteral;
+
+  bool get isNotSerialized =>
+      attributes & CorFieldAttr.fdNotSerialized == CorFieldAttr.fdNotSerialized;
+
+  bool get isSpecialName =>
+      attributes & CorFieldAttr.fdSpecialName == CorFieldAttr.fdSpecialName;
+
+  bool get isPinvokeImpl =>
+      attributes & CorFieldAttr.fdPinvokeImpl == CorFieldAttr.fdPinvokeImpl;
+
+  bool get isRTSpecialName =>
+      attributes & CorFieldAttr.fdRTSpecialName == CorFieldAttr.fdRTSpecialName;
+
+  bool get hasFieldMarshal =>
+      attributes & CorFieldAttr.fdHasFieldMarshal ==
+      CorFieldAttr.fdHasFieldMarshal;
+
+  bool get hasDefault =>
+      attributes & CorFieldAttr.fdHasDefault == CorFieldAttr.fdHasDefault;
+
+  bool get hasFieldRVA =>
+      attributes & CorFieldAttr.fdHasFieldRVA == CorFieldAttr.fdHasFieldRVA;
+
+  Field(IMetaDataImport2 reader, int token, this.name, this.value,
+      this.typeIdentifier, this.fieldType, this.attributes, this.signatureBlob)
       : super(reader, token);
 
   factory Field.fromToken(IMetaDataImport2 reader, int token) {
@@ -59,7 +97,7 @@ class Field extends AttributeObject {
 
       if (SUCCEEDED(hr)) {
         final fieldName = szField.toDartString();
-        final ctype = pdwCPlusTypeFlag.value;
+        final cPlusTypeFlag = pdwCPlusTypeFlag.value;
 
         // The first entry of the signature is its FieldAttribute (compare
         // against the CorFieldAttr enumeration), and then follows a type
@@ -72,7 +110,7 @@ class Field extends AttributeObject {
             fieldName,
             ppValue.value != nullptr ? ppValue.value.value : 0,
             typeTuple.typeIdentifier,
-            ctype,
+            CorElementType.values[cPlusTypeFlag],
             pdwAttr.value,
             signature);
       } else {

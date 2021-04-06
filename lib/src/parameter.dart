@@ -14,15 +14,29 @@ import 'constants.dart';
 import 'typeidentifier.dart';
 
 /// A parameter or return type.
-class Parameter extends AttributeObject {
+class Parameter extends TokenObject with CustomAttributes {
   final int sequence;
-  final int attributeFlags;
+  final int attributes;
   TypeIdentifier typeIdentifier;
   String name;
   final Uint8List signatureBlob;
 
-  Parameter(IMetaDataImport2 reader, int token, this.sequence,
-      this.attributeFlags, this.typeIdentifier, this.name, this.signatureBlob)
+  bool get isInParam => attributes & CorParamAttr.pdIn == CorParamAttr.pdIn;
+
+  bool get isOutParam => attributes & CorParamAttr.pdOut == CorParamAttr.pdOut;
+
+  bool get isOptional =>
+      attributes & CorParamAttr.pdOptional == CorParamAttr.pdOptional;
+
+  bool get hasDefault =>
+      attributes & CorParamAttr.pdHasDefault == CorParamAttr.pdHasDefault;
+
+  bool get hasFieldMarshal =>
+      attributes & CorParamAttr.pdHasFieldMarshal ==
+      CorParamAttr.pdHasFieldMarshal;
+
+  Parameter(IMetaDataImport2 reader, int token, this.sequence, this.attributes,
+      this.typeIdentifier, this.name, this.signatureBlob)
       : super(reader, token);
 
   factory Parameter.fromToken(IMetaDataImport2 reader, int token) {

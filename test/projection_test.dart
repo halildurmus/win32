@@ -140,14 +140,25 @@ void main() {
           equals('Pointer<NativeFunction<SymEnumSymbolsProc>>'));
     });
 
+    test('Pointers to structs are represented correctly', () {
+      final typedef = scope['Windows.Win32.WindowsAndMessaging.Apis']!;
+      final api = typedef.findMethod('ChooseFontW')!;
+      final type = api.parameters.first.typeIdentifier; // CHOOSEFONTW
+      final typeProjection = TypeProjector(type);
+
+      expect(typeProjection.nativeType, equals('Pointer<CHOOSEFONT>'));
+      expect(typeProjection.dartType, equals('Pointer<CHOOSEFONT>'));
+    });
+
     test('Naked structs are represented correctly', () {
       final typedef = scope['Windows.Win32.SystemServices.Apis']!;
       final api = typedef.findMethod('InitializeProcThreadAttributeList')!;
-      final type = api.parameters.first.typeIdentifier; // FONTENUMPROCW
+      final type =
+          api.parameters.first.typeIdentifier; // LPPROC_THREAD_ATTRIBUTE_LIST
       final typeProjection = TypeProjector(type);
 
-      expect(typeProjection.nativeType, equals('IntPtr'));
-      expect(typeProjection.dartType, equals('int'));
+      expect(typeProjection.nativeType, equals('Pointer'));
+      expect(typeProjection.dartType, equals('Pointer'));
     });
 
     test('Enumeration params are represented correctly', () {

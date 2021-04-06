@@ -49,10 +49,7 @@ class ClassProjector {
         methodProjection.returnTypeNative = typeBuilder.nativeType;
         methodProjection.returnTypeDart = typeBuilder.dartType;
 
-        // Win32 COM properties are not marked as such in the metadata
-        // (https://github.com/microsoft/win32metadata/issues/270), so we have
-        // to manually deal with them.
-        if (mdMethod.methodName.startsWith('get_')) {
+        if (mdMethod.isGetProperty) {
           methodProjection.isGetProperty = true;
 
           // This is a Pointer<T>, which will be wrapped later, so strip the
