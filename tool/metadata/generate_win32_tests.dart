@@ -132,7 +132,14 @@ void main() {
 ''');
 
   for (final struct in structSize64.keys) {
-    writer.writeStringSync('''
+    if (structSize64[struct] == structSize32[struct]) {
+      writer.writeStringSync('''
+  test('Struct $struct is the right size', () {
+    expect(sizeOf<$struct>(), equals(${structSize64[struct]}));
+  });
+    ''');
+    } else {
+      writer.writeStringSync('''
   test('Struct $struct is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<$struct>(), equals(${structSize64[struct]}));
@@ -142,6 +149,7 @@ void main() {
     }
   });
 ''');
+    }
     testsGenerated++;
   }
 
