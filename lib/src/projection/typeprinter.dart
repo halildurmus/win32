@@ -202,14 +202,17 @@ import '../winrt/winrt_constants.dart';
     ${method.parameters.first.dartType} get $exposedMethodName {
       final retValuePtr = calloc<${method.parameters.first.nativeType}>();
       
-      final hr = Pointer<NativeFunction<_${method.name}_Native>>.fromAddress(
-        ptr.ref.vtable.elementAt($vtableIndex).value)
-          .asFunction<_${method.name}_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-      if (FAILED(hr)) throw WindowsException(hr);
+      try {
+        final hr = Pointer<NativeFunction<_${method.name}_Native>>.fromAddress(
+          ptr.ref.vtable.elementAt($vtableIndex).value)
+           .asFunction<_${method.name}_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+        if (FAILED(hr)) throw WindowsException(hr);
 
-      final retValue = retValuePtr.value;
-      free(retValuePtr);
-      return ${convertBool ? 'retValue == 0' : 'retValue'};
+        final retValue = retValuePtr.value;
+        return ${convertBool ? 'retValue == 0' : 'retValue'};
+      } finally {
+        free(retValuePtr);
+      }
     }
 ''');
     return buffer.toString();
