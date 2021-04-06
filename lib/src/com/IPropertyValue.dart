@@ -195,27 +195,35 @@ class IPropertyValue extends IInspectable {
   int get Type {
     final retValuePtr = calloc<Uint32>();
 
-    final hr = Pointer<NativeFunction<_get_Type_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(6).value)
-        .asFunction<_get_Type_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw WindowsException(hr);
+    try {
+      final hr = Pointer<NativeFunction<_get_Type_Native>>.fromAddress(
+              ptr.ref.vtable.elementAt(6).value)
+          .asFunction<_get_Type_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    final retValue = retValuePtr.value;
-    free(retValuePtr);
-    return retValue;
+      final retValue = retValuePtr.value;
+      return retValue;
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   bool get IsNumericScalar {
     final retValuePtr = calloc< /* Boolean */ Uint8>();
 
-    final hr = Pointer<NativeFunction<_get_IsNumericScalar_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(7).value)
-        .asFunction<_get_IsNumericScalar_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw WindowsException(hr);
+    try {
+      final hr =
+          Pointer<NativeFunction<_get_IsNumericScalar_Native>>.fromAddress(
+                      ptr.ref.vtable.elementAt(7).value)
+                  .asFunction<_get_IsNumericScalar_Dart>()(
+              ptr.ref.lpVtbl, retValuePtr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    final retValue = retValuePtr.value;
-    free(retValuePtr);
-    return retValue == 0;
+      final retValue = retValuePtr.value;
+      return retValue == 0;
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   int GetUInt8(Pointer<Uint8> result) =>

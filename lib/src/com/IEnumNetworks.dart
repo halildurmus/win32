@@ -52,14 +52,17 @@ class IEnumNetworks extends IDispatch {
   Pointer get NewEnum {
     final retValuePtr = calloc<Pointer>();
 
-    final hr = Pointer<NativeFunction<_get__NewEnum_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(7).value)
-        .asFunction<_get__NewEnum_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw WindowsException(hr);
+    try {
+      final hr = Pointer<NativeFunction<_get__NewEnum_Native>>.fromAddress(
+              ptr.ref.vtable.elementAt(7).value)
+          .asFunction<_get__NewEnum_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    final retValue = retValuePtr.value;
-    free(retValuePtr);
-    return retValue;
+      final retValue = retValuePtr.value;
+      return retValue;
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   int Next(int celt, Pointer<Pointer> rgelt, Pointer<Uint32> pceltFetched) =>

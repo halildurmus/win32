@@ -96,14 +96,17 @@ class ISpellChecker extends IUnknown {
   Pointer<Utf16> get LanguageTag {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
-    final hr = Pointer<NativeFunction<_get_LanguageTag_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(3).value)
-        .asFunction<_get_LanguageTag_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw WindowsException(hr);
+    try {
+      final hr = Pointer<NativeFunction<_get_LanguageTag_Native>>.fromAddress(
+              ptr.ref.vtable.elementAt(3).value)
+          .asFunction<_get_LanguageTag_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    final retValue = retValuePtr.value;
-    free(retValuePtr);
-    return retValue;
+      final retValue = retValuePtr.value;
+      return retValue;
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   int Check(Pointer<Utf16> text, Pointer<Pointer> value) =>
@@ -139,40 +142,49 @@ class ISpellChecker extends IUnknown {
   Pointer get OptionIds {
     final retValuePtr = calloc<Pointer>();
 
-    final hr = Pointer<NativeFunction<_get_OptionIds_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(10).value)
-        .asFunction<_get_OptionIds_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw WindowsException(hr);
+    try {
+      final hr = Pointer<NativeFunction<_get_OptionIds_Native>>.fromAddress(
+              ptr.ref.vtable.elementAt(10).value)
+          .asFunction<_get_OptionIds_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    final retValue = retValuePtr.value;
-    free(retValuePtr);
-    return retValue;
+      final retValue = retValuePtr.value;
+      return retValue;
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   Pointer<Utf16> get Id {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
-    final hr = Pointer<NativeFunction<_get_Id_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(11).value)
-        .asFunction<_get_Id_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw WindowsException(hr);
+    try {
+      final hr = Pointer<NativeFunction<_get_Id_Native>>.fromAddress(
+              ptr.ref.vtable.elementAt(11).value)
+          .asFunction<_get_Id_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    final retValue = retValuePtr.value;
-    free(retValuePtr);
-    return retValue;
+      final retValue = retValuePtr.value;
+      return retValue;
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   Pointer<Utf16> get LocalizedName {
     final retValuePtr = calloc<Pointer<Utf16>>();
 
-    final hr = Pointer<NativeFunction<_get_LocalizedName_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(12).value)
-        .asFunction<_get_LocalizedName_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw WindowsException(hr);
+    try {
+      final hr = Pointer<NativeFunction<_get_LocalizedName_Native>>.fromAddress(
+              ptr.ref.vtable.elementAt(12).value)
+          .asFunction<_get_LocalizedName_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    final retValue = retValuePtr.value;
-    free(retValuePtr);
-    return retValue;
+      final retValue = retValuePtr.value;
+      return retValue;
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   int add_SpellCheckerChanged(Pointer handler, Pointer<Uint32> eventCookie) =>

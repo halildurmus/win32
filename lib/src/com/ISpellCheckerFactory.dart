@@ -50,16 +50,19 @@ class ISpellCheckerFactory extends IUnknown {
   Pointer get SupportedLanguages {
     final retValuePtr = calloc<Pointer>();
 
-    final hr =
-        Pointer<NativeFunction<_get_SupportedLanguages_Native>>.fromAddress(
-                    ptr.ref.vtable.elementAt(3).value)
-                .asFunction<_get_SupportedLanguages_Dart>()(
-            ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw WindowsException(hr);
+    try {
+      final hr =
+          Pointer<NativeFunction<_get_SupportedLanguages_Native>>.fromAddress(
+                      ptr.ref.vtable.elementAt(3).value)
+                  .asFunction<_get_SupportedLanguages_Dart>()(
+              ptr.ref.lpVtbl, retValuePtr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    final retValue = retValuePtr.value;
-    free(retValuePtr);
-    return retValue;
+      final retValue = retValuePtr.value;
+      return retValue;
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   int IsSupported(Pointer<Utf16> languageTag, Pointer<Int32> value) =>

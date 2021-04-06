@@ -153,29 +153,36 @@ class INetwork extends IDispatch {
   int get IsConnectedToInternet {
     final retValuePtr = calloc<Int16>();
 
-    final hr =
-        Pointer<NativeFunction<_get_IsConnectedToInternet_Native>>.fromAddress(
-                    ptr.ref.vtable.elementAt(15).value)
-                .asFunction<_get_IsConnectedToInternet_Dart>()(
-            ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw WindowsException(hr);
+    try {
+      final hr = Pointer<
+                      NativeFunction<
+                          _get_IsConnectedToInternet_Native>>.fromAddress(
+                  ptr.ref.vtable.elementAt(15).value)
+              .asFunction<_get_IsConnectedToInternet_Dart>()(
+          ptr.ref.lpVtbl, retValuePtr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    final retValue = retValuePtr.value;
-    free(retValuePtr);
-    return retValue;
+      final retValue = retValuePtr.value;
+      return retValue;
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   int get IsConnected {
     final retValuePtr = calloc<Int16>();
 
-    final hr = Pointer<NativeFunction<_get_IsConnected_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(16).value)
-        .asFunction<_get_IsConnected_Dart>()(ptr.ref.lpVtbl, retValuePtr);
-    if (FAILED(hr)) throw WindowsException(hr);
+    try {
+      final hr = Pointer<NativeFunction<_get_IsConnected_Native>>.fromAddress(
+              ptr.ref.vtable.elementAt(16).value)
+          .asFunction<_get_IsConnected_Dart>()(ptr.ref.lpVtbl, retValuePtr);
+      if (FAILED(hr)) throw WindowsException(hr);
 
-    final retValue = retValuePtr.value;
-    free(retValuePtr);
-    return retValue;
+      final retValue = retValuePtr.value;
+      return retValue;
+    } finally {
+      free(retValuePtr);
+    }
   }
 
   int GetConnectivity(Pointer<Uint32> pConnectivity) =>
