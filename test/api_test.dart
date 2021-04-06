@@ -6332,12 +6332,230 @@ void main() {
               int hwndCallback)>('mciSendStringW');
       expect(mciSendString, isA<Function>());
     });
+    test('Can instantiate midiConnect', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiConnect = winmm.lookupFunction<
+          Uint32 Function(IntPtr hmi, IntPtr hmo, Pointer pReserved),
+          int Function(int hmi, int hmo, Pointer pReserved)>('midiConnect');
+      expect(midiConnect, isA<Function>());
+    });
+    test('Can instantiate midiDisconnect', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiDisconnect = winmm.lookupFunction<
+          Uint32 Function(IntPtr hmi, IntPtr hmo, Pointer pReserved),
+          int Function(int hmi, int hmo, Pointer pReserved)>('midiDisconnect');
+      expect(midiDisconnect, isA<Function>());
+    });
+    test('Can instantiate midiInClose', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiInClose = winmm.lookupFunction<Uint32 Function(IntPtr hmi),
+          int Function(int hmi)>('midiInClose');
+      expect(midiInClose, isA<Function>());
+    });
+    test('Can instantiate midiInGetDevCaps', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiInGetDevCaps = winmm.lookupFunction<
+          Uint32 Function(
+              IntPtr uDeviceID, Pointer<MIDIINCAPS> pmic, Uint32 cbmic),
+          int Function(int uDeviceID, Pointer<MIDIINCAPS> pmic,
+              int cbmic)>('midiInGetDevCapsW');
+      expect(midiInGetDevCaps, isA<Function>());
+    });
+    test('Can instantiate midiInGetErrorText', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiInGetErrorText = winmm.lookupFunction<
+          Uint32 Function(
+              Uint32 mmrError, Pointer<Utf16> pszText, Uint32 cchText),
+          int Function(int mmrError, Pointer<Utf16> pszText,
+              int cchText)>('midiInGetErrorTextW');
+      expect(midiInGetErrorText, isA<Function>());
+    });
+    test('Can instantiate midiInGetID', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiInGetID = winmm.lookupFunction<
+          Uint32 Function(IntPtr hmi, Pointer<Uint32> puDeviceID),
+          int Function(int hmi, Pointer<Uint32> puDeviceID)>('midiInGetID');
+      expect(midiInGetID, isA<Function>());
+    });
+    test('Can instantiate midiInGetNumDevs', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiInGetNumDevs =
+          winmm.lookupFunction<Uint32 Function(), int Function()>(
+              'midiInGetNumDevs');
+      expect(midiInGetNumDevs, isA<Function>());
+    });
+    test('Can instantiate midiInMessage', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiInMessage = winmm.lookupFunction<
+          Uint32 Function(IntPtr hmi, Uint32 uMsg, IntPtr dw1, IntPtr dw2),
+          int Function(int hmi, int uMsg, int dw1, int dw2)>('midiInMessage');
+      expect(midiInMessage, isA<Function>());
+    });
+    test('Can instantiate midiInOpen', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiInOpen = winmm.lookupFunction<
+          Uint32 Function(Pointer<IntPtr> phmi, Uint32 uDeviceID,
+              IntPtr dwCallback, IntPtr dwInstance, Uint32 fdwOpen),
+          int Function(Pointer<IntPtr> phmi, int uDeviceID, int dwCallback,
+              int dwInstance, int fdwOpen)>('midiInOpen');
+      expect(midiInOpen, isA<Function>());
+    });
+    test('Can instantiate midiInPrepareHeader', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiInPrepareHeader = winmm.lookupFunction<
+          Uint32 Function(IntPtr hmi, Pointer<MIDIHDR> pmh, Uint32 cbmh),
+          int Function(
+              int hmi, Pointer<MIDIHDR> pmh, int cbmh)>('midiInPrepareHeader');
+      expect(midiInPrepareHeader, isA<Function>());
+    });
+    test('Can instantiate midiInReset', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiInReset = winmm.lookupFunction<Uint32 Function(IntPtr hmi),
+          int Function(int hmi)>('midiInReset');
+      expect(midiInReset, isA<Function>());
+    });
+    test('Can instantiate midiInStart', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiInStart = winmm.lookupFunction<Uint32 Function(IntPtr hmi),
+          int Function(int hmi)>('midiInStart');
+      expect(midiInStart, isA<Function>());
+    });
+    test('Can instantiate midiInStop', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiInStop = winmm.lookupFunction<Uint32 Function(IntPtr hmi),
+          int Function(int hmi)>('midiInStop');
+      expect(midiInStop, isA<Function>());
+    });
+    test('Can instantiate midiInUnprepareHeader', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiInUnprepareHeader = winmm.lookupFunction<
+          Uint32 Function(IntPtr hmi, Pointer<MIDIHDR> pmh, Uint32 cbmh),
+          int Function(int hmi, Pointer<MIDIHDR> pmh,
+              int cbmh)>('midiInUnprepareHeader');
+      expect(midiInUnprepareHeader, isA<Function>());
+    });
+    test('Can instantiate midiOutCacheDrumPatches', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiOutCacheDrumPatches = winmm.lookupFunction<
+          Uint32 Function(
+              IntPtr hmo, Uint32 uPatch, Pointer<Uint16> pwkya, Uint32 fuCache),
+          int Function(int hmo, int uPatch, Pointer<Uint16> pwkya,
+              int fuCache)>('midiOutCacheDrumPatches');
+      expect(midiOutCacheDrumPatches, isA<Function>());
+    });
+    test('Can instantiate midiOutCachePatches', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiOutCachePatches = winmm.lookupFunction<
+          Uint32 Function(
+              IntPtr hmo, Uint32 uBank, Pointer<Uint16> pwpa, Uint32 fuCache),
+          int Function(int hmo, int uBank, Pointer<Uint16> pwpa,
+              int fuCache)>('midiOutCachePatches');
+      expect(midiOutCachePatches, isA<Function>());
+    });
+    test('Can instantiate midiOutClose', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiOutClose = winmm.lookupFunction<Uint32 Function(IntPtr hmo),
+          int Function(int hmo)>('midiOutClose');
+      expect(midiOutClose, isA<Function>());
+    });
+    test('Can instantiate midiOutGetDevCaps', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiOutGetDevCaps = winmm.lookupFunction<
+          Uint32 Function(
+              IntPtr uDeviceID, Pointer<MIDIOUTCAPS> pmoc, Uint32 cbmoc),
+          int Function(int uDeviceID, Pointer<MIDIOUTCAPS> pmoc,
+              int cbmoc)>('midiOutGetDevCapsW');
+      expect(midiOutGetDevCaps, isA<Function>());
+    });
+    test('Can instantiate midiOutGetErrorText', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiOutGetErrorText = winmm.lookupFunction<
+          Uint32 Function(
+              Uint32 mmrError, Pointer<Utf16> pszText, Uint32 cchText),
+          int Function(int mmrError, Pointer<Utf16> pszText,
+              int cchText)>('midiOutGetErrorTextW');
+      expect(midiOutGetErrorText, isA<Function>());
+    });
+    test('Can instantiate midiOutGetID', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiOutGetID = winmm.lookupFunction<
+          Uint32 Function(IntPtr hmo, Pointer<Uint32> puDeviceID),
+          int Function(int hmo, Pointer<Uint32> puDeviceID)>('midiOutGetID');
+      expect(midiOutGetID, isA<Function>());
+    });
     test('Can instantiate midiOutGetNumDevs', () {
       final winmm = DynamicLibrary.open('winmm.dll');
       final midiOutGetNumDevs =
           winmm.lookupFunction<Uint32 Function(), int Function()>(
               'midiOutGetNumDevs');
       expect(midiOutGetNumDevs, isA<Function>());
+    });
+    test('Can instantiate midiOutGetVolume', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiOutGetVolume = winmm.lookupFunction<
+          Uint32 Function(IntPtr hmo, Pointer<Uint32> pdwVolume),
+          int Function(int hmo, Pointer<Uint32> pdwVolume)>('midiOutGetVolume');
+      expect(midiOutGetVolume, isA<Function>());
+    });
+    test('Can instantiate midiOutLongMsg', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiOutLongMsg = winmm.lookupFunction<
+          Uint32 Function(IntPtr hmo, Pointer<MIDIHDR> pmh, Uint32 cbmh),
+          int Function(
+              int hmo, Pointer<MIDIHDR> pmh, int cbmh)>('midiOutLongMsg');
+      expect(midiOutLongMsg, isA<Function>());
+    });
+    test('Can instantiate midiOutMessage', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiOutMessage = winmm.lookupFunction<
+          Uint32 Function(IntPtr hmo, Uint32 uMsg, IntPtr dw1, IntPtr dw2),
+          int Function(int hmo, int uMsg, int dw1, int dw2)>('midiOutMessage');
+      expect(midiOutMessage, isA<Function>());
+    });
+    test('Can instantiate midiOutOpen', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiOutOpen = winmm.lookupFunction<
+          Uint32 Function(Pointer<IntPtr> phmo, Uint32 uDeviceID,
+              IntPtr dwCallback, IntPtr dwInstance, Uint32 fdwOpen),
+          int Function(Pointer<IntPtr> phmo, int uDeviceID, int dwCallback,
+              int dwInstance, int fdwOpen)>('midiOutOpen');
+      expect(midiOutOpen, isA<Function>());
+    });
+    test('Can instantiate midiOutPrepareHeader', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiOutPrepareHeader = winmm.lookupFunction<
+          Uint32 Function(IntPtr hmo, Pointer<MIDIHDR> pmh, Uint32 cbmh),
+          int Function(
+              int hmo, Pointer<MIDIHDR> pmh, int cbmh)>('midiOutPrepareHeader');
+      expect(midiOutPrepareHeader, isA<Function>());
+    });
+    test('Can instantiate midiOutReset', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiOutReset = winmm.lookupFunction<Uint32 Function(IntPtr hmo),
+          int Function(int hmo)>('midiOutReset');
+      expect(midiOutReset, isA<Function>());
+    });
+    test('Can instantiate midiOutSetVolume', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiOutSetVolume = winmm.lookupFunction<
+          Uint32 Function(IntPtr hmo, Uint32 dwVolume),
+          int Function(int hmo, int dwVolume)>('midiOutSetVolume');
+      expect(midiOutSetVolume, isA<Function>());
+    });
+    test('Can instantiate midiOutShortMsg', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiOutShortMsg = winmm.lookupFunction<
+          Uint32 Function(IntPtr hmo, Uint32 dwMsg),
+          int Function(int hmo, int dwMsg)>('midiOutShortMsg');
+      expect(midiOutShortMsg, isA<Function>());
+    });
+    test('Can instantiate midiOutUnprepareHeader', () {
+      final winmm = DynamicLibrary.open('winmm.dll');
+      final midiOutUnprepareHeader = winmm.lookupFunction<
+          Uint32 Function(IntPtr hmo, Pointer<MIDIHDR> pmh, Uint32 cbmh),
+          int Function(int hmo, Pointer<MIDIHDR> pmh,
+              int cbmh)>('midiOutUnprepareHeader');
+      expect(midiOutUnprepareHeader, isA<Function>());
     });
     test('Can instantiate PlaySound', () {
       final winmm = DynamicLibrary.open('winmm.dll');

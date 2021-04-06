@@ -195,6 +195,34 @@
         "namespace": "Windows.Win32.DataExchange.METAFILEPICT",
         "comment": "Defines the metafile picture format used for exchanging metafile data through the clipboard."
     },
+    "MIDIEVENT": {
+        "namespace": "Windows.Win32.Multimedia.MIDIEVENT",
+        "comment": "The MIDIEVENT structure describes a MIDI event in a stream buffer."
+    },
+    "MIDIHDR": {
+        "namespace": "Windows.Win32.Multimedia.MIDIHDR",
+        "comment": "The MIDIHDR structure defines the header used to identify a MIDI system-exclusive or stream buffer."
+    },
+    "MIDIINCAPS": {
+        "namespace": "Windows.Win32.Multimedia.MIDIINCAPSW",
+        "comment": "The MIDIINCAPS structure describes the capabilities of a MIDI input device."
+    },
+    "MIDIOUTCAPS": {
+        "namespace": "Windows.Win32.Multimedia.MIDIOUTCAPSW",
+        "comment": "The MIDIOUTCAPS structure describes the capabilities of a MIDI output device."
+    },
+    "MIDIPROPTEMPO": {
+        "namespace": "Windows.Win32.Multimedia.MIDIPROPTEMPO",
+        "comment": "The MIDIPROPTEMPO structure contains the tempo property for a stream."
+    },
+    "MIDIPROPTIMEDIV": {
+        "namespace": "Windows.Win32.Multimedia.MIDIPROPTIMEDIV",
+        "comment": "The MIDIPROPTIMEDIV structure contains the time division property for a stream."
+    },
+    "MIDISTRMBUFFVER": {
+        "namespace": "Windows.Win32.Multimedia.MIDISTRMBUFFVER",
+        "comment": "The MIDISTRMBUFFVER structure contains version information for a long MIDI event of the MEVT_VERSION type."
+    },
     "MINMAXINFO": {
         "namespace": "Windows.Win32.WindowsAndMessaging.MINMAXINFO",
         "comment": "Contains information about a window's maximized size and position and its minimum and maximum tracking size."

@@ -414,6 +414,55 @@ void main() {
       expect(sizeOf<METAFILEPICT>(), equals(16));
     }
   });
+  test('Struct MIDIEVENT is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<MIDIEVENT>(), equals(16));
+    } else {
+      expect(sizeOf<MIDIEVENT>(), equals(16));
+    }
+  });
+  test('Struct MIDIHDR is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<MIDIHDR>(), equals(112));
+    } else {
+      expect(sizeOf<MIDIHDR>(), equals(64));
+    }
+  });
+  test('Struct MIDIINCAPS is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<MIDIINCAPS>(), equals(76));
+    } else {
+      expect(sizeOf<MIDIINCAPS>(), equals(76));
+    }
+  });
+  test('Struct MIDIOUTCAPS is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<MIDIOUTCAPS>(), equals(84));
+    } else {
+      expect(sizeOf<MIDIOUTCAPS>(), equals(84));
+    }
+  });
+  test('Struct MIDIPROPTEMPO is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<MIDIPROPTEMPO>(), equals(8));
+    } else {
+      expect(sizeOf<MIDIPROPTEMPO>(), equals(8));
+    }
+  });
+  test('Struct MIDIPROPTIMEDIV is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<MIDIPROPTIMEDIV>(), equals(8));
+    } else {
+      expect(sizeOf<MIDIPROPTIMEDIV>(), equals(8));
+    }
+  });
+  test('Struct MIDISTRMBUFFVER is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<MIDISTRMBUFFVER>(), equals(12));
+    } else {
+      expect(sizeOf<MIDISTRMBUFFVER>(), equals(12));
+    }
+  });
   test('Struct MINMAXINFO is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<MINMAXINFO>(), equals(40));

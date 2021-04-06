@@ -2117,10 +2117,155 @@
         "category": "winrt",
         "minimumWindowsVersion": "WIN10_TH2"
     },
+    "midiConnect": {
+        "prototype": "MMRESULT midiConnect(\n  HMIDI    hmi,\n  HMIDIOUT hmo,\n  LPVOID   pReserved\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiConnect function connects a MIDI input device to a MIDI thru or output device, or connects a MIDI thru device to a MIDI output device."
+    },
+    "midiDisconnect": {
+        "prototype": "MMRESULT midiDisconnect(\n  HMIDI    hmi,\n  HMIDIOUT hmo,\n  LPVOID   pReserved\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiDisconnect function disconnects a MIDI input device from a MIDI thru or output device, or disconnects a MIDI thru device from a MIDI output device."
+    },
+    "midiInClose": {
+        "prototype": "MMRESULT midiInClose(\n  HMIDIIN hmi\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiInClose function closes the specified MIDI input device."
+    },
+    "midiInGetDevCaps": {
+        "prototype": "MMRESULT midiInGetDevCapsW(\n  UINT_PTR      uDeviceID,\n  LPMIDIINCAPSW pmic,\n  UINT          cbmic\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiInGetDevCaps function determines the capabilities of a specified MIDI input device."
+    },
+    "midiInGetErrorText": {
+        "prototype": "MMRESULT midiInGetErrorTextW(\n  MMRESULT mmrError,\n  LPWSTR   pszText,\n  UINT     cchText\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiInGetErrorText function retrieves a textual description for an error identified by the specified error code."
+    },
+    "midiInGetID": {
+        "prototype": "MMRESULT midiInGetID(\n  HMIDIIN hmi,\n  LPUINT  puDeviceID\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiInGetID function gets the device identifier for the given MIDI input device."
+    },
+    "midiInGetNumDevs": {
+        "prototype": "UINT midiInGetNumDevs();",
+        "dllLibrary": "winmm",
+        "comment": "The midiInGetNumDevs function retrieves the number of MIDI input devices in the system."
+    },
+    "midiInMessage": {
+        "prototype": "MMRESULT midiInMessage(\n  HMIDIIN   hmi,\n  UINT      uMsg,\n  DWORD_PTR dw1,\n  DWORD_PTR dw2\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiInMessage function sends a message to the MIDI device driver."
+    },
+    "midiInOpen": {
+        "prototype": "MMRESULT midiInOpen(\n  LPHMIDIIN phmi,\n  UINT      uDeviceID,\n  DWORD_PTR dwCallback,\n  DWORD_PTR dwInstance,\n  DWORD     fdwOpen\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiInOpen function opens a specified MIDI input device."
+    },
+    "midiInPrepareHeader": {
+        "prototype": "MMRESULT midiInPrepareHeader(\n  HMIDIIN   hmi,\n  LPMIDIHDR pmh,\n  UINT      cbmh\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiInPrepareHeader function prepares a buffer for MIDI input."
+    },
+    "midiInReset": {
+        "prototype": "MMRESULT midiInReset(\n  HMIDIIN hmi\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiInReset function stops input on a given MIDI input device."
+    },
+    "midiInStart": {
+        "prototype": "MMRESULT midiInStart(\n  HMIDIIN hmi\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiInStart function starts MIDI input on the specified MIDI input device."
+    },
+    "midiInStop": {
+        "prototype": "MMRESULT midiInStop(\n  HMIDIIN hmi\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiInStop function stops MIDI input on the specified MIDI input device."
+    },
+    "midiInUnprepareHeader": {
+        "prototype": "MMRESULT midiInUnprepareHeader(\n  HMIDIIN   hmi,\n  LPMIDIHDR pmh,\n  UINT      cbmh\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiInUnprepareHeader function cleans up the preparation performed by the midiInPrepareHeader function."
+    },
+    "midiOutCacheDrumPatches": {
+        "prototype": "MMRESULT midiOutCacheDrumPatches(\n  HMIDIOUT hmo,\n  UINT     uPatch,\n  LPWORD   pwkya,\n  UINT     fuCache\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiOutCacheDrumPatches function requests that an internal MIDI synthesizer device preload and cache a specified set of key-based percussion patches."
+    },
+    "midiOutCachePatches": {
+        "prototype": "MMRESULT midiOutCachePatches(\n  HMIDIOUT hmo,\n  UINT     uBank,\n  LPWORD   pwpa,\n  UINT     fuCache\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiOutCachePatches function requests that an internal MIDI synthesizer device preload and cache a specified set of patches."
+    },
+    "midiOutClose": {
+        "prototype": "MMRESULT midiOutClose(\n  HMIDIOUT hmo\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiOutClose function closes the specified MIDI output device."
+    },
+    "midiOutGetDevCaps": {
+        "prototype": "MMRESULT midiOutGetDevCapsW(\n  UINT_PTR       uDeviceID,\n  LPMIDIOUTCAPSW pmoc,\n  UINT           cbmoc\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiOutGetDevCaps function queries a specified MIDI output device to determine its capabilities."
+    },
+    "midiOutGetErrorText": {
+        "prototype": "MMRESULT midiOutGetErrorTextW(\n  MMRESULT mmrError,\n  LPWSTR   pszText,\n  UINT     cchText\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiOutGetErrorText function retrieves a textual description for an error identified by the specified error code."
+    },
+    "midiOutGetID": {
+        "prototype": "MMRESULT midiOutGetID(\n  HMIDIOUT hmo,\n  LPUINT   puDeviceID\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiOutGetID function retrieves the device identifier for the given MIDI output device."
+    },
     "midiOutGetNumDevs": {
         "prototype": "UINT midiOutGetNumDevs();",
         "dllLibrary": "winmm",
         "comment": "The midiOutGetNumDevs function retrieves the number of MIDI output devices present in the system."
+    },
+    "midiOutGetVolume": {
+        "prototype": "MMRESULT midiOutGetVolume(\n  HMIDIOUT hmo,\n  LPDWORD  pdwVolume\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiOutGetVolume function retrieves the current volume setting of a MIDI output device."
+    },
+    "midiOutLongMsg": {
+        "prototype": "MMRESULT midiOutLongMsg(\n  HMIDIOUT  hmo,\n  LPMIDIHDR pmh,\n  UINT      cbmh\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiOutLongMsg function sends a system-exclusive MIDI message to the specified MIDI output device."
+    },
+    "midiOutMessage": {
+        "prototype": "MMRESULT midiOutMessage(\n  HMIDIOUT  hmo,\n  UINT      uMsg,\n  DWORD_PTR dw1,\n  DWORD_PTR dw2\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiOutMessage function sends a message to the MIDI device drivers. This function is used only for driver-specific messages that are not supported by the MIDI API."
+    },
+    "midiOutOpen": {
+        "prototype": "MMRESULT midiOutOpen(\n  LPHMIDIOUT phmo,\n  UINT       uDeviceID,\n  DWORD_PTR  dwCallback,\n  DWORD_PTR  dwInstance,\n  DWORD      fdwOpen\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiOutOpen function opens a MIDI output device for playback."
+    },
+    "midiOutPrepareHeader": {
+        "prototype": "MMRESULT midiOutPrepareHeader(\n  HMIDIOUT  hmo,\n  LPMIDIHDR pmh,\n  UINT      cbmh\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiOutPrepareHeader function prepares a MIDI system-exclusive or stream buffer for output."
+    },
+    "midiOutReset": {
+        "prototype": "MMRESULT midiOutReset(\n  HMIDIOUT hmo\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiOutReset function turns off all notes on all MIDI channels for the specified MIDI output device."
+    },
+    "midiOutSetVolume": {
+        "prototype": "MMRESULT midiOutSetVolume(\n  HMIDIOUT hmo,\n  DWORD    dwVolume\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiOutSetVolume function sets the volume of a MIDI output device."
+    },
+    "midiOutShortMsg": {
+        "prototype": "MMRESULT midiOutShortMsg(\n  HMIDIOUT hmo,\n  DWORD    dwMsg\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiOutShortMsg function sends a short MIDI message to the specified MIDI output device."
+    },
+    "midiOutUnprepareHeader": {
+        "prototype": "MMRESULT midiOutUnprepareHeader(\n  HMIDIOUT  hmo,\n  LPMIDIHDR pmh,\n  UINT      cbmh\n);",
+        "dllLibrary": "winmm",
+        "comment": "The midiOutUnprepareHeader function cleans up the preparation performed by the midiOutPrepareHeader function."
     },
     "MonitorFromPoint": {
         "prototype": "HMONITOR MonitorFromPoint(\n  POINT pt,\n  DWORD dwFlags\n);",

@@ -87,6 +87,13 @@ void main()
     printf("  'MENUINFO': %zu,\n", sizeof(MENUINFO));
     printf("  'MENUITEMINFO': %zu,\n", sizeof(MENUITEMINFO));
     printf("  'METAFILEPICT': %zu,\n", sizeof(METAFILEPICT));
+    printf("  'MIDIEVENT': %zu,\n", sizeof(MIDIEVENT));
+    printf("  'MIDIHDR': %zu,\n", sizeof(MIDIHDR));
+    printf("  'MIDIINCAPS': %zu,\n", sizeof(MIDIINCAPSW));
+    printf("  'MIDIOUTCAPS': %zu,\n", sizeof(MIDIOUTCAPSW));
+    printf("  'MIDIPROPTEMPO': %zu,\n", sizeof(MIDIPROPTEMPO));
+    printf("  'MIDIPROPTIMEDIV': %zu,\n", sizeof(MIDIPROPTIMEDIV));
+    printf("  'MIDISTRMBUFFVER': %zu,\n", sizeof(MIDISTRMBUFFVER));
     printf("  'MINMAXINFO': %zu,\n", sizeof(MINMAXINFO));
     printf("  'MMTIME': %zu,\n", sizeof(MMTIME));
     printf("  'MONITORINFO': %zu,\n", sizeof(MONITORINFO));

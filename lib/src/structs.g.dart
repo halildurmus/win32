@@ -901,6 +901,126 @@ class METAFILEPICT extends Struct {
   external int hMF;
 }
 
+/// The MIDIEVENT structure describes a MIDI event in a stream buffer.
+///
+/// {@category Struct}
+@Packed(1)
+class MIDIEVENT extends Struct {
+  @Uint32()
+  external int dwDeltaTime;
+  @Uint32()
+  external int dwStreamID;
+  @Uint32()
+  external int dwEvent;
+  @Array(1)
+  external Array<Uint32> dwParms;
+}
+
+/// The MIDIHDR structure defines the header used to identify a MIDI
+/// system-exclusive or stream buffer.
+///
+/// {@category Struct}
+@Packed(1)
+class MIDIHDR extends Struct {
+  external Pointer<Utf8> lpData;
+  @Uint32()
+  external int dwBufferLength;
+  @Uint32()
+  external int dwBytesRecorded;
+  @IntPtr()
+  external int dwUser;
+  @Uint32()
+  external int dwFlags;
+  external Pointer<MIDIHDR> lpNext;
+  @IntPtr()
+  external int reserved;
+  @Uint32()
+  external int dwOffset;
+  @Array(8)
+  external Array<IntPtr> dwReserved;
+}
+
+/// The MIDIINCAPS structure describes the capabilities of a MIDI input
+/// device.
+///
+/// {@category Struct}
+@Packed(1)
+class MIDIINCAPS extends Struct {
+  @Uint16()
+  external int wMid;
+  @Uint16()
+  external int wPid;
+  @Uint32()
+  external int vDriverVersion;
+  @Array(32)
+  external Array<Uint16> szPname;
+  @Uint32()
+  external int dwSupport;
+}
+
+/// The MIDIOUTCAPS structure describes the capabilities of a MIDI output
+/// device.
+///
+/// {@category Struct}
+@Packed(1)
+class MIDIOUTCAPS extends Struct {
+  @Uint16()
+  external int wMid;
+  @Uint16()
+  external int wPid;
+  @Uint32()
+  external int vDriverVersion;
+  @Array(32)
+  external Array<Uint16> szPname;
+  @Uint16()
+  external int wTechnology;
+  @Uint16()
+  external int wVoices;
+  @Uint16()
+  external int wNotes;
+  @Uint16()
+  external int wChannelMask;
+  @Uint32()
+  external int dwSupport;
+}
+
+/// The MIDIPROPTEMPO structure contains the tempo property for a stream.
+///
+/// {@category Struct}
+@Packed(1)
+class MIDIPROPTEMPO extends Struct {
+  @Uint32()
+  external int cbStruct;
+  @Uint32()
+  external int dwTempo;
+}
+
+/// The MIDIPROPTIMEDIV structure contains the time division property for a
+/// stream.
+///
+/// {@category Struct}
+@Packed(1)
+class MIDIPROPTIMEDIV extends Struct {
+  @Uint32()
+  external int cbStruct;
+  @Uint32()
+  external int dwTimeDiv;
+}
+
+/// The MIDISTRMBUFFVER structure contains version information for a long
+/// MIDI event of the MEVT_VERSION type.
+///
+/// {@category Struct}
+@Packed(1)
+class MIDISTRMBUFFVER extends Struct {
+  @Uint32()
+  external int dwVersion;
+  @Uint32()
+  external int dwMid;
+  @Uint32()
+  external int dwOEMVersion;
+}
+
 /// Contains information about a window's maximized size and position and
 /// its minimum and maximum tracking size.
 ///
