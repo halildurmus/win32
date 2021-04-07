@@ -102,6 +102,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `dynamic_load.dart`| Demonstrate loading a DLL and calling it at runtime       |
 | `filever.dart`     | Getting file version information from the file resource   |
 | `guid.dart`        | Creates a globally unique identifier (GUID)               |
+| `idispatch.dart`   | Demonstrates calling a method using `IDispatch`           |
 | `knownfolder.dart` | Retrieves known folders from the current user profile     |
 | `manifest\`        | Demonstrates the use of app manifests for compiled apps   |
 | `midi.dart`        | Demonstrates MIDI playback using MCI commands             |
