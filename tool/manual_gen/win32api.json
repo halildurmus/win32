@@ -479,6 +479,11 @@
         "dllLibrary": "kernel32",
         "comment": "Creates a console screen buffer."
     },
+    "CreateDC": {
+        "prototype": "HDC CreateDCW(\n  LPCWSTR        pwszDriver,\n  LPCWSTR        pwszDevice,\n  LPCWSTR        pszPort,\n  const DEVMODEW *pdm\n);",
+        "dllLibrary": "gdi32",
+        "comment": "The CreateDC function creates a device context (DC) for a device using the specified name."
+    },
     "CreateDialogIndirectParam": {
         "prototype": "HWND CreateDialogIndirectParamW(\n  HINSTANCE       hInstance,\n  LPCDLGTEMPLATEW lpTemplate,\n  HWND            hWndParent,\n  DLGPROC         lpDialogFunc,\n  LPARAM          dwInitParam\n);",
         "dllLibrary": "user32",

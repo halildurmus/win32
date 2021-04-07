@@ -5882,3 +5882,59 @@ class ACTIVATEOPTIONS {
   /// supported starting in Windows 10.
   static const AO_PRELAUNCH = 0x2000000;
 }
+
+// -----------------------------------------------------------------------------
+// Symbol Flag constants
+// -----------------------------------------------------------------------------
+
+/// The Value member is used.
+const SYMFLAG_VALUEPRESENT = 0x00000001;
+
+/// The symbol is a register. The Register member is used.
+const SYMFLAG_REGISTER = 0x00000008;
+
+/// Offsets are register relative.
+const SYMFLAG_REGREL = 0x00000010;
+
+/// Offsets are frame relative.
+const SYMFLAG_FRAMEREL = 0x00000020;
+
+/// The symbol is a parameter.
+const SYMFLAG_PARAMETER = 0x00000040;
+
+/// The symbol is a local variable.
+const SYMFLAG_LOCAL = 0x00000080;
+
+/// The symbol is a constant.
+const SYMFLAG_CONSTANT = 0x00000100;
+
+/// The symbol is from the export table.
+const SYMFLAG_EXPORT = 0x00000200;
+
+/// The symbol is a forwarder.
+const SYMFLAG_FORWARDER = 0x00000400;
+
+/// The symbol is a known function.
+const SYMFLAG_FUNCTION = 0x00000800;
+
+/// The symbol is a virtual symbol created by the SymAddSymbol function.
+const SYMFLAG_VIRTUAL = 0x00001000;
+
+/// The symbol is a thunk.
+const SYMFLAG_THUNK = 0x00002000;
+
+/// The symbol is an offset into the TLS data area.
+const SYMFLAG_TLSREL = 0x00004000;
+
+/// The symbol is a managed code slot.
+const SYMFLAG_SLOT = 0x00008000;
+
+/// The symbol address is an offset relative to the beginning of the
+/// intermediate language block. This applies to managed code only.
+const SYMFLAG_ILREL = 0x00010000;
+
+/// The symbol is managed metadata.
+const SYMFLAG_METADATA = 0x00020000;
+
+/// The symbol is a CLR token.
+const SYMFLAG_CLR_TOKEN = 0x00040000;

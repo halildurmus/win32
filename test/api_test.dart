@@ -4078,6 +4078,15 @@ void main() {
           int Function(int hdc)>('CreateCompatibleDC');
       expect(CreateCompatibleDC, isA<Function>());
     });
+    test('Can instantiate CreateDC', () {
+      final gdi32 = DynamicLibrary.open('gdi32.dll');
+      final CreateDC = gdi32.lookupFunction<
+          IntPtr Function(Pointer<Utf16> pwszDriver, Pointer<Utf16> pwszDevice,
+              Pointer<Utf16> pszPort, Pointer<DEVMODE> pdm),
+          int Function(Pointer<Utf16> pwszDriver, Pointer<Utf16> pwszDevice,
+              Pointer<Utf16> pszPort, Pointer<DEVMODE> pdm)>('CreateDCW');
+      expect(CreateDC, isA<Function>());
+    });
     test('Can instantiate CreateDIBitmap', () {
       final gdi32 = DynamicLibrary.open('gdi32.dll');
       final CreateDIBitmap = gdi32.lookupFunction<

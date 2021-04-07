@@ -294,6 +294,28 @@ int CreateCompatibleDC(int hdc) {
   return _CreateCompatibleDC(hdc);
 }
 
+/// The CreateDC function creates a device context (DC) for a device using
+/// the specified name.
+///
+/// ```c
+/// HDC CreateDCW(
+///   LPCWSTR        pwszDriver,
+///   LPCWSTR        pwszDevice,
+///   LPCWSTR        pszPort,
+///   const DEVMODEW *pdm
+/// );
+/// ```
+/// {@category gdi32}
+int CreateDC(Pointer<Utf16> pwszDriver, Pointer<Utf16> pwszDevice,
+    Pointer<Utf16> pszPort, Pointer<DEVMODE> pdm) {
+  final _CreateDC = _gdi32.lookupFunction<
+      IntPtr Function(Pointer<Utf16> pwszDriver, Pointer<Utf16> pwszDevice,
+          Pointer<Utf16> pszPort, Pointer<DEVMODE> pdm),
+      int Function(Pointer<Utf16> pwszDriver, Pointer<Utf16> pwszDevice,
+          Pointer<Utf16> pszPort, Pointer<DEVMODE> pdm)>('CreateDCW');
+  return _CreateDC(pwszDriver, pwszDevice, pszPort, pdm);
+}
+
 /// The CreateDIBitmap function creates a compatible bitmap (DDB) from a
 /// DIB and, optionally, sets the bitmap bits.
 ///

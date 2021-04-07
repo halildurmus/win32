@@ -95,6 +95,10 @@
         "namespace": "Windows.Win32.Gdi.DESIGNVECTOR",
         "comment": "The DESIGNVECTOR structure is used by an application to specify values for the axes of a multiple master font."
     },
+    "DEVMODE": {
+        "namespace": "Windows.Win32.DisplayDevices.DEVMODEW",
+        "comment": "The DEVMODE data structure contains information about the initialization and environment of a printer or a display device."
+    },
     "DIBSECTION": {
         "namespace": "Windows.Win32.Gdi.DIBSECTION",
         "comment": "The DIBSECTION structure contains information about a DIB created by calling the CreateDIBSection function. A DIBSECTION structure includes information about the bitmap's dimensions, color format, color masks, optional file mapping object, and optional bit values storage offset. An application can obtain a filled-in DIBSECTION structure for a given DIB by calling the GetObject function."
