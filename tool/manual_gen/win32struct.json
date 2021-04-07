@@ -383,6 +383,10 @@
         "namespace": "Windows.Win32.WindowsAndMessaging.TITLEBARINFOEX",
         "comment": "Expands on the information described in the TITLEBARINFO structure by including the coordinates of each element of the title bar. This structure is sent with the WM_GETTITLEBARINFOEX message."
     },
+    "TOKEN_APPCONTAINER_INFORMATION": {
+        "namespace": "Windows.Win32.Security.TOKEN_APPCONTAINER_INFORMATION",
+        "comment": "The TOKEN_APPCONTAINER_INFORMATION structure specifies all the information in a token that is necessary for an app container."
+    },
     "TPMPARAMS": {
         "namespace": "Windows.Win32.WindowsAndMessaging.TPMPARAMS",
         "comment": "Contains extended parameters for the TrackPopupMenuEx function."

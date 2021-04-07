@@ -1690,6 +1690,11 @@
         "dllLibrary": "user32",
         "comment": "Retrieves information about the specified title bar."
     },
+    "GetTokenInformation": {
+        "prototype": "BOOL GetTokenInformation(\n  HANDLE                  TokenHandle,\n  TOKEN_INFORMATION_CLASS TokenInformationClass,\n  LPVOID                  TokenInformation,\n  DWORD                   TokenInformationLength,\n  PDWORD                  ReturnLength\n);",
+        "dllLibrary": "advapi32",
+        "comment": "The GetTokenInformation function retrieves a specified type of information about an access token. The calling process must have appropriate access rights to obtain the information."
+    },
     "GetTopWindow": {
         "prototype": "HWND GetTopWindow(\n  HWND hWnd\n);",
         "dllLibrary": "user32",

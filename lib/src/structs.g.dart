@@ -1833,6 +1833,14 @@ class TITLEBARINFOEX extends Struct {
   external Array<RECT> rgrect;
 }
 
+/// The TOKEN_APPCONTAINER_INFORMATION structure specifies all the
+/// information in a token that is necessary for an app container.
+///
+/// {@category Struct}
+class TOKEN_APPCONTAINER_INFORMATION extends Struct {
+  external Pointer TokenAppContainer;
+}
+
 /// Contains extended parameters for the TrackPopupMenuEx function.
 ///
 /// {@category Struct}

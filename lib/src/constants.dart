@@ -5938,3 +5938,62 @@ const SYMFLAG_METADATA = 0x00020000;
 
 /// The symbol is a CLR token.
 const SYMFLAG_CLR_TOKEN = 0x00040000;
+
+// -----------------------------------------------------------------------------
+// Token information constants
+// -----------------------------------------------------------------------------
+
+/// The TOKEN_INFORMATION_CLASS enumeration contains values that specify the
+/// type of information being assigned to or retrieved from an access token.
+///
+/// {@category Struct}
+class TOKEN_INFORMATION_CLASS {
+  static const TokenUser = 1;
+  static const TokenGroups = 2;
+  static const TokenPrivileges = 3;
+  static const TokenOwner = 4;
+  static const TokenPrimaryGroup = 5;
+  static const TokenDefaultDacl = 6;
+  static const TokenSource = 7;
+  static const TokenType = 8;
+  static const TokenImpersonationLevel = 9;
+  static const TokenStatistics = 10;
+  static const TokenRestrictedSids = 11;
+  static const TokenSessionId = 12;
+  static const TokenGroupsAndPrivileges = 13;
+  static const TokenSessionReference = 14;
+  static const TokenSandBoxInert = 15;
+  static const TokenAuditPolicy = 16;
+  static const TokenOrigin = 17;
+  static const TokenElevationType = 18;
+  static const TokenLinkedToken = 19;
+  static const TokenElevation = 20;
+  static const TokenHasRestrictions = 21;
+  static const TokenAccessInformation = 22;
+  static const TokenVirtualizationAllowed = 23;
+  static const TokenVirtualizationEnabled = 24;
+  static const TokenIntegrityLevel = 25;
+  static const TokenUIAccess = 26;
+  static const TokenMandatoryPolicy = 27;
+  static const TokenLogonSid = 28;
+  static const TokenIsAppContainer = 29;
+  static const TokenCapabilities = 30;
+  static const TokenAppContainerSid = 31;
+  static const TokenAppContainerNumber = 32;
+  static const TokenUserClaimAttributes = 33;
+  static const TokenDeviceClaimAttributes = 34;
+  static const TokenRestrictedUserClaimAttributes = 35;
+  static const TokenRestrictedDeviceClaimAttributes = 36;
+  static const TokenDeviceGroups = 37;
+  static const TokenRestrictedDeviceGroups = 38;
+  static const TokenSecurityAttributes = 39;
+  static const TokenIsRestricted = 40;
+  static const TokenProcessTrustLevel = 41;
+  static const TokenPrivateNameSpace = 42;
+  static const TokenSingletonAttributes = 43;
+  static const TokenBnoIsolation = 44;
+  static const TokenChildProcessFlags = 45;
+  static const TokenIsLessPrivilegedAppContainer = 46;
+  static const TokenIsSandboxed = 47;
+  static const TokenOriginatingProcessTrustLevel = 48;
+}

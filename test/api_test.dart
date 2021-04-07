@@ -5079,6 +5079,23 @@ void main() {
               Pointer<Uint32> lpStatus)>('FileEncryptionStatusW');
       expect(FileEncryptionStatus, isA<Function>());
     });
+    test('Can instantiate GetTokenInformation', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final GetTokenInformation = advapi32.lookupFunction<
+          Int32 Function(
+              IntPtr TokenHandle,
+              Uint32 TokenInformationClass,
+              Pointer TokenInformation,
+              Uint32 TokenInformationLength,
+              Pointer<Uint32> ReturnLength),
+          int Function(
+              int TokenHandle,
+              int TokenInformationClass,
+              Pointer TokenInformation,
+              int TokenInformationLength,
+              Pointer<Uint32> ReturnLength)>('GetTokenInformation');
+      expect(GetTokenInformation, isA<Function>());
+    });
     test('Can instantiate InitiateShutdown', () {
       final advapi32 = DynamicLibrary.open('advapi32.dll');
       final InitiateShutdown = advapi32.lookupFunction<

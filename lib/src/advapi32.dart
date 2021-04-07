@@ -147,6 +147,43 @@ int FileEncryptionStatus(Pointer<Utf16> lpFileName, Pointer<Uint32> lpStatus) {
   return _FileEncryptionStatus(lpFileName, lpStatus);
 }
 
+/// The GetTokenInformation function retrieves a specified type of
+/// information about an access token. The calling process must have
+/// appropriate access rights to obtain the information.
+///
+/// ```c
+/// BOOL GetTokenInformation(
+///   HANDLE                  TokenHandle,
+///   TOKEN_INFORMATION_CLASS TokenInformationClass,
+///   LPVOID                  TokenInformation,
+///   DWORD                   TokenInformationLength,
+///   PDWORD                  ReturnLength
+/// );
+/// ```
+/// {@category advapi32}
+int GetTokenInformation(
+    int TokenHandle,
+    int TokenInformationClass,
+    Pointer TokenInformation,
+    int TokenInformationLength,
+    Pointer<Uint32> ReturnLength) {
+  final _GetTokenInformation = _advapi32.lookupFunction<
+      Int32 Function(
+          IntPtr TokenHandle,
+          Uint32 TokenInformationClass,
+          Pointer TokenInformation,
+          Uint32 TokenInformationLength,
+          Pointer<Uint32> ReturnLength),
+      int Function(
+          int TokenHandle,
+          int TokenInformationClass,
+          Pointer TokenInformation,
+          int TokenInformationLength,
+          Pointer<Uint32> ReturnLength)>('GetTokenInformation');
+  return _GetTokenInformation(TokenHandle, TokenInformationClass,
+      TokenInformation, TokenInformationLength, ReturnLength);
+}
+
 /// Initiates a shutdown and restart of the specified computer, and
 /// restarts any applications that have been registered for restart.
 ///
