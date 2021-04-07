@@ -109,7 +109,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | `modules.dart`     | Enumerates all loaded modules on the current system       |
 | `monitor.dart`     | Uses DDC and monitor-config API to get monitor caps       |
 | `msgbox.dart`      | Demonstrates a MessageBox from the console                |
-| `notepad\notepad.dart` | Lightweight replica of the Windows notepad applet     |
+| `notepad\`         | Lightweight replica of the Windows notepad applet         |
 | `paint.dart`       | Demonstrates simple GDI drawing and min/max window sizing |
 | `play_sound.dart`  | Plays a WAV file through the Windows PlaySound API        |
 | `screenshot.dart`  | Takes a screenshot of the current desktop                 |
