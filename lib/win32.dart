@@ -106,6 +106,7 @@ export 'src/bthprops.dart';
 export 'src/combase.dart';
 export 'src/comctl32.dart';
 export 'src/comdlg32.dart';
+export 'src/dbghelp.dart';
 export 'src/dxva2.dart';
 export 'src/gdi32.dart';
 export 'src/kernel32.dart';
