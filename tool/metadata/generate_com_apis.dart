@@ -70,6 +70,7 @@ const interfacesToGenerate = <String>[
   'Windows.Win32.Shell.IShellItem2',
   'Windows.Win32.Shell.IShellItemArray',
   'Windows.Win32.Shell.IShellItemFilter',
+  'Windows.Win32.Shell.IVirtualDesktopManager',
   'Windows.Win32.StructuredStorage.ISequentialStream',
   'Windows.Win32.StructuredStorage.IStream',
   'Windows.Win32.WinRT.IInspectable',
