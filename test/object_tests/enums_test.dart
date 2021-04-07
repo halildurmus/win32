@@ -16,7 +16,8 @@ void main() {
   // } // end of class Windows.Win32.WindowsAndMessaging.HANDEDNESS
   test('Windows.Win32.WindowsAndMessaging.HANDEDNESS', () {
     final scope = MetadataStore.getWin32Scope();
-    final hand = scope['Windows.Win32.WindowsAndMessaging.HANDEDNESS']!;
+    final hand =
+        scope.findTypeDef('Windows.Win32.WindowsAndMessaging.HANDEDNESS')!;
 
     expect(hand.typeVisibility, equals(TypeVisibility.Public));
     expect(hand.typeLayout, equals(TypeLayout.Auto));

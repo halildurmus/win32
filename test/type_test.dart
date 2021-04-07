@@ -7,7 +7,7 @@ void main() {
   final scope = MetadataStore.getWin32Scope();
 
   test('NonClosableHandle should be projected as an IntPtr', () {
-    final typedef = scope['Windows.Win32.SystemServices.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.SystemServices.Apis')!;
     final api = typedef.findMethod('GetCurrentProcess')!;
     final returnType = api.returnType.typeIdentifier;
 
@@ -15,7 +15,7 @@ void main() {
     expect(returnType.name,
         equals('Windows.Win32.SystemServices.NonClosableHandle'));
 
-    final valueTypedef = scope[returnType.name]!;
+    final valueTypedef = scope.findTypeDef(returnType.name)!;
     expect(valueTypedef.fields.first.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_I));
 
@@ -25,7 +25,7 @@ void main() {
   });
 
   test('LARGE_INTEGER should be projected as an Int64', () {
-    final typedef = scope['Windows.Win32.FileSystem.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.FileSystem.Apis')!;
     final api = typedef.findMethod('SetFilePointerEx')!;
     final param = api.parameters[1];
 

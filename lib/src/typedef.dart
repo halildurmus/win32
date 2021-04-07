@@ -195,7 +195,7 @@ class TypeDef extends TokenObject with CustomAttributes {
         // TODO: Can we shortcut something by using the resolution scope token?
         try {
           final newScope = MetadataStore.getScopeForType(typeName);
-          return newScope[typeName]!;
+          return newScope.findTypeDef(typeName)!;
         } catch (exception) {
           // a token like IInspectable is out of reach of GetTypeRefProps, since it is
           // a plain COM object. These objects are returned as system types.

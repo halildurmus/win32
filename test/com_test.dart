@@ -277,7 +277,8 @@ void main() {
     });
 
     test('Unidentified COM interfaces should be represented as Pointers', () {
-      final iSpellChecker = scope['Windows.Win32.Intl.ISpellCheckerFactory']!;
+      final iSpellChecker =
+          scope.findTypeDef('Windows.Win32.Intl.ISpellCheckerFactory')!;
       final createSpellChecker =
           iSpellChecker.findMethod('CreateSpellChecker')!;
       final type = createSpellChecker

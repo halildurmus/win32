@@ -139,7 +139,7 @@ class MetadataStore {
     if (!isInitialized) initialize();
 
     final scope = getScopeForType(typeName);
-    return scope[typeName];
+    return scope.findTypeDef(typeName);
   }
 
   /// Dispose of all objects.

@@ -25,21 +25,21 @@ void main() {
   });
 
   test('Can successfully load a typedef from the Win32 metadata', () {
-    final typedef = scope['Windows.Win32.Gdi.Apis'];
+    final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis');
     expect(typedef, isNotNull);
     expect(typedef!.methods.length, isNonZero);
   });
 
   test('Typedef is named correctly', () {
-    final typedef = scope['Windows.Win32.Shell.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Shell.Apis')!;
     expect(typedef.typeName, equals('Windows.Win32.Shell.Apis'));
     expect(typedef.toString(), equals('TypeDef: Windows.Win32.Shell.Apis'));
   });
 
   test('Typedef equality is successful', () {
-    final typedef1 = scope['Windows.Win32.Shell.Apis']!;
+    final typedef1 = scope.findTypeDef('Windows.Win32.Shell.Apis')!;
     final typedef2 = scope.findTypeDef('Windows.Win32.Shell.Apis');
-    final typedef3 = scope['Windows.Win32.Gdi.Apis']!;
+    final typedef3 = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
 
     expect(typedef1, equals(typedef2));
     expect(typedef1, isNot(equals(typedef3)));
@@ -47,12 +47,12 @@ void main() {
 
   test('Searching for a non-existent typedef returns null', () {
     const fakeTypeDef = 'Windows.Flutter.Apis'; // for now :)
-    final typedef = scope[fakeTypeDef];
+    final typedef = scope.findTypeDef(fakeTypeDef);
     expect(typedef, isNull);
   });
 
   test('Can find a known API within the given scope', () {
-    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
 
     final api = typedef.findMethod('AddFontResourceW');
     expect(api, isNotNull);
@@ -60,14 +60,14 @@ void main() {
   });
 
   test('Searching for a non-existent API call returns null', () {
-    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
 
     final api = typedef.findMethod('AddFlutterWidget');
     expect(api, isNull);
   });
 
   test('Can detect the module in which an API is found', () {
-    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
 
     final api = typedef.findMethod('AddFontResourceW')!;
 
@@ -75,7 +75,7 @@ void main() {
   });
 
   test('isValid gives correct result for a real token', () {
-    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
 
     final api = typedef.findMethod('AddFontResourceW')!;
 
@@ -83,7 +83,7 @@ void main() {
   });
 
   test('isValid gives correct result for a pseudo-token', () {
-    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
     final api = typedef.findMethod('AddFontResourceW')!;
     final returnType = api.returnType;
 
@@ -91,7 +91,7 @@ void main() {
   });
 
   test('No attributes for a pseudo-token', () {
-    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
     final api = typedef.findMethod('AddFontResourceW')!;
     final returnType = api.returnType;
 
@@ -99,7 +99,7 @@ void main() {
   });
 
   test('Functions can correctly return an int type', () {
-    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
     final api = typedef.findMethod('AddFontResourceW')!;
     final returnType = api.returnType;
 
@@ -110,7 +110,7 @@ void main() {
   });
 
   test('LPWSTR parameters are handled correctly', () {
-    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
     final api = typedef.findMethod('AddFontResourceW')!;
 
     expect(api.parameters.length, equals(1));
@@ -126,13 +126,13 @@ void main() {
   });
 
   test('Signature blob is correct', () {
-    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
     final api = typedef.findMethod('AddFontResourceW')!;
     expect(api.signatureBlob.sublist(0, 4), equals([0x00, 0x01, 0x08, 0x11]));
   });
 
   test('Unicode string params are correctly marked', () {
-    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
     final api = typedef.findMethod('AddFontResourceW')!;
 
     expect(api.parameters.length, equals(1));
@@ -143,7 +143,7 @@ void main() {
   });
 
   test('ANSI string params are correctly marked', () {
-    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
     final api = typedef.findMethod('AddFontResourceA')!;
 
     expect(api.parameters.length, equals(1));
@@ -154,7 +154,7 @@ void main() {
   });
 
   test('Returned structs like LPRECT have correct param width', () {
-    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
     final api = typedef.findMethod('UnionRect')!;
 
     expect(api.parameters.length, equals(3));
@@ -172,7 +172,7 @@ void main() {
   });
 
   test('Structs like RECT have the correct type args', () {
-    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
     final api = typedef.findMethod('UnionRect')!;
 
     expect(api.parameters.first.name, equals('lprcDst'));
@@ -185,7 +185,7 @@ void main() {
   });
 
   test('DWORD typedefs like COLORREF have the correct param type', () {
-    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
     final api = typedef.findMethod('SetBkColor')!;
     final colorParam = api.parameters.last;
 
@@ -195,7 +195,7 @@ void main() {
   });
 
   test('DWORD typedefs like COLORREF have the correct return type', () {
-    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
     final api = typedef.findMethod('SetBkColor')!;
     final returnType = api.returnType;
 
@@ -204,7 +204,8 @@ void main() {
   });
 
   test('HANDLE-style parameters have the correct type', () {
-    final typedef = scope['Windows.Win32.KeyboardAndMouseInput.Apis']!;
+    final typedef =
+        scope.findTypeDef('Windows.Win32.KeyboardAndMouseInput.Apis')!;
     final api = typedef.findMethod('UnregisterHotKey')!;
     final param = api.parameters.first;
 
@@ -214,7 +215,7 @@ void main() {
   });
 
   test('Character parameters have the correct type', () {
-    final typedef = scope['Windows.Win32.SystemServices.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.SystemServices.Apis')!;
     final api = typedef.findMethod('FillConsoleOutputCharacterW')!;
     final param = api.parameters[1];
 
@@ -224,7 +225,7 @@ void main() {
   });
 
   test('UnregisterPowerSettingNotification has the correct parameter type', () {
-    final typedef = scope['Windows.Win32.SystemServices.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.SystemServices.Apis')!;
     final api = typedef.findMethod('UnregisterPowerSettingNotification')!;
     final param = api.parameters.first;
 
@@ -234,7 +235,7 @@ void main() {
   });
 
   test('GetActiveObject REFCLSID has the correct parameter type', () {
-    final typedef = scope['Windows.Win32.Automation.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Automation.Apis')!;
     final api = typedef.findMethod('GetActiveObject')!;
     final param = api.parameters.first;
 
@@ -247,7 +248,7 @@ void main() {
   });
 
   test('APIs with empty parameters have an accurate return type', () {
-    final typedef = scope['Windows.Win32.DataExchange.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.DataExchange.Apis')!;
     final api = typedef.findMethod('CountClipboardFormats')!;
     final returnType = api.returnType;
 
@@ -256,7 +257,7 @@ void main() {
   });
 
   test('Double pointer is interpreted correctly', () {
-    final typedef = scope['Windows.Win32.Security.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Security.Apis')!;
     final api = typedef.findMethod('CredReadW')!;
     final param = api.parameters.last;
 
@@ -269,7 +270,7 @@ void main() {
   });
 
   test('HRESULT return values are generated correctly', () {
-    final typedef = scope['Windows.Win32.WindowsProgramming.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.WindowsProgramming.Apis')!;
     final api = typedef.findMethod('GetIntegratedDisplaySize')!;
     final returnType = api.returnType;
 
@@ -279,7 +280,7 @@ void main() {
   });
 
   test('IUnknown parameters are generated correctly', () {
-    final typedef = scope['Windows.Win32.Com.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Com.Apis')!;
     final api = typedef.findMethod('CoSetProxyBlanket')!;
     final param = api.parameters.first;
 
@@ -289,7 +290,7 @@ void main() {
   });
 
   test('Callback functions are generated correctly', () {
-    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
     final api = typedef.findMethod('EnumFontFamiliesExW')!;
     final param = api.parameters[2]; // FONTENUMPROCW
 
@@ -301,7 +302,7 @@ void main() {
   });
 
   test('Callback functions are generated correctly 2', () {
-    final typedef = scope['Windows.Win32.Debug.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Debug.Apis')!;
     final api = typedef.findMethod('SymEnumSymbolsW')!;
     final param = api.parameters[3]; // PSYM_ENUMERATESYMBOLS_CALLBACKW
 
@@ -313,7 +314,7 @@ void main() {
     expect(param.typeIdentifier.typeArgs, isEmpty);
   });
   test('Naked structs are generated correctly', () {
-    final typedef = scope['Windows.Win32.SystemServices.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.SystemServices.Apis')!;
     final api = typedef.findMethod('InitializeProcThreadAttributeList')!;
     final param = api.parameters.first;
 
@@ -345,7 +346,7 @@ void main() {
   });
 
   test('Enumerations are typed appropriately in functions', () {
-    final typedef = scope['Windows.Win32.Gdi.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
     final api = typedef.findMethod('CreateDIBitmap')!;
     final param = api.parameters.last;
 
@@ -354,7 +355,7 @@ void main() {
   });
 
   test('Pointers to enumerations are typed appropriately in functions', () {
-    final typedef = scope['Windows.Win32.SystemServices.Apis']!;
+    final typedef = scope.findTypeDef('Windows.Win32.SystemServices.Apis')!;
     final api = typedef.findMethod('GetNamedPipeInfo')!;
     final param = api.parameters[1];
 
@@ -366,17 +367,18 @@ void main() {
   });
 
   test('Delegates are appropriately marked', () {
-    final delegate = scope['Windows.Win32.Gdi.MFENUMPROC']!;
+    final delegate = scope.findTypeDef('Windows.Win32.Gdi.MFENUMPROC')!;
     expect(delegate.isDelegate, isTrue);
   });
 
   test('Non-delegates are appropriately marked', () {
-    final notADelegate = scope['Windows.Win32.SystemServices.Apis']!;
+    final notADelegate =
+        scope.findTypeDef('Windows.Win32.SystemServices.Apis')!;
     expect(notADelegate.isDelegate, isFalse);
   });
 
   test('Delegates are appropriately exposed', () {
-    final delegate = scope['Windows.Win32.Gdi.MFENUMPROC']!;
+    final delegate = scope.findTypeDef('Windows.Win32.Gdi.MFENUMPROC')!;
 
     final api = delegate.findMethod('Invoke')!;
     final param = api.parameters.first;
@@ -389,24 +391,28 @@ void main() {
   });
 
   test('Packing instructions are available', () {
-    final packedStruct = scope['Windows.Win32.Gdi.BITMAPFILEHEADER']!;
+    final packedStruct =
+        scope.findTypeDef('Windows.Win32.Gdi.BITMAPFILEHEADER')!;
     expect(packedStruct.classLayout.packingAlignment, equals(2));
     expect(packedStruct.classLayout.minimumSize, isZero);
   });
   test('Packing instructions are available 2', () {
-    final packedStruct = scope['Windows.Win32.Bluetooth.BTH_QUERY_SERVICE']!;
+    final packedStruct =
+        scope.findTypeDef('Windows.Win32.Bluetooth.BTH_QUERY_SERVICE')!;
     expect(packedStruct.classLayout.packingAlignment, equals(1));
     expect(packedStruct.classLayout.minimumSize, isZero);
   });
 
   test('Packing instructions are unavailable for an unpacked class', () {
-    final packedStruct = scope['Windows.Win32.Shell.NOTIFYICONIDENTIFIER']!;
+    final packedStruct =
+        scope.findTypeDef('Windows.Win32.Shell.NOTIFYICONIDENTIFIER')!;
     expect(packedStruct.classLayout.packingAlignment, isNull);
     expect(packedStruct.classLayout.minimumSize, isNull);
   });
 
   test('No crash when calling GetClassLayout on an enum', () {
-    final packedStruct = scope['Windows.Win32.Shell.KNOWN_FOLDER_FLAG']!;
+    final packedStruct =
+        scope.findTypeDef('Windows.Win32.Shell.KNOWN_FOLDER_FLAG')!;
     expect(packedStruct.classLayout.packingAlignment, isNull);
     expect(packedStruct.classLayout.minimumSize, isNull);
   });

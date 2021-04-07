@@ -44,7 +44,7 @@ void listMethods(
   printHeading('First ten methods of $type');
 
   final mdScope = MetadataStore.getScopeForType(type);
-  final winTypeDef = mdScope[type];
+  final winTypeDef = mdScope.findTypeDef(type);
   final methods = winTypeDef!.methods.take(10);
 
   print(methods.map(methodSignature).join('\n'));
@@ -57,7 +57,7 @@ void listParameters(
 
   final mdScope = MetadataStore.getScopeForType(type);
 
-  final winTypeDef = mdScope[type];
+  final winTypeDef = mdScope.findTypeDef(type);
   final method = winTypeDef!.findMethod(methodName)!;
 
   print('${method.methodName} has '
@@ -79,7 +79,7 @@ void listInterfaces([String type = 'Windows.Storage.Pickers.FolderPicker']) {
 
   final mdScope = MetadataStore.getScopeForType(type);
 
-  final winTypeDef = mdScope[type];
+  final winTypeDef = mdScope.findTypeDef(type);
 
   final interfaces = winTypeDef!.interfaces.take(5);
 
@@ -94,7 +94,7 @@ void listGUID([String type = 'Windows.UI.Shell.IAdaptiveCard']) {
   printHeading('GUID for $type');
 
   final mdScope = MetadataStore.getScopeForType(type);
-  final winTypeDef = mdScope[type];
+  final winTypeDef = mdScope.findTypeDef(type);
 
   print(winTypeDef!.guid);
 }
@@ -127,7 +127,7 @@ String convertTypeToProjection(
   final idlProjection = StringBuffer();
 
   final mdScope = MetadataStore.getScopeForType(type);
-  final winTypeDef = mdScope[type];
+  final winTypeDef = mdScope.findTypeDef(type);
 
   if (winTypeDef?.parent?.typeName == 'IInspectable') {
     idlProjection.writeln('// vtable_start 6');

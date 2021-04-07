@@ -2,8 +2,8 @@ import 'package:winmd/winmd.dart';
 
 final scope = MetadataStore.getWin32Scope();
 
-void printStruct(String typedef) =>
-    print(TypePrinter.printStruct(scope[typedef]!, typedef.split('.').last));
+void printStruct(String typedef) => print(TypePrinter.printStruct(
+    scope.findTypeDef(typedef)!, typedef.split('.').last));
 
 // Things that don't work
 

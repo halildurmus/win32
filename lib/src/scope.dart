@@ -8,7 +8,6 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'com/IMetaDataImport2.dart';
-import 'constants.dart';
 import 'enumeration.dart';
 import 'module.dart';
 import 'typedef.dart';
@@ -130,28 +129,6 @@ class Scope {
       }
     }
     return _enums;
-  }
-
-  // TODO: Replace this by findTypeDef (since we have a variety of lists in this
-  // class).
-  /// Find a typedef by name.
-  TypeDef? operator [](String type) {
-    final szTypeDef = type.toNativeUtf16();
-    final ptkTypeDef = calloc<Uint32>();
-
-    try {
-      final hr = reader.FindTypeDefByName(szTypeDef, NULL, ptkTypeDef);
-      if (SUCCEEDED(hr)) {
-        return TypeDef.fromToken(reader, ptkTypeDef.value);
-      } else if (hr == CLDB_E_RECORD_NOTFOUND) {
-        return null;
-      } else {
-        throw COMException(hr);
-      }
-    } finally {
-      calloc.free(szTypeDef);
-      calloc.free(ptkTypeDef);
-    }
   }
 
   @override

@@ -18,7 +18,8 @@ void main() {
   // } // end of method Apis::AdjustWindowRect
   test('Windows.Win32.WindowsAndMessaging.Apis.AdjustWindowRect', () {
     final scope = MetadataStore.getWin32Scope();
-    final typedef = scope['Windows.Win32.WindowsAndMessaging.Apis']!;
+    final typedef =
+        scope.findTypeDef('Windows.Win32.WindowsAndMessaging.Apis')!;
     final awr = typedef.findMethod('AdjustWindowRect')!;
 
     expect(awr.memberAccess, equals(MemberAccess.Public));

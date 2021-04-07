@@ -16,7 +16,7 @@ void main() {
   // } // end of class Windows.Win32.WindowsAndMessaging.ACCEL
   test('Windows.Win32.WindowsAndMessaging.ACCEL', () {
     final scope = MetadataStore.getWin32Scope();
-    final accel = scope['Windows.Win32.WindowsAndMessaging.ACCEL']!;
+    final accel = scope.findTypeDef('Windows.Win32.WindowsAndMessaging.ACCEL')!;
 
     expect(accel.isClass, isTrue);
     expect(accel.typeVisibility, equals(TypeVisibility.Public));

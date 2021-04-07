@@ -13,7 +13,8 @@ void main() {
   final scope = MetadataStore.getWin32Scope();
 
   // Find a namesapce
-  final namespace = scope['Windows.Win32.WindowsAndMessaging.Apis']!;
+  final namespace =
+      scope.findTypeDef('Windows.Win32.WindowsAndMessaging.Apis')!;
 
   // Sort the functions alphabetically
   final sortedMethods = namespace.methods

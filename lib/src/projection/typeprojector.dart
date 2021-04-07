@@ -24,7 +24,7 @@ class TypeProjector {
   bool get isWin32WrappedType {
     final scope = MetadataStore.getWin32Scope();
 
-    final valueTypeDef = scope[typeIdentifier.name];
+    final valueTypeDef = scope.findTypeDef(typeIdentifier.name);
 
     return (valueTypeDef?.fields.length == 1 &&
         valueTypeDef?.fields.first.name == 'Value');
@@ -38,7 +38,7 @@ class TypeProjector {
     if (ffiNativeType != win32Type) return null;
 
     final scope = MetadataStore.getWin32Scope();
-    final valueTypeDef = scope[typeIdentifier.name];
+    final valueTypeDef = scope.findTypeDef(typeIdentifier.name);
     return valueTypeDef?.fields.first.typeIdentifier;
   }
 

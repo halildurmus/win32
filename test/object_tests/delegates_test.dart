@@ -33,7 +33,8 @@ void main() {
   // } // end of class Windows.Win32.WindowsAndMessaging.WNDPROC
   test('Windows.Win32.WindowsAndMessaging.WNDPROC', () {
     final scope = MetadataStore.getWin32Scope();
-    final wndProc = scope['Windows.Win32.WindowsAndMessaging.WNDPROC']!;
+    final wndProc =
+        scope.findTypeDef('Windows.Win32.WindowsAndMessaging.WNDPROC')!;
 
     expect(wndProc.isClass, isTrue);
     expect(wndProc.typeVisibility, equals(TypeVisibility.Public));
