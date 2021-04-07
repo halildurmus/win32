@@ -131,6 +131,10 @@ export 'src/winrt/winrt_helpers.dart';
 
 // COM and Windows Runtime interfaces
 export 'src/com/IApplicationActivationManager.dart';
+export 'src/com/IAppxFactory.dart';
+export 'src/com/IAppxManifestReader.dart';
+export 'src/com/IAppxPackageReader.dart';
+export 'src/com/IApplicationActivationManager.dart';
 export 'src/com/IAsyncInfo.dart';
 export 'src/com/IBindCtx.dart';
 export 'src/com/ICalendar.dart';
@@ -183,6 +187,7 @@ export 'src/com/IStream.dart';
 export 'src/com/ISupportErrorInfo.dart';
 export 'src/com/ITypeInfo.dart';
 export 'src/com/IUnknown.dart';
+export 'src/com/IUri.dart';
 export 'src/com/IWbemClassObject.dart';
 export 'src/com/IWbemContext.dart';
 export 'src/com/IWbemLocator.dart';
