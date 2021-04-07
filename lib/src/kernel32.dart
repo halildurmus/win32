@@ -1056,6 +1056,49 @@ int FindNextVolume(
   return _FindNextVolume(hFindVolume, lpszVolumeName, cchBufferLength);
 }
 
+/// Finds the packages with the specified family name for the current user.
+///
+/// ```c
+/// LONG FindPackagesByPackageFamily(
+///   PCWSTR packageFamilyName,
+///   UINT32 packageFilters,
+///   UINT32 *count,
+///   PWSTR  *packageFullNames,
+///   UINT32 *bufferLength,
+///   WCHAR  *buffer,
+///   UINT32 *packageProperties
+/// );
+/// ```
+/// {@category kernel32}
+int FindPackagesByPackageFamily(
+    Pointer<Utf16> packageFamilyName,
+    int packageFilters,
+    Pointer<Uint32> count,
+    Pointer<Pointer<Utf16>> packageFullNames,
+    Pointer<Uint32> bufferLength,
+    Pointer<Utf16> buffer,
+    Pointer<Uint32> packageProperties) {
+  final _FindPackagesByPackageFamily = _kernel32.lookupFunction<
+      Int32 Function(
+          Pointer<Utf16> packageFamilyName,
+          Uint32 packageFilters,
+          Pointer<Uint32> count,
+          Pointer<Pointer<Utf16>> packageFullNames,
+          Pointer<Uint32> bufferLength,
+          Pointer<Utf16> buffer,
+          Pointer<Uint32> packageProperties),
+      int Function(
+          Pointer<Utf16> packageFamilyName,
+          int packageFilters,
+          Pointer<Uint32> count,
+          Pointer<Pointer<Utf16>> packageFullNames,
+          Pointer<Uint32> bufferLength,
+          Pointer<Utf16> buffer,
+          Pointer<Uint32> packageProperties)>('FindPackagesByPackageFamily');
+  return _FindPackagesByPackageFamily(packageFamilyName, packageFilters, count,
+      packageFullNames, bufferLength, buffer, packageProperties);
+}
+
 /// Determines the location of a resource with the specified type and name
 /// in the specified module.
 ///

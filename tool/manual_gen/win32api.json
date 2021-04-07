@@ -961,6 +961,12 @@
         "dllLibrary": "kernel32",
         "comment": "Continues a volume search started by a call to the FindFirstVolume function. FindNextVolume finds one volume per call."
     },
+    "FindPackagesByPackageFamily": {
+        "prototype": "LONG FindPackagesByPackageFamily(\n  PCWSTR packageFamilyName,\n  UINT32 packageFilters,\n  UINT32 *count,\n  PWSTR  *packageFullNames,\n  UINT32 *bufferLength,\n  WCHAR  *buffer,\n  UINT32 *packageProperties\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Finds the packages with the specified family name for the current user.",
+        "minimumWindowsVersion": "WIN81"
+    },
     "FindResource": {
         "prototype": "HRSRC FindResourceW(\n  HMODULE hModule,\n  LPCWSTR  lpName,\n  LPCWSTR  lpType\n);",
         "dllLibrary": "kernel32",

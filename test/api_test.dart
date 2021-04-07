@@ -491,6 +491,30 @@ void main() {
               int cchBufferLength)>('FindNextVolumeW');
       expect(FindNextVolume, isA<Function>());
     });
+    if (windowsBuildNumber >= 9600) {
+      test('Can instantiate FindPackagesByPackageFamily', () {
+        final kernel32 = DynamicLibrary.open('kernel32.dll');
+        final FindPackagesByPackageFamily = kernel32.lookupFunction<
+                Int32 Function(
+                    Pointer<Utf16> packageFamilyName,
+                    Uint32 packageFilters,
+                    Pointer<Uint32> count,
+                    Pointer<Pointer<Utf16>> packageFullNames,
+                    Pointer<Uint32> bufferLength,
+                    Pointer<Utf16> buffer,
+                    Pointer<Uint32> packageProperties),
+                int Function(
+                    Pointer<Utf16> packageFamilyName,
+                    int packageFilters,
+                    Pointer<Uint32> count,
+                    Pointer<Pointer<Utf16>> packageFullNames,
+                    Pointer<Uint32> bufferLength,
+                    Pointer<Utf16> buffer,
+                    Pointer<Uint32> packageProperties)>(
+            'FindPackagesByPackageFamily');
+        expect(FindPackagesByPackageFamily, isA<Function>());
+      });
+    }
     test('Can instantiate FindResource', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final FindResource = kernel32.lookupFunction<
