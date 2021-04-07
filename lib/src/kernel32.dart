@@ -2407,6 +2407,31 @@ void OutputDebugString(Pointer<Utf16> lpOutputString) {
   return _OutputDebugString(lpOutputString);
 }
 
+/// Gets the package family name for the specified package full name.
+///
+/// ```c
+/// LONG PackageFamilyNameFromFullName(
+///   PCWSTR packageFullName,
+///   UINT32 *packageFamilyNameLength,
+///   PWSTR  packageFamilyName
+/// );
+/// ```
+/// {@category kernel32}
+int PackageFamilyNameFromFullName(Pointer<Utf16> packageFullName,
+    Pointer<Uint32> packageFamilyNameLength, Pointer<Utf16> packageFamilyName) {
+  final _PackageFamilyNameFromFullName = _kernel32.lookupFunction<
+      Int32 Function(
+          Pointer<Utf16> packageFullName,
+          Pointer<Uint32> packageFamilyNameLength,
+          Pointer<Utf16> packageFamilyName),
+      int Function(
+          Pointer<Utf16> packageFullName,
+          Pointer<Uint32> packageFamilyNameLength,
+          Pointer<Utf16> packageFamilyName)>('PackageFamilyNameFromFullName');
+  return _PackageFamilyNameFromFullName(
+      packageFullName, packageFamilyNameLength, packageFamilyName);
+}
+
 /// Copies data from a named or anonymous pipe into a buffer without
 /// removing it from the pipe. It also returns information about data in
 /// the pipe.

@@ -2364,6 +2364,12 @@
         "dllLibrary": "kernel32",
         "comment": "Sends a string to the debugger for display."
     },
+    "PackageFamilyNameFromFullName": {
+        "prototype": "LONG PackageFamilyNameFromFullName(\n  PCWSTR packageFullName,\n  UINT32 *packageFamilyNameLength,\n  PWSTR  packageFamilyName\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Gets the package family name for the specified package full name.",
+        "minimumWindowsVersion": "WIN8"
+    },
     "PaintDesktop": {
         "prototype": "BOOL PaintDesktop(\n  HDC hdc\n);",
         "dllLibrary": "user32",

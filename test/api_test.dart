@@ -1118,6 +1118,22 @@ void main() {
           void Function(Pointer<Utf16> lpOutputString)>('OutputDebugStringW');
       expect(OutputDebugString, isA<Function>());
     });
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate PackageFamilyNameFromFullName', () {
+        final kernel32 = DynamicLibrary.open('kernel32.dll');
+        final PackageFamilyNameFromFullName = kernel32.lookupFunction<
+                Int32 Function(
+                    Pointer<Utf16> packageFullName,
+                    Pointer<Uint32> packageFamilyNameLength,
+                    Pointer<Utf16> packageFamilyName),
+                int Function(
+                    Pointer<Utf16> packageFullName,
+                    Pointer<Uint32> packageFamilyNameLength,
+                    Pointer<Utf16> packageFamilyName)>(
+            'PackageFamilyNameFromFullName');
+        expect(PackageFamilyNameFromFullName, isA<Function>());
+      });
+    }
     test('Can instantiate PeekNamedPipe', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final PeekNamedPipe = kernel32.lookupFunction<
