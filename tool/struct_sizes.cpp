@@ -26,6 +26,7 @@
 #include <CorHdr.h>
 #include <DbgHelp.h>
 #include <ShellScalingApi.h>
+#include <AppxPackaging.h>
 
 void main()
 {
