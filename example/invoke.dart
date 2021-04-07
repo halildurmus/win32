@@ -3,89 +3,121 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-// TODO: Tidy up this sample
+class Dispatcher {
+  final String progID;
+  final IDispatch disp;
+
+  late final Pointer<GUID> IID_NULL;
+
+  Dispatcher(this.progID, this.disp) {
+    IID_NULL = calloc<GUID>();
+  }
+
+  factory Dispatcher.fromProgID(String progID) {
+    final ptrProgID = progID.toNativeUtf16();
+    final clsid = calloc<GUID>();
+    final pIID_IDispatch = calloc<GUID>()..ref.setGUID(IID_IDispatch);
+    final ppv = calloc<COMObject>();
+
+    try {
+      var hr = CLSIDFromProgID(ptrProgID, clsid);
+      if (FAILED(hr)) {
+        throw WindowsException(hr);
+      }
+
+      hr = CoCreateInstance(
+          clsid, nullptr, CLSCTX_INPROC_SERVER, pIID_IDispatch, ppv.cast());
+      if (FAILED(hr)) {
+        throw WindowsException(hr);
+      }
+
+      final iDispatch = IDispatch(ppv);
+
+      return Dispatcher(progID, iDispatch);
+    } finally {
+      free(ptrProgID);
+      free(clsid);
+      free(pIID_IDispatch);
+    }
+  }
+
+  int getDispId(String member) {
+    final ptNameFunc = member.toNativeUtf16();
+    final ptName = calloc<Pointer<Utf16>>()..value = ptNameFunc;
+    final dispid = calloc<Int32>();
+
+    try {
+      final hr = disp.GetIDsOfNames(
+          IID_NULL, ptName.cast(), 1, LOCALE_USER_DEFAULT, dispid);
+      if (FAILED(hr)) {
+        throw WindowsException(hr);
+      } else {
+        return dispid.value;
+      }
+    } finally {
+      free(ptNameFunc);
+      free(ptName);
+      free(dispid);
+    }
+  }
+
+  int get typeInfoCount {
+    final count = calloc<Uint32>();
+
+    try {
+      final hr = disp.GetTypeInfoCount(count);
+      if (SUCCEEDED(hr)) {
+        return count.value;
+      } else {
+        throw WindowsException(hr);
+      }
+    } finally {
+      free(count);
+    }
+  }
+
+  void invokeMethod(int dispid, {Pointer<DISPPARAMS>? params}) {
+    Pointer<DISPPARAMS> args;
+    if (params == null) {
+      args = calloc<DISPPARAMS>();
+    } else {
+      args = params;
+    }
+
+    try {
+      final hr = disp.Invoke(dispid, IID_NULL, LOCALE_SYSTEM_DEFAULT,
+          DISPATCH_METHOD, args, nullptr, nullptr, nullptr);
+      if (FAILED(hr)) {
+        throw WindowsException(hr);
+      } else {
+        return;
+      }
+    } finally {
+      if (params == null) {
+        free(args);
+      }
+    }
+  }
+
+  void dispose() {
+    free(disp.ptr);
+    free(IID_NULL);
+  }
+}
+
 void main() {
-  var hr = OleInitialize(nullptr);
+  final hr = OleInitialize(nullptr);
 
   if (FAILED(hr)) {
     print('Failed at OleInitialize.');
     throw WindowsException(hr);
   }
 
-  final shellApp = calloc<GUID>();
-  hr = CLSIDFromProgID(TEXT('Shell.Application'), shellApp);
-  if (FAILED(hr)) {
-    print('Failed at CLSIDFromProgID.');
-    throw WindowsException(hr);
-  }
+  final dispatcher = Dispatcher.fromProgID('Shell.Application');
+  final dispid = dispatcher.getDispId('MinimizeAll');
 
-  final inst = calloc<COMObject>();
-  final iidIDispatch = calloc<GUID>()..ref.setGUID(IID_IDispatch);
+  dispatcher.invokeMethod(dispid);
 
-  hr = CoCreateInstance(
-      shellApp, nullptr, CLSCTX_INPROC_SERVER, iidIDispatch, inst.cast());
-  if (FAILED(hr)) {
-    print('Failed at CoCreateInstance.');
-    print('CLSID: ${shellApp.ref.toString()}');
-    print('IID: ${iidIDispatch.ref.toString()}');
-    throw WindowsException(hr);
-  }
-
-  final pDisp = IDispatch(inst.cast());
-  print('IDispatch.ptr == ${pDisp.ptr.address.toHexString(64)}');
-  print('calling GetTypeInfoCount');
-  final typeInfoCount = calloc<Uint32>();
-  hr = pDisp.GetTypeInfoCount(typeInfoCount);
-  if (SUCCEEDED(hr)) {
-    print('There are ${typeInfoCount.value} type info interfaces provided.');
-  } else {
-    print('Failed at IDispatch::GetTypeInfoCount.');
-    throw WindowsException(hr);
-  }
-
-  print('calling GetTypeInfo');
-  final ppTypeInfo = calloc<Pointer>();
-  hr = pDisp.GetTypeInfo(0, 0, ppTypeInfo.cast());
-  if (FAILED(hr)) {
-    print('Failed at IDispatch::GetTypeInfo.');
-    throw WindowsException(hr);
-  }
-
-  print('calling GetTypeAttr');
-  final ppTypeAttr = calloc<Pointer<TYPEATTR>>();
-  final pTypeInfo = ITypeInfo(ppTypeInfo.cast());
-  print('ITypeInfo.ptr == ${pTypeInfo.ptr.address.toHexString(64)}');
-  hr = pTypeInfo.GetTypeAttr(ppTypeAttr);
-  if (FAILED(hr)) {
-    print('Failed at ITypeInfo::GetTypeAttr.');
-    throw WindowsException(hr);
-  }
-
-  final ptNameFunc = 'MinimizeAll'.toNativeUtf16();
-  final ptName = calloc<Pointer<Utf16>>()..value = ptNameFunc;
-  final iidNull = calloc<GUID>();
-  print(iidNull.ref.toString());
-
-  final dispid = calloc<Int32>();
-  print('calling GetIDsOfNames');
-  hr = pDisp.GetIDsOfNames(
-      iidNull, ptName.cast(), 1, LOCALE_USER_DEFAULT, dispid);
-  if (FAILED(hr)) {
-    print('Failed at IDispatch::GetIDsOfNames.');
-    throw WindowsException(hr);
-  } else {
-    print('Got ID from ${dispid.value}.');
-  }
-
-  final noArgs = calloc<DISPPARAMS>();
-  hr = pDisp.Invoke(dispid.value, iidNull, LOCALE_SYSTEM_DEFAULT,
-      DISPATCH_METHOD, noArgs, nullptr, nullptr, nullptr);
-  if (FAILED(hr)) {
-    print('Failed at IDispatch::Invoke.');
-    throw WindowsException(hr);
-  } else {
-    print('Succeeded. And here we are in Dart again.');
-  }
-
+  dispatcher.dispose();
   OleUninitialize();
 }
