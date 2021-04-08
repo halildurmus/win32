@@ -77,34 +77,38 @@ void main() {
         interfaceNames, contains('Windows.UI.Xaml.Controls.IButtonWithFlyout'));
   });
 
-  test('Find interfaces returns sane results when inheriting from system type',
-      () {
-    final winTypeDef = MetadataStore.getMetadataForType(
-        'Windows.Media.Playback.PlaybackMediaMarkerSequence')!;
-
-    final interfaces = winTypeDef.interfaces;
-    expect(interfaces.length, equals(2));
-
-    final interfaceNames = interfaces.map((element) => element.typeName);
-    // expect(interfaceNames, contains('IEnumerable'));
-    expect(interfaceNames,
-        contains('Windows.Media.Playback.IPlaybackMediaMarkerSequence'));
-  });
-
-  test('Find interfaces returns sane results when inheriting from system type',
+  test('Find interfaces returns sane results with IDictionary<string, object>',
       () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.Foundation.Collections.IPropertySet')!;
 
     final interfaces = winTypeDef.interfaces;
     expect(interfaces.length, equals(3));
-    expect(interfaces.first.tokenType, equals(TokenType.TypeSpec));
+    expect(interfaces[1].tokenType, equals(TokenType.TypeSpec));
 
-    // final interfaceNames = interfaces.map((element) => element.typeName);
-    // expect(interfaceNames, contains('IEnumerable'));
-    // expect(interfaceNames,
-    //     contains('Windows.Media.Playback.IPlaybackMediaMarkerSequence'));
+    final idict = interfaces[1];
+    expect(idict.typeSpec?.corType,
+        equals(CorElementType.ELEMENT_TYPE_GENERICINST));
+    expect(idict.typeSpec?.name, contains('Collections.IMap'));
+    expect(idict.typeSpec?.typeArgs.length, equals(2));
+    expect(idict.typeSpec?.typeArgs.first.corType,
+        equals(CorElementType.ELEMENT_TYPE_STRING));
+    expect(idict.typeSpec?.typeArgs.last.corType,
+        equals(CorElementType.ELEMENT_TYPE_OBJECT));
   });
+
+  test('Find interfaces returns sane results with IEnumerable<class>', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Media.Playback.PlaybackMediaMarkerSequence')!;
+
+    final interfaces = winTypeDef.interfaces;
+    expect(interfaces.length, equals(2));
+
+    expect(interfaces.first.typeName, endsWith('IPlaybackMediaMarkerSequence'));
+    expect(interfaces.last.typeSpec?.typeArgs.first.name,
+        endsWith('PlaybackMediaMarker'));
+  });
+
   test('Interface GUID is correct', () {
     final winTypeDef =
         MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;

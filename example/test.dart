@@ -55,18 +55,20 @@ void main() {
       print('iface token: ${iface.toHexString(32)}. '
           'typeSpec: ${tokenIsTypeSpec(iface)}');
 
-      // Resolve interface token
-      final ptkResolutionScope = calloc<Uint32>();
-      final szName = calloc<Uint16>(256).cast<Utf16>();
-      final pchName = calloc<Uint32>();
-      hr = reader.GetTypeRefProps(
-          iface, ptkResolutionScope, szName, 256, pchName);
-      if (FAILED(hr)) {
-        throw WindowsException(hr);
+      if (tokenIsTypeRef(iface)) {
+        // Resolve interface token
+        final ptkResolutionScope = calloc<Uint32>();
+        final szName = calloc<Uint16>(256).cast<Utf16>();
+        final pchName = calloc<Uint32>();
+        hr = reader.GetTypeRefProps(
+            iface, ptkResolutionScope, szName, 256, pchName);
+        if (FAILED(hr)) {
+          throw WindowsException(hr);
+        }
+        print('iface represents: ${szName.toDartString()}');
+        print(
+            'ptkResolutionScope is: ${ptkResolutionScope.value.toHexString(32)}');
       }
-      print('iface represents: ${szName.toDartString()}');
-      print(
-          'ptkResolutionScope is: ${ptkResolutionScope.value.toHexString(32)}');
     }
     print('');
   }

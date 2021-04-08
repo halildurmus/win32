@@ -239,8 +239,8 @@ class TypeDef extends TokenObject with CustomAttributes {
           reader.GetTypeSpecFromToken(typeSpecToken, ppvSig.cast(), pcbSig);
       final signature = ppvSig.value.asTypedList(pcbSig.value);
       final typeTuple = parseTypeFromSignature(signature, reader);
-      print(
-          '${typeSpecToken.toHexString(32)}: ${signature.map((m) => m.toHexString(8))}');
+      // print(
+      //     '${typeSpecToken.toHexString(32)}: ${signature.map((m) => m.toHexString(8))}');
 
       if (SUCCEEDED(hr)) {
         return TypeDef(
