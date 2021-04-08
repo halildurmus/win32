@@ -2,7 +2,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import '_base.dart';
+import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 
 class PinvokeMap extends TokenObject {

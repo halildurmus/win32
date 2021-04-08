@@ -8,7 +8,7 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import '_base.dart';
+import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'methodimpls.dart';
@@ -293,7 +293,7 @@ class Method extends TokenObject with CustomAttributes {
 
     for (final param in parameters) {
       for (final attr in param.customAttributes) {
-        if (attr.tokenType == nativeTypeInfoToken) {
+        if (attr.attributeType == nativeTypeInfoToken) {
           if (attr.signatureBlob[2] == 0x14) // ASCII
           {
             param.typeIdentifier.name = 'LPSTR';

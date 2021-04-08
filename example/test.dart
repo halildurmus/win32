@@ -53,7 +53,7 @@ void main() {
 
       final iface = ptkIface.value;
       print('iface token: ${iface.toHexString(32)}. '
-          'typeRef: ${tokenIsTypeRef(iface)}');
+          'typeSpec: ${tokenIsTypeSpec(iface)}');
 
       // Resolve interface token
       final ptkResolutionScope = calloc<Uint32>();

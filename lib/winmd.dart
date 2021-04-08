@@ -12,6 +12,7 @@
 
 library winmd;
 
+export 'src/base.dart';
 export 'src/classlayout.dart';
 export 'src/constants.dart';
 export 'src/customattribute.dart';
