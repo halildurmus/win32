@@ -575,4 +575,12 @@ void main() {
     expect(winTypeDef.genericParams.length, equals(1));
     expect(winTypeDef.genericParams.first.paramName, endsWith('TResult'));
   });
+  test('Can find type information for generic types 2', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Foundation.IAsyncOperationWithProgress`2')!;
+
+    expect(winTypeDef.genericParams.length, equals(2));
+    expect(winTypeDef.genericParams.first.paramName, endsWith('TResult'));
+    expect(winTypeDef.genericParams.last.paramName, endsWith('TProgress'));
+  });
 }
