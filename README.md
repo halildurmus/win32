@@ -91,6 +91,7 @@ examples use the Win32 API for all UI display and do not require Flutter.
 | Example            | Description                                               |
 | ------------------ | --------------------------------------------------------- |
 | `hello.dart`       | Basic Petzoldian "hello world" Win32 app                  |
+| `bluetooth.dart`   | Demonstrate enumerating Bluetooth devices                 |
 | `calendar.dart`    | Gets information about the calendar from a WinRT API      |
 | `console.dart`     | Shows usage of console APIs                               |
 | `credentials.dart` | Adds a credential to the store and retrieves it           |
