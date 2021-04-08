@@ -11,6 +11,7 @@ import 'package:win32/win32.dart';
 import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
+import 'pinvokemap.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
 
@@ -35,36 +36,49 @@ class Field extends TokenObject with CustomAttributes {
   FieldAccess get fieldAccess =>
       FieldAccess.values[attributes & CorFieldAttr.fdFieldAccessMask];
 
+  /// Returns true if the field is a member of its type rather than an instance member.
   bool get isStatic =>
       attributes & CorFieldAttr.fdStatic == CorFieldAttr.fdStatic;
 
+  /// Returns true if the field cannot be changed after it is initialized.
   bool get isInitOnly =>
       attributes & CorFieldAttr.fdInitOnly == CorFieldAttr.fdInitOnly;
 
+  /// Returns true if the field value is a compile-time constant.
   bool get isLiteral =>
       attributes & CorFieldAttr.fdLiteral == CorFieldAttr.fdLiteral;
 
+  /// Returns true if the field is not serialized when its type is remoted.
   bool get isNotSerialized =>
       attributes & CorFieldAttr.fdNotSerialized == CorFieldAttr.fdNotSerialized;
 
+  /// Returns true if the field is special; its name describes how.
   bool get isSpecialName =>
       attributes & CorFieldAttr.fdSpecialName == CorFieldAttr.fdSpecialName;
 
+  /// Returns true if the field implementation is forwarded through PInvoke.
   bool get isPinvokeImpl =>
       attributes & CorFieldAttr.fdPinvokeImpl == CorFieldAttr.fdPinvokeImpl;
 
+  /// Returns true if the common language runtime metadata internal APIs should
+  /// check the encoding of the name.
   bool get isRTSpecialName =>
       attributes & CorFieldAttr.fdRTSpecialName == CorFieldAttr.fdRTSpecialName;
 
+  /// Returns true if the field contains marshaling information.
   bool get hasFieldMarshal =>
       attributes & CorFieldAttr.fdHasFieldMarshal ==
       CorFieldAttr.fdHasFieldMarshal;
 
+  /// Returns true if the field has a default value.
   bool get hasDefault =>
       attributes & CorFieldAttr.fdHasDefault == CorFieldAttr.fdHasDefault;
 
+  /// Returns true if the field has a relative virtual address.
   bool get hasFieldRVA =>
       attributes & CorFieldAttr.fdHasFieldRVA == CorFieldAttr.fdHasFieldRVA;
+
+  PinvokeMap get pinvokeMap => PinvokeMap.fromToken(reader, token);
 
   Field(IMetaDataImport2 reader, int token, this.name, this.value,
       this.typeIdentifier, this.fieldType, this.attributes, this.signatureBlob)

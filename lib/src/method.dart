@@ -37,21 +37,34 @@ class Method extends TokenObject with CustomAttributes {
   int relativeVirtualAddress;
   int implFlags;
 
+  /// Returns information about the method's visibility / accessibility to other
+  /// types.
   MemberAccess get memberAccess =>
       MemberAccess.values[attributes & CorMethodAttr.mdMemberAccessMask];
 
+  /// Returns true if the member is defined as part of the type rather than as a
+  /// member of an instance.
   bool get isStatic =>
       attributes & CorMethodAttr.mdStatic == CorMethodAttr.mdStatic;
 
+  /// Returns true if the method cannot be overridden.
   bool get isFinal =>
       attributes & CorMethodAttr.mdFinal == CorMethodAttr.mdFinal;
 
+  /// Returns true if the method can be overridden.
   bool get isVirtual =>
       attributes & CorMethodAttr.mdVirtual == CorMethodAttr.mdVirtual;
 
+  /// Returns true if the method hides by name and signature, rather than just
+  /// by name.
   bool get isHideBySig =>
       attributes & CorMethodAttr.mdHideBySig == CorMethodAttr.mdHideBySig;
 
+  /// Returns information about the vtable layout of this method.
+  ///
+  /// If `ReuseSlot`, the slot used for this method in the virtual table be
+  /// reused. This is the default. If `NewSlot`, the method always gets a new
+  /// slot in the virtual table.
   VtableLayout get vTableLayout {
     switch (attributes & CorMethodAttr.mdVtableLayoutMask) {
       case CorMethodAttr.mdReuseSlot:
@@ -63,23 +76,31 @@ class Method extends TokenObject with CustomAttributes {
     }
   }
 
+  /// Returns true if the method can be overridden by the same types to which it
+  /// is visible.
   bool get isCheckAccessOnOverride =>
       attributes & CorMethodAttr.mdCheckAccessOnOverride ==
       CorMethodAttr.mdCheckAccessOnOverride;
 
+  /// Returns true if the method is not implemented.
   bool get isAbstract =>
       attributes & CorMethodAttr.mdAbstract == CorMethodAttr.mdAbstract;
 
+  /// Returns true if the method is special; its name describes how.
   bool get isSpecialName =>
       attributes & CorMethodAttr.mdSpecialName == CorMethodAttr.mdSpecialName;
 
+  /// Returns true if the method implementation is forwarded using PInvoke.
   bool get isPinvokeImpl =>
       attributes & CorMethodAttr.mdPinvokeImpl == CorMethodAttr.mdPinvokeImpl;
 
+  /// Returns true if the method is a managed method exported to unmanaged code.
   bool get isUnmanagedExport =>
       attributes & CorMethodAttr.mdUnmanagedExport ==
       CorMethodAttr.mdUnmanagedExport;
 
+  /// Returns true if the common language runtime should check the encoding of
+  /// the method name.
   bool get isRTSpecialName =>
       attributes & CorMethodAttr.mdSpecialName == CorMethodAttr.mdSpecialName;
 
@@ -171,6 +192,7 @@ class Method extends TokenObject with CustomAttributes {
     }
   }
 
+  /// Returns flags relating to the method calling convention.
   String get callingConvention {
     final retVal = StringBuffer();
     final cc = signatureBlob[0];
