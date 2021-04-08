@@ -152,6 +152,7 @@ export 'src/com/IAppxManifestProperties.dart';
 export 'src/com/IAppxPackageReader.dart';
 export 'src/com/IApplicationActivationManager.dart';
 export 'src/com/IAsyncInfo.dart';
+export 'src/com/IAsyncAction.dart';
 export 'src/com/IBindCtx.dart';
 export 'src/com/ICalendar.dart';
 export 'src/com/IClassFactory.dart';

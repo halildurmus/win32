@@ -15,7 +15,9 @@ import 'package:winmd/winmd.dart';
 
 final typesToGenerate = [
   'Windows.Foundation.IPropertyValue',
+  'Windows.Foundation.IAsyncAction',
   'Windows.Foundation.IAsyncInfo',
+  // 'Windows.Foundation.IAsyncOperation`1',
   'Windows.Foundation.IClosable',
   'Windows.Foundation.IStringable',
   'Windows.Globalization.ICalendar',
@@ -23,9 +25,8 @@ final typesToGenerate = [
 ];
 
 void main(List<String> args) {
-  final outputDirectory = (args.length == 1)
-      ? Directory(args.first)
-      : Directory('lib/src/generated');
+  final outputDirectory =
+      (args.length == 1) ? Directory(args.first) : Directory('lib/src/com');
 
   for (final type in typesToGenerate) {
     final mdTypeDef = MetadataStore.getMetadataForType(type);
