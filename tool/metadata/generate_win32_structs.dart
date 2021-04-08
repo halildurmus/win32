@@ -24,7 +24,8 @@ const structFileHeader = '''
 // -----------------------------------------------------------------------------
 // Linter exceptions
 // -----------------------------------------------------------------------------
-// ignore_for_file: camel_case_types ignore_for_file: camel_case_extensions
+// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_extensions
 //
 // Why? The linter defaults to throw a warning for types not named as camel
 // case. We deliberately break this convention to match the Win32 underlying
@@ -76,7 +77,7 @@ int generateStructs(Win32API win32) {
 
   for (final struct in win32.structs.keys) {
     final win32struct = win32.structs[struct]!;
-    final typedef = scope[win32struct.namespace]!;
+    final typedef = scope.findTypeDef(win32struct.namespace)!;
 
     writer.writeStringSync(wrapCommentText(win32struct.comment));
 
