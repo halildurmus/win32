@@ -8,13 +8,13 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import '_base.dart';
+import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 
 /// A custom (named) attribute.
 class CustomAttribute extends TokenObject {
   final int modifiedObjectToken;
-  final int tokenType;
+  final int attributeType;
   final Uint8List signatureBlob;
 
   // String get name {
@@ -45,7 +45,7 @@ class CustomAttribute extends TokenObject {
   // }
 
   CustomAttribute(IMetaDataImport2 reader, int token, this.modifiedObjectToken,
-      this.tokenType, this.signatureBlob)
+      this.attributeType, this.signatureBlob)
       : super(reader, token);
 
   factory CustomAttribute.fromToken(IMetaDataImport2 reader, int token) {

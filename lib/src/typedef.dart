@@ -7,7 +7,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import '_base.dart';
+import 'base.dart';
 import 'classlayout.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
@@ -16,6 +16,7 @@ import 'metadatastore.dart';
 import 'method.dart';
 import 'property.dart';
 import 'systemtokens.dart';
+import 'typeidentifier.dart';
 import 'utils.dart';
 
 enum TypeVisibility {
@@ -38,6 +39,7 @@ class TypeDef extends TokenObject with CustomAttributes {
   final String typeName;
   final int attributes;
   final int baseTypeToken;
+  final TypeIdentifier? typeSpec;
 
   TypeVisibility get typeVisibility =>
       TypeVisibility.values[attributes & CorTypeAttr.tdVisibilityMask];
@@ -130,7 +132,8 @@ class TypeDef extends TokenObject with CustomAttributes {
       [int token = 0,
       this.typeName = '',
       this.attributes = 0,
-      this.baseTypeToken = 0])
+      this.baseTypeToken = 0,
+      this.typeSpec])
       : super(reader, token);
 
   /// Instantiate a typedef from a token.
@@ -145,9 +148,11 @@ class TypeDef extends TokenObject with CustomAttributes {
     if (tokenIsTypeDef(token)) {
       return TypeDef.fromTypeDefToken(reader, token);
     }
+    if (tokenIsTypeSpec(token)) {
+      return TypeDef.fromTypeSpecToken(reader, token);
+    }
 
-    print('Unrecognized token $token');
-    return TypeDef(reader);
+    throw WinmdException('Unrecognized token ${token.toHexString(32)}');
   }
 
   /// Instantiate a typedef from a TypeDef token.
@@ -191,8 +196,6 @@ class TypeDef extends TokenObject with CustomAttributes {
 
       if (SUCCEEDED(hr)) {
         final typeName = szName.toDartString();
-
-        // TODO: Can we shortcut something by using the resolution scope token?
         try {
           final newScope = MetadataStore.getScopeForType(typeName);
           return newScope.findTypeDef(typeName)!;
@@ -225,6 +228,32 @@ class TypeDef extends TokenObject with CustomAttributes {
     }
   }
 
+  /// Instantiate a typedef from a TypeSpec token.
+  factory TypeDef.fromTypeSpecToken(
+      IMetaDataImport2 reader, int typeSpecToken) {
+    final ppvSig = calloc<Pointer<Uint8>>();
+    final pcbSig = calloc<Uint32>();
+
+    try {
+      final hr =
+          reader.GetTypeSpecFromToken(typeSpecToken, ppvSig.cast(), pcbSig);
+      final signature = ppvSig.value.asTypedList(pcbSig.value);
+      final typeTuple = parseTypeFromSignature(signature, reader);
+      // print(
+      //     '${typeSpecToken.toHexString(32)}: ${signature.map((m) => m.toHexString(8))}');
+
+      if (SUCCEEDED(hr)) {
+        return TypeDef(
+            reader, typeSpecToken, '', 0, 0, typeTuple.typeIdentifier);
+      } else {
+        throw WindowsException(hr);
+      }
+    } finally {
+      calloc.free(ppvSig);
+      calloc.free(pcbSig);
+    }
+  }
+
   /// Converts an individual interface into a type.
   TypeDef processInterfaceToken(int token) {
     final pClass = calloc<Uint32>();
@@ -233,14 +262,11 @@ class TypeDef extends TokenObject with CustomAttributes {
     try {
       final hr = reader.GetInterfaceImplProps(token, pClass, ptkIface);
       if (SUCCEEDED(hr)) {
-        if (tokenIsTypeRef(ptkIface.value)) {
-          return TypeDef.fromTypeRefToken(reader, ptkIface.value);
-        } else if (tokenIsTypeDef(pClass.value)) {
-          return TypeDef.fromTypeDefToken(reader, ptkIface.value);
-        }
+        final interfaceToken = ptkIface.value;
+        return TypeDef.fromToken(reader, interfaceToken);
+      } else {
+        throw WindowsException(hr);
       }
-
-      throw WindowsException(hr);
     } finally {
       calloc.free(pClass);
       calloc.free(ptkIface);

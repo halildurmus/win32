@@ -1,6 +1,7 @@
 @TestOn('windows')
 
 import 'package:test/test.dart';
+import 'package:winmd/src/pinvokemap.dart';
 import 'package:winmd/winmd.dart';
 
 /// Exhaustively test a method representation.
@@ -28,10 +29,9 @@ void main() {
 
     expect(awr.isPinvokeImpl, isTrue);
     expect(awr.pinvokeMap.moduleName, equals('USER32'));
-    expect(awr.pinvokeMap.hasAttribute(CorPinvokeMap.pmNoMangle), isTrue);
-    expect(
-        awr.pinvokeMap.hasAttribute(CorPinvokeMap.pmSupportsLastError), isTrue);
-    expect(awr.pinvokeMap.hasAttribute(CorPinvokeMap.pmCallConvWinapi), isTrue);
+    expect(awr.pinvokeMap.isNoMangle, isTrue);
+    expect(awr.pinvokeMap.supportsLastError, isTrue);
+    expect(awr.pinvokeMap.callingConvention, equals(CallingConvention.WinApi));
 
     expect(awr.returnType.typeIdentifier.name,
         equals('Windows.Win32.SystemServices.BOOL'));

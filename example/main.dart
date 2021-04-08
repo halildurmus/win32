@@ -8,7 +8,7 @@ import 'package:winmd/winmd.dart';
 
 void main() {
   // A Windows Runtime interface
-  const type = 'Windows.Foundation.IAsyncInfo';
+  const type = 'Windows.Media.Playback.MediaPlayer';
 
   // Load the metadata for this interface
   final typeDef = MetadataStore.getMetadataForType(type)!;
