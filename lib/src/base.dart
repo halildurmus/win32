@@ -13,6 +13,7 @@ import 'utils.dart';
 
 const MAX_STRING_SIZE = 256;
 
+/// The type of object represented by a given token.
 enum TokenType {
   Module,
   TypeRef,
@@ -42,7 +43,12 @@ enum TokenType {
   BaseType
 }
 
-// The base object for metadata objects.
+/// The base object for metadata objects.
+///
+/// All metadata objects (typedefs, parameters, fields, events, etc.) have a
+/// 32-bit token value, which is the primary key for the object in the
+/// underlying Windows metadata database. The high byte of the token describes
+/// its type.
 abstract class TokenObject {
   final IMetaDataImport2 reader;
   final int token;
@@ -72,6 +78,7 @@ abstract class TokenObject {
     }
   }
 
+  /// Returns the type of the token.
   TokenType get tokenType {
     switch (token & 0xFF000000) {
       case CorTokenType.mdtModule:

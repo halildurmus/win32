@@ -31,6 +31,7 @@ class PinvokeMap extends TokenObject {
       attributes & CorPinvokeMap.pmSupportsLastError ==
       CorPinvokeMap.pmSupportsLastError;
 
+  /// Returns details of the string marshalling convention used for this member.
   StringMarshalConvention get stringMarshalConvention {
     switch (attributes & CorPinvokeMap.pmCharSetMask) {
       case CorPinvokeMap.pmCharSetNotSpec:

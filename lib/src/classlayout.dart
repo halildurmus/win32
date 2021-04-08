@@ -13,12 +13,22 @@ class FieldOffset {
   const FieldOffset(this.fieldToken, this.offset);
 }
 
+/// Layout information for the class referenced by a specified token.
 class ClassLayout {
   final IMetaDataImport2 reader;
   final int token;
 
+  /// The pack size of the class.
+  ///
+  /// If specified, this contains one of the values 1, 2, 4, 8, or 16,
+  /// representing the packing alignment of the class. If null, no packing
+  /// alignment is specified.
   int? packingAlignment;
+
+  /// The size in bytes of the class represented.
   int? minimumSize;
+
+  /// The array of field offsets, for manually-aligned structs.
   List<FieldOffset>? fieldOffsets;
 
   ClassLayout(this.reader, this.token) {

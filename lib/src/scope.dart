@@ -75,7 +75,7 @@ class Scope {
   List<TypeDef> get delegates =>
       typeDefs.where((typeDef) => typeDef.isDelegate).toList();
 
-  /// Get an enumerated list of modules for this scope.
+  /// Get an enumerated list of modules in this scope.
   List<Module> get modules {
     if (_modules.isEmpty) {
       final phEnum = calloc<IntPtr>();
@@ -99,6 +99,7 @@ class Scope {
     return _modules;
   }
 
+  /// Get an enumerated list of all hard-coded strings in this scope.
   List<String> get userStrings {
     final strings = <String>[];
 
@@ -130,6 +131,7 @@ class Scope {
     return strings;
   }
 
+  /// Get an enumerated list of all enumerations in this scope.
   List<Enumeration> get enums {
     if (_enums.isEmpty) {
       for (final typeDef in typeDefs) {
