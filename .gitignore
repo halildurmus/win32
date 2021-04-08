@@ -20,8 +20,5 @@ build/
 # ...but keep one sample executable around
 !example/bin/hello.exe
 
-# This file is how Github maps docs to the site
-!doc/api/CNAME
-
 # This file varies from machine to machine
 .vscode/c_cpp_properties.json
