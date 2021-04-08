@@ -159,11 +159,11 @@ class TypeDef extends TokenObject
     final nRead = calloc<Uint32>();
     final tdFlags = calloc<Uint32>();
     final baseClassToken = calloc<Uint32>();
-    final typeName = calloc<Uint16>(256).cast<Utf16>();
+    final typeName = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
 
     try {
-      final hr = reader.GetTypeDefProps(
-          typeDefToken, typeName, 256, nRead, tdFlags, baseClassToken);
+      final hr = reader.GetTypeDefProps(typeDefToken, typeName, MAX_STRING_SIZE,
+          nRead, tdFlags, baseClassToken);
 
       if (SUCCEEDED(hr)) {
         return TypeDef(reader, typeDefToken, typeName.toDartString(),
@@ -186,12 +186,12 @@ class TypeDef extends TokenObject
   /// metadata file, from which the TypeDef can be found and returned.
   factory TypeDef.fromTypeRefToken(IMetaDataImport2 reader, int typeRefToken) {
     final ptkResolutionScope = calloc<Uint32>();
-    final szName = calloc<Uint16>(256).cast<Utf16>();
+    final szName = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
     final pchName = calloc<Uint32>();
 
     try {
       final hr = reader.GetTypeRefProps(
-          typeRefToken, ptkResolutionScope, szName, 256, pchName);
+          typeRefToken, ptkResolutionScope, szName, MAX_STRING_SIZE, pchName);
 
       if (SUCCEEDED(hr)) {
         final typeName = szName.toDartString();

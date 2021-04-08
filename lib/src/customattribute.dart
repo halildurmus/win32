@@ -18,7 +18,7 @@ class CustomAttribute extends TokenObject {
   final Uint8List signatureBlob;
 
   // String get name {
-  //   final szString = calloc<Uint16>(256).cast<Utf16>();
+  //   final szString = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
   //   final ptk = calloc<Uint32>();
 
   //   final pchString = calloc<Uint32>();
@@ -29,7 +29,7 @@ class CustomAttribute extends TokenObject {
   //     print('Token type: ${tokenType.toHexString(32)}');
 
   //     final hr = reader.GetMemberRefProps(
-  //         tokenType, ptk, szString, 256, pchString, ppBlob, pcbBlob);
+  //         tokenType, ptk, szString, MAX_STRING_SIZE, pchString, ppBlob, pcbBlob);
 
   //     if (SUCCEEDED(hr)) {
   //       print('success');

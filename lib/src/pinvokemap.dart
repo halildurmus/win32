@@ -96,18 +96,18 @@ class PinvokeMap extends TokenObject {
 
   factory PinvokeMap.fromToken(IMetaDataImport2 reader, int token) {
     final pdwMappingFlags = calloc<Uint32>();
-    final szImportName = calloc<Uint16>(256).cast<Utf16>();
+    final szImportName = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
     final pchImportName = calloc<Uint32>();
     final ptkImportDLL = calloc<Uint32>();
-    final szModuleName = calloc<Uint16>(256).cast<Utf16>();
+    final szModuleName = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
     final pchModuleName = calloc<Uint32>();
 
     try {
-      var hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName, 256,
-          pchImportName, ptkImportDLL);
+      var hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName,
+          MAX_STRING_SIZE, pchImportName, ptkImportDLL);
       if (SUCCEEDED(hr)) {
         hr = reader.GetModuleRefProps(
-            ptkImportDLL.value, szModuleName, 256, pchModuleName);
+            ptkImportDLL.value, szModuleName, MAX_STRING_SIZE, pchModuleName);
 
         final moduleName = SUCCEEDED(hr) ? szModuleName.toDartString() : '';
 

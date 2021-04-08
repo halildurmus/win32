@@ -32,7 +32,7 @@ class Event extends TokenObject with CustomAttributesMixin {
 
   factory Event.fromToken(IMetaDataImport2 reader, int token) {
     final ptkClass = calloc<Uint32>();
-    final szEvent = calloc<Uint16>(256).cast<Utf16>();
+    final szEvent = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
     final pchEvent = calloc<Uint32>();
     final pdwEventFlags = calloc<Uint32>();
     final ptkEventType = calloc<Uint32>();
@@ -47,7 +47,7 @@ class Event extends TokenObject with CustomAttributesMixin {
           token,
           ptkClass,
           szEvent,
-          256,
+          MAX_STRING_SIZE,
           pchEvent,
           pdwEventFlags,
           ptkEventType,

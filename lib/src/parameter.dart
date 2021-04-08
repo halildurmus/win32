@@ -48,7 +48,7 @@ class Parameter extends TokenObject with CustomAttributesMixin {
   factory Parameter.fromToken(IMetaDataImport2 reader, int token) {
     final pmd = calloc<Uint32>();
     final pulSequence = calloc<Uint32>();
-    final szName = calloc<Uint16>(256).cast<Utf16>();
+    final szName = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
     final pchName = calloc<Uint32>();
     final pdwAttr = calloc<Uint32>();
     final pdwCPlusTypeFlag = calloc<Uint32>();
@@ -56,8 +56,17 @@ class Parameter extends TokenObject with CustomAttributesMixin {
     final pcchValue = calloc<Uint32>();
 
     try {
-      final hr = reader.GetParamProps(token, pmd, pulSequence, szName, 256,
-          pchName, pdwAttr, pdwCPlusTypeFlag, ppValue.cast(), pcchValue);
+      final hr = reader.GetParamProps(
+          token,
+          pmd,
+          pulSequence,
+          szName,
+          MAX_STRING_SIZE,
+          pchName,
+          pdwAttr,
+          pdwCPlusTypeFlag,
+          ppValue.cast(),
+          pcchValue);
       if (SUCCEEDED(hr)) {
         return Parameter(
             reader,

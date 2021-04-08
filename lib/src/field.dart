@@ -88,7 +88,7 @@ class Field extends TokenObject with CustomAttributesMixin {
 
   factory Field.fromToken(IMetaDataImport2 reader, int token) {
     final ptkTypeDef = calloc<Uint32>();
-    final szField = calloc<Uint16>(256).cast<Utf16>();
+    final szField = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
     final pchField = calloc<Uint32>();
     final pdwAttr = calloc<Uint32>();
     final ppvSigBlob = calloc<Pointer<Uint8>>();
@@ -102,7 +102,7 @@ class Field extends TokenObject with CustomAttributesMixin {
           token,
           ptkTypeDef,
           szField,
-          256,
+          MAX_STRING_SIZE,
           pchField,
           pdwAttr,
           ppvSigBlob.cast(),

@@ -11,6 +11,8 @@ import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'utils.dart';
 
+const MAX_STRING_SIZE = 256;
+
 enum TokenType {
   Module,
   TypeRef,

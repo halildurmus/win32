@@ -22,12 +22,12 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
     final pdwParamFlags = calloc<Uint32>();
     final ptOwner = calloc<Uint32>();
     final reserved = calloc<Uint32>();
-    final wzName = calloc<Uint16>(256).cast<Utf16>();
+    final wzName = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
     final pchName = calloc<Uint32>();
 
     try {
       final hr = reader.GetGenericParamProps(token, pulParamSeq, pdwParamFlags,
-          ptOwner, reserved, wzName, 256, pchName);
+          ptOwner, reserved, wzName, MAX_STRING_SIZE, pchName);
 
       if (SUCCEEDED(hr)) {
         return GenericParam(reader, token, wzName.toDartString(),

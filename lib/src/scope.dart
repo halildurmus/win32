@@ -7,6 +7,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'enumeration.dart';
 import 'module.dart';
@@ -25,10 +26,11 @@ class Scope {
   Scope(this.reader);
 
   String get name {
-    final szName = calloc<Uint16>(256).cast<Utf16>();
+    final szName = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
     final pchName = calloc<Uint32>();
     try {
-      final hr = reader.GetScopeProps(szName, 256, pchName, nullptr);
+      final hr =
+          reader.GetScopeProps(szName, MAX_STRING_SIZE, pchName, nullptr);
       if (SUCCEEDED(hr)) {
         return szName.toDartString();
       } else {
@@ -103,14 +105,14 @@ class Scope {
     final phEnum = calloc<IntPtr>();
     final rgStrings = calloc<Uint32>();
     final pcStrings = calloc<Uint32>();
-    final szString = calloc<Uint16>(256).cast<Utf16>();
+    final szString = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
     final pchString = calloc<Uint32>();
 
     try {
       var hr = reader.EnumUserStrings(phEnum, rgStrings, 1, pcStrings);
       while (hr == S_OK) {
         final token = rgStrings.value;
-        hr = reader.GetUserString(token, szString, 256, pchString);
+        hr = reader.GetUserString(token, szString, MAX_STRING_SIZE, pchString);
         if (hr == S_OK) {
           strings.add(szString.toDartString());
         }

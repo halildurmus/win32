@@ -121,12 +121,12 @@ class Method extends TokenObject
 
   Module get module {
     final pdwMappingFlags = calloc<Uint32>();
-    final szImportName = calloc<Uint16>(256).cast<Utf16>();
+    final szImportName = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
     final pchImportName = calloc<Uint32>();
     final ptkImportDLL = calloc<Uint32>();
     try {
-      final hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName, 256,
-          pchImportName, ptkImportDLL);
+      final hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName,
+          MAX_STRING_SIZE, pchImportName, ptkImportDLL);
       if (SUCCEEDED(hr)) {
         return Module.fromToken(reader, ptkImportDLL.value);
       } else {
@@ -151,7 +151,7 @@ class Method extends TokenObject
 
   factory Method.fromToken(IMetaDataImport2 reader, int token) {
     final pClass = calloc<Uint32>();
-    final szMethod = calloc<Uint16>(256).cast<Utf16>();
+    final szMethod = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
     final pchMethod = calloc<Uint32>();
     final pdwAttr = calloc<Uint32>();
     final ppvSigBlob = calloc<IntPtr>();
@@ -160,8 +160,17 @@ class Method extends TokenObject
     final pdwImplFlags = calloc<Uint32>();
 
     try {
-      final hr = reader.GetMethodProps(token, pClass, szMethod, 256, pchMethod,
-          pdwAttr, ppvSigBlob.cast(), pcbSigBlob, pulCodeRVA, pdwImplFlags);
+      final hr = reader.GetMethodProps(
+          token,
+          pClass,
+          szMethod,
+          MAX_STRING_SIZE,
+          pchMethod,
+          pdwAttr,
+          ppvSigBlob.cast(),
+          pcbSigBlob,
+          pulCodeRVA,
+          pdwImplFlags);
 
       if (SUCCEEDED(hr)) {
         final signature = Pointer<Uint8>.fromAddress(ppvSigBlob.value)

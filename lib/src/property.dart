@@ -53,7 +53,7 @@ class Property extends TokenObject with CustomAttributesMixin {
 
   factory Property.fromToken(IMetaDataImport2 reader, int token) {
     final ptkTypeDef = calloc<Uint32>();
-    final szProperty = calloc<Uint16>(256).cast<Utf16>();
+    final szProperty = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
     final pchProperty = calloc<Uint32>();
     final pdwPropFlags = calloc<Uint32>();
     // TODO: Incorrectly declared? Should be P<P<U1>>?
@@ -73,7 +73,7 @@ class Property extends TokenObject with CustomAttributesMixin {
           token,
           ptkTypeDef,
           szProperty,
-          256,
+          MAX_STRING_SIZE,
           pchProperty,
           pdwPropFlags,
           ppvSigBlob.cast(),

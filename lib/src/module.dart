@@ -17,11 +17,12 @@ class Module extends TokenObject with CustomAttributesMixin {
   Module(IMetaDataImport2 reader, int token, this.name) : super(reader, token);
 
   factory Module.fromToken(IMetaDataImport2 reader, int token) {
-    final szName = calloc<Uint16>(256).cast<Utf16>();
+    final szName = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
     final pchName = calloc<Uint32>();
 
     try {
-      final hr = reader.GetModuleRefProps(token, szName, 256, pchName);
+      final hr =
+          reader.GetModuleRefProps(token, szName, MAX_STRING_SIZE, pchName);
 
       if (SUCCEEDED(hr)) {
         return Module(reader, token, szName.toDartString());
