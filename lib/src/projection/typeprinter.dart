@@ -57,7 +57,8 @@ import '../winrt/winrt_constants.dart';
           "const CLSID_${type.className} = '${type.clsid.toString()}';");
     }
     buffer.writeln('/// @nodoc');
-    buffer.writeln("const IID_${type.shortName} = '${type.iid.toString()}';\n");
+    buffer.writeln(
+        "const IID_${type.shortName.split('`').first} = '${type.iid.toString()}';\n");
     return buffer.toString();
   }
 
@@ -131,7 +132,7 @@ import '../winrt/winrt_constants.dart';
 ''');
     if (type.inherits.isNotEmpty) {
       buffer.write('''
-   ${type.shortName}(Pointer<COMObject> ptr) : super(ptr);\n
+   ${type.shortNameWithGenericSpecifier}(Pointer<COMObject> ptr) : super(ptr);\n
 ''');
     } else {
       buffer.write('''
