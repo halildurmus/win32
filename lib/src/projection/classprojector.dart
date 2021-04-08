@@ -22,6 +22,15 @@ class ClassProjector {
       ..inherits = typeDef.parent!.typeName
       ..vtableStart = 6; // For now, hardcode to IInspectable subclass
 
+    if (typeDef.genericParams.isNotEmpty) {
+      final genericParams =
+          typeDef.genericParams.map<String>((p) => p.paramName).join(', ');
+      interface.shortNameWithGenericSpecifier =
+          '${interface.shortName}<$genericParams>';
+    } else {
+      interface.shortNameWithGenericSpecifier = interface.shortName;
+    }
+
     for (final mdMethod in typeDef.methods) {
       final methodProjection = MethodProjection();
       final overload = mdMethod

@@ -120,9 +120,10 @@ import '../winrt/winrt_constants.dart';
       buffer.writeln('/// {@category com}');
     }
     if (type.inherits == '') {
-      buffer.writeln('class ${type.shortName} {');
+      buffer.writeln('class ${type.shortNameWithGenericSpecifier} {');
     } else {
-      buffer.writeln('class ${type.shortName} extends ${type.inherits} {');
+      buffer.writeln(
+          'class ${type.shortNameWithGenericSpecifier} extends ${type.inherits} {');
     }
 
     buffer.writeln('''

@@ -37,6 +37,7 @@ class ClassProjection {
   late SourceType sourceType;
   String? iid;
   late String name;
+  late String shortNameWithGenericSpecifier;
   bool generateClass = false;
   late String clsid;
   late String className;
