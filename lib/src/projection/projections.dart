@@ -46,7 +46,7 @@ class ClassProjection {
 
   final methods = <MethodProjection>[];
 
-  String get shortName => name.split('.').last;
+  String get shortName => name.split('.').last.split('`').first;
 
   @override
   String toString() =>

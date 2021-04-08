@@ -26,7 +26,7 @@ class ClassProjector {
       final genericParams =
           typeDef.genericParams.map<String>((p) => p.paramName).join(', ');
       interface.shortNameWithGenericSpecifier =
-          '${interface.shortName.split('`').first}<$genericParams>';
+          '${interface.shortName}<$genericParams>';
     } else {
       interface.shortNameWithGenericSpecifier = interface.shortName;
     }
