@@ -9,8 +9,9 @@ import 'package:win32/win32.dart';
 
 import 'base.dart';
 import 'com/IMetaDataImport2.dart';
+import 'mixins/customattributes_mixin.dart';
 
-class Module extends TokenObject with CustomAttributes {
+class Module extends TokenObject with CustomAttributesMixin {
   final String name;
 
   Module(IMetaDataImport2 reader, int token, this.name) : super(reader, token);

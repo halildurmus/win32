@@ -557,4 +557,19 @@ void main() {
     expect(valueParam.typeIdentifier.typeArgs.first.corType,
         equals(CorElementType.ELEMENT_TYPE_U1));
   });
+
+  test('Can find generic types', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Foundation.IAsyncOperation`1');
+
+    expect(winTypeDef, isNotNull);
+  });
+
+  test('Can find type information for generic types', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Foundation.IAsyncOperation`1')!;
+
+    expect(winTypeDef.genericParams.length, equals(1));
+    expect(winTypeDef.genericParams.first.paramName, endsWith('TResult'));
+  });
 }

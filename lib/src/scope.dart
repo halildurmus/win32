@@ -103,11 +103,17 @@ class Scope {
     final phEnum = calloc<IntPtr>();
     final rgStrings = calloc<Uint32>();
     final pcStrings = calloc<Uint32>();
+    final szString = calloc<Uint16>(256).cast<Utf16>();
+    final pchString = calloc<Uint32>();
+
     try {
       var hr = reader.EnumUserStrings(phEnum, rgStrings, 1, pcStrings);
       while (hr == S_OK) {
         final token = rgStrings.value;
-        strings.add(token.toHexString(16));
+        hr = reader.GetUserString(token, szString, 256, pchString);
+        if (hr == S_OK) {
+          strings.add(szString.toDartString());
+        }
         hr = reader.EnumUserStrings(phEnum, rgStrings, 1, pcStrings);
       }
     } finally {
@@ -115,6 +121,8 @@ class Scope {
       calloc.free(phEnum);
       calloc.free(rgStrings);
       calloc.free(pcStrings);
+      calloc.free(szString);
+      calloc.free(pchString);
     }
 
     return strings;

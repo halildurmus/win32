@@ -11,10 +11,11 @@ import 'package:win32/win32.dart';
 import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
+import 'mixins/customattributes_mixin.dart';
 import 'typeidentifier.dart';
 
 /// A parameter or return type.
-class Parameter extends TokenObject with CustomAttributes {
+class Parameter extends TokenObject with CustomAttributesMixin {
   final int sequence;
   final int attributes;
   TypeIdentifier typeIdentifier;

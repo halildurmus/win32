@@ -11,6 +11,7 @@ import 'package:win32/win32.dart';
 import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
+import 'mixins/customattributes_mixin.dart';
 import 'pinvokemap.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
@@ -25,7 +26,7 @@ enum FieldAccess {
   Public
 }
 
-class Field extends TokenObject with CustomAttributes {
+class Field extends TokenObject with CustomAttributesMixin {
   final String name;
   final int value;
   final TypeIdentifier typeIdentifier;

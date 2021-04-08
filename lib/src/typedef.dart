@@ -11,9 +11,12 @@ import 'base.dart';
 import 'classlayout.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
+import 'event.dart';
 import 'field.dart';
 import 'metadatastore.dart';
 import 'method.dart';
+import 'mixins/customattributes_mixin.dart';
+import 'mixins/genericparams_mixin.dart';
 import 'property.dart';
 import 'systemtokens.dart';
 import 'typeidentifier.dart';
@@ -35,7 +38,8 @@ enum TypeLayout { Auto, Sequential, Explicit }
 enum StringFormat { Ansi, Unicode, Auto, Custom }
 
 /// Represents a TypeDef in the Windows Metadata file
-class TypeDef extends TokenObject with CustomAttributes {
+class TypeDef extends TokenObject
+    with CustomAttributesMixin, GenericParamsMixin {
   final String typeName;
   final int attributes;
   final int baseTypeToken;
@@ -366,6 +370,31 @@ class TypeDef extends TokenObject with CustomAttributes {
       calloc.free(phEnum);
       calloc.free(rgProperties);
       calloc.free(pcProperties);
+    }
+  }
+
+  /// Enumerate all events contained within this type.
+  List<Event> get events {
+    final events = <Event>[];
+
+    final phEnum = calloc<IntPtr>();
+    final rgEvents = calloc<Uint32>();
+    final pcEvents = calloc<Uint32>();
+
+    try {
+      var hr = reader.EnumEvents(phEnum, token, rgEvents, 1, pcEvents);
+      while (hr == S_OK) {
+        final token = rgEvents.value;
+
+        events.add(Event.fromToken(reader, token));
+        hr = reader.EnumEvents(phEnum, token, rgEvents, 1, pcEvents);
+      }
+      return events;
+    } finally {
+      reader.CloseEnum(phEnum.value);
+      calloc.free(phEnum);
+      calloc.free(rgEvents);
+      calloc.free(pcEvents);
     }
   }
 

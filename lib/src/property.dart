@@ -11,10 +11,11 @@ import 'package:win32/win32.dart';
 import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
+import 'mixins/customattributes_mixin.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
 
-class Property extends TokenObject with CustomAttributes {
+class Property extends TokenObject with CustomAttributesMixin {
   final String name;
   final CorElementType corType;
   final int attributes;

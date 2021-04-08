@@ -12,6 +12,8 @@ import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'methodimpls.dart';
+import 'mixins/customattributes_mixin.dart';
+import 'mixins/genericparams_mixin.dart';
 import 'module.dart';
 import 'parameter.dart';
 import 'pinvokemap.dart';
@@ -30,7 +32,8 @@ enum MemberAccess {
 
 enum VtableLayout { ReuseSlot, NewSlot }
 
-class Method extends TokenObject with CustomAttributes {
+class Method extends TokenObject
+    with CustomAttributesMixin, GenericParamsMixin {
   String methodName;
   int attributes;
   Uint8List signatureBlob;
