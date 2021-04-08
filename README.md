@@ -11,7 +11,7 @@ possible to load them and build Dart FFI interop libraries from the results.
 
 ## Usage (Windows Runtime)
 
-A simple example: loading the IAsyncInfo interface and emitting the Dart
+A simple example: loading the `IAsyncInfo` interface and emitting the Dart
 equivalent file.
 
 ```dart
@@ -28,7 +28,7 @@ void main() {
   final projection = ClassProjector(typeDef).projection;
 
   // Create a Dart projection
-  final dartClass = TypePrinter.printType(projection);
+  final dartClass = TypePrinter.printProjection(projection);
 
   // Print it to the screen. Normally you'd save it to a file and format it.
   print(dartClass);
@@ -48,7 +48,7 @@ void main() {
   final scope = MetadataStore.getWin32Scope();
 
   // Find a namesapce
-  final namespace = scope['Windows.Win32.WindowsAndMessaging.Apis']!;
+  final namespace = scope.findTypeDef('Windows.Win32.WindowsAndMessaging.Apis')!;
 
   // Sort the functions alphabetically
   final sortedMethods = namespace.methods
