@@ -15,10 +15,13 @@ void main() {
   });
 
   test('Scope modules contain expected user strings', () {
-    final scope =
-        MetadataStore.getScopeForType('Windows.Globalization.Calendar');
-    expect(scope.userStrings.length, equals(1));
-    expect(scope.userStrings.first, equals('0x0001'));
+    final winRTScope =
+        MetadataStore.getScopeForType('Windows.Foundation.IPropertyValue');
+    expect(winRTScope.userStrings.length, equals(1));
+    expect(winRTScope.userStrings.first, equals(' '));
+
+    final win32Scope = MetadataStore.getWin32Scope();
+    expect(win32Scope.userStrings.length, equals(0));
   });
 
   test('Appropriate response to failure to find scope', () {
