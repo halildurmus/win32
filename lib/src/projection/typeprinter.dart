@@ -222,7 +222,7 @@ import '../winrt/winrt_constants.dart';
     final buffer = StringBuffer();
 
     buffer.writeln('''
-  set ${method.name.substring(4)}(${method.returnTypeDart} value) {
+  set ${method.name.substring(4)}(${method.parameters.first.dartType} value) {
     final hr = Pointer<NativeFunction<_${method.name}_Native>>.fromAddress(
             ptr.ref.vtable.elementAt($vtableIndex).value)
         .asFunction<_${method.name}_Dart>()(ptr.ref.lpVtbl, value);

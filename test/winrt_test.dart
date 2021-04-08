@@ -290,6 +290,39 @@ void main() {
     expect(typeProjection.nativeType, equals('Pointer'));
   });
 
+  test('Property getter returns appropriate results for delegate.', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Foundation.IAsyncAction')!;
+
+    final method = winTypeDef.findMethod('get_Completed')!;
+    expect(method.isGetProperty, isTrue);
+    expect(method.returnType.name, equals('handler'));
+    expect(method.returnType.typeIdentifier.name,
+        endsWith('AsyncActionCompletedHandler'));
+  });
+
+  test('Property setter returns appropriate results for delegate.', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Foundation.IAsyncAction')!;
+
+    final method = winTypeDef.findMethod('put_Completed')!;
+    expect(method.isSetProperty, isTrue);
+    expect(method.parameters.first.name, equals('handler'));
+    expect(method.parameters.first.typeIdentifier.name,
+        endsWith('AsyncActionCompletedHandler'));
+  });
+
+  test('Property setter projects appropriate results for delegate.', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Foundation.IAsyncAction')!;
+
+    final method = winTypeDef.findMethod('put_Completed')!;
+    final typeProjection =
+        TypeProjector(method.parameters.first.typeIdentifier);
+    expect(typeProjection.dartType, equals('Pointer'));
+    expect(typeProjection.nativeType, equals('Pointer'));
+  });
+
   test('String parameters are accurately represented', () {
     final winTypeDef =
         MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
