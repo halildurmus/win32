@@ -33,6 +33,7 @@ class Field extends TokenObject with CustomAttributes {
   final int attributes;
   final Uint8List signatureBlob;
 
+  /// Returns the visibility of the field (public, private, etc.)
   FieldAccess get fieldAccess =>
       FieldAccess.values[attributes & CorFieldAttr.fdFieldAccessMask];
 

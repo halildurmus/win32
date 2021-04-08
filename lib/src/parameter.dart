@@ -21,16 +21,21 @@ class Parameter extends TokenObject with CustomAttributes {
   String name;
   final Uint8List signatureBlob;
 
+  /// Returns true if the parameter is passed into the method call.
   bool get isInParam => attributes & CorParamAttr.pdIn == CorParamAttr.pdIn;
 
+  /// Returns true if the parameter is passed from the method return.
   bool get isOutParam => attributes & CorParamAttr.pdOut == CorParamAttr.pdOut;
 
+  /// Returns true if the parameter is optional.
   bool get isOptional =>
       attributes & CorParamAttr.pdOptional == CorParamAttr.pdOptional;
 
+  /// Returns true if the parameter has a default value.
   bool get hasDefault =>
       attributes & CorParamAttr.pdHasDefault == CorParamAttr.pdHasDefault;
 
+  /// Returns true if the parameter has marshaling information.
   bool get hasFieldMarshal =>
       attributes & CorParamAttr.pdHasFieldMarshal ==
       CorParamAttr.pdHasFieldMarshal;

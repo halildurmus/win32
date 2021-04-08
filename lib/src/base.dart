@@ -49,10 +49,10 @@ abstract class TokenObject {
 
   const TokenObject(this.reader, this.token);
 
-  /// Token is valid within the current metadata scope
+  /// Returns true if the token is well-formed.
   bool get isValidToken => reader.IsValidToken(token) == TRUE;
 
-  /// Token is marked as global
+  /// Returns true if the token is marked as global.
   bool get isGlobal {
     if (isValidToken) {
       final pIsGlobal = calloc<Int32>();
