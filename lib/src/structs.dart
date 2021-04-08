@@ -45,6 +45,81 @@ import 'combase.dart';
 import 'oleaut32.dart';
 import 'structs.g.dart';
 
+/// The DEVMODE data structure contains information about the
+/// initialization and environment of a printer or a display device.
+///
+/// {@category Struct}
+class DEVMODE extends Struct {
+  @Array(32)
+  external Array<Uint16> dmDeviceName;
+  @Uint16()
+  external int dmSpecVersion;
+  @Uint16()
+  external int dmDriverVersion;
+  @Uint16()
+  external int dmSize;
+  @Uint16()
+  external int dmDriverExtra;
+  @Uint32()
+  external int dmFields;
+  @Uint16()
+  external int dmOrientation;
+  @Uint16()
+  external int dmPaperSize;
+  @Uint16()
+  external int dmPaperLength;
+  @Uint16()
+  external int dmPaperWidth;
+  @Uint16()
+  external int dmScale;
+  @Uint16()
+  external int dmCopies;
+  @Uint16()
+  external int dmDefaultSource;
+  @Uint16()
+  external int dmPrintQuality;
+  @Int16()
+  external int dmColor;
+  @Int16()
+  external int dmDuplex;
+  @Int16()
+  external int dmYResolution;
+  @Int16()
+  external int dmTTOption;
+  @Int16()
+  external int dmCollate;
+  @Array(32)
+  external Array<Uint16> dmFormName;
+  @Uint16()
+  external int dmLogPixels;
+  @Uint32()
+  external int dmBitsPerPel;
+  @Uint32()
+  external int dmPelsWidth;
+  @Uint32()
+  external int dmPelsHeight;
+  @Uint32()
+  external int dmDisplayFlags;
+  @Uint32()
+  external int dmDisplayFrequency;
+  @Uint32()
+  external int dmICMMethod;
+  @Uint32()
+  external int dmICMIntent;
+  @Uint32()
+  external int dmMediaType;
+  @Uint32()
+  external int dmDitherType;
+  @Uint32()
+  external int dmReserved1;
+  @Uint32()
+  external int dmReserved2;
+  @Uint32()
+  external int dmPanningWidth;
+  @Uint32()
+  external int dmPanningHeight;
+}
+
 // typedef struct _SYSTEM_INFO {
 //   union {
 //     DWORD dwOemId;

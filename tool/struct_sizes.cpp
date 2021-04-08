@@ -61,6 +61,7 @@ void main()
     printf("  'CREDENTIAL': %zu,\n", sizeof(CREDENTIAL));
     printf("  'CREDENTIAL_ATTRIBUTE': %zu,\n", sizeof(CREDENTIAL_ATTRIBUTE));
     printf("  'DESIGNVECTOR': %zu,\n", sizeof(DESIGNVECTOR));
+    printf("  'DEVMODE': %zu,\n", sizeof(DEVMODEW));
     printf("  'DIBSECTION': %zu,\n", sizeof(DIBSECTION));
     printf("  'DISPPARAMS': %zu,\n", sizeof(DISPPARAMS));
     printf("  'DLGITEMTEMPLATE': %zu,\n", sizeof(DLGITEMTEMPLATE));
