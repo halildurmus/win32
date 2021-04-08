@@ -64,7 +64,17 @@ void main() {
     expect(methods[75].isSpecialName, isFalse);
   });
 
-  test('Find interfaces returns sane results', () {
+  test('Interface correctly identifies what it inherits', () {
+    final winTypeDef =
+        MetadataStore.getMetadataForType('Windows.Foundation.IAsyncAction')!;
+
+    final interfaces = winTypeDef.interfaces;
+    expect(interfaces.length, equals(1));
+    expect(interfaces.first.typeName, equals('Windows.Foundation.IAsyncInfo'));
+  });
+
+  test('Interface with multiple inheritance identifies all parent interfaces',
+      () {
     final winTypeDef =
         MetadataStore.getMetadataForType('Windows.UI.Xaml.Controls.Button')!;
 
