@@ -53,11 +53,6 @@ extension CamelCaseConversion on String {
       length >= 2 ? substring(0, 1).toLowerCase() + substring(1) : this;
 }
 
-bool tokenIsTypeRef(int token) => token & 0xFF000000 == CorTokenType.mdtTypeRef;
-bool tokenIsTypeDef(int token) => token & 0xFF000000 == CorTokenType.mdtTypeDef;
-bool tokenIsTypeSpec(int token) =>
-    token & 0xFF000000 == CorTokenType.mdtTypeSpec;
-
 /// Takes a typename (e.g. `Windows.Globalization.Calendar`) and returns the
 /// metadata file that contains the type.
 File metadataFileContainingType(String typeName) {

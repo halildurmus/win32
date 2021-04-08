@@ -137,22 +137,17 @@ class TypeDef extends TokenObject with CustomAttributes {
       : super(reader, token);
 
   /// Instantiate a typedef from a token.
-  ///
-  /// If the token is a TypeDef, it will be created directly; otherwise it will
-  /// be retrieved by finding the scope that it comes from and returning a
-  /// typedef from the new scope.
   factory TypeDef.fromToken(IMetaDataImport2 reader, int token) {
-    if (tokenIsTypeRef(token)) {
-      return TypeDef.fromTypeRefToken(reader, token);
+    switch (token & 0xFF000000) {
+      case CorTokenType.mdtTypeRef:
+        return TypeDef.fromTypeRefToken(reader, token);
+      case CorTokenType.mdtTypeDef:
+        return TypeDef.fromTypeDefToken(reader, token);
+      case CorTokenType.mdtTypeSpec:
+        return TypeDef.fromTypeSpecToken(reader, token);
+      default:
+        throw WinmdException('Unrecognized token ${token.toHexString(32)}');
     }
-    if (tokenIsTypeDef(token)) {
-      return TypeDef.fromTypeDefToken(reader, token);
-    }
-    if (tokenIsTypeSpec(token)) {
-      return TypeDef.fromTypeSpecToken(reader, token);
-    }
-
-    throw WinmdException('Unrecognized token ${token.toHexString(32)}');
   }
 
   /// Instantiate a typedef from a TypeDef token.

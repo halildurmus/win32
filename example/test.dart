@@ -53,9 +53,9 @@ void main() {
 
       final iface = ptkIface.value;
       print('iface token: ${iface.toHexString(32)}. '
-          'typeSpec: ${tokenIsTypeSpec(iface)}');
+          'typeSpec: ${iface & 0xFF000000 == CorTokenType.mdtTypeSpec}');
 
-      if (tokenIsTypeRef(iface)) {
+      if (iface & 0xFF000000 == CorTokenType.mdtTypeRef) {
         // Resolve interface token
         final ptkResolutionScope = calloc<Uint32>();
         final szName = calloc<Uint16>(256).cast<Utf16>();
