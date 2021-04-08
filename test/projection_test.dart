@@ -26,7 +26,8 @@ void main() {
     final scope = MetadataStore.getWin32Scope();
 
     test('ANSI string', () {
-      final typedef = scope['Windows.Win32.KeyboardAndMouseInput.Apis']!;
+      final typedef =
+          scope.findTypeDef('Windows.Win32.KeyboardAndMouseInput.Apis')!;
       final api = typedef.findMethod('GetKeyNameTextA')!;
       final type = api.parameters[1].typeIdentifier; // LPSTR
       final typeProjection = TypeProjector(type);
@@ -36,7 +37,8 @@ void main() {
     });
 
     test('Handle', () {
-      final typedef = scope['Windows.Win32.KeyboardAndMouseInput.Apis']!;
+      final typedef =
+          scope.findTypeDef('Windows.Win32.KeyboardAndMouseInput.Apis')!;
       final api = typedef.findMethod('UnregisterHotKey')!;
       final type = api.parameters.first.typeIdentifier; // HWND
       final typeProjection = TypeProjector(type);
@@ -46,7 +48,8 @@ void main() {
     });
 
     test('Pointer<T>', () {
-      final typedef = scope['Windows.Win32.KeyboardAndMouseInput.Apis']!;
+      final typedef =
+          scope.findTypeDef('Windows.Win32.KeyboardAndMouseInput.Apis')!;
       final api = typedef.findMethod('GetKeyboardState')!;
       final type = api.parameters.first.typeIdentifier; // PBYTE
       final typeProjection = TypeProjector(type);
@@ -56,7 +59,7 @@ void main() {
     });
 
     test('Pointer<Pointer<T>>', () {
-      final typedef = scope['Windows.Win32.Security.Apis']!;
+      final typedef = scope.findTypeDef('Windows.Win32.Security.Apis')!;
       final api = typedef.findMethod('CredReadW')!;
       final type = api.parameters.last.typeIdentifier; // PCREDENTIALW *
       final typeProjection = TypeProjector(type);
@@ -66,7 +69,7 @@ void main() {
     });
 
     test('Unicode string w/ double pointer', () {
-      final typedef = scope['Windows.Win32.Shell.Apis']!;
+      final typedef = scope.findTypeDef('Windows.Win32.Shell.Apis')!;
       final api = typedef.findMethod('SHGetKnownFolderPath')!;
       final type = api.parameters.last.typeIdentifier; // PWSTR *
       final typeProjection = TypeProjector(type);
@@ -76,7 +79,7 @@ void main() {
     });
 
     test('Pass COM interfaces', () {
-      final typedef = scope['Windows.Win32.Com.Apis']!;
+      final typedef = scope.findTypeDef('Windows.Win32.Com.Apis')!;
       final api = typedef.findMethod('CoSetProxyBlanket')!;
       final type = api.parameters.first.typeIdentifier; // IUnknown
       final typeProjection = TypeProjector(type);
@@ -86,7 +89,7 @@ void main() {
     });
 
     test('Pass pointers to COM interfaces', () {
-      final typedef = scope['Windows.Win32.Com.Apis']!;
+      final typedef = scope.findTypeDef('Windows.Win32.Com.Apis')!;
       final api = typedef.findMethod('CoCreateInstance')!;
       final type = api.parameters[1].typeIdentifier; // LPUNKNOWN
       final typeProjection = TypeProjector(type);
@@ -96,7 +99,7 @@ void main() {
     });
 
     test('Pass double pointers to COM interfaces', () {
-      final typedef = scope['Windows.Win32.Automation.Apis']!;
+      final typedef = scope.findTypeDef('Windows.Win32.Automation.Apis')!;
       final api = typedef.findMethod('GetActiveObject')!;
       final type = api.parameters.last.typeIdentifier; // IUnknown **
       final typeProjection = TypeProjector(type);
@@ -106,7 +109,7 @@ void main() {
     });
 
     test('OLECHAR is represented correctly', () {
-      final typedef = scope['Windows.Win32.Automation.Apis']!;
+      final typedef = scope.findTypeDef('Windows.Win32.Automation.Apis')!;
       final api = typedef.findMethod('SysAllocString')!;
       final type = api.parameters.first.typeIdentifier; // OLECHAR *
       final typeProjection = TypeProjector(type);
@@ -116,7 +119,7 @@ void main() {
     });
 
     test('Callbacks are represented correctly', () {
-      final typedef = scope['Windows.Win32.Gdi.Apis']!;
+      final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
       final api = typedef.findMethod('EnumFontFamiliesExW')!;
       final type = api.parameters[2].typeIdentifier; // FONTENUMPROCW
       final typeProjection = TypeProjector(type);
@@ -127,18 +130,43 @@ void main() {
           equals('Pointer<NativeFunction<EnumFontFamExProc>>'));
     });
 
-    test('Naked structs are represented correctly', () {
-      final typedef = scope['Windows.Win32.SystemServices.Apis']!;
-      final api = typedef.findMethod('InitializeProcThreadAttributeList')!;
-      final type = api.parameters.first.typeIdentifier; // FONTENUMPROCW
+    test('Callbacks are represented correctly 2', () {
+      final typedef = scope.findTypeDef('Windows.Win32.Debug.Apis')!;
+      final api = typedef.findMethod('SymEnumSymbolsW')!;
+      final type =
+          api.parameters[3].typeIdentifier; // PSYM_ENUMERATESYMBOLS_CALLBACKW
       final typeProjection = TypeProjector(type);
 
-      expect(typeProjection.nativeType, equals('IntPtr'));
-      expect(typeProjection.dartType, equals('int'));
+      expect(typeProjection.nativeType,
+          equals('Pointer<NativeFunction<SymEnumSymbolsProc>>'));
+      expect(typeProjection.dartType,
+          equals('Pointer<NativeFunction<SymEnumSymbolsProc>>'));
+    });
+
+    test('Pointers to structs are represented correctly', () {
+      final typedef =
+          scope.findTypeDef('Windows.Win32.WindowsAndMessaging.Apis')!;
+      final api = typedef.findMethod('ChooseFontW')!;
+      final type = api.parameters.first.typeIdentifier; // CHOOSEFONTW
+      final typeProjection = TypeProjector(type);
+
+      expect(typeProjection.nativeType, equals('Pointer<CHOOSEFONT>'));
+      expect(typeProjection.dartType, equals('Pointer<CHOOSEFONT>'));
+    });
+
+    test('Naked structs are represented correctly', () {
+      final typedef = scope.findTypeDef('Windows.Win32.SystemServices.Apis')!;
+      final api = typedef.findMethod('InitializeProcThreadAttributeList')!;
+      final type =
+          api.parameters.first.typeIdentifier; // LPPROC_THREAD_ATTRIBUTE_LIST
+      final typeProjection = TypeProjector(type);
+
+      expect(typeProjection.nativeType, equals('Pointer'));
+      expect(typeProjection.dartType, equals('Pointer'));
     });
 
     test('Enumeration params are represented correctly', () {
-      final typedef = scope['Windows.Win32.Gdi.Apis']!;
+      final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
       final api = typedef.findMethod('CreateDIBitmap')!;
       final type = api.parameters.last.typeIdentifier;
       final typeProjection = TypeProjector(type);
@@ -148,7 +176,7 @@ void main() {
     });
 
     test('Pointer<Enum> params are represented correctly', () {
-      final typedef = scope['Windows.Win32.SystemServices.Apis']!;
+      final typedef = scope.findTypeDef('Windows.Win32.SystemServices.Apis')!;
       final api = typedef.findMethod('GetNamedPipeInfo')!;
       final type = api.parameters[1].typeIdentifier;
       final typeProjection = TypeProjector(type);
@@ -158,7 +186,7 @@ void main() {
     });
 
     test('Void returns are represented correctly', () {
-      final typedef = scope['Windows.Win32.Security.Apis']!;
+      final typedef = scope.findTypeDef('Windows.Win32.Security.Apis')!;
       final api = typedef.findMethod('CredFree')!;
       final type = api.returnType.typeIdentifier;
       final typeProjection = TypeProjector(type);

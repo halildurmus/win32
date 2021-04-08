@@ -11,17 +11,82 @@ import 'package:win32/win32.dart';
 import '_base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
+import 'methodimpls.dart';
 import 'module.dart';
 import 'parameter.dart';
+import 'pinvokemap.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
 
-class Method extends AttributeObject {
+enum MemberAccess {
+  PrivateScope,
+  Private,
+  FamilyAndAssembly,
+  Assembly,
+  Family,
+  FamilyOrAssembly,
+  Public
+}
+
+enum VtableLayout { ReuseSlot, NewSlot }
+
+class Method extends TokenObject with CustomAttributes {
   String methodName;
-  int methodFlags;
+  int attributes;
   Uint8List signatureBlob;
   int relativeVirtualAddress;
   int implFlags;
+
+  MemberAccess get memberAccess =>
+      MemberAccess.values[attributes & CorMethodAttr.mdMemberAccessMask];
+
+  bool get isStatic =>
+      attributes & CorMethodAttr.mdStatic == CorMethodAttr.mdStatic;
+
+  bool get isFinal =>
+      attributes & CorMethodAttr.mdFinal == CorMethodAttr.mdFinal;
+
+  bool get isVirtual =>
+      attributes & CorMethodAttr.mdVirtual == CorMethodAttr.mdVirtual;
+
+  bool get isHideBySig =>
+      attributes & CorMethodAttr.mdHideBySig == CorMethodAttr.mdHideBySig;
+
+  VtableLayout get vTableLayout {
+    switch (attributes & CorMethodAttr.mdVtableLayoutMask) {
+      case CorMethodAttr.mdReuseSlot:
+        return VtableLayout.ReuseSlot;
+      case CorMethodAttr.mdNewSlot:
+        return VtableLayout.NewSlot;
+      default:
+        throw WinmdException('Attribute missing vtable layout information');
+    }
+  }
+
+  bool get isCheckAccessOnOverride =>
+      attributes & CorMethodAttr.mdCheckAccessOnOverride ==
+      CorMethodAttr.mdCheckAccessOnOverride;
+
+  bool get isAbstract =>
+      attributes & CorMethodAttr.mdAbstract == CorMethodAttr.mdAbstract;
+
+  bool get isSpecialName =>
+      attributes & CorMethodAttr.mdSpecialName == CorMethodAttr.mdSpecialName;
+
+  bool get isPinvokeImpl =>
+      attributes & CorMethodAttr.mdPinvokeImpl == CorMethodAttr.mdPinvokeImpl;
+
+  bool get isUnmanagedExport =>
+      attributes & CorMethodAttr.mdUnmanagedExport ==
+      CorMethodAttr.mdUnmanagedExport;
+
+  bool get isRTSpecialName =>
+      attributes & CorMethodAttr.mdSpecialName == CorMethodAttr.mdSpecialName;
+
+  PinvokeMap get pinvokeMap => PinvokeMap.fromToken(reader, token);
+
+  MethodImplementationFeatures get implFeatures =>
+      MethodImplementationFeatures(implFlags);
 
   bool get isProperty => isGetProperty | isSetProperty;
   bool isGetProperty = false;
@@ -29,16 +94,6 @@ class Method extends AttributeObject {
 
   List<Parameter> parameters = <Parameter>[];
   late Parameter returnType;
-
-  bool _testFlag(int attribute) => methodFlags & attribute == attribute;
-
-  bool get isPrivate => _testFlag(CorMethodAttr.mdPrivate);
-  bool get isPublic => _testFlag(CorMethodAttr.mdPublic);
-  bool get isStatic => _testFlag(CorMethodAttr.mdStatic);
-  bool get isFinal => _testFlag(CorMethodAttr.mdFinal);
-  bool get isVirtual => _testFlag(CorMethodAttr.mdVirtual);
-  bool get isSpecialName => _testFlag(CorMethodAttr.mdSpecialName);
-  bool get isRTSpecialName => _testFlag(CorMethodAttr.mdRTSpecialName);
 
   Module get module {
     final pdwMappingFlags = calloc<Uint32>();
@@ -61,7 +116,7 @@ class Method extends AttributeObject {
     }
   }
 
-  Method(IMetaDataImport2 reader, int token, this.methodName, this.methodFlags,
+  Method(IMetaDataImport2 reader, int token, this.methodName, this.attributes,
       this.signatureBlob, this.relativeVirtualAddress, this.implFlags)
       : super(reader, token) {
     _parseMethodType();
@@ -107,9 +162,6 @@ class Method extends AttributeObject {
   bool get hasGenericParameters => signatureBlob[0] & 0x10 == 0x10;
 
   void _parseMethodType() {
-    // Note that COM properties currently do not have special name, per:
-    // https://github.com/microsoft/win32metadata/issues/270
-    // So for now, we treat them just as methods.
     if (isSpecialName && methodName.startsWith('get_')) {
       // Property getter
       isGetProperty = true;
@@ -137,7 +189,9 @@ class Method extends AttributeObject {
   /// method is a property getter). This is documented in §II.23.2.1 and
   /// §II.23.2.5 respectively.
   void _parseSignatureBlob() {
-    if (isGetProperty) {
+    // Win32 properties are declared as such, but are represented as
+    // MethodDefSig objects
+    if (isGetProperty && signatureBlob[0] != 0x20) {
       _parsePropertySig();
     } else {
       _parseMethodDefSig();
@@ -213,25 +267,23 @@ class Method extends AttributeObject {
   }
 
   void _parseParameterNames() {
-    if (!isGetProperty) {
-      final phEnum = calloc<IntPtr>();
-      final ptkParamDef = calloc<Uint32>();
-      final pcTokens = calloc<Uint32>();
+    final phEnum = calloc<IntPtr>();
+    final ptkParamDef = calloc<Uint32>();
+    final pcTokens = calloc<Uint32>();
 
-      try {
-        var hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
-        while (hr == S_OK) {
-          final token = ptkParamDef.value;
+    try {
+      var hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
+      while (hr == S_OK) {
+        final token = ptkParamDef.value;
 
-          parameters.add(Parameter.fromToken(reader, token));
-          hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
-        }
-      } finally {
-        reader.CloseEnum(phEnum.value);
-        calloc.free(phEnum);
-        calloc.free(ptkParamDef);
-        calloc.free(pcTokens);
+        parameters.add(Parameter.fromToken(reader, token));
+        hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
       }
+    } finally {
+      reader.CloseEnum(phEnum.value);
+      calloc.free(phEnum);
+      calloc.free(ptkParamDef);
+      calloc.free(pcTokens);
     }
   }
 
@@ -240,7 +292,7 @@ class Method extends AttributeObject {
     const nativeTypeInfoToken = 0x0A000004;
 
     for (final param in parameters) {
-      for (final attr in param.attributes) {
+      for (final attr in param.customAttributes) {
         if (attr.tokenType == nativeTypeInfoToken) {
           if (attr.signatureBlob[2] == 0x14) // ASCII
           {

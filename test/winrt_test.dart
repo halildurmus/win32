@@ -30,7 +30,7 @@ void main() {
     final mdScope =
         MetadataStore.getScopeForType('Windows.Globalization.ICalendarFactory');
 
-    final type = mdScope['Windows.Globalization.Calendar']!;
+    final type = mdScope.findTypeDef('Windows.Globalization.Calendar')!;
 
     // The number token ID may change from build to build, but the highest
     // order byte should always be 0x02
@@ -41,7 +41,7 @@ void main() {
     final mdScope =
         MetadataStore.getScopeForType('Windows.Foundation.IPropertyValue');
 
-    final winTypeDef = mdScope['Windows.Foundation.IAsyncInfo']!;
+    final winTypeDef = mdScope.findTypeDef('Windows.Foundation.IAsyncInfo')!;
     final methods = winTypeDef.methods;
 
     expect(methods[0].methodName, equals('get_Id'));
@@ -57,13 +57,11 @@ void main() {
     final methods = winTypeDef.methods;
 
     expect(methods[75].methodName, equals('HourAsPaddedString'));
-    expect(methods[75].isPublic, isTrue);
-    expect(methods[75].isPrivate, isFalse);
+    expect(methods[75].memberAccess, equals(MemberAccess.Public));
     expect(methods[75].isStatic, isFalse);
     expect(methods[75].isFinal, isTrue);
     expect(methods[75].isVirtual, isTrue);
     expect(methods[75].isSpecialName, isFalse);
-    expect(methods[75].isRTSpecialName, isFalse);
   });
 
   test('Find interfaces returns sane results', () {

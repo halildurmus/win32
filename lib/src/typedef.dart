@@ -8,27 +8,112 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import '_base.dart';
+import 'classlayout.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'field.dart';
 import 'metadatastore.dart';
 import 'method.dart';
+import 'property.dart';
+import 'systemtokens.dart';
 import 'utils.dart';
 
+enum TypeVisibility {
+  NotPublic,
+  Public,
+  NestedPublic,
+  NestedPrivate,
+  NestedFamily,
+  NestedAssembly,
+  NestedFamilyAndAssembly,
+  NestedFamilyOrAssembly
+}
+
+enum TypeLayout { Auto, Sequential, Explicit }
+
+enum StringFormat { Ansi, Unicode, Auto, Custom }
+
 /// Represents a TypeDef in the Windows Metadata file
-class TypeDef extends AttributeObject {
+class TypeDef extends TokenObject with CustomAttributes {
   final String typeName;
-  final int flags;
+  final int attributes;
   final int baseTypeToken;
+
+  TypeVisibility get typeVisibility =>
+      TypeVisibility.values[attributes & CorTypeAttr.tdVisibilityMask];
+
+  TypeLayout get typeLayout {
+    switch (attributes & CorTypeAttr.tdLayoutMask) {
+      case CorTypeAttr.tdAutoLayout:
+        return TypeLayout.Auto;
+      case CorTypeAttr.tdSequentialLayout:
+        return TypeLayout.Sequential;
+      case CorTypeAttr.tdExplicitLayout:
+        return TypeLayout.Explicit;
+      default:
+        throw WinmdException('Attribute missing type layout information');
+    }
+  }
 
   /// Is the type a class?
   bool get isClass =>
-      (flags & CorTypeAttr.tdClass == CorTypeAttr.tdClass) &&
-      (flags & CorTypeAttr.tdInterface != CorTypeAttr.tdInterface);
+      attributes & CorTypeAttr.tdClassSemanticsMask == CorTypeAttr.tdClass;
 
   /// Is the type an interface?
   bool get isInterface =>
-      flags & CorTypeAttr.tdInterface == CorTypeAttr.tdInterface;
+      attributes & CorTypeAttr.tdClassSemanticsMask == CorTypeAttr.tdInterface;
+
+  bool get isAbstract =>
+      attributes & CorTypeAttr.tdAbstract == CorTypeAttr.tdAbstract;
+
+  bool get isSealed =>
+      attributes & CorTypeAttr.tdSealed == CorTypeAttr.tdSealed;
+
+  bool get isSpecialName =>
+      attributes & CorTypeAttr.tdSpecialName == CorTypeAttr.tdSpecialName;
+
+  bool get isImported =>
+      attributes & CorTypeAttr.tdImport == CorTypeAttr.tdImport;
+
+  bool get isSerializable =>
+      attributes & CorTypeAttr.tdSerializable == CorTypeAttr.tdSerializable;
+
+  bool get isWindowsRuntime =>
+      attributes & CorTypeAttr.tdWindowsRuntime == CorTypeAttr.tdWindowsRuntime;
+
+  bool get isRTSpecialName =>
+      attributes & CorTypeAttr.tdRTSpecialName == CorTypeAttr.tdRTSpecialName;
+
+  StringFormat get stringFormat {
+    switch (attributes & CorTypeAttr.tdStringFormatMask) {
+      case CorTypeAttr.tdAnsiClass:
+        return StringFormat.Ansi;
+      case CorTypeAttr.tdUnicodeClass:
+        return StringFormat.Unicode;
+      case CorTypeAttr.tdAutoClass:
+        return StringFormat.Auto;
+      case CorTypeAttr.tdCustomFormatClass:
+        return StringFormat.Custom;
+      default:
+        throw WinmdException('Attribute missing string format information');
+    }
+  }
+
+  bool get isBeforeFieldInit =>
+      attributes & CorTypeAttr.tdBeforeFieldInit ==
+      CorTypeAttr.tdBeforeFieldInit;
+
+  bool get isForwarder =>
+      attributes & CorTypeAttr.tdForwarder == CorTypeAttr.tdForwarder;
+
+  /// Is the type a delegate?
+  bool get isDelegate => parent?.typeName == 'System.MulticastDelegate';
+
+  /// Retrieve class layout information.
+  ///
+  /// This includes the packing alignment, the minimum class size, and the field
+  /// layout (e.g. for sparsely or overlapping structs).
+  ClassLayout get classLayout => ClassLayout(reader, token);
 
   /// Is the type a non-Windows Runtime type, such as System.Object or
   /// IInspectable?
@@ -44,7 +129,7 @@ class TypeDef extends AttributeObject {
   const TypeDef(IMetaDataImport2 reader,
       [int token = 0,
       this.typeName = '',
-      this.flags = 0,
+      this.attributes = 0,
       this.baseTypeToken = 0])
       : super(reader, token);
 
@@ -56,12 +141,13 @@ class TypeDef extends AttributeObject {
   factory TypeDef.fromToken(IMetaDataImport2 reader, int token) {
     if (tokenIsTypeRef(token)) {
       return TypeDef.fromTypeRefToken(reader, token);
-    } else if (tokenIsTypeDef(token)) {
-      return TypeDef.fromTypeDefToken(reader, token);
-    } else {
-      print('Unrecognized token $token');
-      return TypeDef(reader);
     }
+    if (tokenIsTypeDef(token)) {
+      return TypeDef.fromTypeDefToken(reader, token);
+    }
+
+    print('Unrecognized token $token');
+    return TypeDef(reader);
   }
 
   /// Instantiate a typedef from a TypeDef token.
@@ -107,7 +193,7 @@ class TypeDef extends AttributeObject {
         final typeName = szName.toDartString();
         try {
           final newScope = MetadataStore.getScopeForType(typeName);
-          return newScope[typeName]!;
+          return newScope.findTypeDef(typeName)!;
         } catch (exception) {
           // a token like IInspectable is out of reach of GetTypeRefProps, since it is
           // a plain COM object. These objects are returned as system types.
@@ -117,8 +203,15 @@ class TypeDef extends AttributeObject {
           if (systemTokens.containsValue(typeName)) {
             return TypeDef(reader, 0, typeName);
           }
-          throw WinmdException(
-              'Unable to find scope for $typeName [${typeRefToken.toHexString(32)}]...');
+          // Perhaps we can find it in the current scope after all (for example,
+          // it's a nested class)
+          try {
+            final typedef = TypeDef.fromTypeDefToken(reader, typeRefToken);
+            return typedef;
+          } catch (exception) {
+            throw WinmdException(
+                'Unable to find scope for $typeName [${typeRefToken.toHexString(32)}]...');
+          }
         }
       } else {
         throw WindowsException(hr);
@@ -178,6 +271,7 @@ class TypeDef extends AttributeObject {
     }
   }
 
+  /// Enumerate all fields contained within this type.
   List<Field> get fields {
     final fields = <Field>[];
 
@@ -207,23 +301,49 @@ class TypeDef extends AttributeObject {
     final methods = <Method>[];
 
     final phEnum = calloc<IntPtr>();
-    final mdMethodDef = calloc<Uint32>();
+    final rgMethods = calloc<Uint32>();
     final pcTokens = calloc<Uint32>();
 
     try {
-      var hr = reader.EnumMethods(phEnum, token, mdMethodDef, 1, pcTokens);
+      var hr = reader.EnumMethods(phEnum, token, rgMethods, 1, pcTokens);
       while (hr == S_OK) {
-        final token = mdMethodDef.value;
+        final token = rgMethods.value;
 
         methods.add(Method.fromToken(reader, token));
-        hr = reader.EnumMethods(phEnum, token, mdMethodDef, 1, pcTokens);
+        hr = reader.EnumMethods(phEnum, token, rgMethods, 1, pcTokens);
       }
       return methods;
     } finally {
       reader.CloseEnum(phEnum.value);
       calloc.free(phEnum);
-      calloc.free(mdMethodDef);
+      calloc.free(rgMethods);
       calloc.free(pcTokens);
+    }
+  }
+
+  /// Enumerate all properties contained within this type.
+  List<Property> get properties {
+    final properties = <Property>[];
+
+    final phEnum = calloc<IntPtr>();
+    final rgProperties = calloc<Uint32>();
+    final pcProperties = calloc<Uint32>();
+
+    try {
+      var hr =
+          reader.EnumProperties(phEnum, token, rgProperties, 1, pcProperties);
+      while (hr == S_OK) {
+        final token = rgProperties.value;
+
+        properties.add(Property.fromToken(reader, token));
+        hr = reader.EnumMethods(phEnum, token, rgProperties, 1, pcProperties);
+      }
+      return properties;
+    } finally {
+      reader.CloseEnum(phEnum.value);
+      calloc.free(phEnum);
+      calloc.free(rgProperties);
+      calloc.free(pcProperties);
     }
   }
 

@@ -47,19 +47,27 @@ class MetadataStore {
   // types. It also reduces the risk of breaking changes being out of sync with
   // the winmd library, since the two can be more tightly bound together.
   static Scope getWin32Scope() {
-    final uri = Uri.parse('package:winmd/assets/Windows.Win32.winmd');
-    final future = Isolate.resolvePackageUri(uri);
-    final package = waitFor(future, timeout: const Duration(seconds: 5));
-    if (package == null) throw Exception('Could not find Windows.Win32.winmd');
-    final fileScope = File.fromUri(package);
+    const win32ScopeName = 'Windows.Win32.winmd';
+    if (cache.containsKey(win32ScopeName)) {
+      return cache[win32ScopeName]!;
+    } else {
+      final uri = Uri.parse('package:winmd/assets/Windows.Win32.winmd');
+      final future = Isolate.resolvePackageUri(uri);
+      final package = waitFor(future, timeout: const Duration(seconds: 5));
+      if (package == null) {
+        throw Exception('Could not find Windows.Win32.winmd');
+      }
+      final fileScope = File.fromUri(package);
 
-    return getScopeForFile(fileScope);
+      return getScopeForFile(fileScope);
+    }
   }
 
   /// Takes a metadata file path and returns the matching scope.
   static Scope getScopeForFile(File fileScope) {
-    final filename = fileScope.uri.pathSegments.last;
     if (!isInitialized) initialize();
+
+    final filename = fileScope.uri.pathSegments.last;
 
     if (cache.containsKey(filename)) {
       return cache[filename]!;
@@ -131,7 +139,7 @@ class MetadataStore {
     if (!isInitialized) initialize();
 
     final scope = getScopeForType(typeName);
-    return scope[typeName];
+    return scope.findTypeDef(typeName);
   }
 
   /// Dispose of all objects.

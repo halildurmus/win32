@@ -10,7 +10,7 @@ import 'package:win32/win32.dart';
 import '_base.dart';
 import 'com/IMetaDataImport2.dart';
 
-class Module extends AttributeObject {
+class Module extends TokenObject with CustomAttributes {
   final String name;
 
   Module(IMetaDataImport2 reader, int token, this.name) : super(reader, token);

@@ -19,6 +19,9 @@ class TypeIdentifier {
   /// The class or interface, if the type is (for example) ELEMENT_TYPE_CLASS
   TypeDef? type;
 
+  /// The dimensions of the contained array, if there is one.
+  List<int>? arrayDimensions;
+
   /// Any arguments (for example, the Uint16 in a Pointer<Uint16>).
   List<TypeIdentifier> typeArgs = [];
 
