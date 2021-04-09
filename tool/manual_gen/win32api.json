@@ -1729,6 +1729,11 @@
         "dllLibrary": "gdi32",
         "comment": "The GetTextMetrics function fills the specified buffer with the metrics for the currently selected font."
     },
+    "GetThreadDesktop": {
+        "prototype": "HDESK GetThreadDesktop(\n  DWORD dwThreadId\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a handle to the desktop assigned to the specified thread."
+    },
     "GetThreadDpiAwarenessContext": {
         "prototype": "DPI_AWARENESS_CONTEXT GetThreadDpiAwarenessContext();",
         "dllLibrary": "user32",
@@ -1858,6 +1863,11 @@
         "dllLibrary": "user32",
         "comment": "Retrieves the dimensions of the bounding rectangle of the specified window. The dimensions are given in screen coordinates that are relative to the upper-left corner of the screen."
     },
+    "GetWindowRgn": {
+        "prototype": "int GetWindowRgn(\n  HWND hWnd,\n  HRGN hRgn\n);",
+        "dllLibrary": "user32",
+        "comment": "The GetWindowRgn function obtains a copy of the window region of a window. The window region of a window is set by calling the SetWindowRgn function. The window region determines the area within the window where the system permits drawing. The system does not display any portion of a window that lies outside of the window region"
+    },
     "GetWindowRgnBox": {
         "prototype": "int GetWindowRgnBox(\n  HWND   hWnd,\n  LPRECT lprc\n);",
         "dllLibrary": "user32",
@@ -1912,6 +1922,11 @@
         "prototype": "BOOL HeapFree(\n  HANDLE                 hHeap,\n  DWORD                  dwFlags,\n  _Frees_ptr_opt_ LPVOID lpMem\n);",
         "dllLibrary": "kernel32",
         "comment": "Frees a memory block allocated from a heap by the HeapAlloc or HeapReAlloc function."
+    },
+    "HideCaret": {
+        "prototype": "BOOL HideCaret(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Removes the caret from the screen. Hiding a caret does not destroy its current shape or invalidate the insertion point."
     },
     "IIDFromString": {
         "prototype": "HRESULT IIDFromString(\n  LPCOLESTR lpsz,\n  LPIID     lpiid\n);",
@@ -2013,6 +2028,16 @@
         "dllLibrary": "user32",
         "comment": "Determines whether the specified window is minimized (iconic)."
     },
+    "IsImmersiveProcess": {
+        "prototype": "BOOL IsImmersiveProcess(\n  HANDLE hProcess\n);",
+        "dllLibrary": "user32",
+        "comment": "Determines whether the process belongs to a Windows Store app."
+    },
+    "IsMenu": {
+        "prototype": "BOOL IsMenu(\n  HMENU hMenu\n);",
+        "dllLibrary": "user32",
+        "comment": "Determines whether a handle is a menu handle."
+    },
     "IsNativeVhdBoot": {
         "prototype": "BOOL IsNativeVhdBoot(\n  PBOOL NativeVhdBoot\n);",
         "dllLibrary": "kernel32",
@@ -2079,6 +2104,11 @@
         "prototype": "BOOL LineTo(\n  HDC hdc,\n  int x,\n  int y\n);",
         "dllLibrary": "gdi32",
         "comment": "The LineTo function draws a line from the current position up to, but not including, the specified point."
+    },
+    "LoadAccelerators": {
+        "prototype": "HACCEL LoadAcceleratorsW(\n  HINSTANCE hInstance,\n  LPCWSTR   lpTableName\n);",
+        "dllLibrary": "user32",
+        "comment": "Loads the specified accelerator table."
     },
     "LoadCursor": {
         "prototype": "HCURSOR LoadCursorW(\n  HINSTANCE hInstance,\n  LPCWSTR   lpCursorName\n);",
@@ -2151,6 +2181,11 @@
         "dllLibrary": "user32",
         "comment": "Translates (maps) a virtual-key code into a scan code or character value, or translates a scan code into a virtual-key code."
     },
+    "MapVirtualKeyEx": {
+        "prototype": "UINT MapVirtualKeyExW(\n  UINT uCode,\n  UINT uMapType,\n  HKL  dwhkl\n);",
+        "dllLibrary": "user32",
+        "comment": "Translates (maps) a virtual-key code into a scan code or character value, or translates a scan code into a virtual-key code. The function translates the codes using the input language and an input locale identifier."
+    },
     "MapWindowPoints": {
         "prototype": "int MapWindowPoints(\n  HWND    hWndFrom,\n  HWND    hWndTo,\n  LPPOINT lpPoints,\n  UINT    cPoints\n);",
         "dllLibrary": "user32",
@@ -2181,10 +2216,20 @@
         "dllLibrary": "winmm",
         "comment": "The mciSendString function sends a command string to an MCI device. The device that the command is sent to is specified in the command string."
     },
+    "MenuItemFromPoint": {
+        "prototype": "int MenuItemFromPoint(\n  HWND  hWnd,\n  HMENU hMenu,\n  POINT ptScreen\n);",
+        "dllLibrary": "user32",
+        "comment": "Determines which menu item, if any, is at the specified location."
+    },
     "MessageBox": {
         "prototype": "int MessageBoxW(\n  HWND    hWnd,\n  LPCWSTR lpText,\n  LPCWSTR lpCaption,\n  UINT    uType\n);",
         "dllLibrary": "user32",
         "comment": "Displays a modal dialog box that contains a system icon, a set of buttons, and a brief application-specific message, such as status or error information. The message box returns an integer value that indicates which button the user clicked."
+    },
+    "MessageBoxEx": {
+        "prototype": "int MessageBoxExW(\n  HWND    hWnd,\n  LPCWSTR lpText,\n  LPCWSTR lpCaption,\n  UINT    uType,\n  WORD    wLanguageId\n);",
+        "dllLibrary": "user32",
+        "comment": "Creates, displays, and operates a message box. The message box contains an application-defined message and title, plus any combination of predefined icons and push buttons. The buttons are in the language of the system user interface."
     },
     "MetaDataGetDispenser": {
         "prototype": "HRESULT MetaDataGetDispenser(\n  REFCLSID rclsid,\n  REFIID   riid,\n  LPVOID   *ppv\n);",
@@ -2343,6 +2388,11 @@
         "dllLibrary": "winmm",
         "comment": "The midiOutUnprepareHeader function cleans up the preparation performed by the midiOutPrepareHeader function."
     },
+    "ModifyMenu": {
+        "prototype": "BOOL ModifyMenuW(\n  HMENU    hMnu,\n  UINT     uPosition,\n  UINT     uFlags,\n  UINT_PTR uIDNewItem,\n  LPCWSTR  lpNewItem\n);",
+        "dllLibrary": "user32",
+        "comment": "Changes an existing menu item. This function is used to specify the content, appearance, and behavior of the menu item."
+    },
     "MonitorFromPoint": {
         "prototype": "HMONITOR MonitorFromPoint(\n  POINT pt,\n  DWORD dwFlags\n);",
         "dllLibrary": "user32",
@@ -2398,10 +2448,20 @@
         "dllLibrary": "user32",
         "comment": "Opens the clipboard for examination and prevents other applications from modifying the clipboard content."
     },
+    "OpenDesktop": {
+        "prototype": "HDESK OpenDesktopW(\n  LPCWSTR     lpszDesktop,\n  DWORD       dwFlags,\n  BOOL        fInherit,\n  ACCESS_MASK dwDesiredAccess\n);",
+        "dllLibrary": "user32",
+        "comment": "Opens the specified desktop object."
+    },
     "OpenIcon": {
         "prototype": "BOOL OpenIcon(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
         "comment": "Restores a minimized (iconic) window to its previous size and position; it then activates the window."
+    },
+    "OpenInputDesktop": {
+        "prototype": "HDESK OpenInputDesktop(\n  DWORD       dwFlags,\n  BOOL        fInherit,\n  ACCESS_MASK dwDesiredAccess\n);",
+        "dllLibrary": "user32",
+        "comment": "Opens the desktop that receives user input."
     },
     "OpenProcess": {
         "prototype": "HANDLE OpenProcess(\n  DWORD dwDesiredAccess,\n  BOOL  bInheritHandle,\n  DWORD dwProcessId\n);",
@@ -2418,6 +2478,11 @@
         "dllLibrary": "uxtheme",
         "comment": "A variant of OpenThemeData that opens a theme handle associated with a specific DPI.",
         "minimumWindowsVersion": "WIN10_RS2"
+    },
+    "OpenWindowStation": {
+        "prototype": "HWINSTA OpenWindowStationW(\n  LPCWSTR     lpszWinSta,\n  BOOL        fInherit,\n  ACCESS_MASK dwDesiredAccess\n);",
+        "dllLibrary": "user32",
+        "comment": "Opens the specified window station."
     },
     "OutputDebugString": {
         "prototype": "void OutputDebugStringW(\n  LPCWSTR lpOutputString\n);",
@@ -2861,6 +2926,16 @@
         "dllLibrary": "kernel32",
         "comment": "Deletes an existing empty directory."
     },
+    "RemoveMenu": {
+        "prototype": "BOOL RemoveMenu(\n  HMENU hMenu,\n  UINT  uPosition,\n  UINT  uFlags\n);",
+        "dllLibrary": "user32",
+        "comment": "Deletes a menu item or detaches a submenu from the specified menu. If the menu item opens a drop-down menu or submenu, RemoveMenu does not destroy the menu or its handle, allowing the menu to be reused. Before this function is called, the GetSubMenu function should retrieve a handle to the drop-down menu or submenu."
+    },
+    "RemoveProp": {
+        "prototype": "HANDLE RemovePropW(\n  HWND    hWnd,\n  LPCWSTR lpString\n);",
+        "dllLibrary": "user32",
+        "comment": "Removes an entry from the property list of the specified window. The specified character string identifies the entry to be removed."
+    },
     "ReOpenFile": {
         "prototype": "HANDLE ReOpenFile(\n  HANDLE hOriginalFile,\n  DWORD  dwDesiredAccess,\n  DWORD  dwShareMode,\n  DWORD  dwFlagsAndAttributes);",
         "dllLibrary": "kernel32",
@@ -2949,6 +3024,11 @@
         "dllLibrary": "kernel32",
         "comment": "Moves a block of data in a screen buffer. The effects of the move can be limited by specifying a clipping rectangle, so the contents of the console screen buffer outside the clipping rectangle are unchanged."
     },
+    "ScrollDC": {
+        "prototype": "BOOL ScrollDC(\n  HDC        hDC,\n  int        dx,\n  int        dy,\n  const RECT *lprcScroll,\n  const RECT *lprcClip,\n  HRGN       hrgnUpdate,\n  LPRECT     lprcUpdate\n);",
+        "dllLibrary": "user32",
+        "comment": "The ScrollDC function scrolls a rectangle of bits horizontally and vertically."
+    },
     "ScrollWindow": {
         "prototype": "BOOL ScrollWindow(\n  HWND       hWnd,\n  int        XAmount,\n  int        YAmount,\n  const RECT *lpRect,\n  const RECT *lpClipRect\n);",
         "dllLibrary": "user32",
@@ -2993,6 +3073,16 @@
         "prototype": "HWND SetCapture(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
         "comment": "Sets the mouse capture to the specified window belonging to the current thread. SetCapture captures mouse input either when the mouse is over the capturing window, or when the mouse button was pressed while the mouse was over the capturing window and the button is still down. Only one window at a time can capture the mouse."
+    },
+    "SetCaretBlinkTime": {
+        "prototype": "BOOL SetCaretBlinkTime(\n  UINT uMSeconds\n);",
+        "dllLibrary": "user32",
+        "comment": "Sets the caret blink time to the specified number of milliseconds. The blink time is the elapsed time, in milliseconds, required to invert the caret's pixels."
+    },
+    "SetCaretPos": {
+        "prototype": "BOOL SetCaretPos(\n  int X,\n  int Y\n);",
+        "dllLibrary": "user32",
+        "comment": "Moves the caret to the specified coordinates. If the window that owns the caret was created with the CS_OWNDC class style, then the specified coordinates are subject to the mapping mode of the device context associated with that window."
     },
     "SetClipboardData": {
         "prototype": "HANDLE SetClipboardData(\n  UINT   uFormat,\n  HANDLE hMem\n);",
@@ -3048,6 +3138,11 @@
         "prototype": "BOOL SetCurrentDirectoryW(\n  LPCTSTR lpPathName\n);",
         "dllLibrary": "kernel32",
         "comment": "Changes the current directory for the current process."
+    },
+    "SetCursor": {
+        "prototype": "HCURSOR SetCursor(\n  HCURSOR hCursor\n);",
+        "dllLibrary": "user32",
+        "comment": "Sets the cursor shape."
     },
     "SetCursorPos": {
         "prototype": "BOOL SetCursorPos(\n  int X,\n  int Y\n);",
@@ -3254,6 +3349,11 @@
         "dllLibrary": "user32",
         "comment": "Sets the colors for the specified display elements. Display elements are the various parts of a window and the display that appear on the system display screen."
     },
+    "SetSystemCursor": {
+        "prototype": "BOOL SetSystemCursor(\n  HCURSOR hcur,\n  DWORD   id\n);",
+        "dllLibrary": "user32",
+        "comment": "Enables an application to customize the system cursors. It replaces the contents of the system cursor specified by the id parameter with the contents of the cursor specified by the hcur parameter and then destroys hcur."
+    },
     "SetTextColor": {
         "prototype": "COLORREF SetTextColor(\n  HDC      hdc,\n  COLORREF color\n);",
         "dllLibrary": "gdi32",
@@ -3390,6 +3490,11 @@
         "prototype": "HRESULT SHGetKnownFolderPath(\n  REFKNOWNFOLDERID rfid,\n  DWORD            dwFlags,\n  HANDLE           hToken,\n  PWSTR            *ppszPath\n);",
         "dllLibrary": "shell32",
         "comment": "Retrieves the full path of a known folder identified by the folder's KNOWNFOLDERID."
+    },
+    "ShowCaret": {
+        "prototype": "BOOL ShowCaret(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Makes the caret visible on the screen at the caret's current position. When the caret becomes visible, it begins flashing automatically."
     },
     "ShowCursor": {
         "prototype": "int ShowCursor(\n  BOOL bShow\n);",
@@ -3815,6 +3920,11 @@
         "prototype": "SHORT VkKeyScanExW(\n  WCHAR ch,\n  HKL   dwhkl\n);",
         "dllLibrary": "user32",
         "comment": "Translates a character to the corresponding virtual-key code and shift state. The function translates the character using the input language and physical keyboard layout identified by the input locale identifier."
+    },
+    "WaitForInputIdle": {
+        "prototype": "DWORD WaitForInputIdle(\n  HANDLE hProcess,\n  DWORD  dwMilliseconds\n);",
+        "dllLibrary": "user32",
+        "comment": "Waits until the specified process has finished processing its initial input and is waiting for user input with no input pending, or until the time-out interval has elapsed."
     },
     "WaitForSingleObject": {
         "prototype": "DWORD WaitForSingleObject(\n  HANDLE hHandle,\n  DWORD  dwMilliseconds\n);",
