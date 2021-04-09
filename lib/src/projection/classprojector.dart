@@ -45,20 +45,10 @@ class ClassProjector {
 
       for (final mdParam in mdMethod.parameters) {
         final typeProjection = TypeProjector(mdParam.typeIdentifier);
-        // Convert a generic (e.g. TResult) into an appropriate type
-        if (mdParam.typeIdentifier.corType == CorElementType.ELEMENT_TYPE_VAR) {
-          methodProjection.parameters.add(ParameterProjection(mdParam.name,
-              nativeType: typeDef
-                  .genericParams[mdParam.typeIdentifier.genericParameter!]
-                  .paramName,
-              dartType: typeDef
-                  .genericParams[mdParam.typeIdentifier.genericParameter!]
-                  .paramName));
-        } else {
-          methodProjection.parameters.add(ParameterProjection(mdParam.name,
-              nativeType: typeProjection.nativeType,
-              dartType: typeProjection.dartType));
-        }
+
+        methodProjection.parameters.add(ParameterProjection(mdParam.name,
+            nativeType: typeProjection.nativeType,
+            dartType: typeProjection.dartType));
       }
 
       if (interface.name.startsWith('Windows.Win32')) {
