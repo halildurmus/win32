@@ -13,6 +13,7 @@ import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'typeidentifier.dart';
+import 'win32.dart';
 
 /// A parameter or return type.
 class Parameter extends TokenObject with CustomAttributesMixin {
@@ -46,19 +47,19 @@ class Parameter extends TokenObject with CustomAttributesMixin {
       : super(reader, token);
 
   factory Parameter.fromToken(IMetaDataImport2 reader, int token) {
-    final pmd = calloc<Uint32>();
-    final pulSequence = calloc<Uint32>();
-    final szName = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
-    final pchName = calloc<Uint32>();
-    final pdwAttr = calloc<Uint32>();
-    final pdwCPlusTypeFlag = calloc<Uint32>();
-    final ppValue = calloc<IntPtr>();
-    final pcchValue = calloc<Uint32>();
+    final ptkMethodDef = calloc<mdMethodDef>();
+    final pulSequence = calloc<ULONG>();
+    final szName = stralloc(MAX_STRING_SIZE);
+    final pchName = calloc<ULONG>();
+    final pdwAttr = calloc<DWORD>();
+    final pdwCPlusTypeFlag = calloc<DWORD>();
+    final ppValue = calloc<UVCP_CONSTANT>();
+    final pcchValue = calloc<ULONG>();
 
     try {
       final hr = reader.GetParamProps(
           token,
-          pmd,
+          ptkMethodDef,
           pulSequence,
           szName,
           MAX_STRING_SIZE,
@@ -75,20 +76,19 @@ class Parameter extends TokenObject with CustomAttributesMixin {
             pdwAttr.value,
             TypeIdentifier.fromValue(pdwCPlusTypeFlag.value),
             szName.toDartString(),
-            Pointer<Uint8>.fromAddress(ppValue.value)
-                .asTypedList(pcchValue.value));
+            ppValue.value.asTypedList(pcchValue.value));
       } else {
         throw WindowsException(hr);
       }
     } finally {
-      calloc.free(pmd);
-      calloc.free(pulSequence);
-      calloc.free(szName);
-      calloc.free(pchName);
-      calloc.free(pdwAttr);
-      calloc.free(pdwCPlusTypeFlag);
-      calloc.free(ppValue);
-      calloc.free(pcchValue);
+      free(ptkMethodDef);
+      free(pulSequence);
+      free(szName);
+      free(pchName);
+      free(pdwAttr);
+      free(pdwCPlusTypeFlag);
+      free(ppValue);
+      free(pcchValue);
     }
   }
 

@@ -6,6 +6,7 @@ import 'package:win32/win32.dart';
 import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'mixins/customattributes_mixin.dart';
+import 'win32.dart';
 
 class GenericParam extends TokenObject with CustomAttributesMixin {
   final String paramName;
@@ -18,12 +19,12 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
       : super(reader, token);
 
   factory GenericParam.fromToken(IMetaDataImport2 reader, int token) {
-    final pulParamSeq = calloc<Uint32>();
-    final pdwParamFlags = calloc<Uint32>();
-    final ptOwner = calloc<Uint32>();
-    final reserved = calloc<Uint32>();
-    final wzName = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
-    final pchName = calloc<Uint32>();
+    final pulParamSeq = calloc<ULONG>();
+    final pdwParamFlags = calloc<DWORD>();
+    final ptOwner = calloc<mdToken>();
+    final reserved = calloc<DWORD>();
+    final wzName = stralloc(MAX_STRING_SIZE);
+    final pchName = calloc<ULONG>();
 
     try {
       final hr = reader.GetGenericParamProps(token, pulParamSeq, pdwParamFlags,
@@ -36,12 +37,12 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
         throw WindowsException(hr);
       }
     } finally {
-      calloc.free(pulParamSeq);
-      calloc.free(pdwParamFlags);
-      calloc.free(ptOwner);
-      calloc.free(reserved);
-      calloc.free(wzName);
-      calloc.free(pchName);
+      free(pulParamSeq);
+      free(pdwParamFlags);
+      free(ptOwner);
+      free(reserved);
+      free(wzName);
+      free(pchName);
     }
   }
 }

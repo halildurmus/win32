@@ -71,7 +71,7 @@ abstract class TokenObject {
           throw WindowsException(hr);
         }
       } finally {
-        calloc.free(pIsGlobal);
+        free(pIsGlobal);
       }
     } else {
       return false;

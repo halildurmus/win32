@@ -6,6 +6,7 @@ import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'utils.dart';
+import 'win32.dart';
 
 enum StringMarshalConvention { NotSpecified, Ansi, Unicode, Auto }
 
@@ -96,12 +97,12 @@ class PinvokeMap extends TokenObject {
       : super(reader, token);
 
   factory PinvokeMap.fromToken(IMetaDataImport2 reader, int token) {
-    final pdwMappingFlags = calloc<Uint32>();
-    final szImportName = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
-    final pchImportName = calloc<Uint32>();
-    final ptkImportDLL = calloc<Uint32>();
-    final szModuleName = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
-    final pchModuleName = calloc<Uint32>();
+    final pdwMappingFlags = calloc<DWORD>();
+    final szImportName = stralloc(MAX_STRING_SIZE);
+    final pchImportName = calloc<ULONG>();
+    final ptkImportDLL = calloc<mdModuleRef>();
+    final szModuleName = stralloc(MAX_STRING_SIZE);
+    final pchModuleName = calloc<ULONG>();
 
     try {
       var hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName,
@@ -118,10 +119,10 @@ class PinvokeMap extends TokenObject {
         throw WindowsException(hr);
       }
     } finally {
-      calloc.free(pdwMappingFlags);
-      calloc.free(szImportName);
-      calloc.free(pchImportName);
-      calloc.free(ptkImportDLL);
+      free(pdwMappingFlags);
+      free(szImportName);
+      free(pchImportName);
+      free(ptkImportDLL);
     }
   }
 }

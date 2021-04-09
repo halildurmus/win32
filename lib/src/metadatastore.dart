@@ -86,7 +86,7 @@ class MetadataStore {
           return scope;
         }
       } finally {
-        calloc.free(szFile);
+        free(szFile);
       }
     }
   }
@@ -129,8 +129,8 @@ class MetadataStore {
         WindowsDeleteString(hstrTypeName.value);
         WindowsDeleteString(hstrMetaDataFilePath.value);
 
-        calloc.free(hstrTypeName);
-        calloc.free(hstrMetaDataFilePath);
+        free(hstrTypeName);
+        free(hstrMetaDataFilePath);
       }
     }
   }
@@ -151,9 +151,9 @@ class MetadataStore {
     if (!isInitialized) return;
 
     for (final scope in cache.values) {
-      calloc.free(scope.reader.ptr);
+      free(scope.reader.ptr);
     }
-    calloc.free(dispenser.ptr);
+    free(dispenser.ptr);
 
     cache.clear();
     isInitialized = false;

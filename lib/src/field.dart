@@ -15,6 +15,7 @@ import 'mixins/customattributes_mixin.dart';
 import 'pinvokemap.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
+import 'win32.dart';
 
 enum FieldAccess {
   PrivateScope,
@@ -87,15 +88,15 @@ class Field extends TokenObject with CustomAttributesMixin {
       : super(reader, token);
 
   factory Field.fromToken(IMetaDataImport2 reader, int token) {
-    final ptkTypeDef = calloc<Uint32>();
-    final szField = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
-    final pchField = calloc<Uint32>();
-    final pdwAttr = calloc<Uint32>();
-    final ppvSigBlob = calloc<Pointer<Uint8>>();
-    final pcbSigBlob = calloc<Uint32>();
-    final pdwCPlusTypeFlag = calloc<Uint32>();
+    final ptkTypeDef = calloc<mdTypeDef>();
+    final szField = stralloc(MAX_STRING_SIZE);
+    final pchField = calloc<ULONG>();
+    final pdwAttr = calloc<DWORD>();
+    final ppvSigBlob = calloc<PCCOR_SIGNATURE>();
+    final pcbSigBlob = calloc<ULONG>();
+    final pdwCPlusTypeFlag = calloc<DWORD>();
     final ppValue = calloc<Pointer<Uint32>>();
-    final pcchValue = calloc<Uint32>();
+    final pcchValue = calloc<ULONG>();
 
     try {
       final hr = reader.GetFieldProps(
@@ -120,6 +121,7 @@ class Field extends TokenObject with CustomAttributesMixin {
         // identifier.
         final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
         final typeTuple = parseTypeFromSignature(signature.sublist(1), reader);
+
         return Field(
             reader,
             ptkTypeDef.value,
@@ -133,15 +135,15 @@ class Field extends TokenObject with CustomAttributesMixin {
         throw WindowsException(hr);
       }
     } finally {
-      calloc.free(ptkTypeDef);
-      calloc.free(szField);
-      calloc.free(pchField);
-      calloc.free(pdwAttr);
-      calloc.free(ppvSigBlob);
-      calloc.free(pcbSigBlob);
-      calloc.free(pdwCPlusTypeFlag);
-      calloc.free(ppValue);
-      calloc.free(pcchValue);
+      free(ptkTypeDef);
+      free(szField);
+      free(pchField);
+      free(pdwAttr);
+      free(ppvSigBlob);
+      free(pcbSigBlob);
+      free(pdwCPlusTypeFlag);
+      free(ppValue);
+      free(pcchValue);
     }
   }
 

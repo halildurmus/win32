@@ -5,14 +5,15 @@ import 'package:win32/win32.dart';
 
 import '../base.dart';
 import '../genericparam.dart';
+import '../win32.dart';
 
 mixin GenericParamsMixin on TokenObject {
   List<GenericParam> get genericParams {
     final params = <GenericParam>[];
 
-    final phEnum = calloc<IntPtr>();
-    final rGenericParams = calloc<Uint32>();
-    final pcGenericParams = calloc<Uint32>();
+    final phEnum = calloc<HCORENUM>();
+    final rGenericParams = calloc<ULONG>();
+    final pcGenericParams = calloc<ULONG>();
 
     try {
       var hr = reader.EnumGenericParams(
@@ -21,15 +22,15 @@ mixin GenericParamsMixin on TokenObject {
         final token = rGenericParams.value;
 
         params.add(GenericParam.fromToken(reader, token));
-        hr = reader.EnumMethods(
+        hr = reader.EnumGenericParams(
             phEnum, token, rGenericParams, 1, pcGenericParams);
       }
       return params;
     } finally {
       reader.CloseEnum(phEnum.value);
-      calloc.free(phEnum);
-      calloc.free(rGenericParams);
-      calloc.free(pcGenericParams);
+      free(phEnum);
+      free(rGenericParams);
+      free(pcGenericParams);
     }
   }
 }

@@ -6,6 +6,7 @@ import 'package:win32/win32.dart';
 import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'mixins/customattributes_mixin.dart';
+import 'win32.dart';
 
 class Event extends TokenObject with CustomAttributesMixin {
   final String eventName;
@@ -31,16 +32,16 @@ class Event extends TokenObject with CustomAttributesMixin {
       : super(reader, token);
 
   factory Event.fromToken(IMetaDataImport2 reader, int token) {
-    final ptkClass = calloc<Uint32>();
-    final szEvent = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
-    final pchEvent = calloc<Uint32>();
-    final pdwEventFlags = calloc<Uint32>();
-    final ptkEventType = calloc<Uint32>();
-    final ptkAddOn = calloc<Uint32>();
-    final ptkRemoveOn = calloc<Uint32>();
-    final tkkFire = calloc<Uint32>();
-    final rgOtherMethod = calloc<Uint32>(16);
-    final pcOtherMethod = calloc<Uint32>();
+    final ptkClass = calloc<mdTypeDef>();
+    final szEvent = stralloc(MAX_STRING_SIZE);
+    final pchEvent = calloc<ULONG>();
+    final pdwEventFlags = calloc<DWORD>();
+    final ptkEventType = calloc<mdToken>();
+    final ptkAddOn = calloc<mdMethodDef>();
+    final ptkRemoveOn = calloc<mdMethodDef>();
+    final tkkFire = calloc<mdMethodDef>();
+    final rgOtherMethod = calloc<mdMethodDef>(16);
+    final pcOtherMethod = calloc<ULONG>();
 
     try {
       final hr = reader.GetEventProps(
@@ -74,16 +75,16 @@ class Event extends TokenObject with CustomAttributesMixin {
         throw WindowsException(hr);
       }
     } finally {
-      calloc.free(ptkClass);
-      calloc.free(szEvent);
-      calloc.free(pchEvent);
-      calloc.free(pdwEventFlags);
-      calloc.free(ptkEventType);
-      calloc.free(ptkAddOn);
-      calloc.free(ptkRemoveOn);
-      calloc.free(tkkFire);
-      calloc.free(rgOtherMethod);
-      calloc.free(pcOtherMethod);
+      free(ptkClass);
+      free(szEvent);
+      free(pchEvent);
+      free(pdwEventFlags);
+      free(ptkEventType);
+      free(ptkAddOn);
+      free(ptkRemoveOn);
+      free(tkkFire);
+      free(rgOtherMethod);
+      free(pcOtherMethod);
     }
   }
 }

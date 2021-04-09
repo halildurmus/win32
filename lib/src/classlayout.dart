@@ -5,6 +5,7 @@ import 'package:win32/win32.dart';
 
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
+import 'win32.dart';
 
 class FieldOffset {
   final int fieldToken;
@@ -32,10 +33,10 @@ class ClassLayout {
   List<FieldOffset>? fieldOffsets;
 
   ClassLayout(this.reader, this.token) {
-    final pdwPackSize = calloc<Uint32>();
+    final pdwPackSize = calloc<DWORD>();
     final rgFieldOffset = calloc<COR_FIELD_OFFSET>(256);
-    final pcFieldOffset = calloc<Uint32>();
-    final pulClassSize = calloc<Uint32>();
+    final pcFieldOffset = calloc<ULONG>();
+    final pulClassSize = calloc<ULONG>();
 
     try {
       final hr = reader.GetClassLayout(

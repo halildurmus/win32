@@ -10,6 +10,7 @@ import 'package:win32/win32.dart';
 
 import 'base.dart';
 import 'com/IMetaDataImport2.dart';
+import 'win32.dart';
 
 /// A custom (named) attribute.
 class CustomAttribute extends TokenObject {
@@ -18,7 +19,7 @@ class CustomAttribute extends TokenObject {
   final Uint8List signatureBlob;
 
   // String get name {
-  //   final szString = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
+  //   final szString = stralloc(MAX_STRING_SIZE);
   //   final ptk = calloc<Uint32>();
 
   //   final pchString = calloc<Uint32>();
@@ -49,10 +50,10 @@ class CustomAttribute extends TokenObject {
       : super(reader, token);
 
   factory CustomAttribute.fromToken(IMetaDataImport2 reader, int token) {
-    final ptkObj = calloc<Uint32>();
-    final ptkType = calloc<Uint32>();
+    final ptkObj = calloc<mdToken>();
+    final ptkType = calloc<mdToken>();
     final ppBlob = calloc<IntPtr>();
-    final pcbBlob = calloc<Uint32>();
+    final pcbBlob = calloc<ULONG>();
 
     try {
       final hr = reader.GetCustomAttributeProps(
@@ -69,10 +70,10 @@ class CustomAttribute extends TokenObject {
         throw WindowsException(hr);
       }
     } finally {
-      calloc.free(pcbBlob);
-      calloc.free(ppBlob);
-      calloc.free(ptkType);
-      calloc.free(ptkObj);
+      free(pcbBlob);
+      free(ppBlob);
+      free(ptkType);
+      free(ptkObj);
     }
   }
 }

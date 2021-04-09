@@ -19,6 +19,7 @@ import 'parameter.dart';
 import 'pinvokemap.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
+import 'win32.dart';
 
 enum MemberAccess {
   PrivateScope,
@@ -120,10 +121,10 @@ class Method extends TokenObject
   late Parameter returnType;
 
   Module get module {
-    final pdwMappingFlags = calloc<Uint32>();
-    final szImportName = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
-    final pchImportName = calloc<Uint32>();
-    final ptkImportDLL = calloc<Uint32>();
+    final pdwMappingFlags = calloc<DWORD>();
+    final szImportName = stralloc(MAX_STRING_SIZE);
+    final pchImportName = calloc<ULONG>();
+    final ptkImportDLL = calloc<mdModuleRef>();
     try {
       final hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName,
           MAX_STRING_SIZE, pchImportName, ptkImportDLL);
@@ -133,10 +134,10 @@ class Method extends TokenObject
         throw COMException(hr);
       }
     } finally {
-      calloc.free(pdwMappingFlags);
-      calloc.free(szImportName);
-      calloc.free(pchImportName);
-      calloc.free(ptkImportDLL);
+      free(pdwMappingFlags);
+      free(szImportName);
+      free(pchImportName);
+      free(ptkImportDLL);
     }
   }
 
@@ -150,19 +151,19 @@ class Method extends TokenObject
   }
 
   factory Method.fromToken(IMetaDataImport2 reader, int token) {
-    final pClass = calloc<Uint32>();
-    final szMethod = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
-    final pchMethod = calloc<Uint32>();
-    final pdwAttr = calloc<Uint32>();
-    final ppvSigBlob = calloc<IntPtr>();
-    final pcbSigBlob = calloc<Uint32>();
-    final pulCodeRVA = calloc<Uint32>();
-    final pdwImplFlags = calloc<Uint32>();
+    final ptkClass = calloc<mdTypeDef>();
+    final szMethod = stralloc(MAX_STRING_SIZE);
+    final pchMethod = calloc<ULONG>();
+    final pdwAttr = calloc<DWORD>();
+    final ppvSigBlob = calloc<PCCOR_SIGNATURE>();
+    final pcbSigBlob = calloc<ULONG>();
+    final pulCodeRVA = calloc<ULONG>();
+    final pdwImplFlags = calloc<DWORD>();
 
     try {
       final hr = reader.GetMethodProps(
           token,
-          pClass,
+          ptkClass,
           szMethod,
           MAX_STRING_SIZE,
           pchMethod,
@@ -173,22 +174,21 @@ class Method extends TokenObject
           pdwImplFlags);
 
       if (SUCCEEDED(hr)) {
-        final signature = Pointer<Uint8>.fromAddress(ppvSigBlob.value)
-            .asTypedList(pcbSigBlob.value);
+        final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
         return Method(reader, token, szMethod.toDartString(), pdwAttr.value,
             signature, pulCodeRVA.value, pdwImplFlags.value);
       } else {
         throw WindowsException(hr);
       }
     } finally {
-      calloc.free(pClass);
-      calloc.free(szMethod);
-      calloc.free(pchMethod);
-      calloc.free(pdwAttr);
-      calloc.free(ppvSigBlob);
-      calloc.free(pcbSigBlob);
-      calloc.free(pulCodeRVA);
-      calloc.free(pdwImplFlags);
+      free(ptkClass);
+      free(szMethod);
+      free(pchMethod);
+      free(pdwAttr);
+      free(ppvSigBlob);
+      free(pcbSigBlob);
+      free(pulCodeRVA);
+      free(pdwImplFlags);
     }
   }
 
@@ -301,23 +301,23 @@ class Method extends TokenObject
   }
 
   void _parseParameterNames() {
-    final phEnum = calloc<IntPtr>();
-    final ptkParamDef = calloc<Uint32>();
-    final pcTokens = calloc<Uint32>();
+    final phEnum = calloc<HCORENUM>();
+    final rParams = calloc<mdParamDef>();
+    final pcTokens = calloc<ULONG>();
 
     try {
-      var hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
+      var hr = reader.EnumParams(phEnum, token, rParams, 1, pcTokens);
       while (hr == S_OK) {
-        final token = ptkParamDef.value;
+        final token = rParams.value;
 
         parameters.add(Parameter.fromToken(reader, token));
-        hr = reader.EnumParams(phEnum, token, ptkParamDef, 1, pcTokens);
+        hr = reader.EnumParams(phEnum, token, rParams, 1, pcTokens);
       }
     } finally {
       reader.CloseEnum(phEnum.value);
-      calloc.free(phEnum);
-      calloc.free(ptkParamDef);
-      calloc.free(pcTokens);
+      free(phEnum);
+      free(rParams);
+      free(pcTokens);
     }
   }
 

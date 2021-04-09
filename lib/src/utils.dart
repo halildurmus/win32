@@ -78,8 +78,8 @@ File metadataFileContainingType(String typeName) {
     WindowsDeleteString(hstrTypeName.value);
     WindowsDeleteString(hstrMetaDataFilePath.value);
 
-    calloc.free(hstrTypeName);
-    calloc.free(hstrMetaDataFilePath);
+    free(hstrTypeName);
+    free(hstrMetaDataFilePath);
   }
 
   return path;
@@ -143,6 +143,16 @@ int unencodeDefRefSpecToken(int encoded) {
   } else {
     return 0;
   }
+}
+
+int byteListToInteger(Uint8List list) {
+  final data = ByteData.sublistView(list);
+  print('${list.length} ${data.lengthInBytes}');
+  if (data.lengthInBytes == 8) return data.getUint64(0);
+  if (data.lengthInBytes == 4) return data.getUint32(0);
+  if (data.lengthInBytes == 2) return data.getUint16(0);
+  if (data.lengthInBytes == 1) return data.getUint8(0);
+  return 0;
 }
 
 void flattenTypeArgs(TypeIdentifier type) {

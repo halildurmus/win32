@@ -21,6 +21,7 @@ import 'property.dart';
 import 'systemtokens.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
+import 'win32.dart';
 
 enum TypeVisibility {
   NotPublic,
@@ -156,26 +157,26 @@ class TypeDef extends TokenObject
 
   /// Instantiate a typedef from a TypeDef token.
   factory TypeDef.fromTypeDefToken(IMetaDataImport2 reader, int typeDefToken) {
-    final nRead = calloc<Uint32>();
-    final tdFlags = calloc<Uint32>();
-    final baseClassToken = calloc<Uint32>();
-    final typeName = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
+    final szTypeDef = stralloc(MAX_STRING_SIZE);
+    final pchTypeDef = calloc<ULONG>();
+    final pdwTypeDefFlags = calloc<DWORD>();
+    final ptkExtends = calloc<mdToken>();
 
     try {
-      final hr = reader.GetTypeDefProps(typeDefToken, typeName, MAX_STRING_SIZE,
-          nRead, tdFlags, baseClassToken);
+      final hr = reader.GetTypeDefProps(typeDefToken, szTypeDef,
+          MAX_STRING_SIZE, pchTypeDef, pdwTypeDefFlags, ptkExtends);
 
       if (SUCCEEDED(hr)) {
-        return TypeDef(reader, typeDefToken, typeName.toDartString(),
-            tdFlags.value, baseClassToken.value);
+        return TypeDef(reader, typeDefToken, szTypeDef.toDartString(),
+            pdwTypeDefFlags.value, ptkExtends.value);
       } else {
         throw WindowsException(hr);
       }
     } finally {
-      calloc.free(nRead);
-      calloc.free(tdFlags);
-      calloc.free(baseClassToken);
-      calloc.free(typeName);
+      free(pchTypeDef);
+      free(pdwTypeDefFlags);
+      free(ptkExtends);
+      free(szTypeDef);
     }
   }
 
@@ -185,9 +186,9 @@ class TypeDef extends TokenObject
   /// Windows Runtime classes, the TypeRef is used to obtain the host scope
   /// metadata file, from which the TypeDef can be found and returned.
   factory TypeDef.fromTypeRefToken(IMetaDataImport2 reader, int typeRefToken) {
-    final ptkResolutionScope = calloc<Uint32>();
-    final szName = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
-    final pchName = calloc<Uint32>();
+    final ptkResolutionScope = calloc<mdToken>();
+    final szName = stralloc(MAX_STRING_SIZE);
+    final pchName = calloc<ULONG>();
 
     try {
       final hr = reader.GetTypeRefProps(
@@ -221,17 +222,17 @@ class TypeDef extends TokenObject
         throw WindowsException(hr);
       }
     } finally {
-      calloc.free(ptkResolutionScope);
-      calloc.free(szName);
-      calloc.free(pchName);
+      free(ptkResolutionScope);
+      free(szName);
+      free(pchName);
     }
   }
 
   /// Instantiate a typedef from a TypeSpec token.
   factory TypeDef.fromTypeSpecToken(
       IMetaDataImport2 reader, int typeSpecToken) {
-    final ppvSig = calloc<Pointer<Uint8>>();
-    final pcbSig = calloc<Uint32>();
+    final ppvSig = calloc<PCCOR_SIGNATURE>();
+    final pcbSig = calloc<ULONG>();
 
     try {
       final hr =
@@ -248,18 +249,18 @@ class TypeDef extends TokenObject
         throw WindowsException(hr);
       }
     } finally {
-      calloc.free(ppvSig);
-      calloc.free(pcbSig);
+      free(ppvSig);
+      free(pcbSig);
     }
   }
 
   /// Converts an individual interface into a type.
   TypeDef processInterfaceToken(int token) {
-    final pClass = calloc<Uint32>();
-    final ptkIface = calloc<Uint32>();
+    final ptkClass = calloc<mdTypeDef>();
+    final ptkIface = calloc<mdToken>();
 
     try {
-      final hr = reader.GetInterfaceImplProps(token, pClass, ptkIface);
+      final hr = reader.GetInterfaceImplProps(token, ptkClass, ptkIface);
       if (SUCCEEDED(hr)) {
         final interfaceToken = ptkIface.value;
         return TypeDef.fromToken(reader, interfaceToken);
@@ -267,8 +268,8 @@ class TypeDef extends TokenObject
         throw WindowsException(hr);
       }
     } finally {
-      calloc.free(pClass);
-      calloc.free(ptkIface);
+      free(ptkClass);
+      free(ptkIface);
     }
   }
 
@@ -276,9 +277,9 @@ class TypeDef extends TokenObject
   List<TypeDef> get interfaces {
     final interfaces = <TypeDef>[];
 
-    final phEnum = calloc<IntPtr>();
-    final rImpls = calloc<Uint32>();
-    final pcImpls = calloc<Uint32>();
+    final phEnum = calloc<HCORENUM>();
+    final rImpls = calloc<mdInterfaceImpl>();
+    final pcImpls = calloc<ULONG>();
 
     try {
       var hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
@@ -291,9 +292,9 @@ class TypeDef extends TokenObject
       return interfaces;
     } finally {
       reader.CloseEnum(phEnum.value);
-      calloc.free(phEnum);
-      calloc.free(rImpls);
-      calloc.free(pcImpls);
+      free(phEnum);
+      free(rImpls);
+      free(pcImpls);
     }
   }
 
@@ -301,9 +302,9 @@ class TypeDef extends TokenObject
   List<Field> get fields {
     final fields = <Field>[];
 
-    final phEnum = calloc<IntPtr>();
-    final rgFields = calloc<Uint32>();
-    final pcTokens = calloc<Uint32>();
+    final phEnum = calloc<HCORENUM>();
+    final rgFields = calloc<mdFieldDef>();
+    final pcTokens = calloc<ULONG>();
 
     try {
       var hr = reader.EnumFields(phEnum, token, rgFields, 1, pcTokens);
@@ -316,9 +317,9 @@ class TypeDef extends TokenObject
       return fields;
     } finally {
       reader.CloseEnum(phEnum.value);
-      calloc.free(phEnum);
-      calloc.free(rgFields);
-      calloc.free(pcTokens);
+      free(phEnum);
+      free(rgFields);
+      free(pcTokens);
     }
   }
 
@@ -326,9 +327,9 @@ class TypeDef extends TokenObject
   List<Method> get methods {
     final methods = <Method>[];
 
-    final phEnum = calloc<IntPtr>();
-    final rgMethods = calloc<Uint32>();
-    final pcTokens = calloc<Uint32>();
+    final phEnum = calloc<HCORENUM>();
+    final rgMethods = calloc<mdMethodDef>();
+    final pcTokens = calloc<ULONG>();
 
     try {
       var hr = reader.EnumMethods(phEnum, token, rgMethods, 1, pcTokens);
@@ -341,9 +342,9 @@ class TypeDef extends TokenObject
       return methods;
     } finally {
       reader.CloseEnum(phEnum.value);
-      calloc.free(phEnum);
-      calloc.free(rgMethods);
-      calloc.free(pcTokens);
+      free(phEnum);
+      free(rgMethods);
+      free(pcTokens);
     }
   }
 
@@ -351,9 +352,9 @@ class TypeDef extends TokenObject
   List<Property> get properties {
     final properties = <Property>[];
 
-    final phEnum = calloc<IntPtr>();
-    final rgProperties = calloc<Uint32>();
-    final pcProperties = calloc<Uint32>();
+    final phEnum = calloc<HCORENUM>();
+    final rgProperties = calloc<mdProperty>();
+    final pcProperties = calloc<ULONG>();
 
     try {
       var hr =
@@ -367,9 +368,9 @@ class TypeDef extends TokenObject
       return properties;
     } finally {
       reader.CloseEnum(phEnum.value);
-      calloc.free(phEnum);
-      calloc.free(rgProperties);
-      calloc.free(pcProperties);
+      free(phEnum);
+      free(rgProperties);
+      free(pcProperties);
     }
   }
 
@@ -377,9 +378,9 @@ class TypeDef extends TokenObject
   List<Event> get events {
     final events = <Event>[];
 
-    final phEnum = calloc<IntPtr>();
-    final rgEvents = calloc<Uint32>();
-    final pcEvents = calloc<Uint32>();
+    final phEnum = calloc<HCORENUM>();
+    final rgEvents = calloc<mdEvent>();
+    final pcEvents = calloc<ULONG>();
 
     try {
       var hr = reader.EnumEvents(phEnum, token, rgEvents, 1, pcEvents);
@@ -392,9 +393,9 @@ class TypeDef extends TokenObject
       return events;
     } finally {
       reader.CloseEnum(phEnum.value);
-      calloc.free(phEnum);
-      calloc.free(rgEvents);
-      calloc.free(pcEvents);
+      free(phEnum);
+      free(rgEvents);
+      free(pcEvents);
     }
   }
 
@@ -411,7 +412,7 @@ class TypeDef extends TokenObject
   /// Returns null if the method is not found.
   Method? findMethod(String methodName) {
     final szName = methodName.toNativeUtf16();
-    final pmb = calloc<Uint32>();
+    final pmb = calloc<mdMethodDef>();
 
     try {
       final hr = reader.FindMethod(token, szName, nullptr, 0, pmb);
@@ -423,8 +424,8 @@ class TypeDef extends TokenObject
         throw COMException(hr);
       }
     } finally {
-      calloc.free(szName);
-      calloc.free(pmb);
+      free(szName);
+      free(pmb);
     }
   }
 
@@ -435,7 +436,7 @@ class TypeDef extends TokenObject
   String? getCustomGUIDAttribute(String guidAttributeName) {
     final ptrAttributeName = guidAttributeName.toNativeUtf16();
     final ppData = calloc<IntPtr>();
-    final pcbData = calloc<Uint32>();
+    final pcbData = calloc<ULONG>();
 
     try {
       final hr = reader.GetCustomAttributeByName(
@@ -448,9 +449,9 @@ class TypeDef extends TokenObject
         }
       }
     } finally {
-      calloc.free(ptrAttributeName);
-      calloc.free(ppData);
-      calloc.free(pcbData);
+      free(ptrAttributeName);
+      free(ppData);
+      free(pcbData);
     }
   }
 

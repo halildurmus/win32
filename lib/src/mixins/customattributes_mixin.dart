@@ -28,9 +28,9 @@ mixin CustomAttributesMixin on TokenObject {
         throw WindowsException(hr);
       }
     } finally {
-      calloc.free(szName);
-      calloc.free(ppData);
-      calloc.free(pcbData);
+      free(szName);
+      free(ppData);
+      free(pcbData);
     }
   }
 
@@ -50,9 +50,9 @@ mixin CustomAttributesMixin on TokenObject {
         throw WindowsException(hr);
       }
     } finally {
-      calloc.free(szName);
-      calloc.free(ppData);
-      calloc.free(pcbData);
+      free(szName);
+      free(ppData);
+      free(pcbData);
     }
   }
 
@@ -82,9 +82,9 @@ mixin CustomAttributesMixin on TokenObject {
       return attributes;
     } finally {
       reader.CloseEnum(phEnum.value);
-      calloc.free(phEnum);
-      calloc.free(rAttrs);
-      calloc.free(pcAttrs);
+      free(phEnum);
+      free(rAttrs);
+      free(pcAttrs);
     }
   }
 }

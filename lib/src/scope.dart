@@ -12,6 +12,7 @@ import 'com/IMetaDataImport2.dart';
 import 'enumeration.dart';
 import 'module.dart';
 import 'typedef.dart';
+import 'win32.dart';
 
 /// A metadata scope, which typically matches an on-disk file.
 ///
@@ -26,8 +27,8 @@ class Scope {
   Scope(this.reader);
 
   String get name {
-    final szName = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
-    final pchName = calloc<Uint32>();
+    final szName = stralloc(MAX_STRING_SIZE);
+    final pchName = calloc<ULONG>();
     try {
       final hr =
           reader.GetScopeProps(szName, MAX_STRING_SIZE, pchName, nullptr);
@@ -37,8 +38,8 @@ class Scope {
         throw COMException(hr);
       }
     } finally {
-      calloc.free(szName);
-      calloc.free(pchName);
+      free(szName);
+      free(pchName);
     }
   }
 
@@ -50,9 +51,9 @@ class Scope {
   /// Get an enumerated list of typedefs for this scope.
   List<TypeDef> get typeDefs {
     if (_typedefs.isEmpty) {
-      final phEnum = calloc<IntPtr>();
-      final rgTypeDefs = calloc<Uint32>();
-      final pcTypeDefs = calloc<Uint32>();
+      final phEnum = calloc<HCORENUM>();
+      final rgTypeDefs = calloc<mdTypeDef>();
+      final pcTypeDefs = calloc<ULONG>();
 
       try {
         var hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
@@ -64,9 +65,9 @@ class Scope {
         }
       } finally {
         reader.CloseEnum(phEnum.value);
-        calloc.free(phEnum);
-        calloc.free(rgTypeDefs);
-        calloc.free(pcTypeDefs);
+        free(phEnum);
+        free(rgTypeDefs);
+        free(pcTypeDefs);
       }
     }
     return _typedefs;
@@ -78,9 +79,9 @@ class Scope {
   /// Get an enumerated list of modules in this scope.
   List<Module> get modules {
     if (_modules.isEmpty) {
-      final phEnum = calloc<IntPtr>();
-      final rgModuleRefs = calloc<Uint32>();
-      final pcModuleRefs = calloc<Uint32>();
+      final phEnum = calloc<HCORENUM>();
+      final rgModuleRefs = calloc<mdModuleRef>();
+      final pcModuleRefs = calloc<ULONG>();
 
       try {
         var hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
@@ -91,9 +92,9 @@ class Scope {
         }
       } finally {
         reader.CloseEnum(phEnum.value);
-        calloc.free(phEnum);
-        calloc.free(rgModuleRefs);
-        calloc.free(pcModuleRefs);
+        free(phEnum);
+        free(rgModuleRefs);
+        free(pcModuleRefs);
       }
     }
     return _modules;
@@ -103,11 +104,11 @@ class Scope {
   List<String> get userStrings {
     final strings = <String>[];
 
-    final phEnum = calloc<IntPtr>();
-    final rgStrings = calloc<Uint32>();
-    final pcStrings = calloc<Uint32>();
-    final szString = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
-    final pchString = calloc<Uint32>();
+    final phEnum = calloc<HCORENUM>();
+    final rgStrings = calloc<mdString>();
+    final pcStrings = calloc<ULONG>();
+    final szString = stralloc(MAX_STRING_SIZE);
+    final pchString = calloc<ULONG>();
 
     try {
       var hr = reader.EnumUserStrings(phEnum, rgStrings, 1, pcStrings);
@@ -121,11 +122,11 @@ class Scope {
       }
     } finally {
       reader.CloseEnum(phEnum.value);
-      calloc.free(phEnum);
-      calloc.free(rgStrings);
-      calloc.free(pcStrings);
-      calloc.free(szString);
-      calloc.free(pchString);
+      free(phEnum);
+      free(rgStrings);
+      free(pcStrings);
+      free(szString);
+      free(pchString);
     }
 
     return strings;

@@ -14,6 +14,7 @@ import 'constants.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
+import 'win32.dart';
 
 class Property extends TokenObject with CustomAttributesMixin {
   final String name;
@@ -52,21 +53,19 @@ class Property extends TokenObject with CustomAttributesMixin {
       : super(reader, token);
 
   factory Property.fromToken(IMetaDataImport2 reader, int token) {
-    final ptkTypeDef = calloc<Uint32>();
-    final szProperty = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
-    final pchProperty = calloc<Uint32>();
-    final pdwPropFlags = calloc<Uint32>();
-    // TODO: Incorrectly declared? Should be P<P<U1>>?
-    final ppvSigBlob = calloc<Pointer<Uint8>>();
-    final pcbSigBlob = calloc<Uint32>();
-    final pdwCPlusTypeFlag = calloc<Uint32>();
-    // TODO: Incorrectly declared? Should be P<P<U1>>?
-    final ppDefaultValue = calloc<Pointer<Uint8>>();
-    final pcchDefaultValue = calloc<Uint32>();
-    final ptkSetter = calloc<Uint32>();
-    final ptkGetter = calloc<Uint32>();
-    final rgOtherMethod = calloc<Uint32>(256);
-    final pcOtherMethod = calloc<Uint32>();
+    final ptkTypeDef = calloc<mdTypeDef>();
+    final szProperty = stralloc(MAX_STRING_SIZE);
+    final pchProperty = calloc<ULONG>();
+    final pdwPropFlags = calloc<DWORD>();
+    final ppvSigBlob = calloc<PCCOR_SIGNATURE>();
+    final pcbSigBlob = calloc<ULONG>();
+    final pdwCPlusTypeFlag = calloc<DWORD>();
+    final ppDefaultValue = calloc<UVCP_CONSTANT>();
+    final pcchDefaultValue = calloc<ULONG>();
+    final ptkSetter = calloc<mdMethodDef>();
+    final ptkGetter = calloc<mdMethodDef>();
+    final rgOtherMethod = calloc<mdMethodDef>(256);
+    final pcOtherMethod = calloc<ULONG>();
 
     try {
       final hr = reader.GetPropertyProps(
@@ -116,19 +115,19 @@ class Property extends TokenObject with CustomAttributesMixin {
         throw WindowsException(hr);
       }
     } finally {
-      calloc.free(ptkTypeDef);
-      calloc.free(szProperty);
-      calloc.free(pchProperty);
-      calloc.free(pdwPropFlags);
-      calloc.free(ppvSigBlob);
-      calloc.free(pcbSigBlob);
-      calloc.free(pdwCPlusTypeFlag);
-      calloc.free(ppDefaultValue);
-      calloc.free(pcchDefaultValue);
-      calloc.free(ptkSetter);
-      calloc.free(ptkGetter);
-      calloc.free(rgOtherMethod);
-      calloc.free(pcOtherMethod);
+      free(ptkTypeDef);
+      free(szProperty);
+      free(pchProperty);
+      free(pdwPropFlags);
+      free(ppvSigBlob);
+      free(pcbSigBlob);
+      free(pdwCPlusTypeFlag);
+      free(ppDefaultValue);
+      free(pcchDefaultValue);
+      free(ptkSetter);
+      free(ptkGetter);
+      free(rgOtherMethod);
+      free(pcOtherMethod);
     }
   }
 

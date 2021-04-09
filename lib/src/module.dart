@@ -10,6 +10,7 @@ import 'package:win32/win32.dart';
 import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'mixins/customattributes_mixin.dart';
+import 'win32.dart';
 
 class Module extends TokenObject with CustomAttributesMixin {
   final String name;
@@ -17,8 +18,8 @@ class Module extends TokenObject with CustomAttributesMixin {
   Module(IMetaDataImport2 reader, int token, this.name) : super(reader, token);
 
   factory Module.fromToken(IMetaDataImport2 reader, int token) {
-    final szName = calloc<Uint16>(MAX_STRING_SIZE).cast<Utf16>();
-    final pchName = calloc<Uint32>();
+    final szName = stralloc(MAX_STRING_SIZE);
+    final pchName = calloc<ULONG>();
 
     try {
       final hr =
@@ -30,8 +31,8 @@ class Module extends TokenObject with CustomAttributesMixin {
         throw WindowsException(hr);
       }
     } finally {
-      calloc.free(pchName);
-      calloc.free(szName);
+      free(pchName);
+      free(szName);
     }
   }
 
