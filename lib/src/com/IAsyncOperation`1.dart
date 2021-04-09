@@ -27,15 +27,17 @@ const IID_IAsyncOperation = '{9FC2B0BB-E446-44E2-AA61-9CAB8F636AF2}';
 typedef _put_Completed_Native = Int32 Function(Pointer obj, Pointer handler);
 typedef _put_Completed_Dart = int Function(Pointer obj, Pointer handler);
 
-typedef _get_Completed_Native = Int32 Function(Pointer obj, Pointer value);
-typedef _get_Completed_Dart = int Function(Pointer obj, Pointer value);
+typedef _get_Completed_Native = Int32 Function(
+    Pointer obj, Pointer<Pointer> value);
+typedef _get_Completed_Dart = int Function(Pointer obj, Pointer<Pointer> value);
 
-typedef _GetResults_Native = Int32 Function(Pointer obj, Pointer result);
-typedef _GetResults_Dart = int Function(Pointer obj, Pointer result);
+typedef _GetResults_Native = Int32 Function(
+    Pointer obj, Pointer<Pointer> result);
+typedef _GetResults_Dart = int Function(Pointer obj, Pointer<Pointer> result);
 
 /// {@category Interface}
 /// {@category winrt}
-class IAsyncOperation extends IInspectable {
+class IAsyncOperation<TResult> extends IInspectable {
   // vtable begins at 6, ends at 8
 
   IAsyncOperation(Pointer<COMObject> ptr) : super(ptr);
@@ -64,7 +66,7 @@ class IAsyncOperation extends IInspectable {
     }
   }
 
-  int GetResults(Pointer result) =>
+  int GetResults(Pointer<Pointer> result) =>
       Pointer<NativeFunction<_GetResults_Native>>.fromAddress(
               ptr.ref.vtable.elementAt(8).value)
           .asFunction<_GetResults_Dart>()(ptr.ref.lpVtbl, result);
