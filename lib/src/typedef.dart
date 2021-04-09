@@ -435,14 +435,14 @@ class TypeDef extends TokenObject
 
   String? getCustomGUIDAttribute(String guidAttributeName) {
     final ptrAttributeName = guidAttributeName.toNativeUtf16();
-    final ppData = calloc<IntPtr>();
+    final ppData = calloc<Pointer<BYTE>>();
     final pcbData = calloc<ULONG>();
 
     try {
       final hr = reader.GetCustomAttributeByName(
-          token, ptrAttributeName, ppData, pcbData);
+          token, ptrAttributeName, ppData.cast(), pcbData);
       if (SUCCEEDED(hr)) {
-        final blob = Pointer<Uint8>.fromAddress(ppData.value);
+        final blob = ppData.value;
         if (pcbData.value > 0) {
           final returnValue = blob.elementAt(2).cast<GUID>();
           return returnValue.ref.toString();
