@@ -25,6 +25,8 @@ class TypeIdentifier {
   /// Any arguments (for example, the Uint16 in a Pointer<Uint16>).
   List<TypeIdentifier> typeArgs = [];
 
+  int? genericParameter;
+
   TypeIdentifier(this.corType, [this.name = '', this.type]);
 
   TypeIdentifier clone() {
@@ -232,7 +234,7 @@ class TypeIdentifier {
       case CorElementType.ELEMENT_TYPE_CLASS:
         return 'class';
       case CorElementType.ELEMENT_TYPE_VAR:
-        return 'classvar';
+        return 'generic_type_parameter';
       case CorElementType.ELEMENT_TYPE_ARRAY:
         return 'array';
       case CorElementType.ELEMENT_TYPE_GENERICINST:
@@ -250,7 +252,7 @@ class TypeIdentifier {
       case CorElementType.ELEMENT_TYPE_SZARRAY:
         return 'vector';
       case CorElementType.ELEMENT_TYPE_MVAR:
-        return 'methodvar';
+        return 'generic_method_parameter';
       case CorElementType.ELEMENT_TYPE_CMOD_REQD:
         return 'required';
       case CorElementType.ELEMENT_TYPE_CMOD_OPT:

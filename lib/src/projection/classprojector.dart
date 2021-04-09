@@ -45,6 +45,7 @@ class ClassProjector {
 
       for (final mdParam in mdMethod.parameters) {
         final typeProjection = TypeProjector(mdParam.typeIdentifier);
+
         methodProjection.parameters.add(ParameterProjection(mdParam.name,
             nativeType: typeProjection.nativeType,
             dartType: typeProjection.dartType));

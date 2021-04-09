@@ -167,6 +167,9 @@ class TypeProjector {
         return 'IntPtr';
       case CorElementType.ELEMENT_TYPE_OBJECT:
         return 'COMObject';
+      case CorElementType.ELEMENT_TYPE_VAR:
+      case CorElementType.ELEMENT_TYPE_MVAR:
+        return 'Pointer';
       case CorElementType.ELEMENT_TYPE_GENERICINST:
       case CorElementType.ELEMENT_TYPE_ARRAY:
         // TODO: Assume a Vector for now
