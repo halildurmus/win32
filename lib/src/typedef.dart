@@ -46,6 +46,12 @@ class TypeDef extends TokenObject
   final int baseTypeToken;
   final TypeIdentifier? typeSpec;
 
+  final _interfaces = <TypeDef>[];
+  final _fields = <Field>[];
+  final _methods = <Method>[];
+  final _properties = <Property>[];
+  final _events = <Event>[];
+
   TypeVisibility get typeVisibility =>
       TypeVisibility.values[attributes & CorTypeAttr.tdVisibilityMask];
 
@@ -133,7 +139,7 @@ class TypeDef extends TokenObject
   ///
   /// Typically, typedefs should be obtained from a [WinmdScope] object rather
   /// than being created directly.
-  const TypeDef(IMetaDataImport2 reader,
+  TypeDef(IMetaDataImport2 reader,
       [int token = 0,
       this.typeName = '',
       this.attributes = 0,
@@ -239,8 +245,6 @@ class TypeDef extends TokenObject
           reader.GetTypeSpecFromToken(typeSpecToken, ppvSig.cast(), pcbSig);
       final signature = ppvSig.value.asTypedList(pcbSig.value);
       final typeTuple = parseTypeFromSignature(signature, reader);
-      // print(
-      //     '${typeSpecToken.toHexString(32)}: ${signature.map((m) => m.toHexString(8))}');
 
       if (SUCCEEDED(hr)) {
         return TypeDef(
@@ -275,130 +279,133 @@ class TypeDef extends TokenObject
 
   /// Enumerate all interfaces that this type implements.
   List<TypeDef> get interfaces {
-    final interfaces = <TypeDef>[];
+    if (_interfaces.isEmpty) {
+      final phEnum = calloc<HCORENUM>();
+      final rImpls = calloc<mdInterfaceImpl>();
+      final pcImpls = calloc<ULONG>();
 
-    final phEnum = calloc<HCORENUM>();
-    final rImpls = calloc<mdInterfaceImpl>();
-    final pcImpls = calloc<ULONG>();
+      try {
+        var hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
+        while (hr == S_OK) {
+          final token = rImpls.value;
 
-    try {
-      var hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
-      while (hr == S_OK) {
-        final token = rImpls.value;
-
-        interfaces.add(processInterfaceToken(token));
-        hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
+          _interfaces.add(processInterfaceToken(token));
+          hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
+        }
+      } finally {
+        reader.CloseEnum(phEnum.value);
+        free(phEnum);
+        free(rImpls);
+        free(pcImpls);
       }
-      return interfaces;
-    } finally {
-      reader.CloseEnum(phEnum.value);
-      free(phEnum);
-      free(rImpls);
-      free(pcImpls);
     }
+    return _interfaces;
   }
 
   /// Enumerate all fields contained within this type.
   List<Field> get fields {
-    final fields = <Field>[];
+    if (_fields.isEmpty) {
+      final phEnum = calloc<HCORENUM>();
+      final rgFields = calloc<mdFieldDef>();
+      final pcTokens = calloc<ULONG>();
 
-    final phEnum = calloc<HCORENUM>();
-    final rgFields = calloc<mdFieldDef>();
-    final pcTokens = calloc<ULONG>();
+      try {
+        var hr = reader.EnumFields(phEnum, token, rgFields, 1, pcTokens);
+        while (hr == S_OK) {
+          final token = rgFields.value;
 
-    try {
-      var hr = reader.EnumFields(phEnum, token, rgFields, 1, pcTokens);
-      while (hr == S_OK) {
-        final token = rgFields.value;
-
-        fields.add(Field.fromToken(reader, token));
-        hr = reader.EnumFields(phEnum, token, rgFields, 1, pcTokens);
+          _fields.add(Field.fromToken(reader, token));
+          hr = reader.EnumFields(phEnum, token, rgFields, 1, pcTokens);
+        }
+      } finally {
+        reader.CloseEnum(phEnum.value);
+        free(phEnum);
+        free(rgFields);
+        free(pcTokens);
       }
-      return fields;
-    } finally {
-      reader.CloseEnum(phEnum.value);
-      free(phEnum);
-      free(rgFields);
-      free(pcTokens);
     }
+    return _fields;
   }
 
   /// Enumerate all methods contained within this type.
   List<Method> get methods {
-    final methods = <Method>[];
+    if (_methods.isEmpty) {
+      final phEnum = calloc<HCORENUM>();
+      final rgMethods = calloc<mdMethodDef>();
+      final pcTokens = calloc<ULONG>();
 
-    final phEnum = calloc<HCORENUM>();
-    final rgMethods = calloc<mdMethodDef>();
-    final pcTokens = calloc<ULONG>();
+      try {
+        var hr = reader.EnumMethods(phEnum, token, rgMethods, 1, pcTokens);
+        while (hr == S_OK) {
+          final token = rgMethods.value;
 
-    try {
-      var hr = reader.EnumMethods(phEnum, token, rgMethods, 1, pcTokens);
-      while (hr == S_OK) {
-        final token = rgMethods.value;
-
-        methods.add(Method.fromToken(reader, token));
-        hr = reader.EnumMethods(phEnum, token, rgMethods, 1, pcTokens);
+          _methods.add(Method.fromToken(reader, token));
+          hr = reader.EnumMethods(phEnum, token, rgMethods, 1, pcTokens);
+        }
+      } finally {
+        reader.CloseEnum(phEnum.value);
+        free(phEnum);
+        free(rgMethods);
+        free(pcTokens);
       }
-      return methods;
-    } finally {
-      reader.CloseEnum(phEnum.value);
-      free(phEnum);
-      free(rgMethods);
-      free(pcTokens);
     }
+    return _methods;
   }
 
   /// Enumerate all properties contained within this type.
   List<Property> get properties {
-    final properties = <Property>[];
+    if (_properties.isEmpty) {
+      final phEnum = calloc<HCORENUM>();
+      final rgProperties = calloc<mdProperty>();
+      final pcProperties = calloc<ULONG>();
 
-    final phEnum = calloc<HCORENUM>();
-    final rgProperties = calloc<mdProperty>();
-    final pcProperties = calloc<ULONG>();
+      try {
+        var hr =
+            reader.EnumProperties(phEnum, token, rgProperties, 1, pcProperties);
+        while (hr == S_OK) {
+          final token = rgProperties.value;
 
-    try {
-      var hr =
-          reader.EnumProperties(phEnum, token, rgProperties, 1, pcProperties);
-      while (hr == S_OK) {
-        final token = rgProperties.value;
-
-        properties.add(Property.fromToken(reader, token));
-        hr = reader.EnumMethods(phEnum, token, rgProperties, 1, pcProperties);
+          _properties.add(Property.fromToken(reader, token));
+          hr = reader.EnumMethods(phEnum, token, rgProperties, 1, pcProperties);
+        }
+      } finally {
+        reader.CloseEnum(phEnum.value);
+        free(phEnum);
+        free(rgProperties);
+        free(pcProperties);
       }
-      return properties;
-    } finally {
-      reader.CloseEnum(phEnum.value);
-      free(phEnum);
-      free(rgProperties);
-      free(pcProperties);
     }
+    return _properties;
   }
 
   /// Enumerate all events contained within this type.
   List<Event> get events {
-    final events = <Event>[];
+    if (_events.isEmpty) {
+      final phEnum = calloc<HCORENUM>();
+      final rgEvents = calloc<mdEvent>();
+      final pcEvents = calloc<ULONG>();
 
-    final phEnum = calloc<HCORENUM>();
-    final rgEvents = calloc<mdEvent>();
-    final pcEvents = calloc<ULONG>();
+      try {
+        var hr = reader.EnumEvents(phEnum, token, rgEvents, 1, pcEvents);
+        while (hr == S_OK) {
+          final token = rgEvents.value;
 
-    try {
-      var hr = reader.EnumEvents(phEnum, token, rgEvents, 1, pcEvents);
-      while (hr == S_OK) {
-        final token = rgEvents.value;
-
-        events.add(Event.fromToken(reader, token));
-        hr = reader.EnumEvents(phEnum, token, rgEvents, 1, pcEvents);
+          _events.add(Event.fromToken(reader, token));
+          hr = reader.EnumEvents(phEnum, token, rgEvents, 1, pcEvents);
+        }
+      } finally {
+        reader.CloseEnum(phEnum.value);
+        free(phEnum);
+        free(rgEvents);
+        free(pcEvents);
       }
-      return events;
-    } finally {
-      reader.CloseEnum(phEnum.value);
-      free(phEnum);
-      free(rgEvents);
-      free(pcEvents);
     }
+    return _events;
   }
 
+  /// Get a field matching the name, if one exists.
+  ///
+  /// Returns null if the field is not found.
   Field? findField(String fieldName) {
     try {
       return fields.firstWhere((field) => field.name == fieldName);

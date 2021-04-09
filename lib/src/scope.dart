@@ -20,6 +20,7 @@ import 'win32.dart';
 /// [MetadataStore], which caches scopes to avoid duplication.
 class Scope {
   final IMetaDataImport2 reader;
+
   final _typedefs = <TypeDef>[];
   final _modules = <Module>[];
   final _enums = <Enumeration>[];
