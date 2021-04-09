@@ -14,6 +14,7 @@ import 'com/IMetaDataDispenser.dart';
 import 'com/IMetaDataImport2.dart';
 import 'scope.dart';
 import 'typedef.dart';
+import 'win32.dart';
 
 /// Caches a reader for each file scope.
 ///
@@ -25,6 +26,9 @@ class MetadataStore {
 
   static bool isInitialized = false;
 
+  /// Initialize the [MetadataStore] object.
+  ///
+  /// This is done automatically by any method that uses it.
   static void initialize() {
     // This must have the same object lifetime as MetadataStore itself.
     final dispenserObject = calloc<Pointer>();
@@ -41,21 +45,27 @@ class MetadataStore {
     isInitialized = true;
   }
 
-  // Generate a scope for the locally-cached Win32 metadata file. By having this
-  // here, we remove the need for this large file to be distributed with the
-  // win32 package, since it's only used at development time for generating
-  // types. It also reduces the risk of breaking changes being out of sync with
-  // the winmd library, since the two can be more tightly bound together.
+  /// Return the scope that contains the Win32 metadata.
+  ///
+  /// The Windows Runtime metadata is included as part of Windows, but Win32
+  /// metadata is not. We include a copy that is tested to work with this
+  /// package, since it's likely that the two will be used together.
+  ///
+  /// By having this here, we remove the need for this large file to be
+  /// distributed with the win32 package, since it's only used at development
+  /// time for generating types. It also reduces the risk of breaking changes
+  /// being out of sync with the winmd library, since the two can be more
+  /// tightly bound together.
   static Scope getWin32Scope() {
     const win32ScopeName = 'Windows.Win32.winmd';
     if (cache.containsKey(win32ScopeName)) {
       return cache[win32ScopeName]!;
     } else {
-      final uri = Uri.parse('package:winmd/assets/Windows.Win32.winmd');
+      final uri = Uri.parse('package:winmd/assets/$win32ScopeName');
       final future = Isolate.resolvePackageUri(uri);
       final package = waitFor(future, timeout: const Duration(seconds: 5));
       if (package == null) {
-        throw Exception('Could not find Windows.Win32.winmd');
+        throw Exception('Could not find $win32ScopeName.');
       }
       final fileScope = File.fromUri(package);
 
@@ -111,7 +121,7 @@ class MetadataStore {
 
       final hstrMetaDataFilePath = calloc<IntPtr>();
       final spMetaDataImport = calloc<Pointer>();
-      final typeDef = calloc<Uint32>();
+      final typeDef = calloc<mdTypeDef>();
 
       try {
         // For apps that are not Windows Store apps, RoGetMetaDataFile can only be
@@ -135,6 +145,7 @@ class MetadataStore {
     }
   }
 
+  /// Find a matching typedef, if one exists, for a Windows Runtime type.
   static TypeDef? getMetadataForType(String typeName) {
     if (!isInitialized) initialize();
 

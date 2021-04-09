@@ -15,6 +15,7 @@ import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
+import 'win32.dart';
 
 class WinmdException implements Exception {
   final String message;
@@ -59,10 +60,9 @@ File metadataFileContainingType(String typeName) {
   File path;
 
   final hstrTypeName = convertToHString(typeName);
-
   final hstrMetaDataFilePath = calloc<IntPtr>();
   final spMetaDataImport = calloc<Pointer>();
-  final typeDef = calloc<Uint32>();
+  final typeDef = calloc<mdTypeDef>();
 
   try {
     // RoGetMetaDataFile can only be used for Windows Runtime classes (i.e. not
