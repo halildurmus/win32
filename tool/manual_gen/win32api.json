@@ -2824,6 +2824,20 @@
         "category": "winrt",
         "minimumWindowsVersion": "WIN8"
     },
+    "RoGetActivationFactory": {
+        "prototype": "HRESULT RoGetActivationFactory(\n  HSTRING activatableClassId,\n  REFIID  iid,\n  void    **factory\n);",
+        "apiSet": "api-ms-win-core-winrt-l1-1-0",
+        "comment": "Gets the activation factory for the specified runtime class.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "RoGetApartmentIdentifier": {
+        "prototype": "HRESULT RoGetApartmentIdentifier(\n  UINT64 *apartmentIdentifier\n);",
+        "apiSet": "api-ms-win-core-winrt-l1-1-0",
+        "comment": "Gets a unique identifier for the current apartment.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
     "RoGetMetaDataFile": {
         "prototype": "HRESULT RoGetMetaDataFile(\n  const HSTRING        name,\n  IMetaDataDispenserEx *metaDataDispenser,\n  HSTRING              *metaDataFilePath,\n  IMetaDataImport2     **metaDataImport,\n  mdTypeDef            *typeDefToken\n);",
         "apiSet": "api-ms-win-ro-typeresolution-l1-1-0",

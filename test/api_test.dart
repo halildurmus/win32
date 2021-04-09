@@ -6839,6 +6839,31 @@ void main() {
       });
     }
     if (windowsBuildNumber >= 9200) {
+      test('Can instantiate RoGetActivationFactory', () {
+        final api_ms_win_core_winrt_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-l1-1-0.dll');
+        final RoGetActivationFactory =
+            api_ms_win_core_winrt_l1_1_0.lookupFunction<
+                Int32 Function(IntPtr activatableClassId, Pointer<GUID> iid,
+                    Pointer<Pointer> factory),
+                int Function(int activatableClassId, Pointer<GUID> iid,
+                    Pointer<Pointer> factory)>('RoGetActivationFactory');
+        expect(RoGetActivationFactory, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate RoGetApartmentIdentifier', () {
+        final api_ms_win_core_winrt_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-l1-1-0.dll');
+        final RoGetApartmentIdentifier =
+            api_ms_win_core_winrt_l1_1_0.lookupFunction<
+                    Int32 Function(Pointer<Uint64> apartmentIdentifier),
+                    int Function(Pointer<Uint64> apartmentIdentifier)>(
+                'RoGetApartmentIdentifier');
+        expect(RoGetApartmentIdentifier, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
       test('Can instantiate RoInitialize', () {
         final api_ms_win_core_winrt_l1_1_0 =
             DynamicLibrary.open('api-ms-win-core-winrt-l1-1-0.dll');

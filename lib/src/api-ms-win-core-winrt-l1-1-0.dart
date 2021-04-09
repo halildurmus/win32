@@ -37,6 +37,43 @@ int RoActivateInstance(int activatableClassId, Pointer<Pointer> instance) {
   return _RoActivateInstance(activatableClassId, instance);
 }
 
+/// Gets the activation factory for the specified runtime class.
+///
+/// ```c
+/// HRESULT RoGetActivationFactory(
+///   HSTRING activatableClassId,
+///   REFIID  iid,
+///   void    **factory
+/// );
+/// ```
+/// {@category winrt}
+int RoGetActivationFactory(
+    int activatableClassId, Pointer<GUID> iid, Pointer<Pointer> factory) {
+  final _RoGetActivationFactory = _api_ms_win_core_winrt_l1_1_0.lookupFunction<
+      Int32 Function(IntPtr activatableClassId, Pointer<GUID> iid,
+          Pointer<Pointer> factory),
+      int Function(int activatableClassId, Pointer<GUID> iid,
+          Pointer<Pointer> factory)>('RoGetActivationFactory');
+  return _RoGetActivationFactory(activatableClassId, iid, factory);
+}
+
+/// Gets a unique identifier for the current apartment.
+///
+/// ```c
+/// HRESULT RoGetApartmentIdentifier(
+///   UINT64 *apartmentIdentifier
+/// );
+/// ```
+/// {@category winrt}
+int RoGetApartmentIdentifier(Pointer<Uint64> apartmentIdentifier) {
+  final _RoGetApartmentIdentifier =
+      _api_ms_win_core_winrt_l1_1_0.lookupFunction<
+          Int32 Function(Pointer<Uint64> apartmentIdentifier),
+          int Function(
+              Pointer<Uint64> apartmentIdentifier)>('RoGetApartmentIdentifier');
+  return _RoGetApartmentIdentifier(apartmentIdentifier);
+}
+
 /// Initializes the Windows Runtime on the current thread with the
 /// specified concurrency model.
 ///
