@@ -103,6 +103,10 @@
         "namespace": "Windows.Win32.Security.CREDENTIAL_ATTRIBUTEW",
         "comment": "The CREDENTIAL_ATTRIBUTE structure contains an application-defined attribute of the credential. An attribute is a keyword-value pair. It is up to the application to define the meaning of the attribute."
     },
+    "CURSORINFO": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.CURSORINFO",
+        "comment": "Contains global cursor information."
+    },
     "DESIGNVECTOR": {
         "namespace": "Windows.Win32.Gdi.DESIGNVECTOR",
         "comment": "The DESIGNVECTOR structure is used by an application to specify values for the axes of a multiple master font."

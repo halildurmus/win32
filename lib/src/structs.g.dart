@@ -495,6 +495,19 @@ class CREDENTIAL_ATTRIBUTE extends Struct {
   external Pointer<Uint8> Value;
 }
 
+/// Contains global cursor information.
+///
+/// {@category Struct}
+class CURSORINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int flags;
+  @IntPtr()
+  external int hCursor;
+  external POINT ptScreenPos;
+}
+
 /// The DESIGNVECTOR structure is used by an application to specify values
 /// for the axes of a multiple master font.
 ///

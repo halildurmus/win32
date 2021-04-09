@@ -2289,6 +2289,12 @@ void main() {
           int Function(int hDlg, int nResult)>('EndDialog');
       expect(EndDialog, isA<Function>());
     });
+    test('Can instantiate EndMenu', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final EndMenu =
+          user32.lookupFunction<Int32 Function(), int Function()>('EndMenu');
+      expect(EndMenu, isA<Function>());
+    });
     test('Can instantiate EndPaint', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final EndPaint = user32.lookupFunction<
@@ -2442,6 +2448,20 @@ void main() {
           .lookupFunction<IntPtr Function(), int Function()>('GetCapture');
       expect(GetCapture, isA<Function>());
     });
+    test('Can instantiate GetCaretBlinkTime', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetCaretBlinkTime =
+          user32.lookupFunction<Uint32 Function(), int Function()>(
+              'GetCaretBlinkTime');
+      expect(GetCaretBlinkTime, isA<Function>());
+    });
+    test('Can instantiate GetCaretPos', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetCaretPos = user32.lookupFunction<
+          Int32 Function(Pointer<POINT> lpPoint),
+          int Function(Pointer<POINT> lpPoint)>('GetCaretPos');
+      expect(GetCaretPos, isA<Function>());
+    });
     test('Can instantiate GetClassInfo', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetClassInfo = user32.lookupFunction<
@@ -2511,11 +2531,25 @@ void main() {
               'GetClipboardViewer');
       expect(GetClipboardViewer, isA<Function>());
     });
+    test('Can instantiate GetClipCursor', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetClipCursor = user32.lookupFunction<
+          Int32 Function(Pointer<RECT> lpRect),
+          int Function(Pointer<RECT> lpRect)>('GetClipCursor');
+      expect(GetClipCursor, isA<Function>());
+    });
     test('Can instantiate GetCursor', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetCursor =
           user32.lookupFunction<IntPtr Function(), int Function()>('GetCursor');
       expect(GetCursor, isA<Function>());
+    });
+    test('Can instantiate GetCursorInfo', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetCursorInfo = user32.lookupFunction<
+          Int32 Function(Pointer<CURSORINFO> pci),
+          int Function(Pointer<CURSORINFO> pci)>('GetCursorInfo');
+      expect(GetCursorInfo, isA<Function>());
     });
     test('Can instantiate GetCursorPos', () {
       final user32 = DynamicLibrary.open('user32.dll');

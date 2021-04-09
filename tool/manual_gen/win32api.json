@@ -846,6 +846,11 @@
         "dllLibrary": "user32",
         "comment": "Destroys a modal dialog box, causing the system to end any processing for the dialog box."
     },
+    "EndMenu": {
+        "prototype": "BOOL EndMenu();",
+        "dllLibrary": "user32",
+        "comment": "Ends the calling thread's active menu."
+    },
     "EndPaint": {
         "prototype": "BOOL EndPaint(\n  HWND              hWnd,\n  const PAINTSTRUCT *lpPaint\n);",
         "dllLibrary": "user32",
@@ -1118,6 +1123,16 @@
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the window (if any) that has captured the mouse. Only one window at a time can capture the mouse; this window receives mouse input whether or not the cursor is within its borders."
     },
+    "GetCaretBlinkTime": {
+        "prototype": "UINT GetCaretBlinkTime();",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the time required to invert the caret's pixels. The user can set this value."
+    },
+    "GetCaretPos": {
+        "prototype": "BOOL GetCaretPos(\n  LPPOINT lpPoint\n);",
+        "dllLibrary": "user32",
+        "comment": "Copies the caret's position to the specified POINT structure."
+    },
     "GetClassInfo": {
         "prototype": "BOOL GetClassInfoW(\n  HINSTANCE   hInstance,\n  LPCWSTR     lpClassName,\n  LPWNDCLASSW lpWndClass\n);",
         "dllLibrary": "user32",
@@ -1162,6 +1177,11 @@
         "prototype": "HWND GetClipboardViewer();",
         "dllLibrary": "user32",
         "comment": "Retrieves the handle to the first window in the clipboard viewer chain."
+    },
+    "GetClipCursor": {
+        "prototype": "BOOL GetClipCursor(\n  LPRECT lpRect\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the screen coordinates of the rectangular area to which the cursor is confined."
     },
     "GetComputerName": {
         "prototype": "BOOL GetComputerNameW(\n  LPWSTR  lpBuffer,\n  LPDWORD nSize\n);",
@@ -1217,6 +1237,11 @@
         "prototype": "HCURSOR GetCursor();",
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the current cursor."
+    },
+    "GetCursorInfo": {
+        "prototype": "BOOL GetCursorInfo(\n  PCURSORINFO pci\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves information about the global cursor."
     },
     "GetCursorPos": {
         "prototype": "BOOL GetCursorPos(\n  LPPOINT lpPoint\n);",

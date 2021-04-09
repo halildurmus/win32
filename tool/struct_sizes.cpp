@@ -47,6 +47,7 @@ void main()
     printf("  'BLUETOOTH_OOB_DATA_INFO': %zu,\n", sizeof(BLUETOOTH_OOB_DATA_INFO));
     printf("  'BLUETOOTH_PIN_INFO': %zu,\n", sizeof(BLUETOOTH_PIN_INFO));
     printf("  'BLUETOOTH_RADIO_INFO': %zu,\n", sizeof(BLUETOOTH_RADIO_INFO));
+    printf("  'BSMINFO': %zu,\n", sizeof(BSMINFO));
     printf("  'CHAR_INFO': %zu,\n", sizeof(CHAR_INFO));
     printf("  'CHOOSECOLOR': %zu,\n", sizeof(CHOOSECOLOR));
     printf("  'CHOOSEFONT': %zu,\n", sizeof(CHOOSEFONT));
@@ -60,6 +61,7 @@ void main()
     printf("  'CREATESTRUCT': %zu,\n", sizeof(CREATESTRUCT));
     printf("  'CREDENTIAL': %zu,\n", sizeof(CREDENTIAL));
     printf("  'CREDENTIAL_ATTRIBUTE': %zu,\n", sizeof(CREDENTIAL_ATTRIBUTE));
+    printf("  'CURSORINFO': %zu,\n", sizeof(CURSORINFO));
     printf("  'DESIGNVECTOR': %zu,\n", sizeof(DESIGNVECTOR));
     printf("  'DEVMODE': %zu,\n", sizeof(DEVMODEW));
     printf("  'DIBSECTION': %zu,\n", sizeof(DIBSECTION));
@@ -82,6 +84,7 @@ void main()
     printf("  'LOGBRUSH': %zu,\n", sizeof(LOGBRUSH));
     printf("  'LOGFONT': %zu,\n", sizeof(LOGFONTW));
     printf("  'LOGPALETTE': %zu,\n", sizeof(LOGPALETTE));
+    printf("  'LUID': %zu,\n", sizeof(LUID));
     printf("  'MCI_OPEN_PARMS': %zu,\n", sizeof(MCI_OPEN_PARMS));
     printf("  'MCI_PLAY_PARMS': %zu,\n", sizeof(MCI_PLAY_PARMS));
     printf("  'MCI_SEEK_PARMS': %zu,\n", sizeof(MCI_SEEK_PARMS));

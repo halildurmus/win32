@@ -1489,6 +1489,18 @@ int EndDialog(int hDlg, int nResult) {
   return _EndDialog(hDlg, nResult);
 }
 
+/// Ends the calling thread's active menu.
+///
+/// ```c
+/// BOOL EndMenu();
+/// ```
+/// {@category user32}
+int EndMenu() {
+  final _EndMenu =
+      _user32.lookupFunction<Int32 Function(), int Function()>('EndMenu');
+  return _EndMenu();
+}
+
 /// The EndPaint function marks the end of painting in the specified
 /// window. This function is required for each call to the BeginPaint
 /// function, but only after painting is complete.
@@ -1838,6 +1850,34 @@ int GetCapture() {
   return _GetCapture();
 }
 
+/// Retrieves the time required to invert the caret's pixels. The user can
+/// set this value.
+///
+/// ```c
+/// UINT GetCaretBlinkTime();
+/// ```
+/// {@category user32}
+int GetCaretBlinkTime() {
+  final _GetCaretBlinkTime = _user32
+      .lookupFunction<Uint32 Function(), int Function()>('GetCaretBlinkTime');
+  return _GetCaretBlinkTime();
+}
+
+/// Copies the caret's position to the specified POINT structure.
+///
+/// ```c
+/// BOOL GetCaretPos(
+///   LPPOINT lpPoint
+/// );
+/// ```
+/// {@category user32}
+int GetCaretPos(Pointer<POINT> lpPoint) {
+  final _GetCaretPos = _user32.lookupFunction<
+      Int32 Function(Pointer<POINT> lpPoint),
+      int Function(Pointer<POINT> lpPoint)>('GetCaretPos');
+  return _GetCaretPos(lpPoint);
+}
+
 /// Retrieves information about a window class.
 ///
 /// ```c
@@ -1991,6 +2031,22 @@ int GetClipboardViewer() {
   return _GetClipboardViewer();
 }
 
+/// Retrieves the screen coordinates of the rectangular area to which the
+/// cursor is confined.
+///
+/// ```c
+/// BOOL GetClipCursor(
+///   LPRECT lpRect
+/// );
+/// ```
+/// {@category user32}
+int GetClipCursor(Pointer<RECT> lpRect) {
+  final _GetClipCursor = _user32.lookupFunction<
+      Int32 Function(Pointer<RECT> lpRect),
+      int Function(Pointer<RECT> lpRect)>('GetClipCursor');
+  return _GetClipCursor(lpRect);
+}
+
 /// Retrieves a handle to the current cursor.
 ///
 /// ```c
@@ -2001,6 +2057,21 @@ int GetCursor() {
   final _GetCursor =
       _user32.lookupFunction<IntPtr Function(), int Function()>('GetCursor');
   return _GetCursor();
+}
+
+/// Retrieves information about the global cursor.
+///
+/// ```c
+/// BOOL GetCursorInfo(
+///   PCURSORINFO pci
+/// );
+/// ```
+/// {@category user32}
+int GetCursorInfo(Pointer<CURSORINFO> pci) {
+  final _GetCursorInfo = _user32.lookupFunction<
+      Int32 Function(Pointer<CURSORINFO> pci),
+      int Function(Pointer<CURSORINFO> pci)>('GetCursorInfo');
+  return _GetCursorInfo(pci);
 }
 
 /// Retrieves the position of the mouse cursor, in screen coordinates.
