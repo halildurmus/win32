@@ -592,16 +592,30 @@ void main() {
     expect(getResults.parameters, isEmpty);
     expect(getResults.returnType.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_VAR));
-    expect(getResults.genericParams.length, isNonZero);
+    expect(getResults.returnType.typeIdentifier.genericParameter, equals(0));
   });
 
-  test('Generic parameter contains the right type', () {
+  test('Generic put parameter contains the right type', () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.Foundation.IAsyncOperation`1')!;
 
     final putCompleted = winTypeDef.findMethod('put_Completed')!;
     expect(putCompleted.parameters.length, equals(1));
     expect(putCompleted.parameters.first.name, equals('handler'));
-    expect(putCompleted.genericParams.length, equals(1));
+    expect(putCompleted.parameters.first.typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_GENERICINST));
+    expect(putCompleted.parameters.first.typeIdentifier.name,
+        endsWith('AsyncOperationCompletedHandler`1'));
+  });
+
+  test('Generic get parameter contains the right type', () {
+    final winTypeDef = MetadataStore.getMetadataForType(
+        'Windows.Foundation.IAsyncOperation`1')!;
+
+    final getCompleted = winTypeDef.findMethod('get_Completed')!;
+    expect(getCompleted.returnType.typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_GENERICINST));
+    expect(getCompleted.returnType.typeIdentifier.name,
+        endsWith('AsyncOperationCompletedHandler`1'));
   });
 }
