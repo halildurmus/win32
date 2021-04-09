@@ -260,6 +260,31 @@ class BLUETOOTH_OOB_DATA_INFO extends Struct {
   external Array<Uint8> R;
 }
 
+/// Contains information about a window that denied a request from
+/// BroadcastSystemMessageEx.
+///
+/// {@category Struct}
+class BSMINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  @IntPtr()
+  external int hdesk;
+  @IntPtr()
+  external int hwnd;
+  external LUID luid;
+}
+
+/// Contains extended result information obtained by calling the
+/// ChangeWindowMessageFilterEx function.
+///
+/// {@category Struct}
+class CHANGEFILTERSTRUCT extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int ExtStatus;
+}
+
 /// Contains information the ChooseColor function uses to initialize the
 /// Color dialog box. After the user closes the dialog box, the system
 /// returns information about the user's selection in this structure.
@@ -788,6 +813,19 @@ class LOGPALETTE extends Struct {
   external int palNumEntries;
   @Array(1)
   external Array<PALETTEENTRY> palPalEntry;
+}
+
+/// A Locally Unique Identifier (LUID). This is a value guaranteed to be
+/// unique only on the system on which it was generated. The uniqueness of
+/// a locally unique identifier is guaranteed only until the system is
+/// restarted.
+///
+/// {@category Struct}
+class LUID extends Struct {
+  @Uint32()
+  external int LowPart;
+  @Int32()
+  external int HighPart;
 }
 
 /// The MCI_OPEN_PARMS structure contains information for the MCI_OPEN

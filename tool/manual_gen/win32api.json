@@ -106,6 +106,11 @@
         "dllLibrary": "kernel32",
         "comment": "Attaches the calling process to the console of the specified process."
     },
+    "AttachThreadInput": {
+        "prototype": "BOOL AttachThreadInput(\n  DWORD idAttach,\n  DWORD idAttachTo,\n  BOOL  fAttach\n);",
+        "dllLibrary": "user32",
+        "comment": "Attaches or detaches the input processing mechanism of one thread to that of another thread."
+    },
     "Beep": {
         "prototype": "BOOL Beep(\n  DWORD dwFreq,\n  DWORD dwDuration\n);",
         "dllLibrary": "kernel32",
@@ -251,6 +256,11 @@
         "dllLibrary": "user32",
         "comment": "Sends a message to the specified recipients. The recipients can be applications, installable drivers, network drivers, system-level device drivers, or any combination of these system components."
     },
+    "BroadcastSystemMessageEx": {
+        "prototype": "long BroadcastSystemMessageExW(\n  DWORD    flags,\n  LPDWORD  lpInfo,\n  UINT     Msg,\n  WPARAM   wParam,\n  LPARAM   lParam,\n  PBSMINFO pbsmInfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Sends a message to the specified recipients. The recipients can be applications, installable drivers, network drivers, system-level device drivers, or any combination of these system components."
+    },
     "CalculatePopupWindowPosition": {
         "prototype": "BOOL CalculatePopupWindowPosition(\n  const POINT *anchorPoint,\n  const SIZE  *windowSize,\n  UINT        flags,\n  RECT        *excludeRect,\n  RECT        *popupWindowPosition\n);",
         "dllLibrary": "user32",
@@ -260,6 +270,11 @@
         "prototype": "BOOL CallMsgFilterW(\n  LPMSG lpMsg,\n  int   nCode\n);",
         "dllLibrary": "user32",
         "comment": "Passes the specified message and hook code to the hook procedures associated with the WH_SYSMSGFILTER and WH_MSGFILTER hooks. A WH_SYSMSGFILTER or WH_MSGFILTER hook procedure is an application-defined callback function that examines and, optionally, modifies messages for a dialog box, message box, menu, or scroll bar."
+    },
+    "CallNextHookEx": {
+        "prototype": "LRESULT CallNextHookEx(\n  HHOOK  hhk,\n  int    nCode,\n  WPARAM wParam,\n  LPARAM lParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Passes the hook information to the next hook procedure in the current hook chain. A hook procedure can call this function either before or after processing the hook information."
     },
     "CallNtPowerInformation": {
         "prototype": "NTSTATUS CallNtPowerInformation(\n  POWER_INFORMATION_LEVEL InformationLevel,\n  PVOID                   InputBuffer,\n  ULONG                   InputBufferLength,\n  PVOID                   OutputBuffer,\n  ULONG                   OutputBufferLength\n);",
@@ -282,9 +297,29 @@
         "comment": "Cascades the specified child windows of the specified parent window."
     },
     "ChangeClipboardChain": {
-        "prototype": "BOOL ChangeClipboardChain(\n  HWND hWndRemove,\n  HWND hWndNewNext\n  );",
+        "prototype": "BOOL ChangeClipboardChain(\n  HWND hWndRemove,\n  HWND hWndNewNext\n);",
         "dllLibrary": "user32",
         "comment": "Removes a specified window from the chain of clipboard viewers."
+    },
+    "ChangeDisplaySettings": {
+        "prototype": "LONG ChangeDisplaySettingsW(\n  DEVMODEW *lpDevMode,\n  DWORD    dwFlags\n);",
+        "dllLibrary": "user32",
+        "comment": "The ChangeDisplaySettings function changes the settings of the default display device to the specified graphics mode."
+    },
+    "ChangeDisplaySettingsEx": {
+        "prototype": "LONG ChangeDisplaySettingsExW(\n  LPCWSTR  lpszDeviceName,\n  DEVMODEW *lpDevMode,\n  HWND     hwnd,\n  DWORD    dwflags,\n  LPVOID   lParam\n);",
+        "dllLibrary": "user32",
+        "comment": "The ChangeDisplaySettingsEx function changes the settings of the specified display device to the specified graphics mode."
+    },
+    "ChangeWindowMessageFilter": {
+        "prototype": "BOOL ChangeWindowMessageFilter(\n  UINT  message,\n  DWORD dwFlag\n);",
+        "dllLibrary": "user32",
+        "comment": "Adds or removes a message from the User Interface Privilege Isolation (UIPI) message filter."
+    },
+    "ChangeWindowMessageFilterEx": {
+        "prototype": "BOOL ChangeWindowMessageFilterEx(\n  HWND                hwnd,\n  UINT                message,\n  DWORD               action,\n  PCHANGEFILTERSTRUCT pChangeFilterStruct\n);",
+        "dllLibrary": "user32",
+        "comment": "Modifies the User Interface Privilege Isolation (UIPI) message filter for a specified window."
     },
     "CheckRemoteDebuggerPresent": {
         "prototype": "BOOL CheckRemoteDebuggerPresent(\n  HANDLE hProcess,\n  PBOOL  pbDebuggerPresent\n      );",
@@ -484,6 +519,16 @@
         "dllLibrary": "gdi32",
         "comment": "The CreateDC function creates a device context (DC) for a device using the specified name."
     },
+    "CreateDesktop": {
+        "prototype": "HDESK CreateDesktopW(\n  LPCWSTR               lpszDesktop,\n  LPCWSTR               lpszDevice,\n  DEVMODEW              *pDevmode,\n  DWORD                 dwFlags,\n  ACCESS_MASK           dwDesiredAccess,\n  LPSECURITY_ATTRIBUTES lpsa\n);",
+        "dllLibrary": "user32",
+        "comment": "Creates a new desktop, associates it with the current window station of the calling process, and assigns it to the calling thread. The calling process must have an associated window station, either assigned by the system at process creation time or set by the SetProcessWindowStation function."
+    },
+    "CreateDesktopEx": {
+        "prototype": "HDESK CreateDesktopExW(\n  LPCWSTR               lpszDesktop,\n  LPCWSTR               lpszDevice,\n  DEVMODEW              *pDevmode,\n  DWORD                 dwFlags,\n  ACCESS_MASK           dwDesiredAccess,\n  LPSECURITY_ATTRIBUTES lpsa,\n  ULONG                 ulHeapSize,\n  PVOID                 pvoid\n);",
+        "dllLibrary": "user32",
+        "comment": "Creates a new desktop with the specified heap, associates it with the current window station of the calling process, and assigns it to the calling thread. The calling process must have an associated window station, either assigned by the system at process creation time or set by the SetProcessWindowStation function."
+    },
     "CreateDialogIndirectParam": {
         "prototype": "HWND CreateDialogIndirectParamW(\n  HINSTANCE       hInstance,\n  LPCDLGTEMPLATEW lpTemplate,\n  HWND            hWndParent,\n  DLGPROC         lpDialogFunc,\n  LPARAM          dwInitParam\n);",
         "dllLibrary": "user32",
@@ -575,6 +620,11 @@
         "dllLibrary": "user32",
         "comment": "Creates an overlapped, pop-up, or child window. It specifies the window class, window title, window style, and (optionally) the initial position and size of the window. The function also specifies the window's parent or owner, if any, and the window's menu."
     },
+    "CreateWindowStation": {
+        "prototype": "HWINSTA CreateWindowStationW(\n  LPCWSTR               lpwinsta,\n  DWORD                 dwFlags,\n  ACCESS_MASK           dwDesiredAccess,\n  LPSECURITY_ATTRIBUTES lpsa\n);",
+        "dllLibrary": "user32",
+        "comment": "Creates a window station object, associates it with the calling process, and assigns it to the current session."
+    },
     "CredDelete": {
         "prototype": "BOOL CredDeleteW(\n  LPCWSTR TargetName,\n  DWORD   Type,\n  DWORD   Flags\n);",
         "dllLibrary": "advapi32",
@@ -644,6 +694,11 @@
         "prototype": "BOOL DeleteFileW(\n  LPCWSTR lpFileName\n);",
         "dllLibrary": "kernel32",
         "comment": "Deletes an existing file."
+    },
+    "DeleteMenu": {
+        "prototype": "BOOL DeleteMenu(\n  HMENU hMenu,\n  UINT  uPosition,\n  UINT  uFlags\n);",
+        "dllLibrary": "user32",
+        "comment": "Deletes an item from the specified menu. If the menu item opens a menu or submenu, this function destroys the handle to the menu or submenu and frees the memory used by the menu or submenu."
     },
     "DeleteObject": {
         "prototype": "BOOL DeleteObject(\n  HGDIOBJ ho\n);",
@@ -820,6 +875,11 @@
         "prototype": "UINT EnumClipboardFormats(\n  UINT format\n);",
         "dllLibrary": "user32",
         "comment": "Enumerates the data formats currently available on the clipboard."
+    },
+    "EnumDesktopWindows": {
+        "prototype": "BOOL EnumDesktopWindows(\n  HDESK       hDesktop,\n  WNDENUMPROC lpfn,\n  LPARAM      lParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Enumerates all top-level windows associated with the specified desktop. It passes the handle to each window, in turn, to an application-defined callback function."
     },
     "EnumDisplayMonitors": {
         "prototype": "BOOL EnumDisplayMonitors(\n  HDC             hdc,\n  LPCRECT         lprcClip,\n  MONITORENUMPROC lpfnEnum,\n  LPARAM          dwData\n);",
@@ -2461,6 +2521,11 @@
         "dllLibrary": "user32",
         "comment": "Posts a message to the message queue of the specified thread. It returns without waiting for the thread to process the message."
     },
+    "PrintWindow": {
+        "prototype": "BOOL PrintWindow(\n  HWND hwnd,\n  HDC  hdcBlt,\n  UINT nFlags\n);",
+        "dllLibrary": "user32",
+        "comment": "The PrintWindow function copies a visual window into the specified device context (DC), typically a printer DC."
+    },
     "ProgIDFromCLSID": {
         "prototype": "HRESULT ProgIDFromCLSID(\n  REFCLSID clsid,\n  LPOLESTR *lplpszProgID\n);",
         "dllLibrary": "ole32",
@@ -3395,6 +3460,11 @@
         "prototype": "BOOL SwapMouseButton(\n  BOOL fSwap\n);",
         "dllLibrary": "user32",
         "comment": "Reverses or restores the meaning of the left and right mouse buttons."
+    },
+    "SwitchDesktop": {
+        "prototype": "BOOL SwitchDesktop(\n  HDESK hDesktop\n);",
+        "dllLibrary": "user32",
+        "comment": "Makes the specified desktop visible and activates it. This enables the desktop to receive input from the user. The calling process must have DESKTOP_SWITCHDESKTOP access to the desktop for the SwitchDesktop function to succeed."
     },
     "SwitchToThisWindow": {
         "prototype": "void SwitchToThisWindow(\n  HWND hwnd,\n  BOOL fUnknown\n);",

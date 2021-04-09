@@ -51,6 +51,14 @@
         "namespace": "Windows.Win32.Bluetooth.BLUETOOTH_OOB_DATA_INFO",
         "comment": "The BLUETOOTH_OOB_DATA_INFO structure contains data used to authenticate prior to establishing an Out-of-Band device pairing."
     },
+    "BSMINFO": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.BSMINFO",
+        "comment": "Contains information about a window that denied a request from BroadcastSystemMessageEx."
+    },
+    "CHANGEFILTERSTRUCT": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.CHANGEFILTERSTRUCT",
+        "comment": "Contains extended result information obtained by calling the ChangeWindowMessageFilterEx function."
+    },
     "CHOOSECOLOR": {
         "namespace": "Windows.Win32.WindowsAndMessaging.CHOOSECOLORW",
         "comment": "Contains information the ChooseColor function uses to initialize the Color dialog box. After the user closes the dialog box, the system returns information about the user's selection in this structure."
@@ -170,6 +178,10 @@
     "LOGPALETTE": {
         "namespace": "Windows.Win32.Gdi.LOGPALETTE",
         "comment": "The LOGPALETTE structure defines a logical palette."
+    },
+    "LUID": {
+        "namespace": "Windows.Win32.Kernel.LUID",
+        "comment": "A Locally Unique Identifier (LUID). This is a value guaranteed to be unique only on the system on which it was generated. The uniqueness of a locally unique identifier is guaranteed only until the system is restarted."
     },
     "MCI_OPEN_PARMS": {
         "namespace": "Windows.Win32.CoreAudio.MCI_OPEN_PARMSW",

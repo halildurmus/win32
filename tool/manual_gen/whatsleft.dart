@@ -63,7 +63,9 @@ Map<String, int> getExports(String module) {
   return _exportedSymbols;
 }
 
-void main() {
+void main(List<String> args) {
+  final module = args.isNotEmpty ? args.first : 'gdi32.dll';
+
   final projected = Win32API(
       apiFile: 'tool/manual_gen/win32api.json',
       structFile: 'tool/manual_gen/win32struct.json');
@@ -78,7 +80,7 @@ void main() {
   }).toList()
     ..sort();
 
-  final symbols = getExports(r'c:\windows\system32\gdi32.dll');
+  final symbols = getExports('c:\\windows\\system32\\$module');
 
   var included = 0;
   var missing = 0;
