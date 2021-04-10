@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <stdio.h>
+#include <appmodel.h>
 
 void main()
 {

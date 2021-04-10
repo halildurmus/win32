@@ -8,10 +8,16 @@
 // is included in taskdialog.exe.manifest, but this will only be loaded if
 // you first compile this example with a command such as:
 //   dart compile exe taskdialog.dart
+//
+// An example of the manifest is found in the bin\ subdirectory as
+// taskdialog.exe.manifest. Place the compiled taskdialog.exe in the same folder
+// as the manifest and then when you run this it should display two task dialog
+// samples.
 
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+import 'package:win32/src/constants_nodoc.dart';
 import 'package:win32/win32.dart';
 
 void showSimpleTaskDialog() {
@@ -49,7 +55,8 @@ void showSimpleTaskDialog() {
   } on ArgumentError {
     print(
         'If you see an error "Failed to lookup symbol", it\'s likely because the '
-        'app manifest\ndeclaring a dependency on comctl32.dll v6 is missing.\n');
+        'app manifest\ndeclaring a dependency on comctl32.dll v6 is missing.\n\n'
+        'See the comment at the top of the sample source code.\n');
     rethrow;
   } finally {
     free(windowTitle);
@@ -58,9 +65,7 @@ void showSimpleTaskDialog() {
   }
 }
 
-// Broken until https://github.com/dart-lang/sdk/issues/38158 is fixed.
 void showCustomTaskDialog() {
-  print(sizeOf<TASKDIALOGCONFIG>());
   final buttonSelected = calloc<Int32>();
 
   final buttons = calloc<TASKDIALOG_BUTTON>(2);
@@ -92,10 +97,10 @@ void showCustomTaskDialog() {
         'other hand, the blue pill represents a beautiful prison: it would lead him '
         'back to ignorance, living in confined comfort without want or fear within '
         'the simulated reality of the Matrix.')
+    ..ref.dwFlags = TASKDIALOG_FLAGS.TDF_USE_COMMAND_LINKS
     ..ref.cButtons = 2
     ..ref.pButtons = buttons;
 
-  print('Here we go.');
   final hr = TaskDialogIndirect(config, buttonSelected, nullptr, nullptr);
 
   if (SUCCEEDED(hr)) {
@@ -111,5 +116,5 @@ void showCustomTaskDialog() {
 
 void main() {
   showSimpleTaskDialog();
-  // showCustomTaskDialog();
+  showCustomTaskDialog();
 }

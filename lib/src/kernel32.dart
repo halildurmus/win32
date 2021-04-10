@@ -883,7 +883,7 @@ int FillConsoleOutputAttribute(int hConsoleOutput, int wAttribute, int nLength,
 /// ```c
 /// BOOL WINAPI FillConsoleOutputCharacterW(
 ///   _In_  HANDLE  hConsoleOutput,
-///   _In_  TCHAR   cCharacter,
+///   _In_  WCHAR   cCharacter,
 ///   _In_  DWORD   nLength,
 ///   _In_  COORD   dwWriteCoord,
 ///   _Out_ LPDWORD lpNumberOfCharsWritten
@@ -1054,6 +1054,49 @@ int FindNextVolume(
       int Function(int hFindVolume, Pointer<Utf16> lpszVolumeName,
           int cchBufferLength)>('FindNextVolumeW');
   return _FindNextVolume(hFindVolume, lpszVolumeName, cchBufferLength);
+}
+
+/// Finds the packages with the specified family name for the current user.
+///
+/// ```c
+/// LONG FindPackagesByPackageFamily(
+///   PCWSTR packageFamilyName,
+///   UINT32 packageFilters,
+///   UINT32 *count,
+///   PWSTR  *packageFullNames,
+///   UINT32 *bufferLength,
+///   WCHAR  *buffer,
+///   UINT32 *packageProperties
+/// );
+/// ```
+/// {@category kernel32}
+int FindPackagesByPackageFamily(
+    Pointer<Utf16> packageFamilyName,
+    int packageFilters,
+    Pointer<Uint32> count,
+    Pointer<Pointer<Utf16>> packageFullNames,
+    Pointer<Uint32> bufferLength,
+    Pointer<Utf16> buffer,
+    Pointer<Uint32> packageProperties) {
+  final _FindPackagesByPackageFamily = _kernel32.lookupFunction<
+      Int32 Function(
+          Pointer<Utf16> packageFamilyName,
+          Uint32 packageFilters,
+          Pointer<Uint32> count,
+          Pointer<Pointer<Utf16>> packageFullNames,
+          Pointer<Uint32> bufferLength,
+          Pointer<Utf16> buffer,
+          Pointer<Uint32> packageProperties),
+      int Function(
+          Pointer<Utf16> packageFamilyName,
+          int packageFilters,
+          Pointer<Uint32> count,
+          Pointer<Pointer<Utf16>> packageFullNames,
+          Pointer<Uint32> bufferLength,
+          Pointer<Utf16> buffer,
+          Pointer<Uint32> packageProperties)>('FindPackagesByPackageFamily');
+  return _FindPackagesByPackageFamily(packageFamilyName, packageFilters, count,
+      packageFullNames, bufferLength, buffer, packageProperties);
 }
 
 /// Determines the location of a resource with the specified type and name
@@ -1406,6 +1449,24 @@ int GetCurrentProcess() {
   return _GetCurrentProcess();
 }
 
+/// Retrieves the application-specific portion of the search path used to
+/// locate DLLs for the application.
+///
+/// ```c
+/// DWORD GetDllDirectoryW(
+///   DWORD  nBufferLength,
+///   LPWSTR lpBuffer
+/// );
+/// ```
+/// {@category kernel32}
+int GetDllDirectory(int nBufferLength, Pointer<Utf16> lpBuffer) {
+  final _GetDllDirectory = _kernel32.lookupFunction<
+      Uint32 Function(Uint32 nBufferLength, Pointer<Utf16> lpBuffer),
+      int Function(
+          int nBufferLength, Pointer<Utf16> lpBuffer)>('GetDllDirectoryW');
+  return _GetDllDirectory(nBufferLength, lpBuffer);
+}
+
 /// Retrieves the termination status of the specified process.
 ///
 /// ```c
@@ -1619,6 +1680,40 @@ int GetModuleHandle(Pointer<Utf16> lpModuleName) {
       IntPtr Function(Pointer<Utf16> lpModuleName),
       int Function(Pointer<Utf16> lpModuleName)>('GetModuleHandleW');
   return _GetModuleHandle(lpModuleName);
+}
+
+/// Retrieves the client process identifier for the specified named pipe.
+///
+/// ```c
+/// BOOL GetNamedPipeClientProcessId(
+///   HANDLE Pipe,
+///   PULONG ClientProcessId
+/// );
+/// ```
+/// {@category kernel32}
+int GetNamedPipeClientProcessId(int Pipe, Pointer<Uint32> ClientProcessId) {
+  final _GetNamedPipeClientProcessId = _kernel32.lookupFunction<
+      Int32 Function(IntPtr Pipe, Pointer<Uint32> ClientProcessId),
+      int Function(int Pipe,
+          Pointer<Uint32> ClientProcessId)>('GetNamedPipeClientProcessId');
+  return _GetNamedPipeClientProcessId(Pipe, ClientProcessId);
+}
+
+/// Retrieves the client process identifier for the specified named pipe.
+///
+/// ```c
+/// BOOL GetNamedPipeClientSessionId(
+///   HANDLE Pipe,
+///   PULONG ClientSessionId
+/// );
+/// ```
+/// {@category kernel32}
+int GetNamedPipeClientSessionId(int Pipe, Pointer<Uint32> ClientSessionId) {
+  final _GetNamedPipeClientSessionId = _kernel32.lookupFunction<
+      Int32 Function(IntPtr Pipe, Pointer<Uint32> ClientSessionId),
+      int Function(int Pipe,
+          Pointer<Uint32> ClientSessionId)>('GetNamedPipeClientSessionId');
+  return _GetNamedPipeClientSessionId(Pipe, ClientSessionId);
 }
 
 /// Retrieves information about the specified named pipe.
@@ -2136,12 +2231,12 @@ int HeapFree(int hHeap, int dwFlags, Pointer lpMem) {
 /// );
 /// ```
 /// {@category kernel32}
-int InitializeProcThreadAttributeList(int lpAttributeList, int dwAttributeCount,
-    int dwFlags, Pointer<IntPtr> lpSize) {
+int InitializeProcThreadAttributeList(Pointer lpAttributeList,
+    int dwAttributeCount, int dwFlags, Pointer<IntPtr> lpSize) {
   final _InitializeProcThreadAttributeList = _kernel32.lookupFunction<
-      Int32 Function(IntPtr lpAttributeList, Uint32 dwAttributeCount,
+      Int32 Function(Pointer lpAttributeList, Uint32 dwAttributeCount,
           Uint32 dwFlags, Pointer<IntPtr> lpSize),
-      int Function(int lpAttributeList, int dwAttributeCount, int dwFlags,
+      int Function(Pointer lpAttributeList, int dwAttributeCount, int dwFlags,
           Pointer<IntPtr> lpSize)>('InitializeProcThreadAttributeList');
   return _InitializeProcThreadAttributeList(
       lpAttributeList, dwAttributeCount, dwFlags, lpSize);
@@ -2310,6 +2405,31 @@ void OutputDebugString(Pointer<Utf16> lpOutputString) {
       Void Function(Pointer<Utf16> lpOutputString),
       void Function(Pointer<Utf16> lpOutputString)>('OutputDebugStringW');
   return _OutputDebugString(lpOutputString);
+}
+
+/// Gets the package family name for the specified package full name.
+///
+/// ```c
+/// LONG PackageFamilyNameFromFullName(
+///   PCWSTR packageFullName,
+///   UINT32 *packageFamilyNameLength,
+///   PWSTR  packageFamilyName
+/// );
+/// ```
+/// {@category kernel32}
+int PackageFamilyNameFromFullName(Pointer<Utf16> packageFullName,
+    Pointer<Uint32> packageFamilyNameLength, Pointer<Utf16> packageFamilyName) {
+  final _PackageFamilyNameFromFullName = _kernel32.lookupFunction<
+      Int32 Function(
+          Pointer<Utf16> packageFullName,
+          Pointer<Uint32> packageFamilyNameLength,
+          Pointer<Utf16> packageFamilyName),
+      int Function(
+          Pointer<Utf16> packageFullName,
+          Pointer<Uint32> packageFamilyNameLength,
+          Pointer<Utf16> packageFamilyName)>('PackageFamilyNameFromFullName');
+  return _PackageFamilyNameFromFullName(
+      packageFullName, packageFamilyNameLength, packageFamilyName);
 }
 
 /// Copies data from a named or anonymous pipe into a buffer without
@@ -3074,7 +3194,7 @@ int TransactNamedPipe(
 /// ```
 /// {@category kernel32}
 int UpdateProcThreadAttribute(
-    int lpAttributeList,
+    Pointer lpAttributeList,
     int dwFlags,
     int Attribute,
     Pointer lpValue,
@@ -3083,7 +3203,7 @@ int UpdateProcThreadAttribute(
     Pointer<IntPtr> lpReturnSize) {
   final _UpdateProcThreadAttribute = _kernel32.lookupFunction<
       Int32 Function(
-          IntPtr lpAttributeList,
+          Pointer lpAttributeList,
           Uint32 dwFlags,
           IntPtr Attribute,
           Pointer lpValue,
@@ -3091,7 +3211,7 @@ int UpdateProcThreadAttribute(
           Pointer lpPreviousValue,
           Pointer<IntPtr> lpReturnSize),
       int Function(
-          int lpAttributeList,
+          Pointer lpAttributeList,
           int dwFlags,
           int Attribute,
           Pointer lpValue,

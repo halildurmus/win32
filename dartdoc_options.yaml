@@ -30,6 +30,8 @@ dartdoc:
       markdown: doc/shell32.md
     "user32":
       markdown: doc/user32.md
+    "uxtheme":
+      markdown: doc/uxtheme.md
     "version":
       markdown: doc/version.md
     "winmm":
@@ -40,10 +42,16 @@ dartdoc:
     "winrt":
       name: "WinRT APIs"
       markdown: doc/winrt.md
+    "struct":
+      name: "Structures"
+      markdown: doc/struct.md
+    "enum":
+      name: "Enumerations"
+      markdown: doc/enum.md
     "examples":
       name: "Sample apps"
       markdown: doc/examples.md
-  categoryOrder: ["kernel32", "user32", "gdi32", "shell32", "ole32", "oleaut32", "comctl32", "comdlg32", "shcore", "psapi", "version", "advapi32", "kernelbase", "bthprops", "powrprof", "dxva2", "winmm", "com", "winrt", "examples"]
+  categoryOrder: ["kernel32", "user32", "gdi32", "shell32", "ole32", "oleaut32", "comctl32", "comdlg32", "uxtheme", "shcore", "psapi", "version", "advapi32", "kernelbase", "bthprops", "powrprof", "dxva2", "winmm", "com", "winrt", "struct", "enum", "examples"]
   showUndocumentedCategories: true
   nodoc: ['lib/src/constants_nodoc.dart']
   ignore:

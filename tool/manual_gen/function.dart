@@ -20,8 +20,10 @@ class Win32Struct {
   final String namespace;
   final String comment;
 
-  Map<String, dynamic> toJson() =>
-      <String, dynamic>{'namespace': namespace, 'comment': comment};
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'namespace': namespace,
+        'comment': comment,
+      };
 
   Win32Struct.fromJson(Map<String, dynamic> json)
       : assert(json['namespace'] != null),
