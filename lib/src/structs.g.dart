@@ -235,20 +235,20 @@ class BLUETOOTH_DEVICE_INFO extends Struct {
   external int fAuthenticated;
   external SYSTEMTIME stLastSeen;
   external SYSTEMTIME stLastUsed;
-  @Array(128)
+  @Array(248)
   external Array<Uint16> _szName;
 
   String get szName {
     final charCodes = <int>[];
-    for (var i = 0; i < 128; i++) {
+    for (var i = 0; i < 248; i++) {
       charCodes.add(_szName[i]);
     }
     return String.fromCharCodes(charCodes);
   }
 
   set szName(String value) {
-    final stringToStore = value.padRight(128, '\x00');
-    for (var i = 0; i < 128; i++) {
+    final stringToStore = value.padRight(248, '\x00');
+    for (var i = 0; i < 248; i++) {
       _szName[i] = stringToStore.codeUnitAt(i);
     }
   }
@@ -305,20 +305,20 @@ class BLUETOOTH_RADIO_INFO extends Struct {
   @Uint32()
   external int dwSize;
   external BLUETOOTH_ADDRESS address;
-  @Array(128)
+  @Array(248)
   external Array<Uint16> _szName;
 
   String get szName {
     final charCodes = <int>[];
-    for (var i = 0; i < 128; i++) {
+    for (var i = 0; i < 248; i++) {
       charCodes.add(_szName[i]);
     }
     return String.fromCharCodes(charCodes);
   }
 
   set szName(String value) {
-    final stringToStore = value.padRight(128, '\x00');
-    for (var i = 0; i < 128; i++) {
+    final stringToStore = value.padRight(248, '\x00');
+    for (var i = 0; i < 248; i++) {
       _szName[i] = stringToStore.codeUnitAt(i);
     }
   }
@@ -1465,20 +1465,20 @@ class NEWTEXTMETRIC extends Struct {
 ///
 /// {@category Struct}
 class NLM_SIMULATED_PROFILE_INFO extends Struct {
-  @Array(129)
+  @Array(256)
   external Array<Uint16> _ProfileName;
 
   String get ProfileName {
     final charCodes = <int>[];
-    for (var i = 0; i < 129; i++) {
+    for (var i = 0; i < 256; i++) {
       charCodes.add(_ProfileName[i]);
     }
     return String.fromCharCodes(charCodes);
   }
 
   set ProfileName(String value) {
-    final stringToStore = value.padRight(129, '\x00');
-    for (var i = 0; i < 129; i++) {
+    final stringToStore = value.padRight(256, '\x00');
+    for (var i = 0; i < 256; i++) {
       _ProfileName[i] = stringToStore.codeUnitAt(i);
     }
   }
@@ -2510,20 +2510,20 @@ class WIN32_FIND_DATA extends Struct {
   external int dwReserved0;
   @Uint32()
   external int dwReserved1;
-  @Array(129)
+  @Array(260)
   external Array<Uint16> _cFileName;
 
   String get cFileName {
     final charCodes = <int>[];
-    for (var i = 0; i < 129; i++) {
+    for (var i = 0; i < 260; i++) {
       charCodes.add(_cFileName[i]);
     }
     return String.fromCharCodes(charCodes);
   }
 
   set cFileName(String value) {
-    final stringToStore = value.padRight(129, '\x00');
-    for (var i = 0; i < 129; i++) {
+    final stringToStore = value.padRight(260, '\x00');
+    for (var i = 0; i < 260; i++) {
       _cFileName[i] = stringToStore.codeUnitAt(i);
     }
   }
