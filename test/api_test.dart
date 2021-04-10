@@ -675,6 +675,13 @@ void main() {
               'GetCurrentProcess');
       expect(GetCurrentProcess, isA<Function>());
     });
+    test('Can instantiate GetCurrentThread', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetCurrentThread =
+          kernel32.lookupFunction<IntPtr Function(), int Function()>(
+              'GetCurrentThread');
+      expect(GetCurrentThread, isA<Function>());
+    });
     test('Can instantiate GetDllDirectory', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetDllDirectory = kernel32.lookupFunction<

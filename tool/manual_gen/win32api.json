@@ -1258,6 +1258,11 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves a pseudo handle for the current process."
     },
+    "GetCurrentThread": {
+        "prototype": "HANDLE GetCurrentThread();",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves a pseudo handle for the calling thread."
+    },
     "GetCursor": {
         "prototype": "HCURSOR GetCursor();",
         "dllLibrary": "user32",

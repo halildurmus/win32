@@ -1449,6 +1449,18 @@ int GetCurrentProcess() {
   return _GetCurrentProcess();
 }
 
+/// Retrieves a pseudo handle for the calling thread.
+///
+/// ```c
+/// HANDLE GetCurrentThread();
+/// ```
+/// {@category kernel32}
+int GetCurrentThread() {
+  final _GetCurrentThread = _kernel32
+      .lookupFunction<IntPtr Function(), int Function()>('GetCurrentThread');
+  return _GetCurrentThread();
+}
+
 /// Retrieves the application-specific portion of the search path used to
 /// locate DLLs for the application.
 ///
