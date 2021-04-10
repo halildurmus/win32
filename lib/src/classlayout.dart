@@ -17,7 +17,7 @@ class FieldOffset {
 /// Layout information for the class referenced by a specified token.
 class ClassLayout {
   final IMetaDataImport2 reader;
-  final int token;
+  final int classToken;
 
   /// The pack size of the class.
   ///
@@ -32,15 +32,15 @@ class ClassLayout {
   /// The array of field offsets, for manually-aligned structs.
   List<FieldOffset>? fieldOffsets;
 
-  ClassLayout(this.reader, this.token) {
+  ClassLayout(this.reader, this.classToken) {
     final pdwPackSize = calloc<DWORD>();
     final rgFieldOffset = calloc<COR_FIELD_OFFSET>(256);
     final pcFieldOffset = calloc<ULONG>();
     final pulClassSize = calloc<ULONG>();
 
     try {
-      final hr = reader.GetClassLayout(
-          token, pdwPackSize, rgFieldOffset, 256, pcFieldOffset, pulClassSize);
+      final hr = reader.GetClassLayout(classToken, pdwPackSize, rgFieldOffset,
+          256, pcFieldOffset, pulClassSize);
       if (SUCCEEDED(hr)) {
         packingAlignment = pdwPackSize.value;
         minimumSize = pulClassSize.value;

@@ -12,14 +12,16 @@ import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'mixins/customattributes_mixin.dart';
+import 'typedef.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
 import 'win32.dart';
 
 class Property extends TokenObject with CustomAttributesMixin {
+  final int _parentToken;
   final String name;
   final CorElementType corType;
-  final int attributes;
+  final int _attributes;
   final Uint8List signatureBlob;
   final TypeIdentifier typeIdentifier;
   final Uint8List defaultValue;
@@ -27,22 +29,26 @@ class Property extends TokenObject with CustomAttributesMixin {
   final int getterToken;
   final Uint32List otherMethodTokens;
 
+  TypeDef get parentToken => TypeDef.fromToken(reader, _parentToken);
+
   bool get isSpecialName =>
-      attributes & CorPropertyAttr.prSpecialName ==
+      _attributes & CorPropertyAttr.prSpecialName ==
       CorPropertyAttr.prSpecialName;
 
   bool get hasDefault =>
-      attributes & CorPropertyAttr.prHasDefault == CorPropertyAttr.prHasDefault;
+      _attributes & CorPropertyAttr.prHasDefault ==
+      CorPropertyAttr.prHasDefault;
 
   bool get isRTSpecialName =>
-      attributes & CorPropertyAttr.prRTSpecialName ==
+      _attributes & CorPropertyAttr.prRTSpecialName ==
       CorPropertyAttr.prRTSpecialName;
 
   Property(
       IMetaDataImport2 reader,
       int token,
+      this._parentToken,
       this.name,
-      this.attributes,
+      this._attributes,
       this.signatureBlob,
       this.typeIdentifier,
       this.corType,
@@ -52,6 +58,7 @@ class Property extends TokenObject with CustomAttributesMixin {
       this.otherMethodTokens)
       : super(reader, token);
 
+  /// Creates a property object from its given token.
   factory Property.fromToken(IMetaDataImport2 reader, int token) {
     final ptkTypeDef = calloc<mdTypeDef>();
     final szProperty = stralloc(MAX_STRING_SIZE);
@@ -101,6 +108,7 @@ class Property extends TokenObject with CustomAttributesMixin {
 
         return Property(
             reader,
+            token,
             ptkTypeDef.value,
             propName,
             pdwPropFlags.value,

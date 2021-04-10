@@ -60,7 +60,7 @@ void main() {
     final methods = winTypeDef.methods;
 
     expect(methods[75].methodName, equals('HourAsPaddedString'));
-    expect(methods[75].memberAccess, equals(MemberAccess.Public));
+    expect(methods[75].memberAccess, equals(MemberAccess.public));
     expect(methods[75].isStatic, isFalse);
     expect(methods[75].isFinal, isTrue);
     expect(methods[75].isVirtual, isTrue);

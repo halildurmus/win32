@@ -19,9 +19,9 @@ void main() {
     final hand =
         scope.findTypeDef('Windows.Win32.WindowsAndMessaging.HANDEDNESS')!;
 
-    expect(hand.typeVisibility, equals(TypeVisibility.Public));
-    expect(hand.typeLayout, equals(TypeLayout.Auto));
-    expect(hand.stringFormat, equals(StringFormat.Ansi));
+    expect(hand.typeVisibility, equals(TypeVisibility.public));
+    expect(hand.typeLayout, equals(TypeLayout.auto));
+    expect(hand.stringFormat, equals(StringFormat.ansi));
     expect(hand.isSealed, isTrue);
     expect(
         hand.typeName, equals('Windows.Win32.WindowsAndMessaging.HANDEDNESS'));
@@ -29,14 +29,14 @@ void main() {
 
     expect(hand.fields.length, equals(3));
 
-    expect(hand.fields[0].fieldAccess, equals(FieldAccess.Public));
+    expect(hand.fields[0].fieldAccess, equals(FieldAccess.public));
     expect(hand.fields[0].isSpecialName, isTrue);
     expect(hand.fields[0].isRTSpecialName, isTrue);
     expect(hand.fields[0].typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_I4));
     expect(hand.fields[0].name, equals('value__'));
 
-    expect(hand.fields[1].fieldAccess, equals(FieldAccess.Public));
+    expect(hand.fields[1].fieldAccess, equals(FieldAccess.public));
     expect(hand.fields[1].isStatic, isTrue);
     expect(hand.fields[1].isLiteral, isTrue);
     expect(hand.fields[1].typeIdentifier.corType,
@@ -47,7 +47,7 @@ void main() {
     expect(hand.fields[1].fieldType, equals(CorElementType.ELEMENT_TYPE_I4));
     expect(hand.fields[1].value, equals(0));
 
-    expect(hand.fields[2].fieldAccess, equals(FieldAccess.Public));
+    expect(hand.fields[2].fieldAccess, equals(FieldAccess.public));
     expect(hand.fields[2].isStatic, isTrue);
     expect(hand.fields[2].isLiteral, isTrue);
     expect(hand.fields[2].typeIdentifier.corType,

@@ -17,6 +17,7 @@ class Module extends TokenObject with CustomAttributesMixin {
 
   Module(IMetaDataImport2 reader, int token, this.name) : super(reader, token);
 
+  /// Creates a module object from its given token.
   factory Module.fromToken(IMetaDataImport2 reader, int token) {
     final szName = stralloc(MAX_STRING_SIZE);
     final pchName = calloc<ULONG>();

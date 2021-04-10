@@ -26,9 +26,9 @@ void main() {
     final ifop2 = scope.findTypeDef('Windows.Win32.Shell.IFileOperation2')!;
 
     expect(ifop2.isInterface, isTrue);
-    expect(ifop2.typeVisibility, equals(TypeVisibility.Public));
-    expect(ifop2.typeLayout, equals(TypeLayout.Auto));
-    expect(ifop2.stringFormat, equals(StringFormat.Ansi));
+    expect(ifop2.typeVisibility, equals(TypeVisibility.public));
+    expect(ifop2.typeLayout, equals(TypeLayout.auto));
+    expect(ifop2.stringFormat, equals(StringFormat.ansi));
     expect(ifop2.isAbstract, isTrue);
     expect(ifop2.typeName, equals('Windows.Win32.Shell.IFileOperation2'));
 
@@ -45,9 +45,9 @@ void main() {
         ]));
 
     expect(ifop2.methods.length, equals(1));
-    expect(ifop2.methods[0].memberAccess, equals(MemberAccess.Public));
+    expect(ifop2.methods[0].memberAccess, equals(MemberAccess.public));
     expect(ifop2.methods[0].isHideBySig, isTrue);
-    expect(ifop2.methods[0].vTableLayout, equals(VtableLayout.NewSlot));
+    expect(ifop2.methods[0].vTableLayout, equals(VtableLayout.newSlot));
     expect(ifop2.methods[0].isAbstract, isTrue);
     expect(ifop2.methods[0].isVirtual, isTrue);
 

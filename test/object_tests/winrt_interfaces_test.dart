@@ -61,9 +61,9 @@ void main() {
     final iai =
         MetadataStore.getMetadataForType('Windows.Foundation.IAsyncInfo')!;
     expect(iai.isInterface, isTrue);
-    expect(iai.typeVisibility, equals(TypeVisibility.Public));
-    expect(iai.typeLayout, equals(TypeLayout.Auto));
-    expect(iai.stringFormat, equals(StringFormat.Ansi));
+    expect(iai.typeVisibility, equals(TypeVisibility.public));
+    expect(iai.typeLayout, equals(TypeLayout.auto));
+    expect(iai.stringFormat, equals(StringFormat.ansi));
     expect(iai.isAbstract, isTrue);
     // expect(iai.isImported, isTrue);
     expect(iai.isWindowsRuntime, isTrue);
@@ -84,16 +84,16 @@ void main() {
             <int>[0x01, 0x00, 0x25, 0x57, 0x69, 0x6e, 0x64, 0x6f]));
 
     expect(iai.methods.length, equals(5));
-    expect(iai.methods[0].memberAccess, equals(MemberAccess.Public));
+    expect(iai.methods[0].memberAccess, equals(MemberAccess.public));
     expect(iai.methods[0].isHideBySig, isTrue);
     expect(iai.methods[0].isSpecialName, isTrue);
-    expect(iai.methods[0].vTableLayout, equals(VtableLayout.NewSlot));
+    expect(iai.methods[0].vTableLayout, equals(VtableLayout.newSlot));
     expect(iai.methods[0].isAbstract, isTrue);
     expect(iai.methods[0].isVirtual, isTrue);
     expect(iai.methods[0].returnType.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_U4));
     expect(iai.methods[0].methodName, equals('get_Id'));
-    expect(iai.methods[0].implFeatures.codeType, equals(CodeType.Runtime));
+    expect(iai.methods[0].implFeatures.codeType, equals(CodeType.runtime));
     expect(iai.methods[0].implFeatures.isManaged, isTrue);
 
     expect(iai.properties.length, equals(3));

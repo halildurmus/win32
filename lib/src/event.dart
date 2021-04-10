@@ -5,25 +5,36 @@ import 'package:win32/win32.dart';
 
 import 'base.dart';
 import 'com/IMetaDataImport2.dart';
+import 'constants.dart';
 import 'mixins/customattributes_mixin.dart';
+import 'typedef.dart';
 import 'win32.dart';
 
 class Event extends TokenObject with CustomAttributesMixin {
   final String eventName;
-  final int classToken;
-  final int attributes;
+  final int _parentToken;
+  final int _attributes;
   final int eventType;
   final int addOnToken;
   final int removeOnToken;
   final int fireToken;
   final List<int> otherMethodTokens;
 
+  TypeDef get parent => TypeDef.fromToken(reader, _parentToken);
+
+  bool get isSpecialName =>
+      _attributes & CorEventAttr.evSpecialName == CorEventAttr.evSpecialName;
+
+  bool get isRTSpecialName =>
+      _attributes & CorEventAttr.evRTSpecialName ==
+      CorEventAttr.evRTSpecialName;
+
   Event(
       IMetaDataImport2 reader,
       int token,
+      this._parentToken,
       this.eventName,
-      this.classToken,
-      this.attributes,
+      this._attributes,
       this.eventType,
       this.addOnToken,
       this.removeOnToken,
@@ -31,6 +42,7 @@ class Event extends TokenObject with CustomAttributesMixin {
       this.otherMethodTokens)
       : super(reader, token);
 
+  /// Creates an event object from its given token.
   factory Event.fromToken(IMetaDataImport2 reader, int token) {
     final ptkClass = calloc<mdTypeDef>();
     final szEvent = stralloc(MAX_STRING_SIZE);
@@ -63,8 +75,8 @@ class Event extends TokenObject with CustomAttributesMixin {
         return Event(
             reader,
             token,
-            szEvent.toDartString(),
             ptkClass.value,
+            szEvent.toDartString(),
             pdwEventFlags.value,
             ptkEventType.value,
             ptkAddOn.value,

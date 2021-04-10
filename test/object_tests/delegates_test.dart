@@ -37,9 +37,9 @@ void main() {
         scope.findTypeDef('Windows.Win32.WindowsAndMessaging.WNDPROC')!;
 
     expect(wndProc.isClass, isTrue);
-    expect(wndProc.typeVisibility, equals(TypeVisibility.Public));
-    expect(wndProc.typeLayout, equals(TypeLayout.Auto));
-    expect(wndProc.stringFormat, equals(StringFormat.Auto));
+    expect(wndProc.typeVisibility, equals(TypeVisibility.public));
+    expect(wndProc.typeLayout, equals(TypeLayout.auto));
+    expect(wndProc.stringFormat, equals(StringFormat.auto));
     expect(wndProc.isSealed, isTrue);
     expect(wndProc.isBeforeFieldInit, isTrue);
     expect(
@@ -60,7 +60,7 @@ void main() {
         ]));
 
     expect(wndProc.methods.length, equals(2));
-    expect(wndProc.methods[0].memberAccess, equals(MemberAccess.Public));
+    expect(wndProc.methods[0].memberAccess, equals(MemberAccess.public));
     expect(wndProc.methods[0].isHideBySig, isTrue);
     expect(wndProc.methods[0].isSpecialName, isTrue);
     expect(wndProc.methods[0].isRTSpecialName, isTrue);
@@ -77,12 +77,12 @@ void main() {
     expect(wndProc.methods[0].parameters[1].name, equals('method'));
     expect(wndProc.methods[0].parameters[1].typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_I));
-    expect(wndProc.methods[0].implFeatures.codeType, equals(CodeType.Runtime));
+    expect(wndProc.methods[0].implFeatures.codeType, equals(CodeType.runtime));
     expect(wndProc.methods[0].implFeatures.isManaged, isTrue);
 
-    expect(wndProc.methods[1].memberAccess, equals(MemberAccess.Public));
+    expect(wndProc.methods[1].memberAccess, equals(MemberAccess.public));
     expect(wndProc.methods[1].isHideBySig, isTrue);
-    expect(wndProc.methods[1].vTableLayout, equals(VtableLayout.NewSlot));
+    expect(wndProc.methods[1].vTableLayout, equals(VtableLayout.newSlot));
     expect(wndProc.methods[1].isVirtual, isTrue);
 
     expect(wndProc.methods[1].returnType.typeIdentifier.name,
@@ -115,7 +115,7 @@ void main() {
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
     expect(wndProc.methods[1].parameters[3].typeIdentifier.name,
         equals('Windows.Win32.WindowsAndMessaging.LPARAM'));
-    expect(wndProc.methods[1].implFeatures.codeType, equals(CodeType.Runtime));
+    expect(wndProc.methods[1].implFeatures.codeType, equals(CodeType.runtime));
     expect(wndProc.methods[1].implFeatures.isManaged, isTrue);
   });
 }

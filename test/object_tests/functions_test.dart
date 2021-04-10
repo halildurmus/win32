@@ -23,7 +23,7 @@ void main() {
         scope.findTypeDef('Windows.Win32.WindowsAndMessaging.Apis')!;
     final awr = typedef.findMethod('AdjustWindowRect')!;
 
-    expect(awr.memberAccess, equals(MemberAccess.Public));
+    expect(awr.memberAccess, equals(MemberAccess.public));
     expect(awr.isHideBySig, isTrue);
     expect(awr.isStatic, isTrue);
 
@@ -31,7 +31,7 @@ void main() {
     expect(awr.pinvokeMap.moduleName, equals('USER32'));
     expect(awr.pinvokeMap.isNoMangle, isTrue);
     expect(awr.pinvokeMap.supportsLastError, isTrue);
-    expect(awr.pinvokeMap.callingConvention, equals(CallingConvention.WinApi));
+    expect(awr.pinvokeMap.callingConvention, equals(CallingConvention.winApi));
 
     expect(awr.returnType.typeIdentifier.name,
         equals('Windows.Win32.SystemServices.BOOL'));

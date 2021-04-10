@@ -24,25 +24,25 @@ import 'utils.dart';
 import 'win32.dart';
 
 enum TypeVisibility {
-  NotPublic,
-  Public,
-  NestedPublic,
-  NestedPrivate,
-  NestedFamily,
-  NestedAssembly,
-  NestedFamilyAndAssembly,
-  NestedFamilyOrAssembly
+  notPublic,
+  public,
+  nestedPublic,
+  nestedPrivate,
+  nestedFamily,
+  nestedAssembly,
+  nestedFamilyAndAssembly,
+  nestedFamilyOrAssembly
 }
 
-enum TypeLayout { Auto, Sequential, Explicit }
+enum TypeLayout { auto, sequential, explicit }
 
-enum StringFormat { Ansi, Unicode, Auto, Custom }
+enum StringFormat { ansi, unicode, auto, custom }
 
 /// Represents a TypeDef in the Windows Metadata file
 class TypeDef extends TokenObject
     with CustomAttributesMixin, GenericParamsMixin {
   final String typeName;
-  final int attributes;
+  final int _attributes;
   final int baseTypeToken;
   final TypeIdentifier? typeSpec;
 
@@ -53,16 +53,16 @@ class TypeDef extends TokenObject
   final _events = <Event>[];
 
   TypeVisibility get typeVisibility =>
-      TypeVisibility.values[attributes & CorTypeAttr.tdVisibilityMask];
+      TypeVisibility.values[_attributes & CorTypeAttr.tdVisibilityMask];
 
   TypeLayout get typeLayout {
-    switch (attributes & CorTypeAttr.tdLayoutMask) {
+    switch (_attributes & CorTypeAttr.tdLayoutMask) {
       case CorTypeAttr.tdAutoLayout:
-        return TypeLayout.Auto;
+        return TypeLayout.auto;
       case CorTypeAttr.tdSequentialLayout:
-        return TypeLayout.Sequential;
+        return TypeLayout.sequential;
       case CorTypeAttr.tdExplicitLayout:
-        return TypeLayout.Explicit;
+        return TypeLayout.explicit;
       default:
         throw WinmdException('Attribute missing type layout information');
     }
@@ -70,54 +70,55 @@ class TypeDef extends TokenObject
 
   /// Is the type a class?
   bool get isClass =>
-      attributes & CorTypeAttr.tdClassSemanticsMask == CorTypeAttr.tdClass;
+      _attributes & CorTypeAttr.tdClassSemanticsMask == CorTypeAttr.tdClass;
 
   /// Is the type an interface?
   bool get isInterface =>
-      attributes & CorTypeAttr.tdClassSemanticsMask == CorTypeAttr.tdInterface;
+      _attributes & CorTypeAttr.tdClassSemanticsMask == CorTypeAttr.tdInterface;
 
   bool get isAbstract =>
-      attributes & CorTypeAttr.tdAbstract == CorTypeAttr.tdAbstract;
+      _attributes & CorTypeAttr.tdAbstract == CorTypeAttr.tdAbstract;
 
   bool get isSealed =>
-      attributes & CorTypeAttr.tdSealed == CorTypeAttr.tdSealed;
+      _attributes & CorTypeAttr.tdSealed == CorTypeAttr.tdSealed;
 
   bool get isSpecialName =>
-      attributes & CorTypeAttr.tdSpecialName == CorTypeAttr.tdSpecialName;
+      _attributes & CorTypeAttr.tdSpecialName == CorTypeAttr.tdSpecialName;
 
   bool get isImported =>
-      attributes & CorTypeAttr.tdImport == CorTypeAttr.tdImport;
+      _attributes & CorTypeAttr.tdImport == CorTypeAttr.tdImport;
 
   bool get isSerializable =>
-      attributes & CorTypeAttr.tdSerializable == CorTypeAttr.tdSerializable;
+      _attributes & CorTypeAttr.tdSerializable == CorTypeAttr.tdSerializable;
 
   bool get isWindowsRuntime =>
-      attributes & CorTypeAttr.tdWindowsRuntime == CorTypeAttr.tdWindowsRuntime;
+      _attributes & CorTypeAttr.tdWindowsRuntime ==
+      CorTypeAttr.tdWindowsRuntime;
 
   bool get isRTSpecialName =>
-      attributes & CorTypeAttr.tdRTSpecialName == CorTypeAttr.tdRTSpecialName;
+      _attributes & CorTypeAttr.tdRTSpecialName == CorTypeAttr.tdRTSpecialName;
 
   StringFormat get stringFormat {
-    switch (attributes & CorTypeAttr.tdStringFormatMask) {
+    switch (_attributes & CorTypeAttr.tdStringFormatMask) {
       case CorTypeAttr.tdAnsiClass:
-        return StringFormat.Ansi;
+        return StringFormat.ansi;
       case CorTypeAttr.tdUnicodeClass:
-        return StringFormat.Unicode;
+        return StringFormat.unicode;
       case CorTypeAttr.tdAutoClass:
-        return StringFormat.Auto;
+        return StringFormat.auto;
       case CorTypeAttr.tdCustomFormatClass:
-        return StringFormat.Custom;
+        return StringFormat.custom;
       default:
         throw WinmdException('Attribute missing string format information');
     }
   }
 
   bool get isBeforeFieldInit =>
-      attributes & CorTypeAttr.tdBeforeFieldInit ==
+      _attributes & CorTypeAttr.tdBeforeFieldInit ==
       CorTypeAttr.tdBeforeFieldInit;
 
   bool get isForwarder =>
-      attributes & CorTypeAttr.tdForwarder == CorTypeAttr.tdForwarder;
+      _attributes & CorTypeAttr.tdForwarder == CorTypeAttr.tdForwarder;
 
   /// Is the type a delegate?
   bool get isDelegate => parent?.typeName == 'System.MulticastDelegate';
@@ -142,12 +143,12 @@ class TypeDef extends TokenObject
   TypeDef(IMetaDataImport2 reader,
       [int token = 0,
       this.typeName = '',
-      this.attributes = 0,
+      this._attributes = 0,
       this.baseTypeToken = 0,
       this.typeSpec])
       : super(reader, token);
 
-  /// Instantiate a typedef from a token.
+  /// Creates a typedef object from its given token.
   factory TypeDef.fromToken(IMetaDataImport2 reader, int token) {
     switch (token & 0xFF000000) {
       case CorTokenType.mdtTypeRef:

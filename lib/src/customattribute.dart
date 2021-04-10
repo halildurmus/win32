@@ -49,6 +49,7 @@ class CustomAttribute extends TokenObject {
       this.attributeType, this.signatureBlob)
       : super(reader, token);
 
+  /// Creates a custom attribute object from its given token.
   factory CustomAttribute.fromToken(IMetaDataImport2 reader, int token) {
     final ptkObj = calloc<mdToken>();
     final ptkType = calloc<mdToken>();

@@ -16,7 +16,6 @@ export 'src/base.dart';
 export 'src/classlayout.dart';
 export 'src/constants.dart';
 export 'src/customattribute.dart';
-export 'src/enumeration.dart';
 export 'src/field.dart';
 export 'src/metadatastore.dart';
 export 'src/method.dart';

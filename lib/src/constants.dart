@@ -46,6 +46,19 @@ enum CorElementType {
   ELEMENT_TYPE_PINNED
 }
 
+/// Contains values that describe the metadata of an event.
+class CorEventAttr {
+  /// Specifies that the event is special, and that its name describes how.
+  static const evSpecialName = 0x0200;
+
+  /// Reserved for internal use by the common language runtime.
+  static const evReservedMask = 0x0400;
+
+  /// Specifies that the common language runtime should check the encoding of
+  /// the event name.
+  static const evRTSpecialName = 0x0400;
+}
+
 /// Contains values that describe metadata about a field.
 class CorFieldAttr {
   /// Specifies accessibility information.
@@ -109,6 +122,39 @@ class CorFieldAttr {
 
   /// Specifies that the field has a relative virtual address.
   static const fdHasFieldRVA = 0x0100;
+}
+
+/// Contains values that describe the Type parameters for generic types.
+class CorGenericParamAttr {
+  /// Parameter variance applies only to generic parameters for interfaces and
+  /// delegates.
+  static const gpVarianceMask = 0x0003;
+
+  /// Indicates the absence of variance.
+  static const gpNonVariant = 0x0000;
+
+  /// Indicates covariance.
+  static const gpCovariant = 0x0001;
+
+  /// Indicates contravariance.
+  static const gpContravariant = 0x0002;
+
+  /// Special constraints can apply to any Type parameter.
+  static const gpSpecialConstraintMask = 0x001C;
+
+  /// Indicates that no constraint applies to the Type parameter.
+  static const gpNoSpecialConstraint = 0x0000;
+
+  /// Indicates that the Type parameter must be a reference type.
+  static const gpReferenceTypeConstraint = 0x0004;
+
+  /// Indicates that the Type parameter must be a value type that cannot be a
+  /// null value.
+  static const gpNotNullableValueTypeConstraint = 0x0008;
+
+  /// Indicates that the Type parameter must have a default public constructor
+  /// that takes no parameters.
+  static const gpDefaultConstructorConstraint = 0x0010;
 }
 
 /// Contains values that describe the features of a method.

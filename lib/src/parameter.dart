@@ -11,41 +11,53 @@ import 'package:win32/win32.dart';
 import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
+import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'typeidentifier.dart';
 import 'win32.dart';
 
 /// A parameter or return type.
 class Parameter extends TokenObject with CustomAttributesMixin {
+  final int _methodToken;
   final int sequence;
-  final int attributes;
+  final int _attributes;
   TypeIdentifier typeIdentifier;
   String name;
   final Uint8List signatureBlob;
 
+  Method get parent => Method.fromToken(reader, _methodToken);
+
   /// Returns true if the parameter is passed into the method call.
-  bool get isInParam => attributes & CorParamAttr.pdIn == CorParamAttr.pdIn;
+  bool get isInParam => _attributes & CorParamAttr.pdIn == CorParamAttr.pdIn;
 
   /// Returns true if the parameter is passed from the method return.
-  bool get isOutParam => attributes & CorParamAttr.pdOut == CorParamAttr.pdOut;
+  bool get isOutParam => _attributes & CorParamAttr.pdOut == CorParamAttr.pdOut;
 
   /// Returns true if the parameter is optional.
   bool get isOptional =>
-      attributes & CorParamAttr.pdOptional == CorParamAttr.pdOptional;
+      _attributes & CorParamAttr.pdOptional == CorParamAttr.pdOptional;
 
   /// Returns true if the parameter has a default value.
   bool get hasDefault =>
-      attributes & CorParamAttr.pdHasDefault == CorParamAttr.pdHasDefault;
+      _attributes & CorParamAttr.pdHasDefault == CorParamAttr.pdHasDefault;
 
   /// Returns true if the parameter has marshaling information.
   bool get hasFieldMarshal =>
-      attributes & CorParamAttr.pdHasFieldMarshal ==
+      _attributes & CorParamAttr.pdHasFieldMarshal ==
       CorParamAttr.pdHasFieldMarshal;
 
-  Parameter(IMetaDataImport2 reader, int token, this.sequence, this.attributes,
-      this.typeIdentifier, this.name, this.signatureBlob)
+  Parameter(
+      IMetaDataImport2 reader,
+      int token,
+      this._methodToken,
+      this.sequence,
+      this._attributes,
+      this.typeIdentifier,
+      this.name,
+      this.signatureBlob)
       : super(reader, token);
 
+  /// Creates a parameter object from its given token.
   factory Parameter.fromToken(IMetaDataImport2 reader, int token) {
     final ptkMethodDef = calloc<mdMethodDef>();
     final pulSequence = calloc<ULONG>();
@@ -72,6 +84,7 @@ class Parameter extends TokenObject with CustomAttributesMixin {
         return Parameter(
             reader,
             token,
+            ptkMethodDef.value,
             pulSequence.value,
             pdwAttr.value,
             TypeIdentifier.fromValue(pdwCPlusTypeFlag.value),
@@ -92,13 +105,13 @@ class Parameter extends TokenObject with CustomAttributesMixin {
     }
   }
 
-  factory Parameter.fromTypeIdentifier(
-          IMetaDataImport2 reader, TypeIdentifier runtimeType) =>
-      Parameter(reader, 0, 0, 0, runtimeType, '', Uint8List(0));
+  factory Parameter.fromTypeIdentifier(IMetaDataImport2 reader, int methodToken,
+          TypeIdentifier runtimeType) =>
+      Parameter(reader, 0, methodToken, 0, 0, runtimeType, '', Uint8List(0));
 
-  factory Parameter.fromVoid(IMetaDataImport2 reader) => Parameter(reader, 0, 0,
-      0, TypeIdentifier(CorElementType.ELEMENT_TYPE_VOID), '', Uint8List(0));
-
+  factory Parameter.fromVoid(IMetaDataImport2 reader, int methodToken) =>
+      Parameter(reader, 0, methodToken, 0, 0,
+          TypeIdentifier(CorElementType.ELEMENT_TYPE_VOID), '', Uint8List(0));
   @override
   String toString() => 'Parameter: $name';
 }

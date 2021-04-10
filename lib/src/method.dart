@@ -17,52 +17,56 @@ import 'mixins/genericparams_mixin.dart';
 import 'module.dart';
 import 'parameter.dart';
 import 'pinvokemap.dart';
+import 'typedef.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
 import 'win32.dart';
 
 enum MemberAccess {
-  PrivateScope,
-  Private,
-  FamilyAndAssembly,
-  Assembly,
-  Family,
-  FamilyOrAssembly,
-  Public
+  privateScope,
+  private,
+  familyAndAssembly,
+  assembly,
+  family,
+  familyOrAssembly,
+  public
 }
 
-enum VtableLayout { ReuseSlot, NewSlot }
+enum VtableLayout { reuseSlot, newSlot }
 
 class Method extends TokenObject
     with CustomAttributesMixin, GenericParamsMixin {
+  int _parentToken;
   String methodName;
-  int attributes;
+  int _attributes;
   Uint8List signatureBlob;
   int relativeVirtualAddress;
   int implFlags;
 
+  TypeDef get parent => TypeDef.fromToken(reader, _parentToken);
+
   /// Returns information about the method's visibility / accessibility to other
   /// types.
   MemberAccess get memberAccess =>
-      MemberAccess.values[attributes & CorMethodAttr.mdMemberAccessMask];
+      MemberAccess.values[_attributes & CorMethodAttr.mdMemberAccessMask];
 
   /// Returns true if the member is defined as part of the type rather than as a
   /// member of an instance.
   bool get isStatic =>
-      attributes & CorMethodAttr.mdStatic == CorMethodAttr.mdStatic;
+      _attributes & CorMethodAttr.mdStatic == CorMethodAttr.mdStatic;
 
   /// Returns true if the method cannot be overridden.
   bool get isFinal =>
-      attributes & CorMethodAttr.mdFinal == CorMethodAttr.mdFinal;
+      _attributes & CorMethodAttr.mdFinal == CorMethodAttr.mdFinal;
 
   /// Returns true if the method can be overridden.
   bool get isVirtual =>
-      attributes & CorMethodAttr.mdVirtual == CorMethodAttr.mdVirtual;
+      _attributes & CorMethodAttr.mdVirtual == CorMethodAttr.mdVirtual;
 
   /// Returns true if the method hides by name and signature, rather than just
   /// by name.
   bool get isHideBySig =>
-      attributes & CorMethodAttr.mdHideBySig == CorMethodAttr.mdHideBySig;
+      _attributes & CorMethodAttr.mdHideBySig == CorMethodAttr.mdHideBySig;
 
   /// Returns information about the vtable layout of this method.
   ///
@@ -70,11 +74,11 @@ class Method extends TokenObject
   /// reused. This is the default. If `NewSlot`, the method always gets a new
   /// slot in the virtual table.
   VtableLayout get vTableLayout {
-    switch (attributes & CorMethodAttr.mdVtableLayoutMask) {
+    switch (_attributes & CorMethodAttr.mdVtableLayoutMask) {
       case CorMethodAttr.mdReuseSlot:
-        return VtableLayout.ReuseSlot;
+        return VtableLayout.reuseSlot;
       case CorMethodAttr.mdNewSlot:
-        return VtableLayout.NewSlot;
+        return VtableLayout.newSlot;
       default:
         throw WinmdException('Attribute missing vtable layout information');
     }
@@ -83,30 +87,30 @@ class Method extends TokenObject
   /// Returns true if the method can be overridden by the same types to which it
   /// is visible.
   bool get isCheckAccessOnOverride =>
-      attributes & CorMethodAttr.mdCheckAccessOnOverride ==
+      _attributes & CorMethodAttr.mdCheckAccessOnOverride ==
       CorMethodAttr.mdCheckAccessOnOverride;
 
   /// Returns true if the method is not implemented.
   bool get isAbstract =>
-      attributes & CorMethodAttr.mdAbstract == CorMethodAttr.mdAbstract;
+      _attributes & CorMethodAttr.mdAbstract == CorMethodAttr.mdAbstract;
 
   /// Returns true if the method is special; its name describes how.
   bool get isSpecialName =>
-      attributes & CorMethodAttr.mdSpecialName == CorMethodAttr.mdSpecialName;
+      _attributes & CorMethodAttr.mdSpecialName == CorMethodAttr.mdSpecialName;
 
   /// Returns true if the method implementation is forwarded using PInvoke.
   bool get isPinvokeImpl =>
-      attributes & CorMethodAttr.mdPinvokeImpl == CorMethodAttr.mdPinvokeImpl;
+      _attributes & CorMethodAttr.mdPinvokeImpl == CorMethodAttr.mdPinvokeImpl;
 
   /// Returns true if the method is a managed method exported to unmanaged code.
   bool get isUnmanagedExport =>
-      attributes & CorMethodAttr.mdUnmanagedExport ==
+      _attributes & CorMethodAttr.mdUnmanagedExport ==
       CorMethodAttr.mdUnmanagedExport;
 
   /// Returns true if the common language runtime should check the encoding of
   /// the method name.
   bool get isRTSpecialName =>
-      attributes & CorMethodAttr.mdSpecialName == CorMethodAttr.mdSpecialName;
+      _attributes & CorMethodAttr.mdSpecialName == CorMethodAttr.mdSpecialName;
 
   PinvokeMap get pinvokeMap => PinvokeMap.fromToken(reader, token);
 
@@ -141,8 +145,15 @@ class Method extends TokenObject
     }
   }
 
-  Method(IMetaDataImport2 reader, int token, this.methodName, this.attributes,
-      this.signatureBlob, this.relativeVirtualAddress, this.implFlags)
+  Method(
+      IMetaDataImport2 reader,
+      int token,
+      this._parentToken,
+      this.methodName,
+      this._attributes,
+      this.signatureBlob,
+      this.relativeVirtualAddress,
+      this.implFlags)
       : super(reader, token) {
     _parseMethodType();
     _parseParameterNames();
@@ -150,6 +161,7 @@ class Method extends TokenObject
     _parseParameterAttributes();
   }
 
+  /// Creates a method object from its given token.
   factory Method.fromToken(IMetaDataImport2 reader, int token) {
     final ptkClass = calloc<mdTypeDef>();
     final szMethod = stralloc(MAX_STRING_SIZE);
@@ -175,8 +187,8 @@ class Method extends TokenObject
 
       if (SUCCEEDED(hr)) {
         final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
-        return Method(reader, token, szMethod.toDartString(), pdwAttr.value,
-            signature, pulCodeRVA.value, pdwImplFlags.value);
+        return Method(reader, token, ptkClass.value, szMethod.toDartString(),
+            pdwAttr.value, signature, pulCodeRVA.value, pdwImplFlags.value);
       } else {
         throw WindowsException(hr);
       }
@@ -242,10 +254,10 @@ class Method extends TokenObject
       final typeIdentifier =
           parseTypeFromSignature(signatureBlob.sublist(2), reader)
               .typeIdentifier;
-      returnType = Parameter.fromTypeIdentifier(reader, typeIdentifier);
+      returnType = Parameter.fromTypeIdentifier(reader, token, typeIdentifier);
     } else if (isSetProperty) {
       // set properties don't have a return type
-      returnType = Parameter.fromVoid(reader);
+      returnType = Parameter.fromVoid(reader, token);
     }
   }
 
@@ -277,8 +289,8 @@ class Method extends TokenObject
       // if there is a return type. So we create a new returnType for it.
       final returnTypeTuple =
           parseTypeFromSignature(signatureBlob.sublist(blobPtr), reader);
-      returnType =
-          Parameter.fromTypeIdentifier(reader, returnTypeTuple.typeIdentifier);
+      returnType = Parameter.fromTypeIdentifier(
+          reader, token, returnTypeTuple.typeIdentifier);
       blobPtr += returnTypeTuple.offsetLength;
     }
 
@@ -354,7 +366,7 @@ class Method extends TokenObject
         .typeArgs
         .add(TypeIdentifier(CorElementType.ELEMENT_TYPE_U4));
 
-    parameters.insert(paramsIndex + 1, Parameter.fromVoid(reader));
+    parameters.insert(paramsIndex + 1, Parameter.fromVoid(reader, token));
     parameters[paramsIndex + 1].name = 'value';
     parameters[paramsIndex + 1].typeIdentifier.corType =
         CorElementType.ELEMENT_TYPE_PTR;

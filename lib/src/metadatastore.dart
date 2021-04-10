@@ -31,16 +31,16 @@ class MetadataStore {
   /// This is done automatically by any method that uses it.
   static void initialize() {
     // This must have the same object lifetime as MetadataStore itself.
-    final dispenserObject = calloc<Pointer>();
+    final dispenserObject = calloc<COMObject>();
 
     final hr = MetaDataGetDispenser(convertToCLSID(CLSID_CorMetaDataDispenser),
-        convertToIID(IID_IMetaDataDispenser), dispenserObject);
+        convertToIID(IID_IMetaDataDispenser), dispenserObject.cast());
 
     if (FAILED(hr)) {
       throw WindowsException(hr);
     }
 
-    dispenser = IMetaDataDispenser(dispenserObject.cast());
+    dispenser = IMetaDataDispenser(dispenserObject);
 
     isInitialized = true;
   }
@@ -83,15 +83,15 @@ class MetadataStore {
       return cache[filename]!;
     } else {
       final szFile = fileScope.path.toNativeUtf16();
-      final pReader = calloc<IntPtr>();
+      final pReader = calloc<COMObject>();
 
       try {
         final hr = dispenser.OpenScope(szFile, CorOpenFlags.ofRead,
-            convertToIID(IID_IMetaDataImport2), pReader);
+            convertToIID(IID_IMetaDataImport2), pReader.cast());
         if (FAILED(hr)) {
           throw WindowsException(hr);
         } else {
-          final scope = Scope(IMetaDataImport2(pReader.cast()));
+          final scope = Scope(IMetaDataImport2(pReader));
           cache[filename] = scope;
           return scope;
         }

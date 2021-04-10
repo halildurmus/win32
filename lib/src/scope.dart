@@ -9,7 +9,6 @@ import 'package:win32/win32.dart';
 
 import 'base.dart';
 import 'com/IMetaDataImport2.dart';
-import 'enumeration.dart';
 import 'module.dart';
 import 'typedef.dart';
 import 'win32.dart';
@@ -23,18 +22,20 @@ class Scope {
 
   final _typedefs = <TypeDef>[];
   final _modules = <Module>[];
-  final _enums = <Enumeration>[];
+  final _enums = <TypeDef>[];
 
-  Scope(this.reader);
+  late final String name;
+  late final String guid;
 
-  String get name {
+  Scope(this.reader) {
     final szName = stralloc(MAX_STRING_SIZE);
     final pchName = calloc<ULONG>();
+    final pmvid = calloc<GUID>();
     try {
-      final hr =
-          reader.GetScopeProps(szName, MAX_STRING_SIZE, pchName, nullptr);
+      final hr = reader.GetScopeProps(szName, MAX_STRING_SIZE, pchName, pmvid);
       if (SUCCEEDED(hr)) {
-        return szName.toDartString();
+        name = szName.toDartString();
+        guid = pmvid.ref.toString();
       } else {
         throw COMException(hr);
       }
@@ -134,11 +135,11 @@ class Scope {
   }
 
   /// Get an enumerated list of all enumerations in this scope.
-  List<Enumeration> get enums {
+  List<TypeDef> get enums {
     if (_enums.isEmpty) {
       for (final typeDef in typeDefs) {
         if (typeDef.parent?.typeName == 'System.Enum') {
-          _enums.add(Enumeration(typeDef));
+          _enums.add(typeDef);
         }
       }
     }
