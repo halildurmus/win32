@@ -17,7 +17,8 @@ import 'combase.dart';
 import 'structs.dart';
 import 'structs.g.dart';
 
-final _api_ms_win_core_winrt_string_l1_1_0 = DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+final _api_ms_win_core_winrt_string_l1_1_0 =
+    DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
 
 /// Creates a new HSTRING based on the specified source string.
 ///
@@ -29,11 +30,14 @@ final _api_ms_win_core_winrt_string_l1_1_0 = DynamicLibrary.open('api-ms-win-cor
 /// );
 /// ```
 /// {@category winrt}
-int WindowsCreateString(Pointer<Utf16> sourceString, int length, Pointer<IntPtr> string) {
-  final _WindowsCreateString = _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
-    Int32 Function(Pointer<Utf16> sourceString, Uint32 length, Pointer<IntPtr> string), 
-    int Function(Pointer<Utf16> sourceString, int length, Pointer<IntPtr> string)
-  >('WindowsCreateString');
+int WindowsCreateString(
+    Pointer<Utf16> sourceString, int length, Pointer<IntPtr> string) {
+  final _WindowsCreateString =
+      _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+          Int32 Function(Pointer<Utf16> sourceString, Uint32 length,
+              Pointer<IntPtr> string),
+          int Function(Pointer<Utf16> sourceString, int length,
+              Pointer<IntPtr> string)>('WindowsCreateString');
   return _WindowsCreateString(sourceString, length, string);
 }
 
@@ -46,10 +50,9 @@ int WindowsCreateString(Pointer<Utf16> sourceString, int length, Pointer<IntPtr>
 /// ```
 /// {@category winrt}
 int WindowsDeleteString(int string) {
-  final _WindowsDeleteString = _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
-    Int32 Function(IntPtr string), 
-    int Function(int string)
-  >('WindowsDeleteString');
+  final _WindowsDeleteString = _api_ms_win_core_winrt_string_l1_1_0
+      .lookupFunction<Int32 Function(IntPtr string), int Function(int string)>(
+          'WindowsDeleteString');
   return _WindowsDeleteString(string);
 }
 
@@ -63,10 +66,10 @@ int WindowsDeleteString(int string) {
 /// ```
 /// {@category winrt}
 Pointer<Utf16> WindowsGetStringRawBuffer(int string, Pointer<Uint32> length) {
-  final _WindowsGetStringRawBuffer = _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
-    Pointer<Utf16> Function(IntPtr string, Pointer<Uint32> length), 
-    Pointer<Utf16> Function(int string, Pointer<Uint32> length)
-  >('WindowsGetStringRawBuffer');
+  final _WindowsGetStringRawBuffer =
+      _api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+          Pointer<Utf16> Function(IntPtr string, Pointer<Uint32> length),
+          Pointer<Utf16> Function(
+              int string, Pointer<Uint32> length)>('WindowsGetStringRawBuffer');
   return _WindowsGetStringRawBuffer(string, length);
 }
-

@@ -712,6 +712,20 @@ int CloseClipboard() {
   return _CloseClipboard();
 }
 
+/// Minimizes (but does not destroy) the specified window.
+///
+/// ```c
+/// BOOL CloseWindow(
+///   HWND hWnd
+/// );
+/// ```
+/// {@category user32}
+int CloseWindow(int hWnd) {
+  final _CloseWindow = _user32.lookupFunction<Int32 Function(IntPtr hWnd),
+      int Function(int hWnd)>('CloseWindow');
+  return _CloseWindow(hWnd);
+}
+
 /// Copies the specified accelerator table. This function is used to obtain
 /// the accelerator-table data that corresponds to an accelerator-table
 /// handle, or to determine the size of the accelerator-table data.
@@ -1199,6 +1213,21 @@ int DeleteMenu(int hMenu, int uPosition, int uFlags) {
       Int32 Function(IntPtr hMenu, Uint32 uPosition, Uint32 uFlags),
       int Function(int hMenu, int uPosition, int uFlags)>('DeleteMenu');
   return _DeleteMenu(hMenu, uPosition, uFlags);
+}
+
+/// Destroys a cursor and frees any memory the cursor occupied. Do not use
+/// this function to destroy a shared cursor.
+///
+/// ```c
+/// BOOL DestroyCursor(
+///   HCURSOR hCursor
+/// );
+/// ```
+/// {@category user32}
+int DestroyCursor(int hCursor) {
+  final _DestroyCursor = _user32.lookupFunction<Int32 Function(IntPtr hCursor),
+      int Function(int hCursor)>('DestroyCursor');
+  return _DestroyCursor(hCursor);
 }
 
 /// Destroys an icon and frees any memory the icon occupied.

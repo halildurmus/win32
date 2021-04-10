@@ -1943,6 +1943,12 @@ void main() {
           .lookupFunction<Int32 Function(), int Function()>('CloseClipboard');
       expect(CloseClipboard, isA<Function>());
     });
+    test('Can instantiate CloseWindow', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final CloseWindow = user32.lookupFunction<Int32 Function(IntPtr hWnd),
+          int Function(int hWnd)>('CloseWindow');
+      expect(CloseWindow, isA<Function>());
+    });
     test('Can instantiate CopyAcceleratorTable', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final CopyAcceleratorTable = user32.lookupFunction<
@@ -2165,6 +2171,13 @@ void main() {
           Int32 Function(IntPtr hMenu, Uint32 uPosition, Uint32 uFlags),
           int Function(int hMenu, int uPosition, int uFlags)>('DeleteMenu');
       expect(DeleteMenu, isA<Function>());
+    });
+    test('Can instantiate DestroyCursor', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final DestroyCursor = user32.lookupFunction<
+          Int32 Function(IntPtr hCursor),
+          int Function(int hCursor)>('DestroyCursor');
+      expect(DestroyCursor, isA<Function>());
     });
     test('Can instantiate DestroyIcon', () {
       final user32 = DynamicLibrary.open('user32.dll');

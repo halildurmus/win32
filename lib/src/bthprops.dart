@@ -19,9 +19,9 @@ import 'structs.g.dart';
 
 final _bthprops = DynamicLibrary.open('bthprops.cpl');
 
-/// The BluetoothAuthenticateDeviceEx function sends an authentication 
-/// request to a remote Bluetooth device. Additionally, this function 
-/// allows for out-of-band data to be passed into the function call for the 
+/// The BluetoothAuthenticateDeviceEx function sends an authentication
+/// request to a remote Bluetooth device. Additionally, this function
+/// allows for out-of-band data to be passed into the function call for the
 /// device being authenticated.
 ///
 /// ```c
@@ -34,15 +34,30 @@ final _bthprops = DynamicLibrary.open('bthprops.cpl');
 /// );
 /// ```
 /// {@category bthprops}
-int BluetoothAuthenticateDeviceEx(int hwndParentIn, int hRadioIn, Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout, Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData, int authenticationRequirement) {
+int BluetoothAuthenticateDeviceEx(
+    int hwndParentIn,
+    int hRadioIn,
+    Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
+    Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
+    int authenticationRequirement) {
   final _BluetoothAuthenticateDeviceEx = _bthprops.lookupFunction<
-    Uint32 Function(IntPtr hwndParentIn, IntPtr hRadioIn, Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout, Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData, Uint32 authenticationRequirement), 
-    int Function(int hwndParentIn, int hRadioIn, Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout, Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData, int authenticationRequirement)
-  >('BluetoothAuthenticateDeviceEx');
-  return _BluetoothAuthenticateDeviceEx(hwndParentIn, hRadioIn, pbtdiInout, pbtOobData, authenticationRequirement);
+      Uint32 Function(
+          IntPtr hwndParentIn,
+          IntPtr hRadioIn,
+          Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
+          Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
+          Uint32 authenticationRequirement),
+      int Function(
+          int hwndParentIn,
+          int hRadioIn,
+          Pointer<BLUETOOTH_DEVICE_INFO> pbtdiInout,
+          Pointer<BLUETOOTH_OOB_DATA_INFO> pbtOobData,
+          int authenticationRequirement)>('BluetoothAuthenticateDeviceEx');
+  return _BluetoothAuthenticateDeviceEx(hwndParentIn, hRadioIn, pbtdiInout,
+      pbtOobData, authenticationRequirement);
 }
 
-/// The BluetoothDisplayDeviceProperties function opens the Control Panel 
+/// The BluetoothDisplayDeviceProperties function opens the Control Panel
 /// device information property sheet.
 ///
 /// ```c
@@ -52,15 +67,18 @@ int BluetoothAuthenticateDeviceEx(int hwndParentIn, int hRadioIn, Pointer<BLUETO
 /// );
 /// ```
 /// {@category bthprops}
-int BluetoothDisplayDeviceProperties(int hwndParent, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi) {
+int BluetoothDisplayDeviceProperties(
+    int hwndParent, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi) {
   final _BluetoothDisplayDeviceProperties = _bthprops.lookupFunction<
-    Int32 Function(IntPtr hwndParent, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi), 
-    int Function(int hwndParent, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)
-  >('BluetoothDisplayDeviceProperties');
+      Int32 Function(IntPtr hwndParent, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
+      int Function(
+          int hwndParent,
+          Pointer<BLUETOOTH_DEVICE_INFO>
+              pbtdi)>('BluetoothDisplayDeviceProperties');
   return _BluetoothDisplayDeviceProperties(hwndParent, pbtdi);
 }
 
-/// The BluetoothEnableDiscovery function changes the discovery state of a 
+/// The BluetoothEnableDiscovery function changes the discovery state of a
 /// local Bluetooth radio or radios.
 ///
 /// ```c
@@ -72,13 +90,12 @@ int BluetoothDisplayDeviceProperties(int hwndParent, Pointer<BLUETOOTH_DEVICE_IN
 /// {@category bthprops}
 int BluetoothEnableDiscovery(int hRadio, int fEnabled) {
   final _BluetoothEnableDiscovery = _bthprops.lookupFunction<
-    Int32 Function(IntPtr hRadio, Int32 fEnabled), 
-    int Function(int hRadio, int fEnabled)
-  >('BluetoothEnableDiscovery');
+      Int32 Function(IntPtr hRadio, Int32 fEnabled),
+      int Function(int hRadio, int fEnabled)>('BluetoothEnableDiscovery');
   return _BluetoothEnableDiscovery(hRadio, fEnabled);
 }
 
-/// The BluetoothEnableIncomingConnections function modifies whether a 
+/// The BluetoothEnableIncomingConnections function modifies whether a
 /// local Bluetooth radio accepts incoming connections.
 ///
 /// ```c
@@ -90,14 +107,14 @@ int BluetoothEnableDiscovery(int hRadio, int fEnabled) {
 /// {@category bthprops}
 int BluetoothEnableIncomingConnections(int hRadio, int fEnabled) {
   final _BluetoothEnableIncomingConnections = _bthprops.lookupFunction<
-    Int32 Function(IntPtr hRadio, Int32 fEnabled), 
-    int Function(int hRadio, int fEnabled)
-  >('BluetoothEnableIncomingConnections');
+      Int32 Function(IntPtr hRadio, Int32 fEnabled),
+      int Function(
+          int hRadio, int fEnabled)>('BluetoothEnableIncomingConnections');
   return _BluetoothEnableIncomingConnections(hRadio, fEnabled);
 }
 
-/// The BluetoothEnumerateInstalledServices function enumerates the 
-/// services GUIDs (Globally Unique Identifiers) enabled on a Bluetooth 
+/// The BluetoothEnumerateInstalledServices function enumerates the
+/// services GUIDs (Globally Unique Identifiers) enabled on a Bluetooth
 /// device.
 ///
 /// ```c
@@ -109,15 +126,24 @@ int BluetoothEnableIncomingConnections(int hRadio, int fEnabled) {
 /// );
 /// ```
 /// {@category bthprops}
-int BluetoothEnumerateInstalledServices(int hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi, Pointer<Uint32> pcServiceInout, Pointer<GUID> pGuidServices) {
+int BluetoothEnumerateInstalledServices(
+    int hRadio,
+    Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
+    Pointer<Uint32> pcServiceInout,
+    Pointer<GUID> pGuidServices) {
   final _BluetoothEnumerateInstalledServices = _bthprops.lookupFunction<
-    Uint32 Function(IntPtr hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi, Pointer<Uint32> pcServiceInout, Pointer<GUID> pGuidServices), 
-    int Function(int hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi, Pointer<Uint32> pcServiceInout, Pointer<GUID> pGuidServices)
-  >('BluetoothEnumerateInstalledServices');
-  return _BluetoothEnumerateInstalledServices(hRadio, pbtdi, pcServiceInout, pGuidServices);
+      Uint32 Function(IntPtr hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
+          Pointer<Uint32> pcServiceInout, Pointer<GUID> pGuidServices),
+      int Function(
+          int hRadio,
+          Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
+          Pointer<Uint32> pcServiceInout,
+          Pointer<GUID> pGuidServices)>('BluetoothEnumerateInstalledServices');
+  return _BluetoothEnumerateInstalledServices(
+      hRadio, pbtdi, pcServiceInout, pGuidServices);
 }
 
-/// The BluetoothFindDeviceClose function closes an enumeration handle 
+/// The BluetoothFindDeviceClose function closes an enumeration handle
 /// associated with a device query.
 ///
 /// ```c
@@ -128,13 +154,12 @@ int BluetoothEnumerateInstalledServices(int hRadio, Pointer<BLUETOOTH_DEVICE_INF
 /// {@category bthprops}
 int BluetoothFindDeviceClose(int hFind) {
   final _BluetoothFindDeviceClose = _bthprops.lookupFunction<
-    Int32 Function(IntPtr hFind), 
-    int Function(int hFind)
-  >('BluetoothFindDeviceClose');
+      Int32 Function(IntPtr hFind),
+      int Function(int hFind)>('BluetoothFindDeviceClose');
   return _BluetoothFindDeviceClose(hFind);
 }
 
-/// The BluetoothFindFirstDevice function begins the enumeration Bluetooth 
+/// The BluetoothFindFirstDevice function begins the enumeration Bluetooth
 /// devices.
 ///
 /// ```c
@@ -144,15 +169,17 @@ int BluetoothFindDeviceClose(int hFind) {
 /// );
 /// ```
 /// {@category bthprops}
-int BluetoothFindFirstDevice(Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi) {
+int BluetoothFindFirstDevice(Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp,
+    Pointer<BLUETOOTH_DEVICE_INFO> pbtdi) {
   final _BluetoothFindFirstDevice = _bthprops.lookupFunction<
-    IntPtr Function(Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi), 
-    int Function(Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)
-  >('BluetoothFindFirstDevice');
+      IntPtr Function(Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp,
+          Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
+      int Function(Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp,
+          Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)>('BluetoothFindFirstDevice');
   return _BluetoothFindFirstDevice(pbtsp, pbtdi);
 }
 
-/// The BluetoothFindFirstRadio function begins the enumeration of local 
+/// The BluetoothFindFirstRadio function begins the enumeration of local
 /// Bluetooth radios.
 ///
 /// ```c
@@ -162,11 +189,13 @@ int BluetoothFindFirstDevice(Pointer<BLUETOOTH_DEVICE_SEARCH_PARAMS> pbtsp, Poin
 /// );
 /// ```
 /// {@category bthprops}
-int BluetoothFindFirstRadio(Pointer<BLUETOOTH_FIND_RADIO_PARAMS> pbtfrp, Pointer<IntPtr> phRadio) {
+int BluetoothFindFirstRadio(
+    Pointer<BLUETOOTH_FIND_RADIO_PARAMS> pbtfrp, Pointer<IntPtr> phRadio) {
   final _BluetoothFindFirstRadio = _bthprops.lookupFunction<
-    IntPtr Function(Pointer<BLUETOOTH_FIND_RADIO_PARAMS> pbtfrp, Pointer<IntPtr> phRadio), 
-    int Function(Pointer<BLUETOOTH_FIND_RADIO_PARAMS> pbtfrp, Pointer<IntPtr> phRadio)
-  >('BluetoothFindFirstRadio');
+      IntPtr Function(
+          Pointer<BLUETOOTH_FIND_RADIO_PARAMS> pbtfrp, Pointer<IntPtr> phRadio),
+      int Function(Pointer<BLUETOOTH_FIND_RADIO_PARAMS> pbtfrp,
+          Pointer<IntPtr> phRadio)>('BluetoothFindFirstRadio');
   return _BluetoothFindFirstRadio(pbtfrp, phRadio);
 }
 
@@ -181,9 +210,9 @@ int BluetoothFindFirstRadio(Pointer<BLUETOOTH_FIND_RADIO_PARAMS> pbtfrp, Pointer
 /// {@category bthprops}
 int BluetoothFindNextDevice(int hFind, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi) {
   final _BluetoothFindNextDevice = _bthprops.lookupFunction<
-    Int32 Function(IntPtr hFind, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi), 
-    int Function(int hFind, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)
-  >('BluetoothFindNextDevice');
+      Int32 Function(IntPtr hFind, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
+      int Function(int hFind,
+          Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)>('BluetoothFindNextDevice');
   return _BluetoothFindNextDevice(hFind, pbtdi);
 }
 
@@ -198,13 +227,13 @@ int BluetoothFindNextDevice(int hFind, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi) {
 /// {@category bthprops}
 int BluetoothFindNextRadio(int hFind, Pointer<IntPtr> phRadio) {
   final _BluetoothFindNextRadio = _bthprops.lookupFunction<
-    Int32 Function(IntPtr hFind, Pointer<IntPtr> phRadio), 
-    int Function(int hFind, Pointer<IntPtr> phRadio)
-  >('BluetoothFindNextRadio');
+      Int32 Function(IntPtr hFind, Pointer<IntPtr> phRadio),
+      int Function(
+          int hFind, Pointer<IntPtr> phRadio)>('BluetoothFindNextRadio');
   return _BluetoothFindNextRadio(hFind, phRadio);
 }
 
-/// The BluetoothFindRadioClose function closes the enumeration handle 
+/// The BluetoothFindRadioClose function closes the enumeration handle
 /// associated with finding Bluetooth radios.
 ///
 /// ```c
@@ -215,13 +244,12 @@ int BluetoothFindNextRadio(int hFind, Pointer<IntPtr> phRadio) {
 /// {@category bthprops}
 int BluetoothFindRadioClose(int hFind) {
   final _BluetoothFindRadioClose = _bthprops.lookupFunction<
-    Int32 Function(IntPtr hFind), 
-    int Function(int hFind)
-  >('BluetoothFindRadioClose');
+      Int32 Function(IntPtr hFind),
+      int Function(int hFind)>('BluetoothFindRadioClose');
   return _BluetoothFindRadioClose(hFind);
 }
 
-/// The BluetoothGetRadioInfo function obtains information about a 
+/// The BluetoothGetRadioInfo function obtains information about a
 /// Bluetooth radio.
 ///
 /// ```c
@@ -231,15 +259,16 @@ int BluetoothFindRadioClose(int hFind) {
 /// );
 /// ```
 /// {@category bthprops}
-int BluetoothGetRadioInfo(int hRadio, Pointer<BLUETOOTH_RADIO_INFO> pRadioInfo) {
+int BluetoothGetRadioInfo(
+    int hRadio, Pointer<BLUETOOTH_RADIO_INFO> pRadioInfo) {
   final _BluetoothGetRadioInfo = _bthprops.lookupFunction<
-    Uint32 Function(IntPtr hRadio, Pointer<BLUETOOTH_RADIO_INFO> pRadioInfo), 
-    int Function(int hRadio, Pointer<BLUETOOTH_RADIO_INFO> pRadioInfo)
-  >('BluetoothGetRadioInfo');
+      Uint32 Function(IntPtr hRadio, Pointer<BLUETOOTH_RADIO_INFO> pRadioInfo),
+      int Function(int hRadio,
+          Pointer<BLUETOOTH_RADIO_INFO> pRadioInfo)>('BluetoothGetRadioInfo');
   return _BluetoothGetRadioInfo(hRadio, pRadioInfo);
 }
 
-/// The BluetoothIsConnectable function determines whether a Bluetooth 
+/// The BluetoothIsConnectable function determines whether a Bluetooth
 /// radio or radios is connectable.
 ///
 /// ```c
@@ -250,13 +279,12 @@ int BluetoothGetRadioInfo(int hRadio, Pointer<BLUETOOTH_RADIO_INFO> pRadioInfo) 
 /// {@category bthprops}
 int BluetoothIsConnectable(int hRadio) {
   final _BluetoothIsConnectable = _bthprops.lookupFunction<
-    Int32 Function(IntPtr hRadio), 
-    int Function(int hRadio)
-  >('BluetoothIsConnectable');
+      Int32 Function(IntPtr hRadio),
+      int Function(int hRadio)>('BluetoothIsConnectable');
   return _BluetoothIsConnectable(hRadio);
 }
 
-/// The BluetoothIsDiscoverable function determines whether a Bluetooth 
+/// The BluetoothIsDiscoverable function determines whether a Bluetooth
 /// radio or radios is discoverable.
 ///
 /// ```c
@@ -267,13 +295,12 @@ int BluetoothIsConnectable(int hRadio) {
 /// {@category bthprops}
 int BluetoothIsDiscoverable(int hRadio) {
   final _BluetoothIsDiscoverable = _bthprops.lookupFunction<
-    Int32 Function(IntPtr hRadio), 
-    int Function(int hRadio)
-  >('BluetoothIsDiscoverable');
+      Int32 Function(IntPtr hRadio),
+      int Function(int hRadio)>('BluetoothIsDiscoverable');
   return _BluetoothIsDiscoverable(hRadio);
 }
 
-/// The BluetoothIsVersionAvailable function indicates if the installed 
+/// The BluetoothIsVersionAvailable function indicates if the installed
 /// Bluetooth binary set supports the requested version.
 ///
 /// ```c
@@ -285,14 +312,14 @@ int BluetoothIsDiscoverable(int hRadio) {
 /// {@category bthprops}
 int BluetoothIsVersionAvailable(int MajorVersion, int MinorVersion) {
   final _BluetoothIsVersionAvailable = _bthprops.lookupFunction<
-    Int32 Function(Uint8 MajorVersion, Uint8 MinorVersion), 
-    int Function(int MajorVersion, int MinorVersion)
-  >('BluetoothIsVersionAvailable');
+      Int32 Function(Uint8 MajorVersion, Uint8 MinorVersion),
+      int Function(
+          int MajorVersion, int MinorVersion)>('BluetoothIsVersionAvailable');
   return _BluetoothIsVersionAvailable(MajorVersion, MinorVersion);
 }
 
-/// The BluetoothRegisterForAuthenticationEx function registers an 
-/// application for a pin request, numeric comparison and callback 
+/// The BluetoothRegisterForAuthenticationEx function registers an
+/// application for a pin request, numeric comparison and callback
 /// function.
 ///
 /// ```c
@@ -304,16 +331,28 @@ int BluetoothIsVersionAvailable(int MajorVersion, int MinorVersion) {
 /// );
 /// ```
 /// {@category bthprops}
-int BluetoothRegisterForAuthenticationEx(Pointer<BLUETOOTH_DEVICE_INFO> pbtdiIn, Pointer<IntPtr> phRegHandleOut, Pointer<NativeFunction<PfnAuthenticationCallbackEx>> pfnCallbackIn, Pointer pvParam) {
+int BluetoothRegisterForAuthenticationEx(
+    Pointer<BLUETOOTH_DEVICE_INFO> pbtdiIn,
+    Pointer<IntPtr> phRegHandleOut,
+    Pointer<NativeFunction<PfnAuthenticationCallbackEx>> pfnCallbackIn,
+    Pointer pvParam) {
   final _BluetoothRegisterForAuthenticationEx = _bthprops.lookupFunction<
-    Uint32 Function(Pointer<BLUETOOTH_DEVICE_INFO> pbtdiIn, Pointer<IntPtr> phRegHandleOut, Pointer<NativeFunction<PfnAuthenticationCallbackEx>> pfnCallbackIn, Pointer pvParam), 
-    int Function(Pointer<BLUETOOTH_DEVICE_INFO> pbtdiIn, Pointer<IntPtr> phRegHandleOut, Pointer<NativeFunction<PfnAuthenticationCallbackEx>> pfnCallbackIn, Pointer pvParam)
-  >('BluetoothRegisterForAuthenticationEx');
-  return _BluetoothRegisterForAuthenticationEx(pbtdiIn, phRegHandleOut, pfnCallbackIn, pvParam);
+      Uint32 Function(
+          Pointer<BLUETOOTH_DEVICE_INFO> pbtdiIn,
+          Pointer<IntPtr> phRegHandleOut,
+          Pointer<NativeFunction<PfnAuthenticationCallbackEx>> pfnCallbackIn,
+          Pointer pvParam),
+      int Function(
+          Pointer<BLUETOOTH_DEVICE_INFO> pbtdiIn,
+          Pointer<IntPtr> phRegHandleOut,
+          Pointer<NativeFunction<PfnAuthenticationCallbackEx>> pfnCallbackIn,
+          Pointer pvParam)>('BluetoothRegisterForAuthenticationEx');
+  return _BluetoothRegisterForAuthenticationEx(
+      pbtdiIn, phRegHandleOut, pfnCallbackIn, pvParam);
 }
 
-/// The BluetoothRemoveDevice function removes authentication between a 
-/// Bluetooth device and the computer and clears cached service information 
+/// The BluetoothRemoveDevice function removes authentication between a
+/// Bluetooth device and the computer and clears cached service information
 /// for the device.
 ///
 /// ```c
@@ -324,13 +363,13 @@ int BluetoothRegisterForAuthenticationEx(Pointer<BLUETOOTH_DEVICE_INFO> pbtdiIn,
 /// {@category bthprops}
 int BluetoothRemoveDevice(Pointer<BLUETOOTH_ADDRESS> pAddress) {
   final _BluetoothRemoveDevice = _bthprops.lookupFunction<
-    Uint32 Function(Pointer<BLUETOOTH_ADDRESS> pAddress), 
-    int Function(Pointer<BLUETOOTH_ADDRESS> pAddress)
-  >('BluetoothRemoveDevice');
+      Uint32 Function(Pointer<BLUETOOTH_ADDRESS> pAddress),
+      int Function(
+          Pointer<BLUETOOTH_ADDRESS> pAddress)>('BluetoothRemoveDevice');
   return _BluetoothRemoveDevice(pAddress);
 }
 
-/// The BluetoothSetServiceState function enables or disables services for 
+/// The BluetoothSetServiceState function enables or disables services for
 /// a Bluetooth device.
 ///
 /// ```c
@@ -342,16 +381,21 @@ int BluetoothRemoveDevice(Pointer<BLUETOOTH_ADDRESS> pAddress) {
 /// );
 /// ```
 /// {@category bthprops}
-int BluetoothSetServiceState(int hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi, Pointer<GUID> pGuidService, int dwServiceFlags) {
+int BluetoothSetServiceState(int hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
+    Pointer<GUID> pGuidService, int dwServiceFlags) {
   final _BluetoothSetServiceState = _bthprops.lookupFunction<
-    Uint32 Function(IntPtr hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi, Pointer<GUID> pGuidService, Uint32 dwServiceFlags), 
-    int Function(int hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi, Pointer<GUID> pGuidService, int dwServiceFlags)
-  >('BluetoothSetServiceState');
+      Uint32 Function(IntPtr hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
+          Pointer<GUID> pGuidService, Uint32 dwServiceFlags),
+      int Function(
+          int hRadio,
+          Pointer<BLUETOOTH_DEVICE_INFO> pbtdi,
+          Pointer<GUID> pGuidService,
+          int dwServiceFlags)>('BluetoothSetServiceState');
   return _BluetoothSetServiceState(hRadio, pbtdi, pGuidService, dwServiceFlags);
 }
 
-/// The BluetoothUnregisterAuthentication function removes registration for 
-/// a callback routine that was previously registered with a call to the 
+/// The BluetoothUnregisterAuthentication function removes registration for
+/// a callback routine that was previously registered with a call to the
 /// BluetoothRegisterForAuthentication function.
 ///
 /// ```c
@@ -362,13 +406,12 @@ int BluetoothSetServiceState(int hRadio, Pointer<BLUETOOTH_DEVICE_INFO> pbtdi, P
 /// {@category bthprops}
 int BluetoothUnregisterAuthentication(int hRegHandle) {
   final _BluetoothUnregisterAuthentication = _bthprops.lookupFunction<
-    Int32 Function(IntPtr hRegHandle), 
-    int Function(int hRegHandle)
-  >('BluetoothUnregisterAuthentication');
+      Int32 Function(IntPtr hRegHandle),
+      int Function(int hRegHandle)>('BluetoothUnregisterAuthentication');
   return _BluetoothUnregisterAuthentication(hRegHandle);
 }
 
-/// The BluetoothUpdateDeviceRecord function updates the local computer 
+/// The BluetoothUpdateDeviceRecord function updates the local computer
 /// cache about a Bluetooth device.
 ///
 /// ```c
@@ -379,9 +422,8 @@ int BluetoothUnregisterAuthentication(int hRegHandle) {
 /// {@category bthprops}
 int BluetoothUpdateDeviceRecord(Pointer<BLUETOOTH_DEVICE_INFO> pbtdi) {
   final _BluetoothUpdateDeviceRecord = _bthprops.lookupFunction<
-    Uint32 Function(Pointer<BLUETOOTH_DEVICE_INFO> pbtdi), 
-    int Function(Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)
-  >('BluetoothUpdateDeviceRecord');
+      Uint32 Function(Pointer<BLUETOOTH_DEVICE_INFO> pbtdi),
+      int Function(
+          Pointer<BLUETOOTH_DEVICE_INFO> pbtdi)>('BluetoothUpdateDeviceRecord');
   return _BluetoothUpdateDeviceRecord(pbtdi);
 }
-
