@@ -392,6 +392,11 @@
         "comment": "Closes a pseudoconsole from the given handle.",
         "minimumWindowsVersion": "WIN10_RS5"
     },
+    "CloseWindow": {
+        "prototype": "BOOL CloseWindow(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Minimizes (but does not destroy) the specified window."
+    },
     "CLSIDFromProgID": {
         "prototype": "HRESULT CLSIDFromProgID(\n  LPCOLESTR lpszProgID,\n  LPCLSID   lpclsid\n);",
         "dllLibrary": "ole32",
