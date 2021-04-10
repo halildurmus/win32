@@ -586,6 +586,46 @@ int ChangeWindowMessageFilterEx(int hwnd, int message, int action,
       hwnd, message, action, pChangeFilterStruct);
 }
 
+/// Changes the check state of a button control.
+///
+/// ```c
+/// BOOL CheckDlgButton(
+///   HWND hDlg,
+///   int  nIDButton,
+///   UINT uCheck
+/// );
+/// ```
+/// {@category user32}
+int CheckDlgButton(int hDlg, int nIDButton, int uCheck) {
+  final _CheckDlgButton = _user32.lookupFunction<
+      Int32 Function(IntPtr hDlg, Int32 nIDButton, Uint32 uCheck),
+      int Function(int hDlg, int nIDButton, int uCheck)>('CheckDlgButton');
+  return _CheckDlgButton(hDlg, nIDButton, uCheck);
+}
+
+/// Adds a check mark to (checks) a specified radio button in a group and
+/// removes a check mark from (clears) all other radio buttons in the
+/// group.
+///
+/// ```c
+/// BOOL CheckRadioButton(
+///   HWND hDlg,
+///   int  nIDFirstButton,
+///   int  nIDLastButton,
+///   int  nIDCheckButton
+/// );
+/// ```
+/// {@category user32}
+int CheckRadioButton(
+    int hDlg, int nIDFirstButton, int nIDLastButton, int nIDCheckButton) {
+  final _CheckRadioButton = _user32.lookupFunction<
+      Int32 Function(IntPtr hDlg, Int32 nIDFirstButton, Int32 nIDLastButton,
+          Int32 nIDCheckButton),
+      int Function(int hDlg, int nIDFirstButton, int nIDLastButton,
+          int nIDCheckButton)>('CheckRadioButton');
+  return _CheckRadioButton(hDlg, nIDFirstButton, nIDLastButton, nIDCheckButton);
+}
+
 /// Determines which, if any, of the child windows belonging to a parent
 /// window contains the specified point. The search is restricted to
 /// immediate child windows. Grandchildren, and deeper descendant windows
@@ -1435,6 +1475,24 @@ int EnableNonClientDpiScaling(int hwnd) {
       Int32 Function(IntPtr hwnd),
       int Function(int hwnd)>('EnableNonClientDpiScaling');
   return _EnableNonClientDpiScaling(hwnd);
+}
+
+/// The EnableScrollBar function enables or disables one or both scroll bar
+/// arrows.
+///
+/// ```c
+/// BOOL EnableScrollBar(
+///   HWND hWnd,
+///   UINT wSBflags,
+///   UINT wArrows
+/// );
+/// ```
+/// {@category user32}
+int EnableScrollBar(int hWnd, int wSBflags, int wArrows) {
+  final _EnableScrollBar = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Uint32 wSBflags, Uint32 wArrows),
+      int Function(int hWnd, int wSBflags, int wArrows)>('EnableScrollBar');
+  return _EnableScrollBar(hWnd, wSBflags, wArrows);
 }
 
 /// Enables or disables mouse and keyboard input to the specified window or
@@ -2481,6 +2539,133 @@ int GetLastInputInfo(Pointer<LASTINPUTINFO> plii) {
   return _GetLastInputInfo(plii);
 }
 
+/// Retrieves a handle to the menu assigned to the specified window.
+///
+/// ```c
+/// HMENU GetMenu(
+///   HWND hWnd
+/// );
+/// ```
+/// {@category user32}
+int GetMenu(int hWnd) {
+  final _GetMenu = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
+      int Function(int hWnd)>('GetMenu');
+  return _GetMenu(hWnd);
+}
+
+/// Retrieves information about a specified menu.
+///
+/// ```c
+/// HMENU GetMenuInfo(
+///   HMENU hMenu,
+///   LPMENUINFO lpMenuInfo
+/// );
+/// ```
+/// {@category user32}
+int GetMenuInfo(int param0, Pointer<MENUINFO> param1) {
+  final _GetMenuInfo = _user32.lookupFunction<
+      Int32 Function(IntPtr param0, Pointer<MENUINFO> param1),
+      int Function(int param0, Pointer<MENUINFO> param1)>('GetMenuInfo');
+  return _GetMenuInfo(param0, param1);
+}
+
+/// Determines the number of items in the specified menu.
+///
+/// ```c
+/// int GetMenuItemCount(
+///   HMENU hMenu
+/// );
+/// ```
+/// {@category user32}
+int GetMenuItemCount(int hMenu) {
+  final _GetMenuItemCount = _user32.lookupFunction<Int32 Function(IntPtr hMenu),
+      int Function(int hMenu)>('GetMenuItemCount');
+  return _GetMenuItemCount(hMenu);
+}
+
+/// Retrieves information about a menu item.
+///
+/// ```c
+/// BOOL GetMenuItemInfoW(
+///   HMENU           hmenu,
+///   UINT            item,
+///   BOOL            fByPosition,
+///   LPMENUITEMINFOW lpmii
+/// );
+/// ```
+/// {@category user32}
+int GetMenuItemInfo(
+    int hmenu, int item, int fByPosition, Pointer<MENUITEMINFO> lpmii) {
+  final _GetMenuItemInfo = _user32.lookupFunction<
+      Int32 Function(IntPtr hmenu, Uint32 item, Int32 fByPosition,
+          Pointer<MENUITEMINFO> lpmii),
+      int Function(int hmenu, int item, int fByPosition,
+          Pointer<MENUITEMINFO> lpmii)>('GetMenuItemInfoW');
+  return _GetMenuItemInfo(hmenu, item, fByPosition, lpmii);
+}
+
+/// Retrieves the bounding rectangle for the specified menu item.
+///
+/// ```c
+/// BOOL GetMenuItemRect(
+///   HWND   hWnd,
+///   HMENU  hMenu,
+///   UINT   uItem,
+///   LPRECT lprcItem
+/// );
+/// ```
+/// {@category user32}
+int GetMenuItemRect(int hWnd, int hMenu, int uItem, Pointer<RECT> lprcItem) {
+  final _GetMenuItemRect = _user32.lookupFunction<
+      Int32 Function(
+          IntPtr hWnd, IntPtr hMenu, Uint32 uItem, Pointer<RECT> lprcItem),
+      int Function(int hWnd, int hMenu, int uItem,
+          Pointer<RECT> lprcItem)>('GetMenuItemRect');
+  return _GetMenuItemRect(hWnd, hMenu, uItem, lprcItem);
+}
+
+/// Retrieves the menu flags associated with the specified menu item. If
+/// the menu item opens a submenu, this function also returns the number of
+/// items in the submenu.
+///
+/// ```c
+/// UINT GetMenuState(
+///   HMENU hMenu,
+///   UINT  uId,
+///   UINT  uFlags
+/// );
+/// ```
+/// {@category user32}
+int GetMenuState(int hMenu, int uId, int uFlags) {
+  final _GetMenuState = _user32.lookupFunction<
+      Uint32 Function(IntPtr hMenu, Uint32 uId, Uint32 uFlags),
+      int Function(int hMenu, int uId, int uFlags)>('GetMenuState');
+  return _GetMenuState(hMenu, uId, uFlags);
+}
+
+/// Copies the text string of the specified menu item into the specified
+/// buffer.
+///
+/// ```c
+/// int GetMenuStringW(
+///   HMENU  hMenu,
+///   UINT   uIDItem,
+///   LPWSTR lpString,
+///   int    cchMax,
+///   UINT   flags
+/// );
+/// ```
+/// {@category user32}
+int GetMenuString(
+    int hMenu, int uIDItem, Pointer<Utf16> lpString, int cchMax, int flags) {
+  final _GetMenuString = _user32.lookupFunction<
+      Int32 Function(IntPtr hMenu, Uint32 uIDItem, Pointer<Utf16> lpString,
+          Int32 cchMax, Uint32 flags),
+      int Function(int hMenu, int uIDItem, Pointer<Utf16> lpString, int cchMax,
+          int flags)>('GetMenuStringW');
+  return _GetMenuString(hMenu, uIDItem, lpString, cchMax, flags);
+}
+
 /// Retrieves a message from the calling thread's message queue. The
 /// function dispatches incoming sent messages until a posted message is
 /// available for retrieval.
@@ -2655,6 +2840,21 @@ int GetParent(int hWnd) {
   return _GetParent(hWnd);
 }
 
+/// Retrieves the position of the cursor in physical coordinates.
+///
+/// ```c
+/// BOOL GetPhysicalCursorPos(
+///   LPPOINT lpPoint
+/// );
+/// ```
+/// {@category user32}
+int GetPhysicalCursorPos(Pointer<POINT> lpPoint) {
+  final _GetPhysicalCursorPos = _user32.lookupFunction<
+      Int32 Function(Pointer<POINT> lpPoint),
+      int Function(Pointer<POINT> lpPoint)>('GetPhysicalCursorPos');
+  return _GetPhysicalCursorPos(lpPoint);
+}
+
 /// Retrieves the first available clipboard format in the specified list.
 ///
 /// ```c
@@ -2671,6 +2871,44 @@ int GetPriorityClipboardFormat(
       int Function(Pointer<Uint32> paFormatPriorityList,
           int cFormats)>('GetPriorityClipboardFormat');
   return _GetPriorityClipboardFormat(paFormatPriorityList, cFormats);
+}
+
+/// Retrieves a data handle from the property list of the specified window.
+/// The character string identifies the handle to be retrieved. The string
+/// and handle must have been added to the property list by a previous call
+/// to the SetProp function.
+///
+/// ```c
+/// HANDLE GetPropW(
+///   HWND    hWnd,
+///   LPCWSTR lpString
+/// );
+/// ```
+/// {@category user32}
+int GetProp(int hWnd, Pointer<Utf16> lpString) {
+  final _GetProp = _user32.lookupFunction<
+      IntPtr Function(IntPtr hWnd, Pointer<Utf16> lpString),
+      int Function(int hWnd, Pointer<Utf16> lpString)>('GetPropW');
+  return _GetProp(hWnd, lpString);
+}
+
+/// The GetScrollBarInfo function retrieves information about the specified
+/// scroll bar.
+///
+/// ```c
+/// BOOL GetScrollBarInfo(
+///   HWND           hwnd,
+///   LONG           idObject,
+///   PSCROLLBARINFO psbi
+/// );
+/// ```
+/// {@category user32}
+int GetScrollBarInfo(int hwnd, int idObject, Pointer<SCROLLBARINFO> psbi) {
+  final _GetScrollBarInfo = _user32.lookupFunction<
+      Int32 Function(IntPtr hwnd, Uint32 idObject, Pointer<SCROLLBARINFO> psbi),
+      int Function(int hwnd, int idObject,
+          Pointer<SCROLLBARINFO> psbi)>('GetScrollBarInfo');
+  return _GetScrollBarInfo(hwnd, idObject, psbi);
 }
 
 /// The GetScrollInfo function retrieves the parameters of a scroll bar,
@@ -3781,6 +4019,21 @@ int LoadCursor(int hInstance, Pointer<Utf16> lpCursorName) {
   return _LoadCursor(hInstance, lpCursorName);
 }
 
+/// Creates a cursor based on data contained in a file.
+///
+/// ```c
+/// HCURSOR LoadCursorFromFileW(
+///   LPCWSTR lpFileName
+/// );
+/// ```
+/// {@category user32}
+int LoadCursorFromFile(Pointer<Utf16> lpFileName) {
+  final _LoadCursorFromFile = _user32.lookupFunction<
+      IntPtr Function(Pointer<Utf16> lpFileName),
+      int Function(Pointer<Utf16> lpFileName)>('LoadCursorFromFileW');
+  return _LoadCursorFromFile(lpFileName);
+}
+
 /// Loads the specified icon resource from the executable (.exe) file
 /// associated with an application instance.
 ///
@@ -3836,6 +4089,21 @@ int LoadKeyboardLayout(Pointer<Utf16> pwszKLID, int Flags) {
       IntPtr Function(Pointer<Utf16> pwszKLID, Uint32 Flags),
       int Function(Pointer<Utf16> pwszKLID, int Flags)>('LoadKeyboardLayoutW');
   return _LoadKeyboardLayout(pwszKLID, Flags);
+}
+
+/// Creates a cursor based on data contained in a file.
+///
+/// ```c
+/// HMENU LoadMenuIndirectW(
+///   const MENUTEMPLATEW *lpMenuTemplate
+/// );
+/// ```
+/// {@category user32}
+int LoadMenuIndirect(Pointer lpMenuTemplate) {
+  final _LoadMenuIndirect = _user32.lookupFunction<
+      IntPtr Function(Pointer lpMenuTemplate),
+      int Function(Pointer lpMenuTemplate)>('LoadMenuIndirectW');
+  return _LoadMenuIndirect(lpMenuTemplate);
 }
 
 /// The foreground process can call the LockSetForegroundWindow function to
@@ -4573,6 +4841,22 @@ int RegisterPowerSettingNotification(
       int Function(int hRecipient, Pointer<GUID> PowerSettingGuid,
           int Flags)>('RegisterPowerSettingNotification');
   return _RegisterPowerSettingNotification(hRecipient, PowerSettingGuid, Flags);
+}
+
+/// Registers a window to process the WM_TOUCHHITTESTING notification.
+///
+/// ```c
+/// BOOL RegisterTouchHitTestingWindow(
+///   HWND  hwnd,
+///   ULONG value
+/// );
+/// ```
+/// {@category user32}
+int RegisterTouchHitTestingWindow(int hwnd, int value) {
+  final _RegisterTouchHitTestingWindow = _user32.lookupFunction<
+      Int32 Function(IntPtr hwnd, Uint32 value),
+      int Function(int hwnd, int value)>('RegisterTouchHitTestingWindow');
+  return _RegisterTouchHitTestingWindow(hwnd, value);
 }
 
 /// Defines a new window message that is guaranteed to be unique throughout

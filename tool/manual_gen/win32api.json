@@ -321,6 +321,16 @@
         "dllLibrary": "user32",
         "comment": "Modifies the User Interface Privilege Isolation (UIPI) message filter for a specified window."
     },
+    "CheckDlgButton": {
+        "prototype": "BOOL CheckDlgButton(\n  HWND hDlg,\n  int  nIDButton,\n  UINT uCheck\n);",
+        "dllLibrary": "user32",
+        "comment": "Changes the check state of a button control."
+    },
+    "CheckRadioButton": {
+        "prototype": "BOOL CheckRadioButton(\n  HWND hDlg,\n  int  nIDFirstButton,\n  int  nIDLastButton,\n  int  nIDCheckButton\n);",
+        "dllLibrary": "user32",
+        "comment": "Adds a check mark to (checks) a specified radio button in a group and removes a check mark from (clears) all other radio buttons in the group."
+    },
     "CheckRemoteDebuggerPresent": {
         "prototype": "BOOL CheckRemoteDebuggerPresent(\n  HANDLE hProcess,\n  PBOOL  pbDebuggerPresent\n      );",
         "dllLibrary": "kernel32",
@@ -825,6 +835,11 @@
         "dllLibrary": "user32",
         "comment": "In high-DPI displays, enables automatic display scaling of the non-client area portions of the specified top-level window. Must be called during the initialization of that window.",
         "minimumWindowsVersion": "WIN10_RS1"
+    },
+    "EnableScrollBar": {
+        "prototype": "BOOL EnableScrollBar(\n  HWND hWnd,\n  UINT wSBflags,\n  UINT wArrows\n);",
+        "dllLibrary": "user32",
+        "comment": "The EnableScrollBar function enables or disables one or both scroll bar arrows."
     },
     "EnableWindow": {
         "prototype": "BOOL EnableWindow(\n  HWND hWnd,\n  BOOL bEnable\n);",
@@ -1456,6 +1471,41 @@
         "dllLibrary": "kernel32",
         "comment": "Fills a buffer with strings that specify valid drives in the system."
     },
+    "GetMenu": {
+        "prototype": "HMENU GetMenu(\n  HWND hWnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a handle to the menu assigned to the specified window."
+    },
+    "GetMenuInfo": {
+        "prototype": "HMENU GetMenuInfo(\n  HMENU hMenu,\n  LPMENUINFO lpMenuInfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves information about a specified menu."
+    },
+    "GetMenuItemCount": {
+        "prototype": "int GetMenuItemCount(\n  HMENU hMenu\n);",
+        "dllLibrary": "user32",
+        "comment": "Determines the number of items in the specified menu."
+    },
+    "GetMenuItemInfo": {
+        "prototype": "BOOL GetMenuItemInfoW(\n  HMENU           hmenu,\n  UINT            item,\n  BOOL            fByPosition,\n  LPMENUITEMINFOW lpmii\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves information about a menu item."
+    },
+    "GetMenuItemRect": {
+        "prototype": "BOOL GetMenuItemRect(\n  HWND   hWnd,\n  HMENU  hMenu,\n  UINT   uItem,\n  LPRECT lprcItem\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the bounding rectangle for the specified menu item."
+    },
+    "GetMenuState": {
+        "prototype": "UINT GetMenuState(\n  HMENU hMenu,\n  UINT  uId,\n  UINT  uFlags\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the menu flags associated with the specified menu item. If the menu item opens a submenu, this function also returns the number of items in the submenu."
+    },
+    "GetMenuString": {
+        "prototype": "int GetMenuStringW(\n  HMENU  hMenu,\n  UINT   uIDItem,\n  LPWSTR lpString,\n  int    cchMax,\n  UINT   flags\n);",
+        "dllLibrary": "user32",
+        "comment": "Copies the text string of the specified menu item into the specified buffer."
+    },
     "GetMessage": {
         "prototype": "BOOL GetMessageW(\n  LPMSG lpMsg,\n  HWND  hWnd,\n  UINT  wMsgFilterMin,\n  UINT  wMsgFilterMax\n);",
         "dllLibrary": "user32",
@@ -1611,6 +1661,11 @@
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the specified window's parent or owner."
     },
+    "GetPhysicalCursorPos": {
+        "prototype": "BOOL GetPhysicalCursorPos(\n  LPPOINT lpPoint\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the position of the cursor in physical coordinates."
+    },
     "GetPhysicallyInstalledSystemMemory": {
         "prototype": "BOOL GetPhysicallyInstalledSystemMemory(\n  PULONGLONG TotalMemoryInKilobytes\n);",
         "dllLibrary": "kernel32",
@@ -1647,10 +1702,20 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves the product type for the operating system on the local computer, and maps the type to the product types supported by the specified operating system."
     },
+    "GetProp": {
+        "prototype": "HANDLE GetPropW(\n  HWND    hWnd,\n  LPCWSTR lpString\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a data handle from the property list of the specified window. The character string identifies the handle to be retrieved. The string and handle must have been added to the property list by a previous call to the SetProp function."
+    },
     "GetSaveFileName": {
         "prototype": "BOOL GetSaveFileNameW(\n  LPOPENFILENAMEW Arg1\n);",
         "dllLibrary": "comdlg32",
         "comment": "Creates a Save dialog box that lets the user specify the drive, directory, and name of a file to save."
+    },
+    "GetScrollBarInfo": {
+        "prototype": "BOOL GetScrollBarInfo(\n  HWND           hwnd,\n  LONG           idObject,\n  PSCROLLBARINFO psbi\n);",
+        "dllLibrary": "user32",
+        "comment": "The GetScrollBarInfo function retrieves information about the specified scroll bar."
     },
     "GetScrollInfo": {
         "prototype": "BOOL GetScrollInfo(\n  HWND         hwnd,\n  int          nBar,\n  LPSCROLLINFO lpsi\n);",
@@ -2140,6 +2205,11 @@
         "dllLibrary": "user32",
         "comment": "Loads the specified cursor resource from the executable (.EXE) file associated with an application instance. Note: this function has been superseded by the LoadImage function."
     },
+    "LoadCursorFromFile": {
+        "prototype": "HCURSOR LoadCursorFromFileW(\n  LPCWSTR lpFileName\n);",
+        "dllLibrary": "user32",
+        "comment": "Creates a cursor based on data contained in a file."
+    },
     "LoadIcon": {
         "prototype": "HICON LoadIconW(\n  HINSTANCE hInstance,\n  LPCWSTR   lpIconName\n);",
         "dllLibrary": "user32",
@@ -2159,6 +2229,11 @@
         "prototype": "HMODULE LoadLibraryW(\n  LPCWSTR lpLibFileName\n);",
         "dllLibrary": "kernel32",
         "comment": "Loads the specified module into the address space of the calling process. The specified module may cause other modules to be loaded."
+    },
+    "LoadMenuIndirect": {
+        "prototype": "HMENU LoadMenuIndirectW(\n  const MENUTEMPLATEW *lpMenuTemplate\n);",
+        "dllLibrary": "user32",
+        "comment": "Creates a cursor based on data contained in a file."
     },
     "LoadResource": {
         "prototype": "HGLOBAL LoadResource(\n  HMODULE hModule,\n  HRSRC   hResInfo\n);",
@@ -2805,6 +2880,11 @@
         "prototype": "HPOWERNOTIFY RegisterPowerSettingNotification(\n  HANDLE  hRecipient,\n  LPCGUID PowerSettingGuid,\n  DWORD   Flags\n);",
         "dllLibrary": "user32",
         "comment": "Registers the application to receive power setting notifications for the specific power setting event."
+    },
+    "RegisterTouchHitTestingWindow": {
+        "prototype": "BOOL RegisterTouchHitTestingWindow(\n  HWND  hwnd,\n  ULONG value\n);",
+        "dllLibrary": "user32",
+        "comment": "Registers a window to process the WM_TOUCHHITTESTING notification."
     },
     "RegisterWindowMessage": {
         "prototype": "UINT RegisterWindowMessageW(\n  LPCWSTR lpString\n);",

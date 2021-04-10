@@ -947,6 +947,29 @@ class MENUITEMINFO extends Struct {
   external int hbmpItem;
 }
 
+/// Defines a menu item in a menu template.
+///
+/// {@category Struct}
+class MENUITEMTEMPLATE extends Struct {
+  @Uint16()
+  external int mtOption;
+  @Uint16()
+  external int mtID;
+  @Array(1)
+  external Array<Uint16> mtString;
+}
+
+/// Defines the header for a menu template. A complete menu template
+/// consists of a header and one or more menu item lists.
+///
+/// {@category Struct}
+class MENUITEMTEMPLATEHEADER extends Struct {
+  @Uint16()
+  external int versionNumber;
+  @Uint16()
+  external int offset;
+}
+
 /// Defines the metafile picture format used for exchanging metafile data
 /// through the clipboard.
 ///
@@ -1444,6 +1467,25 @@ class SAFEARRAYBOUND extends Struct {
   external int cElements;
   @Int32()
   external int lLbound;
+}
+
+/// The SCROLLBARINFO structure contains scroll bar information.
+///
+/// {@category Struct}
+class SCROLLBARINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  external RECT rcScrollBar;
+  @Int32()
+  external int dxyLineButton;
+  @Int32()
+  external int xyThumbTop;
+  @Int32()
+  external int xyThumbBottom;
+  @Int32()
+  external int reserved;
+  @Array(6)
+  external Array<Uint32> rgstate;
 }
 
 /// The SCROLLINFO structure contains scroll bar parameters to be set by

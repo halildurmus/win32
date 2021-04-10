@@ -28,8 +28,6 @@ types and generate the classes from them.
 This folder also includes a few other small utilities of limited usefulness.
 
 - `build.cmd`. Generates EXE files for some of the Dart samples.
-- `constants.cpp`. Small helper app for confirm widths of various types across
-  32-bit and 64-bit architectures.
 - `struct_sizes.cpp`. Measures the size of structs in structs.dart on both
   32-bit and 64-bit architectures so the appropriate unit tests can be
   generated.

@@ -211,6 +211,14 @@
         "namespace": "Windows.Win32.WindowsAndMessaging.MENUITEMINFOW",
         "comment": "Contains information about a menu item."
     },
+    "MENUITEMTEMPLATE": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.MENUITEMTEMPLATE",
+        "comment": "Defines a menu item in a menu template."
+    },
+    "MENUITEMTEMPLATEHEADER": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.MENUITEMTEMPLATEHEADER",
+        "comment": "Defines the header for a menu template. A complete menu template consists of a header and one or more menu item lists."
+    },
     "METAFILEPICT": {
         "namespace": "Windows.Win32.DataExchange.METAFILEPICT",
         "comment": "Defines the metafile picture format used for exchanging metafile data through the clipboard."
@@ -322,6 +330,10 @@
     "SAFEARRAYBOUND": {
         "namespace": "Windows.Win32.Automation.SAFEARRAYBOUND",
         "comment": "Represents the bounds of one dimension of the array."
+    },
+    "SCROLLBARINFO": {
+        "namespace": "Windows.Win32.Controls.SCROLLBARINFO",
+        "comment": "The SCROLLBARINFO structure contains scroll bar information."
     },
     "SCROLLINFO": {
         "namespace": "Windows.Win32.Controls.SCROLLINFO",
