@@ -1315,6 +1315,11 @@
         "dllLibrary": "gdi32",
         "comment": "The GetDIBits function retrieves the bits of the specified compatible bitmap and copies them into a buffer as a DIB using the specified format."
     },
+    "GetDisplayAutoRotationPreferences": {
+        "prototype": "BOOL GetDisplayAutoRotationPreferences(\n  ORIENTATION_PREFERENCE *pOrientation\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the screen auto-rotation preferences for the current process."
+    },
     "GetDlgItem": {
         "prototype": "HWND GetDlgItem(\n  HWND hDlg,\n  int  nIDDlgItem\n);",
         "dllLibrary": "user32",
@@ -1712,6 +1717,11 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves a handle to the default heap of the calling process. This handle can then be used in subsequent calls to the heap functions."
     },
+    "GetProcessWindowStation": {
+        "prototype": "HWINSTA GetProcessWindowStation();",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a handle to the current window station for the calling process."
+    },
     "GetProductInfo": {
         "prototype": "BOOL GetProductInfo(\n  DWORD  dwOSMajorVersion,\n  DWORD  dwOSMinorVersion,\n  DWORD  dwSpMajorVersion,\n  DWORD  dwSpMinorVersion,\n  PDWORD pdwReturnedProductType\n);",
         "dllLibrary": "kernel32",
@@ -1905,6 +1915,11 @@
         "prototype": "int GetUserDefaultLocaleName(\n  LPWSTR lpLocaleName,\n  int    cchLocaleName\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves the user default locale name."
+    },
+    "GetUserObjectInformation": {
+        "prototype": "BOOL GetUserObjectInformationW(\n  HANDLE  hObj,\n  int     nIndex,\n  PVOID   pvInfo,\n  DWORD   nLength,\n  LPDWORD lpnLengthNeeded\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves information about the specified window station or desktop object."
     },
     "GetVersionEx": {
         "prototype": "BOOL GetVersionExW(\n  LPOSVERSIONINFOW lpVersionInformation\n);",
@@ -2118,6 +2133,11 @@
         "dllLibrary": "user32",
         "comment": "Determines whether a message is intended for the specified dialog box and, if it is, processes the message."
     },
+    "IsDlgButtonChecked": {
+        "prototype": "UINT IsDlgButtonChecked(\n  HWND hDlg,\n  int  nIDButton\n);",
+        "dllLibrary": "user32",
+        "comment": "The IsDlgButtonChecked function determines whether a button control is checked or whether a three-state button control is checked, unchecked, or indeterminate."
+    },
     "IsGUIThread": {
         "prototype": "BOOL IsGUIThread(\n  BOOL bConvert\n);",
         "dllLibrary": "user32",
@@ -2158,6 +2178,11 @@
         "dllLibrary": "user32",
         "comment": "The IsRectEmpty function determines whether the specified rectangle is empty. An empty rectangle is one that has no area; that is, the coordinate of the right side is less than or equal to the coordinate of the left side, or the coordinate of the bottom side is less than or equal to the coordinate of the top side."
     },
+    "IsTouchWindow": {
+        "prototype": "BOOL IsTouchWindow(\n  HWND   hwnd,\n  PULONG pulFlags\n);",
+        "dllLibrary": "user32",
+        "comment": "Checks whether a specified window is touch-capable and, optionally, retrieves the modifier flags set for the window's touch capability."
+    },
     "IsValidDpiAwarenessContext": {
         "prototype": "BOOL IsValidDpiAwarenessContext(\n  DPI_AWARENESS_CONTEXT value);",
         "dllLibrary": "user32",
@@ -2188,6 +2213,11 @@
         "prototype": "BOOL IsWindowVisible(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
         "comment": "Determines the visibility state of the specified window."
+    },
+    "IsWow64Message": {
+        "prototype": "BOOL IsWow64Message();",
+        "dllLibrary": "user32",
+        "comment": "Determines whether the last message read from the current thread's queue originated from a WOW64 process."
     },
     "IsWow64Process2": {
         "prototype": "BOOL IsWow64Process2(\n  HANDLE hProcess,\n  USHORT *pProcessMachine,\n  USHORT *pNativeMachine\n);",
@@ -2255,6 +2285,11 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves a handle that can be used to obtain a pointer to the first byte of the specified resource in memory."
     },
+    "LoadString": {
+        "prototype": "int LoadStringW(\n  HINSTANCE hInstance,\n  UINT      uID,\n  LPWSTR    lpBuffer,\n  int       cchBufferMax\n);",
+        "dllLibrary": "user32",
+        "comment": "Loads a string resource from the executable file associated with a specified module and either copies the string into a buffer with a terminating null character or returns a read-only pointer to the string resource itself."
+    },
     "LockResource": {
         "prototype": "LPVOID LockResource(\n  HGLOBAL hResData\n);",
         "dllLibrary": "kernel32",
@@ -2285,6 +2320,16 @@
         "dllLibrary": "user32",
         "comment": "Converts a point in a window from logical coordinates into physical coordinates, regardless of the dots per inch (dpi) awareness of the caller.",
         "minimumWindowsVersion": "WIN81"
+    },
+    "LookupIconIdFromDirectory": {
+        "prototype": "int LookupIconIdFromDirectory(\n  PBYTE presbits,\n  BOOL  fIcon\n);",
+        "dllLibrary": "user32",
+        "comment": "Searches through icon or cursor data for the icon or cursor that best fits the current display device."
+    },
+    "LookupIconIdFromDirectoryEx": {
+        "prototype": "int LookupIconIdFromDirectoryEx(\n  PBYTE presbits,\n  BOOL  fIcon,\n  int   cxDesired,\n  int   cyDesired,\n  UINT  Flags\n);",
+        "dllLibrary": "user32",
+        "comment": "Searches through icon or cursor data for the icon or cursor that best fits the current display device."
     },
     "MapDialogRect": {
         "prototype": "BOOL MapDialogRect(\n  HWND   hDlg,\n  LPRECT lpRect\n);",
@@ -2542,6 +2587,16 @@
         "prototype": "DWORD MsgWaitForMultipleObjects(\n  DWORD        nCount,\n  const HANDLE *pHandles,\n  BOOL         fWaitAll,\n  DWORD        dwMilliseconds,\n  DWORD        dwWakeMask\n);",
         "dllLibrary": "user32",
         "comment": "Waits until one or all of the specified objects are in the signaled state or the time-out interval elapses. The objects can include input event objects, which you specify using the dwWakeMask parameter."
+    },
+    "MsgWaitForMultipleObjectsEx": {
+        "prototype": "DWORD MsgWaitForMultipleObjectsEx(\n  DWORD        nCount,\n  const HANDLE *pHandles,\n  DWORD        dwMilliseconds,\n  DWORD        dwWakeMask,\n  DWORD        dwFlags\n);",
+        "dllLibrary": "user32",
+        "comment": "Waits until one or all of the specified objects are in the signaled state, an I/O completion routine or asynchronous procedure call (APC) is queued to the thread, or the time-out interval elapses. The array of objects can include input event objects, which you specify using the dwWakeMask parameter."
+    },
+    "NotifyWinEvent": {
+        "prototype": "void NotifyWinEvent(\n  DWORD event,\n  HWND  hwnd,\n  LONG  idObject,\n  LONG  idChild\n);",
+        "dllLibrary": "user32",
+        "comment": "Signals the system that a predefined event occurred. If any client applications have registered a hook function for the event, the system calls the client's hook function."
     },
     "OffsetRect": {
         "prototype": "BOOL OffsetRect(\n  LPRECT lprc,\n  int    dx,\n  int    dy\n);",
@@ -3154,6 +3209,11 @@
         "dllLibrary": "user32",
         "comment": "The ScrollWindow function scrolls the contents of the specified window's client area."
     },
+    "ScrollWindowEx": {
+        "prototype": "int ScrollWindowEx(\n  HWND       hWnd,\n  int        dx,\n  int        dy,\n  const RECT *prcScroll,\n  const RECT *prcClip,\n  HRGN       hrgnUpdate,\n  LPRECT     prcUpdate,\n  UINT       flags\n);",
+        "dllLibrary": "user32",
+        "comment": "The ScrollWindowEx function scrolls the contents of the specified window's client area."
+    },
     "SelectObject": {
         "prototype": "HGDIOBJ SelectObject(\n  HDC     hdc,\n  HGDIOBJ h\n);",
         "dllLibrary": "gdi32",
@@ -3173,6 +3233,21 @@
         "prototype": "LRESULT SendMessageW(\n  HWND   hWnd,\n  UINT   Msg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
         "dllLibrary": "user32",
         "comment": "Sends the specified message to a window or windows. The SendMessage function calls the window procedure for the specified window and does not return until the window procedure has processed the message."
+    },
+    "SendMessageCallback": {
+        "prototype": "BOOL SendMessageCallbackW(\n  HWND          hWnd,\n  UINT          Msg,\n  WPARAM        wParam,\n  LPARAM        lParam,\n  SENDASYNCPROC lpResultCallBack,\n  ULONG_PTR     dwData\n);",
+        "dllLibrary": "user32",
+        "comment": "Sends the specified message to a window or windows. It calls the window procedure for the specified window and returns immediately if the window belongs to another thread. After the window procedure processes the message, the system calls the specified callback function, passing the result of the message processing and an application-defined value to the callback function."
+    },
+    "SendMessageTimeout": {
+        "prototype": "LRESULT SendMessageTimeoutW(\n  HWND       hWnd,\n  UINT       Msg,\n  WPARAM     wParam,\n  LPARAM     lParam,\n  UINT       fuFlags,\n  UINT       uTimeout,\n  PDWORD_PTR lpdwResult\n);",
+        "dllLibrary": "user32",
+        "comment": "Sends the specified message to one or more windows."
+    },
+    "SendNotifyMessage": {
+        "prototype": "BOOL SendNotifyMessageW(\n  HWND   hWnd,\n  UINT   Msg,\n  WPARAM wParam,\n  LPARAM lParam\n);",
+        "dllLibrary": "user32",
+        "comment": "Sends the specified message to a window or windows. If the window was created by the calling thread, SendNotifyMessage calls the window procedure for the window and does not return until the window procedure has processed the message. If the window was created by a different thread, SendNotifyMessage passes the message to the window procedure and returns immediately; it does not wait for the window procedure to finish processing the message."
     },
     "SetActiveWindow": {
         "prototype": "HWND SetActiveWindow(\n  HWND hWnd\n);",
@@ -3281,6 +3356,11 @@
         "comment": "Dialogs in Per-Monitor v2 contexts are automatically DPI scaled. This method lets you customize their DPI change behavior. This function works in conjunction with the DIALOG_DPI_CHANGE_BEHAVIORS enum in order to override the default DPI scaling behavior for dialogs. This function is called on a specified dialog, for which the specified flags are individually saved.",
         "minimumWindowsVersion": "WIN10_RS2"
     },
+    "SetDisplayAutoRotationPreferences": {
+        "prototype": "BOOL SetDisplayAutoRotationPreferences(\n  ORIENTATION_PREFERENCE orientation\n);",
+        "dllLibrary": "user32",
+        "comment": "Sets the screen auto-rotation preferences for the current process."
+    },
     "SetDlgItemInt": {
         "prototype": "BOOL SetDlgItemInt(\n  HWND hDlg,\n  int  nIDDlgItem,\n  UINT uValue,\n  BOOL bSigned\n);",
         "dllLibrary": "user32",
@@ -3355,6 +3435,11 @@
         "prototype": "BOOL SetMenuInfo(\n  HMENU       hmenu,\n  LPCMENUINFO lpmi\n);",
         "dllLibrary": "user32",
         "comment": "Sets information for a specified menu."
+    },
+    "SetMenuItemBitmaps": {
+        "prototype": "BOOL SetMenuItemBitmaps(\n  HMENU   hMenu,\n  UINT    uPosition,\n  UINT    uFlags,\n  HBITMAP hBitmapUnchecked,\n  HBITMAP hBitmapChecked\n);",
+        "dllLibrary": "user32",
+        "comment": "Associates the specified bitmap with a menu item. Whether the menu item is selected or clear, the system displays the appropriate bitmap next to the menu item."
     },
     "SetMenuItemInfo": {
         "prototype": "BOOL SetMenuItemInfoW(\n  HMENU            hmenu,\n  UINT             item,\n  BOOL             fByPositon,\n  LPCMENUITEMINFOW lpmii\n);",
@@ -3505,6 +3590,11 @@
         "prototype": "UINT_PTR SetTimer(\n  HWND      hWnd,\n  UINT_PTR  nIDEvent,\n  UINT      uElapse,\n  TIMERPROC lpTimerFunc\n);",
         "dllLibrary": "user32",
         "comment": "Creates a timer with the specified time-out value."
+    },
+    "SetUserObjectInformation": {
+        "prototype": "BOOL SetUserObjectInformationW(\n  HANDLE hObj,\n  int    nIndex,\n  PVOID  pvInfo,\n  DWORD  nLength\n);",
+        "dllLibrary": "user32",
+        "comment": "Sets information about the specified window station or desktop object."
     },
     "SetViewportExtEx": {
         "prototype": "BOOL SetViewportExtEx(\n  HDC    hdc,\n  int    x,\n  int    y,\n  LPSIZE lpsz\n);",

@@ -2280,6 +2280,22 @@ int GetDialogDpiChangeBehavior(int hDlg) {
   return _GetDialogDpiChangeBehavior(hDlg);
 }
 
+/// Retrieves the screen auto-rotation preferences for the current process.
+///
+/// ```c
+/// BOOL GetDisplayAutoRotationPreferences(
+///   ORIENTATION_PREFERENCE *pOrientation
+/// );
+/// ```
+/// {@category user32}
+int GetDisplayAutoRotationPreferences(Pointer<Uint32> pOrientation) {
+  final _GetDisplayAutoRotationPreferences = _user32.lookupFunction<
+      Int32 Function(Pointer<Uint32> pOrientation),
+      int Function(
+          Pointer<Uint32> pOrientation)>('GetDisplayAutoRotationPreferences');
+  return _GetDisplayAutoRotationPreferences(pOrientation);
+}
+
 /// Retrieves a handle to a control in the specified dialog box.
 ///
 /// ```c
@@ -2902,6 +2918,20 @@ int GetPriorityClipboardFormat(
   return _GetPriorityClipboardFormat(paFormatPriorityList, cFormats);
 }
 
+/// Retrieves a handle to the current window station for the calling
+/// process.
+///
+/// ```c
+/// HWINSTA GetProcessWindowStation();
+/// ```
+/// {@category user32}
+int GetProcessWindowStation() {
+  final _GetProcessWindowStation =
+      _user32.lookupFunction<IntPtr Function(), int Function()>(
+          'GetProcessWindowStation');
+  return _GetProcessWindowStation();
+}
+
 /// Retrieves a data handle from the property list of the specified window.
 /// The character string identifies the handle to be retrieved. The string
 /// and handle must have been added to the property list by a previous call
@@ -3253,6 +3283,30 @@ int GetUpdateRgn(int hWnd, int hRgn, int bErase) {
       Int32 Function(IntPtr hWnd, IntPtr hRgn, Int32 bErase),
       int Function(int hWnd, int hRgn, int bErase)>('GetUpdateRgn');
   return _GetUpdateRgn(hWnd, hRgn, bErase);
+}
+
+/// Retrieves information about the specified window station or desktop
+/// object.
+///
+/// ```c
+/// BOOL GetUserObjectInformationW(
+///   HANDLE  hObj,
+///   int     nIndex,
+///   PVOID   pvInfo,
+///   DWORD   nLength,
+///   LPDWORD lpnLengthNeeded
+/// );
+/// ```
+/// {@category user32}
+int GetUserObjectInformation(int hObj, int nIndex, Pointer pvInfo, int nLength,
+    Pointer<Uint32> lpnLengthNeeded) {
+  final _GetUserObjectInformation = _user32.lookupFunction<
+      Int32 Function(IntPtr hObj, Uint32 nIndex, Pointer pvInfo, Uint32 nLength,
+          Pointer<Uint32> lpnLengthNeeded),
+      int Function(int hObj, int nIndex, Pointer pvInfo, int nLength,
+          Pointer<Uint32> lpnLengthNeeded)>('GetUserObjectInformationW');
+  return _GetUserObjectInformation(
+      hObj, nIndex, pvInfo, nLength, lpnLengthNeeded);
 }
 
 /// Retrieves a handle to a window that has the specified relationship
@@ -3804,6 +3858,24 @@ int IsDialogMessage(int hDlg, Pointer<MSG> lpMsg) {
   return _IsDialogMessage(hDlg, lpMsg);
 }
 
+/// The IsDlgButtonChecked function determines whether a button control is
+/// checked or whether a three-state button control is checked, unchecked,
+/// or indeterminate.
+///
+/// ```c
+/// UINT IsDlgButtonChecked(
+///   HWND hDlg,
+///   int  nIDButton
+/// );
+/// ```
+/// {@category user32}
+int IsDlgButtonChecked(int hDlg, int nIDButton) {
+  final _IsDlgButtonChecked = _user32.lookupFunction<
+      Uint32 Function(IntPtr hDlg, Int32 nIDButton),
+      int Function(int hDlg, int nIDButton)>('IsDlgButtonChecked');
+  return _IsDlgButtonChecked(hDlg, nIDButton);
+}
+
 /// Determines whether the calling thread is already a GUI thread. It can
 /// also optionally convert the thread to a GUI thread.
 ///
@@ -3912,6 +3984,23 @@ int IsRectEmpty(Pointer<RECT> lprc) {
   return _IsRectEmpty(lprc);
 }
 
+/// Checks whether a specified window is touch-capable and, optionally,
+/// retrieves the modifier flags set for the window's touch capability.
+///
+/// ```c
+/// BOOL IsTouchWindow(
+///   HWND   hwnd,
+///   PULONG pulFlags
+/// );
+/// ```
+/// {@category user32}
+int IsTouchWindow(int hwnd, Pointer<Uint32> pulFlags) {
+  final _IsTouchWindow = _user32.lookupFunction<
+      Int32 Function(IntPtr hwnd, Pointer<Uint32> pulFlags),
+      int Function(int hwnd, Pointer<Uint32> pulFlags)>('IsTouchWindow');
+  return _IsTouchWindow(hwnd, pulFlags);
+}
+
 /// Determines if a specified DPI_AWARENESS_CONTEXT is valid and supported
 /// by the current system.
 ///
@@ -3981,6 +4070,19 @@ int IsWindowVisible(int hWnd) {
   final _IsWindowVisible = _user32.lookupFunction<Int32 Function(IntPtr hWnd),
       int Function(int hWnd)>('IsWindowVisible');
   return _IsWindowVisible(hWnd);
+}
+
+/// Determines whether the last message read from the current thread's
+/// queue originated from a WOW64 process.
+///
+/// ```c
+/// BOOL IsWow64Message();
+/// ```
+/// {@category user32}
+int IsWow64Message() {
+  final _IsWow64Message = _user32
+      .lookupFunction<Int32 Function(), int Function()>('IsWow64Message');
+  return _IsWow64Message();
 }
 
 /// Determines whether a window is maximized.
@@ -4135,6 +4237,30 @@ int LoadMenuIndirect(Pointer lpMenuTemplate) {
   return _LoadMenuIndirect(lpMenuTemplate);
 }
 
+/// Loads a string resource from the executable file associated with a
+/// specified module and either copies the string into a buffer with a
+/// terminating null character or returns a read-only pointer to the string
+/// resource itself.
+///
+/// ```c
+/// int LoadStringW(
+///   HINSTANCE hInstance,
+///   UINT      uID,
+///   LPWSTR    lpBuffer,
+///   int       cchBufferMax
+/// );
+/// ```
+/// {@category user32}
+int LoadString(
+    int hInstance, int uID, Pointer<Utf16> lpBuffer, int cchBufferMax) {
+  final _LoadString = _user32.lookupFunction<
+      Int32 Function(IntPtr hInstance, Uint32 uID, Pointer<Utf16> lpBuffer,
+          Int32 cchBufferMax),
+      int Function(int hInstance, int uID, Pointer<Utf16> lpBuffer,
+          int cchBufferMax)>('LoadStringW');
+  return _LoadString(hInstance, uID, lpBuffer, cchBufferMax);
+}
+
 /// The foreground process can call the LockSetForegroundWindow function to
 /// disable calls to the SetForegroundWindow function.
 ///
@@ -4214,6 +4340,48 @@ int LogicalToPhysicalPointForPerMonitorDPI(int hWnd, Pointer<POINT> lpPoint) {
       int Function(int hWnd,
           Pointer<POINT> lpPoint)>('LogicalToPhysicalPointForPerMonitorDPI');
   return _LogicalToPhysicalPointForPerMonitorDPI(hWnd, lpPoint);
+}
+
+/// Searches through icon or cursor data for the icon or cursor that best
+/// fits the current display device.
+///
+/// ```c
+/// int LookupIconIdFromDirectory(
+///   PBYTE presbits,
+///   BOOL  fIcon
+/// );
+/// ```
+/// {@category user32}
+int LookupIconIdFromDirectory(Pointer<Uint8> presbits, int fIcon) {
+  final _LookupIconIdFromDirectory = _user32.lookupFunction<
+      Int32 Function(Pointer<Uint8> presbits, Int32 fIcon),
+      int Function(
+          Pointer<Uint8> presbits, int fIcon)>('LookupIconIdFromDirectory');
+  return _LookupIconIdFromDirectory(presbits, fIcon);
+}
+
+/// Searches through icon or cursor data for the icon or cursor that best
+/// fits the current display device.
+///
+/// ```c
+/// int LookupIconIdFromDirectoryEx(
+///   PBYTE presbits,
+///   BOOL  fIcon,
+///   int   cxDesired,
+///   int   cyDesired,
+///   UINT  Flags
+/// );
+/// ```
+/// {@category user32}
+int LookupIconIdFromDirectoryEx(Pointer<Uint8> presbits, int fIcon,
+    int cxDesired, int cyDesired, int Flags) {
+  final _LookupIconIdFromDirectoryEx = _user32.lookupFunction<
+      Int32 Function(Pointer<Uint8> presbits, Int32 fIcon, Int32 cxDesired,
+          Int32 cyDesired, Uint32 Flags),
+      int Function(Pointer<Uint8> presbits, int fIcon, int cxDesired,
+          int cyDesired, int Flags)>('LookupIconIdFromDirectoryEx');
+  return _LookupIconIdFromDirectoryEx(
+      presbits, fIcon, cxDesired, cyDesired, Flags);
 }
 
 /// Converts the specified dialog box units to screen units (pixels). The
@@ -4484,6 +4652,54 @@ int MsgWaitForMultipleObjects(int nCount, Pointer<IntPtr> pHandles,
           int dwMilliseconds, int dwWakeMask)>('MsgWaitForMultipleObjects');
   return _MsgWaitForMultipleObjects(
       nCount, pHandles, fWaitAll, dwMilliseconds, dwWakeMask);
+}
+
+/// Waits until one or all of the specified objects are in the signaled
+/// state, an I/O completion routine or asynchronous procedure call (APC)
+/// is queued to the thread, or the time-out interval elapses. The array of
+/// objects can include input event objects, which you specify using the
+/// dwWakeMask parameter.
+///
+/// ```c
+/// DWORD MsgWaitForMultipleObjectsEx(
+///   DWORD        nCount,
+///   const HANDLE *pHandles,
+///   DWORD        dwMilliseconds,
+///   DWORD        dwWakeMask,
+///   DWORD        dwFlags
+/// );
+/// ```
+/// {@category user32}
+int MsgWaitForMultipleObjectsEx(int nCount, Pointer<IntPtr> pHandles,
+    int dwMilliseconds, int dwWakeMask, int dwFlags) {
+  final _MsgWaitForMultipleObjectsEx = _user32.lookupFunction<
+      Uint32 Function(Uint32 nCount, Pointer<IntPtr> pHandles,
+          Uint32 dwMilliseconds, Uint32 dwWakeMask, Uint32 dwFlags),
+      int Function(int nCount, Pointer<IntPtr> pHandles, int dwMilliseconds,
+          int dwWakeMask, int dwFlags)>('MsgWaitForMultipleObjectsEx');
+  return _MsgWaitForMultipleObjectsEx(
+      nCount, pHandles, dwMilliseconds, dwWakeMask, dwFlags);
+}
+
+/// Signals the system that a predefined event occurred. If any client
+/// applications have registered a hook function for the event, the system
+/// calls the client's hook function.
+///
+/// ```c
+/// void NotifyWinEvent(
+///   DWORD event,
+///   HWND  hwnd,
+///   LONG  idObject,
+///   LONG  idChild
+/// );
+/// ```
+/// {@category user32}
+void NotifyWinEvent(int event, int hwnd, int idObject, int idChild) {
+  final _NotifyWinEvent = _user32.lookupFunction<
+      Void Function(Uint32 event, IntPtr hwnd, Int32 idObject, Int32 idChild),
+      void Function(
+          int event, int hwnd, int idObject, int idChild)>('NotifyWinEvent');
+  return _NotifyWinEvent(event, hwnd, idObject, idChild);
 }
 
 /// The OffsetRect function moves the specified rectangle by the specified
@@ -5080,6 +5296,47 @@ int ScrollWindow(int hWnd, int XAmount, int YAmount, Pointer<RECT> lpRect,
   return _ScrollWindow(hWnd, XAmount, YAmount, lpRect, lpClipRect);
 }
 
+/// The ScrollWindowEx function scrolls the contents of the specified
+/// window's client area.
+///
+/// ```c
+/// int ScrollWindowEx(
+///   HWND       hWnd,
+///   int        dx,
+///   int        dy,
+///   const RECT *prcScroll,
+///   const RECT *prcClip,
+///   HRGN       hrgnUpdate,
+///   LPRECT     prcUpdate,
+///   UINT       flags
+/// );
+/// ```
+/// {@category user32}
+int ScrollWindowEx(int hWnd, int dx, int dy, Pointer<RECT> prcScroll,
+    Pointer<RECT> prcClip, int hrgnUpdate, Pointer<RECT> prcUpdate, int flags) {
+  final _ScrollWindowEx = _user32.lookupFunction<
+      Int32 Function(
+          IntPtr hWnd,
+          Int32 dx,
+          Int32 dy,
+          Pointer<RECT> prcScroll,
+          Pointer<RECT> prcClip,
+          IntPtr hrgnUpdate,
+          Pointer<RECT> prcUpdate,
+          Uint32 flags),
+      int Function(
+          int hWnd,
+          int dx,
+          int dy,
+          Pointer<RECT> prcScroll,
+          Pointer<RECT> prcClip,
+          int hrgnUpdate,
+          Pointer<RECT> prcUpdate,
+          int flags)>('ScrollWindowEx');
+  return _ScrollWindowEx(
+      hWnd, dx, dy, prcScroll, prcClip, hrgnUpdate, prcUpdate, flags);
+}
+
 /// Sends a message to the specified control in a dialog box.
 ///
 /// ```c
@@ -5138,6 +5395,95 @@ int SendMessage(int hWnd, int Msg, int wParam, int lParam) {
       IntPtr Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
       int Function(int hWnd, int Msg, int wParam, int lParam)>('SendMessageW');
   return _SendMessage(hWnd, Msg, wParam, lParam);
+}
+
+/// Sends the specified message to a window or windows. It calls the window
+/// procedure for the specified window and returns immediately if the
+/// window belongs to another thread. After the window procedure processes
+/// the message, the system calls the specified callback function, passing
+/// the result of the message processing and an application-defined value
+/// to the callback function.
+///
+/// ```c
+/// BOOL SendMessageCallbackW(
+///   HWND          hWnd,
+///   UINT          Msg,
+///   WPARAM        wParam,
+///   LPARAM        lParam,
+///   SENDASYNCPROC lpResultCallBack,
+///   ULONG_PTR     dwData
+/// );
+/// ```
+/// {@category user32}
+int SendMessageCallback(int hWnd, int Msg, int wParam, int lParam,
+    Pointer<NativeFunction<SendAsyncProc>> lpResultCallBack, int dwData) {
+  final _SendMessageCallback = _user32.lookupFunction<
+      Int32 Function(
+          IntPtr hWnd,
+          Uint32 Msg,
+          IntPtr wParam,
+          IntPtr lParam,
+          Pointer<NativeFunction<SendAsyncProc>> lpResultCallBack,
+          IntPtr dwData),
+      int Function(
+          int hWnd,
+          int Msg,
+          int wParam,
+          int lParam,
+          Pointer<NativeFunction<SendAsyncProc>> lpResultCallBack,
+          int dwData)>('SendMessageCallbackW');
+  return _SendMessageCallback(
+      hWnd, Msg, wParam, lParam, lpResultCallBack, dwData);
+}
+
+/// Sends the specified message to one or more windows.
+///
+/// ```c
+/// LRESULT SendMessageTimeoutW(
+///   HWND       hWnd,
+///   UINT       Msg,
+///   WPARAM     wParam,
+///   LPARAM     lParam,
+///   UINT       fuFlags,
+///   UINT       uTimeout,
+///   PDWORD_PTR lpdwResult
+/// );
+/// ```
+/// {@category user32}
+int SendMessageTimeout(int hWnd, int Msg, int wParam, int lParam, int fuFlags,
+    int uTimeout, Pointer<IntPtr> lpdwResult) {
+  final _SendMessageTimeout = _user32.lookupFunction<
+      IntPtr Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam,
+          Uint32 fuFlags, Uint32 uTimeout, Pointer<IntPtr> lpdwResult),
+      int Function(int hWnd, int Msg, int wParam, int lParam, int fuFlags,
+          int uTimeout, Pointer<IntPtr> lpdwResult)>('SendMessageTimeoutW');
+  return _SendMessageTimeout(
+      hWnd, Msg, wParam, lParam, fuFlags, uTimeout, lpdwResult);
+}
+
+/// Sends the specified message to a window or windows. If the window was
+/// created by the calling thread, SendNotifyMessage calls the window
+/// procedure for the window and does not return until the window procedure
+/// has processed the message. If the window was created by a different
+/// thread, SendNotifyMessage passes the message to the window procedure
+/// and returns immediately; it does not wait for the window procedure to
+/// finish processing the message.
+///
+/// ```c
+/// BOOL SendNotifyMessageW(
+///   HWND   hWnd,
+///   UINT   Msg,
+///   WPARAM wParam,
+///   LPARAM lParam
+/// );
+/// ```
+/// {@category user32}
+int SendNotifyMessage(int hWnd, int Msg, int wParam, int lParam) {
+  final _SendNotifyMessage = _user32.lookupFunction<
+      Int32 Function(IntPtr hWnd, Uint32 Msg, IntPtr wParam, IntPtr lParam),
+      int Function(
+          int hWnd, int Msg, int wParam, int lParam)>('SendNotifyMessageW');
+  return _SendNotifyMessage(hWnd, Msg, wParam, lParam);
 }
 
 /// Activates a window. The window must be attached to the calling thread's
@@ -5347,6 +5693,21 @@ int SetDialogDpiChangeBehavior(int hDlg, int mask, int values) {
   return _SetDialogDpiChangeBehavior(hDlg, mask, values);
 }
 
+/// Sets the screen auto-rotation preferences for the current process.
+///
+/// ```c
+/// BOOL SetDisplayAutoRotationPreferences(
+///   ORIENTATION_PREFERENCE orientation
+/// );
+/// ```
+/// {@category user32}
+int SetDisplayAutoRotationPreferences(int orientation) {
+  final _SetDisplayAutoRotationPreferences = _user32.lookupFunction<
+      Int32 Function(Uint32 orientation),
+      int Function(int orientation)>('SetDisplayAutoRotationPreferences');
+  return _SetDisplayAutoRotationPreferences(orientation);
+}
+
 /// Sets the text of a control in a dialog box to the string representation
 /// of a specified integer value.
 ///
@@ -5490,6 +5851,31 @@ int SetMenuInfo(int param0, Pointer<MENUINFO> param1) {
       Int32 Function(IntPtr param0, Pointer<MENUINFO> param1),
       int Function(int param0, Pointer<MENUINFO> param1)>('SetMenuInfo');
   return _SetMenuInfo(param0, param1);
+}
+
+/// Associates the specified bitmap with a menu item. Whether the menu item
+/// is selected or clear, the system displays the appropriate bitmap next
+/// to the menu item.
+///
+/// ```c
+/// BOOL SetMenuItemBitmaps(
+///   HMENU   hMenu,
+///   UINT    uPosition,
+///   UINT    uFlags,
+///   HBITMAP hBitmapUnchecked,
+///   HBITMAP hBitmapChecked
+/// );
+/// ```
+/// {@category user32}
+int SetMenuItemBitmaps(int hMenu, int uPosition, int uFlags,
+    int hBitmapUnchecked, int hBitmapChecked) {
+  final _SetMenuItemBitmaps = _user32.lookupFunction<
+      Int32 Function(IntPtr hMenu, Uint32 uPosition, Uint32 uFlags,
+          IntPtr hBitmapUnchecked, IntPtr hBitmapChecked),
+      int Function(int hMenu, int uPosition, int uFlags, int hBitmapUnchecked,
+          int hBitmapChecked)>('SetMenuItemBitmaps');
+  return _SetMenuItemBitmaps(
+      hMenu, uPosition, uFlags, hBitmapUnchecked, hBitmapChecked);
 }
 
 /// Changes information about a menu item.
@@ -5755,6 +6141,26 @@ int SetTimer(int hWnd, int nIDEvent, int uElapse,
       int Function(int hWnd, int nIDEvent, int uElapse,
           Pointer<NativeFunction<TimerProc>> lpTimerFunc)>('SetTimer');
   return _SetTimer(hWnd, nIDEvent, uElapse, lpTimerFunc);
+}
+
+/// Sets information about the specified window station or desktop object.
+///
+/// ```c
+/// BOOL SetUserObjectInformationW(
+///   HANDLE hObj,
+///   int    nIndex,
+///   PVOID  pvInfo,
+///   DWORD  nLength
+/// );
+/// ```
+/// {@category user32}
+int SetUserObjectInformation(
+    int hObj, int nIndex, Pointer pvInfo, int nLength) {
+  final _SetUserObjectInformation = _user32.lookupFunction<
+      Int32 Function(IntPtr hObj, Int32 nIndex, Pointer pvInfo, Uint32 nLength),
+      int Function(int hObj, int nIndex, Pointer pvInfo,
+          int nLength)>('SetUserObjectInformationW');
+  return _SetUserObjectInformation(hObj, nIndex, pvInfo, nLength);
 }
 
 /// Specifies where the content of the window can be displayed.

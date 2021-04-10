@@ -95,6 +95,13 @@ typedef OutputProc = Int32 Function(IntPtr Arg1, IntPtr Arg2, Int32 Arg3);
 typedef PfnAuthenticationCallbackEx = Int32 Function(Pointer pvParam,
     Pointer<BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS> pAuthCallbackParams);
 
+/// Application-defined callback function used with the SendMessageCallback
+/// function. The system passes the message to the callback function after
+/// passing the message to the destination window procedure. The SENDASYNCPROC
+/// type defines a pointer to this callback function. SendAsyncProc is a
+/// placeholder for the application-defined function name.
+typedef SendAsyncProc = Void Function(IntPtr, Uint32, IntPtr, IntPtr);
+
 /// Application-defined callback function used with the SymEnumSymbols,
 /// SymEnumTypes, and SymEnumTypesByName functions.
 typedef SymEnumSymbolsProc = Int32 Function(
