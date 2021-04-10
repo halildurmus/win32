@@ -61,6 +61,20 @@ typedef FRHookProc = IntPtr Function(IntPtr, Uint32, IntPtr, IntPtr);
 /// new thread in the process to execute the function.
 typedef HandlerProc = Int32 Function(Uint32 dwCtrlType);
 
+/// Application-defined callback function for handling incoming MIDI messages.
+/// MidiInProc is a placeholder for the application-supplied function name. The
+/// address of this function can be specified in the callback-address parameter
+/// of the midiInOpen function.
+typedef MidiInProc = Void Function(IntPtr hMidiIn, Uint32 wMsg,
+    IntPtr dwInstance, IntPtr dwParam1, IntPtr dwParam2);
+
+/// Application-defined callback function for handling outgoing MIDI messages.
+/// MidiOutProc is a placeholder for the application-supplied function name. The
+/// address of the function can be specified in the callback-address parameter
+/// of the midiOutOpen function.
+typedef MidiOutProc = Void Function(IntPtr hmo, Uint32 wMsg, IntPtr dwInstance,
+    IntPtr dwParam1, IntPtr dwParam2);
+
 /// Application-defined callback function used with the EnumDisplayMonitors
 /// function. It receives display monitors in the calculated enumeration set.
 typedef MonitorEnumProc = Int32 Function(
