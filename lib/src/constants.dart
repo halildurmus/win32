@@ -4894,6 +4894,8 @@ const CALLBACK_FUNCTION = 0x00030000;
 /// The dwCallback parameter is an event handle.
 const CALLBACK_EVENT = 0x00050000;
 
+/// The function queries the device to determine whether it supports the given
+/// format, but it does not open the device.
 const WAVE_FORMAT_QUERY = 0x0001;
 
 /// If this flag is specified, a synchronous waveform-audio device can be
@@ -4912,6 +4914,192 @@ const WAVE_FORMAT_DIRECT = 0x0008;
 /// If this flag is specified and the uDeviceID parameter is WAVE_MAPPER, the
 /// function opens the default communication device.
 const WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE = 0x0010;
+
+// -----------------------------------------------------------------------------
+// Multimedia Extensions messages
+// -----------------------------------------------------------------------------
+
+/// The MM_JOY1MOVE message notifies the window that has captured joystick
+/// JOYSTICKID1 that the joystick position has changed.
+const MM_JOY1MOVE = 0x3A0;
+
+/// The MM_JOY2MOVE message notifies the window that has captured joystick
+/// JOYSTICKID2 that the joystick position has changed.
+const MM_JOY2MOVE = 0x3A1;
+
+/// The MM_JOY1ZMOVE message notifies the window that has captured joystick
+/// JOYSTICKID1 that the joystick position on the z-axis has changed.
+const MM_JOY1ZMOVE = 0x3A2;
+
+/// The MM_JOY2ZMOVE message notifies the window that has captured joystick
+/// JOYSTICKID2 that the joystick position on the z-axis has changed.
+const MM_JOY2ZMOVE = 0x3A3;
+
+/// The MM_JOY1BUTTONDOWN message notifies the window that has captured joystick
+/// JOYSTICKID1 that a button has been pressed.
+const MM_JOY1BUTTONDOWN = 0x3B5;
+
+/// The MM_JOY2BUTTONDOWN message notifies the window that has captured joystick
+/// JOYSTICKID2 that a button has been pressed.
+const MM_JOY2BUTTONDOWN = 0x3B6;
+
+/// The MM_JOY1BUTTONUP message notifies the window that has captured joystick
+/// JOYSTICKID1 that a button has been released.
+const MM_JOY1BUTTONUP = 0x3B7;
+
+/// The MM_JOY2BUTTONUP message notifies the window that has captured joystick
+/// JOYSTICKID2 that a button has been released.
+const MM_JOY2BUTTONUP = 0x3B8;
+
+/// The MM_MCINOTIFY message notifies an application that an MCI device has
+/// completed an operation. MCI devices send this message only when the
+/// MCI_NOTIFY flag is used.
+const MM_MCINOTIFY = 0x3B9;
+
+/// The MM_WOM_OPEN message is sent to a window when the given waveform-audio
+/// output device is opened.
+const MM_WOM_OPEN = 0x3BB;
+
+/// The MM_WOM_CLOSE message is sent to a window when a waveform-audio output
+/// device is closed. The device handle is no longer valid after this message
+/// has been sent.
+const MM_WOM_CLOSE = 0x3BC;
+
+/// The MM_WOM_DONE message is sent to a window when the given output buffer is
+/// being returned to the application. Buffers are returned to the application
+/// when they have been played, or as the result of a call to the waveOutReset
+/// function.
+const MM_WOM_DONE = 0x3BD;
+
+/// The MM_WIM_OPEN message is sent to a window when a waveform-audio input
+/// device is opened.
+const MM_WIM_OPEN = 0x3BE;
+
+/// The MM_WIM_CLOSE message is sent to a window when a waveform-audio input
+/// device is closed. The device handle is no longer valid after this message
+/// has been sent.
+const MM_WIM_CLOSE = 0x3BF;
+
+/// The MM_WIM_DATA message is sent to a window when waveform-audio data is
+/// present in the input buffer and the buffer is being returned to the
+/// application. The message can be sent either when the buffer is full or after
+/// the waveInReset function is called.
+const MM_WIM_DATA = 0x3C0;
+
+/// The MM_MIM_OPEN message is sent to a window when a MIDI input device is
+/// opened.
+const MM_MIM_OPEN = 0x3C1;
+
+/// The MM_MIM_CLOSE message is sent to a window when a MIDI input device is
+/// closed.
+const MM_MIM_CLOSE = 0x3C2;
+
+/// The MM_MIM_DATA message is sent to a window when a complete MIDI message is
+/// received by a MIDI input device.
+const MM_MIM_DATA = 0x3C3;
+
+/// The MM_MIM_LONGDATA message is sent to a window when either a complete MIDI
+/// system-exclusive message is received or when a buffer has been filled with
+/// system-exclusive data.
+const MM_MIM_LONGDATA = 0x3C4;
+
+/// The MM_MIM_ERROR message is sent to a window when an invalid MIDI message is
+/// received.
+const MM_MIM_ERROR = 0x3C5;
+
+/// The MM_MIM_LONGERROR message is sent to a window when an invalid or
+/// incomplete MIDI system-exclusive message is received.
+const MM_MIM_LONGERROR = 0x3C6;
+
+/// The MM_MOM_OPEN message is sent to a window when a MIDI output device is
+/// opened.
+const MM_MOM_OPEN = 0x3C7;
+
+/// The MM_MOM_CLOSE message is sent to a window when a MIDI output device is
+/// closed.
+const MM_MOM_CLOSE = 0x3C8;
+
+/// The MM_MOM_DONE message is sent to a window when the specified MIDI
+/// system-exclusive or stream buffer has been played and is being returned to
+/// the application.
+const MM_MOM_DONE = 0x3C9;
+
+/// The MM_MOM_POSITIONCB message is sent to a window when an MEVT_F_CALLBACK
+/// event is reached in the MIDI output stream.
+const MM_MOM_POSITIONCB = 0x3CA;
+
+/// The MM_MCISIGNAL message is sent to a window to notify an application that
+/// an MCI device has reached a position defined in a previous signal (
+/// MCI_SIGNAL) command.
+const MM_MCISIGNAL = 0x3CB;
+
+/// The MM_MIM_MOREDATA message is sent to a callback window when a MIDI message
+/// is received by a MIDI input device but the application is not processing
+/// MIM_DATA messages fast enough to keep up with the input device driver. The
+/// window receives this message only when the application specifies
+/// MIDI_IO_STATUS in the call to the midiInOpen function.
+const MM_MIM_MOREDATA = 0x3CC;
+
+/// The MM_MIXM_LINE_CHANGE message is sent by a mixer device to notify an
+/// application that the state of an audio line on the specified device has
+/// changed. The application should refresh its display and cached values for
+/// the specified audio line.
+const MM_MIXM_LINE_CHANGE = 0x3D0;
+
+/// The MM_MIXM_CONTROL_CHANGE message is sent by a mixer device to notify an
+/// application that the state of a control associated with an audio line has
+/// changed. The application should refresh its display and cached values for
+/// the specified control.
+const MM_MIXM_CONTROL_CHANGE = 0x3D1;
+
+/// The MIM_OPEN message is sent to a MIDI input callback function when a MIDI
+/// input device is opened.
+const MIM_OPEN = MM_MIM_OPEN;
+
+/// The MIM_CLOSE message is sent to a MIDI input callback function when a MIDI
+/// input device is closed.
+const MIM_CLOSE = MM_MIM_CLOSE;
+
+/// The MIM_DATA message is sent to a MIDI input callback function when a MIDI
+/// message is received by a MIDI input device.
+const MIM_DATA = MM_MIM_DATA;
+
+/// The MIM_LONGDATA message is sent to a MIDI input callback function when a
+/// system-exclusive buffer has been filled with data and is being returned to
+/// the application.
+const MIM_LONGDATA = MM_MIM_LONGDATA;
+
+/// The MIM_ERROR message is sent to a MIDI input callback function when an
+/// invalid MIDI message is received.
+const MIM_ERROR = MM_MIM_ERROR;
+
+/// The MIM_LONGERROR message is sent to a MIDI input callback function when an
+/// invalid or incomplete MIDI system-exclusive message is received.
+const MIM_LONGERROR = MM_MIM_LONGERROR;
+
+/// The MOM_OPEN message is sent to a MIDI output callback function when a MIDI
+/// output device is opened.
+const MOM_OPEN = MM_MOM_OPEN;
+
+/// The MOM_CLOSE message is sent to a MIDI output callback function when a MIDI
+/// output device is closed.
+const MOM_CLOSE = MM_MOM_CLOSE;
+
+/// The MOM_DONE message is sent to a MIDI output callback function when the
+/// specified system-exclusive or stream buffer has been played and is being
+/// returned to the application.
+const MOM_DONE = MM_MOM_DONE;
+
+/// The MIM_MOREDATA message is sent to a MIDI input callback function when a
+/// MIDI message is received by a MIDI input device but the application is not
+/// processing MIM_DATA messages fast enough to keep up with the input device
+/// driver. The callback function receives this message only when the
+/// application specifies MIDI_IO_STATUS in the call to the midiInOpen function.
+const MIM_MOREDATA = MM_MIM_MOREDATA;
+
+/// The MOM_POSITION message is sent when an MEVT_F_CALLBACK event is reached in
+/// the MIDI output stream.
+const MOM_POSITIONCB = MM_MOM_POSITIONCB;
 
 // -----------------------------------------------------------------------------
 // Monitor Configuration constants & enumerations
