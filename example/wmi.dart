@@ -116,7 +116,7 @@ void main() {
   // For example, query for all the running processes
   hr = pSvc.ExecQuery(
       TEXT('WQL'),
-      TEXT('SELECT * FROM Win32_ComputerSystemProduct'),
+      TEXT('SELECT * FROM Win32_Process'),
       WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_FORWARD_ONLY |
           WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_RETURN_IMMEDIATELY,
       nullptr,
@@ -136,28 +136,32 @@ void main() {
 
     final uReturn = calloc<Uint32>();
 
-    if (enumerator.ptr.address > 0) {
+    var idx = 0;
+    while (enumerator.ptr.address > 0) {
       final pClsObj = calloc<IntPtr>();
 
       hr = enumerator.Next(
           WBEM_TIMEOUT_TYPE.WBEM_INFINITE, 1, pClsObj.cast(), uReturn);
 
       // Break out of the while loop if we've run out of processes to inspect
-      if (uReturn.value != 0) {
-        final clsObj = IWbemClassObject(pClsObj.cast());
+      if (uReturn.value == 0) break;
 
-        final vtProp = calloc<VARIANT>();
-        hr = clsObj.Get(TEXT('UUID'), 0, vtProp, nullptr, nullptr);
-        if (SUCCEEDED(hr)) {
-          print('UUID: ${vtProp.ref.bstrVal.toDartString()}');
-        }
-        // Free BSTRs in the returned variants
-        VariantClear(vtProp);
-        free(vtProp);
+      idx++;
 
-        clsObj.Release();
+      final clsObj = IWbemClassObject(pClsObj.cast());
+
+      final vtProp = calloc<VARIANT>();
+      hr = clsObj.Get(TEXT('Name'), 0, vtProp, nullptr, nullptr);
+      if (SUCCEEDED(hr)) {
+        print('Process: ${vtProp.ref.bstrVal.toDartString()}');
       }
+      // Free BSTRs in the returned variants
+      VariantClear(vtProp);
+      free(vtProp);
+
+      clsObj.Release();
     }
+    print('$idx processes found.');
   }
 
   pSvc.Release();
