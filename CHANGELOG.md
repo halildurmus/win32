@@ -1,4 +1,4 @@
-## 1.0.0-pre.2
+## 1.0.0-pre.3
 
 - Update to Dart 2.13, which includes new support for packed structs and arrays.
 - Overhaul the APIs to include much better support for attributes. WinMD can now
@@ -6,8 +6,9 @@
   interfaces and structs) and all documented metadata, as demonstrated with the
   object_tests folder.
 - Add support for events, properties, and delegates.
-- Much better documentation
+- Update to latest win32metadata `.winmd` file.
 - Support generics.
+- Much better documentation.
 
 ## 0.4.12
 
