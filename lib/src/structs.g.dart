@@ -217,6 +217,43 @@ class BLENDFUNCTION extends Struct {
   external int AlphaFormat;
 }
 
+/// The BLUETOOTH_DEVICE_INFO structure provides information about a
+/// Bluetooth device.
+///
+/// {@category Struct}
+class BLUETOOTH_DEVICE_INFO extends Struct {
+  @Uint32()
+  external int dwSize;
+  external BLUETOOTH_ADDRESS Address;
+  @Uint32()
+  external int ulClassofDevice;
+  @Int32()
+  external int fConnected;
+  @Int32()
+  external int fRemembered;
+  @Int32()
+  external int fAuthenticated;
+  external SYSTEMTIME stLastSeen;
+  external SYSTEMTIME stLastUsed;
+  @Array(128)
+  external Array<Uint16> _szName;
+
+  String get szName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 128; i++) {
+      charCodes.add(_szName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szName(String value) {
+    final stringToStore = value.padRight(128, '\x00');
+    for (var i = 0; i < 128; i++) {
+      _szName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
 /// The BLUETOOTH_DEVICE_SEARCH_PARAMS structure specifies search criteria
 /// for Bluetooth device searches.
 ///
@@ -258,6 +295,40 @@ class BLUETOOTH_OOB_DATA_INFO extends Struct {
   external Array<Uint8> C;
   @Array(16)
   external Array<Uint8> R;
+}
+
+/// The BLUETOOTH_RADIO_INFO structure provides information about a
+/// Bluetooth radio.
+///
+/// {@category Struct}
+class BLUETOOTH_RADIO_INFO extends Struct {
+  @Uint32()
+  external int dwSize;
+  external BLUETOOTH_ADDRESS address;
+  @Array(128)
+  external Array<Uint16> _szName;
+
+  String get szName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 128; i++) {
+      charCodes.add(_szName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szName(String value) {
+    final stringToStore = value.padRight(128, '\x00');
+    for (var i = 0; i < 128; i++) {
+      _szName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Uint32()
+  external int ulClassofDevice;
+  @Uint16()
+  external int lmpSubversion;
+  @Uint16()
+  external int manufacturer;
 }
 
 /// Contains information about a window that denied a request from
@@ -634,6 +705,67 @@ class DRAWTEXTPARAMS extends Struct {
   external int uiLengthDrawn;
 }
 
+/// The ENUMLOGFONTEX structure contains information about an enumerated
+/// font.
+///
+/// {@category Struct}
+class ENUMLOGFONTEX extends Struct {
+  external LOGFONT elfLogFont;
+  @Array(64)
+  external Array<Uint16> _elfFullName;
+
+  String get elfFullName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 64; i++) {
+      charCodes.add(_elfFullName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set elfFullName(String value) {
+    final stringToStore = value.padRight(64, '\x00');
+    for (var i = 0; i < 64; i++) {
+      _elfFullName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Array(32)
+  external Array<Uint16> _elfStyle;
+
+  String get elfStyle {
+    final charCodes = <int>[];
+    for (var i = 0; i < 32; i++) {
+      charCodes.add(_elfStyle[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set elfStyle(String value) {
+    final stringToStore = value.padRight(32, '\x00');
+    for (var i = 0; i < 32; i++) {
+      _elfStyle[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Array(32)
+  external Array<Uint16> _elfScript;
+
+  String get elfScript {
+    final charCodes = <int>[];
+    for (var i = 0; i < 32; i++) {
+      charCodes.add(_elfScript[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set elfScript(String value) {
+    final stringToStore = value.padRight(32, '\x00');
+    for (var i = 0; i < 32; i++) {
+      _elfScript[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
 /// Describes an exception that occurred during IDispatch::Invoke.
 ///
 /// {@category Struct}
@@ -816,6 +948,55 @@ class LOGBRUSH extends Struct {
   external int lbHatch;
 }
 
+/// The LOGFONT structure defines the attributes of a font.
+///
+/// {@category Struct}
+class LOGFONT extends Struct {
+  @Int32()
+  external int lfHeight;
+  @Int32()
+  external int lfWidth;
+  @Int32()
+  external int lfEscapement;
+  @Int32()
+  external int lfOrientation;
+  @Int32()
+  external int lfWeight;
+  @Uint8()
+  external int lfItalic;
+  @Uint8()
+  external int lfUnderline;
+  @Uint8()
+  external int lfStrikeOut;
+  @Uint8()
+  external int lfCharSet;
+  @Uint8()
+  external int lfOutPrecision;
+  @Uint8()
+  external int lfClipPrecision;
+  @Uint8()
+  external int lfQuality;
+  @Uint8()
+  external int lfPitchAndFamily;
+  @Array(32)
+  external Array<Uint16> _lfFaceName;
+
+  String get lfFaceName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 32; i++) {
+      charCodes.add(_lfFaceName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set lfFaceName(String value) {
+    final stringToStore = value.padRight(32, '\x00');
+    for (var i = 0; i < 32; i++) {
+      _lfFaceName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
 /// The LOGPALETTE structure defines a logical palette.
 ///
 /// {@category Struct}
@@ -956,7 +1137,22 @@ class MENUITEMTEMPLATE extends Struct {
   @Uint16()
   external int mtID;
   @Array(1)
-  external Array<Uint16> mtString;
+  external Array<Uint16> _mtString;
+
+  String get mtString {
+    final charCodes = <int>[];
+    for (var i = 0; i < 1; i++) {
+      charCodes.add(_mtString[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set mtString(String value) {
+    final stringToStore = value.padRight(1, '\x00');
+    for (var i = 0; i < 1; i++) {
+      _mtString[i] = stringToStore.codeUnitAt(i);
+    }
+  }
 }
 
 /// Defines the header for a menu template. A complete menu template
@@ -1037,7 +1233,23 @@ class MIDIINCAPS extends Struct {
   @Uint32()
   external int vDriverVersion;
   @Array(32)
-  external Array<Uint16> szPname;
+  external Array<Uint16> _szPname;
+
+  String get szPname {
+    final charCodes = <int>[];
+    for (var i = 0; i < 32; i++) {
+      charCodes.add(_szPname[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szPname(String value) {
+    final stringToStore = value.padRight(32, '\x00');
+    for (var i = 0; i < 32; i++) {
+      _szPname[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
   @Uint32()
   external int dwSupport;
 }
@@ -1055,7 +1267,23 @@ class MIDIOUTCAPS extends Struct {
   @Uint32()
   external int vDriverVersion;
   @Array(32)
-  external Array<Uint16> szPname;
+  external Array<Uint16> _szPname;
+
+  String get szPname {
+    final charCodes = <int>[];
+    for (var i = 0; i < 32; i++) {
+      charCodes.add(_szPname[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szPname(String value) {
+    final stringToStore = value.padRight(32, '\x00');
+    for (var i = 0; i < 32; i++) {
+      _szPname[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
   @Uint16()
   external int wTechnology;
   @Uint16()
@@ -1230,6 +1458,39 @@ class NEWTEXTMETRIC extends Struct {
   external int ntmAvgWidth;
 }
 
+/// Used to specify values that are used by SetSimulatedProfileInfo to
+/// override current internet connection profile values in an RDP Child
+/// Session to support the simulation of specific metered internet
+/// connection conditions.
+///
+/// {@category Struct}
+class NLM_SIMULATED_PROFILE_INFO extends Struct {
+  @Array(129)
+  external Array<Uint16> _ProfileName;
+
+  String get ProfileName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 129; i++) {
+      charCodes.add(_ProfileName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set ProfileName(String value) {
+    final stringToStore = value.padRight(129, '\x00');
+    for (var i = 0; i < 129; i++) {
+      _ProfileName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Uint32()
+  external int cost;
+  @Uint32()
+  external int UsageInMegabytes;
+  @Uint32()
+  external int DataLimitInMegabytes;
+}
+
 /// Contains the scalable metrics associated with the nonclient area of a
 /// nonminimized window. This structure is used by the
 /// SPI_GETNONCLIENTMETRICS and SPI_SETNONCLIENTMETRICS actions of the
@@ -1311,6 +1572,109 @@ class OPENFILENAME extends Struct {
   external int FlagsEx;
 }
 
+/// Contains operating system version information. The information includes
+/// major and minor version numbers, a build number, a platform identifier,
+/// and descriptive text about the operating system. This structure is used
+/// with the GetVersionEx function.
+///
+/// {@category Struct}
+class OSVERSIONINFO extends Struct {
+  @Uint32()
+  external int dwOSVersionInfoSize;
+  @Uint32()
+  external int dwMajorVersion;
+  @Uint32()
+  external int dwMinorVersion;
+  @Uint32()
+  external int dwBuildNumber;
+  @Uint32()
+  external int dwPlatformId;
+  @Array(128)
+  external Array<Uint16> _szCSDVersion;
+
+  String get szCSDVersion {
+    final charCodes = <int>[];
+    for (var i = 0; i < 128; i++) {
+      charCodes.add(_szCSDVersion[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szCSDVersion(String value) {
+    final stringToStore = value.padRight(128, '\x00');
+    for (var i = 0; i < 128; i++) {
+      _szCSDVersion[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+}
+
+/// Contains operating system version information. The information includes
+/// major and minor version numbers, a build number, a platform identifier,
+/// and information about product suites and the latest Service Pack
+/// installed on the system. This structure is used with the GetVersionEx
+/// and VerifyVersionInfo functions.
+///
+/// {@category Struct}
+class OSVERSIONINFOEXW extends Struct {
+  @Uint32()
+  external int dwOSVersionInfoSize;
+  @Uint32()
+  external int dwMajorVersion;
+  @Uint32()
+  external int dwMinorVersion;
+  @Uint32()
+  external int dwBuildNumber;
+  @Uint32()
+  external int dwPlatformId;
+  @Array(128)
+  external Array<Uint16> _szCSDVersion;
+
+  String get szCSDVersion {
+    final charCodes = <int>[];
+    for (var i = 0; i < 128; i++) {
+      charCodes.add(_szCSDVersion[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szCSDVersion(String value) {
+    final stringToStore = value.padRight(128, '\x00');
+    for (var i = 0; i < 128; i++) {
+      _szCSDVersion[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Uint16()
+  external int wServicePackMajor;
+  @Uint16()
+  external int wServicePackMinor;
+  @Uint16()
+  external int wSuiteMask;
+  @Uint8()
+  external int wProductType;
+  @Uint8()
+  external int wReserved;
+}
+
+/// The PAINTSTRUCT structure contains information for an application. This
+/// information can be used to paint the client area of a window owned by
+/// that application.
+///
+/// {@category Struct}
+class PAINTSTRUCT extends Struct {
+  @IntPtr()
+  external int hdc;
+  @Int32()
+  external int fErase;
+  external RECT rcPaint;
+  @Int32()
+  external int fRestore;
+  @Int32()
+  external int fIncUpdate;
+  @Array(32)
+  external Array<Uint8> rgbReserved;
+}
+
 /// The PALETTEENTRY structure specifies the color and usage of an entry in
 /// a logical palette. A logical palette is defined by a LOGPALETTE
 /// structure.
@@ -1344,6 +1708,33 @@ class PARAMDESCEX extends Struct {
   @Uint32()
   external int cBytes;
   external VARIANT varDefaultValue;
+}
+
+/// Contains a handle and text description corresponding to a physical
+/// monitor.
+///
+/// {@category Struct}
+@Packed(1)
+class PHYSICAL_MONITOR extends Struct {
+  @IntPtr()
+  external int hPhysicalMonitor;
+  @Array(128)
+  external Array<Uint16> _szPhysicalMonitorDescription;
+
+  String get szPhysicalMonitorDescription {
+    final charCodes = <int>[];
+    for (var i = 0; i < 128; i++) {
+      charCodes.add(_szPhysicalMonitorDescription[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szPhysicalMonitorDescription(String value) {
+    final stringToStore = value.padRight(128, '\x00');
+    for (var i = 0; i < 128; i++) {
+      _szPhysicalMonitorDescription[i] = stringToStore.codeUnitAt(i);
+    }
+  }
 }
 
 /// The POINT structure defines the x- and y-coordinates of a point.
@@ -1713,7 +2104,22 @@ class SYMBOL_INFO extends Struct {
   @Uint32()
   external int MaxNameLen;
   @Array(1)
-  external Array<Uint16> Name;
+  external Array<Uint16> _Name;
+
+  String get Name {
+    final charCodes = <int>[];
+    for (var i = 0; i < 1; i++) {
+      charCodes.add(_Name[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set Name(String value) {
+    final stringToStore = value.padRight(1, '\x00');
+    for (var i = 0; i < 1; i++) {
+      _Name[i] = stringToStore.codeUnitAt(i);
+    }
+  }
 }
 
 /// Contains information about the current state of the system battery.
@@ -2044,6 +2450,101 @@ class WAVEHDR extends Struct {
   external Pointer<WAVEHDR> lpNext;
   @IntPtr()
   external int reserved;
+}
+
+/// The WAVEOUTCAPS structure describes the capabilities of a
+/// waveform-audio output device.
+///
+/// {@category Struct}
+@Packed(1)
+class WAVEOUTCAPS extends Struct {
+  @Uint16()
+  external int wMid;
+  @Uint16()
+  external int wPid;
+  @Uint32()
+  external int vDriverVersion;
+  @Array(32)
+  external Array<Uint16> _szPname;
+
+  String get szPname {
+    final charCodes = <int>[];
+    for (var i = 0; i < 32; i++) {
+      charCodes.add(_szPname[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szPname(String value) {
+    final stringToStore = value.padRight(32, '\x00');
+    for (var i = 0; i < 32; i++) {
+      _szPname[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Uint32()
+  external int dwFormats;
+  @Uint16()
+  external int wChannels;
+  @Uint16()
+  external int wReserved1;
+  @Uint32()
+  external int dwSupport;
+}
+
+/// Contains information about the file that is found by the FindFirstFile,
+/// FindFirstFileEx, or FindNextFile function.
+///
+/// {@category Struct}
+class WIN32_FIND_DATA extends Struct {
+  @Uint32()
+  external int dwFileAttributes;
+  external FILETIME ftCreationTime;
+  external FILETIME ftLastAccessTime;
+  external FILETIME ftLastWriteTime;
+  @Uint32()
+  external int nFileSizeHigh;
+  @Uint32()
+  external int nFileSizeLow;
+  @Uint32()
+  external int dwReserved0;
+  @Uint32()
+  external int dwReserved1;
+  @Array(129)
+  external Array<Uint16> _cFileName;
+
+  String get cFileName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 129; i++) {
+      charCodes.add(_cFileName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set cFileName(String value) {
+    final stringToStore = value.padRight(129, '\x00');
+    for (var i = 0; i < 129; i++) {
+      _cFileName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Array(14)
+  external Array<Uint16> _cAlternateFileName;
+
+  String get cAlternateFileName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 14; i++) {
+      charCodes.add(_cAlternateFileName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set cAlternateFileName(String value) {
+    final stringToStore = value.padRight(14, '\x00');
+    for (var i = 0; i < 14; i++) {
+      _cAlternateFileName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
 }
 
 /// Contains window information.

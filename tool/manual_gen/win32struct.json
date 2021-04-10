@@ -39,6 +39,10 @@
         "namespace": "Windows.Win32.Gdi.BLENDFUNCTION",
         "comment": "The BLENDFUNCTION structure controls blending by specifying the blending functions for source and destination bitmaps."
     },
+    "BLUETOOTH_DEVICE_INFO": {
+        "namespace": "Windows.Win32.Bluetooth.BLUETOOTH_DEVICE_INFO",
+        "comment": "The BLUETOOTH_DEVICE_INFO structure provides information about a Bluetooth device."
+    },
     "BLUETOOTH_DEVICE_SEARCH_PARAMS": {
         "namespace": "Windows.Win32.Bluetooth.BLUETOOTH_DEVICE_SEARCH_PARAMS",
         "comment": "The BLUETOOTH_DEVICE_SEARCH_PARAMS structure specifies search criteria for Bluetooth device searches."
@@ -50,6 +54,10 @@
     "BLUETOOTH_OOB_DATA_INFO": {
         "namespace": "Windows.Win32.Bluetooth.BLUETOOTH_OOB_DATA_INFO",
         "comment": "The BLUETOOTH_OOB_DATA_INFO structure contains data used to authenticate prior to establishing an Out-of-Band device pairing."
+    },
+    "BLUETOOTH_RADIO_INFO": {
+        "namespace": "Windows.Win32.Bluetooth.BLUETOOTH_RADIO_INFO",
+        "comment": "The BLUETOOTH_RADIO_INFO structure provides information about a Bluetooth radio."
     },
     "BSMINFO": {
         "namespace": "Windows.Win32.WindowsAndMessaging.BSMINFO",
@@ -135,6 +143,10 @@
         "namespace": "Windows.Win32.Gdi.DRAWTEXTPARAMS",
         "comment": "The DRAWTEXTPARAMS structure contains extended formatting options for the DrawTextEx function."
     },
+    "ENUMLOGFONTEX": {
+        "namespace": "Windows.Win32.Gdi.ENUMLOGFONTEXW",
+        "comment": "The ENUMLOGFONTEX structure contains information about an enumerated font."
+    },
     "EXCEPINFO": {
         "namespace": "Windows.Win32.Automation.EXCEPINFO",
         "comment": "Describes an exception that occurred during IDispatch::Invoke."
@@ -178,6 +190,10 @@
     "LOGBRUSH": {
         "namespace": "Windows.Win32.Gdi.LOGBRUSH",
         "comment": "The LOGBRUSH structure defines the style, color, and pattern of a physical brush. It is used by the CreateBrushIndirect and ExtCreatePen functions."
+    },
+    "LOGFONT": {
+        "namespace": "Windows.Win32.Shell.LOGFONTW",
+        "comment": "The LOGFONT structure defines the attributes of a font."
     },
     "LOGPALETTE": {
         "namespace": "Windows.Win32.Gdi.LOGPALETTE",
@@ -275,6 +291,10 @@
         "namespace": "Windows.Win32.Gdi.NEWTEXTMETRICW",
         "comment": "The NEWTEXTMETRIC structure contains data that describes a physical font."
     },
+    "NLM_SIMULATED_PROFILE_INFO": {
+        "namespace": "Windows.Win32.NetworkListManager.NLM_SIMULATED_PROFILE_INFO",
+        "comment": "Used to specify values that are used by SetSimulatedProfileInfo to override current internet connection profile values in an RDP Child Session to support the simulation of specific metered internet connection conditions."
+    },
     "NONCLIENTMETRICS": {
         "namespace": "Windows.Win32.WindowsAndMessaging.NONCLIENTMETRICSW",
         "comment": "Contains the scalable metrics associated with the nonclient area of a nonminimized window. This structure is used by the SPI_GETNONCLIENTMETRICS and SPI_SETNONCLIENTMETRICS actions of the SystemParametersInfo function."
@@ -282,6 +302,18 @@
     "OPENFILENAME": {
         "namespace": "Windows.Win32.WindowsAndMessaging.OPENFILENAMEW",
         "comment": "Contains information that the GetOpenFileName and GetSaveFileName functions use to initialize an Open or Save As dialog box. After the user closes the dialog box, the system returns information about the user's selection in this structure."
+    },
+    "OSVERSIONINFO": {
+        "namespace": "Windows.Win32.WindowsProgramming.OSVERSIONINFOW",
+        "comment": "Contains operating system version information. The information includes major and minor version numbers, a build number, a platform identifier, and descriptive text about the operating system. This structure is used with the GetVersionEx function."
+    },
+    "OSVERSIONINFOEXW": {
+        "namespace": "Windows.Win32.WindowsProgramming.OSVERSIONINFOEXW",
+        "comment": "Contains operating system version information. The information includes major and minor version numbers, a build number, a platform identifier, and information about product suites and the latest Service Pack installed on the system. This structure is used with the GetVersionEx and VerifyVersionInfo functions."
+    },
+    "PAINTSTRUCT": {
+        "namespace": "Windows.Win32.Gdi.PAINTSTRUCT",
+        "comment": "The PAINTSTRUCT structure contains information for an application. This information can be used to paint the client area of a window owned by that application."
     },
     "PALETTEENTRY": {
         "namespace": "Windows.Win32.Gdi.PALETTEENTRY",
@@ -294,6 +326,10 @@
     "PARAMDESCEX": {
         "namespace": "Windows.Win32.Automation.PARAMDESCEX",
         "comment": "Contains information about the default value of a parameter."
+    },
+    "PHYSICAL_MONITOR": {
+        "namespace": "Windows.Win32.Monitor.PHYSICAL_MONITOR",
+        "comment": "Contains a handle and text description corresponding to a physical monitor."
     },
     "POINT": {
         "namespace": "Windows.Win32.DisplayDevices.POINT",
@@ -442,6 +478,14 @@
     "WAVEHDR": {
         "namespace": "Windows.Win32.Multimedia.WAVEHDR",
         "comment": "The WAVEHDR structure defines the header used to identify a waveform-audio buffer."
+    },
+    "WAVEOUTCAPS": {
+        "namespace": "Windows.Win32.Multimedia.WAVEOUTCAPSW",
+        "comment": "The WAVEOUTCAPS structure describes the capabilities of a waveform-audio output device."
+    },
+    "WIN32_FIND_DATA": {
+        "namespace": "Windows.Win32.FileSystem.WIN32_FIND_DATAW",
+        "comment": "Contains information about the file that is found by the FindFirstFile, FindFirstFileEx, or FindNextFile function."
     },
     "WINDOWINFO": {
         "namespace": "Windows.Win32.WindowsAndMessaging.WINDOWINFO",
