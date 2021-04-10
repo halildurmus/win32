@@ -66,4 +66,32 @@ void main() {
     expect(nativeType, equals('Uint64'));
     expect(dartType, equals('int'));
   });
+
+  test('Struct PHYSICAL_MONITOR contains an array of chars', () {
+    final procInfo =
+        scope.findTypeDef('Windows.Win32.Monitor.PHYSICAL_MONITOR')!;
+    final szPhysicalMonitorDescription = procInfo.fields[1];
+
+    expect(szPhysicalMonitorDescription.typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_ARRAY));
+    expect(szPhysicalMonitorDescription.typeIdentifier.typeArgs.first.corType,
+        equals(CorElementType.ELEMENT_TYPE_CHAR));
+  });
+
+  test('Small struct array fields have the correct dimensions', () {
+    final procInfo =
+        scope.findTypeDef('Windows.Win32.FileSystem.WIN32_FIND_DATAW')!;
+    final cAlternateFileName = procInfo.fields[9];
+    expect(cAlternateFileName.name, equals('cAlternateFileName'));
+    expect(
+        cAlternateFileName.typeIdentifier.arrayDimensions?.first, equals(14));
+  });
+
+  test('Large struct array fields have the correct dimensions', () {
+    final procInfo =
+        scope.findTypeDef('Windows.Win32.FileSystem.WIN32_FIND_DATAW')!;
+    final cFileName = procInfo.fields[8];
+    expect(cFileName.name, equals('cFileName'));
+    expect(cFileName.typeIdentifier.arrayDimensions?.first, equals(260));
+  });
 }

@@ -228,7 +228,10 @@ TypeTuple parseTypeFromSignature(
       final dimensionUpperBounds = List<int>.filled(dimensionsCount, 0);
       final numSizes = signatureBlob[dataLength++];
       for (var i = 0; i < numSizes; i++) {
-        dimensionUpperBounds[i] = signatureBlob[dataLength++];
+        final uncompressed =
+            corSigUncompressData(signatureBlob.sublist(dataLength));
+        dataLength += uncompressed.dataLength;
+        dimensionUpperBounds[i] = uncompressed.data;
       }
       runtimeType.arrayDimensions = dimensionUpperBounds;
       break;

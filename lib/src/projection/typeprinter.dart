@@ -322,6 +322,29 @@ void main() {
     return buffer.toString();
   }
 
+  static String printArray(
+      String nativeType, String fieldName, int dimensions) {
+    final buffer = StringBuffer();
+    buffer.writeln('  @Array($dimensions)');
+    buffer.writeln('  external Array<$nativeType> _$fieldName;\n');
+    buffer.writeln('  String get $fieldName {');
+    buffer.writeln('    final charCodes = <int>[];');
+    buffer.writeln('    for (var i = 0; i < $dimensions; i++) {');
+    buffer.writeln('      charCodes.add(_$fieldName[i]);');
+    buffer.writeln('    }');
+    buffer.writeln('    return String.fromCharCodes(charCodes);');
+    buffer.writeln('  }\n');
+
+    buffer.writeln('  set $fieldName(String value) {');
+    buffer.writeln(
+        "    final stringToStore = value.padRight($dimensions, '\\x00');");
+    buffer.writeln('    for (var i = 0; i < $dimensions; i++) {');
+    buffer.writeln('      _$fieldName[i] = stringToStore.codeUnitAt(i);');
+    buffer.writeln('    }');
+    buffer.writeln('  }');
+    return buffer.toString();
+  }
+
   static String printStruct(TypeDef typedef, String structName) {
     try {
       final buffer = StringBuffer();
@@ -333,9 +356,21 @@ void main() {
           final dimensions = field.typeIdentifier.arrayDimensions!.first;
           final nativeType = TypeProjector(field.typeIdentifier).nativeType;
 
-          buffer.writeln('  @Array($dimensions)');
-          buffer.writeln('  external Array<$nativeType> ${field.name};');
-        } else {
+          // Handle a string array
+          if (field.typeIdentifier.typeArgs.isNotEmpty &&
+              field.typeIdentifier.typeArgs.first.corType ==
+                  CorElementType.ELEMENT_TYPE_CHAR) {
+            buffer.write(printArray(nativeType, field.name, dimensions));
+          }
+
+          // Handle a non-string array
+          else {
+            buffer.writeln('  @Array($dimensions)');
+            buffer.writeln('  external Array<$nativeType> ${field.name};');
+          }
+        }
+        // Handle a non-array
+        else {
           final nativeType = TypeProjector(field.typeIdentifier).nativeType;
           final dartType = TypeProjector(field.typeIdentifier).dartType;
 

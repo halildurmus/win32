@@ -20,7 +20,8 @@ void printStruct(String typedef) => print(TypePrinter.printStruct(
 // },
 
 void main() {
-  printStruct('Windows.Win32.DisplayDevices.DEVMODEW');
+  // printStruct('Windows.Win32.DisplayDevices.DEVMODEW');
+  printStruct('Windows.Win32.Gdi.PAINTSTRUCT');
   // printStruct('Windows.Win32.SystemServices.STARTUPINFOEXW');
   // printStruct('Windows.Win32.SystemServices.CHAR_INFO');
 }
