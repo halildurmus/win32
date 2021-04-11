@@ -1950,6 +1950,20 @@ void main() {
           .lookupFunction<Int32 Function(), int Function()>('CloseClipboard');
       expect(CloseClipboard, isA<Function>());
     });
+    test('Can instantiate CloseGestureInfoHandle', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final CloseGestureInfoHandle = user32.lookupFunction<
+          Int32 Function(IntPtr hGestureInfo),
+          int Function(int hGestureInfo)>('CloseGestureInfoHandle');
+      expect(CloseGestureInfoHandle, isA<Function>());
+    });
+    test('Can instantiate CloseTouchInputHandle', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final CloseTouchInputHandle = user32.lookupFunction<
+          Int32 Function(IntPtr hTouchInput),
+          int Function(int hTouchInput)>('CloseTouchInputHandle');
+      expect(CloseTouchInputHandle, isA<Function>());
+    });
     test('Can instantiate CloseWindow', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final CloseWindow = user32.lookupFunction<Int32 Function(IntPtr hWnd),
@@ -2726,6 +2740,58 @@ void main() {
               'GetForegroundWindow');
       expect(GetForegroundWindow, isA<Function>());
     });
+    test('Can instantiate GetGestureConfig', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetGestureConfig = user32.lookupFunction<
+          Int32 Function(
+              IntPtr hwnd,
+              Uint32 dwReserved,
+              Uint32 dwFlags,
+              Pointer<Uint32> pcIDs,
+              Pointer<GESTURECONFIG> pGestureConfig,
+              Uint32 cbSize),
+          int Function(
+              int hwnd,
+              int dwReserved,
+              int dwFlags,
+              Pointer<Uint32> pcIDs,
+              Pointer<GESTURECONFIG> pGestureConfig,
+              int cbSize)>('GetGestureConfig');
+      expect(GetGestureConfig, isA<Function>());
+    });
+    test('Can instantiate GetGestureExtraArgs', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetGestureExtraArgs = user32.lookupFunction<
+          Int32 Function(IntPtr hGestureInfo, Uint32 cbExtraArgs,
+              Pointer<Uint8> pExtraArgs),
+          int Function(int hGestureInfo, int cbExtraArgs,
+              Pointer<Uint8> pExtraArgs)>('GetGestureExtraArgs');
+      expect(GetGestureExtraArgs, isA<Function>());
+    });
+    test('Can instantiate GetGestureInfo', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetGestureInfo = user32.lookupFunction<
+          Int32 Function(
+              IntPtr hGestureInfo, Pointer<GESTUREINFO> pGestureInfo),
+          int Function(int hGestureInfo,
+              Pointer<GESTUREINFO> pGestureInfo)>('GetGestureInfo');
+      expect(GetGestureInfo, isA<Function>());
+    });
+    test('Can instantiate GetIconInfo', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetIconInfo = user32.lookupFunction<
+          Int32 Function(IntPtr hIcon, Pointer<ICONINFO> piconinfo),
+          int Function(int hIcon, Pointer<ICONINFO> piconinfo)>('GetIconInfo');
+      expect(GetIconInfo, isA<Function>());
+    });
+    test('Can instantiate GetIconInfoEx', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetIconInfoEx = user32.lookupFunction<
+          Int32 Function(IntPtr hicon, Pointer<ICONINFOEX> piconinfo),
+          int Function(
+              int hicon, Pointer<ICONINFOEX> piconinfo)>('GetIconInfoExW');
+      expect(GetIconInfoEx, isA<Function>());
+    });
     test('Can instantiate GetInputState', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final GetInputState = user32
@@ -2788,6 +2854,15 @@ void main() {
           Int32 Function(Pointer<LASTINPUTINFO> plii),
           int Function(Pointer<LASTINPUTINFO> plii)>('GetLastInputInfo');
       expect(GetLastInputInfo, isA<Function>());
+    });
+    test('Can instantiate GetLayeredWindowAttributes', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetLayeredWindowAttributes = user32.lookupFunction<
+          Int32 Function(IntPtr hwnd, Pointer<Uint32> pcrKey,
+              Pointer<Uint8> pbAlpha, Pointer<Uint32> pdwFlags),
+          int Function(int hwnd, Pointer<Uint32> pcrKey, Pointer<Uint8> pbAlpha,
+              Pointer<Uint32> pdwFlags)>('GetLayeredWindowAttributes');
+      expect(GetLayeredWindowAttributes, isA<Function>());
     });
     test('Can instantiate GetMenu', () {
       final user32 = DynamicLibrary.open('user32.dll');
@@ -3078,6 +3153,15 @@ void main() {
       final GetTopWindow = user32.lookupFunction<IntPtr Function(IntPtr hWnd),
           int Function(int hWnd)>('GetTopWindow');
       expect(GetTopWindow, isA<Function>());
+    });
+    test('Can instantiate GetTouchInputInfo', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final GetTouchInputInfo = user32.lookupFunction<
+          Int32 Function(IntPtr hTouchInput, Uint32 cInputs,
+              Pointer<TOUCHINPUT> pInputs, Int32 cbSize),
+          int Function(int hTouchInput, int cInputs,
+              Pointer<TOUCHINPUT> pInputs, int cbSize)>('GetTouchInputInfo');
+      expect(GetTouchInputInfo, isA<Function>());
     });
     test('Can instantiate GetUpdatedClipboardFormats', () {
       final user32 = DynamicLibrary.open('user32.dll');
@@ -3867,6 +3951,13 @@ void main() {
           int Function(int hwnd, int value)>('RegisterTouchHitTestingWindow');
       expect(RegisterTouchHitTestingWindow, isA<Function>());
     });
+    test('Can instantiate RegisterTouchWindow', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final RegisterTouchWindow = user32.lookupFunction<
+          Int32 Function(IntPtr hwnd, Uint32 ulFlags),
+          int Function(int hwnd, int ulFlags)>('RegisterTouchWindow');
+      expect(RegisterTouchWindow, isA<Function>());
+    });
     test('Can instantiate RegisterWindowMessage', () {
       final user32 = DynamicLibrary.open('user32.dll');
       final RegisterWindowMessage = user32.lookupFunction<
@@ -4171,6 +4262,19 @@ void main() {
           Int32 Function(IntPtr hWnd),
           int Function(int hWnd)>('SetForegroundWindow');
       expect(SetForegroundWindow, isA<Function>());
+    });
+    test('Can instantiate SetGestureConfig', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final SetGestureConfig = user32.lookupFunction<
+          Int32 Function(IntPtr hwnd, Uint32 dwReserved, Uint32 cIDs,
+              Pointer<GESTURECONFIG> pGestureConfig, Uint32 cbSize),
+          int Function(
+              int hwnd,
+              int dwReserved,
+              int cIDs,
+              Pointer<GESTURECONFIG> pGestureConfig,
+              int cbSize)>('SetGestureConfig');
+      expect(SetGestureConfig, isA<Function>());
     });
     test('Can instantiate SetKeyboardState', () {
       final user32 = DynamicLibrary.open('user32.dll');
@@ -4623,6 +4727,13 @@ void main() {
           Int32 Function(IntPtr Handle),
           int Function(int Handle)>('UnregisterPowerSettingNotification');
       expect(UnregisterPowerSettingNotification, isA<Function>());
+    });
+    test('Can instantiate UnregisterTouchWindow', () {
+      final user32 = DynamicLibrary.open('user32.dll');
+      final UnregisterTouchWindow = user32.lookupFunction<
+          Int32 Function(IntPtr hwnd),
+          int Function(int hwnd)>('UnregisterTouchWindow');
+      expect(UnregisterTouchWindow, isA<Function>());
     });
     test('Can instantiate UpdateLayeredWindowIndirect', () {
       final user32 = DynamicLibrary.open('user32.dll');

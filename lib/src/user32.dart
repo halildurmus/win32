@@ -712,6 +712,37 @@ int CloseClipboard() {
   return _CloseClipboard();
 }
 
+/// Closes resources associated with a gesture information handle.
+///
+/// ```c
+/// BOOL CloseGestureInfoHandle(
+///   HGESTUREINFO hGestureInfo
+/// );
+/// ```
+/// {@category user32}
+int CloseGestureInfoHandle(int hGestureInfo) {
+  final _CloseGestureInfoHandle = _user32.lookupFunction<
+      Int32 Function(IntPtr hGestureInfo),
+      int Function(int hGestureInfo)>('CloseGestureInfoHandle');
+  return _CloseGestureInfoHandle(hGestureInfo);
+}
+
+/// Closes a touch input handle, frees process memory associated with it,
+/// and invalidates the handle.
+///
+/// ```c
+/// BOOL CloseTouchInputHandle(
+///   HTOUCHINPUT hTouchInput
+/// );
+/// ```
+/// {@category user32}
+int CloseTouchInputHandle(int hTouchInput) {
+  final _CloseTouchInputHandle = _user32.lookupFunction<
+      Int32 Function(IntPtr hTouchInput),
+      int Function(int hTouchInput)>('CloseTouchInputHandle');
+  return _CloseTouchInputHandle(hTouchInput);
+}
+
 /// Minimizes (but does not destroy) the specified window.
 ///
 /// ```c
@@ -2442,6 +2473,112 @@ int GetForegroundWindow() {
   return _GetForegroundWindow();
 }
 
+/// Retrieves the configuration for which Windows Touch gesture messages
+/// are sent from a window.
+///
+/// ```c
+/// BOOL GetGestureConfig(
+///   HWND           hwnd,
+///   DWORD          dwReserved,
+///   DWORD          dwFlags,
+///   PUINT          pcIDs,
+///   PGESTURECONFIG pGestureConfig,
+///   UINT           cbSize
+/// );
+/// ```
+/// {@category user32}
+int GetGestureConfig(int hwnd, int dwReserved, int dwFlags,
+    Pointer<Uint32> pcIDs, Pointer<GESTURECONFIG> pGestureConfig, int cbSize) {
+  final _GetGestureConfig = _user32.lookupFunction<
+      Int32 Function(
+          IntPtr hwnd,
+          Uint32 dwReserved,
+          Uint32 dwFlags,
+          Pointer<Uint32> pcIDs,
+          Pointer<GESTURECONFIG> pGestureConfig,
+          Uint32 cbSize),
+      int Function(
+          int hwnd,
+          int dwReserved,
+          int dwFlags,
+          Pointer<Uint32> pcIDs,
+          Pointer<GESTURECONFIG> pGestureConfig,
+          int cbSize)>('GetGestureConfig');
+  return _GetGestureConfig(
+      hwnd, dwReserved, dwFlags, pcIDs, pGestureConfig, cbSize);
+}
+
+/// Retrieves additional information about a gesture from its GESTUREINFO
+/// handle.
+///
+/// ```c
+/// BOOL GetGestureExtraArgs(
+///   HGESTUREINFO hGestureInfo,
+///   UINT         cbExtraArgs,
+///   PBYTE        pExtraArgs
+/// );
+/// ```
+/// {@category user32}
+int GetGestureExtraArgs(
+    int hGestureInfo, int cbExtraArgs, Pointer<Uint8> pExtraArgs) {
+  final _GetGestureExtraArgs = _user32.lookupFunction<
+      Int32 Function(
+          IntPtr hGestureInfo, Uint32 cbExtraArgs, Pointer<Uint8> pExtraArgs),
+      int Function(int hGestureInfo, int cbExtraArgs,
+          Pointer<Uint8> pExtraArgs)>('GetGestureExtraArgs');
+  return _GetGestureExtraArgs(hGestureInfo, cbExtraArgs, pExtraArgs);
+}
+
+/// Retrieves a GESTUREINFO structure given a handle to the gesture
+/// information.
+///
+/// ```c
+/// BOOL GetGestureInfo(
+///   HGESTUREINFO hGestureInfo,
+///   PGESTUREINFO pGestureInfo
+/// );
+/// ```
+/// {@category user32}
+int GetGestureInfo(int hGestureInfo, Pointer<GESTUREINFO> pGestureInfo) {
+  final _GetGestureInfo = _user32.lookupFunction<
+      Int32 Function(IntPtr hGestureInfo, Pointer<GESTUREINFO> pGestureInfo),
+      int Function(int hGestureInfo,
+          Pointer<GESTUREINFO> pGestureInfo)>('GetGestureInfo');
+  return _GetGestureInfo(hGestureInfo, pGestureInfo);
+}
+
+/// Retrieves information about the specified icon or cursor.
+///
+/// ```c
+/// BOOL GetIconInfo(
+///   HICON     hIcon,
+///   PICONINFO piconinfo
+/// );
+/// ```
+/// {@category user32}
+int GetIconInfo(int hIcon, Pointer<ICONINFO> piconinfo) {
+  final _GetIconInfo = _user32.lookupFunction<
+      Int32 Function(IntPtr hIcon, Pointer<ICONINFO> piconinfo),
+      int Function(int hIcon, Pointer<ICONINFO> piconinfo)>('GetIconInfo');
+  return _GetIconInfo(hIcon, piconinfo);
+}
+
+/// Retrieves the opacity and transparency color key of a layered window.
+///
+/// ```c
+/// BOOL GetIconInfoExW(
+///   HICON        hicon,
+///   PICONINFOEXW piconinfo
+/// );
+/// ```
+/// {@category user32}
+int GetIconInfoEx(int hicon, Pointer<ICONINFOEX> piconinfo) {
+  final _GetIconInfoEx = _user32.lookupFunction<
+      Int32 Function(IntPtr hicon, Pointer<ICONINFOEX> piconinfo),
+      int Function(int hicon, Pointer<ICONINFOEX> piconinfo)>('GetIconInfoExW');
+  return _GetIconInfoEx(hicon, piconinfo);
+}
+
 /// Determines whether there are mouse-button or keyboard messages in the
 /// calling thread's message queue.
 ///
@@ -2582,6 +2719,27 @@ int GetLastInputInfo(Pointer<LASTINPUTINFO> plii) {
       Int32 Function(Pointer<LASTINPUTINFO> plii),
       int Function(Pointer<LASTINPUTINFO> plii)>('GetLastInputInfo');
   return _GetLastInputInfo(plii);
+}
+
+/// Retrieves the opacity and transparency color key of a layered window.
+///
+/// ```c
+/// BOOL GetLayeredWindowAttributes(
+///   HWND     hwnd,
+///   COLORREF *pcrKey,
+///   BYTE     *pbAlpha,
+///   DWORD    *pdwFlags
+/// );
+/// ```
+/// {@category user32}
+int GetLayeredWindowAttributes(int hwnd, Pointer<Uint32> pcrKey,
+    Pointer<Uint8> pbAlpha, Pointer<Uint32> pdwFlags) {
+  final _GetLayeredWindowAttributes = _user32.lookupFunction<
+      Int32 Function(IntPtr hwnd, Pointer<Uint32> pcrKey,
+          Pointer<Uint8> pbAlpha, Pointer<Uint32> pdwFlags),
+      int Function(int hwnd, Pointer<Uint32> pcrKey, Pointer<Uint8> pbAlpha,
+          Pointer<Uint32> pdwFlags)>('GetLayeredWindowAttributes');
+  return _GetLayeredWindowAttributes(hwnd, pcrKey, pbAlpha, pdwFlags);
 }
 
 /// Retrieves a handle to the menu assigned to the specified window.
@@ -3221,6 +3379,28 @@ int GetTopWindow(int hWnd) {
   final _GetTopWindow = _user32.lookupFunction<IntPtr Function(IntPtr hWnd),
       int Function(int hWnd)>('GetTopWindow');
   return _GetTopWindow(hWnd);
+}
+
+/// Retrieves detailed information about touch inputs associated with a
+/// particular touch input handle.
+///
+/// ```c
+/// BOOL GetTouchInputInfo(
+///   HTOUCHINPUT hTouchInput,
+///   UINT        cInputs,
+///   PTOUCHINPUT pInputs,
+///   int         cbSize
+/// );
+/// ```
+/// {@category user32}
+int GetTouchInputInfo(
+    int hTouchInput, int cInputs, Pointer<TOUCHINPUT> pInputs, int cbSize) {
+  final _GetTouchInputInfo = _user32.lookupFunction<
+      Int32 Function(IntPtr hTouchInput, Uint32 cInputs,
+          Pointer<TOUCHINPUT> pInputs, Int32 cbSize),
+      int Function(int hTouchInput, int cInputs, Pointer<TOUCHINPUT> pInputs,
+          int cbSize)>('GetTouchInputInfo');
+  return _GetTouchInputInfo(hTouchInput, cInputs, pInputs, cbSize);
 }
 
 /// Retrieves the currently supported clipboard formats.
@@ -5104,6 +5284,22 @@ int RegisterTouchHitTestingWindow(int hwnd, int value) {
   return _RegisterTouchHitTestingWindow(hwnd, value);
 }
 
+/// Registers a window as being touch-capable.
+///
+/// ```c
+/// BOOL RegisterTouchWindow(
+///   HWND  hwnd,
+///   ULONG ulFlags
+/// );
+/// ```
+/// {@category user32}
+int RegisterTouchWindow(int hwnd, int ulFlags) {
+  final _RegisterTouchWindow = _user32.lookupFunction<
+      Int32 Function(IntPtr hwnd, Uint32 ulFlags),
+      int Function(int hwnd, int ulFlags)>('RegisterTouchWindow');
+  return _RegisterTouchWindow(hwnd, ulFlags);
+}
+
 /// Defines a new window message that is guaranteed to be unique throughout
 /// the system. The message value can be used when sending or posting
 /// messages.
@@ -5798,6 +5994,33 @@ int SetForegroundWindow(int hWnd) {
       Int32 Function(IntPtr hWnd),
       int Function(int hWnd)>('SetForegroundWindow');
   return _SetForegroundWindow(hWnd);
+}
+
+/// Configures the messages that are sent from a window for Windows Touch
+/// gestures.
+///
+/// ```c
+/// BOOL SetGestureConfig(
+///   HWND           hwnd,
+///   DWORD          dwReserved,
+///   UINT           cIDs,
+///   PGESTURECONFIG pGestureConfig,
+///   UINT           cbSize
+/// );
+/// ```
+/// {@category user32}
+int SetGestureConfig(int hwnd, int dwReserved, int cIDs,
+    Pointer<GESTURECONFIG> pGestureConfig, int cbSize) {
+  final _SetGestureConfig = _user32.lookupFunction<
+      Int32 Function(IntPtr hwnd, Uint32 dwReserved, Uint32 cIDs,
+          Pointer<GESTURECONFIG> pGestureConfig, Uint32 cbSize),
+      int Function(
+          int hwnd,
+          int dwReserved,
+          int cIDs,
+          Pointer<GESTURECONFIG> pGestureConfig,
+          int cbSize)>('SetGestureConfig');
+  return _SetGestureConfig(hwnd, dwReserved, cIDs, pGestureConfig, cbSize);
 }
 
 /// Copies an array of keyboard key states into the calling thread's
@@ -6839,6 +7062,21 @@ int UnregisterPowerSettingNotification(int Handle) {
       Int32 Function(IntPtr Handle),
       int Function(int Handle)>('UnregisterPowerSettingNotification');
   return _UnregisterPowerSettingNotification(Handle);
+}
+
+/// Registers a window as no longer being touch-capable.
+///
+/// ```c
+/// BOOL UnregisterTouchWindow(
+/// HWND hwnd
+/// );
+/// ```
+/// {@category user32}
+int UnregisterTouchWindow(int hwnd) {
+  final _UnregisterTouchWindow = _user32.lookupFunction<
+      Int32 Function(IntPtr hwnd),
+      int Function(int hwnd)>('UnregisterTouchWindow');
+  return _UnregisterTouchWindow(hwnd);
 }
 
 /// Updates the position, size, shape, content, and translucency of a

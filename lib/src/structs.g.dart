@@ -850,6 +850,58 @@ class FUNCDESC extends Struct {
   external int wFuncFlags;
 }
 
+/// Gets and sets the configuration for enabling gesture messages and the
+/// type of this configuration.
+///
+/// {@category Struct}
+class GESTURECONFIG extends Struct {
+  @Uint32()
+  external int dwID;
+  @Uint32()
+  external int dwWant;
+  @Uint32()
+  external int dwBlock;
+}
+
+/// Stores information about a gesture.
+///
+/// {@category Struct}
+class GESTUREINFO extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwID;
+  @IntPtr()
+  external int hwndTarget;
+  external POINTS ptsLocation;
+  @Uint32()
+  external int dwInstanceID;
+  @Uint32()
+  external int dwSequenceID;
+  @Uint64()
+  external int ullArguments;
+  @Uint32()
+  external int cbExtraArgs;
+}
+
+/// When transmitted with WM_GESTURENOTIFY messages, passes information
+/// about a gesture.
+///
+/// {@category Struct}
+class GESTURENOTIFYSTRUCT extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Uint32()
+  external int dwFlags;
+  @IntPtr()
+  external int hwndTarget;
+  external POINTS ptsLocation;
+  @Uint32()
+  external int dwInstanceID;
+}
+
 /// Contains information about a GUI thread.
 ///
 /// {@category Struct}
@@ -871,6 +923,78 @@ class GUITHREADINFO extends Struct {
   @IntPtr()
   external int hwndCaret;
   external RECT rcCaret;
+}
+
+/// Contains information about an icon or a cursor.
+///
+/// {@category Struct}
+class ICONINFO extends Struct {
+  @Int32()
+  external int fIcon;
+  @Uint32()
+  external int xHotspot;
+  @Uint32()
+  external int yHotspot;
+  @IntPtr()
+  external int hbmMask;
+  @IntPtr()
+  external int hbmColor;
+}
+
+/// Contains information about an icon or a cursor. Extends ICONINFO. Used
+/// by GetIconInfoEx.
+///
+/// {@category Struct}
+class ICONINFOEX extends Struct {
+  @Uint32()
+  external int cbSize;
+  @Int32()
+  external int fIcon;
+  @Uint32()
+  external int xHotspot;
+  @Uint32()
+  external int yHotspot;
+  @IntPtr()
+  external int hbmMask;
+  @IntPtr()
+  external int hbmColor;
+  @Uint16()
+  external int wResID;
+  @Array(260)
+  external Array<Uint16> _szModName;
+
+  String get szModName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 260; i++) {
+      charCodes.add(_szModName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szModName(String value) {
+    final stringToStore = value.padRight(260, '\x00');
+    for (var i = 0; i < 260; i++) {
+      _szModName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
+
+  @Array(260)
+  external Array<Uint16> _szResName;
+
+  String get szResName {
+    final charCodes = <int>[];
+    for (var i = 0; i < 260; i++) {
+      charCodes.add(_szResName[i]);
+    }
+    return String.fromCharCodes(charCodes);
+  }
+
+  set szResName(String value) {
+    final stringToStore = value.padRight(260, '\x00');
+    for (var i = 0; i < 260; i++) {
+      _szResName[i] = stringToStore.codeUnitAt(i);
+    }
+  }
 }
 
 /// Contains the IDL attributes of a type.
@@ -1747,6 +1871,16 @@ class POINT extends Struct {
   external int y;
 }
 
+/// The POINTS structure defines the x- and y-coordinates of a point.
+///
+/// {@category Struct}
+class POINTS extends Struct {
+  @Int16()
+  external int x;
+  @Int16()
+  external int y;
+}
+
 /// The POLYTEXT structure describes how the PolyTextOut function should
 /// draw a string of text.
 ///
@@ -2287,6 +2421,32 @@ class TITLEBARINFOEX extends Struct {
 /// {@category Struct}
 class TOKEN_APPCONTAINER_INFORMATION extends Struct {
   external Pointer TokenAppContainer;
+}
+
+/// Encapsulates data for touch input.
+///
+/// {@category Struct}
+class TOUCHINPUT extends Struct {
+  @Int32()
+  external int x;
+  @Int32()
+  external int y;
+  @IntPtr()
+  external int hSource;
+  @Uint32()
+  external int dwID;
+  @Uint32()
+  external int dwFlags;
+  @Uint32()
+  external int dwMask;
+  @Uint32()
+  external int dwTime;
+  @IntPtr()
+  external int dwExtraInfo;
+  @Uint32()
+  external int cxContact;
+  @Uint32()
+  external int cyContact;
 }
 
 /// Contains extended parameters for the TrackPopupMenuEx function.

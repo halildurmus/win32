@@ -381,6 +381,11 @@
         "dllLibrary": "gdi32",
         "comment": "The CloseFigure function closes an open figure in a path."
     },
+    "CloseGestureInfoHandle": {
+        "prototype": "BOOL CloseGestureInfoHandle(\n  HGESTUREINFO hGestureInfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Closes resources associated with a gesture information handle."
+    },
     "CloseHandle": {
         "prototype": "BOOL CloseHandle(\n  HANDLE hObject\n);",
         "dllLibrary": "kernel32",
@@ -391,6 +396,11 @@
         "dllLibrary": "kernel32",
         "comment": "Closes a pseudoconsole from the given handle.",
         "minimumWindowsVersion": "WIN10_RS5"
+    },
+    "CloseTouchInputHandle": {
+        "prototype": "BOOL CloseTouchInputHandle(\n  HTOUCHINPUT hTouchInput\n);",
+        "dllLibrary": "user32",
+        "comment": "Closes a touch input handle, frees process memory associated with it, and invalidates the handle."
     },
     "CloseWindow": {
         "prototype": "BOOL CloseWindow(\n  HWND hWnd\n);",
@@ -1409,10 +1419,35 @@
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the foreground window (the window with which the user is currently working). The system assigns a slightly higher priority to the thread that creates the foreground window than it does to other threads."
     },
+    "GetGestureConfig": {
+        "prototype": "BOOL GetGestureConfig(\n  HWND           hwnd,\n  DWORD          dwReserved,\n  DWORD          dwFlags,\n  PUINT          pcIDs,\n  PGESTURECONFIG pGestureConfig,\n  UINT           cbSize\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the configuration for which Windows Touch gesture messages are sent from a window."
+    },
+    "GetGestureExtraArgs": {
+        "prototype": "BOOL GetGestureExtraArgs(\n  HGESTUREINFO hGestureInfo,\n  UINT         cbExtraArgs,\n  PBYTE        pExtraArgs\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves additional information about a gesture from its GESTUREINFO handle."
+    },
+    "GetGestureInfo": {
+        "prototype": "BOOL GetGestureInfo(\n  HGESTUREINFO hGestureInfo,\n  PGESTUREINFO pGestureInfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves a GESTUREINFO structure given a handle to the gesture information."
+    },
     "GetHandleInformation": {
         "prototype": "BOOL GetHandleInformation(\n  HANDLE  hObject,\n  LPDWORD lpdwFlags\n);",
         "dllLibrary": "kernel32",
         "comment": "Retrieves certain properties of an object handle."
+    },
+    "GetIconInfo": {
+        "prototype": "BOOL GetIconInfo(\n  HICON     hIcon,\n  PICONINFO piconinfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves information about the specified icon or cursor."
+    },
+    "GetIconInfoEx": {
+        "prototype": "BOOL GetIconInfoExW(\n  HICON        hicon,\n  PICONINFOEXW piconinfo\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the opacity and transparency color key of a layered window."
     },
     "GetInputState": {
         "prototype": "BOOL GetInputState();",
@@ -1475,6 +1510,11 @@
         "prototype": "BOOL GetLastInputInfo(\n  PLASTINPUTINFO plii\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves the time of the last input event."
+    },
+    "GetLayeredWindowAttributes": {
+        "prototype": "BOOL GetLayeredWindowAttributes(\n  HWND     hwnd,\n  COLORREF *pcrKey,\n  BYTE     *pbAlpha,\n  DWORD    *pdwFlags\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves the opacity and transparency color key of a layered window."
     },
     "GetLocaleInfoEx": {
         "prototype": "int GetLocaleInfoEx(\n  LPCWSTR lpLocaleName,\n  LCTYPE  LCType,\n  LPWSTR  lpLCData,\n  int     cchData\n);",
@@ -1885,6 +1925,11 @@
         "prototype": "HWND GetTopWindow(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
         "comment": "Examines the Z order of the child windows associated with the specified parent window and retrieves a handle to the child window at the top of the Z order."
+    },
+    "GetTouchInputInfo": {
+        "prototype": "BOOL GetTouchInputInfo(\n  HTOUCHINPUT hTouchInput,\n  UINT        cInputs,\n  PTOUCHINPUT pInputs,\n  int         cbSize\n);",
+        "dllLibrary": "user32",
+        "comment": "Retrieves detailed information about touch inputs associated with a particular touch input handle."
     },
     "GetUpdatedClipboardFormats": {
         "prototype": "BOOL GetUpdatedClipboardFormats(\n  PUINT lpuiFormats,\n  UINT  cFormats,\n  PUINT pcFormatsOut\n);",
@@ -2956,6 +3001,11 @@
         "dllLibrary": "user32",
         "comment": "Registers a window to process the WM_TOUCHHITTESTING notification."
     },
+    "RegisterTouchWindow": {
+        "prototype": "BOOL RegisterTouchWindow(\n  HWND  hwnd,\n  ULONG ulFlags\n);",
+        "dllLibrary": "user32",
+        "comment": "Registers a window as being touch-capable."
+    },
     "RegisterWindowMessage": {
         "prototype": "UINT RegisterWindowMessageW(\n  LPCWSTR lpString\n);",
         "dllLibrary": "user32",
@@ -3410,6 +3460,11 @@
         "prototype": "BOOL SetForegroundWindow(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
         "comment": "Brings the thread that created the specified window into the foreground and activates the window. Keyboard input is directed to the window, and various visual cues are changed for the user. The system assigns a slightly higher priority to the thread that created the foreground window than it does to other threads."
+    },
+    "SetGestureConfig": {
+        "prototype": "BOOL SetGestureConfig(\n  HWND           hwnd,\n  DWORD          dwReserved,\n  UINT           cIDs,\n  PGESTURECONFIG pGestureConfig,\n  UINT           cbSize\n);",
+        "dllLibrary": "user32",
+        "comment": "Configures the messages that are sent from a window for Windows Touch gestures."
     },
     "SetHandleInformation": {
         "prototype": "BOOL SetHandleInformation(\n  HANDLE hObject,\n  DWORD  dwMask,\n  DWORD  dwFlags\n);",
@@ -4030,6 +4085,11 @@
         "prototype": "BOOL UnregisterPowerSettingNotification(\n  HPOWERNOTIFY Handle\n);",
         "dllLibrary": "user32",
         "comment": "Unregisters the power setting notification."
+    },
+    "UnregisterTouchWindow": {
+        "prototype": "BOOL UnregisterTouchWindow(\nHWND hwnd\n);",
+        "dllLibrary": "user32",
+        "comment": "Registers a window as no longer being touch-capable."
     },
     "UpdateLayeredWindowIndirect": {
         "prototype": "BOOL WINAPI UpdateLayeredWindowIndirect(\n  HWND hwnd,\n  const UPDATELAYEREDWINDOWINFO *pULWInfo\n);",

@@ -163,9 +163,29 @@
         "namespace": "Windows.Win32.Automation.FUNCDESC",
         "comment": "Describes a function."
     },
+    "GESTURECONFIG": {
+        "namespace": "Windows.Win32.TouchInput.GESTURECONFIG",
+        "comment": "Gets and sets the configuration for enabling gesture messages and the type of this configuration."
+    },
+    "GESTUREINFO": {
+        "namespace": "Windows.Win32.TouchInput.GESTUREINFO",
+        "comment": "Stores information about a gesture."
+    },
+    "GESTURENOTIFYSTRUCT": {
+        "namespace": "Windows.Win32.TouchInput.GESTURENOTIFYSTRUCT",
+        "comment": "When transmitted with WM_GESTURENOTIFY messages, passes information about a gesture."
+    },
     "GUITHREADINFO": {
         "namespace": "Windows.Win32.WindowsAndMessaging.GUITHREADINFO",
         "comment": "Contains information about a GUI thread."
+    },
+    "ICONINFO": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.ICONINFO",
+        "comment": "Contains information about an icon or a cursor."
+    },
+    "ICONINFOEX": {
+        "namespace": "Windows.Win32.WindowsAndMessaging.ICONINFOEXW",
+        "comment": "Contains information about an icon or a cursor. Extends ICONINFO. Used by GetIconInfoEx."
     },
     "IDLDESC": {
         "namespace": "Windows.Win32.Automation.IDLDESC",
@@ -335,6 +355,10 @@
         "namespace": "Windows.Win32.DisplayDevices.POINT",
         "comment": "The POINT structure defines the x- and y-coordinates of a point."
     },
+    "POINTS": {
+        "namespace": "Windows.Win32.DisplayDevices.POINTS",
+        "comment": "The POINTS structure defines the x- and y-coordinates of a point."
+    },
     "POLYTEXT": {
         "namespace": "Windows.Win32.Gdi.POLYTEXTW",
         "comment": "The POLYTEXT structure describes how the PolyTextOut function should draw a string of text."
@@ -450,6 +474,10 @@
     "TOKEN_APPCONTAINER_INFORMATION": {
         "namespace": "Windows.Win32.Security.TOKEN_APPCONTAINER_INFORMATION",
         "comment": "The TOKEN_APPCONTAINER_INFORMATION structure specifies all the information in a token that is necessary for an app container."
+    },
+    "TOUCHINPUT": {
+        "namespace": "Windows.Win32.TouchInput.TOUCHINPUT",
+        "comment": "Encapsulates data for touch input."
     },
     "TPMPARAMS": {
         "namespace": "Windows.Win32.WindowsAndMessaging.TPMPARAMS",
