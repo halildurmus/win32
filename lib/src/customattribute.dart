@@ -10,7 +10,7 @@ import 'package:win32/win32.dart';
 
 import 'base.dart';
 import 'com/IMetaDataImport2.dart';
-import 'win32.dart';
+import 'type_aliases.dart';
 
 /// A custom (named) attribute.
 class CustomAttribute extends TokenObject {

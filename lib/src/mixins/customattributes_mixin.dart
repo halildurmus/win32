@@ -6,7 +6,7 @@ import 'package:win32/win32.dart';
 
 import '../base.dart';
 import '../customattribute.dart';
-import '../win32.dart';
+import '../type_aliases.dart';
 
 /// Represents an object that has custom (named) attributes associated with it.
 mixin CustomAttributesMixin on TokenObject {

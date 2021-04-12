@@ -8,9 +8,9 @@ import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
+import 'type_aliases.dart';
 import 'typedef.dart';
 import 'utils.dart';
-import 'win32.dart';
 
 enum Variance { nonvariant, covariant, contravariant }
 

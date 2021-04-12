@@ -7,8 +7,9 @@ import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'mixins/customattributes_mixin.dart';
+import 'type_aliases.dart';
 import 'typedef.dart';
-import 'win32.dart';
+import 'utils.dart';
 
 class Event extends TokenObject with CustomAttributesMixin {
   final String eventName;

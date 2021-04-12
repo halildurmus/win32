@@ -17,10 +17,10 @@ import 'mixins/genericparams_mixin.dart';
 import 'module.dart';
 import 'parameter.dart';
 import 'pinvokemap.dart';
+import 'type_aliases.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
-import 'win32.dart';
 
 enum MemberAccess {
   privateScope,

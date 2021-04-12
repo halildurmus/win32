@@ -1,12 +1,13 @@
 import 'dart:ffi';
+
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
+import 'type_aliases.dart';
 import 'utils.dart';
-import 'win32.dart';
 
 enum StringMarshalConvention { notSpecified, ansi, unicode, auto }
 

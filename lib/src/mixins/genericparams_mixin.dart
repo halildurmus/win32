@@ -5,7 +5,7 @@ import 'package:win32/win32.dart';
 
 import '../base.dart';
 import '../genericparam.dart';
-import '../win32.dart';
+import '../type_aliases.dart';
 
 mixin GenericParamsMixin on TokenObject {
   List<GenericParam> get genericParams {

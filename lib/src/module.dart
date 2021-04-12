@@ -10,7 +10,8 @@ import 'package:win32/win32.dart';
 import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'mixins/customattributes_mixin.dart';
-import 'win32.dart';
+import 'type_aliases.dart';
+import 'utils.dart';
 
 class Module extends TokenObject with CustomAttributesMixin {
   final String name;

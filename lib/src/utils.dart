@@ -13,9 +13,12 @@ import 'package:win32/win32.dart';
 
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
+import 'type_aliases.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
-import 'win32.dart';
+
+// Helper for allocating memory for Unicode strings.
+Pointer<Utf16> stralloc(int wChars) => calloc<Uint16>(wChars).cast();
 
 class WinmdException implements Exception {
   final String message;

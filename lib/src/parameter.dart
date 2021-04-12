@@ -13,8 +13,9 @@ import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
+import 'type_aliases.dart';
 import 'typeidentifier.dart';
-import 'win32.dart';
+import 'utils.dart';
 
 /// A parameter or return type.
 class Parameter extends TokenObject with CustomAttributesMixin {

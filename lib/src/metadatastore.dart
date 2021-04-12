@@ -13,8 +13,8 @@ import 'package:win32/win32.dart';
 import 'com/IMetaDataDispenser.dart';
 import 'com/IMetaDataImport2.dart';
 import 'scope.dart';
+import 'type_aliases.dart';
 import 'typedef.dart';
-import 'win32.dart';
 
 /// Caches a reader for each file scope.
 ///

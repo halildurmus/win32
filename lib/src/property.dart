@@ -12,10 +12,10 @@ import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'mixins/customattributes_mixin.dart';
+import 'type_aliases.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
-import 'win32.dart';
 
 class Property extends TokenObject with CustomAttributesMixin {
   final int _parentToken;

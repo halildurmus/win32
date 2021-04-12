@@ -10,8 +10,9 @@ import 'package:win32/win32.dart';
 import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'module.dart';
+import 'type_aliases.dart';
 import 'typedef.dart';
-import 'win32.dart';
+import 'utils.dart';
 
 /// A metadata scope, which typically matches an on-disk file.
 ///

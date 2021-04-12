@@ -1,10 +1,5 @@
 import 'dart:ffi';
 
-import 'package:ffi/ffi.dart';
-
-// Helper for allocating memory for Unicode strings.
-Pointer<Utf16> stralloc(int wChars) => calloc<Uint16>(wChars).cast();
-
 // Type aliases for Win32 integer types that are frequently used.
 typedef ULONG = Uint32;
 typedef DWORD = Uint32;

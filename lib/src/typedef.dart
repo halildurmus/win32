@@ -19,9 +19,9 @@ import 'mixins/customattributes_mixin.dart';
 import 'mixins/genericparams_mixin.dart';
 import 'property.dart';
 import 'systemtokens.dart';
+import 'type_aliases.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
-import 'win32.dart';
 
 enum TypeVisibility {
   notPublic,
