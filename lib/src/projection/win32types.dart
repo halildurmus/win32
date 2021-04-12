@@ -50,133 +50,19 @@ String convertToDartType(String ffiType) {
 const win32TypeMap = <String, String>{
   // Base C types
   'void': 'Void',
-  'int': 'Int32',
-  'long': 'Int32',
-  'short': 'Int16',
-  'char': 'Int8',
-
-  // Windows numerics
-
-  // A signed integer type for pointer precision. Use when casting a pointer to
-  // an integer to perform pointer arithmetic.
-  'INT_PTR': 'IntPtr',
-
-  // An unsigned INT_PTR.
-  'UINT_PTR': 'IntPtr',
-
-  // A signed long type for pointer precision. Use when casting a pointer to a
-  // long to perform pointer arithmetic.
-  'LONG_PTR': 'IntPtr',
-
-  // An unsigned long type for pointer precision. Use when casting a pointer to
-  // a long type to perform pointer arithmetic. (Also commonly used for general
-  // 32-bit parameters that have been extended to 64 bits in 64-bit Windows.)
-  // Declared as `ULONG_PTR`.
-  'DWORD_PTR': 'IntPtr',
-
-  // An unsigned LONG_PTR.
-  'ULONG_PTR': 'IntPtr',
-
   // A message parameter. Declared as `UINT_PTR`.
   'WPARAM': 'IntPtr',
 
-  // A message parameter. Declared as `LONG_PTR`.
+// A message parameter. Declared as `LONG_PTR`.
   'LPARAM': 'IntPtr',
 
-  // The maximum number of bytes to which a pointer can point. Use for a count
-  // that must span the full range of a pointer. Declared as `ULONG_PTR`.
-  'SIZE_T': 'IntPtr',
-
   // Signed result of message processing. Declared as `LONG_PTR`.
+
   'LRESULT': 'IntPtr',
 
   'FARPROC': 'IntPtr',
-
-  // A 64-bit signed integer. The range is -9223372036854775808 through
-  // 9223372036854775807 decimal.
-  'LONGLONG': 'Int64',
-
-  // A 64-bit signed integer. The range is -9223372036854775808 through
-  // 9223372036854775807 decimal. Declared as `signed __int64`.
-  'INT64': 'Int64',
-
   'LARGE_INTEGER': 'Int64',
-  'ULONGLONG': 'Uint64', 'UINT64': 'Uint64', 'ULARGE_INTEGER': 'Uint64',
-
-  // A 64-bit unsigned integer. The range is 0 through 18446744073709551615
-  // decimal. Declared as `unsigned __int64`.
-  'DWORDLONG': 'Uint64',
-
-  // A 64-bit unsigned integer. Declared as `unsigned __int64`.
-  'DWORD64': 'Uint64',
-
-  // A 32-bit signed integer. The range is -2147483648 through 2147483647
-  // decimal. Declared as `long`.
-  'LONG': 'Int32',
-
-  // A 32-bit signed integer. The range is -2147483648 through 2147483647
-  // decimal. Declared as `long`.
-  'INT': 'Int32',
-
-  'INT32': 'Int32', 'LSTATUS': 'Int32',
-
-  // A 32-bit unsigned integer. Declared as `unsigned int`.
-  'DWORD32': 'Uint32',
-
-  // An unsigned INT. The range is 0 through 4294967295 decimal. Declared as
-  // `unsigned int`.
-  'UINT': 'Uint32',
-
-  // An unsigned INT32. The range is 0 through 4294967295 decimal. Declared as
-  // `unsigned int`.
-  'UINT32': 'Uint32',
-
-  // A 32-bit unsigned integer. The range is 0 through 4294967295 decimal.
-  // Declared as `unsigned long`.
-  'DWORD': 'Uint32',
-
-  // An unsigned LONG. The range is 0 through 4294967295 decimal. Declared as
-  // `unsigned long`.
-  'ULONG': 'Uint32',
-
-  // A 16-bit integer. The range is -32768 through 32767 decimal. Declared as
-  // `short`.
-  'SHORT': 'Int16',
-
-  // A 16-bit signed integer. Declared as `signed short`.
-  'INT16': 'Int16',
-
-  // A 16-bit unsigned integer. The range is 0 through 65535 decimal. Declared
-  // as `unsigned short`.
-  'WORD': 'Uint16',
-
-  // A 16-bit Unicode character. Declared as `wchar_t`.
-  'WCHAR': 'Uint16',
-
-  // An unsigned INT16. Declared as `unsigned short`.
-  'UINT16': 'Uint16',
-
-  // An atom. Declared as `WORD`.
-  'ATOM': 'Uint16',
-
-  // An unsigned SHORT. The range is 0 through 65535 decimal. Declared as
-  // `unsigned short`.
-  'USHORT': 'Uint16',
-
-  // A Boolean variable (should be TRUE or FALSE). Defined as `BYTE`.
-  'BOOLEAN': 'Uint8',
-
-  // A byte (8 bits). Type defined as as `unsigned char`.
-  'BYTE': 'Uint8',
-
-  // An 8-bit Windows (ANSI) character. Declared as `char`.
-  'CHAR': 'Int8',
-
-  // An unsigned CHAR. Declared as `unsigned char`.
-  'UCHAR': 'Uint8',
-
-  // A Boolean variable (should be TRUE or FALSE). Defined as `int`.
-  'BOOL': 'Int32', '_BOOL': 'Int32',
+  'ULARGE_INTEGER': 'Uint64',
 
   // A floating-point variable. Defined as `float`.
   'FLOAT': 'Float',
@@ -184,37 +70,6 @@ const win32TypeMap = <String, String>{
   'DOUBLE': 'Double', 'double': 'Double',
   'VOID': 'Void',
 
-  // The return codes used by COM interfaces. To test an HRESULT value, use the
-  // FAILED and SUCCEEDED macros. Declared as `LONG`.
-  'HRESULT': 'Int32',
-
-  'MMRESULT': 'Uint32',
-  'NTSTATUS': 'Int32',
-
-  // Subtype of a VARIANT. Declared as `unsigned short`.
-  'VARTYPE': 'Uint16',
-
-  // A language identifier. Declared as `WORD`.
-  'LANGID': 'Uint16',
-
-  // A locale identifier. Declared as `DWORD`.
-  'LCID': 'Uint32',
-
-  // A locale information. Declared as `DWORD`.
-  'LCTYPE': 'Uint32',
-
-  // A language group identifier. Declared as `DWORD`.
-  'LGRPID': 'Uint32',
-
-  'SHSTDAPI': 'Int32', 'SHFOLDERAPI': 'Int32',
-
-  // The red, green, blue (RGB) color value (32 bits). Defined as `DWORD`.
-  'COLORREF': 'Int32',
-
-  'MCIDEVICEID': 'Uint32', 'MCIERROR': 'Uint32',
-  'REGSAM': 'Uint32',
-  // Enums generated by win32metadata
-  'ProcessHeapHandle': 'IntPtr',
   'CONSOLE_READCONSOLE_CONTROL': 'Void',
 
   // Callbacks
