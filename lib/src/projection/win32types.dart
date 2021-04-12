@@ -244,11 +244,6 @@ const win32TypeMap = <String, String>{
   'LPVOID': 'Pointer', 'PVOID': 'Pointer', 'LPCVOID': 'Pointer',
   'LPUNKNOWN': 'Pointer<IntPtr>',
 
-  // Pointers to ints
-  'LPDWORD': 'Pointer<Uint32>', 'LPBYTE': 'Pointer<Uint8>',
-  'LPBOOL': 'Pointer<Uint32>', 'LPUINT': 'Pointer<Uint32>',
-  'LPWORD': 'Pointer<Uint16>',
-
   // Strings
   'LPWSTR': 'Pointer<Utf16>', 'LPCWSTR': 'Pointer<Utf16>',
   'LPCTSTR': 'Pointer<Utf16>',
@@ -270,59 +265,10 @@ const win32TypeMap = <String, String>{
   'BSTR': 'Pointer<Utf16>',
 
   // Pointers not prefixed with LP*
-  'PBOOL': 'Pointer<Int32>',
-  'PBOOLEAN': 'Pointer<Uint8>',
-  'PBYTE': 'Pointer<Uint8>',
-  'PCHAR': 'Pointer<Int8>',
-  'PDWORD': 'Pointer<Uint32>',
-  'PDWORDLONG': 'Pointer<Uint64>',
-  'PDWORD_PTR': 'Pointer<IntPtr>',
-  'PDWORD32': 'Pointer<Uint32>',
-  'PDWORD64': 'Pointer<Uint64>',
-  'PFLOAT': 'Pointer<Float>',
-  'PHALF_PTR': 'Pointer<IntPtr>',
-  'PHANDLE': 'Pointer<IntPtr>',
-  'PHKEY': 'Pointer<IntPtr>',
-  'PINT': 'Pointer<Int32>',
-  'PINT_PTR': 'Pointer<IntPtr>',
-  'PINT8': 'Pointer<Int8>',
-  'PINT16': 'Pointer<Int16>',
-  'PINT32': 'Pointer<Int32>',
-  'PINT64': 'Pointer<Int64>',
-  'PLCID': 'Pointer<Uint32>',
-  'PLONG': 'Pointer<Int32>',
-  'PLONGLONG': 'Pointer<Int64>',
-  'PSHORT': 'Pointer<Int64>',
-  'PUINT': 'Pointer<Uint32>',
-  'PULONGLONG': 'Pointer<Uint64>',
-  'PLARGE_INTEGER': 'Pointer<Int64>',
+
   'PSIZE_T': 'Pointer<IntPtr>',
-  'PBLUETOOTH_OOB_DATA_INFO': 'Pointer<BLUETOOTH_OOB_DATA_INFO>',
-  'PBLUETOOTH_RADIO_INFO': 'Pointer<BLUETOOTH_RADIO_INFO>',
-  'PCREDENTIALW': 'Pointer<CREDENTIAL>',
-  'PCOORD': 'Pointer<COORD>', 'PWINDOWINFO': 'Pointer<WINDOWINFO>',
-  'PCONSOLE_CURSOR_INFO': 'Pointer<CONSOLE_CURSOR_INFO>',
-  'PCONSOLE_SELECTION_INFO': 'Pointer<CONSOLE_SELECTION_INFO>',
-  'PCONSOLE_SCREEN_BUFFER_INFO': 'Pointer<CONSOLE_SCREEN_BUFFER_INFO>',
-  'PCACTCTXW': 'Pointer<ACTCTX>',
-  'PLASTINPUTINFO': 'Pointer<LASTINPUTINFO>',
-  'PVALENTW': 'Pointer<VALENT>',
+
   'PSID': 'Pointer',
-
-  // Pointers to enums
-  'LPMC_COLOR_TEMPERATURE': 'Pointer<Int32>',
-  'LPMC_DISPLAY_TECHNOLOGY_TYPE': 'Pointer<Int32>',
-
-  // Pointers to Unicode structs
-  'LPFINDREPLACEW': 'Pointer<FINDREPLACE>',
-  'LPOPENFILENAMEW': 'Pointer<OPENFILENAME>',
-  'LPLOGFONTW': 'Pointer<LOGFONT>',
-  'LPTEXTMETRICW': 'Pointer<TEXTMETRIC>',
-  'LPSHELLEXECUTEINFOW': 'Pointer<SHELLEXECUTEINFO>',
-  'LPSTARTUPINFOW': 'Pointer<STARTUPINFO>',
-  'LPOSVERSIONINFOW': 'Pointer<OSVERSIONINFO>',
-  'LPCDLGTEMPLATEW': 'Pointer<DLGTEMPLATE>',
-  'LPWIN32_FIND_DATAW': 'Pointer<WIN32_FIND_DATA>',
 
   'mdTypeDef': 'Uint32',
   'IMetaDataDispenserEx': 'IntPtr',
