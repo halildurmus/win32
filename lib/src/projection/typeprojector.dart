@@ -68,43 +68,24 @@ class TypeProjector {
     // Check if it's Pointer<T>, in which case we have work
     final typeArgs = typeIdentifier.typeArgs;
     if (typeArgs.isNotEmpty) {
-      if (typeArgs.first.type != null &&
-          typeArgs.first.type!.typeName.startsWith('Windows.Win32') &&
-          typeArgs.first.corType != CorElementType.ELEMENT_TYPE_CLASS) {
-        final win32Type = typeArgs.first.type?.typeName.split('.').last ?? '';
-        final ffiNativeType = convertToFFIType(win32Type);
-        // If it's a Unicode Win32 type, strip off the ending 'W'.
-        if (ffiNativeType.endsWith('W')) {
-          return 'Pointer<${ffiNativeType.substring(0, ffiNativeType.length - 1)}>';
-        } else {
-          return 'Pointer<$ffiNativeType>';
-        }
-      } else {
-        if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_VOID) {
-          // Pointer<Void> in Dart is unnecessarily restrictive, versus the
-          // Win32 meaning, which is more like "undefined type". We can
-          // model that with a generic Pointer in Dart.
-          return 'Pointer';
-        } else if (typeArgs.first.type != null &&
-            typeArgs.first.type!.interfaces.isNotEmpty &&
-            typeArgs.first.type!.interfaces.first.typeName ==
-                'Windows.Win32.Com.IUnknown') {
-          // COM type
-          return 'Pointer<Pointer>';
-        } else {
-          // If it's a double- (or triple-) dereferenced pointer, then
-          // create a new typeIdentifier, based on the first typeArgs entry
-          // and with the remainder as its typeArgs. Then recursively call
-          // the function.
-          final newType = typeArgs.first.clone();
-          if (typeArgs.length > 1) {
-            newType.typeArgs.addAll(typeArgs.skip(1));
-          }
-          return 'Pointer<${TypeProjector(newType).nativeType}>';
-        }
+      // Pointer<Void> in Dart is unnecessarily restrictive, versus the
+      // Win32 meaning, which is more like "undefined type". We can
+      // model that with a generic Pointer in Dart.
+
+      if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_VOID) {
+        return 'Pointer';
       }
+
+      final T = TypeProjector(typeArgs.first).nativeType;
+      // If it's a Unicode Win32 type, strip off the ending 'W'.
+      if (T.endsWith('W')) {
+        return 'Pointer<${T.substring(0, T.length - 1)}>';
+      } else {
+        return 'Pointer<$T>';
+      }
+    } else {
+      return 'Pointer';
     }
-    return 'Pointer';
   }
 
   String get dartType => convertToDartType(nativeType);

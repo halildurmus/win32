@@ -209,9 +209,54 @@ void main() {
     final api = typedef.findMethod('UnregisterHotKey')!;
     final param = api.parameters.first;
 
+    expect(param.name, endsWith('hWnd'));
     expect(param.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
     expect(param.typeIdentifier.name, endsWith('HWND'));
+    expect(param.typeIdentifier.typeArgs, isEmpty);
+  });
+
+  test('HANDLE-style parameters have the correct projection', () {
+    final typedef =
+        scope.findTypeDef('Windows.Win32.KeyboardAndMouseInput.Apis')!;
+    final api = typedef.findMethod('UnregisterHotKey')!;
+    final param = api.parameters.first;
+    expect(TypeProjector(param.typeIdentifier).nativeType, equals('IntPtr'));
+  });
+
+  test('LPHANDLE-style parameters have the correct type', () {
+    final typedef =
+        scope.findTypeDef('Windows.Win32.WindowsAndMessaging.Apis')!;
+    final api = typedef.findMethod('CascadeWindows')!;
+    final param = api.parameters.last;
+
+    expect(param.name, endsWith('lpKids'));
+    expect(
+        param.typeIdentifier.corType, equals(CorElementType.ELEMENT_TYPE_PTR));
+    expect(param.typeIdentifier.name, isEmpty);
+    expect(param.typeIdentifier.typeArgs.length, equals(1));
+
+    final arg = param.typeIdentifier.typeArgs.first;
+    expect(arg.corType, equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+    expect(arg.name, endsWith('HWND'));
+    expect(arg.typeArgs, isEmpty);
+  });
+
+  test('LPHANDLE-style parameters have the correct projection', () {
+    final typedef =
+        scope.findTypeDef('Windows.Win32.WindowsAndMessaging.Apis')!;
+    final api = typedef.findMethod('CascadeWindows')!;
+    final param = api.parameters.last;
+    expect(TypeProjector(param.typeIdentifier).nativeType,
+        equals('Pointer<IntPtr>'));
+  });
+
+  test('LPVOID parameters are projected to Pointer, not Pointer<Void>', () {
+    final typedef = scope.findTypeDef('Windows.Win32.Security.Apis')!;
+    final api = typedef.findMethod('CredFree')!;
+    final param = api.parameters.first;
+    expect(param.name, equals('Buffer'));
+    expect(TypeProjector(param.typeIdentifier).nativeType, equals('Pointer'));
   });
 
   test('Character parameters have the correct type', () {

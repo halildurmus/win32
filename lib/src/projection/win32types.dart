@@ -184,113 +184,6 @@ const win32TypeMap = <String, String>{
   'DOUBLE': 'Double', 'double': 'Double',
   'VOID': 'Void',
 
-  // A handle to an object. Declared as `PVOID`.
-  'HANDLE': 'IntPtr',
-
-  // A handle to an accelerator table. Declared as `HANDLE`.
-  'HACCEL': 'IntPtr',
-
-  // A handle to a bitmap. Declared as `HANDLE`.
-  'HBITMAP': 'IntPtr',
-
-  // A handle to a brush. Declared as `HANDLE`.
-  'HBRUSH': 'IntPtr',
-
-  // A handle to a color space. Declared as `HANDLE`.
-  'HCOLORSPACE': 'IntPtr',
-
-  // A handle to a cursor. Declared as `HANDLE`.
-  'HCURSOR': 'IntPtr',
-
-  // A handle to a device context (DC). Declared as `HANDLE`.
-  'HDC': 'IntPtr',
-
-  // A handle to a desktop. Declared as `HANDLE`.
-  'HDESK': 'IntPtr',
-
-  // A handle to an enhanced metafile. Declared as `HANDLE`.
-  'HENHMETAFILE': 'IntPtr',
-
-  // A handle to a file opened by OpenFile, not CreateFile. Declared as `HANDLE`.
-  'HFILE': 'IntPtr',
-
-  // A handle to a font. Declared as `HANDLE`.
-  'HFONT': 'IntPtr',
-
-  // A handle to a GDI object. Declared as `HANDLE`.
-  'HGDIOBJ': 'IntPtr',
-
-  // A handle to a global memory block. Declared as `HANDLE`.
-  'HGLOBAL': 'IntPtr',
-
-  // A handle to an icon. Declared as `HANDLE`.
-  'HICON': 'IntPtr',
-
-  // A handle to an instance. This is the base address of the module in memory.
-  // HMODULE and HINSTANCE are the same today, but represented different things
-  // in 16-bit Windows. Declared as `HANDLE`.
-  'HINSTANCE': 'IntPtr',
-
-  // A handle to a registry key. Declared as `HANDLE`.
-  'HKEY': 'IntPtr',
-
-  // A handle to a keyboard layout. Declared as `HANDLE`.
-  'HKL': 'IntPtr',
-
-  // A handle to a menu. Declared as `HANDLE`.
-  'HMENU': 'IntPtr',
-
-  // A handle to a metafile. Declared as `HANDLE`.
-  'HMETAFILE': 'IntPtr',
-
-  // A handle to a MIDI device. Declared as `HANDLE`.
-  'HMIDI': 'IntPtr',
-
-  // A handle to a MIDI input device. Declared as `HANDLE`.
-  'HMIDIIN': 'IntPtr',
-
-  // A handle to a MIDI output device. Declared as `HANDLE`.
-  'HMIDIOUT': 'IntPtr',
-
-  // A handle to a MIDI stream. Declared as `HANDLE`.
-  'HMIDISTRM': 'IntPtr',
-
-  // A handle to a module. The is the base address of the module in memory.
-  // Declared as `HANDLE`.
-  'HMODULE': 'IntPtr',
-
-  // A handle to a display monitor. Declared as `HANDLE`.
-  'HMONITOR': 'IntPtr',
-
-  // A handle to a palette. Declared as `HANDLE`.
-  'HPALETTE': 'IntPtr',
-
-  // A handle to a pen. Declared as `HANDLE`.
-  'HPEN': 'IntPtr',
-
-  // A handle to a region. Declared as `HANDLE`.
-  'HRGN': 'IntPtr',
-
-  // A handle to a resource. Declared as `HANDLE`.
-  'HRSRC': 'IntPtr',
-
-  // A handle to a window. Declared as `HANDLE`.
-  'HWND': 'IntPtr',
-
-  'HBLUETOOTH_DEVICE_FIND': 'IntPtr',
-  'HBLUETOOTH_RADIO_FIND': 'IntPtr',
-  'HBLUETOOTH_AUTHENTICATION_REGISTRATION': 'IntPtr',
-
-  // A handle to a pseudoconsole.
-  'HPCON': 'IntPtr',
-
-  'HWAVEOUT': 'IntPtr',
-
-  // A handle to a Windows Runtime string.
-  'HSTRING': 'IntPtr',
-
-  'HPOWERNOTIFY': 'IntPtr',
-
   // The return codes used by COM interfaces. To test an HRESULT value, use the
   // FAILED and SUCCEEDED macros. Declared as `LONG`.
   'HRESULT': 'Int32',
@@ -338,6 +231,7 @@ const win32TypeMap = <String, String>{
   'ENUMRESTYPEPROCW': 'Pointer<NativeFunction<EnumResTypeProc>>',
   'MONITORENUMPROC': 'Pointer<NativeFunction<MonitorEnumProc>>',
   'GRAYSTRINGPROC': 'Pointer<NativeFunction<OutputProc>>',
+  'SENDASYNCPROC': 'Pointer<NativeFunction<SendAsyncProc>>',
   'PHANDLER_ROUTINE': 'Pointer<NativeFunction<HandlerProc>>',
   'TIMERPROC': 'Pointer<NativeFunction<TimerProc>>',
   'PFN_AUTHENTICATION_CALLBACK_EX':
