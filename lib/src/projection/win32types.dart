@@ -310,16 +310,7 @@ const win32TypeMap = <String, String>{
 
   // Special cases
   'RPC_AUTH_IDENTITY_HANDLE': 'Pointer',
-  'REFGUID': 'Pointer<GUID>',
-  'LPCRECT': 'Pointer<RECT>',
-  'LPCGUID': 'Pointer<GUID>',
-  'LPCMENUINFO': 'Pointer<MENUINFO>',
-  'LPCMENUITEMINFOW': 'Pointer<MENUITEMINFO>',
-  'LPCSCROLLINFO': 'Pointer<SCROLLINFO>',
-  'LPCWAVEFORMATEX': 'Pointer<WAVEFORMATEX>',
-  'LPCLSID': 'Pointer<GUID>', 'REFCLSID': 'Pointer<GUID>',
-  'REFIID': 'Pointer<GUID>', 'LPIID': 'Pointer<GUID>',
-  'REFKNOWNFOLDERID': 'Pointer<GUID>',
+
   'OLECHAR': 'Utf16',
   'VARIANTARG': 'Void', 'va_list': 'Void',
   'HPCON*': 'Pointer<IntPtr>',
