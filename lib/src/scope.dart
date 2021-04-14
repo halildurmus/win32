@@ -10,6 +10,7 @@ import 'package:win32/win32.dart';
 import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'module.dart';
+import 'pekind.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 import 'utils.dart';
@@ -147,6 +148,8 @@ class Scope {
     }
     return _enums;
   }
+
+  PEKind get executableKind => PEKind(reader);
 
   @override
   String toString() => 'Scope: $name';

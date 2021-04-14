@@ -369,6 +369,28 @@ class CorParamAttr {
   static const pdUnused = 0xcfe0;
 }
 
+/// Contains values that describe a portable executable (PE) file.
+class CorPEKind {
+  /// Indicates that this is not a PE file.
+  static const peNot = 0x00000000;
+
+  /// Indicates that this PE file contains only managed code.
+  static const peILonly = 0x00000001;
+
+  /// Indicates that this PE file makes Win32 calls.
+  static const pe32BitRequired = 0x00000002;
+
+  /// Indicates that this PE file runs on a 64-bit platform.
+  static const pe32Plus = 0x00000004;
+
+  /// Indicates that this PE file is native code.
+  static const pe32Unmanaged = 0x00000008;
+
+  /// Indicates that this PE file is platform-neutral and prefers to be loaded
+  /// in a 32-bit environment.
+  static const pe32BitPreferred = 0x00000010;
+}
+
 /// Specifies options for a PInvoke call.
 class CorPinvokeMap {
   /// Use each member name as specified.
