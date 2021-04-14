@@ -14,6 +14,12 @@ void main() {
     expect(mdScope.typeDefs.length, greaterThan(50));
   });
 
+  test('Scope version string returns expected result', () {
+    final scope =
+        MetadataStore.getScopeForType('Windows.Globalization.Calendar');
+    expect(scope.versionNumber, startsWith('WindowsRuntime'));
+  });
+
   test('Scope modules contain expected user strings', () {
     final winRTScope =
         MetadataStore.getScopeForType('Windows.Foundation.IPropertyValue');

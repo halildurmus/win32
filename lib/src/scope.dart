@@ -151,6 +151,23 @@ class Scope {
 
   PEKind get executableKind => PEKind(reader);
 
+  String get versionNumber {
+    final pwzBuf = stralloc(MAX_STRING_SIZE);
+    final pccBufSize = calloc<DWORD>();
+    try {
+      final hr = reader.GetVersionString(pwzBuf, MAX_STRING_SIZE, pccBufSize);
+
+      if (SUCCEEDED(hr)) {
+        return pwzBuf.toDartString();
+      } else {
+        return '';
+      }
+    } finally {
+      free(pwzBuf);
+      free(pccBufSize);
+    }
+  }
+
   @override
   String toString() => 'Scope: $name';
 }

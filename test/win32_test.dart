@@ -9,6 +9,10 @@ void main() {
     expect(scope.name, equals('Windows.Win32.winmd'));
   });
 
+  test('Scope version string returns expected result', () {
+    expect(scope.versionNumber, equals('v4.0.30319'));
+  });
+
   test('Scope toString() is as expected', () {
     expect(scope.toString(), equals('Scope: Windows.Win32.winmd'));
   });
