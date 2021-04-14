@@ -212,7 +212,7 @@
         "comment": "The LOGBRUSH structure defines the style, color, and pattern of a physical brush. It is used by the CreateBrushIndirect and ExtCreatePen functions."
     },
     "LOGFONT": {
-        "namespace": "Windows.Win32.Shell.LOGFONTW",
+        "namespace": "Windows.Win32.Gdi.LOGFONTW",
         "comment": "The LOGFONT structure defines the attributes of a font."
     },
     "LOGPALETTE": {
