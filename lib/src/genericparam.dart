@@ -6,6 +6,7 @@ import 'package:win32/win32.dart';
 import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
+import 'genericparamconstraint.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'type_aliases.dart';
@@ -41,6 +42,8 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
   final int _attributes;
   final int _parentToken;
 
+  final _constraints = <GenericParamConstraint>[];
+
   TokenObject get parentToken {
     if (token & 0xFF000000 == CorTokenType.mdtTypeDef) {
       return TypeDef.fromToken(reader, _parentToken);
@@ -61,6 +64,32 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
       default:
         throw WinmdException('Unrecognized variance type.');
     }
+  }
+
+  List<GenericParamConstraint> get constraints {
+    if (_constraints.isEmpty) {
+      final phEnum = calloc<HCORENUM>();
+      final rGenericParamConstraints = calloc<mdGenericParam>();
+      final pcGenericParamConstraints = calloc<ULONG>();
+
+      try {
+        var hr = reader.EnumGenericParamConstraints(phEnum, token,
+            rGenericParamConstraints, 1, pcGenericParamConstraints);
+        while (hr == S_OK) {
+          final gpcToken = rGenericParamConstraints.value;
+
+          _constraints.add(GenericParamConstraint.fromToken(reader, gpcToken));
+          hr = reader.EnumGenericParamConstraints(phEnum, token,
+              rGenericParamConstraints, 1, pcGenericParamConstraints);
+        }
+      } finally {
+        reader.CloseEnum(phEnum.value);
+        free(phEnum);
+        free(rGenericParamConstraints);
+        free(pcGenericParamConstraints);
+      }
+    }
+    return _constraints;
   }
 
   SpecialConstraints get specialConstraints => SpecialConstraints(
