@@ -19,9 +19,9 @@ mixin GenericParamsMixin on TokenObject {
       var hr = reader.EnumGenericParams(
           phEnum, token, rGenericParams, 1, pcGenericParams);
       while (hr == S_OK) {
-        final token = rGenericParams.value;
+        final genericParamToken = rGenericParams.value;
 
-        params.add(GenericParam.fromToken(reader, token));
+        params.add(GenericParam.fromToken(reader, genericParamToken));
         hr = reader.EnumGenericParams(
             phEnum, token, rGenericParams, 1, pcGenericParams);
       }

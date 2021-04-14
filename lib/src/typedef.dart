@@ -288,9 +288,9 @@ class TypeDef extends TokenObject
       try {
         var hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
         while (hr == S_OK) {
-          final token = rImpls.value;
+          final interfaceToken = rImpls.value;
 
-          _interfaces.add(processInterfaceToken(token));
+          _interfaces.add(processInterfaceToken(interfaceToken));
           hr = reader.EnumInterfaceImpls(phEnum, token, rImpls, 1, pcImpls);
         }
       } finally {
@@ -313,9 +313,9 @@ class TypeDef extends TokenObject
       try {
         var hr = reader.EnumFields(phEnum, token, rgFields, 1, pcTokens);
         while (hr == S_OK) {
-          final token = rgFields.value;
+          final fieldToken = rgFields.value;
 
-          _fields.add(Field.fromToken(reader, token));
+          _fields.add(Field.fromToken(reader, fieldToken));
           hr = reader.EnumFields(phEnum, token, rgFields, 1, pcTokens);
         }
       } finally {
@@ -338,9 +338,9 @@ class TypeDef extends TokenObject
       try {
         var hr = reader.EnumMethods(phEnum, token, rgMethods, 1, pcTokens);
         while (hr == S_OK) {
-          final token = rgMethods.value;
+          final methodToken = rgMethods.value;
 
-          _methods.add(Method.fromToken(reader, token));
+          _methods.add(Method.fromToken(reader, methodToken));
           hr = reader.EnumMethods(phEnum, token, rgMethods, 1, pcTokens);
         }
       } finally {
@@ -364,9 +364,9 @@ class TypeDef extends TokenObject
         var hr =
             reader.EnumProperties(phEnum, token, rgProperties, 1, pcProperties);
         while (hr == S_OK) {
-          final token = rgProperties.value;
+          final propertyToken = rgProperties.value;
 
-          _properties.add(Property.fromToken(reader, token));
+          _properties.add(Property.fromToken(reader, propertyToken));
           hr = reader.EnumMethods(phEnum, token, rgProperties, 1, pcProperties);
         }
       } finally {
@@ -389,9 +389,9 @@ class TypeDef extends TokenObject
       try {
         var hr = reader.EnumEvents(phEnum, token, rgEvents, 1, pcEvents);
         while (hr == S_OK) {
-          final token = rgEvents.value;
+          final eventToken = rgEvents.value;
 
-          _events.add(Event.fromToken(reader, token));
+          _events.add(Event.fromToken(reader, eventToken));
           hr = reader.EnumEvents(phEnum, token, rgEvents, 1, pcEvents);
         }
       } finally {

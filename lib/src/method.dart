@@ -320,9 +320,9 @@ class Method extends TokenObject
     try {
       var hr = reader.EnumParams(phEnum, token, rParams, 1, pcTokens);
       while (hr == S_OK) {
-        final token = rParams.value;
+        final parameterToken = rParams.value;
 
-        parameters.add(Parameter.fromToken(reader, token));
+        parameters.add(Parameter.fromToken(reader, parameterToken));
         hr = reader.EnumParams(phEnum, token, rParams, 1, pcTokens);
       }
     } finally {

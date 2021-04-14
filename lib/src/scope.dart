@@ -61,9 +61,9 @@ class Scope {
       try {
         var hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
         while (hr == S_OK) {
-          final token = rgTypeDefs.value;
+          final typeDefToken = rgTypeDefs.value;
 
-          _typedefs.add(TypeDef.fromToken(reader, token));
+          _typedefs.add(TypeDef.fromToken(reader, typeDefToken));
           hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
         }
       } finally {
@@ -89,8 +89,8 @@ class Scope {
       try {
         var hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
         while (hr == S_OK) {
-          final token = rgModuleRefs.value;
-          _modules.add(Module.fromToken(reader, token));
+          final moduleToken = rgModuleRefs.value;
+          _modules.add(Module.fromToken(reader, moduleToken));
           hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
         }
       } finally {
@@ -116,8 +116,9 @@ class Scope {
     try {
       var hr = reader.EnumUserStrings(phEnum, rgStrings, 1, pcStrings);
       while (hr == S_OK) {
-        final token = rgStrings.value;
-        hr = reader.GetUserString(token, szString, MAX_STRING_SIZE, pchString);
+        final stringToken = rgStrings.value;
+        hr = reader.GetUserString(
+            stringToken, szString, MAX_STRING_SIZE, pchString);
         if (hr == S_OK) {
           strings.add(szString.toDartString());
         }
