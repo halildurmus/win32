@@ -15,16 +15,16 @@ jobs:
       fail-fast: false
 
       matrix:
-        os: [windows-latest]
+        os: [windows-latest, windows-2016]
         # sdk: [stable, dev]
-        sdk: [main]
+        sdk: [beta, dev, main]
 
     steps:
       - name: Fetch sources
         uses: actions/checkout@v2
 
-      - name: Set up Dart
-        uses: dart-lang/setup-dart@main
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@v1.0
         with:
           sdk: ${{matrix.sdk}}
 
