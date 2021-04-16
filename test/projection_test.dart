@@ -108,6 +108,16 @@ void main() {
       expect(typeProjection.dartType, equals('Pointer<Pointer>'));
     });
 
+    test('Double pointer is projected correctly', () {
+      final typedef = scope.findTypeDef('Windows.Win32.Security.Apis')!;
+      final api = typedef.findMethod('CredReadW')!;
+      final type = api.parameters.last.typeIdentifier;
+      final typeProjection = TypeProjector(type);
+
+      expect(typeProjection.nativeType, equals('Pointer<Pointer<CREDENTIAL>>'));
+      expect(typeProjection.dartType, equals('Pointer<Pointer<CREDENTIAL>>'));
+    });
+
     test('OLECHAR is represented correctly', () {
       final typedef = scope.findTypeDef('Windows.Win32.Automation.Apis')!;
       final api = typedef.findMethod('SysAllocString')!;

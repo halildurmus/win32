@@ -29,6 +29,7 @@ class TypeIdentifier {
 
   TypeIdentifier(this.corType, [this.name = '', this.type]);
 
+  // TODO: Do we need this?
   TypeIdentifier clone() {
     final clone = TypeIdentifier(corType, name, type);
     clone.typeArgs = List.from(typeArgs);

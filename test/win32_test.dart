@@ -312,10 +312,11 @@ void main() {
 
     expect(
         param.typeIdentifier.corType, equals(CorElementType.ELEMENT_TYPE_PTR));
-    expect(param.typeIdentifier.typeArgs.length, equals(2));
+    expect(param.typeIdentifier.typeArgs.length, equals(1));
     expect(param.typeIdentifier.typeArgs.first.corType,
         equals(CorElementType.ELEMENT_TYPE_PTR));
-    expect(param.typeIdentifier.typeArgs.last.name, endsWith('CREDENTIALW'));
+    expect(param.typeIdentifier.typeArgs.first.typeArgs.first.name,
+        endsWith('CREDENTIALW'));
   });
 
   test('HRESULT return values are generated correctly', () {

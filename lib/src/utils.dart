@@ -158,14 +158,6 @@ int byteListToInteger(Uint8List list) {
   return 0;
 }
 
-void flattenTypeArgs(TypeIdentifier type) {
-  // TODO: Need to walk deeper in case of triple dereference
-  if (type.typeArgs.first.typeArgs.isNotEmpty) {
-    type.typeArgs.add(type.typeArgs.first.typeArgs.first);
-    type.typeArgs.first.typeArgs.remove(0);
-  }
-}
-
 /// Parse a single type from the signature blob.
 ///
 /// Returns a [TypeTuple] containing the runtime type and the number of bytes
@@ -202,7 +194,7 @@ TypeTuple parseTypeFromSignature(
       final ptrTuple = parseTypeFromSignature(signatureBlob.sublist(1), reader);
       dataLength = 1 + ptrTuple.offsetLength;
       runtimeType.typeArgs.add(ptrTuple.typeIdentifier);
-      flattenTypeArgs(runtimeType);
+      // flattenTypeArgs(runtimeType);
       break;
 
     case CorElementType.ELEMENT_TYPE_GENERICINST:
