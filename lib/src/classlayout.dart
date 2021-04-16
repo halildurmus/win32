@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'type_aliases.dart';
@@ -15,10 +16,7 @@ class FieldOffset {
 }
 
 /// Layout information for the class referenced by a specified token.
-class ClassLayout {
-  final IMetaDataImport2 reader;
-  final int classToken;
-
+class ClassLayout extends TokenObject {
   /// The pack size of the class.
   ///
   /// If specified, this contains one of the values 1, 2, 4, 8, or 16,
@@ -32,7 +30,8 @@ class ClassLayout {
   /// The array of field offsets, for manually-aligned structs.
   List<FieldOffset>? fieldOffsets;
 
-  ClassLayout(this.reader, this.classToken) {
+  ClassLayout(IMetaDataImport2 reader, int classToken)
+      : super(reader, classToken) {
     final pdwPackSize = calloc<DWORD>();
     final rgFieldOffset = calloc<COR_FIELD_OFFSET>(256);
     final pcFieldOffset = calloc<ULONG>();
