@@ -44,8 +44,8 @@ void main() {
     expect(awr.parameters[0].name, equals('lpRect'));
     expect(awr.parameters[0].typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_PTR));
-    expect(awr.parameters[0].typeIdentifier.typeArgs.length, equals(1));
-    expect(awr.parameters[0].typeIdentifier.typeArgs.first.name,
+    expect(awr.parameters[0].typeIdentifier.typeArg, isNotNull);
+    expect(awr.parameters[0].typeIdentifier.typeArg?.name,
         equals('Windows.Win32.DisplayDevices.RECT'));
 
     expect(awr.parameters[1].isInParam, isTrue);

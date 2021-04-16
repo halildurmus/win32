@@ -109,10 +109,11 @@ void main() {
     expect(idict.typeSpec?.corType,
         equals(CorElementType.ELEMENT_TYPE_GENERICINST));
     expect(idict.typeSpec?.name, contains('Collections.IMap'));
-    expect(idict.typeSpec?.typeArgs.length, equals(2));
-    expect(idict.typeSpec?.typeArgs.first.corType,
+    expect(idict.typeSpec?.typeArg, isNotNull);
+    expect(idict.typeSpec?.typeArg?.corType,
         equals(CorElementType.ELEMENT_TYPE_STRING));
-    expect(idict.typeSpec?.typeArgs.last.corType,
+    expect(idict.typeSpec?.typeArg?.typeArg, isNotNull);
+    expect(idict.typeSpec?.typeArg?.typeArg?.corType,
         equals(CorElementType.ELEMENT_TYPE_OBJECT));
   });
 
@@ -124,7 +125,7 @@ void main() {
     expect(interfaces.length, equals(2));
 
     expect(interfaces.first.typeName, endsWith('IPlaybackMediaMarkerSequence'));
-    expect(interfaces.last.typeSpec?.typeArgs.first.name,
+    expect(interfaces.last.typeSpec?.typeArg?.name,
         endsWith('PlaybackMediaMarker'));
   });
 
@@ -371,11 +372,10 @@ void main() {
         equals(CorElementType.ELEMENT_TYPE_GENERICINST));
     expect(method.returnType.typeIdentifier.name,
         equals('Windows.Foundation.Collections.IVectorView`1'));
-    expect(method.returnType.typeIdentifier.typeArgs.length, equals(1));
-    expect(method.returnType.typeIdentifier.typeArgs.first.corType,
+    expect(method.returnType.typeIdentifier.typeArg, isNotNull);
+    expect(method.returnType.typeIdentifier.typeArg?.corType,
         equals(CorElementType.ELEMENT_TYPE_STRING));
-    expect(
-        method.returnType.typeIdentifier.typeArgs.first.name, equals('string'));
+    expect(method.returnType.typeIdentifier.typeArg?.name, equals('string'));
   });
 
   test('Calendar.PeriodAsFullString overload is correctly represented', () {
@@ -466,8 +466,8 @@ void main() {
     expect(method.parameters.length, equals(2));
     expect(method.returnType.typeIdentifier.name,
         equals('Windows.Foundation.Collections.IVectorView`1'));
-    expect(method.returnType.typeIdentifier.typeArgs.length, equals(1));
-    expect(method.returnType.typeIdentifier.typeArgs.first.name,
+    expect(method.returnType.typeIdentifier.typeArg, isNotNull);
+    expect(method.returnType.typeIdentifier.typeArg?.name,
         equals('Windows.Globalization.JapanesePhoneme'));
     expect(method.parameters.first.name, equals('input'));
     expect(method.parameters.first.typeIdentifier.name, equals('string'));
@@ -555,16 +555,16 @@ void main() {
     expect(valueSizeParam.name, equals('__valueSize'));
     expect(valueSizeParam.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_PTR));
-    expect(valueSizeParam.typeIdentifier.typeArgs.length, equals(1));
-    expect(valueSizeParam.typeIdentifier.typeArgs.first.corType,
+    expect(valueSizeParam.typeIdentifier.typeArg, isNotNull);
+    expect(valueSizeParam.typeIdentifier.typeArg?.corType,
         equals(CorElementType.ELEMENT_TYPE_U4));
 
     final valueParam = method.parameters.last;
     expect(valueParam.name, equals('value'));
     expect(valueParam.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_PTR));
-    expect(valueParam.typeIdentifier.typeArgs.length, equals(1));
-    expect(valueParam.typeIdentifier.typeArgs.first.corType,
+    expect(valueParam.typeIdentifier.typeArg, isNotNull);
+    expect(valueParam.typeIdentifier.typeArg?.corType,
         equals(CorElementType.ELEMENT_TYPE_U1));
   });
 

@@ -64,8 +64,8 @@ class ClassProjector {
 
           // This is a Pointer<T>, which will be wrapped later, so strip the
           // Pointer<> off.
-          final typeBuilder = TypeProjector(
-              mdMethod.parameters.first.typeIdentifier.typeArgs.first);
+          final typeBuilder =
+              TypeProjector(mdMethod.parameters.first.typeIdentifier.typeArg!);
           methodProjection.parameters = [
             ParameterProjection(mdMethod.parameters.first.name,
                 nativeType: typeBuilder.nativeType,

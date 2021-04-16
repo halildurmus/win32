@@ -32,8 +32,8 @@ void main() {
     expect(procInfo.fields.last.name, equals('bmiColors'));
     expect(procInfo.fields.last.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_ARRAY));
-    expect(procInfo.fields.last.typeIdentifier.typeArgs.first.name,
-        endsWith('RGBQUAD'));
+    expect(
+        procInfo.fields.last.typeIdentifier.typeArg?.name, endsWith('RGBQUAD'));
   });
 
   test('Struct array field has expected name and type 2', () {
@@ -41,7 +41,7 @@ void main() {
     expect(procInfo.fields.last.name, equals('dvValues'));
     expect(procInfo.fields.last.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_ARRAY));
-    expect(procInfo.fields.last.typeIdentifier.typeArgs.first.corType,
+    expect(procInfo.fields.last.typeIdentifier.typeArg?.corType,
         equals(CorElementType.ELEMENT_TYPE_I4));
     expect(procInfo.fields.last.typeIdentifier.arrayDimensions, equals([16]));
   });
@@ -74,7 +74,7 @@ void main() {
 
     expect(szPhysicalMonitorDescription.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_ARRAY));
-    expect(szPhysicalMonitorDescription.typeIdentifier.typeArgs.first.corType,
+    expect(szPhysicalMonitorDescription.typeIdentifier.typeArg?.corType,
         equals(CorElementType.ELEMENT_TYPE_CHAR));
   });
 

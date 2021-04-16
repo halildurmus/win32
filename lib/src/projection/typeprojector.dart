@@ -61,22 +61,22 @@ class TypeProjector {
     if (typeIdentifier.name == 'char') {
       return 'Pointer<Utf16>';
     }
-    if (typeIdentifier.typeArgs.first.type?.parent?.typeName == 'System.Enum') {
+    if (typeIdentifier.typeArg?.type?.parent?.typeName == 'System.Enum') {
       return 'Pointer<Uint32>';
     }
 
     // Check if it's Pointer<T>, in which case we have work
-    final typeArgs = typeIdentifier.typeArgs;
-    if (typeArgs.isNotEmpty) {
+    final typeArgs = typeIdentifier.typeArg;
+    if (typeArgs != null) {
       // Pointer<Void> in Dart is unnecessarily restrictive, versus the
       // Win32 meaning, which is more like "undefined type". We can
       // model that with a generic Pointer in Dart.
 
-      if (typeArgs.first.corType == CorElementType.ELEMENT_TYPE_VOID) {
+      if (typeArgs.corType == CorElementType.ELEMENT_TYPE_VOID) {
         return 'Pointer';
       }
 
-      final T = TypeProjector(typeArgs.first).nativeType;
+      final T = TypeProjector(typeArgs).nativeType;
       // If it's a Unicode Win32 type, strip off the ending 'W'.
       if (T.endsWith('W')) {
         return 'Pointer<${T.substring(0, T.length - 1)}>';
@@ -154,7 +154,7 @@ class TypeProjector {
       case CorElementType.ELEMENT_TYPE_GENERICINST:
       case CorElementType.ELEMENT_TYPE_ARRAY:
         // TODO: Assume a Vector for now
-        return TypeProjector(typeIdentifier.typeArgs.first).nativeType;
+        return TypeProjector(typeIdentifier.typeArg!).nativeType;
       case CorElementType.ELEMENT_TYPE_PTR:
         return pointerType(typeIdentifier);
       case CorElementType.ELEMENT_TYPE_FNPTR:

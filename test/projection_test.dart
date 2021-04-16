@@ -15,7 +15,7 @@ void main() {
   test('Unicode string', () {
     final type = TypeIdentifier(CorElementType.ELEMENT_TYPE_PTR)
       ..name = 'LPWSTR'
-      ..typeArgs = [TypeIdentifier(CorElementType.ELEMENT_TYPE_U2)];
+      ..typeArg = TypeIdentifier(CorElementType.ELEMENT_TYPE_U2);
     final typeProjection = TypeProjector(type);
 
     expect(typeProjection.dartType, equals('Pointer<Utf16>'));

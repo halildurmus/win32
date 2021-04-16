@@ -109,7 +109,7 @@ void main() {
 
     expect(returnType.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_I4));
-    expect(returnType.typeIdentifier.typeArgs.length, isZero);
+    expect(returnType.typeIdentifier.typeArg, isNull);
     expect(returnType.typeIdentifier.name, equals('int'));
   });
 
@@ -126,7 +126,7 @@ void main() {
 
     expect(param.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
-    expect(param.typeIdentifier.typeArgs.length, isZero);
+    expect(param.typeIdentifier.typeArg, isNull);
   });
 
   test('Signature blob is correct', () {
@@ -183,8 +183,8 @@ void main() {
     expect(api.parameters.first.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_PTR));
 
-    expect(api.parameters.first.typeIdentifier.typeArgs.length, equals(1));
-    expect(api.parameters.first.typeIdentifier.typeArgs.first.name,
+    expect(api.parameters.first.typeIdentifier.typeArg, isNotNull);
+    expect(api.parameters.first.typeIdentifier.typeArg?.name,
         equals('Windows.Win32.DisplayDevices.RECT'));
   });
 
@@ -217,7 +217,7 @@ void main() {
     expect(param.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
     expect(param.typeIdentifier.name, endsWith('HWND'));
-    expect(param.typeIdentifier.typeArgs, isEmpty);
+    expect(param.typeIdentifier.typeArg, isNull);
   });
 
   test('HANDLE-style parameters have the correct projection', () {
@@ -238,12 +238,12 @@ void main() {
     expect(
         param.typeIdentifier.corType, equals(CorElementType.ELEMENT_TYPE_PTR));
     expect(param.typeIdentifier.name, isEmpty);
-    expect(param.typeIdentifier.typeArgs.length, equals(1));
+    expect(param.typeIdentifier.typeArg, isNotNull);
 
-    final arg = param.typeIdentifier.typeArgs.first;
+    final arg = param.typeIdentifier.typeArg!;
     expect(arg.corType, equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
     expect(arg.name, endsWith('HWND'));
-    expect(arg.typeArgs, isEmpty);
+    expect(arg.typeArg, isNull);
   });
 
   test('LPHANDLE-style parameters have the correct projection', () {
@@ -291,8 +291,8 @@ void main() {
     expect(param.name, equals('rclsid'));
     expect(
         param.typeIdentifier.corType, equals(CorElementType.ELEMENT_TYPE_PTR));
-    expect(param.typeIdentifier.typeArgs.first.name, endsWith('System.Guid'));
-    expect(param.typeIdentifier.typeArgs.first.corType,
+    expect(param.typeIdentifier.typeArg?.name, endsWith('System.Guid'));
+    expect(param.typeIdentifier.typeArg?.corType,
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
   });
 
@@ -312,11 +312,11 @@ void main() {
 
     expect(
         param.typeIdentifier.corType, equals(CorElementType.ELEMENT_TYPE_PTR));
-    expect(param.typeIdentifier.typeArgs.length, equals(1));
-    expect(param.typeIdentifier.typeArgs.first.corType,
+    expect(param.typeIdentifier.typeArg, isNotNull);
+    expect(param.typeIdentifier.typeArg?.corType,
         equals(CorElementType.ELEMENT_TYPE_PTR));
-    expect(param.typeIdentifier.typeArgs.first.typeArgs.first.name,
-        endsWith('CREDENTIALW'));
+    expect(
+        param.typeIdentifier.typeArg?.typeArg?.name, endsWith('CREDENTIALW'));
   });
 
   test('HRESULT return values are generated correctly', () {
@@ -348,7 +348,7 @@ void main() {
     expect(param.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_CLASS));
     expect(param.typeIdentifier.name, endsWith('FONTENUMPROCW'));
-    expect(param.typeIdentifier.typeArgs, isEmpty);
+    expect(param.typeIdentifier.typeArg, isNull);
   });
 
   test('Callback functions are generated correctly 2', () {
@@ -361,7 +361,7 @@ void main() {
         equals(CorElementType.ELEMENT_TYPE_CLASS));
     expect(
         param.typeIdentifier.name, endsWith('PSYM_ENUMERATESYMBOLS_CALLBACKW'));
-    expect(param.typeIdentifier.typeArgs, isEmpty);
+    expect(param.typeIdentifier.typeArg, isNull);
   });
   test('Naked structs are generated correctly', () {
     final typedef = scope.findTypeDef('Windows.Win32.SystemServices.Apis')!;
@@ -372,7 +372,7 @@ void main() {
     expect(param.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
     expect(param.typeIdentifier.name, endsWith('LPPROC_THREAD_ATTRIBUTE_LIST'));
-    expect(param.typeIdentifier.typeArgs, isEmpty);
+    expect(param.typeIdentifier.typeArg, isNull);
   });
 
   test('Enumerations present in Win32 metadata', () {
@@ -410,9 +410,9 @@ void main() {
     final param = api.parameters[1];
 
     expect(param.name, equals('lpFlags'));
-    expect(param.typeIdentifier.typeArgs.first.corType,
+    expect(param.typeIdentifier.typeArg?.corType,
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
-    expect(param.typeIdentifier.typeArgs.first.type?.parent?.typeName,
+    expect(param.typeIdentifier.typeArg?.type?.parent?.typeName,
         equals('System.Enum'));
   });
 
