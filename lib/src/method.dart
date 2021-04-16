@@ -361,19 +361,15 @@ class Method extends TokenObject
     parameters[paramsIndex].name = '__valueSize';
     parameters[paramsIndex].typeIdentifier.corType =
         CorElementType.ELEMENT_TYPE_PTR;
-    parameters[paramsIndex]
-        .typeIdentifier
-        .typeArgs
-        .add(TypeIdentifier(CorElementType.ELEMENT_TYPE_U4));
+    parameters[paramsIndex].typeIdentifier.typeArg =
+        TypeIdentifier(CorElementType.ELEMENT_TYPE_U4);
 
     parameters.insert(paramsIndex + 1, Parameter.fromVoid(reader, token));
     parameters[paramsIndex + 1].name = 'value';
     parameters[paramsIndex + 1].typeIdentifier.corType =
         CorElementType.ELEMENT_TYPE_PTR;
-    parameters[paramsIndex + 1]
-        .typeIdentifier
-        .typeArgs
-        .add(typeTuple.typeIdentifier);
+    parameters[paramsIndex + 1].typeIdentifier.typeArg =
+        typeTuple.typeIdentifier;
 
     return typeTuple.offsetLength;
   }

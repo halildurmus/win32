@@ -193,7 +193,7 @@ TypeTuple parseTypeFromSignature(
     case CorElementType.ELEMENT_TYPE_PTR:
       final ptrTuple = parseTypeFromSignature(signatureBlob.sublist(1), reader);
       dataLength = 1 + ptrTuple.offsetLength;
-      runtimeType.typeArgs.add(ptrTuple.typeIdentifier);
+      runtimeType.typeArg = ptrTuple.typeIdentifier;
       // flattenTypeArgs(runtimeType);
       break;
 
@@ -205,11 +205,14 @@ TypeTuple parseTypeFromSignature(
           signatureBlob[1 + classTuple.offsetLength]; // GENERICINST + class
       dataLength =
           classTuple.offsetLength + 2; // GENERICINST + class + argsCount
+
+      var argPtr = runtimeType;
       for (var idx = 0; idx < argsCount; idx++) {
         final arg =
             parseTypeFromSignature(signatureBlob.sublist(dataLength), reader);
         dataLength += arg.offsetLength;
-        runtimeType.typeArgs.add(arg.typeIdentifier);
+        argPtr.typeArg = arg.typeIdentifier;
+        argPtr = argPtr.typeArg!;
       }
       break;
 
@@ -218,7 +221,7 @@ TypeTuple parseTypeFromSignature(
       final arrayTuple =
           parseTypeFromSignature(signatureBlob.sublist(1), reader);
       dataLength = 1 + arrayTuple.offsetLength;
-      runtimeType.typeArgs.add(arrayTuple.typeIdentifier);
+      runtimeType.typeArg = arrayTuple.typeIdentifier;
       final dimensionsCount = signatureBlob[dataLength++]; // rank
       final dimensionUpperBounds = List<int>.filled(dimensionsCount, 0);
       final numSizes = signatureBlob[dataLength++];

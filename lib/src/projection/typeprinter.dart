@@ -357,9 +357,8 @@ void main() {
           final nativeType = TypeProjector(field.typeIdentifier).nativeType;
 
           // Handle a string array
-          if (field.typeIdentifier.typeArgs.isNotEmpty &&
-              field.typeIdentifier.typeArgs.first.corType ==
-                  CorElementType.ELEMENT_TYPE_CHAR) {
+          if (field.typeIdentifier.typeArg?.corType ==
+              CorElementType.ELEMENT_TYPE_CHAR) {
             buffer.write(printArray(nativeType, field.name, dimensions));
           }
 

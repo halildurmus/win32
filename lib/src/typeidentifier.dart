@@ -22,19 +22,16 @@ class TypeIdentifier {
   /// The dimensions of the contained array, if there is one.
   List<int>? arrayDimensions;
 
-  /// Any arguments (for example, the Uint16 in a Pointer<Uint16>).
-  List<TypeIdentifier> typeArgs = [];
+  /// Any arguments (for example, the `Uint16` in a `Pointer<Uint16>`).
+  ///
+  /// These may be nested (for example, a `Pointer<Pointer<MYSTRUCT>>` is a
+  /// `Pointer` with a [typeArg] of `Pointer`, which in turn has a [typeArg] of
+  /// `MYSTRUCT`).
+  TypeIdentifier? typeArg;
 
   int? genericParameter;
 
   TypeIdentifier(this.corType, [this.name = '', this.type]);
-
-  // TODO: Do we need this?
-  TypeIdentifier clone() {
-    final clone = TypeIdentifier(corType, name, type);
-    clone.typeArgs = List.from(typeArgs);
-    return clone;
-  }
 
   factory TypeIdentifier.fromValue(int corElementTypeValue) {
     switch (corElementTypeValue) {

@@ -65,9 +65,9 @@ void main() {
       expect(param.name, equals('pszNetworkName'));
       expect(param.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_PTR));
-      expect(param.typeIdentifier.typeArgs.length, equals(1));
-      expect(param.typeIdentifier.typeArgs.first.name, endsWith('BSTR'));
-      expect(param.typeIdentifier.typeArgs.first.corType,
+      expect(param.typeIdentifier.typeArg, isNotNull);
+      expect(param.typeIdentifier.typeArg?.name, endsWith('BSTR'));
+      expect(param.typeIdentifier.typeArg?.corType,
           equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
     });
 
@@ -87,7 +87,7 @@ void main() {
       expect(param.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
       expect(param.typeIdentifier.name, endsWith('BSTR'));
-      expect(param.typeIdentifier.typeArgs.length, isZero);
+      expect(param.typeIdentifier.typeArg, isNull);
     });
 
     test('COM method strings are projected to Dart accurately', () {
@@ -105,8 +105,8 @@ void main() {
       expect(param.name, equals('pgdGuidNetworkId'));
       expect(param.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_PTR));
-      expect(param.typeIdentifier.typeArgs.length, equals(1));
-      expect(param.typeIdentifier.typeArgs.first.name, endsWith('Guid'));
+      expect(param.typeIdentifier.typeArg, isNotNull);
+      expect(param.typeIdentifier.typeArg?.name, endsWith('Guid'));
     });
 
     test('GUIDs are projected accurately', () {
@@ -158,8 +158,8 @@ void main() {
       expect(param.name, equals('pbIsConnected'));
       expect(param.typeIdentifier.corType,
           equals(CorElementType.ELEMENT_TYPE_PTR));
-      expect(param.typeIdentifier.typeArgs.length, equals(1));
-      expect(param.typeIdentifier.typeArgs.first.corType,
+      expect(param.typeIdentifier.typeArg, isNotNull);
+      expect(param.typeIdentifier.typeArg?.corType,
           equals(CorElementType.ELEMENT_TYPE_I2));
     });
 
@@ -253,7 +253,7 @@ void main() {
           equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
       expect(
           param.typeIdentifier.type?.parent?.typeName, equals('System.Enum'));
-      expect(param.typeIdentifier.typeArgs.length, isZero);
+      expect(param.typeIdentifier.typeArg, isNull);
       expect(
           scope.enums
               .firstWhere((p) => p.typeName == param.typeIdentifier.name),
