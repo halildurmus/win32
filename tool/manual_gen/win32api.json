@@ -1312,13 +1312,13 @@
         "prototype": "DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS GetDialogControlDpiChangeBehavior(\n  HWND hWnd\n);",
         "dllLibrary": "user32",
         "comment": "Retrieves and per-monitor DPI scaling behavior overrides of a child window in a dialog.",
-        "minimumWindowsVersion": "WIN10_RS1"
+        "minimumWindowsVersion": "WIN10_RS2"
     },
     "GetDialogDpiChangeBehavior": {
         "prototype": "DIALOG_DPI_CHANGE_BEHAVIORS GetDialogDpiChangeBehavior(\n  HWND hDlg\n);",
         "dllLibrary": "user32",
         "comment": "Returns the flags that might have been set on a given dialog by an earlier call to SetDialogDpiChangeBehavior. If that function was never called on the dialog, the return value will be zero.",
-        "minimumWindowsVersion": "WIN10_RS1"
+        "minimumWindowsVersion": "WIN10_RS2"
     },
     "GetDIBits": {
         "prototype": "int GetDIBits(\n  HDC          hdc,\n  HBITMAP      hbm,\n  UINT         start,\n  UINT         cLines,\n  LPVOID       lpvBits,\n  LPBITMAPINFO lpbmi,\n  UINT         usage\n);",
