@@ -110,7 +110,6 @@ void main() {
     expect(returnType.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_I4));
     expect(returnType.typeIdentifier.typeArg, isNull);
-    expect(returnType.typeIdentifier.name, equals('int'));
   });
 
   test('LPWSTR parameters are handled correctly', () {
@@ -268,9 +267,9 @@ void main() {
     final api = typedef.findMethod('FillConsoleOutputCharacterW')!;
     final param = api.parameters[1];
 
+    expect(param.name, equals('cCharacter'));
     expect(
         param.typeIdentifier.corType, equals(CorElementType.ELEMENT_TYPE_CHAR));
-    expect(param.typeIdentifier.name, equals('char'));
   });
 
   test('UnregisterPowerSettingNotification has the correct parameter type', () {

@@ -44,12 +44,20 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
 
   final _constraints = <GenericParamConstraint>[];
 
-  TokenObject get parentToken {
-    if (token & 0xFF000000 == CorTokenType.mdtTypeDef) {
+  /// The object representing the owner of the parameter.
+  ///
+  /// The object is a [TokenObject], which may either be a [TypeDef] or a
+  /// [Method]. You can use the [TokenObject.tokenType] property to identify the
+  /// parent type.
+  TokenObject get parent {
+    if (tokenType == TokenType.TypeDef) {
       return TypeDef.fromToken(reader, _parentToken);
-    } else if (token & 0xFF000000 == CorTokenType.mdtMethodDef) {
+    }
+
+    if (tokenType == TokenType.MethodDef) {
       return Method.fromToken(reader, _parentToken);
     }
+
     throw WinmdException('Unrecognized parent token.');
   }
 

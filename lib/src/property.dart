@@ -17,6 +17,7 @@ import 'typedef.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
 
+/// A property object.
 class Property extends TokenObject with CustomAttributesMixin {
   final int _parentToken;
   final String name;
@@ -29,16 +30,21 @@ class Property extends TokenObject with CustomAttributesMixin {
   final int getterToken;
   final Uint32List otherMethodTokens;
 
-  TypeDef get parentToken => TypeDef.fromToken(reader, _parentToken);
+  /// Returns the [TypeDef] representing the type that implements the property.
+  TypeDef get parent => TypeDef.fromToken(reader, _parentToken);
 
+  /// Returns true if the property is special; the name describes how.
   bool get isSpecialName =>
       _attributes & CorPropertyAttr.prSpecialName ==
       CorPropertyAttr.prSpecialName;
 
+  /// Returns true if the property has a default value.
   bool get hasDefault =>
       _attributes & CorPropertyAttr.prHasDefault ==
       CorPropertyAttr.prHasDefault;
 
+  /// Returns true if the common language runtime metadata internal APIs should
+  /// check the encoding of the property name.
   bool get isRTSpecialName =>
       _attributes & CorPropertyAttr.prRTSpecialName ==
       CorPropertyAttr.prRTSpecialName;

@@ -341,7 +341,6 @@ void main() {
 
     expect(method.parameters.first.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_STRING));
-    expect(method.parameters.first.typeIdentifier.name, equals('string'));
     expect(method.isSpecialName, isFalse);
     expect(method.isProperty, isFalse);
     expect(method.isSetProperty, isFalse);
@@ -375,7 +374,6 @@ void main() {
     expect(method.returnType.typeIdentifier.typeArg, isNotNull);
     expect(method.returnType.typeIdentifier.typeArg?.corType,
         equals(CorElementType.ELEMENT_TYPE_STRING));
-    expect(method.returnType.typeIdentifier.typeArg?.name, equals('string'));
   });
 
   test('Calendar.PeriodAsFullString overload is correctly represented', () {
@@ -443,7 +441,6 @@ void main() {
     expect(method.parameters[0].typeIdentifier.name,
         equals('Windows.Storage.IStorageFile'));
     expect(method.parameters[0].name, equals('file'));
-    expect(method.parameters[1].typeIdentifier.name, equals('string'));
     expect(method.parameters[1].typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_STRING));
     expect(method.parameters[1].name, equals('contentId'));
@@ -470,7 +467,6 @@ void main() {
     expect(method.returnType.typeIdentifier.typeArg?.name,
         equals('Windows.Globalization.JapanesePhoneme'));
     expect(method.parameters.first.name, equals('input'));
-    expect(method.parameters.first.typeIdentifier.name, equals('string'));
     expect(method.parameters.first.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_STRING));
   });
@@ -599,7 +595,8 @@ void main() {
     expect(getResults.parameters, isEmpty);
     expect(getResults.returnType.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_VAR));
-    expect(getResults.returnType.typeIdentifier.genericParameter, equals(0));
+    expect(getResults.returnType.typeIdentifier.genericParameterSequence,
+        equals(0));
   });
 
   test('Generic put parameter contains the right type', () {

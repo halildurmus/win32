@@ -238,14 +238,13 @@ TypeTuple parseTypeFromSignature(
     case CorElementType.ELEMENT_TYPE_MVAR:
       // Element is a generic parameter of a type or a method
       final uncompressed = corSigUncompressData(signatureBlob.sublist(1));
-      runtimeType.genericParameter = uncompressed.data;
+      runtimeType.genericParameterSequence = uncompressed.data;
       dataLength = 1;
       runtimeType.name = runtimeType.toString();
       break;
 
     default:
       dataLength = 1;
-      runtimeType.name = runtimeType.toString();
   }
 
   return TypeTuple(runtimeType, dataLength);

@@ -37,6 +37,7 @@ class Field extends TokenObject with CustomAttributesMixin {
   final int _attributes;
   final Uint8List signatureBlob;
 
+  /// Returns the [TypeDef] representing the class that the field belongs to.
   TypeDef get parent => TypeDef.fromToken(reader, _parentToken);
 
   /// Returns the visibility of the field (public, private, etc.)

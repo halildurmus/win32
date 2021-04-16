@@ -11,6 +11,7 @@ import 'type_aliases.dart';
 import 'typedef.dart';
 import 'utils.dart';
 
+/// An event.
 class Event extends TokenObject with CustomAttributesMixin {
   final String eventName;
   final int _parentToken;
@@ -21,6 +22,7 @@ class Event extends TokenObject with CustomAttributesMixin {
   final int fireToken;
   final List<int> otherMethodTokens;
 
+  /// Returns the [TypeDef] representing the class that declares the event.
   TypeDef get parent => TypeDef.fromToken(reader, _parentToken);
 
   bool get isSpecialName =>

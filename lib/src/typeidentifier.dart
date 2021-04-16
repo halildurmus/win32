@@ -9,11 +9,13 @@ import 'utils.dart';
 /// Represents a type, as for example used in a parameter. Return
 /// types use the same class, although they have no name.
 class TypeIdentifier {
-  /// Underlying base type represented here
+  /// Underlying base type represented by this class.
   CorElementType corType;
 
   /// The name of the type (for example, `Windows.Storage.IStorageFile` or
-  /// `LPWSTR`)
+  /// `LPWSTR`), if it is not a primitive type.
+  ///
+  /// For a type like [CorElementType.ELEMENT_TYPE_I1], this is empty.
   String name;
 
   /// The class or interface, if the type is (for example) ELEMENT_TYPE_CLASS
@@ -29,7 +31,12 @@ class TypeIdentifier {
   /// `MYSTRUCT`).
   TypeIdentifier? typeArg;
 
-  int? genericParameter;
+  // The value identifying the generic parameter sequence, if there is one.
+  //
+  // For example, in class Foo<T, U>, a property that returns T will have a
+  // returnType with a [TypeIdentifier] that has a genericParameterSequence of
+  // 0.
+  int? genericParameterSequence;
 
   TypeIdentifier(this.corType, [this.name = '', this.type]);
 
@@ -113,82 +120,5 @@ class TypeIdentifier {
   }
 
   @override
-  String toString() {
-    switch (corType) {
-      case CorElementType.ELEMENT_TYPE_END:
-        return '*END*';
-      case CorElementType.ELEMENT_TYPE_VOID:
-        return 'void';
-      case CorElementType.ELEMENT_TYPE_BOOLEAN:
-        return 'bool';
-      case CorElementType.ELEMENT_TYPE_CHAR:
-        return 'char';
-      case CorElementType.ELEMENT_TYPE_I1:
-        return 'byte';
-      case CorElementType.ELEMENT_TYPE_U1:
-        return 'ubyte';
-      case CorElementType.ELEMENT_TYPE_I2:
-        return 'short';
-      case CorElementType.ELEMENT_TYPE_U2:
-        return 'ushort';
-      case CorElementType.ELEMENT_TYPE_I4:
-        return 'int';
-      case CorElementType.ELEMENT_TYPE_U4:
-        return 'uint';
-      case CorElementType.ELEMENT_TYPE_I8:
-        return 'int64';
-      case CorElementType.ELEMENT_TYPE_U8:
-        return 'uint64';
-      case CorElementType.ELEMENT_TYPE_R4:
-        return 'float';
-      case CorElementType.ELEMENT_TYPE_R8:
-        return 'double';
-      case CorElementType.ELEMENT_TYPE_STRING:
-        return 'string';
-      case CorElementType.ELEMENT_TYPE_PTR:
-        return 'pointer';
-      case CorElementType.ELEMENT_TYPE_BYREF:
-        return 'byref';
-      case CorElementType.ELEMENT_TYPE_VALUETYPE:
-        return 'valuetype';
-      case CorElementType.ELEMENT_TYPE_CLASS:
-        return 'class';
-      case CorElementType.ELEMENT_TYPE_VAR:
-        return 'generic_type_parameter';
-      case CorElementType.ELEMENT_TYPE_ARRAY:
-        return 'array';
-      case CorElementType.ELEMENT_TYPE_GENERICINST:
-        return 'generic';
-      case CorElementType.ELEMENT_TYPE_TYPEDBYREF:
-        return 'typedref';
-      case CorElementType.ELEMENT_TYPE_I:
-        return 'intptr';
-      case CorElementType.ELEMENT_TYPE_U:
-        return 'uintptr';
-      case CorElementType.ELEMENT_TYPE_FNPTR:
-        return 'funcptr';
-      case CorElementType.ELEMENT_TYPE_OBJECT:
-        return 'object';
-      case CorElementType.ELEMENT_TYPE_SZARRAY:
-        return 'vector';
-      case CorElementType.ELEMENT_TYPE_MVAR:
-        return 'generic_method_parameter';
-      case CorElementType.ELEMENT_TYPE_CMOD_REQD:
-        return 'required';
-      case CorElementType.ELEMENT_TYPE_CMOD_OPT:
-        return 'optional';
-      case CorElementType.ELEMENT_TYPE_INTERNAL:
-        return '*internal*';
-      case CorElementType.ELEMENT_TYPE_MAX:
-        return '*invalid*';
-      case CorElementType.ELEMENT_TYPE_MODIFIER:
-        return '*modifier*';
-      case CorElementType.ELEMENT_TYPE_SENTINEL:
-        return 'sentinel';
-      case CorElementType.ELEMENT_TYPE_PINNED:
-        return '*pinned*';
-      default:
-        throw WinmdException('Unrecognized type ${corType.index}');
-    }
-  }
+  String toString() => 'TypeIdentifier: ${corType.toString().split('.').last}';
 }
