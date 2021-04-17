@@ -19,33 +19,13 @@ import 'utils.dart';
 
 /// A parameter or return type.
 class Parameter extends TokenObject with CustomAttributesMixin {
-  final int _methodToken;
-  final int sequence;
-  final int _attributes;
-  TypeIdentifier typeIdentifier;
   String name;
+  final int sequence;
   final Uint8List signatureBlob;
+  TypeIdentifier typeIdentifier;
 
-  Method get parent => Method.fromToken(reader, _methodToken);
-
-  /// Returns true if the parameter is passed into the method call.
-  bool get isInParam => _attributes & CorParamAttr.pdIn == CorParamAttr.pdIn;
-
-  /// Returns true if the parameter is passed from the method return.
-  bool get isOutParam => _attributes & CorParamAttr.pdOut == CorParamAttr.pdOut;
-
-  /// Returns true if the parameter is optional.
-  bool get isOptional =>
-      _attributes & CorParamAttr.pdOptional == CorParamAttr.pdOptional;
-
-  /// Returns true if the parameter has a default value.
-  bool get hasDefault =>
-      _attributes & CorParamAttr.pdHasDefault == CorParamAttr.pdHasDefault;
-
-  /// Returns true if the parameter has marshaling information.
-  bool get hasFieldMarshal =>
-      _attributes & CorParamAttr.pdHasFieldMarshal ==
-      CorParamAttr.pdHasFieldMarshal;
+  final int _attributes;
+  final int _methodToken;
 
   Parameter(
       IMetaDataImport2 reader,
@@ -113,6 +93,29 @@ class Parameter extends TokenObject with CustomAttributesMixin {
   factory Parameter.fromVoid(IMetaDataImport2 reader, int methodToken) =>
       Parameter(reader, 0, methodToken, 0, 0,
           TypeIdentifier(CorElementType.ELEMENT_TYPE_VOID), '', Uint8List(0));
+
   @override
   String toString() => 'Parameter: $name';
+
+  /// Returns the [Method] that takes the parameter.
+  Method get parent => Method.fromToken(reader, _methodToken);
+
+  /// Returns true if the parameter is passed into the method call.
+  bool get isInParam => _attributes & CorParamAttr.pdIn == CorParamAttr.pdIn;
+
+  /// Returns true if the parameter is passed from the method return.
+  bool get isOutParam => _attributes & CorParamAttr.pdOut == CorParamAttr.pdOut;
+
+  /// Returns true if the parameter is optional.
+  bool get isOptional =>
+      _attributes & CorParamAttr.pdOptional == CorParamAttr.pdOptional;
+
+  /// Returns true if the parameter has a default value.
+  bool get hasDefault =>
+      _attributes & CorParamAttr.pdHasDefault == CorParamAttr.pdHasDefault;
+
+  /// Returns true if the parameter has marshaling information.
+  bool get hasFieldMarshal =>
+      _attributes & CorParamAttr.pdHasFieldMarshal ==
+      CorParamAttr.pdHasFieldMarshal;
 }

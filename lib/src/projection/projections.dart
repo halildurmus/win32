@@ -9,9 +9,9 @@
 enum SourceType { com, winrt, win32, unknown }
 
 class ParameterProjection {
+  final String dartType;
   final String name;
   final String nativeType;
-  final String dartType;
 
   const ParameterProjection(this.name,
       {required this.nativeType, required this.dartType});
@@ -21,12 +21,12 @@ class ParameterProjection {
 }
 
 class MethodProjection {
-  late String name;
   late bool isGetProperty;
   late bool isSetProperty;
-  late String returnTypeNative;
-  late String returnTypeDart;
+  late String name;
   List<ParameterProjection> parameters = <ParameterProjection>[];
+  late String returnTypeDart;
+  late String returnTypeNative;
 
   @override
   String toString() =>
@@ -34,21 +34,20 @@ class MethodProjection {
 }
 
 class ClassProjection {
-  late SourceType sourceType;
+  late String className;
+  late String clsid;
+  bool generateClass = false;
   String? iid;
+  late String inherits;
+  final methods = <MethodProjection>[];
   late String name;
   late String shortNameWithGenericSpecifier;
-  bool generateClass = false;
-  late String clsid;
-  late String className;
-  late String inherits;
+  late SourceType sourceType;
   late int vtableStart;
-
-  final methods = <MethodProjection>[];
-
-  String get shortName => name.split('.').last.split('`').first;
 
   @override
   String toString() =>
       '$name (methods: ${methods.length}, inherits: $inherits)';
+
+  String get shortName => name.split('.').last.split('`').first;
 }

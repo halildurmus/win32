@@ -13,24 +13,15 @@ import 'utils.dart';
 
 /// An event.
 class Event extends TokenObject with CustomAttributesMixin {
-  final String eventName;
-  final int _parentToken;
-  final int _attributes;
-  final int eventType;
   final int addOnToken;
-  final int removeOnToken;
+  final String eventName;
+  final int eventType;
   final int fireToken;
   final List<int> otherMethodTokens;
+  final int removeOnToken;
 
-  /// Returns the [TypeDef] representing the class that declares the event.
-  TypeDef get parent => TypeDef.fromToken(reader, _parentToken);
-
-  bool get isSpecialName =>
-      _attributes & CorEventAttr.evSpecialName == CorEventAttr.evSpecialName;
-
-  bool get isRTSpecialName =>
-      _attributes & CorEventAttr.evRTSpecialName ==
-      CorEventAttr.evRTSpecialName;
+  final int _attributes;
+  final int _parentToken;
 
   Event(
       IMetaDataImport2 reader,
@@ -102,4 +93,16 @@ class Event extends TokenObject with CustomAttributesMixin {
       free(pcOtherMethod);
     }
   }
+
+  /// Returns the [TypeDef] representing the class that declares the event.
+  TypeDef get parent => TypeDef.fromToken(reader, _parentToken);
+
+  /// Returns true if the event is special; its name describes how.
+  bool get isSpecialName =>
+      _attributes & CorEventAttr.evSpecialName == CorEventAttr.evSpecialName;
+
+  /// Returns true if the common language runtime should check the encoding of the event name.
+  bool get isRTSpecialName =>
+      _attributes & CorEventAttr.evRTSpecialName ==
+      CorEventAttr.evRTSpecialName;
 }

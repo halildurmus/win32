@@ -19,8 +19,27 @@ const IMAGE_FILE_MACHINE_AMD64 = 0x8664;
 enum ImageType { i386, ia64, amd64 }
 
 class PEKind {
-  late final int _peKind;
   late final int _machine;
+  late final int _peKind;
+
+  PEKind(IMetaDataImport2 reader) {
+    final pdwPEKind = calloc<DWORD>();
+    final pdwMachine = calloc<DWORD>();
+
+    try {
+      final hr = reader.GetPEKind(pdwPEKind, pdwMachine);
+      if (SUCCEEDED(hr)) {
+        _peKind = pdwPEKind.value;
+        _machine = pdwMachine.value;
+      } else {
+        _peKind = 0;
+        _machine = 0;
+      }
+    } finally {
+      free(pdwPEKind);
+      free(pdwMachine);
+    }
+  }
 
   /// Returns false if the file is not in portable executable (PE) file format.
   bool get isPEFile => _peKind != 0;
@@ -58,25 +77,6 @@ class PEKind {
         return ImageType.amd64;
       default:
         throw WinmdException('Unrecognized image type.');
-    }
-  }
-
-  PEKind(IMetaDataImport2 reader) {
-    final pdwPEKind = calloc<DWORD>();
-    final pdwMachine = calloc<DWORD>();
-
-    try {
-      final hr = reader.GetPEKind(pdwPEKind, pdwMachine);
-      if (SUCCEEDED(hr)) {
-        _peKind = pdwPEKind.value;
-        _machine = pdwMachine.value;
-      } else {
-        _peKind = 0;
-        _machine = 0;
-      }
-    } finally {
-      free(pdwPEKind);
-      free(pdwMachine);
     }
   }
 }

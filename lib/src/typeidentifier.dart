@@ -9,8 +9,18 @@ import 'utils.dart';
 /// Represents a type, as for example used in a parameter. Return
 /// types use the same class, although they have no name.
 class TypeIdentifier {
+  /// The dimensions of the contained array, if there is one.
+  List<int>? arrayDimensions;
+
   /// Underlying base type represented by this class.
   CorElementType corType;
+
+  // The value identifying the generic parameter sequence, if there is one.
+  //
+  // For example, in class Foo<T, U>, a property that returns T will have a
+  // returnType with a [TypeIdentifier] that has a genericParameterSequence of
+  // 0.
+  int? genericParameterSequence;
 
   /// The name of the type (for example, `Windows.Storage.IStorageFile` or
   /// `LPWSTR`), if it is not a primitive type.
@@ -21,22 +31,12 @@ class TypeIdentifier {
   /// The class or interface, if the type is (for example) ELEMENT_TYPE_CLASS
   TypeDef? type;
 
-  /// The dimensions of the contained array, if there is one.
-  List<int>? arrayDimensions;
-
   /// Any arguments (for example, the `Uint16` in a `Pointer<Uint16>`).
   ///
   /// These may be nested (for example, a `Pointer<Pointer<MYSTRUCT>>` is a
   /// `Pointer` with a [typeArg] of `Pointer`, which in turn has a [typeArg] of
   /// `MYSTRUCT`).
   TypeIdentifier? typeArg;
-
-  // The value identifying the generic parameter sequence, if there is one.
-  //
-  // For example, in class Foo<T, U>, a property that returns T will have a
-  // returnType with a [TypeIdentifier] that has a genericParameterSequence of
-  // 0.
-  int? genericParameterSequence;
 
   TypeIdentifier(this.corType, [this.name = '', this.type]);
 

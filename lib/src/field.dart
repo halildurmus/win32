@@ -29,66 +29,14 @@ enum FieldAccess {
 }
 
 class Field extends TokenObject with CustomAttributesMixin {
-  final int _parentToken;
-  final String name;
-  final int value;
-  final TypeIdentifier typeIdentifier;
   final CorElementType fieldType;
-  final int _attributes;
+  final String name;
   final Uint8List signatureBlob;
+  final TypeIdentifier typeIdentifier;
+  final int value;
 
-  /// Returns the [TypeDef] representing the class that the field belongs to.
-  TypeDef get parent => TypeDef.fromToken(reader, _parentToken);
-
-  /// Returns the visibility of the field (public, private, etc.)
-  FieldAccess get fieldAccess =>
-      FieldAccess.values[_attributes & CorFieldAttr.fdFieldAccessMask];
-
-  /// Returns true if the field is a member of its type rather than an instance member.
-  bool get isStatic =>
-      _attributes & CorFieldAttr.fdStatic == CorFieldAttr.fdStatic;
-
-  /// Returns true if the field cannot be changed after it is initialized.
-  bool get isInitOnly =>
-      _attributes & CorFieldAttr.fdInitOnly == CorFieldAttr.fdInitOnly;
-
-  /// Returns true if the field value is a compile-time constant.
-  bool get isLiteral =>
-      _attributes & CorFieldAttr.fdLiteral == CorFieldAttr.fdLiteral;
-
-  /// Returns true if the field is not serialized when its type is remoted.
-  bool get isNotSerialized =>
-      _attributes & CorFieldAttr.fdNotSerialized ==
-      CorFieldAttr.fdNotSerialized;
-
-  /// Returns true if the field is special; its name describes how.
-  bool get isSpecialName =>
-      _attributes & CorFieldAttr.fdSpecialName == CorFieldAttr.fdSpecialName;
-
-  /// Returns true if the field implementation is forwarded through PInvoke.
-  bool get isPinvokeImpl =>
-      _attributes & CorFieldAttr.fdPinvokeImpl == CorFieldAttr.fdPinvokeImpl;
-
-  /// Returns true if the common language runtime metadata internal APIs should
-  /// check the encoding of the name.
-  bool get isRTSpecialName =>
-      _attributes & CorFieldAttr.fdRTSpecialName ==
-      CorFieldAttr.fdRTSpecialName;
-
-  /// Returns true if the field contains marshaling information.
-  bool get hasFieldMarshal =>
-      _attributes & CorFieldAttr.fdHasFieldMarshal ==
-      CorFieldAttr.fdHasFieldMarshal;
-
-  /// Returns true if the field has a default value.
-  bool get hasDefault =>
-      _attributes & CorFieldAttr.fdHasDefault == CorFieldAttr.fdHasDefault;
-
-  /// Returns true if the field has a relative virtual address.
-  bool get hasFieldRVA =>
-      _attributes & CorFieldAttr.fdHasFieldRVA == CorFieldAttr.fdHasFieldRVA;
-
-  PinvokeMap get pinvokeMap => PinvokeMap.fromToken(reader, token);
+  final int _attributes;
+  final int _parentToken;
 
   Field(
       IMetaDataImport2 reader,
@@ -166,6 +114,59 @@ class Field extends TokenObject with CustomAttributesMixin {
 
   @override
   String toString() => 'Field: $name';
+
+  /// Returns the [TypeDef] representing the class that the field belongs to.
+  TypeDef get parent => TypeDef.fromToken(reader, _parentToken);
+
+  /// Returns the visibility of the field (public, private, etc.)
+  FieldAccess get fieldAccess =>
+      FieldAccess.values[_attributes & CorFieldAttr.fdFieldAccessMask];
+
+  /// Returns true if the field is a member of its type rather than an instance member.
+  bool get isStatic =>
+      _attributes & CorFieldAttr.fdStatic == CorFieldAttr.fdStatic;
+
+  /// Returns true if the field cannot be changed after it is initialized.
+  bool get isInitOnly =>
+      _attributes & CorFieldAttr.fdInitOnly == CorFieldAttr.fdInitOnly;
+
+  /// Returns true if the field value is a compile-time constant.
+  bool get isLiteral =>
+      _attributes & CorFieldAttr.fdLiteral == CorFieldAttr.fdLiteral;
+
+  /// Returns true if the field is not serialized when its type is remoted.
+  bool get isNotSerialized =>
+      _attributes & CorFieldAttr.fdNotSerialized ==
+      CorFieldAttr.fdNotSerialized;
+
+  /// Returns true if the field is special; its name describes how.
+  bool get isSpecialName =>
+      _attributes & CorFieldAttr.fdSpecialName == CorFieldAttr.fdSpecialName;
+
+  /// Returns true if the field implementation is forwarded through PInvoke.
+  bool get isPinvokeImpl =>
+      _attributes & CorFieldAttr.fdPinvokeImpl == CorFieldAttr.fdPinvokeImpl;
+
+  /// Returns true if the common language runtime metadata internal APIs should
+  /// check the encoding of the name.
+  bool get isRTSpecialName =>
+      _attributes & CorFieldAttr.fdRTSpecialName ==
+      CorFieldAttr.fdRTSpecialName;
+
+  /// Returns true if the field contains marshaling information.
+  bool get hasFieldMarshal =>
+      _attributes & CorFieldAttr.fdHasFieldMarshal ==
+      CorFieldAttr.fdHasFieldMarshal;
+
+  /// Returns true if the field has a default value.
+  bool get hasDefault =>
+      _attributes & CorFieldAttr.fdHasDefault == CorFieldAttr.fdHasDefault;
+
+  /// Returns true if the field has a relative virtual address.
+  bool get hasFieldRVA =>
+      _attributes & CorFieldAttr.fdHasFieldRVA == CorFieldAttr.fdHasFieldRVA;
+
+  PinvokeMap get pinvokeMap => PinvokeMap.fromToken(reader, token);
 }
 
 extension ListField on List<Field> {

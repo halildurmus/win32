@@ -18,6 +18,8 @@ enum Variance { nonvariant, covariant, contravariant }
 class SpecialConstraints {
   final int _attributes;
 
+  const SpecialConstraints(this._attributes);
+
   bool get noConstraints =>
       _attributes == CorGenericParamAttr.gpNoSpecialConstraint;
 
@@ -32,17 +34,47 @@ class SpecialConstraints {
   bool get defaultConstructor =>
       _attributes & CorGenericParamAttr.gpDefaultConstructorConstraint ==
       CorGenericParamAttr.gpDefaultConstructorConstraint;
-
-  const SpecialConstraints(this._attributes);
 }
 
 class GenericParam extends TokenObject with CustomAttributesMixin {
   final String paramName;
   final int paramSequence;
+
   final int _attributes;
+  final _constraints = <GenericParamConstraint>[];
   final int _parentToken;
 
-  final _constraints = <GenericParamConstraint>[];
+  GenericParam(IMetaDataImport2 reader, int token, this.paramSequence,
+      this._attributes, this._parentToken, this.paramName)
+      : super(reader, token);
+
+  factory GenericParam.fromToken(IMetaDataImport2 reader, int token) {
+    final pulParamSeq = calloc<ULONG>();
+    final pdwParamFlags = calloc<DWORD>();
+    final ptOwner = calloc<mdToken>();
+    final reserved = calloc<DWORD>();
+    final wzName = stralloc(MAX_STRING_SIZE);
+    final pchName = calloc<ULONG>();
+
+    try {
+      final hr = reader.GetGenericParamProps(token, pulParamSeq, pdwParamFlags,
+          ptOwner, reserved, wzName, MAX_STRING_SIZE, pchName);
+
+      if (SUCCEEDED(hr)) {
+        return GenericParam(reader, token, pulParamSeq.value,
+            pdwParamFlags.value, ptOwner.value, wzName.toDartString());
+      } else {
+        throw WindowsException(hr);
+      }
+    } finally {
+      free(pulParamSeq);
+      free(pdwParamFlags);
+      free(ptOwner);
+      free(reserved);
+      free(wzName);
+      free(pchName);
+    }
+  }
 
   /// The object representing the owner of the parameter.
   ///
@@ -102,36 +134,4 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
 
   SpecialConstraints get specialConstraints => SpecialConstraints(
       _attributes & CorGenericParamAttr.gpSpecialConstraintMask);
-
-  GenericParam(IMetaDataImport2 reader, int token, this.paramSequence,
-      this._attributes, this._parentToken, this.paramName)
-      : super(reader, token);
-
-  factory GenericParam.fromToken(IMetaDataImport2 reader, int token) {
-    final pulParamSeq = calloc<ULONG>();
-    final pdwParamFlags = calloc<DWORD>();
-    final ptOwner = calloc<mdToken>();
-    final reserved = calloc<DWORD>();
-    final wzName = stralloc(MAX_STRING_SIZE);
-    final pchName = calloc<ULONG>();
-
-    try {
-      final hr = reader.GetGenericParamProps(token, pulParamSeq, pdwParamFlags,
-          ptOwner, reserved, wzName, MAX_STRING_SIZE, pchName);
-
-      if (SUCCEEDED(hr)) {
-        return GenericParam(reader, token, pulParamSeq.value,
-            pdwParamFlags.value, ptOwner.value, wzName.toDartString());
-      } else {
-        throw WindowsException(hr);
-      }
-    } finally {
-      free(pulParamSeq);
-      free(pdwParamFlags);
-      free(ptOwner);
-      free(reserved);
-      free(wzName);
-      free(pchName);
-    }
-  }
 }

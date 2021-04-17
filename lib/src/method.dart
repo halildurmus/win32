@@ -36,12 +36,79 @@ enum VtableLayout { reuseSlot, newSlot }
 
 class Method extends TokenObject
     with CustomAttributesMixin, GenericParamsMixin {
-  int _parentToken;
-  String methodName;
-  int _attributes;
-  Uint8List signatureBlob;
-  int relativeVirtualAddress;
   int implFlags;
+  bool isGetProperty = false;
+  bool isSetProperty = false;
+  String methodName;
+  List<Parameter> parameters = <Parameter>[];
+  int relativeVirtualAddress;
+  late Parameter returnType;
+  Uint8List signatureBlob;
+
+  int _attributes;
+  int _parentToken;
+
+  Method(
+      IMetaDataImport2 reader,
+      int token,
+      this._parentToken,
+      this.methodName,
+      this._attributes,
+      this.signatureBlob,
+      this.relativeVirtualAddress,
+      this.implFlags)
+      : super(reader, token) {
+    _parseMethodType();
+    _parseParameterNames();
+    _parseSignatureBlob();
+    _parseParameterAttributes();
+  }
+
+  /// Creates a method object from its given token.
+  factory Method.fromToken(IMetaDataImport2 reader, int token) {
+    final ptkClass = calloc<mdTypeDef>();
+    final szMethod = stralloc(MAX_STRING_SIZE);
+    final pchMethod = calloc<ULONG>();
+    final pdwAttr = calloc<DWORD>();
+    final ppvSigBlob = calloc<PCCOR_SIGNATURE>();
+    final pcbSigBlob = calloc<ULONG>();
+    final pulCodeRVA = calloc<ULONG>();
+    final pdwImplFlags = calloc<DWORD>();
+
+    try {
+      final hr = reader.GetMethodProps(
+          token,
+          ptkClass,
+          szMethod,
+          MAX_STRING_SIZE,
+          pchMethod,
+          pdwAttr,
+          ppvSigBlob.cast(),
+          pcbSigBlob,
+          pulCodeRVA,
+          pdwImplFlags);
+
+      if (SUCCEEDED(hr)) {
+        final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
+        return Method(reader, token, ptkClass.value, szMethod.toDartString(),
+            pdwAttr.value, signature, pulCodeRVA.value, pdwImplFlags.value);
+      } else {
+        throw WindowsException(hr);
+      }
+    } finally {
+      free(ptkClass);
+      free(szMethod);
+      free(pchMethod);
+      free(pdwAttr);
+      free(ppvSigBlob);
+      free(pcbSigBlob);
+      free(pulCodeRVA);
+      free(pdwImplFlags);
+    }
+  }
+
+  @override
+  String toString() => 'Method: $methodName';
 
   TypeDef get parent => TypeDef.fromToken(reader, _parentToken);
 
@@ -118,11 +185,6 @@ class Method extends TokenObject
       MethodImplementationFeatures(implFlags);
 
   bool get isProperty => isGetProperty | isSetProperty;
-  bool isGetProperty = false;
-  bool isSetProperty = false;
-
-  List<Parameter> parameters = <Parameter>[];
-  late Parameter returnType;
 
   Module get module {
     final pdwMappingFlags = calloc<DWORD>();
@@ -142,65 +204,6 @@ class Method extends TokenObject
       free(szImportName);
       free(pchImportName);
       free(ptkImportDLL);
-    }
-  }
-
-  Method(
-      IMetaDataImport2 reader,
-      int token,
-      this._parentToken,
-      this.methodName,
-      this._attributes,
-      this.signatureBlob,
-      this.relativeVirtualAddress,
-      this.implFlags)
-      : super(reader, token) {
-    _parseMethodType();
-    _parseParameterNames();
-    _parseSignatureBlob();
-    _parseParameterAttributes();
-  }
-
-  /// Creates a method object from its given token.
-  factory Method.fromToken(IMetaDataImport2 reader, int token) {
-    final ptkClass = calloc<mdTypeDef>();
-    final szMethod = stralloc(MAX_STRING_SIZE);
-    final pchMethod = calloc<ULONG>();
-    final pdwAttr = calloc<DWORD>();
-    final ppvSigBlob = calloc<PCCOR_SIGNATURE>();
-    final pcbSigBlob = calloc<ULONG>();
-    final pulCodeRVA = calloc<ULONG>();
-    final pdwImplFlags = calloc<DWORD>();
-
-    try {
-      final hr = reader.GetMethodProps(
-          token,
-          ptkClass,
-          szMethod,
-          MAX_STRING_SIZE,
-          pchMethod,
-          pdwAttr,
-          ppvSigBlob.cast(),
-          pcbSigBlob,
-          pulCodeRVA,
-          pdwImplFlags);
-
-      if (SUCCEEDED(hr)) {
-        final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
-        return Method(reader, token, ptkClass.value, szMethod.toDartString(),
-            pdwAttr.value, signature, pulCodeRVA.value, pdwImplFlags.value);
-      } else {
-        throw WindowsException(hr);
-      }
-    } finally {
-      free(ptkClass);
-      free(szMethod);
-      free(pchMethod);
-      free(pdwAttr);
-      free(ppvSigBlob);
-      free(pcbSigBlob);
-      free(pulCodeRVA);
-      free(pdwImplFlags);
     }
   }
 
@@ -373,7 +376,4 @@ class Method extends TokenObject
 
     return typeTuple.offsetLength;
   }
-
-  @override
-  String toString() => 'Method: $methodName';
 }

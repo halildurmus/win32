@@ -41,100 +41,16 @@ enum StringFormat { ansi, unicode, auto, custom }
 /// Represents a TypeDef in the Windows Metadata file
 class TypeDef extends TokenObject
     with CustomAttributesMixin, GenericParamsMixin {
-  final String typeName;
-  final int _attributes;
   final int baseTypeToken;
+  final String typeName;
   final TypeIdentifier? typeSpec;
 
-  final _interfaces = <TypeDef>[];
+  final int _attributes;
+  final _events = <Event>[];
   final _fields = <Field>[];
+  final _interfaces = <TypeDef>[];
   final _methods = <Method>[];
   final _properties = <Property>[];
-  final _events = <Event>[];
-
-  TypeVisibility get typeVisibility =>
-      TypeVisibility.values[_attributes & CorTypeAttr.tdVisibilityMask];
-
-  TypeLayout get typeLayout {
-    switch (_attributes & CorTypeAttr.tdLayoutMask) {
-      case CorTypeAttr.tdAutoLayout:
-        return TypeLayout.auto;
-      case CorTypeAttr.tdSequentialLayout:
-        return TypeLayout.sequential;
-      case CorTypeAttr.tdExplicitLayout:
-        return TypeLayout.explicit;
-      default:
-        throw WinmdException('Attribute missing type layout information');
-    }
-  }
-
-  /// Is the type a class?
-  bool get isClass =>
-      _attributes & CorTypeAttr.tdClassSemanticsMask == CorTypeAttr.tdClass;
-
-  /// Is the type an interface?
-  bool get isInterface =>
-      _attributes & CorTypeAttr.tdClassSemanticsMask == CorTypeAttr.tdInterface;
-
-  bool get isAbstract =>
-      _attributes & CorTypeAttr.tdAbstract == CorTypeAttr.tdAbstract;
-
-  bool get isSealed =>
-      _attributes & CorTypeAttr.tdSealed == CorTypeAttr.tdSealed;
-
-  bool get isSpecialName =>
-      _attributes & CorTypeAttr.tdSpecialName == CorTypeAttr.tdSpecialName;
-
-  bool get isImported =>
-      _attributes & CorTypeAttr.tdImport == CorTypeAttr.tdImport;
-
-  bool get isSerializable =>
-      _attributes & CorTypeAttr.tdSerializable == CorTypeAttr.tdSerializable;
-
-  bool get isWindowsRuntime =>
-      _attributes & CorTypeAttr.tdWindowsRuntime ==
-      CorTypeAttr.tdWindowsRuntime;
-
-  bool get isRTSpecialName =>
-      _attributes & CorTypeAttr.tdRTSpecialName == CorTypeAttr.tdRTSpecialName;
-
-  StringFormat get stringFormat {
-    switch (_attributes & CorTypeAttr.tdStringFormatMask) {
-      case CorTypeAttr.tdAnsiClass:
-        return StringFormat.ansi;
-      case CorTypeAttr.tdUnicodeClass:
-        return StringFormat.unicode;
-      case CorTypeAttr.tdAutoClass:
-        return StringFormat.auto;
-      case CorTypeAttr.tdCustomFormatClass:
-        return StringFormat.custom;
-      default:
-        throw WinmdException('Attribute missing string format information');
-    }
-  }
-
-  bool get isBeforeFieldInit =>
-      _attributes & CorTypeAttr.tdBeforeFieldInit ==
-      CorTypeAttr.tdBeforeFieldInit;
-
-  bool get isForwarder =>
-      _attributes & CorTypeAttr.tdForwarder == CorTypeAttr.tdForwarder;
-
-  /// Is the type a delegate?
-  bool get isDelegate => parent?.typeName == 'System.MulticastDelegate';
-
-  /// Retrieve class layout information.
-  ///
-  /// This includes the packing alignment, the minimum class size, and the field
-  /// layout (e.g. for sparsely or overlapping structs).
-  ClassLayout get classLayout => ClassLayout(reader, token);
-
-  /// Is the type a non-Windows Runtime type, such as System.Object or
-  /// IInspectable?
-  ///
-  /// More information at:
-  /// https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#type-system-encoding
-  bool get isSystemType => systemTokens.containsValue(typeName);
 
   /// Create a typedef.
   ///
@@ -258,6 +174,93 @@ class TypeDef extends TokenObject
       free(pcbSig);
     }
   }
+
+  @override
+  String toString() => 'TypeDef: $typeName';
+
+  TypeVisibility get typeVisibility =>
+      TypeVisibility.values[_attributes & CorTypeAttr.tdVisibilityMask];
+
+  TypeLayout get typeLayout {
+    switch (_attributes & CorTypeAttr.tdLayoutMask) {
+      case CorTypeAttr.tdAutoLayout:
+        return TypeLayout.auto;
+      case CorTypeAttr.tdSequentialLayout:
+        return TypeLayout.sequential;
+      case CorTypeAttr.tdExplicitLayout:
+        return TypeLayout.explicit;
+      default:
+        throw WinmdException('Attribute missing type layout information');
+    }
+  }
+
+  /// Is the type a class?
+  bool get isClass =>
+      _attributes & CorTypeAttr.tdClassSemanticsMask == CorTypeAttr.tdClass;
+
+  /// Is the type an interface?
+  bool get isInterface =>
+      _attributes & CorTypeAttr.tdClassSemanticsMask == CorTypeAttr.tdInterface;
+
+  bool get isAbstract =>
+      _attributes & CorTypeAttr.tdAbstract == CorTypeAttr.tdAbstract;
+
+  bool get isSealed =>
+      _attributes & CorTypeAttr.tdSealed == CorTypeAttr.tdSealed;
+
+  bool get isSpecialName =>
+      _attributes & CorTypeAttr.tdSpecialName == CorTypeAttr.tdSpecialName;
+
+  bool get isImported =>
+      _attributes & CorTypeAttr.tdImport == CorTypeAttr.tdImport;
+
+  bool get isSerializable =>
+      _attributes & CorTypeAttr.tdSerializable == CorTypeAttr.tdSerializable;
+
+  bool get isWindowsRuntime =>
+      _attributes & CorTypeAttr.tdWindowsRuntime ==
+      CorTypeAttr.tdWindowsRuntime;
+
+  bool get isRTSpecialName =>
+      _attributes & CorTypeAttr.tdRTSpecialName == CorTypeAttr.tdRTSpecialName;
+
+  StringFormat get stringFormat {
+    switch (_attributes & CorTypeAttr.tdStringFormatMask) {
+      case CorTypeAttr.tdAnsiClass:
+        return StringFormat.ansi;
+      case CorTypeAttr.tdUnicodeClass:
+        return StringFormat.unicode;
+      case CorTypeAttr.tdAutoClass:
+        return StringFormat.auto;
+      case CorTypeAttr.tdCustomFormatClass:
+        return StringFormat.custom;
+      default:
+        throw WinmdException('Attribute missing string format information');
+    }
+  }
+
+  bool get isBeforeFieldInit =>
+      _attributes & CorTypeAttr.tdBeforeFieldInit ==
+      CorTypeAttr.tdBeforeFieldInit;
+
+  bool get isForwarder =>
+      _attributes & CorTypeAttr.tdForwarder == CorTypeAttr.tdForwarder;
+
+  /// Is the type a delegate?
+  bool get isDelegate => parent?.typeName == 'System.MulticastDelegate';
+
+  /// Retrieve class layout information.
+  ///
+  /// This includes the packing alignment, the minimum class size, and the field
+  /// layout (e.g. for sparsely or overlapping structs).
+  ClassLayout get classLayout => ClassLayout(reader, token);
+
+  /// Is the type a non-Windows Runtime type, such as System.Object or
+  /// IInspectable?
+  ///
+  /// More information at:
+  /// https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#type-system-encoding
+  bool get isSystemType => systemTokens.containsValue(typeName);
 
   /// Converts an individual interface into a type.
   TypeDef processInterfaceToken(int token) {
@@ -473,7 +476,4 @@ class TypeDef extends TokenObject
 
     return guid;
   }
-
-  @override
-  String toString() => 'TypeDef: $typeName';
 }

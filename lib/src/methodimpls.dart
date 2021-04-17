@@ -7,6 +7,8 @@ enum CodeType { IL, native, optIL, runtime }
 class MethodImplementationFeatures {
   final int _implFlags;
 
+  const MethodImplementationFeatures(this._implFlags);
+
   /// Returns information about the code type used in implementing the method.
   CodeType get codeType =>
       CodeType.values[_implFlags & CorMethodImpl.miCodeTypeMask];
@@ -42,6 +44,4 @@ class MethodImplementationFeatures {
   bool get isNoOptimization =>
       _implFlags & CorMethodImpl.miNoOptimization ==
       CorMethodImpl.miNoOptimization;
-
-  const MethodImplementationFeatures(this._implFlags);
 }

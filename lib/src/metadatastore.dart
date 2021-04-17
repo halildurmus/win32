@@ -21,9 +21,8 @@ import 'typedef.dart';
 /// Use this to obtain a reference of a scope without creating unnecessary
 /// copies or cycles.
 class MetadataStore {
-  static late IMetaDataDispenser dispenser;
   static Map<String, Scope> cache = {};
-
+  static late IMetaDataDispenser dispenser;
   static bool isInitialized = false;
 
   /// Initialize the [MetadataStore] object.

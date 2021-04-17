@@ -55,6 +55,13 @@ abstract class TokenObject {
 
   const TokenObject(this.reader, this.token);
 
+  @override
+  int get hashCode => token;
+
+  @override
+  bool operator ==(Object other) =>
+      other is TokenObject && other.token == token;
+
   /// Returns true if the token is well-formed.
   bool get isValidToken => reader.IsValidToken(token) == TRUE;
 
@@ -138,11 +145,4 @@ abstract class TokenObject {
             'Unrecognized token type ${(token & 0xFF000000).toHexString(32)}');
     }
   }
-
-  @override
-  int get hashCode => token;
-
-  @override
-  bool operator ==(Object other) =>
-      other is TokenObject && other.token == token;
 }

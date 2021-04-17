@@ -18,80 +18,11 @@ enum ThrowOnUnmappableChar { useAssem, enabled, disabled }
 enum CallingConvention { winApi, cdecl, stdcall, thiscall, fastcall }
 
 class PinvokeMap extends TokenObject {
-  final int _attributes;
-  final String importName;
   final int importDllToken;
+  final String importName;
   final String moduleName;
 
-  /// Returns true if each member name is used as specified.
-  bool get isNoMangle =>
-      _attributes & CorPinvokeMap.pmNoMangle == CorPinvokeMap.pmNoMangle;
-
-  /// Returns true if the callee is allowed to call the Win32 SetLastError
-  /// function before returning from the attributed method.
-  bool get supportsLastError =>
-      _attributes & CorPinvokeMap.pmSupportsLastError ==
-      CorPinvokeMap.pmSupportsLastError;
-
-  /// Returns details of the string marshalling convention used for this member.
-  StringMarshalConvention get stringMarshalConvention {
-    switch (_attributes & CorPinvokeMap.pmCharSetMask) {
-      case CorPinvokeMap.pmCharSetNotSpec:
-        return StringMarshalConvention.notSpecified;
-      case CorPinvokeMap.pmCharSetAnsi:
-        return StringMarshalConvention.ansi;
-      case CorPinvokeMap.pmCharSetUnicode:
-        return StringMarshalConvention.unicode;
-      case CorPinvokeMap.pmCharSetAuto:
-        return StringMarshalConvention.auto;
-      default:
-        throw WinmdException('Unable to identify string marshal convention.');
-    }
-  }
-
-  BestFit get bestFitConvention {
-    switch (_attributes & CorPinvokeMap.pmBestFitMask) {
-      case CorPinvokeMap.pmBestFitUseAssem:
-        return BestFit.useAssem;
-      case CorPinvokeMap.pmBestFitEnabled:
-        return BestFit.enabled;
-      case CorPinvokeMap.pmBestFitDisabled:
-        return BestFit.disabled;
-      default:
-        throw WinmdException('Unable to identify best fit convention.');
-    }
-  }
-
-  ThrowOnUnmappableChar get throwOnUnmappableCharConvention {
-    switch (_attributes & CorPinvokeMap.pmThrowOnUnmappableCharMask) {
-      case CorPinvokeMap.pmThrowOnUnmappableCharUseAssem:
-        return ThrowOnUnmappableChar.useAssem;
-      case CorPinvokeMap.pmThrowOnUnmappableCharEnabled:
-        return ThrowOnUnmappableChar.enabled;
-      case CorPinvokeMap.pmThrowOnUnmappableCharDisabled:
-        return ThrowOnUnmappableChar.disabled;
-      default:
-        throw WinmdException(
-            'Unable to identify convention for handling unmappable characters.');
-    }
-  }
-
-  CallingConvention get callingConvention {
-    switch (_attributes & CorPinvokeMap.pmCallConvMask) {
-      case CorPinvokeMap.pmCallConvWinapi:
-        return CallingConvention.winApi;
-      case CorPinvokeMap.pmCallConvCdecl:
-        return CallingConvention.cdecl;
-      case CorPinvokeMap.pmCallConvStdcall:
-        return CallingConvention.stdcall;
-      case CorPinvokeMap.pmCallConvThiscall:
-        return CallingConvention.thiscall;
-      case CorPinvokeMap.pmCallConvFastcall:
-        return CallingConvention.fastcall;
-      default:
-        throw WinmdException('Unable to identify calling convention.');
-    }
-  }
+  final int _attributes;
 
   const PinvokeMap(IMetaDataImport2 reader, int token, this._attributes,
       this.importName, this.importDllToken, this.moduleName)
@@ -124,6 +55,81 @@ class PinvokeMap extends TokenObject {
       free(szImportName);
       free(pchImportName);
       free(ptkImportDLL);
+    }
+  }
+
+  /// Returns true if each member name is used as specified.
+  bool get isNoMangle =>
+      _attributes & CorPinvokeMap.pmNoMangle == CorPinvokeMap.pmNoMangle;
+
+  /// Returns true if the callee is allowed to call the Win32 SetLastError
+  /// function before returning from the attributed method.
+  bool get supportsLastError =>
+      _attributes & CorPinvokeMap.pmSupportsLastError ==
+      CorPinvokeMap.pmSupportsLastError;
+
+  /// Returns details of the string marshalling convention used for this member.
+  StringMarshalConvention get stringMarshalConvention {
+    switch (_attributes & CorPinvokeMap.pmCharSetMask) {
+      case CorPinvokeMap.pmCharSetNotSpec:
+        return StringMarshalConvention.notSpecified;
+      case CorPinvokeMap.pmCharSetAnsi:
+        return StringMarshalConvention.ansi;
+      case CorPinvokeMap.pmCharSetUnicode:
+        return StringMarshalConvention.unicode;
+      case CorPinvokeMap.pmCharSetAuto:
+        return StringMarshalConvention.auto;
+      default:
+        throw WinmdException('Unable to identify string marshal convention.');
+    }
+  }
+
+  /// Returns the preferred convention for mapping of Unicode characters that
+  /// lack an exact match in the ANSI character set.
+  BestFit get bestFitConvention {
+    switch (_attributes & CorPinvokeMap.pmBestFitMask) {
+      case CorPinvokeMap.pmBestFitUseAssem:
+        return BestFit.useAssem;
+      case CorPinvokeMap.pmBestFitEnabled:
+        return BestFit.enabled;
+      case CorPinvokeMap.pmBestFitDisabled:
+        return BestFit.disabled;
+      default:
+        throw WinmdException('Unable to identify best fit convention.');
+    }
+  }
+
+  /// Returns the preferred convention for how the interop marshaler should
+  /// respond when it encounters an unmappable character.
+  ThrowOnUnmappableChar get throwOnUnmappableCharConvention {
+    switch (_attributes & CorPinvokeMap.pmThrowOnUnmappableCharMask) {
+      case CorPinvokeMap.pmThrowOnUnmappableCharUseAssem:
+        return ThrowOnUnmappableChar.useAssem;
+      case CorPinvokeMap.pmThrowOnUnmappableCharEnabled:
+        return ThrowOnUnmappableChar.enabled;
+      case CorPinvokeMap.pmThrowOnUnmappableCharDisabled:
+        return ThrowOnUnmappableChar.disabled;
+      default:
+        throw WinmdException(
+            'Unable to identify convention for handling unmappable characters.');
+    }
+  }
+
+  /// Returns the calling convention.
+  CallingConvention get callingConvention {
+    switch (_attributes & CorPinvokeMap.pmCallConvMask) {
+      case CorPinvokeMap.pmCallConvWinapi:
+        return CallingConvention.winApi;
+      case CorPinvokeMap.pmCallConvCdecl:
+        return CallingConvention.cdecl;
+      case CorPinvokeMap.pmCallConvStdcall:
+        return CallingConvention.stdcall;
+      case CorPinvokeMap.pmCallConvThiscall:
+        return CallingConvention.thiscall;
+      case CorPinvokeMap.pmCallConvFastcall:
+        return CallingConvention.fastcall;
+      default:
+        throw WinmdException('Unable to identify calling convention.');
     }
   }
 }

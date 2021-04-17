@@ -11,17 +11,8 @@ import 'type_aliases.dart';
 import 'typedef.dart';
 
 class GenericParamConstraint extends TokenObject with CustomAttributesMixin {
-  final int _parentToken;
   final int _constraintType;
-
-  /// The generic parameter that is constrained by this object.
-  GenericParam get parent => GenericParam.fromToken(reader, _parentToken);
-
-  /// The type of the constraint.
-  ///
-  /// For example, `class Foo<T> where T : System.Enum` has a constraintType
-  /// that matches System.Enum).
-  TypeDef get constraintType => TypeDef.fromToken(reader, _constraintType);
+  final int _parentToken;
 
   GenericParamConstraint(IMetaDataImport2 reader, int token, this._parentToken,
       this._constraintType)
@@ -46,4 +37,13 @@ class GenericParamConstraint extends TokenObject with CustomAttributesMixin {
       free(ptkConstraintType);
     }
   }
+
+  /// The generic parameter that is constrained by this object.
+  GenericParam get parent => GenericParam.fromToken(reader, _parentToken);
+
+  /// The type of the constraint.
+  ///
+  /// For example, `class Foo<T> where T : System.Enum` has a constraintType
+  /// that matches System.Enum).
+  TypeDef get constraintType => TypeDef.fromToken(reader, _constraintType);
 }

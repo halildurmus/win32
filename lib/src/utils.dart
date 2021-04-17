@@ -30,17 +30,17 @@ class WinmdException implements Exception {
 }
 
 class TypeTuple {
-  /// Returns the first item of the tuple
-  final TypeIdentifier typeIdentifier;
-
   /// Returns the second item of the tuple
   final int offsetLength;
+
+  /// Returns the first item of the tuple
+  final TypeIdentifier typeIdentifier;
 
   /// Creates a new tuple value with the specified items.
   const TypeTuple(this.typeIdentifier, this.offsetLength);
 
   @override
-  String toString() => 'TypeTuple: [$typeIdentifier, $offsetLength]';
+  int get hashCode => typeIdentifier.hashCode * offsetLength.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -49,7 +49,7 @@ class TypeTuple {
       other.offsetLength == offsetLength;
 
   @override
-  int get hashCode => typeIdentifier.hashCode * offsetLength.hashCode;
+  String toString() => 'TypeTuple: [$typeIdentifier, $offsetLength]';
 }
 
 extension CamelCaseConversion on String {

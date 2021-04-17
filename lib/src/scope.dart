@@ -20,14 +20,13 @@ import 'utils.dart';
 /// Rather than being created directly, you should obtain a scope from a
 /// [MetadataStore], which caches scopes to avoid duplication.
 class Scope {
+  late final String guid;
+  late final String name;
   final IMetaDataImport2 reader;
 
-  final _typedefs = <TypeDef>[];
-  final _modules = <Module>[];
   final _enums = <TypeDef>[];
-
-  late final String name;
-  late final String guid;
+  final _modules = <Module>[];
+  final _typedefs = <TypeDef>[];
 
   Scope(this.reader) {
     final szName = stralloc(MAX_STRING_SIZE);
@@ -46,6 +45,9 @@ class Scope {
       free(pchName);
     }
   }
+
+  @override
+  String toString() => 'Scope: $name';
 
   TypeDef? findTypeDef(String typedef) {
     final typeDef = typeDefs.where((t) => t.typeName == typedef);
@@ -167,7 +169,4 @@ class Scope {
       free(pccBufSize);
     }
   }
-
-  @override
-  String toString() => 'Scope: $name';
 }
