@@ -2642,7 +2642,7 @@ void main() {
               'GetDialogBaseUnits');
       expect(GetDialogBaseUnits, isA<Function>());
     });
-    if (windowsBuildNumber >= 14393) {
+    if (windowsBuildNumber >= 15063) {
       test('Can instantiate GetDialogControlDpiChangeBehavior', () {
         final user32 = DynamicLibrary.open('user32.dll');
         final GetDialogControlDpiChangeBehavior = user32.lookupFunction<
@@ -2651,7 +2651,7 @@ void main() {
         expect(GetDialogControlDpiChangeBehavior, isA<Function>());
       });
     }
-    if (windowsBuildNumber >= 14393) {
+    if (windowsBuildNumber >= 15063) {
       test('Can instantiate GetDialogDpiChangeBehavior', () {
         final user32 = DynamicLibrary.open('user32.dll');
         final GetDialogDpiChangeBehavior = user32.lookupFunction<
