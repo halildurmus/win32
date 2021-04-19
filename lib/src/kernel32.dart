@@ -2179,6 +2179,20 @@ Pointer GlobalLock(int hMem) {
   return _GlobalLock(hMem);
 }
 
+/// Retrieves the current size of the specified global memory object, in bytes.
+///
+/// ```c
+/// SIZE_T GlobalSize(
+///   HGLOBAL hMem
+/// );
+/// ```
+/// {@category kernel32}
+int GlobalSize(int hMem) {
+  final _GlobalSize = _kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
+      int Function(int hMem)>('GlobalSize');
+  return _GlobalSize(hMem);
+}
+
 /// Decrements the lock count associated with a memory object that was
 /// allocated with GMEM_MOVEABLE. This function has no effect on memory
 /// objects allocated with GMEM_FIXED.
