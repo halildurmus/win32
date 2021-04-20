@@ -2179,7 +2179,8 @@ Pointer GlobalLock(int hMem) {
   return _GlobalLock(hMem);
 }
 
-/// Retrieves the current size of the specified global memory object, in bytes.
+/// Retrieves the current size of the specified global memory object, in
+/// bytes.
 ///
 /// ```c
 /// SIZE_T GlobalSize(
