@@ -1015,6 +1015,12 @@ void main() {
           Pointer Function(int hMem)>('GlobalLock');
       expect(GlobalLock, isA<Function>());
     });
+    test('Can instantiate GlobalSize', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GlobalSize = kernel32.lookupFunction<IntPtr Function(IntPtr hMem),
+          int Function(int hMem)>('GlobalSize');
+      expect(GlobalSize, isA<Function>());
+    });
     test('Can instantiate GlobalUnlock', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GlobalUnlock = kernel32.lookupFunction<Int32 Function(IntPtr hMem),
