@@ -849,6 +849,14 @@ void main() {
           .lookupFunction<IntPtr Function(), int Function()>('GetProcessHeap');
       expect(GetProcessHeap, isA<Function>());
     });
+    test('Can instantiate GetProcessHeaps', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetProcessHeaps = kernel32.lookupFunction<
+          Uint32 Function(Uint32 NumberOfHeaps, Pointer<IntPtr> ProcessHeaps),
+          int Function(int NumberOfHeaps,
+              Pointer<IntPtr> ProcessHeaps)>('GetProcessHeaps');
+      expect(GetProcessHeaps, isA<Function>());
+    });
     test('Can instantiate GetProductInfo', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetProductInfo = kernel32.lookupFunction<

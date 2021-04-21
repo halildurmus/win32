@@ -60,6 +60,13 @@ void main() {
       expect(sizeOf<OVERLAPPED>(), equals(20));
     }
   });
+  test('Struct PROCESS_HEAP_ENTRY is the right size', () {
+    if (is64bitOS) {
+      expect(sizeOf<PROCESS_HEAP_ENTRY>(), equals(40));
+    } else {
+      expect(sizeOf<PROCESS_HEAP_ENTRY>(), equals(28));
+    }
+  });
   test('Struct PROPVARIANT is the right size', () {
     if (is64bitOS) {
       expect(sizeOf<PROPVARIANT>(), equals(24));

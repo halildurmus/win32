@@ -1828,6 +1828,24 @@ int GetProcessHeap() {
   return _GetProcessHeap();
 }
 
+/// Returns the number of active heaps and retrieves handles to all of the
+/// active heaps for the calling process.
+///
+/// ```c
+/// DWORD GetProcessHeaps(
+///   DWORD   NumberOfHeaps,
+///   PHANDLE ProcessHeaps
+/// );
+/// ```
+/// {@category kernel32}
+int GetProcessHeaps(int NumberOfHeaps, Pointer<IntPtr> ProcessHeaps) {
+  final _GetProcessHeaps = _kernel32.lookupFunction<
+      Uint32 Function(Uint32 NumberOfHeaps, Pointer<IntPtr> ProcessHeaps),
+      int Function(
+          int NumberOfHeaps, Pointer<IntPtr> ProcessHeaps)>('GetProcessHeaps');
+  return _GetProcessHeaps(NumberOfHeaps, ProcessHeaps);
+}
+
 /// Retrieves the product type for the operating system on the local
 /// computer, and maps the type to the product types supported by the
 /// specified operating system.
