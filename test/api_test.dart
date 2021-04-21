@@ -1028,12 +1028,106 @@ void main() {
           Pointer Function(int hHeap, int dwFlags, int dwBytes)>('HeapAlloc');
       expect(HeapAlloc, isA<Function>());
     });
+    test('Can instantiate HeapCompact', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final HeapCompact = kernel32.lookupFunction<
+          IntPtr Function(IntPtr hHeap, Uint32 dwFlags),
+          int Function(int hHeap, int dwFlags)>('HeapCompact');
+      expect(HeapCompact, isA<Function>());
+    });
+    test('Can instantiate HeapCreate', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final HeapCreate = kernel32.lookupFunction<
+          IntPtr Function(
+              Uint32 flOptions, IntPtr dwInitialSize, IntPtr dwMaximumSize),
+          int Function(int flOptions, int dwInitialSize,
+              int dwMaximumSize)>('HeapCreate');
+      expect(HeapCreate, isA<Function>());
+    });
+    test('Can instantiate HeapDestroy', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final HeapDestroy = kernel32.lookupFunction<Int32 Function(IntPtr hHeap),
+          int Function(int hHeap)>('HeapDestroy');
+      expect(HeapDestroy, isA<Function>());
+    });
     test('Can instantiate HeapFree', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final HeapFree = kernel32.lookupFunction<
           Int32 Function(IntPtr hHeap, Uint32 dwFlags, Pointer lpMem),
           int Function(int hHeap, int dwFlags, Pointer lpMem)>('HeapFree');
       expect(HeapFree, isA<Function>());
+    });
+    test('Can instantiate HeapLock', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final HeapLock = kernel32.lookupFunction<Int32 Function(IntPtr hHeap),
+          int Function(int hHeap)>('HeapLock');
+      expect(HeapLock, isA<Function>());
+    });
+    test('Can instantiate HeapQueryInformation', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final HeapQueryInformation = kernel32.lookupFunction<
+          Int32 Function(
+              IntPtr HeapHandle,
+              Uint32 HeapInformationClass,
+              Pointer HeapInformation,
+              IntPtr HeapInformationLength,
+              Pointer<IntPtr> ReturnLength),
+          int Function(
+              int HeapHandle,
+              int HeapInformationClass,
+              Pointer HeapInformation,
+              int HeapInformationLength,
+              Pointer<IntPtr> ReturnLength)>('HeapQueryInformation');
+      expect(HeapQueryInformation, isA<Function>());
+    });
+    test('Can instantiate HeapReAlloc', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final HeapReAlloc = kernel32.lookupFunction<
+          Pointer Function(
+              IntPtr hHeap, Uint32 dwFlags, Pointer lpMem, IntPtr dwBytes),
+          Pointer Function(int hHeap, int dwFlags, Pointer lpMem,
+              int dwBytes)>('HeapReAlloc');
+      expect(HeapReAlloc, isA<Function>());
+    });
+    test('Can instantiate HeapSetInformation', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final HeapSetInformation = kernel32.lookupFunction<
+          Int32 Function(IntPtr HeapHandle, Uint32 HeapInformationClass,
+              Pointer HeapInformation, IntPtr HeapInformationLength),
+          int Function(
+              int HeapHandle,
+              int HeapInformationClass,
+              Pointer HeapInformation,
+              int HeapInformationLength)>('HeapSetInformation');
+      expect(HeapSetInformation, isA<Function>());
+    });
+    test('Can instantiate HeapSize', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final HeapSize = kernel32.lookupFunction<
+          IntPtr Function(IntPtr hHeap, Uint32 dwFlags, Pointer lpMem),
+          int Function(int hHeap, int dwFlags, Pointer lpMem)>('HeapSize');
+      expect(HeapSize, isA<Function>());
+    });
+    test('Can instantiate HeapUnlock', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final HeapUnlock = kernel32.lookupFunction<Int32 Function(IntPtr hHeap),
+          int Function(int hHeap)>('HeapUnlock');
+      expect(HeapUnlock, isA<Function>());
+    });
+    test('Can instantiate HeapValidate', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final HeapValidate = kernel32.lookupFunction<
+          Int32 Function(IntPtr hHeap, Uint32 dwFlags, Pointer lpMem),
+          int Function(int hHeap, int dwFlags, Pointer lpMem)>('HeapValidate');
+      expect(HeapValidate, isA<Function>());
+    });
+    test('Can instantiate HeapWalk', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final HeapWalk = kernel32.lookupFunction<
+          Int32 Function(IntPtr hHeap, Pointer<PROCESS_HEAP_ENTRY> lpEntry),
+          int Function(
+              int hHeap, Pointer<PROCESS_HEAP_ENTRY> lpEntry)>('HeapWalk');
+      expect(HeapWalk, isA<Function>());
     });
     test('Can instantiate InitializeProcThreadAttributeList', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');

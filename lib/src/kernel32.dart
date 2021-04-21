@@ -2213,6 +2213,62 @@ Pointer HeapAlloc(int hHeap, int dwFlags, int dwBytes) {
   return _HeapAlloc(hHeap, dwFlags, dwBytes);
 }
 
+/// Returns the size of the largest committed free block in the specified
+/// heap. If the Disable heap coalesce on free global flag is set, this
+/// function also coalesces adjacent free blocks of memory in the heap.
+///
+/// ```c
+/// SIZE_T HeapCompact(
+///   HANDLE hHeap,
+///   DWORD  dwFlags
+/// );
+/// ```
+/// {@category kernel32}
+int HeapCompact(int hHeap, int dwFlags) {
+  final _HeapCompact = _kernel32.lookupFunction<
+      IntPtr Function(IntPtr hHeap, Uint32 dwFlags),
+      int Function(int hHeap, int dwFlags)>('HeapCompact');
+  return _HeapCompact(hHeap, dwFlags);
+}
+
+/// Creates a private heap object that can be used by the calling process.
+/// The function reserves space in the virtual address space of the process
+/// and allocates physical storage for a specified initial portion of this
+/// block.
+///
+/// ```c
+/// HANDLE HeapCreate(
+///   DWORD  flOptions,
+///   SIZE_T dwInitialSize,
+///   SIZE_T dwMaximumSize
+/// );
+/// ```
+/// {@category kernel32}
+int HeapCreate(int flOptions, int dwInitialSize, int dwMaximumSize) {
+  final _HeapCreate = _kernel32.lookupFunction<
+      IntPtr Function(
+          Uint32 flOptions, IntPtr dwInitialSize, IntPtr dwMaximumSize),
+      int Function(
+          int flOptions, int dwInitialSize, int dwMaximumSize)>('HeapCreate');
+  return _HeapCreate(flOptions, dwInitialSize, dwMaximumSize);
+}
+
+/// Destroys the specified heap object. It decommits and releases all the
+/// pages of a private heap object, and it invalidates the handle to the
+/// heap.
+///
+/// ```c
+/// BOOL HeapDestroy(
+///   HANDLE hHeap
+/// );
+/// ```
+/// {@category kernel32}
+int HeapDestroy(int hHeap) {
+  final _HeapDestroy = _kernel32.lookupFunction<Int32 Function(IntPtr hHeap),
+      int Function(int hHeap)>('HeapDestroy');
+  return _HeapDestroy(hHeap);
+}
+
 /// Frees a memory block allocated from a heap by the HeapAlloc or
 /// HeapReAlloc function.
 ///
@@ -2229,6 +2285,172 @@ int HeapFree(int hHeap, int dwFlags, Pointer lpMem) {
       Int32 Function(IntPtr hHeap, Uint32 dwFlags, Pointer lpMem),
       int Function(int hHeap, int dwFlags, Pointer lpMem)>('HeapFree');
   return _HeapFree(hHeap, dwFlags, lpMem);
+}
+
+/// Attempts to acquire the critical section object, or lock, that is
+/// associated with a specified heap.
+///
+/// ```c
+/// BOOL HeapLock(
+///   HANDLE hHeap
+/// );
+/// ```
+/// {@category kernel32}
+int HeapLock(int hHeap) {
+  final _HeapLock = _kernel32.lookupFunction<Int32 Function(IntPtr hHeap),
+      int Function(int hHeap)>('HeapLock');
+  return _HeapLock(hHeap);
+}
+
+/// Retrieves information about the specified heap.
+///
+/// ```c
+/// BOOL HeapQueryInformation(
+///   HANDLE                 HeapHandle,
+///   HEAP_INFORMATION_CLASS HeapInformationClass,
+///   PVOID                  HeapInformation,
+///   SIZE_T                 HeapInformationLength,
+///   PSIZE_T                ReturnLength
+/// );
+/// ```
+/// {@category kernel32}
+int HeapQueryInformation(
+    int HeapHandle,
+    int HeapInformationClass,
+    Pointer HeapInformation,
+    int HeapInformationLength,
+    Pointer<IntPtr> ReturnLength) {
+  final _HeapQueryInformation = _kernel32.lookupFunction<
+      Int32 Function(
+          IntPtr HeapHandle,
+          Uint32 HeapInformationClass,
+          Pointer HeapInformation,
+          IntPtr HeapInformationLength,
+          Pointer<IntPtr> ReturnLength),
+      int Function(
+          int HeapHandle,
+          int HeapInformationClass,
+          Pointer HeapInformation,
+          int HeapInformationLength,
+          Pointer<IntPtr> ReturnLength)>('HeapQueryInformation');
+  return _HeapQueryInformation(HeapHandle, HeapInformationClass,
+      HeapInformation, HeapInformationLength, ReturnLength);
+}
+
+/// Retrieves information about the specified heap.
+///
+/// ```c
+/// DECLSPEC_ALLOCATOR LPVOID HeapReAlloc(
+///   HANDLE                 hHeap,
+///   DWORD                  dwFlags,
+///   _Frees_ptr_opt_ LPVOID lpMem,
+///   SIZE_T                 dwBytes
+/// );
+/// ```
+/// {@category kernel32}
+Pointer HeapReAlloc(int hHeap, int dwFlags, Pointer lpMem, int dwBytes) {
+  final _HeapReAlloc = _kernel32.lookupFunction<
+      Pointer Function(
+          IntPtr hHeap, Uint32 dwFlags, Pointer lpMem, IntPtr dwBytes),
+      Pointer Function(
+          int hHeap, int dwFlags, Pointer lpMem, int dwBytes)>('HeapReAlloc');
+  return _HeapReAlloc(hHeap, dwFlags, lpMem, dwBytes);
+}
+
+/// Enables features for a specified heap.
+///
+/// ```c
+/// BOOL HeapSetInformation(
+///   HANDLE                 HeapHandle,
+///   HEAP_INFORMATION_CLASS HeapInformationClass,
+///   PVOID                  HeapInformation,
+///   SIZE_T                 HeapInformationLength
+/// );
+/// ```
+/// {@category kernel32}
+int HeapSetInformation(int HeapHandle, int HeapInformationClass,
+    Pointer HeapInformation, int HeapInformationLength) {
+  final _HeapSetInformation = _kernel32.lookupFunction<
+      Int32 Function(IntPtr HeapHandle, Uint32 HeapInformationClass,
+          Pointer HeapInformation, IntPtr HeapInformationLength),
+      int Function(
+          int HeapHandle,
+          int HeapInformationClass,
+          Pointer HeapInformation,
+          int HeapInformationLength)>('HeapSetInformation');
+  return _HeapSetInformation(
+      HeapHandle, HeapInformationClass, HeapInformation, HeapInformationLength);
+}
+
+/// Retrieves the size of a memory block allocated from a heap by the
+/// HeapAlloc or HeapReAlloc function.
+///
+/// ```c
+/// SIZE_T HeapSize(
+///   HANDLE  hHeap,
+///   DWORD   dwFlags,
+///   LPCVOID lpMem
+/// );
+/// ```
+/// {@category kernel32}
+int HeapSize(int hHeap, int dwFlags, Pointer lpMem) {
+  final _HeapSize = _kernel32.lookupFunction<
+      IntPtr Function(IntPtr hHeap, Uint32 dwFlags, Pointer lpMem),
+      int Function(int hHeap, int dwFlags, Pointer lpMem)>('HeapSize');
+  return _HeapSize(hHeap, dwFlags, lpMem);
+}
+
+/// Releases ownership of the critical section object, or lock, that is
+/// associated with a specified heap. It reverses the action of the
+/// HeapLock function.
+///
+/// ```c
+/// BOOL HeapUnlock(
+///   HANDLE hHeap
+/// );
+/// ```
+/// {@category kernel32}
+int HeapUnlock(int hHeap) {
+  final _HeapUnlock = _kernel32.lookupFunction<Int32 Function(IntPtr hHeap),
+      int Function(int hHeap)>('HeapUnlock');
+  return _HeapUnlock(hHeap);
+}
+
+/// Validates the specified heap. The function scans all the memory blocks
+/// in the heap and verifies that the heap control structures maintained by
+/// the heap manager are in a consistent state. You can also use the
+/// HeapValidate function to validate a single memory block within a
+/// specified heap without checking the validity of the entire heap.
+///
+/// ```c
+/// BOOL HeapValidate(
+///   HANDLE  hHeap,
+///   DWORD   dwFlags,
+///   LPCVOID lpMem
+/// );
+/// ```
+/// {@category kernel32}
+int HeapValidate(int hHeap, int dwFlags, Pointer lpMem) {
+  final _HeapValidate = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hHeap, Uint32 dwFlags, Pointer lpMem),
+      int Function(int hHeap, int dwFlags, Pointer lpMem)>('HeapValidate');
+  return _HeapValidate(hHeap, dwFlags, lpMem);
+}
+
+/// Enumerates the memory blocks in the specified heap.
+///
+/// ```c
+/// BOOL HeapWalk(
+///   HANDLE               hHeap,
+///   LPPROCESS_HEAP_ENTRY lpEntry
+/// );
+/// ```
+/// {@category kernel32}
+int HeapWalk(int hHeap, Pointer<PROCESS_HEAP_ENTRY> lpEntry) {
+  final _HeapWalk = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hHeap, Pointer<PROCESS_HEAP_ENTRY> lpEntry),
+      int Function(int hHeap, Pointer<PROCESS_HEAP_ENTRY> lpEntry)>('HeapWalk');
+  return _HeapWalk(hHeap, lpEntry);
 }
 
 /// Initializes the specified list of attributes for process and thread

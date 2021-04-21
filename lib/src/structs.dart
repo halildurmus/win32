@@ -120,6 +120,28 @@ class DEVMODE extends Struct {
   external int dmPanningHeight;
 }
 
+/// Contains information about a heap element. The HeapWalk function uses a
+/// PROCESS_HEAP_ENTRY structure to enumerate the elements of a heap.
+///
+/// {@category Struct}
+class PROCESS_HEAP_ENTRY extends Struct {
+  external Pointer lpData;
+  @Uint32()
+  external int cbData;
+  @Uint8()
+  external int cbOverhead;
+  @Uint8()
+  external int iRegionIndex;
+  @Uint16()
+  external int wFlags;
+  @Uint32()
+  external int dwCommittedSize;
+  @Uint32()
+  external int dwUnCommittedSize;
+  external Pointer lpFirstBlock;
+  external Pointer lpLastBlock;
+}
+
 // typedef struct _SYSTEM_INFO {
 //   union {
 //     DWORD dwOemId;

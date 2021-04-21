@@ -1757,6 +1757,11 @@
         "dllLibrary": "kernel32",
         "comment": "Retrieves a handle to the default heap of the calling process. This handle can then be used in subsequent calls to the heap functions."
     },
+    "GetProcessHeaps": {
+        "prototype": "DWORD GetProcessHeaps(\n  DWORD   NumberOfHeaps,\n  PHANDLE ProcessHeaps\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Returns the number of active heaps and retrieves handles to all of the active heaps for the calling process."
+    },
     "GetProcessWindowStation": {
         "prototype": "HWINSTA GetProcessWindowStation();",
         "dllLibrary": "user32",
@@ -2083,10 +2088,65 @@
         "dllLibrary": "kernel32",
         "comment": "Allocates a block of memory from a heap. The allocated memory is not movable."
     },
+    "HeapCompact": {
+        "prototype": "SIZE_T HeapCompact(\n  HANDLE hHeap,\n  DWORD  dwFlags\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Returns the size of the largest committed free block in the specified heap. If the Disable heap coalesce on free global flag is set, this function also coalesces adjacent free blocks of memory in the heap."
+    },
+    "HeapCreate": {
+        "prototype": "HANDLE HeapCreate(\n  DWORD  flOptions,\n  SIZE_T dwInitialSize,\n  SIZE_T dwMaximumSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Creates a private heap object that can be used by the calling process. The function reserves space in the virtual address space of the process and allocates physical storage for a specified initial portion of this block."
+    },
+    "HeapDestroy": {
+        "prototype": "BOOL HeapDestroy(\n  HANDLE hHeap\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Destroys the specified heap object. It decommits and releases all the pages of a private heap object, and it invalidates the handle to the heap."
+    },
     "HeapFree": {
         "prototype": "BOOL HeapFree(\n  HANDLE                 hHeap,\n  DWORD                  dwFlags,\n  _Frees_ptr_opt_ LPVOID lpMem\n);",
         "dllLibrary": "kernel32",
         "comment": "Frees a memory block allocated from a heap by the HeapAlloc or HeapReAlloc function."
+    },
+    "HeapLock": {
+        "prototype": "BOOL HeapLock(\n  HANDLE hHeap\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Attempts to acquire the critical section object, or lock, that is associated with a specified heap."
+    },
+    "HeapQueryInformation": {
+        "prototype": "BOOL HeapQueryInformation(\n  HANDLE                 HeapHandle,\n  HEAP_INFORMATION_CLASS HeapInformationClass,\n  PVOID                  HeapInformation,\n  SIZE_T                 HeapInformationLength,\n  PSIZE_T                ReturnLength\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves information about the specified heap."
+    },
+    "HeapReAlloc": {
+        "prototype": "DECLSPEC_ALLOCATOR LPVOID HeapReAlloc(\n  HANDLE                 hHeap,\n  DWORD                  dwFlags,\n  _Frees_ptr_opt_ LPVOID lpMem,\n  SIZE_T                 dwBytes\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves information about the specified heap."
+    },
+    "HeapSetInformation": {
+        "prototype": "BOOL HeapSetInformation(\n  HANDLE                 HeapHandle,\n  HEAP_INFORMATION_CLASS HeapInformationClass,\n  PVOID                  HeapInformation,\n  SIZE_T                 HeapInformationLength\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Enables features for a specified heap."
+    },
+    "HeapSize": {
+        "prototype": "SIZE_T HeapSize(\n  HANDLE  hHeap,\n  DWORD   dwFlags,\n  LPCVOID lpMem\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the size of a memory block allocated from a heap by the HeapAlloc or HeapReAlloc function."
+    },
+    "HeapUnlock": {
+        "prototype": "BOOL HeapUnlock(\n  HANDLE hHeap\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Releases ownership of the critical section object, or lock, that is associated with a specified heap. It reverses the action of the HeapLock function."
+    },
+    "HeapValidate": {
+        "prototype": "BOOL HeapValidate(\n  HANDLE  hHeap,\n  DWORD   dwFlags,\n  LPCVOID lpMem\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Validates the specified heap. The function scans all the memory blocks in the heap and verifies that the heap control structures maintained by the heap manager are in a consistent state. You can also use the HeapValidate function to validate a single memory block within a specified heap without checking the validity of the entire heap."
+    },
+    "HeapWalk": {
+        "prototype": "BOOL HeapWalk(\n  HANDLE               hHeap,\n  LPPROCESS_HEAP_ENTRY lpEntry\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Enumerates the memory blocks in the specified heap."
     },
     "HideCaret": {
         "prototype": "BOOL HideCaret(\n  HWND hWnd\n);",
