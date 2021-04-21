@@ -2073,6 +2073,11 @@
         "dllLibrary": "kernel32",
         "comment": "Locks a global memory object and returns a pointer to the first byte of the object's memory block."
     },
+    "GlobalSize": {
+        "prototype": "SIZE_T GlobalSize(\n  HGLOBAL hMem\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the current size of the specified global memory object, in bytes."
+    },
     "GlobalUnlock": {
         "prototype": "BOOL GlobalUnlock(\n  HGLOBAL hMem\n);",
         "dllLibrary": "kernel32",
