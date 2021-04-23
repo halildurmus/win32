@@ -1,4 +1,4 @@
-## 1.0.0-pre.6
+## 1.0.0-pre.7
 
 - Update to Dart 2.13, which includes new support for packed structs and arrays.
 - Overhaul the APIs to include much better support for attributes. WinMD can now
