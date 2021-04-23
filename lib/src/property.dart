@@ -11,6 +11,7 @@ import 'package:win32/win32.dart';
 import 'base.dart';
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
+import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
@@ -21,15 +22,15 @@ import 'utils.dart';
 class Property extends TokenObject with CustomAttributesMixin {
   final CorElementType corType;
   final Uint8List defaultValue;
-  final int getterToken;
   final String name;
   final Uint32List otherMethodTokens;
-  final int setterToken;
   final Uint8List signatureBlob;
   final TypeIdentifier typeIdentifier;
 
   final int _attributes;
+  final int _getterToken;
   final int _parentToken;
+  final int _setterToken;
 
   Property(
       IMetaDataImport2 reader,
@@ -41,8 +42,8 @@ class Property extends TokenObject with CustomAttributesMixin {
       this.typeIdentifier,
       this.corType,
       this.defaultValue,
-      this.setterToken,
-      this.getterToken,
+      this._setterToken,
+      this._getterToken,
       this.otherMethodTokens)
       : super(reader, token);
 
@@ -85,8 +86,6 @@ class Property extends TokenObject with CustomAttributesMixin {
         final propName = szProperty.toDartString();
 
         // PropertySig is defined in §II.23.2.5.
-        //
-        // TODO: More sophisticated parsing.
         final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
         final typeTuple = parseTypeFromSignature(signature.sublist(2), reader);
         final defaultValue =
@@ -130,6 +129,16 @@ class Property extends TokenObject with CustomAttributesMixin {
   @override
   String toString() => 'Property: $name';
 
+  /// Returns the get accessor method for the property.
+  Method? get getterMethod => reader.IsValidToken(_getterToken) == TRUE
+      ? Method.fromToken(reader, _getterToken)
+      : null;
+
+  /// Returns the set accessor method for the property.
+  Method? get setterMethod => reader.IsValidToken(_setterToken) == TRUE
+      ? Method.fromToken(reader, _setterToken)
+      : null;
+
   /// Returns the [TypeDef] representing the type that implements the property.
   TypeDef get parent => TypeDef.fromToken(reader, _parentToken);
 
@@ -142,6 +151,14 @@ class Property extends TokenObject with CustomAttributesMixin {
   bool get hasDefault =>
       _attributes & CorPropertyAttr.prHasDefault ==
       CorPropertyAttr.prHasDefault;
+
+  /// Returns true if the property has a getter. If false, the property is
+  /// write-only.
+  bool get hasGetter => reader.IsValidToken(_getterToken) == TRUE;
+
+  /// Returns true if the property has a setter. If false, the property is
+  /// read-only.
+  bool get hasSetter => reader.IsValidToken(_setterToken) == TRUE;
 
   /// Returns true if the common language runtime metadata internal APIs should
   /// check the encoding of the property name.

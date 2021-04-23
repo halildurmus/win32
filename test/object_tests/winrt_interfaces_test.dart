@@ -97,11 +97,13 @@ void main() {
     expect(iai.methods[0].implFeatures.isManaged, isTrue);
 
     expect(iai.properties.length, equals(3));
-    // TODO: Why is this not Exception?
     expect(iai.properties[0].typeIdentifier.name,
         equals('Windows.Foundation.HResult'));
     expect(iai.properties[0].typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
     expect(iai.properties[0].name, equals('ErrorCode'));
+    expect(iai.properties[0].hasGetter, isTrue);
+    expect(iai.properties[0].getterMethod?.methodName, equals('get_ErrorCode'));
+    expect(iai.properties[0].hasSetter, isFalse);
   });
 }

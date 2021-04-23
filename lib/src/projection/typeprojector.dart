@@ -153,7 +153,6 @@ class TypeProjector {
         return 'Pointer';
       case CorElementType.ELEMENT_TYPE_GENERICINST:
       case CorElementType.ELEMENT_TYPE_ARRAY:
-        // TODO: Assume a Vector for now
         return TypeProjector(typeIdentifier.typeArg!).nativeType;
       case CorElementType.ELEMENT_TYPE_PTR:
         return pointerType(typeIdentifier);
@@ -183,7 +182,6 @@ class TypeProjector {
 
     if (typeIdentifier.corType == CorElementType.ELEMENT_TYPE_CLASS) {
       // WinRT type
-      // TODO: Check this is right in all cases.
       return 'Pointer';
     }
     // Something failed. Return something egregiously wrong, so that the
