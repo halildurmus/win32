@@ -18,6 +18,7 @@ import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'mixins/genericparams_mixin.dart';
 import 'property.dart';
+import 'scope.dart';
 import 'systemtokens.dart';
 import 'type_aliases.dart';
 import 'typeidentifier.dart';
@@ -119,28 +120,30 @@ class TypeDef extends TokenObject
 
       if (SUCCEEDED(hr)) {
         final typeName = szName.toDartString();
-        try {
+        final resolutionScopeToken = ptkResolutionScope.value;
+
+        // Special case for WinRT base type
+        if (resolutionScopeToken == 0x00 && typeRefToken == 0x01000000) {
+          return TypeDef(reader, 0, 'IInspectable');
+        }
+
+        // If it's the same scope, just look it up.
+        if (Scope.moduleToken(reader) == resolutionScopeToken) {
           final newScope = MetadataStore.getScopeForType(typeName);
           return newScope.findTypeDef(typeName)!;
-        } catch (exception) {
-          // a token like IInspectable is out of reach of GetTypeRefProps, since it is
-          // a plain COM object. These objects are returned as system types.
-          if (systemTokens.containsKey(typeRefToken)) {
-            return TypeDef(reader, 0, systemTokens[typeRefToken]!);
-          }
-          if (systemTokens.containsValue(typeName)) {
-            return TypeDef(reader, 0, typeName);
-          }
-          // Perhaps we can find it in the current scope after all (for example,
-          // it's a nested class)
-          try {
-            final typedef = TypeDef.fromTypeDefToken(reader, typeRefToken);
-            return typedef;
-          } catch (exception) {
-            throw WinmdException(
-                'Unable to find scope for $typeName [${typeRefToken.toHexString(32)}]...');
+        }
+
+        if (resolutionScopeToken & 0xFF000000 == CorTokenType.mdtAssemblyRef) {
+          // Some references are to .NET objects like System.Guid. Rather than
+          // try and reference the .NET type, these are returned as system
+          // types.
+          if (netStandardTokens.containsKey(typeRefToken)) {
+            return TypeDef(reader, 0, netStandardTokens[typeRefToken]!);
           }
         }
+
+        // OK, so we'll just return the type name
+        return TypeDef(reader, 0, typeName);
       } else {
         throw WindowsException(hr);
       }
@@ -260,7 +263,7 @@ class TypeDef extends TokenObject
   ///
   /// More information at:
   /// https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#type-system-encoding
-  bool get isSystemType => systemTokens.containsValue(typeName);
+  bool get isSystemType => netStandardTokens.containsValue(typeName);
 
   /// Converts an individual interface into a type.
   TypeDef processInterfaceToken(int token) {

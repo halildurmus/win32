@@ -19,7 +19,7 @@ void main() {
 
   test('Scope modules contain expected DLLs', () {
     expect(
-        scope.modules.map((module) => module.name),
+        scope.moduleRefs.map((module) => module.name),
         containsAll(
             <String>['KERNEL32', 'USER32', 'GDI32', 'd3d12', 'netutils']));
   });

@@ -9,7 +9,7 @@ import 'package:win32/win32.dart';
 
 import 'base.dart';
 import 'com/IMetaDataImport2.dart';
-import 'module.dart';
+import 'moduleref.dart';
 import 'pekind.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
@@ -25,7 +25,7 @@ class Scope {
   final IMetaDataImport2 reader;
 
   final _enums = <TypeDef>[];
-  final _modules = <Module>[];
+  final _modules = <ModuleRef>[];
   final _typedefs = <TypeDef>[];
 
   Scope(this.reader) {
@@ -79,11 +79,26 @@ class Scope {
     return _typedefs;
   }
 
+  static int moduleToken(IMetaDataImport2 reader) {
+    final pmd = calloc<mdModule>();
+
+    try {
+      final hr = reader.GetModuleFromScope(pmd);
+      if (SUCCEEDED(hr)) {
+        return pmd.value;
+      } else {
+        throw WinmdException('Unable to find module token.');
+      }
+    } finally {
+      free(pmd);
+    }
+  }
+
   List<TypeDef> get delegates =>
       typeDefs.where((typeDef) => typeDef.isDelegate).toList();
 
   /// Get an enumerated list of modules in this scope.
-  List<Module> get modules {
+  List<ModuleRef> get moduleRefs {
     if (_modules.isEmpty) {
       final phEnum = calloc<HCORENUM>();
       final rgModuleRefs = calloc<mdModuleRef>();
@@ -93,7 +108,7 @@ class Scope {
         var hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
         while (hr == S_OK) {
           final moduleToken = rgModuleRefs.value;
-          _modules.add(Module.fromToken(reader, moduleToken));
+          _modules.add(ModuleRef.fromToken(reader, moduleToken));
           hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
         }
       } finally {
