@@ -65,12 +65,18 @@ abstract class TokenObject {
   bool operator ==(Object other) =>
       other is TokenObject && other.token == token;
 
-  /// Returns true if the token is well-formed.
-  bool get isValidToken => reader.IsValidToken(token) == TRUE;
+  /// Returns true if the token maps to an entry in the WinMD database.
+  ///
+  /// This should return true for most objects, but as noted in
+  /// https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#type-system-encoding,
+  /// some types are markers that shoudl never be resolved. For example, WinRT
+  /// uses the CLR `System.Guid` type as a marker, but it should not be resolved
+  /// to the .NET type system.
+  bool get isResolvedToken => reader.IsValidToken(token) == TRUE;
 
   /// Returns true if the token is marked as global.
   bool get isGlobal {
-    if (isValidToken) {
+    if (isResolvedToken) {
       final pIsGlobal = calloc<Int32>();
 
       try {

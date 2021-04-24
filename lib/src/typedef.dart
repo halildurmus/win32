@@ -17,7 +17,6 @@ import 'mixins/customattributes_mixin.dart';
 import 'mixins/genericparams_mixin.dart';
 import 'property.dart';
 import 'scope.dart';
-import 'systemtokens.dart';
 import 'type_aliases.dart';
 import 'typeidentifier.dart';
 import 'utils/exception.dart';
@@ -129,21 +128,13 @@ class TypeDef extends TokenObject
           return TypeDef(scope, 0, 'IInspectable');
         }
 
-        // If it's the same scope, just look it up.
+        // If it's the same scope, just look it up based on the returned name.
         if (scope.moduleToken == resolutionScopeToken) {
           return scope.findTypeDef(typeName)!;
         }
 
-        if (resolutionScopeToken & 0xFF000000 == CorTokenType.mdtAssemblyRef) {
-          // Some references are to .NET objects like System.Guid. Rather than
-          // try and reference the .NET type, these are returned as system
-          // types.
-          if (netStandardTokens.containsKey(typeRefToken)) {
-            return TypeDef(scope, 0, netStandardTokens[typeRefToken]!);
-          }
-        }
-
-        // OK, so we'll just return the type name
+        // Otherwise the resolution scope is an AssemblyRef or ModuleRef token.
+        // OK, so we'll just return the type name.
         return TypeDef(scope, 0, typeName);
       } else {
         throw WindowsException(hr);
@@ -258,12 +249,6 @@ class TypeDef extends TokenObject
   /// This includes the packing alignment, the minimum class size, and the field
   /// layout (e.g. for sparsely or overlapping structs).
   ClassLayout get classLayout => ClassLayout(scope, token);
-
-  /// Is the type a non-Windows Runtime type, such as `System.Object`?
-  ///
-  /// More information at:
-  /// https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#type-system-encoding
-  bool get isSystemType => netStandardTokens.containsValue(typeName);
 
   /// Converts an individual interface into a type.
   TypeDef processInterfaceToken(int token) {

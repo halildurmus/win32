@@ -78,20 +78,20 @@ void main() {
     expect(api.module.name, equalsIgnoringCase('gdi32'));
   });
 
-  test('isValid gives correct result for a real token', () {
+  test('isResolvedToken gives correct result for a real token', () {
     final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
 
     final api = typedef.findMethod('AddFontResourceW')!;
 
-    expect(api.isValidToken, isTrue);
+    expect(api.isResolvedToken, isTrue);
   });
 
-  test('isValid gives correct result for a pseudo-token', () {
+  test('isResolvedToken gives correct result for a pseudo-token', () {
     final typedef = scope.findTypeDef('Windows.Win32.Gdi.Apis')!;
     final api = typedef.findMethod('AddFontResourceW')!;
     final returnType = api.returnType;
 
-    expect(returnType.isValidToken, isFalse);
+    expect(returnType.isResolvedToken, isFalse);
   });
 
   test('No attributes for a pseudo-token', () {

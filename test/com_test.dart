@@ -9,14 +9,14 @@ void main() {
     final iNetwork = scope.typeDefs
         .firstWhere((typedef) => typedef.typeName.endsWith('INetwork'));
 
-    expect(iNetwork.isValidToken, isTrue);
+    expect(iNetwork.isResolvedToken, isTrue);
   });
 
   test('Can find a COM interface in winmd by name', () {
     final iNetwork =
         scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
 
-    expect(iNetwork.isValidToken, isTrue);
+    expect(iNetwork.isResolvedToken, isTrue);
   });
 
   group('INetwork tests', () {
@@ -25,7 +25,7 @@ void main() {
 
     test('Can search for a COM interface in winmd', () {
       expect(iNetwork.isInterface, isTrue);
-      expect(iNetwork.isValidToken, isTrue);
+      expect(iNetwork.isResolvedToken, isTrue);
     });
 
     test('INetwork inherits from IDispatch', () {

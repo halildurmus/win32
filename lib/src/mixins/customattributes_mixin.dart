@@ -66,7 +66,7 @@ mixin CustomAttributesMixin on TokenObject {
       // type has a token of 0). In this case, we return an empty set, since
       // calling EnumCustomAttributes with a scope of 0 will return all
       // attributes on all objects in the scope.
-      if (!isValidToken) return customAttributes;
+      if (!isResolvedToken) return customAttributes;
 
       var hr =
           reader.EnumCustomAttributes(phEnum, token, 0, rAttrs, 1, pcAttrs);
