@@ -63,7 +63,6 @@ class Method extends TokenObject
     _parseMethodType();
     _parseParameterNames();
     _parseSignatureBlob();
-    _parseParameterAttributes();
   }
 
   /// Creates a method object from its given token.
@@ -336,25 +335,6 @@ class Method extends TokenObject
       free(phEnum);
       free(rParams);
       free(pcTokens);
-    }
-  }
-
-  void _parseParameterAttributes() {
-    // At some point, we should look this up
-    const nativeTypeInfoToken = 0x0A000004;
-
-    for (final param in parameters) {
-      for (final attr in param.customAttributes) {
-        if (attr.attributeType == nativeTypeInfoToken) {
-          if (attr.signatureBlob[2] == 0x14) // ASCII
-          {
-            param.typeIdentifier.name = 'LPSTR';
-          } else if (attr.signatureBlob[2] == 0x15) // Unicode
-          {
-            param.typeIdentifier.name = 'LPWSTR';
-          }
-        }
-      }
     }
   }
 
