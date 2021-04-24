@@ -257,8 +257,7 @@ class TypeDef extends TokenObject
   /// layout (e.g. for sparsely or overlapping structs).
   ClassLayout get classLayout => ClassLayout(scope, token);
 
-  /// Is the type a non-Windows Runtime type, such as System.Object or
-  /// IInspectable?
+  /// Is the type a non-Windows Runtime type, such as `System.Object`?
   ///
   /// More information at:
   /// https://docs.microsoft.com/en-us/uwp/winrt-cref/winmd-files#type-system-encoding
