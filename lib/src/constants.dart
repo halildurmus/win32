@@ -5506,6 +5506,110 @@ const CF_NOVERTFONTS = 0x01000000;
 const CF_INACTIVEFONTS = 0x02000000;
 
 // -----------------------------------------------------------------------------
+// Find / Replace Common Dialog constants
+// -----------------------------------------------------------------------------
+
+/// If set, the Down button of the direction radio buttons in a Find dialog box
+/// is selected indicating that you should search from the current location to
+/// the end of the document. If not set, the Up button is selected so you should
+/// search to the beginning of the document. You can set this flag to initialize
+/// the dialog box. If set in a FINDMSGSTRING message, indicates the user's
+/// selection.
+const FR_DOWN = 0x00000001;
+
+/// If set, the Match Whole Word Only check box is selected indicating that you
+/// should search only for whole words that match the search string. If not set,
+/// the check box is unselected so you should also search for word fragments
+/// that match the search string. You can set this flag to initialize the dialog
+/// box. If set in a FINDMSGSTRING message, indicates the user's selection.
+const FR_WHOLEWORD = 0x00000002;
+
+/// If set, the Match Case check box is selected indicating that the search
+/// should be case-sensitive. If not set, the check box is unselected so the
+/// search should be case-insensitive. You can set this flag to initialize the
+/// dialog box. If set in a FINDMSGSTRING message, indicates the user's
+/// selection.
+const FR_MATCHCASE = 0x00000004;
+
+/// If set in a FINDMSGSTRING message, indicates that the user clicked the Find
+/// Next button in a Find or Replace dialog box. The lpstrFindWhat member
+/// specifies the string to search for.
+const FR_FINDNEXT = 0x00000008;
+
+/// If set in a FINDMSGSTRING message, indicates that the user clicked the
+/// Replace button in a Replace dialog box. The lpstrFindWhat member specifies
+/// the string to be replaced and the lpstrReplaceWith member specifies the
+/// replacement string.
+const FR_REPLACE = 0x00000010;
+
+/// If set in a FINDMSGSTRING message, indicates that the user clicked the
+/// Replace All button in a Replace dialog box. The lpstrFindWhat member
+/// specifies the string to be replaced and the lpstrReplaceWith member
+/// specifies the replacement string.
+const FR_REPLACEALL = 0x00000020;
+
+/// If set in a FINDMSGSTRING message, indicates that the dialog box is closing.
+/// When you receive a message with this flag set, the dialog box handle
+/// returned by the FindText or ReplaceText function is no longer valid.
+const FR_DIALOGTERM = 0x00000040;
+
+/// Causes the dialog box to display the Help button. The hwndOwner member must
+/// specify the window to receive the HELPMSGSTRING registered messages that the
+/// dialog box sends when the user clicks the Help button.
+const FR_SHOWHELP = 0x00000080;
+
+/// Enables the hook function specified in the lpfnHook member. This flag is
+/// used only to initialize the dialog box.
+const FR_ENABLEHOOK = 0x00000100;
+
+/// Indicates that the hInstance and lpTemplateName members specify a dialog box
+/// template to use in place of the default template. This flag is used only to
+/// initialize the dialog box.
+const FR_ENABLETEMPLATE = 0x00000200;
+
+/// If set when initializing a Find dialog box, disables the search direction
+/// radio buttons.
+const FR_NOUPDOWN = 0x00000400;
+
+/// If set when initializing a Find or Replace dialog box, disables the Match
+/// Case check box.
+const FR_NOMATCHCASE = 0x00000800;
+
+/// If set when initializing a Find or Replace dialog box, disables the Whole
+/// Word check box.
+const FR_NOWHOLEWORD = 0x00001000;
+
+/// Indicates that the hInstance member identifies a data block that contains a
+/// preloaded dialog box template. The system ignores the lpTemplateName member
+/// if this flag is specified.
+const FR_ENABLETEMPLATEHANDLE = 0x00002000;
+
+/// If set when initializing a Find dialog box, hides the search direction radio
+/// buttons.
+const FR_HIDEUPDOWN = 0x00004000;
+
+/// If set when initializing a Find or Replace dialog box, hides the Match Case
+/// check box.
+const FR_HIDEMATCHCASE = 0x00008000;
+
+/// If set when initializing a Find or Replace dialog box, hides the Match Whole
+/// Word Only check box.
+const FR_HIDEWHOLEWORD = 0x00010000;
+
+/// If set, the search operation considers Arabic and Hebrew diacritical marks.
+/// If not set, diacritical marks are ignored.
+const FR_MATCHDIAC = 0x20000000;
+
+/// If set, the search operation considers Arabic and Hebrew kashidas. If not
+/// set, kashidas are ignored.
+const FR_MATCHKASHIDA = 0x40000000;
+
+/// If set, the search differentiates between Arabic and Hebrew alefs with
+/// different accents. If not set, all alefs are matched by the alef character
+/// alone.
+const FR_MATCHALEFHAMZA = 0x80000000;
+
+// -----------------------------------------------------------------------------
 // Open File Common Dialog constants
 // -----------------------------------------------------------------------------
 
