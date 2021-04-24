@@ -12,6 +12,7 @@ import '../manual_gen/function.dart';
 import '../manual_gen/win32api.dart';
 import 'generate_win32_structs.dart';
 import 'generate_win32_tests.dart';
+import 'projection/typeprojector.dart';
 import 'winmd_caveats.dart';
 
 class Win32Prototype {

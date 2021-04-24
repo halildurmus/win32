@@ -13,6 +13,7 @@ import '../manual_gen/function.dart';
 import '../manual_gen/struct_sizes.dart';
 import '../manual_gen/win32api.dart';
 import 'generate_win32.dart';
+import 'projection/typeprojector.dart';
 
 int generateTests(Win32API win32) {
   var testsGenerated = 0;

@@ -11,6 +11,7 @@ import 'package:winmd/winmd.dart';
 
 import '../manual_gen/win32api.dart';
 import 'generate_win32.dart';
+import 'projection/typeprinter.dart';
 
 const structFileHeader = '''
 // Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file

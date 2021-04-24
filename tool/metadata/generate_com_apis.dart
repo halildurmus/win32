@@ -5,6 +5,10 @@ import 'dart:io';
 import 'package:args/args.dart';
 import 'package:winmd/winmd.dart';
 
+import 'projection/classprojector.dart';
+import 'projection/projections.dart';
+import 'projection/typeprinter.dart';
+
 const interfacesToGenerate = <String>[
   'Windows.Win32.Automation.IDispatch',
   'Windows.Win32.Automation.IEnumVARIANT',
