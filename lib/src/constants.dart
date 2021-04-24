@@ -5297,6 +5297,381 @@ const WDA_MONITOR = 0x00000001;
 const WDA_EXCLUDEFROMCAPTURE = 0x00000011;
 
 // -----------------------------------------------------------------------------
+// Bitmap compression constants
+// -----------------------------------------------------------------------------
+
+/// An uncompressed format.
+const BI_RGB = 0;
+
+/// A run-length encoded (RLE) format for bitmaps with 8 bpp. The compression
+/// format is a two-byte format consisting of a count byte followed by a byte
+/// containing a color index. If bV5Compression is BI_RGB and the bV5BitCount
+/// member is 16, 24, or 32, the bitmap array specifies the actual intensities
+/// of blue, green, and red rather than using color table indexes.
+const BI_RLE8 = 1;
+
+/// An RLE format for bitmaps with 4 bpp. The compression format is a two-byte
+/// format consisting of a count byte followed by two word-length color indexes.
+const BI_RLE4 = 2;
+
+/// Specifies that the bitmap is not compressed and that the color masks for the
+/// red, green, and blue components of each pixel are specified in the
+/// bV5RedMask, bV5GreenMask, and bV5BlueMask members. This is valid when used
+/// with 16- and 32-bpp bitmaps.
+const BI_BITFIELDS = 3;
+
+/// Specifies that the image is compressed using the JPEG file Interchange
+/// Format. JPEG compression trades off compression against loss; it can achieve
+/// a compression ratio of 20:1 with little noticeable loss.
+const BI_JPEG = 4;
+
+/// Specifies that the image is compressed using the PNG file Interchange
+/// Format.
+const BI_PNG = 5;
+
+// -----------------------------------------------------------------------------
+// Color Common Dialog constants
+// -----------------------------------------------------------------------------
+
+/// Causes the dialog box to use the color specified in the rgbResult member as
+/// the initial color selection.
+const CC_RGBINIT = 0x00000001;
+
+/// Causes the dialog box to display the additional controls that allow the user
+/// to create custom colors. If this flag is not set, the user must click the
+/// Define Custom Color button to display the custom color controls.
+const CC_FULLOPEN = 0x00000002;
+
+/// Disables the Define Custom Color button.
+const CC_PREVENTFULLOPEN = 0x00000004;
+
+/// Causes the dialog box to display the Help button. The hwndOwner member must
+/// specify the window to receive the HELPMSGSTRING registered messages that the
+/// dialog box sends when the user clicks the Help button.
+const CC_SHOWHELP = 0x00000008;
+
+/// Enables the hook procedure specified in the lpfnHook member of this
+/// structure. This flag is used only to initialize the dialog box.
+const CC_ENABLEHOOK = 0x00000010;
+
+/// The hInstance and lpTemplateName members specify a dialog box template to
+/// use in place of the default template. This flag is used only to initialize
+/// the dialog box.
+const CC_ENABLETEMPLATE = 0x00000020;
+
+/// The hInstance member identifies a data block that contains a preloaded
+/// dialog box template. The system ignores the lpTemplateName member if this
+/// flag is specified. This flag is used only to initialize the dialog box.
+const CC_ENABLETEMPLATEHANDLE = 0x00000040;
+
+/// Causes the dialog box to display only solid colors in the set of basic
+/// colors.
+const CC_SOLIDCOLOR = 0x00000080;
+
+/// Causes the dialog box to display all available colors in the set of basic
+/// colors.
+const CC_ANYCOLOR = 0x00000100;
+
+// -----------------------------------------------------------------------------
+// Font Common Dialog constants
+// -----------------------------------------------------------------------------
+
+/// This flag is ignored for font enumeration. In Windows Vista or below, it
+/// caused the dialog box to list only the screen fonts supported by the system.
+const CF_SCREENFONTS = 0x00000001;
+
+/// This flag is ignored for font enumeration. In Windows Vista or below, it
+/// caused the dialog box to list only the fonts supported by the printer
+/// associated with the device context or information context identified by the
+/// hDC member.
+const CF_PRINTERFONTS = 0x00000002;
+
+/// This flag is ignored for font enumeration.
+const CF_BOTH = CF_SCREENFONTS | CF_PRINTERFONTS;
+
+/// Causes the dialog box to display the Help button. The hwndOwner member must
+/// specify the window to receive the HELPMSGSTRING registered messages that the
+/// dialog box sends when the user clicks the Help button.
+const CF_SHOWHELP = 0x00000004;
+
+/// Enables the hook procedure specified in the lpfnHook member of this
+/// structure.
+const CF_ENABLEHOOK = 0x00000008;
+
+/// Indicates that the hInstance and lpTemplateName members specify a dialog box
+/// template to use in place of the default template.
+const CF_ENABLETEMPLATE = 0x00000010;
+
+/// Indicates that the hInstance member identifies a data block that contains a
+/// preloaded dialog box template. The system ignores the lpTemplateName member
+/// if this flag is specified.
+const CF_ENABLETEMPLATEHANDLE = 0x00000020;
+
+/// ChooseFont should use the structure pointed to by the lpLogFont member to
+/// initialize the dialog box controls.
+const CF_INITTOLOGFONTSTRUCT = 0x00000040;
+
+/// The lpszStyle member is a pointer to a buffer that contains style data that
+/// ChooseFont should use to initialize the Font Style combo box. When the user
+/// closes the dialog box, ChooseFont copies style data for the user's selection
+/// to this buffer.
+const CF_USESTYLE = 0x00000080;
+
+/// Causes the dialog box to display the controls that allow the user to specify
+/// strikeout, underline, and text color options. If this flag is set, you can
+/// use the rgbColors member to specify the initial text color. You can use the
+/// lfStrikeOut and lfUnderline members of the structure pointed to by lpLogFont
+/// to specify the initial settings of the strikeout and underline check boxes.
+/// ChooseFont can use these members to return the user's selections.
+const CF_EFFECTS = 0x00000100;
+
+/// Causes the dialog box to display the Apply button. You should provide a hook
+/// procedure to process WM_COMMAND messages for the Apply button. The hook
+/// procedure can send the WM_CHOOSEFONT_GETLOGFONT message to the dialog box to
+/// retrieve the address of the structure that contains the current selections
+/// for the font.
+const CF_APPLY = 0x00000200;
+
+/// This flag is obsolete.
+const CF_ANSIONLY = 0x00000400;
+
+/// ChooseFont should allow selection of fonts for all non-OEM and Symbol
+/// character sets, as well as the ANSI character set.
+const CF_SCRIPTSONLY = CF_ANSIONLY;
+
+/// ChooseFont should not allow vector font selections.
+const CF_NOVECTORFONTS = 0x00000800;
+
+/// Same as the CF_NOVECTORFONTS flag.
+const CF_NOOEMFONTS = CF_NOVECTORFONTS;
+
+/// ChooseFont should not display or allow selection of font simulations.
+const CF_NOSIMULATIONS = 0x00001000;
+
+/// ChooseFont should select only font sizes within the range specified by the
+/// nSizeMin and nSizeMax members.
+const CF_LIMITSIZE = 0x00002000;
+
+/// ChooseFont should enumerate and allow selection of only fixed-pitch fonts.
+const CF_FIXEDPITCHONLY = 0x00004000;
+
+/// Obsolete. ChooseFont ignores this flag.
+const CF_WYSIWYG = 0x00008000;
+
+/// ChooseFont should indicate an error condition if the user attempts to select
+/// a font or style that is not listed in the dialog box.
+const CF_FORCEFONTEXIST = 0x00010000;
+
+/// Specifies that ChooseFont should allow only the selection of scalable fonts.
+/// Scalable fonts include vector fonts, scalable printer fonts, TrueType fonts,
+/// and fonts scaled by other technologies.
+const CF_SCALABLEONLY = 0x00020000;
+
+/// ChooseFont should only enumerate and allow the selection of TrueType fonts.
+const CF_TTONLY = 0x00040000;
+
+/// When using a LOGFONT structure to initialize the dialog box controls, use
+/// this flag to prevent the dialog box from displaying an initial selection for
+/// the font name combo box. This is useful when there is no single font name
+/// that applies to the text selection.
+const CF_NOFACESEL = 0x00080000;
+
+/// When using a LOGFONT structure to initialize the dialog box controls, use
+/// this flag to prevent the dialog box from displaying an initial selection for
+/// the Font Style combo box. This is useful when there is no single font style
+/// that applies to the text selection.
+const CF_NOSTYLESEL = 0x00100000;
+
+/// When using a structure to initialize the dialog box controls, use this flag
+/// to prevent the dialog box from displaying an initial selection for the Font
+/// Size combo box. This is useful when there is no single font size that
+/// applies to the text selection.
+const CF_NOSIZESEL = 0x00200000;
+
+/// When specified on input, only fonts with the character set identified in the
+/// lfCharSet member of the LOGFONT structure are displayed. The user will not
+/// be allowed to change the character set specified in the Scripts combo box.
+const CF_SELECTSCRIPT = 0x00400000;
+
+/// Disables the Script combo box. When this flag is set, the lfCharSet member
+/// of the LOGFONT structure is set to DEFAULT_CHARSET when ChooseFont returns.
+/// This flag is used only to initialize the dialog box.
+const CF_NOSCRIPTSEL = 0x00800000;
+
+/// Causes the Font dialog box to list only horizontally oriented fonts.
+const CF_NOVERTFONTS = 0x01000000;
+
+/// ChooseFont should additionally display fonts that are set to Hide in Fonts
+/// Control Panel.
+const CF_INACTIVEFONTS = 0x02000000;
+
+// -----------------------------------------------------------------------------
+// Open File Common Dialog constants
+// -----------------------------------------------------------------------------
+
+/// Causes the Read Only check box to be selected initially when the dialog box
+/// is created. This flag indicates the state of the Read Only check box when
+/// the dialog box is closed.
+const OFN_READONLY = 0x00000001;
+
+/// Causes the Save As dialog box to generate a message box if the selected file
+/// already exists. The user must confirm whether to overwrite the file.
+const OFN_OVERWRITEPROMPT = 0x00000002;
+
+/// Hides the Read Only check box.
+const OFN_HIDEREADONLY = 0x00000004;
+
+/// Restores the current directory to its original value if the user changed the
+/// directory while searching for files.
+const OFN_NOCHANGEDIR = 0x00000008;
+
+/// Causes the dialog box to display the Help button. The hwndOwner member must
+/// specify the window to receive the HELPMSGSTRING registered messages that the
+/// dialog box sends when the user clicks the Help button. An Explorer-style
+/// dialog box sends a CDN_HELP notification message to your hook procedure when
+/// the user clicks the Help button.
+const OFN_SHOWHELP = 0x00000010;
+
+/// Enables the hook function specified in the lpfnHook member.
+const OFN_ENABLEHOOK = 0x00000020;
+
+/// The lpTemplateName member is a pointer to the name of a dialog template
+/// resource in the module identified by the hInstance member. If the
+/// OFN_EXPLORER flag is set, the system uses the specified template to create a
+/// dialog box that is a child of the default Explorer-style dialog box. If the
+/// OFN_EXPLORER flag is not set, the system uses the template to create an
+/// old-style dialog box that replaces the default dialog box.
+const OFN_ENABLETEMPLATE = 0x00000040;
+
+/// The hInstance member identifies a data block that contains a preloaded
+/// dialog box template. The system ignores lpTemplateName if this flag is
+/// specified. If the OFN_EXPLORER flag is set, the system uses the specified
+/// template to create a dialog box that is a child of the default
+/// Explorer-style dialog box. If the OFN_EXPLORER flag is not set, the system
+/// uses the template to create an old-style dialog box that replaces the
+/// default dialog box.
+const OFN_ENABLETEMPLATEHANDLE = 0x00000080;
+
+/// The common dialog boxes allow invalid characters in the returned file name.
+/// Typically, the calling application uses a hook procedure that checks the
+/// file name by using the FILEOKSTRING message. If the text box in the edit
+/// control is empty or contains nothing but spaces, the lists of files and
+/// directories are updated. If the text box in the edit control contains
+/// anything else, nFileOffset and nFileExtension are set to values generated by
+/// parsing the text. No default extension is added to the text, nor is text
+/// copied to the buffer specified by lpstrFileTitle. If the value specified by
+/// nFileOffset is less than zero, the file name is invalid. Otherwise, the file
+/// name is valid, and nFileExtension and nFileOffset can be used as if the
+/// OFN_NOVALIDATE flag had not been specified.
+const OFN_NOVALIDATE = 0x00000100;
+
+/// The File Name list box allows multiple selections. If you also set the
+/// OFN_EXPLORER flag, the dialog box uses the Explorer-style user interface;
+/// otherwise, it uses the old-style user interface.
+const OFN_ALLOWMULTISELECT = 0x00000200;
+
+/// The user typed a file name extension that differs from the extension
+/// specified by lpstrDefExt. The function does not use this flag if lpstrDefExt
+/// is NULL.
+const OFN_EXTENSIONDIFFERENT = 0x00000400;
+
+/// The user can type only valid paths and file names. If this flag is used and
+/// the user types an invalid path and file name in the File Name entry field,
+/// the dialog box function displays a warning in a message box.
+const OFN_PATHMUSTEXIST = 0x00000800;
+
+/// The user can type only names of existing files in the File Name entry field.
+/// If this flag is specified and the user enters an invalid name, the dialog
+/// box procedure displays a warning in a message box. If this flag is
+/// specified, the OFN_PATHMUSTEXIST flag is also used. This flag can be used in
+/// an Open dialog box. It cannot be used with a Save As dialog box.
+const OFN_FILEMUSTEXIST = 0x00001000;
+
+/// If the user specifies a file that does not exist, this flag causes the
+/// dialog box to prompt the user for permission to create the file. If the user
+/// chooses to create the file, the dialog box closes and the function returns
+/// the specified name; otherwise, the dialog box remains open. If you use this
+/// flag with the OFN_ALLOWMULTISELECT flag, the dialog box allows the user to
+/// specify only one nonexistent file.
+const OFN_CREATEPROMPT = 0x00002000;
+
+/// Specifies that if a call to the OpenFile function fails because of a network
+/// sharing violation, the error is ignored and the dialog box returns the
+/// selected file name. If this flag is not set, the dialog box notifies your
+/// hook procedure when a network sharing violation occurs for the file name
+/// specified by the user. If you set the OFN_EXPLORER flag, the dialog box
+/// sends the CDN_SHAREVIOLATION message to the hook procedure. If you do not
+/// set OFN_EXPLORER, the dialog box sends the SHAREVISTRING registered message
+/// to the hook procedure.
+const OFN_SHAREAWARE = 0x00004000;
+
+/// The returned file does not have the Read Only check box selected and is not
+/// in a write-protected directory.
+const OFN_NOREADONLYRETURN = 0x00008000;
+
+/// The file is not created before the dialog box is closed. This flag should be
+/// specified if the application saves the file on a create-nonmodify network
+/// share. When an application specifies this flag, the library does not check
+/// for write protection, a full disk, an open drive door, or network
+/// protection. Applications using this flag must perform file operations
+/// carefully, because a file cannot be reopened once it is closed.
+const OFN_NOTESTFILECREATE = 0x00010000;
+
+/// Hides and disables the Network button.
+const OFN_NONETWORKBUTTON = 0x00020000;
+
+/// For old-style dialog boxes, this flag causes the dialog box to use short
+/// file names (8.3 format). Explorer-style dialog boxes ignore this flag and
+/// always display long file names.
+const OFN_NOLONGNAMES = 0x00040000;
+
+/// Indicates that any customizations made to the Open or Save As dialog box use
+/// the Explorer-style customization methods.
+const OFN_EXPLORER = 0x00080000;
+
+/// Directs the dialog box to return the path and file name of the selected
+/// shortcut (.LNK) file. If this value is not specified, the dialog box returns
+/// the path and file name of the file referenced by the shortcut.
+const OFN_NODEREFERENCELINKS = 0x00100000;
+
+/// For old-style dialog boxes, this flag causes the dialog box to use long file
+/// names. If this flag is not specified, or if the OFN_ALLOWMULTISELECT flag is
+/// also set, old-style dialog boxes use short file names (8.3 format) for file
+/// names with spaces. Explorer-style dialog boxes ignore this flag and always
+/// display long file names.
+const OFN_LONGNAMES = 0x00200000;
+
+/// Causes the dialog box to send CDN_INCLUDEITEM notification messages to your
+/// OFNHookProc hook procedure when the user opens a folder. The dialog box
+/// sends a notification for each item in the newly opened folder. These
+/// messages enable you to control which items the dialog box displays in the
+/// folder's item list.
+const OFN_ENABLEINCLUDENOTIFY = 0x00400000;
+
+/// Enables the Explorer-style dialog box to be resized using either the mouse
+/// or the keyboard. By default, the Explorer-style Open and Save As dialog
+/// boxes allow the dialog box to be resized regardless of whether this flag is
+/// set. This flag is necessary only if you provide a hook procedure or custom
+/// template. The old-style dialog box does not permit resizing.
+const OFN_ENABLESIZING = 0x00800000;
+
+/// Prevents the system from adding a link to the selected file in the file
+/// system directory that contains the user's most recently used documents. To
+/// retrieve the location of this directory, call the SHGetSpecialFolderLocation
+/// function with the CSIDL_RECENT flag.
+const OFN_DONTADDTORECENT = 0x02000000;
+
+/// Forces the showing of system and hidden files, thus overriding the user
+/// setting to show or not show hidden files. However, a file that is marked
+/// both system and hidden is not shown.
+const OFN_FORCESHOWHIDDEN = 0x10000000;
+
+/// If this flag is set, the places bar is not displayed. If this flag is not
+/// set, Explorer-style dialog boxes include a places bar containing icons for
+/// commonly-used folders, such as Favorites and Desktop.
+const OFN_EX_NOPLACESBAR = 0x00000001;
+
+// -----------------------------------------------------------------------------
 /// High DPI constants & enumerations
 // -----------------------------------------------------------------------------
 
