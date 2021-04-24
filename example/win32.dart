@@ -30,10 +30,10 @@ void main() {
   // Retrieve its parameters and project them into Dart FFI types
   final params = method.parameters
       .map((param) =>
-          '${TypeProjector(param.typeIdentifier).nativeType} ${param.name}')
+          '${param.typeIdentifier.name.split('.').last} ${param.name}')
       .join(', ');
   print('The parameters are:\n  $params');
 
-  final returnType = TypeProjector(method.returnType.typeIdentifier).nativeType;
+  final returnType = method.returnType.typeIdentifier.name.split('.').last;
   print('It returns type: $returnType.');
 }

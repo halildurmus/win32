@@ -1,10 +1,15 @@
-## 1.0.0-pre.8
+## 1.0.0-pre.9
 
-- Update to Dart 2.13, which includes new support for packed structs and arrays.
+- Update to Dart 2.13, which includes new FFI support for packed structs, type
+  aliases and arrays.
 - Overhaul the APIs to include much better support for attributes. WinMD can now
   successfully access all the Win32 APIs (enums, delegates, functions,
   interfaces and structs) and all documented metadata, as demonstrated with the
   object_tests folder.
+- Move all projection code to [win32](https://pub.dev/packages/win32). This
+  package now is focused exclusively on extracting metadata from WinMD files,
+  rather than attempting to build Dart projections from it. That code is a
+  better fit for win32, since it will evolve with the generated output.
 - Add support for events, properties, and delegates.
 - Expose scope in TokenObject.
 - Update to latest win32metadata `.winmd` file.

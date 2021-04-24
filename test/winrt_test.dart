@@ -268,17 +268,6 @@ void main() {
         equals('Windows.Storage.Pickers.PickerViewMode'));
   });
 
-  test('Class valuetype is correctly identified', () {
-    final winTypeDef = MetadataStore.getMetadataForType(
-        'Windows.Storage.Pickers.IFileOpenPicker')!;
-
-    final method = winTypeDef.findMethod('put_ViewMode')!;
-    final classType = method.parameters.first.typeIdentifier;
-    final typeProjection = TypeProjector(classType);
-
-    expect(typeProjection.isTypeValueType, isTrue);
-  });
-
   test('Property getter returns appropriate results for interface.', () {
     final winTypeDef =
         MetadataStore.getMetadataForType('Windows.Media.Playback.MediaPlayer')!;
@@ -288,16 +277,6 @@ void main() {
         equals(CorElementType.ELEMENT_TYPE_CLASS));
     expect(method.returnType.typeIdentifier.name,
         endsWith('IMediaPlaybackSource'));
-  });
-
-  test('Property getter projects appropriate results for interface.', () {
-    final winTypeDef =
-        MetadataStore.getMetadataForType('Windows.Media.Playback.MediaPlayer')!;
-
-    final method = winTypeDef.findMethod('get_Source')!;
-    final typeProjection = TypeProjector(method.returnType.typeIdentifier);
-    expect(typeProjection.dartType, equals('Pointer'));
-    expect(typeProjection.nativeType, equals('Pointer'));
   });
 
   test('Property getter returns appropriate results for delegate.', () {
@@ -320,17 +299,6 @@ void main() {
     expect(method.parameters.first.name, equals('handler'));
     expect(method.parameters.first.typeIdentifier.name,
         endsWith('AsyncActionCompletedHandler'));
-  });
-
-  test('Property setter projects appropriate results for delegate.', () {
-    final winTypeDef =
-        MetadataStore.getMetadataForType('Windows.Foundation.IAsyncAction')!;
-
-    final method = winTypeDef.findMethod('put_Completed')!;
-    final typeProjection =
-        TypeProjector(method.parameters.first.typeIdentifier);
-    expect(typeProjection.dartType, equals('Pointer'));
-    expect(typeProjection.nativeType, equals('Pointer'));
   });
 
   test('String parameters are accurately represented', () {

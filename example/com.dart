@@ -11,7 +11,10 @@ const typeToGenerate = 'Windows.Win32.NetworkListManager.INetwork';
 void main(List<String> args) {
   final scope = MetadataStore.getWin32Scope();
   final typedef = scope.findTypeDef(typeToGenerate)!;
-  final dartClass = TypePrinter.printType(typedef);
 
-  print(dartClass);
+  print('$typeToGenerate contains the following methods:');
+
+  for (final method in typedef.methods) {
+    print('  ${method.methodName}');
+  }
 }

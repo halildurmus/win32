@@ -46,27 +46,6 @@ void main() {
     expect(procInfo.fields.last.typeIdentifier.arrayDimensions, equals([16]));
   });
 
-  test('Struct array field projects correctly', () {
-    final procInfo = scope.findTypeDef('Windows.Win32.Gdi.BITMAPINFO')!;
-    final bmiColors = procInfo.fields.last.typeIdentifier;
-
-    final nativeType = TypeProjector(bmiColors).nativeType;
-    final dartType = TypeProjector(bmiColors).dartType;
-    expect(nativeType, equals('RGBQUAD'));
-    expect(dartType, equals('RGBQUAD'));
-  });
-
-  test('Struct STATSTG projects correctly', () {
-    final procInfo =
-        scope.findTypeDef('Windows.Win32.StructuredStorage.STATSTG')!;
-    final cbSize = procInfo.fields[2].typeIdentifier; // cbSize
-
-    final nativeType = TypeProjector(cbSize).nativeType;
-    final dartType = TypeProjector(cbSize).dartType;
-    expect(nativeType, equals('Uint64'));
-    expect(dartType, equals('int'));
-  });
-
   test('Struct PHYSICAL_MONITOR contains an array of chars', () {
     final procInfo =
         scope.findTypeDef('Windows.Win32.Monitor.PHYSICAL_MONITOR')!;

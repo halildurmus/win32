@@ -219,14 +219,6 @@ void main() {
     expect(param.typeIdentifier.typeArg, isNull);
   });
 
-  test('HANDLE-style parameters have the correct projection', () {
-    final typedef =
-        scope.findTypeDef('Windows.Win32.KeyboardAndMouseInput.Apis')!;
-    final api = typedef.findMethod('UnregisterHotKey')!;
-    final param = api.parameters.first;
-    expect(TypeProjector(param.typeIdentifier).nativeType, equals('IntPtr'));
-  });
-
   test('LPHANDLE-style parameters have the correct type', () {
     final typedef =
         scope.findTypeDef('Windows.Win32.WindowsAndMessaging.Apis')!;
@@ -243,23 +235,6 @@ void main() {
     expect(arg.corType, equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
     expect(arg.name, endsWith('HWND'));
     expect(arg.typeArg, isNull);
-  });
-
-  test('LPHANDLE-style parameters have the correct projection', () {
-    final typedef =
-        scope.findTypeDef('Windows.Win32.WindowsAndMessaging.Apis')!;
-    final api = typedef.findMethod('CascadeWindows')!;
-    final param = api.parameters.last;
-    expect(TypeProjector(param.typeIdentifier).nativeType,
-        equals('Pointer<IntPtr>'));
-  });
-
-  test('LPVOID parameters are projected to Pointer, not Pointer<Void>', () {
-    final typedef = scope.findTypeDef('Windows.Win32.Security.Apis')!;
-    final api = typedef.findMethod('CredFree')!;
-    final param = api.parameters.first;
-    expect(param.name, equals('Buffer'));
-    expect(TypeProjector(param.typeIdentifier).nativeType, equals('Pointer'));
   });
 
   test('Character parameters have the correct type', () {

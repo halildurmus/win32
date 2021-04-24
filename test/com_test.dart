@@ -71,14 +71,6 @@ void main() {
           equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
     });
 
-    test('COM method string pointers are projected to Dart accurately', () {
-      final getName = iNetwork.methods.first;
-      final param = getName.parameters.first;
-      final projection = TypeProjector(param.typeIdentifier);
-
-      expect(projection.dartType, equals('Pointer<Pointer<Utf16>>'));
-    });
-
     test('COM method strings are represented accurately', () {
       final setName = iNetwork.methods[1];
       final param = setName.parameters.first;
@@ -90,14 +82,6 @@ void main() {
       expect(param.typeIdentifier.typeArg, isNull);
     });
 
-    test('COM method strings are projected to Dart accurately', () {
-      final setName = iNetwork.methods[1];
-      final param = setName.parameters.first;
-      final projection = TypeProjector(param.typeIdentifier);
-
-      expect(projection.dartType, equals('Pointer<Utf16>'));
-    });
-
     test('GUIDs are represented accurately', () {
       final getNetworkId = iNetwork.findMethod('GetNetworkId')!;
       final param = getNetworkId.parameters.first;
@@ -107,43 +91,6 @@ void main() {
           equals(CorElementType.ELEMENT_TYPE_PTR));
       expect(param.typeIdentifier.typeArg, isNotNull);
       expect(param.typeIdentifier.typeArg?.name, endsWith('Guid'));
-    });
-
-    test('GUIDs are projected accurately', () {
-      final getNetworkId = iNetwork.findMethod('GetNetworkId')!;
-      final param = getNetworkId.parameters.first;
-      final projection = TypeProjector(param.typeIdentifier);
-
-      expect(projection.dartType, equals('Pointer<GUID>'));
-      expect(projection.nativeType, equals('Pointer<GUID>'));
-    });
-
-    test('Enums like NLM_NETWORK_CATEGORY are projected accurately', () {
-      final setCategory = iNetwork.findMethod('SetCategory')!;
-      final param = setCategory.parameters.first;
-      final projection = TypeProjector(param.typeIdentifier);
-
-      expect(projection.dartType, equals('int'));
-      expect(projection.nativeType, equals('Uint32'));
-    });
-
-    test('Pointers to enums are projected accurately', () {
-      final getCategory = iNetwork.findMethod('GetCategory')!;
-      final param = getCategory.parameters.first;
-      final projection = TypeProjector(param.typeIdentifier);
-
-      expect(projection.dartType, equals('Pointer<Uint32>'));
-      expect(projection.nativeType, equals('Pointer<Uint32>'));
-    });
-
-    test('Pointers to interfaces are projected accurately', () {
-      final getNetworkConnections =
-          iNetwork.findMethod('GetNetworkConnections')!;
-      final param = getNetworkConnections.parameters.first;
-      final projection = TypeProjector(param.typeIdentifier);
-
-      expect(projection.dartType, equals('Pointer<Pointer>'));
-      expect(projection.nativeType, equals('Pointer<Pointer>'));
     });
 
     test('Properties are true for isGetProperty', () {
@@ -162,130 +109,26 @@ void main() {
       expect(param.typeIdentifier.typeArg?.corType,
           equals(CorElementType.ELEMENT_TYPE_I2));
     });
-
-    test('Properties are projected accurately', () {
-      final isConnected = iNetwork.findMethod('get_IsConnectedToInternet')!;
-      final param = isConnected.parameters.first;
-      final projection = TypeProjector(param.typeIdentifier);
-
-      expect(projection.dartType, equals('Pointer<Int16>'));
-      expect(projection.nativeType, equals('Pointer<Int16>'));
-    });
   });
 
-  group('Projection of INetwork', () {
-    final iNetwork =
-        scope.findTypeDef('Windows.Win32.NetworkListManager.INetwork')!;
+  test(
+      'IApplicationActivationManager.ActivateApplication '
+      'recognizes ACTIVATEOPTIONS as an enum', () {
+    final iApplicationActivationManager =
+        scope.findTypeDef('Windows.Win32.Shell.IApplicationActivationManager')!;
+    final activateApplication =
+        iApplicationActivationManager.findMethod('ActivateApplication')!;
+    final param = activateApplication.parameters[2];
 
-    test('Correct number of projected methods', () {
-      final projection = ClassProjector(iNetwork).projection;
-
-      expect(projection.methods.length, equals(13));
-    });
-
-    test('Correct number of parameters in a test method', () {
-      final projection = ClassProjector(iNetwork).projection;
-
-      expect(projection.methods.first.parameters.length, equals(1));
-    });
-
-    test('Property can be found in projection', () {
-      final projection = ClassProjector(iNetwork).projection;
-
-      final isConnected = projection.methods
-          .indexWhere((method) => (method.name == 'get_IsConnectedToInternet'));
-      expect(isConnected, isNot(-1));
-    });
-
-    test('isConnectedToInternet property is a property', () {
-      final projection = ClassProjector(iNetwork).projection;
-
-      final isConnected = projection.methods
-          .firstWhere((method) => (method.name == 'get_IsConnectedToInternet'));
-      expect(isConnected.isGetProperty, isTrue);
-    });
-
-    test('isConnectedToInternet property return is HRESULT', () {
-      final projection = ClassProjector(iNetwork).projection;
-
-      final isConnected = projection.methods
-          .firstWhere((method) => (method.name == 'get_IsConnectedToInternet'));
-      expect(isConnected.returnTypeNative, equals('Int32'));
-      expect(isConnected.returnTypeDart, equals('int'));
-    });
-
-    test('isConnectedToInternet property parameter is VARIANT_BOOL', () {
-      final projection = ClassProjector(iNetwork).projection;
-
-      final isConnected = projection.methods
-          .firstWhere((method) => (method.name == 'get_IsConnectedToInternet'));
-      expect(isConnected.parameters.length, equals(1));
-      expect(isConnected.parameters.first.nativeType, equals('Int16'));
-      expect(isConnected.parameters.first.dartType, equals('int'));
-    });
-  });
-
-  group('Other projection tests', () {
-    test('IEnumNetworkConnections.NewEnum returns a Pointer', () {
-      final iEnumNetworkConnections = scope.findTypeDef(
-          'Windows.Win32.NetworkListManager.IEnumNetworkConnections')!;
-      final projection = ClassProjector(iEnumNetworkConnections).projection;
-      final newEnum = projection.methods
-          .firstWhere((method) => (method.name == 'get__NewEnum'));
-      expect(newEnum.parameters.length, equals(1));
-      expect(newEnum.parameters.first.nativeType, equals('Pointer'));
-      expect(newEnum.parameters.first.dartType, equals('Pointer'));
-    });
-
-    test(
-        'IApplicationActivationManager.ActivateApplication '
-        'recognizes ACTIVATEOPTIONS as an enum', () {
-      final iApplicationActivationManager = scope
-          .findTypeDef('Windows.Win32.Shell.IApplicationActivationManager')!;
-      final activateApplication =
-          iApplicationActivationManager.findMethod('ActivateApplication')!;
-      final param = activateApplication.parameters[2];
-
-      expect(param.name, equals('options'));
-      expect(param.typeIdentifier.name,
-          equals('Windows.Win32.Shell.ACTIVATEOPTIONS'));
-      expect(param.typeIdentifier.corType,
-          equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
-      expect(
-          param.typeIdentifier.type?.parent?.typeName, equals('System.Enum'));
-      expect(param.typeIdentifier.typeArg, isNull);
-      expect(
-          scope.enums
-              .firstWhere((p) => p.typeName == param.typeIdentifier.name),
-          isNotNull);
-    });
-
-    test(
-        'IApplicationActivationManager.ActivateApplication '
-        'projects ACTIVATEOPTIONS as an enum', () {
-      final iApplicationActivationManager = scope
-          .findTypeDef('Windows.Win32.Shell.IApplicationActivationManager')!;
-      final activateApplication =
-          iApplicationActivationManager.findMethod('ActivateApplication')!;
-      final param = activateApplication.parameters[2];
-      final projector = TypeProjector(param.typeIdentifier);
-
-      expect(projector.isTypeAnEnum, equals(true));
-      expect(projector.nativeType, equals('Uint32'));
-      expect(projector.dartType, equals('int'));
-    });
-
-    test('Unidentified COM interfaces should be represented as Pointers', () {
-      final iSpellChecker =
-          scope.findTypeDef('Windows.Win32.Intl.ISpellCheckerFactory')!;
-      final createSpellChecker =
-          iSpellChecker.findMethod('CreateSpellChecker')!;
-      final type = createSpellChecker
-          .parameters.last.typeIdentifier; // ISpellChecker **value
-      final typeProjection = TypeProjector(type);
-
-      expect(typeProjection.nativeType, equals('Pointer<Pointer>'));
-      expect(typeProjection.dartType, equals('Pointer<Pointer>'));
-    });
+    expect(param.name, equals('options'));
+    expect(param.typeIdentifier.name,
+        equals('Windows.Win32.Shell.ACTIVATEOPTIONS'));
+    expect(param.typeIdentifier.corType,
+        equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+    expect(param.typeIdentifier.type?.parent?.typeName, equals('System.Enum'));
+    expect(param.typeIdentifier.typeArg, isNull);
+    expect(
+        scope.enums.firstWhere((p) => p.typeName == param.typeIdentifier.name),
+        isNotNull);
   });
 }

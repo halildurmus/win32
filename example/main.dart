@@ -8,14 +8,15 @@ import 'package:winmd/winmd.dart';
 
 void main() {
   // A Windows Runtime interface
-  const type = 'Windows.Media.Playback.MediaPlayer';
+  const typeToGenerate = 'Windows.Media.Playback.MediaPlayer';
 
   // Load the metadata for this interface
-  final typeDef = MetadataStore.getMetadataForType(type)!;
+  final typeDef = MetadataStore.getMetadataForType(typeToGenerate)!;
 
   // Create a Dart projection
-  final dartClass = TypePrinter.printType(typeDef);
+  print('$typeToGenerate contains the following methods:');
 
-  // Print it to the screen. Normally you'd save it to a file and format it.
-  print(dartClass);
+  for (final method in typeDef.methods) {
+    print('  ${method.methodName}');
+  }
 }

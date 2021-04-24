@@ -11,27 +11,25 @@ possible to load them and build Dart FFI interop libraries from the results.
 
 ## Usage (Windows Runtime)
 
-A simple example: loading the `IAsyncInfo` interface and emitting the Dart
-equivalent file.
+A simple example: loading the `MediaPlayer` class and retrieving information
+about its methods.
 
 ```dart
 import 'package:winmd/winmd.dart';
 
 void main() {
   // A Windows Runtime interface
-  const type = 'Windows.Foundation.IAsyncInfo';
+  const typeToGenerate = 'Windows.Media.Playback.MediaPlayer';
 
   // Load the metadata for this interface
-  final typeDef = MetadataStore.getMetadataForType(type)!;
-
-  // Project it into something Dart can work with
-  final projection = ClassProjector(typeDef).projection;
+  final typeDef = MetadataStore.getMetadataForType(typeToGenerate)!;
 
   // Create a Dart projection
-  final dartClass = TypePrinter.printProjection(projection);
+  print('$typeToGenerate contains the following methods:');
 
-  // Print it to the screen. Normally you'd save it to a file and format it.
-  print(dartClass);
+  for (final method in typeDef.methods) {
+    print('  ${method.methodName}');
+  }
 }
 ```
 
@@ -48,7 +46,8 @@ void main() {
   final scope = MetadataStore.getWin32Scope();
 
   // Find a namesapce
-  final namespace = scope.findTypeDef('Windows.Win32.WindowsAndMessaging.Apis')!;
+  final namespace =
+      scope.findTypeDef('Windows.Win32.WindowsAndMessaging.Apis')!;
 
   // Sort the functions alphabetically
   final sortedMethods = namespace.methods
@@ -64,11 +63,11 @@ void main() {
   // Retrieve its parameters and project them into Dart FFI types
   final params = method.parameters
       .map((param) =>
-          '${TypeProjector(param.typeIdentifier).nativeType} ${param.name}')
+          '${param.typeIdentifier.name.split('.').last} ${param.name}')
       .join(', ');
   print('The parameters are:\n  $params');
 
-  final returnType = TypeProjector(method.returnType.typeIdentifier).nativeType;
+  final returnType = method.returnType.typeIdentifier.name.split('.').last;
   print('It returns type: $returnType.');
 }
 ```

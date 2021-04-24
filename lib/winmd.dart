@@ -37,11 +37,6 @@ export 'src/com/IMetaDataDispenserEx.dart';
 export 'src/com/IMetaDataImport.dart';
 export 'src/com/IMetaDataImport2.dart';
 
-export 'src/projection/classprojector.dart';
-export 'src/projection/projections.dart';
-export 'src/projection/typeprinter.dart';
-export 'src/projection/typeprojector.dart';
-
 export 'src/utils/blob.dart';
 export 'src/utils/exception.dart';
 export 'src/utils/string.dart';
