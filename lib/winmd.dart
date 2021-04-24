@@ -23,7 +23,7 @@ export 'src/genericparamconstraint.dart';
 export 'src/metadatastore.dart';
 export 'src/method.dart';
 export 'src/methodimpls.dart';
-export 'src/module.dart';
+export 'src/moduleref.dart';
 export 'src/parameter.dart';
 export 'src/pekind.dart';
 export 'src/pinvokemap.dart';

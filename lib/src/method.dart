@@ -14,7 +14,7 @@ import 'constants.dart';
 import 'methodimpls.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'mixins/genericparams_mixin.dart';
-import 'module.dart';
+import 'moduleref.dart';
 import 'parameter.dart';
 import 'pinvokemap.dart';
 import 'type_aliases.dart';
@@ -186,7 +186,7 @@ class Method extends TokenObject
 
   bool get isProperty => isGetProperty | isSetProperty;
 
-  Module get module {
+  ModuleRef get module {
     final pdwMappingFlags = calloc<DWORD>();
     final szImportName = stralloc(MAX_STRING_SIZE);
     final pchImportName = calloc<ULONG>();
@@ -195,7 +195,7 @@ class Method extends TokenObject
       final hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName,
           MAX_STRING_SIZE, pchImportName, ptkImportDLL);
       if (SUCCEEDED(hr)) {
-        return Module.fromToken(reader, ptkImportDLL.value);
+        return ModuleRef.fromToken(reader, ptkImportDLL.value);
       } else {
         throw COMException(hr);
       }

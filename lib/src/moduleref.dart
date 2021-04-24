@@ -13,13 +13,14 @@ import 'mixins/customattributes_mixin.dart';
 import 'type_aliases.dart';
 import 'utils.dart';
 
-class Module extends TokenObject with CustomAttributesMixin {
+class ModuleRef extends TokenObject with CustomAttributesMixin {
   final String name;
 
-  Module(IMetaDataImport2 reader, int token, this.name) : super(reader, token);
+  ModuleRef(IMetaDataImport2 reader, int token, this.name)
+      : super(reader, token);
 
   /// Creates a module object from its given token.
-  factory Module.fromToken(IMetaDataImport2 reader, int token) {
+  factory ModuleRef.fromToken(IMetaDataImport2 reader, int token) {
     final szName = stralloc(MAX_STRING_SIZE);
     final pchName = calloc<ULONG>();
 
@@ -28,7 +29,7 @@ class Module extends TokenObject with CustomAttributesMixin {
           reader.GetModuleRefProps(token, szName, MAX_STRING_SIZE, pchName);
 
       if (SUCCEEDED(hr)) {
-        return Module(reader, token, szName.toDartString());
+        return ModuleRef(reader, token, szName.toDartString());
       } else {
         throw WindowsException(hr);
       }
