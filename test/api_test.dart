@@ -7928,6 +7928,13 @@ void main() {
               int hProcess, Pointer<Utf16> SearchPathA)>('SymSetSearchPathW');
       expect(SymSetSearchPath, isA<Function>());
     });
+    test('Can instantiate SymUnloadModule', () {
+      final dbghelp = DynamicLibrary.open('dbghelp.dll');
+      final SymUnloadModule = dbghelp.lookupFunction<
+          Int32 Function(IntPtr hProcess, Uint32 BaseOfDll),
+          int Function(int hProcess, int BaseOfDll)>('SymUnloadModule');
+      expect(SymUnloadModule, isA<Function>());
+    });
     test('Can instantiate SymUnloadModule64', () {
       final dbghelp = DynamicLibrary.open('dbghelp.dll');
       final SymUnloadModule64 = dbghelp.lookupFunction<

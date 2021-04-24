@@ -309,6 +309,22 @@ int SymSetSearchPath(int hProcess, Pointer<Utf16> SearchPathA) {
 /// Unloads the symbol table.
 ///
 /// ```c
+/// BOOL IMAGEAPI SymUnloadModule(
+///   HANDLE hProcess,
+///   DWORD  BaseOfDll
+/// );
+/// ```
+/// {@category dbghelp}
+int SymUnloadModule(int hProcess, int BaseOfDll) {
+  final _SymUnloadModule = _dbghelp.lookupFunction<
+      Int32 Function(IntPtr hProcess, Uint32 BaseOfDll),
+      int Function(int hProcess, int BaseOfDll)>('SymUnloadModule');
+  return _SymUnloadModule(hProcess, BaseOfDll);
+}
+
+/// Unloads the symbol table.
+///
+/// ```c
 /// BOOL IMAGEAPI SymUnloadModule64(
 ///   HANDLE  hProcess,
 ///   DWORD64 BaseOfDll
