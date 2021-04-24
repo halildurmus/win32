@@ -7,6 +7,11 @@ import 'package:winmd/winmd.dart';
 import 'projections.dart';
 import 'typeprojector.dart';
 
+extension CamelCaseConversion on String {
+  String toCamelCase() =>
+      length >= 2 ? substring(0, 1).toLowerCase() + substring(1) : this;
+}
+
 class ClassProjector {
   final TypeDef typeDef;
 
