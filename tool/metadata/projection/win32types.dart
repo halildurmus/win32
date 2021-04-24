@@ -53,11 +53,10 @@ const win32TypeMap = <String, String>{
   // A message parameter. Declared as `UINT_PTR`.
   'WPARAM': 'IntPtr',
 
-// A message parameter. Declared as `LONG_PTR`.
+  // A message parameter. Declared as `LONG_PTR`.
   'LPARAM': 'IntPtr',
 
   // Signed result of message processing. Declared as `LONG_PTR`.
-
   'LRESULT': 'IntPtr',
 
   'FARPROC': 'IntPtr',

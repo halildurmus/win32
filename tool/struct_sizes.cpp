@@ -27,6 +27,7 @@
 #include <DbgHelp.h>
 #include <ShellScalingApi.h>
 #include <AppxPackaging.h>
+#include <roapi.h>
 
 void main()
 {
