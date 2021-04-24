@@ -4,8 +4,8 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'base.dart';
-import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
+import 'scope.dart';
 import 'type_aliases.dart';
 import 'utils.dart';
 
@@ -24,11 +24,11 @@ class PinvokeMap extends TokenObject {
 
   final int _attributes;
 
-  const PinvokeMap(IMetaDataImport2 reader, int token, this._attributes,
-      this.importName, this.importDllToken, this.moduleName)
-      : super(reader, token);
+  const PinvokeMap(Scope scope, int token, this._attributes, this.importName,
+      this.importDllToken, this.moduleName)
+      : super(scope, token);
 
-  factory PinvokeMap.fromToken(IMetaDataImport2 reader, int token) {
+  factory PinvokeMap.fromToken(Scope scope, int token) {
     final pdwMappingFlags = calloc<DWORD>();
     final szImportName = stralloc(MAX_STRING_SIZE);
     final pchImportName = calloc<ULONG>();
@@ -37,6 +37,7 @@ class PinvokeMap extends TokenObject {
     final pchModuleName = calloc<ULONG>();
 
     try {
+      final reader = scope.reader;
       var hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName,
           MAX_STRING_SIZE, pchImportName, ptkImportDLL);
       if (SUCCEEDED(hr)) {
@@ -45,7 +46,7 @@ class PinvokeMap extends TokenObject {
 
         final moduleName = SUCCEEDED(hr) ? szModuleName.toDartString() : '';
 
-        return PinvokeMap(reader, token, pdwMappingFlags.value,
+        return PinvokeMap(scope, token, pdwMappingFlags.value,
             szImportName.toDartString(), ptkImportDLL.value, moduleName);
       } else {
         throw WindowsException(hr);

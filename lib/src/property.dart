@@ -9,10 +9,10 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'base.dart';
-import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
+import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
@@ -33,7 +33,7 @@ class Property extends TokenObject with CustomAttributesMixin {
   final int _setterToken;
 
   Property(
-      IMetaDataImport2 reader,
+      Scope scope,
       int token,
       this._parentToken,
       this.name,
@@ -45,10 +45,10 @@ class Property extends TokenObject with CustomAttributesMixin {
       this._setterToken,
       this._getterToken,
       this.otherMethodTokens)
-      : super(reader, token);
+      : super(scope, token);
 
   /// Creates a property object from its given token.
-  factory Property.fromToken(IMetaDataImport2 reader, int token) {
+  factory Property.fromToken(Scope scope, int token) {
     final ptkTypeDef = calloc<mdTypeDef>();
     final szProperty = stralloc(MAX_STRING_SIZE);
     final pchProperty = calloc<ULONG>();
@@ -64,6 +64,7 @@ class Property extends TokenObject with CustomAttributesMixin {
     final pcOtherMethod = calloc<ULONG>();
 
     try {
+      final reader = scope.reader;
       final hr = reader.GetPropertyProps(
           token,
           ptkTypeDef,
@@ -87,14 +88,14 @@ class Property extends TokenObject with CustomAttributesMixin {
 
         // PropertySig is defined in §II.23.2.5.
         final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
-        final typeTuple = parseTypeFromSignature(signature.sublist(2), reader);
+        final typeTuple = parseTypeFromSignature(signature.sublist(2), scope);
         final defaultValue =
             ppDefaultValue.value.asTypedList(pcchDefaultValue.value);
         final otherMethodTokens =
             rgOtherMethod.asTypedList(pcOtherMethod.value);
 
         return Property(
-            reader,
+            scope,
             token,
             ptkTypeDef.value,
             propName,
@@ -131,16 +132,16 @@ class Property extends TokenObject with CustomAttributesMixin {
 
   /// Returns the get accessor method for the property.
   Method? get getterMethod => reader.IsValidToken(_getterToken) == TRUE
-      ? Method.fromToken(reader, _getterToken)
+      ? Method.fromToken(scope, _getterToken)
       : null;
 
   /// Returns the set accessor method for the property.
   Method? get setterMethod => reader.IsValidToken(_setterToken) == TRUE
-      ? Method.fromToken(reader, _setterToken)
+      ? Method.fromToken(scope, _setterToken)
       : null;
 
   /// Returns the [TypeDef] representing the type that implements the property.
-  TypeDef get parent => TypeDef.fromToken(reader, _parentToken);
+  TypeDef get parent => TypeDef.fromToken(scope, _parentToken);
 
   /// Returns true if the property is special; the name describes how.
   bool get isSpecialName =>

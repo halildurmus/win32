@@ -4,11 +4,11 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'base.dart';
-import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'genericparamconstraint.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
+import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 import 'utils.dart';
@@ -44,11 +44,11 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
   final _constraints = <GenericParamConstraint>[];
   final int _parentToken;
 
-  GenericParam(IMetaDataImport2 reader, int token, this.paramSequence,
-      this._attributes, this._parentToken, this.paramName)
-      : super(reader, token);
+  GenericParam(Scope scope, int token, this.paramSequence, this._attributes,
+      this._parentToken, this.paramName)
+      : super(scope, token);
 
-  factory GenericParam.fromToken(IMetaDataImport2 reader, int token) {
+  factory GenericParam.fromToken(Scope scope, int token) {
     final pulParamSeq = calloc<ULONG>();
     final pdwParamFlags = calloc<DWORD>();
     final ptOwner = calloc<mdToken>();
@@ -57,11 +57,12 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
     final pchName = calloc<ULONG>();
 
     try {
+      final reader = scope.reader;
       final hr = reader.GetGenericParamProps(token, pulParamSeq, pdwParamFlags,
           ptOwner, reserved, wzName, MAX_STRING_SIZE, pchName);
 
       if (SUCCEEDED(hr)) {
-        return GenericParam(reader, token, pulParamSeq.value,
+        return GenericParam(scope, token, pulParamSeq.value,
             pdwParamFlags.value, ptOwner.value, wzName.toDartString());
       } else {
         throw WindowsException(hr);
@@ -83,11 +84,11 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
   /// parent type.
   TokenObject get parent {
     if (tokenType == TokenType.TypeDef) {
-      return TypeDef.fromToken(reader, _parentToken);
+      return TypeDef.fromToken(scope, _parentToken);
     }
 
     if (tokenType == TokenType.MethodDef) {
-      return Method.fromToken(reader, _parentToken);
+      return Method.fromToken(scope, _parentToken);
     }
 
     throw WinmdException('Unrecognized parent token.');
@@ -118,7 +119,7 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
         while (hr == S_OK) {
           final gpcToken = rGenericParamConstraints.value;
 
-          _constraints.add(GenericParamConstraint.fromToken(reader, gpcToken));
+          _constraints.add(GenericParamConstraint.fromToken(scope, gpcToken));
           hr = reader.EnumGenericParamConstraints(phEnum, token,
               rGenericParamConstraints, 1, pcGenericParamConstraints);
         }

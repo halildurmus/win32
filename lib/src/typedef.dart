@@ -9,11 +9,9 @@ import 'package:win32/win32.dart';
 
 import 'base.dart';
 import 'classlayout.dart';
-import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'event.dart';
 import 'field.dart';
-import 'metadatastore.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'mixins/genericparams_mixin.dart';
@@ -57,41 +55,42 @@ class TypeDef extends TokenObject
   ///
   /// Typically, typedefs should be obtained from a [WinmdScope] object rather
   /// than being created directly.
-  TypeDef(IMetaDataImport2 reader,
+  TypeDef(Scope scope,
       [int token = 0,
       this.typeName = '',
       this._attributes = 0,
       this.baseTypeToken = 0,
       this.typeSpec])
-      : super(reader, token);
+      : super(scope, token);
 
   /// Creates a typedef object from its given token.
-  factory TypeDef.fromToken(IMetaDataImport2 reader, int token) {
+  factory TypeDef.fromToken(Scope scope, int token) {
     switch (token & 0xFF000000) {
       case CorTokenType.mdtTypeRef:
-        return TypeDef.fromTypeRefToken(reader, token);
+        return TypeDef.fromTypeRefToken(scope, token);
       case CorTokenType.mdtTypeDef:
-        return TypeDef.fromTypeDefToken(reader, token);
+        return TypeDef.fromTypeDefToken(scope, token);
       case CorTokenType.mdtTypeSpec:
-        return TypeDef.fromTypeSpecToken(reader, token);
+        return TypeDef.fromTypeSpecToken(scope, token);
       default:
         throw WinmdException('Unrecognized token ${token.toHexString(32)}');
     }
   }
 
   /// Instantiate a typedef from a TypeDef token.
-  factory TypeDef.fromTypeDefToken(IMetaDataImport2 reader, int typeDefToken) {
+  factory TypeDef.fromTypeDefToken(Scope scope, int typeDefToken) {
     final szTypeDef = stralloc(MAX_STRING_SIZE);
     final pchTypeDef = calloc<ULONG>();
     final pdwTypeDefFlags = calloc<DWORD>();
     final ptkExtends = calloc<mdToken>();
 
     try {
+      final reader = scope.reader;
       final hr = reader.GetTypeDefProps(typeDefToken, szTypeDef,
           MAX_STRING_SIZE, pchTypeDef, pdwTypeDefFlags, ptkExtends);
 
       if (SUCCEEDED(hr)) {
-        return TypeDef(reader, typeDefToken, szTypeDef.toDartString(),
+        return TypeDef(scope, typeDefToken, szTypeDef.toDartString(),
             pdwTypeDefFlags.value, ptkExtends.value);
       } else {
         throw WindowsException(hr);
@@ -109,12 +108,13 @@ class TypeDef extends TokenObject
   /// Unless the TypeRef token is `IInspectable`, the COM parent interface for
   /// Windows Runtime classes, the TypeRef is used to obtain the host scope
   /// metadata file, from which the TypeDef can be found and returned.
-  factory TypeDef.fromTypeRefToken(IMetaDataImport2 reader, int typeRefToken) {
+  factory TypeDef.fromTypeRefToken(Scope scope, int typeRefToken) {
     final ptkResolutionScope = calloc<mdToken>();
     final szName = stralloc(MAX_STRING_SIZE);
     final pchName = calloc<ULONG>();
 
     try {
+      final reader = scope.reader;
       final hr = reader.GetTypeRefProps(
           typeRefToken, ptkResolutionScope, szName, MAX_STRING_SIZE, pchName);
 
@@ -124,13 +124,12 @@ class TypeDef extends TokenObject
 
         // Special case for WinRT base type
         if (resolutionScopeToken == 0x00 && typeRefToken == 0x01000000) {
-          return TypeDef(reader, 0, 'IInspectable');
+          return TypeDef(scope, 0, 'IInspectable');
         }
 
         // If it's the same scope, just look it up.
-        if (Scope.moduleToken(reader) == resolutionScopeToken) {
-          final newScope = MetadataStore.getScopeForType(typeName);
-          return newScope.findTypeDef(typeName)!;
+        if (scope.moduleToken == resolutionScopeToken) {
+          return scope.findTypeDef(typeName)!;
         }
 
         if (resolutionScopeToken & 0xFF000000 == CorTokenType.mdtAssemblyRef) {
@@ -138,12 +137,12 @@ class TypeDef extends TokenObject
           // try and reference the .NET type, these are returned as system
           // types.
           if (netStandardTokens.containsKey(typeRefToken)) {
-            return TypeDef(reader, 0, netStandardTokens[typeRefToken]!);
+            return TypeDef(scope, 0, netStandardTokens[typeRefToken]!);
           }
         }
 
         // OK, so we'll just return the type name
-        return TypeDef(reader, 0, typeName);
+        return TypeDef(scope, 0, typeName);
       } else {
         throw WindowsException(hr);
       }
@@ -155,20 +154,20 @@ class TypeDef extends TokenObject
   }
 
   /// Instantiate a typedef from a TypeSpec token.
-  factory TypeDef.fromTypeSpecToken(
-      IMetaDataImport2 reader, int typeSpecToken) {
+  factory TypeDef.fromTypeSpecToken(Scope scope, int typeSpecToken) {
     final ppvSig = calloc<PCCOR_SIGNATURE>();
     final pcbSig = calloc<ULONG>();
 
     try {
+      final reader = scope.reader;
       final hr =
           reader.GetTypeSpecFromToken(typeSpecToken, ppvSig.cast(), pcbSig);
       final signature = ppvSig.value.asTypedList(pcbSig.value);
-      final typeTuple = parseTypeFromSignature(signature, reader);
+      final typeTuple = parseTypeFromSignature(signature, scope);
 
       if (SUCCEEDED(hr)) {
         return TypeDef(
-            reader, typeSpecToken, '', 0, 0, typeTuple.typeIdentifier);
+            scope, typeSpecToken, '', 0, 0, typeTuple.typeIdentifier);
       } else {
         throw WindowsException(hr);
       }
@@ -256,7 +255,7 @@ class TypeDef extends TokenObject
   ///
   /// This includes the packing alignment, the minimum class size, and the field
   /// layout (e.g. for sparsely or overlapping structs).
-  ClassLayout get classLayout => ClassLayout(reader, token);
+  ClassLayout get classLayout => ClassLayout(scope, token);
 
   /// Is the type a non-Windows Runtime type, such as System.Object or
   /// IInspectable?
@@ -274,7 +273,7 @@ class TypeDef extends TokenObject
       final hr = reader.GetInterfaceImplProps(token, ptkClass, ptkIface);
       if (SUCCEEDED(hr)) {
         final interfaceToken = ptkIface.value;
-        return TypeDef.fromToken(reader, interfaceToken);
+        return TypeDef.fromToken(scope, interfaceToken);
       } else {
         throw WindowsException(hr);
       }
@@ -321,7 +320,7 @@ class TypeDef extends TokenObject
         while (hr == S_OK) {
           final fieldToken = rgFields.value;
 
-          _fields.add(Field.fromToken(reader, fieldToken));
+          _fields.add(Field.fromToken(scope, fieldToken));
           hr = reader.EnumFields(phEnum, token, rgFields, 1, pcTokens);
         }
       } finally {
@@ -346,7 +345,7 @@ class TypeDef extends TokenObject
         while (hr == S_OK) {
           final methodToken = rgMethods.value;
 
-          _methods.add(Method.fromToken(reader, methodToken));
+          _methods.add(Method.fromToken(scope, methodToken));
           hr = reader.EnumMethods(phEnum, token, rgMethods, 1, pcTokens);
         }
       } finally {
@@ -372,7 +371,7 @@ class TypeDef extends TokenObject
         while (hr == S_OK) {
           final propertyToken = rgProperties.value;
 
-          _properties.add(Property.fromToken(reader, propertyToken));
+          _properties.add(Property.fromToken(scope, propertyToken));
           hr = reader.EnumMethods(phEnum, token, rgProperties, 1, pcProperties);
         }
       } finally {
@@ -397,7 +396,7 @@ class TypeDef extends TokenObject
         while (hr == S_OK) {
           final eventToken = rgEvents.value;
 
-          _events.add(Event.fromToken(reader, eventToken));
+          _events.add(Event.fromToken(scope, eventToken));
           hr = reader.EnumEvents(phEnum, token, rgEvents, 1, pcEvents);
         }
       } finally {
@@ -431,7 +430,7 @@ class TypeDef extends TokenObject
     try {
       final hr = reader.FindMethod(token, szName, nullptr, 0, pmb);
       if (SUCCEEDED(hr)) {
-        return Method.fromToken(reader, pmb.value);
+        return Method.fromToken(scope, pmb.value);
       } else if (hr == CLDB_E_RECORD_NOTFOUND) {
         return null;
       } else {
@@ -445,7 +444,7 @@ class TypeDef extends TokenObject
 
   /// Gets the type referencing this type's superclass.
   TypeDef? get parent =>
-      token == 0 ? null : TypeDef.fromToken(reader, baseTypeToken);
+      token == 0 ? null : TypeDef.fromToken(scope, baseTypeToken);
 
   String? getCustomGUIDAttribute(String guidAttributeName) {
     final ptrAttributeName = guidAttributeName.toNativeUtf16();

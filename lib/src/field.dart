@@ -9,10 +9,10 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'base.dart';
-import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'pinvokemap.dart';
+import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
@@ -38,20 +38,12 @@ class Field extends TokenObject with CustomAttributesMixin {
   final int _attributes;
   final int _parentToken;
 
-  Field(
-      IMetaDataImport2 reader,
-      int token,
-      this._parentToken,
-      this.name,
-      this.value,
-      this.typeIdentifier,
-      this.fieldType,
-      this._attributes,
-      this.signatureBlob)
-      : super(reader, token);
+  Field(Scope scope, int token, this._parentToken, this.name, this.value,
+      this.typeIdentifier, this.fieldType, this._attributes, this.signatureBlob)
+      : super(scope, token);
 
   /// Creates a field object from its given token.
-  factory Field.fromToken(IMetaDataImport2 reader, int token) {
+  factory Field.fromToken(Scope scope, int token) {
     final ptkTypeDef = calloc<mdTypeDef>();
     final szField = stralloc(MAX_STRING_SIZE);
     final pchField = calloc<ULONG>();
@@ -63,6 +55,7 @@ class Field extends TokenObject with CustomAttributesMixin {
     final pcchValue = calloc<ULONG>();
 
     try {
+      final reader = scope.reader;
       final hr = reader.GetFieldProps(
           token,
           ptkTypeDef,
@@ -84,10 +77,10 @@ class Field extends TokenObject with CustomAttributesMixin {
         // against the CorFieldAttr enumeration), and then follows a type
         // identifier.
         final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
-        final typeTuple = parseTypeFromSignature(signature.sublist(1), reader);
+        final typeTuple = parseTypeFromSignature(signature.sublist(1), scope);
 
         return Field(
-            reader,
+            scope,
             token,
             ptkTypeDef.value,
             fieldName,
@@ -116,7 +109,7 @@ class Field extends TokenObject with CustomAttributesMixin {
   String toString() => 'Field: $name';
 
   /// Returns the [TypeDef] representing the class that the field belongs to.
-  TypeDef get parent => TypeDef.fromToken(reader, _parentToken);
+  TypeDef get parent => TypeDef.fromToken(scope, _parentToken);
 
   /// Returns the visibility of the field (public, private, etc.)
   FieldAccess get fieldAccess =>
@@ -166,7 +159,7 @@ class Field extends TokenObject with CustomAttributesMixin {
   bool get hasFieldRVA =>
       _attributes & CorFieldAttr.fdHasFieldRVA == CorFieldAttr.fdHasFieldRVA;
 
-  PinvokeMap get pinvokeMap => PinvokeMap.fromToken(reader, token);
+  PinvokeMap get pinvokeMap => PinvokeMap.fromToken(scope, token);
 }
 
 extension ListField on List<Field> {

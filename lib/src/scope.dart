@@ -66,7 +66,7 @@ class Scope {
         while (hr == S_OK) {
           final typeDefToken = rgTypeDefs.value;
 
-          _typedefs.add(TypeDef.fromToken(reader, typeDefToken));
+          _typedefs.add(TypeDef.fromToken(this, typeDefToken));
           hr = reader.EnumTypeDefs(phEnum, rgTypeDefs, 1, pcTypeDefs);
         }
       } finally {
@@ -79,7 +79,7 @@ class Scope {
     return _typedefs;
   }
 
-  static int moduleToken(IMetaDataImport2 reader) {
+  int get moduleToken {
     final pmd = calloc<mdModule>();
 
     try {
@@ -108,7 +108,7 @@ class Scope {
         var hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
         while (hr == S_OK) {
           final moduleToken = rgModuleRefs.value;
-          _modules.add(ModuleRef.fromToken(reader, moduleToken));
+          _modules.add(ModuleRef.fromToken(this, moduleToken));
           hr = reader.EnumModuleRefs(phEnum, rgModuleRefs, 1, pcModuleRefs);
         }
       } finally {

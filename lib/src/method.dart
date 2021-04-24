@@ -9,7 +9,6 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'base.dart';
-import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'methodimpls.dart';
 import 'mixins/customattributes_mixin.dart';
@@ -17,6 +16,7 @@ import 'mixins/genericparams_mixin.dart';
 import 'moduleref.dart';
 import 'parameter.dart';
 import 'pinvokemap.dart';
+import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
@@ -49,7 +49,7 @@ class Method extends TokenObject
   int _parentToken;
 
   Method(
-      IMetaDataImport2 reader,
+      Scope scope,
       int token,
       this._parentToken,
       this.methodName,
@@ -57,7 +57,7 @@ class Method extends TokenObject
       this.signatureBlob,
       this.relativeVirtualAddress,
       this.implFlags)
-      : super(reader, token) {
+      : super(scope, token) {
     _parseMethodType();
     _parseParameterNames();
     _parseSignatureBlob();
@@ -65,7 +65,7 @@ class Method extends TokenObject
   }
 
   /// Creates a method object from its given token.
-  factory Method.fromToken(IMetaDataImport2 reader, int token) {
+  factory Method.fromToken(Scope scope, int token) {
     final ptkClass = calloc<mdTypeDef>();
     final szMethod = stralloc(MAX_STRING_SIZE);
     final pchMethod = calloc<ULONG>();
@@ -76,6 +76,7 @@ class Method extends TokenObject
     final pdwImplFlags = calloc<DWORD>();
 
     try {
+      final reader = scope.reader;
       final hr = reader.GetMethodProps(
           token,
           ptkClass,
@@ -90,7 +91,7 @@ class Method extends TokenObject
 
       if (SUCCEEDED(hr)) {
         final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
-        return Method(reader, token, ptkClass.value, szMethod.toDartString(),
+        return Method(scope, token, ptkClass.value, szMethod.toDartString(),
             pdwAttr.value, signature, pulCodeRVA.value, pdwImplFlags.value);
       } else {
         throw WindowsException(hr);
@@ -110,7 +111,7 @@ class Method extends TokenObject
   @override
   String toString() => 'Method: $methodName';
 
-  TypeDef get parent => TypeDef.fromToken(reader, _parentToken);
+  TypeDef get parent => TypeDef.fromToken(scope, _parentToken);
 
   /// Returns information about the method's visibility / accessibility to other
   /// types.
@@ -179,7 +180,7 @@ class Method extends TokenObject
   bool get isRTSpecialName =>
       _attributes & CorMethodAttr.mdSpecialName == CorMethodAttr.mdSpecialName;
 
-  PinvokeMap get pinvokeMap => PinvokeMap.fromToken(reader, token);
+  PinvokeMap get pinvokeMap => PinvokeMap.fromToken(scope, token);
 
   MethodImplementationFeatures get implFeatures =>
       MethodImplementationFeatures(implFlags);
@@ -195,7 +196,7 @@ class Method extends TokenObject
       final hr = reader.GetPinvokeMap(token, pdwMappingFlags, szImportName,
           MAX_STRING_SIZE, pchImportName, ptkImportDLL);
       if (SUCCEEDED(hr)) {
-        return ModuleRef.fromToken(reader, ptkImportDLL.value);
+        return ModuleRef.fromToken(scope, ptkImportDLL.value);
       } else {
         throw COMException(hr);
       }
@@ -255,12 +256,12 @@ class Method extends TokenObject
     if (isGetProperty) {
       // Type should begin at index 2
       final typeIdentifier =
-          parseTypeFromSignature(signatureBlob.sublist(2), reader)
+          parseTypeFromSignature(signatureBlob.sublist(2), scope)
               .typeIdentifier;
-      returnType = Parameter.fromTypeIdentifier(reader, token, typeIdentifier);
+      returnType = Parameter.fromTypeIdentifier(scope, token, typeIdentifier);
     } else if (isSetProperty) {
       // set properties don't have a return type
-      returnType = Parameter.fromVoid(reader, token);
+      returnType = Parameter.fromVoid(scope, token);
     }
   }
 
@@ -284,16 +285,16 @@ class Method extends TokenObject
       returnType = parameters.first;
       parameters = parameters.sublist(1);
       final returnTypeTuple =
-          parseTypeFromSignature(signatureBlob.sublist(blobPtr), reader);
+          parseTypeFromSignature(signatureBlob.sublist(blobPtr), scope);
       returnType.typeIdentifier = returnTypeTuple.typeIdentifier;
       blobPtr += returnTypeTuple.offsetLength;
     } else {
       // In Win32 metadata, EnumParams does not return a zero-th parameter even
       // if there is a return type. So we create a new returnType for it.
       final returnTypeTuple =
-          parseTypeFromSignature(signatureBlob.sublist(blobPtr), reader);
+          parseTypeFromSignature(signatureBlob.sublist(blobPtr), scope);
       returnType = Parameter.fromTypeIdentifier(
-          reader, token, returnTypeTuple.typeIdentifier);
+          scope, token, returnTypeTuple.typeIdentifier);
       blobPtr += returnTypeTuple.offsetLength;
     }
 
@@ -301,7 +302,7 @@ class Method extends TokenObject
     // type to the corresponding parameter.
     while (paramsIndex < parameters.length) {
       final runtimeType =
-          parseTypeFromSignature(signatureBlob.sublist(blobPtr), reader);
+          parseTypeFromSignature(signatureBlob.sublist(blobPtr), scope);
       blobPtr += runtimeType.offsetLength;
 
       if (runtimeType.typeIdentifier.corType ==
@@ -325,7 +326,7 @@ class Method extends TokenObject
       while (hr == S_OK) {
         final parameterToken = rParams.value;
 
-        parameters.add(Parameter.fromToken(reader, parameterToken));
+        parameters.add(Parameter.fromToken(scope, parameterToken));
         hr = reader.EnumParams(phEnum, token, rParams, 1, pcTokens);
       }
     } finally {
@@ -359,7 +360,7 @@ class Method extends TokenObject
   // value. We're not that clever yet, so we project it in its raw state, which
   // means a little work here to ensure that it comes out right.
   int _parseArray(Uint8List sublist, int paramsIndex) {
-    final typeTuple = parseTypeFromSignature(sublist.sublist(2), reader);
+    final typeTuple = parseTypeFromSignature(sublist.sublist(2), scope);
 
     parameters[paramsIndex].name = '__valueSize';
     parameters[paramsIndex].typeIdentifier.corType =
@@ -367,7 +368,7 @@ class Method extends TokenObject
     parameters[paramsIndex].typeIdentifier.typeArg =
         TypeIdentifier(CorElementType.ELEMENT_TYPE_U4);
 
-    parameters.insert(paramsIndex + 1, Parameter.fromVoid(reader, token));
+    parameters.insert(paramsIndex + 1, Parameter.fromVoid(scope, token));
     parameters[paramsIndex + 1].name = 'value';
     parameters[paramsIndex + 1].typeIdentifier.corType =
         CorElementType.ELEMENT_TYPE_PTR;

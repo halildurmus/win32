@@ -11,8 +11,8 @@ import 'dart:typed_data';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
-import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
+import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
@@ -165,8 +165,7 @@ int byteListToInteger(Uint8List list) {
 ///
 /// Details on the blob format can be found at §II.23.1.16 and §II.23.2 of
 /// ECMA-335.
-TypeTuple parseTypeFromSignature(
-    Uint8List signatureBlob, IMetaDataImport2 reader) {
+TypeTuple parseTypeFromSignature(Uint8List signatureBlob, Scope scope) {
   final paramType = signatureBlob.first;
   final runtimeType = TypeIdentifier.fromValue(paramType);
   var dataLength = 0;
@@ -176,7 +175,7 @@ TypeTuple parseTypeFromSignature(
     case CorElementType.ELEMENT_TYPE_CLASS:
       final uncompressed = corSigUncompressData(signatureBlob.sublist(1));
       final token = unencodeDefRefSpecToken(uncompressed.data);
-      final tokenAsType = TypeDef.fromToken(reader, token);
+      final tokenAsType = TypeDef.fromToken(scope, token);
 
       dataLength = uncompressed.dataLength + 1;
       runtimeType.name = tokenAsType.typeName;
@@ -191,7 +190,7 @@ TypeTuple parseTypeFromSignature(
       break;
 
     case CorElementType.ELEMENT_TYPE_PTR:
-      final ptrTuple = parseTypeFromSignature(signatureBlob.sublist(1), reader);
+      final ptrTuple = parseTypeFromSignature(signatureBlob.sublist(1), scope);
       dataLength = 1 + ptrTuple.offsetLength;
       runtimeType.typeArg = ptrTuple.typeIdentifier;
       // flattenTypeArgs(runtimeType);
@@ -199,7 +198,7 @@ TypeTuple parseTypeFromSignature(
 
     case CorElementType.ELEMENT_TYPE_GENERICINST:
       final classTuple =
-          parseTypeFromSignature(signatureBlob.sublist(1), reader);
+          parseTypeFromSignature(signatureBlob.sublist(1), scope);
       runtimeType.name = classTuple.typeIdentifier.name;
       final argsCount =
           signatureBlob[1 + classTuple.offsetLength]; // GENERICINST + class
@@ -209,7 +208,7 @@ TypeTuple parseTypeFromSignature(
       var argPtr = runtimeType;
       for (var idx = 0; idx < argsCount; idx++) {
         final arg =
-            parseTypeFromSignature(signatureBlob.sublist(dataLength), reader);
+            parseTypeFromSignature(signatureBlob.sublist(dataLength), scope);
         dataLength += arg.offsetLength;
         argPtr.typeArg = arg.typeIdentifier;
         argPtr = argPtr.typeArg!;
@@ -219,7 +218,7 @@ TypeTuple parseTypeFromSignature(
     case CorElementType.ELEMENT_TYPE_ARRAY:
       // Format is [Type ArrayShape] (see §II.23.2.13)
       final arrayTuple =
-          parseTypeFromSignature(signatureBlob.sublist(1), reader);
+          parseTypeFromSignature(signatureBlob.sublist(1), scope);
       dataLength = 1 + arrayTuple.offsetLength;
       runtimeType.typeArg = arrayTuple.typeIdentifier;
       final dimensionsCount = signatureBlob[dataLength++]; // rank

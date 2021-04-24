@@ -4,8 +4,8 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'base.dart';
-import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
+import 'scope.dart';
 import 'type_aliases.dart';
 
 class FieldOffset {
@@ -30,8 +30,7 @@ class ClassLayout extends TokenObject {
   /// alignment is specified.
   int? packingAlignment;
 
-  ClassLayout(IMetaDataImport2 reader, int classToken)
-      : super(reader, classToken) {
+  ClassLayout(Scope scope, int classToken) : super(scope, classToken) {
     final pdwPackSize = calloc<DWORD>();
     final rgFieldOffset = calloc<COR_FIELD_OFFSET>(256);
     final pcFieldOffset = calloc<ULONG>();

@@ -9,7 +9,7 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'base.dart';
-import 'com/IMetaDataImport2.dart';
+import 'scope.dart';
 import 'type_aliases.dart';
 import 'utils.dart';
 
@@ -19,23 +19,24 @@ class CustomAttribute extends TokenObject {
   final int modifiedObjectToken;
   final Uint8List signatureBlob;
 
-  CustomAttribute(IMetaDataImport2 reader, int token, this.modifiedObjectToken,
+  CustomAttribute(Scope scope, int token, this.modifiedObjectToken,
       this.attributeType, this.signatureBlob)
-      : super(reader, token);
+      : super(scope, token);
 
   /// Creates a custom attribute object from its given token.
-  factory CustomAttribute.fromToken(IMetaDataImport2 reader, int token) {
+  factory CustomAttribute.fromToken(Scope scope, int token) {
     final ptkObj = calloc<mdToken>();
     final ptkType = calloc<mdToken>();
     final ppBlob = calloc<IntPtr>();
     final pcbBlob = calloc<ULONG>();
 
     try {
+      final reader = scope.reader;
       final hr = reader.GetCustomAttributeProps(
           token, ptkObj, ptkType, ppBlob, pcbBlob);
       if (SUCCEEDED(hr)) {
         return CustomAttribute(
-            reader,
+            scope,
             token,
             ptkObj.value,
             ptkType.value,

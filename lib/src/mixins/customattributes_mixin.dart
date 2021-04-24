@@ -73,7 +73,7 @@ mixin CustomAttributesMixin on TokenObject {
       while (hr == S_OK) {
         final attrToken = rAttrs.value;
 
-        customAttributes.add(CustomAttribute.fromToken(reader, attrToken));
+        customAttributes.add(CustomAttribute.fromToken(scope, attrToken));
         hr = reader.EnumCustomAttributes(phEnum, token, 0, rAttrs, 1, pcAttrs);
       }
       return customAttributes;

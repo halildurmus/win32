@@ -9,6 +9,7 @@ import 'package:win32/win32.dart';
 
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
+import 'scope.dart';
 import 'utils.dart';
 
 const MAX_STRING_SIZE = 256;
@@ -50,10 +51,12 @@ enum TokenType {
 /// underlying Windows metadata database. The high byte of the token describes
 /// its type.
 abstract class TokenObject {
-  final IMetaDataImport2 reader;
+  final Scope scope;
   final int token;
 
-  const TokenObject(this.reader, this.token);
+  const TokenObject(this.scope, this.token);
+
+  IMetaDataImport2 get reader => scope.reader;
 
   @override
   int get hashCode => token;

@@ -21,7 +21,7 @@ mixin GenericParamsMixin on TokenObject {
       while (hr == S_OK) {
         final genericParamToken = rGenericParams.value;
 
-        params.add(GenericParam.fromToken(reader, genericParamToken));
+        params.add(GenericParam.fromToken(scope, genericParamToken));
         hr = reader.EnumGenericParams(
             phEnum, token, rGenericParams, 1, pcGenericParams);
       }

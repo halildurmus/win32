@@ -9,10 +9,10 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'base.dart';
-import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'method.dart';
 import 'mixins/customattributes_mixin.dart';
+import 'scope.dart';
 import 'type_aliases.dart';
 import 'typeidentifier.dart';
 import 'utils.dart';
@@ -27,19 +27,12 @@ class Parameter extends TokenObject with CustomAttributesMixin {
   final int _attributes;
   final int _methodToken;
 
-  Parameter(
-      IMetaDataImport2 reader,
-      int token,
-      this._methodToken,
-      this.sequence,
-      this._attributes,
-      this.typeIdentifier,
-      this.name,
-      this.signatureBlob)
-      : super(reader, token);
+  Parameter(Scope scope, int token, this._methodToken, this.sequence,
+      this._attributes, this.typeIdentifier, this.name, this.signatureBlob)
+      : super(scope, token);
 
   /// Creates a parameter object from its given token.
-  factory Parameter.fromToken(IMetaDataImport2 reader, int token) {
+  factory Parameter.fromToken(Scope scope, int token) {
     final ptkMethodDef = calloc<mdMethodDef>();
     final pulSequence = calloc<ULONG>();
     final szName = stralloc(MAX_STRING_SIZE);
@@ -50,6 +43,7 @@ class Parameter extends TokenObject with CustomAttributesMixin {
     final pcchValue = calloc<ULONG>();
 
     try {
+      final reader = scope.reader;
       final hr = reader.GetParamProps(
           token,
           ptkMethodDef,
@@ -63,7 +57,7 @@ class Parameter extends TokenObject with CustomAttributesMixin {
           pcchValue);
       if (SUCCEEDED(hr)) {
         return Parameter(
-            reader,
+            scope,
             token,
             ptkMethodDef.value,
             pulSequence.value,
@@ -86,19 +80,25 @@ class Parameter extends TokenObject with CustomAttributesMixin {
     }
   }
 
-  factory Parameter.fromTypeIdentifier(IMetaDataImport2 reader, int methodToken,
-          TypeIdentifier runtimeType) =>
-      Parameter(reader, 0, methodToken, 0, 0, runtimeType, '', Uint8List(0));
+  factory Parameter.fromTypeIdentifier(
+          Scope scope, int methodToken, TypeIdentifier runtimeType) =>
+      Parameter(scope, 0, methodToken, 0, 0, runtimeType, '', Uint8List(0));
 
-  factory Parameter.fromVoid(IMetaDataImport2 reader, int methodToken) =>
-      Parameter(reader, 0, methodToken, 0, 0,
-          TypeIdentifier(CorElementType.ELEMENT_TYPE_VOID), '', Uint8List(0));
+  factory Parameter.fromVoid(Scope scope, int methodToken) => Parameter(
+      scope,
+      0,
+      methodToken,
+      0,
+      0,
+      TypeIdentifier(CorElementType.ELEMENT_TYPE_VOID),
+      '',
+      Uint8List(0));
 
   @override
   String toString() => 'Parameter: $name';
 
   /// Returns the [Method] that takes the parameter.
-  Method get parent => Method.fromToken(reader, _methodToken);
+  Method get parent => Method.fromToken(scope, _methodToken);
 
   /// Returns true if the parameter is passed into the method call.
   bool get isInParam => _attributes & CorParamAttr.pdIn == CorParamAttr.pdIn;

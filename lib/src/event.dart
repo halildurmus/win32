@@ -4,9 +4,9 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'base.dart';
-import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
 import 'mixins/customattributes_mixin.dart';
+import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 import 'utils.dart';
@@ -24,7 +24,7 @@ class Event extends TokenObject with CustomAttributesMixin {
   final int _parentToken;
 
   Event(
-      IMetaDataImport2 reader,
+      Scope scope,
       int token,
       this._parentToken,
       this.eventName,
@@ -34,10 +34,10 @@ class Event extends TokenObject with CustomAttributesMixin {
       this.removeOnToken,
       this.fireToken,
       this.otherMethodTokens)
-      : super(reader, token);
+      : super(scope, token);
 
   /// Creates an event object from its given token.
-  factory Event.fromToken(IMetaDataImport2 reader, int token) {
+  factory Event.fromToken(Scope scope, int token) {
     final ptkClass = calloc<mdTypeDef>();
     final szEvent = stralloc(MAX_STRING_SIZE);
     final pchEvent = calloc<ULONG>();
@@ -50,6 +50,7 @@ class Event extends TokenObject with CustomAttributesMixin {
     final pcOtherMethod = calloc<ULONG>();
 
     try {
+      final reader = scope.reader;
       final hr = reader.GetEventProps(
           token,
           ptkClass,
@@ -67,7 +68,7 @@ class Event extends TokenObject with CustomAttributesMixin {
 
       if (SUCCEEDED(hr)) {
         return Event(
-            reader,
+            scope,
             token,
             ptkClass.value,
             szEvent.toDartString(),
@@ -95,7 +96,7 @@ class Event extends TokenObject with CustomAttributesMixin {
   }
 
   /// Returns the [TypeDef] representing the class that declares the event.
-  TypeDef get parent => TypeDef.fromToken(reader, _parentToken);
+  TypeDef get parent => TypeDef.fromToken(scope, _parentToken);
 
   /// Returns true if the event is special; its name describes how.
   bool get isSpecialName =>
