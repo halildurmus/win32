@@ -39,5 +39,4 @@ export 'src/com/IMetaDataImport2.dart';
 
 export 'src/utils/blob.dart';
 export 'src/utils/exception.dart';
-export 'src/utils/string.dart';
 export 'src/utils/typetuple.dart';

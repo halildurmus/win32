@@ -24,13 +24,13 @@ typedef _OpenScopeOnITypeInfo_Native = Int32 Function(
     Pointer<COMObject> pITI,
     Uint32 dwOpenFlags,
     Pointer<GUID> riid,
-    Pointer<IntPtr> ppIUnk);
+    Pointer<Pointer> ppIUnk);
 typedef _OpenScopeOnITypeInfo_Dart = int Function(
     Pointer obj,
     Pointer<COMObject> pITI,
     int dwOpenFlags,
     Pointer<GUID> riid,
-    Pointer<IntPtr> ppIUnk);
+    Pointer<Pointer> ppIUnk);
 
 typedef _GetCORSystemDirectory_Native = Int32 Function(Pointer obj,
     Pointer<Utf16> szBuffer, Uint32 cchBuffer, Pointer<Uint32> pchBuffer);
@@ -95,7 +95,7 @@ class IMetaDataDispenserEx extends IMetaDataDispenser {
           .asFunction<_GetOption_Dart>()(ptr.ref.lpVtbl, optionId, pValue);
 
   int OpenScopeOnITypeInfo(Pointer<COMObject> pITI, int dwOpenFlags,
-          Pointer<GUID> riid, Pointer<IntPtr> ppIUnk) =>
+          Pointer<GUID> riid, Pointer<Pointer> ppIUnk) =>
       Pointer<NativeFunction<_OpenScopeOnITypeInfo_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(8).value)
               .asFunction<_OpenScopeOnITypeInfo_Dart>()(

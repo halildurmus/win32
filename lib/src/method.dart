@@ -85,7 +85,7 @@ class Method extends TokenObject
           MAX_STRING_SIZE,
           pchMethod,
           pdwAttr,
-          ppvSigBlob.cast(),
+          ppvSigBlob,
           pcbSigBlob,
           pulCodeRVA,
           pdwImplFlags);

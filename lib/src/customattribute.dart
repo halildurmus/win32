@@ -27,7 +27,7 @@ class CustomAttribute extends TokenObject {
   factory CustomAttribute.fromToken(Scope scope, int token) {
     final ptkObj = calloc<mdToken>();
     final ptkType = calloc<mdToken>();
-    final ppBlob = calloc<IntPtr>();
+    final ppBlob = calloc<UVCP_CONSTANT>();
     final pcbBlob = calloc<ULONG>();
 
     try {
@@ -35,48 +35,45 @@ class CustomAttribute extends TokenObject {
       final hr = reader.GetCustomAttributeProps(
           token, ptkObj, ptkType, ppBlob, pcbBlob);
       if (SUCCEEDED(hr)) {
-        return CustomAttribute(
-            scope,
-            token,
-            ptkObj.value,
-            ptkType.value,
-            Pointer<Uint8>.fromAddress(ppBlob.value)
-                .asTypedList(pcbBlob.value));
+        return CustomAttribute(scope, token, ptkObj.value, ptkType.value,
+            ppBlob.value.asTypedList(pcbBlob.value));
       } else {
         throw WindowsException(hr);
       }
     } finally {
-      free(pcbBlob);
-      free(ppBlob);
-      free(ptkType);
       free(ptkObj);
+      free(ptkType);
+      free(ppBlob);
+      free(pcbBlob);
     }
   }
 
   String get name {
-    final szString = stralloc(MAX_STRING_SIZE);
-    final ptk = calloc<Uint32>();
+    final ptk = calloc<mdToken>();
+    final szMember = stralloc(MAX_STRING_SIZE);
+    final pchMember = calloc<ULONG>();
+    final ppvSigBlob = calloc<PCCOR_SIGNATURE>();
+    final pcbSigBlob = calloc<ULONG>();
 
-    final pchString = calloc<Uint32>();
-    final ppBlob = calloc<Uint8>(256);
-    final pcbBlob = calloc<Uint32>();
     try {
       print('Token: ${token.toHexString(32)}');
       print('Token type: ${tokenType.toString()}');
 
-      final hr = reader.GetMemberRefProps(
-          token, ptk, szString, MAX_STRING_SIZE, pchString, ppBlob, pcbBlob);
+      final hr = reader.GetMemberRefProps(token, ptk, szMember, MAX_STRING_SIZE,
+          pchMember, ppvSigBlob, pcbSigBlob);
 
       if (SUCCEEDED(hr)) {
         print('success');
-        print(pchString.value);
-        return szString.toDartString();
+        print(pchMember.value);
+        return szMember.toDartString();
       } else {
         throw WindowsException(hr);
       }
     } finally {
-      free(pchString);
-      free(szString);
+      free(szMember);
+      free(pchMember);
+      free(ppvSigBlob);
+      free(pcbSigBlob);
     }
   }
 }

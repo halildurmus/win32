@@ -112,9 +112,9 @@ typedef _GetTypeRefProps_Dart = int Function(
     Pointer<Uint32> pchName);
 
 typedef _ResolveTypeRef_Native = Int32 Function(Pointer obj, Uint32 tkTypeRef,
-    Pointer<GUID> riid, Pointer<IntPtr> ppIScope, Pointer<Uint32> ptkTypeDef);
+    Pointer<GUID> riid, Pointer<Pointer> ppIScope, Pointer<Uint32> ptkTypeDef);
 typedef _ResolveTypeRef_Dart = int Function(Pointer obj, int tkTypeRef,
-    Pointer<GUID> riid, Pointer<IntPtr> ppIScope, Pointer<Uint32> ptkTypeDef);
+    Pointer<GUID> riid, Pointer<Pointer> ppIScope, Pointer<Uint32> ptkTypeDef);
 
 typedef _EnumMembers_Native = Int32 Function(
     Pointer obj,
@@ -344,7 +344,7 @@ typedef _GetMethodProps_Native = Int32 Function(
     Uint32 cchMethod,
     Pointer<Uint32> pchMethod,
     Pointer<Uint32> pdwAttr,
-    Pointer<Uint8> ppvSigBlob,
+    Pointer<Pointer<Uint8>> ppvSigBlob,
     Pointer<Uint32> pcbSigBlob,
     Pointer<Uint32> pulCodeRVA,
     Pointer<Uint32> pdwImplFlags);
@@ -356,7 +356,7 @@ typedef _GetMethodProps_Dart = int Function(
     int cchMethod,
     Pointer<Uint32> pchMethod,
     Pointer<Uint32> pdwAttr,
-    Pointer<Uint8> ppvSigBlob,
+    Pointer<Pointer<Uint8>> ppvSigBlob,
     Pointer<Uint32> pcbSigBlob,
     Pointer<Uint32> pulCodeRVA,
     Pointer<Uint32> pdwImplFlags);
@@ -368,7 +368,7 @@ typedef _GetMemberRefProps_Native = Int32 Function(
     Pointer<Utf16> szMember,
     Uint32 cchMember,
     Pointer<Uint32> pchMember,
-    Pointer<Uint8> ppvSigBlob,
+    Pointer<Pointer<Uint8>> ppvSigBlob,
     Pointer<Uint32> pcbSigBlob);
 typedef _GetMemberRefProps_Dart = int Function(
     Pointer obj,
@@ -377,7 +377,7 @@ typedef _GetMemberRefProps_Dart = int Function(
     Pointer<Utf16> szMember,
     int cchMember,
     Pointer<Uint32> pchMember,
-    Pointer<Uint8> ppvSigBlob,
+    Pointer<Pointer<Uint8>> ppvSigBlob,
     Pointer<Uint32> pcbSigBlob);
 
 typedef _EnumProperties_Native = Int32 Function(
@@ -474,9 +474,9 @@ typedef _GetClassLayout_Dart = int Function(
     Pointer<Uint32> pulClassSize);
 
 typedef _GetFieldMarshal_Native = Int32 Function(Pointer obj, Uint32 tk,
-    Pointer<Uint8> ppvNativeType, Pointer<Uint32> pcbNativeType);
+    Pointer<Pointer<Uint8>> ppvNativeType, Pointer<Uint32> pcbNativeType);
 typedef _GetFieldMarshal_Dart = int Function(Pointer obj, int tk,
-    Pointer<Uint8> ppvNativeType, Pointer<Uint32> pcbNativeType);
+    Pointer<Pointer<Uint8>> ppvNativeType, Pointer<Uint32> pcbNativeType);
 
 typedef _GetRVA_Native = Int32 Function(Pointer obj, Uint32 tk,
     Pointer<Uint32> pulCodeRVA, Pointer<Uint32> pdwImplFlags);
@@ -487,19 +487,19 @@ typedef _GetPermissionSetProps_Native = Int32 Function(
     Pointer obj,
     Uint32 tk,
     Pointer<Uint32> pdwAction,
-    Pointer<IntPtr> ppvPermission,
+    Pointer<Pointer> ppvPermission,
     Pointer<Uint32> pcbPermission);
 typedef _GetPermissionSetProps_Dart = int Function(
     Pointer obj,
     int tk,
     Pointer<Uint32> pdwAction,
-    Pointer<IntPtr> ppvPermission,
+    Pointer<Pointer> ppvPermission,
     Pointer<Uint32> pcbPermission);
 
 typedef _GetSigFromToken_Native = Int32 Function(Pointer obj,
-    Uint32 tkSignature, Pointer<Uint8> ppvSig, Pointer<Uint32> pcbSig);
+    Uint32 tkSignature, Pointer<Pointer<Uint8>> ppvSig, Pointer<Uint32> pcbSig);
 typedef _GetSigFromToken_Dart = int Function(Pointer obj, int tkSignature,
-    Pointer<Uint8> ppvSig, Pointer<Uint32> pcbSig);
+    Pointer<Pointer<Uint8>> ppvSig, Pointer<Uint32> pcbSig);
 
 typedef _GetModuleRefProps_Native = Int32 Function(
     Pointer obj,
@@ -520,9 +520,9 @@ typedef _EnumModuleRefs_Dart = int Function(Pointer obj, Pointer<IntPtr> phEnum,
     Pointer<Uint32> rgModuleRefs, int cMax, Pointer<Uint32> pcModuleRefs);
 
 typedef _GetTypeSpecFromToken_Native = Int32 Function(Pointer obj,
-    Uint32 tkTypeSpec, Pointer<Uint8> ppvSig, Pointer<Uint32> pcbSig);
-typedef _GetTypeSpecFromToken_Dart = int Function(
-    Pointer obj, int tkTypeSpec, Pointer<Uint8> ppvSig, Pointer<Uint32> pcbSig);
+    Uint32 tkTypeSpec, Pointer<Pointer<Uint8>> ppvSig, Pointer<Uint32> pcbSig);
+typedef _GetTypeSpecFromToken_Dart = int Function(Pointer obj, int tkTypeSpec,
+    Pointer<Pointer<Uint8>> ppvSig, Pointer<Uint32> pcbSig);
 
 typedef _GetNameFromToken_Native = Int32 Function(
     Pointer obj, Uint32 tk, Pointer<Uint8> pszUtf8NamePtr);
@@ -622,14 +622,14 @@ typedef _GetCustomAttributeProps_Native = Int32 Function(
     Uint32 cv,
     Pointer<Uint32> ptkObj,
     Pointer<Uint32> ptkType,
-    Pointer<IntPtr> ppBlob,
+    Pointer<Pointer> ppBlob,
     Pointer<Uint32> pcbBlob);
 typedef _GetCustomAttributeProps_Dart = int Function(
     Pointer obj,
     int cv,
     Pointer<Uint32> ptkObj,
     Pointer<Uint32> ptkType,
-    Pointer<IntPtr> ppBlob,
+    Pointer<Pointer> ppBlob,
     Pointer<Uint32> pcbBlob);
 
 typedef _FindTypeRef_Native = Int32 Function(Pointer obj,
@@ -645,12 +645,12 @@ typedef _GetMemberProps_Native = Int32 Function(
     Uint32 cchMember,
     Pointer<Uint32> pchMember,
     Pointer<Uint32> pdwAttr,
-    Pointer<Uint8> ppvSigBlob,
+    Pointer<Pointer<Uint8>> ppvSigBlob,
     Pointer<Uint32> pcbSigBlob,
     Pointer<Uint32> pulCodeRVA,
     Pointer<Uint32> pdwImplFlags,
     Pointer<Uint32> pdwCPlusTypeFlag,
-    Pointer<Uint8> ppValue,
+    Pointer<Pointer> ppValue,
     Pointer<Uint32> pcchValue);
 typedef _GetMemberProps_Dart = int Function(
     Pointer obj,
@@ -660,12 +660,12 @@ typedef _GetMemberProps_Dart = int Function(
     int cchMember,
     Pointer<Uint32> pchMember,
     Pointer<Uint32> pdwAttr,
-    Pointer<Uint8> ppvSigBlob,
+    Pointer<Pointer<Uint8>> ppvSigBlob,
     Pointer<Uint32> pcbSigBlob,
     Pointer<Uint32> pulCodeRVA,
     Pointer<Uint32> pdwImplFlags,
     Pointer<Uint32> pdwCPlusTypeFlag,
-    Pointer<Uint8> ppValue,
+    Pointer<Pointer> ppValue,
     Pointer<Uint32> pcchValue);
 
 typedef _GetFieldProps_Native = Int32 Function(
@@ -676,10 +676,10 @@ typedef _GetFieldProps_Native = Int32 Function(
     Uint32 cchField,
     Pointer<Uint32> pchField,
     Pointer<Uint32> pdwAttr,
-    Pointer<Uint8> ppvSigBlob,
+    Pointer<Pointer<Uint8>> ppvSigBlob,
     Pointer<Uint32> pcbSigBlob,
     Pointer<Uint32> pdwCPlusTypeFlag,
-    Pointer<Uint8> ppValue,
+    Pointer<Pointer> ppValue,
     Pointer<Uint32> pcchValue);
 typedef _GetFieldProps_Dart = int Function(
     Pointer obj,
@@ -689,10 +689,10 @@ typedef _GetFieldProps_Dart = int Function(
     int cchField,
     Pointer<Uint32> pchField,
     Pointer<Uint32> pdwAttr,
-    Pointer<Uint8> ppvSigBlob,
+    Pointer<Pointer<Uint8>> ppvSigBlob,
     Pointer<Uint32> pcbSigBlob,
     Pointer<Uint32> pdwCPlusTypeFlag,
-    Pointer<Uint8> ppValue,
+    Pointer<Pointer> ppValue,
     Pointer<Uint32> pcchValue);
 
 typedef _GetPropertyProps_Native = Int32 Function(
@@ -703,10 +703,10 @@ typedef _GetPropertyProps_Native = Int32 Function(
     Uint32 cchProperty,
     Pointer<Uint32> pchProperty,
     Pointer<Uint32> pdwPropFlags,
-    Pointer<Uint8> ppvSigBlob,
+    Pointer<Pointer<Uint8>> ppvSigBlob,
     Pointer<Uint32> pcbSigBlob,
     Pointer<Uint32> pdwCPlusTypeFlag,
-    Pointer<Uint8> ppDefaultValue,
+    Pointer<Pointer> ppDefaultValue,
     Pointer<Uint32> pcchDefaultValue,
     Pointer<Uint32> ptkSetter,
     Pointer<Uint32> ptkGetter,
@@ -721,10 +721,10 @@ typedef _GetPropertyProps_Dart = int Function(
     int cchProperty,
     Pointer<Uint32> pchProperty,
     Pointer<Uint32> pdwPropFlags,
-    Pointer<Uint8> ppvSigBlob,
+    Pointer<Pointer<Uint8>> ppvSigBlob,
     Pointer<Uint32> pcbSigBlob,
     Pointer<Uint32> pdwCPlusTypeFlag,
-    Pointer<Uint8> ppDefaultValue,
+    Pointer<Pointer> ppDefaultValue,
     Pointer<Uint32> pcchDefaultValue,
     Pointer<Uint32> ptkSetter,
     Pointer<Uint32> ptkGetter,
@@ -742,7 +742,7 @@ typedef _GetParamProps_Native = Int32 Function(
     Pointer<Uint32> pchName,
     Pointer<Uint32> pdwAttr,
     Pointer<Uint32> pdwCPlusTypeFlag,
-    Pointer<Uint8> ppValue,
+    Pointer<Pointer> ppValue,
     Pointer<Uint32> pcchValue);
 typedef _GetParamProps_Dart = int Function(
     Pointer obj,
@@ -754,17 +754,17 @@ typedef _GetParamProps_Dart = int Function(
     Pointer<Uint32> pchName,
     Pointer<Uint32> pdwAttr,
     Pointer<Uint32> pdwCPlusTypeFlag,
-    Pointer<Uint8> ppValue,
+    Pointer<Pointer> ppValue,
     Pointer<Uint32> pcchValue);
 
 typedef _GetCustomAttributeByName_Native = Int32 Function(
     Pointer obj,
     Uint32 tkObj,
     Pointer<Utf16> szName,
-    Pointer<IntPtr> ppData,
+    Pointer<Pointer> ppData,
     Pointer<Uint32> pcbData);
 typedef _GetCustomAttributeByName_Dart = int Function(Pointer obj, int tkObj,
-    Pointer<Utf16> szName, Pointer<IntPtr> ppData, Pointer<Uint32> pcbData);
+    Pointer<Utf16> szName, Pointer<Pointer> ppData, Pointer<Uint32> pcbData);
 
 typedef _IsValidToken_Native = Int32 Function(Pointer obj, Uint32 tk);
 typedef _IsValidToken_Dart = int Function(Pointer obj, int tk);
@@ -873,7 +873,7 @@ class IMetaDataImport extends IUnknown {
           ptkResolutionScope, szName, cchName, pchName);
 
   int ResolveTypeRef(int tkTypeRef, Pointer<GUID> riid,
-          Pointer<IntPtr> ppIScope, Pointer<Uint32> ptkTypeDef) =>
+          Pointer<Pointer> ppIScope, Pointer<Uint32> ptkTypeDef) =>
       Pointer<NativeFunction<_ResolveTypeRef_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(15).value)
               .asFunction<_ResolveTypeRef_Dart>()(
@@ -1008,7 +1008,7 @@ class IMetaDataImport extends IUnknown {
           int cchMethod,
           Pointer<Uint32> pchMethod,
           Pointer<Uint32> pdwAttr,
-          Pointer<Uint8> ppvSigBlob,
+          Pointer<Pointer<Uint8>> ppvSigBlob,
           Pointer<Uint32> pcbSigBlob,
           Pointer<Uint32> pulCodeRVA,
           Pointer<Uint32> pdwImplFlags) =>
@@ -1033,7 +1033,7 @@ class IMetaDataImport extends IUnknown {
           Pointer<Utf16> szMember,
           int cchMember,
           Pointer<Uint32> pchMember,
-          Pointer<Uint8> ppvSigBlob,
+          Pointer<Pointer<Uint8>> ppvSigBlob,
           Pointer<Uint32> pcbSigBlob) =>
       Pointer<NativeFunction<_GetMemberRefProps_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(31).value)
@@ -1123,7 +1123,7 @@ class IMetaDataImport extends IUnknown {
               .asFunction<_GetClassLayout_Dart>()(ptr.ref.lpVtbl, tkTypeDef,
           pdwPackSize, rgFieldOffset, cMax, pcFieldOffset, pulClassSize);
 
-  int GetFieldMarshal(int tk, Pointer<Uint8> ppvNativeType,
+  int GetFieldMarshal(int tk, Pointer<Pointer<Uint8>> ppvNativeType,
           Pointer<Uint32> pcbNativeType) =>
       Pointer<NativeFunction<_GetFieldMarshal_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(38).value)
@@ -1138,14 +1138,14 @@ class IMetaDataImport extends IUnknown {
           ptr.ref.lpVtbl, tk, pulCodeRVA, pdwImplFlags);
 
   int GetPermissionSetProps(int tk, Pointer<Uint32> pdwAction,
-          Pointer<IntPtr> ppvPermission, Pointer<Uint32> pcbPermission) =>
+          Pointer<Pointer> ppvPermission, Pointer<Uint32> pcbPermission) =>
       Pointer<NativeFunction<_GetPermissionSetProps_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(40).value)
               .asFunction<_GetPermissionSetProps_Dart>()(
           ptr.ref.lpVtbl, tk, pdwAction, ppvPermission, pcbPermission);
 
-  int GetSigFromToken(
-          int tkSignature, Pointer<Uint8> ppvSig, Pointer<Uint32> pcbSig) =>
+  int GetSigFromToken(int tkSignature, Pointer<Pointer<Uint8>> ppvSig,
+          Pointer<Uint32> pcbSig) =>
       Pointer<NativeFunction<_GetSigFromToken_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(41).value)
               .asFunction<_GetSigFromToken_Dart>()(
@@ -1165,8 +1165,8 @@ class IMetaDataImport extends IUnknown {
               .asFunction<_EnumModuleRefs_Dart>()(
           ptr.ref.lpVtbl, phEnum, rgModuleRefs, cMax, pcModuleRefs);
 
-  int GetTypeSpecFromToken(
-          int tkTypeSpec, Pointer<Uint8> ppvSig, Pointer<Uint32> pcbSig) =>
+  int GetTypeSpecFromToken(int tkTypeSpec, Pointer<Pointer<Uint8>> ppvSig,
+          Pointer<Uint32> pcbSig) =>
       Pointer<NativeFunction<_GetTypeSpecFromToken_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(44).value)
               .asFunction<_GetTypeSpecFromToken_Dart>()(
@@ -1254,7 +1254,7 @@ class IMetaDataImport extends IUnknown {
           int cv,
           Pointer<Uint32> ptkObj,
           Pointer<Uint32> ptkType,
-          Pointer<IntPtr> ppBlob,
+          Pointer<Pointer> ppBlob,
           Pointer<Uint32> pcbBlob) =>
       Pointer<NativeFunction<_GetCustomAttributeProps_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(54).value)
@@ -1275,12 +1275,12 @@ class IMetaDataImport extends IUnknown {
           int cchMember,
           Pointer<Uint32> pchMember,
           Pointer<Uint32> pdwAttr,
-          Pointer<Uint8> ppvSigBlob,
+          Pointer<Pointer<Uint8>> ppvSigBlob,
           Pointer<Uint32> pcbSigBlob,
           Pointer<Uint32> pulCodeRVA,
           Pointer<Uint32> pdwImplFlags,
           Pointer<Uint32> pdwCPlusTypeFlag,
-          Pointer<Uint8> ppValue,
+          Pointer<Pointer> ppValue,
           Pointer<Uint32> pcchValue) =>
       Pointer<NativeFunction<_GetMemberProps_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(56).value)
@@ -1307,10 +1307,10 @@ class IMetaDataImport extends IUnknown {
           int cchField,
           Pointer<Uint32> pchField,
           Pointer<Uint32> pdwAttr,
-          Pointer<Uint8> ppvSigBlob,
+          Pointer<Pointer<Uint8>> ppvSigBlob,
           Pointer<Uint32> pcbSigBlob,
           Pointer<Uint32> pdwCPlusTypeFlag,
-          Pointer<Uint8> ppValue,
+          Pointer<Pointer> ppValue,
           Pointer<Uint32> pcchValue) =>
       Pointer<NativeFunction<_GetFieldProps_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(57).value)
@@ -1335,10 +1335,10 @@ class IMetaDataImport extends IUnknown {
           int cchProperty,
           Pointer<Uint32> pchProperty,
           Pointer<Uint32> pdwPropFlags,
-          Pointer<Uint8> ppvSigBlob,
+          Pointer<Pointer<Uint8>> ppvSigBlob,
           Pointer<Uint32> pcbSigBlob,
           Pointer<Uint32> pdwCPlusTypeFlag,
-          Pointer<Uint8> ppDefaultValue,
+          Pointer<Pointer> ppDefaultValue,
           Pointer<Uint32> pcchDefaultValue,
           Pointer<Uint32> ptkSetter,
           Pointer<Uint32> ptkGetter,
@@ -1375,7 +1375,7 @@ class IMetaDataImport extends IUnknown {
           Pointer<Uint32> pchName,
           Pointer<Uint32> pdwAttr,
           Pointer<Uint32> pdwCPlusTypeFlag,
-          Pointer<Uint8> ppValue,
+          Pointer<Pointer> ppValue,
           Pointer<Uint32> pcchValue) =>
       Pointer<NativeFunction<_GetParamProps_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(59).value)
@@ -1393,7 +1393,7 @@ class IMetaDataImport extends IUnknown {
           pcchValue);
 
   int GetCustomAttributeByName(int tkObj, Pointer<Utf16> szName,
-          Pointer<IntPtr> ppData, Pointer<Uint32> pcbData) =>
+          Pointer<Pointer> ppData, Pointer<Uint32> pcbData) =>
       Pointer<NativeFunction<_GetCustomAttributeByName_Native>>.fromAddress(
                   ptr.ref.vtable.elementAt(60).value)
               .asFunction<_GetCustomAttributeByName_Dart>()(

@@ -16,8 +16,8 @@ mixin CustomAttributesMixin on TokenObject {
     final ppData = calloc<Pointer<BYTE>>();
     final pcbData = calloc<ULONG>();
     try {
-      final hr = reader.GetCustomAttributeByName(
-          token, szName, ppData.cast(), pcbData);
+      final hr =
+          reader.GetCustomAttributeByName(token, szName, ppData, pcbData);
       if (SUCCEEDED(hr)) {
         if (pcbData.value <= 3) return '';
         final sigList = ppData.value.elementAt(3).cast<Utf8>().toDartString();
@@ -38,8 +38,8 @@ mixin CustomAttributesMixin on TokenObject {
     final ppData = calloc<Pointer<BYTE>>();
     final pcbData = calloc<ULONG>();
     try {
-      final hr = reader.GetCustomAttributeByName(
-          token, szName, ppData.cast(), pcbData);
+      final hr =
+          reader.GetCustomAttributeByName(token, szName, ppData, pcbData);
       if (SUCCEEDED(hr)) {
         final sigList = ppData.value.asTypedList(pcbData.value);
         return sigList;

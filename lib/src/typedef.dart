@@ -153,8 +153,7 @@ class TypeDef extends TokenObject
 
     try {
       final reader = scope.reader;
-      final hr =
-          reader.GetTypeSpecFromToken(typeSpecToken, ppvSig.cast(), pcbSig);
+      final hr = reader.GetTypeSpecFromToken(typeSpecToken, ppvSig, pcbSig);
       final signature = ppvSig.value.asTypedList(pcbSig.value);
       final typeTuple = TypeTuple.fromSignature(signature, scope);
 
@@ -439,7 +438,7 @@ class TypeDef extends TokenObject
 
     try {
       final hr = reader.GetCustomAttributeByName(
-          token, ptrAttributeName, ppData.cast(), pcbData);
+          token, ptrAttributeName, ppData, pcbData);
       if (SUCCEEDED(hr)) {
         final blob = ppData.value;
         if (pcbData.value > 0) {

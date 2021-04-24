@@ -64,10 +64,10 @@ class Field extends TokenObject with CustomAttributesMixin {
           MAX_STRING_SIZE,
           pchField,
           pdwAttr,
-          ppvSigBlob.cast(),
+          ppvSigBlob,
           pcbSigBlob,
           pdwCPlusTypeFlag,
-          ppValue.cast(),
+          ppValue,
           pcchValue);
 
       if (SUCCEEDED(hr)) {

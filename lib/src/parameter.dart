@@ -53,7 +53,7 @@ class Parameter extends TokenObject with CustomAttributesMixin {
           pchName,
           pdwAttr,
           pdwCPlusTypeFlag,
-          ppValue.cast(),
+          ppValue,
           pcchValue);
       if (SUCCEEDED(hr)) {
         return Parameter(
