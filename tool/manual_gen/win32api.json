@@ -2748,6 +2748,11 @@
         "dllLibrary": "kernel32",
         "comment": "Opens an existing local process object."
     },
+    "OpenProcessToken": {
+        "prototype": "BOOL OpenProcessToken(\n  HANDLE  ProcessHandle,\n  DWORD   DesiredAccess,\n  PHANDLE TokenHandle\n);",
+        "dllLibrary": "advapi32",
+        "comment": "The OpenProcessToken function opens the access token associated with a process."
+    },
     "OpenThemeData": {
         "prototype": "HTHEME OpenThemeData(\n  HWND    hwnd,\n  LPCWSTR pszClassList\n);",
         "dllLibrary": "uxtheme",
@@ -2758,6 +2763,11 @@
         "dllLibrary": "uxtheme",
         "comment": "A variant of OpenThemeData that opens a theme handle associated with a specific DPI.",
         "minimumWindowsVersion": "WIN10_RS2"
+    },
+    "OpenThreadToken": {
+        "prototype": "BOOL OpenThreadToken(\n  HANDLE  ThreadHandle,\n  DWORD   DesiredAccess,\n  BOOL    OpenAsSelf,\n  PHANDLE TokenHandle\n);",
+        "dllLibrary": "advapi32",
+        "comment": "The OpenThreadToken function opens the access token associated with a thread."
     },
     "OpenWindowStation": {
         "prototype": "HWINSTA OpenWindowStationW(\n  LPCWSTR     lpszWinSta,\n  BOOL        fInherit,\n  ACCESS_MASK dwDesiredAccess\n);",
@@ -3700,6 +3710,11 @@
         "prototype": "EXECUTION_STATE SetThreadExecutionState(\n  EXECUTION_STATE esFlags\n  );",
         "dllLibrary": "kernel32",
         "comment": "Enables an application to inform the system that it is in use, thereby preventing the system from entering sleep or turning off the display while the application is running."
+    },
+    "SetThreadToken": {
+        "prototype": "BOOL SetThreadToken(\n  PHANDLE Thread,\n  HANDLE  Token\n);",
+        "dllLibrary": "advapi32",
+        "comment": "The SetThreadToken function assigns an impersonation token to a thread. The function can also cause a thread to stop using an impersonation token."
     },
     "SetThreadUILanguage": {
         "prototype": "LANGID SetThreadUILanguage(\n  LANGID LangId\n);",

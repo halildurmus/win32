@@ -212,6 +212,49 @@ int InitiateShutdown(Pointer<Utf16> lpMachineName, Pointer<Utf16> lpMessage,
       lpMachineName, lpMessage, dwGracePeriod, dwShutdownFlags, dwReason);
 }
 
+/// The OpenProcessToken function opens the access token associated with a
+/// process.
+///
+/// ```c
+/// BOOL OpenProcessToken(
+///   HANDLE  ProcessHandle,
+///   DWORD   DesiredAccess,
+///   PHANDLE TokenHandle
+/// );
+/// ```
+/// {@category advapi32}
+int OpenProcessToken(
+    int ProcessHandle, int DesiredAccess, Pointer<IntPtr> TokenHandle) {
+  final _OpenProcessToken = _advapi32.lookupFunction<
+      Int32 Function(IntPtr ProcessHandle, Uint32 DesiredAccess,
+          Pointer<IntPtr> TokenHandle),
+      int Function(int ProcessHandle, int DesiredAccess,
+          Pointer<IntPtr> TokenHandle)>('OpenProcessToken');
+  return _OpenProcessToken(ProcessHandle, DesiredAccess, TokenHandle);
+}
+
+/// The OpenThreadToken function opens the access token associated with a
+/// thread.
+///
+/// ```c
+/// BOOL OpenThreadToken(
+///   HANDLE  ThreadHandle,
+///   DWORD   DesiredAccess,
+///   BOOL    OpenAsSelf,
+///   PHANDLE TokenHandle
+/// );
+/// ```
+/// {@category advapi32}
+int OpenThreadToken(int ThreadHandle, int DesiredAccess, int OpenAsSelf,
+    Pointer<IntPtr> TokenHandle) {
+  final _OpenThreadToken = _advapi32.lookupFunction<
+      Int32 Function(IntPtr ThreadHandle, Uint32 DesiredAccess,
+          Int32 OpenAsSelf, Pointer<IntPtr> TokenHandle),
+      int Function(int ThreadHandle, int DesiredAccess, int OpenAsSelf,
+          Pointer<IntPtr> TokenHandle)>('OpenThreadToken');
+  return _OpenThreadToken(ThreadHandle, DesiredAccess, OpenAsSelf, TokenHandle);
+}
+
 /// Closes a handle to the specified registry key.
 ///
 /// ```c
@@ -1351,4 +1394,22 @@ int RegUnLoadKey(int hKey, Pointer<Utf16> lpSubKey) {
       Int32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey),
       int Function(int hKey, Pointer<Utf16> lpSubKey)>('RegUnLoadKeyW');
   return _RegUnLoadKey(hKey, lpSubKey);
+}
+
+/// The SetThreadToken function assigns an impersonation token to a thread.
+/// The function can also cause a thread to stop using an impersonation
+/// token.
+///
+/// ```c
+/// BOOL SetThreadToken(
+///   PHANDLE Thread,
+///   HANDLE  Token
+/// );
+/// ```
+/// {@category advapi32}
+int SetThreadToken(Pointer<IntPtr> Thread, int Token) {
+  final _SetThreadToken = _advapi32.lookupFunction<
+      Int32 Function(Pointer<IntPtr> Thread, IntPtr Token),
+      int Function(Pointer<IntPtr> Thread, int Token)>('SetThreadToken');
+  return _SetThreadToken(Thread, Token);
 }

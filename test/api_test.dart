@@ -6058,6 +6058,24 @@ void main() {
               int dwReason)>('InitiateShutdownW');
       expect(InitiateShutdown, isA<Function>());
     });
+    test('Can instantiate OpenProcessToken', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final OpenProcessToken = advapi32.lookupFunction<
+          Int32 Function(IntPtr ProcessHandle, Uint32 DesiredAccess,
+              Pointer<IntPtr> TokenHandle),
+          int Function(int ProcessHandle, int DesiredAccess,
+              Pointer<IntPtr> TokenHandle)>('OpenProcessToken');
+      expect(OpenProcessToken, isA<Function>());
+    });
+    test('Can instantiate OpenThreadToken', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final OpenThreadToken = advapi32.lookupFunction<
+          Int32 Function(IntPtr ThreadHandle, Uint32 DesiredAccess,
+              Int32 OpenAsSelf, Pointer<IntPtr> TokenHandle),
+          int Function(int ThreadHandle, int DesiredAccess, int OpenAsSelf,
+              Pointer<IntPtr> TokenHandle)>('OpenThreadToken');
+      expect(OpenThreadToken, isA<Function>());
+    });
     test('Can instantiate RegCloseKey', () {
       final advapi32 = DynamicLibrary.open('advapi32.dll');
       final RegCloseKey = advapi32.lookupFunction<Int32 Function(IntPtr hKey),
@@ -6595,6 +6613,13 @@ void main() {
           Int32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey),
           int Function(int hKey, Pointer<Utf16> lpSubKey)>('RegUnLoadKeyW');
       expect(RegUnLoadKey, isA<Function>());
+    });
+    test('Can instantiate SetThreadToken', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final SetThreadToken = advapi32.lookupFunction<
+          Int32 Function(Pointer<IntPtr> Thread, IntPtr Token),
+          int Function(Pointer<IntPtr> Thread, int Token)>('SetThreadToken');
+      expect(SetThreadToken, isA<Function>());
     });
   });
 
