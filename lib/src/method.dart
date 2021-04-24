@@ -20,7 +20,9 @@ import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
-import 'utils.dart';
+import 'utils/exception.dart';
+import 'utils/string.dart';
+import 'utils/typetuple.dart';
 
 enum MemberAccess {
   privateScope,
@@ -256,7 +258,7 @@ class Method extends TokenObject
     if (isGetProperty) {
       // Type should begin at index 2
       final typeIdentifier =
-          parseTypeFromSignature(signatureBlob.sublist(2), scope)
+          TypeTuple.fromSignature(signatureBlob.sublist(2), scope)
               .typeIdentifier;
       returnType = Parameter.fromTypeIdentifier(scope, token, typeIdentifier);
     } else if (isSetProperty) {
@@ -285,14 +287,14 @@ class Method extends TokenObject
       returnType = parameters.first;
       parameters = parameters.sublist(1);
       final returnTypeTuple =
-          parseTypeFromSignature(signatureBlob.sublist(blobPtr), scope);
+          TypeTuple.fromSignature(signatureBlob.sublist(blobPtr), scope);
       returnType.typeIdentifier = returnTypeTuple.typeIdentifier;
       blobPtr += returnTypeTuple.offsetLength;
     } else {
       // In Win32 metadata, EnumParams does not return a zero-th parameter even
       // if there is a return type. So we create a new returnType for it.
       final returnTypeTuple =
-          parseTypeFromSignature(signatureBlob.sublist(blobPtr), scope);
+          TypeTuple.fromSignature(signatureBlob.sublist(blobPtr), scope);
       returnType = Parameter.fromTypeIdentifier(
           scope, token, returnTypeTuple.typeIdentifier);
       blobPtr += returnTypeTuple.offsetLength;
@@ -302,7 +304,7 @@ class Method extends TokenObject
     // type to the corresponding parameter.
     while (paramsIndex < parameters.length) {
       final runtimeType =
-          parseTypeFromSignature(signatureBlob.sublist(blobPtr), scope);
+          TypeTuple.fromSignature(signatureBlob.sublist(blobPtr), scope);
       blobPtr += runtimeType.offsetLength;
 
       if (runtimeType.typeIdentifier.corType ==
@@ -360,7 +362,7 @@ class Method extends TokenObject
   // value. We're not that clever yet, so we project it in its raw state, which
   // means a little work here to ensure that it comes out right.
   int _parseArray(Uint8List sublist, int paramsIndex) {
-    final typeTuple = parseTypeFromSignature(sublist.sublist(2), scope);
+    final typeTuple = TypeTuple.fromSignature(sublist.sublist(2), scope);
 
     parameters[paramsIndex].name = '__valueSize';
     parameters[paramsIndex].typeIdentifier.corType =

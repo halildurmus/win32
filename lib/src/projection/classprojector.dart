@@ -4,7 +4,7 @@
 
 import '../constants.dart';
 import '../typedef.dart';
-import '../utils.dart';
+import '../utils/string.dart';
 import 'projections.dart';
 import 'typeprojector.dart';
 

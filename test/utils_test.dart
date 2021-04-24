@@ -4,7 +4,8 @@ import 'package:winmd/winmd.dart';
 
 void main() {
   test('Can successfully find the location of a WinRT metadata file', () {
-    final file = metadataFileContainingType('Windows.Globalization.Calendar');
+    final file =
+        MetadataStore.winmdFileContainingType('Windows.Globalization.Calendar');
     expect(file.path, endsWith(r'WinMetadata\Windows.Globalization.winmd'));
   });
 

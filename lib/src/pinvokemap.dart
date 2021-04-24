@@ -7,7 +7,8 @@ import 'base.dart';
 import 'constants.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
-import 'utils.dart';
+import 'utils/exception.dart';
+import 'utils/string.dart';
 
 enum StringMarshalConvention { notSpecified, ansi, unicode, auto }
 

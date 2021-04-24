@@ -11,7 +11,8 @@ import 'mixins/customattributes_mixin.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
-import 'utils.dart';
+import 'utils/exception.dart';
+import 'utils/string.dart';
 
 enum Variance { nonvariant, covariant, contravariant }
 

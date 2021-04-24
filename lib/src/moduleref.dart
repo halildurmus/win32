@@ -11,7 +11,7 @@ import 'base.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
-import 'utils.dart';
+import 'utils/string.dart';
 
 class ModuleRef extends TokenObject with CustomAttributesMixin {
   final String name;

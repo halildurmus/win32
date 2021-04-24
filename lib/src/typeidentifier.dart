@@ -4,7 +4,7 @@
 
 import 'constants.dart';
 import 'typedef.dart';
-import 'utils.dart';
+import 'utils/exception.dart';
 
 /// Represents a type, as for example used in a parameter. Return
 /// types use the same class, although they have no name.

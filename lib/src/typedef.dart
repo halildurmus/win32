@@ -20,7 +20,9 @@ import 'scope.dart';
 import 'systemtokens.dart';
 import 'type_aliases.dart';
 import 'typeidentifier.dart';
-import 'utils.dart';
+import 'utils/exception.dart';
+import 'utils/string.dart';
+import 'utils/typetuple.dart';
 
 enum TypeVisibility {
   notPublic,
@@ -163,7 +165,7 @@ class TypeDef extends TokenObject
       final hr =
           reader.GetTypeSpecFromToken(typeSpecToken, ppvSig.cast(), pcbSig);
       final signature = ppvSig.value.asTypedList(pcbSig.value);
-      final typeTuple = parseTypeFromSignature(signature, scope);
+      final typeTuple = TypeTuple.fromSignature(signature, scope);
 
       if (SUCCEEDED(hr)) {
         return TypeDef(

@@ -11,7 +11,7 @@ import 'package:win32/win32.dart';
 import 'base.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
-import 'utils.dart';
+import 'utils/string.dart';
 
 /// A custom (named) attribute.
 class CustomAttribute extends TokenObject {

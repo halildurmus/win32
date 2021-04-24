@@ -30,7 +30,8 @@ void listTokens([String type = 'Windows.Devices.Bluetooth.BluetoothAdapter']) {
 void listEnums([String type = 'Windows.Globalization']) {
   printHeading('Enums implemented by $type');
 
-  final file = metadataFileContainingType('Windows.Globalization.DayOfWeek');
+  final file =
+      MetadataStore.winmdFileContainingType('Windows.Globalization.DayOfWeek');
   final mdScope = MetadataStore.getScopeForFile(File(file.path));
   final enums = mdScope.enums;
 

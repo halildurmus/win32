@@ -16,7 +16,8 @@ import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
-import 'utils.dart';
+import 'utils/string.dart';
+import 'utils/typetuple.dart';
 
 /// A property object.
 class Property extends TokenObject with CustomAttributesMixin {
@@ -88,7 +89,7 @@ class Property extends TokenObject with CustomAttributesMixin {
 
         // PropertySig is defined in §II.23.2.5.
         final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
-        final typeTuple = parseTypeFromSignature(signature.sublist(2), scope);
+        final typeTuple = TypeTuple.fromSignature(signature.sublist(2), scope);
         final defaultValue =
             ppDefaultValue.value.asTypedList(pcchDefaultValue.value);
         final otherMethodTokens =

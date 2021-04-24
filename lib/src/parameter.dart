@@ -15,7 +15,7 @@ import 'mixins/customattributes_mixin.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
 import 'typeidentifier.dart';
-import 'utils.dart';
+import 'utils/string.dart';
 
 /// A parameter or return type.
 class Parameter extends TokenObject with CustomAttributesMixin {

@@ -101,6 +101,37 @@ class MetadataStore {
   }
 
   /// Takes a typename (e.g. `Windows.Globalization.Calendar`) and returns the
+  /// metadata file that contains the type.
+  static File winmdFileContainingType(String typeName) {
+    File path;
+
+    final hstrTypeName = convertToHString(typeName);
+    final hstrMetaDataFilePath = calloc<IntPtr>();
+    final spMetaDataImport = calloc<Pointer>();
+    final typeDef = calloc<mdTypeDef>();
+
+    try {
+      // RoGetMetaDataFile can only be used for Windows Runtime classes (i.e. not
+      // third-party types) in an app that is not a Windows Store app.
+      final hr = RoGetMetaDataFile(hstrTypeName.value, nullptr,
+          hstrMetaDataFilePath, spMetaDataImport, typeDef);
+      if (SUCCEEDED(hr)) {
+        path = File(convertFromHString(hstrMetaDataFilePath));
+      } else {
+        throw WindowsException(hr);
+      }
+    } finally {
+      WindowsDeleteString(hstrTypeName.value);
+      WindowsDeleteString(hstrMetaDataFilePath.value);
+
+      free(hstrTypeName);
+      free(hstrMetaDataFilePath);
+    }
+
+    return path;
+  }
+
+  /// Takes a typename (e.g. `Windows.Globalization.Calendar`) and returns the
   /// metadata scope that contains the type.
   static Scope getScopeForType(String typeName) {
     if (typeName.startsWith('Windows.Win32')) {

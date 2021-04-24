@@ -16,7 +16,8 @@ import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
 import 'typeidentifier.dart';
-import 'utils.dart';
+import 'utils/string.dart';
+import 'utils/typetuple.dart';
 
 enum FieldAccess {
   privateScope,
@@ -77,7 +78,7 @@ class Field extends TokenObject with CustomAttributesMixin {
         // against the CorFieldAttr enumeration), and then follows a type
         // identifier.
         final signature = ppvSigBlob.value.asTypedList(pcbSigBlob.value);
-        final typeTuple = parseTypeFromSignature(signature.sublist(1), scope);
+        final typeTuple = TypeTuple.fromSignature(signature.sublist(1), scope);
 
         return Field(
             scope,

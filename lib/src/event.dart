@@ -9,7 +9,7 @@ import 'mixins/customattributes_mixin.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
-import 'utils.dart';
+import 'utils/string.dart';
 
 /// An event.
 class Event extends TokenObject with CustomAttributesMixin {

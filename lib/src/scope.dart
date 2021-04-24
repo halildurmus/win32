@@ -13,7 +13,8 @@ import 'moduleref.dart';
 import 'pekind.dart';
 import 'type_aliases.dart';
 import 'typedef.dart';
-import 'utils.dart';
+import 'utils/exception.dart';
+import 'utils/string.dart';
 
 /// A metadata scope, which typically matches an on-disk file.
 ///

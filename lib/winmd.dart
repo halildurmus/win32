@@ -31,7 +31,6 @@ export 'src/property.dart';
 export 'src/scope.dart';
 export 'src/typedef.dart';
 export 'src/typeidentifier.dart';
-export 'src/utils.dart';
 
 export 'src/com/IMetaDataDispenser.dart';
 export 'src/com/IMetaDataDispenserEx.dart';
@@ -42,3 +41,8 @@ export 'src/projection/classprojector.dart';
 export 'src/projection/projections.dart';
 export 'src/projection/typeprinter.dart';
 export 'src/projection/typeprojector.dart';
+
+export 'src/utils/blob.dart';
+export 'src/utils/exception.dart';
+export 'src/utils/string.dart';
+export 'src/utils/typetuple.dart';
