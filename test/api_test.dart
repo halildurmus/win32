@@ -6058,6 +6058,24 @@ void main() {
               int dwReason)>('InitiateShutdownW');
       expect(InitiateShutdown, isA<Function>());
     });
+    test('Can instantiate OpenProcessToken', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final OpenProcessToken = advapi32.lookupFunction<
+          Int32 Function(IntPtr ProcessHandle, Uint32 DesiredAccess,
+              Pointer<IntPtr> TokenHandle),
+          int Function(int ProcessHandle, int DesiredAccess,
+              Pointer<IntPtr> TokenHandle)>('OpenProcessToken');
+      expect(OpenProcessToken, isA<Function>());
+    });
+    test('Can instantiate OpenThreadToken', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final OpenThreadToken = advapi32.lookupFunction<
+          Int32 Function(IntPtr ThreadHandle, Uint32 DesiredAccess,
+              Int32 OpenAsSelf, Pointer<IntPtr> TokenHandle),
+          int Function(int ThreadHandle, int DesiredAccess, int OpenAsSelf,
+              Pointer<IntPtr> TokenHandle)>('OpenThreadToken');
+      expect(OpenThreadToken, isA<Function>());
+    });
     test('Can instantiate RegCloseKey', () {
       final advapi32 = DynamicLibrary.open('advapi32.dll');
       final RegCloseKey = advapi32.lookupFunction<Int32 Function(IntPtr hKey),
@@ -6595,6 +6613,13 @@ void main() {
           Int32 Function(IntPtr hKey, Pointer<Utf16> lpSubKey),
           int Function(int hKey, Pointer<Utf16> lpSubKey)>('RegUnLoadKeyW');
       expect(RegUnLoadKey, isA<Function>());
+    });
+    test('Can instantiate SetThreadToken', () {
+      final advapi32 = DynamicLibrary.open('advapi32.dll');
+      final SetThreadToken = advapi32.lookupFunction<
+          Int32 Function(Pointer<IntPtr> Thread, IntPtr Token),
+          int Function(Pointer<IntPtr> Thread, int Token)>('SetThreadToken');
+      expect(SetThreadToken, isA<Function>());
     });
   });
 
@@ -7979,6 +8004,40 @@ void main() {
       });
     }
     if (windowsBuildNumber >= 9200) {
+      test('Can instantiate WindowsDeleteStringBuffer', () {
+        final api_ms_win_core_winrt_string_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+        final WindowsDeleteStringBuffer =
+            api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+                Int32 Function(IntPtr bufferHandle),
+                int Function(int bufferHandle)>('WindowsDeleteStringBuffer');
+        expect(WindowsDeleteStringBuffer, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate WindowsDuplicateString', () {
+        final api_ms_win_core_winrt_string_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+        final WindowsDuplicateString =
+            api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+                Int32 Function(IntPtr string, Pointer<IntPtr> newString),
+                int Function(int string,
+                    Pointer<IntPtr> newString)>('WindowsDuplicateString');
+        expect(WindowsDuplicateString, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate WindowsGetStringLen', () {
+        final api_ms_win_core_winrt_string_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+        final WindowsGetStringLen =
+            api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+                Uint32 Function(IntPtr string),
+                int Function(int string)>('WindowsGetStringLen');
+        expect(WindowsGetStringLen, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
       test('Can instantiate WindowsGetStringRawBuffer', () {
         final api_ms_win_core_winrt_string_l1_1_0 =
             DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
@@ -7988,6 +8047,131 @@ void main() {
                 Pointer<Utf16> Function(int string,
                     Pointer<Uint32> length)>('WindowsGetStringRawBuffer');
         expect(WindowsGetStringRawBuffer, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate WindowsIsStringEmpty', () {
+        final api_ms_win_core_winrt_string_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+        final WindowsIsStringEmpty =
+            api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+                Int32 Function(IntPtr string),
+                int Function(int string)>('WindowsIsStringEmpty');
+        expect(WindowsIsStringEmpty, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate WindowsPreallocateStringBuffer', () {
+        final api_ms_win_core_winrt_string_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+        final WindowsPreallocateStringBuffer =
+            api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+                    Int32 Function(
+                        Uint32 length,
+                        Pointer<Pointer<Uint16>> charBuffer,
+                        Pointer<IntPtr> bufferHandle),
+                    int Function(
+                        int length,
+                        Pointer<Pointer<Uint16>> charBuffer,
+                        Pointer<IntPtr> bufferHandle)>(
+                'WindowsPreallocateStringBuffer');
+        expect(WindowsPreallocateStringBuffer, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate WindowsPromoteStringBuffer', () {
+        final api_ms_win_core_winrt_string_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+        final WindowsPromoteStringBuffer =
+            api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+                Int32 Function(IntPtr bufferHandle, Pointer<IntPtr> string),
+                int Function(int bufferHandle,
+                    Pointer<IntPtr> string)>('WindowsPromoteStringBuffer');
+        expect(WindowsPromoteStringBuffer, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate WindowsReplaceString', () {
+        final api_ms_win_core_winrt_string_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+        final WindowsReplaceString =
+            api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+                Int32 Function(IntPtr string, IntPtr stringReplaced,
+                    IntPtr stringReplaceWith, Pointer<IntPtr> newString),
+                int Function(
+                    int string,
+                    int stringReplaced,
+                    int stringReplaceWith,
+                    Pointer<IntPtr> newString)>('WindowsReplaceString');
+        expect(WindowsReplaceString, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate WindowsStringHasEmbeddedNull', () {
+        final api_ms_win_core_winrt_string_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+        final WindowsStringHasEmbeddedNull =
+            api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+                    Int32 Function(IntPtr string, Pointer<Int32> hasEmbedNull),
+                    int Function(int string, Pointer<Int32> hasEmbedNull)>(
+                'WindowsStringHasEmbeddedNull');
+        expect(WindowsStringHasEmbeddedNull, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate WindowsSubstring', () {
+        final api_ms_win_core_winrt_string_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+        final WindowsSubstring =
+            api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+                Int32 Function(IntPtr string, Uint32 startIndex,
+                    Pointer<IntPtr> newString),
+                int Function(int string, int startIndex,
+                    Pointer<IntPtr> newString)>('WindowsSubstring');
+        expect(WindowsSubstring, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate WindowsSubstringWithSpecifiedLength', () {
+        final api_ms_win_core_winrt_string_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+        final WindowsSubstringWithSpecifiedLength =
+            api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+                Int32 Function(IntPtr string, Uint32 startIndex, Uint32 length,
+                    Pointer<IntPtr> newString),
+                int Function(
+                    int string,
+                    int startIndex,
+                    int length,
+                    Pointer<IntPtr>
+                        newString)>('WindowsSubstringWithSpecifiedLength');
+        expect(WindowsSubstringWithSpecifiedLength, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate WindowsTrimStringEnd', () {
+        final api_ms_win_core_winrt_string_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+        final WindowsTrimStringEnd =
+            api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+                Int32 Function(IntPtr string, IntPtr trimString,
+                    Pointer<IntPtr> newString),
+                int Function(int string, int trimString,
+                    Pointer<IntPtr> newString)>('WindowsTrimStringEnd');
+        expect(WindowsTrimStringEnd, isA<Function>());
+      });
+    }
+    if (windowsBuildNumber >= 9200) {
+      test('Can instantiate WindowsTrimStringStart', () {
+        final api_ms_win_core_winrt_string_l1_1_0 =
+            DynamicLibrary.open('api-ms-win-core-winrt-string-l1-1-0.dll');
+        final WindowsTrimStringStart =
+            api_ms_win_core_winrt_string_l1_1_0.lookupFunction<
+                Int32 Function(IntPtr string, IntPtr trimString,
+                    Pointer<IntPtr> newString),
+                int Function(int string, int trimString,
+                    Pointer<IntPtr> newString)>('WindowsTrimStringStart');
+        expect(WindowsTrimStringStart, isA<Function>());
       });
     }
   });

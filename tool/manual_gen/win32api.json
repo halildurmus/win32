@@ -2748,6 +2748,11 @@
         "dllLibrary": "kernel32",
         "comment": "Opens an existing local process object."
     },
+    "OpenProcessToken": {
+        "prototype": "BOOL OpenProcessToken(\n  HANDLE  ProcessHandle,\n  DWORD   DesiredAccess,\n  PHANDLE TokenHandle\n);",
+        "dllLibrary": "advapi32",
+        "comment": "The OpenProcessToken function opens the access token associated with a process."
+    },
     "OpenThemeData": {
         "prototype": "HTHEME OpenThemeData(\n  HWND    hwnd,\n  LPCWSTR pszClassList\n);",
         "dllLibrary": "uxtheme",
@@ -2758,6 +2763,11 @@
         "dllLibrary": "uxtheme",
         "comment": "A variant of OpenThemeData that opens a theme handle associated with a specific DPI.",
         "minimumWindowsVersion": "WIN10_RS2"
+    },
+    "OpenThreadToken": {
+        "prototype": "BOOL OpenThreadToken(\n  HANDLE  ThreadHandle,\n  DWORD   DesiredAccess,\n  BOOL    OpenAsSelf,\n  PHANDLE TokenHandle\n);",
+        "dllLibrary": "advapi32",
+        "comment": "The OpenThreadToken function opens the access token associated with a thread."
     },
     "OpenWindowStation": {
         "prototype": "HWINSTA OpenWindowStationW(\n  LPCWSTR     lpszWinSta,\n  BOOL        fInherit,\n  ACCESS_MASK dwDesiredAccess\n);",
@@ -3701,6 +3711,11 @@
         "dllLibrary": "kernel32",
         "comment": "Enables an application to inform the system that it is in use, thereby preventing the system from entering sleep or turning off the display while the application is running."
     },
+    "SetThreadToken": {
+        "prototype": "BOOL SetThreadToken(\n  PHANDLE Thread,\n  HANDLE  Token\n);",
+        "dllLibrary": "advapi32",
+        "comment": "The SetThreadToken function assigns an impersonation token to a thread. The function can also cause a thread to stop using an impersonation token."
+    },
     "SetThreadUILanguage": {
         "prototype": "LANGID SetThreadUILanguage(\n  LANGID LangId\n);",
         "dllLibrary": "kernel32",
@@ -4405,10 +4420,94 @@
         "category": "winrt",
         "minimumWindowsVersion": "WIN8"
     },
+    "WindowsDeleteStringBuffer": {
+        "prototype": "HRESULT WindowsDeleteStringBuffer(\n  HSTRING_BUFFER bufferHandle\n);",
+        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
+        "comment": "Discards a preallocated string buffer if it was not promoted to an HSTRING.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "WindowsDuplicateString": {
+        "prototype": "HRESULT WindowsDuplicateString(\n  HSTRING string,\nHSTRING *newString\n);",
+        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
+        "comment": "Creates a copy of the specified string.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "WindowsGetStringLen": {
+        "prototype": "UINT32 WindowsGetStringLen(\n  HSTRING string\n);",
+        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
+        "comment": "Gets the length, in Unicode characters, of the specified string.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
     "WindowsGetStringRawBuffer": {
         "prototype": "PCWSTR WindowsGetStringRawBuffer(\n  HSTRING string,\n  UINT32  *length\n);",
         "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
         "comment": "Retrieves the backing buffer for the specified string.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "WindowsIsStringEmpty": {
+        "prototype": "BOOL WindowsIsStringEmpty(\n  HSTRING string\n);",
+        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
+        "comment": "Indicates whether the specified string is the empty string.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "WindowsPreallocateStringBuffer": {
+        "prototype": "HRESULT WindowsPreallocateStringBuffer(\n  UINT32         length,\n  WCHAR          **charBuffer,\n  HSTRING_BUFFER *bufferHandle\n);",
+        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
+        "comment": "Allocates a mutable character buffer for use in HSTRING creation.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "WindowsPromoteStringBuffer": {
+        "prototype": "HRESULT WindowsPromoteStringBuffer(\n  HSTRING_BUFFER bufferHandle,\n  HSTRING        *string\n);",
+        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
+        "comment": "Creates an HSTRING from the specified HSTRING_BUFFER.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "WindowsReplaceString": {
+        "prototype": "HRESULT WindowsReplaceString(\n  HSTRING string,\n  HSTRING stringReplaced,\n  HSTRING stringReplaceWith,\n  HSTRING *newString\n);",
+        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
+        "comment": "Replaces all occurrences of a set of characters in the specified string with another set of characters to create a new string.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "WindowsStringHasEmbeddedNull": {
+        "prototype": "HRESULT WindowsStringHasEmbeddedNull(\n  HSTRING string,\n  BOOL    *hasEmbedNull);",
+        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
+        "comment": "Indicates whether the specified string has embedded null characters.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "WindowsSubstring": {
+        "prototype": "HRESULT WindowsSubstring(\n  HSTRING string,\n  UINT32  startIndex,\n  HSTRING *newString\n);",
+        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
+        "comment": "Retrieves a substring from the specified string. The substring starts at the specified character position.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "WindowsSubstringWithSpecifiedLength": {
+        "prototype": "HRESULT WindowsSubstringWithSpecifiedLength(\n  HSTRING string,\n  UINT32  startIndex,\n  UINT32  length,\n  HSTRING *newString\n);",
+        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
+        "comment": "Retrieves a substring from the specified string. The substring starts at a specified character position and has a specified length.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "WindowsTrimStringEnd": {
+        "prototype": "HRESULT WindowsTrimStringEnd(\n  HSTRING string,\n  HSTRING trimString,\n  HSTRING *newString\n);",
+        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
+        "comment": "Removes all trailing occurrences of a specified set of characters from the source string.",
+        "category": "winrt",
+        "minimumWindowsVersion": "WIN8"
+    },
+    "WindowsTrimStringStart": {
+        "prototype": "HRESULT WindowsTrimStringStart(\n  HSTRING string,\n  HSTRING trimString,\n  HSTRING *newString\n);",
+        "apiSet": "api-ms-win-core-winrt-string-l1-1-0",
+        "comment": "Removes all leading occurrences of a specified set of characters from the source string.",
         "category": "winrt",
         "minimumWindowsVersion": "WIN8"
     },
