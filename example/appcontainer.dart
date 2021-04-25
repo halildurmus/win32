@@ -45,24 +45,26 @@ void main() {
 
   const udpClassName = 'Windows.Storage.UserDataPaths';
   final hstr = convertToHString(udpClassName);
-  final iudpStatics = calloc<GUID>()..ref.setGUID(IID_IUserDataPathsStatics);
-  final factory = calloc<COMObject>();
-  final defaults = calloc<COMObject>();
+
+  final pIID_IUserDataPathsStatics = calloc<GUID>()
+    ..ref.setGUID(IID_IUserDataPathsStatics);
+  final activationFactory = calloc<COMObject>();
+  final userDataDefaults = calloc<COMObject>();
 
   try {
-    hr = RoGetActivationFactory(hstr.value, iudpStatics, factory.cast());
+    hr = RoGetActivationFactory(
+        hstr.value, pIID_IUserDataPathsStatics, activationFactory.cast());
     if (FAILED(hr)) {
       throw WindowsException(hr);
     }
-    final userDataStatics = IUserDataPathsStatics(factory);
+    final userDataStatics = IUserDataPathsStatics(activationFactory);
 
-    hr = userDataStatics.GetDefault(defaults.cast());
+    hr = userDataStatics.GetDefault(userDataDefaults.cast());
     if (FAILED(hr)) {
       throw WindowsException(hr);
     }
 
-    final userData = UserDataPaths(defaults);
-
+    final userData = UserDataPaths(userDataDefaults);
     final hstr_RAD = userData.RoamingAppData;
 
     final pathPtr = WindowsGetStringRawBuffer(hstr_RAD, nullptr);
@@ -70,6 +72,9 @@ void main() {
     print(pathPtr.toDartString());
   } finally {
     WindowsDeleteString(hstr.value);
+    free(pIID_IUserDataPathsStatics);
+    free(activationFactory);
+    free(userDataDefaults);
     RoUninitialize();
   }
 }
