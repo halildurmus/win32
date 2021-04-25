@@ -10,7 +10,7 @@ import 'package:winmd/winmd.dart';
 import '../tool/metadata/projection/classprojector.dart';
 
 void main() {
-  test('vTableStart', () {
+  test('vTableStart for COM types', () {
     const testedTypes = <String, int>{
       'Windows.Win32.Automation.IDispatch': 3,
       'Windows.Win32.Automation.IEnumVARIANT': 3,
@@ -67,9 +67,28 @@ void main() {
     for (final type in testedTypes.keys) {
       final typedef = scope.findTypeDef(type)!;
       final projectedClass = ClassProjector(typedef);
-      final calculatedVTableStart = projectedClass.vTableStart;
+      final calculatedVTableStart = projectedClass.vtableStart;
 
-      expect(calculatedVTableStart, equals(testedTypes[type]));
+      expect(calculatedVTableStart, equals(testedTypes[type]),
+          reason: typedef.typeName);
+    }
+  });
+
+  test('vTableStart for Windows Runtime types', () {
+    const testedTypes = <String, int>{
+      'Windows.Globalization.ICalendar': 6,
+      'Windows.Foundation.IAsyncInfo': 6,
+      'Windows.Foundation.IAsyncAction': 11
+    };
+
+    for (final type in testedTypes.keys) {
+      final scope = MetadataStore.getScopeForType(type);
+      final typedef = scope.findTypeDef(type)!;
+      final projectedClass = ClassProjector(typedef);
+      final calculatedVTableStart = projectedClass.vtableStart;
+
+      expect(calculatedVTableStart, equals(testedTypes[type]),
+          reason: typedef.typeName);
     }
   });
 }

@@ -15,16 +15,21 @@ extension CamelCaseConversion on String {
 class ClassProjector {
   final TypeDef typeDef;
 
-  int vTableStart(TypeDef? type) {
+  int _vtableStart(TypeDef? type) {
     if (type == null) {
       return 0;
+    }
+
+    // WinRT types inherit from IInspectable
+    if (!type.typeName.startsWith('Windows.Win32') && type.interfaces.isEmpty) {
+      return 6;
     }
 
     if (type.isInterface && type.interfaces.isNotEmpty) {
       var sum = 0;
 
       for (final interface in type.interfaces) {
-        sum += interface.methods.length + vTableStart(interface);
+        sum += interface.methods.length + _vtableStart(interface);
       }
 
       return sum;
@@ -33,22 +38,35 @@ class ClassProjector {
     return 0;
   }
 
+  int get vtableStart => _vtableStart(typeDef);
+
   const ClassProjector(this.typeDef);
 
   /// Take a TypeDef and create a Dart projection of it.
   ClassProjection get projection {
-    final classInheritsFrom = typeDef.interfaces.isNotEmpty
-        ? typeDef.interfaces.first.typeName.split('.').last
-        : 'IInspectable';
-    final vtableStart =
-        classInheritsFrom == 'IInspectable' ? 6 : vTableStart(typeDef);
+    var parent = '';
+
+    // WinRT interfaces don't inherit in metadata (e.g. IAsyncInfo has no
+    // parent), but all WinRT interfaces have a base type of IInspectable as far
+    // as the COM vtable is concerned. They contain the functions of
+    // IInspectable (as well as IUnknown, from which IInspectable itself
+    // inherits).
+    if (typeDef.interfaces.isNotEmpty) {
+      parent = typeDef.interfaces.first.typeName.split('.').last;
+    } else if (!typeDef.typeName.endsWith('IUnknown')) {
+      parent = 'IInspectable';
+    }
+
+    final classInheritsFrom = parent;
 
     final interface = ClassProjection(
-        sourceType: SourceType.winrt,
+        sourceType: typeDef.typeName.startsWith('Windows.Win32')
+            ? SourceType.com
+            : SourceType.winrt,
         iid: typeDef.guid,
         name: typeDef.typeName,
         inherits: classInheritsFrom,
-        vtableStart: vtableStart);
+        vtableStart: _vtableStart(typeDef));
 
     if (typeDef.genericParams.isNotEmpty) {
       final genericParams =
