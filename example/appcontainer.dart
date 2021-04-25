@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
+import 'package:win32/src/com/UserDataPaths.dart';
 import 'package:win32/win32.dart';
 
 typedef DWORD = Uint32;
@@ -37,40 +38,38 @@ bool isAppContainer() {
   }
 }
 
-int CreateHString(String dartString) {
-  final ptr = dartString.toNativeUtf16();
-  try {
-    final hstr = calloc<HSTRING>();
-    WindowsCreateString(ptr, dartString.length, hstr);
-    return hstr.value;
-  } finally {
-    free(ptr);
-  }
-}
-
 void main() {
+  var hr = RoInitialize(RO_INIT_TYPE.RO_INIT_SINGLETHREADED);
   OutputDebugString(
       '${!isAppContainer() ? '!' : ''}isAppContainer'.toNativeUtf16());
 
   const udpClassName = 'Windows.Storage.UserDataPaths';
-  final hstr = CreateHString(udpClassName);
+  final hstr = convertToHString(udpClassName);
   final iudpStatics = calloc<GUID>()..ref.setGUID(IID_IUserDataPathsStatics);
   final factory = calloc<COMObject>();
-  final defaults = calloc<Pointer>();
+  final defaults = calloc<COMObject>();
 
   try {
-    var hr = RoGetActivationFactory(hstr, iudpStatics, factory.cast());
+    hr = RoGetActivationFactory(hstr.value, iudpStatics, factory.cast());
     if (FAILED(hr)) {
       throw WindowsException(hr);
     }
-    final userDataPath = IUserDataPathsStatics(factory);
+    final userDataStatics = IUserDataPathsStatics(factory);
 
-    hr = userDataPath.GetDefault(defaults);
+    hr = userDataStatics.GetDefault(defaults.cast());
     if (FAILED(hr)) {
       throw WindowsException(hr);
     }
-    print('yay!');
+
+    final userData = UserDataPaths(defaults);
+
+    final hstr_RAD = userData.RoamingAppData;
+
+    final pathPtr = WindowsGetStringRawBuffer(hstr_RAD, nullptr);
+
+    print(pathPtr.toDartString());
   } finally {
-    WindowsDeleteString(hstr);
+    WindowsDeleteString(hstr.value);
+    RoUninitialize();
   }
 }

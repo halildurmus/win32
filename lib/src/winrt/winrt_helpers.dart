@@ -22,7 +22,7 @@ import '../utils.dart';
 /// Initializes the Windows Runtime on the current thread with a single-threaded
 /// concurrency model.
 /// {@category winrt}
-void winrtInitialize() => RoInitialize(RO_INIT_TYPE.RO_INIT_MULTITHREADED);
+void winrtInitialize() => RoInitialize(RO_INIT_TYPE.RO_INIT_SINGLETHREADED);
 
 /// Closes the Windows Runtime on the current thread.
 /// {@category winrt}
