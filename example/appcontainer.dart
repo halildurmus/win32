@@ -1,13 +1,7 @@
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
-import 'package:win32/src/com/UserDataPaths.dart';
 import 'package:win32/win32.dart';
-
-typedef DWORD = Uint32;
-typedef ULONG = Uint32;
-typedef HANDLE = IntPtr;
-typedef HSTRING = IntPtr;
 
 bool isAppContainer() {
   final phToken = calloc<HANDLE>();
