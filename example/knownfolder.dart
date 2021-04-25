@@ -10,7 +10,7 @@ import 'package:win32/win32.dart';
 
 // Get the path of the temporary directory (typically %TEMP%)
 String getTemporaryPath() {
-  final buffer = calloc<Uint16>(MAX_PATH + 1).cast<Utf16>();
+  final buffer = wsalloc(MAX_PATH + 1);
   final length = GetTempPath(MAX_PATH, buffer);
 
   if (length == 0) {
@@ -32,7 +32,7 @@ String getTemporaryPath() {
 
 /// Get the path for a known Windows folder, using the classic (deprecated) API
 String getFolderPath() {
-  final path = calloc<Uint16>(MAX_PATH).cast<Utf16>();
+  final path = wsalloc(MAX_PATH);
 
   final result = SHGetFolderPath(NULL, CSIDL_DESKTOP, NULL, 0, path);
 
@@ -46,7 +46,7 @@ String getFolderPath() {
 /// Get the path for a known Windows folder, using the modern API
 String getKnownFolderPath() {
   final knownFolderID = calloc<GUID>()..ref.setGUID(FOLDERID_Desktop);
-  final pathPtrPtr = calloc<Pointer<Utf16>>();
+  final pathPtrPtr = calloc<PWSTR>();
 
   try {
     final hr =

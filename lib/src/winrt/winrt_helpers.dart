@@ -17,6 +17,7 @@ import '../exceptions.dart';
 import '../macros.dart';
 import '../ole32.dart';
 import '../structs.dart';
+import '../types.dart';
 import '../utils.dart';
 
 /// Initializes the Windows Runtime on the current thread with a single-threaded
@@ -31,7 +32,7 @@ void winrtUninitialize() => RoUninitialize();
 /// Takes a `HSTRING` (a WinRT String), and converts it to a Dart `String`.
 /// {@category winrt}
 String convertFromHString(Pointer<IntPtr> hstring) {
-  final stringLength = calloc<Uint32>();
+  final stringLength = calloc<UINT32>();
 
   try {
     final stringPtr = WindowsGetStringRawBuffer(hstring.value, stringLength);
@@ -50,7 +51,7 @@ String convertFromHString(Pointer<IntPtr> hstring) {
 /// used, through a call to `WindowsDeleteString()`.
 /// {@category winrt}
 Pointer<IntPtr> convertToHString(String string) {
-  final hString = calloc<IntPtr>();
+  final hString = calloc<HSTRING>();
   final stringPtr = string.toNativeUtf16();
   // Create a HSTRING representing the object
   try {
@@ -73,7 +74,7 @@ Pointer<IntPtr> convertToHString(String string) {
 /// ```
 /// {@category winrt}
 Pointer<COMObject> CreateObject(String className, String iid) {
-  final hstrClass = calloc<IntPtr>();
+  final hstrClass = calloc<HSTRING>();
   final lpClassName = className.toNativeUtf16();
   final inspectablePtr = calloc<COMObject>();
   final riid = calloc<GUID>();

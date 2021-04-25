@@ -54,7 +54,7 @@ bool isWindows8OrGreater() => isWindowsVersionAtLeast(6, 2);
 /// Return a value representing the physically installed memory in the computer.
 /// This may not be the same as available memory.
 int getSystemMemoryInMegabytes() {
-  final memory = calloc<Uint64>();
+  final memory = calloc<ULONGLONG>();
 
   try {
     final result = GetPhysicallyInstalledSystemMemory(memory);
@@ -71,13 +71,13 @@ int getSystemMemoryInMegabytes() {
 
 /// Get the computer's fully-qualified DNS name, where available.
 String getComputerName() {
-  final nameLength = calloc<Uint32>();
+  final nameLength = calloc<DWORD>();
   String name;
 
   GetComputerNameEx(
       COMPUTER_NAME_FORMAT.ComputerNameDnsFullyQualified, nullptr, nameLength);
 
-  final namePtr = calloc<Uint16>(nameLength.value).cast<Utf16>();
+  final namePtr = wsalloc(nameLength.value);
 
   try {
     final result = GetComputerNameEx(
@@ -103,19 +103,19 @@ Object getRegistryValue(int key, String subKey, String valueName) {
 
   final subKeyPtr = TEXT(subKey);
   final valueNamePtr = TEXT(valueName);
-  final openKeyPtr = calloc<IntPtr>();
-  final dataType = calloc<Uint32>();
+  final openKeyPtr = calloc<HANDLE>();
+  final dataType = calloc<DWORD>();
 
   // 256 bytes is more than enough, and Windows will throw ERROR_MORE_DATA if
   // not, so there won't be an overrun.
-  final data = calloc<Uint8>(256);
-  final dataSize = calloc<Uint32>()..value = 256;
+  final data = calloc<BYTE>(256);
+  final dataSize = calloc<DWORD>()..value = 256;
 
   try {
     var result = RegOpenKeyEx(key, subKeyPtr, 0, KEY_READ, openKeyPtr);
     if (result == ERROR_SUCCESS) {
-      result = RegQueryValueEx(openKeyPtr.value, valueNamePtr, nullptr,
-          dataType, data.cast(), dataSize);
+      result = RegQueryValueEx(
+          openKeyPtr.value, valueNamePtr, nullptr, dataType, data, dataSize);
 
       if (result == ERROR_SUCCESS) {
         if (dataType.value == REG_DWORD) {

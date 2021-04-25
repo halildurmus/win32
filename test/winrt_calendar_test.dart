@@ -49,7 +49,7 @@ void main() {
     });
 
     test('Calendar month as string', () {
-      final hstr = calloc<IntPtr>();
+      final hstr = calloc<HSTRING>();
       calendar.MonthAsFullString(hstr);
       expect(
           convertFromHString(hstr),
@@ -72,7 +72,7 @@ void main() {
     });
 
     test('Calendar month as truncated string', () {
-      final hstr = calloc<IntPtr>();
+      final hstr = calloc<HSTRING>();
       calendar.MonthAsString(3, hstr);
       expect(
           convertFromHString(hstr),
@@ -95,7 +95,7 @@ void main() {
     });
 
     test('Calendar resolved language', () {
-      final hstrPtr = calloc<IntPtr>()..value = calendar.ResolvedLanguage;
+      final hstrPtr = calloc<HSTRING>()..value = calendar.ResolvedLanguage;
       final lang = convertFromHString(hstrPtr);
 
       // Should be something like en-US

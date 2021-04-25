@@ -26,8 +26,8 @@ class Volumes {
 
     // Could be arbitrarily long, but 4*MAX_PATH is a reasonable default.
     // More sophisticated solutions can be found online
-    final pathNamePtr = calloc<Uint16>(MAX_PATH * 4).cast<Utf16>();
-    final charCount = calloc<Uint32>();
+    final pathNamePtr = wsalloc(MAX_PATH * 4);
+    final charCount = calloc<DWORD>();
     final volumeNamePtr = volumeName.toNativeUtf16();
 
     try {
@@ -55,7 +55,7 @@ class Volumes {
 
   Volumes() {
     var error = 0;
-    final volumeNamePtr = calloc<Uint16>(MAX_PATH).cast<Utf16>();
+    final volumeNamePtr = wsalloc(MAX_PATH);
 
     final hFindVolume = FindFirstVolume(volumeNamePtr, MAX_PATH);
     if (hFindVolume == INVALID_HANDLE_VALUE) {
@@ -70,7 +70,7 @@ class Volumes {
       final shortVolumeName = volumeName.substring(4, volumeName.length - 1);
       final shortVolumeNamePtr = shortVolumeName.toNativeUtf16();
 
-      final deviceName = calloc<Uint16>(MAX_PATH).cast<Utf16>();
+      final deviceName = wsalloc(MAX_PATH);
       final charCount =
           QueryDosDevice(shortVolumeNamePtr, deviceName, MAX_PATH);
 

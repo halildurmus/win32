@@ -8,6 +8,8 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import 'types.dart';
+
 /// Detects whether the Windows Runtime is available by attempting to open its
 /// core library.
 bool isWindowsRuntimeAvailable() {
@@ -25,14 +27,14 @@ bool isWindowsRuntimeAvailable() {
 ///
 /// The receiver is responsible for disposing its memory, typically by calling
 /// [free] when it has been used.
-Pointer<Utf16> TEXT(String string) => string.toNativeUtf16();
+LPWSTR TEXT(String string) => string.toNativeUtf16();
 
 /// Allocates memory for a Unicode string and returns a pointer.
 ///
 /// The parameter indicates how many characters should be allocated. The
 /// receiver is responsible for disposing the memory allocated, typically by
 /// calling [free] when it is no longer required.
-Pointer<Utf16> wsalloc(int wChars) => calloc<Uint16>(wChars).cast();
+LPWSTR wsalloc(int wChars) => calloc<WCHAR>(wChars).cast();
 
 /// Frees allocated memory.
 ///

@@ -20,7 +20,7 @@ List<int> findBluetoothRadios() {
 
   final radioHandles = <int>[];
 
-  final hRadio = calloc<IntPtr>();
+  final hRadio = calloc<HANDLE>();
 
   try {
     final hEnum = BluetoothFindFirstRadio(findRadioParams, hRadio);

@@ -67,6 +67,7 @@ void main() {
     print('RoamingAppData: $roamingAppData');
   } finally {
     WindowsDeleteString(hstr.value);
+    free(hstr);
     free(pIID_IUserDataPathsStatics);
     free(activationFactory);
     free(userDataDefaults);

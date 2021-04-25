@@ -38,7 +38,7 @@ void printWallpaper() {
 }
 
 void printBackgroundColor() {
-  final colorPtr = calloc<Uint32>(); // COLORREF
+  final colorPtr = calloc<COLORREF>();
 
   try {
     final hr = wallpaper.GetBackgroundColor(colorPtr);

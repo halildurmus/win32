@@ -42,7 +42,7 @@
 ///
 /// To receive a string, allocate memory with a command like the following:
 /// ```dart
-///   final buffer = calloc<Uint16>(count: length).cast<Utf16>();
+///   final buffer = wsalloc(length);
 ///   GetWindowText(hWnd, buffer, length);
 /// ```
 ///
@@ -71,7 +71,7 @@
 /// [WindowsDeleteString] API. A Dart function may be used to convert to and
 /// from `HSTRING`s, for example:
 /// ```dart
-///   final systemPtr = calloc<IntPtr>();
+///   final systemPtr = calloc<HSTRING>();
 ///   calendar.GetCalendarSystem(systemPtr);
 ///   print('The calendar system is ${convertFromHString(systemPtr)}.');
 ///   WindowsDeleteString(systemPtr.value);

@@ -15,7 +15,7 @@ void main() {
   }
 
   final ikf = IKnownFolder(ppkf);
-  final ppszPath = calloc<Pointer<Utf16>>();
+  final ppszPath = calloc<LPWSTR>();
   hr = ikf.GetPath(0, ppszPath);
   if (FAILED(hr)) {
     throw WindowsException(hr);
