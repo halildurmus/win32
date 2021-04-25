@@ -24,7 +24,8 @@ final typesToGenerate = [
   'Windows.Foundation.IClosable',
   'Windows.Foundation.IStringable',
   'Windows.Globalization.ICalendar',
-  'Windows.Storage.Pickers.IFileOpenPicker'
+  'Windows.Storage.Pickers.IFileOpenPicker',
+  'Windows.Storage.IUserDataPathsStatics'
 ];
 
 void main(List<String> args) {
