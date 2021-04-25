@@ -581,6 +581,20 @@ void main() {
           int Function(int hLibModule)>('FreeLibrary');
       expect(FreeLibrary, isA<Function>());
     });
+    test('Can instantiate GetActiveProcessorCount', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetActiveProcessorCount = kernel32.lookupFunction<
+          Uint32 Function(Uint16 GroupNumber),
+          int Function(int GroupNumber)>('GetActiveProcessorCount');
+      expect(GetActiveProcessorCount, isA<Function>());
+    });
+    test('Can instantiate GetActiveProcessorGroupCount', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetActiveProcessorGroupCount =
+          kernel32.lookupFunction<Uint16 Function(), int Function()>(
+              'GetActiveProcessorGroupCount');
+      expect(GetActiveProcessorGroupCount, isA<Function>());
+    });
     test('Can instantiate GetBinaryType', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetBinaryType = kernel32.lookupFunction<
@@ -752,6 +766,20 @@ void main() {
               Pointer<Utf16> lpBuffer)>('GetLogicalDriveStringsW');
       expect(GetLogicalDriveStrings, isA<Function>());
     });
+    test('Can instantiate GetMaximumProcessorCount', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetMaximumProcessorCount = kernel32.lookupFunction<
+          Uint32 Function(Uint16 GroupNumber),
+          int Function(int GroupNumber)>('GetMaximumProcessorCount');
+      expect(GetMaximumProcessorCount, isA<Function>());
+    });
+    test('Can instantiate GetMaximumProcessorGroupCount', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetMaximumProcessorGroupCount =
+          kernel32.lookupFunction<Uint16 Function(), int Function()>(
+              'GetMaximumProcessorGroupCount');
+      expect(GetMaximumProcessorGroupCount, isA<Function>());
+    });
     test('Can instantiate GetModuleBaseName', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final GetModuleBaseName = kernel32.lookupFunction<
@@ -856,6 +884,20 @@ void main() {
           int Function(int NumberOfHeaps,
               Pointer<IntPtr> ProcessHeaps)>('GetProcessHeaps');
       expect(GetProcessHeaps, isA<Function>());
+    });
+    test('Can instantiate GetProcessWorkingSetSize', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final GetProcessWorkingSetSize = kernel32.lookupFunction<
+              Int32 Function(
+                  IntPtr hProcess,
+                  Pointer<IntPtr> lpMinimumWorkingSetSize,
+                  Pointer<IntPtr> lpMaximumWorkingSetSize),
+              int Function(
+                  int hProcess,
+                  Pointer<IntPtr> lpMinimumWorkingSetSize,
+                  Pointer<IntPtr> lpMaximumWorkingSetSize)>(
+          'GetProcessWorkingSetSize');
+      expect(GetProcessWorkingSetSize, isA<Function>());
     });
     test('Can instantiate GetProductInfo', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
@@ -1538,12 +1580,37 @@ void main() {
               Pointer<Uint32> lpCollectDataTimeout)>('SetNamedPipeHandleState');
       expect(SetNamedPipeHandleState, isA<Function>());
     });
+    test('Can instantiate SetProcessAffinityMask', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetProcessAffinityMask = kernel32.lookupFunction<
+          Int32 Function(IntPtr hProcess, IntPtr dwProcessAffinityMask),
+          int Function(int hProcess,
+              int dwProcessAffinityMask)>('SetProcessAffinityMask');
+      expect(SetProcessAffinityMask, isA<Function>());
+    });
+    test('Can instantiate SetProcessWorkingSetSize', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetProcessWorkingSetSize = kernel32.lookupFunction<
+          Int32 Function(IntPtr hProcess, IntPtr dwMinimumWorkingSetSize,
+              IntPtr dwMaximumWorkingSetSize),
+          int Function(int hProcess, int dwMinimumWorkingSetSize,
+              int dwMaximumWorkingSetSize)>('SetProcessWorkingSetSize');
+      expect(SetProcessWorkingSetSize, isA<Function>());
+    });
     test('Can instantiate SetStdHandle', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');
       final SetStdHandle = kernel32.lookupFunction<
           Int32 Function(Uint32 nStdHandle, IntPtr hHandle),
           int Function(int nStdHandle, int hHandle)>('SetStdHandle');
       expect(SetStdHandle, isA<Function>());
+    });
+    test('Can instantiate SetThreadAffinityMask', () {
+      final kernel32 = DynamicLibrary.open('kernel32.dll');
+      final SetThreadAffinityMask = kernel32.lookupFunction<
+          IntPtr Function(IntPtr hThread, IntPtr dwThreadAffinityMask),
+          int Function(
+              int hThread, int dwThreadAffinityMask)>('SetThreadAffinityMask');
+      expect(SetThreadAffinityMask, isA<Function>());
     });
     test('Can instantiate SetThreadExecutionState', () {
       final kernel32 = DynamicLibrary.open('kernel32.dll');

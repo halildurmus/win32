@@ -1254,6 +1254,35 @@ int FreeLibrary(int hLibModule) {
   return _FreeLibrary(hLibModule);
 }
 
+/// Returns the number of active processors in a processor group or in the
+/// system.
+///
+/// ```c
+/// DWORD GetActiveProcessorCount(
+///   WORD GroupNumber
+/// );
+/// ```
+/// {@category kernel32}
+int GetActiveProcessorCount(int GroupNumber) {
+  final _GetActiveProcessorCount = _kernel32.lookupFunction<
+      Uint32 Function(Uint16 GroupNumber),
+      int Function(int GroupNumber)>('GetActiveProcessorCount');
+  return _GetActiveProcessorCount(GroupNumber);
+}
+
+/// Returns the number of active processor groups in the system.
+///
+/// ```c
+/// WORD GetActiveProcessorGroupCount();
+/// ```
+/// {@category kernel32}
+int GetActiveProcessorGroupCount() {
+  final _GetActiveProcessorGroupCount =
+      _kernel32.lookupFunction<Uint16 Function(), int Function()>(
+          'GetActiveProcessorGroupCount');
+  return _GetActiveProcessorGroupCount();
+}
+
 /// Determines whether a file is an executable (.exe) file, and if so,
 /// which subsystem runs the executable file.
 ///
@@ -1615,6 +1644,36 @@ int GetLogicalDriveStrings(int nBufferLength, Pointer<Utf16> lpBuffer) {
   return _GetLogicalDriveStrings(nBufferLength, lpBuffer);
 }
 
+/// Returns the maximum number of logical processors that a processor group
+/// or the system can have.
+///
+/// ```c
+/// DWORD GetMaximumProcessorCount(
+///   WORD GroupNumber
+/// );
+/// ```
+/// {@category kernel32}
+int GetMaximumProcessorCount(int GroupNumber) {
+  final _GetMaximumProcessorCount = _kernel32.lookupFunction<
+      Uint32 Function(Uint16 GroupNumber),
+      int Function(int GroupNumber)>('GetMaximumProcessorCount');
+  return _GetMaximumProcessorCount(GroupNumber);
+}
+
+/// Returns the maximum number of processor groups that the system can
+/// have.
+///
+/// ```c
+/// WORD GetMaximumProcessorGroupCount();
+/// ```
+/// {@category kernel32}
+int GetMaximumProcessorGroupCount() {
+  final _GetMaximumProcessorGroupCount =
+      _kernel32.lookupFunction<Uint16 Function(), int Function()>(
+          'GetMaximumProcessorGroupCount');
+  return _GetMaximumProcessorGroupCount();
+}
+
 /// Retrieves the base name of the specified module.
 ///
 /// ```c
@@ -1844,6 +1903,30 @@ int GetProcessHeaps(int NumberOfHeaps, Pointer<IntPtr> ProcessHeaps) {
       int Function(
           int NumberOfHeaps, Pointer<IntPtr> ProcessHeaps)>('GetProcessHeaps');
   return _GetProcessHeaps(NumberOfHeaps, ProcessHeaps);
+}
+
+/// Retrieves the minimum and maximum working set sizes of the specified
+/// process.
+///
+/// ```c
+/// BOOL GetProcessWorkingSetSize(
+///   HANDLE  hProcess,
+///   PSIZE_T lpMinimumWorkingSetSize,
+///   PSIZE_T lpMaximumWorkingSetSize
+/// );
+/// ```
+/// {@category kernel32}
+int GetProcessWorkingSetSize(
+    int hProcess,
+    Pointer<IntPtr> lpMinimumWorkingSetSize,
+    Pointer<IntPtr> lpMaximumWorkingSetSize) {
+  final _GetProcessWorkingSetSize = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hProcess, Pointer<IntPtr> lpMinimumWorkingSetSize,
+          Pointer<IntPtr> lpMaximumWorkingSetSize),
+      int Function(int hProcess, Pointer<IntPtr> lpMinimumWorkingSetSize,
+          Pointer<IntPtr> lpMaximumWorkingSetSize)>('GetProcessWorkingSetSize');
+  return _GetProcessWorkingSetSize(
+      hProcess, lpMinimumWorkingSetSize, lpMaximumWorkingSetSize);
 }
 
 /// Retrieves the product type for the operating system on the local
@@ -3306,6 +3389,46 @@ int SetNamedPipeHandleState(
       hNamedPipe, lpMode, lpMaxCollectionCount, lpCollectDataTimeout);
 }
 
+/// Sets a processor affinity mask for the threads of the specified
+/// process.
+///
+/// ```c
+/// BOOL SetProcessAffinityMask(
+///   HANDLE    hProcess,
+///   DWORD_PTR dwProcessAffinityMask
+/// );
+/// ```
+/// {@category kernel32}
+int SetProcessAffinityMask(int hProcess, int dwProcessAffinityMask) {
+  final _SetProcessAffinityMask = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hProcess, IntPtr dwProcessAffinityMask),
+      int Function(
+          int hProcess, int dwProcessAffinityMask)>('SetProcessAffinityMask');
+  return _SetProcessAffinityMask(hProcess, dwProcessAffinityMask);
+}
+
+/// Sets the minimum and maximum working set sizes for the specified
+/// process.
+///
+/// ```c
+/// BOOL SetProcessWorkingSetSize(
+///   HANDLE hProcess,
+///   SIZE_T dwMinimumWorkingSetSize,
+///   SIZE_T dwMaximumWorkingSetSize
+/// );
+/// ```
+/// {@category kernel32}
+int SetProcessWorkingSetSize(
+    int hProcess, int dwMinimumWorkingSetSize, int dwMaximumWorkingSetSize) {
+  final _SetProcessWorkingSetSize = _kernel32.lookupFunction<
+      Int32 Function(IntPtr hProcess, IntPtr dwMinimumWorkingSetSize,
+          IntPtr dwMaximumWorkingSetSize),
+      int Function(int hProcess, int dwMinimumWorkingSetSize,
+          int dwMaximumWorkingSetSize)>('SetProcessWorkingSetSize');
+  return _SetProcessWorkingSetSize(
+      hProcess, dwMinimumWorkingSetSize, dwMaximumWorkingSetSize);
+}
+
 /// Sets the handle for the specified standard device (standard input,
 /// standard output, or standard error).
 ///
@@ -3321,6 +3444,23 @@ int SetStdHandle(int nStdHandle, int hHandle) {
       Int32 Function(Uint32 nStdHandle, IntPtr hHandle),
       int Function(int nStdHandle, int hHandle)>('SetStdHandle');
   return _SetStdHandle(nStdHandle, hHandle);
+}
+
+/// Sets a processor affinity mask for the specified thread.
+///
+/// ```c
+/// DWORD_PTR SetThreadAffinityMask(
+///   HANDLE    hThread,
+///   DWORD_PTR dwThreadAffinityMask
+/// );
+/// ```
+/// {@category kernel32}
+int SetThreadAffinityMask(int hThread, int dwThreadAffinityMask) {
+  final _SetThreadAffinityMask = _kernel32.lookupFunction<
+      IntPtr Function(IntPtr hThread, IntPtr dwThreadAffinityMask),
+      int Function(
+          int hThread, int dwThreadAffinityMask)>('SetThreadAffinityMask');
+  return _SetThreadAffinityMask(hThread, dwThreadAffinityMask);
 }
 
 /// Enables an application to inform the system that it is in use, thereby

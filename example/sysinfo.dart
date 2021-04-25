@@ -273,6 +273,9 @@ void main() {
 
   print(
       '\nRAM physically installed on this computer: ${getSystemMemoryInMegabytes()}MB');
+
+  print(
+      '\nActive processors on the system: ${GetActiveProcessorCount(ALL_PROCESSOR_GROUPS)}');
   print('Computer name is: ${getComputerName()}\n');
 
   printPowerInfo();

@@ -1127,6 +1127,16 @@
         "dllLibrary": "oleaut32",
         "comment": "Retrieves a pointer to a running object that has been registered with OLE."
     },
+    "GetActiveProcessorCount": {
+        "prototype": "DWORD GetActiveProcessorCount(\n  WORD GroupNumber\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Returns the number of active processors in a processor group or in the system."
+    },
+    "GetActiveProcessorGroupCount": {
+        "prototype": "WORD GetActiveProcessorGroupCount();",
+        "dllLibrary": "kernel32",
+        "comment": "Returns the number of active processor groups in the system."
+    },
     "GetActiveWindow": {
         "prototype": "HWND GetActiveWindow();",
         "dllLibrary": "user32",
@@ -1379,6 +1389,11 @@
         "comment": "Retrieves the DPI from a given DPI_AWARENESS_CONTEXT handle. This enables you to determine the DPI of a thread without needed to examine a window created within that thread.",
         "minimumWindowsVersion": "WIN10_RS4"
     },
+    "GetEnvironmentVariable": {
+        "prototype": "DWORD GetEnvironmentVariable(\n  LPCTSTR lpName,\n  LPTSTR  lpBuffer,\n  DWORD   nSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the contents of the specified variable from the environment block of the calling process."
+    },
     "GetExitCodeProcess": {
         "prototype": "BOOL GetExitCodeProcess(\n  HANDLE  hProcess,\n  LPDWORD lpExitCode);",
         "dllLibrary": "kernel32",
@@ -1530,6 +1545,16 @@
         "prototype": "DWORD GetLogicalDriveStringsW(\n  DWORD  nBufferLength,\n  LPWSTR lpBuffer\n);",
         "dllLibrary": "kernel32",
         "comment": "Fills a buffer with strings that specify valid drives in the system."
+    },
+    "GetMaximumProcessorCount": {
+        "prototype": "DWORD GetMaximumProcessorCount(\n  WORD GroupNumber\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Returns the maximum number of logical processors that a processor group or the system can have."
+    },
+    "GetMaximumProcessorGroupCount": {
+        "prototype": "WORD GetMaximumProcessorGroupCount();",
+        "dllLibrary": "kernel32",
+        "comment": "Returns the maximum number of processor groups that the system can have."
     },
     "GetMenu": {
         "prototype": "HMENU GetMenu(\n  HWND hWnd\n);",
@@ -1766,6 +1791,11 @@
         "prototype": "HWINSTA GetProcessWindowStation();",
         "dllLibrary": "user32",
         "comment": "Retrieves a handle to the current window station for the calling process."
+    },
+    "GetProcessWorkingSetSize": {
+        "prototype": "BOOL GetProcessWorkingSetSize(\n  HANDLE  hProcess,\n  PSIZE_T lpMinimumWorkingSetSize,\n  PSIZE_T lpMaximumWorkingSetSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Retrieves the minimum and maximum working set sizes of the specified process."
     },
     "GetProductInfo": {
         "prototype": "BOOL GetProductInfo(\n  DWORD  dwOSMajorVersion,\n  DWORD  dwOSMinorVersion,\n  DWORD  dwSpMajorVersion,\n  DWORD  dwSpMinorVersion,\n  PDWORD pdwReturnedProductType\n);",
@@ -3501,6 +3531,11 @@
         "dllLibrary": "user32",
         "comment": "Sets the double-click time for the mouse. A double-click is a series of two clicks of a mouse button, the second occurring within a specified time after the first. The double-click time is the maximum number of milliseconds that may occur between the first and second clicks of a double-click."
     },
+    "SetEnvironmentVariable": {
+        "prototype": "BOOL SetEnvironmentVariable(\n  LPCTSTR lpName,\n  LPCTSTR lpValue\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the contents of the specified environment variable for the current process."
+    },
     "SetFilePointer": {
         "prototype": "DWORD SetFilePointer(\n  HANDLE hFile,\n  LONG   lDistanceToMove,\n  PLONG  lpDistanceToMoveHigh,\n  DWORD  dwMoveMethod\n);",
         "dllLibrary": "kernel32",
@@ -3631,6 +3666,11 @@
         "dllLibrary": "gdi32",
         "comment": "The SetPixel function sets the pixel at the specified coordinates to the specified color."
     },
+    "SetProcessAffinityMask": {
+        "prototype": "BOOL SetProcessAffinityMask(\n  HANDLE    hProcess,\n  DWORD_PTR dwProcessAffinityMask\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets a processor affinity mask for the threads of the specified process."
+    },
     "SetProcessDPIAware": {
         "prototype": "BOOL SetProcessDPIAware();",
         "dllLibrary": "user32",
@@ -3647,6 +3687,11 @@
         "dllLibrary": "user32",
         "comment": "It is recommended that you set the process-default DPI awareness via application manifest. See Setting the default DPI awareness for a process for more information. Setting the process-default DPI awareness via API call can lead to unexpected application behavior. Sets the current process to a specified dots per inch (dpi) awareness context. The DPI awareness contexts are from the DPI_AWARENESS_CONTEXT value.",
         "minimumWindowsVersion": "WIN10_RS2"
+    },
+    "SetProcessWorkingSetSize": {
+        "prototype": "BOOL SetProcessWorkingSetSize(\n  HANDLE hProcess,\n  SIZE_T dwMinimumWorkingSetSize,\n  SIZE_T dwMaximumWorkingSetSize\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets the minimum and maximum working set sizes for the specified process."
     },
     "SetProp": {
         "prototype": "BOOL SetPropW(\n  HWND    hWnd,\n  LPCWSTR lpString,\n  HANDLE  hData\n);",
@@ -3693,6 +3738,11 @@
         "prototype": "COLORREF SetTextColor(\n  HDC      hdc,\n  COLORREF color\n);",
         "dllLibrary": "gdi32",
         "comment": "The SetTextColor function sets the text color for the specified device context to the specified color."
+    },
+    "SetThreadAffinityMask": {
+        "prototype": "DWORD_PTR SetThreadAffinityMask(\n  HANDLE    hThread,\n  DWORD_PTR dwThreadAffinityMask\n);",
+        "dllLibrary": "kernel32",
+        "comment": "Sets a processor affinity mask for the specified thread."
     },
     "SetThreadDpiAwarenessContext": {
         "prototype": "DPI_AWARENESS_CONTEXT SetThreadDpiAwarenessContext(\n  DPI_AWARENESS_CONTEXT dpiContext\n);",

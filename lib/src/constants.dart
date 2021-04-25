@@ -35,6 +35,9 @@ const LOCALE_SYSTEM_DEFAULT = 0x0800;
 /// The default locale for the user or process.
 const LOCALE_USER_DEFAULT = 0x0400;
 
+/// All processor groups.
+const ALL_PROCESSOR_GROUPS = 0xFFFF;
+
 // -----------------------------------------------------------------------------
 // COM Error Codes
 // -----------------------------------------------------------------------------
