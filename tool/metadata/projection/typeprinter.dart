@@ -9,7 +9,7 @@
 import 'package:winmd/winmd.dart';
 
 import 'classprojector.dart';
-import 'projections.dart';
+import 'data_classes.dart';
 import 'typeprojector.dart';
 
 class TypePrinter {

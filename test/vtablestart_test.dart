@@ -7,7 +7,7 @@
 import 'package:test/test.dart';
 import 'package:winmd/winmd.dart';
 
-import '../tool/metadata/generate_com_apis.dart';
+import '../tool/metadata/projection/classprojector.dart';
 
 void main() {
   test('vTableStart', () {
@@ -65,7 +65,9 @@ void main() {
     final scope = MetadataStore.getWin32Scope();
 
     for (final type in testedTypes.keys) {
-      final calculatedVTableStart = vTableStart(scope.findTypeDef(type));
+      final typedef = scope.findTypeDef(type)!;
+      final projectedClass = ClassProjector(typedef);
+      final calculatedVTableStart = projectedClass.vTableStart;
 
       expect(calculatedVTableStart, equals(testedTypes[type]));
     }

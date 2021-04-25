@@ -4,7 +4,7 @@
 
 import 'package:winmd/winmd.dart';
 
-import 'projections.dart';
+import 'data_classes.dart';
 import 'typeprojector.dart';
 
 extension CamelCaseConversion on String {
@@ -15,16 +15,40 @@ extension CamelCaseConversion on String {
 class ClassProjector {
   final TypeDef typeDef;
 
+  int vTableStart(TypeDef? type) {
+    if (type == null) {
+      return 0;
+    }
+
+    if (type.isInterface && type.interfaces.isNotEmpty) {
+      var sum = 0;
+
+      for (final interface in type.interfaces) {
+        sum += interface.methods.length + vTableStart(interface);
+      }
+
+      return sum;
+    }
+
+    return 0;
+  }
+
   const ClassProjector(this.typeDef);
 
   /// Take a TypeDef and create a Dart projection of it.
   ClassProjection get projection {
-    final interface = ClassProjection()
-      ..sourceType = SourceType.winrt // for now
-      ..iid = typeDef.guid
-      ..name = typeDef.typeName
-      ..inherits = typeDef.parent!.typeName
-      ..vtableStart = 6; // For now, hardcode to IInspectable subclass
+    final classInheritsFrom = typeDef.interfaces.isNotEmpty
+        ? typeDef.interfaces.first.typeName.split('.').last
+        : 'IInspectable';
+    final vtableStart =
+        classInheritsFrom == 'IInspectable' ? 6 : vTableStart(typeDef);
+
+    final interface = ClassProjection(
+        sourceType: SourceType.winrt,
+        iid: typeDef.guid,
+        name: typeDef.typeName,
+        inherits: classInheritsFrom,
+        vtableStart: vtableStart);
 
     if (typeDef.genericParams.isNotEmpty) {
       final genericParams =
