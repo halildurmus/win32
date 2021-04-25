@@ -25,7 +25,9 @@ final typesToGenerate = [
   'Windows.Foundation.IStringable',
   'Windows.Globalization.ICalendar',
   'Windows.Storage.Pickers.IFileOpenPicker',
-  'Windows.Storage.IUserDataPathsStatics'
+  'Windows.Storage.IUserDataPathsStatics',
+  'Windows.Gaming.Input.IGamepadStatics',
+  // 'Windows.Gaming.Input.IGamepadStatics2'
 ];
 
 void main(List<String> args) {
