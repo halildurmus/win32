@@ -17,9 +17,7 @@ import '../structs.dart';
 import '../structs.g.dart';
 import '../utils.dart';
 
-import '../winrt/winrt_constants.dart';
-
-import 'IInspectable.dart';
+import 'IDispatch.dart';
 /// @nodoc
 const IID_INetwork = '{DCB00002-570F-4A9B-8D69-199FDBA5723B}';
 
@@ -143,57 +141,57 @@ typedef _SetCategory_Dart = int Function(
 );
 
 /// {@category Interface}
-/// {@category winrt}
-class INetwork extends IInspectable {
-  // vtable begins at 6, ends at 18
+/// {@category com}
+class INetwork extends IDispatch {
+  // vtable begins at 7, ends at 19
 
    INetwork(Pointer<COMObject> ptr) : super(ptr);
 
   int GetName(Pointer<Pointer<Utf16>> pszNetworkName) =>
     Pointer<NativeFunction<_GetName_Native>>.fromAddress(
-                ptr.ref.vtable.elementAt(6).value)
+                ptr.ref.vtable.elementAt(7).value)
             .asFunction<_GetName_Dart>()(
          ptr.ref.lpVtbl, pszNetworkName);
 
   int SetName(Pointer<Utf16> szNetworkNewName) =>
     Pointer<NativeFunction<_SetName_Native>>.fromAddress(
-                ptr.ref.vtable.elementAt(7).value)
+                ptr.ref.vtable.elementAt(8).value)
             .asFunction<_SetName_Dart>()(
          ptr.ref.lpVtbl, szNetworkNewName);
 
   int GetDescription(Pointer<Pointer<Utf16>> pszDescription) =>
     Pointer<NativeFunction<_GetDescription_Native>>.fromAddress(
-                ptr.ref.vtable.elementAt(8).value)
+                ptr.ref.vtable.elementAt(9).value)
             .asFunction<_GetDescription_Dart>()(
          ptr.ref.lpVtbl, pszDescription);
 
   int SetDescription(Pointer<Utf16> szDescription) =>
     Pointer<NativeFunction<_SetDescription_Native>>.fromAddress(
-                ptr.ref.vtable.elementAt(9).value)
+                ptr.ref.vtable.elementAt(10).value)
             .asFunction<_SetDescription_Dart>()(
          ptr.ref.lpVtbl, szDescription);
 
   int GetNetworkId(Pointer<GUID> pgdGuidNetworkId) =>
     Pointer<NativeFunction<_GetNetworkId_Native>>.fromAddress(
-                ptr.ref.vtable.elementAt(10).value)
+                ptr.ref.vtable.elementAt(11).value)
             .asFunction<_GetNetworkId_Dart>()(
          ptr.ref.lpVtbl, pgdGuidNetworkId);
 
   int GetDomainType(Pointer<Uint32> pNetworkType) =>
     Pointer<NativeFunction<_GetDomainType_Native>>.fromAddress(
-                ptr.ref.vtable.elementAt(11).value)
+                ptr.ref.vtable.elementAt(12).value)
             .asFunction<_GetDomainType_Dart>()(
          ptr.ref.lpVtbl, pNetworkType);
 
   int GetNetworkConnections(Pointer<Pointer> ppEnumNetworkConnection) =>
     Pointer<NativeFunction<_GetNetworkConnections_Native>>.fromAddress(
-                ptr.ref.vtable.elementAt(12).value)
+                ptr.ref.vtable.elementAt(13).value)
             .asFunction<_GetNetworkConnections_Dart>()(
          ptr.ref.lpVtbl, ppEnumNetworkConnection);
 
   int GetTimeCreatedAndConnected(Pointer<Uint32> pdwLowDateTimeCreated, Pointer<Uint32> pdwHighDateTimeCreated, Pointer<Uint32> pdwLowDateTimeConnected, Pointer<Uint32> pdwHighDateTimeConnected) =>
     Pointer<NativeFunction<_GetTimeCreatedAndConnected_Native>>.fromAddress(
-                ptr.ref.vtable.elementAt(13).value)
+                ptr.ref.vtable.elementAt(14).value)
             .asFunction<_GetTimeCreatedAndConnected_Dart>()(
          ptr.ref.lpVtbl, pdwLowDateTimeCreated, pdwHighDateTimeCreated, pdwLowDateTimeConnected, pdwHighDateTimeConnected);
 
@@ -202,7 +200,7 @@ class INetwork extends IInspectable {
       
       try {
         final hr = Pointer<NativeFunction<_get_IsConnectedToInternet_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(14).value)
+          ptr.ref.vtable.elementAt(15).value)
            .asFunction<_get_IsConnectedToInternet_Dart>()(ptr.ref.lpVtbl, retValuePtr);
         if (FAILED(hr)) throw WindowsException(hr);
 
@@ -218,7 +216,7 @@ class INetwork extends IInspectable {
       
       try {
         final hr = Pointer<NativeFunction<_get_IsConnected_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(15).value)
+          ptr.ref.vtable.elementAt(16).value)
            .asFunction<_get_IsConnected_Dart>()(ptr.ref.lpVtbl, retValuePtr);
         if (FAILED(hr)) throw WindowsException(hr);
 
@@ -231,19 +229,19 @@ class INetwork extends IInspectable {
 
   int GetConnectivity(Pointer<Uint32> pConnectivity) =>
     Pointer<NativeFunction<_GetConnectivity_Native>>.fromAddress(
-                ptr.ref.vtable.elementAt(16).value)
+                ptr.ref.vtable.elementAt(17).value)
             .asFunction<_GetConnectivity_Dart>()(
          ptr.ref.lpVtbl, pConnectivity);
 
   int GetCategory(Pointer<Uint32> pCategory) =>
     Pointer<NativeFunction<_GetCategory_Native>>.fromAddress(
-                ptr.ref.vtable.elementAt(17).value)
+                ptr.ref.vtable.elementAt(18).value)
             .asFunction<_GetCategory_Dart>()(
          ptr.ref.lpVtbl, pCategory);
 
   int SetCategory(int NewCategory) =>
     Pointer<NativeFunction<_SetCategory_Native>>.fromAddress(
-                ptr.ref.vtable.elementAt(18).value)
+                ptr.ref.vtable.elementAt(19).value)
             .asFunction<_SetCategory_Dart>()(
          ptr.ref.lpVtbl, NewCategory);
 
