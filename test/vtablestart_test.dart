@@ -5,7 +5,7 @@
 @TestOn('windows')
 
 import 'package:test/test.dart';
-import 'package:winmd/winmd.dart' hide ULONG, DWORD, BYTE;
+import 'package:winmd/winmd.dart';
 
 import '../tool/metadata/generate_com_apis.dart';
 
