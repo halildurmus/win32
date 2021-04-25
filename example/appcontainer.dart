@@ -33,44 +33,19 @@ bool isAppContainer() {
 }
 
 void main() {
-  var hr = RoInitialize(RO_INIT_TYPE.RO_INIT_SINGLETHREADED);
+  final hr = RoInitialize(RO_INIT_TYPE.RO_INIT_SINGLETHREADED);
+  if (FAILED(hr)) {
+    throw WindowsException(hr);
+  }
+
   OutputDebugString(
       '${!isAppContainer() ? '!' : ''}isAppContainer'.toNativeUtf16());
 
-  const udpClassName = 'Windows.Storage.UserDataPaths';
-  final hstr = convertToHString(udpClassName);
+  final userData = UserDataPaths.GetDefault();
+  final hstrRoamingAppData = userData.RoamingAppData;
 
-  final pIID_IUserDataPathsStatics = calloc<GUID>()
-    ..ref.setGUID(IID_IUserDataPathsStatics);
-  final activationFactory = calloc<COMObject>();
-  final userDataDefaults = calloc<COMObject>();
+  final roamingAppData =
+      WindowsGetStringRawBuffer(hstrRoamingAppData, nullptr).toDartString();
 
-  try {
-    hr = RoGetActivationFactory(
-        hstr.value, pIID_IUserDataPathsStatics, activationFactory.cast());
-    if (FAILED(hr)) {
-      throw WindowsException(hr);
-    }
-    final userDataStatics = IUserDataPathsStatics(activationFactory);
-
-    hr = userDataStatics.GetDefault(userDataDefaults.cast());
-    if (FAILED(hr)) {
-      throw WindowsException(hr);
-    }
-
-    final userData = UserDataPaths(userDataDefaults);
-    final hstrRoamingAppData = userData.RoamingAppData;
-
-    final roamingAppData =
-        WindowsGetStringRawBuffer(hstrRoamingAppData, nullptr).toDartString();
-
-    print('RoamingAppData: $roamingAppData');
-  } finally {
-    WindowsDeleteString(hstr.value);
-    free(hstr);
-    free(pIID_IUserDataPathsStatics);
-    free(activationFactory);
-    free(userDataDefaults);
-    RoUninitialize();
-  }
+  print('RoamingAppData: $roamingAppData');
 }

@@ -1,25 +1,22 @@
 // UserDataPaths.dart
 
-// THIS FILE IS GENERATED AUTOMATICALLY AND SHOULD NOT BE EDITED DIRECTLY.
-
-// ignore_for_file: unused_import
-
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+import '../api-ms-win-core-winrt-l1-1-0.dart';
+import '../api-ms-win-core-winrt-string-l1-1-0.dart';
 import '../combase.dart';
-import '../constants.dart';
 import '../exceptions.dart';
 import '../macros.dart';
-import '../ole32.dart';
 import '../structs.dart';
-import '../structs.g.dart';
 import '../utils.dart';
-
-import '../winrt/winrt_constants.dart';
+import '../winrt/winrt_helpers.dart';
 
 import 'IInspectable.dart';
+import 'IUserDataPathsStatics.dart';
+
+const _className = 'Windows.Storage.UserDataPaths';
 
 typedef _get_CameraRoll_Native = Int32 Function(
     Pointer obj, Pointer<IntPtr> value);
@@ -100,16 +97,6 @@ typedef _get_Templates_Dart = int Function(Pointer obj, Pointer<IntPtr> value);
 typedef _get_Videos_Native = Int32 Function(Pointer obj, Pointer<IntPtr> value);
 typedef _get_Videos_Dart = int Function(Pointer obj, Pointer<IntPtr> value);
 
-typedef _GetForUser_Native = Int32 Function(
-    Pointer obj, Pointer user, Pointer<Pointer> result);
-typedef _GetForUser_Dart = int Function(
-    Pointer obj, Pointer user, Pointer<Pointer> result);
-
-typedef _GetDefault_Native = Int32 Function(
-    Pointer obj, Pointer<Pointer> result);
-typedef _GetDefault_Dart = int Function(Pointer obj, Pointer<Pointer> result);
-
-/// {@category Interface}
 /// {@category winrt}
 class UserDataPaths extends IInspectable {
   // vtable begins at 6, ends at 26
@@ -424,13 +411,59 @@ class UserDataPaths extends IInspectable {
     }
   }
 
-  int GetForUser(Pointer user, Pointer<Pointer> result) =>
-      Pointer<NativeFunction<_GetForUser_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(25).value)
-          .asFunction<_GetForUser_Dart>()(ptr.ref.lpVtbl, user, result);
+  static UserDataPaths GetForUser(Pointer user) {
+    final hClassName = convertToHString(_className);
 
-  int GetDefault(Pointer<Pointer> result) =>
-      Pointer<NativeFunction<_GetDefault_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(26).value)
-          .asFunction<_GetDefault_Dart>()(ptr.ref.lpVtbl, result);
+    final pIID = calloc<GUID>()..ref.setGUID(IID_IUserDataPathsStatics);
+    final activationFactory = calloc<COMObject>();
+    final userDataDefaults = calloc<COMObject>();
+
+    try {
+      var hr = RoGetActivationFactory(
+          hClassName.value, pIID, activationFactory.cast());
+      if (FAILED(hr)) {
+        throw WindowsException(hr);
+      }
+      final userDataStatics = IUserDataPathsStatics(activationFactory);
+      hr = userDataStatics.GetForUser(user, userDataDefaults.cast());
+      if (FAILED(hr)) {
+        throw WindowsException(hr);
+      }
+      return UserDataPaths(userDataDefaults);
+    } finally {
+      WindowsDeleteString(hClassName.value);
+      free(hClassName);
+      free(pIID);
+      free(activationFactory);
+      free(userDataDefaults);
+    }
+  }
+
+  static UserDataPaths GetDefault() {
+    final hClassName = convertToHString(_className);
+
+    final pIID = calloc<GUID>()..ref.setGUID(IID_IUserDataPathsStatics);
+    final activationFactory = calloc<COMObject>();
+    final userDataDefaults = calloc<COMObject>();
+
+    try {
+      var hr = RoGetActivationFactory(
+          hClassName.value, pIID, activationFactory.cast());
+      if (FAILED(hr)) {
+        throw WindowsException(hr);
+      }
+      final userDataStatics = IUserDataPathsStatics(activationFactory);
+      hr = userDataStatics.GetDefault(userDataDefaults.cast());
+      if (FAILED(hr)) {
+        throw WindowsException(hr);
+      }
+      return UserDataPaths(userDataDefaults);
+    } finally {
+      WindowsDeleteString(hClassName.value);
+      free(hClassName);
+      free(pIID);
+      free(activationFactory);
+      free(userDataDefaults);
+    }
+  }
 }
