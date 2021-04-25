@@ -10,7 +10,6 @@ import 'package:win32/win32.dart';
 import 'base.dart';
 import 'mixins/customattributes_mixin.dart';
 import 'scope.dart';
-import 'type_aliases.dart';
 import 'utils/string.dart';
 
 class ModuleRef extends TokenObject with CustomAttributesMixin {

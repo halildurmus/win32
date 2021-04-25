@@ -6,7 +6,6 @@ import 'package:win32/win32.dart';
 import 'base.dart';
 import 'constants.dart';
 import 'scope.dart';
-import 'type_aliases.dart';
 
 class FieldOffset {
   final int fieldToken;

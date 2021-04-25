@@ -9,7 +9,6 @@ import 'package:win32/win32.dart';
 
 import 'com/IMetaDataImport2.dart';
 import 'constants.dart';
-import 'type_aliases.dart';
 import 'utils/exception.dart';
 
 const IMAGE_FILE_MACHINE_I386 = 0x014C;

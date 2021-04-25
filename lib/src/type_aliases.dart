@@ -1,10 +1,5 @@
 import 'dart:ffi';
 
-// Type aliases for Win32 integer types that are frequently used.
-typedef ULONG = Uint32;
-typedef DWORD = Uint32;
-typedef BYTE = Uint8;
-
 // Type aliases for metadata objects
 typedef HCORENUM = IntPtr;
 typedef PCCOR_SIGNATURE = Pointer<Uint8>;
