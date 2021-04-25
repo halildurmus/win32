@@ -11,7 +11,3 @@ build/
 
 # Directory created by dartdoc
 doc/api/
-
-# We create these files for inspection if the goldens tests fail, but we don't
-# need to check them in.
-test/goldens/*.comparison
