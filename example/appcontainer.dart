@@ -65,11 +65,12 @@ void main() {
     }
 
     final userData = UserDataPaths(userDataDefaults);
-    final hstr_RAD = userData.RoamingAppData;
+    final hstrRoamingAppData = userData.RoamingAppData;
 
-    final pathPtr = WindowsGetStringRawBuffer(hstr_RAD, nullptr);
+    final roamingAppData =
+        WindowsGetStringRawBuffer(hstrRoamingAppData, nullptr).toDartString();
 
-    print(pathPtr.toDartString());
+    print('RoamingAppData: $roamingAppData');
   } finally {
     WindowsDeleteString(hstr.value);
     free(pIID_IUserDataPathsStatics);
