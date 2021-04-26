@@ -48,7 +48,7 @@ class Scope {
   }
 
   @override
-  String toString() => 'Scope: $name';
+  String toString() => name;
 
   TypeDef? findTypeDef(String typedef) {
     final typeDef = typeDefs.where((t) => t.name == typedef);

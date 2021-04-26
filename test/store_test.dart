@@ -42,17 +42,17 @@ void main() {
     MetadataStore.getWin32Scope();
     MetadataStore.getScopeForType('Windows.Win32.Shell.Apis');
     expect(MetadataStore.cache.length, equals(1));
-    expect(MetadataStore.cacheInfo(), equals('Store: [Windows.Win32.winmd]'));
+    expect(MetadataStore.cacheInfo, equals('[Windows.Win32.winmd]'));
   });
 
   test('MetadataStore can cache both WinRT and Win32 metadata', () {
     MetadataStore.getScopeForType('Windows.Globalization.Calendar');
     expect(MetadataStore.cache.length, equals(2));
     expect(
-        MetadataStore.cacheInfo(),
+        MetadataStore.cacheInfo,
         anyOf(
-          equals('Store: [Windows.Globalization.winmd, Windows.Win32.winmd]'),
-          equals('Store: [Windows.Win32.winmd, Windows.Globalization.winmd]'),
+          equals('[Windows.Globalization.winmd, Windows.Win32.winmd]'),
+          equals('[Windows.Win32.winmd, Windows.Globalization.winmd]'),
         ));
   });
 }

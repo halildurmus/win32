@@ -120,5 +120,5 @@ class TypeIdentifier {
   }
 
   @override
-  String toString() => 'TypeIdentifier: ${corType.toString().split('.').last}';
+  String toString() => corType.toString().split('.').last;
 }

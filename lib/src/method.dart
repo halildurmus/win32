@@ -103,7 +103,7 @@ class Method extends TokenObject
   }
 
   @override
-  String toString() => 'Method: $name';
+  String toString() => name;
 
   TypeDef get parent => TypeDef.fromToken(scope, _parentToken);
 

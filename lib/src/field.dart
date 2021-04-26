@@ -107,7 +107,7 @@ class Field extends TokenObject with CustomAttributesMixin {
   }
 
   @override
-  String toString() => 'Field: $name';
+  String toString() => name;
 
   /// Returns the [TypeDef] representing the class that the field belongs to.
   TypeDef get parent => TypeDef.fromToken(scope, _parentToken);

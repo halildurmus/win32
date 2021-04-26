@@ -78,6 +78,9 @@ class GenericParam extends TokenObject with CustomAttributesMixin {
     }
   }
 
+  @override
+  String toString() => name;
+
   /// The object representing the owner of the parameter.
   ///
   /// The object is a [TokenObject], which may either be a [TypeDef] or a

@@ -95,7 +95,7 @@ class Parameter extends TokenObject with CustomAttributesMixin {
       Uint8List(0));
 
   @override
-  String toString() => 'Parameter: $name';
+  String toString() => name;
 
   /// Returns the [Method] that takes the parameter.
   Method get parent => Method.fromToken(scope, _methodToken);

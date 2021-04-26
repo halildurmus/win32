@@ -39,5 +39,5 @@ class ModuleRef extends TokenObject with CustomAttributesMixin {
   }
 
   @override
-  String toString() => 'Module: $name';
+  String toString() => name;
 }

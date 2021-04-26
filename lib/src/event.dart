@@ -95,6 +95,9 @@ class Event extends TokenObject with CustomAttributesMixin {
     }
   }
 
+  @override
+  String toString() => name;
+
   /// Returns the [TypeDef] representing the class that declares the event.
   TypeDef get parent => TypeDef.fromToken(scope, _parentToken);
 

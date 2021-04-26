@@ -14,7 +14,7 @@ void main() {
   });
 
   test('Scope toString() is as expected', () {
-    expect(scope.toString(), equals('Scope: Windows.Win32.winmd'));
+    expect(scope.toString(), equals('Windows.Win32.winmd'));
   });
 
   test('Scope modules contain expected DLLs', () {
@@ -37,7 +37,7 @@ void main() {
   test('Typedef is named correctly', () {
     final typedef = scope.findTypeDef('Windows.Win32.Shell.Apis')!;
     expect(typedef.name, equals('Windows.Win32.Shell.Apis'));
-    expect(typedef.toString(), equals('TypeDef: Windows.Win32.Shell.Apis'));
+    expect(typedef.toString(), equals('Windows.Win32.Shell.Apis'));
   });
 
   test('Typedef equality is successful', () {

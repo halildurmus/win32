@@ -49,5 +49,5 @@ class MemberRef extends TokenObject {
   }
 
   @override
-  String toString() => 'MemberRef: $name';
+  String toString() => name;
 }

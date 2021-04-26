@@ -54,5 +54,5 @@ class CustomAttribute extends TokenObject {
   }
 
   @override
-  String toString() => 'CustomAttribute: $name';
+  String toString() => name;
 }

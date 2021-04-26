@@ -129,7 +129,7 @@ class Property extends TokenObject with CustomAttributesMixin {
   }
 
   @override
-  String toString() => 'Property: $name';
+  String toString() => name;
 
   /// Returns the get accessor method for the property.
   Method? get getterMethod => reader.IsValidToken(_getterToken) == TRUE

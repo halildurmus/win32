@@ -201,6 +201,5 @@ class MetadataStore {
   }
 
   /// Print information about the cache for debugging purposes.
-  static String cacheInfo() =>
-      'Store: [${MetadataStore.cache.keys.join(', ')}]';
+  static String get cacheInfo => '[${MetadataStore.cache.keys.join(', ')}]';
 }

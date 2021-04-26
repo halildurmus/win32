@@ -170,7 +170,7 @@ class TypeDef extends TokenObject
   }
 
   @override
-  String toString() => 'TypeDef: $name';
+  String toString() => name;
 
   TypeVisibility get typeVisibility =>
       TypeVisibility.values[_attributes & CorTypeAttr.tdVisibilityMask];
