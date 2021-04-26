@@ -34,20 +34,31 @@ class MethodProjection {
 }
 
 class ClassProjection {
-  late String className;
-  late String clsid;
+  String? className;
+  String? clsid;
   bool generateClass = false;
   String? iid;
-  late String inherits;
+  String inherits;
   final methods = <MethodProjection>[];
-  late String name;
-  late String shortNameWithGenericSpecifier;
-  late SourceType sourceType;
-  late int vtableStart;
+  String name;
+  String shortNameWithGenericSpecifier;
+  SourceType sourceType;
+  int vtableStart;
 
   @override
   String toString() =>
       '$name (methods: ${methods.length}, inherits: $inherits)';
 
   String get shortName => name.split('.').last.split('`').first;
+
+  ClassProjection(
+      {this.className,
+      this.clsid,
+      this.sourceType = SourceType.unknown,
+      this.iid,
+      required this.inherits,
+      required this.name,
+      this.vtableStart = 0,
+      this.generateClass = false})
+      : shortNameWithGenericSpecifier = name.split('.').last.split('`').first;
 }

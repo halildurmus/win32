@@ -19,7 +19,7 @@ import '../utils.dart';
 
 import '../winrt/winrt_constants.dart';
 
-import 'IInspectable.dart';
+import 'IAsyncInfo.dart';
 
 /// @nodoc
 const IID_IAsyncAction = '{5A648006-843A-4DA9-865B-9D26E5DFAD7B}';
@@ -36,14 +36,14 @@ typedef _GetResults_Dart = int Function(Pointer obj);
 
 /// {@category Interface}
 /// {@category winrt}
-class IAsyncAction extends IInspectable {
-  // vtable begins at 6, ends at 8
+class IAsyncAction extends IAsyncInfo {
+  // vtable begins at 11, ends at 13
 
   IAsyncAction(Pointer<COMObject> ptr) : super(ptr);
 
   set Completed(Pointer value) {
     final hr = Pointer<NativeFunction<_put_Completed_Native>>.fromAddress(
-            ptr.ref.vtable.elementAt(6).value)
+            ptr.ref.vtable.elementAt(11).value)
         .asFunction<_put_Completed_Dart>()(ptr.ref.lpVtbl, value);
 
     if (FAILED(hr)) throw WindowsException(hr);
@@ -54,7 +54,7 @@ class IAsyncAction extends IInspectable {
 
     try {
       final hr = Pointer<NativeFunction<_get_Completed_Native>>.fromAddress(
-              ptr.ref.vtable.elementAt(7).value)
+              ptr.ref.vtable.elementAt(12).value)
           .asFunction<_get_Completed_Dart>()(ptr.ref.lpVtbl, retValuePtr);
       if (FAILED(hr)) throw WindowsException(hr);
 
@@ -66,6 +66,6 @@ class IAsyncAction extends IInspectable {
   }
 
   int GetResults() => Pointer<NativeFunction<_GetResults_Native>>.fromAddress(
-          ptr.ref.vtable.elementAt(8).value)
+          ptr.ref.vtable.elementAt(13).value)
       .asFunction<_GetResults_Dart>()(ptr.ref.lpVtbl);
 }

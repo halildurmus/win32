@@ -6,7 +6,7 @@ import 'package:args/args.dart';
 import 'package:winmd/winmd.dart';
 
 import 'projection/classprojector.dart';
-import 'projection/projections.dart';
+import 'projection/data_classes.dart';
 import 'projection/typeprinter.dart';
 
 const interfacesToGenerate = <String>[
@@ -85,24 +85,6 @@ const interfacesToGenerate = <String>[
   'Windows.Win32.Wmi.IWbemServices',
 ];
 
-int vTableStart(TypeDef? type) {
-  if (type == null) {
-    return 0;
-  }
-
-  if (type.isInterface && type.interfaces.isNotEmpty) {
-    var sum = 0;
-
-    for (final interface in type.interfaces) {
-      sum += interface.methods.length + vTableStart(interface);
-    }
-
-    return sum;
-  }
-
-  return 0;
-}
-
 void main(List<String> args) {
   final scope = MetadataStore.getWin32Scope();
 
@@ -130,7 +112,7 @@ void main(List<String> args) {
 
     final projection = ClassProjector(mdTypeDef).projection
       ..inherits = parentInterface
-      ..vtableStart = vTableStart(mdTypeDef)
+      // ..vtableStart = vTableStart(mdTypeDef)
       ..sourceType = SourceType.com
       ..generateClass = clsid.isNotEmpty
       ..clsid = clsid

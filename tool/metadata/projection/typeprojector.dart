@@ -4,7 +4,7 @@
 
 import 'package:winmd/winmd.dart';
 
-import 'win32types.dart';
+import 'win32_typemap.dart';
 
 const Map<String, String> specialTypes = {'System.Guid': 'GUID'};
 
@@ -28,11 +28,26 @@ class TypeProjector {
         valueTypeDef?.fields.first.name == 'Value');
   }
 
+  /// Converts from a Win32 type (e.g. BOOL, UINT, DWORD) to the underlying Dart
+  /// FFI native type (e.g. Uint32).
+  String _convertToFFIType(String win32Type) {
+    if (win32TypeMap.containsKey(win32Type)) {
+      return win32TypeMap[win32Type]!;
+    } else {
+      if (win32Type.startsWith('LP')) {
+        return 'Pointer<${win32Type.substring(2)}>';
+      }
+      // It's a STRUCT (or an unknown type, in which case it will fail Dart
+      // analysis.)
+      return win32Type;
+    }
+  }
+
   TypeIdentifier? get win32WrappedType {
     // Test to see if it's a type on our exceptions list, in which case do
     // nothing.
     final win32Type = typeIdentifier.type?.typeName.split('.').last ?? '';
-    final ffiNativeType = convertToFFIType(win32Type);
+    final ffiNativeType = _convertToFFIType(win32Type);
     if (ffiNativeType != win32Type) return null;
 
     final scope = MetadataStore.getWin32Scope();
@@ -86,7 +101,41 @@ class TypeProjector {
     }
   }
 
-  String get dartType => convertToDartType(nativeType);
+  /// Take a Dart FFI native type (e.g. `Uint32`) and return the equivalent Dart
+  /// type (e.g. `int`).
+  String get dartType {
+    final ffiType = nativeType;
+
+    const intTypes = <String>[
+      'Int8',
+      'Int16',
+      'Int32',
+      'Int64',
+      'IntPtr',
+      'Uint8',
+      'Uint16',
+      'Uint32',
+      'Uint64'
+    ];
+
+    if (['Float', 'Double'].contains(ffiType)) {
+      return 'double';
+    }
+
+    if (intTypes.contains(ffiType)) {
+      return 'int';
+    }
+
+    if (ffiType == 'Void') {
+      return 'void';
+    }
+
+    if (ffiType == '/* Boolean */ Uint8') {
+      return 'bool';
+    }
+
+    return ffiType;
+  }
 
   String get nativeType {
     // ECMA-335 II.14.3 does not guarantee that an enum is 32-bit, but
@@ -174,7 +223,7 @@ class TypeProjector {
     if (typeIdentifier.type != null &&
         typeIdentifier.type!.typeName.startsWith('Windows.Win32')) {
       final win32Type = typeIdentifier.type?.typeName.split('.').last ?? '';
-      final ffiNativeType = convertToFFIType(win32Type);
+      final ffiNativeType = _convertToFFIType(win32Type);
       return ffiNativeType;
     }
 
