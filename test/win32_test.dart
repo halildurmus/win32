@@ -447,20 +447,5 @@ void main() {
     expect(interface.customAttributes.length, equals(2));
     expect(interface.customAttributes.first.name,
         endsWith('SupportedOSPlatformAttribute'));
-    // token       0x0c00531d
-    // parent      0x02004A5D
-    // constructor MemberRef 0x0A000004 -> Parent 0x01000019 SupportedPlatformAttribute
-    // offset      0x00638812
-    // value       0x0ED6
-//  .class /* 02004A5D */ interface public auto ansi abstract Windows.Win32.WinRT.IActivationFactory
-// 	implements [Windows.Win32.winmd]Windows.Win32.WinRT.IInspectable
-// {
-// 	.custom instance void [Windows.Win32.Interop]Windows.Win32.Interop.SupportedOSPlatformAttribute::.ctor(string) = (
-// 		01 00 0a 77 69 6e 64 6f 77 73 38 2e 30 00 00
-// 	)
-// 	.custom instance void [Windows.Win32.Interop]Windows.Win32.Interop.GuidAttribute::.ctor(uint32, uint16, uint16, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8) = (
-// 		01 00 35 00 00 00 00 00 00 00 c0 00 00 00 00 00
-// 		00 46 00 00
-// 	)
   });
 }

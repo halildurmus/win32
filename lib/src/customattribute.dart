@@ -17,9 +17,9 @@ import 'typedef.dart';
 
 /// A custom (named) attribute.
 class CustomAttribute extends TokenObject {
-  final String name;
   final int attributeType;
   final int modifiedObjectToken;
+  final String name;
   final Uint8List signatureBlob;
 
   CustomAttribute(Scope scope, int token, this.name, this.modifiedObjectToken,

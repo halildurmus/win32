@@ -16,37 +16,6 @@ class TypeTuple {
   /// Creates a new tuple value with the specified items.
   const TypeTuple(this.typeIdentifier, this.offsetLength);
 
-  @override
-  int get hashCode => typeIdentifier.hashCode * offsetLength.hashCode;
-
-  static int _unencodeDefRefSpecToken(int encoded) {
-    final token = encoded >> 2;
-
-    if (encoded & 0x03 == 0x00) {
-      // typedef
-      return CorTokenType.mdtTypeDef | token;
-    }
-    if (encoded & 0x03 == 0x01) {
-      // typeref
-      return CorTokenType.mdtTypeRef | token;
-    }
-    if (encoded & 0x03 == 0x02) {
-      // typespec
-      return CorTokenType.mdtTypeSpec | token;
-    } else {
-      return 0;
-    }
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      other is TypeTuple &&
-      other.typeIdentifier == typeIdentifier &&
-      other.offsetLength == offsetLength;
-
-  @override
-  String toString() => 'TypeTuple: [$typeIdentifier, $offsetLength]';
-
   /// Parse a single type from the signature blob.
   ///
   /// Returns a [TypeTuple] containing the runtime type and the number of bytes
@@ -139,5 +108,36 @@ class TypeTuple {
     }
 
     return TypeTuple(runtimeType, dataLength);
+  }
+
+  @override
+  int get hashCode => typeIdentifier.hashCode * offsetLength.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      other is TypeTuple &&
+      other.typeIdentifier == typeIdentifier &&
+      other.offsetLength == offsetLength;
+
+  @override
+  String toString() => 'TypeTuple: [$typeIdentifier, $offsetLength]';
+
+  static int _unencodeDefRefSpecToken(int encoded) {
+    final token = encoded >> 2;
+
+    if (encoded & 0x03 == 0x00) {
+      // typedef
+      return CorTokenType.mdtTypeDef | token;
+    }
+    if (encoded & 0x03 == 0x01) {
+      // typeref
+      return CorTokenType.mdtTypeRef | token;
+    }
+    if (encoded & 0x03 == 0x02) {
+      // typespec
+      return CorTokenType.mdtTypeSpec | token;
+    } else {
+      return 0;
+    }
   }
 }
