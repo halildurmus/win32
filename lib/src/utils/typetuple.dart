@@ -68,7 +68,7 @@ class TypeTuple {
         final tokenAsType = TypeDef.fromToken(scope, token);
 
         dataLength = uncompressed.dataLength + 1;
-        runtimeType.name = tokenAsType.typeName;
+        runtimeType.name = tokenAsType.name;
         runtimeType.type = tokenAsType;
         break;
 

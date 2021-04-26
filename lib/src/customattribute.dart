@@ -9,17 +9,20 @@ import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
 import 'base.dart';
+import 'memberref.dart';
 import 'scope.dart';
 import 'type_aliases.dart';
-import 'utils/string.dart';
+import 'typedef.dart';
+// import 'utils/string.dart';
 
 /// A custom (named) attribute.
 class CustomAttribute extends TokenObject {
+  final String name;
   final int attributeType;
   final int modifiedObjectToken;
   final Uint8List signatureBlob;
 
-  CustomAttribute(Scope scope, int token, this.modifiedObjectToken,
+  CustomAttribute(Scope scope, int token, this.name, this.modifiedObjectToken,
       this.attributeType, this.signatureBlob)
       : super(scope, token);
 
@@ -35,8 +38,10 @@ class CustomAttribute extends TokenObject {
       final hr = reader.GetCustomAttributeProps(
           token, ptkObj, ptkType, ppBlob, pcbBlob);
       if (SUCCEEDED(hr)) {
-        return CustomAttribute(scope, token, ptkObj.value, ptkType.value,
-            ppBlob.value.asTypedList(pcbBlob.value));
+        final member = MemberRef.fromToken(scope, ptkType.value);
+        final memberParent = TypeDef.fromToken(scope, member.token);
+        return CustomAttribute(scope, token, memberParent.name, ptkObj.value,
+            ptkType.value, ppBlob.value.asTypedList(pcbBlob.value));
       } else {
         throw WindowsException(hr);
       }
@@ -48,32 +53,32 @@ class CustomAttribute extends TokenObject {
     }
   }
 
-  String get name {
-    final ptk = calloc<mdToken>();
-    final szMember = stralloc(MAX_STRING_SIZE);
-    final pchMember = calloc<ULONG>();
-    final ppvSigBlob = calloc<PCCOR_SIGNATURE>();
-    final pcbSigBlob = calloc<ULONG>();
+  // String get name {
+  //   final ptk = calloc<mdToken>();
+  //   final szMember = stralloc(MAX_STRING_SIZE);
+  //   final pchMember = calloc<ULONG>();
+  //   final ppvSigBlob = calloc<PCCOR_SIGNATURE>();
+  //   final pcbSigBlob = calloc<ULONG>();
 
-    try {
-      print('Token: ${token.toHexString(32)}');
-      print('Token type: ${tokenType.toString()}');
+  //   try {
+  //     print('Token: ${token.toHexString(32)}');
+  //     print('Token type: ${tokenType.toString()}');
 
-      final hr = reader.GetMemberRefProps(token, ptk, szMember, MAX_STRING_SIZE,
-          pchMember, ppvSigBlob, pcbSigBlob);
+  //     final hr = reader.GetMemberRefProps(token, ptk, szMember, MAX_STRING_SIZE,
+  //         pchMember, ppvSigBlob, pcbSigBlob);
 
-      if (SUCCEEDED(hr)) {
-        print('success');
-        print(pchMember.value);
-        return szMember.toDartString();
-      } else {
-        throw WindowsException(hr);
-      }
-    } finally {
-      free(szMember);
-      free(pchMember);
-      free(ppvSigBlob);
-      free(pcbSigBlob);
-    }
-  }
+  //     if (SUCCEEDED(hr)) {
+  //       print('success');
+  //       print(pchMember.value);
+  //       return szMember.toDartString();
+  //     } else {
+  //       throw WindowsException(hr);
+  //     }
+  //   } finally {
+  //     free(szMember);
+  //     free(pchMember);
+  //     free(ppvSigBlob);
+  //     free(pcbSigBlob);
+  //   }
+  // }
 }

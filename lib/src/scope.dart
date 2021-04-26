@@ -51,7 +51,7 @@ class Scope {
   String toString() => 'Scope: $name';
 
   TypeDef? findTypeDef(String typedef) {
-    final typeDef = typeDefs.where((t) => t.typeName == typedef);
+    final typeDef = typeDefs.where((t) => t.name == typedef);
     return (typeDef.isNotEmpty ? typeDef.first : null);
   }
 
@@ -159,7 +159,7 @@ class Scope {
   List<TypeDef> get enums {
     if (_enums.isEmpty) {
       for (final typeDef in typeDefs) {
-        if (typeDef.parent?.typeName == 'System.Enum') {
+        if (typeDef.parent?.name == 'System.Enum') {
           _enums.add(typeDef);
         }
       }

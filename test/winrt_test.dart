@@ -53,11 +53,11 @@ void main() {
     final winTypeDef = mdScope.findTypeDef('Windows.Foundation.IAsyncInfo')!;
     final methods = winTypeDef.methods;
 
-    expect(methods[0].methodName, equals('get_Id'));
-    expect(methods[1].methodName, equals('get_Status'));
-    expect(methods[2].methodName, equals('get_ErrorCode'));
-    expect(methods[3].methodName, equals('Cancel'));
-    expect(methods[4].methodName, equals('Close'));
+    expect(methods[0].name, equals('get_Id'));
+    expect(methods[1].name, equals('get_Status'));
+    expect(methods[2].name, equals('get_ErrorCode'));
+    expect(methods[3].name, equals('Cancel'));
+    expect(methods[4].name, equals('Close'));
   });
 
   test('Calendar.HourAsPaddedString method properties', () {
@@ -65,7 +65,7 @@ void main() {
         MetadataStore.getMetadataForType('Windows.Globalization.Calendar')!;
     final methods = winTypeDef.methods;
 
-    expect(methods[75].methodName, equals('HourAsPaddedString'));
+    expect(methods[75].name, equals('HourAsPaddedString'));
     expect(methods[75].memberAccess, equals(MemberAccess.public));
     expect(methods[75].isStatic, isFalse);
     expect(methods[75].isFinal, isTrue);
@@ -79,7 +79,7 @@ void main() {
 
     final interfaces = winTypeDef.interfaces;
     expect(interfaces.length, equals(1));
-    expect(interfaces.first.typeName, equals('Windows.Foundation.IAsyncInfo'));
+    expect(interfaces.first.name, equals('Windows.Foundation.IAsyncInfo'));
   });
 
   test('Interface with multiple inheritance identifies all parent interfaces',
@@ -90,7 +90,7 @@ void main() {
     final interfaces = winTypeDef.interfaces;
     expect(interfaces.length, equals(2));
 
-    final interfaceNames = interfaces.map((element) => element.typeName);
+    final interfaceNames = interfaces.map((element) => element.name);
     expect(interfaceNames, contains('Windows.UI.Xaml.Controls.IButton'));
     expect(
         interfaceNames, contains('Windows.UI.Xaml.Controls.IButtonWithFlyout'));
@@ -124,7 +124,7 @@ void main() {
     final interfaces = winTypeDef.interfaces;
     expect(interfaces.length, equals(2));
 
-    expect(interfaces.first.typeName, endsWith('IPlaybackMediaMarkerSequence'));
+    expect(interfaces.first.name, endsWith('IPlaybackMediaMarkerSequence'));
     expect(interfaces.last.typeSpec?.typeArg?.name,
         endsWith('PlaybackMediaMarker'));
   });
@@ -348,8 +348,7 @@ void main() {
     final winTypeDef =
         MetadataStore.getMetadataForType('Windows.Globalization.ICalendar')!;
 
-    final methods =
-        winTypeDef.methods.where((m) => m.methodName == 'PeriodAsString');
+    final methods = winTypeDef.methods.where((m) => m.name == 'PeriodAsString');
     expect(methods.length, equals(2));
 
     for (final method in methods) {
@@ -380,7 +379,7 @@ void main() {
         MetadataStore.getMetadataForType('Windows.Globalization.Calendar')!;
 
     final method = winTypeDef.methods
-        .where((m) => m.methodName == 'MonthAsString')
+        .where((m) => m.name == 'MonthAsString')
         .firstWhere((m) =>
             m.attributeAsString(
                 'Windows.Foundation.Metadata.OverloadAttribute') ==
@@ -492,7 +491,7 @@ void main() {
         MetadataStore.getScopeForType('Windows.Globalization.Calendar');
 
     final dayOfWeek =
-        mdScope.enums.firstWhere((en) => en.typeName.endsWith('DayOfWeek'));
+        mdScope.enums.firstWhere((en) => en.name.endsWith('DayOfWeek'));
 
     expect(dayOfWeek.fields.length, equals(8)); // includes 'value__'
   });
@@ -502,7 +501,7 @@ void main() {
         MetadataStore.getScopeForType('Windows.Globalization.Calendar');
 
     final dayOfWeek =
-        mdScope.enums.firstWhere((en) => en.typeName.endsWith('DayOfWeek'));
+        mdScope.enums.firstWhere((en) => en.name.endsWith('DayOfWeek'));
 
     expect(dayOfWeek.findField('Tuesday')?.value, equals(2));
   });
@@ -544,15 +543,15 @@ void main() {
         'Windows.Foundation.IAsyncOperation`1')!;
 
     expect(winTypeDef.genericParams.length, equals(1));
-    expect(winTypeDef.genericParams.first.paramName, endsWith('TResult'));
+    expect(winTypeDef.genericParams.first.name, endsWith('TResult'));
   });
   test('Can find type information for generic types 2', () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.Foundation.IAsyncOperationWithProgress`2')!;
 
     expect(winTypeDef.genericParams.length, equals(2));
-    expect(winTypeDef.genericParams.first.paramName, endsWith('TResult'));
-    expect(winTypeDef.genericParams.last.paramName, endsWith('TProgress'));
+    expect(winTypeDef.genericParams.first.name, endsWith('TResult'));
+    expect(winTypeDef.genericParams.last.name, endsWith('TProgress'));
   });
 
   test('Generic method returns the right type', () {

@@ -25,8 +25,8 @@ void main() {
     expect(accel.isSealed, isTrue);
     expect(accel.isBeforeFieldInit, isTrue);
 
-    expect(accel.typeName, equals('Windows.Win32.WindowsAndMessaging.ACCEL'));
-    expect(accel.parent?.typeName, equals('System.ValueType'));
+    expect(accel.name, equals('Windows.Win32.WindowsAndMessaging.ACCEL'));
+    expect(accel.parent?.name, equals('System.ValueType'));
 
     expect(accel.fields.length, equals(3));
     expect(accel.fields[0].name, equals('fVirt'));

@@ -67,7 +67,7 @@ void main() {
     expect(iai.isAbstract, isTrue);
     // expect(iai.isImported, isTrue);
     expect(iai.isWindowsRuntime, isTrue);
-    expect(iai.typeName, equals('Windows.Foundation.IAsyncInfo'));
+    expect(iai.name, equals('Windows.Foundation.IAsyncInfo'));
 
     expect(iai.customAttributes.length, equals(2));
     expect(
@@ -92,7 +92,7 @@ void main() {
     expect(iai.methods[0].isVirtual, isTrue);
     expect(iai.methods[0].returnType.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_U4));
-    expect(iai.methods[0].methodName, equals('get_Id'));
+    expect(iai.methods[0].name, equals('get_Id'));
     expect(iai.methods[0].implFeatures.codeType, equals(CodeType.runtime));
     expect(iai.methods[0].implFeatures.isManaged, isTrue);
 
@@ -103,7 +103,7 @@ void main() {
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
     expect(iai.properties[0].name, equals('ErrorCode'));
     expect(iai.properties[0].hasGetter, isTrue);
-    expect(iai.properties[0].getterMethod?.methodName, equals('get_ErrorCode'));
+    expect(iai.properties[0].getterMethod?.name, equals('get_ErrorCode'));
     expect(iai.properties[0].hasSetter, isFalse);
   });
 }

@@ -17,6 +17,6 @@ void main() {
   print('$typeToGenerate contains the following methods:');
 
   for (final method in typeDef.methods) {
-    print('  ${method.methodName}');
+    print('  ${method.name}');
   }
 }

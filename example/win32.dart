@@ -18,11 +18,11 @@ void main() {
 
   // Sort the functions alphabetically
   final sortedMethods = namespace.methods
-    ..sort((a, b) => a.methodName.compareTo(b.methodName));
+    ..sort((a, b) => a.name.compareTo(b.name));
 
   // Find a specific function
   const funcName = 'MessageBoxW';
-  final method = sortedMethods.firstWhere((m) => m.methodName == funcName);
+  final method = sortedMethods.firstWhere((m) => m.name == funcName);
 
   // Print out some information about it
   print('Win32 function $funcName [token #${method.token}]');

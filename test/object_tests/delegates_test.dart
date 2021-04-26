@@ -42,9 +42,8 @@ void main() {
     expect(wndProc.stringFormat, equals(StringFormat.auto));
     expect(wndProc.isSealed, isTrue);
     expect(wndProc.isBeforeFieldInit, isTrue);
-    expect(
-        wndProc.typeName, equals('Windows.Win32.WindowsAndMessaging.WNDPROC'));
-    expect(wndProc.parent?.typeName, equals('System.MulticastDelegate'));
+    expect(wndProc.name, equals('Windows.Win32.WindowsAndMessaging.WNDPROC'));
+    expect(wndProc.parent?.name, equals('System.MulticastDelegate'));
 
     expect(wndProc.customAttributes.length, equals(1));
     // expect(
@@ -67,7 +66,7 @@ void main() {
 
     expect(wndProc.methods[0].returnType.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_VOID));
-    expect(wndProc.methods[0].methodName, equals('.ctor'));
+    expect(wndProc.methods[0].name, equals('.ctor'));
     expect(wndProc.methods[0].parameters.length, equals(2));
 
     expect(wndProc.methods[0].parameters[0].name, equals('object'));
@@ -87,7 +86,7 @@ void main() {
 
     expect(wndProc.methods[1].returnType.typeIdentifier.name,
         equals('Windows.Win32.SystemServices.LRESULT'));
-    expect(wndProc.methods[1].methodName, equals('Invoke'));
+    expect(wndProc.methods[1].name, equals('Invoke'));
     expect(wndProc.methods[1].parameters.length, equals(4));
 
     expect(wndProc.methods[1].parameters[0].isInParam, isTrue);

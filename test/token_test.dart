@@ -19,12 +19,12 @@ void main() {
     final scope = MetadataStore.getWin32Scope();
     final accel = scope.findTypeDef('Windows.Win32.WindowsAndMessaging.ACCEL')!;
     expect(accel.isResolvedToken, isTrue);
-    expect(accel.parent?.typeName, equals('System.ValueType'));
+    expect(accel.parent?.name, equals('System.ValueType'));
     expect(accel.parent?.isResolvedToken, isFalse);
   });
   test('IInspectable works', () {
     final winTypeDef = MetadataStore.getMetadataForType(
         'Windows.Foundation.Collections.IPropertySet')!;
-    expect(winTypeDef.parent?.typeName, endsWith('IInspectable'));
+    expect(winTypeDef.parent?.name, endsWith('IInspectable'));
   });
 }

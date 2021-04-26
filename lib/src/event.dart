@@ -14,7 +14,7 @@ import 'utils/string.dart';
 /// An event.
 class Event extends TokenObject with CustomAttributesMixin {
   final int addOnToken;
-  final String eventName;
+  final String name;
   final int eventType;
   final int fireToken;
   final List<int> otherMethodTokens;
@@ -27,7 +27,7 @@ class Event extends TokenObject with CustomAttributesMixin {
       Scope scope,
       int token,
       this._parentToken,
-      this.eventName,
+      this.name,
       this._attributes,
       this.eventType,
       this.addOnToken,

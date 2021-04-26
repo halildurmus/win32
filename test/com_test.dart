@@ -7,7 +7,7 @@ void main() {
   final scope = MetadataStore.getWin32Scope();
   test('Can find a COM interface in winmd', () {
     final iNetwork = scope.typeDefs
-        .firstWhere((typedef) => typedef.typeName.endsWith('INetwork'));
+        .firstWhere((typedef) => typedef.name.endsWith('INetwork'));
 
     expect(iNetwork.isResolvedToken, isTrue);
   });
@@ -29,7 +29,7 @@ void main() {
     });
 
     test('INetwork inherits from IDispatch', () {
-      expect(iNetwork.interfaces.first.typeName, endsWith('IDispatch'));
+      expect(iNetwork.interfaces.first.name, endsWith('IDispatch'));
     });
 
     test('Interface has expected number of methods', () {
@@ -43,7 +43,7 @@ void main() {
     test('COM methods are named correctly', () {
       final getName = iNetwork.methods.first;
 
-      expect(getName.methodName, equals('GetName'));
+      expect(getName.name, equals('GetName'));
     });
 
     test('COM methods have right number of parameters', () {
@@ -125,10 +125,9 @@ void main() {
         equals('Windows.Win32.Shell.ACTIVATEOPTIONS'));
     expect(param.typeIdentifier.corType,
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
-    expect(param.typeIdentifier.type?.parent?.typeName, equals('System.Enum'));
+    expect(param.typeIdentifier.type?.parent?.name, equals('System.Enum'));
     expect(param.typeIdentifier.typeArg, isNull);
-    expect(
-        scope.enums.firstWhere((p) => p.typeName == param.typeIdentifier.name),
+    expect(scope.enums.firstWhere((p) => p.name == param.typeIdentifier.name),
         isNotNull);
   });
 }

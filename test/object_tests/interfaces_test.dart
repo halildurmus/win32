@@ -30,11 +30,11 @@ void main() {
     expect(ifop2.typeLayout, equals(TypeLayout.auto));
     expect(ifop2.stringFormat, equals(StringFormat.ansi));
     expect(ifop2.isAbstract, isTrue);
-    expect(ifop2.typeName, equals('Windows.Win32.Shell.IFileOperation2'));
+    expect(ifop2.name, equals('Windows.Win32.Shell.IFileOperation2'));
 
     expect(ifop2.interfaces.length, equals(1));
-    expect(ifop2.interfaces[0].typeName,
-        equals('Windows.Win32.Shell.IFileOperation'));
+    expect(
+        ifop2.interfaces[0].name, equals('Windows.Win32.Shell.IFileOperation'));
 
     expect(
         ifop2.customAttributeAsBytes('Windows.Win32.Interop.GuidAttribute'),
@@ -55,7 +55,7 @@ void main() {
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
     expect(ifop2.methods[0].returnType.typeIdentifier.name,
         equals('Windows.Win32.Com.HRESULT'));
-    expect(ifop2.methods[0].methodName, equals('SetOperationFlags2'));
+    expect(ifop2.methods[0].name, equals('SetOperationFlags2'));
 
     expect(ifop2.methods[0].parameters.length, equals(1));
     expect(ifop2.methods[0].parameters[0].isInParam, isTrue);

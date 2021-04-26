@@ -35,7 +35,7 @@ void main() {
 
     expect(awr.returnType.typeIdentifier.name,
         equals('Windows.Win32.SystemServices.BOOL'));
-    expect(awr.methodName, equals('AdjustWindowRect'));
+    expect(awr.name, equals('AdjustWindowRect'));
 
     expect(awr.parameters.length, equals(3));
 

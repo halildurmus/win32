@@ -22,7 +22,7 @@ void listTokens([String type = 'Windows.Devices.Bluetooth.BluetoothAdapter']) {
   final mdScope = MetadataStore.getScopeForType(type);
 
   for (final type in mdScope.typeDefs.take(10)) {
-    print('[${type.token.toHexString(32)}] ${type.typeName} '
+    print('[${type.token.toHexString(32)}] ${type.name} '
         '(baseType: ${type.baseTypeToken.toHexString(32)})');
   }
 }
@@ -36,7 +36,7 @@ void listEnums([String type = 'Windows.Globalization']) {
   final enums = mdScope.enums;
 
   for (final enumEntry in enums) {
-    print('${enumEntry.typeName} has ${enumEntry.fields.length} entries.');
+    print('${enumEntry.name} has ${enumEntry.fields.length} entries.');
   }
 }
 
@@ -61,7 +61,7 @@ void listParameters(
   final winTypeDef = mdScope.findTypeDef(type);
   final method = winTypeDef!.findMethod(methodName)!;
 
-  print('${method.methodName} has '
+  print('${method.name} has '
       '${method.parameters.length} parameter(s).');
 
   // the zeroth parameter is the return type
@@ -86,7 +86,7 @@ void listInterfaces([String type = 'Windows.Storage.Pickers.FolderPicker']) {
 
   print('$type implements:');
   for (final interface in interfaces) {
-    print('  ${interface.typeName}');
+    print('  ${interface.name}');
   }
 }
 
@@ -107,7 +107,7 @@ String methodSignature(Method method) {
       '${method.isGetProperty ? '[propget] ' : ''}'
       '${method.isSetProperty ? '[propset] ' : ''}'
       '${method.returnType.typeIdentifier.name} '
-      '${method.isProperty ? method.methodName.substring(4) : method.methodName}');
+      '${method.isProperty ? method.name.substring(4) : method.name}');
 
   if (!method.isGetProperty) {
     buffer.write('(${typeParams(method)})');
@@ -130,15 +130,15 @@ String convertTypeToProjection(
   final mdScope = MetadataStore.getScopeForType(type);
   final winTypeDef = mdScope.findTypeDef(type);
 
-  if (winTypeDef?.parent?.typeName == 'IInspectable') {
+  if (winTypeDef?.parent?.name == 'IInspectable') {
     idlProjection.writeln('// vtable_start 6');
   } else {
     idlProjection.writeln('// vtable_start UNKNOWN');
   }
 
   idlProjection.writeln('[uuid(${winTypeDef!.guid}]');
-  idlProjection.writeln(
-      'interface ${winTypeDef.typeName} : ${winTypeDef.parent!.typeName}');
+  idlProjection
+      .writeln('interface ${winTypeDef.name} : ${winTypeDef.parent!.name}');
   idlProjection.writeln('{');
 
   idlProjection.writeln(winTypeDef.methods.map(methodSignature).join('\n'));

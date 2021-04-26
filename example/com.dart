@@ -15,6 +15,6 @@ void main(List<String> args) {
   print('$typeToGenerate contains the following methods:');
 
   for (final method in typedef.methods) {
-    print('  ${method.methodName}');
+    print('  ${method.name}');
   }
 }

@@ -14,4 +14,9 @@ void main() {
         MetadataStore.winmdFileContainingType('Windows.Globalization.Calendar');
     expect(file.path, endsWith(r'WinMetadata\Windows.Globalization.winmd'));
   });
+
+  test('Can successfully find a module', () {
+    final file = MetadataStore.getWin32Scope();
+    expect(file.moduleToken, equals(0x00000001));
+  });
 }

@@ -36,7 +36,7 @@ void main() {
 
   test('Typedef is named correctly', () {
     final typedef = scope.findTypeDef('Windows.Win32.Shell.Apis')!;
-    expect(typedef.typeName, equals('Windows.Win32.Shell.Apis'));
+    expect(typedef.name, equals('Windows.Win32.Shell.Apis'));
     expect(typedef.toString(), equals('TypeDef: Windows.Win32.Shell.Apis'));
   });
 
@@ -357,14 +357,14 @@ void main() {
 
   test('Enumerations contain correct entries', () {
     final ropCode =
-        scope.enums.firstWhere((en) => en.typeName.endsWith('ROP_CODE'));
+        scope.enums.firstWhere((en) => en.name.endsWith('ROP_CODE'));
 
     expect(ropCode.fields.length, equals(18));
   });
 
   test('A specific enumeration contains expected constants', () {
     final ropCode =
-        scope.enums.firstWhere((en) => en.typeName.endsWith('ROP_CODE'));
+        scope.enums.firstWhere((en) => en.name.endsWith('ROP_CODE'));
 
     expect(ropCode.findField('SRCCOPY')?.value, equals(0x00CC0020));
   });
@@ -375,7 +375,7 @@ void main() {
     final param = api.parameters.last;
 
     expect(param.name, equals('iUsage'));
-    expect(param.typeIdentifier.type?.parent?.typeName, equals('System.Enum'));
+    expect(param.typeIdentifier.type?.parent?.name, equals('System.Enum'));
   });
 
   test('Pointers to enumerations are typed appropriately in functions', () {
@@ -386,7 +386,7 @@ void main() {
     expect(param.name, equals('lpFlags'));
     expect(param.typeIdentifier.typeArg?.corType,
         equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
-    expect(param.typeIdentifier.typeArg?.type?.parent?.typeName,
+    expect(param.typeIdentifier.typeArg?.type?.parent?.name,
         equals('System.Enum'));
   });
 
@@ -439,5 +439,28 @@ void main() {
         scope.findTypeDef('Windows.Win32.Shell.KNOWN_FOLDER_FLAG')!;
     expect(packedStruct.classLayout.packingAlignment, isNull);
     expect(packedStruct.classLayout.minimumSize, isNull);
+  });
+
+  test('Attributes for an interface', () {
+    final interface =
+        scope.findTypeDef('Windows.Win32.WinRT.IActivationFactory')!;
+    expect(interface.customAttributes.length, equals(2));
+    expect(interface.customAttributes.first.name,
+        endsWith('SupportedOSPlatformAttribute'));
+    // token       0x0c00531d
+    // parent      0x02004A5D
+    // constructor MemberRef 0x0A000004 -> Parent 0x01000019 SupportedPlatformAttribute
+    // offset      0x00638812
+    // value       0x0ED6
+//  .class /* 02004A5D */ interface public auto ansi abstract Windows.Win32.WinRT.IActivationFactory
+// 	implements [Windows.Win32.winmd]Windows.Win32.WinRT.IInspectable
+// {
+// 	.custom instance void [Windows.Win32.Interop]Windows.Win32.Interop.SupportedOSPlatformAttribute::.ctor(string) = (
+// 		01 00 0a 77 69 6e 64 6f 77 73 38 2e 30 00 00
+// 	)
+// 	.custom instance void [Windows.Win32.Interop]Windows.Win32.Interop.GuidAttribute::.ctor(uint32, uint16, uint16, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8) = (
+// 		01 00 35 00 00 00 00 00 00 00 c0 00 00 00 00 00
+// 		00 46 00 00
+// 	)
   });
 }

@@ -42,7 +42,7 @@ enum StringFormat { ansi, unicode, auto, custom }
 class TypeDef extends TokenObject
     with CustomAttributesMixin, GenericParamsMixin {
   final int baseTypeToken;
-  final String typeName;
+  final String name;
   final TypeIdentifier? typeSpec;
 
   final int _attributes;
@@ -58,7 +58,7 @@ class TypeDef extends TokenObject
   /// than being created directly.
   TypeDef(Scope scope,
       [int token = 0,
-      this.typeName = '',
+      this.name = '',
       this._attributes = 0,
       this.baseTypeToken = 0,
       this.typeSpec])
@@ -170,7 +170,7 @@ class TypeDef extends TokenObject
   }
 
   @override
-  String toString() => 'TypeDef: $typeName';
+  String toString() => 'TypeDef: $name';
 
   TypeVisibility get typeVisibility =>
       TypeVisibility.values[_attributes & CorTypeAttr.tdVisibilityMask];
@@ -241,7 +241,7 @@ class TypeDef extends TokenObject
       _attributes & CorTypeAttr.tdForwarder == CorTypeAttr.tdForwarder;
 
   /// Is the type a delegate?
-  bool get isDelegate => parent?.typeName == 'System.MulticastDelegate';
+  bool get isDelegate => parent?.name == 'System.MulticastDelegate';
 
   /// Retrieve class layout information.
   ///

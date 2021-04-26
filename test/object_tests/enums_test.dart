@@ -23,9 +23,8 @@ void main() {
     expect(hand.typeLayout, equals(TypeLayout.auto));
     expect(hand.stringFormat, equals(StringFormat.ansi));
     expect(hand.isSealed, isTrue);
-    expect(
-        hand.typeName, equals('Windows.Win32.WindowsAndMessaging.HANDEDNESS'));
-    expect(hand.parent?.typeName, equals('System.Enum'));
+    expect(hand.name, equals('Windows.Win32.WindowsAndMessaging.HANDEDNESS'));
+    expect(hand.parent?.name, equals('System.Enum'));
 
     expect(hand.fields.length, equals(3));
 

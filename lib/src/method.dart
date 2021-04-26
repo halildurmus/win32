@@ -41,7 +41,7 @@ class Method extends TokenObject
   int implFlags;
   bool isGetProperty = false;
   bool isSetProperty = false;
-  String methodName;
+  String name;
   List<Parameter> parameters = <Parameter>[];
   int relativeVirtualAddress;
   late Parameter returnType;
@@ -50,15 +50,8 @@ class Method extends TokenObject
   int _attributes;
   int _parentToken;
 
-  Method(
-      Scope scope,
-      int token,
-      this._parentToken,
-      this.methodName,
-      this._attributes,
-      this.signatureBlob,
-      this.relativeVirtualAddress,
-      this.implFlags)
+  Method(Scope scope, int token, this._parentToken, this.name, this._attributes,
+      this.signatureBlob, this.relativeVirtualAddress, this.implFlags)
       : super(scope, token) {
     _parseMethodType();
     _parseParameterNames();
@@ -110,7 +103,7 @@ class Method extends TokenObject
   }
 
   @override
-  String toString() => 'Method: $methodName';
+  String toString() => 'Method: $name';
 
   TypeDef get parent => TypeDef.fromToken(scope, _parentToken);
 
@@ -212,10 +205,10 @@ class Method extends TokenObject
   bool get hasGenericParameters => signatureBlob[0] & 0x10 == 0x10;
 
   void _parseMethodType() {
-    if (isSpecialName && methodName.startsWith('get_')) {
+    if (isSpecialName && name.startsWith('get_')) {
       // Property getter
       isGetProperty = true;
-    } else if (isSpecialName && methodName.startsWith('put_')) {
+    } else if (isSpecialName && name.startsWith('put_')) {
       // Property setter
       isSetProperty = true;
     }
