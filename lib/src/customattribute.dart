@@ -53,32 +53,6 @@ class CustomAttribute extends TokenObject {
     }
   }
 
-  // String get name {
-  //   final ptk = calloc<mdToken>();
-  //   final szMember = stralloc(MAX_STRING_SIZE);
-  //   final pchMember = calloc<ULONG>();
-  //   final ppvSigBlob = calloc<PCCOR_SIGNATURE>();
-  //   final pcbSigBlob = calloc<ULONG>();
-
-  //   try {
-  //     print('Token: ${token.toHexString(32)}');
-  //     print('Token type: ${tokenType.toString()}');
-
-  //     final hr = reader.GetMemberRefProps(token, ptk, szMember, MAX_STRING_SIZE,
-  //         pchMember, ppvSigBlob, pcbSigBlob);
-
-  //     if (SUCCEEDED(hr)) {
-  //       print('success');
-  //       print(pchMember.value);
-  //       return szMember.toDartString();
-  //     } else {
-  //       throw WindowsException(hr);
-  //     }
-  //   } finally {
-  //     free(szMember);
-  //     free(pchMember);
-  //     free(ppvSigBlob);
-  //     free(pcbSigBlob);
-  //   }
-  // }
+  @override
+  String toString() => 'CustomAttribute: $name';
 }
