@@ -63,8 +63,8 @@ void main() {
 
       late Method method;
       try {
-        method = methods.firstWhere((m) => methodMatches(
-            m.methodName, filteredFunctionList[function]!.prototype));
+        method = methods.firstWhere((m) =>
+            methodMatches(m.name, filteredFunctionList[function]!.prototype));
       } on StateError {
         continue;
       }
@@ -85,7 +85,7 @@ void main() {
         final $function = $libraryDartName.lookupFunction<\n
           $returnFFIType Function(${prototype.nativeParams}),
           $returnDartType Function(${prototype.dartParams})>
-          ('${method.methodName}');
+          ('${method.name}');
         expect($function, isA<Function>());
       });''';
 

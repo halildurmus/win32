@@ -352,13 +352,12 @@ void main() {
       buffer.writeln('class $structName extends Struct {');
 
       for (final field in typedef.fields) {
-        if (field.typeIdentifier.corType == CorElementType.ELEMENT_TYPE_ARRAY) {
+        if (field.typeIdentifier.baseType == BaseType.ArrayTypeModifier) {
           final dimensions = field.typeIdentifier.arrayDimensions!.first;
           final nativeType = TypeProjector(field.typeIdentifier).nativeType;
 
           // Handle a string array
-          if (field.typeIdentifier.typeArg?.corType ==
-              CorElementType.ELEMENT_TYPE_CHAR) {
+          if (field.typeIdentifier.typeArg?.baseType == BaseType.Char) {
             buffer.write(printArray(nativeType, field.name, dimensions));
           }
 

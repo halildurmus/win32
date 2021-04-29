@@ -46,7 +46,7 @@ class TypeProjector {
   TypeIdentifier? get win32WrappedType {
     // Test to see if it's a type on our exceptions list, in which case do
     // nothing.
-    final win32Type = typeIdentifier.type?.typeName.split('.').last ?? '';
+    final win32Type = typeIdentifier.type?.name.split('.').last ?? '';
     final ffiNativeType = _convertToFFIType(win32Type);
     if (ffiNativeType != win32Type) return null;
 
@@ -55,12 +55,11 @@ class TypeProjector {
     return valueTypeDef?.fields.first.typeIdentifier;
   }
 
-  bool get isTypeAnEnum =>
-      typeIdentifier.type?.parent?.typeName == 'System.Enum';
+  bool get isTypeAnEnum => typeIdentifier.type?.parent?.name == 'System.Enum';
 
   bool get isTypeValueType =>
-      (typeIdentifier.corType == CorElementType.ELEMENT_TYPE_VALUETYPE ||
-          typeIdentifier.type?.parent?.typeName == 'System.ValueType');
+      (typeIdentifier.baseType == BaseType.ValueTypeModifier ||
+          typeIdentifier.type?.parent?.name == 'System.ValueType');
 
   String pointerType(TypeIdentifier typeIdentifier) {
     // Is it a string pointer?
@@ -74,7 +73,7 @@ class TypeProjector {
     if (typeIdentifier.name == 'char') {
       return 'Pointer<Utf16>';
     }
-    if (typeIdentifier.typeArg?.type?.parent?.typeName == 'System.Enum') {
+    if (typeIdentifier.typeArg?.type?.parent?.name == 'System.Enum') {
       return 'Pointer<Uint32>';
     }
 
@@ -85,7 +84,7 @@ class TypeProjector {
       // Win32 meaning, which is more like "undefined type". We can
       // model that with a generic Pointer in Dart.
 
-      if (typeArgs.corType == CorElementType.ELEMENT_TYPE_VOID) {
+      if (typeArgs.baseType == BaseType.Void) {
         return 'Pointer';
       }
 
@@ -164,49 +163,49 @@ class TypeProjector {
     }
 
     // Handle base types
-    switch (typeIdentifier.corType) {
-      case CorElementType.ELEMENT_TYPE_VOID:
+    switch (typeIdentifier.baseType) {
+      case BaseType.Void:
         return 'Void';
-      case CorElementType.ELEMENT_TYPE_BOOLEAN:
+      case BaseType.Boolean:
         return '/* Boolean */ Uint8';
-      case CorElementType.ELEMENT_TYPE_CHAR:
+      case BaseType.Char:
         return 'Uint16';
-      case CorElementType.ELEMENT_TYPE_U1:
-        return 'Uint8';
-      case CorElementType.ELEMENT_TYPE_I1:
+      case BaseType.Int8:
         return 'Int8';
-      case CorElementType.ELEMENT_TYPE_I2:
+      case BaseType.Uint8:
+        return 'Uint8';
+      case BaseType.Int16:
         return 'Int16';
-      case CorElementType.ELEMENT_TYPE_U2:
+      case BaseType.Uint16:
         return 'Uint16';
-      case CorElementType.ELEMENT_TYPE_I4:
+      case BaseType.Int32:
         return 'Int32';
-      case CorElementType.ELEMENT_TYPE_U4:
+      case BaseType.Uint32:
         return 'Uint32';
-      case CorElementType.ELEMENT_TYPE_I8:
+      case BaseType.Int64:
         return 'Int64';
-      case CorElementType.ELEMENT_TYPE_U8:
+      case BaseType.Uint64:
         return 'Uint64';
-      case CorElementType.ELEMENT_TYPE_R4:
+      case BaseType.Float:
         return 'Float';
-      case CorElementType.ELEMENT_TYPE_R8:
+      case BaseType.Double:
         return 'Double';
-      case CorElementType.ELEMENT_TYPE_STRING:
+      case BaseType.String:
         return 'IntPtr';
-      case CorElementType.ELEMENT_TYPE_OBJECT:
+      case BaseType.Object:
         return 'COMObject';
-      case CorElementType.ELEMENT_TYPE_VAR:
-      case CorElementType.ELEMENT_TYPE_MVAR:
+      case BaseType.ClassVariableTypeModifier:
+      case BaseType.MethodVariableTypeModifier:
         return 'Pointer';
-      case CorElementType.ELEMENT_TYPE_GENERICINST:
-      case CorElementType.ELEMENT_TYPE_ARRAY:
+      case BaseType.GenericTypeModifier:
+      case BaseType.ArrayTypeModifier:
         return TypeProjector(typeIdentifier.typeArg!).nativeType;
-      case CorElementType.ELEMENT_TYPE_PTR:
+      case BaseType.PointerTypeModifier:
         return pointerType(typeIdentifier);
-      case CorElementType.ELEMENT_TYPE_FNPTR:
+      case BaseType.FunctionPointer:
         return 'Pointer';
-      case CorElementType.ELEMENT_TYPE_I:
-      case CorElementType.ELEMENT_TYPE_U:
+      case BaseType.IntPtr:
+      case BaseType.UintPtr:
         return 'IntPtr';
       default:
     }
@@ -214,20 +213,20 @@ class TypeProjector {
     // COM type
     if (typeIdentifier.type != null &&
         typeIdentifier.type!.interfaces.isNotEmpty &&
-        typeIdentifier.type!.interfaces.first.typeName ==
+        typeIdentifier.type!.interfaces.first.name ==
             'Windows.Win32.Com.IUnknown') {
       return 'Pointer';
     }
 
     // If it's a Win32 type, we know how to get the type
     if (typeIdentifier.type != null &&
-        typeIdentifier.type!.typeName.startsWith('Windows.Win32')) {
-      final win32Type = typeIdentifier.type?.typeName.split('.').last ?? '';
+        typeIdentifier.type!.name.startsWith('Windows.Win32')) {
+      final win32Type = typeIdentifier.type?.name.split('.').last ?? '';
       final ffiNativeType = _convertToFFIType(win32Type);
       return ffiNativeType;
     }
 
-    if (typeIdentifier.corType == CorElementType.ELEMENT_TYPE_CLASS) {
+    if (typeIdentifier.baseType == BaseType.ClassTypeModifier) {
       // WinRT type
       return 'Pointer';
     }

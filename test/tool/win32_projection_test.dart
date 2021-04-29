@@ -8,7 +8,7 @@ import '../../tool/metadata/projection/typeprojector.dart';
 void main() {
   final scope = MetadataStore.getWin32Scope();
   test('Simple int type', () {
-    final type = TypeIdentifier(CorElementType.ELEMENT_TYPE_I4);
+    final type = TypeIdentifier(BaseType.Int32);
     final typeProjection = TypeProjector(type);
 
     expect(typeProjection.dartType, equals('int'));
@@ -16,9 +16,9 @@ void main() {
   });
 
   test('Unicode string', () {
-    final type = TypeIdentifier(CorElementType.ELEMENT_TYPE_PTR)
+    final type = TypeIdentifier(BaseType.PointerTypeModifier)
       ..name = 'LPWSTR'
-      ..typeArg = TypeIdentifier(CorElementType.ELEMENT_TYPE_U2);
+      ..typeArg = TypeIdentifier(BaseType.Uint16);
     final typeProjection = TypeProjector(type);
 
     expect(typeProjection.dartType, equals('Pointer<Utf16>'));
@@ -210,13 +210,13 @@ void main() {
     final api = typedef.findMethod('GetCurrentProcess')!;
     final returnType = api.returnType.typeIdentifier;
 
-    expect(returnType.corType, equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+    expect(returnType.baseType, equals(BaseType.ValueTypeModifier));
     expect(returnType.name,
         equals('Windows.Win32.SystemServices.NonClosableHandle'));
 
     final valueTypedef = scope.findTypeDef(returnType.name)!;
-    expect(valueTypedef.fields.first.typeIdentifier.corType,
-        equals(CorElementType.ELEMENT_TYPE_I));
+    expect(valueTypedef.fields.first.typeIdentifier.baseType,
+        equals(BaseType.IntPtr));
 
     final projection = TypeProjector(returnType);
     expect(projection.dartType, equals('int'));
@@ -229,8 +229,7 @@ void main() {
     final param = api.parameters[1];
 
     expect(param.name, equals('liDistanceToMove'));
-    expect(param.typeIdentifier.corType,
-        equals(CorElementType.ELEMENT_TYPE_VALUETYPE));
+    expect(param.typeIdentifier.baseType, equals(BaseType.ValueTypeModifier));
 
     final projection = TypeProjector(param.typeIdentifier);
     expect(projection.nativeType, equals('Int64'));

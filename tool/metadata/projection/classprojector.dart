@@ -21,7 +21,7 @@ class ClassProjector {
     }
 
     // WinRT types inherit from IInspectable
-    if (!type.typeName.startsWith('Windows.Win32') && type.interfaces.isEmpty) {
+    if (!type.name.startsWith('Windows.Win32') && type.interfaces.isEmpty) {
       return 6;
     }
 
@@ -52,25 +52,25 @@ class ClassProjector {
     // IInspectable (as well as IUnknown, from which IInspectable itself
     // inherits).
     if (typeDef.interfaces.isNotEmpty) {
-      parent = typeDef.interfaces.first.typeName.split('.').last;
-    } else if (!typeDef.typeName.endsWith('IUnknown')) {
+      parent = typeDef.interfaces.first.name.split('.').last;
+    } else if (!typeDef.name.endsWith('IUnknown')) {
       parent = 'IInspectable';
     }
 
     final classInheritsFrom = parent;
 
     final interface = ClassProjection(
-        sourceType: typeDef.typeName.startsWith('Windows.Win32')
+        sourceType: typeDef.name.startsWith('Windows.Win32')
             ? SourceType.com
             : SourceType.winrt,
         iid: typeDef.guid,
-        name: typeDef.typeName,
+        name: typeDef.name,
         inherits: classInheritsFrom,
         vtableStart: _vtableStart(typeDef));
 
     if (typeDef.genericParams.isNotEmpty) {
       final genericParams =
-          typeDef.genericParams.map<String>((p) => p.paramName).join(', ');
+          typeDef.genericParams.map<String>((p) => p.name).join(', ');
       interface.shortNameWithGenericSpecifier =
           '${interface.shortName}<$genericParams>';
     } else {
@@ -84,7 +84,7 @@ class ClassProjector {
       if (overload.isNotEmpty) {
         methodProjection.name = overload;
       } else {
-        methodProjection.name = mdMethod.methodName;
+        methodProjection.name = mdMethod.name;
       }
       methodProjection.isGetProperty = mdMethod.isGetProperty;
       methodProjection.isSetProperty = mdMethod.isSetProperty;
@@ -123,8 +123,7 @@ class ClassProjector {
         // value as an pointer
         methodProjection.returnTypeNative = 'Int32';
         methodProjection.returnTypeDart = 'int';
-        if (mdMethod.returnType.typeIdentifier.corType !=
-            CorElementType.ELEMENT_TYPE_VOID) {
+        if (mdMethod.returnType.typeIdentifier.baseType != BaseType.Void) {
           final typeBuilder = TypeProjector(mdMethod.returnType.typeIdentifier);
 
           if (mdMethod.isSetProperty) {

@@ -42,7 +42,7 @@ class Win32Prototype {
       '  final _$_nameWithoutEncoding = _$_lib.lookupFunction<\n'
       '    $nativePrototype, \n'
       '    $dartPrototype\n'
-      "  >('${_method.methodName}');\n"
+      "  >('${_method.name}');\n"
       '  return _$_nameWithoutEncoding'
       '(${_method.parameters.map((param) => (param.name)).toList().join(', ')})'
       ';\n'
@@ -141,8 +141,8 @@ final _$libraryDartName = DynamicLibrary.open('$library${library == 'bthprops' ?
 
     for (final function in filteredFunctionList.keys) {
       try {
-        final method = methods.firstWhere((m) => methodMatches(
-            m.methodName, filteredFunctionList[function]!.prototype));
+        final method = methods.firstWhere((m) =>
+            methodMatches(m.name, filteredFunctionList[function]!.prototype));
         writer.writeStringSync('''
 ${generateDocComment(filteredFunctionList[function]!)}
 ${Win32Prototype(function, method, libraryDartName).dartFfiMapping}
@@ -158,7 +158,7 @@ ${Win32Prototype(function, method, libraryDartName).dartFfiMapping}
 
 void main() {
   final scope = MetadataStore.getWin32Scope();
-  final apis = scope.typeDefs.where((type) => type.typeName.endsWith('Apis'));
+  final apis = scope.typeDefs.where((type) => type.name.endsWith('Apis'));
 
   apis.forEach((api) => methods.addAll(api.methods));
   print('${methods.length} APIs collected');

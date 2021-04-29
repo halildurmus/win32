@@ -107,7 +107,7 @@ void main(List<String> args) {
     final clsid = scope.findTypeDef(fullyQualifiedClassName)?.guid ?? '';
 
     final parentInterface = mdTypeDef.interfaces.isNotEmpty
-        ? mdTypeDef.interfaces.first.typeName.split('.').last
+        ? mdTypeDef.interfaces.first.name.split('.').last
         : '';
 
     final projection = ClassProjector(mdTypeDef).projection

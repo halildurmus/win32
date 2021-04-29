@@ -70,7 +70,7 @@ void main() {
       final calculatedVTableStart = projectedClass.vtableStart;
 
       expect(calculatedVTableStart, equals(testedTypes[type]),
-          reason: typedef.typeName);
+          reason: typedef.name);
     }
   });
 
@@ -88,7 +88,7 @@ void main() {
       final calculatedVTableStart = projectedClass.vtableStart;
 
       expect(calculatedVTableStart, equals(testedTypes[type]),
-          reason: typedef.typeName);
+          reason: typedef.name);
     }
   });
 }
